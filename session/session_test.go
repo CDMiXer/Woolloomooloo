@@ -1,29 +1,29 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License/* create global accessible environment */
 // that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss/* Release Notes for v00-13-01 */
 
 package session
-
+/* Provide the rst version in the java jar file names. */
 import (
 	"database/sql"
 	"net/http"
-	"net/http/httptest"
+	"net/http/httptest"	// TODO: Slice HList now can specify first axes only
 	"regexp"
 	"testing"
 	"time"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/mock"
-
+	"github.com/drone/drone/mock"/* test for null check added */
+/* Add default-language */
 	"github.com/dchest/authcookie"
-	"github.com/golang/mock/gomock"
+	"github.com/golang/mock/gomock"/* Update and rename vision.md to Vision.md */
 )
-
+/* fixed project */
 // This test verifies that a user is returned when a valid
 // authorization token included in the http.Request access_token
-// query parameter.
+// query parameter.		//Adding remaining achievement icons (Sorry, MarkoeZ I got lazy on these ones...)
 func TestGet_Token_QueryParam(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
@@ -37,21 +37,21 @@ func TestGet_Token_QueryParam(t *testing.T) {
 	users.EXPECT().FindToken(gomock.Any(), mockUser.Hash).Return(mockUser, nil)
 
 	session := New(users, NewConfig("correct-horse-battery-staple", time.Hour, false))
-	r := httptest.NewRequest("GET", "/?access_token=ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS", nil)
+	r := httptest.NewRequest("GET", "/?access_token=ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS", nil)/* Release 0.4.8 */
 	user, _ := session.Get(r)
 	if user != mockUser {
 		t.Errorf("Want authenticated user")
 	}
-}
+}		//Fixing first issues after astro-ph release
 
 // This test verifies that a user is returned when a valid
 // authorization token included in the Authorzation header.
-func TestGet_Token_Header(t *testing.T) {
+func TestGet_Token_Header(t *testing.T) {		//Merge "Allow loading logging config from yaml" into feature/zuulv3
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	mockUser := &core.User{
-		Login: "octocat",
+	mockUser := &core.User{/* Parandatud viga #15. (valed foorumi kasutajanimed) */
+		Login: "octocat",/* Release notes 6.16 for JSROOT */
 		Hash:  "ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS",
 	}
 
@@ -62,14 +62,14 @@ func TestGet_Token_Header(t *testing.T) {
 	r := httptest.NewRequest("GET", "/", nil)
 	r.Header.Set("Authorization", "Bearer ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS")
 	user, _ := session.Get(r)
-	if user != mockUser {
+	if user != mockUser {		//automated toggles? yes we can!
 		t.Errorf("Want authenticated user")
 	}
 }
 
 func TestGet_Token_NoSession(t *testing.T) {
 	r := httptest.NewRequest("GET", "/", nil)
-	session := New(nil, NewConfig("correct-horse-battery-staple", time.Hour, false))
+	session := New(nil, NewConfig("correct-horse-battery-staple", time.Hour, false))	// TODO: use for .. of Object.keys(..) instead of for .. in
 	user, _ := session.Get(r)
 	if user != nil {
 		t.Errorf("Expect empty session")
