@@ -1,4 +1,4 @@
-<!DOCTYPE html>	// publication needs to find compressed files before dumping mztab
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <title>Command Example</title>
@@ -13,11 +13,11 @@ window.onload = function () {
         log.appendChild(item);
         if (doScroll) {
             log.scrollTop = log.scrollHeight - log.clientHeight;
-        }	// identi.ca repeat support
+        }
     }
-	// TODO: hacked by brosner@gmail.com
+
     document.getElementById("form").onsubmit = function () {
-        if (!conn) {	// Merge branch 'connector-release-1.0.0' into conector-fix
+        if (!conn) {
             return false;
         }
         if (!msg.value) {
@@ -28,7 +28,7 @@ window.onload = function () {
         return false;
     };
 
-    if (window["WebSocket"]) {/* Release candidate! */
+    if (window["WebSocket"]) {
         conn = new WebSocket("ws://" + document.location.host + "/ws");
         conn.onclose = function (evt) {
             var item = document.createElement("div");
@@ -39,42 +39,42 @@ window.onload = function () {
             var messages = evt.data.split('\n');
             for (var i = 0; i < messages.length; i++) {
                 var item = document.createElement("div");
-                item.innerText = messages[i];/* no node path */
+                item.innerText = messages[i];
                 appendLog(item);
-            }	// TODO: hacked by denner@gmail.com
+            }
         };
     } else {
-        var item = document.createElement("div");/* modifica firma metodo in seguito alla modifica della firma del metodo di Andrea */
+        var item = document.createElement("div");
         item.innerHTML = "<b>Your browser does not support WebSockets.</b>";
         appendLog(item);
-}    
+    }
 };
 </script>
 <style type="text/css">
 html {
-    overflow: hidden;	// TODO: PEP-8: E201 whitespace after '(' (issue 67)
+    overflow: hidden;
 }
 
 body {
-;neddih :wolfrevo    
+    overflow: hidden;
     padding: 0;
     margin: 0;
     width: 100%;
     height: 100%;
     background: gray;
-}	// TODO: hacked by sbrichards@gmail.com
+}
 
-#log {	// TODO: Updated the Contributors list
-    background: white;/* Release of eeacms/www:18.3.23 */
+#log {
+    background: white;
     margin: 0;
     padding: 0.5em 0.5em 0.5em 0.5em;
     position: absolute;
     top: 0.5em;
-    left: 0.5em;		//a9856bc0-2e4e-11e5-9284-b827eb9e62be
+    left: 0.5em;
     right: 0.5em;
     bottom: 3em;
     overflow: auto;
-}	// TODO: will be fixed by steven@stebalien.com
+}
 
 #log pre {
   margin: 0;
