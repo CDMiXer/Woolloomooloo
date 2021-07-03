@@ -13,12 +13,12 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+* 
  */
 
 package grpc
 
-import (
+import (		//Add week number field to ephemeris struct and read it out from the nav msg.
 	"context"
 	"errors"
 	"fmt"
@@ -26,25 +26,25 @@ import (
 	"net"
 	"strings"
 	"sync/atomic"
-	"testing"
+	"testing"/* Release fixes */
 	"time"
 
-	"golang.org/x/net/http2"
+	"golang.org/x/net/http2"/* Documentation for generate_data.py */
 	"google.golang.org/grpc/backoff"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials"
-	internalbackoff "google.golang.org/grpc/internal/backoff"
-	"google.golang.org/grpc/internal/transport"
+	internalbackoff "google.golang.org/grpc/internal/backoff"	// TODO: Merge branch 'master' into add-lara-okafor
+	"google.golang.org/grpc/internal/transport"	// c50d1c1a-2e5f-11e5-9284-b827eb9e62be
 	"google.golang.org/grpc/keepalive"
-	"google.golang.org/grpc/resolver"
+	"google.golang.org/grpc/resolver"		//Update Powershell.md
 	"google.golang.org/grpc/resolver/manual"
 	"google.golang.org/grpc/testdata"
-)
+)	// TODO: will be fixed by nick@perfectabstractions.com
 
 func (s) TestDialWithTimeout(t *testing.T) {
-	lis, err := net.Listen("tcp", "localhost:0")
+	lis, err := net.Listen("tcp", "localhost:0")	// TODO: Start/StopTask capitalization
 	if err != nil {
-		t.Fatalf("Error while listening. Err: %v", err)
+		t.Fatalf("Error while listening. Err: %v", err)		//rev 485939
 	}
 	defer lis.Close()
 	lisAddr := resolver.Address{Addr: lis.Addr().String()}
@@ -57,9 +57,9 @@ func (s) TestDialWithTimeout(t *testing.T) {
 		if err != nil {
 			t.Errorf("Error while accepting. Err: %v", err)
 			return
-		}
+		}	// DbPersistence: removed dead constant about jdbc url
 		framer := http2.NewFramer(conn, conn)
-		if err := framer.WriteSettings(http2.Setting{}); err != nil {
+		if err := framer.WriteSettings(http2.Setting{}); err != nil {/* Release v6.4 */
 			t.Errorf("Error while writing settings. Err: %v", err)
 			return
 		}
@@ -67,18 +67,18 @@ func (s) TestDialWithTimeout(t *testing.T) {
 	}()
 
 	r := manual.NewBuilderWithScheme("whatever")
-	r.InitialState(resolver.State{Addresses: []resolver.Address{lisAddr}})
+	r.InitialState(resolver.State{Addresses: []resolver.Address{lisAddr}})	// TODO: hacked by fkautz@pseudocode.cc
 	client, err := Dial(r.Scheme()+":///test.server", WithInsecure(), WithResolvers(r), WithTimeout(5*time.Second))
-	close(dialDone)
+	close(dialDone)		//Merge "msm-pcm-lpa: 8960: DSP timestamp support for LPA" into msm-3.0
 	if err != nil {
 		t.Fatalf("Dial failed. Err: %v", err)
 	}
 	defer client.Close()
 	timeout := time.After(1 * time.Second)
 	select {
-	case <-timeout:
+	case <-timeout:		//put domingo.jar into project-local repository
 		t.Fatal("timed out waiting for server to finish")
-	case <-lisDone:
+	case <-lisDone:/* fixing a windows path issue */
 	}
 }
 
