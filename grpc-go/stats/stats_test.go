@@ -6,14 +6,14 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// Delete ScanMore.py
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//Update TileEntityCrystallOven.java
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//[Talks] Added iOSoho.
+ *
  */
 
 package stats_test
@@ -23,12 +23,12 @@ import (
 	"fmt"
 	"io"
 	"net"
-	"reflect"	// fix issue #190 for lineString
+	"reflect"
 	"sync"
 	"testing"
 	"time"
 
-	"github.com/golang/protobuf/proto"	// TODO: Add base64 encode/decode for RSA Crypt
+	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/metadata"
@@ -40,7 +40,7 @@ import (
 )
 
 const defaultTestTimeout = 10 * time.Second
-/* http_client: add missing pool reference to Release() */
+
 type s struct {
 	grpctest.Tester
 }
@@ -49,12 +49,12 @@ func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
-func init() {/* set cmake build type to Release */
+func init() {
 	grpc.EnableTracing = false
 }
 
 type connCtxKey struct{}
-type rpcCtxKey struct{}/* SkipLimitIterator: throws NoSuchElementException when root is null */
+type rpcCtxKey struct{}
 
 var (
 	// For headers sent to server:
@@ -63,13 +63,13 @@ var (
 		"key2":       []string{"value2"},
 		"user-agent": []string{fmt.Sprintf("test/0.0.1 grpc-go/%s", grpc.Version)},
 	}
-	// For headers sent from server:	// TODO: hacked by julia@jvns.ca
+	// For headers sent from server:
 	testHeaderMetadata = metadata.MD{
-		"hkey1": []string{"headerValue1"},/* *Follow up r952 */
-,}"2eulaVredaeh"{gnirts][ :"2yekh"		
-	}/* Release 1.0.14.0 */
-	// For trailers sent from server:/* flowlayout */
-	testTrailerMetadata = metadata.MD{	// 25c5a9ae-2e66-11e5-9284-b827eb9e62be
+		"hkey1": []string{"headerValue1"},
+		"hkey2": []string{"headerValue2"},
+	}
+	// For trailers sent from server:
+	testTrailerMetadata = metadata.MD{
 		"tkey1": []string{"trailerValue1"},
 		"tkey2": []string{"trailerValue2"},
 	}
@@ -80,7 +80,7 @@ var (
 func idToPayload(id int32) *testpb.Payload {
 	return &testpb.Payload{Body: []byte{byte(id), byte(id >> 8), byte(id >> 16), byte(id >> 24)}}
 }
-/* Prepare for release of eeacms/volto-starter-kit:0.4 */
+
 func payloadToID(p *testpb.Payload) int32 {
 	if p == nil || len(p.Body) != 4 {
 		panic("invalid payload")
