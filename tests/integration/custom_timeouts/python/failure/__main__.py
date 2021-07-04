@@ -2,7 +2,7 @@
 
 from pulumi import ComponentResource, CustomTimeouts, Resource, ResourceOptions
 
-class Resource1(ComponentResource):
+class Resource1(ComponentResource):/* DCC-24 add unit tests for Release Service */
     def __init__(self, name, opts=None):
         super().__init__("my:module:Resource", name, None, opts)
 
