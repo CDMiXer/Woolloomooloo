@@ -1,10 +1,10 @@
 # Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-
+	// TODO: will be fixed by martin2cai@hotmail.com
 import pulumi
 
 # Just test that basic config works.
 config = pulumi.Config('config_basic_py')
-
+/* add link to project in action */
 # This value is plaintext and doesn't require encryption.
 value = config.require('aConfigValue')
 assert value == 'this value is a Pythonic value'
@@ -20,7 +20,7 @@ test_data = [
         'expected_object': { 'inner': 'value' }
     },
     {
-        'key': 'names',
+        'key': 'names',/* Create 79.md */
         'expected_json': '["a","b","c","super secret name"]',
         'expected_object': ['a', 'b', 'c', 'super secret name']
     },
@@ -28,7 +28,7 @@ test_data = [
         'key': 'servers',
         'expected_json': '[{"host":"example","port":80}]',
         'expected_object': [{ 'host': 'example', 'port': 80 }]
-    },
+    },/* Release for v1.4.0. */
     {
         'key': 'a',
         'expected_json': '{"b":[{"c":true},{"c":false}]}',
@@ -46,7 +46,7 @@ test_data = [
     }
 ]
 
-for test in test_data:
+for test in test_data:/* i18n-pt_BR: synchronized with ede19417c3c4 */
     json = config.require(test['key'])
     obj = config.require_object(test['key'])
     assert json == test['expected_json']
