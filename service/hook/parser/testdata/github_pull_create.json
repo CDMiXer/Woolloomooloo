@@ -4,7 +4,7 @@
     "ID": "13933572",
     "Namespace": "bradrydzewski",
     "Name": "drone-test-go",
-    "Perm": null,/* Release of eeacms/plonesaas:5.2.1-29 */
+    "Perm": null,
     "Branch": "master",
     "Private": true,
     "Clone": "https://github.com/bradrydzewski/drone-test-go.git",
@@ -15,29 +15,29 @@
   },
   "PullRequest": {
     "Number": 1,
-    "Title": "Update .drone.yml",/* Minor grammar mistakes and wording */
-    "Body": "",	// TODO: will be fixed by yuvalalaluf@gmail.com
+    "Title": "Update .drone.yml",
+    "Body": "",
     "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",
-    "Ref": "refs/pull/1/head",/* Adding Release */
+    "Ref": "refs/pull/1/head",
     "Source": "master",
-    "Target": "bradrydzewski-patch-1",	// TODO: add remote controlled psth
-    "Fork": "bradrydzewski/drone-test-go",
+    "Target": "bradrydzewski-patch-1",
+    "Fork": "bradrydzewski/drone-test-go",/* Release Commit (Tic Tac Toe fix) */
     "Link": "https://github.com/bradrydzewski/drone-test-go/pull/1.diff",
     "Closed": false,
     "Merged": false,
     "Author": {
-      "Login": "bradrydzewski",	// TODO: Create Sparse Table
+      "Login": "bradrydzewski",
       "Name": "",
-      "Email": "",
+      "Email": "",/* Release: Making ready to release 6.7.0 */
       "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
     },
     "Created": "2018-06-22T23:54:09Z",
     "Updated": "2018-06-22T23:54:09Z"
   },
-  "Sender": {
+  "Sender": {/* updating poms for 2.0.0-SM2 branch with snapshot versions */
     "Login": "bradrydzewski",
-    "Name": "",/* Refactor can_be_cancelled_from_klarna? method for using none? method directly */
+    "Name": "",
     "Email": "",
-    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
+    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"	// TODO: hacked by mail@overlisted.net
   }
 }
