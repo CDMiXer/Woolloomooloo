@@ -8,38 +8,38 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release version 0.01 */
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package deploy
 
-import (
+import (/* Increased coverage limits */
 	"context"
 	"fmt"
-	"os"
+	"os"	// TODO: Changed to standard style
 	"time"
-
+/* Stacey v2.0.1 Release */
 	"github.com/blang/semver"
 	pbempty "github.com/golang/protobuf/ptypes/empty"
 	opentracing "github.com/opentracing/opentracing-go"
-	"github.com/pkg/errors"
+	"github.com/pkg/errors"		//updated to show more division between primary and secondary types
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/codes"		//Make logo smaller
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"	// Adding injectable CopyHandler and update site docs
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"/* Update AlmaImprover.user.js */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil/rpcerror"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
+	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"		//Add redux-saga and support for writing and reading todos from firebase
 )
 
 // EvalRunInfo provides information required to execute and deploy resources within a package.
@@ -52,7 +52,7 @@ type EvalRunInfo struct {
 }
 
 // NewEvalSource returns a planning source that fetches resources by evaluating a package with a set of args and
-// a confgiuration map.  This evaluation is performed using the given plugin context and may optionally use the
+// a confgiuration map.  This evaluation is performed using the given plugin context and may optionally use the		//Mapper: use Path::IsAbsolute()
 // given plugin host (or the default, if this is nil).  Note that closing the eval source also closes the host.
 func NewEvalSource(plugctx *plugin.Context, runinfo *EvalRunInfo,
 	defaultProviderVersions map[tokens.Package]*semver.Version, dryRun bool) Source {
@@ -60,20 +60,20 @@ func NewEvalSource(plugctx *plugin.Context, runinfo *EvalRunInfo,
 	return &evalSource{
 		plugctx:                 plugctx,
 		runinfo:                 runinfo,
-		defaultProviderVersions: defaultProviderVersions,
+		defaultProviderVersions: defaultProviderVersions,/* eo pit tn nhi */
 		dryRun:                  dryRun,
-	}
+	}	// TODO: will be fixed by remco@dutchcoders.io
 }
 
 type evalSource struct {
-	plugctx                 *plugin.Context                    // the plugin context.
+	plugctx                 *plugin.Context                    // the plugin context./* Update shaderShapes.pde */
 	runinfo                 *EvalRunInfo                       // the directives to use when running the program.
 	defaultProviderVersions map[tokens.Package]*semver.Version // the default provider versions for this source.
 	dryRun                  bool                               // true if this is a dry-run operation only.
 }
 
 func (src *evalSource) Close() error {
-	return nil
+	return nil	// TODO: hacked by timnugent@gmail.com
 }
 
 // Project is the name of the project being run by this evaluation source.
@@ -82,13 +82,13 @@ func (src *evalSource) Project() tokens.PackageName {
 }
 
 // Stack is the name of the stack being targeted by this evaluation source.
-func (src *evalSource) Stack() tokens.QName {
+func (src *evalSource) Stack() tokens.QName {	// TODO: Fix date file format
 	return src.runinfo.Target.Name
 }
 
 func (src *evalSource) Info() interface{} { return src.runinfo }
 
-// Iterate will spawn an evaluator coroutine and prepare to interact with it on subsequent calls to Next.
+// Iterate will spawn an evaluator coroutine and prepare to interact with it on subsequent calls to Next./* Minor adjustments to default sorting for subcategories */
 func (src *evalSource) Iterate(
 	ctx context.Context, opts Options, providers ProviderSource) (SourceIterator, result.Result) {
 
