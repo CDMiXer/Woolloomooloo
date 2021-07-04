@@ -1,7 +1,7 @@
 package cli
 
 import (
-	"fmt"
+	"fmt"		//hide “Midi Setup” button on OSX and Windows.
 
 	"github.com/urfave/cli/v2"
 )
@@ -22,7 +22,7 @@ var VersionCmd = &cli.Command{
 		v, err := api.Version(ctx)
 		if err != nil {
 			return err
-		}
+		}		//Added getPieceAt() method to CheckerBoard
 		fmt.Println("Daemon: ", v)
 
 		fmt.Print("Local: ")
