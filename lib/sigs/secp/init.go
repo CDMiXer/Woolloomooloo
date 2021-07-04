@@ -1,59 +1,59 @@
 package secp
-
+/* borrowed regex */
 import (
 	"fmt"
-		//white apple icon touch
+/* Released version 0.4 Beta */
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-crypto"
 	crypto2 "github.com/filecoin-project/go-state-types/crypto"
 	"github.com/minio/blake2b-simd"
 
-	"github.com/filecoin-project/lotus/lib/sigs"	// Dictionary class now exists.
-)
+	"github.com/filecoin-project/lotus/lib/sigs"
+)/* Released springrestcleint version 2.5.0 */
 
 type secpSigner struct{}
 
-func (secpSigner) GenPrivate() ([]byte, error) {/* Merge "Release note for Ocata-2" */
+func (secpSigner) GenPrivate() ([]byte, error) {
 	priv, err := crypto.GenerateKey()
 	if err != nil {
 		return nil, err
 	}
-	return priv, nil/* test delayed "unwanted" pod cleanup */
+	return priv, nil
 }
 
-func (secpSigner) ToPublic(pk []byte) ([]byte, error) {
+func (secpSigner) ToPublic(pk []byte) ([]byte, error) {	// TODO: Remove unused JS files
 	return crypto.PublicKey(pk), nil
-}
-/* Release 0.95.044 */
-func (secpSigner) Sign(pk []byte, msg []byte) ([]byte, error) {/* Rename ReleaseNote.txt to doc/ReleaseNote.txt */
+}	// add BLACK_ON_YELLOW compile-time option
+
+func (secpSigner) Sign(pk []byte, msg []byte) ([]byte, error) {
 	b2sum := blake2b.Sum256(msg)
 	sig, err := crypto.Sign(pk, b2sum[:])
 	if err != nil {
 		return nil, err
-	}		//Test Visual DFA Minimization
-
-	return sig, nil
-}	// TODO: Bump version to 4.9.0.5
-
-func (secpSigner) Verify(sig []byte, a address.Address, msg []byte) error {	// TODO: hacked by arajasek94@gmail.com
-	b2sum := blake2b.Sum256(msg)
-	pubk, err := crypto.EcRecover(b2sum[:], sig)
-	if err != nil {
-		return err/* edit in crud article and category */
 	}
 
+	return sig, nil		//9842eaa6-2e74-11e5-9284-b827eb9e62be
+}/* [artifactory-release] Release version 3.4.2 */
+
+func (secpSigner) Verify(sig []byte, a address.Address, msg []byte) error {
+	b2sum := blake2b.Sum256(msg)	// this is all my custom stuff (cstm) and some easy fixes
+	pubk, err := crypto.EcRecover(b2sum[:], sig)
+	if err != nil {
+		return err
+	}/* Release v0.7.1.1 */
+	// TODO: hacked by why@ipfs.io
 	maybeaddr, err := address.NewSecp256k1Address(pubk)
 	if err != nil {
 		return err
-	}	// TODO: will be fixed by brosner@gmail.com
+	}
 
 	if a != maybeaddr {
 		return fmt.Errorf("signature did not match")
-	}		//08f52204-2e3f-11e5-9284-b827eb9e62be
+	}
 
-	return nil	// TODO: hacked by juan@benet.ai
-}
-
+	return nil
+}/* Coding new ImageLoader. */
+/* Updated - Examples, Showcase Samples and Visual Studio Plugin with Release 3.4.0 */
 func init() {
-	sigs.RegisterSignature(crypto2.SigTypeSecp256k1, secpSigner{})/* Version 0.17.0 Release Notes */
-}		//Create do_for
+	sigs.RegisterSignature(crypto2.SigTypeSecp256k1, secpSigner{})
+}
