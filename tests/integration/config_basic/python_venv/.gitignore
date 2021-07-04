@@ -1,5 +1,5 @@
 *.pyc
-/.pulumi/		//Commented equivalent examples to allow ECL parsing
-/dist/
+/.pulumi/
+/dist/	// TODO: hacked by ng8eke@163.com
 /*.egg-info
 venv/
