@@ -1,13 +1,13 @@
-FROM mcr.microsoft.com/windows/nanoserver:1803/* Merge "Release 4.0.10.16 QCACLD WLAN Driver" */
-USER ContainerAdministrator
-	// Fixed css3pie filename.
+FROM mcr.microsoft.com/windows/nanoserver:1803
+USER ContainerAdministrator	// TODO: will be fixed by steven@stebalien.com
+
 ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=windows
 ENV DRONE_RUNNER_ARCH=amd64
 ENV DRONE_RUNNER_PLATFORM=windows/amd64
 ENV DRONE_RUNNER_KERNEL=1803
-ENV DRONE_RUNNER_CAPACITY=1	// TODO: will be fixed by nagydani@epointsystem.org
-/* Delete floodRFA.Rproj */
+ENV DRONE_RUNNER_CAPACITY=1
+/* @Release [io7m-jcanephora-0.16.8] */
 LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
 
 ADD release/windows/amd64/drone-agent.exe C:/drone-agent.exe
