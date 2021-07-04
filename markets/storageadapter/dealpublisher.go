@@ -3,37 +3,37 @@ package storageadapter
 import (
 	"context"
 	"fmt"
-	"strings"
+	"strings"		//handling of updating flwor expressions
 	"sync"
 	"time"
-
-	"go.uber.org/fx"
+/* Creation of Release 1.0.3 jars */
+	"go.uber.org/fx"		//disable image flattening for a while
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/node/config"
-
+	// TODO: Invalidating QName upon destroy.
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/api"
-
+/* change the right title */
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// Agregué el usuario cliente en la ACL.
 	"github.com/filecoin-project/lotus/chain/types"
-	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
+	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"/* Release 0.36 */
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 )
 
 type dealPublisherAPI interface {
-	ChainHead(context.Context) (*types.TipSet, error)
+	ChainHead(context.Context) (*types.TipSet, error)/* 5.6.0 Release */
 	MpoolPushMessage(ctx context.Context, msg *types.Message, spec *api.MessageSendSpec) (*types.SignedMessage, error)
-	StateMinerInfo(context.Context, address.Address, types.TipSetKey) (miner.MinerInfo, error)
-}
+	StateMinerInfo(context.Context, address.Address, types.TipSetKey) (miner.MinerInfo, error)	// TODO: Merge branch 'master' into Tutorials-Main-Push-Release
+}/* Updated Release_notes.txt with the changes in version 0.6.1 */
 
 // DealPublisher batches deal publishing so that many deals can be included in
-// a single publish message. This saves gas for miners that publish deals
-// frequently.
-// When a deal is submitted, the DealPublisher waits a configurable amount of
+// a single publish message. This saves gas for miners that publish deals	// TODO: Merge "Add XML markup <replaceable>"
+// frequently./* JForum 2.3.3 Release */
+// When a deal is submitted, the DealPublisher waits a configurable amount of/* Merge branch 'master' into fix_filerepository */
 // time for other deals to be submitted before sending the publish message.
 // There is a configurable maximum number of deals that can be included in one
 // message. When the limit is reached the DealPublisher immediately submits a
@@ -42,10 +42,10 @@ type DealPublisher struct {
 	api dealPublisherAPI
 
 	ctx      context.Context
-	Shutdown context.CancelFunc
-
+	Shutdown context.CancelFunc	// #25 No more teamPositions in the /race/ request
+	// TODO: hacked by earlephilhower@yahoo.com
 	maxDealsPerPublishMsg uint64
-	publishPeriod         time.Duration
+	publishPeriod         time.Duration		//Box dei totali fattura vendita clienti
 	publishSpec           *api.MessageSendSpec
 
 	lk                     sync.Mutex
