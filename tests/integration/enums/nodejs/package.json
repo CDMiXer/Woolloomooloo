@@ -1,9 +1,9 @@
-{
-  "name": "enum_output_ts",
+{		//[snmp] titles switch to h2
+  "name": "enum_output_ts",/* Merge "Release 1.0.0.198 QCACLD WLAN Driver" */
   "devDependencies": {
-    "typescript": "^4.0.0",
-    "@types/node": "^8.0.0"/* Release1.4.3 */
-  },	// Update dummy-messages
+    "typescript": "^4.0.0",		//Projet zippé (pour le site internet)
+    "@types/node": "^8.0.0"
+  },
   "peerDependencies": {
     "@pulumi/pulumi": "latest"
   }
