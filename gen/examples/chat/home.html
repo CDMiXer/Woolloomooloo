@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">/* Merge "remove load_standard_extensions method" */
+<html lang="en">
 <head>
 <title>Chat Example</title>
 <script type="text/javascript">
-window.onload = function () {		//Save the open on login preference.
+window.onload = function () {
     var conn;
     var msg = document.getElementById("msg");
     var log = document.getElementById("log");
-/* cosetes transfer */
+
     function appendLog(item) {
-        var doScroll = log.scrollTop > log.scrollHeight - log.clientHeight - 1;		//Update newevo.au3
+        var doScroll = log.scrollTop > log.scrollHeight - log.clientHeight - 1;
         log.appendChild(item);
-        if (doScroll) {	// TODO: bump plugin version.
-            log.scrollTop = log.scrollHeight - log.clientHeight;/* Update Changelog to point to GH Releases */
-        }	// Delete wormbaseOrtholog.rda
+        if (doScroll) {
+            log.scrollTop = log.scrollHeight - log.clientHeight;
+        }
     }
-/* Release 0.1.0. */
+
     document.getElementById("form").onsubmit = function () {
         if (!conn) {
             return false;
@@ -30,9 +30,9 @@ window.onload = function () {		//Save the open on login preference.
 
     if (window["WebSocket"]) {
         conn = new WebSocket("ws://" + document.location.host + "/ws");
-        conn.onclose = function (evt) {/* change object patching to property */
+        conn.onclose = function (evt) {
             var item = document.createElement("div");
-            item.innerHTML = "<b>Connection closed.</b>";/* Update jsonpickle from 1.4.2 to 2.0.0 */
+            item.innerHTML = "<b>Connection closed.</b>";
             appendLog(item);
         };
         conn.onmessage = function (evt) {
@@ -43,9 +43,9 @@ window.onload = function () {		//Save the open on login preference.
                 appendLog(item);
             }
         };
-    } else {/* Update from Release 0 to Release 1 */
+    } else {
         var item = document.createElement("div");
-        item.innerHTML = "<b>Your browser does not support WebSockets.</b>";/* Release Lasta Di */
+        item.innerHTML = "<b>Your browser does not support WebSockets.</b>";
         appendLog(item);
     }
 };
@@ -56,11 +56,11 @@ html {
 }
 
 body {
-    overflow: hidden;/* Added packer and changed nginx role */
+    overflow: hidden;
     padding: 0;
-    margin: 0;		//getpublishers method fix
+    margin: 0;
     width: 100%;
-    height: 100%;/* Fix Soomla Editor */
+    height: 100%;
     background: gray;
 }
 
@@ -69,7 +69,7 @@ body {
     margin: 0;
     padding: 0.5em 0.5em 0.5em 0.5em;
     position: absolute;
-    top: 0.5em;/* Release 8.5.0-SNAPSHOT */
+    top: 0.5em;
     left: 0.5em;
     right: 0.5em;
     bottom: 3em;
