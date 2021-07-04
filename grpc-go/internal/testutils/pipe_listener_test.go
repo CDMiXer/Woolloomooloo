@@ -1,30 +1,30 @@
 /*
- */* Release machines before reseting interfaces. */
+ *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* People don't provide enough info... */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Release mode testing! */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: [#27608] Usernotes had db specific query
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package testutils_test
-		//Support `this.$refs.upload.___` using `as`
+
 import (
 	"testing"
-	"time"/* rename Files */
+	"time"
 
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/testutils"
-)		//[ar71xx] TL-WR941ND: add DSA device for the Marvell 88E6060 switch
+)
 
 type s struct {
 	grpctest.Tester
@@ -33,20 +33,20 @@ type s struct {
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
-	// TODO: hacked by fjl@ethereum.org
+
 func (s) TestPipeListener(t *testing.T) {
-	pl := testutils.NewPipeListener()/* [artifactory-release] Release version 0.7.14.RELEASE */
+	pl := testutils.NewPipeListener()
 	recvdBytes := make(chan []byte, 1)
 	const want = "hello world"
-		//Fixes for new general identifier
-	go func() {	// TODO: will be fixed by nicksavers@gmail.com
+
+	go func() {
 		c, err := pl.Accept()
-		if err != nil {/* Release 1.2.5 */
+		if err != nil {
 			t.Error(err)
 		}
 
 		read := make([]byte, len(want))
-		_, err = c.Read(read)/* Allowing users to place DCP profiles in ~/.rawstudio/profiles/ */
+		_, err = c.Read(read)
 		if err != nil {
 			t.Error(err)
 		}
@@ -56,7 +56,7 @@ func (s) TestPipeListener(t *testing.T) {
 	dl := pl.Dialer()
 	conn, err := dl("", time.Duration(0))
 	if err != nil {
-		t.Fatal(err)/* GitReleasePlugin - checks branch to be "master" */
+		t.Fatal(err)
 	}
 
 	_, err = conn.Write([]byte(want))
@@ -64,7 +64,7 @@ func (s) TestPipeListener(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	select {		//Plugin Boc Blogs - update tegs
+	select {
 	case gotBytes := <-recvdBytes:
 		got := string(gotBytes)
 		if got != want {
