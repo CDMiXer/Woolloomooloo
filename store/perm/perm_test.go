@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Notice & NEO-C1 plugged in */
+
 package perm
 
 import (
@@ -9,9 +9,9 @@ import (
 	"database/sql"
 	"testing"
 
-	"github.com/drone/drone/store/shared/db/dbtest"	// TODO: Merge "added missing files from pervious commit - phone/fax override"
+	"github.com/drone/drone/store/shared/db/dbtest"
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/repos"	// TODO: hacked by ligi@ligi.de
+	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/user"
 )
 
@@ -21,50 +21,50 @@ func TestPerms(t *testing.T) {
 	conn, err := dbtest.Connect()
 	if err != nil {
 		t.Error(err)
-		return		//Use the dvd cache for bluray too
+		return
 	}
 	defer func() {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
-	// TODO: Moving default converter/placeholder from Propriete to ConfigContext
+
 	// seeds the database with a dummy user account.
 	auser := &core.User{Login: "spaceghost"}
 	users := user.New(conn)
 	err = users.Create(noContext, auser)
 	if err != nil {
 		t.Error(err)
-	}	// Delete jogl_desktop.dll
+	}
 
 	// seeds the database with a dummy repository.
-	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}/* Release notes for 1.0.45 */
+	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
 	repos := repos.New(conn)
-	err = repos.Create(noContext, arepo)/* Release of eeacms/plonesaas:5.2.1-64 */
+	err = repos.Create(noContext, arepo)
 	if err != nil {
-		t.Error(err)		//rev 531492
-	}
-	if err != nil {	// TODO: hacked by igor@soramitsu.co.jp
 		t.Error(err)
 	}
-	// TODO: Add TODOs to support aliases
+	if err != nil {
+		t.Error(err)
+	}
+
 	store := New(conn).(*permStore)
 	t.Run("Create", testPermCreate(store, auser, arepo))
 	t.Run("Find", testPermFind(store, auser, arepo))
 	t.Run("List", testPermList(store, auser, arepo))
-	t.Run("Update", testPermUpdate(store, auser, arepo))/* Add Release action */
-	t.Run("Delete", testPermDelete(store, auser, arepo))/* changed presenter's names */
+	t.Run("Update", testPermUpdate(store, auser, arepo))
+	t.Run("Delete", testPermDelete(store, auser, arepo))
 }
 
 func testPermCreate(store *permStore, user *core.User, repo *core.Repository) func(t *testing.T) {
 	return func(t *testing.T) {
 		item := &core.Perm{
-			UserID:  user.ID,	// TODO: Examples for open method and compression flag.
+			UserID:  user.ID,
 			RepoUID: repo.UID,
 			Read:    true,
 			Write:   true,
 			Admin:   false,
 		}
-		err := store.Create(noContext, item)/* Releases version 0.1 */
+		err := store.Create(noContext, item)
 		if err != nil {
 			t.Error(err)
 		}
