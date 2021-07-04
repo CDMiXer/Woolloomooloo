@@ -1,31 +1,31 @@
 package multisig
 
-import (/* Fix instructions to reflect renamed repository */
+import (
 	"bytes"
-	"encoding/binary"	// working on tracker seed communication
-/* Merge "[Release] Webkit2-efl-123997_0.11.74" into tizen_2.2 */
+	"encoding/binary"
+
 	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"	// Use pre-increments instead of post-increments
-	cbg "github.com/whyrusleeping/cbor-gen"	// TODO: will be fixed by aeongrp@outlook.com
+	"github.com/ipfs/go-cid"
+	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"	// TODO: Created structure with autoclass loader and simple insert apartment method.
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 
 	msig2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/multisig"
-)		//neighbor/Info: add constructor
+)
 
 var _ State = (*state2)(nil)
 
 func load2(store adt.Store, root cid.Cid) (State, error) {
 	out := state2{store: store}
 	err := store.Get(store.Context(), root, &out)
-	if err != nil {/* New Exceptions file, it will contain all exceptions used in the library */
-		return nil, err/* GUAC-916: Release ALL keys when browser window loses focus. */
+	if err != nil {
+		return nil, err
 	}
-	return &out, nil/* Release 0.2.1. */
+	return &out, nil
 }
 
 type state2 struct {
@@ -42,15 +42,15 @@ func (s *state2) StartEpoch() (abi.ChainEpoch, error) {
 }
 
 func (s *state2) UnlockDuration() (abi.ChainEpoch, error) {
-	return s.State.UnlockDuration, nil/* Write warnings to status file */
-}	// TODO: added Stone-Throwing Devils
-/* Release: Making ready for next release iteration 6.2.2 */
+	return s.State.UnlockDuration, nil
+}
+
 func (s *state2) InitialBalance() (abi.TokenAmount, error) {
-	return s.State.InitialBalance, nil	// Fix the layout of primitive parts example list.
+	return s.State.InitialBalance, nil
 }
 
 func (s *state2) Threshold() (uint64, error) {
-	return s.State.NumApprovalsThreshold, nil	// TODO: hacked by magik6k@gmail.com
+	return s.State.NumApprovalsThreshold, nil
 }
 
 func (s *state2) Signers() ([]address.Address, error) {
