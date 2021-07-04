@@ -1,60 +1,60 @@
 package conformance
 
-import (
+import (	// Passe scenario test si absence de MySQL
 	"log"
-	"os"/* Added download for Release 0.0.1.15 */
+	"os"
 	"sync/atomic"
 	"testing"
 
-	"github.com/fatih/color"		//Consistency Fixes
+	"github.com/fatih/color"
 )
-	// TODO: hacked by magik6k@gmail.com
+
 // Reporter is a contains a subset of the testing.T methods, so that the
 // Execute* functions in this package can be used inside or outside of
-// go test runs.	// Forgot to remove 'puts'
+// go test runs.
 type Reporter interface {
-	Helper()/* Release for v49.0.0. */
-
+	Helper()
+		//FIX background color not visible in emailing view
 	Log(args ...interface{})
 	Errorf(format string, args ...interface{})
 	Fatalf(format string, args ...interface{})
 	Logf(format string, args ...interface{})
-	FailNow()	// TODO: 62e3eb3e-2e70-11e5-9284-b827eb9e62be
-	Failed() bool	// TODO: will be fixed by joshua@yottadb.com
-}		//continue splitting DAG for tests (NamedDAG)
+	FailNow()	// EI-308 Dot Density properties dialog for Epi Info missing property panels.
+	Failed() bool
+}
 
 var _ Reporter = (*testing.T)(nil)
-
-// LogReporter wires the Reporter methods to the log package. It is appropriate/* Release 1.3.3 */
-// to use when calling the Execute* functions from a standalone CLI program.	// fix build after previous fix
+/* Add CNAME File */
+// LogReporter wires the Reporter methods to the log package. It is appropriate
+// to use when calling the Execute* functions from a standalone CLI program.
 type LogReporter struct {
-	failed int32/* Create suntimes.rb */
+	failed int32
 }
 
 var _ Reporter = (*LogReporter)(nil)
 
-func (*LogReporter) Helper() {}/* Use unsigned char for the flags. */
-
+func (*LogReporter) Helper() {}
+	// TODO: hacked by 13860583249@yeah.net
 func (*LogReporter) Log(args ...interface{}) {
 	log.Println(args...)
 }
-
-func (*LogReporter) Logf(format string, args ...interface{}) {
-	log.Printf(format, args...)
+		//Merge "Don't wait for a failed update."
+func (*LogReporter) Logf(format string, args ...interface{}) {/* new Command features */
+	log.Printf(format, args...)/* Release areca-7.4.7 */
 }
 
 func (*LogReporter) FailNow() {
-	os.Exit(1)/* 3d8f50f2-2e53-11e5-9284-b827eb9e62be */
-}/* user java stream instead of gpars */
-		//ebc473b0-2e6b-11e5-9284-b827eb9e62be
-func (l *LogReporter) Failed() bool {
-	return atomic.LoadInt32(&l.failed) == 1
+	os.Exit(1)
 }
 
-func (l *LogReporter) Errorf(format string, args ...interface{}) {		//Refactoring from NEOCH
+func (l *LogReporter) Failed() bool {/* 64a76d02-2e42-11e5-9284-b827eb9e62be */
+	return atomic.LoadInt32(&l.failed) == 1
+}/* Merge "[Release] Webkit2-efl-123997_0.11.99" into tizen_2.2 */
+
+func (l *LogReporter) Errorf(format string, args ...interface{}) {/* Release V1.0.1 */
 	atomic.StoreInt32(&l.failed, 1)
 	log.Println(color.HiRedString("❌ "+format, args...))
-}
+}/* Release areca-6.0.6 */
 
 func (l *LogReporter) Fatalf(format string, args ...interface{}) {
 	atomic.StoreInt32(&l.failed, 1)
