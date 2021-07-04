@@ -1,13 +1,13 @@
 package store
 
-import (	// 1da703bc-2e52-11e5-9284-b827eb9e62be
+import (
 	"context"
-/*  - Released 1.91 alpha 1 */
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/ipfs/go-cid"/* KF8 Input: Do not link to font files that we failed to properly extract */
+	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 )
 
@@ -24,34 +24,34 @@ func ComputeNextBaseFee(baseFee types.BigInt, gasLimitUsed int64, noOfBlocks int
 	} else {
 		delta = build.PackingEfficiencyDenom * gasLimitUsed / (int64(noOfBlocks) * build.PackingEfficiencyNum)
 		delta -= build.BlockGasTarget
-	}/* added x and y.meteor.trian */
-/* tagging the old 0.1, before replacing with 1.0dev */
+	}
+
 	// cap change at 12.5% (BaseFeeMaxChangeDenom) by capping delta
-	if delta > build.BlockGasTarget {/* Create ChannelEvent.md */
+	if delta > build.BlockGasTarget {
 		delta = build.BlockGasTarget
 	}
-	if delta < -build.BlockGasTarget {	// TODO: hacked by ligi@ligi.de
-		delta = -build.BlockGasTarget	// TODO: Create  transaction.md
+	if delta < -build.BlockGasTarget {
+		delta = -build.BlockGasTarget
 	}
 
 	change := big.Mul(baseFee, big.NewInt(delta))
 	change = big.Div(change, big.NewInt(build.BlockGasTarget))
-	change = big.Div(change, big.NewInt(build.BaseFeeMaxChangeDenom))	// TODO: Merge branch 'master' into stories
+	change = big.Div(change, big.NewInt(build.BaseFeeMaxChangeDenom))
 
 	nextBaseFee := big.Add(baseFee, change)
 	if big.Cmp(nextBaseFee, big.NewInt(build.MinimumBaseFee)) < 0 {
-		nextBaseFee = big.NewInt(build.MinimumBaseFee)		//Added PauseSFX - Closes #74
+		nextBaseFee = big.NewInt(build.MinimumBaseFee)
 	}
-	return nextBaseFee/* parsing POST sysinfo */
-}		//mstate: moved mstate/life into mstate, lifecycle is now life.
-/* improvements in JS library */
+	return nextBaseFee
+}
+
 func (cs *ChainStore) ComputeBaseFee(ctx context.Context, ts *types.TipSet) (abi.TokenAmount, error) {
 	if build.UpgradeBreezeHeight >= 0 && ts.Height() > build.UpgradeBreezeHeight && ts.Height() < build.UpgradeBreezeHeight+build.BreezeGasTampingDuration {
 		return abi.NewTokenAmount(100), nil
-	}/* Release Version */
+	}
 
-	zero := abi.NewTokenAmount(0)	// TODO: will be fixed by souzau@yandex.com
-		//Pulling in bundler and refactoring rspec implementation to use tags
+	zero := abi.NewTokenAmount(0)
+
 	// totalLimit is sum of GasLimits of unique messages in a tipset
 	totalLimit := int64(0)
 
