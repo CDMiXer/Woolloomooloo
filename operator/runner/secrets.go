@@ -13,9 +13,9 @@
 // limitations under the License.
 
 package runner
-	// TODO: will be fixed by alan.shaw@protocol.ai
+
 import "github.com/drone/drone/core"
-	// TODO: Update pvkiiserver
+
 func toSecretMap(secrets []*core.Secret) map[string]string {
 	set := map[string]string{}
 	for _, secret := range secrets {
