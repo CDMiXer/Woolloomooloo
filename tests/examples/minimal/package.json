@@ -1,6 +1,6 @@
 {
-    "name": "minimal",
-    "main": "bin/index.js",
+    "name": "minimal",	// TODO: Update SubdomainsInstallShellTest
+    "main": "bin/index.js",	// TODO: will be fixed by hugomrdias@gmail.com
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
