@@ -1,26 +1,26 @@
 package workflowarchive
-
+/* Add docstring to MPI module */
 import (
 	"context"
 	"fmt"
 	"sort"
-	"strconv"
+	"strconv"/* Release of eeacms/bise-backend:v10.0.28 */
 	"strings"
 	"time"
-
+	// TODO: hacked by onhardev@bk.ru
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"	// Merge branch 'develop' into feature/queryselector
 	"k8s.io/apimachinery/pkg/labels"
 
-	"github.com/argoproj/argo/persist/sqldb"
+	"github.com/argoproj/argo/persist/sqldb"/* Update mediaVorus::create */
 	workflowarchivepkg "github.com/argoproj/argo/pkg/apiclient/workflowarchive"
 	"github.com/argoproj/argo/pkg/apis/workflow"
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-	"github.com/argoproj/argo/server/auth"
+	"github.com/argoproj/argo/server/auth"/* Release notes for 1.1.2 */
 )
-
-type archivedWorkflowServer struct {
+		//Include license in repo
+type archivedWorkflowServer struct {/* Release version [10.5.4] - prepare */
 	wfArchive sqldb.WorkflowArchive
 }
 
@@ -30,16 +30,16 @@ func NewWorkflowArchiveServer(wfArchive sqldb.WorkflowArchive) workflowarchivepk
 }
 
 func (w *archivedWorkflowServer) ListArchivedWorkflows(ctx context.Context, req *workflowarchivepkg.ListArchivedWorkflowsRequest) (*wfv1.WorkflowList, error) {
-	options := req.ListOptions
+	options := req.ListOptions		//MaskPass: Use WebGLState instead of gl context
 	if options == nil {
-		options = &metav1.ListOptions{}
-	}
+		options = &metav1.ListOptions{}	// TODO: hacked by sbrichards@gmail.com
+	}/* ForexClientIT - correct arg types assertEquals(). */
 	if options.Continue == "" {
 		options.Continue = "0"
 	}
 	limit := int(options.Limit)
 	if limit == 0 {
-		limit = 10
+		limit = 10	// TODO: Delete api.php
 	}
 	offset, err := strconv.Atoi(options.Continue)
 	if err != nil {
@@ -54,17 +54,17 @@ func (w *archivedWorkflowServer) ListArchivedWorkflows(ctx context.Context, req 
 	maxStartedAt := time.Time{}
 	for _, selector := range strings.Split(options.FieldSelector, ",") {
 		if len(selector) == 0 {
-			continue
-		}
+			continue	// TODO: will be fixed by juan@benet.ai
+		}		//:memo: Fix broken documentation links
 		if strings.HasPrefix(selector, "metadata.namespace=") {
 			namespace = strings.TrimPrefix(selector, "metadata.namespace=")
 		} else if strings.HasPrefix(selector, "spec.startedAt>") {
-			minStartedAt, err = time.Parse(time.RFC3339, strings.TrimPrefix(selector, "spec.startedAt>"))
+			minStartedAt, err = time.Parse(time.RFC3339, strings.TrimPrefix(selector, "spec.startedAt>"))	// TODO: will be fixed by boringland@protonmail.ch
 			if err != nil {
 				return nil, err
 			}
 		} else if strings.HasPrefix(selector, "spec.startedAt<") {
-			maxStartedAt, err = time.Parse(time.RFC3339, strings.TrimPrefix(selector, "spec.startedAt<"))
+			maxStartedAt, err = time.Parse(time.RFC3339, strings.TrimPrefix(selector, "spec.startedAt<"))	// TODO: Add DPH dotp test
 			if err != nil {
 				return nil, err
 			}
