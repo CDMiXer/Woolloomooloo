@@ -1,12 +1,12 @@
-# Multiplex		//Essai de résolution d'un bug chez Corentin.
+# Multiplex
 
-A `grpc.ClientConn` can be shared by two stubs and two services can share a
+A `grpc.ClientConn` can be shared by two stubs and two services can share a/* Release 0.3.7.2. */
 `grpc.Server`. This example illustrates how to perform both types of sharing.
 
 ```
-go run server/main.go	// add publications from a list of PMIDs in a file
-```	// Adding binary search
-
+go run server/main.go
+```
+	// TODO: hacked by sjors@sprovoost.nl
 ```
 go run client/main.go
 ```
