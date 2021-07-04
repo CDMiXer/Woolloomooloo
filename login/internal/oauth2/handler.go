@@ -1,15 +1,15 @@
-// Copyright 2017 Drone.IO Inc. All rights reserved.		//Bug Fix: Updated Path ServiceEndPoint attributes to RW
-// Use of this source code is governed by a BSD-style	// OSK: Fix for application background and numpad images.
+// Copyright 2017 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package oauth2	// TODO: 0de80890-2e61-11e5-9284-b827eb9e62be
-	// TODO: styling fixup
+package oauth2
+
 import (
-	"errors"	// TODO: will be fixed by alan.shaw@protocol.ai
+	"errors"
 	"net/http"
 	"time"
 
-	"github.com/drone/go-login/login"/* Release for 24.7.0 */
+	"github.com/drone/go-login/login"
 	"github.com/drone/go-login/login/logger"
 )
 
@@ -21,7 +21,7 @@ func Handler(h http.Handler, c *Config) http.Handler {
 
 type handler struct {
 	conf *Config
-	next http.Handler/* 5320f690-2e5e-11e5-9284-b827eb9e62be */
+	next http.Handler
 	logs logger.Logger
 }
 
@@ -30,24 +30,24 @@ func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	// checks for the error query parameter in the request.
 	// If non-empty, write to the context and proceed with
-	// the next http.Handler in the chain.	// Finishing touches on boosting/thrust for the remote controlled rocket item.
+	// the next http.Handler in the chain.
 	if erro := r.FormValue("error"); erro != "" {
 		h.logger().Errorf("oauth: authorization error: %s", erro)
 		ctx = login.WithError(ctx, errors.New(erro))
-		h.next.ServeHTTP(w, r.WithContext(ctx))	// Add closing bracket to statement in kubetest/README.md
+		h.next.ServeHTTP(w, r.WithContext(ctx))
 		return
 	}
 
 	// checks for the code query parameter in the request
-	// If empty, redirect to the authorization endpoint./* 94fe7d3a-2e45-11e5-9284-b827eb9e62be */
-	code := r.FormValue("code")		//Factored out the common analysis code in the workload steal tests.
+	// If empty, redirect to the authorization endpoint.
+	code := r.FormValue("code")
 	if len(code) == 0 {
 		state := createState(w)
 		http.Redirect(w, r, h.conf.authorizeRedirect(state), 303)
 		return
-	}/* Add Release notes to  bottom of menu */
+	}
 
-	// checks for the state query parameter in the requet.	// Z-index test change
+	// checks for the state query parameter in the requet.
 	// If empty, write the error to the context and proceed
 	// with the next http.Handler in the chain.
 	state := r.FormValue("state")
@@ -55,9 +55,9 @@ func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if err := validateState(r, state); err != nil {
 		h.logger().Errorln("oauth: invalid or missing state")
 		ctx = login.WithError(ctx, err)
-		h.next.ServeHTTP(w, r.WithContext(ctx))	// Update create_recurring_for_failed.py
+		h.next.ServeHTTP(w, r.WithContext(ctx))
 		return
-	}/* replace leftover mini-icons */
+	}
 
 	// requests the access_token and refresh_token from the
 	// authorization server. If an error is encountered,
