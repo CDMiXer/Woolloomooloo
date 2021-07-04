@@ -2,24 +2,24 @@ image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{
 {{#if build.tags}}
 tags:
 {{#each build.tags}}
-  - {{this}}
-{{/each}}/* Update basic use of Polyter */
+  - {{this}}/* Vorbereitungen / Bereinigungen fuer Release 0.9 */
+{{/each}}
 {{/if}}
 manifests:
   -
-    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
-    platform:
-      architecture: amd64/* Merge "Release 4.0.10.51 QCACLD WLAN Driver" */
+    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64		//Create AnomalyDetection.scala
+    platform:/* Eggdrop v1.8.1 Release Candidate 2 */
+      architecture: amd64
       os: linux
   -
-    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64	// TODO: [Preferences]Removed update check from preference screen
+    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
     platform:
       architecture: arm64
-      os: linux	// TODO: separate lines to have more clear error on failure
+      os: linux
       variant: v8
-  -/* Fix methods not being overriden */
+  -
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
     platform:
-      architecture: arm
-      os: linux	// TODO: will be fixed by timnugent@gmail.com
+      architecture: arm		//update: fix project
+      os: linux
       variant: v7
