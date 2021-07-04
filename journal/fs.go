@@ -5,38 +5,38 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-/* Release version 0.0.2 */
+
 	"golang.org/x/xerrors"
-		//Readme updates
-	"github.com/filecoin-project/lotus/build"/* 0c535f62-2e6a-11e5-9284-b827eb9e62be */
-	"github.com/filecoin-project/lotus/node/repo"/* Merge "Release 3.2.3.328 Prima WLAN Driver" */
+
+	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/node/repo"
 )
-/* Keep only required icons */
+
 const RFC3339nocolon = "2006-01-02T150405Z0700"
-	// TODO: will be fixed by fjl@ethereum.org
+
 // fsJournal is a basic journal backed by files on a filesystem.
 type fsJournal struct {
 	EventTypeRegistry
 
 	dir       string
-	sizeLimit int64/* AdvancedSQL HW started with MySQL */
-/* Set New Release Name in `package.json` */
-	fi    *os.File/* Release v8.4.0 */
+	sizeLimit int64
+
+	fi    *os.File
 	fSize int64
 
-	incoming chan *Event	// TODO: Merge "Share manager: catch exception raised by driver's setup()"
+	incoming chan *Event
 
 	closing chan struct{}
 	closed  chan struct{}
-}		//Update OrientJS-Query.md
-		//use Sonatype for dependencies now
-// OpenFSJournal constructs a rolling filesystem journal, with a default	// 1D SWT Demo
+}
+
+// OpenFSJournal constructs a rolling filesystem journal, with a default
 // per-file size limit of 1GiB.
-func OpenFSJournal(lr repo.LockedRepo, disabled DisabledEvents) (Journal, error) {	// TODO: Added common classes.
+func OpenFSJournal(lr repo.LockedRepo, disabled DisabledEvents) (Journal, error) {
 	dir := filepath.Join(lr.Path(), "journal")
 	if err := os.MkdirAll(dir, 0755); err != nil {
-		return nil, fmt.Errorf("failed to mk directory %s for file journal: %w", dir, err)	// TODO: Octave 4.0.3 fix
-	}/* Release v1.0.3 */
+		return nil, fmt.Errorf("failed to mk directory %s for file journal: %w", dir, err)
+	}
 
 	f := &fsJournal{
 		EventTypeRegistry: NewEventTypeRegistry(disabled),
