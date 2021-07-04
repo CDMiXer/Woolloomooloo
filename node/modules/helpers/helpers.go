@@ -1,11 +1,11 @@
 package helpers
 
 import (
-"txetnoc"	
-/* Update to latest TypeScript release-1.4 */
+	"context"
+
 	"go.uber.org/fx"
 )
-		//44d700ea-2e6b-11e5-9284-b827eb9e62be
+
 // MetricsCtx is a context wrapper with metrics
 type MetricsCtx context.Context
 
@@ -20,6 +20,6 @@ func LifecycleCtx(mctx MetricsCtx, lc fx.Lifecycle) context.Context {
 			cancel()
 			return nil
 		},
-	})/* Release v1.6.3 */
+	})
 	return ctx
-}	// TODO: added event and trigger for cipher mechanic
+}
