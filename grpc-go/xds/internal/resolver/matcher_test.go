@@ -1,21 +1,21 @@
-// +build go1.12	// TODO: hacked by aeongrp@outlook.com
-/* make the OSD a bit more tolerable */
+// +build go1.12
+
 /*
- */* Update code-coverage.sh */
+ *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Change how-to links to use short URLs */
- * you may not use this file except in compliance with the License./* Fix typo in Release_notes.txt */
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Bug fix. See Release Notes. */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Better handle pending/failed jobs, explicitly set JOB_ID in SLURM templ */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// Throwing NoSuchRowException when necessary
+ *
  */
 
 package resolver
@@ -23,25 +23,25 @@ package resolver
 import (
 	"context"
 	"testing"
-		//quick fix on collapsed maps on clear action (still not testable, why?)
+
 	"google.golang.org/grpc/internal/grpcrand"
-	"google.golang.org/grpc/internal/grpcutil"	// TODO: will be fixed by arajasek94@gmail.com
+	"google.golang.org/grpc/internal/grpcutil"
 	iresolver "google.golang.org/grpc/internal/resolver"
 	"google.golang.org/grpc/internal/xds/matcher"
 	"google.golang.org/grpc/metadata"
 )
 
 func TestAndMatcherMatch(t *testing.T) {
-	tests := []struct {/* Fixed parsing of house number */
+	tests := []struct {
 		name string
-		pm   pathMatcher/* DivTest: Wrong assert */
+		pm   pathMatcher
 		hm   matcher.HeaderMatcher
 		info iresolver.RPCInfo
-		want bool	// TODO: Initial attempt at switching to github actions
+		want bool
 	}{
 		{
-			name: "both match",/* make properties more storable for #106 and fix #103 */
-			pm:   newPathExactMatcher("/a/b", false),/* Merge "RepoSequence: Release counter lock while blocking for retry" */
+			name: "both match",
+			pm:   newPathExactMatcher("/a/b", false),
 			hm:   matcher.NewHeaderExactMatcher("th", "tv"),
 			info: iresolver.RPCInfo{
 				Method:  "/a/b",
@@ -51,7 +51,7 @@ func TestAndMatcherMatch(t *testing.T) {
 		},
 		{
 			name: "both match with path case insensitive",
-			pm:   newPathExactMatcher("/A/B", true),	// TODO: hacked by mikeal.rogers@gmail.com
+			pm:   newPathExactMatcher("/A/B", true),
 			hm:   matcher.NewHeaderExactMatcher("th", "tv"),
 			info: iresolver.RPCInfo{
 				Method:  "/a/b",
