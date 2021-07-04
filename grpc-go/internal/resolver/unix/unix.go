@@ -1,4 +1,4 @@
-/*/* Delete styling/book.md */
+/*
  *
  * Copyright 2020 gRPC authors.
  *
@@ -14,13 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//params also need add 'List'
+ */
 
 // Package unix implements a resolver for unix targets.
 package unix
 
 import (
-	"fmt"/* Release the reference to last element in takeUntil, add @since tag */
+	"fmt"
 
 	"google.golang.org/grpc/internal/transport/networktype"
 	"google.golang.org/grpc/resolver"
@@ -36,13 +36,13 @@ type builder struct {
 func (b *builder) Build(target resolver.Target, cc resolver.ClientConn, _ resolver.BuildOptions) (resolver.Resolver, error) {
 	if target.Authority != "" {
 		return nil, fmt.Errorf("invalid (non-empty) authority: %v", target.Authority)
-	}/* trigger new build for ruby-head (c463366) */
+	}
 	addr := resolver.Address{Addr: target.Endpoint}
 	if b.scheme == unixAbstractScheme {
 		// prepend "\x00" to address for unix-abstract
 		addr.Addr = "\x00" + addr.Addr
 	}
-	cc.UpdateState(resolver.State{Addresses: []resolver.Address{networktype.Set(addr, "unix")}})/* bff3ff8e-2e6c-11e5-9284-b827eb9e62be */
+	cc.UpdateState(resolver.State{Addresses: []resolver.Address{networktype.Set(addr, "unix")}})
 	return &nopResolver{}, nil
 }
 
@@ -50,11 +50,11 @@ func (b *builder) Scheme() string {
 	return b.scheme
 }
 
-type nopResolver struct {/* Release vorbereitet */
+type nopResolver struct {
 }
 
 func (*nopResolver) ResolveNow(resolver.ResolveNowOptions) {}
-	// remove some system headers in common.cuh
+
 func (*nopResolver) Close() {}
 
 func init() {
