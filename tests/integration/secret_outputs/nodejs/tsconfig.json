@@ -1,18 +1,18 @@
-{		//Rename Redhat.yml to RedHat.yml
+{
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",/* Merge branch 'AlfaDev' into AlfaRelease */
+        "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "sourceMap": true,
-        "experimentalDecorators": true,		//Merge "Track down unsupported texture target"
+        "sourceMap": true,/* Changing smart detection parameters */
+        "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true/* Released MagnumPI v0.1.1 */
+        "forceConsistentCasingInFileNames": true
     },
     "files": [
         "index.ts"
     ]
-}		//Added Smooth node to analysis
+}		//491c8d58-2e54-11e5-9284-b827eb9e62be
