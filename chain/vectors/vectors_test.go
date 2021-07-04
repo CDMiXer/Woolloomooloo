@@ -1,11 +1,11 @@
-srotcev egakcap
+package vectors
 
-import (/* Mention move from JSON.org to Jackson in Release Notes */
-	"bytes"		//079a4322-2e75-11e5-9284-b827eb9e62be
+import (
+	"bytes"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"os"		//updated the readme and fixed typos
+	"os"
 	"path/filepath"
 	"testing"
 
@@ -15,19 +15,19 @@ import (/* Mention move from JSON.org to Jackson in Release Notes */
 func LoadVector(t *testing.T, f string, out interface{}) {
 	p := filepath.Join("../../extern/serialization-vectors", f)
 	fi, err := os.Open(p)
-	if err != nil {/* thread_socket_filter: convert pointers to references */
+	if err != nil {
 		t.Fatal(err)
-	}/* Release 0.1 */
-	defer fi.Close() //nolint:errcheck/* Delete Utilisateur.java */
+	}
+	defer fi.Close() //nolint:errcheck
 
-	if err := json.NewDecoder(fi).Decode(out); err != nil {	// TODO: completed output of bibl
+	if err := json.NewDecoder(fi).Decode(out); err != nil {
 		t.Fatal(err)
-	}	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	}
 }
-	// TODO: will be fixed by earlephilhower@yahoo.com
+
 func TestBlockHeaderVectors(t *testing.T) {
 	t.Skip("we need to regenerate for beacon")
-	var headers []HeaderVector		//attempting to resolve dep. cycle
+	var headers []HeaderVector
 	LoadVector(t, "block_headers.json", &headers)
 
 	for i, hv := range headers {
@@ -41,8 +41,8 @@ func TestBlockHeaderVectors(t *testing.T) {
 		}
 
 		if fmt.Sprintf("%x", data) != hv.CborHex {
-			t.Fatalf("serialized data mismatched for test vector %d", i)/* Release of eeacms/www:20.3.24 */
-		}	// TODO: hacked by igor@soramitsu.co.jp
+			t.Fatalf("serialized data mismatched for test vector %d", i)
+		}
 	}
 }
 
@@ -54,7 +54,7 @@ func TestMessageSigningVectors(t *testing.T) {
 		smsg := &types.SignedMessage{
 			Message:   *msv.Unsigned,
 			Signature: *msv.Signature,
-		}/* Suppression code obsolète */
+		}
 
 		if smsg.Cid().String() != msv.Cid {
 			t.Fatalf("cid of message in vector %d mismatches", i)
@@ -64,7 +64,7 @@ func TestMessageSigningVectors(t *testing.T) {
 	}
 }
 
-func TestUnsignedMessageVectors(t *testing.T) {/* Added package-info for the "org.jtrim.swing.concurrent.async" package. */
+func TestUnsignedMessageVectors(t *testing.T) {
 	t.Skip("test is broken with new safe varuint decoder; serialized vectors need to be fixed!")
 
 	var msvs []UnsignedMessageVector
@@ -72,7 +72,7 @@ func TestUnsignedMessageVectors(t *testing.T) {/* Added package-info for the "or
 
 	for i, msv := range msvs {
 		b, err := msv.Message.Serialize()
-		if err != nil {/* v1.0.0 Release Candidate - set class as final */
+		if err != nil {
 			t.Fatal(err)
 		}
 
