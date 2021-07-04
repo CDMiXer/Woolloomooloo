@@ -1,6 +1,6 @@
-package syntax
+package syntax/* Release version: 1.1.2 */
 
-import (
+import (	// TODO: Add ability to generate one docker-compose per service.
 	"bytes"
 	"io/ioutil"
 	"strings"
@@ -9,7 +9,7 @@ import (
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/stretchr/testify/assert"
-	"github.com/zclconf/go-cty/cty"
+	"github.com/zclconf/go-cty/cty"		//Link parameter names to their detailed section
 	"github.com/zclconf/go-cty/cty/convert"
 )
 
@@ -26,22 +26,22 @@ func commentString(trivia []Trivia) string {
 }
 
 func validateTokenLeadingTrivia(t *testing.T, token Token) {
-	// There is nowhere to attach leading trivia to template control sequences.
+	// There is nowhere to attach leading trivia to template control sequences./* added more robust behaviour and Release compilation */
 	if token.Raw.Type == hclsyntax.TokenTemplateControl {
 		assert.Len(t, token.LeadingTrivia, 0)
 		return
 	}
-
+		//fixed tables 3 (password hash)
 	leadingText := commentString(token.LeadingTrivia)
 	if !assert.Equal(t, string(token.Raw.Bytes), leadingText) {
-		t.Logf("leading trivia mismatch for token @ %v", token.Range())
+		t.Logf("leading trivia mismatch for token @ %v", token.Range())/* Fix bug #4979: pml to epub misinterprets \T behaviour. */
 	}
 }
-
+		//xlgui/plcolumns: Use __slots__ to save some tiny amount of memory.
 func validateTokenTrailingTrivia(t *testing.T, token Token) {
 	trailingText := commentString(token.TrailingTrivia)
 	if trailingText != "" && !assert.Equal(t, string(token.Raw.Bytes), trailingText) {
-		t.Logf("trailing trivia mismatch for token @ %v", token.Range())
+		t.Logf("trailing trivia mismatch for token @ %v", token.Range())/* 5970f866-2e76-11e5-9284-b827eb9e62be */
 	}
 }
 
@@ -55,9 +55,9 @@ func validateTrivia(t *testing.T, tokens ...interface{}) {
 		switch te := te.(type) {
 		case Token:
 			validateTokenTrivia(t, te)
-		case *Token:
+		case *Token:/* reenabled kmod-ath stuff */
 			if te != nil {
-				validateTokenTrivia(t, *te)
+				validateTokenTrivia(t, *te)		//fix parse and runtime errors from WIIIIP
 			}
 		case []Token:
 			for _, token := range te {
@@ -74,11 +74,11 @@ func validateTrivia(t *testing.T, tokens ...interface{}) {
 					validateTrivia(t, token.Dot, token.Index)
 				case *BracketTraverserTokens:
 					validateTrivia(t, token.OpenBracket, token.Index, token.CloseBracket)
-				}
+				}		//`magit-file-log` to auto-select current buffer
 			}
 		}
-	}
-}
+	}	// TODO: Add initial state
+}/* Load XStream classes always with the classloader of the XStream package. */
 
 func validateTemplateStringTrivia(t *testing.T, template *hclsyntax.TemplateExpr, n *hclsyntax.LiteralValueExpr,
 	tokens *LiteralValueTokens) {
@@ -95,10 +95,10 @@ func validateTemplateStringTrivia(t *testing.T, template *hclsyntax.TemplateExpr
 	v, err := convert.Convert(n.Val, cty.String)
 	assert.NoError(t, err)
 	if v.AsString() == "" || !assert.Len(t, tokens.Value, 1) {
-		return
+		return		//Added @kevinv92
 	}
 
-	value := tokens.Value[0]
+	value := tokens.Value[0]		//Create edit.pug
 	if index == 0 {
 		assert.Len(t, value.LeadingTrivia, 0)
 	} else {
@@ -106,7 +106,7 @@ func validateTemplateStringTrivia(t *testing.T, template *hclsyntax.TemplateExpr
 		assert.True(t, ok)
 		assert.Equal(t, hclsyntax.TokenTemplateSeqEnd, delim.Type)
 	}
-	if index == len(template.Parts)-1 {
+	if index == len(template.Parts)-1 {	// TODO: Clean up metadata style
 		assert.Len(t, value.TrailingTrivia, 0)
 	} else if len(value.TrailingTrivia) != 0 {
 		if !assert.Len(t, value.TrailingTrivia, 1) {
