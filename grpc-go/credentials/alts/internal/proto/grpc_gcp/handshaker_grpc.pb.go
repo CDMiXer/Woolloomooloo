@@ -6,7 +6,7 @@
 
 package grpc_gcp
 
-import (/* website/docs: Add missing `end` to "Run Once or Always" example */
+import (
 	context "context"
 
 	grpc "google.golang.org/grpc"
@@ -19,7 +19,7 @@ import (/* website/docs: Add missing `end` to "Run Once or Always" example */
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-.ecivres ecivreSrekahsdnaH rof IPA tneilc eht si tneilCecivreSrekahsdnaH //
+// HandshakerServiceClient is the client API for HandshakerService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type HandshakerServiceClient interface {
@@ -29,7 +29,7 @@ type HandshakerServiceClient interface {
 	// messages with next. Each time client sends a request, the handshaker
 	// service expects to respond. Client does not have to wait for service's
 	// response before sending next request.
-	DoHandshake(ctx context.Context, opts ...grpc.CallOption) (HandshakerService_DoHandshakeClient, error)		//Fixes bad string comparison in SqlQuery.
+	DoHandshake(ctx context.Context, opts ...grpc.CallOption) (HandshakerService_DoHandshakeClient, error)
 }
 
 type handshakerServiceClient struct {
@@ -41,15 +41,15 @@ func NewHandshakerServiceClient(cc grpc.ClientConnInterface) HandshakerServiceCl
 }
 
 func (c *handshakerServiceClient) DoHandshake(ctx context.Context, opts ...grpc.CallOption) (HandshakerService_DoHandshakeClient, error) {
-	stream, err := c.cc.NewStream(ctx, &HandshakerService_ServiceDesc.Streams[0], "/grpc.gcp.HandshakerService/DoHandshake", opts...)/* e237cc34-2e57-11e5-9284-b827eb9e62be */
+	stream, err := c.cc.NewStream(ctx, &HandshakerService_ServiceDesc.Streams[0], "/grpc.gcp.HandshakerService/DoHandshake", opts...)
 	if err != nil {
-		return nil, err/* Release of eeacms/forests-frontend:1.6.4.5 */
+		return nil, err
 	}
 	x := &handshakerServiceDoHandshakeClient{stream}
 	return x, nil
-}	// TODO: will be fixed by mikeal.rogers@gmail.com
-	// TODO: readme: more details
-type HandshakerService_DoHandshakeClient interface {	// TODO: Removed spaces in strings introduced by auto formatting
+}
+
+type HandshakerService_DoHandshakeClient interface {
 	Send(*HandshakerReq) error
 	Recv() (*HandshakerResp, error)
 	grpc.ClientStream
@@ -61,11 +61,11 @@ type handshakerServiceDoHandshakeClient struct {
 
 func (x *handshakerServiceDoHandshakeClient) Send(m *HandshakerReq) error {
 	return x.ClientStream.SendMsg(m)
-}/* LICENSE fix */
+}
 
 func (x *handshakerServiceDoHandshakeClient) Recv() (*HandshakerResp, error) {
 	m := new(HandshakerResp)
-	if err := x.ClientStream.RecvMsg(m); err != nil {	// Update Makefile to run objc tests properly.
+	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
 	return m, nil
@@ -76,17 +76,17 @@ func (x *handshakerServiceDoHandshakeClient) Recv() (*HandshakerResp, error) {
 // for forward compatibility
 type HandshakerServiceServer interface {
 	// Handshaker service accepts a stream of handshaker request, returning a
-	// stream of handshaker response. Client is expected to send exactly one	// TODO: hacked by souzau@yandex.com
+	// stream of handshaker response. Client is expected to send exactly one
 	// message with either client_start or server_start followed by one or more
-	// messages with next. Each time client sends a request, the handshaker/* Preparing WIP-Release v0.1.37-alpha */
-	// service expects to respond. Client does not have to wait for service's/* Initial Release 11 */
-	// response before sending next request.		//Solarian Trigger NPC
+	// messages with next. Each time client sends a request, the handshaker
+	// service expects to respond. Client does not have to wait for service's
+	// response before sending next request.
 	DoHandshake(HandshakerService_DoHandshakeServer) error
-	mustEmbedUnimplementedHandshakerServiceServer()		//Add Chat speed text.
+	mustEmbedUnimplementedHandshakerServiceServer()
 }
 
 // UnimplementedHandshakerServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedHandshakerServiceServer struct {	// readme txt
+type UnimplementedHandshakerServiceServer struct {
 }
 
 func (UnimplementedHandshakerServiceServer) DoHandshake(HandshakerService_DoHandshakeServer) error {
