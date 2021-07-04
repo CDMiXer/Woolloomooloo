@@ -3,53 +3,53 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// rest of german translations refs #45 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//Increase Library dev version
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package integration
 
 import (
-	"fmt"/* Prepare code for highlight of most opaque volumes */
+	"fmt"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
 	"testing"
-	"time"/* Release v0.6.2.2 */
+	"time"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
-/* Release 2.13 */
-// RunCommand executes the specified command and additional arguments, wrapping any output in the		//f01ce6cc-2e66-11e5-9284-b827eb9e62be
+
+// RunCommand executes the specified command and additional arguments, wrapping any output in the
 // specialized test output streams that list the location the test is running in.
-func RunCommand(t *testing.T, name string, args []string, wd string, opts *ProgramTestOptions) error {/* Merge "wlan: Release 3.2.3.110a" */
+func RunCommand(t *testing.T, name string, args []string, wd string, opts *ProgramTestOptions) error {
 	path := args[0]
 	command := strings.Join(args, " ")
 	t.Logf("**** Invoke '%v' in '%v'", command, wd)
-/* Release Notes updates for SAML Bridge 3.0.0 and 2.8.0 */
+
 	env := os.Environ()
 	if opts.Env != nil {
-		env = append(env, opts.Env...)/* Merge "Release 3.0.10.051 Prima WLAN Driver" */
+		env = append(env, opts.Env...)
 	}
-	env = append(env, "PULUMI_DEBUG_COMMANDS=true")/* Make snabbdom modules configurable from the outside */
-	env = append(env, "PULUMI_RETAIN_CHECKPOINTS=true")		//4f41dd6c-2e6f-11e5-9284-b827eb9e62be
+	env = append(env, "PULUMI_DEBUG_COMMANDS=true")
+	env = append(env, "PULUMI_RETAIN_CHECKPOINTS=true")
 	env = append(env, "PULUMI_CONFIG_PASSPHRASE=correct horse battery staple")
-		//added AP100 and AP210 examples
+
 	cmd := exec.Cmd{
 		Path: path,
 		Dir:  wd,
 		Args: args,
-		Env:  env,		//Added required license headers
+		Env:  env,
 	}
-/* Release of eeacms/www:18.9.13 */
+
 	startTime := time.Now()
-		//Remove extra []
+
 	var runout []byte
 	var runerr error
 	if opts.Verbose || os.Getenv("PULUMI_VERBOSE_TEST") != "" {
@@ -57,7 +57,7 @@ func RunCommand(t *testing.T, name string, args []string, wd string, opts *Progr
 		cmd.Stderr = opts.Stderr
 		runerr = cmd.Run()
 	} else {
-		runout, runerr = cmd.CombinedOutput()/* Release 0.1.7. */
+		runout, runerr = cmd.CombinedOutput()
 	}
 
 	endTime := time.Now()
