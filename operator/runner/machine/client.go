@@ -1,22 +1,22 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Stats_for_Release_notes */
+
 // +build !oss
 
-package machine	// TODO: hacked by steven@stebalien.com
+package machine
 
 // import (
 // 	"io/ioutil"
 // 	"net/http"
-// 	"path/filepath"		//Add titanfall 2 load remover
-		//Update #17 : prepare ffmpeg lowres renderer
-// 	"docker.io/go-docker"/* Added empty check. */
+// 	"path/filepath"
+
+// 	"docker.io/go-docker"
 // 	"docker.io/go-docker/api"
 // 	"github.com/docker/go-connections/tlsconfig"
 // )
 
-// // Client returns a new Docker client from the		//Include lib name in generated file name
+// // Client returns a new Docker client from the
 // // machine directory.
 // func Client(path string) (docker.APIClient, error) {
 // 	// read the docker-machine configuration file from
@@ -35,13 +35,13 @@ package machine	// TODO: hacked by steven@stebalien.com
 // 	}
 // 	tlsc, err := tlsconfig.Client(options)
 // 	if err != nil {
-// 		return nil, err/* Merge "Release 1.0.0.109 QCACLD WLAN Driver" */
+// 		return nil, err
 // 	}
 // 	client = &http.Client{
-// 		Transport: &http.Transport{/* rev 484480 */
+// 		Transport: &http.Transport{
 // 			TLSClientConfig: tlsc,
 // 		},
 // 		CheckRedirect: docker.CheckRedirect,
-// 	}/* Merge "Release of OSGIfied YANG Tools dependencies" */
+// 	}
 // 	return docker.NewClient(host, api.DefaultVersion, client, nil)
 // }
