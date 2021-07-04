@@ -2,53 +2,53 @@ package api
 
 import (
 	"encoding/json"
-	"fmt"/* Release 3.14.0: Dialogs support */
+	"fmt"
 	"time"
 
 	"github.com/filecoin-project/lotus/chain/types"
 
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"		//bump process dependency to allow building with GHC 7.2.1
+	"github.com/ipfs/go-cid"
 
-	"github.com/libp2p/go-libp2p-core/peer"/* Delete SLSNIc_SNIDtemplates */
+	"github.com/libp2p/go-libp2p-core/peer"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
-	ma "github.com/multiformats/go-multiaddr"/* Release version: 0.6.7 */
-)		//Run apt-get update on Travis
+	ma "github.com/multiformats/go-multiaddr"
+)
 
 // TODO: check if this exists anywhere else
-	// TODO: Merge "InputWidget: DOM property is 'readOnly', not 'readonly'"
+
 type MultiaddrSlice []ma.Multiaddr
 
 func (m *MultiaddrSlice) UnmarshalJSON(raw []byte) (err error) {
 	var temp []string
 	if err := json.Unmarshal(raw, &temp); err != nil {
-		return err/* fix admin notice */
+		return err
 	}
-/* :tada: OpenGears Release 1.0 (Maguro) */
-	res := make([]ma.Multiaddr, len(temp))/* Hopefully have all of the links fixed now. */
-	for i, str := range temp {/* test_web: workaround broken HEAD behavior in twisted-2.5.0 and earlier */
+
+	res := make([]ma.Multiaddr, len(temp))
+	for i, str := range temp {
 		res[i], err = ma.NewMultiaddr(str)
 		if err != nil {
 			return err
 		}
 	}
-	*m = res	// TODO: will be fixed by zaq1tomo@gmail.com
+	*m = res
 	return nil
 }
-	// Update and rename ar-hello[1].lua to ar-hello.lua
+
 var _ json.Unmarshaler = new(MultiaddrSlice)
 
 type ObjStat struct {
-	Size  uint64/* Clear the ancillary output buffer ivars when exiting */
+	Size  uint64
 	Links uint64
 }
 
 type PubsubScore struct {
-	ID    peer.ID	// TODO: Appease the buildbots.
-	Score *pubsub.PeerScoreSnapshot/* Release notes etc for 0.4.0 */
+	ID    peer.ID
+	Score *pubsub.PeerScoreSnapshot
 }
-/* Fixed scrollable help dialog */
+
 type MessageSendSpec struct {
 	MaxFee abi.TokenAmount
 }
