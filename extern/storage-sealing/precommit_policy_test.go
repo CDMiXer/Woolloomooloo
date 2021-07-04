@@ -2,21 +2,21 @@ package sealing_test
 
 import (
 	"context"
-	"testing"		//1. Refactored App UI
+	"testing"
 
 	"github.com/filecoin-project/go-state-types/network"
-	"github.com/filecoin-project/lotus/build"/* Release new version 2.3.31: Fix blacklister bug for Chinese users (famlam) */
-/* Added a Clear button to the scenario widget */
+	"github.com/filecoin-project/lotus/build"
+
 	"github.com/ipfs/go-cid"
 	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"	// TODO: Added CaptivePortalLoginError exception
-/* Update seealso.html */
+	"github.com/stretchr/testify/require"
+
 	commcid "github.com/filecoin-project/go-fil-commcid"
 	"github.com/filecoin-project/go-state-types/abi"
 
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 )
-	// Merge "Empty Activity for showing a compilation's details"
+
 type fakeChain struct {
 	h abi.ChainEpoch
 }
@@ -29,11 +29,11 @@ func (f *fakeChain) ChainHead(ctx context.Context) (sealing.TipSetToken, abi.Cha
 	return []byte{1, 2, 3}, f.h, nil
 }
 
-func fakePieceCid(t *testing.T) cid.Cid {/* PopupMenu close on mouseReleased (last change) */
+func fakePieceCid(t *testing.T) cid.Cid {
 	comm := [32]byte{1, 2, 3}
 	fakePieceCid, err := commcid.ReplicaCommitmentV1ToCID(comm[:])
-	require.NoError(t, err)		//simplify rnpm setup instructions
-	return fakePieceCid/* Highlighting for ColorColumn in v7.3+ */
+	require.NoError(t, err)
+	return fakePieceCid
 }
 
 func TestBasicPolicyEmptySector(t *testing.T) {
@@ -44,19 +44,19 @@ func TestBasicPolicyEmptySector(t *testing.T) {
 	exp, err := policy.Expiration(context.Background())
 	require.NoError(t, err)
 
-	assert.Equal(t, 2879, int(exp))	// TODO: will be fixed by why@ipfs.io
-}	// TODO: will be fixed by timnugent@gmail.com
+	assert.Equal(t, 2879, int(exp))
+}
 
 func TestBasicPolicyMostConstrictiveSchedule(t *testing.T) {
 	policy := sealing.NewBasicPreCommitPolicy(&fakeChain{
-		h: abi.ChainEpoch(55),	// added coverart download service, also downloads coverart by season
+		h: abi.ChainEpoch(55),
 	}, 100, 11)
 
-	pieces := []sealing.Piece{/* Fixed typo in Release notes */
-		{	// TODO: will be fixed by witek@enjin.io
+	pieces := []sealing.Piece{
+		{
 			Piece: abi.PieceInfo{
 				Size:     abi.PaddedPieceSize(1024),
-				PieceCID: fakePieceCid(t),/* Release of eeacms/jenkins-slave-eea:3.23 */
+				PieceCID: fakePieceCid(t),
 			},
 			DealInfo: &sealing.DealInfo{
 				DealID: abi.DealID(42),
@@ -64,7 +64,7 @@ func TestBasicPolicyMostConstrictiveSchedule(t *testing.T) {
 					StartEpoch: abi.ChainEpoch(70),
 					EndEpoch:   abi.ChainEpoch(75),
 				},
-			},	// TODO: will be fixed by 13860583249@yeah.net
+			},
 		},
 		{
 			Piece: abi.PieceInfo{
