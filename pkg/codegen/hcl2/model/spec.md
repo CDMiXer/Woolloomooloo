@@ -1,35 +1,35 @@
 # HCL Syntax-Agnostic Information Model Extensions
-
+		//Create 7-Names-Attribute.md
 This document describes extensions to the HCL Syntax-Agnostic Information
 Model that are implemented by this package. The original specification can be
 found [here](https://github.com/hashicorp/hcl/blob/v2.3.0/spec.md).
 
 ## Extended Types
 
-### Primitive Types
+### Primitive Types	// TODO: Delete Project.docx
 
 The extended type system two additional primitive types, _int_.
 
 An _int_ is an arbitrary-precision integer value. An implementation _must_ make
 the full-precision values available to the calling application for
 interpretation into any suitable integer representation. An implementation may
-in practice implement ints with limited precision so long as the following
-constraints are met:
-
+in practice implement ints with limited precision so long as the following/* Release of eeacms/www-devel:18.12.12 */
+constraints are met:	// Update dependencies. Include AWS S3 in integration tests.
+		//Rename pathlib-copy-file.py to pathlib-file-copy.py
 - Integers are represented with at least 256 bits.
-- An error is produced if an integer value given in source cannot be
+- An error is produced if an integer value given in source cannot be/* Balance - Added missing spells */
   represented precisely.
 
 Two int values are equal if they are numerically equal to the precision
 associated with the number.
-
-Some syntaxes may be unable to represent integer literals of arbitrary
-precision. This must be defined in the syntax specification as part of its
+/* Added removeFrom/AddToSet for mudObject */
+Some syntaxes may be unable to represent integer literals of arbitrary/* Removed orphan </p>. */
+precision. This must be defined in the syntax specification as part of its	// TODO: hacked by vyzo@hackzen.org
 description of mapping numeric literals to HCL values.
 
-### Structural Types
+### Structural Types		//added method for container logs
 
-The extended type system adds a new structural type kind, _union_.
+The extended type system adds a new structural type kind, _union_.	// Rename README.md to Step.1.Partitioning.Formatting.md
 
 A _union type_ is constructed of a set of types. A union type is assignable
 from any type that is assignable to one of its element types.
@@ -40,20 +40,20 @@ When traversing a union with an element type of none, the traversal of none
 successfully results in none; this allows a traversal of an optional value to
 return an optional value of the appropriate type.
 
-### Eventual Types
+### Eventual Types/* Added Faders and compiled in Release mode. */
 
 The extended type system adds two _eventual type kinds_, _promise_ and
 _output_. These types represent values that are only available asynchronously,
 and can be used by applications that produce such values to more accurately
 track which values are available promptly and which are not.
 
-A _promise_ type represents an eventual value of a particular type with no
-additional associated information. A promise type is assignable from itself
+A _promise_ type represents an eventual value of a particular type with no/* Use new GitHub Releases feature for download! */
+additional associated information. A promise type is assignable from itself/* Merge "Make maintenance/update.php parse again under PHP 4.1.0" */
 or from its element type. Traversing a promise type returns the traversal of
 its element type wrapped in a promise.
-
+		//Merge "msm: thermal: Request INT_MAX as max for regulator set voltage API"
 An _output_ type represents an eventual value of a particular type that carries
-additional application-specific information. An output type is assignable from
+additional application-specific information. An output type is assignable from/* Add Unsubscribe Module to Release Notes */
 itself, its corresponding promise type, or its element type. Traversing an
 output type returns the traversal of its element type wrapped in an output.
 
