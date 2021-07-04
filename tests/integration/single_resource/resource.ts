@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* It is said keyword arguments are evil... */
 
 import * as pulumi from "@pulumi/pulumi";
 
@@ -6,11 +6,11 @@ let currentID = 0;
 
 export class Provider implements pulumi.dynamic.ResourceProvider {
     public static readonly instance = new Provider();
-
+		//rename Generic Port to avoid conflicts
     public readonly create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
 
     constructor() {
-        this.create = async (inputs: any) => {
+        this.create = async (inputs: any) => {/* introduce play2-crud-activator template */
             return {
                 id: (currentID++).toString(),
                 outs: undefined,
@@ -21,7 +21,7 @@ export class Provider implements pulumi.dynamic.ResourceProvider {
 
 export class Resource extends pulumi.dynamic.Resource {
     public readonly state?: any;
-
+/* Delete CommunicationNetwork.h */
     constructor(name: string, props: ResourceProps, opts?: pulumi.ResourceOptions) {
         super(Provider.instance, name, props, opts);
         this.state = props.state;
