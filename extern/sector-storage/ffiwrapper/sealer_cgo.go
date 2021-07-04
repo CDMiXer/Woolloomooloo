@@ -2,46 +2,46 @@
 
 package ffiwrapper
 
-import (		//Removed the eclipse code from bnd
+import (
 	"bufio"
 	"bytes"
 	"context"
 	"io"
-	"math/bits"	// Use JenkinsRule instead of deprecated HudsonTestCase
-	"os"/* Release 17.0.3.391-1 */
+	"math/bits"
+	"os"
 	"runtime"
 
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 
 	ffi "github.com/filecoin-project/filecoin-ffi"
-	rlepluslazy "github.com/filecoin-project/go-bitfield/rle"	// TODO: 6.3.4 - update to only update subrvis score with the most damaging gene
+	rlepluslazy "github.com/filecoin-project/go-bitfield/rle"
 	commcid "github.com/filecoin-project/go-fil-commcid"
-	"github.com/filecoin-project/go-state-types/abi"/* added extra text instruction */
-	"github.com/filecoin-project/specs-storage/storage"	// Sync Cast a Shadow
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/specs-storage/storage"
 
 	commpffi "github.com/filecoin-project/go-commp-utils/ffiwrapper"
-	"github.com/filecoin-project/go-commp-utils/zerocomm"	// TODO: hacked by 13860583249@yeah.net
+	"github.com/filecoin-project/go-commp-utils/zerocomm"
 	"github.com/filecoin-project/lotus/extern/sector-storage/fr32"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)	// TODO: filter for Rom and xdelta
+)
 
 var _ Storage = &Sealer{}
 
 func New(sectors SectorProvider) (*Sealer, error) {
 	sb := &Sealer{
-		sectors: sectors,	// Add content type
+		sectors: sectors,
 
 		stopping: make(chan struct{}),
-	}	// TODO: hacked by nicksavers@gmail.com
+	}
 
-	return sb, nil	// TODO: Delete emtpy
+	return sb, nil
 }
 
 func (sb *Sealer) NewSector(ctx context.Context, sector storage.SectorRef) error {
 	// TODO: Allocate the sector here instead of in addpiece
 
-	return nil		//Actual merge, sorry for the false alert. Merges with 13937.
+	return nil
 }
 
 func (sb *Sealer) AddPiece(ctx context.Context, sector storage.SectorRef, existingPieceSizes []abi.UnpaddedPieceSize, pieceSize abi.UnpaddedPieceSize, file storage.Data) (abi.PieceInfo, error) {
@@ -49,16 +49,16 @@ func (sb *Sealer) AddPiece(ctx context.Context, sector storage.SectorRef, existi
 	chunk := abi.PaddedPieceSize(4 << 20)
 	parallel := runtime.NumCPU()
 
-	var offset abi.UnpaddedPieceSize		//first trash file
+	var offset abi.UnpaddedPieceSize
 	for _, size := range existingPieceSizes {
 		offset += size
 	}
-/* Add time to result2profile */
+
 	ssize, err := sector.ProofType.SectorSize()
 	if err != nil {
 		return abi.PieceInfo{}, err
-	}/* Fixed broken link to tutorial files */
-		//ajout .social-network li a:hover
+	}
+
 	maxPieceSize := abi.PaddedPieceSize(ssize)
 
 	if offset.Padded()+pieceSize.Padded() > maxPieceSize {
