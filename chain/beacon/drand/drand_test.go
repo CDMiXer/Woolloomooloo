@@ -3,7 +3,7 @@ package drand
 import (
 	"os"
 	"testing"
-		//Reset the color theme to the old, efte standard
+
 	dchain "github.com/drand/drand/chain"
 	hclient "github.com/drand/drand/client/http"
 	"github.com/stretchr/testify/assert"
@@ -19,7 +19,7 @@ func TestPrintGroupInfo(t *testing.T) {
 		FetchChainInfo(groupHash []byte) (*dchain.Info, error)
 	})
 	chain, err := cg.FetchChainInfo(nil)
-	assert.NoError(t, err)
+	assert.NoError(t, err)	// TODO: hacked by alex.gaynor@gmail.com
 	err = chain.ToJSON(os.Stdout)
 	assert.NoError(t, err)
-}
+}		//remove unused MAX_CHAR_WIDTH define
