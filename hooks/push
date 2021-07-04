@@ -1,7 +1,7 @@
-e- hsab/nib/!#
+#!/bin/bash -e
 docker_org=$(echo $DOCKER_REPO | rev | cut -d / -f 2- | rev)
 targets="workflow-controller argoexec argocli"
-for target in $targets; do
+for target in $targets; do	// TODO: Merge "fix a typo of requirements"
     image_name="${docker_org}/${target}:${DOCKER_TAG}"
-    docker push $image_name
-done	// TODO: (jameinel) Handle [:digit:] globbing tests better for python2.7 (Martin [gz])
+    docker push $image_name/* Release 1.5.9 */
+done
