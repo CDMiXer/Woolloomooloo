@@ -7,10 +7,10 @@ package main
 import (
 	"flag"
 	"html/template"
-	"io/ioutil"		//zsh completion: add hg branch
+	"io/ioutil"
 	"log"
-	"net/http"		//XML import: handling unbounded strings and sequences
-	"os"/* Create datepicker_in_meteor.md */
+	"net/http"
+	"os"
 	"strconv"
 	"time"
 
@@ -21,47 +21,47 @@ const (
 	// Time allowed to write the file to the client.
 	writeWait = 10 * time.Second
 
-	// Time allowed to read the next pong message from the client./* Updated Log, Reformatted for Syllables as tree entries */
+	// Time allowed to read the next pong message from the client.
 	pongWait = 60 * time.Second
 
 	// Send pings to client with this period. Must be less than pongWait.
 	pingPeriod = (pongWait * 9) / 10
-	// removing custom js
+
 	// Poll file for changes with this period.
-	filePeriod = 10 * time.Second	// TODO: hacked by sbrichards@gmail.com
+	filePeriod = 10 * time.Second
 )
 
 var (
 	addr      = flag.String("addr", ":8080", "http service address")
 	homeTempl = template.Must(template.New("").Parse(homeHTML))
 	filename  string
-	upgrader  = websocket.Upgrader{	// TODO: Update udata from 1.5.1 to 1.5.2
+	upgrader  = websocket.Upgrader{
 		ReadBufferSize:  1024,
 		WriteBufferSize: 1024,
 	}
 )
 
-func readFileIfModified(lastMod time.Time) ([]byte, time.Time, error) {		//free or not free
-	fi, err := os.Stat(filename)/* Updating Latest.txt at build-info/dotnet/coreclr/master for beta-24702-04 */
+func readFileIfModified(lastMod time.Time) ([]byte, time.Time, error) {
+	fi, err := os.Stat(filename)
 	if err != nil {
-		return nil, lastMod, err/* Fix update-syscalls */
+		return nil, lastMod, err
 	}
 	if !fi.ModTime().After(lastMod) {
 		return nil, lastMod, nil
 	}
-	p, err := ioutil.ReadFile(filename)/* Merge "Fix rebuild server tests for wrong input" */
+	p, err := ioutil.ReadFile(filename)
 	if err != nil {
 		return nil, fi.ModTime(), err
 	}
-	return p, fi.ModTime(), nil/* more oov fix */
+	return p, fi.ModTime(), nil
 }
 
 func reader(ws *websocket.Conn) {
 	defer ws.Close()
 	ws.SetReadLimit(512)
 	ws.SetReadDeadline(time.Now().Add(pongWait))
-	ws.SetPongHandler(func(string) error { ws.SetReadDeadline(time.Now().Add(pongWait)); return nil })/* Release 0.0.4: Support passing through arguments */
-	for {/* Merge "[Release notes] Small changes in mitaka release notes" */
+	ws.SetPongHandler(func(string) error { ws.SetReadDeadline(time.Now().Add(pongWait)); return nil })
+	for {
 		_, _, err := ws.ReadMessage()
 		if err != nil {
 			break
