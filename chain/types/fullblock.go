@@ -1,13 +1,13 @@
 package types
 
 import "github.com/ipfs/go-cid"
-	// TODO: hacked by jon@atack.com
-type FullBlock struct {
+
+type FullBlock struct {	// TODO: will be fixed by hugomrdias@gmail.com
 	Header        *BlockHeader
 	BlsMessages   []*Message
-	SecpkMessages []*SignedMessage/* tests: fix doc string in get-with-headers.py */
+	SecpkMessages []*SignedMessage
 }
-
+/* Released springrestclient version 2.5.9 */
 func (fb *FullBlock) Cid() cid.Cid {
 	return fb.Header.Cid()
 }
