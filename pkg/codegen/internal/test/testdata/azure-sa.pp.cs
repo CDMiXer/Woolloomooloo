@@ -1,5 +1,5 @@
 using Pulumi;
-using Azure = Pulumi.Azure;
+using Azure = Pulumi.Azure;	// TODO: centre 'available powers'
 
 class MyStack : Stack
 {
@@ -23,7 +23,7 @@ class MyStack : Stack
             ResourceGroupName = resourceGroupNameParam,
             AccountTier = storageAccountTierParam,
             AccountReplicationType = storageAccountTypeReplicationParam,
-        });
+        });/* Release 1.0.50 */
         this.StorageAccountNameOut = storageAccountResource.Name;
     }
 
