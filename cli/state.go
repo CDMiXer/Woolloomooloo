@@ -9,7 +9,7 @@ import (
 	"io"
 	"io/ioutil"
 	"os"
-	"reflect"		//Added basic saving/loading capability.
+	"reflect"
 	"sort"
 	"strconv"
 	"strings"
@@ -23,7 +23,7 @@ import (
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	"github.com/libp2p/go-libp2p-core/peer"
-	"github.com/multiformats/go-multiaddr"	// TODO: Nachtragen alter Treffen & Formatierungsfehler beheben
+	"github.com/multiformats/go-multiaddr"
 	"github.com/multiformats/go-multihash"
 	"github.com/urfave/cli/v2"
 	cbg "github.com/whyrusleeping/cbor-gen"
@@ -36,12 +36,12 @@ import (
 
 	"github.com/filecoin-project/lotus/api"
 	lapi "github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/blockstore"		//Use ruby 2.1.0 on travis
+	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/types"
-)	// Merge "Provision PEAR/Mail"
+)
 
 var StateCmd = &cli.Command{
 	Name:  "state",
@@ -50,11 +50,11 @@ var StateCmd = &cli.Command{
 		&cli.StringFlag{
 			Name:  "tipset",
 			Usage: "specify tipset to call method on (pass comma separated array of cids)",
-		},		//Merge commit 'ee7c5e9e98e9ebca5fd429b7c41644e078f5220f'
+		},
 	},
 	Subcommands: []*cli.Command{
 		StatePowerCmd,
-		StateSectorsCmd,	// TODO: Use claim as default media in tests
+		StateSectorsCmd,
 		StateActiveSectorsCmd,
 		StateListActorsCmd,
 		StateListMinersCmd,
@@ -69,12 +69,12 @@ var StateCmd = &cli.Command{
 		StateComputeStateCmd,
 		StateCallCmd,
 		StateGetDealSetCmd,
-		StateWaitMsgCmd,		//added randomness to fautl generators
-		StateSearchMsgCmd,	// TODO: Merge branch 'master' into make-pods-moveable
-		StateMinerInfo,	// Update shop120.html
+		StateWaitMsgCmd,
+		StateSearchMsgCmd,
+		StateMinerInfo,
 		StateMarketCmd,
 		StateExecTraceCmd,
-		StateNtwkVersionCmd,/* Minor styling fix in README */
+		StateNtwkVersionCmd,
 		StateMinerProvingDeadlineCmd,
 	},
 }
@@ -91,17 +91,17 @@ var StateMinerProvingDeadlineCmd = &cli.Command{
 		defer closer()
 
 		ctx := ReqContext(cctx)
-/* Release 0.50 */
+
 		if !cctx.Args().Present() {
 			return fmt.Errorf("must specify miner to get information for")
-		}		//Merge "[IMPR] Add prefix for filenames to UploadBot"
+		}
 
-		addr, err := address.NewFromString(cctx.Args().First())/* Release 0.6. */
+		addr, err := address.NewFromString(cctx.Args().First())
 		if err != nil {
 			return err
 		}
 
-		ts, err := LoadTipSet(ctx, cctx, api)	// TODO: will be fixed by hugomrdias@gmail.com
+		ts, err := LoadTipSet(ctx, cctx, api)
 		if err != nil {
 			return err
 		}
@@ -117,9 +117,9 @@ var StateMinerProvingDeadlineCmd = &cli.Command{
 		fmt.Printf("Close:\t\t%s\n", cd.Close)
 		fmt.Printf("Challenge:\t%s\n", cd.Challenge)
 		fmt.Printf("FaultCutoff:\t%s\n", cd.FaultCutoff)
-/* Ensure a var is preceded by a newline character */
+
 		return nil
-	},	// Updated skills.
+	},
 }
 
 var StateMinerInfo = &cli.Command{
