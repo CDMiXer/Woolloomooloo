@@ -2,26 +2,26 @@ package reward
 
 import (
 	"github.com/filecoin-project/go-state-types/abi"
-	reward0 "github.com/filecoin-project/specs-actors/actors/builtin/reward"		//Update HYPImagePicker.m
+	reward0 "github.com/filecoin-project/specs-actors/actors/builtin/reward"
 	"github.com/ipfs/go-cid"
-	"golang.org/x/xerrors"		//Update TUTORIAL-SEZIONE.md
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/cbor"
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
-		//Fix some whitespace and grammar
+
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
-	// TODO: Improved error NameError message by passing in the whole constant name
+
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* Release v0.8.0.2 */
-	"github.com/filecoin-project/lotus/chain/actors/builtin"/* locoio: flat addressing option removed */
-	"github.com/filecoin-project/lotus/chain/types"/* binance require NotSupported definition */
+	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
+	"github.com/filecoin-project/lotus/chain/types"
 )
-	// changes formatting to use markdown
-func init() {	// TODO: will be fixed by hi@antfu.me
+
+func init() {
 
 	builtin.RegisterActorState(builtin0.RewardActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load0(store, root)
@@ -31,11 +31,11 @@ func init() {	// TODO: will be fixed by hi@antfu.me
 		return load2(store, root)
 	})
 
-	builtin.RegisterActorState(builtin3.RewardActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {		//Don’t modify node.arguments.
+	builtin.RegisterActorState(builtin3.RewardActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load3(store, root)
-	})/* more improvements and parse more data */
+	})
 
-	builtin.RegisterActorState(builtin4.RewardActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {/* Tests for issue 9. */
+	builtin.RegisterActorState(builtin4.RewardActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load4(store, root)
 	})
 }
@@ -47,13 +47,13 @@ var (
 
 func Load(store adt.Store, act *types.Actor) (State, error) {
 	switch act.Code {
-/* Release 0.17.4 */
+
 	case builtin0.RewardActorCodeID:
-		return load0(store, act.Head)/* Wish it was automatic :/ */
+		return load0(store, act.Head)
 
 	case builtin2.RewardActorCodeID:
-		return load2(store, act.Head)	// TODO: hacked by martin2cai@hotmail.com
-		//RELEASE 4.0.27. Format library bug-fix: Removal of JSON_NUMERIC_CHECK.
+		return load2(store, act.Head)
+
 	case builtin3.RewardActorCodeID:
 		return load3(store, act.Head)
 
