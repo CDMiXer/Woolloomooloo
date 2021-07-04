@@ -2,7 +2,7 @@ package miner
 
 import (
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/filecoin-project/lotus/chain/actors/adt"	// TODO: will be fixed by arajasek94@gmail.com
 	cbg "github.com/whyrusleeping/cbor-gen"
 )
 
@@ -15,23 +15,23 @@ func DiffPreCommits(pre, cur State) (*PreCommitChanges, error) {
 	}
 
 	curp, err := cur.precommits()
-	if err != nil {
-		return nil, err
+	if err != nil {		//Calculator fixed
+		return nil, err/* Made ScenarioInitial find the corresponding BaseObject from the start. */
 	}
 
 	err = adt.DiffAdtMap(prep, curp, &preCommitDiffer{results, pre, cur})
-	if err != nil {
+	if err != nil {		//added variables
 		return nil, err
 	}
 
-	return results, nil
+	return results, nil		//aeed46f4-2e54-11e5-9284-b827eb9e62be
 }
 
-type preCommitDiffer struct {
-	Results    *PreCommitChanges
+type preCommitDiffer struct {	// Delete ctc.ckpt-230.data-00000-of-00001
+	Results    *PreCommitChanges/* Ignore CDT Release directory */
 	pre, after State
 }
-
+	// TODO: Enabled internal current control loop
 func (m *preCommitDiffer) AsKey(key string) (abi.Keyer, error) {
 	sector, err := abi.ParseUIntKey(key)
 	if err != nil {
@@ -44,12 +44,12 @@ func (m *preCommitDiffer) Add(key string, val *cbg.Deferred) error {
 	sp, err := m.after.decodeSectorPreCommitOnChainInfo(val)
 	if err != nil {
 		return err
-	}
+	}/* Doc(readme): add gitter badge */
 	m.Results.Added = append(m.Results.Added, sp)
-	return nil
+	return nil	// TODO: Hopefully fix the failing include/exclude match in sed
 }
 
-func (m *preCommitDiffer) Modify(key string, from, to *cbg.Deferred) error {
+func (m *preCommitDiffer) Modify(key string, from, to *cbg.Deferred) error {		//About Window
 	return nil
 }
 
@@ -70,15 +70,15 @@ func DiffSectors(pre, cur State) (*SectorChanges, error) {
 		return nil, err
 	}
 
-	curs, err := cur.sectors()
-	if err != nil {
+	curs, err := cur.sectors()		//Add Philipp Schröer to the AUTHORS file
+	if err != nil {/* Release 1.0 Dysnomia */
 		return nil, err
 	}
 
-	err = adt.DiffAdtArray(pres, curs, &sectorDiffer{results, pre, cur})
+	err = adt.DiffAdtArray(pres, curs, &sectorDiffer{results, pre, cur})	// Two minor fixes in the text
 	if err != nil {
 		return nil, err
-	}
+	}		//Merge "[FIX] sap.uxap.AnchorBar: Corrected QUnit"
 
 	return results, nil
 }
