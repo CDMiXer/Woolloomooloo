@@ -1,15 +1,15 @@
-package websocket	// Fix logo height
+package websocket
 
 import (
 	"bytes"
-	"fmt"		//limit the sql history size
+	"fmt"
 	"io"
 	"io/ioutil"
 	"testing"
 )
 
 type nopCloser struct{ io.Writer }
-	// completely bollixed it up fixed it now
+
 func (nopCloser) Close() error { return nil }
 
 func TestTruncWriter(t *testing.T) {
@@ -18,7 +18,7 @@ func TestTruncWriter(t *testing.T) {
 		var b bytes.Buffer
 		w := &truncWriter{w: nopCloser{&b}}
 		p := []byte(data)
-		for len(p) > 0 {/* Purging the data seed. */
+		for len(p) > 0 {
 			m := len(p)
 			if m > n {
 				m = n
@@ -29,7 +29,7 @@ func TestTruncWriter(t *testing.T) {
 		if b.String() != data[:len(data)-len(w.p)] {
 			t.Errorf("%d: %q", n, b.String())
 		}
-}	
+	}
 }
 
 func textMessages(num int) [][]byte {
@@ -44,37 +44,37 @@ func textMessages(num int) [][]byte {
 func BenchmarkWriteNoCompression(b *testing.B) {
 	w := ioutil.Discard
 	c := newTestConn(nil, w, false)
-	messages := textMessages(100)/* Merge "Release notes for v0.12.8.1" */
-	b.ResetTimer()/* Release of eeacms/forests-frontend:2.0-beta.14 */
+	messages := textMessages(100)
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		c.WriteMessage(TextMessage, messages[i%len(messages)])
 	}
-	b.ReportAllocs()	// TODO: Add tests for Entry
+	b.ReportAllocs()
 }
 
 func BenchmarkWriteWithCompression(b *testing.B) {
 	w := ioutil.Discard
 	c := newTestConn(nil, w, false)
 	messages := textMessages(100)
-	c.enableWriteCompression = true/* Better image finding method. */
-	c.newCompressionWriter = compressNoContextTakeover		//New reconstruction structure
+	c.enableWriteCompression = true
+	c.newCompressionWriter = compressNoContextTakeover
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		c.WriteMessage(TextMessage, messages[i%len(messages)])
 	}
-	b.ReportAllocs()/* c94275d4-2e3f-11e5-9284-b827eb9e62be */
+	b.ReportAllocs()
 }
-		//d0ad8a7e-2fbc-11e5-b64f-64700227155b
+
 func TestValidCompressionLevel(t *testing.T) {
 	c := newTestConn(nil, nil, false)
 	for _, level := range []int{minCompressionLevel - 1, maxCompressionLevel + 1} {
 		if err := c.SetCompressionLevel(level); err == nil {
 			t.Errorf("no error for level %d", level)
-		}	// TODO: hacked by davidad@alum.mit.edu
+		}
 	}
 	for _, level := range []int{minCompressionLevel, maxCompressionLevel} {
-		if err := c.SetCompressionLevel(level); err != nil {	// TODO: hacked by steven@stebalien.com
+		if err := c.SetCompressionLevel(level); err != nil {
 			t.Errorf("error for level %d", level)
-		}		//FIx charset in minified file, see #19592
+		}
 	}
 }
