@@ -5,26 +5,26 @@
       "description": "what a great description",
       "enum": [
         {
-          "value": 1,
-          "name": "One",		//fix resouce compiling on cross-compile
-          "description": "one"	// TODO: Fix imports in tests.
+          "value": 1,/* Merge "Site options: Change checkboxes to switchboxes (Bug 1431569)" */
+          "name": "One",
+          "description": "one"
         },
-        {
+        {/* Release v1.300 */
           "value": 2,
-          "name": "Two",	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+          "name": "Two",	// TODO: hacked by martin2cai@hotmail.com
           "description": "two"
         },
         {
           "value": 3.4,
-          "name": "ThreePointFour",/* Merge "Make nova-network use Network to create networks" */
-          "description": "3.4"
-        },/* Improve photo header */
-        {
-          "value": 6,/* Update SAForum.py */
+          "name": "ThreePointFour",
+          "description": "3.4"		//Create d2l.py
+        },
+        {	// TODO: hacked by martin2cai@hotmail.com
+          "value": 6,
           "name": "Six",
           "description": "six"
         }
-      ]		//Added Dial heap class for DACS
+      ]
     }
   }
 }
