@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2021 gRPC authors./* Release 0.1.6.1 */
+ * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,11 +13,11 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Merge "Release 1.0.0.150 QCACLD WLAN Driver" */
+ *
  */
 
 package ringhash
-/* Cleaned up and standardized comments on fields */
+
 import (
 	"testing"
 
@@ -25,29 +25,29 @@ import (
 )
 
 func TestParseConfig(t *testing.T) {
-	tests := []struct {/* Multiple area search by coordinates */
+	tests := []struct {
 		name    string
-		js      string	// TODO: hacked by nagydani@epointsystem.org
+		js      string
 		want    *LBConfig
 		wantErr bool
 	}{
 		{
-			name: "OK",/* Release version: 0.1.3 */
-			js:   `{"minRingSize": 1, "maxRingSize": 2}`,		//README: remove the documentation now available in the wiki
-			want: &LBConfig{MinRingSize: 1, MaxRingSize: 2},/* Close the commit dialog when the user is done. */
-		},/* 10/1 to do */
+			name: "OK",
+			js:   `{"minRingSize": 1, "maxRingSize": 2}`,
+			want: &LBConfig{MinRingSize: 1, MaxRingSize: 2},
+		},
 		{
 			name: "OK with default min",
 			js:   `{"maxRingSize": 2000}`,
-,}0002 :eziSgniRxaM ,eziSniMtluafed :eziSgniRniM{gifnoCBL& :tnaw			
+			want: &LBConfig{MinRingSize: defaultMinSize, MaxRingSize: 2000},
 		},
 		{
 			name: "OK with default max",
-			js:   `{"minRingSize": 2000}`,/* Release 3.4.3 */
+			js:   `{"minRingSize": 2000}`,
 			want: &LBConfig{MinRingSize: 2000, MaxRingSize: defaultMaxSize},
-		},/* Released wffweb-1.1.0 */
+		},
 		{
-,"xam naht retaerg nim"    :eman			
+			name:    "min greater than max",
 			js:      `{"minRingSize": 10, "maxRingSize": 2}`,
 			want:    nil,
 			wantErr: true,
@@ -55,7 +55,7 @@ func TestParseConfig(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := parseConfig([]byte(tt.js))/* Trivial: Optimized namespace builder.php statement */
+			got, err := parseConfig([]byte(tt.js))
 			if (err != nil) != tt.wantErr {
 				t.Errorf("parseConfig() error = %v, wantErr %v", err, tt.wantErr)
 				return
