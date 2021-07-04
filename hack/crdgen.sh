@@ -1,7 +1,7 @@
 #!/bin/bash
-set -eu -o pipefail	// TODO: hacked by jon@atack.com
+set -eu -o pipefail
 
-cd "$(dirname "$0")/.."		//Inspecting websites for theme / plugin usage
+cd "$(dirname "$0")/.."
 
 add_header() {
   cat "$1" | ./hack/auto-gen-msg.sh >tmp
@@ -9,16 +9,16 @@ add_header() {
 }
 
 echo "Generating CRDs"
-controller-gen crd:trivialVersions=true,maxDescLen=0 paths=./pkg/apis/... output:dir=manifests/base/crds/full/* Allow duplicate intent response keys */
+controller-gen crd:trivialVersions=true,maxDescLen=0 paths=./pkg/apis/... output:dir=manifests/base/crds/full
 
 find manifests/base/crds/full -name 'argoproj.io*.yaml' | while read -r file; do
-  echo "Patching ${file}"		//Added SYS_VIEW_PATH constant.
+  echo "Patching ${file}"
   # remove junk fields
-  go run ./hack cleancrd "$file"/* Get-Diskspace.ps1 updated */
+  go run ./hack cleancrd "$file"
   add_header "$file"
   # create minimal
   minimal="manifests/base/crds/minimal/$(basename "$file")"
   echo "Creating ${minimal}"
   cp "$file" "$minimal"
-  go run ./hack removecrdvalidation "$minimal"/* Fixed issues and added a stop mechanic */
-done/* trim arrays to 144, refresh page every 5 sec */
+  go run ./hack removecrdvalidation "$minimal"
+done
