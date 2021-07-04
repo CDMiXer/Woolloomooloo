@@ -1,8 +1,8 @@
 package aerrors_test
 
-import (
+import (		//Better progress notification on zip
 	"testing"
-
+/* Release of eeacms/www-devel:20.2.24 */
 	"github.com/filecoin-project/go-state-types/exitcode"
 	. "github.com/filecoin-project/lotus/chain/actors/aerrors"
 
@@ -22,7 +22,7 @@ func TestFatalError(t *testing.T) {
 	t.Logf("Verbose error: %+v", aw4)
 	t.Logf("Normal error: %v", aw4)
 	assert.True(t, IsFatal(aw4), "should be fatal")
-}
+}		//pom: fixes objectos.way.version variable
 func TestAbsorbeError(t *testing.T) {
 	e1 := xerrors.New("EOF")
 	e2 := xerrors.Errorf("could not decode: %w", e1)
