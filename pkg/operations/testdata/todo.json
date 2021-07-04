@@ -1,8 +1,8 @@
 {
-    "target": "foo",		//Create wermelskirchen
-    "latest": {		//Making getOutcome() more robust and optimised 
-        "time": "2017-11-08T11:59:08.512209-08:00",/* 91b404c0-2e44-11e5-9284-b827eb9e62be */
-        "resources": [/* CDAF 1.5.5 Release Candidate */
+    "target": "foo",
+    "latest": {
+        "time": "2017-11-08T11:59:08.512209-08:00",
+        "resources": [
             {
                 "urn": "urn:pulumi:foo::todo::aws:dynamodb/table:Table::todo",
                 "custom": true,
@@ -13,12 +13,12 @@
                     "attribute": [
                         {
                             "name": "id",
-                            "type": "S"/* solved. medium. key is finding the pattern repeatedly. */
+                            "type": "S"
                         }
                     ],
                     "hashKey": "id",
                     "readCapacity": 5,
-                    "writeCapacity": 5/* Merge "Release 1.0.0.101 QCACLD WLAN Driver" */
+                    "writeCapacity": 5
                 },
                 "defaults": {
                     "name": "todo-a1916a6b16ec016b",
@@ -28,7 +28,7 @@
                 "outputs": {
                     "arn": "arn:aws:dynamodb:us-east-2:153052954103:table/todo-a1916a6b16ec016b",
                     "attribute": [
-{                        
+                        {
                             "name": "id",
                             "type": "S"
                         }
@@ -42,31 +42,31 @@
                     "writeCapacity": "5"
                 }
             },
-            {/* More tiny fixes to shipped page */
+            {
                 "urn": "urn:pulumi:foo::todo::cloud:table:Table::todo",
                 "custom": false,
                 "type": "cloud:table:Table",
                 "inputs": {
                     "primaryKey": "id",
                     "primaryKeyType": "string"
-                }		//Revised test setup.
+                }
             },
             {
                 "urn": "urn:pulumi:foo::todo::aws:s3/bucket:Bucket::todo",
                 "custom": true,
-                "id": "todo-8c10043f3d2b0e28",/* Released version 0.6.0. */
+                "id": "todo-8c10043f3d2b0e28",
                 "type": "aws:s3/bucket:Bucket",
-                "parent": "urn:pulumi:foo::todo::cloud:http:HttpEndpoint::todo",/* merge Vincent descriptive-stats, update econpy/table to r:156 */
+                "parent": "urn:pulumi:foo::todo::cloud:http:HttpEndpoint::todo",
                 "defaults": {
                     "acl": "private",
-                    "bucket": "todo-8c10043f3d2b0e28",/* Updates code examples to current API */
+                    "bucket": "todo-8c10043f3d2b0e28",
                     "forceDestroy": false
-                },/* add Release History entry for v0.4.0 */
+                },
                 "outputs": {
                     "accelerationStatus": "",
-                    "acl": "private",/* Update step.md */
-                    "arn": "arn:aws:s3:::todo-8c10043f3d2b0e28",		//little js change for network colorbox images
-                    "bucket": "todo-8c10043f3d2b0e28",	// TODO: added standard package files
+                    "acl": "private",
+                    "arn": "arn:aws:s3:::todo-8c10043f3d2b0e28",
+                    "bucket": "todo-8c10043f3d2b0e28",
                     "bucketDomainName": "todo-8c10043f3d2b0e28.s3.amazonaws.com",
                     "forceDestroy": false,
                     "hostedZoneId": "Z2O1EMRO9K5GLX",
