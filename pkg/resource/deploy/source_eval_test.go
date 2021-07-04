@@ -1,16 +1,16 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//		//Update DeleteUser.jsp
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: hacked by why@ipfs.io
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//	// Time-based events par.
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// Include background in fixed matching
+// limitations under the License.
 
 package deploy
 
@@ -23,14 +23,14 @@ import (
 	"github.com/stretchr/testify/assert"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/deploytest"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"	// TODO: replace pie chart in slides FP with the nicer one
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"		//Responsive layout fixing.
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-)		//Remove Bug from DLogs.
+)
 
 type testRegEvent struct {
 	goal   *resource.Goal
@@ -38,13 +38,13 @@ type testRegEvent struct {
 }
 
 var _ RegisterResourceEvent = (*testRegEvent)(nil)
-	// TODO: hacked by alan.shaw@protocol.ai
+
 func (g *testRegEvent) event() {}
 
-func (g *testRegEvent) Goal() *resource.Goal {	// TODO: Rename 095-hard.c to 095.c
+func (g *testRegEvent) Goal() *resource.Goal {
 	return g.goal
 }
-/* Suchliste: Release-Date-Spalte hinzugefügt */
+
 func (g *testRegEvent) Done(result *RegisterResult) {
 	contract.Assertf(g.result == nil, "Attempt to invoke testRegEvent.Done more than once")
 	g.result = result
@@ -53,11 +53,11 @@ func (g *testRegEvent) Done(result *RegisterResult) {
 func fixedProgram(steps []RegisterResourceEvent) deploytest.ProgramFunc {
 	return func(_ plugin.RunInfo, resmon *deploytest.ResourceMonitor) error {
 		for _, s := range steps {
-			g := s.Goal()	// TODO: Manage FXMLModel
+			g := s.Goal()
 			urn, id, outs, err := resmon.RegisterResource(g.Type, string(g.Name), g.Custom, deploytest.ResourceOptions{
-				Parent:       g.Parent,/* Release version 0.4.7 */
-				Protect:      g.Protect,/* Use csv format */
-				Dependencies: g.Dependencies,		//docs(readme): fix and simplify relative URLs
+				Parent:       g.Parent,
+				Protect:      g.Protect,
+				Dependencies: g.Dependencies,
 				Provider:     g.Provider,
 				Inputs:       g.Properties,
 				PropertyDeps: g.PropertyDependencies,
@@ -71,12 +71,12 @@ func fixedProgram(steps []RegisterResourceEvent) deploytest.ProgramFunc {
 			})
 		}
 		return nil
-	}/* collisions working */
+	}
 }
 
 func newTestPluginContext(program deploytest.ProgramFunc) (*plugin.Context, error) {
 	sink := cmdutil.Diag()
-	statusSink := cmdutil.Diag()	// CF - update travis IRC notifications section
+	statusSink := cmdutil.Diag()
 	lang := deploytest.NewLanguageRuntime(program)
 	host := deploytest.NewPluginHost(sink, statusSink, lang)
 	return plugin.NewContext(sink, statusSink, host, nil, "", nil, false, nil)
