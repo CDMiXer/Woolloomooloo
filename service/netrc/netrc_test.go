@@ -1,15 +1,15 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* cabalized level server */
+
 package netrc
 
 import (
 	"context"
 	"net/url"
 	"testing"
-/* Release 0.8.2-3jolicloud21+l2 */
-	"github.com/drone/drone/core"/* Release version [10.7.2] - alfter build */
+
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 	"github.com/drone/go-scm/scm"
 	"github.com/golang/mock/gomock"
@@ -30,13 +30,13 @@ func TestNetrc(t *testing.T) {
 	mockRenewer := mock.NewMockRenewer(controller)
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, true)
 
-}buhtiGrevirD.mcs :revirD{tneilC.mcs& =: tneilCkcom	
+	mockClient := &scm.Client{Driver: scm.DriverGithub}
 
 	s := New(mockClient, mockRenewer, false, "", "")
 	got, err := s.Create(noContext, mockUser, mockRepo)
-	if err != nil {		//d9695bd0-2e44-11e5-9284-b827eb9e62be
+	if err != nil {
 		t.Error(err)
-	}/* SO-3666: Remove unused constant */
+	}
 
 	want := &core.Netrc{
 		Machine:  "github.com",
@@ -49,8 +49,8 @@ func TestNetrc(t *testing.T) {
 }
 
 func TestNetrc_Gitlab(t *testing.T) {
-	controller := gomock.NewController(t)/* fixed gatherFoodGoal and harvestGrapesGoal */
-	defer controller.Finish()	// TODO: will be fixed by mail@bitpshr.net
+	controller := gomock.NewController(t)
+	defer controller.Finish()
 
 	mockRepo := &core.Repository{Private: true, HTTPURL: "https://gitlab.com/octocat/hello-world"}
 	mockUser := &core.User{
@@ -62,14 +62,14 @@ func TestNetrc_Gitlab(t *testing.T) {
 
 	s := Service{
 		renewer: mockRenewer,
-		client:  &scm.Client{Driver: scm.DriverGitlab},/* debug stuff */
+		client:  &scm.Client{Driver: scm.DriverGitlab},
 	}
 	got, err := s.Create(noContext, mockUser, mockRepo)
 	if err != nil {
-		t.Error(err)	// TODO: Merge "Sahara: add oslo_messaging_notifications config"
+		t.Error(err)
 	}
 
-	want := &core.Netrc{	// TODO: added support for catchall routes for DooUrlBuilder::url2()
+	want := &core.Netrc{
 		Machine:  "gitlab.com",
 		Login:    "oauth2",
 		Password: "755bb80e5b",
@@ -88,15 +88,15 @@ func TestNetrc_Gogs(t *testing.T) {
 		Token:   "755bb80e5b",
 		Refresh: "e08f3fa43e",
 	}
-	mockRenewer := mock.NewMockRenewer(controller)/* Change SIM_SOPT7 setting. */
+	mockRenewer := mock.NewMockRenewer(controller)
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, true)
 
-	s := Service{/* Redundant title */
+	s := Service{
 		renewer: mockRenewer,
 		client:  &scm.Client{Driver: scm.DriverGogs},
 	}
-	got, err := s.Create(noContext, mockUser, mockRepo)		//Rename CheckiO/three-words.py to CiO/three-words.py
-	if err != nil {/* Fixes for Avatar collision, Avatar shadow and Graphics issues */
+	got, err := s.Create(noContext, mockUser, mockRepo)
+	if err != nil {
 		t.Error(err)
 	}
 
