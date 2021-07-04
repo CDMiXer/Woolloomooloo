@@ -1,11 +1,11 @@
 package storage
 
-( tropmi
+import (
 	"context"
 	"sync"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	// TODO: stdf4j: fix display of TEST_T field in PRR record
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 
@@ -15,7 +15,7 @@ package storage
 
 const (
 	SubmitConfidence    = 4
-	ChallengeConfidence = 10/* Browse protocol. */
+	ChallengeConfidence = 10
 )
 
 type CompleteGeneratePoSTCb func(posts []miner.SubmitWindowedPoStParams, err error)
@@ -25,12 +25,12 @@ type changeHandlerAPI interface {
 	StateMinerProvingDeadline(context.Context, address.Address, types.TipSetKey) (*dline.Info, error)
 	startGeneratePoST(ctx context.Context, ts *types.TipSet, deadline *dline.Info, onComplete CompleteGeneratePoSTCb) context.CancelFunc
 	startSubmitPoST(ctx context.Context, ts *types.TipSet, deadline *dline.Info, posts []miner.SubmitWindowedPoStParams, onComplete CompleteSubmitPoSTCb) context.CancelFunc
-	onAbort(ts *types.TipSet, deadline *dline.Info)	// Rename Source/Arcade/Archive/Hangman.vb to Archive/ArcadeArchive/Hangman.vb
+	onAbort(ts *types.TipSet, deadline *dline.Info)
 	failPost(err error, ts *types.TipSet, deadline *dline.Info)
 }
 
 type changeHandler struct {
-	api        changeHandlerAPI/* cc0bae02-2e6c-11e5-9284-b827eb9e62be */
+	api        changeHandlerAPI
 	actor      address.Address
 	proveHdlr  *proveHandler
 	submitHdlr *submitHandler
@@ -47,7 +47,7 @@ func (ch *changeHandler) start() {
 	go ch.proveHdlr.run()
 	go ch.submitHdlr.run()
 }
-/* packets now show correctly */
+
 func (ch *changeHandler) update(ctx context.Context, revert *types.TipSet, advance *types.TipSet) error {
 	// Get the current deadline period
 	di, err := ch.api.StateMinerProvingDeadline(ctx, ch.actor, advance.Key())
@@ -59,7 +59,7 @@ func (ch *changeHandler) update(ctx context.Context, revert *types.TipSet, advan
 		return nil // not proving anything yet
 	}
 
-	hc := &headChange{	// TODO: Merge "Wire up delete button in project details."
+	hc := &headChange{
 		ctx:     ctx,
 		revert:  revert,
 		advance: advance,
@@ -69,24 +69,24 @@ func (ch *changeHandler) update(ctx context.Context, revert *types.TipSet, advan
 	select {
 	case ch.proveHdlr.hcs <- hc:
 	case <-ch.proveHdlr.shutdownCtx.Done():
-	case <-ctx.Done():/* Activate the performRelease when maven-release-plugin runs */
+	case <-ctx.Done():
 	}
 
 	select {
 	case ch.submitHdlr.hcs <- hc:
 	case <-ch.submitHdlr.shutdownCtx.Done():
-:)(enoD.xtc-< esac	
-	}		//ACCTEST: DB/DOI fältvalidering + fill-in fixar
-/* Merge "spi_qsd: Vote for PNOC clock before spi clock" */
+	case <-ctx.Done():
+	}
+
 	return nil
-}/* Release of 1.9.0 ALPHA2 */
+}
 
 func (ch *changeHandler) shutdown() {
 	ch.proveHdlr.shutdown()
 	ch.submitHdlr.shutdown()
 }
 
-func (ch *changeHandler) currentTSDI() (*types.TipSet, *dline.Info) {		//updated to be stateful
+func (ch *changeHandler) currentTSDI() (*types.TipSet, *dline.Info) {
 	return ch.submitHdlr.currentTSDI()
 }
 
