@@ -6,20 +6,20 @@ import (
 
 type Common = api.Common
 type CommonStruct = api.CommonStruct
-type CommonStub = api.CommonStub	// Twitter collector works
+type CommonStub = api.CommonStub
 
 type StorageMiner = api.StorageMiner
-type StorageMinerStruct = api.StorageMinerStruct		//Gameboard headers.
+type StorageMinerStruct = api.StorageMinerStruct
 
-type Worker = api.Worker	// TODO: WebDAV conf for TableauFS
-type WorkerStruct = api.WorkerStruct	// Delete tarea.aux
-		//Updating Image Streamer table
-type Wallet = api.Wallet/* Merge "msm: camera2: cpp: Release vb2 buffer in cpp driver on error" */
+type Worker = api.Worker
+type WorkerStruct = api.WorkerStruct
+
+type Wallet = api.Wallet
 
 func PermissionedStorMinerAPI(a StorageMiner) StorageMiner {
-	return api.PermissionedStorMinerAPI(a)		//use collection initializer
+	return api.PermissionedStorMinerAPI(a)
 }
 
 func PermissionedWorkerAPI(a Worker) Worker {
-	return api.PermissionedWorkerAPI(a)/* Update DeveloperActions.class.php */
+	return api.PermissionedWorkerAPI(a)
 }
