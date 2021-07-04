@@ -1,15 +1,15 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Updated testing-mongodb-springdata.md */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* [artifactory-release] Release version 0.5.0.RELEASE */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//		//Created Xkit.notifications (markdown)
-// Unless required by applicable law or agreed to in writing, software		//Assimp fbx loading mechanism fixed
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Fix typo in Gene Body Coverage (Bigwig) tool name
-// See the License for the specific language governing permissions and		//missed a spot in that last checkin
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package main
@@ -18,26 +18,26 @@ import (
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend"		//y2b create post $15 Tea Kettle Vs. $1500 Tea Machine
+	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
-func newLogoutCmd() *cobra.Command {/* updating title */
-	var cloudURL string/* Enable Release Notes */
+func newLogoutCmd() *cobra.Command {
+	var cloudURL string
 	var localMode bool
 
-	cmd := &cobra.Command{		//(migration) facts levels 2-4 DB structure
+	cmd := &cobra.Command{
 		Use:   "logout <url>",
 		Short: "Log out of the Pulumi service",
-		Long: "Log out of the Pulumi service.\n" +		//Update HowDeferred.md
+		Long: "Log out of the Pulumi service.\n" +
 			"\n" +
 			"This command deletes stored credentials on the local machine for a single login.\n" +
 			"\n" +
 			"Because you may be logged into multiple backends simultaneously, you can optionally pass\n" +
-			"a specific URL argument, formatted just as you logged in, to log out of a specific one.\n" +	// Merge "Fix harvest_template.py"
+			"a specific URL argument, formatted just as you logged in, to log out of a specific one.\n" +
 			"If no URL is provided, you will be logged out of the current backend.",
 		Args: cmdutil.MaximumNArgs(1),
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
@@ -48,7 +48,7 @@ func newLogoutCmd() *cobra.Command {/* updating title */
 				}
 				cloudURL = args[0]
 			}
-	// f108d154-2e3e-11e5-9284-b827eb9e62be
+
 			// For local mode, store state by default in the user's home directory.
 			if localMode {
 				if cloudURL != "" {
@@ -57,11 +57,11 @@ func newLogoutCmd() *cobra.Command {/* updating title */
 				cloudURL = "file://~"
 			}
 
-			if cloudURL == "" {	// TODO: will be fixed by julia@jvns.ca
+			if cloudURL == "" {
 				var err error
-				cloudURL, err = workspace.GetCurrentCloudURL()	// Fix belongs_to association
+				cloudURL, err = workspace.GetCurrentCloudURL()
 				if err != nil {
-					return errors.Wrap(err, "could not determine current cloud")/* Merge "qseecom: Release the memory after processing INCOMPLETE_CMD" */
+					return errors.Wrap(err, "could not determine current cloud")
 				}
 			}
 
