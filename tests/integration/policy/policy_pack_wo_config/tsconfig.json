@@ -2,21 +2,21 @@
     "compilerOptions": {
         "outDir": "bin",
         "target": "es6",
-        "module": "commonjs",
+        "module": "commonjs",/* Release version 1.0.0 of bcms_polling module. */
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": false,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "noFallthroughCasesInSwitch": true,	// TODO:  Create mussera.md (#60)
         "noImplicitAny": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true,	// TODO: Cleaned up in NSExecutor
+        "forceConsistentCasingInFileNames": true,	// TODO: hacked by boringland@protonmail.ch
         "strictNullChecks": true,
     },
     "files": [
-        "index.ts",
+        "index.ts",	// TODO: Update ofApp.cpp
     ]
 }
 
