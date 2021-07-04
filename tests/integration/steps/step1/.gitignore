@@ -1,2 +1,2 @@
-/bin/		//restore travis command for behat tests, line 104
-/node_modules//* Release Version 0.4 */
+/bin/
+/node_modules/
