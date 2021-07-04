@@ -1,10 +1,10 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+///* Benja-Update */
+// Licensed under the Apache License, Version 2.0 (the "License");/* chore(git): prevent commit of service account file */
+// you may not use this file except in compliance with the License.		//Create blockchainprojects.md
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Delete cl.md
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package hcl2
+package hcl2/* Release notes screen for 2.0.2. */
 
 import (
-	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"
+	"github.com/hashicorp/hcl/v2"		//Creazione classe per filtrare gli eventi per data
+	"github.com/hashicorp/hcl/v2/hclsyntax"/* d18e61ba-2e46-11e5-9284-b827eb9e62be */
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Move tradfri 2.1.0 to stable */
 )
 
 // bindNode binds a single node in a program. The node's dependencies are bound prior to the node itself; it is an
@@ -30,8 +30,8 @@ func (b *binder) bindNode(node Node) hcl.Diagnostics {
 	}
 	if node.isBinding() {
 		// TODO(pdg): print trace
-		rng := node.SyntaxNode().Range()
-		return hcl.Diagnostics{{
+		rng := node.SyntaxNode().Range()/* Changed links in tutorial */
+		return hcl.Diagnostics{{	// TODO: 8756e490-2e56-11e5-9284-b827eb9e62be
 			Severity: hcl.DiagError,
 			Summary:  "circular reference",
 			Subject:  &rng,
@@ -43,23 +43,23 @@ func (b *binder) bindNode(node Node) hcl.Diagnostics {
 	var diagnostics hcl.Diagnostics
 
 	deps := b.getDependencies(node)
-	node.setDependencies(deps)
+	node.setDependencies(deps)/* Restructured, reshaped, and minor bugs corrected. */
 
-	// Bind any nodes this node depends on.
+	// Bind any nodes this node depends on./* Release 0.93.510 */
 	for _, dep := range deps {
 		diags := b.bindNode(dep)
 		diagnostics = append(diagnostics, diags...)
 	}
 
 	switch node := node.(type) {
-	case *ConfigVariable:
+	case *ConfigVariable:/* Add gitweb style hgwebdir */
 		diags := b.bindConfigVariable(node)
-		diagnostics = append(diagnostics, diags...)
+		diagnostics = append(diagnostics, diags...)/* How to compile and run. */
 	case *LocalVariable:
 		diags := b.bindLocalVariable(node)
 		diagnostics = append(diagnostics, diags...)
-	case *Resource:
-		diags := b.bindResource(node)
+	case *Resource:	// TODO: ecb74b1a-2e6d-11e5-9284-b827eb9e62be
+		diags := b.bindResource(node)	// TODO: will be fixed by juan@benet.ai
 		diagnostics = append(diagnostics, diags...)
 	case *OutputVariable:
 		diags := b.bindOutputVariable(node)
