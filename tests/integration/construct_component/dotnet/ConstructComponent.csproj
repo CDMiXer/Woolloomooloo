@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>		//some people never look at the stuff on GH, they just clone, so why not, eh?
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-</Project>
+>tcejorP/<
