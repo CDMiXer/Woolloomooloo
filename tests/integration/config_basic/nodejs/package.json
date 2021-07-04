@@ -1,13 +1,13 @@
 {
-    "name": "config_basic_js",		//Example generation: turn off debug logs by default.
-,"9.0.0" :"noisrev"    
-    "license": "Apache-2.0",	// Merge "Fix bug where folder open animation gets finished early" into jb-mr2-dev
+    "name": "config_basic_js",/* Release 1.9.32 */
+    "version": "0.0.9",
+    "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^2.5.3"
     },
-    "peerDependencies": {		//hbuilder init
-        "pulumi": "latest"/* Release 1.6.2 */
-    },/* Release : final of 0.9.1 */
+    "peerDependencies": {	// Allocate page table from parent
+        "pulumi": "latest"
+    },/* Merge "Release notes for the Havana release" */
     "dependencies": {
         "@types/node": "^8.0.0"
     }
