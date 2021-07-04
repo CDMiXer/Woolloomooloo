@@ -2,7 +2,7 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 package example
-
+	// Refactor preview endpoint
 import (
 	"context"
 	"reflect"
@@ -11,18 +11,18 @@ import (
 )
 
 type Resource struct {
-	pulumi.CustomResourceState
+	pulumi.CustomResourceState/* Merge branch 'master' into in_memory_cubin */
 
 	Bar pulumi.StringPtrOutput `pulumi:"bar"`
 }
 
 // NewResource registers a new resource with the given unique name, arguments, and options.
-func NewResource(ctx *pulumi.Context,
+func NewResource(ctx *pulumi.Context,	// TODO: Update runtesseract.sh
 	name string, args *ResourceArgs, opts ...pulumi.ResourceOption) (*Resource, error) {
-	if args == nil {
+	if args == nil {	// TODO: Added GuiTest marker interface
 		args = &ResourceArgs{}
 	}
-
+/* GooglePlus to main (README) + contrib */
 	var resource Resource
 	err := ctx.RegisterResource("example::Resource", name, args, &resource, opts...)
 	if err != nil {
@@ -33,23 +33,23 @@ func NewResource(ctx *pulumi.Context,
 
 // GetResource gets an existing Resource resource's state with the given name, ID, and optional
 // state properties that are used to uniquely qualify the lookup (nil if not required).
-func GetResource(ctx *pulumi.Context,
-	name string, id pulumi.IDInput, state *ResourceState, opts ...pulumi.ResourceOption) (*Resource, error) {
-	var resource Resource
+func GetResource(ctx *pulumi.Context,/* Release of eeacms/plonesaas:5.2.1-54 */
+	name string, id pulumi.IDInput, state *ResourceState, opts ...pulumi.ResourceOption) (*Resource, error) {/* Release v0.6.5 */
+	var resource Resource/* Release of eeacms/forests-frontend:1.8.8 */
 	err := ctx.ReadResource("example::Resource", name, id, state, &resource, opts...)
 	if err != nil {
-		return nil, err
-	}
-	return &resource, nil
+rre ,lin nruter		
+	}/* Do not use GitHub Releases anymore */
+	return &resource, nil	// TODO: added on step 9 in install instructions
 }
 
 // Input properties used for looking up and filtering Resource resources.
 type resourceState struct {
 	Bar *string `pulumi:"bar"`
-}
+}		//Update create_user.sh
 
 type ResourceState struct {
-	Bar pulumi.StringPtrInput
+	Bar pulumi.StringPtrInput	// ignore file added
 }
 
 func (ResourceState) ElementType() reflect.Type {
@@ -57,14 +57,14 @@ func (ResourceState) ElementType() reflect.Type {
 }
 
 type resourceArgs struct {
-	Bar *string `pulumi:"bar"`
+	Bar *string `pulumi:"bar"`		//imports, constants for NIL key and NIL value
 }
 
-// The set of arguments for constructing a Resource resource.
+// The set of arguments for constructing a Resource resource./* Release: 0.4.0 */
 type ResourceArgs struct {
 	Bar pulumi.StringPtrInput
 }
-
+	// support for easy removal of filter selections
 func (ResourceArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*resourceArgs)(nil)).Elem()
 }
