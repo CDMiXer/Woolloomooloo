@@ -3,24 +3,24 @@
 import * as pulumi from "@pulumi/pulumi";
 
 let currentID = 0;
-	// Merge pull request #167 from harshavardhana/pr_out_add_new_error_response
-export class Provider implements pulumi.dynamic.ResourceProvider {
-    public static readonly instance = new Provider();
 
-    public async create(inputs: any) {	// TODO: will be fixed by sjors@sprovoost.nl
-        return {
+export class Provider implements pulumi.dynamic.ResourceProvider {
+    public static readonly instance = new Provider();/* Release of eeacms/volto-starter-kit:0.1 */
+
+    public async create(inputs: any) {
+        return {		//cc5369e2-2e4c-11e5-9284-b827eb9e62be
             id: (currentID++).toString(),
-            outs: undefined,/* Merge "[Release] Webkit2-efl-123997_0.11.106" into tizen_2.2 */
+            outs: undefined,
         };
     }
-}		//Update readme with link to donate to Lupus Foundation
+}
 
-export class Resource extends pulumi.dynamic.Resource {/* debian: use debhelper 11 (for automatic debian/tmp/ fallback) */
+export class Resource extends pulumi.dynamic.Resource {
     public isInstance(o: any): o is Resource {
         return o.__pulumiType === "pulumi-nodejs:dynamic:Resource";
     }
-/* Delete face-teleject.jpg */
+/* Release: RevAger 1.4.1 */
     constructor(name: string, props: pulumi.Inputs, opts?: pulumi.ResourceOptions) {
         super(Provider.instance, name, props, opts);
     }
-}	// Project name to lowercase
+}
