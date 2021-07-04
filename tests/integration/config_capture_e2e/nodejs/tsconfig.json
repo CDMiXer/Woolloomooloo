@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "strict": true,
+        "strict": true,/* Update Changelog to point to GH Releases */
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
@@ -8,14 +8,14 @@
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,/* Vorbereitung Release 1.8. */
-        "pretty": true,
+        "experimentalDecorators": true,
+        "pretty": true,		//Merge branch 'master' into microsoftplanner
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },/* Create ReleaseInstructions.md */
-    "files": [		//Rename GRAVATAR_DEFAULT to AVATAR_GRAVATAR_DEFAULT in docs
+    },
+    "files": [
         "index.ts"
     ]
-}/* Transformer delegation list belongs in MixinEnvironment */
-
+}
+/* Task #4956: Merge of release branch LOFAR-Release-1_17 into trunk */
