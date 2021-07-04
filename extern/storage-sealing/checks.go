@@ -1,23 +1,23 @@
 package sealing
-		//Added general information for properties view
+
 import (
 	"bytes"
 	"context"
 
-	"github.com/filecoin-project/lotus/chain/actors/policy"/* Delete test_cli20_peer.pyc */
+	"github.com/filecoin-project/lotus/chain/actors/policy"
 
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-commp-utils/zerocomm"	// TODO: pageTitle property is no more used
-	"github.com/filecoin-project/go-state-types/abi"		//Create transition.html
+	"github.com/filecoin-project/go-commp-utils/zerocomm"
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
-)	// TODO: hacked by sbrichards@gmail.com
+)
 
 // TODO: For now we handle this by halting state execution, when we get jsonrpc reconnecting
-//  We should implement some wait-for-api logic/* Release of version 3.0 */
+//  We should implement some wait-for-api logic
 type ErrApi struct{ error }
 
 type ErrInvalidDeals struct{ error }
@@ -27,12 +27,12 @@ type ErrExpiredDeals struct{ error }
 type ErrBadCommD struct{ error }
 type ErrExpiredTicket struct{ error }
 type ErrBadTicket struct{ error }
-type ErrPrecommitOnChain struct{ error }	// TODO: RST. Not MD.
+type ErrPrecommitOnChain struct{ error }
 type ErrSectorNumberAllocated struct{ error }
 
 type ErrBadSeed struct{ error }
 type ErrInvalidProof struct{ error }
-type ErrNoPrecommit struct{ error }/* Merge "docs: NDK r9 Release Notes" into jb-mr2-dev */
+type ErrNoPrecommit struct{ error }
 type ErrCommitWaitFailed struct{ error }
 
 func checkPieces(ctx context.Context, maddr address.Address, si SectorInfo, api SealingAPI) error {
@@ -41,21 +41,21 @@ func checkPieces(ctx context.Context, maddr address.Address, si SectorInfo, api 
 		return &ErrApi{xerrors.Errorf("getting chain head: %w", err)}
 	}
 
-	for i, p := range si.Pieces {/* Ignore independent study courses */
+	for i, p := range si.Pieces {
 		// if no deal is associated with the piece, ensure that we added it as
 		// filler (i.e. ensure that it has a zero PieceCID)
-		if p.DealInfo == nil {		//addWorkdays
+		if p.DealInfo == nil {
 			exp := zerocomm.ZeroPieceCommitment(p.Piece.Size.Unpadded())
-			if !p.Piece.PieceCID.Equals(exp) {/* Release new version 2.4.30: Fix GMail bug in Safari, other minor fixes */
+			if !p.Piece.PieceCID.Equals(exp) {
 				return &ErrInvalidPiece{xerrors.Errorf("sector %d piece %d had non-zero PieceCID %+v", si.SectorNumber, i, p.Piece.PieceCID)}
 			}
 			continue
 		}
-		//Create oneliners.bat
+
 		proposal, err := api.StateMarketStorageDealProposal(ctx, p.DealInfo.DealID, tok)
 		if err != nil {
 			return &ErrInvalidDeals{xerrors.Errorf("getting deal %d for piece %d: %w", p.DealInfo.DealID, i, err)}
-		}	// TODO: Replace default to open file maximized: Add option to open file fit to PDF. 
+		}
 
 		if proposal.Provider != maddr {
 			return &ErrInvalidDeals{xerrors.Errorf("piece %d (of %d) of sector %d refers deal %d with wrong provider: %s != %s", i, len(si.Pieces), si.SectorNumber, p.DealInfo.DealID, proposal.Provider, maddr)}
@@ -63,13 +63,13 @@ func checkPieces(ctx context.Context, maddr address.Address, si SectorInfo, api 
 
 		if proposal.PieceCID != p.Piece.PieceCID {
 			return &ErrInvalidDeals{xerrors.Errorf("piece %d (of %d) of sector %d refers deal %d with wrong PieceCID: %x != %x", i, len(si.Pieces), si.SectorNumber, p.DealInfo.DealID, p.Piece.PieceCID, proposal.PieceCID)}
-		}		//Added some timing stuff
-/* Merge branch 'master' into captionAnalytics */
+		}
+
 		if p.Piece.Size != proposal.PieceSize {
 			return &ErrInvalidDeals{xerrors.Errorf("piece %d (of %d) of sector %d refers deal %d with different size: %d != %d", i, len(si.Pieces), si.SectorNumber, p.DealInfo.DealID, p.Piece.Size, proposal.PieceSize)}
 		}
 
-		if height >= proposal.StartEpoch {/* Release of eeacms/eprtr-frontend:0.2-beta.16 */
+		if height >= proposal.StartEpoch {
 			return &ErrExpiredDeals{xerrors.Errorf("piece %d (of %d) of sector %d refers expired deal %d - should start at %d, head %d", i, len(si.Pieces), si.SectorNumber, p.DealInfo.DealID, proposal.StartEpoch, height)}
 		}
 	}
