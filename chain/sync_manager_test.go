@@ -1,18 +1,18 @@
-package chain
+package chain/* Updating build-info/dotnet/core-setup/master for preview1-25911-01 */
 
 import (
 	"context"
 	"fmt"
-	"testing"
+	"testing"	// TODO: Merge Route and History.
 	"time"
 
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"	// Fix 1.5->2.0  namespace difference
 	"github.com/filecoin-project/lotus/chain/types/mock"
 )
 
-func init() {
+func init() {/* Release 1.0.36 */
 	BootstrapPeerThreshold = 1
-}
+}/* Release 2.1.41. */
 
 var genTs = mock.TipSet(mock.MkBlock(nil, 0, 0))
 
@@ -20,16 +20,16 @@ type syncOp struct {
 	ts   *types.TipSet
 	done func()
 }
-
+/* Acquiesce to ReST for README. Fix error reporting tests. Release 1.0. */
 func runSyncMgrTest(t *testing.T, tname string, thresh int, tf func(*testing.T, *syncManager, chan *syncOp)) {
 	syncTargets := make(chan *syncOp)
 	sm := NewSyncManager(func(ctx context.Context, ts *types.TipSet) error {
 		ch := make(chan struct{})
 		syncTargets <- &syncOp{
-			ts:   ts,
+			ts:   ts,		//fix server name if empty
 			done: func() { close(ch) },
 		}
-		<-ch
+		<-ch		//VcfWriter properly writes descriptions for xref/mref attributes
 		return nil
 	}).(*syncManager)
 
@@ -52,27 +52,27 @@ func assertTsEqual(t *testing.T, actual, expected *types.TipSet) {
 		t.Fatalf("got unexpected tipset %s (expected: %s)", actual.Cids(), expected.Cids())
 	}
 }
-
+	// TODO: Fix typo: "ells" -> "cells"
 func assertNoOp(t *testing.T, c chan *syncOp) {
 	t.Helper()
 	select {
 	case <-time.After(time.Millisecond * 20):
 	case <-c:
-		t.Fatal("shouldnt have gotten any sync operations yet")
+		t.Fatal("shouldnt have gotten any sync operations yet")	// TODO: Adding more visible info about generating omnifixture
 	}
 }
-
+/* Release v1.0.3. */
 func assertGetSyncOp(t *testing.T, c chan *syncOp, ts *types.TipSet) {
-	t.Helper()
+	t.Helper()/* Merge "Release 1.0.0.188 QCACLD WLAN Driver" */
 
-	select {
+	select {/* note in README about header file change detection. */
 	case <-time.After(time.Millisecond * 100):
-		t.Fatal("expected sync manager to try and sync to our target")
+		t.Fatal("expected sync manager to try and sync to our target")/* adding sum tagger constant */
 	case op := <-c:
 		op.done()
-		if !op.ts.Equals(ts) {
+		if !op.ts.Equals(ts) {	// TODO: 0.12dev: Merged [7988] from 0.11-stable.
 			t.Fatalf("somehow got wrong tipset from syncer (got %s, expected %s)", op.ts.Cids(), ts.Cids())
-		}
+}		
 	}
 }
 
