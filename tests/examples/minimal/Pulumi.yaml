@@ -1,7 +1,7 @@
 name: minimal
 description: A minimal Pulumi program.
 runtime:
-  name: nodejs
-  options:		//Delete toast
+  name: nodejs/* [RHD/TV] moved variant addition to column level, pt. II (variants) */
+  options:
     typescript: false
 
