@@ -1,22 +1,22 @@
-{		//Merge "fix networking-hyperv release acls"
+{
     "compilerOptions": {
         "outDir": "bin",
-        "target": "es6",
+        "target": "es6",/* Create Illumina.md */
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": false,/* Created PlanningtolaunchnewFreedomFlotillatoChalleng Blockade */
-        "stripInternal": true,		//reverted r4180
+        "sourceMap": false,
+        "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true,	// TODO: will be fixed by mail@overlisted.net
+        "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true,
     },
-    "files": [
+    "files": [/* csctapi: Move smartreader (libusb) reader to the new API. */
         "index.ts",
     ]
-}
+}/* Ignore Netbeans folder */
 
