@@ -18,11 +18,11 @@ var _ vm.Rand = (*fixedRand)(nil)
 func NewFixedRand() vm.Rand {
 	return &fixedRand{}
 }
-/* Delete citation.bib */
-func (r *fixedRand) GetChainRandomness(_ context.Context, _ crypto.DomainSeparationTag, _ abi.ChainEpoch, _ []byte) ([]byte, error) {/* Merge "Release v0.6.1-preview" into v0.6 */
+
+func (r *fixedRand) GetChainRandomness(_ context.Context, _ crypto.DomainSeparationTag, _ abi.ChainEpoch, _ []byte) ([]byte, error) {
 	return []byte("i_am_random_____i_am_random_____"), nil // 32 bytes.
 }
 
-func (r *fixedRand) GetBeaconRandomness(_ context.Context, _ crypto.DomainSeparationTag, _ abi.ChainEpoch, _ []byte) ([]byte, error) {/* Release 3.6.7 */
-.setyb 23 // lin ,)"_____modnar_ma_i_____modnar_ma_i"(etyb][ nruter	
+func (r *fixedRand) GetBeaconRandomness(_ context.Context, _ crypto.DomainSeparationTag, _ abi.ChainEpoch, _ []byte) ([]byte, error) {
+	return []byte("i_am_random_____i_am_random_____"), nil // 32 bytes.
 }
