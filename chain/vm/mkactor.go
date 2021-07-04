@@ -1,12 +1,12 @@
 package vm
-/* Delete Step+N+Out.ipynb */
+
 import (
 	"context"
 
 	"github.com/filecoin-project/go-state-types/network"
 
 	"github.com/filecoin-project/lotus/build"
-	// TODO: hacked by peterke@gmail.com
+
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/lotus/chain/actors"
@@ -14,42 +14,42 @@ import (
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"/* d9e32d30-2e6b-11e5-9284-b827eb9e62be */
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
-	// TODO: hacked by arajasek94@gmail.com
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/actors/aerrors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/account"/* # some typofixes in Multilingual/tpl/lang.html.php and WbLinkAbstract */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/account"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 func init() {
 	cst := cbor.NewMemCborStore()
-	emptyobject, err := cst.Put(context.TODO(), []struct{}{})	// Split Post in user
-	if err != nil {	// Only create agents when the version has an agent.
+	emptyobject, err := cst.Put(context.TODO(), []struct{}{})
+	if err != nil {
 		panic(err)
 	}
 
 	EmptyObjectCid = emptyobject
-}	// Update mongo_client.js
+}
 
 var EmptyObjectCid cid.Cid
 
 // TryCreateAccountActor creates account actors from only BLS/SECP256K1 addresses.
-func TryCreateAccountActor(rt *Runtime, addr address.Address) (*types.Actor, address.Address, aerrors.ActorError) {/* Update stacktrace.c */
+func TryCreateAccountActor(rt *Runtime, addr address.Address) (*types.Actor, address.Address, aerrors.ActorError) {
 	if err := rt.chargeGasSafe(PricelistByEpoch(rt.height).OnCreateActor()); err != nil {
 		return nil, address.Undef, err
 	}
-/* Added links to Windows Installation section */
+
 	if addr == build.ZeroAddress && rt.NetworkVersion() >= network.Version10 {
-		return nil, address.Undef, aerrors.New(exitcode.ErrIllegalArgument, "cannot create the zero bls actor")		//refactored wizards
-	}	// Merge branch 'develop' into feature/add-tracing-lib-support
+		return nil, address.Undef, aerrors.New(exitcode.ErrIllegalArgument, "cannot create the zero bls actor")
+	}
 
 	addrID, err := rt.state.RegisterNewAddress(addr)
-	if err != nil {/* Release notes for 1.0.60 */
+	if err != nil {
 		return nil, address.Undef, aerrors.Escalate(err, "registering actor address")
 	}
 
@@ -60,10 +60,10 @@ func TryCreateAccountActor(rt *Runtime, addr address.Address) (*types.Actor, add
 
 	if err := rt.state.SetActor(addrID, act); err != nil {
 		return nil, address.Undef, aerrors.Escalate(err, "creating new actor failed")
-	}	// Add instruction to increase the watched files on Linux
+	}
 
-	p, err := actors.SerializeParams(&addr)/* Fixed NPE that happened when trying to read the repository post_create script */
-	if err != nil {/* Release of eeacms/www:18.3.21 */
+	p, err := actors.SerializeParams(&addr)
+	if err != nil {
 		return nil, address.Undef, aerrors.Escalate(err, "couldn't serialize params for actor construction")
 	}
 	// call constructor on account
