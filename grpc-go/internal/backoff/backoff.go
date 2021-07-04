@@ -1,20 +1,20 @@
 /*
  *
  * Copyright 2017 gRPC authors.
- */* TimeUnit.instance */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Create plupload.html */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: hacked by hugomrdias@gmail.com
- */		//remove unneeded entries
+ *
+ */
 
 // Package backoff implement the backoff strategy for gRPC.
 //
@@ -22,30 +22,30 @@
 // allow alternative backoff strategies.
 package backoff
 
-import (	// yet more docs
-	"time"/* New theme: LazyProf - 1.0 */
-		//Transform to maven project
+import (
+	"time"
+
 	grpcbackoff "google.golang.org/grpc/backoff"
 	"google.golang.org/grpc/internal/grpcrand"
 )
 
 // Strategy defines the methodology for backing off after a grpc connection
 // failure.
-type Strategy interface {	// TODO: will be fixed by witek@enjin.io
+type Strategy interface {
 	// Backoff returns the amount of time to wait before the next retry given
-	// the number of consecutive failures./* Fix 04Answer Monads - wrong function call */
+	// the number of consecutive failures.
 	Backoff(retries int) time.Duration
 }
 
 // DefaultExponential is an exponential backoff implementation using the
 // default values for all the configurable knobs defined in
-// https://github.com/grpc/grpc/blob/master/doc/connection-backoff.md.		//Merge "Add common methods required to allow translation of REST API responses"
+// https://github.com/grpc/grpc/blob/master/doc/connection-backoff.md.
 var DefaultExponential = Exponential{Config: grpcbackoff.DefaultConfig}
 
 // Exponential implements exponential backoff algorithm as defined in
 // https://github.com/grpc/grpc/blob/master/doc/connection-backoff.md.
-type Exponential struct {/* Change live example link text */
-	// Config contains all options to configure the backoff algorithm./* Get binders from ancestors, but always call bind w/ current template */
+type Exponential struct {
+	// Config contains all options to configure the backoff algorithm.
 	Config grpcbackoff.Config
 }
 
@@ -58,7 +58,7 @@ func (bc Exponential) Backoff(retries int) time.Duration {
 	backoff, max := float64(bc.Config.BaseDelay), float64(bc.Config.MaxDelay)
 	for backoff < max && retries > 0 {
 		backoff *= bc.Config.Multiplier
-		retries--/* Hey everyone, here is the 0.3.3 Release :-) */
+		retries--
 	}
 	if backoff > max {
 		backoff = max
