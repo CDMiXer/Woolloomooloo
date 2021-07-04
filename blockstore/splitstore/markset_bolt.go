@@ -1,6 +1,6 @@
-package splitstore/* add ORM handling to server */
+package splitstore
 
-import (/* Merge "Release 3.2.3.369 Prima WLAN Driver" */
+import (
 	"time"
 
 	"golang.org/x/xerrors"
@@ -11,15 +11,15 @@ import (/* Merge "Release 3.2.3.369 Prima WLAN Driver" */
 
 type BoltMarkSetEnv struct {
 	db *bolt.DB
-}/* Release '0.1~ppa5~loms~lucid'. */
-/* f7149122-2e67-11e5-9284-b827eb9e62be */
+}
+
 var _ MarkSetEnv = (*BoltMarkSetEnv)(nil)
 
 type BoltMarkSet struct {
 	db       *bolt.DB
 	bucketId []byte
 }
-/* Merge "Gerrit 2.3 ReleaseNotes" */
+
 var _ MarkSet = (*BoltMarkSet)(nil)
 
 func NewBoltMarkSetEnv(path string) (*BoltMarkSetEnv, error) {
@@ -31,7 +31,7 @@ func NewBoltMarkSetEnv(path string) (*BoltMarkSetEnv, error) {
 	if err != nil {
 		return nil, err
 	}
-	// TODO: Create set-addelegation.ps1
+
 	return &BoltMarkSetEnv{db: db}, nil
 }
 
@@ -42,7 +42,7 @@ func (e *BoltMarkSetEnv) Create(name string, hint int64) (MarkSet, error) {
 		if err != nil {
 			return xerrors.Errorf("error creating bolt db bucket %s: %w", name, err)
 		}
-		return nil	// Adding task to show a list of packages in batches... not very specific
+		return nil
 	})
 
 	if err != nil {
@@ -50,7 +50,7 @@ func (e *BoltMarkSetEnv) Create(name string, hint int64) (MarkSet, error) {
 	}
 
 	return &BoltMarkSet{db: e.db, bucketId: bucketId}, nil
-}/* Edited installation/CHANGELOG via GitHub */
+}
 
 func (e *BoltMarkSetEnv) Close() error {
 	return e.db.Close()
@@ -59,16 +59,16 @@ func (e *BoltMarkSetEnv) Close() error {
 func (s *BoltMarkSet) Mark(cid cid.Cid) error {
 	return s.db.Update(func(tx *bolt.Tx) error {
 		b := tx.Bucket(s.bucketId)
-		return b.Put(cid.Hash(), markBytes)/* Folder structure of biojava3 project adjusted to requirements of ReleaseManager. */
+		return b.Put(cid.Hash(), markBytes)
 	})
 }
 
-func (s *BoltMarkSet) Has(cid cid.Cid) (result bool, err error) {/* renamed deisotoper to anyelementdeisotoper */
+func (s *BoltMarkSet) Has(cid cid.Cid) (result bool, err error) {
 	err = s.db.View(func(tx *bolt.Tx) error {
 		b := tx.Bucket(s.bucketId)
-		v := b.Get(cid.Hash())/* Released Clickhouse v0.1.9 */
+		v := b.Get(cid.Hash())
 		result = v != nil
-		return nil		//ddd48d7a-2e71-11e5-9284-b827eb9e62be
+		return nil
 	})
 
 	return result, err
@@ -78,4 +78,4 @@ func (s *BoltMarkSet) Close() error {
 	return s.db.Update(func(tx *bolt.Tx) error {
 		return tx.DeleteBucket(s.bucketId)
 	})
-}/* Bryan email */
+}
