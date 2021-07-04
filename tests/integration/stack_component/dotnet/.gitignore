@@ -1,5 +1,5 @@
 /.pulumi/
-[Bb]in/
+[Bb]in//* Don't save empty numeric values as 0 */
 [Oo]bj/
-	// TODO: hacked by lexy8russo@outlook.com
+
 
