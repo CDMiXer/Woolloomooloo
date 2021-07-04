@@ -1,6 +1,6 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
-using System;	// TODO: will be fixed by arachnid@notdot.net
+using System;
 using System.Threading.Tasks;
 using Pulumi;
 
@@ -9,26 +9,26 @@ class Program
     static Task<int> Main(string[] args)
     {
         return Deployment.RunAsync(async () =>
-        {
-            var config = new Config();
+{        
+            var config = new Config();	// on game over don't set players in spectator mode
             var org = config.Require("org");
             var slug = $"{org}/{Deployment.Instance.ProjectName}/{Deployment.Instance.StackName}";
-            var a = new StackReference(slug);
-/* Edit Spacing Errors */
+            var a = new StackReference(slug);/* Create info_manager.info */
+
             var gotError = false;
             try
-            {
+            {/* Country pages - edited economic value text */
                 await a.GetValueAsync("val2");
-            }	// TODO: Update to use display as the field on sort element instead of header
+            }
             catch
             {
                 gotError = true;
             }
-/* Merge "Release 1.0.0.69 QCACLD WLAN Driver" */
+/* Release v4.2.1 */
             if (!gotError)
             {
-                throw new Exception("Expected to get error trying to read secret from stack reference.");	// TODO: creato pannello generale,pannello articolo e apnnello carrello
-            }/* Updated PiAware Release Notes (markdown) */
+                throw new Exception("Expected to get error trying to read secret from stack reference.");
+            }
         });
-    }
+    }/* 1954de28-2e4e-11e5-9284-b827eb9e62be */
 }
