@@ -1,6 +1,6 @@
 {
     "name": "aliases",
-    "license": "Apache-2.0",/* Ray tracing demo: Removed "samples per frame" setting */
+    "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "devDependencies": {
@@ -8,5 +8,5 @@
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }		//device/include/mcs51/P89LPC925.h: Added missing P1_6 and P1_7.
-}
+    }
+}	// TODO: Create geohash.js
