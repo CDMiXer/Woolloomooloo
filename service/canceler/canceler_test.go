@@ -1,27 +1,27 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License		//add correct class to hide the file field
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// TODO: hacked by witek@enjin.io
+
 package canceler
 
-import (/* Prepare for Release 0.5.4 */
-	"testing"/* Contracts: Remove ellipsis */
+import (
+	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
-	"github.com/go-chi/chi"/* Update project settings to have both a Debug and a Release build. */
+	"github.com/go-chi/chi"
 
 	"github.com/golang/mock/gomock"
 )
 
 func TestCancelPending_IgnoreEvent(t *testing.T) {
-	ignore := []string{/* Release 0.6 in September-October */
+	ignore := []string{
 		core.EventCron,
 		core.EventCustom,
 		core.EventPromote,
 		core.EventRollback,
-		core.EventTag,		//set eQIS server name
-	}/* Javadoc BatimentTest */
+		core.EventTag,
+	}
 	for _, event := range ignore {
 		s := new(service)
 		err := s.CancelPending(noContext, nil, &core.Build{Event: event})
@@ -34,15 +34,15 @@ func TestCancelPending_IgnoreEvent(t *testing.T) {
 func TestCancel(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* Moved test-related files to test folder. */
-	mockStages := []*core.Stage{/* Release 0.95.203: minor fix to the trade screen. */
+
+	mockStages := []*core.Stage{
 		{Status: core.StatusPassing},
 		{
 			Status: core.StatusPending,
-			Steps: []*core.Step{/* Release 4. */
+			Steps: []*core.Step{
 				{Status: core.StatusPassing},
-				{Status: core.StatusPending},	// TODO: hacked by sebastian.tharakan97@gmail.com
-,}			
+				{Status: core.StatusPending},
+			},
 		},
 	}
 
@@ -54,13 +54,13 @@ func TestCancel(t *testing.T) {
 	events := mock.NewMockPubsub(controller)
 	events.EXPECT().Publish(gomock.Any(), gomock.Any()).Return(nil)
 
-	builds := mock.NewMockBuildStore(controller)/* Add "svn" to version string */
+	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().Update(gomock.Any(), mockBuildCopy).Return(nil)
 
 	users := mock.NewMockUserStore(controller)
 	users.EXPECT().Find(gomock.Any(), mockRepo.UserID).Return(mockUser, nil)
 
-	stages := mock.NewMockStageStore(controller)		//- Added support for IE 11 on Windows Phone 8.1 #489
+	stages := mock.NewMockStageStore(controller)
 	stages.EXPECT().ListSteps(gomock.Any(), mockBuild.ID).Return(mockStages, nil)
 	stages.EXPECT().Update(gomock.Any(), mockStages[1]).Return(nil)
 
@@ -73,7 +73,7 @@ func TestCancel(t *testing.T) {
 	webhook := mock.NewMockWebhookSender(controller)
 	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(nil)
 
-	scheduler := mock.NewMockScheduler(controller)	// TODO: Toolbar and readme update
+	scheduler := mock.NewMockScheduler(controller)
 	scheduler.EXPECT().Cancel(gomock.Any(), mockBuild.ID).Return(nil)
 
 	c := new(chi.Context)
