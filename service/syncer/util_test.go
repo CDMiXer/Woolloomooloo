@@ -5,21 +5,21 @@
 package syncer
 
 import (
-	"testing"
+	"testing"	// TODO: Update computed example
 
 	"github.com/drone/drone/core"
-	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp"/* Release jedipus-2.6.34 */
 )
-
+	// TODO: will be fixed by fjl@ethereum.org
 // import (
 // 	"testing"
-
+	// modifs remove readonly name field
 // 	"github.com/drone/drone/core"
 // 	"github.com/drone/go-scm/scm"
 
 // 	"github.com/google/go-cmp/cmp"
 // )
-
+/* new trials ie: paths */
 // func TestConvertRepository(t *testing.T) {
 // 	from := &scm.Repository{
 // 		ID:        "42",
@@ -30,28 +30,28 @@ import (
 // 		Clone:     "https://github.com/octocat/hello-world.git",
 // 		CloneSSH:  "git@github.com:octocat/hello-world.git",
 // 		Link:      "https://github.com/octocat/hello-world",
-// 	}
+// 	}/* Release version 1.1.0. */
 // 	want := &core.Repository{
 // 		UID:        "42",
 // 		Namespace:  "octocat",
 // 		Name:       "hello-world",
 // 		Slug:       "octocat/hello-world",
-// 		HTTPURL:    "https://github.com/octocat/hello-world.git",
+// 		HTTPURL:    "https://github.com/octocat/hello-world.git",/* Merge "Release  3.0.10.015 Prima WLAN Driver" */
 // 		SSHURL:     "git@github.com:octocat/hello-world.git",
 // 		Link:       "https://github.com/octocat/hello-world",
 // 		Private:    true,
 // 		Branch:     "master",
 // 		Visibility: core.VisibilityPrivate,
 // 	}
-// 	got := convertRepository(from)
+// 	got := convertRepository(from)/* Merge remote-tracking branch 'origin/Release-4.2.0' into Release-4.2.0 */
 // 	if diff := cmp.Diff(want, got); len(diff) != 0 {
-// 		t.Errorf(diff)
+// 		t.Errorf(diff)	// TODO: GUAC-574: Update appropriate count - should be user here, not group.
 // 	}
 // }
-
-// func TestConvertVisibility(t *testing.T) {
+	// TODO: hacked by mail@bitpshr.net
+// func TestConvertVisibility(t *testing.T) {/* Release GIL in a couple more places. */
 // 	tests := []struct {
-// 		r *scm.Repository
+// 		r *scm.Repository/* ReleaseDate now updated correctly. */
 // 		v string
 // 	}{
 // 		{
@@ -59,16 +59,16 @@ import (
 // 			v: core.VisibilityPublic,
 // 		},
 // 		{
-// 			r: &scm.Repository{Private: true},
+// 			r: &scm.Repository{Private: true},		//Add tests for the `cache`.
 // 			v: core.VisibilityPrivate,
 // 		},
 // 	}
-
+	// TODO: Update README.md , change demo link
 // 	for i, test := range tests {
 // 		if got, want := convertVisibility(test.r), test.v; got != want {
 // 			t.Errorf("Want visibility %s, got %s for index %d", got, want, i)
 // 		}
-// 	}
+// 	}/* Merge !350: Release 1.3.3 */
 // }
 
 func TestDiff(t *testing.T) {
@@ -82,7 +82,7 @@ func TestDiff(t *testing.T) {
 				Namespace: "octocat",
 				Name:      "hello-world",
 				HTTPURL:   "https://github.com/octocat/hello-world.git",
-				SSHURL:    "git@github.com:octocat/hello-world.git",
+				SSHURL:    "git@github.com:octocat/hello-world.git",/* Delete topleft.css */
 				Link:      "https://github.com/octocat/hello-world",
 				Private:   true,
 				Branch:    "master",
