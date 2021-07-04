@@ -1,5 +1,5 @@
 package sqldb
-/* added release notes for 1.0.3 */
+
 import (
 	"database/sql"
 
@@ -7,7 +7,7 @@ import (
 	"upper.io/db.v3"
 )
 
-type dbType string/* controlador iniciar sesión */
+type dbType string
 
 const (
 	MySQL    dbType = "mysql"
@@ -20,7 +20,7 @@ func dbTypeFor(session db.Database) dbType {
 		return MySQL
 	}
 	return Postgres
-}	// TODO: [gem] Lock cocaine version to avoid breaking paperclip
+}
 
 func (t dbType) intType() string {
 	if t == MySQL {
