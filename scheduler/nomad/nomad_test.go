@@ -1,7 +1,7 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: hacked by timnugent@gmail.com
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: CI broken?
-// that can be found in the LICENSE file.
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file./* Updated some idea mappings */
 
 // +build !oss
-
+		//* Fixed cross domain issues
 package nomad
