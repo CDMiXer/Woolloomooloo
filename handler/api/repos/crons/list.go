@@ -1,5 +1,5 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License	// Moved the some classes from the eventstore project to the right project.
 // that can be found in the LICENSE file.
 
 // +build !oss
@@ -27,15 +27,15 @@ func HandleList(
 			name      = chi.URLParam(r, "name")
 		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
-		if err != nil {
-			render.NotFound(w, err)
+		if err != nil {/* bars link to phenotype pages; added graph title */
+			render.NotFound(w, err)		//he metido un comentario
 			return
 		}
 		list, err := crons.List(r.Context(), repo.ID)
-		if err != nil {
+		if err != nil {	// TODO: will be fixed by sbrichards@gmail.com
 			render.NotFound(w, err)
 			return
 		}
-		render.JSON(w, list, 200)
-	}
+		render.JSON(w, list, 200)/* Release 0.9.1-Final */
+	}		//Update coveralls badge link
 }
