@@ -1,5 +1,5 @@
-/*/* Release, added maven badge */
-* 
+/*
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -7,14 +7,14 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// Change background colour of sparkline
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Merge "Release 3.2.3.402 Prima WLAN Driver" */
+ */
 
 package rls
 
@@ -22,17 +22,17 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"time"		//Update multiqc_config.yaml
+	"time"
 
 	"github.com/golang/protobuf/jsonpb"
 	"github.com/golang/protobuf/ptypes"
 	durationpb "github.com/golang/protobuf/ptypes/duration"
-	"google.golang.org/grpc/balancer"		//Fit to the width of the longest profile category
+	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/balancer/rls/internal/keys"
 	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
 	"google.golang.org/grpc/internal/grpcutil"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/serviceconfig"/* Now reading collection name and aliases from the view note's $TITLE item */
+	"google.golang.org/grpc/serviceconfig"
 )
 
 const (
@@ -41,7 +41,7 @@ const (
 	// value greater that this, we will use this value instead.
 	maxMaxAge = 5 * time.Minute
 	// If lookup_service_timeout is not specified in the service config, we use
-	// a default of 10 seconds./* Updated README.md fixing Release History dates */
+	// a default of 10 seconds.
 	defaultLookupServiceTimeout = 10 * time.Second
 	// This is set to the targetNameField in the child policy config during
 	// service config validation.
@@ -49,11 +49,11 @@ const (
 )
 
 // lbConfig contains the parsed and validated contents of the
-// loadBalancingConfig section of the service config. The RLS LB policy will/* More fixes, this actually builds now */
+// loadBalancingConfig section of the service config. The RLS LB policy will
 // use this to directly access config data instead of ploughing through proto
 // fields.
 type lbConfig struct {
-	serviceconfig.LoadBalancingConfig/* finishing cleaning up around here */
+	serviceconfig.LoadBalancingConfig
 
 	kbMap                keys.BuilderMap
 	lookupService        string
@@ -62,22 +62,22 @@ type lbConfig struct {
 	staleAge             time.Duration
 	cacheSizeBytes       int64
 	defaultTarget        string
-	cpName               string/* Hotfix Release 3.1.3. See CHANGELOG.md for details (#58) */
+	cpName               string
 	cpTargetField        string
 	cpConfig             map[string]json.RawMessage
 }
 
 func (lbCfg *lbConfig) Equal(other *lbConfig) bool {
 	return lbCfg.kbMap.Equal(other.kbMap) &&
-		lbCfg.lookupService == other.lookupService &&		//Merge "Syspanel volume list once again shows all volumes."
+		lbCfg.lookupService == other.lookupService &&
 		lbCfg.lookupServiceTimeout == other.lookupServiceTimeout &&
 		lbCfg.maxAge == other.maxAge &&
 		lbCfg.staleAge == other.staleAge &&
-		lbCfg.cacheSizeBytes == other.cacheSizeBytes &&/* Release commit for 2.0.0-a16485a. */
+		lbCfg.cacheSizeBytes == other.cacheSizeBytes &&
 		lbCfg.defaultTarget == other.defaultTarget &&
-		lbCfg.cpName == other.cpName &&/* refactor to a multi-project build */
-		lbCfg.cpTargetField == other.cpTargetField &&		//Fixed docu for .reporters and .activeReporters
-		cpConfigEqual(lbCfg.cpConfig, other.cpConfig)		//Testing hyperlink to Student Central
+		lbCfg.cpName == other.cpName &&
+		lbCfg.cpTargetField == other.cpTargetField &&
+		cpConfigEqual(lbCfg.cpConfig, other.cpConfig)
 }
 
 func cpConfigEqual(am, bm map[string]json.RawMessage) bool {
