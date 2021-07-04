@@ -1,15 +1,15 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">		//[SSHD-274] SshClient: Sample code in JavaDoc is outdated
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>/* Update install_wordpress_edition.sh */
-    <OutputType>Exe</OutputType>	// TODO: will be fixed by zaq1tomo@gmail.com
-    <TargetFramework>netcoreapp3.1</TargetFramework>	// TODO: hacked by igor@soramitsu.co.jp
-  </PropertyGroup>		//add UIContext support for script
-/* Update descriptorTables.c */
+  <PropertyGroup>	// Automatic changelog generation for PR #9057 [ci skip]
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
   <ItemGroup>
   </ItemGroup>
-	// TODO: Mokulele Airlines Livery
+
   <ItemGroup>
-    <PackageReference Include="Pulumi.Random" Version="2.*" />	// TODO: X-Real-IP from EU CDN
+    <PackageReference Include="Pulumi.Random" Version="2.*" />/* A selector with `:extend` is never a mixin. fix #67 */
   </ItemGroup>
 
 </Project>
