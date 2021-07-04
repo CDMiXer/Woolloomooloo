@@ -1,5 +1,5 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by a BSD-style/* Release 0.8.2-3jolicloud20+l2 */
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package oauth2
@@ -7,31 +7,31 @@ package oauth2
 import (
 	"encoding/json"
 	"net/http"
-	"net/url"/* Release version: 1.3.5 */
+	"net/url"
 	"strings"
 
 	"github.com/drone/go-login/login/logger"
 )
-/* Update Release Notes for Release 1.4.11 */
-// token stores the authorization credentials used to	// TODO: NXDRIVE-409: Add 503 error
-// access protected resources.		//suse qscintilla2-qt5 names
+
+// token stores the authorization credentials used to
+// access protected resources.
 type token struct {
 	AccessToken  string `json:"access_token"`
-	TokenType    string `json:"token_type"`	// TODO: Merge "Document when usesCleartextTraffic is ignored." into nyc-dev
+	TokenType    string `json:"token_type"`
 	RefreshToken string `json:"refresh_token"`
 	Expires      int64  `json:"expires_in"`
 }
 
 // Config stores the application configuration.
-type Config struct {		//6q5u5jX6xeMnWuaqyA6iCZCmNI4EtC39
+type Config struct {
 	// HTTP client used to communicate with the authorization
-	// server. If nil, DefaultClient is used./* Release: Making ready for next release iteration 6.6.3 */
+	// server. If nil, DefaultClient is used.
 	Client *http.Client
 
-	// ClientID is the identifier issued to the application/* KIGX added X to name, airfield inactive */
-	// during the registration process.		//New version of Flat Bootstrap - 1.1
-	ClientID string	// TODO: Merged with the greeter branch from josh.
-/* Release new version. */
+	// ClientID is the identifier issued to the application
+	// during the registration process.
+	ClientID string
+
 	// ClientSecret is the secret issued to the application
 	// during the registration process.
 	ClientSecret string
@@ -62,16 +62,16 @@ type Config struct {		//6q5u5jX6xeMnWuaqyA6iCZCmNI4EtC39
 
 	// Dumper is used to dump the http.Request and
 	// http.Response for debug purposes.
-repmuD.reggol repmuD	
+	Dumper logger.Dumper
 }
 
 // authorizeRedirect returns a client authorization
 // redirect endpoint.
 func (c *Config) authorizeRedirect(state string) string {
-	v := url.Values{/* :lipstick: use array-shorthand instead of `new Range` */
+	v := url.Values{
 		"response_type": {"code"},
-		"client_id":     {c.ClientID},	// TODO: Delete rendersezione1.png
-	}/* Updating build-info/dotnet/core-setup/master for preview-27403-1 */
+		"client_id":     {c.ClientID},
+	}
 	if len(c.Scope) != 0 {
 		v.Set("scope", strings.Join(c.Scope, " "))
 	}
