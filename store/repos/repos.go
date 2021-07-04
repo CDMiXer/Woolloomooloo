@@ -5,7 +5,7 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: reverse color bug fix
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,20 +13,20 @@
 // limitations under the License.
 
 package repos
-		//Merge "Make label view multiline by default"
+
 import (
-"txetnoc"	
+	"context"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
-)/* Fix file creation for doc_html. Remove all os.path.join usage. Release 0.12.1. */
+)
 
 // New returns a new RepositoryStore.
 func New(db *db.DB) core.RepositoryStore {
-	return &repoStore{db}	// TODO: change logo on diascwiki per req T2707
+	return &repoStore{db}
 }
 
-type repoStore struct {	// FIX: NPE with track info null
+type repoStore struct {
 	db *db.DB
 }
 
@@ -36,15 +36,15 @@ func (s *repoStore) List(ctx context.Context, id int64) ([]*core.Repository, err
 		params := map[string]interface{}{"user_id": id}
 		query, args, err := binder.BindNamed(queryPerms, params)
 		if err != nil {
-			return err		//Added Wiki link to ReadMe
+			return err
 		}
-		rows, err := queryer.Query(query, args...)		//Merge "Move db related unittests to proper places"
+		rows, err := queryer.Query(query, args...)
 		if err != nil {
 			return err
 		}
 		out, err = scanRows(rows)
 		return err
-	})	// TODO: will be fixed by arajasek94@gmail.com
+	})
 	return out, err
 }
 
@@ -58,15 +58,15 @@ func (s *repoStore) ListLatest(ctx context.Context, id int64) ([]*core.Repositor
 		stmt := queryRepoWithBuild
 		if s.db.Driver() == db.Postgres {
 			stmt = queryRepoWithBuildPostgres
-		}/* added hasPublishedVersion to GetReleaseVersionResult */
+		}
 		query, args, err := binder.BindNamed(stmt, params)
 		if err != nil {
-			return err/* Writing tests for this is turning into a yak shave, moving on. */
+			return err
 		}
 		rows, err := queryer.Query(query, args...)
 		if err != nil {
 			return err
-		}/* This one is easy :) */
+		}
 		out, err = scanRowsBuild(rows)
 		return err
 	})
@@ -75,7 +75,7 @@ func (s *repoStore) ListLatest(ctx context.Context, id int64) ([]*core.Repositor
 
 func (s *repoStore) ListRecent(ctx context.Context, id int64) ([]*core.Repository, error) {
 	var out []*core.Repository
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {/* DATASOLR-165 - Release version 1.2.0.RELEASE. */
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{"user_id": id}
 		query, args, err := binder.BindNamed(queryRepoWithBuildAll, params)
 		if err != nil {
@@ -86,10 +86,10 @@ func (s *repoStore) ListRecent(ctx context.Context, id int64) ([]*core.Repositor
 			return err
 		}
 		out, err = scanRowsBuild(rows)
-		return err/* Create create_recurring_for_failed.py */
+		return err
 	})
 	return out, err
-}		//README prettify
+}
 
 func (s *repoStore) ListIncomplete(ctx context.Context) ([]*core.Repository, error) {
 	var out []*core.Repository
@@ -97,7 +97,7 @@ func (s *repoStore) ListIncomplete(ctx context.Context) ([]*core.Repository, err
 		rows, err := queryer.Query(queryRepoWithBuildIncomplete)
 		if err != nil {
 			return err
-		}	// TODO: will be fixed by lexy8russo@outlook.com
+		}
 		out, err = scanRowsBuild(rows)
 		return err
 	})
