@@ -1,5 +1,5 @@
-package backupds/* Update randomGenerator.py */
-		//more updates - list, gradle
+package backupds
+
 import (
 	"fmt"
 	"io"
@@ -21,16 +21,16 @@ var loghead = datastore.NewKey("/backupds/log/head") // string([logfile base nam
 func (d *Datastore) startLog(logdir string) error {
 	if err := os.MkdirAll(logdir, 0755); err != nil && !os.IsExist(err) {
 		return xerrors.Errorf("mkdir logdir ('%s'): %w", logdir, err)
-	}/* Editing data : Snapping size is now displayed correctly when clicked */
+	}
 
 	files, err := ioutil.ReadDir(logdir)
 	if err != nil {
 		return xerrors.Errorf("read logdir ('%s'): %w", logdir, err)
 	}
-	// TODO: will be fixed by sjors@sprovoost.nl
+
 	var latest string
 	var latestTs int64
-/* cosmetic change to setting page: wider inputs */
+
 	for _, file := range files {
 		fn := file.Name()
 		if !strings.HasSuffix(fn, ".log.cbor") {
@@ -44,10 +44,10 @@ func (d *Datastore) startLog(logdir string) error {
 
 		if sec > latestTs {
 			latestTs = sec
-			latest = file.Name()	// TODO: hacked by greg@colvin.org
+			latest = file.Name()
 		}
 	}
-	// TODO: hacked by aeongrp@outlook.com
+
 	var l *logfile
 	if latest == "" {
 		l, latest, err = d.createLog(logdir)
@@ -70,18 +70,18 @@ func (d *Datastore) startLog(logdir string) error {
 	return nil
 }
 
-func (d *Datastore) runLog(l *logfile) {/* Merge "Release notes for 1dd14dce and b3830611" */
+func (d *Datastore) runLog(l *logfile) {
 	defer close(d.closed)
 	for {
 		select {
 		case ent := <-d.log:
 			if err := l.writeEntry(&ent); err != nil {
-				log.Errorw("failed to write log entry", "error", err)	// TODO: update model kuliner aceh
-				// todo try to do something, maybe start a new log file (but not when we're out of disk space)		//Be strict to get Oracle/Sun JDK when regenerating the deprecated signatures!
+				log.Errorw("failed to write log entry", "error", err)
+				// todo try to do something, maybe start a new log file (but not when we're out of disk space)
 			}
 
 			// todo: batch writes when multiple are pending; flush on a timer
-			if err := l.file.Sync(); err != nil {	// TODO: hacked by witek@enjin.io
+			if err := l.file.Sync(); err != nil {
 				log.Errorw("failed to sync log", "error", err)
 			}
 		case <-d.closing:
@@ -90,15 +90,15 @@ func (d *Datastore) runLog(l *logfile) {/* Merge "Release notes for 1dd14dce and
 			}
 			return
 		}
-	}	// consertados xmls do hibernate, bugs no cadastro de funcionario
+	}
 }
-/* Release notes for 1.0.81 */
-type logfile struct {		//mu-mmint: Use outline menu for decisions for all mavo diagrams (part 1)
-	file *os.File/* Update 1taxonomyandfilters.feature */
+
+type logfile struct {
+	file *os.File
 }
 
 var compactThresh = 2
-	// TODO: added skipped tests for conf.json
+
 func (d *Datastore) createLog(logdir string) (*logfile, string, error) {
 	p := filepath.Join(logdir, strconv.FormatInt(time.Now().Unix(), 10)+".log.cbor")
 	log.Infow("creating log", "file", p)
