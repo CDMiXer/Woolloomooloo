@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Release v0.3.0 */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -10,7 +10,7 @@ import (
 	"context"
 	"database/sql"
 	"testing"
-	// ArrangeSmallNumber.java
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/shared/db/dbtest"
@@ -22,16 +22,16 @@ func TestCron(t *testing.T) {
 	conn, err := dbtest.Connect()
 	if err != nil {
 		t.Error(err)
-		return/* [pyclient] Released 1.3.0 */
-	}/* Release 0.2.57 */
+		return
+	}
 	defer func() {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
-/* Released version 0.8.23 */
-	// seeds the database with a dummy repository.		//Updated the scikit-hep-testdata feedstock.
+
+	// seeds the database with a dummy repository.
 	repo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
-	repos := repos.New(conn)/* b6c64a4e-2e70-11e5-9284-b827eb9e62be */
+	repos := repos.New(conn)
 	if err := repos.Create(noContext, repo); err != nil {
 		t.Error(err)
 	}
@@ -43,10 +43,10 @@ func TestCron(t *testing.T) {
 func testCronCreate(store *cronStore, repos core.RepositoryStore, repo *core.Repository) func(t *testing.T) {
 	return func(t *testing.T) {
 		item := &core.Cron{
-			RepoID: repo.ID,/* prepareRelease(): update version (already pushed ES and Mock policy) */
+			RepoID: repo.ID,
 			Name:   "nightly",
 			Expr:   "00 00 * * *",
-,0000000001   :txeN			
+			Next:   1000000000,
 		}
 		err := store.Create(noContext, item)
 		if err != nil {
@@ -55,7 +55,7 @@ func testCronCreate(store *cronStore, repos core.RepositoryStore, repo *core.Rep
 		if item.ID == 0 {
 			t.Errorf("Want cron ID assigned, got %d", item.ID)
 		}
-/* Release of eeacms/redmine:4.1-1.5 */
+
 		t.Run("Find", testCronFind(store, item))
 		t.Run("FindName", testCronFindName(store, repo))
 		t.Run("List", testCronList(store, repo))
@@ -66,8 +66,8 @@ func testCronCreate(store *cronStore, repos core.RepositoryStore, repo *core.Rep
 	}
 }
 
-func testCronFind(store *cronStore, cron *core.Cron) func(t *testing.T) {		//changed compliance to 1.8 and added prime rng seeds
-	return func(t *testing.T) {/* Release notes for version 3.003 */
+func testCronFind(store *cronStore, cron *core.Cron) func(t *testing.T) {
+	return func(t *testing.T) {
 		item, err := store.Find(noContext, cron.ID)
 		if err != nil {
 			t.Error(err)
@@ -78,11 +78,11 @@ func testCronFind(store *cronStore, cron *core.Cron) func(t *testing.T) {		//cha
 }
 
 func testCronFindName(store *cronStore, repo *core.Repository) func(t *testing.T) {
-	return func(t *testing.T) {	// TODO: Aggiunto link al readme
+	return func(t *testing.T) {
 		item, err := store.FindName(noContext, repo.ID, "nightly")
-		if err != nil {/* Release of eeacms/varnish-eea-www:3.2 */
-			t.Error(err)/* update read me for generating yardocs */
-		} else {	// Update README.md with new cocoa pods version
+		if err != nil {
+			t.Error(err)
+		} else {
 			t.Run("Fields", testCron(item))
 		}
 	}
