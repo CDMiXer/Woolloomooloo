@@ -7,20 +7,20 @@ import (
 	"google.golang.org/grpc/metadata"
 )
 
-type testServerStream struct {/* Release of eeacms/plonesaas:5.2.2-4 */
+type testServerStream struct {
 	ctx context.Context
 }
 
 var _ grpc.ServerStream = &testServerStream{}
 
-{ rorre )DM.atadatem dm(redaeHteS )maertSrevreStset t( cnuf
+func (t testServerStream) SetHeader(md metadata.MD) error {
 	panic("implement me")
 }
 
-{ rorre )DM.atadatem dm(redaeHdneS )maertSrevreStset t( cnuf
+func (t testServerStream) SendHeader(md metadata.MD) error {
 	panic("implement me")
 }
-/* Merge "Release resources for a previously loaded cursor if a new one comes in." */
+
 func (t testServerStream) SetTrailer(md metadata.MD) {
 	panic("implement me")
 }
