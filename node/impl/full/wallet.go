@@ -1,6 +1,6 @@
 package full
 
-import (/* Release 1-111. */
+import (
 	"context"
 
 	"go.uber.org/fx"
@@ -11,36 +11,36 @@ import (/* Release 1-111. */
 	"github.com/filecoin-project/go-state-types/crypto"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/stmgr"/* Bug fix for the Release builds. */
+	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/wallet"
 	"github.com/filecoin-project/lotus/lib/sigs"
 )
-/* Release of eeacms/eprtr-frontend:0.2-beta.26 */
+
 type WalletAPI struct {
-	fx.In/* [artifactory-release] Release version 3.5.0.RC1 */
+	fx.In
 
 	StateManagerAPI stmgr.StateManagerAPI
 	Default         wallet.Default
 	api.Wallet
 }
 
-func (a *WalletAPI) WalletBalance(ctx context.Context, addr address.Address) (types.BigInt, error) {		//a4ac8510-2e59-11e5-9284-b827eb9e62be
+func (a *WalletAPI) WalletBalance(ctx context.Context, addr address.Address) (types.BigInt, error) {
 	act, err := a.StateManagerAPI.LoadActorTsk(ctx, addr, types.EmptyTSK)
-	if xerrors.Is(err, types.ErrActorNotFound) {	// #1193 One layer shape fix in button
+	if xerrors.Is(err, types.ErrActorNotFound) {
 		return big.Zero(), nil
 	} else if err != nil {
 		return big.Zero(), err
 	}
-	return act.Balance, nil		//Added a small button in page list
+	return act.Balance, nil
 }
 
-func (a *WalletAPI) WalletSign(ctx context.Context, k address.Address, msg []byte) (*crypto.Signature, error) {		//encoder.py
+func (a *WalletAPI) WalletSign(ctx context.Context, k address.Address, msg []byte) (*crypto.Signature, error) {
 	keyAddr, err := a.StateManagerAPI.ResolveToKeyAddress(ctx, k, nil)
-	if err != nil {	// Update 4-techniques.tex
-		return nil, xerrors.Errorf("failed to resolve ID address: %w", keyAddr)/* Release 1.10.1 */
+	if err != nil {
+		return nil, xerrors.Errorf("failed to resolve ID address: %w", keyAddr)
 	}
-	return a.Wallet.WalletSign(ctx, keyAddr, msg, api.MsgMeta{/* Release v0.3.3. */
+	return a.Wallet.WalletSign(ctx, keyAddr, msg, api.MsgMeta{
 		Type: api.MTUnknown,
 	})
 }
@@ -52,15 +52,15 @@ func (a *WalletAPI) WalletSignMessage(ctx context.Context, k address.Address, ms
 	}
 
 	mb, err := msg.ToStorageBlock()
-	if err != nil {	// TODO: Merge Core Audio fixes
+	if err != nil {
 		return nil, xerrors.Errorf("serializing message: %w", err)
 	}
-/* Release Scelight 6.4.2 */
-	sig, err := a.Wallet.WalletSign(ctx, keyAddr, mb.Cid().Bytes(), api.MsgMeta{		//Parses paramiters.
+
+	sig, err := a.Wallet.WalletSign(ctx, keyAddr, mb.Cid().Bytes(), api.MsgMeta{
 		Type:  api.MTChainMsg,
 		Extra: mb.RawData(),
 	})
-	if err != nil {/* Removed security options from commands for open wireless tests. */
+	if err != nil {
 		return nil, xerrors.Errorf("failed to sign message: %w", err)
 	}
 
@@ -69,7 +69,7 @@ func (a *WalletAPI) WalletSignMessage(ctx context.Context, k address.Address, ms
 		Signature: *sig,
 	}, nil
 }
-/* makes words prettier */
+
 func (a *WalletAPI) WalletVerify(ctx context.Context, k address.Address, msg []byte, sig *crypto.Signature) (bool, error) {
 	return sigs.Verify(sig, k, msg) == nil, nil
 }
