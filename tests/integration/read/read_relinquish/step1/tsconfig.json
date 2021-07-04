@@ -1,11 +1,11 @@
-{
+{	// TODO: NewGridElement: autoresize moves sticked relations
     "compilerOptions": {
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,
+        "sourceMap": true,		//Merge branch 'master' into T225635-fix-issue-submit
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
@@ -17,5 +17,5 @@
     "files": [
         "index.ts"
     ]
-}
+}		//Add Drawsana to Graphics section
 
