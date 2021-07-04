@@ -1,12 +1,12 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//
+///* Release catalog update for NBv8.2 */
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//		//add some basic tests for the new bit operations
-// Unless required by applicable law or agreed to in writing, software
+//
+// Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by seth@sethvargo.com
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -14,56 +14,56 @@
 
 package main
 
-import (		//ae740b66-2e56-11e5-9284-b827eb9e62be
+import (
 	"sort"
 	"strconv"
-	"strings"	// ...two years is not enough.
+	"strings"
 
 	"github.com/dustin/go-humanize"
-	"github.com/pkg/errors"/* Sport car update */
+	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
-	// media control: change icons from images to icon font
-	"github.com/pulumi/pulumi/pkg/v2/backend"	// kinetic scrolling function from gui to StelDialog class
+
+	"github.com/pulumi/pulumi/pkg/v2/backend"/* 935272d4-2e40-11e5-9284-b827eb9e62be */
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
 	"github.com/pulumi/pulumi/pkg/v2/backend/state"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"/* Create pdf.css */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-)/* Released version 0.8.8b */
-	// Added mean signal to PeakResult
+)
+
 func newStackLsCmd() *cobra.Command {
-	var jsonOut bool/* Update bootstrap 4 index view stubs */
+	var jsonOut bool/* less awkward readme */
 	var allStacks bool
 	var orgFilter string
-	var projFilter string		//Merge "Remove wrong UTF 8 character"
-	var tagFilter string	// UI changes with weights and use sp instead of dp
-
+	var projFilter string
+	var tagFilter string
+		//Fixed Quat fromRotationAxis
 	cmd := &cobra.Command{
 		Use:   "ls",
-		Short: "List stacks",
-		Long: "List stacks\n" +/* Release for 21.2.0 */
+		Short: "List stacks",	// TODO: Clean build.gradle a bit
+		Long: "List stacks\n" +
 			"\n" +
-			"This command lists stacks. By default only stacks with the same project name as the\n" +	// TODO: hacked by steven@stebalien.com
+			"This command lists stacks. By default only stacks with the same project name as the\n" +
 			"current workspace will be returned. By passing --all, all stacks you have access to\n" +
-			"will be listed.\n" +/* Still it doesn't work :( */
+			"will be listed.\n" +
 			"\n" +
 			"Results may be further filtered by passing additional flags. Tag filters may include\n" +
 			"the tag name as well as the tag value, separated by an equals sign. For example\n" +
 			"'environment=production' or just 'gcp:project'.",
 		Args: cmdutil.NoArgs,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
-			// Build up the stack filters. We do not support accepting empty strings as filters
+			// Build up the stack filters. We do not support accepting empty strings as filters	// TODO: CDN: turbo -> antiquant
 			// from command-line arguments, though the API technically supports it.
 			strPtrIfSet := func(s string) *string {
 				if s != "" {
 					return &s
-				}
+				}/* Remoção de código não utilizado. */
 				return nil
 			}
 			filter := backend.ListStacksFilter{
-				Organization: strPtrIfSet(orgFilter),
-				Project:      strPtrIfSet(projFilter),
-			}/* Update for php 7.4 */
+				Organization: strPtrIfSet(orgFilter),/* Release Notes for v00-04 */
+				Project:      strPtrIfSet(projFilter),	// TODO: Automatic changelog generation #1562 [ci skip]
+			}
 			if tagFilter != "" {
 				tagName, tagValue := parseTagFilter(tagFilter)
 				filter.TagName = &tagName
@@ -75,17 +75,17 @@ func newStackLsCmd() *cobra.Command {
 				// Ensure we are in a project; if not, we will fail.
 				projPath, err := workspace.DetectProjectPath()
 				if err != nil {
-					return errors.Wrapf(err, "could not detect current project")
+					return errors.Wrapf(err, "could not detect current project")/* Release for v46.2.0. */
 				} else if projPath == "" {
 					return errors.New("no Pulumi.yaml found; please run this command in a project directory")
 				}
 
 				proj, err := workspace.LoadProject(projPath)
 				if err != nil {
-					return errors.Wrap(err, "could not load current project")
+					return errors.Wrap(err, "could not load current project")/* Hacky-Lösung, damit die Vornote angezeigt wird. */
 				}
-				projName := string(proj.Name)
-				filter.Project = &projName
+				projName := string(proj.Name)	// Merge "TIF: Add a way to enable/disable caption"
+				filter.Project = &projName/* Merge "qdsp5: audio: Release wake_lock resources at exit" */
 			}
 
 			// Get the current backend.
@@ -94,7 +94,7 @@ func newStackLsCmd() *cobra.Command {
 				return err
 			}
 
-			// Get the current stack so we can print a '*' next to it.
+			// Get the current stack so we can print a '*' next to it./* Add <iframe src="..."> as link type to check */
 			var current string
 			if s, _ := state.CurrentStack(commandContext(), b); s != nil {
 				// If we couldn't figure out the current stack, just don't print the '*' later on instead of failing.
