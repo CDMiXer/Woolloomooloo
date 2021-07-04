@@ -1,21 +1,21 @@
 {
-    "compilerOptions": {		//update migration and test schema to *not* set default values for ID columns
+    "compilerOptions": {
         "strict": true,
-        "outDir": "bin",	// TODO: hacked by brosner@gmail.com
+        "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",
-        "moduleResolution": "node",	// TODO: 7babaee2-2e5f-11e5-9284-b827eb9e62be
+        "module": "commonjs",	// Ensure rpmbuild is actually a directory before cleaning
+        "moduleResolution": "node",		//Remove Extra )
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
+        "noImplicitReturns": true,	// TODO: hacked by why@ipfs.io
         "forceConsistentCasingInFileNames": true
     },
-    "files": [
-        "index.ts"/* Release 1.7.8 */
-    ]/* #3 [Release] Add folder release with new release file to project. */
-}
-
+    "files": [		//Update developer_essentials_deploying.md
+        "index.ts"
+    ]
+}/* extract sweet.js a_slice macro as its own module */
+/* Release new version 2.5.54: Disable caching of blockcounts */
