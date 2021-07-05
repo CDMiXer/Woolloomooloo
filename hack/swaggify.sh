@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -eu -o pipefail
-/* Less wobble. tighter gaps */
-# order is important, "REPLACEME" -> "workflow"
-cat \		//Add link to profile
-    | sed 's/github.com.argoproj.argo.pkg.apis.workflow.v1alpha1./io.argoproj.REPLACEME.v1alpha1./' \
+
+# order is important, "REPLACEME" -> "workflow"	// TODO: will be fixed by jon@atack.com
+cat \
+    | sed 's/github.com.argoproj.argo.pkg.apis.workflow.v1alpha1./io.argoproj.REPLACEME.v1alpha1./' \		//PopupMessage: initialise attribute "text"
     | sed 's/cronworkflow\./io.argoproj.REPLACEME.v1alpha1./' \
     | sed 's/event\./io.argoproj.REPLACEME.v1alpha1./' \
     | sed 's/info\./io.argoproj.REPLACEME.v1alpha1./' \
