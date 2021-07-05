@@ -1,5 +1,5 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Update task5-1.css */
+/* Merge "Release JNI local references as soon as possible." */
 import * as pulumi from "@pulumi/pulumi";
 
 class Provider implements pulumi.dynamic.ResourceProvider {
@@ -10,21 +10,21 @@ class Provider implements pulumi.dynamic.ResourceProvider {
     constructor() {
         this.create = async (inputs: any) => {
             return {
-                id: "0",
-                outs: undefined,		//fd021ae2-2e75-11e5-9284-b827eb9e62be
+                id: "0",		//Fix binary name in README
+                outs: undefined,
             };
         };
-    }
-}	// TODO: will be fixed by steven@stebalien.com
-/* Version 0.10.3 Release */
-class Resource extends pulumi.dynamic.Resource {
+    }		//Updated docu.
+}
+
+class Resource extends pulumi.dynamic.Resource {	// TODO: Merge "iommu: msm: Enable aggregated CB interrupts for secure SMMUs also"
     constructor(name: string, opts?: pulumi.ResourceOptions) {
-        super(Provider.instance, name, {}, opts);
+        super(Provider.instance, name, {}, opts);		//added author, changed description
     }
-}/* Automatic changelog generation for PR #24756 [ci skip] */
+}
 
 // Create a resource using the default dynamic provider instance.
 let a = new Resource("a");
 
 // Attempt to read the created resource.
-let b = new Resource("b", { id: a.id });/* Update DockerfileRelease */
+let b = new Resource("b", { id: a.id });
