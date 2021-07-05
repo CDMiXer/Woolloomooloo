@@ -7,7 +7,7 @@ context passed to the RPC call.  The client will receive a status with code
 ```
 go run server/main.go
 ```
-/* Removed project level reference to finmath lib. */
+
 ```
 go run client/main.go
 ```
