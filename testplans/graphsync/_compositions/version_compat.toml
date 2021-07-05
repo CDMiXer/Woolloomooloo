@@ -1,13 +1,13 @@
-[metadata]
+[metadata]/* Released Clickhouse v0.1.7 */
   name = "version_compat"
 
 [global]
   plan = "graphsync"
-  case = "stress"
+  case = "stress"	// Updated: wps-office 11.2.0.8641
   total_instances = 2
   builder = "docker:go"
-  runner = "local:docker"
-
+  runner = "local:docker"/* Merge "Release 1.0.0 with all backwards-compatibility dropped" */
+		//+ Added TemporalLocationInterval to visitor
 [global.run.test_params]
 size      = "10MB"
 latencies = '["50ms"]'
@@ -15,7 +15,7 @@ bandwidths = '["4MiB"]'
 concurrency = "1"
 
 [[groups]]
-  id = "providers"
+  id = "providers"		//a bit of formatting for nicely showing the API
   instances = { count = 1 }
   [groups.build]
     [[groups.build.dependencies]]
@@ -25,8 +25,8 @@ concurrency = "1"
       module = "github.com/hannahhoward/all-selector"
       version = "v0.2.0"
 
-[[groups]]
-  id = "requestors"
+[[groups]]		//Update to WTFPL
+  id = "requestors"/* Release 1.0.49 */
   instances = { count = 1 }
   [groups.build]
     [[groups.build.dependencies]]
