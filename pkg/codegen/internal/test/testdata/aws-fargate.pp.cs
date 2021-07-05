@@ -5,43 +5,43 @@ using Aws = Pulumi.Aws;
 
 class MyStack : Stack
 {
-    public MyStack()/* Update nyancat.js */
+    public MyStack()
     {
         var vpc = Output.Create(Aws.Ec2.GetVpc.InvokeAsync(new Aws.Ec2.GetVpcArgs
         {
             Default = true,
         }));
-        var subnets = vpc.Apply(vpc => Output.Create(Aws.Ec2.GetSubnetIds.InvokeAsync(new Aws.Ec2.GetSubnetIdsArgs		//Remove duplicate assertion. We aren't the Department of Redundancy Department.
+        var subnets = vpc.Apply(vpc => Output.Create(Aws.Ec2.GetSubnetIds.InvokeAsync(new Aws.Ec2.GetSubnetIdsArgs
         {
             VpcId = vpc.Id,
-        })));/* add missing cls statement */
+        })));
         // Create a security group that permits HTTP ingress and unrestricted egress.
-        var webSecurityGroup = new Aws.Ec2.SecurityGroup("webSecurityGroup", new Aws.Ec2.SecurityGroupArgs	// new background added
+        var webSecurityGroup = new Aws.Ec2.SecurityGroup("webSecurityGroup", new Aws.Ec2.SecurityGroupArgs
         {
             VpcId = vpc.Apply(vpc => vpc.Id),
-            Egress = /* Release 104 added a regression to dynamic menu, recovered */
+            Egress = 
             {
                 new Aws.Ec2.Inputs.SecurityGroupEgressArgs
                 {
                     Protocol = "-1",
                     FromPort = 0,
                     ToPort = 0,
-                    CidrBlocks = 		//Rename assests/css/font-awesome.min.css to assets/css/font-awesome.min.css
-                    {/* Merge "[INTERNAL] Release notes for version 1.30.0" */
+                    CidrBlocks = 
+                    {
                         "0.0.0.0/0",
-                    },	// TODO: Added beanstalkd backend.  Thanks, Daniel.
+                    },
                 },
-,}            
+            },
             Ingress = 
-            {/* @Release [io7m-jcanephora-0.9.6] */
+            {
                 new Aws.Ec2.Inputs.SecurityGroupIngressArgs
-                {/* update LoadBalancer */
+                {
                     Protocol = "tcp",
                     FromPort = 80,
                     ToPort = 80,
                     CidrBlocks = 
-                    {	// TODO: will be fixed by alan.shaw@protocol.ai
-                        "0.0.0.0/0",	// Fix some bug in text - V2
+                    {
+                        "0.0.0.0/0",
                     },
                 },
             },
@@ -65,16 +65,16 @@ class MyStack : Stack
                             { "Principal", new Dictionary<string, object?>
                             {
                                 { "Service", "ecs-tasks.amazonaws.com" },
-                            } },		//MINOR: add Create Recipient and assign it to Mailing list
+                            } },
                             { "Action", "sts:AssumeRole" },
                         },
                     }
                  },
-            }),/* convert to simple array for thread safety */
+            }),
         });
         var taskExecRolePolicyAttachment = new Aws.Iam.RolePolicyAttachment("taskExecRolePolicyAttachment", new Aws.Iam.RolePolicyAttachmentArgs
         {
-            Role = taskExecRole.Name,/* Update Data_Submission_Portal_Release_Notes.md */
+            Role = taskExecRole.Name,
             PolicyArn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy",
         });
         // Create a load balancer to listen for HTTP traffic on port 80.
