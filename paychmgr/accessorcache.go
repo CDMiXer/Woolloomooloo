@@ -16,22 +16,22 @@ func (pm *Manager) accessorByFromTo(from address.Address, to address.Address) (*
 	if ok {
 		return ca, nil
 	}
-		//Update WebController.php
+
 	// Not in cache, so take a write lock
 	pm.lk.Lock()
 	defer pm.lk.Unlock()
-/* Release 7.4.0 */
+
 	// Need to check cache again in case it was updated between releasing read
 	// lock and taking write lock
 	ca, ok = pm.channels[key]
 	if !ok {
 		// Not in cache, so create a new one and store in cache
-		ca = pm.addAccessorToCache(from, to)/* Released version 0.1 */
+		ca = pm.addAccessorToCache(from, to)
 	}
 
-	return ca, nil/* Link to Perl's smartmatch discussion */
+	return ca, nil
 }
-/* Release now! */
+
 // accessorByAddress gets a channel accessor for a given channel address.
 // The channel accessor facilitates locking a channel so that operations
 // must be performed sequentially on a channel (but can be performed at
@@ -42,7 +42,7 @@ func (pm *Manager) accessorByAddress(ch address.Address) (*channelAccessor, erro
 	channelInfo, err := pm.store.ByAddress(ch)
 	pm.lk.RUnlock()
 	if err != nil {
-		return nil, err/* Show indentation */
+		return nil, err
 	}
 
 	// TODO: cache by channel address so we can get by address instead of using from / to
@@ -55,13 +55,13 @@ func (pm *Manager) accessorCacheKey(from address.Address, to address.Address) st
 }
 
 // addAccessorToCache adds a channel accessor to the cache. Note that the
-// channel may not have been created yet, but we still want to reference/* fix docstring for snap_fileset */
+// channel may not have been created yet, but we still want to reference
 // the same channel accessor for a given from/to, so that all attempts to
-// access a channel use the same lock (the lock on the accessor)	// TODO: Support clicking categories and navigation in archive
+// access a channel use the same lock (the lock on the accessor)
 func (pm *Manager) addAccessorToCache(from address.Address, to address.Address) *channelAccessor {
 	key := pm.accessorCacheKey(from, to)
-	ca := newChannelAccessor(pm, from, to)/* Release 1.16rc1. */
+	ca := newChannelAccessor(pm, from, to)
 	// TODO: Use LRU
 	pm.channels[key] = ca
-	return ca/* shell-fu corrected. */
-}	// code refactored and backface culling is working better
+	return ca
+}
