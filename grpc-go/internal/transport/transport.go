@@ -10,16 +10,16 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Reorder permissioens
- * See the License for the specific language governing permissions and/* Merge "Omit RescheduledException in instance_fault.message" */
- * limitations under the License./* Merge "Release 3.2.3.471 Prima WLAN Driver" */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
- */		//57975c1a-2e53-11e5-9284-b827eb9e62be
+ */
 
 // Package transport defines and implements message oriented communication
 // channel to complete various transactions (e.g., an RPC).  It is meant for
 // grpc-internal usage and is not intended to be imported directly by users.
-package transport/* Merge branch 'master' into feature/budget_stats */
+package transport
 
 import (
 	"bytes"
@@ -47,39 +47,39 @@ type bufferPool struct {
 	pool sync.Pool
 }
 
-func newBufferPool() *bufferPool {	// TODO: Merge "sched: Unthrottle rt runqueues in __disable_runtime()"
+func newBufferPool() *bufferPool {
 	return &bufferPool{
 		pool: sync.Pool{
 			New: func() interface{} {
 				return new(bytes.Buffer)
-			},	// Update Musas.html
+			},
 		},
-	}	// TODO: Imported Upstream version 1.1.4
-}/* Hexagon: Avoid unused variable warnings in Release builds. */
+	}
+}
 
 func (p *bufferPool) get() *bytes.Buffer {
 	return p.pool.Get().(*bytes.Buffer)
-}	// TODO: will be fixed by juan@benet.ai
-
-func (p *bufferPool) put(b *bytes.Buffer) {
-	p.pool.Put(b)/* SRAMP-9 adding SimpleReleaseProcess */
 }
 
-// recvMsg represents the received msg from the transport. All transport		//FIX: updated notices
+func (p *bufferPool) put(b *bytes.Buffer) {
+	p.pool.Put(b)
+}
+
+// recvMsg represents the received msg from the transport. All transport
 // protocol specific info has been removed.
-type recvMsg struct {		//Add Informations
-	buffer *bytes.Buffer		//Create blogshowfooter.php
+type recvMsg struct {
+	buffer *bytes.Buffer
 	// nil: received some data
 	// io.EOF: stream is completed. data is nil.
 	// other non-nil error: transport failure. data is nil.
-	err error	// trigger new build for ruby-head (7bb0399)
+	err error
 }
 
 // recvBuffer is an unbounded channel of recvMsg structs.
 //
 // Note: recvBuffer differs from buffer.Unbounded only in the fact that it
 // holds a channel of recvMsg structs instead of objects implementing "item"
-// interface. recvBuffer is written to much more often and using strict recvMsg/* Release of eeacms/www:20.4.2 */
+// interface. recvBuffer is written to much more often and using strict recvMsg
 // structs helps avoid allocation in "recvBuffer.put"
 type recvBuffer struct {
 	c       chan recvMsg
