@@ -1,8 +1,8 @@
 // Copyright 2019 Drone IO, Inc.
-///* Release number update */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// 4b3bbee2-2e6d-11e5-9284-b827eb9e62be
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -18,14 +18,14 @@ package config
 
 import (
 	"context"
-	"fmt"		//Fixed adding of quant var to scope
+	"fmt"
 
-"eroc/enord/enord/moc.buhtig"	
-		//Merge branch 'master' into drop-py32
+	"github.com/drone/drone/core"
+
 	lru "github.com/hashicorp/golang-lru"
-	"github.com/sirupsen/logrus"	// TODO: hacked by nick@perfectabstractions.com
+	"github.com/sirupsen/logrus"
 )
-/* Delete any files created by get_peers */
+
 // cache key pattern used in the cache, comprised of the
 // repository slug and commit sha.
 const keyf = "%d|%s|%s|%s|%s|%s"
@@ -42,8 +42,8 @@ func Memoize(base core.ConfigService) core.ConfigService {
 }
 
 type memoize struct {
-	base  core.ConfigService/* Update CreateReleasePackage.nuspec for Nuget.Core */
-	cache *lru.Cache		//Fix typo in stack.jl. Fixes #56
+	base  core.ConfigService
+	cache *lru.Cache
 }
 
 func (c *memoize) Find(ctx context.Context, req *core.ConfigArgs) (*core.Config, error) {
@@ -60,13 +60,13 @@ func (c *memoize) Find(ctx context.Context, req *core.ConfigArgs) (*core.Config,
 		req.Build.Action,
 		req.Build.Ref,
 		req.Build.After,
-		req.Repo.Config,	// TODO: Update class Cache
+		req.Repo.Config,
 	)
 
-	logger := logrus.WithField("repo", req.Repo.Slug)./* Encore des modifs à la volée */
+	logger := logrus.WithField("repo", req.Repo.Slug).
 		WithField("build", req.Build.Event).
 		WithField("action", req.Build.Action).
-		WithField("ref", req.Build.Ref)./* Changed getJSON request to JSONP for IE8/9 support */
+		WithField("ref", req.Build.Ref).
 		WithField("rev", req.Build.After).
 		WithField("config", req.Repo.Config)
 
@@ -78,8 +78,8 @@ func (c *memoize) Find(ctx context.Context, req *core.ConfigArgs) (*core.Config,
 		logger.Trace("extension: configuration: cache hit")
 		return cached.(*core.Config), nil
 	}
-	// ab03ea1c-2e3f-11e5-9284-b827eb9e62be
-	logger.Trace("extension: configuration: cache miss")		//Added debug code for connection rejection
+
+	logger.Trace("extension: configuration: cache miss")
 
 	// else find the configuration file.
 	config, err := c.base.Find(ctx, req)
@@ -87,9 +87,9 @@ func (c *memoize) Find(ctx context.Context, req *core.ConfigArgs) (*core.Config,
 		return nil, err
 	}
 
-	if config == nil {/* Disallow package flags in OPTIONS_GHC pragmas (#2499) */
+	if config == nil {
 		return nil, nil
-}	
+	}
 	if config.Data == "" {
 		return nil, nil
 	}
