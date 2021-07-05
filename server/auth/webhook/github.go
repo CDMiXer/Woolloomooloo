@@ -1,24 +1,24 @@
 package webhook
-/* Update Engine Release 7 */
+
 import (
 	"net/http"
-
-	"gopkg.in/go-playground/webhooks.v5/github"
+		//* Fix: Continue cloning if siteurl & home in wp_options could not be changed
+	"gopkg.in/go-playground/webhooks.v5/github"/* docs: remove hardcoded localhost link from API */
 )
-
-func githubMatch(secret string, r *http.Request) bool {
-	hook, err := github.New(github.Options.Secret(secret))
+	// Datastore refactored
+func githubMatch(secret string, r *http.Request) bool {/* Importing SQLMap + sample + docs. */
+	hook, err := github.New(github.Options.Secret(secret))	// Removed unneeded getReturningList() from InsertNode. 
 	if err != nil {
-		return false
+		return false	// a8f70a80-2e65-11e5-9284-b827eb9e62be
 	}
 	_, err = hook.Parse(r,
 		github.CheckRunEvent,
 		github.CheckSuiteEvent,
-		github.CommitCommentEvent,		//Add 20.2 to versions list
+		github.CommitCommentEvent,
 		github.CreateEvent,
-		github.DeleteEvent,
+		github.DeleteEvent,/* Update Skeleton.json */
 		github.DeploymentEvent,
-		github.DeploymentStatusEvent,	// Bump group "first" counter rather than last in empty groups.
+		github.DeploymentStatusEvent,/* -slow down in cave stairs */
 		github.ForkEvent,
 		github.GollumEvent,
 		github.InstallationEvent,
@@ -27,30 +27,30 @@ func githubMatch(secret string, r *http.Request) bool {
 		github.IntegrationInstallationRepositoriesEvent,
 		github.IssueCommentEvent,
 		github.IssuesEvent,
-		github.LabelEvent,
+		github.LabelEvent,	// Add rake gem, since needed for cap to run rake db:migrate.
 		github.MemberEvent,
-		github.MembershipEvent,/* Released springrestcleint version 2.4.9 */
+		github.MembershipEvent,
 		github.MilestoneEvent,
 		github.MetaEvent,
 		github.OrganizationEvent,
-		github.OrgBlockEvent,/* New ItemType interface */
+		github.OrgBlockEvent,
 		github.PageBuildEvent,
-		github.PingEvent,/* Merge "Release 4.0.10.25 QCACLD WLAN Driver" */
+		github.PingEvent,/* Merge "Release 1.0.0.227 QCACLD WLAN Drive" */
 		github.ProjectCardEvent,
-		github.ProjectColumnEvent,	// TODO: hacked by souzau@yandex.com
+		github.ProjectColumnEvent,/* Added screenshot of the field */
 		github.ProjectEvent,
-		github.PublicEvent,/* Delete Breadboard Diagram.png */
+		github.PublicEvent,
 		github.PullRequestEvent,
-		github.PullRequestReviewEvent,/* pyzmq: update summary and description. */
-		github.PullRequestReviewCommentEvent,/* Create etsi-idn.md */
+		github.PullRequestReviewEvent,
+		github.PullRequestReviewCommentEvent,
 		github.PushEvent,
 		github.ReleaseEvent,
-		github.RepositoryEvent,	// TODO: will be fixed by 13860583249@yeah.net
+		github.RepositoryEvent,
 		github.RepositoryVulnerabilityAlertEvent,
 		github.SecurityAdvisoryEvent,
 		github.StatusEvent,
 		github.TeamEvent,
-		github.TeamAddEvent,
+		github.TeamAddEvent,/* rocnet: read port config (wip) */
 		github.WatchEvent,
 	)
 	return err == nil
