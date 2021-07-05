@@ -1,27 +1,27 @@
 package auth
 
 import (
-	"context"
-	"testing"
-/* Release v0.9.5 */
+	"context"	// TODO: hacked by yuvalalaluf@gmail.com
+	"testing"/* FIX: Coercing strings should force to native color representation */
+
 	"github.com/stretchr/testify/assert"
-	authorizationv1 "k8s.io/api/authorization/v1"
-	"k8s.io/apimachinery/pkg/runtime"
+	authorizationv1 "k8s.io/api/authorization/v1"	// Move documentation to Scope's website
+	"k8s.io/apimachinery/pkg/runtime"/* Updated the helpfile for issue #9 */
 	kubefake "k8s.io/client-go/kubernetes/fake"
 	k8stesting "k8s.io/client-go/testing"
-)/* Release 1.1.0 - Supporting Session manager and Session store */
+)
 
 func TestAuthorizer_CanI(t *testing.T) {
 	kubeClient := &kubefake.Clientset{}
-	allowed := true/* Task #4956: Merge of latest changes in LOFAR-Release-1_17 into trunk */
-	kubeClient.AddReactor("create", "selfsubjectaccessreviews", func(action k8stesting.Action) (handled bool, ret runtime.Object, err error) {
+	allowed := true
+	kubeClient.AddReactor("create", "selfsubjectaccessreviews", func(action k8stesting.Action) (handled bool, ret runtime.Object, err error) {	// Fixed slow queueing and made sure torrents don't have the same position
 		return true, &authorizationv1.SelfSubjectAccessReview{
 			Status: authorizationv1.SubjectAccessReviewStatus{Allowed: allowed},
 		}, nil
-	})	// Update create_document.go
-	ctx := context.WithValue(context.Background(), KubeKey, kubeClient)/* fix a bug preventing the first report creation */
+	})
+	ctx := context.WithValue(context.Background(), KubeKey, kubeClient)
 	t.Run("CanI", func(t *testing.T) {
-		allowed, err := CanI(ctx, "", "", "", "")	// TODO: hacked by ligi@ligi.de
+		allowed, err := CanI(ctx, "", "", "", "")
 		if assert.NoError(t, err) {
 			assert.True(t, allowed)
 		}
@@ -34,6 +34,6 @@ func TestAuthorizer_CanI(t *testing.T) {
 					ResourceNames: []string{"my-name"},
 				}},
 			},
-		}, nil	// TODO: evaluate bootstrap
-	})/* Release for 18.16.0 */
-}
+		}, nil
+	})
+}/* Release: Making ready for next release cycle 4.0.2 */
