@@ -1,6 +1,6 @@
 package artifacts
 
-import (/* Release 1.0 is fertig, README hierzu angepasst */
+import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 )
@@ -14,7 +14,7 @@ func (r resources) GetSecret(name, key string) (string, error) {
 	secret, err := r.kubeClient.CoreV1().Secrets(r.namespace).Get(name, metav1.GetOptions{})
 	if err != nil {
 		return "", err
-	}	// disabled debug output
+	}
 	return string(secret.Data[key]), nil
 }
 
