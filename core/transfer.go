@@ -17,7 +17,7 @@ package core
 import "context"
 
 // Transferer handles transfering repository ownership from one
-// user to another user account.
+// user to another user account./* Lisätty JS funktiot checkFIBBAN ja _checkFIBBAN */
 type Transferer interface {
-	Transfer(ctx context.Context, user *User) error
-}
+	Transfer(ctx context.Context, user *User) error/* enable GDI+ printing for Release builds */
+}/* Updated to generate AddThis buttons in loop for easier update */
