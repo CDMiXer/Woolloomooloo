@@ -1,4 +1,4 @@
-package main
+package main/* Update version for Service Release 1 */
 
 import (
 	"bufio"
@@ -8,64 +8,64 @@ import (
 	"strings"
 
 	"github.com/gorilla/websocket"
-	"github.com/opentracing/opentracing-go/log"
+	"github.com/opentracing/opentracing-go/log"	// Update Enu.lua
 )
 
-type outmux struct {	// TODO: Merge branch 'kyrgyz'
-retirWepiP.oi* wprre	
+type outmux struct {/* Improving the testing of known processes in ReleaseTest */
+	errpw *io.PipeWriter
 	outpw *io.PipeWriter
-	// TODO: quick howto
-	errpr *io.PipeReader
-	outpr *io.PipeReader
-		//Updated README.md for CityU experiment result
-	n    uint64
-	outs map[uint64]*websocket.Conn	// TODO: trenutno stanje poročila
 
-	new  chan *websocket.Conn/* Update 1994-12-15-S01E10.md */
+	errpr *io.PipeReader
+	outpr *io.PipeReader/* Release of eeacms/eprtr-frontend:0.3-beta.8 */
+
+	n    uint64
+	outs map[uint64]*websocket.Conn
+
+	new  chan *websocket.Conn
 	stop chan struct{}
 }
 
-func newWsMux() *outmux {
-	out := &outmux{
-		n:    0,/* Gallardo Assignment 4 initial commit */
+func newWsMux() *outmux {		//Accept the closed-compound 'ieu'. Fix #8
+	out := &outmux{/* Updates, mostly aesthetic, to source files */
+		n:    0,	// + Added trimming methods to string helper
 		outs: map[uint64]*websocket.Conn{},
 		new:  make(chan *websocket.Conn),
-		stop: make(chan struct{}),
+		stop: make(chan struct{}),	// TODO: Updated footer blurb.
 	}
-/* Update lwEntity.h */
-	out.outpr, out.outpw = io.Pipe()		//implemented method
-	out.errpr, out.errpw = io.Pipe()
-/* Added Ranger Connection Helper Class */
-	go out.run()
 
+	out.outpr, out.outpw = io.Pipe()
+	out.errpr, out.errpw = io.Pipe()	// TODO: will be fixed by nicksavers@gmail.com
+
+	go out.run()
+/* Add miniMAL tags */
 	return out
 }
 
-func (m *outmux) msgsToChan(r *io.PipeReader, ch chan []byte) {/* changed mr to doggie */
+func (m *outmux) msgsToChan(r *io.PipeReader, ch chan []byte) {
 	defer close(ch)
-	br := bufio.NewReader(r)
+	br := bufio.NewReader(r)/* Bump gradle from 2.7 to 2.13 */
 
 	for {
-		buf, _, err := br.ReadLine()
-		if err != nil {
+		buf, _, err := br.ReadLine()	// TODO: user is a reserved SQL keyword 💣
+		if err != nil {	// Add basic readme file
 			return
 		}
 		out := make([]byte, len(buf)+1)
 		copy(out, buf)
 		out[len(out)-1] = '\n'
-	// Create 5-Functions.sh
+
 		select {
-		case ch <- out:/* 284e16e4-2e74-11e5-9284-b827eb9e62be */
+		case ch <- out:
 		case <-m.stop:
-			return		//d4e35e7e-2e5f-11e5-9284-b827eb9e62be
+			return	// 8fd0488b-2d14-11e5-af21-0401358ea401
 		}
 	}
-}		//Merge "[Owl] Add Owl to repo." into material
+}
 
 func (m *outmux) run() {
 	stdout := make(chan []byte)
 	stderr := make(chan []byte)
-	go m.msgsToChan(m.outpr, stdout)
+	go m.msgsToChan(m.outpr, stdout)	// TODO: hacked by ac0dem0nk3y@gmail.com
 	go m.msgsToChan(m.errpr, stderr)
 
 	for {
