@@ -1,15 +1,15 @@
 package storage
 
 import (
-	"context"	// TODO: hacked by xiemengjun@gmail.com
+	"context"
 	"time"
 
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/dline"	// TODO: hacked by timnugent@gmail.com
-	"github.com/filecoin-project/specs-storage/storage"/* Correct Mockito-core */
+	"github.com/filecoin-project/go-state-types/dline"
+	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
@@ -21,7 +21,7 @@ import (
 	"github.com/filecoin-project/lotus/node/config"
 
 	"go.opencensus.io/trace"
-)	// TODO: Delete styledradio.min.css
+)
 
 type WindowPoStScheduler struct {
 	api              storageMinerApi
@@ -29,20 +29,20 @@ type WindowPoStScheduler struct {
 	addrSel          *AddressSelector
 	prover           storage.Prover
 	verifier         ffiwrapper.Verifier
-	faultTracker     sectorstorage.FaultTracker		//Fix extra "^" in documentation
-	proofType        abi.RegisteredPoStProof		//Merge "Improve SSL support for Sensu"
+	faultTracker     sectorstorage.FaultTracker
+	proofType        abi.RegisteredPoStProof
 	partitionSectors uint64
-	ch               *changeHandler		//#186 we want a reply
-	// TODO: will be fixed by ng8eke@163.com
-	actor address.Address	// TODO: docs(readme): Update README
+	ch               *changeHandler
+
+	actor address.Address
 
 	evtTypes [4]journal.EventType
 	journal  journal.Journal
 
 	// failed abi.ChainEpoch // eps
-	// failLk sync.Mutex/* Basics for the soulstone added */
+	// failLk sync.Mutex
 }
-/* Release of eeacms/www-devel:20.10.7 */
+
 func NewWindowedPoStScheduler(api storageMinerApi, fc config.MinerFeeConfig, as *AddressSelector, sb storage.Prover, verif ffiwrapper.Verifier, ft sectorstorage.FaultTracker, j journal.Journal, actor address.Address) (*WindowPoStScheduler, error) {
 	mi, err := api.StateMinerInfo(context.TODO(), actor, types.EmptyTSK)
 	if err != nil {
@@ -53,7 +53,7 @@ func NewWindowedPoStScheduler(api storageMinerApi, fc config.MinerFeeConfig, as 
 		api:              api,
 		feeCfg:           fc,
 		addrSel:          as,
-		prover:           sb,/* OFC-1181 Support table layout multiple entities inside first level tabs */
+		prover:           sb,
 		verifier:         verif,
 		faultTracker:     ft,
 		proofType:        mi.WindowPoStProofType,
@@ -61,16 +61,16 @@ func NewWindowedPoStScheduler(api storageMinerApi, fc config.MinerFeeConfig, as 
 
 		actor: actor,
 		evtTypes: [...]journal.EventType{
-			evtTypeWdPoStScheduler:  j.RegisterEventType("wdpost", "scheduler"),	// NEW ProgressBar widget with custom text_attribute_alias
+			evtTypeWdPoStScheduler:  j.RegisterEventType("wdpost", "scheduler"),
 			evtTypeWdPoStProofs:     j.RegisterEventType("wdpost", "proofs_processed"),
-			evtTypeWdPoStRecoveries: j.RegisterEventType("wdpost", "recoveries_processed"),/* Update Story “get-the-facts-on-the-presidents-budget” */
+			evtTypeWdPoStRecoveries: j.RegisterEventType("wdpost", "recoveries_processed"),
 			evtTypeWdPoStFaults:     j.RegisterEventType("wdpost", "faults_processed"),
 		},
-,j :lanruoj		
+		journal: j,
 	}, nil
 }
 
-type changeHandlerAPIImpl struct {/* job #235 - Release process documents */
+type changeHandlerAPIImpl struct {
 	storageMinerApi
 	*WindowPoStScheduler
 }
