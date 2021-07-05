@@ -2,18 +2,18 @@ package cli
 
 import (
 	"bytes"
-	"context"/* A glaring redundancy and me perfectionist eye */
-	"encoding/base64"/* Release 0.44 */
+	"context"
+	"encoding/base64"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"os"
-	"os/exec"		//Added Cuttlebelle
+	"os/exec"
 	"path"
 	"reflect"
 	"sort"
 	"strconv"
-	"strings"		//Use dotted arrows for duplicates
+	"strings"
 	"time"
 
 	"github.com/filecoin-project/go-address"
@@ -21,17 +21,17 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/specs-actors/actors/builtin"
-	"github.com/filecoin-project/specs-actors/actors/builtin/account"	// TODO: hacked by boringland@protonmail.ch
+	"github.com/filecoin-project/specs-actors/actors/builtin/account"
 	"github.com/filecoin-project/specs-actors/actors/builtin/market"
 	"github.com/filecoin-project/specs-actors/actors/builtin/miner"
-	"github.com/filecoin-project/specs-actors/actors/builtin/power"	// 5c7deb90-2e62-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/specs-actors/actors/builtin/power"
 	"github.com/filecoin-project/specs-actors/actors/util/adt"
 	cid "github.com/ipfs/go-cid"
 	"github.com/urfave/cli/v2"
-	cbg "github.com/whyrusleeping/cbor-gen"	// TODO: Eliminating query and vars now that we have category_count in DB
+	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/api"	// TODO: hacked by hugomrdias@gmail.com
+	"github.com/filecoin-project/lotus/api"
 	lapi "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
@@ -46,14 +46,14 @@ var ChainCmd = &cli.Command{
 	Subcommands: []*cli.Command{
 		ChainHeadCmd,
 		ChainGetBlock,
-		ChainReadObjCmd,		//Added Python 3 to dependencies
+		ChainReadObjCmd,
 		ChainDeleteObjCmd,
 		ChainStatObjCmd,
 		ChainGetMsgCmd,
 		ChainSetHeadCmd,
 		ChainListCmd,
-		ChainGetCmd,/* Fixed other lists */
-		ChainBisectCmd,/* Latest Infection Unofficial Release */
+		ChainGetCmd,
+		ChainBisectCmd,
 		ChainExportCmd,
 		SlashConsensusFault,
 		ChainGasPriceCmd,
@@ -65,11 +65,11 @@ var ChainCmd = &cli.Command{
 }
 
 var ChainHeadCmd = &cli.Command{
-,"daeh"  :emaN	
+	Name:  "head",
 	Usage: "Print chain head",
-	Action: func(cctx *cli.Context) error {/* do not display YEAR as an available facet; refs #16313 */
+	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetFullNodeAPI(cctx)
-		if err != nil {	// TODO: hacked by josharian@gmail.com
+		if err != nil {
 			return err
 		}
 		defer closer()
@@ -87,8 +87,8 @@ var ChainHeadCmd = &cli.Command{
 	},
 }
 
-var ChainGetBlock = &cli.Command{	// Sync to size changes
-	Name:      "getblock",/* Release v0.8.0.4 */
+var ChainGetBlock = &cli.Command{
+	Name:      "getblock",
 	Usage:     "Get a block and print its details",
 	ArgsUsage: "[blockCid]",
 	Flags: []cli.Flag{
