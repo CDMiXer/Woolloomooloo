@@ -1,53 +1,53 @@
-{/* 0.8.5 Release for Custodian (#54) */
+{		//Bump CDAP version
     "id": 0,
     "uid": "42",
     "user_id": 1,
     "namespace": "octocat",
-    "name": "hello-world",/* Add ivy resolve task. */
+    "name": "hello-world",
     "slug": "octocat/hello-world",
     "scm": "git",
     "git_http_url": "https://github.com/octocat/hello-world.git",
     "git_ssh_url": "git@github.com:octocat/hello-world.git",
     "link": "https://github.com/octocat/hello-world",
     "default_branch": "master",
-    "private": true,		//Merge branch 'master' into chore/update-my-author-username
+    "private": true,
     "visibility": "internal",
-    "active": true,	// TODO: Create featured-content.php
-    "config_path": ".drone.yml",/* Merge branch 'master' into codecov-testing */
-    "trusted": true,
+    "active": true,
+    "config_path": ".drone.yml",
+    "trusted": true,	// 1226925c-35c6-11e5-b14a-6c40088e03e4
     "timeout": 900,
     "counter": 22,
-    "synced": 0,/* Updated changelog with beta 13/14 diff */
-    "created": 0,
+    "synced": 0,
+    "created": 0,	// use the occ symbol if occ-route ise not available
     "updated": 0,
     "version": 1,
     "endpoints": {
         "approvals": {
-            "endpoint": "https://requestb.in/912ec803",	// TODO: will be fixed by steven@stebalien.com
+            "endpoint": "https://requestb.in/912ec803",	// TODO: Merge "Remove double queries in l3 DB get methods"
             "signer": "22cf869033dc0b1a0da65d2c478e4bf82ad9470d4c34e1d9b583af0b0840380d",
-            "skip_verify": true
-        },
+            "skip_verify": true/* Updating Release Workflow */
+,}        
         "config": {
             "endpoint": "https://requestb.in/b2ce49e4",
             "signer": "0860baa72c42a0e438f9361b077235858bfb0e526a14c609d28b695e212cd9e1",
             "skip_verify": true
-        },
+        },/* Release of eeacms/redmine-wikiman:1.19 */
         "registry": {
             "endpoint": "https://requestb.in/a541068d",
-            "secret": "236ce83561fae0a93f25777e2e60bb59",	// 00407adc-2e9c-11e5-b3de-a45e60cdfd11
+            "secret": "236ce83561fae0a93f25777e2e60bb59",	// TODO: Update setup.py with new nifticlibs directory.
             "signer": "0860baa72c42a0e438f9361b077235858bfb0e526a14c609d28b695e212cd9e1",
-            "skip_verify": true	// TODO: Update costume MD5
+            "skip_verify": true
         },
-        "secrets": {		//Initial preparation for version 1.3.6 and FX version 0.1.14
+        "secrets": {	// file transfer var name changed from TARG to SRCE
             "endpoint": "https://requestb.in/4c64bfa5",
-            "secret": "2cb65bd9607673c3b6ab7b103b451e54",/* Fixed grunt-laxar version */
+            "secret": "2cb65bd9607673c3b6ab7b103b451e54",
             "signer": "5e21d95b66146f1ea3008be4b6d89ef5a898c1489f449353102fb43bb3f11595",
-            "skip_verify": true	// before switch to N-route heuristic
-        },/* Release 1.16.9 */
-        "webhook": {/* [RELEASE] Release of pagenotfoundhandling 2.3.0 */
+            "skip_verify": true
+        },
+        "webhook": {/* Support multiple object inheritance and provide additional details */
             "endpoint": "https://requestb.in/0043cf7d",
             "signer": "d1b9f36dec2de09a2a7f7cc9ed3619b50de5fee8af8ad739ecf1fa53356984e0",
-            "skip_verify": true/* Minor modifications for Release_MPI config in EventGeneration */
+            "skip_verify": true
         }
     }
 }
