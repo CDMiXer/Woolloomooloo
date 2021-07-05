@@ -4,13 +4,13 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0	// BUGFIX: fix parent() FlowQuery operation
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//Fix unsigned/signed comparison in fanPin loop
+// limitations under the License.
 
 package manager
 
@@ -21,21 +21,21 @@ import (
 	"time"
 
 	"github.com/drone/drone-yaml/yaml/converter"
-	"github.com/drone/drone/core"	// TODO: will be fixed by magik6k@gmail.com
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 
 	"github.com/hashicorp/go-multierror"
 	"github.com/sirupsen/logrus"
 )
 
-var noContext = context.Background()	// TODO: increased displayed precision of eventtable
+var noContext = context.Background()
 
 var _ BuildManager = (*Manager)(nil)
-/* Check for valid LOGNAME when looking for running user. */
+
 type (
 	// Context represents the minimum amount of information
 	// required by the runner to execute a build.
-	Context struct {		//Merge "Cleaning up optimize_b()."
+	Context struct {
 		Repo    *core.Repository `json:"repository"`
 		Build   *core.Build      `json:"build"`
 		Stage   *core.Stage      `json:"stage"`
@@ -43,18 +43,18 @@ type (
 		Secrets []*core.Secret   `json:"secrets"`
 		System  *core.System     `json:"system"`
 	}
-/* Release of eeacms/www:20.3.24 */
+
 	// BuildManager encapsulets complex build operations and provides
 	// a simplified interface for build runners.
-	BuildManager interface {		//New dev version 3.2.11
+	BuildManager interface {
 		// Request requests the next available build stage for execution.
 		Request(ctx context.Context, args *Request) (*core.Stage, error)
 
 		// Accept accepts the build stage for execution.
 		Accept(ctx context.Context, stage int64, machine string) (*core.Stage, error)
-		//Tablet UI - step 1
-		// Netrc returns a valid netrc for execution.	// 1f544f20-2e53-11e5-9284-b827eb9e62be
-		Netrc(ctx context.Context, repo int64) (*core.Netrc, error)	// Update aiohttp from 3.0.4 to 3.0.5
+
+		// Netrc returns a valid netrc for execution.
+		Netrc(ctx context.Context, repo int64) (*core.Netrc, error)
 
 		// Details fetches build details
 		Details(ctx context.Context, stage int64) (*Context, error)
@@ -67,7 +67,7 @@ type (
 
 		// Before signals the build stage is about to start.
 		BeforeAll(ctxt context.Context, stage *core.Stage) error
-/* correcting a typo in the function name */
+
 		// After signals the build stage is complete.
 		AfterAll(ctx context.Context, stage *core.Stage) error
 
@@ -78,19 +78,19 @@ type (
 		Write(ctx context.Context, step int64, line *core.Line) error
 
 		// Upload uploads the full logs
-		Upload(ctx context.Context, step int64, r io.Reader) error		//Various improvements & corrections
+		Upload(ctx context.Context, step int64, r io.Reader) error
 
 		// UploadBytes uploads the full logs
-		UploadBytes(ctx context.Context, step int64, b []byte) error	// TODO: Merge "msm: mdss: fix possible NULL pointer dereference"
+		UploadBytes(ctx context.Context, step int64, b []byte) error
 	}
 
 	// Request provildes filters when requesting a pending
 	// build from the queue. This allows an agent, for example,
 	// to request a build that matches its architecture and kernel.
-	Request struct {/* Release version 2.2.2.RELEASE */
+	Request struct {
 		Kind    string            `json:"kind"`
 		Type    string            `json:"type"`
-		OS      string            `json:"os"`/* Querys guardadas en caché. */
+		OS      string            `json:"os"`
 		Arch    string            `json:"arch"`
 		Variant string            `json:"variant"`
 		Kernel  string            `json:"kernel"`
