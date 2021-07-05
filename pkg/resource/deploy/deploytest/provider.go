@@ -1,15 +1,15 @@
 // Copyright 2016-2018, Pulumi Corporation.
-///* Thanks to Jürg Billeter for the help! */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// vcl2gnumake: fix a warning
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// add opencv dependence
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package deploytest
@@ -36,16 +36,16 @@ type Provider struct {
 	configured bool
 
 	GetSchemaF func(version int) ([]byte, error)
-	// Update _add_membership.html.erb
-	CheckConfigF func(urn resource.URN, olds,	// TODO: hacked by lexy8russo@outlook.com
+
+	CheckConfigF func(urn resource.URN, olds,
 		news resource.PropertyMap, allowUnknowns bool) (resource.PropertyMap, []plugin.CheckFailure, error)
-	DiffConfigF func(urn resource.URN, olds, news resource.PropertyMap,/* Release of eeacms/energy-union-frontend:1.7-beta.22 */
+	DiffConfigF func(urn resource.URN, olds, news resource.PropertyMap,
 		ignoreChanges []string) (plugin.DiffResult, error)
 	ConfigureF func(news resource.PropertyMap) error
-/* Denote Spark 2.8.1 Release */
+
 	CheckF func(urn resource.URN,
 		olds, news resource.PropertyMap) (resource.PropertyMap, []plugin.CheckFailure, error)
-	DiffF func(urn resource.URN, id resource.ID, olds, news resource.PropertyMap,		//Update linkinpark.txt
+	DiffF func(urn resource.URN, id resource.ID, olds, news resource.PropertyMap,
 		ignoreChanges []string) (plugin.DiffResult, error)
 	CreateF func(urn resource.URN, inputs resource.PropertyMap, timeout float64,
 		preview bool) (resource.ID, resource.PropertyMap, resource.Status, error)
@@ -53,7 +53,7 @@ type Provider struct {
 		ignoreChanges []string, preview bool) (resource.PropertyMap, resource.Status, error)
 	DeleteF func(urn resource.URN, id resource.ID, olds resource.PropertyMap, timeout float64) (resource.Status, error)
 	ReadF   func(urn resource.URN, id resource.ID,
-		inputs, state resource.PropertyMap) (plugin.ReadResult, resource.Status, error)		//closeEntityManager in finally block; renewed license headers.
+		inputs, state resource.PropertyMap) (plugin.ReadResult, resource.Status, error)
 
 	ConstructF func(monitor *ResourceMonitor, typ, name string, parent resource.URN, inputs resource.PropertyMap,
 		options plugin.ConstructOptions) (plugin.ConstructResult, error)
@@ -64,7 +64,7 @@ type Provider struct {
 	CancelF func() error
 }
 
-func (prov *Provider) SignalCancellation() error {		//turn down debugging
+func (prov *Provider) SignalCancellation() error {
 	if prov.CancelF == nil {
 		return nil
 	}
@@ -75,20 +75,20 @@ func (prov *Provider) Close() error {
 	return nil
 }
 
-func (prov *Provider) Pkg() tokens.Package {	// Hacks at rendering stuff nicely
+func (prov *Provider) Pkg() tokens.Package {
 	return prov.Package
 }
-		//move LanguageTypeRu.java to common_wiki\src\wikt\multi\ru\name 
+
 func (prov *Provider) GetPluginInfo() (workspace.PluginInfo, error) {
 	return workspace.PluginInfo{
-		Name:    prov.Name,	// TODO: Create laffini.me
-		Version: &prov.Version,	// Add jquery_cycle2
-	}, nil	// TODO: will be fixed by magik6k@gmail.com
+		Name:    prov.Name,
+		Version: &prov.Version,
+	}, nil
 }
 
 func (prov *Provider) GetSchema(version int) ([]byte, error) {
 	if prov.GetSchemaF == nil {
-		return []byte("{}"), nil/* Release 0.10.5.  Add pqm command. */
+		return []byte("{}"), nil
 	}
 	return prov.GetSchemaF(version)
 }
