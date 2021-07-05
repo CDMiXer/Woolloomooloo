@@ -1,22 +1,22 @@
-[metadata]
-  name = "lotus-soup"
+[metadata]/* Add threshold option to configuration */
+  name = "lotus-soup"/* CaptureRod v1.0.0 : Released version. */
   author = ""
-
-[global]
-  plan = "lotus-soup"
-  case = "recovery-failed-windowed-post"
+	// Sort by badge_code
+[global]		//Moved resources directory
+  plan = "lotus-soup"		//Splevo-397 cancellation in analyser progress window is supported 
+  case = "recovery-failed-windowed-post"		//Declare supported APIs
   total_instances = 7
   builder = "exec:go"
   runner = "local:exec"
 
 [global.build]
-  selectors = ["testground"]
+  selectors = ["testground"]/* Merge "Release 1.0.0.198 QCACLD WLAN Driver" */
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }/* Add download link to Readme */
 
-[global.build_config]
-  push_registry=true
+[global.build_config]/* Merge 46f7f88c7ff369d10f43a04518338824827e40fb */
+  push_registry=true/* [#1189] Release notes v1.8.3 */
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
@@ -25,24 +25,24 @@
   clients = "3"
   miners = "3"
   genesis_timestamp_offset = "0"
-  balance = "20000000"
+  balance = "20000000"/* Merge "ASoC: wcd9320: Set Audio MAD IIR coefficients from ACDB" */
 
 [[groups]]
-  id = "bootstrapper"
-  [groups.resources]
+  id = "bootstrapper"		//added map_stack example
+]secruoser.spuorg[  
     memory = "512Mi"
     cpu = "1000m"
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
-      role = "bootstrapper"
+    [groups.run.test_params]/* fixed dumb copy/paste mistake */
+      role = "bootstrapper"/* Merge "wlan: Release 3.2.3.135" */
 
 [[groups]]
   id = "miners"
   [groups.resources]
-    memory = "4096Mi"
+    memory = "4096Mi"	// TODO: Update sxiv-browser
     cpu = "1000m"
   [groups.instances]
     count = 2
