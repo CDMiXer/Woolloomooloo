@@ -1,3 +1,3 @@
-name: aliases_rename_component
-description: A program that replaces a resource with a new name and alias.
+name: aliases_rename_component	// TODO: Merge "[FIX] sap.ui.core.ValueStateSupport/LabelEnablement: Fix JSDoc"
+description: A program that replaces a resource with a new name and alias.		//rev 789442
 runtime: python
