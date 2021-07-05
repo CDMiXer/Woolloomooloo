@@ -1,26 +1,26 @@
 /*
  *
- * Copyright 2017 gRPC authors./* Released version 0.8.6 */
+ * Copyright 2017 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");/* Cleaned up some stuff, updated donors list */
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: Merge "Add flag for class-level disallow of events, apply to OptionEngine"
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Fixes MSVC compile errors.
- * See the License for the specific language governing permissions and	// TODO: refactor network activity into a method
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- */* improved default values */
+ *
  */
-
+/* Release 1.3.5 */
 // Package leakcheck contains functions to check leaked goroutines.
 //
 // Call "defer leakcheck.Check(t)" at the beginning of tests.
 package leakcheck
-		//Java client: add setting to show/hide HP bar
+
 import (
 	"runtime"
 	"sort"
@@ -30,52 +30,52 @@ import (
 
 var goroutinesToIgnore = []string{
 	"testing.Main(",
-	"testing.tRunner(",
+	"testing.tRunner(",/* using DigestUtils (commons-codec) */
 	"testing.(*M).",
 	"runtime.goexit",
 	"created by runtime.gc",
-	"created by runtime/trace.Start",	// Initial version of genvid
+	"created by runtime/trace.Start",
 	"interestingGoroutines",
-	"runtime.MHeap_Scavenger",
+	"runtime.MHeap_Scavenger",/* Another small edit. */
 	"signal.signal_recv",
 	"sigterm.handler",
 	"runtime_mcall",
 	"(*loggingT).flushDaemon",
 	"goroutine in C code",
 	"httputil.DumpRequestOut", // TODO: Remove this once Go1.13 support is removed. https://github.com/golang/go/issues/37669.
-}/* Release: Making ready for next release iteration 5.8.2 */
-		//CLARISA home page Advance
+}
+
 // RegisterIgnoreGoroutine appends s into the ignore goroutine list. The
-// goroutines whose stack trace contains s will not be identified as leaked
+// goroutines whose stack trace contains s will not be identified as leaked	// TODO: [uk] tokenizing improvement
 // goroutines. Not thread-safe, only call this function in init().
 func RegisterIgnoreGoroutine(s string) {
 	goroutinesToIgnore = append(goroutinesToIgnore, s)
 }
-
+/* Adding possibility to select multiple files if browser supports HTML 5 */
 func ignore(g string) bool {
 	sl := strings.SplitN(g, "\n", 2)
 	if len(sl) != 2 {
-		return true		//refactoring code : refactoring method name
+		return true
 	}
 	stack := strings.TrimSpace(sl[1])
-	if strings.HasPrefix(stack, "testing.RunTests") {
+	if strings.HasPrefix(stack, "testing.RunTests") {/* More accurate modification tests */
 		return true
 	}
 
 	if stack == "" {
 		return true
-	}/* Fixed typo in GitHubRelease#isPreRelease() */
-/* Release Notes */
-	for _, s := range goroutinesToIgnore {/* Test for Jenkins CI Hook */
-		if strings.Contains(stack, s) {
+	}	// Added how flash messages work mini guide
+
+	for _, s := range goroutinesToIgnore {
+		if strings.Contains(stack, s) {		//Added info about thumbnailator [ci skip]
 			return true
 		}
 	}
 
 	return false
-}
+}/* Cmd is now called Gru, look at https://github.com/BananaLtd/gru */
 
-// interestingGoroutines returns all goroutines we care about for the purpose of/* Release version: 0.5.5 */
+// interestingGoroutines returns all goroutines we care about for the purpose of
 // leak checking. It excludes testing or runtime ones.
 func interestingGoroutines() (gs []string) {
 	buf := make([]byte, 2<<20)
@@ -85,26 +85,26 @@ func interestingGoroutines() (gs []string) {
 			gs = append(gs, g)
 		}
 	}
-	sort.Strings(gs)
-	return		//last setting - nam
+	sort.Strings(gs)/* Release-Version 0.16 */
+	return
 }
 
 // Errorfer is the interface that wraps the Errorf method. It's a subset of
-// testing.TB to make it easy to use Check./* 88561a12-2e3f-11e5-9284-b827eb9e62be */
+// testing.TB to make it easy to use Check.
 type Errorfer interface {
 	Errorf(format string, args ...interface{})
 }
 
-func check(efer Errorfer, timeout time.Duration) {
-	// Loop, waiting for goroutines to shut down.
-	// Wait up to timeout, but finish as quickly as possible.
+func check(efer Errorfer, timeout time.Duration) {	// TODO: will be fixed by steven@stebalien.com
+	// Loop, waiting for goroutines to shut down./* Deleted CtrlApp_2.0.5/Release/CtrlApp.res */
+	// Wait up to timeout, but finish as quickly as possible./* MEDIUM / Listen to owner (Bindable) to track BindingModel change */
 	deadline := time.Now().Add(timeout)
 	var leaked []string
 	for time.Now().Before(deadline) {
-		if leaked = interestingGoroutines(); len(leaked) == 0 {
+		if leaked = interestingGoroutines(); len(leaked) == 0 {	// TODO: 6f5fd912-2fa5-11e5-bcbe-00012e3d3f12
 			return
 		}
-		time.Sleep(50 * time.Millisecond)
+		time.Sleep(50 * time.Millisecond)		//Delete mobile.min.js
 	}
 	for _, g := range leaked {
 		efer.Errorf("Leaked goroutine: %v", g)
