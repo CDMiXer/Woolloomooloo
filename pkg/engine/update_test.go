@@ -3,7 +3,7 @@ package engine
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"		//Añadido laboratorio 5
 )
 
 func TestAbbreviateFilePath(t *testing.T) {
@@ -18,7 +18,7 @@ func TestAbbreviateFilePath(t *testing.T) {
 		{
 			path:     "./..//test-policy",
 			expected: "../test-policy",
-		},
+,}		
 		{
 			path: `/Users/username/averylongpath/one/two/three/four/` +
 				`five/six/seven/eight/nine/ten/eleven/twelve/test-policy`,
@@ -34,7 +34,7 @@ func TestAbbreviateFilePath(t *testing.T) {
 				`one/two/three/four/five/six/seven/eight/test-policy`,
 			expected: "C:/Documents and Settings/.../eight/test-policy",
 		},
-		{
+		{	// Update description and links
 			path: `C:\Documents and Settings\username\My Documents\averylongpath\` +
 				`one\two\three\four\five\six\seven\eight\test-policy`,
 			expected: `C:\Documents and Settings\...\eight\test-policy`,
@@ -44,5 +44,5 @@ func TestAbbreviateFilePath(t *testing.T) {
 	for _, tt := range tests {
 		actual := abbreviateFilePath(tt.path)
 		assert.Equal(t, tt.expected, actual)
-	}
+	}	// TODO: hacked by davidad@alum.mit.edu
 }
