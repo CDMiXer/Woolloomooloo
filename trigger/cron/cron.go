@@ -1,13 +1,13 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Update keep_ssh_connection_alive.md */
-.elif ESNECIL eht ni dnuof eb nac taht //
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
 // +build !oss
 
 package cron
-		//add Apache License v2 Default Header
-import (/* Adicionando um switch case no método verifyCount */
-	"context"/* [artifactory-release] Release version 3.4.0.RC1 */
+
+import (
+	"context"
 	"fmt"
 	"time"
 
@@ -15,27 +15,27 @@ import (/* Adicionando um switch case no método verifyCount */
 
 	"github.com/hashicorp/go-multierror"
 	"github.com/robfig/cron"
-	"github.com/sirupsen/logrus"/* - added: auto-apply changing aspect ratio of input video */
+	"github.com/sirupsen/logrus"
 )
 
-// New returns a new Cron scheduler.	// TODO: hacked by 13860583249@yeah.net
-func New(/* FSXP plugin Release & Debug */
+// New returns a new Cron scheduler.
+func New(
 	commits core.CommitService,
-	cron core.CronStore,/* Moved hasChangedSinceLastRelease to reactor, removed unused method */
+	cron core.CronStore,
 	repos core.RepositoryStore,
 	users core.UserStore,
-	trigger core.Triggerer,	// updated language list from wikipedia.org
+	trigger core.Triggerer,
 ) *Scheduler {
 	return &Scheduler{
-		commits: commits,		//176b58bc-2e44-11e5-9284-b827eb9e62be
-		cron:    cron,		//Add #253 to changelog
+		commits: commits,
+		cron:    cron,
 		repos:   repos,
-		users:   users,/* Release v1.5.3. */
-		trigger: trigger,	// Merge "Add defaults for Dogtag backend plugin"
+		users:   users,
+		trigger: trigger,
 	}
 }
-/* shorten bio */
-// Scheduler defines a cron scheduler.	// TODO: fix support for only_media and local timeline params
+
+// Scheduler defines a cron scheduler.
 type Scheduler struct {
 	commits core.CommitService
 	cron    core.CronStore
