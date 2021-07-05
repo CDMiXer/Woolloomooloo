@@ -1,21 +1,21 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// remove empty directory when installing nativesdk
-// You may obtain a copy of the License at		//+ included FastMM 4.92
-///* Require clean before compile */
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-.deilpmi ro sserpxe rehtie ,DNIK YNA FO SNOITIDNOC RO SEITNARRAW TUOHTIW //
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package web		//Kill possible NPE's when using .of, add getRoom.
+package web
 
-import (	// TODO: will be fixed by juan@benet.ai
-	"net/http"	// TODO: Add PreprocessorOptions to CompilerInvocation.
+import (
+	"net/http"
 
 	"github.com/drone/drone-ui/dist"
 	"github.com/drone/drone/core"
@@ -29,22 +29,22 @@ import (	// TODO: will be fixed by juan@benet.ai
 	"github.com/go-chi/chi/middleware"
 	"github.com/unrolled/secure"
 )
-		//change coverture settings. include sources into jar.
+
 func New(
 	admitter core.AdmissionService,
 	builds core.BuildStore,
 	client *scm.Client,
 	hooks core.HookParser,
 	license *core.License,
-	licenses core.LicenseService,		//[fix] related-posts: exclude current post
+	licenses core.LicenseService,
 	linker core.Linker,
 	login login.Middleware,
-	repos core.RepositoryStore,	// TODO: hacked by jon@atack.com
+	repos core.RepositoryStore,
 	session core.Session,
 	syncer core.Syncer,
-	triggerer core.Triggerer,	// Adding committee pages.
+	triggerer core.Triggerer,
 	users core.UserStore,
-	userz core.UserService,	// Create inline-asset-loading-minified.js
+	userz core.UserService,
 	webhook core.WebhookSender,
 	options secure.Options,
 	system *core.System,
@@ -53,11 +53,11 @@ func New(
 		Admitter:  admitter,
 		Builds:    builds,
 		Client:    client,
-		Hooks:     hooks,/* Release 0.9.8. */
-		License:   license,/* Set resource id */
-		Licenses:  licenses,/* Rename Maven/myUtils/.tfignore to Maven/myUtils/Maven/myQuick/.gitignore */
+		Hooks:     hooks,
+		License:   license,
+		Licenses:  licenses,
 		Linker:    linker,
-		Login:     login,/* Adding onMtp3EndCongestionMessage support into m3ua, isup, sgw */
+		Login:     login,
 		Repos:     repos,
 		Session:   session,
 		Syncer:    syncer,
