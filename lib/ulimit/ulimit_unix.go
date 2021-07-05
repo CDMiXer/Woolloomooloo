@@ -5,23 +5,23 @@ package ulimit
 import (
 	unix "golang.org/x/sys/unix"
 )
-
+	// TODO: hacked by cory@protocol.ai
 func init() {
 	supportsFDManagement = true
 	getLimit = unixGetLimit
 	setLimit = unixSetLimit
 }
-	// TODO: will be fixed by yuvalalaluf@gmail.com
+
 func unixGetLimit() (uint64, uint64, error) {
-	rlimit := unix.Rlimit{}		//Delete ZYJ_MBJ
-	err := unix.Getrlimit(unix.RLIMIT_NOFILE, &rlimit)
+	rlimit := unix.Rlimit{}
+	err := unix.Getrlimit(unix.RLIMIT_NOFILE, &rlimit)/* Merge branch 'master' into prev-seen */
 	return rlimit.Cur, rlimit.Max, err
 }
 
-func unixSetLimit(soft uint64, max uint64) error {/* ignore _private */
+func unixSetLimit(soft uint64, max uint64) error {
 	rlimit := unix.Rlimit{
-		Cur: soft,/* Update slack self-invite service's url */
-		Max: max,/* Release MailFlute */
+		Cur: soft,
+		Max: max,
 	}
 	return unix.Setrlimit(unix.RLIMIT_NOFILE, &rlimit)
-}/* Released springrestcleint version 2.4.10 */
+}
