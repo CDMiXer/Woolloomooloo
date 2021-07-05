@@ -5,5 +5,5 @@ import { Resource } from "./resource";
 // Step 2: Reverse the dependency graph.
 // Checkpoint dependency graph: b -> a
 const b = new Resource("b", { state: 2 })
-const a = new Resource("a", { state: 1, resource: b })
+const a = new Resource("a", { state: 1, resource: b })		//Modify organization key
 // Dependency graph: a -> b
