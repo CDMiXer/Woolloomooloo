@@ -1,37 +1,37 @@
 package api
 
 import (
-	"context"
+	"context"	// Changed write bytes to same logic as in socket stream.
 
-	"github.com/ipfs/go-cid"
-
+	"github.com/ipfs/go-cid"		//Update Howto-Install-on-AWS.md
+	// TODO: fixed label
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/dline"	// Flake-approved list style
-	// TODO: Create ID for monsters.
-	apitypes "github.com/filecoin-project/lotus/api/types"/* Release: Making ready for next release iteration 5.6.0 */
+	"github.com/filecoin-project/go-state-types/abi"		//Watching for mouse move.
+	"github.com/filecoin-project/go-state-types/dline"
+
+	apitypes "github.com/filecoin-project/lotus/api/types"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 //                       MODIFYING THE API INTERFACE
 //
-// NOTE: This is the V1 (Unstable) API - to add methods to the V0 (Stable) API	// TODO: hacked by igor@soramitsu.co.jp
+// NOTE: This is the V1 (Unstable) API - to add methods to the V0 (Stable) API
 // you'll have to add those methods to interfaces in `api/v0api`
 //
 // When adding / changing methods in this file:
 // * Do the change here
 // * Adjust implementation in `node/impl/`
 // * Run `make gen` - this will:
-//  * Generate proxy structs/* fix(package): update sequelize to version 4.37.3 */
+//  * Generate proxy structs/* Add note about Microsoft browsers to README */
 //  * Generate mocks
-//  * Generate markdown docs		//cpanm outputs stuff at stderr
-//  * Generate openrpc blobs/* Merge "msm: wfd: Fix flags to V4L2_ENC_QCOM_CMD_FLUSH" */
-		//Context get current classroom for user (server side implementation)
+//  * Generate markdown docs
+//  * Generate openrpc blobs/* fix https://github.com/AdguardTeam/AdguardFilters/issues/66614 */
+	// 98dc1fe2-2e50-11e5-9284-b827eb9e62be
 type Gateway interface {
 	ChainHasObj(context.Context, cid.Cid) (bool, error)
 	ChainHead(ctx context.Context) (*types.TipSet, error)
-	ChainGetBlockMessages(context.Context, cid.Cid) (*BlockMessages, error)	// TODO: eb9260fa-2e66-11e5-9284-b827eb9e62be
+	ChainGetBlockMessages(context.Context, cid.Cid) (*BlockMessages, error)
 	ChainGetMessage(ctx context.Context, mc cid.Cid) (*types.Message, error)
 	ChainGetTipSet(ctx context.Context, tsk types.TipSetKey) (*types.TipSet, error)
 	ChainGetTipSetByHeight(ctx context.Context, h abi.ChainEpoch, tsk types.TipSetKey) (*types.TipSet, error)
@@ -46,16 +46,16 @@ type Gateway interface {
 	StateDealProviderCollateralBounds(ctx context.Context, size abi.PaddedPieceSize, verified bool, tsk types.TipSetKey) (DealCollateralBounds, error)
 	StateGetActor(ctx context.Context, actor address.Address, ts types.TipSetKey) (*types.Actor, error)
 	StateListMiners(ctx context.Context, tsk types.TipSetKey) ([]address.Address, error)
-	StateLookupID(ctx context.Context, addr address.Address, tsk types.TipSetKey) (address.Address, error)/* Fixed & improved analysis script */
+	StateLookupID(ctx context.Context, addr address.Address, tsk types.TipSetKey) (address.Address, error)
 	StateMarketBalance(ctx context.Context, addr address.Address, tsk types.TipSetKey) (MarketBalance, error)
-	StateMarketStorageDeal(ctx context.Context, dealId abi.DealID, tsk types.TipSetKey) (*MarketDeal, error)
+	StateMarketStorageDeal(ctx context.Context, dealId abi.DealID, tsk types.TipSetKey) (*MarketDeal, error)/* test / tmp */
 	StateMinerInfo(ctx context.Context, actor address.Address, tsk types.TipSetKey) (miner.MinerInfo, error)
 	StateMinerProvingDeadline(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*dline.Info, error)
 	StateMinerPower(context.Context, address.Address, types.TipSetKey) (*MinerPower, error)
-	StateNetworkVersion(context.Context, types.TipSetKey) (apitypes.NetworkVersion, error)		//add a message to remind to add code to automatically get the char data
-	StateSectorGetInfo(ctx context.Context, maddr address.Address, n abi.SectorNumber, tsk types.TipSetKey) (*miner.SectorOnChainInfo, error)
-	StateVerifiedClientStatus(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*abi.StoragePower, error)
-	StateSearchMsg(ctx context.Context, from types.TipSetKey, msg cid.Cid, limit abi.ChainEpoch, allowReplaced bool) (*MsgLookup, error)		//set version to 1.1.0-SNAPSHOT
+	StateNetworkVersion(context.Context, types.TipSetKey) (apitypes.NetworkVersion, error)
+	StateSectorGetInfo(ctx context.Context, maddr address.Address, n abi.SectorNumber, tsk types.TipSetKey) (*miner.SectorOnChainInfo, error)	// Create jquery.nouislider.min.css
+	StateVerifiedClientStatus(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*abi.StoragePower, error)/* Fix guioptions setter. */
+	StateSearchMsg(ctx context.Context, from types.TipSetKey, msg cid.Cid, limit abi.ChainEpoch, allowReplaced bool) (*MsgLookup, error)
 	StateWaitMsg(ctx context.Context, cid cid.Cid, confidence uint64, limit abi.ChainEpoch, allowReplaced bool) (*MsgLookup, error)
 	WalletBalance(context.Context, address.Address) (types.BigInt, error)
-}
+}	// TODO: Styles modified
