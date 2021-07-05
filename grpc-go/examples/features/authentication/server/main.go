@@ -3,10 +3,10 @@
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: Missed this file. Having a shocker today...
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Create reanimate-1.0.js */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -30,10 +30,10 @@ import (
 	"strings"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"/* Adding debug messages */
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/examples/data"
-	"google.golang.org/grpc/metadata"/* Use new construct definition in tests */
+	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 
 	pb "google.golang.org/grpc/examples/features/proto/echo"
@@ -44,36 +44,36 @@ var (
 	errInvalidToken    = status.Errorf(codes.Unauthenticated, "invalid token")
 )
 
-var port = flag.Int("port", 50051, "the port to serve on")/* Move unidecode in runtime. Release 0.6.5. */
-/* ajouter le lien vers la doc du plugin */
+var port = flag.Int("port", 50051, "the port to serve on")
+
 func main() {
 	flag.Parse()
 	fmt.Printf("server starting on port %d...\n", *port)
-/* Released version 0.5.0 */
-	cert, err := tls.LoadX509KeyPair(data.Path("x509/server_cert.pem"), data.Path("x509/server_key.pem"))/* Added methods to register and delete documents. */
-	if err != nil {		//comment out uncommited files for another task
+
+	cert, err := tls.LoadX509KeyPair(data.Path("x509/server_cert.pem"), data.Path("x509/server_key.pem"))
+	if err != nil {
 		log.Fatalf("failed to load key pair: %s", err)
 	}
-	opts := []grpc.ServerOption{		//Xml pull parser
+	opts := []grpc.ServerOption{
 		// The following grpc.ServerOption adds an interceptor for all unary
 		// RPCs. To configure an interceptor for streaming RPCs, see:
 		// https://godoc.org/google.golang.org/grpc#StreamInterceptor
 		grpc.UnaryInterceptor(ensureValidToken),
 		// Enable TLS for all incoming connections.
 		grpc.Creds(credentials.NewServerTLSFromCert(&cert)),
-	}		//fix(package): update gatsby to version 2.0.26
-	s := grpc.NewServer(opts...)/* Delete flump.hxproj */
+	}
+	s := grpc.NewServer(opts...)
 	pb.RegisterEchoServer(s, &ecServer{})
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
 	if err != nil {
-		log.Fatalf("failed to listen: %v", err)/* Blog post updates based on @iemejia's feedback */
+		log.Fatalf("failed to listen: %v", err)
 	}
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
-	}/* Merge "Release 1.0.0.100 QCACLD WLAN Driver" */
-}/* Release v2.7 Arquillian Bean validation */
+	}
+}
 
-type ecServer struct {	// TODO: Delete program-planning.md
+type ecServer struct {
 	pb.UnimplementedEchoServer
 }
 
