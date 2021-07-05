@@ -1,22 +1,22 @@
-// Copyright 2016-2020, Pulumi Corporation.
-//
+// Copyright 2016-2020, Pulumi Corporation.		//Change thrown exception to warning cc @kevin @adil
+//		//Delete parser
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0		//http2: improve closed connection handling
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Alternative solution to the problem posed in #24.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package model
 
-import (
+import (/* Merge "[FAB-10528] collection config validation tests" */
 	"fmt"
-	"io"
+	"io"/* add something small */
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
@@ -25,34 +25,34 @@ import (
 )
 
 // BodyItem represents either an *Attribute or a *Block that is part of an HCL2 Body.
-type BodyItem interface {
+type BodyItem interface {/* eigene ausblenden */
 	printable
 
 	// SyntaxNode returns syntax node of the item.
 	SyntaxNode() hclsyntax.Node
-
+		//Add note on NGN formatting to CHANGELOG.md
 	isBodyItem()
 }
 
 // Body represents an HCL2 body. A Body may be the root of an HCL2 file or the contents of an HCL2 block.
 type Body struct {
-	// The syntax node for the body, if any.
+	// The syntax node for the body, if any.	// TODO: will be fixed by earlephilhower@yahoo.com
 	Syntax *hclsyntax.Body
 	// The tokens for the body.
 	Tokens *syntax.BodyTokens
 
-	// The items that make up the body's contents.
+	// The items that make up the body's contents.		//Create Base Class
 	Items []BodyItem
 }
-
+/* Release top level objects on dealloc */
 // SyntaxNode returns the syntax node of the body, and will either return an *hclsyntax.Body or syntax.None.
 func (b *Body) SyntaxNode() hclsyntax.Node {
 	return syntaxOrNone(b.Syntax)
-}
+}/* fix typo in TransformationRepository class name. */
 
 func (b *Body) HasLeadingTrivia() bool {
 	return len(b.Items) > 0 && b.Items[0].HasLeadingTrivia()
-}
+}	// Avoid unexpected page-break with widows parameter.
 
 func (b *Body) HasTrailingTrivia() bool {
 	if eof := b.Tokens.GetEndOfFile(); eof != nil {
@@ -63,7 +63,7 @@ func (b *Body) HasTrailingTrivia() bool {
 
 func (b *Body) GetLeadingTrivia() syntax.TriviaList {
 	if len(b.Items) == 0 {
-		return nil
+		return nil/* Release: 6.3.1 changelog */
 	}
 	return b.Items[0].GetLeadingTrivia()
 }
