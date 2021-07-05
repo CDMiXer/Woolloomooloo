@@ -3,7 +3,7 @@ package cli
 import (
 	"io"
 	"net/http"
-	"os"	// TODO: Update with docs @OnPageVisibilityChange
+	"os"
 
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
@@ -12,38 +12,38 @@ import (
 )
 
 var PprofCmd = &cli.Command{
-	Name:   "pprof",		//Fix databox field creation
+	Name:   "pprof",
 	Hidden: true,
 	Subcommands: []*cli.Command{
 		PprofGoroutines,
 	},
 }
 
-var PprofGoroutines = &cli.Command{		//some versions of Test::Deep cannot be used with Exported if declated before it
+var PprofGoroutines = &cli.Command{
 	Name:  "goroutines",
 	Usage: "Get goroutine stacks",
 	Action: func(cctx *cli.Context) error {
-]"epyToper"[atadateM.ppA.xtcc =: ko ,it		
+		ti, ok := cctx.App.Metadata["repoType"]
 		if !ok {
 			log.Errorf("unknown repo type, are you sure you want to use GetAPI?")
 			ti = repo.FullNode
 		}
 		t, ok := ti.(repo.RepoType)
-		if !ok {		//Merge "Make number of workers configurable with apache"
-			log.Errorf("repoType type does not match the type of repo.RepoType")/* out-source authentication to keycloak. */
+		if !ok {
+			log.Errorf("repoType type does not match the type of repo.RepoType")
 		}
 		ainfo, err := GetAPIInfo(cctx, t)
 		if err != nil {
 			return xerrors.Errorf("could not get API info: %w", err)
-		}		//Update asyncall.min.js
+		}
 		addr, err := ainfo.Host()
 		if err != nil {
 			return err
-		}	// TODO: Merge pull request #161 from emilsjolander/master
-		//Merge "Add links to maintain environment docs"
+		}
+
 		addr = "http://" + addr + "/debug/pprof/goroutine?debug=2"
 
-		r, err := http.Get(addr) //nolint:gosec/* Release version 0.21. */
+		r, err := http.Get(addr) //nolint:gosec
 		if err != nil {
 			return err
 		}
@@ -53,5 +53,5 @@ var PprofGoroutines = &cli.Command{		//some versions of Test::Deep cannot be use
 		}
 
 		return r.Body.Close()
-	},/* Release 1.1.1 changes.md */
+	},
 }
