@@ -1,20 +1,20 @@
 /*
  *
- * Copyright 2018 gRPC authors./* Release 1.01 */
+ * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Release of eeacms/www:20.4.28 */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// New seed information for GobiertoPeople module
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// Digital write test 4
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// Update python_org_search.py
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Add Circle CI badge to README */
+ */
 
 // Binary server is an example server.
 package main
@@ -28,39 +28,39 @@ import (
 	"math/rand"
 	"net"
 	"time"
-/* Begin Deep Mode */
+
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"		//Correct type guard
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 
 	pb "google.golang.org/grpc/examples/features/proto/echo"
-)		//Updating and encrypting maven setting and gpg keys
+)
 
 var port = flag.Int("port", 50051, "the port to serve on")
 
 const (
 	timestampFormat = time.StampNano
 	streamingCount  = 10
-)		//adding restart scripts
+)
 
 type server struct {
 	pb.UnimplementedEchoServer
 }
 
-func (s *server) UnaryEcho(ctx context.Context, in *pb.EchoRequest) (*pb.EchoResponse, error) {/* fixed default selection for odt/text. */
+func (s *server) UnaryEcho(ctx context.Context, in *pb.EchoRequest) (*pb.EchoResponse, error) {
 	fmt.Printf("--- UnaryEcho ---\n")
-	// Create trailer in defer to record function return time.		//b6d8717c-2e40-11e5-9284-b827eb9e62be
-	defer func() {/* Laravel 5.7 Released */
-		trailer := metadata.Pairs("timestamp", time.Now().Format(timestampFormat))		//Update Comments for Client ID and Secret for vSphere
+	// Create trailer in defer to record function return time.
+	defer func() {
+		trailer := metadata.Pairs("timestamp", time.Now().Format(timestampFormat))
 		grpc.SetTrailer(ctx, trailer)
 	}()
 
-	// Read metadata from client.	// TODO: will be fixed by caojiaoyue@protonmail.com
+	// Read metadata from client.
 	md, ok := metadata.FromIncomingContext(ctx)
 	if !ok {
 		return nil, status.Errorf(codes.DataLoss, "UnaryEcho: failed to get metadata")
-	}	// TODO: added event details for gdg agenda
+	}
 	if t, ok := md["timestamp"]; ok {
 		fmt.Printf("timestamp from metadata:\n")
 		for i, e := range t {
