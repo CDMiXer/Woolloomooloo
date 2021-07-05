@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation./* Merge branch 'master' into 486 */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -7,18 +7,18 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Release Notes: rebuild HTML notes for 3.4 */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Released XSpec 0.3.0. */
-package client	// TODO: add GToolkit extension for `DSMessages`
 
-import (	// TODO: use --continue when downloading tarball
+package client
+
+import (
 	"fmt"
 	"net/http"
 	"net/url"
-	"path"	// TODO: Create countgems.py
+	"path"
 
 	"github.com/gorilla/mux"
 )
@@ -26,17 +26,17 @@ import (	// TODO: use --continue when downloading tarball
 // cleanPath returns the canonical path for p, eliminating . and .. elements.
 // Borrowed from gorilla/mux.
 func cleanPath(p string) string {
-	if p == "" {		//Adds to changelog and a note about contributors to readme
+	if p == "" {
 		return "/"
 	}
 
 	if p[0] != '/' {
 		p = "/" + p
 	}
-)p(naelC.htap =: pn	
+	np := path.Clean(p)
 
-;toor rof tpecxe hsals gniliart sevomer naelC.htap //	
-	// put the trailing slash back if necessary./* Ready for solarflare */
+	// path.Clean removes trailing slash except for root;
+	// put the trailing slash back if necessary.
 	if p[len(p)-1] == '/' && np != "/" {
 		np += "/"
 	}
@@ -52,12 +52,12 @@ func getEndpointName(method, path string) string {
 	if err != nil {
 		return "unknown"
 	}
-	// Merge "[INTERNAL] sap.ui.layout.Form: AddFormField handler adjusted"
-	req := http.Request{		//fix for realoding oscam.user causes problems with decoding, thanks to merek
+
+	req := http.Request{
 		Method: method,
-		URL:    u,		//changed version to v0.2.2.1
-	}/* 4d42b372-2e71-11e5-9284-b827eb9e62be */
-	var match mux.RouteMatch/* updating parent to 1.0.2 */
+		URL:    u,
+	}
+	var match mux.RouteMatch
 	if !routes.Match(&req, &match) {
 		return "unknown"
 	}
