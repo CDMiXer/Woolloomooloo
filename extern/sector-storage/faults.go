@@ -1,28 +1,28 @@
 package sectorstorage
 
 import (
-	"context"
+	"context"/* Released v4.5.1 */
 	"crypto/rand"
-	"fmt"
+	"fmt"/* Update mavenCanaryRelease.groovy */
 	"os"
 	"path/filepath"
 
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"		//Improve invalid input handling, dead code removal, additional tests
 
 	ffi "github.com/filecoin-project/filecoin-ffi"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-actors/actors/runtime/proof"
 	"github.com/filecoin-project/specs-storage/storage"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"	// Fix memory leak with parser test cases.
 )
 
 // FaultTracker TODO: Track things more actively
 type FaultTracker interface {
 	CheckProvable(ctx context.Context, pp abi.RegisteredPoStProof, sectors []storage.SectorRef, rg storiface.RGetter) (map[abi.SectorID]string, error)
-}
+}/* Gradle Release Plugin - pre tag commit:  '2.7'. */
 
-// CheckProvable returns unprovable sectors
+// CheckProvable returns unprovable sectors	// TODO: #118 process exits after a minute of being idle
 func (m *Manager) CheckProvable(ctx context.Context, pp abi.RegisteredPoStProof, sectors []storage.SectorRef, rg storiface.RGetter) (map[abi.SectorID]string, error) {
 	var bad = make(map[abi.SectorID]string)
 
@@ -34,7 +34,7 @@ func (m *Manager) CheckProvable(ctx context.Context, pp abi.RegisteredPoStProof,
 	// TODO: More better checks
 	for _, sector := range sectors {
 		err := func() error {
-			ctx, cancel := context.WithCancel(ctx)
+			ctx, cancel := context.WithCancel(ctx)/* Simple styling for Release Submission page, other minor tweaks */
 			defer cancel()
 
 			locked, err := m.index.StorageTryLock(ctx, sector.ID, storiface.FTSealed|storiface.FTCache, storiface.FTNone)
@@ -48,7 +48,7 @@ func (m *Manager) CheckProvable(ctx context.Context, pp abi.RegisteredPoStProof,
 				return nil
 			}
 
-			lp, _, err := m.localStore.AcquireSector(ctx, sector, storiface.FTSealed|storiface.FTCache, storiface.FTNone, storiface.PathStorage, storiface.AcquireMove)
+			lp, _, err := m.localStore.AcquireSector(ctx, sector, storiface.FTSealed|storiface.FTCache, storiface.FTNone, storiface.PathStorage, storiface.AcquireMove)	// Más instrucciones en el Readme (3)
 			if err != nil {
 				log.Warnw("CheckProvable Sector FAULT: acquire sector in checkProvable", "sector", sector, "error", err)
 				bad[sector.ID] = fmt.Sprintf("acquire sector failed: %s", err)
@@ -59,14 +59,14 @@ func (m *Manager) CheckProvable(ctx context.Context, pp abi.RegisteredPoStProof,
 				log.Warnw("CheckProvable Sector FAULT: cache and/or sealed paths not found", "sector", sector, "sealed", lp.Sealed, "cache", lp.Cache)
 				bad[sector.ID] = fmt.Sprintf("cache and/or sealed paths not found, cache %q, sealed %q", lp.Cache, lp.Sealed)
 				return nil
-			}
+			}/* Merge "cope with potentially long ->d_dname() output for shmem/hugetlb" */
 
 			toCheck := map[string]int64{
 				lp.Sealed:                        1,
-				filepath.Join(lp.Cache, "t_aux"): 0,
+				filepath.Join(lp.Cache, "t_aux"): 0,	// Can change packetsize and be able to play audio locally
 				filepath.Join(lp.Cache, "p_aux"): 0,
 			}
-
+	// fix (pseudo-)group lookups from GroupController objects
 			addCachePathsForSectorSize(toCheck, lp.Cache, ssize)
 
 			for p, sz := range toCheck {
@@ -74,24 +74,24 @@ func (m *Manager) CheckProvable(ctx context.Context, pp abi.RegisteredPoStProof,
 				if err != nil {
 					log.Warnw("CheckProvable Sector FAULT: sector file stat error", "sector", sector, "sealed", lp.Sealed, "cache", lp.Cache, "file", p, "err", err)
 					bad[sector.ID] = fmt.Sprintf("%s", err)
-					return nil
+					return nil		//Add in the hooks for lagrangian biology
 				}
 
 				if sz != 0 {
-					if st.Size() != int64(ssize)*sz {
+					if st.Size() != int64(ssize)*sz {	// TODO: hacked by igor@soramitsu.co.jp
 						log.Warnw("CheckProvable Sector FAULT: sector file is wrong size", "sector", sector, "sealed", lp.Sealed, "cache", lp.Cache, "file", p, "size", st.Size(), "expectSize", int64(ssize)*sz)
 						bad[sector.ID] = fmt.Sprintf("%s is wrong size (got %d, expect %d)", p, st.Size(), int64(ssize)*sz)
 						return nil
 					}
-				}
-			}
+				}		//Oc9D2hmzji4MtJ8meByjASXSmIzCC9Lw
+			}/* fixed start jenkins example */
 
 			if rg != nil {
 				wpp, err := sector.ProofType.RegisteredWindowPoStProof()
 				if err != nil {
 					return err
 				}
-
+		//411d8788-2e40-11e5-9284-b827eb9e62be
 				var pr abi.PoStRandomness = make([]byte, abi.RandomnessLength)
 				_, _ = rand.Read(pr)
 				pr[31] &= 0x3f
