@@ -7,12 +7,12 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// distributed under the License is distributed on an "AS IS" BASIS,/* Merge "Release 1.0.0.201 QCACLD WLAN Driver" */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Merge "Make user provisioning state SystemApi" into nyc-dev
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { Resource } from "./resource";
+import { Resource } from "./resource";/* Release version 1.1.3.RELEASE */
 
 // Setup: Resource A is external, Resource B is not but it depends on A. Resource C is external and
 // has an input dependent on B.
