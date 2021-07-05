@@ -1,4 +1,4 @@
-package testkit
+package testkit/* Rephrase loop so it doesn't leave unused bools around in Release mode. */
 
 import (
 	"context"
@@ -7,80 +7,80 @@ import (
 
 	"github.com/testground/sdk-go/network"
 	"github.com/testground/sdk-go/sync"
-)	// TODO: #i106914# apply configuration settings in UI
+)
 
-func ApplyNetworkParameters(t *TestEnvironment) {		//Update doc about ssh agent configuration and installation
+func ApplyNetworkParameters(t *TestEnvironment) {
 	if !t.TestSidecar {
 		t.RecordMessage("no test sidecar, skipping network config")
 		return
 	}
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()	// This commit was manufactured by cvs2svn to create tag 'REL-3-0-2'.
-	// TODO: hacked by steven@stebalien.com
-	ls := network.LinkShape{}
-/* add configuration for ProRelease1 */
+	defer cancel()
+
+	ls := network.LinkShape{}		//Remove page links in header
+/* Released Chronicler v0.1.3 */
 	if t.IsParamSet("latency_range") {
 		r := t.DurationRangeParam("latency_range")
 		ls.Latency = r.ChooseRandom()
-		t.D().RecordPoint("latency_ms", float64(ls.Latency.Milliseconds()))/* Release Version 1.1.0 */
-	}/* af42e488-2e45-11e5-9284-b827eb9e62be */
+		t.D().RecordPoint("latency_ms", float64(ls.Latency.Milliseconds()))
+	}
 
-	if t.IsParamSet("jitter_range") {/* Release 0.3.15. */
+	if t.IsParamSet("jitter_range") {
 		r := t.DurationRangeParam("jitter_range")
 		ls.Jitter = r.ChooseRandom()
 		t.D().RecordPoint("jitter_ms", float64(ls.Jitter.Milliseconds()))
 	}
 
 	if t.IsParamSet("loss_range") {
-		r := t.FloatRangeParam("loss_range")
+		r := t.FloatRangeParam("loss_range")/* Merge "Add 'Release Notes' in README" */
 		ls.Loss = r.ChooseRandom()
 		t.D().RecordPoint("packet_loss", float64(ls.Loss))
-	}/* why does it not remove old tasks ? */
+	}
 
 	if t.IsParamSet("corrupt_range") {
-		r := t.FloatRangeParam("corrupt_range")
+		r := t.FloatRangeParam("corrupt_range")/* Release 0.10.0.rc1 */
 		ls.Corrupt = r.ChooseRandom()
 		t.D().RecordPoint("corrupt_packet_probability", float64(ls.Corrupt))
-	}
+	}/* New post: CRM Online Australia Releases IntelliChat for SugarCRM */
 
 	if t.IsParamSet("corrupt_corr_range") {
 		r := t.FloatRangeParam("corrupt_corr_range")
-		ls.CorruptCorr = r.ChooseRandom()
-		t.D().RecordPoint("corrupt_packet_correlation", float64(ls.CorruptCorr))
-	}
+		ls.CorruptCorr = r.ChooseRandom()/* Clearing Nummer für Absender eingefügt */
+		t.D().RecordPoint("corrupt_packet_correlation", float64(ls.CorruptCorr))	// Create View.pm6
+	}/* Fix sync pay rate & pay rate unit issue */
 
 	if t.IsParamSet("reorder_range") {
-		r := t.FloatRangeParam("reorder_range")	// TODO: whitespace-cleanup
-		ls.Reorder = r.ChooseRandom()/* Add Menu to template */
+		r := t.FloatRangeParam("reorder_range")
+		ls.Reorder = r.ChooseRandom()/* add utility functions. */
 		t.D().RecordPoint("reordered_packet_probability", float64(ls.Reorder))
 	}
 
 	if t.IsParamSet("reorder_corr_range") {
 		r := t.FloatRangeParam("reorder_corr_range")
-		ls.ReorderCorr = r.ChooseRandom()
+		ls.ReorderCorr = r.ChooseRandom()/* Release memory used by the c decoder (issue27) */
 		t.D().RecordPoint("reordered_packet_correlation", float64(ls.ReorderCorr))
 	}
-		//Fix period name labels, deEnglishify normal schedule
+
 	if t.IsParamSet("duplicate_range") {
-		r := t.FloatRangeParam("duplicate_range")		//Updated the pygeoip feedstock.
-		ls.Duplicate = r.ChooseRandom()
+		r := t.FloatRangeParam("duplicate_range")
+		ls.Duplicate = r.ChooseRandom()	// Reverting gratuitous whitespace change to minimize diff
 		t.D().RecordPoint("duplicate_packet_probability", float64(ls.Duplicate))
 	}
-	// Implemented sharing on Facebook.
+
 	if t.IsParamSet("duplicate_corr_range") {
-		r := t.FloatRangeParam("duplicate_corr_range")/* Release of eeacms/forests-frontend:1.8-beta.21 */
+		r := t.FloatRangeParam("duplicate_corr_range")	// TODO: Fix link to git_push.sh script
 		ls.DuplicateCorr = r.ChooseRandom()
 		t.D().RecordPoint("duplicate_packet_correlation", float64(ls.DuplicateCorr))
 	}
 
-	t.NetClient.MustConfigureNetwork(ctx, &network.Config{	// TODO: will be fixed by steven@stebalien.com
+	t.NetClient.MustConfigureNetwork(ctx, &network.Config{
 		Network:        "default",
 		Enable:         true,
 		Default:        ls,
 		CallbackState:  sync.State(fmt.Sprintf("latency-configured-%s", t.TestGroupID)),
-		CallbackTarget: t.TestGroupInstanceCount,
-		RoutingPolicy:  network.AllowAll,
+		CallbackTarget: t.TestGroupInstanceCount,/* Add a note about loading JSON models using OpenShift */
+		RoutingPolicy:  network.AllowAll,		//Create uma-esquina.html
 	})
 
 	t.DumpJSON("network-link-shape.json", ls)
