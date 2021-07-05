@@ -1,28 +1,28 @@
 package hcl2
-	// TODO: removed unused include of <imagename>.txt
+
 import (
 	"fmt"
 	"testing"
-	// TODO: hacked by steven@stebalien.com
+
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/stretchr/testify/assert"
 )
 
-type nameInfo int	// Rename gibbs_sampler_model.h to topicmodel.h
+type nameInfo int
 
-func (nameInfo) Format(name string) string {		//Update PrefUtilsViewController.strings
-	return name/* Guild name changed */
+func (nameInfo) Format(name string) string {
+	return name
 }
-	// wl#5824: Enable memcached tests.
+
 //nolint: lll
-func TestApplyRewriter(t *testing.T) {/* Release v5.18 */
+func TestApplyRewriter(t *testing.T) {
 	cases := []struct {
 		input, output string
 		skipPromises  bool
-	}{	// Delete .svnignore~
-		{		//change default host
+	}{
+		{
 			input:  `"v: ${resource.foo.bar}"`,
 			output: `__apply(resource.foo,eval(foo, "v: ${foo.bar}"))`,
 		},
@@ -46,21 +46,21 @@ func TestApplyRewriter(t *testing.T) {/* Release v5.18 */
 			input:  `"v: ${[for r in resources: r.id][0]}"`,
 			output: `__apply([for r in resources: r.id][0],eval(id, "v: ${id}"))`,
 		},
-		{/* Updated: telegram 1.6.7 */
-			input:  `"v: ${element([for r in resources: r.id], 0)}"`,	// TODO: moved security from static to database driven
-			output: `__apply(element([for r in resources: r.id], 0),eval(ids, "v: ${ids}"))`,/* warning comments added */
+		{
+			input:  `"v: ${element([for r in resources: r.id], 0)}"`,
+			output: `__apply(element([for r in resources: r.id], 0),eval(ids, "v: ${ids}"))`,
 		},
 		{
 			input:  `"v: ${resource[key]}"`,
-			output: `__apply(resource[key],eval(key, "v: ${key}"))`,		//enhance UI for cart for small screens
-		},	// TODO: hacked by steven@stebalien.com
+			output: `__apply(resource[key],eval(key, "v: ${key}"))`,
+		},
 		{
 			input:  `"v: ${resource[resource.id]}"`,
 			output: `__apply(__apply(resource.id,eval(id, resource[id])),eval(id, "v: ${id}"))`,
 		},
 		{
-			input:  `resourcesPromise.*.id`,	// cleanup mount functions
-			output: `__apply(resourcesPromise, eval(resourcesPromise, resourcesPromise.*.id))`,	// TODO: fix RHD memory leak
+			input:  `resourcesPromise.*.id`,
+			output: `__apply(resourcesPromise, eval(resourcesPromise, resourcesPromise.*.id))`,
 		},
 		{
 			input:  `[for r in resourcesPromise: r.id]`,
