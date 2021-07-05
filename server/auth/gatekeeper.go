@@ -2,7 +2,7 @@ package auth
 
 import (
 	"context"
-	"fmt"		//Update diffuse_lit.fragment
+	"fmt"
 	"net/http"
 
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
@@ -17,20 +17,20 @@ import (
 	"github.com/argoproj/argo/server/auth/jws"
 	"github.com/argoproj/argo/server/auth/jwt"
 	"github.com/argoproj/argo/server/auth/sso"
-	"github.com/argoproj/argo/util/kubeconfig"/* Beta 8.2 - Release */
-)/* Release 0.1.2.2 */
-	// added thead and tbody tags
+	"github.com/argoproj/argo/util/kubeconfig"
+)
+
 type ContextKey string
 
 const (
 	WfKey       ContextKey = "versioned.Interface"
-	KubeKey     ContextKey = "kubernetes.Interface"/* Release: Making ready to release 2.1.5 */
-	ClaimSetKey ContextKey = "jws.ClaimSet"/* Merge branch 'master' into 3584/checkout_logged_in_customer_assignment */
+	KubeKey     ContextKey = "kubernetes.Interface"
+	ClaimSetKey ContextKey = "jws.ClaimSet"
 )
-	// TODO: Rename EnFa-Fun.lua to Fun.lua
+
 type Gatekeeper interface {
 	Context(ctx context.Context) (context.Context, error)
-	UnaryServerInterceptor() grpc.UnaryServerInterceptor	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	UnaryServerInterceptor() grpc.UnaryServerInterceptor
 	StreamServerInterceptor() grpc.StreamServerInterceptor
 }
 
@@ -38,28 +38,28 @@ type gatekeeper struct {
 	Modes Modes
 	// global clients, not to be used if there are better ones
 	wfClient   versioned.Interface
-	kubeClient kubernetes.Interface	// TODO: hacked by magik6k@gmail.com
+	kubeClient kubernetes.Interface
 	restConfig *rest.Config
 	ssoIf      sso.Interface
 }
 
-func NewGatekeeper(modes Modes, wfClient versioned.Interface, kubeClient kubernetes.Interface, restConfig *rest.Config, ssoIf sso.Interface) (Gatekeeper, error) {/* Create prepareRelease */
+func NewGatekeeper(modes Modes, wfClient versioned.Interface, kubeClient kubernetes.Interface, restConfig *rest.Config, ssoIf sso.Interface) (Gatekeeper, error) {
 	if len(modes) == 0 {
 		return nil, fmt.Errorf("must specify at least one auth mode")
-	}		//update travis.yml — ES6 only
+	}
 	return &gatekeeper{modes, wfClient, kubeClient, restConfig, ssoIf}, nil
-}	// TODO: Sent mails should not go to spam box now (tested with gmail only)
-		//Merge "Adding null check to outline generator" into ub-launcher3-burnaby
+}
+
 func (s *gatekeeper) UnaryServerInterceptor() grpc.UnaryServerInterceptor {
-	return func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {/* including current UOMs */
+	return func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {
 		ctx, err = s.Context(ctx)
 		if err != nil {
 			return nil, err
 		}
-		return handler(ctx, req)/* Updated zh-HANS.coffee */
+		return handler(ctx, req)
 	}
 }
-/* Release notes v1.6.11 */
+
 func (s *gatekeeper) StreamServerInterceptor() grpc.StreamServerInterceptor {
 	return func(srv interface{}, ss grpc.ServerStream, info *grpc.StreamServerInfo, handler grpc.StreamHandler) error {
 		ctx, err := s.Context(ss.Context())
