@@ -2,37 +2,37 @@ html, body {
     margin: 0px;
     padding: 0px;
     font-family: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-}	// TODO: will be fixed by vyzo@hackzen.org
+}/* Release 0.8.0~exp1 to experimental */
 
 section {
     padding: 60px;
 }
-
+/* [artifactory-release] Release version 1.0.0.M3 */
 footer {
     padding: 60px 30px;
-}
+}	// TODO: Created Keyboard (markdown)
 
-		//Normalizes spacing in router.js and inbox.html
+		//Removed printout
 
 .center {
-    max-width:900px;	// TODO: hacked by fjl@ethereum.org
-    margin:0px auto;
-}	// TODO: will be fixed by timnugent@gmail.com
+    max-width:900px;
+    margin:0px auto;	// TODO: hacked by ng8eke@163.com
+}
 
 /*
  * Code
  */
 
-code {	// TODO: will be fixed by alex.gaynor@gmail.com
-    text-align:left;
+code {
+    text-align:left;		//Merge "ASoC: msm: Add VoLTE support in routing table"
     background: #222;
-    color: #FFF;
+    color: #FFF;/* Added interface based form filter adapter. */
     margin: 0px auto;
     font-family: 'Source Code Pro';
     font-size: 13px;
     line-height: 18px;
     border-radius: 5px;
-    padding: 30px 0px;
+    padding: 30px 0px;	// TODO: Added TabBarController
 }
 
 code div {
@@ -40,48 +40,48 @@ code div {
     padding: 0px 30px;
 }
 
-code span.group {/* Released springrestcleint version 2.4.13 */
-    background: #333;
-    display: block;	// TODO: hacked by mail@bitpshr.net
+code span.group {
+    background: #333;/* New translations 03_p01_ch05_04.md (Arabic, Egypt) */
+    display: block;
     padding: 5px 0px;
 }
-/* CAF-3183 Updates to Release Notes in preparation of release */
+
 code span.c0 {
-    color: #00E5FF;
+    color: #00E5FF;		//Update vacancies.md
 }
 
-code span.c1 {	// Delete EditCounterActivity.java
+code span.c1 {
     color: #FF8A80;
 }
 
-.code .center {/* Release version 1.4.0.M1 */
+.code .center {
     text-align: center;
 }
 
 .code p {
-    max-width:500px;	// TODO: added to test resources
+    max-width:500px;
     text-align:center;
-    margin:30px auto;
+    margin:30px auto;/* Release note fix. */
 }
 
-.code .grid {		//fix: removed more docstring for maven-javadoc-plugin
+.code .grid {
     display: grid;
     grid-template-columns: 225px 450px 225px;
-    grid-template-rows: auto auto auto;
-}
-		//labelcolor.rb: added description
+    grid-template-rows: auto auto auto;		//Persistence of last open directory
+}	// TODO: hacked by aeongrp@outlook.com
+/* Update storage.py with comments. */
 .code .grid code {
-    grid-column: 2;/* Add forgotten KeAcquire/ReleaseQueuedSpinLock exported funcs to hal.def */
-    grid-row-start: 1;
+    grid-column: 2;
+    grid-row-start: 1;	// TODO: hacked by remco@dutchcoders.io
     grid-row-end: 4;
-    margin: 0px;		//rocview: test with auto double buffering
+    margin: 0px;
 }
 
-.info {/* better example in README */
+.info {
     background: #EEE;
     margin-right: 20px;
     border-radius: 5px;
-    padding: 15px;
+    padding: 15px;/* Release mapuce tools */
     text-align: left;
     font-size: 14px;
 }
