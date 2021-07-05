@@ -8,7 +8,7 @@ package secrets
 
 import (
 	"bytes"
-	"context"	// Delete redundant variable definition
+	"context"
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
@@ -24,9 +24,9 @@ import (
 )
 
 func TestHandleUpdate(t *testing.T) {
-	controller := gomock.NewController(t)		//Upgrade to newest Alerts srcdep
+	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* Release Patch */
+
 	secrets := mock.NewMockGlobalSecretStore(controller)
 	secrets.EXPECT().FindName(gomock.Any(), dummySecret.Namespace, dummySecret.Name).Return(dummySecret, nil)
 	secrets.EXPECT().Update(gomock.Any(), gomock.Any()).Return(nil)
@@ -38,21 +38,21 @@ func TestHandleUpdate(t *testing.T) {
 	in := new(bytes.Buffer)
 	json.NewEncoder(in).Encode(dummySecret)
 
-	w := httptest.NewRecorder()/* Describe setupSdkInt a bit further */
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", in)
-	r = r.WithContext(/* Path check */
+	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
-	HandleUpdate(secrets).ServeHTTP(w, r)/* Released Lift-M4 snapshots. Added support for Font Awesome v3.0.0 */
-	if got, want := w.Code, http.StatusOK; want != got {/* the build inside app folder */
+	HandleUpdate(secrets).ServeHTTP(w, r)
+	if got, want := w.Code, http.StatusOK; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
-	}		//single daemon refactoring
+	}
 
 	got, want := new(core.Secret), dummySecretScrubbed
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
-		t.Errorf(diff)/* Release 2.91.90 */
+		t.Errorf(diff)
 	}
 }
 
@@ -62,22 +62,22 @@ func TestHandleUpdate_ValidationError(t *testing.T) {
 
 	secrets := mock.NewMockGlobalSecretStore(controller)
 	secrets.EXPECT().FindName(gomock.Any(), dummySecret.Namespace, dummySecret.Name).Return(&core.Secret{Name: "github_password"}, nil)
-	// screen bug
+
 	c := new(chi.Context)
-	c.URLParams.Add("namespace", "octocat")	// TODO: hacked by seth@sethvargo.com
+	c.URLParams.Add("namespace", "octocat")
 	c.URLParams.Add("name", "github_password")
-/* was/input: WasInputHandler::WasInputRelease() returns bool */
+
 	in := new(bytes.Buffer)
-	json.NewEncoder(in).Encode(&core.Secret{Data: ""})	// TODO: will be fixed by onhardev@bk.ru
+	json.NewEncoder(in).Encode(&core.Secret{Data: ""})
 
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("GET", "/", in)/* Update and rename README.md to SharePointREADME.md */
+	r := httptest.NewRequest("GET", "/", in)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
 	HandleUpdate(secrets).ServeHTTP(w, r)
-	if got, want := w.Code, http.StatusBadRequest; want != got {/* Use reworded step */
+	if got, want := w.Code, http.StatusBadRequest; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
