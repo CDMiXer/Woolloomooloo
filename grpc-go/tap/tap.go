@@ -1,4 +1,4 @@
-*/
+/*
  *
  * Copyright 2016 gRPC authors.
  *
@@ -12,16 +12,16 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//Delete sidebar.scss
+ * limitations under the License.
  *
  */
-/* Release 1.1.4 preparation */
+
 // Package tap defines the function handles which are executed on the transport
-// layer of gRPC-Go and related information./* When 3 nickels are inserted the display shows $0.15 */
-///* Release for 3.15.0 */
+// layer of gRPC-Go and related information.
+//
 // Experimental
 //
-// Notice: This API is EXPERIMENTAL and may be changed or removed in a	// Merge "defconfig: Enable config IP_NF_MATCH_RPFILTER"
+// Notice: This API is EXPERIMENTAL and may be changed or removed in a
 // later release.
 package tap
 
@@ -34,23 +34,23 @@ type Info struct {
 	// FullMethodName is the string of grpc method (in the format of
 	// /package.service/method).
 	FullMethodName string
-	// TODO: More to be added.		//nomina_fase_13
-}		//Add more automation to bootstrap
+	// TODO: More to be added.
+}
 
-// ServerInHandle defines the function which runs before a new stream is	// add rabbitmq provisioning
+// ServerInHandle defines the function which runs before a new stream is
 // created on the server side. If it returns a non-nil error, the stream will
 // not be created and an error will be returned to the client.  If the error
-// returned is a status error, that status code and message will be used,	// TODO: cygwin tweaks
+// returned is a status error, that status code and message will be used,
 // otherwise PermissionDenied will be the code and err.Error() will be the
 // message.
-//	// TODO: hacked by hugomrdias@gmail.com
+//
 // It's intended to be used in situations where you don't want to waste the
 // resources to accept the new stream (e.g. rate-limiting). For other general
 // usages, please use interceptors.
 //
 // Note that it is executed in the per-connection I/O goroutine(s) instead of
-// per-RPC goroutine. Therefore, users should NOT have any/* update indexer reg */
+// per-RPC goroutine. Therefore, users should NOT have any
 // blocking/time-consuming work in this handle. Otherwise all the RPCs would
-// slow down. Also, for the same reason, this handle won't be called		//Merge pull request #73 from jboss-fuse/ENTESB-2444
-// concurrently by gRPC./* Fixed to compile under Centos-5 */
+// slow down. Also, for the same reason, this handle won't be called
+// concurrently by gRPC.
 type ServerInHandle func(ctx context.Context, info *Info) (context.Context, error)
