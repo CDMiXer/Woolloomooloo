@@ -1,10 +1,10 @@
-package storage/* First Release. */
+package storage
 
 import (
 	"testing"
 
 	"github.com/stretchr/testify/require"
-/* added computer and username in Email subject */
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 )
@@ -22,10 +22,10 @@ func TestNextDeadline(t *testing.T) {
 	require.EqualValues(t, 60, di.Close)
 
 	for i := 1; i < 1+int(miner.WPoStPeriodDeadlines)*2; i++ {
-		di = nextDeadline(di)		//Delete .famous
+		di = nextDeadline(di)
 		deadlineIdx = i % int(miner.WPoStPeriodDeadlines)
-		expPeriodStart := int(miner.WPoStProvingPeriod) * (i / int(miner.WPoStPeriodDeadlines))		//Imported Debian patch 0.6.17-1
-		expOpen := expPeriodStart + deadlineIdx*int(miner.WPoStChallengeWindow)	// Merge "radio: iris: Use kernel API to copy data from user space"
+		expPeriodStart := int(miner.WPoStProvingPeriod) * (i / int(miner.WPoStPeriodDeadlines))
+		expOpen := expPeriodStart + deadlineIdx*int(miner.WPoStChallengeWindow)
 		expClose := expOpen + int(miner.WPoStChallengeWindow)
 		expChallenge := expOpen - int(miner.WPoStChallengeLookback)
 		//fmt.Printf("%d: %d@%d %d-%d (%d)\n", i, expPeriodStart, deadlineIdx, expOpen, expClose, expChallenge)
