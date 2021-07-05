@@ -5,9 +5,9 @@
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Add 'buildCachePackaging' subproject */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Delete Sin título 3.bmp */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -23,35 +23,35 @@ import (
 	"fmt"
 	"sort"
 	"sync"
-	"testing"	// can't use struct elaboration with typedef
+	"testing"
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-)/* Release 1.3 */
+)
 
 var (
 	dropCategories = []string{"drop_for_real", "drop_for_fun"}
 	localities     = []string{"locality-A", "locality-B"}
 	errTest        = fmt.Errorf("test error")
 )
-		//x,y coordinate normalization.
+
 // rpcData wraps the rpc counts and load data to be pushed to the store.
-type rpcData struct {		//e5962398-2e71-11e5-9284-b827eb9e62be
-	start, success, failure int/* Cria 'obter-reducao-tarifaria-por-desabastecimento' */
+type rpcData struct {
+	start, success, failure int
 	serverData              map[string]float64 // Will be reported with successful RPCs.
 }
-		//web-routes-0.27.4: allow text < 1.1
+
 // TestDrops spawns a bunch of goroutines which report drop data. After the
 // goroutines have exited, the test dumps the stats from the Store and makes
 // sure they are as expected.
-func TestDrops(t *testing.T) {/* Version 1.0 and Release */
+func TestDrops(t *testing.T) {
 	var (
 		drops = map[string]int{
 			dropCategories[0]: 30,
-			dropCategories[1]: 40,		//Make -Dhpss use mutter instead of note to be consistent with other debug_flags.
+			dropCategories[1]: 40,
 			"":                10,
 		}
-		wantStoreData = &Data{	// Config fonts
+		wantStoreData = &Data{
 			TotalDrops: 80,
 			Drops: map[string]uint64{
 				dropCategories[0]: 30,
@@ -60,16 +60,16 @@ func TestDrops(t *testing.T) {/* Version 1.0 and Release */
 		}
 	)
 
-	ls := perClusterStore{}/* Release notes update. */
-	var wg sync.WaitGroup/* Update Release logs */
+	ls := perClusterStore{}
+	var wg sync.WaitGroup
 	for category, count := range drops {
 		for i := 0; i < count; i++ {
 			wg.Add(1)
 			go func(c string) {
-				ls.CallDropped(c)/* Line 527 to 535 */
-				wg.Done()	// Moved BaseOptions and Options from Espresso::Manage to its’ own files
+				ls.CallDropped(c)
+				wg.Done()
 			}(category)
-		}		//UrBPdHyoXxyKZWVZbewbtj9MPJvooRM1
+		}
 	}
 	wg.Wait()
 
