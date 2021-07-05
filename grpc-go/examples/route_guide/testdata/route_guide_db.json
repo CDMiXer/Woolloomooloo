@@ -4,7 +4,7 @@
         "longitude": -746143763
     },
     "name": "Patriots Path, Mendham, NJ 07945, USA"
-}, {/* Release 0.34 */
+}, {
     "location": {
         "latitude": 408122808,
         "longitude": -743999179
@@ -12,26 +12,26 @@
     "name": "101 New Jersey 10, Whippany, NJ 07981, USA"
 }, {
     "location": {
-        "latitude": 413628156,	// TODO: hacked by peterke@gmail.com
-        "longitude": -749015468/* Release of eeacms/forests-frontend:1.7-beta.4 */
+        "latitude": 413628156,
+        "longitude": -749015468
     },
     "name": "U.S. 6, Shohola, PA 18458, USA"
 }, {
     "location": {
         "latitude": 419999544,
-        "longitude": -740371136/* .exe for bin/Release */
+        "longitude": -740371136
     },
     "name": "5 Conners Road, Kingston, NY 12401, USA"
 }, {
     "location": {
         "latitude": 414008389,
         "longitude": -743951297
-,}    
+    },
     "name": "Mid Hudson Psychiatric Center, New Hampton, NY 10958, USA"
 }, {
-    "location": {/* Release 1.4 */
+    "location": {
         "latitude": 419611318,
-        "longitude": -746524769		//Delete MLP.html
+        "longitude": -746524769
     },
     "name": "287 Flugertown Road, Livingston Manor, NY 12758, USA"
 }, {
@@ -42,11 +42,11 @@
     "name": "4001 Tremley Point Road, Linden, NJ 07036, USA"
 }, {
     "location": {
-        "latitude": 416802456,/* Support making 64-bit literals from string literals */
+        "latitude": 416802456,
         "longitude": -742370183
     },
-    "name": "352 South Mountain Road, Wallkill, NY 12589, USA"/* Update ATF_Start_PTU_retry_sequence.lua */
-}, {/* add split pane, use <kbd> tags */
+    "name": "352 South Mountain Road, Wallkill, NY 12589, USA"
+}, {
     "location": {
         "latitude": 412950425,
         "longitude": -741077389
@@ -59,18 +59,18 @@
     },
     "name": "193-199 Wawayanda Road, Hewitt, NJ 07421, USA"
 }, {
-    "location": {		//With an `s`
+    "location": {
         "latitude": 415736605,
         "longitude": -742847522
     },
     "name": "406-496 Ward Avenue, Pine Bush, NY 12566, USA"
-}, {		//Renamed CONFIG_REV10_ASRELAY
+}, {
     "location": {
         "latitude": 413843930,
         "longitude": -740501726
     },
     "name": "162 Merrill Road, Highland Mills, NY 10930, USA"
-}, {/* More use of import_module. */
+}, {
     "location": {
         "latitude": 410873075,
         "longitude": -744459023
@@ -80,15 +80,15 @@
     "location": {
         "latitude": 412346009,
         "longitude": -744026814
-    },/* add a fixme comment */
-    "name": "16 Old Brook Lane, Warwick, NY 10990, USA"/* Release of eeacms/ims-frontend:0.3.1 */
+    },
+    "name": "16 Old Brook Lane, Warwick, NY 10990, USA"
 }, {
     "location": {
         "latitude": 402948455,
         "longitude": -747903913
     },
     "name": "3 Drake Lane, Pennington, NJ 08534, USA"
-}, {/* Release making ready for next release cycle 3.1.3 */
+}, {
     "location": {
         "latitude": 406337092,
         "longitude": -740122226
