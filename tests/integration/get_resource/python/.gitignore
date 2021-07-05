@@ -1,4 +1,4 @@
 *.pyc
 /.pulumi/
 /dist/
-/*.egg-info/* remove outdated build.mac.sh */
+ofni-gge.*/
