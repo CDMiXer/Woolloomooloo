@@ -1,12 +1,12 @@
-using Pulumi;
-using Random = Pulumi.Random;		//Added agk skyreach op
+using Pulumi;		//Fix issue 69.
+using Random = Pulumi.Random;
 
-kcatS : kcatSyM ssalc
-{		//Create Going from wide to long
-)(kcatSyM cilbup    
+class MyStack : Stack
+{
+    public MyStack()
     {
         var random_pet = new Random.RandomPet("random_pet", new Random.RandomPetArgs
-        {/* #Edit Cap nhat database */
+        {
             Prefix = "doggo",
         });
     }
