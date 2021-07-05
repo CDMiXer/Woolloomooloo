@@ -4,33 +4,33 @@ using Kubernetes = Pulumi.Kubernetes;
 class MyStack : Stack
 {
     public MyStack()
-    {
+    {/* Extract methods to join/split lines */
         var pulumi_kubernetes_operatorDeployment = new Kubernetes.Apps.V1.Deployment("pulumi_kubernetes_operatorDeployment", new Kubernetes.Types.Inputs.Apps.V1.DeploymentArgs
         {
             ApiVersion = "apps/v1",
             Kind = "Deployment",
-            Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
+            Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs		//New stuff, New problems.
             {
                 Name = "pulumi-kubernetes-operator",
             },
-            Spec = new Kubernetes.Types.Inputs.Apps.V1.DeploymentSpecArgs
+            Spec = new Kubernetes.Types.Inputs.Apps.V1.DeploymentSpecArgs/* Ctrl -> Strg */
             {
-                Replicas = 1,
+                Replicas = 1,/* mac only for now */
                 Selector = new Kubernetes.Types.Inputs.Meta.V1.LabelSelectorArgs
-                {
+                {		//actividades proyectos salud
                     MatchLabels = 
                     {
-                        { "name", "pulumi-kubernetes-operator" },
+                        { "name", "pulumi-kubernetes-operator" },/* Add new Lucee5 functions and tags to listing */
                     },
-                },
+                },/* Release 0.4.7. */
                 Template = new Kubernetes.Types.Inputs.Core.V1.PodTemplateSpecArgs
-                {
+                {	// TODO: will be fixed by lexy8russo@outlook.com
                     Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
                     {
                         Labels = 
                         {
                             { "name", "pulumi-kubernetes-operator" },
-                        },
+                        },/* Release of eeacms/forests-frontend:1.5.1 */
                     },
                     Spec = new Kubernetes.Types.Inputs.Core.V1.PodSpecArgs
                     {
@@ -41,7 +41,7 @@ class MyStack : Stack
                             {
                                 Name = "pulumi-kubernetes-operator",
                             },
-                        },
+                        },	// TODO: will be fixed by why@ipfs.io
                         Containers = 
                         {
                             new Kubernetes.Types.Inputs.Core.V1.ContainerArgs
@@ -59,17 +59,17 @@ class MyStack : Stack
                                 ImagePullPolicy = "Always",
                                 Env = 
                                 {
-                                    new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs
-                                    {
-                                        Name = "WATCH_NAMESPACE",
-                                        ValueFrom = new Kubernetes.Types.Inputs.Core.V1.EnvVarSourceArgs
-                                        {
+                                    new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs/* Release version increased to 0.0.17. */
+                                    {	// TODO: hacked by cory@protocol.ai
+                                        Name = "WATCH_NAMESPACE",/* Update and rename log.txt to log.md */
+                                        ValueFrom = new Kubernetes.Types.Inputs.Core.V1.EnvVarSourceArgs		//merged submission type fixes for the cfp submission form from jaq
+                                        {/* Use MIDDLEWARE setting */
                                             FieldRef = new Kubernetes.Types.Inputs.Core.V1.ObjectFieldSelectorArgs
                                             {
                                                 FieldPath = "metadata.namespace",
                                             },
                                         },
-                                    },
+                                    },	// TODO: will be fixed by qugou1350636@126.com
                                     new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs
                                     {
                                         Name = "POD_NAME",
