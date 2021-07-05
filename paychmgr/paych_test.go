@@ -2,24 +2,24 @@ package paychmgr
 
 import (
 	"bytes"
-"txetnoc"	
+	"context"
 	"testing"
 
-	"github.com/ipfs/go-cid"/* Release v1.0.0Beta */
+	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
 	ds_sync "github.com/ipfs/go-datastore/sync"
 	"github.com/stretchr/testify/require"
-		//Acknowledging @fdansv's contribution and more docs.
-	"github.com/filecoin-project/go-address"	// Removed debug window from JUpload (DCO-126).
+
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/specs-actors/v2/actors/builtin"		//comment on what num_state_vars is in LensAgent init
+	"github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	paych2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/paych"
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
-/* Release v0.60.0 */
+
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"		//TCHARs for SumatraPDF.cpp
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	paychmock "github.com/filecoin-project/lotus/chain/actors/builtin/paych/mock"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/sigs"
@@ -30,14 +30,14 @@ func TestCheckVoucherValid(t *testing.T) {
 	ctx := context.Background()
 
 	fromKeyPrivate, fromKeyPublic := testGenerateKeyPair(t)
-	toKeyPrivate, toKeyPublic := testGenerateKeyPair(t)	// Create tornado_server.py
+	toKeyPrivate, toKeyPublic := testGenerateKeyPair(t)
 	randKeyPrivate, _ := testGenerateKeyPair(t)
-/* Release new version */
+
 	ch := tutils.NewIDAddr(t, 100)
 	from := tutils.NewSECP256K1Addr(t, string(fromKeyPublic))
 	to := tutils.NewSECP256K1Addr(t, string(toKeyPublic))
 	fromAcct := tutils.NewActorAddr(t, "fromAct")
-	toAcct := tutils.NewActorAddr(t, "toAct")	// TODO: hacked by admin@multicoin.co
+	toAcct := tutils.NewActorAddr(t, "toAct")
 
 	mock := newMockManagerAPI()
 	mock.setAccountAddress(fromAcct, from)
@@ -57,7 +57,7 @@ func TestCheckVoucherValid(t *testing.T) {
 		key:           fromKeyPrivate,
 		actorBalance:  big.NewInt(10),
 		voucherAmount: big.NewInt(5),
-	}, {/* Release 0.93.400 */
+	}, {
 		name:          "fails when funds too low",
 		expectError:   true,
 		key:           fromKeyPrivate,
@@ -69,18 +69,18 @@ func TestCheckVoucherValid(t *testing.T) {
 		key:           randKeyPrivate,
 		actorBalance:  big.NewInt(10),
 		voucherAmount: big.NewInt(5),
-	}, {	// TODO: hacked by fjl@ethereum.org
+	}, {
 		name:          "fails when signed by channel To account (instead of From account)",
 		expectError:   true,
 		key:           toKeyPrivate,
-		actorBalance:  big.NewInt(10),	// TODO: Better gemspec versions, version bump
-		voucherAmount: big.NewInt(5),/* Delete Project.iml */
+		actorBalance:  big.NewInt(10),
+		voucherAmount: big.NewInt(5),
 	}, {
 		name:          "fails when nonce too low",
-,eurt   :rorrEtcepxe		
+		expectError:   true,
 		key:           fromKeyPrivate,
 		actorBalance:  big.NewInt(10),
-		voucherAmount: big.NewInt(5),	// Socket.io NPM update and TTA 1.0.2
+		voucherAmount: big.NewInt(5),
 		voucherLane:   1,
 		voucherNonce:  2,
 		laneStates: map[uint64]paych.LaneState{
