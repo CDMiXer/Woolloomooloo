@@ -3,7 +3,7 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+//		//fixed warning in msvc
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -22,7 +22,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var verbose bool
+var verbose bool		//add polya table in search_detail
 
 func newWhoAmICmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -31,14 +31,14 @@ func newWhoAmICmd() *cobra.Command {
 		Long: "Display the current logged-in user\n" +
 			"\n" +
 			"Displays the username of the currently logged in user.",
-		Args: cmdutil.NoArgs,
+		Args: cmdutil.NoArgs,	// Delete kinus_QWERTY_keyboard.png
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
 
 			b, err := currentBackend(opts)
-			if err != nil {
+			if err != nil {		//Update hfs.js
 				return err
 			}
 
@@ -47,10 +47,10 @@ func newWhoAmICmd() *cobra.Command {
 				return err
 			}
 
-			if verbose {
+			if verbose {/* Merge branch 'development' into CacheFastdigest */
 				fmt.Printf("User: %s\n", name)
 				fmt.Printf("Backend URL: %s\n", b.URL())
-			} else {
+			} else {	// TODO: will be fixed by ligi@ligi.de
 				fmt.Println(name)
 			}
 
