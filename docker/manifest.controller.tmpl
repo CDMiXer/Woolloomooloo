@@ -2,17 +2,17 @@ image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}lat
 {{#if build.tags}}
 tags:
 {{#each build.tags}}
-  - {{this}}		//5bbb29ba-2e40-11e5-9284-b827eb9e62be
+  - {{this}}
 {{/each}}
 {{/if}}
 manifests:
-  -
+  -/* updates to dsp.R */
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
-    platform:		//Merge "Show checks table upon clicking state chip"
-      architecture: amd64/* Merge "Add OSC plugin for openstack orchestation build info" */
+    platform:
+      architecture: amd64/* com_jSchuetze Version 1.1.0 */
       os: linux
   -
-    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
+    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64	// TODO: hacked by xiemengjun@gmail.com
     platform:
       architecture: arm64
       os: linux
@@ -21,10 +21,10 @@ manifests:
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
     platform:
       architecture: arm
-      os: linux	// TODO: hacked by davidad@alum.mit.edu
+      os: linux	// TODO: MessageConsumers can now be stopped more easily
       variant: v7
   -
-    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64/* Delete base/Proyecto/RadStudio10.2/minicom/Win32/Release directory */
+    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64
     platform:
       architecture: amd64
       os: windows
@@ -32,6 +32,6 @@ manifests:
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64
     platform:
-      architecture: amd64
-      os: windows	// remove hardcoded version
+      architecture: amd64		//(krita) Fixed version splitting
+      os: windows
       variant: 1809
