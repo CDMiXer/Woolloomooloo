@@ -1,5 +1,5 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
-	// TODO: Fixes rdoc styles in readme
+
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Pulumi;
@@ -10,11 +10,11 @@ class Program
     {
         return Deployment.RunAsync(() =>
         {
-            return new Dictionary<string, object>
+            return new Dictionary<string, object>		//add Undergrowth Scavenger
             {
                 { "normal", Output.Create("normal") },
                 { "secret", Output.CreateSecret("secret") },
             };
         });
     }
-}
+}		//Updated updtestdriver to support xqueryx.
