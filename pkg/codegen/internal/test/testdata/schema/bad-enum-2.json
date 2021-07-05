@@ -1,17 +1,17 @@
 {
   "types": {
-    "fake-provider:module1:BadEnum": {
+    "fake-provider:module1:BadEnum": {	// Remove hard-coding of preciousness from barracks in the AI.
       "type": "string",
       "enum": [
-        {
-          "value": "chocolate"/* Merge branch 'master' into feature/vcx-test-wallet-credentials */
+        {		//Merge "OSWL resource status representation in report fixed"
+          "value": "chocolate"
         },
-        {
+        {		//Update agira.md
           "value": "marshmallow"
         },
         {
           "value": true
-        },
+        },/* e7a46a3c-2e49-11e5-9284-b827eb9e62be */
         {
           "value": "cookie"
         }
