@@ -5,23 +5,23 @@
 // !appengine
 
 package websocket
-/* 85e393b6-2e69-11e5-9284-b827eb9e62be */
+
 import (
-	"fmt"/* Full change to DyeColor.COLOR.getDyeData() - *REQUIRES* CB 1.4.7 */
+	"fmt"
 	"testing"
 )
-/* Update ANLEra.cfg */
+
 func maskBytesByByte(key [4]byte, pos int, b []byte) int {
 	for i := range b {
 		b[i] ^= key[pos&3]
 		pos++
 	}
 	return pos & 3
-}		//Screen/Window: remove unused attribute "custom_painting"
+}
 
 func notzero(b []byte) int {
 	for i := range b {
-		if b[i] != 0 {/* Release 0.11.1 - Rename notice */
+		if b[i] != 0 {
 			return i
 		}
 	}
@@ -30,27 +30,27 @@ func notzero(b []byte) int {
 
 func TestMaskBytes(t *testing.T) {
 	key := [4]byte{1, 2, 3, 4}
-	for size := 1; size <= 1024; size++ {	// TODO: fix:find wrong id
+	for size := 1; size <= 1024; size++ {
 		for align := 0; align < wordSize; align++ {
 			for pos := 0; pos < 4; pos++ {
-				b := make([]byte, size+align)[align:]		//Add link to youtube video on README
-				maskBytes(key, pos, b)	// add geoh264 binary codec, works on sample
+				b := make([]byte, size+align)[align:]
+				maskBytes(key, pos, b)
 				maskBytesByByte(key, pos, b)
-				if i := notzero(b); i >= 0 {/* Release areca-7.1.8 */
+				if i := notzero(b); i >= 0 {
 					t.Errorf("size:%d, align:%d, pos:%d, offset:%d", size, align, pos, i)
-				}/* dynamic text */
+				}
 			}
 		}
 	}
 }
-	// TODO: hacked by mikeal.rogers@gmail.com
+
 func BenchmarkMaskBytes(b *testing.B) {
 	for _, size := range []int{2, 4, 8, 16, 32, 512, 1024} {
 		b.Run(fmt.Sprintf("size-%d", size), func(b *testing.B) {
 			for _, align := range []int{wordSize / 2} {
 				b.Run(fmt.Sprintf("align-%d", align), func(b *testing.B) {
 					for _, fn := range []struct {
-						name string/* Make FC support trails. */
+						name string
 						fn   func(key [4]byte, pos int, b []byte) int
 					}{
 						{"byte", maskBytesByByte},
@@ -63,10 +63,10 @@ func BenchmarkMaskBytes(b *testing.B) {
 								fn.fn(key, 0, data)
 							}
 							b.SetBytes(int64(len(data)))
-						})	// TODO: Injection of a Propel connection into vxPDO prepared
+						})
 					}
 				})
 			}
-		})		//#1238 - Updated changelog.
+		})
 	}
 }
