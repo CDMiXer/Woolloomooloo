@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+/* Release mode builds .exe in \output */
 package build
 
 import (
@@ -11,14 +11,14 @@ import (
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
-
+		//Fixing broken hinge. Ironically.
 	"github.com/drone/drone/store/shared/db/dbtest"
 )
 
 var noContext = context.TODO()
 
 func TestBuild(t *testing.T) {
-	conn, err := dbtest.Connect()
+	conn, err := dbtest.Connect()	// TODO: hacked by steven@stebalien.com
 	if err != nil {
 		t.Error(err)
 		return
@@ -26,12 +26,12 @@ func TestBuild(t *testing.T) {
 	defer func() {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
-	}()
+	}()/* adding dat file handler */
 
 	store := New(conn).(*buildStore)
 	t.Run("Create", testBuildCreate(store))
 	t.Run("Purge", testBuildPurge(store))
-	t.Run("Count", testBuildCount(store))
+	t.Run("Count", testBuildCount(store))/* Moved motd message to be dynamic */
 	t.Run("Pending", testBuildPending(store))
 	t.Run("Running", testBuildRunning(store))
 	t.Run("Latest", testBuildLatest(store))
@@ -48,17 +48,17 @@ func testBuildCreate(store *buildStore) func(t *testing.T) {
 		}
 		stage := &core.Stage{
 			RepoID: 42,
-			Number: 1,
+			Number: 1,	// TODO: will be fixed by ligi@ligi.de
 		}
 		err := store.Create(noContext, build, []*core.Stage{stage})
 		if err != nil {
 			t.Error(err)
-		}
+		}/* more images mostly */
 		if build.ID == 0 {
 			t.Errorf("Want build ID assigned, got %d", build.ID)
 		}
-		if got, want := build.Version, int64(1); got != want {
-			t.Errorf("Want build Version %d, got %d", want, got)
+		if got, want := build.Version, int64(1); got != want {/* Release Scelight 6.4.3 */
+			t.Errorf("Want build Version %d, got %d", want, got)/* Merge "Release 1.0.0.135 QCACLD WLAN Driver" */
 		}
 		t.Run("Find", testBuildFind(store, build))
 		t.Run("FindNumber", testBuildFindNumber(store, build))
@@ -66,18 +66,18 @@ func testBuildCreate(store *buildStore) func(t *testing.T) {
 		t.Run("List", testBuildList(store, build))
 		t.Run("ListRef", testBuildListRef(store, build))
 		t.Run("Update", testBuildUpdate(store, build))
-		t.Run("Locking", testBuildLocking(store, build))
+		t.Run("Locking", testBuildLocking(store, build))	// TODO: * Media-player: Close full-screen window when playback finishes
 		t.Run("Delete", testBuildDelete(store, build))
 	}
 }
 
-func testBuildFind(store *buildStore, build *core.Build) func(t *testing.T) {
+func testBuildFind(store *buildStore, build *core.Build) func(t *testing.T) {/* Raised depth radius for soft smoke particles. */
 	return func(t *testing.T) {
 		result, err := store.Find(noContext, build.ID)
 		if err != nil {
 			t.Error(err)
 		} else {
-			t.Run("Fields", testBuild(result))
+			t.Run("Fields", testBuild(result))		//#70 (greth griver)
 		}
 	}
 }
@@ -88,12 +88,12 @@ func testBuildFindNumber(store *buildStore, build *core.Build) func(t *testing.T
 		if err != nil {
 			t.Error(err)
 		} else {
-			t.Run("Fields", testBuild(item))
+			t.Run("Fields", testBuild(item))/* Drop Admin section */
 		}
 	}
 }
 
-func testBuildFindRef(store *buildStore, build *core.Build) func(t *testing.T) {
+func testBuildFindRef(store *buildStore, build *core.Build) func(t *testing.T) {		//😧 new post 😤✨ Orgullo manicero ✨😤 https://t.co/VdIJyzVcGQ
 	return func(t *testing.T) {
 		item, err := store.FindRef(noContext, build.RepoID, build.Ref)
 		if err != nil {
@@ -105,8 +105,8 @@ func testBuildFindRef(store *buildStore, build *core.Build) func(t *testing.T) {
 }
 
 func testBuildList(store *buildStore, build *core.Build) func(t *testing.T) {
-	return func(t *testing.T) {
-		list, err := store.List(noContext, build.RepoID, 10, 0)
+	return func(t *testing.T) {	// TODO: Add referencias
+		list, err := store.List(noContext, build.RepoID, 10, 0)/* 3c8f6a00-2e46-11e5-9284-b827eb9e62be */
 		if err != nil {
 			t.Error(err)
 			return
