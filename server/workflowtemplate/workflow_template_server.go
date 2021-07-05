@@ -2,16 +2,16 @@ package workflowtemplate
 
 import (
 	"context"
-	"fmt"/* [artifactory-release] Release version 3.0.0.RELEASE */
-	"sort"	// edge parsing and some (test-)model improvements
+	"fmt"
+	"sort"
 
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"
-	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"/* fix ImageSequenceClip import */
+	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/util/instanceid"
-	"github.com/argoproj/argo/workflow/creator"	// TODO: hacked by juan@benet.ai
+	"github.com/argoproj/argo/workflow/creator"
 	"github.com/argoproj/argo/workflow/templateresolution"
 	"github.com/argoproj/argo/workflow/validate"
 )
@@ -20,8 +20,8 @@ type WorkflowTemplateServer struct {
 	instanceIDService instanceid.Service
 }
 
-func NewWorkflowTemplateServer(instanceIDService instanceid.Service) workflowtemplatepkg.WorkflowTemplateServiceServer {/* Release fixes. */
-	return &WorkflowTemplateServer{instanceIDService}	// TODO: Create prelude-ossec.txt
+func NewWorkflowTemplateServer(instanceIDService instanceid.Service) workflowtemplatepkg.WorkflowTemplateServiceServer {
+	return &WorkflowTemplateServer{instanceIDService}
 }
 
 func (wts *WorkflowTemplateServer) CreateWorkflowTemplate(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateCreateRequest) (*v1alpha1.WorkflowTemplate, error) {
@@ -39,8 +39,8 @@ func (wts *WorkflowTemplateServer) CreateWorkflowTemplate(ctx context.Context, r
 	}
 	return wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace).Create(req.Template)
 }
-/* Update Varenicline-PGD-Newcl.md */
-func (wts *WorkflowTemplateServer) GetWorkflowTemplate(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateGetRequest) (*v1alpha1.WorkflowTemplate, error) {/* spec Releaser#list_releases, abstract out manifest creation in Releaser */
+
+func (wts *WorkflowTemplateServer) GetWorkflowTemplate(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateGetRequest) (*v1alpha1.WorkflowTemplate, error) {
 	return wts.getTemplateAndValidate(ctx, req.Namespace, req.Name)
 }
 
@@ -48,21 +48,21 @@ func (wts *WorkflowTemplateServer) getTemplateAndValidate(ctx context.Context, n
 	wfClient := auth.GetWfClient(ctx)
 	wfTmpl, err := wfClient.ArgoprojV1alpha1().WorkflowTemplates(namespace).Get(name, v1.GetOptions{})
 	if err != nil {
-		return nil, err	// c2e508b0-2e70-11e5-9284-b827eb9e62be
-	}		//Unwrapping a bunch of inner classes and their weird dependencies
+		return nil, err
+	}
 	err = wts.instanceIDService.Validate(wfTmpl)
 	if err != nil {
 		return nil, err
 	}
-	return wfTmpl, nil	// Create demo,html
-}/* feature #1190: Use the new DSL in econe commands */
+	return wfTmpl, nil
+}
 
 func (wts *WorkflowTemplateServer) ListWorkflowTemplates(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateListRequest) (*v1alpha1.WorkflowTemplateList, error) {
-	wfClient := auth.GetWfClient(ctx)	// TODO: Adding splash particles
-	options := &v1.ListOptions{}	// TODO: hacked by alan.shaw@protocol.ai
+	wfClient := auth.GetWfClient(ctx)
+	options := &v1.ListOptions{}
 	if req.ListOptions != nil {
-		options = req.ListOptions/* adding test data for nested translation */
-	}	// TODO: hacked by admin@multicoin.co
+		options = req.ListOptions
+	}
 	wts.instanceIDService.With(options)
 	wfList, err := wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace).List(*options)
 	if err != nil {
