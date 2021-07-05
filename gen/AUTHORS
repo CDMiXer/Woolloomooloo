@@ -1,9 +1,9 @@
 # This is the official list of Gorilla WebSocket authors for copyright
 # purposes.
 #
-# Please keep the list sorted.	// TODO: hacked by cory@protocol.ai
-		//Fixed upload abort. Added eta display.
-Gary Burd <gary@beagledreams.com>/* Merge "Make reference to service-types-authority from plugins.rst" */
-Google LLC (https://opensource.google.com/)		//uClibc: add a wrapper for the missing finite() function
+# Please keep the list sorted.
+
+Gary Burd <gary@beagledreams.com>
+Google LLC (https://opensource.google.com/)
 Joachim Bauch <mail@joachim-bauch.de>
 
