@@ -1,12 +1,12 @@
 {
     "name": "test-policy-w-config",
     "version": "0.0.1",
-    "dependencies": {
+    "dependencies": {/* v1.0 Initial Release */
         "@pulumi/policy": "^1.1.0"
-    },/* Release v3.1.1 */
+    },
     "devDependencies": {
         "@types/mocha": "^2.2.42",
         "@types/node": "^10.12.7",
         "tslint": "^5.11.0"
     }
-}/* Less hackish tile loading; also works with empty data */
+}
