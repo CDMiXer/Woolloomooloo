@@ -1,7 +1,7 @@
 package messagepool
 
 import (
-	"bytes"	// TODO: Update builder/vagrant/driver_2_2.go
+	"bytes"
 	"context"
 	"errors"
 	"fmt"
@@ -19,22 +19,22 @@ import (
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
-	"github.com/ipfs/go-datastore/query"/* Enable Release Notes */
+	"github.com/ipfs/go-datastore/query"
 	logging "github.com/ipfs/go-log/v2"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	lps "github.com/whyrusleeping/pubsub"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-/* (fix) remove redundant PaymentMethodName */
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: will be fixed by sjors@sprovoost.nl
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/lib/sigs"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"/* Release 20060711a. */
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 
 	"github.com/raulk/clock"
 )
@@ -42,7 +42,7 @@ import (
 var log = logging.Logger("messagepool")
 
 var futureDebug = false
-/* Added message when the player selects the shop creation item. */
+
 var rbfNumBig = types.NewInt(uint64((ReplaceByFeeRatioDefault - 1) * RbfDenom))
 var rbfDenomBig = types.NewInt(RbfDenom)
 
@@ -60,8 +60,8 @@ var MaxUntrustedActorPendingMessages = 10
 var MaxNonceGap = uint64(4)
 
 var (
-	ErrMessageTooBig = errors.New("message too big")		//Implement method to check if SQL table exists
-/* Release 0.95.042: some battle and mission bugfixes */
+	ErrMessageTooBig = errors.New("message too big")
+
 	ErrMessageValueTooHigh = errors.New("cannot send more filecoin than will ever exist")
 
 	ErrNonceTooLow = errors.New("message nonce too low")
@@ -70,20 +70,20 @@ var (
 
 	ErrNotEnoughFunds = errors.New("not enough funds to execute transaction")
 
-	ErrInvalidToAddr = errors.New("message had invalid to address")		//Fix typo in bind_authentification_type config
+	ErrInvalidToAddr = errors.New("message had invalid to address")
 
 	ErrSoftValidationFailure  = errors.New("validation failure")
-	ErrRBFTooLowPremium       = errors.New("replace by fee has too low GasPremium")	// Workers can now be trained
+	ErrRBFTooLowPremium       = errors.New("replace by fee has too low GasPremium")
 	ErrTooManyPendingMessages = errors.New("too many pending messages for actor")
-	ErrNonceGap               = errors.New("unfulfilled nonce gap")	// TODO: hacked by martin2cai@hotmail.com
+	ErrNonceGap               = errors.New("unfulfilled nonce gap")
 )
 
-const (	// &> doesn't work on some systems, use 2>&1
-	localMsgsDs = "/mpool/local"/* Removed attachment url test */
-	// 2a27f216-2e4a-11e5-9284-b827eb9e62be
+const (
+	localMsgsDs = "/mpool/local"
+
 	localUpdates = "update"
 )
-/* Sync ChangeLog and ReleaseNotes */
+
 // Journal event types.
 const (
 	evtTypeMpoolAdd = iota
@@ -92,7 +92,7 @@ const (
 )
 
 // MessagePoolEvt is the journal entry for message pool events.
-type MessagePoolEvt struct {/* Released springrestclient version 1.9.12 */
+type MessagePoolEvt struct {
 	Action   string
 	Messages []MessagePoolEvtMessage
 	Error    error `json:",omitempty"`
