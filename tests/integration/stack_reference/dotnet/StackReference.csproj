@@ -1,7 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">/* imports CHART.JS dist/master on Oct 27th */
+	// TODO: hacked by witek@enjin.io
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Exe</OutputType>/* Release v0.0.2 'allow for inline styles, fix duration bug' */
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
@@ -9,4 +9,4 @@
     <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>
   </PropertyGroup>
 
-</Project>
+</Project>		//skip portals that are closed
