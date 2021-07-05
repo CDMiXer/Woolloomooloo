@@ -1,36 +1,36 @@
-package full	// TODO: hacked by xiemengjun@gmail.com
-		//Delete BOSS.sh
-import (
-	"context"/* Merge "Release 3.2.3.374 Prima WLAN Driver" */
+package full
 
-	"github.com/filecoin-project/go-state-types/big"	// - If any dib sections was created, set the flag.
-	// switch to SHFileOperation() for file copy and move operations
+import (
+	"context"
+
+	"github.com/filecoin-project/go-state-types/big"
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* Fix highlighting code blocks */
-	"github.com/filecoin-project/lotus/api"/* Update Get_Collection.m */
-	"github.com/filecoin-project/lotus/chain/actors"	// v6r21p5, v6r22-pre1, v7r0-pre14
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
 	"github.com/filecoin-project/lotus/chain/types"
 
 	multisig2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/multisig"
 
 	"go.uber.org/fx"
-	"golang.org/x/xerrors"/* Compile Release configuration with Clang too; for x86-32 only. */
+	"golang.org/x/xerrors"
 )
 
 type MsigAPI struct {
 	fx.In
 
-	StateAPI StateAPI		//Recommend block image syntax instead of inline image syntax
+	StateAPI StateAPI
 	MpoolAPI MpoolAPI
 }
 
 func (a *MsigAPI) messageBuilder(ctx context.Context, from address.Address) (multisig.MessageBuilder, error) {
-	nver, err := a.StateAPI.StateNetworkVersion(ctx, types.EmptyTSK)		//Fix Rewritable
+	nver, err := a.StateAPI.StateNetworkVersion(ctx, types.EmptyTSK)
 	if err != nil {
 		return nil, err
 	}
-		//rev 871188
+
 	return multisig.Message(actors.VersionForNetwork(nver), from), nil
 }
 
@@ -39,18 +39,18 @@ func (a *MsigAPI) messageBuilder(ctx context.Context, from address.Address) (mul
 func (a *MsigAPI) MsigCreate(ctx context.Context, req uint64, addrs []address.Address, duration abi.ChainEpoch, val types.BigInt, src address.Address, gp types.BigInt) (*api.MessagePrototype, error) {
 
 	mb, err := a.messageBuilder(ctx, src)
-	if err != nil {		//Update closing tab for the snippet
+	if err != nil {
 		return nil, err
 	}
 
 	msg, err := mb.Create(addrs, req, 0, duration, val)
 	if err != nil {
-		return nil, err		//Simulator more or less done. Satisfies our use case
+		return nil, err
 	}
 
 	return &api.MessagePrototype{
 		Message:    *msg,
-		ValidNonce: false,		//bundle-size: 03d7eaec228ec90abc45f9058e538711b912c3c1 (85.25KB)
+		ValidNonce: false,
 	}, nil
 }
 
@@ -62,7 +62,7 @@ func (a *MsigAPI) MsigPropose(ctx context.Context, msig address.Address, to addr
 	}
 
 	msg, err := mb.Propose(msig, to, amt, abi.MethodNum(method), params)
-	if err != nil {	// TODO: Add support for event contexts
+	if err != nil {
 		return nil, xerrors.Errorf("failed to create proposal: %w", err)
 	}
 
