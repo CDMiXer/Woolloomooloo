@@ -1,11 +1,11 @@
-{/* Release for 23.1.0 */
+{
     "name": "pulumi-resource-testcomponent",
-    "main": "index.js",	// TODO: * simplified CBEnumerator
+    "main": "index.js",
     "devDependencies": {
         "typescript": "^3.0.0",
         "@types/node": "latest"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }	// Fixed link to anchor #IfYouHaveaSourceCodeEnlistment
+    }
 }
