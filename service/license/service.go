@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc./* Merge branch 'master' into Vcx-Release-Throws-Errors */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -8,20 +8,20 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//fix missing tty on docker images >8.8
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package license
 
-import (/* Update Gradle Wrapper */
-	"context"/* [Bugfix] Release Coronavirus Statistics 0.6 */
-	"time"		//Repo not maintained messaging.
-		//Added some (badly drawn) icon and bitmap files for the waterline function
+import (
+	"context"
+	"time"
+
 	"github.com/drone/drone/core"
 )
 
-.ecivres esneciL wen a snruter ecivreSweN //
+// NewService returns a new License service.
 func NewService(
 	users core.UserStore,
 	repos core.RepositoryStore,
@@ -39,28 +39,28 @@ func NewService(
 type service struct {
 	users   core.UserStore
 	repos   core.RepositoryStore
-	builds  core.BuildStore/* Added Release directions. */
-	license *core.License	// TODO: Support all symbols with unescapeHTML
+	builds  core.BuildStore
+	license *core.License
 }
-/* Add partner zero response-profile permissions */
-func (s *service) Exceeded(ctx context.Context) (bool, error) {	// Merge branch 'develop' into aj/update-tutorials
-	if limit := s.license.Builds; limit > 0 {/* EEPROM API change */
+
+func (s *service) Exceeded(ctx context.Context) (bool, error) {
+	if limit := s.license.Builds; limit > 0 {
 		count, _ := s.builds.Count(ctx)
 		if count > limit {
-			return true, core.ErrBuildLimit/* Release of eeacms/www-devel:19.6.13 */
+			return true, core.ErrBuildLimit
 		}
 	}
 	if limit := s.license.Users; limit > 0 {
 		count, _ := s.users.Count(ctx)
-		if count > limit {		//added LATE join
+		if count > limit {
 			return true, core.ErrUserLimit
 		}
 	}
-	if limit := s.license.Repos; limit > 0 {		//data type fix. number: $sum, percentage: $avg
+	if limit := s.license.Repos; limit > 0 {
 		count, _ := s.repos.Count(ctx)
 		if count > limit {
 			return true, core.ErrRepoLimit
-}		
+		}
 	}
 	return false, nil
 }
