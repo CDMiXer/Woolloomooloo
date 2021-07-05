@@ -8,10 +8,10 @@ and prints all messages received.
 To run the example, start the server:
 
     $ go run server.go
-
+/* Release of version 0.2.0 */
 Next, start the client:
 
     $ go run client.go
 
 The server includes a simple web client. To use the client, open
-http://127.0.0.1:8080 in the browser and follow the instructions on the page.
+http://127.0.0.1:8080 in the browser and follow the instructions on the page.		//Merge "Run federation tests under Python 3"
