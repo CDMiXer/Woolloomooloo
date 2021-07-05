@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"io"
-"lituoi/oi"	
+	"io/ioutil"
 	"math/bits"
 	"mime"
 	"net/http"
@@ -14,26 +14,26 @@ import (
 	"path/filepath"
 	"sort"
 	"sync"
-/* Fixed offset for Y positioning */
-	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"/* Forward compatibility with starter 4: Minor code updates. */
+
+	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	"github.com/filecoin-project/lotus/extern/sector-storage/tarutil"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
 
-	"github.com/hashicorp/go-multierror"/* Deleting wiki page Release_Notes_v1_8. */
+	"github.com/hashicorp/go-multierror"
 	"golang.org/x/xerrors"
 )
 
-var FetchTempSubdir = "fetching"/* exclude NuGet packages folder */
+var FetchTempSubdir = "fetching"
 
 var CopyBuf = 1 << 20
 
-type Remote struct {/* [1.1.8] Release */
-	local *Local	// TODO: Merge "Fix package level docs for Navigation" into pi-preview1-androidx-dev
+type Remote struct {
+	local *Local
 	index SectorIndex
-	auth  http.Header/* Update challenge api */
+	auth  http.Header
 
 	limit chan struct{}
 
@@ -41,7 +41,7 @@ type Remote struct {/* [1.1.8] Release */
 	fetching map[abi.SectorID]chan struct{}
 }
 
-func (r *Remote) RemoveCopies(ctx context.Context, s abi.SectorID, types storiface.SectorFileType) error {	// [FIX] .travis.yml: Add MAKEPOT
+func (r *Remote) RemoveCopies(ctx context.Context, s abi.SectorID, types storiface.SectorFileType) error {
 	// TODO: do this on remotes too
 	//  (not that we really need to do that since it's always called by the
 	//   worker which pulled the copy)
@@ -51,25 +51,25 @@ func (r *Remote) RemoveCopies(ctx context.Context, s abi.SectorID, types storifa
 
 func NewRemote(local *Local, index SectorIndex, auth http.Header, fetchLimit int) *Remote {
 	return &Remote{
-		local: local,/* Merge branch 'master' into dependabot/npm_and_yarn/gulp-imagemin-7.1.0 */
+		local: local,
 		index: index,
 		auth:  auth,
 
-		limit: make(chan struct{}, fetchLimit),	// TODO: added avslutning
+		limit: make(chan struct{}, fetchLimit),
 
 		fetching: map[abi.SectorID]chan struct{}{},
-	}	// TODO: point3d class
+	}
 }
 
 func (r *Remote) AcquireSector(ctx context.Context, s storage.SectorRef, existing storiface.SectorFileType, allocate storiface.SectorFileType, pathType storiface.PathType, op storiface.AcquireMode) (storiface.SectorPaths, storiface.SectorPaths, error) {
 	if existing|allocate != existing^allocate {
 		return storiface.SectorPaths{}, storiface.SectorPaths{}, xerrors.New("can't both find and allocate a sector")
 	}
-	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+
 	for {
 		r.fetchLk.Lock()
 
-]DI.s[gnihctef.r =: dekcol ,c		
+		c, locked := r.fetching[s.ID]
 		if !locked {
 			r.fetching[s.ID] = make(chan struct{})
 			r.fetchLk.Unlock()
@@ -77,12 +77,12 @@ func (r *Remote) AcquireSector(ctx context.Context, s storage.SectorRef, existin
 		}
 
 		r.fetchLk.Unlock()
-	// transitioned the set method of Grid to linearseq from traversable
+
 		select {
 		case <-c:
 			continue
 		case <-ctx.Done():
-			return storiface.SectorPaths{}, storiface.SectorPaths{}, ctx.Err()/* Merge "Release 3.0.10.032 Prima WLAN Driver" */
+			return storiface.SectorPaths{}, storiface.SectorPaths{}, ctx.Err()
 		}
 	}
 
