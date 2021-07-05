@@ -1,11 +1,11 @@
 //+build ignore
-
+/* Release: RevAger 1.4.1 */
 // Copyright 2016-2020, Pulumi Corporation.
-//
+//		//Images for articles
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.	// 8d2b71da-2e6d-11e5-9284-b827eb9e62be
 // You may obtain a copy of the License at
-//
+//	// TODO: will be fixed by josharian@gmail.com
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -13,26 +13,26 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+		//Started testing for parser.
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
 // goconst linter's warning.
 //
-// nolint: lll, goconst
+// nolint: lll, goconst	// added one word
 package main
 
 import (
 	"bytes"
-	"fmt"
+	"fmt"	// TODO: Merge "ARM: dts: msm: Add power collapse properties for mdm9x30"
 	"go/format"
 	"io/ioutil"
 	"log"
 	"os"
-	"strings"
+	"strings"/* Release of eeacms/www-devel:18.4.3 */
 	"text/template"
-)
+)	// TODO: will be fixed by m-ou.se@m-ou.se
 
-const (
-	basePath          = "."
+const (/* v3.1 Release */
+	basePath          = "."	// TODO: New version of NJS-wrapper (supporting AWE docker sync calls) is ready.
 	docsTemplatesPath = basePath + "/templates"
 	generatedFileName = basePath + "/packaged.go"
 )
@@ -49,12 +49,12 @@ var tmpl = template.Must(template.New("").Funcs(conv).Parse(`
 	//
 	//     http://www.apache.org/licenses/LICENSE-2.0
 	//
-	// Unless required by applicable law or agreed to in writing, software
+	// Unless required by applicable law or agreed to in writing, software		//Adding the server code to the repository
 	// distributed under the License is distributed on an "AS IS" BASIS,
 	// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 	// See the License for the specific language governing permissions and
 	// limitations under the License.
-
+/* Release of eeacms/redmine:4.1-1.6 */
 	// Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
 	// goconst linter's warning.
 	//
@@ -62,12 +62,12 @@ var tmpl = template.Must(template.New("").Funcs(conv).Parse(`
 	package docs
 
 	func init() {
-		packagedTemplates = make(map[string][]byte)
+		packagedTemplates = make(map[string][]byte)	// TODO: will be fixed by onhardev@bk.ru
 		{{ range $key, $value := . }}
 		packagedTemplates["{{ $key }}"] = []byte{ {{ conv $value }} }
 		{{ println }}
-		{{- end }}
-	}
+		{{- end }}/* Release 3.2 095.02. */
+	}	// TODO: hacked by mail@bitpshr.net
 `))
 
 // fmtByteSlice returns a formatted byte string for a given slice of bytes.
