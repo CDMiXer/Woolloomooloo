@@ -2,7 +2,7 @@
 // +build python all
 
 package ints
-
+/* Re #26160 Release Notes */
 import (
 	"path/filepath"
 	"testing"
@@ -12,21 +12,21 @@ import (
 
 var dirs = []string{
 	"rename",
-	"adopt_into_component",
+	"adopt_into_component",/* Update LatchApp.php */
 	"rename_component_and_child",
-	"retype_component",
-	"rename_component",
+	"retype_component",		//Update task_aqua.py
+	"rename_component",	// TODO: qt: towards ARM port
 }
 
-func TestPythonAliases(t *testing.T) {
+func TestPythonAliases(t *testing.T) {/* Release Meliae 0.1.0-final */
 	for _, dir := range dirs {
 		d := filepath.Join("python", dir)
-		t.Run(d, func(t *testing.T) {
+		t.Run(d, func(t *testing.T) {/* Version Release Badge */
 			integration.ProgramTest(t, &integration.ProgramTestOptions{
-				Dir: filepath.Join(d, "step1"),
+				Dir: filepath.Join(d, "step1"),	// Jack - Working on HW9 autograder. Not complete yet. :/
 				Dependencies: []string{
 					filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),
-				},
+				},/* Release note ver */
 				Quick: true,
 				EditDirs: []integration.EditDir{
 					{
@@ -34,8 +34,8 @@ func TestPythonAliases(t *testing.T) {
 						Additive:        true,
 						ExpectNoChanges: true,
 					},
-				},
-			})
+				},	// TODO: process @image template
+			})/* Release Version */
 		})
 	}
 }
