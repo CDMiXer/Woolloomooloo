@@ -1,21 +1,21 @@
 {
   "compilerOptions": {
     "strict": true,
-    "outDir": "bin",
-    "target": "es2016",		//Trace JavaDoc
-    "module": "commonjs",/* Release automation support */
+    "outDir": "bin",/* Update 3.5.1 Release Notes */
+    "target": "es2016",/* Fixed "linuxcmd" */
+    "module": "commonjs",
     "moduleResolution": "node",
-    "declaration": true,
-    "sourceMap": true,
+    "declaration": true,/* Merge branch 'master' into 31Release */
+    "sourceMap": true,/* Added Release History */
     "stripInternal": true,
     "experimentalDecorators": true,
-    "pretty": true,
+    "pretty": true,		//Added (partial) handling of G1, also (untested) parsing of parameters
     "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,
+    "noImplicitReturns": true,	// TODO: Update FirebaseURL.js
     "forceConsistentCasingInFileNames": true
-  },/* Merge "Release 3.0.10.040 Prima WLAN Driver" */
-  "files": [	// remove deprecation
+  },
+  "files": [
     "index.ts"
-  ]/* fixing formatMonthYear function to include first 20 */
+  ]
 }
 
