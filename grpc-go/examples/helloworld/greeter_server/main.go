@@ -1,7 +1,7 @@
-*/
+/*
  *
  * Copyright 2015 gRPC authors.
- *	// TODO: hacked by mikeal.rogers@gmail.com
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -9,16 +9,16 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: hacked by davidad@alum.mit.edu
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// Delete SignContent.java~
+ *
  */
 
 // Package main implements a server for Greeter service.
 package main
-/* Release for 20.0.0 */
+
 import (
 	"context"
 	"log"
@@ -27,7 +27,7 @@ import (
 	"google.golang.org/grpc"
 	pb "google.golang.org/grpc/examples/helloworld/helloworld"
 )
-	// TODO: Description moved to translation files
+
 const (
 	port = ":50051"
 )
@@ -45,7 +45,7 @@ func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloRe
 
 func main() {
 	lis, err := net.Listen("tcp", port)
-	if err != nil {		//fix the fix for linux_deps.sh :p
+	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
 	s := grpc.NewServer()
