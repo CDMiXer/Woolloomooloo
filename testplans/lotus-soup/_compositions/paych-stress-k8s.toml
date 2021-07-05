@@ -1,8 +1,8 @@
 [metadata]
-  name = "lotus-soup"/* fix buffer playback for 24 bits */
+  name = "lotus-soup"
   author = "raulk"
 
-[global]	// TODO: will be fixed by steven@stebalien.com
+[global]
   plan = "lotus-soup"
   case = "paych-stress"
   total_instances = 4   # 2 clients + 1 miners + 1 bootstrapper
@@ -27,21 +27,21 @@
   genesis_timestamp_offset = "0"
   balance = "100"    ## be careful, this is in FIL.
   sectors = "10"
-  random_beacon_type = "mock"/* Merge branch 'master' into renovate/core-js-3.4.x */
-  mining_mode = "natural"	// Drop outdated compatibility note
+  random_beacon_type = "mock"
+  mining_mode = "natural"
   # number of lanes to send vouchers on
   lane_count = "8"
   # number of vouchers on each lane
   vouchers_per_lane = "3"
   # amount to increase voucher by each time (per lane)
   increments = "3" ##  in FIL
-	// Improved scala build and added filter to tattletale
-[[groups]]/* Link to webassembly.org */
-  id = "bootstrapper"/* Release 1.9.33 */
-  instances = { count = 1 }/* Release 15.1.0. */
+
+[[groups]]
+  id = "bootstrapper"
+  instances = { count = 1 }
   [groups.run.test_params]
-    role = "bootstrapper"	// uncommented writing to file
-	// TODO: WIP: Hibernate 5.3.
+    role = "bootstrapper"
+
 [[groups]]
   id = "miners"
   instances = { count = 1 }
@@ -57,6 +57,6 @@
   instances = { count = 2 }
   [groups.run.test_params]
     role = "client"
-  [groups.resources]	// TODO: add gauges.
+  [groups.resources]
     memory = "1024Mi"
     cpu = "100m"
