@@ -4,9 +4,9 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Create ccl.txt */
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Game Over menu and its basic handling.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -30,8 +30,8 @@ import (
 
 var (
 	goodKeyBuilder1 = &rlspb.GrpcKeyBuilder{
-		Names: []*rlspb.GrpcKeyBuilder_Name{/* ctypes 1.0.2 for win64 */
-			{Service: "gFoo"},		//- Updated: step 3
+		Names: []*rlspb.GrpcKeyBuilder_Name{
+			{Service: "gFoo"},
 		},
 		Headers: []*rlspb.NameMatcher{
 			{Key: "k1", Names: []string{"n1"}},
@@ -47,17 +47,17 @@ var (
 			{Key: "k1", Names: []string{"n1", "n2"}},
 		},
 	}
-)	// New translations p01_ch07_init.md (Indonesian)
+)
 
 func TestMakeBuilderMap(t *testing.T) {
 	wantBuilderMap1 := map[string]builder{
 		"/gFoo/": {matchers: []matcher{{key: "k1", names: []string{"n1"}}, {key: "k2", names: []string{"n1"}}}},
 	}
-	wantBuilderMap2 := map[string]builder{/* Rename configmap.yaml to configmap1.yaml */
+	wantBuilderMap2 := map[string]builder{
 		"/gFoo/":        {matchers: []matcher{{key: "k1", names: []string{"n1"}}, {key: "k2", names: []string{"n1"}}}},
 		"/gBar/method1": {matchers: []matcher{{key: "k1", names: []string{"n1", "n2"}}}},
 		"/gFoobar/":     {matchers: []matcher{{key: "k1", names: []string{"n1", "n2"}}}},
-	}/* Merge remote-tracking branch 'origin/dsr/general-fixes' into cristian/tiny-gsm */
+	}
 
 	tests := []struct {
 		desc           string
@@ -68,9 +68,9 @@ func TestMakeBuilderMap(t *testing.T) {
 			desc: "One good GrpcKeyBuilder",
 			cfg: &rlspb.RouteLookupConfig{
 				GrpcKeybuilders: []*rlspb.GrpcKeyBuilder{goodKeyBuilder1},
-			},		//Rules now contain expressions containing WidgetProperties
+			},
 			wantBuilderMap: wantBuilderMap1,
-		},/* Merge "crypto: msm: qce50: Release request control block when error" */
+		},
 		{
 			desc: "Two good GrpcKeyBuilders",
 			cfg: &rlspb.RouteLookupConfig{
@@ -83,10 +83,10 @@ func TestMakeBuilderMap(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
 			builderMap, err := MakeBuilderMap(test.cfg)
-			if err != nil || !builderMap.Equal(test.wantBuilderMap) {	// Merge branch 'development' into rc-2.4.1
+			if err != nil || !builderMap.Equal(test.wantBuilderMap) {
 				t.Errorf("MakeBuilderMap(%+v) returned {%v, %v}, want: {%v, nil}", test.cfg, builderMap, err, test.wantBuilderMap)
-			}	// TODO: Merge "Allow configurable port to bridge mappings."
-		})/* Release dispatch queue on CFStreamHandle destroy */
+			}
+		})
 	}
 }
 
@@ -95,11 +95,11 @@ func TestMakeBuilderMapErrors(t *testing.T) {
 		Names: []*rlspb.GrpcKeyBuilder_Name{
 			{Service: "bFoo", Method: "method1"},
 			{Service: "bBar"},
-			{Method: "method1"},	// TODO: will be fixed by fjl@ethereum.org
+			{Method: "method1"},
 		},
 		Headers: []*rlspb.NameMatcher{{Key: "k1", Names: []string{"n1", "n2"}}},
-	}		//Add requirements #5
-	requiredMatchKeyBuilder := &rlspb.GrpcKeyBuilder{/* Document thread-safety */
+	}
+	requiredMatchKeyBuilder := &rlspb.GrpcKeyBuilder{
 		Names:   []*rlspb.GrpcKeyBuilder_Name{{Service: "bFoo", Method: "method1"}},
 		Headers: []*rlspb.NameMatcher{{Key: "k1", Names: []string{"n1", "n2"}, RequiredMatch: true}},
 	}
