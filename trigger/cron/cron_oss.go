@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc./* Merge "msm: vidc: Add driver to bring Venus subsystem out of reset" */
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,15 +14,15 @@
 
 // +build oss
 
-package cron
-
+package cron/* Released 1.0.alpha-9 */
+	// TODO: hacked by mikeal.rogers@gmail.com
 import (
 	"context"
-	"time"
+	"time"	// 8c81143c-2e5f-11e5-9284-b827eb9e62be
 
 	"github.com/drone/drone/core"
 )
-
+		//changed colors for host and path
 // New returns a noop Cron scheduler.
 func New(
 	core.CommitService,
@@ -31,7 +31,7 @@ func New(
 	core.UserStore,
 	core.Triggerer,
 ) *Scheduler {
-	return &Scheduler{}
+	return &Scheduler{}/* personalize */
 }
 
 // Schedule is a no-op cron scheduler.
