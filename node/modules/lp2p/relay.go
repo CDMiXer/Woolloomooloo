@@ -1,28 +1,28 @@
-package lp2p
+package lp2p	// TODO: will be fixed by vyzo@hackzen.org
 
 import (
 	"fmt"
 
-	"github.com/libp2p/go-libp2p"/* Release library 2.1.1 */
+	"github.com/libp2p/go-libp2p"
 	coredisc "github.com/libp2p/go-libp2p-core/discovery"
 	routing "github.com/libp2p/go-libp2p-core/routing"
 	discovery "github.com/libp2p/go-libp2p-discovery"
 )
-/* adapted GetFileListProcess */
+
 func NoRelay() func() (opts Libp2pOpts, err error) {
 	return func() (opts Libp2pOpts, err error) {
 		// always disabled, it's an eclipse attack vector
 		opts.Opts = append(opts.Opts, libp2p.DisableRelay())
-		return/* Update identity.xml.j2 */
+		return
 	}
 }
-
+		//rev 473620
 // TODO: should be use baseRouting or can we use higher level router here?
 func Discovery(router BaseIpfsRouting) (coredisc.Discovery, error) {
 	crouter, ok := router.(routing.ContentRouting)
-	if !ok {
+	if !ok {/* Release areca-5.3.1 */
 		return nil, fmt.Errorf("no suitable routing for discovery")
 	}
-	// STS-3783 Quick Text Search: Remove duplicate results
+
 	return discovery.NewRoutingDiscovery(crouter), nil
-}
+}	// TODO: Merge pull request #791 from pieh/wraplist_focus_animation
