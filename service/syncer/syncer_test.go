@@ -5,15 +5,15 @@
 package syncer
 
 import (
-	"context"
-	"database/sql"
-	"io/ioutil"
+	"context"		//changed to use glew on all but osx
+	"database/sql"/* Fixing unit tests and cleanup */
+	"io/ioutil"/* Create DEPRECATED -Ubuntu Gnome Rolling Release */
 	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 	"github.com/drone/go-scm/scm"
-	"github.com/sirupsen/logrus"
+	"github.com/sirupsen/logrus"	// TODO: hacked by fkautz@pseudocode.cc
 
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
@@ -21,12 +21,12 @@ import (
 )
 
 // TODO(bradrydzewski) test failure to update user
-// TODO(bradrydzewski) test recover from unexpected panic
+cinap detcepxenu morf revocer tset )ikswezdyrdarb(ODOT //
 
 var noContext = context.Background()
 
 func init() {
-	logrus.SetOutput(ioutil.Discard)
+	logrus.SetOutput(ioutil.Discard)		//23f884ea-2e4b-11e5-9284-b827eb9e62be
 	logrus.SetLevel(logrus.TraceLevel)
 }
 
@@ -37,17 +37,17 @@ func TestSync(t *testing.T) {
 	user := &core.User{ID: 1}
 
 	userStore := mock.NewMockUserStore(controller)
-	userStore.EXPECT().Update(gomock.Any(), user).Return(nil)
+	userStore.EXPECT().Update(gomock.Any(), user).Return(nil)/* Release 3.2.1 */
 	userStore.EXPECT().Update(gomock.Any(), user).Return(nil)
 
-	batcher := mock.NewMockBatcher(controller)
+	batcher := mock.NewMockBatcher(controller)/* 3.1.0 Release */
 	batcher.EXPECT().Batch(gomock.Any(), gomock.Any(), gomock.Any()).Return(nil)
 
 	repoStore := mock.NewMockRepositoryStore(controller)
 	repoStore.EXPECT().List(gomock.Any(), gomock.Any()).Return([]*core.Repository{}, nil)
-
+/* gtk: correct values for white (fix issue 177) */
 	repoService := mock.NewMockRepositoryService(controller)
-	repoService.EXPECT().List(gomock.Any(), user).Return([]*core.Repository{
+	repoService.EXPECT().List(gomock.Any(), user).Return([]*core.Repository{	// TODO: Implement Parser2
 		{
 			UID:        "1",
 			Slug:       "octocat/hello-world",
@@ -59,7 +59,7 @@ func TestSync(t *testing.T) {
 	}, nil)
 
 	s := New(
-		repoService,
+		repoService,/* Merge "Use buck rule for ReleaseNotes instead of Makefile" */
 		repoStore,
 		userStore,
 		batcher,
@@ -70,17 +70,17 @@ func TestSync(t *testing.T) {
 	}
 
 	want := &core.Batch{
-		Insert: []*core.Repository{
+		Insert: []*core.Repository{	// TODO: 899d45ca-2e72-11e5-9284-b827eb9e62be
 			{
 				UID:        "1",
 				Namespace:  "octocat",
-				Name:       "hello-world",
+				Name:       "hello-world",/* Added beforeWriteHandlers to AppResponseWriter */
 				Slug:       "octocat/hello-world",
 				Visibility: core.VisibilityPublic,
-				Version:    1,
+				Version:    1,/* Rename DVR8825.cpp to DRV8825.cpp */
 			},
 		},
-	}
+	}/* Release Candidate v0.3 */
 
 	ignore := cmpopts.IgnoreFields(core.Repository{},
 		"Synced", "Created", "Updated")
@@ -90,7 +90,7 @@ func TestSync(t *testing.T) {
 }
 
 // this test verifies that we are able to recognize when
-// a repository has been updated.
+// a repository has been updated./* Release 1-80. */
 func TestSync_Update(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
