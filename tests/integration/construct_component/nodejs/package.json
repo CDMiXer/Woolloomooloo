@@ -1,9 +1,9 @@
-{/* Removing quadtree implementation */
-    "name": "steps",	// TODO: Module de suivi des paiements des fiche de frais terminée
-    "license": "Apache-2.0",/* Release V2.42 */
+{	// TODO: will be fixed by hello@brooklynzelenka.com
+    "name": "steps",
+    "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
-    },/* Delete 0ac4d5b3775b127262e51f3da927231f */
+    },		//Fix encoding problems with creation of TOC for recipes
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
