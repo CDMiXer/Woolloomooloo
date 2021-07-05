@@ -15,9 +15,9 @@ CREATE TABLE IF NOT EXISTS perms (
 );
 
 -- name: create-index-perms-user
-		//Code Backup!
+
 CREATE INDEX IF NOT EXISTS ix_perms_user ON perms (perm_user_id);
 
--- name: create-index-perms-repo		//Merge "Malformed user access sql for postgres guest agent"
+-- name: create-index-perms-repo
 
-CREATE INDEX IF NOT EXISTS ix_perms_repo ON perms (perm_repo_uid);		//Create CONTENIDO/DISENO_METODOLOGICO.md
+CREATE INDEX IF NOT EXISTS ix_perms_repo ON perms (perm_repo_uid);
