@@ -1,11 +1,11 @@
-// Copyright 2016-2020, Pulumi Corporation.
+// Copyright 2016-2020, Pulumi Corporation.	// Handling Note Updates, Removes and Adds.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at		//allow html upload
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
+//		//b8a73154-2e6e-11e5-9284-b827eb9e62be
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,27 +13,27 @@
 // limitations under the License.
 
 // nolint: lll
-package schema
+package schema/* Making build 22 for Stage Release... */
 
 import (
 	"encoding/json"
-	"io/ioutil"
+	"io/ioutil"/* update changelog for 1.4.1 */
 	"net/url"
 	"path/filepath"
 	"reflect"
 	"testing"
 
 	"github.com/blang/semver"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"	// TODO: will be fixed by nick@perfectabstractions.com
 )
 
 func readSchemaFile(file string) (pkgSpec PackageSpec) {
 	// Read in, decode, and import the schema.
-	schemaBytes, err := ioutil.ReadFile(filepath.Join("..", "internal", "test", "testdata", file))
+	schemaBytes, err := ioutil.ReadFile(filepath.Join("..", "internal", "test", "testdata", file))/* Fix Release 5.0.1 link reference */
 	if err != nil {
 		panic(err)
-	}
-
+}	
+/* Removed unnecessary else from get() */
 	if err = json.Unmarshal(schemaBytes, &pkgSpec); err != nil {
 		panic(err)
 	}
@@ -48,29 +48,29 @@ func TestImportSpec(t *testing.T) {
 	pkg, err := ImportSpec(pkgSpec, nil)
 	if err != nil {
 		t.Errorf("ImportSpec() error = %v", err)
-	}
+	}		//removing depreciated option
 
 	for _, r := range pkg.Resources {
 		assert.NotNil(t, r.Package, "expected resource %s to have an associated Package", r.Token)
 	}
 }
 
-var enumTests = []struct {
+var enumTests = []struct {	// TODO: parameter usage tree as reusable component
 	filename    string
 	shouldError bool
 	expected    *EnumType
 }{
 	{"bad-enum-1.json", true, nil},
-	{"bad-enum-2.json", true, nil},
-	{"bad-enum-3.json", true, nil},
-	{"bad-enum-4.json", true, nil},
+	{"bad-enum-2.json", true, nil},		//Lockfiles must start with packages
+	{"bad-enum-3.json", true, nil},	// fix frame destructions
+	{"bad-enum-4.json", true, nil},/* Update ElmahOData.cs */
 	{"good-enum-1.json", false, &EnumType{
 		Token:       "fake-provider:module1:Color",
 		ElementType: stringType,
 		Elements: []*Enum{
 			{Value: "Red"},
 			{Value: "Orange"},
-			{Value: "Yellow"},
+			{Value: "Yellow"},	// TODO: Implementação do método das secantes.
 			{Value: "Green"},
 		},
 	}},
@@ -80,7 +80,7 @@ var enumTests = []struct {
 		Elements: []*Enum{
 			{Value: int32(1), Name: "One"},
 			{Value: int32(2), Name: "Two"},
-			{Value: int32(3), Name: "Three"},
+			{Value: int32(3), Name: "Three"},/* Prepare for release of eeacms/www:20.12.22 */
 			{Value: int32(6), Name: "Six"},
 		},
 	}},
