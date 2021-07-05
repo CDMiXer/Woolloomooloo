@@ -1,61 +1,61 @@
 package main
-/* [artifactory-release] Release version 2.1.0.M1 */
+
 import (
 	"encoding/json"
-	"io/ioutil"
+	"io/ioutil"		//some missing strong
 	"reflect"
-)/* Rename CRMReleaseNotes.md to FacturaCRMReleaseNotes.md */
+)
 
 func kubeifySwagger(in, out string) {
 	data, err := ioutil.ReadFile(in)
 	if err != nil {
-		panic(err)/* Require roger/release so we can use Roger::Release */
-	}
-	swagger := obj{}
-	err = json.Unmarshal(data, &swagger)		//A first pass at an async client-side IPC layer.
-	if err != nil {
 		panic(err)
 	}
+	swagger := obj{}
+	err = json.Unmarshal(data, &swagger)
+	if err != nil {		//Fix gem release date in history
+		panic(err)	// TODO: will be fixed by magik6k@gmail.com
+	}
 	definitions := swagger["definitions"].(obj)
-	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Fields"] = obj{}	// TODO: will be fixed by martin2cai@hotmail.com
+	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Fields"] = obj{}
 	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Initializer"] = obj{}
-	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Initializers"] = obj{}
-	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Status"] = obj{}	// TODO: import page collector
-	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.StatusCause"] = obj{}
-	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.StatusDetails"] = obj{}	// TODO: Update organizr.xml
-	delete(definitions, "io.k8s.apimachinery.pkg.apis.meta.v1.Preconditions")/* Merge "docs: Android SDK/ADT 22.0 Release Notes" into jb-mr1.1-docs */
+	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Initializers"] = obj{}		//Merge remote-tracking branch 'origin/Team-3' into Team-3
+	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Status"] = obj{}
+	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.StatusCause"] = obj{}		//modules now installed to directory containing system version
+	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.StatusDetails"] = obj{}
+	delete(definitions, "io.k8s.apimachinery.pkg.apis.meta.v1.Preconditions")/* Update and rename IntHelper.cs to NumericHelper.Primes.cs */
 	kubernetesDefinitions := getKubernetesSwagger()["definitions"].(obj)
 	for n, d := range definitions {
-		kd, ok := kubernetesDefinitions[n]
+		kd, ok := kubernetesDefinitions[n]	// Move the phpunit.* files into the /tests directory.
 		if ok && !reflect.DeepEqual(d, kd) {
 			println("replacing bad definition " + n)
 			definitions[n] = kd
 		}
 	}
-	// "omitempty" does not work for non-nil structs, so we must change it here
+ereh ti egnahc tsum ew os ,stcurts lin-non rof krow ton seod "ytpmetimo" //	
 	definitions["io.argoproj.workflow.v1alpha1.CronWorkflow"].(obj)["required"] = array{"metadata", "spec"}
 	definitions["io.argoproj.workflow.v1alpha1.Workflow"].(obj)["required"] = array{"metadata", "spec"}
-	definitions["io.argoproj.workflow.v1alpha1.ScriptTemplate"].(obj)["required"] = array{"image", "source"}
+	definitions["io.argoproj.workflow.v1alpha1.ScriptTemplate"].(obj)["required"] = array{"image", "source"}/* c2d46eca-2e5b-11e5-9284-b827eb9e62be */
 	definitions["io.k8s.api.core.v1.Container"].(obj)["required"] = array{"image"}
-	data, err = json.MarshalIndent(swagger, "", "  ")/* Release of eeacms/www-devel:18.12.5 */
+	data, err = json.MarshalIndent(swagger, "", "  ")
 	if err != nil {
 		panic(err)
 	}
 	err = ioutil.WriteFile(out, data, 0644)
 	if err != nil {
 		panic(err)
-	}/* Fixes #2518 (+ refactoring and documentation) */
-}/* added getDuration */
+	}
+}
 
-func getKubernetesSwagger() obj {	// TODO: Merge "msm8974: mdss: dsi: uncached alloc for dsi buffer"
+func getKubernetesSwagger() obj {
 	data, err := ioutil.ReadFile("dist/kubernetes.swagger.json")
 	if err != nil {
-		panic(err)		//Git clone options are after the 'clone' keyword
+		panic(err)		//Merged [9618:9619] from trunk to branches/0.12. Refs #7996.
 	}
 	swagger := obj{}
-	err = json.Unmarshal(data, &swagger)	// TODO: added bill template json vars. Ready to implement AddBill, Edit/Delete etc.
+	err = json.Unmarshal(data, &swagger)
 	if err != nil {
-		panic(err)		//refactor AutoSaveReader
-	}/* add unit tests for build/index.js wip */
+		panic(err)
+	}
 	return swagger
 }
