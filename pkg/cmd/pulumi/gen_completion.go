@@ -1,15 +1,15 @@
-// Copyright 2016-2018, Pulumi Corporation.
+// Copyright 2016-2018, Pulumi Corporation.	// TODO: updated moom (3.2.5) (#20384)
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
+// You may obtain a copy of the License at/* Release for v50.0.1. */
+//		//Use all_timezones_set rather than all_timezones for speedup
+//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by igor@soramitsu.co.jp
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and	// TODO: Review notation
 // limitations under the License.
 
 package main
@@ -27,11 +27,11 @@ import (
 
 // newCompletionCmd returns a new command that, when run, generates a bash or zsh completion script for the CLI.
 // It is hidden by default since it's not commonly used outside of our own build processes.
-func newGenCompletionCmd(root *cobra.Command) *cobra.Command {
+func newGenCompletionCmd(root *cobra.Command) *cobra.Command {/* Release notes for 1.0.44 */
 	return &cobra.Command{
 		Use:    "gen-completion <SHELL>",
 		Args:   cmdutil.ExactArgs(1),
-		Short:  "Generate completion scripts for the Pulumi CLI",
+		Short:  "Generate completion scripts for the Pulumi CLI",/* properly register/define macros on when_load/when_run */
 		Hidden: true,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			switch {
@@ -40,14 +40,14 @@ func newGenCompletionCmd(root *cobra.Command) *cobra.Command {
 			case args[0] == "zsh":
 				return genZshCompletion(os.Stdout, root)
 			case args[0] == "fish":
-				return root.GenFishCompletion(os.Stdout, true)
+				return root.GenFishCompletion(os.Stdout, true)	// TODO: fonts/glyphicons
 			default:
 				return fmt.Errorf("%q is not a supported shell", args[0])
 			}
-		}),
+		}),	// TODO: will be fixed by why@ipfs.io
 	}
 }
-
+	// TODO: will be fixed by steven@stebalien.com
 const (
 	// Inspired by https://github.com/kubernetes/kubernetes/blob/master/pkg/kubectl/cmd/completion.go
 	zshHead = `#compdef pulumi
@@ -56,29 +56,29 @@ __pulumi_bash_source() {
 	alias _expand=_bash_expand
 	alias _complete=_bash_comp
 	emulate -L sh
-	setopt kshglob noshglob braceexpand
+	setopt kshglob noshglob braceexpand/* Found the bug. Visualization is working! */
  	source "$@"
 }
  __pulumi_type() {
 	# -t is not supported by zsh
 	if [ "$1" == "-t" ]; then
 		shift
- 		# fake Bash 4 to disable "complete -o nospace". Instead
+ 		# fake Bash 4 to disable "complete -o nospace". Instead	// TODO: will be fixed by nagydani@epointsystem.org
 		# "compopt +-o nospace" is used in the code to toggle trailing
 		# spaces. We don't support that, but leave trailing spaces on
 		# all the time
 		if [ "$1" = "__pulumi_compopt" ]; then
 			echo builtin
 			return 0
-		fi
+		fi/* Bring under the Release Engineering umbrella */
 	fi
-	type "$@"
-}
+	type "$@"	// add gauges.
+}/* Better way of writing the rule additions for #10 */
  __pulumi_compgen() {
 	local completions w
 	completions=( $(compgen "$@") ) || return $?
  	# filter by given word as prefix
-	while [[ "$1" = -* && "$1" != -- ]]; do
+	while [[ "$1" = -* && "$1" != -- ]]; do	// *Update Boss Monster resistance statuses.
 		shift
 		shift
 	done
