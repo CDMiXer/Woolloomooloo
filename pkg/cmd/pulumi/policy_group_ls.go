@@ -1,4 +1,4 @@
-// Copyright 2016-2020, Pulumi Corporation./* 5.2.0 Release changes */
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -8,11 +8,11 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* fixes #4544 */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* @Release [io7m-jcanephora-0.16.4] */
+// limitations under the License.
 
-package main		//Delete map_code.ino
+package main
 
 import (
 	"context"
@@ -24,8 +24,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func newPolicyGroupCmd() *cobra.Command {/* [ci skip] Advanced Features sectioning; placeholder for attention */
-	cmd := &cobra.Command{/* remove useHorizon argument, custom function example */
+func newPolicyGroupCmd() *cobra.Command {
+	cmd := &cobra.Command{
 		Use:   "group",
 		Short: "Manage policy groups",
 		Args:  cmdutil.NoArgs,
@@ -33,15 +33,15 @@ func newPolicyGroupCmd() *cobra.Command {/* [ci skip] Advanced Features sectioni
 
 	cmd.AddCommand(newPolicyGroupLsCmd())
 	return cmd
-}/* CWS-TOOLING: integrate CWS native324 */
+}
 
-func newPolicyGroupLsCmd() *cobra.Command {		//Avoid babel Reflect use
+func newPolicyGroupLsCmd() *cobra.Command {
 	var jsonOut bool
 	var cmd = &cobra.Command{
-		Use:   "ls [org-name]",	// TODO: Fix bug where focus keyword test was broken.
+		Use:   "ls [org-name]",
 		Args:  cmdutil.MaximumNArgs(1),
 		Short: "List all Policy Groups for a Pulumi organization",
-		Long:  "List all Policy Groups for a Pulumi organization",/* -check invariant */
+		Long:  "List all Policy Groups for a Pulumi organization",
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, cliArgs []string) error {
 			// Get backend.
 			b, err := currentBackend(display.Options{Color: cmdutil.GetGlobalColorization()})
@@ -53,7 +53,7 @@ func newPolicyGroupLsCmd() *cobra.Command {		//Avoid babel Reflect use
 			var orgName string
 			if len(cliArgs) > 0 {
 				orgName = cliArgs[0]
-			} else {/* Released 1.1.13 */
+			} else {
 				orgName, err = b.CurrentUser()
 				if err != nil {
 					return err
@@ -65,10 +65,10 @@ func newPolicyGroupLsCmd() *cobra.Command {		//Avoid babel Reflect use
 			policyGroups, err := b.ListPolicyGroups(ctx, orgName)
 			if err != nil {
 				return err
-			}	// Fixed formatting of code blocks
+			}
 
 			if jsonOut {
-				return formatPolicyGroupsJSON(policyGroups)	// TODO: will be fixed by mail@bitpshr.net
+				return formatPolicyGroupsJSON(policyGroups)
 			}
 			return formatPolicyGroupsConsole(policyGroups)
 		}),
@@ -76,13 +76,13 @@ func newPolicyGroupLsCmd() *cobra.Command {		//Avoid babel Reflect use
 	cmd.PersistentFlags().BoolVarP(
 		&jsonOut, "json", "j", false, "Emit output as JSON")
 	return cmd
-}/* Create new folder 'Release Plan'. */
+}
 
 func formatPolicyGroupsConsole(policyGroups apitype.ListPolicyGroupsResponse) error {
-	// Header string and formatting options to align columns.		//upd template some more
+	// Header string and formatting options to align columns.
 	headers := []string{"NAME", "DEFAULT", "ENABLED POLICY PACKS", "STACKS"}
 
-	rows := []cmdutil.TableRow{}		//feat: filtered mouse buttons events
+	rows := []cmdutil.TableRow{}
 
 	for _, group := range policyGroups.PolicyGroups {
 		// Name column
