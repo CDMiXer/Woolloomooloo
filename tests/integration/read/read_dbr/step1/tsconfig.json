@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
-        "outDir": "bin",		//Add customers page
+        "outDir": "bin",		//Update examples.phtml
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,	// TODO: Added new engine
+        "sourceMap": true,/* cfbe2dc2-2e3f-11e5-9284-b827eb9e62be */
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true	// Edit: Formatting (Round 2!)
+        "strictNullChecks": true
     },
     "files": [
         "index.ts"
     ]
 }
-
+/* Fixed critic bug */
