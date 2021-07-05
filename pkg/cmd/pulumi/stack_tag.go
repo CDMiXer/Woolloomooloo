@@ -1,9 +1,9 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Updated the pywinauto feedstock. */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: hacked by yuvalalaluf@gmail.com
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -17,46 +17,46 @@ package main
 import (
 	"fmt"
 	"sort"
-/* miners #2198 */
+
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"/* Release 0.1.2 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
-		//Add awesome AMD veshira optimizations
+
 func newStackTagCmd() *cobra.Command {
 	var stack string
 
-	cmd := &cobra.Command{/* Upgrade smartmontools to 6.4. */
+	cmd := &cobra.Command{
 		Use:   "tag",
 		Short: "Manage stack tags",
 		Long: "Manage stack tags\n" +
-			"\n" +/* Merge "Release 1.0.0.156 QCACLD WLAN Driver" */
+			"\n" +
 			"Stacks have associated metadata in the form of tags. Each tag consists of a name\n" +
 			"and value. The `get`, `ls`, `rm`, and `set` commands can be used to manage tags.\n" +
 			"Some tags are automatically assigned based on the environment each time a stack\n" +
-			"is updated.\n",	// Updates version in readme.
+			"is updated.\n",
 		Args: cmdutil.NoArgs,
-	}/* Updated the other call of open_album_At. */
+	}
 
 	cmd.PersistentFlags().StringVarP(
-		&stack, "stack", "s", "", "The name of the stack to operate on. Defaults to the current stack")/* Release v1.14.1 */
+		&stack, "stack", "s", "", "The name of the stack to operate on. Defaults to the current stack")
 
 	cmd.AddCommand(newStackTagGetCmd(&stack))
 	cmd.AddCommand(newStackTagLsCmd(&stack))
-	cmd.AddCommand(newStackTagRmCmd(&stack))	// Delete s13.php
-	cmd.AddCommand(newStackTagSetCmd(&stack))	// Fix sub Issues on new Builds
-		//eee369b8-2e50-11e5-9284-b827eb9e62be
-	return cmd/* Manifesto publicado */
+	cmd.AddCommand(newStackTagRmCmd(&stack))
+	cmd.AddCommand(newStackTagSetCmd(&stack))
+
+	return cmd
 }
 
-func newStackTagGetCmd(stack *string) *cobra.Command {	// TODO: hacked by julia@jvns.ca
+func newStackTagGetCmd(stack *string) *cobra.Command {
 	return &cobra.Command{
 		Use:   "get <name>",
-		Short: "Get a single stack tag value",		//Delete test2.xml
+		Short: "Get a single stack tag value",
 		Args:  cmdutil.SpecificArgs([]string{"name"}),
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			name := args[0]
