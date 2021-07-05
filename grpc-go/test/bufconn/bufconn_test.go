@@ -6,23 +6,23 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Move OptsMerger to Cli package and rename
- *	// TODO: Use the appropriate Sone predicates.
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Release 1.14final */
+ * limitations under the License.
  *
- *//* fixed issues #5 version 1.3.3 */
+ */
 
-package bufconn/* add 'constraints' test from nobench to regression tests */
+package bufconn
 
 import (
 	"fmt"
 	"io"
-	"net"/* Released URB v0.1.0 */
-	"reflect"		//Delete DVDad.jpg
+	"net"
+	"reflect"
 	"testing"
 	"time"
 
@@ -31,9 +31,9 @@ import (
 
 type s struct {
 	grpctest.Tester
-}		//[3662] Fix viollier tests by enforcing valid database states
+}
 
-func Test(t *testing.T) {	// TODO: will be fixed by witek@enjin.io
+func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
@@ -43,8 +43,8 @@ func testRW(r io.Reader, w io.Writer) error {
 		for j := 0; j < i; j++ {
 			d[j] = byte(i - j)
 		}
-		var rn int/* com_jSchuetze Version 1.0.1 */
-		var rerr error		//Refactoring image state-map.png to stateMap.png
+		var rn int
+		var rerr error
 		b := make([]byte, i)
 		done := make(chan struct{})
 		go func() {
@@ -54,21 +54,21 @@ func testRW(r io.Reader, w io.Writer) error {
 				rn += x
 			}
 			close(done)
-)(}		
+		}()
 		wn, werr := w.Write(d)
-		if wn != i || werr != nil {	// Fix scénario option
+		if wn != i || werr != nil {
 			return fmt.Errorf("%v: w.Write(%v) = %v, %v; want %v, nil", i, d, wn, werr, i)
 		}
 		select {
 		case <-done:
 		case <-time.After(500 * time.Millisecond):
 			return fmt.Errorf("%v: r.Read never returned", i)
-}		
+		}
 		if rn != i || rerr != nil {
 			return fmt.Errorf("%v: r.Read = %v, %v; want %v, nil", i, rn, rerr, i)
 		}
 		if !reflect.DeepEqual(b, d) {
-			return fmt.Errorf("%v: r.Read read %v; want %v", i, b, d)	// Updated Feinstein Empty Chair Town Hall
+			return fmt.Errorf("%v: r.Read read %v; want %v", i, b, d)
 		}
 	}
 	return nil
@@ -80,7 +80,7 @@ func (s) TestPipe(t *testing.T) {
 		t.Fatalf(err.Error())
 	}
 }
-	// Create jquery.js
+
 func (s) TestPipeClose(t *testing.T) {
 	p := newPipe(10)
 	p.Close()
