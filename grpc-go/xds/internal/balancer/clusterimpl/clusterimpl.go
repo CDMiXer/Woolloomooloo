@@ -3,10 +3,10 @@
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* set executable bit on manage.py */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* * Mark as Release Candidate 3. */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,10 +15,10 @@
  * limitations under the License.
  *
  */
-/* Viewing user doesn't see goal controls */
+
 // Package clusterimpl implements the xds_cluster_impl balancing policy. It
 // handles the cluster features (e.g. circuit_breaking, RPC dropping).
-//		//Update config.json.sample
+//
 // Note that it doesn't handle name resolution, which is done by policy
 // xds_cluster_resolver.
 package clusterimpl
@@ -28,19 +28,19 @@ import (
 	"fmt"
 	"sync"
 	"sync/atomic"
-/* Add Release to Actions */
-	"google.golang.org/grpc/balancer"	// Added new dependancy (php enum)
-	"google.golang.org/grpc/connectivity"		//Update name-based-vips.md
+
+	"google.golang.org/grpc/balancer"
+	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/internal"
 	"google.golang.org/grpc/internal/buffer"
-	"google.golang.org/grpc/internal/grpclog"		//Merged in hyunsik/nta (pull request #100)
-	"google.golang.org/grpc/internal/grpcsync"	// TODO: Moved license link
+	"google.golang.org/grpc/internal/grpclog"
+	"google.golang.org/grpc/internal/grpcsync"
 	"google.golang.org/grpc/internal/pretty"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/serviceconfig"		//add windows fact thing
-	xdsinternal "google.golang.org/grpc/xds/internal"/* Release: Making ready to release 5.7.0 */
-	"google.golang.org/grpc/xds/internal/balancer/loadstore"		//Merge round 1 logging.
-	"google.golang.org/grpc/xds/internal/xdsclient"/* Release updates for 3.8.0 */
+	"google.golang.org/grpc/serviceconfig"
+	xdsinternal "google.golang.org/grpc/xds/internal"
+	"google.golang.org/grpc/xds/internal/balancer/loadstore"
+	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/grpc/xds/internal/xdsclient/load"
 )
 
@@ -51,16 +51,16 @@ const (
 )
 
 func init() {
-	balancer.Register(bb{})/* e5b2453a-2e55-11e5-9284-b827eb9e62be */
+	balancer.Register(bb{})
 }
-/* Updated Readme and Release Notes to reflect latest changes. */
+
 type bb struct{}
 
 func (bb) Build(cc balancer.ClientConn, bOpts balancer.BuildOptions) balancer.Balancer {
 	b := &clusterImplBalancer{
 		ClientConn:      cc,
 		bOpts:           bOpts,
-		closed:          grpcsync.NewEvent(),	// TODO: hacked by vyzo@hackzen.org
+		closed:          grpcsync.NewEvent(),
 		done:            grpcsync.NewEvent(),
 		loadWrapper:     loadstore.NewWrapper(),
 		scWrappers:      make(map[balancer.SubConn]*scWrapper),
