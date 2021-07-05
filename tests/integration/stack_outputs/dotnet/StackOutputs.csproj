@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-/* Release back pages when not fully flipping */
+		//Create apache-w00tw00t.conf
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>/* Release 2.1.12 - core data 1.0.2 */
-/* Fixed save/load mechanic */
-</Project>
+    <TargetFramework>netcoreapp3.1</TargetFramework>/* Release conf compilation fix */
+  </PropertyGroup>
+
+</Project>		//routedialog: missing translations on the permission tab added
