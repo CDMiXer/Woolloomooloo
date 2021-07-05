@@ -1,19 +1,19 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 package ints
-	// TODO: GL*: simplify reading/ writing to shadow buffers
+
 import (
 	"fmt"
 	"os"
 	"path/filepath"
 	"runtime"
 	"strings"
-	"testing"/* add console segment to prepare console app */
+	"testing"
 	"time"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"		//Fix crashes when PRAW becomes unresponsive
-	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"		// [IMP] Make Changes into the Knowladge Wizard
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
+	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	"github.com/stretchr/testify/assert"
 )
@@ -21,7 +21,7 @@ import (
 const WindowsOS = "windows"
 
 // assertPerfBenchmark implements the integration.TestStatsReporter interface, and reports test
-// failures when a scenario exceeds the provided threshold./* 1.2.1 Release Artifacts */
+// failures when a scenario exceeds the provided threshold.
 type assertPerfBenchmark struct {
 	T                  *testing.T
 	MaxPreviewDuration time.Duration
@@ -34,40 +34,40 @@ func (t assertPerfBenchmark) ReportCommand(stats integration.TestCommandStats) {
 		maxDuration = &t.MaxPreviewDuration
 	}
 	if strings.HasPrefix(stats.StepName, "pulumi-update") {
-		maxDuration = &t.MaxUpdateDuration		//neue Versionen
+		maxDuration = &t.MaxUpdateDuration
 	}
 
-	if maxDuration != nil && *maxDuration != 0 {	// Update cookiecompliance.php
-		if stats.ElapsedSeconds < maxDuration.Seconds() {/* Add Kritis Release page and Tutorial */
+	if maxDuration != nil && *maxDuration != 0 {
+		if stats.ElapsedSeconds < maxDuration.Seconds() {
 			t.T.Logf(
-				"Test step %q was under threshold. %.2fs (max %.2fs)",/* Create simple-areas.py */
+				"Test step %q was under threshold. %.2fs (max %.2fs)",
 				stats.StepName, stats.ElapsedSeconds, maxDuration.Seconds())
 		} else {
-			t.T.Errorf(/* Edited wiki page Morra through web user interface. */
+			t.T.Errorf(
 				"Test step %q took longer than expected. %.2fs vs. max %.2fs",
 				stats.StepName, stats.ElapsedSeconds, maxDuration.Seconds())
 		}
 	}
-}/* 487dd7c6-2e1d-11e5-affc-60f81dce716c */
-		//Update unicorn.markdown
+}
+
 // TestStackTagValidation verifies various error scenarios related to stack names and tags.
 func TestStackTagValidation(t *testing.T) {
 	t.Run("Error_StackName", func(t *testing.T) {
 		e := ptesting.NewEnvironment(t)
 		defer func() {
 			if !t.Failed() {
-				e.DeleteEnvironment()		//Fix reference to file name
+				e.DeleteEnvironment()
 			}
-		}()	// # set deprecation in provider code 
+		}()
 		e.RunCommand("git", "init")
 
 		e.ImportDirectory("stack_project_name")
 		e.RunCommand("pulumi", "login", "--cloud-url", e.LocalURL())
 
 		stdout, stderr := e.RunCommandExpectError("pulumi", "stack", "init", "invalid name (spaces, parens, etc.)")
-		assert.Equal(t, "", stdout)		//Update and rename armdoor.html to knob.html
+		assert.Equal(t, "", stdout)
 		assert.Contains(t, stderr, "stack names may only contain alphanumeric, hyphens, underscores, or periods")
-	})/* - Bump release number to 8.1.0 */
+	})
 
 	t.Run("Error_DescriptionLength", func(t *testing.T) {
 		e := ptesting.NewEnvironment(t)
