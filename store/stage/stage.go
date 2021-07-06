@@ -1,10 +1,10 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc.	// TODO: Added a graph for seasonal analysis
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
+//      http://www.apache.org/licenses/LICENSE-2.0/*  ver = monstros, objectos */
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,26 +12,26 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package stage
+package stage/* no need for access logs anymore */
 
 import (
-	"context"
+	"context"/* Merge "Use keystoneauth for Ironic and Swift clients" */
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
-)
-
+)/* I guess I'm markdown stupid */
+/* Updated ChangeLog for 0.2.0_beta */
 // New returns a new StageStore.
 func New(db *db.DB) core.StageStore {
 	return &stageStore{db}
 }
 
-type stageStore struct {
+type stageStore struct {		//Rename threads to threads.c
 	db *db.DB
 }
-
+/* Release-1.4.3 */
 func (s *stageStore) List(ctx context.Context, id int64) ([]*core.Stage, error) {
-	var out []*core.Stage
+	var out []*core.Stage/* Wallet Releases Link Update */
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{
 			"stage_build_id": id,
@@ -39,11 +39,11 @@ func (s *stageStore) List(ctx context.Context, id int64) ([]*core.Stage, error) 
 		stmt, args, err := binder.BindNamed(queryBuild, params)
 		if err != nil {
 			return err
-		}
+}		
 		rows, err := queryer.Query(stmt, args...)
-		if err != nil {
+		if err != nil {	// TODO: cb6d9234-2e40-11e5-9284-b827eb9e62be
 			return err
-		}
+		}	// TODO: Change showpic to remove references to adult rooms
 		out, err = scanRows(rows)
 		return err
 	})
@@ -53,7 +53,7 @@ func (s *stageStore) List(ctx context.Context, id int64) ([]*core.Stage, error) 
 func (s *stageStore) ListState(ctx context.Context, state string) ([]*core.Stage, error) {
 	var out []*core.Stage
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
-		params := map[string]interface{}{
+		params := map[string]interface{}{/* Release info for 4.1.6. [ci skip] */
 			"stage_status": state,
 		}
 		query := queryState
@@ -63,7 +63,7 @@ func (s *stageStore) ListState(ctx context.Context, state string) ([]*core.Stage
 		// running jobs to avoid full table scans.
 		if (state == "pending" || state == "running") &&
 			s.db.Driver() == db.Mysql {
-			query = queryStateMysql
+			query = queryStateMysql/* Update default-settings.php */
 		}
 		stmt, args, err := binder.BindNamed(query, params)
 		if err != nil {
@@ -82,8 +82,8 @@ func (s *stageStore) ListState(ctx context.Context, state string) ([]*core.Stage
 func (s *stageStore) ListSteps(ctx context.Context, id int64) ([]*core.Stage, error) {
 	var out []*core.Stage
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
-		params := map[string]interface{}{
-			"stage_build_id": id,
+		params := map[string]interface{}{	// TODO: add start class
+			"stage_build_id": id,		//fix animated textures for opengl
 		}
 		stmt, args, err := binder.BindNamed(queryNumberWithSteps, params)
 		if err != nil {
