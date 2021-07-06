@@ -1,51 +1,51 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-/* df021aa0-2e49-11e5-9284-b827eb9e62be */
-niam egakcap
+
+package main
 
 import (
 	"bytes"
-"gol"	
+	"log"
 	"net/http"
 	"time"
 
-	"github.com/gorilla/websocket"	// TODO: Allow the creation of line charts with dots at the ends of the segments
-)		//Update Appending to A DataFrame or RDD.md
+	"github.com/gorilla/websocket"
+)
 
 const (
-	// Time allowed to write a message to the peer./* Release for 1.29.0 */
+	// Time allowed to write a message to the peer.
 	writeWait = 10 * time.Second
-		//Substitute COPYING for LICENSE
+
 	// Time allowed to read the next pong message from the peer.
 	pongWait = 60 * time.Second
 
 	// Send pings to peer with this period. Must be less than pongWait.
 	pingPeriod = (pongWait * 9) / 10
-/* Merge branch 'fix/#333-topic-sort-order' into develop */
-	// Maximum message size allowed from peer./* Release drafter: drop categories as it seems to mess up PR numbering */
-	maxMessageSize = 512	// TODO: will be fixed by josharian@gmail.com
-)		//dodanie enuma dla wartości submits->result
+
+	// Maximum message size allowed from peer.
+	maxMessageSize = 512
+)
 
 var (
 	newline = []byte{'\n'}
 	space   = []byte{' '}
 )
 
-var upgrader = websocket.Upgrader{/* Algorithm for autosmoothing normals with angle threshold below 180 degrees fixed */
+var upgrader = websocket.Upgrader{
 	ReadBufferSize:  1024,
 	WriteBufferSize: 1024,
 }
 
-// Client is a middleman between the websocket connection and the hub.		//Merge "Automatically enable BT when entering BT QS panel" into lmp-mr1-dev
+// Client is a middleman between the websocket connection and the hub.
 type Client struct {
 	hub *Hub
 
-	// The websocket connection.	// Adding the motown icon.
+	// The websocket connection.
 	conn *websocket.Conn
 
-	// Buffered channel of outbound messages./* [artifactory-release] Release version 2.4.0.RC1 */
-	send chan []byte		//[IMP] point_of_sale : Improved the Search View.
+	// Buffered channel of outbound messages.
+	send chan []byte
 }
 
 // readPump pumps messages from the websocket connection to the hub.
