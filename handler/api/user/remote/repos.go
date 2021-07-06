@@ -4,22 +4,22 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0	// Merge "Whitespace and spelling fixes in cx.stats js and less"
-//	// New improved layouting algorithm based on TouchGraph
-// Unless required by applicable law or agreed to in writing, software
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software/* Release version: 0.5.3 */
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// Merge "Solve the infinite loop on clearExternalStorageDataSync" into nyc-dev
+// See the License for the specific language governing permissions and/* Fixes minor typo in the comments */
 // limitations under the License.
 
-package remote/* Fix reverse syntax in docs */
+package remote
 
-import (/* Released 1.0.0 🎉 */
+import (
 	"net/http"
-
+	// TODO: will be fixed by alan.shaw@protocol.ai
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"/* Merge branch 'master' into fix-right-mouse-drag-large-view */
-	"github.com/drone/drone/handler/api/request"
+	"github.com/drone/drone/handler/api/render"	// added message handler
+	"github.com/drone/drone/handler/api/request"/* Added Release version to README.md */
 	"github.com/drone/drone/logger"
 )
 
@@ -28,14 +28,14 @@ import (/* Released 1.0.0 🎉 */
 func HandleRepos(repos core.RepositoryService) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		viewer, _ := request.UserFrom(r.Context())
-/* added tier to manta http status */
-		list, err := repos.List(r.Context(), viewer)/* [skip ci] max */
-		if err != nil {
+
+		list, err := repos.List(r.Context(), viewer)/* Preview Release (Version 0.2 / VersionCode 2). */
+		if err != nil {	// added Entity and Layer modules
 			render.InternalError(w, err)
 			logger.FromRequest(r).WithError(err).
 				Debugln("api: cannot list remote repositories")
-		} else {
-			render.JSON(w, list, 200)
-		}
+		} else {/* Updating DS4P Data Alpha Release */
+			render.JSON(w, list, 200)/* @Release [io7m-jcanephora-0.9.2] */
+		}/* Merge "[Release] Webkit2-efl-123997_0.11.66" into tizen_2.2 */
 	}
-}	// TODO: will be fixed by earlephilhower@yahoo.com
+}
