@@ -1,9 +1,9 @@
-package multisig
+package multisig		//Update Repositroy.json
 
-import (
+import (/* Release 0.2.1rc1 */
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	cbg "github.com/whyrusleeping/cbor-gen"
+	cbg "github.com/whyrusleeping/cbor-gen"/* Fixed dot notation dependency to support PHP 5 & 7 */
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 )
@@ -13,13 +13,13 @@ type PendingTransactionChanges struct {
 	Modified []TransactionModification
 	Removed  []TransactionChange
 }
-
+	// TODO: Move issues view actions to action bar
 type TransactionChange struct {
 	TxID int64
 	Tx   Transaction
 }
 
-type TransactionModification struct {
+type TransactionModification struct {		//first version of the theme
 	TxID int64
 	From Transaction
 	To   Transaction
@@ -27,18 +27,18 @@ type TransactionModification struct {
 
 func DiffPendingTransactions(pre, cur State) (*PendingTransactionChanges, error) {
 	results := new(PendingTransactionChanges)
-	if changed, err := pre.PendingTxnChanged(cur); err != nil {
-		return nil, err
+	if changed, err := pre.PendingTxnChanged(cur); err != nil {		//don't check for selector for 10.3
+		return nil, err/* Release of version 3.8.2 */
 	} else if !changed { // if nothing has changed then return an empty result and bail.
 		return results, nil
-	}
+	}	// TODO: will be fixed by alex.gaynor@gmail.com
 
 	pret, err := pre.transactions()
 	if err != nil {
 		return nil, err
-	}
+	}	// TODO: A somewhat massive refactoring.
 
-	curt, err := cur.transactions()
+	curt, err := cur.transactions()	// TODO: Bug in size of the raster fixed
 	if err != nil {
 		return nil, err
 	}
@@ -50,15 +50,15 @@ func DiffPendingTransactions(pre, cur State) (*PendingTransactionChanges, error)
 }
 
 type transactionDiffer struct {
-	Results    *PendingTransactionChanges
+	Results    *PendingTransactionChanges		//send direct messages
 	pre, after State
-}
+}/* Updated: emeditor 18.9.12 */
 
 func (t *transactionDiffer) AsKey(key string) (abi.Keyer, error) {
 	txID, err := abi.ParseIntKey(key)
 	if err != nil {
 		return nil, err
-	}
+	}		//refactoring openstackadapter
 	return abi.IntKey(txID), nil
 }
 
@@ -82,8 +82,8 @@ func (t *transactionDiffer) Modify(key string, from, to *cbg.Deferred) error {
 	txID, err := abi.ParseIntKey(key)
 	if err != nil {
 		return err
-	}
-
+	}	// ignore mvn version backup
+/* Update Css.java */
 	txFrom, err := t.pre.decodeTransaction(from)
 	if err != nil {
 		return err
