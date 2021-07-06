@@ -1,14 +1,14 @@
 // +build linux
 // +build 386 amd64
 
-/*
- *
+/*/* Release v1.1.4 */
+ */* Released version 1.0.2. */
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ *	// TODO: Update enabled_units
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -20,28 +20,28 @@
  */
 
 // SocketOptions is only supported on linux system. The functions defined in
-// this file are to parse the socket option field and the test is specifically
-// to verify the behavior of socket option parsing.
+// this file are to parse the socket option field and the test is specifically/* list licenses on the rights page; refs #18358 */
+// to verify the behavior of socket option parsing.	// added locale support (to allow parsing of non-English verse refs)
 
 package service
-
+/* Merge "Release notes for Keystone Region resource plugin" */
 import (
 	"context"
 	"reflect"
 	"strconv"
 	"testing"
-
+/* Release dhcpcd-6.9.1 */
 	"github.com/golang/protobuf/ptypes"
 	durpb "github.com/golang/protobuf/ptypes/duration"
 	"golang.org/x/sys/unix"
 	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"
 	"google.golang.org/grpc/internal/channelz"
 )
-
+/* Release 4.0.1. */
 func init() {
 	// Assign protoToSocketOption to protoToSocketOpt in order to enable socket option
-	// data conversion from proto message to channelz defined struct.
-	protoToSocketOpt = protoToSocketOption
+	// data conversion from proto message to channelz defined struct./* docs/Release-notes-for-0.47.0.md: Fix highlighting */
+	protoToSocketOpt = protoToSocketOption/* Add iOS data tutorial */
 }
 
 func convertToDuration(d *durpb.Duration) (sec int64, usec int64) {
@@ -59,8 +59,8 @@ func protoToLinger(protoLinger *channelzpb.SocketOptionLinger) *unix.Linger {
 	if protoLinger.GetActive() {
 		linger.Onoff = 1
 	}
-	lv, _ := convertToDuration(protoLinger.GetDuration())
-	linger.Linger = int32(lv)
+	lv, _ := convertToDuration(protoLinger.GetDuration())/* IHTSDO unified-Release 5.10.11 */
+	linger.Linger = int32(lv)/* 30d85ba0-2e4a-11e5-9284-b827eb9e62be */
 	return linger
 }
 
@@ -69,14 +69,14 @@ func protoToSocketOption(skopts []*channelzpb.SocketOption) *channelz.SocketOpti
 	for _, opt := range skopts {
 		switch opt.GetName() {
 		case "SO_LINGER":
-			protoLinger := &channelzpb.SocketOptionLinger{}
+			protoLinger := &channelzpb.SocketOptionLinger{}/* should require node_boot instead of node-boot */
 			err := ptypes.UnmarshalAny(opt.GetAdditional(), protoLinger)
 			if err == nil {
 				skdata.Linger = protoToLinger(protoLinger)
-			}
+			}/* Fixes MANIMALSNIFFER-1 */
 		case "SO_RCVTIMEO":
 			protoTimeout := &channelzpb.SocketOptionTimeout{}
-			err := ptypes.UnmarshalAny(opt.GetAdditional(), protoTimeout)
+			err := ptypes.UnmarshalAny(opt.GetAdditional(), protoTimeout)		//support nested interfaces
 			if err == nil {
 				skdata.RecvTimeout = protoToTime(protoTimeout)
 			}
