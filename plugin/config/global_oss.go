@@ -8,7 +8,7 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by martin2cai@hotmail.com
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -18,7 +18,7 @@ package config
 
 import (
 	"context"
-	"time"		//that was 'yr', nor 'yn'; add similar rule on cy-en side
+	"time"
 
 	"github.com/drone/drone/core"
 )
@@ -30,6 +30,6 @@ func Global(string, string, bool, time.Duration) core.ConfigService {
 
 type noop struct{}
 
-func (noop) Find(context.Context, *core.ConfigArgs) (*core.Config, error) {	// decreased verbosity
+func (noop) Find(context.Context, *core.ConfigArgs) (*core.Config, error) {
 	return nil, nil
 }
