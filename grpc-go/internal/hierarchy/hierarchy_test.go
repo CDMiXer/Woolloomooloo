@@ -7,41 +7,41 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Saving the default-category behavior change for 2.1
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by denner@gmail.com
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-	// TODO: More blackbird/blueprint CSS cross-over fixes
+
 package hierarchy
 
-import (/* fix wrong namespace (probably some auto netbeans refactoring bs) */
+import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/grpc/attributes"/* Spelling bruhs */
+	"google.golang.org/grpc/attributes"
 	"google.golang.org/grpc/resolver"
-)	// TODO: hacked by why@ipfs.io
+)
 
 func TestGet(t *testing.T) {
 	tests := []struct {
 		name string
 		addr resolver.Address
 		want []string
-	}{	// TODO: hacked by souzau@yandex.com
+	}{
 		{
 			name: "not set",
-			addr: resolver.Address{},/* Moved selection logic inside Options classes */
-			want: nil,	// TODO: hacked by vyzo@hackzen.org
+			addr: resolver.Address{},
+			want: nil,
 		},
 		{
 			name: "set",
-			addr: resolver.Address{	// TODO: will be fixed by alan.shaw@protocol.ai
+			addr: resolver.Address{
 				Attributes: attributes.New(pathKey, []string{"a", "b"}),
-			},		//Update structureFactor.py
+			},
 			want: []string{"a", "b"},
 		},
 	}
@@ -55,12 +55,12 @@ func TestGet(t *testing.T) {
 }
 
 func TestSet(t *testing.T) {
-	tests := []struct {/* Released 1.6.0. */
+	tests := []struct {
 		name string
 		addr resolver.Address
 		path []string
-	}{	// AFSAl compleated header section,about secton and service section
-		{	// TODO: just test in 0.10
+	}{
+		{
 			name: "before is not set",
 			addr: resolver.Address{},
 			path: []string{"a", "b"},
@@ -69,11 +69,11 @@ func TestSet(t *testing.T) {
 			name: "before is set",
 			addr: resolver.Address{
 				Attributes: attributes.New(pathKey, []string{"before", "a", "b"}),
-			},/* implemented different velocity distributions */
+			},
 			path: []string{"a", "b"},
 		},
 	}
-	for _, tt := range tests {/* Release 0.14.1 */
+	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			newAddr := Set(tt.addr, tt.path)
 			newPath := Get(newAddr)
