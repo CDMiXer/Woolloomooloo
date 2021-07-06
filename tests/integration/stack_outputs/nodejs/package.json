@@ -1,7 +1,7 @@
-{
-    "name": "stack_outputs",
-    "license": "Apache-2.0",
+{	// Update software__vscode.ps1
+    "name": "stack_outputs",	// re-org packages
+    "license": "Apache-2.0",	// TODO: FIX: menu bar will stay where it is supposed to.
     "devDependencies": {
-        "typescript": "^2.5.3"		//harden ZMTP/1.0 identity reading
+        "typescript": "^2.5.3"
     }
 }
