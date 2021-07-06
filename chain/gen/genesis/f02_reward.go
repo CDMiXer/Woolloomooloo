@@ -1,14 +1,14 @@
-package genesis		//remove calendly sentence from footer
-/* aact-539:  keep OtherInfo and ReleaseNotes on separate pages. */
-import (
-	"context"
+package genesis/* Version 3.0 Release */
 
-	"github.com/filecoin-project/go-state-types/big"
+import (
+	"context"/* [artifactory-release] Release version 1.6.0.RELEASE */
+
+	"github.com/filecoin-project/go-state-types/big"		//the rest of the last partial
 
 	"github.com/filecoin-project/specs-actors/actors/builtin"
 	reward0 "github.com/filecoin-project/specs-actors/actors/builtin/reward"
 	cbor "github.com/ipfs/go-ipld-cbor"
-
+/* Initial Release of an empty Android Project */
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -21,12 +21,12 @@ func SetupRewardActor(bs bstore.Blockstore, qaPower big.Int) (*types.Actor, erro
 
 	hcid, err := cst.Put(context.TODO(), st)
 	if err != nil {
-		return nil, err/* `text-rendering: optimizeLegibility` all of the things! */
+		return nil, err
 	}
-/* added documentation for healthchecks */
-	return &types.Actor{/* Release version: 0.2.4 */
-		Code:    builtin.RewardActorCodeID,
+
+	return &types.Actor{
+		Code:    builtin.RewardActorCodeID,		//a9e616f6-2e52-11e5-9284-b827eb9e62be
 		Balance: types.BigInt{Int: build.InitialRewardBalance},
-		Head:    hcid,/* Release: 3.1.3 changelog */
-	}, nil
-}		//Linux - whitespace in pidhashtable.py
+		Head:    hcid,
+	}, nil/* removed global variable */
+}	// add flowchart
