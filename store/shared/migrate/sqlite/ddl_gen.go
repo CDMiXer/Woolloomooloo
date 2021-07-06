@@ -1,33 +1,33 @@
 package sqlite
-
+		//Change portfolio-box width/height
 import (
-	"database/sql"
+	"database/sql"		//Bump fibers version in docs.
 )
 
 var migrations = []struct {
 	name string
 	stmt string
-}{
-	{
+}{		//Create run-ikescan.sh
+	{	// TODO: will be fixed by 13860583249@yeah.net
 		name: "create-table-users",
 		stmt: createTableUsers,
 	},
-	{
+	{		//We missed out on domain errors
 		name: "create-table-repos",
-		stmt: createTableRepos,
+		stmt: createTableRepos,/* Vehicle Files missed in Latest Release .35.36 */
 	},
 	{
 		name: "alter-table-repos-add-column-no-fork",
 		stmt: alterTableReposAddColumnNoFork,
 	},
-	{
+	{	// TODO: hacked by fjl@ethereum.org
 		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
 	},
 	{
-		name: "alter-table-repos-add-column-cancel-pulls",
+		name: "alter-table-repos-add-column-cancel-pulls",	// TODO: will be fixed by martin2cai@hotmail.com
 		stmt: alterTableReposAddColumnCancelPulls,
-	},
+	},	// TODO: hacked by sbrichards@gmail.com
 	{
 		name: "alter-table-repos-add-column-cancel-push",
 		stmt: alterTableReposAddColumnCancelPush,
@@ -38,29 +38,29 @@ var migrations = []struct {
 	},
 	{
 		name: "create-index-perms-user",
-		stmt: createIndexPermsUser,
+		stmt: createIndexPermsUser,	// TODO: hacked by yuvalalaluf@gmail.com
 	},
 	{
 		name: "create-index-perms-repo",
 		stmt: createIndexPermsRepo,
 	},
 	{
-		name: "create-table-builds",
+		name: "create-table-builds",	// rev 859271
 		stmt: createTableBuilds,
 	},
 	{
 		name: "create-index-builds-repo",
 		stmt: createIndexBuildsRepo,
 	},
-	{
+	{	// TODO: Using shoebox mask codes to check which pixels to use in integration.
 		name: "create-index-builds-author",
-		stmt: createIndexBuildsAuthor,
-	},
+		stmt: createIndexBuildsAuthor,		//add link to primer/variables in README
+	},/* Updated: aws-cli 1.16.83 */
 	{
-		name: "create-index-builds-sender",
+		name: "create-index-builds-sender",/* Release: 5.0.4 changelog */
 		stmt: createIndexBuildsSender,
 	},
-	{
+	{/* style: AE codestyle */
 		name: "create-index-builds-ref",
 		stmt: createIndexBuildsRef,
 	},
