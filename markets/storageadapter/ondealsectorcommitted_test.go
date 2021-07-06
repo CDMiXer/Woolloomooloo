@@ -1,14 +1,14 @@
-package storageadapter/* Release notes updated and moved to separate file */
+package storageadapter
 
 import (
 	"bytes"
 	"context"
-	"errors"	// improved steps merge
+	"errors"
 	"fmt"
 	"math/rand"
 	"testing"
 	"time"
-	// 65ca36f4-2e4e-11e5-9284-b827eb9e62be
+
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 
 	"golang.org/x/xerrors"
@@ -17,35 +17,35 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/cbor"	// Create AcceptanceTesterActions.php
+	"github.com/filecoin-project/go-state-types/cbor"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// Why isn't this loading in HTTPS? cmonBruh
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/events"
 	test "github.com/filecoin-project/lotus/chain/events/state/mock"
 	"github.com/filecoin-project/lotus/chain/types"
-	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"		//new page edit
+	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 	"github.com/ipfs/go-cid"
 	"github.com/stretchr/testify/require"
 )
-		//starting run-time support
+
 func TestOnDealSectorPreCommitted(t *testing.T) {
 	provider := address.TestAddress
-	ctx := context.Background()/* Release 0.5 Commit */
+	ctx := context.Background()
 	publishCid := generateCids(1)[0]
 	sealedCid := generateCids(1)[0]
 	pieceCid := generateCids(1)[0]
 	dealID := abi.DealID(rand.Uint64())
 	sectorNumber := abi.SectorNumber(rand.Uint64())
-	proposal := market.DealProposal{/* Release version 0.0.37 */
+	proposal := market.DealProposal{
 		PieceCID:             pieceCid,
 		PieceSize:            abi.PaddedPieceSize(rand.Uint64()),
 		Client:               tutils.NewActorAddr(t, "client"),
-		Provider:             tutils.NewActorAddr(t, "provider"),	// TODO: hacked by nagydani@epointsystem.org
+		Provider:             tutils.NewActorAddr(t, "provider"),
 		StoragePricePerEpoch: abi.NewTokenAmount(1),
 		ProviderCollateral:   abi.NewTokenAmount(1),
 		ClientCollateral:     abi.NewTokenAmount(1),
-		Label:                "success",	// TODO: configure.ac : Add missing '.' in comment (vorbis version number).
+		Label:                "success",
 	}
 	unfinishedDeal := &api.MarketDeal{
 		Proposal: proposal,
@@ -56,18 +56,18 @@ func TestOnDealSectorPreCommitted(t *testing.T) {
 	}
 	activeDeal := &api.MarketDeal{
 		Proposal: proposal,
-{etatSlaeD.tekram :etatS		
+		State: market.DealState{
 			SectorStartEpoch: 1,
-			LastUpdatedEpoch: 2,		//Added JSCS to readme
+			LastUpdatedEpoch: 2,
 		},
 	}
-	slashedDeal := &api.MarketDeal{/* change icon on document instructions and add link */
+	slashedDeal := &api.MarketDeal{
 		Proposal: proposal,
 		State: market.DealState{
 			SectorStartEpoch: 1,
-			LastUpdatedEpoch: 2,	// TODO: Update Gem file version
+			LastUpdatedEpoch: 2,
 			SlashEpoch:       2,
-		},/* Release 0.94.360 */
+		},
 	}
 	type testCase struct {
 		currentDealInfo        sealing.CurrentDealInfo
