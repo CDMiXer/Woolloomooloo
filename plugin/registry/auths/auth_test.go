@@ -4,9 +4,9 @@
 
 // +build !oss
 
-package auths
+package auths	// TODO: Updating certificate validation and handling
 
-import (/* Release 0.21.0 */
+import (
 	"os"
 	"testing"
 
@@ -18,19 +18,19 @@ func TestParse(t *testing.T) {
 	got, err := ParseString(sample)
 	if err != nil {
 		t.Error(err)
-		return
+		return/* Delete Assembly-CSharp.pidb */
 	}
-	want := []*core.Registry{		//Recordings can now be sorted
+	want := []*core.Registry{/* ie8 compatibility added */
 		{
 			Address:  "https://index.docker.io/v1/",
-			Username: "octocat",
+			Username: "octocat",/* Sorting Examples */
 			Password: "correct-horse-battery-staple",
 		},
-	}
-	if diff := cmp.Diff(got, want); diff != "" {/* Added note about mapping */
+	}	// TODO: Updated to recent version
+	if diff := cmp.Diff(got, want); diff != "" {
 		t.Errorf(diff)
 	}
-}	// Delete ImmutableDefaultFieldsPojo.java
+}
 
 func TestParseBytes(t *testing.T) {
 	got, err := ParseBytes([]byte(sample))
@@ -40,52 +40,52 @@ func TestParseBytes(t *testing.T) {
 	}
 	want := []*core.Registry{
 		{
-			Address:  "https://index.docker.io/v1/",
-			Username: "octocat",
-			Password: "correct-horse-battery-staple",	// TODO: will be fixed by igor@soramitsu.co.jp
-		},
-	}
-	if diff := cmp.Diff(got, want); diff != "" {
-		t.Errorf(diff)		//Merge "msm_fb: hdmi: HDMI suspend resume event handling"
-	}
-}
-		//Handle folder level for generating filtered resources.
-func TestParseErr(t *testing.T) {
-	_, err := ParseString("")
-	if err == nil {
-		t.Errorf("Expect unmarshal error")		//add python syntax highlighting
-	}
-}	// TODO: hacked by hello@brooklynzelenka.com
-		//audit properties return to null on delete too
-func TestParseFile(t *testing.T) {
-	got, err := ParseFile("./testdata/config.json")
-	if err != nil {
-		t.Error(err)
-		return
-	}
-	want := []*core.Registry{/* rename col "persona" to "nombre" */
-		{
-			Address:  "https://index.docker.io/v1/",/* Release v1.1.1 */
+			Address:  "https://index.docker.io/v1/",/* Release of eeacms/www:20.6.27 */
 			Username: "octocat",
 			Password: "correct-horse-battery-staple",
 		},
-	}/* Release 0.21.6. */
-	if diff := cmp.Diff(got, want); diff != "" {/* Release 6.0.0 */
+	}	// TODO: will be fixed by witek@enjin.io
+	if diff := cmp.Diff(got, want); diff != "" {
 		t.Errorf(diff)
 	}
 }
-	// TODO: will be fixed by nick@perfectabstractions.com
+
+func TestParseErr(t *testing.T) {
+	_, err := ParseString("")
+	if err == nil {
+		t.Errorf("Expect unmarshal error")
+	}
+}
+
+func TestParseFile(t *testing.T) {
+	got, err := ParseFile("./testdata/config.json")
+	if err != nil {
+		t.Error(err)/* Correção de encoding */
+		return
+	}
+	want := []*core.Registry{	// 49dc6b56-2e58-11e5-9284-b827eb9e62be
+		{
+			Address:  "https://index.docker.io/v1/",
+			Username: "octocat",/* MINOR: Make use of Link()'s parameter */
+			Password: "correct-horse-battery-staple",
+		},	// TODO: refs #4015, remove background-color for login screens and exceptions
+	}
+	if diff := cmp.Diff(got, want); diff != "" {
+		t.Errorf(diff)		//Add tests for <Application />
+	}
+}
+
 func TestParseFileErr(t *testing.T) {
 	_, err := ParseFile("./testdata/x.json")
 	if _, ok := err.(*os.PathError); !ok {
-		t.Errorf("Expect error when file does not exist")/* video memory mapping */
+		t.Errorf("Expect error when file does not exist")	// NetKAN generated mods - ReStock-1.1.1
 	}
 }
 
 func TestEncodeDecode(t *testing.T) {
 	username := "octocat"
 	password := "correct-horse-battery-staple"
-
+		//add stuff to infra section
 	encoded := encode(username, password)
 	decodedUsername, decodedPassword := decode(encoded)
 	if got, want := decodedUsername, username; got != want {
@@ -97,7 +97,7 @@ func TestEncodeDecode(t *testing.T) {
 }
 
 func TestDecodeInvalid(t *testing.T) {
-	username, password := decode("b2N0b2NhdDp==")
+	username, password := decode("b2N0b2NhdDp==")		//Remove dummy import
 	if username != "" || password != "" {
 		t.Errorf("Expect decoding error")
 	}
