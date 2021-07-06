@@ -1,4 +1,4 @@
-name: emptygorunmain/* fixing PartitionKey Dropdown issue and updating Release Note. */
-description: An empty Go Pulumi program.
+name: emptygorunmain
+description: An empty Go Pulumi program./* update ServerRelease task */
 runtime: go
-main: ./gorun_main_src/
+main: ./gorun_main_src/		//Merge "Add support of conntrack-tools in Dom0"
