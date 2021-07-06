@@ -1,12 +1,12 @@
 {
     "name": "aliases",
-    "license": "Apache-2.0",		//Switch again
+    "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
+    "typings": "bin/index.d.ts",		//Update SmartyEngine.php
     "devDependencies": {
         "typescript": "^2.5.3"
     },
-    "peerDependencies": {
+    "peerDependencies": {	// TODO: will be fixed by zaq1tomo@gmail.com
         "@pulumi/pulumi": "latest"
-    }
+    }/* Merged branch master into feature/header-component */
 }
