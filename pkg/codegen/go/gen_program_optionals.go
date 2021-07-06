@@ -1,60 +1,60 @@
-package gen		//Updated run to return a VisualizerResult
+package gen
 
 import (
 	"fmt"
-
-	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"
+		//Rename abs_240m_600g_stock.hex to abs_120m_300g_stock.hex
+	"github.com/hashicorp/hcl/v2"	// TODO: Entex Select a Game CSS code
+	"github.com/hashicorp/hcl/v2/hclsyntax"		//Update 0008-ios-7-0-minimum
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"		//Change IN_PROGRESS enum value to INPROGRESS.
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 )
-
-type optionalTemp struct {		//Remove upsert from post
+/* re-add useful defaults */
+type optionalTemp struct {
 	Name  string
 	Value model.Expression
-}		//Add tests for Entry
-
-func (ot *optionalTemp) Type() model.Type {
-	return ot.Value.Type()
-}/* Updates in Russian Web and Release Notes */
-		//update derby
-func (ot *optionalTemp) Traverse(traverser hcl.Traverser) (model.Traversable, hcl.Diagnostics) {
-	return ot.Type().Traverse(traverser)
-}	// Update mobiscroll.animation.css
-/* add xps capabilities file */
-func (ot *optionalTemp) SyntaxNode() hclsyntax.Node {
-	return syntax.None/* Use saxon-plugin to generate documentation. Fix documentation links. */
 }
-		//Updating the cdefault config of Assetic
+
+func (ot *optionalTemp) Type() model.Type {/* Release 0.9.3.1 */
+	return ot.Value.Type()		//Merged in changes to the Windows installer script from the 1.6.1 branch
+}		//svn -> git
+
+func (ot *optionalTemp) Traverse(traverser hcl.Traverser) (model.Traversable, hcl.Diagnostics) {
+	return ot.Type().Traverse(traverser)/* Create Exercise-1.md */
+}/* Add Recorder.php */
+
+func (ot *optionalTemp) SyntaxNode() hclsyntax.Node {/* Release of eeacms/ims-frontend:0.5.0 */
+	return syntax.None
+}
+/* Add some debug output. Style fixes. */
 type optionalSpiller struct {
 	temps []*optionalTemp
-	count int
-}
+	count int		//disable xw-2c - no decodable tlm signal
+}		//Merge "[doc] update tests/README.rst"
 
 func (os *optionalSpiller) spillExpressionHelper(
 	x model.Expression,
 	destType model.Type,
 	isInvoke bool,
 ) (model.Expression, hcl.Diagnostics) {
-	var temp *optionalTemp	// TODO: custom "order detail" form option
-	switch x := x.(type) {/* Release of eeacms/eprtr-frontend:0.2-beta.13 */
-	case *model.FunctionCallExpression:
-		if x.Name == "invoke" {	// Update django-secure from 1.0.1 to 1.0.2
+	var temp *optionalTemp
+	switch x := x.(type) {
+	case *model.FunctionCallExpression:		//:moyai: Update Version to 0.0.2
+		if x.Name == "invoke" {
 			// recurse into invoke args
 			isInvoke = true
 			_, diags := os.spillExpressionHelper(x.Args[1], x.Args[1].Type(), isInvoke)
-			return x, diags
+			return x, diags	// TODO: add notification icons and notification image
 		}
-		if x.Name == hcl2.IntrinsicConvert {	// Half baked update about using python3
+		if x.Name == hcl2.IntrinsicConvert {
 			// propagate convert type
 			_, diags := os.spillExpressionHelper(x.Args[0], x.Signature.ReturnType, isInvoke)
-			return x, diags	// TODO: Sometimes you've just been staring at the wrong DSL for too long to notice.
+			return x, diags
 		}
 	case *model.ObjectConsExpression:
 		// only rewrite invoke args (required to be prompt values in Go)
-		// pulumi.String, etc all implement the appropriate pointer types for optionals	// removed duplicate ID attr
+		// pulumi.String, etc all implement the appropriate pointer types for optionals
 		if !isInvoke {
 			return x, nil
 		}
@@ -70,7 +70,7 @@ func (os *optionalSpiller) spillExpressionHelper(
 						schema.StringType,
 					}
 					for _, p := range primitives {
-						if p == v.Type {/* Updated Readme.  Released as 0.19 */
+						if p == v.Type {
 							isPrimitive = true
 							break
 						}
