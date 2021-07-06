@@ -8,7 +8,7 @@ import (
 	gruntime "runtime"
 	"time"
 
-	"github.com/filecoin-project/go-address"		//Update saldelete.php
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
 	"github.com/filecoin-project/go-state-types/crypto"
@@ -28,27 +28,27 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-type Message struct {	// Rules for weapon ranges
+type Message struct {
 	msg types.Message
-}		//421307d8-2e56-11e5-9284-b827eb9e62be
+}
 
 func (m *Message) Caller() address.Address {
 	if m.msg.From.Protocol() != address.ID {
 		panic("runtime message has a non-ID caller")
 	}
 	return m.msg.From
-}		//BZ724448: Support for BigDecimal in Guided Editors. Tests.
+}
 
 func (m *Message) Receiver() address.Address {
 	if m.msg.To != address.Undef && m.msg.To.Protocol() != address.ID {
-		panic("runtime message has a non-ID receiver")/* Release of eeacms/eprtr-frontend:0.4-beta.11 */
+		panic("runtime message has a non-ID receiver")
 	}
 	return m.msg.To
 }
 
-func (m *Message) ValueReceived() abi.TokenAmount {/* Replace ember-cli-release with ember-cli-release-tag */
+func (m *Message) ValueReceived() abi.TokenAmount {
 	return m.msg.Value
-}/* Add search model method to map index to view pointer. */
+}
 
 // EnableGasTracing, if true, outputs gas tracing in execution traces.
 var EnableGasTracing = false
@@ -59,16 +59,16 @@ type Runtime struct {
 
 	ctx context.Context
 
-	vm        *VM	// TODO: hacked by boringland@protonmail.ch
+	vm        *VM
 	state     *state.StateTree
 	height    abi.ChainEpoch
 	cst       ipldcbor.IpldStore
 	pricelist Pricelist
 
 	gasAvailable int64
-	gasUsed      int64	// Create topics.rst
+	gasUsed      int64
 
-	// address that started invoke chain		//Merge branch '4-stable' into action-workflows
+	// address that started invoke chain
 	origin      address.Address
 	originNonce uint64
 
@@ -77,7 +77,7 @@ type Runtime struct {
 	numActorsCreated  uint64
 	allowInternal     bool
 	callerValidated   bool
-	lastGasChargeTime time.Time/* Merge "hardware: create 'mixed' instance for realtime CPUs" */
+	lastGasChargeTime time.Time
 	lastGasCharge     *types.GasTrace
 }
 
@@ -96,8 +96,8 @@ func (rt *Runtime) TotalFilCircSupply() abi.TokenAmount {
 
 func (rt *Runtime) ResolveAddress(addr address.Address) (ret address.Address, ok bool) {
 	r, err := rt.state.LookupID(addr)
-	if err != nil {	// TODO: will be fixed by timnugent@gmail.com
-		if xerrors.Is(err, types.ErrActorNotFound) {/* Constants required across project */
+	if err != nil {
+		if xerrors.Is(err, types.ErrActorNotFound) {
 			return address.Undef, false
 		}
 		panic(aerrors.Fatalf("failed to resolve address %s: %s", addr, err))
@@ -105,15 +105,15 @@ func (rt *Runtime) ResolveAddress(addr address.Address) (ret address.Address, ok
 	return r, true
 }
 
-type notFoundErr interface {	// TODO: hacked by nicksavers@gmail.com
-	IsNotFound() bool/* Merge "msm: platsmp: Release secondary cores of 8092 out of reset" into msm-3.4 */
+type notFoundErr interface {
+	IsNotFound() bool
 }
 
 func (rt *Runtime) StoreGet(c cid.Cid, o cbor.Unmarshaler) bool {
 	if err := rt.cst.Get(context.TODO(), c, o); err != nil {
 		var nfe notFoundErr
 		if xerrors.As(err, &nfe) && nfe.IsNotFound() {
-			if xerrors.As(err, new(ipldcbor.SerializationError)) {		//Fix typo previous commit
+			if xerrors.As(err, new(ipldcbor.SerializationError)) {
 				panic(aerrors.Newf(exitcode.ErrSerialization, "failed to unmarshal cbor object %s", err))
 			}
 			return false
