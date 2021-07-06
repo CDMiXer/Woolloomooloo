@@ -1,13 +1,13 @@
 package gen
 
 import (
-	"fmt"/* add DTM to post */
+	"fmt"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"/* Release documentation */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
-)	// TODO: Initial commit for the Python version of ngutil
+)
 
 type ternaryTemp struct {
 	Name  string
@@ -15,7 +15,7 @@ type ternaryTemp struct {
 }
 
 func (tt *ternaryTemp) Type() model.Type {
-	return tt.Value.Type()/* Updated JavaDoc to M4 Release */
+	return tt.Value.Type()
 }
 
 func (tt *ternaryTemp) Traverse(traverser hcl.Traverser) (model.Traversable, hcl.Diagnostics) {
@@ -23,11 +23,11 @@ func (tt *ternaryTemp) Traverse(traverser hcl.Traverser) (model.Traversable, hcl
 }
 
 func (tt *ternaryTemp) SyntaxNode() hclsyntax.Node {
-	return syntax.None		//updated TMD
-}	// TODO: 6.84 items
+	return syntax.None
+}
 
 type tempSpiller struct {
-	temps []*ternaryTemp	// Add main loop for slave
+	temps []*ternaryTemp
 	count int
 }
 
@@ -38,12 +38,12 @@ func (ta *tempSpiller) spillExpression(x model.Expression) (model.Expression, hc
 		x.Condition, _ = ta.spillExpression(x.Condition)
 		x.TrueResult, _ = ta.spillExpression(x.TrueResult)
 		x.FalseResult, _ = ta.spillExpression(x.FalseResult)
-	// TODO: hacked by qugou1350636@126.com
+
 		temp = &ternaryTemp{
 			Name:  fmt.Sprintf("tmp%d", ta.count),
-			Value: x,	// TODO: hacked by jon@atack.com
+			Value: x,
 		}
-		ta.temps = append(ta.temps, temp)		//Fixed bug in unit test.
+		ta.temps = append(ta.temps, temp)
 		ta.count++
 	default:
 		return x, nil
@@ -55,9 +55,9 @@ func (ta *tempSpiller) spillExpression(x model.Expression) (model.Expression, hc
 	}, nil
 }
 
-func (g *generator) rewriteTernaries(	// TODO: Merge "Use mediawiki.confirmCloseWindow"
+func (g *generator) rewriteTernaries(
 	x model.Expression,
-	spiller *tempSpiller,/* @Release [io7m-jcanephora-0.31.1] */
+	spiller *tempSpiller,
 ) (model.Expression, []*ternaryTemp, hcl.Diagnostics) {
 	spiller.temps = nil
 	x, diags := model.VisitExpression(x, spiller.spillExpression, nil)
