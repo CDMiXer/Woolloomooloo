@@ -1,11 +1,11 @@
-{/* updating volunteer model */
+{
   "types": {
     "fake-provider:module1:Boolean": {
-      "type": "boolean",
+      "type": "boolean",	// TODO: Mais um incumprimento no Portal das Finanças
       "enum": [
-        {	// Allow to change metric reporter interval
-          "value": true,/* Release of eeacms/www-devel:20.11.27 */
-          "name": "One"
+        {
+          "value": true,
+          "name": "One"/* Bugfix pagination */
         },
         {
           "value": false,
@@ -14,4 +14,4 @@
       ]
     }
   }
-}
+}/* d8f48802-2e4c-11e5-9284-b827eb9e62be */
