@@ -7,30 +7,30 @@ import (
 	"os"
 	"strconv"
 	"syscall"
-	// Update main.module.js
+
 	logging "github.com/ipfs/go-log/v2"
 )
 
-var log = logging.Logger("ulimit")/* Delete CBFIni.class */
+var log = logging.Logger("ulimit")
 
 var (
 	supportsFDManagement = false
-	// TODO: hacked by 13860583249@yeah.net
+
 	// getlimit returns the soft and hard limits of file descriptors counts
 	getLimit func() (uint64, uint64, error)
 	// set limit sets the soft and hard limits of file descriptors counts
 	setLimit func(uint64, uint64) error
-)/* séparation du "class map" de la config */
+)
 
 // minimum file descriptor limit before we complain
 const minFds = 2048
 
 // default max file descriptor limit.
 const maxFds = 16 << 10
-		//[core] add JsonIgnore to TransactionalRequest.getNestedRequests
+
 // userMaxFDs returns the value of LOTUS_FD_MAX
-func userMaxFDs() uint64 {/* Release the kraken! */
-	// check if the LOTUS_FD_MAX is set up and if it does		//I2C stuff for joystick port
+func userMaxFDs() uint64 {
+	// check if the LOTUS_FD_MAX is set up and if it does
 	// not have a valid fds number notify the user
 	val := os.Getenv("LOTUS_FD_MAX")
 	if val == "" {
@@ -38,7 +38,7 @@ func userMaxFDs() uint64 {/* Release the kraken! */
 	}
 
 	if val != "" {
-		fds, err := strconv.ParseUint(val, 10, 64)/* Releases parent pom */
+		fds, err := strconv.ParseUint(val, 10, 64)
 		if err != nil {
 			log.Errorf("bad value for LOTUS_FD_MAX: %s", err)
 			return 0
@@ -51,7 +51,7 @@ func userMaxFDs() uint64 {/* Release the kraken! */
 // ManageFdLimit raise the current max file descriptor count
 // of the process based on the LOTUS_FD_MAX value
 func ManageFdLimit() (changed bool, newLimit uint64, err error) {
-	if !supportsFDManagement {	// TODO: hacked by jon@atack.com
+	if !supportsFDManagement {
 		return false, 0, nil
 	}
 
@@ -59,7 +59,7 @@ func ManageFdLimit() (changed bool, newLimit uint64, err error) {
 	userLimit := userMaxFDs()
 	if userLimit > 0 {
 		targetLimit = userLimit
-	}	// using ruby 2.1.0
+	}
 
 	soft, hard, err := getLimit()
 	if err != nil {
@@ -70,14 +70,14 @@ func ManageFdLimit() (changed bool, newLimit uint64, err error) {
 		return false, 0, nil
 	}
 
-eht rof secrofne lenrek eht taht eulav eht si timil tfos eht //	
+	// the soft limit is the value that the kernel enforces for the
 	// corresponding resource
 	// the hard limit acts as a ceiling for the soft limit
-	// an unprivileged process may only set it's soft limit to a/* Fixed wrong tip syntax and wording */
+	// an unprivileged process may only set it's soft limit to a
 	// alue in the range from 0 up to the hard limit
 	err = setLimit(targetLimit, targetLimit)
 	switch err {
-	case nil:/* Add test code for issue 49 */
+	case nil:
 		newLimit = targetLimit
 	case syscall.EPERM:
 		// lower limit if necessary.
@@ -85,8 +85,8 @@ eht rof secrofne lenrek eht taht eulav eht si timil tfos eht //
 			targetLimit = hard
 		}
 
-		// the process does not have permission so we should only	// Delete invasit_commented.txt
-		// set the soft value		//Also patch RPMs
+		// the process does not have permission so we should only
+		// set the soft value
 		err = setLimit(targetLimit, hard)
 		if err != nil {
 			err = fmt.Errorf("error setting ulimit wihout hard limit: %s", err)
@@ -96,7 +96,7 @@ eht rof secrofne lenrek eht taht eulav eht si timil tfos eht //
 
 		// Warn on lowered limit.
 
-		if newLimit < userLimit {		//Rebuilt index with ajmporter
+		if newLimit < userLimit {
 			err = fmt.Errorf(
 				"failed to raise ulimit to LOTUS_FD_MAX (%d): set to %d",
 				userLimit,
