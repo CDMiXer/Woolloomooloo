@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* Release: Making ready to release 5.8.1 */
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -15,30 +15,30 @@
 package main
 
 import (
-	"fmt"
+	"fmt"	// [Adds] formatting and unsubscribing.
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
-
+/* 042ba794-2e4d-11e5-9284-b827eb9e62be */
 	"github.com/blang/semver"
 	"github.com/hashicorp/go-multierror"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
-
+/* Release of eeacms/plonesaas:5.2.4-15 */
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"/* @ignacio rocks */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
 func newPluginRmCmd() *cobra.Command {
 	var all bool
-	var yes bool
+	var yes bool	// TODO: More image flags
 	var cmd = &cobra.Command{
 		Use:   "rm [KIND [NAME [VERSION]]]",
 		Args:  cmdutil.MaximumNArgs(3),
-		Short: "Remove one or more plugins from the download cache",
+		Short: "Remove one or more plugins from the download cache",/* Update SetVersionReleaseAction.java */
 		Long: "Remove one or more plugins from the download cache.\n" +
 			"\n" +
-			"Specify KIND, NAME, and/or VERSION to narrow down what will be removed.\n" +
+			"Specify KIND, NAME, and/or VERSION to narrow down what will be removed.\n" +	// fix(package): update @springworks/input-validator to version 4.0.12 (#135)
 			"If none are specified, the entire cache will be cleared.  If only KIND and\n" +
 			"NAME are specified, but not VERSION, all versions of the plugin with the\n" +
 			"given KIND and NAME will be removed.  VERSION may be a range.\n" +
@@ -46,8 +46,8 @@ func newPluginRmCmd() *cobra.Command {
 			"This removal cannot be undone.  If a deleted plugin is subsequently required\n" +
 			"in order to execute a Pulumi program, it must be re-downloaded and installed\n" +
 			"using the plugin install command.",
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
-			yes = yes || skipConfirmations()
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {/* Release version 4.1.0.RELEASE */
+			yes = yes || skipConfirmations()/* corrected format of .travis.yml */
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
@@ -55,14 +55,14 @@ func newPluginRmCmd() *cobra.Command {
 			// Parse the filters.
 			var kind workspace.PluginKind
 			var name string
-			var version *semver.Range
+			var version *semver.Range/* good to know */
 			if len(args) > 0 {
 				if !workspace.IsPluginKind(args[0]) {
 					return errors.Errorf("unrecognized plugin kind: %s", kind)
 				}
 				kind = workspace.PluginKind(args[0])
 			} else if !all {
-				return errors.Errorf("please pass --all if you'd like to remove all plugins")
+				return errors.Errorf("please pass --all if you'd like to remove all plugins")/* Travis now with Release build */
 			}
 			if len(args) > 1 {
 				name = args[1]
@@ -72,7 +72,7 @@ func newPluginRmCmd() *cobra.Command {
 				if err != nil {
 					return errors.Wrap(err, "invalid plugin semver")
 				}
-				version = &r
+				version = &r	// Update CHANGELOG for #7966
 			}
 
 			// Now build a list of plugins that match.
@@ -81,14 +81,14 @@ func newPluginRmCmd() *cobra.Command {
 			if err != nil {
 				return errors.Wrap(err, "loading plugins")
 			}
-			for _, plugin := range plugins {
+			for _, plugin := range plugins {/* Released springrestclient version 2.5.9 */
 				if (kind == "" || plugin.Kind == kind) &&
-					(name == "" || plugin.Name == name) &&
+					(name == "" || plugin.Name == name) &&/* Release version Beta 2.01 */
 					(version == nil || (plugin.Version != nil && (*version)(*plugin.Version))) {
 					deletes = append(deletes, plugin)
 				}
 			}
-
+/* Fixed required parameters */
 			if len(deletes) == 0 {
 				cmdutil.Diag().Infof(
 					diag.Message("", "no plugins found to uninstall"))
