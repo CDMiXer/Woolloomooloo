@@ -1,1 +1,1 @@
-pulumi>=1.0.0
+pulumi>=1.0.0		//Fixed parameter completion unit test.
