@@ -1,26 +1,26 @@
 {
     "Ref": {
-        "Name": "v1.1.0",	// Transparent image backgrounds
+        "Name": "v1.1.0",
         "Sha": "823b2230a56056231c9425d63758fa87078a66b4"
-    },		//Create Data_Types_Lab .py
+    },
     "Repo": {
         "ID": "1",
-        "Namespace": "PRJ",/* fix MegaD-2561 name */
+        "Namespace": "PRJ",
         "Name": "my-repo",
         "Perm": null,
         "Branch": "master",
         "Private": true,
-        "Clone": "",
+        "Clone": "",	// TODO: Usage twiddling, doc comments
         "CloneSSH": "",
         "Link": "",
         "Created": "0001-01-01T00:00:00Z",
-        "Updated": "0001-01-01T00:00:00Z"
-    },		//Merge "Disable Ceilometer API by default on undercloud"
-    "Action": "created",
+        "Updated": "0001-01-01T00:00:00Z"	// TODO: hacked by timnugent@gmail.com
+    },
+    "Action": "created",/* Updated Wait And See */
     "Sender": {
         "Login": "jcitizen",
         "Name": "Jane Citizen",
-        "Email": "jane@example.com",/* Release sun.misc */
+        "Email": "jane@example.com",
         "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
-    }/* Release new version 2.5.41:  */
+    }
 }
