@@ -1,22 +1,22 @@
 resource bar "kubernetes:core/v1:Pod" {
     apiVersion = "v1"
-    kind = "Pod"
+    kind = "Pod"		//Story name detection
     metadata = {
-        namespace = "foo"	// TODO: hacked by zaq1tomo@gmail.com
-        name = "bar"
+        namespace = "foo"
+        name = "bar"	// TODO: affinity checker
     }
-    spec = {/* New version of BizStudio Lite - 1.0.19 */
-        containers = [	// TODO: weekly dependabot updates
+    spec = {
+        containers = [	// TODO: Merge "Reformat hudson.tools and hudson.triggers"
             {
-                name = "nginx"
-                image = "nginx:1.14-alpine"/* don't send NHC's TCV thru the VTEC ingest, its duplicated */
-                resources = {/* Beta Release (Version 1.2.7 / VersionCode 15) */
-                    limits = {
+                name = "nginx"/* Adding Academy Release Note */
+                image = "nginx:1.14-alpine"
+                resources = {	// TODO: hacked by alan.shaw@protocol.ai
+                    limits = {	// TODO: Update ICommandDescriptor.cs
                         memory = "20Mi"
-                        cpu = 0.2
-                    }
+                        cpu = 0.2		//Some additional work on the Tk UI from #hsbxl
+                    }	// TODO: GCOV support
                 }
-            }/* Merge "Embrane LBaaS Driver" */
+            }/* Released springjdbcdao version 1.9.9 */
         ]
     }
-}		//More fixes for orderly resource cleanup and added comments
+}
