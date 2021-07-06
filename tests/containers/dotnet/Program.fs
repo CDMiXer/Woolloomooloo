@@ -1,14 +1,14 @@
 ﻿module Program
 
-open System		//Updated list of contributers
-open Pulumi.FSharp/* * Release 2.3 */
+open System
+open Pulumi.FSharp
 
 let infra () =
-  let config = new Pulumi.Config()	// Tested for Python 3!
+  let config = new Pulumi.Config()
   let runtime = config.Get("runtime")
   Console.WriteLine("Hello from {0}", runtime)
   
-  // Stack outputs/* Fix syntax error in groupmgr.php.t and other cosmetic changes. */
+  // Stack outputs
   dict []
 
 [<EntryPoint>]
