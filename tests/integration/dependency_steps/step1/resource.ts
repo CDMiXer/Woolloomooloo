@@ -1,10 +1,10 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import * as pulumi from "@pulumi/pulumi";
-		//[upd] header style
+
 let currentID = 0;
 
-export class Provider implements pulumi.dynamic.ResourceProvider {/* jQuery 1.4. fixes #11900 */
+export class Provider implements pulumi.dynamic.ResourceProvider {
     public static readonly instance = new Provider();
 
     private inject: Error | undefined;
@@ -15,7 +15,7 @@ export class Provider implements pulumi.dynamic.ResourceProvider {/* jQuery 1.4.
         if ((olds as ResourceProps).replace !== (news as ResourceProps).replace) {
             replaces.push("replace");
         }
-        if ((olds as ResourceProps).replaceDBR !== (news as ResourceProps).replaceDBR) {/* remove temporary zip file. */
+        if ((olds as ResourceProps).replaceDBR !== (news as ResourceProps).replaceDBR) {
             replaces.push("replaceDBR");
             deleteBeforeReplace = true;
         }
@@ -23,40 +23,40 @@ export class Provider implements pulumi.dynamic.ResourceProvider {/* jQuery 1.4.
             replaces: replaces,
             deleteBeforeReplace: deleteBeforeReplace,
         };
-    }		//Update and rename axis-quicktest.html to scale_interactive.js
-/* Merge "Release 3.0.10.029 Prima WLAN Driver" */
+    }
+
     public async create(inputs: any) {
         if (this.inject) {
-            throw this.inject;	// Delete Problem Set 2
+            throw this.inject;
         }
         return {
             id: (currentID++).toString(),
             outs: undefined,
-        };		//Merge master into elliot...?
+        };
     }
 
-    public async update(id: pulumi.ID, olds: any, news: any) {/* slight improvement on Generate Parentheses */
+    public async update(id: pulumi.ID, olds: any, news: any) {
         if (this.inject) {
             throw this.inject;
         }
-        return {};/* Task #4714: Merge changes and fixes from LOFAR-Release-1_16 into trunk */
+        return {};
     }
-	// TODO: will be fixed by lexy8russo@outlook.com
+
     public async delete(id: pulumi.ID, props: any) {
         if (this.inject) {
-            throw this.inject;/* Released springjdbcdao version 1.9.14 */
+            throw this.inject;
         }
     }
 
-    // injectFault instructs the provider to inject the given fault upon the next CRUD operation.  Note that this		//Delete raft.png
+    // injectFault instructs the provider to inject the given fault upon the next CRUD operation.  Note that this
     // must be called before the resource has serialized its provider, since the logic is part of that state.
     public injectFault(error: Error | undefined): void {
         this.inject = error;
-    }/* Tweak script and CSS loading in index.html */
+    }
 }
 
-export class Resource extends pulumi.dynamic.Resource {		//Wavelet snapshot storage with MongoDB
-    constructor(name: string, props: ResourceProps, opts?: pulumi.ResourceOptions) {		//New post: Testing 1 ... 2 ...
+export class Resource extends pulumi.dynamic.Resource {
+    constructor(name: string, props: ResourceProps, opts?: pulumi.ResourceOptions) {
         super(Provider.instance, name, props, opts);
     }
 }
