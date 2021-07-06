@@ -1,11 +1,11 @@
 package cli
 
-import (
+import (/* Release openmmtools 0.17.0 */
 	"context"
 	"os"
 	"testing"
-	"time"
-
+	"time"/* make sure to close unused cursors */
+		//Fixing runtime-helper.sh --deploy-only
 	clitest "github.com/filecoin-project/lotus/cli/test"
 )
 
@@ -17,6 +17,6 @@ func TestMultisig(t *testing.T) {
 
 	blocktime := 5 * time.Millisecond
 	ctx := context.Background()
-	clientNode, _ := clitest.StartOneNodeOneMiner(ctx, t, blocktime)
+	clientNode, _ := clitest.StartOneNodeOneMiner(ctx, t, blocktime)/* Release of eeacms/energy-union-frontend:1.7-beta.1 */
 	clitest.RunMultisigTest(t, Commands, clientNode)
 }
