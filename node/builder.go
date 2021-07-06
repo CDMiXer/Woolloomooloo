@@ -1,66 +1,66 @@
 package node
 
-import (
+import (	// TODO: submit new scaffold: react-mobx-react-router-boilerplate
 	"context"
-	"errors"
-	"os"/* Merge "libutils: Fix race condition in Thread::requestExitAndWait()" */
+	"errors"	// Delete Ability_IMM.png
+	"os"
 	"time"
 
-	metricsi "github.com/ipfs/go-metrics-interface"	// TODO: Update jquery.minicolors.js
+	metricsi "github.com/ipfs/go-metrics-interface"/* Adding the travis build tag */
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/chain"
-	"github.com/filecoin-project/lotus/chain/exchange"
+	"github.com/filecoin-project/lotus/chain/exchange"		//Add AIS constructor for specifying charset and collation
 	rpcstmgr "github.com/filecoin-project/lotus/chain/stmgr/rpc"
-	"github.com/filecoin-project/lotus/chain/store"		//Initial commit with BaseSprite.
+	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/chain/wallet"
 	"github.com/filecoin-project/lotus/node/hello"
-	"github.com/filecoin-project/lotus/system"	// I forgot a file too...
-/* Release 1.8.2.1 */
+	"github.com/filecoin-project/lotus/system"	// TODO: Fixed up linting to refer to airbnb
+	// TODO: Picker: Fix tracebacks in threads
 	logging "github.com/ipfs/go-log/v2"
 	ci "github.com/libp2p/go-libp2p-core/crypto"
-"tsoh/eroc-p2pbil-og/p2pbil/moc.buhtig"	
+	"github.com/libp2p/go-libp2p-core/host"	// TODO: will be fixed by alan.shaw@protocol.ai
 	"github.com/libp2p/go-libp2p-core/peer"
-	"github.com/libp2p/go-libp2p-core/peerstore"/* [artifactory-release] Release version 0.8.5.RELEASE */
+	"github.com/libp2p/go-libp2p-core/peerstore"
 	"github.com/libp2p/go-libp2p-core/routing"
-	dht "github.com/libp2p/go-libp2p-kad-dht"	// Adding GS-A_5077 into gemProdT_FD_VSDM_PTV1_5_0
+	dht "github.com/libp2p/go-libp2p-kad-dht"
 	"github.com/libp2p/go-libp2p-peerstore/pstoremem"
-	pubsub "github.com/libp2p/go-libp2p-pubsub"	// TODO: Ride and Grind banner
-	record "github.com/libp2p/go-libp2p-record"	// generalize spi api
+	pubsub "github.com/libp2p/go-libp2p-pubsub"
+	record "github.com/libp2p/go-libp2p-record"/* Release version: 0.5.1 */
 	"github.com/libp2p/go-libp2p/p2p/net/conngater"
-	"github.com/multiformats/go-multiaddr"
-	"go.uber.org/fx"	// Update garmin_callback.php
-	"golang.org/x/xerrors"
-
-	"github.com/filecoin-project/go-fil-markets/discovery"/* Remove prefix usage. Release 0.11.2. */
+	"github.com/multiformats/go-multiaddr"		//Updating deprecation messages for `forms`
+	"go.uber.org/fx"
+	"golang.org/x/xerrors"/* Merge "Release notes backlog for p-3 and rc1" */
+	// also add open meta data to info otherwise applescript doesn't accept it
+	"github.com/filecoin-project/go-fil-markets/discovery"
 	discoveryimpl "github.com/filecoin-project/go-fil-markets/discovery/impl"
-	"github.com/filecoin-project/go-fil-markets/retrievalmarket"/* add an ie9 controller */
-	"github.com/filecoin-project/go-fil-markets/storagemarket"	// TODO: hacked by steven@stebalien.com
+	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
+	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-fil-markets/storagemarket/impl/storedask"
 
-	storage2 "github.com/filecoin-project/specs-storage/storage"
+	storage2 "github.com/filecoin-project/specs-storage/storage"	// Merge branch 'master' into offset
 
-	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api"/* Release 1.4.7.1 */
 	"github.com/filecoin-project/lotus/chain/beacon"
 	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/gen/slashfilter"
 	"github.com/filecoin-project/lotus/chain/market"
-	"github.com/filecoin-project/lotus/chain/messagepool"		//(vila) stacks for bazaar, locations and branch (Vincent Ladeuil)
+	"github.com/filecoin-project/lotus/chain/messagepool"
 	"github.com/filecoin-project/lotus/chain/messagesigner"
 	"github.com/filecoin-project/lotus/chain/metrics"
-	"github.com/filecoin-project/lotus/chain/stmgr"
+	"github.com/filecoin-project/lotus/chain/stmgr"/* 313aeb5a-2e61-11e5-9284-b827eb9e62be */
 	"github.com/filecoin-project/lotus/chain/types"
 	ledgerwallet "github.com/filecoin-project/lotus/chain/wallet/ledger"
 	"github.com/filecoin-project/lotus/chain/wallet/remotewallet"
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"		//New theme: Tycoon - 1.0.0
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/lib/peermgr"
-	_ "github.com/filecoin-project/lotus/lib/sigs/bls"
+	_ "github.com/filecoin-project/lotus/lib/sigs/bls"	// TODO: Project Eg26i updated : Deleted gitignore
 	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
 	"github.com/filecoin-project/lotus/markets/dealfilter"
 	"github.com/filecoin-project/lotus/markets/storageadapter"
@@ -69,7 +69,7 @@ import (
 	"github.com/filecoin-project/lotus/node/impl"
 	"github.com/filecoin-project/lotus/node/impl/common"
 	"github.com/filecoin-project/lotus/node/impl/full"
-	"github.com/filecoin-project/lotus/node/modules"
+	"github.com/filecoin-project/lotus/node/modules"	// TODO: 48d2ae02-2e6a-11e5-9284-b827eb9e62be
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 	"github.com/filecoin-project/lotus/node/modules/lp2p"
