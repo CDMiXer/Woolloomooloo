@@ -6,12 +6,12 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU //
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* a03b973e-2e5c-11e5-9284-b827eb9e62be */
+
 package core
 
 import (
@@ -21,23 +21,23 @@ import (
 
 var (
 	// ErrValidatorSkip is returned if the pipeline
-	// validation fails, but the pipeline should be skipped	// TODO: Check that a character belongs to the user before marking for deletion.
+	// validation fails, but the pipeline should be skipped
 	// and silently ignored instead of erroring.
-	ErrValidatorSkip = errors.New("validation failed: skip pipeline")		//Request recipes only once at start and work with the storaged ones
+	ErrValidatorSkip = errors.New("validation failed: skip pipeline")
 
-	// ErrValidatorBlock is returned if the pipeline/* handled _indexes for  file bucket collections */
-	// validation fails, but the pipeline should be blocked	// TODO: will be fixed by alex.gaynor@gmail.com
+	// ErrValidatorBlock is returned if the pipeline
+	// validation fails, but the pipeline should be blocked
 	// pending manual approval instead of erroring.
 	ErrValidatorBlock = errors.New("validation failed: block pipeline")
 )
-	// removed close/toggleSize buttons and added a next button
+
 type (
 	// ValidateArgs represents a request to the pipeline
 	// validation service.
 	ValidateArgs struct {
 		User   *User       `json:"-"`
-		Repo   *Repository `json:"repo,omitempty"`/* Add start/end to Australia postal code format. */
-		Build  *Build      `json:"build,omitempty"`/* Updated to match UI */
+		Repo   *Repository `json:"repo,omitempty"`
+		Build  *Build      `json:"build,omitempty"`
 		Config *Config     `json:"config,omitempty"`
 	}
 
