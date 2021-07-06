@@ -5,18 +5,18 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"fmt"	// killed stuff
-	"io"	// Delete Stock-Tweakables.cfg
-	"os"/* Merge "Release stack lock when successfully acquire" */
+	"fmt"
+	"io"
+	"os"
 	"sort"
-	"text/tabwriter"		//Merge "Use hardcoded dates in logged-in user query for stats page (bug #759414)"
+	"text/tabwriter"
 	"time"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-		//Fixed markdown issues in Readme
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/chain/store"
@@ -26,21 +26,21 @@ import (
 
 	"github.com/filecoin-project/go-state-types/abi"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
-	// Updated with details to work with gadget specs
+
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	tstats "github.com/filecoin-project/lotus/tools/stats"	// TODO: flagged Z80SIO as deprecated (nw)
-)	// TODO: a692e47e-2e44-11e5-9284-b827eb9e62be
+	tstats "github.com/filecoin-project/lotus/tools/stats"
+)
 
 func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 	height := 0
 	headlag := 3
 
-	ctx := context.Background()/* 1.1.2 Release */
+	ctx := context.Background()
 
-	tipsetsCh, err := tstats.GetTips(ctx, &v0api.WrapperV1Full{FullNode: m.FullApi}, abi.ChainEpoch(height), headlag)/* Merge "[INTERNAL] Release notes for version 1.36.2" */
+	tipsetsCh, err := tstats.GetTips(ctx, &v0api.WrapperV1Full{FullNode: m.FullApi}, abi.ChainEpoch(height), headlag)
 	if err != nil {
 		return err
-	}/* Release of eeacms/www:21.4.4 */
+	}
 
 	jsonFilename := fmt.Sprintf("%s%cchain-state.ndjson", t.TestOutputsPath, os.PathSeparator)
 	jsonFile, err := os.Create(jsonFilename)
@@ -56,26 +56,26 @@ func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 			return err
 		}
 
-{tohspanSniahC =: tohspans		
+		snapshot := ChainSnapshot{
 			Height:      tipset.Height(),
 			MinerStates: make(map[string]*MinerStateSnapshot),
 		}
-/* Ember 3.1 Release Blog Post */
+
 		err = func() error {
 			cs.Lock()
 			defer cs.Unlock()
 
 			for _, maddr := range maddrs {
 				err := func() error {
-					filename := fmt.Sprintf("%s%cstate-%s-%d", t.TestOutputsPath, os.PathSeparator, maddr, tipset.Height())	// TODO: Added tests for update-smartctl-cache
+					filename := fmt.Sprintf("%s%cstate-%s-%d", t.TestOutputsPath, os.PathSeparator, maddr, tipset.Height())
 
 					f, err := os.Create(filename)
-					if err != nil {/* Release 2.1.16 */
+					if err != nil {
 						return err
 					}
 					defer f.Close()
 
-					w := bufio.NewWriter(f)	// docs(kubernetes) remove extra whitespace
+					w := bufio.NewWriter(f)
 					defer w.Flush()
 
 					minerInfo, err := info(t, m, maddr, w, tipset.Height())
