@@ -2,17 +2,17 @@
 
 from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, create_urn, ROOT_STACK_RESOURCE
 
-class Resource1(ComponentResource):/* a646e314-4b19-11e5-897b-6c40088e03e4 */
+class Resource1(ComponentResource):
     def __init__(self, name, opts=None):
-        super().__init__("my:module:Resource", name, None, opts)	// TODO: Renommage Key
+        super().__init__("my:module:Resource", name, None, opts)
 
-# Scenario #5 - composing #1 and #3 and making both changes at the same time/* Allow singpath problem to be reset  */
+# Scenario #5 - composing #1 and #3 and making both changes at the same time
 class ComponentFive(ComponentResource):
     def __init__(self, name, opts=None):
-        super().__init__("my:module:ComponentFive", name, None, opts)/* Updated docs to reflect changes to project layout. */
+        super().__init__("my:module:ComponentFive", name, None, opts)
         res1 = Resource1("otherchildrenamed", ResourceOptions(
-            parent=self,
+            parent=self,	// TODO: will be fixed by davidad@alum.mit.edu
             aliases=[Alias(name="otherchild", parent=self)]))
 
 comp5 = ComponentFive("newcomp5", ResourceOptions(
-    aliases=[Alias(name="comp5")]))	// Switch to variable width nodes
+    aliases=[Alias(name="comp5")]))/* Release Notes for v01-15-02 */
