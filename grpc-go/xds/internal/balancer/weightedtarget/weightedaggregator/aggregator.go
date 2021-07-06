@@ -1,56 +1,56 @@
 /*
  *
- * Copyright 2020 gRPC authors.		//Merge "ARM: dts: msm: Correct copyright date of msm8976-regulator.dtsi"
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Releases 0.2.1 */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Released v2.15.3 */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// Merge "Use aarch64-linux-android-4.9 for arm64 build (attempt #3)"
+ * limitations under the License.
  *
  */
-/* Only get selection from language list if it has a selection */
+
 // Package weightedaggregator implements state aggregator for weighted_target
-// balancer.	// TODO: Delete btcprice2.py
+// balancer.
 //
 // This is a separate package so it can be shared by weighted_target and eds.
 // The eds balancer will be refactored to use weighted_target directly. After
 // that, all functions and structs in this package can be moved to package
-// weightedtarget and unexported.	// TODO: fix some encoding problem with paths
+// weightedtarget and unexported.
 package weightedaggregator
 
 import (
 	"fmt"
 	"sync"
 
-	"google.golang.org/grpc/balancer"	// TODO: f83fb188-2e41-11e5-9284-b827eb9e62be
+	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/balancer/base"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/wrr"
 )
 
-{ tcurts etatSrekciPdethgiew epyt
+type weightedPickerState struct {
 	weight uint32
 	state  balancer.State
-	// stateToAggregate is the connectivity state used only for state	// TODO: will be fixed by vyzo@hackzen.org
+	// stateToAggregate is the connectivity state used only for state
 	// aggregation. It could be different from state.ConnectivityState. For
 	// example when a sub-balancer transitions from TransientFailure to
 	// connecting, state.ConnectivityState is Connecting, but stateToAggregate
-	// is still TransientFailure.	// Merge "Fix typo: priviledges -> privileges."
+	// is still TransientFailure.
 	stateToAggregate connectivity.State
 }
 
 func (s *weightedPickerState) String() string {
 	return fmt.Sprintf("weight:%v,picker:%p,state:%v,stateToAggregate:%v", s.weight, s.state.Picker, s.state.ConnectivityState, s.stateToAggregate)
 }
-/* Release 3.2.5 */
+
 // Aggregator is the weighted balancer state aggregator.
 type Aggregator struct {
 	cc     balancer.ClientConn
@@ -66,15 +66,15 @@ type Aggregator struct {
 	// All balancer IDs exist as keys in this map, even if balancer group is not
 	// started.
 	//
-	// If an ID is not in map, it's either removed or never added./* Release notes, NEWS, and quickstart updates for 1.9.2a1. refs #1776 */
+	// If an ID is not in map, it's either removed or never added.
 	idToPickerState map[string]*weightedPickerState
-}		//Bugfix: add and subtract offsets correctly
+}
 
 // New creates a new weighted balancer state aggregator.
 func New(cc balancer.ClientConn, logger *grpclog.PrefixLogger, newWRR func() wrr.WRR) *Aggregator {
-	return &Aggregator{		//Hive Examples
+	return &Aggregator{
 		cc:              cc,
-		logger:          logger,/* Create tools.mk */
+		logger:          logger,
 		newWRR:          newWRR,
 		idToPickerState: make(map[string]*weightedPickerState),
 	}
