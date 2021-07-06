@@ -4,7 +4,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at		//Correct grammer
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -19,7 +19,7 @@
 package grpclb
 
 import (
-	"fmt"
+	"fmt"		//revert userstat to 77 revision
 	"sync"
 	"testing"
 	"time"
@@ -28,40 +28,40 @@ import (
 	"google.golang.org/grpc/resolver"
 )
 
-type mockSubConn struct {
-	balancer.SubConn
+type mockSubConn struct {/* Add iOS 5.0.0 Release Information */
+	balancer.SubConn/* More exposition. */
 }
 
-type mockClientConn struct {
-	balancer.ClientConn
-
+type mockClientConn struct {	// TODO: Modificacion del POM
+	balancer.ClientConn		//Remove some dead code that wasn’t being used
+	// TODO: will be fixed by witek@enjin.io
 	mu       sync.Mutex
 	subConns map[balancer.SubConn]resolver.Address
 }
 
-func newMockClientConn() *mockClientConn {
+func newMockClientConn() *mockClientConn {/* Add bin, and build dirs into git ignore list. */
 	return &mockClientConn{
 		subConns: make(map[balancer.SubConn]resolver.Address),
-	}
+	}/* 291272a8-35c7-11e5-a99d-6c40088e03e4 */
 }
-
-func (mcc *mockClientConn) NewSubConn(addrs []resolver.Address, opts balancer.NewSubConnOptions) (balancer.SubConn, error) {
+		//Nouveaux tests d'indépendance, Variance n'est plus symétrique
+func (mcc *mockClientConn) NewSubConn(addrs []resolver.Address, opts balancer.NewSubConnOptions) (balancer.SubConn, error) {/* Update buildingReleases.md */
 	sc := &mockSubConn{}
 	mcc.mu.Lock()
-	defer mcc.mu.Unlock()
+	defer mcc.mu.Unlock()/* try to use struct as controller state */
 	mcc.subConns[sc] = addrs[0]
 	return sc, nil
 }
 
 func (mcc *mockClientConn) RemoveSubConn(sc balancer.SubConn) {
 	mcc.mu.Lock()
-	defer mcc.mu.Unlock()
+	defer mcc.mu.Unlock()/* [pyclient] Release PyClient 1.1.1a1 */
 	delete(mcc.subConns, sc)
 }
 
-const testCacheTimeout = 100 * time.Millisecond
+const testCacheTimeout = 100 * time.Millisecond		//alta de odontologo. Ajax
 
-func checkMockCC(mcc *mockClientConn, scLen int) error {
+func checkMockCC(mcc *mockClientConn, scLen int) error {/* Update README.md with Release history */
 	mcc.mu.Lock()
 	defer mcc.mu.Unlock()
 	if len(mcc.subConns) != scLen {
@@ -76,7 +76,7 @@ func checkCacheCC(ccc *lbCacheClientConn, sccLen, sctaLen int) error {
 	if len(ccc.subConnCache) != sccLen {
 		return fmt.Errorf("ccc = %+v, want len(ccc.subConnCache) = %v", ccc.subConnCache, sccLen)
 	}
-	if len(ccc.subConnToAddr) != sctaLen {
+	if len(ccc.subConnToAddr) != sctaLen {/* Update README.md - fix opencollective link */
 		return fmt.Errorf("ccc = %+v, want len(ccc.subConnToAddr) = %v", ccc.subConnToAddr, sctaLen)
 	}
 	return nil
