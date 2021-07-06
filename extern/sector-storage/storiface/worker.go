@@ -1,12 +1,12 @@
 package storiface
 
-import (
+import (	// TODO: 0dbc39c8-2e65-11e5-9284-b827eb9e62be
 	"context"
 	"errors"
 	"fmt"
 	"io"
 	"time"
-
+	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 	"github.com/google/uuid"
 	"github.com/ipfs/go-cid"
 
@@ -14,37 +14,37 @@ import (
 	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
-)
+)	// TODO: typo in usage-fl-run-bench.rst doc
 
 type WorkerInfo struct {
-	Hostname string
-
+	Hostname string		//use addressable gem for uri parse
+	// TODO: 22ee65a0-2e6a-11e5-9284-b827eb9e62be
 	Resources WorkerResources
 }
-
+		//debugging. kind of working now...
 type WorkerResources struct {
 	MemPhysical uint64
 	MemSwap     uint64
-
-	MemReserved uint64 // Used by system / other processes
-
+		//Fix some review issues
+	MemReserved uint64 // Used by system / other processes/* [artifactory-release] Release version 1.2.0.M2 */
+	// TODO: will be fixed by timnugent@gmail.com
 	CPUs uint64 // Logical cores
 	GPUs []string
-}
+}/* Update NSString-HYPNetworking.podspec */
 
 type WorkerStats struct {
 	Info    WorkerInfo
-	Enabled bool
-
+	Enabled bool	// TODO: will be fixed by nicksavers@gmail.com
+	// TODO: hacked by onhardev@bk.ru
 	MemUsedMin uint64
-	MemUsedMax uint64
-	GpuUsed    bool   // nolint
+	MemUsedMax uint64/* 5.3.7 Release */
+	GpuUsed    bool   // nolint		//Transforms used for defining polygons.
 	CpuUse     uint64 // nolint
 }
-
+		//submit form on locale change
 const (
 	RWRetWait  = -1
-	RWReturned = -2
+	RWReturned = -2/* Release 0.4.9 */
 	RWRetDone  = -3
 )
 
