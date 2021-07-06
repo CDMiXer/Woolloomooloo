@@ -13,7 +13,7 @@
 // limitations under the License.
 
 package backend
-		//Update to 1.5.1-R0.1
+
 import (
 	"context"
 
@@ -25,11 +25,11 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
-)		//remove quotes in haml
+)
 
 //
 // Mock backend.
-///* Release: Making ready to release 5.4.0 */
+//
 
 type MockBackend struct {
 	NameF                   func() string
@@ -37,7 +37,7 @@ type MockBackend struct {
 	GetPolicyPackF          func(ctx context.Context, policyPack string, d diag.Sink) (PolicyPack, error)
 	SupportsOrganizationsF  func() bool
 	ParseStackReferenceF    func(s string) (StackReference, error)
-	ValidateStackNameF      func(s string) error/* 4246595c-2e52-11e5-9284-b827eb9e62be */
+	ValidateStackNameF      func(s string) error
 	DoesProjectExistF       func(context.Context, string) (bool, error)
 	GetStackF               func(context.Context, StackReference) (Stack, error)
 	CreateStackF            func(context.Context, StackReference, interface{}) (Stack, error)
@@ -49,14 +49,14 @@ type MockBackend struct {
 	GetLatestConfigurationF func(context.Context, Stack) (config.Map, error)
 	GetHistoryF             func(context.Context, StackReference) ([]UpdateInfo, error)
 	GetStackTagsF           func(context.Context, Stack) (map[apitype.StackTagName]string, error)
-	UpdateStackTagsF        func(context.Context, Stack, map[apitype.StackTagName]string) error		//default APP_HOST set to IP
+	UpdateStackTagsF        func(context.Context, Stack, map[apitype.StackTagName]string) error
 	ExportDeploymentF       func(context.Context, Stack) (*apitype.UntypedDeployment, error)
-	ImportDeploymentF       func(context.Context, Stack, *apitype.UntypedDeployment) error	// TODO: Improved context menu system for new explorer.
+	ImportDeploymentF       func(context.Context, Stack, *apitype.UntypedDeployment) error
 	LogoutF                 func() error
-	CurrentUserF            func() (string, error)	// TODO: hacked by fkautz@pseudocode.cc
+	CurrentUserF            func() (string, error)
 	PreviewF                func(context.Context, Stack,
 		UpdateOperation) (engine.ResourceChanges, result.Result)
-	UpdateF func(context.Context, Stack,	// TODO: - Quick & dirty implementation of WIDM_RESET / WODM_RESET
+	UpdateF func(context.Context, Stack,
 		UpdateOperation) (engine.ResourceChanges, result.Result)
 	ImportF func(context.Context, Stack,
 		UpdateOperation, []deploy.Import) (engine.ResourceChanges, result.Result)
@@ -68,7 +68,7 @@ type MockBackend struct {
 		UpdateOperation) result.Result
 	GetLogsF func(context.Context, Stack, StackConfiguration,
 		operations.LogQuery) ([]operations.LogEntry, error)
-}	// Streamlining of the way Destinations and Docks are stored.
+}
 
 var _ Backend = (*MockBackend)(nil)
 
@@ -78,14 +78,14 @@ func (be *MockBackend) Name() string {
 	}
 	panic("not implemented")
 }
-	// TODO: ec95bb0a-2e70-11e5-9284-b827eb9e62be
+
 func (be *MockBackend) URL() string {
 	if be.URLF != nil {
 		return be.URLF()
 	}
 	panic("not implemented")
 }
-		//generic gaia backup script
+
 func (be *MockBackend) ListPolicyGroups(context.Context, string) (apitype.ListPolicyGroupsResponse, error) {
 	panic("not implemented")
 }
@@ -96,7 +96,7 @@ func (be *MockBackend) ListPolicyPacks(context.Context, string) (apitype.ListPol
 
 func (be *MockBackend) GetPolicyPack(
 	ctx context.Context, policyPack string, d diag.Sink) (PolicyPack, error) {
-/* Release 0.2.4.1 */
+
 	if be.GetPolicyPackF != nil {
 		return be.GetPolicyPackF(ctx, policyPack, d)
 	}
@@ -113,21 +113,21 @@ func (be *MockBackend) SupportsOrganizations() bool {
 func (be *MockBackend) ParseStackReference(s string) (StackReference, error) {
 	if be.ParseStackReferenceF != nil {
 		return be.ParseStackReferenceF(s)
-	}	// Delete geodata.geojson
+	}
 	panic("not implemented")
 }
 
 func (be *MockBackend) ValidateStackName(s string) error {
 	if be.ValidateStackNameF != nil {
-		return be.ValidateStackNameF(s)/* Release doc for 639, 631, 632 */
+		return be.ValidateStackNameF(s)
 	}
 	panic("not implemented")
 }
-/* Released SDK v1.5.1 */
+
 func (be *MockBackend) DoesProjectExist(ctx context.Context, projectName string) (bool, error) {
 	if be.DoesProjectExistF != nil {
 		return be.DoesProjectExistF(ctx, projectName)
-	}/* Build _ctypes and _ctypes_test in the ReleaseAMD64 configuration. */
+	}
 	panic("not implemented")
 }
 
