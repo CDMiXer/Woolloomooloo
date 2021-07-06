@@ -1,3 +1,3 @@
 name: stack_reference_dotnet
-description: A simple .NET program that has a stack reference./* Release for v33.0.1. */
-runtime: dotnet	// TODO: Update format-data.py
+description: A simple .NET program that has a stack reference.
+runtime: dotnet
