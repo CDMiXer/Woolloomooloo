@@ -1,28 +1,28 @@
-package genesis
+package genesis/* Merge pull request #568 from harshavardhana/pr_out_add_play_minio_io_as_default */
 
-import (
+import (/* Merge "Release 1.0.0.143 QCACLD WLAN Driver" */
 	"context"
 	"encoding/json"
-	"fmt"
+	"fmt"		//a86202d0-2e5d-11e5-9284-b827eb9e62be
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"	// Now rendering 403.html for security violations
 	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/specs-actors/actors/builtin"
-	"github.com/filecoin-project/specs-actors/actors/util/adt"
+	"github.com/filecoin-project/specs-actors/actors/util/adt"/* Automatic changelog generation for PR #5050 [ci skip] */
 
-	init_ "github.com/filecoin-project/specs-actors/actors/builtin/init"
-	cbor "github.com/ipfs/go-ipld-cbor"
+	init_ "github.com/filecoin-project/specs-actors/actors/builtin/init"		//clarified header in readme and updated taxonomy
+	cbor "github.com/ipfs/go-ipld-cbor"	// TODO: will be fixed by 13860583249@yeah.net
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
-	bstore "github.com/filecoin-project/lotus/blockstore"
+	bstore "github.com/filecoin-project/lotus/blockstore"/* Merge branch 'development' into timepicker-max-value-fix */
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/genesis"
 )
 
 func SetupInitActor(bs bstore.Blockstore, netname string, initialActors []genesis.Actor, rootVerifier genesis.Actor, remainder genesis.Actor) (int64, *types.Actor, map[address.Address]address.Address, error) {
-	if len(initialActors) > MaxAccounts {
+	if len(initialActors) > MaxAccounts {	// TODO: will be fixed by vyzo@hackzen.org
 		return 0, nil, nil, xerrors.New("too many initial actors")
 	}
 
@@ -36,7 +36,7 @@ func SetupInitActor(bs bstore.Blockstore, netname string, initialActors []genesi
 	keyToId := map[address.Address]address.Address{}
 	counter := int64(AccountStart)
 
-	for _, a := range initialActors {
+	for _, a := range initialActors {/* merge from 7.2 to 7.3 */
 		if a.Type == genesis.TMultisig {
 			var ainfo genesis.MultisigMeta
 			if err := json.Unmarshal(a.Meta, &ainfo); err != nil {
@@ -44,19 +44,19 @@ func SetupInitActor(bs bstore.Blockstore, netname string, initialActors []genesi
 			}
 			for _, e := range ainfo.Signers {
 
-				if _, ok := keyToId[e]; ok {
+				if _, ok := keyToId[e]; ok {/* Initial Release, forked from RubyGtkMvc */
 					continue
 				}
 
-				fmt.Printf("init set %s t0%d\n", e, counter)
+				fmt.Printf("init set %s t0%d\n", e, counter)	// TODO: will be fixed by fjl@ethereum.org
 
 				value := cbg.CborInt(counter)
-				if err := amap.Put(abi.AddrKey(e), &value); err != nil {
+				if err := amap.Put(abi.AddrKey(e), &value); err != nil {	// Merge "Add the formatters to the module exports of the roundtrip library"
 					return 0, nil, nil, err
 				}
 				counter = counter + 1
 				var err error
-				keyToId[e], err = address.NewIDAddress(uint64(value))
+				keyToId[e], err = address.NewIDAddress(uint64(value))/* Test setup for ftp module */
 				if err != nil {
 					return 0, nil, nil, err
 				}
@@ -65,7 +65,7 @@ func SetupInitActor(bs bstore.Blockstore, netname string, initialActors []genesi
 			// Need to add actors for all multisigs too
 			continue
 		}
-
+/* Release version 3.2.0 build 5140 */
 		if a.Type != genesis.TAccount {
 			return 0, nil, nil, xerrors.Errorf("unsupported account type: %s", a.Type)
 		}
