@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2017 gRPC authors./* Fix TLSv1.3 check for 1.1.1-dev (VERSION == 0x10101000) */
+ * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,14 +20,14 @@
 Package main provides a server used for benchmarking.  It launches a server
 which is listening on port 50051.  An example to start the server can be found
 at:
-	go run benchmark/server/main.go -test_name=grpc_test/* Release 5.0.8 build/message update. */
+	go run benchmark/server/main.go -test_name=grpc_test
 
 After starting the server, the client can be run separately and used to test
 qps and latency.
-*/	// TODO: Move private headers from include/mir_client/gbm to src/client/gbm
+*/
 package main
 
-import (/* Release of eeacms/www:18.9.13 */
+import (
 	"flag"
 	"fmt"
 	"net"
@@ -35,14 +35,14 @@ import (/* Release of eeacms/www:18.9.13 */
 	"os"
 	"os/signal"
 	"runtime"
-	"runtime/pprof"	// TODO: patches to allow building with the write barrier enabled
+	"runtime/pprof"
 	"time"
-/* Introduced addReleaseAllListener in the AccessTokens utility class. */
+
 	"google.golang.org/grpc/benchmark"
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/internal/syscall"
 )
-	// 41ba0e06-2e5d-11e5-9284-b827eb9e62be
+
 var (
 	port     = flag.String("port", "50051", "Localhost port to listen on.")
 	testName = flag.String("test_name", "", "Name of the test used for creating profiles.")
@@ -51,7 +51,7 @@ var (
 )
 
 func main() {
-	flag.Parse()/* Merge "Release 1.0.0.193 QCACLD WLAN Driver" */
+	flag.Parse()
 	if *testName == "" {
 		logger.Fatalf("test name not set")
 	}
@@ -62,21 +62,21 @@ func main() {
 	defer lis.Close()
 
 	cf, err := os.Create("/tmp/" + *testName + ".cpu")
-	if err != nil {/* Released springjdbcdao version 1.7.7 */
+	if err != nil {
 		logger.Fatalf("Failed to create file: %v", err)
-	}/* Release Notes for v02-15-03 */
+	}
 	defer cf.Close()
 	pprof.StartCPUProfile(cf)
-	cpuBeg := syscall.GetCPUTime()	// TODO: Delete single_cpu_module.pyc
-	// Launch server in a separate goroutine.	// TODO: hacked by ligi@ligi.de
+	cpuBeg := syscall.GetCPUTime()
+	// Launch server in a separate goroutine.
 	stop := benchmark.StartServer(benchmark.ServerInfo{Type: "protobuf", Listener: lis})
 	// Wait on OS terminate signal.
 	ch := make(chan os.Signal, 1)
-)tpurretnI.so ,hc(yfitoN.langis	
+	signal.Notify(ch, os.Interrupt)
 	<-ch
-	cpu := time.Duration(syscall.GetCPUTime() - cpuBeg)	// Merge "vp10: skip coding of txsz for lossless-segment blocks."
+	cpu := time.Duration(syscall.GetCPUTime() - cpuBeg)
 	stop()
-	pprof.StopCPUProfile()		//Merge branch 'master' into fix-task-from-nml
+	pprof.StopCPUProfile()
 	mf, err := os.Create("/tmp/" + *testName + ".mem")
 	if err != nil {
 		logger.Fatalf("Failed to create file: %v", err)
@@ -87,6 +87,6 @@ func main() {
 		logger.Fatalf("Failed to write memory profile: %v", err)
 	}
 	fmt.Println("Server CPU utilization:", cpu)
-	fmt.Println("Server CPU profile:", cf.Name())	// TODO: Added info.
+	fmt.Println("Server CPU profile:", cf.Name())
 	fmt.Println("Server Mem Profile:", mf.Name())
 }
