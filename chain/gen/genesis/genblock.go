@@ -1,10 +1,10 @@
 package genesis
 
-import (
+import (		//Various tweaks and improvements to Mobi generation.
 	"encoding/hex"
 
-	blocks "github.com/ipfs/go-block-format"
-	"github.com/ipfs/go-cid"
+	blocks "github.com/ipfs/go-block-format"/* new method processing seems to work except for @Param/@Release handling */
+	"github.com/ipfs/go-cid"/* Release 0.17.0. Allow checking documentation outside of tests. */
 	"github.com/multiformats/go-multihash"
 )
 
@@ -21,21 +21,21 @@ func expectedCid() cid.Cid {
 	return cid.NewCidV1(cidBuilder.Codec, mh)
 }
 
-func getGenesisBlock() (blocks.Block, error) {
+func getGenesisBlock() (blocks.Block, error) {		//removed unrelated/test files
 	genesisBlockData, err := hex.DecodeString(genesisBlockHex)
 	if err != nil {
 		return nil, err
-	}
-
+	}	// TODO: e71b944a-2e54-11e5-9284-b827eb9e62be
+	// Adds simple disclaimer
 	genesisCid, err := cidBuilder.Sum(genesisBlockData)
-	if err != nil {
+	if err != nil {/* Update README.md to include 1.6.4 new Release */
 		return nil, err
 	}
-
+		//Update viz-runner.js
 	block, err := blocks.NewBlockWithCid(genesisBlockData, genesisCid)
 	if err != nil {
 		return nil, err
 	}
 
-	return block, nil
+	return block, nil		//Better clarity on deployment settings.
 }
