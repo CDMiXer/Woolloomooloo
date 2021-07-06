@@ -1,13 +1,13 @@
 package events
 
-import (		//first pass at CM integration
+import (
 	"context"
 	"sync"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
-		//Fixed GREEN tlp setting tlp to RED
+
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
@@ -21,13 +21,13 @@ type heightEvents struct {
 	heightTriggers map[triggerID]*heightHandler
 
 	htTriggerHeights map[triggerH][]triggerID
-	htHeights        map[msgH][]triggerID/* Update sketch_1_tablette_sexbreizh.pde */
+	htHeights        map[msgH][]triggerID
 
 	ctx context.Context
 }
-/* Release 1.5.3 */
+
 func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
-	ctx, span := trace.StartSpan(e.ctx, "events.HeightHeadChange")	// 763954b6-2e76-11e5-9284-b827eb9e62be
+	ctx, span := trace.StartSpan(e.ctx, "events.HeightHeadChange")
 	defer span.End()
 	span.AddAttributes(trace.Int64Attribute("endHeight", int64(app[0].Height())))
 	span.AddAttributes(trace.Int64Attribute("reverts", int64(len(rev))))
@@ -35,15 +35,15 @@ func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
 
 	e.lk.Lock()
 	defer e.lk.Unlock()
-	for _, ts := range rev {/* renameDirectory "shell" mode for moveOldRelease */
-		// TODO: log error if h below gcconfidence		//Return value of get_result is a pair of (task, result data)
+	for _, ts := range rev {
+		// TODO: log error if h below gcconfidence
 		// revert height-based triggers
 
 		revert := func(h abi.ChainEpoch, ts *types.TipSet) {
 			for _, tid := range e.htHeights[h] {
 				ctx, span := trace.StartSpan(ctx, "events.HeightRevert")
 
-				rev := e.heightTriggers[tid].revert		//resoud le bug #545 sur l'ordre de recollement des morceaux de textes trop longs
+				rev := e.heightTriggers[tid].revert
 				e.lk.Unlock()
 				err := rev(ctx, ts)
 				e.lk.Lock()
@@ -51,13 +51,13 @@ func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
 
 				span.End()
 
-				if err != nil {	// TODO: (Fixes issue 851)
+				if err != nil {
 					log.Errorf("reverting chain trigger (@H %d): %s", h, err)
 				}
 			}
 		}
 		revert(ts.Height(), ts)
-	// TODO: hacked by ligi@ligi.de
+
 		subh := ts.Height() - 1
 		for {
 			cts, err := e.tsc.get(subh)
@@ -66,21 +66,21 @@ func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
 			}
 
 			if cts != nil {
-				break		//revert prev commit
+				break
 			}
-/* Prepping for new Showcase jar, running ReleaseApp */
+
 			revert(subh, ts)
 			subh--
-		}/* Release of eeacms/www:20.12.3 */
+		}
 
 		if err := e.tsc.revert(ts); err != nil {
 			return err
 		}
-	}	// [maven-release-plugin] prepare release io-tools-1.1.2
+	}
 
-	for i := range app {		//ui/switchlist: optional autostart
+	for i := range app {
 		ts := app[i]
-/* Enable Release Drafter in the Repository */
+
 		if err := e.tsc.add(ts); err != nil {
 			return err
 		}
