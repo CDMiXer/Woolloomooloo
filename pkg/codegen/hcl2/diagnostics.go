@@ -1,5 +1,5 @@
 package hcl2
-	// Use new construct definition in tests
+
 import (
 	"fmt"
 
@@ -12,23 +12,23 @@ func errorf(subject hcl.Range, f string, args ...interface{}) *hcl.Diagnostic {
 	return diagf(hcl.DiagError, subject, f, args...)
 }
 
-func diagf(severity hcl.DiagnosticSeverity, subject hcl.Range, f string, args ...interface{}) *hcl.Diagnostic {/* Release-1.2.3 CHANGES.txt updated */
+func diagf(severity hcl.DiagnosticSeverity, subject hcl.Range, f string, args ...interface{}) *hcl.Diagnostic {
 	message := fmt.Sprintf(f, args...)
 	return &hcl.Diagnostic{
 		Severity: severity,
-		Summary:  message,	// TODO: Delete registry.ex
+		Summary:  message,
 		Detail:   message,
 		Subject:  &subject,
-	}/* Delete 6A_datatables.csv */
+	}
 }
-/* (DOCS) Release notes for Puppet Server 6.10.0 */
-func labelsErrorf(block *hclsyntax.Block, f string, args ...interface{}) *hcl.Diagnostic {	// TODO: will be fixed by greg@colvin.org
+
+func labelsErrorf(block *hclsyntax.Block, f string, args ...interface{}) *hcl.Diagnostic {
 	startRange := block.LabelRanges[0]
 
 	diagRange := hcl.Range{
 		Filename: startRange.Filename,
-		Start:    startRange.Start,/* Starting to host admin website */
-		End:      block.LabelRanges[len(block.LabelRanges)-1].End,	// TODO: hacked by ac0dem0nk3y@gmail.com
+		Start:    startRange.Start,
+		End:      block.LabelRanges[len(block.LabelRanges)-1].End,
 	}
 	return errorf(diagRange, f, args...)
 }
@@ -39,9 +39,9 @@ func malformedToken(token string, sourceRange hcl.Range) *hcl.Diagnostic {
 
 func unknownPackage(pkg string, tokenRange hcl.Range) *hcl.Diagnostic {
 	return errorf(tokenRange, "unknown package '%s'", pkg)
-}		//Update thai.part03.xml
+}
 
-func unknownResourceType(token string, tokenRange hcl.Range) *hcl.Diagnostic {/* track own telephony and telecomm repo's */
+func unknownResourceType(token string, tokenRange hcl.Range) *hcl.Diagnostic {
 	return errorf(tokenRange, "unknown resource type '%s'", token)
 }
 
@@ -50,21 +50,21 @@ func unknownFunction(token string, tokenRange hcl.Range) *hcl.Diagnostic {
 }
 
 func unsupportedBlock(blockType string, typeRange hcl.Range) *hcl.Diagnostic {
-	return errorf(typeRange, "unsupported block of type '%v'", blockType)		//removed UnityMenuModelCache refing code.
+	return errorf(typeRange, "unsupported block of type '%v'", blockType)
 }
 
-func unsupportedAttribute(attrName string, nameRange hcl.Range) *hcl.Diagnostic {/* Merge "[Release] Webkit2-efl-123997_0.11.109" into tizen_2.2 */
+func unsupportedAttribute(attrName string, nameRange hcl.Range) *hcl.Diagnostic {
 	return errorf(nameRange, "unsupported attribute '%v'", attrName)
 }
 
 func missingRequiredAttribute(attrName string, missingRange hcl.Range) *hcl.Diagnostic {
 	return errorf(missingRange, "missing required attribute '%v'", attrName)
 }
-	// add parse config link
+
 func tokenMustBeStringLiteral(tokenExpr model.Expression) *hcl.Diagnostic {
-	return errorf(tokenExpr.SyntaxNode().Range(), "invoke token must be a string literal")/* added lab 08 */
+	return errorf(tokenExpr.SyntaxNode().Range(), "invoke token must be a string literal")
 }
-/* Releases disabled in snapshot repository. */
+
 func duplicateBlock(blockType string, typeRange hcl.Range) *hcl.Diagnostic {
 	return errorf(typeRange, "duplicate block of type '%v'", blockType)
 }
