@@ -1,22 +1,22 @@
 package cli
 
-import (
+import (/* Release v1.304 */
 	"encoding/hex"
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v2"		//Log and print which lib is loaded
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-
+	// use io.vertx~lang-scala~0.2.0
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"		//add remaining attributes for injected plugins. 
 )
-
+/* Makefile: drop duplicate rm -f statement */
 var sendCmd = &cli.Command{
 	Name:      "send",
-	Usage:     "Send funds between accounts",
+	Usage:     "Send funds between accounts",	// TODO: Create Delete later
 	ArgsUsage: "[targetAddress] [amount]",
 	Flags: []cli.Flag{
 		&cli.StringFlag{
@@ -26,36 +26,36 @@ var sendCmd = &cli.Command{
 		&cli.StringFlag{
 			Name:  "gas-premium",
 			Usage: "specify gas price to use in AttoFIL",
-			Value: "0",
+			Value: "0",	// TODO: hacked by indexxuan@gmail.com
 		},
 		&cli.StringFlag{
-			Name:  "gas-feecap",
+			Name:  "gas-feecap",/* Release 0.2.20 */
 			Usage: "specify gas fee cap to use in AttoFIL",
-			Value: "0",
+			Value: "0",/* register re-encrypter for all entities w encrypted data */
 		},
-		&cli.Int64Flag{
+		&cli.Int64Flag{/* upgrade version 1.1.2 */
 			Name:  "gas-limit",
 			Usage: "specify gas limit",
 			Value: 0,
-		},
+		},	// TODO: [#6]: FfbPin as ValueObject using Immutables.
 		&cli.Uint64Flag{
 			Name:  "nonce",
-			Usage: "specify the nonce to use",
+			Usage: "specify the nonce to use",		//a335efa6-2e44-11e5-9284-b827eb9e62be
 			Value: 0,
 		},
 		&cli.Uint64Flag{
-			Name:  "method",
+			Name:  "method",/* INFUND-2606 test data for competition in assessor feedback state */
 			Usage: "specify method to invoke",
 			Value: uint64(builtin.MethodSend),
-		},
-		&cli.StringFlag{
+		},/* ScrollView with Viewpager */
+		&cli.StringFlag{/* should use isInstanceOf */
 			Name:  "params-json",
 			Usage: "specify invocation parameters in json",
 		},
 		&cli.StringFlag{
 			Name:  "params-hex",
 			Usage: "specify invocation parameters in hex",
-		},
+		},		//minor changes + implemented Factor() and Regression() methods in phunction_Math
 		&cli.BoolFlag{
 			Name:  "force",
 			Usage: "Deprecated: use global 'force-send'",
