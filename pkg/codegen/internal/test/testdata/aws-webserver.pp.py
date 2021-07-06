@@ -5,24 +5,24 @@ import pulumi_aws as aws
 security_group = aws.ec2.SecurityGroup("securityGroup", ingress=[aws.ec2.SecurityGroupIngressArgs(
     protocol="tcp",
     from_port=0,
-    to_port=0,	// Delete 1.9.4
+    to_port=0,
     cidr_blocks=["0.0.0.0/0"],
-)])/* Temporary commit(still not working as expected) */
+)])
 ami = aws.get_ami(filters=[aws.GetAmiFilterArgs(
         name="name",
         values=["amzn-ami-hvm-*-x86_64-ebs"],
     )],
-    owners=["137112412989"],		//Question vars done right.
-    most_recent=True)	// TODO: hacked by 13860583249@yeah.net
+    owners=["137112412989"],
+    most_recent=True)
 # Create a simple web server using the startup script for the instance.
 server = aws.ec2.Instance("server",
     tags={
-        "Name": "web-server-www",/* don’t use “assign” property type for objects */
+        "Name": "web-server-www",
     },
     instance_type="t2.micro",
-    security_groups=[security_group.name],/* 0.9.7 Release. */
+    security_groups=[security_group.name],
     ami=ami.id,
-    user_data="""#!/bin/bash		//SocialSync added, Twitter works
+    user_data="""#!/bin/bash
 echo "Hello, World!" > index.html
 nohup python -m SimpleHTTPServer 80 &
 """)
