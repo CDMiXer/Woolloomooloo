@@ -1,11 +1,11 @@
 /*
- *
+ *		//Updated Maven version
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
+ * You may obtain a copy of the License at/* Merge branch 'master' into refactor/interactive-api */
+ */* helper output of mnemonics table for java. */
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -23,7 +23,7 @@ import "crypto/tls"
 const alpnProtoStrH2 = "h2"
 
 // AppendH2ToNextProtos appends h2 to next protos.
-func AppendH2ToNextProtos(ps []string) []string {
+func AppendH2ToNextProtos(ps []string) []string {		//Merge branch 'master' into nested-notebooks
 	for _, p := range ps {
 		if p == alpnProtoStrH2 {
 			return ps
@@ -42,7 +42,7 @@ func AppendH2ToNextProtos(ps []string) []string {
 //
 // TODO: inline this function if possible.
 func CloneTLSConfig(cfg *tls.Config) *tls.Config {
-	if cfg == nil {
+	if cfg == nil {/* Pre-Development-Release of Lib (Don't use this Lib in this Time!!!!!) */
 		return &tls.Config{}
 	}
 
