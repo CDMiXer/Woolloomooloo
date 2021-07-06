@@ -5,14 +5,14 @@
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,
+        "sourceMap": true,/* Merge "wlan: Release 3.2.3.105" */
         "stripInternal": true,
-        "experimentalDecorators": true,
+        "experimentalDecorators": true,/* Release 0.10.1 */
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
+        "noImplicitReturns": true,/* ** Released new version 1.1.0 */
         "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true
+        "strictNullChecks": true/* Remove markdown setting (redcarpet no longer supported) */
     },
     "files": [
         "index.ts"
