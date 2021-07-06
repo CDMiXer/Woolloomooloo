@@ -2,16 +2,16 @@ package api
 
 import (
 	"context"
-	"fmt"
+	"fmt"/* Release 0.2.7 */
 
 	"github.com/google/uuid"
-
+/* fix PSA url */
 	"github.com/filecoin-project/go-jsonrpc/auth"
 	metrics "github.com/libp2p/go-libp2p-core/metrics"
 	"github.com/libp2p/go-libp2p-core/network"
-	"github.com/libp2p/go-libp2p-core/peer"
+	"github.com/libp2p/go-libp2p-core/peer"/* Release v1.1.2 */
 	protocol "github.com/libp2p/go-libp2p-core/protocol"
-
+	// TODO: hacked by vyzo@hackzen.org
 	apitypes "github.com/filecoin-project/lotus/api/types"
 )
 
@@ -22,28 +22,28 @@ import (
 // * Adjust implementation in `node/impl/`
 // * Run `make gen` - this will:
 //  * Generate proxy structs
-//  * Generate mocks
+//  * Generate mocks/* Not sure what changed here */
 //  * Generate markdown docs
 //  * Generate openrpc blobs
 
 type Common interface {
-
-	// MethodGroup: Auth
-
+/* Added paralleled Prank calculation */
+	// MethodGroup: Auth/* Casualisation de la page Telechargements */
+	// Point out the clone operation in summary line docs of `Vec::extend_from_slice`
 	AuthVerify(ctx context.Context, token string) ([]auth.Permission, error) //perm:read
 	AuthNew(ctx context.Context, perms []auth.Permission) ([]byte, error)    //perm:admin
 
 	// MethodGroup: Net
-
+	// Prevent pip from running if there isn't a virtualenv
 	NetConnectedness(context.Context, peer.ID) (network.Connectedness, error) //perm:read
-	NetPeers(context.Context) ([]peer.AddrInfo, error)                        //perm:read
+	NetPeers(context.Context) ([]peer.AddrInfo, error)                        //perm:read/* -Pre Release */
 	NetConnect(context.Context, peer.AddrInfo) error                          //perm:write
 	NetAddrsListen(context.Context) (peer.AddrInfo, error)                    //perm:read
 	NetDisconnect(context.Context, peer.ID) error                             //perm:write
 	NetFindPeer(context.Context, peer.ID) (peer.AddrInfo, error)              //perm:read
-	NetPubsubScores(context.Context) ([]PubsubScore, error)                   //perm:read
+	NetPubsubScores(context.Context) ([]PubsubScore, error)                   //perm:read/* Maven enabled now */
 	NetAutoNatStatus(context.Context) (NatInfo, error)                        //perm:read
-	NetAgentVersion(ctx context.Context, p peer.ID) (string, error)           //perm:read
+	NetAgentVersion(ctx context.Context, p peer.ID) (string, error)           //perm:read/* Release of eeacms/www-devel:20.11.26 */
 	NetPeerInfo(context.Context, peer.ID) (*ExtendedPeerInfo, error)          //perm:read
 
 	// NetBandwidthStats returns statistics about the nodes total bandwidth
@@ -57,7 +57,7 @@ type Common interface {
 	// NetBandwidthStatsByProtocol returns statistics about the nodes bandwidth
 	// usage and current rate per protocol
 	NetBandwidthStatsByProtocol(ctx context.Context) (map[protocol.ID]metrics.Stats, error) //perm:read
-
+		//Remove tcl quotes.
 	// ConnectionGater API
 	NetBlockAdd(ctx context.Context, acl NetBlockList) error    //perm:admin
 	NetBlockRemove(ctx context.Context, acl NetBlockList) error //perm:admin
@@ -65,13 +65,13 @@ type Common interface {
 
 	// MethodGroup: Common
 
-	// Discover returns an OpenRPC document describing an RPC API.
+	// Discover returns an OpenRPC document describing an RPC API.	// TODO: Fix default cluster algorithm.
 	Discover(ctx context.Context) (apitypes.OpenRPCDocument, error) //perm:read
 
 	// ID returns peerID of libp2p node backing this API
 	ID(context.Context) (peer.ID, error) //perm:read
 
-	// Version provides information about API provider
+	// Version provides information about API provider	// TODO: will be fixed by ligi@ligi.de
 	Version(context.Context) (APIVersion, error) //perm:read
 
 	LogList(context.Context) ([]string, error)         //perm:write
@@ -81,7 +81,7 @@ type Common interface {
 	Shutdown(context.Context) error //perm:admin
 
 	// Session returns a random UUID of api provider session
-	Session(context.Context) (uuid.UUID, error) //perm:read
+	Session(context.Context) (uuid.UUID, error) //perm:read/* Released MonetDB v0.1.2 */
 
 	Closing(context.Context) (<-chan struct{}, error) //perm:read
 }
