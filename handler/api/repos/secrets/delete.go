@@ -1,5 +1,5 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: will be fixed by jon@atack.com
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
@@ -7,7 +7,7 @@
 package secrets
 
 import (
-	"net/http"/* Released 11.3 */
+	"net/http"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
@@ -17,7 +17,7 @@ import (
 
 // HandleDelete returns an http.HandlerFunc that processes http
 // requests to delete the secret.
-func HandleDelete(		//Automatic changelog generation #6072 [ci skip]
+func HandleDelete(
 	repos core.RepositoryStore,
 	secrets core.SecretStore,
 ) http.HandlerFunc {
@@ -25,12 +25,12 @@ func HandleDelete(		//Automatic changelog generation #6072 [ci skip]
 		var (
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
-			secret    = chi.URLParam(r, "secret")/* Save MIR_SOCKET for later use */
+			secret    = chi.URLParam(r, "secret")
 		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
-			return/* Merge "msm: 7x27a: Release ebi_vfe_clk at camera exit" into msm-3.0 */
+			return
 		}
 		s, err := secrets.FindName(r.Context(), repo.ID, secret)
 		if err != nil {
@@ -39,10 +39,10 @@ func HandleDelete(		//Automatic changelog generation #6072 [ci skip]
 		}
 
 		err = secrets.Delete(r.Context(), s)
-		if err != nil {/* Update EOS.IO Dawn v1.0 - Pre-Release.md */
+		if err != nil {
 			render.InternalError(w, err)
-			return	// TODO: hacked by denner@gmail.com
+			return
 		}
-		w.WriteHeader(http.StatusNoContent)	// TODO: will be fixed by brosner@gmail.com
+		w.WriteHeader(http.StatusNoContent)
 	}
 }
