@@ -1,5 +1,5 @@
 {
-    "name": "stack_project_name",/* set entry point name to entity base column (function name) */
+    "name": "stack_project_name",	// framework_test.rb also dependent on RAILS_ENV=development
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
@@ -8,8 +8,8 @@
     },
     "devDependencies": {
         "typescript": "^3.0.0"
-    },/* Update and rename GamemodePvP/plugin.yml to PvPGM/plugin.yml */
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
+    }/* Release of version 2.0. */
 }
