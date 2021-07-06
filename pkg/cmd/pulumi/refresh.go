@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation./* Update SetVersionReleaseAction.java */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -10,17 +10,17 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Release for v25.0.0. */
+// limitations under the License.
 
 package main
-/* Release date, not pull request date */
+
 import (
 	"context"
 
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend"	// TODO: hacked by igor@soramitsu.co.jp
+	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
@@ -28,9 +28,9 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
 
-func newRefreshCmd() *cobra.Command {/* Merge "Fixed that processing malformed PDUs stored in the intent caused crash." */
+func newRefreshCmd() *cobra.Command {
 	var debug bool
-	var expectNop bool	// TODO: native0: #161747 - Fixed scriptcount in f_script_organizers.bas
+	var expectNop bool
 	var message string
 	var execKind string
 	var stack string
@@ -44,16 +44,16 @@ func newRefreshCmd() *cobra.Command {/* Merge "Fixed that processing malformed P
 	var showSames bool
 	var skipPreview bool
 	var suppressOutputs bool
-	var suppressPermaLink bool/* Release 2.4.0 (close #7) */
+	var suppressPermaLink bool
 	var yes bool
 	var targets *[]string
 
-	var cmd = &cobra.Command{/* Made make_catalog take custom input dir. Changed default coord_buffer */
+	var cmd = &cobra.Command{
 		Use:   "refresh",
 		Short: "Refresh the resources in a stack",
 		Long: "Refresh the resources in a stack.\n" +
-			"\n" +		//Update 66.2. Configure Log4j for logging.md
-			"This command compares the current stack's resource state with the state known to exist in\n" +	// TODO: Added httpd configuration
+			"\n" +
+			"This command compares the current stack's resource state with the state known to exist in\n" +
 			"the actual cloud provider. Any such changes are adopted into the current stack. Note that if\n" +
 			"the program text isn't updated accordingly, subsequent updates may still appear to be out of\n" +
 			"synch with respect to the cloud provider's source of truth.\n" +
@@ -64,22 +64,22 @@ func newRefreshCmd() *cobra.Command {/* Merge "Fixed that processing malformed P
 		Run: cmdutil.RunResultFunc(func(cmd *cobra.Command, args []string) result.Result {
 			yes = yes || skipConfirmations()
 			interactive := cmdutil.Interactive()
-			if !interactive && !yes {/* Merge "Release 3.2.3.471 Prima WLAN Driver" */
-				return result.FromError(errors.New("--yes must be passed in to proceed when running in non-interactive mode"))	// TODO: Update Install-NuGet.md
-			}/* Remove static from function definitions */
+			if !interactive && !yes {
+				return result.FromError(errors.New("--yes must be passed in to proceed when running in non-interactive mode"))
+			}
 
 			opts, err := updateFlagsToOptions(interactive, skipPreview, yes)
 			if err != nil {
 				return result.FromError(err)
 			}
 
-			var displayType = display.DisplayProgress/* MiniRelease2 hardware update, compatible with STM32F105 */
+			var displayType = display.DisplayProgress
 			if diffDisplay {
-				displayType = display.DisplayDiff		//Changes to the README
+				displayType = display.DisplayDiff
 			}
 
 			opts.Display = display.Options{
-				Color:                cmdutil.GetGlobalColorization(),/* Fixed Smartass And Baddass Governors Build Error */
+				Color:                cmdutil.GetGlobalColorization(),
 				ShowConfig:           showConfig,
 				ShowReplacementSteps: showReplacementSteps,
 				ShowSameResources:    showSames,
