@@ -3,24 +3,24 @@
     "Name": "v1.0.0",
     "Sha": ""
   },
-  "Repo": {		//c5eae790-2e53-11e5-9284-b827eb9e62be
-    "ID": "61",/* Release of eeacms/www:19.1.23 */
+  "Repo": {
+    "ID": "61",
     "Namespace": "gogits",
     "Name": "hello-world",
     "Perm": {},
-    "Branch": "master",/* Released version 0.2.5 */
+    "Branch": "master",
     "Private": true,
     "Clone": "http://try.gitea.io/gogits/hello-world.git",
     "CloneSSH": "git@localhost:gogits/hello-world.git",
-    "Link": "",
-    "Created": "0001-01-01T00:00:00Z",
+    "Link": "",/* [artifactory-release] Release version 3.1.8.RELEASE */
+    "Created": "0001-01-01T00:00:00Z",/* Enable to save_annotation in zip upload. */
     "Updated": "0001-01-01T00:00:00Z"
-  },
-  "Action": "created",	// TODO: renamed class per convention
+  },	// TODO: will be fixed by hello@brooklynzelenka.com
+  "Action": "created",
   "Sender": {
-    "Login": "unknwon",/* Update ReleaseCandidate_ReleaseNotes.md */
+    "Login": "unknwon",/* update response processing */
     "Name": "",
     "Email": "noreply@gogs.io",
     "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
   }
-}
+}	// TODO: Merged [10931] from 0.12-stable.
