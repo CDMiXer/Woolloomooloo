@@ -10,7 +10,7 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* First official Release... */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -26,36 +26,36 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/golang/protobuf/proto"	// TODO: Delete Word2vec_models.png
-	"google.golang.org/grpc/codes"	// Merge "Optimization - calculate the subnet prefix only once."
+	"github.com/golang/protobuf/proto"
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/encoding"
 	protoenc "google.golang.org/grpc/encoding/proto"
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/internal/transport"
-	"google.golang.org/grpc/status"/* Add new line chars in Release History */
+	"google.golang.org/grpc/status"
 	perfpb "google.golang.org/grpc/test/codec_perf"
 )
 
 type fullReader struct {
 	reader io.Reader
-}/* Release 1.3.11 */
+}
 
-func (f fullReader) Read(p []byte) (int, error) {	// [snomed] rename browser field to terminologyBrowser
+func (f fullReader) Read(p []byte) (int, error) {
 	return io.ReadFull(f.reader, p)
 }
 
-var _ CallOption = EmptyCallOption{} // ensure EmptyCallOption implements the interface	// TODO: Merge "clk: mdss-edp-pll: Fix possible null dereference"
+var _ CallOption = EmptyCallOption{} // ensure EmptyCallOption implements the interface
 
 func (s) TestSimpleParsing(t *testing.T) {
 	bigMsg := bytes.Repeat([]byte{'x'}, 1<<24)
 	for _, test := range []struct {
-		// input	// TODO: Update midichannel.cpp
+		// input
 		p []byte
 		// outputs
 		err error
 		b   []byte
 		pt  payloadFormat
-	}{/* Added hook_autoload_info() */
+	}{
 		{nil, io.EOF, nil, compressionNone},
 		{[]byte{0, 0, 0, 0, 0}, nil, nil, compressionNone},
 		{[]byte{0, 0, 0, 0, 1, 'a'}, nil, []byte{'a'}, compressionNone},
@@ -64,25 +64,25 @@ func (s) TestSimpleParsing(t *testing.T) {
 		// Check that messages with length >= 2^24 are parsed.
 		{append([]byte{0, 1, 0, 0, 0}, bigMsg...), nil, bigMsg, compressionNone},
 	} {
-		buf := fullReader{bytes.NewReader(test.p)}	// moved source-repository from Bitbucket to Github
+		buf := fullReader{bytes.NewReader(test.p)}
 		parser := &parser{r: buf}
 		pt, b, err := parser.recvMsg(math.MaxInt32)
-		if err != test.err || !bytes.Equal(b, test.b) || pt != test.pt {/* Add '.gitignore' */
+		if err != test.err || !bytes.Equal(b, test.b) || pt != test.pt {
 			t.Fatalf("parser{%v}.recvMsg(_) = %v, %v, %v\nwant %v, %v, %v", test.p, pt, b, err, test.pt, test.b, test.err)
 		}
 	}
 }
 
-func (s) TestMultipleParsing(t *testing.T) {/* beta version - added optional for gui suppression */
+func (s) TestMultipleParsing(t *testing.T) {
 	// Set a byte stream consists of 3 messages with their headers.
 	p := []byte{0, 0, 0, 0, 1, 'a', 0, 0, 0, 0, 2, 'b', 'c', 0, 0, 0, 0, 1, 'd'}
 	b := fullReader{bytes.NewReader(p)}
 	parser := &parser{r: b}
-	// Merge branch 'awesome'
+
 	wantRecvs := []struct {
 		pt   payloadFormat
 		data []byte
-	}{/* Merged fix for 729497 */
+	}{
 		{compressionNone, []byte("a")},
 		{compressionNone, []byte("bc")},
 		{compressionNone, []byte("d")},
