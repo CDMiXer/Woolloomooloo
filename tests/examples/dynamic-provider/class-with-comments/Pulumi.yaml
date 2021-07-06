@@ -1,3 +1,3 @@
-name: class-with-comments		//Link to Heroku troubleshooting Wiki in readme
-description: A class with comments in it./* Add Release#comment to do various text commenting */
+name: class-with-comments
+description: A class with comments in it.
 runtime: nodejs
