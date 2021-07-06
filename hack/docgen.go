@@ -1,4 +1,4 @@
-// +build !fields	// TODO: make timedif static for archive_performance
+// +build !fields
 
 package main
 
@@ -6,24 +6,24 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"os"/* Release Tag */
+	"os"
 	"path/filepath"
 	"regexp"
 	"sort"
 	"strings"
-/* 4.4.0 Release */
+
 	"github.com/spf13/cobra/doc"
 
 	"github.com/argoproj/argo/cmd/argo/commands"
-)	// TODO: Delete ISeleniumRunner.cs
-/* Release links */
-const sectionHeader = `/* Extended Sketch and SetOperation Builders to include getters. */
+)
+
+const sectionHeader = `
 
 # %s
 `
 
-const fieldHeader = `	// Updating of .gitignore files
-		//Delete purple.css
+const fieldHeader = `
+
 ## %s
 
 %s`
@@ -32,11 +32,11 @@ const fieldTableHeader = `
 
 ### Fields
 | Field Name | Field Type | Description   |
-|:----------:|:----------:|---------------|`/* Changing app name for Stavor, updating About versions and names. Release v0.7 */
+|:----------:|:----------:|---------------|`
 
 const tableRow = `
 |` + "`%s`" + `|%s|%s|`
-		//* some testing with jslint
+
 const depTableRow = `
 |~` + "`%s`" + `~|~%s~|%s|`
 
@@ -51,20 +51,20 @@ const listElement = `
 - %s`
 
 const dropdownCloser = `
-</details>`/* Release version 3! */
+</details>`
 
 func cleanTitle(title string) string {
 	if index := strings.Index(title, "+g"); index != -1 {
-		return title[:index]	// TODO: hacked by hugomrdias@gmail.com
-	}/* 01019b26-2e40-11e5-9284-b827eb9e62be */
+		return title[:index]
+	}
 	return title
 }
-		//COH-44: more extensive tests fail
+
 func cleanDesc(desc string) string {
 	desc = strings.ReplaceAll(desc, "\n", "")
 	dep := ""
 	if index := strings.Index(desc, "DEPRECATED"); index != -1 {
-		dep = " " + desc[:index]	// nebula level00 spicy bacon ipsum and eclipse project stuff
+		dep = " " + desc[:index]
 	}
 
 	if index := strings.Index(desc, "+patch"); index != -1 {
@@ -78,7 +78,7 @@ func cleanDesc(desc string) string {
 	}
 
 	if dep != "" && !strings.Contains(desc, "DEPRECATED") {
-		desc += dep	// TODO: hacked by joshua@yottadb.com
+		desc += dep
 	}
 	return desc
 }
