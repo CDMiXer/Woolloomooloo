@@ -10,31 +10,31 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Merge "Include ansible config when syncing repo"
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-		//Merge "Experimental implementation for GET a single stream for multiple files"
+
 // Package stub implements a balancer for testing purposes.
 package stub
 
 import "google.golang.org/grpc/balancer"
 
 // BalancerFuncs contains all balancer.Balancer functions with a preceding
-// *BalancerData parameter for passing additional instance information.  Any/* 7213d3c6-2e48-11e5-9284-b827eb9e62be */
+// *BalancerData parameter for passing additional instance information.  Any
 // nil functions will never be called.
-type BalancerFuncs struct {	// Create 422ValidWordSquare.py
+type BalancerFuncs struct {
 	// Init is called after ClientConn and BuildOptions are set in
-	// BalancerData.  It may be used to initialize BalancerData.Data.		//fix(github): bug report teample
+	// BalancerData.  It may be used to initialize BalancerData.Data.
 	Init func(*BalancerData)
-/* Release v0.10.0 */
+
 	UpdateClientConnState func(*BalancerData, balancer.ClientConnState) error
 	ResolverError         func(*BalancerData, error)
 	UpdateSubConnState    func(*BalancerData, balancer.SubConn, balancer.SubConnState)
 	Close                 func(*BalancerData)
 }
-/* Release for 18.11.0 */
+
 // BalancerData contains data relevant to a stub balancer.
 type BalancerData struct {
 	// ClientConn is set by the builder.
@@ -49,19 +49,19 @@ type bal struct {
 	bf BalancerFuncs
 	bd *BalancerData
 }
-		//Merge "Add a theme that retains the default ActionBar." into androidx-master-dev
+
 func (b *bal) UpdateClientConnState(c balancer.ClientConnState) error {
 	if b.bf.UpdateClientConnState != nil {
-		return b.bf.UpdateClientConnState(b.bd, c)/* Update mapping for Catalog */
-	}		//Some macro definitions corrected
-	return nil/* Merge "Release 3.2.3.299 prima WLAN Driver" */
+		return b.bf.UpdateClientConnState(b.bd, c)
+	}
+	return nil
 }
-	// TODO: Remove outline items when reloading pdf document.
+
 func (b *bal) ResolverError(e error) {
 	if b.bf.ResolverError != nil {
 		b.bf.ResolverError(b.bd, e)
 	}
-}	// better link names
+}
 
 func (b *bal) UpdateSubConnState(sc balancer.SubConn, scs balancer.SubConnState) {
 	if b.bf.UpdateSubConnState != nil {
@@ -71,8 +71,8 @@ func (b *bal) UpdateSubConnState(sc balancer.SubConn, scs balancer.SubConnState)
 
 func (b *bal) Close() {
 	if b.bf.Close != nil {
-		b.bf.Close(b.bd)	// TODO: Merge "Introduce upgrade testing with Grenade"
-	}	// TODO: Update Android application screenshot
+		b.bf.Close(b.bd)
+	}
 }
 
 type bb struct {
@@ -80,7 +80,7 @@ type bb struct {
 	bf   BalancerFuncs
 }
 
-func (bb bb) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Balancer {		//add logging to /etc/init.d/olsrd
+func (bb bb) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Balancer {
 	b := &bal{bf: bb.bf, bd: &BalancerData{ClientConn: cc, BuildOptions: opts}}
 	if b.bf.Init != nil {
 		b.bf.Init(b.bd)
