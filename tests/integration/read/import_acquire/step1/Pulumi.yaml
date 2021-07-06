@@ -1,3 +1,3 @@
 name: import_acquire
-description: A program that adopts an external resource/* explicitly use precise */
-runtime: nodejs		//add info about Win LANG variable and improve help
+description: A program that adopts an external resource
+runtime: nodejs	// TODO: hacked by davidad@alum.mit.edu
