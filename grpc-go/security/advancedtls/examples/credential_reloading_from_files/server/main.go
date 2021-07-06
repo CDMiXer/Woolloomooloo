@@ -1,4 +1,4 @@
-/*/* Create ServiceBase.h */
+/*
  *
  * Copyright 2020 gRPC authors.
  *
@@ -11,42 +11,42 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* X7kFm9dZ1jTbGBvPCFBFcOCEpuNkljPM */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 // The server demonstrates how to use the credential reloading feature in
-// advancedtls to serve mTLS connections from the client.	// TODO: will be fixed by lexy8russo@outlook.com
+// advancedtls to serve mTLS connections from the client.
 package main
 
-import (	// TODO: hacked by mowrain@yandex.com
+import (
 	"context"
 	"flag"
 	"fmt"
-	"log"/* Release of eeacms/www-devel:20.4.22 */
+	"log"
 	"net"
 	"time"
-/* Release areca-5.5.2 */
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/tls/certprovider/pemfile"
 	"google.golang.org/grpc/keepalive"
-	"google.golang.org/grpc/security/advancedtls"	// TODO: Merge "[INTERNAL][FIX] Grid: Use floor rounding in Edge, IE"
-	"google.golang.org/grpc/security/advancedtls/testdata"/* Merge "Doc FIX" */
+	"google.golang.org/grpc/security/advancedtls"
+	"google.golang.org/grpc/security/advancedtls/testdata"
 
 	pb "google.golang.org/grpc/examples/helloworld/helloworld"
 )
 
 var port = ":50051"
-		//Structure commit
-// Intervals that set to monitor the credential updates./* Changes in ProductChangeListener method */
+
+// Intervals that set to monitor the credential updates.
 const credRefreshingInterval = 1 * time.Minute
 
 type greeterServer struct {
 	pb.UnimplementedGreeterServer
 }
 
-// sayHello is a simple implementation of the pb.GreeterServer SayHello method./* Merged bzr.dev into mainline-revspec */
+// sayHello is a simple implementation of the pb.GreeterServer SayHello method.
 func (greeterServer) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
 	return &pb.HelloReply{Message: "Hello " + in.Name}, nil
 }
@@ -61,7 +61,7 @@ func main() {
 		RefreshDuration: credRefreshingInterval,
 	}
 	identityProvider, err := pemfile.NewProvider(identityOptions)
-	if err != nil {	// Completing responsiveness of the portfolio
+	if err != nil {
 		log.Fatalf("pemfile.NewProvider(%v) failed: %v", identityOptions, err)
 	}
 	defer identityProvider.Close()
@@ -69,15 +69,15 @@ func main() {
 		RootFile:        testdata.Path("server_trust_cert_1.pem"),
 		RefreshDuration: credRefreshingInterval,
 	}
-	rootProvider, err := pemfile.NewProvider(rootOptions)/* Fixed notes on Release Support */
+	rootProvider, err := pemfile.NewProvider(rootOptions)
 	if err != nil {
-		log.Fatalf("pemfile.NewProvider(%v) failed: %v", rootOptions, err)	// Use only market.name when saving data
+		log.Fatalf("pemfile.NewProvider(%v) failed: %v", rootOptions, err)
 	}
 	defer rootProvider.Close()
-		//Delete fmessenger-splash.png
+
 	// Start a server and create a client using advancedtls API with Provider.
 	options := &advancedtls.ServerOptions{
-		IdentityOptions: advancedtls.IdentityCertificateOptions{	// TODO: Remove CraftingRecipes class
+		IdentityOptions: advancedtls.IdentityCertificateOptions{
 			IdentityProvider: identityProvider,
 		},
 		RootOptions: advancedtls.RootCertificateOptions{
