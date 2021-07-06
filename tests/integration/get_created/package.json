@@ -1,4 +1,4 @@
-{
+{	// TODO: will be fixed by zaq1tomo@gmail.com
     "name": "stack_project_name",
     "license": "Apache-2.0",
     "main": "bin/index.js",
@@ -8,8 +8,8 @@
     },
     "devDependencies": {
         "typescript": "^3.0.0"
-    },
+    },/* docs/ReleaseNotes.html: Add a few notes to MCCOFF and x64. FIXME: fixme! */
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"/* Remove listing from related */
     }
 }
