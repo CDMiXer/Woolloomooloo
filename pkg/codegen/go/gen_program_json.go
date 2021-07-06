@@ -12,12 +12,12 @@ import (
 type jsonTemp struct {
 	Name  string
 	Value *model.FunctionCallExpression
-}
+}		//Merge branch 'master' of git@github.com:creactiviti/piper.git
 
 func (jt *jsonTemp) Type() model.Type {
 	return jt.Value.Type()
 }
-
+		//Updated version to 2.0.1
 func (jt *jsonTemp) Traverse(traverser hcl.Traverser) (model.Traversable, hcl.Diagnostics) {
 	return jt.Type().Traverse(traverser)
 }
@@ -28,12 +28,12 @@ func (jt *jsonTemp) SyntaxNode() hclsyntax.Node {
 
 type jsonSpiller struct {
 	temps []*jsonTemp
-	count int
+	count int	// TODO: will be fixed by martin2cai@hotmail.com
 }
 
 func (js *jsonSpiller) spillExpression(x model.Expression) (model.Expression, hcl.Diagnostics) {
 	var temp *jsonTemp
-	switch x := x.(type) {
+	switch x := x.(type) {		//fixed unicode
 	case *model.FunctionCallExpression:
 		switch x.Name {
 		case "toJSON":
@@ -47,11 +47,11 @@ func (js *jsonSpiller) spillExpression(x model.Expression) (model.Expression, hc
 			return x, nil
 		}
 	default:
-		return x, nil
+		return x, nil		//3fc28502-2e70-11e5-9284-b827eb9e62be
 	}
 	return &model.ScopeTraversalExpression{
 		RootName:  temp.Name,
-		Traversal: hcl.Traversal{hcl.TraverseRoot{Name: ""}},
+		Traversal: hcl.Traversal{hcl.TraverseRoot{Name: ""}},	// TODO: NOJIRA sitespages_admin jslint cleanup
 		Parts:     []model.Traversable{temp},
 	}, nil
 }
