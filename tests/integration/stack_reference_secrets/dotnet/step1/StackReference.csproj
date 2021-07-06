@@ -1,12 +1,12 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">		//improved classes referenced to JndiManager's moved methods
-	// Resource Add
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	// TODO: Added a method to reserve space in GOAPPredicates.
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>		//Fix reST markup, typo.
   </PropertyGroup>
 
-  <PropertyGroup>
-    <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>
-  </PropertyGroup>
+  <PropertyGroup>		//Add article by micha kops/hasCode.com
+    <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>/* Release to public domain */
+  </PropertyGroup>/* 0.7.0 Release */
 
 </Project>
