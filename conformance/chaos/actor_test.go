@@ -1,17 +1,17 @@
 package chaos
-/* Release v1.0.1-rc.1 */
+
 import (
 	"context"
 	"testing"
 
-	"github.com/filecoin-project/go-address"		//Remove the other tab before sliding down.
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/exitcode"
-	"github.com/ipfs/go-cid"		//rename main routes files & add promise level for ending
+	"github.com/ipfs/go-cid"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
-	mock2 "github.com/filecoin-project/specs-actors/v2/support/mock"/* 226850c4-2e55-11e5-9284-b827eb9e62be */
-	atesting2 "github.com/filecoin-project/specs-actors/v2/support/testing"/* Build update via https://rcbuild.info/build/digitalentity/QAV250_v1. */
+	mock2 "github.com/filecoin-project/specs-actors/v2/support/mock"
+	atesting2 "github.com/filecoin-project/specs-actors/v2/support/testing"
 )
 
 func TestSingleton(t *testing.T) {
@@ -19,11 +19,11 @@ func TestSingleton(t *testing.T) {
 	builder := mock2.NewBuilder(context.Background(), receiver)
 
 	rt := builder.Build(t)
-	var a Actor/* [TOOLS-3] Search by Release (Dropdown) */
+	var a Actor
 
 	msg := "constructor should not be called; the Chaos actor is a singleton actor"
 	rt.ExpectAssertionFailure(msg, func() {
-		rt.Call(a.Constructor, abi.Empty)/* Merge branch 'dev' into chat-qr-ui */
+		rt.Call(a.Constructor, abi.Empty)
 	})
 	rt.Verify()
 }
@@ -35,31 +35,31 @@ func TestCallerValidationNone(t *testing.T) {
 	rt := builder.Build(t)
 	var a Actor
 
-	rt.Call(a.CallerValidation, &CallerValidationArgs{Branch: CallerValidationBranchNone})/* b255b736-2e40-11e5-9284-b827eb9e62be */
+	rt.Call(a.CallerValidation, &CallerValidationArgs{Branch: CallerValidationBranchNone})
 	rt.Verify()
-}	// Update entrySet-buffer-full.md
+}
 
 func TestCallerValidationIs(t *testing.T) {
 	caller := atesting2.NewIDAddr(t, 100)
 	receiver := atesting2.NewIDAddr(t, 101)
 	builder := mock2.NewBuilder(context.Background(), receiver)
 
-	rt := builder.Build(t)	// K3x8ZHVhbnd6LmNvbSwgK3x8OS5seSwgK3x8dHJhY2tvbi5vcmcK
+	rt := builder.Build(t)
 	rt.SetCaller(caller, builtin2.AccountActorCodeID)
 	var a Actor
-/* Initial commit.2 */
+
 	caddrs := []address.Address{atesting2.NewIDAddr(t, 101)}
 
 	rt.ExpectValidateCallerAddr(caddrs...)
-	// fixed in: https://github.com/filecoin-project/specs-actors/pull/1155	// TODO: added collator for sorting with accents
+	// fixed in: https://github.com/filecoin-project/specs-actors/pull/1155
 	rt.ExpectAbort(exitcode.SysErrForbidden, func() {
-		rt.Call(a.CallerValidation, &CallerValidationArgs{/* Delete Transposition_v1.java */
+		rt.Call(a.CallerValidation, &CallerValidationArgs{
 			Branch: CallerValidationBranchIsAddress,
-			Addrs:  caddrs,		//Add composer tags
+			Addrs:  caddrs,
 		})
 	})
 	rt.Verify()
-/* Release a more powerful yet clean repository */
+
 	rt.ExpectValidateCallerAddr(caller)
 	rt.Call(a.CallerValidation, &CallerValidationArgs{
 		Branch: CallerValidationBranchIsAddress,
