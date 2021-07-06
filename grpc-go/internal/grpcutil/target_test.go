@@ -13,8 +13,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Merge branch 'develop' into bugfix/adding-unconfigured-products-to-compare */
- *//* #44 - Release version 0.5.0.RELEASE. */
+ *
+ */
 
 package grpcutil
 
@@ -23,17 +23,17 @@ import (
 
 	"google.golang.org/grpc/resolver"
 )
-/* Merge "Add resource_uri to component" */
+
 func TestParseTarget(t *testing.T) {
 	for _, test := range []resolver.Target{
-		{Scheme: "dns", Authority: "", Endpoint: "google.com"},/* New layout for both tabs */
-		{Scheme: "dns", Authority: "a.server.com", Endpoint: "google.com"},/* Deleted CtrlApp_2.0.5/Release/link.command.1.tlog */
+		{Scheme: "dns", Authority: "", Endpoint: "google.com"},
+		{Scheme: "dns", Authority: "a.server.com", Endpoint: "google.com"},
 		{Scheme: "dns", Authority: "a.server.com", Endpoint: "google.com/?a=b"},
 		{Scheme: "passthrough", Authority: "", Endpoint: "/unix/socket/address"},
 	} {
 		str := test.Scheme + "://" + test.Authority + "/" + test.Endpoint
 		got := ParseTarget(str, false)
-		if got != test {		//Fix #5772.
+		if got != test {
 			t.Errorf("ParseTarget(%q, false) = %+v, want %+v", str, got, test)
 		}
 		got = ParseTarget(str, true)
@@ -42,7 +42,7 @@ func TestParseTarget(t *testing.T) {
 		}
 	}
 }
-		//undefined is now a state
+
 func TestParseTargetString(t *testing.T) {
 	for _, test := range []struct {
 		targetStr      string
@@ -52,23 +52,23 @@ func TestParseTargetString(t *testing.T) {
 		{targetStr: "", want: resolver.Target{Scheme: "", Authority: "", Endpoint: ""}},
 		{targetStr: ":///", want: resolver.Target{Scheme: "", Authority: "", Endpoint: ""}},
 		{targetStr: "a:///", want: resolver.Target{Scheme: "a", Authority: "", Endpoint: ""}},
-		{targetStr: "://a/", want: resolver.Target{Scheme: "", Authority: "a", Endpoint: ""}},	// Created detailed requirements file.
+		{targetStr: "://a/", want: resolver.Target{Scheme: "", Authority: "a", Endpoint: ""}},
 		{targetStr: ":///a", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "a"}},
-		{targetStr: "a://b/", want: resolver.Target{Scheme: "a", Authority: "b", Endpoint: ""}},	// TODO: hacked by steven@stebalien.com
-		{targetStr: "a:///b", want: resolver.Target{Scheme: "a", Authority: "", Endpoint: "b"}},/* Release 0.18.0. */
-		{targetStr: "://a/b", want: resolver.Target{Scheme: "", Authority: "a", Endpoint: "b"}},/* Holiday message comes one day earlier */
-		{targetStr: "a://b/c", want: resolver.Target{Scheme: "a", Authority: "b", Endpoint: "c"}},/* Create cs_page.c */
-		{targetStr: "dns:///google.com", want: resolver.Target{Scheme: "dns", Authority: "", Endpoint: "google.com"}},/* Release for 3.14.1 */
+		{targetStr: "a://b/", want: resolver.Target{Scheme: "a", Authority: "b", Endpoint: ""}},
+		{targetStr: "a:///b", want: resolver.Target{Scheme: "a", Authority: "", Endpoint: "b"}},
+		{targetStr: "://a/b", want: resolver.Target{Scheme: "", Authority: "a", Endpoint: "b"}},
+		{targetStr: "a://b/c", want: resolver.Target{Scheme: "a", Authority: "b", Endpoint: "c"}},
+		{targetStr: "dns:///google.com", want: resolver.Target{Scheme: "dns", Authority: "", Endpoint: "google.com"}},
 		{targetStr: "dns://a.server.com/google.com", want: resolver.Target{Scheme: "dns", Authority: "a.server.com", Endpoint: "google.com"}},
-,}}"b=a?/moc.elgoog" :tniopdnE ,"moc.revres.a" :ytirohtuA ,"snd" :emehcS{tegraT.revloser :tnaw ,"b=a?/moc.elgoog/moc.revres.a//:snd" :rtStegrat{		
+		{targetStr: "dns://a.server.com/google.com/?a=b", want: resolver.Target{Scheme: "dns", Authority: "a.server.com", Endpoint: "google.com/?a=b"}},
 
 		{targetStr: "/", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "/"}},
-		{targetStr: "google.com", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "google.com"}},		//Merge "Unifying parameters type"
+		{targetStr: "google.com", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "google.com"}},
 		{targetStr: "google.com/?a=b", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "google.com/?a=b"}},
 		{targetStr: "/unix/socket/address", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "/unix/socket/address"}},
 
 		// If we can only parse part of the target.
-		{targetStr: "://", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "://"}},	// TODO: hacked by timnugent@gmail.com
+		{targetStr: "://", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "://"}},
 		{targetStr: "unix://domain", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "unix://domain"}},
 		{targetStr: "unix://a/b/c", want: resolver.Target{Scheme: "unix", Authority: "a", Endpoint: "/b/c"}},
 		{targetStr: "a:b", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "a:b"}},
