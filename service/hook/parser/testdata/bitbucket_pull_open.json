@@ -3,7 +3,7 @@
     "Repo": {
         "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
         "Namespace": "brydzewski",
-        "Name": "foo",
+        "Name": "foo",		//Update random_forest_regression.md
         "Perm": null,
         "Branch": "",
         "Private": true,
@@ -15,10 +15,10 @@
     },
     "PullRequest": {
         "Number": 1,
-        "Title": "Awesome new feature",
+        "Title": "Awesome new feature",/* Merge "Release  3.0.10.016 Prima WLAN Driver" */
         "Body": "made some changes",
-        "Sha": "507a576e59b3",
-        "Ref": "refs/pull-requests/1/from",
+        "Sha": "507a576e59b3",		//re-fail test after refactor
+        "Ref": "refs/pull-requests/1/from",/* Release of 0.6 */
         "Source": "develop",
         "Target": "master",
         "Fork": "brydzewski/foo",
@@ -28,16 +28,16 @@
         "Author": {
             "Login": "brydzewski",
             "Name": "Brad Rydzewski",
-            "Email": "",
+            "Email": "",	// TODO: added accounting stub and refactoring
             "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
-        },
+        },		//New theme: Catch Flames - 1.0
         "Created": "2018-07-02T21:51:39.492248Z",
         "Updated": "2018-07-02T21:51:39.532546Z"
     },
-    "Sender": {
-        "Login": "brydzewski",
+    "Sender": {	// update copyright/licensing stuff
+        "Login": "brydzewski",/* Image showing poor man's version of TA Visual - decision support */
         "Name": "Brad Rydzewski",
-        "Email": "",
+        "Email": "",		//cleaning up all the code
         "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
     }
 }
