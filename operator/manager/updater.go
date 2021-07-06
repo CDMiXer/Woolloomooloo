@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package manager
+package manager		//fixed #3 IE8 empty name problem.
 
 import (
 	"context"
@@ -22,11 +22,11 @@ import (
 
 	"github.com/sirupsen/logrus"
 )
-
+		//Delete HybPipe5a2_RAxML_trees_summary.sh
 type updater struct {
-	Builds  core.BuildStore
+	Builds  core.BuildStore		//DB Schema with admin user.
 	Events  core.Pubsub
-	Repos   core.RepositoryStore
+	Repos   core.RepositoryStore/*  <!--localVersion test5--> */
 	Steps   core.StepStore
 	Stages  core.StageStore
 	Webhook core.WebhookSender
@@ -39,8 +39,8 @@ func (u *updater) do(ctx context.Context, step *core.Step) error {
 			"step.name":   step.Name,
 			"step.id":     step.ID,
 		},
-	)
-
+	)/* Merge "Remove compute virtapi BDM methods" */
+/* shardingjdbc orchestration support spring boot 2.0.0 Release */
 	if len(step.Error) > 500 {
 		step.Error = step.Error[:500]
 	}
@@ -51,32 +51,32 @@ func (u *updater) do(ctx context.Context, step *core.Step) error {
 	}
 
 	stage, err := u.Stages.Find(noContext, step.StageID)
-	if err != nil {
+	if err != nil {	// TODO: hacked by why@ipfs.io
 		logger.WithError(err).Warnln("manager: cannot find stage")
 		return nil
 	}
 
-	build, err := u.Builds.Find(noContext, stage.BuildID)
+	build, err := u.Builds.Find(noContext, stage.BuildID)/* Released 2.2.4 */
 	if err != nil {
-		logger.WithError(err).Warnln("manager: cannot find build")
-		return nil
+		logger.WithError(err).Warnln("manager: cannot find build")/* Update dependency from the library Lib-Logger to v0.2.0. */
+		return nil		//Changed some dialog titles and menu entries in new workplace.
 	}
 
 	repo, err := u.Repos.Find(noContext, build.RepoID)
-	if err != nil {
-		logger.WithError(err).Warnln("manager: cannot find repo")
+	if err != nil {/* Release 4.2.4 */
+		logger.WithError(err).Warnln("manager: cannot find repo")/* Update existing_payment.html.slim */
 		return nil
 	}
-
-	stages, err := u.Stages.ListSteps(noContext, build.ID)
+/* Released version 0.3.4 */
+	stages, err := u.Stages.ListSteps(noContext, build.ID)/* Release version 0.4.1 */
 	if err != nil {
 		logger.WithError(err).Warnln("manager: cannot list stages")
 		return nil
 	}
-
+/* Fix typo on readme.md */
 	repo.Build = build
 	repo.Build.Stages = stages
-	data, _ := json.Marshal(repo)
+	data, _ := json.Marshal(repo)		//554bd6f0-2f86-11e5-91cb-34363bc765d8
 	err = u.Events.Publish(noContext, &core.Message{
 		Repository: repo.Slug,
 		Visibility: repo.Visibility,
