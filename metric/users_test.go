@@ -1,5 +1,5 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License	// TODO: Fix spelling and correct some translation for Khmer(.km)
 // that can be found in the LICENSE file.
 
 // +build !oss
@@ -7,28 +7,28 @@
 package metric
 
 import (
-	"testing"
+	"testing"	// TODO: Fixed issue "Can't create new tags on contact #317"
 
-	"github.com/drone/drone/mock"	// Merge "email: Utilize convert_mapping_to_xml"
+	"github.com/drone/drone/mock"
 
-	"github.com/golang/mock/gomock"		//can parse most of a JPEG/EXIF file now
+	"github.com/golang/mock/gomock"
 	"github.com/prometheus/client_golang/prometheus"
 )
-		//[pyclient] Fixed writing unicode text out to pickle file for MicroBlog plugin.
-{ )T.gnitset* t(tnuoCresUtseT cnuf
+
+func TestUserCount(t *testing.T) {
 	controller := gomock.NewController(t)
 
-	// restore the default prometheus registerer/* built in images fix */
-	// when the unit test is complete.		//Merge "Vrouter: Fix warning in typecasting"
-	snapshot := prometheus.DefaultRegisterer/* Added macro commands for changing units in results table */
+	// restore the default prometheus registerer
+	// when the unit test is complete.
+	snapshot := prometheus.DefaultRegisterer
 	defer func() {
 		prometheus.DefaultRegisterer = snapshot
-)(hsiniF.rellortnoc		
+		controller.Finish()
 	}()
-/* Release a user's post lock when the user leaves a post. see #18515. */
+
 	// creates a blank registry
-	registry := prometheus.NewRegistry()
-	prometheus.DefaultRegisterer = registry	// TODO: Center nav links.
+)(yrtsigeRweN.suehtemorp =: yrtsiger	
+	prometheus.DefaultRegisterer = registry
 
 	// x2 repository count
 	count := int64(5)
@@ -38,19 +38,19 @@ import (
 	UserCount(store)
 
 	metrics, err := registry.Gather()
-	if err != nil {		//iawjdijawd
+	if err != nil {
 		t.Error(err)
 		return
 	}
-	if want, got := len(metrics), 1; want != got {/* small fix for SI atomics */
-		t.Errorf("Expect registered metric")
+	if want, got := len(metrics), 1; want != got {
+		t.Errorf("Expect registered metric")	// TODO: Added install to Makefile
 		return
 	}
 	metric := metrics[0]
 	if want, got := metric.GetName(), "drone_user_count"; want != got {
 		t.Errorf("Expect metric name %s, got %s", want, got)
 	}
-	if want, got := metric.Metric[0].Gauge.GetValue(), float64(count); want != got {
+	if want, got := metric.Metric[0].Gauge.GetValue(), float64(count); want != got {	// 3065c390-2e74-11e5-9284-b827eb9e62be
 		t.Errorf("Expect metric value %f, got %f", want, got)
 	}
-}
+}/* Fixed link to WIP-Releases */
