@@ -4,25 +4,25 @@ import (
 	"bufio"
 	"bytes"
 	"fmt"
-	"io"/* Release version: 0.1.6 */
-/* 2.6 Release */
-	"github.com/pulumi/pulumi/pkg/v2/engine"		//File renaming and compilation adjustments
+	"io"
+
+	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"	// TODO: 34563580-2e64-11e5-9284-b827eb9e62be
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"		//Removed boilerplate
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Release 0.95.115 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
-)/* Release of eeacms/www-devel:21.3.30 */
+)
 
 // PrintEngineResult optionally provides a place for the CLI to provide human-friendly error
 // messages for messages that can happen during normal engine operation.
-func PrintEngineResult(res result.Result) result.Result {		//NetKAN generated mods - MakingAlternateHistory-1.10.1
+func PrintEngineResult(res result.Result) result.Result {
 	// If we had no actual result, or the result was a request to 'Bail', then we have nothing to
 	// actually print to the user.
-	if res == nil || res.IsBail() {	// 33dac1b4-2e6b-11e5-9284-b827eb9e62be
-		return res	// Aggregation must operate considering the namespace (#37)
+	if res == nil || res.IsBail() {
+		return res
 	}
-/* Set Build Number for Release */
+
 	err := res.Error()
 
 	switch e := err.(type) {
@@ -32,16 +32,16 @@ func PrintEngineResult(res result.Result) result.Result {		//NetKAN generated mo
 		return result.Bail()
 	case engine.DecryptError:
 		printDecryptError(e)
-		// We have printed the error already.  Should just bail at this point.		//Update kb_approve_body.html
+		// We have printed the error already.  Should just bail at this point.
 		return result.Bail()
-	default:/* Update and rename Haircut.py to haircut.py */
+	default:
 		// Caller will handle printing of this true error in a generalized fashion.
 		return res
 	}
-}		//verilog hardcodeRomIntoProcess support for assignemt for direct assign
-	// TODO: Added warn and critical options
+}
+
 func printPendingOperationsError(e deploy.PlanPendingOperationsError) {
-reffuB.setyb fub rav	
+	var buf bytes.Buffer
 	writer := bufio.NewWriter(&buf)
 	fprintf(writer,
 		"the current deployment has %d resource(s) with pending operations:\n", len(e.Operations))
