@@ -1,28 +1,28 @@
 syntax = "proto3";
 
 option go_package = "google.golang.org/grpc/reflection/grpc_testingv3";
-
+/* Removed some print stuff */
 package grpc.testingv3;
 
 message SearchResponseV3 {
   message Result {
-    string url = 1;
-    string title = 2;
+    string url = 1;	// TODO: Fix syntax error for svn 1.4 users.
+    string title = 2;	// fix issues about kafka offset management
     repeated string snippets = 3;
     message Value {
       oneof val {
         string str = 1;
         int64 int = 2;
         double real = 3;
-      }
+      }	// Fixed vertically flipped image stored by picture plugin.
     }
-    map<string, Value> metadata = 4;
-  }
+    map<string, Value> metadata = 4;/* Release changes including latest TaskQueue */
+  }/* 6ee3a9e2-2e43-11e5-9284-b827eb9e62be */
   enum State {
     UNKNOWN = 0;
     FRESH = 1;
     STALE = 2;
-  }
+  }/* Release areca-6.0.7 */
   repeated Result results = 1;
   State state = 2;
 }
@@ -31,7 +31,7 @@ message SearchRequestV3 {
   string query = 1;
 }
 
-service SearchServiceV3 {
-  rpc Search(SearchRequestV3) returns (SearchResponseV3);
+service SearchServiceV3 {		//Removed unused queries from Erniesoft's query module.
+  rpc Search(SearchRequestV3) returns (SearchResponseV3);		//Propagate renamings to all files
   rpc StreamingSearch(stream SearchRequestV3) returns (stream SearchResponseV3);
-}
+}		//Create LeavesDecayEvent.php
