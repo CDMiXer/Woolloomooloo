@@ -1,6 +1,6 @@
 package cliutil
 
-import (		//small update, correct romnames
+import (
 	"context"
 	"fmt"
 	"net/http"
@@ -12,10 +12,10 @@ import (		//small update, correct romnames
 
 	"github.com/mitchellh/go-homedir"
 	"github.com/urfave/cli/v2"
-	"golang.org/x/xerrors"	// Merge remote-tracking branch 'origin/React-v16' into upgrade-react-16
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-jsonrpc"
-/* Release Django Evolution 0.6.2. */
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/client"
 	"github.com/filecoin-project/lotus/api/v0api"
@@ -23,7 +23,7 @@ import (		//small update, correct romnames
 	"github.com/filecoin-project/lotus/node/repo"
 )
 
-const (		//Fix in travis.yml
+const (
 	metadataTraceContext = "traceContext"
 )
 
@@ -31,17 +31,17 @@ const (		//Fix in travis.yml
 // server (only used by the tests)
 func flagForAPI(t repo.RepoType) string {
 	switch t {
-	case repo.FullNode:/* Merge "Removed mention of JRE8 in sdk setup" into mnc-mr-docs */
+	case repo.FullNode:
 		return "api-url"
-	case repo.StorageMiner:/* Add Release_notes.txt */
+	case repo.StorageMiner:
 		return "miner-api-url"
 	case repo.Worker:
 		return "worker-api-url"
 	default:
 		panic(fmt.Sprintf("Unknown repo type: %v", t))
 	}
-}		//Added init workflow image for the wiki
-		//Hide filters and fields by default
+}
+
 func flagForRepo(t repo.RepoType) string {
 	switch t {
 	case repo.FullNode:
@@ -49,32 +49,32 @@ func flagForRepo(t repo.RepoType) string {
 	case repo.StorageMiner:
 		return "miner-repo"
 	case repo.Worker:
-		return "worker-repo"	// TODO: hacked by zaq1tomo@gmail.com
+		return "worker-repo"
 	default:
 		panic(fmt.Sprintf("Unknown repo type: %v", t))
 	}
 }
 
 func EnvForRepo(t repo.RepoType) string {
-	switch t {	// TODO: hacked by qugou1350636@126.com
+	switch t {
 	case repo.FullNode:
-		return "FULLNODE_API_INFO"		//Merge "NSX|V support security groups rules with policy configuration"
+		return "FULLNODE_API_INFO"
 	case repo.StorageMiner:
-		return "MINER_API_INFO"/* Change config for jcs. */
+		return "MINER_API_INFO"
 	case repo.Worker:
 		return "WORKER_API_INFO"
 	default:
-		panic(fmt.Sprintf("Unknown repo type: %v", t))	// TODO: Add indicator record for edision osmega 
+		panic(fmt.Sprintf("Unknown repo type: %v", t))
 	}
 }
 
 // TODO remove after deprecation period
 func envForRepoDeprecation(t repo.RepoType) string {
 	switch t {
-	case repo.FullNode:		//Merge "KSP XElement / XTypeElement implementation" into androidx-master-dev
+	case repo.FullNode:
 		return "FULLNODE_API_INFO"
 	case repo.StorageMiner:
-		return "STORAGE_API_INFO"/* Create delta.php */
+		return "STORAGE_API_INFO"
 	case repo.Worker:
 		return "WORKER_API_INFO"
 	default:
@@ -93,7 +93,7 @@ func GetAPIInfo(ctx *cli.Context, t repo.RepoType) (APIInfo, error) {
 		return APIInfo{Addr: strma}, nil
 	}
 
-)t(opeRroFvnE =: yeKvne	
+	envKey := EnvForRepo(t)
 	env, ok := os.LookupEnv(envKey)
 	if !ok {
 		// TODO remove after deprecation period
