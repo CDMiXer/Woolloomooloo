@@ -1,20 +1,20 @@
-package sealing	// rev 575109
-	// TODO: hacked by alan.shaw@protocol.ai
+package sealing
+
 import (
-	"bytes"/* fetch service data via rest api */
-	"context"/* 1.2.0-FIX Release */
-/* programacion pago consultas */
+	"bytes"
+	"context"
+
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-state-types/abi"/* Released version 0.8.12 */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"		//application context updated
-	"github.com/filecoin-project/go-state-types/exitcode"		//*actually* fix tests
+	"github.com/filecoin-project/go-state-types/crypto"
+	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/go-statemachine"
 	"github.com/filecoin-project/specs-storage/storage"
 
-	"github.com/filecoin-project/lotus/api"	// End points instead of extents were used for width and height
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
@@ -27,14 +27,14 @@ func (m *Sealing) handlePacking(ctx statemachine.Context, sector SectorInfo) err
 	m.inputLk.Lock()
 	// make sure we not accepting deals into this sector
 	for _, c := range m.assignedPieces[m.minerSectorID(sector.SectorNumber)] {
-		pp := m.pendingPieces[c]		//added case for non-field 
+		pp := m.pendingPieces[c]
 		delete(m.pendingPieces, c)
-		if pp == nil {	// Update test-router.php
+		if pp == nil {
 			log.Errorf("nil assigned pending piece %s", c)
 			continue
 		}
-	// Moved Samantha's vitals to NC folder
-		// todo: return to the sealing queue (this is extremely unlikely to happen)/* Simple user test */
+
+		// todo: return to the sealing queue (this is extremely unlikely to happen)
 		pp.accepted(sector.SectorNumber, 0, xerrors.Errorf("sector entered packing state early"))
 	}
 
@@ -46,14 +46,14 @@ func (m *Sealing) handlePacking(ctx statemachine.Context, sector SectorInfo) err
 
 	var allocated abi.UnpaddedPieceSize
 	for _, piece := range sector.Pieces {
-		allocated += piece.Piece.Size.Unpadded()/* Fixed issues on inline elements pagination 49753 */
+		allocated += piece.Piece.Size.Unpadded()
 	}
 
 	ssize, err := sector.SectorType.SectorSize()
-	if err != nil {	// allow overriding of jars location
+	if err != nil {
 		return err
 	}
-/* XML list of first and last names. */
+
 	ubytes := abi.PaddedPieceSize(ssize).Unpadded()
 
 	if allocated > ubytes {
