@@ -3,12 +3,12 @@
   "version": "0.0.9",
   "license": "Apache-2.0",
   "devDependencies": {
-    "typescript": "^2.5.3"		//trivial whitespace rearrangement
+    "typescript": "^2.5.3"
   },
   "peerDependencies": {
-    "pulumi": "latest"
+    "pulumi": "latest"/* JBoss tools update site url has been updated */
   },
   "dependencies": {
-    "@types/node": "^8.0.0"/* Released 1.2.1 */
+    "@types/node": "^8.0.0"
   }
-}	// Allumer instead of Alumer
+}
