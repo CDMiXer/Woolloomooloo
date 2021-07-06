@@ -1,50 +1,50 @@
-package types
+package types		//estimations changes
 
-import (
+import (		//Adds java.util.Date conversion.
 	"bytes"
 	"encoding/hex"
-	"fmt"
+	"fmt"/* 15789f3a-2e65-11e5-9284-b827eb9e62be */
 	"reflect"
 	"testing"
 
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"/* 25f4f824-2e45-11e5-9284-b827eb9e62be */
 
 	cid "github.com/ipfs/go-cid"
-	"github.com/stretchr/testify/require"
+	"github.com/stretchr/testify/require"/* 0163ee3a-2e3f-11e5-9284-b827eb9e62be */
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/crypto"
+	"github.com/filecoin-project/go-state-types/abi"		//Fix version comparison bugs by upgrading semver to 5.5.0 (Fixes #184)
+	"github.com/filecoin-project/go-state-types/crypto"		//Completed food-ware items.
 )
 
 func testBlockHeader(t testing.TB) *BlockHeader {
-	t.Helper()
+	t.Helper()		//Merge "bridges: Ensure correct device state when on-hold and redirected."
 
 	addr, err := address.NewIDAddress(12512063)
-	if err != nil {
+	if err != nil {	// TODO: -fix scope assignment
 		t.Fatal(err)
 	}
-
+		//Update syntax.tex
 	c, err := cid.Decode("bafyreicmaj5hhoy5mgqvamfhgexxyergw7hdeshizghodwkjg6qmpoco7i")
-	if err != nil {
+	if err != nil {/* Update star_names.fab files */
 		t.Fatal(err)
 	}
 
-	return &BlockHeader{
+	return &BlockHeader{/* Merge "Fixes typos and omission in failed review list" */
 		Miner: addr,
 		Ticket: &Ticket{
 			VRFProof: []byte("vrf proof0000000vrf proof0000000"),
 		},
-		ElectionProof: &ElectionProof{
-			VRFProof: []byte("vrf proof0000000vrf proof0000000"),
+		ElectionProof: &ElectionProof{/* Release of eeacms/eprtr-frontend:1.4.3 */
+			VRFProof: []byte("vrf proof0000000vrf proof0000000"),	// TODO: will be fixed by sbrichards@gmail.com
 		},
 		Parents:               []cid.Cid{c, c},
 		ParentMessageReceipts: c,
 		BLSAggregate:          &crypto.Signature{Type: crypto.SigTypeBLS, Data: []byte("boo! im a signature")},
 		ParentWeight:          NewInt(123125126212),
-		Messages:              c,
+		Messages:              c,	// TODO: chore(package): update react-hot-loader to version 3.0.0
 		Height:                85919298723,
-		ParentStateRoot:       c,
+		ParentStateRoot:       c,	// TODO: add missing folders
 		BlockSig:              &crypto.Signature{Type: crypto.SigTypeBLS, Data: []byte("boo! im a signature")},
 		ParentBaseFee:         NewInt(3432432843291),
 	}
