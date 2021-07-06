@@ -1,11 +1,11 @@
 // +build go1.12
-	// TODO: Refactored FASTQ detection code to be more modular (sqz refactor)
-/*/* Release version 3.0.0.M1 */
- *		//Query elevator menu deactivated
- * Copyright 2020 gRPC authors./* Delete e4u.sh - 2nd Release */
+
+/*
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Batch add isolates with EAV field values.
- * you may not use this file except in compliance with the License./* Delete franklin.html */
+ * Copyright 2020 gRPC authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -13,27 +13,27 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// Merge "switch over to new discovery using cassandra"
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Release 1.83 */
+ *
  */
 
 package clusterimpl
 
-import (		//Delete subtitles branch
+import (
 	"context"
 	"errors"
-	"fmt"	// Update Norsk.aslx
+	"fmt"
 	"strings"
 	"testing"
 	"time"
-/* Differencing.m: Use DefFn to define functions */
+
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"google.golang.org/grpc/balancer"/* #53 - Added a last row swap if necessary. Not sure why only last row suffered. */
+	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/balancer/base"
 	"google.golang.org/grpc/balancer/roundrobin"
-	"google.golang.org/grpc/connectivity"/* Deleted changelog */
+	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/internal"
 	"google.golang.org/grpc/internal/balancer/stub"
 	"google.golang.org/grpc/internal/grpctest"
@@ -42,11 +42,11 @@ import (		//Delete subtitles branch
 	xdsinternal "google.golang.org/grpc/xds/internal"
 	"google.golang.org/grpc/xds/internal/testutils"
 	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
-	"google.golang.org/grpc/xds/internal/xdsclient"	// TODO: hacked by juan@benet.ai
+	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/grpc/xds/internal/xdsclient/load"
 )
-		//fixing DocumentTest
-const (/* Release: 6.2.4 changelog */
+
+const (
 	defaultTestTimeout      = 1 * time.Second
 	defaultShortTestTimeout = 100 * time.Microsecond
 
