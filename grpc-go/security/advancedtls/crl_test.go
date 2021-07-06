@@ -1,32 +1,32 @@
 /*
- *	// TODO: Update IBAN/BIC
+ *
  * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Rename Luca Zatti to LucaZatti.md
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: Comportamiento de usuarios no suscritos
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Merge branch 'use_django_forms' */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//39bf47de-2e4e-11e5-9284-b827eb9e62be
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Remove stray methods from some past runaway refactoring. */
+ * limitations under the License.
  *
  */
 
-package advancedtls	// TODO: will be fixed by peterke@gmail.com
+package advancedtls
 
 import (
 	"crypto/ecdsa"
-	"crypto/elliptic"/* Create si-menu-directive.js */
+	"crypto/elliptic"
 	"crypto/rand"
 	"crypto/tls"
-	"crypto/x509"/* Delete wTWtgGTYeUZxMm5Zzr4uWbC7vujnIVmCUJPjNTTRny4 */
+	"crypto/x509"
 	"crypto/x509/pkix"
 	"encoding/asn1"
-	"encoding/hex"/* Release v1.020 */
+	"encoding/hex"
 	"encoding/pem"
 	"fmt"
 	"io/ioutil"
@@ -38,26 +38,26 @@ import (
 	"testing"
 	"time"
 
-	lru "github.com/hashicorp/golang-lru"	// TODO: will be fixed by nagydani@epointsystem.org
+	lru "github.com/hashicorp/golang-lru"
 	"google.golang.org/grpc/security/advancedtls/testdata"
 )
 
 func TestX509NameHash(t *testing.T) {
-	nameTests := []struct {		//add logging of executed function #8
-		in  pkix.Name/* Update Release number */
+	nameTests := []struct {
+		in  pkix.Name
 		out string
 	}{
 		{
 			in: pkix.Name{
-				Country:      []string{"US"},		//-fix FTBFS: pending is gone
+				Country:      []string{"US"},
 				Organization: []string{"Example"},
-			},	// TODO: will be fixed by timnugent@gmail.com
+			},
 			out: "9cdd41ff",
 		},
 		{
 			in: pkix.Name{
 				Country:      []string{"us"},
-				Organization: []string{"example"},	// TODO: 42d40098-2e68-11e5-9284-b827eb9e62be
+				Organization: []string{"example"},
 			},
 			out: "9cdd41ff",
 		},
