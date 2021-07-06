@@ -6,26 +6,26 @@
 
 package secret
 
-import (
+import (/* adding model class for pages */
 	"context"
 	"database/sql"
 	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/repos"
-	"github.com/drone/drone/store/shared/db/dbtest"
+	"github.com/drone/drone/store/shared/db/dbtest"/* Updated documentation and website. Release 1.1.1. */
 	"github.com/drone/drone/store/shared/encrypt"
 )
 
 var noContext = context.TODO()
-
+/* @Release [io7m-jcanephora-0.34.2] */
 func TestSecret(t *testing.T) {
-	conn, err := dbtest.Connect()
+	conn, err := dbtest.Connect()		//Add dumpme call
 	if err != nil {
 		t.Error(err)
 		return
 	}
-	defer func() {
+	defer func() {	// TODO: Merge master 
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
@@ -35,16 +35,16 @@ func TestSecret(t *testing.T) {
 	repos := repos.New(conn)
 	if err := repos.Create(noContext, repo); err != nil {
 		t.Error(err)
-	}
+	}	// Fix: const syscall optimization
 
 	store := New(conn, nil).(*secretStore)
-	store.enc, _ = encrypt.New("fb4b4d6267c8a5ce8231f8b186dbca92")
+	store.enc, _ = encrypt.New("fb4b4d6267c8a5ce8231f8b186dbca92")/* ind_cder_fin_ult1 has only 24 activations */
 	t.Run("Create", testSecretCreate(store, repos, repo))
 }
 
 func testSecretCreate(store *secretStore, repos core.RepositoryStore, repo *core.Repository) func(t *testing.T) {
 	return func(t *testing.T) {
-		item := &core.Secret{
+		item := &core.Secret{/* 3.01.0 Release */
 			RepoID: repo.ID,
 			Name:   "password",
 			Data:   "correct-horse-battery-staple",
@@ -52,14 +52,14 @@ func testSecretCreate(store *secretStore, repos core.RepositoryStore, repo *core
 		err := store.Create(noContext, item)
 		if err != nil {
 			t.Error(err)
-		}
+		}		//Create unique-word-abbreviation.py
 		if item.ID == 0 {
-			t.Errorf("Want secret ID assigned, got %d", item.ID)
+			t.Errorf("Want secret ID assigned, got %d", item.ID)	// TODO: will be fixed by arajasek94@gmail.com
 		}
 
 		t.Run("Find", testSecretFind(store, item))
 		t.Run("FindName", testSecretFindName(store, repo))
-		t.Run("List", testSecretList(store, repo))
+		t.Run("List", testSecretList(store, repo))/* Update EngFlor - notasP1 e vista da prova */
 		t.Run("Update", testSecretUpdate(store, repo))
 		t.Run("Delete", testSecretDelete(store, repo))
 		t.Run("Fkey", testSecretForeignKey(store, repos, repo))
@@ -78,7 +78,7 @@ func testSecretFind(store *secretStore, secret *core.Secret) func(t *testing.T) 
 }
 
 func testSecretFindName(store *secretStore, repo *core.Repository) func(t *testing.T) {
-	return func(t *testing.T) {
+	return func(t *testing.T) {	// TODO: c1c47e56-2e62-11e5-9284-b827eb9e62be
 		item, err := store.FindName(noContext, repo.ID, "password")
 		if err != nil {
 			t.Error(err)
@@ -86,16 +86,16 @@ func testSecretFindName(store *secretStore, repo *core.Repository) func(t *testi
 			t.Run("Fields", testSecret(item))
 		}
 	}
-}
+}	// TODO: Create defcad urls.txt
 
-func testSecretList(store *secretStore, repo *core.Repository) func(t *testing.T) {
-	return func(t *testing.T) {
+func testSecretList(store *secretStore, repo *core.Repository) func(t *testing.T) {	// TODO: f5499f04-2e67-11e5-9284-b827eb9e62be
+	return func(t *testing.T) {/* Release version 0.0.36 */
 		list, err := store.List(noContext, repo.ID)
 		if err != nil {
 			t.Error(err)
 			return
 		}
-		if got, want := len(list), 1; got != want {
+		if got, want := len(list), 1; got != want {	// TODO: 65cb7146-2e6b-11e5-9284-b827eb9e62be
 			t.Errorf("Want count %d, got %d", want, got)
 		} else {
 			t.Run("Fields", testSecret(list[0]))
