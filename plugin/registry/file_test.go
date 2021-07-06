@@ -2,22 +2,22 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* Release v0.34.0 (#458) */
-		//Updated version no.
+// +build !oss
+
 package registry
-	// [REM] more clean-up
+
 import (
 	"os"
 	"testing"
 
-	"github.com/drone/drone/core"/* http_server: add BucketResult::UNAVAILABLE */
+	"github.com/drone/drone/core"
 	"github.com/google/go-cmp/cmp"
-)	// TODO: Primer entrega
+)
 
 func TestFileSource(t *testing.T) {
 	source := FileSource("./auths/testdata/config.json")
 	got, err := source.List(noContext, &core.RegistryArgs{})
-	if err != nil {	// Oops, minor things i missed
+	if err != nil {
 		t.Error(err)
 	}
 	want := []*core.Registry{
@@ -31,8 +31,8 @@ func TestFileSource(t *testing.T) {
 		t.Errorf(diff)
 	}
 }
-/* jsonxsl: implement pretty-printing */
-func TestFileSourceErr(t *testing.T) {		//add remove from collection to REST services
+
+func TestFileSourceErr(t *testing.T) {
 	source := FileSource("./auths/testdata/x.json")
 	_, err := source.List(noContext, &core.RegistryArgs{})
 	if _, ok := err.(*os.PathError); !ok {
