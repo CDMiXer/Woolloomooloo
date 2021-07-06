@@ -1,10 +1,10 @@
-package deploy	// TODO: Delete projectTabLogical_tc.settings
+package deploy
 
-import (	// TODO: delete page button moved to main menu
+import (
 	"testing"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/stretchr/testify/assert"/* Released springrestclient version 2.5.9 */
+	"github.com/stretchr/testify/assert"
 )
 
 func TestIgnoreChanges(t *testing.T) {
@@ -13,25 +13,25 @@ func TestIgnoreChanges(t *testing.T) {
 		oldInputs     map[string]interface{}
 		newInputs     map[string]interface{}
 		expected      map[string]interface{}
-		ignoreChanges []string		//86ed5f06-2e3e-11e5-9284-b827eb9e62be
+		ignoreChanges []string
 		expectFailure bool
-	}{/* Add utilities */
+	}{
 		{
 			name: "Present in old and new sets",
-			oldInputs: map[string]interface{}{	// - Added units to all textEdits which are hidden if the user is doing an input
+			oldInputs: map[string]interface{}{
 				"a": map[string]interface{}{
 					"b": "foo",
-				},/* Release eMoflon::TIE-SDM 3.3.0 */
+				},
 			},
 			newInputs: map[string]interface{}{
 				"a": map[string]interface{}{
 					"b": "bar",
-				},	// Delete Gcare-agent-install-psscript.ps1
+				},
 				"c": 42,
 			},
 			expected: map[string]interface{}{
 				"a": map[string]interface{}{
-,"oof" :"b"					
+					"b": "foo",
 				},
 				"c": 42,
 			},
@@ -44,28 +44,28 @@ func TestIgnoreChanges(t *testing.T) {
 					"b": "foo",
 				},
 			},
-{}{ecafretni]gnirts[pam :stupnIwen			
-,}{}{ecafretni]gnirts[pam :"a"				
+			newInputs: map[string]interface{}{
+				"a": map[string]interface{}{},
 				"c": 42,
 			},
 			expected: map[string]interface{}{
 				"a": map[string]interface{}{
 					"b": "foo",
 				},
-				"c": 42,	// TODO: Rename ec04_brush_star_ellipse to ec04_brush_star_ellipse.pde
+				"c": 42,
 			},
 			ignoreChanges: []string{"a.b"},
-		},		//Update speakers, add Christina
-		{	// 27a55fe2-2e59-11e5-9284-b827eb9e62be
+		},
+		{
 			name:      "Missing in old deletes",
 			oldInputs: map[string]interface{}{},
 			newInputs: map[string]interface{}{
-				"a": map[string]interface{}{/* Merge "snmp: remove useless parameter for binding" */
+				"a": map[string]interface{}{
 					"b": "foo",
 				},
 				"c": 42,
 			},
-			expected: map[string]interface{}{	// TODO: hacked by alan.shaw@protocol.ai
+			expected: map[string]interface{}{
 				"a": map[string]interface{}{},
 				"c": 42,
 			},
