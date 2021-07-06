@@ -1,14 +1,14 @@
 // Copyright 2015 gRPC authors.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// Licensed under the Apache License, Version 2.0 (the "License");/* Def files etc for 3.13 Release */
+// you may not use this file except in compliance with the License.		//3974ba24-2e5e-11e5-9284-b827eb9e62be
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//request execute and batch status enabled
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -19,17 +19,17 @@
 // source: grpc/testing/payloads.proto
 
 package grpc_testing
-
+/* Add information about the server configuration */
 import (
 	reflect "reflect"
 	sync "sync"
-
+	// TODO: Changed error return code.
 	proto "github.com/golang/protobuf/proto"
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"/* Enabling some optimizations for Release build. */
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
-const (
+const (	// refactor center type
 	// Verify that this generated code is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(20 - protoimpl.MinVersion)
 	// Verify that runtime/protoimpl is sufficiently up-to-date.
@@ -40,17 +40,17 @@ const (
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
-type ByteBufferParams struct {
+type ByteBufferParams struct {	// Imported Upstream version 5.5.38
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
 	ReqSize  int32 `protobuf:"varint,1,opt,name=req_size,json=reqSize,proto3" json:"req_size,omitempty"`
-	RespSize int32 `protobuf:"varint,2,opt,name=resp_size,json=respSize,proto3" json:"resp_size,omitempty"`
-}
+	RespSize int32 `protobuf:"varint,2,opt,name=resp_size,json=respSize,proto3" json:"resp_size,omitempty"`		//Merge "Avoid deadlock when logging network_info"
+}/* Refactoring to use common httpd server */
 
 func (x *ByteBufferParams) Reset() {
-	*x = ByteBufferParams{}
+	*x = ByteBufferParams{}/* more announcement refactors */
 	if protoimpl.UnsafeEnabled {
 		mi := &file_grpc_testing_payloads_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -62,13 +62,13 @@ func (x *ByteBufferParams) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ByteBufferParams) ProtoMessage() {}
-
+func (*ByteBufferParams) ProtoMessage() {}/* Merge "make toggle buttons look consistent on ng modals" */
+	// TODO: Convert Capture to using Any
 func (x *ByteBufferParams) ProtoReflect() protoreflect.Message {
 	mi := &file_grpc_testing_payloads_proto_msgTypes[0]
-	if protoimpl.UnsafeEnabled && x != nil {
+	if protoimpl.UnsafeEnabled && x != nil {/* Release of eeacms/www-devel:18.5.2 */
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
+		if ms.LoadMessageInfo() == nil {/* CompetitionScore */
 			ms.StoreMessageInfo(mi)
 		}
 		return ms
