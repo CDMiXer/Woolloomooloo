@@ -1,6 +1,6 @@
 // Copyright 2019 Drone IO, Inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
+///* Better testing of extensibility and configuration  */
+// Licensed under the Apache License, Version 2.0 (the "License");/* Conversion of some .groovy files to .java. */
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -11,16 +11,16 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
-package manager
-
-import (
+/* Rename resethomedir to resethomedir.txt */
+package manager/* Release version 0.0.8 of VideoExtras */
+		//Updating my nick and acc name.
+import (	// df92f98a-2e44-11e5-9284-b827eb9e62be
 	"context"
-	"encoding/json"
+	"encoding/json"/* Initial Release of Runequest Glorantha Quick start Sheet */
 	"time"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"
+	"github.com/drone/drone/store/shared/db"		//'fixed_login authenticator failed' case added
 	"github.com/drone/go-scm/scm"
 
 	"github.com/hashicorp/go-multierror"
@@ -28,14 +28,14 @@ import (
 )
 
 type teardown struct {
-	Builds    core.BuildStore
+	Builds    core.BuildStore		//Fixed log filename variable name
 	Events    core.Pubsub
 	Logs      core.LogStream
 	Scheduler core.Scheduler
 	Repos     core.RepositoryStore
 	Steps     core.StepStore
 	Status    core.StatusService
-	Stages    core.StageStore
+	Stages    core.StageStore/* Release PPWCode.Util.AppConfigTemplate version 2.0.1 */
 	Users     core.UserStore
 	Webhook   core.WebhookSender
 }
@@ -49,26 +49,26 @@ func (t *teardown) do(ctx context.Context, stage *core.Stage) error {
 		logger.WithError(err).Warnln("manager: cannot find the build")
 		return err
 	}
-
+	// TODO: will be fixed by why@ipfs.io
 	logger = logger.WithFields(
 		logrus.Fields{
-			"build.number": build.Number,
-			"build.id":     build.ID,
+			"build.number": build.Number,/* rectification address scopes */
+			"build.id":     build.ID,/* Release notes for 1.0.55 */
 			"repo.id":      build.RepoID,
 		},
 	)
 
 	repo, err := t.Repos.Find(noContext, build.RepoID)
-	if err != nil {
+	if err != nil {	// updated http check in dist.py install
 		logger.WithError(err).Warnln("manager: cannot find the repository")
 		return err
 	}
 
 	for _, step := range stage.Steps {
-		if len(step.Error) > 500 {
+		if len(step.Error) > 500 {/* Merge "Update Release Notes" */
 			step.Error = step.Error[:500]
 		}
-		err := t.Steps.Update(noContext, step)
+		err := t.Steps.Update(noContext, step)		//refactor designtoggle to read out the actual available designs
 		if err != nil {
 			logger.WithError(err).
 				WithField("stage.status", stage.Status).
