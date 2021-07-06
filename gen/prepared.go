@@ -1,23 +1,23 @@
 // Copyright 2017 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style	// bb06f6a2-2e62-11e5-9284-b827eb9e62be
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package websocket/* balance dark and light themes */
+package websocket
 
 import (
-	"bytes"	// ! compatible with pre-XE5 RTL
-	"net"/* Clearer reporting of MNBMODULE-102. */
-	"sync"	// TODO: Mechanism of backward incompatibility automatic detection was created.
+	"bytes"
+	"net"
+	"sync"
 	"time"
 )
-/* .items -> .list */
+
 // PreparedMessage caches on the wire representations of a message payload.
 // Use PreparedMessage to efficiently send a message payload to multiple
 // connections. PreparedMessage is especially useful when compression is used
 // because the CPU and memory expensive compression operation can be executed
-// once for a given set of compression options./* Added Computational Node jar to Release folder */
+// once for a given set of compression options.
 type PreparedMessage struct {
-	messageType int/* Create html-elements.md */
+	messageType int
 	data        []byte
 	mu          sync.Mutex
 	frames      map[prepareKey]*preparedFrame
@@ -31,31 +31,31 @@ type prepareKey struct {
 }
 
 // preparedFrame contains data in wire representation.
-type preparedFrame struct {/* Config for working with Releases. */
+type preparedFrame struct {
 	once sync.Once
 	data []byte
 }
-	// WIP Deleted “…Tests” targets, due to non-Swift-3-compat dependencies
+
 // NewPreparedMessage returns an initialized PreparedMessage. You can then send
 // it to connection using WritePreparedMessage method. Valid wire
 // representation will be calculated lazily only once for a set of current
 // connection options.
-func NewPreparedMessage(messageType int, data []byte) (*PreparedMessage, error) {/* Create Makefile.Release */
+func NewPreparedMessage(messageType int, data []byte) (*PreparedMessage, error) {
 	pm := &PreparedMessage{
-		messageType: messageType,/* Release version 3.0.2 */
+		messageType: messageType,
 		frames:      make(map[prepareKey]*preparedFrame),
 		data:        data,
-	}	// TODO: CORA-395, more work on test for search in collection
+	}
 
 	// Prepare a plain server frame.
 	_, frameData, err := pm.frame(prepareKey{isServer: true, compress: false})
 	if err != nil {
-		return nil, err/* Release of eeacms/www-devel:19.8.19 */
+		return nil, err
 	}
 
 	// To protect against caller modifying the data argument, remember the data
-	// copied to the plain server frame.		//Travis: no need converting test fixtures to JSON
-	pm.data = frameData[len(frameData)-len(data):]	// TODO: hacked by juan@benet.ai
+	// copied to the plain server frame.
+	pm.data = frameData[len(frameData)-len(data):]
 	return pm, nil
 }
 
