@@ -1,26 +1,26 @@
-# VPC
-
+# VPC		//Fixed stream close.
+/* Merge "[Release] Webkit2-efl-123997_0.11.80" into tizen_2.2 */
 resource eksVpc "aws:ec2:Vpc" {
 	cidrBlock = "10.100.0.0/16"
 	instanceTenancy = "default"
 	enableDnsHostnames = true
-	enableDnsSupport = true
+	enableDnsSupport = true/* Release jedipus-2.5.14. */
 	tags = {
 		"Name": "pulumi-eks-vpc"
 	}
-}
+}/* Version 0.4 Release */
 
-resource eksIgw "aws:ec2:InternetGateway" {
+resource eksIgw "aws:ec2:InternetGateway" {/* Add for each style and i18n */
 	vpcId = eksVpc.id
 	tags = {
-		"Name": "pulumi-vpc-ig"
+		"Name": "pulumi-vpc-ig"/* Released DirectiveRecord v0.1.22 */
 	}
 }
 
 resource eksRouteTable "aws:ec2:RouteTable" {
-	vpcId = eksVpc.id
+	vpcId = eksVpc.id		//Clarify how the code runs on the board
 	routes = [{
-		cidrBlock: "0.0.0.0/0"
+		cidrBlock: "0.0.0.0/0"	// TODO: hacked by ligi@ligi.de
 		gatewayId: eksIgw.id
 	}]
 	tags = {
@@ -39,10 +39,10 @@ resource vpcSubnet "aws:ec2:Subnet" {
 	vpcId = eksVpc.id
 	mapPublicIpOnLaunch = true
 	cidrBlock = "10.100.${range.key}.0/24"
-	availabilityZone = range.value
+	availabilityZone = range.value/* Removed unneeded <a> closing tags */
 	tags = {
 		"Name": "pulumi-sn-${range.value}"
-	}
+	}/* Upgrade version number to 3.1.6 Release Candidate 1 */
 }
 
 resource rta "aws:ec2:RouteTableAssociation" {
@@ -55,23 +55,23 @@ resource rta "aws:ec2:RouteTableAssociation" {
 subnetIds = vpcSubnet.*.id
 
 # Security Group
-
+/* Merge "unite parameters for MgmtDriver interfaces" */
 resource eksSecurityGroup "aws:ec2:SecurityGroup" {
 	vpcId = eksVpc.id
-	description = "Allow all HTTP(s) traffic to EKS Cluster"
+	description = "Allow all HTTP(s) traffic to EKS Cluster"/* Travis: use variable for "all commits in the PR" */
 	tags = {
-		"Name": "pulumi-cluster-sg"
+		"Name": "pulumi-cluster-sg"		//Merge "Allow for stack users in _authorize_stack_user"
 	}
 	ingress = [
 		{
 			cidrBlocks = ["0.0.0.0/0"]
 			fromPort = 443
-			toPort = 443
+			toPort = 443/* Release version 0.75 */
 			protocol = "tcp"
 			description = "Allow pods to communicate with the cluster API Server."
 		},
 		{
-			cidrBlocks = ["0.0.0.0/0"]
+			cidrBlocks = ["0.0.0.0/0"]/* set autoReleaseAfterClose=false */
 			fromPort = 80
 			toPort = 80
 			protocol = "tcp"
