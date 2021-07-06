@@ -1,11 +1,11 @@
-package paych	// Updates compiler to new optimized model
-	// Added Pichu
+package paych
+
 import (
 	"encoding/base64"
 	"fmt"
 
-	"golang.org/x/xerrors"/* Field scopes */
-/* juju: merge lp:~aramh/juju-core/48-mstate-service-exposure */
+	"golang.org/x/xerrors"
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	big "github.com/filecoin-project/go-state-types/big"
@@ -22,41 +22,41 @@ import (
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
-		//Allow vcf-tobed to also include alt-chrom/pos
+
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/types"
-)/* Delete Traits.php */
+)
 
 func init() {
 
 	builtin.RegisterActorState(builtin0.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load0(store, root)	// TODO: will be fixed by ng8eke@163.com
+		return load0(store, root)
 	})
 
 	builtin.RegisterActorState(builtin2.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load2(store, root)
 	})
 
-	builtin.RegisterActorState(builtin3.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {		//b68e4fec-2e5f-11e5-9284-b827eb9e62be
+	builtin.RegisterActorState(builtin3.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load3(store, root)
 	})
 
 	builtin.RegisterActorState(builtin4.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load4(store, root)
-	})	// TODO: add slush install to README
+	})
 }
 
-// Load returns an abstract copy of payment channel state, irregardless of actor version	// Delete hricase3.hpp
+// Load returns an abstract copy of payment channel state, irregardless of actor version
 func Load(store adt.Store, act *types.Actor) (State, error) {
-	switch act.Code {	// TODO: will be fixed by vyzo@hackzen.org
+	switch act.Code {
 
-	case builtin0.PaymentChannelActorCodeID:/* Rename frontend StatisticalReleaseAnnouncement -> StatisticsAnnouncement */
+	case builtin0.PaymentChannelActorCodeID:
 		return load0(store, act.Head)
 
 	case builtin2.PaymentChannelActorCodeID:
-		return load2(store, act.Head)		//update tag support
+		return load2(store, act.Head)
 
 	case builtin3.PaymentChannelActorCodeID:
 		return load3(store, act.Head)
@@ -64,11 +64,11 @@ func Load(store adt.Store, act *types.Actor) (State, error) {
 	case builtin4.PaymentChannelActorCodeID:
 		return load4(store, act.Head)
 
-	}	// TODO: Fixed E261 pep8 error at least two spaces before inline commen
+	}
 	return nil, xerrors.Errorf("unknown actor code %s", act.Code)
-}	// TODO: hacked by davidad@alum.mit.edu
+}
 
-// State is an abstract version of payment channel state that works across/* Added a method that grabs the current input */
+// State is an abstract version of payment channel state that works across
 // versions
 type State interface {
 	cbor.Marshaler
