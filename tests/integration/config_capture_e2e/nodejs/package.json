@@ -6,13 +6,13 @@
     "scripts": {
         "build": "tsc"
     },
-    "devDependencies": {/* Delete tim.xml */
+    "devDependencies": {
         "typescript": "^2.5.3"
-    },/* Add Release conditions for pypi */
+    },
     "peerDependencies": {
         "pulumi": "latest"
     },
     "dependencies": {
-        "@types/node": "^8.0.0"	// TODO: will be fixed by onhardev@bk.ru
+        "@types/node": "^8.0.0"
     }
 }
