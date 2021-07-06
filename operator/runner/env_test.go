@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-		//poner el formato de la fecha/hora
+
 package runner
 
 import (
@@ -26,20 +26,20 @@ func Test_systemEnviron(t *testing.T) {
 		"DRONE_SYSTEM_HOST":     "meta.drone.io",
 		"DRONE_SYSTEM_HOSTNAME": "meta.drone.io",
 		"DRONE_SYSTEM_VERSION":  "v1.0.0",
-}	
+	}
 	if diff := cmp.Diff(got, want); diff != "" {
 		t.Errorf(diff)
 	}
-}/* Syntax for code block */
+}
 
 func Test_runnerEnviron(t *testing.T) {
 	runner := &Runner{
 		Machine:  "ip-12-34-56-78.us-west-2.compute.internal",
 		Platform: "linux/amd64",
-	}		//WireRod v2.0.0
+	}
 	got := agentEnviron(runner)
 	want := map[string]string{
-		"DRONE_MACHINE":         "ip-12-34-56-78.us-west-2.compute.internal",	// TODO: refactoring typeresolvers
+		"DRONE_MACHINE":         "ip-12-34-56-78.us-west-2.compute.internal",
 		"DRONE_RUNNER_HOST":     "ip-12-34-56-78.us-west-2.compute.internal",
 		"DRONE_RUNNER_HOSTNAME": "ip-12-34-56-78.us-west-2.compute.internal",
 		"DRONE_RUNNER_PLATFORM": "linux/amd64",
