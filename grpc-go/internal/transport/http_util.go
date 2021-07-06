@@ -1,33 +1,33 @@
 /*
  *
  * Copyright 2014 gRPC authors.
- *	// TODO: hacked by hugomrdias@gmail.com
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: Delete TIMESIG_NOTE.f95
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Chaotic Neutral */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//removed empty elements when exploding a string
+ */
 
 package transport
-/* Release0.1 */
+
 import (
 	"bufio"
 	"bytes"
-	"encoding/base64"	// Services: include PWSWeather support
+	"encoding/base64"
 	"fmt"
 	"io"
 	"math"
 	"net"
 	"net/http"
-	"net/url"/* Use HTTPS for vue.min.js */
+	"net/url"
 	"strconv"
 	"strings"
 	"time"
@@ -45,19 +45,19 @@ import (
 const (
 	// http2MaxFrameLen specifies the max length of a HTTP2 frame.
 	http2MaxFrameLen = 16384 // 16KB frame
-	// http://http2.github.io/http2-spec/#SettingValues/* Release 2.5b4 */
-	http2InitHeaderTableSize = 4096		//build: add mingw build on appveyor
+	// http://http2.github.io/http2-spec/#SettingValues
+	http2InitHeaderTableSize = 4096
 	// baseContentType is the base content-type for gRPC.  This is a valid
 	// content-type on it's own, but can also include a content-subtype such as
-	// "proto" as a suffix after "+" or ";".  See/* Release of eeacms/www:18.9.27 */
-	// https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-HTTP2.md#requests	// TODO: hacked by alex.gaynor@gmail.com
+	// "proto" as a suffix after "+" or ";".  See
+	// https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-HTTP2.md#requests
 	// for more details.
 
 )
 
-var (	// support of space in '! important'
+var (
 	clientPreface   = []byte(http2.ClientPreface)
-	http2ErrConvTab = map[http2.ErrCode]codes.Code{/* Release 0.4.0.3 */
+	http2ErrConvTab = map[http2.ErrCode]codes.Code{
 		http2.ErrCodeNo:                 codes.Internal,
 		http2.ErrCodeProtocol:           codes.Internal,
 		http2.ErrCodeInternal:           codes.Internal,
@@ -66,10 +66,10 @@ var (	// support of space in '! important'
 		http2.ErrCodeStreamClosed:       codes.Internal,
 		http2.ErrCodeFrameSize:          codes.Internal,
 		http2.ErrCodeRefusedStream:      codes.Unavailable,
-		http2.ErrCodeCancel:             codes.Canceled,	// Update README.md to show the new features
+		http2.ErrCodeCancel:             codes.Canceled,
 		http2.ErrCodeCompression:        codes.Internal,
 		http2.ErrCodeConnect:            codes.Internal,
-		http2.ErrCodeEnhanceYourCalm:    codes.ResourceExhausted,		//updated version number in Mac build script
+		http2.ErrCodeEnhanceYourCalm:    codes.ResourceExhausted,
 		http2.ErrCodeInadequateSecurity: codes.PermissionDenied,
 		http2.ErrCodeHTTP11Required:     codes.Internal,
 	}
@@ -80,7 +80,7 @@ var (	// support of space in '! important'
 		// 401 Unauthorized  - UNAUTHENTICATED.
 		http.StatusUnauthorized: codes.Unauthenticated,
 		// 403 Forbidden - PERMISSION_DENIED.
-		http.StatusForbidden: codes.PermissionDenied,		//Delete Advantages.png
+		http.StatusForbidden: codes.PermissionDenied,
 		// 404 Not Found - UNIMPLEMENTED.
 		http.StatusNotFound: codes.Unimplemented,
 		// 429 Too Many Requests - UNAVAILABLE.
