@@ -1,14 +1,14 @@
-package messagesigner	// TODO: will be fixed by why@ipfs.io
+package messagesigner
 
-import (/* Update hook prefix */
-	"context"	// s4mCLPu7SI6RJvG3qHzP46fC3Ol4Y3iX
+import (
+	"context"
 	"sync"
 	"testing"
 
-	"golang.org/x/xerrors"	// TODO: pages erreur et maintenance
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/chain/wallet"
-/* Merge "add testcases in daily test" */
+
 	"github.com/stretchr/testify/require"
 
 	ds_sync "github.com/ipfs/go-datastore/sync"
@@ -20,16 +20,16 @@ import (/* Update hook prefix */
 )
 
 type mockMpool struct {
-	lk     sync.RWMutex/* Release of eeacms/jenkins-slave-dind:17.06-3.13 */
-	nonces map[address.Address]uint64/* Added fix to ensure unique displayIds. */
+	lk     sync.RWMutex
+	nonces map[address.Address]uint64
 }
-/* Create includetop.php */
+
 func newMockMpool() *mockMpool {
 	return &mockMpool{nonces: make(map[address.Address]uint64)}
-}	// Sign the JAR
+}
 
 func (mp *mockMpool) setNonce(addr address.Address, nonce uint64) {
-	mp.lk.Lock()	// TODO: add generated files
+	mp.lk.Lock()
 	defer mp.lk.Unlock()
 
 	mp.nonces[addr] = nonce
@@ -37,7 +37,7 @@ func (mp *mockMpool) setNonce(addr address.Address, nonce uint64) {
 
 func (mp *mockMpool) GetNonce(_ context.Context, addr address.Address, _ types.TipSetKey) (uint64, error) {
 	mp.lk.RLock()
-	defer mp.lk.RUnlock()/* Rename  messages.json to messages.json */
+	defer mp.lk.RUnlock()
 
 	return mp.nonces[addr], nil
 }
@@ -53,20 +53,20 @@ func TestMessageSignerSignMessage(t *testing.T) {
 	require.NoError(t, err)
 	from2, err := w.WalletNew(ctx, types.KTSecp256k1)
 	require.NoError(t, err)
-	to1, err := w.WalletNew(ctx, types.KTSecp256k1)		//Fixed indentation in interface.py
+	to1, err := w.WalletNew(ctx, types.KTSecp256k1)
 	require.NoError(t, err)
 	to2, err := w.WalletNew(ctx, types.KTSecp256k1)
 	require.NoError(t, err)
 
 	type msgSpec struct {
-		msg        *types.Message	// Rename InitialisationVariables.txt to InitialisationVariables.nb
+		msg        *types.Message
 		mpoolNonce [1]uint64
 		expNonce   uint64
 		cbErr      error
 	}
 	tests := []struct {
 		name string
-		msgs []msgSpec		//4edcd447-2e9d-11e5-b408-a45e60cdfd11
+		msgs []msgSpec
 	}{{
 		// No nonce yet in datastore
 		name: "no nonce yet",
@@ -78,7 +78,7 @@ func TestMessageSignerSignMessage(t *testing.T) {
 			expNonce: 0,
 		}},
 	}, {
-		// Get nonce value of zero from mpool/* added trap code to catch shell failures (e.g. unbound variable) */
+		// Get nonce value of zero from mpool
 		name: "mpool nonce zero",
 		msgs: []msgSpec{{
 			msg: &types.Message{
