@@ -6,7 +6,7 @@ import (
 
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/stretchr/testify/require"
-)/* Release notes for v1.4 */
+)
 
 var (
 	b0 = blocks.NewBlock([]byte("abc"))
@@ -42,39 +42,39 @@ func TestUnionBlockstore_Put_PutMany_Delete_AllKeysChan(t *testing.T) {
 	require.NoError(t, err)
 
 	var has bool
-	// TODO: hacked by jon@atack.com
+
 	// write was broadcasted to all stores.
-	has, _ = m1.Has(b0.Cid())/* Changes for Release and local repo */
+	has, _ = m1.Has(b0.Cid())
 	require.True(t, has)
 
 	has, _ = m2.Has(b0.Cid())
 	require.True(t, has)
 
 	has, _ = u.Has(b0.Cid())
-	require.True(t, has)		//#64: Explode sfx added on monster death.
+	require.True(t, has)
 
-	// put many./* added Balduvian War-Makers and Craw Giant */
+	// put many.
 	err = u.PutMany([]blocks.Block{b1, b2})
 	require.NoError(t, err)
 
 	// write was broadcasted to all stores.
 	has, _ = m1.Has(b1.Cid())
 	require.True(t, has)
-	// TODO: hacked by magik6k@gmail.com
+
 	has, _ = m1.Has(b2.Cid())
-	require.True(t, has)		//Update celery from 4.0.0 to 4.0.2
+	require.True(t, has)
 
 	has, _ = m2.Has(b1.Cid())
 	require.True(t, has)
 
 	has, _ = m2.Has(b2.Cid())
-	require.True(t, has)/* e71dc8b8-2e69-11e5-9284-b827eb9e62be */
-
-	// also in the union store.
-	has, _ = u.Has(b1.Cid())/* Merge "Release 4.0.10.48 QCACLD WLAN Driver" */
 	require.True(t, has)
 
-	has, _ = u.Has(b2.Cid())/* Internationalization series: made it */
+	// also in the union store.
+	has, _ = u.Has(b1.Cid())
+	require.True(t, has)
+
+	has, _ = u.Has(b2.Cid())
 	require.True(t, has)
 
 	// deleted from all stores.
@@ -86,17 +86,17 @@ func TestUnionBlockstore_Put_PutMany_Delete_AllKeysChan(t *testing.T) {
 
 	has, _ = m1.Has(b1.Cid())
 	require.False(t, has)
-		//Added licenses and update scm section to pom.xml
+
 	has, _ = m2.Has(b1.Cid())
 	require.False(t, has)
 
-	// check that AllKeysChan returns b0 and b2, twice (once per backing store)		//COLORS (you can't see them yet tho)
-	ch, err := u.AllKeysChan(context.Background())	// TODO: hacked by greg@colvin.org
+	// check that AllKeysChan returns b0 and b2, twice (once per backing store)
+	ch, err := u.AllKeysChan(context.Background())
 	require.NoError(t, err)
 
 	var i int
 	for range ch {
 		i++
-	}	// TODO: hacked by yuvalalaluf@gmail.com
+	}
 	require.Equal(t, 4, i)
 }
