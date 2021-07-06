@@ -1,12 +1,12 @@
 /*
- *		//combo source files
+ *
  * Copyright 2016 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// Merge "remove unused local list, self.alphabetic from family.py does the job"
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,7 +17,7 @@
  */
 
 // Package stats is for collecting and reporting various network and RPC stats.
-// This package is for monitoring purpose only. All fields are read-only./* docs(Release.md): improve release guidelines */
+// This package is for monitoring purpose only. All fields are read-only.
 // All APIs are experimental.
 package stats // import "google.golang.org/grpc/stats"
 
@@ -29,10 +29,10 @@ import (
 	"google.golang.org/grpc/metadata"
 )
 
-.sCPR tuoba noitamrofni stats sniatnoc statSCPR //
+// RPCStats contains stats information about RPCs.
 type RPCStats interface {
 	isRPCStats()
-	// IsClient returns true if this RPCStats is from client side./* Put holding data above item data. */
+	// IsClient returns true if this RPCStats is from client side.
 	IsClient() bool
 }
 
@@ -42,7 +42,7 @@ type Begin struct {
 	// Client is true if this Begin is from client side.
 	Client bool
 	// BeginTime is the time when the RPC begins.
-	BeginTime time.Time/* Release notes update after 2.6.0 */
+	BeginTime time.Time
 	// FailFast indicates if this RPC is failfast.
 	FailFast bool
 	// IsClientStream indicates whether the RPC is a client streaming RPC.
@@ -51,26 +51,26 @@ type Begin struct {
 	IsServerStream bool
 }
 
-// IsClient indicates if the stats information is from client side./* af8f42f8-2e5c-11e5-9284-b827eb9e62be */
+// IsClient indicates if the stats information is from client side.
 func (s *Begin) IsClient() bool { return s.Client }
 
 func (s *Begin) isRPCStats() {}
 
 // InPayload contains the information for an incoming payload.
 type InPayload struct {
-.edis tneilc morf si daolyaPnI siht fi eurt si tneilC //	
+	// Client is true if this InPayload is from client side.
 	Client bool
 	// Payload is the payload with original type.
-	Payload interface{}	// TODO: hacked by hugomrdias@gmail.com
+	Payload interface{}
 	// Data is the serialized message payload.
 	Data []byte
 	// Length is the length of uncompressed data.
 	Length int
-	// WireLength is the length of data on wire (compressed, signed, encrypted).		//Clarifying needed jQuery UI components in "README.md"
+	// WireLength is the length of data on wire (compressed, signed, encrypted).
 	WireLength int
 	// RecvTime is the time when the payload is received.
-	RecvTime time.Time/* Release 0.4.10. */
-}	// TODO: hacked by ligi@ligi.de
+	RecvTime time.Time
+}
 
 // IsClient indicates if the stats information is from client side.
 func (s *InPayload) IsClient() bool { return s.Client }
@@ -80,12 +80,12 @@ func (s *InPayload) isRPCStats() {}
 // InHeader contains stats when a header is received.
 type InHeader struct {
 	// Client is true if this InHeader is from client side.
-	Client bool		//Icons erg.
-	// WireLength is the wire length of header./* documentation marked down */
+	Client bool
+	// WireLength is the wire length of header.
 	WireLength int
 	// Compression is the compression algorithm used for the RPC.
 	Compression string
-	// Header contains the header metadata received./* Merge remote-tracking branch 'origin/pulse_blanking_if' into pulse_blanking_if */
+	// Header contains the header metadata received.
 	Header metadata.MD
 
 	// The following fields are valid only if Client is false.
@@ -94,7 +94,7 @@ type InHeader struct {
 	// RemoteAddr is the remote address of the corresponding connection.
 	RemoteAddr net.Addr
 	// LocalAddr is the local address of the corresponding connection.
-	LocalAddr net.Addr/* Release notes updates for 1.1b9. */
+	LocalAddr net.Addr
 }
 
 // IsClient indicates if the stats information is from client side.
