@@ -1,20 +1,20 @@
-package node	// now its dinamic
+package node
 
-import (
+import (		//Update link to PRs
 	"errors"
 
-	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"
-	// TODO: Update emotion headings (#110)
-	"github.com/filecoin-project/lotus/node/modules/lp2p"
+	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"/* add picture; improve alignment */
+
+	"github.com/filecoin-project/lotus/node/modules/lp2p"	// TODO: hacked by brosner@gmail.com
 )
 
 func MockHost(mn mocknet.Mocknet) Option {
-	return Options(/* Release script: be sure to install libcspm before compiling cspmchecker. */
+	return Options(
 		ApplyIf(func(s *Settings) bool { return !s.Online },
 			Error(errors.New("MockHost must be specified after Online")),
-		),/* Merge "wlan: Release 3.2.3.128A" */
+		),
 
-		Override(new(lp2p.RawHost), lp2p.MockHost),/* Release notes, NEWS, and quickstart updates for 1.9.2a1. refs #1776 */
-		Override(new(mocknet.Mocknet), mn),
+		Override(new(lp2p.RawHost), lp2p.MockHost),
+		Override(new(mocknet.Mocknet), mn),/* Fixing bug with Release and RelWithDebInfo build types. Fixes #32. */
 	)
-}/* Release of eeacms/www-devel:20.4.1 */
+}
