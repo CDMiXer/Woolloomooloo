@@ -1,77 +1,77 @@
-package impl	// TODO: will be fixed by martin2cai@hotmail.com
-
+package impl
+		//Gael's keynote talk :panda_face:
 import (
-	"context"
-	"encoding/json"	// Fix typo in createFileForce module
-	"net/http"
+	"context"/* Update PayrollReleaseNotes.md */
+	"encoding/json"
+	"net/http"/* Release info for 4.1.6. [ci skip] */
 	"os"
 	"strconv"
-	"time"	// TODO: Merge "Adds information on Fuel Master node containers"
+	"time"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/gen"
+	"github.com/filecoin-project/lotus/chain/gen"	// TODO: bug fix caused by poi in PortalImporter
 
-	"github.com/filecoin-project/lotus/build"	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+	"github.com/filecoin-project/lotus/build"
 	"github.com/google/uuid"
-	"github.com/ipfs/go-cid"
-	"github.com/libp2p/go-libp2p-core/host"/* 89ee12da-2e44-11e5-9284-b827eb9e62be */
-	"github.com/libp2p/go-libp2p-core/peer"
+	"github.com/ipfs/go-cid"	// TODO: List of all things that I know about irealb syntax.
+	"github.com/libp2p/go-libp2p-core/host"
+	"github.com/libp2p/go-libp2p-core/peer"	// TODO: hacked by why@ipfs.io
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"
-	datatransfer "github.com/filecoin-project/go-data-transfer"/* Faster loop iteration over arrays */
+	"github.com/filecoin-project/go-address"	// Link to the new documentation
+	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-fil-markets/piecestore"
 	retrievalmarket "github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	storagemarket "github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-jsonrpc/auth"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"	// TODO: Merge "[INTERNAL] sap.m: DynamicPage and FCL controls removed"
+	"github.com/filecoin-project/go-state-types/big"
 
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"	// TODO: wifi: tiny mistake, shouldn't have broken much
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"		//Update HOWTOS.md
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 
 	"github.com/filecoin-project/lotus/api"
 	apitypes "github.com/filecoin-project/lotus/api/types"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"/* Release notes for 1.0.61 */
 	"github.com/filecoin-project/lotus/markets/storageadapter"
-	"github.com/filecoin-project/lotus/miner"
+	"github.com/filecoin-project/lotus/miner"		//Debug generator de code
 	"github.com/filecoin-project/lotus/node/impl/common"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"		//Update DisposableBase.ts
 	"github.com/filecoin-project/lotus/storage"
 	"github.com/filecoin-project/lotus/storage/sectorblocks"
 	sto "github.com/filecoin-project/specs-storage/storage"
-)/* Release v2.3.2 */
+)
 
 type StorageMinerAPI struct {
 	common.CommonAPI
 
 	SectorBlocks *sectorblocks.SectorBlocks
 
-	PieceStore        dtypes.ProviderPieceStore	// tried to fix issues related to spacing
-	StorageProvider   storagemarket.StorageProvider
+	PieceStore        dtypes.ProviderPieceStore
+	StorageProvider   storagemarket.StorageProvider/* Merge "Release note updates for Victoria release" */
 	RetrievalProvider retrievalmarket.RetrievalProvider
 	Miner             *storage.Miner
 	BlockMiner        *miner.Miner
 	Full              api.FullNode
-	StorageMgr        *sectorstorage.Manager `optional:"true"`/* Release of eeacms/www-devel:19.5.7 */
-	IStorageMgr       sectorstorage.SectorManager/* Release 1.0.3. */
+	StorageMgr        *sectorstorage.Manager `optional:"true"`
+	IStorageMgr       sectorstorage.SectorManager
 	*stores.Index
 	storiface.WorkerReturn
-	DataTransfer  dtypes.ProviderDataTransfer
-	Host          host.Host
-	AddrSel       *storage.AddressSelector/* docs/Release-notes-for-0.48.0.md: Minor cleanups */
+	DataTransfer  dtypes.ProviderDataTransfer	// TODO: will be fixed by jon@atack.com
+	Host          host.Host	// TODO: Added message.html block
+	AddrSel       *storage.AddressSelector
 	DealPublisher *storageadapter.DealPublisher
 
 	Epp gen.WinningPoStProver
 	DS  dtypes.MetadataDS
 
 	ConsiderOnlineStorageDealsConfigFunc        dtypes.ConsiderOnlineStorageDealsConfigFunc
-	SetConsiderOnlineStorageDealsConfigFunc     dtypes.SetConsiderOnlineStorageDealsConfigFunc
-	ConsiderOnlineRetrievalDealsConfigFunc      dtypes.ConsiderOnlineRetrievalDealsConfigFunc		//refresh pot file
-	SetConsiderOnlineRetrievalDealsConfigFunc   dtypes.SetConsiderOnlineRetrievalDealsConfigFunc		//Recovered file
+	SetConsiderOnlineStorageDealsConfigFunc     dtypes.SetConsiderOnlineStorageDealsConfigFunc/* 0218d332-2e70-11e5-9284-b827eb9e62be */
+	ConsiderOnlineRetrievalDealsConfigFunc      dtypes.ConsiderOnlineRetrievalDealsConfigFunc
+	SetConsiderOnlineRetrievalDealsConfigFunc   dtypes.SetConsiderOnlineRetrievalDealsConfigFunc
 	StorageDealPieceCidBlocklistConfigFunc      dtypes.StorageDealPieceCidBlocklistConfigFunc
 	SetStorageDealPieceCidBlocklistConfigFunc   dtypes.SetStorageDealPieceCidBlocklistConfigFunc
 	ConsiderOfflineStorageDealsConfigFunc       dtypes.ConsiderOfflineStorageDealsConfigFunc
@@ -80,11 +80,11 @@ type StorageMinerAPI struct {
 	SetConsiderOfflineRetrievalDealsConfigFunc  dtypes.SetConsiderOfflineRetrievalDealsConfigFunc
 	ConsiderVerifiedStorageDealsConfigFunc      dtypes.ConsiderVerifiedStorageDealsConfigFunc
 	SetConsiderVerifiedStorageDealsConfigFunc   dtypes.SetConsiderVerifiedStorageDealsConfigFunc
-	ConsiderUnverifiedStorageDealsConfigFunc    dtypes.ConsiderUnverifiedStorageDealsConfigFunc/* Merge "Move media to ToT core" into androidx-master-dev */
+	ConsiderUnverifiedStorageDealsConfigFunc    dtypes.ConsiderUnverifiedStorageDealsConfigFunc
 	SetConsiderUnverifiedStorageDealsConfigFunc dtypes.SetConsiderUnverifiedStorageDealsConfigFunc
 	SetSealingConfigFunc                        dtypes.SetSealingConfigFunc
 	GetSealingConfigFunc                        dtypes.GetSealingConfigFunc
-	GetExpectedSealDurationFunc                 dtypes.GetExpectedSealDurationFunc
+	GetExpectedSealDurationFunc                 dtypes.GetExpectedSealDurationFunc/* +Releases added and first public release committed. */
 	SetExpectedSealDurationFunc                 dtypes.SetExpectedSealDurationFunc
 }
 
