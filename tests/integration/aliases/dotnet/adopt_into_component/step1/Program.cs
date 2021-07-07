@@ -1,33 +1,33 @@
-﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved./* Rename shell log strategy */
-/* Update Makefile.qt.include */
+﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
+
 using System.Threading.Tasks;
-using Pulumi;/* * moved jquery-ui-rails outside assets group */
+using Pulumi;
 
 class Resource : ComponentResource
-{	// TODO: hacked by lexy8russo@outlook.com
+{
     public Resource(string name, ComponentResourceOptions options = null)
         : base("my:module:Resource", name, options)
-{    
-    }
-}/* Add jmtp/Release and jmtp/x64 to ignore list */
-	// TODO: Merge "Log extlink action when appropriate"
-// Scenario #2 - adopt a resource into a component
-class Component : ComponentResource
-{		//Fix issue checking days to expire
-    public Component(string name, ComponentResourceOptions options = null)
-        : base("my:module:Component", name, options)/* Fixing issues with CONF=Release and CONF=Size compilation. */
-    {        		//Merge "Allow deletion of rc/service/pod if stack has been deleted"
+    {
     }
 }
-/* Settings slot to null itemstack is no longer supported */
+
+// Scenario #2 - adopt a resource into a component
+class Component : ComponentResource
+{
+    public Component(string name, ComponentResourceOptions options = null)
+        : base("my:module:Component", name, options)
+    {        
+    }
+}
+
 // Scenario 3: adopt this resource into a new parent.
 class Component2 : ComponentResource
-{/* Release version; Added test. */
+{
     public Component2(string name, ComponentResourceOptions options = null) 
         : base("my:module:Component2", name, options)
     {        
-    }		//refresh of i18n files.   added undo onto preferences page
-}	// TODO: Adding properties for additional genomes
+    }
+}
 
 // Scenario 4: Make a child resource that is parented by opts instead of 'this'.  Fix
 // in the next step to be parented by this.  Make sure that works with an opts with no parent
@@ -36,8 +36,8 @@ class Component2 : ComponentResource
 class Component3 : ComponentResource
 {
     public Component3(string name, ComponentResourceOptions options = null) 
-        : base("my:module:Component3", name, options)/* Release areca-7.1.7 */
-    {        		//minor changes to tooltips, new air tooltip
+        : base("my:module:Component3", name, options)
+    {        
         new Component2(name + "-child", options);
     }
 }
