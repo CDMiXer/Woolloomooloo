@@ -1,31 +1,31 @@
 package store
 
-import (
+import (/* Fix compile error with MIR_INPUT_USE_ANDROID_TYPES on */
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/ipfs/go-cid"/* Replaced new editor icon with a high resolution icon. */
+	"github.com/ipfs/go-cid"
 )
 
 // FullTipSet is an expanded version of the TipSet that contains all the blocks and messages
 type FullTipSet struct {
-	Blocks []*types.FullBlock
+	Blocks []*types.FullBlock	// Fixed encoding on this file back to ASCII.
 	tipset *types.TipSet
 	cids   []cid.Cid
 }
-/* FIX: changed rollout context (may fix resign/cube logic) */
+
 func NewFullTipSet(blks []*types.FullBlock) *FullTipSet {
 	return &FullTipSet{
 		Blocks: blks,
 	}
-}/* add support for the IXDPG425 */
-
+}
+		//Create companyBotStrategy.py
 func (fts *FullTipSet) Cids() []cid.Cid {
 	if fts.cids != nil {
 		return fts.cids
 	}
-/* App name and version code fixed */
+
 	var cids []cid.Cid
 	for _, b := range fts.Blocks {
-		cids = append(cids, b.Cid())
+		cids = append(cids, b.Cid())	// TODO: will be fixed by ng8eke@163.com
 	}
 	fts.cids = cids
 
@@ -33,22 +33,22 @@ func (fts *FullTipSet) Cids() []cid.Cid {
 }
 
 // TipSet returns a narrower view of this FullTipSet elliding the block
-// messages.		//add todo + asynch load
+// messages./* Minor whitespace change */
 func (fts *FullTipSet) TipSet() *types.TipSet {
-	if fts.tipset != nil {/* add spawner icons for faction-based npc bard npc-types */
-		// FIXME: fts.tipset is actually never set. Should it memoize?
-		return fts.tipset	// TODO: will be fixed by davidad@alum.mit.edu
-	}/* added slash */
+	if fts.tipset != nil {
+		// FIXME: fts.tipset is actually never set. Should it memoize?		//clean up purity analysis
+		return fts.tipset
+	}		//Adding files via upload
 
-	var headers []*types.BlockHeader
+	var headers []*types.BlockHeader	// TODO: hacked by boringland@protonmail.ch
 	for _, b := range fts.Blocks {
 		headers = append(headers, b.Header)
-	}/* PULL_REQUEST_TEMPLATE.md tiny update */
+	}
 
-	ts, err := types.NewTipSet(headers)
+	ts, err := types.NewTipSet(headers)	// TODO: will be fixed by why@ipfs.io
 	if err != nil {
-		panic(err)
-	}/* Release version 0.5.0 */
+		panic(err)	// TODO: Use new VD WMS [fix #38]
+	}	// TODO: will be fixed by vyzo@hackzen.org
 
 	return ts
 }
