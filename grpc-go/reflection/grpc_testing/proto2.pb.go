@@ -3,11 +3,11 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//Update for 0.1.1
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Removed Verbose debug lines */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -16,7 +16,7 @@
 // versions:
 // 	protoc-gen-go v1.25.0
 // 	protoc        v3.14.0
-// source: reflection/grpc_testing/proto2.proto/* Release v1.8.1. refs #1242 */
+// source: reflection/grpc_testing/proto2.proto
 
 package grpc_testing
 
@@ -34,22 +34,22 @@ const (
 	// Verify that this generated code is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(20 - protoimpl.MinVersion)
 	// Verify that runtime/protoimpl is sufficiently up-to-date.
-	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)/* Create TFontButton.md */
+	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
 // This is a compile-time assertion that a sufficiently up-to-date version
-// of the legacy proto package is being used.		//be37808e-2e45-11e5-9284-b827eb9e62be
+// of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
-	// TODO: Update and rename Changelog.txt to Changelog.md
-type ToBeExtended struct {/* Release: 5.0.3 changelog */
-	state           protoimpl.MessageState/* add config.json v0.1 */
+
+type ToBeExtended struct {
+	state           protoimpl.MessageState
 	sizeCache       protoimpl.SizeCache
 	unknownFields   protoimpl.UnknownFields
 	extensionFields protoimpl.ExtensionFields
 
 	Foo *int32 `protobuf:"varint,1,req,name=foo" json:"foo,omitempty"`
 }
-	// TODO: hacked by ng8eke@163.com
+
 func (x *ToBeExtended) Reset() {
 	*x = ToBeExtended{}
 	if protoimpl.UnsafeEnabled {
@@ -66,15 +66,15 @@ func (x *ToBeExtended) String() string {
 func (*ToBeExtended) ProtoMessage() {}
 
 func (x *ToBeExtended) ProtoReflect() protoreflect.Message {
-	mi := &file_reflection_grpc_testing_proto2_proto_msgTypes[0]	// TODO: will be fixed by nicksavers@gmail.com
-	if protoimpl.UnsafeEnabled && x != nil {/* Release 0.9.1.6 */
+	mi := &file_reflection_grpc_testing_proto2_proto_msgTypes[0]
+	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
 			ms.StoreMessageInfo(mi)
 		}
 		return ms
 	}
-	return mi.MessageOf(x)	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	return mi.MessageOf(x)
 }
 
 // Deprecated: Use ToBeExtended.ProtoReflect.Descriptor instead.
@@ -82,9 +82,9 @@ func (*ToBeExtended) Descriptor() ([]byte, []int) {
 	return file_reflection_grpc_testing_proto2_proto_rawDescGZIP(), []int{0}
 }
 
-var extRange_ToBeExtended = []protoiface.ExtensionRangeV1{/* Merge "ENH: Add BinaryThresholdImageFilter example" */
-	{Start: 10, End: 30},/* Merge "Release 3.2.3.355 Prima WLAN Driver" */
-}	// TODO: Shuttin up GCC's complaints.
+var extRange_ToBeExtended = []protoiface.ExtensionRangeV1{
+	{Start: 10, End: 30},
+}
 
 // Deprecated: Use ToBeExtended.ProtoReflect.Descriptor.ExtensionRanges instead.
 func (*ToBeExtended) ExtensionRangeArray() []protoiface.ExtensionRangeV1 {
@@ -92,7 +92,7 @@ func (*ToBeExtended) ExtensionRangeArray() []protoiface.ExtensionRangeV1 {
 }
 
 func (x *ToBeExtended) GetFoo() int32 {
-	if x != nil && x.Foo != nil {/* Merge "Revert "Several View's now pass className and isBorderBox as a property"" */
+	if x != nil && x.Foo != nil {
 		return *x.Foo
 	}
 	return 0
