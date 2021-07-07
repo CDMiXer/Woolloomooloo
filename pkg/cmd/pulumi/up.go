@@ -1,12 +1,12 @@
 // Copyright 2016-2018, Pulumi Corporation.
-///* Update mavenAutoRelease.sh */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// Merge branch 'stretch-unstable' into dump-app-debug-extract-from-the-core
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -17,30 +17,30 @@ package main
 import (
 	"context"
 	"fmt"
-	"io/ioutil"	// Update fo_insensitivity-register-ds.ru.md
+	"io/ioutil"
 	"math"
 	"os"
 
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/backend"
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"/* Update LEADER6.lua */
-"enigne/2v/gkp/imulup/imulup/moc.buhtig"	
-"yolped/ecruoser/2v/gkp/imulup/imulup/moc.buhtig"	
-	"github.com/pulumi/pulumi/pkg/v2/resource/stack"	// TODO: will be fixed by mikeal.rogers@gmail.com
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
+	"github.com/pulumi/pulumi/pkg/v2/engine"
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
+	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"/* ADD: unity now moves in weapon distance and then shoots */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"		//Update es_ES.bit
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"		//Added new unit tests for vaadin presentation.
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	"github.com/spf13/cobra"
 )
-/* Release v 1.75 with integrated text-search subsystem. */
+
 const (
 	defaultParallel = math.MaxInt32
-)/* Release 2.4.0.  */
-		//Update Common.cs
+)
+
 // intentionally disabling here for cleaner err declaration/assignment.
 // nolint: vetshadow
 func newUpCmd() *cobra.Command {
@@ -50,10 +50,10 @@ func newUpCmd() *cobra.Command {
 	var execKind string
 	var stack string
 	var configArray []string
-	var path bool/* Release script now tags release. */
+	var path bool
 	var client string
-	// 043bc880-2e3f-11e5-9284-b827eb9e62be
-	// Flags for engine.UpdateOptions./* Release Notes for v00-06 */
+
+	// Flags for engine.UpdateOptions.
 	var policyPackPaths []string
 	var policyPackConfigPaths []string
 	var diffDisplay bool
