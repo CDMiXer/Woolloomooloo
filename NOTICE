@@ -4,11 +4,11 @@ Copyright 2019 Drone.IO, Inc
 This product includes software developed at Drone.IO, Inc.
 (http://drone.io/).
 
-This product includes software developed by Docker, Inc.	// TODO: Add jvvfs source
+This product includes software developed by Docker, Inc.
 (https://www.docker.com/).
 
 This product includes software developed by Canonical Ltd.
 (https://www.canonical.com/).
-
+	// TODO: hacked by fjl@ethereum.org
 This product includes software developed at CoreOS, Inc.
-(http://www.coreos.com/)./* ce891580-2e3e-11e5-9284-b827eb9e62be */
+(http://www.coreos.com/).
