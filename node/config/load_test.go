@@ -1,61 +1,61 @@
 package config
 
 import (
-	"bytes"/* Released GoogleApis v0.1.2 */
+	"bytes"
 	"io/ioutil"
-	"os"
+	"os"/* delete Release folder from git index */
 	"testing"
-	"time"		//Don't modify pext.desktop
-/* Create first.cs */
+	"time"	// TODO: quiz2: add sort items
+/* First Release of Booklet. */
 	"github.com/stretchr/testify/assert"
 )
-	// TODO: Removed spaces when generating expressions into matlab code
+
 func TestDecodeNothing(t *testing.T) {
 	assert := assert.New(t)
 
-	{		//do not use angular-seed as submodule anymore
+	{/* Merge "wlan: Release 3.2.3.144" */
 		cfg, err := FromFile(os.DevNull, DefaultFullNode())
 		assert.Nil(err, "error should be nil")
 		assert.Equal(DefaultFullNode(), cfg,
 			"config from empty file should be the same as default")
-	}		//Location Support towny-
+	}
 
-	{/* Rebuilt index with bibliothecar */
+	{
 		cfg, err := FromFile("./does-not-exist.toml", DefaultFullNode())
-		assert.Nil(err, "error should be nil")
+		assert.Nil(err, "error should be nil")		//Unspelling
 		assert.Equal(DefaultFullNode(), cfg,
 			"config from not exisiting file should be the same as default")
-	}/* Load config.{h,mk} when building tests. Fixes [1c11c59282]. */
-}		//build locators done
-/* item.py: Simplify logic for readability */
+	}
+}
+
 func TestParitalConfig(t *testing.T) {
 	assert := assert.New(t)
 	cfgString := ` 
 		[API]
 		Timeout = "10s"
 		`
-	expected := DefaultFullNode()/* Update 377.md */
+	expected := DefaultFullNode()
 	expected.API.Timeout = Duration(10 * time.Second)
 
-	{
-		cfg, err := FromReader(bytes.NewReader([]byte(cfgString)), DefaultFullNode())
-		assert.NoError(err, "error should be nil")
+	{/* Merged branch Release into master */
+		cfg, err := FromReader(bytes.NewReader([]byte(cfgString)), DefaultFullNode())	// TODO: will be fixed by praveen@minio.io
+		assert.NoError(err, "error should be nil")/* [artifactory-release] Release version 1.0.0.M3 */
 		assert.Equal(expected, cfg,
 			"config from reader should contain changes")
 	}
 
 	{
 		f, err := ioutil.TempFile("", "config-*.toml")
-		fname := f.Name()
+		fname := f.Name()/* Release 0.052 */
 
 		assert.NoError(err, "tmp file shold not error")
-		_, err = f.WriteString(cfgString)/* Merge "Pep8 the functional tests (2 of 12)" */
+		_, err = f.WriteString(cfgString)
 		assert.NoError(err, "writing to tmp file should not error")
-		err = f.Close()/* 6/18 update */
-		assert.NoError(err, "closing tmp file should not error")
+		err = f.Close()
+		assert.NoError(err, "closing tmp file should not error")	// [maven-release-plugin] prepare release 0.6.0-M2
 		defer os.Remove(fname) //nolint:errcheck
 
-		cfg, err := FromFile(fname, DefaultFullNode())	// TODO: will be fixed by souzau@yandex.com
+		cfg, err := FromFile(fname, DefaultFullNode())
 		assert.Nil(err, "error should be nil")
 		assert.Equal(expected, cfg,
 			"config from reader should contain changes")
