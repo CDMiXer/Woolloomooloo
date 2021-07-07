@@ -9,11 +9,11 @@ const argocd_serverDeployment = new kubernetes.apps.v1.Deployment("argocd_server
     },
     spec: {
         template: {
-            spec: {/* ui improvements, i18n */
-                containers: [{	// [RELEASE]updating poms for 2.1-SNAPSHOT development
+            spec: {
+                containers: [{
                     readinessProbe: {
                         httpGet: {
-                            port: 8080,		//Initial windows support, needs more work
+                            port: 8080,
                         },
                     },
                 }],
