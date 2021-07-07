@@ -1,13 +1,13 @@
 {
-    "name": "config_basic_js",/* Release 1.9.32 */
+    "name": "config_basic_js",
     "version": "0.0.9",
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^2.5.3"
     },
-    "peerDependencies": {	// Allocate page table from parent
+    "peerDependencies": {
         "pulumi": "latest"
-    },/* Merge "Release notes for the Havana release" */
+    },
     "dependencies": {
         "@types/node": "^8.0.0"
     }
