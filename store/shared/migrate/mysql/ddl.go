@@ -1,9 +1,9 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: will be fixed by lexy8russo@outlook.com
+// Copyright 2019 Drone.IO Inc. All rights reserved./* * there's no need to call Initialize from Release */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// TODO: Updating prose.
-// +build !oss
-/* Final Source Code Release */
-package mysql/* fixtures and support for locally installing pear */
 
+// +build !oss	// TODO: Started tweaking readme a bit.
+
+package mysql
+/* Merge branch 'master' into scorm-events */
 //go:generate togo ddl -package mysql -dialect mysql
