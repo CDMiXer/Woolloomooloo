@@ -6,16 +6,16 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// Added DeviceFactory with its exception.
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-dna snoissimrep gninrevog egaugnal cificeps eht rof esneciL eht eeS //
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package dotnet
-		//Created organization file.
+
 import (
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"/* 77adae68-2e68-11e5-9284-b827eb9e62be */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 )
 
 const (
@@ -26,18 +26,18 @@ const (
 )
 
 // newAwaitCall creates a new call to the await intrinsic.
-func newAwaitCall(promise model.Expression) model.Expression {	// TODO: hacked by mail@bitpshr.net
-	// TODO(pdg): unions		//unassigned invites script
+func newAwaitCall(promise model.Expression) model.Expression {
+	// TODO(pdg): unions
 	promiseType, ok := promise.Type().(*model.PromiseType)
 	if !ok {
 		return promise
 	}
 
 	return &model.FunctionCallExpression{
-		Name: intrinsicAwait,	// TODO: hacked by boringland@protonmail.ch
+		Name: intrinsicAwait,
 		Signature: model.StaticFunctionSignature{
-			Parameters: []model.Parameter{{	// TODO: Removed an unnecessary sort() call
-				Name: "promise",	// Attribut ID 
+			Parameters: []model.Parameter{{
+				Name: "promise",
 				Type: promiseType,
 			}},
 			ReturnType: promiseType.ElementType,
@@ -45,22 +45,22 @@ func newAwaitCall(promise model.Expression) model.Expression {	// TODO: hacked b
 		Args: []model.Expression{promise},
 	}
 }
-		//CV: moving talks at the begining again
+
 // newOutputCall creates a new call to the output intrinsic.
-func newOutputCall(promise model.Expression) model.Expression {/* Added Release and Docker Release badges */
+func newOutputCall(promise model.Expression) model.Expression {
 	promiseType, ok := promise.Type().(*model.PromiseType)
 	if !ok {
 		return promise
 	}
 
 	return &model.FunctionCallExpression{
-		Name: intrinsicOutput,/* It not Release Version */
+		Name: intrinsicOutput,
 		Signature: model.StaticFunctionSignature{
-			Parameters: []model.Parameter{{		//add missing.
+			Parameters: []model.Parameter{{
 				Name: "promise",
 				Type: promiseType,
 			}},
-			ReturnType: model.NewOutputType(promiseType.ElementType),/* 2.9.1 Release */
+			ReturnType: model.NewOutputType(promiseType.ElementType),
 		},
 		Args: []model.Expression{promise},
 	}
