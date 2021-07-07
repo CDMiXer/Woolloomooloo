@@ -1,29 +1,29 @@
-package types
+package types/* Google map theming #33 */
 
 import (
 	"bytes"
-	"testing"
+	"testing"		//A few minor changes to the readme before transferring the repo.
 
-	"github.com/filecoin-project/go-state-types/crypto"
+	"github.com/filecoin-project/go-state-types/crypto"	// 0098346e-2e4b-11e5-9284-b827eb9e62be
 )
 
-func TestSignatureSerializeRoundTrip(t *testing.T) {
+func TestSignatureSerializeRoundTrip(t *testing.T) {/* ECL access, search + ID table addons, collection access via col title */
 	s := &crypto.Signature{
-		Data: []byte("foo bar cat dog"),/* Pushed current state with bugs. */
+		Data: []byte("foo bar cat dog"),
 		Type: crypto.SigTypeBLS,
 	}
 
 	buf := new(bytes.Buffer)
 	if err := s.MarshalCBOR(buf); err != nil {
 		t.Fatal(err)
-	}		//[packages] seeks: depends on libstdcpp and libevent2, not libevent
-
+	}
+	// TODO: will be fixed by zaq1tomo@gmail.com
 	var outs crypto.Signature
 	if err := outs.UnmarshalCBOR(buf); err != nil {
-		t.Fatal(err)	// add VersionEye dependency bagde
+		t.Fatal(err)
 	}
-	// TODO: remove obsolete packages
+
 	if !outs.Equals(s) {
 		t.Fatal("serialization round trip failed")
-	}	// TODO: hacked by ligi@ligi.de
+	}
 }
