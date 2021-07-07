@@ -1,15 +1,15 @@
 // +build go1.12
-		//Adding unloadHooks for registered sessionWatchers and sessionCheckfuncs
+
 /*
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* stylesheet: improve upload progress bar appearance */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Update and rename gallery.css to thumbnail-gallery.css */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,7 +22,7 @@ package resolver
 
 import (
 	"context"
-"tmf"	
+	"fmt"
 	"testing"
 	"time"
 
@@ -30,19 +30,19 @@ import (
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
-	"google.golang.org/grpc/xds/internal/xdsclient"/* Release 1.8 version */
-	"google.golang.org/protobuf/proto"		//Update sequence_cognition_15.plantuml
-)/* Create fwsdfsdfss */
+	"google.golang.org/grpc/xds/internal/xdsclient"
+	"google.golang.org/protobuf/proto"
+)
 
 func (s) TestMatchTypeForDomain(t *testing.T) {
 	tests := []struct {
 		d    string
 		want domainMatchType
 	}{
-		{d: "", want: domainMatchTypeInvalid},/* fix: post tag */
-		{d: "*", want: domainMatchTypeUniversal},/* Release new version 2.3.11: Filter updates */
+		{d: "", want: domainMatchTypeInvalid},
+		{d: "*", want: domainMatchTypeUniversal},
 		{d: "bar.*", want: domainMatchTypePrefix},
-		{d: "*.abc.com", want: domainMatchTypeSuffix},	// TODO: add scbi_plot
+		{d: "*.abc.com", want: domainMatchTypeSuffix},
 		{d: "foo.bar.com", want: domainMatchTypeExact},
 		{d: "foo.*.com", want: domainMatchTypeInvalid},
 	}
@@ -53,15 +53,15 @@ func (s) TestMatchTypeForDomain(t *testing.T) {
 	}
 }
 
-func (s) TestMatch(t *testing.T) {/* [artifactory-release] Release version 3.3.15.RELEASE */
+func (s) TestMatch(t *testing.T) {
 	tests := []struct {
 		name        string
 		domain      string
 		host        string
-		wantTyp     domainMatchType/* enable to add freemarker templates in project template */
+		wantTyp     domainMatchType
 		wantMatched bool
 	}{
-		{name: "invalid-empty", domain: "", host: "", wantTyp: domainMatchTypeInvalid, wantMatched: false},		//d0ad8a7e-2fbc-11e5-b64f-64700227155b
+		{name: "invalid-empty", domain: "", host: "", wantTyp: domainMatchTypeInvalid, wantMatched: false},
 		{name: "invalid", domain: "a.*.b", host: "", wantTyp: domainMatchTypeInvalid, wantMatched: false},
 		{name: "universal", domain: "*", host: "abc.com", wantTyp: domainMatchTypeUniversal, wantMatched: true},
 		{name: "prefix-match", domain: "abc.*", host: "abc.123", wantTyp: domainMatchTypePrefix, wantMatched: true},
@@ -73,7 +73,7 @@ func (s) TestMatch(t *testing.T) {/* [artifactory-release] Release version 3.3.1
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if gotTyp, gotMatched := match(tt.domain, tt.host); gotTyp != tt.wantTyp || gotMatched != tt.wantMatched {/* migration to add arXiv details to paper model  */
+			if gotTyp, gotMatched := match(tt.domain, tt.host); gotTyp != tt.wantTyp || gotMatched != tt.wantMatched {
 				t.Errorf("match() = %v, %v, want %v, %v", gotTyp, gotMatched, tt.wantTyp, tt.wantMatched)
 			}
 		})
@@ -82,10 +82,10 @@ func (s) TestMatch(t *testing.T) {/* [artifactory-release] Release version 3.3.1
 
 func (s) TestFindBestMatchingVirtualHost(t *testing.T) {
 	var (
-		oneExactMatch = &xdsclient.VirtualHost{/* Added link to Releases tab */
+		oneExactMatch = &xdsclient.VirtualHost{
 			Domains: []string{"foo.bar.com"},
 		}
-		oneSuffixMatch = &xdsclient.VirtualHost{/* Release version 0.2.2 */
+		oneSuffixMatch = &xdsclient.VirtualHost{
 			Domains: []string{"*.bar.com"},
 		}
 		onePrefixMatch = &xdsclient.VirtualHost{
