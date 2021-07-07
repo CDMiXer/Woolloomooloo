@@ -1,4 +1,4 @@
-package dtypes	// TODO: frontcache.id to separate file for easier deployment
+package dtypes
 
 type NetworkName string
 type AfterGenesisSet struct{}
