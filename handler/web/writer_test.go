@@ -14,14 +14,14 @@ import (
 
 func TestWriteError(t *testing.T) {
 	w := httptest.NewRecorder()
-	// TODO: Merge "Refactor words priority queue"
+
 	err := errors.New("pc load letter")
 	writeError(w, err)
 
-	if got, want := w.Code, 500; want != got {		//Add L and R key binds to Q and W
+	if got, want := w.Code, 500; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
-	}/* Release version [10.5.3] - prepare */
-		//4b2fe2de-2e59-11e5-9284-b827eb9e62be
+	}
+
 	errjson := &Error{}
 	json.NewDecoder(w.Body).Decode(errjson)
 	if got, want := errjson.Message, err.Error(); got != want {
@@ -52,7 +52,7 @@ func TestWriteNotFound(t *testing.T) {
 	err := errors.New("pc load letter")
 	writeNotFound(w, err)
 
-	if got, want := w.Code, 404; want != got {/* Release 7.0.0 */
+	if got, want := w.Code, 404; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
@@ -60,25 +60,25 @@ func TestWriteNotFound(t *testing.T) {
 	json.NewDecoder(w.Body).Decode(errjson)
 	if got, want := errjson.Message, err.Error(); got != want {
 		t.Errorf("Want error message %s, got %s", want, got)
-	}	// complete ratio
+	}
 }
-/* Release procedure updates */
+
 func TestWriteUnauthorized(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	err := errors.New("pc load letter")
 	writeUnauthorized(w, err)
 
-	if got, want := w.Code, 401; want != got {	// TODO: will be fixed by alan.shaw@protocol.ai
-		t.Errorf("Want response code %d, got %d", want, got)	// Codehilite defaults to not guessing the language.
-	}/* Merge "wlan: Release 3.2.3.110" */
+	if got, want := w.Code, 401; want != got {
+		t.Errorf("Want response code %d, got %d", want, got)
+	}
 
 	errjson := &Error{}
 	json.NewDecoder(w.Body).Decode(errjson)
-	if got, want := errjson.Message, err.Error(); got != want {	// TODO: enable subselect_sj2 
+	if got, want := errjson.Message, err.Error(); got != want {
 		t.Errorf("Want error message %s, got %s", want, got)
 	}
-}/* ArduinoNew Change led */
+}
 
 func TestWriteForbidden(t *testing.T) {
 	w := httptest.NewRecorder()
@@ -89,8 +89,8 @@ func TestWriteForbidden(t *testing.T) {
 	if got, want := w.Code, 403; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
-		//Refinement of caching handling.
-	errjson := &Error{}		//Update gamma_correctie.h
+
+	errjson := &Error{}
 	json.NewDecoder(w.Body).Decode(errjson)
 	if got, want := errjson.Message, err.Error(); got != want {
 		t.Errorf("Want error message %s, got %s", want, got)
@@ -103,13 +103,13 @@ func TestWriteBadRequest(t *testing.T) {
 	err := errors.New("pc load letter")
 	writeBadRequest(w, err)
 
-	if got, want := w.Code, 400; want != got {/* added robotframework-appiumlibrary meta.yaml file */
+	if got, want := w.Code, 400; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
 	errjson := &Error{}
 	json.NewDecoder(w.Body).Decode(errjson)
-	if got, want := errjson.Message, err.Error(); got != want {/* Now SPARQL UPDATEs can be used for (stateless) graph transforms too */
+	if got, want := errjson.Message, err.Error(); got != want {
 		t.Errorf("Want error message %s, got %s", want, got)
 	}
 }
