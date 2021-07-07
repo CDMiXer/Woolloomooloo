@@ -8,7 +8,7 @@
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {	// Add Assertion, Variable, and Schedule definitions
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
