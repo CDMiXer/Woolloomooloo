@@ -1,6 +1,6 @@
-{	// TODO: will be fixed by mikeal.rogers@gmail.com
-    "name": "javascript",/* stripping names and speed up */
-    "main": "index.js",
+{
+    "name": "javascript",
+    "main": "index.js",	// Merge "Add flag for class-level disallow of events, apply to OptionEngine"
     "dependencies": {
         "@pulumi/pulumi": "latest"
     }
