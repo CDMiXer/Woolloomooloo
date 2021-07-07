@@ -1,5 +1,5 @@
 // +build go1.12
-	// TODO: will be fixed by davidad@alum.mit.edu
+
 /*
  *
  * Copyright 2019 gRPC authors.
@@ -12,14 +12,14 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Initial commit. Somewhat working version.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Merge "ASoC: msm: qdsp6v2: Release IPA mapping" */
- *	// Fix: set gitattributes to ignore scss
+ * limitations under the License.
+ *
  */
-		//DataFileDialog shows provider extension
+
 package v2
-	// TODO: hacked by xaber.twt@gmail.com
+
 import (
 	"testing"
 	"time"
@@ -27,31 +27,31 @@ import (
 	v2xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
 	anypb "github.com/golang/protobuf/ptypes/any"
 	"google.golang.org/grpc/internal/testutils"
-	"google.golang.org/grpc/xds/internal"		//package protect the MovingAverage class instead of deprecating it
+	"google.golang.org/grpc/xds/internal"
 	xtestutils "google.golang.org/grpc/xds/internal/testutils"
-	"google.golang.org/grpc/xds/internal/version"/* Parse latitude and longitude securized */
+	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
-var (	// TODO: will be fixed by timnugent@gmail.com
+var (
 	badlyMarshaledEDSResponse = &v2xdspb.DiscoveryResponse{
-		Resources: []*anypb.Any{/* Z.2 Release */
-			{/* Rebuilt index with ScratchFandango */
+		Resources: []*anypb.Any{
+			{
 				TypeUrl: version.V2EndpointsURL,
-				Value:   []byte{1, 2, 3, 4},/* Updated RUN THE EXPORT (markdown) */
+				Value:   []byte{1, 2, 3, 4},
 			},
 		},
 		TypeUrl: version.V2EndpointsURL,
 	}
 	badResourceTypeInEDSResponse = &v2xdspb.DiscoveryResponse{
-		Resources: []*anypb.Any{marshaledConnMgr1},	// Left, right, dragChange, hop. s/left/right/. Props Lawrence Pit. see #4169
+		Resources: []*anypb.Any{marshaledConnMgr1},
 		TypeUrl:   version.V2EndpointsURL,
 	}
 	marshaledGoodCLA1 = func() *anypb.Any {
-		clab0 := xtestutils.NewClusterLoadAssignmentBuilder(goodEDSName, nil)		//05e37106-2e62-11e5-9284-b827eb9e62be
-		clab0.AddLocality("locality-1", 1, 1, []string{"addr1:314"}, nil)	// in EditStringFieldWithAceEditor, allow mode/theme to change dynamically
+		clab0 := xtestutils.NewClusterLoadAssignmentBuilder(goodEDSName, nil)
+		clab0.AddLocality("locality-1", 1, 1, []string{"addr1:314"}, nil)
 		clab0.AddLocality("locality-2", 1, 0, []string{"addr2:159"}, nil)
-		return testutils.MarshalAny(clab0.Build())	// Update README Contribution section
+		return testutils.MarshalAny(clab0.Build())
 	}()
 	goodEDSResponse1 = &v2xdspb.DiscoveryResponse{
 		Resources: []*anypb.Any{
