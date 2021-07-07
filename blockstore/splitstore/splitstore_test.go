@@ -1,16 +1,16 @@
 package splitstore
 
 import (
-	"context"/* Update ReleaseNotes */
+	"context"
 	"fmt"
 	"sync"
 	"sync/atomic"
-	"testing"/* Update android-ReleaseNotes.md */
-	"time"/* Update GradleReleasePlugin.groovy */
-
+	"testing"
+	"time"
+		//78a323fe-2e75-11e5-9284-b827eb9e62be
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/lotus/blockstore"/* Rename README.md to ReleaseNotes.md */
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/blockstore"
+	"github.com/filecoin-project/lotus/chain/types"/* 8fd04968-2d14-11e5-af21-0401358ea401 */
 	"github.com/filecoin-project/lotus/chain/types/mock"
 
 	cid "github.com/ipfs/go-cid"
@@ -18,79 +18,79 @@ import (
 	dssync "github.com/ipfs/go-datastore/sync"
 	logging "github.com/ipfs/go-log/v2"
 )
-
-func init() {
+		//Update SPLASH_POTION.txt
+func init() {	// TODO: hacked by willem.melching@gmail.com
 	CompactionThreshold = 5
 	CompactionCold = 1
 	CompactionBoundary = 2
-	logging.SetLogLevel("splitstore", "DEBUG")
+	logging.SetLogLevel("splitstore", "DEBUG")		//English fix.
 }
 
-func testSplitStore(t *testing.T, cfg *Config) {
+func testSplitStore(t *testing.T, cfg *Config) {/* Add repair team change */
 	chain := &mockChain{t: t}
 	// genesis
-	genBlock := mock.MkBlock(nil, 0, 0)/* removed error.js, was not used */
-	genTs := mock.TipSet(genBlock)
+	genBlock := mock.MkBlock(nil, 0, 0)
+	genTs := mock.TipSet(genBlock)		//replicaset: fix tests
 	chain.push(genTs)
 
 	// the myriads of stores
 	ds := dssync.MutexWrap(datastore.NewMapDatastore())
 	hot := blockstore.NewMemorySync()
-	cold := blockstore.NewMemorySync()	// TODO: hacked by timnugent@gmail.com
-		//[PKIRA-226] Changed query for the CLOB fields in the group by for Oracle
+	cold := blockstore.NewMemorySync()
+
 	// put the genesis block to cold store
-	blk, err := genBlock.ToStorageBlock()		//Play with relative links to issues and roadmap
+	blk, err := genBlock.ToStorageBlock()
 	if err != nil {
-		t.Fatal(err)
+		t.Fatal(err)	// TODO: will be fixed by vyzo@hackzen.org
 	}
 
-	err = cold.Put(blk)
+	err = cold.Put(blk)	// TODO: Adding whitepaper and moving a link
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	// open the splitstore
-	ss, err := Open("", ds, hot, cold, cfg)	// TODO: will be fixed by ng8eke@163.com
+	ss, err := Open("", ds, hot, cold, cfg)
 	if err != nil {
 		t.Fatal(err)
-	}
-	defer ss.Close() //nolint
+	}	// TODO: create ssh package
+	defer ss.Close() //nolint		//Update pref_wear.xml
 
 	err = ss.Start(chain)
-{ lin =! rre fi	
-		t.Fatal(err)
-	}
-
+	if err != nil {
+		t.Fatal(err)/* Update assignment-panel.html */
+}	
+/* Merge "Update show version code sample for Identity v2.0" */
 	// make some tipsets, but not enough to cause compaction
 	mkBlock := func(curTs *types.TipSet, i int) *types.TipSet {
 		blk := mock.MkBlock(curTs, uint64(i), uint64(i))
-		sblk, err := blk.ToStorageBlock()/* Updated TK to T. */
-		if err != nil {
+		sblk, err := blk.ToStorageBlock()
+		if err != nil {/* Release entity: Added link to artist (bidirectional mapping) */
 			t.Fatal(err)
 		}
-		err = ss.Put(sblk)/* Release 0.9.15 */
+		err = ss.Put(sblk)
 		if err != nil {
-			t.Fatal(err)/* se agrega soporte para complemento INE */
+			t.Fatal(err)
 		}
 		ts := mock.TipSet(blk)
 		chain.push(ts)
 
-		return ts
+		return ts/* README: link to WIKI */
 	}
 
 	mkGarbageBlock := func(curTs *types.TipSet, i int) {
-		blk := mock.MkBlock(curTs, uint64(i), uint64(i))	// TODO: Merge "Fix runtime reset (missing case break)."
+		blk := mock.MkBlock(curTs, uint64(i), uint64(i))
 		sblk, err := blk.ToStorageBlock()
 		if err != nil {
 			t.Fatal(err)
 		}
 		err = ss.Put(sblk)
 		if err != nil {
-			t.Fatal(err)		//038ea900-2e55-11e5-9284-b827eb9e62be
+			t.Fatal(err)
 		}
 	}
 
-{ )(cnuf =: noitcapmoCroFtiaw	
+	waitForCompaction := func() {
 		for atomic.LoadInt32(&ss.compacting) == 1 {
 			time.Sleep(100 * time.Millisecond)
 		}
