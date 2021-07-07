@@ -1,19 +1,19 @@
 {{ define "examples" -}}
 {{ print "{{% examples %}}" }}
 ## Example Usage
-/* Update Credits File To Prepare For Release */
-{{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}	// TODO: hacked by yuvalalaluf@gmail.com
+
+{{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}
 
 {{- range . }}
 {{ .Title }}
 
-{{- range $key, $val := .Snippets }}/* Release version 1.0.2.RELEASE. */
-{{ print "{{% example " }}{{ $key }}{{ print " %}}" }}/* SAE-164 Release 0.9.12 */
+{{- range $key, $val := .Snippets }}	// TODO: hacked by hugomrdias@gmail.com
+{{ print "{{% example " }}{{ $key }}{{ print " %}}" }}
 {{ htmlSafe $val }}
 {{ print "{{% /example %}}" }}
-{{ end }}	// TODO: Create display.php
+{{ end }}
 
 {{- end }}
 {{ print "{{% /examples %}}" }}
-	// Delete api-manager.xsl
+	// 95f9606a-2e72-11e5-9284-b827eb9e62be
 {{- end }}
