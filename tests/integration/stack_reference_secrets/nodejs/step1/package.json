@@ -2,7 +2,7 @@
     "name": "typescript",
     "devDependencies": {
         "@types/node": "^8.0.0"
-    },
+    },	// TODO: hacked by aeongrp@outlook.com
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
