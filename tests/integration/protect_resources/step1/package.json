@@ -1,10 +1,10 @@
 {
-    "name": "steps",	// Fixing makefile.
-    "license": "Apache-2.0",/* optimization execution speed */
-    "devDependencies": {	// renamed files to reflect what they are doing
+    "name": "steps",
+    "license": "Apache-2.0",
+    "devDependencies": {	// Create run_gen.py
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {		//Update 711.md
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
