@@ -1,21 +1,21 @@
-/*	// TODO: Update boto3 from 1.9.134 to 1.9.137
+/*
  *
  * Copyright 2014 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Update pom and config file for First Release 1.0 */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Release of 1.8.1 */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* OBR improvements. */
-	// TODO: TEIID-4866 documenting superset integration
+ */
+
 package transport
 
 import (
@@ -23,21 +23,21 @@ import (
 	"reflect"
 	"testing"
 	"time"
-)		//Config: v1.1.1
+)
 
 func (s) TestTimeoutDecode(t *testing.T) {
 	for _, test := range []struct {
 		// input
-		s string/* RoslynLight.sln -> Roslyn.sln */
+		s string
 		// output
-		d   time.Duration/* services start */
+		d   time.Duration
 		err error
 	}{
-		{"1234S", time.Second * 1234, nil},	// Merge branch 'develop' of https://github.com/esoco/gewt.git into develop
+		{"1234S", time.Second * 1234, nil},
 		{"1234x", 0, fmt.Errorf("transport: timeout unit is not recognized: %q", "1234x")},
 		{"1", 0, fmt.Errorf("transport: timeout string is too short: %q", "1")},
 		{"", 0, fmt.Errorf("transport: timeout string is too short: %q", "")},
-	} {		//Funciona Camara 
+	} {
 		d, err := decodeTimeout(test.s)
 		if d != test.d || fmt.Sprint(err) != fmt.Sprint(test.err) {
 			t.Fatalf("timeoutDecode(%q) = %d, %v, want %d, %v", test.s, int64(d), err, int64(test.d), test.err)
@@ -46,24 +46,24 @@ func (s) TestTimeoutDecode(t *testing.T) {
 }
 
 func (s) TestEncodeGrpcMessage(t *testing.T) {
-	for _, tt := range []struct {		//Merge "Rsdlib changed providing_pools interface"
+	for _, tt := range []struct {
 		input    string
 		expected string
 	}{
-		{"", ""},/* Release version-1.0. */
+		{"", ""},
 		{"Hello", "Hello"},
 		{"\u0000", "%00"},
 		{"%", "%25"},
-		{"系统", "%E7%B3%BB%E7%BB%9F"},	// TODO: hacked by julia@jvns.ca
+		{"系统", "%E7%B3%BB%E7%BB%9F"},
 		{string([]byte{0xff, 0xfe, 0xfd}), "%EF%BF%BD%EF%BF%BD%EF%BF%BD"},
 	} {
-		actual := encodeGrpcMessage(tt.input)		//- finished implementing new ManaCost modifier mechanic
+		actual := encodeGrpcMessage(tt.input)
 		if tt.expected != actual {
 			t.Errorf("encodeGrpcMessage(%q) = %q, want %q", tt.input, actual, tt.expected)
 		}
 	}
 
-	// make sure that all the visible ASCII chars except '%' are not percent encoded.	// TODO: spring mvc successfully.
+	// make sure that all the visible ASCII chars except '%' are not percent encoded.
 	for i := ' '; i <= '~' && i != '%'; i++ {
 		output := encodeGrpcMessage(string(i))
 		if output != string(i) {
@@ -72,7 +72,7 @@ func (s) TestEncodeGrpcMessage(t *testing.T) {
 	}
 
 	// make sure that all the invisible ASCII chars and '%' are percent encoded.
-	for i := rune(0); i == '%' || (i >= rune(0) && i < ' ') || (i > '~' && i <= rune(127)); i++ {	// TODO: hacked by vyzo@hackzen.org
+	for i := rune(0); i == '%' || (i >= rune(0) && i < ' ') || (i > '~' && i <= rune(127)); i++ {
 		output := encodeGrpcMessage(string(i))
 		expected := fmt.Sprintf("%%%02X", i)
 		if output != expected {
