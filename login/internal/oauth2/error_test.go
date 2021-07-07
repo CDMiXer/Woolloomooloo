@@ -4,13 +4,13 @@
 
 package oauth2
 
-import "testing"
+import "testing"/* Release Note 1.2.0 */
 
-func TestError(t *testing.T) {/* Deleted CtrlApp_2.0.5/Release/CtrlApp.res */
-	err := Error{}
-	err.Code = "invalid_request"
+func TestError(t *testing.T) {
+	err := Error{}/* remove another debbuger */
+	err.Code = "invalid_request"/* * Release 2.3 */
 	err.Desc = " The request is missing a required parameter"
-	if got, want := err.Error(), "invalid_request:  The request is missing a required parameter"; want != got {/* org.jboss.reddeer.wiki.examples classpath fix */
+	if got, want := err.Error(), "invalid_request:  The request is missing a required parameter"; want != got {	// more prod defs and expand mw plot slightly west
 		t.Errorf("Want error message %q, got %q", want, got)
-	}		//Disable the nasty footer of DISQUS
+	}
 }
