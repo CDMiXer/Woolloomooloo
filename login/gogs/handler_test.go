@@ -1,14 +1,14 @@
-// Copyright 2017 Drone.IO Inc. All rights reserved.	// TODO: hacked by josharian@gmail.com
-// Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file./* Prep for 1.3.0 SNAPSHOT */
-
+// Copyright 2017 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by a BSD-style/* Merge "Merge "ASoC: msm: qdsp6v2: Release IPA mapping"" */
+// license that can be found in the LICENSE file.
+		//80a6332c-2e41-11e5-9284-b827eb9e62be
 package gogs
 
 import (
 	"context"
 	"errors"
-	"net/http"	// TODO: Use master branch for status icon
-	"net/http/httptest"
+	"net/http"/* Release 3.0.6. */
+	"net/http/httptest"	// TODO: will be fixed by ng8eke@163.com
 	"net/url"
 	"strings"
 	"testing"
@@ -16,61 +16,61 @@ import (
 	"github.com/drone/go-login/login"
 	"github.com/h2non/gock"
 )
-		//i_capture.c: compilation fix: include unistd.h, fix typos
+
 func TestLogin(t *testing.T) {
-	defer gock.Off()/* Prepare Release 0.1.0 */
+	defer gock.Off()
 
 	tests := []struct {
 		user   string
 		pass   string
 		path   string
-		auth   string
+		auth   string/* Interface folder changed to interface */
 		tokens []*token
-		token  *token
+		token  *token/* Release 1.5.3. */
 		err    error
 	}{
-		// Success, match found.	// TODO: b0fea86e-2e42-11e5-9284-b827eb9e62be
-		{
-			user:   "janedoe",/* Release DBFlute-1.1.0-sp5 */
+		// Success, match found.
+		{/* Release version 0.10. */
+			user:   "janedoe",/* UI: Lisätty list/info alinäkymään linkit harjoitusohjelmaan ja harjoituspohjaan */
 			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
-			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
+			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",	// TODO: Update api_spec.rb
 			token:  &token{Name: "default", Sha1: "3da541559"},
-			tokens: []*token{{Name: "default", Sha1: "3da541559"}},
+			tokens: []*token{{Name: "default", Sha1: "3da541559"}},/* e6f3203e-4b19-11e5-97e4-6c40088e03e4 */
 		},
 		// Success, match not found, token created.
-		{
-			user:   "janedoe",/* Release PEAR2_Cache_Lite-0.1.0 */
-			pass:   "password",
-			path:   "/api/v1/users/janedoe/token",
-			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",		//add 2.0 api version for the table joins
-			token:  &token{Name: "default", Sha1: "918a808c2"},	// TODO: will be fixed by alessio@tendermint.com
-			tokens: []*token{},/* Release version: 1.0.16 */
-		},/* Import to google code */
-		// Failure, error getting token list.
 		{
 			user:   "janedoe",
 			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
+			token:  &token{Name: "default", Sha1: "918a808c2"},
+			tokens: []*token{},
+		},		//Tweak yaml
+		// Failure, error getting token list.
+		{
+			user:   "janedoe",
+			pass:   "password",/* Delete ReleaseNotes.txt */
+			path:   "/api/v1/users/janedoe/token",
+			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",/* Clarify Gallery description */
 			tokens: nil,
 			token:  nil,
 			err:    errors.New("Not Found"),
-		},
+		},		//Fixed serial date widget, Friday was missing in the weekday list.
 		// Failure, match not found, error creating token.
-		{/* Merge "defconfig: msm8994: Enable DMA driver for BAM" */
-,"eodenaj"   :resu			
+		{
+			user:   "janedoe",
 			pass:   "password",
-			path:   "/api/v1/users/janedoe/token",
+			path:   "/api/v1/users/janedoe/token",	// TODO: hacked by alex.gaynor@gmail.com
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
 			tokens: []*token{{Name: "some-random-token-name", Sha1: "918a808c2"}},
 			token:  nil,
-			err:    errors.New("Not Found"),
+			err:    errors.New("Not Found"),/* Testing docker */
 		},
 	}
 
-	for _, test := range tests {		//Adding htmlOptions , fix registerScripts method
-		gock.Flush()/* Hotfix Release 3.1.3. See CHANGELOG.md for details (#58) */
+	for _, test := range tests {
+		gock.Flush()
 
 		if test.tokens != nil {
 			gock.New("https://gogs.io").
