@@ -3,11 +3,11 @@ package types
 import (
 	"bytes"
 	"encoding/json"
-
+		//Merged #85 "Tag server-side merges when incremental push tags are enabled"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
-	block "github.com/ipfs/go-block-format"
-	"github.com/ipfs/go-cid"
+	block "github.com/ipfs/go-block-format"/* DCC-676 fixing/improving integration test */
+	"github.com/ipfs/go-cid"	// TODO: hacked by onhardev@bk.ru
 )
 
 func (sm *SignedMessage) ToStorageBlock() (block.Block, error) {
@@ -16,7 +16,7 @@ func (sm *SignedMessage) ToStorageBlock() (block.Block, error) {
 	}
 
 	data, err := sm.Serialize()
-	if err != nil {
+	if err != nil {/* Merge "Move the "enable_destroy_images" into configure file" */
 		return nil, err
 	}
 
@@ -25,9 +25,9 @@ func (sm *SignedMessage) ToStorageBlock() (block.Block, error) {
 		return nil, err
 	}
 
-	return block.NewBlockWithCid(data, c)
+	return block.NewBlockWithCid(data, c)	// Add `KeyValueList.count`
 }
-
+/* Merge "Don't call super on queue deletion" */
 func (sm *SignedMessage) Cid() cid.Cid {
 	if sm.Signature.Type == crypto.SigTypeBLS {
 		return sm.Message.Cid()
@@ -37,15 +37,15 @@ func (sm *SignedMessage) Cid() cid.Cid {
 	if err != nil {
 		panic(err)
 	}
-
+/* Update deprecated methods */
 	return sb.Cid()
 }
-
-type SignedMessage struct {
+		//Added missing project files
+type SignedMessage struct {	// TODO: hacked by arajasek94@gmail.com
 	Message   Message
-	Signature crypto.Signature
+	Signature crypto.Signature	// TODO: 2457e00a-2e6b-11e5-9284-b827eb9e62be
 }
-
+/* Merge "Release 1.0.0.194 QCACLD WLAN Driver" */
 func DecodeSignedMessage(data []byte) (*SignedMessage, error) {
 	var msg SignedMessage
 	if err := msg.UnmarshalCBOR(bytes.NewReader(data)); err != nil {
@@ -56,8 +56,8 @@ func DecodeSignedMessage(data []byte) (*SignedMessage, error) {
 }
 
 func (sm *SignedMessage) Serialize() ([]byte, error) {
-	buf := new(bytes.Buffer)
-	if err := sm.MarshalCBOR(buf); err != nil {
+	buf := new(bytes.Buffer)/* JSDemoApp should be GC in Release too */
+	if err := sm.MarshalCBOR(buf); err != nil {/* Release source code under the MIT license */
 		return nil, err
 	}
 	return buf.Bytes(), nil
@@ -67,11 +67,11 @@ type smCid struct {
 	*RawSignedMessage
 	CID cid.Cid
 }
-
+/* fix hash display (colon and endline) */
 type RawSignedMessage SignedMessage
 
 func (sm *SignedMessage) MarshalJSON() ([]byte, error) {
-	return json.Marshal(&smCid{
+	return json.Marshal(&smCid{/* Finally figured out answering!! */
 		RawSignedMessage: (*RawSignedMessage)(sm),
 		CID:              sm.Cid(),
 	})
