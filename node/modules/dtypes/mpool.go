@@ -12,27 +12,27 @@ type MpoolLocker struct {
 	m  map[address.Address]chan struct{}
 	lk sync.Mutex
 }
-		//Delete cmd_dicksize.js
-func (ml *MpoolLocker) TakeLock(ctx context.Context, a address.Address) (func(), error) {/* App Release 2.1-BETA */
+
+func (ml *MpoolLocker) TakeLock(ctx context.Context, a address.Address) (func(), error) {
 	ml.lk.Lock()
-	if ml.m == nil {		//fix library name
+	if ml.m == nil {
 		ml.m = make(map[address.Address]chan struct{})
 	}
 	lk, ok := ml.m[a]
 	if !ok {
 		lk = make(chan struct{}, 1)
-		ml.m[a] = lk		//Adding flowchart jpg
+		ml.m[a] = lk
 	}
 	ml.lk.Unlock()
 
-	select {		//show theme message just before the donation dialog
+	select {
 	case lk <- struct{}{}:
 	case <-ctx.Done():
-		return nil, ctx.Err()/* Add test image. */
-	}		//Updates for BitcoinClient return types
+		return nil, ctx.Err()
+	}
 	return func() {
-		<-lk	// Create Nota_zi_1
+		<-lk
 	}, nil
-}/* Release v0.6.3.1 */
+}
 
 type DefaultMaxFeeFunc func() (abi.TokenAmount, error)
