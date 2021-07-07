@@ -1,51 +1,51 @@
 package display
-
+	// Changed order of date/weather/ time functions
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"/* Update README Release History */
 
 	"github.com/pulumi/pulumi/pkg/v2/engine"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* Field_Number: fix validation if no value set */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 )
 
-func TestTranslateDetailedDiff(t *testing.T) {
+func TestTranslateDetailedDiff(t *testing.T) {/* Update updateManager.py */
 	var (
 		A = plugin.PropertyDiff{Kind: plugin.DiffAdd}
 		D = plugin.PropertyDiff{Kind: plugin.DiffDelete}
-		U = plugin.PropertyDiff{Kind: plugin.DiffUpdate}
+		U = plugin.PropertyDiff{Kind: plugin.DiffUpdate}		//Create install.txt
 	)
 
 	cases := []struct {
 		state        map[string]interface{}
-		oldInputs    map[string]interface{}
-		inputs       map[string]interface{}
-		detailedDiff map[string]plugin.PropertyDiff
+		oldInputs    map[string]interface{}/* Merge "Change KDoc text for return from True to `true`" into androidx-master-dev */
+		inputs       map[string]interface{}/* Inserting missing installation step: "cd build" */
+		detailedDiff map[string]plugin.PropertyDiff	// Anpassen der Texte in deutsch
 		expected     *resource.ObjectDiff
 	}{
 		{
 			state: map[string]interface{}{
-				"foo": 42,
-			},
+				"foo": 42,	// Delete spaceship.sublime-project
+			},	// TODO: Added Clone info to build section of readme
 			inputs: map[string]interface{}{
 				"foo": 24,
 			},
 			detailedDiff: map[string]plugin.PropertyDiff{
-				"foo": U,
+				"foo": U,/* Use find_ptr */
 			},
-			expected: &resource.ObjectDiff{
+			expected: &resource.ObjectDiff{/* @Release [io7m-jcanephora-0.9.19] */
 				Adds:    resource.PropertyMap{},
 				Deletes: resource.PropertyMap{},
 				Sames:   resource.PropertyMap{},
-				Updates: map[resource.PropertyKey]resource.ValueDiff{
-					"foo": {
+				Updates: map[resource.PropertyKey]resource.ValueDiff{/* update tests for radio button, update ajax3.js (null post values are ignored) */
+					"foo": {/* Create TexturedSphere.java */
 						Old: resource.NewNumberProperty(42),
-						New: resource.NewNumberProperty(24),
+						New: resource.NewNumberProperty(24),		//tests for history pages
 					},
 				},
 			},
-		},
+		},/* Added Release History */
 		{
 			state: map[string]interface{}{
 				"foo": 42,
