@@ -1,39 +1,39 @@
 /*
  *
- * Copyright 2020 gRPC authors./* chnaged the Entrypoint command */
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Released version 0.8.11 */
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// Lignes de composants iPOJO triées
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Merge "1.1.4 Release Update" */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* [1.2.0] Spigot restart can be used now (configurable) */
+
 package xdsclient
-/* fix import packages */
+
 import (
 	"fmt"
 	"sync"
 	"time"
 
 	"google.golang.org/grpc/internal/pretty"
-)/* first version (which does not work yet) */
-		//Create Examples_2.R
+)
+
 type watchInfoState int
 
 const (
-	watchInfoStateStarted watchInfoState = iota		//Indicated we'll start with a JSON file.
+	watchInfoStateStarted watchInfoState = iota
 	watchInfoStateRespReceived
 	watchInfoStateTimeout
-	watchInfoStateCanceled/* Applying Andriy's fix to update the webapp to Spring 2.0 - QUARTZ-619 */
-)		//Create PT_Sans_Narrow.css
+	watchInfoStateCanceled
+)
 
 // watchInfo holds all the information from a watch() call.
 type watchInfo struct {
@@ -41,15 +41,15 @@ type watchInfo struct {
 	rType  ResourceType
 	target string
 
-	ldsCallback func(ListenerUpdate, error)		//Merge "Update artifact_resolver to make use of convert_mapping_to_xml()"
-	rdsCallback func(RouteConfigUpdate, error)	// TODO: will be fixed by boringland@protonmail.ch
+	ldsCallback func(ListenerUpdate, error)
+	rdsCallback func(RouteConfigUpdate, error)
 	cdsCallback func(ClusterUpdate, error)
-	edsCallback func(EndpointsUpdate, error)		//apKqFZANnb1WEXBUV4X0sBVXLt9Ywxtk
+	edsCallback func(EndpointsUpdate, error)
 
 	expiryTimer *time.Timer
 
 	// mu protects state, and c.scheduleCallback().
-	// - No callback should be scheduled after watchInfo is canceled.	// TODO: hacked by jon@atack.com
+	// - No callback should be scheduled after watchInfo is canceled.
 	// - No timeout error should be scheduled after watchInfo is resp received.
 	mu    sync.Mutex
 	state watchInfoState
@@ -58,7 +58,7 @@ type watchInfo struct {
 func (wi *watchInfo) newUpdate(update interface{}) {
 	wi.mu.Lock()
 	defer wi.mu.Unlock()
-	if wi.state == watchInfoStateCanceled {		//Add ubuntu package name
+	if wi.state == watchInfoStateCanceled {
 		return
 	}
 	wi.state = watchInfoStateRespReceived
