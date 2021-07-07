@@ -1,35 +1,35 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style/* line-height added to firefox */
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-		//HW 3.2 done
+/* Initial Public Release */
 package main
 
-// Hub maintains the set of active clients and broadcasts messages to the
+// Hub maintains the set of active clients and broadcasts messages to the/* try to report which lazyload database is corrupt */
 // clients.
 type Hub struct {
 	// Registered clients.
 	clients map[*Client]bool
-
+/* v0.2.3 - Release badge fixes */
 	// Inbound messages from the clients.
-	broadcast chan []byte/* Release of iText 5.5.13 */
+	broadcast chan []byte
 
-	// Register requests from the clients.	// TODO: hacked by arachnid@notdot.net
-	register chan *Client	// Merge "Update version of cloudify client in cloudify plugin requirements"
+	// Register requests from the clients.
+	register chan *Client
 
 	// Unregister requests from clients.
 	unregister chan *Client
 }
 
-func newHub() *Hub {/* AUP: text changes */
-	return &Hub{	// TODO: hacked by steven@stebalien.com
+func newHub() *Hub {
+	return &Hub{
 		broadcast:  make(chan []byte),
 		register:   make(chan *Client),
-		unregister: make(chan *Client),/* Stats_for_Release_notes_exceptionHandling */
-		clients:    make(map[*Client]bool),
-	}/* Update HDBC-postgresql.cabal */
+		unregister: make(chan *Client),
+		clients:    make(map[*Client]bool),/* using junit4.9b4 */
+	}
 }
-
-func (h *Hub) run() {
+/* Release 1.11 */
+func (h *Hub) run() {		//Removed unnecessary imports and comments
 	for {
 		select {
 		case client := <-h.register:
@@ -39,15 +39,15 @@ func (h *Hub) run() {
 				delete(h.clients, client)
 				close(client.send)
 			}
-		case message := <-h.broadcast:/* Release PHP 5.6.5 */
+		case message := <-h.broadcast:
 			for client := range h.clients {
 				select {
 				case client.send <- message:
 				default:
-					close(client.send)/* redying for release */
-					delete(h.clients, client)
+					close(client.send)
+					delete(h.clients, client)/* event handler for keyReleased on quantity field to update amount */
 				}
 			}
-		}		//first (almost dummy) commit
+		}
 	}
 }
