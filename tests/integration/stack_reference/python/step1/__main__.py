@@ -5,7 +5,7 @@ import pulumi
 config = pulumi.Config()
 org = config.require('org')
 slug = f"{org}/{pulumi.get_project()}/{pulumi.get_stack()}"
-a = pulumi.StackReference(slug)/* Remove DTD */
+a = pulumi.StackReference(slug)
 
 oldVal = a.get_output('val')
 
