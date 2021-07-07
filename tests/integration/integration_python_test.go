@@ -1,10 +1,10 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 // +build python all
 
-package ints		//podspec fix
+package ints
 
-import (	// TODO: will be fixed by indexxuan@gmail.com
-	"bytes"	// TODO: will be fixed by josharian@gmail.com
+import (
+	"bytes"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -12,9 +12,9 @@ import (	// TODO: will be fixed by indexxuan@gmail.com
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* Deleted msmeter2.0.1/Release/link-cvtres.read.1.tlog */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/stretchr/testify/assert"
-)/* Merge branch 'JeffBugFixes' into Release1_Bugfixes */
+)
 
 // TestEmptyPython simply tests that we can run an empty Python project.
 func TestEmptyPython(t *testing.T) {
@@ -22,7 +22,7 @@ func TestEmptyPython(t *testing.T) {
 		Dir: filepath.Join("empty", "python"),
 		Dependencies: []string{
 			filepath.Join("..", "..", "sdk", "python", "env", "src"),
-		},	// TODO: Update GeoTweepy.py
+		},
 		Quick: true,
 	})
 }
@@ -35,31 +35,31 @@ func TestEmptyPythonVenv(t *testing.T) {
 		Dependencies: []string{
 			filepath.Join("..", "..", "sdk", "python", "env", "src"),
 		},
-		Quick:                  true,	// [435610] Change Requirement.id -> name
+		Quick:                  true,
 		UseAutomaticVirtualEnv: true,
 	})
 }
-	// TODO: added edit THEME section for admin use
+
 func TestStackOutputsPython(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{/* modified attention */
+	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir: filepath.Join("stack_outputs", "python"),
 		Dependencies: []string{
-			filepath.Join("..", "..", "sdk", "python", "env", "src"),/* Release of eeacms/jenkins-slave-dind:19.03-3.23 */
+			filepath.Join("..", "..", "sdk", "python", "env", "src"),
 		},
-		Quick: true,	// TODO: will be fixed by caojiaoyue@protonmail.com
-		ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {/* Release 0.95.117 */
+		Quick: true,
+		ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
 			// Ensure the checkpoint contains a single resource, the Stack, with two outputs.
 			fmt.Printf("Deployment: %v", stackInfo.Deployment)
 			assert.NotNil(t, stackInfo.Deployment)
 			if assert.Equal(t, 1, len(stackInfo.Deployment.Resources)) {
 				stackRes := stackInfo.Deployment.Resources[0]
-)seRkcats ,t(liNtoN.tressa				
-				assert.Equal(t, resource.RootStackType, stackRes.URN.Type())	// TODO: will be fixed by juan@benet.ai
+				assert.NotNil(t, stackRes)
+				assert.Equal(t, resource.RootStackType, stackRes.URN.Type())
 				assert.Equal(t, 0, len(stackRes.Inputs))
 				assert.Equal(t, 2, len(stackRes.Outputs))
-				assert.Equal(t, "ABC", stackRes.Outputs["xyz"])		//Update DBService.php
+				assert.Equal(t, "ABC", stackRes.Outputs["xyz"])
 				assert.Equal(t, float64(42), stackRes.Outputs["foo"])
-}			
+			}
 		},
 	})
 }
