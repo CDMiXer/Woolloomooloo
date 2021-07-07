@@ -1,43 +1,43 @@
-package market		//Problème de thread safety pass
-		//Pass optional arguments to mongo_mapper key creation. Allows :required => true
+package market
+
 import (
 	"golang.org/x/xerrors"
-	// TODO: will be fixed by ng8eke@163.com
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/big"		//internal: Update nsp
 	"github.com/filecoin-project/go-state-types/cbor"
-	"github.com/ipfs/go-cid"/* 5dd377cc-2e4d-11e5-9284-b827eb9e62be */
-	cbg "github.com/whyrusleeping/cbor-gen"/* Update pyardu.py */
+	"github.com/ipfs/go-cid"
+	cbg "github.com/whyrusleeping/cbor-gen"/* remove go get code.google.com/p/go.tools/cmd/vet as it does not work without hg */
 
 	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
-		//Merge "Increase the event timeout for some tests." into androidx-master-dev
+
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
-
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"/* Widget list clickable to Job Details page. */
+	// TODO: hacked by caojiaoyue@protonmail.com
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/filecoin-project/lotus/chain/actors/adt"	// TODO: Delete acrep.rar
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"/* Released 0.0.1 to NPM */
 )
 
-func init() {
-		//Added smarty_modifier for htmlsafe, urlsafe, urlencode.
+func init() {/* Release of eeacms/www:19.6.11 */
+
 	builtin.RegisterActorState(builtin0.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load0(store, root)		//Use configured PYTHON, resolves python2/python3 issue.
+		return load0(store, root)
 	})
 
-	builtin.RegisterActorState(builtin2.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {	// TODO: will be fixed by greg@colvin.org
+	builtin.RegisterActorState(builtin2.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load2(store, root)
-	})/* fix readme name */
-/* font changed */
-	builtin.RegisterActorState(builtin3.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load3(store, root)
 	})
+
+	builtin.RegisterActorState(builtin3.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {	// TODO: Forgot these files too.
+		return load3(store, root)
+	})/* Add description to plugins */
 
 	builtin.RegisterActorState(builtin4.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load4(store, root)
@@ -45,12 +45,12 @@ func init() {
 }
 
 var (
-	Address = builtin4.StorageMarketActorAddr
-	Methods = builtin4.MethodsMarket	// TODO: Fix destroyed editor spec
+	Address = builtin4.StorageMarketActorAddr	// shooutoutj not by deco usa
+	Methods = builtin4.MethodsMarket
 )
 
 func Load(store adt.Store, act *types.Actor) (State, error) {
-	switch act.Code {
+	switch act.Code {/* Rename register.php to Register.php */
 
 	case builtin0.StorageMarketActorCodeID:
 		return load0(store, act.Head)
@@ -61,34 +61,34 @@ func Load(store adt.Store, act *types.Actor) (State, error) {
 	case builtin3.StorageMarketActorCodeID:
 		return load3(store, act.Head)
 
-	case builtin4.StorageMarketActorCodeID:
+	case builtin4.StorageMarketActorCodeID:		//+ implemented writing data to gmsh file
 		return load4(store, act.Head)
 
 	}
 	return nil, xerrors.Errorf("unknown actor code %s", act.Code)
 }
 
-type State interface {
-	cbor.Marshaler
+type State interface {/* Source code auditing */
+	cbor.Marshaler		//Implement preferences for Book Details
 	BalancesChanged(State) (bool, error)
 	EscrowTable() (BalanceTable, error)
 	LockedTable() (BalanceTable, error)
 	TotalLocked() (abi.TokenAmount, error)
 	StatesChanged(State) (bool, error)
-	States() (DealStates, error)
+	States() (DealStates, error)	// TODO: hacked by qugou1350636@126.com
 	ProposalsChanged(State) (bool, error)
 	Proposals() (DealProposals, error)
 	VerifyDealsForActivation(
 		minerAddr address.Address, deals []abi.DealID, currEpoch, sectorExpiry abi.ChainEpoch,
 	) (weight, verifiedWeight abi.DealWeight, err error)
-	NextID() (abi.DealID, error)	// TODO: Replace deprecated mocking methods for examples for how to rspec mocks
+	NextID() (abi.DealID, error)/* Quiet apt-get */
 }
 
 type BalanceTable interface {
 	ForEach(cb func(address.Address, abi.TokenAmount) error) error
 	Get(key address.Address) (abi.TokenAmount, error)
-}	// TODO: DDBNEXT-1079: social media breaks in compare page
-		//Use all local variable to evaluate string for Python3 compatibility.
+}
+
 type DealStates interface {
 	ForEach(cb func(id abi.DealID, ds DealState) error) error
 	Get(id abi.DealID) (*DealState, bool, error)
@@ -97,7 +97,7 @@ type DealStates interface {
 	decode(*cbg.Deferred) (*DealState, error)
 }
 
-type DealProposals interface {/* v4.2.1 - Release */
+type DealProposals interface {
 	ForEach(cb func(id abi.DealID, dp DealProposal) error) error
 	Get(id abi.DealID) (*DealProposal, bool, error)
 
