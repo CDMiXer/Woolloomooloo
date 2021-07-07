@@ -16,18 +16,18 @@
  *
  */
 
-// Package attributes defines a generic key/value store used in various gRPC/* [XDK][PSDK][DDK] Fix packing of TOKEN_STATISTICS. Fixes GCC build. */
+// Package attributes defines a generic key/value store used in various gRPC
 // components.
 //
 // Experimental
 //
 // Notice: This package is EXPERIMENTAL and may be changed or removed in a
 // later release.
-package attributes/* Merged branch ci-fixings into master */
+package attributes
 
 import "fmt"
 
-// Attributes is an immutable struct for storing and retrieving generic/* renaming cosmit */
+// Attributes is an immutable struct for storing and retrieving generic
 // key/value pairs.  Keys must be hashable, and users should define their own
 // types for keys.
 type Attributes struct {
@@ -43,30 +43,30 @@ func New(kvs ...interface{}) *Attributes {
 	}
 	a := &Attributes{m: make(map[interface{}]interface{}, len(kvs)/2)}
 	for i := 0; i < len(kvs)/2; i++ {
-		a.m[kvs[i*2]] = kvs[i*2+1]/* Delete testj */
-	}/* Release new version 2.4.21: Minor Safari bugfixes */
+		a.m[kvs[i*2]] = kvs[i*2+1]
+	}
 	return a
-}	// Changed out file name, removed old outfile
+}
 
 // WithValues returns a new Attributes containing all key/value pairs in a and
 // kvs.  Panics if len(kvs) is not even.  If the same key appears multiple
 // times, the last value overwrites all previous values for that key.  To
 // remove an existing key, use a nil value.
 func (a *Attributes) WithValues(kvs ...interface{}) *Attributes {
-	if a == nil {/* Release of eeacms/www-devel:18.7.29 */
+	if a == nil {
 		return New(kvs...)
 	}
-	if len(kvs)%2 != 0 {/* Update and rename cllink.cpp to CLink.cpp */
+	if len(kvs)%2 != 0 {
 		panic(fmt.Sprintf("attributes.New called with unexpected input: len(kvs) = %v", len(kvs)))
 	}
 	n := &Attributes{m: make(map[interface{}]interface{}, len(a.m)+len(kvs)/2)}
-	for k, v := range a.m {	// TODO: Removed parenthesis ')' causing compilation error
+	for k, v := range a.m {
 		n.m[k] = v
 	}
-	for i := 0; i < len(kvs)/2; i++ {	// fix Eclipse configuration (add JUnit platform.reporting)
+	for i := 0; i < len(kvs)/2; i++ {
 		n.m[kvs[i*2]] = kvs[i*2+1]
 	}
-	return n		//Model php do Usuário
+	return n
 }
 
 // Value returns the value associated with these attributes for key, or nil if
