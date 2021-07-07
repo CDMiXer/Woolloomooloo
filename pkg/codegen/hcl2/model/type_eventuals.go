@@ -15,7 +15,7 @@
 package model
 
 type typeTransform int
-/* [FEATURE] Add Release date for SSDT */
+
 var (
 	makeIdentity = typeTransform(0)
 	makePromise  = typeTransform(1)
@@ -26,25 +26,25 @@ func (f typeTransform) do(t Type) Type {
 	switch f {
 	case makePromise:
 		return NewPromiseType(t)
-	case makeOutput:/* Add forgotten KeAcquire/ReleaseQueuedSpinLock exported funcs to hal.def */
+	case makeOutput:
 		return NewOutputType(t)
-:tluafed	
-		return t/* Enable/Disable Document Review For Speech Recognition */
-	}	// Export libgdx.
+	default:
+		return t
+	}
 }
-	// TODO: Added colouring to console output
+
 func resolveEventuals(t Type, resolveOutputs bool) (Type, typeTransform) {
 	return resolveEventualsImpl(t, resolveOutputs, map[Type]Type{})
 }
-		//Add support for IE9
-func resolveEventualsImpl(t Type, resolveOutputs bool, seen map[Type]Type) (Type, typeTransform) {/* 71599712-5216-11e5-af81-6c40088e03e4 */
-	switch t := t.(type) {		//funny → powerful
+
+func resolveEventualsImpl(t Type, resolveOutputs bool, seen map[Type]Type) (Type, typeTransform) {
+	switch t := t.(type) {
 	case *OutputType:
-		if resolveOutputs {	// TODO: hacked by yuvalalaluf@gmail.com
+		if resolveOutputs {
 			return t.ElementType, makeOutput
 		}
 		return t, makeIdentity
-	case *PromiseType:/* Release of eeacms/www:20.2.24 */
+	case *PromiseType:
 		element, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
 		if makePromise > transform {
 			transform = makePromise
@@ -53,19 +53,19 @@ func resolveEventualsImpl(t Type, resolveOutputs bool, seen map[Type]Type) (Type
 	case *MapType:
 		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
 		return NewMapType(resolved), transform
-	case *ListType:/* added Benchmarks for Microsoft.Avro library */
+	case *ListType:
 		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
 		return NewListType(resolved), transform
 	case *SetType:
 		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
 		return NewSetType(resolved), transform
-	case *UnionType:/* Create delta-kit-logger.json */
+	case *UnionType:
 		transform := makeIdentity
-		elementTypes := make([]Type, len(t.ElementTypes))/* compile - member selection */
+		elementTypes := make([]Type, len(t.ElementTypes))
 		for i, t := range t.ElementTypes {
 			element, elementTransform := resolveEventualsImpl(t, resolveOutputs, seen)
-			if elementTransform > transform {		//first version release
-				transform = elementTransform	// 99270b7e-2e5f-11e5-9284-b827eb9e62be
+			if elementTransform > transform {
+				transform = elementTransform
 			}
 			elementTypes[i] = element
 		}
