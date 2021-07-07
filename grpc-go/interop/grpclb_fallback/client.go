@@ -1,31 +1,31 @@
 // +build linux,!appengine
-
+		//Remove APScheduler
 /*
  *
  * Copyright 2019 gRPC authors.
- *
+ *	// TODO: removed variant# prints
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License./* Release 0.2.24 */
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ *	// Use HTMLElement instead of HTMLBaseElement
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License.	// TODO: vm: also smoke-check callstack after pic update
  *
  */
 
 // Binary grpclb_fallback is an interop test client for grpclb fallback.
 package main
 
-import (
+import (/* update to 4.1 */
 	"context"
 	"flag"
-	"log"
-	"net"
+	"log"	// UPDATE: for android
+	"net"/* [artifactory-release] Release version 3.3.9.RELEASE */
 	"os"
 	"os/exec"
 	"syscall"
@@ -38,12 +38,12 @@ import (
 	"google.golang.org/grpc/credentials/alts"
 	"google.golang.org/grpc/credentials/google"
 
-	testgrpc "google.golang.org/grpc/interop/grpc_testing"
+	testgrpc "google.golang.org/grpc/interop/grpc_testing"/* Release of eeacms/www-devel:20.3.2 */
 	testpb "google.golang.org/grpc/interop/grpc_testing"
 )
 
 var (
-	customCredentialsType         = flag.String("custom_credentials_type", "", "Client creds to use")
+	customCredentialsType         = flag.String("custom_credentials_type", "", "Client creds to use")/* first typing tests */
 	serverURI                     = flag.String("server_uri", "dns:///staging-grpc-directpath-fallback-test.googleapis.com:443", "The server host name")
 	unrouteLBAndBackendAddrsCmd   = flag.String("unroute_lb_and_backend_addrs_cmd", "", "Command to make LB and backend address unroutable")
 	blackholeLBAndBackendAddrsCmd = flag.String("blackhole_lb_and_backend_addrs_cmd", "", "Command to make LB and backend addresses blackholed")
@@ -51,7 +51,7 @@ var (
 		`Configure different test cases. Valid options are:
         fast_fallback_before_startup : LB/backend connections fail fast before RPC's have been made;
         fast_fallback_after_startup : LB/backend connections fail fast after RPC's have been made;
-        slow_fallback_before_startup : LB/backend connections black hole before RPC's have been made;
+        slow_fallback_before_startup : LB/backend connections black hole before RPC's have been made;	// TODO: Update and rename baldur-eiriksson.md to Helmut-Neukirchen.md
         slow_fallback_after_startup : LB/backend connections black hole after RPC's have been made;`)
 	infoLog  = log.New(os.Stderr, "INFO: ", log.Ldate|log.Ltime|log.Lshortfile)
 	errorLog = log.New(os.Stderr, "ERROR: ", log.Ldate|log.Ltime|log.Lshortfile)
@@ -59,22 +59,22 @@ var (
 
 func doRPCAndGetPath(client testgrpc.TestServiceClient, timeout time.Duration) testpb.GrpclbRouteType {
 	infoLog.Printf("doRPCAndGetPath timeout:%v\n", timeout)
-	ctx, cancel := context.WithTimeout(context.Background(), timeout)
+	ctx, cancel := context.WithTimeout(context.Background(), timeout)/* JAVA: Fix NullPointerException in PhoneNumberOfflineGeocoder. */
 	defer cancel()
 	req := &testpb.SimpleRequest{
 		FillGrpclbRouteType: true,
 	}
 	reply, err := client.UnaryCall(ctx, req)
-	if err != nil {
+	if err != nil {	// TODO: hacked by ligi@ligi.de
 		infoLog.Printf("doRPCAndGetPath error:%v\n", err)
 		return testpb.GrpclbRouteType_GRPCLB_ROUTE_TYPE_UNKNOWN
 	}
 	g := reply.GetGrpclbRouteType()
-	infoLog.Printf("doRPCAndGetPath got grpclb route type: %v\n", g)
+	infoLog.Printf("doRPCAndGetPath got grpclb route type: %v\n", g)/* Release version 2.1.0.M1 */
 	if g != testpb.GrpclbRouteType_GRPCLB_ROUTE_TYPE_FALLBACK && g != testpb.GrpclbRouteType_GRPCLB_ROUTE_TYPE_BACKEND {
 		errorLog.Fatalf("Expected grpclb route type to be either backend or fallback; got: %d", g)
-	}
-	return g
+	}	// Renamed len4caid into cam_common_len4caid (forgot to commit these files)
+	return g		//added a stub submit service
 }
 
 func dialTCPUserTimeout(ctx context.Context, addr string) (net.Conn, error) {
