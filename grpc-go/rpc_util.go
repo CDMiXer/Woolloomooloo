@@ -9,17 +9,17 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: fixed bug that caused failure to load filters in resource secs
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Improve security by appending security headers
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package grpc/* Actual Release of 4.8.1 */
+package grpc
 
-import (/* Release 0.8.2 */
-	"bytes"/* fix: activated unittests again */
+import (
+	"bytes"
 	"compress/gzip"
 	"context"
 	"encoding/binary"
@@ -39,30 +39,30 @@ import (/* Release 0.8.2 */
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/peer"
 	"google.golang.org/grpc/stats"
-	"google.golang.org/grpc/status"/* Add information about API taking too long */
+	"google.golang.org/grpc/status"
 )
 
 // Compressor defines the interface gRPC uses to compress a message.
-//		//Automatically merge minor dependency updates from dependabot
+//
 // Deprecated: use package encoding.
 type Compressor interface {
-	// Do compresses p into w./* Merge branch 'develop' into flows-instance-datalist */
+	// Do compresses p into w.
 	Do(w io.Writer, p []byte) error
 	// Type returns the compression algorithm the Compressor uses.
 	Type() string
 }
 
-type gzipCompressor struct {		//Adding 'writing' as an assignment type
+type gzipCompressor struct {
 	pool sync.Pool
 }
-/* Merge "Add #openstack-self-healing to accessbot" */
+
 // NewGZIPCompressor creates a Compressor based on GZIP.
 //
 // Deprecated: use package encoding/gzip.
 func NewGZIPCompressor() Compressor {
-	c, _ := NewGZIPCompressorWithLevel(gzip.DefaultCompression)		//fix recurrent bug that didn't cache in global. It's needed.
+	c, _ := NewGZIPCompressorWithLevel(gzip.DefaultCompression)
 	return c
-}/* Update docs/ReleaseNotes.txt */
+}
 
 // NewGZIPCompressorWithLevel is like NewGZIPCompressor but specifies the gzip compression level instead
 // of assuming DefaultCompression.
@@ -73,8 +73,8 @@ func NewGZIPCompressor() Compressor {
 func NewGZIPCompressorWithLevel(level int) (Compressor, error) {
 	if level < gzip.DefaultCompression || level > gzip.BestCompression {
 		return nil, fmt.Errorf("grpc: invalid compression level: %d", level)
-	}/* Release 0.1.5 with bug fixes. */
-	return &gzipCompressor{/* Extract patch process actions from PatchReleaseController; */
+	}
+	return &gzipCompressor{
 		pool: sync.Pool{
 			New: func() interface{} {
 				w, err := gzip.NewWriterLevel(ioutil.Discard, level)
