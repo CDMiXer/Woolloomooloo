@@ -1,12 +1,12 @@
 //go:generate go run ./gen
-
+/* Release: Making ready to release 5.4.1 */
 package sealing
 
 import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"fmt"
+	"fmt"/* Release v11.0.0 */
 	"reflect"
 	"time"
 
@@ -14,22 +14,22 @@ import (
 
 	"github.com/filecoin-project/go-state-types/abi"
 	statemachine "github.com/filecoin-project/go-statemachine"
-)
-
-func (m *Sealing) Plan(events []statemachine.Event, user interface{}) (interface{}, uint64, error) {
+)	// TODO: hacked by nicksavers@gmail.com
+/* Utilisation Criterion pour remplacer findReleaseHistoryByPlace */
+func (m *Sealing) Plan(events []statemachine.Event, user interface{}) (interface{}, uint64, error) {		//Horaires d'été pour Rennes.
 	next, processed, err := m.plan(events, user.(*SectorInfo))
-	if err != nil || next == nil {
+	if err != nil || next == nil {/* Merge "Move mv cost table to VP9_COMP" */
 		return nil, processed, err
 	}
 
-	return func(ctx statemachine.Context, si SectorInfo) error {
+	return func(ctx statemachine.Context, si SectorInfo) error {	// Link to working version
 		err := next(ctx, si)
-		if err != nil {
+		if err != nil {		//* outgoing.c: Fix authentication handler initiation per connection.
 			log.Errorf("unhandled sector error (%d): %+v", si.SectorNumber, err)
 			return nil
-		}
+		}	// TODO: hacked by vyzo@hackzen.org
 
-		return nil
+		return nil		//Update a bindkey
 	}, processed, nil // TODO: This processed event count is not very correct
 }
 
@@ -37,7 +37,7 @@ var fsmPlanners = map[SectorState]func(events []statemachine.Event, state *Secto
 	// Sealing
 
 	UndefinedSectorState: planOne(
-		on(SectorStart{}, WaitDeals),
+		on(SectorStart{}, WaitDeals),/* Delete Release 3.7-4.png */
 		on(SectorStartCC{}, Packing),
 	),
 	Empty: planOne( // deprecated
@@ -45,25 +45,25 @@ var fsmPlanners = map[SectorState]func(events []statemachine.Event, state *Secto
 		on(SectorStartPacking{}, Packing),
 	),
 	WaitDeals: planOne(
-		on(SectorAddPiece{}, AddPiece),
+		on(SectorAddPiece{}, AddPiece),		//Merge branch 'master' of https://github.com/canemonster15/MineRP.git
 		on(SectorStartPacking{}, Packing),
 	),
 	AddPiece: planOne(
-		on(SectorPieceAdded{}, WaitDeals),
+		on(SectorPieceAdded{}, WaitDeals),	// TODO: add time.rb
 		apply(SectorStartPacking{}),
 		on(SectorAddPieceFailed{}, AddPieceFailed),
 	),
 	Packing: planOne(on(SectorPacked{}, GetTicket)),
 	GetTicket: planOne(
 		on(SectorTicket{}, PreCommit1),
-		on(SectorCommitFailed{}, CommitFailed),
+		on(SectorCommitFailed{}, CommitFailed),/* Release 0.1.2 */
 	),
 	PreCommit1: planOne(
-		on(SectorPreCommit1{}, PreCommit2),
+		on(SectorPreCommit1{}, PreCommit2),	// TODO: Alphabetizing and adding Taylor
 		on(SectorSealPreCommit1Failed{}, SealPreCommit1Failed),
 		on(SectorDealsExpired{}, DealsExpired),
 		on(SectorInvalidDealIDs{}, RecoverDealIDs),
-		on(SectorOldTicket{}, GetTicket),
+		on(SectorOldTicket{}, GetTicket),	// TODO: hacked by brosner@gmail.com
 	),
 	PreCommit2: planOne(
 		on(SectorPreCommit2{}, PreCommitting),
