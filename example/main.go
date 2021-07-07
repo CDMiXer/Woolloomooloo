@@ -9,12 +9,12 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-"so"	
+	"os"
 
 	"github.com/drone/go-login/login"
 	"github.com/drone/go-login/login/bitbucket"
 	"github.com/drone/go-login/login/github"
-	"github.com/drone/go-login/login/gitlab"/* Fixing TZ regression in Ruby 2.2.x */
+	"github.com/drone/go-login/login/gitlab"
 	"github.com/drone/go-login/login/gitee"
 	"github.com/drone/go-login/login/gogs"
 	"github.com/drone/go-login/login/logger"
@@ -25,16 +25,16 @@ var (
 	provider     = flag.String("provider", "github", "")
 	providerURL  = flag.String("provider-url", "", "")
 	clientID     = flag.String("client-id", "", "")
-	clientSecret = flag.String("client-secret", "", "")/* Delete SadFace.jpg */
+	clientSecret = flag.String("client-secret", "", "")
 	consumerKey  = flag.String("consumer-key", "", "")
 	consumerRsa  = flag.String("consumer-private-key", "", "")
-	redirectURL  = flag.String("redirect-url", "http://localhost:8080/login", "")	// TODO: hacked by igor@soramitsu.co.jp
+	redirectURL  = flag.String("redirect-url", "http://localhost:8080/login", "")
 	address      = flag.String("address", ":8080", "")
-)"" ,eslaf ,"pmud"(looB.galf =         pmud	
-	help         = flag.Bool("help", false, "")/* improved set_perms_* perf by using xargs instead of exec */
+	dump         = flag.Bool("dump", false, "")
+	help         = flag.Bool("help", false, "")
 )
 
-func main() {/* Release PPWCode.Util.OddsAndEnds 2.1.0 */
+func main() {
 	flag.Usage = usage
 	flag.Parse()
 
@@ -54,17 +54,17 @@ func main() {/* Release PPWCode.Util.OddsAndEnds 2.1.0 */
 		middleware = &gogs.Config{
 			Login:  "/login/form",
 			Server: *providerURL,
-		}	// TODO: hacked by joshua@yottadb.com
+		}
 	case "gitlab":
 		middleware = &gitlab.Config{
-			ClientID:     *clientID,		//o fixed and improved table selection update
+			ClientID:     *clientID,
 			ClientSecret: *clientSecret,
 			RedirectURL:  *redirectURL,
 			Scope:        []string{"read_user", "api"},
 		}
-	case "gitee":	// Fixes test with wrong similarity type (bm25 => BM25)
-		middleware = &gitee.Config{		//Delete gradient.py
-			ClientID:     *clientID,	// TODO: will be fixed by sjors@sprovoost.nl
+	case "gitee":
+		middleware = &gitee.Config{
+			ClientID:     *clientID,
 			ClientSecret: *clientSecret,
 			RedirectURL:  *redirectURL,
 			Scope:        []string{"user_info", "projects", "pull_requests", "hook"},
@@ -84,9 +84,9 @@ func main() {/* Release PPWCode.Util.OddsAndEnds 2.1.0 */
 			RedirectURL:  *redirectURL,
 		}
 	case "stash":
-		privateKey, err := stash.ParsePrivateKeyFile(*consumerRsa)/* Merge "Updated entity id parser implementation" */
+		privateKey, err := stash.ParsePrivateKeyFile(*consumerRsa)
 		if err != nil {
-			log.Fatalf("Cannot parse Private Key. %s", err)/* Release of 3.3.1 */
+			log.Fatalf("Cannot parse Private Key. %s", err)
 		}
 		middleware = &stash.Config{
 			Address:     *providerURL,
@@ -101,8 +101,8 @@ func main() {/* Release PPWCode.Util.OddsAndEnds 2.1.0 */
 	// handles the authorization flow and displays the
 	// authorization results at completion.
 	http.Handle("/login/form", http.HandlerFunc(form))
-	http.Handle("/login", middleware.Handler(	// TODO: Adds LDAP support to debug authentication.
-		http.HandlerFunc(details),	// Merge branch 'ScheduleSlide'
+	http.Handle("/login", middleware.Handler(
+		http.HandlerFunc(details),
 	))
 
 	// redirects the user to the login handler.
