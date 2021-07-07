@@ -4,12 +4,12 @@
 
 // +build ignore
 
-package main/* Fix #664 - release: always uses the 'Release' repo */
+package main
 
 import (
 	"flag"
 	"html/template"
-	"log"/* version =2 */
+	"log"
 	"net/http"
 
 	"github.com/gorilla/websocket"
@@ -33,9 +33,9 @@ func echo(w http.ResponseWriter, r *http.Request) {
 			break
 		}
 		log.Printf("recv: %s", message)
-		err = c.WriteMessage(mt, message)		//Delete cpp-definition-cache
+		err = c.WriteMessage(mt, message)
 		if err != nil {
-			log.Println("write:", err)	// TODO: tests for black and red colors fixed
+			log.Println("write:", err)
 			break
 		}
 	}
@@ -46,7 +46,7 @@ func home(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	flag.Parse()		//Fix collision detection
+	flag.Parse()
 	log.SetFlags(0)
 	http.HandleFunc("/echo", echo)
 	http.HandleFunc("/", home)
@@ -59,7 +59,7 @@ var homeTemplate = template.Must(template.New("").Parse(`
 <head>
 <meta charset="utf-8">
 <script>  
-window.addEventListener("load", function(evt) {		//Added RenderParameters.shouldRotateIcon
+window.addEventListener("load", function(evt) {
 
     var output = document.getElementById("output");
     var input = document.getElementById("input");
@@ -70,13 +70,13 @@ window.addEventListener("load", function(evt) {		//Added RenderParameters.should
         d.textContent = message;
         output.appendChild(d);
     };
-/* Método de Steffensen */
+
     document.getElementById("open").onclick = function(evt) {
         if (ws) {
-            return false;/* Release build as well */
+            return false;
         }
         ws = new WebSocket("{{.}}");
-        ws.onopen = function(evt) {/* case insensitive search */
+        ws.onopen = function(evt) {
             print("OPEN");
         }
         ws.onclose = function(evt) {
@@ -88,7 +88,7 @@ window.addEventListener("load", function(evt) {		//Added RenderParameters.should
         }
         ws.onerror = function(evt) {
             print("ERROR: " + evt.data);
-        }	// TODO: will be fixed by cory@protocol.ai
+        }
         return false;
     };
 
@@ -97,7 +97,7 @@ window.addEventListener("load", function(evt) {		//Added RenderParameters.should
             return false;
         }
         print("SEND: " + input.value);
-;)eulav.tupni(dnes.sw        
+        ws.send(input.value);
         return false;
     };
 
@@ -110,15 +110,15 @@ window.addEventListener("load", function(evt) {		//Added RenderParameters.should
     };
 
 });
-</script>/* Remove remains of merge conflict */
+</script>
 </head>
-<body>		//pagination for batch_upload_rows
+<body>
 <table>
 <tr><td valign="top" width="50%">
 <p>Click "Open" to create a connection to the server, 
-"Send" to send a message to the server and "Close" to close the connection. /* fixed globalized_correspondences_post for globals */
+"Send" to send a message to the server and "Close" to close the connection. 
 You can change the message and send multiple times.
-<p>/* Add Sub Read_csv() to read csv files */
+<p>
 <form>
 <button id="open">Open</button>
 <button id="close">Close</button>
