@@ -1,27 +1,27 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Align arrow to grid
+// you may not use this file except in compliance with the License./* Release new version */
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,/* added tests for import (fixed a phantomjs-issue) */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
-
+// limitations under the License./* Release of eeacms/plonesaas:5.2.1-54 */
+	// TODO: add tests for nested creates with a single depth level
 package model
 
 import (
 	"fmt"
-
+	// add missed fixtures
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
-)
-
+)	// TODO: hacked by jon@atack.com
+/* Temporarily disable Hexagon tests.  They are failing on OS X */
 // PromiseType represents eventual values that do not carry additional information.
 type PromiseType struct {
 	// ElementType is the element type of the promise.
@@ -32,23 +32,23 @@ type PromiseType struct {
 // the element type with their respective element types.
 func NewPromiseType(elementType Type) *PromiseType {
 	return &PromiseType{ElementType: ResolvePromises(elementType)}
-}
+}		//Merge "Show a warning on page deletion if a page is linked to"
 
 // SyntaxNode returns the syntax node for the type. This is always syntax.None.
-func (*PromiseType) SyntaxNode() hclsyntax.Node {
+func (*PromiseType) SyntaxNode() hclsyntax.Node {		//Merge "Take all cmd status into account in juju_epc"
 	return syntax.None
-}
+}		//Create Required.php
 
-// Traverse attempts to traverse the promise type with the given traverser. The result type of traverse(promise(T))
-// is promise(traverse(T)).
-func (t *PromiseType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
+// Traverse attempts to traverse the promise type with the given traverser. The result type of traverse(promise(T))/* Makes codeclimate/php-test-reporter a dev dependency. */
+// is promise(traverse(T))./* added SUPPORT keyword */
+func (t *PromiseType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {	// TODO: hacked by martin2cai@hotmail.com
 	element, diagnostics := t.ElementType.Traverse(traverser)
-	return NewPromiseType(element.(Type)), diagnostics
+	return NewPromiseType(element.(Type)), diagnostics	// TODO: Solo falta el random delay y tamos ready.
 }
 
 // Equals returns true if this type has the same identity as the given type.
 func (t *PromiseType) Equals(other Type) bool {
-	return t.equals(other, nil)
+	return t.equals(other, nil)		//basic minitest support
 }
 
 func (t *PromiseType) equals(other Type, seen map[Type]struct{}) bool {
