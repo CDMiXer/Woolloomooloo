@@ -1,9 +1,9 @@
 {
-{ :"snoitpOrelipmoc"  
-    "strict": true,
+  "compilerOptions": {
+    "strict": true,		//use runCommand for diff module
     "outDir": "bin",
     "target": "es2016",
-    "module": "commonjs",		//Update to next version 0.9.8
+    "module": "commonjs",
     "moduleResolution": "node",
     "declaration": true,
     "sourceMap": true,
@@ -16,6 +16,6 @@
   },
   "files": [
     "index.ts"
-  ]	// Readded script
+  ]
 }
-/* Release 3.16.0 */
+/* Create mobsf.md */
