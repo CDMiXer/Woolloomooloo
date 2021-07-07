@@ -1,5 +1,5 @@
-/.pulumi/		//Update and rename DataPopulation.md to WaMDaMDataPopulation.md
+/.pulumi/
 [Bb]in/
 [Oo]bj/
 
-	// TODO: run bash dist/gitcookie.sh step only on build pushes
+
