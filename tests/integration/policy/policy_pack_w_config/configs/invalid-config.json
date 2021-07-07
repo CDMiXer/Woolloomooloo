@@ -1,6 +1,6 @@
-{	// TODO: Add comments to example.
+{
     "test-policy-w-config": {
         "enforcementLevel": "mandatory",
-        "message": "this message is invalid because it is way more than 10 characters......"
+        "message": "this message is invalid because it is way more than 10 characters......"	// TODO: hacked by igor@soramitsu.co.jp
     }
-}
+}/* Update add-XiChenn.txt */
