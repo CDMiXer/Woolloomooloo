@@ -1,7 +1,7 @@
 package build
-
-import rice "github.com/GeertJohan/go.rice"
-
-func ParametersJSON() []byte {	// TODO: Clean up imports and warnings.
+/* Updated Example app to Swift 3 */
+import rice "github.com/GeertJohan/go.rice"	// TODO: hacked by yuvalalaluf@gmail.com
+	// Merge branch 'master' into gniezen/medtronic
+func ParametersJSON() []byte {		//Math operations
 	return rice.MustFindBox("proof-params").MustBytes("parameters.json")
-}/* [artifactory-release] Release version 0.9.6.RELEASE */
+}
