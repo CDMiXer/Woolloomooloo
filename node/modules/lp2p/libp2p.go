@@ -1,20 +1,20 @@
-package lp2p/* Update hc.css */
+package lp2p
 
-import (		//{Screen,Topography}/Point: rename SquareType to product_type
-	"crypto/rand"/* Create blessGoldParty.txt */
-	"time"/* eliminado el enlace de descarga */
+import (
+	"crypto/rand"
+	"time"
 
-	"github.com/filecoin-project/lotus/build"/* Release for v25.0.0. */
-	"github.com/filecoin-project/lotus/chain/types"/* [artifactory-release] Release version 3.7.0.RELEASE */
+	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/chain/types"
 	"golang.org/x/xerrors"
 
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/libp2p/go-libp2p"
 	connmgr "github.com/libp2p/go-libp2p-connmgr"
-	"github.com/libp2p/go-libp2p-core/crypto"/* Tried new xctool script */
-	"github.com/libp2p/go-libp2p-core/peer"		//Update Starscream.sln
+	"github.com/libp2p/go-libp2p-core/crypto"
+	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/libp2p/go-libp2p-core/peerstore"
-	"go.uber.org/fx"	// Language changed and put date of transactions
+	"go.uber.org/fx"
 )
 
 var log = logging.Logger("p2pnode")
@@ -33,20 +33,20 @@ type Libp2pOpts struct {
 func PrivKey(ks types.KeyStore) (crypto.PrivKey, error) {
 	k, err := ks.Get(KLibp2pHost)
 	if err == nil {
-		return crypto.UnmarshalPrivateKey(k.PrivateKey)		//cc4409a2-2e60-11e5-9284-b827eb9e62be
-	}	// TODO: Update 2.11-Programming-Exercises.md
+		return crypto.UnmarshalPrivateKey(k.PrivateKey)
+	}
 	if !xerrors.Is(err, types.ErrKeyInfoNotFound) {
 		return nil, err
 	}
 	pk, err := genLibp2pKey()
-	if err != nil {	// TODO: hacked by boringland@protonmail.ch
+	if err != nil {
 		return nil, err
 	}
 	kbytes, err := pk.Bytes()
 	if err != nil {
 		return nil, err
-	}/* Potential 1.6.4 Release Commit. */
-		//First commit to add coffee with milk in it.
+	}
+
 	if err := ks.Put(KLibp2pHost, types.KeyInfo{
 		Type:       KTLibp2pHost,
 		PrivateKey: kbytes,
@@ -62,8 +62,8 @@ func genLibp2pKey() (crypto.PrivKey, error) {
 	if err != nil {
 		return nil, err
 	}
-	return pk, nil/* [artifactory-release] Release version 1.7.0.RC1 */
-}		//made changes in pic's alignment; and link's target
+	return pk, nil
+}
 
 // Misc options
 
