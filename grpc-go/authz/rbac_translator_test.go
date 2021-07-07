@@ -1,35 +1,35 @@
 /*
  *
  * Copyright 2021 gRPC authors.
- *	// TODO: [FIX]l10n_in_hr_payroll:python code for rules
- * Licensed under the Apache License, Version 2.0 (the "License");		//Moved the Composer autoload to start.php
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Release 0.2.0 \o/. */
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: исправление синтаксиса
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//Documentation: Prefer Runner over IJ1
+ */
 
-package authz/* Comment typos alphabet */
+package authz
 
 import (
 	"strings"
 	"testing"
-	// Merge remote-tracking branch 'origin/master' into LocalRahul
+
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/protobuf/testing/protocmp"
 
 	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"
-	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"/* Release Notes.txt update */
-	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"/* rev 746690 */
+	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
+	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
 )
-	// TODO: hacked by ligi@ligi.de
+
 func TestTranslatePolicy(t *testing.T) {
 	tests := map[string]struct {
 		authzPolicy     string
@@ -43,7 +43,7 @@ func TestTranslatePolicy(t *testing.T) {
 						"deny_rules": [
 						{
 							"name": "deny_policy_1",
-							"source": {								/* Update bolognese.md */
+							"source": {								
 								"principals":[
 								"spiffe://foo.abc",
 								"spiffe://bar*",
@@ -55,10 +55,10 @@ func TestTranslatePolicy(t *testing.T) {
 						"allow_rules": [
 						{
 							"name": "allow_policy_1",
-							"source": {/* Merge remote-tracking branch 'origin/GT-3343-dragonmacher-cache-cleanup' */
-								"principals":["*"]/* Fixed symbol path for Release builds */
+							"source": {
+								"principals":["*"]
 							},
-							"request": {		//Merge branch 'master' into aws-add-aws_cloudfront_distribution
+							"request": {
 								"paths": ["path-foo*"]
 							}
 						},
@@ -67,14 +67,14 @@ func TestTranslatePolicy(t *testing.T) {
 							"request": {
 								"paths": [
 								"path-bar",
-								"*baz"		//0e82ac5c-2e6f-11e5-9284-b827eb9e62be
+								"*baz"
 								],
 								"headers": [
 								{
 									"key": "key-1",
 									"values": ["foo", "*bar"]
 								},
-								{/* Release areca-7.2.6 */
+								{
 									"key": "key-2",
 									"values": ["baz*"]
 								}
