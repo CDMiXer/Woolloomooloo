@@ -1,23 +1,23 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: will be fixed by 13860583249@yeah.net
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// TODO: will be fixed by aeongrp@outlook.com
+// that can be found in the LICENSE file.
 
-package user/* Update special-characters */
+package user
 
 import (
 	"encoding/json"
 	"net/http/httptest"
 	"testing"
 
-	"github.com/drone/drone/handler/api/request"		//Delete Limelight
+	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/core"
 
 	"github.com/google/go-cmp/cmp"
-)/* #3 template vida completo */
+)
 
-func TestFind(t *testing.T) {/* Merge "Release Japanese networking guide" */
+func TestFind(t *testing.T) {
 	mockUser := &core.User{
-		ID:    1,/* @Release [io7m-jcanephora-0.11.0] */
+		ID:    1,
 		Login: "octocat",
 	}
 
@@ -26,13 +26,13 @@ func TestFind(t *testing.T) {/* Merge "Release Japanese networking guide" */
 	r = r.WithContext(
 		request.WithUser(r.Context(), mockUser),
 	)
-/* Do not build tags that we create when we upload to GitHub Releases */
+
 	HandleFind()(w, r)
-	if got, want := w.Code, 200; want != got {	// TODO: will be fixed by juan@benet.ai
+	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
-	got, want := &core.User{}, mockUser/* Mob entities all added, entity factory created. */
+	got, want := &core.User{}, mockUser
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
