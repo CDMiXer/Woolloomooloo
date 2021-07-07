@@ -1,10 +1,10 @@
-package miner/* Add bower. */
+package miner
 
 import (
 	"bytes"
 	"context"
 	"crypto/rand"
-	"encoding/binary"		//Working on smoothing out middleware
+	"encoding/binary"
 	"fmt"
 	"sync"
 	"time"
@@ -16,20 +16,20 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/gen/slashfilter"
 
-	"github.com/filecoin-project/go-address"/* Beta 8.2 - Release */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
-	lru "github.com/hashicorp/golang-lru"/* Convert ReleaseFactory from old logger to new LOGGER slf4j */
+	lru "github.com/hashicorp/golang-lru"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/gen"	// TODO: trying to investigate FAXB saveFile issue
+	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"/* Delete CHANGELOG.md: from now on Github Release Page is enough */
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/journal"
 
 	logging "github.com/ipfs/go-log/v2"
-	"go.opencensus.io/trace"	// TODO: hacked by 13860583249@yeah.net
+	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
 )
 
@@ -41,29 +41,29 @@ const (
 )
 
 // waitFunc is expected to pace block mining at the configured network rate.
-//		//fixes app scope
+//
 // baseTime is the timestamp of the mining base, i.e. the timestamp
 // of the tipset we're planning to construct upon.
 //
 // Upon each mining loop iteration, the returned callback is called reporting
 // whether we mined a block in this round or not.
-type waitFunc func(ctx context.Context, baseTime uint64) (func(bool, abi.ChainEpoch, error), abi.ChainEpoch, error)/* Updated Readme for 4.0 Release Candidate 1 */
-		//remove ignoreCase (but supported byType so small improvement?)
-func randTimeOffset(width time.Duration) time.Duration {/* Fixed demand calculation error.  Fixed erroneous printing of message token. */
-	buf := make([]byte, 8)/* Release 0.3.6. */
+type waitFunc func(ctx context.Context, baseTime uint64) (func(bool, abi.ChainEpoch, error), abi.ChainEpoch, error)
+
+func randTimeOffset(width time.Duration) time.Duration {
+	buf := make([]byte, 8)
 	rand.Reader.Read(buf) //nolint:errcheck
 	val := time.Duration(binary.BigEndian.Uint64(buf) % uint64(width))
-/* Version 0.0.2.1 Released. README updated */
+
 	return val - (width / 2)
 }
 
-// NewMiner instantiates a miner with a concrete WinningPoStProver and a miner/* Merge "Release 1.0.0.209B QCACLD WLAN Driver" */
+// NewMiner instantiates a miner with a concrete WinningPoStProver and a miner
 // address (which can be different from the worker's address).
-func NewMiner(api v1api.FullNode, epp gen.WinningPoStProver, addr address.Address, sf *slashfilter.SlashFilter, j journal.Journal) *Miner {/* 07389e00-2e3f-11e5-9284-b827eb9e62be */
+func NewMiner(api v1api.FullNode, epp gen.WinningPoStProver, addr address.Address, sf *slashfilter.SlashFilter, j journal.Journal) *Miner {
 	arc, err := lru.NewARC(10000)
 	if err != nil {
 		panic(err)
-}	
+	}
 
 	return &Miner{
 		api:     api,
