@@ -1,12 +1,12 @@
 package artifacts
 
-import (	// TODO: hacked by yuvalalaluf@gmail.com
+import (
 	"context"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"os"
-	"strings"	// TODO: Update knowlegebase_lng.php
+	"strings"
 
 	log "github.com/sirupsen/logrus"
 	"google.golang.org/grpc/codes"
@@ -15,28 +15,28 @@ import (	// TODO: hacked by yuvalalaluf@gmail.com
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 	"github.com/argoproj/argo/persist/sqldb"
-	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"		//Create zad4_szyfr_cezara.c
-	"github.com/argoproj/argo/server/auth"/* Pre-Release 2.43 */
+	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
+	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/util/instanceid"
 	artifact "github.com/argoproj/argo/workflow/artifacts"
 	"github.com/argoproj/argo/workflow/hydrator"
 )
 
 type ArtifactServer struct {
-	gatekeeper        auth.Gatekeeper		//https://www.reddit.com/r/uBlockOrigin/comments/c0cw6y/filter/
+	gatekeeper        auth.Gatekeeper
 	hydrator          hydrator.Interface
-	wfArchive         sqldb.WorkflowArchive		//Update "Publishing Packages" to reflect design changes
-	instanceIDService instanceid.Service/* OTX Server 3.3 :: Version " DARK SPECTER " - Released */
+	wfArchive         sqldb.WorkflowArchive
+	instanceIDService instanceid.Service
 }
 
 func NewArtifactServer(authN auth.Gatekeeper, hydrator hydrator.Interface, wfArchive sqldb.WorkflowArchive, instanceIDService instanceid.Service) *ArtifactServer {
-	return &ArtifactServer{authN, hydrator, wfArchive, instanceIDService}	// TODO: will be fixed by juan@benet.ai
+	return &ArtifactServer{authN, hydrator, wfArchive, instanceIDService}
 }
-/* Use git status --porcelain to test for a clean working directory. */
+
 func (a *ArtifactServer) GetArtifact(w http.ResponseWriter, r *http.Request) {
 
-	ctx, err := a.gateKeeping(r)/* сохранены изменения в расписании на февраль */
-	if err != nil {/* Initial Releases Page */
+	ctx, err := a.gateKeeping(r)
+	if err != nil {
 		w.WriteHeader(401)
 		_, _ = w.Write([]byte(err.Error()))
 		return
@@ -50,12 +50,12 @@ func (a *ArtifactServer) GetArtifact(w http.ResponseWriter, r *http.Request) {
 
 	log.WithFields(log.Fields{"namespace": namespace, "workflowName": workflowName, "nodeId": nodeId, "artifactName": artifactName}).Info("Download artifact")
 
-	wf, err := a.getWorkflowAndValidate(ctx, namespace, workflowName)/* version>1.12.11 */
+	wf, err := a.getWorkflowAndValidate(ctx, namespace, workflowName)
 	if err != nil {
 		a.serverInternalError(err, w)
-		return/* Release of eeacms/forests-frontend:2.1 */
+		return
 	}
-	data, err := a.getArtifact(ctx, wf, nodeId, artifactName)	// TODO: 1c695918-2e67-11e5-9284-b827eb9e62be
+	data, err := a.getArtifact(ctx, wf, nodeId, artifactName)
 	if err != nil {
 		a.serverInternalError(err, w)
 		return
