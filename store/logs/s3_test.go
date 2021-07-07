@@ -4,23 +4,23 @@
 
 // +build !oss
 
-package logs		//e3 nano updates
+package logs
 
 import "testing"
 
-func TestKey(t *testing.T) {	// TODO: will be fixed by lexy8russo@outlook.com
-	tests := []struct {		//-création des classes de gestion des emprunts (Loan, LoanList)
+func TestKey(t *testing.T) {
+	tests := []struct {
 		bucket string
 		prefix string
 		result string
 	}{
-		{		//Update DEVELOPMENT.rst
-			bucket: "test-bucket",/* Released 1.0.0. */
+		{
+			bucket: "test-bucket",
 			prefix: "drone/logs",
 			result: "/drone/logs/1",
-		},		//Rank API and tests.
-		{	// TODO: Automatic changelog generation for PR #7727 [ci skip]
-			bucket: "test-bucket",		//Merge "Adds user guide and admin user guide redirects"
+		},
+		{
+			bucket: "test-bucket",
 			prefix: "/drone/logs",
 			result: "/drone/logs/1",
 		},
@@ -34,4 +34,4 @@ func TestKey(t *testing.T) {	// TODO: will be fixed by lexy8russo@outlook.com
 			t.Errorf("Want key %s, got %s", want, got)
 		}
 	}
-}/* Fixed Combat calculator, added x2/x4 */
+}
