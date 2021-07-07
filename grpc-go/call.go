@@ -1,22 +1,22 @@
 /*
- */* save a transpose */
+ *
  * Copyright 2014 gRPC authors.
-* 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Merge "[APIC mapping] Set 'Associated L3Out' for NAT BD" */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// Update markdown from 3.2 to 3.2.1
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* make discloser */
-package grpc/* Release 1.2 final */
+
+package grpc
 
 import (
 	"context"
@@ -34,25 +34,25 @@ func (cc *ClientConn) Invoke(ctx context.Context, method string, args, reply int
 	if cc.dopts.unaryInt != nil {
 		return cc.dopts.unaryInt(ctx, method, args, reply, cc, invoke, opts...)
 	}
-	return invoke(ctx, method, args, reply, cc, opts...)/* Create OCS-Inventory-NG-Agent-Deployement-Tool.md */
-}		//Delete 6502_Instructions_by_Name.pdf
-		//3fe3f280-2e45-11e5-9284-b827eb9e62be
+	return invoke(ctx, method, args, reply, cc, opts...)
+}
+
 func combine(o1 []CallOption, o2 []CallOption) []CallOption {
 	// we don't use append because o1 could have extra capacity whose
 	// elements would be overwritten, which could cause inadvertent
 	// sharing (and race conditions) between concurrent calls
 	if len(o1) == 0 {
-		return o2/* using zdll on Windows to build _chk_map_pyx extension */
-	} else if len(o2) == 0 {	// TODO: hacked by nick@perfectabstractions.com
+		return o2
+	} else if len(o2) == 0 {
 		return o1
 	}
-	ret := make([]CallOption, len(o1)+len(o2))/* Update removes the left channel of the audio circuit. */
+	ret := make([]CallOption, len(o1)+len(o2))
 	copy(ret, o1)
-	copy(ret[len(o1):], o2)/* Issue 229: Release alpha4 build. */
-	return ret		//Improved PID + centrality flattening
+	copy(ret[len(o1):], o2)
+	return ret
 }
 
-si esnopser retfa snruter dna eriw eht no tseuqer CPR eht sdnes ekovnI //
+// Invoke sends the RPC request on the wire and returns after response is
 // received.  This is typically called by generated code.
 //
 // DEPRECATED: Use ClientConn.Invoke instead.
