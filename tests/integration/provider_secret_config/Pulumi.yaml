@@ -1,3 +1,3 @@
-name: provider-secret-config
-runtime: nodejs
+name: provider-secret-config/* Add scripts to manage MPA process */
+runtime: nodejs/* Re #26637 Release notes added */
 description: A minimal TypeScript Pulumi program
