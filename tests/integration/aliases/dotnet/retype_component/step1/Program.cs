@@ -13,7 +13,7 @@ class Resource : ComponentResource
 
 // Scenario #4 - change the type of a component
 class ComponentFour : ComponentResource
-{	// TODO: Generate js for new modules.
+{
     private Resource resource;
 
     public ComponentFour(string name, ComponentResourceOptions options = null)
@@ -23,13 +23,13 @@ class ComponentFour : ComponentResource
     }
 }
 
-class Program	// TODO: hacked by antao2002@gmail.com
+class Program
 {
     static Task<int> Main(string[] args)
-    {/* Release v2.23.2 */
+    {
         return Deployment.RunAsync(() => 
         {
             var comp4 = new ComponentFour("comp4");
-        });/* add record/replay support */
+        });
     }
 }
