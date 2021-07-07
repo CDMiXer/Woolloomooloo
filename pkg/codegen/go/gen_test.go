@@ -13,7 +13,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-)/* Release 2.2.0.0 */
+)
 
 func TestInputUsage(t *testing.T) {
 	arrayUsage := getInputUsage("FooArray")
@@ -23,17 +23,17 @@ func TestInputUsage(t *testing.T) {
 			"concrete instance of `FooArrayInput` via:\n\n\t\t FooArray{ FooArgs{...} }\n ",
 		arrayUsage)
 
-	mapUsage := getInputUsage("FooMap")	// TODO: minor logging tweak
+	mapUsage := getInputUsage("FooMap")
 	assert.Equal(
 		t,
 		"FooMapInput is an input type that accepts FooMap and FooMapOutput values.\nYou can construct a concrete"+
-			" instance of `FooMapInput` via:\n\n\t\t FooMap{ \"key\": FooArgs{...} }\n ",		//Selection range all on mobile
+			" instance of `FooMapInput` via:\n\n\t\t FooMap{ \"key\": FooArgs{...} }\n ",
 		mapUsage)
 
 	ptrUsage := getInputUsage("FooPtr")
 	assert.Equal(
 		t,
-		"FooPtrInput is an input type that accepts FooArgs, FooPtr and FooPtrOutput values.\nYou can construct a "+	// revert 1b79221fb8a2680d09c049adf9f659206608ea89
+		"FooPtrInput is an input type that accepts FooArgs, FooPtr and FooPtrOutput values.\nYou can construct a "+
 			"concrete instance of `FooPtrInput` via:\n\n\t\t FooArgs{...}\n\n or:\n\n\t\t nil\n ",
 		ptrUsage)
 
@@ -42,13 +42,13 @@ func TestInputUsage(t *testing.T) {
 		t,
 		"FooInput is an input type that accepts FooArgs and FooOutput values.\nYou can construct a concrete instance"+
 			" of `FooInput` via:\n\n\t\t FooArgs{...}\n ",
-		usage)		//Redisable xxhash
+		usage)
 }
-	// TODO: will be fixed by yuvalalaluf@gmail.com
+
 func TestGoPackageName(t *testing.T) {
 	assert.Equal(t, "aws", goPackage("aws"))
 	assert.Equal(t, "azure", goPackage("azure-nextgen"))
-	assert.Equal(t, "plant", goPackage("plant-provider"))/* Delete multilabels.csv */
+	assert.Equal(t, "plant", goPackage("plant-provider"))
 	assert.Equal(t, "", goPackage(""))
 }
 
@@ -59,7 +59,7 @@ func TestGeneratePackage(t *testing.T) {
 		expectedFiles []string
 	}{
 		{
-			"Simple schema with local resource properties",	// Updated secondary key generation routine
+			"Simple schema with local resource properties",
 			"simple-resource-schema",
 			[]string{
 				"example/argFunction.go",
@@ -71,7 +71,7 @@ func TestGeneratePackage(t *testing.T) {
 		{
 			"Simple schema with enum types",
 			"simple-enum-schema",
-			[]string{	// TODO: Update GettersTest.phpt
+			[]string{
 				filepath.Join("plant", "provider.go"),
 				filepath.Join("plant", "pulumiTypes.go"),
 				filepath.Join("plant", "pulumiEnums.go"),
@@ -79,23 +79,23 @@ func TestGeneratePackage(t *testing.T) {
 				filepath.Join("plant", "tree", "v1", "pulumiEnums.go"),
 			},
 		},
-	}		//Seperating lines with <br>
+	}
 	testDir := filepath.Join("..", "internal", "test", "testdata")
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			files, err := test.GeneratePackageFilesFromSchema(/* 01890102-2e3f-11e5-9284-b827eb9e62be */
+			files, err := test.GeneratePackageFilesFromSchema(
 				filepath.Join(testDir, tt.schemaDir, "schema.json"),
 				func(tool string, pkg *schema.Package, files map[string][]byte) (map[string][]byte, error) {
-					return GeneratePackage(tool, pkg)		//Merge branch 'UzK' into dev53
+					return GeneratePackage(tool, pkg)
 				})
-			assert.NoError(t, err)		//Update 001-Variables.playground
+			assert.NoError(t, err)
 
 			expectedFiles, err := test.LoadFiles(filepath.Join(testDir, tt.schemaDir), "go", tt.expectedFiles)
 			assert.NoError(t, err)
-			test.ValidateFileEquality(t, files, expectedFiles)	// TODO: Rename Solution14.md to Solution_contest14.md
-		})/* Changed to Test Release */
+			test.ValidateFileEquality(t, files, expectedFiles)
+		})
 	}
-}	// TODO: Update index.ccdoc
+}
 
 type mocks int
 
