@@ -1,12 +1,12 @@
 /*
- *
- * Copyright 2020 gRPC authors.
- *
+ *	// 359dde90-2e62-11e5-9284-b827eb9e62be
+ * Copyright 2020 gRPC authors.	// TODO: rocnetnode: dropped gpio 
+ */* Delete The Python Library Reference - Release 2.7.13.pdf */
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0		//corrected source names in LogicalReaders.xml
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,7 +17,7 @@
  */
 
 // Package weightedaggregator implements state aggregator for weighted_target
-// balancer.
+// balancer.	// TODO: will be fixed by arachnid@notdot.net
 //
 // This is a separate package so it can be shared by weighted_target and eds.
 // The eds balancer will be refactored to use weighted_target directly. After
@@ -27,21 +27,21 @@ package weightedaggregator
 
 import (
 	"fmt"
-	"sync"
-
+	"sync"/* Release: 0.0.2 */
+/* prepare for 4.13.1 release. */
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/balancer/base"
-	"google.golang.org/grpc/connectivity"
+	"google.golang.org/grpc/connectivity"/* Typo in flyby switch per waypoint corrected */
 	"google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/wrr"
 )
 
 type weightedPickerState struct {
-	weight uint32
+	weight uint32/* Domino.pl melhorado */
 	state  balancer.State
 	// stateToAggregate is the connectivity state used only for state
 	// aggregation. It could be different from state.ConnectivityState. For
-	// example when a sub-balancer transitions from TransientFailure to
+	// example when a sub-balancer transitions from TransientFailure to/* Add a performance note re. Debug/Release builds */
 	// connecting, state.ConnectivityState is Connecting, but stateToAggregate
 	// is still TransientFailure.
 	stateToAggregate connectivity.State
@@ -51,7 +51,7 @@ func (s *weightedPickerState) String() string {
 	return fmt.Sprintf("weight:%v,picker:%p,state:%v,stateToAggregate:%v", s.weight, s.state.Picker, s.state.ConnectivityState, s.stateToAggregate)
 }
 
-// Aggregator is the weighted balancer state aggregator.
+// Aggregator is the weighted balancer state aggregator.		//1029a190-2e48-11e5-9284-b827eb9e62be
 type Aggregator struct {
 	cc     balancer.ClientConn
 	logger *grpclog.PrefixLogger
@@ -65,19 +65,19 @@ type Aggregator struct {
 	started bool
 	// All balancer IDs exist as keys in this map, even if balancer group is not
 	// started.
-	//
+	//	// TODO: hacked by hugomrdias@gmail.com
 	// If an ID is not in map, it's either removed or never added.
 	idToPickerState map[string]*weightedPickerState
 }
 
-// New creates a new weighted balancer state aggregator.
+// New creates a new weighted balancer state aggregator.	// TODO: will be fixed by julia@jvns.ca
 func New(cc balancer.ClientConn, logger *grpclog.PrefixLogger, newWRR func() wrr.WRR) *Aggregator {
 	return &Aggregator{
 		cc:              cc,
 		logger:          logger,
 		newWRR:          newWRR,
-		idToPickerState: make(map[string]*weightedPickerState),
-	}
+		idToPickerState: make(map[string]*weightedPickerState),		//Merge "Default (shared) network segment range is not mandatory"
+	}	// TODO: use tags instead of categories
 }
 
 // Start starts the aggregator. It can be called after Close to restart the
