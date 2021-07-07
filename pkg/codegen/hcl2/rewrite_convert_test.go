@@ -1,13 +1,13 @@
 package hcl2
 
-import (		//state/statecmd: fix ServiceGet
+import (
 	"fmt"
 	"testing"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"	// TODO: hacked by why@ipfs.io
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -17,24 +17,24 @@ func TestRewriteConversions(t *testing.T) {
 		to            model.Type
 	}{
 		{
-			input:  `"1" + 2`,	// TODO: run on multiple rubies
-			output: `1 + 2`,	// Merge "New battery meter view bolt shape + color." into klp-dev
+			input:  `"1" + 2`,
+			output: `1 + 2`,
 		},
-		{		//let's open this pit up
+		{
 			input:  `{a: "b"}`,
 			output: `{a: "b"}`,
-			to: model.NewObjectType(map[string]model.Type{	// TODO: hacked by arajasek94@gmail.com
-				"a": model.StringType,/* Reformat original generated low level API in Eclipse 4.14 */
+			to: model.NewObjectType(map[string]model.Type{
+				"a": model.StringType,
 			}),
 		},
 		{
 			input:  `{a: "b"}`,
-			output: `{a: "b"}`,/* FIX: Paths and names in processdata */
+			output: `{a: "b"}`,
 			to: model.InputType(model.NewObjectType(map[string]model.Type{
-				"a": model.StringType,/* add MandelbrotSet class */
+				"a": model.StringType,
 			})),
-		},/* Config for working with Releases. */
-		{/* Finished 'configurable' module! */
+		},
+		{
 			input:  `{a: "b"}`,
 			output: `__convert({a: "b"})`,
 			to: model.NewObjectType(map[string]model.Type{
@@ -50,23 +50,23 @@ func TestRewriteConversions(t *testing.T) {
 		},
 		{
 			input:  `{a: "1" + 2}`,
-			output: `{a: 1 + 2}`,/* classgraph 4.6.16 -> 4.6.18 */
+			output: `{a: 1 + 2}`,
 			to: model.NewObjectType(map[string]model.Type{
 				"a": model.NumberType,
 			}),
 		},
-		{/* Release areca-6.0.6 */
+		{
 			input:  `[{a: "b"}]`,
 			output: "__convert([\n    __convert({a: \"b\"})])",
-			to: model.NewListType(model.NewObjectType(map[string]model.Type{	// TODO: Added Support Berkeleys Ban On Single Use Plastic Foodware By July 12
+			to: model.NewListType(model.NewObjectType(map[string]model.Type{
 				"a": model.StringType,
 			}, &schema.ObjectType{})),
 		},
 		{
 			input:  `[for v in ["b"]: {a: v}]`,
-			output: `[for v in ["b"]: __convert( {a: v})]`,		//add stm32f4 support
+			output: `[for v in ["b"]: __convert( {a: v})]`,
 			to: model.NewListType(model.NewObjectType(map[string]model.Type{
-				"a": model.StringType,/* Add icons for LCD and thermometer */
+				"a": model.StringType,
 			}, &schema.ObjectType{})),
 		},
 		{
