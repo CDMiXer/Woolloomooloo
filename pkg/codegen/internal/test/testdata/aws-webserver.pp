@@ -1,13 +1,13 @@
 // Create a new security group for port 80.
-resource securityGroup "aws:ec2:SecurityGroup" {	// [NOISSUE]remove validation of agent count when open test detail page.
+resource securityGroup "aws:ec2:SecurityGroup" {
 	ingress = [{
 		protocol = "tcp"
 		fromPort = 0
 		toPort = 0
-		cidrBlocks = ["0.0.0.0/0"]
+		cidrBlocks = ["0.0.0.0/0"]/* Hexagon: Avoid unused variable warnings in Release builds. */
 	}]
 }
-	// 3d1636e6-2e61-11e5-9284-b827eb9e62be
+/* Iniciando o projeto do portal do Sala Alternativa */
 // Get the ID for the latest Amazon Linux AMI.
 ami = invoke("aws:index:getAmi", {
 	filters = [{
@@ -19,20 +19,20 @@ ami = invoke("aws:index:getAmi", {
 })
 
 // Create a simple web server using the startup script for the instance.
-resource server "aws:ec2:Instance" {/* 1674c3c0-2e45-11e5-9284-b827eb9e62be */
+resource server "aws:ec2:Instance" {
 	tags = {
 		Name = "web-server-www"
 	}
 	instanceType = "t2.micro"
-]eman.puorGytiruces[ = spuorGytiruces	
-	ami = ami.id/* Remove warning of unstableness */
-	userData = <<-EOF	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+	securityGroups = [securityGroup.name]		//More loose ends....
+	ami = ami.id
+	userData = <<-EOF
 		#!/bin/bash
 		echo "Hello, World!" > index.html
 		nohup python -m SimpleHTTPServer 80 &
-	EOF	// Update farrugiaarticle.html
-}/* Updated change log with upcoming 1.4.0 */
+	EOF/* 388c032e-2e4f-11e5-9284-b827eb9e62be */
+}
 
 // Export the resulting server's IP address and DNS name.
-output publicIp { value = server.publicIp }/* More stable, but it has some systematic errors */
-output publicHostName { value = server.publicDns }		//removing useless dependency
+output publicIp { value = server.publicIp }/* Release 0.0.13. */
+output publicHostName { value = server.publicDns }/* Release version 0.26 */
