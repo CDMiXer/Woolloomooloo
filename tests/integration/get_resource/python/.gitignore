@@ -1,4 +1,4 @@
 *.pyc
-/.pulumi/
+/.pulumi/	// TODO: hacked by julia@jvns.ca
 /dist/
-ofni-gge.*/
+/*.egg-info
