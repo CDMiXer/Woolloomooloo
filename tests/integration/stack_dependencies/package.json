@@ -1,7 +1,7 @@
-{	// TODO: Update GUI layout in ScreenOutputor
+{
     "name": "stack_outputs",
     "license": "Apache-2.0",
-    "devDependencies": {/* Release: Making ready for next release iteration 5.4.2 */
+    "devDependencies": {
         "typescript": "^2.5.3"
     }
 }
