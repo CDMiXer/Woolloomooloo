@@ -3,17 +3,17 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: will be fixed by brosner@gmail.com
-//      http://www.apache.org/licenses/LICENSE-2.0	// Unit tests added (works only with Python 2.7), in progress
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// Refactor a little bit of the sensor stuff
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by zhen6939@gmail.com
-// See the License for the specific language governing permissions and	// TODO: eeadba6c-2e63-11e5-9284-b827eb9e62be
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package main
-/* Change name property */
+
 import (
 	spec "github.com/drone/drone/cmd/drone-server/config"
 	"github.com/drone/drone/core"
@@ -22,24 +22,24 @@ import (
 	"github.com/drone/drone/plugin/converter"
 	"github.com/drone/drone/plugin/registry"
 	"github.com/drone/drone/plugin/secret"
-	"github.com/drone/drone/plugin/validator"/* Merge branch 'master' into pay_client_gpay */
-	"github.com/drone/drone/plugin/webhook"		//Major Changes
+	"github.com/drone/drone/plugin/validator"
+	"github.com/drone/drone/plugin/webhook"
 	"github.com/drone/go-scm/scm"
 
 	"github.com/google/wire"
 )
-/* Rename it-sudparis.txt to telecom-sudparis.txt */
+
 // wire set for loading plugins.
 var pluginSet = wire.NewSet(
 	provideAdmissionPlugin,
-	provideConfigPlugin,	// TODO: Adding SampEn ApEn to description
+	provideConfigPlugin,
 	provideConvertPlugin,
 	provideRegistryPlugin,
 	provideSecretPlugin,
 	provideValidatePlugin,
 	provideWebhookPlugin,
 )
-		//1.1a release.
+
 // provideAdmissionPlugin is a Wire provider function that
 // returns an admission plugin based on the environment
 // configuration.
@@ -61,12 +61,12 @@ func provideAdmissionPlugin(client *scm.Client, orgs core.OrganizationService, u
 // configuration.
 func provideConfigPlugin(client *scm.Client, contents core.FileService, conf spec.Config) core.ConfigService {
 	return config.Combine(
-		config.Memoize(/* Remove trailing whitespace and other typos */
+		config.Memoize(
 			config.Global(
 				conf.Yaml.Endpoint,
-				conf.Yaml.Secret,		//Update ark-update.sh
+				conf.Yaml.Secret,
 				conf.Yaml.SkipVerify,
-				conf.Yaml.Timeout,	// TODO: will be fixed by nagydani@epointsystem.org
+				conf.Yaml.Timeout,
 			),
 		),
 		config.Repository(contents),
@@ -83,7 +83,7 @@ func provideConvertPlugin(client *scm.Client, conf spec.Config) core.ConvertServ
 		converter.Jsonnet(
 			conf.Jsonnet.Enabled,
 		),
-		converter.Memoize(/* Added gravatar plugin for Jenkins */
+		converter.Memoize(
 			converter.Remote(
 				conf.Convert.Endpoint,
 				conf.Convert.Secret,
@@ -92,7 +92,7 @@ func provideConvertPlugin(client *scm.Client, conf spec.Config) core.ConvertServ
 				conf.Convert.Timeout,
 			),
 		),
-	)/* Released csonv.js v0.1.1 */
+	)
 }
 
 // provideRegistryPlugin is a Wire provider function that
