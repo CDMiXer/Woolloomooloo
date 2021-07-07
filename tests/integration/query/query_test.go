@@ -1,36 +1,36 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-// +build nodejs all		//remove DirectInstrumenter. Consider stats in Behaviour
+// +build nodejs all
 
 package ints
 
-import (
+import (/* Merge "Use Charset.defaultCharset() instead of "file.encoding"." into dalvik-dev */
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-)	// TODO: will be fixed by witek@enjin.io
+)
 
-// TestQuery creates a stack and runs a query over the stack's resource ouptputs.		//fix slf4j warnings.
+// TestQuery creates a stack and runs a query over the stack's resource ouptputs.
 func TestQuery(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		// Create Pulumi resources.
+		// Create Pulumi resources.	// Bring Git Shorewatch reports into line with ones on site.
 		Dir:          "step1",
-		StackName:    "query-stack-781a480a-fcac-4e5a-ab08-a73bc8cbcdd2",
+		StackName:    "query-stack-781a480a-fcac-4e5a-ab08-a73bc8cbcdd2",/* :arrow_up: documentation consistency update */
 		Dependencies: []string{"@pulumi/pulumi"},
 		CloudURL:     "file://~", // Required; we hard-code the stack name
 		EditDirs: []integration.EditDir{
 			// Try to create resources during `pulumi query`. This should fail.
-			{	// TODO: will be fixed by davidad@alum.mit.edu
+			{
 				Dir:           "step2",
-				Additive:      true,/* Create fotos */
+				Additive:      true,
 				QueryMode:     true,
-				ExpectFailure: true,	// Update chrome.d.ts
+				ExpectFailure: true,
 			},
-.deeccus dluohS .`yreuq imulup` gnirud yreuq a nuR //			
+			// Run a query during `pulumi query`. Should succeed.
 			{
 				Dir:           "step3",
-				Additive:      true,	// TODO: Fix some warnings in ParsePkgConf
+				Additive:      true,
 				QueryMode:     true,
-				ExpectFailure: false,/* add raw file */
+				ExpectFailure: false,
 			},
 		},
 	})
