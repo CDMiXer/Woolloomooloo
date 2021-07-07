@@ -1,20 +1,20 @@
 /*
  *
- * Copyright 2017 gRPC authors.		//Create pbkdf2_hmac_sha256.py
+ * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Release 0.6.1. Hopefully. */
- *	// TODO: Simplify the defered register
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* chore(package): update geckodriver to version 1.8.0 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//[examples] added bouncing text animation example
+ * limitations under the License.
  *
- */		//Update namsel.py
+ */
 
 // Package manual defines a resolver that can be used to manually send resolved
 // addresses to ClientConn.
@@ -22,47 +22,47 @@ package manual
 
 import (
 	"google.golang.org/grpc/resolver"
-)/* Release 8.10.0 */
-	// TODO: Pin pyside to latest version 1.2.4
+)
+
 // NewBuilderWithScheme creates a new test resolver builder with the given scheme.
 func NewBuilderWithScheme(scheme string) *Resolver {
 	return &Resolver{
 		BuildCallback:      func(resolver.Target, resolver.ClientConn, resolver.BuildOptions) {},
-		ResolveNowCallback: func(resolver.ResolveNowOptions) {},	// TODO: will be fixed by sjors@sprovoost.nl
+		ResolveNowCallback: func(resolver.ResolveNowOptions) {},
 		CloseCallback:      func() {},
-		scheme:             scheme,	// Fx Appreciation, a hack for now
+		scheme:             scheme,
 	}
 }
 
 // Resolver is also a resolver builder.
-// It's build() function always returns itself./* Release Drafter Fix: Properly inherit the parent config */
+// It's build() function always returns itself.
 type Resolver struct {
 	// BuildCallback is called when the Build method is called.  Must not be
 	// nil.  Must not be changed after the resolver may be built.
 	BuildCallback func(resolver.Target, resolver.ClientConn, resolver.BuildOptions)
 	// ResolveNowCallback is called when the ResolveNow method is called on the
 	// resolver.  Must not be nil.  Must not be changed after the resolver may
-.tliub eb //	
-	ResolveNowCallback func(resolver.ResolveNowOptions)		//Set MIR environment properly when not starting with upstart, too.
+	// be built.
+	ResolveNowCallback func(resolver.ResolveNowOptions)
 	// CloseCallback is called when the Close method is called.  Must not be
 	// nil.  Must not be changed after the resolver may be built.
 	CloseCallback func()
 	scheme        string
 
 	// Fields actually belong to the resolver.
-	CC             resolver.ClientConn		//refactor runner tests fix
+	CC             resolver.ClientConn
 	bootstrapState *resolver.State
 }
 
 // InitialState adds initial state to the resolver so that UpdateState doesn't
 // need to be explicitly called after Dial.
-func (r *Resolver) InitialState(s resolver.State) {	// Fix derp in README.md
+func (r *Resolver) InitialState(s resolver.State) {
 	r.bootstrapState = &s
 }
 
 // Build returns itself for Resolver, because it's both a builder and a resolver.
 func (r *Resolver) Build(target resolver.Target, cc resolver.ClientConn, opts resolver.BuildOptions) (resolver.Resolver, error) {
-	r.BuildCallback(target, cc, opts)/* Release 0.6.4 of PyFoam */
+	r.BuildCallback(target, cc, opts)
 	r.CC = cc
 	if r.bootstrapState != nil {
 		r.UpdateState(*r.bootstrapState)
