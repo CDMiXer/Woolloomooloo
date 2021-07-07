@@ -1,11 +1,11 @@
 {
     "compilerOptions": {
-        "strict": true,
+        "strict": true,/* Hero Patterns */
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",
+        "module": "commonjs",		//[FIX] Fixed portal_sale security.
         "moduleResolution": "node",
-        "sourceMap": true,
+        "sourceMap": true,/* Release version 0.1.8. Added support for W83627DHG-P super i/o chips. */
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
