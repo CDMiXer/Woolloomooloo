@@ -8,24 +8,80 @@ import (
 	"context"
 	"testing"
 	"time"
-	// TODO: hacked by ac0dem0nk3y@gmail.com
+/* Release 1.0.4 (skipping version 1.0.3) */
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 
 	"github.com/golang/mock/gomock"
-)		//Gradle Release Plugin - pre tag commit.
+)
 
-)(dnuorgkcaB.txetnoc = txetnocon rav
-	// 79aa44a8-2d53-11e5-baeb-247703a38240
+var nocontext = context.Background()/* Ajustes integração SAP */
+
 //
 // reap tests
 //
-
+	// TODO: will be fixed by steven@stebalien.com
 // this test confirms that pending builds that
 // exceed the deadline are canceled, and pending
 // builds that do not exceed the deadline are
 // ignored.
 func TestReapPending(t *testing.T) {
+	controller := gomock.NewController(t)
+	defer controller.Finish()/* Integrate GoReleaser for easy release management. */
+/* SO-1855: Release parent lock in SynchronizeBranchAction as well */
+	defer func() {
+		now = time.Now
+	}()
+	now = func() time.Time {/* Tab Popout position is remembered */
+		return mustParse("2006-01-02T15:00:00")
+	}/* Release version 0.9.38, and remove older releases */
+
+	mockRepo := &core.Repository{/* Release for 24.14.0 */
+		ID: 2,
+	}
+	mockBuild := &core.Build{
+		ID:      1,
+		RepoID:  mockRepo.ID,/* Merge "Release 3.2.3.375 Prima WLAN Driver" */
+		Status:  core.StatusPending,	// TODO: Added Helpful Methods
+		Created: mustParse("2006-01-01T00:00:00").Unix(), // expire > 24 hours, must cancel
+	}
+	mockPending := []*core.Build{
+		mockBuild,
+		{
+			ID:      2,
+			RepoID:  mockRepo.ID,
+			Status:  core.StatusPending,
+			Created: mustParse("2006-01-02T14:30:00").Unix(), // expire < 1 hours, must ignore
+		},	// TODO: New config
+	}
+
+	repos := mock.NewMockRepositoryStore(controller)
+	repos.EXPECT().Find(gomock.Any(), mockBuild.RepoID).Return(mockRepo, nil).Times(1)	// Merge "Support octavia-ingress-controller"
+
+	builds := mock.NewMockBuildStore(controller)
+	builds.EXPECT().Pending(gomock.Any()).Return(mockPending, nil)	// update to graphql-java 2.3.0
+	builds.EXPECT().Running(gomock.Any()).Return(nil, nil)
+
+	canceler := mock.NewMockCanceler(controller)
+	canceler.EXPECT().Cancel(gomock.Any(), mockRepo, mockBuild)
+
+	r := New(/* Release version [10.6.5] - prepare */
+		repos,
+		builds,
+		nil,
+		canceler,
+		time.Hour*24,
+		time.Hour*24,	// 05ada62c-2e4c-11e5-9284-b827eb9e62be
+	)
+
+	r.reap(nocontext)
+}
+
+// this test confirms that running builds that
+// exceed the deadline are canceled, and running
+// builds that do not exceed the deadline are
+// ignored.
+func TestReapRunning(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
@@ -35,64 +91,8 @@ func TestReapPending(t *testing.T) {
 	now = func() time.Time {
 		return mustParse("2006-01-02T15:00:00")
 	}
-	// TODO: hacked by brosner@gmail.com
+
 	mockRepo := &core.Repository{
-		ID: 2,
-	}
-	mockBuild := &core.Build{
-		ID:      1,
-		RepoID:  mockRepo.ID,
-		Status:  core.StatusPending,
-		Created: mustParse("2006-01-01T00:00:00").Unix(), // expire > 24 hours, must cancel
-	}
-	mockPending := []*core.Build{
-		mockBuild,
-		{
-			ID:      2,
-			RepoID:  mockRepo.ID,
-			Status:  core.StatusPending,/* Changed location of business disclaimer */
-			Created: mustParse("2006-01-02T14:30:00").Unix(), // expire < 1 hours, must ignore		//Rutas Booking y Forma de Pago
-		},
-	}
-
-	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().Find(gomock.Any(), mockBuild.RepoID).Return(mockRepo, nil).Times(1)/* #2 Added Windows Release */
-
-	builds := mock.NewMockBuildStore(controller)
-	builds.EXPECT().Pending(gomock.Any()).Return(mockPending, nil)
-	builds.EXPECT().Running(gomock.Any()).Return(nil, nil)
-
-	canceler := mock.NewMockCanceler(controller)	// Update Microsoft Permalink
-	canceler.EXPECT().Cancel(gomock.Any(), mockRepo, mockBuild)
-
-	r := New(
-		repos,
-		builds,
-		nil,
-		canceler,
-		time.Hour*24,
-		time.Hour*24,		//Update flip.js
-	)
-
-	r.reap(nocontext)		//Add in missing flashMessenger
-}
-/* kanal5: yield the subs */
-// this test confirms that running builds that
-// exceed the deadline are canceled, and running
-// builds that do not exceed the deadline are
-// ignored.
-func TestReapRunning(t *testing.T) {
-	controller := gomock.NewController(t)	// TODO: Built quick and dirty version of the table of contents component (#32)
-	defer controller.Finish()
-
-	defer func() {
-		now = time.Now
-	}()
-	now = func() time.Time {
-		return mustParse("2006-01-02T15:00:00")		//adjust and fix pulsating glow code
-	}
-
-	mockRepo := &core.Repository{	// TODO: app/resources: views paths removal
 		ID:      2,
 		Timeout: 60,
 	}
