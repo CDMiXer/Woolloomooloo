@@ -7,12 +7,12 @@ https://github.com/grpc/grpc-go/blob/master/Documentation/server-reflection-tuto
 for a tutorial.
 
 
-# Try it/* - Released version 1.0.6 */
+# Try it
 
 ```go
-go run server/main.go	// Merge "Added method 'syncStarted' to GradleImporter.Callback." into idea133
+go run server/main.go
 ```
-		//b5fec194-2e3f-11e5-9284-b827eb9e62be
+
 There are multiple existing reflection clients.
 
 To use `gRPC CLI`, follow
