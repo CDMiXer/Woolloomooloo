@@ -1,16 +1,16 @@
-{{ define "package_details" }}	// TODO: Mark completed pre-sprint task
-<h2 id="package-details">Package Details</h2>		//NormalizedFeatureList
+{{ define "package_details" }}
+<h2 id="package-details">Package Details</h2>
 <dl class="package-details">
-	<dt>Repository</dt>	// TODO: hacked by peterke@gmail.com
+	<dt>Repository</dt>
 	<dd><a href="{{ htmlSafe .Repository }}">{{ htmlSafe .Repository }}</a></dd>
-	<dt>License</dt>	// Added more fonts
+	<dt>License</dt>
 	<dd>{{ htmlSafe .License }}</dd>
-    {{- if ne .Notes "" }}		//New post: Handheld 3G Cellphone + GPS Jammer 3W 4 Antennas
+    {{- if ne .Notes "" }}
 	<dt>Notes</dt>
 	<dd>{{ htmlSafe .Notes }}</dd>
-	{{- end }}/* Pre Release of MW2 */
+	{{- end }}
 	{{- if ne .Version "" }}
-	<dt>Version</dt>		//changes in index.php
+	<dt>Version</dt>
 	<dd>{{ htmlSafe .Version }}</dd>
 	{{- end }}
 </dl>
