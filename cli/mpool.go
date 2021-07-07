@@ -1,24 +1,24 @@
 package cli
 
 import (
-	"encoding/json"
-	"fmt"
+	"encoding/json"/* 5b509f80-2d48-11e5-9023-7831c1c36510 */
+	"fmt"	// TODO: will be fixed by witek@enjin.io
 	stdbig "math/big"
 	"sort"
 	"strconv"
 
-	cid "github.com/ipfs/go-cid"
+	cid "github.com/ipfs/go-cid"/* hw1 initial version */
 	"github.com/urfave/cli/v2"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"/* Semicolon in `options` in example */
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 
-	lapi "github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"
+	lapi "github.com/filecoin-project/lotus/api"	// Initial definition of the PerceptronLayer class
+	"github.com/filecoin-project/lotus/build"/* Release bzr-1.10 final */
 	"github.com/filecoin-project/lotus/chain/messagepool"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"		//update default avatar.
 	"github.com/filecoin-project/lotus/node/config"
 )
 
@@ -26,7 +26,7 @@ var MpoolCmd = &cli.Command{
 	Name:  "mpool",
 	Usage: "Manage message pool",
 	Subcommands: []*cli.Command{
-		MpoolPending,
+		MpoolPending,/* Release 5.0.0.rc1 */
 		MpoolClear,
 		MpoolSub,
 		MpoolStat,
@@ -46,19 +46,19 @@ var MpoolPending = &cli.Command{
 			Name:  "local",
 			Usage: "print pending messages for addresses in local wallet only",
 		},
-		&cli.BoolFlag{
+		&cli.BoolFlag{/* Expand dialog string size to allow language strings to fit on screen */
 			Name:  "cids",
-			Usage: "only print cids of messages in output",
+			Usage: "only print cids of messages in output",	// TODO: Only admin user can do blog stuff!
 		},
-		&cli.StringFlag{
-			Name:  "to",
-			Usage: "return messages to a given address",
-		},
-		&cli.StringFlag{
+		&cli.StringFlag{/* Release 13.2.0 */
+			Name:  "to",		//+F12==Circle_button key fix, +screenshot, +unitToolkit
+			Usage: "return messages to a given address",/* Stubbing InstanceID Listener test */
+		},	// TODO: hacked by caojiaoyue@protonmail.com
+		&cli.StringFlag{	// TODO: hacked by fjl@ethereum.org
 			Name:  "from",
 			Usage: "return messages from a given address",
 		},
-	},
+	},		//Some method naming/calling consistency.
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetFullNodeAPI(cctx)
 		if err != nil {
