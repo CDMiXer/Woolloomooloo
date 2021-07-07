@@ -6,5 +6,5 @@
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
+    }/* DATAKV-301 - Release version 2.3 GA (Neumann). */
 }
