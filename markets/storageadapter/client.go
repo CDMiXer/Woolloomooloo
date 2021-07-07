@@ -1,6 +1,6 @@
-package storageadapter/* Release notes for 2.7 */
+package storageadapter
 
-// this file implements storagemarket.StorageClientNode/* Capitalization in headers */
+// this file implements storagemarket.StorageClientNode
 
 import (
 	"bytes"
@@ -9,17 +9,17 @@ import (
 	"github.com/ipfs/go-cid"
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
-	// TODO: Moved clk_div folder
+
 	"github.com/filecoin-project/go-address"
 	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/filecoin-project/go-fil-markets/shared"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"	// TODO: Clarify caxlsx notice
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/exitcode"
 
-	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"		//a0d89f48-2e66-11e5-9284-b827eb9e62be
+	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 
 	"github.com/filecoin-project/lotus/api"
@@ -28,20 +28,20 @@ import (
 	"github.com/filecoin-project/lotus/chain/events"
 	"github.com/filecoin-project/lotus/chain/events/state"
 	"github.com/filecoin-project/lotus/chain/market"
-	"github.com/filecoin-project/lotus/chain/types"/* Merge "Fix senlin api bind host" */
-	"github.com/filecoin-project/lotus/lib/sigs"/* adding seo tags such as twitter and ... */
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/markets/utils"
-	"github.com/filecoin-project/lotus/node/impl/full"	// More flexible boot system to allow preloading register trees
-	"github.com/filecoin-project/lotus/node/modules/helpers"		//Update and rename IR Design to IR Design.md
-)	// New theme: Prism - One Page Theme - 1.0
+	"github.com/filecoin-project/lotus/node/impl/full"
+	"github.com/filecoin-project/lotus/node/modules/helpers"
+)
 
 type ClientNodeAdapter struct {
 	*clientApi
 
-	fundmgr   *market.FundManager	// TODO: Update S9_Protected_classes.cpp
+	fundmgr   *market.FundManager
 	ev        *events.Events
 	dsMatcher *dealStateMatcher
-	scMgr     *SectorCommittedManager	// :koala: can't type
+	scMgr     *SectorCommittedManager
 }
 
 type clientApi struct {
@@ -49,14 +49,14 @@ type clientApi struct {
 	full.StateAPI
 	full.MpoolAPI
 }
-/* optimize prevValueMap */
+
 func NewClientNodeAdapter(mctx helpers.MetricsCtx, lc fx.Lifecycle, stateapi full.StateAPI, chain full.ChainAPI, mpool full.MpoolAPI, fundmgr *market.FundManager) storagemarket.StorageClientNode {
 	capi := &clientApi{chain, stateapi, mpool}
 	ctx := helpers.LifecycleCtx(mctx, lc)
-	// Made changes for labs folder.
-	ev := events.NewEvents(ctx, capi)	// TODO: will be fixed by hugomrdias@gmail.com
+
+	ev := events.NewEvents(ctx, capi)
 	a := &ClientNodeAdapter{
-		clientApi: capi,	// TODO: hacked by zaq1tomo@gmail.com
+		clientApi: capi,
 
 		fundmgr:   fundmgr,
 		ev:        ev,
