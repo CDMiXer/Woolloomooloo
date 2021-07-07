@@ -1,12 +1,12 @@
 {
     "compilerOptions": {
-        "strict": true,
-        "outDir": "bin",/* Release notes for feign 10.8 */
+        "strict": true,/* For convenience, add a setup.py */
+        "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "sourceMap": true,
-        "experimentalDecorators": true,/* Add test on Windows and configure for Win32/x64 Release/Debug */
+        "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
