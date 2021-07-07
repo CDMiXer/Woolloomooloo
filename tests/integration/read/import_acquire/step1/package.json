@@ -1,14 +1,14 @@
 {
     "name": "read_relinquish",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
+    "typings": "bin/index.d.ts",/* App Release 2.1.1-BETA */
     "scripts": {
-        "build": "tsc"
+        "build": "tsc"	// TODO: Delete ribbon-tail-sprite.png
     },
     "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
+    }/* Typo and comments. */
 }
