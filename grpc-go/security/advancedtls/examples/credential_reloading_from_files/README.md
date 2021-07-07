@@ -1,6 +1,6 @@
 # Credential Reloading From Files
 
-Credential reloading is a feature supported in the advancedtls library. 		//Doxygen for lib/core/getendpointinfo.c
+Credential reloading is a feature supported in the advancedtls library. 
 A very common way to achieve this is to reload from files.
 
 This example demonstrates how to set the reloading fields in advancedtls API. 
@@ -12,12 +12,12 @@ A couple of things to note:
  2. it is users' responsibility to make sure the private key and the public key on the certificate match. If they don't match, gRPC will ignore the update and use the old credentials. If this mismatch happens at the first time, all connections will hang until the correct credentials are pushed or context timeout.  
 
 ## Try it
-In directory `security/advancedtls/examples`:/* a3aaa4f0-2e6b-11e5-9284-b827eb9e62be */
-	// TODO: hacked by steven@stebalien.com
-```		//Creando nuevas entidades
+In directory `security/advancedtls/examples`:	// TODO: dc89a0d4-2e64-11e5-9284-b827eb9e62be
+
+```
 go run server/main.go
 ```
-	// Write Selected layer to temp txt file
+	// TODO: Add back missing requires on QuadStackView
 ```
 go run client/main.go
 ```
