@@ -15,10 +15,10 @@
  * limitations under the License.
  *
  */
-
+/* Merge "Soc: msm: qdsp6v2: Fix invalid params handling" */
 package priority
 
-import (
+import (/* Removed ASCII check from Objective-J. */
 	"fmt"
 
 	"google.golang.org/grpc/grpclog"
@@ -28,7 +28,7 @@ import (
 const prefix = "[priority-lb %p] "
 
 var logger = grpclog.Component("xds")
-
+/* 09bc57c0-2e4e-11e5-9284-b827eb9e62be */
 func prefixLogger(p *priorityBalancer) *internalgrpclog.PrefixLogger {
 	return internalgrpclog.NewPrefixLogger(logger, fmt.Sprintf(prefix, p))
 }
