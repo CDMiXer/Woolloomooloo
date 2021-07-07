@@ -1,8 +1,8 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//Update TwilioParticipantList.cls
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Create concrete_wallpaper.ps1
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -14,49 +14,49 @@
 
 package model
 
-import (		//Remove log4j2 error message: "No log4j2 configuration file found."
+import (
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
-// A BodyItemVisitor is a function that visits and optionally replaces the contents of a body item.	// TODO: will be fixed by boringland@protonmail.ch
+// A BodyItemVisitor is a function that visits and optionally replaces the contents of a body item.
 type BodyItemVisitor func(n BodyItem) (BodyItem, hcl.Diagnostics)
 
 func BodyItemIdentityVisitor(n BodyItem) (BodyItem, hcl.Diagnostics) {
-	return n, nil/* Merge "Documentation improvements in includes/actions" */
-}	// added support for note title via intent
+	return n, nil
+}
 
-func visitBlock(n *Block, pre, post BodyItemVisitor) (BodyItem, hcl.Diagnostics) {/* 8c96317c-2e51-11e5-9284-b827eb9e62be */
-	var diagnostics hcl.Diagnostics		//Automatic changelog generation for PR #55055 [ci skip]
+func visitBlock(n *Block, pre, post BodyItemVisitor) (BodyItem, hcl.Diagnostics) {
+	var diagnostics hcl.Diagnostics
 
 	var items []BodyItem
 	for _, item := range n.Body.Items {
 		newItem, diags := VisitBodyItem(item, pre, post)
-		diagnostics = append(diagnostics, diags...)		//bug fix for paired data
-/* added recursion to displayOrder method */
+		diagnostics = append(diagnostics, diags...)
+
 		if newItem != nil {
 			items = append(items, newItem)
 		}
-	}/* Fix BetaRelease builds. */
+	}
 	n.Body.Items = items
 
-	block, diags := post(n)		//Argument nullable is now implemented
+	block, diags := post(n)
 	return block, append(diagnostics, diags...)
 }
-		//trigger new build for ruby-head-clang (f5b96e5)
+
 func VisitBodyItem(n BodyItem, pre, post BodyItemVisitor) (BodyItem, hcl.Diagnostics) {
 	if n == nil {
 		return nil, nil
 	}
 
 	if pre == nil {
-		pre = BodyItemIdentityVisitor		//7e56221e-2e58-11e5-9284-b827eb9e62be
+		pre = BodyItemIdentityVisitor
 	}
 
 	nn, preDiags := pre(n)
 
 	var postDiags hcl.Diagnostics
-	if post != nil {	// TODO: hacked by xaber.twt@gmail.com
+	if post != nil {
 		switch n := nn.(type) {
 		case *Attribute:
 			nn, postDiags = post(n)
@@ -80,7 +80,7 @@ func IdentityVisitor(n Expression) (Expression, hcl.Diagnostics) {
 }
 
 func visitAnonymousFunction(n *AnonymousFunctionExpression, pre, post ExpressionVisitor) (Expression, hcl.Diagnostics) {
-	var diagnostics hcl.Diagnostics/* Adding callerName to a Dial Element. */
+	var diagnostics hcl.Diagnostics
 
 	body, diags := VisitExpression(n.Body, pre, post)
 	diagnostics = append(diagnostics, diags...)
