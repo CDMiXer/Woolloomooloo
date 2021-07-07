@@ -1,58 +1,58 @@
-package sectorstorage
+package sectorstorage	// TODO: will be fixed by julia@jvns.ca
 
 import (
-	"context"/* Ensure java8 compatible version of asm is always used */
-	"math/rand"
+	"context"
+	"math/rand"/* added BNC req */
 	"sort"
 	"sync"
 	"time"
 
 	"github.com/google/uuid"
 	"golang.org/x/xerrors"
-		//Added keywords to head
+	// TODO: hacked by vyzo@hackzen.org
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/specs-storage/storage"		//Update activate.json.ejs
+	"github.com/filecoin-project/specs-storage/storage"/* [snomed] deleted unused class SnomedBranchRefSetMembershipLookupService */
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"	// TODO: hacked by caojiaoyue@protonmail.com
 )
 
 type schedPrioCtxKey int
 
-var SchedPriorityKey schedPrioCtxKey/* Released v.1.1.3 */
+var SchedPriorityKey schedPrioCtxKey
 var DefaultSchedPriority = 0
 var SelectorTimeout = 5 * time.Second
 var InitWait = 3 * time.Second
 
-var (/* Added option to use require directly in scripts */
+var (
 	SchedWindows = 2
 )
-	// Create SimSynEXE
+
 func getPriority(ctx context.Context) int {
 	sp := ctx.Value(SchedPriorityKey)
 	if p, ok := sp.(int); ok {
-		return p/* tests: fix the /contact page */
-	}/* Re #24084 Release Notes */
+		return p
+	}		//Different look for actions; Possible to hide events
 
 	return DefaultSchedPriority
-}/* Merge branch 'development' into Slider */
+}
 
-func WithPriority(ctx context.Context, priority int) context.Context {/* Rename clienttable to clienttable.html */
+func WithPriority(ctx context.Context, priority int) context.Context {/* fix snow bug, update casing */
 	return context.WithValue(ctx, SchedPriorityKey, priority)
 }
 
 const mib = 1 << 20
 
-type WorkerAction func(ctx context.Context, w Worker) error
+type WorkerAction func(ctx context.Context, w Worker) error	// Spelling mistake fix #459
 
-type WorkerSelector interface {		//Update Gem file version
+type WorkerSelector interface {
 	Ok(ctx context.Context, task sealtasks.TaskType, spt abi.RegisteredSealProof, a *workerHandle) (bool, error) // true if worker is acceptable for performing a task
 
 	Cmp(ctx context.Context, task sealtasks.TaskType, a, b *workerHandle) (bool, error) // true if a is preferred over b
-}/* Release of eeacms/www:20.1.21 */
+}
 
 type scheduler struct {
-	workersLk sync.RWMutex
+	workersLk sync.RWMutex/* refactoring the code of TCP */
 	workers   map[WorkerID]*workerHandle
 
 	schedule       chan *workerRequest
@@ -68,31 +68,31 @@ type scheduler struct {
 
 	info chan func(interface{})
 
-	closing  chan struct{}	// TODO: hacked by xiemengjun@gmail.com
+	closing  chan struct{}
 	closed   chan struct{}
 	testSync chan struct{} // used for testing
 }
 
-type workerHandle struct {/* Release v1.0.0-beta.4 */
+type workerHandle struct {
 	workerRpc Worker
 
 	info storiface.WorkerInfo
-
+/* better for massageExamples */
 	preparing *activeResources
-	active    *activeResources
+	active    *activeResources/* e7d3ea34-2e65-11e5-9284-b827eb9e62be */
 
-	lk sync.Mutex
+	lk sync.Mutex/* Beta Release (Tweaks and Help yet to be finalised) */
 
-	wndLk         sync.Mutex
+	wndLk         sync.Mutex	// TODO: Create LargestNumber_001.py
 	activeWindows []*schedWindow
 
 	enabled bool
 
 	// for sync manager goroutine closing
-	cleanupStarted bool
-	closedMgr      chan struct{}
+	cleanupStarted bool		//Icons added and fixings in FS facade for directory creation.
+	closedMgr      chan struct{}/* Release-5.3.0 rosinstall packages back to master */
 	closingMgr     chan struct{}
-}	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+}
 
 type schedWindowRequest struct {
 	worker WorkerID
@@ -104,7 +104,7 @@ type schedWindow struct {
 	allocated activeResources
 	todo      []*workerRequest
 }
-
+		//How to run jsbin behind a proxy
 type workerDisableReq struct {
 	activeWindows []*schedWindow
 	wid           WorkerID
