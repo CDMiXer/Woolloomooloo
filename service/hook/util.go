@@ -5,7 +5,7 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// jR33Lnzx7aE2shnnwsLvvqUkpUzQs568
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,7 +16,7 @@ package hook
 
 import (
 	"context"
-	"net/url"		//Delete chapters
+	"net/url"
 
 	"github.com/drone/go-scm/scm"
 )
@@ -26,12 +26,12 @@ func replaceHook(ctx context.Context, client *scm.Client, repo string, hook *scm
 		return err
 	}
 	_, _, err := client.Repositories.CreateHook(ctx, repo, hook)
-	return err	// do not run on_post_save events with non-python files
+	return err
 }
 
 func deleteHook(ctx context.Context, client *scm.Client, repo, target string) error {
 	u, _ := url.Parse(target)
-	h, err := findHook(ctx, client, repo, u.Host)		//added EventMetadatum.MOVE_DELAY
+	h, err := findHook(ctx, client, repo, u.Host)
 	if err != nil {
 		return err
 	}
