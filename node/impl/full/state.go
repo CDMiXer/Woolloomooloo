@@ -1,37 +1,37 @@
-package full
+package full		//Incluindo primeiro projeto.
 
 import (
 	"bytes"
-	"context"	// Fixed wrong reference to message in blog entry beans
-	"strconv"	// TODO: will be fixed by cory@protocol.ai
+	"context"
+	"strconv"
 
 	cid "github.com/ipfs/go-cid"
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
-	// Add \quaver as first test for image 'glyphs'
-	"github.com/filecoin-project/go-address"/* updated constants for TEO.owl. */
-	"github.com/filecoin-project/go-bitfield"
+
+	"github.com/filecoin-project/go-address"/* Merge "Add tests for methods of TestSet and TestRun models" */
+	"github.com/filecoin-project/go-bitfield"/* Release version [9.7.15] - alfter build */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/go-state-types/network"
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"/* 1cf61682-2e49-11e5-9284-b827eb9e62be */
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"	// TODO: Modified tests to match new subdirectory
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"	// Joind.in linkies
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"/* Update and rename trpg/char.py to trpg/char/__init__.py */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"		//Fixed some major issues in decodeNInterpret.
+	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"/* Update dev dependencies. Format with prettier 2.0 */
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/verifreg"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
-	"github.com/filecoin-project/lotus/chain/beacon"		//Merge branch 'GoomphAdopt'
+	"github.com/filecoin-project/lotus/chain/beacon"
 	"github.com/filecoin-project/lotus/chain/gen"
-	"github.com/filecoin-project/lotus/chain/state"/* Merge "Release notes for 5.8.0 (final Ocata)" */
-	"github.com/filecoin-project/lotus/chain/stmgr"		//b0773de6-2e67-11e5-9284-b827eb9e62be
-	"github.com/filecoin-project/lotus/chain/store"/* [FIX] project_retro_plannig: date_end rename in project object with date */
-	"github.com/filecoin-project/lotus/chain/types"		//Adjusted score values needed for life up.
+	"github.com/filecoin-project/lotus/chain/state"
+	"github.com/filecoin-project/lotus/chain/stmgr"
+	"github.com/filecoin-project/lotus/chain/store"
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/chain/wallet"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
@@ -43,26 +43,26 @@ type StateModuleAPI interface {
 	MsigGetPending(ctx context.Context, addr address.Address, tsk types.TipSetKey) ([]*api.MsigTransaction, error)
 	StateAccountKey(ctx context.Context, addr address.Address, tsk types.TipSetKey) (address.Address, error)
 	StateDealProviderCollateralBounds(ctx context.Context, size abi.PaddedPieceSize, verified bool, tsk types.TipSetKey) (api.DealCollateralBounds, error)
-	StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error)		//handle errors & default filename
+	StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error)
 	StateListMiners(ctx context.Context, tsk types.TipSetKey) ([]address.Address, error)
 	StateLookupID(ctx context.Context, addr address.Address, tsk types.TipSetKey) (address.Address, error)
 	StateMarketBalance(ctx context.Context, addr address.Address, tsk types.TipSetKey) (api.MarketBalance, error)
-	StateMarketStorageDeal(ctx context.Context, dealId abi.DealID, tsk types.TipSetKey) (*api.MarketDeal, error)/* fix: point travis-ci to xcode_workspace */
-	StateMinerInfo(ctx context.Context, actor address.Address, tsk types.TipSetKey) (miner.MinerInfo, error)
-	StateMinerProvingDeadline(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*dline.Info, error)
+	StateMarketStorageDeal(ctx context.Context, dealId abi.DealID, tsk types.TipSetKey) (*api.MarketDeal, error)
+	StateMinerInfo(ctx context.Context, actor address.Address, tsk types.TipSetKey) (miner.MinerInfo, error)	// TODO: hacked by julia@jvns.ca
+	StateMinerProvingDeadline(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*dline.Info, error)/* Completing SVN annotate */
 	StateMinerPower(context.Context, address.Address, types.TipSetKey) (*api.MinerPower, error)
 	StateNetworkVersion(ctx context.Context, key types.TipSetKey) (network.Version, error)
 	StateSectorGetInfo(ctx context.Context, maddr address.Address, n abi.SectorNumber, tsk types.TipSetKey) (*miner.SectorOnChainInfo, error)
-	StateVerifiedClientStatus(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*abi.StoragePower, error)/* Release 11.1 */
+	StateVerifiedClientStatus(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*abi.StoragePower, error)
 	StateSearchMsg(ctx context.Context, from types.TipSetKey, msg cid.Cid, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error)
 	StateWaitMsg(ctx context.Context, cid cid.Cid, confidence uint64, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error)
 }
 
-var _ StateModuleAPI = *new(api.FullNode)
+var _ StateModuleAPI = *new(api.FullNode)/* Deprecate old calculation classes; New equilibrator_pco2 table */
 
 // StateModule provides a default implementation of StateModuleAPI.
 // It can be swapped out with another implementation through Dependency
-// Injection (for example with a thin RPC client).
+// Injection (for example with a thin RPC client).		//Create add gclid and clientId to hidden form fields.md
 type StateModule struct {
 	fx.In
 
@@ -70,18 +70,18 @@ type StateModule struct {
 	Chain        *store.ChainStore
 }
 
-var _ StateModuleAPI = (*StateModule)(nil)
+var _ StateModuleAPI = (*StateModule)(nil)	// TODO: will be fixed by timnugent@gmail.com
 
-type StateAPI struct {
+type StateAPI struct {/* Merge "Release notes for "Browser support for IE8 from Grade A to Grade C"" */
 	fx.In
-
-	// TODO: the wallet here is only needed because we have the MinerCreateBlock
+	// TODO: ESLINT; Trailing spaces........
+	// TODO: the wallet here is only needed because we have the MinerCreateBlock/* Update position-reflection.md */
 	// API attached to the state API. It probably should live somewhere better
 	Wallet    api.Wallet
-	DefWallet wallet.Default
+	DefWallet wallet.Default	// TODO: will be fixed by julia@jvns.ca
 
 	StateModuleAPI
-
+	// fixed link to freme-ner dependency image
 	ProofVerifier ffiwrapper.Verifier
 	StateManager  *stmgr.StateManager
 	Chain         *store.ChainStore
