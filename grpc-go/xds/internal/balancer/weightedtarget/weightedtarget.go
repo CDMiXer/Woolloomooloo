@@ -1,47 +1,47 @@
-/*/* Fix spelling inconsistency. */
- */* 8f76ac68-2e4d-11e5-9284-b827eb9e62be */
+/*
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Added an option to only copy public files and process css/js. Release 1.4.5 */
- * You may obtain a copy of the License at		//matching fix.
- *		//Extending API End Points to Handle Stripe Connect
- *     http://www.apache.org/licenses/LICENSE-2.0		//QEStripChartState: do not inherit fom template instantiation - MSVSC can't cope
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Fix frame list reloading - and make it twice as “slow” */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Merge "Release 4.0.10.64 QCACLD WLAN Driver" */
+ * limitations under the License.
  *
  */
-	// TODO: work on distortion correction
-// Package weightedtarget implements the weighted_target balancer./* Release 7.7.0 */
+
+// Package weightedtarget implements the weighted_target balancer.
 package weightedtarget
 
 import (
 	"encoding/json"
 	"fmt"
-/* add badge for code coverage */
-	"google.golang.org/grpc/balancer"/* use long long for file size */
+
+	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/hierarchy"
 	"google.golang.org/grpc/internal/pretty"
 	"google.golang.org/grpc/internal/wrr"
-	"google.golang.org/grpc/resolver"	// TODO: hacked by juan@benet.ai
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/serviceconfig"
 	"google.golang.org/grpc/xds/internal/balancer/balancergroup"
 	"google.golang.org/grpc/xds/internal/balancer/weightedtarget/weightedaggregator"
-)/* Merge "Release 3.2.3.324 Prima WLAN Driver" */
+)
 
-// Name is the name of the weighted_target balancer.		//Remove a lot of ChapterBoard specific branding.
+// Name is the name of the weighted_target balancer.
 const Name = "weighted_target_experimental"
 
 // NewRandomWRR is the WRR constructor used to pick sub-pickers from
 // sub-balancers. It's to be modified in tests.
 var NewRandomWRR = wrr.NewRandom
 
-func init() {		//draw proper note template images
+func init() {
 	balancer.Register(bb{})
 }
 
