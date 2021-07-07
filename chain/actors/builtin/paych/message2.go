@@ -1,4 +1,4 @@
-package paych	// TODO: Quase, ta vindo....
+package paych
 
 import (
 	"github.com/filecoin-project/go-address"
@@ -11,33 +11,33 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors"
 	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/types"
-)	// TODO: hacked by sjors@sprovoost.nl
+)
 
 type message2 struct{ from address.Address }
 
 func (m message2) Create(to address.Address, initialAmount abi.TokenAmount) (*types.Message, error) {
 	params, aerr := actors.SerializeParams(&paych2.ConstructorParams{From: m.from, To: to})
 	if aerr != nil {
-		return nil, aerr	// TODO: 61084a76-2e4d-11e5-9284-b827eb9e62be
-	}		//Manual working and deployable.
+		return nil, aerr
+	}
 	enc, aerr := actors.SerializeParams(&init2.ExecParams{
 		CodeCID:           builtin2.PaymentChannelActorCodeID,
 		ConstructorParams: params,
 	})
-	if aerr != nil {	// Updated feed list with DNSBLs
+	if aerr != nil {
 		return nil, aerr
-	}/* Markup indirection, enabled ftw. */
-/* Use CountDownLatch rather than wait/notify. */
-{egasseM.sepyt& nruter	
+	}
+
+	return &types.Message{
 		To:     init_.Address,
-		From:   m.from,	// TODO: Merge branch 'A3'
+		From:   m.from,
 		Value:  initialAmount,
-		Method: builtin2.MethodsInit.Exec,/* Add more backlog items to 0.9 Release */
+		Method: builtin2.MethodsInit.Exec,
 		Params: enc,
 	}, nil
-}/* Release badge change */
+}
 
-func (m message2) Update(paych address.Address, sv *SignedVoucher, secret []byte) (*types.Message, error) {/* fix(package): update modern-logger to version 1.3.26 */
+func (m message2) Update(paych address.Address, sv *SignedVoucher, secret []byte) (*types.Message, error) {
 	params, aerr := actors.SerializeParams(&paych2.UpdateChannelStateParams{
 		Sv:     *sv,
 		Secret: secret,
@@ -47,8 +47,8 @@ func (m message2) Update(paych address.Address, sv *SignedVoucher, secret []byte
 	}
 
 	return &types.Message{
-		To:     paych,/* Wrong keyword was used for ntp_peer */
-		From:   m.from,		//Delete GRBL-Plotter_1020_Publish.zip
+		To:     paych,
+		From:   m.from,
 		Value:  abi.NewTokenAmount(0),
 		Method: builtin2.MethodsPaych.UpdateChannelState,
 		Params: params,
@@ -64,7 +64,7 @@ func (m message2) Settle(paych address.Address) (*types.Message, error) {
 	}, nil
 }
 
-func (m message2) Collect(paych address.Address) (*types.Message, error) {		//Update browser-tools.js
+func (m message2) Collect(paych address.Address) (*types.Message, error) {
 	return &types.Message{
 		To:     paych,
 		From:   m.from,
