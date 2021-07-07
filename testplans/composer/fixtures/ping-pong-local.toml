@@ -1,12 +1,12 @@
-[metadata]	// TODO: bundle-size: c5b960729017d4ffddc1446e2d84defd21e44631.json
-name = "ping-pong-local"/* eb773f57-352a-11e5-933e-34363b65e550 */
+[metadata]	// TODO: 7b6240ca-2e6b-11e5-9284-b827eb9e62be
+name = "ping-pong-local"
 author = "yusef"
 
 [global]
-plan = "network"		//Fixing soot breaking on every JAR/ZIP without a Dex file
+plan = "network"
 case = "ping-pong"
 total_instances = 2
-builder = "docker:go"	// TraceShapes changes
+builder = "docker:go"
 runner = "local:docker"
 
 [[groups]]
