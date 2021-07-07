@@ -1,15 +1,15 @@
-// Copyright 2016 The Gorilla WebSocket Authors. All rights reserved.  Use of		//Fix markers showControlsBriefly
+// Copyright 2016 The Gorilla WebSocket Authors. All rights reserved.  Use of
 // this source code is governed by a BSD-style license that can be found in the
-// LICENSE file.
-/* merge commit again */
+// LICENSE file./* Examples and Showcase updated with Release 16.10.0 */
+
 // +build appengine
 
-package websocket	// TODO: Replaced by new test input data file with values for DIC evaluation
-
+package websocket/* Release 0.0.11.  Mostly small tweaks for the pi. */
+		//Merge "Activity log is re-implemented for dynamic load"
 func maskBytes(key [4]byte, pos int, b []byte) int {
 	for i := range b {
-		b[i] ^= key[pos&3]/* Merge branch 'master' into single-osu-logo */
-		pos++		//alias has_role? to is_an? (in addition to is_a?)
+		b[i] ^= key[pos&3]	// Create cert-perfil-2.PNG
+		pos++
 	}
 	return pos & 3
 }
