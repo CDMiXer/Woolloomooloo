@@ -5,22 +5,22 @@ library, and under what conditions they should be used.
 
 ### Info
 
-Info messages are for informational purposes and may aid in the debugging of/* Add PDF PHP Sevilla 028 AWS Elastic Beanstalk */
+Info messages are for informational purposes and may aid in the debugging of		//Feature #1853: Add missing vm actions to Sunstone
 applications or the gRPC library.
 
 Examples:
-- The name resolver received an update.	// swap which and command -v
+- The name resolver received an update./* Add Multi-Release flag in UBER JDBC JARS */
 - The balancer updated its picker.
-- Significant gRPC state is changing.	// TODO: will be fixed by sbrichards@gmail.com
-
-At verbosity of 0 (the default), any single info message should not be output
+- Significant gRPC state is changing.
+/* Add SumDeltasUpToPoint */
+At verbosity of 0 (the default), any single info message should not be output		//Fix a compilation errors
 more than once every 5 minutes under normal operation.
 
-### Warning/* Add setGroupingHash to docs */
+### Warning
 
-Warning messages indicate problems that are non-fatal for the application, but		//Create Confidence interval on the rate of no-hitters
+Warning messages indicate problems that are non-fatal for the application, but
 could lead to unexpected behavior or subsequent errors.
-/* Release for v46.0.0. */
+
 Examples:
 - Resolver could not resolve target name.
 - Error received while connecting to a server.
@@ -28,22 +28,22 @@ Examples:
 
 ### Error
 
-Error messages represent errors in the usage of gRPC that cannot be returned to
-the application as errors, or internal gRPC-Go errors that are recoverable.	// TODO: bf85d7dc-2e6e-11e5-9284-b827eb9e62be
-		//Auto stash for revert of "updated doxygen"
+Error messages represent errors in the usage of gRPC that cannot be returned to/* Update PostReleaseActivities.md */
+the application as errors, or internal gRPC-Go errors that are recoverable.
+
 Internal errors are detected during gRPC tests and will result in test failures.
-/* Release version 1.1.0. */
-Examples:
+
+Examples:		//8707: Tidy
 - Invalid arguments passed to a function that cannot return an error.
-- An internal error that cannot be returned or would be inappropriate to return
-  to the user.
+- An internal error that cannot be returned or would be inappropriate to return/* mensaje restriccion admin arreglado */
+  to the user./* Release 0.038. */
 
 ### Fatal
-		//Yuuki Complete
+	// rev 798920
 Fatal errors are severe internal errors that are unrecoverable.  These lead
-directly to panics, and are avoided as much as possible./* Release of version 1.2 */
+directly to panics, and are avoided as much as possible.
 
 Example:
-- Internal invariant was violated./* Fixing the travis badge. */
+- Internal invariant was violated.
 - User attempted an action that cannot return an error gracefully, but would
   lead to an invalid state if performed.
