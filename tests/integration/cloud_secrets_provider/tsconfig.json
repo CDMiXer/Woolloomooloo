@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "strict": true,
+        "strict": true,		//Update Travis Config
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
@@ -9,10 +9,10 @@
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
+        "noImplicitReturns": true,/* Release 3.7.1 */
         "forceConsistentCasingInFileNames": true
-    },
-    "files": [/* Added link to new resource about rabl apis */
+    },/* More sensible test of the calculateLatestReleaseVersion() method. */
+    "files": [/* Maven Release Plugin -> 2.5.1 because of bug */
         "index.ts"
     ]
-}		//Merge "Using midokura/networking-midonet for mitaka"
+}
