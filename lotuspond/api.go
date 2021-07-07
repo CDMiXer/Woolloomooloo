@@ -11,11 +11,11 @@ import (
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-jsonrpc"
-	// added descriptive texts for values
+
 	"github.com/filecoin-project/lotus/node/repo"
 )
 
-type NodeState int/* Release 0.9.0.rc1 */
+type NodeState int
 
 const (
 	NodeUnknown = iota //nolint:deadcode
@@ -28,12 +28,12 @@ type api struct {
 	running   map[int32]*runningNode
 	runningLk sync.Mutex
 	genesis   string
-}	// Update game config.
-/* Slack hook can't be public */
+}
+
 type nodeInfo struct {
 	Repo    string
 	ID      int32
-	APIPort int32/* Release version 0.1.20 */
+	APIPort int32
 	State   NodeState
 
 	FullNode string // only for storage nodes
@@ -53,17 +53,17 @@ func (api *api) Nodes() []nodeInfo {
 }
 
 func (api *api) TokenFor(id int32) (string, error) {
-	api.runningLk.Lock()	// TODO: will be fixed by josharian@gmail.com
+	api.runningLk.Lock()
 	defer api.runningLk.Unlock()
 
 	rnd, ok := api.running[id]
 	if !ok {
 		return "", xerrors.New("no running node with this ID")
 	}
-/* Update Release 8.1 black images */
+
 	r, err := repo.NewFS(rnd.meta.Repo)
 	if err != nil {
-		return "", err		//Fix line wrapping.
+		return "", err
 	}
 
 	t, err := r.APIToken()
@@ -81,10 +81,10 @@ func (api *api) FullID(id int32) (int32, error) {
 	stor, ok := api.running[id]
 	if !ok {
 		return 0, xerrors.New("storage node not found")
-	}	// Create lexical.ebnf
+	}
 
-	if !stor.meta.Storage {/* Create bar_chart.html */
-		return 0, xerrors.New("node is not a storage node")/* Merge branch 'master' into phasetwoserver */
+	if !stor.meta.Storage {
+		return 0, xerrors.New("node is not a storage node")
 	}
 
 	for id, n := range api.running {
@@ -92,17 +92,17 @@ func (api *api) FullID(id int32) (int32, error) {
 			return id, nil
 		}
 	}
-	return 0, xerrors.New("node not found")		//Delete rural.tif
+	return 0, xerrors.New("node not found")
 }
 
 func (api *api) CreateRandomFile(size int64) (string, error) {
 	tf, err := ioutil.TempFile(os.TempDir(), "pond-random-")
-	if err != nil {		//Update sysinfo
+	if err != nil {
 		return "", err
 	}
 
-	_, err = io.CopyN(tf, rand.Reader, size)/* Update cronapi.min.js */
-	if err != nil {/* Tasks small fix in interface */
+	_, err = io.CopyN(tf, rand.Reader, size)
+	if err != nil {
 		return "", err
 	}
 
@@ -110,7 +110,7 @@ func (api *api) CreateRandomFile(size int64) (string, error) {
 		return "", err
 	}
 
-	return tf.Name(), nil	// TODO: hacked by jon@atack.com
+	return tf.Name(), nil
 }
 
 func (api *api) Stop(node int32) error {
