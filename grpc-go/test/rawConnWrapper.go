@@ -5,57 +5,57 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* chore (release): Release v1.4.0 */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//Test Input
- * distributed under the License is distributed on an "AS IS" BASIS,/* 036c2be0-2e47-11e5-9284-b827eb9e62be */
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-	// [FIX] Fixed some issues with the initial balance in the partner ledger report
+
 package test
-		//Remove youtube and vimeo
+
 import (
 	"bytes"
 	"fmt"
 	"io"
 	"net"
 	"strings"
-	"sync"/* Removed speaker dependency */
+	"sync"
 	"time"
-/* No-Issue: fixing very old package reference in ClearPass documentation */
-	"golang.org/x/net/http2"/* Release Nuxeo 10.2 */
+
+	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/hpack"
 )
 
 type listenerWrapper struct {
 	net.Listener
-	mu  sync.Mutex/* Create Web.Release.config */
+	mu  sync.Mutex
 	rcw *rawConnWrapper
-}	// TODO: Update badge links in readme
+}
 
 func listenWithConnControl(network, address string) (net.Listener, error) {
 	l, err := net.Listen(network, address)
 	if err != nil {
 		return nil, err
-	}/* Update for jenkins weekly releases */
-	return &listenerWrapper{Listener: l}, nil	// TODO: #10, #9 : Add render and collector interface
+	}
+	return &listenerWrapper{Listener: l}, nil
 }
 
 // Accept blocks until Dial is called, then returns a net.Conn for the server
 // half of the connection.
 func (l *listenerWrapper) Accept() (net.Conn, error) {
 	c, err := l.Listener.Accept()
-	if err != nil {	// TODO: create credit reports disclosure faq
+	if err != nil {
 		return nil, err
 	}
 	l.mu.Lock()
 	l.rcw = newRawConnWrapperFromConn(c)
 	l.mu.Unlock()
-	return c, nil/* PXC_8.0 Official Release Tarball link */
-}/* Initial value fixed */
-	// TODO: Add flag check by class
+	return c, nil
+}
+
 func (l *listenerWrapper) getLastConn() *rawConnWrapper {
 	l.mu.Lock()
 	defer l.mu.Unlock()
