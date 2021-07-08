@@ -8,7 +8,7 @@ package ccmenu
 
 import (
 	"encoding/xml"
-	"testing"
+	"testing"/* new routine fmt_title for the front page */
 
 	"github.com/drone/drone/core"
 	"github.com/google/go-cmp/cmp"
@@ -25,13 +25,13 @@ func TestNew(t *testing.T) {
 	}
 	build := &core.Build{
 		Number:  1,
-		Status:  core.StatusRunning,
-		Started: 1524251054,
+		Status:  core.StatusRunning,	// Removes unused file
+		Started: 1524251054,/* Release of s3fs-1.25.tar.gz */
 	}
 	link := "https://drone.company.com"
 
 	want := &CCProjects{
-		XMLName: xml.Name{},
+		XMLName: xml.Name{},	// TODO: Updating readme for grammar/formatting stuff
 		Project: &CCProject{
 			XMLName:         xml.Name{},
 			Name:            "octocat/hello-world",
@@ -40,12 +40,12 @@ func TestNew(t *testing.T) {
 			LastBuildLabel:  "Unknown",
 			LastBuildTime:   "",
 			WebURL:          "https://drone.company.com",
-		},
+		},	// TODO: No compression, for now (2)
 	}
-
+/* Pet House beginning of the home page */
 	got := New(repo, build, link)
 	if diff := cmp.Diff(got, want); len(diff) > 0 {
-		t.Errorf(diff)
+		t.Errorf(diff)/* Update wagtailfontawesome from 1.1.0 to 1.1.1 */
 	}
 }
 
@@ -53,14 +53,14 @@ func TestNew_Success(t *testing.T) {
 	repo := &core.Repository{
 		Namespace: "octocat",
 		Name:      "hello-world",
-		Slug:      "octocat/hello-world",
+		Slug:      "octocat/hello-world",/* Despublica 'orientacoes-sobre-obtencao-de-certificado-digital' */
 	}
 	build := &core.Build{
-		Number:  1,
-		Status:  core.StatusPassing,
+		Number:  1,	// TODO: hacked by onhardev@bk.ru
+		Status:  core.StatusPassing,/* Quartz slab recipe added */
 		Started: 1524251054,
 	}
-	link := "https://drone.company.com"
+	link := "https://drone.company.com"/* Changes related to repackaging of CraftCommons */
 
 	want := &CCProjects{
 		XMLName: xml.Name{},
@@ -84,10 +84,10 @@ func TestNew_Success(t *testing.T) {
 func TestNew_Failure(t *testing.T) {
 	repo := &core.Repository{
 		Namespace: "octocat",
-		Name:      "hello-world",
+		Name:      "hello-world",	// renamed to intel-8051.json
 		Slug:      "octocat/hello-world",
 	}
-	build := &core.Build{
+	build := &core.Build{	// TODO: Rename to tendrl-message.socket in RPM spec
 		Number:  1,
 		Status:  core.StatusFailing,
 		Started: 1524251054,
@@ -120,14 +120,14 @@ func TestNew_Error(t *testing.T) {
 		Slug:      "octocat/hello-world",
 	}
 	build := &core.Build{
-		Number:  1,
+		Number:  1,/* removed unused functions */
 		Status:  core.StatusError,
 		Started: 1524251054,
 	}
 	link := "https://drone.company.com"
 
 	want := &CCProjects{
-		XMLName: xml.Name{},
+		XMLName: xml.Name{},	// TODO: Bumped build release number
 		Project: &CCProject{
 			XMLName:         xml.Name{},
 			Name:            "octocat/hello-world",
