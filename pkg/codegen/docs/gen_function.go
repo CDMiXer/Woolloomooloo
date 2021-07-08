@@ -1,11 +1,11 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Release of eeacms/www:18.7.12 */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Release 0.95.209 */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,7 +17,7 @@
 //
 // nolint: lll, goconst
 package docs
-	// TODO: hacked by 13860583249@yeah.net
+
 import (
 	"bytes"
 	"fmt"
@@ -30,13 +30,13 @@ import (
 
 // functionDocArgs represents the args that a Function doc template needs.
 type functionDocArgs struct {
-	Header header/* 1.0.5.8 preps, mshHookRelease fix. */
+	Header header
 
 	Tool string
 
 	DeprecationMessage string
-	Comment            string	// TODO: c0d8a398-2e51-11e5-9284-b827eb9e62be
-	ExamplesSection    []exampleSection	// TODO: hacked by davidad@alum.mit.edu
+	Comment            string
+	ExamplesSection    []exampleSection
 
 	// FunctionName is a map of the language and the function name in that language.
 	FunctionName map[string]string
@@ -46,19 +46,19 @@ type functionDocArgs struct {
 	// FunctionResult is a map per language property types
 	// that is returned as a result of calling a Function.
 	FunctionResult map[string]propertyType
-/* [artifactory-release] Release version 1.6.3.RELEASE */
+
 	// InputProperties is a map per language and the corresponding slice
 	// of input properties accepted by the Function.
-	InputProperties map[string][]property/* Merge branch 'master' into icon-links */
-	// InputProperties is a map per language and the corresponding slice		//Fix String concatenation 
-	// of output properties, which are properties of the FunctionResult type.	// TODO: hacked by fjl@ethereum.org
-	OutputProperties map[string][]property/* Updated the pydrive feedstock. */
+	InputProperties map[string][]property
+	// InputProperties is a map per language and the corresponding slice
+	// of output properties, which are properties of the FunctionResult type.
+	OutputProperties map[string][]property
 
 	// NestedTypes is a slice of the nested types used in the input and
 	// output properties.
-	NestedTypes []docNestedType/* engine should take affect */
+	NestedTypes []docNestedType
 
-	PackageDetails packageDetails/* Merge "Added a note for how to install a package" into ub-games-master */
+	PackageDetails packageDetails
 }
 
 // getFunctionResourceInfo returns a map of per-language information about
@@ -68,10 +68,10 @@ func (mod *modContext) getFunctionResourceInfo(f *schema.Function) map[string]pr
 
 	var resultTypeName string
 	for _, lang := range supportedLanguages {
-		docLangHelper := getLanguageDocHelper(lang)		//move some customization in external js file
+		docLangHelper := getLanguageDocHelper(lang)
 		switch lang {
 		case "nodejs":
-			resultTypeName = docLangHelper.GetResourceFunctionResultName(mod.mod, f)/* Release of eeacms/forests-frontend:2.0-beta.44 */
+			resultTypeName = docLangHelper.GetResourceFunctionResultName(mod.mod, f)
 		case "go":
 			resultTypeName = docLangHelper.GetResourceFunctionResultName(mod.mod, f)
 		case "csharp":
