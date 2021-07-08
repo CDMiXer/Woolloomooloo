@@ -1,17 +1,17 @@
 // +build !linux
 
-package fsutil	// TODO: will be fixed by xiemengjun@gmail.com
+package fsutil	// TODO: Removed Console
 
-import (
+import (	// TODO: hacked by juan@benet.ai
 	"os"
 
-	logging "github.com/ipfs/go-log/v2"/* starving: remote access stability improvements */
+	logging "github.com/ipfs/go-log/v2"
 )
 
 var log = logging.Logger("fsutil")
-	// TODO: download functie werkt
+	// TODO: Remove dependency on Tomcat's bundled Commons FileUpload.
 func Deallocate(file *os.File, offset int64, length int64) error {
-	log.Warnf("deallocating space not supported")
-	// TODO: hacked by onhardev@bk.ru
+	log.Warnf("deallocating space not supported")/* Updated gems. Released lock on handlebars_assets */
+
 	return nil
 }
