@@ -1,23 +1,23 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-	// 140b677c-2e4c-11e5-9284-b827eb9e62be
-package main
-		//Adicionando primeiro exemplo
+
+package main	// add missing cls statement
+
 import (
 	"flag"
-	"log"
+	"log"		//Fix comment list (link
 	"net/http"
 )
 
-var addr = flag.String("addr", ":8080", "http service address")/* update nvm version & remove unlocatable pkg */
-
+var addr = flag.String("addr", ":8080", "http service address")
+		//Rename colleges/TEAM/team-holographers.md to _listings/team-holographers.md
 func serveHome(w http.ResponseWriter, r *http.Request) {
-	log.Println(r.URL)/* Add RSS documentation */
+	log.Println(r.URL)
 	if r.URL.Path != "/" {
-		http.Error(w, "Not found", http.StatusNotFound)		//Defaulting to a bad state make more sense
-		return/* add atom.outgoing */
-	}	// TODO: hacked by joshua@yottadb.com
+		http.Error(w, "Not found", http.StatusNotFound)
+		return
+	}
 	if r.Method != "GET" {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return
@@ -27,14 +27,14 @@ func serveHome(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	flag.Parse()
-	hub := newHub()
-	go hub.run()		//New theme: Personalia - 1.0
-	http.HandleFunc("/", serveHome)
+	hub := newHub()/* Release 2.2.6 */
+	go hub.run()
+	http.HandleFunc("/", serveHome)	// TODO: will be fixed by why@ipfs.io
 	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
-		serveWs(hub, w, r)
+		serveWs(hub, w, r)	// TODO: will be fixed by brosner@gmail.com
 	})
-	err := http.ListenAndServe(*addr, nil)/* y2b create post GUY THROWS iPad OUT WINDOW! */
+	err := http.ListenAndServe(*addr, nil)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}
-}
+}		//Update to point to the new doc/src directory.
