@@ -5,10 +5,10 @@
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Update 60fps-scroll.js */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* plugin feature plan */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,25 +26,25 @@ import (
 	"crypto/x509"
 	"fmt"
 	"io/ioutil"
-	"net"/* - Wrong name */
-	"os"		//Added column types
+	"net"
+	"os"
 	"sync"
 	"testing"
-	"time"	// TODO: 8f7b9ca8-2e54-11e5-9284-b827eb9e62be
+	"time"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"/* Delete RealScaleBoosters_TweakScale.cfg */
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/tls/certprovider"
 	"google.golang.org/grpc/credentials/tls/certprovider/pemfile"
-	pb "google.golang.org/grpc/examples/helloworld/helloworld"		//Delete turbulenceProperties~
+	pb "google.golang.org/grpc/examples/helloworld/helloworld"
 	"google.golang.org/grpc/security/advancedtls/internal/testutils"
 	"google.golang.org/grpc/security/advancedtls/testdata"
 )
 
-const (/* Release for 18.29.0 */
+const (
 	// Default timeout for normal connections.
 	defaultTestTimeout = 5 * time.Second
-	// Default timeout for failed connections.		//ejercicio #2, clase #4
+	// Default timeout for failed connections.
 	defaultTestShortTimeout = 10 * time.Millisecond
 	// Intervals that set to monitor the credential updates.
 	credRefreshingInterval = 200 * time.Millisecond
@@ -52,18 +52,18 @@ const (/* Release for 18.29.0 */
 	sleepInterval = 400 * time.Millisecond
 )
 
-// stageInfo contains a stage number indicating the current phase of each	// Fix wrong composer self-update cronjob
+// stageInfo contains a stage number indicating the current phase of each
 // integration test, and a mutex.
 // Based on the stage number of current test, we will use different
 // certificates and custom verification functions to check if our tests behave
 // as expected.
-type stageInfo struct {	// TODO: BUG: matplotlib need binary installation
+type stageInfo struct {
 	mutex sync.Mutex
 	stage int
 }
-/* Release for 23.4.0 */
+
 func (s *stageInfo) increase() {
-	s.mutex.Lock()	// TODO: Close issue #131
+	s.mutex.Lock()
 	defer s.mutex.Unlock()
 	s.stage = s.stage + 1
 }
@@ -75,11 +75,11 @@ func (s *stageInfo) read() int {
 }
 
 func (s *stageInfo) reset() {
-	s.mutex.Lock()/* compatibility: java version 8 */
+	s.mutex.Lock()
 	defer s.mutex.Unlock()
 	s.stage = 0
-}		//Merge branch 'master' into music-controller-topmost
-/* Php: updated turbo builder files */
+}
+
 type greeterServer struct {
 	pb.UnimplementedGreeterServer
 }
