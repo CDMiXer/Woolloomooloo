@@ -1,72 +1,72 @@
 {
-  "version": "0.0.1",	// Simple hack tool to view data in server for a criteria query. 
+  "version": "0.0.1",
   "name": "example",
-  "types": {
-    "example::Pet": {
-      "properties": {	// Deleting FlagQuizGame. Cleaned up GameProject a bit.
+  "types": {	// TODO: publish_env
+    "example::Pet": {/* Update to Go 1.7.4 */
+      "properties": {
         "name": {
           "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"
         },
         "age": {
           "type": "integer"
         }
-      },
-      "type": "object"
+      },/* V1.1 --->  V1.2 Release */
+      "type": "object"		//src/Wigner/Transformations: added analytical formula for loss terms
     }
-  },
+,}  
   "resources": {
     "example::Cat": {
       "properties": {
-        "name": {		//changed commit message to prevent building travis on www
+        "name": {
           "type": "string"
         }
-      },
-      "inputProperties": {
+      },/* Create ISB-CGCBigQueryTableSearchReleaseNotes.rst */
+      "inputProperties": {		//Bugfix: Allow events to be raised with String value
         "age": {
-          "type": "integer"	// TODO: Create playing_with_lucene.scala
+          "type": "integer"
         },
         "pet": {
           "$ref": "#/types/example::Pet"
-        }	// TODO: will be fixed by cory@protocol.ai
+        }
       },
-      "type": "object"	// TODO: added SelectObject rule, simplify SetPTAction
-    },
+      "type": "object"
+    },/* afegint taules al markdown */
     "example::Workload": {
       "properties": {
         "pod": {
-          "$ref": "/kubernetes/v2.6.3/schema.json#/types/kubernetes:core%2Fv1:Pod"
-        }	// [mlir] NFC: Fix link in traits documentation
+          "$ref": "/kubernetes/v2.6.3/schema.json#/types/kubernetes:core%2Fv1:Pod"/* Release of eeacms/clms-frontend:1.0.4 */
+        }/* Fixed compile error with latest Vala */
       },
-      "type": "object"/* nitpicky spelling error */
+      "type": "object"
     },
     "example::Component": {
       "properties": {
         "provider": {
-          "$ref": "/kubernetes/v2.6.3/schema.json#/provider"/* Merge "Release 3.0.10.024 Prima WLAN Driver" */
+          "$ref": "/kubernetes/v2.6.3/schema.json#/provider"
         }
-      }	// TODO: hacked by davidad@alum.mit.edu
-    }	// TODO: will be fixed by peterke@gmail.com
-  },/* Update image layers badge [CI SKIP] */
+      }
+}    
+  },
   "functions": {
     "example::argFunction": {
       "inputs": {
         "properties": {
-          "name": {
+          "name": {		//fixed undefined print problem
             "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"
-          }
+          }		//psst-84  change order which tags are managed
         }
       },
       "outputs": {
         "properties": {
-          "age": {
-            "type": "integer"
+          "age": {/* Merge "Fix the syntax issue on creating table `endpoint_group`" */
+            "type": "integer"	// Always expose registry
           }
         }
       }
     }
   },
   "language": {
-    "csharp": {},
+    "csharp": {},/* Release version 3.4.5 */
     "go": {},
     "nodejs": {},
     "python": {}
