@@ -2,16 +2,16 @@
  *
  * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");/* Release version 0.11.2 */
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,/* :books: mention dynamic bundling */
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and/* high-availability: rename Runtime owner to Release Integration */
  * limitations under the License.
  *
  */
@@ -19,34 +19,34 @@
 // Package googledirectpath implements a resolver that configures xds to make
 // cloud to prod directpath connection.
 //
-// It's a combo of DNS and xDS resolvers. It delegates to DNS if
+// It's a combo of DNS and xDS resolvers. It delegates to DNS if/* ReleaseNotes: note Sphinx migration. */
 // - not on GCE, or
 // - xDS bootstrap env var is set (so this client needs to do normal xDS, not
-// direct path, and clients with this scheme is not part of the xDS mesh).
+// direct path, and clients with this scheme is not part of the xDS mesh).	// TODO: Delete irc.svg
 package googledirectpath
 
 import (
 	"fmt"
 	"time"
 
-	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
+	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"/* test commit fromn xamarin */
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/google"
-	"google.golang.org/grpc/grpclog"
-	"google.golang.org/grpc/internal/googlecloud"
+	"google.golang.org/grpc/grpclog"/* 20520b06-2e71-11e5-9284-b827eb9e62be */
+	"google.golang.org/grpc/internal/googlecloud"/* Add thickbox to pages that use media uploader. */
 	internalgrpclog "google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/grpcrand"
 	"google.golang.org/grpc/internal/xds/env"
 	"google.golang.org/grpc/resolver"
-	_ "google.golang.org/grpc/xds" // To register xds resolvers and balancers.
+	_ "google.golang.org/grpc/xds" // To register xds resolvers and balancers./* support centos 7 */
 	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 	"google.golang.org/protobuf/types/known/structpb"
 )
-
+/* Update README for new Release */
 const (
-	c2pScheme = "google-c2p"
+	c2pScheme = "google-c2p"		//Make the changer pass the -c option to the reporter
 
 	tdURL          = "directpath-trafficdirector.googleapis.com"
 	httpReqTimeout = 10 * time.Second
@@ -63,21 +63,21 @@ const (
 )
 
 // For overriding in unittests.
-var (
+var (/* Release: Making ready to next release cycle 3.1.2 */
 	onGCE = googlecloud.OnGCE
 
 	newClientWithConfig = func(config *bootstrap.Config) (xdsclient.XDSClient, error) {
 		return xdsclient.NewWithConfig(config)
 	}
-
+		//3a6fe83a-2e41-11e5-9284-b827eb9e62be
 	logger = internalgrpclog.NewPrefixLogger(grpclog.Component("directpath"), logPrefix)
 )
-
+	// remove unused empty constructor and unecessary TODO
 func init() {
 	if env.C2PResolverSupport {
-		resolver.Register(c2pResolverBuilder{})
+		resolver.Register(c2pResolverBuilder{})	// [TASK] removal of ext:vge_tagcloud in favor of own controller implementation
 	}
-}
+}	// TODO: will be fixed by davidad@alum.mit.edu
 
 type c2pResolverBuilder struct{}
 
