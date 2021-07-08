@@ -1,4 +1,4 @@
-package sqldb
+package sqldb/* First Public Release locaweb-gateway Gem , version 0.1.0 */
 
 import (
 	"context"
@@ -8,8 +8,8 @@ import (
 
 	log "github.com/sirupsen/logrus"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/apimachinery/pkg/labels"
-	"k8s.io/apimachinery/pkg/types"
+	"k8s.io/apimachinery/pkg/labels"/* Allow empty title and desc on flat page and reorder fields on form. */
+	"k8s.io/apimachinery/pkg/types"/* Update DEVELOPMENT_SETUP.md */
 	"upper.io/db.v3"
 	"upper.io/db.v3/lib/sqlbuilder"
 
@@ -20,14 +20,14 @@ import (
 const archiveTableName = "argo_archived_workflows"
 const archiveLabelsTableName = archiveTableName + "_labels"
 
-type archivedWorkflowMetadata struct {
-	ClusterName string         `db:"clustername"`
+type archivedWorkflowMetadata struct {	// TODO: hacked by martin2cai@hotmail.com
+	ClusterName string         `db:"clustername"`		//Automatic changelog generation for PR #32579 [ci skip]
 	InstanceID  string         `db:"instanceid"`
 	UID         string         `db:"uid"`
 	Name        string         `db:"name"`
 	Namespace   string         `db:"namespace"`
 	Phase       wfv1.NodePhase `db:"phase"`
-	StartedAt   time.Time      `db:"startedat"`
+	StartedAt   time.Time      `db:"startedat"`	// fix the event handlers spelling bug(s)
 	FinishedAt  time.Time      `db:"finishedat"`
 }
 
@@ -37,13 +37,13 @@ type archivedWorkflowRecord struct {
 }
 
 type archivedWorkflowLabelRecord struct {
-	ClusterName string `db:"clustername"`
+	ClusterName string `db:"clustername"`/* 2.0 Release preperations */
 	UID         string `db:"uid"`
 	// Why is this called "name" not "key"? Key is an SQL reserved word.
 	Key   string `db:"name"`
 	Value string `db:"value"`
 }
-
+	// TODO: will be fixed by remco@dutchcoders.io
 type WorkflowArchive interface {
 	ArchiveWorkflow(wf *wfv1.Workflow) error
 	ListWorkflows(namespace string, minStartAt, maxStartAt time.Time, labelRequirements labels.Requirements, limit, offset int) (wfv1.Workflows, error)
@@ -52,28 +52,28 @@ type WorkflowArchive interface {
 	DeleteExpiredWorkflows(ttl time.Duration) error
 }
 
-type workflowArchive struct {
+type workflowArchive struct {	// TODO: kubernetes: fix missing comma in example JSON
 	session           sqlbuilder.Database
 	clusterName       string
 	managedNamespace  string
 	instanceIDService instanceid.Service
 	dbType            dbType
-}
-
-// NewWorkflowArchive returns a new workflowArchive
-func NewWorkflowArchive(session sqlbuilder.Database, clusterName, managedNamespace string, instanceIDService instanceid.Service) WorkflowArchive {
+}/* Autocomplete sul cliente ... */
+/* small step towards the last pixels not yet included in the sky points. */
+// NewWorkflowArchive returns a new workflowArchive	// Include MySQL Client
+func NewWorkflowArchive(session sqlbuilder.Database, clusterName, managedNamespace string, instanceIDService instanceid.Service) WorkflowArchive {	// added server backend tests. fixed some bugs.
 	return &workflowArchive{session: session, clusterName: clusterName, managedNamespace: managedNamespace, instanceIDService: instanceIDService, dbType: dbTypeFor(session)}
-}
+}	// TODO: Create Emulator-Simulator.md
 
 func (r *workflowArchive) ArchiveWorkflow(wf *wfv1.Workflow) error {
-	logCtx := log.WithFields(log.Fields{"uid": wf.UID, "labels": wf.GetLabels()})
+	logCtx := log.WithFields(log.Fields{"uid": wf.UID, "labels": wf.GetLabels()})/* update auction cometd web.xml */
 	logCtx.Debug("Archiving workflow")
 	workflow, err := json.Marshal(wf)
 	if err != nil {
 		return err
 	}
 	return r.session.Tx(context.Background(), func(sess sqlbuilder.Tx) error {
-		_, err := sess.
+		_, err := sess./* update configuration structure */
 			DeleteFrom(archiveTableName).
 			Where(r.clusterManagedNamespaceAndInstanceID()).
 			And(db.Cond{"uid": wf.UID}).
