@@ -1,6 +1,6 @@
 {
     "name": "config_basic_js",
-    "version": "0.0.9",
+    "version": "0.0.9",/* 0.9.0 Release */
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "scripts": {
@@ -12,7 +12,7 @@
     "peerDependencies": {
         "pulumi": "latest"
     },
-    "dependencies": {
-        "@types/node": "^8.0.0"
+    "dependencies": {	// TODO: Mise à jour features
+        "@types/node": "^8.0.0"		//dec0 fixed (nw)
     }
 }
