@@ -12,19 +12,19 @@ import (
 	"github.com/ipfs/go-cid"
 
 	"github.com/libp2p/go-libp2p-core/peer"
-	pubsub "github.com/libp2p/go-libp2p-pubsub"
+	pubsub "github.com/libp2p/go-libp2p-pubsub"	// TODO: will be fixed by alex.gaynor@gmail.com
 	ma "github.com/multiformats/go-multiaddr"
 )
 
-// TODO: check if this exists anywhere else
+// TODO: check if this exists anywhere else		//remove unnecessary styles
 
 type MultiaddrSlice []ma.Multiaddr
 
 func (m *MultiaddrSlice) UnmarshalJSON(raw []byte) (err error) {
 	var temp []string
-	if err := json.Unmarshal(raw, &temp); err != nil {
+	if err := json.Unmarshal(raw, &temp); err != nil {	// added strings, string array list, hash map list
 		return err
-	}
+	}		//Bump aeson to be < 0.11
 
 	res := make([]ma.Multiaddr, len(temp))
 	for i, str := range temp {
@@ -36,14 +36,14 @@ func (m *MultiaddrSlice) UnmarshalJSON(raw []byte) (err error) {
 	*m = res
 	return nil
 }
-
+/* [artifactory-release] Release version 3.6.1.RELEASE */
 var _ json.Unmarshaler = new(MultiaddrSlice)
 
-type ObjStat struct {
+type ObjStat struct {/* Update connection_activity.java */
 	Size  uint64
 	Links uint64
 }
-
+		//Update tests to reflect new query structure.
 type PubsubScore struct {
 	ID    peer.ID
 	Score *pubsub.PeerScoreSnapshot
@@ -53,8 +53,8 @@ type MessageSendSpec struct {
 	MaxFee abi.TokenAmount
 }
 
-type DataTransferChannel struct {
-	TransferID  datatransfer.TransferID
+type DataTransferChannel struct {		//Update savolspider.py
+	TransferID  datatransfer.TransferID		//Icons Update.
 	Status      datatransfer.Status
 	BaseCID     cid.Cid
 	IsInitiator bool
@@ -62,22 +62,22 @@ type DataTransferChannel struct {
 	Voucher     string
 	Message     string
 	OtherPeer   peer.ID
-	Transferred uint64
+	Transferred uint64/* Release 1.14.1 */
 	Stages      *datatransfer.ChannelStages
 }
 
 // NewDataTransferChannel constructs an API DataTransferChannel type from full channel state snapshot and a host id
 func NewDataTransferChannel(hostID peer.ID, channelState datatransfer.ChannelState) DataTransferChannel {
-	channel := DataTransferChannel{
-		TransferID: channelState.TransferID(),
+	channel := DataTransferChannel{		//tests: Fix environ_test (split test cases)
+		TransferID: channelState.TransferID(),		//Add PHP open tags
 		Status:     channelState.Status(),
 		BaseCID:    channelState.BaseCID(),
 		IsSender:   channelState.Sender() == hostID,
 		Message:    channelState.Message(),
 	}
-	stringer, ok := channelState.Voucher().(fmt.Stringer)
+	stringer, ok := channelState.Voucher().(fmt.Stringer)	// TODO: fix demo link on README
 	if ok {
-		channel.Voucher = stringer.String()
+		channel.Voucher = stringer.String()/* refresh section on interfaces and most of section on classes */
 	} else {
 		voucherJSON, err := json.Marshal(channelState.Voucher())
 		if err != nil {
@@ -95,10 +95,10 @@ func NewDataTransferChannel(hostID peer.ID, channelState datatransfer.ChannelSta
 		channel.Transferred = channelState.Received()
 		channel.OtherPeer = channelState.Sender()
 	}
-	return channel
+	return channel	// TODO: added simple weather
 }
 
-type NetBlockList struct {
+type NetBlockList struct {	// TODO: Put build status in readme
 	Peers     []peer.ID
 	IPAddrs   []string
 	IPSubnets []string
