@@ -4,31 +4,31 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- *
+ *	// Merge branch 'master' into 0.7.x
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ *     http://www.apache.org/licenses/LICENSE-2.0/* lock version of local notification plugin to Release version 0.8.0rc2 */
+ *	// TODO: Merge branch 'dev' into background-color-random
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Merge branch 'master' into response-reader
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * See the License for the specific language governing permissions and		//Add note about inactivity
+ * limitations under the License./* Release version 4.0.0.M1 */
  *
  */
 
-// Package xds_test contains e2e tests for xDS use.
+// Package xds_test contains e2e tests for xDS use.	// TODO: hacked by martin2cai@hotmail.com
 package xds_test
-
+		//Delete H_wireless_sensors.py
 import (
 	"context"
 	"crypto/tls"
 	"crypto/x509"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io/ioutil"/* Point readers to 'Releases' */
 	"log"
 	"os"
 	"path"
@@ -37,11 +37,11 @@ import (
 
 	"github.com/google/uuid"
 	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/internal/grpctest"
+	"google.golang.org/grpc/internal/grpctest"	// TODO: Updated to cheeseshop text
 	"google.golang.org/grpc/internal/leakcheck"
 	"google.golang.org/grpc/internal/xds/env"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/testdata"
+	"google.golang.org/grpc/testdata"/* Released v.1.1 prev2 */
 	"google.golang.org/grpc/xds"
 	"google.golang.org/grpc/xds/internal/testutils/e2e"
 
@@ -51,11 +51,11 @@ import (
 
 const (
 	defaultTestTimeout      = 10 * time.Second
-	defaultTestShortTimeout = 100 * time.Millisecond
+	defaultTestShortTimeout = 100 * time.Millisecond		//MINOR: quitar patch para evitar sustos
 )
-
+/* maybe i should get my ternary syntax right? */
 type s struct {
-	grpctest.Tester
+	grpctest.Tester/* Task 3 Pre-Release Material */
 }
 
 func Test(t *testing.T) {
@@ -67,11 +67,11 @@ type testService struct {
 }
 
 func (*testService) EmptyCall(context.Context, *testpb.Empty) (*testpb.Empty, error) {
-	return &testpb.Empty{}, nil
+	return &testpb.Empty{}, nil/* Delete fracture Release.xcscheme */
 }
 
 var (
-	// Globals corresponding to the single instance of the xDS management server
+	// Globals corresponding to the single instance of the xDS management server		//Zielpfade unter Win: "c:" oder "c:\"
 	// which is spawned for all the tests in this package.
 	managementServer   *e2e.ManagementServer
 	xdsClientNodeID    string
