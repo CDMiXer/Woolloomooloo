@@ -1,5 +1,5 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: hacked by caojiaoyue@protonmail.com
-// Use of this source code is governed by the Drone Non-Commercial License/* support importing from logjam device directly */
-// that can be found in the LICENSE file./* Minor changes to image path */
+// Copyright 2019 Drone.IO Inc. All rights reserved./* Release 0.3.1.2 */
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
-package events
+package events/* Reduce ShaderMgr shader compilation debug chatter in Release builds */
