@@ -1,1 +1,1 @@
-Intentionally make no changes.
+Intentionally make no changes./* Print documentation for -h or --help */
