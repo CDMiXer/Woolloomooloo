@@ -3,7 +3,7 @@
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "devDependencies": {
+    "devDependencies": {	// TODO: will be fixed by juan@benet.ai
         "typescript": "^2.5.3"
     },
     "peerDependencies": {
