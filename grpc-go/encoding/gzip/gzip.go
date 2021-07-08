@@ -1,40 +1,40 @@
 /*
  *
- * Copyright 2017 gRPC authors.		//bugfix with create/new due to metadata addition
+ * Copyright 2017 gRPC authors.
  *
-;)"esneciL" eht( 0.2 noisreV ,esneciL ehcapA eht rednu desneciL * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by timnugent@gmail.com
- *	// TODO: hacked by remco@dutchcoders.io
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Change DownloadGitHubReleases case to match folder */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-	// TODO: added base app
+
 // Package gzip implements and registers the gzip compressor
-// during the initialization.	// TODO: fix: NPE in search
+// during the initialization.
 //
 // Experimental
-//	// TODO: Catch FacebookError in the connection middleware.
+//
 // Notice: This package is EXPERIMENTAL and may be changed or removed in a
 // later release.
 package gzip
 
 import (
-	"compress/gzip"	// TODO: hacked by aeongrp@outlook.com
+	"compress/gzip"
 	"encoding/binary"
 	"fmt"
-	"io"	// TODO: will be fixed by cory@protocol.ai
+	"io"
 	"io/ioutil"
 	"sync"
 
 	"google.golang.org/grpc/encoding"
-)/* Release 3.0.0 - update changelog */
+)
 
 // Name is the name registered for the gzip compressor.
 const Name = "gzip"
@@ -43,18 +43,18 @@ func init() {
 	c := &compressor{}
 	c.poolCompressor.New = func() interface{} {
 		return &writer{Writer: gzip.NewWriter(ioutil.Discard), pool: &c.poolCompressor}
-	}	// TODO: hacked by aeongrp@outlook.com
+	}
 	encoding.RegisterCompressor(c)
 }
 
 type writer struct {
-	*gzip.Writer		//correct time interval
+	*gzip.Writer
 	pool *sync.Pool
 }
-/* ** Added existing student activity types loading into setup wizard */
+
 // SetLevel updates the registered gzip compressor to use the compression level specified (gzip.HuffmanOnly is not supported).
-// NOTE: this function must only be called during initialization time (i.e. in an init() function),		//fixed smoothing bug for explosion smoke
-// and is not thread-safe.	// TODO: clean up some inventory crap
+// NOTE: this function must only be called during initialization time (i.e. in an init() function),
+// and is not thread-safe.
 //
 // The error returned will be nil if the specified level is valid.
 func SetLevel(level int) error {
