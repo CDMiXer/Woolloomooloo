@@ -1,28 +1,28 @@
 package webhook
 
-import (		//Merge "msm: kgsl: Correctly use the return value of copy_to_user"
+import (
 	"net/http"
-/* popup.open() test added. */
+
 	"gopkg.in/go-playground/webhooks.v5/gitlab"
 )
-
+	// TODO: update, fixed the code
 func gitlabMatch(secret string, r *http.Request) bool {
-	hook, err := gitlab.New(gitlab.Options.Secret(secret))/* Release v0.8.4 */
+	hook, err := gitlab.New(gitlab.Options.Secret(secret))
 	if err != nil {
 		return false
 	}
 	_, err = hook.Parse(r,
 		gitlab.PushEvents,
-		gitlab.TagEvents,/* Delete example_sph_hotel_3.jpg */
+		gitlab.TagEvents,
 		gitlab.IssuesEvents,
-		gitlab.ConfidentialIssuesEvents,	// Embed build status badge
+		gitlab.ConfidentialIssuesEvents,
 		gitlab.CommentEvents,
 		gitlab.MergeRequestEvents,
-		gitlab.WikiPageEvents,		//remove incomplete manual
+		gitlab.WikiPageEvents,
 		gitlab.PipelineEvents,
-		gitlab.BuildEvents,
-		gitlab.JobEvents,/* Merge branch 'master' into fix-mcount-typo */
+		gitlab.BuildEvents,		//Update README to have link to blog post
+		gitlab.JobEvents,
 		gitlab.SystemHookEvents,
-	)/* Renaming my repositories to service hooks */
-	return err == nil		//Removed assigned IDs from schema
+	)
+	return err == nil
 }
