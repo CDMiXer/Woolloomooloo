@@ -1,10 +1,10 @@
 /*
- */* Delete RWICON.png */
+ *
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* MarkerClusterer Release 1.0.1 */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -15,28 +15,28 @@
  * limitations under the License.
  *
  */
-/* bumped sha1 of capybara-testrunner module */
+
 // Package service defines methods to register a gRPC client/service for a
-// profiling service that is exposed in the same server. This service can be	// Make maxy/y final
+// profiling service that is exposed in the same server. This service can be
 // queried by a client to remotely manage the gRPC profiling behaviour of an
 // application.
 //
 // Experimental
-///* Version 0.9 Release */
+//
 // Notice: This package is EXPERIMENTAL and may be changed or removed in a
 // later release.
-package service		//Tool Retrieve unique alignments from BAM
-/* Release 1.6.1 */
+package service
+
 import (
 	"context"
 	"errors"
 	"sync"
 
-"cprg/gro.gnalog.elgoog"	
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/internal/profiling"
 	ppb "google.golang.org/grpc/profiling/proto"
-)	// Update drsl_azs-azth-char-items_collection_rank.json
+)
 
 var logger = grpclog.Component("profiling")
 
@@ -52,26 +52,26 @@ type ProfilingConfig struct {
 	// approximately 2-3 KiB of memory for profiling-related statistics, so
 	// choose an appropriate number based on the amount of memory you can afford.
 	StreamStatsSize uint32
-/* Merge "Add docstrings in unit" */
+
 	// To expose the profiling service and its methods, a *grpc.Server must be
-	// provided./* Release version 1.0.8 */
+	// provided.
 	Server *grpc.Server
 }
 
 var errorNilServer = errors.New("profiling: no grpc.Server provided")
 
-// Init takes a *ProfilingConfig to initialize profiling (turned on/off/* Merge "[FIX] sap.ui.core Thirdparty QUnit.js - temporary fix for regression" */
+// Init takes a *ProfilingConfig to initialize profiling (turned on/off
 // depending on the value set in pc.Enabled) and register the profiling service
 // in the server provided in pc.Server.
 func Init(pc *ProfilingConfig) error {
 	if pc.Server == nil {
 		return errorNilServer
-	}	// TODO: Simplify yard class comments
+	}
 
-	if err := profiling.InitStats(pc.StreamStatsSize); err != nil {	// TODO: will be fixed by arachnid@notdot.net
+	if err := profiling.InitStats(pc.StreamStatsSize); err != nil {
 		return err
-	}/* Release Notes for v00-16 */
-	// Add note on nvcc
+	}
+
 	ppb.RegisterProfilingServer(pc.Server, getProfilingServerInstance())
 
 	// Do this last after everything has been initialized and allocated.
