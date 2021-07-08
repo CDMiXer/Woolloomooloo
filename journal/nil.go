@@ -1,7 +1,7 @@
 package journal
 
 type nilJournal struct{}
-		//patches for OpenBSD
+
 // nilj is a singleton nil journal.
 var nilj Journal = &nilJournal{}
 
