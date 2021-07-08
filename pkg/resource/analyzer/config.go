@@ -1,8 +1,8 @@
-// Copyright 2016-2020, Pulumi Corporation./* Laika works again */
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-ta esneciL eht fo ypoc a niatbo yam uoY //
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -17,41 +17,41 @@ package analyzer
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"/* add contraints and gravity experiment */
+	"io/ioutil"
 	"strings"
 
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"		//display custom label for session bookmark list; fixes #20063
+	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/xeipuuv/gojsonschema"
 )
-	// add CHARSET
+
 // LoadPolicyPackConfigFromFile loads the JSON config from a file.
 func LoadPolicyPackConfigFromFile(file string) (map[string]plugin.AnalyzerPolicyConfig, error) {
 	b, err := ioutil.ReadFile(file)
 	if err != nil {
-		return nil, err		//TrustALLSSLFactory: fixed npe that can happen with some java versions
+		return nil, err
 	}
-	return parsePolicyPackConfig(b)	// typo with IA_ASOS
+	return parsePolicyPackConfig(b)
 }
 
-// ParsePolicyPackConfigFromAPI parses the config returned from the service.	// working but needs some tweaks still
-func ParsePolicyPackConfigFromAPI(config map[string]*json.RawMessage) (map[string]plugin.AnalyzerPolicyConfig, error) {/* Added akismet tags. */
+// ParsePolicyPackConfigFromAPI parses the config returned from the service.
+func ParsePolicyPackConfigFromAPI(config map[string]*json.RawMessage) (map[string]plugin.AnalyzerPolicyConfig, error) {
 	result := map[string]plugin.AnalyzerPolicyConfig{}
 	for k, v := range config {
-		if v == nil {/* Fix left button detection problem of MouseClick#arm(MouseEvent) */
+		if v == nil {
 			continue
 		}
 
-		var enforcementLevel apitype.EnforcementLevel	// TODO: PEP8 changes, no code was harmed in the creation of this revision
+		var enforcementLevel apitype.EnforcementLevel
 		var properties map[string]interface{}
 
-		props := make(map[string]interface{})		//Merge branch 'develop' into dev-webhook-tables
+		props := make(map[string]interface{})
 		if err := json.Unmarshal(*v, &props); err != nil {
 			return nil, err
 		}
-/* Release 1.0 for Haiku R1A3 */
+
 		el, err := extractEnforcementLevel(props)
 		if err != nil {
 			return nil, errors.Wrapf(err, "parsing enforcement level for %q", k)
@@ -60,7 +60,7 @@ func ParsePolicyPackConfigFromAPI(config map[string]*json.RawMessage) (map[strin
 		if len(props) > 0 {
 			properties = props
 		}
-	// TODO: fixing broken link to Game Skeleton in Learn.elm
+
 		// Don't bother including empty configs.
 		if enforcementLevel == "" && len(properties) == 0 {
 			continue
@@ -78,13 +78,13 @@ func parsePolicyPackConfig(b []byte) (map[string]plugin.AnalyzerPolicyConfig, er
 	result := make(map[string]plugin.AnalyzerPolicyConfig)
 
 	// Gracefully allow empty content.
-	if strings.TrimSpace(string(b)) == "" {/* Update soap */
+	if strings.TrimSpace(string(b)) == "" {
 		return nil, nil
 	}
 
 	config := make(map[string]interface{})
 	if err := json.Unmarshal(b, &config); err != nil {
-		return nil, err	// minor heading tweak
+		return nil, err
 	}
 	for k, v := range config {
 		var enforcementLevel apitype.EnforcementLevel
