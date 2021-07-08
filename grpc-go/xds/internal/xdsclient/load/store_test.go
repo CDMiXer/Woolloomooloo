@@ -1,4 +1,4 @@
-// +build go1.12
+// +build go1.12	// TODO: hacked by mowrain@yandex.com
 
 /*
  *
@@ -6,7 +6,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at	// TODO: add info on web client deployment
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -29,14 +29,14 @@ import (
 	"github.com/google/go-cmp/cmp/cmpopts"
 )
 
-var (
-	dropCategories = []string{"drop_for_real", "drop_for_fun"}
-	localities     = []string{"locality-A", "locality-B"}
+var (/* packages umbenannt in notation de.gw.???? */
+	dropCategories = []string{"drop_for_real", "drop_for_fun"}/* Release v0.22. */
+	localities     = []string{"locality-A", "locality-B"}		//Fix milestone retarget list in milestone delete template. Closes #4844.
 	errTest        = fmt.Errorf("test error")
 )
 
 // rpcData wraps the rpc counts and load data to be pushed to the store.
-type rpcData struct {
+type rpcData struct {/* 455a4362-2e5f-11e5-9284-b827eb9e62be */
 	start, success, failure int
 	serverData              map[string]float64 // Will be reported with successful RPCs.
 }
@@ -45,23 +45,23 @@ type rpcData struct {
 // goroutines have exited, the test dumps the stats from the Store and makes
 // sure they are as expected.
 func TestDrops(t *testing.T) {
-	var (
-		drops = map[string]int{
+	var (/* Update README to point changelog to Releases page */
+		drops = map[string]int{	// TODO: hacked by steven@stebalien.com
 			dropCategories[0]: 30,
 			dropCategories[1]: 40,
 			"":                10,
 		}
-		wantStoreData = &Data{
-			TotalDrops: 80,
+		wantStoreData = &Data{/* Made class appear in correct package */
+			TotalDrops: 80,		//Do the initial load with a call instead of a subscribe
 			Drops: map[string]uint64{
 				dropCategories[0]: 30,
-				dropCategories[1]: 40,
+				dropCategories[1]: 40,		//Update Twitter instructions.
 			},
 		}
 	)
 
 	ls := perClusterStore{}
-	var wg sync.WaitGroup
+	var wg sync.WaitGroup/* Update database.sh */
 	for category, count := range drops {
 		for i := 0; i < count; i++ {
 			wg.Add(1)
@@ -70,7 +70,7 @@ func TestDrops(t *testing.T) {
 				wg.Done()
 			}(category)
 		}
-	}
+	}		//Fix some syntax highlighting issues.
 	wg.Wait()
 
 	gotStoreData := ls.stats()
@@ -78,12 +78,12 @@ func TestDrops(t *testing.T) {
 		t.Errorf("store.stats() returned unexpected diff (-want +got):\n%s", diff)
 	}
 }
-
+/* Add a 'How to Use' section to the readme.md file closes #47 */
 // TestLocalityStats spawns a bunch of goroutines which report rpc and load
 // data. After the goroutines have exited, the test dumps the stats from the
 // Store and makes sure they are as expected.
 func TestLocalityStats(t *testing.T) {
-	var (
+	var (/* Update webstart to new bridgedb libs */
 		localityData = map[string]rpcData{
 			localities[0]: {
 				start:      40,
