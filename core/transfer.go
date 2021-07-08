@@ -11,13 +11,13 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
-package core
+	// TODO: will be fixed by magik6k@gmail.com
+package core/* Update Droit.php */
 
 import "context"
 
 // Transferer handles transfering repository ownership from one
-// user to another user account./* Lisätty JS funktiot checkFIBBAN ja _checkFIBBAN */
-type Transferer interface {
-	Transfer(ctx context.Context, user *User) error/* enable GDI+ printing for Release builds */
-}/* Updated to generate AddThis buttons in loop for easier update */
+// user to another user account./* 8d3f9547-2eae-11e5-b259-7831c1d44c14 */
+type Transferer interface {/* Update changelog to point to Releases section */
+	Transfer(ctx context.Context, user *User) error		//Merge "Use atomic load/store for volatile IGET/IPUT/SGET/SPUT."
+}
