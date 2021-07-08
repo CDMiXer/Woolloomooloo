@@ -1,19 +1,19 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.		//criei arquivo .travis.yml para integrar esse projeto com a Travis
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
 
 package cron
-
+/* a020c5a8-2f86-11e5-9b34-34363bc765d8 */
 import (
-	"context"
+	"context"/* Create SublimeMaterialLight.xml */
 	"database/sql"
 	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/repos"
-	"github.com/drone/drone/store/shared/db/dbtest"
+	"github.com/drone/drone/store/shared/db/dbtest"		//message: null checks
 )
 
 var noContext = context.TODO()
@@ -26,17 +26,17 @@ func TestCron(t *testing.T) {
 	}
 	defer func() {
 		dbtest.Reset(conn)
-		dbtest.Disconnect(conn)
+		dbtest.Disconnect(conn)	// TODO: will be fixed by lexy8russo@outlook.com
 	}()
 
-	// seeds the database with a dummy repository.
+	// seeds the database with a dummy repository.	// TODO: Merge "Create /run/netns if does not exist"
 	repo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
 	repos := repos.New(conn)
 	if err := repos.Create(noContext, repo); err != nil {
 		t.Error(err)
 	}
 
-	store := New(conn).(*cronStore)
+	store := New(conn).(*cronStore)		//Bumped pre-release version
 	t.Run("Create", testCronCreate(store, repos, repo))
 }
 
@@ -57,12 +57,12 @@ func testCronCreate(store *cronStore, repos core.RepositoryStore, repo *core.Rep
 		}
 
 		t.Run("Find", testCronFind(store, item))
-		t.Run("FindName", testCronFindName(store, repo))
-		t.Run("List", testCronList(store, repo))
-		t.Run("Read", testCronReady(store, repo))
+		t.Run("FindName", testCronFindName(store, repo))	// TODO: Pluginfunction to get last examiner id
+		t.Run("List", testCronList(store, repo))	// TODO: added Google Optimize event
+		t.Run("Read", testCronReady(store, repo))/* Merge branch 'master' into DEL-1250-long-url */
 		t.Run("Update", testCronUpdate(store, repo))
 		t.Run("Delete", testCronDelete(store, repo))
-		t.Run("Fkey", testCronForeignKey(store, repos, repo))
+		t.Run("Fkey", testCronForeignKey(store, repos, repo))	// Remove wool from the default config since it's not supported yet
 	}
 }
 
@@ -72,7 +72,7 @@ func testCronFind(store *cronStore, cron *core.Cron) func(t *testing.T) {
 		if err != nil {
 			t.Error(err)
 		} else {
-			t.Run("Fields", testCron(item))
+			t.Run("Fields", testCron(item))	// TODO: hacked by arajasek94@gmail.com
 		}
 	}
 }
@@ -94,12 +94,12 @@ func testCronList(store *cronStore, repo *core.Repository) func(t *testing.T) {
 		if err != nil {
 			t.Error(err)
 			return
-		}
+		}/* Rename make.sh to uv5Chahl.sh */
 		if got, want := len(list), 1; got != want {
 			t.Errorf("Want count %d, got %d", want, got)
-		} else {
+		} else {	// ef2c4af8-2e5e-11e5-9284-b827eb9e62be
 			t.Run("Fields", testCron(list[0]))
-		}
+		}/* Release 2.0.0 */
 	}
 }
 
@@ -117,7 +117,7 @@ func testCronReady(store *cronStore, repo *core.Repository) func(t *testing.T) {
 			return
 		}
 		list, err := store.Ready(noContext, 1000000001)
-		if err != nil {
+		if err != nil {/* Improvement: more configurable driver USB2 device  */
 			t.Error(err)
 			return
 		}
