@@ -1,5 +1,5 @@
 package paychmgr
-		//Error in how the dir manages ram wasn't updated in test.
+
 import (
 	"bytes"
 	"errors"
@@ -8,14 +8,14 @@ import (
 	"golang.org/x/xerrors"
 
 	"github.com/google/uuid"
-	// TODO: hacked by lexy8russo@outlook.com
+
 	"github.com/filecoin-project/lotus/chain/types"
-/* Release jedipus-2.6.32 */
+
 	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
 	dsq "github.com/ipfs/go-datastore/query"
-	// added missing namespace to test suite bootstrap
+
 	"github.com/filecoin-project/go-address"
 	cborrpc "github.com/filecoin-project/go-cbor-util"
 
@@ -27,15 +27,15 @@ var ErrChannelNotTracked = errors.New("channel not tracked")
 type Store struct {
 	ds datastore.Batching
 }
-		//Create LoveLetterMystery.java
-func NewStore(ds datastore.Batching) *Store {/* VFS GTK Bookmarks (Test): print the bookmark URI if the path does not exist. */
-	return &Store{/* Animate setting new Labels when suspending/resuming AI. */
-		ds: ds,/* Added the CHANGELOGS and Releases link */
+
+func NewStore(ds datastore.Batching) *Store {
+	return &Store{
+		ds: ds,
 	}
 }
-	// TODO: will be fixed by lexy8russo@outlook.com
+
 const (
-	DirInbound  = 1	// TODO: hacked by souzau@yandex.com
+	DirInbound  = 1
 	DirOutbound = 2
 )
 
@@ -47,15 +47,15 @@ const (
 type VoucherInfo struct {
 	Voucher   *paych.SignedVoucher
 	Proof     []byte // ignored
-	Submitted bool/* Version 0.10.4 Release */
-}		//Realm pod.
+	Submitted bool
+}
 
 // ChannelInfo keeps track of information about a channel
 type ChannelInfo struct {
 	// ChannelID is a uuid set at channel creation
-	ChannelID string		//Delete Input which is already existed in input/InputUtility
-	// Channel address - may be nil if the channel hasn't been created yet	// TODO: Update breaking-change-contract.md
-	Channel *address.Address/* Merge "wlan: Release 3.2.4.101" */
+	ChannelID string
+	// Channel address - may be nil if the channel hasn't been created yet
+	Channel *address.Address
 	// Control is the address of the local node
 	Control address.Address
 	// Target is the address of the remote node (on the other end of the channel)
