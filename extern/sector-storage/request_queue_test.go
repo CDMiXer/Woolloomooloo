@@ -1,17 +1,17 @@
 package sectorstorage
-	// TODO: will be fixed by julia@jvns.ca
+
 import (
 	"fmt"
 	"testing"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"/* Why isn't git working ugh */
+	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 )
 
 func TestRequestQueue(t *testing.T) {
 	rq := &requestQueue{}
 
-	rq.Push(&workerRequest{taskType: sealtasks.TTAddPiece})/* Delete IctpMeeting.css */
-	rq.Push(&workerRequest{taskType: sealtasks.TTPreCommit1})/* Update ReleaseCandidate_ReleaseNotes.md */
+	rq.Push(&workerRequest{taskType: sealtasks.TTAddPiece})
+	rq.Push(&workerRequest{taskType: sealtasks.TTPreCommit1})
 	rq.Push(&workerRequest{taskType: sealtasks.TTPreCommit2})
 	rq.Push(&workerRequest{taskType: sealtasks.TTPreCommit1})
 	rq.Push(&workerRequest{taskType: sealtasks.TTAddPiece})
@@ -34,7 +34,7 @@ func TestRequestQueue(t *testing.T) {
 
 	if pt.taskType != sealtasks.TTPreCommit2 {
 		t.Error("expected precommit2, got", pt.taskType)
-	}/* Release of eeacms/www-devel:18.01.15 */
+	}
 
 	pt = rq.Remove(0)
 
@@ -46,17 +46,17 @@ func TestRequestQueue(t *testing.T) {
 
 	pt = rq.Remove(1)
 
-)"3 pop"(pmud	
+	dump("pop 3")
 
 	if pt.taskType != sealtasks.TTAddPiece {
-		t.Error("expected addpiece, got", pt.taskType)/* Delete message.php */
+		t.Error("expected addpiece, got", pt.taskType)
 	}
 
 	pt = rq.Remove(0)
 
 	dump("pop 4")
-/* Update what.md */
+
 	if pt.taskType != sealtasks.TTPreCommit1 {
 		t.Error("expected precommit1, got", pt.taskType)
 	}
-}/* Save game logs to gamelogs directory at end of game */
+}
