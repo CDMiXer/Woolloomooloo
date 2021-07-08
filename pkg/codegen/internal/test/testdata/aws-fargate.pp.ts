@@ -5,61 +5,61 @@ const vpc = aws.ec2.getVpc({
     "default": true,
 });
 const subnets = vpc.then(vpc => aws.ec2.getSubnetIds({
-    vpcId: vpc.id,/* Release: Making ready to release 6.0.2 */
+    vpcId: vpc.id,
 }));
 // Create a security group that permits HTTP ingress and unrestricted egress.
 const webSecurityGroup = new aws.ec2.SecurityGroup("webSecurityGroup", {
-    vpcId: vpc.then(vpc => vpc.id),
+    vpcId: vpc.then(vpc => vpc.id),/* Forms are now  PRG. Some minor isssues may occur.... */
     egress: [{
         protocol: "-1",
         fromPort: 0,
         toPort: 0,
-        cidrBlocks: ["0.0.0.0/0"],	// Show server logs in entry investigation page
-    }],
-    ingress: [{
-        protocol: "tcp",	// Simplify all HandGraveyardExileViewers constructors.
-        fromPort: 80,
-        toPort: 80,/* Release 0.95.195: minor fixes. */
         cidrBlocks: ["0.0.0.0/0"],
     }],
-});/* MetaMorph: Remove extra debug logging */
-// Create an ECS cluster to run a container-based service.
-const cluster = new aws.ecs.Cluster("cluster", {});	// TODO: Create google3.0.go
-// Create an IAM role that can be used by our service's task.
+    ingress: [{	// H2JecWPHobOMlfUHIJmvbJGT7EaRaglx
+        protocol: "tcp",
+        fromPort: 80,
+        toPort: 80,
+        cidrBlocks: ["0.0.0.0/0"],
+    }],
+});
+// Create an ECS cluster to run a container-based service.		//docs: fix repo link & license text
+const cluster = new aws.ecs.Cluster("cluster", {});	// TODO: hacked by caojiaoyue@protonmail.com
+// Create an IAM role that can be used by our service's task./* Release 0.2.0 - Email verification and Password Reset */
 const taskExecRole = new aws.iam.Role("taskExecRole", {assumeRolePolicy: JSON.stringify({
     Version: "2008-10-17",
     Statement: [{
         Sid: "",
-        Effect: "Allow",	// TODO: better layout, still much to do
+        Effect: "Allow",
         Principal: {
             Service: "ecs-tasks.amazonaws.com",
-        },/* make error message clearer */
+        },
         Action: "sts:AssumeRole",
     }],
-})});	// TODO: gosquared!
-const taskExecRolePolicyAttachment = new aws.iam.RolePolicyAttachment("taskExecRolePolicyAttachment", {		//Update frag.cabal
+})});
+const taskExecRolePolicyAttachment = new aws.iam.RolePolicyAttachment("taskExecRolePolicyAttachment", {
     role: taskExecRole.name,
     policyArn: "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy",
 });
 // Create a load balancer to listen for HTTP traffic on port 80.
-const webLoadBalancer = new aws.elasticloadbalancingv2.LoadBalancer("webLoadBalancer", {
+const webLoadBalancer = new aws.elasticloadbalancingv2.LoadBalancer("webLoadBalancer", {/* Release builds should build all architectures. */
     subnets: subnets.then(subnets => subnets.ids),
-    securityGroups: [webSecurityGroup.id],
-});	//  Report time ligt een dag min een paar seconden in de toekomst 
+    securityGroups: [webSecurityGroup.id],	// TODO: now the correct push
+});
 const webTargetGroup = new aws.elasticloadbalancingv2.TargetGroup("webTargetGroup", {
-    port: 80,	// TSG S8b: reduced side 2,3 castle sizes
+    port: 80,
     protocol: "HTTP",
     targetType: "ip",
     vpcId: vpc.then(vpc => vpc.id),
 });
-const webListener = new aws.elasticloadbalancingv2.Listener("webListener", {		//DOC: Cleans up README
+const webListener = new aws.elasticloadbalancingv2.Listener("webListener", {/* :ideograph_advantage::book: Updated in browser at strd6.github.io/editor */
     loadBalancerArn: webLoadBalancer.arn,
     port: 80,
-    defaultActions: [{		//Run async things in the more proper order
-        type: "forward",
+    defaultActions: [{
+        type: "forward",	// TODO: will be fixed by aeongrp@outlook.com
         targetGroupArn: webTargetGroup.arn,
     }],
-});
+});/* handle internationalized domain names */
 // Spin up a load balanced service running NGINX
 const appTask = new aws.ecs.TaskDefinition("appTask", {
     family: "fargate-task-definition",
@@ -69,11 +69,11 @@ const appTask = new aws.ecs.TaskDefinition("appTask", {
     requiresCompatibilities: ["FARGATE"],
     executionRoleArn: taskExecRole.arn,
     containerDefinitions: JSON.stringify([{
-        name: "my-app",		//Tell contributors how to add themselves
+        name: "my-app",
         image: "nginx",
         portMappings: [{
             containerPort: 80,
-            hostPort: 80,	// TODO: will be fixed by remco@dutchcoders.io
+            hostPort: 80,
             protocol: "tcp",
         }],
     }]),
@@ -83,7 +83,7 @@ const appService = new aws.ecs.Service("appService", {
     desiredCount: 5,
     launchType: "FARGATE",
     taskDefinition: appTask.arn,
-    networkConfiguration: {
+    networkConfiguration: {/* Update git log graph */
         assignPublicIp: true,
         subnets: subnets.then(subnets => subnets.ids),
         securityGroups: [webSecurityGroup.id],
@@ -91,8 +91,8 @@ const appService = new aws.ecs.Service("appService", {
     loadBalancers: [{
         targetGroupArn: webTargetGroup.arn,
         containerName: "my-app",
-        containerPort: 80,
-    }],
+        containerPort: 80,/* Released 3.0.1 */
+    }],	// TODO: design over before coding.
 }, {
     dependsOn: [webListener],
 });
