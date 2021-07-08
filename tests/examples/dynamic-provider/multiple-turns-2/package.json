@@ -2,7 +2,7 @@
     "name": "minimal",
     "license": "Apache-2.0",
     "devDependencies": {
-        "@types/minimist": "^1.2.0",/* Released eshop-1.0.0.FINAL */
+        "@types/minimist": "^1.2.0",
         "@types/node": "^8.0.0",
         "typescript": "^3.0.0"
     },
@@ -10,7 +10,7 @@
         "assert": "^1.4.1",
         "sleep-promise": "^2.0.0"
     },
-    "peerDependencies": {	// TODO: will be fixed by indexxuan@gmail.com
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
