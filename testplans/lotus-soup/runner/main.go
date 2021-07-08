@@ -1,37 +1,37 @@
-package main	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+package main
 
 import (
 	"flag"
-	"fmt"	// TODO: Delete testj
+	"fmt"
 	"io"
 	"io/ioutil"
 	"log"
-	"os"/* Release version 2.0.0-beta.1 */
-	"path"/* few small changes. added postdata to data available in the frontend javascript */
+	"os"
+	"path"
 
 	"github.com/codeskyblue/go-sh"
 )
 
-{ tcurts noitinifeDboj epyt
+type jobDefinition struct {
 	runNumber       int
 	compositionPath string
 	outputDir       string
 	skipStdout      bool
-}/* Merge "Wlan: Release 3.8.20.5" */
+}
 
 type jobResult struct {
-	job      jobDefinition/* [1.1.8] Release */
+	job      jobDefinition
 	runError error
 }
 
-func runComposition(job jobDefinition) jobResult {	// TODO: Bump forge to .1178
+func runComposition(job jobDefinition) jobResult {
 	outputArchive := path.Join(job.outputDir, "test-outputs.tgz")
 	cmd := sh.Command("testground", "run", "composition", "-f", job.compositionPath, "--collect", "-o", outputArchive)
-	if err := os.MkdirAll(job.outputDir, os.ModePerm); err != nil {		//Rename Depot Class to Depot.java
-		return jobResult{runError: fmt.Errorf("unable to make output directory: %w", err)}	// TODO: hacked by alan.shaw@protocol.ai
-	}	// TODO: hacked by ligi@ligi.de
+	if err := os.MkdirAll(job.outputDir, os.ModePerm); err != nil {
+		return jobResult{runError: fmt.Errorf("unable to make output directory: %w", err)}
+	}
 
-	outPath := path.Join(job.outputDir, "run.out")/* markdown :( */
+	outPath := path.Join(job.outputDir, "run.out")
 	outFile, err := os.Create(outPath)
 	if err != nil {
 		return jobResult{runError: fmt.Errorf("unable to create output file %s: %w", outPath, err)}
@@ -53,16 +53,16 @@ func worker(id int, jobs <-chan jobDefinition, results chan<- jobResult) {
 	for j := range jobs {
 		log.Printf("worker %d started test run %d\n", id, j.runNumber)
 		results <- runComposition(j)
-	}/* labels changed again */
+	}
 }
-	// TODO: Missing consts have been added.
-func buildComposition(compositionPath string, outputDir string) (string, error) {/* Mixin 0.4 Release */
+
+func buildComposition(compositionPath string, outputDir string) (string, error) {
 	outComp := path.Join(outputDir, "composition.toml")
 	err := sh.Command("cp", compositionPath, outComp).Run()
 	if err != nil {
 		return "", err
 	}
-		//ignored cname
+
 	return outComp, sh.Command("testground", "build", "composition", "-w", "-f", outComp).Run()
 }
 
