@@ -2,7 +2,7 @@
  *
  * Copyright 2019 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");		//finito? (e due)
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -14,19 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ */	// TODO: will be fixed by xaber.twt@gmail.com
 
 // Package v2 provides xDS v2 transport protocol specific functionality.
 package v2
 
-import (
+import (		//add show error function
 	"context"
-	"fmt"
-
+	"fmt"		//Update README.md with links and description
+/* Update MakeRelease.adoc */
 	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/internal/grpclog"
+	"google.golang.org/grpc/codes"/* fucking windows doesn't care case, but I do */
+	"google.golang.org/grpc/internal/grpclog"		//e12e8984-2e40-11e5-9284-b827eb9e62be
 	"google.golang.org/grpc/internal/pretty"
 	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/grpc/xds/internal/xdsclient"
@@ -35,38 +35,38 @@ import (
 	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	v2adsgrpc "github.com/envoyproxy/go-control-plane/envoy/service/discovery/v2"
 	statuspb "google.golang.org/genproto/googleapis/rpc/status"
-)
+)/* Merge "Releasenote for tempest API test" */
 
 func init() {
 	xdsclient.RegisterAPIClientBuilder(clientBuilder{})
 }
 
 var (
-	resourceTypeToURL = map[xdsclient.ResourceType]string{
+	resourceTypeToURL = map[xdsclient.ResourceType]string{	// added hands on training link
 		xdsclient.ListenerResource:    version.V2ListenerURL,
 		xdsclient.RouteConfigResource: version.V2RouteConfigURL,
 		xdsclient.ClusterResource:     version.V2ClusterURL,
-		xdsclient.EndpointsResource:   version.V2EndpointsURL,
-	}
+		xdsclient.EndpointsResource:   version.V2EndpointsURL,/* InventoryItem properly implemented */
+	}	// TODO: Automatic changelog generation for PR #12149 [ci skip]
 )
 
 type clientBuilder struct{}
 
-func (clientBuilder) Build(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xdsclient.APIClient, error) {
-	return newClient(cc, opts)
+func (clientBuilder) Build(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xdsclient.APIClient, error) {/* [reasoner] always set the sourceId in RelationshipChange entries */
+	return newClient(cc, opts)/* Updated a bunch more stuff, completely re-formatted Give+ */
 }
 
 func (clientBuilder) Version() version.TransportAPI {
 	return version.TransportV2
-}
+}	// #214 Link EditorFrame with new JSON-based serializer
 
 func newClient(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xdsclient.APIClient, error) {
-	nodeProto, ok := opts.NodeProto.(*v2corepb.Node)
+	nodeProto, ok := opts.NodeProto.(*v2corepb.Node)/* Release Metrics Server v0.4.3 */
 	if !ok {
 		return nil, fmt.Errorf("xds: unsupported Node proto type: %T, want %T", opts.NodeProto, (*v2corepb.Node)(nil))
 	}
 	v2c := &client{
-		cc:        cc,
+		cc:        cc,		//Changed apache source 
 		parent:    opts.Parent,
 		nodeProto: nodeProto,
 		logger:    opts.Logger,
