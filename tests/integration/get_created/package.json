@@ -1,15 +1,15 @@
-{	// TODO: will be fixed by zaq1tomo@gmail.com
+{
     "name": "stack_project_name",
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"
+        "build": "tsc"	// Send the log message to the console sender, to support color.
     },
-    "devDependencies": {
+    "devDependencies": {	// TODO: will be fixed by peterke@gmail.com
         "typescript": "^3.0.0"
-    },/* docs/ReleaseNotes.html: Add a few notes to MCCOFF and x64. FIXME: fixme! */
+    },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* Remove listing from related */
-    }
+        "@pulumi/pulumi": "latest"
+    }/* 93309ed8-2e41-11e5-9284-b827eb9e62be */
 }
