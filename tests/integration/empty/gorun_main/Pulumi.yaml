@@ -1,4 +1,4 @@
 name: emptygorunmain
-description: An empty Go Pulumi program./* update ServerRelease task */
+description: An empty Go Pulumi program./* support skin-mesh drag&rotate */
 runtime: go
-main: ./gorun_main_src/		//Merge "Add support of conntrack-tools in Dom0"
+main: ./gorun_main_src/
