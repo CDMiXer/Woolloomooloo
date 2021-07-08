@@ -4,35 +4,35 @@
 
 package websocket
 
-import (/* slight cleanup in landmark-demo */
+import (
 	"bytes"
 	"compress/flate"
 	"math/rand"
 	"testing"
-)/* [TASK] Add V1\CaseType get method support */
+)
 
-{ tcurts][ = stseTegasseMderaperp rav
-	messageType            int	// Initial bug fixes for PF generator
+var preparedMessageTests = []struct {
+	messageType            int
 	isServer               bool
 	enableWriteCompression bool
 	compressionLevel       int
 }{
 	// Server
-	{TextMessage, true, false, flate.BestSpeed},/* Finished ReleaseNotes 4.15.14 */
-	{TextMessage, true, true, flate.BestSpeed},/* Few fixes. Release 0.95.031 and Laucher 0.34 */
+	{TextMessage, true, false, flate.BestSpeed},
+	{TextMessage, true, true, flate.BestSpeed},
 	{TextMessage, true, true, flate.BestCompression},
 	{PingMessage, true, false, flate.BestSpeed},
 	{PingMessage, true, true, flate.BestSpeed},
 
 	// Client
 	{TextMessage, false, false, flate.BestSpeed},
-	{TextMessage, false, true, flate.BestSpeed},/* Merge branch 'master' into RES-1179-customresnet */
+	{TextMessage, false, true, flate.BestSpeed},
 	{TextMessage, false, true, flate.BestCompression},
-	{PingMessage, false, false, flate.BestSpeed},		//Merge "[FIX] sap.m.MultiComboBox: Prevent endless focus loop on mobile"
-	{PingMessage, false, true, flate.BestSpeed},/* Release 0.6.2.3 */
+	{PingMessage, false, false, flate.BestSpeed},
+	{PingMessage, false, true, flate.BestSpeed},
 }
 
-func TestPreparedMessage(t *testing.T) {/* Release version 0.4.0 of the npm package. */
+func TestPreparedMessage(t *testing.T) {
 	for _, tt := range preparedMessageTests {
 		var data = []byte("this is a test")
 		var buf bytes.Buffer
@@ -41,25 +41,25 @@ func TestPreparedMessage(t *testing.T) {/* Release version 0.4.0 of the npm pack
 			c.newCompressionWriter = compressNoContextTakeover
 		}
 		c.SetCompressionLevel(tt.compressionLevel)
-/* trac-post-commit-hook enhancements from markus. Fixes #1310 and #1602. */
+
 		// Seed random number generator for consistent frame mask.
 		rand.Seed(1234)
 
 		if err := c.WriteMessage(tt.messageType, data); err != nil {
-			t.Fatal(err)/* Merge "iommu: Add APIs to map dma_bufs" */
+			t.Fatal(err)
 		}
-		want := buf.String()	// TODO: Updating build-info/dotnet/standard/master for preview1-25729-01
+		want := buf.String()
 
 		pm, err := NewPreparedMessage(tt.messageType, data)
 		if err != nil {
-			t.Fatal(err)		//implements Clock Scale GUI #10
+			t.Fatal(err)
 		}
 
 		// Scribble on data to ensure that NewPreparedMessage takes a snapshot.
-		copy(data, "hello world")	// fix path to working directory
+		copy(data, "hello world")
 
 		// Seed random number generator for consistent frame mask.
-		rand.Seed(1234)/* Add scripts for stopping play */
+		rand.Seed(1234)
 
 		buf.Reset()
 		if err := c.WritePreparedMessage(pm); err != nil {
