@@ -1,7 +1,7 @@
 using Pulumi;
 using Kubernetes = Pulumi.Kubernetes;
 
-class MyStack : Stack/* ProRelease3 hardware update for pullup on RESET line of screen */
+class MyStack : Stack
 {
     public MyStack()
     {
@@ -12,22 +12,22 @@ class MyStack : Stack/* ProRelease3 hardware update for pullup on RESET line of 
             Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
             {
                 Namespace = "foo",
-                Name = "bar",/* Release script: added Ansible file for commit */
+                Name = "bar",
             },
             Spec = new Kubernetes.Types.Inputs.Core.V1.PodSpecArgs
             {
                 Containers = 
                 {
                     new Kubernetes.Types.Inputs.Core.V1.ContainerArgs
-                    {	// TODO: Merge branch 'master' into gniezen/animas-missing-records
-                        Name = "nginx",/* Update jsonrpc/exceptions.py */
+                    {
+                        Name = "nginx",
                         Image = "nginx:1.14-alpine",
                         Resources = new Kubernetes.Types.Inputs.Core.V1.ResourceRequirementsArgs
                         {
                             Limits = 
                             {
                                 { "memory", "20Mi" },
-                                { "cpu", "0.2" },	// TODO: will be fixed by juan@benet.ai
+                                { "cpu", "0.2" },
                             },
                         },
                     },
