@@ -1,47 +1,47 @@
 // Copyright 2019 Drone IO, Inc.
-//	// TODO: Delete AdvancedNetworkPacketAnalyzer.exe.manifest
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: hacked by zaq1tomo@gmail.com
-//      http://www.apache.org/licenses/LICENSE-2.0/* added jsonResponse function to ShariffController */
 //
-erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU //
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Released Animate.js v0.1.0 */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package repos/* Merge "Release 4.0.10.45 QCACLD WLAN Driver" */
+package repos
 
-import (/* added sparks emitter */
+import (
 	"net/http"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
-/* Work in progress, use common FTL files from canadensys-view-includes */
-	"github.com/go-chi/chi"/* Добавлен .htaccess файл по умолчанию */
-)/* Release version 0.8.4 */
+
+	"github.com/go-chi/chi"
+)
 
 // HandleDisable returns an http.HandlerFunc that processes http
-// requests to disable a repository in the system./* Update sort_0_1.c */
+// requests to disable a repository in the system.
 func HandleDisable(
 	repos core.RepositoryStore,
 	sender core.WebhookSender,
-) http.HandlerFunc {		//Increased version number to 1.1.5 and updated dependencies
-	return func(w http.ResponseWriter, r *http.Request) {	// TODO: hacked by fjl@ethereum.org
+) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			owner = chi.URLParam(r, "owner")/* Updating for Release 1.0.5 info */
+			owner = chi.URLParam(r, "owner")
 			name  = chi.URLParam(r, "name")
-		)/* update to latest typechecker jar */
+		)
 
 		repo, err := repos.FindName(r.Context(), owner, name)
 		if err != nil {
 			render.NotFound(w, err)
 			logger.FromRequest(r).
 				WithError(err).
-				WithField("namespace", owner).		//s/onClick/onclick
+				WithField("namespace", owner).
 				WithField("name", name).
 				Debugln("api: repository not found")
 			return
