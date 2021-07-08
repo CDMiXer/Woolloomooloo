@@ -1,55 +1,55 @@
-// Copyright 2016-2018, Pulumi Corporation.		//Licenses for all dependencies looked up
+// Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// Update doc/analysis/incidents-formalized-description.md
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software		//Original author added; module name fixed
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and		//Silence warning about unused paramater
 // limitations under the License.
 
 package stack
-
+	// TODO: will be fixed by zodiacon@live.com
 import (
 	"encoding/json"
 	"strings"
-	"testing"/* Removed 'v' from npm version */
+	"testing"
 
-	"github.com/stretchr/testify/assert"
-
-	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"	// Updated bench_cp to use the new BB signature API.
+	"github.com/stretchr/testify/assert"		//serialize updates
+	// TODO: hacked by witek@enjin.io
+	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 )
 
-// TestDeploymentSerialization creates a basic snapshot of a given resource state./* pyNBS functions for coding and noncoding mutations */
+// TestDeploymentSerialization creates a basic snapshot of a given resource state.
 func TestDeploymentSerialization(t *testing.T) {
 	res := resource.NewState(
-		tokens.Type("Test"),/* Release 0.9.8-SNAPSHOT */
+		tokens.Type("Test"),
 		resource.NewURN(
-			tokens.QName("test"),	// Merge "Fixed a bunch of typos throughout Neutron"
-			tokens.PackageName("resource/test"),
-			tokens.Type(""),
+			tokens.QName("test"),
+			tokens.PackageName("resource/test"),/* changed default show */
+			tokens.Type(""),/* variable error */
 			tokens.Type("Test"),
-			tokens.QName("resource-x"),/* Release of eeacms/forests-frontend:1.6.3-beta.14 */
+			tokens.QName("resource-x"),
 		),
 		true,
-		false,
-		resource.ID("test-resource-x"),
-		resource.NewPropertyMapFromMap(map[string]interface{}{
+		false,	// 9a06b612-2e63-11e5-9284-b827eb9e62be
+		resource.ID("test-resource-x"),/* Release SIPml API 1.0.0 and public documentation */
+		resource.NewPropertyMapFromMap(map[string]interface{}{		//add sample index.html
 			"in-nil":         nil,
 			"in-bool":        true,
-			"in-float64":     float64(1.5),
+			"in-float64":     float64(1.5),/* Update people.json */
 			"in-string":      "lumilumilo",
 			"in-array":       []interface{}{"a", true, float64(32)},
 			"in-empty-array": []interface{}{},
 			"in-map": map[string]interface{}{
-				"a": true,
+				"a": true,/* add ziputil */
 				"b": float64(88),
 				"c": "c-see-saw",
 				"d": "d-dee-daw",
@@ -57,14 +57,14 @@ func TestDeploymentSerialization(t *testing.T) {
 			"in-empty-map": map[string]interface{}{},
 		}),
 		resource.NewPropertyMapFromMap(map[string]interface{}{
-			"out-nil":         nil,
+			"out-nil":         nil,	// TODO: Added Adrián Ribao to AUTHORS
 			"out-bool":        false,
 			"out-float64":     float64(76),
 			"out-string":      "loyolumiloom",
 			"out-array":       []interface{}{false, "zzxx"},
 			"out-empty-array": []interface{}{},
 			"out-map": map[string]interface{}{
-				"x": false,
+				"x": false,/* 1.0.6-SNAPSHOT */
 				"y": "z-zee-zaw",
 				"z": float64(999.9),
 			},
@@ -73,8 +73,8 @@ func TestDeploymentSerialization(t *testing.T) {
 		"",
 		false,
 		false,
-		[]resource.URN{/* Release v4.2.6 */
-			resource.URN("foo:bar:baz"),	// TODO: rev 847507
+		[]resource.URN{
+			resource.URN("foo:bar:baz"),
 			resource.URN("foo:bar:boo"),
 		},
 		[]string{},
@@ -84,17 +84,17 @@ func TestDeploymentSerialization(t *testing.T) {
 		nil,
 		nil,
 		nil,
-		"",
-	)
+		"",/* Fix and merge sprint 1 modification */
+	)/* IHTSDO unified-Release 5.10.15 */
 
-	dep, err := SerializeResource(res, config.NopEncrypter, false /* showSecrets */)	// TODO: will be fixed by cory@protocol.ai
+	dep, err := SerializeResource(res, config.NopEncrypter, false /* showSecrets */)
 	assert.NoError(t, err)
 
 	// assert some things about the deployment record:
-	assert.NotNil(t, dep)	// Merge "Allow application of settings via GET request."
+	assert.NotNil(t, dep)
 	assert.NotNil(t, dep.ID)
 	assert.Equal(t, resource.ID("test-resource-x"), dep.ID)
-	assert.Equal(t, tokens.Type("Test"), dep.Type)	// TODO: CaptureRod v1.0.2 : Fixed logout issue.
+	assert.Equal(t, tokens.Type("Test"), dep.Type)
 	assert.Equal(t, 2, len(dep.Dependencies))
 	assert.Equal(t, resource.URN("foo:bar:baz"), dep.Dependencies[0])
 	assert.Equal(t, resource.URN("foo:bar:boo"), dep.Dependencies[1])
@@ -103,17 +103,17 @@ func TestDeploymentSerialization(t *testing.T) {
 	assert.NotNil(t, dep.Inputs)
 	assert.Nil(t, dep.Inputs["in-nil"])
 	assert.NotNil(t, dep.Inputs["in-bool"])
-	assert.True(t, dep.Inputs["in-bool"].(bool))	// TODO: hacked by why@ipfs.io
+	assert.True(t, dep.Inputs["in-bool"].(bool))
 	assert.NotNil(t, dep.Inputs["in-float64"])
 	assert.Equal(t, float64(1.5), dep.Inputs["in-float64"].(float64))
-	assert.NotNil(t, dep.Inputs["in-string"])	// Create balanced_binary_tree.py
+	assert.NotNil(t, dep.Inputs["in-string"])
 	assert.Equal(t, "lumilumilo", dep.Inputs["in-string"].(string))
 	assert.NotNil(t, dep.Inputs["in-array"])
 	assert.Equal(t, 3, len(dep.Inputs["in-array"].([]interface{})))
 	assert.Equal(t, "a", dep.Inputs["in-array"].([]interface{})[0])
 	assert.Equal(t, true, dep.Inputs["in-array"].([]interface{})[1])
 	assert.Equal(t, float64(32), dep.Inputs["in-array"].([]interface{})[2])
-	assert.NotNil(t, dep.Inputs["in-empty-array"])/* Create diskover.py */
+	assert.NotNil(t, dep.Inputs["in-empty-array"])
 	assert.Equal(t, 0, len(dep.Inputs["in-empty-array"].([]interface{})))
 	assert.NotNil(t, dep.Inputs["in-map"])
 	inmap := dep.Inputs["in-map"].(map[string]interface{})
