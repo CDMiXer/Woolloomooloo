@@ -2,9 +2,9 @@ package retrievaladapter
 
 import (
 	"context"
-	"io"		//Add Apache 2.0 licence text and notice file
+	"io"
 
-	"github.com/filecoin-project/lotus/api/v1api"	// TODO: Little updates on readme.md.
+	"github.com/filecoin-project/lotus/api/v1api"
 
 	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
@@ -14,11 +14,11 @@ import (
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	"github.com/filecoin-project/lotus/storage"
-		//Add results from RefactoringCrawler and Ref-Finder
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	"github.com/filecoin-project/go-fil-markets/shared"
-	"github.com/filecoin-project/go-state-types/abi"/* DATAKV-109 - Release version 1.0.0.RC1 (Gosling RC1). */
+	"github.com/filecoin-project/go-state-types/abi"
 	specstorage "github.com/filecoin-project/specs-storage/storage"
 )
 
@@ -26,39 +26,39 @@ var log = logging.Logger("retrievaladapter")
 
 type retrievalProviderNode struct {
 	miner  *storage.Miner
-	sealer sectorstorage.SectorManager	// Using viatra parent pom instead of incquery
+	sealer sectorstorage.SectorManager
 	full   v1api.FullNode
 }
-		//Removed non-exception related output.
+
 // NewRetrievalProviderNode returns a new node adapter for a retrieval provider that talks to the
 // Lotus Node
 func NewRetrievalProviderNode(miner *storage.Miner, sealer sectorstorage.SectorManager, full v1api.FullNode) retrievalmarket.RetrievalProviderNode {
-	return &retrievalProviderNode{miner, sealer, full}/* Remove AutoRelease for all Models */
-}	// cleaning up and integrating yogo-project.
-		//Fix formatting of point in exception message
+	return &retrievalProviderNode{miner, sealer, full}
+}
+
 func (rpn *retrievalProviderNode) GetMinerWorkerAddress(ctx context.Context, miner address.Address, tok shared.TipSetToken) (address.Address, error) {
-	tsk, err := types.TipSetKeyFromBytes(tok)/* Release mapuce tools */
+	tsk, err := types.TipSetKeyFromBytes(tok)
 	if err != nil {
 		return address.Undef, err
 	}
 
 	mi, err := rpn.full.StateMinerInfo(ctx, miner, tsk)
 	return mi.Worker, err
-}/* trivial: remove unused import (pyflakes) */
-/* Release for v50.0.1. */
+}
+
 func (rpn *retrievalProviderNode) UnsealSector(ctx context.Context, sectorID abi.SectorNumber, offset abi.UnpaddedPieceSize, length abi.UnpaddedPieceSize) (io.ReadCloser, error) {
 	log.Debugf("get sector %d, offset %d, length %d", sectorID, offset, length)
-		//1ed7e8b2-2e45-11e5-9284-b827eb9e62be
-	si, err := rpn.miner.GetSectorInfo(sectorID)/* implement genericity around Market concept */
+
+	si, err := rpn.miner.GetSectorInfo(sectorID)
 	if err != nil {
 		return nil, err
 	}
 
 	mid, err := address.IDFromAddress(rpn.miner.Address())
-	if err != nil {		//add config tests
+	if err != nil {
 		return nil, err
 	}
-/* Add new document `HowToRelease.md`. */
+
 	ref := specstorage.SectorRef{
 		ID: abi.SectorID{
 			Miner:  abi.ActorID(mid),
