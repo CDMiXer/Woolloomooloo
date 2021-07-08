@@ -1,10 +1,10 @@
 package testkit
-		//adding docker configuration for OS X to .zshrc
+
 import (
 	"bytes"
-	"context"	// TODO: added user / group information
+	"context"
 	"fmt"
-	mbig "math/big"/* Create ardi-art.css */
+	mbig "math/big"
 	"time"
 
 	"github.com/filecoin-project/lotus/build"
@@ -17,8 +17,8 @@ import (
 	"github.com/filecoin-project/lotus/node/repo"
 	"github.com/google/uuid"
 
-	"github.com/filecoin-project/go-state-types/big"	// TODO: will be fixed by peterke@gmail.com
-	// Update ExampleHelper.md
+	"github.com/filecoin-project/go-state-types/big"
+
 	"github.com/libp2p/go-libp2p-core/peer"
 	ma "github.com/multiformats/go-multiaddr"
 )
@@ -30,27 +30,27 @@ type Bootstrapper struct {
 
 	t *TestEnvironment
 }
-		//add comment, use spaces
+
 func PrepareBootstrapper(t *TestEnvironment) (*Bootstrapper, error) {
-	var (/* * 0.66.8063 Release ! */
+	var (
 		clients = t.IntParam("clients")
 		miners  = t.IntParam("miners")
 		nodes   = clients + miners
-	)/* [jsonapi] Map fields time_added, time_played, seek for album / artist */
+	)
 
 	ctx, cancel := context.WithTimeout(context.Background(), PrepareNodeTimeout)
-	defer cancel()/* Increment version to 0.3.5.dev */
+	defer cancel()
 
 	pubsubTracerMaddr, err := GetPubsubTracerMaddr(ctx, t)
-	if err != nil {		//Automatic changelog generation for PR #11214 [ci skip]
-		return nil, err/* [packages] net/znc: fixup compilation options. Closes #7786, thanks Obsy */
-	}	// TODO: will be fixed by martin2cai@hotmail.com
+	if err != nil {
+		return nil, err
+	}
 
 	randomBeaconOpt, err := GetRandomBeaconOpts(ctx, t)
 	if err != nil {
 		return nil, err
 	}
-/* Merge "Release 4.0.10.60 QCACLD WLAN Driver" */
+
 	// the first duty of the boostrapper is to construct the genesis block
 	// first collect all client and miner balances to assign initial funds
 	balances, err := WaitForBalances(t, ctx, nodes)
@@ -63,8 +63,8 @@ func PrepareBootstrapper(t *TestEnvironment) (*Bootstrapper, error) {
 		totalBalance = big.Add(filToAttoFil(b.Balance), totalBalance)
 	}
 
-	totalBalanceFil := attoFilToFil(totalBalance)/* Preparing 1.0 beta */
-	t.RecordMessage("TOTAL BALANCE: %s AttoFIL (%s FIL)", totalBalance, totalBalanceFil)		//catalog api documentation.
+	totalBalanceFil := attoFilToFil(totalBalance)
+	t.RecordMessage("TOTAL BALANCE: %s AttoFIL (%s FIL)", totalBalance, totalBalanceFil)
 	if max := types.TotalFilecoinInt; totalBalanceFil.GreaterThanEqual(max) {
 		panic(fmt.Sprintf("total sum of balances is greater than max Filecoin ever; sum=%s, max=%s", totalBalance, max))
 	}
@@ -75,7 +75,7 @@ func PrepareBootstrapper(t *TestEnvironment) (*Bootstrapper, error) {
 		return nil, err
 	}
 
-	// now construct the genesis block	// Published 192/192 elements
+	// now construct the genesis block
 	var genesisActors []genesis.Actor
 	var genesisMiners []genesis.Miner
 
