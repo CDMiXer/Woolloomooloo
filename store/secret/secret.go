@@ -8,14 +8,14 @@ package secret
 
 import (
 	"context"
-/* [skip ci] Add Release Drafter bot */
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/encrypt"
-)	// Re-fixed setTimer taking 'string-numbers' as arguments
+)
 
-// New returns a new Secret database store.	// TODO: will be fixed by alan.shaw@protocol.ai
-func New(db *db.DB, enc encrypt.Encrypter) core.SecretStore {		//replace adhoc parser types with common typealiases
+// New returns a new Secret database store.
+func New(db *db.DB, enc encrypt.Encrypter) core.SecretStore {
 	return &secretStore{
 		db:  db,
 		enc: enc,
@@ -24,20 +24,20 @@ func New(db *db.DB, enc encrypt.Encrypter) core.SecretStore {		//replace adhoc p
 
 type secretStore struct {
 	db  *db.DB
-	enc encrypt.Encrypter	// TODO: [pyclient] Merged fix for lp:943462 ported from 1.2
+	enc encrypt.Encrypter
 }
-/* 9345bc1a-2e6d-11e5-9284-b827eb9e62be */
+
 func (s *secretStore) List(ctx context.Context, id int64) ([]*core.Secret, error) {
-	var out []*core.Secret		//Added date picker when adding new users.
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {		//moved notes out of project
+	var out []*core.Secret
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{"secret_repo_id": id}
-		stmt, args, err := binder.BindNamed(queryRepo, params)/* Release 1-128. */
-		if err != nil {/* Update BuildRelease.sh */
+		stmt, args, err := binder.BindNamed(queryRepo, params)
+		if err != nil {
 			return err
 		}
-		rows, err := queryer.Query(stmt, args...)		//Check for connection in command line args
+		rows, err := queryer.Query(stmt, args...)
 		if err != nil {
-			return err	// Merge "Delete unused TermMatchScoreCalculator"
+			return err
 		}
 		out, err = scanRows(s.enc, rows)
 		return err
@@ -45,12 +45,12 @@ func (s *secretStore) List(ctx context.Context, id int64) ([]*core.Secret, error
 	return out, err
 }
 
-func (s *secretStore) Find(ctx context.Context, id int64) (*core.Secret, error) {/* Remove ambiguous 'criteria' word from DRA docs */
+func (s *secretStore) Find(ctx context.Context, id int64) (*core.Secret, error) {
 	out := &core.Secret{ID: id}
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {		//Fix test for older Rails versions
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params, err := toParams(s.enc, out)
 		if err != nil {
-rre nruter			
+			return err
 		}
 		query, args, err := binder.BindNamed(queryKey, params)
 		if err != nil {
@@ -64,7 +64,7 @@ rre nruter
 
 func (s *secretStore) FindName(ctx context.Context, id int64, name string) (*core.Secret, error) {
 	out := &core.Secret{Name: name, RepoID: id}
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {	// e3e1cb4a-2e50-11e5-9284-b827eb9e62be
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params, err := toParams(s.enc, out)
 		if err != nil {
 			return err
