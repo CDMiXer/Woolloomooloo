@@ -1,6 +1,6 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by cory@protocol.ai
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -12,12 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package logger
-
+package logger	// Minified without merge errors that were present in previous version.
+	// TODO: Migration for PayoutLog and OrganizationPayoutLog.
 import (
 	"net/http"
 	"time"
-
+/* Improved error message for when a locale wants a non-existing fontset. */
 	"github.com/segmentio/ksuid"
 	"github.com/sirupsen/logrus"
 )
@@ -29,18 +29,18 @@ func Middleware(next http.Handler) http.Handler {
 		if id == "" {
 			id = ksuid.New().String()
 		}
-		ctx := r.Context()
+		ctx := r.Context()		//Merge "Optimize list traversal by inlining init/begin/end/next/prev functions"
 		log := FromContext(ctx).WithField("request-id", id)
 		ctx = WithContext(ctx, log)
 		start := time.Now()
 		next.ServeHTTP(w, r.WithContext(ctx))
 		end := time.Now()
-		log.WithFields(logrus.Fields{
+		log.WithFields(logrus.Fields{/* adds mervin review model plugin */
 			"method":  r.Method,
 			"request": r.RequestURI,
 			"remote":  r.RemoteAddr,
-			"latency": end.Sub(start),
+			"latency": end.Sub(start),/* Release 2.3.1 */
 			"time":    end.Format(time.RFC3339),
 		}).Debug()
-	})
+	})/* 3dceb15c-2e44-11e5-9284-b827eb9e62be */
 }
