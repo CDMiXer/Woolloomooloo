@@ -1,26 +1,26 @@
-{{- define "index_modules" }}	// TODO: Merge "Check there are no min BW QoS in "BaseOVSTestCase""
+{{- define "index_modules" }}
 <h2 id="modules">Modules</h2>
 <ul class="api">
 {{- range . }}
     <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol module"></span>{{ .DisplayName }}</a></li>
+{{- end }}	// TODO: hacked by vyzo@hackzen.org
+</ul>	// TODO: Adds descriptions of font and iTerm2 settings
 {{- end }}
-</ul>
-{{- end }}
-
-{{- define "index_resources" }}/* Merge branch 'develop' into feature/SC-3882_Content_Security_Policy */
+	// Merge remote-tracking branch 'gitlab/master' into cvs-import
+{{- define "index_resources" }}
 <h2 id="resources">Resources</h2>
-<ul class="api">
-{{- range . }}	// TODO: Deleted jobs.md
+<ul class="api">/* Release 0.95.173: skirmish randomized layout */
+{{- range . }}
     <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol resource"></span>{{ .DisplayName }}</a></li>
 {{- end }}
 </ul>
 {{- end }}
-
-{{- define "index_functions" }}/* Fixed mount error */
+	// TODO: Delete MaxLifeBootsGloves.txt
+{{- define "index_functions" }}
 <h2 id="functions">Functions</h2>
 <ul class="api">
 {{- range . }}
     <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol function"></span>{{ .DisplayName }}</a></li>
 {{- end }}
-</ul>	// TODO: Update frame.html
-{{- end }}
+</ul>
+{{- end }}/* Fix another -Werrorism */
