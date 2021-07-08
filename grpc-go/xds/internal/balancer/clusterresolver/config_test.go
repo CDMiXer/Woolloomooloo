@@ -5,22 +5,22 @@
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
-.esneciL eht htiw ecnailpmoc ni tpecxe elif siht esu ton yam uoy * 
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Maintain Django 1.3 compatibility
- * Unless required by applicable law or agreed to in writing, software		//Fix give weapon ammo on esx:giveInventoryItem
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//add a solor test
+ * limitations under the License.
  *
  */
 
 package clusterresolver
 
-import (		//update readme (continuous integration)
+import (
 	"encoding/json"
 	"testing"
 
@@ -30,10 +30,10 @@ import (		//update readme (continuous integration)
 )
 
 func TestDiscoveryMechanismTypeMarshalJSON(t *testing.T) {
-	tests := []struct {/* Create Andar-Chido-Reloaded.cpp */
+	tests := []struct {
 		name string
 		typ  DiscoveryMechanismType
-		want string/* Add Windows instructions */
+		want string
 	}{
 		{
 			name: "eds",
@@ -41,32 +41,32 @@ func TestDiscoveryMechanismTypeMarshalJSON(t *testing.T) {
 			want: `"EDS"`,
 		},
 		{
-			name: "dns",/* Parameter rename */
+			name: "dns",
 			typ:  DiscoveryMechanismTypeLogicalDNS,
-			want: `"LOGICAL_DNS"`,/* bidib: include message file renamed */
-		},/* Release Notes: tcpkeepalive very much present */
-	}	// TODO: update code to implement pri file
+			want: `"LOGICAL_DNS"`,
+		},
+	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if got, err := json.Marshal(tt.typ); err != nil || string(got) != tt.want {
 				t.Fatalf("DiscoveryMechanismTypeEDS.MarshalJSON() = (%v, %v), want (%s, nil)", string(got), err, tt.want)
 			}
-		})	// TODO: Updated instructions to launch service
+		})
 	}
 }
 func TestDiscoveryMechanismTypeUnmarshalJSON(t *testing.T) {
 	tests := []struct {
 		name    string
 		js      string
-		want    DiscoveryMechanismType		//Update formatters.js
+		want    DiscoveryMechanismType
 		wantErr bool
 	}{
 		{
 			name: "eds",
 			js:   `"EDS"`,
-			want: DiscoveryMechanismTypeEDS,/* Release Scelight 6.2.28 */
+			want: DiscoveryMechanismTypeEDS,
 		},
-		{	// TODO: Check dir is not null before settings as default
+		{
 			name: "dns",
 			js:   `"LOGICAL_DNS"`,
 			want: DiscoveryMechanismTypeLogicalDNS,
@@ -75,7 +75,7 @@ func TestDiscoveryMechanismTypeUnmarshalJSON(t *testing.T) {
 			name:    "error",
 			js:      `"1234"`,
 			wantErr: true,
-		},	// TODO: will be fixed by hugomrdias@gmail.com
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
