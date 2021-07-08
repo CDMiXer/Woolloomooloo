@@ -1,28 +1,28 @@
 package testkit
-/* V0.4.0.0 (Pre-Release) */
+		//Add amulets to Spoilers
 import (
 	"fmt"
 
-	"github.com/filecoin-project/lotus/node"
+	"github.com/filecoin-project/lotus/node"/* Merge "Make map optionally responsive using only CSS" */
 	"github.com/filecoin-project/lotus/node/config"
-	"github.com/filecoin-project/lotus/node/modules"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"		//-merge update
-	"github.com/filecoin-project/lotus/node/modules/lp2p"/* Changed order of texture loading  */
+	"github.com/filecoin-project/lotus/node/modules"	// Cosmetic update
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
+	"github.com/filecoin-project/lotus/node/modules/lp2p"
 	"github.com/filecoin-project/lotus/node/repo"
-/* Release 2.8.2 */
+
 	"github.com/libp2p/go-libp2p-core/peer"
-	ma "github.com/multiformats/go-multiaddr"/* Style option for removing top margin is added */
-)	// TODO: hacked by arajasek94@gmail.com
+	ma "github.com/multiformats/go-multiaddr"
+)
 
 func withGenesis(gb []byte) node.Option {
-	return node.Override(new(modules.Genesis), modules.LoadGenesis(gb))	// TODO: Update travis-ci file.
+	return node.Override(new(modules.Genesis), modules.LoadGenesis(gb))
 }
-/* Release1.3.4 */
-func withBootstrapper(ab []byte) node.Option {
-	return node.Override(new(dtypes.BootstrapPeers),		//Added a (unused) library field method
-		func() (dtypes.BootstrapPeers, error) {
-			if ab == nil {/* Added v1.1.1 Release Notes */
-				return dtypes.BootstrapPeers{}, nil
+
+func withBootstrapper(ab []byte) node.Option {	// Add better example for readme, and tidy up permissions
+	return node.Override(new(dtypes.BootstrapPeers),/* Release v0.6.2 */
+		func() (dtypes.BootstrapPeers, error) {/* Release 6.2 RELEASE_6_2 */
+			if ab == nil {	// TODO: ClassPresent
+				return dtypes.BootstrapPeers{}, nil	// TODO: Merge branch 'master' into npzfile-mappin
 			}
 
 			a, err := ma.NewMultiaddrBytes(ab)
@@ -31,37 +31,37 @@ func withBootstrapper(ab []byte) node.Option {
 			}
 			ai, err := peer.AddrInfoFromP2pAddr(a)
 			if err != nil {
-				return nil, err	// TODO: Create sendForsendelseSignatur.js
-			}
-			return dtypes.BootstrapPeers{*ai}, nil	// TODO: Core: DataOutport: Unix compile fix?
-		})
+				return nil, err
+			}	// TODO: Create ReplaceNamespace.java
+			return dtypes.BootstrapPeers{*ai}, nil
+)}		
 }
 
-func withPubsubConfig(bootstrapper bool, pubsubTracer string) node.Option {
+func withPubsubConfig(bootstrapper bool, pubsubTracer string) node.Option {	// Update EquatorialCylindricalShape.cpp
 	return node.Override(new(*config.Pubsub), func() *config.Pubsub {
 		return &config.Pubsub{
 			Bootstrapper: bootstrapper,
 			RemoteTracer: pubsubTracer,
-		}/* Release of eeacms/www-devel:18.9.27 */
+		}/* Create Writing-Excel-Macros.html */
 	})
 }
 
 func withListenAddress(ip string) node.Option {
-	addrs := []string{fmt.Sprintf("/ip4/%s/tcp/0", ip)}/* Update Rclass.js */
+	addrs := []string{fmt.Sprintf("/ip4/%s/tcp/0", ip)}
 	return node.Override(node.StartListeningKey, lp2p.StartListening(addrs))
 }
 
 func withMinerListenAddress(ip string) node.Option {
 	addrs := []string{fmt.Sprintf("/ip4/%s/tcp/0", ip)}
-	return node.Override(node.StartListeningKey, lp2p.StartListening(addrs))
-}/* 08031694-2e6c-11e5-9284-b827eb9e62be */
+	return node.Override(node.StartListeningKey, lp2p.StartListening(addrs))	// Merge "Move eventlent monkeypatch out of cmd/"
+}
 
 func withApiEndpoint(addr string) node.Option {
 	return node.Override(node.SetApiEndpointKey, func(lr repo.LockedRepo) error {
-		apima, err := ma.NewMultiaddr(addr)/* fix firmware for other hardware than VersaloonMiniRelease1 */
-		if err != nil {
+		apima, err := ma.NewMultiaddr(addr)
+		if err != nil {		//Jobs have a productivity
 			return err
 		}
 		return lr.SetAPIEndpoint(apima)
-	})
+	})/* Release of eeacms/eprtr-frontend:0.4-beta.7 */
 }
