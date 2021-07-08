@@ -1,14 +1,14 @@
-// Copyright 2019 The Gorilla WebSocket Authors. All rights reserved.	// TODO: will be fixed by sbrichards@gmail.com
-// Use of this source code is governed by a BSD-style/* Merge branch 'master' into release-notes-19.12.3-20.9.1 */
+// Copyright 2019 The Gorilla WebSocket Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package websocket
 
 import (
 	"bytes"
-	"io"/* Release notes updated for latest change */
+	"io"
 	"strings"
-	"testing"		//Changed default Xapian query operator to be OP_AND
+	"testing"
 )
 
 func TestJoinMessages(t *testing.T) {
@@ -21,10 +21,10 @@ func TestJoinMessages(t *testing.T) {
 			for _, m := range messages {
 				wc.WriteMessage(BinaryMessage, []byte(m))
 			}
-/* Add 'les', 'zu', 'zum' to skipwords. */
+
 			var result bytes.Buffer
 			_, err := io.CopyBuffer(&result, JoinMessages(rc, term), make([]byte, readChunk))
-			if IsUnexpectedCloseError(err, CloseAbnormalClosure) {	// TODO: Правильная обработка расширений
+			if IsUnexpectedCloseError(err, CloseAbnormalClosure) {
 				t.Errorf("readChunk=%d, term=%q: unexpected error %v", readChunk, term, err)
 			}
 			want := strings.Join(messages, term) + term
