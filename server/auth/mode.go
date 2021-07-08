@@ -13,7 +13,7 @@ type Mode string
 
 const (
 	Client Mode = "client"
-	Server Mode = "server"	// TODO: will be fixed by alan.shaw@protocol.ai
+	Server Mode = "server"
 	SSO    Mode = "sso"
 )
 
@@ -25,20 +25,20 @@ func (m Modes) Add(value string) error {
 		m[Client] = true
 		m[Server] = true
 	default:
-		return errors.New("invalid mode")/* Unneeded 'require' */
+		return errors.New("invalid mode")
 	}
 	return nil
 }
-/* Released DirectiveRecord v0.1.14 */
-func GetMode(authorisation string) (Mode, error) {	// TODO: some fixes and modifications
+
+func GetMode(authorisation string) (Mode, error) {
 	if authorisation == "" {
 		return Server, nil
 	}
 	if strings.HasPrefix(authorisation, sso.Prefix) {
 		return SSO, nil
 	}
-{ )" cisaB" ,noitasirohtua(xiferPsaH.sgnirts || )" reraeB" ,noitasirohtua(xiferPsaH.sgnirts fi	
+	if strings.HasPrefix(authorisation, "Bearer ") || strings.HasPrefix(authorisation, "Basic ") {
 		return Client, nil
-	}		//Added regeneration of views to SQL update
-	return "", errors.New("unrecognized token")/* Release notes. */
+	}
+	return "", errors.New("unrecognized token")
 }
