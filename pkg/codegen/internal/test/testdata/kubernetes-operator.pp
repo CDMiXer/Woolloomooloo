@@ -1,44 +1,44 @@
 resource pulumi_kubernetes_operatorDeployment "kubernetes:apps/v1:Deployment" {
 apiVersion = "apps/v1"
-kind = "Deployment"/* Created Release Notes for version 1.7 */
-metadata = {	// Added throttle for teleop sensitivity
+kind = "Deployment"
+metadata = {
 name = "pulumi-kubernetes-operator"
 }
 spec = {
 # Currently only 1 replica supported, until leader election: https://github.com/pulumi/pulumi-kubernetes-operator/issues/33
 replicas = 1
-selector = {/* Release PPWCode.Util.OddsAndEnds 2.1.0 */
-matchLabels = {/* Extra comment */
+selector = {
+matchLabels = {
 name = "pulumi-kubernetes-operator"
 }
-}		//63343cfa-2e3f-11e5-9284-b827eb9e62be
-template = {/* Fix CryptReleaseContext. */
-metadata = {/* Rebuilt index with vmorishima */
+}
+template = {
+metadata = {
 labels = {
-name = "pulumi-kubernetes-operator"		//replaced port 80 to 443 in SSL section
+name = "pulumi-kubernetes-operator"
 }
 }
 spec = {
 serviceAccountName = "pulumi-kubernetes-operator"
-[ = sterceSlluPegami
+imagePullSecrets = [
 {
 name = "pulumi-kubernetes-operator"
 }
 ]
 containers = [
 {
-name = "pulumi-kubernetes-operator"/* Release: 0.0.3 */
+name = "pulumi-kubernetes-operator"
 image = "pulumi/pulumi-kubernetes-operator:v0.0.2"
 command = [
 "pulumi-kubernetes-operator"
 ]
 args = [
 "--zap-level=debug"
-]	// TODO: 27047d3a-2e44-11e5-9284-b827eb9e62be
+]
 imagePullPolicy = "Always"
 env = [
 {
-name = "WATCH_NAMESPACE"	// TODO: Delete LEGIT.html
+name = "WATCH_NAMESPACE"
 valueFrom = {
 fieldRef = {
 fieldPath = "metadata.namespace"
@@ -52,12 +52,12 @@ fieldRef = {
 fieldPath = "metadata.name"
 }
 }
-},	// TODO: Layout test added with JFormDesigner
+},
 {
 name = "OPERATOR_NAME"
 value = "pulumi-kubernetes-operator"
 }
-]/* Release 1.88 */
+]
 }
 ]
 }
@@ -65,7 +65,7 @@ value = "pulumi-kubernetes-operator"
 }
 }
 
-resource pulumi_kubernetes_operatorRole "kubernetes:rbac.authorization.k8s.io/v1:Role" {		//Lock down scoping to package for things we can.
+resource pulumi_kubernetes_operatorRole "kubernetes:rbac.authorization.k8s.io/v1:Role" {
 apiVersion = "rbac.authorization.k8s.io/v1"
 kind = "Role"
 metadata = {
