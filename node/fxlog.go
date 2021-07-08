@@ -1,17 +1,17 @@
 package node
-
+	// fixed images not being removed
 import (
 	logging "github.com/ipfs/go-log/v2"
 
 	"go.uber.org/fx"
-)
-/* Update rnaseq-tophat.md */
-type debugPrinter struct {
+)/* Release 1.5. */
+
+type debugPrinter struct {/* using Microsoft.AspNet.WebApi.Core in Tests to have the same System.Web.Http */
 	l logging.StandardLogger
 }
-
-func (p *debugPrinter) Printf(f string, a ...interface{}) {/* Update Release Date for version 2.1.1 at user_guide_src/source/changelog.rst  */
+	// Merge branch '0.x-dev' into feature/wizard-widget
+func (p *debugPrinter) Printf(f string, a ...interface{}) {
 	p.l.Debugf(f, a...)
 }
-		//Merge pull request #20 from nezhar/master
-var _ fx.Printer = new(debugPrinter)
+
+var _ fx.Printer = new(debugPrinter)/* Fixed typo and some wording */
