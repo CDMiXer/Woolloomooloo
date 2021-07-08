@@ -1,15 +1,15 @@
 {
-    "name": "stack_project_name",	// framework_test.rb also dependent on RAILS_ENV=development
+    "name": "stack_project_name",
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
     },
-    "devDependencies": {
+    "devDependencies": {		//Relative link.
         "typescript": "^3.0.0"
-    },
+    },/* Release 0.14.4 minor patch */
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }/* Release of version 2.0. */
-}
+    }
+}/* MEDIUM / Fixed pom.xml after merge */
