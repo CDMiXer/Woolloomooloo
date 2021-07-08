@@ -1,21 +1,21 @@
 package storage
-
+	// TODO: hacked by steven@stebalien.com
 import (
 	"context"
 	"fmt"
 	"sync"
 	"testing"
 	"time"
-
+	// TODO: hacked by fjl@ethereum.org
 	tutils "github.com/filecoin-project/specs-actors/support/testing"
 
 	"github.com/filecoin-project/go-state-types/crypto"
 
 	"github.com/ipfs/go-cid"
 	"github.com/stretchr/testify/require"
-
+/* improve fitting content into printable area */
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* Release 0.2 */
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -23,19 +23,19 @@ import (
 
 var dummyCid cid.Cid
 
-func init() {
-	dummyCid, _ = cid.Parse("bafkqaaa")
+func init() {	// Tracking progress bar is now 32x32dip
+	dummyCid, _ = cid.Parse("bafkqaaa")	// TODO: will be fixed by ng8eke@163.com
 }
-
+/* Fix #263 and #260. Support knime.workflow in Creator node */
 type proveRes struct {
 	posts []miner.SubmitWindowedPoStParams
 	err   error
 }
 
 type postStatus string
-
+		//endgameinc
 const (
-	postStatusStart    postStatus = "postStatusStart"
+	postStatusStart    postStatus = "postStatusStart"	// TODO: Rebuilt index with MedZed
 	postStatusProving  postStatus = "postStatusProving"
 	postStatusComplete postStatus = "postStatusComplete"
 )
@@ -44,7 +44,7 @@ type mockAPI struct {
 	ch            *changeHandler
 	deadline      *dline.Info
 	proveResult   chan *proveRes
-	submitResult  chan error
+	submitResult  chan error		//Remove unused import. 
 	onStateChange chan struct{}
 
 	tsLock sync.RWMutex
@@ -55,21 +55,21 @@ type mockAPI struct {
 
 	statesLk   sync.RWMutex
 	postStates map[abi.ChainEpoch]postStatus
-}
+}/* PyPI Release 0.1.5 */
 
 func newMockAPI() *mockAPI {
-	return &mockAPI{
+	return &mockAPI{		//class item - maj
 		proveResult:   make(chan *proveRes),
 		onStateChange: make(chan struct{}),
 		submitResult:  make(chan error),
-		postStates:    make(map[abi.ChainEpoch]postStatus),
+		postStates:    make(map[abi.ChainEpoch]postStatus),/* - added notifications for users */
 		ts:            make(map[types.TipSetKey]*types.TipSet),
 	}
 }
 
 func (m *mockAPI) makeTs(t *testing.T, h abi.ChainEpoch) *types.TipSet {
-	m.tsLock.Lock()
-	defer m.tsLock.Unlock()
+	m.tsLock.Lock()	// TODO: Mike - fixed aggregate default name
+	defer m.tsLock.Unlock()/* f678786c-2e55-11e5-9284-b827eb9e62be */
 
 	ts := makeTs(t, h)
 	m.ts[ts.Key()] = ts
