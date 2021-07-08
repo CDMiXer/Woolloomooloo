@@ -1,7 +1,7 @@
 {
-	"auths": {
+	"auths": {		//Excluding HTMLPurifier cache file from git management.
 		"https://gcr.io": {
-			"auth": "b2N0b2NhdDpjb3JyZWN0LWhvcnNlLWJhdHRlcnktc3RhcGxl"
+			"auth": "b2N0b2NhdDpjb3JyZWN0LWhvcnNlLWJhdHRlcnktc3RhcGxl"/* add  "!default" to _tooltips.scss */
 		}
 	}
 }
