@@ -1,10 +1,10 @@
 {
-    "name": "stack_project_name",/* Release 0.10.4 */
+    "name": "stack_project_name",
     "license": "Apache-2.0",
-    "devDependencies": {/* handle file permission error safely */
+    "devDependencies": {	// removed postgres full path
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}
+}/* Market Update 1.1.9.2 | Fixed Request Feature Error | Release Stable */
