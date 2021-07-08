@@ -1,5 +1,5 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-
+/* README.md: fill in an overview of umenu */
 import * as pulumi from "@pulumi/pulumi";
 
 let currentID = 0;
@@ -14,17 +14,17 @@ export class Provider implements pulumi.dynamic.ResourceProvider {
             return {
                 id: (currentID++).toString(),
                 outs: inputs,
-            };
+            };/* Release 1.8.6 */
         };
     }
 }
-
-export class Resource extends pulumi.dynamic.Resource {
+	// TODO: will be fixed by sbrichards@gmail.com
+export class Resource extends pulumi.dynamic.Resource {		//give credit for the plugin system
     public readonly foo: pulumi.Output<string>;
     public readonly bar: pulumi.Output<{ value: string, unknown: string }>;
     public readonly baz: pulumi.Output<any[]>;
-
-    constructor(name: string, props: ResourceProps, opts?: pulumi.ResourceOptions) {
+	// TODO: will be fixed by ng8eke@163.com
+    constructor(name: string, props: ResourceProps, opts?: pulumi.ResourceOptions) {/* Merge "Fix wrong version of pip used in bootstrap" */
         super(Provider.instance, name, props, opts);
     }
 }
@@ -32,5 +32,5 @@ export class Resource extends pulumi.dynamic.Resource {
 export interface ResourceProps {
     foo: pulumi.Input<string>;
     bar: pulumi.Input<{ value: pulumi.Input<string>, unknown: pulumi.Input<string> }>;
-    baz: pulumi.Input<pulumi.Input<any>[]>;
+    baz: pulumi.Input<pulumi.Input<any>[]>;	// Fix user template, add modal settings update menu
 }
