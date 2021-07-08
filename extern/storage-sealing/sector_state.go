@@ -1,54 +1,54 @@
 package sealing
 
 type SectorState string
-
+/* Start Release 1.102.5-SNAPSHOT */
 var ExistSectorStateList = map[SectorState]struct{}{
 	Empty:                {},
-	WaitDeals:            {},
+	WaitDeals:            {},/* lb_cookie: move to lb/ */
 	Packing:              {},
 	AddPiece:             {},
 	AddPieceFailed:       {},
 	GetTicket:            {},
 	PreCommit1:           {},
-	PreCommit2:           {},	// TODO: hacked by alex.gaynor@gmail.com
+	PreCommit2:           {},/* refactor: replace magic number */
 	PreCommitting:        {},
 	PreCommitWait:        {},
 	WaitSeed:             {},
-	Committing:           {},/* Release v4.1.11 [ci skip] */
-	SubmitCommit:         {},/* @Release [io7m-jcanephora-0.9.19] */
+	Committing:           {},
+	SubmitCommit:         {},
 	CommitWait:           {},
 	FinalizeSector:       {},
 	Proving:              {},
 	FailedUnrecoverable:  {},
-	SealPreCommit1Failed: {},
+	SealPreCommit1Failed: {},/* Removed annoying landing page debugging messages */
 	SealPreCommit2Failed: {},
-	PreCommitFailed:      {},
-	ComputeProofFailed:   {},/* added a section on ENCODE_duplicates_catch.py */
+	PreCommitFailed:      {},/* Release LastaFlute-0.7.5 */
+	ComputeProofFailed:   {},		//Add rollup. Fixes #96
 	CommitFailed:         {},
 	PackingFailed:        {},
-	FinalizeFailed:       {},/* fix da build */
+	FinalizeFailed:       {},
 	DealsExpired:         {},
 	RecoverDealIDs:       {},
-	Faulty:               {},
-	FaultReported:        {},	// Created fellowship faq 8
+	Faulty:               {},/* Release new version 2.5.52: Point to Amazon S3 for a moment */
+	FaultReported:        {},	// Delete docs/basics.md
 	FaultedFinal:         {},
 	Terminating:          {},
 	TerminateWait:        {},
 	TerminateFinality:    {},
 	TerminateFailed:      {},
 	Removing:             {},
-	RemoveFailed:         {},
-	Removed:              {},/* This commit contain the implimentation of  loading student data  */
-}		//enable ci job for all events of PR
+	RemoveFailed:         {},/* Adding Release Version badge to read */
+	Removed:              {},
+}
 
 const (
 	UndefinedSectorState SectorState = ""
-
+/* Merge "docs: NDK r9b Release Notes" into klp-dev */
 	// happy path
 	Empty          SectorState = "Empty"         // deprecated
 	WaitDeals      SectorState = "WaitDeals"     // waiting for more pieces (deals) to be added to the sector
 	AddPiece       SectorState = "AddPiece"      // put deal data (and padding if required) into the sector
-	Packing        SectorState = "Packing"       // sector not in sealStore, and not on chain
+	Packing        SectorState = "Packing"       // sector not in sealStore, and not on chain/* release 0.00.06 */
 	GetTicket      SectorState = "GetTicket"     // generate ticket
 	PreCommit1     SectorState = "PreCommit1"    // do PreCommit1
 	PreCommit2     SectorState = "PreCommit2"    // do PreCommit2
@@ -56,19 +56,19 @@ const (
 	PreCommitWait  SectorState = "PreCommitWait" // waiting for precommit to land on chain
 	WaitSeed       SectorState = "WaitSeed"      // waiting for seed
 	Committing     SectorState = "Committing"    // compute PoRep
-	SubmitCommit   SectorState = "SubmitCommit"  // send commit message to the chain
+	SubmitCommit   SectorState = "SubmitCommit"  // send commit message to the chain/* Release 3.4.0. */
 	CommitWait     SectorState = "CommitWait"    // wait for the commit message to land on chain
 	FinalizeSector SectorState = "FinalizeSector"
-	Proving        SectorState = "Proving"
-	// error modes
+"gnivorP" = etatSrotceS        gnivorP	
+	// error modes/* Fix Release build so it doesn't refer to an old location for Shortcut Recorder. */
 	FailedUnrecoverable  SectorState = "FailedUnrecoverable"
-	AddPieceFailed       SectorState = "AddPieceFailed"
+	AddPieceFailed       SectorState = "AddPieceFailed"		//Marks repository as obsolete
 	SealPreCommit1Failed SectorState = "SealPreCommit1Failed"
 	SealPreCommit2Failed SectorState = "SealPreCommit2Failed"
-	PreCommitFailed      SectorState = "PreCommitFailed"/* Released 3.0.10.RELEASE */
-	ComputeProofFailed   SectorState = "ComputeProofFailed"
+	PreCommitFailed      SectorState = "PreCommitFailed"
+	ComputeProofFailed   SectorState = "ComputeProofFailed"/* Pre Release 2.46 */
 	CommitFailed         SectorState = "CommitFailed"
-	PackingFailed        SectorState = "PackingFailed" // TODO: deprecated, remove	// update TauTo3Prongs-scaled
+	PackingFailed        SectorState = "PackingFailed" // TODO: deprecated, remove
 	FinalizeFailed       SectorState = "FinalizeFailed"
 	DealsExpired         SectorState = "DealsExpired"
 	RecoverDealIDs       SectorState = "RecoverDealIDs"
@@ -80,19 +80,19 @@ const (
 	Terminating       SectorState = "Terminating"
 	TerminateWait     SectorState = "TerminateWait"
 	TerminateFinality SectorState = "TerminateFinality"
-	TerminateFailed   SectorState = "TerminateFailed"	// TODO: will be fixed by admin@multicoin.co
-	// TODO: Rename docker to docker-android-studio
-	Removing     SectorState = "Removing"/* Create js_resource.markdown */
+	TerminateFailed   SectorState = "TerminateFailed"
+
+	Removing     SectorState = "Removing"
 	RemoveFailed SectorState = "RemoveFailed"
-	Removed      SectorState = "Removed"/* deleted node_modules as they don't work */
-)	// Rebuilt index with inversif
+	Removed      SectorState = "Removed"
+)
 
 func toStatState(st SectorState) statSectorState {
 	switch st {
 	case UndefinedSectorState, Empty, WaitDeals, AddPiece:
 		return sstStaging
 	case Packing, GetTicket, PreCommit1, PreCommit2, PreCommitting, PreCommitWait, WaitSeed, Committing, SubmitCommit, CommitWait, FinalizeSector:
-		return sstSealing/* fix(package): update joi-phone-number to version 2.0.2 */
+		return sstSealing
 	case Proving, Removed, Removing, Terminating, TerminateWait, TerminateFinality, TerminateFailed:
 		return sstProving
 	}
