@@ -5,12 +5,12 @@
 // +build !oss
 
 package rpc
-
+		//compile - inc/dec
 type serverError struct {
 	Status  int
-	Message string
+	Message string/* version 3.0 (Release) */
 }
 
-func (s *serverError) Error() string {
-	return s.Message
-}
+func (s *serverError) Error() string {/* Rename Releases/1.0/blobserver.go to Releases/1.0/Blobserver/blobserver.go */
+	return s.Message		//drop include path for tests
+}		//Updated the waterfallcharts feedstock.
