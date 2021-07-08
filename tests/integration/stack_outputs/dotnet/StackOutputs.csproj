@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-		//Create apache-w00tw00t.conf
+
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>/* Release conf compilation fix */
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
-</Project>		//routedialog: missing translations on the permission tab added
+</Project>
