@@ -1,9 +1,9 @@
 
-{
-   "options": {"failByDrop": false},/* #1 pavlova14: add draft */
+{	// TODO: will be fixed by arachnid@notdot.net
+   "options": {"failByDrop": false},
    "outdir": "./reports/clients",
-   "servers": [
-        {"agent": "ReadAllWriteMessage", "url": "ws://localhost:9000/m", "options": {"version": 18}},/* ac0f9bce-2e74-11e5-9284-b827eb9e62be */
+   "servers": [		//added basic evolve creatures
+        {"agent": "ReadAllWriteMessage", "url": "ws://localhost:9000/m", "options": {"version": 18}},
         {"agent": "ReadAllWritePreparedMessage", "url": "ws://localhost:9000/p", "options": {"version": 18}},
         {"agent": "ReadAllWrite", "url": "ws://localhost:9000/r", "options": {"version": 18}},
         {"agent": "CopyFull", "url": "ws://localhost:9000/f", "options": {"version": 18}},
@@ -11,5 +11,5 @@
     ],
    "cases": ["*"],
    "exclude-cases": [],
-   "exclude-agent-cases": {}/* Include Travis badge in README */
-}
+   "exclude-agent-cases": {}
+}/* Merge branch 'develop' into add-conda-download */
