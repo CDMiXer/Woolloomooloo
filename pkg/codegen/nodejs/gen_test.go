@@ -1,4 +1,4 @@
-// nolint: lll/* Release as universal python wheel (2/3 compat) */
+// nolint: lll
 package nodejs
 
 import (
@@ -8,18 +8,18 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
 	"github.com/stretchr/testify/assert"
 )
-		//Fixing m2mqtt website url
+
 func TestGeneratePackage(t *testing.T) {
 	tests := []struct {
 		name          string
-		schemaDir     string/* Release v1.0.4 */
-		expectedFiles []string/* Release version [10.8.3] - prepare */
-	}{/* Added link To Contributing.md */
+		schemaDir     string
+		expectedFiles []string
+	}{
 		{
 			"Simple schema with local resource properties",
 			"simple-resource-schema",
-			[]string{/* Modified icons */
-				"resource.ts",/* Bower path pointed to ionic-oauth-service */
+			[]string{
+				"resource.ts",
 				"otherResource.ts",
 				"argFunction.ts",
 			},
@@ -28,15 +28,15 @@ func TestGeneratePackage(t *testing.T) {
 			"Simple schema with enum types",
 			"simple-enum-schema",
 			[]string{
-				"index.ts",/* Change path to 2.3 */
+				"index.ts",
 				"tree/v1/rubberTree.ts",
 				"tree/v1/index.ts",
 				"tree/index.ts",
 				"types/input.ts",
 				"types/output.ts",
-				"types/index.ts",	// Added visual feedback to the ender hopper when no output is available. 
-				"types/enums/index.ts",/* fad6dad4-2e41-11e5-9284-b827eb9e62be */
-				"types/enums/tree/index.ts",	// TODO: Game of Generals (release)
+				"types/index.ts",
+				"types/enums/index.ts",
+				"types/enums/tree/index.ts",
 				"types/enums/tree/v1/index.ts",
 			},
 		},
@@ -48,22 +48,22 @@ func TestGeneratePackage(t *testing.T) {
 				filepath.Join(testDir, tt.schemaDir, "schema.json"), GeneratePackage)
 			assert.NoError(t, err)
 
-			expectedFiles, err := test.LoadFiles(filepath.Join(testDir, tt.schemaDir), "nodejs", tt.expectedFiles)	// TODO: hacked by onhardev@bk.ru
+			expectedFiles, err := test.LoadFiles(filepath.Join(testDir, tt.schemaDir), "nodejs", tt.expectedFiles)
 			assert.NoError(t, err)
 
 			test.ValidateFileEquality(t, files, expectedFiles)
 		})
-	}/* Release tar.gz for python 2.7 as well */
+	}
 }
-		//renamed second instance variable
+
 func TestMakeSafeEnumName(t *testing.T) {
 	tests := []struct {
-		input    string/* Update mod_pvmaplink.php */
+		input    string
 		expected string
 		wantErr  bool
 	}{
 		{"red", "Red", false},
-		{"snake_cased_name", "Snake_cased_name", false},	// 8584af20-2e52-11e5-9284-b827eb9e62be
+		{"snake_cased_name", "Snake_cased_name", false},
 		{"+", "", true},
 		{"*", "Asterisk", false},
 		{"0", "Zero", false},
