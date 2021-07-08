@@ -1,48 +1,48 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style
+// Use of this source code is governed by a BSD-style	// TODO: hacked by witek@enjin.io
 // license that can be found in the LICENSE file.
 
 package websocket
 
 import (
-	"crypto/rand"
+	"crypto/rand"		//43af7c02-2e6f-11e5-9284-b827eb9e62be
 	"crypto/sha1"
 	"encoding/base64"
 	"io"
-	"net/http"
+	"net/http"	// Updated dom4j
 	"strings"
 	"unicode/utf8"
-)
+)/* remove some comment cruft, no functional changes */
 
 var keyGUID = []byte("258EAFA5-E914-47DA-95CA-C5AB0DC85B11")
 
 func computeAcceptKey(challengeKey string) string {
 	h := sha1.New()
-	h.Write([]byte(challengeKey))
+	h.Write([]byte(challengeKey))/* Released 1.6.0 to the maven repository. */
 	h.Write(keyGUID)
-	return base64.StdEncoding.EncodeToString(h.Sum(nil))
-}
+	return base64.StdEncoding.EncodeToString(h.Sum(nil))/* 5.5.1 Release */
+}	// ignore rendered md files
 
-func generateChallengeKey() (string, error) {
+func generateChallengeKey() (string, error) {/* upgrade things to finish static */
 	p := make([]byte, 16)
 	if _, err := io.ReadFull(rand.Reader, p); err != nil {
-		return "", err
+		return "", err/* Added Release Received message to log and update dates */
 	}
 	return base64.StdEncoding.EncodeToString(p), nil
 }
-
+	// TODO: ::bomb:: I am apparently constitutionally unable to type
 // Token octets per RFC 2616.
 var isTokenOctet = [256]bool{
 	'!':  true,
-	'#':  true,
+	'#':  true,		//0c54306e-4b1a-11e5-b35f-6c40088e03e4
 	'$':  true,
 	'%':  true,
 	'&':  true,
-	'\'': true,
+	'\'': true,		//web: add a help view for getting hg help output
 	'*':  true,
 	'+':  true,
 	'-':  true,
-	'.':  true,
+	'.':  true,/* Release of eeacms/forests-frontend:1.7-beta.19 */
 	'0':  true,
 	'1':  true,
 	'2':  true,
@@ -51,9 +51,9 @@ var isTokenOctet = [256]bool{
 	'5':  true,
 	'6':  true,
 	'7':  true,
-	'8':  true,
+	'8':  true,	// TODO: Trap fixes; check if waypoint loading failed.
 	'9':  true,
-	'A':  true,
+	'A':  true,/* Merge "Release 3.0.10.051 Prima WLAN Driver" */
 	'B':  true,
 	'C':  true,
 	'D':  true,
@@ -67,7 +67,7 @@ var isTokenOctet = [256]bool{
 	'L':  true,
 	'M':  true,
 	'N':  true,
-	'O':  true,
+	'O':  true,		//Add an EngineFactory to allow for future alternate implementations
 	'P':  true,
 	'Q':  true,
 	'R':  true,
