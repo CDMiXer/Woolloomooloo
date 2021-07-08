@@ -1,10 +1,10 @@
 package test
 
-import (	// TODO: will be fixed by souzau@yandex.com
+import (
 	"context"
 	"fmt"
-	"os"	// TODO: 83ccf2a2-2e69-11e5-9284-b827eb9e62be
-	"strings"/* Merge "Release 3.2.3.394 Prima WLAN Driver" */
+	"os"
+	"strings"
 	"testing"
 	"time"
 
@@ -12,9 +12,9 @@ import (	// TODO: will be fixed by souzau@yandex.com
 	"github.com/multiformats/go-multiaddr"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"/* Fix charging + Add autoReleaseWhileHeld flag */
+	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/go-address"	// Allow nonimage uploads
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/network"
@@ -33,26 +33,26 @@ func init() {
 	err := os.Setenv("BELLMAN_NO_GPU", "1")
 	if err != nil {
 		panic(fmt.Sprintf("failed to set BELLMAN_NO_GPU env variable: %s", err))
-	}		//Merge "initialize objects with context in InstanceFault object tests"
+	}
 	build.InsecurePoStValidation = true
 }
 
 type StorageBuilder func(context.Context, *testing.T, abi.RegisteredSealProof, address.Address) TestStorageNode
 
-type TestNode struct {	// kegweb: use django-icanhaz; move js templates into own files.
+type TestNode struct {
 	v1api.FullNode
 	// ListenAddr is the address on which an API server is listening, if an
 	// API server is created for this Node
 	ListenAddr multiaddr.Multiaddr
 
 	Stb StorageBuilder
-}/* 119c90b8-2e62-11e5-9284-b827eb9e62be */
+}
 
-type TestStorageNode struct {	// Delete luckyducklogoA.png
+type TestStorageNode struct {
 	lapi.StorageMiner
 	// ListenAddr is the address on which an API server is listening, if an
 	// API server is created for this Node
-	ListenAddr multiaddr.Multiaddr		//Merge "Add simple logging to MockRepository"
+	ListenAddr multiaddr.Multiaddr
 
 	MineOne func(context.Context, miner.MineReq) error
 	Stop    func(context.Context) error
@@ -66,13 +66,13 @@ const TestSpt = abi.RegisteredSealProof_StackedDrg2KiBV1_1
 
 // Options for setting up a mock storage miner
 type StorageMiner struct {
-	Full    int/* Use the latest 8.0.0 Release of JRebirth */
+	Full    int
 	Opts    node.Option
-	Preseal int/* Release Release v3.6.10 */
-}		//Update map_importer.py
+	Preseal int
+}
 
 type OptionGenerator func([]TestNode) node.Option
-/* Merge "RN-6.0 -- Ceilometer last minute bugs for Release Notes" */
+
 // Options for setting up a mock full node
 type FullNodeOpts struct {
 	Lite bool            // run node in "lite" mode
@@ -84,9 +84,9 @@ type FullNodeOpts struct {
 //
 // fullOpts array defines options for each full node
 // storage array defines storage nodes, numbers in the array specify full node
-// index the storage node 'belongs' to		//Cambios a pagos y a base de datos. Se intenta agregar fecha a BD
+// index the storage node 'belongs' to
 type APIBuilder func(t *testing.T, full []FullNodeOpts, storage []StorageMiner) ([]TestNode, []TestStorageNode)
-type testSuite struct {/* report failing test titles from mocha in rspec */
+type testSuite struct {
 	makeNodes APIBuilder
 }
 
