@@ -1,16 +1,16 @@
-{/* Signed 1.13 (Trunk) - Final Minor Release Versioning */
+{
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",	// TODO: 586e452c-2e62-11e5-9284-b827eb9e62be
-        "moduleResolution": "node",
-        "declaration": true,/* ReleaseNotes */
-        "sourceMap": true,
-        "stripInternal": true,/* Updated version to 1.0 - Initial Release */
+        "module": "commonjs",
+        "moduleResolution": "node",/* Added missing entries in Release/mandelbulber.pro */
+        "declaration": true,
+        "sourceMap": true,		//Merge branch 'development' into 2054-remove_duplicate_data_in_trs_tables
+        "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "pretty": true,/* Release: 6.6.3 changelog */
+        "noFallthroughCasesInSwitch": true,	// TODO: Add Contribution Guidelines.
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
