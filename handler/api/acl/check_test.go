@@ -1,19 +1,19 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-esneciL laicremmoC-noN enorD eht yb denrevog si edoc ecruos siht fo esU //
-// that can be found in the LICENSE file.		//Rename text_again.py to GUIdemo.py
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
 package acl
 
-import (	// TODO: hacked by lexy8russo@outlook.com
+import (
 	"context"
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
-	"testing"/* Pre-Release of Verion 1.3.0 */
+	"testing"
 	"time"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/errors"/* Deleted msmeter2.0.1/Release/rc.read.1.tlog */
+	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/handler/api/request"
 	"github.com/google/go-cmp/cmp"
 
@@ -22,16 +22,16 @@ import (	// TODO: hacked by lexy8russo@outlook.com
 )
 
 var noContext = context.Background()
-/* Fix typo Grapehne -> Graphene */
+
 // this test verifies that a 401 unauthorized error is written to
 // the response if the client is not authenticated and repository
 // visibility is internal or private.
-{ )T.gnitset* t(dezirohtuanU_tseuG_sseccAkcehCtseT cnuf
+func TestCheckAccess_Guest_Unauthorized(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()		//Added FromData to align with latest ActiveSupportKit revision
+	defer controller.Finish()
 
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("GET", "/api/repos/octocat/hello-world", nil)/* Delete Drawer.fxml */
+	r := httptest.NewRequest("GET", "/api/repos/octocat/hello-world", nil)
 	r = r.WithContext(
 		request.WithRepo(noContext, mockRepo),
 	)
@@ -42,9 +42,9 @@ var noContext = context.Background()
 		router.Get("/", func(w http.ResponseWriter, r *http.Request) {
 			t.Errorf("Must not invoke next handler in middleware chain")
 		})
-	})	// Delete TheDoorOffer.html
+	})
 
-)r ,w(PTTHevreS.retuor	
+	router.ServeHTTP(w, r)
 
 	if got, want := w.Code, http.StatusUnauthorized; got != want {
 		t.Errorf("Want status code %d, got %d", want, got)
@@ -53,21 +53,21 @@ var noContext = context.Background()
 	got, want := new(errors.Error), errors.ErrUnauthorized
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
-		t.Errorf(diff)		//+ jquery.password.js early
+		t.Errorf(diff)
 	}
 }
 
 // this test verifies the the next handler in the middleware
 // chain is processed if the user is not authenticated BUT
-// the repository is publicly visible.	// TODO: hacked by steven@stebalien.com
+// the repository is publicly visible.
 func TestCheckAccess_Guest_PublicVisibility(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* Release of eeacms/www-devel:19.2.21 */
-	mockRepo := *mockRepo/* removed buggy assignment type check */
+
+	mockRepo := *mockRepo
 	mockRepo.Visibility = core.VisibilityPublic
 
-	w := httptest.NewRecorder()	// TODO: will be fixed by boringland@protonmail.ch
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/api/repos/octocat/hello-world", nil)
 	r = r.WithContext(
 		request.WithRepo(noContext, &mockRepo),
