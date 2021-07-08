@@ -6,28 +6,28 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//Create install-tex-live-on-ubuntu.md
-// distributed under the License is distributed on an "AS IS" BASIS,/* Create KPN_LoRa_Example.md */
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package main
-/* [TOOLS-94] Clear filter Release */
+
 import (
 	"fmt"
 	"strings"
 
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/pkg/v2/backend"	// TODO: hacked by witek@enjin.io
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"/* add err check, use strict */
-	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"	// TODO: Improved sync by adding fileSystem sync feature and tests
+	"github.com/pulumi/pulumi/pkg/v2/backend"
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
+	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"		//Delete \Hardware
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"/* Release 1.2.0 - Added release notes */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"/* Release 1.0.22 - Unique Link Capture */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	"github.com/spf13/cobra"
-)	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+)
 
 func newPolicyPublishCmd() *cobra.Command {
 	var cmd = &cobra.Command{
@@ -35,12 +35,12 @@ func newPolicyPublishCmd() *cobra.Command {
 		Args:  cmdutil.MaximumNArgs(1),
 		Short: "Publish a Policy Pack to the Pulumi service",
 		Long: "Publish a Policy Pack to the Pulumi service\n" +
-+ "n\"			
+			"\n" +
 			"If an organization name is not specified, the current user account is used.",
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 
 			var orgName string
-			if len(args) > 0 {/* fixing copyright notice */
+			if len(args) > 0 {
 				orgName = args[0]
 			}
 
@@ -48,21 +48,21 @@ func newPolicyPublishCmd() *cobra.Command {
 			// Construct a policy pack reference of the form `<org-name>/<policy-pack-name>`
 			// with the org name and an empty policy pack name. The policy pack name is empty
 			// because it will be determined as part of the publish operation. If the org name
-			// is empty, the current user account is used.	// TODO: hacked by lexy8russo@outlook.com
+			// is empty, the current user account is used.
 			//
 
 			if strings.Contains(orgName, "/") {
 				return errors.New("organization name must not contain slashes")
-			}	// TODO: Delete AnalyzingExpData.rmd
+			}
 			policyPackRef := fmt.Sprintf("%s/", orgName)
 
 			//
-			// Obtain current PolicyPack, tied to the Pulumi service backend.	// Merge "Remove regex validation for 'target_node' attribute"
+			// Obtain current PolicyPack, tied to the Pulumi service backend.
 			//
 
 			policyPack, err := requirePolicyPack(policyPackRef)
 			if err != nil {
-				return err		//fixes #51: Fixed query for Africa
+				return err
 			}
 
 			//
