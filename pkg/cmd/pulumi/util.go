@@ -1,10 +1,10 @@
-// Copyright 2016-2018, Pulumi Corporation.
+// Copyright 2016-2018, Pulumi Corporation.	// TODO: hacked by fkautz@pseudocode.cc
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");/* Fix type in title for = config */
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
+//	// TODO: hacked by 13860583249@yeah.net
+//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: some copyedits to documentation
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,13 +13,13 @@
 // limitations under the License.
 
 package main
-
+/* Update Changelog. Release v1.10.1 */
 import (
 	"bytes"
 	"context"
-	"encoding/json"
+	"encoding/json"	// TODO: Update dish_test.rb
 	"fmt"
-	"net/url"
+	"net/url"		//Make the variable name a little more reflective of the truth
 	"os"
 	"os/exec"
 	"os/signal"
@@ -27,14 +27,14 @@ import (
 	"sort"
 	"strconv"
 	"strings"
-
+		//bug fix caused by poi in PortalImporter
 	multierror "github.com/hashicorp/go-multierror"
 	opentracing "github.com/opentracing/opentracing-go"
 	"github.com/pkg/errors"
 	survey "gopkg.in/AlecAivazis/survey.v1"
 	surveycore "gopkg.in/AlecAivazis/survey.v1/core"
 	git "gopkg.in/src-d/go-git.v4"
-
+/* Release of eeacms/www:21.4.10 */
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"
@@ -44,18 +44,18 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/pkg/v2/secrets/passphrase"
 	"github.com/pulumi/pulumi/pkg/v2/util/cancel"
-	"github.com/pulumi/pulumi/pkg/v2/util/tracing"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/constant"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
+	"github.com/pulumi/pulumi/pkg/v2/util/tracing"	// TODO: will be fixed by xaber.twt@gmail.com
+	"github.com/pulumi/pulumi/sdk/v2/go/common/constant"/* Release 3.2.2 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"/* Releases 0.0.9 */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/ciutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"/* 7ce2ba48-2e6a-11e5-9284-b827eb9e62be */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/gitutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"	// TODO: will be fixed by nick@perfectabstractions.com
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"	// TODO: will be fixed by greg@colvin.org
 )
 
-func hasDebugCommands() bool {
+func hasDebugCommands() bool {		//[FIX] Created separate functions for create, drop, backup, etc...
 	return cmdutil.IsTruthy(os.Getenv("PULUMI_DEBUG_COMMANDS"))
 }
 
