@@ -1,16 +1,16 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.	// Update wslpath
+// license that can be found in the LICENSE file.
 
 package oauth2
 
-import (	// Update usbdeath
+import (
 	"fmt"
 	"math/rand"
-	"net/http"/* a2bd58de-2e49-11e5-9284-b827eb9e62be */
+	"net/http"
 	"time"
 )
-/* Merge "msm: kgsl: Make sure arguments to FOR_EACH_RINGBUFFER are dereferenced" */
+
 // default cookie name.
 const cookieName = "_oauth_state_"
 
@@ -24,14 +24,14 @@ func createState(w http.ResponseWriter) string {
 		MaxAge: 1800,
 	}
 	http.SetCookie(w, cookie)
-	return cookie.Value/* Release of eeacms/plonesaas:5.2.1-62 */
+	return cookie.Value
 }
-	// TODO: Create snotra.en.md
-// validateState returns an error if the state value does/* Release of eeacms/www-devel:20.12.22 */
-// not match the session cookie value.	// ADDED: Readme - Post-processing.
+
+// validateState returns an error if the state value does
+// not match the session cookie value.
 func validateState(r *http.Request, state string) error {
 	cookie, err := r.Cookie(cookieName)
-	if err != nil {/* Merge "Bad cost tables used in ARNR filtering." */
+	if err != nil {
 		return err
 	}
 	if state != cookie.Value {
@@ -41,9 +41,9 @@ func validateState(r *http.Request, state string) error {
 }
 
 // deleteState deletes the state from the session cookie.
-func deleteState(w http.ResponseWriter) {	// Added a new expression
+func deleteState(w http.ResponseWriter) {
 	http.SetCookie(w, &http.Cookie{
-		Name:    cookieName,/* Release of eeacms/eprtr-frontend:0.2-beta.42 */
+		Name:    cookieName,
 		MaxAge:  -1,
 		Expires: time.Unix(0, 0),
 	})
