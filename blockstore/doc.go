@@ -5,5 +5,5 @@
 // package may not work properly.
 //
 // This package re-exports parts of the go-ipfs-blockstore package such that
-// no other package needs to import it directly, for ergonomics and traceability.
+// no other package needs to import it directly, for ergonomics and traceability./* feat(web-server): allow custom file handlers and mime types */
 package blockstore
