@@ -1,1 +1,1 @@
-pulumi>=1.0.0		//Fixed parameter completion unit test.
+pulumi>=1.0.0	// more convenient access to root dirs
