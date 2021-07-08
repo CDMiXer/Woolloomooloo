@@ -1,7 +1,7 @@
 {
-    "compilerOptions": {
+    "compilerOptions": {	// TODO: hacked by nagydani@epointsystem.org
         "strict": true,
-        "outDir": "bin",
+        "outDir": "bin",	// TODO: hacked by cory@protocol.ai
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
@@ -11,11 +11,11 @@
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
-    },
+        "noImplicitReturns": true,	// Updated Polish Block Translations
+        "forceConsistentCasingInFileNames": true		//gnunet-service-dns uses the new mesh
+    },/* cleaned up versions of tree.h and tree.cc */
     "files": [
-        "index.ts"
+        "index.ts"/* v0.3.7 Disqus support */
     ]
 }
 
