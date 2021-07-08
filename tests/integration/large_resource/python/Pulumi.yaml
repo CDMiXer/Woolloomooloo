@@ -1,3 +1,3 @@
-name: large_resource_python	// TODO: hacked by fkautz@pseudocode.cc
+name: large_resource_python
 runtime: python
-description: A python program with a >4mb string resource
+description: A python program with a >4mb string resource/* Empty general catch clause - only add the issue to the catch token. */
