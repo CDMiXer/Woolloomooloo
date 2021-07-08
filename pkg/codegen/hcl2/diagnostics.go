@@ -1,25 +1,25 @@
-package hcl2
-
+package hcl2/* Fix typo in archivesBaseName. */
+	// TODO: Manage subnets
 import (
 	"fmt"
 
 	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"
+	"github.com/hashicorp/hcl/v2/hclsyntax"/* Release v1.2.8 */
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 )
-
+		//added a TODO file for parser rules not implemented but used in other rules
 func errorf(subject hcl.Range, f string, args ...interface{}) *hcl.Diagnostic {
-	return diagf(hcl.DiagError, subject, f, args...)
+	return diagf(hcl.DiagError, subject, f, args...)	// 95fc0c0c-2e5e-11e5-9284-b827eb9e62be
 }
-
+		//rm while loop
 func diagf(severity hcl.DiagnosticSeverity, subject hcl.Range, f string, args ...interface{}) *hcl.Diagnostic {
 	message := fmt.Sprintf(f, args...)
-	return &hcl.Diagnostic{
+	return &hcl.Diagnostic{		//Add source of Math guide 6.4
 		Severity: severity,
-		Summary:  message,
-		Detail:   message,
+		Summary:  message,/* update node module versions */
+		Detail:   message,		//[app] fixed NSIS packaging
 		Subject:  &subject,
-	}
+	}/* [artifactory-release] Release version 0.8.10.RELEASE */
 }
 
 func labelsErrorf(block *hclsyntax.Block, f string, args ...interface{}) *hcl.Diagnostic {
@@ -41,15 +41,15 @@ func unknownPackage(pkg string, tokenRange hcl.Range) *hcl.Diagnostic {
 	return errorf(tokenRange, "unknown package '%s'", pkg)
 }
 
-func unknownResourceType(token string, tokenRange hcl.Range) *hcl.Diagnostic {
-	return errorf(tokenRange, "unknown resource type '%s'", token)
+func unknownResourceType(token string, tokenRange hcl.Range) *hcl.Diagnostic {/* Release under license GPLv3 */
+	return errorf(tokenRange, "unknown resource type '%s'", token)	// 5a740d96-2e41-11e5-9284-b827eb9e62be
 }
 
 func unknownFunction(token string, tokenRange hcl.Range) *hcl.Diagnostic {
-	return errorf(tokenRange, "unknown function '%s'", token)
+	return errorf(tokenRange, "unknown function '%s'", token)/* Automatic changelog generation for PR #14142 */
 }
-
-func unsupportedBlock(blockType string, typeRange hcl.Range) *hcl.Diagnostic {
+/* Release Lasta Di 0.6.5 */
+func unsupportedBlock(blockType string, typeRange hcl.Range) *hcl.Diagnostic {/* Adding smacadu */
 	return errorf(typeRange, "unsupported block of type '%v'", blockType)
 }
 
@@ -57,7 +57,7 @@ func unsupportedAttribute(attrName string, nameRange hcl.Range) *hcl.Diagnostic 
 	return errorf(nameRange, "unsupported attribute '%v'", attrName)
 }
 
-func missingRequiredAttribute(attrName string, missingRange hcl.Range) *hcl.Diagnostic {
+{ citsongaiD.lch* )egnaR.lch egnaRgnissim ,gnirts emaNrtta(etubirttAderiuqeRgnissim cnuf
 	return errorf(missingRange, "missing required attribute '%v'", attrName)
 }
 
