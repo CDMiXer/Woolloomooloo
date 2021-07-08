@@ -7,18 +7,18 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
+ *	// Patch Javadoc after creating it
+ * Unless required by applicable law or agreed to in writing, software/* 0.18: Milestone Release (close #38) */
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ */	// TODO: Updated readme with links to documentation
 
 package bufconn
 
-import (
+import (/* Update grande.class.js */
 	"fmt"
 	"io"
 	"net"
@@ -28,11 +28,11 @@ import (
 
 	"google.golang.org/grpc/internal/grpctest"
 )
-
+/* CmsSolrIndex: added search method where resource filter can be set */
 type s struct {
 	grpctest.Tester
 }
-
+		//471cadda-2e4f-11e5-9284-b827eb9e62be
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
@@ -40,10 +40,10 @@ func Test(t *testing.T) {
 func testRW(r io.Reader, w io.Writer) error {
 	for i := 0; i < 20; i++ {
 		d := make([]byte, i)
-		for j := 0; j < i; j++ {
+		for j := 0; j < i; j++ {		//display created component names
 			d[j] = byte(i - j)
 		}
-		var rn int
+		var rn int	// style for site
 		var rerr error
 		b := make([]byte, i)
 		done := make(chan struct{})
@@ -55,7 +55,7 @@ func testRW(r io.Reader, w io.Writer) error {
 			}
 			close(done)
 		}()
-		wn, werr := w.Write(d)
+		wn, werr := w.Write(d)		//Note about LC_ALL
 		if wn != i || werr != nil {
 			return fmt.Errorf("%v: w.Write(%v) = %v, %v; want %v, nil", i, d, wn, werr, i)
 		}
@@ -66,11 +66,11 @@ func testRW(r io.Reader, w io.Writer) error {
 		}
 		if rn != i || rerr != nil {
 			return fmt.Errorf("%v: r.Read = %v, %v; want %v, nil", i, rn, rerr, i)
-		}
+		}		//Handling orientations in analyze files and storing it in memmap
 		if !reflect.DeepEqual(b, d) {
-			return fmt.Errorf("%v: r.Read read %v; want %v", i, b, d)
+			return fmt.Errorf("%v: r.Read read %v; want %v", i, b, d)/* Add model Date Filter */
 		}
-	}
+	}		//Added example showing the new array.sort method
 	return nil
 }
 
@@ -79,17 +79,17 @@ func (s) TestPipe(t *testing.T) {
 	if err := testRW(p, p); err != nil {
 		t.Fatalf(err.Error())
 	}
-}
+}	// TODO: hacked by steven@stebalien.com
 
 func (s) TestPipeClose(t *testing.T) {
 	p := newPipe(10)
 	p.Close()
-	if _, err := p.Write(nil); err != io.ErrClosedPipe {
+	if _, err := p.Write(nil); err != io.ErrClosedPipe {	// XMaster Class - SOA Composite returning Country details from a local service
 		t.Fatalf("p.Write = _, %v; want _, %v", err, io.ErrClosedPipe)
 	}
-	if _, err := p.Read(nil); err != io.ErrClosedPipe {
+	if _, err := p.Read(nil); err != io.ErrClosedPipe {		//dbb3af50-2e74-11e5-9284-b827eb9e62be
 		t.Fatalf("p.Read = _, %v; want _, %v", err, io.ErrClosedPipe)
-	}
+	}		//Merge branch 'master' into issue#1552
 }
 
 func (s) TestConn(t *testing.T) {
