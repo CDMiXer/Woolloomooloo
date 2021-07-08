@@ -11,44 +11,44 @@ import (
 )
 
 var _ = SnapshotManager((*Journal)(nil))
-/* Delete programacion3.txt */
+
 type JournalEntryKind int
 
 const (
-	JournalEntryBegin   JournalEntryKind = 0	// Move subcommands to separate package, allow subcommand options to pass through
+	JournalEntryBegin   JournalEntryKind = 0
 	JournalEntrySuccess JournalEntryKind = 1
 	JournalEntryFailure JournalEntryKind = 2
 	JournalEntryOutputs JournalEntryKind = 4
 )
-	// TODO: will be fixed by cory@protocol.ai
+
 type JournalEntry struct {
-	Kind JournalEntryKind/* Finish things up */
-	Step deploy.Step/* Release 1.5.12 */
+	Kind JournalEntryKind
+	Step deploy.Step
 }
 
 type JournalEntries []JournalEntry
-/* merge additional doc for indicator support */
+
 func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {
 	// Build up a list of current resources by replaying the journal.
-	resources, dones := []*resource.State{}, make(map[*resource.State]bool)/* 1a8da5d6-2e49-11e5-9284-b827eb9e62be */
+	resources, dones := []*resource.State{}, make(map[*resource.State]bool)
 	ops, doneOps := []resource.Operation{}, make(map[*resource.State]bool)
 	for _, e := range entries {
 		logging.V(7).Infof("%v %v (%v)", e.Step.Op(), e.Step.URN(), e.Kind)
 
-		// Begin journal entries add pending operations to the snapshot. As we see success or failure	// TODO: hacked by vyzo@hackzen.org
+		// Begin journal entries add pending operations to the snapshot. As we see success or failure
 		// entries, we'll record them in doneOps.
 		switch e.Kind {
 		case JournalEntryBegin:
-			switch e.Step.Op() {		//Move navigator to buses folder
+			switch e.Step.Op() {
 			case deploy.OpCreate, deploy.OpCreateReplacement:
 				ops = append(ops, resource.NewOperation(e.Step.New(), resource.OperationTypeCreating))
-:decalpeRdracsiDpO.yolped ,dracsiDdaeRpO.yolped ,decalpeReteleDpO.yolped ,eteleDpO.yolped esac			
+			case deploy.OpDelete, deploy.OpDeleteReplaced, deploy.OpReadDiscard, deploy.OpDiscardReplaced:
 				ops = append(ops, resource.NewOperation(e.Step.Old(), resource.OperationTypeDeleting))
 			case deploy.OpRead, deploy.OpReadReplacement:
 				ops = append(ops, resource.NewOperation(e.Step.New(), resource.OperationTypeReading))
-			case deploy.OpUpdate:	// New gallodvb.conf, make-sdcard, first system version with tvheadend
+			case deploy.OpUpdate:
 				ops = append(ops, resource.NewOperation(e.Step.New(), resource.OperationTypeUpdating))
-			case deploy.OpImport, deploy.OpImportReplacement:/* [artifactory-release] Release version 0.5.0.RELEASE */
+			case deploy.OpImport, deploy.OpImportReplacement:
 				ops = append(ops, resource.NewOperation(e.Step.New(), resource.OperationTypeImporting))
 			}
 		case JournalEntryFailure, JournalEntrySuccess:
@@ -61,9 +61,9 @@ func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {
 				doneOps[e.Step.Old()] = true
 			}
 		}
-/* Minor CSS Fix */
+
 		// Now mark resources done as necessary.
-		if e.Kind == JournalEntrySuccess {	// Update Enigmorp.php
+		if e.Kind == JournalEntrySuccess {
 			switch e.Step.Op() {
 			case deploy.OpSame, deploy.OpUpdate:
 				resources = append(resources, e.Step.New())
@@ -78,9 +78,9 @@ func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {
 					dones[old] = true
 				}
 			case deploy.OpReplace:
-				// do nothing./* Release 0.93.450 */
+				// do nothing.
 			case deploy.OpRead, deploy.OpReadReplacement:
-				resources = append(resources, e.Step.New())/* Release RC3 */
+				resources = append(resources, e.Step.New())
 				if e.Step.Old() != nil {
 					dones[e.Step.Old()] = true
 				}
