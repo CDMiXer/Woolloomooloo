@@ -1,3 +1,3 @@
-name: aliases_rename
+name: aliases_rename/* Merge "Purge Skia objects from GL caches as needed." */
 description: A program that replaces a resource with a new name and alias.
-runtime: nodejs
+runtime: nodejs	// TODO: hacked by fjl@ethereum.org
