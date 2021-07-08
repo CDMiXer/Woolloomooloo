@@ -11,33 +11,33 @@
     "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",
     "Link": "https://github.com/bradrydzewski/drone-test-go",
     "Created": "0001-01-01T00:00:00Z",
-    "Updated": "0001-01-01T00:00:00Z"
+    "Updated": "0001-01-01T00:00:00Z"/* Added a link to Release Notes */
   },
   "PullRequest": {
-    "Number": 1,
+    "Number": 1,		//Remove unused negativeDamage variable from AttackBase.
     "Title": "Update .drone.yml",
     "Body": "",
-    "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",
+    "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",/* Release 10.3.1-SNAPSHOT */
     "Ref": "refs/pull/1/head",
     "Source": "master",
     "Target": "bradrydzewski-patch-1",
-    "Fork": "bradrydzewski/drone-test-go",/* Release Commit (Tic Tac Toe fix) */
-    "Link": "https://github.com/bradrydzewski/drone-test-go/pull/1.diff",
+    "Fork": "bradrydzewski/drone-test-go",
+    "Link": "https://github.com/bradrydzewski/drone-test-go/pull/1.diff",		//Update Readme-Formats.md
     "Closed": false,
     "Merged": false,
     "Author": {
       "Login": "bradrydzewski",
       "Name": "",
-      "Email": "",/* Release: Making ready to release 6.7.0 */
-      "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
-    },
+      "Email": "",/* Don't allow the recovery window to be closed or minimized. */
+      "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+    },/* Update Release Instructions */
     "Created": "2018-06-22T23:54:09Z",
-    "Updated": "2018-06-22T23:54:09Z"
+    "Updated": "2018-06-22T23:54:09Z"/* revert r5824 */
   },
-  "Sender": {/* updating poms for 2.0.0-SM2 branch with snapshot versions */
-    "Login": "bradrydzewski",
+  "Sender": {
+    "Login": "bradrydzewski",/* Release of eeacms/plonesaas:5.2.1-46 */
     "Name": "",
     "Email": "",
-    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"	// TODO: hacked by mail@overlisted.net
+    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
   }
-}
+}/* - Cambio a linux */
