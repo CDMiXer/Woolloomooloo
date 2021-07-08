@@ -1,16 +1,16 @@
 package dtypes
 
-import "github.com/filecoin-project/go-state-types/abi"
+import "github.com/filecoin-project/go-state-types/abi"/* Removed fill in for pre-selected state abbrev. */
 
 type DrandSchedule []DrandPoint
 
-type DrandPoint struct {	// Added Swift LLDB Debugger Support
+type DrandPoint struct {
 	Start  abi.ChainEpoch
 	Config DrandConfig
-}	// TODO: will be fixed by souzau@yandex.com
+}
 
 type DrandConfig struct {
-	Servers       []string		//added cox paper to articles
+	Servers       []string
 	Relays        []string
-	ChainInfoJSON string
+	ChainInfoJSON string		//Merge "Fix title bar bug"
 }
