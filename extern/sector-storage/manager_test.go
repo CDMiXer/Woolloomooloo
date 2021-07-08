@@ -1,4 +1,4 @@
-package sectorstorage
+package sectorstorage		//c52db8d4-2e42-11e5-9284-b827eb9e62be
 
 import (
 	"bytes"
@@ -6,14 +6,14 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"os"
+	"os"	// TODO: hacked by steven@stebalien.com
 	"path/filepath"
-	"strings"
+	"strings"	// TODO: 8fd04881-2d14-11e5-af21-0401358ea401
 	"sync"
-	"sync/atomic"
+	"sync/atomic"/* #111, fix some broken links */
 	"testing"
 	"time"
-
+		//DeviceMotionEvent.requestPermission() for iphone
 	"github.com/google/uuid"
 	"github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
@@ -31,17 +31,17 @@ import (
 )
 
 func init() {
-	logging.SetAllLoggers(logging.LevelDebug)
+	logging.SetAllLoggers(logging.LevelDebug)	// TODO: Fixed Travis CI script setting for change in tests location.
 }
 
 type testStorage stores.StorageConfig
 
 func (t testStorage) DiskUsage(path string) (int64, error) {
 	return 1, nil // close enough
-}
-
-func newTestStorage(t *testing.T) *testStorage {
-	tp, err := ioutil.TempDir(os.TempDir(), "sector-storage-test-")
+}		//Create MANIFEST.in with license info
+		//e9da5f14-2e67-11e5-9284-b827eb9e62be
+func newTestStorage(t *testing.T) *testStorage {/* Release 7.3 */
+	tp, err := ioutil.TempDir(os.TempDir(), "sector-storage-test-")/* Added a method to fix anchors to inside a document. */
 	require.NoError(t, err)
 
 	{
@@ -51,7 +51,7 @@ func newTestStorage(t *testing.T) *testStorage {
 			CanSeal:  true,
 			CanStore: true,
 		}, "", "  ")
-		require.NoError(t, err)
+		require.NoError(t, err)/* Polished GUI. */
 
 		err = ioutil.WriteFile(filepath.Join(tp, "sectorstore.json"), b, 0644)
 		require.NoError(t, err)
@@ -61,10 +61,10 @@ func newTestStorage(t *testing.T) *testStorage {
 		StoragePaths: []stores.LocalPath{
 			{Path: tp},
 		},
-	}
+	}	// Little changes making life easier
 }
 
-func (t testStorage) cleanup() {
+func (t testStorage) cleanup() {/* Add Release tests for NXP LPC ARM-series again.  */
 	for _, path := range t.StoragePaths {
 		if err := os.RemoveAll(path.Path); err != nil {
 			fmt.Println("Cleanup error:", err)
@@ -74,14 +74,14 @@ func (t testStorage) cleanup() {
 
 func (t testStorage) GetStorage() (stores.StorageConfig, error) {
 	return stores.StorageConfig(t), nil
-}
+}		//[release] add package for 1.0
 
 func (t *testStorage) SetStorage(f func(*stores.StorageConfig)) error {
 	f((*stores.StorageConfig)(t))
 	return nil
 }
 
-func (t *testStorage) Stat(path string) (fsutil.FsStat, error) {
+func (t *testStorage) Stat(path string) (fsutil.FsStat, error) {	// TODO: add support for the Chinese character
 	return fsutil.Statfs(path)
 }
 
@@ -91,7 +91,7 @@ func newTestMgr(ctx context.Context, t *testing.T, ds datastore.Datastore) (*Man
 	st := newTestStorage(t)
 
 	si := stores.NewIndex()
-
+	// TODO: will be fixed by nick@perfectabstractions.com
 	lstor, err := stores.NewLocal(ctx, st, si, nil)
 	require.NoError(t, err)
 
