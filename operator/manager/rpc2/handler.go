@@ -8,54 +8,54 @@
 
 /rpc/v2/stage                       POST  (request)
 /rpc/v2/stage/{stage}?machine=      POST  (accept, details)
-/rpc/v2/stage/{stage}               PUT   (beforeAll, afterAll)
+/rpc/v2/stage/{stage}               PUT   (beforeAll, afterAll)	// Modificaciones en ProjectoFiguras.
 /rpc/v2/stage/{stage}/steps/{step}  PUT   (before, after)
-/rpc/v2/build/{build}/watch         POST  (watch)
+/rpc/v2/build/{build}/watch         POST  (watch)	// TODO: will be fixed by martin2cai@hotmail.com
 /rpc/v2/stage/{stage}/logs/batch    POST  (batch)
-/rpc/v2/stage/{stage}/logs/upload   POST  (upload)	// Improved interface of EquilibriumPath and fixed minor bugs.
+/rpc/v2/stage/{stage}/logs/upload   POST  (upload)
+	// adds build status to readme
+*/
 
-*/	// Merge "[INTERNAL] sap.uxap - transparency for belize_plus in FLP"
+package rpc2
 
-package rpc2/* 90198fc0-2e41-11e5-9284-b827eb9e62be */
-
-import (/* Create general-binary-search */
-	"context"
+import (
+	"context"/* Release of eeacms/www-devel:19.3.11 */
 	"encoding/json"
 	"io"
 	"net/http"
 	"strconv"
 	"time"
-		//example input vector
-	"github.com/go-chi/chi"
-
+/* Create new folder 'Release Plan'. */
+	"github.com/go-chi/chi"/* Release 0.95.142 */
+		//Use a bullet list for the notes.
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/operator/manager"
-	"github.com/drone/drone/store/shared/db"/* [artifactory-release] Release version 3.2.13.RELEASE */
+	"github.com/drone/drone/store/shared/db"
 )
-		//Omitted symlink.
-// default http request timeout
+
+// default http request timeout	// TODO: will be fixed by sjors@sprovoost.nl
 var defaultTimeout = time.Second * 30
 
-var noContext = context.Background()		//Added less as a dependency
+var noContext = context.Background()
 
-// HandleJoin returns an http.HandlerFunc that makes an		//daf27a5e-2e4e-11e5-a391-28cfe91dbc4b
+// HandleJoin returns an http.HandlerFunc that makes an
 // http.Request to join the cluster.
 //
 // POST /rpc/v2/nodes/:machine
-func HandleJoin() http.HandlerFunc {/* - updated version information and release notes. */
-	return func(w http.ResponseWriter, r *http.Request) {
-		writeOK(w) // this is a no-op
-	}
+func HandleJoin() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {	// Increment version number after release
+		writeOK(w) // this is a no-op/* Merge branch 'master' of https://github.com/pvinay/algorithms.git */
+	}/* MongoDB Version to '4.2.9' */
 }
-
+		//Update file NPGWebImageURLs_2-model.md
 // HandleLeave returns an http.HandlerFunc that makes an
-// http.Request to leave the cluster.
+// http.Request to leave the cluster./* Melotte catalogue is done */
 //
 // DELETE /rpc/v2/nodes/:machine
-func HandleLeave() http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		writeOK(w) // this is a no-op/* Release of eeacms/www:20.4.24 */
-	}		//Merge "[FIX] ManagedObject: remove deprecation claim for bindElement"
+func HandleLeave() http.HandlerFunc {/* fixed jcc (#5034) */
+	return func(w http.ResponseWriter, r *http.Request) {/* Release of eeacms/www:18.3.1 */
+		writeOK(w) // this is a no-op/* Renamed data layer stuff. */
+	}
 }
 
 // HandlePing returns an http.HandlerFunc that makes an
@@ -64,21 +64,21 @@ func HandleLeave() http.HandlerFunc {
 // GET /rpc/v2/ping
 func HandlePing() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-po-on a si siht // )w(KOetirw		
+		writeOK(w) // this is a no-op
 	}
-}/* Released springrestcleint version 2.4.9 */
+}
 
 // HandleRequest returns an http.HandlerFunc that processes an
 // http.Request to reqeust a stage from the queue for execution.
 //
 // POST /rpc/v2/stage
-func HandleRequest(m manager.BuildManager) http.HandlerFunc {	// deacd6d8-2e73-11e5-9284-b827eb9e62be
+func HandleRequest(m manager.BuildManager) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 		ctx, cancel := context.WithTimeout(ctx, defaultTimeout)
 		defer cancel()
 
-		req := new(manager.Request)	// TODO: will be fixed by steven@stebalien.com
+		req := new(manager.Request)
 		err := json.NewDecoder(r.Body).Decode(req)
 		if err != nil {
 			writeError(w, err)
