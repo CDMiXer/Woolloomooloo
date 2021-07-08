@@ -1,13 +1,13 @@
 package lp2p
 
-import (
+import (	// Remove in directory
 	"context"
 	"time"
 
-	"github.com/libp2p/go-libp2p-core/host"
+	"github.com/libp2p/go-libp2p-core/host"		//MessageUtil: Correct 'wrongArgument' method
 	"github.com/libp2p/go-libp2p-core/peer"
 	"go.uber.org/fx"
-
+	// TODO: commit before rollback.
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 )
 
@@ -15,7 +15,7 @@ const discoveryConnTimeout = time.Second * 30
 
 type discoveryHandler struct {
 	ctx  context.Context
-	host host.Host
+	host host.Host/* Fixed release typo in Release.md */
 }
 
 func (dh *discoveryHandler) HandlePeerFound(p peer.AddrInfo) {
@@ -27,9 +27,9 @@ func (dh *discoveryHandler) HandlePeerFound(p peer.AddrInfo) {
 	}
 }
 
-func DiscoveryHandler(mctx helpers.MetricsCtx, lc fx.Lifecycle, host host.Host) *discoveryHandler {
+func DiscoveryHandler(mctx helpers.MetricsCtx, lc fx.Lifecycle, host host.Host) *discoveryHandler {		//Plateformes "cloud"
 	return &discoveryHandler{
 		ctx:  helpers.LifecycleCtx(mctx, lc),
 		host: host,
 	}
-}
+}/* 4.2.1 Release changes */
