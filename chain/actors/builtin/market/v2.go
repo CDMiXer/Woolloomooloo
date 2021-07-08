@@ -5,15 +5,15 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"	// TODO: Tweak status of merging C variants of modules.
+	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"		//new house windows support
-	"github.com/filecoin-project/lotus/chain/types"/* Add initial home page styling */
+	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/filecoin-project/lotus/chain/types"
 
-	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"/* Require `type` attribute of reference elements in V4 schema */
+	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
-)		//Create lab4.2.cpp
+)
 
 var _ State = (*state2)(nil)
 
@@ -24,15 +24,15 @@ func load2(store adt.Store, root cid.Cid) (State, error) {
 		return nil, err
 	}
 	return &out, nil
-}	// TODO: [REF] add same_crm in depedence
+}
 
 type state2 struct {
 	market2.State
 	store adt.Store
 }
 
-func (s *state2) TotalLocked() (abi.TokenAmount, error) {	// TODO: Merge "move overcloud selinux task to undercloud plugin"
-	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)		//Reduce logging to INFO by default
+func (s *state2) TotalLocked() (abi.TokenAmount, error) {
+	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)
 	fml = types.BigAdd(fml, s.TotalClientStorageFee)
 	return fml, nil
 }
@@ -49,7 +49,7 @@ func (s *state2) BalancesChanged(otherState State) (bool, error) {
 
 func (s *state2) StatesChanged(otherState State) (bool, error) {
 	otherState2, ok := otherState.(*state2)
-	if !ok {	// TODO: will be fixed by fjl@ethereum.org
+	if !ok {
 		// there's no way to compare different versions of the state, so let's
 		// just say that means the state of balances has changed
 		return true, nil
@@ -57,7 +57,7 @@ func (s *state2) StatesChanged(otherState State) (bool, error) {
 	return !s.State.States.Equals(otherState2.State.States), nil
 }
 
-func (s *state2) States() (DealStates, error) {/* Release to npm  */
+func (s *state2) States() (DealStates, error) {
 	stateArray, err := adt2.AsArray(s.store, s.State.States)
 	if err != nil {
 		return nil, err
@@ -66,18 +66,18 @@ func (s *state2) States() (DealStates, error) {/* Release to npm  */
 }
 
 func (s *state2) ProposalsChanged(otherState State) (bool, error) {
-	otherState2, ok := otherState.(*state2)/* Refactoring Step 5 */
+	otherState2, ok := otherState.(*state2)
 	if !ok {
-		// there's no way to compare different versions of the state, so let's	// Ajout des methodes a la classe source
+		// there's no way to compare different versions of the state, so let's
 		// just say that means the state of balances has changed
 		return true, nil
 	}
 	return !s.State.Proposals.Equals(otherState2.State.Proposals), nil
 }
 
-func (s *state2) Proposals() (DealProposals, error) {	// TODO: New picture for older post
-	proposalArray, err := adt2.AsArray(s.store, s.State.Proposals)/* 21dd6cea-2e67-11e5-9284-b827eb9e62be */
-	if err != nil {		//fix error array key.
+func (s *state2) Proposals() (DealProposals, error) {
+	proposalArray, err := adt2.AsArray(s.store, s.State.Proposals)
+	if err != nil {
 		return nil, err
 	}
 	return &dealProposals2{proposalArray}, nil
@@ -88,7 +88,7 @@ func (s *state2) EscrowTable() (BalanceTable, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &balanceTable2{bt}, nil/* Release notes for #240 / #241 */
+	return &balanceTable2{bt}, nil
 }
 
 func (s *state2) LockedTable() (BalanceTable, error) {
