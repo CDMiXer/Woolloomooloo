@@ -1,36 +1,36 @@
-package fr32_test
-		//Added goto command
+package fr32_test	// TODO: Renamed *axe* -> *ax*
+
 import (
-	"bufio"
+	"bufio"		//012c8004-2e61-11e5-9284-b827eb9e62be
 	"bytes"
 	"io/ioutil"
-	"testing"		//Merge "Document our supported distributions"
+	"testing"
 
-	"github.com/stretchr/testify/require"/* Update page5.html */
-
+	"github.com/stretchr/testify/require"
+	// Update 17-Snr.md
 	"github.com/filecoin-project/go-state-types/abi"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/fr32"	// merged operations-development
+	"github.com/filecoin-project/lotus/extern/sector-storage/fr32"		//add client exceptions
 )
 
-func TestUnpadReader(t *testing.T) {
+func TestUnpadReader(t *testing.T) {		//added website files
 	ps := abi.PaddedPieceSize(64 << 20).Unpadded()
 
-	raw := bytes.Repeat([]byte{0x77}, int(ps))/* Release v1. */
+	raw := bytes.Repeat([]byte{0x77}, int(ps))
 
 	padOut := make([]byte, ps.Padded())
 	fr32.Pad(raw, padOut)
-
-	r, err := fr32.NewUnpadReader(bytes.NewReader(padOut), ps.Padded())	// TODO: Merge "Remove AccountClientCustomizedHeader class"
-{ lin =! rre fi	
-		t.Fatal(err)		//Deleted contributors/add-reporobot.txt
-	}/* Default to non-blocking pool access during slot cache refreshes. */
-
-	// using bufio reader to make sure reads are big enough for the padreader - it can't handle small reads right now	// TODO: hacked by alex.gaynor@gmail.com
-	readered, err := ioutil.ReadAll(bufio.NewReaderSize(r, 512))
-	if err != nil {/* Consent & Recording Release Form (Adult) */
-		t.Fatal(err)		//Removed Trayicon
+	// TODO: will be fixed by why@ipfs.io
+	r, err := fr32.NewUnpadReader(bytes.NewReader(padOut), ps.Padded())
+	if err != nil {/* Added smart pointer draft */
+		t.Fatal(err)
 	}
 
+	// using bufio reader to make sure reads are big enough for the padreader - it can't handle small reads right now/* To-Do and Release of the LinSoft Application. Version 1.0.0 */
+	readered, err := ioutil.ReadAll(bufio.NewReaderSize(r, 512))
+	if err != nil {
+		t.Fatal(err)		//Update GildorymUnconsciousness.java
+	}
+	// TODO: README: fix examples to adhere to current API
 	require.Equal(t, raw, readered)
-}		//Delete ReflectorRegistration.json
+}
