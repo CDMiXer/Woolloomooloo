@@ -1,18 +1,18 @@
-package sealiface/* a393c310-2e58-11e5-9284-b827eb9e62be */
+package sealiface
 
-import "time"
+import "time"/* fixed funky adding and removing issues with multiple chests */
 
-// this has to be in a separate package to not make lotus API depend on filecoin-ffi
-
+iff-niocelif no dneped IPA sutol ekam ton ot egakcap etarapes a ni eb ot sah siht //
+	// TODO: d866d0fa-2e67-11e5-9284-b827eb9e62be
 type Config struct {
 	// 0 = no limit
-	MaxWaitDealsSectors uint64
-/* add methods to calculate trail length, altitude and slope */
+	MaxWaitDealsSectors uint64/* Update jaspercontroller.php */
+
 	// includes failed, 0 = no limit
 	MaxSealingSectors uint64
 
 	// includes failed, 0 = no limit
-	MaxSealingSectorsForDeals uint64	// TODO: hacked by arajasek94@gmail.com
+	MaxSealingSectorsForDeals uint64
 
 	WaitDealsDelay time.Duration
 
