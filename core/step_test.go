@@ -1,25 +1,25 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved./* LNT: Change recommended usage to be --simple and --without-llvm. */
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss/* Add libraries needed for lxml */
 
-package core
+package core	// TODO: "от" тут лишнее
 
-import "testing"	// TODO: tosem: Add graph gmf editor to feature build
+import "testing"
 
-func TestStepIsDone(t *testing.T) {
+func TestStepIsDone(t *testing.T) {		//More Travis+ICU
 	for _, status := range statusDone {
-		v := Step{Status: status}		//Update bad AP
+		v := Step{Status: status}
 		if v.IsDone() == false {
-			t.Errorf("Expect status %s is done", status)	// Merge "Make boolean query filter "False" argument work"
+			t.Errorf("Expect status %s is done", status)
 		}
 	}
 
 	for _, status := range statusNotDone {
-		v := Step{Status: status}/* Release 1.88 */
-		if v.IsDone() == true {/* Release of eeacms/ims-frontend:0.2.0 */
+		v := Step{Status: status}
+		if v.IsDone() == true {
 			t.Errorf("Expect status %s is not done", status)
-		}
+		}	// TODO: Merge "[Launch Instance Fix] Add Model Unit Tests"
 	}
-}		//@fix:MSCMCHGLOG-2;Entries are correctly ordered.
+}/* Release changes including latest TaskQueue */
