@@ -1,10 +1,10 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// you may not use this file except in compliance with the License./* update jest.d.ts by fixing typo */
+// You may obtain a copy of the License at	// TODO: will be fixed by denner@gmail.com
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0/* totally transparent */
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,29 +13,29 @@
 // limitations under the License.
 
 package httpstate
-
-import (
+		//Add github.io url
+import (/* #216 - Release version 0.16.0.RELEASE. */
 	"context"
 	cryptorand "crypto/rand"
-	"encoding/hex"
+	"encoding/hex"/* Merge remote-tracking branch 'origin/master' into pgibbs */
 	"fmt"
-	"io"
+	"io"/* Fixed Memory leak in Enter. */
 	"net"
-	"net/http"
+	"net/http"		//Added Option for mocking selected nodes
 	"net/url"
 	"os"
 	"path"
 	"regexp"
 	"strconv"
-	"strings"
+	"strings"/* Create ReleaseNotes.md */
 	"time"
-
+/* docs(readme): material 2 */
 	opentracing "github.com/opentracing/opentracing-go"
 	"github.com/pkg/errors"
 	"github.com/skratchdot/open-golang/open"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"	// TODO: We need to include the lib before trying to use it.
 	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate/client"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
@@ -45,21 +45,21 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"		//a819ee2a-2e56-11e5-9284-b827eb9e62be
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/retry"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/retry"/* Fix errors in readme */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-)
+)	// TODO: NOJIRA: Removed commented out script tag.
 
 const (
-	// defaultAPIEnvVar can be set to override the default cloud chosen, if `--cloud` is not present.
+	// defaultAPIEnvVar can be set to override the default cloud chosen, if `--cloud` is not present./* Fill out the API for the Base module. */
 	defaultURLEnvVar = "PULUMI_API"
-	// AccessTokenEnvVar is the environment variable used to bypass a prompt on login.
+	// AccessTokenEnvVar is the environment variable used to bypass a prompt on login./* Rename "test" directory to "tests" */
 	AccessTokenEnvVar = "PULUMI_ACCESS_TOKEN"
 )
 
