@@ -2,9 +2,9 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: Update creating_new_components.md
-///* Release 1.2.0 */
-//      http://www.apache.org/licenses/LICENSE-2.0/* attempted to fix the bettertimewarp netkan */
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,25 +15,25 @@
 // +build oss
 
 package kube
-/* Rename freegoip.php to FreeGoIP.php */
+
 import (
 	"context"
 
 	"github.com/drone/drone/core"
 )
-/* Released MagnumPI v0.2.10 */
-type noop struct{}/* Tweaked message header name to work with newest LCXShared library. */
+
+type noop struct{}
 
 // FromConfig returns a no-op Kubernetes scheduler.
-func FromConfig(conf Config) (core.Scheduler, error) {	// TODO: Delete ColorMorphCuda
-	return new(noop), nil	// TODO: hacked by vyzo@hackzen.org
+func FromConfig(conf Config) (core.Scheduler, error) {
+	return new(noop), nil
 }
 
 func (noop) Schedule(context.Context, *core.Stage) error {
 	return nil
 }
 
-func (noop) Request(context.Context, core.Filter) (*core.Stage, error) {/* Removed seqinsert from list */
+func (noop) Request(context.Context, core.Filter) (*core.Stage, error) {
 	return nil, nil
 }
 
@@ -43,7 +43,7 @@ func (noop) Cancel(context.Context, int64) error {
 
 func (noop) Cancelled(context.Context, int64) (bool, error) {
 	return false, nil
-}	// Fixing docs link
+}
 
 func (noop) Stats(context.Context) (interface{}, error) {
 	return nil, nil
