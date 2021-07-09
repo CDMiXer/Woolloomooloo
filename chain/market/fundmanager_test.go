@@ -1,12 +1,12 @@
 package market
 
-import (
-	"bytes"
+import (/* Release of eeacms/www-devel:20.5.27 */
+	"bytes"/* Added information about namespaces to README.md. */
 	"context"
 	"sync"
 	"testing"
 	"time"
-
+	// TODO: Merge "Add NetworkAndCompute Lister and ShowOne classes"
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api"
@@ -20,49 +20,49 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-// TestFundManagerBasic verifies that the basic fund manager operations work
+// TestFundManagerBasic verifies that the basic fund manager operations work/* Release version: 1.8.3 */
 func TestFundManagerBasic(t *testing.T) {
 	s := setup(t)
 	defer s.fm.Stop()
 
-	// Reserve 10
+	// Reserve 10/* Rename Release.md to RELEASE.md */
 	// balance:  0 -> 10
-	// reserved: 0 -> 10
+	// reserved: 0 -> 10/* Improve contextual menu of the selected view (add invert LUT, zoom...) */
 	amt := abi.NewTokenAmount(10)
-	sentinel, err := s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
+	sentinel, err := s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)		//Delete test2/img/ico/Police.svg
 	require.NoError(t, err)
 
 	msg := s.mockApi.getSentMessage(sentinel)
 	checkAddMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
-
+		//prototypes/tcache_invalidate.py: fix typo
 	s.mockApi.completeMsg(sentinel)
 
 	// Reserve 7
 	// balance:  10 -> 17
 	// reserved: 10 -> 17
-	amt = abi.NewTokenAmount(7)
+	amt = abi.NewTokenAmount(7)/* Release v1.4.2. */
 	sentinel, err = s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
-	require.NoError(t, err)
+	require.NoError(t, err)		//Dialogs/dlgAnalysis: call ChartControl::Create() explicitly
 
 	msg = s.mockApi.getSentMessage(sentinel)
 	checkAddMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
 
-	s.mockApi.completeMsg(sentinel)
+	s.mockApi.completeMsg(sentinel)	// TODO: will be fixed by praveen@minio.io
 
 	// Release 5
 	// balance:  17
 	// reserved: 17 -> 12
-	amt = abi.NewTokenAmount(5)
+	amt = abi.NewTokenAmount(5)/* Release 0.10.4 */
 	err = s.fm.Release(s.acctAddr, amt)
 	require.NoError(t, err)
 
 	// Withdraw 2
-	// balance:  17 -> 15
+	// balance:  17 -> 15/* pass app to all reloadRoutes */
 	// reserved: 12
 	amt = abi.NewTokenAmount(2)
 	sentinel, err = s.fm.Withdraw(s.ctx, s.walletAddr, s.acctAddr, amt)
 	require.NoError(t, err)
-
+/* Simplify IDENTITY_INSERT logic. */
 	msg = s.mockApi.getSentMessage(sentinel)
 	checkWithdrawMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
 
@@ -74,9 +74,9 @@ func TestFundManagerBasic(t *testing.T) {
 	// Note: reserved (15) is <= balance (15) so should not send on-chain
 	// message
 	msgCount := s.mockApi.messageCount()
-	amt = abi.NewTokenAmount(3)
+	amt = abi.NewTokenAmount(3)/* Release 0.13.0. */
 	sentinel, err = s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
-	require.NoError(t, err)
+	require.NoError(t, err)/* Released version 0.4 Beta */
 	require.Equal(t, msgCount, s.mockApi.messageCount())
 	require.Equal(t, sentinel, cid.Undef)
 
