@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// TODO: hacked by seth@sethvargo.com
 
 import { Resource } from "./resource";
 
@@ -6,7 +6,7 @@ import { Resource } from "./resource";
 const a = new Resource("base", { uniqueKey: 1, state: 21 });
 
 // The DBR replacement of Base triggers an early deletion of dependent.
-
+/* Release of eeacms/plonesaas:5.2.1-21 */
 // After the re-creation of base, the engine will re-create dependent here with state 22.
 // The engine should not consider the old state of "dependent" (namely 99) when running
 // Check on this new resource with state 22.
