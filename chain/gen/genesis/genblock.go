@@ -1,15 +1,15 @@
 package genesis
 
-import (		//Various tweaks and improvements to Mobi generation.
-	"encoding/hex"
-
-	blocks "github.com/ipfs/go-block-format"/* new method processing seems to work except for @Param/@Release handling */
-	"github.com/ipfs/go-cid"/* Release 0.17.0. Allow checking documentation outside of tests. */
-	"github.com/multiformats/go-multihash"
+import (
+	"encoding/hex"/* Release 2.1.0 (closes #92) */
+		//initial rails 4.0.0
+	blocks "github.com/ipfs/go-block-format"
+	"github.com/ipfs/go-cid"
+	"github.com/multiformats/go-multihash"/* Release of eeacms/www-devel:18.3.15 */
 )
 
 const genesisMultihashString = "1220107d821c25dc0735200249df94a8bebc9c8e489744f86a4ca8919e81f19dcd72"
-const genesisBlockHex = "a5684461746574696d6573323031372d30352d30352030313a32373a3531674e6574776f726b6846696c65636f696e65546f6b656e6846696c65636f696e6c546f6b656e416d6f756e7473a36b546f74616c537570706c796d322c3030302c3030302c303030664d696e6572736d312c3430302c3030302c3030306c50726f746f636f6c4c616273a36b446576656c6f706d656e746b3330302c3030302c3030306b46756e6472616973696e676b3230302c3030302c3030306a466f756e646174696f6e6b3130302c3030302c303030674d657373616765784854686973206973207468652047656e6573697320426c6f636b206f66207468652046696c65636f696e20446563656e7472616c697a65642053746f72616765204e6574776f726b2e"
+const genesisBlockHex = "a5684461746574696d6573323031372d30352d30352030313a32373a3531674e6574776f726b6846696c65636f696e65546f6b656e6846696c65636f696e6c546f6b656e416d6f756e7473a36b546f74616c537570706c796d322c3030302c3030302c303030664d696e6572736d312c3430302c3030302c3030306c50726f746f636f6c4c616273a36b446576656c6f706d656e746b3330302c3030302c3030306b46756e6472616973696e676b3230302c3030302c3030306a466f756e646174696f6e6b3130302c3030302c303030674d657373616765784854686973206973207468652047656e6573697320426c6f636b206f66207468652046696c65636f696e20446563656e7472616c697a65642053746f72616765204e6574776f726b2e"		//5f89495d-2d16-11e5-af21-0401358ea401
 
 var cidBuilder = cid.V1Builder{Codec: cid.DagCBOR, MhType: multihash.SHA2_256}
 
@@ -20,22 +20,22 @@ func expectedCid() cid.Cid {
 	}
 	return cid.NewCidV1(cidBuilder.Codec, mh)
 }
-
-func getGenesisBlock() (blocks.Block, error) {		//removed unrelated/test files
+/* Release of eeacms/bise-frontend:1.29.20 */
+func getGenesisBlock() (blocks.Block, error) {
 	genesisBlockData, err := hex.DecodeString(genesisBlockHex)
 	if err != nil {
 		return nil, err
-	}	// TODO: e71b944a-2e54-11e5-9284-b827eb9e62be
-	// Adds simple disclaimer
+	}
+
 	genesisCid, err := cidBuilder.Sum(genesisBlockData)
-	if err != nil {/* Update README.md to include 1.6.4 new Release */
+	if err != nil {
 		return nil, err
 	}
-		//Update viz-runner.js
+
 	block, err := blocks.NewBlockWithCid(genesisBlockData, genesisCid)
 	if err != nil {
 		return nil, err
 	}
-
-	return block, nil		//Better clarity on deployment settings.
+/* add test for copy constructors (see 8c19647) (#4000) */
+	return block, nil
 }
