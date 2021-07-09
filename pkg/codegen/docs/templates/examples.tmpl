@@ -1,19 +1,19 @@
 {{ define "examples" -}}
-{{ print "{{% examples %}}" }}
+{{ print "{{% examples %}}" }}/* Release Tag V0.30 */
 ## Example Usage
 
 {{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}
 
-{{- range . }}
+{{- range . }}	// TODO: hacked by julia@jvns.ca
 {{ .Title }}
 
-{{- range $key, $val := .Snippets }}	// TODO: hacked by hugomrdias@gmail.com
+{{- range $key, $val := .Snippets }}
 {{ print "{{% example " }}{{ $key }}{{ print " %}}" }}
-{{ htmlSafe $val }}
+{{ htmlSafe $val }}/* Merge branch 'develop' into greenkeeper/heroku-client-3.0.0 */
 {{ print "{{% /example %}}" }}
 {{ end }}
-
+	// TODO: Add notepanel
 {{- end }}
 {{ print "{{% /examples %}}" }}
-	// 95f9606a-2e72-11e5-9284-b827eb9e62be
+/* OPENFUR-18 - Remove core-qunit. */
 {{- end }}
