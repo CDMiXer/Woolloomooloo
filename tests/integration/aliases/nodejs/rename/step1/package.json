@@ -1,12 +1,12 @@
-{
-    "name": "aliases",
+{		//Clarified chr naming issues.
+    "name": "aliases",/* More flexible RCD ammo stuff. */
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",		//Update SmartyEngine.php
-    "devDependencies": {
+    "typings": "bin/index.d.ts",
+    "devDependencies": {/* Merge "[INTERNAL] Release notes for version 1.28.2" */
         "typescript": "^2.5.3"
     },
-    "peerDependencies": {	// TODO: will be fixed by zaq1tomo@gmail.com
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }/* Merged branch master into feature/header-component */
-}
+    }	// TODO: Merge "Fix failure in test_05_fieldname_query test"
+}		//Merge origin/master into pr63
