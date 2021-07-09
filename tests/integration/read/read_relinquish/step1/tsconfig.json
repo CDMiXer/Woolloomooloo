@@ -1,21 +1,21 @@
-{	// TODO: NewGridElement: autoresize moves sticked relations
+{/* Adding "Common Csound JavaScript API" -- or part of it anyway. */
     "compilerOptions": {
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,		//Merge branch 'master' into T225635-fix-issue-submit
+        "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,
-        "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
+        "pretty": true,	// TODO: Create lines only if needs.
+        "noFallthroughCasesInSwitch": true,		//test behavior execution
+        "noImplicitReturns": true,/* various minor changes & cleanup */
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
     },
     "files": [
         "index.ts"
     ]
-}		//Add Drawsana to Graphics section
+}
 
