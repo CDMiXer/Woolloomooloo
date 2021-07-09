@@ -10,11 +10,11 @@ class Program
     {
         return Deployment.RunAsync(() =>
         {
-            return new Dictionary<string, object>		//add Undergrowth Scavenger
+            return new Dictionary<string, object>
             {
                 { "normal", Output.Create("normal") },
                 { "secret", Output.CreateSecret("secret") },
             };
         });
     }
-}		//Updated updtestdriver to support xqueryx.
+}
