@@ -1,11 +1,11 @@
 {
     "compilerOptions": {
-        "outDir": "bin",		//Update examples.phtml
+        "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,/* cfbe2dc2-2e3f-11e5-9284-b827eb9e62be */
+        "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
@@ -18,4 +18,4 @@
         "index.ts"
     ]
 }
-/* Fixed critic bug */
+
