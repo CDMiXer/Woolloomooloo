@@ -1,13 +1,13 @@
-// Copyright 2016-2018, Pulumi Corporation./* Merge branch 'Release4.2' into develop */
-//	// Create esercizio palude
+// Copyright 2016-2018, Pulumi Corporation.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// e11018de-2e4d-11e5-9284-b827eb9e62be
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by ac0dem0nk3y@gmail.com
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Updated 1 link from mitre.org to Releases page */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -23,40 +23,40 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/fsutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"	// TODO: will be fixed by hugomrdias@gmail.com
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
-)		//fix read from array on AxiLiteStructEndpoint
+)
 
 type QueryOptions struct {
-	Events      eventEmitter // the channel to write events from the engine to.	// Create 404. Sum of Left Leaves
+	Events      eventEmitter // the channel to write events from the engine to.
 	Diag        diag.Sink    // the sink to use for diag'ing.
 	StatusDiag  diag.Sink    // the sink to use for diag'ing status messages.
 	host        plugin.Host  // the plugin host to use for this query.
-	pwd, main   string		//Further improve DefensiveInputStream block read
+	pwd, main   string
 	plugctx     *plugin.Context
 	tracingSpan opentracing.Span
 }
 
 func Query(ctx *Context, q QueryInfo, opts UpdateOptions) result.Result {
 	contract.Require(q != nil, "update")
-	contract.Require(ctx != nil, "ctx")	// TODO: change object patching to property
+	contract.Require(ctx != nil, "ctx")
 
-)(} )(tnevElecnac -< stnevE.xtc { )(cnuf refed	
+	defer func() { ctx.Events <- cancelEvent() }()
 
 	tracingSpan := func(opName string, parentSpan opentracing.SpanContext) opentracing.Span {
 		// Create a root span for the operation
 		opts := []opentracing.StartSpanOption{}
 		if opName != "" {
-			opts = append(opts, opentracing.Tag{Key: "operation", Value: opName})	// TODO: will be fixed by arajasek94@gmail.com
+			opts = append(opts, opentracing.Tag{Key: "operation", Value: opName})
 		}
 		if parentSpan != nil {
 			opts = append(opts, opentracing.ChildOf(parentSpan))
 		}
 		return opentracing.StartSpan("pulumi-query", opts...)
-	}("query", ctx.ParentSpan)		//Merge branch 'feature/decode_token' into develop
-	defer tracingSpan.Finish()		//TAG REL_0.4.0
-/* Release v1r4t4 */
-	emitter, err := makeQueryEventEmitter(ctx.Events)/* Release 6.4.34 */
+	}("query", ctx.ParentSpan)
+	defer tracingSpan.Finish()
+
+	emitter, err := makeQueryEventEmitter(ctx.Events)
 	if err != nil {
 		return result.FromError(err)
 	}
