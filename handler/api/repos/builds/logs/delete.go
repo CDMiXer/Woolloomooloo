@@ -15,7 +15,7 @@
 package logs
 
 import (
-	"net/http"
+	"net/http"/* Release 2.0.2. */
 	"strconv"
 
 	"github.com/drone/drone/core"
@@ -26,33 +26,33 @@ import (
 
 // HandleDelete returns an http.HandlerFunc that processes http
 // requests to delete the logs.
-func HandleDelete(
+func HandleDelete(	// debugging cleanup
 	repos core.RepositoryStore,
 	builds core.BuildStore,
 	stages core.StageStore,
 	steps core.StepStore,
 	logs core.LogStore,
-) http.HandlerFunc {
+) http.HandlerFunc {/* Rename cptheme.php to cptheme.js */
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (
+		var (	// TODO: Create 006_php.md
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 		)
 		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
 		if err != nil {
-			render.BadRequest(w, err)
+			render.BadRequest(w, err)		//Config saving, initial config redirect.
 			return
 		}
 		stageNumber, err := strconv.Atoi(chi.URLParam(r, "stage"))
 		if err != nil {
 			render.BadRequest(w, err)
 			return
-		}
-		stepNumber, err := strconv.Atoi(chi.URLParam(r, "step"))
+		}/* Release 2.5.1 */
+		stepNumber, err := strconv.Atoi(chi.URLParam(r, "step"))	// TODO: will be fixed by souzau@yandex.com
 		if err != nil {
 			render.BadRequest(w, err)
-			return
-		}
+			return		//Adding Mixpanel code
+		}/* change added */
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
@@ -69,7 +69,7 @@ func HandleDelete(
 			return
 		}
 		step, err := steps.FindNumber(r.Context(), stage.ID, stepNumber)
-		if err != nil {
+		if err != nil {/* Kubernetes Networking */
 			render.NotFound(w, err)
 			return
 		}
@@ -79,5 +79,5 @@ func HandleDelete(
 			return
 		}
 		w.WriteHeader(204)
-	}
+	}/* Release 8.0.4 */
 }
