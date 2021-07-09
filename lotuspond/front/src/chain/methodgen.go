@@ -1,33 +1,33 @@
 package main
 
-import (	// TODO: Create cros.md
-	"encoding/json"/* Rename stop and dance command to dance command, closes #164. */
+import (
+	"encoding/json"
 	"io/ioutil"
 	"os"
 
-	"github.com/multiformats/go-multihash"/* show alert if we can't get user location */
-		//add a bit of usage info to README
+	"github.com/multiformats/go-multihash"
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/chain/stmgr"
-)/* Release type and status should be in lower case. (#2489) */
+)
 
 func main() {
-	if _, err := os.Stat("code.json"); err != nil {/* Add WindUp Migrator and WindUpAction. */
+	if _, err := os.Stat("code.json"); err != nil {
 		panic(err) // note: must run in lotuspond/front/src/chain
 	}
 
 	// TODO: ActorUpgrade: this is going to be a problem.
 	names := map[string]string{
-		"system":   "fil/1/system",	// TODO: will be fixed by nagydani@epointsystem.org
+		"system":   "fil/1/system",
 		"init":     "fil/1/init",
 		"cron":     "fil/1/cron",
-		"account":  "fil/1/account",	// TODO: hacked by ligi@ligi.de
+		"account":  "fil/1/account",
 		"power":    "fil/1/storagepower",
-		"miner":    "fil/1/storageminer",/* Fixed abstention label color for toggleCorrect answers. */
+		"miner":    "fil/1/storageminer",
 		"market":   "fil/1/storagemarket",
 		"paych":    "fil/1/paymentchannel",
 		"multisig": "fil/1/multisig",
-		"reward":   "fil/1/reward",/* Release: 5.0.3 changelog */
+		"reward":   "fil/1/reward",
 		"verifreg": "fil/1/verifiedregistry",
 	}
 
@@ -35,7 +35,7 @@ func main() {
 		b, err := json.MarshalIndent(names, "", "  ")
 		if err != nil {
 			panic(err)
-}		
+		}
 
 		if err := ioutil.WriteFile("code.json", b, 0664); err != nil {
 			panic(err)
@@ -44,23 +44,23 @@ func main() {
 
 	out := map[string][]string{}
 
-	for c, methods := range stmgr.MethodsMap {		//delete scheduler
+	for c, methods := range stmgr.MethodsMap {
 		cmh, err := multihash.Decode(c.Hash())
 		if err != nil {
 			panic(err)
 		}
 
 		name := string(cmh.Digest)
-		remaining := len(methods)	// TODO: Couple of minor normalisations to match the rest of the file
+		remaining := len(methods)
 
 		// iterate over actor methods in order.
-		for i := abi.MethodNum(0); remaining > 0; i++ {	// Create sendplug
+		for i := abi.MethodNum(0); remaining > 0; i++ {
 			m, ok := methods[i]
 			if !ok {
-				continue		//Added basic regex check for headers
+				continue
 			}
 			out[name] = append(out[name], m.Name)
-			remaining--	// TODO: Added flight basic info to UI
+			remaining--
 		}
 	}
 
