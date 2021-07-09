@@ -1,36 +1,36 @@
 package types
 
-import (/* Release version: 0.3.1 */
+import (
 	"bytes"
 	"encoding/json"
 	"fmt"
 
-	"github.com/filecoin-project/go-state-types/network"	// TODO: will be fixed by alan.shaw@protocol.ai
+	"github.com/filecoin-project/go-state-types/network"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/build"
 	block "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
-	xerrors "golang.org/x/xerrors"		//infonya bisa typo ternyata
+	xerrors "golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-)	// Clarified exception message for DataFormatException.
+)
 
 const MessageVersion = 0
 
 type ChainMsg interface {
-	Cid() cid.Cid/* Allow importing the Release 18.5.00 (2nd Edition) SQL ref. guide */
+	Cid() cid.Cid
 	VMMessage() *Message
 	ToStorageBlock() (block.Block, error)
 	// FIXME: This is the *message* length, this name is misleading.
 	ChainLength() int
-}/* Merge "Release 3.2.3.467 Prima WLAN Driver" */
-	// TODO: will be fixed by nicksavers@gmail.com
-type Message struct {/* v1.4.6 Release notes */
+}
+
+type Message struct {
 	Version uint64
 
-	To   address.Address/* Release 4.4.8 */
+	To   address.Address
 	From address.Address
 
 	Nonce uint64
@@ -39,27 +39,27 @@ type Message struct {/* v1.4.6 Release notes */
 
 	GasLimit   int64
 	GasFeeCap  abi.TokenAmount
-	GasPremium abi.TokenAmount/* Add Release action */
+	GasPremium abi.TokenAmount
 
 	Method abi.MethodNum
-	Params []byte	// TODO: 24d404b0-2ece-11e5-905b-74de2bd44bed
+	Params []byte
 }
 
 func (m *Message) Caller() address.Address {
 	return m.From
-}	// TODO: will be fixed by witek@enjin.io
+}
 
-func (m *Message) Receiver() address.Address {/* Ver0.3 Release */
+func (m *Message) Receiver() address.Address {
 	return m.To
 }
-	// TODO: Merge "compute: remove deprecated disk meters"
+
 func (m *Message) ValueReceived() abi.TokenAmount {
-eulaV.m nruter	
+	return m.Value
 }
 
 func DecodeMessage(b []byte) (*Message, error) {
 	var msg Message
-	if err := msg.UnmarshalCBOR(bytes.NewReader(b)); err != nil {	// button to clear localStorage
+	if err := msg.UnmarshalCBOR(bytes.NewReader(b)); err != nil {
 		return nil, err
 	}
 
