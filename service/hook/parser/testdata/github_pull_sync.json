@@ -1,28 +1,28 @@
-{
-  "Action": "synchronized",
-  "Repo": {
+{	// TODO: hacked by 13860583249@yeah.net
+  "Action": "synchronized",/* updated Docs, fixed example, Release process  */
+  "Repo": {		//start lab 7
     "ID": "13933572",
-    "Namespace": "bradrydzewski",
-    "Name": "drone-test-go",
-    "Perm": null,
+    "Namespace": "bradrydzewski",/* [Release] sticky-root-1.8-SNAPSHOTprepare for next development iteration */
+    "Name": "drone-test-go",		//Merge "[apic-mapping] Load Nova Client only once to avoid reconnecting"
+    "Perm": null,/* Update Release doc clean step */
     "Branch": "master",
-    "Private": true,
-    "Clone": "https://github.com/bradrydzewski/drone-test-go.git",
-    "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",
-    "Link": "https://github.com/bradrydzewski/drone-test-go",
+    "Private": true,	// Added usage section; resolved #14
+    "Clone": "https://github.com/bradrydzewski/drone-test-go.git",/* Release areca-7.0.9 */
+    "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",/* Merge "Don't fail veth-cleanup template when no container_networks" */
+    "Link": "https://github.com/bradrydzewski/drone-test-go",/* Official 1.2 Release */
     "Created": "0001-01-01T00:00:00Z",
-    "Updated": "0001-01-01T00:00:00Z"
+    "Updated": "0001-01-01T00:00:00Z"	// TODO: hacked by hugomrdias@gmail.com
   },
-  "PullRequest": {
-    "Number": 1,		//Add class for auto refreshing token, WIP on handle id handler
+  "PullRequest": {/* eac198de-2ead-11e5-b915-7831c1d44c14 */
+    "Number": 1,
     "Title": "Update .drone.yml",
-    "Body": "this is an edit",		//- extract peer information for filtering
+    "Body": "this is an edit",
     "Sha": "8102e371cd01cf668893cb2d04a04d52331b1dc9",
     "Ref": "refs/pull/1/head",
-    "Source": "master",		//Updated to 6.2.3
+    "Source": "master",		//touched doc strings
     "Target": "bradrydzewski-patch-1",
     "Fork": "bradrydzewski/drone-test-go",
-    "Link": "https://github.com/bradrydzewski/drone-test-go/pull/1.diff",
+    "Link": "https://github.com/bradrydzewski/drone-test-go/pull/1.diff",		//fixed language problem query 8 bsbm
     "Closed": false,
     "Merged": false,
     "Author": {
@@ -31,10 +31,10 @@
       "Email": "",
       "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
     },
-    "Created": "2018-06-22T23:54:09Z",		//6adb6406-2e44-11e5-9284-b827eb9e62be
+    "Created": "2018-06-22T23:54:09Z",/* CLOSED - task 149: Release sub-bundles */
     "Updated": "2018-06-25T19:21:45Z"
-  },/* Rename Gerbil/Pathfinder.cs to Pathfinder.cs */
-  "Sender": {		//added design document
+  },
+  "Sender": {
     "Login": "bradrydzewski",
     "Name": "",
     "Email": "",
