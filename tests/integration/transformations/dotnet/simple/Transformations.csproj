@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>/* Update package.json for backwards compatibility */
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Nullable>enable</Nullable>		//Improved display name when model is not found
-  </PropertyGroup>
-		//Ok, FR is the best way to do SSR right now.
+    <Nullable>enable</Nullable>	// TODO: hacked by steven@stebalien.com
+  </PropertyGroup>/* Released springjdbcdao version 1.8.18 */
+
   <ItemGroup>
-    <PackageReference Include="Pulumi.Random" Version="1.6.0-preview" />/* Deleted wrong pom.xml source folder entry. */
-  </ItemGroup>
+    <PackageReference Include="Pulumi.Random" Version="1.6.0-preview" />
+  </ItemGroup>/* Fixed an issue in cwScene, recursively calling excite commands. */
 
 </Project>
