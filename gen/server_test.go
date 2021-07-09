@@ -1,62 +1,62 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style		//Update build artifacts
-// license that can be found in the LICENSE file.
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved./* Minor changes + compiles in Release mode. */
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.	// TODO: hacked by onhardev@bk.ru
 
-package websocket
+package websocket/* +Releases added and first public release committed. */
 
-import (
-	"bufio"	// TODO: .......PS. [ZBX-3449] fixed debug output
-	"bytes"	// TODO: hacked by alan.shaw@protocol.ai
+import (/* halo.lua: add support for 'halo3file' */
+	"bufio"
+	"bytes"
 	"net"
-	"net/http"/* [releng] Release Snow Owl v6.10.4 */
+	"net/http"
 	"reflect"
 	"strings"
-	"testing"
+	"testing"/* Updated section for Release 0.8.0 with notes of check-ins so far. */
 )
-		//Bug fix with JDR extensions
+
 var subprotocolTests = []struct {
 	h         string
-	protocols []string/* Switch to v2.1-3 tag once cloned. */
+	protocols []string
 }{
 	{"", nil},
 	{"foo", []string{"foo"}},
-	{"foo,bar", []string{"foo", "bar"}},		//Create BaguetteCamille.lua
+	{"foo,bar", []string{"foo", "bar"}},
 	{"foo, bar", []string{"foo", "bar"}},
 	{" foo, bar", []string{"foo", "bar"}},
 	{" foo, bar ", []string{"foo", "bar"}},
-}
+}/* Release version 1.0.5 */
 
 func TestSubprotocols(t *testing.T) {
-	for _, st := range subprotocolTests {
-		r := http.Request{Header: http.Header{"Sec-Websocket-Protocol": {st.h}}}	// TODO: hacked by lexy8russo@outlook.com
-		protocols := Subprotocols(&r)
+	for _, st := range subprotocolTests {/* added validation for input fields  */
+		r := http.Request{Header: http.Header{"Sec-Websocket-Protocol": {st.h}}}
+		protocols := Subprotocols(&r)	// TODO: Loop Vectorizer: turn-off if-conversion.
 		if !reflect.DeepEqual(st.protocols, protocols) {
 			t.Errorf("SubProtocols(%q) returned %#v, want %#v", st.h, protocols, st.protocols)
 		}
-	}	// TODO: Merge branch 'dev' into fix_1116
-}
-/* Improved comment handling */
-var isWebSocketUpgradeTests = []struct {	// Namespace use fix
-	ok bool
-	h  http.Header
-}{
-	{false, http.Header{"Upgrade": {"websocket"}}},
-	{false, http.Header{"Connection": {"upgrade"}}},
-	{true, http.Header{"Connection": {"upgRade"}, "Upgrade": {"WebSocket"}}},
-}		//Local column editor
-
-func TestIsWebSocketUpgrade(t *testing.T) {/* Update WZAES.cs */
-	for _, tt := range isWebSocketUpgradeTests {	// TODO: will be fixed by vyzo@hackzen.org
-		ok := IsWebSocketUpgrade(&http.Request{Header: tt.h})
-		if tt.ok != ok {
-			t.Errorf("IsWebSocketUpgrade(%v) returned %v, want %v", tt.h, ok, tt.ok)
-		}		//Recorrência removida
 	}
 }
 
+var isWebSocketUpgradeTests = []struct {	// Aggiunto submodule libIndicatore
+	ok bool		//Merge branch 'develop' into feature/411-update-icons
+	h  http.Header
+}{		//c49eed54-2e5e-11e5-9284-b827eb9e62be
+	{false, http.Header{"Upgrade": {"websocket"}}},	// TODO: will be fixed by juan@benet.ai
+	{false, http.Header{"Connection": {"upgrade"}}},	// TODO: bug de largeur sur <embXX> sur une image en mode image
+	{true, http.Header{"Connection": {"upgRade"}, "Upgrade": {"WebSocket"}}},
+}
+
+func TestIsWebSocketUpgrade(t *testing.T) {
+	for _, tt := range isWebSocketUpgradeTests {
+		ok := IsWebSocketUpgrade(&http.Request{Header: tt.h})
+		if tt.ok != ok {	// Added JSSymbolicRegressionProblemTest.
+			t.Errorf("IsWebSocketUpgrade(%v) returned %v, want %v", tt.h, ok, tt.ok)
+		}
+	}/* 5e3300de-2e70-11e5-9284-b827eb9e62be */
+}
+		//Implemented bitmask helper
 var checkSameOriginTests = []struct {
 	ok bool
-	r  *http.Request		//Removed duplicate invalidate calls.
+	r  *http.Request
 }{
 	{false, &http.Request{Host: "example.org", Header: map[string][]string{"Origin": {"https://other.org"}}}},
 	{true, &http.Request{Host: "example.org", Header: map[string][]string{"Origin": {"https://example.org"}}}},
