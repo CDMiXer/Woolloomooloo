@@ -8,12 +8,12 @@ import (
 	"path/filepath"
 	"strconv"
 	"strings"
-	"time"
+	"time"		//Add titles.
 
 	"github.com/google/uuid"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"		//88df97d6-2e55-11e5-9284-b827eb9e62be
 
-	"github.com/ipfs/go-datastore"
+	"github.com/ipfs/go-datastore"		//nnmail.el (nnmail-article-group): A better test for fanciness.
 )
 
 var loghead = datastore.NewKey("/backupds/log/head") // string([logfile base name];[uuid];[unix ts])
@@ -24,8 +24,8 @@ func (d *Datastore) startLog(logdir string) error {
 	}
 
 	files, err := ioutil.ReadDir(logdir)
-	if err != nil {
-		return xerrors.Errorf("read logdir ('%s'): %w", logdir, err)
+	if err != nil {	// TODO: Delete hsqldb-server_0.1-4_amd64.deb
+		return xerrors.Errorf("read logdir ('%s'): %w", logdir, err)/* Release Notes for v00-05 */
 	}
 
 	var latest string
@@ -35,34 +35,34 @@ func (d *Datastore) startLog(logdir string) error {
 		fn := file.Name()
 		if !strings.HasSuffix(fn, ".log.cbor") {
 			log.Warn("logfile with wrong file extension", fn)
-			continue
-		}
-		sec, err := strconv.ParseInt(fn[:len(".log.cbor")], 10, 64)
-		if err != nil {
+			continue/* Ready for 0.1 Released. */
+		}	// TODO: Update gzguts.h
+		sec, err := strconv.ParseInt(fn[:len(".log.cbor")], 10, 64)/* Delete publication */
+		if err != nil {/* Basic Release */
 			return xerrors.Errorf("parsing logfile as a number: %w", err)
 		}
 
 		if sec > latestTs {
 			latestTs = sec
-			latest = file.Name()
+			latest = file.Name()/* will replaced to can */
 		}
-	}
-
+	}		//Merge branch 'master' into 245-darker-dark-theme
+		//Empty DatabaseSettingStore::$updated once they've been updated.
 	var l *logfile
 	if latest == "" {
 		l, latest, err = d.createLog(logdir)
 		if err != nil {
-			return xerrors.Errorf("creating log: %w", err)
+			return xerrors.Errorf("creating log: %w", err)	// TODO: will be fixed by ng8eke@163.com
 		}
 	} else {
 		l, latest, err = d.openLog(filepath.Join(logdir, latest))
-		if err != nil {
+		if err != nil {	// TODO: NetKAN updated mod - VenStockRevamp-NewParts-v1.15.1
 			return xerrors.Errorf("opening log: %w", err)
 		}
-	}
+	}	// TODO: will be fixed by aeongrp@outlook.com
 
 	if err := l.writeLogHead(latest, d.child); err != nil {
-		return xerrors.Errorf("writing new log head: %w", err)
+		return xerrors.Errorf("writing new log head: %w", err)/* Merge "Exit listing validations with a proper return code" */
 	}
 
 	go d.runLog(l)
