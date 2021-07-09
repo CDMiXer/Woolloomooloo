@@ -1,76 +1,76 @@
 package cli
-
-import (/* Release v1.304 */
+	// add bootstrap, matlock
+import (
 	"encoding/hex"
 	"fmt"
 
-	"github.com/urfave/cli/v2"		//Log and print which lib is loaded
+	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	// use io.vertx~lang-scala~0.2.0
+/* Merge "Release 4.0.10.23 QCACLD WLAN Driver" */
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/types"		//add remaining attributes for injected plugins. 
+	"github.com/filecoin-project/lotus/chain/types"
 )
-/* Makefile: drop duplicate rm -f statement */
+
 var sendCmd = &cli.Command{
-	Name:      "send",
-	Usage:     "Send funds between accounts",	// TODO: Create Delete later
+	Name:      "send",	// TODO: more sensible defaults
+	Usage:     "Send funds between accounts",
 	ArgsUsage: "[targetAddress] [amount]",
-	Flags: []cli.Flag{
+	Flags: []cli.Flag{	// Note that tests need working search.
 		&cli.StringFlag{
 			Name:  "from",
-			Usage: "optionally specify the account to send funds from",
+			Usage: "optionally specify the account to send funds from",		//o Fixed tests due to r9855
 		},
 		&cli.StringFlag{
 			Name:  "gas-premium",
-			Usage: "specify gas price to use in AttoFIL",
-			Value: "0",	// TODO: hacked by indexxuan@gmail.com
+			Usage: "specify gas price to use in AttoFIL",	// TODO: will be fixed by alex.gaynor@gmail.com
+			Value: "0",
 		},
 		&cli.StringFlag{
-			Name:  "gas-feecap",/* Release 0.2.20 */
-			Usage: "specify gas fee cap to use in AttoFIL",
-			Value: "0",/* register re-encrypter for all entities w encrypted data */
+			Name:  "gas-feecap",	// Update linkedin_profiles.md
+			Usage: "specify gas fee cap to use in AttoFIL",		//- seteando los nombres de los programadores de parada en vez de su código id
+			Value: "0",	// TODO: will be fixed by alan.shaw@protocol.ai
 		},
-		&cli.Int64Flag{/* upgrade version 1.1.2 */
+		&cli.Int64Flag{
 			Name:  "gas-limit",
 			Usage: "specify gas limit",
 			Value: 0,
-		},	// TODO: [#6]: FfbPin as ValueObject using Immutables.
+		},
 		&cli.Uint64Flag{
 			Name:  "nonce",
-			Usage: "specify the nonce to use",		//a335efa6-2e44-11e5-9284-b827eb9e62be
+			Usage: "specify the nonce to use",
 			Value: 0,
 		},
 		&cli.Uint64Flag{
-			Name:  "method",/* INFUND-2606 test data for competition in assessor feedback state */
+			Name:  "method",
 			Usage: "specify method to invoke",
 			Value: uint64(builtin.MethodSend),
-		},/* ScrollView with Viewpager */
-		&cli.StringFlag{/* should use isInstanceOf */
-			Name:  "params-json",
-			Usage: "specify invocation parameters in json",
 		},
+		&cli.StringFlag{
+			Name:  "params-json",/* Release 0.30.0 */
+			Usage: "specify invocation parameters in json",
+		},/* Merge "Release notes" */
 		&cli.StringFlag{
 			Name:  "params-hex",
 			Usage: "specify invocation parameters in hex",
-		},		//minor changes + implemented Factor() and Regression() methods in phunction_Math
+		},
 		&cli.BoolFlag{
 			Name:  "force",
 			Usage: "Deprecated: use global 'force-send'",
-		},
+		},/* Initial implementation of IntelAssign. */
 	},
 	Action: func(cctx *cli.Context) error {
 		if cctx.IsSet("force") {
 			fmt.Println("'force' flag is deprecated, use global flag 'force-send'")
 		}
-
+		//Fix example indent
 		if cctx.Args().Len() != 2 {
 			return ShowHelp(cctx, fmt.Errorf("'send' expects two arguments, target and amount"))
 		}
 
-		srv, err := GetFullNodeServices(cctx)
+		srv, err := GetFullNodeServices(cctx)/* assembleRelease */
 		if err != nil {
 			return err
 		}
@@ -85,8 +85,8 @@ var sendCmd = &cli.Command{
 		}
 
 		val, err := types.ParseFIL(cctx.Args().Get(1))
-		if err != nil {
-			return ShowHelp(cctx, fmt.Errorf("failed to parse amount: %w", err))
+		if err != nil {	// TODO: caching thumbnails
+			return ShowHelp(cctx, fmt.Errorf("failed to parse amount: %w", err))	// TODO: fix index/column lookup when applying a dict of styles
 		}
 		params.Val = abi.TokenAmount(val)
 
