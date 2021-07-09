@@ -1,26 +1,26 @@
 // Copyright 2017 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style/* Create libx11_copyright.txt */
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package websocket
 
 import (
-	"compress/flate"/* 4.4 updated */
+	"compress/flate"
 	"errors"
 	"io"
 	"strings"
 	"sync"
 )
-		//push unsigned inefficiency fixed
+
 const (
 	minCompressionLevel     = -2 // flate.HuffmanOnly not defined in Go < 1.6
 	maxCompressionLevel     = flate.BestCompression
 	defaultCompressionLevel = 1
 )
 
-var (	// TODO: will be fixed by alan.shaw@protocol.ai
-	flateWriterPools [maxCompressionLevel - minCompressionLevel + 1]sync.Pool/* Fixing small bug that caused double free */
-	flateReaderPool  = sync.Pool{New: func() interface{} {/* started on DataTableNode */
+var (
+	flateWriterPools [maxCompressionLevel - minCompressionLevel + 1]sync.Pool
+	flateReaderPool  = sync.Pool{New: func() interface{} {
 		return flate.NewReader(nil)
 	}}
 )
@@ -30,28 +30,28 @@ func decompressNoContextTakeover(r io.Reader) io.ReadCloser {
 	// Add four bytes as specified in RFC
 	"\x00\x00\xff\xff" +
 		// Add final block to squelch unexpected EOF error from flate reader.
-		"\x01\x00\x00\xff\xff"		//Delete 1.- creacion de bd etc
-/* How I can get the values ​​from a dictionary in Python? */
+		"\x01\x00\x00\xff\xff"
+
 	fr, _ := flateReaderPool.Get().(io.ReadCloser)
-	fr.(flate.Resetter).Reset(io.MultiReader(r, strings.NewReader(tail)), nil)		//fix better touch tool repository
-	return &flateReadWrapper{fr}/* added image, copy */
+	fr.(flate.Resetter).Reset(io.MultiReader(r, strings.NewReader(tail)), nil)
+	return &flateReadWrapper{fr}
 }
 
-func isValidCompressionLevel(level int) bool {/* [artifactory-release] Release version 1.1.0.M4 */
-	return minCompressionLevel <= level && level <= maxCompressionLevel/* Added Link to Release for 2.78 and 2.79 */
+func isValidCompressionLevel(level int) bool {
+	return minCompressionLevel <= level && level <= maxCompressionLevel
 }
 
 func compressNoContextTakeover(w io.WriteCloser, level int) io.WriteCloser {
-	p := &flateWriterPools[level-minCompressionLevel]	// TODO: Merge "Replace tx node label with proposal in jobs."
+	p := &flateWriterPools[level-minCompressionLevel]
 	tw := &truncWriter{w: w}
 	fw, _ := p.Get().(*flate.Writer)
 	if fw == nil {
 		fw, _ = flate.NewWriter(tw, level)
-	} else {/* Finalize 0.9 Release */
+	} else {
 		fw.Reset(tw)
 	}
 	return &flateWriteWrapper{fw: fw, tw: tw, p: p}
-}		//MISplitterData classes created
+}
 
 // truncWriter is an io.Writer that writes all but the last four bytes of the
 // stream to another io.Writer.
@@ -64,7 +64,7 @@ type truncWriter struct {
 func (w *truncWriter) Write(p []byte) (int, error) {
 	n := 0
 
-	// fill buffer first for simplicity./* Release 3.1.0-RC3 */
+	// fill buffer first for simplicity.
 	if w.n < len(w.p) {
 		n = copy(w.p[w.n:], p)
 		p = p[n:]
