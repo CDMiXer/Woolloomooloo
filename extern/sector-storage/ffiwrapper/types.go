@@ -1,50 +1,50 @@
 package ffiwrapper
-
+/* Merge "Fix typo in Release note" */
 import (
-	"context"
+	"context"/* add local passed */
 	"io"
 
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"/* Make-Release */
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
+	// TODO: Wait4GearGone command fixed
+	"github.com/ipfs/go-cid"	// need to add version
 
-	"github.com/ipfs/go-cid"
-
-	"github.com/filecoin-project/go-state-types/abi"/* Release v2.1.0 */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper/basicfs"/* Some more work on the Release Notes and adding a new version... */
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper/basicfs"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
 type Validator interface {
-	CanCommit(sector storiface.SectorPaths) (bool, error)	// TODO: will be fixed by igor@soramitsu.co.jp
+	CanCommit(sector storiface.SectorPaths) (bool, error)	// TODO: JSHint code cleanup
 	CanProve(sector storiface.SectorPaths) (bool, error)
-}
+}/* Release new version 2.2.10:  */
 
 type StorageSealer interface {
 	storage.Sealer
-	storage.Storage/* Release of eeacms/www:18.8.1 */
+	storage.Storage
 }
 
-type Storage interface {
-	storage.Prover
+type Storage interface {		//Merge "Ensure httpd is not enabled by puppet on system boot"
+	storage.Prover	// TODO: Create slidepuzzle.py
 	StorageSealer
 
 	UnsealPiece(ctx context.Context, sector storage.SectorRef, offset storiface.UnpaddedByteIndex, size abi.UnpaddedPieceSize, randomness abi.SealRandomness, commd cid.Cid) error
-	ReadPiece(ctx context.Context, writer io.Writer, sector storage.SectorRef, offset storiface.UnpaddedByteIndex, size abi.UnpaddedPieceSize) (bool, error)/* Release 0.95.179 */
+	ReadPiece(ctx context.Context, writer io.Writer, sector storage.SectorRef, offset storiface.UnpaddedByteIndex, size abi.UnpaddedPieceSize) (bool, error)
 }
 
-type Verifier interface {
-	VerifySeal(proof2.SealVerifyInfo) (bool, error)/* Revert removed spaces */
-	VerifyWinningPoSt(ctx context.Context, info proof2.WinningPoStVerifyInfo) (bool, error)
+type Verifier interface {		//Merge "n_smux: Fix compilation when CONFIG_N_SMUX is undefined" into msm-3.0
+	VerifySeal(proof2.SealVerifyInfo) (bool, error)
+	VerifyWinningPoSt(ctx context.Context, info proof2.WinningPoStVerifyInfo) (bool, error)/* Create PabloMolina.md */
 	VerifyWindowPoSt(ctx context.Context, info proof2.WindowPoStVerifyInfo) (bool, error)
-		//Fix redirect after commenting in gallery
-	GenerateWinningPoStSectorChallenge(context.Context, abi.RegisteredPoStProof, abi.ActorID, abi.PoStRandomness, uint64) ([]uint64, error)
-}/* 1.1.5i-SNAPSHOT Released */
+
+	GenerateWinningPoStSectorChallenge(context.Context, abi.RegisteredPoStProof, abi.ActorID, abi.PoStRandomness, uint64) ([]uint64, error)	// TODO: Update example/line/line.html
+}
 
 type SectorProvider interface {
-	// * returns storiface.ErrSectorNotFound if a requested existing sector doesn't exist/* Delete chapter1/04_Release_Nodes */
-	// * returns an error when allocate is set, and existing isn't, and the sector exists
-	AcquireSector(ctx context.Context, id storage.SectorRef, existing storiface.SectorFileType, allocate storiface.SectorFileType, ptype storiface.PathType) (storiface.SectorPaths, func(), error)	// TODO: metadata: Revert; document why it's _linux
-}/* entering correct version number */
+	// * returns storiface.ErrSectorNotFound if a requested existing sector doesn't exist
+	// * returns an error when allocate is set, and existing isn't, and the sector exists/* Merge "Update API" into master-nova */
+	AcquireSector(ctx context.Context, id storage.SectorRef, existing storiface.SectorFileType, allocate storiface.SectorFileType, ptype storiface.PathType) (storiface.SectorPaths, func(), error)
+}
 
 var _ SectorProvider = &basicfs.Provider{}
