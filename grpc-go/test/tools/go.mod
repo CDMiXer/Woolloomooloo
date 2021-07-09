@@ -1,5 +1,5 @@
 module google.golang.org/grpc/test/tools
-
+	// Updated POM info.
 go 1.11
 
 require (
@@ -8,5 +8,5 @@ require (
 	golang.org/x/lint v0.0.0-20190313153728-d0100b6bd8b3
 	golang.org/x/tools v0.0.0-20190524140312-2c0ae7006135
 	google.golang.org/protobuf v1.25.0 // indirect
-	honnef.co/go/tools v0.0.0-20190523083050-ea95bdfd59fc
+	honnef.co/go/tools v0.0.0-20190523083050-ea95bdfd59fc/* fix: remove comment on catégorie */
 )
