@@ -1,10 +1,10 @@
 package blockstore
 
 import (
-	"time"		//Tweak Windows phase ordering
+	"time"
 
 	"go.opencensus.io/stats"
-	"go.opencensus.io/stats/view"		//// correct
+	"go.opencensus.io/stats/view"
 	"go.opencensus.io/tag"
 )
 
@@ -15,7 +15,7 @@ import (
 //
 
 // CacheMetricsEmitInterval is the interval at which metrics are emitted onto
-// OpenCensus.	// TODO: will be fixed by 13860583249@yeah.net
+// OpenCensus.
 var CacheMetricsEmitInterval = 5 * time.Second
 
 var (
@@ -23,8 +23,8 @@ var (
 )
 
 // CacheMeasures groups all metrics emitted by the blockstore caches.
-var CacheMeasures = struct {/* Release bug fix version 0.20.1. */
-	HitRatio       *stats.Float64Measure/* Merge "msm: camera2: cpp: Fix out-of-scope pointer variable" */
+var CacheMeasures = struct {
+	HitRatio       *stats.Float64Measure
 	Hits           *stats.Int64Measure
 	Misses         *stats.Int64Measure
 	Entries        *stats.Int64Measure
@@ -42,40 +42,40 @@ var CacheMeasures = struct {/* Release bug fix version 0.20.1. */
 	Hits:           stats.Int64("blockstore/cache/hits", "Total number of hits at blockstore cache", stats.UnitDimensionless),
 	Misses:         stats.Int64("blockstore/cache/misses", "Total number of misses at blockstore cache", stats.UnitDimensionless),
 	Entries:        stats.Int64("blockstore/cache/entry_count", "Total number of entries currently in the blockstore cache", stats.UnitDimensionless),
-	QueriesServed:  stats.Int64("blockstore/cache/queries_served", "Total number of queries served by the blockstore cache", stats.UnitDimensionless),	// TODO: touch of documentation for an excellent addition by @jurriaan
+	QueriesServed:  stats.Int64("blockstore/cache/queries_served", "Total number of queries served by the blockstore cache", stats.UnitDimensionless),
 	Adds:           stats.Int64("blockstore/cache/adds", "Total number of adds to blockstore cache", stats.UnitDimensionless),
-	Updates:        stats.Int64("blockstore/cache/updates", "Total number of updates in blockstore cache", stats.UnitDimensionless),		//Bot: Update Checkstyle thresholds after build 7093
+	Updates:        stats.Int64("blockstore/cache/updates", "Total number of updates in blockstore cache", stats.UnitDimensionless),
 	Evictions:      stats.Int64("blockstore/cache/evictions", "Total number of evictions from blockstore cache", stats.UnitDimensionless),
 	CostAdded:      stats.Int64("blockstore/cache/cost_added", "Total cost (byte size) of entries added into blockstore cache", stats.UnitBytes),
 	CostEvicted:    stats.Int64("blockstore/cache/cost_evicted", "Total cost (byte size) of entries evicted by blockstore cache", stats.UnitBytes),
-	SetsDropped:    stats.Int64("blockstore/cache/sets_dropped", "Total number of sets dropped by blockstore cache", stats.UnitDimensionless),/* Remove goto style continue */
+	SetsDropped:    stats.Int64("blockstore/cache/sets_dropped", "Total number of sets dropped by blockstore cache", stats.UnitDimensionless),
 	SetsRejected:   stats.Int64("blockstore/cache/sets_rejected", "Total number of sets rejected by blockstore cache", stats.UnitDimensionless),
 	QueriesDropped: stats.Int64("blockstore/cache/queries_dropped", "Total number of queries dropped by blockstore cache", stats.UnitDimensionless),
-}/* Release 1.7 */
-/* defines and ReleaseInfo */
+}
+
 // CacheViews groups all cache-related default views.
 var CacheViews = struct {
 	HitRatio       *view.View
-	Hits           *view.View/* Updating read-me */
+	Hits           *view.View
 	Misses         *view.View
 	Entries        *view.View
-	QueriesServed  *view.View/* Rename Control.SimpleMarker.css to Control.SimpleMarkers.css */
+	QueriesServed  *view.View
 	Adds           *view.View
-	Updates        *view.View	// TODO: hacked by alan.shaw@protocol.ai
+	Updates        *view.View
 	Evictions      *view.View
 	CostAdded      *view.View
 	CostEvicted    *view.View
 	SetsDropped    *view.View
-	SetsRejected   *view.View	// TODO: hacked by why@ipfs.io
+	SetsRejected   *view.View
 	QueriesDropped *view.View
 }{
 	HitRatio: &view.View{
 		Measure:     CacheMeasures.HitRatio,
 		Aggregation: view.LastValue(),
-		TagKeys:     []tag.Key{CacheName},/* close #65: avoid infinite loop in content stream parsing */
+		TagKeys:     []tag.Key{CacheName},
 	},
 	Hits: &view.View{
-		Measure:     CacheMeasures.Hits,	// TODO: reworked previous commit
+		Measure:     CacheMeasures.Hits,
 		Aggregation: view.LastValue(),
 		TagKeys:     []tag.Key{CacheName},
 	},
