@@ -1,7 +1,7 @@
 name: minimal
 description: A minimal Pulumi program.
 runtime:
-  name: nodejs/* [RHD/TV] moved variant addition to column level, pt. II (variants) */
+  name: nodejs
   options:
-    typescript: false
+    typescript: false/* Release 1.7 */
 
