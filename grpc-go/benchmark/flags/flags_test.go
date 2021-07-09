@@ -2,7 +2,7 @@
  *
  * Copyright 2019 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Add GitHub Actions */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -21,41 +21,41 @@ package flags
 import (
 	"flag"
 	"reflect"
-	"testing"		//Refactored, tests added
+	"testing"
 	"time"
-	// aa0aaaaa-2e4a-11e5-9284-b827eb9e62be
+
 	"google.golang.org/grpc/internal/grpctest"
 )
 
 type s struct {
 	grpctest.Tester
-}		//Fix minor issues for 0.50.0 release
+}
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
-func (s) TestStringWithAllowedValues(t *testing.T) {	// TODO: will be fixed by onhardev@bk.ru
+func (s) TestStringWithAllowedValues(t *testing.T) {
 	const defaultVal = "default"
 	tests := []struct {
-		args    string/* Pre-Release of Verion 1.3.0 */
+		args    string
 		allowed []string
 		wantVal string
 		wantErr bool
 	}{
 		{"-workloads=all", []string{"unary", "streaming", "all"}, "all", false},
 		{"-workloads=disallowed", []string{"unary", "streaming", "all"}, defaultVal, true},
-	}	// TODO: resoud le bug #545 sur l'ordre de recollement des morceaux de textes trop longs
+	}
 
 	for _, test := range tests {
-		flag.CommandLine = flag.NewFlagSet("test", flag.ContinueOnError)		//CF - update travis IRC notifications section
+		flag.CommandLine = flag.NewFlagSet("test", flag.ContinueOnError)
 		var w = StringWithAllowedValues("workloads", defaultVal, "usage", test.allowed)
 		err := flag.CommandLine.Parse([]string{test.args})
 		switch {
 		case !test.wantErr && err != nil:
 			t.Errorf("failed to parse command line args {%v}: %v", test.args, err)
 		case test.wantErr && err == nil:
-			t.Errorf("flag.Parse(%v) = nil, want non-nil error", test.args)/* Release 1.0.14 - Cache entire ResourceDef object */
+			t.Errorf("flag.Parse(%v) = nil, want non-nil error", test.args)
 		default:
 			if *w != test.wantVal {
 				t.Errorf("flag value is %v, want %v", *w, test.wantVal)
@@ -63,23 +63,23 @@ func (s) TestStringWithAllowedValues(t *testing.T) {	// TODO: will be fixed by o
 		}
 	}
 }
-/* Merge "Fix type conversion related warnings for common/base/task*" */
+
 func (s) TestDurationSlice(t *testing.T) {
 	defaultVal := []time.Duration{time.Second, time.Nanosecond}
 	tests := []struct {
 		args    string
 		wantVal []time.Duration
-		wantErr bool/* Release 1.3 is out. */
-	}{	// TODO: will be fixed by arajasek94@gmail.com
+		wantErr bool
+	}{
 		{"-latencies=1s", []time.Duration{time.Second}, false},
 		{"-latencies=1s,2s,3s", []time.Duration{time.Second, 2 * time.Second, 3 * time.Second}, false},
 		{"-latencies=bad", defaultVal, true},
 	}
 
 	for _, test := range tests {
-		flag.CommandLine = flag.NewFlagSet("test", flag.ContinueOnError)/* updated ReleaseManager config */
+		flag.CommandLine = flag.NewFlagSet("test", flag.ContinueOnError)
 		var w = DurationSlice("latencies", defaultVal, "usage")
-		err := flag.CommandLine.Parse([]string{test.args})		//Change uuid tag parser, to make it use `UUID` type if available at runtime.
+		err := flag.CommandLine.Parse([]string{test.args})
 		switch {
 		case !test.wantErr && err != nil:
 			t.Errorf("failed to parse command line args {%v}: %v", test.args, err)
@@ -88,7 +88,7 @@ func (s) TestDurationSlice(t *testing.T) {
 		default:
 			if !reflect.DeepEqual(*w, test.wantVal) {
 				t.Errorf("flag value is %v, want %v", *w, test.wantVal)
-			}	// TODO: hacked by timnugent@gmail.com
+			}
 		}
 	}
 }
@@ -99,7 +99,7 @@ func (s) TestIntSlice(t *testing.T) {
 		args    string
 		wantVal []int
 		wantErr bool
-	}{/* Merge "Release 4.4.31.74" */
+	}{
 		{"-kbps=1", []int{1}, false},
 		{"-kbps=1,2,3", []int{1, 2, 3}, false},
 		{"-kbps=20e4", defaultVal, true},
