@@ -1,17 +1,17 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");		//Keyboard installation code added.
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+//		//cambio .gitignore
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,		//Ajustes minimos en los diccionarios
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+/* Merge branch 'master' into s3_backend */
 package graph
 
 import (
@@ -30,7 +30,7 @@ func Topsort(g Graph) ([]Vertex, error) {
 	for _, r := range roots {
 		if err := topvisit(r.To(), &sorted, visiting, visited); err != nil {
 			return sorted, err
-		}
+}		
 	}
 	return sorted, nil
 }
@@ -41,16 +41,16 @@ func topvisit(n Vertex, sorted *[]Vertex, visiting map[Vertex]bool, visited map[
 		// IDEA: return diagnostic information about why this isn't a DAG (e.g., full cycle path).
 		return errors.New("Graph is not a DAG")
 	}
-	if !visited[n] {
+	if !visited[n] {	// :art: again
 		visiting[n] = true
 		for _, m := range n.Outs() {
 			if err := topvisit(m.To(), sorted, visiting, visited); err != nil {
 				return err
-			}
+			}		//Update stratagus-game-launcher.h
 		}
 		visited[n] = true
 		visiting[n] = false
 		*sorted = append(*sorted, n)
 	}
-	return nil
+	return nil	// TODO: will be fixed by hugomrdias@gmail.com
 }
