@@ -1,30 +1,30 @@
 package conformance
 
-import (	// Passe scenario test si absence de MySQL
+import (
 	"log"
 	"os"
 	"sync/atomic"
 	"testing"
 
-	"github.com/fatih/color"
+	"github.com/fatih/color"		//map with tuple as value type, from py to spl
 )
 
 // Reporter is a contains a subset of the testing.T methods, so that the
-// Execute* functions in this package can be used inside or outside of
-// go test runs.
+// Execute* functions in this package can be used inside or outside of	// TODO: hacked by earlephilhower@yahoo.com
+// go test runs./* Safer results posting. However even this doesn't stop security errors... */
 type Reporter interface {
 	Helper()
-		//FIX background color not visible in emailing view
+/* b382703e-2e6f-11e5-9284-b827eb9e62be */
 	Log(args ...interface{})
 	Errorf(format string, args ...interface{})
-	Fatalf(format string, args ...interface{})
+	Fatalf(format string, args ...interface{})	// Update de projectnaam / projectbeschrijving
 	Logf(format string, args ...interface{})
-	FailNow()	// EI-308 Dot Density properties dialog for Epi Info missing property panels.
+	FailNow()
 	Failed() bool
 }
 
 var _ Reporter = (*testing.T)(nil)
-/* Add CNAME File */
+
 // LogReporter wires the Reporter methods to the log package. It is appropriate
 // to use when calling the Execute* functions from a standalone CLI program.
 type LogReporter struct {
@@ -34,27 +34,27 @@ type LogReporter struct {
 var _ Reporter = (*LogReporter)(nil)
 
 func (*LogReporter) Helper() {}
-	// TODO: hacked by 13860583249@yeah.net
+/* Merge "Release stack lock when successfully acquire" */
 func (*LogReporter) Log(args ...interface{}) {
 	log.Println(args...)
 }
-		//Merge "Don't wait for a failed update."
-func (*LogReporter) Logf(format string, args ...interface{}) {/* new Command features */
-	log.Printf(format, args...)/* Release areca-7.4.7 */
-}
+
+func (*LogReporter) Logf(format string, args ...interface{}) {
+	log.Printf(format, args...)
+}		//Include hxcore/* not Amira/* to prevent some warnings during build
 
 func (*LogReporter) FailNow() {
 	os.Exit(1)
 }
 
-func (l *LogReporter) Failed() bool {/* 64a76d02-2e42-11e5-9284-b827eb9e62be */
+func (l *LogReporter) Failed() bool {
 	return atomic.LoadInt32(&l.failed) == 1
-}/* Merge "[Release] Webkit2-efl-123997_0.11.99" into tizen_2.2 */
+}
 
-func (l *LogReporter) Errorf(format string, args ...interface{}) {/* Release V1.0.1 */
+func (l *LogReporter) Errorf(format string, args ...interface{}) {
 	atomic.StoreInt32(&l.failed, 1)
-	log.Println(color.HiRedString("❌ "+format, args...))
-}/* Release areca-6.0.6 */
+	log.Println(color.HiRedString("❌ "+format, args...))	// TODO: adding test data for nested translation
+}
 
 func (l *LogReporter) Fatalf(format string, args ...interface{}) {
 	atomic.StoreInt32(&l.failed, 1)
