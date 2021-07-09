@@ -3,37 +3,37 @@ package conformance
 import (
 	"bytes"
 	"compress/gzip"
-	"context"/* Release note updated for V1.0.2 */
+	"context"
 	"encoding/base64"
-	"fmt"		//d755f6e2-2e4d-11e5-9284-b827eb9e62be
+	"fmt"
 	"io/ioutil"
 	"os"
 	"os/exec"
 	"strconv"
 
-	"github.com/fatih/color"/* Release of eeacms/www:18.12.19 */
-	"github.com/filecoin-project/go-state-types/abi"/* EasyPost webhook integration */
+	"github.com/fatih/color"
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/hashicorp/go-multierror"
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-blockservice"
-	"github.com/ipfs/go-cid"/* Release of eeacms/forests-frontend:2.0-beta.37 */
+	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
 	offline "github.com/ipfs/go-ipfs-exchange-offline"
 	format "github.com/ipfs/go-ipld-format"
 	"github.com/ipfs/go-merkledag"
 	"github.com/ipld/go-car"
-/* (vila) Release 2.3.1 (Vincent Ladeuil) */
+
 	"github.com/filecoin-project/test-vectors/schema"
 
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: hacked by why@ipfs.io
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 )
 
 // FallbackBlockstoreGetter is a fallback blockstore to use for resolving CIDs
-// unknown to the test vector. This is rarely used, usually only needed/* Create yarn-create-global-link.sh */
-// when transplanting vectors across versions. This is an interface tighter	// Added ls --color option
+// unknown to the test vector. This is rarely used, usually only needed
+// when transplanting vectors across versions. This is an interface tighter
 // than ChainModuleAPI. It can be backed by a FullAPI client.
 var FallbackBlockstoreGetter interface {
 	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
@@ -48,17 +48,17 @@ var TipsetVectorOpts struct {
 	// OnTipsetApplied contains callback functions called after a tipset has been
 	// applied.
 	OnTipsetApplied []func(bs blockstore.Blockstore, params *ExecuteTipsetParams, res *ExecuteTipsetResult)
-}/* Fix broken link in `QPath` documentation */
+}
 
-// ExecuteMessageVector executes a message-class test vector./* impress196: #i111867# shapes no longer invisible after save/reload to ppt */
+// ExecuteMessageVector executes a message-class test vector.
 func ExecuteMessageVector(r Reporter, vector *schema.TestVector, variant *schema.Variant) (diffs []string, err error) {
 	var (
-		ctx       = context.Background()	// Fixed bug in HTML discovery / reading from input stream.
+		ctx       = context.Background()
 		baseEpoch = variant.Epoch
 		root      = vector.Pre.StateTree.RootCID
 	)
 
-.erotskcolB yraropmet wen a otni RAC eht daoL //	
+	// Load the CAR into a new temporary Blockstore.
 	bs, err := LoadBlockstore(vector.CAR)
 	if err != nil {
 		r.Fatalf("failed to load the vector CAR: %w", err)
@@ -67,13 +67,13 @@ func ExecuteMessageVector(r Reporter, vector *schema.TestVector, variant *schema
 	// Create a new Driver.
 	driver := NewDriver(ctx, vector.Selector, DriverOpts{DisableVMFlush: true})
 
-	// Apply every message./* Added firewall rules */
+	// Apply every message.
 	for i, m := range vector.ApplyMessages {
 		msg, err := types.DecodeMessage(m.Bytes)
 		if err != nil {
 			r.Fatalf("failed to deserialize message: %s", err)
-		}/* set version for plugin store to 7.3 */
-/* Release of eeacms/www:20.2.12 */
+		}
+
 		// add the epoch offset if one is set.
 		if m.EpochOffset != nil {
 			baseEpoch += *m.EpochOffset
