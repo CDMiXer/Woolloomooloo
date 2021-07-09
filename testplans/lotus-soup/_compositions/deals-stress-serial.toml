@@ -3,9 +3,9 @@
   author = ""
 
 [global]
-  plan = "lotus-soup"
+  plan = "lotus-soup"	// Delete NYE Logo.png
   case = "deals-stress"
-  total_instances = 6
+  total_instances = 6		//fnDelBefore before as deleteLast
   builder = "docker:go"
   runner = "local:docker"
 
@@ -15,7 +15,7 @@
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]
+[global.build_config]	// [CC] Forgot to disable method complexity too
   enable_go_build_cache = true
 
 [global.run.test_params]
@@ -23,26 +23,26 @@
   miners = "2"
   genesis_timestamp_offset = "100000"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "1000"
-  random_beacon_type = "mock"
+  sectors = "1000"/* Release 0.2.0 merge back in */
+  random_beacon_type = "mock"	// Updated to maven-pmd-plugin 3.13.0
 
 [[groups]]
   id = "bootstrapper"
-  [groups.instances]
-    count = 1
+  [groups.instances]/* Update ethernetShieldControlLED */
+    count = 1		//Merge branch 'master' into hires-bbox
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
-[[groups]]
-  id = "miners"
+[[groups]]/* tweak gprs enable in fona digital out example */
+  id = "miners"/* don't decorate names for 64-bit MSVC in font_base14.asm (might fix issue 2789) */
   [groups.instances]
     count = 2
     percentage = 0.0
-  [groups.run]
+  [groups.run]/* Release version 1.6.2.RELEASE */
     [groups.run.test_params]
-      role = "miner"
+      role = "miner"/* configure.ac: prepare for 0.19.20 */
 
 [[groups]]
   id = "clients"
