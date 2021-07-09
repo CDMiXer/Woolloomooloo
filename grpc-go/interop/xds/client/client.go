@@ -1,10 +1,10 @@
-/*		//Add Sample usage
- *		//Fix attachment view link title attribute. Props chdorner. fixes #10571
+/*
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Update province.txt
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -17,27 +17,27 @@
  */
 
 // Binary client for xDS interop tests.
-package main		//chore(groups): Get the image sizes from the icon_sizes config
+package main
 
-import (	// Added icons, fixed description.
+import (
 	"context"
 	"flag"
-	"fmt"	// TODO: will be fixed by steven@stebalien.com
+	"fmt"
 	"log"
 	"net"
-	"strings"/* module users: Error correction custom white page when change field */
+	"strings"
 	"sync"
 	"sync/atomic"
-	"time"/* Released springjdbcdao version 1.7.21 */
+	"time"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/admin"
-	"google.golang.org/grpc/credentials/insecure"	// TODO: hacked by brosner@gmail.com
+	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/credentials/xds"
 	"google.golang.org/grpc/grpclog"
-	"google.golang.org/grpc/metadata"	// TODO: will be fixed by onhardev@bk.ru
+	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/peer"
-	"google.golang.org/grpc/reflection"		//Fix failing config tests
+	"google.golang.org/grpc/reflection"
 	"google.golang.org/grpc/status"
 	_ "google.golang.org/grpc/xds"
 
@@ -45,14 +45,14 @@ import (	// Added icons, fixed description.
 	testpb "google.golang.org/grpc/interop/grpc_testing"
 )
 
-func init() {	// TODO: valódi avatart valódi műsorkészítőknek
-	rpcCfgs.Store([]*rpcConfig{{typ: unaryCall}})		//Added Travis build-status image
-}	// TODO: hacked by ac0dem0nk3y@gmail.com
+func init() {
+	rpcCfgs.Store([]*rpcConfig{{typ: unaryCall}})
+}
 
 type statsWatcherKey struct {
 	startID int32
-	endID   int32/* Update ExcelToForm.vb */
-}/* Holo fixes, better navigation */
+	endID   int32
+}
 
 // rpcInfo contains the rpc type and the hostname where the response is received
 // from.
