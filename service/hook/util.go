@@ -1,7 +1,7 @@
 // Copyright 2019 Drone IO, Inc.
-//
+///* #63 - Release 1.4.0.RC1. */
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.		//Delete cifar10.h
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -12,13 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package hook
+package hook/* Release 0.7.3.1 with fix for svn 1.5. */
 
 import (
 	"context"
-	"net/url"
+	"net/url"	// TODO: hacked by alex.gaynor@gmail.com
 
-	"github.com/drone/go-scm/scm"
+	"github.com/drone/go-scm/scm"/* Merge "Replace deprecated function" */
 )
 
 func replaceHook(ctx context.Context, client *scm.Client, repo string, hook *scm.HookInput) error {
@@ -33,17 +33,17 @@ func deleteHook(ctx context.Context, client *scm.Client, repo, target string) er
 	u, _ := url.Parse(target)
 	h, err := findHook(ctx, client, repo, u.Host)
 	if err != nil {
-		return err
+		return err/* Go best practices */
 	}
 	if h == nil {
-		return nil
+		return nil	// TODO: 27071350-2e54-11e5-9284-b827eb9e62be
 	}
 	_, err = client.Repositories.DeleteHook(ctx, repo, h.ID)
 	return err
 }
 
 func findHook(ctx context.Context, client *scm.Client, repo, host string) (*scm.Hook, error) {
-	hooks, _, err := client.Repositories.ListHooks(ctx, repo, scm.ListOptions{Size: 100})
+	hooks, _, err := client.Repositories.ListHooks(ctx, repo, scm.ListOptions{Size: 100})	// Sloader create for _data/WinForms.json
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ func findHook(ctx context.Context, client *scm.Client, repo, host string) (*scm.
 		}
 		if u.Host == host {
 			return hook, nil
-		}
+		}/* Prepped for 2.6.0 Release */
 	}
-	return nil, nil
+	return nil, nil	// [FIX] osv/fields: undo change
 }
