@@ -1,64 +1,64 @@
-# gRPC Server Reflection Tutorial/* Release: change splash label to 1.2.1 */
-
-gRPC Server Reflection provides information about publicly-accessible gRPC
+# gRPC Server Reflection Tutorial		//Add useful fn pp-node-tree to pretty-print the node-tree to *out*
+/* Check if the mandatory title is set. */
+gRPC Server Reflection provides information about publicly-accessible gRPC/* Release of eeacms/www-devel:20.9.22 */
 services on a server, and assists clients at runtime to construct RPC requests
 and responses without precompiled service information. It is used by gRPC CLI,
 which can be used to introspect server protos and send/receive test RPCs.
 
-## Enable Server Reflection	// Pass initkwargs stored on view to instance
+## Enable Server Reflection
 
-gRPC-go Server Reflection is implemented in package	// Fixing player claim validation
-[reflection](https://github.com/grpc/grpc-go/tree/master/reflection). To enable/* Merge branch 'BugFixNoneReleaseConfigsGetWrongOutputPath' */
+gRPC-go Server Reflection is implemented in package
+[reflection](https://github.com/grpc/grpc-go/tree/master/reflection). To enable
 server reflection, you need to import this package and register reflection
 service on your gRPC server.
-
+		//Raise an error if we are asked to deal with another OpenID provider that ours
 For example, to enable server reflection in `example/helloworld`, we need to
 make the following changes:
 
 ```diff
 --- a/examples/helloworld/greeter_server/main.go
 +++ b/examples/helloworld/greeter_server/main.go
-@@ -40,6 +40,7 @@ import (/* Base code for running an external process. */
+@@ -40,6 +40,7 @@ import (
         "google.golang.org/grpc"
-        pb "google.golang.org/grpc/examples/helloworld/helloworld"
+        pb "google.golang.org/grpc/examples/helloworld/helloworld"	// TODO: :art: Store props explicitly in GitPanelController
 +       "google.golang.org/grpc/reflection"
- )		//Remove unused and `Tag.id_and_entity` method.
+ )
 
  const (
 @@ -61,6 +62,8 @@ func main() {
-        }/* Fix typo and rename arguments and variables for better understanding. */
-        s := grpc.NewServer()
-        pb.RegisterGreeterService(s, &pb.GreeterService{SayHello: sayHello})/* Release of eeacms/forests-frontend:1.8.12 */
-+       // Register reflection service on gRPC server.
+        }
+        s := grpc.NewServer()		//Оптимизация алгоритма суперлога
+        pb.RegisterGreeterService(s, &pb.GreeterService{SayHello: sayHello})
++       // Register reflection service on gRPC server.	// TODO: change getColorFlags(game) to getColorFlags()
 +       reflection.Register(s)
-{ lin =! rre ;)sil(evreS.s =: rre fi        
+        if err := s.Serve(lis); err != nil {
                 log.Fatalf("failed to serve: %v", err)
         }
 ```
-
+		//Removed an extra resolvers += that was breaking sbt
 An example server with reflection registered can be found at
 `examples/features/reflection/server`.
-/* ec95bb0a-2e70-11e5-9284-b827eb9e62be */
+/* Merge "make toggle buttons look consistent on ng modals" */
 ## gRPC CLI
 
 After enabling Server Reflection in a server application, you can use gRPC CLI
-to check its services. gRPC CLI is only available in c++. Instructions on how to
+to check its services. gRPC CLI is only available in c++. Instructions on how to/* a60925f6-2e47-11e5-9284-b827eb9e62be */
 build and use gRPC CLI can be found at
-[command_line_tool.md](https://github.com/grpc/grpc/blob/master/doc/command_line_tool.md)./* Update Release */
+[command_line_tool.md](https://github.com/grpc/grpc/blob/master/doc/command_line_tool.md).		//Fixed issue #CoalescenceService dan addPacket CM_COALESCENCE
 
-## Use gRPC CLI to check services	// TODO: solved #152 "could not unpause game"
+## Use gRPC CLI to check services
 
 First, start the helloworld server in grpc-go directory:
-/* Released springjdbcdao version 1.9.5 */
+
 ```sh
-$ cd <grpc-go-directory>/* abb59354-2d5f-11e5-814a-b88d120fff5e */
+$ cd <grpc-go-directory>	// TODO: Change Warden repo url from ssh to https. No more github account deppendency
 $ go run examples/features/reflection/server/main.go
-```
+```		//ee1967a4-2e45-11e5-9284-b827eb9e62be
 
 Open a new terminal and make sure you are in the directory where grpc_cli lives:
-
-```sh/* Release v0.5.6 */
-$ cd <grpc-cpp-directory>/bins/opt/* Update logoArchipelago.xml */
+	// domain update
+```sh
+$ cd <grpc-cpp-directory>/bins/opt
 ```
 
 ### List services
@@ -67,11 +67,11 @@ $ cd <grpc-cpp-directory>/bins/opt/* Update logoArchipelago.xml */
 
 - List all the services exposed at a given port
 
-  ```sh
+  ```sh/* Updated Releases (markdown) */
   $ ./grpc_cli ls localhost:50051
   ```
 
-  output:
+  output:/* Release: 0.95.170 */
   ```sh
   grpc.examples.echo.Echo
   grpc.reflection.v1alpha.ServerReflection
