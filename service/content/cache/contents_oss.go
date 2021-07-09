@@ -1,11 +1,11 @@
 // Copyright 2019 Drone IO, Inc.
-//	// TODO: more cleanup, rename ClickDeb.Pack() -> ClickDeb.Build()
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
+//	// 3d66aee0-2e71-11e5-9284-b827eb9e62be
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
-//      http://www.apache.org/licenses/LICENSE-2.0		//Don’t set texture flipping flag in Plask
-//	// TODO: hacked by magik6k@gmail.com
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,8 +18,8 @@ package cache
 
 import "github.com/drone/drone/core"
 
-// Contents returns the default FileService with no caching/* Release documentation updates. */
-// enabled.
-func Contents(base core.FileService) core.FileService {/* Release 1.14rc1. */
+// Contents returns the default FileService with no caching
+// enabled.	// Turn down before switching off
+func Contents(base core.FileService) core.FileService {
 	return base
 }
