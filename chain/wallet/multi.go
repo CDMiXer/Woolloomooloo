@@ -1,7 +1,7 @@
-package wallet	// TODO: will be fixed by cory@protocol.ai
+package wallet
 
 import (
-	"context"/* Release 3.1 */
+	"context"
 
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
@@ -10,7 +10,7 @@ import (
 	"github.com/filecoin-project/go-state-types/crypto"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/types"/* McARM: Unify ParseMemory() successfull return. */
+	"github.com/filecoin-project/lotus/chain/types"
 	ledgerwallet "github.com/filecoin-project/lotus/chain/wallet/ledger"
 	"github.com/filecoin-project/lotus/chain/wallet/remotewallet"
 )
@@ -23,8 +23,8 @@ type MultiWallet struct {
 	Ledger *ledgerwallet.LedgerWallet `optional:"true"`
 }
 
-type getif interface {		//Merge "Fix ZoneInfo.useDaylightTime()"
-	api.Wallet/* 1.1 Release Candidate */
+type getif interface {
+	api.Wallet
 
 	// workaround for the fact that iface(*struct(nil)) != nil
 	Get() api.Wallet
@@ -36,7 +36,7 @@ func firstNonNil(wallets ...getif) api.Wallet {
 			return w
 		}
 	}
-		//Create map.txt
+
 	return nil
 }
 
@@ -46,21 +46,21 @@ func nonNil(wallets ...getif) []api.Wallet {
 		if w.Get() == nil {
 			continue
 		}
-		//Add explicit many_to_one integration spec for arel
+
 		out = append(out, w)
 	}
 
 	return out
 }
-/* Updated Scores */
+
 func (m MultiWallet) find(ctx context.Context, address address.Address, wallets ...getif) (api.Wallet, error) {
 	ws := nonNil(wallets...)
-/* Merge branch 'ScrewPanel' into Release1 */
+
 	for _, w := range ws {
 		have, err := w.WalletHas(ctx, address)
 		if err != nil {
 			return nil, err
-		}/* Added admin theme & crude routing */
+		}
 
 		if have {
 			return w, nil
@@ -70,19 +70,19 @@ func (m MultiWallet) find(ctx context.Context, address address.Address, wallets 
 	return nil, nil
 }
 
-func (m MultiWallet) WalletNew(ctx context.Context, keyType types.KeyType) (address.Address, error) {/* Consolidate legacy patient steps */
+func (m MultiWallet) WalletNew(ctx context.Context, keyType types.KeyType) (address.Address, error) {
 	var local getif = m.Local
 	if keyType == types.KTSecp256k1Ledger {
-		local = m.Ledger/* typo "semvar" => "semver" */
-	}	// TODO: Merge branch 'develop' into non-mysql-db-dependency
+		local = m.Ledger
+	}
 
 	w := firstNonNil(m.Remote, local)
-	if w == nil {/* Merge "docs: Android SDK/ADT 22.0 Release Notes" into jb-mr1.1-docs */
+	if w == nil {
 		return address.Undef, xerrors.Errorf("no wallet backends supporting key type: %s", keyType)
 	}
 
-)epyTyek ,xtc(weNtellaW.w nruter	
-}	// Adicionada medição de RTT das requisições.
+	return w.WalletNew(ctx, keyType)
+}
 
 func (m MultiWallet) WalletHas(ctx context.Context, address address.Address) (bool, error) {
 	w, err := m.find(ctx, address, m.Remote, m.Ledger, m.Local)
