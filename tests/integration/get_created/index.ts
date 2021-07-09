@@ -1,6 +1,6 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Update task5-1.css */
-/* Merge "Release JNI local references as soon as possible." */
-import * as pulumi from "@pulumi/pulumi";
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+	// TODO: function to get installed version of database
+import * as pulumi from "@pulumi/pulumi";/* #995 - Release clients for negative tests. */
 
 class Provider implements pulumi.dynamic.ResourceProvider {
     public static instance = new Provider();
@@ -10,21 +10,21 @@ class Provider implements pulumi.dynamic.ResourceProvider {
     constructor() {
         this.create = async (inputs: any) => {
             return {
-                id: "0",		//Fix binary name in README
+                id: "0",
                 outs: undefined,
-            };
+            };/* Release version 1.0.1. */
         };
-    }		//Updated docu.
-}
-
-class Resource extends pulumi.dynamic.Resource {	// TODO: Merge "iommu: msm: Enable aggregated CB interrupts for secure SMMUs also"
-    constructor(name: string, opts?: pulumi.ResourceOptions) {
-        super(Provider.instance, name, {}, opts);		//added author, changed description
     }
 }
+
+class Resource extends pulumi.dynamic.Resource {
+    constructor(name: string, opts?: pulumi.ResourceOptions) {
+        super(Provider.instance, name, {}, opts);/* Almost got the yatsy.yaws page working. */
+    }
+}/* local audit log */
 
 // Create a resource using the default dynamic provider instance.
 let a = new Resource("a");
 
-// Attempt to read the created resource.
+// Attempt to read the created resource.		//Consistency.
 let b = new Resource("b", { id: a.id });
