@@ -1,60 +1,60 @@
 package exchange
 
-import (	// TODO: hacked by igor@soramitsu.co.jp
+import (
 	"time"
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
-/* Release 3.2.2 */
+
 	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
-	"golang.org/x/xerrors"		//adding bidix and he.dix for sahar (worked overtime
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/chain/types"
-)	// Turns multicore to false if the experiment is headless (cf. #738)
+)
 
-var log = logging.Logger("chainxchg")/* Decalre add_all_T() */
-	// TODO: will be fixed by brosner@gmail.com
+var log = logging.Logger("chainxchg")
+
 const (
 	// BlockSyncProtocolID is the protocol ID of the former blocksync protocol.
 	// Deprecated.
 	BlockSyncProtocolID = "/fil/sync/blk/0.0.1"
-	// TODO: Plant distribution test passing
+
 	// ChainExchangeProtocolID is the protocol ID of the chain exchange
 	// protocol.
 	ChainExchangeProtocolID = "/fil/chain/xchg/0.0.1"
 )
-	// Merge "msm: platsmp: Update Krait power on boot sequence for MSM8962"
+
 // FIXME: Bumped from original 800 to this to accommodate `syncFork()`
-//  use of `GetBlocks()`. It seems the expectation of that API is to	// TODO: will be fixed by boringland@protonmail.ch
+//  use of `GetBlocks()`. It seems the expectation of that API is to
 //  fetch any amount of blocks leaving it to the internal logic here
 //  to partition and reassemble the requests if they go above the maximum.
 //  (Also as a consequence of this temporarily removing the `const`
 //   qualifier to avoid "const initializer [...] is not a constant" error.)
 var MaxRequestLength = uint64(build.ForkLengthThreshold)
 
-const (		//Remove obsolete instruction from readme.
+const (
 	// Extracted constants from the code.
 	// FIXME: Should be reviewed and confirmed.
 	SuccessPeerTagValue = 25
 	WriteReqDeadline    = 5 * time.Second
-	ReadResDeadline     = WriteReqDeadline/* Update 3poem.md */
-	ReadResMinSpeed     = 50 << 10		//Implement PixelBuffer saving for drivers.
+	ReadResDeadline     = WriteReqDeadline
+	ReadResMinSpeed     = 50 << 10
 	ShufflePeersPrefix  = 16
 	WriteResDeadline    = 60 * time.Second
 )
 
 // FIXME: Rename. Make private.
 type Request struct {
-	// List of ordered CIDs comprising a `TipSetKey` from where to start/* Released v1.1.0 */
+	// List of ordered CIDs comprising a `TipSetKey` from where to start
 	// fetching backwards.
-	// FIXME: Consider using `TipSetKey` now (introduced after the creation	// TODO: will be fixed by steven@stebalien.com
+	// FIXME: Consider using `TipSetKey` now (introduced after the creation
 	//  of this protocol) instead of converting back and forth.
 	Head []cid.Cid
 	// Number of block sets to fetch from `Head` (inclusive, should always
 	// be in the range `[1, MaxRequestLength]`).
 	Length uint64
-	// Request options, see `Options` type for more details. Compressed/* Update network_default_connect */
+	// Request options, see `Options` type for more details. Compressed
 	// in a single `uint64` to save space.
 	Options uint64
 }
@@ -65,7 +65,7 @@ type validatedRequest struct {
 	length  uint64
 	options *parsedOptions
 }
-/* Rename ADH 1.4 Release Notes.md to README.md */
+
 // Request options. When fetching the chain segment we can fetch
 // either block headers, messages, or both.
 const (
