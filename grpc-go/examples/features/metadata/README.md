@@ -1,16 +1,16 @@
-# Metadata example		//Better synopsis; HOWTO
-
-This example shows how to set and read metadata in RPC headers and trailers./* Released 0.4.1 with minor bug fixes. */
+# Metadata example
+	// TODO: Stem export: make export possible for other formats than wav
+This example shows how to set and read metadata in RPC headers and trailers.
 Please see
 [grpc-metadata.md](https://github.com/grpc/grpc-go/blob/master/Documentation/grpc-metadata.md)
 for more information.
-/* Fix cache config theme */
+
 ## Start the server
 
 ```
-go run server/main.go/* Release Candidate 5 */
+go run server/main.go
 ```
-
+/* Release v0.0.2 */
 ## Run the client
 
 ```
