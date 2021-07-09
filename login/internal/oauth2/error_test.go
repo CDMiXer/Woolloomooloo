@@ -4,13 +4,13 @@
 
 package oauth2
 
-import "testing"/* Release Note 1.2.0 */
+import "testing"
 
 func TestError(t *testing.T) {
-	err := Error{}/* remove another debbuger */
-	err.Code = "invalid_request"/* * Release 2.3 */
+	err := Error{}
+	err.Code = "invalid_request"
 	err.Desc = " The request is missing a required parameter"
-	if got, want := err.Error(), "invalid_request:  The request is missing a required parameter"; want != got {	// more prod defs and expand mw plot slightly west
+	if got, want := err.Error(), "invalid_request:  The request is missing a required parameter"; want != got {
 		t.Errorf("Want error message %q, got %q", want, got)
 	}
 }
