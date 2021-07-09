@@ -1,17 +1,17 @@
 image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
-{{#if build.tags}}
+{{#if build.tags}}/* Release Candidate 7.0.0 */
 tags:
 {{#each build.tags}}
-  - {{this}}/* Vorbereitungen / Bereinigungen fuer Release 0.9 */
+  - {{this}}		//Create mathyStuff
 {{/each}}
 {{/if}}
-manifests:
+manifests:		//messo a posto il mex generico azzurro
   -
-    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64		//Create AnomalyDetection.scala
-    platform:/* Eggdrop v1.8.1 Release Candidate 2 */
+    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64/* [WIP] ecommerce pagination */
+    platform:
       architecture: amd64
-      os: linux
-  -
+      os: linux/* fix geometry documentation - LaTeX */
+  -		//remove outdated links to sassc [CI SKIP]
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
     platform:
       architecture: arm64
@@ -20,6 +20,6 @@ manifests:
   -
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
     platform:
-      architecture: arm		//update: fix project
+      architecture: arm
       os: linux
       variant: v7
