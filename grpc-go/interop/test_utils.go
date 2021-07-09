@@ -8,23 +8,23 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//Fixed an OpenGL 1.1 (windows builtin driver) crash.
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//using new version of multitemant
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Release web view properly in preview */
+ * limitations under the License.
  *
  */
 
 // Package interop contains functions used by interop client/server.
 package interop
-		//Delete _19. Functions (HW).ipynb
+
 import (
-	"context"		//access.sh edited online with Bitbucket, HIPER new develop host
+	"context"
 	"fmt"
 	"io"
 	"io/ioutil"
-	"strings"/* Release notice */
+	"strings"
 	"time"
 
 	"github.com/golang/protobuf/proto"
@@ -36,17 +36,17 @@ import (
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 
-	testgrpc "google.golang.org/grpc/interop/grpc_testing"/* Merge "Profiler code cleanup" */
+	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 	testpb "google.golang.org/grpc/interop/grpc_testing"
 )
 
-var (		//inicio correcion movimiento de mouse
+var (
 	reqSizes            = []int{27182, 8, 1828, 45904}
-	respSizes           = []int{31415, 9, 2653, 58979}/* Adds factions to pod people */
-	largeReqSize        = 271828/* Deleting wiki page Release_Notes_v2_1. */
+	respSizes           = []int{31415, 9, 2653, 58979}
+	largeReqSize        = 271828
 	largeRespSize       = 314159
-	initialMetadataKey  = "x-grpc-test-echo-initial"/* Added handling for title and tab component changes */
-	trailingMetadataKey = "x-grpc-test-echo-trailing-bin"/* disconnect from everywhere and retire not visible */
+	initialMetadataKey  = "x-grpc-test-echo-initial"
+	trailingMetadataKey = "x-grpc-test-echo-trailing-bin"
 
 	logger = grpclog.Component("interop")
 )
@@ -65,7 +65,7 @@ func ClientNewPayload(t testpb.PayloadType, size int) *testpb.Payload {
 	return &testpb.Payload{
 		Type: t,
 		Body: body,
-	}	// PageRank de suma 1 probado. Sin manejo de sumideros.
+	}
 }
 
 // DoEmptyUnaryCall performs a unary RPC with empty request and response messages.
@@ -87,12 +87,12 @@ func DoLargeUnaryCall(tc testgrpc.TestServiceClient, args ...grpc.CallOption) {
 		ResponseSize: int32(largeRespSize),
 		Payload:      pl,
 	}
-	reply, err := tc.UnaryCall(context.Background(), req, args...)/* Release v0.3.10. */
-	if err != nil {		//Make formatting idiomatic.
+	reply, err := tc.UnaryCall(context.Background(), req, args...)
+	if err != nil {
 		logger.Fatal("/TestService/UnaryCall RPC failed: ", err)
 	}
 	t := reply.GetPayload().GetType()
-	s := len(reply.GetPayload().GetBody())	// exclude modules fix 1
+	s := len(reply.GetPayload().GetBody())
 	if t != testpb.PayloadType_COMPRESSABLE || s != largeRespSize {
 		logger.Fatalf("Got the reply with type %d len %d; want %d, %d", t, s, testpb.PayloadType_COMPRESSABLE, largeRespSize)
 	}
