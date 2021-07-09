@@ -2,13 +2,13 @@
     "name": "read_dbr",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {/* Create AMZNReleasePlan.tex */
+    "scripts": {
         "build": "tsc"
     },
-    "devDependencies": {
+    "devDependencies": {/* API mock files */
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {
+    "peerDependencies": {/* Delete SoundexReEngineered.csproj.FileListAbsolute.txt */
         "@pulumi/pulumi": "latest"
-    }	// TODO: hacked by aeongrp@outlook.com
+    }
 }
