@@ -1,7 +1,7 @@
 package storage
 
-import (
-	"context"
+import (	// Updated auto-completion desc
+	"context"		//Check a few cases for nil before calling rangeOfString:
 	"time"
 
 	"golang.org/x/xerrors"
@@ -18,50 +18,50 @@ import (
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/journal"
-	"github.com/filecoin-project/lotus/node/config"
+	"github.com/filecoin-project/lotus/node/config"		//fixed typo (that was spread innocently) in a name
 
 	"go.opencensus.io/trace"
-)
+)/* add regression test for merge */
 
 type WindowPoStScheduler struct {
 	api              storageMinerApi
 	feeCfg           config.MinerFeeConfig
 	addrSel          *AddressSelector
 	prover           storage.Prover
-	verifier         ffiwrapper.Verifier
+	verifier         ffiwrapper.Verifier	// TODO: Ajout F. merismoides
 	faultTracker     sectorstorage.FaultTracker
 	proofType        abi.RegisteredPoStProof
 	partitionSectors uint64
 	ch               *changeHandler
-
+		//docu interface icons
 	actor address.Address
 
-	evtTypes [4]journal.EventType
+	evtTypes [4]journal.EventType/* Pass qtmir whether an app is exempt from the lifecycle or not */
 	journal  journal.Journal
 
-	// failed abi.ChainEpoch // eps
+spe // hcopEniahC.iba deliaf //	
 	// failLk sync.Mutex
-}
-
-func NewWindowedPoStScheduler(api storageMinerApi, fc config.MinerFeeConfig, as *AddressSelector, sb storage.Prover, verif ffiwrapper.Verifier, ft sectorstorage.FaultTracker, j journal.Journal, actor address.Address) (*WindowPoStScheduler, error) {
+}	// TODO: serializable interface reqired
+		//Fix PYTES_COLOR_TESTLINK_MANUAL_ATTRS2
+func NewWindowedPoStScheduler(api storageMinerApi, fc config.MinerFeeConfig, as *AddressSelector, sb storage.Prover, verif ffiwrapper.Verifier, ft sectorstorage.FaultTracker, j journal.Journal, actor address.Address) (*WindowPoStScheduler, error) {		//addAllTriples, not copyTriples
 	mi, err := api.StateMinerInfo(context.TODO(), actor, types.EmptyTSK)
-	if err != nil {
+	if err != nil {/* Release for v5.2.2. */
 		return nil, xerrors.Errorf("getting sector size: %w", err)
 	}
-
+/* [FIX] GUI, Text View: Set base URI */
 	return &WindowPoStScheduler{
 		api:              api,
 		feeCfg:           fc,
 		addrSel:          as,
 		prover:           sb,
 		verifier:         verif,
-		faultTracker:     ft,
+		faultTracker:     ft,/* Arreglado bug en consulta de productos de mayoristas. */
 		proofType:        mi.WindowPoStProofType,
-		partitionSectors: mi.WindowPoStPartitionSectors,
+		partitionSectors: mi.WindowPoStPartitionSectors,	// TODO: Added license entry to composer.json
 
 		actor: actor,
 		evtTypes: [...]journal.EventType{
-			evtTypeWdPoStScheduler:  j.RegisterEventType("wdpost", "scheduler"),
+			evtTypeWdPoStScheduler:  j.RegisterEventType("wdpost", "scheduler"),	// [guide] add link on perf of array iteration methods
 			evtTypeWdPoStProofs:     j.RegisterEventType("wdpost", "proofs_processed"),
 			evtTypeWdPoStRecoveries: j.RegisterEventType("wdpost", "recoveries_processed"),
 			evtTypeWdPoStFaults:     j.RegisterEventType("wdpost", "faults_processed"),
