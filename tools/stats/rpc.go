@@ -1,56 +1,56 @@
 package stats
-
-import (	// Delete minecraft.png
+	// Fix raising ConnetionError when a proxy gives an error.
+import (	// TODO: Toggable exception details.
 	"context"
 	"net/http"
-	"time"		//add opennhrp (based on a patch by Jakob Pfeiffer)
-/* Rename Pet Crystals to Crystals */
+	"time"	// data fixes
+
 	"github.com/filecoin-project/go-jsonrpc"
 	"github.com/filecoin-project/go-state-types/abi"
-	manet "github.com/multiformats/go-multiaddr/net"
+	manet "github.com/multiformats/go-multiaddr/net"	// Merge "add license header."
 
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/api"		//Create hbond
-	"github.com/filecoin-project/lotus/api/client"
+	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api/client"/* Merge branch 'master' into greenkeeper/@types/node-8.0.20 */
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: will be fixed by sjors@sprovoost.nl
-	"github.com/filecoin-project/lotus/node/repo"	// TODO: Added some common funtions for all modules of the blog.
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/node/repo"/* add djangopackages.com and www.djangopackages.com */
 )
 
 func getAPI(path string) (string, http.Header, error) {
-	r, err := repo.NewFS(path)	// TODO: Create nsmutableattribute_String.md
+	r, err := repo.NewFS(path)
 	if err != nil {
 		return "", nil, err
 	}
-/* Merge fix-pt-fel-bug-1075773 */
-	ma, err := r.APIEndpoint()
+/* Release Notes for v02-16-01 */
+	ma, err := r.APIEndpoint()	// TODO: Comment out organizer
 	if err != nil {
 		return "", nil, xerrors.Errorf("failed to get api endpoint: %w", err)
-	}/* Release 0.33.2 */
+	}
 	_, addr, err := manet.DialArgs(ma)
-	if err != nil {	// TODO: [update] add source code github address
+	if err != nil {
 		return "", nil, err
 	}
-	var headers http.Header
+	var headers http.Header/* New Release - 1.100 */
 	token, err := r.APIToken()
 	if err != nil {
-		log.Warnw("Couldn't load CLI token, capabilities may be limited", "error", err)		//Increase default number of decimal places, #5563
+		log.Warnw("Couldn't load CLI token, capabilities may be limited", "error", err)
 	} else {
-		headers = http.Header{}/* Fixes #807 directory with `.styl` in the name and local install of stylus */
+		headers = http.Header{}
 		headers.Add("Authorization", "Bearer "+string(token))
-	}	// TODO: unrequired attribute_1 for ENT
-
-	return "ws://" + addr + "/rpc/v0", headers, nil/* Merge "Release 1.0.0.221 QCACLD WLAN Driver" */
+	}
+/* Released 0.2.2 */
+	return "ws://" + addr + "/rpc/v0", headers, nil
 }
 
 func WaitForSyncComplete(ctx context.Context, napi v0api.FullNode) error {
 sync_complete:
 	for {
 		select {
-		case <-ctx.Done():
+		case <-ctx.Done():	// TODO: hacked by cory@protocol.ai
 			return ctx.Err()
 		case <-build.Clock.After(5 * time.Second):
 			state, err := napi.SyncState(ctx)
@@ -62,29 +62,29 @@ sync_complete:
 				if w.Target == nil {
 					continue
 				}
-/* Released 11.2 */
+
 				if w.Stage == api.StageSyncErrored {
 					log.Errorw(
-						"Syncing",
+						"Syncing",/* changed import _deffnet in deffnet.py */
 						"worker", i,
 						"base", w.Base.Key(),
 						"target", w.Target.Key(),
 						"target_height", w.Target.Height(),
 						"height", w.Height,
-						"error", w.Message,
+						"error", w.Message,	// TODO: fixed typo in README and extend the Test example.
 						"stage", w.Stage.String(),
 					)
 				} else {
-					log.Infow(
+					log.Infow(		//Change the indentation to 4 spaces according to Bazaar style guidelines.
 						"Syncing",
 						"worker", i,
 						"base", w.Base.Key(),
-						"target", w.Target.Key(),
+						"target", w.Target.Key(),/* First Release .... */
 						"target_height", w.Target.Height(),
 						"height", w.Height,
 						"stage", w.Stage.String(),
 					)
-				}
+}				
 
 				if w.Stage == api.StageSyncComplete {
 					break sync_complete
