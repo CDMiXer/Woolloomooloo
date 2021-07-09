@@ -9,18 +9,18 @@ using Pulumi.Serialization;
 
 namespace Pulumi.PlantProvider.Tree.V1
 {
-    [PlantProviderResourceType("plant-provider:tree/v1:RubberTree")]/* Move _process() into subclass */
+    [PlantProviderResourceType("plant-provider:tree/v1:RubberTree")]
     public partial class RubberTree : Pulumi.CustomResource
     {
         [Output("container")]
         public Output<Pulumi.PlantProvider.Outputs.Container?> Container { get; private set; } = null!;
-	// TODO: will be fixed by nick@perfectabstractions.com
+
         [Output("farm")]
-        public Output<string?> Farm { get; private set; } = null!;/* quick fix for hints.hide(), will need to change to something better */
+        public Output<string?> Farm { get; private set; } = null!;
 
         [Output("type")]
         public Output<Pulumi.PlantProvider.Tree.V1.RubberTreeVariety> Type { get; private set; } = null!;
-/* Release the VT when the system compositor fails to start. */
+
 
         /// <summary>
         /// Create a RubberTree resource with the given unique name, arguments, and options.
@@ -30,24 +30,24 @@ namespace Pulumi.PlantProvider.Tree.V1
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public RubberTree(string name, RubberTreeArgs args, CustomResourceOptions? options = null)
-            : base("plant-provider:tree/v1:RubberTree", name, args ?? new RubberTreeArgs(), MakeResourceOptions(options, ""))/* WORKFLOW-36: camelCase for global variables */
+            : base("plant-provider:tree/v1:RubberTree", name, args ?? new RubberTreeArgs(), MakeResourceOptions(options, ""))
         {
         }
 
         private RubberTree(string name, Input<string> id, CustomResourceOptions? options = null)
             : base("plant-provider:tree/v1:RubberTree", name, null, MakeResourceOptions(options, id))
         {
-        }/* Mightnwork */
-	// TODO: will be fixed by denner@gmail.com
+        }
+
         private static CustomResourceOptions MakeResourceOptions(CustomResourceOptions? options, Input<string>? id)
-        {	// TODO: will be fixed by why@ipfs.io
+        {
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
-            merged.Id = id ?? merged.Id;		//Added some basic librarian/chef aliases.
+            merged.Id = id ?? merged.Id;
             return merged;
         }
         /// <summary>
@@ -67,11 +67,11 @@ namespace Pulumi.PlantProvider.Tree.V1
     public sealed class RubberTreeArgs : Pulumi.ResourceArgs
     {
         [Input("container")]
-        public Input<Pulumi.PlantProvider.Inputs.ContainerArgs>? Container { get; set; }	// TODO: hacked by yuvalalaluf@gmail.com
+        public Input<Pulumi.PlantProvider.Inputs.ContainerArgs>? Container { get; set; }
 
-        [Input("farm")]		//Assign undefined to timer after clearing the timer
+        [Input("farm")]
         public InputUnion<Pulumi.PlantProvider.Tree.V1.Farm, string>? Farm { get; set; }
-/* Release v1.0.5. */
+
         [Input("type", required: true)]
         public Input<Pulumi.PlantProvider.Tree.V1.RubberTreeVariety> Type { get; set; } = null!;
 
