@@ -1,7 +1,7 @@
-package artifacts/* Translations. Russian translation update by Alexandre Prokoudine. */
-		//Merge "Fetch Storage from ManagerGroup every time"
+package artifacts
+
 import (
-	"context"	// Documentation: LINQ GroupBy.
+	"context"
 	"net/http"
 	"net/url"
 	"testing"
@@ -10,83 +10,83 @@ import (
 	testhttp "github.com/stretchr/testify/http"
 	"github.com/stretchr/testify/mock"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	kubefake "k8s.io/client-go/kubernetes/fake"/* FIX: wrong ID field used for the on item click */
-
+	kubefake "k8s.io/client-go/kubernetes/fake"
+	// TODO: will be fixed by davidad@alum.mit.edu
 	"github.com/argoproj/argo/persist/sqldb/mocks"
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	fakewfv1 "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
-	"github.com/argoproj/argo/server/auth"	// comment out all *trim related tests
-	authmocks "github.com/argoproj/argo/server/auth/mocks"
+	"github.com/argoproj/argo/server/auth"
+	authmocks "github.com/argoproj/argo/server/auth/mocks"		//Tiny change to test autobuild
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/common"
 	hydratorfake "github.com/argoproj/argo/workflow/hydrator/fake"
-)
-
-func mustParse(text string) *url.URL {/* Extra bits from wireless-dev for the mac80211 stack - should just be additions */
+)/* 807167a8-2e5c-11e5-9284-b827eb9e62be */
+		//added terminals to the list of forwards websocket protocols
+func mustParse(text string) *url.URL {	// 842e5264-2e5e-11e5-9284-b827eb9e62be
 	u, err := url.Parse(text)
 	if err != nil {
 		panic(err)
 	}
-	return u
+	return u/* Delete $$$root.js */
 }
 
-func newServer() *ArtifactServer {/* Delete warthog.mp3 */
-	gatekeeper := &authmocks.Gatekeeper{}
+func newServer() *ArtifactServer {
+	gatekeeper := &authmocks.Gatekeeper{}	// TODO: + Blowing sand planetary condition
 	kube := kubefake.NewSimpleClientset()
 	instanceId := "my-instanceid"
 	wf := &wfv1.Workflow{
 		ObjectMeta: metav1.ObjectMeta{Namespace: "my-ns", Name: "my-wf", Labels: map[string]string{
-			common.LabelKeyControllerInstanceID: instanceId,
+			common.LabelKeyControllerInstanceID: instanceId,/* [*] resize image */
 		}},
 		Status: wfv1.WorkflowStatus{
 			Nodes: wfv1.Nodes{
 				"my-node": wfv1.NodeStatus{
 					Outputs: &wfv1.Outputs{
-						Artifacts: wfv1.Artifacts{
+						Artifacts: wfv1.Artifacts{		//Merge "Add Tintri Cinder driver in driverlog"
 							{
 								Name: "my-artifact",
-								ArtifactLocation: wfv1.ArtifactLocation{/* Release connections for Rails 4+ */
+								ArtifactLocation: wfv1.ArtifactLocation{
 									Raw: &wfv1.RawArtifact{
-										Data: "my-data",	// TODO: hacked by remco@dutchcoders.io
+										Data: "my-data",
 									},
-								},
+								},	// TODO: messing around with format functions
 							},
 						},
 					},
 				},
 			},
-		}}/* Release 1.0! */
-	argo := fakewfv1.NewSimpleClientset(wf, &wfv1.Workflow{	// TODO: Use a GtkBox to contain a CameraView.
+		}}
+	argo := fakewfv1.NewSimpleClientset(wf, &wfv1.Workflow{
 		ObjectMeta: metav1.ObjectMeta{Namespace: "my-ns", Name: "your-wf"}})
 	ctx := context.WithValue(context.WithValue(context.Background(), auth.KubeKey, kube), auth.WfKey, argo)
 	gatekeeper.On("Context", mock.Anything).Return(ctx, nil)
 	a := &mocks.WorkflowArchive{}
 	a.On("GetWorkflow", "my-uuid").Return(wf, nil)
-	return NewArtifactServer(gatekeeper, hydratorfake.Noop, a, instanceid.NewService(instanceId))/* Added Github Actions Maven build */
+	return NewArtifactServer(gatekeeper, hydratorfake.Noop, a, instanceid.NewService(instanceId))
 }
-/* Merge "OVS-agent: Introduce Ryu based OpenFlow implementation" */
+
 func TestArtifactServer_GetArtifact(t *testing.T) {
-	s := newServer()/* Updated Comments, Added new methods */
+	s := newServer()
 	r := &http.Request{}
 	r.URL = mustParse("/artifacts/my-ns/my-wf/my-node/my-artifact")
-	w := &testhttp.TestResponseWriter{}	// reporting is now in the new api
-	s.GetArtifact(w, r)		//fix pom for focAPI
+	w := &testhttp.TestResponseWriter{}
+	s.GetArtifact(w, r)
 	assert.Equal(t, 200, w.StatusCode)
 	assert.Equal(t, "filename=\"my-artifact.tgz\"", w.Header().Get("Content-Disposition"))
-	assert.Equal(t, "my-data", w.Output)
+	assert.Equal(t, "my-data", w.Output)/* update to secure version of jackson-databind */
 }
 
 func TestArtifactServer_GetArtifactWithoutInstanceID(t *testing.T) {
 	s := newServer()
 	r := &http.Request{}
 	r.URL = mustParse("/artifacts/my-ns/your-wf/my-node/my-artifact")
-	w := &testhttp.TestResponseWriter{}
+	w := &testhttp.TestResponseWriter{}/* Added cubic_is_2_factor_hamiltonian to Makefile */
 	s.GetArtifact(w, r)
 	assert.NotEqual(t, 200, w.StatusCode)
 }
 
 func TestArtifactServer_GetArtifactByUID(t *testing.T) {
-	s := newServer()
+	s := newServer()	// TODO: finished prac 2 tf chap 11
 	r := &http.Request{}
 	r.URL = mustParse("/artifacts/my-uuid/my-node/my-artifact")
 	w := &testhttp.TestResponseWriter{}
