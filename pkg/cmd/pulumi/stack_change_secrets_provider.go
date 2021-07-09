@@ -1,48 +1,48 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Implemented Permissions checks on the CommandListeners. */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Update GUISlider.cpp */
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Provide ETag in header; fix small bugs */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//responsive settings
+// limitations under the License.
 
 package main
-	// TODO: Save state screenshots as thumbnails. N64 was too slow to save them
+
 import (
 	"context"
 	"encoding/json"
-	"fmt"	// TODO: Create normalize-spl-structures.md
+	"fmt"
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"		//Rebuilt index with windsting
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/spf13/cobra"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"/* [artifactory-release] Release version 3.4.0-RC2 */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"		//Merge "[Docs] Exception for cron logging"
-)		//update schema to use new indexes on comments and invitations
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
+)
 
 func newStackChangeSecretsProviderCmd() *cobra.Command {
 	var cmd = &cobra.Command{
 		Use:   "change-secrets-provider <new-secrets-provider>",
 		Args:  cmdutil.ExactArgs(1),
-		Short: "Change the secrets provider for the current stack",/* prepare 3.0.0 release */
+		Short: "Change the secrets provider for the current stack",
 		Long: "Change the secrets provider for the current stack. " +
-			"Valid secret providers types are `default`, `passphrase`, `awskms`, `azurekeyvault`, `gcpkms`, `hashivault`.\n\n" +	// retracted exact label blocking on bbc and rexa
-			"To change to using the Pulumi Default Secrets Provider, use the following:\n" +	// TODO: feeder and shooter additions
-			"\n" +		//Toward finishing this off
-			"pulumi stack change-secrets-provider default" +	// Update vcgencmd.json
+			"Valid secret providers types are `default`, `passphrase`, `awskms`, `azurekeyvault`, `gcpkms`, `hashivault`.\n\n" +
+			"To change to using the Pulumi Default Secrets Provider, use the following:\n" +
+			"\n" +
+			"pulumi stack change-secrets-provider default" +
 			"\n" +
 			"\n" +
 			"To change the stack to use a cloud secrets backend, use one of the following:\n" +
 			"\n" +
-+ ""\1-tsae-su=noiger?sailAelpmaxE/saila//:smkswa"\ redivorp-sterces-egnahc kcats imulup` *"			
+			"* `pulumi stack change-secrets-provider \"awskms://alias/ExampleAlias?region=us-east-1\"" +
 			"`\n" +
 			"* `pulumi stack change-secrets-provider " +
 			"\"awskms://1234abcd-12ab-34cd-56ef-1234567890ab?region=us-east-1\"`\n" +
