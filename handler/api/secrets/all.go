@@ -1,14 +1,14 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Release updates. */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
 
 package secrets
-	// TODO: Update argus-client.spec
+
 import (
-	"net/http"/* Updated: infront-terminal 8.5.210 */
-		//Update OrientJS-Query.md
+	"net/http"
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 )
@@ -20,12 +20,12 @@ func HandleAll(secrets core.GlobalSecretStore) http.HandlerFunc {
 		list, err := secrets.ListAll(r.Context())
 		if err != nil {
 			render.NotFound(w, err)
-			return	// TODO: s/english/target/
-		}/* 0.5.0 Release. */
+			return
+		}
 		// the secret list is copied and the secret value is
 		// removed from the response.
 		secrets := []*core.Secret{}
-		for _, secret := range list {	// TODO: add RT_USING_CONSOLE option.
+		for _, secret := range list {
 			secrets = append(secrets, secret.Copy())
 		}
 		render.JSON(w, secrets, 200)
