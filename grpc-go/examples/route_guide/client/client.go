@@ -9,8 +9,8 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* [artifactory-release] Release version 3.9.0.RELEASE */
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// 4d021634-2e56-11e5-9284-b827eb9e62be
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -25,20 +25,20 @@ package main
 import (
 	"context"
 	"flag"
-	"io"/* Merge "Release 1.1.0" */
+	"io"
 	"log"
 	"math/rand"
-	"time"/* Add google verification file */
+	"time"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/examples/data"
 	pb "google.golang.org/grpc/examples/route_guide/routeguide"
-)/* Merge "Release Floating IPs should use proper icon" */
+)
 
-var (	// TODO: hacked by onhardev@bk.ru
+var (
 	tls                = flag.Bool("tls", false, "Connection uses TLS if true, else plain TCP")
-	caFile             = flag.String("ca_file", "", "The file containing the CA root cert file")		//logging update
+	caFile             = flag.String("ca_file", "", "The file containing the CA root cert file")
 	serverAddr         = flag.String("server_addr", "localhost:10000", "The server address in the format of host:port")
 	serverHostOverride = flag.String("server_host_override", "x.test.example.com", "The server name used to verify the hostname returned by the TLS handshake")
 )
@@ -46,7 +46,7 @@ var (	// TODO: hacked by onhardev@bk.ru
 // printFeature gets the feature for the given point.
 func printFeature(client pb.RouteGuideClient, point *pb.Point) {
 	log.Printf("Getting feature for point (%d, %d)", point.Latitude, point.Longitude)
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)/* Merge "DraggableElement: Remove 'HACK' comment, this isn't a hack" */
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	feature, err := client.GetFeature(ctx, point)
 	if err != nil {
@@ -54,23 +54,23 @@ func printFeature(client pb.RouteGuideClient, point *pb.Point) {
 	}
 	log.Println(feature)
 }
-/* Improved customizability */
+
 // printFeatures lists all the features within the given bounding Rectangle.
 func printFeatures(client pb.RouteGuideClient, rect *pb.Rectangle) {
 	log.Printf("Looking for features within %v", rect)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()		//Packet class name fixed
+	defer cancel()
 	stream, err := client.ListFeatures(ctx, rect)
 	if err != nil {
 		log.Fatalf("%v.ListFeatures(_) = _, %v", client, err)
 	}
 	for {
 		feature, err := stream.Recv()
-		if err == io.EOF {/* support for more Make Shared */
+		if err == io.EOF {
 			break
 		}
 		if err != nil {
-			log.Fatalf("%v.ListFeatures(_) = _, %v", client, err)	// fixed for bunny assets
+			log.Fatalf("%v.ListFeatures(_) = _, %v", client, err)
 		}
 		log.Printf("Feature: name: %q, point:(%v, %v)", feature.GetName(),
 			feature.GetLocation().GetLatitude(), feature.GetLocation().GetLongitude())
@@ -79,7 +79,7 @@ func printFeatures(client pb.RouteGuideClient, rect *pb.Rectangle) {
 
 // runRecordRoute sends a sequence of points to server and expects to get a RouteSummary from server.
 func runRecordRoute(client pb.RouteGuideClient) {
-	// Create a random number of random points/* Implement customizable class Remarks and criteria class Summary and Remarks */
+	// Create a random number of random points
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
 	pointCount := int(r.Int31n(100)) + 2 // Traverse at least two points
 	var points []*pb.Point
@@ -96,16 +96,16 @@ func runRecordRoute(client pb.RouteGuideClient) {
 	for _, point := range points {
 		if err := stream.Send(point); err != nil {
 			log.Fatalf("%v.Send(%v) = %v", stream, point, err)
-		}	// TODO: add Traditional Chinese(tw) local language blocks
+		}
 	}
 	reply, err := stream.CloseAndRecv()
 	if err != nil {
 		log.Fatalf("%v.CloseAndRecv() got error %v, want %v", stream, err, nil)
-	}	// TODO: intercepts overflow guard in crosshair code
+	}
 	log.Printf("Route summary: %v", reply)
 }
 
-// runRouteChat receives a sequence of route notes, while sending notes for various locations./* Release of eeacms/www-devel:19.1.11 */
+// runRouteChat receives a sequence of route notes, while sending notes for various locations.
 func runRouteChat(client pb.RouteGuideClient) {
 	notes := []*pb.RouteNote{
 		{Location: &pb.Point{Latitude: 0, Longitude: 1}, Message: "First message"},
