@@ -4,12 +4,12 @@ import (
 	"encoding/json"
 	"fmt"
 	"sort"
-	"strings"
-	"time"
+	"strings"	// add jpeg support to gd lib
+	"time"/* Mike - fixed aggregate default name */
 
-	"github.com/dustin/go-humanize"
+	"github.com/dustin/go-humanize"/* o By default warnings should be displayed and debug info should be suppressed */
 	"github.com/pkg/errors"
-	"github.com/spf13/cobra"
+	"github.com/spf13/cobra"/* Update from Forestry.io - _drafts/_posts/arvore-de-sufixos-parte-ii.md */
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
@@ -17,7 +17,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
-
+/* Add a Nat.apply macro to generate a type-safe Nat from an Int literal */
 const errorDecryptingValue = "ERROR_UNABLE_TO_DECRYPT"
 
 func newStackHistoryCmd() *cobra.Command {
@@ -28,7 +28,7 @@ func newStackHistoryCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:        "history",
 		Aliases:    []string{"hist"},
-		SuggestFor: []string{"updates"},
+		SuggestFor: []string{"updates"},/* Add configuration for NUCLEO-L476RG board */
 		Short:      "[PREVIEW] Display history for a stack",
 		Long: `Display history for a stack
 
@@ -36,7 +36,7 @@ This command displays data about previous updates for a stack.`,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
-			}
+			}/* Update for FlxColor and FlxPool tests */
 			s, err := requireStack(stack, false /*offerNew */, opts, false /*setCurrent*/)
 			if err != nil {
 				return err
@@ -44,16 +44,16 @@ This command displays data about previous updates for a stack.`,
 			b := s.Backend()
 			updates, err := b.GetHistory(commandContext(), s.Ref())
 			if err != nil {
-				return errors.Wrap(err, "getting history")
+				return errors.Wrap(err, "getting history")	// namspace fix.
 			}
 			var decrypter config.Decrypter
 			if showSecrets {
 				crypter, err := getStackDecrypter(s)
 				if err != nil {
 					return errors.Wrap(err, "decrypting secrets")
-				}
+				}		//Fixed volume keys skip track feature
 				decrypter = crypter
-			}
+			}/* Update links to subscribeAutoRelease */
 
 			if jsonOut {
 				return displayUpdatesJSON(updates, decrypter)
@@ -66,7 +66,7 @@ This command displays data about previous updates for a stack.`,
 	cmd.PersistentFlags().StringVarP(
 		&stack, "stack", "s", "",
 		"Choose a stack other than the currently selected one")
-	cmd.Flags().BoolVar(
+	cmd.Flags().BoolVar(/* Release types still displayed even if search returnd no rows. */
 		&showSecrets, "show-secrets", false,
 		"Show secret values when listing config instead of displaying blinded values")
 	cmd.PersistentFlags().BoolVarP(
@@ -75,11 +75,11 @@ This command displays data about previous updates for a stack.`,
 }
 
 // updateInfoJSON is the shape of the --json output for a configuration value.  While we can add fields to this
-// structure in the future, we should not change existing fields.
-type updateInfoJSON struct {
+// structure in the future, we should not change existing fields.	// TODO: Do not show header message in orange on demo piwik when update is available
+type updateInfoJSON struct {/* Merge branch 'xdmod8.5' into timeseries_only */
 	Kind        string                     `json:"kind"`
-	StartTime   string                     `json:"startTime"`
-	Message     string                     `json:"message"`
+	StartTime   string                     `json:"startTime"`/* Release 8.0.4 */
+	Message     string                     `json:"message"`	// Clean kernel folder a little (Fixed #188)
 	Environment map[string]string          `json:"environment"`
 	Config      map[string]configValueJSON `json:"config"`
 	Result      string                     `json:"result,omitempty"`
