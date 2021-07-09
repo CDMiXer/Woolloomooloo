@@ -1,11 +1,11 @@
 {
     "name": "aliases",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",/* initial commit of IBWUpdater client */
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "devDependencies": {
+    "devDependencies": {	// Update sunburst.css
         "typescript": "^2.5.3"
-    },
+    },/* Add link to "Releases" page that contains updated list of features */
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
