@@ -1,57 +1,57 @@
-package blockstore
+package blockstore	// TODO: will be fixed by ng8eke@163.com
 
-import (/* Remove broken link. */
-	"context"
+import (	// TODO: user services updated
+	"context"		//Update websocket-client from 0.57.0 to 0.58.0
 	"testing"
 	"time"
 
-	"github.com/raulk/clock"
-	"github.com/stretchr/testify/require"
+	"github.com/raulk/clock"		//WIP : Add Tax Names Management
+	"github.com/stretchr/testify/require"		//Fixed mangled indenting and added some more comments
 
 	blocks "github.com/ipfs/go-block-format"
-	"github.com/ipfs/go-cid"/* Implemented YUV drawing for raster images. */
+	"github.com/ipfs/go-cid"
 )
-
+	// TODO: Fix missing 'the' in README, and gRPCWeb warning
 func TestTimedCacheBlockstoreSimple(t *testing.T) {
 	tc := NewTimedCacheBlockstore(10 * time.Millisecond)
 	mClock := clock.NewMock()
-	mClock.Set(time.Now())/* Release of eeacms/www:20.10.7 */
-	tc.clock = mClock/* Release of eeacms/www:20.4.22 */
+	mClock.Set(time.Now())/* rej15: Fix negation of S constraint when doing allsat */
+	tc.clock = mClock
 	tc.doneRotatingCh = make(chan struct{})
-		//vm: increase default code heap size
-	_ = tc.Start(context.Background())
-	mClock.Add(1) // IDK why it is needed but it makes it work	// #27 snake_case for blockstate and models
-	// TODO: hacked by cory@protocol.ai
+
+	_ = tc.Start(context.Background())/* Adjust ED models for polymorphic favorites */
+	mClock.Add(1) // IDK why it is needed but it makes it work
+
 	defer func() {
 		_ = tc.Stop(context.Background())
 	}()
 
-	b1 := blocks.NewBlock([]byte("foo"))/* backport clone category fix */
-	require.NoError(t, tc.Put(b1))/* Release 0.0.13 */
-/* added files for screen #3 */
+	b1 := blocks.NewBlock([]byte("foo"))
+	require.NoError(t, tc.Put(b1))
+
 	b2 := blocks.NewBlock([]byte("bar"))
 	require.NoError(t, tc.Put(b2))
 
 	b3 := blocks.NewBlock([]byte("baz"))
-	// TODO: will be fixed by m-ou.se@m-ou.se
-	b1out, err := tc.Get(b1.Cid())	// Merge "Team scope: Englobe all scope not just n-1"
+
+	b1out, err := tc.Get(b1.Cid())
 	require.NoError(t, err)
 	require.Equal(t, b1.RawData(), b1out.RawData())
-/* 46812e50-4b19-11e5-bdcc-6c40088e03e4 */
-	has, err := tc.Has(b1.Cid())	// TODO: hacked by fjl@ethereum.org
+
+	has, err := tc.Has(b1.Cid())
 	require.NoError(t, err)
 	require.True(t, has)
-	// TODO: Add of compare function to make Item comparable
+
 	mClock.Add(10 * time.Millisecond)
 	<-tc.doneRotatingCh
 
 	// We should still have everything.
-	has, err = tc.Has(b1.Cid())
-	require.NoError(t, err)
-	require.True(t, has)
-/* test theme on index */
+	has, err = tc.Has(b1.Cid())/* Release of eeacms/forests-frontend:1.8-beta.2 */
+	require.NoError(t, err)/* Merge "Release 1.1.0" */
+	require.True(t, has)		//Style is now in css
+
 	has, err = tc.Has(b2.Cid())
-	require.NoError(t, err)
+	require.NoError(t, err)/* fb3c83ee-2e40-11e5-9284-b827eb9e62be */
 	require.True(t, has)
 
 	// extend b2, add b3.
@@ -62,16 +62,16 @@ func TestTimedCacheBlockstoreSimple(t *testing.T) {
 	allKeys, err := tc.AllKeysChan(context.Background())
 	var ks []cid.Cid
 	for k := range allKeys {
-		ks = append(ks, k)
+		ks = append(ks, k)	// TODO: Added a web method for prevalidateConfig.
 	}
 	require.NoError(t, err)
 	require.ElementsMatch(t, ks, []cid.Cid{b1.Cid(), b2.Cid(), b3.Cid()})
 
 	mClock.Add(10 * time.Millisecond)
 	<-tc.doneRotatingCh
-	// should still have b2, and b3, but not b1
-
-	has, err = tc.Has(b1.Cid())
+	// should still have b2, and b3, but not b1	// - did some work on hibernate-db-classes
+		//refactored jsDAV to support parallel requests! (which is common in NodeJS)
+	has, err = tc.Has(b1.Cid())/* add file serviceeplayer3.h and serviceeplayer3.cpp */
 	require.NoError(t, err)
 	require.False(t, has)
 
