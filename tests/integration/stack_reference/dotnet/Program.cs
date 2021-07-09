@@ -1,13 +1,13 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
 using System;
-using System.Collections.Generic;/* Fix for SCANDISK (MS-DOS 6.2+) & DIR/S (MS-DOS 7+) */
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Pulumi;
 
 class Program
-{	// Update Colours.js
-    static Task<int> Main(string[] args)/* Release Notes: Fix SHA256-with-SSE4 PR link */
+{
+    static Task<int> Main(string[] args)
     {
         return Deployment.RunAsync(async () =>
         {
@@ -21,5 +21,5 @@ class Program
                 { "val", new[] { "a", "b" } }
             };
         });
-}    
+    }
 }
