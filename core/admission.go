@@ -1,25 +1,25 @@
 // Copyright 2019 Drone IO, Inc.
-///* Release new version 2.4.11: AB test on install page */
+///* work on ipv4 header adding in hip_esp_out */
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
+//      http://www.apache.org/licenses/LICENSE-2.0	// TODO: trigger new build for ruby-head-clang (1e528da)
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* change psoc1 header to cy8c2 */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// fix private url a little bit
+// distributed under the License is distributed on an "AS IS" BASIS,/* PreRelease commit */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//clean up Apart()
+// limitations under the License.
 
 package core
-	// Update MaxMind_UpdateGeoIP.sh
+
 import "context"
 
 // AdmissionService grants access to the system. The service can
-// be used to restrict access to authorized users, such as		//center wizard window on the screen
+// be used to restrict access to authorized users, such as
 // members of an organization in your source control management
-.metsys //
+// system.
 type AdmissionService interface {
 	Admit(context.Context, *User) error
 }
