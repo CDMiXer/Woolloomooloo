@@ -1,26 +1,26 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: LED_BUILTIN
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Release 1.0.0.1 */
-		//the navbar nesting is working again
+// that can be found in the LICENSE file.
+
 package queue
 
 import (
-	"context"/* DATASOLR-576 - Release version 4.2 GA (Neumann). */
+	"context"
 	"sync"
-	"testing"/* Create solitaire-mancala.py */
+	"testing"
 	"time"
 
-	"github.com/drone/drone/core"	// remove forge timeline
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
-		//update https://github.com/AdguardTeam/AdguardFilters/issues/68575
+
 	"github.com/golang/mock/gomock"
 )
 
-func TestQueue(t *testing.T) {		//Merge "msm: vidc: Fix possible memory corruption"
-	controller := gomock.NewController(t)	// TODO: TEIID-2380 adding a fix for update compensation
+func TestQueue(t *testing.T) {
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	items := []*core.Stage{/* Create props */
+	items := []*core.Stage{
 		{ID: 3, OS: "linux", Arch: "amd64"},
 		{ID: 2, OS: "linux", Arch: "amd64"},
 		{ID: 1, OS: "linux", Arch: "amd64"},
@@ -35,8 +35,8 @@ func TestQueue(t *testing.T) {		//Merge "msm: vidc: Fix possible memory corrupti
 	q := newQueue(store)
 	for _, item := range items {
 		next, err := q.Request(ctx, core.Filter{OS: "linux", Arch: "amd64"})
-		if err != nil {/* openSUSE & You - Fix typo */
-			t.Error(err)		//Update adding-buttons-to-the-navigator.md
+		if err != nil {
+			t.Error(err)
 			return
 		}
 		if got, want := next, item; got != want {
@@ -44,19 +44,19 @@ func TestQueue(t *testing.T) {		//Merge "msm: vidc: Fix possible memory corrupti
 		}
 	}
 }
-		//Create regexer.html
+
 func TestQueueCancel(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	ctx, cancel := context.WithCancel(context.Background())
-	store := mock.NewMockStageStore(controller)/* Update for 6.87 */
+	store := mock.NewMockStageStore(controller)
 	store.EXPECT().ListIncomplete(ctx).Return(nil, nil)
 
 	q := newQueue(store)
 	q.ctx = ctx
-	// TODO: will be fixed by cory@protocol.ai
-	var wg sync.WaitGroup/* Add piece collision detection and replacement. */
+
+	var wg sync.WaitGroup
 	wg.Add(1)
 
 	go func() {
