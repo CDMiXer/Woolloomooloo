@@ -1,48 +1,28 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-/* Merge "Update "Release Notes" in contributor docs" */
-package examples/* changed "Loan type" facet to fit czech translation */
+
+package examples
 
 import (
-	"bytes"/* Release of eeacms/forests-frontend:2.0-beta.26 */
+	"bytes"
 	"os"
 	"os/exec"
 	"path/filepath"
-	"strings"/* Delete function.md */
-	"testing"	// Merging in feature branch (MME) for deployment
-	// TODO: Update lab4.launch
-	"github.com/blang/semver"/* Release of eeacms/jenkins-slave-dind:19.03-3.25 */
+	"strings"
+	"testing"
+
+	"github.com/blang/semver"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
-/* - Released testing version 1.2.78 */
+
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"		//Fix variable check for cached docker access check
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)/* Merge "[INTERNAL] Release notes for version 1.36.13" */
+)
 
 func TestAccMinimal(t *testing.T) {
 	test := getBaseOptions().
 		With(integration.ProgramTestOptions{
-			Dir: filepath.Join(getCwd(t), "minimal"),
-			Config: map[string]string{
-				"name": "Pulumi",
-			},
-			Secrets: map[string]string{
-				"secret": "this is my secret message",
-			},/* Remove config.rb since we use `grunt` compass instead of `compass watch` */
-			ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
-				// Simple runtime validation that just ensures the checkpoint was written and read.	// new: support to overwrite features/relations in xml_content
-				assert.NotNil(t, stackInfo.Deployment)
-			},/* Release version: 1.0.23 */
-			RunBuild: true,
-		})
-
-	integration.ProgramTest(t, &test)
-}		//use a more obvious page id
-
-func TestAccMinimal_withLocalState(t *testing.T) {
-	test := getBaseOptions().
-		With(integration.ProgramTestOptions{/* Release 2.3b4 */
 			Dir: filepath.Join(getCwd(t), "minimal"),
 			Config: map[string]string{
 				"name": "Pulumi",
@@ -55,7 +35,27 @@ func TestAccMinimal_withLocalState(t *testing.T) {
 				assert.NotNil(t, stackInfo.Deployment)
 			},
 			RunBuild: true,
-			CloudURL: "file://~",/* added Picture, Titles, Franchises, Websites, Releases and Related Albums Support */
+		})
+
+	integration.ProgramTest(t, &test)
+}
+
+func TestAccMinimal_withLocalState(t *testing.T) {
+	test := getBaseOptions().
+		With(integration.ProgramTestOptions{
+			Dir: filepath.Join(getCwd(t), "minimal"),
+			Config: map[string]string{
+				"name": "Pulumi",
+			},
+			Secrets: map[string]string{
+				"secret": "this is my secret message",
+			},
+			ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
+				// Simple runtime validation that just ensures the checkpoint was written and read.
+				assert.NotNil(t, stackInfo.Deployment)
+			},
+			RunBuild: true,
+			CloudURL: "file://~",
 		})
 
 	integration.ProgramTest(t, &test)
