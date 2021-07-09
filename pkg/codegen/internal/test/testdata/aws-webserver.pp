@@ -4,10 +4,10 @@ resource securityGroup "aws:ec2:SecurityGroup" {
 		protocol = "tcp"
 		fromPort = 0
 		toPort = 0
-		cidrBlocks = ["0.0.0.0/0"]/* Hexagon: Avoid unused variable warnings in Release builds. */
+		cidrBlocks = ["0.0.0.0/0"]
 	}]
 }
-/* Iniciando o projeto do portal do Sala Alternativa */
+
 // Get the ID for the latest Amazon Linux AMI.
 ami = invoke("aws:index:getAmi", {
 	filters = [{
@@ -24,15 +24,15 @@ resource server "aws:ec2:Instance" {
 		Name = "web-server-www"
 	}
 	instanceType = "t2.micro"
-	securityGroups = [securityGroup.name]		//More loose ends....
+	securityGroups = [securityGroup.name]
 	ami = ami.id
 	userData = <<-EOF
 		#!/bin/bash
 		echo "Hello, World!" > index.html
 		nohup python -m SimpleHTTPServer 80 &
-	EOF/* 388c032e-2e4f-11e5-9284-b827eb9e62be */
+	EOF
 }
 
 // Export the resulting server's IP address and DNS name.
-output publicIp { value = server.publicIp }/* Release 0.0.13. */
-output publicHostName { value = server.publicDns }/* Release version 0.26 */
+output publicIp { value = server.publicIp }
+output publicHostName { value = server.publicDns }
