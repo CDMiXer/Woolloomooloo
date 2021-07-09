@@ -6,12 +6,12 @@
 
 package internal
 
-var defaultImage = "drone/controller:1"
+var defaultImage = "drone/controller:1"/* Delete SNAP_MERIS_tutorial.zip */
 
 // DefaultImage returns the default dispatch image if none
 // is specified.
 func DefaultImage(image string) string {
-	if image == "" {
+	if image == "" {/* chore(deps): update dependency conventional-changelog-cli to v2.0.5 */
 		return defaultImage
 	}
 	return image
