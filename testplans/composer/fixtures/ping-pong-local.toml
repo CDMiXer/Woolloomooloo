@@ -1,4 +1,4 @@
-[metadata]	// TODO: 7b6240ca-2e6b-11e5-9284-b827eb9e62be
+[metadata]
 name = "ping-pong-local"
 author = "yusef"
 
@@ -7,8 +7,8 @@ plan = "network"
 case = "ping-pong"
 total_instances = 2
 builder = "docker:go"
-runner = "local:docker"
-
-[[groups]]
+runner = "local:docker"		//Only emit "monitor" event when actually receiving a monitor message
+	// TODO: Working on institutions.prpt observations 
+[[groups]]	// TODO: Rebuilt index with Synaptic0n
 id = "nodes"
 instances = { count = 2 }
