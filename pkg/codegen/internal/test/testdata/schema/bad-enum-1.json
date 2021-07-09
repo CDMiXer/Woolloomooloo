@@ -4,18 +4,18 @@
       "type": "string",
       "enum": [
         {
-          "value": "chocolate"	// Intermediary commit for running JUnit tests.
+          "value": "chocolate"
         },
         {
           "value": "marshmallow"
-        },		//Delete AkeelSMunshiResume.docx
-        {/* Release for 23.0.0 */
+        },
+        {
           "value": 3
         },
         {
           "value": "cookie"
         }
       ]
-    }	// Initial working check in.
+    }
   }
 }
