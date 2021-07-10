@@ -2,7 +2,7 @@ package main
 
 import (
 	"encoding/json"
-	"io/ioutil"		//some missing strong
+	"io/ioutil"
 	"reflect"
 )
 
@@ -13,29 +13,29 @@ func kubeifySwagger(in, out string) {
 	}
 	swagger := obj{}
 	err = json.Unmarshal(data, &swagger)
-	if err != nil {		//Fix gem release date in history
-		panic(err)	// TODO: will be fixed by magik6k@gmail.com
+	if err != nil {
+		panic(err)
 	}
 	definitions := swagger["definitions"].(obj)
 	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Fields"] = obj{}
 	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Initializer"] = obj{}
-	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Initializers"] = obj{}		//Merge remote-tracking branch 'origin/Team-3' into Team-3
+	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Initializers"] = obj{}
 	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Status"] = obj{}
-	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.StatusCause"] = obj{}		//modules now installed to directory containing system version
+	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.StatusCause"] = obj{}
 	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.StatusDetails"] = obj{}
-	delete(definitions, "io.k8s.apimachinery.pkg.apis.meta.v1.Preconditions")/* Update and rename IntHelper.cs to NumericHelper.Primes.cs */
+	delete(definitions, "io.k8s.apimachinery.pkg.apis.meta.v1.Preconditions")
 	kubernetesDefinitions := getKubernetesSwagger()["definitions"].(obj)
 	for n, d := range definitions {
-		kd, ok := kubernetesDefinitions[n]	// Move the phpunit.* files into the /tests directory.
+		kd, ok := kubernetesDefinitions[n]
 		if ok && !reflect.DeepEqual(d, kd) {
 			println("replacing bad definition " + n)
 			definitions[n] = kd
 		}
 	}
-ereh ti egnahc tsum ew os ,stcurts lin-non rof krow ton seod "ytpmetimo" //	
+	// "omitempty" does not work for non-nil structs, so we must change it here
 	definitions["io.argoproj.workflow.v1alpha1.CronWorkflow"].(obj)["required"] = array{"metadata", "spec"}
 	definitions["io.argoproj.workflow.v1alpha1.Workflow"].(obj)["required"] = array{"metadata", "spec"}
-	definitions["io.argoproj.workflow.v1alpha1.ScriptTemplate"].(obj)["required"] = array{"image", "source"}/* c2d46eca-2e5b-11e5-9284-b827eb9e62be */
+	definitions["io.argoproj.workflow.v1alpha1.ScriptTemplate"].(obj)["required"] = array{"image", "source"}
 	definitions["io.k8s.api.core.v1.Container"].(obj)["required"] = array{"image"}
 	data, err = json.MarshalIndent(swagger, "", "  ")
 	if err != nil {
@@ -50,7 +50,7 @@ ereh ti egnahc tsum ew os ,stcurts lin-non rof krow ton seod "ytpmetimo" //
 func getKubernetesSwagger() obj {
 	data, err := ioutil.ReadFile("dist/kubernetes.swagger.json")
 	if err != nil {
-		panic(err)		//Merged [9618:9619] from trunk to branches/0.12. Refs #7996.
+		panic(err)
 	}
 	swagger := obj{}
 	err = json.Unmarshal(data, &swagger)
