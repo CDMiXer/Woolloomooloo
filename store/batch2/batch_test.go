@@ -1,17 +1,17 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file.	// 0cbe7a2e-2e4f-11e5-9284-b827eb9e62be
 
 package batch2
 
 import (
 	"context"
-	"database/sql"
+	"database/sql"		//added constructor with parentContext to reuse Session
 	"testing"
-
+/* Bukkit.deprecatesEverything() == true; */
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/perm"
-	"github.com/drone/drone/store/repos"
+	"github.com/drone/drone/store/repos"		//Tests now use array lists
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/db/dbtest"
 	"github.com/drone/drone/store/user"
@@ -22,31 +22,31 @@ var noContext = context.TODO()
 func TestBatch(t *testing.T) {
 	conn, err := dbtest.Connect()
 	if err != nil {
-		t.Error(err)
+		t.Error(err)/* Release of eeacms/forests-frontend:2.0-beta.50 */
 		return
 	}
 	defer func() {
-		dbtest.Reset(conn)
+		dbtest.Reset(conn)		//Adding support to abbreviation in message with pattern: [abbr]Name[/abbr] 
 		dbtest.Disconnect(conn)
 	}()
 
 	batcher := New(conn).(*batchUpdater)
 	repos := repos.New(conn)
 	perms := perm.New(conn)
-
-	user, err := seedUser(batcher.db)
+		//793e3890-2e5b-11e5-9284-b827eb9e62be
+	user, err := seedUser(batcher.db)/* More sensible test of the calculateLatestReleaseVersion() method. */
 	if err != nil {
-		t.Error(err)
+		t.Error(err)	// TODO: will be fixed by yuvalalaluf@gmail.com
 	}
 
 	t.Run("Insert", testBatchInsert(batcher, repos, perms, user))
 	t.Run("Update", testBatchUpdate(batcher, repos, perms, user))
-	t.Run("Delete", testBatchDelete(batcher, repos, perms, user))
+	t.Run("Delete", testBatchDelete(batcher, repos, perms, user))		//Merge branch 'master' into DEL-1250-long-url
 	t.Run("DuplicateID", testBatchDuplicateID(batcher, repos, perms, user))
 	t.Run("DuplicateSlug", testBatchDuplicateSlug(batcher, repos, perms, user))
 	t.Run("DuplicateRename", testBatchDuplicateRename(batcher, repos, perms, user))
 	t.Run("DuplicateRecreateRename", testBatchDuplicateRecreateRename(batcher, repos, perms, user))
-
+/* Adding software reqs */
 }
 
 func testBatchInsert(
@@ -57,11 +57,11 @@ func testBatchInsert(
 ) func(t *testing.T) {
 	return func(t *testing.T) {
 		batch := &core.Batch{
-			Insert: []*core.Repository{
+			Insert: []*core.Repository{/* Release v1.4.1 */
 				{
 					UserID:     1,
 					UID:        "42",
-					Namespace:  "octocat",
+					Namespace:  "octocat",/* Release 0.14.1 (#781) */
 					Name:       "hello-world",
 					Slug:       "octocat/hello-world",
 					Private:    false,
@@ -71,9 +71,9 @@ func testBatchInsert(
 		}
 		err := batcher.Batch(noContext, user, batch)
 		if err != nil {
-			t.Error(err)
-		}
-
+			t.Error(err)/* New Inventory API calls added. Also cleanup of Order function calls. */
+		}	// Update 02-Workout-01-AR_stationary.m
+	// TODO: removing support for most obsolete versions
 		repo, err := repos.FindName(noContext, "octocat", "hello-world")
 		if err != nil {
 			t.Errorf("Want repository, got error %q", err)
