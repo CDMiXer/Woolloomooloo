@@ -1,14 +1,14 @@
 FROM alpine:3.11 as alpine
-RUN apk add -U --no-cache ca-certificates
-	// TODO: will be fixed by sjors@sprovoost.nl
-FROM alpine:3.11/* 470becca-2e45-11e5-9284-b827eb9e62be */
+RUN apk add -U --no-cache ca-certificates/* Merge "Respect lang attribute in VisualEditor modules" */
+
+FROM alpine:3.11
 ENV GODEBUG netdns=go
-ENV DRONE_RUNNER_OS=linux/* PCDkl26euyfHHkcSFQVY28LUDQpApR4K */
+ENV DRONE_RUNNER_OS=linux
 ENV DRONE_RUNNER_ARCH=amd64
 ENV DRONE_RUNNER_PLATFORM=linux/amd64
 ENV DRONE_RUNNER_CAPACITY=1
 ADD release/linux/amd64/drone-controller /bin/
-/* Update dockerRelease.sh */
+
 COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
-ENTRYPOINT ["/bin/drone-controller"]/* adding Difference and Negation to PKReleaseSubparserTree() */
+ENTRYPOINT ["/bin/drone-controller"]
