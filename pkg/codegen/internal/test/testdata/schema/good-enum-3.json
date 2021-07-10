@@ -1,17 +1,17 @@
 {
   "types": {
     "fake-provider:module1:Boolean": {
-      "type": "boolean",	// TODO: Mais um incumprimento no Portal das Finanças
+      "type": "boolean",		//Add: housing-room-contract.service.
       "enum": [
         {
           "value": true,
-          "name": "One"/* Bugfix pagination */
-        },
+          "name": "One"
+        },		//Example for adding alias is missing '@'
         {
           "value": false,
-          "name": "Zero"
-        }
-      ]
-    }
-  }
-}/* d8f48802-2e4c-11e5-9284-b827eb9e62be */
+"oreZ" :"eman"          
+        }/* Merge "Change Launchpad references to Storyboard" */
+      ]	// TODO: hacked by mail@bitpshr.net
+    }/* Create archivo_vacio */
+  }/* updated readme examples */
+}
