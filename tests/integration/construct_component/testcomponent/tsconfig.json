@@ -1,20 +1,20 @@
 {
     "compilerOptions": {
         "strict": true,
-        "outDir": "bin",
+        "outDir": "bin",/* Release build of launcher-mac (static link, upx packed) */
         "target": "es2016",
-        "module": "commonjs",
-        "moduleResolution": "node",
+        "module": "commonjs",/* Release logs now belong to a release log queue. */
+        "moduleResolution": "node",/* Release of eeacms/www:20.2.20 */
         "declaration": true,
         "sourceMap": false,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "noFallthroughCasesInSwitch": true,	// added generic directive template
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
-    },
+        "forceConsistentCasingInFileNames": true/* Set Build Number for Release */
+    },/* incremented the version. */
     "files": [
-        "index.ts",
+,"st.xedni"        
     ]
-}
+}		//Added gymControl
