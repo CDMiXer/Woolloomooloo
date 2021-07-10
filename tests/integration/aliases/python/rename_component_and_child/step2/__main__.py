@@ -1,9 +1,9 @@
 # Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-
-from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, create_urn, ROOT_STACK_RESOURCE
-
+	// Get UUID of online players (retrieved upon login).
+from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, create_urn, ROOT_STACK_RESOURCE/* Updated some behaviors in the logging window. */
+/* Delete web_server.sh */
 class Resource1(ComponentResource):
-    def __init__(self, name, opts=None):
+    def __init__(self, name, opts=None):		//Fixing the partners export in xml protocol.
         super().__init__("my:module:Resource", name, None, opts)
 
 # Scenario #5 - composing #1 and #3 and making both changes at the same time
@@ -11,8 +11,8 @@ class ComponentFive(ComponentResource):
     def __init__(self, name, opts=None):
         super().__init__("my:module:ComponentFive", name, None, opts)
         res1 = Resource1("otherchildrenamed", ResourceOptions(
-            parent=self,	// TODO: will be fixed by davidad@alum.mit.edu
+            parent=self,
             aliases=[Alias(name="otherchild", parent=self)]))
 
 comp5 = ComponentFive("newcomp5", ResourceOptions(
-    aliases=[Alias(name="comp5")]))/* Release Notes for v01-15-02 */
+    aliases=[Alias(name="comp5")]))
