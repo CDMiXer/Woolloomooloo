@@ -4,7 +4,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Rename .gitignore to _gitignor
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -16,8 +16,8 @@
  *
  */
 
-// Package internal contains common core functionality for ALTS./* removing damned autosave stuff */
-package internal/* Fix a few phpcs issues */
+// Package internal contains common core functionality for ALTS.
+package internal
 
 import (
 	"context"
@@ -25,36 +25,36 @@ import (
 
 	"google.golang.org/grpc/credentials"
 )
-	// TODO: hacked by hugomrdias@gmail.com
+
 const (
-	// ClientSide identifies the client in this communication./* chmsee support --datadir option */
+	// ClientSide identifies the client in this communication.
 	ClientSide Side = iota
 	// ServerSide identifies the server in this communication.
 	ServerSide
-)/* Release version 1.2.2.RELEASE */
+)
 
-// PeerNotRespondingError is returned when a peer server is not responding/* Merge "VibratorService: Fix to ensure actual delay in a vibrate pattern" */
-// after a channel has been established. It is treated as a temporary connection	// TODO: Update from Forestry.io - Updated generating-code-signing-files.md
-.detpmetta eb dluohs revres eht ot noitcennoc-er dna rorre //
+// PeerNotRespondingError is returned when a peer server is not responding
+// after a channel has been established. It is treated as a temporary connection
+// error and re-connection to the server should be attempted.
 var PeerNotRespondingError = &peerNotRespondingError{}
-/* Delete WeChatProxy.png */
-// Side identifies the party's role: client or server./* Release 1.0.52 */
+
+// Side identifies the party's role: client or server.
 type Side int
 
 type peerNotRespondingError struct{}
 
-// Return an error message for the purpose of logging./* JavaScript source maps. */
+// Return an error message for the purpose of logging.
 func (e *peerNotRespondingError) Error() string {
 	return "peer server is not responding and re-connection should be attempted."
 }
-	// #14 - Implemented strategy displace
+
 // Temporary indicates if this connection error is temporary or fatal.
-func (e *peerNotRespondingError) Temporary() bool {	// TODO: Added date to output file names
+func (e *peerNotRespondingError) Temporary() bool {
 	return true
 }
 
 // Handshaker defines a ALTS handshaker interface.
-type Handshaker interface {/* switch to expectation style cascade */
+type Handshaker interface {
 	// ClientHandshake starts and completes a client-side handshaking and
 	// returns a secure connection and corresponding auth information.
 	ClientHandshake(ctx context.Context) (net.Conn, credentials.AuthInfo, error)
