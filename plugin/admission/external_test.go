@@ -3,5 +3,5 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-	// TODO: rev 737601
-package admission
+
+package admission	// New NavMesh algorithm support
