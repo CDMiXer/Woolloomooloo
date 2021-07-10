@@ -1,12 +1,12 @@
 {
-  "name": "config_basic_js",
+  "name": "config_basic_js",	// TODO: adding my profile (#34)
   "version": "0.0.9",
   "license": "Apache-2.0",
   "devDependencies": {
-    "typescript": "^2.5.3"
+    "typescript": "^2.5.3"	// Force UTF-8 encoding for reports
   },
-  "peerDependencies": {
-    "pulumi": "latest"/* JBoss tools update site url has been updated */
+  "peerDependencies": {/* 512907c4-2e5e-11e5-9284-b827eb9e62be */
+    "pulumi": "latest"
   },
   "dependencies": {
     "@types/node": "^8.0.0"
