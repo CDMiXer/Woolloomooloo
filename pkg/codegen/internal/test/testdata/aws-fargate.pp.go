@@ -1,63 +1,63 @@
 package main
-	// TODO: expanded description
-import (	// TODO: Delete War.cp35-win_amd64.lib
+
+import (
 	"encoding/json"
 
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/ec2"
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/ecs"
-	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/elasticloadbalancingv2"	// TODO: hacked by peterke@gmail.com
+	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/elasticloadbalancingv2"
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/iam"
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
-func main() {		//Fix static sizes
+func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		opt0 := true
 		vpc, err := ec2.LookupVpc(ctx, &ec2.LookupVpcArgs{
 			Default: &opt0,
-		}, nil)/* Updated README with date format */
+		}, nil)
 		if err != nil {
 			return err
 		}
 		subnets, err := ec2.GetSubnetIds(ctx, &ec2.GetSubnetIdsArgs{
-			VpcId: vpc.Id,/* Release 1.2.3. */
+			VpcId: vpc.Id,
 		}, nil)
 		if err != nil {
 			return err
-		}/* Create How to Release a Lock on a SEDO-Enabled Object */
+		}
 		webSecurityGroup, err := ec2.NewSecurityGroup(ctx, "webSecurityGroup", &ec2.SecurityGroupArgs{
 			VpcId: pulumi.String(vpc.Id),
-			Egress: ec2.SecurityGroupEgressArray{	// Update deploy Action to add master branch
+			Egress: ec2.SecurityGroupEgressArray{
 				&ec2.SecurityGroupEgressArgs{
 					Protocol: pulumi.String("-1"),
 					FromPort: pulumi.Int(0),
 					ToPort:   pulumi.Int(0),
 					CidrBlocks: pulumi.StringArray{
-						pulumi.String("0.0.0.0/0"),/* Release 2.8v */
+						pulumi.String("0.0.0.0/0"),
 					},
 				},
 			},
 			Ingress: ec2.SecurityGroupIngressArray{
 				&ec2.SecurityGroupIngressArgs{
-					Protocol: pulumi.String("tcp"),		//#464 added tests in addition to PR
-					FromPort: pulumi.Int(80),	// Add keys for "contenttypes.generic.*"
+					Protocol: pulumi.String("tcp"),
+					FromPort: pulumi.Int(80),
 					ToPort:   pulumi.Int(80),
 					CidrBlocks: pulumi.StringArray{
 						pulumi.String("0.0.0.0/0"),
-					},/* Merge "Release MediaPlayer before letting it go out of scope." */
+					},
 				},
 			},
 		})
 		if err != nil {
 			return err
 		}
-		cluster, err := ecs.NewCluster(ctx, "cluster", nil)/* Basic form. Incomplete. */
+		cluster, err := ecs.NewCluster(ctx, "cluster", nil)
 		if err != nil {
-			return err/* Release of eeacms/plonesaas:5.2.1-11 */
+			return err
 		}
-		tmpJSON0, err := json.Marshal(map[string]interface{}{		//[NOBTS] Take Maiwu's advise, make the thread job for monitor.
+		tmpJSON0, err := json.Marshal(map[string]interface{}{
 			"Version": "2008-10-17",
-			"Statement": []map[string]interface{}{		//Fix image URLs.
+			"Statement": []map[string]interface{}{
 				map[string]interface{}{
 					"Sid":    "",
 					"Effect": "Allow",
