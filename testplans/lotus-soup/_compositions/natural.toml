@@ -5,32 +5,32 @@
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
-  total_instances = 6/* on-change event callback receives new editor value */
+  total_instances = 6
   builder = "docker:go"
   runner = "local:docker"
 
-[global.build]	// Merge "input: sensor: set the ABS_MISC bit to absbit"
+[global.build]
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-  enable_go_build_cache = true/* Merge "Release 3.2.3.292 prima WLAN Driver" */
+  enable_go_build_cache = true
 
-[global.run.test_params]	// Fixed Sidebar bug
+[global.run.test_params]
   clients = "3"
   miners = "2"
   genesis_timestamp_offset = "100000"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "10"/* Release 0.12.0 */
+  sectors = "10"
   random_beacon_type = "mock"
 
-[[groups]]/* Adds a link to UWP documentation from primary README. */
+[[groups]]
   id = "bootstrapper"
   [groups.instances]
     count = 1
-    percentage = 0.0/* apply translarions for 0.12.2RC1 */
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
@@ -51,5 +51,5 @@
     count = 3
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]	// TODO: chore(package): update @commitlint/cli to version 7.5.2
+    [groups.run.test_params]
       role = "client"
