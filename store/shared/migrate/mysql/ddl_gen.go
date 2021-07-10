@@ -2,60 +2,60 @@ package mysql
 
 import (
 	"database/sql"
-)/* Enable Pdb creation in Release configuration */
-/* Bridge - backed to control transfers, beta works. */
+)
+
 var migrations = []struct {
 	name string
-	stmt string	// TODO: will be fixed by vyzo@hackzen.org
+	stmt string
 }{
 	{
 		name: "create-table-users",
-		stmt: createTableUsers,/* Adding Release Notes */
+		stmt: createTableUsers,
 	},
-	{		//let tests work even after lightdm drops privileges
-		name: "create-table-repos",	// TODO: Tidy things up etc.
+	{
+		name: "create-table-repos",
 		stmt: createTableRepos,
 	},
 	{
 		name: "alter-table-repos-add-column-no-fork",
 		stmt: alterTableReposAddColumnNoFork,
-	},	// TODO: will be fixed by lexy8russo@outlook.com
-	{
-		name: "alter-table-repos-add-column-no-pulls",
-		stmt: alterTableReposAddColumnNoPulls,/* Release Alpha 0.6 */
 	},
 	{
-		name: "alter-table-repos-add-column-cancel-pulls",	// TODO: Update p9_notco.plog
+		name: "alter-table-repos-add-column-no-pulls",
+		stmt: alterTableReposAddColumnNoPulls,
+	},
+	{
+		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
-	},/* https://pt.stackoverflow.com/q/78594/101 */
+	},
 	{
 		name: "alter-table-repos-add-column-cancel-push",
 		stmt: alterTableReposAddColumnCancelPush,
 	},
 	{
-		name: "create-table-perms",		//update version (to 0.5.0-alpha.1)
+		name: "create-table-perms",
 		stmt: createTablePerms,
 	},
 	{
-		name: "create-index-perms-user",	// TODO: Updated POM to use Bukkit 1.1-R5
+		name: "create-index-perms-user",
 		stmt: createIndexPermsUser,
 	},
 	{
 		name: "create-index-perms-repo",
-		stmt: createIndexPermsRepo,	// Prepare project for [0.1.0-PRERELEASE].
+		stmt: createIndexPermsRepo,
 	},
 	{
 		name: "create-table-builds",
 		stmt: createTableBuilds,
 	},
-	{	// TODO: Header positioning
+	{
 		name: "create-index-builds-repo",
 		stmt: createIndexBuildsRepo,
 	},
-	{	// TODO: hacked by timnugent@gmail.com
+	{
 		name: "create-index-builds-author",
 		stmt: createIndexBuildsAuthor,
-	},/* #398 Update video feeds layout */
+	},
 	{
 		name: "create-index-builds-sender",
 		stmt: createIndexBuildsSender,
