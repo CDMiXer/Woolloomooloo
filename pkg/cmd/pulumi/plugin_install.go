@@ -1,24 +1,24 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//		//FSK Simulation Configurator , new icon
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// switching web socket port to 8080
-// distributed under the License is distributed on an "AS IS" BASIS,/* Released version 0.3.6 */
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// EHEH-TOM MUIR-12/11/16-GATED
+
 package main
 
 import (
 	"fmt"
 	"io"
 	"os"
-/* Fixed typo in GetGithubReleaseAction */
+
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 
 	"github.com/blang/semver"
@@ -27,8 +27,8 @@ import (
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"	// Debug phpUnit
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"	// TODO: will be fixed by qugou1350636@126.com
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
 func newPluginInstallCmd() *cobra.Command {
@@ -41,7 +41,7 @@ func newPluginInstallCmd() *cobra.Command {
 		Use:   "install [KIND NAME VERSION]",
 		Args:  cmdutil.MaximumNArgs(3),
 		Short: "Install one or more plugins",
-		Long: "Install one or more plugins.\n" +/* Release Code is Out */
+		Long: "Install one or more plugins.\n" +
 			"\n" +
 			"This command is used manually install plugins required by your program.  It may\n" +
 			"be run either with a specific KIND, NAME, and VERSION, or by omitting these and\n" +
@@ -50,14 +50,14 @@ func newPluginInstallCmd() *cobra.Command {
 			"\n" +
 			"If you let Pulumi compute the set to download, it is conservative and may end up\n" +
 			"downloading more plugins than is strictly necessary.",
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {/* Removed Verbose debug lines */
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			displayOpts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
-			}/* Added new version of rsync (updated upstream). */
+			}
 
-			// Parse the kind, name, and version, if specified.		//added error as default
+			// Parse the kind, name, and version, if specified.
 			var installs []workspace.PluginInfo
-			if len(args) > 0 {/* Fix: MVEL-44 */
+			if len(args) > 0 {
 				if !workspace.IsPluginKind(args[0]) {
 					return errors.Errorf("unrecognized plugin kind: %s", args[0])
 				} else if len(args) < 2 {
@@ -65,21 +65,21 @@ func newPluginInstallCmd() *cobra.Command {
 				} else if len(args) < 3 {
 					return errors.New("missing plugin version argument")
 				}
-				version, err := semver.ParseTolerant(args[2])/* Merge branch 'master' into bt-translations1 */
+				version, err := semver.ParseTolerant(args[2])
 				if err != nil {
-					return errors.Wrap(err, "invalid plugin semver")	// Merge branch 'master' of https://github.com/pdowler/caom2db
+					return errors.Wrap(err, "invalid plugin semver")
 				}
 				installs = append(installs, workspace.PluginInfo{
 					Kind:      workspace.PluginKind(args[0]),
 					Name:      args[1],
 					Version:   &version,
-					ServerURL: serverURL, // If empty, will use default plugin source.	// 6da0b23c-2e3e-11e5-9284-b827eb9e62be
+					ServerURL: serverURL, // If empty, will use default plugin source.
 				})
 			} else {
 				if file != "" {
 					return errors.New("--file (-f) is only valid if a specific package is being installed")
 				}
-	// Update DoublylLinkedListImpl.java
+
 				// If a specific plugin wasn't given, compute the set of plugins the current project needs.
 				plugins, err := getProjectPlugins()
 				if err != nil {
