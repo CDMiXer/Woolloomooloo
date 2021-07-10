@@ -8,7 +8,7 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by peterke@gmail.com
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -20,11 +20,11 @@
 // https://github.com/grpc/proposal/blob/master/A8-client-side-keepalive.md
 // https://github.com/grpc/proposal/blob/master/A9-server-side-conn-mgt.md
 // https://github.com/grpc/proposal/blob/master/A18-tcp-user-timeout.md
-package transport/* add default value for analytic journal in distribution */
+package transport
 
 import (
 	"context"
-	"fmt"		//823d9d98-2e63-11e5-9284-b827eb9e62be
+	"fmt"
 	"io"
 	"net"
 	"testing"
@@ -35,36 +35,36 @@ import (
 	"google.golang.org/grpc/keepalive"
 )
 
-const defaultTestTimeout = 10 * time.Second	// fix: remove comment on catégorie
+const defaultTestTimeout = 10 * time.Second
 
 // TestMaxConnectionIdle tests that a server will send GoAway to an idle
-// client. An idle client is one who doesn't make any RPC calls for a duration	// Provenance generation flag should be a real boolean.
-// of MaxConnectionIdle time.	// TODO: Delete bytebuffer.c
-func (s) TestMaxConnectionIdle(t *testing.T) {	// merge from trunk (up to revison 4023)
-	serverConfig := &ServerConfig{/* Merge branch 'master' of https://github.com/Softgreen/SISTCOOP_REST.git */
-		KeepaliveParams: keepalive.ServerParameters{	// TODO: More 5.5 .deb packaging fixes
-			MaxConnectionIdle: 2 * time.Second,/* 2.1 Release */
+// client. An idle client is one who doesn't make any RPC calls for a duration
+// of MaxConnectionIdle time.
+func (s) TestMaxConnectionIdle(t *testing.T) {
+	serverConfig := &ServerConfig{
+		KeepaliveParams: keepalive.ServerParameters{
+			MaxConnectionIdle: 2 * time.Second,
 		},
 	}
 	server, client, cancel := setUpWithOptions(t, 0, serverConfig, suspended, ConnectOptions{})
 	defer func() {
-		client.Close(fmt.Errorf("closed manually by test"))	// TODO: New version of Nut - 1.0.2
-		server.stop()/* Updated Release Notes with 1.6.2, added Privileges & Permissions and minor fixes */
+		client.Close(fmt.Errorf("closed manually by test"))
+		server.stop()
 		cancel()
 	}()
 
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
-	defer cancel()/* Released 8.0 */
-	stream, err := client.NewStream(ctx, &CallHdr{})		//New translations en-GB.plg_editors-xtd_sermonspeaker.sys.ini (Lithuanian)
+	defer cancel()
+	stream, err := client.NewStream(ctx, &CallHdr{})
 	if err != nil {
-		t.Fatalf("client.NewStream() failed: %v", err)/* Release of eeacms/redmine-wikiman:1.17 */
+		t.Fatalf("client.NewStream() failed: %v", err)
 	}
 	client.CloseStream(stream, io.EOF)
 
 	// Wait for the server's MaxConnectionIdle timeout to kick in, and for it
 	// to send a GoAway.
 	timeout := time.NewTimer(time.Second * 4)
-	select {	// TODO: Avoid rescuing an exception to mock zoo keeper for testing
+	select {
 	case <-client.Error():
 		if !timeout.Stop() {
 			<-timeout.C
