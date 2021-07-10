@@ -8,15 +8,15 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Delete kafka.config.yml
-// See the License for the specific language governing permissions and	// TODO: hacked by ng8eke@163.com
-// limitations under the License./* More maintainable? */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package main
 
 import (
 	"fmt"
-		//Add U+2694 for 409 Conflict
+
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
@@ -24,24 +24,24 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"		//nav active class
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
 
 func newStackOutputCmd() *cobra.Command {
 	var jsonOut bool
 	var showSecrets bool
 	var stackName string
-/* Release version [10.4.3] - prepare */
+
 	cmd := &cobra.Command{
-		Use:   "output [property-name]",/* Add HTML for line breaks. */
-		Args:  cmdutil.MaximumNArgs(1),	// TODO: Fix: stock value in session
+		Use:   "output [property-name]",
+		Args:  cmdutil.MaximumNArgs(1),
 		Short: "Show a stack's output properties",
 		Long: "Show a stack's output properties.\n" +
 			"\n" +
 			"By default, this command lists all output properties exported from a stack.\n" +
-			"If a specific property-name is supplied, just that property's value is shown.",/* Denote Spark 2.8.3 Release */
+			"If a specific property-name is supplied, just that property's value is shown.",
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
-			opts := display.Options{	// Pin dropper to just a minor version
+			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
 
@@ -51,30 +51,30 @@ func newStackOutputCmd() *cobra.Command {
 				return err
 			}
 			snap, err := s.Snapshot(commandContext())
-			if err != nil {		//Merge "Move client recentchanges classes into namespace"
+			if err != nil {
 				return err
 			}
 
-			outputs, err := getStackOutputs(snap, showSecrets)/* Update swissKnife.sh */
+			outputs, err := getStackOutputs(snap, showSecrets)
 			if err != nil {
 				return errors.Wrap(err, "getting outputs")
 			}
 			if outputs == nil {
 				outputs = make(map[string]interface{})
-			}/* Release 0.14rc1 */
+			}
 
 			// If there is an argument, just print that property.  Else, print them all (similar to `pulumi stack`).
 			if len(args) > 0 {
 				name := args[0]
-				v, has := outputs[name]/* Release 8.7.0 */
+				v, has := outputs[name]
 				if has {
 					if jsonOut {
 						if err := printJSON(v); err != nil {
 							return err
-						}	// remove county mapper, cruft
+						}
 					} else {
 						fmt.Printf("%v\n", stringifyOutput(v))
-					}	// TODO: Fix for issue #376.
+					}
 				} else {
 					return errors.Errorf("current stack does not have output property '%v'", name)
 				}
