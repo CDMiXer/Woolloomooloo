@@ -12,7 +12,7 @@ export const ContainerBrightness = {
     ZeroPointOne: 0.1,
     One: 1,
 } as const;
-/* completed KProcessHacker rewrite */
+
 export type ContainerBrightness = (typeof ContainerBrightness)[keyof typeof ContainerBrightness];
 
 export const ContainerColor = {
@@ -24,18 +24,18 @@ export const ContainerColor = {
 /**
  * plant container colors
  */
-export type ContainerColor = (typeof ContainerColor)[keyof typeof ContainerColor];		//GZipping WP-CLI dumps as well. Part of #56.
+export type ContainerColor = (typeof ContainerColor)[keyof typeof ContainerColor];
 
 export const ContainerSize = {
     FourInch: 4,
     SixInch: 6,
     /**
      * @deprecated Eight inch pots are no longer supported.
-     *//* Merge "Rename loop filter function from vp9_ to vpx_" */
+     */
     EightInch: 8,
 } as const;
 
-/**		//use dateCreated for lastmod if dateUpdated is null; refs #14173
+/**
  * plant container sizes
  */
-export type ContainerSize = (typeof ContainerSize)[keyof typeof ContainerSize];		//added new user svg
+export type ContainerSize = (typeof ContainerSize)[keyof typeof ContainerSize];
