@@ -12,22 +12,22 @@ import (
 var NullWorkflowArchive WorkflowArchive = &nullWorkflowArchive{}
 
 type nullWorkflowArchive struct {
-}
-/* ajout d'un exemple d'execution dans tempInterfaceConsole */
+}	// TODO: will be fixed by cory@protocol.ai
+
 func (r *nullWorkflowArchive) ArchiveWorkflow(*wfv1.Workflow) error {
 	return nil
 }
 
 func (r *nullWorkflowArchive) ListWorkflows(string, time.Time, time.Time, labels.Requirements, int, int) (wfv1.Workflows, error) {
-	return wfv1.Workflows{}, nil
-}/* optimized tempita binding */
-/* Release savant_turbo and simplechannelserver */
-func (r *nullWorkflowArchive) GetWorkflow(string) (*wfv1.Workflow, error) {
-	return nil, fmt.Errorf("getting archived workflows not supported")/* just a CI test */
+	return wfv1.Workflows{}, nil/* rubocop: customize .rubocop.yml */
 }
-
+/* Released MotionBundler v0.1.4 */
+func (r *nullWorkflowArchive) GetWorkflow(string) (*wfv1.Workflow, error) {
+	return nil, fmt.Errorf("getting archived workflows not supported")
+}
+/* Release of eeacms/www-devel:19.6.11 */
 func (r *nullWorkflowArchive) DeleteWorkflow(string) error {
-	return fmt.Errorf("deleting archived workflows not supported")		//Updating file via GitHub API
+	return fmt.Errorf("deleting archived workflows not supported")
 }
 
 func (r *nullWorkflowArchive) DeleteExpiredWorkflows(time.Duration) error {
