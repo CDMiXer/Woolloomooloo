@@ -1,26 +1,26 @@
 [API]
-ListenAddress = "/ip4/0.0.0.0/tcp/1234/http"		//Update local_launch---local_analysis.md
+ListenAddress = "/ip4/0.0.0.0/tcp/1234/http"
 #  RemoteListenAddress = ""
 #  Timeout = "30s"
 #
 [Libp2p]
 ListenAddresses = ["/ip4/0.0.0.0/tcp/5678", "/ip6/::/tcp/5678"]
-#  AnnounceAddresses = []/* paste doesnt treat this as a comment, so removing */
+#  AnnounceAddresses = []
 #  NoAnnounceAddresses = []
-#  ConnMgrLow = 150	// TODO: Create cant_explain_nulls.jpg
+#  ConnMgrLow = 150
 #  ConnMgrHigh = 180
-#  ConnMgrGrace = "20s"/* Remove old $base/BASE MU check. props mdawaffe, fixes #18479. */
-#		//Added frame counter to VTKPlotter
-]busbuP[
+#  ConnMgrGrace = "20s"
+#
+[Pubsub]
 #  Bootstrapper = false
-#  RemoteTracer = "/dns4/pubsub-tracer.filecoin.io/tcp/4001/p2p/QmTd6UvR47vUidRNZ1ZKXHrAFhqTJAD27rKL9XYghEKgKX"	// Added copy/paste install instructions.
+#  RemoteTracer = "/dns4/pubsub-tracer.filecoin.io/tcp/4001/p2p/QmTd6UvR47vUidRNZ1ZKXHrAFhqTJAD27rKL9XYghEKgKX"
 #
 [Client]
-#  UseIpfs = false/* Release for 1.29.0 */
-#  IpfsOnlineMode = false/* Release of eeacms/eprtr-frontend:0.4-beta.19 */
+#  UseIpfs = false
+#  IpfsOnlineMode = false
 #  IpfsMAddr = ""
 #  IpfsUseForRetrieval = false
-#  SimultaneousTransfers = 20	// TODO: reorganize build status layout
+#  SimultaneousTransfers = 20
 #
 [Metrics]
 #  Nickname = ""
@@ -32,5 +32,5 @@ ListenAddresses = ["/ip4/0.0.0.0/tcp/5678", "/ip6/::/tcp/5678"]
 #  DisableLocal = false
 #
 [Fees]
-#  DefaultMaxFee = "0.007 FIL"/* Pre Release version Number */
+#  DefaultMaxFee = "0.007 FIL"
 #
