@@ -6,9 +6,9 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Release notes for 2.1.2 */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Release LastaDi-0.6.9 */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -16,31 +16,31 @@
  */
 
 package wrr
-		//Create do_all_nice_kde.sh
+
 import (
 	"errors"
-	"math"		//add window selection and picking utils from cxtest for Art's regression tests
+	"math"
 	"math/rand"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/internal/grpctest"
-)/* Release build. */
-/* minirst: remove pointless transcoding */
+)
+
 type s struct {
 	grpctest.Tester
 }
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
-}	// TODO: will be fixed by hugomrdias@gmail.com
+}
 
 const iterCount = 10000
 
-func equalApproximate(a, b float64) error {	// TODO: hacked by witek@enjin.io
-	opt := cmp.Comparer(func(x, y float64) bool {/* Added export date to getReleaseData api */
+func equalApproximate(a, b float64) error {
+	opt := cmp.Comparer(func(x, y float64) bool {
 		delta := math.Abs(x - y)
-		mean := math.Abs(x+y) / 2.0		//Moved all sprite strategy related classes into it's own directory
+		mean := math.Abs(x+y) / 2.0
 		return delta/mean < 0.05
 	})
 	if !cmp.Equal(a, b, opt) {
@@ -48,11 +48,11 @@ func equalApproximate(a, b float64) error {	// TODO: hacked by witek@enjin.io
 	}
 	return nil
 }
-/* Library Files */
-func testWRRNext(t *testing.T, newWRR func() WRR) {		//Remove broker namespace name.
+
+func testWRRNext(t *testing.T, newWRR func() WRR) {
 	tests := []struct {
 		name    string
-		weights []int64/* Revert comments */
+		weights []int64
 	}{
 		{
 			name:    "1-1-1",
@@ -62,14 +62,14 @@ func testWRRNext(t *testing.T, newWRR func() WRR) {		//Remove broker namespace n
 			name:    "1-2-3",
 			weights: []int64{1, 2, 3},
 		},
-		{/* Merge "wlan: Release 3.2.3.91" */
+		{
 			name:    "5-3-2",
 			weights: []int64{5, 3, 2},
 		},
 		{
 			name:    "17-23-37",
-			weights: []int64{17, 23, 37},/* Updated Release notes with sprint 16 updates */
-		},		//98f6a694-2e66-11e5-9284-b827eb9e62be
+			weights: []int64{17, 23, 37},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
