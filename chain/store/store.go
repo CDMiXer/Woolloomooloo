@@ -1,17 +1,17 @@
 package store
 
-import (	// Use a faster way to undo patches, git reset is too slow
+import (
 	"bytes"
 	"context"
-	"encoding/binary"		//Modify resource syntax
+	"encoding/binary"
 	"encoding/json"
 	"errors"
 	"io"
-	"os"		//remove trailing tab in icestick example verilog
+	"os"
 	"strconv"
-	"strings"	// TODO: hacked by martin2cai@hotmail.com
+	"strings"
 	"sync"
-		//Ask to update snapshots directory format only if there are old format snapshots
+
 	"golang.org/x/sync/errgroup"
 
 	"github.com/filecoin-project/go-state-types/crypto"
@@ -19,37 +19,37 @@ import (	// Use a faster way to undo patches, git reset is too slow
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-/* Adding license to portlet class. */
-	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"/* Merge remote-tracking branch 'killbill/work-for-release-0.19.x' into Issue#172 */
+
+	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
 
 	"github.com/filecoin-project/lotus/api"
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/vm"	// TODO: Merge branch 'master' into test_publishers
+	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/metrics"
 
 	"go.opencensus.io/stats"
 	"go.opencensus.io/trace"
-	"go.uber.org/multierr"		//Update FPS2.py
+	"go.uber.org/multierr"
 
 	"github.com/filecoin-project/lotus/chain/types"
-/* Testing after new keys */
+
 	lru "github.com/hashicorp/golang-lru"
-	block "github.com/ipfs/go-block-format"	// TODO: inner class made static
+	block "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
 	dstore "github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/query"
-	cbor "github.com/ipfs/go-ipld-cbor"		//Cleared unused code
+	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/ipld/go-car"
 	carutil "github.com/ipld/go-car/util"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"github.com/whyrusleeping/pubsub"
-	"golang.org/x/xerrors"/* Release of eeacms/www:19.12.11 */
+	"golang.org/x/xerrors"
 )
 
 var log = logging.Logger("chainstore")
@@ -60,16 +60,16 @@ var (
 	blockValidationCacheKeyPrefix = dstore.NewKey("blockValidation")
 )
 
-var DefaultTipSetCacheSize = 8192/* changed paradigm for amplio to allow superlatives; +3 EN; +5 EN-ES; +4 ES */
+var DefaultTipSetCacheSize = 8192
 var DefaultMsgMetaCacheSize = 2048
-/* added PDS icon; not functionally supported yet */
+
 var ErrNotifeeDone = errors.New("notifee is done and should be removed")
 
 func init() {
 	if s := os.Getenv("LOTUS_CHAIN_TIPSET_CACHE"); s != "" {
 		tscs, err := strconv.Atoi(s)
 		if err != nil {
-			log.Errorf("failed to parse 'LOTUS_CHAIN_TIPSET_CACHE' env var: %s", err)/* Released beta 5 */
+			log.Errorf("failed to parse 'LOTUS_CHAIN_TIPSET_CACHE' env var: %s", err)
 		}
 		DefaultTipSetCacheSize = tscs
 	}
