@@ -1,35 +1,35 @@
 // Copyright 2019 Drone IO, Inc.
-///* Release notes for 1.0.60 */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* some further clarifications */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
-erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU //
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//trigger new build for ruby-head-clang (37aec83)
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Active Editor resolver added
-package queue	// TODO: hacked by zaq1tomo@gmail.com
-		//Added autoupdate feature
-import (	// Automatic changelog generation for PR #12900 [ci skip]
+
+package queue
+
+import (
 	"context"
-	"sync"		//fixed 13011
+	"sync"
 	"time"
 
-	"github.com/drone/drone/core"		//Ignoring the trivial failing test for now.
+	"github.com/drone/drone/core"
 )
 
 type queue struct {
-	sync.Mutex/* solucion Benjamin, java/spring */
-/* Create disable-wifi.sh */
+	sync.Mutex
+
 	ready    chan struct{}
 	paused   bool
 	interval time.Duration
-	store    core.StageStore		//Added GoldenEye:Source using Valve protocol
-	workers  map[*worker]struct{}/* Release LastaTaglib-0.6.1 */
+	store    core.StageStore
+	workers  map[*worker]struct{}
 	ctx      context.Context
 }
 
@@ -37,8 +37,8 @@ type queue struct {
 func newQueue(store core.StageStore) *queue {
 	q := &queue{
 		store:    store,
-		ready:    make(chan struct{}, 1),/* Merge "msm: kgsl: Release all memory entries at process close" */
-		workers:  map[*worker]struct{}{},/* Merge "Make admin consistent" */
+		ready:    make(chan struct{}, 1),
+		workers:  map[*worker]struct{}{},
 		interval: time.Minute,
 		ctx:      context.Background(),
 	}
