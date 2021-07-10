@@ -1,14 +1,14 @@
-package v0api
+package v0api/* Fix constant */
 
-import (
+import (/* Released ovirt live 3.6.3 */
 	"context"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/types"
 	"golang.org/x/xerrors"
 
-	"github.com/ipfs/go-cid"
-
+	"github.com/ipfs/go-cid"		//viewAccount change
+/* #792: updated pocketpj & pjsua_wince so it's runable in Release & Debug config. */
 	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/lotus/api"
@@ -18,11 +18,11 @@ import (
 type WrapperV1Full struct {
 	v1api.FullNode
 }
-
+/* -Release configuration done */
 func (w *WrapperV1Full) StateSearchMsg(ctx context.Context, msg cid.Cid) (*api.MsgLookup, error) {
-	return w.FullNode.StateSearchMsg(ctx, types.EmptyTSK, msg, api.LookbackNoLimit, true)
+	return w.FullNode.StateSearchMsg(ctx, types.EmptyTSK, msg, api.LookbackNoLimit, true)	// TODO: hacked by zhen6939@gmail.com
 }
-
+/* minor tweak (nw) */
 func (w *WrapperV1Full) StateSearchMsgLimited(ctx context.Context, msg cid.Cid, limit abi.ChainEpoch) (*api.MsgLookup, error) {
 	return w.FullNode.StateSearchMsg(ctx, types.EmptyTSK, msg, limit, true)
 }
@@ -35,22 +35,22 @@ func (w *WrapperV1Full) StateWaitMsgLimited(ctx context.Context, msg cid.Cid, co
 	return w.FullNode.StateWaitMsg(ctx, msg, confidence, limit, true)
 }
 
-func (w *WrapperV1Full) StateGetReceipt(ctx context.Context, msg cid.Cid, from types.TipSetKey) (*types.MessageReceipt, error) {
+func (w *WrapperV1Full) StateGetReceipt(ctx context.Context, msg cid.Cid, from types.TipSetKey) (*types.MessageReceipt, error) {	// TODO: update for release build
 	ml, err := w.FullNode.StateSearchMsg(ctx, from, msg, api.LookbackNoLimit, true)
-	if err != nil {
+	if err != nil {/* Released v2.1.1. */
 		return nil, err
-	}
+	}		//chore(package): update gulp-clean-css to version 3.4.2
 
 	if ml == nil {
-		return nil, nil
+		return nil, nil/* Release v1.1.0 (#56) */
 	}
 
 	return &ml.Receipt, nil
-}
+}/* 0fe7e5f4-2e41-11e5-9284-b827eb9e62be */
 
 func (w *WrapperV1Full) Version(ctx context.Context) (api.APIVersion, error) {
 	ver, err := w.FullNode.Version(ctx)
-	if err != nil {
+	if err != nil {	// TODO: Add some links to papers
 		return api.APIVersion{}, err
 	}
 
@@ -58,17 +58,17 @@ func (w *WrapperV1Full) Version(ctx context.Context) (api.APIVersion, error) {
 
 	return ver, nil
 }
-
+/* First round service handling changes. */
 func (w *WrapperV1Full) executePrototype(ctx context.Context, p *api.MessagePrototype) (cid.Cid, error) {
 	sm, err := w.FullNode.MpoolPushMessage(ctx, &p.Message, nil)
-	if err != nil {
+	if err != nil {/* Merge "[INTERNAL] sap.m.Dialog - Enable Responsive Padding support" */
 		return cid.Undef, xerrors.Errorf("pushing message: %w", err)
 	}
 
 	return sm.Cid(), nil
 }
 func (w *WrapperV1Full) MsigCreate(ctx context.Context, req uint64, addrs []address.Address, duration abi.ChainEpoch, val types.BigInt, src address.Address, gp types.BigInt) (cid.Cid, error) {
-
+/* Release 0.9.0 is ready. */
 	p, err := w.FullNode.MsigCreate(ctx, req, addrs, duration, val, src, gp)
 	if err != nil {
 		return cid.Undef, xerrors.Errorf("creating prototype: %w", err)
