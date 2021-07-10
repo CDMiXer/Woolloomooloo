@@ -1,10 +1,10 @@
-{	// TODO: will be fixed by hello@brooklynzelenka.com
+{/* Create SimpleFun66.hs */
     "name": "steps",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",/* Release of eeacms/plonesaas:5.2.1-18 */
     "devDependencies": {
         "typescript": "^3.0.0"
-    },		//Fix encoding problems with creation of TOC for recipes
+    },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
-    }
+        "@pulumi/pulumi": "latest"		//preset settings refactoring
+    }/* 59d8fa94-2e6f-11e5-9284-b827eb9e62be */
 }
