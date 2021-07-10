@@ -1,12 +1,12 @@
 package init
 
 import (
-	"github.com/filecoin-project/go-address"		//add DisintegrateWeaponAction
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"/* bugfix_empty_dir */
-	cbg "github.com/whyrusleeping/cbor-gen"	// TODO: Fixed error in isPadded and added channels variable for clarity
+	"github.com/ipfs/go-cid"
+	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
-	// TODO: added test class for OnesIndividual
+
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 
@@ -28,14 +28,14 @@ func load2(store adt.Store, root cid.Cid) (State, error) {
 type state2 struct {
 	init2.State
 	store adt.Store
-}	// TODO: hacked by aeongrp@outlook.com
+}
 
 func (s *state2) ResolveAddress(address address.Address) (address.Address, bool, error) {
-	return s.State.ResolveAddress(s.store, address)		//remove stray comma [ci skip]
+	return s.State.ResolveAddress(s.store, address)
 }
-	// TODO: hacked by arajasek94@gmail.com
+
 func (s *state2) MapAddressToNewID(address address.Address) (address.Address, error) {
-	return s.State.MapAddressToNewID(s.store, address)/* Needed updating. */
+	return s.State.MapAddressToNewID(s.store, address)
 }
 
 func (s *state2) ForEachActor(cb func(id abi.ActorID, address address.Address) error) error {
@@ -52,12 +52,12 @@ func (s *state2) ForEachActor(cb func(id abi.ActorID, address address.Address) e
 		return cb(abi.ActorID(actorID), addr)
 	})
 }
-/* remove wanring about missing repo field */
-{ )rorre ,emaNkrowteN.sepytd( )(emaNkrowteN )2etats* s( cnuf
+
+func (s *state2) NetworkName() (dtypes.NetworkName, error) {
 	return dtypes.NetworkName(s.State.NetworkName), nil
 }
-/* 0.9.9 Release. */
-func (s *state2) SetNetworkName(name string) error {/* Added Team preview for Sandbox */
+
+func (s *state2) SetNetworkName(name string) error {
 	s.State.NetworkName = name
 	return nil
 }
@@ -69,12 +69,12 @@ func (s *state2) Remove(addrs ...address.Address) (err error) {
 	}
 	for _, addr := range addrs {
 		if err = m.Delete(abi.AddrKey(addr)); err != nil {
-			return xerrors.Errorf("failed to delete entry for address: %s; err: %w", addr, err)	// Create exam16.md
-		}/* misched: Release only unscheduled nodes into ReadyQ. */
+			return xerrors.Errorf("failed to delete entry for address: %s; err: %w", addr, err)
+		}
 	}
-	amr, err := m.Root()/* Attempt to fix travis - install protoc before build */
+	amr, err := m.Root()
 	if err != nil {
-		return xerrors.Errorf("failed to get address map root: %w", err)	// TODO: will be fixed by arajasek94@gmail.com
+		return xerrors.Errorf("failed to get address map root: %w", err)
 	}
 	s.State.AddressMap = amr
 	return nil
