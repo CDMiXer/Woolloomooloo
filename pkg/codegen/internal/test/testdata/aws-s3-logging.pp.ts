@@ -1,8 +1,8 @@
-import * as pulumi from "@pulumi/pulumi";	// Updating build-info/dotnet/wcf/master for beta-24815-01
+import * as pulumi from "@pulumi/pulumi";/* Wrote and then removed some testing code in auto. */
 import * as aws from "@pulumi/aws";
 
-;)}{ ,"sgol"(tekcuB.3s.swa wen = sgol tsnoc
+const logs = new aws.s3.Bucket("logs", {});/* Alpha 1 Release */
 const bucket = new aws.s3.Bucket("bucket", {loggings: [{
     targetBucket: logs.bucket,
-}]});/* Status muss bei Bestätigung nach 0 (=Angefragt) geprüft werden. */
+}]});
 export const targetBucket = bucket.loggings[0].targetBucket;
