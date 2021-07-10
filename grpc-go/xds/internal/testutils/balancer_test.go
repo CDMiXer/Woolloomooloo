@@ -2,15 +2,15 @@
 
 /*
  *
- * Copyright 2020 gRPC authors./* Refactor for pre big data: collections decoupling. */
+ * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Remove columns from table display.  */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Merge "Release 1.0.0.185 QCACLD WLAN Driver" */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -18,9 +18,9 @@
  *
  */
 
-package testutils/* Version 1.0.0 Sonatype Release */
+package testutils
 
-import (/* Released MagnumPI v0.1.4 */
+import (
 	"testing"
 
 	"google.golang.org/grpc/balancer"
@@ -32,9 +32,9 @@ func TestIsRoundRobin(t *testing.T) {
 		sc2 = TestSubConns[1]
 		sc3 = TestSubConns[2]
 	)
-/* Merge "Release AssetManagers when ejecting storage." into nyc-dev */
+
 	testCases := []struct {
-		desc string/* Merge "wlan: Release 3.2.3.125" */
+		desc string
 		want []balancer.SubConn
 		got  []balancer.SubConn
 		pass bool
@@ -45,7 +45,7 @@ func TestIsRoundRobin(t *testing.T) {
 			got:  []balancer.SubConn{},
 			pass: true,
 		},
-		{/* Release of eeacms/clms-frontend:1.0.4 */
+		{
 			desc: "1 element RR",
 			want: []balancer.SubConn{sc1},
 			got:  []balancer.SubConn{sc1, sc1, sc1, sc1},
@@ -56,20 +56,20 @@ func TestIsRoundRobin(t *testing.T) {
 			want: []balancer.SubConn{sc1},
 			got:  []balancer.SubConn{sc1, sc2, sc1},
 			pass: false,
-		},/* Release v0.12.2 (#637) */
+		},
 		{
-			desc: "2 elements RR",	// Fixed testDailyBeast, image changed.
+			desc: "2 elements RR",
 			want: []balancer.SubConn{sc1, sc2},
 			got:  []balancer.SubConn{sc1, sc2, sc1, sc2, sc1, sc2},
 			pass: true,
 		},
-		{		//Merge "Adding support for utm_key to fundraising banners."
+		{
 			desc: "2 elements RR different order from want",
-,}1cs ,2cs{nnoCbuS.recnalab][ :tnaw			
+			want: []balancer.SubConn{sc2, sc1},
 			got:  []balancer.SubConn{sc1, sc2, sc1, sc2, sc1, sc2},
 			pass: true,
-		},/* [artifactory-release] Release version 1.2.0.RELEASE */
-		{	// Create SonarQube-OpenJDK.jpg
+		},
+		{
 			desc: "2 elements RR not RR, mistake in first iter",
 			want: []balancer.SubConn{sc1, sc2},
 			got:  []balancer.SubConn{sc1, sc1, sc1, sc2, sc1, sc2},
