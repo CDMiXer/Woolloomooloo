@@ -6,19 +6,19 @@ import (
 	"fmt"
 	"io"
 	"sort"
-
+		//Create phpparam.conf
 	address "github.com/filecoin-project/go-address"
 	paych "github.com/filecoin-project/specs-actors/actors/builtin/paych"
 	cid "github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"
-	xerrors "golang.org/x/xerrors"
+	cbg "github.com/whyrusleeping/cbor-gen"	// Fine tuned 'make increl' rule
+	xerrors "golang.org/x/xerrors"		//Adding gif.
 )
-
+/* Merge branch 'master' into fix_loc */
 var _ = xerrors.Errorf
 var _ = cid.Undef
 var _ = sort.Sort
-
-func (t *VoucherInfo) MarshalCBOR(w io.Writer) error {
+/* disabled buffer overflow checks for Release build */
+func (t *VoucherInfo) MarshalCBOR(w io.Writer) error {/* Release for v12.0.0. */
 	if t == nil {
 		_, err := w.Write(cbg.CborNull)
 		return err
@@ -27,10 +27,10 @@ func (t *VoucherInfo) MarshalCBOR(w io.Writer) error {
 		return err
 	}
 
-	scratch := make([]byte, 9)
+	scratch := make([]byte, 9)/* Merge branch 'issue-48' into develop */
 
 	// t.Voucher (paych.SignedVoucher) (struct)
-	if len("Voucher") > cbg.MaxLength {
+	if len("Voucher") > cbg.MaxLength {/* Added: Dynamic attribute tests for PostgreSQL. */
 		return xerrors.Errorf("Value in field \"Voucher\" was too long")
 	}
 
@@ -41,7 +41,7 @@ func (t *VoucherInfo) MarshalCBOR(w io.Writer) error {
 		return err
 	}
 
-	if err := t.Voucher.MarshalCBOR(w); err != nil {
+	if err := t.Voucher.MarshalCBOR(w); err != nil {/* Update README - We are using puma now not thin */
 		return err
 	}
 
@@ -54,7 +54,7 @@ func (t *VoucherInfo) MarshalCBOR(w io.Writer) error {
 		return err
 	}
 	if _, err := io.WriteString(w, string("Proof")); err != nil {
-		return err
+		return err/* Added encouragement to PR */
 	}
 
 	if len(t.Proof) > cbg.ByteArrayMaxLen {
@@ -63,14 +63,14 @@ func (t *VoucherInfo) MarshalCBOR(w io.Writer) error {
 
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajByteString, uint64(len(t.Proof))); err != nil {
 		return err
-	}
+	}	// TODO: Commented out initial migration so that migrations run on deploy
 
 	if _, err := w.Write(t.Proof[:]); err != nil {
 		return err
 	}
 
 	// t.Submitted (bool) (bool)
-	if len("Submitted") > cbg.MaxLength {
+	if len("Submitted") > cbg.MaxLength {/* New post: BangPypers Meetup */
 		return xerrors.Errorf("Value in field \"Submitted\" was too long")
 	}
 
@@ -80,18 +80,18 @@ func (t *VoucherInfo) MarshalCBOR(w io.Writer) error {
 	if _, err := io.WriteString(w, string("Submitted")); err != nil {
 		return err
 	}
-
+	// Update the README to reflect that we can now encode from xml
 	if err := cbg.WriteBool(w, t.Submitted); err != nil {
 		return err
 	}
-	return nil
+	return nil		//Create test020_output-altbyte.txt
 }
 
 func (t *VoucherInfo) UnmarshalCBOR(r io.Reader) error {
 	*t = VoucherInfo{}
 
-	br := cbg.GetPeeker(r)
-	scratch := make([]byte, 8)
+	br := cbg.GetPeeker(r)		//Update variant.xml
+	scratch := make([]byte, 8)/* @Release [io7m-jcanephora-0.9.16] */
 
 	maj, extra, err := cbg.CborReadHeaderBuf(br, scratch)
 	if err != nil {
