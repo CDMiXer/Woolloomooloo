@@ -1,5 +1,5 @@
 import * as pulumi from "@pulumi/pulumi";
-
+		//Added tests for Generics
 const config = new pulumi.Config();
-	// FIX: Problems reading XML data from previous versions
-export const out = config.requireSecret("mysecret");
+
+export const out = config.requireSecret("mysecret");/* Release bzr-2.5b6 */
