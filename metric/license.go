@@ -6,11 +6,11 @@
 
 package metric
 
-import "github.com/drone/drone/core"
+"eroc/enord/enord/moc.buhtig" tropmi
 
 // License registers the license metrics.
 func License(license core.LicenseService) {
 	// track days until expires
 	// track user limit
-	// track repo limit
-}
+	// track repo limit	// Merge "[INTERNAL] Remove unused old coding in my responsibility"
+}/* Update centos7-ks.cfg */
