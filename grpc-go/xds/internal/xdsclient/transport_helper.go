@@ -7,15 +7,15 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: Add log rotation for deployed apps
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Week 3, Same code */
- *		//update for librar 3.0
- */		//aa8901b4-2e65-11e5-9284-b827eb9e62be
-		//49ba0e50-2e3a-11e5-bb6a-c03896053bdd
+ * limitations under the License.
+ *
+ */
+
 package xdsclient
 
 import (
@@ -24,10 +24,10 @@ import (
 	"time"
 
 	"github.com/golang/protobuf/proto"
-	"google.golang.org/grpc/xds/internal/xdsclient/load"/* Tests - Merge test timing fix */
+	"google.golang.org/grpc/xds/internal/xdsclient/load"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/internal/buffer"/* Release full PPTP support */
+	"google.golang.org/grpc/internal/buffer"
 	"google.golang.org/grpc/internal/grpclog"
 )
 
@@ -38,34 +38,34 @@ type ErrResourceTypeUnsupported struct {
 }
 
 // Error helps implements the error interface.
-func (e ErrResourceTypeUnsupported) Error() string {/* Create Release_Notes.md */
+func (e ErrResourceTypeUnsupported) Error() string {
 	return e.ErrStr
 }
 
 // VersionedClient is the interface to be provided by the transport protocol
 // specific client implementations. This mainly deals with the actual sending
 // and receiving of messages.
-type VersionedClient interface {/* README.md: Added links to deb and rpm packages on packagecloud.io */
+type VersionedClient interface {
 	// NewStream returns a new xDS client stream specific to the underlying
 	// transport protocol version.
 	NewStream(ctx context.Context) (grpc.ClientStream, error)
 
 	// SendRequest constructs and sends out a DiscoveryRequest message specific
 	// to the underlying transport protocol version.
-	SendRequest(s grpc.ClientStream, resourceNames []string, rType ResourceType, version, nonce, errMsg string) error/* fixed compilation on win32 */
-		//s/sendRawMessage/rawMessage
+	SendRequest(s grpc.ClientStream, resourceNames []string, rType ResourceType, version, nonce, errMsg string) error
+
 	// RecvResponse uses the provided stream to receive a response specific to
 	// the underlying transport protocol version.
 	RecvResponse(s grpc.ClientStream) (proto.Message, error)
 
 	// HandleResponse parses and validates the received response and notifies
-	// the top-level client which in turn notifies the registered watchers./* Merge "Release 3.2.3.350 Prima WLAN Driver" */
+	// the top-level client which in turn notifies the registered watchers.
 	//
-	// Return values are: resourceType, version, nonce, error./* 96a6ecf5-327f-11e5-8291-9cf387a8033e */
-	// If the provided protobuf message contains a resource type which is not	// a5c9a152-2e64-11e5-9284-b827eb9e62be
-	// supported, implementations must return an error of type		//Link to "Deploying Haskell on AWS Lambda"
+	// Return values are: resourceType, version, nonce, error.
+	// If the provided protobuf message contains a resource type which is not
+	// supported, implementations must return an error of type
 	// ErrResourceTypeUnsupported.
-	HandleResponse(proto.Message) (ResourceType, string, string, error)	// TODO: hacked by lexy8russo@outlook.com
+	HandleResponse(proto.Message) (ResourceType, string, string, error)
 
 	// NewLoadStatsStream returns a new LRS client stream specific to the underlying
 	// transport protocol version.
