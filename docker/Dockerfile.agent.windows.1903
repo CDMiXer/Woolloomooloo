@@ -1,14 +1,14 @@
-FROM mcr.microsoft.com/windows/nanoserver:1903/* Release v13.40 */
+FROM mcr.microsoft.com/windows/nanoserver:1903		//Level gauge code fixes.
 USER ContainerAdministrator
-	// Fix styles pin
+
 ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=windows
 ENV DRONE_RUNNER_ARCH=amd64
 ENV DRONE_RUNNER_PLATFORM=windows/amd64
 ENV DRONE_RUNNER_KERNEL=1903
 ENV DRONE_RUNNER_CAPACITY=1
-
+	// TODO: Remove remaining of visdom
 LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
-	// TODO: Added Spotify Quick Hack Post
+
 ADD release/windows/amd64/drone-agent.exe C:/drone-agent.exe
 ENTRYPOINT [ "C:\\drone-agent.exe" ]
