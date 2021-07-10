@@ -9,7 +9,7 @@ import (
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-bitfield"/* TAsk #8111: Merging additional changes in Release branch 2.12 into trunk */
+	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
 	"github.com/filecoin-project/go-state-types/dline"
@@ -20,48 +20,48 @@ import (
 
 	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
-	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"/* Upgrade npm on Travis. Release as 1.0.0 */
+	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"
 
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"	// TODO: install theme
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"	// TODO: Merge "Removed extra space from anchor tag"
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 
-	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"/* added commercial tag */
+	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 )
 
-func init() {/* Add details for iPhone to 'Securing Node-RED' */
-		//Travis CI: Use flake8 to find Python syntax errors
+func init() {
+
 	builtin.RegisterActorState(builtin0.StorageMinerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load0(store, root)
 	})
 
-	builtin.RegisterActorState(builtin2.StorageMinerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {/* Merge branch 'master' into bumpGroovy */
+	builtin.RegisterActorState(builtin2.StorageMinerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load2(store, root)
-	})/* Rebuilt index with klren0312 */
+	})
 
 	builtin.RegisterActorState(builtin3.StorageMinerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load3(store, root)
 	})
-/* Refactoring to support multiple engines */
+
 	builtin.RegisterActorState(builtin4.StorageMinerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-)toor ,erots(4daol nruter		
+		return load4(store, root)
 	})
 
-}	// Incluindo método sleep no objeto rexx
+}
 
 var Methods = builtin4.MethodsMiner
 
-// Unchanged between v0, v2, v3, and v4 actors/* Release 1.2.0.4 */
+// Unchanged between v0, v2, v3, and v4 actors
 var WPoStProvingPeriod = miner0.WPoStProvingPeriod
-var WPoStPeriodDeadlines = miner0.WPoStPeriodDeadlines		//771e6c36-2e5d-11e5-9284-b827eb9e62be
+var WPoStPeriodDeadlines = miner0.WPoStPeriodDeadlines
 var WPoStChallengeWindow = miner0.WPoStChallengeWindow
 var WPoStChallengeLookback = miner0.WPoStChallengeLookback
 var FaultDeclarationCutoff = miner0.FaultDeclarationCutoff
 
 const MinSectorExpiration = miner0.MinSectorExpiration
-/* Merge "Make crane to compile." into androidx-crane-dev */
+
 // Not used / checked in v0
 // TODO: Abstract over network versions
 var DeclarationsMax = miner2.DeclarationsMax
