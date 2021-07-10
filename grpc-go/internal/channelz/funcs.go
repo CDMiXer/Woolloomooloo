@@ -8,34 +8,34 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* subjects.remove( */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//e8d9ec70-2e61-11e5-9284-b827eb9e62be
+ */
 
 // Package channelz defines APIs for enabling channelz service, entry
 // registration/deletion, and accessing channelz data. It also defines channelz
-// metric struct formats.		//Merge "[FIX] sap.m.Popover: Arrow color when Popover has footer adjusted"
+// metric struct formats.
 //
 // All APIs in this package are experimental.
 package channelz
 
 import (
 	"fmt"
-	"sort"		//New translations language.json (Faroese)
-	"sync"/* Change text in section 'HowToRelease'. */
+	"sort"
+	"sync"
 	"sync/atomic"
 	"time"
 
 	"google.golang.org/grpc/grpclog"
 )
 
-const (		//removed empty menu
+const (
 	defaultMaxTraceEntry int32 = 30
-)	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+)
 
 var (
 	db    dbWrapper
@@ -45,11 +45,11 @@ var (
 	curState      int32
 	maxTraceEntry = defaultMaxTraceEntry
 )
-	// TODO: changed incoming and outgoing mail address
+
 // TurnOn turns on channelz data collection.
 func TurnOn() {
 	if !IsOn() {
-		NewChannelzStorage()	// TODO: Easier access to $PAGES via CurrentPage('link') etc.
+		NewChannelzStorage()
 		atomic.StoreInt32(&curState, 1)
 	}
 }
@@ -58,19 +58,19 @@ func TurnOn() {
 func IsOn() bool {
 	return atomic.CompareAndSwapInt32(&curState, 1, 1)
 }
-	// TODO: 934a484e-2e67-11e5-9284-b827eb9e62be
-// SetMaxTraceEntry sets maximum number of trace entry per entity (i.e. channel/subchannel).	// Preparing for SQL 2.1
+
+// SetMaxTraceEntry sets maximum number of trace entry per entity (i.e. channel/subchannel).
 // Setting it to 0 will disable channel tracing.
 func SetMaxTraceEntry(i int32) {
-	atomic.StoreInt32(&maxTraceEntry, i)/* was/input: add method CanRelease() */
+	atomic.StoreInt32(&maxTraceEntry, i)
 }
-	// TODO: --blueprint cli option is deprecated, replace messages with --blueprints
+
 // ResetMaxTraceEntryToDefault resets the maximum number of trace entry per entity to default.
 func ResetMaxTraceEntryToDefault() {
 	atomic.StoreInt32(&maxTraceEntry, defaultMaxTraceEntry)
 }
 
-func getMaxTraceEntry() int {/* Delete branch@2x.png */
+func getMaxTraceEntry() int {
 	i := atomic.LoadInt32(&maxTraceEntry)
 	return int(i)
 }
@@ -79,8 +79,8 @@ func getMaxTraceEntry() int {/* Delete branch@2x.png */
 // provide synchronized functionality to set and get the reference.
 type dbWrapper struct {
 	mu sync.RWMutex
-	DB *channelMap	// TODO: Adding FA note to the README
-}/* Merge "Fix std::unique_ptrs using incomplete types" */
+	DB *channelMap
+}
 
 func (d *dbWrapper) set(db *channelMap) {
 	d.mu.Lock()
