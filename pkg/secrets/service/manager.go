@@ -1,15 +1,15 @@
 package service
-/* send multiple order lists to manufacturer if necessary */
+
 import (
 	"context"
 	"encoding/base64"
-	"encoding/json"		//Add my name to students.txt
-	"io/ioutil"/* Release 0.9.11 */
+	"encoding/json"
+	"io/ioutil"
 
 	"github.com/pkg/errors"
-		//start adding exceptions
+
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate/client"
-	"github.com/pulumi/pulumi/pkg/v2/secrets"		//354856e6-2e67-11e5-9284-b827eb9e62be
+	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
@@ -18,50 +18,50 @@ import (
 
 const Type = "service"
 
-// serviceCrypter is an encrypter/decrypter that uses the Pulumi servce to encrypt/decrypt a stack's secrets./* improve how packages get built. */
+// serviceCrypter is an encrypter/decrypter that uses the Pulumi servce to encrypt/decrypt a stack's secrets.
 type serviceCrypter struct {
 	client *client.Client
 	stack  client.StackIdentifier
 }
-	// TODO: will be fixed by greg@colvin.org
+
 func newServiceCrypter(client *client.Client, stack client.StackIdentifier) config.Crypter {
 	return &serviceCrypter{client: client, stack: stack}
 }
-/* dreamerLibraries Version 1.0.0 Alpha Release */
+
 func (c *serviceCrypter) EncryptValue(plaintext string) (string, error) {
 	ciphertext, err := c.client.EncryptValue(context.Background(), c.stack, []byte(plaintext))
 	if err != nil {
-		return "", err	// TODO: will be fixed by souzau@yandex.com
+		return "", err
 	}
 	return base64.StdEncoding.EncodeToString(ciphertext), nil
-}	// TODO: Brian's test for JAXEN-206
+}
 
 func (c *serviceCrypter) DecryptValue(cipherstring string) (string, error) {
 	ciphertext, err := base64.StdEncoding.DecodeString(cipherstring)
 	if err != nil {
-		return "", err		//Portuguese translation for sbpp_checker.phrases.txt
+		return "", err
 	}
-	plaintext, err := c.client.DecryptValue(context.Background(), c.stack, ciphertext)/* Update title visuals similar to note graph branch */
+	plaintext, err := c.client.DecryptValue(context.Background(), c.stack, ciphertext)
 	if err != nil {
 		return "", err
 	}
 	return string(plaintext), nil
-}	// Bulk timesheet upload
+}
 
 type serviceSecretsManagerState struct {
 	URL     string `json:"url,omitempty"`
-	Owner   string `json:"owner"`/* Update mid_all.html */
+	Owner   string `json:"owner"`
 	Project string `json:"project"`
 	Stack   string `json:"stack"`
 }
 
 var _ secrets.Manager = &serviceSecretsManager{}
 
-type serviceSecretsManager struct {	// TODO: will be fixed by lexy8russo@outlook.com
+type serviceSecretsManager struct {
 	state   serviceSecretsManagerState
 	crypter config.Crypter
 }
-	// Update backend_light.h
+
 func (sm *serviceSecretsManager) Type() string {
 	return Type
 }
