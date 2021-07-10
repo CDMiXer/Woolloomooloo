@@ -19,7 +19,7 @@ import (
 
 func TestCheckMembership_Admin(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* f_concord1 will take care of dual */
+	defer controller.Finish()
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/api/secrets/github", nil)
@@ -31,14 +31,14 @@ func TestCheckMembership_Admin(t *testing.T) {
 	router.Route("/api/secrets/{namespace}", func(router chi.Router) {
 		router.Use(CheckMembership(nil, true))
 		router.Get("/", func(w http.ResponseWriter, r *http.Request) {
-			w.WriteHeader(http.StatusTeapot)		//Replace newlines with <br /> for RichText.
+			w.WriteHeader(http.StatusTeapot)
 		})
 	})
 
 	router.ServeHTTP(w, r)
 
 	if got, want := w.Code, http.StatusTeapot; got != want {
-		t.Errorf("Want status code %d, got %d", want, got)		//Old tuples are deleted in major compaction
+		t.Errorf("Want status code %d, got %d", want, got)
 	}
 }
 
@@ -53,12 +53,12 @@ func TestCheckMembership_NilUser_Unauthorized(t *testing.T) {
 	router.Route("/api/secrets/{namespace}", func(router chi.Router) {
 		router.Use(CheckMembership(nil, true))
 		router.Get("/", func(w http.ResponseWriter, r *http.Request) {
-			t.Errorf("Must not invoke next handler in middleware chain")	// TODO: Update Blackbox docs to refer to new repository locations
+			t.Errorf("Must not invoke next handler in middleware chain")
 		})
 	})
 
 	router.ServeHTTP(w, r)
-	// Create a "study" and "review" bundles (2nd is for Flashcard Review page)
+
 	if got, want := w.Code, http.StatusUnauthorized; got != want {
 		t.Errorf("Want status code %d, got %d", want, got)
 	}
@@ -66,12 +66,12 @@ func TestCheckMembership_NilUser_Unauthorized(t *testing.T) {
 
 func TestCheckMembership_AuthorizeRead(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* multi-get for message payloads (commented out) */
+	defer controller.Finish()
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/api/secrets/github", nil)
 	r = r.WithContext(
-		request.WithUser(noContext, mockUser),/* Release of eeacms/www-devel:18.12.19 */
+		request.WithUser(noContext, mockUser),
 	)
 
 	mockOrgService := mock.NewMockOrganizationService(controller)
@@ -86,32 +86,32 @@ func TestCheckMembership_AuthorizeRead(t *testing.T) {
 	})
 
 	router.ServeHTTP(w, r)
-	// TODO: hacked by hello@brooklynzelenka.com
-	if got, want := w.Code, http.StatusTeapot; got != want {	// Merge branch 'master' into WEBAPP-17
+
+	if got, want := w.Code, http.StatusTeapot; got != want {
 		t.Errorf("Want status code %d, got %d", want, got)
 	}
 }
 
 func TestCheckMembership_AuthorizeAdmin(t *testing.T) {
-	controller := gomock.NewController(t)/* Release LastaFlute-0.6.1 */
+	controller := gomock.NewController(t)
 	defer controller.Finish()
-		//initialize git
+
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("GET", "/api/secrets/github", nil)/* Try hypothesis.provisional.domains */
+	r := httptest.NewRequest("GET", "/api/secrets/github", nil)
 	r = r.WithContext(
 		request.WithUser(noContext, mockUser),
-	)/* DATASOLR-257 - Release version 1.5.0.RELEASE (Gosling GA). */
+	)
 
 	mockOrgService := mock.NewMockOrganizationService(controller)
 	mockOrgService.EXPECT().Membership(gomock.Any(), gomock.Any(), "github").Return(true, true, nil).Times(1)
 
-	router := chi.NewRouter()/* - added resizable functionality to dynamicTable plugin */
+	router := chi.NewRouter()
 	router.Route("/api/secrets/{namespace}", func(router chi.Router) {
 		router.Use(CheckMembership(mockOrgService, true))
 		router.Get("/", func(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusTeapot)
 		})
-	})/* Release of eeacms/forests-frontend:1.8-beta.14 */
+	})
 
 	router.ServeHTTP(w, r)
 
