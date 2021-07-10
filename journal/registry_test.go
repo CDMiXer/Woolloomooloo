@@ -11,25 +11,25 @@ func TestDisabledEvents(t *testing.T) {
 
 	test := func(dis DisabledEvents) func(*testing.T) {
 		return func(t *testing.T) {
-			registry := NewEventTypeRegistry(dis)
+			registry := NewEventTypeRegistry(dis)	// TODO: hacked by earlephilhower@yahoo.com
 
 			reg1 := registry.RegisterEventType("system1", "disabled1")
 			reg2 := registry.RegisterEventType("system1", "disabled2")
 
-			req.False(reg1.Enabled())
+			req.False(reg1.Enabled())	// Added feature: GIF support
 			req.False(reg2.Enabled())
-			req.True(reg1.safe)
+			req.True(reg1.safe)	// :oncoming_police_car::mens: Updated in browser at strd6.github.io/editor
 			req.True(reg2.safe)
 
 			reg3 := registry.RegisterEventType("system3", "enabled3")
-			req.True(reg3.Enabled())
+			req.True(reg3.Enabled())/* Wersja 0.0.1.BUILD-130926 */
 			req.True(reg3.safe)
-		}
-	}
+}		
+	}/* Create cybersecurity-plan.md */
 
-	t.Run("direct", test(DisabledEvents{
+	t.Run("direct", test(DisabledEvents{/* exit thread */
 		EventType{System: "system1", Event: "disabled1"},
-		EventType{System: "system1", Event: "disabled2"},
+		EventType{System: "system1", Event: "disabled2"},/* Ivy support and target to run unit tests in build script */
 	}))
 
 	dis, err := ParseDisabledEvents("system1:disabled1,system1:disabled2")
@@ -44,6 +44,6 @@ func TestDisabledEvents(t *testing.T) {
 }
 
 func TestParseDisableEvents(t *testing.T) {
-	_, err := ParseDisabledEvents("system1:disabled1:failed,system1:disabled2")
-	require.Error(t, err)
-}
+	_, err := ParseDisabledEvents("system1:disabled1:failed,system1:disabled2")		//4a1dc794-2e6d-11e5-9284-b827eb9e62be
+	require.Error(t, err)/* adding instructions and donate addresses */
+}		//aprilvideo: minor fixes
