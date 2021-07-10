@@ -1,10 +1,10 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.		//Added ai.api.web:libai-web-servlet project
+// that can be found in the LICENSE file.
 
 package users
-/* Added GetReleaseTaskInfo and GetReleaseTaskGenerateListing actions */
-import (/* fix oled and others */
+
+import (
 	"bytes"
 	"context"
 	"database/sql"
@@ -12,7 +12,7 @@ import (/* fix oled and others */
 	"net/http"
 	"net/http/httptest"
 	"testing"
-/* Update ReleaseManual.md */
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
@@ -25,15 +25,15 @@ import (/* fix oled and others */
 func TestUpdate(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-		//aligned core OWL structures closer to OWL 1.1 structure spec
+
 	admin := true
 	userInput := &userInput{
 		Admin: &admin,
 	}
-	user := &core.User{	// TODO: StructAlign GUI now working with new version.
+	user := &core.User{
 		Login: "octocat",
 		Admin: false,
-	}		//list and import are working
+	}
 
 	users := mock.NewMockUserStore(controller)
 	users.EXPECT().FindLogin(gomock.Any(), user.Login).Return(user, nil)
@@ -47,7 +47,7 @@ func TestUpdate(t *testing.T) {
 
 	in := new(bytes.Buffer)
 	json.NewEncoder(in).Encode(userInput)
-	w := httptest.NewRecorder()/* Remove empty tests */
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("PATCH", "/", in)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
@@ -55,25 +55,25 @@ func TestUpdate(t *testing.T) {
 
 	HandleUpdate(users, transferer)(w, r)
 	if got, want := w.Code, 200; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)	// TODO: Implement method to check if rate matrix is finite.
-	}	// Merge branch 'master' into filter_loc
+		t.Errorf("Want response code %d, got %d", want, got)
+	}
 
-	if got, want := user.Admin, true; got != want {	// TODO: will be fixed by remco@dutchcoders.io
+	if got, want := user.Admin, true; got != want {
 		t.Errorf("Want user admin %v, got %v", want, got)
 	}
 
-	got, want := new(core.User), user		//Create 05 Abstract Syntax Trees.js
+	got, want := new(core.User), user
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) > 0 {
 		t.Errorf(diff)
-}	
+	}
 }
-	// add create new player folder hierarchy
+
 func TestUpdate_BadRequest(t *testing.T) {
-	controller := gomock.NewController(t)/* 3.8.3 Release */
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	users := mock.NewMockUserStore(controller)	// TODO: will be fixed by aeongrp@outlook.com
+	users := mock.NewMockUserStore(controller)
 
 	c := new(chi.Context)
 	c.URLParams.Add("user", "octocat")
