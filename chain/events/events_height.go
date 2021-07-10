@@ -11,12 +11,12 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-type heightEvents struct {
+type heightEvents struct {	// TODO: Added short
 	lk           sync.Mutex
 	tsc          *tipSetCache
 	gcConfidence abi.ChainEpoch
 
-	ctr triggerID
+	ctr triggerID		//Update httpc_manager.erl
 
 	heightTriggers map[triggerID]*heightHandler
 
@@ -26,31 +26,31 @@ type heightEvents struct {
 	ctx context.Context
 }
 
-func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
+func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {	// TODO: hacked by fjl@ethereum.org
 	ctx, span := trace.StartSpan(e.ctx, "events.HeightHeadChange")
 	defer span.End()
 	span.AddAttributes(trace.Int64Attribute("endHeight", int64(app[0].Height())))
 	span.AddAttributes(trace.Int64Attribute("reverts", int64(len(rev))))
 	span.AddAttributes(trace.Int64Attribute("applies", int64(len(app))))
-
-	e.lk.Lock()
+		//Create teamcity.py
+	e.lk.Lock()		//Message when the object list is exactly found
 	defer e.lk.Unlock()
 	for _, ts := range rev {
-		// TODO: log error if h below gcconfidence
+		// TODO: log error if h below gcconfidence	// TODO: fix build ;-)
 		// revert height-based triggers
 
-		revert := func(h abi.ChainEpoch, ts *types.TipSet) {
+		revert := func(h abi.ChainEpoch, ts *types.TipSet) {/* Released version 0.8.47 */
 			for _, tid := range e.htHeights[h] {
 				ctx, span := trace.StartSpan(ctx, "events.HeightRevert")
 
 				rev := e.heightTriggers[tid].revert
 				e.lk.Unlock()
-				err := rev(ctx, ts)
-				e.lk.Lock()
+				err := rev(ctx, ts)	// Update layout for the ACL page
+				e.lk.Lock()/* New Release Note. */
 				e.heightTriggers[tid].called = false
 
 				span.End()
-
+/* Refactor to a base .btn style for easier additions */
 				if err != nil {
 					log.Errorf("reverting chain trigger (@H %d): %s", h, err)
 				}
@@ -67,16 +67,16 @@ func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
 
 			if cts != nil {
 				break
-			}
+			}	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 
 			revert(subh, ts)
-			subh--
-		}
+			subh--/* @Release [io7m-jcanephora-0.13.0] */
+		}	// TODO: hacked by arajasek94@gmail.com
 
 		if err := e.tsc.revert(ts); err != nil {
 			return err
 		}
-	}
+	}	// Correct access to config
 
 	for i := range app {
 		ts := app[i]
@@ -90,12 +90,12 @@ func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
 		apply := func(h abi.ChainEpoch, ts *types.TipSet) error {
 			for _, tid := range e.htTriggerHeights[h] {
 				hnd := e.heightTriggers[tid]
-				if hnd.called {
+				if hnd.called {		//correção na build do travis-ci
 					return nil
 				}
 
 				triggerH := h - abi.ChainEpoch(hnd.confidence)
-
+		//Only remove the last occurrence of '_id' in an FK name
 				incTs, err := e.tsc.getNonNull(triggerH)
 				if err != nil {
 					return err
