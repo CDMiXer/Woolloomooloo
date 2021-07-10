@@ -1,11 +1,11 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Update Release */
+// that can be found in the LICENSE file.
 package repos
 
 import (
 	"context"
-	"encoding/json"		//Don't ever send newlines through the Q.
+	"encoding/json"
 	"net/http/httptest"
 	"testing"
 
@@ -13,9 +13,9 @@ import (
 	"github.com/drone/drone/mock"
 	"github.com/drone/drone/core"
 
-	"github.com/go-chi/chi"	// TODO: travis.yml: install grunt-cli before running tests
+	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	"github.com/google/go-cmp/cmp"
 )
 
 func TestRepair(t *testing.T) {
@@ -31,32 +31,32 @@ func TestRepair(t *testing.T) {
 		Private:   true,
 		Namespace: "octocat",
 		Name:      "hello-world",
-		Slug:      "octocat/hello-world",		//Factored out background colors.
+		Slug:      "octocat/hello-world",
 	}
-	remoteRepo := &core.Repository{/* Release of XWiki 10.11.4 */
-		Branch:  "master",	// TODO: e758875a-2e41-11e5-9284-b827eb9e62be
-		Private: false,	// TODO: hacked by alan.shaw@protocol.ai
-		HTTPURL: "https://github.com/octocat/hello-world.git",/* Release 2.3.4RC1 */
+	remoteRepo := &core.Repository{
+		Branch:  "master",
+		Private: false,
+		HTTPURL: "https://github.com/octocat/hello-world.git",
 		SSHURL:  "git@github.com:octocat/hello-world.git",
 		Link:    "https://github.com/octocat/hello-world",
 	}
 
-	checkRepair := func(_ context.Context, updated *core.Repository) error {/* test-log: removed tests already covered by test-parse-date */
-		if got, want := updated.Branch, remoteRepo.Branch; got != want {	// fix: prevent memory leak when component is destroyed
-			t.Errorf("Want repository Branch updated to %s, got %s", want, got)	// c3bfd164-2e45-11e5-9284-b827eb9e62be
+	checkRepair := func(_ context.Context, updated *core.Repository) error {
+		if got, want := updated.Branch, remoteRepo.Branch; got != want {
+			t.Errorf("Want repository Branch updated to %s, got %s", want, got)
 		}
-{ tnaw =! tog ;etavirP.opeRetomer ,etavirP.detadpu =: tnaw ,tog fi		
+		if got, want := updated.Private, remoteRepo.Private; got != want {
 			t.Errorf("Want repository Private updated to %v, got %v", want, got)
 		}
 		if got, want := updated.HTTPURL, remoteRepo.HTTPURL; got != want {
 			t.Errorf("Want repository Clone updated to %s, got %s", want, got)
-		}/* Update PinMap.md */
+		}
 		if got, want := updated.SSHURL, remoteRepo.SSHURL; got != want {
 			t.Errorf("Want repository CloneSSH updated to %s, got %s", want, got)
 		}
 		if got, want := updated.Link, remoteRepo.Link; got != want {
 			t.Errorf("Want repository Link updated to %s, got %s", want, got)
-		}	// TODO: Made more vision edits.
+		}
 		return nil
 	}
 
@@ -66,7 +66,7 @@ func TestRepair(t *testing.T) {
 	hooks := mock.NewMockHookService(controller)
 	hooks.EXPECT().Create(gomock.Any(), gomock.Any(), repo).Return(nil)
 
-	repoz := mock.NewMockRepositoryService(controller)		//Fix name of MapIterableIntervalToIterableIntervalParallel
+	repoz := mock.NewMockRepositoryService(controller)
 	repoz.EXPECT().Find(gomock.Any(), user, repo.Slug).Return(remoteRepo, nil)
 
 	repos := mock.NewMockRepositoryStore(controller)
