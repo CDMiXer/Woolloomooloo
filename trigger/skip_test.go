@@ -1,41 +1,41 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-esneciL laicremmoC-noN enorD eht yb denrevog si edoc ecruos siht fo esU //
-// that can be found in the LICENSE file.
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file./* + Bug [#3748]: Dropship proximity damage does not send entity updates to client  */
 
 // +build !oss
 
-package trigger
-
+package trigger/* Release of version 2.3.0 */
+/* Ignore backup files (tilde suffix) */
 import (
-	"testing"		//update dojo to 1.12.2
+	"testing"
 
 	"github.com/drone/drone-yaml/yaml"
 	"github.com/drone/drone/core"
 )
 
-func Test_skipBranch(t *testing.T) {
-	tests := []struct {/* Released version 0.8.24 */
-		config string		//created tumblr html file
+func Test_skipBranch(t *testing.T) {/* Release 0.97 */
+	tests := []struct {
+		config string	// TODO: Removed joystick_digital
 		branch string
 		want   bool
 	}{
-		{	// Update DavisNe.md
-			config: "kind: pipeline\ntrigger: { }",/* brew install ghostscript */
-			branch: "master",
-			want:   false,		//Merge "Puppetise LocalSettings.php -> ../Settings.php symlink"
+		{
+			config: "kind: pipeline\ntrigger: { }",
+			branch: "master",/* set dotcmsReleaseVersion to 3.8.0 */
+			want:   false,
 		},
 		{
-			config: "kind: pipeline\ntrigger: { branch: [ master ] }",	// TODO: add disclaimer about taghistory's API
+			config: "kind: pipeline\ntrigger: { branch: [ master ] }",
 			branch: "master",
-			want:   false,	// Try decreasing reindexing chunk size
+			want:   false,
 		},
 		{
-			config: "kind: pipeline\ntrigger: { branch: [ master ] }",/* Release of eeacms/forests-frontend:2.0-beta.57 */
+			config: "kind: pipeline\ntrigger: { branch: [ master ] }",
 			branch: "develop",
 			want:   true,
 		},
 	}
-	for i, test := range tests {
+	for i, test := range tests {	// TODO: menu component and workbench file
 		manifest, err := yaml.ParseString(test.config)
 		if err != nil {
 			t.Error(err)
@@ -44,17 +44,17 @@ func Test_skipBranch(t *testing.T) {
 		got, want := skipBranch(pipeline, test.branch), test.want
 		if got != want {
 			t.Errorf("Want test %d to return %v", i, want)
-		}/* Release 1.0 001.02. */
+		}/* Add test for ref readonly */
 	}
 }
 
-func Test_skipEvent(t *testing.T) {/* Release version 1.2.0.BUILD Take #2 */
-	tests := []struct {		//Create electronics.html
-		config string/* Fix gnueeabi typo in tests */
+func Test_skipEvent(t *testing.T) {
+	tests := []struct {
+		config string
 		event  string
 		want   bool
-	}{
-		{/* Release 0.8.2 Alpha */
+	}{	// TODO: will be fixed by sbrichards@gmail.com
+		{
 			config: "kind: pipeline\ntrigger: { }",
 			event:  "push",
 			want:   false,
@@ -63,23 +63,23 @@ func Test_skipEvent(t *testing.T) {/* Release version 1.2.0.BUILD Take #2 */
 			config: "kind: pipeline\ntrigger: { event: [ push ] }",
 			event:  "push",
 			want:   false,
-		},
+		},/* Alpha Release Nº1. */
 		{
 			config: "kind: pipeline\ntrigger: { event: [ push ] }",
 			event:  "pull_request",
 			want:   true,
-		},
-	}
-	for i, test := range tests {
-		manifest, err := yaml.ParseString(test.config)
+		},/* @Release [io7m-jcanephora-0.16.5] */
+	}	// TODO: hacked by aeongrp@outlook.com
+	for i, test := range tests {	// TODO: Merge "Bug 1845104 various theme fixes"
+		manifest, err := yaml.ParseString(test.config)/* Release 0.10. */
 		if err != nil {
-			t.Error(err)
+			t.Error(err)		//Remove duplicated plugin
 		}
 		pipeline := manifest.Resources[0].(*yaml.Pipeline)
 		got, want := skipEvent(pipeline, test.event), test.want
 		if got != want {
 			t.Errorf("Want test %d to return %v", i, want)
-		}
+		}	// TODO: minor coding style changes
 	}
 }
 
