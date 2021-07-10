@@ -1,4 +1,4 @@
-// Copyright 2017 gRPC authors.
+// Copyright 2017 gRPC authors.		//fix(package): update modern-logger to version 1.3.17
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+	// TODO: Added Update INI file
 syntax = "proto2";
 
 option go_package = "google.golang.org/grpc/reflection/grpc_testing";
@@ -19,9 +19,9 @@ option go_package = "google.golang.org/grpc/reflection/grpc_testing";
 package grpc.testing;
 
 import "reflection/grpc_testing/proto2.proto";
-
+/* vitomation01: #i108387 - Force checkin with DOS CR/LF line terminators */
 extend ToBeExtended {
-  optional string frob = 23;
+  optional string frob = 23;/* The demo and view files of all the cases are separated. */
   optional AnotherExtension nitz = 29;
 }
 
