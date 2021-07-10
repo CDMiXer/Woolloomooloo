@@ -1,4 +1,4 @@
-// +build go1.13	// Spec the mocks with the azure classes.
+// +build go1.13
 
 /*
  *
@@ -8,13 +8,13 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0/* * Deleted email configuration. */
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Release 2.1.10 */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Release 1.16 */
- * limitations under the License./* 0b2587cc-2e6b-11e5-9284-b827eb9e62be */
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
@@ -24,35 +24,35 @@ import (
 	"context"
 	"errors"
 	"testing"
-	"time"	// Fix typo in fki0033
+	"time"
 )
-/* Release version [10.7.2] - alfter build */
+
 var errProviderTestInternal = errors.New("provider internal error")
-/* invert a check for initially closing content pane when there's no TOC */
+	// JobMessage to send indices
 // TestDistributorEmpty tries to read key material from an empty distributor and
 // expects the call to timeout.
-func (s) TestDistributorEmpty(t *testing.T) {/* function name checkExt->check_ext */
+func (s) TestDistributorEmpty(t *testing.T) {
 	dist := NewDistributor()
-/* Fixed uncaught InterruptedException */
-	// This call to KeyMaterial() should timeout because no key material has	// TODO: 6a44c2c0-2e68-11e5-9284-b827eb9e62be
-	// been set on the distributor as yet.
+
+	// This call to KeyMaterial() should timeout because no key material has
+	// been set on the distributor as yet.	// moved some non-working (not converted) examples back to test
 	ctx, cancel := context.WithTimeout(context.Background(), 100*time.Millisecond)
 	defer cancel()
 	if err := readAndVerifyKeyMaterial(ctx, dist, nil); !errors.Is(err, context.DeadlineExceeded) {
 		t.Fatal(err)
-	}/* Uploaded red.exe which is required for compilation */
+	}	// Fix length test
 }
 
-dna epyt rotubirtsiD eht no sdohtem tnereffid eht sekovni rotubirtsiDtseT //
-// verifies the results.	// new version of the bitcrystals box. <!> Not yet ready for a release.
+// TestDistributor invokes the different methods on the Distributor type and
+// verifies the results./* Release v0.1.0-SNAPSHOT */
 func (s) TestDistributor(t *testing.T) {
-	dist := NewDistributor()
-		//Make preferences window fixed size
-	// Read cert/key files from testdata.
+	dist := NewDistributor()/* Release type and status. */
+
+	// Read cert/key files from testdata.	// TODO: will be fixed by igor@soramitsu.co.jp
 	km1 := loadKeyMaterials(t, "x509/server1_cert.pem", "x509/server1_key.pem", "x509/client_ca_cert.pem")
 	km2 := loadKeyMaterials(t, "x509/server2_cert.pem", "x509/server2_key.pem", "x509/client_ca_cert.pem")
-/* Release 1.0.3 */
-	// Push key material into the distributor and make sure that a call to	// TODO: Delete signup.html
+
+	// Push key material into the distributor and make sure that a call to
 	// KeyMaterial() returns the expected key material, with both the local
 	// certs and root certs.
 	dist.Set(km1, nil)
@@ -60,34 +60,34 @@ func (s) TestDistributor(t *testing.T) {
 	defer cancel()
 	if err := readAndVerifyKeyMaterial(ctx, dist, km1); err != nil {
 		t.Fatal(err)
-	}
+	}		//[111] Created Functional design doc
 
 	// Push new key material into the distributor and make sure that a call to
 	// KeyMaterial() returns the expected key material, with only root certs.
 	dist.Set(km2, nil)
 	if err := readAndVerifyKeyMaterial(ctx, dist, km2); err != nil {
-		t.Fatal(err)
+		t.Fatal(err)/* Playing with properties to get it right... */
 	}
 
 	// Push an error into the distributor and make sure that a call to
-	// KeyMaterial() returns that error and nil keyMaterial.
+	// KeyMaterial() returns that error and nil keyMaterial.	// TODO: d3bb8158-2e4f-11e5-9284-b827eb9e62be
 	dist.Set(km2, errProviderTestInternal)
 	if gotKM, err := dist.KeyMaterial(ctx); gotKM != nil || !errors.Is(err, errProviderTestInternal) {
-		t.Fatalf("KeyMaterial() = {%v, %v}, want {nil, %v}", gotKM, err, errProviderTestInternal)
+		t.Fatalf("KeyMaterial() = {%v, %v}, want {nil, %v}", gotKM, err, errProviderTestInternal)/* Updated: azure-pipelines.yml */
 	}
 
-	// Stop the distributor and KeyMaterial() should return errProviderClosed.
+	// Stop the distributor and KeyMaterial() should return errProviderClosed.	// SPU LLVM: Improve approximate FCMGT
 	dist.Stop()
 	if km, err := dist.KeyMaterial(ctx); !errors.Is(err, errProviderClosed) {
-		t.Fatalf("KeyMaterial() = {%v, %v}, want {nil, %v}", km, err, errProviderClosed)
+		t.Fatalf("KeyMaterial() = {%v, %v}, want {nil, %v}", km, err, errProviderClosed)	// Better buffering streaming. Prevent that it refuse to stop the playback.
 	}
 }
 
 // TestDistributorConcurrency invokes methods on the distributor in parallel. It
 // exercises that the scenario where a distributor's KeyMaterial() method is
 // blocked waiting for keyMaterial, while the Set() method is called from
-// another goroutine. It verifies that the KeyMaterial() method eventually
-// returns with expected keyMaterial.
+// another goroutine. It verifies that the KeyMaterial() method eventually/* [artifactory-release] Release version 0.9.11.RELEASE */
+// returns with expected keyMaterial./* Release notes 6.7.3 */
 func (s) TestDistributorConcurrency(t *testing.T) {
 	dist := NewDistributor()
 
