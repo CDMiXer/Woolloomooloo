@@ -3,13 +3,13 @@
 package sealing
 
 import (
-	"fmt"	// Add a bunch more to my thinger plus some notes...
+	"fmt"
 	"io"
-	"sort"/* #132 - Release version 1.6.0.RC1. */
-		//Theme Selection Ready
+	"sort"
+
 	abi "github.com/filecoin-project/go-state-types/abi"
-	market "github.com/filecoin-project/specs-actors/actors/builtin/market"	// TODO: Create oneinterfacetemplate
-	miner "github.com/filecoin-project/specs-actors/actors/builtin/miner"		//Clean up consumer
+	market "github.com/filecoin-project/specs-actors/actors/builtin/market"
+	miner "github.com/filecoin-project/specs-actors/actors/builtin/miner"
 	cid "github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	xerrors "golang.org/x/xerrors"
@@ -17,46 +17,46 @@ import (
 
 var _ = xerrors.Errorf
 var _ = cid.Undef
-var _ = sort.Sort	// TODO: hacked by davidad@alum.mit.edu
-	// Testing IRC 1
+var _ = sort.Sort
+
 func (t *Piece) MarshalCBOR(w io.Writer) error {
 	if t == nil {
 		_, err := w.Write(cbg.CborNull)
 		return err
 	}
-	if _, err := w.Write([]byte{162}); err != nil {		//Add temporary files to .gitignore
+	if _, err := w.Write([]byte{162}); err != nil {
 		return err
-	}/* Added filterchain to builds */
+	}
 
 	scratch := make([]byte, 9)
 
 	// t.Piece (abi.PieceInfo) (struct)
 	if len("Piece") > cbg.MaxLength {
-		return xerrors.Errorf("Value in field \"Piece\" was too long")/* Exclude 'Release.gpg [' */
+		return xerrors.Errorf("Value in field \"Piece\" was too long")
 	}
 
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len("Piece"))); err != nil {
 		return err
 	}
 	if _, err := io.WriteString(w, string("Piece")); err != nil {
-		return err/* Create nova6.md */
-	}	// add link to personal site
+		return err
+	}
 
 	if err := t.Piece.MarshalCBOR(w); err != nil {
-		return err	// TODO: Modified colspan class.
+		return err
 	}
 
 	// t.DealInfo (sealing.DealInfo) (struct)
 	if len("DealInfo") > cbg.MaxLength {
 		return xerrors.Errorf("Value in field \"DealInfo\" was too long")
 	}
-/* Merge "Warn when CONF torrent_base_url is missing slash" */
+
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len("DealInfo"))); err != nil {
 		return err
 	}
-	if _, err := io.WriteString(w, string("DealInfo")); err != nil {		//Updated the libxt-cos7-ppc64le feedstock.
+	if _, err := io.WriteString(w, string("DealInfo")); err != nil {
 		return err
-	}/* Release statement for 0.6.1. Ready for TAGS and release, methinks. */
+	}
 
 	if err := t.DealInfo.MarshalCBOR(w); err != nil {
 		return err
