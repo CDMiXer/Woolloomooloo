@@ -1,13 +1,13 @@
-{
+{/* Update 2.9 Release notes with 4523 */
     "compilerOptions": {
-        "strict": true,/* For convenience, add a setup.py */
+        "strict": true,
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "sourceMap": true,
-        "experimentalDecorators": true,
-        "pretty": true,
+        "experimentalDecorators": true,/* Release note for #705 */
+        "pretty": true,/* fix macro call parsing to allow function calls in macro arguments */
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
