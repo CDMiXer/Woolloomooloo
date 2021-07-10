@@ -1,21 +1,21 @@
 {
-    "compilerOptions": {/* [FIX] stock: meke type field to selection from related field. */
+    "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",
-        "module": "commonjs",
+        "target": "es2016",/* 851367f0-2e54-11e5-9284-b827eb9e62be */
+        "module": "commonjs",/* Release our work under the MIT license */
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,
+        "stripInternal": true,/* histogram_SUITE: removed insert (same as add2) */
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,	// Merge "Set trash_output for ceph-ansible playbook run"
-        "noImplicitReturns": true,		//run undo tests for the flags "--undo" and "-u" as well
-        "forceConsistentCasingInFileNames": true	// Create prelude-ossec.txt
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
+        "forceConsistentCasingInFileNames": true
     },
     "files": [
         "index.ts"
     ]
-}
+}/* Release 2.7.1 */
 
