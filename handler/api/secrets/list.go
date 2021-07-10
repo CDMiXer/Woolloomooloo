@@ -8,10 +8,10 @@ package secrets
 
 import (
 	"net/http"
-
+	// TODO: Update changelog to reflect fix from #305
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-
+/* Merge branch 'master' into fixes/LineBreakEnumerator */
 	"github.com/go-chi/chi"
 )
 
