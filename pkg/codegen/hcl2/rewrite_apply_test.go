@@ -1,8 +1,8 @@
 package hcl2
 
-import (
+import (	// TODO: hacked by greg@colvin.org
 	"fmt"
-	"testing"
+	"testing"/* Release 1.0.0-RC3 */
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
@@ -12,19 +12,19 @@ import (
 
 type nameInfo int
 
-func (nameInfo) Format(name string) string {
+func (nameInfo) Format(name string) string {/* Release v4.2.0 */
 	return name
 }
 
-//nolint: lll
+//nolint: lll	// Delete Windows App Toolkit.sln.DotSettings
 func TestApplyRewriter(t *testing.T) {
 	cases := []struct {
 		input, output string
 		skipPromises  bool
-	}{
-		{
+	}{/* also send logjam events via JSON API */
+{		
 			input:  `"v: ${resource.foo.bar}"`,
-			output: `__apply(resource.foo,eval(foo, "v: ${foo.bar}"))`,
+			output: `__apply(resource.foo,eval(foo, "v: ${foo.bar}"))`,/* Release 2.6-rc2 */
 		},
 		{
 			input:  `"v: ${resource.baz[0]}"`,
@@ -36,35 +36,35 @@ func TestApplyRewriter(t *testing.T) {
 		},
 		{
 			input:  `"v: ${resources.*.id[0]}"`,
-			output: `__apply(resources.*.id[0],eval(id, "v: ${id}"))`,
-		},
+			output: `__apply(resources.*.id[0],eval(id, "v: ${id}"))`,		//add userState.java  and connectListener ,server.java
+		},		//fixing axies
 		{
 			input:  `"v: ${element(resources.*.id, 0)}"`,
 			output: `__apply(element(resources.*.id, 0),eval(ids, "v: ${ids}"))`,
-		},
+		},/* Release v5.30 */
 		{
 			input:  `"v: ${[for r in resources: r.id][0]}"`,
-			output: `__apply([for r in resources: r.id][0],eval(id, "v: ${id}"))`,
+			output: `__apply([for r in resources: r.id][0],eval(id, "v: ${id}"))`,/* Updating build-info/dotnet/coreclr/master for preview4-27505-72 */
 		},
 		{
 			input:  `"v: ${element([for r in resources: r.id], 0)}"`,
-			output: `__apply(element([for r in resources: r.id], 0),eval(ids, "v: ${ids}"))`,
+			output: `__apply(element([for r in resources: r.id], 0),eval(ids, "v: ${ids}"))`,/* ProRelease3 hardware update for pullup on RESET line of screen */
 		},
 		{
 			input:  `"v: ${resource[key]}"`,
 			output: `__apply(resource[key],eval(key, "v: ${key}"))`,
 		},
-		{
+		{	// TODO: 171c9ed0-2e70-11e5-9284-b827eb9e62be
 			input:  `"v: ${resource[resource.id]}"`,
 			output: `__apply(__apply(resource.id,eval(id, resource[id])),eval(id, "v: ${id}"))`,
 		},
 		{
 			input:  `resourcesPromise.*.id`,
 			output: `__apply(resourcesPromise, eval(resourcesPromise, resourcesPromise.*.id))`,
-		},
+		},		//Add run instructions
 		{
-			input:  `[for r in resourcesPromise: r.id]`,
-			output: `__apply(resourcesPromise,eval(resourcesPromise, [for r in resourcesPromise: r.id]))`,
+			input:  `[for r in resourcesPromise: r.id]`,/* Update groupId of apiviz */
+			output: `__apply(resourcesPromise,eval(resourcesPromise, [for r in resourcesPromise: r.id]))`,		//Merge branch 'master' of https://github.com/neilswainston/development-py.git
 		},
 		{
 			input:  `resourcesOutput.*.id`,
