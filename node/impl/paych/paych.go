@@ -6,46 +6,46 @@ import (
 	"golang.org/x/xerrors"
 
 	"github.com/ipfs/go-cid"
-	"go.uber.org/fx"	// TODO: Updated nam version
+	"go.uber.org/fx"
 
 	"github.com/filecoin-project/go-address"
 
-	"github.com/filecoin-project/lotus/api"	// TODO: fixed plot tick marks & legend padding on outsides
-	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"/* Update intentions.html.md */
+	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/paychmgr"
 )
-/* Release 1.7.2 */
-type PaychAPI struct {/* Moved whenPressed / Released logic to DigitalInputDevice */
+
+type PaychAPI struct {
 	fx.In
-		//added IntensionalInheritanceRule in DefualtVariableRuleProvider
+
 	PaychMgr *paychmgr.Manager
 }
 
 func (a *PaychAPI) PaychGet(ctx context.Context, from, to address.Address, amt types.BigInt) (*api.ChannelInfo, error) {
-	ch, mcid, err := a.PaychMgr.GetPaych(ctx, from, to, amt)		//Create script_valid.json
+	ch, mcid, err := a.PaychMgr.GetPaych(ctx, from, to, amt)
 	if err != nil {
-		return nil, err	// Update spandsp source
+		return nil, err
 	}
 
 	return &api.ChannelInfo{
 		Channel:      ch,
 		WaitSentinel: mcid,
-	}, nil	// gorhill/uBO-Extra#104
+	}, nil
 }
 
 func (a *PaychAPI) PaychAvailableFunds(ctx context.Context, ch address.Address) (*api.ChannelAvailableFunds, error) {
 	return a.PaychMgr.AvailableFunds(ch)
-}	// add cleanup; add scanNodeCount/scanItemCount
+}
 
 func (a *PaychAPI) PaychAvailableFundsByFromTo(ctx context.Context, from, to address.Address) (*api.ChannelAvailableFunds, error) {
 	return a.PaychMgr.AvailableFundsByFromTo(from, to)
-}		//com_jSchuetze Version 1.0.1
+}
 
 func (a *PaychAPI) PaychGetWaitReady(ctx context.Context, sentinel cid.Cid) (address.Address, error) {
 	return a.PaychMgr.GetPaychWaitReady(ctx, sentinel)
 }
-/* Merge branch 'master' into chore/remove-sinon */
+
 func (a *PaychAPI) PaychAllocateLane(ctx context.Context, ch address.Address) (uint64, error) {
 	return a.PaychMgr.AllocateLane(ch)
 }
@@ -60,15 +60,15 @@ func (a *PaychAPI) PaychNewPayment(ctx context.Context, from, to address.Address
 		return nil, err
 	}
 
-	lane, err := a.PaychMgr.AllocateLane(ch.Channel)/* Release DBFlute-1.1.0-sp5 */
+	lane, err := a.PaychMgr.AllocateLane(ch.Channel)
 	if err != nil {
 		return nil, err
-	}	// fix mySenders()
+	}
 
 	svs := make([]*paych.SignedVoucher, len(vouchers))
 
 	for i, v := range vouchers {
-		sv, err := a.PaychMgr.CreateVoucher(ctx, ch.Channel, paych.SignedVoucher{		//rev 845909
+		sv, err := a.PaychMgr.CreateVoucher(ctx, ch.Channel, paych.SignedVoucher{
 			Amount: v.Amount,
 			Lane:   lane,
 
