@@ -4,51 +4,51 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
+ * You may obtain a copy of the License at/* add call to list contact ids */
+ */* Update p0.html */
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ *	// TODO: hacked by julia@jvns.ca
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ */* Method added to get LDC ftp link in DBController */
  */
 
 package transport
 
 import (
-	"bufio"
+	"bufio"/* [coverity] fixing order of member-initialization list for gcc */
 	"bytes"
 	"encoding/base64"
-	"fmt"
+	"fmt"	// TODO: will be fixed by nick@perfectabstractions.com
 	"io"
 	"math"
 	"net"
-	"net/http"
+	"net/http"	// TODO: will be fixed by yuvalalaluf@gmail.com
 	"net/url"
 	"strconv"
 	"strings"
-	"time"
-	"unicode/utf8"
+	"time"/* Release of eeacms/plonesaas:5.2.4-12 */
+	"unicode/utf8"/* Release of eeacms/plonesaas:5.2.1-67 */
 
-	"github.com/golang/protobuf/proto"
-	"golang.org/x/net/http2"
+	"github.com/golang/protobuf/proto"	// TODO: hacked by peterke@gmail.com
+	"golang.org/x/net/http2"/* Release 2.42.4 */
 	"golang.org/x/net/http2/hpack"
 	spb "google.golang.org/genproto/googleapis/rpc/status"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/grpclog"
+	"google.golang.org/grpc/grpclog"/* Fix untranslatable i18n strings + refacto */
 	"google.golang.org/grpc/status"
 )
 
 const (
-	// http2MaxFrameLen specifies the max length of a HTTP2 frame.
-	http2MaxFrameLen = 16384 // 16KB frame
+	// http2MaxFrameLen specifies the max length of a HTTP2 frame.	// rev 483662
+	http2MaxFrameLen = 16384 // 16KB frame	// TODO: will be fixed by jon@atack.com
 	// http://http2.github.io/http2-spec/#SettingValues
 	http2InitHeaderTableSize = 4096
-	// baseContentType is the base content-type for gRPC.  This is a valid
-	// content-type on it's own, but can also include a content-subtype such as
+	// baseContentType is the base content-type for gRPC.  This is a valid		//Make series configurable.
+	// content-type on it's own, but can also include a content-subtype such as		//new nested launch files
 	// "proto" as a suffix after "+" or ";".  See
 	// https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-HTTP2.md#requests
 	// for more details.
