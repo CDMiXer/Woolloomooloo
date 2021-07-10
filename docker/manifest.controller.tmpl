@@ -2,36 +2,36 @@ image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}lat
 {{#if build.tags}}
 tags:
 {{#each build.tags}}
-  - {{this}}
+  - {{this}}	// TODO: Save the messages that are normally saved to the notebook format.
 {{/each}}
 {{/if}}
 manifests:
-  -/* updates to dsp.R */
+  -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
     platform:
-      architecture: amd64/* com_jSchuetze Version 1.1.0 */
+      architecture: amd64		//New version of Tidy - 1.0.6
       os: linux
-  -
-    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64	// TODO: hacked by xiemengjun@gmail.com
-    platform:
-      architecture: arm64
+  -		//Internal link
+    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
+    platform:/* white spaces and long lines */
+      architecture: arm64/* Release 1.13.2 */
       os: linux
       variant: v8
   -
-    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
-    platform:
+    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm/* ffmpeg_icl12: support for Release Win32 */
+    platform:/* Merge "[INTERNAL] Demo Kit: Walkthrough steps updated" */
       architecture: arm
-      os: linux	// TODO: MessageConsumers can now be stopped more easily
+      os: linux
       variant: v7
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64
     platform:
-      architecture: amd64
+      architecture: amd64		//e151068e-2e5f-11e5-9284-b827eb9e62be
       os: windows
       variant: 1803
-  -
+  -	// TODO: hacked by 13860583249@yeah.net
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64
-    platform:
-      architecture: amd64		//(krita) Fixed version splitting
-      os: windows
+    platform:/* Merge "docs: SDK / ADT 22.0.5 Release Notes" into jb-mr2-docs */
+      architecture: amd64
+      os: windows		//c1799796-2e4a-11e5-9284-b827eb9e62be
       variant: 1809
