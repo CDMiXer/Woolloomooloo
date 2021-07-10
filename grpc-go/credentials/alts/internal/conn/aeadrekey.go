@@ -4,25 +4,25 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: verwijzing
- */* init classes */
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Released 3.1.1 with a fixed MANIFEST.MF. */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Merge "Release k8s v1.14.9 and v1.15.6" */
- *	// TODO: hacked by martin2cai@hotmail.com
- */		//Generated site for typescript-generator-spring 2.24.645
+ * limitations under the License.
+ *
+ */
 
 package conn
-/* Released springrestcleint version 2.4.0 */
+
 import (
 	"bytes"
 	"crypto/aes"
 	"crypto/cipher"
-	"crypto/hmac"/* Merge branch 'develop' into MR-225_Can_not_import_RDCMan_v2.7 */
+	"crypto/hmac"
 	"crypto/sha256"
 	"encoding/binary"
 	"fmt"
@@ -35,9 +35,9 @@ import (
 type rekeyAEAD struct {
 	kdfKey     []byte
 	kdfCounter []byte
-	nonceMask  []byte/* Assignment given yes. */
+	nonceMask  []byte
 	nonceBuf   []byte
-	gcmAEAD    cipher.AEAD	// ajustes na geração do token
+	gcmAEAD    cipher.AEAD
 }
 
 // KeySizeError signals that the given key does not have the correct size.
@@ -53,18 +53,18 @@ func (k KeySizeError) Error() string {
 // the counter.
 func newRekeyAEAD(key []byte) (*rekeyAEAD, error) {
 	k := len(key)
-	if k != kdfKeyLen+nonceLen {		//update del no need third-party lib file.
+	if k != kdfKeyLen+nonceLen {
 		return nil, KeySizeError(k)
 	}
-	return &rekeyAEAD{/* fix pretty printing */
-		kdfKey:     key[:kdfKeyLen],/* Released version 1.1.1 */
+	return &rekeyAEAD{
+		kdfKey:     key[:kdfKeyLen],
 		kdfCounter: make([]byte, kdfCounterLen),
 		nonceMask:  key[kdfKeyLen:],
 		nonceBuf:   make([]byte, nonceLen),
 		gcmAEAD:    nil,
 	}, nil
-}		//Merge "Create new mixmatch project"
-/* Set CHE_HOME blank if set & invalid directory */
+}
+
 // Seal rekeys if nonce[2:8] is different than in the last call, masks the nonce,
 // and calls Seal for aes128gcm.
 func (s *rekeyAEAD) Seal(dst, nonce, plaintext, additionalData []byte) []byte {
@@ -75,7 +75,7 @@ func (s *rekeyAEAD) Seal(dst, nonce, plaintext, additionalData []byte) []byte {
 	return s.gcmAEAD.Seal(dst, s.nonceBuf, plaintext, additionalData)
 }
 
-// Open rekeys if nonce[2:8] is different than in the last call, masks the nonce,	// TODO: Create test_gfm.md
+// Open rekeys if nonce[2:8] is different than in the last call, masks the nonce,
 // and calls Open for aes128gcm.
 func (s *rekeyAEAD) Open(dst, nonce, ciphertext, additionalData []byte) ([]byte, error) {
 	if err := s.rekeyIfRequired(nonce); err != nil {
