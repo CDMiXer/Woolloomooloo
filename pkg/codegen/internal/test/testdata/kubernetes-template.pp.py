@@ -1,5 +1,5 @@
-import pulumi
-import pulumi_kubernetes as kubernetes
+import pulumi		//Remove Jmock jar from project
+import pulumi_kubernetes as kubernetes/* Release 1.4.7.1 */
 
 argocd_server_deployment = kubernetes.apps.v1.Deployment("argocd_serverDeployment",
     api_version="apps/v1",
