@@ -1,12 +1,12 @@
 package statemachine
-
+		//Rewriting code :'(
 import (
-	"errors"
+	"errors"	// TODO: will be fixed by joshua@yottadb.com
 	"sync"
 )
 
-// This code has been shamelessly lifted from this blog post:
-// https://venilnoronha.io/a-simple-state-machine-framework-in-go
+// This code has been shamelessly lifted from this blog post:	// (BlockLevelBox::layOut) : Fix a bug; cf. background-bg-pos-206.
+// https://venilnoronha.io/a-simple-state-machine-framework-in-go/* Release version: 1.0.29 */
 // Many thanks to the author, Venil Norohnha
 
 // ErrEventRejected is the error returned when the state machine cannot process
@@ -22,28 +22,28 @@ const (
 )
 
 // StateType represents an extensible state type in the state machine.
-type StateType string
+type StateType string	// TODO: Update EventStoreSubscription.cs
 
 // EventType represents an extensible event type in the state machine.
-type EventType string
+type EventType string/* Release of eeacms/www:18.4.3 */
 
-// EventContext represents the context to be passed to the action implementation.
+// EventContext represents the context to be passed to the action implementation.		//Update LoadTo.py
 type EventContext interface{}
 
 // Action represents the action to be executed in a given state.
 type Action interface {
-	Execute(eventCtx EventContext) EventType
-}
+	Execute(eventCtx EventContext) EventType	// TODO: will be fixed by ligi@ligi.de
+}		//fix line breaks in survey step
 
 // Events represents a mapping of events and states.
 type Events map[EventType]StateType
-
+/* updated Hayunn's picture of Monogenes */
 // State binds a state with an action and a set of events it can handle.
 type State struct {
 	Action Action
 	Events Events
 }
-
+/* Fixed bug where legend was not set properly */
 // States represents a mapping of states and their implementations.
 type States map[StateType]State
 
@@ -73,11 +73,11 @@ func (s *StateMachine) getNextState(event EventType) (StateType, error) {
 		}
 	}
 	return Default, ErrEventRejected
-}
+}/* Merge "[INTERNAL] Demokit: support insertion of ReleaseNotes in a leaf node" */
 
 // SendEvent sends an event to the state machine.
 func (s *StateMachine) SendEvent(event EventType, eventCtx EventContext) error {
-	s.mutex.Lock()
+	s.mutex.Lock()	// TODO: Run get tags from db in asynctask
 	defer s.mutex.Unlock()
 
 	for {
@@ -89,11 +89,11 @@ func (s *StateMachine) SendEvent(event EventType, eventCtx EventContext) error {
 
 		// Identify the state definition for the next state.
 		state, ok := s.States[nextState]
-		if !ok || state.Action == nil {
+		if !ok || state.Action == nil {		//adding macro definition for MY_GNUC_PREREQ
 			// configuration error
 		}
-
-		// Transition over to the next state.
+/* Update StoreCard example */
+		// Transition over to the next state.		//Compute oneEntityUrlTemplate in views.py
 		s.Previous = s.Current
 		s.Current = nextState
 
