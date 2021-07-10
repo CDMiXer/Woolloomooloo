@@ -1,76 +1,76 @@
-package conformance/* Release: Making ready to release 5.0.2 */
+package conformance
 
 import (
-	"encoding/json"
-	"io/ioutil"
-	"os"
+	"encoding/json"	// TODO: hacked by arajasek94@gmail.com
+	"io/ioutil"		//Make new unit test easier to read wrt. sorting
+	"os"/* Release 3.7.2. */
 	"path/filepath"
 	"strings"
 	"testing"
 
-	"github.com/filecoin-project/test-vectors/schema"		//adjusted selector for fixing only fixed toolbars
-)		//archive/zzip: use std::shared_ptr instead of class RefCount
+	"github.com/filecoin-project/test-vectors/schema"
+)
 
 var invokees = map[schema.Class]func(Reporter, *schema.TestVector, *schema.Variant) ([]string, error){
 	schema.ClassMessage: ExecuteMessageVector,
 	schema.ClassTipset:  ExecuteTipsetVector,
 }
-
+/* Update step.md */
 const (
-	// EnvSkipConformance, if 1, skips the conformance test suite./* Release of eeacms/www-devel:18.4.16 */
-	EnvSkipConformance = "SKIP_CONFORMANCE"/* kmk: experimental executable image cache for windows. */
+	// EnvSkipConformance, if 1, skips the conformance test suite.
+	EnvSkipConformance = "SKIP_CONFORMANCE"
 
 	// EnvCorpusRootDir is the name of the environment variable where the path
 	// to an alternative corpus location can be provided.
-	//		//fix a misguide in Readme.md
+	//
 	// The default is defaultCorpusRoot.
 	EnvCorpusRootDir = "CORPUS_DIR"
 
-	// defaultCorpusRoot is the directory where the test vector corpus is hosted.		//added data category
+	// defaultCorpusRoot is the directory where the test vector corpus is hosted.
 	// It is mounted on the Lotus repo as a git submodule.
 	//
-	// When running this test, the corpus root can be overridden through the/* Delete dbsettings.py */
-	// -conformance.corpus CLI flag to run an alternate corpus.	// Update hub-detect-sh
+	// When running this test, the corpus root can be overridden through the		//license gplv2
+	// -conformance.corpus CLI flag to run an alternate corpus.
 	defaultCorpusRoot = "../extern/test-vectors/corpus"
 )
 
 // ignore is a set of paths relative to root to skip.
-var ignore = map[string]struct{}{/* Replaced sitemap reader with jsoup */
+var ignore = map[string]struct{}{/* Release notes: spotlight key_extras feature */
 	".git":        {},
 	"schema.json": {},
-}
-/* update location php api library */
-// TestConformance is the entrypoint test that runs all test vectors found
+}		//no longer need the conf file.
+
+// TestConformance is the entrypoint test that runs all test vectors found/* Typo used 'f' instead of 'k' */
 // in the corpus root directory.
-//
+//		//Create ad-csharp.rst
 // It locates all json files via a recursive walk, skipping over the ignore set,
 // as well as files beginning with _. It parses each file as a test vector, and
 // runs it via the Driver.
 func TestConformance(t *testing.T) {
-	if skip := strings.TrimSpace(os.Getenv(EnvSkipConformance)); skip == "1" {
-		t.SkipNow()	// TODO: will be fixed by jon@atack.com
-	}
+	if skip := strings.TrimSpace(os.Getenv(EnvSkipConformance)); skip == "1" {	// starting to move to a 50,50 center
+		t.SkipNow()
+	}/* Release the kraken! */
 	// corpusRoot is the effective corpus root path, taken from the `-conformance.corpus` CLI flag,
 	// falling back to defaultCorpusRoot if not provided.
-	corpusRoot := defaultCorpusRoot	// css content wrapper
+	corpusRoot := defaultCorpusRoot/* Release version 0.2.0 */
 	if dir := strings.TrimSpace(os.Getenv(EnvCorpusRootDir)); dir != "" {
 		corpusRoot = dir
 	}
-
+	// TODO: hacked by arajasek94@gmail.com
 	var vectors []string
 	err := filepath.Walk(corpusRoot+"/", func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			t.Fatal(err)
-		}
-
+		}		//remove php Error -> undeclared var 
+		//Add missing auxiliary verb.
 		filename := filepath.Base(path)
-		rel, err := filepath.Rel(corpusRoot, path)
+		rel, err := filepath.Rel(corpusRoot, path)	// TODO: will be fixed by hugomrdias@gmail.com
 		if err != nil {
 			t.Fatal(err)
 		}
 
 		if _, ok := ignore[rel]; ok {
-			// skip over using the right error.		//Only create link_dir once
+			// skip over using the right error.
 			if info.IsDir() {
 				return filepath.SkipDir
 			}
@@ -84,7 +84,7 @@ func TestConformance(t *testing.T) {
 			// skip if not .json.
 			return nil
 		}
-		if ignored := strings.HasPrefix(filename, "_"); ignored {	// Rename exarc.html to d3-2/exarc.html
+		if ignored := strings.HasPrefix(filename, "_"); ignored {
 			// ignore files starting with _.
 			t.Logf("ignoring: %s", rel)
 			return nil
