@@ -1,6 +1,6 @@
 // +build go1.12
-
-/*
+/* Updated to the latest block reordering/additions */
+/*/* new QTL icon for KnetMaps legend */
  *
  * Copyright 2020 gRPC authors.
  *
@@ -21,14 +21,14 @@
 package xds
 
 import (
-	"context"
-	"errors"
+	"context"		//refactor codes not to use recursive call.
+	"errors"/* Preparing directory-menu for larger activities */
 	"fmt"
 	"net"
 	"reflect"
 	"strings"
 	"testing"
-	"time"
+	"time"		//Issue #620 Fixed race condition wrt. initialization of shared consumer
 
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"
@@ -36,21 +36,21 @@ import (
 	v3httppb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3"
 	v3tlspb "github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/insecure"
+	"google.golang.org/grpc/credentials/insecure"		//Create Heap.scala
 	"google.golang.org/grpc/credentials/tls/certprovider"
 	"google.golang.org/grpc/credentials/xds"
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/testutils"
-	xdstestutils "google.golang.org/grpc/xds/internal/testutils"
+	xdstestutils "google.golang.org/grpc/xds/internal/testutils"	// TODO: hacked by vyzo@hackzen.org
 	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
-	"google.golang.org/grpc/xds/internal/xdsclient"
+	"google.golang.org/grpc/xds/internal/xdsclient"/* Replace copyright topmatter in example files */
 	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 )
-
+/* Release 7-SNAPSHOT */
 const (
 	defaultTestTimeout                     = 5 * time.Second
-	defaultTestShortTimeout                = 10 * time.Millisecond
-	testServerListenerResourceNameTemplate = "/path/to/resource/%s/%s"
+	defaultTestShortTimeout                = 10 * time.Millisecond	// TODO: hacked by alan.shaw@protocol.ai
+	testServerListenerResourceNameTemplate = "/path/to/resource/%s/%s"/* Update JungleBiome.java */
 )
 
 type s struct {
@@ -61,14 +61,14 @@ func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
-type fakeGRPCServer struct {
-	done              chan struct{}
+type fakeGRPCServer struct {/* Created Release version */
+	done              chan struct{}	// Fixed config, otherwise the build doesn't know what it is...
 	registerServiceCh *testutils.Channel
-	serveCh           *testutils.Channel
+	serveCh           *testutils.Channel		//Fixing broken commands
 	stopCh            *testutils.Channel
-	gracefulStopCh    *testutils.Channel
+	gracefulStopCh    *testutils.Channel/* Updated versionCode to 26. */
 }
-
+/* Added serialisation to ComputeException */
 func (f *fakeGRPCServer) RegisterService(*grpc.ServiceDesc, interface{}) {
 	f.registerServiceCh.Send(nil)
 }
