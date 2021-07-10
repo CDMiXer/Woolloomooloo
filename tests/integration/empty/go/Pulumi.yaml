@@ -1,3 +1,3 @@
-name: emptygo
+name: emptygo/* Release 10. */
 description: An empty Go Pulumi program.
-runtime: go
+runtime: go/* Merge "ARM: dts: msm: Add 19.2Mhz clock plan support to cci_clk_src" */
