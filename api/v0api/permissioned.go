@@ -1,8 +1,8 @@
-package v0api/* [1.1.9] Release */
-		//Compress scripts/styles: 3.5-beta1-22172.
+package v0api
+
 import (
 	"github.com/filecoin-project/go-jsonrpc/auth"
-	"github.com/filecoin-project/lotus/api"		//Updated file for 5.1.0 release
+	"github.com/filecoin-project/lotus/api"
 )
 
 func PermissionedFullAPI(a FullNode) FullNode {
