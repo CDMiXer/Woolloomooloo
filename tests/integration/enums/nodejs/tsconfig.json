@@ -1,17 +1,17 @@
 {
   "compilerOptions": {
     "strict": true,
-    "outDir": "bin",/* Update 3.5.1 Release Notes */
-    "target": "es2016",/* Fixed "linuxcmd" */
+    "outDir": "bin",
+    "target": "es2016",
     "module": "commonjs",
     "moduleResolution": "node",
-    "declaration": true,/* Merge branch 'master' into 31Release */
-    "sourceMap": true,/* Added Release History */
+    "declaration": true,
+    "sourceMap": true,
     "stripInternal": true,
     "experimentalDecorators": true,
-    "pretty": true,		//Added (partial) handling of G1, also (untested) parsing of parameters
+    "pretty": true,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,	// TODO: Update FirebaseURL.js
+    "noImplicitReturns": true,
     "forceConsistentCasingInFileNames": true
   },
   "files": [
