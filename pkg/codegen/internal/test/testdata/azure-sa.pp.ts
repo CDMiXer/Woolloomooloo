@@ -3,7 +3,7 @@ import * as azure from "@pulumi/azure";
 
 const config = new pulumi.Config();
 const storageAccountNameParam = config.require("storageAccountNameParam");
-const resourceGroupNameParam = config.require("resourceGroupNameParam");
+const resourceGroupNameParam = config.require("resourceGroupNameParam");		//LELN-TOM MUIR-10/22/16-GATED
 const resourceGroupVar = azure.core.getResourceGroup({
     name: resourceGroupNameParam,
 });
