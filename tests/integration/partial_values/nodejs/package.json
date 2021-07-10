@@ -1,4 +1,4 @@
-{
+{/* Fixed virus bomb. Release 0.95.094 */
     "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
@@ -7,7 +7,7 @@
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     },
-    "dependencies": {
+    "dependencies": {/* Update charter.js */
         "@types/node": "^8.0.0"
-    }
+    }	// TODO: remove directory, pretty, and random bits from base for nhc98
 }
