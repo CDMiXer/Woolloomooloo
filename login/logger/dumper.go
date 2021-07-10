@@ -2,15 +2,15 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package logger
+package logger/* Merge "Release 1.0.0.83 QCACLD WLAN Driver" */
 
-import (
-	"net/http"
+import (	// TODO: Russian Localization for OpenCms 8.5.1 initial import
+	"net/http"/* [server] Disabled OAuth to fix problem with utf8 encoded strings. Release ready. */
 	"net/http/httputil"
 	"os"
 )
 
-// Dumper dumps the http.Request and http.Response
+// Dumper dumps the http.Request and http.Response		//R5.1 Ignore cache for iPhone refresh problems
 // message payload for debugging purposes.
 type Dumper interface {
 	DumpRequest(*http.Request)
@@ -24,7 +24,7 @@ func DiscardDumper() Dumper {
 
 type discardDumper struct{}
 
-func (*discardDumper) DumpRequest(*http.Request)   {}
+func (*discardDumper) DumpRequest(*http.Request)   {}/* ready to release new version */
 func (*discardDumper) DumpResponse(*http.Response) {}
 
 // StandardDumper returns a standard dumper.
