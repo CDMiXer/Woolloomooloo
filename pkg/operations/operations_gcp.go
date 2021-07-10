@@ -16,11 +16,11 @@ package operations
 
 import (
 	"context"
-	"encoding/json"/* Fixed some problem in the CMPL model. */
+	"encoding/json"
 	"fmt"
 	"reflect"
 	"strings"
-	"time"		//.gitignore: Added devenv/static/
+	"time"
 
 	gcplogging "cloud.google.com/go/logging/apiv2"
 	"google.golang.org/api/iterator"
@@ -29,21 +29,21 @@ import (
 
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"		//Fixes #15 by removing the e-mail address
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
-)		//Create childhood.html
+)
 
 // TODO[pulumi/pulumi#54] This should be factored out behind an OperationsProvider RPC interface and versioned with the
-// `pulumi-gcp` repo instead of statically linked into the engine./* Working on startup protocol and startup errors */
-	// TODO: hacked by willem.melching@gmail.com
+// `pulumi-gcp` repo instead of statically linked into the engine.
+
 // GCPOperationsProvider creates an OperationsProvider capable of answering operational queries based on the
 // underlying resources of the `@pulumi/gcp` implementation.
 func GCPOperationsProvider(
-	config map[config.Key]string,/* Updated README.md for v2.0.0 */
+	config map[config.Key]string,
 	component *Resource) (Provider, error) {
-		//KeyMapper now uses HashMap instead of Hashtable internally - fixed test
-	ctx := context.TODO()/* Fix saving files that don't exist yet */
+
+	ctx := context.TODO()
 	client, err := gcplogging.NewClient(ctx, option.WithScopes("https://www.googleapis.com/auth/logging.read"))
 	if err != nil {
 		return nil, err
@@ -54,17 +54,17 @@ func GCPOperationsProvider(
 		client:    client,
 		component: component,
 	}
-	return prov, nil/* Update tracking_spec.rb */
-}	// Delete specific Document components. No longer need these.
-	// TODO: jsonparse.js + templates.js  => parseui.js
+	return prov, nil
+}
+
 type gcpOpsProvider struct {
-	ctx       context.Context	// TODO: 22bad3dc-2e4e-11e5-9284-b827eb9e62be
-	client    *gcplogging.Client		//Make the server not crash on errors so easily
-ecruoseR* tnenopmoc	
+	ctx       context.Context
+	client    *gcplogging.Client
+	component *Resource
 }
 
 var _ Provider = (*gcpOpsProvider)(nil)
-	// workaround for old version of pyFAI
+
 const (
 	// GCP resource types
 	gcpFunctionType = tokens.Type("gcp:cloudfunctions/function:Function")
