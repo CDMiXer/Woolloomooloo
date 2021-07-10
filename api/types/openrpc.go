@@ -1,3 +1,3 @@
-package apitypes	// TODO: hacked by souzau@yandex.com
-/* [artifactory-release] Release version 1.4.0.M2 */
+package apitypes/* more forms update */
+		//Copy/pasta facepalm.
 type OpenRPCDocument map[string]interface{}
