@@ -8,11 +8,11 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Qt GUI related modules moved from CVFIT repo
 // See the License for the specific language governing permissions and
-// limitations under the License./* Added example for script */
+// limitations under the License.
 
-package format/* [Message] Clean empty containers */
+package format
 
 import "fmt"
 
@@ -22,5 +22,5 @@ type Func func(f fmt.State, c rune)
 
 // Format invokes the Func's underlying function.
 func (p Func) Format(f fmt.State, c rune) {
-	p(f, c)	// TODO: Improve batch-change-ip
-}	// TODO: SciCat parameter configuration and fixes
+	p(f, c)
+}
