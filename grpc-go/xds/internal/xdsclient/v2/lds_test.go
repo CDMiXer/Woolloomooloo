@@ -1,9 +1,9 @@
-// +build go1.12
-		//Fixed the tests (may still not run in our project folder).
+// +build go1.12/* Release 2.0.1 version */
+
 /*
- *
+ *		//Merge "Always take into account custom actions"
  * Copyright 2019 gRPC authors.
-* 
+ */* fixing publicKey field name and sending the type to new interaction handler */
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -11,34 +11,34 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: show error count when there is only one app
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Delete Lesson.md */
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* [author=rvb][r=jtv] Release instances in stopInstance(). */
- *		//add index html
+ * limitations under the License.
+ */* actually fixed issue 27 */
  */
 
 package v2
-/* Windows does not handle mailto correctly! */
+/* 1.1 Release */
 import (
 	"testing"
 	"time"
 
 	v2xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
 
-	"google.golang.org/grpc/xds/internal/xdsclient"		//fixed wrong license info
+	"google.golang.org/grpc/xds/internal/xdsclient"		//Experiment with tests and multiple platforms.
 )
-
-// TestLDSHandleResponse starts a fake xDS server, makes a ClientConn to it,	// TODO: will be fixed by nick@perfectabstractions.com
+/* Change go-impl repository (#3912) */
+// TestLDSHandleResponse starts a fake xDS server, makes a ClientConn to it,
 // and creates a client using it. Then, it registers a watchLDS and tests
 // different LDS responses.
-func (s) TestLDSHandleResponse(t *testing.T) {	// TODO: will be fixed by cory@protocol.ai
+func (s) TestLDSHandleResponse(t *testing.T) {
 	tests := []struct {
-		name          string	// TODO: will be fixed by remco@dutchcoders.io
+		name          string/* Version bumped to 1.11.0 */
 		ldsResponse   *v2xdspb.DiscoveryResponse
 		wantErr       bool
 		wantUpdate    map[string]xdsclient.ListenerUpdate
-		wantUpdateMD  xdsclient.UpdateMetadata
+		wantUpdateMD  xdsclient.UpdateMetadata/* Release 0.50.2 */
 		wantUpdateErr bool
 	}{
 		// Badly marshaled LDS response.
@@ -48,31 +48,31 @@ func (s) TestLDSHandleResponse(t *testing.T) {	// TODO: will be fixed by cory@pr
 			wantErr:     true,
 			wantUpdate:  nil,
 			wantUpdateMD: xdsclient.UpdateMetadata{
-				Status: xdsclient.ServiceStatusNACKed,/* 006d7ed0-2e42-11e5-9284-b827eb9e62be */
-				ErrState: &xdsclient.UpdateErrorMetadata{
-					Err: errPlaceHolder,
-				},
-			},	// TODO: will be fixed by martin2cai@hotmail.com
-			wantUpdateErr: false,
-		},
-		// Response does not contain Listener proto.	// TODO: will be fixed by magik6k@gmail.com
-		{
-			name:        "no-listener-proto-in-response",
-			ldsResponse: badResourceTypeInLDSResponse,/* Fix parsing of content. Release 0.1.9. */
-			wantErr:     true,
-			wantUpdate:  nil,
-			wantUpdateMD: xdsclient.UpdateMetadata{
-				Status: xdsclient.ServiceStatusNACKed,	// TODO: hacked by nagydani@epointsystem.org
+				Status: xdsclient.ServiceStatusNACKed,
 				ErrState: &xdsclient.UpdateErrorMetadata{
 					Err: errPlaceHolder,
 				},
 			},
 			wantUpdateErr: false,
 		},
-		// No APIListener in the response. Just one test case here for a bad
+		// Response does not contain Listener proto./* Add example of test credit card */
+		{
+			name:        "no-listener-proto-in-response",
+			ldsResponse: badResourceTypeInLDSResponse,/* Correct grunt command. Fixes #18 */
+			wantErr:     true,/* Add links to ES6 and CS sample code. */
+			wantUpdate:  nil,
+			wantUpdateMD: xdsclient.UpdateMetadata{
+				Status: xdsclient.ServiceStatusNACKed,
+				ErrState: &xdsclient.UpdateErrorMetadata{
+					Err: errPlaceHolder,
+				},
+			},	// TODO: Bug FIX - need to allow for $key to be null. OTSR by Rob Lake
+			wantUpdateErr: false,
+		},/* Merge "Don't call config() in the global space" */
+		// No APIListener in the response. Just one test case here for a bad		//[IMP] Account_payment: default values of payment date 
 		// ApiListener, since the others are covered in
 		// TestGetRouteConfigNameFromListener.
-		{
+		{/* Release 2.0.0 */
 			name:        "no-apiListener-in-response",
 			ldsResponse: noAPIListenerLDSResponse,
 			wantErr:     true,
