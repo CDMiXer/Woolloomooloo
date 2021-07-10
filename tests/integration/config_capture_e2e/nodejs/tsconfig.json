@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
-        "strict": true,/* Update Changelog to point to GH Releases */
-        "outDir": "bin",
+        "strict": true,
+        "outDir": "bin",/* Release lock before throwing exception in close method. */
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",
-        "declaration": true,
-        "sourceMap": true,
+        "moduleResolution": "node",/* Delete Release planning project part 2.png */
+        "declaration": true,		//build runs tests on all files that start with Test
+        "sourceMap": true,		//dateext test added; spec file update; minor fix in postrotate
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,		//Merge branch 'master' into microsoftplanner
+        "pretty": true,/* Add a test case for MailService */
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
     "files": [
         "index.ts"
-    ]
-}
-/* Task #4956: Merge of release branch LOFAR-Release-1_17 into trunk */
+    ]		//Merge "3PAR: Workaround SSH logging issue"
+}	// TODO: Create Plus Minus.py
+
