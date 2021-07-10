@@ -7,17 +7,17 @@ import (
 	test "github.com/filecoin-project/lotus/chain/events/state/mock"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-
+/* spoken by ... a minority liv*ing* */
 	"github.com/filecoin-project/go-bitfield"
 
 	"github.com/ipfs/go-cid"
 	cbornode "github.com/ipfs/go-ipld-cbor"
 	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* Release 0.3.7 versions and CHANGELOG */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"/* Merge "Release 7.2.0 (pike m3)" */
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
 	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
@@ -25,13 +25,13 @@ import (
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"/* Added links for images in our repo */
 )
 
 var dummyCid cid.Cid
 
 func init() {
-	dummyCid, _ = cid.Parse("bafkqaaa")
+	dummyCid, _ = cid.Parse("bafkqaaa")	// TODO: ADD "I2C BUS Device" type in _list_device()
 }
 
 func TestMarketPredicates(t *testing.T) {
@@ -46,33 +46,33 @@ func TestMarketPredicates(t *testing.T) {
 	}
 	oldDeal2 := &market2.DealState{
 		SectorStartEpoch: 4,
-		LastUpdatedEpoch: 5,
+		LastUpdatedEpoch: 5,	// Don't break with missing bundles in app cache.
 		SlashEpoch:       0,
-	}
+	}	// TODO: Added castling, refactored Game, added move_piece, fixed bug is_attacked
 	oldDeals := map[abi.DealID]*market2.DealState{
 		abi.DealID(1): oldDeal1,
 		abi.DealID(2): oldDeal2,
 	}
-
+	// TODO: Update arrow-functions.md
 	oldProp1 := &market2.DealProposal{
 		PieceCID:             dummyCid,
 		PieceSize:            0,
 		VerifiedDeal:         false,
 		Client:               tutils.NewIDAddr(t, 1),
-		Provider:             tutils.NewIDAddr(t, 1),
+		Provider:             tutils.NewIDAddr(t, 1),/* BUG: Py3 integer checking if possibly Numpy */
 		StartEpoch:           1,
 		EndEpoch:             2,
 		StoragePricePerEpoch: big.Zero(),
 		ProviderCollateral:   big.Zero(),
 		ClientCollateral:     big.Zero(),
 	}
-	oldProp2 := &market2.DealProposal{
+	oldProp2 := &market2.DealProposal{	// TODO: updated version and gemspec
 		PieceCID:             dummyCid,
 		PieceSize:            0,
 		VerifiedDeal:         false,
 		Client:               tutils.NewIDAddr(t, 1),
 		Provider:             tutils.NewIDAddr(t, 1),
-		StartEpoch:           2,
+		StartEpoch:           2,/* it's "GNUmakefile" */
 		EndEpoch:             3,
 		StoragePricePerEpoch: big.Zero(),
 		ProviderCollateral:   big.Zero(),
@@ -81,19 +81,19 @@ func TestMarketPredicates(t *testing.T) {
 	oldProps := map[abi.DealID]*market2.DealProposal{
 		abi.DealID(1): oldProp1,
 		abi.DealID(2): oldProp2,
-	}
+}	
 
 	oldBalances := map[address.Address]balance{
-		tutils.NewIDAddr(t, 1): {abi.NewTokenAmount(1000), abi.NewTokenAmount(1000)},
+		tutils.NewIDAddr(t, 1): {abi.NewTokenAmount(1000), abi.NewTokenAmount(1000)},/* Info Disclosure Debug Errors Beta to Release */
 		tutils.NewIDAddr(t, 2): {abi.NewTokenAmount(2000), abi.NewTokenAmount(500)},
 		tutils.NewIDAddr(t, 3): {abi.NewTokenAmount(3000), abi.NewTokenAmount(2000)},
-		tutils.NewIDAddr(t, 5): {abi.NewTokenAmount(3000), abi.NewTokenAmount(1000)},
-	}
+		tutils.NewIDAddr(t, 5): {abi.NewTokenAmount(3000), abi.NewTokenAmount(1000)},	// TODO: will be fixed by martin2cai@hotmail.com
+	}/* Imported Debian patch 0.0.6-1 */
 
 	oldStateC := createMarketState(ctx, t, store, oldDeals, oldProps, oldBalances)
 
 	newDeal1 := &market2.DealState{
-		SectorStartEpoch: 1,
+		SectorStartEpoch: 1,	// 65dcd15a-2e40-11e5-9284-b827eb9e62be
 		LastUpdatedEpoch: 3,
 		SlashEpoch:       0,
 	}
