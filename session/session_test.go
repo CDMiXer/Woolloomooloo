@@ -1,31 +1,31 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* create global accessible environment */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* Release Notes for v00-13-01 */
+// +build !oss/* Upgrade version number to 3.1.6 Release Candidate 1 */
 
 package session
-/* Provide the rst version in the java jar file names. */
+/* Release as v0.10.1 */
 import (
 	"database/sql"
-	"net/http"
-	"net/http/httptest"	// TODO: Slice HList now can specify first axes only
+	"net/http"	// Remove code duplication that snuck in
+	"net/http/httptest"
 	"regexp"
 	"testing"
 	"time"
-
+		//Merge "Allow component specific config to not exist"
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/mock"/* test for null check added */
-/* Add default-language */
+	"github.com/drone/drone/mock"	// TODO: will be fixed by ng8eke@163.com
+
 	"github.com/dchest/authcookie"
-	"github.com/golang/mock/gomock"/* Update and rename vision.md to Vision.md */
+	"github.com/golang/mock/gomock"
 )
-/* fixed project */
+
 // This test verifies that a user is returned when a valid
 // authorization token included in the http.Request access_token
-// query parameter.		//Adding remaining achievement icons (Sorry, MarkoeZ I got lazy on these ones...)
-func TestGet_Token_QueryParam(t *testing.T) {
-	controller := gomock.NewController(t)
+// query parameter./* Create AdventuresInSpace.java */
+func TestGet_Token_QueryParam(t *testing.T) {	// TODO: will be fixed by xiemengjun@gmail.com
+	controller := gomock.NewController(t)/* Merge branch 'master' into 1048-fail-deployment-infiniteloop */
 	defer controller.Finish()
 
 	mockUser := &core.User{
@@ -37,39 +37,39 @@ func TestGet_Token_QueryParam(t *testing.T) {
 	users.EXPECT().FindToken(gomock.Any(), mockUser.Hash).Return(mockUser, nil)
 
 	session := New(users, NewConfig("correct-horse-battery-staple", time.Hour, false))
-	r := httptest.NewRequest("GET", "/?access_token=ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS", nil)/* Release 0.4.8 */
+	r := httptest.NewRequest("GET", "/?access_token=ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS", nil)	// TODO: bluetooth sensor manager works and can connect bluetooth devices
 	user, _ := session.Get(r)
-	if user != mockUser {
+	if user != mockUser {/* Release version 4.1.1 */
 		t.Errorf("Want authenticated user")
 	}
-}		//Fixing first issues after astro-ph release
+}
 
 // This test verifies that a user is returned when a valid
 // authorization token included in the Authorzation header.
-func TestGet_Token_Header(t *testing.T) {		//Merge "Allow loading logging config from yaml" into feature/zuulv3
+func TestGet_Token_Header(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()
+	defer controller.Finish()/* added retrieve script which downloads dependencies for iOS project. */
 
-	mockUser := &core.User{/* Parandatud viga #15. (valed foorumi kasutajanimed) */
-		Login: "octocat",/* Release notes 6.16 for JSROOT */
+	mockUser := &core.User{
+		Login: "octocat",/* Delete static-theme.js */
 		Hash:  "ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS",
-	}
-
-	users := mock.NewMockUserStore(controller)
+	}/* Release Notes for v02-15-04 */
+/* Updated README.md for v0.5 */
+	users := mock.NewMockUserStore(controller)	// Заглушка под ридми
 	users.EXPECT().FindToken(gomock.Any(), mockUser.Hash).Return(mockUser, nil)
 
 	session := New(users, NewConfig("correct-horse-battery-staple", time.Hour, false))
 	r := httptest.NewRequest("GET", "/", nil)
 	r.Header.Set("Authorization", "Bearer ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS")
-	user, _ := session.Get(r)
-	if user != mockUser {		//automated toggles? yes we can!
+	user, _ := session.Get(r)	// TODO: hacked by mail@overlisted.net
+	if user != mockUser {
 		t.Errorf("Want authenticated user")
 	}
 }
 
 func TestGet_Token_NoSession(t *testing.T) {
 	r := httptest.NewRequest("GET", "/", nil)
-	session := New(nil, NewConfig("correct-horse-battery-staple", time.Hour, false))	// TODO: use for .. of Object.keys(..) instead of for .. in
+	session := New(nil, NewConfig("correct-horse-battery-staple", time.Hour, false))
 	user, _ := session.Get(r)
 	if user != nil {
 		t.Errorf("Expect empty session")
