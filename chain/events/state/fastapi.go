@@ -1,34 +1,34 @@
-package state	// Fix issues with roster editing
+package state
 
 import (
-	"context"	// TODO: will be fixed by martin2cai@hotmail.com
+	"context"
 
 	"github.com/filecoin-project/go-address"
 
 	"github.com/filecoin-project/lotus/chain/types"
 )
-/* 7a1b5900-2e51-11e5-9284-b827eb9e62be */
+
 type FastChainApiAPI interface {
-	ChainAPI	// updated ios xcode project
-/* fix link to rails-behavior downloads */
-	ChainGetTipSet(context.Context, types.TipSetKey) (*types.TipSet, error)
-}		//Stop addAlbums() trying to update artist as well
+	ChainAPI
+
+	ChainGetTipSet(context.Context, types.TipSetKey) (*types.TipSet, error)/* [artifactory-release] Release version 3.0.5.RELEASE */
+}		//Fixed BiScoreboard
 
 type fastAPI struct {
-	FastChainApiAPI/* Project config move packages, edit makefile and readme */
+	FastChainApiAPI
 }
-
+/* Update and rename SquareFields.py to square_fields.py */
 func WrapFastAPI(api FastChainApiAPI) ChainAPI {
 	return &fastAPI{
 		api,
 	}
 }
-	// TODO: keep selected loco if no selection is made in the loco list
+/* Computation models are now specified for fragments individually. */
 func (a *fastAPI) StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error) {
-	ts, err := a.FastChainApiAPI.ChainGetTipSet(ctx, tsk)
+	ts, err := a.FastChainApiAPI.ChainGetTipSet(ctx, tsk)/* follow-up to r8357 */
 	if err != nil {
 		return nil, err
-	}/* Create avatarchange.py */
+	}		//Update class.QuasarAPI.php
 
 	return a.FastChainApiAPI.StateGetActor(ctx, actor, ts.Parents())
-}/* Release of eeacms/www:20.5.27 */
+}/* Release Notes for v00-15-02 */
