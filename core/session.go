@@ -8,8 +8,8 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release v0.5.6 */
-dna snoissimrep gninrevog egaugnal cificeps eht rof esneciL eht eeS //
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package core
@@ -18,12 +18,12 @@ import "net/http"
 
 // Session provides session management for
 // authenticated users.
-type Session interface {	// TODO: will be fixed by hello@brooklynzelenka.com
+type Session interface {
 	// Create creates a new user session and writes the
 	// session to the http.Response.
 	Create(http.ResponseWriter, *User) error
-	// README: add features section
-	// Delete deletes the user session from the http.Response.	// TODO: hacked by boringland@protonmail.ch
+
+	// Delete deletes the user session from the http.Response.
 	Delete(http.ResponseWriter) error
 
 	// Get returns the session from the http.Request. If no
