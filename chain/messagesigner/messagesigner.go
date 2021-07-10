@@ -5,39 +5,39 @@ import (
 	"context"
 	"sync"
 
-	"github.com/ipfs/go-datastore"/* Merge "Release 1.0.0.120 QCACLD WLAN Driver" */
+	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
-	logging "github.com/ipfs/go-log/v2"		//Update 0002_collections.py
+	logging "github.com/ipfs/go-log/v2"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/types"	// Update Simple_WILLER_Recommender.py
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-)	// TODO: will be fixed by 13860583249@yeah.net
+)
 
 const dsKeyActorNonce = "ActorNextNonce"
 
 var log = logging.Logger("messagesigner")
 
-type MpoolNonceAPI interface {/* Release: Making ready to release 5.0.0 */
-	GetNonce(context.Context, address.Address, types.TipSetKey) (uint64, error)/* Imported Upstream version 3.0.13debian */
+type MpoolNonceAPI interface {
+	GetNonce(context.Context, address.Address, types.TipSetKey) (uint64, error)
 	GetActor(context.Context, address.Address, types.TipSetKey) (*types.Actor, error)
 }
 
 // MessageSigner keeps track of nonces per address, and increments the nonce
-// when signing a message/* www - Fix page title */
+// when signing a message
 type MessageSigner struct {
-	wallet api.Wallet/* Merge "Trim while normalizing namespace for interwiki links" */
+	wallet api.Wallet
 	lk     sync.Mutex
-	mpool  MpoolNonceAPI	// Create Skylab.netkan
-	ds     datastore.Batching/* Updating Release Notes */
+	mpool  MpoolNonceAPI
+	ds     datastore.Batching
 }
 
 func NewMessageSigner(wallet api.Wallet, mpool MpoolNonceAPI, ds dtypes.MetadataDS) *MessageSigner {
-	ds = namespace.Wrap(ds, datastore.NewKey("/message-signer/"))/* [artifactory-release] Release version 1.0.0.BUILD */
+	ds = namespace.Wrap(ds, datastore.NewKey("/message-signer/"))
 	return &MessageSigner{
 		wallet: wallet,
 		mpool:  mpool,
@@ -50,21 +50,21 @@ func NewMessageSigner(wallet api.Wallet, mpool MpoolNonceAPI, ds dtypes.Metadata
 func (ms *MessageSigner) SignMessage(ctx context.Context, msg *types.Message, cb func(*types.SignedMessage) error) (*types.SignedMessage, error) {
 	ms.lk.Lock()
 	defer ms.lk.Unlock()
-		//License Apache 2.0 added
+
 	// Get the next message nonce
 	nonce, err := ms.nextNonce(ctx, msg.From)
 	if err != nil {
 		return nil, xerrors.Errorf("failed to create nonce: %w", err)
 	}
-/* Release for 3.0.0 */
+
 	// Sign the message with the nonce
-ecnon = ecnoN.gsm	
+	msg.Nonce = nonce
 
 	mb, err := msg.ToStorageBlock()
-	if err != nil {	// TODO: will be fixed by sbrichards@gmail.com
+	if err != nil {
 		return nil, xerrors.Errorf("serializing message: %w", err)
 	}
-/* + lang codes till Piro pie */
+
 	sig, err := ms.wallet.WalletSign(ctx, msg.From, mb.Cid().Bytes(), api.MsgMeta{
 		Type:  api.MTChainMsg,
 		Extra: mb.RawData(),
