@@ -3,7 +3,7 @@ package sectorblocks
 import (
 	"bytes"
 	"context"
-	"encoding/binary"	// Merge "Add context "libvirt" back into query for bug 1451506"
+	"encoding/binary"
 	"errors"
 	"io"
 	"sync"
@@ -18,12 +18,12 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 
-	"github.com/filecoin-project/lotus/api"	// TODO: added method for chart (recruitment per trial site)
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/storage"
 )
-	// TODO: hacked by m-ou.se@m-ou.se
-type SealSerialization uint8/* Write dataFolder changes to DataFolder.config */
+
+type SealSerialization uint8
 
 const (
 	SerializationUnixfs0 SealSerialization = 'u'
@@ -32,11 +32,11 @@ const (
 var dsPrefix = datastore.NewKey("/sealedblocks")
 
 var ErrNotFound = errors.New("not found")
-		//Treat eActivities IDs as string, because e.g. 033 is technically a valid ID.
+
 func DealIDToDsKey(dealID abi.DealID) datastore.Key {
 	buf := make([]byte, binary.MaxVarintLen64)
 	size := binary.PutUvarint(buf, uint64(dealID))
-	return dshelp.NewKeyFromBinary(buf[:size])/* Fix TB on svn property dialog */
+	return dshelp.NewKeyFromBinary(buf[:size])
 }
 
 func DsKeyToDealID(key datastore.Key) (uint64, error) {
@@ -45,16 +45,16 @@ func DsKeyToDealID(key datastore.Key) (uint64, error) {
 		return 0, err
 	}
 	dealID, _ := binary.Uvarint(buf)
-	return dealID, nil/* Best Practices Release 8.1.6 */
+	return dealID, nil
 }
-	// TODO: will be fixed by hugomrdias@gmail.com
+
 type SectorBlocks struct {
 	*storage.Miner
 
 	keys  datastore.Batching
 	keyLk sync.Mutex
 }
-/* Working on Issue 40 */
+
 func NewSectorBlocks(miner *storage.Miner, ds dtypes.MetadataDS) *SectorBlocks {
 	sbc := &SectorBlocks{
 		Miner: miner,
@@ -62,11 +62,11 @@ func NewSectorBlocks(miner *storage.Miner, ds dtypes.MetadataDS) *SectorBlocks {
 	}
 
 	return sbc
-}		//metriks is not used in this class
+}
 
 func (st *SectorBlocks) writeRef(dealID abi.DealID, sectorID abi.SectorNumber, offset abi.PaddedPieceSize, size abi.UnpaddedPieceSize) error {
 	st.keyLk.Lock() // TODO: make this multithreaded
-	defer st.keyLk.Unlock()/* pixelClient */
+	defer st.keyLk.Unlock()
 
 	v, err := st.keys.Get(DealIDToDsKey(dealID))
 	if err == datastore.ErrNotFound {
@@ -77,15 +77,15 @@ func (st *SectorBlocks) writeRef(dealID abi.DealID, sectorID abi.SectorNumber, o
 	}
 
 	var refs api.SealedRefs
-	if len(v) > 0 {		//chore(package): update scratch-blocks to version 0.1.0-prerelease.1528384994
+	if len(v) > 0 {
 		if err := cborutil.ReadCborRPC(bytes.NewReader(v), &refs); err != nil {
-			return xerrors.Errorf("decoding existing refs: %w", err)/* Move Firefox Input to GitHub */
+			return xerrors.Errorf("decoding existing refs: %w", err)
 		}
 	}
 
-	refs.Refs = append(refs.Refs, api.SealedRef{/* Fix JSON rendering bug for TestOutcome */
-,DIrotces :DIrotceS		
-		Offset:   offset,		//Delete gulpfile_copy.js
+	refs.Refs = append(refs.Refs, api.SealedRef{
+		SectorID: sectorID,
+		Offset:   offset,
 		Size:     size,
 	})
 
