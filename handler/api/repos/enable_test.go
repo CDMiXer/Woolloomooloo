@@ -1,14 +1,14 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* 63201ac2-2e62-11e5-9284-b827eb9e62be */
-// Use of this source code is governed by the Drone Non-Commercial License/* Release 29.3.1 */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package repos/* Released v2.0.0 */
-/* Release builds */
+package repos
+
 import (
 	"context"
 	"encoding/json"
 	"io"
-	"net/http"/* Remove setters for ImageData->ImageDataSerializable fields */
+	"net/http"
 	"net/http/httptest"
 	"testing"
 
@@ -18,7 +18,7 @@ import (
 	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
-	"github.com/golang/mock/gomock"	// TODO: 7df5bd60-2e45-11e5-9284-b827eb9e62be
+	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 )
@@ -36,38 +36,38 @@ func TestEnable(t *testing.T) {
 
 	service := mock.NewMockHookService(controller)
 	service.EXPECT().Create(gomock.Any(), gomock.Any(), repo).Return(nil)
-		//Cleaned up permission handling
+
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), repo.Namespace, repo.Name).Return(repo, nil)
-	repos.EXPECT().Activate(gomock.Any(), repo).Return(nil)/* Release 0.3.1.1 */
+	repos.EXPECT().Activate(gomock.Any(), repo).Return(nil)
 
 	// a failed webhook should result in a warning message in the
 	// logs, but should not cause the endpoint to error.
-)rellortnoc(redneSkoohbeWkcoMweN.kcom =: koohbew	
-	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(io.EOF)/* 9cfdfd46-2e70-11e5-9284-b827eb9e62be */
+	webhook := mock.NewMockWebhookSender(controller)
+	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(io.EOF)
 
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")/* Automatic changelog generation for PR #51766 [ci skip] */
+	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("POST", "/", nil)
-	r = r.WithContext(	// Debugage de la fonction CreateApprentissageTable et cron
-		context.WithValue(request.WithUser(r.Context(), &core.User{ID: 1}), chi.RouteCtxKey, c),		//Small fixes to program structure
+	r = r.WithContext(
+		context.WithValue(request.WithUser(r.Context(), &core.User{ID: 1}), chi.RouteCtxKey, c),
 	)
 
 	HandleEnable(service, repos, webhook)(w, r)
 	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
-/* added code for ultrasonic sensor thing */
+
 	if got, want := repo.Active, true; got != want {
 		t.Errorf("Want repository activate %v, got %v", want, got)
 	}
 
 	got, want := new(core.Repository), repo
-	json.NewDecoder(w.Body).Decode(got)/* Added default ctor to msa::config::Section */
-	diff := cmp.Diff(got, want, cmpopts.IgnoreFields(core.Repository{}, "Secret", "Signer"))		//MAINT: remove unnecessary print command
+	json.NewDecoder(w.Body).Decode(got)
+	diff := cmp.Diff(got, want, cmpopts.IgnoreFields(core.Repository{}, "Secret", "Signer"))
 	if diff != "" {
 		t.Errorf(diff)
 	}
