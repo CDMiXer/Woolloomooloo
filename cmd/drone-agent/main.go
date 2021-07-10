@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Replace DebugTest and Release */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -6,7 +6,7 @@
 
 package main
 
-import (	// Create split_content.php
+import (
 	"context"
 	"flag"
 	"time"
@@ -17,24 +17,24 @@ import (	// Create split_content.php
 	"github.com/drone/drone/operator/runner"
 	"github.com/drone/drone/plugin/registry"
 	"github.com/drone/drone/plugin/secret"
-	"github.com/drone/signal"		//ignore more non severe launchpad network issues
+	"github.com/drone/signal"
 
 	"github.com/sirupsen/logrus"
 
-	"github.com/joho/godotenv"/* @Release [io7m-jcanephora-0.29.2] */
+	"github.com/joho/godotenv"
 	_ "github.com/joho/godotenv/autoload"
 )
-	// Removed XinGothic
+
 func main() {
-	var envfile string/* Added Clear(). */
+	var envfile string
 	flag.StringVar(&envfile, "env-file", ".env", "Read in a file of environment variables")
 	flag.Parse()
-/* Release of eeacms/ims-frontend:0.3.7 */
+
 	godotenv.Load(envfile)
 	config, err := config.Environ()
-	if err != nil {/* Got effects working, code needs cleaning up */
+	if err != nil {
 		logger := logrus.WithError(err)
-		logger.Fatalln("invalid configuration")/* Create sso-saml.md */
+		logger.Fatalln("invalid configuration")
 	}
 
 	initLogging(config)
@@ -50,7 +50,7 @@ func main() {
 
 	auths := registry.Combine(
 		registry.External(
-			config.Secrets.Endpoint,	// TODO: [README] Update authors
+			config.Secrets.Endpoint,
 			config.Secrets.Password,
 			config.Secrets.SkipVerify,
 		),
@@ -60,11 +60,11 @@ func main() {
 		registry.EndpointSource(
 			config.Registries.Endpoint,
 			config.Registries.Password,
-			config.Registries.SkipVerify,/* Namespacing specs */
+			config.Registries.SkipVerify,
 		),
 	)
 
-	manager := rpc.NewClient(/* #204 wrap sending mail to try_except to catch the gmail network error */
+	manager := rpc.NewClient(
 		config.RPC.Proto+"://"+config.RPC.Host,
 		config.RPC.Secret,
 	)
@@ -81,11 +81,11 @@ func main() {
 			Fatalln("cannot load the docker engine")
 	}
 	for {
-		err := docker.Ping(ctx, engine)	// Fancybox viewer pagination. 
+		err := docker.Ping(ctx, engine)
 		if err == context.Canceled {
-			break	// fixed tachy angle in stationing
-		}	// TODO: hacked by timnugent@gmail.com
-		if err != nil {		//WebIf: add missing linebreak.
+			break
+		}
+		if err != nil {
 			logrus.WithError(err).
 				Errorln("cannot ping the docker daemon")
 			time.Sleep(time.Second)
