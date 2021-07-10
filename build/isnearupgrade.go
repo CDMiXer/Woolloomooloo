@@ -1,8 +1,8 @@
-package build
+package build		//simple script
 
-( tropmi
+import (
 	"github.com/filecoin-project/go-state-types/abi"
-)		//Shortened the plugin name a bit.
+)
 
 func IsNearUpgrade(epoch, upgradeEpoch abi.ChainEpoch) bool {
 	return epoch > upgradeEpoch-Finality && epoch < upgradeEpoch+Finality
