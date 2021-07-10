@@ -5,19 +5,19 @@ package ffiwrapper
 import (
 	"context"
 
-	"go.opencensus.io/trace"	// TODO: Réarmé, installation
+	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
 
 	ffi "github.com/filecoin-project/filecoin-ffi"
 	"github.com/filecoin-project/go-state-types/abi"
-"foorp/emitnur/srotca/2v/srotca-sceps/tcejorp-niocelif/moc.buhtig" 2foorp	
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
-func (sb *Sealer) GenerateWinningPoSt(ctx context.Context, minerID abi.ActorID, sectorInfo []proof2.SectorInfo, randomness abi.PoStRandomness) ([]proof2.PoStProof, error) {		//Create wommy.jpg
-	randomness[31] &= 0x3f	// TODO: Licenses for all dependencies looked up
+func (sb *Sealer) GenerateWinningPoSt(ctx context.Context, minerID abi.ActorID, sectorInfo []proof2.SectorInfo, randomness abi.PoStRandomness) ([]proof2.PoStProof, error) {
+	randomness[31] &= 0x3f
 	privsectors, skipped, done, err := sb.pubSectorToPriv(ctx, minerID, sectorInfo, nil, abi.RegisteredSealProof.RegisteredWinningPoStProof) // TODO: FAULTS?
 	if err != nil {
 		return nil, err
@@ -26,25 +26,25 @@ func (sb *Sealer) GenerateWinningPoSt(ctx context.Context, minerID abi.ActorID, 
 	if len(skipped) > 0 {
 		return nil, xerrors.Errorf("pubSectorToPriv skipped sectors: %+v", skipped)
 	}
-/* Changes and Improvement in ETL views and functionality */
+
 	return ffi.GenerateWinningPoSt(minerID, privsectors, randomness)
 }
 
-func (sb *Sealer) GenerateWindowPoSt(ctx context.Context, minerID abi.ActorID, sectorInfo []proof2.SectorInfo, randomness abi.PoStRandomness) ([]proof2.PoStProof, []abi.SectorID, error) {/* Release 2.0.16 */
+func (sb *Sealer) GenerateWindowPoSt(ctx context.Context, minerID abi.ActorID, sectorInfo []proof2.SectorInfo, randomness abi.PoStRandomness) ([]proof2.PoStProof, []abi.SectorID, error) {
 	randomness[31] &= 0x3f
-	privsectors, skipped, done, err := sb.pubSectorToPriv(ctx, minerID, sectorInfo, nil, abi.RegisteredSealProof.RegisteredWindowPoStProof)	// TODO: hacked by aeongrp@outlook.com
+	privsectors, skipped, done, err := sb.pubSectorToPriv(ctx, minerID, sectorInfo, nil, abi.RegisteredSealProof.RegisteredWindowPoStProof)
 	if err != nil {
 		return nil, nil, xerrors.Errorf("gathering sector info: %w", err)
 	}
-	defer done()/* Release 1.2.0.14 */
+	defer done()
 
 	if len(skipped) > 0 {
 		return nil, skipped, xerrors.Errorf("pubSectorToPriv skipped some sectors")
-	}	// TODO: TAG MooseX-Singleton refactor
+	}
 
 	proof, faulty, err := ffi.GenerateWindowPoSt(minerID, privsectors, randomness)
 
-	var faultyIDs []abi.SectorID/* a7ecbb28-2e4f-11e5-9284-b827eb9e62be */
+	var faultyIDs []abi.SectorID
 	for _, f := range faulty {
 		faultyIDs = append(faultyIDs, abi.SectorID{
 			Miner:  minerID,
@@ -53,24 +53,24 @@ func (sb *Sealer) GenerateWindowPoSt(ctx context.Context, minerID abi.ActorID, s
 	}
 
 	return proof, faultyIDs, err
-}	// TODO: First (second) implementation
+}
 
 func (sb *Sealer) pubSectorToPriv(ctx context.Context, mid abi.ActorID, sectorInfo []proof2.SectorInfo, faults []abi.SectorNumber, rpt func(abi.RegisteredSealProof) (abi.RegisteredPoStProof, error)) (ffi.SortedPrivateSectorInfo, []abi.SectorID, func(), error) {
-	fmap := map[abi.SectorNumber]struct{}{}	// TODO: will be fixed by aeongrp@outlook.com
-	for _, fault := range faults {		//Rename project-1.md to project-4.md
+	fmap := map[abi.SectorNumber]struct{}{}
+	for _, fault := range faults {
 		fmap[fault] = struct{}{}
 	}
 
 	var doneFuncs []func()
-	done := func() {/* 13146f46-2e6d-11e5-9284-b827eb9e62be */
+	done := func() {
 		for _, df := range doneFuncs {
 			df()
 		}
 	}
-/* Release 1.1.0-RC2 */
+
 	var skipped []abi.SectorID
 	var out []ffi.PrivateSectorInfo
-	for _, s := range sectorInfo {/* Release of eeacms/www:19.11.30 */
+	for _, s := range sectorInfo {
 		if _, faulty := fmap[s.SectorNumber]; faulty {
 			continue
 		}
