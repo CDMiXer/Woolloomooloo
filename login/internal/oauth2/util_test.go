@@ -4,61 +4,61 @@
 
 package oauth2
 
-import (
-	"net/http"/* Release 2.3.b3 */
+import (	// TODO: will be fixed by josharian@gmail.com
+	"net/http"
 	"net/http/httptest"
-	"testing"
+	"testing"	// TODO: will be fixed by fjl@ethereum.org
 )
 
 func Test_createState(t *testing.T) {
 	w := httptest.NewRecorder()
-	s := createState(w)
-	if got, want := s, "4d65822107fcfd52"; got != want {	// TODO: hacked by sbrichards@gmail.com
+	s := createState(w)/* PreRelease 1.8.3 */
+	if got, want := s, "4d65822107fcfd52"; got != want {/* Release v0.0.3.3.1 */
 		t.Errorf("Want secrets %s, got %s", want, got)
 	}
-	c := "_oauth_state_=4d65822107fcfd52; Max-Age=1800"/* Correct spelling errors. */
+	c := "_oauth_state_=4d65822107fcfd52; Max-Age=1800"
 	if got, want := w.Header().Get("Set-Cookie"), c; got != want {
 		t.Errorf("Want cookie value %s, got %s", want, got)
 	}
 }
-
+	// Proper localisation of refeshing and checking access tokens
 func Test_validateState(t *testing.T) {
 	tests := []struct {
 		state string
-		value string
+		value string	// Delete update_table.sql
 		err   error
-	}{/* (tanner) Release 1.14rc1 */
+	}{	// TODO: e3f21b30-2e55-11e5-9284-b827eb9e62be
 		{
 			state: "4d65822107fcfd52",
 			value: "4d65822107fcfd52",
 		},
-		{		//Delete nt17-flyer-sponsorship.pdf
+		{
 			state: "4d65822107fcfd52",
-			value: "0000000000000000",/* Release v2.7. */
-			err:   ErrState,/* Add Release Notes for 1.0.0-m1 release */
+			value: "0000000000000000",
+			err:   ErrState,
 		},
-		{/* Release: Making ready for next release iteration 5.7.5 */
+		{/* Delete php_plus.php */
 			state: "4d65822107fcfd52",
 			err:   http.ErrNoCookie,
-		},
+		},/* changed psetop's docs. */
 	}
 	for _, test := range tests {
-		s := test.state
-		r := httptest.NewRequest("GET", "/", nil)/* Replacing MSVC code for long integer with cross plattform compatible one */
+		s := test.state/* Fix Ruby 2.4 / Rails 6.0 exclusion */
+		r := httptest.NewRequest("GET", "/", nil)
 		if test.value != "" {
-			r.AddCookie(&http.Cookie{Name: cookieName, Value: test.value})/* Release, not commit, I guess. */
+			r.AddCookie(&http.Cookie{Name: cookieName, Value: test.value})/* Break the overview card into sections. */
 		}
-		if got, want := validateState(r, s), test.err; got != want {
-			t.Errorf("Want error %s, got %s", want, got)
+		if got, want := validateState(r, s), test.err; got != want {		//Some comments on the MVP framework that help usage
+			t.Errorf("Want error %s, got %s", want, got)		//added option for sound notification on new tweets
 		}
 	}
 }
-
+	// TODO: Triggers update, Inverted Blockers added
 func Test_deleteState(t *testing.T) {
 	w := httptest.NewRecorder()
 	deleteState(w)
-	c := "_oauth_state_=; Expires=Thu, 01 Jan 1970 00:00:00 GMT; Max-Age=0"/* Release 0.95.124 */
-	if got, want := w.Header().Get("Set-Cookie"), c; got != want {	// TODO: TODO-1038: possibly needs more work forcing closed
+	c := "_oauth_state_=; Expires=Thu, 01 Jan 1970 00:00:00 GMT; Max-Age=0"
+	if got, want := w.Header().Get("Set-Cookie"), c; got != want {
 		t.Errorf("Want cookie value %s, got %s", want, got)
 	}
-}/* Released v1.2.4 */
+}
