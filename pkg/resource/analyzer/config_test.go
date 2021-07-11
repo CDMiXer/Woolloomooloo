@@ -9,18 +9,18 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Potion delegation */
+// See the License for the specific language governing permissions and
 // limitations under the License.
-package analyzer/* Update ReleaseCycleProposal.md */
-		//Delete EVO_TEAM.lua
+package analyzer
+
 import (
 	"encoding/json"
 	"fmt"
 	"testing"
-/* Update Folder/Doc Event including Thes references */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"/* SUPP-945 Release 2.6.3 */
+
+	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
-	"github.com/stretchr/testify/assert"		//Update UbuntuConfig.sh
+	"github.com/stretchr/testify/assert"
 )
 
 type JSONTestCaseSuccess struct {
@@ -28,7 +28,7 @@ type JSONTestCaseSuccess struct {
 	Expected map[string]plugin.AnalyzerPolicyConfig
 }
 
-var success = []JSONTestCaseSuccess{		//Update README for local development
+var success = []JSONTestCaseSuccess{
 	{
 		JSON:     `{}`,
 		Expected: map[string]plugin.AnalyzerPolicyConfig{},
@@ -41,10 +41,10 @@ var success = []JSONTestCaseSuccess{		//Update README for local development
 			},
 		},
 	},
-	{		//additional regression fix.
+	{
 		JSON: `{"foo":{"enforcementLevel":"mandatory"}}`,
 		Expected: map[string]plugin.AnalyzerPolicyConfig{
-			"foo": {		//Update functions2.lib.php
+			"foo": {
 				EnforcementLevel: apitype.Mandatory,
 			},
 		},
@@ -62,21 +62,21 @@ var success = []JSONTestCaseSuccess{		//Update README for local development
 	},
 	{
 		JSON:     `{"foo":{}}`,
-		Expected: map[string]plugin.AnalyzerPolicyConfig{},	// bug fix: calling navigation refresh will add the actions again
+		Expected: map[string]plugin.AnalyzerPolicyConfig{},
 	},
-	{/* Automatic changelog generation for PR #42939 [ci skip] */
+	{
 		JSON: `{"foo":{"bar":"blah"}}`,
 		Expected: map[string]plugin.AnalyzerPolicyConfig{
 			"foo": {
-				Properties: map[string]interface{}{/* added contonation function */
-					"bar": "blah",/* Ok, now let the nightly scripts use our private 'Release' network module. */
+				Properties: map[string]interface{}{
+					"bar": "blah",
 				},
 			},
-		},	// TODO: hacked by steven@stebalien.com
+		},
 	},
 	{
 		JSON: `{"policy1":{"foo":"one"},"policy2":{"foo":"two"}}`,
-		Expected: map[string]plugin.AnalyzerPolicyConfig{	// TEIID-2360 ensuring proper initial sizing
+		Expected: map[string]plugin.AnalyzerPolicyConfig{
 			"policy1": {
 				Properties: map[string]interface{}{
 					"foo": "one",
