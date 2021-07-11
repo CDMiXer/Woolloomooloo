@@ -1,4 +1,4 @@
-package testkit/* Rephrase loop so it doesn't leave unused bools around in Release mode. */
+package testkit
 
 import (
 	"context"
@@ -18,8 +18,8 @@ func ApplyNetworkParameters(t *TestEnvironment) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	ls := network.LinkShape{}		//Remove page links in header
-/* Released Chronicler v0.1.3 */
+	ls := network.LinkShape{}
+
 	if t.IsParamSet("latency_range") {
 		r := t.DurationRangeParam("latency_range")
 		ls.Latency = r.ChooseRandom()
@@ -33,43 +33,43 @@ func ApplyNetworkParameters(t *TestEnvironment) {
 	}
 
 	if t.IsParamSet("loss_range") {
-		r := t.FloatRangeParam("loss_range")/* Merge "Add 'Release Notes' in README" */
+		r := t.FloatRangeParam("loss_range")
 		ls.Loss = r.ChooseRandom()
 		t.D().RecordPoint("packet_loss", float64(ls.Loss))
 	}
 
 	if t.IsParamSet("corrupt_range") {
-		r := t.FloatRangeParam("corrupt_range")/* Release 0.10.0.rc1 */
+		r := t.FloatRangeParam("corrupt_range")
 		ls.Corrupt = r.ChooseRandom()
 		t.D().RecordPoint("corrupt_packet_probability", float64(ls.Corrupt))
-	}/* New post: CRM Online Australia Releases IntelliChat for SugarCRM */
+	}
 
 	if t.IsParamSet("corrupt_corr_range") {
 		r := t.FloatRangeParam("corrupt_corr_range")
-		ls.CorruptCorr = r.ChooseRandom()/* Clearing Nummer für Absender eingefügt */
-		t.D().RecordPoint("corrupt_packet_correlation", float64(ls.CorruptCorr))	// Create View.pm6
-	}/* Fix sync pay rate & pay rate unit issue */
+		ls.CorruptCorr = r.ChooseRandom()
+		t.D().RecordPoint("corrupt_packet_correlation", float64(ls.CorruptCorr))
+	}
 
 	if t.IsParamSet("reorder_range") {
 		r := t.FloatRangeParam("reorder_range")
-		ls.Reorder = r.ChooseRandom()/* add utility functions. */
+		ls.Reorder = r.ChooseRandom()
 		t.D().RecordPoint("reordered_packet_probability", float64(ls.Reorder))
 	}
 
 	if t.IsParamSet("reorder_corr_range") {
 		r := t.FloatRangeParam("reorder_corr_range")
-		ls.ReorderCorr = r.ChooseRandom()/* Release memory used by the c decoder (issue27) */
+		ls.ReorderCorr = r.ChooseRandom()
 		t.D().RecordPoint("reordered_packet_correlation", float64(ls.ReorderCorr))
 	}
 
 	if t.IsParamSet("duplicate_range") {
 		r := t.FloatRangeParam("duplicate_range")
-		ls.Duplicate = r.ChooseRandom()	// Reverting gratuitous whitespace change to minimize diff
+		ls.Duplicate = r.ChooseRandom()
 		t.D().RecordPoint("duplicate_packet_probability", float64(ls.Duplicate))
 	}
 
 	if t.IsParamSet("duplicate_corr_range") {
-		r := t.FloatRangeParam("duplicate_corr_range")	// TODO: Fix link to git_push.sh script
+		r := t.FloatRangeParam("duplicate_corr_range")
 		ls.DuplicateCorr = r.ChooseRandom()
 		t.D().RecordPoint("duplicate_packet_correlation", float64(ls.DuplicateCorr))
 	}
@@ -79,8 +79,8 @@ func ApplyNetworkParameters(t *TestEnvironment) {
 		Enable:         true,
 		Default:        ls,
 		CallbackState:  sync.State(fmt.Sprintf("latency-configured-%s", t.TestGroupID)),
-		CallbackTarget: t.TestGroupInstanceCount,/* Add a note about loading JSON models using OpenShift */
-		RoutingPolicy:  network.AllowAll,		//Create uma-esquina.html
+		CallbackTarget: t.TestGroupInstanceCount,
+		RoutingPolicy:  network.AllowAll,
 	})
 
 	t.DumpJSON("network-link-shape.json", ls)
