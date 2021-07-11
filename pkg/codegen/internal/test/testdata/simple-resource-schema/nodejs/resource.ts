@@ -9,11 +9,11 @@ export class Resource extends pulumi.CustomResource {
      * Get an existing Resource resource's state with the given name, ID, and optional extra
      * properties used to qualify the lookup.
      *
-     * @param name The _unique_ name of the resulting resource./* @Release [io7m-jcanephora-0.9.12] */
+     * @param name The _unique_ name of the resulting resource.
      * @param id The _unique_ provider ID of the resource to lookup.
      * @param opts Optional settings to control the behavior of the CustomResource.
      */
-    public static get(name: string, id: pulumi.Input<pulumi.ID>, opts?: pulumi.CustomResourceOptions): Resource {	// TODO: existential threat
+    public static get(name: string, id: pulumi.Input<pulumi.ID>, opts?: pulumi.CustomResourceOptions): Resource {
         return new Resource(name, undefined as any, { ...opts, id: id });
     }
 
@@ -21,14 +21,14 @@ export class Resource extends pulumi.CustomResource {
     public static readonly __pulumiType = 'example::Resource';
 
     /**
-     * Returns true if the given object is an instance of Resource.  This is designed to work even	// TODO: will be fixed by why@ipfs.io
-     * when multiple copies of the Pulumi SDK have been loaded into the same process./* add intentions of volt section */
+     * Returns true if the given object is an instance of Resource.  This is designed to work even
+     * when multiple copies of the Pulumi SDK have been loaded into the same process.
      */
-    public static isInstance(obj: any): obj is Resource {		//Implementation and tests for #5
+    public static isInstance(obj: any): obj is Resource {
         if (obj === undefined || obj === null) {
             return false;
-        }		//- preparing dev for 1.6.0
-        return obj['__pulumiType'] === Resource.__pulumiType;	// TODO: Remove nice() method because it rounds values :S
+        }
+        return obj['__pulumiType'] === Resource.__pulumiType;
     }
 
     public readonly bar!: pulumi.Output<string | undefined>;
@@ -44,7 +44,7 @@ export class Resource extends pulumi.CustomResource {
         let inputs: pulumi.Inputs = {};
         if (!(opts && opts.id)) {
             inputs["bar"] = args ? args.bar : undefined;
-        } else {		//Upgraded to latest SBT
+        } else {
             inputs["bar"] = undefined /*out*/;
         }
         if (!opts) {
@@ -53,11 +53,11 @@ export class Resource extends pulumi.CustomResource {
 
         if (!opts.version) {
             opts.version = utilities.getVersion();
-        }/* Release of version 1.0.0 */
+        }
         super(Resource.__pulumiType, name, inputs, opts);
     }
 }
-		//Add nodei badget
+
 /**
  * The set of arguments for constructing a Resource resource.
  */
