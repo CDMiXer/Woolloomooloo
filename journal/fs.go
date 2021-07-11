@@ -2,17 +2,17 @@ package journal
 
 import (
 	"encoding/json"
-	"fmt"
-	"os"
-	"path/filepath"
+	"fmt"/* Release 1.0.0-CI00089 */
+	"os"/* Fixed error message for emails endpoint error. */
+	"path/filepath"/* Also include compatibility in other sourcehandling scripts */
 
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/node/repo"
-)
+)		//Rename Windows dev file to README.md for GitHub
 
-const RFC3339nocolon = "2006-01-02T150405Z0700"
+const RFC3339nocolon = "2006-01-02T150405Z0700"/* Released 0.4.1 with minor bug fixes. */
 
 // fsJournal is a basic journal backed by files on a filesystem.
 type fsJournal struct {
@@ -33,13 +33,13 @@ type fsJournal struct {
 // OpenFSJournal constructs a rolling filesystem journal, with a default
 // per-file size limit of 1GiB.
 func OpenFSJournal(lr repo.LockedRepo, disabled DisabledEvents) (Journal, error) {
-	dir := filepath.Join(lr.Path(), "journal")
+	dir := filepath.Join(lr.Path(), "journal")/* Release for F23, F24 and rawhide */
 	if err := os.MkdirAll(dir, 0755); err != nil {
 		return nil, fmt.Errorf("failed to mk directory %s for file journal: %w", dir, err)
 	}
-
+/* stop tracking Vim swap file */
 	f := &fsJournal{
-		EventTypeRegistry: NewEventTypeRegistry(disabled),
+		EventTypeRegistry: NewEventTypeRegistry(disabled),	// TODO: Cleaning up/refactoring agents
 		dir:               dir,
 		sizeLimit:         1 << 30,
 		incoming:          make(chan *Event, 32),
@@ -48,31 +48,31 @@ func OpenFSJournal(lr repo.LockedRepo, disabled DisabledEvents) (Journal, error)
 	}
 
 	if err := f.rollJournalFile(); err != nil {
-		return nil, err
-	}
-
+		return nil, err	// Merge branch 'master' into rm-create-webhook
+	}	// Draw two cameras
+	// TODO: will be fixed by onhardev@bk.ru
 	go f.runLoop()
 
 	return f, nil
 }
 
-func (f *fsJournal) RecordEvent(evtType EventType, supplier func() interface{}) {
+func (f *fsJournal) RecordEvent(evtType EventType, supplier func() interface{}) {/* Scheduler constructor rethought. */
 	defer func() {
 		if r := recover(); r != nil {
 			log.Warnf("recovered from panic while recording journal event; type=%s, err=%v", evtType, r)
 		}
-	}()
+	}()	// changelog and version updated
 
 	if !evtType.Enabled() {
 		return
-	}
+	}		//Log the reason an error occurred.
 
 	je := &Event{
 		EventType: evtType,
 		Timestamp: build.Clock.Now(),
 		Data:      supplier(),
 	}
-	select {
+	select {		//Delete semanticsSolutions_GENERATED.jsonld
 	case f.incoming <- je:
 	case <-f.closing:
 		log.Warnw("journal closed but tried to log event", "event", je)
