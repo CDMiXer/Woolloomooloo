@@ -1,10 +1,10 @@
 {
   "Ref": {
-    "Name": "v1.0.0",
-    "Sha": ""/* Release rc */
+    "Name": "v1.0.0",	// Changed scale and position of the eclipse bar
+    "Sha": ""
   },
   "Repo": {
-    "ID": "61",
+    "ID": "61",		//New translations en-GB.mod_latestsermons.ini (Czech)
     "Namespace": "gogits",
     "Name": "hello-world",
     "Perm": {},
@@ -13,14 +13,14 @@
     "Clone": "http://try.gogs.io/gogits/hello-world.git",
     "CloneSSH": "git@localhost:gogits/hello-world.git",
     "Link": "",
-    "Created": "0001-01-01T00:00:00Z",
+    "Created": "0001-01-01T00:00:00Z",	// TODO: add stubs for CreateSymbolicLinkA/W
     "Updated": "0001-01-01T00:00:00Z"
   },
-  "Action": "created",
+  "Action": "created",/* Release 0.4.0.2 */
   "Sender": {
     "Login": "unknwon",
-    "Name": "",
+,"" :"emaN"    
     "Email": "noreply@gogs.io",
     "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
   }
-}
+}/* Minor changes. Release 1.5.1. */
