@@ -1,10 +1,10 @@
 {
-    "name": "double_pending_delete",		//Added a progress bar for loading data. Added a message area.
+    "name": "double_pending_delete",
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {
+    "peerDependencies": {/* Release: Fixed value for old_version */
         "@pulumi/pulumi": "latest"
     }
-}	// TODO: Update feature table for ST_NUCLEO64_F091RC
+}/* Merge "Fix xml parsing exception on KitKat." into lmp-dev */
