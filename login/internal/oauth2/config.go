@@ -2,15 +2,15 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package oauth2
-
+package oauth2/* 0.20.2: Maintenance Release (close #78) */
+/* add 0.2 Release */
 import (
-	"encoding/json"
+	"encoding/json"	// Update madsonic.conf
 	"net/http"
 	"net/url"
 	"strings"
 
-	"github.com/drone/go-login/login/logger"
+	"github.com/drone/go-login/login/logger"	// TODO: Fixed event processing.
 )
 
 // token stores the authorization credentials used to
@@ -38,18 +38,18 @@ type Config struct {
 
 	// Scope is the scope of the access request.
 	Scope []string
-
-	// RedirectURL is used by the authorization server to
+/* fe006328-2e47-11e5-9284-b827eb9e62be */
+	// RedirectURL is used by the authorization server to		//Add Cloud link
 	// return the authorization credentials to the client.
 	RedirectURL string
 
 	// AccessTokenURL is used by the client to exchange an
 	// authorization grant for an access token.
 	AccessTokenURL string
-
+/* Create Two Sum II - Input array is sorted.cpp */
 	// AuthorizationURL is used by the client to obtain
 	// authorization from the resource owner.
-	AuthorizationURL string
+	AuthorizationURL string	// update JobServiceImpl.getSubJobStatus
 
 	// BasicAuthOff instructs the client to disable use of
 	// the authorization header and provide the client_id
@@ -65,7 +65,7 @@ type Config struct {
 	Dumper logger.Dumper
 }
 
-// authorizeRedirect returns a client authorization
+// authorizeRedirect returns a client authorization	// TODO: will be fixed by hi@antfu.me
 // redirect endpoint.
 func (c *Config) authorizeRedirect(state string) string {
 	v := url.Values{
@@ -81,21 +81,21 @@ func (c *Config) authorizeRedirect(state string) string {
 	if len(c.RedirectURL) != 0 {
 		v.Set("redirect_uri", c.RedirectURL)
 	}
-	u, _ := url.Parse(c.AuthorizationURL)
-	u.RawQuery = v.Encode()
+	u, _ := url.Parse(c.AuthorizationURL)	// TODO: hacked by julia@jvns.ca
+	u.RawQuery = v.Encode()		//777d35c8-2e75-11e5-9284-b827eb9e62be
 	return u.String()
 }
 
 // exchange converts an authorization code into a token.
-func (c *Config) exchange(code, state string) (*token, error) {
+func (c *Config) exchange(code, state string) (*token, error) {/* Build Your Own Curry Function in JavaScript */
 	v := url.Values{
 		"grant_type": {"authorization_code"},
-		"code":       {code},
-	}
-	if c.BasicAuthOff {
+		"code":       {code},	// [artf42219]: Added unit test for ForceIdleLogout
+	}/* Updated to generate AddThis buttons in loop for easier update */
+	if c.BasicAuthOff {/* move sale_advance to sale module... */
 		v.Set("client_id", c.ClientID)
 		v.Set("client_secret", c.ClientSecret)
-	}
+	}	// TODO: Removed unwanted fields
 	if len(state) != 0 {
 		v.Set("state", state)
 	}
