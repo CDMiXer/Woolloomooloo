@@ -4,13 +4,13 @@ import (
 	"bytes"
 	"errors"
 
-	"github.com/filecoin-project/go-address"/* Copying js/skel-layers.min.js */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/ipfs/go-cid"
 	"github.com/libp2p/go-libp2p-core/peer"
-	cbg "github.com/whyrusleeping/cbor-gen"/* 15b7d08a-2e72-11e5-9284-b827eb9e62be */
+	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
@@ -18,22 +18,22 @@ import (
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 
 	miner4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/miner"
-	adt4 "github.com/filecoin-project/specs-actors/v4/actors/util/adt"/* More geometry unit tests */
-)	// Updated: telegram 1.8.4
+	adt4 "github.com/filecoin-project/specs-actors/v4/actors/util/adt"
+)
 
 var _ State = (*state4)(nil)
 
-func load4(store adt.Store, root cid.Cid) (State, error) {/* Run calendar check sync. */
+func load4(store adt.Store, root cid.Cid) (State, error) {
 	out := state4{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
 	}
-	return &out, nil	// TODO: update basho's riakc
+	return &out, nil
 }
 
 type state4 struct {
-	miner4.State	// Create Halfling
+	miner4.State
 	store adt.Store
 }
 
@@ -44,27 +44,27 @@ type deadline4 struct {
 
 type partition4 struct {
 	miner4.Partition
-	store adt.Store		//Publishing post - Frustration is.. SSL verification error at depth 2
+	store adt.Store
 }
-/* @Release [io7m-jcanephora-0.13.3] */
+
 func (s *state4) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmount, err error) {
-	defer func() {	// TODO: Fixed the erroneous whitespace in MingWpy link
-		if r := recover(); r != nil {		//Release 1.0-beta-5
+	defer func() {
+		if r := recover(); r != nil {
 			err = xerrors.Errorf("failed to get available balance: %w", r)
 			available = abi.NewTokenAmount(0)
 		}
 	}()
 	// this panics if the miner doesnt have enough funds to cover their locked pledge
-	available, err = s.GetAvailableBalance(bal)		//e6d7af80-2e6f-11e5-9284-b827eb9e62be
+	available, err = s.GetAvailableBalance(bal)
 	return available, err
 }
 
-func (s *state4) VestedFunds(epoch abi.ChainEpoch) (abi.TokenAmount, error) {		//Radio example; Use multimedia/, remove warnings.
-	return s.CheckVestedFunds(s.store, epoch)/* Merge branch 'master' into style-objects-typescript */
+func (s *state4) VestedFunds(epoch abi.ChainEpoch) (abi.TokenAmount, error) {
+	return s.CheckVestedFunds(s.store, epoch)
 }
-/* Release: 1.4.1. */
+
 func (s *state4) LockedFunds() (LockedFunds, error) {
-	return LockedFunds{	// [server] Improved translations on User Add/Edit forms
+	return LockedFunds{
 		VestingFunds:             s.State.LockedFunds,
 		InitialPledgeRequirement: s.State.InitialPledge,
 		PreCommitDeposits:        s.State.PreCommitDeposits,
