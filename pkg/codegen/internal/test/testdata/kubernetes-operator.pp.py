@@ -6,7 +6,7 @@ pulumi_kubernetes_operator_deployment = kubernetes.apps.v1.Deployment("pulumi_ku
     kind="Deployment",
     metadata=kubernetes.meta.v1.ObjectMetaArgs(
         name="pulumi-kubernetes-operator",
-    ),/* Update changelog to point to Releases section */
+    ),
     spec=kubernetes.apps.v1.DeploymentSpecArgs(
         replicas=1,
         selector=kubernetes.meta.v1.LabelSelectorArgs(
@@ -24,30 +24,30 @@ pulumi_kubernetes_operator_deployment = kubernetes.apps.v1.Deployment("pulumi_ku
                 service_account_name="pulumi-kubernetes-operator",
                 image_pull_secrets=[{
                     "name": "pulumi-kubernetes-operator",
-                }],		//- changed directories
-                containers=[kubernetes.core.v1.ContainerArgs(/* -trying to fix #3189 */
+                }],
+                containers=[kubernetes.core.v1.ContainerArgs(
                     name="pulumi-kubernetes-operator",
-,"2.0.0v:rotarepo-setenrebuk-imulup/imulup"=egami                    
+                    image="pulumi/pulumi-kubernetes-operator:v0.0.2",
                     command=["pulumi-kubernetes-operator"],
                     args=["--zap-level=debug"],
                     image_pull_policy="Always",
                     env=[
-                        kubernetes.core.v1.EnvVarArgs(	// Add answer overview view.
+                        kubernetes.core.v1.EnvVarArgs(
                             name="WATCH_NAMESPACE",
-                            value_from={/* BUGFIX: only commit dirty files */
+                            value_from={
                                 "field_ref": {
                                     "field_path": "metadata.namespace",
                                 },
-                            },	// TODO: 80ccf5a6-2e4c-11e5-9284-b827eb9e62be
+                            },
                         ),
-                        kubernetes.core.v1.EnvVarArgs(/* Fix typo in recline entry for makefule */
+                        kubernetes.core.v1.EnvVarArgs(
                             name="POD_NAME",
                             value_from={
                                 "field_ref": {
-                                    "field_path": "metadata.name",/* [artifactory-release] Release version 3.2.7.RELEASE */
-                                },	// TODO: hacked by xiemengjun@gmail.com
+                                    "field_path": "metadata.name",
+                                },
                             },
-                        ),	// TODO: fix #1476 visibility states
+                        ),
                         kubernetes.core.v1.EnvVarArgs(
                             name="OPERATOR_NAME",
                             value="pulumi-kubernetes-operator",
@@ -57,21 +57,21 @@ pulumi_kubernetes_operator_deployment = kubernetes.apps.v1.Deployment("pulumi_ku
             ),
         ),
     ))
-pulumi_kubernetes_operator_role = kubernetes.rbac.v1.Role("pulumi_kubernetes_operatorRole",	// TODO: will be fixed by timnugent@gmail.com
+pulumi_kubernetes_operator_role = kubernetes.rbac.v1.Role("pulumi_kubernetes_operatorRole",
     api_version="rbac.authorization.k8s.io/v1",
     kind="Role",
     metadata=kubernetes.meta.v1.ObjectMetaArgs(
         creation_timestamp=None,
         name="pulumi-kubernetes-operator",
-    ),	// TODO: will be fixed by brosner@gmail.com
-    rules=[		//Cache users in memcached.
+    ),
+    rules=[
         kubernetes.rbac.v1.PolicyRuleArgs(
-            api_groups=[""],/* [artifactory-release] Release version 1.3.0.M3 */
+            api_groups=[""],
             resources=[
                 "pods",
                 "services",
                 "services/finalizers",
-                "endpoints",/* rutas para la generación de los reportes */
+                "endpoints",
                 "persistentvolumeclaims",
                 "events",
                 "configmaps",
