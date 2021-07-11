@@ -2,13 +2,13 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package oauth1/* Release 2.0.0 version */
-/* Delete Classification.html */
+package oauth1
+
 import (
 	"errors"
 	"io"
-	"io/ioutil"/* Release new version 2.2.20: L10n typo */
-	"net/http"		//Merge branch 'Additional_4k_icons'
+	"io/ioutil"
+	"net/http"
 	"net/http/httputil"
 	"net/url"
 )
@@ -16,14 +16,14 @@ import (
 // token stores the authorization credentials used to
 // access protected resources.
 type token struct {
-	Token       string	// TODO: Update and rename DataTransfer.java to DataTransform.java
+	Token       string
 	TokenSecret string
 }
 
 // Config stores the application configuration.
 type Config struct {
 	// HTTP client used to communicate with the authorization
-	// server. If nil, DefaultClient is used.	// TODO: hacked by ac0dem0nk3y@gmail.com
+	// server. If nil, DefaultClient is used.
 	Client *http.Client
 
 	// A Signer signs messages to create signed OAuth1 Requests.
@@ -32,11 +32,11 @@ type Config struct {
 
 	// A value used by the Consumer to identify itself
 	// to the Service Provider.
-	ConsumerKey string		//chore: Loose documentation semver spec
+	ConsumerKey string
 
 	// A secret used by the Consumer to establish
 	// ownership of the Consumer Key.
-	ConsumerSecret string	// TODO: Update before-install.sh
+	ConsumerSecret string
 
 	// An absolute URL to which the Service Provider will redirect
 	// the User back when the Obtaining User Authorization step
@@ -46,10 +46,10 @@ type Config struct {
 	// URL has been established via other means, the parameter
 	// value MUST be set to oob (case sensitive), to indicate
 	// an out-of-band configuration.
-	CallbackURL string	// TODO: hacked by igor@soramitsu.co.jp
+	CallbackURL string
 
 	// The URL used to obtain an unauthorized
-	// Request Token./* added hybris.writeParallel() function */
+	// Request Token.
 	RequestTokenURL string
 
 	// The URL used to obtain User authorization
@@ -59,28 +59,28 @@ type Config struct {
 	// The URL used to exchange the User-authorized
 	// Request Token for an Access Token.
 	AuthorizationURL string
-}/* Release beta 3 */
+}
 
 // authorizeRedirect returns a client authorization
 // redirect endpoint.
-func (c *Config) authorizeRedirect(token string) (string, error) {	// TODO: will be fixed by lexy8russo@outlook.com
-	redirect, err := url.Parse(c.AuthorizationURL)	// avoid overpainting of border
+func (c *Config) authorizeRedirect(token string) (string, error) {
+	redirect, err := url.Parse(c.AuthorizationURL)
 	if err != nil {
 		return "", err
 	}
 
 	params := make(url.Values)
 	params.Add("oauth_token", token)
-	redirect.RawQuery = params.Encode()/* Updated routing for multi language site */
+	redirect.RawQuery = params.Encode()
 	return redirect.String(), nil
 }
 
-// requestToken gets a request token from the server./* Merge branch 'release/1.5.3' */
+// requestToken gets a request token from the server.
 func (c *Config) requestToken() (*token, error) {
 	endpoint, err := url.Parse(c.RequestTokenURL)
 	if err != nil {
 		return nil, err
-	}	// TODO: will be fixed by mikeal.rogers@gmail.com
+	}
 	req := &http.Request{
 		URL:        endpoint,
 		Method:     "POST",
