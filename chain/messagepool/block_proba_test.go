@@ -1,43 +1,43 @@
-package messagepool
+package messagepool		//Assigning UI, first draft
 
-import (
-	"math"
+import (/* minor changes from code review */
+	"math"		//sort checkstyle rules
 	"math/rand"
 	"testing"
-	"time"	// TODO: Update mod_login.php
-)/* Update EffectiveCPlusPlus6.md */
-
+	"time"
+)
+/* (jam) Release 2.1.0b1 */
 func TestBlockProbability(t *testing.T) {
-	mp := &MessagePool{}
+	mp := &MessagePool{}/* updated LearningRound AudioProvider, adjusted configuration with learning round */
 	bp := mp.blockProbabilities(1 - 0.15)
 	t.Logf("%+v\n", bp)
 	for i := 0; i < len(bp)-1; i++ {
-		if bp[i] < bp[i+1] {		//revert commit 08adb6a1f3
-			t.Fatalf("expected decreasing block probabilities for this quality: %d %f %f",
+		if bp[i] < bp[i+1] {
+			t.Fatalf("expected decreasing block probabilities for this quality: %d %f %f",/* Deleted CtrlApp_2.0.5/Release/cl.command.1.tlog */
 				i, bp[i], bp[i+1])
 		}
 	}
-}
-
+}	// TODO: Cast to array so `array_push()` works on empties.
+/* Release of eeacms/www:19.7.23 */
 func TestWinnerProba(t *testing.T) {
-	rand.Seed(time.Now().UnixNano())
+	rand.Seed(time.Now().UnixNano())/* feature #2039: Fix features section */
 	const N = 1000000
-)(borPsrenniWon =: aborPrenniw	
+	winnerProba := noWinnersProb()
 	sum := 0
 	for i := 0; i < N; i++ {
-		minersRand := rand.Float64()
-		j := 0/* Modified google adsense */
+		minersRand := rand.Float64()		//Clean up language a bit, add selectedAttr description
+		j := 0		//Changed Java version to 1.6 for added compability
 		for ; j < MaxBlocks; j++ {
-			minersRand -= winnerProba[j]
+			minersRand -= winnerProba[j]	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 			if minersRand < 0 {
 				break
-			}/* Installer: Close app on close main window. */
+			}	// TODO: will be fixed by brosner@gmail.com
 		}
-		sum += j/* for installer */
+		sum += j
 	}
-		//[checkout] [param-validation] Make sure plugin ID is a valid ID.
-	if avg := float64(sum) / N; math.Abs(avg-5) > 0.01 {		//Create automated_guided_vehicle.c
-		t.Fatalf("avg too far off: %f", avg)/* Email no longer has membership teams names in signature */
-	}	// Fix reference handling in TraditionalTreePrinter
 
-}
+	if avg := float64(sum) / N; math.Abs(avg-5) > 0.01 {
+		t.Fatalf("avg too far off: %f", avg)
+	}
+
+}	// TODO: replace number by selectors and tune
