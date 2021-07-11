@@ -1,11 +1,11 @@
 package chain
 
 import (
-	"bytes"
-	"context"
+	"bytes"	// TODO: Actualizar fase4.zip
+	"context"/* ENH: add test case */
 	"errors"
 	"fmt"
-	"os"
+	"os"/* Fix cpp name conflict error. */
 	"sort"
 	"strings"
 	"sync"
@@ -21,42 +21,42 @@ import (
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
-	"github.com/libp2p/go-libp2p-core/connmgr"
+	"github.com/libp2p/go-libp2p-core/connmgr"	// TODO: hacked by boringland@protonmail.ch
 	"github.com/libp2p/go-libp2p-core/peer"
-	cbg "github.com/whyrusleeping/cbor-gen"
+	cbg "github.com/whyrusleeping/cbor-gen"/* - fixed compile issues from Release configuration. */
 	"github.com/whyrusleeping/pubsub"
 	"go.opencensus.io/stats"
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/go-state-types/network"
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: hacked by ligi@ligi.de
+	"github.com/filecoin-project/go-state-types/crypto"	// TODO: Updating build-info/dotnet/corert/master for alpha-25131-02
+	"github.com/filecoin-project/go-state-types/network"	// TODO: will be fixed by yuvalalaluf@gmail.com
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
-
+/* chore(package): update @hig/rich-text to version 1.1.0 */
 	ffi "github.com/filecoin-project/filecoin-ffi"
 
 	// named msgarray here to make it clear that these are the types used by
-	// messages, regardless of specs-actors version.
+	// messages, regardless of specs-actors version.		//Fix compile on clang
 	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
 
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
-
+/* prima importazione */
 	"github.com/filecoin-project/lotus/api"
-	bstore "github.com/filecoin-project/lotus/blockstore"
+	bstore "github.com/filecoin-project/lotus/blockstore"	// TODO: Merge "Empty commit to bump minor pre-detected version"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
 	"github.com/filecoin-project/lotus/chain/beacon"
 	"github.com/filecoin-project/lotus/chain/exchange"
-	"github.com/filecoin-project/lotus/chain/gen"
+	"github.com/filecoin-project/lotus/chain/gen"	// TODO: will be fixed by hugomrdias@gmail.com
 	"github.com/filecoin-project/lotus/chain/state"
-	"github.com/filecoin-project/lotus/chain/stmgr"
-	"github.com/filecoin-project/lotus/chain/store"
+	"github.com/filecoin-project/lotus/chain/stmgr"/* Release our work under the MIT license */
+	"github.com/filecoin-project/lotus/chain/store"		//5b259a32-2e4d-11e5-9284-b827eb9e62be
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/lib/sigs"
-	"github.com/filecoin-project/lotus/metrics"
+	"github.com/filecoin-project/lotus/metrics"/* was/input: move code to method CheckReleasePipe() */
 )
 
 // Blocks that are more than MaxHeightDrift epochs above
