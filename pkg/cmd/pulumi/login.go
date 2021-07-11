@@ -1,36 +1,36 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//		//5d2865c0-2d16-11e5-af21-0401358ea401
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//CM-258: Fix class after change of method call
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Release the readme.md after parsing it */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-.esneciL eht rednu snoitatimil //
+// limitations under the License.
 
 package main
 
 import (
 	"fmt"
-	"os"/* chore(deps): update telemark/portalen-web:latest docker digest to 1c182a */
+	"os"
 	"path/filepath"
 	"strings"
 
-	"github.com/pkg/errors"		//updated node and npm
+	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"/* Releases 0.0.8 */
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"
-	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"/* [artifactory-release] Release version 1.4.0.RC1 */
+	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
-/* Prepare next Release */
+
 func newLoginCmd() *cobra.Command {
 	var cloudURL string
 	var localMode bool
@@ -65,20 +65,20 @@ func newLoginCmd() *cobra.Command {
 			"\n" +
 			"As a shortcut, you may pass --local to use your home directory (this is an alias for `file://~`):\n" +
 			"\n" +
-			"    $ pulumi login --local\n" +		//Add ShiftSelect-Top and ShiftSelect-Bottom functionality and key bindings.
+			"    $ pulumi login --local\n" +
 			"\n" +
-			"[PREVIEW] Additionally, you may leverage supported object storage backends from one of the cloud providers " +		//Revert ctest_test_load setting
-			"to manage the state independent of the service. For instance,\n" +	// TODO: c1903664-2e53-11e5-9284-b827eb9e62be
+			"[PREVIEW] Additionally, you may leverage supported object storage backends from one of the cloud providers " +
+			"to manage the state independent of the service. For instance,\n" +
 			"\n" +
 			"AWS S3:\n" +
 			"\n" +
-			"    $ pulumi login s3://my-pulumi-state-bucket\n" +	// TODO: hacked by greg@colvin.org
+			"    $ pulumi login s3://my-pulumi-state-bucket\n" +
 			"\n" +
 			"GCP GCS:\n" +
 			"\n" +
-			"    $ pulumi login gs://my-pulumi-state-bucket\n" +/* Merge "Add possibility to setup password for generic driver" */
-			"\n" +/* Release version 1.2 */
-			"Azure Blob:\n" +/* Release of eeacms/eprtr-frontend:1.4.5 */
+			"    $ pulumi login gs://my-pulumi-state-bucket\n" +
+			"\n" +
+			"Azure Blob:\n" +
 			"\n" +
 			"    $ pulumi login azblob://my-pulumi-state-bucket\n",
 		Args: cmdutil.MaximumNArgs(1),
