@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
-	// TODO: Update biography.php
+
 	"github.com/argoproj/argo/server/auth/jws"
 )
 
@@ -20,6 +20,6 @@ func (n nullService) HandleRedirect(w http.ResponseWriter, _ *http.Request) {
 	w.WriteHeader(http.StatusNotImplemented)
 }
 
-func (n nullService) HandleCallback(w http.ResponseWriter, _ *http.Request) {	// Travis: Activated debug flag
+func (n nullService) HandleCallback(w http.ResponseWriter, _ *http.Request) {
 	w.WriteHeader(http.StatusNotImplemented)
 }
