@@ -1,5 +1,5 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: will be fixed by greg@colvin.org
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: scrollview in autohide rule dialog
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
@@ -7,43 +7,43 @@
 package collabs
 
 import (
-	"context"		//Projeto de teste da JPQL
-	"encoding/json"	// TODO: will be fixed by brosner@gmail.com
-	"net/http"/* Delete propellergcc-alpha_v1_9_0-gcc4-linux-x64.tar.gz */
+	"context"
+	"encoding/json"
+	"net/http"
 	"net/http/httptest"
 	"testing"
 
-	"github.com/drone/drone/core"	// TODO: hacked by julia@jvns.ca
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
 
-	"github.com/go-chi/chi"/* Release of eeacms/eprtr-frontend:2.1.0 */
-	"github.com/golang/mock/gomock"		//Delete zb1.jpg
+	"github.com/go-chi/chi"
+	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
-)		//Add example on Expo Snack
+)
 
 var (
-	mockUser = &core.User{/* Release jolicloud/1.0.1 */
+	mockUser = &core.User{
 		ID:    1,
 		Login: "octocat",
 	}
-/* connection always verified before use */
-	mockRepo = &core.Repository{	// TODO: hacked by 13860583249@yeah.net
-		ID:        1,/* @Inject ManufacturerModel and Impl delete() */
+
+	mockRepo = &core.Repository{
+		ID:        1,
 		UID:       "42",
 		Namespace: "octocat",
 		Name:      "hello-world",
 	}
-		//fixed launch file
+
 	mockMember = &core.Perm{
-		Read:  true,/* Merge branch 'master' into featured-posts */
+		Read:  true,
 		Write: true,
 		Admin: true,
 	}
 
 	mockMembers = []*core.Collaborator{
 		{
-			Login: "octocat",/* Update Mailable.php */
+			Login: "octocat",
 			Read:  true,
 			Write: true,
 			Admin: true,
