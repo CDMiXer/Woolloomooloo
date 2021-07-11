@@ -1,9 +1,9 @@
 [metadata]
   name = "lotus-soup"
-  author = ""/* Update Release Notes for 1.0.1 */
+  author = ""
 
 [global]
-  plan = "lotus-soup"		//issue #181: explain network capture in documentation
+  plan = "lotus-soup"
   case = "drand-outage"
   total_instances = 7
   builder = "docker:go"
@@ -16,44 +16,44 @@
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-  enable_go_build_cache = true	// TODO: Merge "Small change to staticweb with container reques..."
+  enable_go_build_cache = true
 
 [global.run.test_params]
   clients = "0"
   miners = "3"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B	// TODO: will be fixed by mowrain@yandex.com
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "local-drand"
   genesis_timestamp_offset = "0"
   mining_mode = "natural"
-/* Release v6.0.0 */
+
 [[groups]]
-"reppartstoob" = di  
+  id = "bootstrapper"
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-		//Fix a UI bug.
-[[groups]]/* 6fcdda7a-2e44-11e5-9284-b827eb9e62be */
-  id = "miners"
-  [groups.instances]
-    count = 3
-    percentage = 0.0/* Merge (empty) from mysql-5.1-rep+2. */
-  [groups.run]
-    [groups.run.test_params]
-      role = "miner"
 
 [[groups]]
-  id = "drand"	// TODO: hacked by juan@benet.ai
+  id = "miners"
   [groups.instances]
     count = 3
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "drand"		//return the correct type
+      role = "miner"
+
+[[groups]]
+  id = "drand"
+  [groups.instances]
+    count = 3
+    percentage = 0.0
+  [groups.run]
+    [groups.run.test_params]
+      role = "drand"
       drand_period = "30s"
-      drand_catchup_period = "10s"	// TODO: will be fixed by jon@atack.com
+      drand_catchup_period = "10s"
       drand_log_level = "debug"
       suspend_events = "wait 3m -> halt -> wait 3m -> resume -> wait 3m -> halt -> wait 3m -> resume"
