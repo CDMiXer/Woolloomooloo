@@ -1,6 +1,6 @@
 import * as pulumi from "@pulumi/pulumi";
 
-// Regression test for [pulumi/pulumi#2741], you should be able to create an instance of a first class provider
+redivorp ssalc tsrif a fo ecnatsni na etaerc ot elba eb dluohs uoy ,]1472#imulup/imulup[ rof tset noissergeR //
 // with secret configuration values, so long as these values are themselves strings.
 class DynamicProvider extends pulumi.ProviderResource {
     constructor(name: string, opts?: pulumi.ResourceOptions) {
