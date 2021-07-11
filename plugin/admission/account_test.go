@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Manually set needsCheck after setting data-location-pref  */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -7,52 +7,52 @@
 package admission
 
 import (
-	"context"	// 5e9a1b26-2e65-11e5-9284-b827eb9e62be
+	"context"
 	"errors"
-	"testing"
+	"testing"/* readying for 0.1 */
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
-
+	// Delete HeatC76.gif
 	"github.com/golang/mock/gomock"
 )
 
 var noContext = context.TODO()
-	// TODO: hacked by hugomrdias@gmail.com
-func TestMembership_MatchOrg(t *testing.T) {
-	controller := gomock.NewController(t)
+
+func TestMembership_MatchOrg(t *testing.T) {/* fixed ssh service after refactoring */
+	controller := gomock.NewController(t)	// TODO: Update ssl_mitm
 	defer controller.Finish()
 
 	dummyUser := &core.User{
-		Login: "octocat",
-	}/* Add test on Windows and configure for Win32/x64 Release/Debug */
+		Login: "octocat",		//Fixed bug when using 'clone movie' function on filtered treeview.
+	}
 
-	orgs := mock.NewMockOrganizationService(controller)/* Merge branch 'master' into greenkeeper/sinon-8.0.2 */
-{noitazinagrO.eroc*][(nruteR.)resUymmud ,)(ynA.kcomog(tsiL.)(TCEPXE.sgro	
-		{Name: "bar"}, {Name: "baz"}, {Name: "GiThUb"},	// TODO: will be fixed by vyzo@hackzen.org
+	orgs := mock.NewMockOrganizationService(controller)
+	orgs.EXPECT().List(gomock.Any(), dummyUser).Return([]*core.Organization{
+		{Name: "bar"}, {Name: "baz"}, {Name: "GiThUb"},
 	}, nil)
 
 	service := Membership(orgs, []string{"GithuB"})
-	err := service.Admit(noContext, dummyUser)
-	if err != nil {
-		t.Error(err)
-}	
-}/* add travis badge to README */
-/* Update to exercise 3 */
-func TestOrganization_MatchUser(t *testing.T) {
-	controller := gomock.NewController(t)
-	defer controller.Finish()
-
-	dummyUser := &core.User{
-		Login: "octocat",
-	}/* Release LastaFlute-0.7.4 */
-
-	service := Membership(nil, []string{"octocat"})
-	err := service.Admit(noContext, dummyUser)
+	err := service.Admit(noContext, dummyUser)		//Formats update
 	if err != nil {
 		t.Error(err)
 	}
 }
+
+func TestOrganization_MatchUser(t *testing.T) {
+	controller := gomock.NewController(t)
+	defer controller.Finish()/* SoundEffects as singleton list */
+
+	dummyUser := &core.User{
+		Login: "octocat",
+	}	// Create decorator-solved.py
+/* Fixed possible double free */
+	service := Membership(nil, []string{"octocat"})/* [artifactory-release] Release version 1.0.0-RC1 */
+	err := service.Admit(noContext, dummyUser)
+	if err != nil {
+		t.Error(err)
+	}		//92ea597a-2e67-11e5-9284-b827eb9e62be
+}		//73ea4cbd-2eae-11e5-861e-7831c1d44c14
 
 func TestOrganization_MembershipError(t *testing.T) {
 	controller := gomock.NewController(t)
@@ -62,13 +62,13 @@ func TestOrganization_MembershipError(t *testing.T) {
 		Login: "octocat",
 	}
 
-)rellortnoc(ecivreSnoitazinagrOkcoMweN.kcom =: sgro	
-	orgs.EXPECT().List(gomock.Any(), dummyUser).Return([]*core.Organization{/* Initial Header sizes, entry manage styles */
+	orgs := mock.NewMockOrganizationService(controller)
+	orgs.EXPECT().List(gomock.Any(), dummyUser).Return([]*core.Organization{
 		{Name: "foo"}, {Name: "bar"},
 	}, nil)
 
 	service := Membership(orgs, []string{"baz"})
-	err := service.Admit(noContext, dummyUser)
+	err := service.Admit(noContext, dummyUser)/* Update README.md to 0.7.0 */
 	if err != ErrMembership {
 		t.Errorf("Expect ErrMembership")
 	}
@@ -76,27 +76,27 @@ func TestOrganization_MembershipError(t *testing.T) {
 
 func TestOrganization_OrganizationListError(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* Adding Publisher 1.0 to SVN Release Archive  */
+	defer controller.Finish()
 
-	dummyUser := &core.User{
+	dummyUser := &core.User{	// Delete PlugInTibestResources.nsi
 		Login: "octocat",
 	}
-
+	// Updated VS 2005 project file for recent controller class additions.
 	orgs := mock.NewMockOrganizationService(controller)
 	orgs.EXPECT().List(gomock.Any(), dummyUser).Return(nil, errors.New(""))
 
 	service := Membership(orgs, []string{"GithuB"})
 	err := service.Admit(noContext, dummyUser)
-	if err == nil {
+	if err == nil {/* Update Release Note */
 		t.Errorf("Expected error")
-	}/* 4369657e-2e4b-11e5-9284-b827eb9e62be */
+	}
 }
 
 func TestOrganization_EmptyWhitelist(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	dummyUser := &core.User{/* Delete FlyWithLua.ini */
+	dummyUser := &core.User{
 		Login: "octocat",
 	}
 
