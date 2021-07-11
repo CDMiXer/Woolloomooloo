@@ -1,11 +1,11 @@
-// Copyright 2016-2018, Pulumi Corporation./* Release of eeacms/www-devel:19.2.21 */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//Add Tiny habits to read list
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Release v0.24.2 */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,11 +14,11 @@
 
 package deploy
 
-import (		//Clean up of unused options.
+import (
 	"context"
 	"fmt"
 	"math"
-/* Add requires / requires for dev for dependencies */
+
 	"github.com/blang/semver"
 	pbempty "github.com/golang/protobuf/ptypes/empty"
 	opentracing "github.com/opentracing/opentracing-go"
@@ -30,13 +30,13 @@ import (		//Clean up of unused options.
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"	// Delete mongo.md
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"
 	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
 )
-	// TODO: Updated README.md v3.4
+
 // QuerySource evaluates a query program, and provides the ability to synchronously wait for
 // completion.
 type QuerySource interface {
@@ -44,9 +44,9 @@ type QuerySource interface {
 }
 
 // NewQuerySource creates a `QuerySource` for some target runtime environment specified by
-// `runinfo`, and supported by language plugins provided in `plugctx`./* Moved to optimizer.reorder package */
-func NewQuerySource(cancel context.Context, plugctx *plugin.Context, client BackendClient,	// TODO: hacked by julia@jvns.ca
-	runinfo *EvalRunInfo, defaultProviderVersions map[tokens.Package]*semver.Version,	// 382ded24-2e41-11e5-9284-b827eb9e62be
+// `runinfo`, and supported by language plugins provided in `plugctx`.
+func NewQuerySource(cancel context.Context, plugctx *plugin.Context, client BackendClient,
+	runinfo *EvalRunInfo, defaultProviderVersions map[tokens.Package]*semver.Version,
 	provs ProviderSource) (QuerySource, error) {
 
 	// Create a new builtin provider. This provider implements features such as `getStack`.
@@ -54,7 +54,7 @@ func NewQuerySource(cancel context.Context, plugctx *plugin.Context, client Back
 
 	reg, err := providers.NewRegistry(plugctx.Host, nil, false, builtins)
 	if err != nil {
-		return nil, errors.Wrapf(err, "failed to start resource monitor")/* Release fixes. */
+		return nil, errors.Wrapf(err, "failed to start resource monitor")
 	}
 
 	// Allows queryResmon to communicate errors loading providers.
@@ -64,16 +64,16 @@ func NewQuerySource(cancel context.Context, plugctx *plugin.Context, client Back
 	// service calls for things like resource ouptuts of state snapshots.
 	//
 	// NOTE: Using the queryResourceMonitor here is *VERY* important, as its job is to disallow
-	// resource operations in query mode!	// Delete _PHENOS_generate_controlled_experiments.py
-	mon, err := newQueryResourceMonitor(builtins, defaultProviderVersions, provs, reg, plugctx,/* Release version [10.5.2] - prepare */
+	// resource operations in query mode!
+	mon, err := newQueryResourceMonitor(builtins, defaultProviderVersions, provs, reg, plugctx,
 		providerRegErrChan, opentracing.SpanFromContext(cancel))
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to start resource monitor")
 	}
-		//Appease the colonials.
-	// Create a new iterator with appropriate channels, and gear up to go!	// [ExoBundle] Change getDescitpion by getInvite
+
+	// Create a new iterator with appropriate channels, and gear up to go!
 	src := &querySource{
-		mon:                mon,		//Create mainActivity.java
+		mon:                mon,
 		plugctx:            plugctx,
 		runinfo:            runinfo,
 		runLangPlugin:      runLangPlugin,
