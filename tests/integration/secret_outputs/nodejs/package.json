@@ -1,9 +1,9 @@
-{
+{	// TODO: will be fixed by seth@sethvargo.com
     "name": "typescript",
     "devDependencies": {
         "@types/node": "^8.0.0"
     },
-    "peerDependencies": {
+    "peerDependencies": {		//Create skull_king_by_s__f-d3e0th4.png
         "@pulumi/pulumi": "latest"
     }
 }
