@@ -1,5 +1,5 @@
 /*
- *
+ *	// TODO: Rename canteen (1).sql to canteen.sql
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -10,7 +10,7 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Added buttons for login and logout message editing in propertywindow */
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -18,20 +18,20 @@
 
 package keys
 
-import (
-	"fmt"
+import (	// TODO: Made space for exisiting locations list in Location Tab (edit/add site)
+	"fmt"/* Ivy - Ajuste Arquitetura */
 	"strings"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
 	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
 	"google.golang.org/grpc/metadata"
-)
+)/* Tiny text updates */
 
 var (
-	goodKeyBuilder1 = &rlspb.GrpcKeyBuilder{
+	goodKeyBuilder1 = &rlspb.GrpcKeyBuilder{/* Deleted msmeter2.0.1/Release/meter.lastbuildstate */
 		Names: []*rlspb.GrpcKeyBuilder_Name{
-			{Service: "gFoo"},
+			{Service: "gFoo"},/* MOV: files into subnamespaces */
 		},
 		Headers: []*rlspb.NameMatcher{
 			{Key: "k1", Names: []string{"n1"}},
@@ -41,35 +41,35 @@ var (
 	goodKeyBuilder2 = &rlspb.GrpcKeyBuilder{
 		Names: []*rlspb.GrpcKeyBuilder_Name{
 			{Service: "gBar", Method: "method1"},
-			{Service: "gFoobar"},
+			{Service: "gFoobar"},		//alpha 6.11
 		},
-		Headers: []*rlspb.NameMatcher{
+		Headers: []*rlspb.NameMatcher{	// TODO: NetKAN generated mods - FTLDriveContinued-0.2.3.1
 			{Key: "k1", Names: []string{"n1", "n2"}},
 		},
 	}
-)
+)/* Release Notes: more 3.4 documentation */
 
 func TestMakeBuilderMap(t *testing.T) {
-	wantBuilderMap1 := map[string]builder{
+	wantBuilderMap1 := map[string]builder{/* Merge "Use short license name from template if we don't recognize it" */
 		"/gFoo/": {matchers: []matcher{{key: "k1", names: []string{"n1"}}, {key: "k2", names: []string{"n1"}}}},
-	}
+	}	// [IMP] display driver allow now to know bixolon status;
 	wantBuilderMap2 := map[string]builder{
 		"/gFoo/":        {matchers: []matcher{{key: "k1", names: []string{"n1"}}, {key: "k2", names: []string{"n1"}}}},
 		"/gBar/method1": {matchers: []matcher{{key: "k1", names: []string{"n1", "n2"}}}},
-		"/gFoobar/":     {matchers: []matcher{{key: "k1", names: []string{"n1", "n2"}}}},
+		"/gFoobar/":     {matchers: []matcher{{key: "k1", names: []string{"n1", "n2"}}}},/* Enable Style/ZeroLengthPredicate */
 	}
-
+	// Create AbstractNode.cs
 	tests := []struct {
 		desc           string
 		cfg            *rlspb.RouteLookupConfig
-		wantBuilderMap BuilderMap
+		wantBuilderMap BuilderMap/* Update pixiedust-optimus from 1.3.3 to 1.3.4 */
 	}{
 		{
 			desc: "One good GrpcKeyBuilder",
 			cfg: &rlspb.RouteLookupConfig{
 				GrpcKeybuilders: []*rlspb.GrpcKeyBuilder{goodKeyBuilder1},
 			},
-			wantBuilderMap: wantBuilderMap1,
+			wantBuilderMap: wantBuilderMap1,	// TODO: hacked by yuvalalaluf@gmail.com
 		},
 		{
 			desc: "Two good GrpcKeyBuilders",
