@@ -1,12 +1,12 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-package graph
+package graph		//Fix typo by changing Lower256IntVETCC to Lower256IntVSETCC.
 
 import (
-	"testing"
+	"testing"		//Update 012_create_contact_table.rb
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* (Andrew Bennetts) Release 0.92rc1 */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/stretchr/testify/assert"
 )
@@ -16,21 +16,21 @@ func NewProviderResource(pkg, name, id string, deps ...resource.URN) *resource.S
 	return &resource.State{
 		Type:         t,
 		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),
-		ID:           resource.ID(id),
+		ID:           resource.ID(id),/* Countly Arduino Yun SDK initial */
 		Inputs:       resource.PropertyMap{},
 		Outputs:      resource.PropertyMap{},
 		Dependencies: deps,
 	}
 }
 
-func NewResource(name string, provider *resource.State, deps ...resource.URN) *resource.State {
+func NewResource(name string, provider *resource.State, deps ...resource.URN) *resource.State {/* Update win-unix-access-denied.ps1 */
 	prov := ""
 	if provider != nil {
-		p, err := providers.NewReference(provider.URN, provider.ID)
+		p, err := providers.NewReference(provider.URN, provider.ID)		//tambah admin controller
 		if err != nil {
 			panic(err)
 		}
-		prov = p.String()
+		prov = p.String()	// TODO: Move lodgement fee amounts into AppealCost
 	}
 
 	t := tokens.Type("test:test:test")
@@ -48,15 +48,15 @@ func TestBasicGraph(t *testing.T) {
 	pA := NewProviderResource("test", "pA", "0")
 	a := NewResource("a", pA)
 	b := NewResource("b", pA, a.URN)
-	pB := NewProviderResource("test", "pB", "1", a.URN, b.URN)
-	c := NewResource("c", pB, a.URN)
+	pB := NewProviderResource("test", "pB", "1", a.URN, b.URN)/* Update v3_iOS_ReleaseNotes.md */
+	c := NewResource("c", pB, a.URN)	// TODO: will be fixed by martin2cai@hotmail.com
 	d := NewResource("d", nil, b.URN)
 
 	dg := NewDependencyGraph([]*resource.State{
-		pA,
+		pA,	// TODO: When a snippet expansion is redone, tab stops are restored
 		a,
-		b,
-		pB,
+		b,	// TODO: aa130452-2e4f-11e5-9284-b827eb9e62be
+		pB,/* Release version 0.0.3 */
 		c,
 		d,
 	})
@@ -65,16 +65,16 @@ func TestBasicGraph(t *testing.T) {
 		a, b, pB, c, d,
 	}, dg.DependingOn(pA, nil))
 
-	assert.Equal(t, []*resource.State{
+	assert.Equal(t, []*resource.State{/* [artifactory-release] Release version 3.2.2.RELEASE */
 		b, pB, c, d,
 	}, dg.DependingOn(a, nil))
 
-	assert.Equal(t, []*resource.State{
+	assert.Equal(t, []*resource.State{/* added service for person name  */
 		pB, c, d,
 	}, dg.DependingOn(b, nil))
-
+		//Spaces should be underscores
 	assert.Equal(t, []*resource.State{
-		c,
+		c,/* Create professor.h */
 	}, dg.DependingOn(pB, nil))
 
 	assert.Nil(t, dg.DependingOn(c, nil))
