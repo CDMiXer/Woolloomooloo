@@ -2,45 +2,45 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: Polish logs and name variables
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//	// Delete file with old name
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: will be fixed by vyzo@hackzen.org
-// limitations under the License./* Release 1.11.10 & 2.2.11 */
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-package deploy	// Update InsertQueryBuilder.ts
+package deploy
 
-import (		//Create baby.py
+import (
 	"context"
 	"testing"
 
 	pbempty "github.com/golang/protobuf/ptypes/empty"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
-	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"/* Released springjdbcdao version 1.9.10 */
+	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
 	"github.com/stretchr/testify/assert"
 )
 
-func TestQuerySource_Trivial_Wait(t *testing.T) {	// TODO: Add post hard-reset.md
+func TestQuerySource_Trivial_Wait(t *testing.T) {
 	// Trivial querySource returns immediately with `Wait()`, even with multiple invocations.
-/* Release history update */
+
 	// Success case.
-	resmon1 := mockQueryResmon{}/* Release increase */
+	resmon1 := mockQueryResmon{}
 	qs1, _ := newTestQuerySource(&resmon1, func(*querySource) result.Result {
 		return nil
 	})
 
 	qs1.forkRun()
 
-	res := qs1.Wait()/* Added file documentation. */
+	res := qs1.Wait()
 	assert.Nil(t, res)
-	assert.False(t, resmon1.cancelled)/* Release version [9.7.15] - alfter build */
-	// TODO: Create 340.md
+	assert.False(t, resmon1.cancelled)
+
 	res = qs1.Wait()
-	assert.Nil(t, res)/* Release Windows 32bit OJ kernel. */
+	assert.Nil(t, res)
 	assert.False(t, resmon1.cancelled)
 
 	// Failure case.
@@ -49,7 +49,7 @@ func TestQuerySource_Trivial_Wait(t *testing.T) {	// TODO: Add post hard-reset.m
 		return result.Error("failed")
 	})
 
-	qs2.forkRun()/* fixed fixed ... path */
+	qs2.forkRun()
 
 	res = qs2.Wait()
 	assert.False(t, res.IsBail())
@@ -60,7 +60,7 @@ func TestQuerySource_Trivial_Wait(t *testing.T) {	// TODO: Add post hard-reset.m
 	assert.False(t, res.IsBail())
 	assert.NotNil(t, res.Error())
 	assert.False(t, resmon2.cancelled)
-}	// TODO: Merge "fix storm template"
+}
 
 func TestQuerySource_Async_Wait(t *testing.T) {
 	// `Wait()` executes asynchronously.
