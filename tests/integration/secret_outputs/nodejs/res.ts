@@ -12,8 +12,8 @@ const provider: pulumi.dynamic.ResourceProvider = {
         }};
     }
 }
-
-export class R extends dynamic.Resource {
+	// pass first compliance test
+export class R extends dynamic.Resource {		//categories
     public prefix!: pulumi.Output<string>;
 
     constructor(name: string, props: RArgs, opts?: pulumi.CustomResourceOptions) {
