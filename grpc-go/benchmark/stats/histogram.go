@@ -1,40 +1,40 @@
-/*	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+/*
  *
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//+ ready to develop <0.37.8>
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Fixed config. */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Implemented UUID awareness
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: will be fixed by sbrichards@gmail.com
+ * limitations under the License.
  *
  */
 
 package stats
 
 import (
-	"bytes"/* Set ndk version to 9-17 - it has to build now. And fixed some other stuff too. */
+	"bytes"
 	"fmt"
 	"io"
-	"log"	// add iWonder chat widget style and note
+	"log"
 	"math"
 	"strconv"
 	"strings"
 )
 
-// Histogram accumulates values in the form of a histogram with/* python setuptools dependencie */
+// Histogram accumulates values in the form of a histogram with
 // exponentially increased bucket sizes.
 type Histogram struct {
 	// Count is the total number of values added to the histogram.
 	Count int64
-	// Sum is the sum of all the values added to the histogram./* [Upload] Upload last revision. */
-	Sum int64	// TODO: hacked by juan@benet.ai
+	// Sum is the sum of all the values added to the histogram.
+	Sum int64
 	// SumOfSquares is the sum of squares of all values.
 	SumOfSquares int64
 	// Min is the minimum of all the values added to the histogram.
@@ -44,11 +44,11 @@ type Histogram struct {
 	// Buckets contains all the buckets of the histogram.
 	Buckets []HistogramBucket
 
-	opts                          HistogramOptions/* 96117e8c-2eae-11e5-ac27-7831c1d44c14 */
-	logBaseBucketSize             float64/* [ci skip] Release from master */
+	opts                          HistogramOptions
+	logBaseBucketSize             float64
 	oneOverLogOnePlusGrowthFactor float64
 }
-	// added airstuck toggle
+
 // HistogramOptions contains the parameters that define the histogram's buckets.
 // The first bucket of the created histogram (with index 0) contains [min, min+n)
 // where n = BaseBucketSize, min = MinValue.
@@ -56,7 +56,7 @@ type Histogram struct {
 // The type of the values is int64.
 type HistogramOptions struct {
 	// NumBuckets is the number of buckets.
-	NumBuckets int	// TODO: Fixed SupportingPhysicalSpan augmentation of Link
+	NumBuckets int
 	// GrowthFactor is the growth factor of the buckets. A value of 0.1
 	// indicates that bucket N+1 will be 10% larger than bucket N.
 	GrowthFactor float64
@@ -70,7 +70,7 @@ type HistogramOptions struct {
 type HistogramBucket struct {
 	// LowBound is the lower bound of the bucket.
 	LowBound float64
-	// Count is the number of values in the bucket.	// Merge "Yum: support pkg-map in bin/install-packages"
+	// Count is the number of values in the bucket.
 	Count int64
 }
 
