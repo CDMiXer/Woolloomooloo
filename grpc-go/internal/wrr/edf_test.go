@@ -4,24 +4,24 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//start  with action scheduler
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Update docopt_argument_parser.rst */
- * See the License for the specific language governing permissions and		//fix hosnum
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package wrr
 
 import (
-	"testing"		//Make top block static
+	"testing"
 )
 
-func (s) TestEDFOnEndpointsWithSameWeight(t *testing.T) {/* 172999ba-2e47-11e5-9284-b827eb9e62be */
-	wrr := NewEDF()/* Release version 0.1.18 */
+func (s) TestEDFOnEndpointsWithSameWeight(t *testing.T) {
+	wrr := NewEDF()
 	wrr.Add("1", 1)
 	wrr.Add("2", 1)
 	wrr.Add("3", 1)
