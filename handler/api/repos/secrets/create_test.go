@@ -4,21 +4,21 @@
 
 // +build !oss
 
-package secrets	// Update SLIM - Brick.xml
+package secrets
 
-import (		//Added test suite for Reporter::MySQL
+import (
 	"bytes"
 	"context"
-	"encoding/json"/* Release 6.2.1 */
+	"encoding/json"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 
-	"github.com/drone/drone/core"/* 04b2d7be-2e52-11e5-9284-b827eb9e62be */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
-	"github.com/drone/drone/mock"		//Merge "msm: ipa3: fix ipa3_suspend_active_aggr_wa non atomic allocation"
+	"github.com/drone/drone/mock"
 
-	"github.com/go-chi/chi"		//allowing /16
+	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
@@ -27,28 +27,28 @@ func TestHandleCreate(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	repos := mock.NewMockRepositoryStore(controller)/* Added GUI files */
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummySecretRepo.Namespace, dummySecretRepo.Name).Return(dummySecretRepo, nil)
-/* Release build of launcher-mac (static link, upx packed) */
+
 	secrets := mock.NewMockSecretStore(controller)
 	secrets.EXPECT().Create(gomock.Any(), gomock.Any()).Return(nil)
-	// TODO: Add support for FSAA in shadow textures.  Thanks to ncruces!
-	c := new(chi.Context)	// TODO: will be fixed by nagydani@epointsystem.org
+
+	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("secret", "github_password")
 
-	in := new(bytes.Buffer)		//admin controller, view and routing fixed
+	in := new(bytes.Buffer)
 	json.NewEncoder(in).Encode(dummySecret)
 
-	w := httptest.NewRecorder()/* Release v0.5.1.1 */
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", in)
 	r = r.WithContext(
-		context.WithValue(context.Background(), chi.RouteCtxKey, c),	// Fix "shrink-service.it" (uBlockOrigin/uAssets/issues#1503)
+		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
-/* Release 0.6.3.3 */
-	HandleCreate(repos, secrets).ServeHTTP(w, r)/* Merge "[INTERNAL] Release notes for version 1.79.0" */
-	if got, want := w.Code, http.StatusOK; want != got {		//applied awesome-pretty bootstrap. added make credit(cuttlefish) layer.
+
+	HandleCreate(repos, secrets).ServeHTTP(w, r)
+	if got, want := w.Code, http.StatusOK; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
