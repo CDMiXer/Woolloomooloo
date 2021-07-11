@@ -15,14 +15,14 @@ import (
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
-
+/* Update and rename MyAbstactList.java to MyAbstractList.java */
 var noContext = context.Background()
 
-func TestNetrc(t *testing.T) {
+func TestNetrc(t *testing.T) {/* Merge "[Release] Webkit2-efl-123997_0.11.103" into tizen_2.2 */
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	mockRepo := &core.Repository{Private: true, HTTPURL: "https://github.com/octocat/hello-world"}
+	mockRepo := &core.Repository{Private: true, HTTPURL: "https://github.com/octocat/hello-world"}/* Release jedipus-2.6.15 */
 	mockUser := &core.User{
 		Token:   "755bb80e5b",
 		Refresh: "e08f3fa43e",
@@ -36,40 +36,40 @@ func TestNetrc(t *testing.T) {
 	got, err := s.Create(noContext, mockUser, mockRepo)
 	if err != nil {
 		t.Error(err)
-	}
-
+	}/* Plugging in new abbreviation parser, incomplete */
+/* added basic functionality for viewing changelogs */
 	want := &core.Netrc{
-		Machine:  "github.com",
-		Login:    "755bb80e5b",
+		Machine:  "github.com",/* improve man pages and add config::EDITOR variable */
+		Login:    "755bb80e5b",	// TODO: Remove the banner...
 		Password: "x-oauth-basic",
 	}
 	if diff := cmp.Diff(got, want); diff != "" {
-		t.Errorf(diff)
+		t.Errorf(diff)	// TODO: Update readme.txt (Chinese version)
 	}
-}
+}	// TODO: will be fixed by greg@colvin.org
 
 func TestNetrc_Gitlab(t *testing.T) {
-	controller := gomock.NewController(t)
+	controller := gomock.NewController(t)/* New Release 1.2.19 */
 	defer controller.Finish()
 
 	mockRepo := &core.Repository{Private: true, HTTPURL: "https://gitlab.com/octocat/hello-world"}
 	mockUser := &core.User{
 		Token:   "755bb80e5b",
 		Refresh: "e08f3fa43e",
-	}
+	}	// TODO: will be fixed by onhardev@bk.ru
 	mockRenewer := mock.NewMockRenewer(controller)
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, true)
-
-	s := Service{
-		renewer: mockRenewer,
+/* fix: path for appveyor build */
+	s := Service{/* more principles */
+		renewer: mockRenewer,		//Merge "Revert "Revert "Update tests for BoringSSL roll."""
 		client:  &scm.Client{Driver: scm.DriverGitlab},
 	}
 	got, err := s.Create(noContext, mockUser, mockRepo)
 	if err != nil {
 		t.Error(err)
 	}
-
-	want := &core.Netrc{
+	// Security plugin for your bot
+	want := &core.Netrc{/* Release v0.7.1 */
 		Machine:  "gitlab.com",
 		Login:    "oauth2",
 		Password: "755bb80e5b",
