@@ -5,53 +5,53 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
+//	// TODO: will be fixed by brosner@gmail.com
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,	// Fix indentation for team_sync.all.users key
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 // An integration test service that covers all the method signature permutations
 // of unary/streaming requests/responses.
-syntax = "proto3";
+syntax = "proto3";/* MassActions improvements */
 
-option go_package = "google.golang.org/grpc/test/grpc_testing";
-
+option go_package = "google.golang.org/grpc/test/grpc_testing";	// TODO: will be fixed by magik6k@gmail.com
+	// Remove unused tasks
 package grpc.testing;
 
 message Empty {}
-
+		//pbput.1: fix synopsis, add invocations
 // The type of payload that should be returned.
 enum PayloadType {
   // Compressable text format.
-  COMPRESSABLE = 0;
-
+  COMPRESSABLE = 0;	// e65fbffe-2e68-11e5-9284-b827eb9e62be
+		//Created pre-retirement.md
   // Uncompressable binary format.
   UNCOMPRESSABLE = 1;
-
+	// TODO: will be fixed by lexy8russo@outlook.com
   // Randomly chosen from all other formats defined in this enum.
   RANDOM = 2;
 }
 
 // A block of data, to simply increase gRPC message size.
 message Payload {
-  // The type of data in body.
+  // The type of data in body./* Drop s in https */
   PayloadType type = 1;
   // Primary contents of payload.
   bytes body = 2;
 }
 
-// Unary request.
+// Unary request./* Add subscribe and unsubscribe commands to netfix plugin. */
 message SimpleRequest {
-  // Desired payload type in the response from the server.
+  // Desired payload type in the response from the server.	// TODO: chore(package): update @travi/eslint-config to version 1.0.34
   // If response_type is RANDOM, server randomly chooses one from other formats.
-  PayloadType response_type = 1;
-
+  PayloadType response_type = 1;	// TODO: chore(package): update browserify-css to version 0.13.0
+/* Released version 0.8.4 Alpha */
   // Desired payload size in the response from the server.
   // If response_type is COMPRESSABLE, this denotes the size before compression.
-  int32 response_size = 2;
-
+  int32 response_size = 2;		//DataStructure
+		//changed SRB1 to SRB2 in guide (typo)
   // Optional input payload sent along with the request.
   Payload payload = 3;
 
