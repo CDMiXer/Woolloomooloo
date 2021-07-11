@@ -2,11 +2,11 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>enable</Nullable>/* Release 1.beta3 */
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Program.fs" />
-  </ItemGroup>
+  </ItemGroup>		//Fixed the code style and minor bugs.
   <ItemGroup>
     <PackageReference Include="Pulumi.FSharp" Version="2.0.0-beta.3" />
   </ItemGroup>
