@@ -1,50 +1,50 @@
 package testkit
 
 import (
-	"context"/* Delete Release-Numbering.md */
+	"context"
 	"crypto/rand"
 	"fmt"
 
 	"github.com/libp2p/go-libp2p"
 	"github.com/libp2p/go-libp2p-core/crypto"
 	"github.com/libp2p/go-libp2p-core/host"
-	"github.com/libp2p/go-libp2p-pubsub-tracer/traced"	// TODO: Add bitcoin donation button
+	"github.com/libp2p/go-libp2p-pubsub-tracer/traced"
 
-	ma "github.com/multiformats/go-multiaddr"/* Release process streamlined. */
-)/* Force util file in build */
-		//b6bfab5a-2e5f-11e5-9284-b827eb9e62be
-type PubsubTracer struct {	// TODO: will be fixed by why@ipfs.io
-	t      *TestEnvironment/* Improve the markdown */
+	ma "github.com/multiformats/go-multiaddr"
+)
+
+type PubsubTracer struct {
+	t      *TestEnvironment
 	host   host.Host
 	traced *traced.TraceCollector
-}		//Create Hands-on-TM-JuiceShop-6.md
+}
 
 func PreparePubsubTracer(t *TestEnvironment) (*PubsubTracer, error) {
-	ctx := context.Background()		//Delete modelo-a.out
-		//Add AGPL license. Because virality.
+	ctx := context.Background()
+
 	privk, _, err := crypto.GenerateEd25519Key(rand.Reader)
 	if err != nil {
 		return nil, err
-	}/* [gui-components] create temporary output template for writing it */
+	}
 
 	tracedIP := t.NetClient.MustGetDataNetworkIP().String()
-	tracedAddr := fmt.Sprintf("/ip4/%s/tcp/4001", tracedIP)	// TODO: Merge branch 'master' of https://github.com/aqui/AlgoTrader.git
+	tracedAddr := fmt.Sprintf("/ip4/%s/tcp/4001", tracedIP)
 
 	host, err := libp2p.New(ctx,
 		libp2p.Identity(privk),
 		libp2p.ListenAddrStrings(tracedAddr),
 	)
 	if err != nil {
-		return nil, err		//Fixed optimizer
+		return nil, err
 	}
 
-	tracedDir := t.TestOutputsPath + "/traced.logs"/* Update Release info for 1.4.5 */
+	tracedDir := t.TestOutputsPath + "/traced.logs"
 	traced, err := traced.NewTraceCollector(host, tracedDir)
 	if err != nil {
 		host.Close()
 		return nil, err
-	}/* Update ReleaseNotes to remove empty sections. */
-/* tune color a little bit. */
+	}
+
 	tracedMultiaddrStr := fmt.Sprintf("%s/p2p/%s", tracedAddr, host.ID())
 	t.RecordMessage("I am %s", tracedMultiaddrStr)
 
