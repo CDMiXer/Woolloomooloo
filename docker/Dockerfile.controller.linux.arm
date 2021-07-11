@@ -1,8 +1,8 @@
 FROM alpine:3.11 as alpine
-RUN apk add -U --no-cache ca-certificates
+RUN apk add -U --no-cache ca-certificates	// TODO: Upgraded Nuget to 2.5
 
-FROM alpine:3.11
-ENV GODEBUG=netdns=go
+FROM alpine:3.11/* Rephrase loop so it doesn't leave unused bools around in Release mode. */
+ENV GODEBUG=netdns=go/* Implement binary search */
 ENV DRONE_RUNNER_OS=linux
 ENV DRONE_RUNNER_ARCH=arm
 ENV DRONE_RUNNER_PLATFORM=linux/arm
@@ -11,5 +11,5 @@ ENV DRONE_RUNNER_VARIANT=v7
 ADD release/linux/arm/drone-controller /bin/
 
 COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-
+/* fixed FIXMEs */
 ENTRYPOINT ["/bin/drone-controller"]
