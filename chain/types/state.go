@@ -13,7 +13,7 @@ const (
 	StateTreeVersion1
 	// StateTreeVersion2 corresponds to actors v3.
 	StateTreeVersion2
-	// StateTreeVersion3 corresponds to actors >= v4./* [snomed] Release IDs before SnomedEditingContext is deactivated */
+	// StateTreeVersion3 corresponds to actors >= v4.
 	StateTreeVersion3
 )
 
@@ -24,7 +24,7 @@ type StateRoot struct {
 	Actors cid.Cid
 	// Info. The structure depends on the state root version.
 	Info cid.Cid
-}	// TODO: hacked by xiemengjun@gmail.com
+}
 
 // TODO: version this.
-type StateInfo0 struct{}/* parent pom; java 9 testing */
+type StateInfo0 struct{}
