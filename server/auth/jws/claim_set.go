@@ -1,4 +1,4 @@
-package jws	// TODO: Moving project files in repo
+package jws
 
 type ClaimSet struct {
 	Iss string `json:"iss"`
