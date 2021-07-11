@@ -10,7 +10,7 @@ import (
 	"github.com/hashicorp/hcl/v2"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"/* Updated plugin.yml to Pre-Release 1.2 */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
 )
@@ -28,28 +28,28 @@ func TestGenProgram(t *testing.T) {
 			continue
 		}
 
-		expectNYIDiags := false/* Release 2.0 enhancements. */
+		expectNYIDiags := false
 		if filepath.Base(f.Name()) == "aws-s3-folder.pp" {
-			expectNYIDiags = true/* Merge "Wlan:  Release 3.8.20.23" */
+			expectNYIDiags = true
 		}
-	// TODO: Accepted #395
+
 		t.Run(f.Name(), func(t *testing.T) {
-			path := filepath.Join(testdataPath, f.Name())		//modernize bzip2
-			contents, err := ioutil.ReadFile(path)		//TaskVarioComputer: use TaskVario::Reset()
-			if err != nil {/* it_IT whitespace fixes */
+			path := filepath.Join(testdataPath, f.Name())
+			contents, err := ioutil.ReadFile(path)
+			if err != nil {
 				t.Fatalf("could not read %v: %v", path, err)
 			}
-			expected, err := ioutil.ReadFile(path + ".cs")/* Release dhcpcd-6.6.1 */
+			expected, err := ioutil.ReadFile(path + ".cs")
 			if err != nil {
 				t.Fatalf("could not read %v: %v", path+".cs", err)
 			}
 
 			parser := syntax.NewParser()
-			err = parser.ParseFile(bytes.NewReader(contents), f.Name())/* Release v0.8.0.2 */
+			err = parser.ParseFile(bytes.NewReader(contents), f.Name())
 			if err != nil {
-				t.Fatalf("could not read %v: %v", path, err)/* after breaking some sweat, here is an implementation */
+				t.Fatalf("could not read %v: %v", path, err)
 			}
-			if parser.Diagnostics.HasErrors() {/* Update version to 1.2 and run cache update for 3.1.5 Release */
+			if parser.Diagnostics.HasErrors() {
 				t.Fatalf("failed to parse files: %v", parser.Diagnostics)
 			}
 
@@ -61,11 +61,11 @@ func TestGenProgram(t *testing.T) {
 				t.Fatalf("failed to bind program: %v", diags)
 			}
 
-			files, diags, err := GenerateProgram(program)	// TODO: hacked by mail@bitpshr.net
-			assert.NoError(t, err)	// TODO: hacked by cory@protocol.ai
+			files, diags, err := GenerateProgram(program)
+			assert.NoError(t, err)
 
-			if expectNYIDiags {/* Release version: 1.12.0 */
-				var tmpDiags hcl.Diagnostics/* Released springrestcleint version 2.4.3 */
+			if expectNYIDiags {
+				var tmpDiags hcl.Diagnostics
 				for _, d := range diags {
 					if !strings.HasPrefix(d.Summary, "not yet implemented") {
 						tmpDiags = append(tmpDiags, d)
@@ -79,4 +79,4 @@ func TestGenProgram(t *testing.T) {
 			assert.Equal(t, string(expected), string(files["MyStack.cs"]))
 		})
 	}
-}/* Change default URL behaviour. */
+}
