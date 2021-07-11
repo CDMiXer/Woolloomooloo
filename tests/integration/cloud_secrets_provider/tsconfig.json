@@ -1,18 +1,18 @@
 {
     "compilerOptions": {
-        "strict": true,		//Update Travis Config
+        "strict": true,
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",
+        "moduleResolution": "node",	// Factored a helper class for certificate handling
         "sourceMap": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,/* Release 3.7.1 */
+        "noImplicitReturns": true,		//Rename trullatest to trullatest.m
         "forceConsistentCasingInFileNames": true
-    },/* More sensible test of the calculateLatestReleaseVersion() method. */
-    "files": [/* Maven Release Plugin -> 2.5.1 because of bug */
-        "index.ts"
-    ]
-}
+    },
+    "files": [
+        "index.ts"/* ROO-2440: Release Spring Roo 1.1.4.RELEASE */
+    ]/* app-i18n/scim-sunpinyin: Fix HOMEPAGE/SRC_URI */
+}/* Release for 18.34.0 */
