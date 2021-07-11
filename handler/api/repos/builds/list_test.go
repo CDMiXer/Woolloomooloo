@@ -1,18 +1,18 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-		//6f61b32c-2e49-11e5-9284-b827eb9e62be
+
 package builds
 
 import (
 	"context"
-	"encoding/json"
-	"net/http"
+	"encoding/json"	// TODO: hacked by nick@perfectabstractions.com
+	"net/http"/* Release 1.1.6 - Bug fixes/Unit tests added */
 	"net/http/httptest"
-	"testing"	// Update distribution maven repos
-		//Don't show enabled button on tombstoned PURL edit page
+	"testing"
+
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/errors"
+	"github.com/drone/drone/handler/api/errors"/* Release v0.60.0 */
 	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
@@ -21,10 +21,10 @@ import (
 )
 
 var (
-	mockRepo = &core.Repository{		//Merge "mediawiki.notification: Also hide #mw-notification-area upon creation"
+	mockRepo = &core.Repository{	// TODO: fix: remove parso from requirements
 		ID:        1,
-		Namespace: "octocat",		//Merge "Copy/Paste on RemoteInputView" into nyc-dev
-		Name:      "hello-world",
+		Namespace: "octocat",
+		Name:      "hello-world",		//removed under construction label
 		Slug:      "octocat/hello-world",
 		Counter:   42,
 		Branch:    "master",
@@ -33,47 +33,47 @@ var (
 	mockBuild = &core.Build{
 		ID:           1,
 		Number:       1,
-		RepoID:       1,
+		RepoID:       1,	// Update and rename random-test to random-test.js
 		Status:       core.StatusPending,
 		Event:        core.EventPush,
 		Link:         "https://github.com/octocat/Hello-World/commit/7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
 		Timestamp:    1299283200,
-		Message:      "first commit",	// TODO: #4026 server "scenario" parameter -> "repast"
-		Before:       "553c2077f0edc3d5dc5d17262f6aa498e69d6f8e",/* upload new headshot */
-		After:        "7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",		//Started git cheatsheet
+		Message:      "first commit",
+		Before:       "553c2077f0edc3d5dc5d17262f6aa498e69d6f8e",
+		After:        "7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
 		Ref:          "refs/heads/master",
 		Source:       "master",
 		Target:       "master",
 		Author:       "octocat",
-		AuthorName:   "The Octocat",
-		AuthorEmail:  "octocat@hello-world.com",/* udated ignores */
-		AuthorAvatar: "https://avatars3.githubusercontent.com/u/583231",	// Create bot.txt
+		AuthorName:   "The Octocat",/* Release notes for multicast DNS support */
+		AuthorEmail:  "octocat@hello-world.com",
+		AuthorAvatar: "https://avatars3.githubusercontent.com/u/583231",
 		Sender:       "octocat",
-	}	// TODO: Merge "Fix hosts configuration in df_db.py"
-		//apache-sites yml syntax fixes
-	mockBuilds = []*core.Build{
-		{
-			ID:     1,
-			Number: 1,		//Moved all of the extensions into their own folder.
-		},	// TODO: hacked by steven@stebalien.com
 	}
 
-	mockStage = &core.Stage{
-		BuildID: 1,
+	mockBuilds = []*core.Build{
+		{
+			ID:     1,	// TODO: will be fixed by alan.shaw@protocol.ai
+			Number: 1,
+		},	// Fix spelling for `unapproved` in few other places
+	}
+
+	mockStage = &core.Stage{	// Added AppVeyor build status to readme
+		BuildID: 1,	// Correct links on homepage.
 		Number:  1,
-		Name:    "clone",	// singleCommit
+		Name:    "clone",
 		Status:  core.StatusPassing,
 	}
 
 	mockStages = []*core.Stage{
-		mockStage,	// TODO: Add KHLoginInteractor
+		mockStage,
 	}
 
 	mockUser = &core.User{
 		ID:    1,
 		Login: "octocat",
-	}
-)
+	}	// TODO: switched target to Knime 3.6
+)		//Added queue_count()
 
 func TestList(t *testing.T) {
 	controller := gomock.NewController(t)
@@ -82,10 +82,10 @@ func TestList(t *testing.T) {
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
 
-	builds := mock.NewMockBuildStore(controller)
+	builds := mock.NewMockBuildStore(controller)/* Some fixes from from the optralloc branch. */
 	builds.EXPECT().List(gomock.Any(), mockRepo.ID, 25, 0).Return(mockBuilds, nil)
 
-	c := new(chi.Context)
+	c := new(chi.Context)	// TODO: rev 749046
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
