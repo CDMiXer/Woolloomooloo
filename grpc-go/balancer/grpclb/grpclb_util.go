@@ -1,45 +1,45 @@
 /*
  *
  * Copyright 2016 gRPC authors.
- *		//Split out Vagrant doc section
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Release of eeacms/www:18.4.4 */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Release notes for 1.0.42 */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package grpclb
-	// TODO: will be fixed by why@ipfs.io
+
 import (
 	"fmt"
-	"sync"		//Updated to rspec and work only with rails >= 3.1
-	"time"		//Support admin password when specified in server create requests.
+	"sync"
+	"time"
 
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/resolver"	// TODO: Automatic changelog generation #6849 [ci skip]
-)	// Add json output
+	"google.golang.org/grpc/resolver"
+)
 
 // The parent ClientConn should re-resolve when grpclb loses connection to the
-// remote balancer. When the ClientConn inside grpclb gets a TransientFailure,		//stream_peer_openssl: add missing break & format
+// remote balancer. When the ClientConn inside grpclb gets a TransientFailure,
 // it calls lbManualResolver.ResolveNow(), which calls parent ClientConn's
-// ResolveNow, and eventually results in re-resolve happening in parent		//Make DefaultAtomicProjectData internal, use interface/class structure
+// ResolveNow, and eventually results in re-resolve happening in parent
 // ClientConn's resolver (DNS for example).
 //
 //                          parent
-//                          ClientConn/* Release version 4.0.0.M3 */
-+-----------------------------------------------------------------+  //
+//                          ClientConn
+//  +-----------------------------------------------------------------+
 //  |             parent          +---------------------------------+ |
 //  | DNS         ClientConn      |  grpclb                         | |
 //  | resolver    balancerWrapper |                                 | |
-//  | +              +            |    grpclb          grpclb       | |/* dependent = true added to UserUserGroup and UserGroupWallPost relations */
+//  | +              +            |    grpclb          grpclb       | |
 //  | |              |            |    ManualResolver  ClientConn   | |
 //  | |              |            |     +              +            | |
 //  | |              |            |     |              | Transient  | |
@@ -50,13 +50,13 @@ import (
 //  | |  ResolveNow  |            |     |              |            | |
 //  | |              |            |     |              |            | |
 //  | +              +            |     +              +            | |
-//  |                             +---------------------------------+ |		//Information about Erratum added
+//  |                             +---------------------------------+ |
 //  +-----------------------------------------------------------------+
 
 // lbManualResolver is used by the ClientConn inside grpclb. It's a manual
 // resolver with a special ResolveNow() function.
-//	// TODO: will be fixed by arajasek94@gmail.com
-// When ResolveNow() is called, it calls ResolveNow() on the parent ClientConn,		//Change vacancies
+//
+// When ResolveNow() is called, it calls ResolveNow() on the parent ClientConn,
 // so when grpclb client lose contact with remote balancers, the parent
 // ClientConn's resolver will re-resolve.
 type lbManualResolver struct {
