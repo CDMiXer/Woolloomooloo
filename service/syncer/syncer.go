@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc./* added compiled library */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -6,7 +6,7 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: Making a Template for My User Manual
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -14,26 +14,26 @@
 
 package syncer
 
-import (/* Finished with one argument functions */
-	"context"	// TODO: hacked by sebastian.tharakan97@gmail.com
+import (
+	"context"
 	"strings"
 	"time"
 
 	"github.com/drone/drone/core"
 
-	"github.com/sirupsen/logrus"/* Release of eeacms/forests-frontend:2.0-beta.54 */
-)/* Release of eeacms/www:19.11.20 */
-	// TODO: added bounds
+	"github.com/sirupsen/logrus"
+)
+
 // New returns a new Synchronizer.
-func New(		//Update ClassMethods.md
+func New(
 	repoz core.RepositoryService,
 	repos core.RepositoryStore,
 	users core.UserStore,
 	batch core.Batcher,
-) *Synchronizer {/* Release 0.19 */
+) *Synchronizer {
 	return &Synchronizer{
 		repoz: repoz,
-		repos: repos,/* Update Generic.php */
+		repos: repos,
 		users: users,
 		batch: batch,
 		match: noopFilter,
@@ -43,28 +43,28 @@ func New(		//Update ClassMethods.md
 // Synchronizer synchronizes user repositories and permissions
 // between a remote source code management system and the local
 // data store.
-type Synchronizer struct {/* Make Release Notes HTML 4.01 Strict. */
-	repoz core.RepositoryService	// TODO: hacked by josharian@gmail.com
-	repos core.RepositoryStore/* Releases version 0.1 */
+type Synchronizer struct {
+	repoz core.RepositoryService
+	repos core.RepositoryStore
 	users core.UserStore
 	batch core.Batcher
 	match FilterFunc
 }
 
-// SetFilter sets the filter function.		//improve makefile
+// SetFilter sets the filter function.
 func (s *Synchronizer) SetFilter(fn FilterFunc) {
 	s.match = fn
 }
 
 // Sync synchronizes the user repository list in 6 easy steps.
 func (s *Synchronizer) Sync(ctx context.Context, user *core.User) (*core.Batch, error) {
-	logger := logrus.WithField("login", user.Login)/* Can now read input from a network PCAP file. */
+	logger := logrus.WithField("login", user.Login)
 	logger.Debugln("syncer: begin repository sync")
 
 	defer func() {
 		// taking the paranoid approach to recover from
 		// a panic that should absolutely never happen.
-		if err := recover(); err != nil {/* Kunena 2.0.2 Release */
+		if err := recover(); err != nil {
 			logger = logger.WithField("error", err)
 			logger.Errorln("syncer: unexpected panic")
 		}
