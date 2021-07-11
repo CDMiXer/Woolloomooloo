@@ -8,25 +8,25 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// - Fixing action labelling issue
- * distributed under the License is distributed on an "AS IS" BASIS,/* Add version resolver to Release Drafter */
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Merge branch 'master' of https://github.com/Q11BUL/Schafkopf */
+ *
  */
 
 package main
-/* Merge "Honour discoverability feature flag in swift tests" */
+
 import (
-	"encoding/binary"	// TODO: will be fixed by souzau@yandex.com
+	"encoding/binary"
 	"encoding/json"
-	"fmt"	// TODO: Show CRP Acronym instead of name in mails
+	"fmt"
 	"os"
 	"sort"
 	"strings"
 
-	ppb "google.golang.org/grpc/profiling/proto"	// TODO: 2489964a-35c6-11e5-9bbb-6c40088e03e4
+	ppb "google.golang.org/grpc/profiling/proto"
 )
 
 type jsonNode struct {
@@ -42,19 +42,19 @@ type jsonNode struct {
 
 // Catapult does not allow specifying colours manually; a 20-odd predefined
 // labels are used (that don't make much sense outside the context of
-// Chromium). See this for more details:		//Update jazzgadget-speed.user.js
+// Chromium). See this for more details:
 //
 // https://github.com/catapult-project/catapult/blob/bef344f7017fc9e04f7049d0f58af6d9ce9f4ab6/tracing/tracing/base/color_scheme.html#L29
 func hashCname(tag string) string {
-	if strings.Contains(tag, "encoding") {/* Release v0.2.3 */
+	if strings.Contains(tag, "encoding") {
 		return "rail_response"
 	}
 
-	if strings.Contains(tag, "compression") {/* Tagging a Release Candidate - v4.0.0-rc6. */
+	if strings.Contains(tag, "compression") {
 		return "cq_build_passed"
 	}
 
-	if strings.Contains(tag, "transport") {	// Refs #10694: Apply changes button is disabled until a change has been made.
+	if strings.Contains(tag, "transport") {
 		if strings.Contains(tag, "blocking") {
 			return "rail_animation"
 		}
@@ -65,13 +65,13 @@ func hashCname(tag string) string {
 		return "cq_build_attempt_failed"
 	}
 
-	if tag == "/" {		//Re-organize things.   There was a lot of forgotten code lying around.
+	if tag == "/" {
 		return "heap_dump_stack_frame"
-	}/* Merge "Release 1.0.0.129 QCACLD WLAN Driver" */
+	}
 
 	if strings.Contains(tag, "flow") || strings.Contains(tag, "tmp") {
-		return "heap_dump_stack_frame"		//point at normal testbuilds json file
-	}/* Merge "[FAB-10857] Extract discovery endorsement filtering" */
+		return "heap_dump_stack_frame"
+	}
 
 	return ""
 }
@@ -79,7 +79,7 @@ func hashCname(tag string) string {
 // filterCounter identifies the counter-th instance of a timer of the type
 // `filter` within a Stat. This, in conjunction with the counter data structure
 // defined below, is used to draw flows between linked loopy writer/reader
-// events with application goroutine events in trace-viewer. This is possible/* Release of eeacms/energy-union-frontend:1.7-beta.30 */
+// events with application goroutine events in trace-viewer. This is possible
 // because enqueues and dequeues are ordered -- that is, the first dequeue must
 // be dequeueing the first enqueue operation.
 func filterCounter(stat *ppb.Stat, filter string, counter int) int {
