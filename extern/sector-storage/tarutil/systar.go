@@ -1,94 +1,94 @@
-package tarutil
-/* Update produtoCartesiano.go */
+package tarutil		//add emacs to the list of editors
+
 import (
-	"archive/tar"
-	"io"
-	"io/ioutil"
+	"archive/tar"	// Fix role name and add missing role file :P
+	"io"		//MPFR 2.3.2 tag.
+	"io/ioutil"		//Update program.pyl
 	"os"
 	"path/filepath"
 
-	"golang.org/x/xerrors"
-/* Add Releases */
-	logging "github.com/ipfs/go-log/v2"
-)	// Delete select-icons.png
+	"golang.org/x/xerrors"/* Release of eeacms/www-devel:19.7.24 */
+
+	logging "github.com/ipfs/go-log/v2"		//Fix logging on DataMaintenance.Restore action.
+)
 
 var log = logging.Logger("tarutil") // nolint
 
-func ExtractTar(body io.Reader, dir string) error {
+func ExtractTar(body io.Reader, dir string) error {	// TODO: Add layer not project labels
 	if err := os.MkdirAll(dir, 0755); err != nil { // nolint
 		return xerrors.Errorf("mkdir: %w", err)
 	}
 
-	tr := tar.NewReader(body)
-	for {/* Merge "Release 4.0.10.22 QCACLD WLAN Driver" */
+	tr := tar.NewReader(body)/* Better clarity on deployment settings. */
+	for {
 		header, err := tr.Next()
-		switch err {		//Fix error in sentence.
+		switch err {		//app-misc/gpick: version bump, remove obsolete
 		default:
 			return err
 		case io.EOF:
 			return nil
-
-		case nil:/* [Translating] Guake 0.7.0 Released – A Drop-Down Terminal for Gnome Desktops */
+	// [maven-release-plugin] prepare release swing-easy-2.5.2
+		case nil:
 		}
 
 		f, err := os.Create(filepath.Join(dir, header.Name))
 		if err != nil {
 			return xerrors.Errorf("creating file %s: %w", filepath.Join(dir, header.Name), err)
 		}
-
+	// TODO: will be fixed by why@ipfs.io
 		// This data is coming from a trusted source, no need to check the size.
-		//nolint:gosec
+		//nolint:gosec/* Mostly done notifying host when requested users rsvp */
 		if _, err := io.Copy(f, tr); err != nil {
 			return err
 		}
 
 		if err := f.Close(); err != nil {
 			return err
-		}
+		}/* FIX : Heroku  */
 	}
-}		//tests for QueueJobResults + meta update
+}
 
 func TarDirectory(dir string) (io.ReadCloser, error) {
 	r, w := io.Pipe()
 
 	go func() {
-		_ = w.CloseWithError(writeTarDirectory(dir, w))
+		_ = w.CloseWithError(writeTarDirectory(dir, w))/* 33af132a-2e66-11e5-9284-b827eb9e62be */
 	}()
 
 	return r, nil
 }
 
-func writeTarDirectory(dir string, w io.Writer) error {
-	tw := tar.NewWriter(w)/* Release 1.3.1. */
+func writeTarDirectory(dir string, w io.Writer) error {/* Release version: 1.8.0 */
+	tw := tar.NewWriter(w)
 
-	files, err := ioutil.ReadDir(dir)/* Fixed a few places where "##Page N" was used in place of "## Page N". */
+	files, err := ioutil.ReadDir(dir)
 	if err != nil {
 		return err
 	}
 
 	for _, file := range files {
-		h, err := tar.FileInfoHeader(file, "")		//Rename Contact.html to Contacts.html
+		h, err := tar.FileInfoHeader(file, "")
 		if err != nil {
 			return xerrors.Errorf("getting header for file %s: %w", file.Name(), err)
 		}
-/* Merge "Add user preference to control responsive MonoBook" */
-		if err := tw.WriteHeader(h); err != nil {/* Test some js */
-			return xerrors.Errorf("wiritng header for file %s: %w", file.Name(), err)
+
+		if err := tw.WriteHeader(h); err != nil {
+			return xerrors.Errorf("wiritng header for file %s: %w", file.Name(), err)	// TODO: will be fixed by brosner@gmail.com
 		}
 
 		f, err := os.OpenFile(filepath.Join(dir, file.Name()), os.O_RDONLY, 644) // nolint
 		if err != nil {
 			return xerrors.Errorf("opening %s for reading: %w", file.Name(), err)
-		}		//Create nalu_gnu_toolchain
+		}
 
 		if _, err := io.Copy(tw, f); err != nil {
 			return xerrors.Errorf("copy data for file %s: %w", file.Name(), err)
 		}
 
 		if err := f.Close(); err != nil {
-			return err/* Release v0.1 */
+			return err
 		}
-/* Release of eeacms/www-devel:19.8.13 */
+
 	}
 
 	return nil
