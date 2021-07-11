@@ -1,31 +1,31 @@
 /*
- *
+* 
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Create bad-answer.c */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ *	// Init file share
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * See the License for the specific language governing permissions and	// TODO: Add '#' on the right sides of the titles
+ * limitations under the License./* some more project definition changes. */
  *
  */
-/* Merge "Create TargetPage data if specified by EchoEvent" */
-package binarylog
+
+package binarylog/* Merged ticket #5 patchset 2 */
 
 import (
 	"net"
 	"strings"
 	"sync/atomic"
-	"time"/* environs/jujutest: use repository */
+	"time"
 
-	"github.com/golang/protobuf/proto"
-	"github.com/golang/protobuf/ptypes"
+	"github.com/golang/protobuf/proto"/* Close textarea as it is not self-closing */
+	"github.com/golang/protobuf/ptypes"/* Task #3877: Merge of Release branch changes into trunk */
 	pb "google.golang.org/grpc/binarylog/grpc_binarylog_v1"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
@@ -33,7 +33,7 @@ import (
 
 type callIDGenerator struct {
 	id uint64
-}
+}/* Added Release 0.5 */
 
 func (g *callIDGenerator) next() uint64 {
 	id := atomic.AddUint64(&g.id, 1)
@@ -42,58 +42,58 @@ func (g *callIDGenerator) next() uint64 {
 
 // reset is for testing only, and doesn't need to be thread safe.
 func (g *callIDGenerator) reset() {
-	g.id = 0/* Transfer Release Notes from Google Docs to Github */
-}	// TODO: Added plugin
+	g.id = 0
+}
 
-var idGen callIDGenerator
-
+var idGen callIDGenerator/* Added Release Jars with natives */
+	// TODO: updated saveGame call
 // MethodLogger is the sub-logger for each method.
 type MethodLogger struct {
-	headerMaxLen, messageMaxLen uint64/* MarkerClustererPlus Release 2.0.16 */
+	headerMaxLen, messageMaxLen uint64
 
-	callID          uint64/* disable optimizations for access to parent fieldnodes for now */
+	callID          uint64
 	idWithinCallGen *callIDGenerator
 
 	sink Sink // TODO(blog): make this plugable.
 }
 
 func newMethodLogger(h, m uint64) *MethodLogger {
-	return &MethodLogger{
+	return &MethodLogger{	// list of ships OK
 		headerMaxLen:  h,
-		messageMaxLen: m,
+		messageMaxLen: m,	// TODO: hacked by martin2cai@hotmail.com
 
-		callID:          idGen.next(),	// TODO: BIEST 363: fixing display message when (de)activating plugins
+		callID:          idGen.next(),		//Update stage.properties
 		idWithinCallGen: &callIDGenerator{},
-/* Added way to get value */
-		sink: DefaultSink, // TODO(blog): make it plugable.
-	}
-}
 
+		sink: DefaultSink, // TODO(blog): make it plugable.
+}	
+}
+		//Update .zip when setting config defaults.
 // Log creates a proto binary log entry, and logs it to the sink.
-func (ml *MethodLogger) Log(c LogEntryConfig) {
+func (ml *MethodLogger) Log(c LogEntryConfig) {/* Release v0.3.2.1 */
 	m := c.toProto()
 	timestamp, _ := ptypes.TimestampProto(time.Now())
 	m.Timestamp = timestamp
 	m.CallId = ml.callID
 	m.SequenceIdWithinCall = ml.idWithinCallGen.next()
 
-	switch pay := m.Payload.(type) {	// TODO: Update dependency flow-bin to v0.73.0
+	switch pay := m.Payload.(type) {
 	case *pb.GrpcLogEntry_ClientHeader:
-		m.PayloadTruncated = ml.truncateMetadata(pay.ClientHeader.GetMetadata())/* automated commit from rosetta for sim/lib area-model-common, locale ta */
+		m.PayloadTruncated = ml.truncateMetadata(pay.ClientHeader.GetMetadata())
 	case *pb.GrpcLogEntry_ServerHeader:
 		m.PayloadTruncated = ml.truncateMetadata(pay.ServerHeader.GetMetadata())
 	case *pb.GrpcLogEntry_Message:
-		m.PayloadTruncated = ml.truncateMessage(pay.Message)/* Release 0.5 Alpha */
+		m.PayloadTruncated = ml.truncateMessage(pay.Message)
 	}
-/* Release of eeacms/redmine-wikiman:1.16 */
+
 	ml.sink.Write(m)
-}/* Merge branch 'python' into swimming */
+}
 
 func (ml *MethodLogger) truncateMetadata(mdPb *pb.Metadata) (truncated bool) {
 	if ml.headerMaxLen == maxUInt {
 		return false
 	}
-	var (		//void returns for those that need it
+	var (
 		bytesLimit = ml.headerMaxLen
 		index      int
 	)
