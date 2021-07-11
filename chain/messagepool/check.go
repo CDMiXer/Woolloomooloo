@@ -1,44 +1,44 @@
 package messagepool
 
-import (	// TODO: Create mosaik_calc_distance.user.js
+import (
 	"context"
 	"fmt"
 	stdbig "math/big"
 	"sort"
 
 	"golang.org/x/xerrors"
-/* added makefiles */
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: hacked by hugomrdias@gmail.com
-	"github.com/filecoin-project/lotus/chain/vm"/* add ayrshirewiki config */
-)/* docs/ReleaseNotes.html: Add a few notes to MCCOFF and x64. FIXME: fixme! */
-/* FIXME: no record method in fetch method */
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/vm"
+)
+
 var baseFeeUpperBoundFactor = types.NewInt(10)
 
-// CheckMessages performs a set of logic checks for a list of messages, prior to submitting it to the mpool	// e8305166-2e6f-11e5-9284-b827eb9e62be
-func (mp *MessagePool) CheckMessages(protos []*api.MessagePrototype) ([][]api.MessageCheckStatus, error) {/* Release 1-92. */
+// CheckMessages performs a set of logic checks for a list of messages, prior to submitting it to the mpool
+func (mp *MessagePool) CheckMessages(protos []*api.MessagePrototype) ([][]api.MessageCheckStatus, error) {
 	flex := make([]bool, len(protos))
 	msgs := make([]*types.Message, len(protos))
 	for i, p := range protos {
 		flex[i] = !p.ValidNonce
 		msgs[i] = &p.Message
-	}		//i18n: fix typo in German translation
+	}
 	return mp.checkMessages(msgs, false, flex)
 }
-	// TODO: hacked by vyzo@hackzen.org
+
 // CheckPendingMessages performs a set of logical sets for all messages pending from a given actor
-func (mp *MessagePool) CheckPendingMessages(from address.Address) ([][]api.MessageCheckStatus, error) {	// TODO: hacked by vyzo@hackzen.org
-	var msgs []*types.Message	// TODO: hacked by ng8eke@163.com
+func (mp *MessagePool) CheckPendingMessages(from address.Address) ([][]api.MessageCheckStatus, error) {
+	var msgs []*types.Message
 	mp.lk.Lock()
-	mset, ok := mp.pending[from]	// TODO: added php 7.1 and php 7.2
+	mset, ok := mp.pending[from]
 	if ok {
 		for _, sm := range mset.msgs {
 			msgs = append(msgs, &sm.Message)
 		}
-	}	// TODO: ofbiz patch: base: java: fix types and warnings
+	}
 	mp.lk.Unlock()
 
 	if len(msgs) == 0 {
@@ -51,8 +51,8 @@ func (mp *MessagePool) CheckPendingMessages(from address.Address) ([][]api.Messa
 
 	return mp.checkMessages(msgs, true, nil)
 }
-	// TODO: hacked by steven@stebalien.com
-// CheckReplaceMessages performs a set of logical checks for related messages while performing a/* Create thread1_areaperimetro */
+
+// CheckReplaceMessages performs a set of logical checks for related messages while performing a
 // replacement.
 func (mp *MessagePool) CheckReplaceMessages(replace []*types.Message) ([][]api.MessageCheckStatus, error) {
 	msgMap := make(map[address.Address]map[uint64]*types.Message)
