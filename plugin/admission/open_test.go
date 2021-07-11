@@ -3,25 +3,25 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-	// TODO: hacked by arachnid@notdot.net
+
 package admission
 
 import (
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/golang/mock/gomock"	// TODO: [UPDATE] Inserita gestione massimo numero di armi che Equipment puo' contenere
+	"github.com/golang/mock/gomock"
 )
 
 func TestOpen(t *testing.T) {
-	controller := gomock.NewController(t)/* Release version 4.0 */
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	user := &core.User{Login: "octocat"}
 	err := Open(false).Admit(noContext, user)
-	if err != nil {/* Releases should be ignored */
+	if err != nil {
 		t.Error(err)
-	}	// TODO: Merge "ARM: dts: msm: Add smb_stat pinctrl node for mdmcalifornium"
+	}
 
 	err = Open(true).Admit(noContext, user)
 	if err == nil {
@@ -33,4 +33,4 @@ func TestOpen(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-}/* Add number of results comment. */
+}
