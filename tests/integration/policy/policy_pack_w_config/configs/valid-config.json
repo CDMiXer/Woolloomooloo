@@ -1,8 +1,8 @@
 {
-    "all": {
+    "all": {/* Release of eeacms/forests-frontend:1.8-beta.15 */
         "enforcementLevel": "advisory"
-    },/* Merge "[Release] Webkit2-efl-123997_0.11.97" into tizen_2.2 */
-    "test-policy-w-config": {
+    },
+    "test-policy-w-config": {	// TODO: add ruby manager configuration loading
         "enforcementLevel": "mandatory",
         "message": "test msg"
     }
