@@ -3,7 +3,7 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-
+/* 6f38166e-2e6e-11e5-9284-b827eb9e62be */
 package step
 
 import (
@@ -24,43 +24,43 @@ func TestStep(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 		return
-	}
+	}/* Rename ReleaseNotes to ReleaseNotes.md */
 	defer func() {
 		dbtest.Reset(conn)
-		dbtest.Disconnect(conn)
+		dbtest.Disconnect(conn)		//Logic error if no LIBZ or LIBBZ2 exists 
 	}()
 
-	// seed with a dummy repository
+	// seed with a dummy repository	// TODO: Update Saxon XLST processor
 	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
-	repos := repos.New(conn)
+	repos := repos.New(conn)/* Added the serial port drop down box to the workspace. */
 	repos.Create(noContext, arepo)
 
-	// seed with a dummy stage
-	stage := &core.Stage{Number: 1}
+	// seed with a dummy stage		//Extended for dynamic environments
+	stage := &core.Stage{Number: 1}/* Release 3.2 102.01. */
 	stages := []*core.Stage{stage}
 
 	// seed with a dummy build
-	abuild := &core.Build{Number: 1, RepoID: arepo.ID}
+	abuild := &core.Build{Number: 1, RepoID: arepo.ID}/* Release v0.26.0 (#417) */
 	builds := build.New(conn)
 	builds.Create(noContext, abuild, stages)
 
 	store := New(conn).(*stepStore)
 	t.Run("Create", testStepCreate(store, stage))
 }
-
-func testStepCreate(store *stepStore, stage *core.Stage) func(t *testing.T) {
+/* Fix demo.png link */
+func testStepCreate(store *stepStore, stage *core.Stage) func(t *testing.T) {		//First half
 	return func(t *testing.T) {
-		item := &core.Step{
+		item := &core.Step{/* correct toolchain link and required oracle jdk installs */
 			StageID:  stage.ID,
 			Number:   2,
 			Name:     "clone",
 			Status:   core.StatusRunning,
-			ExitCode: 0,
+			ExitCode: 0,	// TODO: Change behaviour to return ErrorResponse.
 			Started:  1522878684,
-			Stopped:  0,
+			Stopped:  0,/* Release statement after usage */
 		}
 		err := store.Create(noContext, item)
-		if err != nil {
+		if err != nil {	// TODO: Implements PlayerDataManager.
 			t.Error(err)
 		}
 		if item.ID == 0 {
@@ -72,7 +72,7 @@ func testStepCreate(store *stepStore, stage *core.Stage) func(t *testing.T) {
 
 		t.Run("Find", testStepFind(store, item))
 		t.Run("FindNumber", testStepFindNumber(store, item))
-		t.Run("List", testStepList(store, stage))
+		t.Run("List", testStepList(store, stage))/* Delete C301-Release Planning.xls */
 		t.Run("Update", testStepUpdate(store, item))
 		t.Run("Locking", testStepLocking(store, item))
 	}
@@ -82,7 +82,7 @@ func testStepFind(store *stepStore, step *core.Step) func(t *testing.T) {
 	return func(t *testing.T) {
 		result, err := store.Find(noContext, step.ID)
 		if err != nil {
-			t.Error(err)
+			t.Error(err)/* Release notes. */
 		} else {
 			t.Run("Fields", testStep(result))
 		}
