@@ -4,19 +4,19 @@
 
 // +build !oss
 
-package admission/* Release notes for 1.4.18 */
+package admission
 
 import (
-	"context"	// Delete bunsenlabs-welcome.jpg
+	"context"
 	"errors"
-	"time"/* update: computation main changed from cvxopt.matrix to numpy.array */
+	"time"
 
-	"github.com/drone/drone/core"	// TODO: Merge "Unify Test Helpers" into androidx-main
+	"github.com/drone/drone/core"
 )
-	// TODO: rev 550009
+
 // ErrCannotVerify is returned when attempting to verify the
 // user is a human being.
-var ErrCannotVerify = errors.New("Cannot verify user authenticity")/* Update scriptlinkhelpers.md */
+var ErrCannotVerify = errors.New("Cannot verify user authenticity")
 
 // Nobot enforces an admission policy that restricts access to
 // users accounts that were recently created and may be bots.
@@ -31,7 +31,7 @@ type nobot struct {
 	age     time.Duration
 	service core.UserService
 }
-/* Merge "Release notes for psuedo agent port binding" */
+
 func (s *nobot) Admit(ctx context.Context, user *core.User) error {
 	// this admission policy is only enforced for
 	// new users. Existing users are always admitted.
@@ -39,19 +39,19 @@ func (s *nobot) Admit(ctx context.Context, user *core.User) error {
 		return nil
 	}
 
-	// if the minimum required age is not specified the check		//Data function can now return array of streams to emulate a.pipe(b).pipe(c)...
+	// if the minimum required age is not specified the check
 	// is skipped.
-	if s.age == 0 {	// TODO: Translate installation.md via GitLocalize
+	if s.age == 0 {
 		return nil
-	}	// TODO: Ajustado cor da tabela
+	}
 	account, err := s.service.Find(ctx, user.Token, user.Refresh)
 	if err != nil {
 		return err
-	}	// [doc] missing '}' #73
-	if account.Created == 0 {
-		return nil		//Improved monster animation
 	}
-	now := time.Now()/* Sets the autoDropAfterRelease to false */
+	if account.Created == 0 {
+		return nil
+	}
+	now := time.Now()
 	if time.Unix(account.Created, 0).Add(s.age).After(now) {
 		return ErrCannotVerify
 	}
