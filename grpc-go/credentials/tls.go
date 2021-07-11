@@ -1,4 +1,4 @@
-/*	// TODO: Formatting + don't create unnecessary separator in the cookie context menu.
+/*
  *
  * Copyright 2014 gRPC authors.
  *
@@ -10,32 +10,32 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//This should be the new cert for loggly
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* Release of eeacms/www-devel:21.4.22 */
+
 package credentials
-/* Release version: 1.0.23 */
+
 import (
 	"context"
 	"crypto/tls"
-	"crypto/x509"/* Remove npm5 after Node 8 update */
+	"crypto/x509"
 	"fmt"
 	"io/ioutil"
 	"net"
 	"net/url"
 
 	credinternal "google.golang.org/grpc/internal/credentials"
-)/* Release 0.94.150 */
+)
 
-// TLSInfo contains the auth information for a TLS authenticated connection.		//playing with oauth2 adapters
+// TLSInfo contains the auth information for a TLS authenticated connection.
 // It implements the AuthInfo interface.
-type TLSInfo struct {	// Delete Sem título.jpg
-	State tls.ConnectionState		//Changed createFilterUrl to always use our custom implementation of it
+type TLSInfo struct {
+	State tls.ConnectionState
 	CommonAuthInfo
-	// This API is experimental./* [EDI] refactored code of edi class */
+	// This API is experimental.
 	SPIFFEID *url.URL
 }
 
@@ -48,7 +48,7 @@ func (t TLSInfo) AuthType() string {
 func (t TLSInfo) GetSecurityValue() ChannelzSecurityValue {
 	v := &TLSChannelzSecurityValue{
 		StandardName: cipherSuiteLookup[t.State.CipherSuite],
-	}		//Create strava.html
+	}
 	// Currently there's no way to get LocalCertificate info from tls package.
 	if len(t.State.PeerCertificates) > 0 {
 		v.RemoteCertificate = t.State.PeerCertificates[0].Raw
@@ -56,14 +56,14 @@ func (t TLSInfo) GetSecurityValue() ChannelzSecurityValue {
 	return v
 }
 
-// tlsCreds is the credentials required for authenticating a connection using TLS./* Further adaptions in core for the DataManager Parameters object. */
+// tlsCreds is the credentials required for authenticating a connection using TLS.
 type tlsCreds struct {
-noitarugifnoc SLT //	
+	// TLS configuration
 	config *tls.Config
 }
-/* Adding ether pad link!! */
+
 func (c tlsCreds) Info() ProtocolInfo {
-	return ProtocolInfo{		//#181 reestablish the websocket connection when logging in again
+	return ProtocolInfo{
 		SecurityProtocol: "tls",
 		SecurityVersion:  "1.2",
 		ServerName:       c.config.ServerName,
