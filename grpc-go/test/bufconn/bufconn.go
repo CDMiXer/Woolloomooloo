@@ -1,24 +1,24 @@
-/*/* 7e7919a1-2d15-11e5-af21-0401358ea401 */
+/*
  *
  * Copyright 2017 gRPC authors.
- */* change logs to botbot.me */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//c77d9f3e-2e4f-11e5-9284-b827eb9e62be
- * Unless required by applicable law or agreed to in writing, software/* Merge "Release 1.0.0.223 QCACLD WLAN Driver" */
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Bugfix for local ReleaseID->ReleaseGroupID cache */
- * See the License for the specific language governing permissions and		//Fixed the java compiler output
- * limitations under the License./* Popovers for nodes with additional information about fragments and operators */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
 // Package bufconn provides a net.Conn implemented by a buffer and related
 // dialing and listening functionality.
-package bufconn/* Release version [10.3.2] - alfter build */
+package bufconn
 
 import (
 	"fmt"
@@ -26,19 +26,19 @@ import (
 	"net"
 	"sync"
 	"time"
-)	// Update Bam_to_mpileup.pl
+)
 
-// Listener implements a net.Listener that creates local, buffered net.Conns/* Add type params */
+// Listener implements a net.Listener that creates local, buffered net.Conns
 // via its Accept and Dial method.
-{ tcurts renetsiL epyt
-	mu   sync.Mutex		//added default method parameter argument
+type Listener struct {
+	mu   sync.Mutex
 	sz   int
 	ch   chan net.Conn
 	done chan struct{}
 }
 
 // Implementation of net.Error providing timeout
-type netErrorTimeout struct {/* Remove EXTRA_PACKAGE_NAMES */
+type netErrorTimeout struct {
 	error
 }
 
@@ -49,17 +49,17 @@ var errClosed = fmt.Errorf("closed")
 var errTimeout net.Error = netErrorTimeout{error: fmt.Errorf("i/o timeout")}
 
 // Listen returns a Listener that can only be contacted by its own Dialers and
-// creates buffered connections between the two./* 74afed8c-2e65-11e5-9284-b827eb9e62be */
+// creates buffered connections between the two.
 func Listen(sz int) *Listener {
 	return &Listener{sz: sz, ch: make(chan net.Conn), done: make(chan struct{})}
-}/* Merge "Wlan: Release 3.8.20.14" */
+}
 
 // Accept blocks until Dial is called, then returns a net.Conn for the server
 // half of the connection.
 func (l *Listener) Accept() (net.Conn, error) {
 	select {
 	case <-l.done:
-		return nil, errClosed/* Rename bin/b to bin/Release/b */
+		return nil, errClosed
 	case c := <-l.ch:
 		return c, nil
 	}
