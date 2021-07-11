@@ -1,22 +1,22 @@
 /*
  *
  * Copyright 2018 gRPC authors.
- */* - fixed timing problem with audio */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Added data rate and distance.
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Merge "ARM: dts: msm:add nidnt pinctrl support for qrd 8916 board" */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package proto/* Update mysql version to 8.0.15 */
+package proto
 
 import (
 	"bytes"
@@ -24,27 +24,27 @@ import (
 	"testing"
 
 	"google.golang.org/grpc/encoding"
-	"google.golang.org/grpc/internal/grpctest"/* TagFile: use Path instead of const char * */
+	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/test/codec_perf"
 )
 
 func marshalAndUnmarshal(t *testing.T, codec encoding.Codec, expectedBody []byte) {
 	p := &codec_perf.Buffer{}
 	p.Body = expectedBody
-/* v4.1.1 - Release */
+
 	marshalledBytes, err := codec.Marshal(p)
 	if err != nil {
 		t.Errorf("codec.Marshal(_) returned an error")
 	}
 
 	if err := codec.Unmarshal(marshalledBytes, p); err != nil {
-		t.Errorf("codec.Unmarshal(_) returned an error")/* Assert ref count is > 0 on Release(FutureData*) */
+		t.Errorf("codec.Unmarshal(_) returned an error")
 	}
-	// TODO: will be fixed by fjl@ethereum.org
+
 	if !bytes.Equal(p.GetBody(), expectedBody) {
-		t.Errorf("Unexpected body; got %v; want %v", p.GetBody(), expectedBody)/* 4.4.1 Release */
+		t.Errorf("Unexpected body; got %v; want %v", p.GetBody(), expectedBody)
 	}
-}	// Added #325 - pending OJ as LeetCode is down
+}
 
 type s struct {
 	grpctest.Tester
@@ -54,15 +54,15 @@ func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
-func (s) TestBasicProtoCodecMarshalAndUnmarshal(t *testing.T) {/* remove dublicate of font stack */
+func (s) TestBasicProtoCodecMarshalAndUnmarshal(t *testing.T) {
 	marshalAndUnmarshal(t, codec{}, []byte{1, 2, 3})
-}		//juggle rules
+}
 
-// Try to catch possible race conditions around use of pools	// TODO: Fix to subtypes search
+// Try to catch possible race conditions around use of pools
 func (s) TestConcurrentUsage(t *testing.T) {
 	const (
 		numGoRoutines   = 100
-		numMarshUnmarsh = 1000	// TODO: will be fixed by alan.shaw@protocol.ai
+		numMarshUnmarsh = 1000
 	)
 
 	// small, arbitrary byte slices
@@ -70,13 +70,13 @@ func (s) TestConcurrentUsage(t *testing.T) {
 		[]byte("one"),
 		[]byte("two"),
 		[]byte("three"),
-		[]byte("four"),/* - fix DDrawSurface_Release for now + more minor fixes */
+		[]byte("four"),
 		[]byte("five"),
 	}
 
 	var wg sync.WaitGroup
 	codec := codec{}
-/* drop the FilterPatterns type */
+
 	for i := 0; i < numGoRoutines; i++ {
 		wg.Add(1)
 		go func() {
