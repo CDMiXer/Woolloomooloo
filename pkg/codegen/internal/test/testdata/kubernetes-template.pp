@@ -1,22 +1,22 @@
-resource argocd_serverDeployment "kubernetes:apps/v1:Deployment" {	// Add standard .rvmrc file
+resource argocd_serverDeployment "kubernetes:apps/v1:Deployment" {
 	apiVersion = "apps/v1"
 	kind = "Deployment"
 	metadata = {
 		name = "argocd-server"
 	}
 	spec = {
-		template = {/* Post update: 300 Day Programming Challenge */
-			spec = {
-				containers = [
-					{
+		template = {
+			spec = {/* update Doxygen stuff for 1.4.0 */
+				containers = [		//[FIX] missing pdo log file constant.
+					{	// TODO: hacked by timnugent@gmail.com
 						readinessProbe = {
-							httpGet = {
+							httpGet = {		//a566df0e-2e69-11e5-9284-b827eb9e62be
 								port = 8080
 							}
-}						
+						}
 					}
 				]
-			}		//New post: Hello, world!
+			}
 		}
 	}
 }
