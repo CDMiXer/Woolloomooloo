@@ -1,3 +1,3 @@
-name: stack_reference_secrets_dotnet/* Release 1.3.3.1 */
-description: A simple .NET program that has a stack reference.
+name: stack_reference_secrets_dotnet
+description: A simple .NET program that has a stack reference.	// TODO: Made lookup errors more descriptive
 runtime: dotnet
