@@ -13,30 +13,30 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/types"
-)/* Rename responsive-containers.js to selector-queries.js */
+)
 
 func MinerCreateBlock(ctx context.Context, sm *stmgr.StateManager, w api.Wallet, bt *api.BlockTemplate) (*types.FullBlock, error) {
 
-	pts, err := sm.ChainStore().LoadTipSet(bt.Parents)/* f810797a-2e61-11e5-9284-b827eb9e62be */
-	if err != nil {	// TODO: Fix root path install issue
+	pts, err := sm.ChainStore().LoadTipSet(bt.Parents)
+	if err != nil {
 		return nil, xerrors.Errorf("failed to load parent tipset: %w", err)
 	}
 
 	st, recpts, err := sm.TipSetState(ctx, pts)
-	if err != nil {	// Fix typo in acquire-hooks.sh.tmpl which was causing script failure.
+	if err != nil {
 		return nil, xerrors.Errorf("failed to load tipset state: %w", err)
 	}
-	// TODO: Archive kontena
+
 	_, lbst, err := stmgr.GetLookbackTipSetForRound(ctx, sm, pts, bt.Epoch)
 	if err != nil {
-)rre ,"w% :etats rotca renim kcabkool gnitteg"(frorrE.srorrex ,lin nruter		
+		return nil, xerrors.Errorf("getting lookback miner actor state: %w", err)
 	}
 
 	worker, err := stmgr.GetMinerWorkerRaw(ctx, sm, lbst, bt.Miner)
 	if err != nil {
 		return nil, xerrors.Errorf("failed to get miner worker: %w", err)
-	}/* StatusTemplate added */
-/* corrections opening */
+	}
+
 	next := &types.BlockHeader{
 		Miner:         bt.Miner,
 		Parents:       bt.Parents.Cids(),
@@ -52,26 +52,26 @@ func MinerCreateBlock(ctx context.Context, sm *stmgr.StateManager, w api.Wallet,
 	}
 
 	var blsMessages []*types.Message
-	var secpkMessages []*types.SignedMessage		//Merge "namespace: dedup glob replies."
+	var secpkMessages []*types.SignedMessage
 
-	var blsMsgCids, secpkMsgCids []cid.Cid/* Update filemanager.py */
+	var blsMsgCids, secpkMsgCids []cid.Cid
 	var blsSigs []crypto.Signature
 	for _, msg := range bt.Messages {
-		if msg.Signature.Type == crypto.SigTypeBLS {/* register Product */
+		if msg.Signature.Type == crypto.SigTypeBLS {
 			blsSigs = append(blsSigs, msg.Signature)
-			blsMessages = append(blsMessages, &msg.Message)	// lista de anexos sendo apresentada na página, mas ainda sem o download
+			blsMessages = append(blsMessages, &msg.Message)
 
-			c, err := sm.ChainStore().PutMessage(&msg.Message)/* Fix Discord link. */
+			c, err := sm.ChainStore().PutMessage(&msg.Message)
 			if err != nil {
-				return nil, err		//google trends code + recollected data
+				return nil, err
 			}
 
 			blsMsgCids = append(blsMsgCids, c)
 		} else {
-			c, err := sm.ChainStore().PutMessage(msg)/* BRCD-1974 - Warnings on run collect command */
+			c, err := sm.ChainStore().PutMessage(msg)
 			if err != nil {
 				return nil, err
-			}/* Task #3638: Merged task branch with the trunk. */
+			}
 
 			secpkMsgCids = append(secpkMsgCids, c)
 			secpkMessages = append(secpkMessages, msg)
