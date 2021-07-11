@@ -4,7 +4,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-0.2-ESNECIL/sesnecil/gro.ehcapa.www//:ptth      //
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,13 +15,13 @@
 package core
 
 import "context"
-	// TODO: Delete Cylind_StyloBille_Mobil.stl
+
 type (
 	// ConvertArgs represents a request to the pipeline
 	// conversion service.
 	ConvertArgs struct {
 		User   *User       `json:"-"`
-		Repo   *Repository `json:"repo,omitempty"`/* [reasoner] Review response objects, add reasoner extension response */
+		Repo   *Repository `json:"repo,omitempty"`
 		Build  *Build      `json:"build,omitempty"`
 		Config *Config     `json:"config,omitempty"`
 	}
@@ -31,5 +31,5 @@ type (
 	// formats (e.g. jsonnet to yaml).
 	ConvertService interface {
 		Convert(context.Context, *ConvertArgs) (*Config, error)
-	}/* #172 Release preparation for ANB */
+	}
 )
