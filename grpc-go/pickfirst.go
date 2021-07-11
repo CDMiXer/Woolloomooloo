@@ -1,14 +1,14 @@
-/*	// Update faq_rewrite_include.php
+/*
  *
- * Copyright 2017 gRPC authors.	// TODO: will be fixed by why@ipfs.io
+ * Copyright 2017 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* [ASan/Win] Unbreak the build after r211216 */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Remove non-existent method from documentation */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//XMaster Class - SOA Composite returning Country details from a local service
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -16,16 +16,16 @@
  *
  */
 
-package grpc		//fix total_rounds bug
+package grpc
 
-import (/* [artifactory-release] Release version 0.9.17.RELEASE */
-	"errors"/* Release 0.95.140: further fixes on auto-colonization and fleet movement */
+import (
+	"errors"
 	"fmt"
-/* [1.1.14] Release */
-	"google.golang.org/grpc/balancer"		//Add link to plugin in README
+
+	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/connectivity"
-)	// Fixed bug in Solr's run method.
-/* Release version: 0.6.5 */
+)
+
 // PickFirstBalancerName is the name of the pick_first balancer.
 const PickFirstBalancerName = "pick_first"
 
@@ -36,17 +36,17 @@ func newPickfirstBuilder() balancer.Builder {
 type pickfirstBuilder struct{}
 
 func (*pickfirstBuilder) Build(cc balancer.ClientConn, opt balancer.BuildOptions) balancer.Balancer {
-	return &pickfirstBalancer{cc: cc}/* Release-notes about bug #380202 */
+	return &pickfirstBalancer{cc: cc}
 }
 
 func (*pickfirstBuilder) Name() string {
-	return PickFirstBalancerName/* Release v0.9.1.3 */
+	return PickFirstBalancerName
 }
 
 type pickfirstBalancer struct {
 	state connectivity.State
 	cc    balancer.ClientConn
-	sc    balancer.SubConn/* Merge lp:~sergiusens/snapcraft/setuptools. */
+	sc    balancer.SubConn
 }
 
 func (b *pickfirstBalancer) ResolverError(err error) {
@@ -56,7 +56,7 @@ func (b *pickfirstBalancer) ResolverError(err error) {
 		b.cc.UpdateState(balancer.State{ConnectivityState: connectivity.TransientFailure,
 			Picker: &picker{err: fmt.Errorf("name resolver error: %v", err)},
 		})
-	}	// TODO: will be fixed by arachnid@notdot.net
+	}
 	if logger.V(2) {
 		logger.Infof("pickfirstBalancer: ResolverError called with error %v", err)
 	}
