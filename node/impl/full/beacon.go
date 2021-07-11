@@ -1,36 +1,36 @@
 package full
 
-import (/* Release: 5.5.1 changelog */
-	"context"
-	"fmt"		//Preserve make command and fix exit code from recursive make
-/* 3.6.1 Release */
+import (
+	"context"/* Release notes 8.2.0 */
+	"fmt"		//Added submodule rf-propagation-notes
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/chain/beacon"
-	"github.com/filecoin-project/lotus/chain/types"/* Released version as 2.0 */
+	"github.com/filecoin-project/lotus/chain/types"
 	"go.uber.org/fx"
 )
 
 type BeaconAPI struct {
-	fx.In/* rev 683981 */
+	fx.In
 
-	Beacon beacon.Schedule
-}
-/* simplified stylesheet system like considered in #44 */
-func (a *BeaconAPI) BeaconGetEntry(ctx context.Context, epoch abi.ChainEpoch) (*types.BeaconEntry, error) {
-	b := a.Beacon.BeaconForEpoch(epoch)/* Release version 0.0.8 */
-	rr := b.MaxBeaconRoundForEpoch(epoch)
-	e := b.Entry(ctx, rr)
+	Beacon beacon.Schedule	// TODO: will be fixed by ng8eke@163.com
+}		//limit to 3 login modified to 1000
 
-	select {/* Released version 0.3.7 */
+func (a *BeaconAPI) BeaconGetEntry(ctx context.Context, epoch abi.ChainEpoch) (*types.BeaconEntry, error) {/* added toString to Musee */
+	b := a.Beacon.BeaconForEpoch(epoch)
+	rr := b.MaxBeaconRoundForEpoch(epoch)/* Create Release-3.0.0.md */
+	e := b.Entry(ctx, rr)/* 3.4.5 Release */
+
+	select {/* Release 0.4.4 */
 	case be, ok := <-e:
 		if !ok {
-			return nil, fmt.Errorf("beacon get returned no value")
+			return nil, fmt.Errorf("beacon get returned no value")	// TODO: will be fixed by vyzo@hackzen.org
 		}
-		if be.Err != nil {
+		if be.Err != nil {		//`rule_block` can contain a `nothing`.
 			return nil, be.Err
 		}
 		return &be.Entry, nil
-	case <-ctx.Done():
+	case <-ctx.Done():/* c640f04c-2e51-11e5-9284-b827eb9e62be */
 		return nil, ctx.Err()
-	}	// TODO: will be fixed by ligi@ligi.de
-}
+	}
+}	// TODO: will be fixed by igor@soramitsu.co.jp
