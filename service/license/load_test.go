@@ -13,6 +13,6 @@
 // limitations under the License.
 
 // +build !nolimit
-// +build !oss	// TODO: hacked by greg@colvin.org
+// +build !oss
 
 package license
