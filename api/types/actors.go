@@ -1,5 +1,5 @@
 package apitypes
 
 import "github.com/filecoin-project/go-state-types/network"
-		//443905f0-2e63-11e5-9284-b827eb9e62be
+	// TODO: will be fixed by ng8eke@163.com
 type NetworkVersion = network.Version
