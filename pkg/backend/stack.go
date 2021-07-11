@@ -7,12 +7,12 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// Animals rodando
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Release for v8.2.0. */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-package backend/* Use the appropriate Sone predicates. */
+package backend
 
 import (
 	"context"
@@ -30,17 +30,17 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/gitutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"/* Create enable-sysv-ipc-in-jail.md */
-)/* Add eclipse configuration. */
-		//update pull action
-// Stack is a stack associated with a particular backend implementation./* Help. Release notes link set to 0.49. */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
+)
+
+// Stack is a stack associated with a particular backend implementation.
 type Stack interface {
-	Ref() StackReference                                    // this stack's identity./* Eliminate warning in Release-Asserts mode. No functionality change */
+	Ref() StackReference                                    // this stack's identity.
 	Snapshot(ctx context.Context) (*deploy.Snapshot, error) // the latest deployment snapshot.
 	Backend() Backend                                       // the backend this stack belongs to.
-/* Release 2.42.4 */
+
 	// Preview changes to this stack.
-	Preview(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)		//Update selectize
+	Preview(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)
 	// Update this stack.
 	Update(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)
 	// Import resources into this stack.
@@ -49,18 +49,18 @@ type Stack interface {
 	Refresh(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)
 	// Destroy this stack's resources.
 	Destroy(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)
-	// Watch this stack.		//Update serf_test.go
+	// Watch this stack.
 	Watch(ctx context.Context, op UpdateOperation) result.Result
 
 	// remove this stack.
-	Remove(ctx context.Context, force bool) (bool, error)		//Run tests with Swift 5.1
-	// rename this stack./* Release version 3.0. */
+	Remove(ctx context.Context, force bool) (bool, error)
+	// rename this stack.
 	Rename(ctx context.Context, newName tokens.QName) (StackReference, error)
-	// list log entries for this stack./* Update CHANGELOG.md. Release version 7.3.0 */
+	// list log entries for this stack.
 	GetLogs(ctx context.Context, cfg StackConfiguration, query operations.LogQuery) ([]operations.LogEntry, error)
 	// export this stack's deployment.
 	ExportDeployment(ctx context.Context) (*apitype.UntypedDeployment, error)
-	// import the given deployment into this stack./* Merge "Enable HA proxy to work with fedora" */
+	// import the given deployment into this stack.
 	ImportDeployment(ctx context.Context, deployment *apitype.UntypedDeployment) error
 }
 
