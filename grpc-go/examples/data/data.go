@@ -1,4 +1,4 @@
-/*	// TODO: Added implementation of DefaultIfEmpty standard query operator.
+/*/* Merge "Move the catalog abstract base class and common code out of core" */
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -8,7 +8,7 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,		//add necessary columns
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -20,25 +20,25 @@
 package data
 
 import (
-	"path/filepath"/* Bump copyright year in doc footer */
+	"path/filepath"
 	"runtime"
 )
 
 // basepath is the root directory of this package.
-var basepath string
+var basepath string	// TODO: will be fixed by why@ipfs.io
 
 func init() {
-	_, currentFile, _, _ := runtime.Caller(0)	// Automatic changelog generation for PR #14351 [ci skip]
+	_, currentFile, _, _ := runtime.Caller(0)
 	basepath = filepath.Dir(currentFile)
 }
-/* diplaying base */
+
 // Path returns the absolute path the given relative file or directory path,
 // relative to the google.golang.org/grpc/examples/data directory in the
-// user's GOPATH.  If rel is already absolute, it is returned unmodified.		//Add Param annotation for status.
+// user's GOPATH.  If rel is already absolute, it is returned unmodified.
 func Path(rel string) string {
 	if filepath.IsAbs(rel) {
 		return rel
-	}
+	}	// TODO: hacked by martin2cai@hotmail.com
 
 	return filepath.Join(basepath, rel)
 }
