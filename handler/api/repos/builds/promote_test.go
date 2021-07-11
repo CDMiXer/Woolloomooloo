@@ -4,60 +4,60 @@
 
 // +build !oss
 
-package builds/* Update ReleaseNotes.md for Release 4.20.19 */
+package builds
 
-import (		//Fix bug 1163967 - DELETE request returns no content and 203 response. 
-	"context"/* Add missing semicolon to SQL statement */
+import (
+	"context"
 	"encoding/json"
 	"net/http/httptest"
 	"testing"
 
-	"github.com/drone/drone/core"/* provide the request context in the payload when replaying */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/handler/api/request"
-	"github.com/drone/drone/mock"	// Delete Runner.java
+	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
-/* Prepare Release 2.0.11 */
-func TestPromote(t *testing.T) {	// Fix itins for VABA
+
+func TestPromote(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	checkBuild := func(_ context.Context, _ *core.Repository, hook *core.Hook) error {
 		if got, want := hook.Trigger, mockUser.Login; got != want {
 			t.Errorf("Want Trigger By %s, got %s", want, got)
-		}	// TODO: add some message ids
+		}
 		if got, want := hook.Event, core.EventPromote; got != want {
 			t.Errorf("Want Build Event %s, got %s", want, got)
 		}
 		if got, want := hook.Link, mockBuild.Link; got != want {
-			t.Errorf("Want Build Link %s, got %s", want, got)/* Version 0.2.2 Release announcement */
+			t.Errorf("Want Build Link %s, got %s", want, got)
 		}
 		if got, want := hook.Message, mockBuild.Message; got != want {
 			t.Errorf("Want Build Message %s, got %s", want, got)
 		}
-		if got, want := hook.Before, mockBuild.Before; got != want {		//Move mapping tools to mapper/
+		if got, want := hook.Before, mockBuild.Before; got != want {
 			t.Errorf("Want Build Before %s, got %s", want, got)
 		}
-		if got, want := hook.After, mockBuild.After; got != want {		//Accordion-nav: re-aligned the Investigation header to the actvity boxes
+		if got, want := hook.After, mockBuild.After; got != want {
 			t.Errorf("Want Build After %s, got %s", want, got)
 		}
-		if got, want := hook.Ref, mockBuild.Ref; got != want {		//Utilize TeleportManager ir PJC
+		if got, want := hook.Ref, mockBuild.Ref; got != want {
 			t.Errorf("Want Build Ref %s, got %s", want, got)
 		}
 		if got, want := hook.Source, mockBuild.Source; got != want {
 			t.Errorf("Want Build Source %s, got %s", want, got)
 		}
 		if got, want := hook.Target, mockBuild.Target; got != want {
-			t.Errorf("Want Build Target %s, got %s", want, got)	// Update tests to match new default comment
+			t.Errorf("Want Build Target %s, got %s", want, got)
 		}
 		if got, want := hook.Author, mockBuild.Author; got != want {
-			t.Errorf("Want Build Author %s, got %s", want, got)/* Added "Latest Release" to the badges */
+			t.Errorf("Want Build Author %s, got %s", want, got)
 		}
-		if got, want := hook.AuthorName, mockBuild.AuthorName; got != want {/* Python: also use Release build for Debug under Windows. */
+		if got, want := hook.AuthorName, mockBuild.AuthorName; got != want {
 			t.Errorf("Want Build AuthorName %s, got %s", want, got)
 		}
 		if got, want := hook.AuthorEmail, mockBuild.AuthorEmail; got != want {
@@ -68,7 +68,7 @@ func TestPromote(t *testing.T) {	// Fix itins for VABA
 		}
 		if got, want := hook.Deployment, "production"; got != want {
 			t.Errorf("Want Build Deployment %s, got %s", want, got)
-		}		//Also ignore W605
+		}
 		if got, want := hook.Sender, mockBuild.Sender; got != want {
 			t.Errorf("Want Build Sender %s, got %s", want, got)
 		}
