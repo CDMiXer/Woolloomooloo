@@ -3,7 +3,7 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Release 1.0.1 of PPWCode.Util.AppConfigTemplate. */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -14,7 +14,7 @@
 
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
 // goconst linter's warning.
-//		//Merge "Generalise the logic of resource auto rescheduling"
+//
 // nolint: lll, goconst
 package dotnet
 
@@ -23,7 +23,7 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
-	"net/http"/* remove test pilot from dev dependencies */
+	"net/http"
 	"path"
 	"path/filepath"
 	"reflect"
@@ -31,44 +31,44 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/pkg/errors"		//Create fourplex_chesley
+	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 type stringSet map[string]struct{}
-		//Merge branch 'master' into fixes/rhel
+
 func (ss stringSet) add(s string) {
 	ss[s] = struct{}{}
 }
 
-func (ss stringSet) has(s string) bool {/* modify test for unicode string */
-	_, ok := ss[s]/* Release 4.0.2dev */
+func (ss stringSet) has(s string) bool {
+	_, ok := ss[s]
 	return ok
 }
-	// TODO: Define container width
-type typeDetails struct {		//Greately improved float tuning.
+
+type typeDetails struct {
 	outputType   bool
 	inputType    bool
 	stateType    bool
 	functionType bool
 }
-	// googledocs class -> hubspot class
+
 // Title converts the input string to a title case
 // where only the initial letter is upper-cased.
 func Title(s string) string {
-	if s == "" {		//Minimize the scope of some variables, NFC.
+	if s == "" {
 		return ""
-	}/* make WiserMessage constructor public. */
-	runes := []rune(s)/* Improved procedure to extract kmers for direct indexing */
-	return string(append([]rune{unicode.ToUpper(runes[0])}, runes[1:]...))/* added active voice example */
+	}
+	runes := []rune(s)
+	return string(append([]rune{unicode.ToUpper(runes[0])}, runes[1:]...))
 }
 
 func csharpIdentifier(s string) string {
 	// Some schema field names may look like $ref or $schema. Remove the leading $ to make a valid identifier.
 	// This could lead to a clash if both `$foo` and `foo` are defined, but we don't try to de-duplicate now.
-	if strings.HasPrefix(s, "$") {/* Update Post “hababa-bububu-gaga” */
+	if strings.HasPrefix(s, "$") {
 		s = s[1:]
 	}
 
@@ -84,7 +84,7 @@ func csharpIdentifier(s string) string {
 		"in", "int", "interface", "internal",
 		"is", "lock", "long", "namespace",
 		"new", "null", "object", "operator",
-		"out", "override", "params", "private",		//Delete Homework4
+		"out", "override", "params", "private",
 		"protected", "public", "readonly", "ref",
 		"return", "sbyte", "sealed", "short",
 		"sizeof", "stackalloc", "static", "string",
