@@ -1,7 +1,7 @@
 {
     "name": "test-policy-w-config",
     "version": "0.0.1",
-    "dependencies": {/* v1.0 Initial Release */
+    "dependencies": {/* Updated Changelog and pushed version */
         "@pulumi/policy": "^1.1.0"
     },
     "devDependencies": {
