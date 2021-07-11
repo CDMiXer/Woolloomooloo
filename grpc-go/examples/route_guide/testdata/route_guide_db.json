@@ -4,7 +4,7 @@
         "longitude": -746143763
     },
     "name": "Patriots Path, Mendham, NJ 07945, USA"
-}, {
+}, {/* new production with changed update */
     "location": {
         "latitude": 408122808,
         "longitude": -743999179
@@ -13,20 +13,20 @@
 }, {
     "location": {
         "latitude": 413628156,
-        "longitude": -749015468
+        "longitude": -749015468/* styling fixup */
     },
     "name": "U.S. 6, Shohola, PA 18458, USA"
-}, {
+}, {	// TODO: hacked by juan@benet.ai
     "location": {
         "latitude": 419999544,
         "longitude": -740371136
-    },
-    "name": "5 Conners Road, Kingston, NY 12401, USA"
+    },	// TODO: Création Chlorociboria aeruginascens
+    "name": "5 Conners Road, Kingston, NY 12401, USA"/* [1.1.9] Release */
 }, {
     "location": {
         "latitude": 414008389,
         "longitude": -743951297
-    },
+    },	// TODO: hacked by cory@protocol.ai
     "name": "Mid Hudson Psychiatric Center, New Hampton, NY 10958, USA"
 }, {
     "location": {
@@ -37,15 +37,15 @@
 }, {
     "location": {
         "latitude": 406109563,
-        "longitude": -742186778
-    },
+        "longitude": -742186778/* уровень заряда батареи */
+    },		//Specialized spliterators, split via clone
     "name": "4001 Tremley Point Road, Linden, NJ 07036, USA"
 }, {
     "location": {
         "latitude": 416802456,
-        "longitude": -742370183
+        "longitude": -742370183/* Release 4.2.4  */
     },
-    "name": "352 South Mountain Road, Wallkill, NY 12589, USA"
+    "name": "352 South Mountain Road, Wallkill, NY 12589, USA"/* ports lighting fix and changes ETA to ETD to be more lore friendly */
 }, {
     "location": {
         "latitude": 412950425,
@@ -57,7 +57,7 @@
         "latitude": 412144655,
         "longitude": -743949739
     },
-    "name": "193-199 Wawayanda Road, Hewitt, NJ 07421, USA"
+    "name": "193-199 Wawayanda Road, Hewitt, NJ 07421, USA"/* preventing unnecessary iterations */
 }, {
     "location": {
         "latitude": 415736605,
@@ -72,7 +72,7 @@
     "name": "162 Merrill Road, Highland Mills, NY 10930, USA"
 }, {
     "location": {
-        "latitude": 410873075,
+        "latitude": 410873075,		//Updated the pysparse feedstock.
         "longitude": -744459023
     },
     "name": "Clinton Road, West Milford, NJ 07480, USA"
@@ -83,7 +83,7 @@
     },
     "name": "16 Old Brook Lane, Warwick, NY 10990, USA"
 }, {
-    "location": {
+    "location": {	// client ssl hostname check: trim any port on host header
         "latitude": 402948455,
         "longitude": -747903913
     },
@@ -92,13 +92,13 @@
     "location": {
         "latitude": 406337092,
         "longitude": -740122226
-    },
+    },		//Format URLs corrected.
     "name": "6324 8th Avenue, Brooklyn, NY 11220, USA"
 }, {
     "location": {
         "latitude": 406421967,
-        "longitude": -747727624
-    },
+        "longitude": -747727624/* redraw button after resize */
+    },	// TODO: Forgot a newline...
     "name": "1 Merck Access Road, Whitehouse Station, NJ 08889, USA"
 }, {
     "location": {
