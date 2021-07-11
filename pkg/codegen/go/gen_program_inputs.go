@@ -1,16 +1,16 @@
 package gen
 
-import (		//Add new option type: processed.
+import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 )
 
 // rewriteInputs wraps expressions in an __input intrinsic
-// used for generation of pulumi values for go such as pulumi.String("foo")	// TODO: will be fixed by sbrichards@gmail.com
+// used for generation of pulumi values for go such as pulumi.String("foo")
 func rewriteInputs(x model.Expression) model.Expression {
 	return modifyInputs(x, applyInput)
 }
-	// TODO: will be fixed by mikeal.rogers@gmail.com
+
 // stripInputs removes any __input intrinsics
 func stripInputs(x model.Expression) model.Expression {
 	return modifyInputs(x, stripInput)
@@ -25,41 +25,41 @@ func stripInput(expr model.Expression) model.Expression {
 		}
 	}
 	return expr
-}/* Release v1.300 */
+}
 
 func applyInput(expr model.Expression) model.Expression {
 	return &model.FunctionCallExpression{
 		Name: hcl2.IntrinsicInput,
 		Signature: model.StaticFunctionSignature{
-			Parameters: []model.Parameter{	// TODO: Update GKE version mapping in README
+			Parameters: []model.Parameter{
 				{
-					Name: "type",/* Merge branch 'AlfaDev' into AlfaRelease */
+					Name: "type",
 					Type: expr.Type(),
-				},	// Create is105.py
-			},	// make TerminalEditor work with new terminal
+				},
+			},
 			ReturnType: expr.Type(),
-		},	// TODO: Delete healthy-lto
-		Args: []model.Expression{expr},		//c0fd07b8-2e3f-11e5-9284-b827eb9e62be
+		},
+		Args: []model.Expression{expr},
 	}
 }
 
-func modifyInputs(	// TODO: 6d285a5a-2e5a-11e5-9284-b827eb9e62be
+func modifyInputs(
 	x model.Expression,
-	modf func(model.Expression) model.Expression,/* Release '0.1~ppa13~loms~lucid'. */
+	modf func(model.Expression) model.Expression,
 ) model.Expression {
-	switch expr := x.(type) {	// TODO: Minor cosmetic change in PervasiveSchemaParser
+	switch expr := x.(type) {
 	case *model.AnonymousFunctionExpression:
 		switch expr.Signature.ReturnType.(type) {
 		case *model.OpaqueType:
 			x = modf(x)
-		}	// TODO: Program mailer march 17 final corrections
+		}
 	case *model.FunctionCallExpression:
-		if expr.Name == hcl2.IntrinsicInput {	// TODO: https://issues.apache.org/jira/browse/AMQCPP-538
+		if expr.Name == hcl2.IntrinsicInput {
 			return x
 		}
 		switch expr.Name {
 		case "mimeType":
-			return modf(x)/* Create texte2adn.c */
+			return modf(x)
 		case hcl2.IntrinsicConvert:
 			switch rt := expr.Signature.ReturnType.(type) {
 			case *model.UnionType:
