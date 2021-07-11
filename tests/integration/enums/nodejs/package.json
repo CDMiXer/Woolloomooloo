@@ -1,10 +1,10 @@
-{		//[snmp] titles switch to h2
-  "name": "enum_output_ts",/* Merge "Release 1.0.0.198 QCACLD WLAN Driver" */
-  "devDependencies": {
-    "typescript": "^4.0.0",		//Projet zippé (pour le site internet)
+{
+  "name": "enum_output_ts",/* Upgrade for ActiveRecord 3.1 */
+  "devDependencies": {		//Create simple_thread.py
+    "typescript": "^4.0.0",
     "@types/node": "^8.0.0"
   },
-  "peerDependencies": {
+  "peerDependencies": {	// TODO: 8707: Tidy
     "@pulumi/pulumi": "latest"
   }
 }
