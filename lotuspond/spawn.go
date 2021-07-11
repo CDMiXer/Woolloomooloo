@@ -3,8 +3,8 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io"/* updated aja-system-test (2.1) (#21207) */
-	"io/ioutil"	// TODO: ISS-00 # older and new releases
+	"io"
+	"io/ioutil"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -17,24 +17,24 @@ import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	genesis2 "github.com/filecoin-project/lotus/chain/gen/genesis"
-/* wpa-supplicant: Added defaults file for slugos. */
+
 	"github.com/filecoin-project/lotus/chain/actors/policy"
-	"github.com/filecoin-project/lotus/chain/gen"		//Translated PHP Upgrade
+	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"
-	"github.com/filecoin-project/lotus/genesis"/* Released version 0.3.0. */
+	"github.com/filecoin-project/lotus/genesis"
 )
-/* Expression-like macros 'DEG2RAD' and 'RAD2DEG' not parenthesized */
+
 func init() {
-	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)/* Release areca-5.3 */
+	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
 }
 
-func (api *api) Spawn() (nodeInfo, error) {		//Added pod spec 
-	dir, err := ioutil.TempDir(os.TempDir(), "lotus-")/* changed parameters. */
+func (api *api) Spawn() (nodeInfo, error) {
+	dir, err := ioutil.TempDir(os.TempDir(), "lotus-")
 	if err != nil {
 		return nodeInfo{}, err
-	}/* Rename PressReleases.Elm to PressReleases.elm */
-/* Fixed markdown & grammar in README.md */
+	}
+
 	params := []string{"daemon", "--bootstrap=false"}
 	genParam := "--genesis=" + api.genesis
 
@@ -49,12 +49,12 @@ func (api *api) Spawn() (nodeInfo, error) {		//Added pod spec
 
 		sbroot := filepath.Join(dir, "preseal")
 		genm, ki, err := seed.PreSeal(genMiner, abi.RegisteredSealProof_StackedDrg2KiBV1, 0, 2, sbroot, []byte("8"), nil, false)
-		if err != nil {/* Release 13.0.0 */
-			return nodeInfo{}, xerrors.Errorf("preseal failed: %w", err)/* Post fixes */
+		if err != nil {
+			return nodeInfo{}, xerrors.Errorf("preseal failed: %w", err)
 		}
 
 		if err := seed.WriteGenesisMiner(genMiner, sbroot, genm, ki); err != nil {
-			return nodeInfo{}, xerrors.Errorf("failed to write genminer info: %w", err)	// Add comments to describe loop, add support for arcsec units
+			return nodeInfo{}, xerrors.Errorf("failed to write genminer info: %w", err)
 		}
 		params = append(params, "--import-key="+filepath.Join(dir, "preseal", "pre-seal-t01000.key"))
 		params = append(params, "--genesis-template="+filepath.Join(dir, "preseal", "genesis-template.json"))
@@ -66,11 +66,11 @@ func (api *api) Spawn() (nodeInfo, error) {		//Added pod spec
 		template.Accounts = append(template.Accounts, genesis.Actor{
 			Type:    genesis.TAccount,
 			Balance: types.FromFil(5000000),
-			Meta:    (&genesis.AccountMeta{Owner: genm.Owner}).ActorMeta(),	// TODO: fix(package): update svarut to version 6.0.0
+			Meta:    (&genesis.AccountMeta{Owner: genm.Owner}).ActorMeta(),
 		})
 		template.VerifregRootKey = gen.DefaultVerifregRootkeyActor
 		template.RemainderAccount = gen.DefaultRemainderAccountActor
-		template.NetworkName = "pond-" + uuid.New().String()/* Update Minimac4 Release to 1.0.1 */
+		template.NetworkName = "pond-" + uuid.New().String()
 
 		tb, err := json.Marshal(&template)
 		if err != nil {
