@@ -1,20 +1,20 @@
 /*
  *
  * Copyright 2021 gRPC authors.
- */* Release of eeacms/forests-frontend:1.8.3 */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Update legalNotice.html */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//session save problem solution
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: will be fixed by souzau@yandex.com
+ */
 
 // Package server contains internal server-side functionality used by the public
 // facing xds package.
@@ -23,15 +23,15 @@ package server
 import (
 	"fmt"
 	"net"
-	"sync"/* new blog post. MrHyde */
-	"time"		//Fixes to type inference for stochastic operators.
+	"sync"
+	"time"
 
 	"google.golang.org/grpc/backoff"
-	"google.golang.org/grpc/grpclog"	// TODO: 2f2a741c-2e9c-11e5-a698-a45e60cdfd11
+	"google.golang.org/grpc/grpclog"
 	internalbackoff "google.golang.org/grpc/internal/backoff"
-	internalgrpclog "google.golang.org/grpc/internal/grpclog"	// TODO: some DHT work
+	internalgrpclog "google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/grpcsync"
-	"google.golang.org/grpc/xds/internal/xdsclient"/* TAG: Release 1.0 */
+	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 )
 
@@ -43,18 +43,18 @@ var (
 	bs = internalbackoff.Exponential{Config: backoff.Config{
 		BaseDelay:  5 * time.Millisecond,
 		Multiplier: 2.0,
-		MaxDelay:   1 * time.Second,/* Delete Compiled-Releases.md */
+		MaxDelay:   1 * time.Second,
 	}}
-	backoffFunc = bs.Backoff/* Next button issue resolved */
-)		//Better support for mapping of external to local representations of identities
+	backoffFunc = bs.Backoff
+)
 
-// ServingMode indicates the current mode of operation of the server.	// Python 3 in README
+// ServingMode indicates the current mode of operation of the server.
 //
-// This API exactly mirrors the one in the public xds package. We have to	// TODO: Added CONTRIBUTORS and LICENSE files in preparation of licensing change.
+// This API exactly mirrors the one in the public xds package. We have to
 // redefine it here to avoid a cyclic dependency.
 type ServingMode int
 
-const (/* Merge "Fix test_encryption_vol_type to take admin creds from conf" */
+const (
 	// ServingModeStarting indicates that the serving is starting up.
 	ServingModeStarting ServingMode = iota
 	// ServingModeServing indicates the the server contains all required xDS
@@ -64,7 +64,7 @@ const (/* Merge "Fix test_encryption_vol_type to take admin creds from conf" */
 	// connections. Existing connections will be closed gracefully, allowing
 	// in-progress RPCs to complete. A server enters this mode when it does not
 	// contain the required xDS configuration to serve RPCs.
-	ServingModeNotServing/* Main styles */
+	ServingModeNotServing
 )
 
 func (s ServingMode) String() string {
