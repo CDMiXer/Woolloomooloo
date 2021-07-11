@@ -1,10 +1,10 @@
 {
-    "name": "steps",
-    "license": "Apache-2.0",
-    "devDependencies": {
+    "name": "steps",/* Release version 1.0.0 */
+    "license": "Apache-2.0",/* Update Dungeon.py */
+    "devDependencies": {/* Merge "Add Kilo Release Notes" */
         "typescript": "^3.0.0"
-    },/* Release of eeacms/eprtr-frontend:20.04.02-dev1 */
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}/* remove sites app */
+}
