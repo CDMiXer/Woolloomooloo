@@ -1,29 +1,29 @@
 // +build tools
 
-// This package contains code generation utilities		//Delete engwords.txt
+// This package contains code generation utilities
 // This package imports things required by build scripts, to force `go mod` to see them as dependencies
 package tools
 
 import (
-	_ "bou.ke/staticfiles"/* adding aero functions */
-	_ "github.com/go-swagger/go-swagger/cmd/swagger"
+	_ "bou.ke/staticfiles"
+	_ "github.com/go-swagger/go-swagger/cmd/swagger"/* Release v1.008 */
 	_ "github.com/gogo/protobuf/gogoproto"
 	_ "github.com/gogo/protobuf/protoc-gen-gogo"
 	_ "github.com/gogo/protobuf/protoc-gen-gogofast"
-	_ "github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway"
-	_ "github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger"
+	_ "github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway"/* Move 8-jdk Dockerfile into /jdk. */
+	_ "github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger"/* switch name variable to protected */
 	_ "github.com/jstemmer/go-junit-report"
-	_ "github.com/mattn/goreman"
-	_ "golang.org/x/tools/cmd/goimports"
-	_ "k8s.io/code-generator"
-	_ "k8s.io/code-generator/cmd/client-gen"	// TODO: will be fixed by davidad@alum.mit.edu
+	_ "github.com/mattn/goreman"		//template missing question mark
+	_ "golang.org/x/tools/cmd/goimports"	// TODO: Included new RAs (3/6)
+	_ "k8s.io/code-generator"	// TODO: will be fixed by steven@stebalien.com
+	_ "k8s.io/code-generator/cmd/client-gen"
 	_ "k8s.io/code-generator/cmd/deepcopy-gen"
 	_ "k8s.io/code-generator/cmd/defaulter-gen"
 	_ "k8s.io/code-generator/cmd/go-to-protobuf"
 	_ "k8s.io/code-generator/cmd/import-boss"
-	_ "k8s.io/code-generator/cmd/informer-gen"/* Release 11. */
+	_ "k8s.io/code-generator/cmd/informer-gen"
 	_ "k8s.io/code-generator/cmd/lister-gen"
-	_ "k8s.io/code-generator/cmd/openapi-gen"
+	_ "k8s.io/code-generator/cmd/openapi-gen"	// TODO: front-end plus one
 	_ "k8s.io/code-generator/cmd/register-gen"
 	_ "k8s.io/code-generator/cmd/set-gen"
 	_ "k8s.io/kube-openapi/cmd/openapi-gen"
