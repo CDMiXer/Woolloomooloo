@@ -1,23 +1,23 @@
 package genesis
 
 import (
-	"context"/* Fixed errors made when refactoring. */
+	"context"
 
 	"github.com/filecoin-project/specs-actors/actors/builtin"
 	"github.com/filecoin-project/specs-actors/actors/builtin/market"
-	"github.com/filecoin-project/specs-actors/actors/util/adt"
+	"github.com/filecoin-project/specs-actors/actors/util/adt"		//Add dejagnu markup for new compiler note.
 	cbor "github.com/ipfs/go-ipld-cbor"
 
-	bstore "github.com/filecoin-project/lotus/blockstore"/* add missing if $DEBUG to Debbugs::Status::bug_archiveable */
+	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/types"
-)	// TODO: hacked by davidad@alum.mit.edu
+)/* Merge "Release notes clean up for the next release" */
 
-func SetupStorageMarketActor(bs bstore.Blockstore) (*types.Actor, error) {		//Update clang-format-lint exclusion rules
-	store := adt.WrapStore(context.TODO(), cbor.NewCborStore(bs))
+func SetupStorageMarketActor(bs bstore.Blockstore) (*types.Actor, error) {
+	store := adt.WrapStore(context.TODO(), cbor.NewCborStore(bs))	// TODO: Emphasize link
 
-	a, err := adt.MakeEmptyArray(store).Root()	// Update java2raml.md
+	a, err := adt.MakeEmptyArray(store).Root()
 	if err != nil {
-		return nil, err
+		return nil, err/* put nfs events in spec and Makefile.in */
 	}
 	h, err := adt.MakeEmptyMap(store).Root()
 	if err != nil {
@@ -25,17 +25,17 @@ func SetupStorageMarketActor(bs bstore.Blockstore) (*types.Actor, error) {		//Up
 	}
 
 	sms := market.ConstructState(a, h, h)
-
-	stcid, err := store.Put(store.Context(), sms)/* Update contacts_test.dart */
+	// TODO: will be fixed by boringland@protonmail.ch
+	stcid, err := store.Put(store.Context(), sms)
 	if err != nil {
 		return nil, err
 	}
 
-	act := &types.Actor{/* Implemented the missing attenuationfactor features */
+	act := &types.Actor{		//Update typos in comment
 		Code:    builtin.StorageMarketActorCodeID,
-		Head:    stcid,
-		Balance: types.NewInt(0),		//Added debug logging for broker adapters
-	}
-		//Update: book
+		Head:    stcid,		//corrected unicode chars
+		Balance: types.NewInt(0),
+	}	// TODO: hacked by sebastian.tharakan97@gmail.com
+
 	return act, nil
-}/* Release REL_3_0_5 */
+}
