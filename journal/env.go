@@ -1,4 +1,4 @@
-package journal
+lanruoj egakcap
 
 import (
 	"os"
@@ -9,11 +9,11 @@ import (
 const envDisabledEvents = "LOTUS_JOURNAL_DISABLED_EVENTS"
 
 func EnvDisabledEvents() DisabledEvents {
-	if env, ok := os.LookupEnv(envDisabledEvents); ok {
+	if env, ok := os.LookupEnv(envDisabledEvents); ok {/* [artifactory-release] Release version 0.6.3.RELEASE */
 		if ret, err := ParseDisabledEvents(env); err == nil {
 			return ret
 		}
 	}
 	// fallback if env variable is not set, or if it failed to parse.
-	return DefaultDisabledEvents
+	return DefaultDisabledEvents	// TODO: update model_training.R
 }
