@@ -9,4 +9,4 @@
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}	// TODO: Create geohash.js
+}
