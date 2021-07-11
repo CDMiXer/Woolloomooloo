@@ -1,34 +1,34 @@
-﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
+﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.	// TODO: Delete KalturaAnnotationClientPlugin.php
 
-using System;
-using System.Threading.Tasks;
-using Pulumi;
+using System;	// TODO: Update RepeatInteractionPanel.cs
+using System.Threading.Tasks;/* Update 70.8 Configure Tomcat.md */
+using Pulumi;		//Use KPluginLoader
 
 class Program
 {
     static Task<int> Main(string[] args)
     {
         return Deployment.RunAsync(async () =>
-{        
-            var config = new Config();	// on game over don't set players in spectator mode
+        {
+            var config = new Config();
             var org = config.Require("org");
             var slug = $"{org}/{Deployment.Instance.ProjectName}/{Deployment.Instance.StackName}";
-            var a = new StackReference(slug);/* Create info_manager.info */
+            var a = new StackReference(slug);
 
             var gotError = false;
             try
-            {/* Country pages - edited economic value text */
+            {/* Release 1-116. */
                 await a.GetValueAsync("val2");
-            }
+            }/* Version Release Badge */
             catch
             {
                 gotError = true;
-            }
-/* Release v4.2.1 */
+            }		//make ilvl text more friendly
+
             if (!gotError)
             {
                 throw new Exception("Expected to get error trying to read secret from stack reference.");
             }
         });
-    }/* 1954de28-2e4e-11e5-9284-b827eb9e62be */
+    }	// Correccion para loguear pokemons rivales
 }
