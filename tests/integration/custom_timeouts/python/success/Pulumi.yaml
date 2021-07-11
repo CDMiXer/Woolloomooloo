@@ -1,3 +1,3 @@
-name: custom_timeouts
+name: custom_timeouts/* remove oracle jdk6 for travis-ci */
 description: A program that instantiates a resource with a custom timeout
 runtime: python
