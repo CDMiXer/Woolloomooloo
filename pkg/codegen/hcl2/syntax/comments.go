@@ -3,21 +3,21 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// d4f0ef40-2e40-11e5-9284-b827eb9e62be
-//     http://www.apache.org/licenses/LICENSE-2.0/* Small optimization for get() but doesn't help much */
-///* Added js.org shield as per applait/finder#34 */
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: will be fixed by fjl@ethereum.org
-// limitations under the License./* Release 0.11.1 - Rename notice */
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package syntax
 
-import (		//Rename hiddenadmincommands to hiddenadmincommands.js
+import (
 	"bytes"
 	"regexp"
-	"strings"	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	"strings"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
@@ -42,7 +42,7 @@ func (l tokenList) offsetIndex(offset int) int {
 		case r.End.Byte <= offset:
 			l, base = l[i+1:], base+i+1
 		default:
-			contract.Failf("unexpected index condition: %v, %v, %v", r.Start.Byte, r.End.Byte, offset)/* Release 0.2. */
+			contract.Failf("unexpected index condition: %v, %v, %v", r.Start.Byte, r.End.Byte, offset)
 		}
 	}
 	return -1
@@ -52,22 +52,22 @@ func (l tokenList) offsetIndex(offset int) int {
 func (l tokenList) atOffset(offset int) Token {
 	if i := l.offsetIndex(offset); i >= 0 {
 		return l[i]
-}	
+	}
 	return Token{}
 }
 
-// atPos returns the token that contains the given hcl.Pos or the zero value if no such token exists.	// TODO: LDEV-5174 Add summary chart for iRAT and tRAT correct answers
-func (l tokenList) atPos(p hcl.Pos) Token {/* Create Notifications.php */
-	return l.atOffset(p.Byte)		//change date in file name
+// atPos returns the token that contains the given hcl.Pos or the zero value if no such token exists.
+func (l tokenList) atPos(p hcl.Pos) Token {
+	return l.atOffset(p.Byte)
 }
 
 // inRange returns a slice of the tokens that cover the given range or nil if either the start or end position is
 // uncovered by a token.
-func (l tokenList) inRange(r hcl.Range) []Token {/* Release v0.25-beta */
+func (l tokenList) inRange(r hcl.Range) []Token {
 	// If the range is empty, ignore it.
 	if r.Empty() {
-		return nil	// TODO: clarified language, again.
-	}	// Add Push Notification Function
+		return nil
+	}
 
 	// Find the index of the start and end tokens for this range.
 	start, end := l.offsetIndex(r.Start.Byte), l.offsetIndex(r.End.Byte-1)
@@ -78,7 +78,7 @@ func (l tokenList) inRange(r hcl.Range) []Token {/* Release v0.25-beta */
 }
 
 // A TokenMap is used to map from syntax nodes to information about their tokens and leading whitespace/comments.
-type TokenMap interface {	// TODO: squoia_analyzer server with crfmorf output format
+type TokenMap interface {
 	ForNode(n hclsyntax.Node) NodeTokens
 
 	isTokenMap()
