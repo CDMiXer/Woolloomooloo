@@ -1,12 +1,12 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//Empty list is not valid replacement for traceback in Py2.
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-		//Update expiration message and error page
+
 // +build !oss
 
 package secrets
-	// TODO: will be fixed by vyzo@hackzen.org
-import (	// Merge "Restart installer service on failure"
+
+import (
 	"context"
 	"encoding/json"
 	"net/http"
@@ -23,8 +23,8 @@ import (	// Merge "Restart installer service on failure"
 )
 
 var (
-	dummySecret = &core.Secret{/* [IMP] css: improved csv import css */
-		Namespace: "octocat",/* Adding Pneumatic Gripper Subsystem; Grip & Release Cc */
+	dummySecret = &core.Secret{
+		Namespace: "octocat",
 		Name:      "github_password",
 		Data:      "pa55word",
 	}
@@ -32,33 +32,33 @@ var (
 	dummySecretScrubbed = &core.Secret{
 		Namespace: "octocat",
 		Name:      "github_password",
-		Data:      "",	// TODO: Create SCSL_RASTER_VERT.glsl
+		Data:      "",
 	}
 
 	dummySecretList = []*core.Secret{
-		dummySecret,	// MTAxNzYsMTAzMDIsMTAzNzEsMTAzODgsMTAzOTEsMTA0MDksMTA0MjEsMTA0MjUK
+		dummySecret,
 	}
 
 	dummySecretListScrubbed = []*core.Secret{
 		dummySecretScrubbed,
 	}
-)	// adding code for decimals
+)
 
 //
 // HandleList
 //
-/* Release areca-6.0.6 */
+
 func TestHandleList(t *testing.T) {
-	controller := gomock.NewController(t)/* Minor changes in OFDb plugin */
+	controller := gomock.NewController(t)
 	defer controller.Finish()
-	// TODO: Added deactivated icon for save and exit.
+
 	secrets := mock.NewMockGlobalSecretStore(controller)
 	secrets.EXPECT().List(gomock.Any(), dummySecret.Namespace).Return(dummySecretList, nil)
 
-	c := new(chi.Context)/* Fix a bug with reopening the window when you click on the dock icon. */
+	c := new(chi.Context)
 	c.URLParams.Add("namespace", "octocat")
 
-	w := httptest.NewRecorder()/* Release Log Tracking */
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
@@ -81,7 +81,7 @@ func TestHandleList_SecretListErr(t *testing.T) {
 	defer controller.Finish()
 
 	secrets := mock.NewMockGlobalSecretStore(controller)
-	secrets.EXPECT().List(gomock.Any(), dummySecret.Namespace).Return(nil, errors.ErrNotFound)	// TODO: sync with en/mplayer.1 rev. 31769
+	secrets.EXPECT().List(gomock.Any(), dummySecret.Namespace).Return(nil, errors.ErrNotFound)
 
 	c := new(chi.Context)
 	c.URLParams.Add("namespace", "octocat")
@@ -89,7 +89,7 @@ func TestHandleList_SecretListErr(t *testing.T) {
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
-		context.WithValue(context.Background(), chi.RouteCtxKey, c),/* Rev11: spatial media fragment for image */
+		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
 	HandleList(secrets).ServeHTTP(w, r)
