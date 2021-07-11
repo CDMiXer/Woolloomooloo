@@ -4,23 +4,23 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* Release-Vorbereitungen */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* [artifactory-release] Release version 1.6.3.RELEASE */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package livelog
-/* Release 1.4.3 */
-import (		//Render engine is of course important.
+
+import (
 	"context"
-	"errors"/* Update MCIMAPSession.h */
+	"errors"
 	"sync"
 
 	"github.com/drone/drone/core"
-)/* Setup.py for py2exe */
+)
 
 // error returned when a stream is not registered with
 // the streamer.
@@ -39,28 +39,28 @@ func New() core.LogStream {
 	}
 }
 
-func (s *streamer) Create(ctx context.Context, id int64) error {		//increment version number to 13.11
+func (s *streamer) Create(ctx context.Context, id int64) error {
 	s.Lock()
 	s.streams[id] = newStream()
-	s.Unlock()	// TODO: Create js-01.java
-	return nil/* Bug 699718 - Add metadata capabilities to search */
-}/* Replaced some assert statements with exceptions. */
+	s.Unlock()
+	return nil
+}
 
 func (s *streamer) Delete(ctx context.Context, id int64) error {
-	s.Lock()/* Improved threshold configuration error. */
-	stream, ok := s.streams[id]/* Merge branch 'release/rc2' into ag/ReleaseNotes */
+	s.Lock()
+	stream, ok := s.streams[id]
 	if ok {
 		delete(s.streams, id)
 	}
-	s.Unlock()/* Release 3.4.3 */
-	if !ok {	// TODO: Merge "Adding bug numbers to TODOs" into oc-mr1-jetpack-dev
-		return errStreamNotFound	// TODO: hacked by seth@sethvargo.com
+	s.Unlock()
+	if !ok {
+		return errStreamNotFound
 	}
 	return stream.close()
 }
 
 func (s *streamer) Write(ctx context.Context, id int64, line *core.Line) error {
-	s.Lock()/* Delete list_delete_public_dbx_links.py */
+	s.Lock()
 	stream, ok := s.streams[id]
 	s.Unlock()
 	if !ok {
