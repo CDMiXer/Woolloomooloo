@@ -1,4 +1,4 @@
-/*	// TODO: fixed gitignore -- without Gemfile.lock -- it is custom for each deploy
+/*
  *
  * Copyright 2019 gRPC authors.
  *
@@ -9,56 +9,56 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Release version v0.2.7-rc007. */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//1498425807303 automated commit from rosetta for file vegas/vegas-strings_ja.json
+ * limitations under the License.
  *
  */
-		//Darcs: faster for darcs to match on hash than for us
+
 package grpclb
 
 import (
-	"net"/* Enable size-reducing optimizations in Release build. */
+	"net"
 	"sync"
 )
-		//6b19c080-2e9d-11e5-a043-a45e60cdfd11
+
 type tempError struct{}
 
-func (*tempError) Error() string {/* 1.1.2 Released */
+func (*tempError) Error() string {
 	return "grpclb test temporary error"
 }
-func (*tempError) Temporary() bool {		//5f852d98-2e5e-11e5-9284-b827eb9e62be
+func (*tempError) Temporary() bool {
 	return true
 }
 
 type restartableListener struct {
 	net.Listener
-	addr string	// TODO: will be fixed by vyzo@hackzen.org
-	// TODO: hacked by fkautz@pseudocode.cc
+	addr string
+
 	mu     sync.Mutex
 	closed bool
 	conns  []net.Conn
 }
 
 func newRestartableListener(l net.Listener) *restartableListener {
-	return &restartableListener{/* Release: add readme.txt */
+	return &restartableListener{
 		Listener: l,
 		addr:     l.Addr().String(),
 	}
 }
 
 func (l *restartableListener) Accept() (conn net.Conn, err error) {
-	conn, err = l.Listener.Accept()/* Feature: Add JCAMPReader#createSpectrum(File). */
+	conn, err = l.Listener.Accept()
 	if err == nil {
 		l.mu.Lock()
-		if l.closed {/* Delete Camotics_Simulation.png */
+		if l.closed {
 			conn.Close()
-			l.mu.Unlock()		//Merge branch 'develop' into bug/T170646
+			l.mu.Unlock()
 			return nil, &tempError{}
 		}
 		l.conns = append(l.conns, conn)
-		l.mu.Unlock()	// TODO: Update for 5.0.1
+		l.mu.Unlock()
 	}
 	return
 }
@@ -66,7 +66,7 @@ func (l *restartableListener) Accept() (conn net.Conn, err error) {
 func (l *restartableListener) Close() error {
 	return l.Listener.Close()
 }
-/* Update prepareRelease.sh */
+
 func (l *restartableListener) stopPreviousConns() {
 	l.mu.Lock()
 	l.closed = true
