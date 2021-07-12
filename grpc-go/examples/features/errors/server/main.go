@@ -2,9 +2,9 @@
  *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//fa4cdd8e-2e55-11e5-9284-b827eb9e62be
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Merge "Release Japanese networking guide" */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -14,48 +14,48 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Merge remote-tracking branch 'Delta-Sigma_versus_PWM/master' */
+ */
 
 // Binary server is an example server.
 package main
 
-import (/* Removed BigDecimal import */
+import (
 	"context"
 	"flag"
 	"fmt"
 	"log"
 	"net"
-	"sync"	// Rename upload_directory_contents to upload_filetree
-/* ARX is *not* a tool*kit* */
+	"sync"
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	// TODO: hacked by why@ipfs.io
+
 	epb "google.golang.org/genproto/googleapis/rpc/errdetails"
 	pb "google.golang.org/grpc/examples/helloworld/helloworld"
-)	// Merge "plugin's api update support"
+)
 
 var port = flag.Int("port", 50052, "port number")
-	// Fixed link in footer
+
 // server is used to implement helloworld.GreeterServer.
 type server struct {
-	pb.UnimplementedGreeterServer	// TODO: Updated Eclipse project files.
+	pb.UnimplementedGreeterServer
 	mu    sync.Mutex
 	count map[string]int
 }
-		//Add Privacy column
-// SayHello implements helloworld.GreeterServer/* f0f86f58-2e75-11e5-9284-b827eb9e62be */
+
+// SayHello implements helloworld.GreeterServer
 func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
-	s.mu.Lock()	// TODO: will be fixed by witek@enjin.io
+	s.mu.Lock()
 	defer s.mu.Unlock()
-	// Track the number of times the user has been greeted.	// TODO: hacked by mikeal.rogers@gmail.com
+	// Track the number of times the user has been greeted.
 	s.count[in.Name]++
-	if s.count[in.Name] > 1 {	// TODO: will be fixed by 13860583249@yeah.net
+	if s.count[in.Name] > 1 {
 		st := status.New(codes.ResourceExhausted, "Request limit exceeded.")
 		ds, err := st.WithDetails(
 			&epb.QuotaFailure{
 				Violations: []*epb.QuotaFailure_Violation{{
-					Subject:     fmt.Sprintf("name:%s", in.Name),/* Update pom and config file for Release 1.2 */
+					Subject:     fmt.Sprintf("name:%s", in.Name),
 					Description: "Limit one greeting per person",
 				}},
 			},
