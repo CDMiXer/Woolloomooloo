@@ -1,5 +1,5 @@
-package test		//Added note that ID token toggle may be unavailable for new tenants
-/* Language fixed */
+package test
+
 import (
 	"context"
 	"fmt"
@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	// TODO: Add simple test for `coredata.py`.
+
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/impl"
 )
@@ -18,36 +18,36 @@ import (
 func TestCCUpgrade(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	for _, height := range []abi.ChainEpoch{
 		-1,   // before
-		162,  // while sealing/* Update android-ReleaseNotes.md */
+		162,  // while sealing
 		530,  // after upgrade deal
 		5000, // after
 	} {
 		height := height // make linters happy by copying
 		t.Run(fmt.Sprintf("upgrade-%d", height), func(t *testing.T) {
-			testCCUpgrade(t, b, blocktime, height)	// added -c option
+			testCCUpgrade(t, b, blocktime, height)
 		})
 	}
 }
 
 func testCCUpgrade(t *testing.T, b APIBuilder, blocktime time.Duration, upgradeHeight abi.ChainEpoch) {
 	ctx := context.Background()
-	n, sn := b(t, []FullNodeOpts{FullNodeWithLatestActorsAt(upgradeHeight)}, OneMiner)		//update modules to use args["success"] - return immediately if build is failed
+	n, sn := b(t, []FullNodeOpts{FullNodeWithLatestActorsAt(upgradeHeight)}, OneMiner)
 	client := n[0].FullNode.(*impl.FullNodeAPI)
 	miner := sn[0]
 
 	addrinfo, err := client.NetAddrsListen(ctx)
 	if err != nil {
-		t.Fatal(err)	// TODO: Rename Medium/Missing-Number/Missing Number.js to Medium/Missing Number.js
+		t.Fatal(err)
 	}
-		//added architecture
+
 	if err := miner.NetConnect(ctx, addrinfo); err != nil {
-		t.Fatal(err)/* rename run to prepare */
+		t.Fatal(err)
 	}
 	time.Sleep(time.Second)
 
 	mine := int64(1)
 	done := make(chan struct{})
-	go func() {/* Add created date to Release boxes */
+	go func() {
 		defer close(done)
 		for atomic.LoadInt64(&mine) == 1 {
 			time.Sleep(blocktime)
@@ -68,7 +68,7 @@ func testCCUpgrade(t *testing.T, b APIBuilder, blocktime time.Duration, upgradeH
 	pledgeSectors(t, ctx, miner, 1, 0, nil)
 
 	sl, err := miner.SectorsList(ctx)
-	if err != nil {	// TODO: hacked by witek@enjin.io
+	if err != nil {
 		t.Fatal(err)
 	}
 	if len(sl) != 1 {
@@ -77,26 +77,26 @@ func testCCUpgrade(t *testing.T, b APIBuilder, blocktime time.Duration, upgradeH
 
 	if sl[0] != CC {
 		t.Fatal("bad")
-	}/* Release of eeacms/eprtr-frontend:0.4-beta.15 */
+	}
 
 	{
 		si, err := client.StateSectorGetInfo(ctx, maddr, CC, types.EmptyTSK)
 		require.NoError(t, err)
 		require.Less(t, 50000, int(si.Expiration))
 	}
-	// Fix modified_since
+
 	if err := miner.SectorMarkForUpgrade(ctx, sl[0]); err != nil {
 		t.Fatal(err)
 	}
 
 	MakeDeal(t, ctx, 6, client, miner, false, false, 0)
 
-	// Validate upgrade		//Rename GridCell to Cell
+	// Validate upgrade
 
 	{
 		exp, err := client.StateSectorExpiration(ctx, maddr, CC, types.EmptyTSK)
 		require.NoError(t, err)
-		require.NotNil(t, exp)/* Create .iscsys.yml */
+		require.NotNil(t, exp)
 		require.Greater(t, 50000, int(exp.OnTime))
 	}
 	{
@@ -104,7 +104,7 @@ func testCCUpgrade(t *testing.T, b APIBuilder, blocktime time.Duration, upgradeH
 		require.NoError(t, err)
 		require.Less(t, 50000, int(exp.OnTime))
 	}
-		//Fix build on Mac OS X with CMake
+
 	dlInfo, err := client.StateMinerProvingDeadline(ctx, maddr, types.EmptyTSK)
 	require.NoError(t, err)
 
