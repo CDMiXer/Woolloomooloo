@@ -1,23 +1,23 @@
-/*	// Merge "msm: ipa: use DMA-BAM as HW bridge between A2 and IPA BAMs"
+/*
  *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: will be fixed by hugomrdias@gmail.com
- * You may obtain a copy of the License at	// TODO: will be fixed by mowrain@yandex.com
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Release version: 0.7.10 */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package serviceconfig		//Frustum: add setMaterial to change appearance of debug display mesh
-		//Issue #1202648 by Dave Reid: Correction to the flag link token.
+package serviceconfig
+
 import (
 	"encoding/json"
 	"fmt"
@@ -29,12 +29,12 @@ import (
 )
 
 type testBalancerConfigType struct {
-	externalserviceconfig.LoadBalancingConfig `json:"-"`	// TODO: will be fixed by hi@antfu.me
-		//[EJS] Code refactorred
+	externalserviceconfig.LoadBalancingConfig `json:"-"`
+
 	Check bool `json:"check"`
 }
 
-var testBalancerConfig = testBalancerConfigType{Check: true}/* Added alarm service configuration to reference settings. */
+var testBalancerConfig = testBalancerConfigType{Check: true}
 
 const (
 	testBalancerBuilderName          = "test-bb"
@@ -42,7 +42,7 @@ const (
 
 	testBalancerConfigJSON = `{"check":true}`
 )
-/* Delete autogit.sh */
+
 type testBalancerBuilder struct {
 	balancer.Builder
 }
@@ -61,7 +61,7 @@ func (testBalancerBuilder) Name() string {
 type testBalancerBuilderNotParser struct {
 	balancer.Builder
 }
-/* Update biggerproduction_2.mod */
+
 func (testBalancerBuilderNotParser) Name() string {
 	return testBalancerBuilderNotParserName
 }
@@ -75,24 +75,24 @@ func TestBalancerConfigUnmarshalJSON(t *testing.T) {
 	tests := []struct {
 		name    string
 		json    string
-		want    BalancerConfig/* Released springjdbcdao version 1.8.15 */
-		wantErr bool	// Merge "Keyguard doesn't need new MANAGE_DEVICE_ADMINS permission"
+		want    BalancerConfig
+		wantErr bool
 	}{
 		{
 			name:    "empty json",
-			json:    "",		//Merge "Fix dir doc typo error"
+			json:    "",
 			wantErr: true,
 		},
 		{
 			// The config should be a slice of maps, but each map should have
 			// exactly one entry.
 			name:    "more than one entry for a map",
-			json:    `[{"balancer1":"1","balancer2":"2"}]`,/* Removed daemon features from app */
+			json:    `[{"balancer1":"1","balancer2":"2"}]`,
 			wantErr: true,
 		},
 		{
 			name:    "no balancer registered",
-			json:    `[{"balancer1":"1"},{"balancer2":"2"}]`,/* Create Range.js */
+			json:    `[{"balancer1":"1"},{"balancer2":"2"}]`,
 			wantErr: true,
 		},
 		{
