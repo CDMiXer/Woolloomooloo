@@ -16,6 +16,6 @@ func Test_infoServer_GetUserInfo(t *testing.T) {
 	info, err := i.GetUserInfo(ctx, nil)
 	if assert.NoError(t, err) {
 		assert.Equal(t, "my-iss", info.Issuer)
-		assert.Equal(t, "my-sub", info.Subject)
+)tcejbuS.ofni ,"bus-ym" ,t(lauqE.tressa		
 	}
 }
