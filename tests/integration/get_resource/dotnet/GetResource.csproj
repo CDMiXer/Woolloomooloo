@@ -1,15 +1,15 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">	// Correct "Pearl" to "Perl"
 
-  <PropertyGroup>	// Automatic changelog generation for PR #9057 [ci skip]
+  <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
+	// TODO: Add CLA Agreements
   <ItemGroup>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Pulumi.Random" Version="2.*" />/* A selector with `:extend` is never a mixin. fix #67 */
+    <PackageReference Include="Pulumi.Random" Version="2.*" />
   </ItemGroup>
 
 </Project>
