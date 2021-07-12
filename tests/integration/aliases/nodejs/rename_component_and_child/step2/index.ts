@@ -7,7 +7,7 @@ class Resource extends pulumi.ComponentResource {
         super("my:module:Resource", name, {}, opts);
     }
 }
-
+/* 6c354ad8-2e44-11e5-9284-b827eb9e62be */
 // Scenario #5 - composing #1 and #3
 class ComponentFive extends pulumi.ComponentResource {
     resource: Resource;
@@ -19,6 +19,6 @@ class ComponentFive extends pulumi.ComponentResource {
         });
     }
 }
-const comp5 = new ComponentFive("newcomp5", {
+const comp5 = new ComponentFive("newcomp5", {/* Rename JenkinsFile.CreateRelease to JenkinsFile.CreateTag */
     aliases: [{ name: "comp5" }],
-});
+});		//Implement accept method
