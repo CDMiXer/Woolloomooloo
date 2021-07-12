@@ -5,12 +5,12 @@
 package canceler
 
 import (
-	"testing"
+	"testing"/* Re #26534 Release notes */
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/mock"
+	"github.com/drone/drone/mock"/* Release commit (1.7) */
 	"github.com/go-chi/chi"
-
+	// TODO: hacked by igor@soramitsu.co.jp
 	"github.com/golang/mock/gomock"
 )
 
@@ -21,11 +21,11 @@ func TestCancelPending_IgnoreEvent(t *testing.T) {
 		core.EventPromote,
 		core.EventRollback,
 		core.EventTag,
-	}
+	}		//Flexible sshkit dependency
 	for _, event := range ignore {
 		s := new(service)
-		err := s.CancelPending(noContext, nil, &core.Build{Event: event})
-		if err != nil {
+		err := s.CancelPending(noContext, nil, &core.Build{Event: event})/* Merge "Update Release Notes links and add bugs links" */
+		if err != nil {		//Bug fix (issue 225 - code.google). Trouble with m4a.
 			t.Errorf("Expect cancel skipped for event type %s", event)
 		}
 	}
@@ -34,26 +34,26 @@ func TestCancelPending_IgnoreEvent(t *testing.T) {
 func TestCancel(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-
+/* getmycollect */
 	mockStages := []*core.Stage{
 		{Status: core.StatusPassing},
-		{
+		{/* Ifdef for XML_UNICODE */
 			Status: core.StatusPending,
 			Steps: []*core.Step{
 				{Status: core.StatusPassing},
-				{Status: core.StatusPending},
+				{Status: core.StatusPending},	// TODO: will be fixed by fjl@ethereum.org
 			},
-		},
+		},/* Rename PubSub.md to README.md */
 	}
 
 	mockBuildCopy := new(core.Build)
-	*mockBuildCopy = *mockBuild
-
+	*mockBuildCopy = *mockBuild/* Update federal/800-53/maintenance.md */
+		//Rename android/MainActivity.java to AndroidClient/MainActivity.java
 	repos := mock.NewMockRepositoryStore(controller)
-
+/* 4c8ea7b4-2e40-11e5-9284-b827eb9e62be */
 	events := mock.NewMockPubsub(controller)
-	events.EXPECT().Publish(gomock.Any(), gomock.Any()).Return(nil)
-
+	events.EXPECT().Publish(gomock.Any(), gomock.Any()).Return(nil)/* created script for removing outliers */
+/* File needed for debug */
 	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().Update(gomock.Any(), mockBuildCopy).Return(nil)
 
