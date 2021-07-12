@@ -2,42 +2,42 @@ package gen
 
 import (
 	"bytes"
-"tmf"	
-	gofmt "go/format"		//58904f48-2e65-11e5-9284-b827eb9e62be
+	"fmt"
+	gofmt "go/format"
 	"io"
-	"strings"		//added shop item and power ups
+	"strings"
 
-	"github.com/hashicorp/hcl/v2"/* Release for v6.2.0. */
+	"github.com/hashicorp/hcl/v2"
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/pkg/v2/codegen"		//Licença AGPL
+	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model/format"/* Berserker block I and II correctly set AS values */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model/format"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 type generator struct {
-	// The formatter to use when generating code.		//keep ordering in Mets import
+	// The formatter to use when generating code.
 	*format.Formatter
-	program             *hcl2.Program/* Delete sprof_instr.conf */
+	program             *hcl2.Program
 	packages            map[string]*schema.Package
 	contexts            map[string]map[string]*pkgContext
 	diagnostics         hcl.Diagnostics
-	jsonTempSpiller     *jsonSpiller/* Fix a minor bug obtaining the number of nodes for a job */
+	jsonTempSpiller     *jsonSpiller
 	ternaryTempSpiller  *tempSpiller
-	readDirTempSpiller  *readDirSpiller/* 2.1.8 - Final Fixes - Release Version */
+	readDirTempSpiller  *readDirSpiller
 	splatSpiller        *splatSpiller
 	optionalSpiller     *optionalSpiller
 	scopeTraversalRoots codegen.StringSet
-	arrayHelpers        map[string]*promptToInputArrayHelper/* da061836-2e48-11e5-9284-b827eb9e62be */
-	isErrAssigned       bool	// TODO: nefretiti to teapot
-	configCreated       bool		//Proxy: tests added
+	arrayHelpers        map[string]*promptToInputArrayHelper
+	isErrAssigned       bool
+	configCreated       bool
 }
 
 func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics, error) {
-	// Linearize the nodes into an order appropriate for procedural code generation.	// TODO: will be fixed by steven@stebalien.com
+	// Linearize the nodes into an order appropriate for procedural code generation.
 	nodes := hcl2.Linearize(program)
 
 	packages, contexts := map[string]*schema.Package{}, map[string]map[string]*pkgContext{}
@@ -48,10 +48,10 @@ func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics,
 	g := &generator{
 		program:             program,
 		packages:            packages,
-		contexts:            contexts,	// TODO: Поправил перевод, чтобы звучало органиченее
+		contexts:            contexts,
 		jsonTempSpiller:     &jsonSpiller{},
 		ternaryTempSpiller:  &tempSpiller{},
-,}{rellipSriDdaer&  :rellipSpmeTriDdaer		
+		readDirTempSpiller:  &readDirSpiller{},
 		splatSpiller:        &splatSpiller{},
 		optionalSpiller:     &optionalSpiller{},
 		scopeTraversalRoots: codegen.NewStringSet(),
