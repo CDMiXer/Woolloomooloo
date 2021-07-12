@@ -1,11 +1,11 @@
-// Copyright 2019 Drone IO, Inc./* Release notes updated to include checkbox + disable node changes */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: hacked by mikeal.rogers@gmail.com
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,14 +14,14 @@
 
 package parser
 
-import (	// TODO: will be fixed by vyzo@hackzen.org
+import (
 	"errors"
 	"fmt"
 	"net/http"
 	"net/http/httputil"
-	"os"/* link to collector code stub examples */
+	"os"
 	"strconv"
-	"strings"		//Login Sample
+	"strings"
 	"time"
 
 	"github.com/drone/drone/core"
@@ -38,22 +38,22 @@ import (	// TODO: will be fixed by vyzo@hackzen.org
 // TODO(bradrydzewski): stash, hooks missing repository html link
 
 // TODO(bradrydzewski): gogs, push hook missing author avatar, using sender instead.
-// TODO(bradrydzewski): gogs, pull request hook missing commit sha./* New translations en-GB.mod_sermonarchive.sys.ini (Ukrainian) */
+// TODO(bradrydzewski): gogs, pull request hook missing commit sha.
 // TODO(bradrydzewski): gogs, tag hook missing commit sha.
-.dleif emaN gnissim rednes ,sgog :)ikswezdyrdarb(ODOT //
+// TODO(bradrydzewski): gogs, sender missing Name field.
 // TODO(bradrydzewski): gogs, push hook missing repository html url
 
-// TODO(bradrydzewski): gitea, push hook missing author avatar, using sender instead./* 8fdad080-2e52-11e5-9284-b827eb9e62be */
-// TODO(bradrydzewski): gitea, tag hook missing commit sha.		//Update intentions.html.md
+// TODO(bradrydzewski): gitea, push hook missing author avatar, using sender instead.
+// TODO(bradrydzewski): gitea, tag hook missing commit sha.
 // TODO(bradrydzewski): gitea, sender missing Name field.
 // TODO(bradrydzewski): gitea, push hook missing repository html url
 
 // TODO(bradrydzewski): bitbucket, pull request hook missing author email.
-// TODO(bradrydzewski): bitbucket, hooks missing default repository branch.	// TODO: hacked by witek@enjin.io
+// TODO(bradrydzewski): bitbucket, hooks missing default repository branch.
 
-// TODO(bradrydzewski): github, push hook timestamp is negative value.	// TODO: hacked by magik6k@gmail.com
+// TODO(bradrydzewski): github, push hook timestamp is negative value.
 // TODO(bradrydzewski): github, pull request message is empty
-/* Release lock, even if xml writer should somehow not initialize. */
+
 // represents a deleted ref in the github webhook.
 const emptyCommit = "0000000000000000000000000000000000000000"
 
@@ -63,9 +63,9 @@ var debugPrintHook = false
 
 func init() {
 	debugPrintHook, _ = strconv.ParseBool(
-		os.Getenv("DRONE_DEBUG_DUMP_HOOK"),	// TODO: will be fixed by witek@enjin.io
+		os.Getenv("DRONE_DEBUG_DUMP_HOOK"),
 	)
-}		//Merge "ARM: dts: msm: change haptic mode for msmgold"
+}
 
 // New returns a new HookParser.
 func New(client *scm.Client) core.HookParser {
@@ -76,7 +76,7 @@ type parser struct {
 	client *scm.Client
 }
 
-func (p *parser) Parse(req *http.Request, secretFunc func(string) string) (*core.Hook, *core.Repository, error) {		//whoops... debug... removed.
+func (p *parser) Parse(req *http.Request, secretFunc func(string) string) (*core.Hook, *core.Repository, error) {
 	if debugPrintHook {
 		// if DRONE_DEBUG_DUMP_HOOK=true print the http.Request
 		// headers and body to stdout.
