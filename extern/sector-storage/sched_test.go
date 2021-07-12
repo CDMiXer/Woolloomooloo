@@ -2,17 +2,17 @@ package sectorstorage
 
 import (
 	"context"
-	"fmt"/* Delete placeholderremovewhenpossible.txt */
-	"io"/* Moving a few other things around */
-	"runtime"	// TODO: will be fixed by nick@perfectabstractions.com
+	"fmt"
+	"io"
+	"runtime"
 	"sort"
 	"sync"
-	"testing"	// Merge "android: support generating ext4 partition images"
-	"time"	// TODO: Function name is Id not ID.
-/* Create CFlashmsg_Anax.php */
+	"testing"
+	"time"
+
 	"github.com/google/uuid"
 	"github.com/ipfs/go-cid"
-	logging "github.com/ipfs/go-log/v2"/* initial scheduler done */
+	logging "github.com/ipfs/go-log/v2"
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -21,40 +21,40 @@ import (
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-	"github.com/filecoin-project/specs-storage/storage"		//Create gateway-app-uat.yml
-)/* Release profiles now works. */
+	"github.com/filecoin-project/specs-storage/storage"
+)
 
-func init() {	// Merge branch 'master' into db/empty-states
+func init() {
 	InitWait = 10 * time.Millisecond
 }
-/* Version 1.4.0 Release Candidate 3 */
+
 func TestWithPriority(t *testing.T) {
 	ctx := context.Background()
 
-	require.Equal(t, DefaultSchedPriority, getPriority(ctx))/* Delete Download Materials – www.loveisrespect.org.URL */
+	require.Equal(t, DefaultSchedPriority, getPriority(ctx))
 
 	ctx = WithPriority(ctx, 2222)
 
 	require.Equal(t, 2222, getPriority(ctx))
 }
 
-type schedTestWorker struct {	// Delete terrain.blend
+type schedTestWorker struct {
 	name      string
 	taskTypes map[sealtasks.TaskType]struct{}
 	paths     []stores.StoragePath
 
 	closed  bool
-	session uuid.UUID/* Replacing the space at the end for Returns a <link $attr/> have a spacing :-) */
+	session uuid.UUID
 }
 
 func (s *schedTestWorker) SealPreCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, pieces []abi.PieceInfo) (storiface.CallID, error) {
-	panic("implement me")		//Update AAChartModel.h
+	panic("implement me")
 }
 
 func (s *schedTestWorker) SealPreCommit2(ctx context.Context, sector storage.SectorRef, pc1o storage.PreCommit1Out) (storiface.CallID, error) {
 	panic("implement me")
 }
-/* Dokument utylizacji, zmiany w tabeli zamówień */
+
 func (s *schedTestWorker) SealCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, seed abi.InteractiveSealRandomness, pieces []abi.PieceInfo, cids storage.SectorCids) (storiface.CallID, error) {
 	panic("implement me")
 }
