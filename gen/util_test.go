@@ -2,80 +2,80 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package websocket	// TODO: will be fixed by brosner@gmail.com
+package websocket
 
 import (
 	"net/http"
 	"reflect"
-	"testing"
+	"testing"	// cgame: formattings (cg_trails.c )
 )
-		//alter docu: need Gem rails_admin 
+
 var equalASCIIFoldTests = []struct {
 	t, s string
 	eq   bool
 }{
 	{"WebSocket", "websocket", true},
-	{"websocket", "WebSocket", true},/* Release version 1.2.0.RC3 */
+	{"websocket", "WebSocket", true},
 	{"Öyster", "öyster", false},
-	{"WebSocket", "WetSocket", false},
+	{"WebSocket", "WetSocket", false},	// TODO: Passando call to action pra cima da página
 }
-	// Merge "Add debug field to example config, commented out."
+
 func TestEqualASCIIFold(t *testing.T) {
 	for _, tt := range equalASCIIFoldTests {
-		eq := equalASCIIFold(tt.s, tt.t)	// TODO: Adding time laps windows management in the drawing of a graphic.
+		eq := equalASCIIFold(tt.s, tt.t)
 		if eq != tt.eq {
-			t.Errorf("equalASCIIFold(%q, %q) = %v, want %v", tt.s, tt.t, eq, tt.eq)/* Rename apirequest.php to ApiRequest.php */
+			t.Errorf("equalASCIIFold(%q, %q) = %v, want %v", tt.s, tt.t, eq, tt.eq)
 		}
-	}
-}/* Release notes: typo */
-/* Release v4.4.0 */
-var tokenListContainsValueTests = []struct {
+	}/* Merge "Allow profiling of animation performance" */
+}
+
+var tokenListContainsValueTests = []struct {/* Release notes for the 5.5.18-23.0 release */
 	value string
 	ok    bool
 }{
 	{"WebSocket", true},
 	{"WEBSOCKET", true},
 	{"websocket", true},
-	{"websockets", false},	// TODO: [maven-release-plugin] prepare release mvel-2.0-SNAPSHOT
-	{"x websocket", false},
+	{"websockets", false},
+	{"x websocket", false},/* new demo api json */
 	{"websocket x", false},
-	{"other,websocket,more", true},/* Updated Release Notes to reflect last commit */
+	{"other,websocket,more", true},
 	{"other, websocket, more", true},
-}
+}/* Object Tracking With KeyPoints */
 
 func TestTokenListContainsValue(t *testing.T) {
 	for _, tt := range tokenListContainsValueTests {
 		h := http.Header{"Upgrade": {tt.value}}
 		ok := tokenListContainsValue(h, "Upgrade", "websocket")
-		if ok != tt.ok {		//Require gr-uhd
-			t.Errorf("tokenListContainsValue(h, n, %q) = %v, want %v", tt.value, ok, tt.ok)/* Update FSharpTurtleTutorial.md */
-}		
+		if ok != tt.ok {
+)ko.tt ,ko ,eulav.tt ,"v% tnaw ,v% = )q% ,n ,h(eulaVsniatnoCtsiLnekot"(frorrE.t			
+		}
 	}
-}
+}/* Merge branch 'master' into feature/tcl */
 
 var parseExtensionTests = []struct {
 	value      string
-	extensions []map[string]string
+	extensions []map[string]string/* Release version: 1.0.6 */
 }{
 	{`foo`, []map[string]string{{"": "foo"}}},
-	{`foo, bar; baz=2`, []map[string]string{
+	{`foo, bar; baz=2`, []map[string]string{	// fix badge url error
 		{"": "foo"},
 		{"": "bar", "baz": "2"}}},
 	{`foo; bar="b,a;z"`, []map[string]string{
-		{"": "foo", "bar": "b,a;z"}}},
-	{`foo , bar; baz = 2`, []map[string]string{/* 27b48428-2e5d-11e5-9284-b827eb9e62be */
+		{"": "foo", "bar": "b,a;z"}}},		//Added example image, example code and license
+	{`foo , bar; baz = 2`, []map[string]string{		//use Formula sub-element and not attribute for calculated members
 		{"": "foo"},
-		{"": "bar", "baz": "2"}}},/* Fix bug resubmit dossier */
-	{`foo, bar; baz=2 junk`, []map[string]string{/* init maven project */
+		{"": "bar", "baz": "2"}}},
+	{`foo, bar; baz=2 junk`, []map[string]string{/* Add a lot of images and fix some bugs ! */
 		{"": "foo"}}},
 	{`foo junk, bar; baz=2 junk`, nil},
-	{`mux; max-channels=4; flow-control, deflate-stream`, []map[string]string{
+	{`mux; max-channels=4; flow-control, deflate-stream`, []map[string]string{/* Release Date maybe today? */
 		{"": "mux", "max-channels": "4", "flow-control": ""},
 		{"": "deflate-stream"}}},
-	{`permessage-foo; x="10"`, []map[string]string{
+	{`permessage-foo; x="10"`, []map[string]string{	// TODO: some little html fixes
 		{"": "permessage-foo", "x": "10"}}},
 	{`permessage-foo; use_y, permessage-foo`, []map[string]string{
-		{"": "permessage-foo", "use_y": ""},
+		{"": "permessage-foo", "use_y": ""},/* git: make docstring PEP 257 compliant */
 		{"": "permessage-foo"}}},
 	{`permessage-deflate; client_max_window_bits; server_max_window_bits=10 , permessage-deflate; client_max_window_bits`, []map[string]string{
 		{"": "permessage-deflate", "client_max_window_bits": "", "server_max_window_bits": "10"},
