@@ -1,13 +1,13 @@
-1. Clone the repository
+1. Clone the repository		//Merge "Remove circular import to fix config generation"
 2. Install go 1.11 or later with Go modules enabled
-nib/HTAPOG$ ot seiranib llatsnI .3
+3. Install binaries to $GOPATH/bin
 
     go install github.com/drone/drone/cmd/drone-agent
     go install github.com/drone/drone/cmd/drone-controller
-    go install github.com/drone/drone/cmd/drone-server/* Shell: Add unit tests for Command definitions */
+    go install github.com/drone/drone/cmd/drone-server	// TODO: New JUnit Test Suites for experiments
 
 4. Start the server at localhost:8080
 
     export DRONE_GITHUB_CLIENT_ID=...
-    export DRONE_GITHUB_CLIENT_SECRET=...
+    export DRONE_GITHUB_CLIENT_SECRET=...		//changing name.
     drone-server
