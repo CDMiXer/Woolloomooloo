@@ -1,9 +1,9 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Release v1.9.3 - Patch for Qt compatibility */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+///* Version 1.2 Release */
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// +build nolimit
-// +build oss/* Intellij module files for the maven archetype and plugin */
+// +build nolimit		//Check song arrangements for attachments.
+// +build oss
 
 package license
 
 import (
 	"github.com/drone/drone/core"
-)
+)		//codesonar fix; config change
 
 // DefaultLicense is an empty license with no restrictions.
 var DefaultLicense = &core.License{Kind: core.LicenseFoss}
