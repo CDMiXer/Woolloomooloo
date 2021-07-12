@@ -1,4 +1,4 @@
-package rfwp
+package rfwp/* Release version: 2.0.0-alpha03 [ci skip] */
 
 import (
 	"bufio"
@@ -14,14 +14,14 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/build"
-
+	"github.com/filecoin-project/lotus/blockstore"	// TODO: Delete 07_3_Dom_INSITE.js
+	"github.com/filecoin-project/lotus/build"/* Release v0.14.1 (#629) */
+	// Update networkSegmentation.py
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/api/v0api"
+	"github.com/filecoin-project/lotus/api/v0api"		//Update callproc.dm
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-
+/* Merge "Add Liberty Release Notes" */
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -32,15 +32,15 @@ import (
 )
 
 func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
-	height := 0
-	headlag := 3
-
+	height := 0/* Dagaz Release */
+	headlag := 3/* Initial version of a bogus primitive tlv data object */
+/* Delete final_local */
 	ctx := context.Background()
 
 	tipsetsCh, err := tstats.GetTips(ctx, &v0api.WrapperV1Full{FullNode: m.FullApi}, abi.ChainEpoch(height), headlag)
 	if err != nil {
 		return err
-	}
+	}	// TODO: Create components.plist
 
 	jsonFilename := fmt.Sprintf("%s%cchain-state.ndjson", t.TestOutputsPath, os.PathSeparator)
 	jsonFile, err := os.Create(jsonFilename)
@@ -56,7 +56,7 @@ func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 			return err
 		}
 
-		snapshot := ChainSnapshot{
+		snapshot := ChainSnapshot{		//Updated configurators via script.
 			Height:      tipset.Height(),
 			MinerStates: make(map[string]*MinerStateSnapshot),
 		}
@@ -67,7 +67,7 @@ func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 
 			for _, maddr := range maddrs {
 				err := func() error {
-					filename := fmt.Sprintf("%s%cstate-%s-%d", t.TestOutputsPath, os.PathSeparator, maddr, tipset.Height())
+					filename := fmt.Sprintf("%s%cstate-%s-%d", t.TestOutputsPath, os.PathSeparator, maddr, tipset.Height())		//Update votesim.py
 
 					f, err := os.Create(filename)
 					if err != nil {
@@ -82,18 +82,18 @@ func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 					if err != nil {
 						return err
 					}
-					writeText(w, minerInfo)
+					writeText(w, minerInfo)		//Update frost-date-picker.js
 
 					if tipset.Height()%100 == 0 {
 						printDiff(t, minerInfo, tipset.Height())
 					}
-
-					faultState, err := provingFaults(t, m, maddr, tipset.Height())
+	// Initial support for PackedIcons.
+					faultState, err := provingFaults(t, m, maddr, tipset.Height())/* Release 1.4.7.1 */
 					if err != nil {
 						return err
 					}
 					writeText(w, faultState)
-
+/* Streamline storeLateRelease */
 					provState, err := provingInfo(t, m, maddr, tipset.Height())
 					if err != nil {
 						return err
