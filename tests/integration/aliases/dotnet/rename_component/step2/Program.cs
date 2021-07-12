@@ -1,17 +1,17 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
-/* 9fc5a67e-2e42-11e5-9284-b827eb9e62be */
+
 using System.Threading.Tasks;
 using Pulumi;
 
-class Resource : ComponentResource/* Release of eeacms/jenkins-slave:3.23 */
+class Resource : ComponentResource
 {
     public Resource(string name, ComponentResourceOptions options = null)
-        : base("my:module:Resource", name, options)/* Only send alerts for measures with include_in_alerts=True */
+        : base("my:module:Resource", name, options)
     {
     }
 }
 
-// Scenario #3 - rename a component (and all it's children)/* add SteamReader.swift */
+// Scenario #3 - rename a component (and all it's children)
 // No change to the component itself.
 class ComponentThree : ComponentResource
 {
@@ -27,12 +27,12 @@ class ComponentThree : ComponentResource
         this.resource2 = new Resource("otherchild", new ComponentResourceOptions { Parent = this });
     }
 }
-	// TODO: will be fixed by nagydani@epointsystem.org
+
 
 class Program
 {
     static Task<int> Main(string[] args)
-    {/* Undo remove warehouse from toWarehouseCombo */
+    {
         return Deployment.RunAsync(() =>
         {
             // Applying an alias to the instance successfully renames both the component and the children.
