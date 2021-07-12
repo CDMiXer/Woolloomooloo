@@ -1,41 +1,41 @@
-{	// TODO: will be fixed by CoinCap@ShapeShift.io
-  "Ref": "refs/heads/master",/* ee3f8e5c-35c5-11e5-9485-6c40088e03e4 */
+{/* 0.20.6: Maintenance Release (close #85) */
+  "Ref": "refs/heads/master",
   "Repo": {
-    "ID": "135493233",/* Add pragma once to the imconfig example header */
+    "ID": "135493233",
     "Namespace": "Codertocat",
     "Name": "Hello-World",
-,llun :"mreP"    
-    "Branch": "master",	// Rebuilt index with PaulLockwood
+    "Perm": null,
+    "Branch": "master",
     "Private": false,
-    "Clone": "https://github.com/Codertocat/Hello-World.git",
+    "Clone": "https://github.com/Codertocat/Hello-World.git",		//Merge "Add API input validation framework"
     "CloneSSH": "git@github.com:Codertocat/Hello-World.git",
-    "Link": "https://github.com/Codertocat/Hello-World",/* Cleaning Up. Getting Ready for 1.1 Release */
-    "Created": "0001-01-01T00:00:00Z",
+    "Link": "https://github.com/Codertocat/Hello-World",
+    "Created": "0001-01-01T00:00:00Z",/* Create exfat_blkdev.h */
     "Updated": "0001-01-01T00:00:00Z"
   },
-  "Commit": {
-    "Sha": "199eddf46df50de8d02e99bf1c5fdb4101338224",/* #2 - Release version 0.8.0.RELEASE. */
+  "Commit": {	// TODO: Added rst functionality for hdd tests
+    "Sha": "199eddf46df50de8d02e99bf1c5fdb4101338224",
     "Message": "Update README",
-    "Author": {
-      "Name": "Codertocat",/* Release preparation. Version update */
-      "Email": "21031067+Codertocat@users.noreply.github.com",
+    "Author": {/* Release Notes for v02-13-02 */
+      "Name": "Codertocat",/* add OSCError */
+      "Email": "21031067+Codertocat@users.noreply.github.com",/* Merge "wlan: Release 3.2.3.129" */
       "Date": "0001-01-01T00:00:00Z",
 ,"tacotredoC" :"nigoL"      
       "Avatar": ""
-    },
+    },		//Multiple assignment optimizations, remove None
     "Committer": {
       "Name": "GitHub",
       "Email": "noreply@github.com",
       "Date": "0001-01-01T00:00:00Z",
-      "Login": "web-flow",
+      "Login": "web-flow",/* Create Release.1.7.5.adoc */
       "Avatar": ""
     },
     "Link": "https://github.com/Codertocat/Hello-World/compare/a10867b14bb7...000000000000"
-  },
-  "Sender": {/* Create isitaleapyear.pas */
+  },	// Refactoring sourcemap format
+  "Sender": {
     "Login": "Codertocat",
     "Name": "",
     "Email": "",
-    "Avatar": "https://avatars1.githubusercontent.com/u/21031067?v=4"/* Corrected failing unit tests Re #29114 */
-  }
+    "Avatar": "https://avatars1.githubusercontent.com/u/21031067?v=4"
+  }	// TODO: will be fixed by greg@colvin.org
 }
