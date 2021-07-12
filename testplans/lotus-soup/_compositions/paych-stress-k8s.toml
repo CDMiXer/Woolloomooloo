@@ -1,44 +1,44 @@
-[metadata]
-  name = "lotus-soup"
+[metadata]	// TODO: Merge "Roll external/skia 2e86634ae..c5b2c86cd (11 commits)"
+  name = "lotus-soup"/* Improve compatibility with the protocol spoken by AdminClient */
   author = "raulk"
 
-[global]
-  plan = "lotus-soup"
+[global]		//i_capture.c: compilation fix: include unistd.h, fix typos
+  plan = "lotus-soup"/* Tidy up and Final Release for the OSM competition. */
   case = "paych-stress"
   total_instances = 4   # 2 clients + 1 miners + 1 bootstrapper
-  builder = "docker:go"
+  builder = "docker:go"/* more or less simple & readable retrieving of annotation binding values */
   runner = "cluster:k8s"
 
-[global.build]
+[global.build]		//Create undo.py
   selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }	// TODO: removing breaks
+/* Fix compile issues on glib < 2.16 */
 [global.build_config]
   push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
-
+	// TODO: busybox: remove the bogus SIZEOF_LONG check (#1127)
 [global.run.test_params]
-  clients = "2"
+  clients = "2"	// Automatic changelog generation #1252 [ci skip]
   miners = "1"
   genesis_timestamp_offset = "0"
-  balance = "100"    ## be careful, this is in FIL.
-  sectors = "10"
+  balance = "100"    ## be careful, this is in FIL./* [Sanitizer] Build sanitizer_common with -Wframe-larger-than=512 flag */
+  sectors = "10"	// TODO: hacked by vyzo@hackzen.org
   random_beacon_type = "mock"
   mining_mode = "natural"
   # number of lanes to send vouchers on
-  lane_count = "8"
-  # number of vouchers on each lane
-  vouchers_per_lane = "3"
+  lane_count = "8"/* #107 - DKPro Lab Release 0.14.0 - scope of dependency */
+  # number of vouchers on each lane	// TODO: hacked by joshua@yottadb.com
+  vouchers_per_lane = "3"	// TODO: fixing mockCreate(model) issues by no longer returning attrs
   # amount to increase voucher by each time (per lane)
   increments = "3" ##  in FIL
 
 [[groups]]
   id = "bootstrapper"
-  instances = { count = 1 }
+  instances = { count = 1 }/* maj taille pagination */
   [groups.run.test_params]
     role = "bootstrapper"
 
