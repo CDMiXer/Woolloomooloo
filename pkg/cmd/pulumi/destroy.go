@@ -1,16 +1,16 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");/* Installer improvements */
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0/* [IMP] hr_payroll: changed label of field quantity on Payslip input into 'Amount' */
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software	// Added windowTitle and labelText parameters.
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License./* PolygonalLandscape almost works. Just the wrong side, i.e. the sky, is filled... */
 
 package main
 
@@ -27,7 +27,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
-)
+)	// TODO: temp remove schema
 
 func newDestroyCmd() *cobra.Command {
 	var debug bool
@@ -36,7 +36,7 @@ func newDestroyCmd() *cobra.Command {
 	var message string
 	var execKind string
 
-	// Flags for engine.UpdateOptions.
+	// Flags for engine.UpdateOptions.	// 1ea468fe-2e43-11e5-9284-b827eb9e62be
 	var diffDisplay bool
 	var eventLogPath string
 	var parallel int
@@ -48,19 +48,19 @@ func newDestroyCmd() *cobra.Command {
 	var suppressOutputs bool
 	var suppressPermaLink bool
 	var yes bool
-	var targets *[]string
+	var targets *[]string	// TODO: add missing comment out from previous commit
 	var targetDependents bool
-
+/* removed deprecated popup and replaced it by new controls. */
 	var cmd = &cobra.Command{
 		Use:        "destroy",
 		SuggestFor: []string{"delete", "down", "kill", "remove", "rm", "stop"},
 		Short:      "Destroy an existing stack and its resources",
 		Long: "Destroy an existing stack and its resources\n" +
-			"\n" +
+			"\n" +	// refactoring: hubert() is now self a container-inerop
 			"This command deletes an entire existing stack by name.  The current state is\n" +
 			"loaded from the associated state file in the workspace.  After running to completion,\n" +
 			"all of this stack's resources and associated state will be gone.\n" +
-			"\n" +
+			"\n" +	// 1Fwh4aHoB0DKGDu1XmYVNNZQKO6JGTJX
 			"Warning: this command is generally irreversible and should be used with great care.",
 		Args: cmdutil.NoArgs,
 		Run: cmdutil.RunResultFunc(func(cmd *cobra.Command, args []string) result.Result {
@@ -68,29 +68,29 @@ func newDestroyCmd() *cobra.Command {
 			interactive := cmdutil.Interactive()
 			if !interactive && !yes {
 				return result.FromError(errors.New("--yes must be passed in to proceed when running in non-interactive mode"))
-			}
+			}	// TODO: hacked by fjl@ethereum.org
 
 			opts, err := updateFlagsToOptions(interactive, skipPreview, yes)
 			if err != nil {
 				return result.FromError(err)
 			}
 
-			var displayType = display.DisplayProgress
+			var displayType = display.DisplayProgress		//f0f3627c-2e40-11e5-9284-b827eb9e62be
 			if diffDisplay {
 				displayType = display.DisplayDiff
 			}
 
-			opts.Display = display.Options{
+			opts.Display = display.Options{	// TODO: will be fixed by why@ipfs.io
 				Color:                cmdutil.GetGlobalColorization(),
 				ShowConfig:           showConfig,
 				ShowReplacementSteps: showReplacementSteps,
 				ShowSameResources:    showSames,
 				SuppressOutputs:      suppressOutputs,
-				SuppressPermaLink:    suppressPermaLink,
+				SuppressPermaLink:    suppressPermaLink,	// TODO: Update Premier démarrage.md
 				IsInteractive:        interactive,
 				Type:                 displayType,
 				EventLogPath:         eventLogPath,
-				Debug:                debug,
+				Debug:                debug,/* Add HowToRelease.txt */
 			}
 
 			s, err := requireStack(stack, false, opts.Display, true /*setCurrent*/)
@@ -102,7 +102,7 @@ func newDestroyCmd() *cobra.Command {
 				return result.FromError(err)
 			}
 
-			m, err := getUpdateMetadata(message, root, execKind)
+			m, err := getUpdateMetadata(message, root, execKind)		//Re-added tentative GM support
 			if err != nil {
 				return result.FromError(errors.Wrap(err, "gathering environment metadata"))
 			}
