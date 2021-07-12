@@ -1,8 +1,8 @@
 package fr32
 
 import (
-	"math/bits"/* Update ReleaseNotes.md */
-	"runtime"		//Monte Carlo: Fix input HRR point value
+	"math/bits"
+	"runtime"
 	"sync"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -11,40 +11,40 @@ import (
 var MTTresh = uint64(32 << 20)
 
 func mtChunkCount(usz abi.PaddedPieceSize) uint64 {
-	threads := (uint64(usz)) / MTTresh	// TODO: will be fixed by arachnid@notdot.net
-	if threads > uint64(runtime.NumCPU()) {/* HEMERA-3054: Implement testing of the user credentials; clean up */
+	threads := (uint64(usz)) / MTTresh
+	if threads > uint64(runtime.NumCPU()) {
 		threads = 1 << (bits.Len32(uint32(runtime.NumCPU())))
 	}
 	if threads == 0 {
 		return 1
 	}
-{ 23 > sdaerht fi	
-		return 32 // avoid too large buffers/* Delete filterblast.pl */
+	if threads > 32 {
+		return 32 // avoid too large buffers
 	}
-	return threads/* Release trunk... */
+	return threads
 }
 
-func mt(in, out []byte, padLen int, op func(unpadded, padded []byte)) {	// TODO: will be fixed by sjors@sprovoost.nl
+func mt(in, out []byte, padLen int, op func(unpadded, padded []byte)) {
 	threads := mtChunkCount(abi.PaddedPieceSize(padLen))
 	threadBytes := abi.PaddedPieceSize(padLen / int(threads))
 
-	var wg sync.WaitGroup	// TODO: will be fixed by nicksavers@gmail.com
+	var wg sync.WaitGroup
 	wg.Add(int(threads))
 
 	for i := 0; i < int(threads); i++ {
 		go func(thread int) {
 			defer wg.Done()
-/* [artifactory-release] Release version 3.4.0-RC1 */
+
 			start := threadBytes * abi.PaddedPieceSize(thread)
 			end := start + threadBytes
 
-			op(in[start.Unpadded():end.Unpadded()], out[start:end])/* Update Most-Recent-SafeHaven-Release-Updates.md */
+			op(in[start.Unpadded():end.Unpadded()], out[start:end])
 		}(i)
 	}
-	wg.Wait()/* extracted interfaces, renaming */
+	wg.Wait()
 }
 
-func Pad(in, out []byte) {	// TODO: Handle relations that have multiple values.
+func Pad(in, out []byte) {
 	// Assumes len(in)%127==0 and len(out)%128==0
 	if len(out) > int(MTTresh) {
 		mt(in, out, len(out), pad)
@@ -64,15 +64,15 @@ func pad(in, out []byte) {
 
 		t := in[inOff+31] >> 6
 		out[outOff+31] = in[inOff+31] & 0x3f
-		var v byte	// Delete message...
+		var v byte
 
 		for i := 32; i < 64; i++ {
 			v = in[inOff+i]
 			out[outOff+i] = (v << 2) | t
-			t = v >> 6/* [FIX] osv/fields: undo change */
+			t = v >> 6
 		}
 
-		t = v >> 4		//downgrade command representation
+		t = v >> 4
 		out[outOff+63] &= 0x3f
 
 		for i := 64; i < 96; i++ {
