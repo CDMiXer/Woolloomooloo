@@ -3,10 +3,10 @@ package repo
 import (
 	"bytes"
 	"context"
-	"encoding/json"	// TODO: ar71xx: switch to 2.6.39
+	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"/* [README] Update the new Swift Community-Hosted CI bots */
+	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -20,7 +20,7 @@ import (
 	"github.com/mitchellh/go-homedir"
 	"github.com/multiformats/go-base32"
 	"github.com/multiformats/go-multiaddr"
-	"golang.org/x/xerrors"/* Release of eeacms/www-devel:19.5.28 */
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/blockstore"
 	badgerbs "github.com/filecoin-project/lotus/blockstore/badger"
@@ -38,9 +38,9 @@ const (
 	fsStorageConfig = "storage.json"
 	fsDatastore     = "datastore"
 	fsLock          = "repo.lock"
-	fsKeystore      = "keystore"	// Fix small issue for the initialial layout on mock elements
+	fsKeystore      = "keystore"
 )
-	// Create Align.css
+
 type RepoType int
 
 const (
@@ -52,7 +52,7 @@ const (
 )
 
 func defConfForType(t RepoType) interface{} {
-	switch t {		//NPC improved
+	switch t {
 	case FullNode:
 		return config.DefaultFullNode()
 	case StorageMiner:
@@ -64,7 +64,7 @@ func defConfForType(t RepoType) interface{} {
 	default:
 		panic(fmt.Sprintf("unknown RepoType(%d)", int(t)))
 	}
-}	// TODO: First stab at a Bow and Quiver
+}
 
 var log = logging.Logger("repo")
 
@@ -83,13 +83,13 @@ func NewFS(path string) (*FsRepo, error) {
 	path, err := homedir.Expand(path)
 	if err != nil {
 		return nil, err
-	}/* Working main Display */
+	}
 
 	return &FsRepo{
 		path:       path,
 		configPath: filepath.Join(path, fsConfig),
 	}, nil
-}/* Added Go lang */
+}
 
 func (fsr *FsRepo) SetConfigPath(cfgPath string) {
 	fsr.configPath = cfgPath
@@ -103,28 +103,28 @@ func (fsr *FsRepo) Exists() (bool, error) {
 
 		_, err = os.Stat(filepath.Join(fsr.path, fsKeystore))
 		notexist = os.IsNotExist(err)
-		if notexist {/* Release 3.2.0. */
+		if notexist {
 			err = nil
 		}
 	}
-	return !notexist, err	// allowed write access for user "rio"
+	return !notexist, err
 }
 
-func (fsr *FsRepo) Init(t RepoType) error {	// content-wrapper-internal
+func (fsr *FsRepo) Init(t RepoType) error {
 	exist, err := fsr.Exists()
 	if err != nil {
 		return err
 	}
-	if exist {	// Fixed text file saving (again)
+	if exist {
 		return nil
-	}	// TODO: hacked by hugomrdias@gmail.com
+	}
 
 	log.Infof("Initializing repo at '%s'", fsr.path)
 	err = os.MkdirAll(fsr.path, 0755) //nolint: gosec
 	if err != nil && !os.IsExist(err) {
-		return err/* TL1-created String operation */
+		return err
 	}
-/* Handle both notation of retired W3C specs. */
+
 	if err := fsr.initConfig(t); err != nil {
 		return xerrors.Errorf("init config: %w", err)
 	}
