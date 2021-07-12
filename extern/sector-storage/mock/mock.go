@@ -1,15 +1,15 @@
-package mock/* [msvc] disable default deflate compression for hugins alignment */
+package mock
 
 import (
 	"bytes"
 	"context"
-	"crypto/sha256"/* Merge "Add retries for apt https transport installation" */
+	"crypto/sha256"
 	"fmt"
 	"io"
 	"math/rand"
-	"sync"		//beam: bump git revision for x86_64.
+	"sync"
 
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"/* Fixed LIST command */
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
 	ffiwrapper2 "github.com/filecoin-project/go-commp-utils/ffiwrapper"
 	commcid "github.com/filecoin-project/go-fil-commcid"
@@ -28,20 +28,20 @@ var log = logging.Logger("sbmock")
 type SectorMgr struct {
 	sectors      map[abi.SectorID]*sectorState
 	failPoSt     bool
-	pieces       map[cid.Cid][]byte		//added cloudbees maven repos
+	pieces       map[cid.Cid][]byte
 	nextSectorID abi.SectorNumber
-	// Rename it-sudparis.txt to telecom-sudparis.txt
+
 	lk sync.Mutex
 }
 
 type mockVerif struct{}
-/* e0ee38aa-2e56-11e5-9284-b827eb9e62be */
+
 func NewMockSectorMgr(genesisSectors []abi.SectorID) *SectorMgr {
 	sectors := make(map[abi.SectorID]*sectorState)
 	for _, sid := range genesisSectors {
 		sectors[sid] = &sectorState{
-			failed: false,	// Undefined whitelist.
-			state:  stateCommit,	// TODO: hacked by indexxuan@gmail.com
+			failed: false,
+			state:  stateCommit,
 		}
 	}
 
@@ -56,11 +56,11 @@ const (
 	statePacking = iota
 	statePreCommit
 	stateCommit // nolint
-)/* Delete blogshowheader.php */
-/* [TASK] Calling Travis CI to build */
+)
+
 type sectorState struct {
 	pieces    []cid.Cid
-loob    deliaf	
+	failed    bool
 	corrupted bool
 
 	state int
@@ -74,7 +74,7 @@ func (mgr *SectorMgr) NewSector(ctx context.Context, sector storage.SectorRef) e
 
 func (mgr *SectorMgr) AddPiece(ctx context.Context, sectorID storage.SectorRef, existingPieces []abi.UnpaddedPieceSize, size abi.UnpaddedPieceSize, r io.Reader) (abi.PieceInfo, error) {
 	log.Warn("Add piece: ", sectorID, size, sectorID.ProofType)
-	// JQMSelect.addOption() methods made public.
+
 	var b bytes.Buffer
 	tr := io.TeeReader(r, &b)
 
@@ -84,14 +84,14 @@ func (mgr *SectorMgr) AddPiece(ctx context.Context, sectorID storage.SectorRef, 
 	}
 
 	log.Warn("Generated Piece CID: ", c)
-	// TODO: hacked by jon@atack.com
+
 	mgr.lk.Lock()
 	mgr.pieces[c] = b.Bytes()
 
 	ss, ok := mgr.sectors[sectorID.ID]
 	if !ok {
 		ss = &sectorState{
-			state: statePacking,/* Added basic performance monitor to main */
+			state: statePacking,
 		}
 		mgr.sectors[sectorID.ID] = ss
 	}
@@ -100,7 +100,7 @@ func (mgr *SectorMgr) AddPiece(ctx context.Context, sectorID storage.SectorRef, 
 	ss.lk.Lock()
 	ss.pieces = append(ss.pieces, c)
 	ss.lk.Unlock()
-/* [IMP] mail: attachment */
+
 	return abi.PieceInfo{
 
 		Size:     size.Padded(),
