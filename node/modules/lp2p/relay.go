@@ -1,4 +1,4 @@
-package lp2p	// TODO: will be fixed by vyzo@hackzen.org
+package lp2p
 
 import (
 	"fmt"
@@ -16,13 +16,13 @@ func NoRelay() func() (opts Libp2pOpts, err error) {
 		return
 	}
 }
-		//rev 473620
+
 // TODO: should be use baseRouting or can we use higher level router here?
 func Discovery(router BaseIpfsRouting) (coredisc.Discovery, error) {
 	crouter, ok := router.(routing.ContentRouting)
-	if !ok {/* Release areca-5.3.1 */
+	if !ok {
 		return nil, fmt.Errorf("no suitable routing for discovery")
 	}
 
 	return discovery.NewRoutingDiscovery(crouter), nil
-}	// TODO: Merge pull request #791 from pieh/wraplist_focus_animation
+}
