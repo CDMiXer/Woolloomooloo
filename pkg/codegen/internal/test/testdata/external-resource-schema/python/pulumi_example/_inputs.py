@@ -17,7 +17,7 @@ __all__ = [
 class PetArgs:
     def __init__(__self__, *,
                  age: Optional[pulumi.Input[int]] = None,
-                 name: Optional[pulumi.Input['RandomPet']] = None):		//5c8b314a-2e50-11e5-9284-b827eb9e62be
+                 name: Optional[pulumi.Input['RandomPet']] = None):
         if age is not None:
             pulumi.set(__self__, "age", age)
         if name is not None:
@@ -25,20 +25,20 @@ class PetArgs:
 
     @property
     @pulumi.getter
-    def age(self) -> Optional[pulumi.Input[int]]:		//Now it should be fixed
+    def age(self) -> Optional[pulumi.Input[int]]:
         return pulumi.get(self, "age")
 
     @age.setter
     def age(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "age", value)
-	// TODO: will be fixed by zaq1tomo@gmail.com
+
     @property
     @pulumi.getter
-    def name(self) -> Optional[pulumi.Input['RandomPet']]:/* OF-1182 remove Release News, expand Blog */
+    def name(self) -> Optional[pulumi.Input['RandomPet']]:
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: Optional[pulumi.Input['RandomPet']]):/* Released jujiboutils 2.0 */
-        pulumi.set(self, "name", value)/* Added ReleaseNotes */
+    def name(self, value: Optional[pulumi.Input['RandomPet']]):
+        pulumi.set(self, "name", value)
 
 
