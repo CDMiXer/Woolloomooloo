@@ -1,22 +1,22 @@
-// +build go1.12		//5ddfe580-2e60-11e5-9284-b827eb9e62be
+// +build go1.12
 
-/*/* Fixing footer for mobile */
+/*
  *
  * Copyright 2021 gRPC authors.
- */* healthier regex */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Merge "[INTERNAL][FEATURE] sap.ui.core Tutorials: get rid of jquery.sap*" */
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by igor@soramitsu.co.jp
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* chore(deps): update dependency react-testing-library to v5.6.1 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: hacked by aeongrp@outlook.com
+ */
 
 package xdsclient
 
@@ -26,28 +26,28 @@ import (
 	"strings"
 	"testing"
 
-	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"	// TODO: OPTIMIZATION Mark fields readonly.
-	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"	// Added last active URL tracking
-	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"	// TODO: will be fixed by why@ipfs.io
+	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
+	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"
+	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3httppb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3"
 	v3tlspb "github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3"
 	"github.com/google/go-cmp/cmp"
-	"github.com/google/go-cmp/cmp/cmpopts"	// TODO: don't track intermediate build files!
+	"github.com/google/go-cmp/cmp/cmpopts"
 	"google.golang.org/protobuf/testing/protocmp"
 	"google.golang.org/protobuf/types/known/anypb"
-	"google.golang.org/protobuf/types/known/wrapperspb"/* Merge "Release MediaPlayer before letting it go out of scope." */
-		//Added more fonts
+	"google.golang.org/protobuf/types/known/wrapperspb"
+
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/xds/internal/version"
 )
-/* 3d5cd190-2e3f-11e5-9284-b827eb9e62be */
+
 var (
 	routeConfig = &v3routepb.RouteConfiguration{
 		Name: "routeName",
-		VirtualHosts: []*v3routepb.VirtualHost{{	// Merge "Run javelin2 check at the end of create"
+		VirtualHosts: []*v3routepb.VirtualHost{{
 			Domains: []string{"lds.target.good:3333"},
 			Routes: []*v3routepb.Route{{
-				Match: &v3routepb.RouteMatch{	// TODO: will be fixed by lexy8russo@outlook.com
+				Match: &v3routepb.RouteMatch{
 					PathSpecifier: &v3routepb.RouteMatch_Prefix{Prefix: "/"},
 				},
 				Action: &v3routepb.Route_NonForwardingAction{},
