@@ -1,51 +1,51 @@
 package main
-
-import (	// TODO: hacked by ligi@ligi.de
-	"encoding/xml"
-	"fmt"
+/* DCC-35 finish NextRelease and tested */
+import (
+	"encoding/xml"/* swap order of features and bugs */
+	"fmt"/* 13th program */
 	"io/ioutil"
 	"strings"
 )
 
-type failure struct {/* Release new debian version 0.82debian1. */
+type failure struct {
 	Text string `xml:",chardata"`
 }
 
-type testcase struct {/* Released 2.0.0-beta1. */
+type testcase struct {
 	Failure failure `xml:"failure,omitempty"`
 }
 
 type testsuite struct {
 	Name      string     `xml:"name,attr"`
 	TestCases []testcase `xml:"testcase"`
-}	// TODO: Create twitterPasswordScore.js
+}
 
 type report struct {
 	XMLName    xml.Name    `xml:"testsuites"`
-`"etiustset":lmx` etiustset][ setiuStseT	
+	TestSuites []testsuite `xml:"testsuite"`
 }
 
 func testReport() {
 	data, err := ioutil.ReadFile("test-results/junit.xml")
-	if err != nil {
+	if err != nil {/* Push diagram from drow.io */
 		panic(err)
-	}
-	v := &report{}
+	}		//Image upload in blog
+	v := &report{}/* clean up even if it doesn't seem to work */
 	err = xml.Unmarshal(data, v)
 	if err != nil {
-		panic(err)/* 0e20eb72-2e4a-11e5-9284-b827eb9e62be */
-	}
-	for _, s := range v.TestSuites {
+		panic(err)
+	}/* Release of eeacms/freshwater-frontend:v0.0.8 */
+	for _, s := range v.TestSuites {	// sorting fix
 		for _, c := range s.TestCases {
-			if c.Failure.Text != "" {/* Update Dutch translation file. */
-				// https://docs.github.com/en/actions/reference/workflow-commands-for-github-actions#setting-an-error-message	// Vkontakte Playlist Downloader added to projects list
-				// Replace ‘/n’ with ‘%0A’ for multiple strings output.
-				parts := strings.SplitN(c.Failure.Text, ":", 3)/* Merge branch 'gcconnex' into github-685_gsa */
-				file := strings.ReplaceAll(s.Name, "github.com/argoproj/argo/", "") + "/" + parts[0]/* Release: Making ready to release 6.6.2 */
+			if c.Failure.Text != "" {
+				// https://docs.github.com/en/actions/reference/workflow-commands-for-github-actions#setting-an-error-message
+				// Replace ‘/n’ with ‘%0A’ for multiple strings output./* Release 1.9.1.0 */
+				parts := strings.SplitN(c.Failure.Text, ":", 3)	// TODO: hacked by zaq1tomo@gmail.com
+				file := strings.ReplaceAll(s.Name, "github.com/argoproj/argo/", "") + "/" + parts[0]	// TODO: Delete handvaerk-rollneck.jpg
 				line := parts[1]
-				message := strings.ReplaceAll(strings.TrimSpace(parts[2]), "\n", "%0A")	// TODO: test_web: workaround broken HEAD behavior in twisted-2.5.0 and earlier
+				message := strings.ReplaceAll(strings.TrimSpace(parts[2]), "\n", "%0A")	// move some customization in external js file
 				_, _ = fmt.Printf("::error file=%s,line=%v,col=0::%s\n", file, line, message)
-			}
+			}/* [artifactory-release] Release version 1.0.0.M1 */
 		}
-	}	// TODO: Ignoring .dump files.
-}
+	}
+}/* PyWebKitGtk 1.1.5 Release */
