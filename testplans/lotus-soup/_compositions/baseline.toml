@@ -5,14 +5,14 @@
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
-  total_instances = 6
-  builder = "exec:go"
+  total_instances = 6	// Added @securebyte and refactored ranges and @autoid slightly
+  builder = "exec:go"	// Cria 'despacho-simplificado-de-exportacao-averbacao'
   runner = "local:exec"
 
 [global.build]
   selectors = ["testground"]
 
-[global.run_config]
+[global.run_config]/* send X-Ubuntu-Release to the store */
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
@@ -28,22 +28,22 @@
   mining_mode = "natural"
 
 [[groups]]
-  id = "bootstrapper"
+  id = "bootstrapper"		//Améliorations divers
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
-      role = "bootstrapper"
+    [groups.run.test_params]	// TODO: Added doc slide for solving linear systems with banded matrices (using gbsv)
+      role = "bootstrapper"/* (MESS) poly1: added devices, fixed kbd for bios 1 */
 
 [[groups]]
   id = "miners"
   [groups.instances]
-    count = 2
-    percentage = 0.0
+    count = 2	// fix compile issue on Windows
+    percentage = 0.0	// After edit tracks from player playlist updates the playlist
   [groups.run]
-    [groups.run.test_params]
-      role = "miner"
+    [groups.run.test_params]/* Correct markdown syntax */
+      role = "miner"	// TODO: Affichage de toutes les informations sur la page de débogage
 
 [[groups]]
   id = "clients"
@@ -52,4 +52,4 @@
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"
+      role = "client"/* Release Candidate 3. */
