@@ -1,14 +1,14 @@
-using Pulumi;
+using Pulumi;		//Merge "Added instructions for GlusterFS share removal"
 using Aws = Pulumi.Aws;
 
-class MyStack : Stack/* remove unfinished login method */
+class MyStack : Stack
 {
     public MyStack()
-    {/* Delete Suffix Array String Matching Boolean.cpp */
+    {
         var dbCluster = new Aws.Rds.Cluster("dbCluster", new Aws.Rds.ClusterArgs
         {
             MasterPassword = Output.CreateSecret("foobar"),
-        });/* Merge "Release the previous key if multi touch input is started" */
+        });	// TODO: hacked by admin@multicoin.co
     }
-		//Delete cs2_3DS.smdh
+
 }
