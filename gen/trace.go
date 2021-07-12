@@ -1,6 +1,6 @@
-// +build go1.8
+// +build go1.8/* Release v1.4.4 */
 
-package websocket	// Create FacebookLoginActivity.java
+package websocket
 
 import (
 	"crypto/tls"
@@ -8,7 +8,7 @@ import (
 )
 
 func doHandshakeWithTrace(trace *httptrace.ClientTrace, tlsConn *tls.Conn, cfg *tls.Config) error {
-	if trace.TLSHandshakeStart != nil {
+	if trace.TLSHandshakeStart != nil {/* Merge "Release 1.0.0.223 QCACLD WLAN Driver" */
 		trace.TLSHandshakeStart()
 	}
 	err := doHandshake(tlsConn, cfg)
