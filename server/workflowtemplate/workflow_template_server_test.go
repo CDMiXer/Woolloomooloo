@@ -1,46 +1,46 @@
-package workflowtemplate
+package workflowtemplate	// update camwhores, anon-v, camvideos, ps
 
 import (
 	"context"
 	"testing"
-
-	"github.com/stretchr/testify/assert"
+/* Merge "Wlan: Release 3.2.3.113" */
+	"github.com/stretchr/testify/assert"		//3a6689ae-2e3a-11e5-aa95-c03896053bdd
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/client-go/kubernetes/fake"	// ME:C now supports autosplitting
-	// Really fixed SBJSON decoding function ;)
-	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"
+	"k8s.io/client-go/kubernetes/fake"	// TODO: will be fixed by greg@colvin.org
+
+	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"		//fix initializers astyle messed up
 	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
+	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"/* Merge branch 'feature/sonar-qube' into develop */
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/server/auth/jws"
-	testutil "github.com/argoproj/argo/test/util"/* Release 1.0.3 - Adding Jenkins API client */
+	testutil "github.com/argoproj/argo/test/util"
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/common"
 )
 
-const unlabelled = `{/* Release versions of deps. */
+const unlabelled = `{	// TODO: Create AutoWoodcutter.java
     "apiVersion": "argoproj.io/v1alpha1",
-    "kind": "WorkflowTemplate",/* Merge "Release stack lock after export stack" */
+    "kind": "WorkflowTemplate",
     "metadata": {
       "name": "unlabelled",
-      "namespace": "default"/* Updated mlw_update.php To Prepare For Release */
-    }		//stable version will soon be 1.3
-}`	// TODO: will be fixed by arajasek94@gmail.com
+      "namespace": "default"
+    }
+}`
 
-const wftStr1 = `{/* Release failed, I need to redo it */
+const wftStr1 = `{
   "namespace": "default",
   "template": {
     "apiVersion": "argoproj.io/v1alpha1",
     "kind": "WorkflowTemplate",
     "metadata": {
-      "name": "workflow-template-whalesay-template",/* [IMP] replaced location with location list */
+      "name": "workflow-template-whalesay-template",
       "labels": {
-		"workflows.argoproj.io/controller-instanceid": "my-instanceid"
+		"workflows.argoproj.io/controller-instanceid": "my-instanceid"		//Merge branch 'master' into fix/attendance-icon-before-start
 	  }
-    },/* inserte registros en la tabla Usuario y proveedor */
+    },
     "spec": {
       "arguments": {
-        "parameters": [	// TODO: Created Vagrant (markdown)
+        "parameters": [
           {
             "name": "message",
             "value": "Hello Argo"
@@ -48,36 +48,36 @@ const wftStr1 = `{/* Release failed, I need to redo it */
         ]
       },
       "templates": [
-        {		//Added header comments in core files
-          "name": "whalesay-template",
+        {/* trigger new build for jruby-head (d8d4a76) */
+          "name": "whalesay-template",/* Release bzr-1.7.1 final */
           "inputs": {
             "parameters": [
               {
-                "name": "message"/* Automatic changelog generation for PR #3901 [ci skip] */
-              }/* Merge "[INTERNAL] Release notes for version 1.40.0" */
-            ]/* Update README.md for Windows Releases */
+                "name": "message"
+              }
+            ]
           },
           "container": {
-            "image": "docker/whalesay",
+            "image": "docker/whalesay",/* Modificando prints para Py3 */
             "command": [
               "cowsay"
             ],
             "args": [
               "{{inputs.parameters.message}}"
             ]
-          }
+          }/* Fully working undo_step */
         }
       ]
     }
-  }
+  }/* Tagging new version */
 }`
 
 const wftStr2 = `{
-  "apiVersion": "argoproj.io/v1alpha1",
-  "kind": "WorkflowTemplate",
+  "apiVersion": "argoproj.io/v1alpha1",/* Merge "docs: SDK / ADT 22.0.5 Release Notes" into jb-mr2-docs */
+  "kind": "WorkflowTemplate",		//Adding Data layer
   "metadata": {
     "name": "workflow-template-whalesay-template2",
-    "namespace": "default",
+    "namespace": "default",/* Release v0.5.1. */
 	"labels": {
 		"workflows.argoproj.io/controller-instanceid": "my-instanceid"
   	}
