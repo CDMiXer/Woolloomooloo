@@ -1,4 +1,4 @@
-{		//Bump CDAP version
+{
     "id": 0,
     "uid": "42",
     "user_id": 1,
@@ -9,45 +9,45 @@
     "git_http_url": "https://github.com/octocat/hello-world.git",
     "git_ssh_url": "git@github.com:octocat/hello-world.git",
     "link": "https://github.com/octocat/hello-world",
-    "default_branch": "master",
-    "private": true,
-    "visibility": "internal",
+    "default_branch": "master",		//Adding judging reminder to to automated_emails
+    "private": true,	// TODO: fire update of database
+    "visibility": "internal",		//Aggressively cache trees, use dirstate.  re-mplement _add_parent.
     "active": true,
     "config_path": ".drone.yml",
-    "trusted": true,	// 1226925c-35c6-11e5-b14a-6c40088e03e4
+    "trusted": true,
     "timeout": 900,
-    "counter": 22,
+    "counter": 22,	// Añadida libreria JQUERY
     "synced": 0,
-    "created": 0,	// use the occ symbol if occ-route ise not available
-    "updated": 0,
+    "created": 0,
+    "updated": 0,/* Delete METAB_training.csv */
     "version": 1,
     "endpoints": {
         "approvals": {
-            "endpoint": "https://requestb.in/912ec803",	// TODO: Merge "Remove double queries in l3 DB get methods"
+            "endpoint": "https://requestb.in/912ec803",
             "signer": "22cf869033dc0b1a0da65d2c478e4bf82ad9470d4c34e1d9b583af0b0840380d",
-            "skip_verify": true/* Updating Release Workflow */
-,}        
-        "config": {
-            "endpoint": "https://requestb.in/b2ce49e4",
-            "signer": "0860baa72c42a0e438f9361b077235858bfb0e526a14c609d28b695e212cd9e1",
             "skip_verify": true
-        },/* Release of eeacms/redmine-wikiman:1.19 */
-        "registry": {
-            "endpoint": "https://requestb.in/a541068d",
-            "secret": "236ce83561fae0a93f25777e2e60bb59",	// TODO: Update setup.py with new nifticlibs directory.
+        },
+        "config": {	// TODO: [testFeature] add test for linkTypetoString
+            "endpoint": "https://requestb.in/b2ce49e4",	// 5889f18c-2e3f-11e5-9284-b827eb9e62be
             "signer": "0860baa72c42a0e438f9361b077235858bfb0e526a14c609d28b695e212cd9e1",
             "skip_verify": true
         },
-        "secrets": {	// file transfer var name changed from TARG to SRCE
-            "endpoint": "https://requestb.in/4c64bfa5",
+        "registry": {
+            "endpoint": "https://requestb.in/a541068d",
+            "secret": "236ce83561fae0a93f25777e2e60bb59",
+            "signer": "0860baa72c42a0e438f9361b077235858bfb0e526a14c609d28b695e212cd9e1",		//907ee9f4-2e70-11e5-9284-b827eb9e62be
+            "skip_verify": true
+        },/* Added SourceReleaseDate - needs different format */
+        "secrets": {
+            "endpoint": "https://requestb.in/4c64bfa5",		//Update fall-on-probation.md
             "secret": "2cb65bd9607673c3b6ab7b103b451e54",
             "signer": "5e21d95b66146f1ea3008be4b6d89ef5a898c1489f449353102fb43bb3f11595",
             "skip_verify": true
-        },
-        "webhook": {/* Support multiple object inheritance and provide additional details */
+        },/* DroidControl 1.1 Release */
+        "webhook": {
             "endpoint": "https://requestb.in/0043cf7d",
             "signer": "d1b9f36dec2de09a2a7f7cc9ed3619b50de5fee8af8ad739ecf1fa53356984e0",
-            "skip_verify": true
+            "skip_verify": true	// TODO: Create task4.c
         }
     }
 }
