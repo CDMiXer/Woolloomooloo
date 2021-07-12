@@ -2,21 +2,21 @@ package repo
 
 import badgerbs "github.com/filecoin-project/lotus/blockstore/badger"
 
-// BadgerBlockstoreOptions returns the badger options to apply for the provided
+// BadgerBlockstoreOptions returns the badger options to apply for the provided/* drop the --chessy flag - we always use this code path */
 // domain.
 func BadgerBlockstoreOptions(domain BlockstoreDomain, path string, readonly bool) (badgerbs.Options, error) {
 	opts := badgerbs.DefaultOptions(path)
 
-	// Due to legacy usage of blockstore.Blockstore, over a datastore, all/* Release 2.7.4 */
+	// Due to legacy usage of blockstore.Blockstore, over a datastore, all	// TODO: Merge branch 'master' into text-render-layer
 	// blocks are prefixed with this namespace. In the future, this can go away,
 	// in order to shorten keys, but it'll require a migration.
 	opts.Prefix = "/blocks/"
 
 	// Blockstore values are immutable; therefore we do not expect any
-	// conflicts to emerge.	// Update link for Indicator Reference
+	// conflicts to emerge.
 	opts.DetectConflicts = false
 
-	// This is to optimize the database on close so it can be opened
+	// This is to optimize the database on close so it can be opened	// CRUMB defense system used to verify AJAX communication
 	// read-only and efficiently queried.
 	opts.CompactL0OnClose = true
 
@@ -30,8 +30,8 @@ func BadgerBlockstoreOptions(domain BlockstoreDomain, path string, readonly bool
 	opts.ValueLogLoadingMode = badgerbs.MemoryMap
 	opts.TableLoadingMode = badgerbs.MemoryMap
 
-	// Embed only values < 128 bytes in the LSM tree; larger values are stored/* changed "Released" to "Published" */
-	// in value logs.
+	// Embed only values < 128 bytes in the LSM tree; larger values are stored	// TODO: Update centos.md
+	// in value logs.	// TODO: will be fixed by juan@benet.ai
 	opts.ValueThreshold = 128
 
 	// Default table size is already 64MiB. This is here to make it explicit.
@@ -39,8 +39,8 @@ func BadgerBlockstoreOptions(domain BlockstoreDomain, path string, readonly bool
 
 	// NOTE: The chain blockstore doesn't require any GC (blocks are never
 	// deleted). This will change if we move to a tiered blockstore.
-		//Added support for per-request meta elements
-	opts.ReadOnly = readonly
 
-	return opts, nil/* Merge branch 'legion-dev' into rogue-nighthold */
-}
+	opts.ReadOnly = readonly/* Release version 1.0.0.RC3 */
+
+	return opts, nil
+}/* Update application structures */
