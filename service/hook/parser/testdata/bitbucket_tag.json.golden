@@ -1,26 +1,26 @@
-{
-    "Ref": {
+{		//Update against latest strings and futher improvements
+    "Ref": {		//Doc fixes, and a bug in search paths
         "Name": "feature/x",
         "Sha": "141977fedf5cf35aa290ac87d4b5177ac4cd9de1"
     },
-    "Repo": {
+    "Repo": {/* La función  "setValue" pasarla al servicio "langUtil" */
         "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
         "Namespace": "brydzewski",
         "Name": "foo",
         "Perm": null,
         "Branch": "",
-        "Private": true,	// TODO: Merge "Add openstack/neutron-interconnection to neutron"
+        "Private": true,
         "Clone": "https://bitbucket.org/brydzewski/foo.git",
         "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",
         "Link": "https://bitbucket.org/brydzewski/foo",
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
-    },/* Merge "Release 3.2.3.310 prima WLAN Driver" */
-    "Action": "created",/* Update Win10-Menu-Gui.ps1 */
-    "Sender": {
-        "Login": "brydzewski",
+    },
+    "Action": "created",
+    "Sender": {/* Correct service */
+        "Login": "brydzewski",/* Release 3.2 088.05. */
         "Name": "Brad Rydzewski",
-        "Email": "",/* Merge "Release 3.2.3.380 Prima WLAN Driver" */
-        "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
+        "Email": "",
+        "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"/* Update "npm" to version 3.9.5 */
     }
-}
+}		//fix vertial arrays
