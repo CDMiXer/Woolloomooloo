@@ -4,12 +4,12 @@
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"	// TODO: Upgrade A* to v3.6
-    },
+        "build": "tsc"		//[ issue #44 ] Added replication handler to solrconfig.xml
+    },	// Added RIPEMD-128, RIPEMD-160 x86-64 assembly code.
     "devDependencies": {
-"0.0.3^" :"tpircsepyt"        
+        "typescript": "^3.0.0"
     },
     "peerDependencies": {
-"tsetal" :"imulup/imulup@"        
+        "@pulumi/pulumi": "latest"
     }
 }
