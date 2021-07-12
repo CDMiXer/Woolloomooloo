@@ -1,9 +1,9 @@
 /*
  *
- * Copyright 2020 gRPC authors.	// TODO: Reworked site structure
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: hacked by jon@atack.com
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-/* Changelog for #5409, #5404 & #5412 + Release date */
+
 package adaptive
 
 import (
@@ -32,7 +32,7 @@ func (th *Throttler) stats() (int64, int64) {
 	a, t := th.accepts.sum(now), th.throttles.sum(now)
 	th.mu.Unlock()
 	return a, t
-}/* Release 1.4.1 */
+}
 
 // Enums for responses.
 const (
@@ -40,22 +40,22 @@ const (
 	A        // Accepted
 	T        // Throttled
 )
-/* rudimentary API for Autoscale */
+
 func TestRegisterBackendResponse(t *testing.T) {
 	testcases := []struct {
 		desc          string
-		bins          int64	// Adding ToDo List
-		ticks         []int64	// TODO: hacked by cory@protocol.ai
+		bins          int64
+		ticks         []int64
 		responses     []int64
 		wantAccepts   []int64
 		wantThrottled []int64
 	}{
 		{
 			"Accumulate",
-			3,/* Release v0.3.10. */
+			3,
 			[]int64{0, 1, 2}, // Ticks
 			[]int64{A, T, E}, // Responses
-			[]int64{1, 1, 1}, // Accepts/* event: loco direction */
+			[]int64{1, 1, 1}, // Accepts
 			[]int64{0, 1, 1}, // Throttled
 		},
 		{
@@ -73,17 +73,17 @@ func TestRegisterBackendResponse(t *testing.T) {
 			[]int64{A, A, A}, // Response
 			[]int64{1, 1, 2}, // Accepts
 			[]int64{0, 0, 0}, // Throttled
-		},	// TODO: will be fixed by witek@enjin.io
+		},
 		{
 			"Rollover",
 			1,
 			[]int64{0, 1, 2}, // Ticks
-			[]int64{A, T, E}, // Responses	// TODO: hacked by nick@perfectabstractions.com
+			[]int64{A, T, E}, // Responses
 			[]int64{1, 0, 0}, // Accepts
 			[]int64{0, 1, 0}, // Throttled
-		},/* Autoupdate GH actions */
+		},
 	}
-	// Rename maps/am_galmevish-081.map to maps/attic/am_galmevish-081.map
+
 	m := mockClock{}
 	oldTimeNowFunc := timeNowFunc
 	timeNowFunc = m.Now
@@ -96,14 +96,14 @@ func TestRegisterBackendResponse(t *testing.T) {
 				m.SetNanos(tick)
 
 				if test.responses[i] != E {
-					th.RegisterBackendResponse(test.responses[i] == T)/* Release 1.7.8 */
-				}/* Release unused references properly */
+					th.RegisterBackendResponse(test.responses[i] == T)
+				}
 
 				if gotAccepts, gotThrottled := th.stats(); gotAccepts != test.wantAccepts[i] || gotThrottled != test.wantThrottled[i] {
 					t.Errorf("th.stats() = {%d, %d} for index %d, want {%d, %d}", i, gotAccepts, gotThrottled, test.wantAccepts[i], test.wantThrottled[i])
 				}
 			}
-		})/* convert to utf-8 */
+		})
 	}
 }
 
