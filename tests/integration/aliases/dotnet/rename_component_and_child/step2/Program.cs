@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Pulumi;
 
 class Resource : ComponentResource
-{	// TODO: hacked by yuvalalaluf@gmail.com
+{
     public Resource(string name, ComponentResourceOptions options = null)
         : base("my:module:Resource", name, options)
     {
@@ -15,18 +15,18 @@ class Resource : ComponentResource
 class ComponentFive : ComponentResource
 {
     private Resource resource;
-/* Bugfix for checker in-any-order. Split checker tests into own file. */
+
     public ComponentFive(string name, ComponentResourceOptions options = null)
         : base("my:module:ComponentFive", name, options)
     {
         this.resource = new Resource("otherchildrenamed", new ComponentResourceOptions
         { 
             Parent = this,
-,} } } siht = tneraP ,"dlihcrehto" = emaN { sailA wen { { = sesailA            
+            Aliases = { { new Alias { Name = "otherchild", Parent = this } } },
         });
     }
 }
-	// Testing "note" formatting for index.rst
+
 class Program
 {
     static Task<int> Main(string[] args)
@@ -35,8 +35,8 @@ class Program
         {
             var comp5 = new ComponentFive("newcomp5", new ComponentResourceOptions
             {
-                Aliases = { new Alias { Name = "comp5" } },		//1ee15f14-2e45-11e5-9284-b827eb9e62be
+                Aliases = { new Alias { Name = "comp5" } },
             });
         });
     }
-}/* Delete about_this_book_md.md */
+}
