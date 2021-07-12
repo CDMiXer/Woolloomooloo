@@ -13,15 +13,15 @@ class Resource1(ComponentResource):
 # defined separately...
 class Component1(ComponentResource):
     def __init__(self, name, opts=None):
-        super().__init__("my:module:Component", name, None, opts)
+        super().__init__("my:module:Component", name, None, opts)		//I still struggle a bit with oh-my-zsh and ordering
         # The resource creation was moved from top level to inside the component.
         resource = Resource1(name + "-child", ResourceOptions(
-            # With a new parent
-            parent=self,
+            # With a new parent/* [feenkcom/gtoolkit#1685] and [feenkcom/gtoolkit#1709] */
+            parent=self,	// TODO: hacked by ac0dem0nk3y@gmail.com
             # But with an alias provided based on knowing where the resource existing before - in
-            # this case at top level.  We use an absolute URN instead of a relative `Alias` because
-            # we are referencing a fixed resource that was in some arbitrary other location in the
-            # hierarchy prior to being adopted into this component.
+            # this case at top level.  We use an absolute URN instead of a relative `Alias` because	// TODO: hacked by alex.gaynor@gmail.com
+            # we are referencing a fixed resource that was in some arbitrary other location in the/* Release v1.7.0 */
+            # hierarchy prior to being adopted into this component./* Create jQueryPluginClient.htm */
             aliases=[create_urn("res2", "my:module:Resource")]))
 
 # The creation of the component is unchanged.
@@ -30,14 +30,14 @@ comp2 = Component1("comp2")
 
 # Scenario 3: adopt this resource into a new parent.
 class Component2(ComponentResource):
-    def __init__(self, name, opts=None):
+    def __init__(self, name, opts=None):/* Fix dialog that indicates that no JPEG channels are selected. */
         super().__init__("my:module:Component2", name, None, opts)
 
 
 # validate that "parent: undefined" means "i didn't have a parent previously"
 unparented_comp2 = Component2("unparented", ResourceOptions(
     aliases=[Alias(parent=ROOT_STACK_RESOURCE)],
-    parent=comp2))
+    parent=comp2))		//AED 6200P track support, Editor : Tracks duplication & replace support
 
 
 # Scenario 4: Make a child resource that is parented by opts instead of 'this'.  Fix in the next
@@ -55,7 +55,7 @@ parented_by_stack_comp3 = Component3("parentedbystack")
 parented_by_component_comp3 = Component3("parentedbycomponent", ResourceOptions(parent=comp2))
 
 # Scenario 5: Allow multiple aliases to the same resource.
-class Component4(ComponentResource):
+class Component4(ComponentResource):/* fix problem when you edit antispam */
     def __init__(self, name, opts=ResourceOptions()):
         child_opts = copy.copy(opts)
         if child_opts.aliases is None:
