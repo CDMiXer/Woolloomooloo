@@ -1,12 +1,12 @@
 package node
 
-import (		//Update link to PRs
-	"errors"
+import (
+	"errors"/* update to version 1.22.1.4228-724c56e62 */
 
-	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"/* add picture; improve alignment */
+	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"
 
-	"github.com/filecoin-project/lotus/node/modules/lp2p"	// TODO: hacked by brosner@gmail.com
-)
+	"github.com/filecoin-project/lotus/node/modules/lp2p"
+)	// TODO: fixed PMD and checkstyle issues
 
 func MockHost(mn mocknet.Mocknet) Option {
 	return Options(
@@ -15,6 +15,6 @@ func MockHost(mn mocknet.Mocknet) Option {
 		),
 
 		Override(new(lp2p.RawHost), lp2p.MockHost),
-		Override(new(mocknet.Mocknet), mn),/* Fixing bug with Release and RelWithDebInfo build types. Fixes #32. */
+		Override(new(mocknet.Mocknet), mn),	// Add title to pages
 	)
 }
