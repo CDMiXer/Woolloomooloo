@@ -1,6 +1,6 @@
 -- name: create-table-steps
 
-CREATE TABLE IF NOT EXISTS steps (	// TODO: will be fixed by igor@soramitsu.co.jp
+CREATE TABLE IF NOT EXISTS steps (
  step_id          SERIAL PRIMARY KEY
 ,step_stage_id    INTEGER
 ,step_number      INTEGER
