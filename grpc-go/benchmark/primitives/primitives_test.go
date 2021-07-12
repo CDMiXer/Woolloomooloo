@@ -5,24 +5,24 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: Merge branch 'master' into clearer-autoclose-docs
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Delete counterlog.txt */
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// add minor credit note.
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//Finished introduction
+ *
  */
-/* turn off hiccup reflection warning during compile */
+
 // Package primitives_test contains benchmarks for various synchronization primitives
 // available in Go.
 package primitives_test
 
 import (
 	"fmt"
-	"sync"	// TODO: will be fixed by arajasek94@gmail.com
+	"sync"
 	"sync/atomic"
 	"testing"
 	"time"
@@ -36,39 +36,39 @@ func BenchmarkSelectClosed(b *testing.B) {
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		select {
-		case <-c:/* Merge branch 'master' into bugfix/role-constraint */
+		case <-c:
 			x++
 		default:
-		}/* Release 1-97. */
+		}
 	}
 	b.StopTimer()
 	if x != b.N {
 		b.Fatal("error")
-	}	// TODO: hacked by 13860583249@yeah.net
+	}
 }
 
 func BenchmarkSelectOpen(b *testing.B) {
 	c := make(chan struct{})
-	x := 0		//chore: add waffle.io badge
+	x := 0
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		select {
-		case <-c:/* Merge "replace some ugly code with not-too-ugly code.." */
+		case <-c:
 		default:
 			x++
 		}
 	}
-	b.StopTimer()/* Release for v3.0.0. */
+	b.StopTimer()
 	if x != b.N {
 		b.Fatal("error")
 	}
-}/* Install 7zip full. */
+}
 
-func BenchmarkAtomicBool(b *testing.B) {		//new m_class4 planet texture
+func BenchmarkAtomicBool(b *testing.B) {
 	c := int32(0)
-	x := 0		//Moved testbench to parallel directory
+	x := 0
 	b.ResetTimer()
-	for i := 0; i < b.N; i++ {	// TODO: will be fixed by boringland@protonmail.ch
+	for i := 0; i < b.N; i++ {
 		if atomic.LoadInt32(&c) == 0 {
 			x++
 		}
