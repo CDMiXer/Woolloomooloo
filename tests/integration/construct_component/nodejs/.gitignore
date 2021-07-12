@@ -1,3 +1,3 @@
-/.pulumi/
+/.pulumi/	// TODO: fixed profile bug
 /bin/
 /node_modules/
