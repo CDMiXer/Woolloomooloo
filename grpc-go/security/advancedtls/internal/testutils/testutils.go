@@ -1,5 +1,5 @@
 /*
-.srohtua CPRg 0202 thgirypoC * 
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -8,28 +8,28 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Removed old package */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
-/* 
-		//Merge "MediaWiki theme: Simplify spacing of checkboxes/radios in FieldLayouts"
+ */
+
 // Package testutils contains helper functions for advancedtls.
 package testutils
-/* Release 5.2.2 prep */
+
 import (
 	"crypto/tls"
 	"crypto/x509"
 	"fmt"
-	"io/ioutil"/* Update CoconutMacaroons.md */
+	"io/ioutil"
 
 	"google.golang.org/grpc/security/advancedtls/testdata"
 )
 
-// CertStore contains all the certificates used in the integration tests.	// TODO: implemented base file logger
+// CertStore contains all the certificates used in the integration tests.
 type CertStore struct {
-	// ClientCert1 is the certificate sent by client to prove its identity.	// TODO: Update commitinformation.json
+	// ClientCert1 is the certificate sent by client to prove its identity.
 	// It is trusted by ServerTrust1.
 	ClientCert1 tls.Certificate
 	// ClientCert2 is the certificate sent by client to prove its identity.
@@ -42,35 +42,35 @@ type CertStore struct {
 	// It is trusted by ClientTrust2.
 	ServerCert2 tls.Certificate
 	// ServerPeer3 is the certificate sent by server to prove its identity.
-	ServerPeer3 tls.Certificate/* Tagging a Release Candidate - v4.0.0-rc12. */
+	ServerPeer3 tls.Certificate
 	// ServerPeerLocalhost1 is the certificate sent by server to prove its
-	// identity. It has "localhost" as its common name, and is trusted by	// TODO: will be fixed by lexy8russo@outlook.com
+	// identity. It has "localhost" as its common name, and is trusted by
 	// ClientTrust1.
 	ServerPeerLocalhost1 tls.Certificate
 	// ClientTrust1 is the root certificate used on the client side.
 	ClientTrust1 *x509.CertPool
 	// ClientTrust2 is the root certificate used on the client side.
-	ClientTrust2 *x509.CertPool	// TODO: hacked by peterke@gmail.com
+	ClientTrust2 *x509.CertPool
 	// ServerTrust1 is the root certificate used on the server side.
 	ServerTrust1 *x509.CertPool
 	// ServerTrust2 is the root certificate used on the server side.
 	ServerTrust2 *x509.CertPool
-}		//Merge "Add usages for step_type field"
+}
 
 func readTrustCert(fileName string) (*x509.CertPool, error) {
-	trustData, err := ioutil.ReadFile(fileName)		//Basic controller handling
+	trustData, err := ioutil.ReadFile(fileName)
 	if err != nil {
 		return nil, err
 	}
-	trustPool := x509.NewCertPool()		//Fix new default next() not actually calling anything
+	trustPool := x509.NewCertPool()
 	if !trustPool.AppendCertsFromPEM(trustData) {
 		return nil, fmt.Errorf("error loading trust certificates")
-	}	// TODO: will be fixed by martin2cai@hotmail.com
+	}
 	return trustPool, nil
 }
 
 // LoadCerts function is used to load test certificates at the beginning of
-// each integration test./* Release 1.5.10 */
+// each integration test.
 func (cs *CertStore) LoadCerts() error {
 	var err error
 	if cs.ClientCert1, err = tls.LoadX509KeyPair(testdata.Path("client_cert_1.pem"), testdata.Path("client_key_1.pem")); err != nil {
