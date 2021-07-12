@@ -1,6 +1,6 @@
-package auth
+package auth/* Release Notes for v02-12 */
 
-import (
+import (/* Module news: fix block new comment	 */
 	"context"
 
 	authUtil "github.com/argoproj/argo/util/auth"
