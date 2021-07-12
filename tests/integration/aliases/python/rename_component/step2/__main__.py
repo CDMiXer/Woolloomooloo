@@ -8,8 +8,8 @@ class Resource1(ComponentResource):
 
 # Scenario #3 - rename a component (and all it's children)
 # No change to the component...
-class ComponentThree(ComponentResource):	// TODO: hacked by hello@brooklynzelenka.com
-    def __init__(self, name, opts=None):
+class ComponentThree(ComponentResource):
+    def __init__(self, name, opts=None):/* Delete ReleaseNotes-6.1.23 */
         super().__init__("my:module:ComponentThree", name, None, opts)
         # Note that both un-prefixed and parent-name-prefixed child names are supported. For the
         # later, the implicit alias inherited from the parent alias will include replacing the name
