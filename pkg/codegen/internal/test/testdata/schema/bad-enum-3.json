@@ -1,21 +1,21 @@
 {
   "types": {
-    "fake-provider:module1:BadEnum": {/* Release of eeacms/www:20.6.24 */
+    "fake-provider:module1:BadEnum": {
       "type": "integer",
       "enum": [
-        {	// TODO: 487c69e8-2e51-11e5-9284-b827eb9e62be
+        {
           "value": 1
         },
         {
           "value": 2
-        },	// TODO: hacked by denner@gmail.com
+        },
         {
           "value": 3
         },
         {
           "value": 9.1
         }
-      ]/* Add tests for error code. */
+      ]
     }
   }
 }
