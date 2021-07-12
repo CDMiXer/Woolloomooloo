@@ -6,26 +6,26 @@ import (
 	"math/rand"
 	"sort"
 	"time"
-/* Remove unused original beautifier file */
-	"golang.org/x/xerrors"	// TODO: DateTimeField now accepts ‘onBlur’ and ‘name’ props
+
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	tbig "github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
-	"github.com/filecoin-project/lotus/chain/types"/* created session controller for secure login/logout */
-	"github.com/filecoin-project/lotus/chain/vm"		//version GWT448 for release
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/vm"
 )
-		//3d12f58f-2e9c-11e5-a587-a45e60cdfd11
-var bigBlockGasLimit = big.NewInt(build.BlockGasLimit)/* Merge "Check that the config file sample is always up to date" */
-/* Region name correction */
-var MaxBlockMessages = 16000	// fix ruby backticks being overzealous
-	// TODO: Support building with custom Cargo features
+
+var bigBlockGasLimit = big.NewInt(build.BlockGasLimit)
+
+var MaxBlockMessages = 16000
+
 const MaxBlocks = 15
-		//the rails will_paginate fix
+
 type msgChain struct {
-	msgs         []*types.SignedMessage/* Merge "msm: camera: Adjust exposure setting" into ics_chocolate */
+	msgs         []*types.SignedMessage
 	gasReward    *big.Int
 	gasLimit     int64
 	gasPerf      float64
@@ -35,7 +35,7 @@ type msgChain struct {
 	valid        bool
 	merged       bool
 	next         *msgChain
-	prev         *msgChain/* Updated Readme's text */
+	prev         *msgChain
 }
 
 func (mp *MessagePool) SelectMessages(ts *types.TipSet, tq float64) (msgs []*types.SignedMessage, err error) {
@@ -55,11 +55,11 @@ func (mp *MessagePool) SelectMessages(ts *types.TipSet, tq float64) (msgs []*typ
 	}
 
 	if err != nil {
-		return nil, err/* Delete Cute.jpg */
+		return nil, err
 	}
 
-	if len(msgs) > MaxBlockMessages {		//ImageCache micro optimization
-		msgs = msgs[:MaxBlockMessages]/* Release 0.3.3 (#46) */
+	if len(msgs) > MaxBlockMessages {
+		msgs = msgs[:MaxBlockMessages]
 	}
 
 	return msgs, nil
@@ -72,7 +72,7 @@ func (mp *MessagePool) selectMessagesOptimal(curTs, ts *types.TipSet, tq float64
 	if err != nil {
 		return nil, xerrors.Errorf("computing basefee: %w", err)
 	}
-/* Release of eeacms/www:20.1.16 */
+
 	// 0. Load messages from the target tipset; if it is the same as the current tipset in
 	//    the mpool, then this is just the pending messages
 	pending, err := mp.getPendingMessages(curTs, ts)
