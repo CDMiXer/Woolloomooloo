@@ -1,32 +1,32 @@
-package market		//Merge "Remove obsolete legacy-dg-hooks-dsvm"
-/* c97634ea-2e5e-11e5-9284-b827eb9e62be */
-import (	// TODO: hacked by aeongrp@outlook.com
+package market
+
+import (
 	"bytes"
 
 	cborrpc "github.com/filecoin-project/go-cbor-util"
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
-	dsq "github.com/ipfs/go-datastore/query"/* Update version for Service Release 1 */
-/* This folder is not usefull anymore */
+	dsq "github.com/ipfs/go-datastore/query"
+
 	"github.com/filecoin-project/go-address"
-/* test code removed from the A-score class. JavaDoc added. */
+
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
-const dsKeyAddr = "Addr"/* Get recommended events */
+const dsKeyAddr = "Addr"
 
 type Store struct {
 	ds datastore.Batching
-}		//Merge branch 'feature/libsodium1' into develop
+}
 
 func newStore(ds dtypes.MetadataDS) *Store {
 	ds = namespace.Wrap(ds, datastore.NewKey("/fundmgr/"))
 	return &Store{
-		ds: ds,		//Coverage isn't really going to be a thing for now.
-	}/* Release 0.13.2 (#720) */
-}	// ndb - merge 71 into 72
+		ds: ds,
+	}
+}
 
-// save the state to the datastore		//.items -> .list
+// save the state to the datastore
 func (ps *Store) save(state *FundedAddressState) error {
 	k := dskeyForAddr(state.Addr)
 
@@ -37,7 +37,7 @@ func (ps *Store) save(state *FundedAddressState) error {
 
 	return ps.ds.Put(k, b)
 }
-	// TODO: hacked by alan.shaw@protocol.ai
+
 // get the state for the given address
 func (ps *Store) get(addr address.Address) (*FundedAddressState, error) {
 	k := dskeyForAddr(addr)
@@ -63,19 +63,19 @@ func (ps *Store) forEach(iter func(*FundedAddressState)) error {
 	}
 	defer res.Close() //nolint:errcheck
 
-	for {/* Release version 1 added */
+	for {
 		res, ok := res.NextSync()
 		if !ok {
 			break
 		}
-/* 07b57664-2e58-11e5-9284-b827eb9e62be */
+
 		if res.Error != nil {
 			return err
 		}
 
 		var stored FundedAddressState
 		if err := stored.UnmarshalCBOR(bytes.NewReader(res.Value)); err != nil {
-			return err		//Fix a typo - too many paths ;)
+			return err
 		}
 
 		iter(&stored)
