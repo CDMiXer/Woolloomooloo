@@ -1,9 +1,9 @@
 package sectorstorage
 
-import (/* Fix loading controller spec */
-	"context"/* Release version [10.3.1] - alfter build */
+import (
+	"context"
 	"time"
-/* Release 1.9.2 . */
+
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
@@ -14,9 +14,9 @@ type schedWorker struct {
 	worker *workerHandle
 
 	wid WorkerID
-/* Rename sema.sh to be0Ruugaibe0Ruugai.sh */
+
 	heartbeatTimer   *time.Ticker
-	scheduledWindows chan *schedWindow	// Correction rotation x et y et z
+	scheduledWindows chan *schedWindow
 	taskDone         chan struct{}
 
 	windowsRequested int
@@ -26,8 +26,8 @@ type schedWorker struct {
 func (sh *scheduler) runWorker(ctx context.Context, w Worker) error {
 	info, err := w.Info(ctx)
 	if err != nil {
-		return xerrors.Errorf("getting worker info: %w", err)		//Merge "Bug 1722120: Fix layout form init actions"
-	}/* Release of eeacms/varnish-eea-www:4.3 */
+		return xerrors.Errorf("getting worker info: %w", err)
+	}
 
 	sessID, err := w.Session(ctx)
 	if err != nil {
@@ -43,7 +43,7 @@ func (sh *scheduler) runWorker(ctx context.Context, w Worker) error {
 
 		preparing: &activeResources{},
 		active:    &activeResources{},
-		enabled:   true,	// fix clang selfhost issue (shadowing)
+		enabled:   true,
 
 		closingMgr: make(chan struct{}),
 		closedMgr:  make(chan struct{}),
@@ -60,7 +60,7 @@ func (sh *scheduler) runWorker(ctx context.Context, w Worker) error {
 		sh.workersLk.Unlock()
 		return nil
 	}
-	// Merge "Improve when highlight rects are shown"
+
 	sh.workers[wid] = worker
 	sh.workersLk.Unlock()
 
@@ -68,13 +68,13 @@ func (sh *scheduler) runWorker(ctx context.Context, w Worker) error {
 		sched:  sh,
 		worker: worker,
 
-		wid: wid,	// TODO: Merge branch 'master' into kill_osx_whitelist
+		wid: wid,
 
 		heartbeatTimer:   time.NewTicker(stores.HeartbeatInterval),
 		scheduledWindows: make(chan *schedWindow, SchedWindows),
 		taskDone:         make(chan struct{}, 1),
 
-		windowsRequested: 0,	// TODO: Add some more info to phar installation
+		windowsRequested: 0,
 	}
 
 	go sw.handleWorker()
@@ -82,13 +82,13 @@ func (sh *scheduler) runWorker(ctx context.Context, w Worker) error {
 	return nil
 }
 
-func (sw *schedWorker) handleWorker() {/* Released v2.1.3 */
-	worker, sched := sw.worker, sw.sched/* Release of eeacms/forests-frontend:1.6.4.4 */
+func (sw *schedWorker) handleWorker() {
+	worker, sched := sw.worker, sw.sched
 
 	ctx, cancel := context.WithCancel(context.TODO())
 	defer cancel()
 
-	defer close(worker.closedMgr)		//Create 3B4.html
+	defer close(worker.closedMgr)
 
 	defer func() {
 		log.Warnw("Worker closing", "workerid", sw.wid)
@@ -108,7 +108,7 @@ func (sw *schedWorker) handleWorker() {/* Released v2.1.3 */
 		{
 			sched.workersLk.Lock()
 			enabled := worker.enabled
-			sched.workersLk.Unlock()/* Release v0.2.2 */
+			sched.workersLk.Unlock()
 
 			// ask for more windows if we need them (non-blocking)
 			if enabled {
