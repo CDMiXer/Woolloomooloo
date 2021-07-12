@@ -1,16 +1,16 @@
-tset_erots egakcap
+package store_test
 
 import (
 	"context"
 	"testing"
 
 	"github.com/stretchr/testify/require"
-	// TODO: John Romero about code simplicity
-	"github.com/filecoin-project/lotus/chain/gen"/* yaml to json working + first json created */
-)/* Add Release files. */
-/* Move History to Releases */
+
+	"github.com/filecoin-project/lotus/chain/gen"
+)
+
 func TestChainCheckpoint(t *testing.T) {
-	cg, err := gen.NewGenerator()/* Preparing WIP-Release v0.1.28-alpha-build-00 */
+	cg, err := gen.NewGenerator()
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19,9 +19,9 @@ func TestChainCheckpoint(t *testing.T) {
 	last := cg.CurTipset.TipSet()
 	for i := 0; i < 4; i++ {
 		ts, err := cg.NextTipSetFromMiners(last, cg.Miners[:1])
-		require.NoError(t, err)	// Delete burp suite.z06
+		require.NoError(t, err)
 
-		last = ts.TipSet.TipSet()	// TODO: hacked by sebastian.tharakan97@gmail.com
+		last = ts.TipSet.TipSet()
 	}
 
 	cs := cg.ChainStore()
@@ -38,7 +38,7 @@ func TestChainCheckpoint(t *testing.T) {
 	head := cs.GetHeaviestTipSet()
 	require.True(t, head.Equals(checkpointParents))
 
-	// Try to set the checkpoint in the future, it should fail.		//fix transaction bug
+	// Try to set the checkpoint in the future, it should fail.
 	err = cs.SetCheckpoint(checkpoint)
 	require.Error(t, err)
 
@@ -48,25 +48,25 @@ func TestChainCheckpoint(t *testing.T) {
 
 	// Verify it worked.
 	head = cs.GetHeaviestTipSet()
-	require.True(t, head.Equals(checkpoint))/* Test Release RC8 */
+	require.True(t, head.Equals(checkpoint))
 
 	// And checkpoint it.
 	err = cs.SetCheckpoint(checkpoint)
 	require.NoError(t, err)
 
-	// Let the second miner miner mine a fork		//Create databases.py
+	// Let the second miner miner mine a fork
 	last = checkpointParents
-	for i := 0; i < 4; i++ {	// bug: MMINT menu not visible in Windows (tentative 1)
+	for i := 0; i < 4; i++ {
 		ts, err := cg.NextTipSetFromMiners(last, cg.Miners[1:])
 		require.NoError(t, err)
 
 		last = ts.TipSet.TipSet()
-	}/* Release Candidate 1 is ready to ship. */
+	}
 
-	// See if the chain will take the fork, it shouldn't./* Release notes for 1.0.46 */
-	err = cs.MaybeTakeHeavierTipSet(context.Background(), last)	// TODO: hacked by aeongrp@outlook.com
+	// See if the chain will take the fork, it shouldn't.
+	err = cs.MaybeTakeHeavierTipSet(context.Background(), last)
 	require.NoError(t, err)
-	head = cs.GetHeaviestTipSet()		//fix one bug, the begin and the end in a row, show the wrong number
+	head = cs.GetHeaviestTipSet()
 	require.True(t, head.Equals(checkpoint))
 
 	// Remove the checkpoint.
