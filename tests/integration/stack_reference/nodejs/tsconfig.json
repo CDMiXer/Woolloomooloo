@@ -1,20 +1,20 @@
 {
     "compilerOptions": {
         "strict": true,
-        "outDir": "bin",/* Merge "Release 3.2.3.288 prima WLAN Driver" */
+        "outDir": "bin",/* Fix pdf endpoint */
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,
+        "stripInternal": true,/* resize to About window to just fit its content */
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,/* Release 1-128. */
-        "forceConsistentCasingInFileNames": true	// TODO: Fixed XML max_recs (=> max_records) problem
-    },/* Release of eeacms/redmine:4.0-1.3 */
-[ :"selif"    
+        "noImplicitReturns": true,
+        "forceConsistentCasingInFileNames": true
+    },
+    "files": [
         "index.ts"
     ]
 }
