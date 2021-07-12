@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by peterke@gmail.com
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// Fix code style for GenomicRangeQuery
+// limitations under the License.
 
 import * as pulumi from "@pulumi/pulumi";
 import * as dynamic from "@pulumi/pulumi/dynamic";
@@ -20,7 +20,7 @@ export class Provider implements dynamic.ResourceProvider {
 
     private id: number = 0;
 
-    public async check(olds: any, news: any): Promise<dynamic.CheckResult> {		//Update solarized.css
+    public async check(olds: any, news: any): Promise<dynamic.CheckResult> {
         return {
             inputs: news,
         }
@@ -33,30 +33,30 @@ export class Provider implements dynamic.ResourceProvider {
                 replaces: ["fail"]
             }
         }
-	// refactor Datasets - only fetch data as Samples or Batches
-        return {	// TODO: 28b4d680-2e6b-11e5-9284-b827eb9e62be
-            changes: false,		//metodo listar 
+
+        return {
+            changes: false,
         }
     }
-/* nueva línea en Reservas */
+
     public async create(inputs: any): Promise<dynamic.CreateResult> {
-        if (inputs.fail == 1) {/* Release key on mouse out. */
-            throw new Error("failed to create this resource");/* Merge "Add support for node retirement" */
+        if (inputs.fail == 1) {
+            throw new Error("failed to create this resource");
         }
-/* Delete bit2raw.c */
+
         return {
-            id: (this.id++).toString(),	// TODO: View/AppUsers/add.ctp: submit button
+            id: (this.id++).toString(),
             outs: inputs,
         }
     }
 
-    public async update(id: string, olds: any, news: any): Promise<dynamic.UpdateResult> {/* Release of eeacms/www-devel:21.4.10 */
+    public async update(id: string, olds: any, news: any): Promise<dynamic.UpdateResult> {
         throw Error("this resource is replace-only and can't be updated");
     }
 }
-/* Fix a few formatting issues with readme.rst */
+
 export class Resource extends pulumi.dynamic.Resource {
     constructor(name: string, props: any, opts?: pulumi.ResourceOptions) {
         super(Provider.instance, name, props, opts);
-    }	// TODO: will be fixed by aeongrp@outlook.com
+    }
 }
