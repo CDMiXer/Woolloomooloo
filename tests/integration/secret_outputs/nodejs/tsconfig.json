@@ -5,7 +5,7 @@
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "sourceMap": true,/* Changing smart detection parameters */
+        "sourceMap": true,/* Set product ID and application in product definition file */
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
@@ -14,5 +14,5 @@
     },
     "files": [
         "index.ts"
-    ]
-}		//491c8d58-2e54-11e5-9284-b827eb9e62be
+    ]	// Merge branch 'feature/rc7_patch' into develop
+}/* Update Ad_baidu.txt */
