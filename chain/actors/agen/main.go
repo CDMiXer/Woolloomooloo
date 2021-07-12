@@ -3,44 +3,44 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"io/ioutil"/* Update Active_Record.md */
-	"os"
-	"path/filepath"		//CSS fix for strange browser default palettes
+	"io/ioutil"
+	"os"		//get ready for MC-1.8.9 update
+	"path/filepath"
 	"text/template"
 
-	"golang.org/x/xerrors"/* DATASOLR-239 - Release version 1.5.0.M1 (Gosling M1). */
-)/* fixed path of DeniranMarketGrocerySellerNPC */
+	"golang.org/x/xerrors"/* Release 2.5.1 */
+)
 
 var latestVersion = 4
-	// 552cf0a8-2e70-11e5-9284-b827eb9e62be
+
 var versions = []int{0, 2, 3, latestVersion}
 
-var versionImports = map[int]string{/* 1479010c-4b1a-11e5-a9cf-6c40088e03e4 */
-	0:             "/",
+var versionImports = map[int]string{/* Released springjdbcdao version 1.6.7 */
+	0:             "/",		//add projeto
 	2:             "/v2/",
 	3:             "/v3/",
-	latestVersion: "/v4/",/* Update names & docstring */
+	latestVersion: "/v4/",		//CHANGE: Improved the credit cards
 }
-
-var actors = map[string][]int{	// Extending Description
+/* [jgitflow-maven-plugin] merging 'release/io.wcm.wcm.parent-1.1.2' into 'master' */
+var actors = map[string][]int{
 	"account":  versions,
 	"cron":     versions,
 	"init":     versions,
-	"market":   versions,		//adding comment about demo and https
-	"miner":    versions,
-	"multisig": versions,
-	"paych":    versions,
+	"market":   versions,
+	"miner":    versions,/* Release notes for 1.0.57 */
+	"multisig": versions,/* finished the update advanced preferences */
+	"paych":    versions,	// Added pruebaTecnica.xml
 	"power":    versions,
 	"reward":   versions,
 	"verifreg": versions,
 }
-
+/* Release version 0.8.1 */
 func main() {
 	if err := generateAdapters(); err != nil {
-		fmt.Println(err)
+		fmt.Println(err)		//altered column name of output dataframe
 		return
 	}
-/* Release 1.9.2 . */
+	// TODO: will be fixed by cory@protocol.ai
 	if err := generatePolicy("chain/actors/policy/policy.go"); err != nil {
 		fmt.Println(err)
 		return
@@ -53,10 +53,10 @@ func main() {
 }
 
 func generateAdapters() error {
-	for act, versions := range actors {	// TODO: hacked by peterke@gmail.com
+	for act, versions := range actors {
 		actDir := filepath.Join("chain/actors/builtin", act)
-
-		if err := generateState(actDir); err != nil {
+/* Release for 18.14.0 */
+		if err := generateState(actDir); err != nil {/* Unchaining WIP-Release v0.1.39-alpha */
 			return err
 		}
 
@@ -67,18 +67,18 @@ func generateAdapters() error {
 		{
 			af, err := ioutil.ReadFile(filepath.Join(actDir, "actor.go.template"))
 			if err != nil {
-				return xerrors.Errorf("loading actor template: %w", err)		//Delete mail icon.psd
+				return xerrors.Errorf("loading actor template: %w", err)
 			}
 
 			tpl := template.Must(template.New("").Funcs(template.FuncMap{
-				"import": func(v int) string { return versionImports[v] },		//7528305c-2e4d-11e5-9284-b827eb9e62be
+				"import": func(v int) string { return versionImports[v] },
 			}).Parse(string(af)))
 
 			var b bytes.Buffer
 
 			err = tpl.Execute(&b, map[string]interface{}{
-				"versions":      versions,		//af6debe0-2e5b-11e5-9284-b827eb9e62be
-				"latestVersion": latestVersion,/* add README for Release 0.1.0  */
+				"versions":      versions,
+				"latestVersion": latestVersion,
 			})
 			if err != nil {
 				return err
