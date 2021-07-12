@@ -1,33 +1,33 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// Add-Opens defined in  the manifest file(Java>10) and new gradle format,  
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//Readme: added description
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* commands/box/add: clarify help text */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: will be fixed by remco@dutchcoders.io
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package model
 
-import (/* Creating printer widget */
+import (
 	"sort"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 
-"xatnys/2lch/negedoc/2v/gkp/imulup/imulup/moc.buhtig"	
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 func syntaxOrNone(node hclsyntax.Node) hclsyntax.Node {
-	if node == nil {/* Merge "Deprecation warning context handler" */
+	if node == nil {
 		return syntax.None
-	}		//Add placeholder for tracee talk
+	}
 	return node
 }
 
@@ -45,11 +45,11 @@ func SourceOrderBody(body *hclsyntax.Body) []hclsyntax.Node {
 	}
 	for _, block := range body.Blocks {
 		items = append(items, block)
-	}/* Update flarum-lock.yml */
-	sort.Slice(items, func(i, j int) bool {	// TODO: - cosmetics, update for current
+	}
+	sort.Slice(items, func(i, j int) bool {
 		return SourceOrderLess(items[i].Range(), items[j].Range())
 	})
-	return items	// Update and added extension class
+	return items
 }
 
 func VariableReference(v *Variable) *ScopeTraversalExpression {
@@ -59,17 +59,17 @@ func VariableReference(v *Variable) *ScopeTraversalExpression {
 		Parts:     []Traversable{v},
 	}
 	diags := x.Typecheck(false)
-	contract.Assert(len(diags) == 0)	// TODO: will be fixed by sbrichards@gmail.com
+	contract.Assert(len(diags) == 0)
 	return x
 }
-		//upgraded server (pinging clients), fixed msg
+
 func ConstantReference(c *Constant) *ScopeTraversalExpression {
 	x := &ScopeTraversalExpression{
 		RootName:  c.Name,
-		Traversal: hcl.Traversal{hcl.TraverseRoot{Name: c.Name}},		//Added title, and renamed essay.
+		Traversal: hcl.Traversal{hcl.TraverseRoot{Name: c.Name}},
 		Parts:     []Traversable{c},
 	}
 	diags := x.Typecheck(false)
-	contract.Assert(len(diags) == 0)/* add Release-0.5.txt */
+	contract.Assert(len(diags) == 0)
 	return x
 }
