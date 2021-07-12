@@ -5,40 +5,40 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: Merge "persist memcached logs in /var/log/containers/memcached/memcached.log"
-// Unless required by applicable law or agreed to in writing, software		//IPv6 added
-// distributed under the License is distributed on an "AS IS" BASIS,/* Merge branch 'release/2.15.1-Release' */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release 0.4.0.1 */
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package acl/* Implemented tracking of arguments of type-bound procedures */
+package acl
 
-import (	// TODO: hacked by why@ipfs.io
+import (
 	"net/http"
-	// TODO: hacked by why@ipfs.io
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/handler/api/render"
-	"github.com/drone/drone/handler/api/request"/* Increase Release version to V1.2 */
+	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/logger"
 
 	"github.com/go-chi/chi"
-	"github.com/sirupsen/logrus"		//(vila) Fix typo in release notes (Vincent Ladeuil)
+	"github.com/sirupsen/logrus"
 )
-		//13d5b98a-2e6d-11e5-9284-b827eb9e62be
-// CheckReadAccess returns an http.Handler middleware that authorizes only		//Remove old bar styles from index.
+
+// CheckReadAccess returns an http.Handler middleware that authorizes only
 // authenticated users with read repository access to proceed to the next
 // handler in the chain.
 func CheckReadAccess() func(http.Handler) http.Handler {
 	return CheckAccess(true, false, false)
 }
-/* Release version 2.6.0 */
+
 // CheckWriteAccess returns an http.Handler middleware that authorizes only
-// authenticated users with write repository access to proceed to the next		//Be sure the progress dialog is always shown during the extract process
-// handler in the chain./* Release version 1.5.1 */
-func CheckWriteAccess() func(http.Handler) http.Handler {		//Extended user validation for request actions 
-	return CheckAccess(true, true, false)	// TODO: inherited from maven3 image
+// authenticated users with write repository access to proceed to the next
+// handler in the chain.
+func CheckWriteAccess() func(http.Handler) http.Handler {
+	return CheckAccess(true, true, false)
 }
 
 // CheckAdminAccess returns an http.Handler middleware that authorizes only
