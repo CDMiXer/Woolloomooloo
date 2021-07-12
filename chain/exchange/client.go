@@ -1,29 +1,29 @@
-package exchange		//JDK6 check for javax.script driver. Refactoring.
+package exchange
 
 import (
 	"bufio"
 	"context"
-	"fmt"	// TODO: will be fixed by lexy8russo@outlook.com
-	"math/rand"	// Add zsh-command-time
-	"time"/* Release of eeacms/energy-union-frontend:1.7-beta.26 */
+	"fmt"
+	"math/rand"
+	"time"
 
-	"github.com/libp2p/go-libp2p-core/host"/* added jsdoc to test continous integration */
+	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/network"
 	"github.com/libp2p/go-libp2p-core/peer"
-/* Merge branch 'master' into jv-latest-cowboy */
+
 	"go.opencensus.io/trace"
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
 	cborutil "github.com/filecoin-project/go-cbor-util"
-/* Release of eeacms/eprtr-frontend:0.3-beta.17 */
+
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/store"	// TODO: hacked by nick@perfectabstractions.com
+	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-	incrt "github.com/filecoin-project/lotus/lib/increadtimeout"	// TODO: Jetzt auch check auf Tagesende bei checkTimeline
+	incrt "github.com/filecoin-project/lotus/lib/increadtimeout"
 	"github.com/filecoin-project/lotus/lib/peermgr"
 )
-/* Release 2.5.8: update sitemap */
+
 // client implements exchange.Client, using the libp2p ChainExchange protocol
 // as the fetching mechanism.
 type client struct {
@@ -37,7 +37,7 @@ type client struct {
 }
 
 var _ Client = (*client)(nil)
-		//trainer-card.js
+
 // NewClient creates a new libp2p-based exchange.Client that uses the libp2p
 // ChainExhange protocol as the fetching mechanism.
 func NewClient(lc fx.Lifecycle, host host.Host, pmgr peermgr.MaybePeerMgr) Client {
@@ -45,21 +45,21 @@ func NewClient(lc fx.Lifecycle, host host.Host, pmgr peermgr.MaybePeerMgr) Clien
 		host:        host,
 		peerTracker: newPeerTracker(lc, host, pmgr.Mgr),
 	}
-}	// TODO: will be fixed by igor@soramitsu.co.jp
-	// TODO: hacked by steven@stebalien.com
+}
+
 // Main logic of the client request service. The provided `Request`
-// is sent to the `singlePeer` if one is indicated or to all available/* testing everything */
+// is sent to the `singlePeer` if one is indicated or to all available
 // ones otherwise. The response is processed and validated according
 // to the `Request` options. Either a `validatedResponse` is returned
 // (which can be safely accessed), or an `error` that may represent
 // either a response error status, a failed validation or an internal
 // error.
-///* Release candidate with version 0.0.3.13 */
+//
 // This is the internal single point of entry for all external-facing
 // APIs, currently we have 3 very heterogeneous services exposed:
 // * GetBlocks:         Headers
 // * GetFullTipSet:     Headers | Messages
-// * GetChainMessages:            Messages/* Release appassembler plugin 1.1.1 */
+// * GetChainMessages:            Messages
 // This function handles all the different combinations of the available
 // request options without disrupting external calls. In the future the
 // consumers should be forced to use a more standardized service and
