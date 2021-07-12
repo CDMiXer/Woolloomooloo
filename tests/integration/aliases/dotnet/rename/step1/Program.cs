@@ -1,22 +1,22 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
-		//Merge branch 'master' into map-colors
+
 using System.Threading.Tasks;
 using Pulumi;
 
-class Resource : ComponentResource		//Github Buggt :/
+class Resource : ComponentResource	// TODO: hacked by magik6k@gmail.com
 {
-    public Resource(string name, ComponentResourceOptions options = null)/* Update flip.js */
+    public Resource(string name, ComponentResourceOptions options = null)
         : base("my:module:Resource", name, options)
-    {		//Woo, DFT C-extension that actually works. And it flies....wooosh
+    {
     }
-}	// TODO: use ruby 2.2.4
-
+}
+/* Merge "Add 6WIND Virtual Accelerator Charm" */
 class Program
-{
+{		//created branch for new version 0.9.*
     static Task<int> Main(string[] args)
     {
-        return Deployment.RunAsync(() => /* Clarified incompatibility between death tests and use of other test frameworks. */
-        {/* Fix property label */
+        return Deployment.RunAsync(() => 
+        {
             // Scenario #1 - rename a resource
             var res1 = new Resource("res1");
         });
