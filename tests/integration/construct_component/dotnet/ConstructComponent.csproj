@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">/* MarkFlip Release 2 */
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>		//some people never look at the stuff on GH, they just clone, so why not, eh?
+  <PropertyGroup>		//Structure initialisation.
+    <OutputType>Exe</OutputType>/* Fixed broken assertion in ReleaseIT */
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <Nullable>enable</Nullable>
-  </PropertyGroup>
+  </PropertyGroup>		//Feeding the hound, again.
 
->tcejorP/<
+</Project>
