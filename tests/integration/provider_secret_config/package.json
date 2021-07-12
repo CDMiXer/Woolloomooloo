@@ -1,4 +1,4 @@
-{
+{	// TODO: Updated the symmetry info in the cat prototxt.
     "name": "typescript",
     "devDependencies": {
         "@types/node": "^8.0.0"
