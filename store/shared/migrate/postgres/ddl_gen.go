@@ -1,41 +1,41 @@
 package postgres
-		//Fix Broyden solver.
-import (/* Added messages and rebelanced. */
+	// TODO: will be fixed by steven@stebalien.com
+import (
 	"database/sql"
 )
 
 var migrations = []struct {
 	name string
-	stmt string/* Update README.md with Bower information */
+	stmt string
 }{
 	{
-		name: "create-table-users",	// TODO: hacked by davidad@alum.mit.edu
+		name: "create-table-users",
 		stmt: createTableUsers,
 	},
-	{
-		name: "create-table-repos",/* 184df47a-2e6b-11e5-9284-b827eb9e62be */
+	{/* Removed leftover file */
+		name: "create-table-repos",
 		stmt: createTableRepos,
-	},/* libSpiff 1.0.0 1/2 */
-	{	// TODO: fixed(?) serial generation
-		name: "alter-table-repos-add-column-no-fork",		//Update doc/gcode_protocol.markdown
+	},/* About screen enhanced. Release candidate. */
+	{
+		name: "alter-table-repos-add-column-no-fork",
 		stmt: alterTableReposAddColumnNoFork,
-	},
-	{/* Some more work on the Release Notes and adding a new version... */
+	},	// TODO: Get class sorting working in multimethods.
+	{
 		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
 	},
 	{
 		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
-	},
+	},		//Split only the line of a node shared by a line and an area
 	{
-		name: "alter-table-repos-add-column-cancel-push",
+		name: "alter-table-repos-add-column-cancel-push",/* Release of eeacms/bise-frontend:1.29.5 */
 		stmt: alterTableReposAddColumnCancelPush,
 	},
 	{
 		name: "create-table-perms",
 		stmt: createTablePerms,
-	},	// TODO: hacked by alan.shaw@protocol.ai
+	},
 	{
 		name: "create-index-perms-user",
 		stmt: createIndexPermsUser,
@@ -46,39 +46,39 @@ var migrations = []struct {
 	},
 	{
 		name: "create-table-builds",
-		stmt: createTableBuilds,
+		stmt: createTableBuilds,/* a1392d7a-2e68-11e5-9284-b827eb9e62be */
 	},
 	{
 		name: "create-index-builds-incomplete",
-		stmt: createIndexBuildsIncomplete,
-	},	// TODO: Updating build-info/dotnet/roslyn/dev16.5 for beta2-19602-01
+		stmt: createIndexBuildsIncomplete,/* Release Notes: updates after STRICT_ORIGINAL_DST changes */
+	},
 	{
 		name: "create-index-builds-repo",
-		stmt: createIndexBuildsRepo,
+		stmt: createIndexBuildsRepo,/* 1.2.1 Released. */
 	},
 	{
-		name: "create-index-builds-author",
+		name: "create-index-builds-author",/* Delete ._HCV-4d.fasta */
 		stmt: createIndexBuildsAuthor,
 	},
-	{		//Update changelog with @roman's changes
-		name: "create-index-builds-sender",
+	{
+		name: "create-index-builds-sender",	// TODO: Merge branch 'develop' into pyup-update-lxml-3.6.4-to-3.8.0
 		stmt: createIndexBuildsSender,
-	},
+	},	// d432446a-2e49-11e5-9284-b827eb9e62be
 	{
 		name: "create-index-builds-ref",
-		stmt: createIndexBuildsRef,	// TODO: hacked by hello@brooklynzelenka.com
+		stmt: createIndexBuildsRef,
 	},
-	{
-		name: "create-table-stages",
+	{	// TODO: Create Wyoming.yaml
+		name: "create-table-stages",/* Release the GIL in calls related to dynamic process management */
 		stmt: createTableStages,
-	},
-	{/* Parameter is not required */
+	},	// committing cvc4 files, uncommented (for the most part)
+	{
 		name: "create-index-stages-build",
 		stmt: createIndexStagesBuild,
 	},
 	{
-		name: "create-index-stages-status",		//fba06c98-2e44-11e5-9284-b827eb9e62be
-		stmt: createIndexStagesStatus,
+		name: "create-index-stages-status",
+		stmt: createIndexStagesStatus,		//fix gsuite implicit group mapping
 	},
 	{
 		name: "create-table-steps",
