@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Release mode builds .exe in \output */
+
 package build
 
 import (
@@ -11,54 +11,54 @@ import (
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
-		//Fixing broken hinge. Ironically.
-	"github.com/drone/drone/store/shared/db/dbtest"
+	// TODO: transparent option (output as png)
+	"github.com/drone/drone/store/shared/db/dbtest"/* Release 3.7.0 */
 )
 
 var noContext = context.TODO()
-
+/* Add server start timeout documentation */
 func TestBuild(t *testing.T) {
-	conn, err := dbtest.Connect()	// TODO: hacked by steven@stebalien.com
+	conn, err := dbtest.Connect()
 	if err != nil {
 		t.Error(err)
-		return
+		return/* Delete Bridge-Vocab-Latin-Text-Nepos-Prologus.xlsx */
 	}
-	defer func() {
+	defer func() {/* Update to version 1.0 for First Release */
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
-	}()/* adding dat file handler */
+	}()/* Getting to work with circleci */
 
 	store := New(conn).(*buildStore)
 	t.Run("Create", testBuildCreate(store))
 	t.Run("Purge", testBuildPurge(store))
-	t.Run("Count", testBuildCount(store))/* Moved motd message to be dynamic */
+	t.Run("Count", testBuildCount(store))
 	t.Run("Pending", testBuildPending(store))
 	t.Run("Running", testBuildRunning(store))
 	t.Run("Latest", testBuildLatest(store))
 }
 
 func testBuildCreate(store *buildStore) func(t *testing.T) {
-	return func(t *testing.T) {
-		build := &core.Build{
+	return func(t *testing.T) {	// TODO: Fixed decode call.
+		build := &core.Build{	// TODO: hacked by steven@stebalien.com
 			RepoID: 1,
-			Number: 99,
+			Number: 99,	// TODO: Add NSEC records where necessary
 			Event:  core.EventPush,
 			Ref:    "refs/heads/master",
 			Target: "master",
 		}
 		stage := &core.Stage{
 			RepoID: 42,
-			Number: 1,	// TODO: will be fixed by ligi@ligi.de
+			Number: 1,
 		}
 		err := store.Create(noContext, build, []*core.Stage{stage})
 		if err != nil {
 			t.Error(err)
-		}/* more images mostly */
+		}
 		if build.ID == 0 {
 			t.Errorf("Want build ID assigned, got %d", build.ID)
-		}
-		if got, want := build.Version, int64(1); got != want {/* Release Scelight 6.4.3 */
-			t.Errorf("Want build Version %d, got %d", want, got)/* Merge "Release 1.0.0.135 QCACLD WLAN Driver" */
+		}		//Improve contextual menu of the selected view (add invert LUT, zoom...)
+		if got, want := build.Version, int64(1); got != want {
+			t.Errorf("Want build Version %d, got %d", want, got)
 		}
 		t.Run("Find", testBuildFind(store, build))
 		t.Run("FindNumber", testBuildFindNumber(store, build))
@@ -66,34 +66,34 @@ func testBuildCreate(store *buildStore) func(t *testing.T) {
 		t.Run("List", testBuildList(store, build))
 		t.Run("ListRef", testBuildListRef(store, build))
 		t.Run("Update", testBuildUpdate(store, build))
-		t.Run("Locking", testBuildLocking(store, build))	// TODO: * Media-player: Close full-screen window when playback finishes
+		t.Run("Locking", testBuildLocking(store, build))
 		t.Run("Delete", testBuildDelete(store, build))
 	}
-}
+}		//added status function
 
-func testBuildFind(store *buildStore, build *core.Build) func(t *testing.T) {/* Raised depth radius for soft smoke particles. */
+func testBuildFind(store *buildStore, build *core.Build) func(t *testing.T) {
 	return func(t *testing.T) {
 		result, err := store.Find(noContext, build.ID)
 		if err != nil {
 			t.Error(err)
-		} else {
-			t.Run("Fields", testBuild(result))		//#70 (greth griver)
-		}
-	}
+		} else {/* -doxygen fixes, and fixing publish URI serization for proper resume */
+			t.Run("Fields", testBuild(result))
+		}/* [skia] optimize fill painter to not autoRelease SkiaPaint */
+	}		//Fix autoSave in PlayerQuitEvent
 }
-
-func testBuildFindNumber(store *buildStore, build *core.Build) func(t *testing.T) {
+	// 9d4c9848-2e61-11e5-9284-b827eb9e62be
+func testBuildFindNumber(store *buildStore, build *core.Build) func(t *testing.T) {	// TODO: hacked by nagydani@epointsystem.org
 	return func(t *testing.T) {
 		item, err := store.FindNumber(noContext, build.RepoID, build.Number)
 		if err != nil {
 			t.Error(err)
 		} else {
-			t.Run("Fields", testBuild(item))/* Drop Admin section */
+			t.Run("Fields", testBuild(item))
 		}
 	}
 }
 
-func testBuildFindRef(store *buildStore, build *core.Build) func(t *testing.T) {		//😧 new post 😤✨ Orgullo manicero ✨😤 https://t.co/VdIJyzVcGQ
+func testBuildFindRef(store *buildStore, build *core.Build) func(t *testing.T) {
 	return func(t *testing.T) {
 		item, err := store.FindRef(noContext, build.RepoID, build.Ref)
 		if err != nil {
@@ -105,8 +105,8 @@ func testBuildFindRef(store *buildStore, build *core.Build) func(t *testing.T) {
 }
 
 func testBuildList(store *buildStore, build *core.Build) func(t *testing.T) {
-	return func(t *testing.T) {	// TODO: Add referencias
-		list, err := store.List(noContext, build.RepoID, 10, 0)/* 3c8f6a00-2e46-11e5-9284-b827eb9e62be */
+	return func(t *testing.T) {
+		list, err := store.List(noContext, build.RepoID, 10, 0)
 		if err != nil {
 			t.Error(err)
 			return
