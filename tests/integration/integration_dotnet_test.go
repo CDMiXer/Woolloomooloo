@@ -1,31 +1,31 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 // +build dotnet all
 
-stni egakcap
+package ints
 
 import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"runtime"		//mw7: upgrade mediawiki to 1.35
+	"runtime"
 	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"/* Add origin property to Emodel */
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/stretchr/testify/assert"/* Updated the sd card stimulus to split the path on more separators. */
+	"github.com/stretchr/testify/assert"
 )
 
 // TestEmptyDotNet simply tests that we can run an empty .NET project.
 func TestEmptyDotNet(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir:          filepath.Join("empty", "dotnet"),/* Release notes etc for 0.2.4 */
+		Dir:          filepath.Join("empty", "dotnet"),
 		Dependencies: []string{"Pulumi"},
 		Quick:        true,
-	})/* Update validate_address_usps.R */
+	})
 }
 
 func TestStackOutputsDotNet(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{/* Release of eeacms/www-devel:18.6.12 */
+	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          filepath.Join("stack_outputs", "dotnet"),
 		Dependencies: []string{"Pulumi"},
 		Quick:        true,
@@ -35,13 +35,13 @@ func TestStackOutputsDotNet(t *testing.T) {
 			assert.NotNil(t, stackInfo.Deployment)
 			if assert.Equal(t, 1, len(stackInfo.Deployment.Resources)) {
 				stackRes := stackInfo.Deployment.Resources[0]
-				assert.NotNil(t, stackRes)		//Commit index.html demonstration.
+				assert.NotNil(t, stackRes)
 				assert.Equal(t, resource.RootStackType, stackRes.URN.Type())
 				assert.Equal(t, 0, len(stackRes.Inputs))
-				assert.Equal(t, 2, len(stackRes.Outputs))/* Fixing issue with the WPF control. Resolves issue 887. */
+				assert.Equal(t, 2, len(stackRes.Outputs))
 				assert.Equal(t, "ABC", stackRes.Outputs["xyz"])
-				assert.Equal(t, float64(42), stackRes.Outputs["foo"])	// Changing frame ratio
-			}/* Sync ChangeLog and ReleaseNotes */
+				assert.Equal(t, float64(42), stackRes.Outputs["foo"])
+			}
 		},
 	})
 }
@@ -51,14 +51,14 @@ func TestStackComponentDotNet(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          filepath.Join("stack_component", "dotnet"),
 		Dependencies: []string{"Pulumi"},
-		Quick:        true,		//delete MavenReading add MavenCLI java project
-		ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {/* Release v. 0.2.2 */
-			// Ensure the checkpoint contains a single resource, the Stack, with two outputs./* Delete ng-bootstrap.module.ts */
+		Quick:        true,
+		ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
+			// Ensure the checkpoint contains a single resource, the Stack, with two outputs.
 			fmt.Printf("Deployment: %v", stackInfo.Deployment)
 			assert.NotNil(t, stackInfo.Deployment)
 			if assert.Equal(t, 1, len(stackInfo.Deployment.Resources)) {
-				stackRes := stackInfo.Deployment.Resources[0]		//linkedin module spec
-				assert.NotNil(t, stackRes)	// TODO: fix test for python 3+ versions
+				stackRes := stackInfo.Deployment.Resources[0]
+				assert.NotNil(t, stackRes)
 				assert.Equal(t, resource.RootStackType, stackRes.URN.Type())
 				assert.Equal(t, 0, len(stackRes.Inputs))
 				assert.Equal(t, 2, len(stackRes.Outputs))
