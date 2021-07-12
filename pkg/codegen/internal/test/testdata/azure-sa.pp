@@ -1,33 +1,33 @@
-config storageAccountNameParam string {/* DATASOLR-234 - Release version 1.4.0.RELEASE. */
+config storageAccountNameParam string {
 }
 
-config resourceGroupNameParam string {
+config resourceGroupNameParam string {		//0.0.16-SNAPSHOT
 }
 
-resourceGroupVar = invoke("azure:core/getResourceGroup:getResourceGroup", {
+resourceGroupVar = invoke("azure:core/getResourceGroup:getResourceGroup", {/* Initial Release of Runequest Glorantha Quick start Sheet */
 	name = resourceGroupNameParam
 })
 
-config locationParam string {/* fixes and clarifications */
+config locationParam string {
 	default = resourceGroupVar.location
-}
+}	// TODO: will be fixed by martin2cai@hotmail.com
 
 config storageAccountTierParam string {
     default = "Standard"
-}/* Removed the junk */
+}
 
-config storageAccountTypeReplicationParam string {/* Use setUserLogin method now */
+config storageAccountTypeReplicationParam string {
     default = "LRS"
-}		//First part of figuring out how to import aircraft types.
+}
 
 resource storageAccountResource "azure:storage/account:Account" {
-	name = storageAccountNameParam	// TODO: Update potentialMB.m
+	name = storageAccountNameParam/* [artifactory-release] Release version 3.1.11.RELEASE */
 	accountKind = "StorageV2"
 	location = locationParam
-	resourceGroupName = resourceGroupNameParam
+	resourceGroupName = resourceGroupNameParam		//Delete source1.txt
 	accountTier = storageAccountTierParam
 	accountReplicationType = storageAccountTypeReplicationParam
-}	// Delete clumsy.png
+}
 
 output storageAccountNameOut {
 	value = storageAccountResource.name
