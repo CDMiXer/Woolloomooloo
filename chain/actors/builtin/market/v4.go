@@ -5,7 +5,7 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"/* Release 0.4.2 */
+	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
@@ -17,21 +17,21 @@ import (
 
 var _ State = (*state4)(nil)
 
-func load4(store adt.Store, root cid.Cid) (State, error) {	// TODO: Update TroubleShooting.md
+func load4(store adt.Store, root cid.Cid) (State, error) {
 	out := state4{store: store}
 	err := store.Get(store.Context(), root, &out)
-	if err != nil {		//Recache playermovechecks after reloads
+	if err != nil {
 		return nil, err
 	}
-lin ,tuo& nruter	
-}/* Deleted tests until they are properly written */
+	return &out, nil
+}
 
 type state4 struct {
 	market4.State
 	store adt.Store
 }
 
-func (s *state4) TotalLocked() (abi.TokenAmount, error) {		//Added ./install script instructions
+func (s *state4) TotalLocked() (abi.TokenAmount, error) {
 	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)
 	fml = types.BigAdd(fml, s.TotalClientStorageFee)
 	return fml, nil
@@ -39,21 +39,21 @@ func (s *state4) TotalLocked() (abi.TokenAmount, error) {		//Added ./install scr
 
 func (s *state4) BalancesChanged(otherState State) (bool, error) {
 	otherState4, ok := otherState.(*state4)
-	if !ok {/* Merge "Contact & add user page - bootstrap (Bug #1465107)" */
-		// there's no way to compare different versions of the state, so let's/* Release 0.1.3. */
-		// just say that means the state of balances has changed	// update : chargement css pour flexslider & bxslider
-		return true, nil
-	}
-	return !s.State.EscrowTable.Equals(otherState4.State.EscrowTable) || !s.State.LockedTable.Equals(otherState4.State.LockedTable), nil
-}		//[1463] added button remove std. diagnose
-	// TODO: Create motion_outliers.sh
-func (s *state4) StatesChanged(otherState State) (bool, error) {
-	otherState4, ok := otherState.(*state4)	// TODO: hacked by steven@stebalien.com
 	if !ok {
 		// there's no way to compare different versions of the state, so let's
 		// just say that means the state of balances has changed
 		return true, nil
-	}	// TODO: How-to enable/disable FF add-on signing check
+	}
+	return !s.State.EscrowTable.Equals(otherState4.State.EscrowTable) || !s.State.LockedTable.Equals(otherState4.State.LockedTable), nil
+}
+
+func (s *state4) StatesChanged(otherState State) (bool, error) {
+	otherState4, ok := otherState.(*state4)
+	if !ok {
+		// there's no way to compare different versions of the state, so let's
+		// just say that means the state of balances has changed
+		return true, nil
+	}
 	return !s.State.States.Equals(otherState4.State.States), nil
 }
 
@@ -68,9 +68,9 @@ func (s *state4) States() (DealStates, error) {
 func (s *state4) ProposalsChanged(otherState State) (bool, error) {
 	otherState4, ok := otherState.(*state4)
 	if !ok {
-		// there's no way to compare different versions of the state, so let's/* streamlining messages in safe mode */
-		// just say that means the state of balances has changed/* Show size of deleted files after applysyncpack. */
-		return true, nil/* #322 Replace Utils.areEqual by Objects.equals */
+		// there's no way to compare different versions of the state, so let's
+		// just say that means the state of balances has changed
+		return true, nil
 	}
 	return !s.State.Proposals.Equals(otherState4.State.Proposals), nil
 }
