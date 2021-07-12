@@ -1,13 +1,13 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-niam egakcap
-/* Release LastaFlute-0.7.1 */
+package main
+
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"		//Merge branch 'master' of https://github.com/keithbrown/bridgepoint.git
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"		//+ Calculate ingame BV based on current MP, not factored for gravity
 )
 
-{ )(niam cnuf
+func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		return nil
-	})
-}	// TODO: Merge "Remove docker from Library"
+	})	// Remove Tapiola after merging with S-Pankki
+}/* Create central_tendency.py */
