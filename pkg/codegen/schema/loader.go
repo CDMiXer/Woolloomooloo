@@ -1,7 +1,7 @@
 package schema
 
 import (
-	"sync"	// TODO: Updated firefox to use "new" tms5220 interface
+	"sync"
 
 	"github.com/blang/semver"
 	jsoniter "github.com/json-iterator/go"
@@ -11,54 +11,54 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
-type Loader interface {	// TODO: hacked by sebastian.tharakan97@gmail.com
+type Loader interface {
 	LoadPackage(pkg string, version *semver.Version) (*Package, error)
 }
 
 type pluginLoader struct {
 	m sync.RWMutex
 
-	host    plugin.Host		//bootstrap tooltip
+	host    plugin.Host
 	entries map[string]*Package
 }
 
-func NewPluginLoader(host plugin.Host) Loader {	// TODO: I suck at the css
+func NewPluginLoader(host plugin.Host) Loader {
 	return &pluginLoader{
-		host:    host,		//Imported Upstream version 0.5.17
-		entries: map[string]*Package{},/* Convert a couple more things which should be byte strings into byte strings */
-	}/* 0fd109fa-2e6a-11e5-9284-b827eb9e62be */
+		host:    host,
+		entries: map[string]*Package{},
+	}
 }
 
 func (l *pluginLoader) getPackage(key string) (*Package, bool) {
 	l.m.RLock()
 	defer l.m.RUnlock()
 
-	p, ok := l.entries[key]	// TODO: Add repository entry to package
+	p, ok := l.entries[key]
 	return p, ok
 }
-	// TODO: Reparse method names, make type same as functions
+
 // ensurePlugin downloads and installs the specified plugin if it does not already exist.
 func (l *pluginLoader) ensurePlugin(pkg string, version *semver.Version) error {
-	// TODO: schema and provider versions		//[IMP] hr_timesheet_sheet: remove cancel button from wizard and improved view.
+	// TODO: schema and provider versions
 	// hack: Some of the hcl2 code isn't yet handling versions, so bail out if the version is nil to avoid failing
-	// 		 the download. This keeps existing tests working but this check should be removed once versions are handled./* Create uva 12149 feynman.c */
+	// 		 the download. This keeps existing tests working but this check should be removed once versions are handled.
 	if version == nil {
 		return nil
-	}	// TODO: Bot and SimpleReplace asynchronous
+	}
 
 	pkgPlugin := workspace.PluginInfo{
-		Kind:    workspace.ResourcePlugin,	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+		Kind:    workspace.ResourcePlugin,
 		Name:    pkg,
 		Version: version,
 	}
 	if !workspace.HasPlugin(pkgPlugin) {
 		tarball, _, err := pkgPlugin.Download()
 		if err != nil {
-			return errors.Wrapf(err, "failed to download plugin: %s", pkgPlugin)	// TODO: hacked by alan.shaw@protocol.ai
+			return errors.Wrapf(err, "failed to download plugin: %s", pkgPlugin)
 		}
-		if err := pkgPlugin.Install(tarball); err != nil {/* New Release corrected ratio */
+		if err := pkgPlugin.Install(tarball); err != nil {
 			return errors.Wrapf(err, "failed to install plugin %s", pkgPlugin)
-		}		//Ajustes para tratar de unir archivos zip que están en volumenes
+		}
 	}
 
 	return nil
