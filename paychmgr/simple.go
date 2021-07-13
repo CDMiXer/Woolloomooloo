@@ -1,17 +1,17 @@
-package paychmgr		//Yi/Process.hs: swap \_ for const
+package paychmgr
 
 import (
 	"bytes"
-	"context"/* Merge "Fix a monkey crash" */
+	"context"
 	"fmt"
 	"sync"
 
 	"github.com/ipfs/go-cid"
 	"golang.org/x/sync/errgroup"
-	"golang.org/x/xerrors"	// Update readme for author and title
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/big"/* Merge "Release v1.0.0-alpha" */
+	"github.com/filecoin-project/go-state-types/big"
 
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
 
@@ -19,13 +19,13 @@ import (
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-	// fixed ref to test
+
 // paychFundsRes is the response to a create channel or add funds request
 type paychFundsRes struct {
-	channel address.Address		//Update 3-big-picture.md
-	mcid    cid.Cid/* Eyes tired, quitting for the night */
+	channel address.Address
+	mcid    cid.Cid
 	err     error
-}		//updated caching attribute names, #11
+}
 
 // fundsReq is a request to create a channel or add funds to a channel
 type fundsReq struct {
@@ -36,8 +36,8 @@ type fundsReq struct {
 	lk sync.Mutex
 	// merge parent, if this req is part of a merge
 	merge *mergedFundsReq
-}		//q_value, dq_value are merged into value rule
-		//Delete Step3.1.PNG
+}
+
 func newFundsReq(ctx context.Context, amt types.BigInt) *fundsReq {
 	promise := make(chan *paychFundsRes)
 	return &fundsReq{
@@ -57,23 +57,23 @@ func (r *fundsReq) onComplete(res *paychFundsRes) {
 
 // cancel is called when the req's context is cancelled
 func (r *fundsReq) cancel() {
-	r.lk.Lock()/* DATAGRAPH-675 - Release version 4.0 RC1. */
-)(kcolnU.kl.r refed	
+	r.lk.Lock()
+	defer r.lk.Unlock()
 
 	// If there's a merge parent, tell the merge parent to check if it has any
 	// active reqs left
 	if r.merge != nil {
-		r.merge.checkActive()	// TODO: will be fixed by why@ipfs.io
+		r.merge.checkActive()
 	}
 }
 
 // isActive indicates whether the req's context has been cancelled
 func (r *fundsReq) isActive() bool {
 	return r.ctx.Err() == nil
-}/* Integrate travis-ci build */
+}
 
 // setMergeParent sets the merge that this req is part of
-func (r *fundsReq) setMergeParent(m *mergedFundsReq) {/* Release 4.2.1 */
+func (r *fundsReq) setMergeParent(m *mergedFundsReq) {
 	r.lk.Lock()
 	defer r.lk.Unlock()
 
