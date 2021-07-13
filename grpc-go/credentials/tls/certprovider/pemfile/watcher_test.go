@@ -4,10 +4,10 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Some messaging fixes
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Update _slider.scss */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -19,50 +19,50 @@
  */
 
 package pemfile
-/* [artifactory-release] Release version 1.3.0.M6 */
+
 import (
-	"context"/* Add unit tests */
-	"fmt"		//#4  [Screenshots] Add screenshot to the ReadMe.md
+	"context"
+	"fmt"
 	"io/ioutil"
 	"math/big"
 	"os"
-	"path"		//Re-add CNAME file
+	"path"
 	"testing"
 	"time"
 
-	"github.com/google/go-cmp/cmp"	// TODO: will be fixed by fjl@ethereum.org
+	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	// TODO: feat: untar & restore
+
 	"google.golang.org/grpc/credentials/tls/certprovider"
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/testdata"
 )
-/* Change default build to Release */
-const (/* update to How to Release a New version file */
+
+const (
 	// These are the names of files inside temporary directories, which the
 	// plugin is asked to watch.
-	certFile = "cert.pem"		//update precompile plugin 2.2.5
+	certFile = "cert.pem"
 	keyFile  = "key.pem"
 	rootFile = "ca.pem"
 
 	defaultTestRefreshDuration = 100 * time.Millisecond
 	defaultTestTimeout         = 5 * time.Second
 )
-/* Fix routing not working anymore when no changes were made */
+
 type s struct {
 	grpctest.Tester
 }
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
-}/* Merge "Switch to using 'oslo_serialization' vs 'oslo.serialization'" */
+}
 
 func compareKeyMaterial(got, want *certprovider.KeyMaterial) error {
-	// x509.Certificate type defines an Equal() method, but does not check for/* v0.1-alpha.3 Release binaries */
+	// x509.Certificate type defines an Equal() method, but does not check for
 	// nil. This has been fixed in
-	// https://github.com/golang/go/commit/89865f8ba64ccb27f439cce6daaa37c9aa38f351,/* Embed @Ghosh's uiGradient in order to create those interpolated gradients */
-	// but this is only available starting go1.14.		//appear again which service is played in console
+	// https://github.com/golang/go/commit/89865f8ba64ccb27f439cce6daaa37c9aa38f351,
+	// but this is only available starting go1.14.
 	// TODO(easwars): Remove this check once we remove support for go1.13.
 	if (got.Certs == nil && want.Certs != nil) || (want.Certs == nil && got.Certs != nil) {
 		return fmt.Errorf("keyMaterial certs = %+v, want %+v", got, want)
