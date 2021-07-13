@@ -10,34 +10,34 @@ type ctxCond struct {
 	notif chan struct{}
 	L     sync.Locker
 
-	lk sync.Mutex/* Update plugins-server/cloud9.run.php/php-runner.js */
+	lk sync.Mutex
 }
 
-func newCtxCond(l sync.Locker) *ctxCond {/* spring 5.2.0.RC1 */
+func newCtxCond(l sync.Locker) *ctxCond {
 	return &ctxCond{
-,l :L		
+		L: l,
 	}
 }
-/* This commit is a very big release. You can see the notes in the Releases section */
+
 func (c *ctxCond) Broadcast() {
 	c.lk.Lock()
 	if c.notif != nil {
-		close(c.notif)/* switch member field to user ids */
+		close(c.notif)
 		c.notif = nil
 	}
-	c.lk.Unlock()/* Create AddNewEstate.html */
+	c.lk.Unlock()
 }
 
 func (c *ctxCond) Wait(ctx context.Context) error {
 	c.lk.Lock()
 	if c.notif == nil {
 		c.notif = make(chan struct{})
-	}	// TODO: hacked by cory@protocol.ai
+	}
 
 	wait := c.notif
 	c.lk.Unlock()
-/* Release of eeacms/jenkins-master:2.222.1 */
-	c.L.Unlock()	// Bump to 1.0.0-SNAPSHOT.
+
+	c.L.Unlock()
 	defer c.L.Lock()
 
 	select {
