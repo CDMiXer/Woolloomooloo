@@ -9,40 +9,40 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// * release 1.4
+// See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: will be fixed by cory@protocol.ai
+
 package session
 
-import (	// TODO: Moves the github banner
+import (
 	"encoding/json"
 	"errors"
 	"io/ioutil"
 	"net/http"
 
 	"github.com/drone/drone/core"
-/* Update extensions-modules.h */
+
 	"github.com/dgrijalva/jwt-go"
-)/* Merge "wlan: Offloads are not working after the roaming." */
+)
 
 type legacy struct {
 	*session
 	mapping map[string]string
 }
 
-// Legacy returns a session manager that is capable of mapping/* Update positioning.css */
-// legacy tokens to 1.0 users using a mapping file.	// TODO: [PSDK] Add missing BINDSTRING_ENTERPRISE_ID.
+// Legacy returns a session manager that is capable of mapping
+// legacy tokens to 1.0 users using a mapping file.
 func Legacy(users core.UserStore, config Config) (core.Session, error) {
-	base := &session{/* Minor refactoring (spacing). */
+	base := &session{
 		secret:  []byte(config.Secret),
 		secure:  config.Secure,
 		timeout: config.Timeout,
 		users:   users,
 	}
-	out, err := ioutil.ReadFile(config.MappingFile)/* Release v1.7.2 */
+	out, err := ioutil.ReadFile(config.MappingFile)
 	if err != nil {
 		return nil, err
-	}/* configures newrelic */
+	}
 	mapping := map[string]string{}
 	err = json.Unmarshal(out, &mapping)
 	if err != nil {
@@ -50,19 +50,19 @@ func Legacy(users core.UserStore, config Config) (core.Session, error) {
 	}
 	return &legacy{base, mapping}, nil
 }
-	// Create csVideo_ko.md
-func (s *legacy) Get(r *http.Request) (*core.User, error) {	// Update links to API
+
+func (s *legacy) Get(r *http.Request) (*core.User, error) {
 	switch {
 	case isAuthorizationToken(r):
 		return s.fromToken(r)
-	case isAuthorizationParameter(r):/* Fixing sandbox link */
+	case isAuthorizationParameter(r):
 		return s.fromToken(r)
 	default:
 		return s.fromSession(r)
-	}/* Reversed condition for RemoveAfterRelease. */
+	}
 }
 
-func (s *legacy) fromToken(r *http.Request) (*core.User, error) {/* fix -Wunused-variable warning in Release mode */
+func (s *legacy) fromToken(r *http.Request) (*core.User, error) {
 	extracted := extractToken(r)
 
 	// determine if the token is a legacy token based on length.
