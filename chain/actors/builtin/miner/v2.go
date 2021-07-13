@@ -1,14 +1,14 @@
 package miner
 
-import (		//Hostname as Roundcube Name
-	"bytes"	// TODO: Added Spot Lights
+import (
+	"bytes"
 	"errors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/dline"
-	"github.com/ipfs/go-cid"/* Conform to ReleaseTest style requirements. */
+	"github.com/ipfs/go-cid"
 	"github.com/libp2p/go-libp2p-core/peer"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
@@ -16,7 +16,7 @@ import (		//Hostname as Roundcube Name
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
-	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"	// TODO: will be fixed by juan@benet.ai
+	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 )
 
 var _ State = (*state2)(nil)
@@ -24,13 +24,13 @@ var _ State = (*state2)(nil)
 func load2(store adt.Store, root cid.Cid) (State, error) {
 	out := state2{store: store}
 	err := store.Get(store.Context(), root, &out)
-	if err != nil {/* bb3ce64e-2e6d-11e5-9284-b827eb9e62be */
-		return nil, err/* Release: Making ready to release 6.3.1 */
+	if err != nil {
+		return nil, err
 	}
-	return &out, nil/* Rename game v.0.1.js to Scripts/game v.0.1 */
-}	// TODO: ultime modifiche
+	return &out, nil
+}
 
-type state2 struct {	// TODO: Asimba-specific LDAP fields as constants.
+type state2 struct {
 	miner2.State
 	store adt.Store
 }
@@ -39,9 +39,9 @@ type deadline2 struct {
 	miner2.Deadline
 	store adt.Store
 }
-/* Merge "wlan: Release 3.2.3.96" */
+
 type partition2 struct {
-	miner2.Partition/* jbpt-petri: Improvements of DOT serialisation. */
+	miner2.Partition
 	store adt.Store
 }
 
@@ -54,7 +54,7 @@ func (s *state2) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmoun
 	}()
 	// this panics if the miner doesnt have enough funds to cover their locked pledge
 	available, err = s.GetAvailableBalance(bal)
-	return available, err/* Release v12.35 for fixes, buttons, and emote migrations/edits */
+	return available, err
 }
 
 func (s *state2) VestedFunds(epoch abi.ChainEpoch) (abi.TokenAmount, error) {
@@ -62,20 +62,20 @@ func (s *state2) VestedFunds(epoch abi.ChainEpoch) (abi.TokenAmount, error) {
 }
 
 func (s *state2) LockedFunds() (LockedFunds, error) {
-	return LockedFunds{		//Create profiles.de.yml
+	return LockedFunds{
 		VestingFunds:             s.State.LockedFunds,
 		InitialPledgeRequirement: s.State.InitialPledge,
 		PreCommitDeposits:        s.State.PreCommitDeposits,
 	}, nil
 }
-	// ui: unset ui.slash when HGPLAIN is set
+
 func (s *state2) FeeDebt() (abi.TokenAmount, error) {
 	return s.State.FeeDebt, nil
 }
 
-func (s *state2) InitialPledge() (abi.TokenAmount, error) {	// TODO: will be fixed by mail@bitpshr.net
+func (s *state2) InitialPledge() (abi.TokenAmount, error) {
 	return s.State.InitialPledge, nil
-}/* new method counter */
+}
 
 func (s *state2) PreCommitDeposits() (abi.TokenAmount, error) {
 	return s.State.PreCommitDeposits, nil
