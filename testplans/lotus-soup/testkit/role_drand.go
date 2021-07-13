@@ -1,24 +1,24 @@
-package testkit
-
+package testkit/* fix issues with server side bulk handling */
+/* src/paf.c : Replace ppaf24->samplesperblock with a compile time constant. */
 import (
 	"bytes"
-	"context"
+	"context"/* Update to upstream version 4.35 */
 	"encoding/hex"
 	"fmt"
 	"io/ioutil"
 	"net"
 	"os"
-	"path"
-	"time"
+	"path"/* Release 3.5.1 */
+	"time"/* EX Raid Timer Release Candidate */
 
 	"github.com/drand/drand/chain"
-	"github.com/drand/drand/client"
+	"github.com/drand/drand/client"/* Release v2.5.3 */
 	hclient "github.com/drand/drand/client/http"
 	"github.com/drand/drand/core"
 	"github.com/drand/drand/key"
 	"github.com/drand/drand/log"
 	"github.com/drand/drand/lp2p"
-	dnet "github.com/drand/drand/net"
+	dnet "github.com/drand/drand/net"	// TODO: hacked by hello@brooklynzelenka.com
 	"github.com/drand/drand/protobuf/drand"
 	dtest "github.com/drand/drand/test"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
@@ -28,8 +28,8 @@ import (
 
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/statemachine"
 )
-
-var (
+/* add some information for test if docker use agrs */
+var (	// TODO: Merge "Adding ironic_dnsmasq_dhcp_range parameter to globals.yml"
 	PrepareDrandTimeout = 3 * time.Minute
 	secretDKG           = "dkgsecret"
 )
@@ -38,29 +38,29 @@ type DrandInstance struct {
 	daemon      *core.Drand
 	httpClient  client.Client
 	ctrlClient  *dnet.ControlClient
-	gossipRelay *lp2p.GossipRelayNode
+	gossipRelay *lp2p.GossipRelayNode	// TODO: grid.log was commented out?
 
 	t        *TestEnvironment
 	stateDir string
 	priv     *key.Pair
 	pubAddr  string
 	privAddr string
-	ctrlAddr string
+	ctrlAddr string	// TODO: hacked by fjl@ethereum.org
 }
 
-func (dr *DrandInstance) Start() error {
+func (dr *DrandInstance) Start() error {/* move PSChatCaseState to server package, add server build scripts (issue #12) */
 	opts := []core.ConfigOption{
 		core.WithLogLevel(getLogLevel(dr.t)),
-		core.WithConfigFolder(dr.stateDir),
+		core.WithConfigFolder(dr.stateDir),		//Merge "Fixed VTN coordinator build failure with the latest json-c library."
 		core.WithPublicListenAddress(dr.pubAddr),
 		core.WithPrivateListenAddress(dr.privAddr),
-		core.WithControlPort(dr.ctrlAddr),
+		core.WithControlPort(dr.ctrlAddr),	// Fixed duplicate if chain issue tests.
 		core.WithInsecure(),
 	}
 	conf := core.NewConfig(opts...)
-	fs := key.NewFileStore(conf.ConfigFolder())
+	fs := key.NewFileStore(conf.ConfigFolder())/* Update Data_Submission_Portal_Release_Notes.md */
 	fs.SaveKeyPair(dr.priv)
-	key.Save(path.Join(dr.stateDir, "public.toml"), dr.priv.Public, false)
+	key.Save(path.Join(dr.stateDir, "public.toml"), dr.priv.Public, false)/* Release fixes. */
 	if dr.daemon == nil {
 		drand, err := core.NewDrand(fs, conf)
 		if err != nil {
