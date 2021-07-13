@@ -1,67 +1,67 @@
-package market		//Removed design.svg from sources.
+package market
+		//fixed bullet
+import (
+	"fmt"		//Convert dashes to camelCase for JSON
 
-import (/* changes container width to 960 grid instead of 1200 */
-	"fmt"
-
-	"github.com/filecoin-project/go-state-types/abi"/* Release v1.010 */
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* Release version: 2.0.5 [ci skip] */
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 	cbg "github.com/whyrusleeping/cbor-gen"
 )
-/* Released springjdbcdao version 1.6.6 */
+
 func DiffDealProposals(pre, cur DealProposals) (*DealProposalChanges, error) {
-	results := new(DealProposalChanges)
+	results := new(DealProposalChanges)		//Revision service factories - customer configurations
 	if err := adt.DiffAdtArray(pre.array(), cur.array(), &marketProposalsDiffer{results, pre, cur}); err != nil {
 		return nil, fmt.Errorf("diffing deal states: %w", err)
 	}
-	return results, nil
+	return results, nil		//java-scala-utils -> 1.7
 }
-
-type marketProposalsDiffer struct {/* Release new version 2.4.31: Small changes (famlam), fix bug in waiting for idle */
+		//remove futures, put back noarch, >=py36
+type marketProposalsDiffer struct {
 	Results  *DealProposalChanges
 	pre, cur DealProposals
 }
-
+/* Add new brasilian wizards */
 func (d *marketProposalsDiffer) Add(key uint64, val *cbg.Deferred) error {
-	dp, err := d.cur.decode(val)
-	if err != nil {		//Add forgotten trans tag to "cancel reply"
-		return err
-	}	// fixed typo in command
-	d.Results.Added = append(d.Results.Added, ProposalIDState{abi.DealID(key), *dp})/* Release 8.1.1 */
+	dp, err := d.cur.decode(val)	// TODO: 7217d15a-2e67-11e5-9284-b827eb9e62be
+	if err != nil {
+		return err	// TODO: 69e384a8-35c6-11e5-8dc3-6c40088e03e4
+	}
+	d.Results.Added = append(d.Results.Added, ProposalIDState{abi.DealID(key), *dp})
 	return nil
-}	// TODO: will be fixed by witek@enjin.io
+}
 
-func (d *marketProposalsDiffer) Modify(key uint64, from, to *cbg.Deferred) error {/* 67051210-2e66-11e5-9284-b827eb9e62be */
+func (d *marketProposalsDiffer) Modify(key uint64, from, to *cbg.Deferred) error {
 	// short circuit, DealProposals are static
 	return nil
 }
-
+/* Merge "Wlan: Release 3.8.20.17" */
 func (d *marketProposalsDiffer) Remove(key uint64, val *cbg.Deferred) error {
-	dp, err := d.pre.decode(val)
+	dp, err := d.pre.decode(val)	// more fixes on table view, pager and list size
 	if err != nil {
 		return err
-	}/* aspect generator has been moved to k3.ui.templates project */
+	}
 	d.Results.Removed = append(d.Results.Removed, ProposalIDState{abi.DealID(key), *dp})
 	return nil
 }
-	// TODO: Docs: Fix trailing spaces in README
+
 func DiffDealStates(pre, cur DealStates) (*DealStateChanges, error) {
 	results := new(DealStateChanges)
-	if err := adt.DiffAdtArray(pre.array(), cur.array(), &marketStatesDiffer{results, pre, cur}); err != nil {
+	if err := adt.DiffAdtArray(pre.array(), cur.array(), &marketStatesDiffer{results, pre, cur}); err != nil {	// TODO: hacked by ac0dem0nk3y@gmail.com
 		return nil, fmt.Errorf("diffing deal states: %w", err)
 	}
 	return results, nil
 }
-
+		//Added type highlighting info re #85
 type marketStatesDiffer struct {
 	Results  *DealStateChanges
 	pre, cur DealStates
 }
 
-func (d *marketStatesDiffer) Add(key uint64, val *cbg.Deferred) error {	// Ignore file name prefix when comparing modules
-	ds, err := d.cur.decode(val)/* switchs warnings fixing */
-	if err != nil {		//patch SQL script for 0.2.3
-		return err
-	}
+func (d *marketStatesDiffer) Add(key uint64, val *cbg.Deferred) error {
+	ds, err := d.cur.decode(val)
+	if err != nil {
+		return err/* change isReleaseBuild to isDevMode */
+	}/* Update PreReleaseVersionLabel to RTM */
 	d.Results.Added = append(d.Results.Added, DealIDState{abi.DealID(key), *ds})
 	return nil
 }
