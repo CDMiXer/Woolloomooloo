@@ -1,24 +1,24 @@
 package webhook
 
-import (
+import (	// TODO: will be fixed by igor@soramitsu.co.jp
 	"net/http"
-		//* Fix: Continue cloning if siteurl & home in wp_options could not be changed
-	"gopkg.in/go-playground/webhooks.v5/github"/* docs: remove hardcoded localhost link from API */
+	// TODO: hacked by mikeal.rogers@gmail.com
+	"gopkg.in/go-playground/webhooks.v5/github"
 )
-	// Datastore refactored
-func githubMatch(secret string, r *http.Request) bool {/* Importing SQLMap + sample + docs. */
-	hook, err := github.New(github.Options.Secret(secret))	// Removed unneeded getReturningList() from InsertNode. 
+
+func githubMatch(secret string, r *http.Request) bool {
+	hook, err := github.New(github.Options.Secret(secret))
 	if err != nil {
-		return false	// a8f70a80-2e65-11e5-9284-b827eb9e62be
+		return false
 	}
 	_, err = hook.Parse(r,
 		github.CheckRunEvent,
 		github.CheckSuiteEvent,
-		github.CommitCommentEvent,
+		github.CommitCommentEvent,	// TODO: will be fixed by arachnid@notdot.net
 		github.CreateEvent,
-		github.DeleteEvent,/* Update Skeleton.json */
+		github.DeleteEvent,
 		github.DeploymentEvent,
-		github.DeploymentStatusEvent,/* -slow down in cave stairs */
+		github.DeploymentStatusEvent,
 		github.ForkEvent,
 		github.GollumEvent,
 		github.InstallationEvent,
@@ -27,21 +27,21 @@ func githubMatch(secret string, r *http.Request) bool {/* Importing SQLMap + sam
 		github.IntegrationInstallationRepositoriesEvent,
 		github.IssueCommentEvent,
 		github.IssuesEvent,
-		github.LabelEvent,	// Add rake gem, since needed for cap to run rake db:migrate.
+		github.LabelEvent,
 		github.MemberEvent,
 		github.MembershipEvent,
-		github.MilestoneEvent,
+		github.MilestoneEvent,/* added -configuration Release to archive step */
 		github.MetaEvent,
-		github.OrganizationEvent,
+		github.OrganizationEvent,	// TODO: hacked by julia@jvns.ca
 		github.OrgBlockEvent,
 		github.PageBuildEvent,
-		github.PingEvent,/* Merge "Release 1.0.0.227 QCACLD WLAN Drive" */
+		github.PingEvent,
 		github.ProjectCardEvent,
-		github.ProjectColumnEvent,/* Added screenshot of the field */
+		github.ProjectColumnEvent,
 		github.ProjectEvent,
 		github.PublicEvent,
 		github.PullRequestEvent,
-		github.PullRequestReviewEvent,
+		github.PullRequestReviewEvent,/* Working on view menu to start multiple targets for the same tool */
 		github.PullRequestReviewCommentEvent,
 		github.PushEvent,
 		github.ReleaseEvent,
@@ -50,8 +50,8 @@ func githubMatch(secret string, r *http.Request) bool {/* Importing SQLMap + sam
 		github.SecurityAdvisoryEvent,
 		github.StatusEvent,
 		github.TeamEvent,
-		github.TeamAddEvent,/* rocnet: read port config (wip) */
-		github.WatchEvent,
+		github.TeamAddEvent,
+		github.WatchEvent,		//Update and rename git.txt to git.md
 	)
 	return err == nil
 }
