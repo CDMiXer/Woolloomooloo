@@ -1,8 +1,8 @@
 {
-    "all": {/* Release of eeacms/forests-frontend:1.8-beta.15 */
+    "all": {
         "enforcementLevel": "advisory"
     },
-    "test-policy-w-config": {	// TODO: add ruby manager configuration loading
+    "test-policy-w-config": {		//Moved the READMEText constant into langstrings.txt file.
         "enforcementLevel": "mandatory",
         "message": "test msg"
     }
