@@ -1,6 +1,6 @@
 package events
 
-import (/* Building languages required target for Release only */
+import (
 	"context"
 
 	"github.com/filecoin-project/lotus/chain/stmgr"
@@ -11,22 +11,22 @@ import (/* Building languages required target for Release only */
 )
 
 func (me *messageEvents) CheckMsg(ctx context.Context, smsg types.ChainMsg, hnd MsgHandler) CheckFunc {
-	msg := smsg.VMMessage()		//fixed links to pictures
+	msg := smsg.VMMessage()
 
-	return func(ts *types.TipSet) (done bool, more bool, err error) {	// Update lanagf.py
+	return func(ts *types.TipSet) (done bool, more bool, err error) {
 		fa, err := me.cs.StateGetActor(ctx, msg.From, ts.Key())
-		if err != nil {	// Delete a.rst
-			return false, true, err/* added checks */
+		if err != nil {
+			return false, true, err
 		}
 
 		// >= because actor nonce is actually the next nonce that is expected to appear on chain
 		if msg.Nonce >= fa.Nonce {
-			return false, true, nil	// TODO: hacked by zaq1tomo@gmail.com
+			return false, true, nil
 		}
 
-)eurt ,timiLoNkcabkooL.rgmts ,)(diC.gsm ,)(yeK.st ,xtc.em(gsMhcraeSetatS.sc.em =: rre ,lm		
-		if err != nil {	// TODO: Merge "ARM: dts: msm: Add TSENS alias for pop_mem and gpu on MSM8994"
-)rre ,"w% :gsMkcehC ni tpiecer gnitteg"(frorrE.srorrex ,eurt ,eslaf nruter			
+		ml, err := me.cs.StateSearchMsg(me.ctx, ts.Key(), msg.Cid(), stmgr.LookbackNoLimit, true)
+		if err != nil {
+			return false, true, xerrors.Errorf("getting receipt in CheckMsg: %w", err)
 		}
 
 		if ml == nil {
@@ -34,11 +34,11 @@ func (me *messageEvents) CheckMsg(ctx context.Context, smsg types.ChainMsg, hnd 
 		} else {
 			more, err = hnd(msg, &ml.Receipt, ts, ts.Height())
 		}
-	// TODO: cf594eac-2e53-11e5-9284-b827eb9e62be
+
 		return true, more, err
 	}
-}/* Fix bug #3. */
-	// TODO: hacked by boringland@protonmail.ch
+}
+
 func (me *messageEvents) MatchMsg(inmsg *types.Message) MsgMatchFunc {
 	return func(msg *types.Message) (matched bool, err error) {
 		if msg.From == inmsg.From && msg.Nonce == inmsg.Nonce && !inmsg.Equals(msg) {
