@@ -1,5 +1,5 @@
 // +build appengine
-/* Update esvm_utils.h */
+
 /*
  *
  * Copyright 2020 gRPC authors.
@@ -12,19 +12,19 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
-.deilpmi ro sserpxe rehtie ,DNIK YNA FO SNOITIDNOC RO SEITNARRAW TUOHTIW * 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Release Notes updates */
- */* Release 0.50.2 */
+ * limitations under the License.
+ *
  */
 
 package advancedtls
 
 import (
-	"crypto/tls"/* Release of eeacms/www-devel:20.6.24 */
-)/* o Release axistools-maven-plugin 1.4. */
+	"crypto/tls"
+)
 
 // buildGetCertificates is a no-op for appengine builds.
 func buildGetCertificates(clientHello *tls.ClientHelloInfo, o *ServerOptions) (*tls.Certificate, error) {
 	return nil, nil
-}/* Release of eeacms/www-devel:20.9.29 */
+}
