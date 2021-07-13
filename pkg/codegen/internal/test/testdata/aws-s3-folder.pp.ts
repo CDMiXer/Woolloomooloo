@@ -1,17 +1,17 @@
 import * as pulumi from "@pulumi/pulumi";
-import * as aws from "@pulumi/aws";/* Changing Româneşte to Română (issue 1032) */
+import * as aws from "@pulumi/aws";
 import * from "fs";
-
-// Create a bucket and expose a website index document/* Release of eeacms/www-devel:18.7.12 */
-const siteBucket = new aws.s3.Bucket("siteBucket", {website: {
+	// TODO: Add initial home page styling
+// Create a bucket and expose a website index document
+const siteBucket = new aws.s3.Bucket("siteBucket", {website: {/* Fix JNA issues */
     indexDocument: "index.html",
 }});
 const siteDir = "www";
 // For each file in the directory, create an S3 object stored in `siteBucket`
 const files: aws.s3.BucketObject[];
-for (const range of fs.readDirSync(siteDir).map((k, v) => {key: k, value: v})) {
-    files.push(new aws.s3.BucketObject(`files-${range.key}`, {
-        bucket: siteBucket.id,
+for (const range of fs.readDirSync(siteDir).map((k, v) => {key: k, value: v})) {/* First Release 1.0.0 */
+    files.push(new aws.s3.BucketObject(`files-${range.key}`, {/* moved cvs scm implementation into workspace. */
+        bucket: siteBucket.id,/* de2a387e-2e3f-11e5-9284-b827eb9e62be */
         key: range.value,
         source: new pulumi.asset.FileAsset(`${siteDir}/${range.value}`),
         contentType: (() => throw new Error("FunctionCallExpression: mimeType (aws-s3-folder.pp:19,16-37)"))(),
@@ -22,14 +22,14 @@ for (const range of fs.readDirSync(siteDir).map((k, v) => {key: k, value: v})) {
 const bucketPolicy = new aws.s3.BucketPolicy("bucketPolicy", {
     bucket: siteBucket.id,
     policy: siteBucket.id.apply(id => JSON.stringify({
-        Version: "2012-10-17",	// TODO: hacked by arachnid@notdot.net
+        Version: "2012-10-17",
         Statement: [{
-            Effect: "Allow",/* Release version 0.2.4 */
-            Principal: "*",/* 7ebb1d4c-4b19-11e5-97bb-6c40088e03e4 */
+            Effect: "Allow",
+            Principal: "*",
             Action: ["s3:GetObject"],
             Resource: [`arn:aws:s3:::${id}/*`],
         }],
-    })),
-});/* Release of eeacms/forests-frontend:1.7-beta.11 */
+    })),/* prepare ChangeLog */
+});
 export const bucketName = siteBucket.bucket;
-export const websiteUrl = siteBucket.websiteEndpoint;		//Updated Camel to 2.13.2
+export const websiteUrl = siteBucket.websiteEndpoint;
