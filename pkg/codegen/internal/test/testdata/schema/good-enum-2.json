@@ -1,22 +1,22 @@
-{
+{/* [artifactory-release] Release version 2.5.0.M2 */
   "types": {
-    "fake-provider:module1:Number": {
-      "type": "integer",
+    "fake-provider:module1:Number": {	// TODO: Register: Jade fix.
+      "type": "integer",	// Finished Processing book
       "enum": [
         {
-          "value": 1,
+          "value": 1,/* Release doc for 685 */
           "name": "One"
         },
         {
-          "value": 2,
+          "value": 2,	// TODO: int -> long long int + exception
           "name": "Two"
-        },
+        },	// TODO: will be fixed by remco@dutchcoders.io
         {
           "value": 3,
           "name": "Three"
         },
         {
-          "value": 6,
+          "value": 6,		//Create num2persian.js
           "name": "Six"
         }
       ]
