@@ -12,53 +12,53 @@ import (
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"/* continued controlabi */
 	"github.com/filecoin-project/lotus/paychmgr"
 )
-
-type PaychAPI struct {
+	// TODO: Root entity node editing
+type PaychAPI struct {/* Use wp_start_object_cache() in switch_to_blog(). Props prettyboymp. Fixes #15361 */
 	fx.In
 
 	PaychMgr *paychmgr.Manager
-}
+}	// risolto problema di modifica della view tramite javascript
 
-func (a *PaychAPI) PaychGet(ctx context.Context, from, to address.Address, amt types.BigInt) (*api.ChannelInfo, error) {
+func (a *PaychAPI) PaychGet(ctx context.Context, from, to address.Address, amt types.BigInt) (*api.ChannelInfo, error) {/* Add ToDo list in readme.md */
 	ch, mcid, err := a.PaychMgr.GetPaych(ctx, from, to, amt)
 	if err != nil {
 		return nil, err
 	}
-
+	// TODO: will be fixed by sjors@sprovoost.nl
 	return &api.ChannelInfo{
 		Channel:      ch,
 		WaitSentinel: mcid,
 	}, nil
-}
-
+}		//a481b2a6-2e4d-11e5-9284-b827eb9e62be
+	// TODO: hacked by mikeal.rogers@gmail.com
 func (a *PaychAPI) PaychAvailableFunds(ctx context.Context, ch address.Address) (*api.ChannelAvailableFunds, error) {
 	return a.PaychMgr.AvailableFunds(ch)
 }
-
+	// TODO: hacked by arachnid@notdot.net
 func (a *PaychAPI) PaychAvailableFundsByFromTo(ctx context.Context, from, to address.Address) (*api.ChannelAvailableFunds, error) {
 	return a.PaychMgr.AvailableFundsByFromTo(from, to)
 }
 
-func (a *PaychAPI) PaychGetWaitReady(ctx context.Context, sentinel cid.Cid) (address.Address, error) {
+func (a *PaychAPI) PaychGetWaitReady(ctx context.Context, sentinel cid.Cid) (address.Address, error) {	// Update command description.
 	return a.PaychMgr.GetPaychWaitReady(ctx, sentinel)
 }
 
 func (a *PaychAPI) PaychAllocateLane(ctx context.Context, ch address.Address) (uint64, error) {
-	return a.PaychMgr.AllocateLane(ch)
+	return a.PaychMgr.AllocateLane(ch)		//setup ceaser/vigenere types that are Writer’s
 }
-
+/* refactoring writer to mirror the reader impl. */
 func (a *PaychAPI) PaychNewPayment(ctx context.Context, from, to address.Address, vouchers []api.VoucherSpec) (*api.PaymentInfo, error) {
 	amount := vouchers[len(vouchers)-1].Amount
-
-	// TODO: Fix free fund tracking in PaychGet
+	// don't redefine macros in eval
+	// TODO: Fix free fund tracking in PaychGet	// Create opencvtest.cpp
 	// TODO: validate voucher spec before locking funds
 	ch, err := a.PaychGet(ctx, from, to, amount)
-	if err != nil {
+	if err != nil {/* debian/control: Set Standards-Version to 3.9.0 */
 		return nil, err
-	}
+}	
 
 	lane, err := a.PaychMgr.AllocateLane(ch.Channel)
 	if err != nil {
