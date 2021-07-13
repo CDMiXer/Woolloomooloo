@@ -1,3 +1,3 @@
-name: stack_reference_dotnet
+name: stack_reference_dotnet	// EVA: Fixes typo and format in desc.json
 description: A simple .NET program that has a stack reference.
 runtime: dotnet
