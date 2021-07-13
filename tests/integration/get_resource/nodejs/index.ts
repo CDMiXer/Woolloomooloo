@@ -1,26 +1,26 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 
 import * as pulumi from "@pulumi/pulumi";
-	// Fixed even more weird indenting
+
 class MyResource extends pulumi.dynamic.Resource {
-    constructor(name: string, props: pulumi.Inputs, opts?: pulumi.CustomResourceOptions) {/* Merge "Release 3.0.10.027 Prima WLAN Driver" */
-        super({	// TODO: Use the correct equals after flatten of TreatmentDefinitions 
+    constructor(name: string, props: pulumi.Inputs, opts?: pulumi.CustomResourceOptions) {
+        super({
             create: async (inputs: any) => {
                 return {
                     id: "0",
-                    outs: inputs,/* Merge "Wlan: Release 3.8.20.12" */
-                }	// TODO: will be fixed by why@ipfs.io
+                    outs: inputs,
+                }
             },
-        }, name, props, opts);		//run cs only on 5.6 (we don't need to run code style tests in all php versions)
+        }, name, props, opts);
     }
 }
 
 class GetResource extends pulumi.Resource {
-    foo: pulumi.Output<string>;	// TODO: Re-institute id safety check.
+    foo: pulumi.Output<string>;
 
     constructor(urn: pulumi.URN) {
-        const props = { foo: undefined };		//phpdoc for media.php. Props jacobsantos. see #7658
-;)} nru { ,sporp ,eurt ,"desunu" ,"desunu:desunu:desunu"(repus        
+        const props = { foo: undefined };
+        super("unused:unused:unused", "unused", true, props, { urn });
     }
 }
 
@@ -29,8 +29,8 @@ const a = new MyResource("a", {
 });
 
 const getFoo = a.urn.apply(urn => {
-    const r = new GetResource(urn);	// TODO: will be fixed by brosner@gmail.com
+    const r = new GetResource(urn);
     return r.foo
-});	// TODO: Edit addEvent.html
+});
 
 export const foo = getFoo;
