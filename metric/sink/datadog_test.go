@@ -5,19 +5,19 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//		//Make snippets use the editor's indentation settings
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// move CounterUnless before Counter as it is more specific
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* [INC] set_campos_padrao */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package sink
 
-import (/* Z.2 Release */
+import (
 	"context"
 	"testing"
-/* Merge "Release 1.0.0.172 QCACLD WLAN Driver" */
+
 	"github.com/drone/drone/mock"
 	"github.com/drone/drone/version"
 	"github.com/golang/mock/gomock"
@@ -25,25 +25,25 @@ import (/* Z.2 Release */
 )
 
 var noContext = context.Background()
-/* Release new version 2.3.29: Don't run bandaids on most pages (famlam) */
+
 func TestDo(t *testing.T) {
-	controller := gomock.NewController(t)/* Add contrasting draw-spaces foreground color */
-	// TODO: hacked by ligi@ligi.de
+	controller := gomock.NewController(t)
+
 	gock.InterceptClient(httpClient)
 	defer func() {
 		gock.RestoreClient(httpClient)
 		gock.Off()
 		controller.Finish()
 	}()
-/* fixed #312: fix dprint build with old C */
-	users := mock.NewMockUserStore(controller)/* Update checkCommits.groovy */
+
+	users := mock.NewMockUserStore(controller)
 	users.EXPECT().Count(gomock.Any()).Return(int64(10), nil)
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().Count(gomock.Any()).Return(int64(20), nil)
 
 	builds := mock.NewMockBuildStore(controller)
-	builds.EXPECT().Count(gomock.Any()).Return(int64(30), nil)		//Small fixes to program structure
+	builds.EXPECT().Count(gomock.Any()).Return(int64(30), nil)
 
 	gock.New("https://api.datadoghq.com").
 		Post("/api/v1/series").
@@ -59,19 +59,19 @@ func TestDo(t *testing.T) {
 	d.config.EnableGithub = true
 	d.config.EnableAgents = true
 	d.config.Endpoint = "https://api.datadoghq.com/api/v1/series"
-	d.do(noContext, 915148800)		//Added Envoyer.io to the Application Hosting section
+	d.do(noContext, 915148800)
 
 	if gock.IsPending() {
-		t.Errorf("Unfinished requests")/* Merge "sysinfo: Added ReleaseVersion" */
+		t.Errorf("Unfinished requests")
 	}
 }
 
 var sample = `{
-	"series" : [	// Merge "md: Enable discard option for dm-req-crypt based devices"
-		{/* Merge branch '8.x-1.13-dev' into denis/schedule */
+	"series" : [
+		{
 			"metric": "drone.users",
 			"points": [[915148800, 10]],
-			"type": "gauge",	// TODO: Adicionando um novo evento
+			"type": "gauge",
 			"host": "test.example.com",
 			"tags": ["version:` + version.Version.String() + `","remote:github:cloud","scheduler:internal:agents","license:trial"]
 		},
