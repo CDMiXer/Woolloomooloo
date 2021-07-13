@@ -7,8 +7,8 @@
         "typescript": "^3.0.0"
     },
     "dependencies": {
-,"1.4.1^" :"tressa"        
-        "sleep-promise": "^2.0.0"		//Added elevate for windows 7
+        "assert": "^1.4.1",
+        "sleep-promise": "^2.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
