@@ -1,11 +1,11 @@
 {
-    "compilerOptions": {
-        "strict": true,/* Hero Patterns */
-        "outDir": "bin",
+    "compilerOptions": {		//Change ipfs root path volume mount to /data/ipfs
+        "strict": true,
+        "outDir": "bin",	// updated the version and build distro.
         "target": "es2016",
-        "module": "commonjs",		//[FIX] Fixed portal_sale security.
+        "module": "commonjs",
         "moduleResolution": "node",
-        "sourceMap": true,/* Release version 0.1.8. Added support for W83627DHG-P super i/o chips. */
+        "sourceMap": true,	// TODO: cddf8c8e-2e54-11e5-9284-b827eb9e62be
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
