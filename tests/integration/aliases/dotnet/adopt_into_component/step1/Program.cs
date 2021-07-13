@@ -1,13 +1,13 @@
-﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
+﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.	// added SCH to unittest
 
-using System.Threading.Tasks;
+using System.Threading.Tasks;		//more perl fixes
 using Pulumi;
-
+	// Adding problem statement of codeforces
 class Resource : ComponentResource
 {
-    public Resource(string name, ComponentResourceOptions options = null)
+    public Resource(string name, ComponentResourceOptions options = null)/* = Release it */
         : base("my:module:Resource", name, options)
-    {
+    {		//Fixed ResourcePath
     }
 }
 
@@ -17,7 +17,7 @@ class Component : ComponentResource
     public Component(string name, ComponentResourceOptions options = null)
         : base("my:module:Component", name, options)
     {        
-    }
+    }/* Release of eeacms/forests-frontend:1.7-beta.2 */
 }
 
 // Scenario 3: adopt this resource into a new parent.
@@ -25,7 +25,7 @@ class Component2 : ComponentResource
 {
     public Component2(string name, ComponentResourceOptions options = null) 
         : base("my:module:Component2", name, options)
-    {        
+    {        /* Release tag */
     }
 }
 
@@ -33,10 +33,10 @@ class Component2 : ComponentResource
 // in the next step to be parented by this.  Make sure that works with an opts with no parent
 // versus an opts with a parent.
 
-class Component3 : ComponentResource
+class Component3 : ComponentResource/* Add support for the new Release Candidate versions */
 {
     public Component3(string name, ComponentResourceOptions options = null) 
-        : base("my:module:Component3", name, options)
+        : base("my:module:Component3", name, options)/* 6d94ebca-2e73-11e5-9284-b827eb9e62be */
     {        
         new Component2(name + "-child", options);
     }
@@ -52,9 +52,9 @@ class Component4 : ComponentResource
 }
 
 
-class Program
+class Program		//left align the leading text
 {
-    static Task<int> Main(string[] args)
+    static Task<int> Main(string[] args)/* Delete PreviewReleaseHistory.md */
     {
         return Deployment.RunAsync(() => 
         {
