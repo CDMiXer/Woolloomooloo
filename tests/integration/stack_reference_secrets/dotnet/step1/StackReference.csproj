@@ -3,8 +3,8 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>/* Merge "Release 1.0.0.149 QCACLD WLAN Driver" */
-	// TODO: add some braces and fix some breakage with new schema selection code
+  </PropertyGroup>
+
   <PropertyGroup>
     <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>
   </PropertyGroup>
