@@ -1,13 +1,13 @@
-{/* Fixed virus bomb. Release 0.95.094 */
+{
     "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"		//Add normal edit mode.
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     },
-    "dependencies": {/* Update charter.js */
-        "@types/node": "^8.0.0"
-    }	// TODO: remove directory, pretty, and random bits from base for nhc98
+    "dependencies": {
+        "@types/node": "^8.0.0"		//Update mercado.js
+    }
 }
