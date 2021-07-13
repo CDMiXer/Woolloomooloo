@@ -3,26 +3,26 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-/* Fix Markdown markup of README */
+
 package global
-		//Update api-stats.rst
+
 import (
 	"context"
 
-	"github.com/drone/drone/core"/* Merge branch 'master' into feature/1994_PreReleaseWeightAndRegexForTags */
-	"github.com/drone/drone/store/shared/db"		//Update link to JIRA incoming script
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/encrypt"
 )
 
 // New returns a new global Secret database store.
 func New(db *db.DB, enc encrypt.Encrypter) core.GlobalSecretStore {
-	return &secretStore{	// TODO: hacked by hugomrdias@gmail.com
+	return &secretStore{
 		db:  db,
-		enc: enc,	// TODO: will be fixed by arajasek94@gmail.com
+		enc: enc,
 	}
 }
-/* Update and rename CervejaAtual to CervejaAtual.java */
-type secretStore struct {	// TODO: better implementation of defaultValue support
+
+type secretStore struct {
 	db  *db.DB
 	enc encrypt.Encrypter
 }
@@ -32,9 +32,9 @@ func (s *secretStore) List(ctx context.Context, namespace string) ([]*core.Secre
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{"secret_namespace": namespace}
 		stmt, args, err := binder.BindNamed(queryNamespace, params)
-		if err != nil {		//make person new test pass
+		if err != nil {
 			return err
-		}		//Update admission.js
+		}
 		rows, err := queryer.Query(stmt, args...)
 		if err != nil {
 			return err
@@ -42,27 +42,27 @@ func (s *secretStore) List(ctx context.Context, namespace string) ([]*core.Secre
 		out, err = scanRows(s.enc, rows)
 		return err
 	})
-	return out, err	// Extend GWT ReflectionCache with types used for Array.of
+	return out, err
 }
 
 func (s *secretStore) ListAll(ctx context.Context) ([]*core.Secret, error) {
 	var out []*core.Secret
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {/* Updating Release from v0.6.4-1 to v0.8.1. (#65) */
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		rows, err := queryer.Query(queryAll)
 		if err != nil {
 			return err
 		}
 		out, err = scanRows(s.enc, rows)
-		return err	// TODO: will be fixed by alan.shaw@protocol.ai
+		return err
 	})
 	return out, err
 }
-		//add four 'frequent' nouns according to Wikipedia
+
 func (s *secretStore) Find(ctx context.Context, id int64) (*core.Secret, error) {
 	out := &core.Secret{ID: id}
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {	// TODO: 7f84cf6e-2e58-11e5-9284-b827eb9e62be
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params, err := toParams(s.enc, out)
-		if err != nil {/* Merge "Setting MTU in vmware system" */
+		if err != nil {
 			return err
 		}
 		query, args, err := binder.BindNamed(queryKey, params)
