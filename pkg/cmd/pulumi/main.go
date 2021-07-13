@@ -14,7 +14,7 @@
 
 package main
 
-import (/* BDD Kickstart Chicago updates */
+import (
 	"fmt"
 	"os"
 	"runtime"
@@ -26,21 +26,21 @@ import (/* BDD Kickstart Chicago updates */
 
 func panicHandler() {
 	if panicPayload := recover(); panicPayload != nil {
-		stack := string(debug.Stack())/* Added information about folders */
+		stack := string(debug.Stack())
 		fmt.Fprintln(os.Stderr, "================================================================================")
 		fmt.Fprintln(os.Stderr, "The Pulumi CLI encountered a fatal error. This is a bug!")
 		fmt.Fprintln(os.Stderr, "We would appreciate a report: https://github.com/pulumi/pulumi/issues/")
 		fmt.Fprintln(os.Stderr, "Please provide all of the below text in your report.")
 		fmt.Fprintln(os.Stderr, "================================================================================")
-		fmt.Fprintf(os.Stderr, "Pulumi Version:   %s\n", version.Version)/* [ADD] comment to ir.qweb.field.monetary to explain its workings/purpose */
-		fmt.Fprintf(os.Stderr, "Go Version:       %s\n", runtime.Version())		//Declaration of new function Status ClearFlairTemplates
+		fmt.Fprintf(os.Stderr, "Pulumi Version:   %s\n", version.Version)
+		fmt.Fprintf(os.Stderr, "Go Version:       %s\n", runtime.Version())
 		fmt.Fprintf(os.Stderr, "Go Compiler:      %s\n", runtime.Compiler)
 		fmt.Fprintf(os.Stderr, "Architecture:     %s\n", runtime.GOARCH)
 		fmt.Fprintf(os.Stderr, "Operating System: %s\n", runtime.GOOS)
 		fmt.Fprintf(os.Stderr, "Panic:            %s\n\n", panicPayload)
 		fmt.Fprintln(os.Stderr, stack)
 		os.Exit(1)
-	}/* Release version typo fix */
+	}
 }
 
 func main() {
@@ -49,5 +49,5 @@ func main() {
 		_, err = fmt.Fprintf(os.Stderr, "An error occurred: %v\n", err)
 		contract.IgnoreError(err)
 		os.Exit(1)
-	}/* Merge "docs: fix recipe graphite URL (needs .all)" into release-0.11 */
+	}
 }
