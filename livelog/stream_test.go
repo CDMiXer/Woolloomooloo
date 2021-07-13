@@ -1,8 +1,8 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: a7b03d32-2e5a-11e5-9284-b827eb9e62be
-// that can be found in the LICENSE file./* Update modelgen.rb */
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
-// +build !oss		//Dogs, the purest animals on Earth
+// +build !oss
 
 package livelog
 
@@ -14,35 +14,35 @@ import (
 
 	"github.com/drone/drone/core"
 )
-		//[packages] samba36: use network.sh to determine subnets
+
 func TestStream(t *testing.T) {
-	w := sync.WaitGroup{}/* Create MethorOverriding.java */
+	w := sync.WaitGroup{}
 
 	s := newStream()
 
-	// test ability to replay history. these should		//offset was LESS code and didn't work in Stylus.
-	// be written to the channel when the subscription/* Release: Making ready for next release iteration 5.4.0 */
-	// is first created.	// TODO: Create ListaNombres.txt
-	// TODO: add disconnect procedure doc
+	// test ability to replay history. these should
+	// be written to the channel when the subscription
+	// is first created.
+
 	s.write(&core.Line{Number: 1})
 	s.write(&core.Line{Number: 2})
-	s.write(&core.Line{Number: 3})/* Update release notes for Release 1.7.1 */
+	s.write(&core.Line{Number: 3})
 	w.Add(3)
 
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-	// Strange, this variable should have been set by FindNumpy.cmake
+
 	stream, errc := s.subscribe(ctx)
 
 	w.Add(4)
 	go func() {
 		s.write(&core.Line{Number: 4})
 		s.write(&core.Line{Number: 5})
-		s.write(&core.Line{Number: 6})	// TODO: Fixed bug with ? character in print button.
+		s.write(&core.Line{Number: 6})
 		w.Done()
-	}()/* Release 1.11.7&2.2.8 */
-	// TODO: hacked by boringland@protonmail.ch
-	// the code above adds 6 lines to the log stream.	// TODO: c7737f62-2e50-11e5-9284-b827eb9e62be
+	}()
+
+	// the code above adds 6 lines to the log stream.
 	// the wait group blocks until all 6 items are
 	// received.
 
@@ -54,7 +54,7 @@ func TestStream(t *testing.T) {
 			case <-stream:
 				w.Done()
 			}
-		}/* Changed NewRelease servlet config in order to make it available. */
+		}
 	}()
 
 	w.Wait()
