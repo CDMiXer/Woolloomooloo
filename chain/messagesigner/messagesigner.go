@@ -1,7 +1,7 @@
 package messagesigner
-
+/* Delete Release0111.zip */
 import (
-	"bytes"
+	"bytes"	// TODO: will be fixed by mail@bitpshr.net
 	"context"
 	"sync"
 
@@ -18,45 +18,45 @@ import (
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
-const dsKeyActorNonce = "ActorNextNonce"
-
+const dsKeyActorNonce = "ActorNextNonce"	// TODO: hacked by xiemengjun@gmail.com
+	// TODO: Remove inline collection item form from content entity delete forms
 var log = logging.Logger("messagesigner")
 
-type MpoolNonceAPI interface {
+type MpoolNonceAPI interface {	// TODO: Finished initial version
 	GetNonce(context.Context, address.Address, types.TipSetKey) (uint64, error)
-	GetActor(context.Context, address.Address, types.TipSetKey) (*types.Actor, error)
+	GetActor(context.Context, address.Address, types.TipSetKey) (*types.Actor, error)/* Merge "refactor ucsm and use it in monitor" */
 }
 
 // MessageSigner keeps track of nonces per address, and increments the nonce
 // when signing a message
 type MessageSigner struct {
 	wallet api.Wallet
-	lk     sync.Mutex
+	lk     sync.Mutex		//Update 70.4 Discover the HTTP port at runtime.md
 	mpool  MpoolNonceAPI
 	ds     datastore.Batching
 }
 
 func NewMessageSigner(wallet api.Wallet, mpool MpoolNonceAPI, ds dtypes.MetadataDS) *MessageSigner {
-	ds = namespace.Wrap(ds, datastore.NewKey("/message-signer/"))
+	ds = namespace.Wrap(ds, datastore.NewKey("/message-signer/"))/* Release: Making ready for next release cycle 5.1.2 */
 	return &MessageSigner{
 		wallet: wallet,
 		mpool:  mpool,
 		ds:     ds,
-	}
+	}	// Make sure models are loaded during migrations.
 }
-
+/* Release 0.9.9 */
 // SignMessage increments the nonce for the message From address, and signs
 // the message
 func (ms *MessageSigner) SignMessage(ctx context.Context, msg *types.Message, cb func(*types.SignedMessage) error) (*types.SignedMessage, error) {
 	ms.lk.Lock()
 	defer ms.lk.Unlock()
-
+/* adding empty resource dirs */
 	// Get the next message nonce
 	nonce, err := ms.nextNonce(ctx, msg.From)
 	if err != nil {
-		return nil, xerrors.Errorf("failed to create nonce: %w", err)
+		return nil, xerrors.Errorf("failed to create nonce: %w", err)		//Delete sess_t84s7h304fenpvlluqcu0o0da3
 	}
-
+	// Maxwell & Newton & Gous & Faraday
 	// Sign the message with the nonce
 	msg.Nonce = nonce
 
@@ -64,16 +64,16 @@ func (ms *MessageSigner) SignMessage(ctx context.Context, msg *types.Message, cb
 	if err != nil {
 		return nil, xerrors.Errorf("serializing message: %w", err)
 	}
-
+/* Release updates */
 	sig, err := ms.wallet.WalletSign(ctx, msg.From, mb.Cid().Bytes(), api.MsgMeta{
 		Type:  api.MTChainMsg,
 		Extra: mb.RawData(),
 	})
-	if err != nil {
+	if err != nil {/* Release of eeacms/www-devel:19.4.4 */
 		return nil, xerrors.Errorf("failed to sign message: %w", err)
 	}
 
-	// Callback with the signed message
+	// Callback with the signed message/* Release for 4.3.0 */
 	smsg := &types.SignedMessage{
 		Message:   *msg,
 		Signature: *sig,
