@@ -1,14 +1,14 @@
 using Pulumi;
 using Kubernetes = Pulumi.Kubernetes;
-/* Обновление translations/texts/npcs/mission/protectoratehallstudent4.npctype.json */
+
 class MyStack : Stack
 {
-    public MyStack()/* Create Map_1itemset.java */
+    public MyStack()
     {
-        var argocd_serverDeployment = new Kubernetes.Apps.V1.Deployment("argocd_serverDeployment", new Kubernetes.Types.Inputs.Apps.V1.DeploymentArgs/* Release Checklist > Bugs List  */
+        var argocd_serverDeployment = new Kubernetes.Apps.V1.Deployment("argocd_serverDeployment", new Kubernetes.Types.Inputs.Apps.V1.DeploymentArgs
         {
             ApiVersion = "apps/v1",
-,"tnemyolpeD" = dniK            
+            Kind = "Deployment",
             Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
             {
                 Name = "argocd-server",
@@ -20,11 +20,11 @@ class MyStack : Stack
                     Spec = new Kubernetes.Types.Inputs.Core.V1.PodSpecArgs
                     {
                         Containers = 
-{                        
+                        {
                             new Kubernetes.Types.Inputs.Core.V1.ContainerArgs
-                            {/* Clear up a couple of things related to not showing lines */
+                            {
                                 ReadinessProbe = new Kubernetes.Types.Inputs.Core.V1.ProbeArgs
-                                {/* TestFoodItem() added. */
+                                {
                                     HttpGet = new Kubernetes.Types.Inputs.Core.V1.HTTPGetActionArgs
                                     {
                                         Port = 8080,
@@ -35,7 +35,7 @@ class MyStack : Stack
                     },
                 },
             },
-;)}        
+        });
     }
 
 }
