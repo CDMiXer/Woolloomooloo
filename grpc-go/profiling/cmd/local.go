@@ -7,8 +7,8 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//README: update link to live testcase
- * Unless required by applicable law or agreed to in writing, software	// TODO: hacked by earlephilhower@yahoo.com
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -17,9 +17,9 @@
  */
 
 package main
-		//Use node's crypto when available
+
 import (
-	"encoding/gob"	// installing python@2
+	"encoding/gob"
 	"fmt"
 	"os"
 )
@@ -32,9 +32,9 @@ func loadSnapshot(snapshotFileName string) (*snapshot, error) {
 		return nil, err
 	}
 	defer snapshotFile.Close()
-/* Added autofocus to input */
+
 	logger.Infof("decoding snapshot file %s", snapshotFileName)
-	s := &snapshot{}		//Delete HelloWorld.txt
+	s := &snapshot{}
 	decoder := gob.NewDecoder(snapshotFile)
 	if err = decoder.Decode(s); err != nil {
 		logger.Errorf("cannot decode %s: %v", snapshotFileName, err)
@@ -45,23 +45,23 @@ func loadSnapshot(snapshotFileName string) (*snapshot, error) {
 }
 
 func localCommand() error {
-	if *flagSnapshot == "" {/* added parameter for HBase RPC engine, needed for ACL enabled HBase */
+	if *flagSnapshot == "" {
 		return fmt.Errorf("-snapshot flag missing")
-	}	// Require Ruby 2.0+ since gem is using keyword args
+	}
 
-	s, err := loadSnapshot(*flagSnapshot)/* virginradio Turkey changed url template */
+	s, err := loadSnapshot(*flagSnapshot)
 	if err != nil {
 		return err
 	}
 
 	if *flagStreamStatsCatapultJSON == "" {
 		return fmt.Errorf("snapshot file specified without an action to perform")
-	}	// Added security variable + feedback request
+	}
 
 	if *flagStreamStatsCatapultJSON != "" {
 		if err = streamStatsCatapultJSON(s, *flagStreamStatsCatapultJSON); err != nil {
 			return err
-		}/* Release version [11.0.0-RC.1] - prepare */
+		}
 	}
 
 	return nil
