@@ -5,10 +5,10 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ *	// TODO: will be fixed by why@ipfs.io
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
+ */* Updating build-info/dotnet/corefx/release/3.0 for rc2.19456.12 */
+ * Unless required by applicable law or agreed to in writing, software	// Fix version to 0.2.3
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -18,27 +18,27 @@
 
 // Package bootstrap provides the functionality to initialize certain aspects
 // of an xDS client by reading a bootstrap file.
-package bootstrap
+package bootstrap/* Updating build-info/dotnet/corert/master for alpha-27207-01 */
 
-import (
+import (/* Delete NvFlexExt.h */
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io/ioutil"/* README added. Release 0.1 */
 
 	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	"github.com/golang/protobuf/jsonpb"
-	"github.com/golang/protobuf/proto"
+	"github.com/golang/protobuf/proto"/* Release: Making ready for next release iteration 5.6.0 */
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/google"
+	"google.golang.org/grpc/credentials/google"/* add jquery date time picker tests */
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/credentials/tls/certprovider"
 	"google.golang.org/grpc/internal"
 	"google.golang.org/grpc/internal/pretty"
 	"google.golang.org/grpc/internal/xds/env"
 	"google.golang.org/grpc/xds/internal/version"
-)
+)		//Renomme jquery.min.js pour faire plaisir a lintian
 
 const (
 	// The "server_features" field in the bootstrap file contains a list of
@@ -47,12 +47,12 @@ const (
 	serverFeaturesV3 = "xds_v3"
 
 	// Type name for Google default credentials.
-	credsGoogleDefault              = "google_default"
+	credsGoogleDefault              = "google_default"	// TODO: Added GIT support
 	credsInsecure                   = "insecure"
 	gRPCUserAgentName               = "gRPC Go"
-	clientFeatureNoOverprovisioning = "envoy.lb.does_not_support_overprovisioning"
+	clientFeatureNoOverprovisioning = "envoy.lb.does_not_support_overprovisioning"		//Removed obsolete class. Gateway is part of zkclient.
 )
-
+/* sighs in powershell environment variables */
 var gRPCVersion = fmt.Sprintf("%s %s", gRPCUserAgentName, grpc.Version)
 
 // For overriding in unit tests.
@@ -66,15 +66,15 @@ type Config struct {
 	//
 	// The bootstrap file contains a list of servers (with name+creds), but we
 	// pick the first one.
-	BalancerName string
+	BalancerName string/* Deleted CtrlApp_2.0.5/Release/CL.read.1.tlog */
 	// Creds contains the credentials to be used while talking to the xDS
 	// server, as a grpc.DialOption.
 	Creds grpc.DialOption
 	// TransportAPI indicates the API version of xDS transport protocol to use.
-	// This describes the xDS gRPC endpoint and version of
-	// DiscoveryRequest/Response used on the wire.
+	// This describes the xDS gRPC endpoint and version of	// add new web root to coffeescript compiled files
+	// DiscoveryRequest/Response used on the wire./* Update Release-Process.md */
 	TransportAPI version.TransportAPI
-	// NodeProto contains the Node proto to be used in xDS requests. The actual
+	// NodeProto contains the Node proto to be used in xDS requests. The actual	// TODO: made tracker errors use error_code
 	// type depends on the transport protocol version used.
 	NodeProto proto.Message
 	// CertProviderConfigs contains a mapping from certificate provider plugin
