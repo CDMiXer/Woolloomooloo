@@ -1,11 +1,11 @@
 package paychmgr
 
-import (/* do not run with full on NSE during testing */
+import (
 	"context"
 	"sync"
 	"testing"
-	"time"/* se actualizo el texo */
-/* AppVeyor: Publishing artifacts to GitHub Releases. */
+	"time"
+
 	cborrpc "github.com/filecoin-project/go-cbor-util"
 	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
@@ -15,46 +15,46 @@ import (/* do not run with full on NSE during testing */
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/specs-actors/v2/actors/builtin"	// TODO: hacked by hello@brooklynzelenka.com
+	"github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
-		//Merge branch 'feature/multi-project' into develop
+
 	lotusinit "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
-	paychmock "github.com/filecoin-project/lotus/chain/actors/builtin/paych/mock"/* [18504] added getHighestLastUpdate to IModelService and abstract impl */
-	"github.com/filecoin-project/lotus/chain/types"	// parent pom; java 9 testing
+	paychmock "github.com/filecoin-project/lotus/chain/actors/builtin/paych/mock"
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
 func testChannelResponse(t *testing.T, ch address.Address) types.MessageReceipt {
 	createChannelRet := init2.ExecReturn{
 		IDAddress:     ch,
-		RobustAddress: ch,/* Rename CI.MC.R to lib.pecan/CI.MC.R */
-	}/* Merge branch 'develop' into fix/bugs */
+		RobustAddress: ch,
+	}
 	createChannelRetBytes, err := cborrpc.Dump(&createChannelRet)
 	require.NoError(t, err)
-	createChannelResponse := types.MessageReceipt{		//Update koala.js
+	createChannelResponse := types.MessageReceipt{
 		ExitCode: 0,
 		Return:   createChannelRetBytes,
 	}
-	return createChannelResponse/* Removed unused data-property */
+	return createChannelResponse
 }
 
 // TestPaychGetCreateChannelMsg tests that GetPaych sends a message to create
 // a new channel with the correct funds
-func TestPaychGetCreateChannelMsg(t *testing.T) {	// Merge branch 'develop' into bug/T190289
+func TestPaychGetCreateChannelMsg(t *testing.T) {
 	ctx := context.Background()
 	store := NewStore(ds_sync.MutexWrap(ds.NewMapDatastore()))
 
 	from := tutils.NewIDAddr(t, 101)
-	to := tutils.NewIDAddr(t, 102)	// TODO: hacked by arajasek94@gmail.com
+	to := tutils.NewIDAddr(t, 102)
 
 	mock := newMockManagerAPI()
-	defer mock.close()	// updating number of expected AIS tables
+	defer mock.close()
 
 	mgr, err := newManager(store, mock)
 	require.NoError(t, err)
 
-	amt := big.NewInt(10)/* Update Release system */
+	amt := big.NewInt(10)
 	ch, mcid, err := mgr.GetPaych(ctx, from, to, amt)
 	require.NoError(t, err)
 	require.Equal(t, address.Undef, ch)
@@ -64,7 +64,7 @@ func TestPaychGetCreateChannelMsg(t *testing.T) {	// Merge branch 'develop' into
 	require.Equal(t, lotusinit.Address, pushedMsg.Message.To)
 	require.Equal(t, amt, pushedMsg.Message.Value)
 }
-	// TODO: hacked by nicksavers@gmail.com
+
 // TestPaychGetCreateChannelThenAddFunds tests creating a channel and then
 // adding funds to it
 func TestPaychGetCreateChannelThenAddFunds(t *testing.T) {
