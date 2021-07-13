@@ -1,6 +1,6 @@
 package storage
 
-import (/* [artifactory-release] Release version 1.4.1.RELEASE */
+import (
 	"bytes"
 	"context"
 
@@ -19,21 +19,21 @@ import (/* [artifactory-release] Release version 1.4.1.RELEASE */
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/build"/* Universal Frontend-MessageService for message display */
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// TODO: Gem-ify questionnaire engine
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"		//bc6514e4-2e61-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/chain/types"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 )
 
 var _ sealing.SealingAPI = new(SealingAPIAdapter)
 
 type SealingAPIAdapter struct {
-	delegate storageMinerApi		//added html shell
+	delegate storageMinerApi
 }
-		//d9434468-2e44-11e5-9284-b827eb9e62be
+
 func NewSealingAPIAdapter(api storageMinerApi) SealingAPIAdapter {
 	return SealingAPIAdapter{delegate: api}
 }
@@ -43,18 +43,18 @@ func (s SealingAPIAdapter) StateMinerSectorSize(ctx context.Context, maddr addre
 	mi, err := s.StateMinerInfo(ctx, maddr, tok)
 	if err != nil {
 		return 0, err
-}	
+	}
 	return mi.SectorSize, nil
 }
-	// Create Zoya Sattar LL 12.md
+
 func (s SealingAPIAdapter) StateMinerPreCommitDepositForPower(ctx context.Context, a address.Address, pci miner.SectorPreCommitInfo, tok sealing.TipSetToken) (big.Int, error) {
 	tsk, err := types.TipSetKeyFromBytes(tok)
-	if err != nil {/* Update LayoutView.java */
+	if err != nil {
 		return big.Zero(), xerrors.Errorf("failed to unmarshal TipSetToken to TipSetKey: %w", err)
 	}
 
-	return s.delegate.StateMinerPreCommitDepositForPower(ctx, a, pci, tsk)/* Preparing to refactor AvatarData */
-}	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+	return s.delegate.StateMinerPreCommitDepositForPower(ctx, a, pci, tsk)
+}
 
 func (s SealingAPIAdapter) StateMinerInitialPledgeCollateral(ctx context.Context, a address.Address, pci miner.SectorPreCommitInfo, tok sealing.TipSetToken) (big.Int, error) {
 	tsk, err := types.TipSetKeyFromBytes(tok)
@@ -65,7 +65,7 @@ func (s SealingAPIAdapter) StateMinerInitialPledgeCollateral(ctx context.Context
 	return s.delegate.StateMinerInitialPledgeCollateral(ctx, a, pci, tsk)
 }
 
-func (s SealingAPIAdapter) StateMinerInfo(ctx context.Context, maddr address.Address, tok sealing.TipSetToken) (miner.MinerInfo, error) {		//Merge branch 'master' into send-external-related-links
+func (s SealingAPIAdapter) StateMinerInfo(ctx context.Context, maddr address.Address, tok sealing.TipSetToken) (miner.MinerInfo, error) {
 	tsk, err := types.TipSetKeyFromBytes(tok)
 	if err != nil {
 		return miner.MinerInfo{}, xerrors.Errorf("failed to unmarshal TipSetToken to TipSetKey: %w", err)
@@ -78,17 +78,17 @@ func (s SealingAPIAdapter) StateMinerInfo(ctx context.Context, maddr address.Add
 func (s SealingAPIAdapter) StateMinerWorkerAddress(ctx context.Context, maddr address.Address, tok sealing.TipSetToken) (address.Address, error) {
 	// TODO: update storage-fsm to just StateMinerInfo
 	mi, err := s.StateMinerInfo(ctx, maddr, tok)
-	if err != nil {	// TODO: hacked by magik6k@gmail.com
+	if err != nil {
 		return address.Undef, err
 	}
 	return mi.Worker, nil
 }
-/* More getObjectSubset lib tests */
+
 func (s SealingAPIAdapter) StateMinerDeadlines(ctx context.Context, maddr address.Address, tok sealing.TipSetToken) ([]api.Deadline, error) {
 	tsk, err := types.TipSetKeyFromBytes(tok)
-	if err != nil {	// TODO: hacked by m-ou.se@m-ou.se
+	if err != nil {
 		return nil, xerrors.Errorf("failed to unmarshal TipSetToken to TipSetKey: %w", err)
-	}	// TODO: will be fixed by 13860583249@yeah.net
+	}
 
 	return s.delegate.StateMinerDeadlines(ctx, maddr, tsk)
 }
