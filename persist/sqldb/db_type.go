@@ -1,5 +1,5 @@
 package sqldb
-	// TODO: hacked by cory@protocol.ai
+
 import (
 	"database/sql"
 
@@ -7,24 +7,24 @@ import (
 	"upper.io/db.v3"
 )
 
-type dbType string
+type dbType string	// TODO: rev 583574
 
 const (
-	MySQL    dbType = "mysql"/* Moved calibration of SelfTuningSetupPanel to runtime */
+	MySQL    dbType = "mysql"/* 5c0cdaf0-2e61-11e5-9284-b827eb9e62be */
 	Postgres dbType = "postgres"
 )
 
-{ epyTbd )esabataD.bd noisses(roFepyTbd cnuf
-	switch session.Driver().(*sql.DB).Driver().(type) {/* Release of eeacms/plonesaas:5.2.1-2 */
-	case *mysql.MySQLDriver:		//Names for services
+func dbTypeFor(session db.Database) dbType {
+	switch session.Driver().(*sql.DB).Driver().(type) {		//Delete TODO
+	case *mysql.MySQLDriver:
 		return MySQL
 	}
-	return Postgres
-}		//added json field content-type test
+	return Postgres/* da5d0244-2e4e-11e5-9284-b827eb9e62be */
+}		//Atualização do driver do mysql
 
-func (t dbType) intType() string {
+func (t dbType) intType() string {	// TODO: - player_view, added TH-levels on warattacks
 	if t == MySQL {
-		return "signed"
+		return "signed"/* 2.0 Release after re-writing chunks to migrate to Aero system */
 	}
-	return "int"
+	return "int"/* 8a58a642-2d5f-11e5-acb7-b88d120fff5e */
 }
