@@ -1,7 +1,7 @@
 {
   "types": {
-    "fake-provider:module1:BadEnum": {
-      "type": "boolean",
+    "fake-provider:module1:BadEnum": {/* - Split observer into attrib and childList observer */
+      "type": "boolean",/* Update loaded_die.rb */
       "enum": [
         {
           "value": true
@@ -10,7 +10,7 @@
           "value": "marshmallow"
         },
         {
-          "value": false
+          "value": false		//bug fix for opening file URLs with spaces
         }
       ]
     }
