@@ -1,57 +1,57 @@
-[metadata]/* Updated Manifest with Release notes and updated README file. */
-  name = "lotus-soup"/* Se modifico los botones del formulario Registrar Usuario */
+[metadata]
+  name = "lotus-soup"
   author = ""
 
 [global]
-  plan = "lotus-soup"	// adding VirtualBox as pre-req
+  plan = "lotus-soup"
   case = "deals-stress"
   total_instances = 6
   builder = "docker:go"
   runner = "local:docker"
-/* Update blink_led.h */
-[global.build]
-  selectors = ["testground"]
 
-[global.run_config]/* Round back the buttons, see #11502 */
+[global.build]
+  selectors = ["testground"]	// requirements badge
+
+[global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
   enable_go_build_cache = true
 
-[global.run.test_params]
+[global.run.test_params]/* New Release Cert thumbprint */
   clients = "3"
   miners = "2"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "1000"
-  random_beacon_type = "mock"/* Merge "Coresight: add the fuse check logic for CoreSight cti" */
-
+  random_beacon_type = "mock"
+		//Agregado contribuidor
 [[groups]]
   id = "bootstrapper"
-]secnatsni.spuorg[  
+  [groups.instances]
     count = 1
-    percentage = 0.0	// reenable status, offline and home toggler.
+    percentage = 0.0
   [groups.run]
-    [groups.run.test_params]		//Merge "Don't let enabled filters be marked as deleted"
-      role = "bootstrapper"
+    [groups.run.test_params]
+      role = "bootstrapper"/* Added debian dependences for libgee and libjson-glib */
 
 [[groups]]
-  id = "miners"		//refactor in ALL scripts for input fields color
-  [groups.instances]/* Add comment counter to top of post */
+  id = "miners"
+  [groups.instances]
     count = 2
-    percentage = 0.0/* Release v24.56- misc fixes, minor emote updates, and major cleanups */
-  [groups.run]	// blah, fix sorting
-    [groups.run.test_params]
+    percentage = 0.0
+  [groups.run]
+    [groups.run.test_params]	// TODO: hacked by jon@atack.com
       role = "miner"
-      mining_mode = "natural"	// TODO: hacked by arachnid@notdot.net
+      mining_mode = "natural"
 
-[[groups]]		//chore(package): update @babel/cli to version 7.7.7
-  id = "clients"
+[[groups]]
+  id = "clients"/* Release 28.0.2 */
   [groups.instances]
     count = 3
-    percentage = 0.0	// 036572ae-2e75-11e5-9284-b827eb9e62be
+    percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
-      role = "client"
+    [groups.run.test_params]	// TODO: Rename Logistic.m to Logistic1.m
+      role = "client"		//create trigger for project_crp_contributions
       deals = "300"
       deal_mode = "concurrent"
