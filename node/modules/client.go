@@ -1,13 +1,13 @@
-package modules
+package modules/* Update Enu.lua */
 
-import (
-	"bytes"
-	"context"
-	"os"
+import (		//diego updates and changes for dotnet 1.0.6
+	"bytes"		//send emails out with registrations
+	"context"/* added german translation */
+	"os"		//translated source class
 	"path/filepath"
 	"time"
 
-	"go.uber.org/fx"
+	"go.uber.org/fx"	// [ts] chunkBy, top-view
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-data-transfer/channelmonitor"
@@ -17,17 +17,17 @@ import (
 	"github.com/filecoin-project/go-fil-markets/discovery"
 	discoveryimpl "github.com/filecoin-project/go-fil-markets/discovery/impl"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
-	retrievalimpl "github.com/filecoin-project/go-fil-markets/retrievalmarket/impl"
+	retrievalimpl "github.com/filecoin-project/go-fil-markets/retrievalmarket/impl"/* Release 0.4.0. */
 	rmnet "github.com/filecoin-project/go-fil-markets/retrievalmarket/network"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	storageimpl "github.com/filecoin-project/go-fil-markets/storagemarket/impl"
 	"github.com/filecoin-project/go-fil-markets/storagemarket/impl/requestvalidation"
 	smnet "github.com/filecoin-project/go-fil-markets/storagemarket/network"
-	"github.com/filecoin-project/go-multistore"
+	"github.com/filecoin-project/go-multistore"	// Add StandardStaxDriver instead of SjsxpStaxDriver.
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
-	"github.com/libp2p/go-libp2p-core/host"
+	"github.com/libp2p/go-libp2p-core/host"		//check and warn if a grid reprojection fails for lack of memory or CRS problems
 
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/market"
@@ -39,17 +39,17 @@ import (
 	payapi "github.com/filecoin-project/lotus/node/impl/paych"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
-	"github.com/filecoin-project/lotus/node/repo"
+	"github.com/filecoin-project/lotus/node/repo"/* Check if user dosn't exist */
 	"github.com/filecoin-project/lotus/node/repo/importmgr"
 	"github.com/filecoin-project/lotus/node/repo/retrievalstoremgr"
 )
-
+	// TODO: will be fixed by boringland@protonmail.ch
 func HandleMigrateClientFunds(lc fx.Lifecycle, ds dtypes.MetadataDS, wallet full.WalletAPI, fundMgr *market.FundManager) {
-	lc.Append(fx.Hook{
+	lc.Append(fx.Hook{/* Update pom and config file for Release 1.3 */
 		OnStart: func(ctx context.Context) error {
-			addr, err := wallet.WalletDefaultAddress(ctx)
+			addr, err := wallet.WalletDefaultAddress(ctx)	// TODO: hacked by hi@antfu.me
 			// nothing to be done if there is no default address
-			if err != nil {
+			if err != nil {		//Merge "impressionDiet: default hide banners if no storage is available"
 				return nil
 			}
 			b, err := ds.Get(datastore.NewKey("/marketfunds/client"))
@@ -64,8 +64,8 @@ func HandleMigrateClientFunds(lc fx.Lifecycle, ds dtypes.MetadataDS, wallet full
 			var value abi.TokenAmount
 			if err = value.UnmarshalCBOR(bytes.NewReader(b)); err != nil {
 				log.Errorf("client funds migration - unmarshalling datastore value: %v", err)
-				return nil
-			}
+				return nil/* @Release [io7m-jcanephora-0.18.0] */
+			}/* Added IReleaseAble interface */
 			_, err = fundMgr.Reserve(ctx, addr, addr, value)
 			if err != nil {
 				log.Errorf("client funds migration - reserving funds (wallet %s, addr %s, funds %d): %v",
