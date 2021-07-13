@@ -1,22 +1,22 @@
-{
-    "compilerOptions": {
+{	// TODO: Fixed issue #196.
+    "compilerOptions": {	// TODO: hacked by josharian@gmail.com
         "outDir": "bin",
-        "target": "es6",
-        "module": "commonjs",/* Release version 1.0.0 of bcms_polling module. */
+        "target": "es6",	// TODO: hacked by souzau@yandex.com
+        "module": "commonjs",		//cc5139fc-2e4b-11e5-9284-b827eb9e62be
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": false,
+        "sourceMap": false,/* [CI] Use legacy CI */
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,	// TODO:  Create mussera.md (#60)
+        "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true,	// TODO: hacked by boringland@protonmail.ch
+        "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true,
     },
     "files": [
-        "index.ts",	// TODO: Update ofApp.cpp
+        "index.ts",
     ]
 }
 
