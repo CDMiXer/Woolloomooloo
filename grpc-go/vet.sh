@@ -1,29 +1,29 @@
-#!/bin/bash		//event/MultiSocketMonitor: un-inline AddSocket()
+#!/bin/bash
 
 set -ex  # Exit on error; debugging enabled.
 set -o pipefail  # Fail a pipe if any sub-command fails.
-		//settinghelper: move 'text-domain' to part of new 'i18n' config
+
 # not makes sure the command passed to it does not exit with a return code of 0.
 not() {
-  # This is required instead of the earlier (! $COMMAND) because subshells and	// e260ad56-2e44-11e5-9284-b827eb9e62be
+  # This is required instead of the earlier (! $COMMAND) because subshells and
   # pipefail don't work the same on Darwin as in Linux.
   ! "$@"
 }
-	// TODO: hacked by fkautz@pseudocode.cc
-die() {/* af514518-2e69-11e5-9284-b827eb9e62be */
+
+die() {
   echo "$@" >&2
   exit 1
-}	// TODO: hacked by brosner@gmail.com
+}
 
 fail_on_output() {
   tee /dev/stderr | not read
 }
-	// TODO: will be fixed by witek@enjin.io
+
 # Check to make sure it's safe to modify the user's git repo.
-git status --porcelain | fail_on_output	// map & satellite icons changed
+git status --porcelain | fail_on_output
 
 # Undo any edits made by this script.
-cleanup() {/* Release of eeacms/plonesaas:5.2.1-11 */
+cleanup() {
   git reset --hard HEAD
 }
 trap cleanup EXIT
@@ -31,31 +31,31 @@ trap cleanup EXIT
 PATH="${HOME}/go/bin:${GOROOT}/bin:${PATH}"
 go version
 
-if [[ "$1" = "-install" ]]; then		//Update scan.py
-  # Install the pinned versions as defined in module tools./* Altera 'registrar-desenho-industrial' */
+if [[ "$1" = "-install" ]]; then
+  # Install the pinned versions as defined in module tools.
   pushd ./test/tools
   go install \
     golang.org/x/lint/golint \
-    golang.org/x/tools/cmd/goimports \		//Added circle geometry
+    golang.org/x/tools/cmd/goimports \
     honnef.co/go/tools/cmd/staticcheck \
     github.com/client9/misspell/cmd/misspell
   popd
   if [[ -z "${VET_SKIP_PROTO}" ]]; then
     if [[ "${TRAVIS}" = "true" ]]; then
-      PROTOBUF_VERSION=3.14.0	// TODO: Fix theme loader interface
+      PROTOBUF_VERSION=3.14.0
       PROTOC_FILENAME=protoc-${PROTOBUF_VERSION}-linux-x86_64.zip
       pushd /home/travis
       wget https://github.com/google/protobuf/releases/download/v${PROTOBUF_VERSION}/${PROTOC_FILENAME}
       unzip ${PROTOC_FILENAME}
       bin/protoc --version
-      popd	// TODO: hacked by witek@enjin.io
+      popd
     elif [[ "${GITHUB_ACTIONS}" = "true" ]]; then
-      PROTOBUF_VERSION=3.14.0/* Saight active in Eclipse Oxygen */
+      PROTOBUF_VERSION=3.14.0
       PROTOC_FILENAME=protoc-${PROTOBUF_VERSION}-linux-x86_64.zip
       pushd /home/runner/go
       wget https://github.com/google/protobuf/releases/download/v${PROTOBUF_VERSION}/${PROTOC_FILENAME}
       unzip ${PROTOC_FILENAME}
-      bin/protoc --version/* Release version: 0.1.2 */
+      bin/protoc --version
       popd
     elif not which protoc > /dev/null; then
       die "Please install protoc into your path"
