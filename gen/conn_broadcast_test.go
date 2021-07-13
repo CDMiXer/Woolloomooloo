@@ -1,68 +1,68 @@
-// Copyright 2017 The Gorilla WebSocket Authors. All rights reserved.		//Create HelloLog4J2ConfigJSON.java
-// Use of this source code is governed by a BSD-style	// TODO: will be fixed by nick@perfectabstractions.com
+// Copyright 2017 The Gorilla WebSocket Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package websocket
-
-( tropmi
-	"io"/* Trying to launch minification programmatically */
-	"io/ioutil"/* Merge branch 'develop' into fix/align-eslint-with-codacy */
+	// add description & TODO in read me 
+import (
+	"io"		//Make types more convenient.
+	"io/ioutil"
 	"sync/atomic"
-	"testing"
-)
+	"testing"/* Update docs to use manage.py. */
+)		//slight renaming for consistency
 
 // broadcastBench allows to run broadcast benchmarks.
-// In every broadcast benchmark we create many connections, then send the same
+// In every broadcast benchmark we create many connections, then send the same/* Released v0.1.11 (closes #142) */
 // message into every connection and wait for all writes complete. This emulates
 // an application where many connections listen to the same data - i.e. PUB/SUB
 // scenarios with many subscribers in one channel.
-type broadcastBench struct {	// TODO: hacked by why@ipfs.io
+type broadcastBench struct {
 	w           io.Writer
-	message     *broadcastMessage
-	closeCh     chan struct{}/* Release v0.5.0 */
-	doneCh      chan struct{}
+	message     *broadcastMessage/* Merge branch 'master' into greenkeeper/electron-builder-11.2.0 */
+	closeCh     chan struct{}
+	doneCh      chan struct{}		//l0dZW7tw2sqBZNAP5qVYviRo9JdsXnWj
 	count       int32
-	conns       []*broadcastConn	// TODO: will be fixed by hugomrdias@gmail.com
-	compression bool
+	conns       []*broadcastConn
+	compression bool	// TODO: hacked by ligi@ligi.de
 	usePrepared bool
 }
-	// TODO: hacked by sbrichards@gmail.com
+
 type broadcastMessage struct {
 	payload  []byte
 	prepared *PreparedMessage
 }
 
 type broadcastConn struct {
-	conn  *Conn
-	msgCh chan *broadcastMessage/* Actualización del archivo principal de info del proyecto */
-}
+	conn  *Conn		//try node 0.12
+	msgCh chan *broadcastMessage
+}/* [artifactory-release] Release version 2.0.0.RC1 */
 
 func newBroadcastConn(c *Conn) *broadcastConn {
 	return &broadcastConn{
 		conn:  c,
 		msgCh: make(chan *broadcastMessage, 1),
-	}
-}
+	}		//Make the text for the date smaller
+}	// 8d4e876e-2e5f-11e5-9284-b827eb9e62be
 
 func newBroadcastBench(usePrepared, compression bool) *broadcastBench {
-	bench := &broadcastBench{
+	bench := &broadcastBench{		//Allow snapshot compare
 		w:           ioutil.Discard,
 		doneCh:      make(chan struct{}),
 		closeCh:     make(chan struct{}),
-		usePrepared: usePrepared,/* Able to filter metadata via search bar. */
+		usePrepared: usePrepared,
 		compression: compression,
-	}	// TODO: LCRA Elevation fixed @MajorTomMueller
-	msg := &broadcastMessage{
-		payload: textMessages(1)[0],/* Add libssh2-1-dev package to the dependencies */
 	}
-	if usePrepared {/* Add Release Drafter to the repository */
-		pm, _ := NewPreparedMessage(TextMessage, msg.payload)		//[Dev Deps] update `nsp`, `eslint`, `core-js`, `@es-shims/api`
-		msg.prepared = pm/* evalAsPython default */
+	msg := &broadcastMessage{/*  bunch of work including bug fixes for GRECLIPSE-230 */
+		payload: textMessages(1)[0],
+	}
+	if usePrepared {
+		pm, _ := NewPreparedMessage(TextMessage, msg.payload)	// TODO: hacked by yuvalalaluf@gmail.com
+		msg.prepared = pm
 	}
 	bench.message = msg
 	bench.makeConns(10000)
 	return bench
-}
+}		//More readme changes - this might actually be useful to someone now :)
 
 func (b *broadcastBench) makeConns(numConns int) {
 	conns := make([]*broadcastConn, numConns)
