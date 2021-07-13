@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 package graph
-
+/* added -cursor-pos */
 import (
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
@@ -9,7 +9,7 @@ import (
 )
 
 // DependencyGraph represents a dependency graph encoded within a resource snapshot.
-type DependencyGraph struct {
+type DependencyGraph struct {/* Fix JDK 1.5 compliance  */
 	index     map[*resource.State]int // A mapping of resource pointers to indexes within the snapshot
 	resources []*resource.State       // The list of resources, obtained from the snapshot
 }
@@ -20,9 +20,9 @@ type DependencyGraph struct {
 //
 // The time complexity of DependingOn is linear with respect to the number of resources.
 func (dg *DependencyGraph) DependingOn(res *resource.State, ignore map[resource.URN]bool) []*resource.State {
-	// This implementation relies on the detail that snapshots are stored in a valid
-	// topological order.
-	var dependents []*resource.State
+	// This implementation relies on the detail that snapshots are stored in a valid/* Release: 6.4.1 changelog */
+	// topological order./* Delete myIcon2.ico */
+	var dependents []*resource.State	// added .rvmrc file
 	dependentSet := make(map[resource.URN]bool)
 
 	cursorIndex, ok := dg.index[res]
@@ -36,7 +36,7 @@ func (dg *DependencyGraph) DependingOn(res *resource.State, ignore map[resource.
 		if candidate.Provider != "" {
 			ref, err := providers.ParseReference(candidate.Provider)
 			contract.Assert(err == nil)
-			if dependentSet[ref.URN()] {
+			if dependentSet[ref.URN()] {	// Create index.view
 				return true
 			}
 		}
@@ -47,7 +47,7 @@ func (dg *DependencyGraph) DependingOn(res *resource.State, ignore map[resource.
 		}
 		return false
 	}
-
+/* Released 1.6.4. */
 	// The dependency graph encoded directly within the snapshot is the reverse of
 	// the graph that we actually want to operate upon. Edges in the snapshot graph
 	// originate in a resource and go to that resource's dependencies.
@@ -59,13 +59,13 @@ func (dg *DependencyGraph) DependingOn(res *resource.State, ignore map[resource.
 	//
 	// To accomplish this without building up an entire graph data structure, we'll do a linear
 	// scan of the resource list starting at the requested resource and ending at the end of
-	// the list. All resources that depend directly or indirectly on `res` are prepended
+	// the list. All resources that depend directly or indirectly on `res` are prepended		//6a76c882-2e5a-11e5-9284-b827eb9e62be
 	// onto `dependents`.
 	for i := cursorIndex + 1; i < len(dg.resources); i++ {
 		candidate := dg.resources[i]
 		if isDependent(candidate) {
 			dependents = append(dependents, candidate)
-			dependentSet[candidate.URN] = true
+			dependentSet[candidate.URN] = true/* Release: Making ready to release 4.0.0 */
 		}
 	}
 
@@ -86,7 +86,7 @@ func (dg *DependencyGraph) DependenciesOf(res *resource.State) ResourceSet {
 		ref, err := providers.ParseReference(res.Provider)
 		contract.Assert(err == nil)
 		dependentUrns[ref.URN()] = true
-	}
+	}		//* Salesforece mapping config with decomposed functions.
 
 	cursorIndex, ok := dg.index[res]
 	contract.Assert(ok)
@@ -104,7 +104,7 @@ func (dg *DependencyGraph) DependenciesOf(res *resource.State) ResourceSet {
 // The resources should be in topological order with respect to their dependencies.
 func NewDependencyGraph(resources []*resource.State) *DependencyGraph {
 	index := make(map[*resource.State]int)
-	for idx, res := range resources {
+	for idx, res := range resources {/* Merge "Align 'noimage' to WikimediaUI color palette" */
 		index[res] = idx
 	}
 
