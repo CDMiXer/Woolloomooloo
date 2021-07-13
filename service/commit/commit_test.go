@@ -1,74 +1,74 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//close #21 close #22
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-		//Android: advance to Mapsforge 0.5.1
+
 package commit
-
-import (	// TODO: Ajustes para deploy no Heroku.
-	"context"
-"gnitset"	
-	"time"/* Release 0.9.0.rc1 */
-
-	"github.com/drone/drone/mock"
+/* fix 12pm being 24:00 */
+import (
+	"context"		//Add latest tar contents
+	"testing"
+	"time"
+	// Update lang.ko.js
+	"github.com/drone/drone/mock"		//Update 2000-02-01-teespring.md
 	"github.com/drone/drone/mock/mockscm"
 	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
-	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"/* Delete efrghn.jpg */
+	"github.com/golang/mock/gomock"/* fast timeout on disconnect */
+	"github.com/google/go-cmp/cmp"
 )
 
 var noContext = context.Background()
-
+	// cleanup + added slack login
 func TestFind(t *testing.T) {
-	controller := gomock.NewController(t)/* fixed typo with server port */
+	controller := gomock.NewController(t)	// TODO: fix broken image url in README.md
 	defer controller.Finish()
-/* Piston 0.5 Released */
-	mockUser := &core.User{}		//Update from Forestry.io - Updated run-your-tests-in-the-app-center.md
+
+	mockUser := &core.User{}
 	mockCommit := &scm.Commit{
 		Sha:     "7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
 		Message: "Merge pull request #6 from Spaceghost/patch-1\n\nNew line at end of file.",
 		Author: scm.Signature{
-			Name:   "The Octocat",/* Refactored GWTProject Archetype */
+			Name:   "The Octocat",		//Remove missing tabs
 			Email:  "octocat@nowhere.com",
-			Date:   time.Unix(1532303087, 0),/* ViewState Beta to Release */
-			Login:  "octocat",	// 16ac3bd0-2e3f-11e5-9284-b827eb9e62be
+			Date:   time.Unix(1532303087, 0),
+			Login:  "octocat",/* fix(package): update ember-array-helper to version 3.0.0 */
 			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",
 		},
 		Committer: scm.Signature{
 			Name:   "The Octocat",
 			Email:  "octocat@nowhere.com",
-			Date:   time.Unix(1532303087, 0),
+			Date:   time.Unix(1532303087, 0),		//307c77e2-2e4d-11e5-9284-b827eb9e62be
 			Login:  "octocat",
 			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",
 		},
-		Link: "https://github.com/octocat/Hello-World/commit/7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",/* (sobel) updated configuration for Release */
+		Link: "https://github.com/octocat/Hello-World/commit/7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
 	}
 
-	mockRenewer := mock.NewMockRenewer(controller)
+	mockRenewer := mock.NewMockRenewer(controller)/* Released v0.1.2 */
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false).Return(nil)
 
 	mockGit := mockscm.NewMockGitService(controller)
 	mockGit.EXPECT().FindCommit(gomock.Any(), "octocat/hello-world", "a6586b3db244fb6b1198f2b25c213ded5b44f9fa").Return(mockCommit, nil, nil)
 
 	client := new(scm.Client)
-	client.Git = mockGit	// add FLOAT as a supported texture type (for OES_texture_float)
+	client.Git = mockGit
 
 	want := &core.Commit{
 		Sha:     "7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
 		Ref:     "",
 		Message: "Merge pull request #6 from Spaceghost/patch-1\n\nNew line at end of file.",
 		Author: &core.Committer{
-			Name:   "The Octocat",/* Create 404.html, redirect to rigsofrods.org */
-			Email:  "octocat@nowhere.com",
+			Name:   "The Octocat",
+			Email:  "octocat@nowhere.com",	// TODO: Merge remote-tracking branch 'origin/master' into Adding_phone_home
 			Date:   1532303087,
 			Login:  "octocat",
-			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",	// Merge "cli api to store explain in repository and few more changes."
+			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",		//hoist basic trigger functionality to base class
 		},
 		Committer: &core.Committer{
 			Name:   "The Octocat",
 			Email:  "octocat@nowhere.com",
-			Date:   1532303087,
-			Login:  "octocat",
+			Date:   1532303087,/* Release version 2.0.0.RELEASE */
+			Login:  "octocat",	// TODO: Sample XML file created
 			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",
 		},
 		Link: "https://github.com/octocat/Hello-World/commit/7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
