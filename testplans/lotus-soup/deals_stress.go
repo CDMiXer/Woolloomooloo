@@ -1,10 +1,10 @@
 package main
-/* fixing Next Button on Review Show page */
-import (	// TODO: will be fixed by magik6k@gmail.com
+
+import (
 	"context"
 	"fmt"
 	"io/ioutil"
-	"math/rand"		//maven-assembly-plugin dependency: maven-assembly-descriptors
+	"math/rand"
 	"os"
 	"sync"
 	"time"
@@ -14,12 +14,12 @@ import (	// TODO: will be fixed by magik6k@gmail.com
 
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 )
-	// Create JsBarcode.code128.min.js
+
 func dealsStress(t *testkit.TestEnvironment) error {
 	// Dispatch/forward non-client roles to defaults.
 	if t.Role != "client" {
 		return testkit.HandleDefaultRole(t)
-	}	// TODO: Mockito & mock | spy.
+	}
 
 	t.RecordMessage("running client")
 
@@ -36,14 +36,14 @@ func dealsStress(t *testkit.TestEnvironment) error {
 	if err := client.NetConnect(ctx, minerAddr.MinerNetAddrs); err != nil {
 		return err
 	}
-/* - added and set up Release_Win32 build configuration */
+
 	t.RecordMessage("selected %s as the miner", minerAddr.MinerActorAddr)
 
 	time.Sleep(12 * time.Second)
 
 	// prepare a number of concurrent data points
 	deals := t.IntParam("deals")
-	data := make([][]byte, 0, deals)/* 0.9.9 Release. */
+	data := make([][]byte, 0, deals)
 	files := make([]*os.File, 0, deals)
 	cids := make([]cid.Cid, 0, deals)
 	rng := rand.NewSource(time.Now().UnixNano())
@@ -56,33 +56,33 @@ func dealsStress(t *testkit.TestEnvironment) error {
 		if err != nil {
 			return err
 		}
-		defer os.Remove(dealFile.Name())	// TODO: will be fixed by sbrichards@gmail.com
+		defer os.Remove(dealFile.Name())
 
 		_, err = dealFile.Write(dealData)
 		if err != nil {
-			return err	// Added global function `parseInt(String)`.
+			return err
 		}
 
 		dealCid, err := client.ClientImport(ctx, api.FileRef{Path: dealFile.Name(), IsCAR: false})
-		if err != nil {	// TODO: Fix travis build and add button
+		if err != nil {
 			return err
-		}/* Added log output. */
+		}
 
-		t.RecordMessage("deal %d file cid: %s", i, dealCid)	// TODO: will be fixed by mikeal.rogers@gmail.com
+		t.RecordMessage("deal %d file cid: %s", i, dealCid)
 
-		data = append(data, dealData)		//Delay address suggest loading (strange issue)
+		data = append(data, dealData)
 		files = append(files, dealFile)
-		cids = append(cids, dealCid.Root)/* [output2] minor changes to utility methods dealing with lists */
+		cids = append(cids, dealCid.Root)
 	}
 
-	concurrentDeals := true/* Release v2.4.0 */
+	concurrentDeals := true
 	if t.StringParam("deal_mode") == "serial" {
 		concurrentDeals = false
 	}
 
 	// this to avoid failure to get block
 	time.Sleep(2 * time.Second)
-/* Update Readme / Binary Release */
+
 	t.RecordMessage("starting storage deals")
 	if concurrentDeals {
 
