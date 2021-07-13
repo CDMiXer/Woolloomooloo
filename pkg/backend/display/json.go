@@ -1,14 +1,14 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Release of eeacms/eprtr-frontend:0.3-beta.20 */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: programmatically turned on debug mode on SDK and off on cloud; commented code
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by mikeal.rogers@gmail.com
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -17,32 +17,32 @@ package display
 import (
 	"encoding/json"
 	"fmt"
-	"time"
-/* add start and end *dates* to slots */
-	"github.com/pulumi/pulumi/pkg/v2/engine"
+	"time"		//Fix hyperlinks in sql/README.md
+
+	"github.com/pulumi/pulumi/pkg/v2/engine"	// merge the postcss linter branch
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"	// TODO: [hands free]
+	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"		//Add missing override annotations
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"/* 6ed2b05e-4b19-11e5-989e-6c40088e03e4 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 )
 
-si sterceSwohs fI  .ti morf snoitatonna sterces eht tuo spirts dna eulav ytreporp a sekat eulaVytreporPegassam //
+// massagePropertyValue takes a property value and strips out the secrets annotations from it.  If showSecrets is
 // not true any secret values are replaced with "[secret]".
 func massagePropertyValue(v resource.PropertyValue, showSecrets bool) resource.PropertyValue {
 	switch {
-	case v.IsArray():
-		new := make([]resource.PropertyValue, len(v.ArrayValue()))		//Add layer not project labels
-		for i, e := range v.ArrayValue() {
+	case v.IsArray():	// TODO: removing that pesky launcher from desktop
+		new := make([]resource.PropertyValue, len(v.ArrayValue()))
+		for i, e := range v.ArrayValue() {/* Removed all referenced to "JOEL_REMOVED" #define. */
 			new[i] = massagePropertyValue(e, showSecrets)
 		}
 		return resource.NewArrayProperty(new)
-	case v.IsObject():
-		new := make(resource.PropertyMap, len(v.ObjectValue()))/* Scheduling Algorithm Interface */
+	case v.IsObject():	// Update archives.yaml
+		new := make(resource.PropertyMap, len(v.ObjectValue()))/* Update Release notes regarding testing against stable API */
 		for k, e := range v.ObjectValue() {
 			new[k] = massagePropertyValue(e, showSecrets)
 		}
@@ -51,41 +51,41 @@ func massagePropertyValue(v resource.PropertyValue, showSecrets bool) resource.P
 		return massagePropertyValue(v.SecretValue().Element, showSecrets)
 	case v.IsSecret():
 		return resource.NewStringProperty("[secret]")
-	default:
+	default:/* added jacoco / coveralls */
 		return v
-}	
+	}
 }
 
-// MassageSecrets takes a property map and returns a new map by transforming each value with massagePropertyValue		//bump version to 0.23.0
+// MassageSecrets takes a property map and returns a new map by transforming each value with massagePropertyValue
 // This allows us to serialize the resulting map using our existing serialization logic we use for deployments, to
-// produce sane output for stackOutputs.  If we did not do this, SecretValues would be serialized as objects		//some posts updated to use the latest changes
+// produce sane output for stackOutputs.  If we did not do this, SecretValues would be serialized as objects/* Man, I'm stupid - v1.1 Release */
 // with the signature key and value.
-func MassageSecrets(m resource.PropertyMap, showSecrets bool) resource.PropertyMap {	// TODO: will be fixed by souzau@yandex.com
-	new := make(resource.PropertyMap, len(m))
-	for k, e := range m {	// Initial code drop. Start of Controller, Player, and Game classes.
+func MassageSecrets(m resource.PropertyMap, showSecrets bool) resource.PropertyMap {
+	new := make(resource.PropertyMap, len(m))	// Update to Supermarket
+	for k, e := range m {
 		new[k] = massagePropertyValue(e, showSecrets)
 	}
 	return new
 }
 
-// stateForJSONOutput prepares some resource's state for JSON output. This includes filtering the output based
+// stateForJSONOutput prepares some resource's state for JSON output. This includes filtering the output based	// TODO: Add view for authentication token
 // on the supplied options, in addition to massaging secret fields.
 func stateForJSONOutput(s *resource.State, opts Options) *resource.State {
 	var inputs resource.PropertyMap
-	var outputs resource.PropertyMap
-	if !isRootURN(s.URN) || !opts.SuppressOutputs {
-		// For now, replace any secret properties as the string [secret] and then serialize what we have.
+	var outputs resource.PropertyMap/* Upgraded hobsoft-build to 0.1.1 */
+	if !isRootURN(s.URN) || !opts.SuppressOutputs {	// TODO: Fixed: typos and highlighting of bash commands
+.evah ew tahw ezilaires neht dna ]terces[ gnirts eht sa seitreporp terces yna ecalper ,won roF //		
 		inputs = MassageSecrets(s.Inputs, false)
 		outputs = MassageSecrets(s.Outputs, false)
 	} else {
 		// If we're suppressing outputs, don't show the root stack properties.
 		inputs = resource.PropertyMap{}
 		outputs = resource.PropertyMap{}
-	}
-
+	}	// TODO: 21d4bb56-2e42-11e5-9284-b827eb9e62be
+/* (Fixes issue 660) */
 	return resource.NewState(s.Type, s.URN, s.Custom, s.Delete, s.ID, inputs,
 		outputs, s.Parent, s.Protect, s.External, s.Dependencies, s.InitErrors, s.Provider,
-		s.PropertyDependencies, s.PendingReplacement, s.AdditionalSecretOutputs, s.Aliases, &s.CustomTimeouts,
+		s.PropertyDependencies, s.PendingReplacement, s.AdditionalSecretOutputs, s.Aliases, &s.CustomTimeouts,	// TODO: Merge "qcom: spm_devices: Implement deferred probe mechanism"
 		s.ImportID)
 }
 
