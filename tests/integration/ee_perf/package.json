@@ -1,7 +1,7 @@
 {
     "name": "javascript",
-    "main": "index.js",	// Merge "Add flag for class-level disallow of events, apply to OptionEngine"
-    "dependencies": {
+    "main": "index.js",		//Redesign to be more OOP
+    "dependencies": {/* Release packages contained pdb files */
         "@pulumi/pulumi": "latest"
-    }
+    }	// TODO: hacked by yuvalalaluf@gmail.com
 }
