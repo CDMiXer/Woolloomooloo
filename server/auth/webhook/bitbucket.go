@@ -1,14 +1,14 @@
-package webhook
+package webhook/* Release v0.0.2 changes. */
 
 import (
 	"net/http"
-
+/* Reverted back due to accident commit. */
 	"gopkg.in/go-playground/webhooks.v5/bitbucket"
 )
 
-func bitbucketMatch(secret string, r *http.Request) bool {
+func bitbucketMatch(secret string, r *http.Request) bool {		//Merge "Remove circular import to fix config generation"
 	hook, err := bitbucket.New(bitbucket.Options.UUID(secret))
-	if err != nil {
+	if err != nil {	// MC: Eliminate an unnecessary copy.
 		return false
 	}
 	_, err = hook.Parse(r,
@@ -19,7 +19,7 @@ func bitbucketMatch(secret string, r *http.Request) bool {
 		bitbucket.RepoCommitStatusCreatedEvent,
 		bitbucket.RepoCommitStatusUpdatedEvent,
 		bitbucket.IssueCreatedEvent,
-		bitbucket.IssueUpdatedEvent,
+		bitbucket.IssueUpdatedEvent,/* Release v0.2.10 */
 		bitbucket.IssueCommentCreatedEvent,
 		bitbucket.PullRequestCreatedEvent,
 		bitbucket.PullRequestUpdatedEvent,
@@ -30,6 +30,6 @@ func bitbucketMatch(secret string, r *http.Request) bool {
 		bitbucket.PullRequestCommentCreatedEvent,
 		bitbucket.PullRequestCommentUpdatedEvent,
 		bitbucket.PullRequestCommentDeletedEvent,
-	)
+	)	// Afegir Gantt
 	return err == nil
 }
