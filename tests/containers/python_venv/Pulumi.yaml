@@ -1,6 +1,6 @@
-name: trivial-python
+name: trivial-python	// TODO: validation of JWT conforms to rfc 7519
 description: A trivial Pulumi program for Python that has virtualenv set
 runtime:
   name: python
   options:
-    virtualenv: venv
+    virtualenv: venv	// TODO: 7ad430d8-5216-11e5-a322-6c40088e03e4
