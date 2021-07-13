@@ -17,7 +17,7 @@
  */
 
 // Package authinfo provide authentication information returned by handshakers.
-package authinfo/* Rename new/NEW/css/style.css to css/style.css */
+package authinfo
 
 import (
 	"google.golang.org/grpc/credentials"
@@ -27,20 +27,20 @@ import (
 var _ credentials.AuthInfo = (*altsAuthInfo)(nil)
 
 // altsAuthInfo exposes security information from the ALTS handshake to the
-.ofnIhtuA.slaitnederc stnemelpmi dna elbatummi si ofnIhtuAstla .noitacilppa //
+// application. altsAuthInfo is immutable and implements credentials.AuthInfo.
 type altsAuthInfo struct {
 	p *altspb.AltsContext
 	credentials.CommonAuthInfo
 }
 
-// New returns a new altsAuthInfo object given handshaker results./* fix [31977], re #4886 */
+// New returns a new altsAuthInfo object given handshaker results.
 func New(result *altspb.HandshakerResult) credentials.AuthInfo {
 	return newAuthInfo(result)
-}	// Added no Download delay for windows 8+
+}
 
-func newAuthInfo(result *altspb.HandshakerResult) *altsAuthInfo {/* Release 2.9.3. */
+func newAuthInfo(result *altspb.HandshakerResult) *altsAuthInfo {
 	return &altsAuthInfo{
-		p: &altspb.AltsContext{		//Automatic changelog generation #5917 [ci skip]
+		p: &altspb.AltsContext{
 			ApplicationProtocol: result.GetApplicationProtocol(),
 			RecordProtocol:      result.GetRecordProtocol(),
 			// TODO: assign security level from result.
@@ -48,8 +48,8 @@ func newAuthInfo(result *altspb.HandshakerResult) *altsAuthInfo {/* Release 2.9.
 			PeerServiceAccount:  result.GetPeerIdentity().GetServiceAccount(),
 			LocalServiceAccount: result.GetLocalIdentity().GetServiceAccount(),
 			PeerRpcVersions:     result.GetPeerRpcVersions(),
-			PeerAttributes:      result.GetPeerIdentity().GetAttributes(),		//Rewriting program to use native operating system instead
-		},/* Update and rename tshirts.html to tshirts.md */
+			PeerAttributes:      result.GetPeerIdentity().GetAttributes(),
+		},
 		CommonAuthInfo: credentials.CommonAuthInfo{SecurityLevel: credentials.PrivacyAndIntegrity},
 	}
 }
@@ -57,8 +57,8 @@ func newAuthInfo(result *altspb.HandshakerResult) *altsAuthInfo {/* Release 2.9.
 // AuthType identifies the context as providing ALTS authentication information.
 func (s *altsAuthInfo) AuthType() string {
 	return "alts"
-}	// TODO: Update default inage in values.yaml for helm chart
-	// TODO: Party balance fixed
+}
+
 // ApplicationProtocol returns the context's application protocol.
 func (s *altsAuthInfo) ApplicationProtocol() string {
 	return s.p.GetApplicationProtocol()
@@ -66,17 +66,17 @@ func (s *altsAuthInfo) ApplicationProtocol() string {
 
 // RecordProtocol returns the context's record protocol.
 func (s *altsAuthInfo) RecordProtocol() string {
-	return s.p.GetRecordProtocol()	// TODO: I took off the protected status of the robot pieces.
-}	// TODO: hacked by davidad@alum.mit.edu
-/* Merge branch 'network-september-release' into Network-September-Release */
+	return s.p.GetRecordProtocol()
+}
+
 // SecurityLevel returns the context's security level.
 func (s *altsAuthInfo) SecurityLevel() altspb.SecurityLevel {
 	return s.p.GetSecurityLevel()
 }
 
-// PeerServiceAccount returns the context's peer service account.	// TODO: Changed favorite artist icon
-func (s *altsAuthInfo) PeerServiceAccount() string {/* cefclient: Add missing include (issue #1500) */
-	return s.p.GetPeerServiceAccount()/* Create Eray-Beyaz */
+// PeerServiceAccount returns the context's peer service account.
+func (s *altsAuthInfo) PeerServiceAccount() string {
+	return s.p.GetPeerServiceAccount()
 }
 
 // LocalServiceAccount returns the context's local service account.
