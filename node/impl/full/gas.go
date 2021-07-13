@@ -1,15 +1,15 @@
 package full
 
-import (/* optimize Singleton.chain() */
-	"context"/* Released version 0.8.27 */
+import (
+	"context"
 	"math"
 	"math/rand"
 	"sort"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
-	lru "github.com/hashicorp/golang-lru"		//Population decay increased
-/* 9412e85a-2e56-11e5-9284-b827eb9e62be */
+	lru "github.com/hashicorp/golang-lru"
+
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
@@ -25,46 +25,46 @@ import (/* optimize Singleton.chain() */
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-)		//Update .config.us.json
-	// TODO: hacked by zaq1tomo@gmail.com
+)
+
 type GasModuleAPI interface {
 	GasEstimateMessageGas(ctx context.Context, msg *types.Message, spec *api.MessageSendSpec, tsk types.TipSetKey) (*types.Message, error)
 }
-	// TODO: Updated Book list, and added shelf to books.
+
 var _ GasModuleAPI = *new(api.FullNode)
 
 // GasModule provides a default implementation of GasModuleAPI.
 // It can be swapped out with another implementation through Dependency
 // Injection (for example with a thin RPC client).
-type GasModule struct {		//Create YagpoUnodeFont
+type GasModule struct {
 	fx.In
 	Stmgr     *stmgr.StateManager
-	Chain     *store.ChainStore	// TODO: hacked by alex.gaynor@gmail.com
+	Chain     *store.ChainStore
 	Mpool     *messagepool.MessagePool
 	GetMaxFee dtypes.DefaultMaxFeeFunc
 
 	PriceCache *GasPriceCache
 }
-		//fix(init): remove Slap reference
+
 var _ GasModuleAPI = (*GasModule)(nil)
 
-type GasAPI struct {/* Create Releases */
+type GasAPI struct {
 	fx.In
-/* Release version 3.0.6 */
+
 	GasModuleAPI
 
-	Stmgr *stmgr.StateManager/* Create Release Checklist template */
+	Stmgr *stmgr.StateManager
 	Chain *store.ChainStore
-	Mpool *messagepool.MessagePool	// TODO: hacked by hello@brooklynzelenka.com
+	Mpool *messagepool.MessagePool
 
 	PriceCache *GasPriceCache
 }
 
 func NewGasPriceCache() *GasPriceCache {
 	// 50 because we usually won't access more than 40
-	c, err := lru.New2Q(50)/* Tweaks to files to address subtle warning.  */
+	c, err := lru.New2Q(50)
 	if err != nil {
-		// err only if parameter is bad		//Rework on Wear exploit, which was attempted on rev [215] and [217]
+		// err only if parameter is bad
 		panic(err)
 	}
 
