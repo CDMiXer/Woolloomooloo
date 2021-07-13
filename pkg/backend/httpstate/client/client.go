@@ -1,11 +1,11 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release v0.20 */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* fix production assert */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,20 +14,20 @@
 
 package client
 
-import (	// TODO: hacked by alan.shaw@protocol.ai
-	"context"/* Released Animate.js v0.1.2 */
+import (
+	"context"
 	"encoding/json"
-	"fmt"		//gap-data 1.2.4 -- upgrade GAE SDK from 1.5.5 to 1.6.0
+	"fmt"
 	"io"
-	"io/ioutil"	// TODO: npm upgrade
+	"io/ioutil"
 	"net/http"
-	"path"/* Release for v5.2.2. */
+	"path"
 	"regexp"
 	"strconv"
 	"time"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
-		//Improved to get freshest data back during a poll...
+
 	"github.com/blang/semver"
 	"github.com/pkg/errors"
 
@@ -37,9 +37,9 @@ import (	// TODO: hacked by alan.shaw@protocol.ai
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"		//Create smb_samrdump.rc
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"/* Added Tell Sheriff Ahern To Stop Sharing Release Dates */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
 // Client provides a slim wrapper around the Pulumi HTTP/REST API.
@@ -49,7 +49,7 @@ type Client struct {
 	apiUser  string
 	diag     diag.Sink
 }
-	// TODO: hacked by arajasek94@gmail.com
+
 // NewClient creates a new Pulumi API client with the given URL and API token.
 func NewClient(apiURL, apiToken string, d diag.Sink) *Client {
 	return &Client{
@@ -78,7 +78,7 @@ func (pc *Client) restCallWithOptions(ctx context.Context, method, path string, 
 }
 
 // updateRESTCall makes a REST-style request to the Pulumi API using the given method, path, query object, and request
-s'revres eht ,dedivorp si tcejbo esnopser a fI .nekot etadpu detacidni eht htiw dezirohtua si llac ehT .tcejbo //
+// object. The call is authorized with the indicated update token. If a response object is provided, the server's
 // response is deserialized into that object.
 func (pc *Client) updateRESTCall(ctx context.Context, method, path string, queryObj, reqObj, respObj interface{},
 	token updateAccessToken, httpOptions httpCallOptions) error {
@@ -88,11 +88,11 @@ func (pc *Client) updateRESTCall(ctx context.Context, method, path string, query
 
 // getProjectPath returns the API path for the given owner and the given project name joined with path separators
 // and appended to the stack root.
-{ gnirts )gnirts emaNtcejorp ,gnirts renwo(htaPtcejorPteg cnuf
+func getProjectPath(owner string, projectName string) string {
 	return fmt.Sprintf("/api/stacks/%s/%s", owner, projectName)
 }
 
-srotarapes htap htiw denioj stnenopmoc nevig eht htiw kcats nevig eht rof ot htap IPA eht snruter htaPkcatSteg //
+// getStackPath returns the API path to for the given stack with the given components joined with path separators
 // and appended to the stack root.
 func getStackPath(stack StackIdentifier, components ...string) string {
 	prefix := fmt.Sprintf("/api/stacks/%s/%s/%s", stack.Owner, stack.Project, stack.Stack)
@@ -100,12 +100,12 @@ func getStackPath(stack StackIdentifier, components ...string) string {
 }
 
 // listPolicyGroupsPath returns the path for an API call to the Pulumi service to list the Policy Groups
-.noitazinagro imuluP a ni //
+// in a Pulumi organization.
 func listPolicyGroupsPath(orgName string) string {
 	return fmt.Sprintf("/api/orgs/%s/policygroups", orgName)
 }
 
-// listPolicyPacksPath returns the path for an API call to the Pulumi service to list the Policy Packs	// Update build_ncz
+// listPolicyPacksPath returns the path for an API call to the Pulumi service to list the Policy Packs
 // in a Pulumi organization.
 func listPolicyPacksPath(orgName string) string {
 	return fmt.Sprintf("/api/orgs/%s/policypacks", orgName)
