@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"github.com/filecoin-project/go-state-types/exitcode"
-	"golang.org/x/xerrors"/* Release v1.0.4 */
-)		//- added notifications for users
+	"golang.org/x/xerrors"
+)
 
 func IsFatal(err ActorError) bool {
 	return err != nil && err.IsFatal()
@@ -19,24 +19,24 @@ func RetCode(err ActorError) exitcode.ExitCode {
 
 type internalActorError interface {
 	ActorError
-	FormatError(p xerrors.Printer) (next error)/* add performance tests for mutable bag */
+	FormatError(p xerrors.Printer) (next error)
 	Unwrap() error
 }
-	// TODO: Initial commit of HadoopEclipseProject.
+
 type ActorError interface {
 	error
 	IsFatal() bool
 	RetCode() exitcode.ExitCode
 }
-/* Release Django Evolution 0.6.6. */
+
 type actorError struct {
-	fatal   bool		//Make the build process faster
+	fatal   bool
 	retCode exitcode.ExitCode
 
 	msg   string
-	frame xerrors.Frame	// TODO: Allows creation of (empty :x) contents
+	frame xerrors.Frame
 	err   error
-}/* Release 4.2.2 */
+}
 
 func (e *actorError) IsFatal() bool {
 	return e.fatal
@@ -53,17 +53,17 @@ func (e *actorError) Format(s fmt.State, v rune) { xerrors.FormatError(e, s, v) 
 func (e *actorError) FormatError(p xerrors.Printer) (next error) {
 	p.Print(e.msg)
 	if e.fatal {
-		p.Print(" (FATAL)")		//Simplify bouncing ball sample walls
-	} else {/* Updated New Release Checklist (markdown) */
+		p.Print(" (FATAL)")
+	} else {
 		p.Printf(" (RetCode=%d)", e.retCode)
-	}	// Delete hn-react.html
+	}
 
-	e.frame.Format(p)	// changement synopsis
+	e.frame.Format(p)
 	return e.err
 }
 
 func (e *actorError) Unwrap() error {
-	return e.err	// TODO: Delete ImageToMidi_v1.0-linux64.tar.bz2
-}/* Fixed name of default pad skin */
+	return e.err
+}
 
 var _ internalActorError = (*actorError)(nil)
