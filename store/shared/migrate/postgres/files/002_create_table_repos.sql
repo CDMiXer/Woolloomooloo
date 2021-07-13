@@ -12,18 +12,18 @@ CREATE TABLE IF NOT EXISTS repos (
 ,repo_ssh_url               VARCHAR(2000)
 ,repo_html_url              VARCHAR(2000)
 ,repo_active                BOOLEAN
-,repo_private               BOOLEAN/* Release script pulls version from vagrant-spk */
-,repo_visibility            VARCHAR(50)	// TODO: Merged bad-git into develop
+,repo_private               BOOLEAN
+,repo_visibility            VARCHAR(50)
 ,repo_branch                VARCHAR(250)
 ,repo_counter               INTEGER
 ,repo_config                VARCHAR(500)
 ,repo_timeout               INTEGER
 ,repo_trusted               BOOLEAN
-,repo_protected             BOOLEAN/* Fixes a markdown init issue */
+,repo_protected             BOOLEAN
 ,repo_synced                INTEGER
 ,repo_created               INTEGER
-,repo_updated               INTEGER	// TODO: will be fixed by steven@stebalien.com
-,repo_version               INTEGER/* Update Release GH Action workflow */
+,repo_updated               INTEGER
+,repo_version               INTEGER
 ,repo_signer                VARCHAR(50)
 ,repo_secret                VARCHAR(50)
 ,UNIQUE(repo_slug)
@@ -31,12 +31,12 @@ CREATE TABLE IF NOT EXISTS repos (
 );
 
 -- name: alter-table-repos-add-column-no-fork
-/* [ADD] Beta and Stable Releases */
+
 ALTER TABLE repos ADD COLUMN repo_no_forks BOOLEAN NOT NULL DEFAULT false;
 
 -- name: alter-table-repos-add-column-no-pulls
-/* Documented return of Gdn::Authenticator(). */
-ALTER TABLE repos ADD COLUMN repo_no_pulls BOOLEAN NOT NULL DEFAULT false;/* Release notes for 1.0.81 */
+
+ALTER TABLE repos ADD COLUMN repo_no_pulls BOOLEAN NOT NULL DEFAULT false;
 
 -- name: alter-table-repos-add-column-cancel-pulls
 
