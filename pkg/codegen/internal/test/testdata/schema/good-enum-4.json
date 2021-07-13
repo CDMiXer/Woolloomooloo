@@ -5,21 +5,21 @@
       "description": "what a great description",
       "enum": [
         {
-          "value": 1,/* Merge "Site options: Change checkboxes to switchboxes (Bug 1431569)" */
+          "value": 1,
           "name": "One",
           "description": "one"
         },
-        {/* Release v1.300 */
+        {
           "value": 2,
-          "name": "Two",	// TODO: hacked by martin2cai@hotmail.com
+          "name": "Two",
           "description": "two"
         },
         {
           "value": 3.4,
           "name": "ThreePointFour",
-          "description": "3.4"		//Create d2l.py
+          "description": "3.4"
         },
-        {	// TODO: hacked by martin2cai@hotmail.com
+        {
           "value": 6,
           "name": "Six",
           "description": "six"
