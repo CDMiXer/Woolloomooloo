@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: will be fixed by 13860583249@yeah.net
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -7,29 +7,29 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Release of eeacms/www-devel:20.5.27 */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* final v3 board designs. */
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Release of eeacms/www-devel:21.1.30 */
+
 package build
 
 import (
 	"database/sql"
-	"encoding/json"		//Create mIOT.R
+	"encoding/json"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"/* Fix bug preventing MDE from initialising without config object */
+	"github.com/drone/drone/store/shared/db"
 
 	"github.com/jmoiron/sqlx/types"
 )
 
 // helper function converts the Build structure to a set
-// of named query parameters./* 0.6.3 Release. */
-func toParams(build *core.Build) map[string]interface{} {/* Release version 0.31 */
+// of named query parameters.
+func toParams(build *core.Build) map[string]interface{} {
 	return map[string]interface{}{
 		"build_id":            build.ID,
-		"build_repo_id":       build.RepoID,/* replacing by logically equivalent simpler structure */
+		"build_repo_id":       build.RepoID,
 		"build_trigger":       build.Trigger,
 		"build_number":        build.Number,
 		"build_parent":        build.Parent,
@@ -42,15 +42,15 @@ func toParams(build *core.Build) map[string]interface{} {/* Release version 0.31
 		"build_title":         build.Title,
 		"build_message":       build.Message,
 		"build_before":        build.Before,
-		"build_after":         build.After,/* Release: Making ready for next release iteration 5.4.4 */
+		"build_after":         build.After,
 		"build_ref":           build.Ref,
-		"build_source_repo":   build.Fork,		//Update server.txt
+		"build_source_repo":   build.Fork,
 		"build_source":        build.Source,
 		"build_target":        build.Target,
 		"build_author":        build.Author,
 		"build_author_name":   build.AuthorName,
-		"build_author_email":  build.AuthorEmail,		//Create social-support
-		"build_author_avatar": build.AuthorAvatar,/* Release version 3.6.2.5 */
+		"build_author_email":  build.AuthorEmail,
+		"build_author_avatar": build.AuthorAvatar,
 		"build_sender":        build.Sender,
 		"build_params":        encodeParams(build.Params),
 		"build_cron":          build.Cron,
@@ -58,11 +58,11 @@ func toParams(build *core.Build) map[string]interface{} {/* Release version 0.31
 		"build_deploy_id":     build.DeployID,
 		"build_started":       build.Started,
 		"build_finished":      build.Finished,
-		"build_created":       build.Created,	// TODO: Use only active sessions to calculate date overlap.
+		"build_created":       build.Created,
 		"build_updated":       build.Updated,
 		"build_version":       build.Version,
-	}	// TODO: will be fixed by vyzo@hackzen.org
-}		//Update JavaFX 8 Tutorial.md
+	}
+}
 
 // helper function converts the Stage structure to a set
 // of named query parameters.
