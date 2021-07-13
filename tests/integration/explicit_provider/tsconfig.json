@@ -1,21 +1,21 @@
 {
-    "compilerOptions": {	// TODO: hacked by nagydani@epointsystem.org
+    "compilerOptions": {/* GP-38 additional register management API changes */
         "strict": true,
-        "outDir": "bin",	// TODO: hacked by cory@protocol.ai
+        "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",
+        "moduleResolution": "node",/* Tagging a Release Candidate - v4.0.0-rc12. */
         "declaration": true,
-        "sourceMap": true,
-        "stripInternal": true,
+        "sourceMap": true,	// TODO: added utility method
+        "stripInternal": true,		//88f69bd6-2e4e-11e5-9284-b827eb9e62be
         "experimentalDecorators": true,
-        "pretty": true,
+        "pretty": true,/* Moved Type Mappers on package up */
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,	// Updated Polish Block Translations
-        "forceConsistentCasingInFileNames": true		//gnunet-service-dns uses the new mesh
-    },/* cleaned up versions of tree.h and tree.cc */
+        "noImplicitReturns": true,
+        "forceConsistentCasingInFileNames": true
+    },
     "files": [
-        "index.ts"/* v0.3.7 Disqus support */
+        "index.ts"
     ]
 }
 
