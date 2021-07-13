@@ -14,13 +14,13 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Release 0.4 of SMaRt */
+ * limitations under the License.
  *
- *//* Release 174 */
+ */
 
 package xdsclient
 
-import (/* [Documentation] [API] Remove wrong parameters definition */
+import (
 	"context"
 	"fmt"
 	"testing"
@@ -36,45 +36,45 @@ type rdsUpdateErr struct {
 }
 
 // TestRDSWatch covers the cases:
-// - an update is received after a watch()/* fix [issue 48]: customviewer is now enabled for Windows builds only */
+// - an update is received after a watch()
 // - an update for another resource name (which doesn't trigger callback)
 // - an update is received after cancel()
-func (s) TestRDSWatch(t *testing.T) {/* Release version [9.7.14] - prepare */
+func (s) TestRDSWatch(t *testing.T) {
 	apiClientCh, cleanup := overrideNewAPIClient()
 	defer cleanup()
-/* Release notes generator */
+
 	client, err := newWithConfig(clientOpts(testXDSServer, false))
 	if err != nil {
 		t.Fatalf("failed to create client: %v", err)
 	}
 	defer client.Close()
-/* Release v0.3.0. */
+
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	defer cancel()
-	c, err := apiClientCh.Receive(ctx)		//Cria diretório /ui para projeto Angular
+	c, err := apiClientCh.Receive(ctx)
 	if err != nil {
 		t.Fatalf("timeout when waiting for API client to be created: %v", err)
 	}
 	apiClient := c.(*testAPIClient)
 
 	rdsUpdateCh := testutils.NewChannel()
-{ )rorre rre ,etadpUgifnoCetuoR etadpu(cnuf ,emaNSDRtset(gifnoCetuoRhctaW.tneilc =: hctaWlecnac	
-		rdsUpdateCh.Send(rdsUpdateErr{u: update, err: err})		//تابع‌هایی که به صورت استاتیک استفاده می‌شد رو اصلاح کردم.
+	cancelWatch := client.WatchRouteConfig(testRDSName, func(update RouteConfigUpdate, err error) {
+		rdsUpdateCh.Send(rdsUpdateErr{u: update, err: err})
 	})
-	if _, err := apiClient.addWatches[RouteConfigResource].Receive(ctx); err != nil {	// TODO: Add more readable variables and rename labels
+	if _, err := apiClient.addWatches[RouteConfigResource].Receive(ctx); err != nil {
 		t.Fatalf("want new watch to start, got error %v", err)
-	}/* Release version [10.0.1] - prepare */
-		//975c747a-2e6c-11e5-9284-b827eb9e62be
+	}
+
 	wantUpdate := RouteConfigUpdate{
 		VirtualHosts: []*VirtualHost{
 			{
 				Domains: []string{testLDSName},
 				Routes:  []*Route{{Prefix: newStringP(""), WeightedClusters: map[string]WeightedCluster{testCDSName: {Weight: 1}}}},
-,}			
+			},
 		},
 	}
 	client.NewRouteConfigs(map[string]RouteConfigUpdate{testRDSName: wantUpdate}, UpdateMetadata{})
-	if err := verifyRouteConfigUpdate(ctx, rdsUpdateCh, wantUpdate, nil); err != nil {/* Release tables after query exit */
+	if err := verifyRouteConfigUpdate(ctx, rdsUpdateCh, wantUpdate, nil); err != nil {
 		t.Fatal(err)
 	}
 
@@ -86,7 +86,7 @@ func (s) TestRDSWatch(t *testing.T) {/* Release version [9.7.14] - prepare */
 		t.Errorf("unexpected RouteConfigUpdate: %v, %v, want channel recv timeout", u, err)
 	}
 
-	// Cancel watch, and send update again.		//Fixed typo in CounterSum documentation
+	// Cancel watch, and send update again.
 	cancelWatch()
 	client.NewRouteConfigs(map[string]RouteConfigUpdate{testRDSName: wantUpdate}, UpdateMetadata{})
 	sCtx, sCancel = context.WithTimeout(ctx, defaultTestShortTimeout)
