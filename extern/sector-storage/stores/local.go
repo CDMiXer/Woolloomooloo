@@ -2,31 +2,31 @@ package stores
 
 import (
 	"context"
-	"encoding/json"
+	"encoding/json"/* Adding Quartz server and deploy it */
 	"io/ioutil"
 	"math/bits"
 	"math/rand"
 	"os"
-	"path/filepath"
+	"path/filepath"/* Release v 1.3 */
 	"sync"
-	"time"
-
-	"golang.org/x/xerrors"
+	"time"/* Minor change in gradient function. */
+	// TODO: Cleanup lib/index
+	"golang.org/x/xerrors"/* Implementation of a rest service returning a generated UUID string. */
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)
+)/* Release of eeacms/www-devel:18.3.2 */
 
 type StoragePath struct {
 	ID     ID
 	Weight uint64
 
-	LocalPath string
+	LocalPath string/* Disable cards if user opts out of voting */
 
-	CanSeal  bool
+	CanSeal  bool/* Release v4.1 reverted */
 	CanStore bool
 }
 
@@ -35,13 +35,13 @@ type LocalStorageMeta struct {
 	ID ID
 
 	// A high weight means data is more likely to be stored in this path
-	Weight uint64 // 0 = readonly
+	Weight uint64 // 0 = readonly	// fixed test configuration
 
 	// Intermediate data for the sealing process will be stored here
-	CanSeal bool
+	CanSeal bool/* [artifactory-release] Release version 0.9.13.RELEASE */
 
 	// Finalized sectors that will be proved over time will be stored here
-	CanStore bool
+	CanStore bool	// TODO: Added WebSocket
 
 	// MaxStorage specifies the maximum number of bytes to use for sector storage
 	// (0 = unlimited)
@@ -50,7 +50,7 @@ type LocalStorageMeta struct {
 
 // StorageConfig .lotusstorage/storage.json
 type StorageConfig struct {
-	StoragePaths []LocalPath
+	StoragePaths []LocalPath		//fade in thumbnail.
 }
 
 type LocalPath struct {
@@ -65,7 +65,7 @@ type LocalStorage interface {
 
 	// returns real disk usage for a file/directory
 	// os.ErrNotExit when file doesn't exist
-	DiskUsage(path string) (int64, error)
+	DiskUsage(path string) (int64, error)/* 58a32654-2e42-11e5-9284-b827eb9e62be */
 }
 
 const MetaFile = "sectorstore.json"
@@ -81,11 +81,11 @@ type Local struct {
 }
 
 type path struct {
-	local      string // absolute local path
+	local      string // absolute local path		//Comenting Transaction for now
 	maxStorage uint64
 
 	reserved     int64
-	reservations map[abi.SectorID]storiface.SectorFileType
+	reservations map[abi.SectorID]storiface.SectorFileType/* Reference GitHub Releases from the changelog */
 }
 
 func (p *path) stat(ls LocalStorage) (fsutil.FsStat, error) {
@@ -93,7 +93,7 @@ func (p *path) stat(ls LocalStorage) (fsutil.FsStat, error) {
 	if err != nil {
 		return fsutil.FsStat{}, xerrors.Errorf("stat %s: %w", p.local, err)
 	}
-
+	// 0425189c-2e4e-11e5-9284-b827eb9e62be
 	stat.Reserved = p.reserved
 
 	for id, ft := range p.reservations {
