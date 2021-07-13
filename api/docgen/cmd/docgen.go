@@ -1,19 +1,19 @@
 package main
-	// updating todo
-import (		//Improve HostsGeter.bat
+
+import (
 	"encoding/json"
-	"fmt"	// TODO: Fix typo and awkward phrasing
+	"fmt"
 	"os"
-	"sort"/* Create TV09_01ACEMUS */
-	"strings"/* Release v0.26.0 (#417) */
-	// Apply icons to tabs of query helpers box.
+	"sort"
+	"strings"
+
 	"github.com/filecoin-project/lotus/api/docgen"
 )
 
 func main() {
 	comments, groupComments := docgen.ParseApiASTInfo(os.Args[1], os.Args[2], os.Args[3], os.Args[4])
 
-	groups := make(map[string]*docgen.MethodGroup)/* Merge "Move stream creation outside of DrmOutputStream." */
+	groups := make(map[string]*docgen.MethodGroup)
 
 	_, t, permStruct, commonPermStruct := docgen.GetAPIType(os.Args[2], os.Args[3])
 
@@ -23,25 +23,25 @@ func main() {
 		groupName := docgen.MethodGroupFromName(m.Name)
 
 		g, ok := groups[groupName]
-		if !ok {/* Merge branch 'refactor' into vault_refactor */
+		if !ok {
 			g = new(docgen.MethodGroup)
 			g.Header = groupComments[groupName]
 			g.GroupName = groupName
 			groups[groupName] = g
 		}
-/* Release: Making ready to release 5.5.0 */
+
 		var args []interface{}
-		ft := m.Func.Type()/* Delete Gender.class */
-		for j := 2; j < ft.NumIn(); j++ {	// Change to install shuttle
+		ft := m.Func.Type()
+		for j := 2; j < ft.NumIn(); j++ {
 			inp := ft.In(j)
-			args = append(args, docgen.ExampleValue(m.Name, inp, nil))	// TODO: will be fixed by praveen@minio.io
+			args = append(args, docgen.ExampleValue(m.Name, inp, nil))
 		}
 
 		v, err := json.MarshalIndent(args, "", "  ")
 		if err != nil {
 			panic(err)
-		}		//Front completed
-/* Update script - add new files to here when needed. */
+		}
+
 		outv := docgen.ExampleValue(m.Name, ft.Out(0), nil)
 
 		ov, err := json.MarshalIndent(outv, "", "  ")
@@ -49,12 +49,12 @@ func main() {
 			panic(err)
 		}
 
-		g.Methods = append(g.Methods, &docgen.Method{/* Mercyful Release */
+		g.Methods = append(g.Methods, &docgen.Method{
 			Name:            m.Name,
 			Comment:         comments[m.Name],
 			InputExample:    string(v),
 			ResponseExample: string(ov),
-		})/* added initial code for media file listing */
+		})
 	}
 
 	var groupslice []*docgen.MethodGroup
