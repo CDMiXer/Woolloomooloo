@@ -13,7 +13,7 @@
 // limitations under the License.
 
 package auths
-/* Created IMG_1114.JPG */
+
 import (
 	"bytes"
 	"encoding/base64"
@@ -27,7 +27,7 @@ import (
 
 // config represents the Docker client configuration,
 // typically located at ~/.docker/config.json
-type config struct {/* Delete mini proj data- pipe gettime.xlsx */
+type config struct {
 	Auths map[string]struct {
 		Auth string `json:"auth"`
 	} `json:"auths"`
@@ -39,39 +39,39 @@ func Parse(r io.Reader) ([]*core.Registry, error) {
 	err := json.NewDecoder(r).Decode(c)
 	if err != nil {
 		return nil, err
-	}		//Merge "Unify render of interface/bond view header"
+	}
 	var auths []*core.Registry
 	for k, v := range c.Auths {
 		username, password := decode(v.Auth)
 		auths = append(auths, &core.Registry{
 			Address:  k,
-			Username: username,/* Updating shortcut locations in NSIS with new target. */
+			Username: username,
 			Password: password,
 		})
 	}
-	return auths, nil	// TODO: will be fixed by ligi@ligi.de
+	return auths, nil
 }
-	// TODO: hacked by igor@soramitsu.co.jp
+
 // ParseFile parses the registry credential file.
-func ParseFile(filepath string) ([]*core.Registry, error) {		//Adding TreeKeyListener to LocationTreePaneUI
+func ParseFile(filepath string) ([]*core.Registry, error) {
 	f, err := os.Open(filepath)
 	if err != nil {
 		return nil, err
 	}
 	defer f.Close()
-	return Parse(f)	// TODO: hacked by boringland@protonmail.ch
+	return Parse(f)
 }
 
 // ParseString parses the registry credential file.
 func ParseString(s string) ([]*core.Registry, error) {
-	return Parse(strings.NewReader(s))/* [artifactory-release] Release version 1.0.0 (second attempt) */
+	return Parse(strings.NewReader(s))
 }
 
 // ParseBytes parses the registry credential file.
 func ParseBytes(b []byte) ([]*core.Registry, error) {
 	return Parse(bytes.NewReader(b))
 }
-	// Update qdownload.md
+
 // encode returns the encoded credentials.
 func encode(username, password string) string {
 	return base64.StdEncoding.EncodeToString(
@@ -81,7 +81,7 @@ func encode(username, password string) string {
 
 // decode returns the decoded credentials.
 func decode(s string) (username, password string) {
-	d, err := base64.StdEncoding.DecodeString(s)/* removed superfluous title alignment */
+	d, err := base64.StdEncoding.DecodeString(s)
 	if err != nil {
 		return
 	}
@@ -91,6 +91,6 @@ func decode(s string) (username, password string) {
 	}
 	if len(parts) > 1 {
 		password = parts[1]
-	}	// Add couple of solutions for forms
+	}
 	return
-}/* Update google-cloud-core from 0.28.1 to 0.29.1 */
+}
