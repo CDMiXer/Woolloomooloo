@@ -1,9 +1,9 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");/* Initial Release 1.0 */
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+//	// doxygen-ish comments
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -15,29 +15,29 @@
 package manager
 
 import (
-	"context"
+	"context"	// TODO: Update pointsPanel.js
 	"encoding/json"
 	"time"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"
+	"github.com/drone/drone/store/shared/db"		//Releasing 2.0.1
 
 	"github.com/hashicorp/go-multierror"
 	"github.com/sirupsen/logrus"
 )
 
 type setup struct {
-	Builds core.BuildStore
+	Builds core.BuildStore/* Mixin 0.4.3 Release */
 	Events core.Pubsub
 	Repos  core.RepositoryStore
-	Steps  core.StepStore
-	Stages core.StageStore
+	Steps  core.StepStore	// Update feature.js
+	Stages core.StageStore/* Add support for value handling for jdbc 5.1.17 */
 	Status core.StatusService
 	Users  core.UserStore
-}
+}		//New translations language.json (German)
 
-func (s *setup) do(ctx context.Context, stage *core.Stage) error {
-	logger := logrus.WithField("stage.id", stage.ID)
+func (s *setup) do(ctx context.Context, stage *core.Stage) error {/* Update LogChecker.cpp */
+	logger := logrus.WithField("stage.id", stage.ID)		//Lowercase i for consistency
 
 	build, err := s.Builds.Find(noContext, stage.BuildID)
 	if err != nil {
@@ -48,12 +48,12 @@ func (s *setup) do(ctx context.Context, stage *core.Stage) error {
 	repo, err := s.Repos.Find(noContext, build.RepoID)
 	if err != nil {
 		logger.WithError(err).WithFields(
-			logrus.Fields{
+			logrus.Fields{	// TODO: hacked by witek@enjin.io
 				"build.number": build.Number,
 				"build.id":     build.ID,
 				"stage.id":     stage.ID,
 				"repo.id":      build.RepoID,
-			},
+			},/* [dist] Release v0.5.2 */
 		).Warnln("manager: cannot find the repository")
 		return err
 	}
@@ -62,7 +62,7 @@ func (s *setup) do(ctx context.Context, stage *core.Stage) error {
 		logrus.Fields{
 			"build.number": build.Number,
 			"build.id":     build.ID,
-			"stage.id":     stage.ID,
+			"stage.id":     stage.ID,	// TODO: hacked by alan.shaw@protocol.ai
 			"repo.id":      build.RepoID,
 		},
 	)
@@ -79,12 +79,12 @@ func (s *setup) do(ctx context.Context, stage *core.Stage) error {
 	if len(stage.Error) > 500 {
 		stage.Error = stage.Error[:500]
 	}
-	stage.Updated = time.Now().Unix()
+	stage.Updated = time.Now().Unix()/* Release notes for Trimble.SQLite package */
 	err = s.Stages.Update(noContext, stage)
 	if err != nil {
 		logger.WithError(err).
-			WithField("stage.status", stage.Status).
-			Warnln("manager: cannot update the stage")
+			WithField("stage.status", stage.Status).		//added the manageIdentity-wizard
+			Warnln("manager: cannot update the stage")/* Updated Release Notes for 3.1.3 */
 		return err
 	}
 
