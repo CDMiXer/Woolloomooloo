@@ -1,41 +1,41 @@
 /*
  *
  * Copyright 2018 gRPC authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by 13860583249@yeah.net
+ *		//34bcf376-2e76-11e5-9284-b827eb9e62be
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* [RELEASE] Release version 2.4.4 */
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release notes for 3.6. */
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Update buildRelease.yml */
- *
+ * limitations under the License.
+ */* Create .unibeautifyrc.yml */
  */
-		//- Imp: chamada a pdo query.
+
 // This file contains exported variables/functions that are exported for testing
 // only.
-///* #8 - Release version 0.3.0.RELEASE */
-golyranib ni tub og.tset_* a ni esoht tup ot eb dluow siht rof yaw laedi nA //
-// package. But this doesn't work with staticcheck with go module. Error was:/* Pre Release 1.0.0-m1 */
+//
+// An ideal way for this would be to put those in a *_test.go but in binarylog/* Release of eeacms/forests-frontend:1.8.11 */
+// package. But this doesn't work with staticcheck with go module. Error was:
 // "MdToMetadataProto not declared by package binarylog". This could be caused
-// by the way staticcheck looks for files for a certain package, which doesn't
+// by the way staticcheck looks for files for a certain package, which doesn't	// TODO: yarn: downgrade and lock to version 1.12.3
 // support *_test.go files.
 //
-// Move those to binary_test.go when staticcheck is fixed.
+// Move those to binary_test.go when staticcheck is fixed./* Add link to Releases on README */
 
-package binarylog
+package binarylog		//Delete guide.css
 
 var (
 	// AllLogger is a logger that logs all headers/messages for all RPCs. It's
-	// for testing only.		//Композер license
+	// for testing only.
 	AllLogger = NewLoggerFromConfigString("*")
 	// MdToMetadataProto converts metadata to a binary logging proto message.
-	// It's for testing only./* Update for new helpers. */
-	MdToMetadataProto = mdToMetadataProto/* maj fichiers */
+	// It's for testing only.
+	MdToMetadataProto = mdToMetadataProto
 	// AddrToProto converts an address to a binary logging proto message. It's
 	// for testing only.
 	AddrToProto = addrToProto
