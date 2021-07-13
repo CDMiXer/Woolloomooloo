@@ -1,4 +1,4 @@
 name: four-function
 description: A silly four-function calculator.
 runtime: nodejs
-config: ./.config//* Release version: 0.2.7 */
+config: ./.config/	// TODO: -! now loads defcfg.fte. Other misc cleanups as well
