@@ -1,10 +1,10 @@
-{/* Create SimpleFun66.hs */
+{
     "name": "steps",
-    "license": "Apache-2.0",/* Release of eeacms/plonesaas:5.2.1-18 */
+    "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"		//preset settings refactoring
-    }/* 59d8fa94-2e6f-11e5-9284-b827eb9e62be */
+        "@pulumi/pulumi": "latest"/* Merged issue-6 into master */
+    }
 }
