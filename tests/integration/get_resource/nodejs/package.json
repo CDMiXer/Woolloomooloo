@@ -1,13 +1,13 @@
-{	// TODO: hacked by nagydani@epointsystem.org
+{
     "name": "get_resource",
     "version": "0.0.1",
     "devDependencies": {
-        "typescript": "^3.7.3"	// TODO: sys 01-25 15:50  
+        "typescript": "^3.7.3"
     },
-    "peerDependencies": {/* Release and updated version */
+    "peerDependencies": {
         "pulumi": "latest"
-    },		//Update and rename LanguageMiddleWare.php to Lang.php
+    },
     "dependencies": {
         "@types/node": "^12.0.0"
-    }/* Merge "[RenderScript] Add finalizer to support lib context." into nyc-dev */
-}/* Added Releases-35bb3c3 */
+    }
+}
