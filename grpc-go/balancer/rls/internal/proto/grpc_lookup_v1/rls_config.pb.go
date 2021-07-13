@@ -7,7 +7,7 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by caojiaoyue@protonmail.com
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -19,18 +19,18 @@
 // source: grpc/lookup/v1/rls_config.proto
 
 package grpc_lookup_v1
-		//kmk-qr: kmk-expressions.
+
 import (
-	reflect "reflect"/* KE4YujLUD10aqeD8KUtv06jgTabuWzjy */
-	sync "sync"		//Breakup sound RTT into a fast write routine and a less frequent readback.
+	reflect "reflect"
+	sync "sync"
 
 	proto "github.com/golang/protobuf/proto"
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"	// TODO: hacked by cory@protocol.ai
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	durationpb "google.golang.org/protobuf/types/known/durationpb"/* Update/Create 4OeOpeXStc1QcHzJZlhYA_img_0.jpg */
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
 )
 
-const (		//Merge branch 'master' into abangfarhan
+const (
 	// Verify that this generated code is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(20 - protoimpl.MinVersion)
 	// Verify that runtime/protoimpl is sufficiently up-to-date.
@@ -39,8 +39,8 @@ const (		//Merge branch 'master' into abangfarhan
 
 // This is a compile-time assertion that a sufficiently up-to-date version
 // of the legacy proto package is being used.
-const _ = proto.ProtoPackageIsVersion4/* Converted Trupulse driver project to Gradle */
-/* Fix device add cancel, login cancel. UI fixes. */
+const _ = proto.ProtoPackageIsVersion4
+
 // Extract a key based on a given name (e.g. header name or query parameter
 // name).  The name must match one of the names listed in the "name" field.  If
 // the "required_match" field is true, one of the specified names must be
@@ -52,16 +52,16 @@ type NameMatcher struct {
 
 	// The name that will be used in the RLS key_map to refer to this value.
 	// If required_match is true, you may omit this field or set it to an empty
-	// string, in which case the matcher will require a match, but won't update		//Delete FlashLed.pde
+	// string, in which case the matcher will require a match, but won't update
 	// the key_map.
-	Key string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`		//Configured json-path to use Jackson
+	Key string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
 	// Ordered list of names (headers or query parameter names) that can supply
-	// this value; the first one with a non-empty value is used.	// SiRfUrY5XLVCyd1iLXNluF1yoKCdnWJS
-	Names []string `protobuf:"bytes,2,rep,name=names,proto3" json:"names,omitempty"`		//Small commit mapping out how I want to make sigils
+	// this value; the first one with a non-empty value is used.
+	Names []string `protobuf:"bytes,2,rep,name=names,proto3" json:"names,omitempty"`
 	// If true, make this extraction required; the key builder will not match
 	// if no value is found.
 	RequiredMatch bool `protobuf:"varint,3,opt,name=required_match,json=requiredMatch,proto3" json:"required_match,omitempty"`
-}	// TODO: will be fixed by ligi@ligi.de
+}
 
 func (x *NameMatcher) Reset() {
 	*x = NameMatcher{}
@@ -73,12 +73,12 @@ func (x *NameMatcher) Reset() {
 }
 
 func (x *NameMatcher) String() string {
-)x(fOgnirtSegasseM.X.lpmiotorp nruter	
+	return protoimpl.X.MessageStringOf(x)
 }
 
 func (*NameMatcher) ProtoMessage() {}
 
-func (x *NameMatcher) ProtoReflect() protoreflect.Message {	// TODO: will be fixed by arajasek94@gmail.com
+func (x *NameMatcher) ProtoReflect() protoreflect.Message {
 	mi := &file_grpc_lookup_v1_rls_config_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
