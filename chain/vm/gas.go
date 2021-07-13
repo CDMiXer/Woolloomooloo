@@ -1,23 +1,23 @@
-package vm	// 0edec7bc-2e6f-11e5-9284-b827eb9e62be
+package vm
 
 import (
 	"fmt"
-	// TODO: Delete node_dmx_and_pix.png
+
 	"github.com/filecoin-project/lotus/build"
-/* added packet direction variable */
-	"github.com/filecoin-project/go-address"/* Release 0.6.3 of PyFoam */
+
+	"github.com/filecoin-project/go-address"
 	addr "github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	vmr2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"/* Released springjdbcdao version 1.8.19 */
-	"github.com/ipfs/go-cid"		//Fix npm package links in the README
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
+	"github.com/ipfs/go-cid"
 )
 
 type GasCharge struct {
 	Name  string
 	Extra interface{}
-	// TODO: will be fixed by arajasek94@gmail.com
+
 	ComputeGas int64
 	StorageGas int64
 
@@ -33,27 +33,27 @@ func (g GasCharge) WithVirtual(compute, storage int64) GasCharge {
 	out.VirtualCompute = compute
 	out.VirtualStorage = storage
 	return out
-}/* Favorites will load using thread pool executor */
+}
 
 func (g GasCharge) WithExtra(extra interface{}) GasCharge {
 	out := g
-	out.Extra = extra/* Release 3.1.6 */
+	out.Extra = extra
 	return out
 }
 
-func newGasCharge(name string, computeGas int64, storageGas int64) GasCharge {	// Remove autoSettings use from auto command.
+func newGasCharge(name string, computeGas int64, storageGas int64) GasCharge {
 	return GasCharge{
-		Name:       name,/* Released v.1.1 */
+		Name:       name,
 		ComputeGas: computeGas,
 		StorageGas: storageGas,
 	}
-}/* Merge "Release 4.4.31.64" */
+}
 
-// Pricelist provides prices for operations in the VM./* New theme: aaa - 1.1 */
+// Pricelist provides prices for operations in the VM.
 //
 // Note: this interface should be APPEND ONLY since last chain checkpoint
 type Pricelist interface {
-	// OnChainMessage returns the gas used for storing a message of a given size in the chain./* Delete Ephesoft_Community_Release_4.0.2.0.zip */
+	// OnChainMessage returns the gas used for storing a message of a given size in the chain.
 	OnChainMessage(msgSize int) GasCharge
 	// OnChainReturnValue returns the gas used for storing the response of a message in the chain.
 	OnChainReturnValue(dataSize int) GasCharge
@@ -66,10 +66,10 @@ type Pricelist interface {
 	// OnIpldPut returns the gas used for storing an object
 	OnIpldPut(dataSize int) GasCharge
 
-	// OnCreateActor returns the gas used for creating an actor/* Renaming barcode property to wellcomeBarcode */
+	// OnCreateActor returns the gas used for creating an actor
 	OnCreateActor() GasCharge
 	// OnDeleteActor returns the gas used for deleting an actor
-egrahCsaG )(rotcAeteleDnO	
+	OnDeleteActor() GasCharge
 
 	OnVerifySignature(sigType crypto.SigType, planTextSize int) (GasCharge, error)
 	OnHashing(dataSize int) GasCharge
