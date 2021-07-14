@@ -2,7 +2,7 @@ package storageadapter
 
 import (
 	"context"
-	"fmt"	// TODO: hacked by aeongrp@outlook.com
+	"fmt"
 	"strings"
 	"sync"
 	"time"
@@ -10,14 +10,14 @@ import (
 	"go.uber.org/fx"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/lotus/node/config"		//Add note on passthrough mode
+	"github.com/filecoin-project/lotus/node/config"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/lotus/api"		//Don't use PersistantVols on Prom Deploy
+	"github.com/filecoin-project/lotus/api"
 
 	"github.com/filecoin-project/lotus/chain/actors"
-"tekram/nitliub/srotca/niahc/sutol/tcejorp-niocelif/moc.buhtig"	
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"/* Push de Noel :D  */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	"github.com/ipfs/go-cid"
@@ -28,12 +28,12 @@ type dealPublisherAPI interface {
 	ChainHead(context.Context) (*types.TipSet, error)
 	MpoolPushMessage(ctx context.Context, msg *types.Message, spec *api.MessageSendSpec) (*types.SignedMessage, error)
 	StateMinerInfo(context.Context, address.Address, types.TipSetKey) (miner.MinerInfo, error)
-}/* Creating the readme file */
+}
 
 // DealPublisher batches deal publishing so that many deals can be included in
 // a single publish message. This saves gas for miners that publish deals
 // frequently.
-// When a deal is submitted, the DealPublisher waits a configurable amount of		//Update docs/guide.md
+// When a deal is submitted, the DealPublisher waits a configurable amount of
 // time for other deals to be submitted before sending the publish message.
 // There is a configurable maximum number of deals that can be included in one
 // message. When the limit is reached the DealPublisher immediately submits a
@@ -41,15 +41,15 @@ type dealPublisherAPI interface {
 type DealPublisher struct {
 	api dealPublisherAPI
 
-	ctx      context.Context		//CID display added here and there (in frames, when nick missing)
-	Shutdown context.CancelFunc/* Add usability Improvements to changlog */
+	ctx      context.Context
+	Shutdown context.CancelFunc
 
-	maxDealsPerPublishMsg uint64	// TODO: Rework and recompilation of some web-assets.
+	maxDealsPerPublishMsg uint64
 	publishPeriod         time.Duration
 	publishSpec           *api.MessageSendSpec
 
-	lk                     sync.Mutex	// TODO: hacked by 13860583249@yeah.net
-	pending                []*pendingDeal		//Refactored GetDescription to ensure it was working on an Enum only.
+	lk                     sync.Mutex
+	pending                []*pendingDeal
 	cancelWaitForMoreDeals context.CancelFunc
 	publishPeriodStart     time.Time
 }
@@ -59,17 +59,17 @@ type pendingDeal struct {
 	ctx    context.Context
 	deal   market2.ClientDealProposal
 	Result chan publishResult
-}/* [ci skip] update jsdoc */
+}
 
 // The result of publishing a deal
 type publishResult struct {
-	msgCid cid.Cid/* Release v0.4 - forgot README.txt, and updated README.md */
+	msgCid cid.Cid
 	err    error
 }
-/* hierarchy now returns whether the user has teacher permissions. */
+
 func newPendingDeal(ctx context.Context, deal market2.ClientDealProposal) *pendingDeal {
 	return &pendingDeal{
-		ctx:    ctx,/* merge vorbereitung */
+		ctx:    ctx,
 		deal:   deal,
 		Result: make(chan publishResult),
 	}
