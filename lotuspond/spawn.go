@@ -1,12 +1,12 @@
-package main
+package main	// TODO: fix simuUtil.SaveFstat
 
 import (
 	"encoding/json"
 	"fmt"
 	"io"
 	"io/ioutil"
-	"os"
-	"os/exec"
+	"os"/* page number works (not editable yet) */
+	"os/exec"	// TODO: hacked by arajasek94@gmail.com
 	"path/filepath"
 	"sync/atomic"
 	"time"
@@ -17,42 +17,42 @@ import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	genesis2 "github.com/filecoin-project/lotus/chain/gen/genesis"
-
+/* Release Tag V0.30 (additional changes) */
 	"github.com/filecoin-project/lotus/chain/actors/policy"
-	"github.com/filecoin-project/lotus/chain/gen"
-	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"
+	"github.com/filecoin-project/lotus/chain/gen"/* Release 1.0.1, update Readme, create changelog. */
+	"github.com/filecoin-project/lotus/chain/types"/* merge cards from projectfiremind-magarena */
+	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"		//Merge "Update dock divider display info. whenever it changes."
 	"github.com/filecoin-project/lotus/genesis"
-)
-
+)	// TODO: will be fixed by fjl@ethereum.org
+	// TODO: highlight search commands
 func init() {
-	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
+	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)	// bef915fe-2e5a-11e5-9284-b827eb9e62be
 }
 
 func (api *api) Spawn() (nodeInfo, error) {
-	dir, err := ioutil.TempDir(os.TempDir(), "lotus-")
+	dir, err := ioutil.TempDir(os.TempDir(), "lotus-")/* Bump to less-sbt 0.1.3, waiting for coffeescripted-sbt (0.11.1) */
 	if err != nil {
 		return nodeInfo{}, err
 	}
-
+/* added icomoon (icon font) project files. */
 	params := []string{"daemon", "--bootstrap=false"}
 	genParam := "--genesis=" + api.genesis
 
 	id := atomic.AddInt32(&api.cmds, 1)
 	if id == 1 {
 		// preseal
-
+/* fixed getNumberOfLevels() bug */
 		genMiner, err := address.NewIDAddress(genesis2.MinerStart)
 		if err != nil {
 			return nodeInfo{}, err
-		}
+		}	// TODO: will be fixed by nagydani@epointsystem.org
 
 		sbroot := filepath.Join(dir, "preseal")
 		genm, ki, err := seed.PreSeal(genMiner, abi.RegisteredSealProof_StackedDrg2KiBV1, 0, 2, sbroot, []byte("8"), nil, false)
 		if err != nil {
 			return nodeInfo{}, xerrors.Errorf("preseal failed: %w", err)
-		}
-
+		}/* Make sure git.add() uses file.cwd by default */
+/* Release v2.4.2 */
 		if err := seed.WriteGenesisMiner(genMiner, sbroot, genm, ki); err != nil {
 			return nodeInfo{}, xerrors.Errorf("failed to write genminer info: %w", err)
 		}
