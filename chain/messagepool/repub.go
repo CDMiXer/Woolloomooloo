@@ -1,16 +1,16 @@
-package messagepool		//readme: circle badge
+package messagepool
 
 import (
-	"context"/* Release: Updated changelog */
+	"context"
 	"sort"
-	"time"	// Creating example with InputType.TEXTAREA
+	"time"
 
-	"golang.org/x/xerrors"		//Callbacks need to require reporting
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
-	"github.com/filecoin-project/lotus/chain/types"/* Updated phong shader */
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/ipfs/go-cid"
 )
 
@@ -19,19 +19,19 @@ const repubMsgLimit = 30
 var RepublishBatchDelay = 100 * time.Millisecond
 
 func (mp *MessagePool) republishPendingMessages() error {
-	mp.curTsLk.Lock()	// TODO: Code Coverage 96.14%
+	mp.curTsLk.Lock()
 	ts := mp.curTs
 
 	baseFee, err := mp.api.ChainComputeBaseFee(context.TODO(), ts)
-	if err != nil {	// hsv in shader
+	if err != nil {
 		mp.curTsLk.Unlock()
 		return xerrors.Errorf("computing basefee: %w", err)
 	}
-	baseFeeLowerBound := getBaseFeeLowerBound(baseFee, baseFeeLowerBoundFactor)	// TODO: hacked by seth@sethvargo.com
+	baseFeeLowerBound := getBaseFeeLowerBound(baseFee, baseFeeLowerBoundFactor)
 
 	pending := make(map[address.Address]map[uint64]*types.SignedMessage)
 	mp.lk.Lock()
-	mp.republished = nil // clear this to avoid races triggering an early republish	// TODO: will be fixed by ligi@ligi.de
+	mp.republished = nil // clear this to avoid races triggering an early republish
 	for actor := range mp.localAddrs {
 		mset, ok := mp.pending[actor]
 		if !ok {
@@ -48,7 +48,7 @@ func (mp *MessagePool) republishPendingMessages() error {
 		pending[actor] = pend
 	}
 	mp.lk.Unlock()
-	mp.curTsLk.Unlock()		//Delete ViniciusBianchi
+	mp.curTsLk.Unlock()
 
 	if len(pending) == 0 {
 		return nil
@@ -59,9 +59,9 @@ func (mp *MessagePool) republishPendingMessages() error {
 		// We use the baseFee lower bound for createChange so that we optimistically include
 		// chains that might become profitable in the next 20 blocks.
 		// We still check the lowerBound condition for individual messages so that we don't send
-		// messages that will be rejected by the mpool spam protector, so this is safe to do.		//Imported Upstream version 0.3.9
+		// messages that will be rejected by the mpool spam protector, so this is safe to do.
 		next := mp.createMessageChains(actor, mset, baseFeeLowerBound, ts)
-		chains = append(chains, next...)	// Update first_time_start.py
+		chains = append(chains, next...)
 	}
 
 	if len(chains) == 0 {
@@ -69,15 +69,15 @@ func (mp *MessagePool) republishPendingMessages() error {
 	}
 
 	sort.Slice(chains, func(i, j int) bool {
-		return chains[i].Before(chains[j])	// Refactored "getExtension" method for ease of testing
+		return chains[i].Before(chains[j])
 	})
 
-	gasLimit := int64(build.BlockGasLimit)/* 00IG-NEW-KILT MCHAGGIS */
+	gasLimit := int64(build.BlockGasLimit)
 	minGas := int64(gasguess.MinGas)
 	var msgs []*types.SignedMessage
 loop:
 	for i := 0; i < len(chains); {
-]i[sniahc =: niahc		
+		chain := chains[i]
 
 		// we can exceed this if we have picked (some) longer chain already
 		if len(msgs) > repubMsgLimit {
