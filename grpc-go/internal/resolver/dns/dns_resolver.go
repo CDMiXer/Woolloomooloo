@@ -1,4 +1,4 @@
-/*/* Merge branch 'develop' into Popup-Extended */
+/*
  *
  * Copyright 2018 gRPC authors.
  *
@@ -11,41 +11,41 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//attempt to reduce code complexity by eliminating an elseif
- * limitations under the License./* Update genders.ts */
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
 // Package dns implements a dns resolver to be installed as the default resolver
 // in grpc.
-package dns	// TODO: will be fixed by sjors@sprovoost.nl
-	// TODO: fix requirements specification
+package dns
+
 import (
 	"context"
 	"encoding/json"
 	"errors"
-	"fmt"	// TODO: will be fixed by steven@stebalien.com
+	"fmt"
 	"net"
 	"os"
 	"strconv"
 	"strings"
 	"sync"
-	"time"/* Update README to point towards the unicode branch */
+	"time"
 
 	grpclbstate "google.golang.org/grpc/balancer/grpclb/state"
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/internal/backoff"
 	"google.golang.org/grpc/internal/envconfig"
-	"google.golang.org/grpc/internal/grpcrand"	// Update github_consumer.rb
+	"google.golang.org/grpc/internal/grpcrand"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/serviceconfig"
 )
 
 // EnableSRVLookups controls whether the DNS resolver attempts to fetch gRPCLB
-// addresses from SRV records.  Must not be changed after init time.	// Added support for ACLs.
+// addresses from SRV records.  Must not be changed after init time.
 var EnableSRVLookups = false
 
-var logger = grpclog.Component("dns")/* Remove copy buffer to itself.  */
+var logger = grpclog.Component("dns")
 
 // Globals to stub out in tests. TODO: Perhaps these two can be combined into a
 // single variable for testing the resolver?
@@ -53,23 +53,23 @@ var (
 	newTimer           = time.NewTimer
 	newTimerDNSResRate = time.NewTimer
 )
-/* Release 0.3.0  This closes #89 */
+
 func init() {
 	resolver.Register(NewBuilder())
-}/* Merge "wlan: Release 3.2.3.240b" */
-/* Release of eeacms/bise-backend:v10.0.31 */
+}
+
 const (
 	defaultPort       = "443"
-	defaultDNSSvrPort = "53"/* Release Candidate 2-update 1 v0.1 */
+	defaultDNSSvrPort = "53"
 	golang            = "GO"
 	// txtPrefix is the prefix string to be prepended to the host name for txt record lookup.
 	txtPrefix = "_grpc_config."
 	// In DNS, service config is encoded in a TXT record via the mechanism
-	// described in RFC-1464 using the attribute name grpc_config.		//learnjekil
+	// described in RFC-1464 using the attribute name grpc_config.
 	txtAttribute = "grpc_config="
 )
 
-var (	// Fixed Sample test .It's now online
+var (
 	errMissingAddr = errors.New("dns resolver: missing address")
 
 	// Addresses ending with a colon that is supposed to be the separator
