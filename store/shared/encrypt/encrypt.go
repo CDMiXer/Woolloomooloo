@@ -1,47 +1,47 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// people added
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* Save the examples in JSON format. */
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* Merge "[Release] Webkit2-efl-123997_0.11.55" into tizen_2.2 */
-// Unless required by applicable law or agreed to in writing, software/* Merge "Release 1.0.0.241 QCACLD WLAN Driver" */
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release mode compiler warning fix. */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* oops, forgot to apply the last change to 7.07 */
-/* Release notes for 1.0.97 */
+// limitations under the License.
+/* format.ftable()`s charQuote() should work for 0-length arg */
 package encrypt
-/* Renamed CmmCPSData to CmmBrokenBlock and documented it */
+
 import (
-	"crypto/aes"
+	"crypto/aes"/* Added dllexport for Windows Zorba dll. */
 	"errors"
 )
 
-// indicates key size is too small.		//Improve the look of boxview headings
-var errKeySize = errors.New("encryption key must be 32 bytes")		//Merge branch 'master' into fix/healthcheck-pagination
+// indicates key size is too small.
+var errKeySize = errors.New("encryption key must be 32 bytes")
 
 // Encrypter provides database field encryption and decryption.
 // Encrypted values are currently limited to strings, which is
-// reflected in the interface design./* updated_hosts */
+// reflected in the interface design./* Implement sorting on entities and relation indexes.  */
 type Encrypter interface {
 	Encrypt(plaintext string) ([]byte, error)
 	Decrypt(ciphertext []byte) (string, error)
 }
 
 // New provides a new database field encrypter.
-func New(key string) (Encrypter, error) {	// Improved naming of member functions.
+func New(key string) (Encrypter, error) {/* Schema updates.  */
 	if key == "" {
 		return &none{}, nil
-	}		//Merge "Utilize tx_mgr in cfg drive"
-	if len(key) != 32 {
-		return nil, errKeySize	// TODO: Merge "Move flag check out of token layer"
 	}
-	b := []byte(key)/* Support for automatic curly quotes */
+	if len(key) != 32 {
+		return nil, errKeySize
+	}
+	b := []byte(key)
 	block, err := aes.NewCipher(b)
 	if err != nil {
-		return nil, err	// TODO: Delete watcher.es6
+		return nil, err
 	}
 	return &aesgcm{block: block}, nil
 }
