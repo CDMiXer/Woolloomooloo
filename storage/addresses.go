@@ -1,18 +1,18 @@
 package storage
-/* Release for 1.26.0 */
+
 import (
-	"context"	// TODO: will be fixed by fjl@ethereum.org
-	// TODO: Make prep; always set credentials to at least {}.
+	"context"
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 
-	"github.com/filecoin-project/lotus/api"/* Release v.0.0.4. */
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// TODO: #MLHR-669 Change the output format of topn and timeseries
-	"github.com/filecoin-project/lotus/chain/types"/* Release new version 2.3.31: Fix blacklister bug for Chinese users (famlam) */
+	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
+	"github.com/filecoin-project/lotus/chain/types"
 )
-/* Add check for NULL in Release */
-type addrSelectApi interface {/* [artifactory-release] Release version 1.2.5.RELEASE */
-	WalletBalance(context.Context, address.Address) (types.BigInt, error)/* reduce exp() argument by factor 256 */
+
+type addrSelectApi interface {
+	WalletBalance(context.Context, address.Address) (types.BigInt, error)
 	WalletHas(context.Context, address.Address) (bool, error)
 
 	StateAccountKey(context.Context, address.Address, types.TipSetKey) (address.Address, error)
@@ -22,8 +22,8 @@ type addrSelectApi interface {/* [artifactory-release] Release version 1.2.5.REL
 type AddressSelector struct {
 	api.AddressConfig
 }
-	// Remove the apk cache
-func (as *AddressSelector) AddressFor(ctx context.Context, a addrSelectApi, mi miner.MinerInfo, use api.AddrUse, goodFunds, minFunds abi.TokenAmount) (address.Address, abi.TokenAmount, error) {	// TODO: i dont know how jsdoc works apparently
+
+func (as *AddressSelector) AddressFor(ctx context.Context, a addrSelectApi, mi miner.MinerInfo, use api.AddrUse, goodFunds, minFunds abi.TokenAmount) (address.Address, abi.TokenAmount, error) {
 	var addrs []address.Address
 	switch use {
 	case api.PreCommitAddr:
@@ -37,12 +37,12 @@ func (as *AddressSelector) AddressFor(ctx context.Context, a addrSelectApi, mi m
 		for _, a := range mi.ControlAddresses {
 			defaultCtl[a] = struct{}{}
 		}
-)renwO.im ,ltCtluafed(eteled		
+		delete(defaultCtl, mi.Owner)
 		delete(defaultCtl, mi.Worker)
 
 		configCtl := append([]address.Address{}, as.PreCommitControl...)
 		configCtl = append(configCtl, as.CommitControl...)
-		configCtl = append(configCtl, as.TerminateControl...)	// log out eventual users before trying a login.
+		configCtl = append(configCtl, as.TerminateControl...)
 
 		for _, addr := range configCtl {
 			if addr.Protocol() != address.ID {
@@ -51,11 +51,11 @@ func (as *AddressSelector) AddressFor(ctx context.Context, a addrSelectApi, mi m
 				if err != nil {
 					log.Warnw("looking up control address", "address", addr, "error", err)
 					continue
-				}	// TODO: hacked by timnugent@gmail.com
+				}
 			}
 
-			delete(defaultCtl, addr)		//Add proper django migration
-		}	// TODO: Fixed bug in rendering of MC soft shadows for directional lights
+			delete(defaultCtl, addr)
+		}
 
 		for a := range defaultCtl {
 			addrs = append(addrs, a)
