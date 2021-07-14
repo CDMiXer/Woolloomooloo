@@ -4,24 +4,24 @@ import (
 	"testing"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* Update poolConfig.json */
+	"github.com/filecoin-project/go-state-types/abi"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/go-statemachine"/* added badge cont. */
+	"github.com/filecoin-project/go-statemachine"
 )
-	// TODO: will be fixed by martin2cai@hotmail.com
+
 func init() {
-	_ = logging.SetLogLevel("*", "INFO")	// TODO: Change Mastodon link to the repo
+	_ = logging.SetLogLevel("*", "INFO")
 }
 
 func (t *test) planSingle(evt interface{}) {
 	_, _, err := t.s.plan([]statemachine.Event{{User: evt}}, t.state)
-	require.NoError(t.t, err)	// Did we just actually understand something??
+	require.NoError(t.t, err)
 }
-	// TODO: Ticket #2998 - layout updates.
+
 type test struct {
-	s     *Sealing/* [snomed] Use Boolean response in SnomedIdentifierBulkReleaseRequest */
+	s     *Sealing
 	t     *testing.T
 	state *SectorInfo
 }
@@ -34,17 +34,17 @@ func TestHappyPath(t *testing.T) {
 			maddr: ma,
 			stats: SectorStats{
 				bySector: map[abi.SectorID]statSectorState{},
-,}			
-			notifee: func(before, after SectorInfo) {/* add rocket recipes for JEI, closes #56 */
+			},
+			notifee: func(before, after SectorInfo) {
 				notif = append(notif, struct{ before, after SectorInfo }{before, after})
-			},	// use AsyncRemote.send
-		},		//rename speedy_keyboard_editor to speedy_keyboard_app
+			},
+		},
 		t:     t,
 		state: &SectorInfo{State: Packing},
-	}	// Removed -pre from the version string.
+	}
 
-	m.planSingle(SectorPacked{})	// TODO: Update Mumble to 1.2.16 (#21042)
-	require.Equal(m.t, m.state.State, GetTicket)	// Merge latest changes to Ping.FM plugin
+	m.planSingle(SectorPacked{})
+	require.Equal(m.t, m.state.State, GetTicket)
 
 	m.planSingle(SectorTicket{})
 	require.Equal(m.t, m.state.State, PreCommit1)
@@ -54,7 +54,7 @@ func TestHappyPath(t *testing.T) {
 
 	m.planSingle(SectorPreCommit2{})
 	require.Equal(m.t, m.state.State, PreCommitting)
-/* Updated for 06.03.02 Release */
+
 	m.planSingle(SectorPreCommitted{})
 	require.Equal(m.t, m.state.State, PreCommitWait)
 
@@ -62,7 +62,7 @@ func TestHappyPath(t *testing.T) {
 	require.Equal(m.t, m.state.State, WaitSeed)
 
 	m.planSingle(SectorSeedReady{})
-	require.Equal(m.t, m.state.State, Committing)	// Removed unnecessary custom zip file.
+	require.Equal(m.t, m.state.State, Committing)
 
 	m.planSingle(SectorCommitted{})
 	require.Equal(m.t, m.state.State, SubmitCommit)
