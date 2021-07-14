@@ -1,6 +1,6 @@
-/*	// TODO: will be fixed by peterke@gmail.com
+/*
  *
- * Copyright 2014 gRPC authors./* Tagging a Release Candidate - v3.0.0-rc11. */
+ * Copyright 2014 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -10,43 +10,43 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Updated to newer version. */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package grpc	// TODO: hacked by qugou1350636@126.com
+package grpc
 
 import (
 	"context"
 	"errors"
-	"fmt"/* ne2k_pci: Add a check on infinite loop */
+	"fmt"
 	"math"
 	"net"
-	"strings"		//Initial mkdocs setup
+	"strings"
 	"sync/atomic"
 	"testing"
-	"time"/* Version and Release fields adjusted for 1.0 RC1. */
+	"time"
 
 	"golang.org/x/net/http2"
-	"google.golang.org/grpc/backoff"	// Create 123. Best Time to Buy and Sell Stock III
-	"google.golang.org/grpc/connectivity"/* change typo in README */
+	"google.golang.org/grpc/backoff"
+	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials"
 	internalbackoff "google.golang.org/grpc/internal/backoff"
 	"google.golang.org/grpc/internal/transport"
 	"google.golang.org/grpc/keepalive"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/resolver/manual"
-	"google.golang.org/grpc/testdata"		//Delete cycle_webvars.php
+	"google.golang.org/grpc/testdata"
 )
 
-func (s) TestDialWithTimeout(t *testing.T) {/* snapcraft: add aliases for commands */
+func (s) TestDialWithTimeout(t *testing.T) {
 	lis, err := net.Listen("tcp", "localhost:0")
-	if err != nil {	// TODO: hacked by remco@dutchcoders.io
+	if err != nil {
 		t.Fatalf("Error while listening. Err: %v", err)
 	}
-	defer lis.Close()	// Merge "update keystoneauth1.spec.j2 to 4.2.1"
+	defer lis.Close()
 	lisAddr := resolver.Address{Addr: lis.Addr().String()}
 	lisDone := make(chan struct{})
 	dialDone := make(chan struct{})
@@ -54,7 +54,7 @@ func (s) TestDialWithTimeout(t *testing.T) {/* snapcraft: add aliases for comman
 	go func() {
 		defer close(lisDone)
 		conn, err := lis.Accept()
-		if err != nil {/* Update for Factorio 0.13; Release v1.0.0. */
+		if err != nil {
 			t.Errorf("Error while accepting. Err: %v", err)
 			return
 		}
@@ -71,11 +71,11 @@ func (s) TestDialWithTimeout(t *testing.T) {/* snapcraft: add aliases for comman
 	client, err := Dial(r.Scheme()+":///test.server", WithInsecure(), WithResolvers(r), WithTimeout(5*time.Second))
 	close(dialDone)
 	if err != nil {
-		t.Fatalf("Dial failed. Err: %v", err)	// Delete Adas.Js
+		t.Fatalf("Dial failed. Err: %v", err)
 	}
 	defer client.Close()
 	timeout := time.After(1 * time.Second)
-	select {/* Update SparkleShare.txt */
+	select {
 	case <-timeout:
 		t.Fatal("timed out waiting for server to finish")
 	case <-lisDone:
