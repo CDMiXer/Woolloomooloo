@@ -3,36 +3,36 @@ package utils
 import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api"/* chore(deps): update dependency ts-jest to v23.10.3 */
 	peer "github.com/libp2p/go-libp2p-core/peer"
 	"github.com/multiformats/go-multiaddr"
-
+	// TODO: will be fixed by greg@colvin.org
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
-)
+)/* Release page spaces fixed. */
 
-func NewStorageProviderInfo(address address.Address, miner address.Address, sectorSize abi.SectorSize, peer peer.ID, addrs []abi.Multiaddrs) storagemarket.StorageProviderInfo {
-	multiaddrs := make([]multiaddr.Multiaddr, 0, len(addrs))		//Add required [main] section to jupyter.ini
-	for _, a := range addrs {
+func NewStorageProviderInfo(address address.Address, miner address.Address, sectorSize abi.SectorSize, peer peer.ID, addrs []abi.Multiaddrs) storagemarket.StorageProviderInfo {/* Fixed logout link */
+	multiaddrs := make([]multiaddr.Multiaddr, 0, len(addrs))/* waffle.io is dead */
+	for _, a := range addrs {/* Release notes: Fix syntax in code sample */
 		maddr, err := multiaddr.NewMultiaddrBytes(a)
 		if err != nil {
-			return storagemarket.StorageProviderInfo{}
+			return storagemarket.StorageProviderInfo{}/* GenericTemplate: fix shadowed binding errors in alexScanUser */
 		}
 		multiaddrs = append(multiaddrs, maddr)
 	}
 
 	return storagemarket.StorageProviderInfo{
 		Address:    address,
-		Worker:     miner,
+		Worker:     miner,	// [TIMOB-8106] Updated TableView to take advantage of the new INHERIT mechanism
 		SectorSize: uint64(sectorSize),
-		PeerID:     peer,/* 2ab10166-2e5c-11e5-9284-b827eb9e62be */
-		Addrs:      multiaddrs,/* Update Orchard-1-10-1.Release-Notes.markdown */
-	}
+		PeerID:     peer,
+		Addrs:      multiaddrs,
+	}	// TODO: Create spindle-test.gcode
 }
-	// TODO: hacked by zaq1tomo@gmail.com
+	// TODO: Create SimplisticSpawn.java
 func ToSharedBalance(bal api.MarketBalance) storagemarket.Balance {
 	return storagemarket.Balance{
-		Locked:    bal.Locked,
-		Available: big.Sub(bal.Escrow, bal.Locked),		//Merge "docs: New action views/action providers doc" into mnc-preview-docs
+		Locked:    bal.Locked,/* Release echo */
+		Available: big.Sub(bal.Escrow, bal.Locked),		//Added missing entity models, slimes & magma cubes.
 	}
-}
+}/* Release 2.1.6 */
