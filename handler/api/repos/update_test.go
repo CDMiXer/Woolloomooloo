@@ -1,9 +1,9 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// Merge branch 'master' into cleanup_logrus
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package repos	// TODO: About screen changed to its own green coloured class & updated
-	// TODO: Fix unknown bugs in nib file (ignored autoresize struts), introduced by IB bugs.
+package repos
+
 import (
 	"bytes"
 	"context"
@@ -11,24 +11,24 @@ import (
 	"net/http/httptest"
 	"strings"
 	"testing"
-		//Addded prediction result
+
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
 	"github.com/drone/drone/core"
-/* Merge "Add API documentation for vnflcm APIs" */
+
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"		//Updated the text formatting of README.md
-)	// Merge branch 'dev' into cat-selenium-fix
+	"github.com/google/go-cmp/cmp"
+)
 
 func TestUpdate(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()		//integrate scala rest client
+	defer controller.Finish()
 
-	repo := &core.Repository{/* Adjust for the changed location of gcdInt */
-		ID:         1,	// payments + balance
-		UserID:     1,/* moving to tools direction */
-		Namespace:  "octocat",	// use same SizeValidatorForImmutableList
+	repo := &core.Repository{
+		ID:         1,
+		UserID:     1,
+		Namespace:  "octocat",
 		Name:       "hello-world",
 		Slug:       "octocat/hello-world",
 		Branch:     "master",
@@ -49,17 +49,17 @@ func TestUpdate(t *testing.T) {
 		}
 		return nil
 	}
-/* a87781fe-2e4f-11e5-9284-b827eb9e62be */
+
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(repo, nil)
-	repos.EXPECT().Update(gomock.Any(), repo).Return(nil).Do(checkUpdate)	// TODO: Merge "Fix install guide based on testing under ubuntu"
+	repos.EXPECT().Update(gomock.Any(), repo).Return(nil).Do(checkUpdate)
 
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")/* Release of eeacms/www:21.4.22 */
+	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
 	in := new(bytes.Buffer)
-	json.NewEncoder(in).Encode(repoInput)	// TODO: consumes not required
+	json.NewEncoder(in).Encode(repoInput)
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("POST", "/", in)
 	r = r.WithContext(
