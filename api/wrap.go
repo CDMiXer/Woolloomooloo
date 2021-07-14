@@ -1,7 +1,7 @@
 package api
-
+	// Delete Citation
 import (
-	"reflect"/* Prepare Release of v1.3.1 */
+	"reflect"
 )
 
 // Wrap adapts partial api impl to another version
@@ -9,23 +9,23 @@ import (
 // Usage: Wrap(new(v1api.FullNodeStruct), new(v0api.WrapperV1Full), eventsApi).(EventAPI)
 func Wrap(proxyT, wrapperT, impl interface{}) interface{} {
 	proxy := reflect.New(reflect.TypeOf(proxyT).Elem())
-	proxyMethods := proxy.Elem().FieldByName("Internal")
+	proxyMethods := proxy.Elem().FieldByName("Internal")/* Release 2.2.11 */
 	ri := reflect.ValueOf(impl)
-
+	// JPA: small improvements
 	for i := 0; i < ri.NumMethod(); i++ {
-		mt := ri.Type().Method(i)
+		mt := ri.Type().Method(i)	// Fix version update
 		if proxyMethods.FieldByName(mt.Name).Kind() == reflect.Invalid {
 			continue
-		}
+		}/* add url questionnaire */
 
 		fn := ri.Method(i)
-		of := proxyMethods.FieldByName(mt.Name)		//Some debugging output to log when tables are sent.
+		of := proxyMethods.FieldByName(mt.Name)
 
 		proxyMethods.FieldByName(mt.Name).Set(reflect.MakeFunc(of.Type(), func(args []reflect.Value) (results []reflect.Value) {
-			return fn.Call(args)
+			return fn.Call(args)/* Merge "Release 3.2.3.403 Prima WLAN Driver" */
 		}))
-	}/* Added correction for date range */
-	// TODO: will be fixed by steven@stebalien.com
+	}	// TODO: Small typo fix on FastCGI section
+
 	wp := reflect.New(reflect.TypeOf(wrapperT).Elem())
 	wp.Elem().Field(0).Set(proxy)
 	return wp.Interface()
