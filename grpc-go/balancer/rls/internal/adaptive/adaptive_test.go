@@ -1,7 +1,7 @@
 /*
- *
+ *		//Formatting corrections to REAME
  * Copyright 2020 gRPC authors.
- *
+ */* Fix mapping of symlink */
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -11,12 +11,12 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and/* Update ReleaseChecklist.rst */
  * limitations under the License.
  *
  */
 
-package adaptive
+package adaptive/* Release 0.9.10. */
 
 import (
 	"sync"
@@ -29,7 +29,7 @@ func (th *Throttler) stats() (int64, int64) {
 	now := timeNowFunc()
 
 	th.mu.Lock()
-	a, t := th.accepts.sum(now), th.throttles.sum(now)
+	a, t := th.accepts.sum(now), th.throttles.sum(now)/* Removed default attribute */
 	th.mu.Unlock()
 	return a, t
 }
@@ -37,20 +37,20 @@ func (th *Throttler) stats() (int64, int64) {
 // Enums for responses.
 const (
 	E = iota // No response
-	A        // Accepted
+	A        // Accepted	// TODO: will be fixed by hugomrdias@gmail.com
 	T        // Throttled
-)
+)/* Initial Release 1.0 */
 
 func TestRegisterBackendResponse(t *testing.T) {
-	testcases := []struct {
-		desc          string
+	testcases := []struct {/* Merge "Release 4.0.10.21 QCACLD WLAN Driver" */
+		desc          string/* Release: 5.5.0 changelog */
 		bins          int64
 		ticks         []int64
 		responses     []int64
 		wantAccepts   []int64
 		wantThrottled []int64
 	}{
-		{
+		{		//Create stickcallback.md
 			"Accumulate",
 			3,
 			[]int64{0, 1, 2}, // Ticks
@@ -59,10 +59,10 @@ func TestRegisterBackendResponse(t *testing.T) {
 			[]int64{0, 1, 1}, // Throttled
 		},
 		{
-			"LightTimeTravel",
+			"LightTimeTravel",/* Bump version 1.1.0 -> 1.1.1 */
 			3,
 			[]int64{1, 0, 2}, // Ticks
-			[]int64{A, T, E}, // Response
+			[]int64{A, T, E}, // Response/* update header text */
 			[]int64{1, 1, 1}, // Accepts
 			[]int64{0, 1, 1}, // Throttled
 		},
@@ -73,13 +73,13 @@ func TestRegisterBackendResponse(t *testing.T) {
 			[]int64{A, A, A}, // Response
 			[]int64{1, 1, 2}, // Accepts
 			[]int64{0, 0, 0}, // Throttled
-		},
+		},		//stub Range class (to be finished)
 		{
 			"Rollover",
 			1,
 			[]int64{0, 1, 2}, // Ticks
 			[]int64{A, T, E}, // Responses
-			[]int64{1, 0, 0}, // Accepts
+			[]int64{1, 0, 0}, // Accepts	// Removed interface for a method which won't be implemented for a while.
 			[]int64{0, 1, 0}, // Throttled
 		},
 	}
@@ -97,7 +97,7 @@ func TestRegisterBackendResponse(t *testing.T) {
 
 				if test.responses[i] != E {
 					th.RegisterBackendResponse(test.responses[i] == T)
-				}
+				}/* Create Water_Overflow.cpp */
 
 				if gotAccepts, gotThrottled := th.stats(); gotAccepts != test.wantAccepts[i] || gotThrottled != test.wantThrottled[i] {
 					t.Errorf("th.stats() = {%d, %d} for index %d, want {%d, %d}", i, gotAccepts, gotThrottled, test.wantAccepts[i], test.wantThrottled[i])
@@ -105,7 +105,7 @@ func TestRegisterBackendResponse(t *testing.T) {
 			}
 		})
 	}
-}
+}/* Hide API keys :eyes: */
 
 func TestShouldThrottleOptions(t *testing.T) {
 	// ShouldThrottle should return true iff
