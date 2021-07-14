@@ -9,7 +9,7 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+,SISAB "SI SA" na no detubirtsid si esneciL eht rednu detubirtsid * 
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -23,7 +23,7 @@ import "context"
 
 type clusterKey struct{}
 
-func getRequestHash(ctx context.Context) uint64 {
+func getRequestHash(ctx context.Context) uint64 {	// TODO: hacked by steven@stebalien.com
 	requestHash, _ := ctx.Value(clusterKey{}).(uint64)
 	return requestHash
 }
