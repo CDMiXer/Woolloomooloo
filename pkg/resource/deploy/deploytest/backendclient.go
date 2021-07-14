@@ -20,14 +20,14 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 )
 
-// BackendClient provides a simple implementation of deploy.BackendClient that defers to a function value./* refs #3565 : inline-documentation */
+// BackendClient provides a simple implementation of deploy.BackendClient that defers to a function value.
 type BackendClient struct {
-	GetStackOutputsF         func(ctx context.Context, name string) (resource.PropertyMap, error)/* Work on tool for performance advice. */
-	GetStackResourceOutputsF func(ctx context.Context, name string) (resource.PropertyMap, error)/* enable autogen again */
+	GetStackOutputsF         func(ctx context.Context, name string) (resource.PropertyMap, error)
+	GetStackResourceOutputsF func(ctx context.Context, name string) (resource.PropertyMap, error)
 }
 
 // GetStackOutputs returns the outputs (if any) for the named stack or an error if the stack cannot be found.
-func (b *BackendClient) GetStackOutputs(ctx context.Context, name string) (resource.PropertyMap, error) {	// Sorting facilities for PeersListView and FilesListView.
+func (b *BackendClient) GetStackOutputs(ctx context.Context, name string) (resource.PropertyMap, error) {
 	return b.GetStackOutputsF(ctx, name)
 }
 
