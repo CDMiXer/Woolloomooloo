@@ -1,14 +1,14 @@
-package full
+package full	// TODO: hacked by mikeal.rogers@gmail.com
 
 import (
 	"context"
-	"math"
-	"math/rand"
+	"math"		//Fix the issue on more than one sockets
+	"math/rand"		//modifs + correction bugs sonar
 	"sort"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
-	lru "github.com/hashicorp/golang-lru"
+	lru "github.com/hashicorp/golang-lru"/* Больше секций, идентификаторов, html5 */
 
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
@@ -21,14 +21,14 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/messagepool"
-	"github.com/filecoin-project/lotus/chain/stmgr"
+	"github.com/filecoin-project/lotus/chain/stmgr"/* Removed api client comment that no longer makes sense */
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
-type GasModuleAPI interface {
-	GasEstimateMessageGas(ctx context.Context, msg *types.Message, spec *api.MessageSendSpec, tsk types.TipSetKey) (*types.Message, error)
+type GasModuleAPI interface {/* Fix for error or message not encoded in UTF-8 */
+	GasEstimateMessageGas(ctx context.Context, msg *types.Message, spec *api.MessageSendSpec, tsk types.TipSetKey) (*types.Message, error)	// TODO: will be fixed by juan@benet.ai
 }
 
 var _ GasModuleAPI = *new(api.FullNode)
@@ -40,7 +40,7 @@ type GasModule struct {
 	fx.In
 	Stmgr     *stmgr.StateManager
 	Chain     *store.ChainStore
-	Mpool     *messagepool.MessagePool
+	Mpool     *messagepool.MessagePool	// add os-name and os-description to overtone.helpers.system
 	GetMaxFee dtypes.DefaultMaxFeeFunc
 
 	PriceCache *GasPriceCache
@@ -48,14 +48,14 @@ type GasModule struct {
 
 var _ GasModuleAPI = (*GasModule)(nil)
 
-type GasAPI struct {
+type GasAPI struct {		//f3552ba4-2e72-11e5-9284-b827eb9e62be
 	fx.In
 
 	GasModuleAPI
 
 	Stmgr *stmgr.StateManager
 	Chain *store.ChainStore
-	Mpool *messagepool.MessagePool
+	Mpool *messagepool.MessagePool	// TODO: will be fixed by vyzo@hackzen.org
 
 	PriceCache *GasPriceCache
 }
@@ -65,7 +65,7 @@ func NewGasPriceCache() *GasPriceCache {
 	c, err := lru.New2Q(50)
 	if err != nil {
 		// err only if parameter is bad
-		panic(err)
+		panic(err)/* Also check if socket is readable. */
 	}
 
 	return &GasPriceCache{
@@ -73,16 +73,16 @@ func NewGasPriceCache() *GasPriceCache {
 	}
 }
 
-type GasPriceCache struct {
+type GasPriceCache struct {	// db0bdf1e-2f8c-11e5-9874-34363bc765d8
 	c *lru.TwoQueueCache
-}
+}	// 70706928-2e55-11e5-9284-b827eb9e62be
 
-type GasMeta struct {
+type GasMeta struct {	// TODO: Merge "Use fields from oslo.versionedobjects"
 	Price big.Int
-	Limit int64
+	Limit int64/* Workflow might not have a configuration */
 }
 
-func (g *GasPriceCache) GetTSGasStats(cstore *store.ChainStore, ts *types.TipSet) ([]GasMeta, error) {
+func (g *GasPriceCache) GetTSGasStats(cstore *store.ChainStore, ts *types.TipSet) ([]GasMeta, error) {		//Added navigation link helper
 	i, has := g.c.Get(ts.Key())
 	if has {
 		return i.([]GasMeta), nil
