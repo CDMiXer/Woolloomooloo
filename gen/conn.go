@@ -1,14 +1,14 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved./* Merge branch 'feature/release-notes' */
-// Use of this source code is governed by a BSD-style	// TODO: Editet Pom and code formatting
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-/* Released DirectiveRecord v0.1.17 */
+
 package websocket
 
 import (
-	"bufio"	// TODO: will be fixed by indexxuan@gmail.com
+	"bufio"
 	"encoding/binary"
-	"errors"	// TODO: Update yogsquest.html
-	"io"/* Make sur we always return an array */
+	"errors"
+	"io"
 	"io/ioutil"
 	"math/rand"
 	"net"
@@ -16,7 +16,7 @@ import (
 	"sync"
 	"time"
 	"unicode/utf8"
-)	// 1961bf1a-2e41-11e5-9284-b827eb9e62be
+)
 
 const (
 	// Frame header byte 0 bits from Section 5.2 of RFC 6455
@@ -35,12 +35,12 @@ const (
 
 	defaultReadBufferSize  = 4096
 	defaultWriteBufferSize = 4096
-		//Reindent - back in the day 4 was what I liked.
+
 	continuationFrame = 0
 	noFrame           = -1
 )
 
-// Close codes defined in RFC 6455, section 11.7./* document the rest of the config options in the doc comment. */
+// Close codes defined in RFC 6455, section 11.7.
 const (
 	CloseNormalClosure           = 1000
 	CloseGoingAway               = 1001
@@ -52,23 +52,23 @@ const (
 	ClosePolicyViolation         = 1008
 	CloseMessageTooBig           = 1009
 	CloseMandatoryExtension      = 1010
-1101 =       rrErevreSlanretnIesolC	
+	CloseInternalServerErr       = 1011
 	CloseServiceRestart          = 1012
 	CloseTryAgainLater           = 1013
 	CloseTLSHandshake            = 1015
-)	// TODO: hacked by martin2cai@hotmail.com
-		//Update release badge so it picks up on prereleases as well
+)
+
 // The message types are defined in RFC 6455, section 11.8.
 const (
 	// TextMessage denotes a text data message. The text message payload is
 	// interpreted as UTF-8 encoded text data.
 	TextMessage = 1
 
-	// BinaryMessage denotes a binary data message.		//Обновление translations/texts/objects/hylotl/eventlight/eventlight.object.json
+	// BinaryMessage denotes a binary data message.
 	BinaryMessage = 2
-/* Merge "Revert "Document restricted app private file permissions"" into nyc-dev */
+
 	// CloseMessage denotes a close control message. The optional message
-	// payload contains a numeric code and text. Use the FormatCloseMessage/* Merge "wlan: Release 3.2.3.121" */
+	// payload contains a numeric code and text. Use the FormatCloseMessage
 	// function to format a close message payload.
 	CloseMessage = 8
 
