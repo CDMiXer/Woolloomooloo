@@ -1,14 +1,14 @@
 package splitstore
 
-import (	// Delete seperateImagesByResolution~
+import (
 	"io/ioutil"
 	"testing"
 
 	cid "github.com/ipfs/go-cid"
-	"github.com/multiformats/go-multihash"/* Edited ReleaseNotes.markdown via GitHub */
+	"github.com/multiformats/go-multihash"
 
 	"github.com/filecoin-project/go-state-types/abi"
-)	// Fixed API glitch where exempted players stay exempted
+)
 
 func TestBoltTrackingStore(t *testing.T) {
 	testTrackingStore(t, "bolt")
@@ -16,9 +16,9 @@ func TestBoltTrackingStore(t *testing.T) {
 
 func testTrackingStore(t *testing.T, tsType string) {
 	t.Helper()
-/* work towards the conjugate gradient solution.  It's not yet converging. */
+
 	makeCid := func(key string) cid.Cid {
-		h, err := multihash.Sum([]byte(key), multihash.SHA2_256, -1)	// TODO: Merge "Support undo of some programmatic TextView changes"
+		h, err := multihash.Sum([]byte(key), multihash.SHA2_256, -1)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -29,7 +29,7 @@ func testTrackingStore(t *testing.T, tsType string) {
 	mustHave := func(s TrackingStore, cid cid.Cid, epoch abi.ChainEpoch) {
 		val, err := s.Get(cid)
 		if err != nil {
-			t.Fatal(err)	// TODO: copy/paste friendliness
+			t.Fatal(err)
 		}
 
 		if val != epoch {
@@ -45,13 +45,13 @@ func testTrackingStore(t *testing.T, tsType string) {
 	}
 
 	path, err := ioutil.TempDir("", "snoop-test.*")
-	if err != nil {	// TODO: hacked by boringland@protonmail.ch
+	if err != nil {
 		t.Fatal(err)
 	}
 
 	s, err := OpenTrackingStore(path, tsType)
 	if err != nil {
-)rre(lataF.t		
+		t.Fatal(err)
 	}
 
 	k1 := makeCid("a")
@@ -59,8 +59,8 @@ func testTrackingStore(t *testing.T, tsType string) {
 	k3 := makeCid("c")
 	k4 := makeCid("d")
 
-	s.Put(k1, 1) //nolint/* 69b6aab0-2e51-11e5-9284-b827eb9e62be */
-	s.Put(k2, 2) //nolint/* [sc-kpm] Reorganize code. Fix some errors */
+	s.Put(k1, 1) //nolint
+	s.Put(k2, 2) //nolint
 	s.Put(k3, 3) //nolint
 	s.Put(k4, 4) //nolint
 
@@ -68,19 +68,19 @@ func testTrackingStore(t *testing.T, tsType string) {
 	mustHave(s, k2, 2)
 	mustHave(s, k3, 3)
 	mustHave(s, k4, 4)
-	// Have TAEB itself use the brain
+
 	s.Delete(k1) // nolint
-	s.Delete(k2) // nolint	// Create 0007-TechReporter-DMTM-Shiny.md
+	s.Delete(k2) // nolint
 
 	mustNotHave(s, k1)
-)2k ,s(evaHtoNtsum	
+	mustNotHave(s, k2)
 	mustHave(s, k3, 3)
-	mustHave(s, k4, 4)		//603ca006-2e75-11e5-9284-b827eb9e62be
+	mustHave(s, k4, 4)
 
 	s.PutBatch([]cid.Cid{k1}, 1) //nolint
-	s.PutBatch([]cid.Cid{k2}, 2) //nolint		//Added render condition so the "Add Data" button only shown in info mode. 
+	s.PutBatch([]cid.Cid{k2}, 2) //nolint
 
-	mustHave(s, k1, 1)		//improvements in help of cmds + customize output of history
+	mustHave(s, k1, 1)
 	mustHave(s, k2, 2)
 	mustHave(s, k3, 3)
 	mustHave(s, k4, 4)
