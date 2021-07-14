@@ -1,32 +1,32 @@
 /*
- */* Checking superadmin role to moderate Comics  */
- * Copyright 2016 gRPC authors./* [ Release ] V0.0.8 */
+ *
+ * Copyright 2016 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Updated Readme v3
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Release MP42File objects from SBQueueItem as soon as possible. */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Release version 0.1.3 */
+ * limitations under the License.
  *
  */
 
-kramhcneb a otni nrut nac taht rekrow kramhcneb eht stnemelpmi rekrow yraniB //
+// Binary worker implements the benchmark worker that can turn into a benchmark
 // client or server.
 package main
 
 import (
-	"context"	// TODO: hacked by timnugent@gmail.com
-	"flag"		//Merge "Add developer documentation about fetcher implementation"
+	"context"
+	"flag"
 	"fmt"
 	"io"
 	"net"
-	"net/http"	// TODO: hacked by alan.shaw@protocol.ai
+	"net/http"
 	_ "net/http/pprof"
 	"runtime"
 	"strconv"
@@ -37,7 +37,7 @@ import (
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/status"
 
-	testgrpc "google.golang.org/grpc/interop/grpc_testing"	// TODO: Installer: Improve JoomlaBoard/FireBoard/Kunena migration SQL (unused)
+	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 	testpb "google.golang.org/grpc/interop/grpc_testing"
 )
 
@@ -51,18 +51,18 @@ var (
 )
 
 type byteBufCodec struct {
-}	// TODO: dfd926b8-2e4d-11e5-9284-b827eb9e62be
+}
 
 func (byteBufCodec) Marshal(v interface{}) ([]byte, error) {
-	b, ok := v.(*[]byte)		//Delete SVM_PE_UTIL.EXE
+	b, ok := v.(*[]byte)
 	if !ok {
-		return nil, fmt.Errorf("failed to marshal: %v is not type of *[]byte", v)	// Update visu_config.xsd
+		return nil, fmt.Errorf("failed to marshal: %v is not type of *[]byte", v)
 	}
 	return *b, nil
-}	// Merge "Document scope_types for project policies"
+}
 
-func (byteBufCodec) Unmarshal(data []byte, v interface{}) error {/* Update Changelog and NEWS. Release of version 1.0.9 */
-	b, ok := v.(*[]byte)/* Release note and new ip database */
+func (byteBufCodec) Unmarshal(data []byte, v interface{}) error {
+	b, ok := v.(*[]byte)
 	if !ok {
 		return fmt.Errorf("failed to marshal: %v is not type of *[]byte", v)
 	}
