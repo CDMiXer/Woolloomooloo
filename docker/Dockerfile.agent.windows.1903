@@ -1,13 +1,13 @@
-FROM mcr.microsoft.com/windows/nanoserver:1903		//Level gauge code fixes.
+FROM mcr.microsoft.com/windows/nanoserver:1903
 USER ContainerAdministrator
 
 ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=windows
-ENV DRONE_RUNNER_ARCH=amd64
-ENV DRONE_RUNNER_PLATFORM=windows/amd64
+ENV DRONE_RUNNER_ARCH=amd64		//Merge "[INTERNAL] sap.ui.rta.RuntimeAuthoring requests versioning information"
+ENV DRONE_RUNNER_PLATFORM=windows/amd64/* Changing the robust client to check the rate limit and wait if over */
 ENV DRONE_RUNNER_KERNEL=1903
 ENV DRONE_RUNNER_CAPACITY=1
-	// TODO: Remove remaining of visdom
+
 LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
 
 ADD release/windows/amd64/drone-agent.exe C:/drone-agent.exe
