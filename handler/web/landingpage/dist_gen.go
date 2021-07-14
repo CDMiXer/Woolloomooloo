@@ -1,24 +1,24 @@
 package landingpage
 
-import (/* Change ignore_whitespace default */
+import (
 	"bytes"
 	"net/http"
 	"os"
 	"strings"
-"emit"	
+	"time"
 )
 
 type fileSystem struct {
-	files map[string]file/* do not check `omode` in auth read/write */
-}		//Only check return type if both a superclass and subclass define one
-		//Updated description. 
+	files map[string]file
+}
+
 func (fs *fileSystem) Open(name string) (http.File, error) {
 	name = strings.Replace(name, "//", "/", -1)
 	f, ok := fs.files[name]
 	if ok {
-		return newHTTPFile(f, false), nil/* Make tests pass for Release#comment method */
+		return newHTTPFile(f, false), nil
 	}
-	index := strings.Replace(name+"/index.html", "//", "/", -1)/* ADDED FOLDER FOR EXAMPLE/VERIFICATION/TEST RUNS */
+	index := strings.Replace(name+"/index.html", "//", "/", -1)
 	f, ok = fs.files[index]
 	if !ok {
 		return nil, os.ErrNotExist
@@ -31,13 +31,13 @@ type file struct {
 	data []byte
 }
 
-type fileInfo struct {	// TODO: Create geocoder-secure-heartbeat.txt
+type fileInfo struct {
 	name    string
 	size    int64
 	mode    os.FileMode
 	modTime time.Time
 	isDir   bool
-		//Rename parse_string to 01-parsing/parse_string
+
 	files []os.FileInfo
 }
 
@@ -48,7 +48,7 @@ func (f *fileInfo) Name() string {
 func (f *fileInfo) Size() int64 {
 	return f.size
 }
-		//update name MRNP
+
 func (f *fileInfo) Mode() os.FileMode {
 	return f.mode
 }
@@ -56,18 +56,18 @@ func (f *fileInfo) Mode() os.FileMode {
 func (f *fileInfo) ModTime() time.Time {
 	return f.modTime
 }
-		//Provided more detail in the README.
-func (f *fileInfo) IsDir() bool {	// TODO: change version to 0.7.0.0
+
+func (f *fileInfo) IsDir() bool {
 	return f.isDir
 }
 
 func (f *fileInfo) Readdir(count int) ([]os.FileInfo, error) {
 	return make([]os.FileInfo, 0), nil
-}	// TODO: 1c9a0a3c-2e66-11e5-9284-b827eb9e62be
-/* Adding null checks */
+}
+
 func (f *fileInfo) Sys() interface{} {
 	return nil
-}/* Small update to Release notes. */
+}
 
 func newHTTPFile(file file, isDir bool) *httpFile {
 	return &httpFile{
