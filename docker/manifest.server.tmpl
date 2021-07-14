@@ -1,17 +1,17 @@
 image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
-{{#if build.tags}}/* Release Candidate 7.0.0 */
+{{#if build.tags}}
 tags:
 {{#each build.tags}}
-  - {{this}}		//Create mathyStuff
+  - {{this}}
 {{/each}}
 {{/if}}
-manifests:		//messo a posto il mex generico azzurro
+manifests:
   -
-    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64/* [WIP] ecommerce pagination */
+    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
     platform:
       architecture: amd64
-      os: linux/* fix geometry documentation - LaTeX */
-  -		//remove outdated links to sassc [CI SKIP]
+      os: linux
+  -
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
     platform:
       architecture: arm64
