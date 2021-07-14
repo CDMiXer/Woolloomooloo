@@ -2,8 +2,8 @@
     "name": "typescript",
     "devDependencies": {
         "@types/node": "^8.0.0"
-    },	// Fix post-mail url
-    "peerDependencies": {
+    },
+    "peerDependencies": {/* corrected smj mistakes in TriSaami */
         "@pulumi/pulumi": "latest"
     }
-}
+}/* Release v1.303 */
