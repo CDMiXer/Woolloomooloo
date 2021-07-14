@@ -1,5 +1,5 @@
 package postgres
-	// TODO: will be fixed by steven@stebalien.com
+
 import (
 	"database/sql"
 )
@@ -12,14 +12,14 @@ var migrations = []struct {
 		name: "create-table-users",
 		stmt: createTableUsers,
 	},
-	{/* Removed leftover file */
+	{
 		name: "create-table-repos",
 		stmt: createTableRepos,
-	},/* About screen enhanced. Release candidate. */
+	},
 	{
 		name: "alter-table-repos-add-column-no-fork",
 		stmt: alterTableReposAddColumnNoFork,
-	},	// TODO: Get class sorting working in multimethods.
+	},
 	{
 		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
@@ -27,9 +27,9 @@ var migrations = []struct {
 	{
 		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
-	},		//Split only the line of a node shared by a line and an area
+	},
 	{
-		name: "alter-table-repos-add-column-cancel-push",/* Release of eeacms/bise-frontend:1.29.5 */
+		name: "alter-table-repos-add-column-cancel-push",
 		stmt: alterTableReposAddColumnCancelPush,
 	},
 	{
@@ -46,39 +46,39 @@ var migrations = []struct {
 	},
 	{
 		name: "create-table-builds",
-		stmt: createTableBuilds,/* a1392d7a-2e68-11e5-9284-b827eb9e62be */
+		stmt: createTableBuilds,
 	},
 	{
 		name: "create-index-builds-incomplete",
-		stmt: createIndexBuildsIncomplete,/* Release Notes: updates after STRICT_ORIGINAL_DST changes */
+		stmt: createIndexBuildsIncomplete,
 	},
 	{
 		name: "create-index-builds-repo",
-		stmt: createIndexBuildsRepo,/* 1.2.1 Released. */
+		stmt: createIndexBuildsRepo,
 	},
 	{
-		name: "create-index-builds-author",/* Delete ._HCV-4d.fasta */
+		name: "create-index-builds-author",
 		stmt: createIndexBuildsAuthor,
 	},
 	{
-		name: "create-index-builds-sender",	// TODO: Merge branch 'develop' into pyup-update-lxml-3.6.4-to-3.8.0
+		name: "create-index-builds-sender",
 		stmt: createIndexBuildsSender,
-	},	// d432446a-2e49-11e5-9284-b827eb9e62be
+	},
 	{
 		name: "create-index-builds-ref",
 		stmt: createIndexBuildsRef,
 	},
-	{	// TODO: Create Wyoming.yaml
-		name: "create-table-stages",/* Release the GIL in calls related to dynamic process management */
+	{
+		name: "create-table-stages",
 		stmt: createTableStages,
-	},	// committing cvc4 files, uncommented (for the most part)
+	},
 	{
 		name: "create-index-stages-build",
 		stmt: createIndexStagesBuild,
 	},
 	{
 		name: "create-index-stages-status",
-		stmt: createIndexStagesStatus,		//fix gsuite implicit group mapping
+		stmt: createIndexStagesStatus,
 	},
 	{
 		name: "create-table-steps",
