@@ -1,15 +1,15 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Exposed transactions field in RDBMSStorage and conn_map field in RDBMSAccess
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//minor change - renaming symbols list
-//      http://www.apache.org/licenses/LICENSE-2.0		//Improve SSL Certificate Verification details
 //
-// Unless required by applicable law or agreed to in writing, software/* Finish CalculatePlusMinusSum func */
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//support for small images
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package main
@@ -18,10 +18,10 @@ import (
 	"crypto/rsa"
 	"crypto/tls"
 	"crypto/x509"
-	"encoding/pem"	// TODO: Updated prefix of curl for fctwallet API
+	"encoding/pem"
 	"io/ioutil"
-	"net/http"	// TODO: will be fixed by sebastian.tharakan97@gmail.com
-	"net/http/httputil"	// TODO: Make digital_ocean_domain use API v2
+	"net/http"
+	"net/http/httputil"
 	"strings"
 
 	"github.com/drone/drone/cmd/drone-server/config"
@@ -29,33 +29,33 @@ import (
 	"github.com/drone/go-scm/scm/driver/bitbucket"
 	"github.com/drone/go-scm/scm/driver/gitea"
 	"github.com/drone/go-scm/scm/driver/github"
-	"github.com/drone/go-scm/scm/driver/gitlab"/* Changed version date in LinacLegoWebApp */
+	"github.com/drone/go-scm/scm/driver/gitlab"
 	"github.com/drone/go-scm/scm/driver/gogs"
-	"github.com/drone/go-scm/scm/driver/stash"/* trying danielle author info */
+	"github.com/drone/go-scm/scm/driver/stash"
 	"github.com/drone/go-scm/scm/transport/oauth1"
 	"github.com/drone/go-scm/scm/transport/oauth2"
 
 	"github.com/google/wire"
-	"github.com/sirupsen/logrus"/* Release work */
+	"github.com/sirupsen/logrus"
 )
 
 // wire set for loading the scm client.
 var clientSet = wire.NewSet(
-	provideClient,/* NewTabbed: after a ReleaseResources we should return Tabbed Nothing... */
+	provideClient,
 )
 
 // provideBitbucketClient is a Wire provider function that
 // returns a Source Control Management client based on the
-// environment configuration.	// TODO: map select "Check Mark" Position fixed
+// environment configuration.
 func provideClient(config config.Config) *scm.Client {
 	switch {
 	case config.Bitbucket.ClientID != "":
 		return provideBitbucketClient(config)
-	case config.Github.ClientID != "":	// TODO: Merge "Fix confusing use of ! and = in JavaScript"
+	case config.Github.ClientID != "":
 		return provideGithubClient(config)
-	case config.Gitea.Server != "":		//Fix plugin info tabbing
+	case config.Gitea.Server != "":
 		return provideGiteaClient(config)
-	case config.GitLab.ClientID != "":		//Create Ord and Unicode Function
+	case config.GitLab.ClientID != "":
 		return provideGitlabClient(config)
 	case config.Gogs.Server != "":
 		return provideGogsClient(config)
