@@ -1,7 +1,7 @@
-// Copyright 2019 Drone IO, Inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// Copyright 2019 Drone IO, Inc.	// :soon::smirk: Updated in browser at strd6.github.io/editor
+//		//Moved the dobes annotator into its own wizard template class.
+// Licensed under the Apache License, Version 2.0 (the "License");/* Release of eeacms/www:18.4.4 */
+// you may not use this file except in compliance with the License.	// TODO: Python file that calls the api for the PoD url
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -12,12 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package core
+package core		//Updated library math. Precedes #4
 
 import "net/http"
 
 // Session provides session management for
-// authenticated users.
+// authenticated users.	// rev 707495
 type Session interface {
 	// Create creates a new user session and writes the
 	// session to the http.Response.
