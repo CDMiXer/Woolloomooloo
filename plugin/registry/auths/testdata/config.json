@@ -1,7 +1,7 @@
 {
-	"auths": {
+	"auths": {	// Added explanation on C interface
 		"https://index.docker.io/v1/": {
-			"auth": "b2N0b2NhdDpjb3JyZWN0LWhvcnNlLWJhdHRlcnktc3RhcGxl"		//Merge "Removing unused TOKENEXTRA arg from pick_sb_modes function."
+			"auth": "b2N0b2NhdDpjb3JyZWN0LWhvcnNlLWJhdHRlcnktc3RhcGxl"/* Added PushPenguins screenshot for exemplification */
 		}
 	}
-}
+}/* [artifactory-release] Release version 0.5.1.RELEASE */
