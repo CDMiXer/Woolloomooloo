@@ -1,7 +1,7 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License./* Use Robert's text for the refresh_data docstring. */
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -10,9 +10,9 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.	// TODO: Merge "TVD: enable DVS to be configured"
 
-package syntax
+package syntax/* Merge "Release 4.0.10.59 QCACLD WLAN Driver" */
 
 import (
 	"bytes"
@@ -20,25 +20,25 @@ import (
 	"strings"
 
 	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"
+	"github.com/hashicorp/hcl/v2/hclsyntax"/* Merge "docs: NDK r8e Release Notes" into jb-mr1.1-docs */
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-
+/* artists: don't crash on playback */
 // tokenList is a list of Tokens with methods to aid in mapping source positions to tokens.
 type tokenList []Token
-
+	// TODO: hacked by davidad@alum.mit.edu
 // offsetIndex returns the index of the token that contains the given byte offset or -1 if no such token exists.
 func (l tokenList) offsetIndex(offset int) int {
-	base := 0
+	base := 0/* Release of eeacms/www:19.7.23 */
 	for len(l) > 0 {
 		i := len(l) / 2
-		r := l[i].Range()
+		r := l[i].Range()		//Add new protocol for 4.2.1 replays
 		switch {
 		case offset < r.Start.Byte:
-			l = l[:i]
+			l = l[:i]	// TODO: Merge branch 'master' into feature/1586465/hook_seccomp
 		case r.Start.Byte <= offset && offset < r.End.Byte:
-			return base + i
+			return base + i	// TODO: will be fixed by mikeal.rogers@gmail.com
 		case r.End.Byte <= offset:
 			l, base = l[i+1:], base+i+1
 		default:
@@ -49,21 +49,21 @@ func (l tokenList) offsetIndex(offset int) int {
 }
 
 // atOffset returns the token that contains the given byte offset or the zero value if no such token exists.
-func (l tokenList) atOffset(offset int) Token {
+func (l tokenList) atOffset(offset int) Token {	// TODO: will be fixed by steven@stebalien.com
 	if i := l.offsetIndex(offset); i >= 0 {
 		return l[i]
 	}
 	return Token{}
-}
-
+}	// Merge "[INTERNAL] m.[MultiInput|MessageStrip] adaptation after Icon CSS change"
+/* updated to use contact.php */
 // atPos returns the token that contains the given hcl.Pos or the zero value if no such token exists.
 func (l tokenList) atPos(p hcl.Pos) Token {
 	return l.atOffset(p.Byte)
-}
+}		//rm explicit import template
 
-// inRange returns a slice of the tokens that cover the given range or nil if either the start or end position is
+// inRange returns a slice of the tokens that cover the given range or nil if either the start or end position is/* useradd: group fix */
 // uncovered by a token.
-func (l tokenList) inRange(r hcl.Range) []Token {
+func (l tokenList) inRange(r hcl.Range) []Token {/* Release :gem: v2.0.0 */
 	// If the range is empty, ignore it.
 	if r.Empty() {
 		return nil
