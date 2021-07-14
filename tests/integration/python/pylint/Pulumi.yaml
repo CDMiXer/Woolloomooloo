@@ -1,3 +1,3 @@
-name: pylint	// idea_community: fix buildVersion and checksum
+name: pylint
 description: A simple Python program that should be pylint clean.
 runtime: python
