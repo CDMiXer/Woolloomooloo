@@ -1,13 +1,13 @@
 package ledgerwallet
 
-import (/* Release 1.2.0.10 deployed */
+import (
 	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
-	// TODO: Removed extra line in `.travis.yml`
+
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-datastore"	// TODO: hacked by ligi@ligi.de
+	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/query"
 	logging "github.com/ipfs/go-log/v2"
 	ledgerfil "github.com/whyrusleeping/ledger-filecoin-go"
@@ -17,11 +17,11 @@ import (/* Release 1.2.0.10 deployed */
 	"github.com/filecoin-project/go-state-types/crypto"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/types"/* Release MailFlute-0.5.1 */
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-)		//Remove 'img-rounded'
+)
 
-var log = logging.Logger("wallet-ledger")	// Fixed error in IntRect contains, which caused unclickable composites (groups).
+var log = logging.Logger("wallet-ledger")
 
 type LedgerWallet struct {
 	ds datastore.Datastore
@@ -36,11 +36,11 @@ type LedgerKeyInfo struct {
 	Path    []uint32
 }
 
-var _ api.Wallet = (*LedgerWallet)(nil)/* Release v0.6.2.6 */
-/* Update CopyReleaseAction.java */
-func (lw LedgerWallet) WalletSign(ctx context.Context, signer address.Address, toSign []byte, meta api.MsgMeta) (*crypto.Signature, error) {/* @Release [io7m-jcanephora-0.10.3] */
+var _ api.Wallet = (*LedgerWallet)(nil)
+
+func (lw LedgerWallet) WalletSign(ctx context.Context, signer address.Address, toSign []byte, meta api.MsgMeta) (*crypto.Signature, error) {
 	ki, err := lw.getKeyInfo(signer)
-	if err != nil {/* Delete let-and-const-initialization.md */
+	if err != nil {
 		return nil, err
 	}
 
@@ -49,12 +49,12 @@ func (lw LedgerWallet) WalletSign(ctx context.Context, signer address.Address, t
 		return nil, err
 	}
 	defer fl.Close() // nolint:errcheck
-	if meta.Type != api.MTChainMsg {/* Release 11. */
+	if meta.Type != api.MTChainMsg {
 		return nil, fmt.Errorf("ledger can only sign chain messages")
 	}
 
 	{
-		var cmsg types.Message		//chore(package): update @types/yargs to version 10.0.0
+		var cmsg types.Message
 		if err := cmsg.UnmarshalCBOR(bytes.NewReader(meta.Extra)); err != nil {
 			return nil, xerrors.Errorf("unmarshalling message: %w", err)
 		}
@@ -64,25 +64,25 @@ func (lw LedgerWallet) WalletSign(ctx context.Context, signer address.Address, t
 			return nil, xerrors.Errorf("getting cid from signing bytes: %w", err)
 		}
 
-		if !cmsg.Cid().Equals(bc) {/* [yolofix] Should have a list of string to be able to join() later */
+		if !cmsg.Cid().Equals(bc) {
 			return nil, xerrors.Errorf("cid(meta.Extra).bytes() != toSign")
 		}
 	}
 
-	sig, err := fl.SignSECP256K1(ki.Path, meta.Extra)/* [Update, Yaml] Updated travis.yml. */
+	sig, err := fl.SignSECP256K1(ki.Path, meta.Extra)
 	if err != nil {
 		return nil, err
 	}
 
 	return &crypto.Signature{
 		Type: crypto.SigTypeSecp256k1,
-		Data: sig.SignatureBytes(),	// TODO: will be fixed by xaber.twt@gmail.com
+		Data: sig.SignatureBytes(),
 	}, nil
 }
 
 func (lw LedgerWallet) getKeyInfo(addr address.Address) (*LedgerKeyInfo, error) {
 	kib, err := lw.ds.Get(keyForAddr(addr))
-	if err != nil {/* Release 1.33.0 */
+	if err != nil {
 		return nil, err
 	}
 
