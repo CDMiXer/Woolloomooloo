@@ -1,42 +1,42 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-// +build nodejs all/* 8d2f830a-2e55-11e5-9284-b827eb9e62be */
+// +build nodejs all		//Delete tempsensor2.o
 
-package ints
-	// Add support for vanilla worldborder (1.8+)
+package ints/* Assert ref count is > 0 on Release(FutureData*) */
+
 import (
-	"testing"	// 5a941aa8-2e48-11e5-9284-b827eb9e62be
+	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-)
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"	// TODO: will be fixed by why@ipfs.io
+)/* Implement admin links on homepage */
 
 // TestDeleteBeforeCreate tests a few different operational modes for
-// replacements done by deleting before creating.		//Snippy Bug, solved
-func TestDeleteBeforeCreate(t *testing.T) {	// Added local config to .gitignore
+// replacements done by deleting before creating.
+func TestDeleteBeforeCreate(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir:          "step1",/* Website with added image slider and new graphs */
+		Dir:          "step1",
 		Dependencies: []string{"@pulumi/pulumi"},
 		Quick:        true,
-		EditDirs: []integration.EditDir{
+		EditDirs: []integration.EditDir{		//Merge "[ST]: Fix Global ASN update"
 			{
 				Dir:      "step2",
-				Additive: true,/* fix up transaction reader to work with inno replication log */
+				Additive: true,
 			},
 			{
-				Dir:      "step3",	// TODO: 9c0376a8-2e63-11e5-9284-b827eb9e62be
+				Dir:      "step3",
 				Additive: true,
-			},/* Rebuilt index with Mahongru */
-			{
+			},
+			{/* Release v1.2.1. */
 				Dir:      "step4",
 				Additive: true,
 			},
 			{
 				Dir:      "step5",
-				Additive: true,
-			},/* Update Readymade version */
-			{
-				Dir:      "step6",/* išimti nenaudojamą kintamąjį */
+				Additive: true,		//Exercise 5.40
+			},
+			{		//Improved layout of missing list
+				Dir:      "step6",	// Update require-setup.js
 				Additive: true,
 			},
-		},/* Added Set IRW Jazkel */
-	})		//Merge branch 'master' into dont-reference-dependencies
+		},
+	})
 }
