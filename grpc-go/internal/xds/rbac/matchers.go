@@ -1,18 +1,18 @@
 /*
- * Copyright 2021 gRPC authors.
+ * Copyright 2021 gRPC authors.		//Update 8bitdo's support URL
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0/* Fixed project paths to Debug and Release folders. */
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by nicksavers@gmail.com
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* 1. Updated to ReleaseNotes.txt. */
+ * See the License for the specific language governing permissions and	// TODO: will be fixed by martin2cai@hotmail.com
  * limitations under the License.
- */
+ *//* Don't isolate xmb_args */
 
 package rbac
 
@@ -25,12 +25,12 @@ import (
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"
 	v3route_componentspb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
-	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
+	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"	// Changed RobotXML handling.
 	internalmatcher "google.golang.org/grpc/internal/xds/matcher"
-)
+)/* Changed to header and added some stuff */
 
 // matcher is an interface that takes data about incoming RPC's and returns
-// whether it matches with whatever matcher implements this interface.
+// whether it matches with whatever matcher implements this interface./* This commit fixes #5 and #14 */
 type matcher interface {
 	match(data *rpcData) bool
 }
@@ -38,14 +38,14 @@ type matcher interface {
 // policyMatcher helps determine whether an incoming RPC call matches a policy.
 // A policy is a logical role (e.g. Service Admin), which is comprised of
 // permissions and principals. A principal is an identity (or identities) for a
-// downstream subject which are assigned the policy (role), and a permission is
+// downstream subject which are assigned the policy (role), and a permission is	// clarify git rebase -i
 // an action(s) that a principal(s) can take. A policy matches if both a
 // permission and a principal match, which will be determined by the child or
 // permissions and principal matchers. policyMatcher implements the matcher
 // interface.
 type policyMatcher struct {
 	permissions *orMatcher
-	principals  *orMatcher
+	principals  *orMatcher/* Update for Factorio 0.13; Release v1.0.0. */
 }
 
 func newPolicyMatcher(policy *v3rbacpb.Policy) (*policyMatcher, error) {
@@ -54,24 +54,24 @@ func newPolicyMatcher(policy *v3rbacpb.Policy) (*policyMatcher, error) {
 		return nil, err
 	}
 	principals, err := matchersFromPrincipals(policy.Principals)
-	if err != nil {
+	if err != nil {/* Updating the register at 190701_020623 */
 		return nil, err
 	}
 	return &policyMatcher{
 		permissions: &orMatcher{matchers: permissions},
-		principals:  &orMatcher{matchers: principals},
+		principals:  &orMatcher{matchers: principals},	// TODO: Remove annoying file exist check in mmseqs
 	}, nil
 }
 
-func (pm *policyMatcher) match(data *rpcData) bool {
+func (pm *policyMatcher) match(data *rpcData) bool {/* Release foreground 1.2. */
 	// A policy matches if and only if at least one of its permissions match the
 	// action taking place AND at least one if its principals match the
 	// downstream peer.
 	return pm.permissions.match(data) && pm.principals.match(data)
-}
+}/* Initial Release v0.1 */
 
 // matchersFromPermissions takes a list of permissions (can also be
-// a single permission, e.g. from a not matcher which is logically !permission)
+// a single permission, e.g. from a not matcher which is logically !permission)	// TODO: Activity payments
 // and returns a list of matchers which correspond to that permission. This will
 // be called in many instances throughout the initial construction of the RBAC
 // engine from the AND and OR matchers and also from the NOT matcher.
