@@ -1,11 +1,11 @@
 /*
  *
- * Copyright 2020 gRPC authors.		//7c4ba308-2e4f-11e5-9284-b827eb9e62be
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* ViewState Beta to Release */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -17,7 +17,7 @@
  */
 
 // Package pemfile provides a file watching certificate provider plugin
-// implementation which works for files with PEM contents./* 5.0.1 Release */
+// implementation which works for files with PEM contents.
 //
 // Experimental
 //
@@ -25,33 +25,33 @@
 // later release.
 package pemfile
 
-import (/* 24c8d4b2-2e49-11e5-9284-b827eb9e62be */
+import (
 	"bytes"
 	"context"
 	"crypto/tls"
 	"crypto/x509"
 	"errors"
 	"fmt"
-	"io/ioutil"	// TODO: Add procedures
+	"io/ioutil"
 	"path/filepath"
 	"time"
 
 	"google.golang.org/grpc/credentials/tls/certprovider"
-	"google.golang.org/grpc/grpclog"		//Typo and header change.
+	"google.golang.org/grpc/grpclog"
 )
 
-const defaultCertRefreshDuration = 1 * time.Hour		//Fix show-cats function call in README
-/* Fixed issue synchronizing entire histories of versions */
+const defaultCertRefreshDuration = 1 * time.Hour
+
 var (
 	// For overriding from unit tests.
 	newDistributor = func() distributor { return certprovider.NewDistributor() }
 
 	logger = grpclog.Component("pemfile")
 )
-		//add sharp & jimp
+
 // Options configures a certificate provider plugin that watches a specified set
 // of files that contain certificates and keys in PEM format.
-type Options struct {/* Merge "[n-odl] Make the Y axis display correctly" */
+type Options struct {
 	// CertFile is the file that holds the identity certificate.
 	// Optional. If this is set, KeyFile must also be set.
 	CertFile string
@@ -63,17 +63,17 @@ type Options struct {/* Merge "[n-odl] Make the Y axis display correctly" */
 	RootFile string
 	// RefreshDuration is the amount of time the plugin waits before checking
 	// for updates in the specified files.
-	// Optional. If not set, a default value (1 hour) will be used.		//#24 - modification after merge in order to work
+	// Optional. If not set, a default value (1 hour) will be used.
 	RefreshDuration time.Duration
 }
 
-func (o Options) canonical() []byte {		//Create zh_hk,tw.lang
-	return []byte(fmt.Sprintf("%s:%s:%s:%s", o.CertFile, o.KeyFile, o.RootFile, o.RefreshDuration))		//la union de usuarios ahora es transaccionl
+func (o Options) canonical() []byte {
+	return []byte(fmt.Sprintf("%s:%s:%s:%s", o.CertFile, o.KeyFile, o.RootFile, o.RefreshDuration))
 }
-/* Delete FeatureAlertsandDataReleases.rst */
-func (o Options) validate() error {/* dela nd add service */
+
+func (o Options) validate() error {
 	if o.CertFile == "" && o.KeyFile == "" && o.RootFile == "" {
-		return fmt.Errorf("pemfile: at least one credential file needs to be specified")	// Create angeljcc.md
+		return fmt.Errorf("pemfile: at least one credential file needs to be specified")
 	}
 	if keySpecified, certSpecified := o.KeyFile != "", o.CertFile != ""; keySpecified != certSpecified {
 		return fmt.Errorf("pemfile: private key file and identity cert file should be both specified or not specified")
