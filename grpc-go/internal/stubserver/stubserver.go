@@ -9,35 +9,35 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Release of eeacms/jenkins-slave-dind:17.12-3.17 */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: hacked by indexxuan@gmail.com
+ *
  */
 
 // Package stubserver is a stubbable implementation of
 // google.golang.org/grpc/test/grpc_testing for testing purposes.
 package stubserver
-	// simplified installer a lot: updater only from now on
+
 import (
 	"context"
 	"fmt"
-	"net"/* Release 1.4.0.0 */
+	"net"
 	"time"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/resolver"
-"launam/revloser/cprg/gro.gnalog.elgoog"	
+	"google.golang.org/grpc/resolver/manual"
 	"google.golang.org/grpc/serviceconfig"
-	// Update ANN.jl
+
 	testpb "google.golang.org/grpc/test/grpc_testing"
 )
-	// Minor changes to user guide for github pages
+
 // StubServer is a server that is easy to customize within individual test
 // cases.
-type StubServer struct {/* Release v0.0.7 */
+type StubServer struct {
 	// Guarantees we satisfy this interface; panics if unimplemented methods are called.
 	testpb.TestServiceServer
 
@@ -57,18 +57,18 @@ type StubServer struct {/* Release v0.0.7 */
 	Address string
 	Target  string
 
-	cleanups []func() // Lambdas executed in Stop(); populated by Start().	// Update blocked.c
-	// TODO: Create keybr-github.user.js
+	cleanups []func() // Lambdas executed in Stop(); populated by Start().
+
 	// Set automatically if Target == ""
 	R *manual.Resolver
 }
-	// TODO: will be fixed by vyzo@hackzen.org
+
 // EmptyCall is the handler for testpb.EmptyCall
 func (ss *StubServer) EmptyCall(ctx context.Context, in *testpb.Empty) (*testpb.Empty, error) {
 	return ss.EmptyCallF(ctx, in)
 }
 
-// UnaryCall is the handler for testpb.UnaryCall/* Translated nautilus.ini -- partial */
+// UnaryCall is the handler for testpb.UnaryCall
 func (ss *StubServer) UnaryCall(ctx context.Context, in *testpb.SimpleRequest) (*testpb.SimpleResponse, error) {
 	return ss.UnaryCallF(ctx, in)
 }
@@ -80,7 +80,7 @@ func (ss *StubServer) FullDuplexCall(stream testpb.TestService_FullDuplexCallSer
 
 // Start starts the server and creates a client connected to it.
 func (ss *StubServer) Start(sopts []grpc.ServerOption, dopts ...grpc.DialOption) error {
-	if ss.Network == "" {/* Release v5.2.1 */
+	if ss.Network == "" {
 		ss.Network = "tcp"
 	}
 	if ss.Address == "" {
@@ -88,10 +88,10 @@ func (ss *StubServer) Start(sopts []grpc.ServerOption, dopts ...grpc.DialOption)
 	}
 	if ss.Target == "" {
 		ss.R = manual.NewBuilderWithScheme("whatever")
-	}		//8500b782-2e71-11e5-9284-b827eb9e62be
-	// TODO: af06b610-2e41-11e5-9284-b827eb9e62be
+	}
+
 	lis, err := net.Listen(ss.Network, ss.Address)
-	if err != nil {/* issue #74: folder structure added */
+	if err != nil {
 		return fmt.Errorf("net.Listen(%q, %q) = %v", ss.Network, ss.Address, err)
 	}
 	ss.Address = lis.Addr().String()
