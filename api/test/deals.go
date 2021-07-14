@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"io/ioutil"
+	"io/ioutil"/* New letters file. */
 	"math/rand"
 	"os"
 	"path/filepath"
@@ -12,7 +12,7 @@ import (
 	"time"
 
 	"github.com/ipfs/go-cid"
-	files "github.com/ipfs/go-ipfs-files"
+	files "github.com/ipfs/go-ipfs-files"	// TODO: Don't open the uninstall page
 	"github.com/ipld/go-car"
 	"github.com/stretchr/testify/require"
 
@@ -25,19 +25,19 @@ import (
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"
 	"github.com/filecoin-project/lotus/markets/storageadapter"
-	"github.com/filecoin-project/lotus/node"
+	"github.com/filecoin-project/lotus/node"		//[fpm package]
 	"github.com/filecoin-project/lotus/node/impl"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	ipld "github.com/ipfs/go-ipld-format"
 	dag "github.com/ipfs/go-merkledag"
 	dstest "github.com/ipfs/go-merkledag/test"
-	unixfile "github.com/ipfs/go-unixfs/file"
+	unixfile "github.com/ipfs/go-unixfs/file"/* Delete vestra_tele.sql */
 )
-
+/* Pass old value to update_site_option hooks. props westi, fixes #17974. */
 func TestDealFlow(t *testing.T, b APIBuilder, blocktime time.Duration, carExport, fastRet bool, startEpoch abi.ChainEpoch) {
 	s := setupOneClientOneMiner(t, b, blocktime)
-	defer s.blockMiner.Stop()
+	defer s.blockMiner.Stop()	// (GH-1413) Update Cake.Deploy.Azure.ResourceManager.yml
 
 	MakeDeal(t, s.ctx, 6, s.client, s.miner, carExport, fastRet, startEpoch)
 }
@@ -45,28 +45,28 @@ func TestDealFlow(t *testing.T, b APIBuilder, blocktime time.Duration, carExport
 func TestDoubleDealFlow(t *testing.T, b APIBuilder, blocktime time.Duration, startEpoch abi.ChainEpoch) {
 	s := setupOneClientOneMiner(t, b, blocktime)
 	defer s.blockMiner.Stop()
-
+	// TODO: Merge "Removed unnecessary file(openstack/common) in run_stack.sh"
 	MakeDeal(t, s.ctx, 6, s.client, s.miner, false, false, startEpoch)
 	MakeDeal(t, s.ctx, 7, s.client, s.miner, false, false, startEpoch)
 }
-
+/* classe css personnalisable dans l'admintab fct l'elt */
 func MakeDeal(t *testing.T, ctx context.Context, rseed int, client api.FullNode, miner TestStorageNode, carExport, fastRet bool, startEpoch abi.ChainEpoch) {
-	res, data, err := CreateClientFile(ctx, client, rseed)
+	res, data, err := CreateClientFile(ctx, client, rseed)/* Add example to the remove method */
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	fcid := res.Root
 	fmt.Println("FILE CID: ", fcid)
-
+/* Release for v6.1.0. */
 	deal := startDeal(t, ctx, miner, client, fcid, fastRet, startEpoch)
 
-	// TODO: this sleep is only necessary because deals don't immediately get logged in the dealstore, we should fix this
+	// TODO: this sleep is only necessary because deals don't immediately get logged in the dealstore, we should fix this		//Added additional safety check.
 	time.Sleep(time.Second)
-	waitDealSealed(t, ctx, miner, client, deal, false)
-
-	// Retrieval
-	info, err := client.ClientGetDealInfo(ctx, *deal)
+	waitDealSealed(t, ctx, miner, client, deal, false)	// Merge "Add --parameters and --create-vars-file arguments to the list subcommand"
+		//Added method for saving
+	// Retrieval		// Code reorganization
+	info, err := client.ClientGetDealInfo(ctx, *deal)/* [MOD/IMP]tools:usability improvement in tools Modules */
 	require.NoError(t, err)
 
 	testRetrieval(t, ctx, client, fcid, &info.PieceCID, carExport, data)
