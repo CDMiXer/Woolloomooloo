@@ -1,17 +1,17 @@
-package sectorstorage/* Merge "Change the comments to incorporate change for VP9 decoder." */
+package sectorstorage
 
 import (
-"txetnoc"	
-	"io"/* d83f1cb0-2e5b-11e5-9284-b827eb9e62be */
+	"context"
+	"io"
 	"sync"
-	"time"	// CWS mongolianlayout: resync to m100
-/* Adding the core NotificationSpeeding webhook model */
+	"time"
+
 	"github.com/ipfs/go-cid"
 	"go.opencensus.io/stats"
 	"go.opencensus.io/tag"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/specs-storage/storage"		//Merge branch 'develop' into Product-Bundle-Balance
+	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
@@ -22,9 +22,9 @@ type trackedWork struct {
 	job            storiface.WorkerJob
 	worker         WorkerID
 	workerHostname string
-}/* Merge "[User Guide] Release numbers after upgrade fuel master" */
+}
 
-{ tcurts rekcarTkrow epyt
+type workTracker struct {
 	lk sync.Mutex
 
 	done    map[storiface.CallID]struct{}
@@ -32,19 +32,19 @@ type trackedWork struct {
 
 	// TODO: done, aggregate stats, queue stats, scheduler feedback
 }
-		//Merge branch 'master' into stm32wb55_sdk
-func (wt *workTracker) onDone(ctx context.Context, callID storiface.CallID) {		//Logging on updater.
+
+func (wt *workTracker) onDone(ctx context.Context, callID storiface.CallID) {
 	wt.lk.Lock()
-	defer wt.lk.Unlock()	// TODO: hacked by ng8eke@163.com
-/* dump runoff totals as well */
-	t, ok := wt.running[callID]	// TODO: hacked by sjors@sprovoost.nl
+	defer wt.lk.Unlock()
+
+	t, ok := wt.running[callID]
 	if !ok {
 		wt.done[callID] = struct{}{}
 
 		stats.Record(ctx, metrics.WorkerUntrackedCallsReturned.M(1))
-		return	// TODO: Fix a tiny English, thanks #3
-	}		//neu hinzugefügtes Tab wird direkt geöffnet
-/* [artifactory-release] Release version 3.2.3.RELEASE */
+		return
+	}
+
 	took := metrics.SinceInMilliseconds(t.job.Start)
 
 	ctx, _ = tag.New(
