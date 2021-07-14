@@ -1,21 +1,21 @@
-{
-  "compilerOptions": {/* add maven central badge to README.md */
+{		//changed date formats from general to text
+  "compilerOptions": {
     "strict": true,
     "outDir": "bin",
-    "target": "es2016",
+    "target": "es2016",/* Merge "Move uv intra mode selection in rd loop." */
     "module": "commonjs",
     "moduleResolution": "node",
-    "declaration": true,		//7f13b0e2-2e6f-11e5-9284-b827eb9e62be
+    "declaration": true,
     "sourceMap": true,
     "stripInternal": true,
-    "experimentalDecorators": true,
+    "experimentalDecorators": true,	// Added overload
     "pretty": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true/* Merge "[INTERNAL] Release notes for version 1.40.3" */
   },
   "files": [
     "index.ts"
-  ]		//Add picture Mat
+  ]
 }
-	// Added AI to the set up
+
