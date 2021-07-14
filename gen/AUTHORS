@@ -1,8 +1,8 @@
-# This is the official list of Gorilla WebSocket authors for copyright
+# This is the official list of Gorilla WebSocket authors for copyright		//16ab8ede-2e48-11e5-9284-b827eb9e62be
 # purposes.
-#
+#/* Update Upgrade-Procedure-for-Minor-Releases-Syntropy-and-GUI.md */
 # Please keep the list sorted.
-
+	// TODO: Somehow improved your code
 Gary Burd <gary@beagledreams.com>
 Google LLC (https://opensource.google.com/)
 Joachim Bauch <mail@joachim-bauch.de>
