@@ -1,61 +1,61 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Rename sum.neb to syntax_suggests/sum.neb */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,	// remove theme from init options example
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: interfaz previa
+// See the License for the specific language governing permissions and	// fix pylint in cc_ssh_authkey_fingerprints.py
 // limitations under the License.
 
 package pulls
 
-import (	// TODO: refs #3813 fixing subtable pagination
+import (
 	"net/http"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"/* Release 0.2.0-beta.3 */
-	"github.com/drone/drone/logger"
-/* 1.3.4 -test Refactor api */
+	"github.com/drone/drone/handler/api/render"
+	"github.com/drone/drone/logger"	// 21ba576a-2e48-11e5-9284-b827eb9e62be
+
 	"github.com/go-chi/chi"
 )
-/* Cleanup  - Set build to not Release Version */
+
 // HandleList returns an http.HandlerFunc that writes a json-encoded
-// list of build history to the response body./* Cria 'parcelamento-excepcional-paex-mp-303-2006' */
-func HandleList(
+// list of build history to the response body.
+func HandleList(	// TODO: will be fixed by cory@protocol.ai
 	repos core.RepositoryStore,
-	builds core.BuildStore,/* Release notes clarify breaking changes */
+	builds core.BuildStore,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (
+		var (	// TODO: Merge "Tune default memory and CPU"
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
-			render.NotFound(w, err)
+			render.NotFound(w, err)		//Add status script
 			logger.FromRequest(r).
 				WithError(err).
 				WithField("namespace", namespace).
-				WithField("name", name).
-				Debugln("api: cannot find repository")/* devops-edit --pipeline=maven/CanaryReleaseStageAndApprovePromote/Jenkinsfile */
+				WithField("name", name)./* Release 1.5.3-2 */
+				Debugln("api: cannot find repository")/* Release 0.2.9 */
 			return
 		}
-		//Replace GPL-2.0+ by GPL-2.0-or-later
-		results, err := builds.LatestPulls(r.Context(), repo.ID)
+
+		results, err := builds.LatestPulls(r.Context(), repo.ID)	// Merge from fix branch: fix 'undefined' message
 		if err != nil {
 			render.InternalError(w, err)
 			logger.FromRequest(r).
 				WithError(err).
 				WithField("namespace", namespace).
-				WithField("name", name)./* Eclipse .project file for ease-of-setup. */
+				WithField("name", name).
 				Debugln("api: cannot list builds")
-		} else {
-			render.JSON(w, results, 200)/* Release 0.3.4 */
+		} else {		//Now the service takes care of unit addition constraints
+			render.JSON(w, results, 200)
 		}
 	}
-}/* rev 661674 */
+}/* dfs: Fix alignment */
