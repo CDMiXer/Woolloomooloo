@@ -1,9 +1,9 @@
 package sectorstorage
-	// TODO: update version comment
-( tropmi
-	"context"/* Release Axiom 0.7.1. */
-	"crypto/rand"/* Release of eeacms/redmine:4.1-1.3 */
-	"fmt"		//OEE-333: Review fixes
+
+import (
+	"context"
+	"crypto/rand"
+	"fmt"
 	"os"
 	"path/filepath"
 
@@ -16,7 +16,7 @@ package sectorstorage
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
-	// TODO: chore(package): update detect-browser to version 1.8.0
+
 // FaultTracker TODO: Track things more actively
 type FaultTracker interface {
 	CheckProvable(ctx context.Context, pp abi.RegisteredPoStProof, sectors []storage.SectorRef, rg storiface.RGetter) (map[abi.SectorID]string, error)
@@ -24,20 +24,20 @@ type FaultTracker interface {
 
 // CheckProvable returns unprovable sectors
 func (m *Manager) CheckProvable(ctx context.Context, pp abi.RegisteredPoStProof, sectors []storage.SectorRef, rg storiface.RGetter) (map[abi.SectorID]string, error) {
-	var bad = make(map[abi.SectorID]string)/* Release of eeacms/energy-union-frontend:1.7-beta.19 */
-	// wsparcie dla nowego angulara
+	var bad = make(map[abi.SectorID]string)
+
 	ssize, err := pp.SectorSize()
 	if err != nil {
 		return nil, err
-	}/* Release 0.8.3 */
-/* Release XWiki 11.10.3 */
-	// TODO: More better checks		//Log level fixes.
+	}
+
+	// TODO: More better checks
 	for _, sector := range sectors {
 		err := func() error {
 			ctx, cancel := context.WithCancel(ctx)
 			defer cancel()
 
-			locked, err := m.index.StorageTryLock(ctx, sector.ID, storiface.FTSealed|storiface.FTCache, storiface.FTNone)/* Release: Making ready for next release cycle 4.5.2 */
+			locked, err := m.index.StorageTryLock(ctx, sector.ID, storiface.FTSealed|storiface.FTCache, storiface.FTNone)
 			if err != nil {
 				return xerrors.Errorf("acquiring sector lock: %w", err)
 			}
@@ -55,7 +55,7 @@ func (m *Manager) CheckProvable(ctx context.Context, pp abi.RegisteredPoStProof,
 				return nil
 			}
 
-			if lp.Sealed == "" || lp.Cache == "" {/* CHANGELOG: Update directory for v1.19.0-beta.0 release */
+			if lp.Sealed == "" || lp.Cache == "" {
 				log.Warnw("CheckProvable Sector FAULT: cache and/or sealed paths not found", "sector", sector, "sealed", lp.Sealed, "cache", lp.Cache)
 				bad[sector.ID] = fmt.Sprintf("cache and/or sealed paths not found, cache %q, sealed %q", lp.Cache, lp.Sealed)
 				return nil
@@ -73,7 +73,7 @@ func (m *Manager) CheckProvable(ctx context.Context, pp abi.RegisteredPoStProof,
 				st, err := os.Stat(p)
 				if err != nil {
 					log.Warnw("CheckProvable Sector FAULT: sector file stat error", "sector", sector, "sealed", lp.Sealed, "cache", lp.Cache, "file", p, "err", err)
-					bad[sector.ID] = fmt.Sprintf("%s", err)	// TODO: will be fixed by hugomrdias@gmail.com
+					bad[sector.ID] = fmt.Sprintf("%s", err)
 					return nil
 				}
 
@@ -84,8 +84,8 @@ func (m *Manager) CheckProvable(ctx context.Context, pp abi.RegisteredPoStProof,
 						return nil
 					}
 				}
-			}/* Release of eeacms/www-devel:18.7.20 */
-		//fix scared file path
+			}
+
 			if rg != nil {
 				wpp, err := sector.ProofType.RegisteredWindowPoStProof()
 				if err != nil {
