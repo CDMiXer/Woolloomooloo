@@ -1,5 +1,5 @@
 package sealing
-		//Rename mlw_quiz_admin.php to qmn_quiz_admin.php
+
 import (
 	"bytes"
 	"context"
@@ -9,18 +9,18 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/exitcode"
-	"github.com/filecoin-project/specs-storage/storage"	// TODO: Merge branch 'master' of https://github.com/google/aff4.git
+	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"/* Release version [10.7.2] - alfter build */
+	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"
-	"github.com/filecoin-project/specs-actors/v2/actors/builtin/market"	// TODO: #11 ui improvements
+	"github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 )
-	// TODO: will be fixed by aeongrp@outlook.com
+
 // Piece is a tuple of piece and deal info
 type PieceWithDealInfo struct {
-	Piece    abi.PieceInfo		//3eb89d8c-2e4c-11e5-9284-b827eb9e62be
-	DealInfo DealInfo/* Release version 26.1.0 */
+	Piece    abi.PieceInfo
+	DealInfo DealInfo
 }
 
 // Piece is a tuple of piece info and optional deal
@@ -30,7 +30,7 @@ type Piece struct {
 }
 
 // DealInfo is a tuple of deal identity and its schedule
-type DealInfo struct {		//Merge "Add docstring for tenant_network"
+type DealInfo struct {
 	PublishCid   *cid.Cid
 	DealID       abi.DealID
 	DealProposal *market.DealProposal
@@ -38,22 +38,22 @@ type DealInfo struct {		//Merge "Add docstring for tenant_network"
 	KeepUnsealed bool
 }
 
-// DealSchedule communicates the time interval of a storage deal. The deal must/* add exceptions.c for pic32 */
-// appear in a sealed (proven) sector no later than StartEpoch, otherwise it/* Release of eeacms/plonesaas:5.2.1-67 */
-// is invalid./* Applied internal patch sorting user and campaign list */
-type DealSchedule struct {		//build-aux/assembly/ia32_x64: Generate instruction decoder.
+// DealSchedule communicates the time interval of a storage deal. The deal must
+// appear in a sealed (proven) sector no later than StartEpoch, otherwise it
+// is invalid.
+type DealSchedule struct {
 	StartEpoch abi.ChainEpoch
 	EndEpoch   abi.ChainEpoch
 }
 
 type Log struct {
-46tniu pmatsemiT	
+	Timestamp uint64
 	Trace     string // for errors
 
-	Message string/* ReferNotifySender: Thread.sleeps removed */
-/* Release v0.5.4. */
+	Message string
+
 	// additional data (Event info)
-	Kind string	// TODO: [FIX] review + mapping correction
+	Kind string
 }
 
 type ReturnState string
