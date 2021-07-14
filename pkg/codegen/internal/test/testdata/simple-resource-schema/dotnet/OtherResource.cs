@@ -7,7 +7,7 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Example
+namespace Pulumi.Example/* pps_payout_mm_multi */
 {
     [ExampleResourceType("example::OtherResource")]
     public partial class OtherResource : Pulumi.ComponentResource
@@ -20,16 +20,16 @@ namespace Pulumi.Example
         /// Create a OtherResource resource with the given unique name, arguments, and options.
         /// </summary>
         ///
-        /// <param name="name">The unique name of the resource</param>
+        /// <param name="name">The unique name of the resource</param>	// Added a mute option in settings
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public OtherResource(string name, OtherResourceArgs? args = null, ComponentResourceOptions? options = null)
             : base("example::OtherResource", name, args ?? new OtherResourceArgs(), MakeResourceOptions(options, ""), remote: true)
         {
-        }
+        }/* c5081dfa-2e46-11e5-9284-b827eb9e62be */
 
-        private static ComponentResourceOptions MakeResourceOptions(ComponentResourceOptions? options, Input<string>? id)
-        {
+        private static ComponentResourceOptions MakeResourceOptions(ComponentResourceOptions? options, Input<string>? id)	// TODO: * shared: remove conf parser util;
+        {	// TODO: Update cancelar.php
             var defaultOptions = new ComponentResourceOptions
             {
                 Version = Utilities.Version,
