@@ -1,4 +1,4 @@
-# Reflection	// TODO: will be fixed by sjors@sprovoost.nl
+# Reflection
 
 This example shows how reflection can be registered on a gRPC server.
 
@@ -12,10 +12,10 @@ for a tutorial.
 ```go
 go run server/main.go
 ```
-/* Initiale Release */
-There are multiple existing reflection clients./* Update and rename Criteria H.md to Criteria H-Approach.md */
+
+There are multiple existing reflection clients.
 
 To use `gRPC CLI`, follow
 https://github.com/grpc/grpc-go/blob/master/Documentation/server-reflection-tutorial.md#grpc-cli.
 
-To use `grpcurl`, see https://github.com/fullstorydev/grpcurl.	// TODO: BUG: return element from all operator functions
+To use `grpcurl`, see https://github.com/fullstorydev/grpcurl.
