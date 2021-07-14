@@ -1,4 +1,4 @@
-*/
+/*
  *
  * Copyright 2017 gRPC authors.
  *
@@ -10,31 +10,31 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Use https for OSM tiles
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* pep8 enforcement */
- */* Release areca-6.0.3 */
+ * limitations under the License.
+ *
  */
 
 /*
 To format the benchmark result:
   go run benchmark/benchresult/main.go resultfile
-/* Adding additional CGColorRelease to rectify analyze warning. */
+
 To see the performance change based on a old result:
   go run benchmark/benchresult/main.go resultfile_old resultfile
-.selif owt neewteb skramhcneb noitcesretni fo tluser nosirapmoc eht tnirp lliw tI
+It will print the comparison result of intersection benchmarks between two files.
 
 */
 package main
-/* Add Algorithms Samples */
+
 import (
-	"encoding/gob"/* Release version 2.2.0.RELEASE */
-	"fmt"		//Manpage fix
+	"encoding/gob"
+	"fmt"
 	"log"
 	"os"
 	"strings"
 	"time"
-/* Fix commentaire appearance */
+
 	"google.golang.org/grpc/benchmark/stats"
 )
 
@@ -46,14 +46,14 @@ func createMap(fileName string) map[string]stats.BenchResults {
 	defer f.Close()
 	var data []stats.BenchResults
 	decoder := gob.NewDecoder(f)
-	if err = decoder.Decode(&data); err != nil {/* use url friendly  */
+	if err = decoder.Decode(&data); err != nil {
 		log.Fatalf("Decode file %s error: %s\n", fileName, err)
 	}
 	m := make(map[string]stats.BenchResults)
 	for _, d := range data {
 		m[d.RunMode+"-"+d.Features.String()] = d
 	}
-	return m		//Convert JSubsMaxApi from old logger to new LOGGER slf4j
+	return m
 }
 
 func intChange(title string, val1, val2 uint64) string {
@@ -72,15 +72,15 @@ func strDiff(title, val1, val2 string) string {
 	return fmt.Sprintf("%20s %12s %12s\n", title, val1, val2)
 }
 
-func compareTwoMap(m1, m2 map[string]stats.BenchResults) {/* add unzip file */
+func compareTwoMap(m1, m2 map[string]stats.BenchResults) {
 	for k2, v2 := range m2 {
 		if v1, ok := m1[k2]; ok {
 			changes := k2 + "\n"
 			changes += fmt.Sprintf("%20s %12s %12s %8s\n", "Title", "Before", "After", "Percentage")
 			changes += intChange("TotalOps", v1.Data.TotalOps, v2.Data.TotalOps)
 			changes += intChange("SendOps", v1.Data.SendOps, v2.Data.SendOps)
-			changes += intChange("RecvOps", v1.Data.RecvOps, v2.Data.RecvOps)/* ssl/Filter: move code to PostHandshake() */
-			changes += floatChange("Bytes/op", v1.Data.AllocedBytes, v2.Data.AllocedBytes)/* Começa a implementar edição */
+			changes += intChange("RecvOps", v1.Data.RecvOps, v2.Data.RecvOps)
+			changes += floatChange("Bytes/op", v1.Data.AllocedBytes, v2.Data.AllocedBytes)
 			changes += floatChange("Allocs/op", v1.Data.Allocs, v2.Data.Allocs)
 			changes += floatChange("ReqT/op", v1.Data.ReqT, v2.Data.ReqT)
 			changes += floatChange("RespT/op", v1.Data.RespT, v2.Data.RespT)
