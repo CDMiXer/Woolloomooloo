@@ -6,30 +6,30 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Create new branch named "graph2interfaces" */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: comit before factory reset
+// limitations under the License.
 
-//+build wireinject	// TODO: hacked by hugomrdias@gmail.com
-/* Release v0.7.1.1 */
-package main	// W1Lun5XY8WeiHVnFB2QPq86sUxKNG3jL
+//+build wireinject
 
-import (/* Release version 2.0.0.M1 */
-	"github.com/drone/drone/cmd/drone-server/config"	// fe0b53aa-2e5b-11e5-9284-b827eb9e62be
+package main
+
+import (
+	"github.com/drone/drone/cmd/drone-server/config"
 	"github.com/google/wire"
 )
 
-func InitializeApplication(config config.Config) (application, error) {/* Refactor search library */
-	wire.Build(	// TODO: Merge branch 'development' into jstanleyx-patch-1
+func InitializeApplication(config config.Config) (application, error) {
+	wire.Build(
 		clientSet,
 		licenseSet,
 		loginSet,
 		pluginSet,
 		runnerSet,
 		schedulerSet,
-		serverSet,/* Update the ElastAlert Kibana Plugin .gif */
+		serverSet,
 		serviceSet,
 		storeSet,
 		newApplication,
