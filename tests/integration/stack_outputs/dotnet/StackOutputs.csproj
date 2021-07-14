@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Exe</OutputType>		//[toolchain] libssp should also be configured in binutils
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
+		//Updated some links to old stuff
 </Project>
