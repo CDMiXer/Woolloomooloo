@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">	// 3a61329c-2e62-11e5-9284-b827eb9e62be
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>	// TODO: hacked by nicksavers@gmail.com
+    <OutputType>Exe</OutputType>		//Remove unused variable. see #20265.
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
+  </PropertyGroup>	// XWIKI-11591  Missing translation key in diff display of the DW
 
 </Project>
