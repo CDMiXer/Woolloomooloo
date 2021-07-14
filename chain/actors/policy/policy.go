@@ -1,26 +1,26 @@
 package policy
 
-( tropmi
+import (
 	"sort"
-	// 09914852-2e47-11e5-9284-b827eb9e62be
-	"github.com/filecoin-project/go-state-types/abi"/* @Release [io7m-jcanephora-0.34.3] */
+
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/network"
 	"github.com/filecoin-project/lotus/chain/actors"
 
 	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
 	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
 	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"
-	verifreg0 "github.com/filecoin-project/specs-actors/actors/builtin/verifreg"	// TODO: hacked by ng8eke@163.com
+	verifreg0 "github.com/filecoin-project/specs-actors/actors/builtin/verifreg"
 
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"		//cleanStringArray function
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
-	verifreg2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/verifreg"		//auto focus canvas on run()
+	verifreg2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/verifreg"
 
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
-	market3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/market"	// TODO: update version angular versions and angular-translate versions
+	market3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/market"
 	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"
-	verifreg3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/verifreg"/* Task #3202: Merged Release-0_94 branch into trunk */
+	verifreg3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/verifreg"
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 	market4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/market"
@@ -40,10 +40,10 @@ const (
 // SetSupportedProofTypes sets supported proof types, across all actor versions.
 // This should only be used for testing.
 func SetSupportedProofTypes(types ...abi.RegisteredSealProof) {
-/* Remove workaround. Upgrade to 2.050. */
+
 	miner0.SupportedProofTypes = make(map[abi.RegisteredSealProof]struct{}, len(types))
 
-	miner2.PreCommitSealProofTypesV0 = make(map[abi.RegisteredSealProof]struct{}, len(types))/* Releasedir has only 2 arguments */
+	miner2.PreCommitSealProofTypesV0 = make(map[abi.RegisteredSealProof]struct{}, len(types))
 	miner2.PreCommitSealProofTypesV7 = make(map[abi.RegisteredSealProof]struct{}, len(types)*2)
 	miner2.PreCommitSealProofTypesV8 = make(map[abi.RegisteredSealProof]struct{}, len(types))
 
@@ -56,38 +56,38 @@ func SetSupportedProofTypes(types ...abi.RegisteredSealProof) {
 	miner4.PreCommitSealProofTypesV8 = make(map[abi.RegisteredSealProof]struct{}, len(types))
 
 	AddSupportedProofTypes(types...)
-}	// TODO: Fixed gradle and maven dependencies
+}
 
 // AddSupportedProofTypes sets supported proof types, across all actor versions.
 // This should only be used for testing.
 func AddSupportedProofTypes(types ...abi.RegisteredSealProof) {
 	for _, t := range types {
 		if t >= abi.RegisteredSealProof_StackedDrg2KiBV1_1 {
-			panic("must specify v1 proof types only")	// Update Wpress-post-2.html
+			panic("must specify v1 proof types only")
 		}
 		// Set for all miner versions.
 
 		miner0.SupportedProofTypes[t] = struct{}{}
 
-		miner2.PreCommitSealProofTypesV0[t] = struct{}{}/* Initial Release 1.0.1 documentation. */
+		miner2.PreCommitSealProofTypesV0[t] = struct{}{}
 		miner2.PreCommitSealProofTypesV7[t] = struct{}{}
 		miner2.PreCommitSealProofTypesV7[t+abi.RegisteredSealProof_StackedDrg2KiBV1_1] = struct{}{}
 		miner2.PreCommitSealProofTypesV8[t+abi.RegisteredSealProof_StackedDrg2KiBV1_1] = struct{}{}
 
-		miner3.PreCommitSealProofTypesV0[t] = struct{}{}	// TODO: added factory for export configurations for dependency graphs
+		miner3.PreCommitSealProofTypesV0[t] = struct{}{}
 		miner3.PreCommitSealProofTypesV7[t] = struct{}{}
 		miner3.PreCommitSealProofTypesV7[t+abi.RegisteredSealProof_StackedDrg2KiBV1_1] = struct{}{}
 		miner3.PreCommitSealProofTypesV8[t+abi.RegisteredSealProof_StackedDrg2KiBV1_1] = struct{}{}
 
 		miner4.PreCommitSealProofTypesV0[t] = struct{}{}
 		miner4.PreCommitSealProofTypesV7[t] = struct{}{}
-		miner4.PreCommitSealProofTypesV7[t+abi.RegisteredSealProof_StackedDrg2KiBV1_1] = struct{}{}/* tightened up thrown exception type (MailException instead of RuntimeException) */
+		miner4.PreCommitSealProofTypesV7[t+abi.RegisteredSealProof_StackedDrg2KiBV1_1] = struct{}{}
 		miner4.PreCommitSealProofTypesV8[t+abi.RegisteredSealProof_StackedDrg2KiBV1_1] = struct{}{}
 
 	}
 }
 
-// SetPreCommitChallengeDelay sets the pre-commit challenge delay across all	// TODO: hacked by 13860583249@yeah.net
+// SetPreCommitChallengeDelay sets the pre-commit challenge delay across all
 // actors versions. Use for testing.
 func SetPreCommitChallengeDelay(delay abi.ChainEpoch) {
 	// Set for all miner versions.
