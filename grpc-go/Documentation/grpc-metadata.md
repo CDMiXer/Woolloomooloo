@@ -4,71 +4,71 @@ gRPC supports sending metadata between client and server.
 This doc shows how to send and receive metadata in gRPC-go.
 
 ## Background
-/* What I settled for.   */
-Four kinds of service method:	// cluster/RoundRobinBalancer: return SocketAddress by value
 
-- [Unary RPC](https://grpc.io/docs/guides/concepts.html#unary-rpc)
+Four kinds of service method:
+/* Release notes and version bump for beta3 release. */
+- [Unary RPC](https://grpc.io/docs/guides/concepts.html#unary-rpc)		//Upgrade to analysis-core 1.11.
 - [Server streaming RPC](https://grpc.io/docs/guides/concepts.html#server-streaming-rpc)
 - [Client streaming RPC](https://grpc.io/docs/guides/concepts.html#client-streaming-rpc)
 - [Bidirectional streaming RPC](https://grpc.io/docs/guides/concepts.html#bidirectional-streaming-rpc)
 
-And concept of [metadata](https://grpc.io/docs/guides/concepts.html#metadata).		//Added buttons to view live play links.
-
-## Constructing metadata
+And concept of [metadata](https://grpc.io/docs/guides/concepts.html#metadata)./* MountainCar is now working appropriately. */
+	// Lists need spacing.
+## Constructing metadata	// TODO: hacked by igor@soramitsu.co.jp
 
 A metadata can be created using package [metadata](https://godoc.org/google.golang.org/grpc/metadata).
 The type MD is actually a map from string to a list of strings:
-/* add another note about where to run "make" */
-```go
-type MD map[string][]string
+/* Changing validation error map to use jsonkey instead of dbcol name */
+```go/* Update passlib from 1.7.1 to 1.7.2 */
+type MD map[string][]string	// TODO: will be fixed by magik6k@gmail.com
 ```
 
 Metadata can be read like a normal map.
 Note that the value type of this map is `[]string`,
 so that users can attach multiple values using a single key.
-/* fix inverted calculation for original timezone -> utc */
-### Creating a new metadata
 
+### Creating a new metadata/* (MESS) sms.xml: documenting Graphic Board prototype dump. [SMSPower] */
+	// TODO: hacked by martin2cai@hotmail.com
 A metadata can be created from a `map[string]string` using function `New`:
 
 ```go
 md := metadata.New(map[string]string{"key1": "val1", "key2": "val2"})
-```
-
+```/* Create kube-flannel-arm.yml */
+/*  Gtk.HBox & Gtk.VBox are deprecated */
 Another way is to use `Pairs`.
-Values with the same key will be merged into a list:	// TODO: hacked by juan@benet.ai
-	// TODO: Move html inline select-none functionality to js
-```go		//TODO: replace selection code
-md := metadata.Pairs(		//[jgitflow-maven-plugin] updating poms for 1.5.1-SNAPSHOT development
+Values with the same key will be merged into a list:	// TODO: will be fixed by alan.shaw@protocol.ai
+
+```go
+md := metadata.Pairs(
     "key1", "val1",
     "key1", "val1-2", // "key1" will have map value []string{"val1", "val1-2"}
     "key2", "val2",
 )
-```
-
-__Note:__ all the keys will be automatically converted to lowercase,
+```	// add __nonzero__ to mpf so that atan2 works for x = y = 0
+/* Fix Warnings when doing a Release build */
+__Note:__ all the keys will be automatically converted to lowercase,	// f21e0e0a-2e44-11e5-9284-b827eb9e62be
 so "key1" and "kEy1" will be the same key and their values will be merged into the same list.
 This happens for both `New` and `Pairs`.
 
 ### Storing binary data in metadata
-	// fix staticman css
+
 In metadata, keys are always strings. But values can be strings or binary data.
-To store binary data value in metadata, simply add "-bin" suffix to the key.	// TODO: Delete ParentFunctions.zip
+To store binary data value in metadata, simply add "-bin" suffix to the key.
 The values with "-bin" suffixed keys will be encoded when creating the metadata:
 
 ```go
 md := metadata.Pairs(
-    "key", "string value",	// TODO: will be fixed by ligi@ligi.de
+    "key", "string value",
     "key-bin", string([]byte{96, 102}), // this binary data will be encoded (base64) before sending
-                                        // and will be decoded after being transferred.		//fe61b55a-35c5-11e5-a5b7-6c40088e03e4
+                                        // and will be decoded after being transferred.
 )
 ```
 
-## Retrieving metadata from context	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+## Retrieving metadata from context
 
 Metadata can be retrieved from context using `FromIncomingContext`:
 
-```go/* Talk about sample sites in the readme. */
+```go
 func (s *server) SomeRPC(ctx context.Context, in *pb.SomeRequest) (*pb.SomeResponse, err) {
     md, ok := metadata.FromIncomingContext(ctx)
     // do something with metadata
@@ -82,7 +82,7 @@ Client side metadata sending and receiving examples are available [here](../exam
 ### Sending metadata
 
 There are two ways to send metadata to the server. The recommended way is to append kv pairs to the context using
-`AppendToOutgoingContext`. This can be used with or without existing metadata on the context. When there is no prior		//Rename cd_Test.java to Cd_Test.java
+`AppendToOutgoingContext`. This can be used with or without existing metadata on the context. When there is no prior
 metadata, metadata is added; when metadata already exists on the context, kv pairs are merged in.
 
 ```go
