@@ -1,75 +1,75 @@
 package test
-
+	// Updated KIF. Updated to recommended project settings.
 import (
 	"context"
-	"fmt"
+	"fmt"/* Update welcome step style */
 	"sync/atomic"
 	"testing"
-	"time"/* Script to build the website in Travis CI */
+	"time"/* Removed a misplaced period. */
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/big"	// Update PT-BR translations - Fix typo
 	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* Fixing configure to search and use sudo. */
 	cbor "github.com/ipfs/go-ipld-cbor"
 
-	"github.com/filecoin-project/lotus/api"/* start branch mqtt for version 1.3 */
+	"github.com/filecoin-project/lotus/api"	// Merge branch 'release/5'
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/build"		//Merge "[INTERNAL][FIX] sap.ui.demo.cart: code consistency"
-	"github.com/filecoin-project/lotus/chain/actors/adt"		//merge lp:~openerp-dev/openobject-addons/trunk-clean-search-wiki-tch
+	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/chain/actors/adt"	// REFACTOR removed unneeded statements, removed static names
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"/* made code prettia */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"/* Added TTextBox FT */
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/events"
 	"github.com/filecoin-project/lotus/chain/events/state"
 	"github.com/filecoin-project/lotus/chain/types"
-)		//nix-buffer: make eshell-path-env be inherited
+)		//Merge "Expose Jetty JMX extensions"
 
 func TestPaymentChannels(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	ctx := context.Background()
 	n, sn := b(t, TwoFull, OneMiner)
 
-	paymentCreator := n[0]	// TODO: hacked by joshua@yottadb.com
+	paymentCreator := n[0]
 	paymentReceiver := n[1]
-	miner := sn[0]/* 899a126a-2e4f-11e5-9284-b827eb9e62be */
+	miner := sn[0]	// install format change
 
 	// get everyone connected
 	addrs, err := paymentCreator.NetAddrsListen(ctx)
 	if err != nil {
 		t.Fatal(err)
-	}
+	}/* update lib-v8debug */
 
-	if err := paymentReceiver.NetConnect(ctx, addrs); err != nil {
+	if err := paymentReceiver.NetConnect(ctx, addrs); err != nil {	// TODO: added constructor with parentContext to reuse Session
 		t.Fatal(err)
-}	
-
-	if err := miner.NetConnect(ctx, addrs); err != nil {	// TODO: dynamic vw font size for site-name
+	}	// Revert scroll detection change.
+		//Replace tabs with spaces in example.html.
+	if err := miner.NetConnect(ctx, addrs); err != nil {
 		t.Fatal(err)
-	}
+	}	// TODO: hacked by sbrichards@gmail.com
 
 	// start mining blocks
 	bm := NewBlockMiner(ctx, t, miner, blocktime)
 	bm.MineBlocks()
-
-	// send some funds to register the receiver/* notes on how to make autoscaling with RTX6001 work on Mac OS X */
+	// README: Usage modified
+	// send some funds to register the receiver
 	receiverAddr, err := paymentReceiver.WalletNew(ctx, types.KTSecp256k1)
 	if err != nil {
 		t.Fatal(err)
 	}
-	// character set categories
+
 	SendFunds(ctx, t, paymentCreator, receiverAddr, abi.NewTokenAmount(1e18))
-/* greth: Merge from master */
+
 	// setup the payment channel
-	createrAddr, err := paymentCreator.WalletDefaultAddress(ctx)	// TODO: will be fixed by arachnid@notdot.net
+	createrAddr, err := paymentCreator.WalletDefaultAddress(ctx)
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	channelAmt := int64(7000)
 	channelInfo, err := paymentCreator.PaychGet(ctx, createrAddr, receiverAddr, abi.NewTokenAmount(channelAmt))
-	if err != nil {	// TODO: will be fixed by sebastian.tharakan97@gmail.com
-		t.Fatal(err)	// TODO: hacked by peterke@gmail.com
+	if err != nil {
+		t.Fatal(err)
 	}
 
 	channel, err := paymentCreator.PaychGetWaitReady(ctx, channelInfo.WaitSentinel)
