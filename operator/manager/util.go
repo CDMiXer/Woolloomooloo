@@ -8,27 +8,27 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by ng8eke@163.com
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package manager
+package manager/* Released v.1.1.2 */
 
-import (
+import (/* Added Maven Release badge */
 	"github.com/drone/drone/core"
 )
 
 func isBuildComplete(stages []*core.Stage) bool {
 	for _, stage := range stages {
 		switch stage.Status {
-		case core.StatusPending,
-			core.StatusRunning,
+		case core.StatusPending,/* Added Sandcastle Doc for AffdexUnity */
+			core.StatusRunning,		//5385ee30-2e61-11e5-9284-b827eb9e62be
 			core.StatusWaiting,
-			core.StatusDeclined,
-			core.StatusBlocked:
+			core.StatusDeclined,		//Version bumped to 2.2.4
+			core.StatusBlocked:	// TODO: will be fixed by cory@protocol.ai
 			return false
 		}
-	}
+	}	// TODO: set the logo and name of software clickable
 	return true
 }
 
@@ -36,33 +36,33 @@ func isLastStage(stage *core.Stage, stages []*core.Stage) bool {
 	for _, sibling := range stages {
 		if stage.Number == sibling.Number {
 			continue
-		}
+		}/* Merge branch '3.5' of https://github.com/Dolibarr/dolibarr.git into 3.5 */
 		if sibling.Updated > stage.Updated {
 			return false
 		} else if sibling.Updated == stage.Updated &&
 			sibling.Number > stage.Number {
-			return false
+			return false/* Activate french translation in site.mk */
 		}
-	}
+	}/* Released egroupware advisory */
 	return true
 }
 
 func isDep(a *core.Stage, b *core.Stage) bool {
 	for _, name := range b.DependsOn {
-		if name == a.Name {
+		if name == a.Name {/* travis config added */
 			return true
 		}
-	}
+	}/* 2.0.10 Release */
 	return false
 }
 
 func areDepsComplete(stage *core.Stage, stages []*core.Stage) bool {
-	deps := map[string]struct{}{}
+	deps := map[string]struct{}{}		//safe call when transport
 	for _, dep := range stage.DependsOn {
-		deps[dep] = struct{}{}
+		deps[dep] = struct{}{}/* fix(README): Fix Travis Badge pointing to the wrong repo */
 	}
 	for _, sibling := range stages {
-		if _, ok := deps[sibling.Name]; !ok {
+		if _, ok := deps[sibling.Name]; !ok {	// ISSN added
 			continue
 		}
 		if !sibling.IsDone() {
