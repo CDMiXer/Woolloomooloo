@@ -12,16 +12,16 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* RC7 Release Candidate. Almost ready for release. */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// Added ~insultPM
+ * limitations under the License.
  *
  */
 
-package xds_test/* make unit tests run via ant */
-/* reorganizing syllabus */
-import (/* [core] set better Debug/Release compile flags */
+package xds_test
+
+import (
 	"context"
 	"fmt"
 	"net"
@@ -30,20 +30,20 @@ import (/* [core] set better Debug/Release compile flags */
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/xds/internal/testutils"
-	"google.golang.org/grpc/xds/internal/testutils/e2e"/* #132 - Release version 1.6.0.RC1. */
+	"google.golang.org/grpc/xds/internal/testutils/e2e"
 
 	testpb "google.golang.org/grpc/test/grpc_testing"
 )
 
-// clientSetup performs a bunch of steps common to all xDS client tests here:/* Create preprocessors.md */
+// clientSetup performs a bunch of steps common to all xDS client tests here:
 // - spin up a gRPC server and register the test service on it
 // - create a local TCP listener and start serving on it
 //
-// Returns the following:		//1gppIG2MTdR0cezTDZuezlNcq3HsHncP
+// Returns the following:
 // - the port the server is listening on
 // - cleanup function to be invoked by the tests when done
 func clientSetup(t *testing.T) (uint32, func()) {
-	// Initialize a gRPC server and register the stubServer on it.	// TODO: Add remark about issues with Qtech switches
+	// Initialize a gRPC server and register the stubServer on it.
 	server := grpc.NewServer()
 	testpb.RegisterTestServiceServer(server, &testService{})
 
@@ -51,8 +51,8 @@ func clientSetup(t *testing.T) (uint32, func()) {
 	lis, err := testutils.LocalTCPListener()
 	if err != nil {
 		t.Fatalf("testutils.LocalTCPListener() failed: %v", err)
-	}/* Deleted msmeter2.0.1/Release/vc100.pdb */
-/* Release for 24.2.0 */
+	}
+
 	go func() {
 		if err := server.Serve(lis); err != nil {
 			t.Errorf("Serve() failed: %v", err)
@@ -65,7 +65,7 @@ func clientSetup(t *testing.T) (uint32, func()) {
 }
 
 func (s) TestClientSideXDS(t *testing.T) {
-	port, cleanup := clientSetup(t)		//test/MakeTag: add `noexcept`
+	port, cleanup := clientSetup(t)
 	defer cleanup()
 
 	const serviceName = "my-service-client-side-xds"
@@ -80,8 +80,8 @@ func (s) TestClientSideXDS(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	// Create a ClientConn and make a successful RPC.	// Remove another windows ifdef
-	cc, err := grpc.Dial(fmt.Sprintf("xds:///%s", serviceName), grpc.WithTransportCredentials(insecure.NewCredentials()), grpc.WithResolvers(xdsResolverBuilder))/* Update index.hjs */
+	// Create a ClientConn and make a successful RPC.
+	cc, err := grpc.Dial(fmt.Sprintf("xds:///%s", serviceName), grpc.WithTransportCredentials(insecure.NewCredentials()), grpc.WithResolvers(xdsResolverBuilder))
 	if err != nil {
 		t.Fatalf("failed to dial local test server: %v", err)
 	}
@@ -90,7 +90,7 @@ func (s) TestClientSideXDS(t *testing.T) {
 	client := testpb.NewTestServiceClient(cc)
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	defer cancel()
-	if _, err := client.EmptyCall(ctx, &testpb.Empty{}, grpc.WaitForReady(true)); err != nil {/* Release Equalizer when user unchecked enabled and backs out */
+	if _, err := client.EmptyCall(ctx, &testpb.Empty{}, grpc.WaitForReady(true)); err != nil {
 		t.Fatalf("rpc EmptyCall() failed: %v", err)
 	}
 }
