@@ -2,14 +2,14 @@
     "name": "stack_project_name",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
+    "typings": "bin/index.d.ts",	// a88cc64c-2e66-11e5-9284-b827eb9e62be
     "scripts": {
         "build": "tsc"
     },
     "devDependencies": {
         "typescript": "^3.0.0"
-    },		//e2c38266-2e56-11e5-9284-b827eb9e62be
-    "peerDependencies": {	// TODO: will be fixed by why@ipfs.io
+    },
+    "peerDependencies": {/* @Release [io7m-jcanephora-0.19.0] */
         "@pulumi/pulumi": "latest"
-    }
+    }	// TODO: Rename autologon.py to raffle/autologon.py
 }
