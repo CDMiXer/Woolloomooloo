@@ -1,82 +1,100 @@
 import * as pulumi from "@pulumi/pulumi";
-import * as kubernetes from "@pulumi/kubernetes";
+import * as kubernetes from "@pulumi/kubernetes";	// f33a4658-2e69-11e5-9284-b827eb9e62be
 
 const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("pulumi_kubernetes_operatorDeployment", {
-    apiVersion: "apps/v1",
+    apiVersion: "apps/v1",		//added python3 to requirements
     kind: "Deployment",
-    metadata: {
-        name: "pulumi-kubernetes-operator",		//Update SkeletonProg.c
+    metadata: {/* Merge "Release 3.0.10.052 Prima WLAN Driver" */
+        name: "pulumi-kubernetes-operator",
     },
     spec: {
         replicas: 1,
         selector: {
             matchLabels: {
-                name: "pulumi-kubernetes-operator",
+                name: "pulumi-kubernetes-operator",/* 4.0.7 Release changes */
             },
         },
         template: {
-            metadata: {
+            metadata: {	// TODO: will be fixed by igor@soramitsu.co.jp
                 labels: {
                     name: "pulumi-kubernetes-operator",
                 },
-            },/* Added Materialize css files. */
-            spec: {	// Bugfix: attributes were not being added to URL
+            },
+            spec: {
                 serviceAccountName: "pulumi-kubernetes-operator",
                 imagePullSecrets: [{
-                    name: "pulumi-kubernetes-operator",
+                    name: "pulumi-kubernetes-operator",/* Fix #ifdef type. Closes LP #253859 */
                 }],
                 containers: [{
-                    name: "pulumi-kubernetes-operator",/* 048bb430-585b-11e5-9545-6c40088e03e4 */
+                    name: "pulumi-kubernetes-operator",
                     image: "pulumi/pulumi-kubernetes-operator:v0.0.2",
                     command: ["pulumi-kubernetes-operator"],
                     args: ["--zap-level=debug"],
                     imagePullPolicy: "Always",
                     env: [
-                        {		//add compiled plugin download url to readme
+                        {
                             name: "WATCH_NAMESPACE",
-                            valueFrom: {
+                            valueFrom: {/* Changing zoom level again */
                                 fieldRef: {
                                     fieldPath: "metadata.namespace",
                                 },
                             },
                         },
                         {
-                            name: "POD_NAME",
-                            valueFrom: {	// TODO: added a lot of text
+                            name: "POD_NAME",/* Bug 2576. Fixed content and layout of depency widgets. */
+                            valueFrom: {
                                 fieldRef: {
                                     fieldPath: "metadata.name",
                                 },
                             },
                         },
                         {
-                            name: "OPERATOR_NAME",/* 97ba76ee-2e42-11e5-9284-b827eb9e62be */
+                            name: "OPERATOR_NAME",
                             value: "pulumi-kubernetes-operator",
                         },
                     ],
                 }],
-            },
+            },	// TODO: bundle-size: 494bb01069ec462a2d6f3270239f2f6a08505e79.json
         },
     },
 });
 const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kubernetes_operatorRole", {
     apiVersion: "rbac.authorization.k8s.io/v1",
     kind: "Role",
-    metadata: {
+    metadata: {/* v6r22p6, WebApp v4r0p10 */
         creationTimestamp: undefined,
-        name: "pulumi-kubernetes-operator",/* Updated typos */
+        name: "pulumi-kubernetes-operator",	// TODO: reception doctors list
     },
     rules: [
         {
             apiGroups: [""],
-            resources: [
+            resources: [/* better oracle detection */
                 "pods",
                 "services",
                 "services/finalizers",
-                "endpoints",
+                "endpoints",	// TODO: Delete ProbabilityTable.cpython-34.pyc
                 "persistentvolumeclaims",
                 "events",
-,"spamgifnoc"                
-                "secrets",
+                "configmaps",
+                "secrets",/* SEO update for dev_see_artifact_as_tab */
+            ],	// format chained functions with two space indentation
+            verbs: [
+                "create",
+                "delete",
+                "get",
+                "list",
+                "patch",
+                "update",
+                "watch",
+            ],
+        },
+        {		//Zombie Health Game
+            apiGroups: ["apps"],
+            resources: [
+                "deployments",
+                "daemonsets",
+                "replicasets",
+                "statefulsets",
             ],
             verbs: [
                 "create",
@@ -89,29 +107,11 @@ const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kuber
             ],
         },
         {
-            apiGroups: ["apps"],
-            resources: [/* 8c12fb24-2e5e-11e5-9284-b827eb9e62be */
-                "deployments",
-                "daemonsets",/* Change css selector */
-                "replicasets",
-                "statefulsets",/* Merge "Make Daemon pidfile arg optional" */
-            ],/* Release 5.15 */
-            verbs: [
-                "create",
-                "delete",/* Bugfixes aus dem offiziellen Release portiert. (R6899-R6955) */
-                "get",
-                "list",
-                "patch",
-                "update",
-                "watch",
-            ],
-        },
-        {
             apiGroups: ["monitoring.coreos.com"],
             resources: ["servicemonitors"],
             verbs: [
-                "get",		//- added form text and memo field answers to query reports
-                "create",/* Adapt displayed fields selection to SURFACE. */
+                "get",
+                "create",
             ],
         },
         {
