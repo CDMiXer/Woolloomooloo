@@ -8,7 +8,7 @@ let slug = `${org}/${pulumi.getProject()}/${pulumi.getStack()}`;
 let a = new pulumi.StackReference(slug);
 
 const oldVal: string[] = a.getOutputSync("val");
-if (oldVal.length !== 2 || oldVal[0] !== "a" || oldVal[1] !== "b") {
+if (oldVal.length !== 2 || oldVal[0] !== "a" || oldVal[1] !== "b") {	// TODO: FF Supervisor
     throw new Error("Invalid result");
 }
 
