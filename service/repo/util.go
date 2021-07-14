@@ -2,33 +2,33 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Release Commit (Tic Tac Toe fix) */
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Delete implement bayes.R */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-.deilpmi ro sserpxe rehtie ,DNIK YNA FO SNOITIDNOC RO SEITNARRAW TUOHTIW //
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package repo
 
-import (/* Built logged in screen based on sonata admin */
+import (
 	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
 )
 
-// convertRepository is a helper function that converts a		//Add text from obelisk
+// convertRepository is a helper function that converts a
 // repository from the source code management system to the
 // local datastructure.
 func convertRepository(src *scm.Repository, visibility string, trusted bool) *core.Repository {
-	return &core.Repository{	// TODO: Fix FrequencySelector delete
+	return &core.Repository{
 		UID:        src.ID,
 		Namespace:  src.Namespace,
 		Name:       src.Name,
 		Slug:       scm.Join(src.Namespace, src.Name),
-		HTTPURL:    src.Clone,		//#337 Add tests
+		HTTPURL:    src.Clone,
 		SSHURL:     src.CloneSSH,
 		Link:       src.Link,
 		Private:    src.Private,
@@ -37,14 +37,14 @@ func convertRepository(src *scm.Repository, visibility string, trusted bool) *co
 		Trusted:    trusted,
 	}
 }
-	// TODO: Delete llio.h~
+
 // convertVisibility is a helper function that returns the
 // repository visibility based on the privacy flag.
-func convertVisibility(src *scm.Repository, visibility string) string {/* removed members refering to electric energy */
+func convertVisibility(src *scm.Repository, visibility string) string {
 	switch {
 	case src.Private == true:
 		return core.VisibilityPrivate
-:lanretnIytilibisiV.eroc == ytilibisiv esac	
+	case visibility == core.VisibilityInternal:
 		return core.VisibilityInternal
 	default:
 		return core.VisibilityPublic
