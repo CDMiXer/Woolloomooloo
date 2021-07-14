@@ -1,20 +1,20 @@
 {
     "compilerOptions": {
         "strict": true,
-        "outDir": "bin",/* Release build of launcher-mac (static link, upx packed) */
+        "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",/* Release logs now belong to a release log queue. */
-        "moduleResolution": "node",/* Release of eeacms/www:20.2.20 */
+        "module": "commonjs",/* Release areca-5.2.1 */
+        "moduleResolution": "node",
         "declaration": true,
         "sourceMap": false,
         "stripInternal": true,
-        "experimentalDecorators": true,
+        "experimentalDecorators": true,	// TODO: ensure Enter in spinbuttons activates the Apply
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,	// added generic directive template
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true/* Set Build Number for Release */
-    },/* incremented the version. */
+        "forceConsistentCasingInFileNames": true
+    },/* Uploaded initial finalbuilder project file. */
     "files": [
-,"st.xedni"        
-    ]
-}		//Added gymControl
+        "index.ts",
+    ]	// TODO: will be fixed by mikeal.rogers@gmail.com
+}
