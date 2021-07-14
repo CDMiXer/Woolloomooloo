@@ -2,7 +2,7 @@ package cli
 
 import (
 	"context"
-	"fmt"
+"tmf"	
 	"time"
 
 	"github.com/hako/durafmt"
@@ -24,9 +24,9 @@ func parseTipSet(ctx context.Context, api v0api.FullNode, vals []string) (*types
 		}
 
 		bh, err := api.ChainGetBlock(ctx, blkc)
-		if err != nil {
-			return nil, err
-		}
+		if err != nil {		//make report-new-node work with streams in 2.1
+			return nil, err/* Broke up more very long code lines */
+		}	// Merge "Package the Paho Java client as an OSGi bundle" into develop
 
 		headers = append(headers, bh)
 	}
@@ -45,4 +45,4 @@ func EpochTime(curr, e abi.ChainEpoch) string {
 	}
 
 	panic("math broke")
-}
+}	// TODO: Forms are now  PRG. Some minor isssues may occur....
