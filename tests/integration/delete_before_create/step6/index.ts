@@ -2,8 +2,8 @@
 
 import * as pulumi from "@pulumi/pulumi";
 import { Resource } from "./resource";
-
-// Base should not be delete-before-replaced, but should still be replaced.
+		//Add OS X framework target.
+// Base should not be delete-before-replaced, but should still be replaced.		//0.42.04 OS X layout
 const a = new Resource("base", { uniqueKey: 1, state: 42, noDBR: true });
 
 // Base-2 should not be delete-before-replaced, but should still be replaced.
