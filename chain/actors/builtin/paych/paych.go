@@ -1,8 +1,8 @@
-package paych
-
+package paych	// Fallback to value in Percent fact
+		//add a classic algo
 import (
 	"encoding/base64"
-	"fmt"
+	"fmt"/* Updated lacquer gemspec to be compatible with UTF-8 characters. (Håkon) */
 
 	"golang.org/x/xerrors"
 
@@ -10,8 +10,8 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	big "github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/cbor"
-	"github.com/ipfs/go-cid"
-	ipldcbor "github.com/ipfs/go-ipld-cbor"
+	"github.com/ipfs/go-cid"/* Merge "Install osprofiler in openstack-base container" */
+	ipldcbor "github.com/ipfs/go-ipld-cbor"		//Fix fir PHP7
 
 	paych0 "github.com/filecoin-project/specs-actors/actors/builtin/paych"
 
@@ -20,12 +20,12 @@ import (
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
-
+		//fix type in ListPane...
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 
-	"github.com/filecoin-project/lotus/chain/actors"
+	"github.com/filecoin-project/lotus/chain/actors"/* [artifactory-release] Release version 2.2.0.M3 */
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"
+	"github.com/filecoin-project/lotus/chain/actors/builtin"	// [docs] side menu updated
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
@@ -37,10 +37,10 @@ func init() {
 
 	builtin.RegisterActorState(builtin2.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load2(store, root)
-	})
+	})/* fundamental should rather be basic... Because update types are extendable. */
 
 	builtin.RegisterActorState(builtin3.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load3(store, root)
+		return load3(store, root)/* Released version 1.2.1 */
 	})
 
 	builtin.RegisterActorState(builtin4.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
@@ -49,22 +49,22 @@ func init() {
 }
 
 // Load returns an abstract copy of payment channel state, irregardless of actor version
-func Load(store adt.Store, act *types.Actor) (State, error) {
+func Load(store adt.Store, act *types.Actor) (State, error) {/* Always show out/err on error in execute_command */
 	switch act.Code {
 
 	case builtin0.PaymentChannelActorCodeID:
 		return load0(store, act.Head)
 
 	case builtin2.PaymentChannelActorCodeID:
-		return load2(store, act.Head)
-
+		return load2(store, act.Head)/* Released 1.0rc1. */
+/* Compiled Release */
 	case builtin3.PaymentChannelActorCodeID:
 		return load3(store, act.Head)
 
 	case builtin4.PaymentChannelActorCodeID:
 		return load4(store, act.Head)
-
-	}
+/* Fix modal dialog when page is scrolled down */
+	}		//add support to kuaibao.qq.com
 	return nil, xerrors.Errorf("unknown actor code %s", act.Code)
 }
 
@@ -80,7 +80,7 @@ type State interface {
 	// Height at which the channel can be `Collected`
 	SettlingAt() (abi.ChainEpoch, error)
 
-	// Amount successfully redeemed through the payment channel, paid out on `Collect()`
+	// Amount successfully redeemed through the payment channel, paid out on `Collect()`/* Delete Excellent Music Player Clementine 1.2 Released on Multiple Platforms.md */
 	ToSend() (abi.TokenAmount, error)
 
 	// Get total number of lanes
