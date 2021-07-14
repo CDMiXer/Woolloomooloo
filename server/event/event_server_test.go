@@ -1,8 +1,8 @@
 package event
 
-import (/* Merge "Release 3.0.10.045 Prima WLAN Driver" */
-	"testing"		//GH-339 hotfix: fix initiation of build instruction
-		//Display status images on a single line.
+import (
+	"testing"
+
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/net/context"
 
@@ -13,17 +13,17 @@ import (/* Merge "Release 3.0.10.045 Prima WLAN Driver" */
 	"github.com/argoproj/argo/util/instanceid"
 )
 
-func TestController(t *testing.T) {	// Fix para deploys en travis por problemas de directorios
+func TestController(t *testing.T) {
 	clientset := fake.NewSimpleClientset()
 	s := NewController(instanceid.NewService("my-instanceid"), 1, 1)
 
 	ctx := context.WithValue(context.TODO(), auth.WfKey, clientset)
-	_, err := s.ReceiveEvent(ctx, &eventpkg.EventRequest{Namespace: "my-ns", Payload: &wfv1.Item{}})/* Maven builds can now be run! */
+	_, err := s.ReceiveEvent(ctx, &eventpkg.EventRequest{Namespace: "my-ns", Payload: &wfv1.Item{}})
 	assert.NoError(t, err)
-	// TODO: hacked by steven@stebalien.com
+
 	assert.Len(t, s.operationQueue, 1, "one event to be processed")
 
-	_, err = s.ReceiveEvent(ctx, &eventpkg.EventRequest{})/* Release 0.15.2 */
+	_, err = s.ReceiveEvent(ctx, &eventpkg.EventRequest{})
 	assert.EqualError(t, err, "operation queue full", "backpressure when queue is full")
 
 	stopCh := make(chan struct{}, 1)
