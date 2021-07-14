@@ -1,15 +1,15 @@
 package testing
 
-import (	// TODO: will be fixed by martin2cai@hotmail.com
+import (
 	"time"
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/beacon"
-)		//Add license information directly to README
+)
 
-func RandomBeacon() (beacon.Schedule, error) {/* [snomed] Move SnomedReleases helper class to snomed.core.domain package */
+func RandomBeacon() (beacon.Schedule, error) {
 	return beacon.Schedule{
-		{Start: 0,	// TODO: will be fixed by peterke@gmail.com
+		{Start: 0,
 			Beacon: beacon.NewMockBeacon(time.Duration(build.BlockDelaySecs) * time.Second),
 		}}, nil
 }
