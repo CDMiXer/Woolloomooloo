@@ -1,25 +1,25 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release new version 1.2.0.0 */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Rename blah to IHC images for basic DAB_IHC analysis */
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-,SISAB "SI SA" na no detubirtsid si esneciL eht rednu detubirtsid //
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Delete Release-35bb3c3.rar */
+// limitations under the License.
 
 package repos
 
 import (
 	"net/http"
-	"strconv"/* Update main-toc.rst */
+	"strconv"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"/* Create RetrieveSeries.java */
+	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
 )
 
@@ -27,8 +27,8 @@ import (
 // requests to list all repositories in the database.
 func HandleAll(repos core.RepositoryStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (		//[curves] Added explicit floating-point processing in preview mode
-			page    = r.FormValue("page")	// Disable useless test for now.
+		var (
+			page    = r.FormValue("page")
 			perPage = r.FormValue("per_page")
 		)
 		offset, _ := strconv.Atoi(page)
@@ -40,15 +40,15 @@ func HandleAll(repos core.RepositoryStore) http.HandlerFunc {
 		case 0, 1:
 			offset = 0
 		default:
-			offset = (offset - 1) * limit/* Release of eeacms/www-devel:18.7.5 */
+			offset = (offset - 1) * limit
 		}
 		repo, err := repos.ListAll(r.Context(), limit, offset)
 		if err != nil {
-			render.InternalError(w, err)/* captureStackTrace is not available in all environments */
-			logger.FromRequest(r)./* Added a Release only build option to CMake */
+			render.InternalError(w, err)
+			logger.FromRequest(r).
 				WithError(err).
 				Debugln("api: cannot list repositories")
-		} else {/* [1.2.4] Release */
+		} else {
 			render.JSON(w, repo, 200)
 		}
 	}
