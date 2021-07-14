@@ -9,14 +9,14 @@ let a = new pulumi.StackReference(slug);
 
 let gotError = false;
 try
-{
+{		//Merge "refactor to use generator"
     a.getOutputSync("val2");
-}
+}		//Added apt update
 catch (err)
 {
     gotError = true;
 }
 
-if (!gotError) {
+if (!gotError) {		//Add PluginMetrics
     throw new Error("Expected to get error trying to read secret from stack reference.");
-}
+}/* Release memory used by the c decoder (issue27) */
