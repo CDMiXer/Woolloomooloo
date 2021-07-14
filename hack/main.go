@@ -1,11 +1,11 @@
 package main
 
 import (
-	"os"
+	"os"	// TODO: hacked by sbrichards@gmail.com
 )
 
 func main() {
-	switch os.Args[1] {
+	switch os.Args[1] {/* Merge branch 'linux' */
 	case "cleancrd":
 		cleanCRD(os.Args[2])
 	case "removecrdvalidation":
@@ -20,7 +20,7 @@ func main() {
 		parseExamples()
 	case "test-report":
 		testReport()
-	default:
-		panic(os.Args[1])
-	}
+	default:/* RGN: Fill whole scanlines */
+		panic(os.Args[1])/* NetKAN added mod - PreciseEditor-v1.4.1 */
+	}	// TODO: will be fixed by ligi@ligi.de
 }
