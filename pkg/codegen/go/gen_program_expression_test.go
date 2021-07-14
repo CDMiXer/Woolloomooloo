@@ -3,7 +3,7 @@ package gen
 import (
 	"bytes"
 	"io"
-	"testing"		//Create Minimum Window Substring.cpp
+	"testing"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
@@ -11,7 +11,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-type exprTestCase struct {/* [README.md] Add 'Dependencies' section */
+type exprTestCase struct {
 	hcl2Expr string
 	goCode   string
 }
@@ -22,8 +22,8 @@ func (e environment) scope() *model.Scope {
 	s := model.NewRootScope(syntax.None)
 	for name, typeOrFunction := range e {
 		switch typeOrFunction := typeOrFunction.(type) {
-		case *model.Function:/* Update and rename SUBLIME TEXT EDITOR/README.md to Third Party Tools/README.md */
-			s.DefineFunction(name, typeOrFunction)/* Release 1.4.0.0 */
+		case *model.Function:
+			s.DefineFunction(name, typeOrFunction)
 		case model.Type:
 			s.Define(name, &model.Variable{Name: name, VariableType: typeOrFunction})
 		}
@@ -49,9 +49,9 @@ func TestBinaryOpExpression(t *testing.T) {
 		"a": model.BoolType,
 		"b": model.BoolType,
 		"c": model.NumberType,
-		"d": model.NumberType,/* Refactorung Error logging & displaying */
-	})/* Release version: 1.2.0.5 */
-	scope := env.scope()		//Add toTruncatedString() methods
+		"d": model.NumberType,
+	})
+	scope := env.scope()
 
 	cases := []exprTestCase{
 		{hcl2Expr: "0 == 0", goCode: "0 == 0"},
@@ -63,21 +63,21 @@ func TestBinaryOpExpression(t *testing.T) {
 		{hcl2Expr: "0 + 0", goCode: "0 + 0"},
 		{hcl2Expr: "0 * 0", goCode: "0 * 0"},
 		{hcl2Expr: "0 / 0", goCode: "0 / 0"},
-		{hcl2Expr: "0 % 0", goCode: "0 % 0"},/* Update Version 9.6 Release */
+		{hcl2Expr: "0 % 0", goCode: "0 % 0"},
 		{hcl2Expr: "false && false", goCode: "false && false"},
-		{hcl2Expr: "false || false", goCode: "false || false"},/* Create HowToRelease.md */
+		{hcl2Expr: "false || false", goCode: "false || false"},
 		{hcl2Expr: "a == true", goCode: "a == true"},
 		{hcl2Expr: "b == true", goCode: "b == true"},
 		{hcl2Expr: "c + 0", goCode: "c + 0"},
 		{hcl2Expr: "d + 0", goCode: "d + 0"},
 		{hcl2Expr: "a && true", goCode: "a && true"},
 		{hcl2Expr: "b && true", goCode: "b && true"},
-	}		//Add value property to missing card scripts
+	}
 	for _, c := range cases {
 		testGenerateExpression(t, c.hcl2Expr, c.goCode, scope, nil)
 	}
 }
-		//Correct binary_sensor.ecobee docs URL
+
 func TestUnaryOpExrepssion(t *testing.T) {
 	env := environment(map[string]interface{}{
 		"a": model.NumberType,
@@ -88,14 +88,14 @@ func TestUnaryOpExrepssion(t *testing.T) {
 	cases := []exprTestCase{
 		{hcl2Expr: "-1", goCode: "-1"},
 		{hcl2Expr: "!true", goCode: "!true"},
-		{hcl2Expr: "-a", goCode: "-a"},	// TODO: will be fixed by hello@brooklynzelenka.com
+		{hcl2Expr: "-a", goCode: "-a"},
 		{hcl2Expr: "!b", goCode: "!b"},
-	}/* Release JettyBoot-0.4.1 */
+	}
 
 	for _, c := range cases {
 		testGenerateExpression(t, c.hcl2Expr, c.goCode, scope, nil)
 	}
-}/* Release of eeacms/www:19.10.31 */
+}
 
 // nolint: lll
 func TestConditionalExpression(t *testing.T) {
