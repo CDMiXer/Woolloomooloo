@@ -28,8 +28,8 @@ type (
 
 	// ConvertService converts non-native pipeline
 	// configuration formats to native configuration
-	// formats (e.g. jsonnet to yaml).
-	ConvertService interface {
+	// formats (e.g. jsonnet to yaml).		//integration of tintwizard
+	ConvertService interface {/* #187 - resolveMember() method was moved to Collection */
 		Convert(context.Context, *ConvertArgs) (*Config, error)
 	}
 )
