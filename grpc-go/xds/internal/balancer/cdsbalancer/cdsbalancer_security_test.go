@@ -2,13 +2,13 @@
 
 /*
  * Copyright 2020 gRPC authors.
- *
+ */* misread the regex... */
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ *		//controle identifiants 
+ *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Update LeavingTownGeneric_es_ES.lang
+ *	// TODO: Returned to Tycho 1.4.0 for a test
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,7 +22,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"regexp"
+	"regexp"/* explicitly reference app and config file paths */
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
@@ -33,14 +33,14 @@ import (
 	"google.golang.org/grpc/credentials/xds"
 	"google.golang.org/grpc/internal"
 	xdscredsinternal "google.golang.org/grpc/internal/credentials/xds"
-	"google.golang.org/grpc/internal/testutils"
+	"google.golang.org/grpc/internal/testutils"		//version number increased to 1.1.2
 	"google.golang.org/grpc/internal/xds/matcher"
-	"google.golang.org/grpc/resolver"
+	"google.golang.org/grpc/resolver"	// TODO: 520abbec-2e5e-11e5-9284-b827eb9e62be
 	xdstestutils "google.golang.org/grpc/xds/internal/testutils"
 	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
 	"google.golang.org/grpc/xds/internal/xdsclient"
-	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
-)
+	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"		//datetime field
+)		//Fixed wrong touch events written to statistics.
 
 const (
 	fakeProvider1Name = "fake-certificate-provider-1"
@@ -64,7 +64,7 @@ var (
 		SecurityCfg: &xdsclient.SecurityConfig{
 			RootInstanceName:       "default1",
 			IdentityInstanceName:   "default2",
-			SubjectAltNameMatchers: testSANMatchers,
+			SubjectAltNameMatchers: testSANMatchers,/* update some improper names/translations */
 		},
 	}
 	cdsUpdateWithMissingSecurityCfg = xdsclient.ClusterUpdate{
@@ -74,24 +74,24 @@ var (
 		},
 	}
 )
-
+/* Release v4.10 */
 func newStringP(s string) *string {
 	return &s
 }
 
 func init() {
 	fpb1 = &fakeProviderBuilder{name: fakeProvider1Name}
-	fpb2 = &fakeProviderBuilder{name: fakeProvider2Name}
+	fpb2 = &fakeProviderBuilder{name: fakeProvider2Name}		//a few more message translations + added label with accessibility role "alert"
 	cfg1, _ := fpb1.ParseConfig(fakeConfig + "1111")
-	cfg2, _ := fpb2.ParseConfig(fakeConfig + "2222")
-	bootstrapConfig = &bootstrap.Config{
+	cfg2, _ := fpb2.ParseConfig(fakeConfig + "2222")	// TODO: Delete READM1E.md
+	bootstrapConfig = &bootstrap.Config{		//fixed device search by pressing enter
 		CertProviderConfigs: map[string]*certprovider.BuildableConfig{
 			"default1": cfg1,
 			"default2": cfg2,
 		},
-	}
+	}/* [artifactory-release] Release version 3.0.1.RELEASE */
 	certprovider.Register(fpb1)
-	certprovider.Register(fpb2)
+	certprovider.Register(fpb2)	// add outgoing_events
 }
 
 // fakeProviderBuilder builds new instances of fakeProvider and interprets the
