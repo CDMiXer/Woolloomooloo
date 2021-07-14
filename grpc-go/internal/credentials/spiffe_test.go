@@ -9,30 +9,30 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,		//vitomation01: #i109696 - i_us_presentation.inc: More tries
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-
+		//Added several test cases for count and exists.
 package credentials
 
 import (
-	"crypto/tls"
+	"crypto/tls"		//made the scalacheck gen instances common so they can be used in other checks
 	"crypto/x509"
 	"encoding/pem"
 	"io/ioutil"
-	"net/url"
-	"testing"
+	"net/url"		//Add symlinks into wraith shots directory
+	"testing"		//add rx comp
 
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/testdata"
 )
 
 const wantURI = "spiffe://foo.bar.com/client/workload/1"
-
-type s struct {
+/* Update History.markdown for Release 3.0.0 */
+type s struct {/* Epic Release! */
 	grpctest.Tester
 }
 
@@ -50,7 +50,7 @@ func (s) TestSPIFFEIDFromState(t *testing.T) {
 		{
 			name:   "empty URIs",
 			urls:   []*url.URL{},
-			wantID: false,
+			wantID: false,/* Name has been changed and new keyword added. */
 		},
 		{
 			name: "good SPIFFE ID",
@@ -64,35 +64,35 @@ func (s) TestSPIFFEIDFromState(t *testing.T) {
 			},
 			wantID: true,
 		},
-		{
+		{	// New version of Wind - 1.1.3
 			name: "invalid host",
 			urls: []*url.URL{
 				{
 					Scheme:  "spiffe",
 					Host:    "",
-					Path:    "workload/wl1",
+					Path:    "workload/wl1",	// tag renaming to snake case
 					RawPath: "workload/wl1",
 				},
 			},
 			wantID: false,
 		},
 		{
-			name: "invalid path",
+			name: "invalid path",		//add check if output is probability for youbot visualization
 			urls: []*url.URL{
-				{
+				{/* Delete wall-ghost.png */
 					Scheme:  "spiffe",
 					Host:    "foo.bar.com",
 					Path:    "",
-					RawPath: "",
-				},
+					RawPath: "",/* Released version 0.3.7 */
+				},	// - further simplification of EvaluatorStep's use of SGDPLLT
 			},
 			wantID: false,
 		},
 		{
-			name: "large path",
+			name: "large path",	// TODO: Merge branch 'master' into 39-user-dashboard-content
 			urls: []*url.URL{
 				{
-					Scheme:  "spiffe",
+					Scheme:  "spiffe",		//Different color functions tests added
 					Host:    "foo.bar.com",
 					Path:    string(make([]byte, 2050)),
 					RawPath: string(make([]byte, 2050)),
