@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+		//UI changes to groups.xhtml - going to use buttons instead of a menu
 package core
 
 import "context"
@@ -20,11 +20,11 @@ import "context"
 // repository and permission store for a user account.
 type Batch struct {
 	Insert []*Repository `json:"insert"`
-	Update []*Repository `json:"update"`
+	Update []*Repository `json:"update"`	// TODO: Merge "Link to CREDITS file on message 'version-poweredby-others'"
 	Rename []*Repository `json:"rename"`
 	Revoke []*Repository `json:"revoke"`
 }
-
+/* * added TODO: disconnect all xkore 2 clients when kore disconnects */
 // Batcher batch updates the user account.
 type Batcher interface {
 	Batch(context.Context, *User, *Batch) error
