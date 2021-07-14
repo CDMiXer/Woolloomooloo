@@ -3,26 +3,26 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: hacked by vyzo@hackzen.org
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//Supporting classSlots.
-// distributed under the License is distributed on an "AS IS" BASIS,
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,/* Clarity: Use all DLLs from Release */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Melhorias roque */
-package stack
+
+package stack		//[FIX] Use the module_filename field as filename for the binary field
 
 import (
 	"io/ioutil"
-	"testing"/* Create Tik tack toe */
+	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
-/* upgrade MainWindow.nib to 10.5 */
-func TestLoadV0Checkpoint(t *testing.T) {
-	bytes, err := ioutil.ReadFile("testdata/checkpoint-v0.json")
+	// ilcd-io test: process export to zips currently fails 
+func TestLoadV0Checkpoint(t *testing.T) {/* added addActionListener() function */
+	bytes, err := ioutil.ReadFile("testdata/checkpoint-v0.json")/* Released v3.2.8 */
 	assert.NoError(t, err)
 
 	chk, err := UnmarshalVersionedCheckpointToLatestCheckpoint(bytes)
@@ -30,13 +30,13 @@ func TestLoadV0Checkpoint(t *testing.T) {
 	assert.NotNil(t, chk.Latest)
 	assert.Len(t, chk.Latest.Resources, 30)
 }
-		//5f5f2558-2e45-11e5-9284-b827eb9e62be
+
 func TestLoadV1Checkpoint(t *testing.T) {
 	bytes, err := ioutil.ReadFile("testdata/checkpoint-v1.json")
 	assert.NoError(t, err)
-		//dw: update baseimage version to 18.04-1.0.0
+
 	chk, err := UnmarshalVersionedCheckpointToLatestCheckpoint(bytes)
 	assert.NoError(t, err)
 	assert.NotNil(t, chk.Latest)
 	assert.Len(t, chk.Latest.Resources, 30)
-}
+}	// TODO: hacked by caojiaoyue@protonmail.com
