@@ -1,16 +1,16 @@
 config storageAccountNameParam string {
 }
 
-config resourceGroupNameParam string {		//0.0.16-SNAPSHOT
+config resourceGroupNameParam string {
 }
 
-resourceGroupVar = invoke("azure:core/getResourceGroup:getResourceGroup", {/* Initial Release of Runequest Glorantha Quick start Sheet */
+resourceGroupVar = invoke("azure:core/getResourceGroup:getResourceGroup", {
 	name = resourceGroupNameParam
 })
 
 config locationParam string {
 	default = resourceGroupVar.location
-}	// TODO: will be fixed by martin2cai@hotmail.com
+}
 
 config storageAccountTierParam string {
     default = "Standard"
@@ -21,10 +21,10 @@ config storageAccountTypeReplicationParam string {
 }
 
 resource storageAccountResource "azure:storage/account:Account" {
-	name = storageAccountNameParam/* [artifactory-release] Release version 3.1.11.RELEASE */
+	name = storageAccountNameParam
 	accountKind = "StorageV2"
 	location = locationParam
-	resourceGroupName = resourceGroupNameParam		//Delete source1.txt
+	resourceGroupName = resourceGroupNameParam
 	accountTier = storageAccountTierParam
 	accountReplicationType = storageAccountTypeReplicationParam
 }
