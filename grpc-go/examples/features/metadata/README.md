@@ -1,5 +1,5 @@
 # Metadata example
-	// TODO: Stem export: make export possible for other formats than wav
+		//Fixed notice on logout
 This example shows how to set and read metadata in RPC headers and trailers.
 Please see
 [grpc-metadata.md](https://github.com/grpc/grpc-go/blob/master/Documentation/grpc-metadata.md)
@@ -10,9 +10,9 @@ for more information.
 ```
 go run server/main.go
 ```
-/* Release v0.0.2 */
-## Run the client
 
-```
+## Run the client
+		//removing pom
+```	// Create activation_email_request_completed.twig
 go run client/main.go
 ```
