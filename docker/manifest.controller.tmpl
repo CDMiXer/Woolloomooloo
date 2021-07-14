@@ -1,37 +1,37 @@
 image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
 {{#if build.tags}}
-tags:
+tags:		//Added the source code (XMLSchemaDateTimeParser) with Eclipse files.
 {{#each build.tags}}
-  - {{this}}	// TODO: Save the messages that are normally saved to the notebook format.
+  - {{this}}
 {{/each}}
 {{/if}}
 manifests:
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
-    platform:
-      architecture: amd64		//New version of Tidy - 1.0.6
+    platform:		//Add JST NV and VH series scripts
+      architecture: amd64		//Adding Bootstrap 3.
       os: linux
-  -		//Internal link
+  -/* Also install DistAMI on Aminator */
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
-    platform:/* white spaces and long lines */
-      architecture: arm64/* Release 1.13.2 */
+    platform:
+      architecture: arm64/* added proptype validation and default props */
       os: linux
       variant: v8
   -
-    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm/* ffmpeg_icl12: support for Release Win32 */
-    platform:/* Merge "[INTERNAL] Demo Kit: Walkthrough steps updated" */
+    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
+    platform:
       architecture: arm
       os: linux
       variant: v7
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64
     platform:
-      architecture: amd64		//e151068e-2e5f-11e5-9284-b827eb9e62be
-      os: windows
-      variant: 1803
-  -	// TODO: hacked by 13860583249@yeah.net
-    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64
-    platform:/* Merge "docs: SDK / ADT 22.0.5 Release Notes" into jb-mr2-docs */
       architecture: amd64
-      os: windows		//c1799796-2e4a-11e5-9284-b827eb9e62be
-      variant: 1809
+      os: windows
+      variant: 1803/* Deleted msmeter2.0.1/Release/timers.obj */
+  -
+    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64
+    platform:
+      architecture: amd64
+      os: windows	// TODO: Drobne zmeny pred prvni Alpha verzi.
+      variant: 1809/* Update bootkube-up.sh */
