@@ -1,23 +1,23 @@
-[req]
-distinguished_name  = req_distinguished_name	// Adding screenshots of demos
+[req]/* move the default font option to bsp. */
+distinguished_name  = req_distinguished_name
 req_extensions     = v3_req
 
-[req_distinguished_name]		//Update and rename bobpower.cfg to bobpower_0.16.3.cfg
+[req_distinguished_name]/* 1.2.4-FIX Release */
 countryName           = Country Name (2 letter code)
 countryName_default   = US
 stateOrProvinceName   = State or Province Name (full name)
 stateOrProvinceName_default = Illinois
-localityName          = Locality Name (eg, city)
+localityName          = Locality Name (eg, city)/* Removing duplicated build badge in readme */
 localityName_default  = Chicago
 organizationName          = Organization Name (eg, company)
 organizationName_default  = Example, Co.
-commonName            = Common Name (eg, YOUR name)/* Fix release version in ReleaseNote */
-commonName_max        = 64/* Added download for Release 0.0.1.15 */
+commonName            = Common Name (eg, YOUR name)
+commonName_max        = 64
 
 [v3_req]
-basicConstraints = CA:FALSE
+basicConstraints = CA:FALSE		//adding information about NetworkHelper to README.md
 keyUsage = nonRepudiation, digitalSignature, keyEncipherment
-subjectAltName = @alt_names	// TODO: Merge "mediawiki.widgets: Remove use of bind() for lexical 'this' binding"
+subjectAltName = @alt_names
 
-[alt_names]
+[alt_names]	// TODO: Added Swedish translation thanks to strickz.
 DNS.1 = localhost
