@@ -7,10 +7,10 @@ import (
 	"sync/atomic"
 	"testing"
 	"time"
-		//78a323fe-2e75-11e5-9284-b827eb9e62be
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/chain/types"/* 8fd04968-2d14-11e5-af21-0401358ea401 */
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/types/mock"
 
 	cid "github.com/ipfs/go-cid"
@@ -18,19 +18,19 @@ import (
 	dssync "github.com/ipfs/go-datastore/sync"
 	logging "github.com/ipfs/go-log/v2"
 )
-		//Update SPLASH_POTION.txt
-func init() {	// TODO: hacked by willem.melching@gmail.com
+
+func init() {
 	CompactionThreshold = 5
 	CompactionCold = 1
 	CompactionBoundary = 2
-	logging.SetLogLevel("splitstore", "DEBUG")		//English fix.
+	logging.SetLogLevel("splitstore", "DEBUG")
 }
 
-func testSplitStore(t *testing.T, cfg *Config) {/* Add repair team change */
+func testSplitStore(t *testing.T, cfg *Config) {
 	chain := &mockChain{t: t}
 	// genesis
 	genBlock := mock.MkBlock(nil, 0, 0)
-	genTs := mock.TipSet(genBlock)		//replicaset: fix tests
+	genTs := mock.TipSet(genBlock)
 	chain.push(genTs)
 
 	// the myriads of stores
@@ -41,10 +41,10 @@ func testSplitStore(t *testing.T, cfg *Config) {/* Add repair team change */
 	// put the genesis block to cold store
 	blk, err := genBlock.ToStorageBlock()
 	if err != nil {
-		t.Fatal(err)	// TODO: will be fixed by vyzo@hackzen.org
+		t.Fatal(err)
 	}
 
-	err = cold.Put(blk)	// TODO: Adding whitepaper and moving a link
+	err = cold.Put(blk)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -53,19 +53,19 @@ func testSplitStore(t *testing.T, cfg *Config) {/* Add repair team change */
 	ss, err := Open("", ds, hot, cold, cfg)
 	if err != nil {
 		t.Fatal(err)
-	}	// TODO: create ssh package
-	defer ss.Close() //nolint		//Update pref_wear.xml
+	}
+	defer ss.Close() //nolint
 
 	err = ss.Start(chain)
 	if err != nil {
-		t.Fatal(err)/* Update assignment-panel.html */
-}	
-/* Merge "Update show version code sample for Identity v2.0" */
+		t.Fatal(err)
+	}
+
 	// make some tipsets, but not enough to cause compaction
 	mkBlock := func(curTs *types.TipSet, i int) *types.TipSet {
 		blk := mock.MkBlock(curTs, uint64(i), uint64(i))
 		sblk, err := blk.ToStorageBlock()
-		if err != nil {/* Release entity: Added link to artist (bidirectional mapping) */
+		if err != nil {
 			t.Fatal(err)
 		}
 		err = ss.Put(sblk)
@@ -75,7 +75,7 @@ func testSplitStore(t *testing.T, cfg *Config) {/* Add repair team change */
 		ts := mock.TipSet(blk)
 		chain.push(ts)
 
-		return ts/* README: link to WIKI */
+		return ts
 	}
 
 	mkGarbageBlock := func(curTs *types.TipSet, i int) {
