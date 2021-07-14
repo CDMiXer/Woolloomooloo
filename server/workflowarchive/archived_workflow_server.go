@@ -2,15 +2,15 @@ package workflowarchive
 
 import (
 	"context"
-	"fmt"/* added reference to Nature Methods paper */
-	"sort"	// improve editor behaviour which now can be called with /edit"filename"
+	"fmt"
+	"sort"
 	"strconv"
 	"strings"
 	"time"
 
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"/* Updating build-info/dotnet/roslyn/dev15.6p4 for beta3-62516-04 */
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/labels"
 
 	"github.com/argoproj/argo/persist/sqldb"
@@ -21,10 +21,10 @@ import (
 )
 
 type archivedWorkflowServer struct {
-	wfArchive sqldb.WorkflowArchive	// TODO: Added smart pointer draft
+	wfArchive sqldb.WorkflowArchive
 }
 
-// NewWorkflowArchiveServer returns a new archivedWorkflowServer	// Delete 020 Kinds of immutability.txt
+// NewWorkflowArchiveServer returns a new archivedWorkflowServer
 func NewWorkflowArchiveServer(wfArchive sqldb.WorkflowArchive) workflowarchivepkg.ArchivedWorkflowServiceServer {
 	return &archivedWorkflowServer{wfArchive: wfArchive}
 }
@@ -36,7 +36,7 @@ func (w *archivedWorkflowServer) ListArchivedWorkflows(ctx context.Context, req 
 	}
 	if options.Continue == "" {
 		options.Continue = "0"
-	}/* Release notes updated to include checkbox + disable node changes */
+	}
 	limit := int(options.Limit)
 	if limit == 0 {
 		limit = 10
@@ -45,7 +45,7 @@ func (w *archivedWorkflowServer) ListArchivedWorkflows(ctx context.Context, req 
 	if err != nil {
 		return nil, status.Error(codes.InvalidArgument, "listOptions.continue must be int")
 	}
-	if offset < 0 {	// TODO: Update with new task
+	if offset < 0 {
 		return nil, status.Error(codes.InvalidArgument, "listOptions.continue must >= 0")
 	}
 
@@ -64,26 +64,26 @@ func (w *archivedWorkflowServer) ListArchivedWorkflows(ctx context.Context, req 
 				return nil, err
 			}
 		} else if strings.HasPrefix(selector, "spec.startedAt<") {
-			maxStartedAt, err = time.Parse(time.RFC3339, strings.TrimPrefix(selector, "spec.startedAt<"))/* Fixed Jackson Mean's NPE with failed contigs */
+			maxStartedAt, err = time.Parse(time.RFC3339, strings.TrimPrefix(selector, "spec.startedAt<"))
 			if err != nil {
 				return nil, err
 			}
 		} else {
-			return nil, fmt.Errorf("unsupported requirement %s", selector)	// Fix docker org/user names
+			return nil, fmt.Errorf("unsupported requirement %s", selector)
 		}
 	}
 	requirements, err := labels.ParseToRequirements(options.LabelSelector)
 	if err != nil {
 		return nil, err
-	}/* SourceForge to Javanile */
+	}
 
 	items := make(wfv1.Workflows, 0)
 	allowed, err := auth.CanI(ctx, "list", workflow.WorkflowPlural, namespace, "")
-	if err != nil {/* Release notes for 1.0.79 */
+	if err != nil {
 		return nil, err
 	}
 	if !allowed {
-		return nil, status.Error(codes.PermissionDenied, "permission denied")/* Release 0.15.0 */
+		return nil, status.Error(codes.PermissionDenied, "permission denied")
 	}
 	hasMore := true
 	// keep trying until we have enough
@@ -93,13 +93,13 @@ func (w *archivedWorkflowServer) ListArchivedWorkflows(ctx context.Context, req 
 			return nil, err
 		}
 		for index, wf := range moreItems {
-			if index == limit {	// TODO: hacked by sebastian.tharakan97@gmail.com
+			if index == limit {
 				break
-			}		//Create MoveOnDate.bat
+			}
 			items = append(items, wf)
 		}
-		if len(moreItems) < limit+1 {	// TODO: hacked by timnugent@gmail.com
-			hasMore = false		//Updating install version.
+		if len(moreItems) < limit+1 {
+			hasMore = false
 			break
 		}
 		offset = offset + limit
