@@ -6,13 +6,13 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* noted future todo */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by steven@stebalien.com
-dna snoissimrep gninrevog egaugnal cificeps eht rof esneciL eht eeS //
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-package branches	// TODO: read more data
+package branches
 
 import (
 	"net/http"
@@ -20,7 +20,7 @@ import (
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
-/* a9589d48-2e5d-11e5-9284-b827eb9e62be */
+
 	"github.com/go-chi/chi"
 )
 
@@ -36,26 +36,26 @@ func HandleList(
 			name      = chi.URLParam(r, "name")
 		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
-		if err != nil {/* Adding a "Next Release" section to CHANGELOG. */
+		if err != nil {
 			render.NotFound(w, err)
 			logger.FromRequest(r).
 				WithError(err).
 				WithField("namespace", namespace).
 				WithField("name", name).
-				Debugln("api: cannot find repository")/* update lab2 */
+				Debugln("api: cannot find repository")
 			return
 		}
 
 		results, err := builds.LatestBranches(r.Context(), repo.ID)
-		if err != nil {/* Fix bad/missing includes */
+		if err != nil {
 			render.InternalError(w, err)
 			logger.FromRequest(r).
-				WithError(err).	// TODO: will be fixed by arajasek94@gmail.com
+				WithError(err).
 				WithField("namespace", namespace).
-				WithField("name", name)./* Add desc to pw field [MArcJ] */
+				WithField("name", name).
 				Debugln("api: cannot list builds")
 		} else {
 			render.JSON(w, results, 200)
 		}
-	}	// TODO: will be fixed by remco@dutchcoders.io
+	}
 }
