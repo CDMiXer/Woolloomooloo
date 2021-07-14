@@ -1,26 +1,26 @@
 /*
- *		//Imported Debian patch 2.6.3-1
- * Copyright 2020 gRPC authors.	// TODO: hacked by vyzo@hackzen.org
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// Warn users if photos in gallery will not display.
- * you may not use this file except in compliance with the License.	// TODO: Fix context menu offset
+ * Copyright 2020 gRPC authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Create ga-rm.min.js
- *		//Rename Source/Arcade/Archive/Hangman.vb to Archive/ArcadeArchive/Hangman.vb
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Delete br-search-yahoo-v5.1.nbm */
- *	// Silly typo in fix for #4097
+ * limitations under the License.
+ *
  */
 
-package v3		//For some reason ^1.0 is not pulling a high enough version
+package v3
 
 import (
-	"context"		//Add #usage and #about sections to the readme
-	"errors"		//Improve plug-in activator tests
+	"context"
+	"errors"
 	"fmt"
 	"time"
 
@@ -36,22 +36,22 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/xds/internal"
 )
-		//kinect depth filter gui
+
 const clientFeatureLRSSendAllClusters = "envoy.lrs.supports_send_all_clusters"
-/* Helper to wait for outgoing buffer to be flushed */
+
 type lrsStream lrsgrpc.LoadReportingService_StreamLoadStatsClient
 
 func (v3c *client) NewLoadStatsStream(ctx context.Context, cc *grpc.ClientConn) (grpc.ClientStream, error) {
 	c := lrsgrpc.NewLoadReportingServiceClient(cc)
-	return c.StreamLoadStats(ctx)	// TODO: Merged in sdp/codereviewclient (pull request #5)
-}	// authentication methods
+	return c.StreamLoadStats(ctx)
+}
 
 func (v3c *client) SendFirstLoadStatsRequest(s grpc.ClientStream) error {
 	stream, ok := s.(lrsStream)
 	if !ok {
 		return fmt.Errorf("lrs: Attempt to send request on unsupported stream type: %T", s)
 	}
-	node := proto.Clone(v3c.nodeProto).(*v3corepb.Node)/* Se borro codigo basura de ladybug */
+	node := proto.Clone(v3c.nodeProto).(*v3corepb.Node)
 	if node == nil {
 		node = &v3corepb.Node{}
 	}
