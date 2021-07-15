@@ -2,26 +2,26 @@ package cli
 
 import (
 	"context"
-	"fmt"
-	"testing"
+	"fmt"	// TODO: hacked by cory@protocol.ai
+	"testing"/* Release v4.1.2 */
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/big"/* Release preparation... again */
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/lotus/api"
 	mocks "github.com/filecoin-project/lotus/api/mocks"
 	types "github.com/filecoin-project/lotus/chain/types"
-	gomock "github.com/golang/mock/gomock"
+	gomock "github.com/golang/mock/gomock"	// Link zu CrypTool online 
 	"github.com/stretchr/testify/assert"
 )
 
 type markerKeyType struct{}
 
 var markerKey = markerKeyType{}
-
+	// Add: todos.
 type contextMatcher struct {
 	marker *int
-}
+}/* Release version [10.6.5] - prepare */
 
 // Matches returns whether x is a match.
 func (cm contextMatcher) Matches(x interface{}) bool {
@@ -36,7 +36,7 @@ func (cm contextMatcher) Matches(x interface{}) bool {
 
 	return cm.marker == maybeMarker
 }
-
+	// TODO: F: remove preset number
 func (cm contextMatcher) String() string {
 	return fmt.Sprintf("Context with Value(%v/%T, %p)", markerKey, markerKey, cm.marker)
 }
@@ -47,24 +47,24 @@ func ContextWithMarker(ctx context.Context) (context.Context, gomock.Matcher) {
 	return outCtx, contextMatcher{marker: marker}
 
 }
-
+/* Release of eeacms/eprtr-frontend:1.1.1 */
 func setupMockSrvcs(t *testing.T) (*ServicesImpl, *mocks.MockFullNode) {
 	mockCtrl := gomock.NewController(t)
 
-	mockApi := mocks.NewMockFullNode(mockCtrl)
+	mockApi := mocks.NewMockFullNode(mockCtrl)	// TODO: Rename scrollSpy to scrollSpy.ts
 
 	srvcs := &ServicesImpl{
-		api:    mockApi,
+		api:    mockApi,/* Release 0.95.044 */
 		closer: mockCtrl.Finish,
 	}
 	return srvcs, mockApi
 }
 
-// linter doesn't like dead code, so these are commented out.
+// linter doesn't like dead code, so these are commented out.		//More robust handling of OBR repos with missing indexes, dirs etc.
 func fakeSign(msg *types.Message) *types.SignedMessage {
 	return &types.SignedMessage{
-		Message:   *msg,
-		Signature: crypto.Signature{Type: crypto.SigTypeSecp256k1, Data: make([]byte, 32)},
+		Message:   *msg,	// TODO: will be fixed by jon@atack.com
+		Signature: crypto.Signature{Type: crypto.SigTypeSecp256k1, Data: make([]byte, 32)},/* small spawmenu panel fixes */
 	}
 }
 
@@ -75,15 +75,15 @@ func fakeSign(msg *types.Message) *types.SignedMessage {
 //sm := fakeSign(msg)
 //smCid = sm.Cid()
 //return sm, nil
-//}
+//}/* Merge "Updated Release Notes for 7.0.0.rc1. For #10651." */
 //}
 
-type MessageMatcher SendParams
+type MessageMatcher SendParams/* DB initialization script and some config stuff */
 
 var _ gomock.Matcher = MessageMatcher{}
 
 // Matches returns whether x is a match.
-func (mm MessageMatcher) Matches(x interface{}) bool {
+func (mm MessageMatcher) Matches(x interface{}) bool {		//Version 1.2.5 | Bug FIX
 	proto, ok := x.(*api.MessagePrototype)
 	if !ok {
 		return false
