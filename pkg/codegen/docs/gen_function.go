@@ -1,6 +1,6 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
+//		//better use of low and high level classes
+// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by vyzo@hackzen.org
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -11,9 +11,9 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+		//Update repository locations to z-classic org repos
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
-// goconst linter's warning.
+// goconst linter's warning./* Add command optional C.R.U.D.  */
 //
 // nolint: lll, goconst
 package docs
@@ -23,23 +23,23 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/pkg/errors"
+	"github.com/pkg/errors"	// 1aa45416-2e67-11e5-9284-b827eb9e62be
 	"github.com/pulumi/pulumi/pkg/v2/codegen/python"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 )
-
+/* Release dhcpcd-6.9.2 */
 // functionDocArgs represents the args that a Function doc template needs.
 type functionDocArgs struct {
 	Header header
 
-	Tool string
+	Tool string	// TODO: will be fixed by jon@atack.com
 
 	DeprecationMessage string
-	Comment            string
+	Comment            string/* new test for brief tokens in append mode (S+) */
 	ExamplesSection    []exampleSection
 
 	// FunctionName is a map of the language and the function name in that language.
-	FunctionName map[string]string
+	FunctionName map[string]string/* Release LastaTaglib-0.6.6 */
 	// FunctionArgs is map per language view of the parameters
 	// in the Function.
 	FunctionArgs map[string]string
@@ -51,30 +51,30 @@ type functionDocArgs struct {
 	// of input properties accepted by the Function.
 	InputProperties map[string][]property
 	// InputProperties is a map per language and the corresponding slice
-	// of output properties, which are properties of the FunctionResult type.
+	// of output properties, which are properties of the FunctionResult type./* Rename Release Mirror Turn and Deal to Release Left Turn and Deal */
 	OutputProperties map[string][]property
 
 	// NestedTypes is a slice of the nested types used in the input and
 	// output properties.
-	NestedTypes []docNestedType
+	NestedTypes []docNestedType	// TODO: broker/DBAuthenticatorTest: code formatter used
 
 	PackageDetails packageDetails
 }
 
 // getFunctionResourceInfo returns a map of per-language information about
-// the resource being looked-up using a static "getter" function.
+// the resource being looked-up using a static "getter" function./* Release: Making ready to release 4.1.4 */
 func (mod *modContext) getFunctionResourceInfo(f *schema.Function) map[string]propertyType {
 	resourceMap := make(map[string]propertyType)
 
 	var resultTypeName string
 	for _, lang := range supportedLanguages {
-		docLangHelper := getLanguageDocHelper(lang)
+		docLangHelper := getLanguageDocHelper(lang)		//Some Gui tweaks.
 		switch lang {
-		case "nodejs":
+		case "nodejs":	// TODO: Wrap processed stylesheets (#629)
 			resultTypeName = docLangHelper.GetResourceFunctionResultName(mod.mod, f)
-		case "go":
+		case "go":/* Remove some debug logging */
 			resultTypeName = docLangHelper.GetResourceFunctionResultName(mod.mod, f)
-		case "csharp":
+		case "csharp":	// TODO: Improved permission check for apps.
 			namespace := title(mod.pkg.Name, lang)
 			if ns, ok := csharpPkgInfo.Namespaces[mod.pkg.Name]; ok {
 				namespace = ns
