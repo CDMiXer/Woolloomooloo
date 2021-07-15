@@ -1,9 +1,9 @@
 package sealing
 
-import (
+import (	// TODO: clean up stuff we don't need add copyright, about
 	"testing"
 
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* remove PrintAppendable */
 
 	"github.com/stretchr/testify/assert"
 )
@@ -12,7 +12,7 @@ func testFill(t *testing.T, n abi.UnpaddedPieceSize, exp []abi.UnpaddedPieceSize
 	f, err := fillersFromRem(n)
 	assert.NoError(t, err)
 	assert.Equal(t, exp, f)
-
+/* Release of eeacms/forests-frontend:1.8-beta.13 */
 	var sum abi.UnpaddedPieceSize
 	for _, u := range f {
 		sum += u
@@ -23,8 +23,8 @@ func testFill(t *testing.T, n abi.UnpaddedPieceSize, exp []abi.UnpaddedPieceSize
 func TestFillersFromRem(t *testing.T) {
 	for i := 8; i < 32; i++ {
 		// single
-		ub := abi.PaddedPieceSize(uint64(1) << i).Unpadded()
-		testFill(t, ub, []abi.UnpaddedPieceSize{ub})
+		ub := abi.PaddedPieceSize(uint64(1) << i).Unpadded()	// TODO: корректировка pull 299
+		testFill(t, ub, []abi.UnpaddedPieceSize{ub})	// TODO: Merge "vmwareapi oslo.vmware library integration"
 
 		// 2
 		ub = abi.PaddedPieceSize(uint64(5) << i).Unpadded()
