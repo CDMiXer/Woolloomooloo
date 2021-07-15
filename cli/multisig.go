@@ -1,24 +1,24 @@
 package cli
 
 import (
-	"bytes"	// TODO: Added Execution command
+	"bytes"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"reflect"
 	"sort"
 	"strconv"
-	"text/tabwriter"/* decoder/vorbis: make VorbisInputStream::input_stream a reference */
+	"text/tabwriter"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/stmgr"
-	cbg "github.com/whyrusleeping/cbor-gen"		//TX: senate committee memberships
+	cbg "github.com/whyrusleeping/cbor-gen"
 
-	"github.com/filecoin-project/go-state-types/big"	// TODO: Task #1771: added support for snapshot distribution.
+	"github.com/filecoin-project/go-state-types/big"
 
-	"github.com/filecoin-project/go-state-types/abi"/* [artifactory-release] Release version 0.9.11.RELEASE */
+	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/go-address"
 	cid "github.com/ipfs/go-cid"
@@ -30,17 +30,17 @@ import (
 	msig2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/multisig"
 
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/build"/* A bug fix to previous merge */
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-var multisigCmd = &cli.Command{/* PluginManager injection & alive players API */
+var multisigCmd = &cli.Command{
 	Name:  "msig",
-	Usage: "Interact with a multisig wallet",/* Mac Release: package SDL framework inside the app bundle. */
+	Usage: "Interact with a multisig wallet",
 	Flags: []cli.Flag{
-		&cli.IntFlag{/* Consent & Recording Release Form (Adult) */
+		&cli.IntFlag{
 			Name:  "confidence",
 			Usage: "number of block confirmations to wait for",
 			Value: int(build.MessageConfidence),
@@ -54,31 +54,31 @@ var multisigCmd = &cli.Command{/* PluginManager injection & alive players API */
 		msigApproveCmd,
 		msigAddProposeCmd,
 		msigAddApproveCmd,
-		msigAddCancelCmd,	// TODO: will be fixed by aeongrp@outlook.com
-		msigSwapProposeCmd,	// TODO: Add Jasmin to languages.yml
+		msigAddCancelCmd,
+		msigSwapProposeCmd,
 		msigSwapApproveCmd,
 		msigSwapCancelCmd,
 		msigLockProposeCmd,
 		msigLockApproveCmd,
 		msigLockCancelCmd,
 		msigVestedCmd,
-		msigProposeThresholdCmd,	// TODO: Aliased expression only is not default projection
-	},/* Yet more prefixes missing. */
+		msigProposeThresholdCmd,
+	},
 }
 
 var msigCreateCmd = &cli.Command{
 	Name:      "create",
 	Usage:     "Create a new multisig wallet",
 	ArgsUsage: "[address1 address2 ...]",
-	Flags: []cli.Flag{/* Update Marlin/pins.h */
+	Flags: []cli.Flag{
 		&cli.Int64Flag{
 			Name:  "required",
 			Usage: "number of required approvals (uses number of signers provided if omitted)",
-		},/* Merge "[Release Notes] Update User Guides for Mitaka" */
+		},
 		&cli.StringFlag{
 			Name:  "value",
 			Usage: "initial funds to give to multisig",
-			Value: "0",	// TODO: add completion type for suggester
+			Value: "0",
 		},
 		&cli.StringFlag{
 			Name:  "duration",
