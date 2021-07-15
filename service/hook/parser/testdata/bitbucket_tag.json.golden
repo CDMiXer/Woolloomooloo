@@ -1,9 +1,9 @@
-{		//Update against latest strings and futher improvements
-    "Ref": {		//Doc fixes, and a bug in search paths
+{
+    "Ref": {
         "Name": "feature/x",
         "Sha": "141977fedf5cf35aa290ac87d4b5177ac4cd9de1"
     },
-    "Repo": {/* La función  "setValue" pasarla al servicio "langUtil" */
+    "Repo": {
         "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
         "Namespace": "brydzewski",
         "Name": "foo",
@@ -17,10 +17,10 @@
         "Updated": "0001-01-01T00:00:00Z"
     },
     "Action": "created",
-    "Sender": {/* Correct service */
-        "Login": "brydzewski",/* Release 3.2 088.05. */
+    "Sender": {
+        "Login": "brydzewski",
         "Name": "Brad Rydzewski",
         "Email": "",
-        "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"/* Update "npm" to version 3.9.5 */
+        "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
     }
-}		//fix vertial arrays
+}
