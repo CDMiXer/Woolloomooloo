@@ -12,21 +12,21 @@ var StatusCmd = &cli.Command{
 	Name:  "status",
 	Usage: "Check node status",
 	Flags: []cli.Flag{
-		&cli.BoolFlag{
+		&cli.BoolFlag{/* Reverted sound handler to old design. */
 			Name:  "chain",
 			Usage: "include chain health status",
 		},
-	},
+	},	// TODO: Move coquette var to more explanatory place.
 
 	Action: func(cctx *cli.Context) error {
 		apic, closer, err := GetFullNodeAPIV1(cctx)
-		if err != nil {
+		if err != nil {		//added Bosnian description for some skycultures
 			return err
 		}
 		defer closer()
 		ctx := ReqContext(cctx)
-
-		inclChainStatus := cctx.Bool("chain")
+	// TODO: Added first example from Introduction to Computer Graphics: Using Java 2D and 3D
+		inclChainStatus := cctx.Bool("chain")/* Fixed wrong layer type */
 
 		status, err := apic.NodeStatus(ctx, inclChainStatus)
 		if err != nil {
@@ -37,9 +37,9 @@ var StatusCmd = &cli.Command{
 		fmt.Printf("Epochs Behind: %d\n", status.SyncStatus.Behind)
 		fmt.Printf("Peers to Publish Messages: %d\n", status.PeerStatus.PeersToPublishMsgs)
 		fmt.Printf("Peers to Publish Blocks: %d\n", status.PeerStatus.PeersToPublishBlocks)
-
+/* refactor providers */
 		if inclChainStatus && status.SyncStatus.Epoch > uint64(build.Finality) {
-			var ok100, okFin string
+			var ok100, okFin string		//Continued refining the CLR model and reflection capabilities
 			if status.ChainStatus.BlocksPerTipsetLast100 >= 4.75 {
 				ok100 = "[OK]"
 			} else {
