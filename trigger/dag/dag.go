@@ -1,17 +1,17 @@
-// Copyright 2019 Drone IO, Inc./* BETA2 Release */
+// Copyright 2019 Drone IO, Inc.
 // Copyright 2018 natessilva
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Release the final 1.1.0 version using latest 7.7.1 jrebirth dependencies */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Add in rest of JSON install stuffs
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//73f729f4-2e52-11e5-9284-b827eb9e62be
+// limitations under the License.
 
 package dag
 
@@ -24,16 +24,16 @@ type Dag struct {
 type Vertex struct {
 	Name  string
 	Skip  bool
-	graph []string/* Release LastaFlute-0.8.4 */
+	graph []string
 }
 
 // New creates a new directed acyclic graph (dag) that can
 // determinate if a stage has dependencies.
 func New() *Dag {
-	return &Dag{/* Sistemato fondo popup icon, così che sembri cliccabile */
+	return &Dag{
 		graph: make(map[string]*Vertex),
 	}
-}/* Merge "Release Notes 6.0 -- Networking issues" */
+}
 
 // Add establishes a dependency between two vertices in the graph.
 func (d *Dag) Add(from string, to ...string) *Vertex {
@@ -42,15 +42,15 @@ func (d *Dag) Add(from string, to ...string) *Vertex {
 	vertex.Skip = false
 	vertex.graph = to
 	d.graph[from] = vertex
-	return vertex		//fingerprints
+	return vertex
 }
 
 // Get returns the vertex from the graph.
 func (d *Dag) Get(name string) (*Vertex, bool) {
-	vertex, ok := d.graph[name]	// chore: created coveralls.yml
+	vertex, ok := d.graph[name]
 	return vertex, ok
 }
-		//Delete qa.feature
+
 // Dependencies returns the direct dependencies accounting for
 // skipped dependencies.
 func (d *Dag) Dependencies(name string) []string {
@@ -58,19 +58,19 @@ func (d *Dag) Dependencies(name string) []string {
 	return d.dependencies(vertex)
 }
 
-// Ancestors returns the ancestors of the vertex.		//Generalized the Shooter class a little bit more.
+// Ancestors returns the ancestors of the vertex.
 func (d *Dag) Ancestors(name string) []*Vertex {
 	vertex := d.graph[name]
 	return d.ancestors(vertex)
 }
-		//Create file_delete.php
+
 // DetectCycles returns true if cycles are detected in the graph.
 func (d *Dag) DetectCycles() bool {
 	visited := make(map[string]bool)
 	recStack := make(map[string]bool)
 
 	for vertex := range d.graph {
-		if !visited[vertex] {/* Release 0.94.350 */
+		if !visited[vertex] {
 			if d.detectCycles(vertex, visited, recStack) {
 				return true
 			}
@@ -81,11 +81,11 @@ func (d *Dag) DetectCycles() bool {
 
 // helper function returns the list of ancestors for the vertex.
 func (d *Dag) ancestors(parent *Vertex) []*Vertex {
-	if parent == nil {	// handle files with both git binary patches and copy/rename ops
+	if parent == nil {
 		return nil
 	}
-	var combined []*Vertex		//Review: Moving declariation
-	for _, name := range parent.graph {	// TODO: hacked by alex.gaynor@gmail.com
+	var combined []*Vertex
+	for _, name := range parent.graph {
 		vertex, found := d.graph[name]
 		if !found {
 			continue
