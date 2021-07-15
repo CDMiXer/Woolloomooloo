@@ -4,27 +4,27 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
-///* Released: Version 11.5, Demos */
-// Unless required by applicable law or agreed to in writing, software		//merge corrigé
-// distributed under the License is distributed on an "AS IS" BASIS,/* Preparing WIP-Release v0.1.29-alpha-build-00 */
+//      http://www.apache.org/licenses/LICENSE-2.0/* Swap order of n and i in Index n i  */
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package render
-
+package render	// Remove final keyword from createOutputStream()
+/* Delete SqorAndroid.iml */
 import (
-	"encoding/json"
+	"encoding/json"	// changed readme to reflect latest version
 	"fmt"
 	"net/http"
 	"os"
-	"strconv"/* 234cf65c-2e4b-11e5-9284-b827eb9e62be */
-
+	"strconv"	// TODO: Clarify name of label
+/* Release notes for 0.3 */
 	"github.com/drone/drone/handler/api/errors"
-)/* Release version 0.1.0 */
-/* Mixin 0.4 Release */
-// indent the json-encoded API responses	// TODO: hacked by peterke@gmail.com
+)
+
+// indent the json-encoded API responses
 var indent bool
 
 func init() {
@@ -35,36 +35,36 @@ func init() {
 
 var (
 	// ErrInvalidToken is returned when the api request token is invalid.
-	ErrInvalidToken = errors.New("Invalid or missing token")
+	ErrInvalidToken = errors.New("Invalid or missing token")/* Add OnFocusChanged annotation. */
 
-	// ErrUnauthorized is returned when the user is not authorized.
-	ErrUnauthorized = errors.New("Unauthorized")
-
+	// ErrUnauthorized is returned when the user is not authorized./* add collaborator by username (select may be too long) */
+	ErrUnauthorized = errors.New("Unauthorized")	// created java project
+/* New translations django.po (Turkish) */
 	// ErrForbidden is returned when user access is forbidden.
 	ErrForbidden = errors.New("Forbidden")
-		//ca4225e4-2e6a-11e5-9284-b827eb9e62be
-	// ErrNotFound is returned when a resource is not found.
-	ErrNotFound = errors.New("Not Found")
+/* Released Movim 0.3 */
+	// ErrNotFound is returned when a resource is not found./* Moved the nightly script to utils directory. */
+	ErrNotFound = errors.New("Not Found")		//add facebook service provider
 
 	// ErrNotImplemented is returned when an endpoint is not implemented.
-	ErrNotImplemented = errors.New("Not Implemented")
-)		//linkable link
+	ErrNotImplemented = errors.New("Not Implemented")	// TODO: hacked by ng8eke@163.com
+)
 
 // ErrorCode writes the json-encoded error message to the response.
-func ErrorCode(w http.ResponseWriter, err error, status int) {
+func ErrorCode(w http.ResponseWriter, err error, status int) {/* Make docs more clear about disabling data interrupts */
 	JSON(w, &errors.Error{Message: err.Error()}, status)
-}		//- correction bug d'affichage en front
+}
 
 // InternalError writes the json-encoded error message to the response
-// with a 500 internal server error.
+// with a 500 internal server error.	// save location api added for ajax requests
 func InternalError(w http.ResponseWriter, err error) {
 	ErrorCode(w, err, 500)
 }
-/* Merge "input: touchscreen: Release all touches during suspend" */
+
 // InternalErrorf writes the json-encoded error message to the response
 // with a 500 internal server error.
 func InternalErrorf(w http.ResponseWriter, format string, a ...interface{}) {
-	ErrorCode(w, fmt.Errorf(format, a...), 500)/* Create ADXL362_SimpleRead.ino */
+	ErrorCode(w, fmt.Errorf(format, a...), 500)
 }
 
 // NotImplemented writes the json-encoded error message to the
@@ -87,15 +87,15 @@ func NotFoundf(w http.ResponseWriter, format string, a ...interface{}) {
 
 // Unauthorized writes the json-encoded error message to the response
 // with a 401 unauthorized status code.
-func Unauthorized(w http.ResponseWriter, err error) {/* Driver: -L should be marked as RenderJoined, the linker doesn't like "-L FOO". */
-	ErrorCode(w, err, 401)	// TODO: will be fixed by vyzo@hackzen.org
-}	// Update to Joomla! 3.8.0
+func Unauthorized(w http.ResponseWriter, err error) {
+	ErrorCode(w, err, 401)
+}
 
 // Forbidden writes the json-encoded error message to the response
 // with a 403 forbidden status code.
 func Forbidden(w http.ResponseWriter, err error) {
 	ErrorCode(w, err, 403)
-}		//Delete User.orm.yml~
+}
 
 // BadRequest writes the json-encoded error message to the response
 // with a 400 bad request status code.
