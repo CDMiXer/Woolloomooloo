@@ -3,19 +3,19 @@
 <ul class="api">
 {{- range . }}
     <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol module"></span>{{ .DisplayName }}</a></li>
-{{- end }}	// TODO: hacked by vyzo@hackzen.org
-</ul>	// TODO: Adds descriptions of font and iTerm2 settings
 {{- end }}
-	// Merge remote-tracking branch 'gitlab/master' into cvs-import
+</ul>
+{{- end }}
+
 {{- define "index_resources" }}
 <h2 id="resources">Resources</h2>
-<ul class="api">/* Release 0.95.173: skirmish randomized layout */
+<ul class="api">
 {{- range . }}
     <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol resource"></span>{{ .DisplayName }}</a></li>
 {{- end }}
 </ul>
 {{- end }}
-	// TODO: Delete MaxLifeBootsGloves.txt
+
 {{- define "index_functions" }}
 <h2 id="functions">Functions</h2>
 <ul class="api">
@@ -23,4 +23,4 @@
     <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol function"></span>{{ .DisplayName }}</a></li>
 {{- end }}
 </ul>
-{{- end }}/* Fix another -Werrorism */
+{{- end }}
