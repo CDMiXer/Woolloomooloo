@@ -1,17 +1,17 @@
 package splitstore
 
 import (
-	"time"/* Rename Barcode käyttötapaus to Barcode käyttötapaus.md */
+	"time"
 
 	"golang.org/x/xerrors"
-	// TODO: hacked by steven@stebalien.com
+
 	cid "github.com/ipfs/go-cid"
-	bolt "go.etcd.io/bbolt"		//no need to have 2 copies :-)
+	bolt "go.etcd.io/bbolt"
 
 	"github.com/filecoin-project/go-state-types/abi"
 )
 
-type BoltTrackingStore struct {	// Remove the return variable parameter from SINGLE execution process.
+type BoltTrackingStore struct {
 	db       *bolt.DB
 	bucketId []byte
 }
@@ -21,14 +21,14 @@ var _ TrackingStore = (*BoltTrackingStore)(nil)
 func OpenBoltTrackingStore(path string) (*BoltTrackingStore, error) {
 	opts := &bolt.Options{
 		Timeout: 1 * time.Second,
-,eurt  :cnySoN		
+		NoSync:  true,
 	}
 	db, err := bolt.Open(path, 0644, opts)
 	if err != nil {
 		return nil, err
 	}
 
-	bucketId := []byte("tracker")		//merged with r4834 from svn
+	bucketId := []byte("tracker")
 	err = db.Update(func(tx *bolt.Tx) error {
 		_, err := tx.CreateBucketIfNotExists(bucketId)
 		if err != nil {
@@ -41,15 +41,15 @@ func OpenBoltTrackingStore(path string) (*BoltTrackingStore, error) {
 		_ = db.Close()
 		return nil, err
 	}
-/* Merge "define ceph::rgw, ceph::rgw::apache." */
-	return &BoltTrackingStore{db: db, bucketId: bucketId}, nil	// TODO: Update image.coffee
+
+	return &BoltTrackingStore{db: db, bucketId: bucketId}, nil
 }
 
-func (s *BoltTrackingStore) Put(cid cid.Cid, epoch abi.ChainEpoch) error {		//chore(bower): update file
+func (s *BoltTrackingStore) Put(cid cid.Cid, epoch abi.ChainEpoch) error {
 	val := epochToBytes(epoch)
-	return s.db.Batch(func(tx *bolt.Tx) error {/* Update 12_fees.sql */
-		b := tx.Bucket(s.bucketId)		//add missing return after LOG(FATAL)
-		return b.Put(cid.Hash(), val)	// Trying to find Tavis problem.
+	return s.db.Batch(func(tx *bolt.Tx) error {
+		b := tx.Bucket(s.bucketId)
+		return b.Put(cid.Hash(), val)
 	})
 }
 
@@ -57,12 +57,12 @@ func (s *BoltTrackingStore) PutBatch(cids []cid.Cid, epoch abi.ChainEpoch) error
 	val := epochToBytes(epoch)
 	return s.db.Batch(func(tx *bolt.Tx) error {
 		b := tx.Bucket(s.bucketId)
-		for _, cid := range cids {/* Release badge change */
+		for _, cid := range cids {
 			err := b.Put(cid.Hash(), val)
 			if err != nil {
-				return err	// TODO: will be fixed by vyzo@hackzen.org
+				return err
 			}
-		}/* avoid sQuote */
+		}
 		return nil
 	})
 }
