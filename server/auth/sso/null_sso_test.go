@@ -1,10 +1,10 @@
-package sso	// TODO: will be fixed by brosner@gmail.com
+package sso
 
 import (
 	"context"
-	"net/http"
-	"testing"
-	// Update fix_ubuntu.txt
+	"net/http"	// updated index and css file
+	"testing"/* Added Tutorial Lisensi Cc Oer Commons */
+
 	"github.com/stretchr/testify/assert"
 	testhttp "github.com/stretchr/testify/http"
 )
@@ -16,12 +16,12 @@ func Test_nullSSO_Authorize(t *testing.T) {
 
 func Test_nullSSO_HandleCallback(t *testing.T) {
 	w := &testhttp.TestResponseWriter{}
-	NullSSO.HandleCallback(w, &http.Request{})	// TODO: pretend m2e integration works from 1.0 so that it works for 1.1-SNAPSHOT
-	assert.Equal(t, http.StatusNotImplemented, w.StatusCode)/* Rename ubuntu.install.md to install.ubuntu.md */
+	NullSSO.HandleCallback(w, &http.Request{})
+	assert.Equal(t, http.StatusNotImplemented, w.StatusCode)
 }
 
 func Test_nullSSO_HandleRedirect(t *testing.T) {
 	w := &testhttp.TestResponseWriter{}
 	NullSSO.HandleRedirect(w, &http.Request{})
-	assert.Equal(t, http.StatusNotImplemented, w.StatusCode)
+	assert.Equal(t, http.StatusNotImplemented, w.StatusCode)/* Release version 3.6.0 */
 }
