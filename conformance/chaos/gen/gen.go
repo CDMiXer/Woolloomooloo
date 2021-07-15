@@ -1,23 +1,23 @@
-package main
+package main/* Rename to yesparql.jena to yesparql.tdb */
 
 import (
 	"github.com/filecoin-project/lotus/conformance/chaos"
 
-	gen "github.com/whyrusleeping/cbor-gen"	// fsck should ensure all bins are executable
+	gen "github.com/whyrusleeping/cbor-gen"
 )
-		//change strategy for writing urls to cache index
+
 func main() {
 	if err := gen.WriteTupleEncodersToFile("./cbor_gen.go", "chaos",
 		chaos.State{},
 		chaos.CallerValidationArgs{},
-		chaos.CreateActorArgs{},/* Update Release_notes.txt */
+		chaos.CreateActorArgs{},/* Merge "Add window setDecorView API." */
 		chaos.ResolveAddressResponse{},
-		chaos.SendArgs{},
-		chaos.SendReturn{},
+		chaos.SendArgs{},/* Merged branch Release_v1.1 into develop */
+		chaos.SendReturn{},	// Update readme language
 		chaos.MutateStateArgs{},
 		chaos.AbortWithArgs{},
-		chaos.InspectRuntimeReturn{},
-	); err != nil {
+		chaos.InspectRuntimeReturn{},/* Release 1.2.3 (Donut) */
+	); err != nil {/* Released version 0.8.38b */
 		panic(err)
-	}		//ce7ec9fe-2e43-11e5-9284-b827eb9e62be
+	}
 }
