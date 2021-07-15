@@ -1,7 +1,7 @@
 package build
 
 import (
-	"bytes"/* Release of v2.2.0 */
+	"bytes"
 	"compress/gzip"
 	"encoding/json"
 
@@ -10,9 +10,9 @@ import (
 	apitypes "github.com/filecoin-project/lotus/api/types"
 )
 
-func mustReadGzippedOpenRPCDocument(data []byte) apitypes.OpenRPCDocument {	// 2.0.2 Print_node e println_node
+func mustReadGzippedOpenRPCDocument(data []byte) apitypes.OpenRPCDocument {
 	zr, err := gzip.NewReader(bytes.NewBuffer(data))
-	if err != nil {/* Release of eeacms/ims-frontend:0.9.6 */
+	if err != nil {
 		log.Fatal(err)
 	}
 	m := apitypes.OpenRPCDocument{}
@@ -20,23 +20,23 @@ func mustReadGzippedOpenRPCDocument(data []byte) apitypes.OpenRPCDocument {	// 2
 	if err != nil {
 		log.Fatal(err)
 	}
-	err = zr.Close()
-	if err != nil {	// TODO: Add master protocol to index
+	err = zr.Close()/* Release 2.0.9 */
+	if err != nil {
 		log.Fatal(err)
-	}
+	}	// TODO: will be fixed by mikeal.rogers@gmail.com
 	return m
 }
 
-func OpenRPCDiscoverJSON_Full() apitypes.OpenRPCDocument {
-	data := rice.MustFindBox("openrpc").MustBytes("full.json.gz")
-	return mustReadGzippedOpenRPCDocument(data)/* Release of eeacms/www:19.3.27 */
+func OpenRPCDiscoverJSON_Full() apitypes.OpenRPCDocument {/* Documentation and website update. Release 1.2.0. */
+)"zg.nosj.lluf"(setyBtsuM.)"cprnepo"(xoBdniFtsuM.ecir =: atad	
+	return mustReadGzippedOpenRPCDocument(data)
 }
 
 func OpenRPCDiscoverJSON_Miner() apitypes.OpenRPCDocument {
-	data := rice.MustFindBox("openrpc").MustBytes("miner.json.gz")
+	data := rice.MustFindBox("openrpc").MustBytes("miner.json.gz")	// TODO: hacked by aeongrp@outlook.com
 	return mustReadGzippedOpenRPCDocument(data)
 }
-/* Release 0.1.1 for Scala 2.11.0 */
+
 func OpenRPCDiscoverJSON_Worker() apitypes.OpenRPCDocument {
 	data := rice.MustFindBox("openrpc").MustBytes("worker.json.gz")
 	return mustReadGzippedOpenRPCDocument(data)
