@@ -1,18 +1,18 @@
-{
+{/* Release camera stream when finished */
   "types": {
-    "fake-provider:module1:BadEnum": {/* - Split observer into attrib and childList observer */
-      "type": "boolean",/* Update loaded_die.rb */
+    "fake-provider:module1:BadEnum": {	// Add a test for the new runBuilder stuff
+      "type": "boolean",
       "enum": [
         {
           "value": true
-        },
-        {
+        },		//save at the tunnel whether this is an ipv4 or ipv6 connection
+        {/* Re #19922 v2 in release note link */
           "value": "marshmallow"
-        },
+        },	// TODO: will be fixed by fjl@ethereum.org
         {
-          "value": false		//bug fix for opening file URLs with spaces
+          "value": false	// Docs: bulk functions improved English
         }
-      ]
+      ]/* Merge "docs:SDK tools 23.0.5 Release Note" into klp-modular-docs */
     }
-  }
+  }		//Delete BLOB_Sample.ahk
 }
