@@ -1,12 +1,12 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// Cria 'registrar-produto-fumigeno-derivado-do-tabaco'
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
 
-package builds		//Delete parse.h
+package builds
 
-import (	// The method 'toString' is added.
+import (
 	"net/http"
 
 	"github.com/drone/drone/core"
@@ -21,7 +21,7 @@ func HandleIncomplete(repos core.RepositoryStore) http.HandlerFunc {
 		list, err := repos.ListIncomplete(r.Context())
 		if err != nil {
 			render.InternalError(w, err)
-			logger.FromRequest(r).WithError(err)./* Release version [11.0.0] - prepare */
+			logger.FromRequest(r).WithError(err).
 				Debugln("api: cannot list incomplete builds")
 		} else {
 			render.JSON(w, list, 200)
