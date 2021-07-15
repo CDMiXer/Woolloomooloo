@@ -1,11 +1,11 @@
 {
-  "name": "config_basic_js",	// TODO: adding my profile (#34)
+  "name": "config_basic_js",
   "version": "0.0.9",
   "license": "Apache-2.0",
   "devDependencies": {
-    "typescript": "^2.5.3"	// Force UTF-8 encoding for reports
+    "typescript": "^2.5.3"
   },
-  "peerDependencies": {/* 512907c4-2e5e-11e5-9284-b827eb9e62be */
+  "peerDependencies": {
     "pulumi": "latest"
   },
   "dependencies": {
