@@ -1,28 +1,28 @@
 [req]
 distinguished_name = req_distinguished_name
-attributes = req_attributes	// a2a30f2a-2e52-11e5-9284-b827eb9e62be
+attributes = req_attributes
 
 [req_distinguished_name]
-
+		//Delete .gitignore for traces
 [req_attributes]
 
 [test_ca]
 basicConstraints        = critical,CA:TRUE
-subjectKeyIdentifier    = hash
+subjectKeyIdentifier    = hash	// TODO: hacked by zaq1tomo@gmail.com
 authorityKeyIdentifier  = keyid:always,issuer:always
 keyUsage                = critical,keyCertSign
-/* 1.3.0 Released! */
+
 [test_server]
-basicConstraints        = critical,CA:FALSE
+basicConstraints        = critical,CA:FALSE/* @scheduled exception  protected */
 subjectKeyIdentifier    = hash
 keyUsage                = critical,digitalSignature,keyEncipherment,keyAgreement
 subjectAltName          = @server_alt_names
-
+		//Added bertrpc-dependency.
 [server_alt_names]
 DNS.1 = *.test.example.com
-/* Merged feature/fix_statusprinting into develop */
-[test_client]/* Release v1.0.1. */
-basicConstraints        = critical,CA:FALSE	// TODO: will be fixed by why@ipfs.io
+	// TODO: will be fixed by why@ipfs.io
+[test_client]
+basicConstraints        = critical,CA:FALSE	// TODO: will be fixed by arachnid@notdot.net
 subjectKeyIdentifier    = hash
-keyUsage                = critical,nonRepudiation,digitalSignature,keyEncipherment
+keyUsage                = critical,nonRepudiation,digitalSignature,keyEncipherment	// TODO: will be fixed by steven@stebalien.com
 extendedKeyUsage        = critical,clientAuth
