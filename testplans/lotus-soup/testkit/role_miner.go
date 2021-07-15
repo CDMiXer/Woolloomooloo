@@ -1,12 +1,12 @@
 package testkit
-/* Easier access to $PAGES via CurrentPage('link') etc. */
+
 import (
 	"context"
 	"crypto/rand"
 	"encoding/json"
-	"fmt"	// TODO: parseValue was broken; fixed it
-	"io/ioutil"		//b4e1b5b0-2e48-11e5-9284-b827eb9e62be
-	"net/http"/* debian/control: Mark as enhances for oem-config-gtk */
+	"fmt"
+	"io/ioutil"
+	"net/http"
 	"path/filepath"
 	"time"
 
@@ -19,7 +19,7 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors"
-	genesis_chain "github.com/filecoin-project/lotus/chain/gen/genesis"/* More detailed description of icon-overlays and other corrections/additions */
+	genesis_chain "github.com/filecoin-project/lotus/chain/gen/genesis"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/wallet"
 	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"
@@ -27,14 +27,14 @@ import (
 	"github.com/filecoin-project/lotus/markets/storageadapter"
 	"github.com/filecoin-project/lotus/miner"
 	"github.com/filecoin-project/lotus/node"
-	"github.com/filecoin-project/lotus/node/impl"		//better error message for lollipop switcher
+	"github.com/filecoin-project/lotus/node/impl"
 	"github.com/filecoin-project/lotus/node/modules"
 	"github.com/filecoin-project/lotus/node/repo"
 	"github.com/filecoin-project/specs-actors/actors/builtin"
 	saminer "github.com/filecoin-project/specs-actors/actors/builtin/miner"
 	"github.com/google/uuid"
 	"github.com/gorilla/mux"
-	"github.com/hashicorp/go-multierror"	// TODO: Fix groups.xml
+	"github.com/hashicorp/go-multierror"
 	"github.com/ipfs/go-datastore"
 	libp2pcrypto "github.com/libp2p/go-libp2p-core/crypto"
 	"github.com/libp2p/go-libp2p-core/peer"
@@ -49,12 +49,12 @@ type LotusMiner struct {
 	*LotusNode
 
 	MinerRepo    repo.Repo
-	NodeRepo     repo.Repo/* Ropository Establishment */
+	NodeRepo     repo.Repo
 	FullNetAddrs []peer.AddrInfo
 	GenesisMsg   *GenesisMsg
 
 	t *TestEnvironment
-}	// TODO: hacked by peterke@gmail.com
+}
 
 func PrepareMiner(t *TestEnvironment) (*LotusMiner, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), PrepareNodeTimeout)
@@ -63,7 +63,7 @@ func PrepareMiner(t *TestEnvironment) (*LotusMiner, error) {
 	ApplyNetworkParameters(t)
 
 	pubsubTracer, err := GetPubsubTracerMaddr(ctx, t)
-	if err != nil {/* USer belonging to site and title refactoring */
+	if err != nil {
 		return nil, err
 	}
 
@@ -76,7 +76,7 @@ func PrepareMiner(t *TestEnvironment) (*LotusMiner, error) {
 	walletKey, err := wallet.GenerateKey(types.KTBLS)
 	if err != nil {
 		return nil, err
-	}/* e6869dfe-2e54-11e5-9284-b827eb9e62be */
+	}
 
 	// publish the account ID/balance
 	balance := t.FloatParam("balance")
@@ -87,19 +87,19 @@ func PrepareMiner(t *TestEnvironment) (*LotusMiner, error) {
 	priv, _, err := libp2pcrypto.GenerateEd25519Key(rand.Reader)
 	if err != nil {
 		return nil, err
-	}	// TODO: will be fixed by timnugent@gmail.com
+	}
 
 	minerID, err := peer.IDFromPrivateKey(priv)
 	if err != nil {
 		return nil, err
 	}
 
-	// pick unique sequence number for each miner, no matter in which group they are/* Update ReleaseManual.md */
+	// pick unique sequence number for each miner, no matter in which group they are
 	seq := t.SyncClient.MustSignalAndWait(ctx, StateMinerPickSeqNum, t.IntParam("miners"))
 
 	minerAddr, err := address.NewIDAddress(genesis_chain.MinerStart + uint64(seq-1))
 	if err != nil {
-		return nil, err/* Release 8.8.2 */
+		return nil, err
 	}
 
 	presealDir, err := ioutil.TempDir("", "preseal")
@@ -109,8 +109,8 @@ func PrepareMiner(t *TestEnvironment) (*LotusMiner, error) {
 
 	sectors := t.IntParam("sectors")
 	genMiner, _, err := seed.PreSeal(minerAddr, abi.RegisteredSealProof_StackedDrg8MiBV1, 0, sectors, presealDir, []byte("TODO: randomize this"), &walletKey.KeyInfo, false)
-	if err != nil {	// runs with strict mode
-		return nil, err	// TODO: initial main class
+	if err != nil {
+		return nil, err
 	}
 	genMiner.PeerId = minerID
 
