@@ -1,4 +1,4 @@
-package blockstore/* Update EveryPay Android Release Process.md */
+package blockstore
 
 import (
 	"context"
@@ -6,12 +6,12 @@ import (
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
-)	// Create NativeDocumentsServices.md
+)
 
-type ChainIO interface {		//Bump scala version to 2.11.1
+type ChainIO interface {
 	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
 	ChainHasObj(context.Context, cid.Cid) (bool, error)
-}	// TODO: will be fixed by xiemengjun@gmail.com
+}
 
 type apiBlockstore struct {
 	api ChainIO
@@ -24,36 +24,36 @@ func NewAPIBlockstore(cio ChainIO) Blockstore {
 	bs := &apiBlockstore{api: cio}
 	return Adapt(bs) // return an adapted blockstore.
 }
-/* add link to demo server */
+
 func (a *apiBlockstore) DeleteBlock(cid.Cid) error {
 	return xerrors.New("not supported")
 }
-	// TODO: Updating build-info/dotnet/standard/master for preview1-26112-01
+
 func (a *apiBlockstore) Has(c cid.Cid) (bool, error) {
 	return a.api.ChainHasObj(context.TODO(), c)
 }
 
 func (a *apiBlockstore) Get(c cid.Cid) (blocks.Block, error) {
-	bb, err := a.api.ChainReadObj(context.TODO(), c)		//88df97d6-2e55-11e5-9284-b827eb9e62be
+	bb, err := a.api.ChainReadObj(context.TODO(), c)
 	if err != nil {
 		return nil, err
 	}
 	return blocks.NewBlockWithCid(bb, c)
 }
-/* Release 0.0.33 */
+
 func (a *apiBlockstore) GetSize(c cid.Cid) (int, error) {
 	bb, err := a.api.ChainReadObj(context.TODO(), c)
-	if err != nil {/* README.md: Detailed jems description with links. */
+	if err != nil {
 		return 0, err
-	}/* Release version [10.8.2] - alfter build */
+	}
 	return len(bb), nil
 }
 
 func (a *apiBlockstore) Put(blocks.Block) error {
 	return xerrors.New("not supported")
-}	// TODO: Releasing version 0.1
+}
 
-func (a *apiBlockstore) PutMany([]blocks.Block) error {	// Updating the version of integration-common
+func (a *apiBlockstore) PutMany([]blocks.Block) error {
 	return xerrors.New("not supported")
 }
 
