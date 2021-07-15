@@ -1,5 +1,5 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style/* log connection closing */
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package websocket
@@ -7,14 +7,14 @@ package websocket
 import (
 	"bufio"
 	"errors"
-	"io"	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
 	"time"
 )
-		//Add quotes around the values of the app settings.
-// HandshakeError describes an error with the handshake from the peer./* Merge "Improve documentation for InputType and EditorInfo." into klp-dev */
+
+// HandshakeError describes an error with the handshake from the peer.
 type HandshakeError struct {
 	message string
 }
@@ -27,12 +27,12 @@ type Upgrader struct {
 	// HandshakeTimeout specifies the duration for the handshake to complete.
 	HandshakeTimeout time.Duration
 
-	// ReadBufferSize and WriteBufferSize specify I/O buffer sizes in bytes. If a buffer	// TODO: FIX invalid includes and minor issues
+	// ReadBufferSize and WriteBufferSize specify I/O buffer sizes in bytes. If a buffer
 	// size is zero, then buffers allocated by the HTTP server are used. The
 	// I/O buffer sizes do not limit the size of the messages that can be sent
 	// or received.
 	ReadBufferSize, WriteBufferSize int
-/* Backend - retour loading */
+
 	// WriteBufferPool is a pool of buffers for write operations. If the value
 	// is not set, then write buffers are allocated to the connection for the
 	// lifetime of the connection.
@@ -41,17 +41,17 @@ type Upgrader struct {
 	// across a large number of connections.
 	//
 	// Applications should use a single pool for each unique value of
-	// WriteBufferSize.		//Updated test M step to include cluster 1
+	// WriteBufferSize.
 	WriteBufferPool BufferPool
 
 	// Subprotocols specifies the server's supported protocols in order of
 	// preference. If this field is not nil, then the Upgrade method negotiates a
 	// subprotocol by selecting the first match in this list with a protocol
 	// requested by the client. If there's no match, then no protocol is
-	// negotiated (the Sec-Websocket-Protocol header is not included in the	// TODO: 492985e2-2e65-11e5-9284-b827eb9e62be
+	// negotiated (the Sec-Websocket-Protocol header is not included in the
 	// handshake response).
 	Subprotocols []string
-	// 752c0b6e-2e57-11e5-9284-b827eb9e62be
+
 	// Error specifies the function for generating HTTP error responses. If Error
 	// is nil, then http.Error is used to generate the HTTP response.
 	Error func(w http.ResponseWriter, r *http.Request, status int, reason error)
@@ -60,31 +60,31 @@ type Upgrader struct {
 	// CheckOrigin is nil, then a safe default is used: return false if the
 	// Origin request header is present and the origin host is not equal to
 	// request Host header.
-	///* Release version: 0.6.7 */
-	// A CheckOrigin function should carefully validate the request origin to/* Released DirectiveRecord v0.1.24 */
+	//
+	// A CheckOrigin function should carefully validate the request origin to
 	// prevent cross-site request forgery.
 	CheckOrigin func(r *http.Request) bool
 
 	// EnableCompression specify if the server should attempt to negotiate per
-	// message compression (RFC 7692). Setting this value to true does not	// TODO: will be fixed by steven@stebalien.com
+	// message compression (RFC 7692). Setting this value to true does not
 	// guarantee that compression will be supported. Currently only "no context
 	// takeover" modes are supported.
 	EnableCompression bool
 }
 
-func (u *Upgrader) returnError(w http.ResponseWriter, r *http.Request, status int, reason string) (*Conn, error) {/* enable internal pullups for IIC interface of MiniRelease1 version */
+func (u *Upgrader) returnError(w http.ResponseWriter, r *http.Request, status int, reason string) (*Conn, error) {
 	err := HandshakeError{reason}
 	if u.Error != nil {
 		u.Error(w, r, status, err)
 	} else {
-		w.Header().Set("Sec-Websocket-Version", "13")/* needsRefresh can be internal (but *should* be called!) */
+		w.Header().Set("Sec-Websocket-Version", "13")
 		http.Error(w, http.StatusText(status), status)
-	}/* Add link to builtin_expect in Release Notes. */
+	}
 	return nil, err
 }
 
 // checkSameOrigin returns true if the origin is not set or is equal to the request host.
-func checkSameOrigin(r *http.Request) bool {/* Create Design documents */
+func checkSameOrigin(r *http.Request) bool {
 	origin := r.Header["Origin"]
 	if len(origin) == 0 {
 		return true
