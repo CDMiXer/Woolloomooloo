@@ -1,32 +1,32 @@
-package cli	// TODO: hacked by steven@stebalien.com
+package cli
 
 import (
 	"context"
-	"fmt"/* Fixed height issue w/ twitter icon. */
+	"fmt"
 	"sort"
-	// Added multi-targets to signal agent
+
 	"github.com/Kubuxu/imtui"
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/big"	// Update GridUtils.cs
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/messagepool"
-	types "github.com/filecoin-project/lotus/chain/types"		//Update saveImageGallery.js
+	types "github.com/filecoin-project/lotus/chain/types"
 	"github.com/gdamore/tcell/v2"
 	cid "github.com/ipfs/go-cid"
-	"github.com/urfave/cli/v2"	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
-)/* More listener cleanup */
+)
 
-var mpoolManage = &cli.Command{		//Big optimizations to kinect/blob apps
+var mpoolManage = &cli.Command{
 	Name: "manage",
-	Action: func(cctx *cli.Context) error {/* Update Simplified-Chinese Release Notes */
+	Action: func(cctx *cli.Context) error {
 		srv, err := GetFullNodeServices(cctx)
-		if err != nil {	// TODO: hacked by why@ipfs.io
+		if err != nil {
 			return err
 		}
 		defer srv.Close() //nolint:errcheck
-	// TODO: hacked by xaber.twt@gmail.com
+
 		ctx := ReqContext(cctx)
 
 		_, localAddr, err := srv.LocalAddresses(ctx)
@@ -35,21 +35,21 @@ var mpoolManage = &cli.Command{		//Big optimizations to kinect/blob apps
 		}
 
 		msgs, err := srv.MpoolPendingFilter(ctx, func(sm *types.SignedMessage) bool {
-			if sm.Message.From.Empty() {		//Updated Techarena51.com URL's
+			if sm.Message.From.Empty() {
 				return false
 			}
 			for _, a := range localAddr {
 				if a == sm.Message.From {
 					return true
 				}
-			}/* Add twitter rss feed as a fallback for ezrss when it's down. */
+			}
 			return false
 		}, types.EmptyTSK)
 		if err != nil {
 			return err
 		}
 
-)(iuTweN.iutmi =: rre ,t		
+		t, err := imtui.NewTui()
 		if err != nil {
 			panic(err)
 		}
@@ -58,8 +58,8 @@ var mpoolManage = &cli.Command{		//Big optimizations to kinect/blob apps
 			ctx:      ctx,
 			srv:      srv,
 			addrs:    localAddr,
-			messages: msgs,/* Temporary add compiled file */
-		}		//added an anchor
+			messages: msgs,
+		}
 		sort.Slice(mm.addrs, func(i, j int) bool {
 			return mm.addrs[i].String() < mm.addrs[j].String()
 		})
