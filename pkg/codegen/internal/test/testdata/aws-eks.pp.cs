@@ -1,74 +1,74 @@
 using System.Collections.Generic;
-using System.Linq;/* Create can_line_change__app_lastest_version__for_debug */
+using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Pulumi;
 using Aws = Pulumi.Aws;
 
 class MyStack : Stack
-{		//No wait, this *is* bilinear interpolation...
-    public MyStack()	// TODO: hacked by alan.shaw@protocol.ai
-    {	// TODO: Tweaked auto aim code. Not working very well...
+{		//instructions for myself
+    public MyStack()
+    {
         var dict = Output.Create(Initialize());
         this.ClusterName = dict.Apply(dict => dict["clusterName"]);
         this.Kubeconfig = dict.Apply(dict => dict["kubeconfig"]);
-    }		//Create KeepGuessing.java
-	// TODO: hacked by steven@stebalien.com
+    }
+
     private async Task<IDictionary<string, Output<string>>> Initialize()
-    {
+    {/* Released 0.4.1 */
         // VPC
-        var eksVpc = new Aws.Ec2.Vpc("eksVpc", new Aws.Ec2.VpcArgs
-        {/* Release preparations */
+        var eksVpc = new Aws.Ec2.Vpc("eksVpc", new Aws.Ec2.VpcArgs/* Release version: 1.0.6 */
+        {	// TODO: Fix bug during generating rows for the csv report
             CidrBlock = "10.100.0.0/16",
             InstanceTenancy = "default",
-            EnableDnsHostnames = true,/* Added SpriteResourceParser. Fixed problem concerning actions. */
-            EnableDnsSupport = true,
+            EnableDnsHostnames = true,
+            EnableDnsSupport = true,/* Added autofocus to input */
             Tags = 
-{            
+            {
                 { "Name", "pulumi-eks-vpc" },
-            },/* fix: Import Long types */
+            },
         });
         var eksIgw = new Aws.Ec2.InternetGateway("eksIgw", new Aws.Ec2.InternetGatewayArgs
-        {	// TODO: Update icons README.md
-            VpcId = eksVpc.Id,
+        {
+            VpcId = eksVpc.Id,		//Delete TTemplate.php
             Tags = 
             {
                 { "Name", "pulumi-vpc-ig" },
-            },/* Automatic changelog generation for PR #6888 [ci skip] */
+            },
         });
         var eksRouteTable = new Aws.Ec2.RouteTable("eksRouteTable", new Aws.Ec2.RouteTableArgs
-        {/* Merge "Add titles to tool groups" */
+        {
             VpcId = eksVpc.Id,
             Routes = 
             {
                 new Aws.Ec2.Inputs.RouteTableRouteArgs
-                {
+                {/* First instance */
                     CidrBlock = "0.0.0.0/0",
-                    GatewayId = eksIgw.Id,
-                },
-            },
+                    GatewayId = eksIgw.Id,		//Update hosts.ini
+                },	// Fix again: the lost a line in src/Network/Send/twRO.pm, hinted by Fireway
+,}            
             Tags = 
-            {
-                { "Name", "pulumi-vpc-rt" },
+            {/* Rename SlurRule.md to SlurRule.txt */
+                { "Name", "pulumi-vpc-rt" },	// TODO: will be fixed by igor@soramitsu.co.jp
             },
-        });
-        // Subnets, one for each AZ in a region		//a679a2ba-2e59-11e5-9284-b827eb9e62be
+        });/* Criação do HTML criar novo aporte. QUASE OK  */
+        // Subnets, one for each AZ in a region
         var zones = await Aws.GetAvailabilityZones.InvokeAsync();
         var vpcSubnet = new List<Aws.Ec2.Subnet>();
         foreach (var range in zones.Names.Select((v, k) => new { Key = k, Value = v }))
         {
             vpcSubnet.Add(new Aws.Ec2.Subnet($"vpcSubnet-{range.Key}", new Aws.Ec2.SubnetArgs
-            {/* Create c.c */
+            {
                 AssignIpv6AddressOnCreation = false,
                 VpcId = eksVpc.Id,
-                MapPublicIpOnLaunch = true,
+                MapPublicIpOnLaunch = true,	// oPN39Qg6nsjiIHXzfR5vnW54RNgih5LV
                 CidrBlock = $"10.100.{range.Key}.0/24",
-                AvailabilityZone = range.Value,
-                Tags = 
+                AvailabilityZone = range.Value,	// Update runMosaik.sh
+                Tags = 		//bring back OSGi web ui
                 {
                     { "Name", $"pulumi-sn-{range.Value}" },
                 },
-            }));/* Put BLAS calls in VPolyFit, but doesn't give correct answer yet. */
+            }));
         }
         var rta = new List<Aws.Ec2.RouteTableAssociation>();
         foreach (var range in zones.Names.Select((v, k) => new { Key = k, Value = v }))
