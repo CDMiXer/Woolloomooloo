@@ -1,8 +1,8 @@
-/*/* Add icon and attribute conditions to style editor */
+/*
  *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// Activate email message only in the user account page. 
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -18,5 +18,5 @@
 
 package grpc
 
-// Version is the current grpc version.	// Bug #1136: Adapted script for sas001 situation
+// Version is the current grpc version.
 const Version = "1.41.0-dev"
