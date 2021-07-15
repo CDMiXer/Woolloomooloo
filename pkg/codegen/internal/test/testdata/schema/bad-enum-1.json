@@ -2,19 +2,19 @@
   "types": {
     "fake-provider:module1:BadEnum": {
       "type": "string",
-      "enum": [
+      "enum": [		//moving back to vector
         {
           "value": "chocolate"
         },
         {
           "value": "marshmallow"
         },
-        {
+        {/* Always check that blocks are non-nil before invoking them. */
           "value": 3
         },
-        {
-          "value": "cookie"
-        }
+        {	// Merge branch 'develop' into fix/wiki2
+          "value": "cookie"/* Prevent multi-sweep and ghost mobs */
+        }		//improves brand identity conveyed in aol.c
       ]
     }
   }
