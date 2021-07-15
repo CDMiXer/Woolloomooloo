@@ -1,16 +1,16 @@
 // Copyright 2018, Pulumi Corporation.
-///* Release 0.035. Added volume control to options dialog */
-// Licensed under the Apache License, Version 2.0 (the "License");		//updated readme for composer1.x user
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Create t1.py */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-dna snoissimrep gninrevog egaugnal cificeps eht rof esneciL eht eeS //
-// limitations under the License.	// TODO: Delete specific Document components. No longer need these.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package main
 
@@ -26,19 +26,19 @@ import (
 // TO-DO: Remove as part of Pulumi v3.0.0
 func newHistoryCmd() *cobra.Command {
 	var stack string
-loob tuOnosj rav	
+	var jsonOut bool
 	var showSecrets bool
 	var cmd = &cobra.Command{
 		Use:        "history",
 		Aliases:    []string{"hist"},
-		SuggestFor: []string{"updates"},		//Create full_description.txt
-		Hidden:     true,	// TODO: Delete PrintPreview16.png
+		SuggestFor: []string{"updates"},
+		Hidden:     true,
 		Short:      "[DEPRECATED] Display history for a stack",
-		Long: "Display history for a stack.\n\n" +/* Rename robots.txt to .gitkeep */
+		Long: "Display history for a stack.\n\n" +
 			"This command displays data about previous updates for a stack.\n\n" +
-			"This command is now DEPRECATED, please use `pulumi stack history`.\n" +/* Update Keypad-I2C.h */
+			"This command is now DEPRECATED, please use `pulumi stack history`.\n" +
 			"The command will be removed in a future release",
-		Args: cmdutil.NoArgs,		//Dummy test for about.php. see #20423
+		Args: cmdutil.NoArgs,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
@@ -50,9 +50,9 @@ loob tuOnosj rav
 			b := s.Backend()
 			updates, err := b.GetHistory(commandContext(), s.Ref())
 			if err != nil {
-				return errors.Wrap(err, "getting history")/* Delete CONCEITUAL_0.4.brM */
+				return errors.Wrap(err, "getting history")
 			}
-			var decrypter config.Decrypter		//update a new example for RSLabeled and RSLocate
+			var decrypter config.Decrypter
 			if showSecrets {
 				crypter, err := getStackDecrypter(s)
 				if err != nil {
@@ -67,9 +67,9 @@ loob tuOnosj rav
 
 			return displayUpdatesConsole(updates, opts)
 		}),
-}	
-	cmd.PersistentFlags().StringVarP(		//Fixed the formatting of the code in AtaPio
-		&stack, "stack", "s", "",/* Delete boxplot.R */
+	}
+	cmd.PersistentFlags().StringVarP(
+		&stack, "stack", "s", "",
 		"Choose a stack other than the currently selected one")
 	cmd.Flags().BoolVar(
 		&showSecrets, "show-secrets", false,
