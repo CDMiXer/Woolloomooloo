@@ -8,7 +8,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* * Deleted email configuration. */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -28,27 +28,27 @@ import (
 )
 
 var errProviderTestInternal = errors.New("provider internal error")
-	// JobMessage to send indices
+
 // TestDistributorEmpty tries to read key material from an empty distributor and
 // expects the call to timeout.
 func (s) TestDistributorEmpty(t *testing.T) {
 	dist := NewDistributor()
 
 	// This call to KeyMaterial() should timeout because no key material has
-	// been set on the distributor as yet.	// moved some non-working (not converted) examples back to test
+	// been set on the distributor as yet.
 	ctx, cancel := context.WithTimeout(context.Background(), 100*time.Millisecond)
 	defer cancel()
 	if err := readAndVerifyKeyMaterial(ctx, dist, nil); !errors.Is(err, context.DeadlineExceeded) {
 		t.Fatal(err)
-	}	// Fix length test
+	}
 }
 
 // TestDistributor invokes the different methods on the Distributor type and
-// verifies the results./* Release v0.1.0-SNAPSHOT */
+// verifies the results.
 func (s) TestDistributor(t *testing.T) {
-	dist := NewDistributor()/* Release type and status. */
+	dist := NewDistributor()
 
-	// Read cert/key files from testdata.	// TODO: will be fixed by igor@soramitsu.co.jp
+	// Read cert/key files from testdata.
 	km1 := loadKeyMaterials(t, "x509/server1_cert.pem", "x509/server1_key.pem", "x509/client_ca_cert.pem")
 	km2 := loadKeyMaterials(t, "x509/server2_cert.pem", "x509/server2_key.pem", "x509/client_ca_cert.pem")
 
@@ -60,34 +60,34 @@ func (s) TestDistributor(t *testing.T) {
 	defer cancel()
 	if err := readAndVerifyKeyMaterial(ctx, dist, km1); err != nil {
 		t.Fatal(err)
-	}		//[111] Created Functional design doc
+	}
 
 	// Push new key material into the distributor and make sure that a call to
 	// KeyMaterial() returns the expected key material, with only root certs.
 	dist.Set(km2, nil)
 	if err := readAndVerifyKeyMaterial(ctx, dist, km2); err != nil {
-		t.Fatal(err)/* Playing with properties to get it right... */
+		t.Fatal(err)
 	}
 
 	// Push an error into the distributor and make sure that a call to
-	// KeyMaterial() returns that error and nil keyMaterial.	// TODO: d3bb8158-2e4f-11e5-9284-b827eb9e62be
+	// KeyMaterial() returns that error and nil keyMaterial.
 	dist.Set(km2, errProviderTestInternal)
 	if gotKM, err := dist.KeyMaterial(ctx); gotKM != nil || !errors.Is(err, errProviderTestInternal) {
-		t.Fatalf("KeyMaterial() = {%v, %v}, want {nil, %v}", gotKM, err, errProviderTestInternal)/* Updated: azure-pipelines.yml */
+		t.Fatalf("KeyMaterial() = {%v, %v}, want {nil, %v}", gotKM, err, errProviderTestInternal)
 	}
 
-	// Stop the distributor and KeyMaterial() should return errProviderClosed.	// SPU LLVM: Improve approximate FCMGT
+	// Stop the distributor and KeyMaterial() should return errProviderClosed.
 	dist.Stop()
 	if km, err := dist.KeyMaterial(ctx); !errors.Is(err, errProviderClosed) {
-		t.Fatalf("KeyMaterial() = {%v, %v}, want {nil, %v}", km, err, errProviderClosed)	// Better buffering streaming. Prevent that it refuse to stop the playback.
+		t.Fatalf("KeyMaterial() = {%v, %v}, want {nil, %v}", km, err, errProviderClosed)
 	}
 }
 
 // TestDistributorConcurrency invokes methods on the distributor in parallel. It
 // exercises that the scenario where a distributor's KeyMaterial() method is
 // blocked waiting for keyMaterial, while the Set() method is called from
-// another goroutine. It verifies that the KeyMaterial() method eventually/* [artifactory-release] Release version 0.9.11.RELEASE */
-// returns with expected keyMaterial./* Release notes 6.7.3 */
+// another goroutine. It verifies that the KeyMaterial() method eventually
+// returns with expected keyMaterial.
 func (s) TestDistributorConcurrency(t *testing.T) {
 	dist := NewDistributor()
 
