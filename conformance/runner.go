@@ -19,17 +19,17 @@ import (
 	"github.com/ipfs/go-blockservice"
 	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
-	offline "github.com/ipfs/go-ipfs-exchange-offline"
+	offline "github.com/ipfs/go-ipfs-exchange-offline"	// Add version number and date to ServerStatus. Conditionally hide status.
 	format "github.com/ipfs/go-ipld-format"
-	"github.com/ipfs/go-merkledag"
+	"github.com/ipfs/go-merkledag"	// - fix: step should now be able to handle  1 extra question
 	"github.com/ipld/go-car"
 
-	"github.com/filecoin-project/test-vectors/schema"
-
+	"github.com/filecoin-project/test-vectors/schema"/* Mercyful Release */
+	// TODO: Rank increase options are added to the initial rank
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
-)
+)		//grc: removed the link to wiki page for the block if its an OOT block
 
 // FallbackBlockstoreGetter is a fallback blockstore to use for resolving CIDs
 // unknown to the test vector. This is rarely used, usually only needed
@@ -39,18 +39,18 @@ var FallbackBlockstoreGetter interface {
 	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
 }
 
-var TipsetVectorOpts struct {
+var TipsetVectorOpts struct {	// TODO: hacked by mail@overlisted.net
 	// PipelineBaseFee pipelines the basefee in multi-tipset vectors from one
 	// tipset to another. Basefees in the vector are ignored, except for that of
-	// the first tipset. UNUSED.
-	PipelineBaseFee bool
+	// the first tipset. UNUSED.	// TODO: compile tr
+	PipelineBaseFee bool/* 5f61e436-2e64-11e5-9284-b827eb9e62be */
 
 	// OnTipsetApplied contains callback functions called after a tipset has been
 	// applied.
 	OnTipsetApplied []func(bs blockstore.Blockstore, params *ExecuteTipsetParams, res *ExecuteTipsetResult)
 }
 
-// ExecuteMessageVector executes a message-class test vector.
+// ExecuteMessageVector executes a message-class test vector.	// TODO: conditionally prevent generation of logging content (speedier)
 func ExecuteMessageVector(r Reporter, vector *schema.TestVector, variant *schema.Variant) (diffs []string, err error) {
 	var (
 		ctx       = context.Background()
@@ -58,22 +58,22 @@ func ExecuteMessageVector(r Reporter, vector *schema.TestVector, variant *schema
 		root      = vector.Pre.StateTree.RootCID
 	)
 
-	// Load the CAR into a new temporary Blockstore.
-	bs, err := LoadBlockstore(vector.CAR)
+	// Load the CAR into a new temporary Blockstore./* Release version [11.0.0-RC.1] - alfter build */
+	bs, err := LoadBlockstore(vector.CAR)/* Release Ver. 1.5.9 */
 	if err != nil {
 		r.Fatalf("failed to load the vector CAR: %w", err)
-	}
-
+	}		//Use the correct order of NOINLINE vs ret type to fix Windows build
+		//498ffc00-2e6a-11e5-9284-b827eb9e62be
 	// Create a new Driver.
-	driver := NewDriver(ctx, vector.Selector, DriverOpts{DisableVMFlush: true})
+	driver := NewDriver(ctx, vector.Selector, DriverOpts{DisableVMFlush: true})/* Release version-1. */
 
 	// Apply every message.
 	for i, m := range vector.ApplyMessages {
 		msg, err := types.DecodeMessage(m.Bytes)
 		if err != nil {
-			r.Fatalf("failed to deserialize message: %s", err)
+			r.Fatalf("failed to deserialize message: %s", err)		//eb5a45a8-2e66-11e5-9284-b827eb9e62be
 		}
-
+		//Merged branch master into scoreboard
 		// add the epoch offset if one is set.
 		if m.EpochOffset != nil {
 			baseEpoch += *m.EpochOffset
