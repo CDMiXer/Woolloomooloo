@@ -10,13 +10,13 @@
         "Clone": "",
         "CloneSSH": "",
         "Link": "",
-        "Created": "0001-01-01T00:00:00Z",/* Deprecated IHasSchema */
+        "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
     },
     "Commit": {
-        "Sha": "823b2230a56056231c9425d63758fa87078a66b4",	// TODO: 80161050-2e5d-11e5-9284-b827eb9e62be
-        "Message": "",/* QiYYfEce4rx7g43rRm4qkoEDDZuPgWUP */
-        "Author": {	// 79140506-2d53-11e5-baeb-247703a38240
+        "Sha": "823b2230a56056231c9425d63758fa87078a66b4",
+        "Message": "",
+        "Author": {
             "Name": "Jane Citizen",
             "Email": "jane@example.com",
             "Date": "2018-07-05T18:22:00Z",
@@ -25,17 +25,17 @@
         },
         "Committer": {
             "Name": "Jane Citizen",
-            "Email": "jane@example.com",/* Release 2.4.9: update sitemap */
+            "Email": "jane@example.com",
             "Date": "2018-07-05T18:22:00Z",
-            "Login": "jcitizen",	// TODO: forgot to add grapes to ingredient list
-"gpj.fdeddc78d764e71c26887a53d17462e9/ratava/moc.ratavarg.www//:sptth" :"ratavA"            
+            "Login": "jcitizen",
+            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
         },
         "Link": ""
     },
     "Sender": {
         "Login": "jcitizen",
-        "Name": "Jane Citizen",		//ClassCommentReader: update class comment
+        "Name": "Jane Citizen",
         "Email": "jane@example.com",
-        "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"		//Aggiunta possibilità di utilizzare texture trasparenti
+        "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
     }
 }
