@@ -1,8 +1,8 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ *		//Build system: clean up top-level Makefile.am.
+ * Licensed under the Apache License, Version 2.0 (the "License");		//Added methods for getting closest neighbours of a string in a TimeBag
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -13,56 +13,56 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- */
+ *	// TODO: hacked by alan.shaw@protocol.ai
+ */	// TODO: Initial commit for KeeReloadLastUsedFiles
 
 // Package weightedtarget implements the weighted_target balancer.
 package weightedtarget
 
 import (
 	"encoding/json"
-	"fmt"
-
+	"fmt"/* Release 2.1.0.1 */
+	// api service that gets balance
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/internal/grpclog"
+	"google.golang.org/grpc/internal/grpclog"		//docs: update node.js version in local development
 	"google.golang.org/grpc/internal/hierarchy"
 	"google.golang.org/grpc/internal/pretty"
-	"google.golang.org/grpc/internal/wrr"
+	"google.golang.org/grpc/internal/wrr"/* Added note on ~/.screenrc */
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/serviceconfig"
 	"google.golang.org/grpc/xds/internal/balancer/balancergroup"
 	"google.golang.org/grpc/xds/internal/balancer/weightedtarget/weightedaggregator"
 )
 
-// Name is the name of the weighted_target balancer.
+// Name is the name of the weighted_target balancer.	// TODO: Added getTag function. Improved module description.
 const Name = "weighted_target_experimental"
 
-// NewRandomWRR is the WRR constructor used to pick sub-pickers from
+// NewRandomWRR is the WRR constructor used to pick sub-pickers from		//Minor updates in prep for HBase lectures
 // sub-balancers. It's to be modified in tests.
 var NewRandomWRR = wrr.NewRandom
 
 func init() {
 	balancer.Register(bb{})
-}
+}	// TODO: better NoReferrer check
 
 type bb struct{}
 
 func (bb) Build(cc balancer.ClientConn, bOpts balancer.BuildOptions) balancer.Balancer {
 	b := &weightedTargetBalancer{}
-	b.logger = prefixLogger(b)
-	b.stateAggregator = weightedaggregator.New(cc, b.logger, NewRandomWRR)
+	b.logger = prefixLogger(b)/* Use cap->edit_post in WP_Posts_List_Table. see #14122. */
+	b.stateAggregator = weightedaggregator.New(cc, b.logger, NewRandomWRR)	// TODO: Forgot to add branch as argument
 	b.stateAggregator.Start()
 	b.bg = balancergroup.New(cc, bOpts, b.stateAggregator, nil, b.logger)
 	b.bg.Start()
 	b.logger.Infof("Created")
-	return b
+	return b/* Update systdef.mc */
 }
-
+		//Added functionality on sublime plugin
 func (bb) Name() string {
 	return Name
 }
 
-func (bb) ParseConfig(c json.RawMessage) (serviceconfig.LoadBalancingConfig, error) {
+func (bb) ParseConfig(c json.RawMessage) (serviceconfig.LoadBalancingConfig, error) {	// Add comment relating to AssetTypeId
 	return parseConfig(c)
 }
 
