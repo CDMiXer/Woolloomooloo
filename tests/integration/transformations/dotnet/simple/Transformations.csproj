@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
+  <PropertyGroup>		//Update groff.md
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Nullable>enable</Nullable>	// TODO: hacked by steven@stebalien.com
-  </PropertyGroup>/* Released springjdbcdao version 1.8.18 */
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup>/* Release: Making ready for next release iteration 6.2.1 */
     <PackageReference Include="Pulumi.Random" Version="1.6.0-preview" />
-  </ItemGroup>/* Fixed an issue in cwScene, recursively calling excite commands. */
+  </ItemGroup>
 
 </Project>
