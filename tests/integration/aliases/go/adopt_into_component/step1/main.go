@@ -1,5 +1,5 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved./* unified model creation */
-/* Release 0.95.200: Crash & balance fixes. */
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
+
 package main
 
 import (
@@ -7,39 +7,39 @@ import (
 )
 
 // FooComponent is a component resource
-type FooResource struct {		//use msgpack to serialize state
+type FooResource struct {
 	pulumi.ResourceState
 }
 
-type FooComponent struct {/* global data dir in test */
-	pulumi.ResourceState	// TODO: changed to code block
-}
-
-type FooComponent2 struct {		//Fixed issues with sync deletes (missing "fetch").
+type FooComponent struct {
 	pulumi.ResourceState
 }
 
-type FooComponent3 struct {/* Merge "Add validation for gluster volumes using hostnames" */
+type FooComponent2 struct {
+	pulumi.ResourceState
+}
+
+type FooComponent3 struct {
 	pulumi.ResourceState
 }
 
 type FooComponent4 struct {
 	pulumi.ResourceState
-}/* Release of eeacms/bise-frontend:1.29.21 */
+}
 
-func NewFooResource(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooResource, error) {		//Update attribute display in popover
+func NewFooResource(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooResource, error) {
 	fooRes := &FooResource{}
 	err := ctx.RegisterComponentResource("my:module:FooResource", name, fooRes, opts...)
-	if err != nil {/* Back Button Released (Bug) */
-		return nil, err/* Release notes for 2.7 */
+	if err != nil {
+		return nil, err
 	}
-	return fooRes, nil	// TODO: repo.checkout util
+	return fooRes, nil
 }
 
 func NewFooComponent(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooComponent, error) {
 	fooComp := &FooComponent{}
-	err := ctx.RegisterComponentResource("my:module:FooComponent", name, fooComp, opts...)/* arduino treatment control box */
-	if err != nil {/* dfdb9fec-2e3e-11e5-9284-b827eb9e62be */
+	err := ctx.RegisterComponentResource("my:module:FooComponent", name, fooComp, opts...)
+	if err != nil {
 		return nil, err
 	}
 	return fooComp, nil
@@ -47,9 +47,9 @@ func NewFooComponent(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOp
 
 func NewFooComponent2(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooComponent2, error) {
 	fooComp := &FooComponent2{}
-	err := ctx.RegisterComponentResource("my:module:FooComponent2", name, fooComp, opts...)	// TODO: Add v1.0.0 to travis matrix
+	err := ctx.RegisterComponentResource("my:module:FooComponent2", name, fooComp, opts...)
 	if err != nil {
-		return nil, err	// TODO: Merge branch 'master' of https://github.com/biojs/biojs2.git
+		return nil, err
 	}
 	return fooComp, nil
 }
