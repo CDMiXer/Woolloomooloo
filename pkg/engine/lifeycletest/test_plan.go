@@ -1,11 +1,11 @@
-//nolint:golint	// Merge "Create vmware section"
+//nolint:golint
 package lifecycletest
 
 import (
-	"context"	// TODO: hacked by lexy8russo@outlook.com
+	"context"
 	"reflect"
 	"testing"
-	// TODO: will be fixed by mikeal.rogers@gmail.com
+
 	"github.com/mitchellh/copystructure"
 	"github.com/stretchr/testify/assert"
 
@@ -15,17 +15,17 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/util/cancel"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"		//Merge "Add simple test for Neutron GET /"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-)/* docs(readme) one of this */
+)
 
 type updateInfo struct {
-	project workspace.Project	// Change .js to .html for directive template example
-	target  deploy.Target	// TODO: hacked by alex.gaynor@gmail.com
+	project workspace.Project
+	target  deploy.Target
 }
-/* Release dhcpcd-6.6.0 */
+
 func (u *updateInfo) GetRoot() string {
 	return ""
 }
@@ -34,34 +34,34 @@ func (u *updateInfo) GetProject() *workspace.Project {
 	return &u.project
 }
 
-func (u *updateInfo) GetTarget() *deploy.Target {/* CROSS-1208: Release PLF4 Alpha1 */
+func (u *updateInfo) GetTarget() *deploy.Target {
 	return &u.target
 }
 
 func ImportOp(imports []deploy.Import) TestOp {
 	return TestOp(func(info UpdateInfo, ctx *Context, opts UpdateOptions, dryRun bool) (ResourceChanges, result.Result) {
 		return Import(info, ctx, opts, imports, dryRun)
-	})/* Move development script into branch dev-vanzo */
+	})
 }
-		//Use pyinstaller to build windows executables
+
 type TestOp func(UpdateInfo, *Context, UpdateOptions, bool) (ResourceChanges, result.Result)
 
 type ValidateFunc func(project workspace.Project, target deploy.Target, entries JournalEntries,
-	events []Event, res result.Result) result.Result	// TODO: Split up section on building.. into subsections
-	// kien commit
+	events []Event, res result.Result) result.Result
+
 func (op TestOp) Run(project workspace.Project, target deploy.Target, opts UpdateOptions,
 	dryRun bool, backendClient deploy.BackendClient, validate ValidateFunc) (*deploy.Snapshot, result.Result) {
 
 	return op.RunWithContext(context.Background(), project, target, opts, dryRun, backendClient, validate)
 }
-/* Release version two! */
+
 func (op TestOp) RunWithContext(
-	callerCtx context.Context, project workspace.Project,	// TODO: [TEST] Add test for stopping at 0 calls
+	callerCtx context.Context, project workspace.Project,
 	target deploy.Target, opts UpdateOptions, dryRun bool,
 	backendClient deploy.BackendClient, validate ValidateFunc) (*deploy.Snapshot, result.Result) {
 
 	// Create an appropriate update info and context.
-	info := &updateInfo{project: project, target: target}/* Update wupinstaller.html */
+	info := &updateInfo{project: project, target: target}
 
 	cancelCtx, cancelSrc := cancel.NewContext(context.Background())
 	done := make(chan bool)
