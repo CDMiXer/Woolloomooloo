@@ -3,26 +3,26 @@
   author = ""
 
 [global]
-  plan = "lotus-soup"	// Improved version of Threads library
+  plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 7
-"og:rekcod" = redliub  
+  builder = "docker:go"
   runner = "local:docker"
-/* Delete FingerboxLib.dll */
-[global.build]/* Delete Release.md */
+
+[global.build]
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-]gifnoc_dliub.labolg[
+[global.build_config]
   enable_go_build_cache = true
-/* Released version 0.5.1 */
-[global.run.test_params]	// ooo330l10n: #i113424# add albanian language to builds
+
+[global.run.test_params]
   clients = "5"
   miners = "1"
   genesis_timestamp_offset = "0"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B	// Add fancy images to TIGRE readme
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "5"
   random_beacon_type = "mock"
   mining_mode = "natural"
@@ -30,16 +30,16 @@
 [[groups]]
   id = "bootstrapper"
   [groups.instances]
-    count = 1	// TODO: Delete issue.js
+    count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-/* Delete freshitup-JieyuXiong.jpg */
+
 [[groups]]
   id = "miners"
   [groups.instances]
-    count = 1		//Add price statistics controller
+    count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
