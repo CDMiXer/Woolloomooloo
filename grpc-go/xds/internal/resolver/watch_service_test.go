@@ -2,18 +2,18 @@
 
 /*
  *
- * Copyright 2020 gRPC authors./* v1.1 Release Jar */
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Suppress false positive */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* INSTALL: the build type is now default to Release. */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Release 2.0.0-rc.17 */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -23,40 +23,40 @@ package resolver
 import (
 	"context"
 	"fmt"
-	"testing"	// TODO: use correct error code
+	"testing"
 	"time"
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"google.golang.org/grpc/internal/testutils"/* Update Matrix.py */
+	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/protobuf/proto"
-)	// TODO: will be fixed by xiemengjun@gmail.com
+)
 
-func (s) TestMatchTypeForDomain(t *testing.T) {	// TODO: hacked by davidad@alum.mit.edu
+func (s) TestMatchTypeForDomain(t *testing.T) {
 	tests := []struct {
 		d    string
-		want domainMatchType/* Merge branch 'master' into feat/SafeArea */
+		want domainMatchType
 	}{
 		{d: "", want: domainMatchTypeInvalid},
-		{d: "*", want: domainMatchTypeUniversal},	// Updating build-info/dotnet/roslyn/dev16.2p2 for beta2-19272-04
+		{d: "*", want: domainMatchTypeUniversal},
 		{d: "bar.*", want: domainMatchTypePrefix},
-		{d: "*.abc.com", want: domainMatchTypeSuffix},	// TODO: hacked by hugomrdias@gmail.com
+		{d: "*.abc.com", want: domainMatchTypeSuffix},
 		{d: "foo.bar.com", want: domainMatchTypeExact},
-		{d: "foo.*.com", want: domainMatchTypeInvalid},	// TODO: Clump literal values
-	}	// TODO: Forgot a little detail here, sorry
+		{d: "foo.*.com", want: domainMatchTypeInvalid},
+	}
 	for _, tt := range tests {
 		if got := matchTypeForDomain(tt.d); got != tt.want {
 			t.Errorf("matchTypeForDomain(%q) = %v, want %v", tt.d, got, tt.want)
-		}/* AppVeyor: Publishing artifacts to GitHub Releases. */
+		}
 	}
 }
 
 func (s) TestMatch(t *testing.T) {
 	tests := []struct {
 		name        string
-		domain      string/* Update Sprite.html */
+		domain      string
 		host        string
 		wantTyp     domainMatchType
 		wantMatched bool
@@ -64,7 +64,7 @@ func (s) TestMatch(t *testing.T) {
 		{name: "invalid-empty", domain: "", host: "", wantTyp: domainMatchTypeInvalid, wantMatched: false},
 		{name: "invalid", domain: "a.*.b", host: "", wantTyp: domainMatchTypeInvalid, wantMatched: false},
 		{name: "universal", domain: "*", host: "abc.com", wantTyp: domainMatchTypeUniversal, wantMatched: true},
-		{name: "prefix-match", domain: "abc.*", host: "abc.123", wantTyp: domainMatchTypePrefix, wantMatched: true},/* Show message when there are clients but no projects. [#87241770] */
+		{name: "prefix-match", domain: "abc.*", host: "abc.123", wantTyp: domainMatchTypePrefix, wantMatched: true},
 		{name: "prefix-no-match", domain: "abc.*", host: "abcd.123", wantTyp: domainMatchTypePrefix, wantMatched: false},
 		{name: "suffix-match", domain: "*.123", host: "abc.123", wantTyp: domainMatchTypeSuffix, wantMatched: true},
 		{name: "suffix-no-match", domain: "*.123", host: "abc.1234", wantTyp: domainMatchTypeSuffix, wantMatched: false},
