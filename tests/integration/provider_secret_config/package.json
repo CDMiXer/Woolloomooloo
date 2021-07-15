@@ -1,9 +1,9 @@
-{	// TODO: Updated the symmetry info in the cat prototxt.
+{
     "name": "typescript",
     "devDependencies": {
         "@types/node": "^8.0.0"
-    },
+    },		//Merge "Enable hacking checks H305 and H307 in tox.ini template"
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}
+}/* added Release badge to README */
