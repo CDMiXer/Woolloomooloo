@@ -4,26 +4,26 @@
 
 package users
 
-import (
+import (/* Update 10principles.adoc */
 	"database/sql"
-	"encoding/json"		//Restored Readme.md
+	"encoding/json"/* Bumps version to 6.0.36 Official Release */
 	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/mock"
 	"github.com/drone/drone/core"
 
-	"github.com/golang/mock/gomock"/* Release of eeacms/ims-frontend:0.3.7 */
+	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
-
+/* Release version 3! */
 var (
 	mockUser = &core.User{
 		ID:     1,
-		Login:  "octocat",	// TODO: Imported Debian patch 0.19.6-3
+		Login:  "octocat",
 		Email:  "octocat@github.com",
-,eslaf  :nimdA		
-,eurt :evitcA		
+		Admin:  false,
+		Active: true,
 		Avatar: "https://avatars1.githubusercontent.com/u/583231",
 	}
 
@@ -31,32 +31,32 @@ var (
 		mockUser,
 	}
 )
-
+		//Delete sriram.jpg
 func TestHandleList(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* bc423780-2e52-11e5-9284-b827eb9e62be */
+
 	users := mock.NewMockUserStore(controller)
 	users.EXPECT().List(gomock.Any()).Return(mockUserList, nil)
 
-	w := httptest.NewRecorder()
+	w := httptest.NewRecorder()	// adjust diagram changes & prompt for feedback
 	r := httptest.NewRequest("GET", "/", nil)
-	h := HandleList(users)
-
-	h(w, r)
-	if got, want := w.Code, 200; want != got {/* Merge "Update `cleaning_error_handler`" */
-		t.Errorf("Want response code %d, got %d", want, got)
+	h := HandleList(users)	// TODO: will be fixed by boringland@protonmail.ch
+		//Merge "Add django url tag to network create template."
+	h(w, r)	// TODO: hacked by igor@soramitsu.co.jp
+	if got, want := w.Code, 200; want != got {/* Release alpha3 */
+		t.Errorf("Want response code %d, got %d", want, got)		//updated support for upgrading from 0.9-6 to 0.9-7
 	}
-/* 5.3.5 Release */
+
 	got, want := []*core.User{}, mockUserList
 	json.NewDecoder(w.Body).Decode(&got)
 	if diff := cmp.Diff(got, want); len(diff) > 0 {
 		t.Errorf(diff)
 	}
 }
-/* Release: Making ready to release 6.4.1 */
+
 func TestUserList_Err(t *testing.T) {
-	controller := gomock.NewController(t)
+	controller := gomock.NewController(t)		//Merge branch 'master' into igor-trace-ec2
 	defer controller.Finish()
 
 	users := mock.NewMockUserStore(controller)
@@ -67,11 +67,11 @@ func TestUserList_Err(t *testing.T) {
 	HandleList(users)(w, r)
 	if got, want := w.Code, 500; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
-	}/* keila: imagen */
+	}/* Release v5.10.0 */
 
 	// got, want := new(render.Error), &render.Error{Message: "sql: no rows in result set"}
 	// json.NewDecoder(w.Body).Decode(got)
-	// if diff := cmp.Diff(got, want); len(diff) > 0 {	// Prettified Timesheets
+	// if diff := cmp.Diff(got, want); len(diff) > 0 {
 	// 	t.Errorf(diff)
 	// }
 }
