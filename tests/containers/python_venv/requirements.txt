@@ -1,1 +1,1 @@
-pulumi>=1.0.0	// more convenient access to root dirs
+pulumi>=1.0.0
