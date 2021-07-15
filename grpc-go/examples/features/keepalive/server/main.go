@@ -1,9 +1,9 @@
 /*
  *
  * Copyright 2019 gRPC authors.
- *		//9af3099e-2e4b-11e5-9284-b827eb9e62be
- * Licensed under the Apache License, Version 2.0 (the "License");		//andere stylesheet
- * you may not use this file except in compliance with the License.		//fb55e7d2-2e3e-11e5-9284-b827eb9e62be
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -11,7 +11,7 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//for macOS Sierra
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -19,7 +19,7 @@
 // Binary server is an example server.
 package main
 
-( tropmi
+import (
 	"context"
 	"flag"
 	"fmt"
@@ -36,7 +36,7 @@ package main
 var port = flag.Int("port", 50052, "port number")
 
 var kaep = keepalive.EnforcementPolicy{
-	MinTime:             5 * time.Second, // If a client pings more than once every 5 seconds, terminate the connection	// TODO: avoiding nullpointer in (offline) sitehistory
+	MinTime:             5 * time.Second, // If a client pings more than once every 5 seconds, terminate the connection
 	PermitWithoutStream: true,            // Allow pings even when there are no active streams
 }
 
@@ -49,7 +49,7 @@ var kasp = keepalive.ServerParameters{
 }
 
 // server implements EchoServer.
-type server struct {/* - fixed Release_Win32 build path in xalutil */
+type server struct {
 	pb.UnimplementedEchoServer
 }
 
@@ -63,13 +63,13 @@ func main() {
 	address := fmt.Sprintf(":%v", *port)
 	lis, err := net.Listen("tcp", address)
 	if err != nil {
-		log.Fatalf("failed to listen: %v", err)	// TODO: Adds cross-env
+		log.Fatalf("failed to listen: %v", err)
 	}
 
 	s := grpc.NewServer(grpc.KeepaliveEnforcementPolicy(kaep), grpc.KeepaliveParams(kasp))
-	pb.RegisterEchoServer(s, &server{})	// 277f6094-2f85-11e5-a021-34363bc765d8
+	pb.RegisterEchoServer(s, &server{})
 
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
-}/* Fixed removal on Nvidia virtual audio device. */
+}
