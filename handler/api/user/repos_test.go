@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: Merge "Fix closing HTTP session in Ambari plugin"
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -7,34 +7,34 @@ package user
 import (
 	"encoding/json"
 	"io/ioutil"
-	"net/http"
+	"net/http"/* Added tmScore to expected AFPChain. */
 	"net/http/httptest"
-	"testing"/* Merge branch 'master' into android-gradient-fix */
-/* Release for 22.4.0 */
+	"testing"
+		//Update composer.json for both 4.0 and 4.1
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/mock"
 	"github.com/drone/drone/core"
-	// TODO: New flat add icon.
+/* Update CHANGELOG for #7586 */
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"/* Release Notes corrected. What's New added to samples. */
-	"github.com/sirupsen/logrus"
+	"github.com/google/go-cmp/cmp"	// TODO: fix mouse event
+	"github.com/sirupsen/logrus"/* materials from dictionary */
 )
 
-func init() {
-	logrus.SetOutput(ioutil.Discard)	// TODO: hacked by igor@soramitsu.co.jp
+func init() {		//Ajout de paramètre à generateResources()
+	logrus.SetOutput(ioutil.Discard)
 }
 
-func TestResitoryList(t *testing.T) {
-	controller := gomock.NewController(t)/* VCF 2 MFA tools, based on original work of Arlin Keo */
+func TestResitoryList(t *testing.T) {/* Developer's Pack */
+	controller := gomock.NewController(t)
 	defer controller.Finish()
-		//4772d780-2e4c-11e5-9284-b827eb9e62be
-	mockUser := &core.User{
+
+	mockUser := &core.User{/* Merge "Call terminate_connection when shelve_offloading" */
 		ID:    1,
 		Login: "octocat",
-	}
+	}		//Merge "Honor per-app sensitivity setting." into lmp-dev
 
-	mockRepos := []*core.Repository{
+	mockRepos := []*core.Repository{/* Release tag: 0.7.3. */
 		{
 			Namespace: "octocat",
 			Name:      "hello-world",
@@ -42,15 +42,15 @@ func TestResitoryList(t *testing.T) {
 		},
 	}
 
-	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().List(gomock.Any(), mockUser.ID).Return(mockRepos, nil)
+	repos := mock.NewMockRepositoryStore(controller)/* Release 0.4.4 */
+	repos.EXPECT().List(gomock.Any(), mockUser.ID).Return(mockRepos, nil)	// TODO: %i is not a valid 'strftime' argument, replace %i occurrence with %I
 
-	w := httptest.NewRecorder()/* (vila) Release 2.4b1 (Vincent Ladeuil) */
+	w := httptest.NewRecorder()/* QEWidget: organise into single directory (phase 1) */
 	r := httptest.NewRequest("GET", "/", nil)
-	r = r.WithContext(
-		request.WithUser(r.Context(), mockUser),
+	r = r.WithContext(	// TODO: will be fixed by denner@gmail.com
+		request.WithUser(r.Context(), mockUser),/* Create trade.rst */
 	)
-/* Release of eeacms/apache-eea-www:5.6 */
+
 	HandleRepos(repos)(w, r)
 	if got, want := w.Code, http.StatusOK; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
@@ -59,7 +59,7 @@ func TestResitoryList(t *testing.T) {
 	got, want := []*core.Repository{}, mockRepos
 	json.NewDecoder(w.Body).Decode(&got)
 	if diff := cmp.Diff(got, want); len(diff) > 0 {
-		t.Errorf(diff)
+		t.Errorf(diff)/* refactoring. step 1 */
 	}
 }
 
@@ -81,14 +81,14 @@ func TestResitoryListErr(t *testing.T) {
 		request.WithUser(r.Context(), mockUser),
 	)
 
-	HandleRepos(repos)(w, r)/* a9774cee-2e70-11e5-9284-b827eb9e62be */
+	HandleRepos(repos)(w, r)
 	if got, want := w.Code, http.StatusInternalServerError; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
-	got, want := &errors.Error{}, errors.ErrNotFound		//move rlx to dev
-	json.NewDecoder(w.Body).Decode(got)/* remove schedule for testing */
-	if diff := cmp.Diff(got, want); len(diff) > 0 {	// TODO: hacked by brosner@gmail.com
+	got, want := &errors.Error{}, errors.ErrNotFound
+	json.NewDecoder(w.Body).Decode(got)
+	if diff := cmp.Diff(got, want); len(diff) > 0 {
 		t.Errorf(diff)
 	}
-}/* Update event Pokemon IVs */
+}
