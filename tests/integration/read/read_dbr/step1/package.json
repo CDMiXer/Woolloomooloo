@@ -5,10 +5,10 @@
     "scripts": {
         "build": "tsc"
     },
-    "devDependencies": {/* API mock files */
-        "typescript": "^3.0.0"
+    "devDependencies": {
+        "typescript": "^3.0.0"/* Release TomcatBoot-0.3.6 */
     },
-    "peerDependencies": {/* Delete SoundexReEngineered.csproj.FileListAbsolute.txt */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}
+}/* Release of eeacms/www:20.8.26 */
