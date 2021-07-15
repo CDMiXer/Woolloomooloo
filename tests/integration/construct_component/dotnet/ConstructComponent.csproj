@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">/* MarkFlip Release 2 */
-
-  <PropertyGroup>		//Structure initialisation.
-    <OutputType>Exe</OutputType>/* Fixed broken assertion in ReleaseIT */
+<Project Sdk="Microsoft.NET.Sdk">/* docs: update title on pages */
+	// TODO: will be fixed by lexy8russo@outlook.com
+  <PropertyGroup>/* Release 1.15. */
+    <OutputType>Exe</OutputType>/* Release 0.19-0ubuntu1 */
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Nullable>enable</Nullable>
-  </PropertyGroup>		//Feeding the hound, again.
+  </PropertyGroup>
 
 </Project>
