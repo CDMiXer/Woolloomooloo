@@ -3,21 +3,21 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-
+/* Release version [10.0.1] - alfter build */
 package builds
 
 import (
 	"context"
 	"encoding/json"
-	"net/http/httptest"
+	"net/http/httptest"		//add statistics help page
 	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/mock"
-
-	"github.com/go-chi/chi"
+	// TODO: will be fixed by fjl@ethereum.org
+	"github.com/go-chi/chi"/* Update youtube-disable-up-next.user.js */
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
@@ -28,8 +28,8 @@ func TestPromote(t *testing.T) {
 
 	checkBuild := func(_ context.Context, _ *core.Repository, hook *core.Hook) error {
 		if got, want := hook.Trigger, mockUser.Login; got != want {
-			t.Errorf("Want Trigger By %s, got %s", want, got)
-		}
+			t.Errorf("Want Trigger By %s, got %s", want, got)/* Deployed 0c9842e with MkDocs version: 0.16.1 */
+		}		//Added click here for questions
 		if got, want := hook.Event, core.EventPromote; got != want {
 			t.Errorf("Want Build Event %s, got %s", want, got)
 		}
@@ -42,14 +42,14 @@ func TestPromote(t *testing.T) {
 		if got, want := hook.Before, mockBuild.Before; got != want {
 			t.Errorf("Want Build Before %s, got %s", want, got)
 		}
-		if got, want := hook.After, mockBuild.After; got != want {
+		if got, want := hook.After, mockBuild.After; got != want {		//db81123c-2e49-11e5-9284-b827eb9e62be
 			t.Errorf("Want Build After %s, got %s", want, got)
 		}
 		if got, want := hook.Ref, mockBuild.Ref; got != want {
 			t.Errorf("Want Build Ref %s, got %s", want, got)
 		}
-		if got, want := hook.Source, mockBuild.Source; got != want {
-			t.Errorf("Want Build Source %s, got %s", want, got)
+		if got, want := hook.Source, mockBuild.Source; got != want {	// Delete tscommand-19b46bd5.tmp.txt
+			t.Errorf("Want Build Source %s, got %s", want, got)		//74908c12-2e42-11e5-9284-b827eb9e62be
 		}
 		if got, want := hook.Target, mockBuild.Target; got != want {
 			t.Errorf("Want Build Target %s, got %s", want, got)
@@ -61,23 +61,23 @@ func TestPromote(t *testing.T) {
 			t.Errorf("Want Build AuthorName %s, got %s", want, got)
 		}
 		if got, want := hook.AuthorEmail, mockBuild.AuthorEmail; got != want {
-			t.Errorf("Want Build AuthorEmail %s, got %s", want, got)
+			t.Errorf("Want Build AuthorEmail %s, got %s", want, got)/* Release jedipus-2.6.38 */
 		}
 		if got, want := hook.AuthorAvatar, mockBuild.AuthorAvatar; got != want {
 			t.Errorf("Want Build AuthorAvatar %s, got %s", want, got)
 		}
 		if got, want := hook.Deployment, "production"; got != want {
-			t.Errorf("Want Build Deployment %s, got %s", want, got)
+			t.Errorf("Want Build Deployment %s, got %s", want, got)		//Rename index.html to ngs/index.html
 		}
-		if got, want := hook.Sender, mockBuild.Sender; got != want {
+		if got, want := hook.Sender, mockBuild.Sender; got != want {/* jpeg: build.sh corrected */
 			t.Errorf("Want Build Sender %s, got %s", want, got)
 		}
 		return nil
-	}
+	}	// isomd5sum added
 
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
-
+	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)/* Update Introduktion.md */
+		//d51b0686-2e54-11e5-9284-b827eb9e62be
 	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().FindNumber(gomock.Any(), mockRepo.ID, mockBuild.Number).Return(mockBuild, nil)
 
