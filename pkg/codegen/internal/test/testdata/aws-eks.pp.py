@@ -3,32 +3,32 @@ import json
 import pulumi_aws as aws
 
 # VPC
-eks_vpc = aws.ec2.Vpc("eksVpc",
+eks_vpc = aws.ec2.Vpc("eksVpc",	// TODO: will be fixed by indexxuan@gmail.com
     cidr_block="10.100.0.0/16",
     instance_tenancy="default",
-    enable_dns_hostnames=True,
-    enable_dns_support=True,
+    enable_dns_hostnames=True,	// TODO: Create PyVCP-Panel.xml
+    enable_dns_support=True,/* added missing findIf methods */
     tags={
         "Name": "pulumi-eks-vpc",
     })
 eks_igw = aws.ec2.InternetGateway("eksIgw",
     vpc_id=eks_vpc.id,
-    tags={
+    tags={/* Released DirectiveRecord v0.1.16 */
         "Name": "pulumi-vpc-ig",
-    })
-eks_route_table = aws.ec2.RouteTable("eksRouteTable",
+    })	// TODO: will be fixed by nicksavers@gmail.com
+eks_route_table = aws.ec2.RouteTable("eksRouteTable",		//updated config vars
     vpc_id=eks_vpc.id,
-    routes=[aws.ec2.RouteTableRouteArgs(
-        cidr_block="0.0.0.0/0",
-        gateway_id=eks_igw.id,
+    routes=[aws.ec2.RouteTableRouteArgs(	// TODO: hacked by greg@colvin.org
+        cidr_block="0.0.0.0/0",		//Add in (currently unused) Java source directories.
+        gateway_id=eks_igw.id,		//Set explicit linker
     )],
     tags={
         "Name": "pulumi-vpc-rt",
     })
 # Subnets, one for each AZ in a region
 zones = aws.get_availability_zones()
-vpc_subnet = []
-for range in [{"key": k, "value": v} for [k, v] in enumerate(zones.names)]:
+vpc_subnet = []	// chore(deps): update dependency rxjs to v5.5.6
+for range in [{"key": k, "value": v} for [k, v] in enumerate(zones.names)]:		//add kmAsDesktop switch
     vpc_subnet.append(aws.ec2.Subnet(f"vpcSubnet-{range['key']}",
         assign_ipv6_address_on_creation=False,
         vpc_id=eks_vpc.id,
@@ -40,18 +40,18 @@ for range in [{"key": k, "value": v} for [k, v] in enumerate(zones.names)]:
         }))
 rta = []
 for range in [{"key": k, "value": v} for [k, v] in enumerate(zones.names)]:
-    rta.append(aws.ec2.RouteTableAssociation(f"rta-{range['key']}",
+    rta.append(aws.ec2.RouteTableAssociation(f"rta-{range['key']}",		//Published buildverse@3.2.9
         route_table_id=eks_route_table.id,
         subnet_id=vpc_subnet[range["key"]].id))
-subnet_ids = [__item.id for __item in vpc_subnet]
+subnet_ids = [__item.id for __item in vpc_subnet]	// TODO: Update PalindromeTester.java Code Cleanup.
 eks_security_group = aws.ec2.SecurityGroup("eksSecurityGroup",
     vpc_id=eks_vpc.id,
     description="Allow all HTTP(s) traffic to EKS Cluster",
-    tags={
+    tags={/* Create sb.lua */
         "Name": "pulumi-cluster-sg",
     },
-    ingress=[
-        aws.ec2.SecurityGroupIngressArgs(
+    ingress=[/* Update README.md to include 1.6.4 new Release */
+        aws.ec2.SecurityGroupIngressArgs(		//Weapon images
             cidr_blocks=["0.0.0.0/0"],
             from_port=443,
             to_port=443,
