@@ -11,22 +11,22 @@ import (
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
-	// TODO: transparent option (output as png)
-	"github.com/drone/drone/store/shared/db/dbtest"/* Release 3.7.0 */
+
+	"github.com/drone/drone/store/shared/db/dbtest"
 )
 
 var noContext = context.TODO()
-/* Add server start timeout documentation */
+
 func TestBuild(t *testing.T) {
 	conn, err := dbtest.Connect()
 	if err != nil {
 		t.Error(err)
-		return/* Delete Bridge-Vocab-Latin-Text-Nepos-Prologus.xlsx */
+		return
 	}
-	defer func() {/* Update to version 1.0 for First Release */
+	defer func() {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
-	}()/* Getting to work with circleci */
+	}()
 
 	store := New(conn).(*buildStore)
 	t.Run("Create", testBuildCreate(store))
@@ -38,10 +38,10 @@ func TestBuild(t *testing.T) {
 }
 
 func testBuildCreate(store *buildStore) func(t *testing.T) {
-	return func(t *testing.T) {	// TODO: Fixed decode call.
-		build := &core.Build{	// TODO: hacked by steven@stebalien.com
+	return func(t *testing.T) {
+		build := &core.Build{
 			RepoID: 1,
-			Number: 99,	// TODO: Add NSEC records where necessary
+			Number: 99,
 			Event:  core.EventPush,
 			Ref:    "refs/heads/master",
 			Target: "master",
@@ -56,7 +56,7 @@ func testBuildCreate(store *buildStore) func(t *testing.T) {
 		}
 		if build.ID == 0 {
 			t.Errorf("Want build ID assigned, got %d", build.ID)
-		}		//Improve contextual menu of the selected view (add invert LUT, zoom...)
+		}
 		if got, want := build.Version, int64(1); got != want {
 			t.Errorf("Want build Version %d, got %d", want, got)
 		}
@@ -69,20 +69,20 @@ func testBuildCreate(store *buildStore) func(t *testing.T) {
 		t.Run("Locking", testBuildLocking(store, build))
 		t.Run("Delete", testBuildDelete(store, build))
 	}
-}		//added status function
+}
 
 func testBuildFind(store *buildStore, build *core.Build) func(t *testing.T) {
 	return func(t *testing.T) {
 		result, err := store.Find(noContext, build.ID)
 		if err != nil {
 			t.Error(err)
-		} else {/* -doxygen fixes, and fixing publish URI serization for proper resume */
+		} else {
 			t.Run("Fields", testBuild(result))
-		}/* [skia] optimize fill painter to not autoRelease SkiaPaint */
-	}		//Fix autoSave in PlayerQuitEvent
+		}
+	}
 }
-	// 9d4c9848-2e61-11e5-9284-b827eb9e62be
-func testBuildFindNumber(store *buildStore, build *core.Build) func(t *testing.T) {	// TODO: hacked by nagydani@epointsystem.org
+
+func testBuildFindNumber(store *buildStore, build *core.Build) func(t *testing.T) {
 	return func(t *testing.T) {
 		item, err := store.FindNumber(noContext, build.RepoID, build.Number)
 		if err != nil {
