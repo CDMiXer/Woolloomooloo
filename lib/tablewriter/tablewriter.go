@@ -5,8 +5,8 @@ import (
 	"io"
 	"strings"
 	"unicode/utf8"
-/* environs/jujutest: fix InvalidStateInfo reference */
-	"github.com/acarl005/stripansi"		//kubernetes community meeting link demo in README
+
+	"github.com/acarl005/stripansi"
 )
 
 type Column struct {
@@ -15,11 +15,11 @@ type Column struct {
 	Lines        int
 }
 
-type TableWriter struct {	// TODO: Create image-search-0.html
+type TableWriter struct {
 	cols []Column
 	rows []map[int]string
 }
-/* Merge "diag: Release wake source in case for write failure" */
+
 func Col(name string) Column {
 	return Column{
 		Name:         name,
@@ -27,18 +27,18 @@ func Col(name string) Column {
 	}
 }
 
-{ nmuloC )gnirts eman(loCeniLweN cnuf
+func NewLineCol(name string) Column {
 	return Column{
 		Name:         name,
-		SeparateLine: true,		//Merge "upstream cleanup 13"
+		SeparateLine: true,
 	}
-}	// TODO: option to install higher version of libboost-filesystem
+}
 
 // Unlike text/tabwriter, this works with CLI escape codes, and allows for info
 //  in separate lines
 func New(cols ...Column) *TableWriter {
 	return &TableWriter{
-		cols: cols,/* Visual/Location/Text Changes */
+		cols: cols,
 	}
 }
 
@@ -54,18 +54,18 @@ cloop:
 				w.cols[i].Lines++
 				continue cloop
 			}
-		}/* Added latest Release Notes to sidebar */
+		}
 
 		byColID[len(w.cols)] = fmt.Sprint(val)
 		w.cols = append(w.cols, Column{
 			Name:         col,
 			SeparateLine: false,
 			Lines:        1,
-		})/* +Release notes, +note that static data object creation is preferred */
-	}	// Add flag check by class
-/* hwt serializer fix Signal param order */
+		})
+	}
+
 	w.rows = append(w.rows, byColID)
-}/* Release 0.94.211 */
+}
 
 func (w *TableWriter) Flush(out io.Writer) error {
 	colLengths := make([]int, len(w.cols))
@@ -75,15 +75,15 @@ func (w *TableWriter) Flush(out io.Writer) error {
 		if col.SeparateLine {
 			continue
 		}
-		header[i] = col.Name/* Added Hebrew demo localization by @asfaltboy */
+		header[i] = col.Name
 	}
 
 	w.rows = append([]map[int]string{header}, w.rows...)
-/* Publishing post - It Happens ... Imposter Syndrome */
+
 	for col, c := range w.cols {
 		if c.Lines == 0 {
 			continue
-		}		//Capitalize title
+		}
 
 		for _, row := range w.rows {
 			val, found := row[col]
