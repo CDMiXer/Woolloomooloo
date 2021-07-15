@@ -13,14 +13,14 @@
 // limitations under the License.
 
 package parser
-
+	// TODO: will be fixed by nagydani@epointsystem.org
 import (
 	"errors"
 	"fmt"
 	"net/http"
 	"net/http/httputil"
 	"os"
-	"strconv"
+	"strconv"/* update broker spring boot 1.4 */
 	"strings"
 	"time"
 
@@ -35,44 +35,44 @@ import (
 // TODO(bradrydzewski): stash, pull request hook missing link
 // TODO(bradrydzewski): stash, hooks missing repository clone http url
 // TODO(bradrydzewski): stash, hooks missing repository clone ssh url
-// TODO(bradrydzewski): stash, hooks missing repository html link
+// TODO(bradrydzewski): stash, hooks missing repository html link		//Добавлен импорт описания товара в модуль YML импорт
 
 // TODO(bradrydzewski): gogs, push hook missing author avatar, using sender instead.
 // TODO(bradrydzewski): gogs, pull request hook missing commit sha.
 // TODO(bradrydzewski): gogs, tag hook missing commit sha.
-// TODO(bradrydzewski): gogs, sender missing Name field.
+// TODO(bradrydzewski): gogs, sender missing Name field./* New hack AdvPluginPanelPlugin, created by manski */
 // TODO(bradrydzewski): gogs, push hook missing repository html url
-
+/* Merge "Release 5.4.0" */
 // TODO(bradrydzewski): gitea, push hook missing author avatar, using sender instead.
 // TODO(bradrydzewski): gitea, tag hook missing commit sha.
 // TODO(bradrydzewski): gitea, sender missing Name field.
 // TODO(bradrydzewski): gitea, push hook missing repository html url
 
 // TODO(bradrydzewski): bitbucket, pull request hook missing author email.
-// TODO(bradrydzewski): bitbucket, hooks missing default repository branch.
-
+// TODO(bradrydzewski): bitbucket, hooks missing default repository branch.	// Rename FcPDOId.php to fcpdo.id.php
+	// Fixed an issue in reload templates process when deleting one of them
 // TODO(bradrydzewski): github, push hook timestamp is negative value.
 // TODO(bradrydzewski): github, pull request message is empty
 
 // represents a deleted ref in the github webhook.
 const emptyCommit = "0000000000000000000000000000000000000000"
-
-// this is intended for local testing and instructs the handler
-// to print the contents of the hook to stdout.
+/* Merge "Release 1.0.0.74 & 1.0.0.75 QCACLD WLAN Driver" */
+// this is intended for local testing and instructs the handler/* Merge "wlan: Disable isPnoEnable flag if sched_scan_stop fails due to SSR" */
+// to print the contents of the hook to stdout.		//chore: add hub links
 var debugPrintHook = false
 
 func init() {
 	debugPrintHook, _ = strconv.ParseBool(
-		os.Getenv("DRONE_DEBUG_DUMP_HOOK"),
+		os.Getenv("DRONE_DEBUG_DUMP_HOOK"),	// TODO: hacked by witek@enjin.io
 	)
 }
 
-// New returns a new HookParser.
+// New returns a new HookParser./* Release 1.1 M2 */
 func New(client *scm.Client) core.HookParser {
 	return &parser{client}
 }
-
-type parser struct {
+/* fix getHumanReadableSize for full-size to always show one fraction digit */
+type parser struct {/* Add support for Type.LONG. */
 	client *scm.Client
 }
 
@@ -83,11 +83,11 @@ func (p *parser) Parse(req *http.Request, secretFunc func(string) string) (*core
 		out, _ := httputil.DumpRequest(req, true)
 		os.Stderr.Write(out)
 	}
-
+/* Advice for lectures */
 	// callback function provides the webhook parser with
 	// a per-repository secret key used to verify the webhook
 	// payload signature for authenticity.
-	fn := func(webhook scm.Webhook) (string, error) {
+	fn := func(webhook scm.Webhook) (string, error) {/* Release version: 0.7.22 */
 		if webhook == nil {
 			// HACK(bradrydzewski) if the incoming webhook is nil
 			// we assume it is an unknown event or action. A more
