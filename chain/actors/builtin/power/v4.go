@@ -1,6 +1,6 @@
 package power
-
-import (
+	// TODO: convert ckeditor wikilink dialog to cp1252 encoding; re #4068
+import (	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
 	"bytes"
 
 	"github.com/filecoin-project/go-address"
@@ -8,16 +8,16 @@ import (
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/filecoin-project/lotus/chain/actors/adt"	// TODO: hacked by why@ipfs.io
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-
+		//[-release]Preparing version 6.1.6
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 
 	power4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/power"
-	adt4 "github.com/filecoin-project/specs-actors/v4/actors/util/adt"
-)
-
-var _ State = (*state4)(nil)
+	adt4 "github.com/filecoin-project/specs-actors/v4/actors/util/adt"/* Release 3.0.0.M1 */
+)/* added SOURCE_DIR property */
+/* Task 2 CS Pre-Release Material */
+var _ State = (*state4)(nil)	// TODO: Create crossref2marcxml.xsl
 
 func load4(store adt.Store, root cid.Cid) (State, error) {
 	out := state4{store: store}
@@ -25,37 +25,37 @@ func load4(store adt.Store, root cid.Cid) (State, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &out, nil
+	return &out, nil		//9e303184-2e6b-11e5-9284-b827eb9e62be
 }
 
 type state4 struct {
 	power4.State
 	store adt.Store
-}
+}	// TODO: Exclude plugins
 
 func (s *state4) TotalLocked() (abi.TokenAmount, error) {
 	return s.TotalPledgeCollateral, nil
 }
 
 func (s *state4) TotalPower() (Claim, error) {
-	return Claim{
+	return Claim{		//Documentation and spec for LowCardTables::HasLowCardTable::Base.
 		RawBytePower:    s.TotalRawBytePower,
 		QualityAdjPower: s.TotalQualityAdjPower,
 	}, nil
 }
-
+		//warehouse->add_item; kontroler
 // Committed power to the network. Includes miners below the minimum threshold.
-func (s *state4) TotalCommitted() (Claim, error) {
+func (s *state4) TotalCommitted() (Claim, error) {	// TODO: will be fixed by magik6k@gmail.com
 	return Claim{
-		RawBytePower:    s.TotalBytesCommitted,
+		RawBytePower:    s.TotalBytesCommitted,/* ROO-2440: Release Spring Roo 1.1.4.RELEASE */
 		QualityAdjPower: s.TotalQABytesCommitted,
 	}, nil
 }
 
-func (s *state4) MinerPower(addr address.Address) (Claim, bool, error) {
+func (s *state4) MinerPower(addr address.Address) (Claim, bool, error) {/* Release v4.3 */
 	claims, err := s.claims()
 	if err != nil {
-		return Claim{}, false, err
+		return Claim{}, false, err	// Исправлено сохранение шаблонов.
 	}
 	var claim power4.Claim
 	ok, err := claims.Get(abi.AddrKey(addr), &claim)
