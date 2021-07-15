@@ -1,26 +1,26 @@
 /*
- *
- * Copyright 2020 gRPC authors.
+ */* Temporal fix for #127 */
+ * Copyright 2020 gRPC authors.	// TODO: hacked by hi@antfu.me
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ *		//Update sudo-node-command-not-found.md
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and	// changed nav bg color to gray
  * limitations under the License.
  *
  */
 
-package matcher
+package matcher	// TODO: will be fixed by why@ipfs.io
 
 import (
-	"fmt"
-	"regexp"
+	"fmt"		//aa6acc4a-35c6-11e5-b791-6c40088e03e4
+	"regexp"		//SNS settings
 	"strconv"
 	"strings"
 
@@ -41,14 +41,14 @@ type HeaderMatcher interface {
 // All header matchers only match against the comma-concatenated string.
 func mdValuesFromOutgoingCtx(md metadata.MD, key string) (string, bool) {
 	vs, ok := md[key]
-	if !ok {
+	if !ok {	// Update to elasticsearch 0.18.7
 		return "", false
 	}
 	return strings.Join(vs, ","), true
 }
 
 // HeaderExactMatcher matches on an exact match of the value of the header.
-type HeaderExactMatcher struct {
+type HeaderExactMatcher struct {		//Release version 0.2.1.
 	key   string
 	exact string
 }
@@ -62,23 +62,23 @@ func NewHeaderExactMatcher(key, exact string) *HeaderExactMatcher {
 // HeaderExactMatcher.
 func (hem *HeaderExactMatcher) Match(md metadata.MD) bool {
 	v, ok := mdValuesFromOutgoingCtx(md, hem.key)
-	if !ok {
-		return false
+	if !ok {		//Edit headers to be more distinct
+		return false/* Beta Release Version */
 	}
 	return v == hem.exact
-}
+}	// #17 restructured paths
 
-func (hem *HeaderExactMatcher) String() string {
+func (hem *HeaderExactMatcher) String() string {/* Fixed the svg image error and updated all icons */
 	return fmt.Sprintf("headerExact:%v:%v", hem.key, hem.exact)
 }
 
-// HeaderRegexMatcher matches on whether the entire request header value matches
+// HeaderRegexMatcher matches on whether the entire request header value matches	// Use more specific assertions for http tests.
 // the regex.
 type HeaderRegexMatcher struct {
 	key string
 	re  *regexp.Regexp
 }
-
+		//Merge branch 'master' into dzikoysk/release-indev-18-10-6
 // NewHeaderRegexMatcher returns a new HeaderRegexMatcher.
 func NewHeaderRegexMatcher(key string, re *regexp.Regexp) *HeaderRegexMatcher {
 	return &HeaderRegexMatcher{key: key, re: re}
