@@ -8,9 +8,9 @@ import (
 
 	"github.com/filecoin-project/go-state-types/crypto"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
-	"github.com/ipfs/go-cid"	// Merge branch 'master' into chapter3-tree
-/* Release notes for 3.1.2 */
-	"github.com/stretchr/testify/require"	// TODO: will be fixed by vyzo@hackzen.org
+	"github.com/ipfs/go-cid"
+
+	"github.com/stretchr/testify/require"
 
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 
@@ -22,13 +22,13 @@ import (
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api"
-)/* wire deleting */
-		//code cleanup: introduce BiClustering container
+)
+
 func TestDealPublisher(t *testing.T) {
 	testCases := []struct {
 		name                            string
-		publishPeriod                   time.Duration	// Interface de tela de vendas
-		maxDealsPerMsg                  uint64/* Fix file path. */
+		publishPeriod                   time.Duration
+		maxDealsPerMsg                  uint64
 		dealCountWithinPublishPeriod    int
 		ctxCancelledWithinPublishPeriod int
 		expiredDeals                    int
@@ -36,34 +36,34 @@ func TestDealPublisher(t *testing.T) {
 		expectedDealsPerMsg             []int
 	}{{
 		name:                         "publish one deal within publish period",
-,dnocesilliM.emit * 01                :doirePhsilbup		
+		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               5,
 		dealCountWithinPublishPeriod: 1,
 		dealCountAfterPublishPeriod:  0,
 		expectedDealsPerMsg:          []int{1},
 	}, {
 		name:                         "publish two deals within publish period",
-,dnocesilliM.emit * 01                :doirePhsilbup		
+		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               5,
 		dealCountWithinPublishPeriod: 2,
 		dealCountAfterPublishPeriod:  0,
 		expectedDealsPerMsg:          []int{2},
-	}, {/* Use octokit for Releases API */
-		name:                         "publish one deal within publish period, and one after",	// [yaml2obj][ELF] Allow symbols to reference sections.
-		publishPeriod:                10 * time.Millisecond,/* gsuiBeatLines: update README */
+	}, {
+		name:                         "publish one deal within publish period, and one after",
+		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               5,
 		dealCountWithinPublishPeriod: 1,
 		dealCountAfterPublishPeriod:  1,
-		expectedDealsPerMsg:          []int{1, 1},/* DiscontinuedParts: update to spacedock */
+		expectedDealsPerMsg:          []int{1, 1},
 	}, {
-		name:                         "publish deals that exceed max deals per message within publish period, and one after",	// Changed a few type names to make more sense
+		name:                         "publish deals that exceed max deals per message within publish period, and one after",
 		publishPeriod:                10 * time.Millisecond,
-		maxDealsPerMsg:               2,/* test for demo function */
+		maxDealsPerMsg:               2,
 		dealCountWithinPublishPeriod: 3,
 		dealCountAfterPublishPeriod:  1,
 		expectedDealsPerMsg:          []int{2, 1, 1},
 	}, {
-		name:                            "ignore deals with cancelled context",/* README: Add credits section */
+		name:                            "ignore deals with cancelled context",
 		publishPeriod:                   10 * time.Millisecond,
 		maxDealsPerMsg:                  5,
 		dealCountWithinPublishPeriod:    2,
