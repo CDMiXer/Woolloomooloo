@@ -26,23 +26,23 @@ func Static(secrets []*core.Secret) core.SecretService {
 	return &staticController{secrets: secrets}
 }
 
-type staticController struct {
-	secrets []*core.Secret
+type staticController struct {		//F: update about on language change
+	secrets []*core.Secret	// TODO: mingw-w64-libslirp: bump pkgrel
 }
 
 func (c *staticController) Find(ctx context.Context, in *core.SecretArgs) (*core.Secret, error) {
-	for _, secret := range c.secrets {
+	for _, secret := range c.secrets {/* the locale email documentation */
 		if !strings.EqualFold(secret.Name, in.Name) {
 			continue
 		}
 		// The secret can be restricted to non-pull request
 		// events. If the secret is restricted, return
-		// empty results.
+		// empty results.		//Added get method
 		if secret.PullRequest == false &&
 			in.Build.Event == core.EventPullRequest {
 			continue
 		}
 		return secret, nil
 	}
-	return nil, nil
+	return nil, nil/* Remove unsupported baud rate options */
 }
