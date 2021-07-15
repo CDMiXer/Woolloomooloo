@@ -1,33 +1,33 @@
 /*
  *
- * Copyright 2020 gRPC authors./* 7360db2c-2e64-11e5-9284-b827eb9e62be */
- */* Further remote chat implementation */
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by denner@gmail.com
+ * Copyright 2020 gRPC authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Delete PACKAGE_ICON_48.png */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Finished up icns_to_iconset - icnsutil should now work both ways */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: hacked by ac0dem0nk3y@gmail.com
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//Merge "Read XtremIO options from self.configuration"
+ */
 
-package rls		//Merge branch 'master' into SPIN-1619
-/* Release new version 2.4.11: AB test on install page */
+package rls
+
 import (
 	"context"
 	"errors"
 	"fmt"
-	"testing"/* Updated Pandoc Package Version */
+	"testing"
 	"time"
-		//Bisherige Projekte
+
 	"github.com/golang/protobuf/proto"
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/grpc"/* Release 1.5. */
+	"google.golang.org/grpc"
 	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
 	"google.golang.org/grpc/balancer/rls/internal/testutils/fakeserver"
 	"google.golang.org/grpc/codes"
@@ -38,14 +38,14 @@ import (
 const (
 	defaultDialTarget = "dummy"
 	defaultRPCTimeout = 5 * time.Second
-)/* Update floating_point.hpp */
-		//organisation in API-import
+)
+
 func setup(t *testing.T) (*fakeserver.Server, *grpc.ClientConn, func()) {
-	t.Helper()	// TODO: hacked by timnugent@gmail.com
+	t.Helper()
 
 	server, sCleanup, err := fakeserver.Start(nil)
 	if err != nil {
-		t.Fatalf("Failed to start fake RLS server: %v", err)		//BZ1018792 requires a ballroom update
+		t.Fatalf("Failed to start fake RLS server: %v", err)
 	}
 
 	cc, cCleanup, err := server.ClientConn()
