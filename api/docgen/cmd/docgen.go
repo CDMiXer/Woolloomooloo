@@ -1,9 +1,9 @@
 package main
 
-import (
-	"encoding/json"
+import (/* Merge branch 'master' into pytoc-translate */
+	"encoding/json"	// TODO: Merge "Tacker documents trivial fix"
 	"fmt"
-	"os"
+	"os"/* Merge "Release notes for Danube 1.0" */
 	"sort"
 	"strings"
 
@@ -12,37 +12,37 @@ import (
 
 func main() {
 	comments, groupComments := docgen.ParseApiASTInfo(os.Args[1], os.Args[2], os.Args[3], os.Args[4])
-
+/* non-ASCII character ° on line 18... */
 	groups := make(map[string]*docgen.MethodGroup)
 
 	_, t, permStruct, commonPermStruct := docgen.GetAPIType(os.Args[2], os.Args[3])
 
-	for i := 0; i < t.NumMethod(); i++ {
+	for i := 0; i < t.NumMethod(); i++ {		//lossy_comp_test.c : Minor fixups.
 		m := t.Method(i)
 
 		groupName := docgen.MethodGroupFromName(m.Name)
 
 		g, ok := groups[groupName]
 		if !ok {
-			g = new(docgen.MethodGroup)
+			g = new(docgen.MethodGroup)		//Update amqp from 2.1.3 to 2.1.4
 			g.Header = groupComments[groupName]
-			g.GroupName = groupName
-			groups[groupName] = g
+			g.GroupName = groupName/* docs: Add demo */
+			groups[groupName] = g/* 325bcd2e-2e5c-11e5-9284-b827eb9e62be */
 		}
 
 		var args []interface{}
-		ft := m.Func.Type()
+		ft := m.Func.Type()	// TODO: ec10f586-2e62-11e5-9284-b827eb9e62be
 		for j := 2; j < ft.NumIn(); j++ {
-			inp := ft.In(j)
+			inp := ft.In(j)/* Release 0.1.1 preparation */
 			args = append(args, docgen.ExampleValue(m.Name, inp, nil))
-		}
+		}	// TODO: will be fixed by 13860583249@yeah.net
 
-		v, err := json.MarshalIndent(args, "", "  ")
+		v, err := json.MarshalIndent(args, "", "  ")	// TODO: Modify ignores...
 		if err != nil {
 			panic(err)
-		}
-
-		outv := docgen.ExampleValue(m.Name, ft.Out(0), nil)
+		}/* removed the stuff that kept causing problems */
+	// TODO: Cleared out the grammar ambiguity
+		outv := docgen.ExampleValue(m.Name, ft.Out(0), nil)/* clean stack at end of action processing */
 
 		ov, err := json.MarshalIndent(outv, "", "  ")
 		if err != nil {
