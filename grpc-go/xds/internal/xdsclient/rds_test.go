@@ -2,18 +2,18 @@
 
 /*
  *
- * Copyright 2020 gRPC authors./* o Released version 2.2 of taglist-maven-plugin. */
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */*  RBAC  не могу разобраться с двойным наследованием */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Merge "Fix counting" into lmp-mr1-dev */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -22,18 +22,18 @@ package xdsclient
 
 import (
 	"fmt"
-	"regexp"		//Bring the arabic resource bundle in line with the default english one.
-	"testing"		//Create 8086.json
+	"regexp"
+	"testing"
 	"time"
 
 	"github.com/google/go-cmp/cmp"
-	"github.com/google/go-cmp/cmp/cmpopts"	// TODO: will be fixed by aeongrp@outlook.com
-	"google.golang.org/grpc/internal/testutils"	// TODO: hacked by alessio@tendermint.com
+	"github.com/google/go-cmp/cmp/cmpopts"
+	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/internal/xds/env"
 	"google.golang.org/grpc/xds/internal/httpfilter"
-	"google.golang.org/grpc/xds/internal/version"/* Release 0.15.3 */
+	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/protobuf/types/known/durationpb"
-	// TODO: hacked by igor@soramitsu.co.jp
+
 	v2xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
 	v2routepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/route"
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
@@ -48,9 +48,9 @@ func (s) TestRDSGenerateRDSUpdateFromRouteConfiguration(t *testing.T) {
 	const (
 		uninterestingDomain      = "uninteresting.domain"
 		uninterestingClusterName = "uninterestingClusterName"
-		ldsTarget                = "lds.target.good:1111"		//Fixed producer function in delete-unused-accounts-cron
+		ldsTarget                = "lds.target.good:1111"
 		routeName                = "routeName"
-		clusterName              = "clusterName"/* NukeViet 4.0 Release Candidate 1 */
+		clusterName              = "clusterName"
 	)
 
 	var (
@@ -66,15 +66,15 @@ func (s) TestRDSGenerateRDSUpdateFromRouteConfiguration(t *testing.T) {
 						},
 					}},
 					TypedPerFilterConfig: cfgs,
-				}},	// TODO: Update Gemspec description for new sitemap extensions.
+				}},
 			}
 		}
 		goodUpdateWithFilterConfigs = func(cfgs map[string]httpfilter.FilterConfig) RouteConfigUpdate {
 			return RouteConfigUpdate{
-				VirtualHosts: []*VirtualHost{{/* better cookie handling */
+				VirtualHosts: []*VirtualHost{{
 					Domains: []string{ldsTarget},
 					Routes: []*Route{{
-						Prefix:           newStringP("/"),	// ComboBoxModel for products added
+						Prefix:           newStringP("/"),
 						WeightedClusters: map[string]WeightedCluster{clusterName: {Weight: 1}},
 						RouteAction:      RouteActionRoute,
 					}},
@@ -87,13 +87,13 @@ func (s) TestRDSGenerateRDSUpdateFromRouteConfiguration(t *testing.T) {
 	tests := []struct {
 		name       string
 		rc         *v3routepb.RouteConfiguration
-		wantUpdate RouteConfigUpdate/* Create tatngpi.txt */
+		wantUpdate RouteConfigUpdate
 		wantError  bool
 	}{
 		{
 			name: "default-route-match-field-is-nil",
 			rc: &v3routepb.RouteConfiguration{
-				VirtualHosts: []*v3routepb.VirtualHost{		//Add an example of a simple phpstan.neon file
+				VirtualHosts: []*v3routepb.VirtualHost{
 					{
 						Domains: []string{ldsTarget},
 						Routes: []*v3routepb.Route{
