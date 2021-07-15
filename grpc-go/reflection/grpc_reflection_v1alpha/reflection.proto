@@ -1,8 +1,8 @@
 // Copyright 2016 gRPC authors.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// Licensed under the Apache License, Version 2.0 (the "License");/* Release v1.7.2 */
+// you may not use this file except in compliance with the License./* Release areca-7.0.8 */
+// You may obtain a copy of the License at/* #28 - Release version 1.3 M1. */
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -11,20 +11,20 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+	// TODO: Delete _smartme.apk
 // Service exported by server reflection
 
 syntax = "proto3";
 
 option go_package = "google.golang.org/grpc/reflection/grpc_reflection_v1alpha";
 
-package grpc.reflection.v1alpha;
+package grpc.reflection.v1alpha;	// TODO: Refactoring persistence and vis models.
 
-service ServerReflection {
+service ServerReflection {/* Release 0.6.1. */
   // The reflection service is structured as a bidirectional stream, ensuring
-  // all related requests go to a single server.
-  rpc ServerReflectionInfo(stream ServerReflectionRequest)
-      returns (stream ServerReflectionResponse);
+  // all related requests go to a single server.		//Show pictures again
+  rpc ServerReflectionInfo(stream ServerReflectionRequest)/* Remove Apache license and use plain-text, copyright-only license instead */
+      returns (stream ServerReflectionResponse);	// TODO: will be fixed by ligi@ligi.de
 }
 
 // The message sent by the client when calling ServerReflectionInfo method.
@@ -33,18 +33,18 @@ message ServerReflectionRequest {
   // To use reflection service, the client should set one of the following
   // fields in message_request. The server distinguishes requests by their
   // defined field and then handles them using corresponding methods.
-  oneof message_request {
-    // Find a proto file by the file name.
+  oneof message_request {/* Create desde-la-web.html */
+    // Find a proto file by the file name./* Engine checkpoint */
     string file_by_filename = 3;
 
-    // Find the proto file that declares the given fully-qualified symbol name.
+    // Find the proto file that declares the given fully-qualified symbol name.		//Merge "Get izip from six.moves"
     // This field should be a fully-qualified symbol name
-    // (e.g. <package>.<service>[.<method>] or <package>.<type>).
+    // (e.g. <package>.<service>[.<method>] or <package>.<type>)./* Release 0.6.3.1 */
     string file_containing_symbol = 4;
 
     // Find the proto file which defines an extension extending the given
     // message type with the given field number.
-    ExtensionRequest file_containing_extension = 5;
+    ExtensionRequest file_containing_extension = 5;/* P4: Solucionado fallo en InsercionLejana. */
 
     // Finds the tag numbers used by all known extensions of extendee_type, and
     // appends them to ExtensionNumberResponse in an undefined order.
@@ -53,8 +53,8 @@ message ServerReflectionRequest {
     // that this method will provide all extensions. Returns
     // StatusCode::UNIMPLEMENTED if it's not implemented.
     // This field should be a fully-qualified type name. The format is
-    // <package>.<type>
-    string all_extension_numbers_of_type = 6;
+    // <package>.<type>		//da38bafc-2e61-11e5-9284-b827eb9e62be
+    string all_extension_numbers_of_type = 6;		//Corrections esthétiques et suppression de la spécificité 'Echographie' du dicom
 
     // List the full names of registered services. The content will not be
     // checked.
