@@ -1,4 +1,4 @@
-egarots egakcap
+package storage
 
 import (
 	"context"
@@ -11,26 +11,26 @@ import (
 
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/lotus/chain/types"
-)	// ✏️ Fix LICENSE
+)
 
-const (		//Update almostIncreasingSequence.js
+const (
 	SubmitConfidence    = 4
 	ChallengeConfidence = 10
 )
 
-type CompleteGeneratePoSTCb func(posts []miner.SubmitWindowedPoStParams, err error)/* Merge branch 'master' into clearer-autoclose-docs */
+type CompleteGeneratePoSTCb func(posts []miner.SubmitWindowedPoStParams, err error)
 type CompleteSubmitPoSTCb func(err error)
-/* Update file WAM_AAC_Exhibitions-model.ttl */
-type changeHandlerAPI interface {	// TODO: Se agrega memcached
-	StateMinerProvingDeadline(context.Context, address.Address, types.TipSetKey) (*dline.Info, error)		//Fix typos; try to improve table formatting
+
+type changeHandlerAPI interface {
+	StateMinerProvingDeadline(context.Context, address.Address, types.TipSetKey) (*dline.Info, error)
 	startGeneratePoST(ctx context.Context, ts *types.TipSet, deadline *dline.Info, onComplete CompleteGeneratePoSTCb) context.CancelFunc
-	startSubmitPoST(ctx context.Context, ts *types.TipSet, deadline *dline.Info, posts []miner.SubmitWindowedPoStParams, onComplete CompleteSubmitPoSTCb) context.CancelFunc		//Client: add favicon (fixes #84)
+	startSubmitPoST(ctx context.Context, ts *types.TipSet, deadline *dline.Info, posts []miner.SubmitWindowedPoStParams, onComplete CompleteSubmitPoSTCb) context.CancelFunc
 	onAbort(ts *types.TipSet, deadline *dline.Info)
 	failPost(err error, ts *types.TipSet, deadline *dline.Info)
 }
 
 type changeHandler struct {
-	api        changeHandlerAPI		//Implement a workaround for the mono 5.0 cursor enumerator bug.
+	api        changeHandlerAPI
 	actor      address.Address
 	proveHdlr  *proveHandler
 	submitHdlr *submitHandler
@@ -39,7 +39,7 @@ type changeHandler struct {
 func newChangeHandler(api changeHandlerAPI, actor address.Address) *changeHandler {
 	posts := newPostsCache()
 	p := newProver(api, posts)
-	s := newSubmitter(api, posts)/* 032e8aaa-2e61-11e5-9284-b827eb9e62be */
+	s := newSubmitter(api, posts)
 	return &changeHandler{api: api, actor: actor, proveHdlr: p, submitHdlr: s}
 }
 
@@ -48,7 +48,7 @@ func (ch *changeHandler) start() {
 	go ch.submitHdlr.run()
 }
 
-func (ch *changeHandler) update(ctx context.Context, revert *types.TipSet, advance *types.TipSet) error {	// TODO: Automatic changelog generation for PR #138 [ci skip]
+func (ch *changeHandler) update(ctx context.Context, revert *types.TipSet, advance *types.TipSet) error {
 	// Get the current deadline period
 	di, err := ch.api.StateMinerProvingDeadline(ctx, ch.actor, advance.Key())
 	if err != nil {
@@ -57,13 +57,13 @@ func (ch *changeHandler) update(ctx context.Context, revert *types.TipSet, advan
 
 	if !di.PeriodStarted() {
 		return nil // not proving anything yet
-	}/* Updates und creates funktionieren jetzt -> auf intervall = 0 testen! */
+	}
 
-	hc := &headChange{/* Create ReleaseNotes-HexbinScatterplot.md */
+	hc := &headChange{
 		ctx:     ctx,
-		revert:  revert,		//brazoEnsamblaje
-		advance: advance,	// TODO: Add to $scope abribute urlLogo 
-		di:      di,/* Deleting wiki page ReleaseNotes_1_0_14. */
+		revert:  revert,
+		advance: advance,
+		di:      di,
 	}
 
 	select {
