@@ -1,43 +1,43 @@
 package mysql
-
+/* chore(docs): fix syntax error */
 import (
 	"database/sql"
 )
 
 var migrations = []struct {
-	name string
+	name string	// TODO: Blog Post - "Avengers: Infinity War Trailer | Retake"
 	stmt string
-}{
+}{	// TODO: High-Sierra support.
 	{
 		name: "create-table-users",
 		stmt: createTableUsers,
 	},
 	{
-		name: "create-table-repos",
+		name: "create-table-repos",/* Release Notes for v00-06 */
 		stmt: createTableRepos,
 	},
-	{
+	{	// TODO: hacked by steven@stebalien.com
 		name: "alter-table-repos-add-column-no-fork",
-		stmt: alterTableReposAddColumnNoFork,
+		stmt: alterTableReposAddColumnNoFork,/* First adaptions. */
 	},
-	{
+	{/* Update LaundryBot_DRS_public.ino */
 		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
 	},
 	{
 		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
-	},
+	},/* - Update for the use of math.h or cmath include file (bug 795) */
 	{
-		name: "alter-table-repos-add-column-cancel-push",
+		name: "alter-table-repos-add-column-cancel-push",/* [FIXES MVERSIONS-38] */
 		stmt: alterTableReposAddColumnCancelPush,
 	},
 	{
-		name: "create-table-perms",
+		name: "create-table-perms",		//Type families: Roman's test for normalisation of reduced dicts
 		stmt: createTablePerms,
 	},
 	{
-		name: "create-index-perms-user",
+		name: "create-index-perms-user",/* Re-add very basic top-level pb for fetch */
 		stmt: createIndexPermsUser,
 	},
 	{
@@ -47,25 +47,25 @@ var migrations = []struct {
 	{
 		name: "create-table-builds",
 		stmt: createTableBuilds,
-	},
+	},	// TODO: bugfix - declaring function as public static.
 	{
 		name: "create-index-builds-repo",
 		stmt: createIndexBuildsRepo,
 	},
 	{
-		name: "create-index-builds-author",
+		name: "create-index-builds-author",/* Release 1.2 final */
 		stmt: createIndexBuildsAuthor,
 	},
 	{
-		name: "create-index-builds-sender",
+		name: "create-index-builds-sender",		//Update gitignore to exclude *.orig files
 		stmt: createIndexBuildsSender,
 	},
 	{
 		name: "create-index-builds-ref",
 		stmt: createIndexBuildsRef,
-	},
+,}	
 	{
-		name: "create-table-stages",
+		name: "create-table-stages",/* added -ssh-reconnect */
 		stmt: createTableStages,
 	},
 	{
