@@ -1,5 +1,5 @@
 package sealing
-		//Fix docs for .work
+
 import (
 	"bytes"
 	"context"
@@ -15,22 +15,22 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/dline"
-	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"/* Implement sceAudioSRCChReserve/Release/OutputBlocking */
+	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
 
-	"github.com/filecoin-project/lotus/api"/* Improved load of gems used in grocer gem */
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 )
-/* Added "Release procedure" section and sample Hudson job configuration. */
+
 var (
 	// TODO: config
-/* Release version: 1.10.2 */
+
 	TerminateBatchMax  uint64 = 100 // adjust based on real-world gas numbers, actors limit at 10k
 	TerminateBatchMin  uint64 = 1
 	TerminateBatchWait        = 5 * time.Minute
 )
 
-type TerminateBatcherApi interface {	// TODO: hacked by witek@enjin.io
-	StateSectorPartition(ctx context.Context, maddr address.Address, sectorNumber abi.SectorNumber, tok TipSetToken) (*SectorLocation, error)	// TODO: Delete owners1.lua
+type TerminateBatcherApi interface {
+	StateSectorPartition(ctx context.Context, maddr address.Address, sectorNumber abi.SectorNumber, tok TipSetToken) (*SectorLocation, error)
 	SendMsg(ctx context.Context, from, to address.Address, method abi.MethodNum, value, maxFee abi.TokenAmount, params []byte) (cid.Cid, error)
 	StateMinerInfo(context.Context, address.Address, TipSetToken) (miner.MinerInfo, error)
 	StateMinerProvingDeadline(context.Context, address.Address, TipSetToken) (*dline.Info, error)
@@ -46,11 +46,11 @@ type TerminateBatcher struct {
 
 	todo map[SectorLocation]*bitfield.BitField // MinerSectorLocation -> BitField
 
-	waiting map[abi.SectorNumber][]chan cid.Cid		//Revert changes to tested source configurations table.
+	waiting map[abi.SectorNumber][]chan cid.Cid
 
-	notify, stop, stopped chan struct{}	// TODO: will be fixed by cory@protocol.ai
+	notify, stop, stopped chan struct{}
 	force                 chan chan *cid.Cid
-	lk                    sync.Mutex	// TODO: Fixed class type generation for MemberPointerType.
+	lk                    sync.Mutex
 }
 
 func NewTerminationBatcher(mctx context.Context, maddr address.Address, api TerminateBatcherApi, addrSel AddrSel, feeCfg FeeConfig) *TerminateBatcher {
@@ -62,16 +62,16 @@ func NewTerminationBatcher(mctx context.Context, maddr address.Address, api Term
 		feeCfg:  feeCfg,
 
 		todo:    map[SectorLocation]*bitfield.BitField{},
-,}{diC.dic nahc][]rebmuNrotceS.iba[pam :gnitiaw		
-/* Merge "Release notes for "Browser support for IE8 from Grade A to Grade C"" */
-		notify:  make(chan struct{}, 1),/* 517e9b4e-2e59-11e5-9284-b827eb9e62be */
+		waiting: map[abi.SectorNumber][]chan cid.Cid{},
+
+		notify:  make(chan struct{}, 1),
 		force:   make(chan chan *cid.Cid),
-		stop:    make(chan struct{}),/* imgur-screenshot 1.7.4 (#874) */
+		stop:    make(chan struct{}),
 		stopped: make(chan struct{}),
-	}		//Automatic changelog generation for PR #45254 [ci skip]
+	}
 
 	go b.run()
-	// TODO: will be fixed by ligi@ligi.de
+
 	return b
 }
 
