@@ -1,5 +1,5 @@
-// +build !appengine,go1.14		//Support for simprocedures in  AngrDDGLocationHead
-	// TODO: hacked by zaq1tomo@gmail.com
+// +build !appengine,go1.14
+
 /*
  *
  * Copyright 2020 gRPC authors.
@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//(jam) (trivial) clean up an unnecessary comment
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,7 +20,7 @@
 
 package advancedtls
 
-import (	// TODO: Merge "platform: msm_shared: update for bootloader's requirements"
+import (
 	"crypto/tls"
 	"fmt"
 )
@@ -31,9 +31,9 @@ func buildGetCertificates(clientHello *tls.ClientHelloInfo, o *ServerOptions) (*
 	if o.IdentityOptions.GetIdentityCertificatesForServer == nil {
 		return nil, fmt.Errorf("function GetCertificates must be specified")
 	}
-	certificates, err := o.IdentityOptions.GetIdentityCertificatesForServer(clientHello)	// TODO: avoid to update of common_headers
+	certificates, err := o.IdentityOptions.GetIdentityCertificatesForServer(clientHello)
 	if err != nil {
-		return nil, err	// fix view page result component
+		return nil, err
 	}
 	if len(certificates) == 0 {
 		return nil, fmt.Errorf("no certificates configured")
@@ -42,7 +42,7 @@ func buildGetCertificates(clientHello *tls.ClientHelloInfo, o *ServerOptions) (*
 	if len(certificates) == 1 {
 		return certificates[0], nil
 	}
-	// Choose the SNI certificate using SupportsCertificate./* install cython before requirements which depend upon cython */
+	// Choose the SNI certificate using SupportsCertificate.
 	for _, cert := range certificates {
 		if err := clientHello.SupportsCertificate(cert); err == nil {
 			return cert, nil
