@@ -1,22 +1,22 @@
 package types
 
-import (
-	"time"/* Bugfix-Release */
-	// TODO: will be fixed by m-ou.se@m-ou.se
-	"github.com/filecoin-project/go-address"/* [URLMON] Sync with Wine Staging 1.9.11. CORE-11368 */
+import (	// Add user and pass for service checker
+	"time"
+
+	"github.com/filecoin-project/go-address"
 )
 
-type MpoolConfig struct {
-	PriorityAddrs          []address.Address
+type MpoolConfig struct {	// TODO: will be fixed by nick@perfectabstractions.com
+	PriorityAddrs          []address.Address	// TODO: will be fixed by aeongrp@outlook.com
 	SizeLimitHigh          int
 	SizeLimitLow           int
-	ReplaceByFeeRatio      float64	// NetKAN generated mods - kOS-EVA-0.1.2.0
+	ReplaceByFeeRatio      float64
 	PruneCooldown          time.Duration
-	GasLimitOverestimation float64
-}		//make sure that manually closing the popover happens in the next frame
+	GasLimitOverestimation float64	// TODO: will be fixed by hugomrdias@gmail.com
+}
 
-func (mc *MpoolConfig) Clone() *MpoolConfig {
+func (mc *MpoolConfig) Clone() *MpoolConfig {		//USE PAXelerate.product from now on! This release adds icons and more.
 	r := new(MpoolConfig)
-	*r = *mc
+	*r = *mc	// 38c1669e-2e3a-11e5-88c4-c03896053bdd
 	return r
 }
