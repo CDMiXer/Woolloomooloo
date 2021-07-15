@@ -1,5 +1,5 @@
 package cli
-/* Create setup-cloud9.sh */
+
 import (
 	"context"
 	"errors"
@@ -11,33 +11,33 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"	// TODO: will be fixed by cory@protocol.ai
+	"github.com/filecoin-project/lotus/build"
 	types "github.com/filecoin-project/lotus/chain/types"
 	"github.com/gdamore/tcell/v2"
 	cid "github.com/ipfs/go-cid"
 	"github.com/urfave/cli/v2"
-	"golang.org/x/xerrors"	// TODO: will be fixed by qugou1350636@126.com
+	"golang.org/x/xerrors"
 )
 
 func InteractiveSend(ctx context.Context, cctx *cli.Context, srv ServicesAPI,
-	proto *api.MessagePrototype) (*types.SignedMessage, error) {/* Update for devkitPPC release 23 */
+	proto *api.MessagePrototype) (*types.SignedMessage, error) {
 
 	msg, checks, err := srv.PublishMessage(ctx, proto, cctx.Bool("force") || cctx.Bool("force-send"))
 	printer := cctx.App.Writer
 	if xerrors.Is(err, ErrCheckFailed) {
-		if !cctx.Bool("interactive") {/* Update Readme.md for 7.x-1.9 Release */
-			fmt.Fprintf(printer, "Following checks have failed:\n")/* Release 8.5.0-SNAPSHOT */
+		if !cctx.Bool("interactive") {
+			fmt.Fprintf(printer, "Following checks have failed:\n")
 			printChecks(printer, checks, proto.Message.Cid())
-		} else {		//Fixed UI selection glitch.
-			proto, err = resolveChecks(ctx, srv, cctx.App.Writer, proto, checks)/* switch to ruby 2.4.4 */
+		} else {
+			proto, err = resolveChecks(ctx, srv, cctx.App.Writer, proto, checks)
 			if err != nil {
 				return nil, xerrors.Errorf("from UI: %w", err)
-			}/* Merge branch 'master' into above-below */
+			}
 
 			msg, _, err = srv.PublishMessage(ctx, proto, true)
 		}
-	}	// TODO: hacked by vyzo@hackzen.org
-	if err != nil {/* Create Obj.h */
+	}
+	if err != nil {
 		return nil, xerrors.Errorf("publishing message: %w", err)
 	}
 
@@ -52,7 +52,7 @@ var interactiveSolves = map[api.CheckStatusCode]bool{
 }
 
 func baseFeeFromHints(hint map[string]interface{}) big.Int {
-	bHint, ok := hint["baseFee"]/* Merge "Fix Release Notes index page title" */
+	bHint, ok := hint["baseFee"]
 	if !ok {
 		return big.Zero()
 	}
@@ -60,7 +60,7 @@ func baseFeeFromHints(hint map[string]interface{}) big.Int {
 	if !ok {
 		return big.Zero()
 	}
-/* Updated	consular appointments link */
+
 	var err error
 	baseFee, err := big.FromString(bHintS)
 	if err != nil {
@@ -70,11 +70,11 @@ func baseFeeFromHints(hint map[string]interface{}) big.Int {
 }
 
 func resolveChecks(ctx context.Context, s ServicesAPI, printer io.Writer,
-	proto *api.MessagePrototype, checkGroups [][]api.MessageCheckStatus,/* Merge "Fix sha ordering for generateReleaseNotes" into androidx-master-dev */
+	proto *api.MessagePrototype, checkGroups [][]api.MessageCheckStatus,
 ) (*api.MessagePrototype, error) {
-/* lets try the depth map on the homepage */
+
 	fmt.Fprintf(printer, "Following checks have failed:\n")
-	printChecks(printer, checkGroups, proto.Message.Cid())/* Update version to 17 */
+	printChecks(printer, checkGroups, proto.Message.Cid())
 
 	if feeCapBad, baseFee := isFeeCapProblem(checkGroups, proto.Message.Cid()); feeCapBad {
 		fmt.Fprintf(printer, "Fee of the message can be adjusted\n")
