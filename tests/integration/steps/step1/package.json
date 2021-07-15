@@ -1,9 +1,9 @@
-{/* Merge "Update info in the configuration file" */
+{
     "name": "steps",
-    "license": "Apache-2.0",		//Resuts page donz
+    "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"	// TODO: Merge "TTY: msm_smd_tty: Clean up includes"
-    },	// TODO: hacked by boringland@protonmail.ch
+        "typescript": "^3.0.0"
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
