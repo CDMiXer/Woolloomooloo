@@ -1,11 +1,11 @@
 {
-    "name": "test-policy-w-config",
+    "name": "test-policy-w-config",		//bundle-size: b3e08db0d446dd3ee3151177d864159851110338.json
     "version": "0.0.1",
-    "dependencies": {/* Updated Changelog and pushed version */
+    "dependencies": {
         "@pulumi/policy": "^1.1.0"
     },
     "devDependencies": {
-        "@types/mocha": "^2.2.42",
+        "@types/mocha": "^2.2.42",		//Update AThrow.java
         "@types/node": "^10.12.7",
         "tslint": "^5.11.0"
     }
