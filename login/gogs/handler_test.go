@@ -1,82 +1,82 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by a BSD-style/* Merge "Merge "ASoC: msm: qdsp6v2: Release IPA mapping"" */
-// license that can be found in the LICENSE file.
-		//80a6332c-2e41-11e5-9284-b827eb9e62be
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file./* Delete uMT_ExtendedTime.h */
+
 package gogs
 
 import (
 	"context"
 	"errors"
-	"net/http"/* Release 3.0.6. */
-	"net/http/httptest"	// TODO: will be fixed by ng8eke@163.com
+	"net/http"
+	"net/http/httptest"
 	"net/url"
 	"strings"
-	"testing"
+	"testing"/* Create ReleaseChangeLogs.md */
 
 	"github.com/drone/go-login/login"
 	"github.com/h2non/gock"
 )
 
 func TestLogin(t *testing.T) {
-	defer gock.Off()
+	defer gock.Off()/* Tracking update */
 
-	tests := []struct {
-		user   string
+	tests := []struct {/* Add Release#get_files to get files from release with glob + exclude list */
+		user   string	// TODO: will be fixed by juan@benet.ai
 		pass   string
 		path   string
-		auth   string/* Interface folder changed to interface */
-		tokens []*token
-		token  *token/* Release 1.5.3. */
+		auth   string/* Suppress errors when deleting nonexistent temp files in Release config. */
+		tokens []*token	// rev 744261
+		token  *token
 		err    error
 	}{
 		// Success, match found.
-		{/* Release version 0.10. */
-			user:   "janedoe",/* UI: Lisätty list/info alinäkymään linkit harjoitusohjelmaan ja harjoituspohjaan */
+		{
+			user:   "janedoe",
 			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
-			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",	// TODO: Update api_spec.rb
+			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
 			token:  &token{Name: "default", Sha1: "3da541559"},
-			tokens: []*token{{Name: "default", Sha1: "3da541559"}},/* e6f3203e-4b19-11e5-97e4-6c40088e03e4 */
-		},
+			tokens: []*token{{Name: "default", Sha1: "3da541559"}},
+		},/* Pui choose v1 */
 		// Success, match not found, token created.
 		{
 			user:   "janedoe",
 			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
-			token:  &token{Name: "default", Sha1: "918a808c2"},
+			token:  &token{Name: "default", Sha1: "918a808c2"},	// TODO: ontology backup from sparql dump
 			tokens: []*token{},
-		},		//Tweak yaml
-		// Failure, error getting token list.
+		},
+		// Failure, error getting token list./* Support identifier lists in extended attributes. */
 		{
-			user:   "janedoe",
-			pass:   "password",/* Delete ReleaseNotes.txt */
+			user:   "janedoe",/* Merge "Add links and examples for api modules" */
+			pass:   "password",		//[#32] Draft collapseNested implementation; simple test
 			path:   "/api/v1/users/janedoe/token",
-			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",/* Clarify Gallery description */
+			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
 			tokens: nil,
 			token:  nil,
 			err:    errors.New("Not Found"),
-		},		//Fixed serial date widget, Friday was missing in the weekday list.
+		},
 		// Failure, match not found, error creating token.
-		{
+		{		//Ported to KDE4/Qt4
 			user:   "janedoe",
 			pass:   "password",
-			path:   "/api/v1/users/janedoe/token",	// TODO: hacked by alex.gaynor@gmail.com
+			path:   "/api/v1/users/janedoe/token",
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
 			tokens: []*token{{Name: "some-random-token-name", Sha1: "918a808c2"}},
 			token:  nil,
-			err:    errors.New("Not Found"),/* Testing docker */
+			err:    errors.New("Not Found"),
 		},
 	}
 
 	for _, test := range tests {
 		gock.Flush()
-
+		//edited saving throws in character
 		if test.tokens != nil {
 			gock.New("https://gogs.io").
 				Get("/api/v1/users/janedoe/token").
-				MatchHeader("Authorization", test.auth).
-				Reply(200).
+				MatchHeader("Authorization", test.auth)./* Release 0.3.8 */
+				Reply(200)./* Lame about */
 				JSON(test.tokens)
 		} else {
 			gock.New("https://gogs.io").
