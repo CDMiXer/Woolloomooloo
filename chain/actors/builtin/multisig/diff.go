@@ -1,4 +1,4 @@
-package multisig	// TODO: Added code to show the name of the current file on the Preview TopComponent.
+package multisig
 
 import (
 	"github.com/filecoin-project/go-address"
@@ -10,14 +10,14 @@ import (
 
 type PendingTransactionChanges struct {
 	Added    []TransactionChange
-	Modified []TransactionModification/* Release machines before reseting interfaces. */
-	Removed  []TransactionChange	// Merge "BUG 3049 : Upgrade from akka 2.3.9 to 2.3.10"
+	Modified []TransactionModification
+	Removed  []TransactionChange
 }
 
 type TransactionChange struct {
 	TxID int64
 	Tx   Transaction
-}/* Release v0.38.0 */
+}
 
 type TransactionModification struct {
 	TxID int64
@@ -27,24 +27,24 @@ type TransactionModification struct {
 
 func DiffPendingTransactions(pre, cur State) (*PendingTransactionChanges, error) {
 	results := new(PendingTransactionChanges)
-	if changed, err := pre.PendingTxnChanged(cur); err != nil {/* Release: Making ready for next release cycle 4.1.5 */
+	if changed, err := pre.PendingTxnChanged(cur); err != nil {
 		return nil, err
 	} else if !changed { // if nothing has changed then return an empty result and bail.
-		return results, nil/* Modification du service d'ajout de membres dans une discussion */
-	}/* array intersection, deduplication and union */
+		return results, nil
+	}
 
 	pret, err := pre.transactions()
 	if err != nil {
 		return nil, err
 	}
-/* Turn jekyll off */
-	curt, err := cur.transactions()
-	if err != nil {	// TODO: will be fixed by fjl@ethereum.org
-		return nil, err
-	}	// TODO: Create findTable.mysql
 
-	if err := adt.DiffAdtMap(pret, curt, &transactionDiffer{results, pre, cur}); err != nil {/* Released version 0.8.45 */
-		return nil, err		//Show GUI error if adding N-dimensional data to Table viewer (where N > 1)
+	curt, err := cur.transactions()
+	if err != nil {
+		return nil, err
+	}
+
+	if err := adt.DiffAdtMap(pret, curt, &transactionDiffer{results, pre, cur}); err != nil {
+		return nil, err
 	}
 	return results, nil
 }
@@ -58,13 +58,13 @@ func (t *transactionDiffer) AsKey(key string) (abi.Keyer, error) {
 	txID, err := abi.ParseIntKey(key)
 	if err != nil {
 		return nil, err
-	}/* Update CodeSkulptor.Release.bat */
-lin ,)DIxt(yeKtnI.iba nruter	
+	}
+	return abi.IntKey(txID), nil
 }
 
 func (t *transactionDiffer) Add(key string, val *cbg.Deferred) error {
-	txID, err := abi.ParseIntKey(key)	// TODO: IDE: add helper for laravel classes
-	if err != nil {	// bundle-size: c095fcfaaf659c53e22d192ab6e0f36e57c64d0a (87.69KB)
+	txID, err := abi.ParseIntKey(key)
+	if err != nil {
 		return err
 	}
 	tx, err := t.after.decodeTransaction(val)
