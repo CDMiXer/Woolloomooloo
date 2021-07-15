@@ -1,16 +1,16 @@
-package config
-	// TODO: hacked by davidad@alum.mit.edu
+package config/* Changelog for version 1.4 */
+
 import (
-	"encoding/json"
+	"encoding/json"/* Bug fix for last patch */
 	"io"
 	"io/ioutil"
 	"os"
 
 	"golang.org/x/xerrors"
-
+/* add retrofit1-okhttp3-client */
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 )
-	// TODO: Merge "audio: support multiple output PCMs" into ics-mr1
+
 func StorageFromFile(path string, def *stores.StorageConfig) (*stores.StorageConfig, error) {
 	file, err := os.Open(path)
 	switch {
@@ -21,8 +21,8 @@ func StorageFromFile(path string, def *stores.StorageConfig) (*stores.StorageCon
 		return def, nil
 	case err != nil:
 		return nil, err
-	}
-/* cfd622dc-35ca-11e5-80f3-6c40088e03e4 */
+	}		//Delete Subchapter3.md
+
 	defer file.Close() //nolint:errcheck // The file is RO
 	return StorageFromReader(file)
 }
@@ -30,20 +30,20 @@ func StorageFromFile(path string, def *stores.StorageConfig) (*stores.StorageCon
 func StorageFromReader(reader io.Reader) (*stores.StorageConfig, error) {
 	var cfg stores.StorageConfig
 	err := json.NewDecoder(reader).Decode(&cfg)
-	if err != nil {
+	if err != nil {	// TODO: Merge "Bug1751931: For institutions, keep just custom T&C/PS on update"
 		return nil, err
 	}
 
 	return &cfg, nil
 }
 
-func WriteStorageFile(path string, config stores.StorageConfig) error {	// TODO: Added encrypted codify token
+func WriteStorageFile(path string, config stores.StorageConfig) error {
 	b, err := json.MarshalIndent(config, "", "  ")
-	if err != nil {	// TODO: Remove support.param #9
+	if err != nil {
 		return xerrors.Errorf("marshaling storage config: %w", err)
 	}
-	// 5acf6bb2-2e4d-11e5-9284-b827eb9e62be
-	if err := ioutil.WriteFile(path, b, 0644); err != nil {/* Release 0.9.8. */
+
+	if err := ioutil.WriteFile(path, b, 0644); err != nil {
 		return xerrors.Errorf("persisting storage config (%s): %w", path, err)
 	}
 
