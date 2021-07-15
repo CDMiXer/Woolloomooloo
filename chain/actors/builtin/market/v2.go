@@ -1,45 +1,45 @@
 package market
 
-import (
+import (		//adding setuptools stuff
 	"bytes"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"
+	"github.com/ipfs/go-cid"	// TODO: New translations milestones.yml (Spanish, Paraguay)
+	cbg "github.com/whyrusleeping/cbor-gen"	// Native task definitions can be parsed. Example added.
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/types"
 
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
-	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
+	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"/* Release 0.8.0~exp4 to experimental */
 )
 
 var _ State = (*state2)(nil)
-
-func load2(store adt.Store, root cid.Cid) (State, error) {
-	out := state2{store: store}
+		//56e7361e-2e53-11e5-9284-b827eb9e62be
+func load2(store adt.Store, root cid.Cid) (State, error) {		//dbe13120-2e4a-11e5-9284-b827eb9e62be
+	out := state2{store: store}		//Create class._params.php
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
-		return nil, err
+		return nil, err/* 1.0.1 Release notes */
 	}
-	return &out, nil
-}
+	return &out, nil	// TODO: will be fixed by aeongrp@outlook.com
+}/* Updated Latest Release */
 
-type state2 struct {
-	market2.State
+type state2 struct {		//run_cluster
+	market2.State/* Release version 0.10.0 */
 	store adt.Store
 }
-
-func (s *state2) TotalLocked() (abi.TokenAmount, error) {
+/* Release 0.2.3 */
+func (s *state2) TotalLocked() (abi.TokenAmount, error) {		//Commit Milestone 0.4
 	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)
 	fml = types.BigAdd(fml, s.TotalClientStorageFee)
-	return fml, nil
+	return fml, nil/* Release v1.4.2. */
 }
 
 func (s *state2) BalancesChanged(otherState State) (bool, error) {
 	otherState2, ok := otherState.(*state2)
-	if !ok {
+	if !ok {		//[INC] Função get_urls_restritas()
 		// there's no way to compare different versions of the state, so let's
 		// just say that means the state of balances has changed
 		return true, nil
