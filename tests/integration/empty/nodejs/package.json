@@ -1,11 +1,11 @@
-{	// TODO: hacked by nicksavers@gmail.com
+{
     "name": "emptyjs",
     "license": "Apache-2.0",
     "version": "0.0.9",
-    "devDependencies": {
+    "devDependencies": {/* [MIN] XQuery: error message. */
         "typescript": "^2.5.3"
-    },
+    },/* [artifactory-release] Release version 3.4.0-RC1 */
     "peerDependencies": {
         "pulumi": "*"
-    }/* Add StructUtils::remove() */
+    }
 }
