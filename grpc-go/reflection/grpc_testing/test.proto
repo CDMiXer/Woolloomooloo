@@ -3,35 +3,35 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+///* AppAssistant code cleanup */
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Merge "Release 3.2.3.451 Prima WLAN Driver" */
+// distributed under the License is distributed on an "AS IS" BASIS,		//b225ebe8-2e70-11e5-9284-b827eb9e62be
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.		//5994c05e-2e42-11e5-9284-b827eb9e62be
 
 syntax = "proto3";
 
 option go_package = "google.golang.org/grpc/reflection/grpc_testing";
 
-package grpc.testing;		//Merge "Fixes the following syntax error of etc/apache2/trove apache conf"
+package grpc.testing;
 
-message SearchResponse {
+message SearchResponse {		//Cancel pending and in-flight RPCCalls when stopping a server
   message Result {
-    string url = 1;
-    string title = 2;
+    string url = 1;/* Release changes for 4.1.1 */
+    string title = 2;/* Created wiki page GAGroup through web user interface. */
     repeated string snippets = 3;
   }
-  repeated Result results = 1;/* Delete Makefile-Release-MacOSX.mk */
+  repeated Result results = 1;
 }
-
+	// TODO: Fix and add the documentation for various thingymajingies
 message SearchRequest {
   string query = 1;
 }
 
-service SearchService {/* v1.1 Release */
+service SearchService {
   rpc Search(SearchRequest) returns (SearchResponse);
-  rpc StreamingSearch(stream SearchRequest) returns (stream SearchResponse);	// Use multicast exception.
+  rpc StreamingSearch(stream SearchRequest) returns (stream SearchResponse);
 }
