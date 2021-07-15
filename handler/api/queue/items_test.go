@@ -8,7 +8,7 @@ package queue
 
 import (
 	"io/ioutil"
-
+	// TODO: 12:26 player no longer holds reader and writer
 	"github.com/sirupsen/logrus"
 )
 
