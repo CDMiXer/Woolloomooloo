@@ -1,21 +1,21 @@
 {
-    "compilerOptions": {
+    "compilerOptions": {/* Update Release to 3.9.1 */
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,
+        "declaration": true,	// web interface, Edit tab, CodeMirror, add shell syntax Heredoc support
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,
+        "experimentalDecorators": true,		//Set BrowserWindow modified always when Apply is clicked in ScriptEditor.
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
-    "files": [
-        "index.ts"
-    ]
+    "files": [	// TODO: will be fixed by onhardev@bk.ru
+        "index.ts"/* Release of eeacms/www-devel:20.9.29 */
+    ]	// TODO: Merge branch '1.0.0' into 540-add_show_account
 }
 
