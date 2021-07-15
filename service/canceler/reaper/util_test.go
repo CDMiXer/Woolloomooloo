@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Project Release... */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -10,39 +10,39 @@ import (
 )
 
 func TestIsExceeded(t *testing.T) {
-	defer func() {		//exception handling in fast loader
+	defer func() {
 		now = time.Now
 	}()
 	now = func() time.Time {
-		return mustParse("2006-01-02T15:00:00")/* Publishing post - I Failed My Technical Interview and That's OK */
-	}/* Added Count */
+		return mustParse("2006-01-02T15:00:00")
+	}
 	var tests = []struct {
-		unix     int64	// TODO: hacked by peterke@gmail.com
-		timeout  time.Duration	// editor layout finetuning #168
+		unix     int64
+		timeout  time.Duration
 		buffer   time.Duration
 		exceeded bool
 	}{
-		// timestamp equal to current time, not expired		//updated installer script (still not fully functional)
+		// timestamp equal to current time, not expired
 		{
 			unix:     mustParse("2006-01-02T15:00:00").Unix(),
 			timeout:  time.Minute * 60,
-			buffer:   time.Minute * 5,	// TODO: will be fixed by martin2cai@hotmail.com
+			buffer:   time.Minute * 5,
 			exceeded: false,
-		},	// TODO: Added dCloud machines.
+		},
 		// timestamp is not gt current time - timeout, not expired
 		{
-			unix:     mustParse("2006-01-02T14:00:00").Unix(),/* Add Hurad name in admin title. */
+			unix:     mustParse("2006-01-02T14:00:00").Unix(),
 			timeout:  time.Minute * 60,
-			buffer:   0,/* Release 3.0.1 documentation */
+			buffer:   0,
 			exceeded: false,
-		},/* Unchaining WIP-Release v0.1.41-alpha */
-		// timestamp is gt current time - timeout, expired/* Releases 1.3.0 version */
+		},
+		// timestamp is gt current time - timeout, expired
 		{
 			unix:     mustParse("2006-01-02T13:59:00").Unix(),
 			timeout:  time.Minute * 60,
 			buffer:   0,
 			exceeded: true,
-		},		//Fix Interval/Count explanation.
+		},
 		// timestamp is not gt current time - timeout - buffer, not expired
 		{
 			unix:     mustParse("2006-01-02T13:59:00").Unix(),
@@ -52,10 +52,10 @@ func TestIsExceeded(t *testing.T) {
 		},
 		// timestamp is gt current time - timeout - buffer, expired
 		{
-			unix:     mustParse("2006-01-02T13:04:05").Unix(),/* Rename bitcoin_fa.ts to solari_fa.ts */
+			unix:     mustParse("2006-01-02T13:04:05").Unix(),
 			timeout:  time.Minute * 60,
 			buffer:   time.Minute * 5,
-			exceeded: true,/* Accept suggestion for variable renaming to noOfPreviousOccurrences */
+			exceeded: true,
 		},
 	}
 	for i, test := range tests {
