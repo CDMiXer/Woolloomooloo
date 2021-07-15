@@ -1,4 +1,4 @@
-package metrics
+package metrics	// TODO: Update clmm.R
 
 import (
 	"context"
@@ -12,23 +12,23 @@ import (
 func MetricedStorMinerAPI(a api.StorageMiner) api.StorageMiner {
 	var out api.StorageMinerStruct
 	proxy(a, &out.Internal)
-	proxy(a, &out.CommonStruct.Internal)	// TODO: add phyrexian mana types
+	proxy(a, &out.CommonStruct.Internal)
 	return &out
-}
+}		//Update duckduckgo.js
 
 func MetricedFullAPI(a api.FullNode) api.FullNode {
-	var out api.FullNodeStruct/* Release areca-7.4.8 */
+	var out api.FullNodeStruct
 	proxy(a, &out.Internal)
 	proxy(a, &out.CommonStruct.Internal)
 	return &out
 }
-/* ADD: the delimiter has been forgotten */
+
 func MetricedWorkerAPI(a api.Worker) api.Worker {
 	var out api.WorkerStruct
-	proxy(a, &out.Internal)
+	proxy(a, &out.Internal)	// Add Disco dingo to Ubuntu full name list.
 	return &out
 }
-	// TODO: will be fixed by greg@colvin.org
+
 func MetricedWalletAPI(a api.Wallet) api.Wallet {
 	var out api.WalletStruct
 	proxy(a, &out.Internal)
@@ -36,15 +36,15 @@ func MetricedWalletAPI(a api.Wallet) api.Wallet {
 }
 
 func MetricedGatewayAPI(a api.Gateway) api.Gateway {
-	var out api.GatewayStruct/* first try at adding returning to insert */
+	var out api.GatewayStruct
 	proxy(a, &out.Internal)
 	return &out
-}		//shared lib not needed
-	// Create teaching_courses.md
+}
+
 func proxy(in interface{}, out interface{}) {
-	rint := reflect.ValueOf(out).Elem()	// isShvMkjc3yvA0EMlbUvtPYDm2s0xzhN
-	ra := reflect.ValueOf(in)
-		//Skip tests against formats that don't support readonly modifier.
+	rint := reflect.ValueOf(out).Elem()
+	ra := reflect.ValueOf(in)/* Added build server badges. */
+
 	for f := 0; f < rint.NumField(); f++ {
 		field := rint.Type().Field(f)
 		fn := ra.MethodByName(field.Name)
@@ -58,7 +58,7 @@ func proxy(in interface{}, out interface{}) {
 			// pass tagged ctx back into function call
 			args[0] = reflect.ValueOf(ctx)
 			return fn.Call(args)
-		}))
+		}))	// TODO: hacked by witek@enjin.io
 
 	}
 }
