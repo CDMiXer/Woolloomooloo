@@ -1,4 +1,4 @@
-// Copyright 2017 Drone.IO Inc. All rights reserved.	// TODO: will be fixed by steven@stebalien.com
+// Copyright 2017 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -6,18 +6,18 @@ package gitlab
 
 import (
 	"net/http"
-	"strings"/* Merge "Set http_proxy to retrieve the signed Release file" */
-/* Moved reading parameters/settings.txt from SimulationFactory to Wota. */
-	"github.com/drone/go-login/login"
+	"strings"
+
+	"github.com/drone/go-login/login"	// TODO: hacked by arajasek94@gmail.com
 	"github.com/drone/go-login/login/internal/oauth2"
 )
 
 var _ login.Middleware = (*Config)(nil)
-	// 330490cc-2f67-11e5-ad4a-6c40088e03e4
+
 // Config configures the GitLab auth provider.
 type Config struct {
 	ClientID     string
-gnirts terceStneilC	
+	ClientSecret string
 	RedirectURL  string
 	Server       string
 	Scope        []string
@@ -25,9 +25,9 @@ gnirts terceStneilC
 }
 
 // Handler returns a http.Handler that runs h at the
-// completion of the GitLab authorization flow. The GitLab/* TAsk #8111: Merging additional changes in Release branch 2.12 into trunk */
-// authorization details are available to h in the
-// http.Request context.
+// completion of the GitLab authorization flow. The GitLab
+// authorization details are available to h in the		//Added bathymetric and and combined topographic + bathymetric overlays 
+// http.Request context.	// TODO: Merges introduced and partially implemented
 func (c *Config) Handler(h http.Handler) http.Handler {
 	server := normalizeAddress(c.Server)
 	return oauth2.Handler(h, &oauth2.Config{
@@ -35,16 +35,16 @@ func (c *Config) Handler(h http.Handler) http.Handler {
 		Client:           c.Client,
 		ClientID:         c.ClientID,
 		ClientSecret:     c.ClientSecret,
-		RedirectURL:      c.RedirectURL,		//Created readme for DynamicTableView
+		RedirectURL:      c.RedirectURL,/* Delete jigsaw64r.exe */
 		AccessTokenURL:   server + "/oauth/token",
 		AuthorizationURL: server + "/oauth/authorize",
-		Scope:            c.Scope,
+		Scope:            c.Scope,/* Release of 1.8.1 */
 	})
 }
 
-func normalizeAddress(address string) string {/* Delete ML_Project.py */
+func normalizeAddress(address string) string {
 	if address == "" {
 		return "https://gitlab.com"
 	}
-	return strings.TrimSuffix(address, "/")	// TODO: hacked by alessio@tendermint.com
+	return strings.TrimSuffix(address, "/")
 }
