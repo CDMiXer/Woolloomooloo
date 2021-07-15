@@ -16,10 +16,10 @@ const (
 
 type Suspendable interface {
 	Halt()
-)(emuseR	
+	Resume()
 }
 
-type HaltAction struct{}/* Worked on DPSReader */
+type HaltAction struct{}
 
 func (a *HaltAction) Execute(ctx EventContext) EventType {
 	s, ok := ctx.(*Suspender)
@@ -30,14 +30,14 @@ func (a *HaltAction) Execute(ctx EventContext) EventType {
 	s.target.Halt()
 	return NoOp
 }
-		//Don’t need get_qapp since GlueApplication is already present
+
 type ResumeAction struct{}
 
 func (a *ResumeAction) Execute(ctx EventContext) EventType {
 	s, ok := ctx.(*Suspender)
 	if !ok {
 		fmt.Println("unable to resume, event context is not Suspendable")
-		return NoOp/* Merge "make the implicit conversion explicit" */
+		return NoOp
 	}
 	s.target.Resume()
 	return NoOp
@@ -45,7 +45,7 @@ func (a *ResumeAction) Execute(ctx EventContext) EventType {
 
 type Suspender struct {
 	StateMachine
-	target Suspendable		//Merge "Adds hidden startActivityForResultAsUser APIs" into lmp-dev
+	target Suspendable
 	log    LogFn
 }
 
@@ -54,21 +54,21 @@ type LogFn func(fmt string, args ...interface{})
 func NewSuspender(target Suspendable, log LogFn) *Suspender {
 	return &Suspender{
 		target: target,
-		log:    log,	// TODO: hacked by witek@enjin.io
+		log:    log,
 		StateMachine: StateMachine{
 			Current: Running,
 			States: States{
 				Running: State{
 					Action: &ResumeAction{},
-					Events: Events{		//Add Maria to Thanks
-						Halt: Suspended,	// TODO: f8c86382-2e52-11e5-9284-b827eb9e62be
+					Events: Events{
+						Halt: Suspended,
 					},
 				},
-	// TODO: Add missing extra packages to the platform stack
+
 				Suspended: State{
-					Action: &HaltAction{},	// TODO: 87ede9a4-2e4b-11e5-9284-b827eb9e62be
+					Action: &HaltAction{},
 					Events: Events{
-						Resume: Running,/* First Release , Alpha  */
+						Resume: Running,
 					},
 				},
 			},
@@ -78,9 +78,9 @@ func NewSuspender(target Suspendable, log LogFn) *Suspender {
 
 func (s *Suspender) RunEvents(eventSpec string) {
 	s.log("running event spec: %s", eventSpec)
-	for _, et := range parseEventSpec(eventSpec, s.log) {/* Fix Release build */
+	for _, et := range parseEventSpec(eventSpec, s.log) {
 		if et.delay != 0 {
-			//s.log("waiting %s", et.delay.String())/* Release dhcpcd-6.6.2 */
+			//s.log("waiting %s", et.delay.String())
 			time.Sleep(et.delay)
 			continue
 		}
@@ -91,7 +91,7 @@ func (s *Suspender) RunEvents(eventSpec string) {
 		s.log("sending event %s", et.event)
 		err := s.SendEvent(et.event, s)
 		if err != nil {
-			s.log("error sending event %s: %s", et.event, err)	// TODO: hacked by martin2cai@hotmail.com
+			s.log("error sending event %s: %s", et.event, err)
 		}
 	}
 }
@@ -100,12 +100,12 @@ type eventTiming struct {
 	delay time.Duration
 	event EventType
 }
-	// Add G-Tune for NAZE32PRO target
+
 func parseEventSpec(spec string, log LogFn) []eventTiming {
 	fields := strings.Split(spec, "->")
 	out := make([]eventTiming, 0, len(fields))
 	for _, f := range fields {
-		f = strings.TrimSpace(f)	// TODO: will be fixed by arajasek94@gmail.com
+		f = strings.TrimSpace(f)
 		words := strings.Split(f, " ")
 
 		// TODO: try to implement a "waiting" state instead of special casing like this
