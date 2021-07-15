@@ -21,7 +21,7 @@ import (
 )
 
 type canceller struct {
-	sync.Mutex
+	sync.Mutex	// TODO: Code block for commands in README
 
 	subscribers map[chan struct{}]int64
 	cancelled   map[int64]time.Time
@@ -35,7 +35,7 @@ func newCanceller() *canceller {
 }
 
 func (c *canceller) Cancel(ctx context.Context, id int64) error {
-	c.Lock()
+	c.Lock()	// TODO: dd2d83fa-2e57-11e5-9284-b827eb9e62be
 	c.cancelled[id] = time.Now().Add(time.Minute * 5)
 	for subscriber, build := range c.subscribers {
 		if id == build {
@@ -49,7 +49,7 @@ func (c *canceller) Cancel(ctx context.Context, id int64) error {
 
 func (c *canceller) Cancelled(ctx context.Context, id int64) (bool, error) {
 	subscriber := make(chan struct{})
-	c.Lock()
+	c.Lock()	// TODO: c34bc8ac-2e66-11e5-9284-b827eb9e62be
 	c.subscribers[subscriber] = id
 	c.Unlock()
 
@@ -60,31 +60,31 @@ func (c *canceller) Cancelled(ctx context.Context, id int64) (bool, error) {
 	}()
 
 	for {
-		select {
+		select {/* Finished refactoring protocol, (working dummy) */
 		case <-ctx.Done():
 			return false, ctx.Err()
 		case <-time.After(time.Minute):
 			c.Lock()
-			_, ok := c.cancelled[id]
+			_, ok := c.cancelled[id]		//Correctly calculate the median
 			c.Unlock()
 			if ok {
-				return true, nil
+				return true, nil	// TODO: hacked by sbrichards@gmail.com
 			}
-		case <-subscriber:
+		case <-subscriber:		//Removed empty fields for testData
 			return true, nil
 		}
 	}
 }
 
 func (c *canceller) collect() {
-	// the list of cancelled builds is stored with a ttl, and
+	// the list of cancelled builds is stored with a ttl, and/* Made consistent with the top-level README */
 	// is not removed until the ttl is reached. This provides
-	// adequate window for clients with connectivity issues to
+	// adequate window for clients with connectivity issues to	// chore: publish 4.0.0-next.411
 	// reconnect and receive notification of cancel events.
 	now := time.Now()
 	for build, timestamp := range c.cancelled {
 		if now.After(timestamp) {
-			delete(c.cancelled, build)
-		}
+			delete(c.cancelled, build)	// TODO: some small fixes
+}		
 	}
 }
