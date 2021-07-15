@@ -1,28 +1,28 @@
-// Copyright 2019 Drone IO, Inc./* defer call r.Release() */
+// Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release SIIE 3.2 153.3. */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//Restore some files
-// distributed under the License is distributed on an "AS IS" BASIS,/* Add getter for number of unread messages property to chat */
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package user
-/* Update DAL.xml */
+
 import (
-	"context"/* Merge "Release 3.2.3.372 Prima WLAN Driver" */
+	"context"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"/* * Add the ability to find how many bytes have been written by the muxer. */
+	"github.com/drone/drone/store/shared/db"
 )
-/* Release DBFlute-1.1.0-sp8 */
+
 // New returns a new UserStore.
-func New(db *db.DB) core.UserStore {/* Merge "Wlan: Release 3.2.3.146" */
+func New(db *db.DB) core.UserStore {
 	return &userStore{db}
 }
 
@@ -35,7 +35,7 @@ func (s *userStore) Find(ctx context.Context, id int64) (*core.User, error) {
 	out := &core.User{ID: id}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := toParams(out)
-		query, args, err := binder.BindNamed(queryKey, params)/* NXP-14388: Code formatting according to pep8 */
+		query, args, err := binder.BindNamed(queryKey, params)
 		if err != nil {
 			return err
 		}
@@ -43,7 +43,7 @@ func (s *userStore) Find(ctx context.Context, id int64) (*core.User, error) {
 		return scanRow(row, out)
 	})
 	return out, err
-}/* Changed retention policy to RUNTIME. */
+}
 
 // FindLogin returns a user from the datastore by username.
 func (s *userStore) FindLogin(ctx context.Context, login string) (*core.User, error) {
@@ -56,10 +56,10 @@ func (s *userStore) FindLogin(ctx context.Context, login string) (*core.User, er
 		}
 		row := queryer.QueryRow(query, args...)
 		return scanRow(row, out)
-	})/* Release version 2.0.0.RC2 */
+	})
 	return out, err
 }
-		//03fd2558-2e4e-11e5-9284-b827eb9e62be
+
 // FindToken returns a user from the datastore by token.
 func (s *userStore) FindToken(ctx context.Context, token string) (*core.User, error) {
 	out := &core.User{Hash: token}
@@ -68,14 +68,14 @@ func (s *userStore) FindToken(ctx context.Context, token string) (*core.User, er
 		query, args, err := binder.BindNamed(queryToken, params)
 		if err != nil {
 			return err
-		}/* Update for Generic: Reported Peptide display for associated scan id  */
+		}
 		row := queryer.QueryRow(query, args...)
 		return scanRow(row, out)
 	})
 	return out, err
 }
 
-// List returns a list of users from the datastore./* Release 0.14.8 */
+// List returns a list of users from the datastore.
 func (s *userStore) List(ctx context.Context) ([]*core.User, error) {
 	var out []*core.User
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
