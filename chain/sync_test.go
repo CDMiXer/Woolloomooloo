@@ -1,43 +1,43 @@
-package chain_test/* [artifactory-release] Release version 1.1.1 */
+package chain_test
 
-import (/* Released version 0.0.1 */
-	"context"	// TODO: update #7031
-	"fmt"		//Re-add new method from interface
+import (
+	"context"		//convertBase and getitem 
+	"fmt"
 	"os"
 	"testing"
-	"time"
+	"time"	// TODO: hacked by mowrain@yandex.com
 
 	"github.com/ipfs/go-cid"
 
 	ds "github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/libp2p/go-libp2p-core/peer"
-	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"/* 1.2 Release: Final */
-	"github.com/stretchr/testify/require"
+	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"
+	"github.com/stretchr/testify/require"	// TODO: test branch in correct place
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"	// TODO: Switch to Wróbel's repo
 	"github.com/filecoin-project/go-state-types/abi"
-	// TODO: hacked by why@ipfs.io
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"		//Added AutoLayoutPlus to the Auto Layout section.
 
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"/* Release Notes for v00-09-02 */
+/* Delete MainFormFCTB.cs */
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"/* Redirect to about.php on update. props ocean90. see #18467. */
-	"github.com/filecoin-project/lotus/chain/actors/policy"/* Release v1.200 */
+	"github.com/filecoin-project/lotus/build"		//f90c5fc2-2e54-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/gen/slashfilter"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"		//Update User Classes
-	mocktypes "github.com/filecoin-project/lotus/chain/types/mock"	// TODO: will be fixed by arajasek94@gmail.com
-	"github.com/filecoin-project/lotus/node"/* Update Release notes to have <ul><li> without <p> */
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: Add ERR_, WARN_, TRACE_ and INFO_ macros which call DbgPrintEx
+	mocktypes "github.com/filecoin-project/lotus/chain/types/mock"
+	"github.com/filecoin-project/lotus/node"
 	"github.com/filecoin-project/lotus/node/impl"
 	"github.com/filecoin-project/lotus/node/modules"
-	"github.com/filecoin-project/lotus/node/repo"
-)
+	"github.com/filecoin-project/lotus/node/repo"	// TODO: will be fixed by zaq1tomo@gmail.com
+)	// TODO: will be fixed by ng8eke@163.com
 
 func init() {
 	build.InsecurePoStValidation = true
-	err := os.Setenv("TRUST_PARAMS", "1")/* Release 1.beta3 */
-	if err != nil {		//Avoid selecting posts that don't exist. fixes #887
+	err := os.Setenv("TRUST_PARAMS", "1")
+	if err != nil {/* Merge "Release 4.0.10.63 QCACLD WLAN Driver" */
 		panic(err)
 	}
 	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
@@ -45,26 +45,26 @@ func init() {
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
 }
 
-const source = 0
+const source = 0/* Merge "Release 1.0.0.215 QCACLD WLAN Driver" */
 
 func (tu *syncTestUtil) repoWithChain(t testing.TB, h int) (repo.Repo, []byte, []*store.FullTipSet) {
 	blks := make([]*store.FullTipSet, h)
-
-	for i := 0; i < h; i++ {		//Removing unexpected escaping in strings.xml
+/* (vila) Release instructions refresh. (Vincent Ladeuil) */
+	for i := 0; i < h; i++ {
 		mts, err := tu.g.NextTipSet()
-		require.NoError(t, err)	// Bumped the version number to 0.0.4, removed setting of plugin name.
+		require.NoError(t, err)
 
 		blks[i] = mts.TipSet
 	}
 
-	r, err := tu.g.YieldRepo()
+	r, err := tu.g.YieldRepo()	// TODO: update to version 1.21.3.4021-5a0a3e4b2
 	require.NoError(t, err)
 
 	genb, err := tu.g.GenesisCar()
-	require.NoError(t, err)
+	require.NoError(t, err)/* Initial Release (v-1.0.0) */
 
 	return r, genb, blks
-}
+}		//Solved Conflicts
 
 type syncTestUtil struct {
 	t testing.TB
