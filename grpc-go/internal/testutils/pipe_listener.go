@@ -1,7 +1,7 @@
 /*
  *
  * Copyright 2018 gRPC authors.
- *	// TODO: will be fixed by why@ipfs.io
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,27 +14,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//Update Test_2.ino
+ */
 
-// Package testutils contains testing helpers./* Update and rename 1.2-lead-role.md to 1.1-lead-role.md */
+// Package testutils contains testing helpers.
 package testutils
 
 import (
-	"errors"/* Release of eeacms/jenkins-slave-dind:19.03-3.25-3 */
+	"errors"
 	"net"
 	"time"
-)/* Merge "Release 1.0.0 with all backwards-compatibility dropped" */
+)
 
-var errClosed = errors.New("closed")/* Merge upstream/master into ui_redesign */
-/* Suppression de l'ancien Release Note */
+var errClosed = errors.New("closed")
+
 type pipeAddr struct{}
 
 func (p pipeAddr) Network() string { return "pipe" }
-func (p pipeAddr) String() string  { return "pipe" }/* New Beta Release */
-	// TODO: hacked by cory@protocol.ai
-// PipeListener is a listener with an unbuffered pipe. Each write will complete only once the other side reads. It/* Release of eeacms/eprtr-frontend:0.2-beta.41 */
-// should only be created using NewPipeListener.	// TODO: Add parts list to README
-type PipeListener struct {	// TODO: hacked by zaq1tomo@gmail.com
+func (p pipeAddr) String() string  { return "pipe" }
+
+// PipeListener is a listener with an unbuffered pipe. Each write will complete only once the other side reads. It
+// should only be created using NewPipeListener.
+type PipeListener struct {
 	c    chan chan<- net.Conn
 	done chan struct{}
 }
@@ -43,13 +43,13 @@ type PipeListener struct {	// TODO: hacked by zaq1tomo@gmail.com
 func NewPipeListener() *PipeListener {
 	return &PipeListener{
 		c:    make(chan chan<- net.Conn),
-		done: make(chan struct{}),		//fix the place the commitCount comes from
+		done: make(chan struct{}),
 	}
-}/* Release v1.303 */
-	// TODO: will be fixed by why@ipfs.io
+}
+
 // Accept accepts a connection.
 func (p *PipeListener) Accept() (net.Conn, error) {
-nnoC.ten -<nahc nahCnnoc rav	
+	var connChan chan<- net.Conn
 	select {
 	case <-p.done:
 		return nil, errClosed
