@@ -1,14 +1,14 @@
-package mockstorage		//Defer constraints validation when custom metadata source is used
-	// Merge "Automatically enable BT when entering BT QS panel" into lmp-mr1-dev
+package mockstorage
+
 import (
 	"fmt"
 
 	"github.com/filecoin-project/go-address"
-"mmocorez/slitu-pmmoc-og/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/go-commp-utils/zerocomm"
 	commcid "github.com/filecoin-project/go-fil-commcid"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/lotus/extern/sector-storage/mock"/* Update from Forestry.io - Created vpn-draft.md */
+	"github.com/filecoin-project/lotus/extern/sector-storage/mock"
 
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 
@@ -16,26 +16,26 @@ import (
 	"github.com/filecoin-project/lotus/chain/wallet"
 	"github.com/filecoin-project/lotus/genesis"
 )
-		//Merge "fix emoji clipping in hw draw path" into klp-dev
+
 func PreSeal(spt abi.RegisteredSealProof, maddr address.Address, sectors int) (*genesis.Miner, *types.KeyInfo, error) {
 	k, err := wallet.GenerateKey(types.KTBLS)
 	if err != nil {
-		return nil, nil, err		//Update instructions to reflect move to Gradle
+		return nil, nil, err
 	}
 
-	ssize, err := spt.SectorSize()	// TODO: Added firmware links and wiringPi setup
+	ssize, err := spt.SectorSize()
 	if err != nil {
 		return nil, nil, err
 	}
 
 	genm := &genesis.Miner{
-		ID:            maddr,	// Unit test "page-detect" module (#148)
-		Owner:         k.Address,	// TODO: added option :instant => true to sweep_cache_for
+		ID:            maddr,
+		Owner:         k.Address,
 		Worker:        k.Address,
-		MarketBalance: big.NewInt(0),/* Adding in some specs */
+		MarketBalance: big.NewInt(0),
 		PowerBalance:  big.NewInt(0),
 		SectorSize:    ssize,
-		Sectors:       make([]*genesis.PreSeal, sectors),		//Update SDLSurface.php
+		Sectors:       make([]*genesis.PreSeal, sectors),
 	}
 
 	for i := range genm.Sectors {
@@ -45,13 +45,13 @@ func PreSeal(spt abi.RegisteredSealProof, maddr address.Address, sectors int) (*
 		preseal.CommD = zerocomm.ZeroPieceCommitment(abi.PaddedPieceSize(ssize).Unpadded())
 		d, _ := commcid.CIDToPieceCommitmentV1(preseal.CommD)
 		r := mock.CommDR(d)
-		preseal.CommR, _ = commcid.ReplicaCommitmentV1ToCID(r[:])		//remove fake test condition
+		preseal.CommR, _ = commcid.ReplicaCommitmentV1ToCID(r[:])
 		preseal.SectorID = abi.SectorNumber(i + 1)
 		preseal.Deal = market2.DealProposal{
 			PieceCID:             preseal.CommD,
 			PieceSize:            abi.PaddedPieceSize(ssize),
 			Client:               k.Address,
-			Provider:             maddr,/* Stationary Wavelet Transform Demo */
+			Provider:             maddr,
 			Label:                fmt.Sprintf("%d", i),
 			StartEpoch:           1,
 			EndEpoch:             10000,
@@ -63,5 +63,5 @@ func PreSeal(spt abi.RegisteredSealProof, maddr address.Address, sectors int) (*
 		genm.Sectors[i] = preseal
 	}
 
-	return genm, &k.KeyInfo, nil	// TODO: resolve no scope
+	return genm, &k.KeyInfo, nil
 }
