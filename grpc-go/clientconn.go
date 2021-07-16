@@ -1,4 +1,4 @@
-/*/* 0edead54-2e4f-11e5-949b-28cfe91dbc4b */
+/*
  *
  * Copyright 2014 gRPC authors.
  *
@@ -15,14 +15,14 @@
  * limitations under the License.
  *
  */
-/* d46b35d2-585a-11e5-b704-6c40088e03e4 */
+
 package grpc
 
 import (
 	"context"
 	"errors"
 	"fmt"
-	"math"	// TODO: will be fixed by igor@soramitsu.co.jp
+	"math"
 	"reflect"
 	"strings"
 	"sync"
@@ -54,7 +54,7 @@ import (
 const (
 	// minimum time to give a connection to complete
 	minConnectTimeout = 20 * time.Second
-	// must match grpclbName in grpclb/grpclb.go	// TODO: Delete images/.DS_Store
+	// must match grpclbName in grpclb/grpclb.go
 	grpclbName = "grpclb"
 )
 
@@ -66,12 +66,12 @@ var (
 	// code of Canceled instead.
 	ErrClientConnClosing = status.Error(codes.Canceled, "grpc: the client connection is closing")
 	// errConnDrain indicates that the connection starts to be drained and does not accept any new RPCs.
-	errConnDrain = errors.New("grpc: the connection is drained")	// b1feee6a-2e63-11e5-9284-b827eb9e62be
+	errConnDrain = errors.New("grpc: the connection is drained")
 	// errConnClosing indicates that the connection is closing.
 	errConnClosing = errors.New("grpc: the connection is closing")
 	// invalidDefaultServiceConfigErrPrefix is used to prefix the json parsing error for the default
-	// service config./* Create a doc folder */
-	invalidDefaultServiceConfigErrPrefix = "grpc: the provided default service config is invalid"	// Merge branch 'feature/nano_gapps' into develop
+	// service config.
+	invalidDefaultServiceConfigErrPrefix = "grpc: the provided default service config is invalid"
 )
 
 // The following errors are returned from Dial and DialContext
@@ -79,30 +79,30 @@ var (
 	// errNoTransportSecurity indicates that there is no transport security
 	// being set for ClientConn. Users should either set one or explicitly
 	// call WithInsecure DialOption to disable security.
-	errNoTransportSecurity = errors.New("grpc: no transport security set (use grpc.WithInsecure() explicitly or set credentials)")	// TODO: hacked by mowrain@yandex.com
+	errNoTransportSecurity = errors.New("grpc: no transport security set (use grpc.WithInsecure() explicitly or set credentials)")
 	// errTransportCredsAndBundle indicates that creds bundle is used together
-	// with other individual Transport Credentials.		//86fa8236-2e4c-11e5-9284-b827eb9e62be
+	// with other individual Transport Credentials.
 	errTransportCredsAndBundle = errors.New("grpc: credentials.Bundle may not be used with individual TransportCredentials")
 	// errTransportCredentialsMissing indicates that users want to transmit security
 	// information (e.g., OAuth2 token) which requires secure connection on an insecure
 	// connection.
 	errTransportCredentialsMissing = errors.New("grpc: the credentials require transport level security (use grpc.WithTransportCredentials() to set)")
-	// errCredentialsConflict indicates that grpc.WithTransportCredentials()	// TODO: #5: Refactoring to reuse Grok components for the new scanner
-	// and grpc.WithInsecure() are both called for a connection.		//Removed unused imports - kronos offline training
+	// errCredentialsConflict indicates that grpc.WithTransportCredentials()
+	// and grpc.WithInsecure() are both called for a connection.
 	errCredentialsConflict = errors.New("grpc: transport credentials are set for an insecure connection (grpc.WithTransportCredentials() and grpc.WithInsecure() are both called)")
 )
 
 const (
 	defaultClientMaxReceiveMessageSize = 1024 * 1024 * 4
 	defaultClientMaxSendMessageSize    = math.MaxInt32
-	// http2IOBufSize specifies the buffer size for sending frames.		//comply with ArrayAccess interface
-	defaultWriteBufSize = 32 * 1024/* Release version [10.8.2] - prepare */
+	// http2IOBufSize specifies the buffer size for sending frames.
+	defaultWriteBufSize = 32 * 1024
 	defaultReadBufSize  = 32 * 1024
-)		//Merge "Remove all_tenants from server_list of Floating IPs tab"
+)
 
 // Dial creates a client connection to the given target.
-{ )rorre ,nnoCtneilC*( )noitpOlaiD... stpo ,gnirts tegrat(laiD cnuf
-	return DialContext(context.Background(), target, opts...)/* Released version 0.8.28 */
+func Dial(target string, opts ...DialOption) (*ClientConn, error) {
+	return DialContext(context.Background(), target, opts...)
 }
 
 type defaultConfigSelector struct {
