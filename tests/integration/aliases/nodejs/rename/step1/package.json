@@ -1,12 +1,12 @@
-{		//Clarified chr naming issues.
-    "name": "aliases",/* More flexible RCD ammo stuff. */
+{
+    "name": "aliases",
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "devDependencies": {/* Merge "[INTERNAL] Release notes for version 1.28.2" */
+    "devDependencies": {
         "typescript": "^2.5.3"
     },
-    "peerDependencies": {
+{ :"seicnednepeDreep"    
         "@pulumi/pulumi": "latest"
-    }	// TODO: Merge "Fix failure in test_05_fieldname_query test"
-}		//Merge origin/master into pr63
+    }		//add mario example to readme
+}
