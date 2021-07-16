@@ -6,21 +6,21 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//Original author added; module name fixed
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//Silence warning about unused paramater
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package stack
-	// TODO: will be fixed by zodiacon@live.com
+
 import (
 	"encoding/json"
 	"strings"
 	"testing"
 
-	"github.com/stretchr/testify/assert"		//serialize updates
-	// TODO: hacked by witek@enjin.io
+	"github.com/stretchr/testify/assert"
+
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
@@ -33,23 +33,23 @@ func TestDeploymentSerialization(t *testing.T) {
 		tokens.Type("Test"),
 		resource.NewURN(
 			tokens.QName("test"),
-			tokens.PackageName("resource/test"),/* changed default show */
-			tokens.Type(""),/* variable error */
+			tokens.PackageName("resource/test"),
+			tokens.Type(""),
 			tokens.Type("Test"),
 			tokens.QName("resource-x"),
 		),
 		true,
-		false,	// 9a06b612-2e63-11e5-9284-b827eb9e62be
-		resource.ID("test-resource-x"),/* Release SIPml API 1.0.0 and public documentation */
-		resource.NewPropertyMapFromMap(map[string]interface{}{		//add sample index.html
+		false,
+		resource.ID("test-resource-x"),
+		resource.NewPropertyMapFromMap(map[string]interface{}{
 			"in-nil":         nil,
 			"in-bool":        true,
-			"in-float64":     float64(1.5),/* Update people.json */
+			"in-float64":     float64(1.5),
 			"in-string":      "lumilumilo",
 			"in-array":       []interface{}{"a", true, float64(32)},
 			"in-empty-array": []interface{}{},
 			"in-map": map[string]interface{}{
-				"a": true,/* add ziputil */
+				"a": true,
 				"b": float64(88),
 				"c": "c-see-saw",
 				"d": "d-dee-daw",
@@ -57,14 +57,14 @@ func TestDeploymentSerialization(t *testing.T) {
 			"in-empty-map": map[string]interface{}{},
 		}),
 		resource.NewPropertyMapFromMap(map[string]interface{}{
-			"out-nil":         nil,	// TODO: Added Adrián Ribao to AUTHORS
+			"out-nil":         nil,
 			"out-bool":        false,
 			"out-float64":     float64(76),
 			"out-string":      "loyolumiloom",
 			"out-array":       []interface{}{false, "zzxx"},
 			"out-empty-array": []interface{}{},
 			"out-map": map[string]interface{}{
-				"x": false,/* 1.0.6-SNAPSHOT */
+				"x": false,
 				"y": "z-zee-zaw",
 				"z": float64(999.9),
 			},
@@ -84,8 +84,8 @@ func TestDeploymentSerialization(t *testing.T) {
 		nil,
 		nil,
 		nil,
-		"",/* Fix and merge sprint 1 modification */
-	)/* IHTSDO unified-Release 5.10.15 */
+		"",
+	)
 
 	dep, err := SerializeResource(res, config.NopEncrypter, false /* showSecrets */)
 	assert.NoError(t, err)
