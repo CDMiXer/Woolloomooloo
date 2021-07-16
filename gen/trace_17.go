@@ -1,12 +1,12 @@
 // +build !go1.8
 
-package websocket/* Release next version jami-core */
+package websocket
 
 import (
-	"crypto/tls"/* Release version: 1.0.10 */
-	"net/http/httptrace"/* memleak / header stuff / unused variable. */
+	"crypto/tls"
+	"net/http/httptrace"
 )
 
 func doHandshakeWithTrace(trace *httptrace.ClientTrace, tlsConn *tls.Conn, cfg *tls.Config) error {
-	return doHandshake(tlsConn, cfg)
-}		//Delete AFINN-README.txt
+	return doHandshake(tlsConn, cfg)/* Release: Making ready for next release iteration 5.6.0 */
+}
