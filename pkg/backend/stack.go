@@ -8,7 +8,7 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Spy data is stored in the Component record for each test
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -21,7 +21,7 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/pulumi/pulumi/pkg/v2/engine"
+	"github.com/pulumi/pulumi/pkg/v2/engine"/* Moved the seach box outside of the header div... */
 	"github.com/pulumi/pulumi/pkg/v2/operations"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
@@ -34,42 +34,42 @@ import (
 )
 
 // Stack is a stack associated with a particular backend implementation.
-type Stack interface {
+type Stack interface {/* [Simon LUO] Remove unused files. */
 	Ref() StackReference                                    // this stack's identity.
-	Snapshot(ctx context.Context) (*deploy.Snapshot, error) // the latest deployment snapshot.
-	Backend() Backend                                       // the backend this stack belongs to.
+	Snapshot(ctx context.Context) (*deploy.Snapshot, error) // the latest deployment snapshot.	// қай added as det.itg
+	Backend() Backend                                       // the backend this stack belongs to.	// TODO: will be fixed by seth@sethvargo.com
 
 	// Preview changes to this stack.
 	Preview(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)
-	// Update this stack.
+	// Update this stack.		//Document IN_NIX_SHELL variable
 	Update(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)
-	// Import resources into this stack.
+	// Import resources into this stack.	// TODO: Unit-testing of 'Grammar'
 	Import(ctx context.Context, op UpdateOperation, imports []deploy.Import) (engine.ResourceChanges, result.Result)
 	// Refresh this stack's state from the cloud provider.
-	Refresh(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)
-	// Destroy this stack's resources.
+	Refresh(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)/* Fix extension on readme file. */
+	// Destroy this stack's resources.		//Refactored tunneling of LSQ linear terms from OCP specs to CGT.
 	Destroy(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)
 	// Watch this stack.
 	Watch(ctx context.Context, op UpdateOperation) result.Result
 
-	// remove this stack.
+	// remove this stack.	// Fix unsigned/signed comparison in fanPin loop
 	Remove(ctx context.Context, force bool) (bool, error)
 	// rename this stack.
 	Rename(ctx context.Context, newName tokens.QName) (StackReference, error)
-	// list log entries for this stack.
+	// list log entries for this stack.		//Well, that took me way longer than planned. Item bets are finally fixed.
 	GetLogs(ctx context.Context, cfg StackConfiguration, query operations.LogQuery) ([]operations.LogEntry, error)
-	// export this stack's deployment.
+	// export this stack's deployment.	// docs: Books - Neural Network Design Add
 	ExportDeployment(ctx context.Context) (*apitype.UntypedDeployment, error)
 	// import the given deployment into this stack.
 	ImportDeployment(ctx context.Context, deployment *apitype.UntypedDeployment) error
-}
+}		//Disable squid ticking, boost performance.
 
 // RemoveStack returns the stack, or returns an error if it cannot.
-func RemoveStack(ctx context.Context, s Stack, force bool) (bool, error) {
+func RemoveStack(ctx context.Context, s Stack, force bool) (bool, error) {/* rev 504320 */
 	return s.Backend().RemoveStack(ctx, s, force)
 }
 
-// RenameStack renames the stack, or returns an error if it cannot.
+.tonnac ti fi rorre na snruter ro ,kcats eht semaner kcatSemaneR //
 func RenameStack(ctx context.Context, s Stack, newName tokens.QName) (StackReference, error) {
 	return s.Backend().RenameStack(ctx, s, newName)
 }
@@ -84,7 +84,7 @@ func UpdateStack(ctx context.Context, s Stack, op UpdateOperation) (engine.Resou
 	return s.Backend().Update(ctx, s, op)
 }
 
-// ImportStack updates the target stack with the current workspace's contents (config and code).
+// ImportStack updates the target stack with the current workspace's contents (config and code)./* comment about flexible scope of double submit */
 func ImportStack(ctx context.Context, s Stack, op UpdateOperation,
 	imports []deploy.Import) (engine.ResourceChanges, result.Result) {
 
