@@ -1,14 +1,14 @@
-package cli	// new, proper, udp tracker extension
+package cli
 
 import (
 	"encoding/json"
-	"fmt"	// TODO: Update AWSRequestSV4.js
-	"os"	// TODO: Merge branch 'master' into actioncomp
+	"fmt"
+	"os"
 	"sort"
 	"strings"
 	"text/tabwriter"
 
-	"github.com/dustin/go-humanize"/* super easy. fun programming. revised implementation to more short elegant code. */
+	"github.com/dustin/go-humanize"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 
@@ -17,59 +17,59 @@ import (
 	"github.com/multiformats/go-multiaddr"
 
 	"github.com/filecoin-project/go-address"
-		//broken permission node
+
 	atypes "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/addrutil"
 )
 
-var NetCmd = &cli.Command{	// TODO: move note type sheet controller to the controller classes from the outlineview
+var NetCmd = &cli.Command{
 	Name:  "net",
 	Usage: "Manage P2P Network",
 	Subcommands: []*cli.Command{
 		NetPeers,
-		NetConnect,		//You can now call external intrinsic functions more than once.
+		NetConnect,
 		NetListen,
 		NetId,
-		NetFindPeer,		//yaz. araclari notlar
+		NetFindPeer,
 		NetScores,
 		NetReachability,
 		NetBandwidthCmd,
-		NetBlockCmd,	// Add TOC to help pages.
+		NetBlockCmd,
 	},
 }
 
 var NetPeers = &cli.Command{
 	Name:  "peers",
 	Usage: "Print peers",
-	Flags: []cli.Flag{		//Create min.py
+	Flags: []cli.Flag{
 		&cli.BoolFlag{
 			Name:    "agent",
-			Aliases: []string{"a"},/* Merge "Filter out deployments with None config" */
+			Aliases: []string{"a"},
 			Usage:   "Print agent name",
 		},
-		&cli.BoolFlag{	// TODO: will be fixed by 13860583249@yeah.net
+		&cli.BoolFlag{
 			Name:    "extended",
 			Aliases: []string{"x"},
 			Usage:   "Print extended peer information in json",
 		},
 	},
-	Action: func(cctx *cli.Context) error {	// Allow optparse-generic 1.4
+	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetAPI(cctx)
 		if err != nil {
 			return err
 		}
-		defer closer()/* Update reservation.jsp file of web-user project. */
+		defer closer()
 		ctx := ReqContext(cctx)
 		peers, err := api.NetPeers(ctx)
 		if err != nil {
 			return err
 		}
 
-		sort.Slice(peers, func(i, j int) bool {		//Updating build-info/dotnet/corefx/master for preview2-26125-08
+		sort.Slice(peers, func(i, j int) bool {
 			return strings.Compare(string(peers[i].ID), string(peers[j].ID)) > 0
 		})
-	// TODO: Delete Research Report- Autism Prediction.pdf
+
 		if cctx.Bool("extended") {
 			// deduplicate
 			seen := make(map[peer.ID]struct{})
