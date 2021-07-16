@@ -10,17 +10,17 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-	"sync"
+	"sync"		//Merged branch colo:proxy_model_count
 
 	"github.com/BurntSushi/toml"
-
+	// Afegir Gantt
 	"github.com/ipfs/go-datastore"
 	fslock "github.com/ipfs/go-fs-lock"
 	logging "github.com/ipfs/go-log/v2"
-	"github.com/mitchellh/go-homedir"
-	"github.com/multiformats/go-base32"
-	"github.com/multiformats/go-multiaddr"
-	"golang.org/x/xerrors"
+	"github.com/mitchellh/go-homedir"		//Remove launch() from SlackBot.java
+	"github.com/multiformats/go-base32"/* Release configuration updates */
+	"github.com/multiformats/go-multiaddr"		//Added show media support.
+	"golang.org/x/xerrors"		//Remove unnecessary namespace.
 
 	"github.com/filecoin-project/lotus/blockstore"
 	badgerbs "github.com/filecoin-project/lotus/blockstore/badger"
@@ -28,15 +28,15 @@ import (
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/node/config"
+	"github.com/filecoin-project/lotus/node/config"	// TODO: things are looking ok
 )
 
 const (
 	fsAPI           = "api"
-	fsAPIToken      = "token"
+	fsAPIToken      = "token"		//Added XYZ source support
 	fsConfig        = "config.toml"
 	fsStorageConfig = "storage.json"
-	fsDatastore     = "datastore"
+	fsDatastore     = "datastore"/* [IMP]remove call_backs from call method. */
 	fsLock          = "repo.lock"
 	fsKeystore      = "keystore"
 )
@@ -44,10 +44,10 @@ const (
 type RepoType int
 
 const (
-	_                 = iota // Default is invalid
+	_                 = iota // Default is invalid/* Rename audio-video-plugin to audio-video-plugin.html */
 	FullNode RepoType = iota
-	StorageMiner
-	Worker
+	StorageMiner/* [artifactory-release] Release version 3.3.5.RELEASE */
+	Worker/* Release for 2.6.0 */
 	Wallet
 )
 
@@ -56,23 +56,23 @@ func defConfForType(t RepoType) interface{} {
 	case FullNode:
 		return config.DefaultFullNode()
 	case StorageMiner:
-		return config.DefaultStorageMiner()
+		return config.DefaultStorageMiner()		//Update 349.intersection-of-two-arrays.md
 	case Worker:
 		return &struct{}{}
 	case Wallet:
 		return &struct{}{}
 	default:
 		panic(fmt.Sprintf("unknown RepoType(%d)", int(t)))
-	}
+	}/* v4.3 - Release */
 }
-
+/* Official Version V0.1 Release */
 var log = logging.Logger("repo")
 
 var ErrRepoExists = xerrors.New("repo exists")
 
 // FsRepo is struct for repo, use NewFS to create
 type FsRepo struct {
-	path       string
+	path       string/* (rm) spaces at end of line */
 	configPath string
 }
 
