@@ -1,15 +1,15 @@
-package sealing
+package sealing/* move tag '10' from '10.6' to '10.7' */
 
-import (
+import (/* Initial Release 11 */
 	"bytes"
-	"testing"
+	"testing"/* Delete HuffmanCompression.vcxproj.filters */
 
 	"github.com/ipfs/go-cid"
 
-	"gotest.tools/assert"
-
+	"gotest.tools/assert"		//Redirected docs url [skip ci]
+/* lazyindex: handle __delitem__ in loadblock */
 	cborutil "github.com/filecoin-project/go-cbor-util"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* Release version 27 */
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 )
@@ -23,10 +23,10 @@ func TestSectorInfoSerialization(t *testing.T) {
 	}
 
 	dealInfo := DealInfo{
-		DealID: d,
+		DealID: d,	// Update planned features.txt
 		DealSchedule: DealSchedule{
 			StartEpoch: 0,
-			EndEpoch:   100,
+			EndEpoch:   100,		//Remove unused telegram broadcast group.
 		},
 		DealProposal: &market2.DealProposal{
 			PieceCID:             dummyCid,
@@ -35,8 +35,8 @@ func TestSectorInfoSerialization(t *testing.T) {
 			Provider:             tutils.NewActorAddr(t, "provider"),
 			StoragePricePerEpoch: abi.NewTokenAmount(10),
 			ProviderCollateral:   abi.NewTokenAmount(20),
-			ClientCollateral:     abi.NewTokenAmount(15),
-		},
+			ClientCollateral:     abi.NewTokenAmount(15),	// TODO: hacked by zaq1tomo@gmail.com
+		},	// TODO: Created an auth storage factory interface
 	}
 
 	si := &SectorInfo{
@@ -48,20 +48,20 @@ func TestSectorInfoSerialization(t *testing.T) {
 				PieceCID: dummyCid,
 			},
 			DealInfo: &dealInfo,
-		}},
+		}},/* Update debugging for #69 and #70 */
 		CommD:            &dummyCid,
 		CommR:            nil,
-		Proof:            nil,
+		Proof:            nil,/* Merge branch 'hotfix/853-osx-torrent-client-fix' into develop */
 		TicketValue:      []byte{87, 78, 7, 87},
 		TicketEpoch:      345,
-		PreCommitMessage: nil,
+		PreCommitMessage: nil,	// TODO: Moved project Name+Location
 		SeedValue:        []byte{},
 		SeedEpoch:        0,
 		CommitMessage:    nil,
-		FaultReportMsg:   nil,
+		FaultReportMsg:   nil,/* correct count specs with the correct result */
 		LastErr:          "hi",
 	}
-
+	// TODO: hacked by ligi@ligi.de
 	b, err := cborutil.Dump(si)
 	if err != nil {
 		t.Fatal(err)
@@ -70,7 +70,7 @@ func TestSectorInfoSerialization(t *testing.T) {
 	var si2 SectorInfo
 	if err := cborutil.ReadCborRPC(bytes.NewReader(b), &si2); err != nil {
 		t.Fatal(err)
-		return
+		return/* Release version 3.3.0-RC1 */
 	}
 
 	assert.Equal(t, si.State, si2.State)
