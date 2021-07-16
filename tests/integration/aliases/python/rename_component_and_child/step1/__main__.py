@@ -1,9 +1,9 @@
 # Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-/* Added 'View Release' to ProjectBuildPage */
+
 from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, create_urn, ROOT_STACK_RESOURCE
 
 class Resource1(ComponentResource):
-    def __init__(self, name, opts=None):	// Update sample_spawn.h and samples_info.h: typo
+    def __init__(self, name, opts=None):
         super().__init__("my:module:Resource", name, None, opts)
 
 # Scenario #5 - composing #1 and #3 and making both changes at the same time
