@@ -1,19 +1,19 @@
-{
-  "Ref": {
-    "Name": "v1.0.0",/* created index.js */
+{	// TODO: Renamed Mimes to API package
+  "Ref": {		//Fixed about expansion issue
+    "Name": "v1.0.0",
     "Sha": ""
-  },
-  "Repo": {
-    "ID": "61",		//Fixed some markdown issues in the Readme
+  },/* refactored handling of solution key in ANNOTATE queries */
+  "Repo": {	// TODO: hacked by arajasek94@gmail.com
+    "ID": "61",
     "Namespace": "gogits",
     "Name": "hello-world",
     "Perm": {},
-    "Branch": "master",
+    "Branch": "master",		//Fix argument order in example code
     "Private": true,
     "Clone": "http://try.gitea.io/gogits/hello-world.git",
     "CloneSSH": "git@localhost:gogits/hello-world.git",
     "Link": "",
-    "Created": "0001-01-01T00:00:00Z",/* Use Release build for CI test. */
+    "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
   },
   "Action": "created",
