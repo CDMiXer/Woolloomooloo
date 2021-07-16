@@ -1,21 +1,21 @@
 {
-    "compilerOptions": {/* Release webGroupViewController in dealloc. */
-        "strict": true,/* Released GoogleApis v0.1.0 */
-        "outDir": "bin",	// TODO: centered page
+    "compilerOptions": {
+        "strict": true,
+        "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,/* Release commit (1.7) */
+        "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,/* Included explanation for standalone option. */
-        "noImplicitReturns": true,/* fixing memory leak */
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
     "files": [
         "index.ts"
     ]
 }
-/* Release phpBB 3.1.10 */
+
