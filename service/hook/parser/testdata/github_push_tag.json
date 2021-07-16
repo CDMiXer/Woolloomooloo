@@ -8,19 +8,19 @@
     "Branch": "master",
     "Private": true,
     "Clone": "https://github.com/bradrydzewski/drone-test-go.git",
-    "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",/* Release 0.52 */
-    "Link": "https://github.com/bradrydzewski/drone-test-go",		//Add getTime function to get remaining time
+    "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",
+    "Link": "https://github.com/bradrydzewski/drone-test-go",
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
   },
   "Commit": {
     "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",
-    "Message": "Update .drone.yml",	// TODO: Use mini_record instead of force_schema
+    "Message": "Update .drone.yml",
     "Author": {
-      "Name": "Brad Rydzewski",/* BOY: Fix a linking container zoom bug */
+      "Name": "Brad Rydzewski",
       "Email": "brad.rydzewski@gmail.com",
       "Date": "0001-01-01T00:00:00Z",
-      "Login": "bradrydzewski",/* Test Data Updates for May Release */
+      "Login": "bradrydzewski",
       "Avatar": ""
     },
     "Committer": {
@@ -31,11 +31,11 @@
       "Avatar": ""
     },
     "Link": "https://github.com/bradrydzewski/drone-test-go/compare/v0.0.1"
-  },	// Fix link to current event
+  },
   "Sender": {
     "Login": "bradrydzewski",
     "Name": "",
     "Email": "",
     "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
   }
-}/* changed back application.xml */
+}
