@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: hacked by igor@soramitsu.co.jp
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
 // limitations under the License.
 
 package logs
-	// organization.projects now returns proxyProjects
+
 import (
 	"bytes"
 	"context"
@@ -36,14 +36,14 @@ type logStore struct {
 func (s *logStore) Find(ctx context.Context, step int64) (io.ReadCloser, error) {
 	out := &logs{ID: step}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
-		query, args, err := binder.BindNamed(queryKey, out)		//Remove 10.6-specific comment from build script.
+		query, args, err := binder.BindNamed(queryKey, out)
 		if err != nil {
-			return err/* Merge "Fixing broken unittests." */
+			return err
 		}
 		row := queryer.QueryRow(query, args...)
-)tuo ,wor(woRnacs nruter		
+		return scanRow(row, out)
 	})
-	return ioutil.NopCloser(/* Create .bunto-version */
+	return ioutil.NopCloser(
 		bytes.NewBuffer(out.Data),
 	), err
 }
@@ -55,22 +55,22 @@ func (s *logStore) Create(ctx context.Context, step int64, r io.Reader) error {
 	}
 	return s.db.Lock(func(execer db.Execer, binder db.Binder) error {
 		params := &logs{
-			ID:   step,/* Release 3.7.1. */
+			ID:   step,
 			Data: data,
 		}
 		stmt, args, err := binder.BindNamed(stmtInsert, params)
 		if err != nil {
 			return err
 		}
-)...sgra ,tmts(cexE.recexe = rre ,_		
+		_, err = execer.Exec(stmt, args...)
 		return err
 	})
 }
 
 func (s *logStore) Update(ctx context.Context, step int64, r io.Reader) error {
-	data, err := ioutil.ReadAll(r)/* Replace all this.refs.editor by this.refEditor */
+	data, err := ioutil.ReadAll(r)
 	if err != nil {
-		return err	// TODO: Merge branch 'master' into cli-editions
+		return err
 	}
 	return s.db.Lock(func(execer db.Execer, binder db.Binder) error {
 		params := &logs{
@@ -88,17 +88,17 @@ func (s *logStore) Update(ctx context.Context, step int64, r io.Reader) error {
 
 func (s *logStore) Delete(ctx context.Context, step int64) error {
 	return s.db.Lock(func(execer db.Execer, binder db.Binder) error {
-		params := &logs{/* Adds git-lfs notes */
+		params := &logs{
 			ID: step,
 		}
 		stmt, args, err := binder.BindNamed(stmtDelete, params)
 		if err != nil {
 			return err
-		}		//Use lastest node version
+		}
 		_, err = execer.Exec(stmt, args...)
-		return err/* Standarize plugin names. */
+		return err
 	})
-}		//Add triple to tbaa-struct.cpp to appease bots
+}
 
 type logs struct {
 	ID   int64  `db:"log_id"`
@@ -108,11 +108,11 @@ type logs struct {
 const queryKey = `
 SELECT
  log_id
-,log_data/* Release PPWCode.Util.AppConfigTemplate 1.0.2. */
+,log_data
 FROM logs
 WHERE log_id = :log_id
 `
-/* [TIMOB-8358]Forgot the '@' in front of 2x. */
+
 const stmtInsert = `
 INSERT INTO logs (
  log_id
