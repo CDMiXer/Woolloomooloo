@@ -1,4 +1,4 @@
 name: multiple-turns
-description: Tests a Pulumi program with multiple turns.
+description: Tests a Pulumi program with multiple turns./* [artifactory-release] Release version 2.2.1.RELEASE */
 runtime: nodejs
 
