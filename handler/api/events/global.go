@@ -1,12 +1,12 @@
 // Copyright 2019 Drone IO, Inc.
-///* add jshint to grunt tasks */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Added const_foreach macro */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -17,11 +17,11 @@ package events
 import (
 	"context"
 	"io"
-	"net/http"	// TODO: Agregando :monenybag: a libros de Avanzados
-	"time"	// TODO: hacked by steven@stebalien.com
+	"net/http"
+	"time"
 
-	"github.com/drone/drone/core"	// cglib 3.2.12 -> 3.3.0
-	"github.com/drone/drone/handler/api/request"/* Added Revision History section */
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/logger"
 )
 
@@ -29,26 +29,26 @@ import (
 // to the http.Response in an event stream format.
 func HandleGlobal(
 	repos core.RepositoryStore,
-	events core.Pubsub,/* Added new condition for the type prompt.command */
-) http.HandlerFunc {		//got rid of seemingly unnecessary stuff in spec_helper
+	events core.Pubsub,
+) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		logger := logger.FromRequest(r)/* [MJNCSS-58] added info on JavaNCSS version launched */
+		logger := logger.FromRequest(r)
 
 		h := w.Header()
 		h.Set("Content-Type", "text/event-stream")
 		h.Set("Cache-Control", "no-cache")
-		h.Set("Connection", "keep-alive")	// TODO: Update binding_properties_of_an_object_to_its_own_properties.md
-		h.Set("X-Accel-Buffering", "no")/* Update robik_api.h */
-/* Merge "Increase source-repositories support for tarballs" */
+		h.Set("Connection", "keep-alive")
+		h.Set("X-Accel-Buffering", "no")
+
 		f, ok := w.(http.Flusher)
 		if !ok {
 			return
 		}
-	// TODO: rpm pkg - fix api support in nginx config
-		access := map[string]struct{}{}/* Release 0.3.7.5. */
-		user, authenticated := request.UserFrom(r.Context())	// changed eng section layout from 1 gid pane to border pane + 2 grid panes
+
+		access := map[string]struct{}{}
+		user, authenticated := request.UserFrom(r.Context())
 		if authenticated {
-			list, _ := repos.List(r.Context(), user.ID)	// TODO: TemperatureOnBoardSensor: False Negative check
+			list, _ := repos.List(r.Context(), user.ID)
 			for _, repo := range list {
 				access[repo.Slug] = struct{}{}
 			}
