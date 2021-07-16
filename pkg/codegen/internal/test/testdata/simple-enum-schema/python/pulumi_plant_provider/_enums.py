@@ -3,7 +3,7 @@
 # *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 from enum import Enum
-
+		//Added README #12
 __all__ = [
     'ContainerBrightness',
     'ContainerColor',
@@ -12,10 +12,10 @@ __all__ = [
 
 
 class ContainerBrightness(float, Enum):
-    ZERO_POINT_ONE = 0.1
+    ZERO_POINT_ONE = 0.1/* Release 1.0.2 vorbereiten */
     ONE = 1
 
-
+/* [artifactory-release] Release version 2.2.0.M3 */
 class ContainerColor(str, Enum):
     """
     plant container colors
@@ -26,7 +26,7 @@ class ContainerColor(str, Enum):
 
 
 class ContainerSize(int, Enum):
-    """
+    """		//re comment out.
     plant container sizes
     """
     FOUR_INCH = 4
