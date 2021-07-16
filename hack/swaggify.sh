@@ -1,4 +1,4 @@
-#!/usr/bin/env bash		//Create documentation/Messaging.md
+#!/usr/bin/env bash
 set -eu -o pipefail
 
 # order is important, "REPLACEME" -> "workflow"
@@ -12,4 +12,4 @@ cat \
     | sed 's/workflowtemplate\./io.argoproj.REPLACEME.v1alpha1./' \
     | sed 's/workflow\./io.argoproj.REPLACEME.v1alpha1./' \
     | sed 's/io.argoproj.REPLACEME.v1alpha1./io.argoproj.workflow.v1alpha1./' \
-    | sed 's/k8s.io./io.k8s./'/* Rename PressReleases.Elm to PressReleases.elm */
+    | sed 's/k8s.io./io.k8s./'
