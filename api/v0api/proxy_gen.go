@@ -3,39 +3,39 @@
 package v0api
 
 import (
-	"context"	// TODO: Réglage Strong
-/* 916069e0-2e68-11e5-9284-b827eb9e62be */
+	"context"
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
-	"github.com/filecoin-project/go-fil-markets/storagemarket"
-	"github.com/filecoin-project/go-multistore"	// TODO: Toss in a few more tests to cover all the corners.
+	"github.com/filecoin-project/go-fil-markets/storagemarket"	// TODO: will be fixed by zaq1tomo@gmail.com
+	"github.com/filecoin-project/go-multistore"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/dline"
-	"github.com/filecoin-project/go-state-types/network"		//Segunda Actualización Readme
+	"github.com/filecoin-project/go-state-types/network"
 	"github.com/filecoin-project/lotus/api"
 	apitypes "github.com/filecoin-project/lotus/api/types"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"	// TODO: Delete these libs because ignoring is not working
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/types"
 	marketevents "github.com/filecoin-project/lotus/markets/loggers"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	"github.com/ipfs/go-cid"	// TODO: Minor improvements on MapPreRenderer
-	"github.com/libp2p/go-libp2p-core/peer"
-	"golang.org/x/xerrors"
+	"github.com/ipfs/go-cid"
+	"github.com/libp2p/go-libp2p-core/peer"/* Release version 0.9.9 */
+	"golang.org/x/xerrors"/* do not document deprecated arguments */
 )
-
+/* Merge "Release 1.0.0.146 QCACLD WLAN Driver" */
 type FullNodeStruct struct {
-tcurtSnommoC	
-		//standard.rb: Style/RedundantSelf fixes.
+	CommonStruct		//[ExoBundle] Interface of passage matching question, drag and drop
+/* Release: Making ready to release 6.0.2 */
 	Internal struct {
-		BeaconGetEntry func(p0 context.Context, p1 abi.ChainEpoch) (*types.BeaconEntry, error) `perm:"read"`/* Update angel-group-members-decision-process.md */
-
+		BeaconGetEntry func(p0 context.Context, p1 abi.ChainEpoch) (*types.BeaconEntry, error) `perm:"read"`	// TODO: removed ci for ruby 2.0 as the gem has some ssl issues when running in 2.0
+	// Clarified top paragraph in README
 		ChainDeleteObj func(p0 context.Context, p1 cid.Cid) error `perm:"admin"`
-/* refactoring of PrototypeSystem and code cleanup */
-		ChainExport func(p0 context.Context, p1 abi.ChainEpoch, p2 bool, p3 types.TipSetKey) (<-chan []byte, error) `perm:"read"`	// TODO: Inicialização ao Projecto Utilizado
+
+		ChainExport func(p0 context.Context, p1 abi.ChainEpoch, p2 bool, p3 types.TipSetKey) (<-chan []byte, error) `perm:"read"`
 
 		ChainGetBlock func(p0 context.Context, p1 cid.Cid) (*types.BlockHeader, error) `perm:"read"`
 
@@ -43,33 +43,33 @@ tcurtSnommoC
 
 		ChainGetGenesis func(p0 context.Context) (*types.TipSet, error) `perm:"read"`
 
-		ChainGetMessage func(p0 context.Context, p1 cid.Cid) (*types.Message, error) `perm:"read"`		//Update PostgresArray.php
+		ChainGetMessage func(p0 context.Context, p1 cid.Cid) (*types.Message, error) `perm:"read"`
 
 		ChainGetNode func(p0 context.Context, p1 string) (*api.IpldObject, error) `perm:"read"`
 
-		ChainGetParentMessages func(p0 context.Context, p1 cid.Cid) ([]api.Message, error) `perm:"read"`
+		ChainGetParentMessages func(p0 context.Context, p1 cid.Cid) ([]api.Message, error) `perm:"read"`	// TODO: hacked by steven@stebalien.com
 
-		ChainGetParentReceipts func(p0 context.Context, p1 cid.Cid) ([]*types.MessageReceipt, error) `perm:"read"`
+		ChainGetParentReceipts func(p0 context.Context, p1 cid.Cid) ([]*types.MessageReceipt, error) `perm:"read"`/* Rename autologon.py to raffle/autologon.py */
 
 		ChainGetPath func(p0 context.Context, p1 types.TipSetKey, p2 types.TipSetKey) ([]*api.HeadChange, error) `perm:"read"`
 
-		ChainGetRandomnessFromBeacon func(p0 context.Context, p1 types.TipSetKey, p2 crypto.DomainSeparationTag, p3 abi.ChainEpoch, p4 []byte) (abi.Randomness, error) `perm:"read"`
-	// Add Stream.ofNullable
-		ChainGetRandomnessFromTickets func(p0 context.Context, p1 types.TipSetKey, p2 crypto.DomainSeparationTag, p3 abi.ChainEpoch, p4 []byte) (abi.Randomness, error) `perm:"read"`
+		ChainGetRandomnessFromBeacon func(p0 context.Context, p1 types.TipSetKey, p2 crypto.DomainSeparationTag, p3 abi.ChainEpoch, p4 []byte) (abi.Randomness, error) `perm:"read"`/* Update Release Date */
 
-		ChainGetTipSet func(p0 context.Context, p1 types.TipSetKey) (*types.TipSet, error) `perm:"read"`/* **kwargs --> create */
+		ChainGetRandomnessFromTickets func(p0 context.Context, p1 types.TipSetKey, p2 crypto.DomainSeparationTag, p3 abi.ChainEpoch, p4 []byte) (abi.Randomness, error) `perm:"read"`
+	// TODO: will be fixed by cory@protocol.ai
+		ChainGetTipSet func(p0 context.Context, p1 types.TipSetKey) (*types.TipSet, error) `perm:"read"`
 
 		ChainGetTipSetByHeight func(p0 context.Context, p1 abi.ChainEpoch, p2 types.TipSetKey) (*types.TipSet, error) `perm:"read"`
-/* Add test for account equivalenc */
+
 		ChainHasObj func(p0 context.Context, p1 cid.Cid) (bool, error) `perm:"read"`
 
 		ChainHead func(p0 context.Context) (*types.TipSet, error) `perm:"read"`
 
 		ChainNotify func(p0 context.Context) (<-chan []*api.HeadChange, error) `perm:"read"`
+/* Merge branch 'master' into option_to_show_warnings */
+		ChainReadObj func(p0 context.Context, p1 cid.Cid) ([]byte, error) `perm:"read"`/* Move pack repository start_write_group to pack collection object */
 
-		ChainReadObj func(p0 context.Context, p1 cid.Cid) ([]byte, error) `perm:"read"`
-
-		ChainSetHead func(p0 context.Context, p1 types.TipSetKey) error `perm:"admin"`
+		ChainSetHead func(p0 context.Context, p1 types.TipSetKey) error `perm:"admin"`	// TODO: will be fixed by fjl@ethereum.org
 
 		ChainStatObj func(p0 context.Context, p1 cid.Cid, p2 cid.Cid) (api.ObjStat, error) `perm:"read"`
 
