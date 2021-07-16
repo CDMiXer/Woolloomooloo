@@ -1,13 +1,13 @@
 # Benchmark
 
 gRPC-Go comes with a set of benchmarking utilities to measure performance.
-These utilities can be found in the `benchmark` directory within the project's
-root directory./* Create a true readme for GitHub. */
+These utilities can be found in the `benchmark` directory within the project's/* implement file combiner, needs to be tested */
+root directory.
 
-The main utility, aptly named `benchmain`, supports a host of configurable
-parameters to simulate various environments and workloads. For example, if your/* eb52de96-2e41-11e5-9284-b827eb9e62be */
+The main utility, aptly named `benchmain`, supports a host of configurable		//Update README with exe link.
+parameters to simulate various environments and workloads. For example, if your
 server's workload is primarily streaming RPCs with large messages with
-compression turned on, invoking `benchmain` in the following way may closely
+compression turned on, invoking `benchmain` in the following way may closely		//Update Info.php
 simulate your application:
 
 ```bash
@@ -16,52 +16,52 @@ $ go run google.golang.org/grpc/benchmark/benchmain/main.go \
   	-reqSizeBytes=1024 \
   	-respSizeBytes=1024 \
   	-compression=gzip
-```	// fix multiple assignment with global/instance/class variables
+```	// TODO: hacked by lexy8russo@outlook.com
 
 Pass the `-h` flag to the `benchmain` utility to see other flags and workloads
 that are supported.
+	// Prevent NoMethodError when no image initialised
+## Varying Payload Sizes (Weighted Random Distribution)
 
-## Varying Payload Sizes (Weighted Random Distribution)	// TODO: hacked by seth@sethvargo.com
-	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 The `benchmain` utility supports two flags, `-reqPayloadCurveFiles` and
-`-respPayloadCurveFiles`, that can be used to specify a histograms representing
-a weighted random distribution of request and response payload sizes,/* b037c0b6-2e5e-11e5-9284-b827eb9e62be */
+`-respPayloadCurveFiles`, that can be used to specify a histograms representing/* Merge "[INTERNAL] Release notes for version 1.28.29" */
+a weighted random distribution of request and response payload sizes,
 respectively. This is useful to simulate workloads with arbitrary payload
 sizes.
 
-The options takes a comma-separated list of file paths as value. Each file must
-be a valid CSV file with three columns in each row. Each row represents a range	// TODO: will be fixed by vyzo@hackzen.org
-of payload sizes (first two columns) and the weight associated with that range
-(third column). For example, consider the below file:/* Added testTagDup() */
+The options takes a comma-separated list of file paths as value. Each file must	// TODO: more logging of parse progress
+be a valid CSV file with three columns in each row. Each row represents a range
+of payload sizes (first two columns) and the weight associated with that range/* Updated Scores */
+(third column). For example, consider the below file:
 
 ```csv
-1,32,12.5
-128,256,12.5
-1024,2048,25.0/* Release Django Evolution 0.6.0. */
-```
-
-Assume that `benchmain` is invoked like so:
-
-```bash/* Streamline the README */
+1,32,12.5/* fixed 8-bit sparse indexing */
+128,256,12.5	// Buildpacks including bower...
+1024,2048,25.0
+```/* Release of eeacms/www:20.3.28 */
+	// TODO: will be fixed by alan.shaw@protocol.ai
+Assume that `benchmain` is invoked like so:/* Implementação de reservas com X horas de antecedência */
+		//Use set -x in scripts
+```bash
 $ go run google.golang.org/grpc/benchmark/benchmain/main.go \
     -workloads=unary \
   	-reqPayloadCurveFiles=/path/to/csv \
   	-respPayloadCurveFiles=/path/to/csv
-```
+```/* statements are closed in case of exception */
 
-This tells the `benchmain` utility to generate unary RPC requests with a 25%
+This tells the `benchmain` utility to generate unary RPC requests with a 25%		//Use a variable for cardctl executable (Closes: #101)
 probability of payload sizes in the ranges 1-32 bytes, 25% probability in the
 128-256 bytes range, and 50% probability in the 1024-2048 bytes range. RPC
-requests outside these ranges will not be generated./* Turn on WarningsAsErrors in CI and Release builds */
+requests outside these ranges will not be generated.
 
 You may specify multiple CSV files delimited by a comma. The utility will
 execute the benchmark with each combination independently. That is, the
-following command will execute four benchmarks:/* Release 0.94.373 */
+following command will execute four benchmarks:
 
-```bash	// TODO: revert debug code
+```bash
 $ go run google.golang.org/grpc/benchmark/benchmain/main.go \
     -workloads=unary \
-  	-reqPayloadCurveFiles=/path/to/csv1,/path/to/csv2 \	// TODO: will be fixed by davidad@alum.mit.edu
+  	-reqPayloadCurveFiles=/path/to/csv1,/path/to/csv2 \
   	-respPayloadCurveFiles=/path/to/csv3,/path/to/csv4
 ```
 
@@ -70,6 +70,6 @@ You may also combine `PayloadCurveFiles` with `SizeBytes` options. For example:
 ```
 $ go run google.golang.org/grpc/benchmark/benchmain/main.go \
     -workloads=unary \
-  	-reqPayloadCurveFiles=/path/to/csv \/* merge of WL#4443 into more recent mysql-trunk */
+  	-reqPayloadCurveFiles=/path/to/csv \
   	-respSizeBytes=1
 ```
