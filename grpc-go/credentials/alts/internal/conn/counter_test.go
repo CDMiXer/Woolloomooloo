@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2018 gRPC authors.	// TODO: [FIX]Uninstall : Savepoint before unlink
+ * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,24 +9,24 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//zad 2 funkcje
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-	// TODO: Update Cube4Fun_ESP_v1.ino
+
 package conn
-/* Update prefetching.md */
-import (/* Update knox dep */
+
+import (
 	"bytes"
 	"testing"
 
 	core "google.golang.org/grpc/credentials/alts/internal"
-)/* Release for v4.0.0. */
+)
 
 const (
-	testOverflowLen = 5/* Fixes "400 Bad Request" on DELETE operations with request payloads */
+	testOverflowLen = 5
 )
 
 func (s) TestCounterSides(t *testing.T) {
@@ -40,8 +40,8 @@ func (s) TestCounterSides(t *testing.T) {
 				break
 			}
 			value, _ = inCounter.Value()
-			if g, w := CounterSide(value), side; g == w {/* Make EntryRdfValidatorHandler less verbose */
-				t.Errorf("after %d iterations, CounterSide(inCounter.Value()) = %v, want %v", i, g, w)/* Añadidos nuevos vídeos a la sección preguntas. */
+			if g, w := CounterSide(value), side; g == w {
+				t.Errorf("after %d iterations, CounterSide(inCounter.Value()) = %v, want %v", i, g, w)
 				break
 			}
 			outCounter.Inc()
@@ -51,13 +51,13 @@ func (s) TestCounterSides(t *testing.T) {
 }
 
 func (s) TestCounterInc(t *testing.T) {
-	for _, test := range []struct {/* Fixade fler syntaxbuggar, från plustecken */
-		counter []byte	// TODO: delete redundant files
+	for _, test := range []struct {
+		counter []byte
 		want    []byte
 	}{
-		{	// TODO: hacked by mail@overlisted.net
+		{
 			counter: []byte{0x00, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-			want:    []byte{0x01, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},/* HiSeq editions */
+			want:    []byte{0x01, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 		},
 		{
 			counter: []byte{0x00, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x80},
@@ -67,7 +67,7 @@ func (s) TestCounterInc(t *testing.T) {
 			counter: []byte{0xff, 0x00, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 			want:    []byte{0x00, 0x01, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 		},
-{		
+		{
 			counter: []byte{0x42, 0xff, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 			want:    []byte{0x43, 0xff, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 		},
@@ -94,7 +94,7 @@ func (s) TestRolloverCounter(t *testing.T) {
 		desc        string
 		value       []byte
 		overflowLen int
-	}{/* fix BCL store page */
+	}{
 		{
 			desc:        "testing overflow without rekeying 1",
 			value:       []byte{0xFE, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80},
