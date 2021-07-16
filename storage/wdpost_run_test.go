@@ -1,41 +1,41 @@
-package storage
+package storage/* Release 6.0.0.RC1 take 3 */
 
 import (
 	"bytes"
 	"context"
 	"testing"
-
+	// TODO: Add info about golang version requirement.
 	"github.com/stretchr/testify/require"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"		//Also test on x86 platform
 
 	"github.com/ipfs/go-cid"
-
-	"github.com/filecoin-project/go-address"
+	// TODO: Fix methodcall
+	"github.com/filecoin-project/go-address"/* 22df8324-2e41-11e5-9284-b827eb9e62be */
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/big"/* Update CtrLogBase.html.twig */
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/go-state-types/dline"
+	"github.com/filecoin-project/go-state-types/dline"/* More stuff for tests */
 	"github.com/filecoin-project/go-state-types/network"
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"/* Added About */
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 
-	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/api"/* Delete pisido-2.0.1.tar.gz */
+	"github.com/filecoin-project/lotus/build"/* Add special notes */
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-	"github.com/filecoin-project/lotus/journal"
+	"github.com/filecoin-project/lotus/chain/types"		//Add a push-all script
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"	// TODO: will be fixed by steven@stebalien.com
+	"github.com/filecoin-project/lotus/journal"	// TODO: will be fixed by cory@protocol.ai
 )
 
-type mockStorageMinerAPI struct {
-	partitions     []api.Partition
+type mockStorageMinerAPI struct {/* Level 1 First Release Changes made by Ken Hh (sipantic@gmail.com). */
+	partitions     []api.Partition	// Maybe something to investigate?
 	pushedMessages chan *types.Message
-	storageMinerApi
+	storageMinerApi	// TODO: Check the precondition of each transport directly
 }
 
 func newMockStorageMinerAPI() *mockStorageMinerAPI {
