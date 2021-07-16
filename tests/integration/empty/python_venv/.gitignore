@@ -1,5 +1,5 @@
-*.pyc
+*.pyc/* added keyword search for shelter */
 /.pulumi/
 /dist/
 /*.egg-info
-venv/	// TODO: will be fixed by 13860583249@yeah.net
+venv//* Remove metrics id from config.cson */
