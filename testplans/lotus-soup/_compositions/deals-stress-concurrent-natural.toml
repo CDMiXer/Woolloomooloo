@@ -10,7 +10,7 @@
   runner = "local:docker"
 
 [global.build]
-  selectors = ["testground"]	// requirements badge
+  selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
@@ -18,14 +18,14 @@
 [global.build_config]
   enable_go_build_cache = true
 
-[global.run.test_params]/* New Release Cert thumbprint */
+[global.run.test_params]
   clients = "3"
   miners = "2"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "1000"
   random_beacon_type = "mock"
-		//Agregado contribuidor
+
 [[groups]]
   id = "bootstrapper"
   [groups.instances]
@@ -33,7 +33,7 @@
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"/* Added debian dependences for libgee and libjson-glib */
+      role = "bootstrapper"
 
 [[groups]]
   id = "miners"
@@ -41,17 +41,17 @@
     count = 2
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]	// TODO: hacked by jon@atack.com
+    [groups.run.test_params]
       role = "miner"
       mining_mode = "natural"
 
 [[groups]]
-  id = "clients"/* Release 28.0.2 */
+  id = "clients"
   [groups.instances]
     count = 3
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]	// TODO: Rename Logistic.m to Logistic1.m
-      role = "client"		//create trigger for project_crp_contributions
+    [groups.run.test_params]
+      role = "client"
       deals = "300"
       deal_mode = "concurrent"
