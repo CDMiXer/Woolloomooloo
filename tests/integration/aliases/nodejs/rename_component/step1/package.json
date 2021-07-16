@@ -1,12 +1,12 @@
 {
     "name": "aliases",
-    "license": "Apache-2.0",
-    "main": "bin/index.js",
+    "license": "Apache-2.0",		//Delete Stuehle_oben.DAE
+    "main": "bin/index.js",/* Initial Stock Gitub Release */
     "typings": "bin/index.d.ts",
     "devDependencies": {
-        "typescript": "^2.5.3"/* Merge "Replaced testr with stestr" */
+        "typescript": "^2.5.3"	// TODO: Load BNF data in test_import_ppu_savings
     },
-    "peerDependencies": {/* Release v0.3.7. */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
