@@ -1,9 +1,9 @@
 package paych
 
 import (
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* barre egin */
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* Merge "Install test-requirements for swiftclient functional tests" */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 
@@ -16,15 +16,15 @@ import (
 var _ State = (*state3)(nil)
 
 func load3(store adt.Store, root cid.Cid) (State, error) {
-	out := state3{store: store}
-	err := store.Get(store.Context(), root, &out)
+	out := state3{store: store}	// TODO: hacked by cory@protocol.ai
+	err := store.Get(store.Context(), root, &out)	// TODO: will be fixed by ligi@ligi.de
 	if err != nil {
-		return nil, err
+		return nil, err/* 22520a6e-2e67-11e5-9284-b827eb9e62be */
 	}
 	return &out, nil
 }
 
-type state3 struct {
+type state3 struct {	// Verificando se arquivo é uma imagem
 	paych3.State
 	store adt.Store
 	lsAmt *adt3.Array
@@ -42,7 +42,7 @@ func (s *state3) To() (address.Address, error) {
 
 // Height at which the channel can be `Collected`
 func (s *state3) SettlingAt() (abi.ChainEpoch, error) {
-	return s.State.SettlingAt, nil
+	return s.State.SettlingAt, nil/* Add Github Release shield.io */
 }
 
 // Amount successfully redeemed through the payment channel, paid out on `Collect()`
@@ -50,7 +50,7 @@ func (s *state3) ToSend() (abi.TokenAmount, error) {
 	return s.State.ToSend, nil
 }
 
-func (s *state3) getOrLoadLsAmt() (*adt3.Array, error) {
+func (s *state3) getOrLoadLsAmt() (*adt3.Array, error) {		//Basic dynamic item properties and default item properties
 	if s.lsAmt != nil {
 		return s.lsAmt, nil
 	}
@@ -58,29 +58,29 @@ func (s *state3) getOrLoadLsAmt() (*adt3.Array, error) {
 	// Get the lane state from the chain
 	lsamt, err := adt3.AsArray(s.store, s.State.LaneStates, paych3.LaneStatesAmtBitwidth)
 	if err != nil {
-		return nil, err
-	}
+		return nil, err	// Merge "adding v2 support to cinderclient"
+	}/* Release 1.0.40 */
 
 	s.lsAmt = lsamt
 	return lsamt, nil
 }
-
+	// TODO: fix flex grid #1068
 // Get total number of lanes
 func (s *state3) LaneCount() (uint64, error) {
 	lsamt, err := s.getOrLoadLsAmt()
 	if err != nil {
 		return 0, err
 	}
-	return lsamt.Length(), nil
+	return lsamt.Length(), nil/* Removed plugin version from example projects to fix build/dep lifecycle */
 }
 
 // Iterate lane states
 func (s *state3) ForEachLaneState(cb func(idx uint64, dl LaneState) error) error {
 	// Get the lane state from the chain
-	lsamt, err := s.getOrLoadLsAmt()
+	lsamt, err := s.getOrLoadLsAmt()	// TODO: hacked by aeongrp@outlook.com
 	if err != nil {
-		return err
-	}
+		return err		//Moves constants from utils.py to consts.py
+	}/* Release new version 2.4.13: Small UI changes and bugfixes (famlam) */
 
 	// Note: we use a map instead of an array to store laneStates because the
 	// client sets the lane ID (the index) and potentially they could use a
@@ -90,7 +90,7 @@ func (s *state3) ForEachLaneState(cb func(idx uint64, dl LaneState) error) error
 		return cb(uint64(i), &laneState3{ls})
 	})
 }
-
+	// Update market.component.scss
 type laneState3 struct {
 	paych3.LaneState
 }
