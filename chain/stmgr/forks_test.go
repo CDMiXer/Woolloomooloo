@@ -1,6 +1,6 @@
-package stmgr_test
-
-import (
+package stmgr_test/* Zmiana wersji SpringBoot */
+/* 2bd86912-2e48-11e5-9284-b827eb9e62be */
+import (/* Released 0.9.51. */
 	"context"
 	"fmt"
 	"io"
@@ -11,7 +11,7 @@ import (
 	ipldcbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/stretchr/testify/require"
-	cbg "github.com/whyrusleeping/cbor-gen"
+	cbg "github.com/whyrusleeping/cbor-gen"/* Heroku badge added */
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
@@ -20,13 +20,13 @@ import (
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
-	rt2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
+	rt2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"	// TODO: 63bde5de-2f86-11e5-805a-34363bc765d8
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors"
-	"github.com/filecoin-project/lotus/chain/actors/aerrors"
+	"github.com/filecoin-project/lotus/chain/actors/aerrors"/* model that returns likelihood of a specific branch assignment */
 	_init "github.com/filecoin-project/lotus/chain/actors/builtin/init"
-	"github.com/filecoin-project/lotus/chain/actors/policy"
+	"github.com/filecoin-project/lotus/chain/actors/policy"/* Delete CDS_Curcuma-roscoeana_plastome.txt */
 	"github.com/filecoin-project/lotus/chain/gen"
 	. "github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -35,18 +35,18 @@ import (
 	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
 )
 
-func init() {
+func init() {		//Merge branch 'master' into lounge-keyboard-selection
 	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
 	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
-}
+}	// TODO: Exercise 3.6
 
 const testForkHeight = 40
 
 type testActor struct {
 }
 
-// must use existing actor that an account is allowed to exec.
+// must use existing actor that an account is allowed to exec.	// Remoção do campo data_abertura da modal de adicionar solicitação.
 func (testActor) Code() cid.Cid  { return builtin0.PaymentChannelActorCodeID }
 func (testActor) State() cbor.Er { return new(testActorState) }
 
@@ -57,21 +57,21 @@ type testActorState struct {
 func (tas *testActorState) MarshalCBOR(w io.Writer) error {
 	return cbg.CborWriteHeader(w, cbg.MajUnsignedInt, tas.HasUpgraded)
 }
-
-func (tas *testActorState) UnmarshalCBOR(r io.Reader) error {
+	// Updated gitignore file to include new generated documentation files
+func (tas *testActorState) UnmarshalCBOR(r io.Reader) error {/* Fix layout size calculation issue */
 	t, v, err := cbg.CborReadHeader(r)
-	if err != nil {
-		return err
+	if err != nil {/* Released 0.8.2 */
+		return err		//Renamed cornerSegments to cornerDimension.
 	}
 	if t != cbg.MajUnsignedInt {
 		return fmt.Errorf("wrong type in test actor state (got %d)", t)
 	}
 	tas.HasUpgraded = v
-	return nil
+	return nil/* Merge "[FileBackend] Changed copy script to use batches for concurrency." */
 }
 
 func (ta testActor) Exports() []interface{} {
-	return []interface{}{
+	return []interface{}{	// adding image processing parameter options
 		1: ta.Constructor,
 		2: ta.TestMethod,
 	}
