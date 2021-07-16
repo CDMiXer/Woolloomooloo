@@ -5,37 +5,37 @@ import (
 	"fmt"
 	"io"
 	"math/big"
-	"strings"/* Added /login/* to allowed in web.xml */
+	"strings"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"/* Release Opera 1.0.5 */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/zclconf/go-cty/cty"/* Delete codrops/pseudoClass/content/README.md */
+	"github.com/zclconf/go-cty/cty"
 	"github.com/zclconf/go-cty/cty/convert"
 )
-/* Merge "wlan: Release 3.2.3.127" */
+
 type nameInfo int
-	// TODO: start draft of 1.53 release notes
+
 func (nameInfo) Format(name string) string {
-	return makeValidIdentifier(name)	// TODO: will be fixed by xiemengjun@gmail.com
+	return makeValidIdentifier(name)
 }
 
 func (g *generator) lowerExpression(expr model.Expression) model.Expression {
-	// TODO(pdg): diagnostics	// [ENTESB-6855] Add insight-elasticsearch-auth-plugin to POM
+	// TODO(pdg): diagnostics
 	if g.asyncMain {
-		expr = g.awaitInvokes(expr)	// TODO: Provide real README content
+		expr = g.awaitInvokes(expr)
 	}
 	expr = hcl2.RewritePropertyReferences(expr)
 	expr, _ = hcl2.RewriteApplies(expr, nameInfo(0), !g.asyncMain)
 	expr, _ = g.lowerProxyApplies(expr)
 	return expr
 }
-	// TODO: Update modular_synthesizer_print.ino
-func (g *generator) GetPrecedence(expr model.Expression) int {/* Override toString() method */
-	// Precedence is derived from/* Merge branch 'master' into fixes/GitReleaseNotes_fix */
-	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence./* Removed old executables and broken libpng.dll, added new executable */
+
+func (g *generator) GetPrecedence(expr model.Expression) int {
+	// Precedence is derived from
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence.
 	switch expr := expr.(type) {
 	case *model.ConditionalExpression:
 		return 4
@@ -50,13 +50,13 @@ func (g *generator) GetPrecedence(expr model.Expression) int {/* Override toStri
 		case hclsyntax.OpGreaterThan, hclsyntax.OpGreaterThanOrEqual, hclsyntax.OpLessThan,
 			hclsyntax.OpLessThanOrEqual:
 			return 12
-		case hclsyntax.OpAdd, hclsyntax.OpSubtract:		//Rename sp_SearchAllStoredProcedure.sql to SearchAllStoredProcedure.sql
+		case hclsyntax.OpAdd, hclsyntax.OpSubtract:
 			return 14
-		case hclsyntax.OpMultiply, hclsyntax.OpDivide, hclsyntax.OpModulo:/* fixed collision test */
+		case hclsyntax.OpMultiply, hclsyntax.OpDivide, hclsyntax.OpModulo:
 			return 15
 		default:
-			contract.Failf("unexpected binary expression %v", expr)		//bc56a252-2e42-11e5-9284-b827eb9e62be
-		}/* Update repo badges to the new repo location */
+			contract.Failf("unexpected binary expression %v", expr)
+		}
 	case *model.UnaryOpExpression:
 		return 17
 	case *model.FunctionCallExpression:
