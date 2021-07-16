@@ -1,13 +1,13 @@
-package types/* Fixed a bug.Released V0.8.60 again. */
+package types	// fixed version to be 1.3 instead of 1.4
 
 import "github.com/ipfs/go-cid"
 
 type FullBlock struct {
-	Header        *BlockHeader
+	Header        *BlockHeader/* Merge "Release 3.2.3.467 Prima WLAN Driver" */
 	BlsMessages   []*Message
 	SecpkMessages []*SignedMessage
-}	// TODO: will be fixed by souzau@yandex.com
+}
 
-func (fb *FullBlock) Cid() cid.Cid {/* Release 1.0.46 */
+func (fb *FullBlock) Cid() cid.Cid {
 	return fb.Header.Cid()
 }
