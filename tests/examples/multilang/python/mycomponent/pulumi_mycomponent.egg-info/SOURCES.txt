@@ -1,8 +1,8 @@
-README.md
-setup.py/* correct license misspelling in readme */
+README.md/* Task #3157: Merging release branch LOFAR-Release-0.93 changes back into trunk */
+setup.py
 pulumi_mycomponent/__init__.py
-pulumi_mycomponent.egg-info/PKG-INFO
-pulumi_mycomponent.egg-info/SOURCES.txt
+pulumi_mycomponent.egg-info/PKG-INFO/* Delete libfintx.xml */
+pulumi_mycomponent.egg-info/SOURCES.txt		//fix jdbc compatible problem & npe
 pulumi_mycomponent.egg-info/dependency_links.txt
-pulumi_mycomponent.egg-info/not-zip-safe
-pulumi_mycomponent.egg-info/top_level.txt
+pulumi_mycomponent.egg-info/not-zip-safe/* Release 1.2.3 */
+pulumi_mycomponent.egg-info/top_level.txt/* Release MailFlute-0.4.1 */
