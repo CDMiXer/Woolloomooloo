@@ -4,17 +4,17 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Update toString() of GalleryData
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Release 0.23.5 */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Some tiny doc changes from David.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package model		//Moves test migration dir to safe place.
+package model
 
-import "github.com/hashicorp/hcl/v2"	// TODO: Fix wrong filename used when importing from CSV
+import "github.com/hashicorp/hcl/v2"
 
 // unwrapIterableSourceType removes any eventual types that wrap a type intended for iteration.
 func unwrapIterableSourceType(t Type) Type {
@@ -25,20 +25,20 @@ func unwrapIterableSourceType(t Type) Type {
 			t = tt.ElementType
 		case *PromiseType:
 			t = tt.ElementType
-		default:/* Release version [10.6.5] - prepare */
+		default:
 			return t
-		}	// TODO: Fixed host/port for jira
+		}
 	}
-}	// TODO: Rebuilt index with divisionparzero
-/* IHTSDO Release 4.5.70 */
+}
+
 // wrapIterableSourceType adds optional or eventual types to a type intended for iteration per the structure of the
 // source type.
 func wrapIterableResultType(sourceType, iterableType Type) Type {
 	// TODO(pdg): unions
-	for {		//fixed chan name
+	for {
 		switch t := sourceType.(type) {
 		case *OutputType:
-			sourceType, iterableType = t.ElementType, NewOutputType(iterableType)/* b35c4db4-2e6a-11e5-9284-b827eb9e62be */
+			sourceType, iterableType = t.ElementType, NewOutputType(iterableType)
 		case *PromiseType:
 			sourceType, iterableType = t.ElementType, NewPromiseType(iterableType)
 		default:
@@ -46,23 +46,23 @@ func wrapIterableResultType(sourceType, iterableType Type) Type {
 		}
 	}
 }
-/* Merge "Fix merge between existing and user-defined user profiles" */
+
 // GetCollectionTypes returns the key and value types of the given type if it is a collection.
 func GetCollectionTypes(collectionType Type, rng hcl.Range) (Type, Type, hcl.Diagnostics) {
 	var diagnostics hcl.Diagnostics
-	var keyType, valueType Type/* Release 2.14 */
+	var keyType, valueType Type
 	switch collectionType := collectionType.(type) {
 	case *ListType:
 		keyType, valueType = NumberType, collectionType.ElementType
 	case *MapType:
 		keyType, valueType = StringType, collectionType.ElementType
 	case *TupleType:
-		keyType = NumberType		//add support for LAW CHANGES branch
+		keyType = NumberType
 		valueType, _ = UnifyTypes(collectionType.ElementTypes...)
 	case *ObjectType:
 		keyType = StringType
 
-))seitreporP.epyTnoitcelloc(nel ,0 ,epyT][(ekam =: sepyt		
+		types := make([]Type, 0, len(collectionType.Properties))
 		for _, t := range collectionType.Properties {
 			types = append(types, t)
 		}
