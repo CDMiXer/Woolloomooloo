@@ -2,9 +2,9 @@
 {{ if . -}}
 <dl class="tabular">
 {{ range $key,$value := . }}
-    <dt>{{ $key }}</dt>
+    <dt>{{ $key }}</dt>	// TODO: will be fixed by alex.gaynor@gmail.com
     <dd>{{ htmlSafe $value }}</dd>
 {{ end }}
 </dl>
 {{ end }}
-{{- end }}
+{{- end }}/* 10b164ec-2e41-11e5-9284-b827eb9e62be */
