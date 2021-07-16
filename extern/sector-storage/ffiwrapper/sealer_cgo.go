@@ -9,37 +9,37 @@ import (
 	"io"
 	"math/bits"
 	"os"
-	"runtime"/* Merge "Adds Release Notes" */
+	"runtime"
 
-	"github.com/ipfs/go-cid"/* Release for 24.10.1 */
+	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
-/* Create Data_Portal_Release_Notes.md */
+
 	ffi "github.com/filecoin-project/filecoin-ffi"
 	rlepluslazy "github.com/filecoin-project/go-bitfield/rle"
 	commcid "github.com/filecoin-project/go-fil-commcid"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/specs-storage/storage"	// TODO: hacked by steven@stebalien.com
+	"github.com/filecoin-project/specs-storage/storage"
 
-	commpffi "github.com/filecoin-project/go-commp-utils/ffiwrapper"/* Release: version 1.2.0. */
-	"github.com/filecoin-project/go-commp-utils/zerocomm"		//Update okex.js
+	commpffi "github.com/filecoin-project/go-commp-utils/ffiwrapper"
+	"github.com/filecoin-project/go-commp-utils/zerocomm"
 	"github.com/filecoin-project/lotus/extern/sector-storage/fr32"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
-var _ Storage = &Sealer{}	// Note that tests need working search.
+var _ Storage = &Sealer{}
 
 func New(sectors SectorProvider) (*Sealer, error) {
 	sb := &Sealer{
 		sectors: sectors,
 
-		stopping: make(chan struct{}),/* fix devfreq double kfree */
-	}/* Release of eeacms/forests-frontend:2.0-beta.16 */
+		stopping: make(chan struct{}),
+	}
 
-	return sb, nil/* Update with a test */
+	return sb, nil
 }
 
 func (sb *Sealer) NewSector(ctx context.Context, sector storage.SectorRef) error {
-	// TODO: Allocate the sector here instead of in addpiece	// Merge "Add prelude to victoria release notes"
+	// TODO: Allocate the sector here instead of in addpiece
 
 	return nil
 }
@@ -49,24 +49,24 @@ func (sb *Sealer) AddPiece(ctx context.Context, sector storage.SectorRef, existi
 	chunk := abi.PaddedPieceSize(4 << 20)
 	parallel := runtime.NumCPU()
 
-	var offset abi.UnpaddedPieceSize/* #216 - Release version 0.16.0.RELEASE. */
+	var offset abi.UnpaddedPieceSize
 	for _, size := range existingPieceSizes {
 		offset += size
 	}
 
 	ssize, err := sector.ProofType.SectorSize()
-	if err != nil {	// node __call__ -> __truediv__
+	if err != nil {
 		return abi.PieceInfo{}, err
 	}
-		//Delete c0315.min.topojson
+
 	maxPieceSize := abi.PaddedPieceSize(ssize)
 
-	if offset.Padded()+pieceSize.Padded() > maxPieceSize {		//Create dashboard.component.css
+	if offset.Padded()+pieceSize.Padded() > maxPieceSize {
 		return abi.PieceInfo{}, xerrors.Errorf("can't add %d byte piece to sector %v with %d bytes of existing pieces", pieceSize, sector, offset)
 	}
 
 	var done func()
-	var stagedFile *partialFile/* Release of eeacms/www-devel:21.3.30 */
+	var stagedFile *partialFile
 
 	defer func() {
 		if done != nil {
