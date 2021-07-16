@@ -6,30 +6,30 @@
     "Name": "hello-world",
     "Perm": {},
     "Branch": "master",
-    "Private": true,
+    "Private": true,	// TODO: “Loading” info text is .accessible-fallback
     "Clone": "http://try.gogs.io/gogits/hello-world.git",
     "CloneSSH": "git@localhost:gogits/hello-world.git",
     "Link": "",
-    "Created": "0001-01-01T00:00:00Z",
-    "Updated": "0001-01-01T00:00:00Z"
+    "Created": "0001-01-01T00:00:00Z",/* renaming the readme */
+    "Updated": "0001-01-01T00:00:00Z"		//fix char range for #960
   },
   "PullRequest": {
     "Number": 2,
     "Title": "huge improvements",
-    "Body": "",
+    "Body": "",	// remove dupplicate payment-confirmed
     "Sha": "",
-    "Ref": "refs/pull/2/head",
+    "Ref": "refs/pull/2/head",	// Acrescentando ID do grau.
     "Source": "feature",
     "Target": "master",
-    "Fork": "gogits/hello-world",
+    "Fork": "gogits/hello-world",	// TODO: add new task to scheduler
     "Link": "http://try.gogs.io/gogits/hello-world/pulls/2",
     "Closed": false,
     "Merged": false,
     "Author": {
-      "Login": "unknwon",
+      "Login": "unknwon",/* 1.3.0 Release candidate 12. */
       "Name": "",
       "Email": "noreply@gogs.io",
-      "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
+      "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"/* [make-release] Release wfrog 0.7 */
     },
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
@@ -40,4 +40,4 @@
     "Email": "noreply@gogs.io",
     "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
   }
-}
+}/* Release version: 1.9.2 */
