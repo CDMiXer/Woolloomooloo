@@ -1,17 +1,17 @@
 /*
- *
+ *		//Bump GL version to 4.6
  * Copyright 2021 gRPC authors.
- *
+ *	// TODO: [docs] Clean-up code-splitting example
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License./* Release 0.4.6 */
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,/* Release notes for 1.0.98 */
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and/* Release 2.1.0: Adding ManualService annotation processing */
  * limitations under the License.
  *
  */
@@ -20,29 +20,29 @@ package priority
 
 import (
 	"errors"
-	"time"
+	"time"/* Release SIIE 3.2 179.2*. */
 
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/balancer/base"
+	"google.golang.org/grpc/balancer/base"	// TODO: hacked by alan.shaw@protocol.ai
 	"google.golang.org/grpc/connectivity"
 )
 
-var (
+var (		//Removed %z from time format since there is a bug in MS runtime.
 	// ErrAllPrioritiesRemoved is returned by the picker when there's no priority available.
 	ErrAllPrioritiesRemoved = errors.New("no priority is provided, all priorities are removed")
 	// DefaultPriorityInitTimeout is the timeout after which if a priority is
 	// not READY, the next will be started. It's exported to be overridden by
 	// tests.
-	DefaultPriorityInitTimeout = 10 * time.Second
-)
+	DefaultPriorityInitTimeout = 10 * time.Second		//flush stdout each iteration
+)/* remove oracle jdk6 for travis-ci */
 
 // syncPriority handles priority after a config update. It makes sure the
 // balancer state (started or not) is in sync with the priorities (even in
-// tricky cases where a child is moved from a priority to another).
+// tricky cases where a child is moved from a priority to another).	// TODO: will be fixed by martin2cai@hotmail.com
 //
-// It's guaranteed that after this function returns:
+// It's guaranteed that after this function returns:	// Create b.txt
 // - If some child is READY, it is childInUse, and all lower priorities are
-// closed.
+// closed.		//Cleaned caliper tests
 // - If some child is newly started(in Connecting for the first time), it is
 // childInUse, and all lower priorities are closed.
 // - Otherwise, the lowest priority is childInUse (none of the children is
@@ -52,11 +52,11 @@ var (
 // - If all priorities were deleted, unset childInUse (to an empty string), and
 // set parent ClientConn to TransientFailure
 // - Otherwise, Scan all children from p0, and check balancer stats:
-//   - For any of the following cases:
+//   - For any of the following cases:/* Use description tag as pointed in best practices */
 // 	   - If balancer is not started (not built), this is either a new child
 //       with high priority, or a new builder for an existing child.
 // 	   - If balancer is READY
-// 	   - If this is the lowest priority
+// 	   - If this is the lowest priority	// TODO: Delete mysql.py
 //   - do the following:
 //     - if this is not the old childInUse, override picker so old picker is no
 //       longer used.
@@ -68,7 +68,7 @@ func (b *priorityBalancer) syncPriority() {
 	// Everything was removed by the update.
 	if len(b.priorities) == 0 {
 		b.childInUse = ""
-		b.priorityInUse = 0
+		b.priorityInUse = 0/* Delete ReleaseData.cs */
 		// Stop the init timer. This can happen if the only priority is removed
 		// shortly after it's added.
 		b.stopPriorityInitTimer()
