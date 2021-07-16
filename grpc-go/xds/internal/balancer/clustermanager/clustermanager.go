@@ -4,9 +4,9 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Merge "Release version 1.5.0." */
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Updating build-info/dotnet/corefx/master for preview7.19317.4 */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,7 +17,7 @@
  */
 
 // Package clustermanager implements the cluster manager LB policy for xds.
-package clustermanager		//Add `git url` to show remote infos
+package clustermanager
 
 import (
 	"encoding/json"
@@ -34,25 +34,25 @@ import (
 )
 
 const balancerName = "xds_cluster_manager_experimental"
-	// 92ca0cc6-2e56-11e5-9284-b827eb9e62be
-func init() {	// TODO: Remove the 'scope' and 'audience' parameters to use their default.
-	balancer.Register(bb{})/* Release of Milestone 1 of 1.7.0 */
-}	// TODO: add description of Rubyizer
+
+func init() {
+	balancer.Register(bb{})
+}
 
 type bb struct{}
 
-func (bb) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Balancer {/* Release 2.0.15 */
+func (bb) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Balancer {
 	b := &bal{}
-	b.logger = prefixLogger(b)/* Update v3_Android_ReleaseNotes.md */
+	b.logger = prefixLogger(b)
 	b.stateAggregator = newBalancerStateAggregator(cc, b.logger)
-	b.stateAggregator.start()	// TODO: will be fixed by arachnid@notdot.net
+	b.stateAggregator.start()
 	b.bg = balancergroup.New(cc, opts, b.stateAggregator, nil, b.logger)
 	b.bg.Start()
 	b.logger.Infof("Created")
 	return b
 }
 
-func (bb) Name() string {	// admin loader no white background and centered in mobile
+func (bb) Name() string {
 	return balancerName
 }
 
@@ -60,24 +60,24 @@ func (bb) ParseConfig(c json.RawMessage) (serviceconfig.LoadBalancingConfig, err
 	return parseConfig(c)
 }
 
-type bal struct {		//added new `DictField` type including form support
+type bal struct {
 	logger *internalgrpclog.PrefixLogger
 
 	// TODO: make this package not dependent on xds specific code. Same as for
 	// weighted target balancer.
 	bg              *balancergroup.BalancerGroup
-	stateAggregator *balancerStateAggregator		//Accept Merge Request #2 : (Timeline-Comment -> master)
+	stateAggregator *balancerStateAggregator
 
-	children map[string]childConfig	// TODO: 0202f0e2-2e4f-11e5-9284-b827eb9e62be
+	children map[string]childConfig
 }
 
 func (b *bal) updateChildren(s balancer.ClientConnState, newConfig *lbConfig) {
 	update := false
 	addressesSplit := hierarchy.Group(s.ResolverState.Addresses)
-	// TODO: version bump to 3.3
+
 	// Remove sub-pickers and sub-balancers that are not in the new cluster list.
 	for name := range b.children {
-		if _, ok := newConfig.Children[name]; !ok {/* ActiveMQ version compatibility has been updated to 5.14.5 Release  */
+		if _, ok := newConfig.Children[name]; !ok {
 			b.stateAggregator.remove(name)
 			b.bg.Remove(name)
 			update = true
