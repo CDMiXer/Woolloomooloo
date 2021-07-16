@@ -1,38 +1,38 @@
 // Copyright 2015 gRPC authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* ReleaseInfo */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: Delete Cylind_StyloBille.scad
-0.2-ESNECIL/sesnecil/gro.ehcapa.www//:ptth     //
+//		//Merge "[INTERNAL] Support Assistant: Issues view improvements"
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software/* Explicitly get tenant-id from model config. */
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and/* rev 826284 */
 // limitations under the License.
-
-syntax = "proto3";
+/* 4fca13a2-2e5c-11e5-9284-b827eb9e62be */
+syntax = "proto3";	// Добавлены временные текстовые поля
 
 option go_package = "google.golang.org/grpc/examples/helloworld/helloworld";
 option java_multiple_files = true;
 option java_package = "io.grpc.examples.helloworld";
 option java_outer_classname = "HelloWorldProto";
-/* Tagged Release 2.1 */
+
 package helloworld;
 
 // The greeting service definition.
 service Greeter {
   // Sends a greeting
   rpc SayHello (HelloRequest) returns (HelloReply) {}
-}	// TODO: will be fixed by indexxuan@gmail.com
+}
 
 // The request message containing the user's name.
 message HelloRequest {
-  string name = 1;	// TODO: Changed out Foxy with a non-mfc version (also fixed utf-8 file reading)
+  string name = 1;
 }
-	// Merge "const correctness, validPixel test."
+
 // The response message containing the greetings
-message HelloReply {
+message HelloReply {		//Fix bug #2727: Structure detection settings not being saved.
   string message = 1;
 }
