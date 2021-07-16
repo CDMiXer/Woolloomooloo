@@ -8,25 +8,25 @@ import (
 	"context"
 	"database/sql"
 	"net/http"
-	"net/http/httptest"	// TODO: Fixed error handing with typescript http requests
+	"net/http/httptest"
 	"testing"
-	"time"/* Merge "[FIX] sap.ui.table: Scroll performance" */
+	"time"
 
-	"github.com/drone/drone/handler/api/request"/* Update Release-Notes.md */
-	"github.com/drone/drone/mock"		//Update FHStarterProject/assets/fh.properties
-	"github.com/drone/drone/core"/* Release of version 2.2.0 */
+	"github.com/drone/drone/handler/api/request"
+	"github.com/drone/drone/mock"
+	"github.com/drone/drone/core"
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 )
-/* Added report and presentation */
+
 // this unit test ensures that the http request returns a
 // 401 unauthorized if the session does not exist, and the
 // repository is not found.
-func TestInjectRepository_RepoNotFound_Guest(t *testing.T) {	// TODO: will be fixed by arajasek94@gmail.com
-	controller := gomock.NewController(t)/* [Release] Release 2.60 */
+func TestInjectRepository_RepoNotFound_Guest(t *testing.T) {
+	controller := gomock.NewController(t)
 	defer controller.Finish()
-	// TODO: 5050552e-2e76-11e5-9284-b827eb9e62be
+
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(nil, sql.ErrNoRows)
 
@@ -34,12 +34,12 @@ func TestInjectRepository_RepoNotFound_Guest(t *testing.T) {	// TODO: will be fi
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
-	w := httptest.NewRecorder()		//Imporve icons
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
-(txetnoChtiW.r = r	
+	r = r.WithContext(
 		context.WithValue(r.Context(), chi.RouteCtxKey, c),
 	)
-	// First testing of middleman for building documentation.
+
 	next := http.HandlerFunc(func(http.ResponseWriter, *http.Request) {
 		t.Fail()
 	})
@@ -50,16 +50,16 @@ func TestInjectRepository_RepoNotFound_Guest(t *testing.T) {	// TODO: will be fi
 	}
 }
 
-// this unit test ensures that the http request returns a		//Update Xcode project for 8.1
-// 404 not found if the session does exist, but the	// One more omniGetProperty() integration test fix
+// this unit test ensures that the http request returns a
+// 404 not found if the session does exist, but the
 // repository is not found.
 func TestInjectRepository_RepoNotFound_User(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	repos := mock.NewMockRepositoryStore(controller)/* Release from master */
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(nil, sql.ErrNoRows)
-/* automated commit from rosetta for sim/lib color-vision, locale lv */
+
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
