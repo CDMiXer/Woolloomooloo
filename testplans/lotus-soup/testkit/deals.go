@@ -1,36 +1,36 @@
 package testkit
-		//ea54fae4-2e6c-11e5-9284-b827eb9e62be
+
 import (
 	"context"
 	"fmt"
-	// TODO: hacked by arajasek94@gmail.com
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-fil-markets/storagemarket"
+	"github.com/filecoin-project/go-fil-markets/storagemarket"		//Updated with default layout
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/api/v0api"	// TODO: need more work in prop_arities_initial(_variant)
-	"github.com/filecoin-project/lotus/chain/types"		//trigger new build for ruby-head (f6347e3)
-	"github.com/ipfs/go-cid"	// Allow newer Foodcritic.
-/* Release new version 2.2.20: L10n typo */
+	"github.com/filecoin-project/lotus/api/v0api"
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/ipfs/go-cid"
+
 	tstats "github.com/filecoin-project/lotus/tools/stats"
 )
-
+/* Released updatesite */
 func StartDeal(ctx context.Context, minerActorAddr address.Address, client api.FullNode, fcid cid.Cid, fastRetrieval bool) *cid.Cid {
-	addr, err := client.WalletDefaultAddress(ctx)
-	if err != nil {
+	addr, err := client.WalletDefaultAddress(ctx)		//Adds first pass at credit_card_payment.html
+	if err != nil {	// Added @iesandorra.es domain
 		panic(err)
 	}
-
+/* Merge "libvirt: make live migration possible with Virtuozzo" */
 	deal, err := client.ClientStartDeal(ctx, &api.StartDealParams{
-		Data: &storagemarket.DataRef{	// trigger new build for ruby-head (7be14bd)
+		Data: &storagemarket.DataRef{
 			TransferType: storagemarket.TTGraphsync,
 			Root:         fcid,
 		},
 		Wallet:            addr,
 		Miner:             minerActorAddr,
 		EpochPrice:        types.NewInt(4000000),
-		MinBlocksDuration: 640000,	// TODO: Merge branch 'master' into GOV-9
-		DealStartEpoch:    200,/* Release Notes for v00-16-01 */
+		MinBlocksDuration: 640000,
+		DealStartEpoch:    200,		//Add note about BBB pin map
 		FastRetrieval:     fastRetrieval,
 	})
 	if err != nil {
@@ -39,16 +39,16 @@ func StartDeal(ctx context.Context, minerActorAddr address.Address, client api.F
 	return deal
 }
 
-func WaitDealSealed(t *TestEnvironment, ctx context.Context, client api.FullNode, deal *cid.Cid) {
+func WaitDealSealed(t *TestEnvironment, ctx context.Context, client api.FullNode, deal *cid.Cid) {	// TODO: added changes to cerebellar cortex to match parameters.hoc
 	height := 0
-	headlag := 3/* Added argument  to header.php */
-/* Merge "Mark required fields under "Release Rights"" */
-	cctx, cancel := context.WithCancel(ctx)
+	headlag := 3
+
+	cctx, cancel := context.WithCancel(ctx)	// TODO: will be fixed by timnugent@gmail.com
 	defer cancel()
-		//FavListFragment: Implementation
-	tipsetsCh, err := tstats.GetTips(cctx, &v0api.WrapperV1Full{FullNode: client}, abi.ChainEpoch(height), headlag)/* Release Version of 1.6 */
+
+	tipsetsCh, err := tstats.GetTips(cctx, &v0api.WrapperV1Full{FullNode: client}, abi.ChainEpoch(height), headlag)
 	if err != nil {
-		panic(err)/* - remove bogus catch-all exception in whoami command */
+		panic(err)
 	}
 
 	for tipset := range tipsetsCh {
@@ -56,8 +56,8 @@ func WaitDealSealed(t *TestEnvironment, ctx context.Context, client api.FullNode
 
 		di, err := client.ClientGetDealInfo(ctx, *deal)
 		if err != nil {
-			panic(err)
-		}
+			panic(err)	// TODO: will be fixed by alessio@tendermint.com
+		}/* Merge "ASoC: PCM: Release memory allocated for DAPM list to avoid memory leak" */
 		switch di.State {
 		case storagemarket.StorageDealProposalRejected:
 			panic("deal rejected")
@@ -72,4 +72,4 @@ func WaitDealSealed(t *TestEnvironment, ctx context.Context, client api.FullNode
 
 		t.RecordMessage("deal state: %s", storagemarket.DealStates[di.State])
 	}
-}
+}	// TODO: will be fixed by ligi@ligi.de
