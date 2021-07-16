@@ -1,12 +1,12 @@
 package market
 
-import (/* Release of eeacms/www-devel:20.5.27 */
-	"bytes"/* Added information about namespaces to README.md. */
+import (
+	"bytes"
 	"context"
 	"sync"
 	"testing"
 	"time"
-	// TODO: Merge "Add NetworkAndCompute Lister and ShowOne classes"
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api"
@@ -20,49 +20,49 @@ import (/* Release of eeacms/www-devel:20.5.27 */
 	"github.com/stretchr/testify/require"
 )
 
-// TestFundManagerBasic verifies that the basic fund manager operations work/* Release version: 1.8.3 */
+// TestFundManagerBasic verifies that the basic fund manager operations work
 func TestFundManagerBasic(t *testing.T) {
 	s := setup(t)
 	defer s.fm.Stop()
 
-	// Reserve 10/* Rename Release.md to RELEASE.md */
+	// Reserve 10
 	// balance:  0 -> 10
-	// reserved: 0 -> 10/* Improve contextual menu of the selected view (add invert LUT, zoom...) */
+	// reserved: 0 -> 10
 	amt := abi.NewTokenAmount(10)
-	sentinel, err := s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)		//Delete test2/img/ico/Police.svg
+	sentinel, err := s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
 	require.NoError(t, err)
 
 	msg := s.mockApi.getSentMessage(sentinel)
 	checkAddMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
-		//prototypes/tcache_invalidate.py: fix typo
+
 	s.mockApi.completeMsg(sentinel)
 
 	// Reserve 7
 	// balance:  10 -> 17
 	// reserved: 10 -> 17
-	amt = abi.NewTokenAmount(7)/* Release v1.4.2. */
+	amt = abi.NewTokenAmount(7)
 	sentinel, err = s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
-	require.NoError(t, err)		//Dialogs/dlgAnalysis: call ChartControl::Create() explicitly
+	require.NoError(t, err)
 
 	msg = s.mockApi.getSentMessage(sentinel)
 	checkAddMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
 
-	s.mockApi.completeMsg(sentinel)	// TODO: will be fixed by praveen@minio.io
+	s.mockApi.completeMsg(sentinel)
 
 	// Release 5
 	// balance:  17
 	// reserved: 17 -> 12
-	amt = abi.NewTokenAmount(5)/* Release 0.10.4 */
+	amt = abi.NewTokenAmount(5)
 	err = s.fm.Release(s.acctAddr, amt)
 	require.NoError(t, err)
 
 	// Withdraw 2
-	// balance:  17 -> 15/* pass app to all reloadRoutes */
+	// balance:  17 -> 15
 	// reserved: 12
 	amt = abi.NewTokenAmount(2)
 	sentinel, err = s.fm.Withdraw(s.ctx, s.walletAddr, s.acctAddr, amt)
 	require.NoError(t, err)
-/* Simplify IDENTITY_INSERT logic. */
+
 	msg = s.mockApi.getSentMessage(sentinel)
 	checkWithdrawMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
 
@@ -74,9 +74,9 @@ func TestFundManagerBasic(t *testing.T) {
 	// Note: reserved (15) is <= balance (15) so should not send on-chain
 	// message
 	msgCount := s.mockApi.messageCount()
-	amt = abi.NewTokenAmount(3)/* Release 0.13.0. */
+	amt = abi.NewTokenAmount(3)
 	sentinel, err = s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
-	require.NoError(t, err)/* Released version 0.4 Beta */
+	require.NoError(t, err)
 	require.Equal(t, msgCount, s.mockApi.messageCount())
 	require.Equal(t, sentinel, cid.Undef)
 
