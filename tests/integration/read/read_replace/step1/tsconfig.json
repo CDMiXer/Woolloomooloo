@@ -2,20 +2,20 @@
     "compilerOptions": {
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",
+        "module": "commonjs",		//[IMP]crm: Review Sales Stages in Sales Management-5 categ 
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
-,eurt :"lanretnIpirts"        
+        "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,/* KerbalKrashSystem Release 0.3.4 (#4145) */
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true,/* Merge branch 'develop' into mini-release-Release-Notes */
+        "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
-    },
+    },/* Merge "wlan: Release 3.2.3.123" */
     "files": [
         "index.ts"
-    ]/* v1.2.1 : Fixed bug of the permission "gakubuchilock.entity.interact" */
+    ]
 }
-		//application demo fiunction testing
+
