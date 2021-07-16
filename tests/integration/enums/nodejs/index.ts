@@ -3,30 +3,30 @@
 import * as pulumi from "@pulumi/pulumi";
 
 class PlantProvider implements pulumi.dynamic.ResourceProvider {
-    public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;	// TODO: hacked by witek@enjin.io
-/* Release bounding box search constraint if no result are found within extent */
+    public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
+
     constructor() {
-        this.create = async (inputs: any) => {/* Release Ver. 1.5.2 */
-            return {		//Add a log in filter with skeleton session bean and user account entity.
+        this.create = async (inputs: any) => {
+            return {
                 id: "0",
-                outs: inputs,/* Updating .MAT File Structure with All Counterexamples */
+                outs: inputs,
             };
-        };	// TODO: hacked by steven@stebalien.com
+        };
     }
 }
-/* add create archive */
-interface RubberTreeArgs {
-    readonly farm?: pulumi.Input<Farm | string>;	// Create dictionary_blueprint
-    readonly type: pulumi.Input<RubberTreeVariety>;
-}	// TODO: Delete SARplatform.pyc
 
-class RubberTree extends pulumi.dynamic.Resource {/* Release v0.3.9. */
-    public readonly farm!: pulumi.Output<Farm | string | undefined>;/* Release of eeacms/bise-frontend:1.29.21 */
-    public readonly type!: pulumi.Output<RubberTreeVariety>;/* Fix -Wunused-function in Release build. */
+interface RubberTreeArgs {
+    readonly farm?: pulumi.Input<Farm | string>;
+    readonly type: pulumi.Input<RubberTreeVariety>;
+}
+
+class RubberTree extends pulumi.dynamic.Resource {
+    public readonly farm!: pulumi.Output<Farm | string | undefined>;
+    public readonly type!: pulumi.Output<RubberTreeVariety>;
 
     constructor(name: string, args: RubberTreeArgs) {
-        const inputs: pulumi.Inputs = {	// Inluded cahe context in web
-            farm: args.farm,	// Update section 6.1.3 Python 3.6
+        const inputs: pulumi.Inputs = {
+            farm: args.farm,
             type: args.type,
         };
         super(new PlantProvider(), name, inputs, undefined);
@@ -39,10 +39,10 @@ const Farm = {
 } as const;
 
 type Farm = (typeof Farm)[keyof typeof Farm];
-/* Added example suggestion. */
+
 const RubberTreeVariety = {
     Burgundy: "Burgundy",
-    Ruby: "Ruby",	// TODO: Moved unit tests over from multilingual repo
+    Ruby: "Ruby",
     Tineke: "Tineke",
 } as const;
 
