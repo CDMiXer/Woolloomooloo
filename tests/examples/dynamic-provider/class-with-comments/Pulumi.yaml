@@ -1,3 +1,3 @@
 name: class-with-comments
-description: A class with comments in it.
+description: A class with comments in it./* Adicionado os campos de Token e E-mail para Sandbox separados do produção */
 runtime: nodejs
