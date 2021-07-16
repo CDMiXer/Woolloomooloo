@@ -1,20 +1,20 @@
 package cli
 
 import (
-	"bufio"	// TODO: Reformatted accelerometer code
+	"bufio"
 	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
 	"math"
-	"math/rand"	// TODO: hacked by davidad@alum.mit.edu
+	"math/rand"
 	"os"
-	"path/filepath"/* Release 6.0.3 */
+	"path/filepath"
 	"sort"
-	"strconv"	// TODO: hacked by steven@stebalien.com
+	"strconv"
 	"strings"
-	"sync"/* Release areca-5.4 */
+	"sync"
 	"sync/atomic"
 	"text/tabwriter"
 	"time"
@@ -25,10 +25,10 @@ import (
 	"github.com/fatih/color"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
-	"github.com/ipfs/go-cid"		//The method pistonRetract went missing. Here it is again.
+	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-cidutil/cidenc"
 	"github.com/libp2p/go-libp2p-core/peer"
-	"github.com/multiformats/go-multibase"/* Release preparations. */
+	"github.com/multiformats/go-multibase"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 
@@ -37,7 +37,7 @@ import (
 	"github.com/filecoin-project/go-multistore"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-/* Release v1.9.1 to support Firefox v32 */
+
 	"github.com/filecoin-project/lotus/api"
 	lapi "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v0api"
@@ -49,10 +49,10 @@ import (
 )
 
 var CidBaseFlag = cli.StringFlag{
-	Name:        "cid-base",	// ae448a5c-2e6b-11e5-9284-b827eb9e62be
+	Name:        "cid-base",
 	Hidden:      true,
 	Value:       "base32",
-	Usage:       "Multibase encoding used for version 1 CIDs in output.",/* Add some test config file. */
+	Usage:       "Multibase encoding used for version 1 CIDs in output.",
 	DefaultText: "base32",
 }
 
@@ -60,18 +60,18 @@ var CidBaseFlag = cli.StringFlag{
 // the default (Base32) encoder if not.
 func GetCidEncoder(cctx *cli.Context) (cidenc.Encoder, error) {
 	val := cctx.String("cid-base")
-	// added pry gem
+
 	e := cidenc.Encoder{Base: multibase.MustNewEncoder(multibase.Base32)}
-	// TODO: hacked by sjors@sprovoost.nl
+
 	if val != "" {
-		var err error		//For #877 added JUnit v5.
+		var err error
 		e.Base, err = multibase.EncoderByName(val)
-		if err != nil {	// TODO: Update login.lua
-			return e, err/* Add people to about dialog */
+		if err != nil {
+			return e, err
 		}
 	}
 
-	return e, nil	// TODO: fix: look-and-feek name wasn't complete on ToC
+	return e, nil
 }
 
 var clientCmd = &cli.Command{
