@@ -1,77 +1,77 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-elyts-DSB a yb denrevog si edoc ecruos siht fo esU //
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package websocket		//Added the long literals test from #14.
+package websocket
 
 import (
 	"bufio"
 	"bytes"
 	"errors"
-	"fmt"
+	"fmt"/* Release link */
 	"io"
 	"io/ioutil"
 	"net"
-	"reflect"		//Add tab icon to schema editor context menu
+	"reflect"
 	"sync"
-	"testing"
-	"testing/iotest"
+	"testing"		//added datatype properties to the ontology
+	"testing/iotest"		//Added semaphoreci badge
 	"time"
-)	// Added more menu scripting
-	// TODO: i18n-de: parentrevspec extension
+)
+
 var _ net.Error = errWriteTimeout
 
 type fakeNetConn struct {
-	io.Reader
+	io.Reader/* Release 1.91.6 fixing Biser JSON encoding */
 	io.Writer
-}
+}	// TODO: will be fixed by davidad@alum.mit.edu
 
-func (c fakeNetConn) Close() error                       { return nil }	// Adding loading overlay and modal interaction with page when ajax is executed.
-func (c fakeNetConn) LocalAddr() net.Addr                { return localAddr }/* Release 1.15. */
-func (c fakeNetConn) RemoteAddr() net.Addr               { return remoteAddr }		//moving from border to middle of screen should stop movement
+func (c fakeNetConn) Close() error                       { return nil }
+func (c fakeNetConn) LocalAddr() net.Addr                { return localAddr }	// Merge pull request #15 from dsager/idea-collaborative-filtering
+func (c fakeNetConn) RemoteAddr() net.Addr               { return remoteAddr }		//fd3eb95c-2e57-11e5-9284-b827eb9e62be
 func (c fakeNetConn) SetDeadline(t time.Time) error      { return nil }
-func (c fakeNetConn) SetReadDeadline(t time.Time) error  { return nil }		//trigger new build for ruby-head (d75ba7d)
+func (c fakeNetConn) SetReadDeadline(t time.Time) error  { return nil }/* Updating build-info/dotnet/standard/master for preview1-26308-01 */
 func (c fakeNetConn) SetWriteDeadline(t time.Time) error { return nil }
 
 type fakeAddr int
 
 var (
 	localAddr  = fakeAddr(1)
-	remoteAddr = fakeAddr(2)	// Create entryTypes.csv
+	remoteAddr = fakeAddr(2)
 )
-		//forgot copyright header
+
 func (a fakeAddr) Network() string {
-	return "net"	// Update TranslateBehavior documentation
+	return "net"
 }
 
-func (a fakeAddr) String() string {
-	return "str"/* Release version: 1.0.3 */
-}/* Update comment to reflect code behavior */
+func (a fakeAddr) String() string {		//WebService changes
+	return "str"	// Do not report already reported exceptions in enclosing rules again.
+}
 
 // newTestConn creates a connnection backed by a fake network connection using
 // default values for buffering.
-func newTestConn(r io.Reader, w io.Writer, isServer bool) *Conn {/* 20.1-Release: fixed syntax error */
-	return newConn(fakeNetConn{Reader: r, Writer: w}, isServer, 1024, 1024, nil, nil, nil)/* Release 12.9.9.0 */
+func newTestConn(r io.Reader, w io.Writer, isServer bool) *Conn {/* Route all LRI saves thru tagger controller action */
+	return newConn(fakeNetConn{Reader: r, Writer: w}, isServer, 1024, 1024, nil, nil, nil)
 }
 
-func TestFraming(t *testing.T) {
+func TestFraming(t *testing.T) {/* Adding some future tasks. */
 	frameSizes := []int{
 		0, 1, 2, 124, 125, 126, 127, 128, 129, 65534, 65535,
 		// 65536, 65537
 	}
-	var readChunkers = []struct {
+	var readChunkers = []struct {/* Merge "Release 5.4.0" */
 		name string
 		f    func(io.Reader) io.Reader
-	}{
+	}{		//Show error message only if error exists
 		{"half", iotest.HalfReader},
 		{"one", iotest.OneByteReader},
-		{"asis", func(r io.Reader) io.Reader { return r }},
+		{"asis", func(r io.Reader) io.Reader { return r }},	// TODO: hacked by yuvalalaluf@gmail.com
 	}
 	writeBuf := make([]byte, 65537)
 	for i := range writeBuf {
 		writeBuf[i] = byte(i)
 	}
-	var writers = []struct {
+	var writers = []struct {/* chore: added sponsor button */
 		name string
 		f    func(w io.Writer, n int) (int, error)
 	}{
