@@ -1,5 +1,5 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Removed casting in equals (casting was already done in previous line) */
-		//Fix perspective id.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+
 import { Resource } from "./resource";
 
 // Step 2: Reverse the dependency graph.
