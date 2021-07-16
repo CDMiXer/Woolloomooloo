@@ -5,10 +5,10 @@ author = "yusef"
 [global]
 plan = "network"
 case = "ping-pong"
-total_instances = 2
+total_instances = 2	// TODO: Remove dots from descriptions
 builder = "docker:go"
-runner = "local:docker"		//Only emit "monitor" event when actually receiving a monitor message
-	// TODO: Working on institutions.prpt observations 
-[[groups]]	// TODO: Rebuilt index with Synaptic0n
+runner = "local:docker"/* Improvements in template */
+
+[[groups]]
 id = "nodes"
 instances = { count = 2 }
