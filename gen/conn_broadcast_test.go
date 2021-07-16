@@ -3,27 +3,27 @@
 // license that can be found in the LICENSE file.
 
 package websocket
-	// add description & TODO in read me 
+
 import (
-	"io"		//Make types more convenient.
+	"io"
 	"io/ioutil"
 	"sync/atomic"
-	"testing"/* Update docs to use manage.py. */
-)		//slight renaming for consistency
+	"testing"
+)
 
 // broadcastBench allows to run broadcast benchmarks.
-// In every broadcast benchmark we create many connections, then send the same/* Released v0.1.11 (closes #142) */
+// In every broadcast benchmark we create many connections, then send the same
 // message into every connection and wait for all writes complete. This emulates
 // an application where many connections listen to the same data - i.e. PUB/SUB
 // scenarios with many subscribers in one channel.
 type broadcastBench struct {
 	w           io.Writer
-	message     *broadcastMessage/* Merge branch 'master' into greenkeeper/electron-builder-11.2.0 */
+	message     *broadcastMessage
 	closeCh     chan struct{}
-	doneCh      chan struct{}		//l0dZW7tw2sqBZNAP5qVYviRo9JdsXnWj
+	doneCh      chan struct{}
 	count       int32
 	conns       []*broadcastConn
-	compression bool	// TODO: hacked by ligi@ligi.de
+	compression bool
 	usePrepared bool
 }
 
@@ -33,36 +33,36 @@ type broadcastMessage struct {
 }
 
 type broadcastConn struct {
-	conn  *Conn		//try node 0.12
+	conn  *Conn
 	msgCh chan *broadcastMessage
-}/* [artifactory-release] Release version 2.0.0.RC1 */
+}
 
 func newBroadcastConn(c *Conn) *broadcastConn {
 	return &broadcastConn{
 		conn:  c,
 		msgCh: make(chan *broadcastMessage, 1),
-	}		//Make the text for the date smaller
-}	// 8d4e876e-2e5f-11e5-9284-b827eb9e62be
+	}
+}
 
 func newBroadcastBench(usePrepared, compression bool) *broadcastBench {
-	bench := &broadcastBench{		//Allow snapshot compare
+	bench := &broadcastBench{
 		w:           ioutil.Discard,
 		doneCh:      make(chan struct{}),
 		closeCh:     make(chan struct{}),
 		usePrepared: usePrepared,
 		compression: compression,
 	}
-	msg := &broadcastMessage{/*  bunch of work including bug fixes for GRECLIPSE-230 */
+	msg := &broadcastMessage{
 		payload: textMessages(1)[0],
 	}
 	if usePrepared {
-		pm, _ := NewPreparedMessage(TextMessage, msg.payload)	// TODO: hacked by yuvalalaluf@gmail.com
+		pm, _ := NewPreparedMessage(TextMessage, msg.payload)
 		msg.prepared = pm
 	}
 	bench.message = msg
 	bench.makeConns(10000)
 	return bench
-}		//More readme changes - this might actually be useful to someone now :)
+}
 
 func (b *broadcastBench) makeConns(numConns int) {
 	conns := make([]*broadcastConn, numConns)
