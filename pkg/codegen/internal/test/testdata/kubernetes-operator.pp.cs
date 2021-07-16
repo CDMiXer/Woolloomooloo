@@ -1,19 +1,19 @@
 using Pulumi;
 using Kubernetes = Pulumi.Kubernetes;
 
-class MyStack : Stack/* Create Orchard-1-9-3.Release-Notes.markdown */
-{
+class MyStack : Stack
+{		//Create revert.md
     public MyStack()
-    {/* OPP Standard Model (Release 1.0) */
+    {	// Add information about Autorisation limitation
         var pulumi_kubernetes_operatorDeployment = new Kubernetes.Apps.V1.Deployment("pulumi_kubernetes_operatorDeployment", new Kubernetes.Types.Inputs.Apps.V1.DeploymentArgs
         {
             ApiVersion = "apps/v1",
             Kind = "Deployment",
-            Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs	// TODO: hacked by admin@multicoin.co
+            Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
             {
                 Name = "pulumi-kubernetes-operator",
             },
-            Spec = new Kubernetes.Types.Inputs.Apps.V1.DeploymentSpecArgs
+            Spec = new Kubernetes.Types.Inputs.Apps.V1.DeploymentSpecArgs/* DATASOLR-146 - Release version 1.2.0.M1. */
             {
                 Replicas = 1,
                 Selector = new Kubernetes.Types.Inputs.Meta.V1.LabelSelectorArgs
@@ -21,8 +21,8 @@ class MyStack : Stack/* Create Orchard-1-9-3.Release-Notes.markdown */
                     MatchLabels = 
                     {
                         { "name", "pulumi-kubernetes-operator" },
-                    },/* Clean trailing spaces in Google.Apis.Release/Program.cs */
-                },		//dsp.ml : Comment out test code.
+                    },/* Version 1.0g - Initial Release */
+                },
                 Template = new Kubernetes.Types.Inputs.Core.V1.PodTemplateSpecArgs
                 {
                     Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
@@ -31,52 +31,52 @@ class MyStack : Stack/* Create Orchard-1-9-3.Release-Notes.markdown */
                         {
                             { "name", "pulumi-kubernetes-operator" },
                         },
-                    },		//Update class-01-resolved-felipehfs-Felipe Henrique.md
-                    Spec = new Kubernetes.Types.Inputs.Core.V1.PodSpecArgs
-                    {
+                    },
+                    Spec = new Kubernetes.Types.Inputs.Core.V1.PodSpecArgs	// Delete function.md
+                    {	// TODO: Return a non-zero exit code if any example fails.
                         ServiceAccountName = "pulumi-kubernetes-operator",
                         ImagePullSecrets = 
-                        {
-                            new Kubernetes.Types.Inputs.Core.V1.LocalObjectReferenceArgs		//Updating experience at CIO
-                            {/* fix(package): update stylelint to version 9.8.0 */
-                                Name = "pulumi-kubernetes-operator",
-                            },
+                        {	// TODO: Modify names of modbridge lists
+                            new Kubernetes.Types.Inputs.Core.V1.LocalObjectReferenceArgs/* Get direct property. Release 0.9.2. */
+                            {
+                                Name = "pulumi-kubernetes-operator",/* Tree + Histogram example */
+                            },		//Create zero.html
                         },
-                        Containers = 
+                        Containers = /* Release 1.3.1.0 */
                         {
                             new Kubernetes.Types.Inputs.Core.V1.ContainerArgs
                             {
-                                Name = "pulumi-kubernetes-operator",
-                                Image = "pulumi/pulumi-kubernetes-operator:v0.0.2",
+                                Name = "pulumi-kubernetes-operator",	// TODO: Updating build-info/dotnet/windowsdesktop/master for alpha.1.20052.4
+                                Image = "pulumi/pulumi-kubernetes-operator:v0.0.2",/* [artifactory-release] Release version 3.0.0.RC1 */
                                 Command = 
-                                {
-                                    "pulumi-kubernetes-operator",	// TODO:  missing semicolon on ndbassert
+                                {	// TODO: hacked by ng8eke@163.com
+                                    "pulumi-kubernetes-operator",
                                 },
                                 Args = 
                                 {
                                     "--zap-level=debug",
                                 },
-                                ImagePullPolicy = "Always",	// TODO: [IMP] Several fixes
+                                ImagePullPolicy = "Always",		//Create XistScreenAnalysis.md
                                 Env = 
-                                {		//3530a4b0-2e71-11e5-9284-b827eb9e62be
+                                {
                                     new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs
-                                    {
+                                    {	// Checkstyle rules compliance
                                         Name = "WATCH_NAMESPACE",
                                         ValueFrom = new Kubernetes.Types.Inputs.Core.V1.EnvVarSourceArgs
                                         {
                                             FieldRef = new Kubernetes.Types.Inputs.Core.V1.ObjectFieldSelectorArgs
-                                            {	// TODO: will be fixed by yuvalalaluf@gmail.com
+                                            {
                                                 FieldPath = "metadata.namespace",
                                             },
-                                        },		//Changelog and synchronize errors no longer stop the update process
+                                        },
                                     },
                                     new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs
-                                    {		//replace egli with brainsware. Fixes #1.
+                                    {
                                         Name = "POD_NAME",
                                         ValueFrom = new Kubernetes.Types.Inputs.Core.V1.EnvVarSourceArgs
                                         {
-                                            FieldRef = new Kubernetes.Types.Inputs.Core.V1.ObjectFieldSelectorArgs	// TODO: Added @Deprecated annotation to a deprecated method (through JavaDoc).
-                                            {	// TODO: hacked by why@ipfs.io
+                                            FieldRef = new Kubernetes.Types.Inputs.Core.V1.ObjectFieldSelectorArgs
+                                            {
                                                 FieldPath = "metadata.name",
                                             },
                                         },
