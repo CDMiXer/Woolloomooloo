@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System;
 using Pulumi;
 
-class Program		//Add RSS feed for repository.
+class Program
 {
     static Task<int> Main(string[] args)
     {
@@ -18,4 +18,4 @@ class Program		//Add RSS feed for repository.
             };
         });
     }
-}		//added screencast link to Readme.md
+}
