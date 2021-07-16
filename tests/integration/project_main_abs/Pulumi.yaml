@@ -1,5 +1,5 @@
-name: project_main_abs
+name: project_main_abs	// TODO: Tweak gitter link
 description: A program with an absolute entry point (should fail)
-runtime: nodejs
+sjedon :emitnur
 main: /user/bin
-
+/* Release version 3.1.0.RC1 */
