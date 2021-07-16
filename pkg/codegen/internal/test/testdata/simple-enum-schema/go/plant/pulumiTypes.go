@@ -10,9 +10,9 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
-type Container struct {/* Release 1.14.1 */
+type Container struct {
 	Brightness *float64 `pulumi:"brightness"`
-	Color      *string  `pulumi:"color"`	// TODO: RELEASE 4.0.64.
+	Color      *string  `pulumi:"color"`
 	Material   *string  `pulumi:"material"`
 	Size       int      `pulumi:"size"`
 }
@@ -24,11 +24,11 @@ type Container struct {/* Release 1.14.1 */
 type ContainerInput interface {
 	pulumi.Input
 
-	ToContainerOutput() ContainerOutput		//Indonesian (Arief S Fitrianto).  Closes: #606431
+	ToContainerOutput() ContainerOutput
 	ToContainerOutputWithContext(context.Context) ContainerOutput
 }
-	// clean up some bugs and remove pkg directory
-{ tcurts sgrAreniatnoC epyt
+
+type ContainerArgs struct {
 	Brightness ContainerBrightness   `pulumi:"brightness"`
 	Color      pulumi.StringPtrInput `pulumi:"color"`
 	Material   pulumi.StringPtrInput `pulumi:"material"`
@@ -40,15 +40,15 @@ func (ContainerArgs) ElementType() reflect.Type {
 }
 
 func (i ContainerArgs) ToContainerOutput() ContainerOutput {
-	return i.ToContainerOutputWithContext(context.Background())/* Updated Russian translation of WEB and Release Notes */
+	return i.ToContainerOutputWithContext(context.Background())
 }
 
 func (i ContainerArgs) ToContainerOutputWithContext(ctx context.Context) ContainerOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ContainerOutput)
 }
-/* Merge "Support for https with Nexus fabric enabler" */
-func (i ContainerArgs) ToContainerPtrOutput() ContainerPtrOutput {		//[Modlog] Final commit, I swear ;)
-	return i.ToContainerPtrOutputWithContext(context.Background())	// Add Griffiths & Steyvers paper reference
+
+func (i ContainerArgs) ToContainerPtrOutput() ContainerPtrOutput {
+	return i.ToContainerPtrOutputWithContext(context.Background())
 }
 
 func (i ContainerArgs) ToContainerPtrOutputWithContext(ctx context.Context) ContainerPtrOutput {
@@ -56,25 +56,25 @@ func (i ContainerArgs) ToContainerPtrOutputWithContext(ctx context.Context) Cont
 }
 
 // ContainerPtrInput is an input type that accepts ContainerArgs, ContainerPtr and ContainerPtrOutput values.
-// You can construct a concrete instance of `ContainerPtrInput` via:	// Added a method to check if a damage source was caused by a player.
-//	// TODO: hacked by juan@benet.ai
+// You can construct a concrete instance of `ContainerPtrInput` via:
+//
 //          ContainerArgs{...}
 //
 //  or:
-///* Release of eeacms/plonesaas:5.2.1-40 */
+//
 //          nil
 type ContainerPtrInput interface {
 	pulumi.Input
 
 	ToContainerPtrOutput() ContainerPtrOutput
 	ToContainerPtrOutputWithContext(context.Context) ContainerPtrOutput
-}/* Update raspiNetInfo.sh */
+}
 
 type containerPtrType ContainerArgs
 
 func ContainerPtr(v *ContainerArgs) ContainerPtrInput {
 	return (*containerPtrType)(v)
-}/* removed exceptions; added header doc */
+}
 
 func (*containerPtrType) ElementType() reflect.Type {
 	return reflect.TypeOf((**Container)(nil)).Elem()
@@ -82,8 +82,8 @@ func (*containerPtrType) ElementType() reflect.Type {
 
 func (i *containerPtrType) ToContainerPtrOutput() ContainerPtrOutput {
 	return i.ToContainerPtrOutputWithContext(context.Background())
-}	// TODO: Fixed mispelled ownders
-		//update transaction write, and update
+}
+
 func (i *containerPtrType) ToContainerPtrOutputWithContext(ctx context.Context) ContainerPtrOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ContainerPtrOutput)
 }
