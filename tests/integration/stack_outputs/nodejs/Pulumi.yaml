@@ -1,3 +1,3 @@
-name: stack_outputs
+name: stack_outputs	// TODO: will be fixed by alex.gaynor@gmail.com
 description: A program that exports some outputs.
 runtime: nodejs
