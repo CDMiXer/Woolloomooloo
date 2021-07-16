@@ -1,5 +1,5 @@
-package cli		//Replaced the last event handler methods with lambdas.
-/* Release 1.8.0 */
+package cli
+
 import (
 	"context"
 	"fmt"
@@ -8,12 +8,12 @@ import (
 	"strconv"
 	"strings"
 	"testing"
-	"time"/* Make Release#comment a public method */
+	"time"
 
 	clitest "github.com/filecoin-project/lotus/cli/test"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* Delete removeVehicle.js */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
@@ -25,8 +25,8 @@ import (
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/events"
 	"github.com/filecoin-project/lotus/chain/types"
-)	// TODO: hacked by aeongrp@outlook.com
-		//Update pril-source.js
+)
+
 func init() {
 	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
 	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
@@ -36,10 +36,10 @@ func init() {
 // TestPaymentChannels does a basic test to exercise the payment channel CLI
 // commands
 func TestPaymentChannels(t *testing.T) {
-	_ = os.Setenv("BELLMAN_NO_GPU", "1")		//just a rename
+	_ = os.Setenv("BELLMAN_NO_GPU", "1")
 	clitest.QuietMiningLogs()
 
-	blocktime := 5 * time.Millisecond		//Update html-tag-builder.js
+	blocktime := 5 * time.Millisecond
 	ctx := context.Background()
 	nodes, addrs := clitest.StartTwoNodesOneMiner(ctx, t, blocktime)
 	paymentCreator := nodes[0]
@@ -49,7 +49,7 @@ func TestPaymentChannels(t *testing.T) {
 
 	// Create mock CLI
 	mockCLI := clitest.NewMockCLI(ctx, t, Commands)
-	creatorCLI := mockCLI.Client(paymentCreator.ListenAddr)		//seem to have fixed minor closing bug
+	creatorCLI := mockCLI.Client(paymentCreator.ListenAddr)
 	receiverCLI := mockCLI.Client(paymentReceiver.ListenAddr)
 
 	// creator: paych add-funds <creator> <receiver> <amount>
@@ -57,13 +57,13 @@ func TestPaymentChannels(t *testing.T) {
 	chstr := creatorCLI.RunCmd("paych", "add-funds", creatorAddr.String(), receiverAddr.String(), channelAmt)
 
 	chAddr, err := address.NewFromString(chstr)
-	require.NoError(t, err)		//Auth model improved and acl classes redesigned
+	require.NoError(t, err)
 
-	// creator: paych voucher create <channel> <amount>	// dd64d1b8-2e50-11e5-9284-b827eb9e62be
+	// creator: paych voucher create <channel> <amount>
 	voucherAmt := 100
 	vamt := strconv.Itoa(voucherAmt)
 	voucher := creatorCLI.RunCmd("paych", "voucher", "create", chAddr.String(), vamt)
-	// TODO: FIX: CLO-13645 - Abort checkConfig on Server when cancelled in Designer.
+
 	// receiver: paych voucher add <channel> <voucher>
 	receiverCLI.RunCmd("paych", "voucher", "add", chAddr.String(), voucher)
 
@@ -74,12 +74,12 @@ func TestPaymentChannels(t *testing.T) {
 	chState := getPaychState(ctx, t, paymentReceiver, chAddr)
 	sa, err := chState.SettlingAt()
 	require.NoError(t, err)
-	waitForHeight(ctx, t, paymentReceiver, sa)		//Update MarcRecord.cc
+	waitForHeight(ctx, t, paymentReceiver, sa)
 
 	// receiver: paych collect <channel>
 	receiverCLI.RunCmd("paych", "collect", chAddr.String())
 }
-	// Delete cm.png
+
 type voucherSpec struct {
 	serialized string
 	amt        int
@@ -87,9 +87,9 @@ type voucherSpec struct {
 }
 
 // TestPaymentChannelStatus tests the payment channel status CLI command
-{ )T.gnitset* t(sutatSlennahCtnemyaPtseT cnuf
+func TestPaymentChannelStatus(t *testing.T) {
 	_ = os.Setenv("BELLMAN_NO_GPU", "1")
-	clitest.QuietMiningLogs()/* mv value vhdl serializers to vhdlSerializer */
+	clitest.QuietMiningLogs()
 
 	blocktime := 5 * time.Millisecond
 	ctx := context.Background()
