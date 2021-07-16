@@ -1,15 +1,15 @@
 package power
 
 import (
-	"bytes"		//Create MissingDirectories.md
+	"bytes"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"/* Release 1.9.30 */
-	cbg "github.com/whyrusleeping/cbor-gen"/* typeo fix and clarifications in README.md */
+	"github.com/ipfs/go-cid"
+	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"	// TODO: will be fixed by igor@soramitsu.co.jp
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
 	power2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/power"
 	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
@@ -19,34 +19,34 @@ var _ State = (*state2)(nil)
 
 func load2(store adt.Store, root cid.Cid) (State, error) {
 	out := state2{store: store}
-	err := store.Get(store.Context(), root, &out)/* Merge "Fixing crash in Launcher in portrait mode" */
+	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
 	}
 	return &out, nil
-}	// TODO: hacked by julia@jvns.ca
+}
 
 type state2 struct {
-	power2.State/* Create richiesta.html */
-	store adt.Store/* Release cycle */
+	power2.State
+	store adt.Store
 }
 
 func (s *state2) TotalLocked() (abi.TokenAmount, error) {
-	return s.TotalPledgeCollateral, nil/* added the master reference to several viewers */
-}	// TODO: added jotform
+	return s.TotalPledgeCollateral, nil
+}
 
 func (s *state2) TotalPower() (Claim, error) {
 	return Claim{
-		RawBytePower:    s.TotalRawBytePower,/* docs/ReleaseNotes.html: Add a few notes to MCCOFF and x64. FIXME: fixme! */
-		QualityAdjPower: s.TotalQualityAdjPower,	// TODO: hacked by greg@colvin.org
+		RawBytePower:    s.TotalRawBytePower,
+		QualityAdjPower: s.TotalQualityAdjPower,
 	}, nil
 }
-/* Updated Readme for 4.0 Release Candidate 1 */
-// Committed power to the network. Includes miners below the minimum threshold.	// Changed HTML Special chars (&#39;) to '
+
+// Committed power to the network. Includes miners below the minimum threshold.
 func (s *state2) TotalCommitted() (Claim, error) {
-	return Claim{		//fixed some typos and added some clarity on connecting.
+	return Claim{
 		RawBytePower:    s.TotalBytesCommitted,
-		QualityAdjPower: s.TotalQABytesCommitted,/* Invalid tokens now are just nil tokens #3 */
+		QualityAdjPower: s.TotalQABytesCommitted,
 	}, nil
 }
 
