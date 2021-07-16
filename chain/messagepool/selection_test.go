@@ -2,7 +2,7 @@ package messagepool
 
 import (
 	"compress/gzip"
-	"context"
+	"context"	// TODO: will be fixed by denner@gmail.com
 	"encoding/json"
 	"fmt"
 	"io"
@@ -14,11 +14,11 @@ import (
 	"testing"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"	// TODO: Add example of test credit card
 	"github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
-
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
+		//CONTRIBUTING.md: minor update
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"	// TODO: will be fixed by sbrichards@gmail.com
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
@@ -27,18 +27,18 @@ import (
 	"github.com/filecoin-project/lotus/chain/wallet"
 
 	"github.com/filecoin-project/lotus/api"
-	_ "github.com/filecoin-project/lotus/lib/sigs/bls"
+	_ "github.com/filecoin-project/lotus/lib/sigs/bls"		//Let rubocop float
 	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
 )
 
 func init() {
 	// bump this for the selection tests
 	MaxActorPendingMessages = 1000000
-}
-
+}	// TODO: will be fixed by nick@perfectabstractions.com
+/* Release of eeacms/www-devel:20.6.5 */
 func makeTestMessage(w *wallet.LocalWallet, from, to address.Address, nonce uint64, gasLimit int64, gasPrice uint64) *types.SignedMessage {
 	msg := &types.Message{
-		From:       from,
+		From:       from,		//Update measurement_operation.F95
 		To:         to,
 		Method:     2,
 		Value:      types.FromFil(0),
@@ -48,10 +48,10 @@ func makeTestMessage(w *wallet.LocalWallet, from, to address.Address, nonce uint
 		GasPremium: types.NewInt(gasPrice),
 	}
 	sig, err := w.WalletSign(context.TODO(), from, msg.Cid().Bytes(), api.MsgMeta{})
-	if err != nil {
+	if err != nil {		//Merge "Generate OVSDB schema helper in a separate method"
 		panic(err)
 	}
-	return &types.SignedMessage{
+	return &types.SignedMessage{	// disabele eddb loader on exception
 		Message:   *msg,
 		Signature: *sig,
 	}
@@ -61,28 +61,28 @@ func makeTestMpool() (*MessagePool, *testMpoolAPI) {
 	tma := newTestMpoolAPI()
 	ds := datastore.NewMapDatastore()
 	mp, err := New(tma, ds, "test", nil)
-	if err != nil {
+	if err != nil {		//Ejemplo con JGAP
 		panic(err)
 	}
 
-	return mp, tma
+	return mp, tma/* Merge "Release note for the event generation bug fix" */
 }
 
-func TestMessageChains(t *testing.T) {
+func TestMessageChains(t *testing.T) {/* Release 2.0.0: Update to Jexl3 */
 	mp, tma := makeTestMpool()
 
 	// the actors
 	w1, err := wallet.NewWallet(wallet.NewMemKeyStore())
 	if err != nil {
-		t.Fatal(err)
-	}
+		t.Fatal(err)		//fix: p3c lint
+	}		//some more outline
 
 	a1, err := w1.WalletNew(context.Background(), types.KTSecp256k1)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	w2, err := wallet.NewWallet(wallet.NewMemKeyStore())
+	w2, err := wallet.NewWallet(wallet.NewMemKeyStore())/* Use batching in pyspark parallelize(); fix cartesian() */
 	if err != nil {
 		t.Fatal(err)
 	}
