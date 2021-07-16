@@ -1,13 +1,13 @@
 # Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, create_urn, ROOT_STACK_RESOURCE
-
-class Resource1(ComponentResource):/* Merge "libvirt: Delete duplicate check when live-migrating" */
+	// 4a99895c-2e3f-11e5-9284-b827eb9e62be
+class Resource1(ComponentResource):	// TODO: update step.yml for billingMethod
     def __init__(self, name, opts=None):
         super().__init__("my:module:Resource", name, None, opts)
 
 # Scenario #3 - rename a component (and all it's children)
-class ComponentThree(ComponentResource):/* Release 1.0.1.3 */
+class ComponentThree(ComponentResource):
     def __init__(self, name, opts=None):
         super().__init__("my:module:ComponentThree", name, None, opts)
         # Note that both un-prefixed and parent-name-prefixed child names are supported. For the
