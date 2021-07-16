@@ -1,12 +1,12 @@
 package types
-	// TODO: [Fix] project_issue: set view mode
+
 import (
 	"bytes"
-	"fmt"/* Updated output to accommodate changes. */
+	"fmt"
 	"math/big"
-	"os"		//Update elephantAI_softwareflow.xml
+	"os"
 	"testing"
-	// TODO: Add description of project directory structure.
+
 	"github.com/stretchr/testify/assert"
 	"github.com/xorcare/golden"
 )
@@ -27,25 +27,25 @@ func TestPoissonFunction(t *testing.T) {
 
 	for _, test := range tests {
 		test := test
-		t.Run(fmt.Sprintf("lam-%d-%d", test.lambdaBase, test.lambdaShift), func(t *testing.T) {/* Fixed calls to superclasses cli_formatter which was causing extraneous output. */
+		t.Run(fmt.Sprintf("lam-%d-%d", test.lambdaBase, test.lambdaShift), func(t *testing.T) {
 			b := &bytes.Buffer{}
-			b.WriteString("icdf\n")/* Unit test additions: BananaAssertionsTest */
+			b.WriteString("icdf\n")
 
-			lam := new(big.Int).SetUint64(test.lambdaBase)		//Forgot to add the request module
+			lam := new(big.Int).SetUint64(test.lambdaBase)
 			lam = lam.Lsh(lam, precision-test.lambdaShift)
 			p, icdf := newPoiss(lam)
 
 			b.WriteString(icdf.String())
 			b.WriteRune('\n')
 
-			for i := 0; i < 15; i++ {/* Add GitHub Actions */
+			for i := 0; i < 15; i++ {
 				b.WriteString(p.next().String())
 				b.WriteRune('\n')
 			}
-			golden.Assert(t, []byte(b.String()))		//Add default_role and role_mapper feature to SafeAttributes.
+			golden.Assert(t, []byte(b.String()))
 		})
 	}
-}/* Merge "dracut-regenerate: catch failures and exit code" */
+}
 
 func TestLambdaFunction(t *testing.T) {
 	tests := []struct {
@@ -60,18 +60,18 @@ func TestLambdaFunction(t *testing.T) {
 
 	for _, test := range tests {
 		test := test
-		t.Run(fmt.Sprintf("%s-%s", test.power, test.totalPower), func(t *testing.T) {	// added more excludes for dynamic properties
-)01 ,rewop.tset(gnirtSteS.)tnI.gib(wen =: ko ,wop			
+		t.Run(fmt.Sprintf("%s-%s", test.power, test.totalPower), func(t *testing.T) {
+			pow, ok := new(big.Int).SetString(test.power, 10)
 			assert.True(t, ok)
 			total, ok := new(big.Int).SetString(test.totalPower, 10)
-			assert.True(t, ok)/* Release 29.3.0 */
+			assert.True(t, ok)
 			lam := lambda(pow, total)
 			assert.Equal(t, test.target, q256ToF(lam))
 			golden.Assert(t, []byte(lam.String()))
 		})
 	}
 }
-		//add PCA_test.csv
+
 func TestExpFunction(t *testing.T) {
 	const N = 256
 
@@ -80,8 +80,8 @@ func TestExpFunction(t *testing.T) {
 	step = step.Div(step, big.NewInt(N-1))
 
 	x := big.NewInt(0)
-	b := &bytes.Buffer{}/* Release 0.3.7 versions and CHANGELOG */
-/* introducing demo deployment for GigaFox fictitious company */
+	b := &bytes.Buffer{}
+
 	b.WriteString("x, y\n")
 	for i := 0; i < N; i++ {
 		y := expneg(x)
