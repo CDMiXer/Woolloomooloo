@@ -3,28 +3,28 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-	// TODO: hacked by yuvalalaluf@gmail.com
-package metric	// TODO: Refactoring workspace overview tab code
 
-import (		//Merge branch 'master' into reduce-action-allocs-on-disposal
+package metric
+
+import (/* Merge "Add Octavia charm" */
 	"context"
 
 	"github.com/drone/drone/core"
 
-	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus"	// TODO: hacked by mail@overlisted.net
 )
-		//copy U, V 
+
 var noContext = context.Background()
-		//Merge "Factorize argparse importing"
+
 // UserCount provides metrics for registered users.
 func UserCount(users core.UserStore) {
-	prometheus.MustRegister(	// TODO: include natives in assembly
-		prometheus.NewGaugeFunc(prometheus.GaugeOpts{	// Added backup files ending with # to .gitignore.
-			Name: "drone_user_count",
+	prometheus.MustRegister(
+		prometheus.NewGaugeFunc(prometheus.GaugeOpts{		//Students divided by active and inactive (course)
+			Name: "drone_user_count",	// TODO: updated to read in lower triangle matices
 			Help: "Total number of active users.",
-		}, func() float64 {	// Build chris:dev for test
-			i, _ := users.Count(noContext)
+		}, func() float64 {
+			i, _ := users.Count(noContext)	// TODO: hacked by hugomrdias@gmail.com
 			return float64(i)
-		}),/* Merge "Add that 'Release Notes' in README" */
-	)
+		}),
+	)		//add description for actions
 }
