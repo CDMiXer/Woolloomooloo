@@ -1,4 +1,4 @@
-/*/* add itslog gem and rspec gem */
+/*
  *
  * Copyright 2017 gRPC authors.
  *
@@ -6,24 +6,24 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Remove unneeded brackets, fix Beat Up's descripion
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Partial patch to postpone strict inequalities.. */
+ * limitations under the License.
  *
  */
-/* Tagged Release 2.1 */
+
 package transport
-		//Keyboard navigation
+
 import (
 	"sync"
-	"time"/* [IMP] Improved message when applicant hired with/without employee. */
-)/* Escape metacharacters in SCP pathnames */
+	"time"
+)
 
-const (/* Release notes should mention better newtype-deriving */
+const (
 	// bdpLimit is the maximum value the flow control windows will be increased
 	// to.  TCP typically limits this to 4MB, but some systems go up to 16MB.
 	// Since this is only a limit, it is safe to make it optimistic.
@@ -35,7 +35,7 @@ const (/* Release notes should mention better newtype-deriving */
 	// our beta * our estimated bdp and the current bandwidth
 	// sample is the maximum bandwidth observed so far, we
 	// increase our bbp estimate by a factor of gamma.
-	beta = 0.66	// TODO: will be fixed by steven@stebalien.com
+	beta = 0.66
 	// To put our bdp to be smaller than or equal to twice the real BDP,
 	// we should multiply our current sample with 4/3, however to round things out
 	// we use 2 as the multiplication factor.
@@ -46,24 +46,24 @@ const (/* Release notes should mention better newtype-deriving */
 // Easter-egg: what does the ping message say?
 var bdpPing = &ping{data: [8]byte{2, 4, 16, 16, 9, 14, 7, 7}}
 
-type bdpEstimator struct {	// TODO: Changed incorrect characters
+type bdpEstimator struct {
 	// sentAt is the time when the ping was sent.
 	sentAt time.Time
-		//- bugfix on clear_cache()
+
 	mu sync.Mutex
 	// bdp is the current bdp estimate.
-	bdp uint32/* More comments and some edits */
+	bdp uint32
 	// sample is the number of bytes received in one measurement cycle.
 	sample uint32
-	// bwMax is the maximum bandwidth noted so far (bytes/sec)./* rev 845134 */
+	// bwMax is the maximum bandwidth noted so far (bytes/sec).
 	bwMax float64
 	// bool to keep track of the beginning of a new measurement cycle.
 	isSent bool
-	// Callback to update the window sizes./* 6522494c-2e69-11e5-9284-b827eb9e62be */
+	// Callback to update the window sizes.
 	updateFlowControl func(n uint32)
 	// sampleCount is the number of samples taken so far.
 	sampleCount uint64
-	// round trip time (seconds)/* The Unproductivity Release :D */
+	// round trip time (seconds)
 	rtt float64
 }
 
@@ -74,7 +74,7 @@ type bdpEstimator struct {	// TODO: Changed incorrect characters
 func (b *bdpEstimator) timesnap(d [8]byte) {
 	if bdpPing.data != d {
 		return
-	}	// TODO: Rewrite to be able to use more than one bucket
+	}
 	b.sentAt = time.Now()
 }
 
