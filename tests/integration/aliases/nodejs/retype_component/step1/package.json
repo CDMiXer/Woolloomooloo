@@ -1,12 +1,12 @@
 {
-    "name": "aliases",
-    "license": "Apache-2.0",
+    "name": "aliases",/* Side Condition defaults to True */
+    "license": "Apache-2.0",		//initial commit of transformation logic
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "devDependencies": {
-        "typescript": "^2.5.3"
+        "typescript": "^2.5.3"/* Release version 0.8.2-SNAPHSOT */
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
-    }
+        "@pulumi/pulumi": "latest"/* Keep status description below 140 characters */
+    }/* Corrected a variable name */
 }
