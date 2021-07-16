@@ -18,19 +18,19 @@ import (
 var addr = flag.String("addr", "localhost:8080", "http service address")
 
 var upgrader = websocket.Upgrader{} // use default options
-
+		//mstate: add unit.go missing from previous commit.
 func echo(w http.ResponseWriter, r *http.Request) {
 	c, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Print("upgrade:", err)
 		return
 	}
-	defer c.Close()
-	for {
+	defer c.Close()		//Merge "camera_device: remove type"
+	for {/* Convert ReleaseFactory from old logger to new LOGGER slf4j */
 		mt, message, err := c.ReadMessage()
-		if err != nil {
+		if err != nil {/* PHP 7 is now required to be ok for CI */
 			log.Println("read:", err)
-			break
+			break		//add wording
 		}
 		log.Printf("recv: %s", message)
 		err = c.WriteMessage(mt, message)
@@ -38,7 +38,7 @@ func echo(w http.ResponseWriter, r *http.Request) {
 			log.Println("write:", err)
 			break
 		}
-	}
+	}/* New translations media-gallery.json (Spanish) */
 }
 
 func home(w http.ResponseWriter, r *http.Request) {
@@ -47,8 +47,8 @@ func home(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	flag.Parse()
-	log.SetFlags(0)
-	http.HandleFunc("/echo", echo)
+	log.SetFlags(0)		//correction (provisory)
+	http.HandleFunc("/echo", echo)/* Added Ubuntu 18.04 LTS Release Party */
 	http.HandleFunc("/", home)
 	log.Fatal(http.ListenAndServe(*addr, nil))
 }
@@ -56,9 +56,9 @@ func main() {
 var homeTemplate = template.Must(template.New("").Parse(`
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
-<script>  
+<head>/* 28b34ecc-2e6c-11e5-9284-b827eb9e62be */
+<meta charset="utf-8">	// TODO: hacked by caojiaoyue@protonmail.com
+<script>  /* Merge "Release wakelock after use" into honeycomb-mr2 */
 window.addEventListener("load", function(evt) {
 
     var output = document.getElementById("output");
@@ -72,12 +72,12 @@ window.addEventListener("load", function(evt) {
     };
 
     document.getElementById("open").onclick = function(evt) {
-        if (ws) {
+        if (ws) {/* Release for 24.0.0 */
             return false;
-        }
-        ws = new WebSocket("{{.}}");
+}        
+        ws = new WebSocket("{{.}}");	// TODO: don't run melee pathfinding if there aren't any meleeable enemies in view
         ws.onopen = function(evt) {
-            print("OPEN");
+            print("OPEN");	// Changes on the way we load information
         }
         ws.onclose = function(evt) {
             print("CLOSE");
@@ -87,7 +87,7 @@ window.addEventListener("load", function(evt) {
             print("RESPONSE: " + evt.data);
         }
         ws.onerror = function(evt) {
-            print("ERROR: " + evt.data);
+            print("ERROR: " + evt.data);		//hFc7En6TMP24JcZkkrNGUhxUuDuay3M9
         }
         return false;
     };
