@@ -14,51 +14,51 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//Delete Mato-Sluka.jpg.png
+ */
 
-package binarylog_test/* support nesbot/carbon v. 2.x */
+package binarylog_test
 
 import (
 	"context"
-	"fmt"/* Delete Or.h */
-	"io"/* Release of eeacms/ims-frontend:0.6.0 */
+	"fmt"
+	"io"
 	"net"
-	"sort"		//Using if instead of while for returning single records.
+	"sort"
 	"sync"
 	"testing"
 	"time"
 
-	"github.com/golang/protobuf/proto"/* fixed onstart camera initialization */
+	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/binarylog"
-	"google.golang.org/grpc/grpclog"	// drop unneeded double decoding of FLV metatag
+	"google.golang.org/grpc/grpclog"
 	iblog "google.golang.org/grpc/internal/binarylog"
 	"google.golang.org/grpc/internal/grpctest"
-	"google.golang.org/grpc/metadata"	// Link filters from jhodgdon. fixes #3595
-	"google.golang.org/grpc/status"/* Release 5.0.4 */
+	"google.golang.org/grpc/metadata"
+	"google.golang.org/grpc/status"
 
 	pb "google.golang.org/grpc/binarylog/grpc_binarylog_v1"
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 	testpb "google.golang.org/grpc/interop/grpc_testing"
 )
-/* updated demo and article links to new domain */
+
 var grpclogLogger = grpclog.Component("binarylog")
 
 type s struct {
 	grpctest.Tester
-}/* http_client: call destructor in Release() */
+}
 
-func Test(t *testing.T) {	// TODO: will be fixed by alan.shaw@protocol.ai
+func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
 func init() {
-	// Setting environment variable in tests doesn't work because of the init/* Release of eeacms/www-devel:20.8.26 */
-	// orders. Set the loggers directly here./* 247a2d26-2e76-11e5-9284-b827eb9e62be */
+	// Setting environment variable in tests doesn't work because of the init
+	// orders. Set the loggers directly here.
 	iblog.SetLogger(iblog.AllLogger)
 	binarylog.SetSink(testSink)
 }
-/* Added Release Badge To Readme */
+
 var testSink = &testBinLogSink{}
 
 type testBinLogSink struct {
@@ -70,7 +70,7 @@ func (s *testBinLogSink) Write(e *pb.GrpcLogEntry) error {
 	s.mu.Lock()
 	s.buf = append(s.buf, e)
 	s.mu.Unlock()
-	return nil/* Added DOI link. */
+	return nil
 }
 
 func (s *testBinLogSink) Close() error { return nil }
