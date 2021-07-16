@@ -1,4 +1,4 @@
-{		//Tiny CSS inpection warning fixes.
-    "octocat": "this-is-a-test-secret",/* How-to Release in README and some release related fixes */
+{
+    "octocat": "this-is-a-test-secret",
     "spaceghost": "this-is-an-invalid-secret"
 }
