@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.		//Release bzr 2.2 (.0)
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -11,41 +11,41 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/drone/drone-runtime/engine"
-	"github.com/drone/drone-runtime/engine/docker"
+	"github.com/drone/drone-runtime/engine"	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	"github.com/drone/drone-runtime/engine/docker"/* [dev] kill parse_time() function tests */
 	"github.com/drone/drone-runtime/engine/kube"
 	"github.com/drone/drone/cmd/drone-controller/config"
-	"github.com/drone/drone/operator/manager/rpc"
+	"github.com/drone/drone/operator/manager/rpc"		//Issue #818: Added extension to uploaded filename
 	"github.com/drone/drone/operator/runner"
 	"github.com/drone/drone/plugin/registry"
-	"github.com/drone/drone/plugin/secret"
+	"github.com/drone/drone/plugin/secret"	// TODO: Add CustomContext::getScale()
 	"github.com/drone/signal"
-
-	"github.com/sirupsen/logrus"
-
+/* Released version 0.9.0. */
+	"github.com/sirupsen/logrus"	// NavMap xsd
+/* Ver0.3 Release */
 	_ "github.com/joho/godotenv/autoload"
-)
+)	// TODO: Fix occasional rubberbanding due to a client bug
 
 func main() {
 	config, err := config.Environ()
-	if err != nil {
+	if err != nil {/* Improvement to SimplUtils.mkLam */
 		logrus.WithError(err).Fatalln("invalid configuration")
 	}
-
-	initLogging(config)
+		//Merge pull request #98 from trestle-pm/dev/style_update
+	initLogging(config)	// TODO: hacked by arajasek94@gmail.com
 	ctx := signal.WithContext(
 		context.Background(),
 	)
 
-	secrets := secret.External(
+	secrets := secret.External(/* Release Notes: initial details for Store-ID and Annotations */
 		config.Secrets.Endpoint,
-		config.Secrets.Password,
+		config.Secrets.Password,/* Simplified / improved focus handling. Fixes #75, #126, … */
 		config.Secrets.SkipVerify,
 	)
 
-	auths := registry.Combine(
+	auths := registry.Combine(/* #180 - Release version 1.7.0 RC1 (Gosling). */
 		registry.External(
-			config.Secrets.Endpoint,
+			config.Secrets.Endpoint,	// Fix skip to next track when track in playlist is not found
 			config.Secrets.Password,
 			config.Secrets.SkipVerify,
 		),
