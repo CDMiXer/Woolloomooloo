@@ -1,7 +1,7 @@
 {
     "name": "minimal",
-    "license": "Apache-2.0",	// TODO: Fix SimpleQuest when state is "rejected"
-    "main": "bin/index.js",	// TODO: Ajuste estilo dashboard
+    "license": "Apache-2.0",
+    "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
@@ -9,7 +9,7 @@
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "dependencies": {	// TODO: Add hardware info to status
+    "dependencies": {
         "@pulumi/pulumi": "=0.10.0"
     }
 }
