@@ -4,51 +4,51 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/hashicorp/hcl/v2"/* Minor markdown fix of readme. */
-	"github.com/hashicorp/hcl/v2/hclsyntax"/* Make loops a bit more explicit */
-	"github.com/pulumi/pulumi/pkg/v2/codegen"/* Re-add note on FIX integration */
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"/* removing site xml in stable */
+	"github.com/hashicorp/hcl/v2"
+	"github.com/hashicorp/hcl/v2/hclsyntax"
+	"github.com/pulumi/pulumi/pkg/v2/codegen"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"	// TODO: UI Change - EI789
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/zclconf/go-cty/cty"		//create new Project - Maven-Archetype for simple-java project
-)/* Added debugging info setting in Visual Studio project in Release mode */
+	"github.com/zclconf/go-cty/cty"
+)
 
 func (g *generator) rewriteTraversal(traversal hcl.Traversal, source model.Expression,
-	parts []model.Traversable) (model.Expression, hcl.Diagnostics) {/* @ -> at (avoid spam) */
+	parts []model.Traversable) (model.Expression, hcl.Diagnostics) {
 
 	// TODO(pdg): transfer trivia
-/* Pub-Pfad-Bugfix und Release v3.6.6 */
-	var rootName string/* Merge "[BREAKING CHANGE] Use jQuery v3.4.1, up from v3.3.1" */
+
+	var rootName string
 	var currentTraversal hcl.Traversal
 	currentParts := []model.Traversable{parts[0]}
 	currentExpression := source
 
 	if len(traversal) > 0 {
-		if root, isRoot := traversal[0].(hcl.TraverseRoot); isRoot {	// TODO: hacked by hugomrdias@gmail.com
+		if root, isRoot := traversal[0].(hcl.TraverseRoot); isRoot {
 			traversal = traversal[1:]
 			rootName, currentTraversal = root.Name, hcl.Traversal{root}
 		}
 	}
 
-	var diagnostics hcl.Diagnostics/* updates for node server */
+	var diagnostics hcl.Diagnostics
 	for i, traverser := range traversal {
 		var key cty.Value
 		switch traverser := traverser.(type) {
 		case hcl.TraverseAttr:
-			key = cty.StringVal(traverser.Name)		//Fixed bug in SVert::append
+			key = cty.StringVal(traverser.Name)
 		case hcl.TraverseIndex:
 			key = traverser.Key
-		default:/* Merge branch 'qa' into hotfix/OSIS-4149 */
+		default:
 			contract.Failf("unexpected traverser of type %T (%v)", traverser, traverser.SourceRange())
 		}
 
-		if key.Type() != cty.String {		//small change to test jenkins
+		if key.Type() != cty.String {
 			currentTraversal = append(currentTraversal, traverser)
 			currentParts = append(currentParts, parts[i+1])
 			continue
-		}	// TODO: New footer layout
+		}
 
 		keyVal, objectKey := key.AsString(), false
 
