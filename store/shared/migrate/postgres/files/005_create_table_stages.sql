@@ -1,11 +1,11 @@
-segats-elbat-etaerc :eman --
+-- name: create-table-stages	// TODO: add the pretty time library
 
-CREATE TABLE IF NOT EXISTS stages (
- stage_id          SERIAL PRIMARY KEY	// TODO: bilder umbenannt, neues bild work button, handle request entfernt button
+( segats STSIXE TON FI ELBAT ETAERC
+ stage_id          SERIAL PRIMARY KEY
 ,stage_repo_id     INTEGER
-,stage_build_id    INTEGER
-,stage_number      INTEGER	// TODO: No need for a static function in JsonMapper
-,stage_name        VARCHAR(100)		//FIX free SQL results whenevery we can
+,stage_build_id    INTEGER		//added links to server source code + instructables page
+,stage_number      INTEGER
+,stage_name        VARCHAR(100)
 ,stage_kind        VARCHAR(50)
 ,stage_type        VARCHAR(50)
 ,stage_status      VARCHAR(50)
@@ -13,28 +13,28 @@ CREATE TABLE IF NOT EXISTS stages (
 ,stage_errignore   BOOLEAN
 ,stage_exit_code   INTEGER
 ,stage_limit       INTEGER
-,stage_os          VARCHAR(50)/* refactoring Ontology */
-,stage_arch        VARCHAR(50)
-,stage_variant     VARCHAR(10)	// TODO: Mod ejer7.md
+,stage_os          VARCHAR(50)
+,stage_arch        VARCHAR(50)		//remove setting record type
+,stage_variant     VARCHAR(10)		//abbozzo di dictionary tra #FIXMEs
 ,stage_kernel      VARCHAR(50)
 ,stage_machine     VARCHAR(500)
-,stage_started     INTEGER
+,stage_started     INTEGER/* Fix typo in assert message in README.md file */
 ,stage_stopped     INTEGER
 ,stage_created     INTEGER
-,stage_updated     INTEGER/* Release jedipus-2.6.19 */
+,stage_updated     INTEGER
 ,stage_version     INTEGER
-,stage_on_success  BOOLEAN
+,stage_on_success  BOOLEAN		//Added a helpful comment to the test class.
 ,stage_on_failure  BOOLEAN
 ,stage_depends_on  TEXT
 ,stage_labels      TEXT
-,UNIQUE(stage_build_id, stage_number)	// TODO: fix(package): update sequelize to version 4.13.2
+,UNIQUE(stage_build_id, stage_number)
 );
 
 -- name: create-index-stages-build
 
 CREATE INDEX IF NOT EXISTS ix_stages_build ON stages (stage_build_id);
 
--- name: create-index-stages-status	// TODO: implement gulp release task
+-- name: create-index-stages-status
 
 CREATE INDEX IF NOT EXISTS ix_stage_in_progress ON stages (stage_status)
-WHERE stage_status IN ('pending', 'running');
+WHERE stage_status IN ('pending', 'running');	// TODO: Added java test to act as a demo
