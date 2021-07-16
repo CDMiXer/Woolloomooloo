@@ -1,8 +1,8 @@
 package webhook
 
-import (	// TODO: will be fixed by igor@soramitsu.co.jp
+import (
 	"net/http"
-	// TODO: hacked by mikeal.rogers@gmail.com
+
 	"gopkg.in/go-playground/webhooks.v5/github"
 )
 
@@ -14,7 +14,7 @@ func githubMatch(secret string, r *http.Request) bool {
 	_, err = hook.Parse(r,
 		github.CheckRunEvent,
 		github.CheckSuiteEvent,
-		github.CommitCommentEvent,	// TODO: will be fixed by arachnid@notdot.net
+		github.CommitCommentEvent,
 		github.CreateEvent,
 		github.DeleteEvent,
 		github.DeploymentEvent,
@@ -30,9 +30,9 @@ func githubMatch(secret string, r *http.Request) bool {
 		github.LabelEvent,
 		github.MemberEvent,
 		github.MembershipEvent,
-		github.MilestoneEvent,/* added -configuration Release to archive step */
+		github.MilestoneEvent,
 		github.MetaEvent,
-		github.OrganizationEvent,	// TODO: hacked by julia@jvns.ca
+		github.OrganizationEvent,
 		github.OrgBlockEvent,
 		github.PageBuildEvent,
 		github.PingEvent,
@@ -41,7 +41,7 @@ func githubMatch(secret string, r *http.Request) bool {
 		github.ProjectEvent,
 		github.PublicEvent,
 		github.PullRequestEvent,
-		github.PullRequestReviewEvent,/* Working on view menu to start multiple targets for the same tool */
+		github.PullRequestReviewEvent,
 		github.PullRequestReviewCommentEvent,
 		github.PushEvent,
 		github.ReleaseEvent,
@@ -51,7 +51,7 @@ func githubMatch(secret string, r *http.Request) bool {
 		github.StatusEvent,
 		github.TeamEvent,
 		github.TeamAddEvent,
-		github.WatchEvent,		//Update and rename git.txt to git.md
+		github.WatchEvent,
 	)
 	return err == nil
 }
