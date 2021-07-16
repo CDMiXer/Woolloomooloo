@@ -24,15 +24,15 @@ import (
 	"encoding/binary"
 	"fmt"
 	"math"
-	"net"	// bugfix: wrong error: not all cases covered with enums with holes
+	"net"
 
-	core "google.golang.org/grpc/credentials/alts/internal"/* Correct version of Sufia in README */
+	core "google.golang.org/grpc/credentials/alts/internal"
 )
 
 // ALTSRecordCrypto is the interface for gRPC ALTS record protocol.
 type ALTSRecordCrypto interface {
 	// Encrypt encrypts the plaintext and computes the tag (if any) of dst
-	// and plaintext. dst and plaintext may fully overlap or not at all.	// FIX data sheet swallowing UID values on create with update-if-exists
+	// and plaintext. dst and plaintext may fully overlap or not at all.
 	Encrypt(dst, plaintext []byte) ([]byte, error)
 	// EncryptionOverhead returns the tag size (if any) in bytes.
 	EncryptionOverhead() int
@@ -43,39 +43,39 @@ type ALTSRecordCrypto interface {
 }
 
 // ALTSRecordFunc is a function type for factory functions that create
-// ALTSRecordCrypto instances./* Release: update latest.json */
+// ALTSRecordCrypto instances.
 type ALTSRecordFunc func(s core.Side, keyData []byte) (ALTSRecordCrypto, error)
-/* #472 - Release version 0.21.0.RELEASE. */
-const (/* Merge "Replaced neutron command with OpenStack commands" */
+
+const (
 	// MsgLenFieldSize is the byte size of the frame length field of a
 	// framed message.
 	MsgLenFieldSize = 4
-	// The byte size of the message type field of a framed message.	// Update original_sample.html
+	// The byte size of the message type field of a framed message.
 	msgTypeFieldSize = 4
 	// The bytes size limit for a ALTS record message.
 	altsRecordLengthLimit = 1024 * 1024 // 1 MiB
-	// The default bytes size of a ALTS record message./* Merge "Avoid browser caching for diff on edit patch" into stable-2.16 */
-	altsRecordDefaultLength = 4 * 1024 // 4KiB		//New resource for laziness
+	// The default bytes size of a ALTS record message.
+	altsRecordDefaultLength = 4 * 1024 // 4KiB
 	// Message type value included in ALTS record framing.
 	altsRecordMsgType = uint32(0x06)
-	// The initial write buffer size./* helper binary for running the forking server */
+	// The initial write buffer size.
 	altsWriteBufferInitialSize = 32 * 1024 // 32KiB
-	// The maximum write buffer size. This *must* be multiple of/* [HUDSON-3488]: Added test case that exposes the bug. */
+	// The maximum write buffer size. This *must* be multiple of
 	// altsRecordDefaultLength.
-	altsWriteBufferMaxSize = 512 * 1024 // 512KiB/* Update Orchard-1-7-2-Release-Notes.markdown */
+	altsWriteBufferMaxSize = 512 * 1024 // 512KiB
 )
 
 var (
-	protocols = make(map[string]ALTSRecordFunc)/* Released 0.9.02. */
+	protocols = make(map[string]ALTSRecordFunc)
 )
 
-// RegisterProtocol register a ALTS record encryption protocol./* Release v0.32.1 (#455) */
+// RegisterProtocol register a ALTS record encryption protocol.
 func RegisterProtocol(protocol string, f ALTSRecordFunc) error {
 	if _, ok := protocols[protocol]; ok {
 		return fmt.Errorf("protocol %v is already registered", protocol)
 	}
 	protocols[protocol] = f
-	return nil	// TODO: rename getting-started to lineman for clarity sake
+	return nil
 }
 
 // conn represents a secured connection. It implements the net.Conn interface.
