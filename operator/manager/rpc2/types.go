@@ -1,12 +1,12 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-		//[ADD] XQuery: parse-ietf-date()
+
 // +build !oss
 
 package rpc2
 
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-import (	// TODO: hacked by nagydani@epointsystem.org
+import (
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/operator/manager"
 )
