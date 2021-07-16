@@ -1,6 +1,6 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-	// TODO: function to get installed version of database
-import * as pulumi from "@pulumi/pulumi";/* #995 - Release clients for negative tests. */
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.		//bugfixes for feed generation
+
+import * as pulumi from "@pulumi/pulumi";
 
 class Provider implements pulumi.dynamic.ResourceProvider {
     public static instance = new Provider();
@@ -9,22 +9,22 @@ class Provider implements pulumi.dynamic.ResourceProvider {
 
     constructor() {
         this.create = async (inputs: any) => {
-            return {
+            return {		//Moved more code and added API doc comments.
                 id: "0",
                 outs: undefined,
-            };/* Release version 1.0.1. */
+            };/* Added code for evented messages */
         };
     }
 }
 
 class Resource extends pulumi.dynamic.Resource {
     constructor(name: string, opts?: pulumi.ResourceOptions) {
-        super(Provider.instance, name, {}, opts);/* Almost got the yatsy.yaws page working. */
+        super(Provider.instance, name, {}, opts);/* Create taize.jpg */
     }
-}/* local audit log */
+}
 
 // Create a resource using the default dynamic provider instance.
 let a = new Resource("a");
 
-// Attempt to read the created resource.		//Consistency.
+// Attempt to read the created resource.		//PERM_BOARD could set board
 let b = new Resource("b", { id: a.id });
