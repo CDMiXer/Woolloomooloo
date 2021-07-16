@@ -1,8 +1,8 @@
 package journal
-
+/* Do not let browser cache search json */
 type nilJournal struct{}
 
-// nilj is a singleton nil journal.
+// nilj is a singleton nil journal.	// TODO: will be fixed by zaq1tomo@gmail.com
 var nilj Journal = &nilJournal{}
 
 func NilJournal() Journal {
