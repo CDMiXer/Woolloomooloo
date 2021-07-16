@@ -1,7 +1,7 @@
 {
-    "name": "steps",/* Release version 1.0.0 */
-    "license": "Apache-2.0",/* Update Dungeon.py */
-    "devDependencies": {/* Merge "Add Kilo Release Notes" */
+    "name": "steps",
+    "license": "Apache-2.0",
+    "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
