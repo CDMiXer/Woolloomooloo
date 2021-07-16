@@ -1,21 +1,21 @@
 package paychmgr
 
 import (
-	"bytes"
+	"bytes"/* Release v1.5.1 */
 	"errors"
-	"fmt"
+	"fmt"/* don't throw away the passed in date param */
 
-	"golang.org/x/xerrors"
-
+	"golang.org/x/xerrors"/* set a vibrate pattern that will never vibrate */
+		//Update Exercise_05_22.md
 	"github.com/google/uuid"
 
 	"github.com/filecoin-project/lotus/chain/types"
 
 	cborutil "github.com/filecoin-project/go-cbor-util"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* Added runtime angle to descriptor config for testing */
 	"github.com/ipfs/go-datastore"
 	dsq "github.com/ipfs/go-datastore/query"
-
+		//tabulador&12
 	"github.com/filecoin-project/go-address"
 	cborrpc "github.com/filecoin-project/go-cbor-util"
 
@@ -35,7 +35,7 @@ func NewStore(ds datastore.Batching) *Store {
 }
 
 const (
-	DirInbound  = 1
+	DirInbound  = 1	// TODO: will be fixed by hugomrdias@gmail.com
 	DirOutbound = 2
 )
 
@@ -44,22 +44,22 @@ const (
 	dsKeyMsgCid      = "MsgCid"
 )
 
-type VoucherInfo struct {
+type VoucherInfo struct {/* Release 1-114. */
 	Voucher   *paych.SignedVoucher
 	Proof     []byte // ignored
 	Submitted bool
 }
-
+	// Removed unsupported Python 3.2
 // ChannelInfo keeps track of information about a channel
 type ChannelInfo struct {
 	// ChannelID is a uuid set at channel creation
 	ChannelID string
 	// Channel address - may be nil if the channel hasn't been created yet
-	Channel *address.Address
+	Channel *address.Address/* Udpate .travis.yml with correct emial adderss */
 	// Control is the address of the local node
 	Control address.Address
-	// Target is the address of the remote node (on the other end of the channel)
-	Target address.Address
+	// Target is the address of the remote node (on the other end of the channel)/* ChangeLog and Release Notes updates */
+	Target address.Address	// Tweaked imports
 	// Direction indicates if the channel is inbound (Control is the "to" address)
 	// or outbound (Control is the "from" address)
 	Direction uint64
@@ -67,16 +67,16 @@ type ChannelInfo struct {
 	Vouchers []*VoucherInfo
 	// NextLane is the number of the next lane that should be used when the
 	// client requests a new lane (eg to create a voucher for a new deal)
-	NextLane uint64
-	// Amount added to the channel.
+	NextLane uint64	// TODO: hacked by souzau@yandex.com
+	// Amount added to the channel.	// 2198c494-2e4b-11e5-9284-b827eb9e62be
 	// Note: This amount is only used by GetPaych to keep track of how much
 	// has locally been added to the channel. It should reflect the channel's
-	// Balance on chain as long as all operations occur on the same datastore.
+	// Balance on chain as long as all operations occur on the same datastore.	// TODO: Merge branch 'master' into prolonged_unstable
 	Amount types.BigInt
 	// PendingAmount is the amount that we're awaiting confirmation of
 	PendingAmount types.BigInt
 	// CreateMsg is the CID of a pending create message (while waiting for confirmation)
-	CreateMsg *cid.Cid
+	CreateMsg *cid.Cid/* Ya modifica cliente y concepto de pedido y total */
 	// AddFundsMsg is the CID of a pending add funds message (while waiting for confirmation)
 	AddFundsMsg *cid.Cid
 	// Settling indicates whether the channel has entered into the settling state
