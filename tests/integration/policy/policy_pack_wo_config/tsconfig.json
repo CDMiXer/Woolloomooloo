@@ -1,11 +1,11 @@
-{	// TODO: Fixed issue #196.
-    "compilerOptions": {	// TODO: hacked by josharian@gmail.com
+{
+    "compilerOptions": {
         "outDir": "bin",
-        "target": "es6",	// TODO: hacked by souzau@yandex.com
-        "module": "commonjs",		//cc5139fc-2e4b-11e5-9284-b827eb9e62be
+        "target": "es6",
+        "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": false,/* [CI] Use legacy CI */
+        "sourceMap": false,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
