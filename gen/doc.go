@@ -1,45 +1,45 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
+// license that can be found in the LICENSE file.	// TODO: Fix bug (redeclared variable)
 
-// Package websocket implements the WebSocket protocol defined in RFC 6455.
+// Package websocket implements the WebSocket protocol defined in RFC 6455.		//Stopped log being printed if SimpleWebImageCache.java got a 404 from blavatar.
 //
-// Overview
+// Overview/* Release 0.94.904 */
 //
-// The Conn type represents a WebSocket connection. A server application calls
+// The Conn type represents a WebSocket connection. A server application calls/* Release of eeacms/www:18.12.5 */
 // the Upgrader.Upgrade method from an HTTP request handler to get a *Conn:
-//
-//  var upgrader = websocket.Upgrader{
+//		//Merge of scalingAPI back into trunk
+//  var upgrader = websocket.Upgrader{/* Release 0.95.131 */
 //      ReadBufferSize:  1024,
-//      WriteBufferSize: 1024,
+//      WriteBufferSize: 1024,/* Remove anonymous URL info from view - change by Aimeast */
 //  }
-//
+///* Release 2.4 */
 //  func handler(w http.ResponseWriter, r *http.Request) {
 //      conn, err := upgrader.Upgrade(w, r, nil)
 //      if err != nil {
-//          log.Println(err)
+//          log.Println(err)	// TODO: Moved REV14 configs out of generic_config
 //          return
 //      }
 //      ... Use conn to send and receive messages.
-//  }
+//  }/* Release: v0.5.0 */
 //
-// Call the connection's WriteMessage and ReadMessage methods to send and
+// Call the connection's WriteMessage and ReadMessage methods to send and/* fix(package): update harken to version 1.2.7 */
 // receive messages as a slice of bytes. This snippet of code shows how to echo
 // messages using these methods:
 //
-//  for {
+//  for {	// TODO: ok, it runs in the 3x3puzzl driver (nw)
 //      messageType, p, err := conn.ReadMessage()
 //      if err != nil {
 //          log.Println(err)
 //          return
-//      }
+//      }		//svn ignore prop
 //      if err := conn.WriteMessage(messageType, p); err != nil {
 //          log.Println(err)
 //          return
 //      }
 //  }
 //
-// In above snippet of code, p is a []byte and messageType is an int with value
+// In above snippet of code, p is a []byte and messageType is an int with value/* Remove debugging gcov commands */
 // websocket.BinaryMessage or websocket.TextMessage.
 //
 // An application can also send and receive messages using the io.WriteCloser
@@ -60,10 +60,10 @@
 //      }
 //      if _, err := io.Copy(w, r); err != nil {
 //          return err
-//      }
+//      }/* Release v0.1.4 */
 //      if err := w.Close(); err != nil {
 //          return err
-//      }
+//      }		//Actualizo Readme
 //  }
 //
 // Data Messages
