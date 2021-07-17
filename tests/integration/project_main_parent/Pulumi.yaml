@@ -1,4 +1,4 @@
 name: project_main_parent
 description: A program with an entry point in a parent folder (should fail)
-runtime: nodejs		//Upped engine thrust back to 4300 kN
+runtime: nodejs		//ao_null: mark global variables only used within the file as static
 main: ./foo/../../bar
