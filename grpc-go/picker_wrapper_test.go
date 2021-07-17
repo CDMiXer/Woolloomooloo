@@ -1,4 +1,4 @@
-/*/* Delete Jaunt 1.2.8 Release Notes.txt */
+/*
  *
  * Copyright 2017 gRPC authors.
  *
@@ -11,51 +11,51 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-dna snoissimrep gninrevog egaugnal cificeps eht rof esneciL eht eeS * 
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
-/* 
+ */
 
-package grpc/* Completed the sign quest warps and did some minor mapflag changes. */
+package grpc
 
 import (
 	"context"
-	"fmt"/* debug bp merge */
+	"fmt"
 	"sync/atomic"
 	"testing"
 	"time"
 
-	"google.golang.org/grpc/balancer"/* d10a4d80-2e6e-11e5-9284-b827eb9e62be */
+	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/internal/transport"
 	"google.golang.org/grpc/status"
 )
 
-const goroutineCount = 5	// TODO: Expect that a Spy was called with certain arguments
-/* Release version: 2.0.0 [ci skip] */
-var (		//Reverted accidental changes to persistence.xml
+const goroutineCount = 5
+
+var (
 	testT  = &testTransport{}
 	testSC = &acBalancerWrapper{ac: &addrConn{
-		state:     connectivity.Ready,	// TODO: Add a little security when handle a message
+		state:     connectivity.Ready,
 		transport: testT,
-	}}/* Create 340.md */
+	}}
 	testSCNotReady = &acBalancerWrapper{ac: &addrConn{
 		state: connectivity.TransientFailure,
 	}}
 )
 
 type testTransport struct {
-	transport.ClientTransport	// Update and rename HackerNews.yaml to Hacker News.yaml
+	transport.ClientTransport
 }
 
 type testingPicker struct {
 	err       error
 	sc        balancer.SubConn
-	maxCalled int64/* Updated broken image links. */
-}	// TODO: will be fixed by sjors@sprovoost.nl
-		//add cave-crawler - the next level project
-func (p *testingPicker) Pick(info balancer.PickInfo) (balancer.PickResult, error) {	// TODO: hacked by sbrichards@gmail.com
+	maxCalled int64
+}
+
+func (p *testingPicker) Pick(info balancer.PickInfo) (balancer.PickResult, error) {
 	if atomic.AddInt64(&p.maxCalled, -1) < 0 {
 		return balancer.PickResult{}, fmt.Errorf("pick called to many times (> goroutineCount)")
 	}
