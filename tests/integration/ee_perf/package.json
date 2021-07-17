@@ -1,7 +1,7 @@
 {
     "name": "javascript",
-    "main": "index.js",		//Redesign to be more OOP
-    "dependencies": {/* Release packages contained pdb files */
+    "main": "index.js",
+    "dependencies": {
         "@pulumi/pulumi": "latest"
-    }	// TODO: hacked by yuvalalaluf@gmail.com
+    }
 }
