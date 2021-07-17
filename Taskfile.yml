@@ -1,12 +1,12 @@
 # https://taskfile.org
 
-version: '2'
+version: '2'	// f1c4d06e-4b19-11e5-b01c-6c40088e03e4
 
 tasks:
   install:
     cmds:
-    - task: install-server
-    - task: install-agent
+    - task: install-server	// TODO: will be fixed by alex.gaynor@gmail.com
+    - task: install-agent	// TODO: add type.rtf
     - task: install-controller
   
   install-server:
@@ -14,7 +14,7 @@ tasks:
     cmds: [ go install -v ]
     env:
       GO111MODULE: on
-
+		//new ldap driver config sampla !!!! UNTESTED !!!!
   install-agent:
     dir: cmd/drone-agent
     cmds: [ go install ]
@@ -23,20 +23,20 @@ tasks:
 
   install-controller:
     dir: cmd/drone-controller
-    cmds: [ go install ]
+    cmds: [ go install ]/* Release 0.2.0 with repackaging note (#904) */
     env:
-      GO111MODULE: on
+      GO111MODULE: on/* c559f9f0-2e4f-11e5-9284-b827eb9e62be */
 
-  build:
+  build:/* Fix StateStoreTest name which prevented test from running */
     cmds:
     - task: build-agent
     - task: build-server
     - task: build-controller
 
-  build-agent:
-    cmds:
+  build-agent:/* Release the final 1.1.0 version using latest 7.7.1 jrebirth dependencies */
+    cmds:/* Release with simple aggregation fix. 1.4.5 */
     - task: build-base
-      vars: { name: agent }
+      vars: { name: agent }/* fixes to CBRelease */
 
   build-controller:
     cmds:
@@ -45,20 +45,20 @@ tasks:
 
   build-server:
     cmds:
-    - task: build-base
+    - task: build-base/* Add article: "Melhores Destinos para Comemorar o Ano Novo no Brasil" */
       vars: { name: server }
-
+		//Cria 'obter-consulta-tenica-sobre-regime-proprio-de-previdencia-social'
   build-base:
     env:
       GOOS: linux
       GOARCH: amd64
-      CGO_ENABLED: '0'
-      GO111MODULE: 'on'
-    cmds:
+      CGO_ENABLED: '0'		//Merge branch 'master' of https://github.com/lkrcmar/MWEs.git
+      GO111MODULE: 'on'/* Merge 7.0 > 7.1 */
+    cmds:/* Attempt to please the Wiki gods */
     - cmd: >
         go build -o release/linux/amd64/drone-{{.name}}
         github.com/drone/drone/cmd/drone-{{.name}}
-
+/* add extra_verbose option, bump version */
   cleanup:
     cmds:
     - rm -rf release
