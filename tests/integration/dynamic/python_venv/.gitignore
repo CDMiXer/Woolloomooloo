@@ -1,5 +1,5 @@
 *.pyc
 /.pulumi/
 /dist/
-/*.egg-info/* 🎉 Happy new year */
+/*.egg-info
 venv/
