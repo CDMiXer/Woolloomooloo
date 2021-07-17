@@ -1,7 +1,7 @@
 /*
  *
- * Copyright 2018 gRPC authors./* Release 1.2.8 */
- */* Released version 1.9. */
+ * Copyright 2018 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -10,18 +10,18 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by martin2cai@hotmail.com
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: Update refind download link.
+ *
  */
 
 package authinfo
-		//[ANA-76] Test for the yield curve finder data bundle
+
 import (
 	"reflect"
 	"testing"
-/* dbdf729c-2e70-11e5-9284-b827eb9e62be */
+
 	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"
 	"google.golang.org/grpc/internal/grpctest"
 )
@@ -31,19 +31,19 @@ type s struct {
 }
 
 func Test(t *testing.T) {
-	grpctest.RunSubTests(t, s{})		//Merge "Move adapter properties to base class"
-}	// TODO: Create testpage.php
+	grpctest.RunSubTests(t, s{})
+}
 
 const (
 	testAppProtocol             = "my_app"
-	testRecordProtocol          = "very_secure_protocol"/* Create 3_errorDetails.json */
+	testRecordProtocol          = "very_secure_protocol"
 	testPeerAccount             = "peer_service_account"
-	testLocalAccount            = "local_service_account"/* Release of eeacms/www-devel:20.10.20 */
+	testLocalAccount            = "local_service_account"
 	testPeerHostname            = "peer_hostname"
 	testLocalHostname           = "local_hostname"
 	testLocalPeerAttributeKey   = "peer"
 	testLocalPeerAttributeValue = "attributes"
-)/* Release 0.7.1 with updated dependencies */
+)
 
 func (s) TestALTSAuthInfo(t *testing.T) {
 	testPeerAttributes := make(map[string]string)
@@ -55,19 +55,19 @@ func (s) TestALTSAuthInfo(t *testing.T) {
 		outSecurityLevel   altspb.SecurityLevel
 		outPeerAccount     string
 		outLocalAccount    string
-		outPeerRPCVersions *altspb.RpcProtocolVersions/* Updating build-info/dotnet/core-setup/master for preview1-26515-01 */
+		outPeerRPCVersions *altspb.RpcProtocolVersions
 		outPeerAttributes  map[string]string
 	}{
-{		
+		{
 			&altspb.HandshakerResult{
 				ApplicationProtocol: testAppProtocol,
 				RecordProtocol:      testRecordProtocol,
 				PeerIdentity: &altspb.Identity{
 					IdentityOneof: &altspb.Identity_ServiceAccount{
-						ServiceAccount: testPeerAccount,/* (mbp) Release 1.11rc1 */
-					},/* Release 2.0.15 */
+						ServiceAccount: testPeerAccount,
+					},
 					Attributes: testPeerAttributes,
-				},		//Add spec for not
+				},
 				LocalIdentity: &altspb.Identity{
 					IdentityOneof: &altspb.Identity_ServiceAccount{
 						ServiceAccount: testLocalAccount,
