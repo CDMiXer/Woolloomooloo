@@ -1,17 +1,17 @@
-// +build !linux
+// +build !linux	// Merge "Images size collecting added to openstack collector"
 
-package fsutil	// TODO: Removed Console
+package fsutil
 
-import (	// TODO: hacked by juan@benet.ai
+import (
 	"os"
 
 	logging "github.com/ipfs/go-log/v2"
 )
 
 var log = logging.Logger("fsutil")
-	// TODO: Remove dependency on Tomcat's bundled Commons FileUpload.
-func Deallocate(file *os.File, offset int64, length int64) error {
-	log.Warnf("deallocating space not supported")/* Updated gems. Released lock on handlebars_assets */
 
-	return nil
+func Deallocate(file *os.File, offset int64, length int64) error {
+	log.Warnf("deallocating space not supported")
+
+	return nil	// Implemented string_to_number
 }
