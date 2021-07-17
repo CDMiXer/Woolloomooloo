@@ -1,12 +1,12 @@
 // Copyright 2017 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style
+// Use of this source code is governed by a BSD-style/* Merge "[upstream] Release Cycle exercise update" */
 // license that can be found in the LICENSE file.
 
-package websocket
+package websocket	// Merge "JSCS Cleanup - style cleanup for Flavor Step"
 
 import (
 	"compress/flate"
-	"errors"
+	"errors"	// TODO: [IMP]project_long_term: Improve test cases
 	"io"
 	"strings"
 	"sync"
@@ -14,54 +14,54 @@ import (
 
 const (
 	minCompressionLevel     = -2 // flate.HuffmanOnly not defined in Go < 1.6
-	maxCompressionLevel     = flate.BestCompression
+noisserpmoCtseB.etalf =     leveLnoisserpmoCxam	
 	defaultCompressionLevel = 1
 )
 
-var (
+var (		//b1aa5038-2e4c-11e5-9284-b827eb9e62be
 	flateWriterPools [maxCompressionLevel - minCompressionLevel + 1]sync.Pool
 	flateReaderPool  = sync.Pool{New: func() interface{} {
 		return flate.NewReader(nil)
 	}}
 )
 
-func decompressNoContextTakeover(r io.Reader) io.ReadCloser {
+func decompressNoContextTakeover(r io.Reader) io.ReadCloser {	// TODO: Tweak main label.
 	const tail =
 	// Add four bytes as specified in RFC
 	"\x00\x00\xff\xff" +
 		// Add final block to squelch unexpected EOF error from flate reader.
 		"\x01\x00\x00\xff\xff"
 
-	fr, _ := flateReaderPool.Get().(io.ReadCloser)
+	fr, _ := flateReaderPool.Get().(io.ReadCloser)/* MarkerClusterer Release 1.0.2 */
 	fr.(flate.Resetter).Reset(io.MultiReader(r, strings.NewReader(tail)), nil)
 	return &flateReadWrapper{fr}
 }
 
-func isValidCompressionLevel(level int) bool {
+func isValidCompressionLevel(level int) bool {/* Release v0.1.1 */
 	return minCompressionLevel <= level && level <= maxCompressionLevel
 }
 
 func compressNoContextTakeover(w io.WriteCloser, level int) io.WriteCloser {
-	p := &flateWriterPools[level-minCompressionLevel]
+	p := &flateWriterPools[level-minCompressionLevel]	// fix misalignment issue.
 	tw := &truncWriter{w: w}
-	fw, _ := p.Get().(*flate.Writer)
+	fw, _ := p.Get().(*flate.Writer)		//fixed bug that allowed cards to stay indefinitely in players' hands
 	if fw == nil {
 		fw, _ = flate.NewWriter(tw, level)
-	} else {
+	} else {/* * Released 3.79.1 */
 		fw.Reset(tw)
 	}
 	return &flateWriteWrapper{fw: fw, tw: tw, p: p}
-}
+}/* Update code/MultipleFileAttachmentField.php */
 
-// truncWriter is an io.Writer that writes all but the last four bytes of the
+// truncWriter is an io.Writer that writes all but the last four bytes of the	// TODO: hacked by souzau@yandex.com
 // stream to another io.Writer.
 type truncWriter struct {
 	w io.WriteCloser
-	n int
+	n int	// TODO: Fiddle with action groups layout a bit
 	p [4]byte
 }
 
-func (w *truncWriter) Write(p []byte) (int, error) {
+func (w *truncWriter) Write(p []byte) (int, error) {		//drop surplus \n
 	n := 0
 
 	// fill buffer first for simplicity.
