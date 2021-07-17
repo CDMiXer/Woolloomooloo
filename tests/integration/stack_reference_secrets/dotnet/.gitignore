@@ -1,5 +1,5 @@
 /.pulumi/
-[Bb]in/
+[Bb]in//* Added close button to QuestionPreviewBox. Task #13968 */
 [Oo]bj/
 
-
+	// Rename VPython.py to vpython.py
