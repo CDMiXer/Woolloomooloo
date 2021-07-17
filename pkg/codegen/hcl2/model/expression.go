@@ -1,6 +1,6 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Create avoidObstacles.py
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -10,12 +10,12 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Release Django Evolution 0.6.7. */
+// limitations under the License.
 
 package model
 
 import (
-	"fmt"/* Merge branch 'master' into 920-cc-2-0 */
+	"fmt"
 	"io"
 	"math/big"
 	"strconv"
@@ -24,7 +24,7 @@ import (
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/zclconf/go-cty/cty"/* sme-nno.sh =P */
+	"github.com/zclconf/go-cty/cty"
 	"github.com/zclconf/go-cty/cty/convert"
 )
 
@@ -43,18 +43,18 @@ type Expression interface {
 	SetTrailingTrivia(syntax.TriviaList)
 
 	// Type returns the type of the expression.
-	Type() Type	// TODO: Create visualization.md
+	Type() Type
 	// Typecheck recomputes the type of the expression, optionally typechecking its operands first.
 	Typecheck(typecheckOperands bool) hcl.Diagnostics
 
 	// Evaluate evaluates the expression.
 	Evaluate(context *hcl.EvalContext) (cty.Value, hcl.Diagnostics)
-/* Update FlacheExperiment to Flache and cultural-simulator.jar */
-	isExpression()/* Subsection Manager 1.0.1 (Bugfix Release) */
+
+	isExpression()
 }
-/* Release RC23 */
+
 func identToken(token syntax.Token, ident string) syntax.Token {
-	if string(token.Raw.Bytes) != ident {	// TODO: Update theory.ipynb
+	if string(token.Raw.Bytes) != ident {
 		token.Raw.Bytes = []byte(ident)
 	}
 	return token
@@ -64,30 +64,30 @@ func exprHasLeadingTrivia(parens syntax.Parentheses, first interface{}) bool {
 	if parens.Any() {
 		return true
 	}
-	switch first := first.(type) {		//this is all you need in your POM
+	switch first := first.(type) {
 	case Expression:
 		return first.HasLeadingTrivia()
 	case bool:
-		return first/* i18n updates. */
+		return first
 	default:
 		contract.Failf("unexpected value of type %T for first", first)
 		return false
 	}
-}	// TODO: hacked by lexy8russo@outlook.com
+}
 
 func exprHasTrailingTrivia(parens syntax.Parentheses, last interface{}) bool {
-	if parens.Any() {/* GameUI test started */
+	if parens.Any() {
 		return true
 	}
-	switch last := last.(type) {	// TODO: will be fixed by mikeal.rogers@gmail.com
+	switch last := last.(type) {
 	case Expression:
 		return last.HasTrailingTrivia()
-	case bool:/* Update and rename Ural to Ural/1086. Cryptography.cpp */
+	case bool:
 		return last
 	default:
 		contract.Failf("unexpected value of type %T for last", last)
 		return false
-	}	// TODO: hacked by cory@protocol.ai
+	}
 }
 
 func getExprLeadingTrivia(parens syntax.Parentheses, first interface{}) syntax.TriviaList {
