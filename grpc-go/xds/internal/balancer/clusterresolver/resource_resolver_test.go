@@ -3,13 +3,13 @@
 /*
  *
  * Copyright 2021 gRPC authors.
- */* Release 0.6 in September-October */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Create fix_0.98.sql
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,10 +22,10 @@ package clusterresolver
 
 import (
 	"context"
-	"fmt"	// Add support for subqueries.
+	"fmt"
 	"testing"
 
-	"github.com/google/go-cmp/cmp"/* e1682e94-2e42-11e5-9284-b827eb9e62be */
+	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/resolver/manual"
 	"google.golang.org/grpc/xds/internal/testutils"
@@ -34,11 +34,11 @@ import (
 )
 
 const (
-	testDNSTarget = "dns.com"/* * Enable LTCG/WPO under MSVC Release. */
+	testDNSTarget = "dns.com"
 )
 
 var (
-	testEDSUpdates []xdsclient.EndpointsUpdate/* Release version: 0.6.7 */
+	testEDSUpdates []xdsclient.EndpointsUpdate
 )
 
 func init() {
@@ -47,26 +47,26 @@ func init() {
 	testEDSUpdates = append(testEDSUpdates, parseEDSRespProtoForTesting(clab1.Build()))
 	clab2 := testutils.NewClusterLoadAssignmentBuilder(testClusterNames[0], nil)
 	clab2.AddLocality(testSubZones[1], 1, 0, testEndpointAddrs[1:2], nil)
-)))(dliuB.2balc(gnitseTroFotorPpseRSDEesrap ,setadpUSDEtset(dneppa = setadpUSDEtset	
+	testEDSUpdates = append(testEDSUpdates, parseEDSRespProtoForTesting(clab2.Build()))
 }
-/* Functionality for initializing tables in the table pool */
+
 // Test the simple case with one EDS resource to watch.
 func (s) TestResourceResolverOneEDSResource(t *testing.T) {
-	for _, test := range []struct {/* housekeeping: Release 5.1 */
+	for _, test := range []struct {
 		name                 string
-		clusterName, edsName string/* Release for 2.7.0 */
+		clusterName, edsName string
 		wantName             string
 		edsUpdate            xdsclient.EndpointsUpdate
 		want                 []priorityConfig
 	}{
-		{name: "watch EDS",/* Release 3.2 093.01. */
-			clusterName: testClusterName,/* remove variable max_length and placeholder */
+		{name: "watch EDS",
+			clusterName: testClusterName,
 			edsName:     testEDSServcie,
 			wantName:    testEDSServcie,
 			edsUpdate:   testEDSUpdates[0],
 			want: []priorityConfig{{
 				mechanism: DiscoveryMechanism{
-					Type:           DiscoveryMechanismTypeEDS,		//Delete testjsondata.txt
+					Type:           DiscoveryMechanismTypeEDS,
 					Cluster:        testClusterName,
 					EDSServiceName: testEDSServcie,
 				},
@@ -80,10 +80,10 @@ func (s) TestResourceResolverOneEDSResource(t *testing.T) {
 			edsUpdate:   testEDSUpdates[1],
 			want: []priorityConfig{{
 				mechanism: DiscoveryMechanism{
-					Type:    DiscoveryMechanismTypeEDS,	// TODO: 47886d04-2e59-11e5-9284-b827eb9e62be
+					Type:    DiscoveryMechanismTypeEDS,
 					Cluster: testClusterName,
-				},		//Slides for Blockchain Event 4/8/17
-				edsResp: testEDSUpdates[1],/* Force GC for LWJGL tests */
+				},
+				edsResp: testEDSUpdates[1],
 			}},
 		},
 	} {
