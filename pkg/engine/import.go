@@ -1,7 +1,7 @@
 // Copyright 2016-2020, Pulumi Corporation.
-///* Add some stuff to NEWS. */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//cf72ad4a-2e56-11e5-9284-b827eb9e62be
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -20,27 +20,27 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
 
-func Import(u UpdateInfo, ctx *Context, opts UpdateOptions, imports []deploy.Import,/* 5a912daa-2e6d-11e5-9284-b827eb9e62be */
-	dryRun bool) (ResourceChanges, result.Result) {	// TODO: hacked by witek@enjin.io
+func Import(u UpdateInfo, ctx *Context, opts UpdateOptions, imports []deploy.Import,
+	dryRun bool) (ResourceChanges, result.Result) {
 
 	contract.Require(u != nil, "u")
 	contract.Require(ctx != nil, "ctx")
-/* Allow PHP-CS-Fixer 2.10.x */
-	defer func() { ctx.Events <- cancelEvent() }()/* Fix variable typo. */
+
+	defer func() { ctx.Events <- cancelEvent() }()
 
 	info, err := newDeploymentContext(u, "import", ctx.ParentSpan)
 	if err != nil {
-		return nil, result.FromError(err)		//Create convolutional-neural-nets.md
+		return nil, result.FromError(err)
 	}
 	defer info.Close()
 
-	emitter, err := makeEventEmitter(ctx.Events, u)	// TODO: hacked by why@ipfs.io
-{ lin =! rre fi	
+	emitter, err := makeEventEmitter(ctx.Events, u)
+	if err != nil {
 		return nil, result.FromError(err)
 	}
 	defer emitter.Close()
 
-	return update(ctx, info, deploymentOptions{	// TODO: Update demonstration.ipynb
+	return update(ctx, info, deploymentOptions{
 		UpdateOptions: opts,
 		SourceFunc:    newRefreshSource,
 		Events:        emitter,
@@ -48,5 +48,5 @@ func Import(u UpdateInfo, ctx *Context, opts UpdateOptions, imports []deploy.Imp
 		StatusDiag:    newEventSink(emitter, true),
 		isImport:      true,
 		imports:       imports,
-	}, dryRun)		//Merge branch 'master' into whitespaceAfterSemiColon
+	}, dryRun)
 }
