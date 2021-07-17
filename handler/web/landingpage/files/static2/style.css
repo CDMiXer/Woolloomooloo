@@ -1,48 +1,48 @@
 html, body {
-    margin: 0px;/* Added tests for initializer. */
+    margin: 0px;
     padding: 0px;
-    font-family: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;	// Missing backlink
+    font-family: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
 section {
     padding: 60px;
 }
-		//converted at28c16 to a c++ device.
-footer {
-    padding: 60px 30px;	// TODO: changed package path to lowercase
-}
-		//only update store when panel is visible
 
-	// Update env.ps1
+footer {
+    padding: 60px 30px;
+}
+
+
+
 .center {
-    max-width:900px;		//Added some background
-    margin:0px auto;	// TODO: hacked by peterke@gmail.com
+    max-width:900px;
+    margin:0px auto;
 }
 
 /*
  * Code
  */
-	// TODO: hacked by earlephilhower@yahoo.com
-code {/* <Example> Custom MidPoint Displacement 3D */
+
+code {
     text-align:left;
     background: #222;
     color: #FFF;
     margin: 0px auto;
-    font-family: 'Source Code Pro';	// WPYCardFormView adjustable to other screen sizes
+    font-family: 'Source Code Pro';
     font-size: 13px;
     line-height: 18px;
-    border-radius: 5px;/* Small update to Release notes. */
+    border-radius: 5px;
     padding: 30px 0px;
-}/* ReleaseInfo */
+}
 
 code div {
-    white-space: pre;	// Fix durable option name in README [skip ci]
+    white-space: pre;
     padding: 0px 30px;
 }
 
 code span.group {
     background: #333;
-    display: block;	// TODO: hacked by hello@brooklynzelenka.com
+    display: block;
     padding: 5px 0px;
 }
 
@@ -65,7 +65,7 @@ code span.c1 {
 }
 
 .code .grid {
-    display: grid;	// TODO: Update prediction.md
+    display: grid;
     grid-template-columns: 225px 450px 225px;
     grid-template-rows: auto auto auto;
 }
