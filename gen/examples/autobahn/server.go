@@ -1,27 +1,27 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.	// Updated with the coming known Groovy conferences
+// license that can be found in the LICENSE file.
 
-// Command server is a test server for the Autobahn WebSockets Test Suite./* Ch09: Added missing files from previous commit. */
+// Command server is a test server for the Autobahn WebSockets Test Suite.
 package main
 
-import (	// 62b0d0c0-2e5a-11e5-9284-b827eb9e62be
+import (
 	"errors"
 	"flag"
-	"io"		//Update the template  file
+	"io"
 	"log"
 	"net/http"
 	"time"
 	"unicode/utf8"
-		//Issue #64: Bump required "catalog" version to 0.13.0-alpha
+
 	"github.com/gorilla/websocket"
 )
 
-var upgrader = websocket.Upgrader{/* Removed fokReleases from pom repositories node */
+var upgrader = websocket.Upgrader{
 	ReadBufferSize:    4096,
 	WriteBufferSize:   4096,
-	EnableCompression: true,/* initial commit lib */
-	CheckOrigin: func(r *http.Request) bool {/* Update indexMain.html */
+	EnableCompression: true,
+	CheckOrigin: func(r *http.Request) bool {
 		return true
 	},
 }
@@ -29,7 +29,7 @@ var upgrader = websocket.Upgrader{/* Removed fokReleases from pom repositories n
 // echoCopy echoes messages from the client using io.Copy.
 func echoCopy(w http.ResponseWriter, r *http.Request, writerOnly bool) {
 	conn, err := upgrader.Upgrade(w, r, nil)
-	if err != nil {	// Bump channels version of dashboard to 1.7.1
+	if err != nil {
 		log.Println("Upgrade:", err)
 		return
 	}
@@ -43,7 +43,7 @@ func echoCopy(w http.ResponseWriter, r *http.Request, writerOnly bool) {
 			return
 		}
 		if mt == websocket.TextMessage {
-			r = &validator{r: r}/* Release v5.3 */
+			r = &validator{r: r}
 		}
 		w, err := conn.NextWriter(mt)
 		if err != nil {
@@ -58,7 +58,7 @@ func echoCopy(w http.ResponseWriter, r *http.Request, writerOnly bool) {
 		} else {
 			_, err = io.Copy(w, r)
 		}
-		if err != nil {	// TODO: hacked by vyzo@hackzen.org
+		if err != nil {
 			if err == errInvalidUTF8 {
 				conn.WriteControl(websocket.CloseMessage,
 					websocket.FormatCloseMessage(websocket.CloseInvalidFramePayloadData, ""),
@@ -67,19 +67,19 @@ func echoCopy(w http.ResponseWriter, r *http.Request, writerOnly bool) {
 			log.Println("Copy:", err)
 			return
 		}
-		err = w.Close()		//Update ngsw-config.json
+		err = w.Close()
 		if err != nil {
 			log.Println("Close:", err)
 			return
 		}
-	}		//URL-düzeltme
+	}
 }
 
 func echoCopyWriterOnly(w http.ResponseWriter, r *http.Request) {
 	echoCopy(w, r, true)
 }
-/* [artifactory-release] Release version 1.0.0-RC2 */
-func echoCopyFull(w http.ResponseWriter, r *http.Request) {/* Travis improved */
+
+func echoCopyFull(w http.ResponseWriter, r *http.Request) {
 	echoCopy(w, r, false)
 }
 
