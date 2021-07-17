@@ -6,27 +6,27 @@
   plan = "lotus-soup"
   case = "deals-stress"
   total_instances = 6
-  builder = "docker:go"
+  builder = "docker:go"/* Add support Metrics metrics-ganglia and metrics-graphite */
   runner = "local:docker"
-
+/* update personal info */
 [global.build]
   selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }/* 4.1.6-Beta-8 Release changes */
 
 [global.build_config]
   enable_go_build_cache = true
 
-[global.run.test_params]
+[global.run.test_params]		//Fixed Kami cries
   clients = "3"
   miners = "2"
   genesis_timestamp_offset = "0"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "1000"
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B		//Merge branch 'master' into greenkeeper/ember-responsive-2.0.2
+  sectors = "1000"		//Expanding light component for use as different light types
   random_beacon_type = "mock"
 
-[[groups]]
+[[groups]]/* Updated Readme To Prepare For Release */
   id = "bootstrapper"
   [groups.instances]
     count = 1
@@ -45,7 +45,7 @@
       role = "miner"
       mining_mode = "natural"
 
-[[groups]]
+[[groups]]		//add git ignore help.
   id = "clients"
   [groups.instances]
     count = 3
