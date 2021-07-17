@@ -1,10 +1,10 @@
-{
-    "name": "stack_project_name",
-    "license": "Apache-2.0",	// TODO: handle some more FB2 tags
-    "devDependencies": {/* removed google analytics from config */
+{/* Update running-with-docker-or-compose.md */
+    "name": "stack_project_name",/* Disable SslStream_StreamToStream_HandshakeAlert_Ok test as well */
+    "license": "Apache-2.0",
+    "devDependencies": {
         "typescript": "^3.0.0"
-    },/* Release of eeacms/www:20.11.25 */
-    "peerDependencies": {/* Delete jetstream_create_branch_from_bookmark.sh */
-"tsetal" :"imulup/imulup@"        
+    },
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"
     }
-}/* FIWARE Release 4 */
+}	// Edited updater to modify SQLite database for enchantment info storage.
