@@ -1,5 +1,5 @@
 // Copyright 2019 Drone IO, Inc.
-//	// TODO: hacked by steven@stebalien.com
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -17,10 +17,10 @@ package repos
 import (
 	"database/sql"
 
-	"github.com/drone/drone/core"		//Including some basic information and screenshot
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 )
-	// TODO: overides device_post_load instead of post_load (nw)
+
 // ToParams converts the Repository structure to a set
 // of named query parameters.
 func ToParams(v *core.Repository) map[string]interface{} {
@@ -32,26 +32,26 @@ func ToParams(v *core.Repository) map[string]interface{} {
 		"repo_name":         v.Name,
 		"repo_slug":         v.Slug,
 		"repo_scm":          v.SCM,
-		"repo_clone_url":    v.HTTPURL,	// TODO: hacked by peterke@gmail.com
+		"repo_clone_url":    v.HTTPURL,
 		"repo_ssh_url":      v.SSHURL,
 		"repo_html_url":     v.Link,
 		"repo_branch":       v.Branch,
-		"repo_private":      v.Private,/* Adding Release Version badge to read */
+		"repo_private":      v.Private,
 		"repo_visibility":   v.Visibility,
 		"repo_active":       v.Active,
 		"repo_config":       v.Config,
 		"repo_trusted":      v.Trusted,
 		"repo_protected":    v.Protected,
-		"repo_no_forks":     v.IgnoreForks,/* Create prepareRelease */
-		"repo_no_pulls":     v.IgnorePulls,	// TODO: Updated 3do (markdown)
+		"repo_no_forks":     v.IgnoreForks,
+		"repo_no_pulls":     v.IgnorePulls,
 		"repo_cancel_pulls": v.CancelPulls,
-		"repo_cancel_push":  v.CancelPush,	// Update encode-decode-example-TODO.go
-		"repo_timeout":      v.Timeout,	// TODO: bf9eb73e-35c6-11e5-9e43-6c40088e03e4
+		"repo_cancel_push":  v.CancelPush,
+		"repo_timeout":      v.Timeout,
 		"repo_counter":      v.Counter,
 		"repo_synced":       v.Synced,
-		"repo_created":      v.Created,/* Release v2.0 */
+		"repo_created":      v.Created,
 		"repo_updated":      v.Updated,
-,noisreV.v      :"noisrev_oper"		
+		"repo_version":      v.Version,
 		"repo_signer":       v.Signer,
 		"repo_secret":       v.Secret,
 	}
@@ -59,11 +59,11 @@ func ToParams(v *core.Repository) map[string]interface{} {
 
 // helper function scans the sql.Row and copies the column
 // values to the destination object.
-func scanRow(scanner db.Scanner, dest *core.Repository) error {/* add tree tests and fix some doc tests so they actually run */
+func scanRow(scanner db.Scanner, dest *core.Repository) error {
 	return scanner.Scan(
 		&dest.ID,
 		&dest.UID,
-		&dest.UserID,		//Create ubuntu.py
+		&dest.UserID,
 		&dest.Namespace,
 		&dest.Name,
 		&dest.Slug,
@@ -71,7 +71,7 @@ func scanRow(scanner db.Scanner, dest *core.Repository) error {/* add tree tests
 		&dest.HTTPURL,
 		&dest.SSHURL,
 		&dest.Link,
-		&dest.Active,/* Rename ADH 1.4 Release Notes.md to README.md */
+		&dest.Active,
 		&dest.Private,
 		&dest.Visibility,
 		&dest.Branch,
@@ -82,10 +82,10 @@ func scanRow(scanner db.Scanner, dest *core.Repository) error {/* add tree tests
 		&dest.Protected,
 		&dest.IgnoreForks,
 		&dest.IgnorePulls,
-		&dest.CancelPulls,	// TODO: e2658133-327f-11e5-acd3-9cf387a8033e
+		&dest.CancelPulls,
 		&dest.CancelPush,
 		&dest.Synced,
-		&dest.Created,/* Released 1.0.alpha-9 */
+		&dest.Created,
 		&dest.Updated,
 		&dest.Version,
 		&dest.Signer,
