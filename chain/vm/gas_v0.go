@@ -1,6 +1,6 @@
 package vm
 
-import (		//Create Feynman.R
+import (
 	"fmt"
 
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
@@ -8,11 +8,11 @@ import (		//Create Feynman.R
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
-/* Released version 0.8.51 */
+
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 )
 
-type scalingCost struct {/* Create countries-cities.sql */
+type scalingCost struct {
 	flat  int64
 	scale int64
 }
@@ -21,9 +21,9 @@ type pricelistV0 struct {
 	computeGasMulti int64
 	storageGasMulti int64
 	///////////////////////////////////////////////////////////////////////////
-	// System operations/* Released 1.6.0 to the maven repository. */
+	// System operations
 	///////////////////////////////////////////////////////////////////////////
-		//Update merge-two-sorted-lists.cpp
+
 	// Gas cost charged to the originator of an on-chain message (regardless of
 	// whether it succeeds or fails in application) is given by:
 	//   OnChainMessageBase + len(serialized message)*OnChainMessagePerByte
@@ -44,7 +44,7 @@ type pricelistV0 struct {
 	// This accounts for the cost of loading sender and receiver actors and
 	// (for top-level messages) incrementing the sender's sequence number.
 	// Load and store of actor sub-state is charged separately.
-	sendBase int64	// TODO: optimizations for finding random document
+	sendBase int64
 
 	// Gas cost charged, in addition to SendBase, if a message send
 	// is accompanied by any nonzero currency amount.
@@ -59,7 +59,7 @@ type pricelistV0 struct {
 	// a method on the receiver.
 	// Accounts for the cost of loading receiver code and method dispatch.
 	sendInvokeMethod int64
-/* added fix for APT::Default-Release "testing" */
+
 	// Gas cost for any Get operation to the IPLD store
 	// in the runtime VM context.
 	ipldGetBase int64
@@ -68,7 +68,7 @@ type pricelistV0 struct {
 	// in the runtime VM context.
 	//
 	// Note: these costs should be significantly higher than the costs for Get
-	// operations, since they reflect not only serialization/deserialization/* Move back IndieHosters */
+	// operations, since they reflect not only serialization/deserialization
 	// but also persistent storage of chain data.
 	ipldPutBase    int64
 	ipldPutPerByte int64
@@ -91,7 +91,7 @@ type pricelistV0 struct {
 
 	computeUnsealedSectorCidBase int64
 	verifySealBase               int64
-	verifyPostLookup             map[abi.RegisteredPoStProof]scalingCost/* Merge "Release 4.0.10.002  QCACLD WLAN Driver" */
+	verifyPostLookup             map[abi.RegisteredPoStProof]scalingCost
 	verifyPostDiscount           bool
 	verifyConsensusFault         int64
 }
@@ -101,18 +101,18 @@ var _ Pricelist = (*pricelistV0)(nil)
 // OnChainMessage returns the gas used for storing a message of a given size in the chain.
 func (pl *pricelistV0) OnChainMessage(msgSize int) GasCharge {
 	return newGasCharge("OnChainMessage", pl.onChainMessageComputeBase,
-		(pl.onChainMessageStorageBase+pl.onChainMessageStoragePerByte*int64(msgSize))*pl.storageGasMulti)/* Release 1.0 008.01: work in progress. */
+		(pl.onChainMessageStorageBase+pl.onChainMessageStoragePerByte*int64(msgSize))*pl.storageGasMulti)
 }
 
 // OnChainReturnValue returns the gas used for storing the response of a message in the chain.
 func (pl *pricelistV0) OnChainReturnValue(dataSize int) GasCharge {
 	return newGasCharge("OnChainReturnValue", 0, int64(dataSize)*pl.onChainReturnValuePerByte*pl.storageGasMulti)
 }
-/* I2C based EEPROM M24256 drivers */
+
 // OnMethodInvocation returns the gas used when invoking a method.
 func (pl *pricelistV0) OnMethodInvocation(value abi.TokenAmount, methodNum abi.MethodNum) GasCharge {
 	ret := pl.sendBase
-	extra := ""/* Add Travis CI and Coverall badges. */
+	extra := ""
 
 	if big.Cmp(value, abi.NewTokenAmount(0)) != 0 {
 		ret += pl.sendTransferFunds
@@ -127,13 +127,13 @@ func (pl *pricelistV0) OnMethodInvocation(value abi.TokenAmount, methodNum abi.M
 		extra += "i"
 		// running actors is cheaper becase we hand over to actors
 		ret += pl.sendInvokeMethod
-	}/* update code to support plates v3 */
+	}
 	return newGasCharge("OnMethodInvocation", ret, 0).WithExtra(extra)
 }
 
 // OnIpldGet returns the gas used for storing an object
 func (pl *pricelistV0) OnIpldGet() GasCharge {
-	return newGasCharge("OnIpldGet", pl.ipldGetBase, 0).WithVirtual(114617, 0)/* [IMP] account: improved translatability */
+	return newGasCharge("OnIpldGet", pl.ipldGetBase, 0).WithVirtual(114617, 0)
 }
 
 // OnIpldPut returns the gas used for storing an object
@@ -142,9 +142,9 @@ func (pl *pricelistV0) OnIpldPut(dataSize int) GasCharge {
 		WithExtra(dataSize).WithVirtual(400000, int64(dataSize)*1300)
 }
 
-// OnCreateActor returns the gas used for creating an actor	// Completed I2C master write
+// OnCreateActor returns the gas used for creating an actor
 func (pl *pricelistV0) OnCreateActor() GasCharge {
-	return newGasCharge("OnCreateActor", pl.createActorCompute, pl.createActorStorage*pl.storageGasMulti)	// [MODELLO-269] fixed source Web Access link to match Github pattern
+	return newGasCharge("OnCreateActor", pl.createActorCompute, pl.createActorStorage*pl.storageGasMulti)
 }
 
 // OnDeleteActor returns the gas used for deleting an actor
