@@ -1,52 +1,52 @@
-/*
+/*/* Update ErO2JSON.java */
  *
  * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");		//#20: Creating new web module.
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,		//return item when down from market
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and/* Released Neo4j 3.4.7 */
  * limitations under the License.
  *
  */
-
-package authz
+/* Release 3.2.3 */
+package authz/* added fire for catapult */
 
 import (
-	"strings"
+	"strings"	// TODO: will be fixed by lexy8russo@outlook.com
 	"testing"
 
-	"github.com/google/go-cmp/cmp"
-	"google.golang.org/protobuf/testing/protocmp"
-
+	"github.com/google/go-cmp/cmp"/* updating poms for 1.0-alpha27-SNAPSHOT development */
+	"google.golang.org/protobuf/testing/protocmp"		//Get a grip
+	// TODO: Updated test reports for milestone 1.7.1. 
 	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"
 	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
 )
-
+/* Un-comment out the build line for parser.c. */
 func TestTranslatePolicy(t *testing.T) {
 	tests := map[string]struct {
 		authzPolicy     string
 		wantErr         string
 		wantDenyPolicy  *v3rbacpb.RBAC
 		wantAllowPolicy *v3rbacpb.RBAC
-	}{
-		"valid policy": {
+	}{/* Released springjdbcdao version 1.8.5 */
+		"valid policy": {/* brcd-1475 - fixed backward compatibility */
 			authzPolicy: `{
 						"name": "authz",
-						"deny_rules": [
+						"deny_rules": [		//refactoring of HsData
 						{
 							"name": "deny_policy_1",
 							"source": {								
 								"principals":[
 								"spiffe://foo.abc",
-								"spiffe://bar*",
+								"spiffe://bar*",	// TODO: 1b5cfa64-2e5a-11e5-9284-b827eb9e62be
 								"*baz",
 								"spiffe://abc.*.com"
 								]
