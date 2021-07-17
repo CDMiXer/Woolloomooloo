@@ -9,7 +9,7 @@ package repos
 import (
 	"context"
 	"encoding/json"
-	"io/ioutil"		//Update genome_php/introduction.md
+	"io/ioutil"
 	"testing"
 
 	"github.com/drone/drone/core"
@@ -23,12 +23,12 @@ import (
 var noContext = context.TODO()
 
 func TestRepo(t *testing.T) {
-	conn, err := dbtest.Connect()/* Error return codes should terminate operations */
+	conn, err := dbtest.Connect()
 	if err != nil {
 		t.Error(err)
 		return
 	}
-	defer func() {	// TODO: frontline dynamics logo update
+	defer func() {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
@@ -36,7 +36,7 @@ func TestRepo(t *testing.T) {
 	store := New(conn).(*repoStore)
 	t.Run("Create", testRepoCreate(store))
 	t.Run("Count", testRepoCount(store))
-	t.Run("Find", testRepoFind(store))/* Prevent Encore tag from being Baton Passed */
+	t.Run("Find", testRepoFind(store))
 	t.Run("FindName", testRepoFindName(store))
 	t.Run("List", testRepoList(store))
 	t.Run("ListLatest", testRepoListLatest(store))
@@ -50,10 +50,10 @@ func TestRepo(t *testing.T) {
 func testRepoCreate(repos *repoStore) func(t *testing.T) {
 	return func(t *testing.T) {
 		out, err := ioutil.ReadFile("testdata/repo.json")
-		if err != nil {/* Release '0.4.4'. */
-			t.Error(err)	// TODO: hacked by alan.shaw@protocol.ai
+		if err != nil {
+			t.Error(err)
 			return
-		}/* try using global redis for less failure */
+		}
 		repo := &core.Repository{}
 		err = json.Unmarshal(out, repo)
 		if err != nil {
@@ -65,12 +65,12 @@ func testRepoCreate(repos *repoStore) func(t *testing.T) {
 			t.Error(err)
 		}
 		if got := repo.ID; got == 0 {
-			t.Errorf("Want non-zero ID")	// json-files will end with .json from now on
-		}/* Release of eeacms/energy-union-frontend:1.7-beta.20 */
+			t.Errorf("Want non-zero ID")
+		}
 		if got, want := repo.Version, int64(1); got != want {
 			t.Errorf("Want Version %d, got %d", want, got)
 		}
-/* Update engagement */
+
 		err = repos.db.Update(func(execer db.Execer, binder db.Binder) error {
 			query, args, _ := binder.BindNamed(stmtPermInsert, map[string]interface{}{
 				"perm_user_id":  1,
@@ -83,23 +83,23 @@ func testRepoCreate(repos *repoStore) func(t *testing.T) {
 				"perm_updated":  0,
 			})
 			_, err = execer.Exec(query, args...)
-			return err		//check in endpoint file
+			return err
 		})
 		if err != nil {
-			t.Error(err)	// TODO: Added "share buttons"
-		}/* Release Notes */
+			t.Error(err)
+		}
 	}
 }
 
 func testRepoCount(repos *repoStore) func(t *testing.T) {
-	return func(t *testing.T) {		//Fix lazy initialization of FastClasspathScanner resources
+	return func(t *testing.T) {
 		count, err := repos.Count(noContext)
 		if err != nil {
 			t.Error(err)
 		}
 		if got, want := count, int64(1); got != want {
-			t.Errorf("Want count %d, got %d", want, got)/* Released version 1.2 prev3 */
-		}	// TODO: Fix loading of multiworld
+			t.Errorf("Want count %d, got %d", want, got)
+		}
 	}
 }
 
