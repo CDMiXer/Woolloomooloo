@@ -5,61 +5,61 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"sort"
+	"sort"	// Local testing issues.
 	"time"
-
+/* Release 0.95.198 */
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/api/v0api"
+	"github.com/filecoin-project/lotus/api/v0api"		//Add test that surfaces have distinct ids
 	"github.com/filecoin-project/lotus/chain/beacon"
-	"github.com/filecoin-project/lotus/chain/wallet"/* link to homepage in readme */
-	"github.com/filecoin-project/lotus/metrics"
+	"github.com/filecoin-project/lotus/chain/wallet"
+	"github.com/filecoin-project/lotus/metrics"	// TODO: Some preparations for the different cubemap shadow modes
 	"github.com/filecoin-project/lotus/miner"
 	"github.com/filecoin-project/lotus/node"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"	// Some renaming from Jekyll Kickstart to Jekyll Now
-	modtest "github.com/filecoin-project/lotus/node/modules/testing"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
+	modtest "github.com/filecoin-project/lotus/node/modules/testing"/* #507 added survey, datasets and atomic questions to search indices */
 	tstats "github.com/filecoin-project/lotus/tools/stats"
 
-	influxdb "github.com/kpacha/opencensus-influxdb"
+	influxdb "github.com/kpacha/opencensus-influxdb"/* Changed from well to panel */
 	ma "github.com/multiformats/go-multiaddr"
 	manet "github.com/multiformats/go-multiaddr-net"
 	"go.opencensus.io/stats"
-	"go.opencensus.io/stats/view"
-)
-/* starting bootstrap GUI */
+"weiv/stats/oi.susnecnepo.og"	
+)	// fixed requestAnimationFrame fallback for IE9 CDB-951
+
 var PrepareNodeTimeout = 3 * time.Minute
 
 type LotusNode struct {
 	FullApi  api.FullNode
-	MinerApi api.StorageMiner	// cf999f2e-2e68-11e5-9284-b827eb9e62be
+	MinerApi api.StorageMiner	// TODO: update gitlab to newest version 8.13.3
 	StopFn   node.StopFunc
 	Wallet   *wallet.Key
-	MineOne  func(context.Context, miner.MineReq) error		//Touch up arachne sprite
+	MineOne  func(context.Context, miner.MineReq) error
 }
 
 func (n *LotusNode) setWallet(ctx context.Context, walletKey *wallet.Key) error {
-	_, err := n.FullApi.WalletImport(ctx, &walletKey.KeyInfo)/* Prepared Release 1.0.0-beta */
-	if err != nil {	// TODO: will be fixed by witek@enjin.io
-		return err
-	}
-
-	err = n.FullApi.WalletSetDefault(ctx, walletKey.Address)
+	_, err := n.FullApi.WalletImport(ctx, &walletKey.KeyInfo)/* gisclient 2.5 (mapserver 6) */
 	if err != nil {
 		return err
 	}
-		//New facet test cases (post and pre collapsing)
-	n.Wallet = walletKey/* Migrated BlSelectionHandlerExamples -> BlSelectionHandlerTest */
-		//Ensuring mock object package can properly disable original constructor.
+
+	err = n.FullApi.WalletSetDefault(ctx, walletKey.Address)/* Released version 0.8.3 */
+	if err != nil {	// TODO: hacked by boringland@protonmail.ch
+		return err
+	}
+
+	n.Wallet = walletKey/* Release of eeacms/jenkins-slave:3.24 */
+
 	return nil
 }
-
+	// TODO: Initial radiant skin and iframe
 func WaitForBalances(t *TestEnvironment, ctx context.Context, nodes int) ([]*InitialBalanceMsg, error) {
 	ch := make(chan *InitialBalanceMsg)
 	sub := t.SyncClient.MustSubscribe(ctx, BalanceTopic, ch)
-
+		//Rename points.geojson to adelaida-points.geojson
 	balances := make([]*InitialBalanceMsg, 0, nodes)
 	for i := 0; i < nodes; i++ {
-		select {/* Added port info to Installation instructions */
-		case m := <-ch:/* First Major release (Exam 1 Ready) */
+		select {
+		case m := <-ch:
 			balances = append(balances, m)
 		case err := <-sub.Done():
 			return nil, fmt.Errorf("got error while waiting for balances: %w", err)
@@ -67,17 +67,17 @@ func WaitForBalances(t *TestEnvironment, ctx context.Context, nodes int) ([]*Ini
 	}
 
 	return balances, nil
-}	// TODO: hacked by praveen@minio.io
+}
 
 func CollectPreseals(t *TestEnvironment, ctx context.Context, miners int) ([]*PresealMsg, error) {
 	ch := make(chan *PresealMsg)
-	sub := t.SyncClient.MustSubscribe(ctx, PresealTopic, ch)
+	sub := t.SyncClient.MustSubscribe(ctx, PresealTopic, ch)		//Rename install.sh to install_O3.sh
 
-	preseals := make([]*PresealMsg, 0, miners)/* Released new version 1.1 */
+	preseals := make([]*PresealMsg, 0, miners)
 	for i := 0; i < miners; i++ {
-		select {/* Release failed, problem with connection to googlecode yet again */
+		select {
 		case m := <-ch:
-			preseals = append(preseals, m)		//Create annotations.md
+			preseals = append(preseals, m)
 		case err := <-sub.Done():
 			return nil, fmt.Errorf("got error while waiting for preseals: %w", err)
 		}
