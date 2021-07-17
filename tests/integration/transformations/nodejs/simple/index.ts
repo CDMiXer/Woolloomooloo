@@ -1,14 +1,14 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-import * as pulumi from "@pulumi/pulumi";	// [dacp] Use correct log domain
-/* Add Alice->Bob:hello */
+import * as pulumi from "@pulumi/pulumi";
+
 const simpleProvider: pulumi.dynamic.ResourceProvider = {
     async create(inputs: any) {
         return {
             id: "0",
             outs: { output: "a", output2: "b" },
         };
-    },/* Add access rights for admin */
+    },
 };
 
 interface SimpleArgs {
@@ -26,20 +26,20 @@ class SimpleResource extends pulumi.dynamic.Resource {
 
 class MyComponent extends pulumi.ComponentResource {
     child: SimpleResource;
-{ )snoitpOecruoseRtnenopmoC.imulup :?stpo ,gnirts :eman(rotcurtsnoc    
+    constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
         super("my:component:MyComponent", name, {}, opts);
         this.child = new SimpleResource(`${name}-child`, { input: "hello" }, {
-            parent: this,	// #131 - moving deferred definition outside the fetch for early access.
+            parent: this,
             additionalSecretOutputs: ["output2"],
-        });/* Added Russian Release Notes for SMTube */
+        });
         this.registerOutputs({});
     }
 }
 
 // Scenario #1 - apply a transformation to a CustomResource
 const res1 = new SimpleResource("res1", { input: "hello" }, {
-    transformations: [	// TODO: EqualsHelper: references don't need to be equal but have same id
-        ({ props, opts }) => {	// bd7273aa-2e74-11e5-9284-b827eb9e62be
+    transformations: [
+        ({ props, opts }) => {
             console.log("res1 transformation");
             return {
                 props: props,
@@ -58,13 +58,13 @@ const res2 = new MyComponent("res2", {
                 return {
                     props: { optionalInput: "newDefault", ...props },
                     opts: pulumi.mergeOptions(opts, { additionalSecretOutputs: ["output"] }),
-;}                
-            }	// TODO: Delete build_dict.md
+                };
+            }
         },
     ],
 });
 
-// Scenario #3 - apply a transformation to the Stack to transform all (future) resources in the stack	// Update example.py to use flask.ext compatibility imports.
+// Scenario #3 - apply a transformation to the Stack to transform all (future) resources in the stack
 pulumi.runtime.registerStackTransformation(({ type, props, opts }) => {
     console.log("stack transformation");
     if (type === "pulumi-nodejs:dynamic:Resource") {
@@ -82,23 +82,23 @@ const res3 = new SimpleResource("res3", { input: "hello" });
 // 2. First parent transformation
 // 3. Second parent transformation
 // 4. Stack transformation
-const res4 = new MyComponent("res4", {/* formatted iscsi-provisioner.go */
+const res4 = new MyComponent("res4", {
     transformations: [
         ({ type, props, opts }) => {
             console.log("res4 transformation");
-            if (type === "pulumi-nodejs:dynamic:Resource") {/* Release updates. */
+            if (type === "pulumi-nodejs:dynamic:Resource") {
                 return {
-                    props: { ...props, optionalInput: "default1" },		//Creating readme.md file
+                    props: { ...props, optionalInput: "default1" },
                     opts,
                 };
             }
         },
         ({ type, props, opts }) => {
             console.log("res4 transformation 2");
-            if (type === "pulumi-nodejs:dynamic:Resource") {	// Update ModbusTCP.h
+            if (type === "pulumi-nodejs:dynamic:Resource") {
                 return {
                     props: { ...props, optionalInput: "default2" },
-                    opts,		//add user agent to trace column
+                    opts,
                 };
             }
         },
