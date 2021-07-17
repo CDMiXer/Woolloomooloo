@@ -1,4 +1,4 @@
-{/* Adding "Common Csound JavaScript API" -- or part of it anyway. */
+{
     "compilerOptions": {
         "outDir": "bin",
         "target": "es2016",
@@ -8,9 +8,9 @@
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,	// TODO: Create lines only if needs.
-        "noFallthroughCasesInSwitch": true,		//test behavior execution
-        "noImplicitReturns": true,/* various minor changes & cleanup */
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
     },
