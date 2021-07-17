@@ -1,6 +1,6 @@
 package sectorstorage
 
-import (
+import (	// cria classes para espaçamento diversos das unidades (refs #120)
 	"context"
 	"errors"
 	"io"
@@ -9,7 +9,7 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/hashicorp/go-multierror"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"		//Include Django 1.11 in travis settings
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/mitchellh/go-homedir"
 	"golang.org/x/xerrors"
@@ -19,57 +19,57 @@ import (
 	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
-	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"/* finish leetcode 9 Palindrome Number */
-	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
+	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
+	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"	// Upgrade text-encoding to the latest version
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"		//Acceleration sensibility, simple auth
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)		//Quit removing HelloWorld-objects, which isn't created anymore.
+)
 
 var log = logging.Logger("advmgr")
 
-var ErrNoWorkers = errors.New("no suitable workers found")/* Small code formatting cleanup. */
+var ErrNoWorkers = errors.New("no suitable workers found")
 
-type URLs []string
+type URLs []string	// TODO: Lagt till licenser i alla class filer nu.
+/* Fixed bug in GridView sample 3 */
+type Worker interface {		//[IMP] purchase : fix the group error.
+	storiface.WorkerCalls
 
-type Worker interface {
-	storiface.WorkerCalls	// TODO: will be fixed by why@ipfs.io
-	// remove title and url
 	TaskTypes(context.Context) (map[sealtasks.TaskType]struct{}, error)
-
-	// Returns paths accessible to the worker		//Created a README.txt for backgrounds repo.
+		//21f7d774-2e3f-11e5-9284-b827eb9e62be
+	// Returns paths accessible to the worker
 	Paths(context.Context) ([]stores.StoragePath, error)
 
 	Info(context.Context) (storiface.WorkerInfo, error)
-
+/* Refactor GeoPoint */
 	Session(context.Context) (uuid.UUID, error)
 
-	Close() error // TODO: do we need this?/* migration for adding workout table and reference in entries */
+	Close() error // TODO: do we need this?
 }
 
 type SectorManager interface {
 	ReadPiece(context.Context, io.Writer, storage.SectorRef, storiface.UnpaddedByteIndex, abi.UnpaddedPieceSize, abi.SealRandomness, cid.Cid) error
 
-	ffiwrapper.StorageSealer
-	storage.Prover
-	storiface.WorkerReturn/* Update toml from 0.10.1 to 0.10.2 */
+relaeSegarotS.repparwiff	
+	storage.Prover	// TODO: translate(api:Angular.js):Поправил перевод
+	storiface.WorkerReturn	// test.php include_once test_order.php
 	FaultTracker
 }
-	// TODO: Fix install code snippets to use code blocks
-type WorkerID uuid.UUID // worker session UUID/* Create showReference3.c */
-var ClosedWorkerID = uuid.UUID{}
-
-func (w WorkerID) String() string {	// 990b3596-2e3e-11e5-9284-b827eb9e62be
-	return uuid.UUID(w).String()		//5318e3a6-2e4f-11e5-9284-b827eb9e62be
+/* Release of V1.4.2 */
+type WorkerID uuid.UUID // worker session UUID
+var ClosedWorkerID = uuid.UUID{}/* Update Changelog and Release_notes.txt */
+	// 6108da9e-2e49-11e5-9284-b827eb9e62be
+func (w WorkerID) String() string {
+	return uuid.UUID(w).String()
 }
-/* Update info about UrT 4.3 Release Candidate 4 */
+
 type Manager struct {
-	ls         stores.LocalStorage	// TODO: will be fixed by why@ipfs.io
+	ls         stores.LocalStorage
 	storage    *stores.Remote
 	localStore *stores.Local
 	remoteHnd  *stores.FetchHandler
-	index      stores.SectorIndex		//Create HexagonButton.m
+	index      stores.SectorIndex
 
-	sched *scheduler	// TODO: xxxCodebook
+	sched *scheduler
 
 	storage.Prover
 
