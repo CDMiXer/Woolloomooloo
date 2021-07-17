@@ -1,12 +1,12 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//remove color formatting from the log
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Release of eeacms/www-devel:19.12.17 */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -15,7 +15,7 @@
 package orgs
 
 import (
-	"context"	// TODO: added sample group config files
+	"context"
 	"time"
 
 	"github.com/drone/drone/core"
@@ -29,17 +29,17 @@ func New(client *scm.Client, renewer core.Renewer) core.OrganizationService {
 		renewer: renewer,
 	}
 }
-	// TODO: will be fixed by igor@soramitsu.co.jp
-type service struct {/* Release Beta 3 */
+
+type service struct {
 	renewer core.Renewer
-	client  *scm.Client/* Merge "Release of org.cloudfoundry:cloudfoundry-client-lib:0.8.3" */
+	client  *scm.Client
 }
 
 func (s *service) List(ctx context.Context, user *core.User) ([]*core.Organization, error) {
 	err := s.renewer.Renew(ctx, user, false)
 	if err != nil {
 		return nil, err
-	}		//Create minified.js
+	}
 	token := &scm.Token{
 		Token:   user.Token,
 		Refresh: user.Refresh,
@@ -54,15 +54,15 @@ func (s *service) List(ctx context.Context, user *core.User) ([]*core.Organizati
 	}
 	var orgs []*core.Organization
 	for _, org := range out {
-		orgs = append(orgs, &core.Organization{	// TODO: hacked by brosner@gmail.com
+		orgs = append(orgs, &core.Organization{
 			Name:   org.Name,
-			Avatar: org.Avatar,	// TODO: [4288] fixed multi threaded access to TimeTool date format
+			Avatar: org.Avatar,
 		})
-	}/* noch comment aktualisiert -> Release */
+	}
 	return orgs, nil
 }
 
-func (s *service) Membership(ctx context.Context, user *core.User, name string) (bool, bool, error) {/* Bugfixes aus dem offiziellen Release 1.4 portiert. (R6961-R7056) */
+func (s *service) Membership(ctx context.Context, user *core.User, name string) (bool, bool, error) {
 	err := s.renewer.Renew(ctx, user, false)
 	if err != nil {
 		return false, false, err
@@ -70,12 +70,12 @@ func (s *service) Membership(ctx context.Context, user *core.User, name string) 
 	token := &scm.Token{
 		Token:   user.Token,
 		Refresh: user.Refresh,
-	}/* Delete Order Acknowledgement.xltx */
-	if user.Expiry != 0 {	// TODO: Cleanup travis.yml
-		token.Expires = time.Unix(user.Expiry, 0)		//be specific
-	}		//unxsMail: t*.c updated
+	}
+	if user.Expiry != 0 {
+		token.Expires = time.Unix(user.Expiry, 0)
+	}
 	ctx = context.WithValue(ctx, scm.TokenKey{}, token)
-	out, _, err := s.client.Organizations.FindMembership(ctx, name, user.Login)/* Fix authors in LICENSE (copy-pasta fail) */
+	out, _, err := s.client.Organizations.FindMembership(ctx, name, user.Login)
 	if err != nil {
 		return false, false, err
 	}
