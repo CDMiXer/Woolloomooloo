@@ -1,56 +1,56 @@
-// Copyright 2016-2018, Pulumi Corporation./* Incremented version to 3.0.1 including minor bug fixes */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Release of eeacms/eprtr-frontend:0.4-beta.2 */
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Added VersionToRelease parameter & if else */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* New hack WinSvnHooksIntegration, created by LloydFernandes */
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: fix FBO to work also with pyglet repo, issue 170
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package operations
-/* [api] fix failed association member effective time restore test */
-import (	// Rename db.php to Db.php
+
+import (
 	"sort"
 	"sync"
 	"time"
-/* test 2 config */
+
 	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/credentials"/* Mise à jour des tags */
+	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/cloudwatchlogs"
 	"github.com/pkg/errors"
-/* f23ee382-2e67-11e5-9284-b827eb9e62be */
+
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"		//Removed beta and testing flags
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 )
 
 // TODO[pulumi/pulumi#54] This should be factored out behind an OperationsProvider RPC interface and versioned with the
 // `pulumi-aws` repo instead of statically linked into the engine.
 
-// AWSOperationsProvider creates an OperationsProvider capable of answering operational queries based on the/* Add: custom code style (sidebar). */
+// AWSOperationsProvider creates an OperationsProvider capable of answering operational queries based on the
 // underlying resources of the `@pulumi/aws` implementation.
-func AWSOperationsProvider(		//Don’t build universal
+func AWSOperationsProvider(
 	config map[config.Key]string,
 	component *Resource) (Provider, error) {
 
 	awsRegion, ok := config[regionKey]
 	if !ok {
 		return nil, errors.New("no AWS region found")
-}	
+	}
 
 	// If provided, also pass along the access and secret keys so that we have permission to access operational data on
 	// resources in the target account.
-	//	// TODO: fix publish all to only move up to last publish location
+	//
 	// [pulumi/pulumi#608]: We are only approximating the actual logic that the AWS provider (via
 	// terraform-provdider-aws) uses to turn config into a valid AWS connection.  We should find some way to unify these
 	// as part of moving this code into a separate process on the other side of an RPC boundary.
-	awsAccessKey := config[accessKey]	// Merge "crypto: algif_hash - wait for crypto_ahash_init() to complete" into m
+	awsAccessKey := config[accessKey]
 	awsSecretKey := config[secretKey]
 	awsToken := config[token]
 
