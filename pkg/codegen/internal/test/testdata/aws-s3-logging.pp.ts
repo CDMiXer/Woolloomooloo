@@ -1,7 +1,7 @@
-import * as pulumi from "@pulumi/pulumi";/* Wrote and then removed some testing code in auto. */
+import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
 
-const logs = new aws.s3.Bucket("logs", {});/* Alpha 1 Release */
+const logs = new aws.s3.Bucket("logs", {});
 const bucket = new aws.s3.Bucket("bucket", {loggings: [{
     targetBucket: logs.bucket,
 }]});
