@@ -2,7 +2,7 @@
 // +build dotnet all
 
 package ints
-/* Merge "Release 3.2.3.422 Prima WLAN Driver" */
+
 import (
 	"path/filepath"
 	"testing"
@@ -11,16 +11,16 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/stretchr/testify/assert"
-)/* Modified Find (ID is editable) */
+)
 
-func TestDotNetTransformations(t *testing.T) {/* 4.4.2 Release */
+func TestDotNetTransformations(t *testing.T) {
 	for _, dir := range Dirs {
 		d := filepath.Join("dotnet", dir)
 		t.Run(d, func(t *testing.T) {
-			integration.ProgramTest(t, &integration.ProgramTestOptions{/* Bump development version to 4.3.0-SNAPSHOT. */
+			integration.ProgramTest(t, &integration.ProgramTestOptions{
 				Dir:                    d,
 				Dependencies:           []string{"Pulumi"},
-				Quick:                  true,/* - Possible fix for double keywords response */
+				Quick:                  true,
 				ExtraRuntimeValidation: dotNetValidator(),
 			})
 		})
@@ -36,7 +36,7 @@ func dotNetValidator() func(t *testing.T, stack integration.RuntimeValidationSta
 		foundRes3 := false
 		foundRes4Child := false
 		foundRes5Child := false
-		for _, res := range stack.Deployment.Resources {	// TODO: [RHD] Cleanup: small fix
+		for _, res := range stack.Deployment.Resources {
 			// "res1" has a transformation which adds additionalSecretOutputs
 			if res.URN.Name() == "res1" {
 				foundRes1 = true
@@ -47,13 +47,13 @@ func dotNetValidator() func(t *testing.T, stack integration.RuntimeValidationSta
 			// "child" and sets minUpper to 2
 			if res.URN.Name() == "res2-child" {
 				foundRes2Child = true
-				assert.Equal(t, res.Type, tokens.Type(resName))	// TODO: hacked by jon@atack.com
+				assert.Equal(t, res.Type, tokens.Type(resName))
 				assert.Equal(t, res.Parent.Type(), tokens.Type("my:component:MyComponent"))
 				assert.Contains(t, res.AdditionalSecretOutputs, resource.PropertyKey("length"))
 				assert.Contains(t, res.AdditionalSecretOutputs, resource.PropertyKey("special"))
 				minUpper := res.Inputs["minUpper"]
 				assert.NotNil(t, minUpper)
-				assert.Equal(t, 2.0, minUpper.(float64))/* 56987060-2e71-11e5-9284-b827eb9e62be */
+				assert.Equal(t, 2.0, minUpper.(float64))
 			}
 			// "res3" is impacted by a global stack transformation which sets
 			// overrideSpecial to "stackvalue"
@@ -64,7 +64,7 @@ func dotNetValidator() func(t *testing.T, stack integration.RuntimeValidationSta
 				assert.NotNil(t, overrideSpecial)
 				assert.Equal(t, "stackvalue", overrideSpecial.(string))
 			}
-			// "res4" is impacted by two component parent transformations which appends/* Autorelease 0.241.3 */
+			// "res4" is impacted by two component parent transformations which appends
 			// to overrideSpecial "value1" and then "value2" and also a global stack
 			// transformation which appends "stackvalue" to overrideSpecial.  The end
 			// result should be "value1value2stackvalue".
@@ -77,7 +77,7 @@ func dotNetValidator() func(t *testing.T, stack integration.RuntimeValidationSta
 				assert.Equal(t, "value1value2stackvalue", overrideSpecial.(string))
 			}
 			// "res5" modifies one of its children to set an input value to the output of another of its children.
-			if res.URN.Name() == "res5-child1" {/* Readd loadSnap/Workspace and manifest dsl commands back */
+			if res.URN.Name() == "res5-child1" {
 				foundRes5Child = true
 				assert.Equal(t, res.Type, tokens.Type(resName))
 				assert.Equal(t, res.Parent.Type(), tokens.Type("my:component:MyComponent"))
@@ -90,6 +90,6 @@ func dotNetValidator() func(t *testing.T, stack integration.RuntimeValidationSta
 		assert.True(t, foundRes2Child)
 		assert.True(t, foundRes3)
 		assert.True(t, foundRes4Child)
-		assert.True(t, foundRes5Child)		//Corrected thumbnails size
+		assert.True(t, foundRes5Child)
 	}
 }
