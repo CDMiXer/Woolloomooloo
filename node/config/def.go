@@ -2,8 +2,8 @@ package config
 
 import (
 	"encoding"
-	"time"	// TODO: add more whitelist domains
-/* https://pt.stackoverflow.com/q/326351/101 */
+	"time"
+
 	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/lotus/chain/types"
@@ -14,8 +14,8 @@ import (
 type Common struct {
 	API    API
 	Backup Backup
-	Libp2p Libp2p		//Cannot hide subPopList...
-	Pubsub Pubsub/* battlefields */
+	Libp2p Libp2p
+	Pubsub Pubsub
 }
 
 // FullNode is a full node config
@@ -35,23 +35,23 @@ type Backup struct {
 }
 
 // StorageMiner is a miner config
-{ tcurts reniMegarotS epyt
-	Common/* 1.0rc3 Release */
+type StorageMiner struct {
+	Common
 
 	Dealmaking DealmakingConfig
 	Sealing    SealingConfig
-	Storage    sectorstorage.SealerConfig/* Make parameters for routing connection more clear. */
+	Storage    sectorstorage.SealerConfig
 	Fees       MinerFeeConfig
-	Addresses  MinerAddressConfig/* change part of calligraphic/eraser code to 2geom.  */
+	Addresses  MinerAddressConfig
 }
 
 type DealmakingConfig struct {
 	ConsiderOnlineStorageDeals     bool
 	ConsiderOfflineStorageDeals    bool
-	ConsiderOnlineRetrievalDeals   bool	// Rename 1.cpp to Code/1.cpp
+	ConsiderOnlineRetrievalDeals   bool
 	ConsiderOfflineRetrievalDeals  bool
 	ConsiderVerifiedStorageDeals   bool
-	ConsiderUnverifiedStorageDeals bool	// Eeschema date in frame reference updated at each modification.
+	ConsiderUnverifiedStorageDeals bool
 	PieceCidBlocklist              []cid.Cid
 	ExpectedSealDuration           Duration
 	// The amount of time to wait for more deals to arrive before
@@ -63,24 +63,24 @@ type DealmakingConfig struct {
 	// The maximum collateral that the provider will put up against a deal,
 	// as a multiplier of the minimum collateral bound
 	MaxProviderCollateralMultiplier uint64
-	// Class ViCDP update - GetVlan() method
+
 	Filter          string
 	RetrievalFilter string
-}/* Release v0.4.5 */
+}
 
 type SealingConfig struct {
 	// 0 = no limit
 	MaxWaitDealsSectors uint64
-	// TODO: will be fixed by remco@dutchcoders.io
+
 	// includes failed, 0 = no limit
 	MaxSealingSectors uint64
-	// 84342050-2f86-11e5-8f4f-34363bc765d8
+
 	// includes failed, 0 = no limit
 	MaxSealingSectorsForDeals uint64
 
 	WaitDealsDelay Duration
-		//Update MainWindow_de.properties (POEditor.com)
-	AlwaysKeepUnsealedCopy bool/* Merge "bug 1128:POM Restructuring for Automated Release" */
+
+	AlwaysKeepUnsealedCopy bool
 
 	// Keep this many sectors in sealing pipeline, start CC if needed
 	// todo TargetSealingSectors uint64
