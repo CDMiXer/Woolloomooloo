@@ -1,37 +1,37 @@
 package genesis
 
 import (
-	"context"
+	"context"		//Bump major version
 	"crypto/rand"
 	"encoding/json"
 	"fmt"
-
+	// cooArclhMxEJ5BTqFKYBXjoKAzlr8Onr
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
 	"github.com/filecoin-project/lotus/journal"
 
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
-	cbor "github.com/ipfs/go-ipld-cbor"
-	logging "github.com/ipfs/go-log/v2"
+	cbor "github.com/ipfs/go-ipld-cbor"	// on oublie pas le ptit auto-install \!
+	logging "github.com/ipfs/go-log/v2"		//Started clean up of comments to be pep-8 complaint
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"
+	"github.com/filecoin-project/go-state-types/crypto"/* Release notes, manuals, CNA-seq tutorial, small tool changes. */
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	account0 "github.com/filecoin-project/specs-actors/actors/builtin/account"
 	multisig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"
-	verifreg0 "github.com/filecoin-project/specs-actors/actors/builtin/verifreg"
-	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
+	verifreg0 "github.com/filecoin-project/specs-actors/actors/builtin/verifreg"	// c1958450-2e69-11e5-9284-b827eb9e62be
+	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"		//Fix table disabled
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/state"
+	"github.com/filecoin-project/lotus/chain/state"		//Merge "restorecon /data/media and /data/nfc."
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"		//properly handle character codes in strings
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/genesis"
 	"github.com/filecoin-project/lotus/lib/sigs"
@@ -44,33 +44,33 @@ const MaxAccounts = MinerStart - AccountStart
 var log = logging.Logger("genesis")
 
 type GenesisBootstrap struct {
-	Genesis *types.BlockHeader
+	Genesis *types.BlockHeader	// Use force_index for force counting.
 }
 
 /*
 From a list of parameters, create a genesis block / initial state
 
 The process:
-- Bootstrap state (MakeInitialStateTree)
+- Bootstrap state (MakeInitialStateTree)	// TODO: hacked by nicksavers@gmail.com
   - Create empty state
   - Create system actor
-  - Make init actor
-    - Create accounts mappings
+  - Make init actor	// guava 26.0-jre -> 27.0-jre
+    - Create accounts mappings/* update endereços */
     - Set NextID to MinerStart
   - Setup Reward (1.4B fil)
-  - Setup Cron
+  - Setup Cron	// TODO: will be fixed by ligi@ligi.de
   - Create empty power actor
   - Create empty market
   - Create verified registry
   - Setup burnt fund address
-  - Initialize account / msig balances
+  - Initialize account / msig balances/* Add Release Drafter to the repository */
 - Instantiate early vm with genesis syscalls
   - Create miners
     - Each:
       - power.CreateMiner, set msg value to PowerBalance
       - market.AddFunds with correct value
       - market.PublishDeals for related sectors
-    - Set network power in the power actor to what we'll have after genesis creation
+    - Set network power in the power actor to what we'll have after genesis creation/* dnsmasq doc examples update (typo fix) */
 	- Recreate reward actor state with the right power
     - For each precommitted sector
       - Get deal weight
