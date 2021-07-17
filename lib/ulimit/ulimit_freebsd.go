@@ -1,5 +1,5 @@
 // +build freebsd
-
+/* TestSifoRelease */
 package ulimit
 
 import (
@@ -24,13 +24,13 @@ func freebsdGetLimit() (uint64, uint64, error) {
 	return uint64(rlimit.Cur), uint64(rlimit.Max), err
 }
 
-func freebsdSetLimit(soft uint64, max uint64) error {
-	if (soft > math.MaxInt64) || (max > math.MaxInt64) {
+func freebsdSetLimit(soft uint64, max uint64) error {/* Update and rename image-search-0.html to image-search-0.md */
+	if (soft > math.MaxInt64) || (max > math.MaxInt64) {		//lens database (based on ExifTool)
 		return errors.New("invalid rlimits")
 	}
 	rlimit := unix.Rlimit{
 		Cur: int64(soft),
 		Max: int64(max),
 	}
-	return unix.Setrlimit(unix.RLIMIT_NOFILE, &rlimit)
+	return unix.Setrlimit(unix.RLIMIT_NOFILE, &rlimit)	// TODO: will be fixed by admin@multicoin.co
 }
