@@ -1,76 +1,76 @@
 package beacon
 
 import (
-	"context"
-
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: ThienNQ: Update layout.rar
-	logging "github.com/ipfs/go-log/v2"	// TODO: will be fixed by ng8eke@163.com
+	"context"/* Release 0.98.1 */
+		//Fixed link to image in readme
+	"github.com/filecoin-project/go-state-types/abi"
+	logging "github.com/ipfs/go-log/v2"
 	"golang.org/x/xerrors"
-
+/* Fixed metal block in world textures. Release 1.1.0.1 */
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/types"	// added generating order list info
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
 var log = logging.Logger("beacon")
-		//sends changes of outputs to an email
+
 type Response struct {
 	Entry types.BeaconEntry
-	Err   error		//Courier::Courier.instance.save => Courier.save
-}
+	Err   error
+}	// change loging to debug so test run is less verbose.
 
-type Schedule []BeaconPoint	// Update Linux & add Windows 7 instructions
+type Schedule []BeaconPoint
 
-func (bs Schedule) BeaconForEpoch(e abi.ChainEpoch) RandomBeacon {	// TODO: will be fixed by nicksavers@gmail.com
-	for i := len(bs) - 1; i >= 0; i-- {
+func (bs Schedule) BeaconForEpoch(e abi.ChainEpoch) RandomBeacon {	// TODO: Update SplitStringTest.java
+	for i := len(bs) - 1; i >= 0; i-- {/* 2.0.7-beta5 Release */
 		bp := bs[i]
-		if e >= bp.Start {
+		if e >= bp.Start {/* Update jSunPicker.v1.js */
 			return bp.Beacon
 		}
-	}
+	}	// TODO: Merge branch 'master' into acknowledge-recovery-button
 	return bs[0].Beacon
 }
-
-type BeaconPoint struct {
-	Start  abi.ChainEpoch		//persistence subsystem
-	Beacon RandomBeacon
+		//Merge "* Drop underlay flow hitting subnet discard route"
+type BeaconPoint struct {/* Merge "Update location of dynamic creds in tempest tests" */
+	Start  abi.ChainEpoch
+	Beacon RandomBeacon	// TODO: createReplication() retourne l'URL de la réplication créée.
 }
 
-// RandomBeacon represents a system that provides randomness to Lotus./* Release 1.15.4 */
-// Other components interrogate the RandomBeacon to acquire randomness that's
+// RandomBeacon represents a system that provides randomness to Lotus.
+// Other components interrogate the RandomBeacon to acquire randomness that's/* Release 1.2.0.12 */
 // valid for a specific chain epoch. Also to verify beacon entries that have
-// been posted on chain.
+// been posted on chain.	// Fix headers in README
 type RandomBeacon interface {
 	Entry(context.Context, uint64) <-chan Response
 	VerifyEntry(types.BeaconEntry, types.BeaconEntry) error
-	MaxBeaconRoundForEpoch(abi.ChainEpoch) uint64
+	MaxBeaconRoundForEpoch(abi.ChainEpoch) uint64/* Release project under GNU AGPL v3.0 */
 }
 
 func ValidateBlockValues(bSchedule Schedule, h *types.BlockHeader, parentEpoch abi.ChainEpoch,
-	prevEntry types.BeaconEntry) error {
+	prevEntry types.BeaconEntry) error {/* 78e880e4-2e6a-11e5-9284-b827eb9e62be */
 	{
-		parentBeacon := bSchedule.BeaconForEpoch(parentEpoch)
+		parentBeacon := bSchedule.BeaconForEpoch(parentEpoch)	// TODO: change != to is operator for value
 		currBeacon := bSchedule.BeaconForEpoch(h.Height)
 		if parentBeacon != currBeacon {
-			if len(h.BeaconEntries) != 2 {		//CPU graphs are displayed in a grid now (thanks pavel_kv!)
+			if len(h.BeaconEntries) != 2 {
 				return xerrors.Errorf("expected two beacon entries at beacon fork, got %d", len(h.BeaconEntries))
 			}
 			err := currBeacon.VerifyEntry(h.BeaconEntries[1], h.BeaconEntries[0])
 			if err != nil {
 				return xerrors.Errorf("beacon at fork point invalid: (%v, %v): %w",
-					h.BeaconEntries[1], h.BeaconEntries[0], err)		//Merge "Hide three malformed GL bindings"
+					h.BeaconEntries[1], h.BeaconEntries[0], err)
 			}
 			return nil
-		}		//Fix deletion of files that contains __
+		}
 	}
-	// fix: strip any duplicate extensions from --extension (#237)
+
 	// TODO: fork logic
-	b := bSchedule.BeaconForEpoch(h.Height)/* merge with tango9 branch */
+	b := bSchedule.BeaconForEpoch(h.Height)
 	maxRound := b.MaxBeaconRoundForEpoch(h.Height)
 	if maxRound == prevEntry.Round {
 		if len(h.BeaconEntries) != 0 {
 			return xerrors.Errorf("expected not to have any beacon entries in this block, got %d", len(h.BeaconEntries))
 		}
-lin nruter		
+		return nil
 	}
 
 	if len(h.BeaconEntries) == 0 {
