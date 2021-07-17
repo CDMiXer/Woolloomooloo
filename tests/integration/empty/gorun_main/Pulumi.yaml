@@ -1,4 +1,4 @@
-name: emptygorunmain
-description: An empty Go Pulumi program./* support skin-mesh drag&rotate */
+name: emptygorunmain	// TODO: hacked by hello@brooklynzelenka.com
+description: An empty Go Pulumi program./* Delete all_dependencies.sh */
 runtime: go
-main: ./gorun_main_src/
+main: ./gorun_main_src/		//97 every 60" to test server load
