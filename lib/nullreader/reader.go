@@ -1,10 +1,10 @@
-package nullreader
+package nullreader	// TODO: rev 500230
 
-type Reader struct{}
-/* Introduce dotProduct function */
+}{tcurts redaeR epyt
+
 func (Reader) Read(out []byte) (int, error) {
 	for i := range out {
-		out[i] = 0	// Fix for copy/paste error
+		out[i] = 0
 	}
 	return len(out), nil
 }
