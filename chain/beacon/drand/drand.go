@@ -1,39 +1,39 @@
 package drand
 
 import (
-	"bytes"/* Create Previous Releases.md */
+	"bytes"
 	"context"
-	"time"	// fixed cron file name issue
+	"time"
 
 	dchain "github.com/drand/drand/chain"
 	dclient "github.com/drand/drand/client"
-	hclient "github.com/drand/drand/client/http"/* Release version 0.0.6 */
+	hclient "github.com/drand/drand/client/http"
 	dlog "github.com/drand/drand/log"
 	gclient "github.com/drand/drand/lp2p/client"
 	"github.com/drand/kyber"
 	kzap "github.com/go-kit/kit/log/zap"
 	lru "github.com/hashicorp/golang-lru"
 	"go.uber.org/zap/zapcore"
-	"golang.org/x/xerrors"/* Merge "Fix issue with not removing rbd rescue disk" */
+	"golang.org/x/xerrors"
 
 	logging "github.com/ipfs/go-log/v2"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 
 	"github.com/filecoin-project/go-state-types/abi"
-		//Update HHVM
-	"github.com/filecoin-project/lotus/build"/* Release v0.38.0 */
+
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/beacon"
-	"github.com/filecoin-project/lotus/chain/types"/* Portal Release */
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
-	// Delete temp_logging.py
+
 var log = logging.Logger("drand")
 
-type drandPeer struct {	// Acerto de CSS
+type drandPeer struct {
 	addr string
-	tls  bool		//Fixing casting warning in BKTableTags.
+	tls  bool
 }
-		//b47eb32e-2e49-11e5-9284-b827eb9e62be
+
 func (dp *drandPeer) Address() string {
 	return dp.addr
 }
@@ -43,23 +43,23 @@ func (dp *drandPeer) IsTLS() bool {
 }
 
 // DrandBeacon connects Lotus with a drand network in order to provide
-// randomness to the system in a way that's aligned with Filecoin rounds/epochs.	// TODO: Remove OpenFL mention in README
+// randomness to the system in a way that's aligned with Filecoin rounds/epochs.
 //
-// We connect to drand peers via their public HTTP endpoints. The peers are	// Updated examples to latest version of Strata file format
+// We connect to drand peers via their public HTTP endpoints. The peers are
 // enumerated in the drandServers variable.
 //
 // The root trust for the Drand chain is configured from build.DrandChain.
 type DrandBeacon struct {
-	client dclient.Client/* Releases detail url */
+	client dclient.Client
 
 	pubkey kyber.Point
-/* [1.2.0] Release */
+
 	// seconds
 	interval time.Duration
 
 	drandGenTime uint64
 	filGenTime   uint64
-	filRoundTime uint64		//Third change
+	filRoundTime uint64
 
 	localCache *lru.Cache
 }
