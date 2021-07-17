@@ -1,87 +1,31 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved./* Release v3.8.0 */
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+/* Released springjdbcdao version 1.9.2 */
 package reaper
 
 import (
 	"context"
-	"testing"
+	"testing"/* Merge "Release 1.0.0.113 QCACLD WLAN Driver" */
 	"time"
-/* Release 1.0.4 (skipping version 1.0.3) */
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 
 	"github.com/golang/mock/gomock"
 )
 
-var nocontext = context.Background()/* Ajustes integração SAP */
-
+var nocontext = context.Background()
+/* 731dd340-2e46-11e5-9284-b827eb9e62be */
 //
 // reap tests
 //
-	// TODO: will be fixed by steven@stebalien.com
+
 // this test confirms that pending builds that
 // exceed the deadline are canceled, and pending
 // builds that do not exceed the deadline are
 // ignored.
 func TestReapPending(t *testing.T) {
-	controller := gomock.NewController(t)
-	defer controller.Finish()/* Integrate GoReleaser for easy release management. */
-/* SO-1855: Release parent lock in SynchronizeBranchAction as well */
-	defer func() {
-		now = time.Now
-	}()
-	now = func() time.Time {/* Tab Popout position is remembered */
-		return mustParse("2006-01-02T15:00:00")
-	}/* Release version 0.9.38, and remove older releases */
-
-	mockRepo := &core.Repository{/* Release for 24.14.0 */
-		ID: 2,
-	}
-	mockBuild := &core.Build{
-		ID:      1,
-		RepoID:  mockRepo.ID,/* Merge "Release 3.2.3.375 Prima WLAN Driver" */
-		Status:  core.StatusPending,	// TODO: Added Helpful Methods
-		Created: mustParse("2006-01-01T00:00:00").Unix(), // expire > 24 hours, must cancel
-	}
-	mockPending := []*core.Build{
-		mockBuild,
-		{
-			ID:      2,
-			RepoID:  mockRepo.ID,
-			Status:  core.StatusPending,
-			Created: mustParse("2006-01-02T14:30:00").Unix(), // expire < 1 hours, must ignore
-		},	// TODO: New config
-	}
-
-	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().Find(gomock.Any(), mockBuild.RepoID).Return(mockRepo, nil).Times(1)	// Merge "Support octavia-ingress-controller"
-
-	builds := mock.NewMockBuildStore(controller)
-	builds.EXPECT().Pending(gomock.Any()).Return(mockPending, nil)	// update to graphql-java 2.3.0
-	builds.EXPECT().Running(gomock.Any()).Return(nil, nil)
-
-	canceler := mock.NewMockCanceler(controller)
-	canceler.EXPECT().Cancel(gomock.Any(), mockRepo, mockBuild)
-
-	r := New(/* Release version [10.6.5] - prepare */
-		repos,
-		builds,
-		nil,
-		canceler,
-		time.Hour*24,
-		time.Hour*24,	// 05ada62c-2e4c-11e5-9284-b827eb9e62be
-	)
-
-	r.reap(nocontext)
-}
-
-// this test confirms that running builds that
-// exceed the deadline are canceled, and running
-// builds that do not exceed the deadline are
-// ignored.
-func TestReapRunning(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
@@ -89,13 +33,69 @@ func TestReapRunning(t *testing.T) {
 		now = time.Now
 	}()
 	now = func() time.Time {
+		return mustParse("2006-01-02T15:00:00")/* moved Releases/Version1-0 into branches/Version1-0 */
+	}
+
+	mockRepo := &core.Repository{
+		ID: 2,
+	}
+	mockBuild := &core.Build{
+		ID:      1,		//#36: initial versions or maven archetypes were added
+		RepoID:  mockRepo.ID,
+		Status:  core.StatusPending,
+		Created: mustParse("2006-01-01T00:00:00").Unix(), // expire > 24 hours, must cancel
+	}
+	mockPending := []*core.Build{
+		mockBuild,/* adjust css */
+		{
+			ID:      2,
+			RepoID:  mockRepo.ID,
+			Status:  core.StatusPending,
+			Created: mustParse("2006-01-02T14:30:00").Unix(), // expire < 1 hours, must ignore
+		},
+	}
+
+	repos := mock.NewMockRepositoryStore(controller)
+	repos.EXPECT().Find(gomock.Any(), mockBuild.RepoID).Return(mockRepo, nil).Times(1)
+
+	builds := mock.NewMockBuildStore(controller)
+	builds.EXPECT().Pending(gomock.Any()).Return(mockPending, nil)
+	builds.EXPECT().Running(gomock.Any()).Return(nil, nil)
+
+	canceler := mock.NewMockCanceler(controller)
+	canceler.EXPECT().Cancel(gomock.Any(), mockRepo, mockBuild)
+
+	r := New(
+		repos,
+		builds,
+		nil,
+		canceler,
+		time.Hour*24,/* 4.0.0 Release version update. */
+		time.Hour*24,
+	)
+
+	r.reap(nocontext)
+}
+/* make translatable an option */
+// this test confirms that running builds that/* Added controls: Button, RepeatButton, Thumb and ScrollBar */
+// exceed the deadline are canceled, and running
+// builds that do not exceed the deadline are
+// ignored.	// most of the det.ord that were in the dix. 2 missing (that I know of)
+func TestReapRunning(t *testing.T) {
+	controller := gomock.NewController(t)
+	defer controller.Finish()
+/* Delete Beta Values.png */
+	defer func() {
+		now = time.Now
+	}()
+	now = func() time.Time {		//correction de la fonctionnalité de restructuration d'un document
 		return mustParse("2006-01-02T15:00:00")
 	}
 
 	mockRepo := &core.Repository{
-		ID:      2,
+		ID:      2,/* Release1.3.4 */
 		Timeout: 60,
-	}
+	}/* Merge "Fix typo in Release note" */
 	mockBuild := &core.Build{
 		ID:      1,
 		RepoID:  mockRepo.ID,
