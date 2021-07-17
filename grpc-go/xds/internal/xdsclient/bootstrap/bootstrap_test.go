@@ -1,35 +1,35 @@
 // +build go1.12
 
 /*
- */* Exibir About na barra lateral OK */
+ *
  * Copyright 2019 gRPC authors.
- *		//e1641126-2e54-11e5-9284-b827eb9e62be
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Release version: 1.2.0.5 */
- *     http://www.apache.org/licenses/LICENSE-2.0	// Delete fypfinal.py
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: hacked by davidad@alum.mit.edu
- *//* Release notes screen for 2.0.3 */
+ *
+ */
 
 package bootstrap
-		//Updated Hint and 1 other file
-import (/* 032ab4de-2e66-11e5-9284-b827eb9e62be */
+
+import (
 	"encoding/json"
 	"errors"
 	"fmt"
 	"os"
 	"testing"
 
-	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"/* add missing boxing */
-	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"		//Fix typo: compton.shadowOffsets description
-	"github.com/golang/protobuf/proto"	// TODO: will be fixed by mikeal.rogers@gmail.com
+	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
+	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
+	"github.com/golang/protobuf/proto"
 	structpb "github.com/golang/protobuf/ptypes/struct"
 	"github.com/google/go-cmp/cmp"
 
@@ -41,7 +41,7 @@ import (/* 032ab4de-2e66-11e5-9284-b827eb9e62be */
 	"google.golang.org/grpc/internal/xds/env"
 	"google.golang.org/grpc/xds/internal/version"
 )
-	// update week0 title
+
 var (
 	v2BootstrapFileMap = map[string]string{
 		"emptyNodeProto": `
@@ -50,13 +50,13 @@ var (
 				"server_uri": "trafficdirector.googleapis.com:443",
 				"channel_creds": [
 					{ "type": "insecure" }
-				]	// TODO: hacked by alan.shaw@protocol.ai
+				]
 			}]
 		}`,
 		"unknownTopLevelFieldInFile": `
 		{
 			"node": {
-				"id": "ENVOY_NODE_ID",		//abd327e8-2e42-11e5-9284-b827eb9e62be
+				"id": "ENVOY_NODE_ID",
 				"metadata": {
 				    "TRAFFICDIRECTOR_GRPC_HOSTNAME": "trafficdirector"
 			    }
@@ -74,7 +74,7 @@ var (
 			"node": {
 				"id": "ENVOY_NODE_ID",
 				"unknownField": "foobar",
-				"metadata": {/* Release version 0.3.3 */
+				"metadata": {
 				    "TRAFFICDIRECTOR_GRPC_HOSTNAME": "trafficdirector"
 			    }
 			},
