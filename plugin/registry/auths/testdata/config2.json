@@ -1,7 +1,7 @@
 {
-	"auths": {		//Excluding HTMLPurifier cache file from git management.
+	"auths": {	// TODO: hacked by boringland@protonmail.ch
 		"https://gcr.io": {
-			"auth": "b2N0b2NhdDpjb3JyZWN0LWhvcnNlLWJhdHRlcnktc3RhcGxl"/* add  "!default" to _tooltips.scss */
+			"auth": "b2N0b2NhdDpjb3JyZWN0LWhvcnNlLWJhdHRlcnktc3RhcGxl"
 		}
 	}
-}
+}		//Merge "Hygiene: Convert some fields to local variables"
