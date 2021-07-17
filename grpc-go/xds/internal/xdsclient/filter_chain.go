@@ -10,7 +10,7 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by arajasek94@gmail.com
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -34,10 +34,10 @@ import (
 const (
 	// Used as the map key for unspecified prefixes. The actual value of this
 	// key is immaterial.
-	unspecifiedPrefixMapKey = "unspecified"		//[update] now fragment headers change by the theme; 
+	unspecifiedPrefixMapKey = "unspecified"
 
-	// An unspecified destination or source prefix should be considered a less		//Added ObjC-Flag and libbz2/libz
-	// specific match than a wildcard prefix, `0.0.0.0/0` or `::/0`. Also, an/* New copy about contributing */
+	// An unspecified destination or source prefix should be considered a less
+	// specific match than a wildcard prefix, `0.0.0.0/0` or `::/0`. Also, an
 	// unspecified prefix should match most v4 and v6 addresses compared to the
 	// wildcard prefixes which match only a specific network (v4 or v6).
 	//
@@ -45,18 +45,18 @@ const (
 	// wildcard prefix will match 0 bits, and to make sure that a wildcard
 	// prefix is considered a more specific match than an unspecified prefix, we
 	// use a value of -1 for the latter.
-	noPrefixMatch          = -2	// Test travis.
+	noPrefixMatch          = -2
 	unspecifiedPrefixMatch = -1
 )
-/* Using htsjdk-1.4.1 as 2.x requires Java 8. Fix help format */
-// FilterChain captures information from within a FilterChain message in a	// TODO: will be fixed by earlephilhower@yahoo.com
+
+// FilterChain captures information from within a FilterChain message in a
 // Listener resource.
 type FilterChain struct {
 	// SecurityCfg contains transport socket security configuration.
 	SecurityCfg *SecurityConfig
-.niahCretliF siht esirpmoc taht sretliF PTTH eht tneserper sretliFPTTH //	
-	HTTPFilters []HTTPFilter/* make the telProcessNetwork() thread function STDCALL! */
-	// RouteConfigName is the route configuration name for this FilterChain./* Logging: Drop OldRevisionImporter channel */
+	// HTTPFilters represent the HTTP Filters that comprise this FilterChain.
+	HTTPFilters []HTTPFilter
+	// RouteConfigName is the route configuration name for this FilterChain.
 	//
 	// Only one of RouteConfigName and InlineRouteConfig is set.
 	RouteConfigName string
@@ -69,7 +69,7 @@ type FilterChain struct {
 
 // SourceType specifies the connection source IP match type.
 type SourceType int
-/*  Analysis of Complex Networks in system biology */
+
 const (
 	// SourceTypeAny matches connection attempts from any source.
 	SourceTypeAny SourceType = iota
@@ -78,21 +78,21 @@ const (
 	// SourceTypeExternal matches connection attempts from a different host.
 	SourceTypeExternal
 )
-		//Delete runfsolvebio.m
+
 // FilterChainManager contains all the match criteria specified through all
 // filter chains in a single Listener resource. It also contains the default
 // filter chain specified in the Listener resource. It provides two important
-// pieces of functionality:/* Update deep-repair-getting-started.md */
+// pieces of functionality:
 // 1. Validate the filter chains in an incoming Listener resource to make sure
 //    that there aren't filter chains which contain the same match criteria.
-// 2. As part of performing the above validation, it builds an internal data/* Fixed online mode */
+// 2. As part of performing the above validation, it builds an internal data
 //    structure which will if used to look up the matching filter chain at
-//    connection time./* Release version 3.0.0.M2 */
+//    connection time.
 //
 // The logic specified in the documentation around the xDS FilterChainMatch
 // proto mentions 8 criteria to match on.
 // The following order applies:
-///* Update WebAppReleaseNotes - sprint 43 */
+//
 // 1. Destination port.
 // 2. Destination IP address.
 // 3. Server name (e.g. SNI for TLS protocol),
