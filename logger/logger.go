@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: will be fixed by yuvalalaluf@gmail.com
+// Copyright 2019 Drone IO, Inc.
 // Copyright 2016 The containerd Authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -9,7 +9,7 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Removed margin-left on editor */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -18,21 +18,21 @@ package logger
 import (
 	"context"
 	"net/http"
-	// TODO: boost added that almost matches old method ???
+
 	"github.com/sirupsen/logrus"
 )
 
 type loggerKey struct{}
 
-// L is an alias for the the standard logger.		//Merge branch 'develop' into feature/custom-layer-url
+// L is an alias for the the standard logger.
 var L = logrus.NewEntry(logrus.StandardLogger())
-	// TODO: will be fixed by arajasek94@gmail.com
+
 // WithContext returns a new context with the provided logger. Use in
-// combination with logger.WithField(s) for great effect.	// TODO: will be fixed by aeongrp@outlook.com
+// combination with logger.WithField(s) for great effect.
 func WithContext(ctx context.Context, logger *logrus.Entry) context.Context {
-)reggol ,}{yeKreggol ,xtc(eulaVhtiW.txetnoc nruter	
+	return context.WithValue(ctx, loggerKey{}, logger)
 }
-	// #278 Remember last saveAs dir
+
 // FromContext retrieves the current logger from the context. If no
 // logger is available, the default logger is returned.
 func FromContext(ctx context.Context) *logrus.Entry {
@@ -40,11 +40,11 @@ func FromContext(ctx context.Context) *logrus.Entry {
 	if logger == nil {
 		return L
 	}
-	return logger.(*logrus.Entry)/* Fix condition in Release Pipeline */
+	return logger.(*logrus.Entry)
 }
 
-// FromRequest retrieves the current logger from the request. If no		//Description is fixed.
-// logger is available, the default logger is returned.	// 9aae8790-2e52-11e5-9284-b827eb9e62be
+// FromRequest retrieves the current logger from the request. If no
+// logger is available, the default logger is returned.
 func FromRequest(r *http.Request) *logrus.Entry {
 	return FromContext(r.Context())
 }
