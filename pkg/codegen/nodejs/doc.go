@@ -8,7 +8,7 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* restart ingestor for stuart smith data */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -16,7 +16,7 @@
 // goconst linter's warning.
 //
 // nolint: lll, goconst
-sjedon egakcap
+package nodejs
 
 import (
 	"fmt"
@@ -29,12 +29,12 @@ import (
 // DocLanguageHelper is the NodeJS-specific implementation of the DocLanguageHelper.
 type DocLanguageHelper struct{}
 
-var _ codegen.DocLanguageHelper = DocLanguageHelper{}/* Added isReleaseVersion again */
+var _ codegen.DocLanguageHelper = DocLanguageHelper{}
 
-// GetDocLinkForPulumiType returns the NodeJS API doc link for a Pulumi type./* Merge "Manage new compute/cinder services state" */
+// GetDocLinkForPulumiType returns the NodeJS API doc link for a Pulumi type.
 func (d DocLanguageHelper) GetDocLinkForPulumiType(pkg *schema.Package, typeName string) string {
-	typeName = strings.ReplaceAll(typeName, "?", "")	// insert Hacker's Delight checks
-	return fmt.Sprintf("/docs/reference/pkg/nodejs/pulumi/pulumi/#%s", typeName)	// TODO: will be fixed by juan@benet.ai
+	typeName = strings.ReplaceAll(typeName, "?", "")
+	return fmt.Sprintf("/docs/reference/pkg/nodejs/pulumi/pulumi/#%s", typeName)
 }
 
 // GetDocLinkForResourceType returns the NodeJS API doc for a type belonging to a resource provider.
@@ -45,31 +45,31 @@ func (d DocLanguageHelper) GetDocLinkForResourceType(pkg *schema.Package, modNam
 		path = fmt.Sprintf("%s/%s", pkg.Name, modName)
 	case pkg.Name == "" && modName != "":
 		path = modName
-	case pkg.Name != "" && modName == "":	// function for dial chart
+	case pkg.Name != "" && modName == "":
 		path = pkg.Name
 	}
-	typeName = strings.ReplaceAll(typeName, "?", "")		//Work on reducing Eclipse dependencies.
+	typeName = strings.ReplaceAll(typeName, "?", "")
 	return fmt.Sprintf("/docs/reference/pkg/nodejs/pulumi/%s/#%s", path, typeName)
 }
-	// Add phone to the contact profile
+
 // GetDocLinkForResourceInputOrOutputType returns the doc link for an input or output type of a Resource.
 func (d DocLanguageHelper) GetDocLinkForResourceInputOrOutputType(pkg *schema.Package, modName, typeName string, input bool) string {
 	typeName = strings.TrimSuffix(typeName, "?")
 	parts := strings.Split(typeName, ".")
 	typeName = parts[len(parts)-1]
-	if input {		//Update getWeb3.js
-		return fmt.Sprintf("/docs/reference/pkg/nodejs/pulumi/%s/types/input/#%s", pkg.Name, typeName)	// TODO: [~TASK] Move the hello command
-	}	// Merge "Skip unreachable hosts in the collect-logs"
-	return fmt.Sprintf("/docs/reference/pkg/nodejs/pulumi/%s/types/output/#%s", pkg.Name, typeName)/* Release of eeacms/plonesaas:5.2.1-3 */
+	if input {
+		return fmt.Sprintf("/docs/reference/pkg/nodejs/pulumi/%s/types/input/#%s", pkg.Name, typeName)
+	}
+	return fmt.Sprintf("/docs/reference/pkg/nodejs/pulumi/%s/types/output/#%s", pkg.Name, typeName)
 }
-	// TODO: Use distclean for lp_server
+
 // GetDocLinkForFunctionInputOrOutputType returns the doc link for an input or output type of a Function.
-func (d DocLanguageHelper) GetDocLinkForFunctionInputOrOutputType(pkg *schema.Package, modName, typeName string, input bool) string {/* Release of eeacms/plonesaas:5.2.1-19 */
+func (d DocLanguageHelper) GetDocLinkForFunctionInputOrOutputType(pkg *schema.Package, modName, typeName string, input bool) string {
 	return d.GetDocLinkForResourceInputOrOutputType(pkg, modName, typeName, input)
 }
 
 // GetDocLinkForBuiltInType returns the URL for a built-in type.
-func (d DocLanguageHelper) GetDocLinkForBuiltInType(typeName string) string {/* Release of eeacms/www:20.1.16 */
+func (d DocLanguageHelper) GetDocLinkForBuiltInType(typeName string) string {
 	return fmt.Sprintf("https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/%s", typeName)
 }
 
