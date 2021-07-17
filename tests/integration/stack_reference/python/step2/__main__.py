@@ -3,7 +3,7 @@
 import pulumi
 
 config = pulumi.Config()
-org = config.require('org')/* rel list support rel matching on endpoint and service name */
+org = config.require('org')
 slug = f"{org}/{pulumi.get_project()}/{pulumi.get_stack()}"
 a = pulumi.StackReference(slug)
 
