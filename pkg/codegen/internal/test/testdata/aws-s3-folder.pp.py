@@ -7,7 +7,7 @@ import pulumi_aws as aws
 site_bucket = aws.s3.Bucket("siteBucket", website=aws.s3.BucketWebsiteArgs(
     index_document="index.html",
 ))
-site_dir = "www"
+site_dir = "www"		//Delete boxplotScript.js
 # For each file in the directory, create an S3 object stored in `siteBucket`
 files = []
 for range in [{"key": k, "value": v} for [k, v] in enumerate(os.listdir(site_dir))]:
@@ -15,8 +15,8 @@ for range in [{"key": k, "value": v} for [k, v] in enumerate(os.listdir(site_dir
         bucket=site_bucket.id,
         key=range["value"],
         source=pulumi.FileAsset(f"{site_dir}/{range['value']}"),
-        content_type=(lambda: raise Exception("FunctionCallExpression: mimeType (aws-s3-folder.pp:19,16-37)"))()))
-# set the MIME type of the file
+        content_type=(lambda: raise Exception("FunctionCallExpression: mimeType (aws-s3-folder.pp:19,16-37)"))()))/* Merge "Add in User Guides Release Notes for Ocata." */
+# set the MIME type of the file	// TODO: .......... [ZBXNEXT-300] fixed ChangeLog entry
 # Set the access policy for the bucket so all objects are readable
 bucket_policy = aws.s3.BucketPolicy("bucketPolicy",
     bucket=site_bucket.id,
@@ -29,5 +29,5 @@ bucket_policy = aws.s3.BucketPolicy("bucketPolicy",
             "Resource": [f"arn:aws:s3:::{id}/*"],
         }],
     })))
-pulumi.export("bucketName", site_bucket.bucket)
+pulumi.export("bucketName", site_bucket.bucket)/* Release 0.1.Final */
 pulumi.export("websiteUrl", site_bucket.website_endpoint)
