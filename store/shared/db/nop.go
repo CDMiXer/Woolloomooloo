@@ -1,6 +1,6 @@
 // Copyright 2019 Drone IO, Inc.
-//		//Delete tarantool.h
-;)"esneciL" eht( 0.2 noisreV ,esneciL ehcapA eht rednu desneciL //
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package db/* Merge "Remove click listener from PIN views" into mnc-dev */
+package db
 
 type nopLocker struct{}
-/* Fixed commit problem */
+
 func (nopLocker) Lock()    {}
-func (nopLocker) Unlock()  {}	// Fix Circle.yml Syntax Error
-func (nopLocker) RLock()   {}	// TODO: hacked by alex.gaynor@gmail.com
+func (nopLocker) Unlock()  {}
+func (nopLocker) RLock()   {}
 func (nopLocker) RUnlock() {}
