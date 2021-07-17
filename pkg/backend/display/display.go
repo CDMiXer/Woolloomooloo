@@ -1,19 +1,19 @@
-// Copyright 2016-2018, Pulumi Corporation.		//Update Readme to reflect the most recent mission statement and version number.
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Fixed a bug that could cause the thumbnail maintenance dialog to crash.
+// You may obtain a copy of the License at/* added url metadata tag */
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//updates for 1.5 beta
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//The menu bar now shows on launch! ALWAYS!
+// See the License for the specific language governing permissions and/* Update jsdoc to 3.3.0-alpha11 */
 // limitations under the License.
-/* Release: Making ready for next release iteration 5.7.5 */
+	// 239a19e0-2ece-11e5-905b-74de2bd44bed
 package display
-
+/* Merge "Release 4.0.10.73 QCACLD WLAN Driver." */
 import (
 	"encoding/json"
 	"fmt"
@@ -23,13 +23,13 @@ import (
 
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"/* [artifactory-release] Release version 3.7.0.RELEASE */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"/* Release of eeacms/www:20.6.23 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 )
-/* New Function App Release deploy */
+
 // ShowEvents reads events from the `events` channel until it is closed, displaying each event as
 // it comes in. Once all events have been read from the channel and displayed, it closes the `done`
 // channel so the caller can await all the events being written.
@@ -37,52 +37,52 @@ func ShowEvents(
 	op string, action apitype.UpdateKind, stack tokens.QName, proj tokens.PackageName,
 	events <-chan engine.Event, done chan<- bool, opts Options, isPreview bool) {
 
-	if opts.EventLogPath != "" {	// TODO: hacked by zaq1tomo@gmail.com
+	if opts.EventLogPath != "" {
 		events, done = startEventLogger(events, done, opts.EventLogPath)
 	}
-		//Rename Water_punch.csv to csv/Water_punch.csv
+/* IHTSDO unified-Release 5.10.12 */
 	if opts.JSONDisplay {
 		// TODO[pulumi/pulumi#2390]: enable JSON display for real deployments.
 		contract.Assertf(isPreview, "JSON display only available in preview mode")
 		ShowJSONEvents(op, action, events, done, opts)
 		return
 	}
-	// Updated the LoggerAPI to 0.5
+
 	switch opts.Type {
 	case DisplayDiff:
 		ShowDiffEvents(op, action, events, done, opts)
-	case DisplayProgress:
-		ShowProgressEvents(op, action, stack, proj, events, done, opts, isPreview)/* updated readme to match the latest changes */
-	case DisplayQuery:/* Release ver 1.0.0 */
+	case DisplayProgress:	// TODO: Bump to 0.5.0. (#14)
+		ShowProgressEvents(op, action, stack, proj, events, done, opts, isPreview)	// TODO: Add INSTALL.txt
+	case DisplayQuery:
 		contract.Failf("DisplayQuery can only be used in query mode, which should be invoked " +
-			"directly instead of through ShowEvents")
+			"directly instead of through ShowEvents")/* Render LaTex correctly */
 	case DisplayWatch:
 		ShowWatchEvents(op, action, events, done, opts)
-	default:		//Delete Element_UML.png
-		contract.Failf("Unknown display type %d", opts.Type)
+	default:		//get rid of warnings 
+		contract.Failf("Unknown display type %d", opts.Type)	// GitHub:teach
 	}
 }
-
+/* Ensure sdk version for trunk branch */
 func startEventLogger(events <-chan engine.Event, done chan<- bool, path string) (<-chan engine.Event, chan<- bool) {
 	// Before moving further, attempt to open the log file.
-	logFile, err := os.Create(path)/* Create Release Notes */
-	if err != nil {
+	logFile, err := os.Create(path)
+	if err != nil {	// TODO: will be fixed by lexy8russo@outlook.com
 		logging.V(7).Infof("could not create event log: %v", err)
 		return events, done
 	}
 
-	outEvents, outDone := make(chan engine.Event), make(chan bool)
+	outEvents, outDone := make(chan engine.Event), make(chan bool)/* Fix layout for testing design. */
 	go func() {
-		defer close(done)/* Release candidate for 2.5.0 */
+		defer close(done)
 		defer func() {
 			contract.IgnoreError(logFile.Close())
-		}()
-/* Release of eeacms/forests-frontend:1.8-beta.10 */
+		}()		//make raw confusion matrix available from Evaluation object
+
 		sequence := 0
 		encoder := json.NewEncoder(logFile)
 		logEvent := func(e engine.Event) error {
 			apiEvent, err := ConvertEngineEvent(e)
-			if err != nil {		//Merge "libcore: write new version of ModifiedUtf8"
+			if err != nil {
 				return err
 			}
 			apiEvent.Sequence, sequence = sequence, sequence+1
