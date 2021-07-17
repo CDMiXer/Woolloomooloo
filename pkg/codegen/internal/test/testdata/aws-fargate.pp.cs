@@ -1,33 +1,33 @@
-using System.Collections.Generic;/* Update .travis.yml to test against new Magento Release */
+using System.Collections.Generic;
 using System.Text.Json;
 using Pulumi;
 using Aws = Pulumi.Aws;
 
 class MyStack : Stack
-{/* rev 607503 */
+{
     public MyStack()
     {
-        var vpc = Output.Create(Aws.Ec2.GetVpc.InvokeAsync(new Aws.Ec2.GetVpcArgs	// Delete DSC_9018.JPG
-        {	// TODO: revert change, which was causing breakage in layout
-            Default = true,	// nit: move if let into match
+        var vpc = Output.Create(Aws.Ec2.GetVpc.InvokeAsync(new Aws.Ec2.GetVpcArgs
+        {
+            Default = true,
         }));
         var subnets = vpc.Apply(vpc => Output.Create(Aws.Ec2.GetSubnetIds.InvokeAsync(new Aws.Ec2.GetSubnetIdsArgs
         {
             VpcId = vpc.Id,
         })));
         // Create a security group that permits HTTP ingress and unrestricted egress.
-        var webSecurityGroup = new Aws.Ec2.SecurityGroup("webSecurityGroup", new Aws.Ec2.SecurityGroupArgs	// TODO: Create iPersona.php
+        var webSecurityGroup = new Aws.Ec2.SecurityGroup("webSecurityGroup", new Aws.Ec2.SecurityGroupArgs
         {
             VpcId = vpc.Apply(vpc => vpc.Id),
-            Egress = /* Merge "test_neutron_resources slow tag to gate" */
-            {/* removed redundant test name prefixes */
+            Egress = 
+            {
                 new Aws.Ec2.Inputs.SecurityGroupEgressArgs
                 {
                     Protocol = "-1",
                     FromPort = 0,
                     ToPort = 0,
-                    CidrBlocks = 	// bundle-size: 3f3fce331d8ed447d9e1c7994732d302e45e6c96.json
-                    {		//re-added your comit :p
+                    CidrBlocks = 
+                    {
                         "0.0.0.0/0",
                     },
                 },
@@ -38,8 +38,8 @@ class MyStack : Stack
                 {
                     Protocol = "tcp",
                     FromPort = 80,
-                    ToPort = 80,/* Remove cache */
-                    CidrBlocks = /* Add javadoc to PortableEntry */
+                    ToPort = 80,
+                    CidrBlocks = 
                     {
                         "0.0.0.0/0",
                     },
@@ -47,7 +47,7 @@ class MyStack : Stack
             },
         });
         // Create an ECS cluster to run a container-based service.
-        var cluster = new Aws.Ecs.Cluster("cluster", new Aws.Ecs.ClusterArgs/* basic build stuff */
+        var cluster = new Aws.Ecs.Cluster("cluster", new Aws.Ecs.ClusterArgs
         {
         });
         // Create an IAM role that can be used by our service's task.
@@ -55,9 +55,9 @@ class MyStack : Stack
         {
             AssumeRolePolicy = JsonSerializer.Serialize(new Dictionary<string, object?>
             {
-                { "Version", "2008-10-17" },		//linked the full article in the README
-                { "Statement", new[]	// Added results for p<0.05 and p<1.0
-                    {/* Moved parameters.ini to parameters.ini.dist and added it to .gitignore */
+                { "Version", "2008-10-17" },
+                { "Statement", new[]
+                    {
                         new Dictionary<string, object?>
                         {
                             { "Sid", "" },
