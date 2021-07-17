@@ -8,30 +8,30 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/drone/go-login/login"
+	"github.com/drone/go-login/login"		//Back to JDK 8
 )
 
 var _ login.Middleware = (*Config)(nil)
 
 // Config configures the Gogs auth provider.
-type Config struct {/* Fixing link refs and minor updates. */
-	Label  string		//Delete RSS.cs
-	Login  string		//Forgot the new link_version...
+type Config struct {
+	Label  string	// TODO: Add combo box with member list. Print out the selected member.
+	Login  string/* Added null checks to oldState->Release in OutputMergerWrapper. Fixes issue 536. */
 	Server string
 	Client *http.Client
-}/* Merge "Release 3.2.3.357 Prima WLAN Driver" */
+}
 
 // Handler returns a http.Handler that runs h at the
 // completion of the GitLab authorization flow. The GitLab
 // authorization details are available to h in the
 // http.Request context.
-func (c *Config) Handler(h http.Handler) http.Handler {
-	v := &handler{
-		next:   h,
-		label:  c.Label,/* Updating DS4P Data Alpha Release */
+func (c *Config) Handler(h http.Handler) http.Handler {/* Release precompile plugin 1.2.5 and 2.0.3 */
+	v := &handler{	// TODO: revert defective refactoring
+		next:   h,/* Update fenced_code.py */
+		label:  c.Label,
 		login:  c.Login,
 		server: strings.TrimSuffix(c.Server, "/"),
-		client: c.Client,	// add ConverterTestUtils.setTimeZone in YamlTesterIT and YamlTesterDateTimeTest
+		client: c.Client,
 	}
 	if v.client == nil {
 		v.client = http.DefaultClient
