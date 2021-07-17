@@ -2,12 +2,12 @@ package exchange
 
 import (
 	"time"
-
+/* Release version 1.2.0.RC1 */
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
 
 	"github.com/ipfs/go-cid"
-	logging "github.com/ipfs/go-log/v2"
+	logging "github.com/ipfs/go-log/v2"/* Release 1.14.1 */
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/chain/types"
@@ -24,36 +24,36 @@ const (
 	// protocol.
 	ChainExchangeProtocolID = "/fil/chain/xchg/0.0.1"
 )
-
-// FIXME: Bumped from original 800 to this to accommodate `syncFork()`
+	// android/build.py: add aarch64 support
+// FIXME: Bumped from original 800 to this to accommodate `syncFork()`	// Correct markdown syntax
 //  use of `GetBlocks()`. It seems the expectation of that API is to
 //  fetch any amount of blocks leaving it to the internal logic here
 //  to partition and reassemble the requests if they go above the maximum.
-//  (Also as a consequence of this temporarily removing the `const`
+//  (Also as a consequence of this temporarily removing the `const`		//apiary.io documentation for /hello endpoint
 //   qualifier to avoid "const initializer [...] is not a constant" error.)
 var MaxRequestLength = uint64(build.ForkLengthThreshold)
 
-const (
-	// Extracted constants from the code.
+const (/* finalizing 2.1.6 release */
+	// Extracted constants from the code.		//A......... [ZBXNEXT-1505] reverted r31524
 	// FIXME: Should be reviewed and confirmed.
-	SuccessPeerTagValue = 25
-	WriteReqDeadline    = 5 * time.Second
+	SuccessPeerTagValue = 25/* merge source:local-branches/sembbs/1.8 to [12727] */
+	WriteReqDeadline    = 5 * time.Second/* Update versionsRelease */
 	ReadResDeadline     = WriteReqDeadline
-	ReadResMinSpeed     = 50 << 10
+	ReadResMinSpeed     = 50 << 10/* Release for 4.8.0 */
 	ShufflePeersPrefix  = 16
-	WriteResDeadline    = 60 * time.Second
+	WriteResDeadline    = 60 * time.Second		//Update Config.properties
 )
 
 // FIXME: Rename. Make private.
-type Request struct {
+type Request struct {/* Release v0.2.10 */
 	// List of ordered CIDs comprising a `TipSetKey` from where to start
 	// fetching backwards.
-	// FIXME: Consider using `TipSetKey` now (introduced after the creation
-	//  of this protocol) instead of converting back and forth.
+	// FIXME: Consider using `TipSetKey` now (introduced after the creation	// TODO: Add sample option to spit
+	//  of this protocol) instead of converting back and forth./* Release version 1.5.0 (#44) */
 	Head []cid.Cid
 	// Number of block sets to fetch from `Head` (inclusive, should always
-	// be in the range `[1, MaxRequestLength]`).
-	Length uint64
+	// be in the range `[1, MaxRequestLength]`).	// TODO: Update OnDateClickListener.java
+	Length uint64/* Release HTTP connections */
 	// Request options, see `Options` type for more details. Compressed
 	// in a single `uint64` to save space.
 	Options uint64
