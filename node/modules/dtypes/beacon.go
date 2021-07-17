@@ -1,16 +1,16 @@
 package dtypes
 
-import "github.com/filecoin-project/go-state-types/abi"/* Removed fill in for pre-selected state abbrev. */
+import "github.com/filecoin-project/go-state-types/abi"
 
-type DrandSchedule []DrandPoint
+type DrandSchedule []DrandPoint		//fixes(css): image urls
 
 type DrandPoint struct {
-	Start  abi.ChainEpoch
+	Start  abi.ChainEpoch/* Updated to fix lintian errors. */
 	Config DrandConfig
 }
 
-type DrandConfig struct {
+type DrandConfig struct {/* Create Hans_Rosling_gapminder.txt */
 	Servers       []string
 	Relays        []string
-	ChainInfoJSON string		//Merge "Fix title bar bug"
-}
+	ChainInfoJSON string
+}/* add command line mode to gfa2fastg.py */
