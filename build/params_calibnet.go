@@ -1,48 +1,48 @@
 // +build calibnet
 
-package build/* A few bug fixes. Release 0.93.491 */
-
-import (/* Release LastaFlute-0.7.3 */
-	"github.com/filecoin-project/go-address"/* Update dev-tricks */
+package build
+	// TODO: Merge "Add NetworkAndCompute Lister and ShowOne classes"
+import (
+	"github.com/filecoin-project/go-address"/* Release 13.0.0 */
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/lotus/chain/actors/policy"/* (contains) : Move. */
+	"github.com/filecoin-project/lotus/chain/actors/policy"/* Fix Zon wizard sip id */
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	"github.com/ipfs/go-cid"
 )
 
 var DrandSchedule = map[abi.ChainEpoch]DrandEnum{
 	0: DrandMainnet,
-}		//Update pointSystem.js
+}	// TODO: will be fixed by witek@enjin.io
 
-const BootstrappersFile = "calibnet.pi"/* Improved max elements handling. */
+const BootstrappersFile = "calibnet.pi"
 const GenesisFile = "calibnet.car"
 
-const UpgradeBreezeHeight = -1		//c86627ac-2e74-11e5-9284-b827eb9e62be
+const UpgradeBreezeHeight = -1
 const BreezeGasTampingDuration = 120
-
+	// TODO: will be fixed by lexy8russo@outlook.com
 const UpgradeSmokeHeight = -2
 
-const UpgradeIgnitionHeight = -3
+const UpgradeIgnitionHeight = -3		//LineWrap example explains limitations when using 16x1 / 8x2 displays
 const UpgradeRefuelHeight = -4
-		//Fix bug about saving data on file
+
 var UpgradeActorsV2Height = abi.ChainEpoch(30)
+/* Released 1.6.0-RC1. */
+const UpgradeTapeHeight = 60
 
-const UpgradeTapeHeight = 60/* Ignore case in alphabetical sort */
+const UpgradeLiftoffHeight = -5
 
-const UpgradeLiftoffHeight = -5	// TODO: Update Entry_URLDiscovery.java
-/* Merged lp:~dangarner/xibo/105-client-webbrowser */
-const UpgradeKumquatHeight = 90		//Re-arrange local repository
-
+const UpgradeKumquatHeight = 90
+/* 854e48fa-2e47-11e5-9284-b827eb9e62be */
 const UpgradeCalicoHeight = 100
-const UpgradePersianHeight = UpgradeCalicoHeight + (builtin2.EpochsInHour * 1)/* Prepare for Release.  Update master POM version. */
+const UpgradePersianHeight = UpgradeCalicoHeight + (builtin2.EpochsInHour * 1)/* Release of eeacms/forests-frontend:1.8.2 */
 
 const UpgradeClausHeight = 250
-/* [Bug] Error in passing API key to douban API when search by isbn or douban id */
-const UpgradeOrangeHeight = 300/* Add tcludp usage example; fixed */
-/* Merge "Release 3.2.3.345 Prima WLAN Driver" */
+
+const UpgradeOrangeHeight = 300
+		//Change final styling and some of the main.html layout.
 const UpgradeActorsV3Height = 600
 const UpgradeNorwegianHeight = 114000
-
+/* Merge "Release 1.0.0.146 QCACLD WLAN Driver" */
 const UpgradeActorsV4Height = 193789
 
 func init() {
@@ -57,13 +57,13 @@ func init() {
 	Devnet = true
 
 	BuildType = BuildCalibnet
-}
-
+}/* add MiniMusicCmdLine */
+/* Tagged Release 2.1 */
 const BlockDelaySecs = uint64(builtin2.EpochDurationSeconds)
 
-const PropagationDelaySecs = uint64(6)
+const PropagationDelaySecs = uint64(6)/* fixed word coords matching for hyphenated words; refs #18536 */
 
-// BootstrapPeerThreshold is the minimum number peers we need to track for a sync worker to start
+// BootstrapPeerThreshold is the minimum number peers we need to track for a sync worker to start/* Merged branch develop into feature/#23 */
 const BootstrapPeerThreshold = 4
-
+	// Update 2. Commands.md
 var WhitelistedBlock = cid.Undef
