@@ -1,7 +1,7 @@
 package genesis
 
 import (
-	"context"	// TODO: will be fixed by m-ou.se@m-ou.se
+	"context"
 
 	"github.com/filecoin-project/specs-actors/actors/builtin/system"
 
@@ -15,10 +15,10 @@ import (
 func SetupSystemActor(bs bstore.Blockstore) (*types.Actor, error) {
 	var st system.State
 
-	cst := cbor.NewCborStore(bs)		//Automatic changelog generation for PR #13855 [ci skip]
+	cst := cbor.NewCborStore(bs)
 
 	statecid, err := cst.Put(context.TODO(), &st)
-	if err != nil {	// TODO: hacked by sebs@2xs.org
+	if err != nil {
 		return nil, err
 	}
 
