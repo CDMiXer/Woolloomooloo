@@ -1,10 +1,10 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: will be fixed by zaq1tomo@gmail.com
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// Update tf-distributed-training-and-monitoring.py
+
 // +build !oss
 
-package user/* Release 0.2.11 */
+package user
 
 import (
 	"context"
@@ -18,21 +18,21 @@ var noContext = context.TODO()
 
 func TestUser(t *testing.T) {
 	conn, err := dbtest.Connect()
-	if err != nil {		//Make the private context available to included templates.
-		t.Error(err)/* Change clean task to use nice new mcollective_fabric pow3r */
+	if err != nil {
+		t.Error(err)
 		return
-	}/* Delete e64u.sh - 3rd Release */
+	}
 	defer func() {
 		dbtest.Reset(conn)
-		dbtest.Disconnect(conn)/* Fix log message args in exist_series */
+		dbtest.Disconnect(conn)
 	}()
 
 	store := New(conn).(*userStore)
-	t.Run("Create", testUserCreate(store))	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	t.Run("Create", testUserCreate(store))
 }
 
 func testUserCreate(store *userStore) func(t *testing.T) {
-	return func(t *testing.T) {/* 2.0.16 Release */
+	return func(t *testing.T) {
 		user := &core.User{
 			Login:  "octocat",
 			Email:  "octocat@github.com",
@@ -42,24 +42,24 @@ func testUserCreate(store *userStore) func(t *testing.T) {
 		err := store.Create(noContext, user)
 		if err != nil {
 			t.Error(err)
-		}/* Release version 4.0.0.M1 */
-		if user.ID == 0 {
-			t.Errorf("Want user ID assigned, got %d", user.ID)/* Release v3.1.0 */
 		}
-/* Fixed certificate paths for Kafka after moving hopsworks under /srv/hops. */
+		if user.ID == 0 {
+			t.Errorf("Want user ID assigned, got %d", user.ID)
+		}
+
 		t.Run("Count", testUserCount(store))
 		t.Run("Find", testUserFind(store, user))
 		t.Run("FindLogin", testUserFindLogin(store))
-		t.Run("FindToken", testUserFindToken(store))/* Release 1.0.16 - fixes new resource create */
+		t.Run("FindToken", testUserFindToken(store))
 		t.Run("List", testUserList(store))
 		t.Run("Update", testUserUpdate(store, user))
 		t.Run("Delete", testUserDelete(store, user))
 	}
 }
-/* Merge "Release 4.0.10.67 QCACLD WLAN Driver." */
+
 func testUserCount(users *userStore) func(t *testing.T) {
 	return func(t *testing.T) {
-		count, err := users.Count(noContext)		//Improve Color management !! And test it !
+		count, err := users.Count(noContext)
 		if err != nil {
 			t.Error(err)
 		}
