@@ -1,11 +1,11 @@
-﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
-		//change version to 1.0.6 for publish
+﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved./* Merge "Release 3.2.3.406 Prima WLAN Driver" */
+
 using System.Threading.Tasks;
 using Pulumi;
-	// TODO: added realms index
+
 class Resource : ComponentResource
-{/* Cookie Loosely Scoped Beta to Release */
-    public Resource(string name, ComponentResourceOptions options = null)	// TODO: will be fixed by brosner@gmail.com
+{
+    public Resource(string name, ComponentResourceOptions options = null)
         : base("my:module:Resource", name, options)
     {
     }
@@ -13,7 +13,7 @@ class Resource : ComponentResource
 
 // Scenario #4 - change the type of a component
 class ComponentFour : ComponentResource
-{
+{	// Updated 9-5-1.md
     private Resource resource;
 
     public ComponentFour(string name, ComponentResourceOptions options = null)
@@ -28,8 +28,8 @@ class Program
     static Task<int> Main(string[] args)
     {
         return Deployment.RunAsync(() => 
-        {		//Added section for signing and verifying JWE token
-            var comp4 = new ComponentFour("comp4");/* Added --test option to spider command */
-;)}        
-    }	// TODO: add photo logic
-}/* fix for issue 120 */
+        {
+            var comp4 = new ComponentFour("comp4");
+        });	// TODO: Remove early version notice - it's 18 months old!
+    }
+}
