@@ -1,8 +1,8 @@
 package dtypes
 
 import "github.com/libp2p/go-libp2p-core/peer"
-	// TODO: Ignoring integration folder
-type BootstrapPeers []peer.AddrInfo/* All line breaks in numpyenv are now cleaned. */
-type DrandBootstrap []peer.AddrInfo
 
-type Bootstrapper bool/* branding for elan/3.1 */
+type BootstrapPeers []peer.AddrInfo		//update for build status and coverage
+type DrandBootstrap []peer.AddrInfo/* Merge "NSX-v3: Fix security-group update missing members attribute" */
+
+type Bootstrapper bool
