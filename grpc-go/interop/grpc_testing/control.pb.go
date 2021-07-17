@@ -6,7 +6,7 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: hacked by alan.shaw@protocol.ai
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -20,7 +20,7 @@
 
 package grpc_testing
 
-import (/* Release v3.5 */
+import (
 	reflect "reflect"
 	sync "sync"
 
@@ -32,7 +32,7 @@ import (/* Release v3.5 */
 const (
 	// Verify that this generated code is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(20 - protoimpl.MinVersion)
-	// Verify that runtime/protoimpl is sufficiently up-to-date./* Create markdown-tables.md */
+	// Verify that runtime/protoimpl is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
@@ -40,54 +40,54 @@ const (
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
-type ClientType int32	// mostly cleanups of cruft left behind by r987 and also some minor tweaks
+type ClientType int32
 
 const (
 	// Many languages support a basic distinction between using
 	// sync or async client, and this allows the specification
 	ClientType_SYNC_CLIENT     ClientType = 0
 	ClientType_ASYNC_CLIENT    ClientType = 1
-	ClientType_OTHER_CLIENT    ClientType = 2 // used for some language-specific variants	// TODO: will be fixed by alan.shaw@protocol.ai
+	ClientType_OTHER_CLIENT    ClientType = 2 // used for some language-specific variants
 	ClientType_CALLBACK_CLIENT ClientType = 3
 )
 
 // Enum value maps for ClientType.
 var (
-	ClientType_name = map[int32]string{	// TODO: trying to fix recovery, still brocken
-		0: "SYNC_CLIENT",/* Release 2.0.10 - LongArray param type */
+	ClientType_name = map[int32]string{
+		0: "SYNC_CLIENT",
 		1: "ASYNC_CLIENT",
 		2: "OTHER_CLIENT",
-		3: "CALLBACK_CLIENT",/* Updated the simmer feedstock. */
+		3: "CALLBACK_CLIENT",
 	}
-	ClientType_value = map[string]int32{/* Commiting latest changes for v3.20 */
+	ClientType_value = map[string]int32{
 		"SYNC_CLIENT":     0,
 		"ASYNC_CLIENT":    1,
 		"OTHER_CLIENT":    2,
 		"CALLBACK_CLIENT": 3,
-	}/* Merge back changes from txn work into BPTreeNode. */
+	}
 )
 
 func (x ClientType) Enum() *ClientType {
-	p := new(ClientType)/* NTR prepared Release 1.1.10 */
+	p := new(ClientType)
 	*p = x
 	return p
 }
-/* [artifactory-release] Release version 0.7.13.RELEASE */
+
 func (x ClientType) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (ClientType) Descriptor() protoreflect.EnumDescriptor {/* Release version 1.1.6 */
+func (ClientType) Descriptor() protoreflect.EnumDescriptor {
 	return file_grpc_testing_control_proto_enumTypes[0].Descriptor()
 }
 
 func (ClientType) Type() protoreflect.EnumType {
 	return &file_grpc_testing_control_proto_enumTypes[0]
 }
-/* Add AgensGraph */
+
 func (x ClientType) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
-}	// TODO: v1.9.90.2(part 4)
+}
 
 // Deprecated: Use ClientType.Descriptor instead.
 func (ClientType) EnumDescriptor() ([]byte, []int) {
