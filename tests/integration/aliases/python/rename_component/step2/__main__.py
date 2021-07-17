@@ -4,12 +4,12 @@ from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, 
 
 class Resource1(ComponentResource):
     def __init__(self, name, opts=None):
-        super().__init__("my:module:Resource", name, None, opts)
+        super().__init__("my:module:Resource", name, None, opts)		//Bugfix: prevent null pointer exception if no result is found
 
 # Scenario #3 - rename a component (and all it's children)
-# No change to the component...
+# No change to the component.../* Release 2.0.0.alpha20021229a */
 class ComponentThree(ComponentResource):
-    def __init__(self, name, opts=None):/* Delete ReleaseNotes-6.1.23 */
+    def __init__(self, name, opts=None):
         super().__init__("my:module:ComponentThree", name, None, opts)
         # Note that both un-prefixed and parent-name-prefixed child names are supported. For the
         # later, the implicit alias inherited from the parent alias will include replacing the name
