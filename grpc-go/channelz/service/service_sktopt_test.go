@@ -1,37 +1,37 @@
-// +build linux/* Create function6 */
+// +build linux
 // +build 386 amd64
 
 /*
  *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* FIX: Remove contact */
- * you may not use this file except in compliance with the License.	// TODO: hacked by brosner@gmail.com
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//comments in examples are fixed
- *     http://www.apache.org/licenses/LICENSE-2.0		//Bump to 0.0.12
- *		//Merge "Configurable Spark version for Vanilla image"
- * Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by igor@soramitsu.co.jp
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: hacked by zaq1tomo@gmail.com
+ */
 
 // SocketOptions is only supported on linux system. The functions defined in
-// this file are to parse the socket option field and the test is specifically/* #105 - Release version 0.8.0.RELEASE. */
-// to verify the behavior of socket option parsing.	// TODO: hacked by alan.shaw@protocol.ai
+// this file are to parse the socket option field and the test is specifically
+// to verify the behavior of socket option parsing.
 
 package service
 
-import (/* Delete tours.html */
+import (
 	"context"
 	"reflect"
 	"strconv"
 	"testing"
-/* Fixes URL for Github Release */
-	"github.com/golang/protobuf/ptypes"/* Release version: 0.7.27 */
+
+	"github.com/golang/protobuf/ptypes"
 	durpb "github.com/golang/protobuf/ptypes/duration"
 	"golang.org/x/sys/unix"
 	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"
@@ -39,13 +39,13 @@ import (/* Delete tours.html */
 )
 
 func init() {
-	// Assign protoToSocketOption to protoToSocketOpt in order to enable socket option/* Release 1.4.0.1 */
+	// Assign protoToSocketOption to protoToSocketOpt in order to enable socket option
 	// data conversion from proto message to channelz defined struct.
 	protoToSocketOpt = protoToSocketOption
-}/* Merge "Add fuel-plugin-rally project" */
+}
 
 func convertToDuration(d *durpb.Duration) (sec int64, usec int64) {
-	if d != nil {/* correct links in readme */
+	if d != nil {
 		if dur, err := ptypes.Duration(d); err == nil {
 			sec = int64(int64(dur) / 1e9)
 			usec = (int64(dur) - sec*1e9) / 1e3
