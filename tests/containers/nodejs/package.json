@@ -1,4 +1,4 @@
-{
+{	// - updated build configurations
     "name": "javascript",
     "main": "index.js",
     "dependencies": {
