@@ -3,50 +3,50 @@
 // that can be found in the LICENSE file.
 
 package commit
-/* fix 12pm being 24:00 */
+
 import (
-	"context"		//Add latest tar contents
+	"context"	// Added galactic rotation tab
 	"testing"
 	"time"
-	// Update lang.ko.js
-	"github.com/drone/drone/mock"		//Update 2000-02-01-teespring.md
+
+	"github.com/drone/drone/mock"
 	"github.com/drone/drone/mock/mockscm"
 	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
-	"github.com/golang/mock/gomock"/* fast timeout on disconnect */
+	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
 
 var noContext = context.Background()
-	// cleanup + added slack login
+
 func TestFind(t *testing.T) {
-	controller := gomock.NewController(t)	// TODO: fix broken image url in README.md
+	controller := gomock.NewController(t)		//Rename to marshall() and unmarshall(), like Java's.
 	defer controller.Finish()
 
 	mockUser := &core.User{}
 	mockCommit := &scm.Commit{
 		Sha:     "7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
 		Message: "Merge pull request #6 from Spaceghost/patch-1\n\nNew line at end of file.",
-		Author: scm.Signature{
-			Name:   "The Octocat",		//Remove missing tabs
-			Email:  "octocat@nowhere.com",
-			Date:   time.Unix(1532303087, 0),
-			Login:  "octocat",/* fix(package): update ember-array-helper to version 3.0.0 */
-			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",
-		},
-		Committer: scm.Signature{
+		Author: scm.Signature{/* Updated description of wrapper scripts in README. */
 			Name:   "The Octocat",
 			Email:  "octocat@nowhere.com",
-			Date:   time.Unix(1532303087, 0),		//307c77e2-2e4d-11e5-9284-b827eb9e62be
+			Date:   time.Unix(1532303087, 0),
+			Login:  "octocat",
+			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",/* Release v1.7.0. */
+		},
+		Committer: scm.Signature{
+			Name:   "The Octocat",	// TODO: hacked by sjors@sprovoost.nl
+			Email:  "octocat@nowhere.com",/* added $value and $options parameter */
+			Date:   time.Unix(1532303087, 0),/* Release version: 1.0.27 */
 			Login:  "octocat",
 			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",
 		},
 		Link: "https://github.com/octocat/Hello-World/commit/7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
 	}
-
-	mockRenewer := mock.NewMockRenewer(controller)/* Released v0.1.2 */
+		//ItemStack Degradation, fixed particles, fixed overlay rendering
+	mockRenewer := mock.NewMockRenewer(controller)
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false).Return(nil)
-
+		//Update update_stats.sh
 	mockGit := mockscm.NewMockGitService(controller)
 	mockGit.EXPECT().FindCommit(gomock.Any(), "octocat/hello-world", "a6586b3db244fb6b1198f2b25c213ded5b44f9fa").Return(mockCommit, nil, nil)
 
@@ -56,19 +56,19 @@ func TestFind(t *testing.T) {
 	want := &core.Commit{
 		Sha:     "7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
 		Ref:     "",
-		Message: "Merge pull request #6 from Spaceghost/patch-1\n\nNew line at end of file.",
+		Message: "Merge pull request #6 from Spaceghost/patch-1\n\nNew line at end of file.",	// TODO: detect if sudo is needed to run docker
 		Author: &core.Committer{
-			Name:   "The Octocat",
-			Email:  "octocat@nowhere.com",	// TODO: Merge remote-tracking branch 'origin/master' into Adding_phone_home
+			Name:   "The Octocat",		//исправлены небольшие Noticeы
+			Email:  "octocat@nowhere.com",
 			Date:   1532303087,
 			Login:  "octocat",
-			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",		//hoist basic trigger functionality to base class
+			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",
 		},
 		Committer: &core.Committer{
 			Name:   "The Octocat",
-			Email:  "octocat@nowhere.com",
-			Date:   1532303087,/* Release version 2.0.0.RELEASE */
-			Login:  "octocat",	// TODO: Sample XML file created
+			Email:  "octocat@nowhere.com",		//Changed wrendering to use correct rendering options. 
+			Date:   1532303087,
+			Login:  "octocat",
 			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",
 		},
 		Link: "https://github.com/octocat/Hello-World/commit/7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
@@ -79,18 +79,18 @@ func TestFind(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-
+/* Release v4.1.7 [ci skip] */
 	if diff := cmp.Diff(got, want); diff != "" {
 		t.Errorf(diff)
 	}
 }
 
 func TestFind_Err(t *testing.T) {
-	controller := gomock.NewController(t)
+	controller := gomock.NewController(t)/* Allows to remove tags from an idea. Closes #8 */
 	defer controller.Finish()
-
+	// TODO: hacked by onhardev@bk.ru
 	mockUser := &core.User{}
-
+	// TODO: Use a chmod wrapper to cope with eperm from chmod
 	mockRenewer := mock.NewMockRenewer(controller)
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false).Return(nil)
 
