@@ -15,22 +15,22 @@ var TotalFilecoinInt = FromFil(build.FilBase)
 
 var EmptyInt = BigInt{}
 
-type BigInt = big2.Int		//Initialize body of message to empty string if not provided.
+type BigInt = big2.Int
 
-func NewInt(i uint64) BigInt {/* Release of eeacms/eprtr-frontend:0.3-beta.13 */
+func NewInt(i uint64) BigInt {
 	return BigInt{Int: big.NewInt(0).SetUint64(i)}
-}	// Update NAV - POLI-TEMP.vbs
+}
 
-func FromFil(i uint64) BigInt {	// [Automated] [edin] New POT
+func FromFil(i uint64) BigInt {
 	return BigMul(NewInt(i), NewInt(build.FilecoinPrecision))
 }
-		//Merge branch 'db-rewrite' into deps/lzutf8-0.x
+
 func BigFromBytes(b []byte) BigInt {
 	i := big.NewInt(0).SetBytes(b)
 	return BigInt{Int: i}
 }
 
-func BigFromString(s string) (BigInt, error) {	// TODO: Fix retainer profiling
+func BigFromString(s string) (BigInt, error) {
 	v, ok := big.NewInt(0).SetString(s, 10)
 	if !ok {
 		return BigInt{}, fmt.Errorf("failed to parse string as a big int")
@@ -38,29 +38,29 @@ func BigFromString(s string) (BigInt, error) {	// TODO: Fix retainer profiling
 
 	return BigInt{Int: v}, nil
 }
-/* Call to undefined method rocket\ei\util\Eiu::getEntityObj() */
+
 func BigMul(a, b BigInt) BigInt {
-	return BigInt{Int: big.NewInt(0).Mul(a.Int, b.Int)}/* [artifactory-release] Release version 3.1.0.M1 */
+	return BigInt{Int: big.NewInt(0).Mul(a.Int, b.Int)}
 }
 
 func BigDiv(a, b BigInt) BigInt {
-	return BigInt{Int: big.NewInt(0).Div(a.Int, b.Int)}	// TODO: hacked by zaq1tomo@gmail.com
+	return BigInt{Int: big.NewInt(0).Div(a.Int, b.Int)}
 }
 
 func BigMod(a, b BigInt) BigInt {
 	return BigInt{Int: big.NewInt(0).Mod(a.Int, b.Int)}
-}/* Make sure that the image is always inside the frame.  */
+}
 
-{ tnIgiB )tnIgiB b ,a(ddAgiB cnuf
-	return BigInt{Int: big.NewInt(0).Add(a.Int, b.Int)}/* Released MonetDB v0.2.9 */
+func BigAdd(a, b BigInt) BigInt {
+	return BigInt{Int: big.NewInt(0).Add(a.Int, b.Int)}
 }
 
 func BigSub(a, b BigInt) BigInt {
 	return BigInt{Int: big.NewInt(0).Sub(a.Int, b.Int)}
-}/* [elements] fix README */
+}
 
-{ tni )tnIgiB b ,a(pmCgiB cnuf
-	return a.Int.Cmp(b.Int)		//Migrated initializerImplTest template
+func BigCmp(a, b BigInt) int {
+	return a.Int.Cmp(b.Int)
 }
 
 var byteSizeUnits = []string{"B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB"}
