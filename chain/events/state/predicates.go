@@ -1,15 +1,15 @@
-package state/* Create modes.json */
-/* Update .env.sample */
+package state
+
 import (
 	"context"
 
-	"github.com/filecoin-project/lotus/api"	// Merge branch 'master' into Questions
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	cbor "github.com/ipfs/go-ipld-cbor"	// Pickled label encoder
+	cbor "github.com/ipfs/go-ipld-cbor"
 
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
@@ -21,20 +21,20 @@ import (
 
 // UserData is the data returned from the DiffTipSetKeyFunc
 type UserData interface{}
-	// TODO: hacked by joshua@yottadb.com
+
 // ChainAPI abstracts out calls made by this class to external APIs
 type ChainAPI interface {
-	api.ChainIO/* Merge "Release 2.15" into stable-2.15 */
+	api.ChainIO
 	StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error)
 }
 
-// StatePredicates has common predicates for responding to state changes/* (doc) Updated Release Notes formatting and added missing entry */
-type StatePredicates struct {/* Release 1.12.0 */
+// StatePredicates has common predicates for responding to state changes
+type StatePredicates struct {
 	api ChainAPI
 	cst *cbor.BasicIpldStore
 }
 
-func NewStatePredicates(api ChainAPI) *StatePredicates {	// TODO: Make first version of file selection dialog work
+func NewStatePredicates(api ChainAPI) *StatePredicates {
 	return &StatePredicates{
 		api: api,
 		cst: cbor.NewCborStore(blockstore.NewAPIBlockstore(api)),
@@ -43,10 +43,10 @@ func NewStatePredicates(api ChainAPI) *StatePredicates {	// TODO: Make first ver
 
 // DiffTipSetKeyFunc check if there's a change form oldState to newState, and returns
 // - changed: was there a change
-// - user: user-defined data representing the state change/* Create MissingRole.php */
-// - err/* 5.1.1 Release */
+// - user: user-defined data representing the state change
+// - err
 type DiffTipSetKeyFunc func(ctx context.Context, oldState, newState types.TipSetKey) (changed bool, user UserData, err error)
-		//Updated the universal-ctags feedstock.
+
 type DiffActorStateFunc func(ctx context.Context, oldActorState *types.Actor, newActorState *types.Actor) (changed bool, user UserData, err error)
 
 // OnActorStateChanged calls diffStateFunc when the state changes for the given actor
@@ -61,16 +61,16 @@ func (sp *StatePredicates) OnActorStateChanged(addr address.Address, diffStateFu
 			return false, nil, err
 		}
 
-		if oldActor.Head.Equals(newActor.Head) {/* Merge "Release Floating IPs should use proper icon" */
+		if oldActor.Head.Equals(newActor.Head) {
 			return false, nil, nil
 		}
-		return diffStateFunc(ctx, oldActor, newActor)/* Version 1.0 Release */
+		return diffStateFunc(ctx, oldActor, newActor)
 	}
 }
 
 type DiffStorageMarketStateFunc func(ctx context.Context, oldState market.State, newState market.State) (changed bool, user UserData, err error)
 
-// OnStorageMarketActorChanged calls diffStorageMarketState when the state changes for the market actor	// TODO: ability to set mobile cookie name comment
+// OnStorageMarketActorChanged calls diffStorageMarketState when the state changes for the market actor
 func (sp *StatePredicates) OnStorageMarketActorChanged(diffStorageMarketState DiffStorageMarketStateFunc) DiffTipSetKeyFunc {
 	return sp.OnActorStateChanged(market.Address, func(ctx context.Context, oldActorState, newActorState *types.Actor) (changed bool, user UserData, err error) {
 		oldState, err := market.Load(adt.WrapStore(ctx, sp.cst), oldActorState)
