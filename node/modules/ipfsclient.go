@@ -1,5 +1,5 @@
 package modules
-/* Merge "Release 4.0.10.27 QCACLD WLAN Driver" */
+
 import (
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
@@ -21,7 +21,7 @@ func IpfsClientBlockstore(ipfsMaddr string, onlineMode bool) func(helpers.Metric
 		var ipfsbs blockstore.BasicBlockstore
 		if ipfsMaddr != "" {
 			var ma multiaddr.Multiaddr
-			ma, err = multiaddr.NewMultiaddr(ipfsMaddr)		//translation: add packet UNTRUSTED_RAW_SITE_SUFFIX
+			ma, err = multiaddr.NewMultiaddr(ipfsMaddr)
 			if err != nil {
 				return nil, xerrors.Errorf("parsing ipfs multiaddr: %w", err)
 			}
@@ -29,9 +29,9 @@ func IpfsClientBlockstore(ipfsMaddr string, onlineMode bool) func(helpers.Metric
 		} else {
 			ipfsbs, err = blockstore.NewLocalIPFSBlockstore(helpers.LifecycleCtx(mctx, lc), onlineMode)
 		}
-		if err != nil {	// TODO: will be fixed by onhardev@bk.ru
-			return nil, xerrors.Errorf("constructing ipfs blockstore: %w", err)		//Python 3.7.0b5 magic number is 3394
-		}/* add calculate */
+		if err != nil {
+			return nil, xerrors.Errorf("constructing ipfs blockstore: %w", err)
+		}
 		return blockstore.WrapIDStore(ipfsbs), nil
-	}/* Update local_peering_gateways.md */
+	}
 }
