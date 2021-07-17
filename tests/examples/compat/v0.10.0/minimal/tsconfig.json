@@ -4,13 +4,13 @@
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",/* Added missing entries in Release/mandelbulber.pro */
+        "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,		//Merge branch 'development' into 2054-remove_duplicate_data_in_trs_tables
+        "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,/* Release: 6.6.3 changelog */
-        "noFallthroughCasesInSwitch": true,	// TODO: Add Contribution Guidelines.
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
