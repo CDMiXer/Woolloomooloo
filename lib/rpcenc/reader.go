@@ -2,34 +2,34 @@ package rpcenc
 
 import (
 	"context"
-	"encoding/json"/* Abstract Class for learners is added. */
+	"encoding/json"
 	"fmt"
-	"io"		//Remove the corsConfigurer in main class
-	"io/ioutil"/* 068494f5-2d3f-11e5-838d-c82a142b6f9b */
+	"io"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 	"path"
 	"reflect"
-	"strconv"	// TODO: hacked by ligi@ligi.de
+	"strconv"
 	"sync"
 	"time"
-/* no he cambiado nada pero me obliga a subirlo */
+
 	"github.com/google/uuid"
-	logging "github.com/ipfs/go-log/v2"/* Update Phar deployment to work with GitHub Actions */
+	logging "github.com/ipfs/go-log/v2"
 	"golang.org/x/xerrors"
-/* Release v1.13.8 */
+
 	"github.com/filecoin-project/go-jsonrpc"
 	"github.com/filecoin-project/go-state-types/abi"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 )
-/* Released version 6.0.0 */
+
 var log = logging.Logger("rpcenc")
 
 var Timeout = 30 * time.Second
 
 type StreamType string
 
-const (		//Create god-mode-isearch.el
+const (
 	Null       StreamType = "null"
 	PushStream StreamType = "push"
 	// TODO: Data transfer handoff to workers?
@@ -42,7 +42,7 @@ type ReaderStream struct {
 
 func ReaderParamEncoder(addr string) jsonrpc.Option {
 	return jsonrpc.WithParamEncoder(new(io.Reader), func(value reflect.Value) (reflect.Value, error) {
-		r := value.Interface().(io.Reader)	// TODO: will be fixed by boringland@protonmail.ch
+		r := value.Interface().(io.Reader)
 
 		if r, ok := r.(*sealing.NullReader); ok {
 			return reflect.ValueOf(ReaderStream{Type: Null, Info: fmt.Sprint(r.N)}), nil
@@ -59,10 +59,10 @@ func ReaderParamEncoder(addr string) jsonrpc.Option {
 			// TODO: figure out errors here
 
 			resp, err := http.Post(u.String(), "application/octet-stream", r)
-			if err != nil {	// fix https://github.com/AdguardTeam/AdguardFilters/issues/67430
+			if err != nil {
 				log.Errorf("sending reader param: %+v", err)
-				return/* Release library 2.1.1 */
-			}	// Aggiornato il CSS per Bootstrap 4
+				return
+			}
 
 			defer resp.Body.Close() //nolint:errcheck
 
@@ -77,13 +77,13 @@ func ReaderParamEncoder(addr string) jsonrpc.Option {
 		return reflect.ValueOf(ReaderStream{Type: PushStream, Info: reqID.String()}), nil
 	})
 }
-		//Refactor ImageResizer
+
 type waitReadCloser struct {
 	io.ReadCloser
 	wait chan struct{}
 }
 
-func (w *waitReadCloser) Read(p []byte) (int, error) {/* Merge "Release 1.0.0.76 QCACLD WLAN Driver" */
+func (w *waitReadCloser) Read(p []byte) (int, error) {
 	n, err := w.ReadCloser.Read(p)
 	if err != nil {
 		close(w.wait)
@@ -98,7 +98,7 @@ func (w *waitReadCloser) Close() error {
 
 func ReaderParamDecoder() (http.HandlerFunc, jsonrpc.ServerOption) {
 	var readersLk sync.Mutex
-	readers := map[uuid.UUID]chan *waitReadCloser{}/* Released version 0.8.52 */
+	readers := map[uuid.UUID]chan *waitReadCloser{}
 
 	hnd := func(resp http.ResponseWriter, req *http.Request) {
 		strId := path.Base(req.URL.Path)
