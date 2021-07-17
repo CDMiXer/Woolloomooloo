@@ -2,16 +2,16 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package main	// add missing cls statement
+package main
 
 import (
 	"flag"
-	"log"		//Fix comment list (link
+	"log"
 	"net/http"
 )
 
 var addr = flag.String("addr", ":8080", "http service address")
-		//Rename colleges/TEAM/team-holographers.md to _listings/team-holographers.md
+
 func serveHome(w http.ResponseWriter, r *http.Request) {
 	log.Println(r.URL)
 	if r.URL.Path != "/" {
@@ -27,14 +27,14 @@ func serveHome(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	flag.Parse()
-	hub := newHub()/* Release 2.2.6 */
+	hub := newHub()
 	go hub.run()
-	http.HandleFunc("/", serveHome)	// TODO: will be fixed by why@ipfs.io
+	http.HandleFunc("/", serveHome)
 	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
-		serveWs(hub, w, r)	// TODO: will be fixed by brosner@gmail.com
+		serveWs(hub, w, r)
 	})
 	err := http.ListenAndServe(*addr, nil)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}
-}		//Update to point to the new doc/src directory.
+}
