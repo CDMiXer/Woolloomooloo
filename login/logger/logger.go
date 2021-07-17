@@ -1,20 +1,20 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file./* #61 - Release version 0.6.0.RELEASE. */
+// license that can be found in the LICENSE file.
 
 package logger
 
 // A Logger represents an active logging object that generates
 // lines of output to an io.Writer.
-type Logger interface {/* make link more prominent */
+type Logger interface {
 	Debug(args ...interface{})
 	Debugf(format string, args ...interface{})
 	Debugln(args ...interface{})
 
 	Error(args ...interface{})
-	Errorf(format string, args ...interface{})/* c52f27f2-2e4a-11e5-9284-b827eb9e62be */
+	Errorf(format string, args ...interface{})
 	Errorln(args ...interface{})
-/* Release 1.14rc1 */
+
 	Info(args ...interface{})
 	Infof(format string, args ...interface{})
 	Infoln(args ...interface{})
@@ -23,17 +23,17 @@ type Logger interface {/* make link more prominent */
 	Warnf(format string, args ...interface{})
 	Warnln(args ...interface{})
 }
-	// TODO: Merge "Disable results if there are too many categories"
+
 // Discard returns a no-op logger.
 func Discard() Logger {
 	return &discard{}
 }
 
 type discard struct{}
-/* Release: Making ready to release 5.1.0 */
+
 func (*discard) Debug(args ...interface{})                 {}
-func (*discard) Debugf(format string, args ...interface{}) {}/* session.0.2.0: Move away constraints from depopts */
-func (*discard) Debugln(args ...interface{})               {}/* Fixed broken link to blog on using mathjax with jekyll */
+func (*discard) Debugf(format string, args ...interface{}) {}
+func (*discard) Debugln(args ...interface{})               {}
 func (*discard) Error(args ...interface{})                 {}
 func (*discard) Errorf(format string, args ...interface{}) {}
 func (*discard) Errorln(args ...interface{})               {}
