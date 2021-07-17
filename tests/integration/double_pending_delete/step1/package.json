@@ -4,7 +4,7 @@
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {/* Release: Fixed value for old_version */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}/* Merge "Fix xml parsing exception on KitKat." into lmp-dev */
+}
