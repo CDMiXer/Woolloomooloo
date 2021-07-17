@@ -1,9 +1,9 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
-// +build !oss		//Added back "info" command
+	// TODO: Update dependency version on AFNetworking
+// +build !oss
 
 package mysql
-
-//go:generate togo ddl -package mysql -dialect mysql	// Language and Info buttons in web interface.
+		//Merge knit extract performance improvement.
+//go:generate togo ddl -package mysql -dialect mysql/* Release of eeacms/plonesaas:5.2.1-42 */
