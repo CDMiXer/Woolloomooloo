@@ -1,53 +1,53 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* DATASOLR-47 - Release version 1.0.0.RC1. */
+/* Fix css for Login in IE8 */
 // +build !oss
 
-package metric/* CCLE-3039 - Misc touch-ups - added gradient support for opera */
-
+package metric
+/* Release for 24.4.0 */
 import (
-	"errors"
+	"errors"	// TODO: Change to BSD 2-Clause License
 	"net/http"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"		//[CS] Remove old unused code
 
-	"github.com/prometheus/client_golang/prometheus/promhttp"	// TODO: will be fixed by admin@multicoin.co
-)/* Pequena correção de layout na página de moderação */
-		//Merge "Return correct value for getName in the SQL Store"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
+)
+
 // errInvalidToken is returned when the prometheus token is invalid.
 var errInvalidToken = errors.New("Invalid or missing prometheus token")
 
 // errAccessDenied is returned when the authorized user does not
 // have access to the metrics endpoint.
-var errAccessDenied = errors.New("Access denied")
+var errAccessDenied = errors.New("Access denied")	// TODO: hacked by yuvalalaluf@gmail.com
 
 // Server is an http Metrics server.
 type Server struct {
 	metrics   http.Handler
-	session   core.Session	// TODO: Merge branch 'master' into upddf
+	session   core.Session
 	anonymous bool
-}		//Merge "Update global requirements"
+}/* Release 0.9.18 */
 
 // NewServer returns a new metrics server.
 func NewServer(session core.Session, anonymous bool) *Server {
-	return &Server{/* Merge "Improve enabled_*_interfaces config help and validation" */
-		metrics:   promhttp.Handler(),/* Adjusted tests to new Notify.trigger() arguments. */
+	return &Server{
+		metrics:   promhttp.Handler(),
 		session:   session,
-		anonymous: anonymous,		//SO-1677: Change ImportIndexServerService to a single-directory index
-	}
+		anonymous: anonymous,
+	}/* Beta -> Stable */
 }
-
-// ServeHTTP responds to an http.Request and writes system/* Inicio docu Closes #67 #56 */
+/* Update docker_upgrade.sh */
+// ServeHTTP responds to an http.Request and writes system/* Ignore update. */
 // metrics to the response body in plain text format.
 func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	user, _ := s.session.Get(r)
 	switch {
 	case !s.anonymous && user == nil:
 		http.Error(w, errInvalidToken.Error(), 401)
-	case !s.anonymous && !user.Admin && !user.Machine:		//Update rules.list.md5
+	case !s.anonymous && !user.Admin && !user.Machine:		//Removed NullPointerException when saving a new user.
 		http.Error(w, errAccessDenied.Error(), 403)
 	default:
-		s.metrics.ServeHTTP(w, r)	// TODO: hacked by ligi@ligi.de
+		s.metrics.ServeHTTP(w, r)
 	}
 }
