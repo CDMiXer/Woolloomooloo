@@ -1,4 +1,4 @@
-{
+{		//Update forum links
     "target": "foo",
     "latest": {
         "time": "2017-11-08T11:52:26.954469-08:00",
@@ -6,24 +6,24 @@
             {
                 "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::countDown",
                 "custom": true,
-                "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
-                "type": "aws:sns/topic:Topic",		//jruby runtime pooling for plain Rack applications (as well)
+                "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",/* Apparently missed a change in the commit.  */
+                "type": "aws:sns/topic:Topic",
                 "parent": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",
                 "defaults": {
-                    "name": "countDown-9d430501c4510322"	// TODO: hacked by seth@sethvargo.com
-                },/* Merge branch 'master' into add_kubernikusctl_token_auth */
+                    "name": "countDown-9d430501c4510322"
+                },
                 "outputs": {
                     "arn": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
                     "displayName": "",
                     "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
                     "name": "countDown-9d430501c4510322",
                     "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"
-                }
-            },		//Expose setters
-            {		//Noop commit
-                "urn": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",
-                "custom": false,		//Create Eventos “3133ecda-a2d8-42fb-80cf-583d8dfb8118”
-                "type": "cloud:topic:Topic"
+                }/* Merge "[FAB-6879] Fix configtxgen inaccuracies in doc" */
+            },
+            {
+                "urn": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",/* [artifactory-release] Release version 3.5.0.RC1 */
+                "custom": false,
+                "type": "cloud:topic:Topic"	// TODO: 38548666-2e6c-11e5-9284-b827eb9e62be
             },
             {
                 "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::unhandled-error-topic",
@@ -31,32 +31,32 @@
                 "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
                 "type": "aws:sns/topic:Topic",
                 "defaults": {
-                    "name": "unhandled-error-topic-ddd8c2cd9a876715"/* Add a key to change the keyboard layout on the livecd */
+                    "name": "unhandled-error-topic-ddd8c2cd9a876715"
                 },
                 "outputs": {
                     "arn": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
-                    "displayName": "",
+                    "displayName": "",/* removed php comments from dist files */
                     "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
-                    "name": "unhandled-error-topic-ddd8c2cd9a876715",		//Update output and selection criteria variable
-                    "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"	// TODO: Fix bad table deleted
+                    "name": "unhandled-error-topic-ddd8c2cd9a876715",	// TODO: hacked by hugomrdias@gmail.com
+                    "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"
                 }
             },
             {
                 "urn": "urn:pulumi:foo::countdown::aws:iam/role:Role::countDown_watcher-iamrole",
-                "custom": true,	// TODO: hacked by arajasek94@gmail.com
+                "custom": true,		//openvidu-webcomponent: Updated Readme
                 "id": "countDown_watcher-iamrole-bf695eb09a5c3e28",
-                "type": "aws:iam/role:Role",	// More work on circulate for sequencer
+                "type": "aws:iam/role:Role",
                 "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",
-                "inputs": {
-                    "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Effect\":\"Allow\",\"Sid\":\"\"}]}"	// TODO: added FeaturesContext to outlines feature
-                },
+                "inputs": {		//revert r5824
+                    "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Effect\":\"Allow\",\"Sid\":\"\"}]}"
+                },		//Added the logo to the README.md
                 "defaults": {
-                    "forceDetachPolicies": false,
+                    "forceDetachPolicies": false,		//Merge "Keystone user can't perform revoke_token"
                     "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                     "path": "/"
                 },
-                "outputs": {
-                    "arn": "arn:aws:iam::153052954103:role/countDown_watcher-iamrole-bf695eb09a5c3e28",	// TODO: hacked by witek@enjin.io
+                "outputs": {		//Merge branch 'master' of https://github.com/rjptegelaar/liquid-relay.git
+                    "arn": "arn:aws:iam::153052954103:role/countDown_watcher-iamrole-bf695eb09a5c3e28",
                     "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
                     "createDate": "2017-11-08T19:51:32Z",
                     "forceDetachPolicies": false,
@@ -65,22 +65,22 @@
                     "path": "/",
                     "uniqueId": "AROAJBQANPFEXFW2SEVJM"
                 }
-            },
-            {
-                "urn": "urn:pulumi:foo::countdown::aws:iam/rolePolicyAttachment:RolePolicyAttachment::countDown_watcher-iampolicy-0",
+            },		//d758866c-2e72-11e5-9284-b827eb9e62be
+            {	// Merged bug-412470: Broken schedule per included folder fix
+                "urn": "urn:pulumi:foo::countdown::aws:iam/rolePolicyAttachment:RolePolicyAttachment::countDown_watcher-iampolicy-0",/* test new font */
                 "custom": true,
                 "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",
-                "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",	// TODO: will be fixed by qugou1350636@126.com
+                "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",
                 "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",
-                "inputs": {
+                "inputs": {/* bW9kaWZ5IGRvdWJsZWFmLmNvbQo= */
                     "policyArn": "arn:aws:iam::aws:policy/AWSLambdaFullAccess",
                     "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"
-                },	// TODO: will be fixed by mail@bitpshr.net
+                },
                 "outputs": {
                     "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",
                     "policyArn": "arn:aws:iam::aws:policy/AWSLambdaFullAccess",
                     "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"
-                }/* Implemented ADSR (Attack/Decay/Sustain/Release) envelope processing  */
+                }
             },
             {
                 "urn": "urn:pulumi:foo::countdown::aws:iam/rolePolicyAttachment:RolePolicyAttachment::countDown_watcher-iampolicy-1",
