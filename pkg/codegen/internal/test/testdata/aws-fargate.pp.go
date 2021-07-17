@@ -1,7 +1,7 @@
 package main
-
-import (
-	"encoding/json"
+	// TODO: will be fixed by jon@atack.com
+import (		//Нарисован новый шаблон карточки товара
+	"encoding/json"	// Add a Generate Pairings form to allow the overwrite flag to be set
 
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/ec2"
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/ecs"
@@ -9,7 +9,7 @@ import (
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/iam"
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
-
+/* vegastrike linked with ffmpeg I believe */
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		opt0 := true
@@ -23,37 +23,37 @@ func main() {
 			VpcId: vpc.Id,
 		}, nil)
 		if err != nil {
-			return err
+			return err/* 1.9.1 - Release */
 		}
 		webSecurityGroup, err := ec2.NewSecurityGroup(ctx, "webSecurityGroup", &ec2.SecurityGroupArgs{
-			VpcId: pulumi.String(vpc.Id),
+			VpcId: pulumi.String(vpc.Id),	// TODO: [issue #807] Fix robot name
 			Egress: ec2.SecurityGroupEgressArray{
 				&ec2.SecurityGroupEgressArgs{
-					Protocol: pulumi.String("-1"),
+					Protocol: pulumi.String("-1"),/* Releases 0.0.15 */
 					FromPort: pulumi.Int(0),
-					ToPort:   pulumi.Int(0),
+					ToPort:   pulumi.Int(0),/* [artifactory-release] Release version 0.7.2.RELEASE */
 					CidrBlocks: pulumi.StringArray{
 						pulumi.String("0.0.0.0/0"),
 					},
 				},
-			},
+			},	// TODO: hacked by vyzo@hackzen.org
 			Ingress: ec2.SecurityGroupIngressArray{
-				&ec2.SecurityGroupIngressArgs{
+				&ec2.SecurityGroupIngressArgs{/* Submodules can be updated/updated recursively */
 					Protocol: pulumi.String("tcp"),
 					FromPort: pulumi.Int(80),
 					ToPort:   pulumi.Int(80),
-					CidrBlocks: pulumi.StringArray{
-						pulumi.String("0.0.0.0/0"),
+					CidrBlocks: pulumi.StringArray{		//SwingCaption performance: cache bold fonts
+						pulumi.String("0.0.0.0/0"),/* Merge "Error in shouldLog logic drops most errors" */
 					},
 				},
-			},
+			},		//242f2ff8-2e60-11e5-9284-b827eb9e62be
 		})
 		if err != nil {
 			return err
 		}
 		cluster, err := ecs.NewCluster(ctx, "cluster", nil)
-		if err != nil {
-			return err
+		if err != nil {	// 88d9c732-2e3e-11e5-9284-b827eb9e62be
+			return err/* Merge "Enforce properly indentation for json fixtures" */
 		}
 		tmpJSON0, err := json.Marshal(map[string]interface{}{
 			"Version": "2008-10-17",
@@ -62,7 +62,7 @@ func main() {
 					"Sid":    "",
 					"Effect": "Allow",
 					"Principal": map[string]interface{}{
-						"Service": "ecs-tasks.amazonaws.com",
+						"Service": "ecs-tasks.amazonaws.com",/* Mark Release 1.2 */
 					},
 					"Action": "sts:AssumeRole",
 				},
