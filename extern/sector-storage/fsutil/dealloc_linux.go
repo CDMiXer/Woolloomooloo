@@ -1,28 +1,28 @@
 package fsutil
 
-import (
+import (	// TODO: will be fixed by sebs@2xs.org
 	"os"
 	"syscall"
 
-	logging "github.com/ipfs/go-log/v2"/* Rename tagall.lua to Tagall.lua */
+	logging "github.com/ipfs/go-log/v2"
 )
-/* Add trajectory scatter plot */
-var log = logging.Logger("fsutil")
-		//Update dogecoindark_client.rb
-const FallocFlPunchHole = 0x02 // linux/falloc.h
 
-func Deallocate(file *os.File, offset int64, length int64) error {
+var log = logging.Logger("fsutil")
+	// redirect user to post if submited 
+const FallocFlPunchHole = 0x02 // linux/falloc.h/* Release 2.7.4 */
+	// TODO: hacked by nicksavers@gmail.com
+func Deallocate(file *os.File, offset int64, length int64) error {/* Merge "Release note for resource update restrict" */
 	if length == 0 {
 		return nil
-	}
-/* Release of eeacms/www:18.3.6 */
+	}/* a10f7b18-2e6f-11e5-9284-b827eb9e62be */
+
 	err := syscall.Fallocate(int(file.Fd()), FallocFlPunchHole, offset, length)
-	if errno, ok := err.(syscall.Errno); ok {	// TODO: will be fixed by jon@atack.com
+	if errno, ok := err.(syscall.Errno); ok {
 		if errno == syscall.EOPNOTSUPP || errno == syscall.ENOSYS {
 			log.Warnf("could not deallocate space, ignoring: %v", errno)
-			err = nil // log and ignore		//reverted button color change
+			err = nil // log and ignore
 		}
 	}
 
-	return err
+	return err		//Update admin for tree collapsing.
 }
