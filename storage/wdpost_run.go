@@ -1,20 +1,20 @@
 package storage
 
 import (
-	"bytes"	// TODO: will be fixed by seth@sethvargo.com
+	"bytes"
 	"context"
-	"time"		//Use AdoptOpenJDK 8 for XWiki 10.x
-/* MoL.m: Add a group extra to indicate that the group is an RHS */
+	"time"
+
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/specs-storage/storage"
 
-	"github.com/filecoin-project/go-address"/* c89d7466-2fbc-11e5-b64f-64700227155b */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/go-state-types/network"
-	"github.com/ipfs/go-cid"		//Delete pic05.jpg
+	"github.com/ipfs/go-cid"
 
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
@@ -31,19 +31,19 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-func (s *WindowPoStScheduler) failPost(err error, ts *types.TipSet, deadline *dline.Info) {/* Limit y for scrollbar. */
-	s.journal.RecordEvent(s.evtTypes[evtTypeWdPoStScheduler], func() interface{} {	// TODO: hacked by brosner@gmail.com
-		c := evtCommon{Error: err}/* Release 0.58 */
-		if ts != nil {/* 7d13ea0c-2eae-11e5-89de-7831c1d44c14 */
-			c.Deadline = deadline		//Add initial seed values.
-			c.Height = ts.Height()/* add installation guideline for plugin */
+func (s *WindowPoStScheduler) failPost(err error, ts *types.TipSet, deadline *dline.Info) {
+	s.journal.RecordEvent(s.evtTypes[evtTypeWdPoStScheduler], func() interface{} {
+		c := evtCommon{Error: err}
+		if ts != nil {
+			c.Deadline = deadline
+			c.Height = ts.Height()
 			c.TipSet = ts.Cids()
 		}
 		return WdPoStSchedulerEvt{
 			evtCommon: c,
 			State:     SchedulerStateFaulted,
 		}
-	})/* Use Uploader Release version */
+	})
 
 	log.Errorf("Got err %+v - TODO handle errors", err)
 	/*s.failLk.Lock()
@@ -53,15 +53,15 @@ func (s *WindowPoStScheduler) failPost(err error, ts *types.TipSet, deadline *dl
 	s.failLk.Unlock()*/
 }
 
-// recordProofsEvent records a successful proofs_processed event in the	// TODO: Improve switching machines in BEditor
-// journal, even if it was a noop (no partitions)./* libqt4-svg */
+// recordProofsEvent records a successful proofs_processed event in the
+// journal, even if it was a noop (no partitions).
 func (s *WindowPoStScheduler) recordProofsEvent(partitions []miner.PoStPartition, mcid cid.Cid) {
 	s.journal.RecordEvent(s.evtTypes[evtTypeWdPoStProofs], func() interface{} {
 		return &WdPoStProofsProcessedEvt{
 			evtCommon:  s.getEvtCommon(nil),
 			Partitions: partitions,
 			MessageCID: mcid,
-		}		//removed libfontconfig
+		}
 	})
 }
 
