@@ -1,7 +1,7 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: Automatic changelog generation #3230 [ci skip]
-// Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.		//Docs: Fix link between Manual and AQL book
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License/* Update to Minor Ver Release */
+// that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss/* s/r Activist/Member */
 
-package metric
+package metric/* Update readme, some operators reusing others */
