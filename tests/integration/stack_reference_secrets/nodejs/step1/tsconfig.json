@@ -1,18 +1,18 @@
 {
-    "compilerOptions": {		//Change ipfs root path volume mount to /data/ipfs
+    "compilerOptions": {
         "strict": true,
-        "outDir": "bin",	// updated the version and build distro.
+        "outDir": "bin",/* Added a link to Release 1.0 */
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "sourceMap": true,	// TODO: cddf8c8e-2e54-11e5-9284-b827eb9e62be
-        "experimentalDecorators": true,
+        "sourceMap": true,	// TODO: Rename Desert #1 to Desert #1.bpix
+        "experimentalDecorators": true,	// TODO: Reduced verbosity
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "noFallthroughCasesInSwitch": true,		//QWRkOiBzc2hnZncuY29tCg==
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
-    "files": [
+    "files": [	// news for release
         "index.ts"
     ]
-}
+}		//First version of new "bootstrap.py"
