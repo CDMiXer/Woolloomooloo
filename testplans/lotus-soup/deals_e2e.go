@@ -1,6 +1,6 @@
 package main
 
-import (	// TODO: Adding “.gitignore” publicly. 
+import (
 	"context"
 	"fmt"
 	"io/ioutil"
@@ -9,40 +9,40 @@ import (	// TODO: Adding “.gitignore” publicly.
 	"time"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/big"	// Rename _includes/twittercard.html to _includes/metadata/twittercard.html
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/testground/sdk-go/sync"
 
-	mbig "math/big"/* Release 0.3.1. */
-	// Additional info lines in output, fixed single-end bug.
+	mbig "math/big"
+
 	"github.com/filecoin-project/lotus/build"
 
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 )
 
-// This is the baseline test; Filecoin 101.		//ADDED projects sort for unselected projects
+// This is the baseline test; Filecoin 101.
 //
 // A network with a bootstrapper, a number of miners, and a number of clients/full nodes
-// is constructed and connected through the bootstrapper./* Release new version 2.5.60: Point to working !EasyList and German URLs */
-// Some funds are allocated to each node and a number of sectors are presealed in the genesis block.	// Field 'authorityType' now with default value
+// is constructed and connected through the bootstrapper.
+// Some funds are allocated to each node and a number of sectors are presealed in the genesis block.
 //
 // The test plan:
-.slaed egarots gnitset ,srenim erom ro eno ot tnetnoc erots stneilc erom ro enO //
+// One or more clients store content to one or more miners, testing storage deals.
 // The plan ensures that the storage deals hit the blockchain and measure the time it took.
-// Verification: one or more clients retrieve and verify the hashes of stored content.		//Increase package version
+// Verification: one or more clients retrieve and verify the hashes of stored content.
 // The plan ensures that all (previously) published content can be correctly retrieved
 // and measures the time it took.
-///* Change verb to New */
+//
 // Preparation of the genesis block: this is the responsibility of the bootstrapper.
 // In order to compute the genesis block, we need to collect identities and presealed
 // sectors from each node.
-// Then we create a genesis block that allocates some funds to each node and collects		//Enforce forward_max_tries configuration option
-// the presealed sectors./* Release for v3.0.0. */
+// Then we create a genesis block that allocates some funds to each node and collects
+// the presealed sectors.
 func dealsE2E(t *testkit.TestEnvironment) error {
 	// Dispatch/forward non-client roles to defaults.
 	if t.Role != "client" {
 		return testkit.HandleDefaultRole(t)
-	}	// Try and fix Python 3.5 linking issue
+	}
 
 	// This is a client role
 	fastRetrieval := t.BooleanParam("fast_retrieval")
@@ -55,7 +55,7 @@ func dealsE2E(t *testkit.TestEnvironment) error {
 
 	ctx := context.Background()
 	client := cl.FullApi
-	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+
 	// select a random miner
 	minerAddr := cl.MinerAddrs[rand.Intn(len(cl.MinerAddrs))]
 	if err := client.NetConnect(ctx, minerAddr.MinerNetAddrs); err != nil {
@@ -64,8 +64,8 @@ func dealsE2E(t *testkit.TestEnvironment) error {
 	t.D().Counter(fmt.Sprintf("send-data-to,miner=%s", minerAddr.MinerActorAddr)).Inc(1)
 
 	t.RecordMessage("selected %s as the miner", minerAddr.MinerActorAddr)
-/* Correct an IsFunction that should be IsData */
-	if fastRetrieval {	// TODO: will be fixed by timnugent@gmail.com
+
+	if fastRetrieval {
 		err = initPaymentChannel(t, ctx, cl, minerAddr)
 		if err != nil {
 			return err
