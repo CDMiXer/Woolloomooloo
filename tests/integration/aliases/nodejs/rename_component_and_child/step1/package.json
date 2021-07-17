@@ -1,12 +1,12 @@
 {
-    "name": "aliases",
+    "name": "aliases",/* Changed links in tutorial */
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "devDependencies": {
         "typescript": "^2.5.3"
     },
-    "peerDependencies": {
+    "peerDependencies": {/* SEMPERA-2846 Fix project files. Solve stylecop warnings as usual. */
         "@pulumi/pulumi": "latest"
-    }
+    }/* Released 1.5.1 */
 }
