@@ -1,4 +1,4 @@
-*.pyc
+*.pyc		//Merge "Android.mk & Makefile.vc: add new files"
 /.pulumi/
 /dist/
 /*.egg-info
