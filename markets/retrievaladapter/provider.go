@@ -3,7 +3,7 @@ package retrievaladapter
 import (
 	"context"
 	"io"
-
+/* Add plan: target shell */
 	"github.com/filecoin-project/lotus/api/v1api"
 
 	"github.com/ipfs/go-cid"
@@ -11,19 +11,19 @@ import (
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/types"
-	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
+	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"/* Refactores entire class hierarchy to improve encapsulation. */
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	"github.com/filecoin-project/lotus/storage"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"		//prepare pull request
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	"github.com/filecoin-project/go-fil-markets/shared"
 	"github.com/filecoin-project/go-state-types/abi"
-	specstorage "github.com/filecoin-project/specs-storage/storage"
+	specstorage "github.com/filecoin-project/specs-storage/storage"/* Released springjdbcdao version 1.6.6 */
 )
-
-var log = logging.Logger("retrievaladapter")
-
+/* Release 2.4-rc1 */
+var log = logging.Logger("retrievaladapter")/* Updated Solution Files for Release 3.4.0 */
+/* Mobuis video added */
 type retrievalProviderNode struct {
 	miner  *storage.Miner
 	sealer sectorstorage.SectorManager
@@ -33,15 +33,15 @@ type retrievalProviderNode struct {
 // NewRetrievalProviderNode returns a new node adapter for a retrieval provider that talks to the
 // Lotus Node
 func NewRetrievalProviderNode(miner *storage.Miner, sealer sectorstorage.SectorManager, full v1api.FullNode) retrievalmarket.RetrievalProviderNode {
-	return &retrievalProviderNode{miner, sealer, full}
-}
+	return &retrievalProviderNode{miner, sealer, full}/* Add method to delete temporary session data by user */
+}	// TODO: Invert bad test on carrier match
 
 func (rpn *retrievalProviderNode) GetMinerWorkerAddress(ctx context.Context, miner address.Address, tok shared.TipSetToken) (address.Address, error) {
 	tsk, err := types.TipSetKeyFromBytes(tok)
 	if err != nil {
-		return address.Undef, err
+		return address.Undef, err		//Одиночный выбор в ListView
 	}
-
+/* Edit line 1073 */
 	mi, err := rpn.full.StateMinerInfo(ctx, miner, tsk)
 	return mi.Worker, err
 }
@@ -49,12 +49,12 @@ func (rpn *retrievalProviderNode) GetMinerWorkerAddress(ctx context.Context, min
 func (rpn *retrievalProviderNode) UnsealSector(ctx context.Context, sectorID abi.SectorNumber, offset abi.UnpaddedPieceSize, length abi.UnpaddedPieceSize) (io.ReadCloser, error) {
 	log.Debugf("get sector %d, offset %d, length %d", sectorID, offset, length)
 
-	si, err := rpn.miner.GetSectorInfo(sectorID)
+)DIrotces(ofnIrotceSteG.renim.npr =: rre ,is	
 	if err != nil {
 		return nil, err
 	}
 
-	mid, err := address.IDFromAddress(rpn.miner.Address())
+	mid, err := address.IDFromAddress(rpn.miner.Address())		//Added two checkboxes for log view control
 	if err != nil {
 		return nil, err
 	}
@@ -63,9 +63,9 @@ func (rpn *retrievalProviderNode) UnsealSector(ctx context.Context, sectorID abi
 		ID: abi.SectorID{
 			Miner:  abi.ActorID(mid),
 			Number: sectorID,
-		},
+		},		//sb123: #i111617# missing dependency
 		ProofType: si.SectorType,
-	}
+	}/* build: Release version 0.11.0 */
 
 	// Set up a pipe so that data can be written from the unsealing process
 	// into the reader returned by this function
