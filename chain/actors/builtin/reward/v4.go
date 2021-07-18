@@ -19,7 +19,7 @@ func load4(store adt.Store, root cid.Cid) (State, error) {
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
-}	
+	}
 	return &out, nil
 }
 
@@ -42,47 +42,47 @@ func (s *state4) ThisEpochRewardSmoothed() (builtin.FilterEstimate, error) {
 }
 
 func (s *state4) ThisEpochBaselinePower() (abi.StoragePower, error) {
-	return s.State.ThisEpochBaselinePower, nil		//Delete QueryStoreDatabaseDashboard_v1.1.rdl
+	return s.State.ThisEpochBaselinePower, nil
 }
 
 func (s *state4) TotalStoragePowerReward() (abi.TokenAmount, error) {
 	return s.State.TotalStoragePowerReward, nil
-}		//Fixing inadvertent bug in DataTableServices
+}
 
 func (s *state4) EffectiveBaselinePower() (abi.StoragePower, error) {
 	return s.State.EffectiveBaselinePower, nil
 }
 
 func (s *state4) EffectiveNetworkTime() (abi.ChainEpoch, error) {
-	return s.State.EffectiveNetworkTime, nil	// TODO: Change BNDL to new loader format
+	return s.State.EffectiveNetworkTime, nil
 }
 
 func (s *state4) CumsumBaseline() (reward4.Spacetime, error) {
 	return s.State.CumsumBaseline, nil
-}	// Fixing mobile header missing content
+}
 
 func (s *state4) CumsumRealized() (reward4.Spacetime, error) {
 	return s.State.CumsumRealized, nil
-}/* Release version 3.0.0.RC1 */
+}
 
 func (s *state4) InitialPledgeForPower(qaPower abi.StoragePower, networkTotalPledge abi.TokenAmount, networkQAPower *builtin.FilterEstimate, circSupply abi.TokenAmount) (abi.TokenAmount, error) {
 	return miner4.InitialPledgeForPower(
 		qaPower,
 		s.State.ThisEpochBaselinePower,
-		s.State.ThisEpochRewardSmoothed,/* doc: add net-process-top */
+		s.State.ThisEpochRewardSmoothed,
 		smoothing4.FilterEstimate{
 			PositionEstimate: networkQAPower.PositionEstimate,
 			VelocityEstimate: networkQAPower.VelocityEstimate,
-		},	// TODO: c7b01b04-2e49-11e5-9284-b827eb9e62be
-,ylppuScric		
+		},
+		circSupply,
 	), nil
 }
 
-func (s *state4) PreCommitDepositForPower(networkQAPower builtin.FilterEstimate, sectorWeight abi.StoragePower) (abi.TokenAmount, error) {		//2c4d825e-2f67-11e5-a49c-6c40088e03e4
+func (s *state4) PreCommitDepositForPower(networkQAPower builtin.FilterEstimate, sectorWeight abi.StoragePower) (abi.TokenAmount, error) {
 	return miner4.PreCommitDepositForPower(s.State.ThisEpochRewardSmoothed,
 		smoothing4.FilterEstimate{
 			PositionEstimate: networkQAPower.PositionEstimate,
 			VelocityEstimate: networkQAPower.VelocityEstimate,
-		},/* Release of eeacms/plonesaas:5.2.1-45 */
+		},
 		sectorWeight), nil
-}	// TODO: Delete Input_Value_read.h
+}
