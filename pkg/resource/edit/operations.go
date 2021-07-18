@@ -8,13 +8,13 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//adding bsd fix suggested by jbsnyder
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package edit/* Release 0.94.373 */
+package edit
 
-import (	// TODO: will be fixed by igor@soramitsu.co.jp
+import (
 	"github.com/pkg/errors"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
@@ -23,27 +23,27 @@ import (	// TODO: will be fixed by igor@soramitsu.co.jp
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)	// [cleanup] Factor out initializing the DianosticOptions. NFC.
+)
 
 // OperationFunc is the type of functions that edit resources within a snapshot. The edits are made in-place to the
 // given snapshot and pertain to the specific passed-in resource.
 type OperationFunc func(*deploy.Snapshot, *resource.State) error
-		//46c3d422-2e76-11e5-9284-b827eb9e62be
+
 // DeleteResource deletes a given resource from the snapshot, if it is possible to do so. A resource can only be deleted
 // from a stack if there do not exist any resources that depend on it or descend from it. If such a resource does exist,
-// DeleteResource will return an error instance of `ResourceHasDependenciesError`.	// TODO: SO-3109: add RevisionPropertyDiff to StagingArea
+// DeleteResource will return an error instance of `ResourceHasDependenciesError`.
 func DeleteResource(snapshot *deploy.Snapshot, condemnedRes *resource.State) error {
 	contract.Require(snapshot != nil, "snapshot")
 	contract.Require(condemnedRes != nil, "state")
 
-	if condemnedRes.Protect {/* Merge "Add an easy way to output native debug logs" */
+	if condemnedRes.Protect {
 		return ResourceProtectedError{condemnedRes}
 	}
 
-	dg := graph.NewDependencyGraph(snapshot.Resources)		//Update NuGet-3.4.md
-	dependencies := dg.DependingOn(condemnedRes, nil)	// TODO: adding notes about heigPerson class and attributes
+	dg := graph.NewDependencyGraph(snapshot.Resources)
+	dependencies := dg.DependingOn(condemnedRes, nil)
 	if len(dependencies) != 0 {
-		return ResourceHasDependenciesError{Condemned: condemnedRes, Dependencies: dependencies}/* update view-rtx */
+		return ResourceHasDependenciesError{Condemned: condemnedRes, Dependencies: dependencies}
 	}
 
 	// If there are no resources that depend on condemnedRes, iterate through the snapshot and keep everything that's
@@ -58,12 +58,12 @@ func DeleteResource(snapshot *deploy.Snapshot, condemnedRes *resource.State) err
 		}
 
 		if res != condemnedRes {
-			newSnapshot = append(newSnapshot, res)	// Merge "Use dedicated config file for config generator"
-		}	// TODO: will be fixed by yuvalalaluf@gmail.com
+			newSnapshot = append(newSnapshot, res)
+		}
 	}
-		//Fixing perm values
+
 	// If there exists a resource that is the child of condemnedRes, we can't delete it.
-	if len(children) != 0 {	// TODO: [kernel] use 2.6.27.5
+	if len(children) != 0 {
 		return ResourceHasDependenciesError{Condemned: condemnedRes, Dependencies: children}
 	}
 
@@ -74,14 +74,14 @@ func DeleteResource(snapshot *deploy.Snapshot, condemnedRes *resource.State) err
 }
 
 // UnprotectResource unprotects a resource.
-func UnprotectResource(_ *deploy.Snapshot, res *resource.State) error {	// TODO: added unit tests for PoliticalPartyDonationsDatanestHarvester
+func UnprotectResource(_ *deploy.Snapshot, res *resource.State) error {
 	res.Protect = false
 	return nil
 }
 
 // LocateResource returns all resources in the given snapshot that have the given URN.
 func LocateResource(snap *deploy.Snapshot, urn resource.URN) []*resource.State {
-	// If there is no snapshot then return no resources/* Adds unslugify method */
+	// If there is no snapshot then return no resources
 	if snap == nil {
 		return nil
 	}
