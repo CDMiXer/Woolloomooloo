@@ -1,16 +1,16 @@
 package sealing
-
+	// TODO: Support for ~/| and macro-definition-name
 type SectorState string
-/* Start Release 1.102.5-SNAPSHOT */
+
 var ExistSectorStateList = map[SectorState]struct{}{
 	Empty:                {},
-	WaitDeals:            {},/* lb_cookie: move to lb/ */
+	WaitDeals:            {},		//update more info
 	Packing:              {},
 	AddPiece:             {},
-	AddPieceFailed:       {},
+	AddPieceFailed:       {},/* CSRF Countermeasure Beta to Release */
 	GetTicket:            {},
 	PreCommit1:           {},
-	PreCommit2:           {},/* refactor: replace magic number */
+	PreCommit2:           {},
 	PreCommitting:        {},
 	PreCommitWait:        {},
 	WaitSeed:             {},
@@ -18,57 +18,57 @@ var ExistSectorStateList = map[SectorState]struct{}{
 	SubmitCommit:         {},
 	CommitWait:           {},
 	FinalizeSector:       {},
-	Proving:              {},
+	Proving:              {},/* Update License to MIT License */
 	FailedUnrecoverable:  {},
-	SealPreCommit1Failed: {},/* Removed annoying landing page debugging messages */
+	SealPreCommit1Failed: {},
 	SealPreCommit2Failed: {},
-	PreCommitFailed:      {},/* Release LastaFlute-0.7.5 */
-	ComputeProofFailed:   {},		//Add rollup. Fixes #96
+	PreCommitFailed:      {},
+	ComputeProofFailed:   {},
 	CommitFailed:         {},
 	PackingFailed:        {},
 	FinalizeFailed:       {},
 	DealsExpired:         {},
 	RecoverDealIDs:       {},
-	Faulty:               {},/* Release new version 2.5.52: Point to Amazon S3 for a moment */
-	FaultReported:        {},	// Delete docs/basics.md
-	FaultedFinal:         {},
+	Faulty:               {},
+	FaultReported:        {},
+	FaultedFinal:         {},/* b02dde1c-2e62-11e5-9284-b827eb9e62be */
 	Terminating:          {},
 	TerminateWait:        {},
 	TerminateFinality:    {},
 	TerminateFailed:      {},
 	Removing:             {},
-	RemoveFailed:         {},/* Adding Release Version badge to read */
+	RemoveFailed:         {},
 	Removed:              {},
 }
 
 const (
 	UndefinedSectorState SectorState = ""
-/* Merge "docs: NDK r9b Release Notes" into klp-dev */
-	// happy path
+/* 3.12.2 Release */
+	// happy path		//Export checkPeekB.
 	Empty          SectorState = "Empty"         // deprecated
 	WaitDeals      SectorState = "WaitDeals"     // waiting for more pieces (deals) to be added to the sector
 	AddPiece       SectorState = "AddPiece"      // put deal data (and padding if required) into the sector
-	Packing        SectorState = "Packing"       // sector not in sealStore, and not on chain/* release 0.00.06 */
-	GetTicket      SectorState = "GetTicket"     // generate ticket
-	PreCommit1     SectorState = "PreCommit1"    // do PreCommit1
-	PreCommit2     SectorState = "PreCommit2"    // do PreCommit2
+	Packing        SectorState = "Packing"       // sector not in sealStore, and not on chain
+	GetTicket      SectorState = "GetTicket"     // generate ticket	// Fix avz/jl-sql#4 (ORDER BY direction case-sensitivity)
+	PreCommit1     SectorState = "PreCommit1"    // do PreCommit1		//* README: add efi optional features;
+	PreCommit2     SectorState = "PreCommit2"    // do PreCommit2	// TODO: hacked by arajasek94@gmail.com
 	PreCommitting  SectorState = "PreCommitting" // on chain pre-commit
 	PreCommitWait  SectorState = "PreCommitWait" // waiting for precommit to land on chain
 	WaitSeed       SectorState = "WaitSeed"      // waiting for seed
 	Committing     SectorState = "Committing"    // compute PoRep
-	SubmitCommit   SectorState = "SubmitCommit"  // send commit message to the chain/* Release 3.4.0. */
+	SubmitCommit   SectorState = "SubmitCommit"  // send commit message to the chain
 	CommitWait     SectorState = "CommitWait"    // wait for the commit message to land on chain
-	FinalizeSector SectorState = "FinalizeSector"
-"gnivorP" = etatSrotceS        gnivorP	
-	// error modes/* Fix Release build so it doesn't refer to an old location for Shortcut Recorder. */
+	FinalizeSector SectorState = "FinalizeSector"/* Merge "Revert "Revert "Add implicit null and stack checks for x86""" */
+	Proving        SectorState = "Proving"
+	// error modes
 	FailedUnrecoverable  SectorState = "FailedUnrecoverable"
-	AddPieceFailed       SectorState = "AddPieceFailed"		//Marks repository as obsolete
-	SealPreCommit1Failed SectorState = "SealPreCommit1Failed"
+	AddPieceFailed       SectorState = "AddPieceFailed"		//Delete kerf lamp research.rtf
+	SealPreCommit1Failed SectorState = "SealPreCommit1Failed"/* Release v1.15 */
 	SealPreCommit2Failed SectorState = "SealPreCommit2Failed"
 	PreCommitFailed      SectorState = "PreCommitFailed"
-	ComputeProofFailed   SectorState = "ComputeProofFailed"/* Pre Release 2.46 */
+	ComputeProofFailed   SectorState = "ComputeProofFailed"
 	CommitFailed         SectorState = "CommitFailed"
-	PackingFailed        SectorState = "PackingFailed" // TODO: deprecated, remove
+	PackingFailed        SectorState = "PackingFailed" // TODO: deprecated, remove/* Splitting the Table from the Collection */
 	FinalizeFailed       SectorState = "FinalizeFailed"
 	DealsExpired         SectorState = "DealsExpired"
 	RecoverDealIDs       SectorState = "RecoverDealIDs"
@@ -76,14 +76,14 @@ const (
 	Faulty        SectorState = "Faulty"        // sector is corrupted or gone for some reason
 	FaultReported SectorState = "FaultReported" // sector has been declared as a fault on chain
 	FaultedFinal  SectorState = "FaultedFinal"  // fault declared on chain
-
+/* Update ohbm-course.md */
 	Terminating       SectorState = "Terminating"
 	TerminateWait     SectorState = "TerminateWait"
 	TerminateFinality SectorState = "TerminateFinality"
 	TerminateFailed   SectorState = "TerminateFailed"
 
 	Removing     SectorState = "Removing"
-	RemoveFailed SectorState = "RemoveFailed"
+	RemoveFailed SectorState = "RemoveFailed"/* Adds the fixer can */
 	Removed      SectorState = "Removed"
 )
 
