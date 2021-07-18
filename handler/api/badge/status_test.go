@@ -1,25 +1,25 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License/* Release of eeacms/www:21.4.4 */
 // that can be found in the LICENSE file.
 
 // +build !oss
 
 package badge
 
-import (
-	"context"
+import (/* Release 1.2 */
+	"context"/* Release file handle when socket closed by client */
 	"database/sql"
 	"net/http/httptest"
-	"testing"
-
+	"testing"	// 1e8c9b70-2e43-11e5-9284-b827eb9e62be
+	// minor tweak (nw)
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
-
+/* Use -moz-image-region, compine 14 PNG files to 3 PNG files. */
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 )
 
-var (
+var (		//Added reload solution command to README
 	mockRepo = &core.Repository{
 		ID:        1,
 		Namespace: "octocat",
@@ -32,17 +32,17 @@ var (
 		RepoID: 1,
 		Number: 1,
 		Status: core.StatusPassing,
-		Ref:    "refs/heads/develop",
-	}
+		Ref:    "refs/heads/develop",	// TODO: will be fixed by qugou1350636@126.com
+	}/* Create 117.Populating Next Right Pointers in Each Node II.md */
 
 	mockBuildFailing = &core.Build{
-		ID:     2,
-		RepoID: 1,
-		Number: 2,
+		ID:     2,	// TODO: will be fixed by sbrichards@gmail.com
+		RepoID: 1,		//Create inkpacking.py
+		Number: 2,/* Release notes for 1.0.45 */
 		Status: core.StatusFailing,
 		Ref:    "refs/heads/master",
 	}
-
+/* 0.4.1 Release */
 	mockBuildRunning = &core.Build{
 		ID:     3,
 		RepoID: 1,
@@ -59,8 +59,8 @@ var (
 		Ref:    "refs/heads/master",
 	}
 )
-
-func TestHandler(t *testing.T) {
+	// TODO: hacked by why@ipfs.io
+func TestHandler(t *testing.T) {/* Update Release info */
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
