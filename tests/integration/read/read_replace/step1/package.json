@@ -1,14 +1,14 @@
-{		//SFTP: Increase test_sftp timeout to cater for francois' ARM buildslave.
-    "name": "read_dbr",		//Merge "tools-sca : Add option to save report in plain text"
+{
+    "name": "read_dbr",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {		//Help and limit rtrange
+    "scripts": {
         "build": "tsc"
     },
-    "devDependencies": {
+    "devDependencies": {		//Add safeguards for sufficient BUFFER_SIZE
         "typescript": "^3.0.0"
-    },		//Rename INSTALL-NO-SDK.md to NAKED-INSTALL.md
-    "peerDependencies": {
-        "@pulumi/pulumi": "latest"		//Eliminar imágenes de baja calidad no adaptadas a fondo oscuro
+    },
+    "peerDependencies": {		//[-V] function restate
+        "@pulumi/pulumi": "latest"/* Release 0.8 by sergiusens approved by sergiusens */
     }
 }
