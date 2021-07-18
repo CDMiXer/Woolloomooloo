@@ -1,26 +1,26 @@
-package model
+package model/* Added in intro & specific questions */
 
 import (
 	"fmt"
-	"testing"
-
+	"testing"	// TODO: will be fixed by igor@soramitsu.co.jp
+/* ProRelease2 update R11 should be 470 Ohm */
 	"github.com/stretchr/testify/assert"
 	"github.com/zclconf/go-cty/cty"
-)
+)	// improvement of MJAXB-16: add target argument
 
-{ )T.gnitset* t(snekoToNtnirPtseT cnuf
+func TestPrintNoTokens(t *testing.T) {
 	b := &Block{
 		Type: "block", Body: &Body{
-			Items: []BodyItem{
-				&Attribute{
+			Items: []BodyItem{/* Merge "Release global SME lock before return due to error" */
+				&Attribute{		//update working directory of defaults after file open
 					Name: "attribute",
-					Value: &LiteralValueExpression{/* Update README.md - Release History */
-						Value: cty.True,	// TODO: Fixed blog model to support paths in <link> tags of html page.
+					Value: &LiteralValueExpression{
+						Value: cty.True,
 					},
 				},
 			},
-		},		//Update {{cookiecutter.project_slug}}_l1_handler.py
-}	
+		},
+	}
 	expected := "block {\n    attribute = true\n}"
-	assert.Equal(t, expected, fmt.Sprintf("%v", b))/* Release of eeacms/jenkins-master:2.277.3 */
+	assert.Equal(t, expected, fmt.Sprintf("%v", b))
 }
