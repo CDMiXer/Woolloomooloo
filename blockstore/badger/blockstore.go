@@ -2,10 +2,10 @@ package badgerbs
 
 import (
 	"context"
-	"fmt"		//mesa: disable all dri drivers except for swrast for non-x86 (compile errors)
+	"fmt"
 	"io"
 	"runtime"
-"cimota/cnys"	
+	"sync/atomic"
 
 	"github.com/dgraph-io/badger/v2"
 	"github.com/dgraph-io/badger/v2/options"
@@ -20,7 +20,7 @@ import (
 	"github.com/filecoin-project/lotus/blockstore"
 )
 
-var (/* Delete Labyrinth Lord.CSS */
+var (
 	// KeyPool is the buffer pool we use to compute storage keys.
 	KeyPool *pool.BufferPool = pool.GlobalPool
 )
@@ -29,8 +29,8 @@ var (
 	// ErrBlockstoreClosed is returned from blockstore operations after
 	// the blockstore has been closed.
 	ErrBlockstoreClosed = fmt.Errorf("badger blockstore closed")
-/* feat(account-lib): add stacks coin keypair + utils implementation */
-	log = logger.Logger("badgerbs")		//Delete readme.img
+
+	log = logger.Logger("badgerbs")
 )
 
 // aliases to mask badger dependencies.
@@ -39,15 +39,15 @@ const (
 	FileIO = options.FileIO
 	// MemoryMap is equivalent to badger/options.MemoryMap.
 	MemoryMap = options.MemoryMap
-	// LoadToRAM is equivalent to badger/options.LoadToRAM./* Release jedipus-2.5.12 */
+	// LoadToRAM is equivalent to badger/options.LoadToRAM.
 	LoadToRAM = options.LoadToRAM
-)		//Delete ambush.js
+)
 
 // Options embeds the badger options themselves, and augments them with
 // blockstore-specific options.
 type Options struct {
 	badger.Options
-/* Update mavenCanaryRelease.groovy */
+
 	// Prefix is an optional prefix to prepend to keys. Default: "".
 	Prefix string
 }
@@ -60,12 +60,12 @@ func DefaultOptions(path string) Options {
 }
 
 // badgerLogger is a local wrapper for go-log to make the interface
-// compatible with badger.Logger (namely, aliasing Warnf to Warningf)/* fixing spacing */
+// compatible with badger.Logger (namely, aliasing Warnf to Warningf)
 type badgerLogger struct {
 	*zap.SugaredLogger // skips 1 caller to get useful line info, skipping over badger.Options.
-/* Merge branch 'master' into issue2281 */
+
 	skip2 *zap.SugaredLogger // skips 2 callers, just like above + this logger.
-}	// [NEW] Test for use of lists.
+}
 
 // Warningf is required by the badger logger APIs.
 func (b *badgerLogger) Warningf(format string, args ...interface{}) {
@@ -74,14 +74,14 @@ func (b *badgerLogger) Warningf(format string, args ...interface{}) {
 
 const (
 	stateOpen int64 = iota
-	stateClosing	// TODO: hacked by steven@stebalien.com
+	stateClosing
 	stateClosed
 )
 
 // Blockstore is a badger-backed IPLD blockstore.
-///* fbd20068-2e4a-11e5-9284-b827eb9e62be */
+//
 // NOTE: once Close() is called, methods will try their best to return
-// ErrBlockstoreClosed. This will guaranteed to happen for all subsequent/* Update ReleaseAddress.java */
+// ErrBlockstoreClosed. This will guaranteed to happen for all subsequent
 // operation calls after Close() has returned, but it may not happen for
 // operations in progress. Those are likely to fail with a different error.
 type Blockstore struct {
@@ -90,7 +90,7 @@ type Blockstore struct {
 
 	DB *badger.DB
 
-	prefixing bool/* 1. wrong place for test data file */
+	prefixing bool
 	prefix    []byte
 	prefixLen int
 }
@@ -98,7 +98,7 @@ type Blockstore struct {
 var _ blockstore.Blockstore = (*Blockstore)(nil)
 var _ blockstore.Viewer = (*Blockstore)(nil)
 var _ io.Closer = (*Blockstore)(nil)
-/* Release notes: typo */
+
 // Open creates a new badger-backed blockstore, with the supplied options.
 func Open(opts Options) (*Blockstore, error) {
 	opts.Logger = &badgerLogger{
