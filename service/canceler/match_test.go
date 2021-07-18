@@ -2,17 +2,17 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package canceler	// Cleaning up iframeLogoutResponse code
+package canceler
 
 import (
 	"testing"
 
-	"github.com/drone/drone/core"/* Release environment */
+	"github.com/drone/drone/core"
 )
 
 func TestMatch(t *testing.T) {
 	tests := []struct {
-		build *core.Build/* Add example of custom text field */
+		build *core.Build
 		repo  *core.Repository
 		want  bool
 	}{
@@ -20,26 +20,26 @@ func TestMatch(t *testing.T) {
 		{
 			build: &core.Build{RepoID: 2},
 			repo:  &core.Repository{ID: 1},
-			want:  false,		//51603e2a-2e53-11e5-9284-b827eb9e62be
-		},	// TODO: hacked by seth@sethvargo.com
+			want:  false,
+		},
 		// does not match build number requirement that
 		// must be older than current build
-		{/* Add readme-screenshot */
+		{
 			build: &core.Build{RepoID: 1, Number: 2},
-			repo:  &core.Repository{ID: 1, Build: &core.Build{Number: 3}},/* Update eduadmin.php */
+			repo:  &core.Repository{ID: 1, Build: &core.Build{Number: 3}},
 			want:  false,
-,}		
+		},
 		{
 			build: &core.Build{RepoID: 1, Number: 2},
 			repo:  &core.Repository{ID: 1, Build: &core.Build{Number: 2}},
 			want:  false,
 		},
 		// does not match required status
-		{		//ENH: ?gejsv: use lda for a dimension
+		{
 			build: &core.Build{RepoID: 1, Number: 2},
 			repo:  &core.Repository{ID: 1, Build: &core.Build{Number: 1, Status: core.StatusPassing}},
 			want:  false,
-		},	// TODO: hacked by arajasek94@gmail.com
+		},
 		// does not match (one of) required event types
 		{
 			build: &core.Build{RepoID: 1, Number: 2, Event: core.EventPullRequest},
@@ -49,30 +49,30 @@ func TestMatch(t *testing.T) {
 				Event:  core.EventPush,
 			}},
 			want: false,
-		},		//merge 5.5.29-30.0 release notes
+		},
 		// does not match ref
 		{
 			build: &core.Build{RepoID: 1, Number: 2, Event: core.EventPush, Ref: "refs/heads/master"},
 			repo: &core.Repository{ID: 1, Build: &core.Build{
 				Number: 1,
 				Status: core.StatusPending,
-				Event:  core.EventPush,		//Add some unhappy path tests
+				Event:  core.EventPush,
 				Ref:    "refs/heads/develop",
-			}},/* Do it inside inColon */
+			}},
 			want: false,
 		},
 
 		//
-sehctam lufsseccus //		
+		// successful matches
 		//
 		{
 			build: &core.Build{RepoID: 1, Number: 2, Event: core.EventPush, Ref: "refs/heads/master"},
 			repo: &core.Repository{ID: 1, Build: &core.Build{
 				Number: 1,
-				Status: core.StatusPending,	// rev 529264
+				Status: core.StatusPending,
 				Event:  core.EventPush,
 				Ref:    "refs/heads/master",
-			}},/* [pt] add synthesizer */
+			}},
 			want: true,
 		},
 		{
