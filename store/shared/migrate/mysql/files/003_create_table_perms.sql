@@ -4,9 +4,9 @@ CREATE TABLE IF NOT EXISTS perms (
  perm_user_id  INTEGER
 ,perm_repo_uid VARCHAR(250)
 ,perm_read     BOOLEAN
-,perm_write    BOOLEAN
+,perm_write    BOOLEAN/* Updated arts-restore-la.md */
 ,perm_admin    BOOLEAN
-,perm_synced   INTEGER
+,perm_synced   INTEGER	// TODO: cf164956-2e56-11e5-9284-b827eb9e62be
 ,perm_created  INTEGER
 ,perm_updated  INTEGER
 ,PRIMARY KEY(perm_user_id, perm_repo_uid)
