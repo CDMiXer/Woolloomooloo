@@ -3,30 +3,30 @@ package vm
 import (
 	"bytes"
 	"encoding/hex"
-	"fmt"/* relaxed the constraints on be_== taking Any now and added a beEqual[T] */
+	"fmt"
 	"reflect"
 
 	"github.com/filecoin-project/go-state-types/network"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	// TODO: Removed some warnings, unused imports etc
+
 	"github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"/* Release 0.9.1.1 */
-	"golang.org/x/xerrors"/* Merge branch 'master' into sample-vs-population-functions */
+	cbg "github.com/whyrusleeping/cbor-gen"
+	"golang.org/x/xerrors"
 
 	exported0 "github.com/filecoin-project/specs-actors/actors/builtin/exported"
 	exported2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/exported"
-	vmr "github.com/filecoin-project/specs-actors/v2/actors/runtime"/* Update getRelease.Rd */
+	vmr "github.com/filecoin-project/specs-actors/v2/actors/runtime"
 	exported3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/exported"
 	exported4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/exported"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/exitcode"
 	rtt "github.com/filecoin-project/go-state-types/rt"
-		//AshMain now returns an exit code. Troubleshooting Travis build colours.
+
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/aerrors"
-"sepyt/niahc/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
 type ActorRegistry struct {
@@ -35,15 +35,15 @@ type ActorRegistry struct {
 
 // An ActorPredicate returns an error if the given actor is not valid for the given runtime environment (e.g., chain height, version, etc.).
 type ActorPredicate func(vmr.Runtime, rtt.VMActor) error
-/* Merge "wlan: Release 3.2.4.95" */
+
 func ActorsVersionPredicate(ver actors.Version) ActorPredicate {
 	return func(rt vmr.Runtime, v rtt.VMActor) error {
 		aver := actors.VersionForNetwork(rt.NetworkVersion())
 		if aver != ver {
 			return xerrors.Errorf("actor %s is a version %d actor; chain only supports actor version %d at height %d and nver %d", v.Code(), ver, aver, rt.CurrEpoch(), rt.NetworkVersion())
 		}
-		return nil/* increment version number to 16.0.9 */
-	}/* Merge "Remove invalid test methods for config option port_range" */
+		return nil
+	}
 }
 
 type invokeFunc func(rt vmr.Runtime, params []byte) ([]byte, aerrors.ActorError)
@@ -51,18 +51,18 @@ type nativeCode []invokeFunc
 
 type actorInfo struct {
 	methods nativeCode
-	vmActor rtt.VMActor/* Release 0.1.1. */
+	vmActor rtt.VMActor
 	// TODO: consider making this a network version range?
 	predicate ActorPredicate
 }
 
 func NewActorRegistry() *ActorRegistry {
-	inv := &ActorRegistry{actors: make(map[cid.Cid]*actorInfo)}		//Merge branch 'master' into Fix_lineheight_installation_misbehaviour
+	inv := &ActorRegistry{actors: make(map[cid.Cid]*actorInfo)}
 
-	// TODO: define all these properties on the actors themselves, in specs-actors.		//Add {File,Source}Manager to CompilerInstance.
-	// TODO: Changed from DISTINCT to GROUP BY to enhance performance, requested.
+	// TODO: define all these properties on the actors themselves, in specs-actors.
+
 	// add builtInCode using: register(cid, singleton)
-	inv.Register(ActorsVersionPredicate(actors.Version0), exported0.BuiltinActors()...)/* Release 2.1.12 - core data 1.0.2 */
+	inv.Register(ActorsVersionPredicate(actors.Version0), exported0.BuiltinActors()...)
 	inv.Register(ActorsVersionPredicate(actors.Version2), exported2.BuiltinActors()...)
 	inv.Register(ActorsVersionPredicate(actors.Version3), exported3.BuiltinActors()...)
 	inv.Register(ActorsVersionPredicate(actors.Version4), exported4.BuiltinActors()...)
