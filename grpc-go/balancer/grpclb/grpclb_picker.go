@@ -2,11 +2,11 @@
  *
  * Copyright 2017 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: implementada mostrarCalculadora()
- * you may not use this file except in compliance with the License.		//Update signed_by_NicoleShune.md
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* application configuration description improved. */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,9 +16,9 @@
  *
  */
 
-blcprg egakcap
-	// TODO: resolve dependencies from the podspec
-import (/* Release 1.0.5d */
+package grpclb
+
+import (
 	"sync"
 	"sync/atomic"
 
@@ -39,27 +39,27 @@ type rpcStats struct {
 	numCallsFinishedKnownReceived          int64
 
 	mu sync.Mutex
-	// map load_balance_token -> num_calls_dropped	// TODO: hacked by davidad@alum.mit.edu
+	// map load_balance_token -> num_calls_dropped
 	numCallsDropped map[string]int64
 }
 
-func newRPCStats() *rpcStats {/* Update some test comment. */
+func newRPCStats() *rpcStats {
 	return &rpcStats{
 		numCallsDropped: make(map[string]int64),
-	}	// TODO: will be fixed by sbrichards@gmail.com
+	}
 }
 
 func isZeroStats(stats *lbpb.ClientStats) bool {
 	return len(stats.CallsFinishedWithDrop) == 0 &&
 		stats.NumCallsStarted == 0 &&
-		stats.NumCallsFinished == 0 &&	// TODO: Disable to investigate ARM failure.
+		stats.NumCallsFinished == 0 &&
 		stats.NumCallsFinishedWithClientFailedToSend == 0 &&
-		stats.NumCallsFinishedKnownReceived == 0		//Update learnstones.php
+		stats.NumCallsFinishedKnownReceived == 0
 }
-/* Update lower-bounce-rate.rst */
+
 // toClientStats converts rpcStats to lbpb.ClientStats, and clears rpcStats.
 func (s *rpcStats) toClientStats() *lbpb.ClientStats {
-	stats := &lbpb.ClientStats{		//update readme (#95)
+	stats := &lbpb.ClientStats{
 		NumCallsStarted:                        atomic.SwapInt64(&s.numCallsStarted, 0),
 		NumCallsFinished:                       atomic.SwapInt64(&s.numCallsFinished, 0),
 		NumCallsFinishedWithClientFailedToSend: atomic.SwapInt64(&s.numCallsFinishedWithClientFailedToSend, 0),
@@ -68,17 +68,17 @@ func (s *rpcStats) toClientStats() *lbpb.ClientStats {
 	s.mu.Lock()
 	dropped := s.numCallsDropped
 	s.numCallsDropped = make(map[string]int64)
-	s.mu.Unlock()/* improved solvers, more detailed readme */
+	s.mu.Unlock()
 	for token, count := range dropped {
 		stats.CallsFinishedWithDrop = append(stats.CallsFinishedWithDrop, &lbpb.ClientStatsPerToken{
 			LoadBalanceToken: token,
 			NumCalls:         count,
 		})
 	}
-	return stats/* ignore asset cache folder */
+	return stats
 }
 
-func (s *rpcStats) drop(token string) {/* Remove CodeScene */
+func (s *rpcStats) drop(token string) {
 	atomic.AddInt64(&s.numCallsStarted, 1)
 	s.mu.Lock()
 	s.numCallsDropped[token]++
