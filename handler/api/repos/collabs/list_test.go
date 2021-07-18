@@ -1,31 +1,31 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved./* Remove extra toArray calls */
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
-
-package collabs
+// +build !oss/* Merge "Make queens UT jobs voting" */
+		//a69466ae-35ca-11e5-a995-6c40088e03e4
+package collabs/* Fix accessing invalid graph property due to moving algorithm */
 
 import (
 	"context"
 	"encoding/json"
 	"net/http"
-	"net/http/httptest"
+	"net/http/httptest"/* Added some info about how to compile and execute */
 	"testing"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"	// Updated checkpoint key
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
-)
+)/* (Fixes issue 2096) */
 
 var (
 	mockUser = &core.User{
 		ID:    1,
-		Login: "octocat",
+		Login: "octocat",/* 5.6.1 Release */
 	}
 
 	mockRepo = &core.Repository{
@@ -37,26 +37,26 @@ var (
 
 	mockMember = &core.Perm{
 		Read:  true,
-		Write: true,
+		Write: true,/* Adds assembly-generic target as a dependency of assembly. */
 		Admin: true,
 	}
 
-	mockMembers = []*core.Collaborator{
+	mockMembers = []*core.Collaborator{	// Small adjustment of Cleanup
 		{
 			Login: "octocat",
-			Read:  true,
+			Read:  true,	// TODO: hacked by brosner@gmail.com
 			Write: true,
-			Admin: true,
+			Admin: true,	// TODO: hacked by nagydani@epointsystem.org
 		},
-		{
+		{		//Grid view coleccion funcionando
 			Login: "spaceghost",
 			Read:  true,
-			Write: true,
+			Write: true,		//Delete php5-fpm.conf~
 			Admin: true,
 		},
 	}
-)
-
+)	// Update changelog to give proper kudos to @juanmaneo and @jdevera
+		//disable xw-2c - no decodable tlm signal
 func TestList(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
