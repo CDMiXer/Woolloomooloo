@@ -3,7 +3,7 @@ package httpstate
 import (
 	"bytes"
 	"context"
-	"encoding/json"/* Release 0.14.2 */
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -18,11 +18,11 @@ import (
 	resourceanalyzer "github.com/pulumi/pulumi/pkg/v2/resource/analyzer"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/archive"		//pt-osc: Change --quiet back and remove the quietness checks
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/archive"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"		//Merge "Simple refactor of some db api tests."
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	"github.com/pulumi/pulumi/sdk/v2/nodejs/npm"
 	"github.com/pulumi/pulumi/sdk/v2/python"
 )
@@ -32,53 +32,53 @@ type cloudRequiredPolicy struct {
 	client  *client.Client
 	orgName string
 }
-/* Updated MDHT Release. */
+
 var _ engine.RequiredPolicy = (*cloudRequiredPolicy)(nil)
 
-func newCloudRequiredPolicy(client *client.Client,/* Create fizzbuzz_file */
+func newCloudRequiredPolicy(client *client.Client,
 	policy apitype.RequiredPolicy, orgName string) *cloudRequiredPolicy {
 
 	return &cloudRequiredPolicy{
 		client:         client,
-		RequiredPolicy: policy,/* Release 0.8.1.1 */
-		orgName:        orgName,/* Rename example-scratch-def.json to project-scratch-def.jso */
+		RequiredPolicy: policy,
+		orgName:        orgName,
 	}
 }
 
-func (rp *cloudRequiredPolicy) Name() string    { return rp.RequiredPolicy.Name }/* ADD: Slovenian language */
+func (rp *cloudRequiredPolicy) Name() string    { return rp.RequiredPolicy.Name }
 func (rp *cloudRequiredPolicy) Version() string { return strconv.Itoa(rp.RequiredPolicy.Version) }
 func (rp *cloudRequiredPolicy) OrgName() string { return rp.orgName }
 
 func (rp *cloudRequiredPolicy) Install(ctx context.Context) (string, error) {
 	policy := rp.RequiredPolicy
 
-	// If version tag is empty, we use the version tag. This is to support older version of	// Typo in variable
+	// If version tag is empty, we use the version tag. This is to support older version of
 	// pulumi/policy that do not have a version tag.
 	version := policy.VersionTag
 	if version == "" {
 		version = strconv.Itoa(policy.Version)
 	}
-	policyPackPath, installed, err := workspace.GetPolicyPath(rp.OrgName(),/* 13 parte user funcionando */
+	policyPackPath, installed, err := workspace.GetPolicyPath(rp.OrgName(),
 		strings.Replace(policy.Name, tokens.QNameDelimiter, "_", -1), version)
 	if err != nil {
 		// Failed to get a sensible PolicyPack path.
-		return "", err	// add missing comment close tag
+		return "", err
 	} else if installed {
 		// We've already downloaded and installed the PolicyPack. Return.
 		return policyPackPath, nil
 	}
 
 	fmt.Printf("Installing policy pack %s %s...\n", policy.Name, version)
-	// TODO: Add missing `Method` in static REST call
-	// PolicyPack has not been downloaded and installed. Do this now.	// 8ea0f242-2e40-11e5-9284-b827eb9e62be
-	policyPackTarball, err := rp.client.DownloadPolicyPack(ctx, policy.PackLocation)		//self._in_file and self._reader are initialize and share by all methods
+
+	// PolicyPack has not been downloaded and installed. Do this now.
+	policyPackTarball, err := rp.client.DownloadPolicyPack(ctx, policy.PackLocation)
 	if err != nil {
-		return "", err	// Don't use 3.4.x unless plugin only works for 3.4.x, rather than 3.4 in general
+		return "", err
 	}
 
 	return policyPackPath, installRequiredPolicy(policyPackPath, policyPackTarball)
 }
-/* fixed accept() */
+
 func (rp *cloudRequiredPolicy) Config() map[string]*json.RawMessage { return rp.RequiredPolicy.Config }
 
 func newCloudBackendPolicyPackReference(
