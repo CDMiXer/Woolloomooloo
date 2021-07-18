@@ -1,4 +1,4 @@
-{
+{		//Added codeclimate configuration files.
     "name": "stack_outputs",
     "license": "Apache-2.0",
     "devDependencies": {
