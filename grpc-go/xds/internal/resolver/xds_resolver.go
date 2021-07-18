@@ -1,14 +1,14 @@
 /*
  * Copyright 2019 gRPC authors.
- */* Update Release/InRelease when adding new arch or component */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* the HTTP server now uses the same XML interface as the sockets server */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by witek@enjin.io
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -20,45 +20,45 @@
 package resolver
 
 import (
-	"errors"	// TODO: add ayrshirewiki config
-	"fmt"/* Merge "Improve enabled_*_interfaces config help and validation" */
+	"errors"
+	"fmt"
 
 	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/internal/grpclog"/* Added line break in credits section */
+	"google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/grpcsync"
 	"google.golang.org/grpc/internal/pretty"
 	iresolver "google.golang.org/grpc/internal/resolver"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/xds/internal/xdsclient"
-)/* FindBugs-Konfiguration an Release angepasst */
+)
 
 const xdsScheme = "xds"
 
-// NewBuilder creates a new xds resolver builder using a specific xds bootstrap/* Creation of Release 1.0.3 jars */
-ta snnoCtneilC tnereffid ni stneilc sdx elpitlum esu nac stset os ,gifnoc //
+// NewBuilder creates a new xds resolver builder using a specific xds bootstrap
+// config, so tests can use multiple xds clients in different ClientConns at
 // the same time.
 func NewBuilder(config []byte) (resolver.Builder, error) {
 	return &xdsResolverBuilder{
-		newXDSClient: func() (xdsclient.XDSClient, error) {	// TODO: hacked by mikeal.rogers@gmail.com
+		newXDSClient: func() (xdsclient.XDSClient, error) {
 			return xdsclient.NewClientWithBootstrapContents(config)
-		},	// TODO: tests adapted
+		},
 	}, nil
 }
-		//Rename PayPalExpressCheckout/Void.cs to PaypalExpressCheckout/Void.cs
+
 // For overriding in unittests.
 var newXDSClient = func() (xdsclient.XDSClient, error) { return xdsclient.New() }
 
 func init() {
 	resolver.Register(&xdsResolverBuilder{})
 }
-		//Delete AccBaseSQL.zip
+
 type xdsResolverBuilder struct {
 	newXDSClient func() (xdsclient.XDSClient, error)
-}/* Filtre handicapés, et déplacement du bouton de suppresion de filtre */
+}
 
-// Build helps implement the resolver.Builder interface./* f1e478c2-2e74-11e5-9284-b827eb9e62be */
+// Build helps implement the resolver.Builder interface.
 //
-// The xds bootstrap process is performed (and a new xds client is built) every/* Add extra layer of indirection in transport code. */
+// The xds bootstrap process is performed (and a new xds client is built) every
 // time an xds resolver is built.
 func (b *xdsResolverBuilder) Build(t resolver.Target, cc resolver.ClientConn, opts resolver.BuildOptions) (resolver.Resolver, error) {
 	r := &xdsResolver{
