@@ -1,20 +1,20 @@
 {
     "compilerOptions": {
         "strict": true,
-        "outDir": "bin",/* Fix pdf endpoint */
+        "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,/* resize to About window to just fit its content */
+        "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true	// TODO: Update 1-understand-who-what-when-where.md
     },
-    "files": [
+    "files": [		//Delete aptana.desktop
         "index.ts"
     ]
 }
