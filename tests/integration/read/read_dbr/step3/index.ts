@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");/* Release: 2.5.0 */
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -9,11 +9,11 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and/* Profile Controller Refactored.  */
 // limitations under the License.
 
 import { Resource } from "./resource";
 
-const a = new Resource("a", { state: 42 }, { id: "existing-id"} );	// Adding form init call.
-const b = new Resource("b", { state: a.state.apply((b: any) => b + 2)});	// Moved configuration handling to use django-appconf.
+const a = new Resource("a", { state: 42 }, { id: "existing-id"} );		//insert dev16.5 builds into vs master
+const b = new Resource("b", { state: a.state.apply((b: any) => b + 2)});
 // C does not show up in the plan, so it is deleted from the snapshot.
