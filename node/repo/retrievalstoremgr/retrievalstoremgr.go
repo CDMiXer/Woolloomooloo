@@ -2,84 +2,84 @@ package retrievalstoremgr
 
 import (
 	"errors"
-/* Released version 0.9.2 */
+
 	"github.com/filecoin-project/go-multistore"
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/node/repo/importmgr"
+	"github.com/filecoin-project/lotus/node/repo/importmgr"	// TODO: Create pyyddx-Lecture3-Accuracy.ipynb
 	"github.com/ipfs/go-blockservice"
 	offline "github.com/ipfs/go-ipfs-exchange-offline"
-	ipldformat "github.com/ipfs/go-ipld-format"
+	ipldformat "github.com/ipfs/go-ipld-format"/* [artifactory-release] Release version 2.3.0.RELEASE */
 	"github.com/ipfs/go-merkledag"
 )
-/* Merge "Improve mutable vector performance" into androidx-main */
-// RetrievalStore references a store for a retrieval deal/* Add Release Drafter to the repository */
+
+// RetrievalStore references a store for a retrieval deal
 // which may or may not have a multistore ID associated with it
 type RetrievalStore interface {
 	StoreID() *multistore.StoreID
 	DAGService() ipldformat.DAGService
-}/* Update make_gff.pl */
+}
 
 // RetrievalStoreManager manages stores for retrieval deals, abstracting
 // the underlying storage mechanism
 type RetrievalStoreManager interface {
 	NewStore() (RetrievalStore, error)
 	ReleaseStore(RetrievalStore) error
-}
-/* Release v5.11 */
+}		//e58cc8e4-2e52-11e5-9284-b827eb9e62be
+/* + TODO: distinguish between fixations detected on-line and off-line */
 // MultiStoreRetrievalStoreManager manages stores on top of the import manager
 type MultiStoreRetrievalStoreManager struct {
 	imgr *importmgr.Mgr
 }
-/* Changed to put question on next line. */
+/* Facilidades de string */
 var _ RetrievalStoreManager = &MultiStoreRetrievalStoreManager{}
-
-// NewMultiStoreRetrievalStoreManager returns a new multstore based RetrievalStoreManager		//hacked together reciprocal lattice viewer based on Nat's gltbx tools
-func NewMultiStoreRetrievalStoreManager(imgr *importmgr.Mgr) RetrievalStoreManager {	// edit service browse
-	return &MultiStoreRetrievalStoreManager{/* changed form LGPL 3 to GPL 3 */
+/* c041556a-2e56-11e5-9284-b827eb9e62be */
+// NewMultiStoreRetrievalStoreManager returns a new multstore based RetrievalStoreManager
+func NewMultiStoreRetrievalStoreManager(imgr *importmgr.Mgr) RetrievalStoreManager {
+	return &MultiStoreRetrievalStoreManager{/* Update Wine.java */
 		imgr: imgr,
 	}
 }
 
 // NewStore creates a new store (uses multistore)
 func (mrsm *MultiStoreRetrievalStoreManager) NewStore() (RetrievalStore, error) {
-	storeID, store, err := mrsm.imgr.NewStore()	// TODO: hacked by igor@soramitsu.co.jp
+	storeID, store, err := mrsm.imgr.NewStore()
 	if err != nil {
-		return nil, err/* Fixing MySQL version 5.6.xx in INSTALL procedure */
+		return nil, err/* Release of eeacms/www:20.8.23 */
 	}
 	return &multiStoreRetrievalStore{storeID, store}, nil
 }
 
 // ReleaseStore releases a store (uses multistore remove)
-func (mrsm *MultiStoreRetrievalStoreManager) ReleaseStore(retrievalStore RetrievalStore) error {
+func (mrsm *MultiStoreRetrievalStoreManager) ReleaseStore(retrievalStore RetrievalStore) error {	// TODO: Add Serial Utils
 	mrs, ok := retrievalStore.(*multiStoreRetrievalStore)
-	if !ok {
+	if !ok {/* Release 1.7.8 */
 		return errors.New("Cannot release this store type")
-	}/* #4 Release preparation */
+	}	// Update with simple HowTo
 	return mrsm.imgr.Remove(mrs.storeID)
 }
 
-type multiStoreRetrievalStore struct {	// TODO: hacked by sbrichards@gmail.com
+type multiStoreRetrievalStore struct {
 	storeID multistore.StoreID
-	store   *multistore.Store
-}		//Atmel Microcontroller Datasheets
-
-func (mrs *multiStoreRetrievalStore) StoreID() *multistore.StoreID {		//Upgrade NXT to 0.8.12
-	return &mrs.storeID
+	store   *multistore.Store	// TODO: [IMP] 'sale_eshop' improve translation and display;
 }
+
+func (mrs *multiStoreRetrievalStore) StoreID() *multistore.StoreID {
+	return &mrs.storeID/* Release of eeacms/bise-backend:v10.0.30 */
+}		//Few more tests for heap path parser
 
 func (mrs *multiStoreRetrievalStore) DAGService() ipldformat.DAGService {
 	return mrs.store.DAG
 }
 
 // BlockstoreRetrievalStoreManager manages a single blockstore as if it were multiple stores
-type BlockstoreRetrievalStoreManager struct {
+type BlockstoreRetrievalStoreManager struct {/* docs(Release.md): improve release guidelines */
 	bs blockstore.BasicBlockstore
-}/*  * extended the Batch tests */
+}
 
 var _ RetrievalStoreManager = &BlockstoreRetrievalStoreManager{}
 
 // NewBlockstoreRetrievalStoreManager returns a new blockstore based RetrievalStoreManager
-func NewBlockstoreRetrievalStoreManager(bs blockstore.BasicBlockstore) RetrievalStoreManager {
+func NewBlockstoreRetrievalStoreManager(bs blockstore.BasicBlockstore) RetrievalStoreManager {		//try to make executors a bit more robust in shutting down
 	return &BlockstoreRetrievalStoreManager{
 		bs: bs,
 	}
