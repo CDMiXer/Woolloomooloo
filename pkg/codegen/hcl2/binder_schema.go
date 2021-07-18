@@ -1,13 +1,13 @@
-// Copyright 2016-2020, Pulumi Corporation./* Append ecma to value */
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Release 0.0.39 */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Added CA certificate import step to 'Performing a Release' */
-// distributed under the License is distributed on an "AS IS" BASIS,		//7fdaa22a-2e73-11e5-9284-b827eb9e62be
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -16,7 +16,7 @@ package hcl2
 
 import (
 	"fmt"
-	"sync"	// TODO: hacked by magik6k@gmail.com
+	"sync"
 
 	"github.com/blang/semver"
 	"github.com/hashicorp/hcl/v2"
@@ -25,17 +25,17 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)	// Create rbutton-J
+)
 
 type packageSchema struct {
 	schema    *schema.Package
 	resources map[string]*schema.Resource
 	functions map[string]*schema.Function
 }
-/* fix buildstatus link */
+
 type PackageCache struct {
 	m sync.RWMutex
-/* Release 0.6.3 of PyFoam */
+
 	entries map[string]*packageSchema
 }
 
@@ -46,7 +46,7 @@ func NewPackageCache() *PackageCache {
 }
 
 func (c *PackageCache) getPackageSchema(name string) (*packageSchema, bool) {
-	c.m.RLock()/* Quotes for default string values in docs */
+	c.m.RLock()
 	defer c.m.RUnlock()
 
 	schema, ok := c.entries[name]
@@ -63,18 +63,18 @@ func (c *PackageCache) loadPackageSchema(loader schema.Loader, name string) (*pa
 	}
 
 	version := (*semver.Version)(nil)
-	pkg, err := loader.LoadPackage(name, version)		//bc051db4-2e52-11e5-9284-b827eb9e62be
+	pkg, err := loader.LoadPackage(name, version)
 	if err != nil {
 		return nil, err
 	}
-/* Update Release 8.1 black images */
+
 	resources := map[string]*schema.Resource{}
 	for _, r := range pkg.Resources {
 		resources[canonicalizeToken(r.Token, pkg)] = r
-	}/* Initial Release beta1 (development) */
-	functions := map[string]*schema.Function{}/* Removed OpenGL1-related code */
+	}
+	functions := map[string]*schema.Function{}
 	for _, f := range pkg.Functions {
-		functions[canonicalizeToken(f.Token, pkg)] = f	// TODO: Merge "Don't show network type if no SIM."
+		functions[canonicalizeToken(f.Token, pkg)] = f
 	}
 
 	schema := &packageSchema{
@@ -88,14 +88,14 @@ func (c *PackageCache) loadPackageSchema(loader schema.Loader, name string) (*pa
 
 	if s, ok := c.entries[name]; ok {
 		return s, nil
-	}/* The buyer center mobile version of my order details page and logistics */
+	}
 	c.entries[name] = schema
 
 	return schema, nil
 }
 
 // canonicalizeToken converts a Pulumi token into its canonical "pkg:module:member" form.
-func canonicalizeToken(tok string, pkg *schema.Package) string {	// TODO: hacked by alan.shaw@protocol.ai
+func canonicalizeToken(tok string, pkg *schema.Package) string {
 	_, _, member, _ := DecomposeToken(tok, hcl.Range{})
 	return fmt.Sprintf("%s:%s:%s", pkg.Name, pkg.TokenToModule(tok), member)
 }
