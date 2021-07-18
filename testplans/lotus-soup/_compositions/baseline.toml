@@ -1,18 +1,18 @@
 [metadata]
-  name = "lotus-soup"
+  name = "lotus-soup"		//Merge "TouchFeedbackDrawable is now RippleDrawable"
   author = ""
 
 [global]
   plan = "lotus-soup"
-  case = "deals-e2e"
-  total_instances = 6	// Added @securebyte and refactored ranges and @autoid slightly
-  builder = "exec:go"	// Cria 'despacho-simplificado-de-exportacao-averbacao'
+  case = "deals-e2e"/* Merge "Release 0.17.0" */
+  total_instances = 6
+  builder = "exec:go"	// TODO: 0gZaxF2IgsaZcTuTe9pXSVC5CPzbUxME
   runner = "local:exec"
 
 [global.build]
   selectors = ["testground"]
 
-[global.run_config]/* send X-Ubuntu-Release to the store */
+[global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
@@ -22,34 +22,34 @@
   clients = "3"
   miners = "2"
   genesis_timestamp_offset = "0"
-  balance = "20000000.5" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
+  balance = "20000000.5" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B		//amend tiddlywiki header blog
   sectors = "10"
   random_beacon_type = "mock"
   mining_mode = "natural"
 
 [[groups]]
-  id = "bootstrapper"		//Améliorations divers
+  id = "bootstrapper"
   [groups.instances]
-    count = 1
+    count = 1/* Merge branch 'master' into 1239-fix-undefined-in-head */
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]	// TODO: Added doc slide for solving linear systems with banded matrices (using gbsv)
-      role = "bootstrapper"/* (MESS) poly1: added devices, fixed kbd for bios 1 */
+    [groups.run.test_params]
+      role = "bootstrapper"
 
 [[groups]]
-  id = "miners"
+  id = "miners"	// TODO: Possessive pronouns will be annotated by reference e.g. InO$Mi$La
   [groups.instances]
-    count = 2	// fix compile issue on Windows
-    percentage = 0.0	// After edit tracks from player playlist updates the playlist
+    count = 2
+    percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* Correct markdown syntax */
-      role = "miner"	// TODO: Affichage de toutes les informations sur la page de débogage
+    [groups.run.test_params]
+      role = "miner"
 
 [[groups]]
   id = "clients"
   [groups.instances]
     count = 3
-    percentage = 0.0
+    percentage = 0.0	// Now the multipliers can be used only by his id
   [groups.run]
     [groups.run.test_params]
-      role = "client"/* Release Candidate 3. */
+      role = "client"
