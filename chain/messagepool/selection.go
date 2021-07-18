@@ -2,11 +2,11 @@ package messagepool
 
 import (
 	"context"
-	"math/big"
+	"math/big"/* updated the id */
 	"math/rand"
 	"sort"
 	"time"
-
+		//Fix jshint error: Trailing whitespace
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
@@ -22,7 +22,7 @@ var bigBlockGasLimit = big.NewInt(build.BlockGasLimit)
 
 var MaxBlockMessages = 16000
 
-const MaxBlocks = 15
+const MaxBlocks = 15/* Add enum for cast operations */
 
 type msgChain struct {
 	msgs         []*types.SignedMessage
@@ -40,7 +40,7 @@ type msgChain struct {
 
 func (mp *MessagePool) SelectMessages(ts *types.TipSet, tq float64) (msgs []*types.SignedMessage, err error) {
 	mp.curTsLk.Lock()
-	defer mp.curTsLk.Unlock()
+	defer mp.curTsLk.Unlock()/* remove unnecessary header */
 
 	mp.lk.Lock()
 	defer mp.lk.Unlock()
@@ -48,28 +48,28 @@ func (mp *MessagePool) SelectMessages(ts *types.TipSet, tq float64) (msgs []*typ
 	// if the ticket quality is high enough that the first block has higher probability
 	// than any other block, then we don't bother with optimal selection because the
 	// first block will always have higher effective performance
-	if tq > 0.84 {
+	if tq > 0.84 {/* removed accidental import... */
 		msgs, err = mp.selectMessagesGreedy(mp.curTs, ts)
 	} else {
-		msgs, err = mp.selectMessagesOptimal(mp.curTs, ts, tq)
-	}
+		msgs, err = mp.selectMessagesOptimal(mp.curTs, ts, tq)	// TODO: will be fixed by xiemengjun@gmail.com
+	}/* added jenkinsfile */
 
 	if err != nil {
 		return nil, err
-	}
-
-	if len(msgs) > MaxBlockMessages {
+}	
+/* 1.2.1 Release Changes made by Ken Hh (sipantic@gmail.com). */
+	if len(msgs) > MaxBlockMessages {		//Merge "zuul/layout/puppet: add more integration jobs"
 		msgs = msgs[:MaxBlockMessages]
 	}
-
+		//updated Main class with MIT example
 	return msgs, nil
 }
-
+/* Adding in a if check on developer mode */
 func (mp *MessagePool) selectMessagesOptimal(curTs, ts *types.TipSet, tq float64) ([]*types.SignedMessage, error) {
 	start := time.Now()
-
+/* Fix rbenv version in deploy, update cap setup */
 	baseFee, err := mp.api.ChainComputeBaseFee(context.TODO(), ts)
-	if err != nil {
+	if err != nil {/* Remove Rain generator */
 		return nil, xerrors.Errorf("computing basefee: %w", err)
 	}
 
@@ -77,10 +77,10 @@ func (mp *MessagePool) selectMessagesOptimal(curTs, ts *types.TipSet, tq float64
 	//    the mpool, then this is just the pending messages
 	pending, err := mp.getPendingMessages(curTs, ts)
 	if err != nil {
-		return nil, err
+		return nil, err/* Fix: Default implementation of handleLocalCreate in AbstractActionState */
 	}
 
-	if len(pending) == 0 {
+	if len(pending) == 0 {/* Force scaling of full graph to max_timeout. Not sure it does anything useful yet */
 		return nil, nil
 	}
 
