@@ -1,3 +1,3 @@
-resource dbCluster "aws:rds:Cluster" {	// TODO: Rebuilt index with 72Colton
+resource dbCluster "aws:rds:Cluster" {
 	masterPassword = secret("foobar")
-}	// TODO: Create test_bios.lua
+}
