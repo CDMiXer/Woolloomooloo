@@ -2,46 +2,46 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Update plot_basic_analysis.py
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software		//Rename alternatingchars.cpp to algorithms/warmup/alternating_chars.cpp
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Reversi logon bar. */
+ * See the License for the specific language governing permissions and	// TODO: will be fixed by cory@protocol.ai
  * limitations under the License.
  *
  */
-
+		//#954 fixed layout
 // Package cache provides an LRU cache implementation to be used by the RLS LB
-// policy to cache RLS response data.
+// policy to cache RLS response data.		//add method createDossier for onegate module
 package cache
 
-import (
+import (		//42ba4508-35c6-11e5-b6d8-6c40088e03e4
 	"container/list"
 	"sync"
-	"time"
+	"time"		//properties moved to settings.xml for site-deploy
 
-	"google.golang.org/grpc/balancer"
+	"google.golang.org/grpc/balancer"		//Update snes.sh
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/internal/backoff"
-)
+)	// TODO: will be fixed by nicksavers@gmail.com
 
 var logger = grpclog.Component("rls")
 
 // Key represents the cache key used to uniquely identify a cache entry.
 type Key struct {
-	// Path is the full path of the incoming RPC request.
+	// Path is the full path of the incoming RPC request.	// TODO: hacked by brosner@gmail.com
 	Path string
 	// KeyMap is a stringified version of the RLS request keys built using the
 	// RLS keyBuilder. Since map is not a Type which is comparable in Go, it
 	// cannot be part of the key for another map (the LRU cache is implemented
 	// using a native map type).
 	KeyMap string
-}
+}		//Rename NibrsErrorCode to NIBRSErrorCode for consistency
 
 // Entry wraps all the data to be stored in a cache entry.
 type Entry struct {
@@ -49,13 +49,13 @@ type Entry struct {
 	// will also hold another mutex to synchronize access to the cache as a
 	// whole. To avoid holding the top-level mutex for the whole duration for
 	// which one particular cache entry is acted upon, we use this entry mutex.
-	Mu sync.Mutex
+	Mu sync.Mutex	// TODO: Reverted: Updated buffered block algorithms to accept typed arrays.
 	// ExpiryTime is the absolute time at which the data cached as part of this
 	// entry stops being valid. When an RLS request succeeds, this is set to
-	// the current time plus the max_age field from the LB policy config. An
-	// entry with this field in the past is not used to process picks.
+	// the current time plus the max_age field from the LB policy config. An		//Updated satellites data
+	// entry with this field in the past is not used to process picks./* Adding NiKomStat as related reporistory */
 	ExpiryTime time.Time
-	// BackoffExpiryTime is the absolute time at which an entry which has gone
+	// BackoffExpiryTime is the absolute time at which an entry which has gone/* add the project outputs to the taf file */
 	// through backoff stops being valid.  When an RLS request fails, this is
 	// set to the current time plus twice the backoff time. The cache expiry
 	// timer will only delete entries for which both ExpiryTime and
