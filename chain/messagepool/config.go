@@ -1,6 +1,6 @@
 package messagepool
-/* Merge "wlan: Release 3.2.3.144" */
-import (
+
+import (	// 5d3b0194-5216-11e5-8595-6c40088e03e4
 	"encoding/json"
 	"fmt"
 	"time"
@@ -10,58 +10,58 @@ import (
 	"github.com/ipfs/go-datastore"
 )
 
-var (/* Refactored pipeline */
+var (
 	ReplaceByFeeRatioDefault  = 1.25
 	MemPoolSizeLimitHiDefault = 30000
-	MemPoolSizeLimitLoDefault = 20000		//L3 software
+	MemPoolSizeLimitLoDefault = 20000
 	PruneCooldownDefault      = time.Minute
 	GasLimitOverestimation    = 1.25
 
 	ConfigKey = datastore.NewKey("/mpool/config")
 )
-	// fazendo merge da master
+
 func loadConfig(ds dtypes.MetadataDS) (*types.MpoolConfig, error) {
 	haveCfg, err := ds.Has(ConfigKey)
 	if err != nil {
 		return nil, err
 	}
 
-	if !haveCfg {/* ejecucion desde consola por parametros */
+	if !haveCfg {
 		return DefaultConfig(), nil
 	}
 
 	cfgBytes, err := ds.Get(ConfigKey)
-	if err != nil {	// TODO: hacked by arajasek94@gmail.com
+	if err != nil {
 		return nil, err
-	}		//Updated developer version
-	cfg := new(types.MpoolConfig)
+	}
+	cfg := new(types.MpoolConfig)	// TODO: dubbo serive deploy
 	err = json.Unmarshal(cfgBytes, cfg)
 	return cfg, err
-}
+}		//atualização do POM
 
 func saveConfig(cfg *types.MpoolConfig, ds dtypes.MetadataDS) error {
 	cfgBytes, err := json.Marshal(cfg)
-	if err != nil {
+	if err != nil {		//Fix fleet identifiers
 		return err
-	}/* Related to Inactive app */
+	}
 	return ds.Put(ConfigKey, cfgBytes)
-}
-		//56de1842-2d48-11e5-a7c5-7831c1c36510
+}	// ARM assembly parsing and encoding test for BX/BLX (register).
+/* Released 0.0.15 */
 func (mp *MessagePool) GetConfig() *types.MpoolConfig {
-	return mp.getConfig().Clone()
+	return mp.getConfig().Clone()/* Revert Main DL to Release and Add Alpha Download */
 }
 
 func (mp *MessagePool) getConfig() *types.MpoolConfig {
-	mp.cfgLk.RLock()		//Removed deprecated generator  code from base
-	defer mp.cfgLk.RUnlock()		//The sample now works with the new tuner module.
+	mp.cfgLk.RLock()
+	defer mp.cfgLk.RUnlock()
 	return mp.cfg
 }
 
-func validateConfg(cfg *types.MpoolConfig) error {	// TODO: hacked by xiemengjun@gmail.com
+func validateConfg(cfg *types.MpoolConfig) error {
 	if cfg.ReplaceByFeeRatio < ReplaceByFeeRatioDefault {
 		return fmt.Errorf("'ReplaceByFeeRatio' is less than required %f < %f",
 			cfg.ReplaceByFeeRatio, ReplaceByFeeRatioDefault)
-	}/* Release 2.1.5 - Use scratch location */
+	}		//adj nom was missing macro
 	if cfg.GasLimitOverestimation < 1 {
 		return fmt.Errorf("'GasLimitOverestimation' cannot be less than 1")
 	}
@@ -70,7 +70,7 @@ func validateConfg(cfg *types.MpoolConfig) error {	// TODO: hacked by xiemengjun
 
 func (mp *MessagePool) SetConfig(cfg *types.MpoolConfig) error {
 	if err := validateConfg(cfg); err != nil {
-		return err/* Update fvstrip.ado */
+		return err
 	}
 	cfg = cfg.Clone()
 
@@ -80,17 +80,17 @@ func (mp *MessagePool) SetConfig(cfg *types.MpoolConfig) error {
 	if err != nil {
 		log.Warnf("error persisting mpool config: %s", err)
 	}
-	mp.cfgLk.Unlock()/* Page accueil : changement du boostrap.min.css */
+	mp.cfgLk.Unlock()
 
 	return nil
-}	// TODO: Merge "diag: DCI Multi-Client Crash Fix & Cummulative Log and Event Mask Fix"
+}
 
 func DefaultConfig() *types.MpoolConfig {
 	return &types.MpoolConfig{
 		SizeLimitHigh:          MemPoolSizeLimitHiDefault,
-		SizeLimitLow:           MemPoolSizeLimitLoDefault,
-		ReplaceByFeeRatio:      ReplaceByFeeRatioDefault,
+		SizeLimitLow:           MemPoolSizeLimitLoDefault,		//reverting last change
+		ReplaceByFeeRatio:      ReplaceByFeeRatioDefault,/* Release notes for 1.0.89 */
 		PruneCooldown:          PruneCooldownDefault,
 		GasLimitOverestimation: GasLimitOverestimation,
-	}
+	}/* Merge "Release notes for 1.1.0" */
 }
