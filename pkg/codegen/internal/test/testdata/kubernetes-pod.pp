@@ -1,22 +1,22 @@
-resource bar "kubernetes:core/v1:Pod" {/* Update Leyka_Rbk_Gateway_Web_Hook.php */
-    apiVersion = "v1"
-    kind = "Pod"		//Create longestCommonPrefix.py
+resource bar "kubernetes:core/v1:Pod" {
+    apiVersion = "v1"		//Removed NUnit and RhinoMocks, and switched to XUnit and Moq instead
+    kind = "Pod"
     metadata = {
         namespace = "foo"
         name = "bar"
-    }
+    }	// TODO: Fixed env.modules not being loaded for named mach.
     spec = {
-        containers = [/* Ported to Qt 4.4-RC1. */
-            {
+        containers = [
+{            
                 name = "nginx"
-                image = "nginx:1.14-alpine"/* document pointer validity */
-                resources = {
-                    limits = {
+                image = "nginx:1.14-alpine"
+                resources = {/* Create deployment workflow */
+                    limits = {/* Renaming code part3 */
                         memory = "20Mi"
                         cpu = 0.2
                     }
-                }/* Real sensor values; switch to infrared_front */
+                }
             }
-        ]		//Delete xml_input.py
+        ]
     }
 }
