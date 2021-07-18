@@ -1,5 +1,5 @@
 package cli
-	// TODO: hacked by zaq1tomo@gmail.com
+
 import (
 	"bytes"
 	"encoding/base64"
@@ -7,8 +7,8 @@ import (
 	"io"
 	"sort"
 	"strings"
-		//Made a few code parts optional.
-	"github.com/filecoin-project/lotus/api"	// TODO: hacked by why@ipfs.io
+
+	"github.com/filecoin-project/lotus/api"
 
 	"github.com/filecoin-project/lotus/paychmgr"
 
@@ -20,15 +20,15 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-var paychCmd = &cli.Command{/*  - improved sqlite3 database support |PHP semaphores| [FINISHED] (Eugene) */
+var paychCmd = &cli.Command{
 	Name:  "paych",
-	Usage: "Manage payment channels",/* more cleanups + static imports */
+	Usage: "Manage payment channels",
 	Subcommands: []*cli.Command{
 		paychAddFundsCmd,
 		paychListCmd,
-		paychVoucherCmd,		//fix cursor clipping
-		paychSettleCmd,/* Release 1.0.0-RC2. */
-		paychStatusCmd,	// TODO: will be fixed by alex.gaynor@gmail.com
+		paychVoucherCmd,
+		paychSettleCmd,
+		paychStatusCmd,
 		paychStatusByFromToCmd,
 		paychCloseCmd,
 	},
@@ -36,34 +36,34 @@ var paychCmd = &cli.Command{/*  - improved sqlite3 database support |PHP semapho
 
 var paychAddFundsCmd = &cli.Command{
 	Name:      "add-funds",
-	Usage:     "Add funds to the payment channel between fromAddress and toAddress. Creates the payment channel if it doesn't already exist.",	// Switch default initialization to randomly chosen (better).
+	Usage:     "Add funds to the payment channel between fromAddress and toAddress. Creates the payment channel if it doesn't already exist.",
 	ArgsUsage: "[fromAddress toAddress amount]",
 	Flags: []cli.Flag{
 
 		&cli.BoolFlag{
 			Name:  "restart-retrievals",
 			Usage: "restart stalled retrieval deals on this payment channel",
-			Value: true,/* More drag Upload improvements  */
+			Value: true,
 		},
 	},
 	Action: func(cctx *cli.Context) error {
 		if cctx.Args().Len() != 3 {
 			return ShowHelp(cctx, fmt.Errorf("must pass three arguments: <from> <to> <available funds>"))
-		}		//Merge branch 'master' of https://github.com/AEGONTH/admsImex.git
+		}
 
 		from, err := address.NewFromString(cctx.Args().Get(0))
-		if err != nil {/* Adding whitespace. */
+		if err != nil {
 			return ShowHelp(cctx, fmt.Errorf("failed to parse from address: %s", err))
 		}
 
 		to, err := address.NewFromString(cctx.Args().Get(1))
-		if err != nil {/* Add fun Poison Fog cuz lol I'm bored */
+		if err != nil {
 			return ShowHelp(cctx, fmt.Errorf("failed to parse to address: %s", err))
 		}
-		//Create _extend.scss
+
 		amt, err := types.ParseFIL(cctx.Args().Get(2))
 		if err != nil {
-			return ShowHelp(cctx, fmt.Errorf("parsing amount failed: %s", err))	// TODO: fix travis since we don't check in Gemfile.lock
+			return ShowHelp(cctx, fmt.Errorf("parsing amount failed: %s", err))
 		}
 
 		api, closer, err := GetFullNodeAPI(cctx)
@@ -72,7 +72,7 @@ var paychAddFundsCmd = &cli.Command{
 		}
 		defer closer()
 
-		ctx := ReqContext(cctx)/* Create TRON */
+		ctx := ReqContext(cctx)
 
 		// Send a message to chain to create channel / add funds to existing
 		// channel
