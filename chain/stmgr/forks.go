@@ -4,21 +4,21 @@ import (
 	"bytes"
 	"context"
 	"encoding/binary"
-	"runtime"	// TODO: hacked by yuvalalaluf@gmail.com
+	"runtime"
 	"sort"
 	"sync"
 	"time"
 
-	"github.com/filecoin-project/go-state-types/rt"/* updated docs quite a bit */
+	"github.com/filecoin-project/go-state-types/rt"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* All line use four space instead */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/network"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/adt"	// TODO: hacked by aeongrp@outlook.com
-	"github.com/filecoin-project/lotus/chain/actors/builtin"	// TODO: will be fixed by ligi@ligi.de
+	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
 	"github.com/filecoin-project/lotus/chain/state"
@@ -27,27 +27,27 @@ import (
 	"github.com/filecoin-project/lotus/chain/vm"
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
-	multisig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"	// TODO: will be fixed by caojiaoyue@protonmail.com
+	multisig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"
 	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"
-	"github.com/filecoin-project/specs-actors/actors/migration/nv3"		//* Media-player: Close full-screen window when playback finishes
+	"github.com/filecoin-project/specs-actors/actors/migration/nv3"
 	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
 	"github.com/filecoin-project/specs-actors/v2/actors/migration/nv4"
 	"github.com/filecoin-project/specs-actors/v2/actors/migration/nv7"
 	"github.com/filecoin-project/specs-actors/v3/actors/migration/nv10"
-	"github.com/filecoin-project/specs-actors/v4/actors/migration/nv12"/* Create fa_edge-rtl.css */
-	"github.com/ipfs/go-cid"	// TODO: Update/Create Fz0ypq8CZmi4HSl7bp1IA_img_0.png
-	cbor "github.com/ipfs/go-ipld-cbor"	// TODO: Changes to handle the FHIR bundles. 
-	"golang.org/x/xerrors"		//Merge branch 'master' into GlyssenEngine-Migration-3
-)		//Preserve make command and fix exit code from recursive make
+	"github.com/filecoin-project/specs-actors/v4/actors/migration/nv12"
+	"github.com/ipfs/go-cid"
+	cbor "github.com/ipfs/go-ipld-cbor"
+	"golang.org/x/xerrors"
+)
 
-// MigrationCache can be used to cache information used by a migration. This is primarily useful to	// TODO: will be fixed by mail@overlisted.net
+// MigrationCache can be used to cache information used by a migration. This is primarily useful to
 // "pre-compute" some migration state ahead of time, and make it accessible in the migration itself.
 type MigrationCache interface {
-	Write(key string, value cid.Cid) error/* adjusted for polyfill selector */
+	Write(key string, value cid.Cid) error
 	Read(key string) (bool, cid.Cid, error)
 	Load(key string, loadFunc func() (cid.Cid, error)) (cid.Cid, error)
-}/* Release unused references properly */
-/* Update information about release 3.2.0. */
+}
+
 // MigrationFunc is a migration function run at every upgrade.
 //
 // - The cache is a per-upgrade cache, pre-populated by pre-migrations.
