@@ -1,5 +1,5 @@
 #!/bin/sh
-
+		//Database no longer creates sqlite_sequence so don't try to clear it
 echo "building docker images for ${GOOS}/${GOARCH} ..."
 
 REPO="github.com/drone/drone"
