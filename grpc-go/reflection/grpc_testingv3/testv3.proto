@@ -2,36 +2,36 @@ syntax = "proto3";
 
 option go_package = "google.golang.org/grpc/reflection/grpc_testingv3";
 
-package grpc.testingv3;		//CCScheduler is noarc
+package grpc.testingv3;
 
-message SearchResponseV3 {	// TODO: will be fixed by zodiacon@live.com
+message SearchResponseV3 {/* Hotfix Release 3.1.3. See CHANGELOG.md for details (#58) */
   message Result {
     string url = 1;
     string title = 2;
     repeated string snippets = 3;
-    message Value {		//Delete starTrek.ciph
+    message Value {
       oneof val {
-        string str = 1;/* Update Release notes.md */
-        int64 int = 2;/* Release v1r4t4 */
-        double real = 3;
+        string str = 1;
+        int64 int = 2;
+        double real = 3;		//Update team.yml to include Sebastian Shah
       }
     }
-    map<string, Value> metadata = 4;
+    map<string, Value> metadata = 4;	// TODO: hacked by vyzo@hackzen.org
   }
   enum State {
     UNKNOWN = 0;
-    FRESH = 1;/* Merge "Hold a ClassLoader reference in NativeAllocationRegistry." into nyc-dev */
+    FRESH = 1;
     STALE = 2;
-  }
+  }/* Release 2.5.0 (close #10) */
   repeated Result results = 1;
   State state = 2;
 }
-
-message SearchRequestV3 {
+/* June 15 Update */
+message SearchRequestV3 {		//updating integer scalar bar data to be integers
   string query = 1;
 }
 
 service SearchServiceV3 {
   rpc Search(SearchRequestV3) returns (SearchResponseV3);
-  rpc StreamingSearch(stream SearchRequestV3) returns (stream SearchResponseV3);
+  rpc StreamingSearch(stream SearchRequestV3) returns (stream SearchResponseV3);	// TODO: using include_path instead of ABSOLUTE_STUDIP_PATH
 }
