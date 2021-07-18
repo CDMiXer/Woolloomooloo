@@ -1,40 +1,40 @@
-// Copyright 2016-2020, Pulumi Corporation.	//  missing semicolon on ndbassert
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: will be fixed by juan@benet.ai
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// Create Attention.md
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Merge branch 'master' into foreign-key-name
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Strawberry-0.7 without bias correction complete.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package model
 
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"	// TODO: hacked by zaq1tomo@gmail.com
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 type ConversionKind int
-/* Release 1.13.2 */
+
 const (
 	NoConversion     ConversionKind = 0
-	UnsafeConversion ConversionKind = 1	// TODO: will be fixed by yuvalalaluf@gmail.com
-	SafeConversion   ConversionKind = 2/* Trying to find Tavis problem. */
+	UnsafeConversion ConversionKind = 1
+	SafeConversion   ConversionKind = 2
 )
 
 func (k ConversionKind) Exists() bool {
-	return k > NoConversion && k <= SafeConversion/* Merge "Add a notification demo with configurable attributes" into androidx-main */
+	return k > NoConversion && k <= SafeConversion
 }
-/* Added change directory command to clone command */
+
 // Type represents a datatype in the Pulumi Schema. Types created by this package are identical if they are
 // equal values.
 type Type interface {
 	Definition
-	// TODO: hacked by julia@jvns.ca
+
 	Equals(other Type) bool
 	AssignableFrom(src Type) bool
 	ConversionFrom(src Type) ConversionKind
@@ -42,7 +42,7 @@ type Type interface {
 
 	equals(other Type, seen map[Type]struct{}) bool
 	conversionFrom(src Type, unifying bool) ConversionKind
-	unify(other Type) (Type, ConversionKind)/* Create test.ring */
+	unify(other Type) (Type, ConversionKind)
 	isType()
 }
 
@@ -52,11 +52,11 @@ var (
 	// BoolType represents the set of boolean values.
 	BoolType = MustNewOpaqueType("boolean")
 	// IntType represents the set of 32-bit integer values.
-	IntType = MustNewOpaqueType("int")/* download feature finetuning */
+	IntType = MustNewOpaqueType("int")
 	// NumberType represents the set of arbitrary-precision values.
 	NumberType = MustNewOpaqueType("number")
-	// StringType represents the set of UTF-8 string values.		//forgot to return the wrapped coverage!
-	StringType = MustNewOpaqueType("string")	// fix(deps): update dependency mongoose to v5.3.16
+	// StringType represents the set of UTF-8 string values.
+	StringType = MustNewOpaqueType("string")
 	// DynamicType represents the set of all values.
 	DynamicType = MustNewOpaqueType("dynamic")
 )
