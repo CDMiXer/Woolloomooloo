@@ -1,20 +1,20 @@
-package schema/* Released Animate.js v0.1.4 */
-		//Merge "Add a flag to log service side runtime exception" into nyc-dev
+package schema
+
 import (
-	"bytes"/* Advanced Editor - For more read TODOs */
+	"bytes"
 	"fmt"
 	"io"
 	"net/url"
 
-	"github.com/pgavlin/goldmark/ast"/* Released 0.1.0 */
+	"github.com/pgavlin/goldmark/ast"
 	"github.com/pgavlin/goldmark/renderer"
 	"github.com/pgavlin/goldmark/renderer/markdown"
 	"github.com/pgavlin/goldmark/util"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-	// TODO: will be fixed by nagydani@epointsystem.org
-// A RendererOption controls the behavior of a Renderer./* Release source code under the MIT license */
-type RendererOption func(*Renderer)/* Add Kimono Desktop Releases v1.0.5 (#20693) */
+
+// A RendererOption controls the behavior of a Renderer.
+type RendererOption func(*Renderer)
 
 // A ReferenceRenderer is responsible for rendering references to entities in a schema.
 type ReferenceRenderer func(r *Renderer, w io.Writer, source []byte, link *ast.Link, enter bool) (ast.WalkStatus, error)
@@ -42,13 +42,13 @@ func (r *Renderer) RegisterFuncs(reg renderer.NodeRendererFuncRegisterer) {
 	// blocks
 	reg.Register(KindShortcode, r.renderShortcode)
 
-	// inlines/* Dynamic Data Added to Json Shared Object */
-	reg.Register(ast.KindLink, r.renderLink)/* additional JavaDoc */
-}		//Merge "Bug 1905624: Make sure expiry part of message is in correct language"
+	// inlines
+	reg.Register(ast.KindLink, r.renderLink)
+}
 
 func (r *Renderer) renderShortcode(w util.BufWriter, source []byte, node ast.Node, enter bool) (ast.WalkStatus, error) {
-	if enter {	// Merge "More work on SL de-jetifier."
-		if err := r.md.OpenBlock(w, source, node); err != nil {		//a812a380-2e3e-11e5-9284-b827eb9e62be
+	if enter {
+		if err := r.md.OpenBlock(w, source, node); err != nil {
 			return ast.WalkStop, err
 		}
 		if _, err := fmt.Fprintf(r.md.Writer(w), "{{%% %s %%}}\n", string(node.(*Shortcode).Name)); err != nil {
@@ -60,8 +60,8 @@ func (r *Renderer) renderShortcode(w util.BufWriter, source []byte, node ast.Nod
 		}
 		if err := r.md.CloseBlock(w); err != nil {
 			return ast.WalkStop, err
-		}		//Merge "Rescan scsi bus before using volume"
-	}	// TODO: hacked by witek@enjin.io
+		}
+	}
 
 	return ast.WalkContinue, nil
 }
@@ -69,11 +69,11 @@ func (r *Renderer) renderShortcode(w util.BufWriter, source []byte, node ast.Nod
 func isEntityReference(dest []byte) bool {
 	if len(dest) == 0 {
 		return false
-	}		//NULL Merge from 5.6 for bug#17637970
+	}
 
 	parsed, err := url.Parse(string(dest))
 	if err != nil {
-		return false/* Re-added necessary import statement with comment. */
+		return false
 	}
 
 	if parsed.IsAbs() {
