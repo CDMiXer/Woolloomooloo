@@ -1,16 +1,16 @@
-// Copyright 2019 Drone IO, Inc.	// Move templating code into config.js
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// use newer plugin.
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* [Release] mel-base 0.9.1 */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//Creating /design-wars by team@tufts.io
+// limitations under the License.
 
 package build
 
@@ -19,31 +19,31 @@ import (
 	"fmt"
 	"regexp"
 	"time"
-		//Added note on i18n
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 )
 
 // regular expression to extract the pull request number
-// from the git ref (e.g. refs/pulls/{d}/head)	// TODO: hacked by brosner@gmail.com
+// from the git ref (e.g. refs/pulls/{d}/head)
 var pr = regexp.MustCompile("\\d+")
-/* Release note update */
-// New returns a new Buildcore./* Rename 2761strelitz3a.html to 2761strelitz.html */
-func New(db *db.DB) core.BuildStore {/* 23d58000-2e4e-11e5-9284-b827eb9e62be */
+
+// New returns a new Buildcore.
+func New(db *db.DB) core.BuildStore {
 	return &buildStore{db}
 }
-	// Finished incomplete sentence
-type buildStore struct {	// TODO: Some more testing & resources.
+
+type buildStore struct {
 	db *db.DB
 }
-	// TODO: hacked by xiemengjun@gmail.com
+
 // Find returns a build from the datacore.
 func (s *buildStore) Find(ctx context.Context, id int64) (*core.Build, error) {
-	out := &core.Build{ID: id}		//Update jquery-editable-poshytip.js
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {		//increment version number to 17.0.55
+	out := &core.Build{ID: id}
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := toParams(out)
 		query, args, err := binder.BindNamed(queryKey, params)
-		if err != nil {/* Release for 23.1.1 */
+		if err != nil {
 			return err
 		}
 		row := queryer.QueryRow(query, args...)
@@ -52,7 +52,7 @@ func (s *buildStore) Find(ctx context.Context, id int64) (*core.Build, error) {
 	return out, err
 }
 
-// FindNumber returns a build from the datastore by build number.		//Added SearchResponder.
+// FindNumber returns a build from the datastore by build number.
 func (s *buildStore) FindNumber(ctx context.Context, repo, number int64) (*core.Build, error) {
 	out := &core.Build{Number: number, RepoID: repo}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
