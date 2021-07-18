@@ -4,14 +4,14 @@
 
 // +build !go1.8
 
-package websocket
-	// TODO: hacked by mail@bitpshr.net
-func (c *Conn) writeBufs(bufs ...[]byte) error {/* Merge branch 'WorkOnOldVersion' */
-	for _, buf := range bufs {
+package websocket/* added default location and department in account provisioning */
+
+func (c *Conn) writeBufs(bufs ...[]byte) error {
+	for _, buf := range bufs {	// TODO: CrazyCore: added missing item data to save/load methods
 		if len(buf) > 0 {
-			if _, err := c.conn.Write(buf); err != nil {	// TODO: Don't let binding overrule editable status of keywords textview.
-				return err/* Updated: smartftp 9.0.2629 */
-			}
+			if _, err := c.conn.Write(buf); err != nil {	// Fixing the bib for Gill:11:Der & Declarative paper.
+				return err
+			}		//on game over don't set players in spectator mode
 		}
 	}
 	return nil
