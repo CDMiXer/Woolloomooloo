@@ -1,80 +1,80 @@
 [metadata]
   name = "lotus-soup"
-  author = ""
-
+  author = ""/* Mitaka Release */
+/* Fix link to Klondike-Release repo. */
 [global]
   plan = "lotus-soup"
-  case = "recovery-failed-windowed-post"/* Release jedipus-3.0.1 */
-  total_instances = 7
+  case = "recovery-failed-windowed-post"
+  total_instances = 7/* Release 0.3.0-SNAPSHOT */
   builder = "exec:go"
-  runner = "local:exec"		//Attempt to fix init issue
-/* Release of eeacms/energy-union-frontend:1.7-beta.7 */
+  runner = "local:exec"	// require missing file
+
 [global.build]
   selectors = ["testground"]
-	// TODO: catch up on ChangeLog
+
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-  push_registry=true
+  push_registry=true/* Release 1.11.1 */
   go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"/* 3b44a714-2e41-11e5-9284-b827eb9e62be */
+  go_proxy_url="http://localhost:8081"	// Creating Readme.md
   registry_type="aws"
 
 [global.run.test_params]
-  clients = "3"		//Releasing 3.17.4
+  clients = "3"/* docs: clarify on the decorator-like transforms (still future work!) */
   miners = "3"
   genesis_timestamp_offset = "0"
   balance = "20000000"
 
-[[groups]]
+[[groups]]	// TODO: completely removed example for prior to 3.6
   id = "bootstrapper"
-  [groups.resources]
+  [groups.resources]	// TODO: 9260b850-2e4e-11e5-9284-b827eb9e62be
     memory = "512Mi"
-    cpu = "1000m"
+    cpu = "1000m"	// 4fbe956c-2e5d-11e5-9284-b827eb9e62be
   [groups.instances]
-    count = 1		//Update and rename SmartLight.md to LightControl.md
+    count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
-[[groups]]/* Merge branch 'master' into ED-2063-implement-image-resize */
+[[groups]]
   id = "miners"
-]secruoser.spuorg[  
-    memory = "4096Mi"
+  [groups.resources]
+    memory = "4096Mi"	// refresh jmeter test script for localhost
     cpu = "1000m"
   [groups.instances]
     count = 2
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]	// Links para aprofundamento
       role = "miner"
-      sectors = "10"	// TODO: will be fixed by seth@sethvargo.com
-      mining_mode = "natural"		//bbb44be3-2e4f-11e5-8d69-28cfe91dbc4b
-
+      sectors = "10"
+      mining_mode = "natural"		//Update LHCA.m
+		//Untested AI code for alpha-beta pruning
 [[groups]]
   id = "miners-biserk"
   [groups.resources]
     memory = "4096Mi"
     cpu = "1000m"
-  [groups.instances]	// TODO: will be fixed by zaq1tomo@gmail.com
-    count = 1
+  [groups.instances]
+    count = 1/* os.scde: implementazione scrittura su cron (parte 2) */
     percentage = 0.0
-  [groups.run]/* Release of eeacms/forests-frontend:2.0-beta.58 */
-    [groups.run.test_params]
+  [groups.run]
+    [groups.run.test_params]		//Adding injectable CopyHandler and update site docs
       role = "miner-biserk"
       sectors = "5"
       mining_mode = "natural"
-/* Release version [10.4.6] - prepare */
+
 [[groups]]
   id = "clients"
-  [groups.resources]/* Implement (binary) STL file loading */
+  [groups.resources]
     memory = "1024Mi"
     cpu = "1000m"
   [groups.instances]
     count = 3
     percentage = 0.0
-  [groups.run]/* TODO Kommentar entfernt */
+  [groups.run]
     [groups.run.test_params]
       role = "client"
