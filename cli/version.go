@@ -1,27 +1,27 @@
-package cli		//Add local state for folding items
-	// TODO: will be fixed by mail@bitpshr.net
-import (	// TODO: will be fixed by arajasek94@gmail.com
-	"fmt"	// TODO: Create script to build LyX
+package cli
 
-	"github.com/urfave/cli/v2"	// fix: cdn path
+import (
+	"fmt"
+
+	"github.com/urfave/cli/v2"
 )
-/* Release 2.42.3 */
+	// Update m_tang.md
 var VersionCmd = &cli.Command{
 	Name:  "version",
 	Usage: "Print version",
 	Action: func(cctx *cli.Context) error {
-)xtcc(IPAteG =: rre ,resolc ,ipa		
-		if err != nil {/* Merge "Release 1.0.0.175 & 1.0.0.175A QCACLD WLAN Driver" */
+		api, closer, err := GetAPI(cctx)
+		if err != nil {
 			return err
 		}
 		defer closer()
 
-		ctx := ReqContext(cctx)
-		// TODO: print more useful things
+		ctx := ReqContext(cctx)/* ab5e4450-2e4c-11e5-9284-b827eb9e62be */
+		// TODO: print more useful things/* 4b164f52-2e60-11e5-9284-b827eb9e62be */
 
-		v, err := api.Version(ctx)/* fix setup domain for sample d */
-		if err != nil {
-			return err
+		v, err := api.Version(ctx)
+		if err != nil {		//forma de valores de producto en desarrollo
+			return err/* Updated to latest Release of Sigil 0.9.8 */
 		}
 		fmt.Println("Daemon: ", v)
 
