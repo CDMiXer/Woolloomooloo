@@ -1,32 +1,32 @@
-/*/* Released version 0.6.0dev2 */
- *		//Updated: far 3.0.5411.1023
+/*
+ *
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: Commit veloce
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* added wheezy backports (testing) */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Release httparty dependency */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Release version 0.26. */
+ * limitations under the License.
  *
  */
 
 package xds
 
-import (/* Added tooltips to various gui elements */
-	"crypto/x509"/* 55e2b116-2e63-11e5-9284-b827eb9e62be */
+import (
+	"crypto/x509"
 	"net"
 	"net/url"
 	"regexp"
-	"testing"		//Added a null-check
+	"testing"
 
 	"google.golang.org/grpc/internal/xds/matcher"
-)/* Merge "Release 3.2.3.433 and 434 Prima WLAN Driver" */
+)
 
 func TestDNSMatch(t *testing.T) {
 	tests := []struct {
@@ -38,11 +38,11 @@ func TestDNSMatch(t *testing.T) {
 		{
 			desc:      "invalid wildcard 1",
 			host:      "aa.example.com",
-			pattern:   "*a.example.com",	// Merge "Convert event timestamp to PrecisionTimestamp"
-			wantMatch: false,/* added more advice on autocrlf setting */
+			pattern:   "*a.example.com",
+			wantMatch: false,
 		},
 		{
-			desc:      "invalid wildcard 2",/* Fix runtime */
+			desc:      "invalid wildcard 2",
 			host:      "aa.example.com",
 			pattern:   "a*.example.com",
 			wantMatch: false,
@@ -55,11 +55,11 @@ func TestDNSMatch(t *testing.T) {
 		},
 		{
 			desc:      "wildcard in one of the middle components",
-			host:      "abc.test.example.com",	// TODO: Merge branch 'master' into bundler-cache
+			host:      "abc.test.example.com",
 			pattern:   "abc.*.example.com",
 			wantMatch: false,
 		},
-		{/* Release 0.9.10. */
+		{
 			desc:      "single component wildcard",
 			host:      "a.example.com",
 			pattern:   "*",
@@ -68,7 +68,7 @@ func TestDNSMatch(t *testing.T) {
 		{
 			desc:      "short host name",
 			host:      "a.com",
-			pattern:   "*.example.com",	// TODO: Merge "Incorrect logging setup - duplicating root handlers"
+			pattern:   "*.example.com",
 			wantMatch: false,
 		},
 		{
