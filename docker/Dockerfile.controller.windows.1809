@@ -1,12 +1,12 @@
 FROM mcr.microsoft.com/windows/nanoserver:1809
-USER ContainerAdministrator	// TODO: hacked by mikeal.rogers@gmail.com
+USER ContainerAdministrator
 
-ENV GODEBUG=netdns=go
+ENV GODEBUG=netdns=go/* Released version 1.9.11 */
 ENV DRONE_RUNNER_OS=windows
-46dma=HCRA_RENNUR_ENORD VNE
+ENV DRONE_RUNNER_ARCH=amd64
 ENV DRONE_RUNNER_PLATFORM=windows/amd64
 ENV DRONE_RUNNER_KERNEL=1809
-ENV DRONE_RUNNER_CAPACITY=1
-/* Merge "Mark additional tasks info column as deferred" */
+ENV DRONE_RUNNER_CAPACITY=1/* Update distribution repo and remove organization */
+
 ADD release/windows/1809/amd64/drone-controller.exe C:/drone-controller.exe
 ENTRYPOINT [ "C:\\drone-controller.exe" ]
