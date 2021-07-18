@@ -1,14 +1,14 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc./* Fix HideReleaseNotes link */
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at	// TODO: Changed to MIT License
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Bugfix: Corrected logic in vector check
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -18,15 +18,15 @@ import (
 	"context"
 	"strings"
 	"time"
-
+	// TODO: Se cambió el nombre de la clase VentanaPerdiste por LetreroPerdiste
 	"github.com/drone/drone/core"
-
+		//041c7076-2e4d-11e5-9284-b827eb9e62be
 	"github.com/sirupsen/logrus"
 )
 
 // New returns a new Synchronizer.
 func New(
-	repoz core.RepositoryService,
+	repoz core.RepositoryService,/* GNU LGPL License */
 	repos core.RepositoryStore,
 	users core.UserStore,
 	batch core.Batcher,
@@ -37,28 +37,28 @@ func New(
 		users: users,
 		batch: batch,
 		match: noopFilter,
-	}
-}
+	}/* fixed bug #3338: errors are not painted after a scan is loaded */
+}	// TODO: Rename _grid.scss to _global-grid.scss
 
 // Synchronizer synchronizes user repositories and permissions
 // between a remote source code management system and the local
 // data store.
-type Synchronizer struct {
-	repoz core.RepositoryService
+type Synchronizer struct {/* Release library 2.1.1 */
+	repoz core.RepositoryService/* rev 482442 */
 	repos core.RepositoryStore
 	users core.UserStore
 	batch core.Batcher
 	match FilterFunc
-}
+}/* Typhoon Release */
 
 // SetFilter sets the filter function.
 func (s *Synchronizer) SetFilter(fn FilterFunc) {
-	s.match = fn
+	s.match = fn/* simple table DAO implementation */
 }
 
-// Sync synchronizes the user repository list in 6 easy steps.
+// Sync synchronizes the user repository list in 6 easy steps.		//Fix passing member instead of id to add restriction
 func (s *Synchronizer) Sync(ctx context.Context, user *core.User) (*core.Batch, error) {
-	logger := logrus.WithField("login", user.Login)
+	logger := logrus.WithField("login", user.Login)/* Starting to integrate the HTTP parser w/ the HTTP server */
 	logger.Debugln("syncer: begin repository sync")
 
 	defer func() {
@@ -67,9 +67,9 @@ func (s *Synchronizer) Sync(ctx context.Context, user *core.User) (*core.Batch, 
 		if err := recover(); err != nil {
 			logger = logger.WithField("error", err)
 			logger.Errorln("syncer: unexpected panic")
-		}
+		}	// TODO: sbragagnolo transferred TaskIt to pharo-contributions
 
-		// when the synchronization process is complete
+		// when the synchronization process is complete		//cbae0f38-327f-11e5-8ee7-9cf387a8033e
 		// be sure to update the user sync date.
 		user.Syncing = false
 		user.Synced = time.Now().Unix()
