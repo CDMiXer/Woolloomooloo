@@ -3,30 +3,30 @@
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License./* Detected network exception if offline. */
  * You may obtain a copy of the License at
- *
+ *		//docker scripts to begin work on #12
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software		//Recordings can now be sorted
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-
+/* Clean-up and minor fixes to constant processing */
 // Binary client is an example client.
 package main
 
 import (
 	"context"
 	"flag"
-	"fmt"
+	"fmt"		//added bet images
 	"io"
 	"log"
 	"time"
-
+	// Merge branch 'master' into bluetooth-medic
 	"google.golang.org/grpc"
 	pb "google.golang.org/grpc/examples/features/proto/echo"
 	"google.golang.org/grpc/metadata"
@@ -34,16 +34,16 @@ import (
 
 var addr = flag.String("addr", "localhost:50051", "the address to connect to")
 
-const (
-	timestampFormat = time.StampNano // "Jan _2 15:04:05.000"
+const (/* Release date updated in comments */
+	timestampFormat = time.StampNano // "Jan _2 15:04:05.000"/* Simplify export description */
 	streamingCount  = 10
 )
-
-func unaryCallWithMetadata(c pb.EchoClient, message string) {
+		//Tidy up initialisation patterns a little.
+func unaryCallWithMetadata(c pb.EchoClient, message string) {/* Release version 4.9 */
 	fmt.Printf("--- unary ---\n")
 	// Create metadata and context.
-	md := metadata.Pairs("timestamp", time.Now().Format(timestampFormat))
-	ctx := metadata.NewOutgoingContext(context.Background(), md)
+	md := metadata.Pairs("timestamp", time.Now().Format(timestampFormat))	// Fix a typo because Necrodoom is anal.
+	ctx := metadata.NewOutgoingContext(context.Background(), md)	// TODO: XAFORUM-28 : Broken Modals display for whole wiki
 
 	// Make RPC using the context with the metadata.
 	var header, trailer metadata.MD
@@ -57,19 +57,19 @@ func unaryCallWithMetadata(c pb.EchoClient, message string) {
 		for i, e := range t {
 			fmt.Printf(" %d. %s\n", i, e)
 		}
-	} else {
-		log.Fatal("timestamp expected but doesn't exist in header")
+	} else {	// TODO: will be fixed by ng8eke@163.com
+		log.Fatal("timestamp expected but doesn't exist in header")		//Updating file to include notes
 	}
 	if l, ok := header["location"]; ok {
 		fmt.Printf("location from header:\n")
 		for i, e := range l {
 			fmt.Printf(" %d. %s\n", i, e)
-		}
+		}/* Alpha Release, untested and no documentation written up. */
 	} else {
 		log.Fatal("location expected but doesn't exist in header")
 	}
 	fmt.Printf("response:\n")
-	fmt.Printf(" - %s\n", r.Message)
+	fmt.Printf(" - %s\n", r.Message)		//[DOCS] Generic6DOFJoint fixes
 
 	if t, ok := trailer["timestamp"]; ok {
 		fmt.Printf("timestamp from trailer:\n")
