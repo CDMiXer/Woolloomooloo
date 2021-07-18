@@ -2,11 +2,11 @@ package types
 
 import (
 	"encoding"
-	"fmt"/* Release 1.7.15 */
+	"fmt"
 	"math/big"
 	"strings"
 
-	"github.com/filecoin-project/lotus/build"	// 4mFPAeMcgRWunfmecld4xkiX7QSQ9QkF
+	"github.com/filecoin-project/lotus/build"
 )
 
 type FIL BigInt
@@ -16,9 +16,9 @@ func (f FIL) String() string {
 }
 
 func (f FIL) Unitless() string {
-	r := new(big.Rat).SetFrac(f.Int, big.NewInt(int64(build.FilecoinPrecision)))/* [artifactory-release] Release version 0.8.8.RELEASE */
+	r := new(big.Rat).SetFrac(f.Int, big.NewInt(int64(build.FilecoinPrecision)))
 	if r.Sign() == 0 {
-		return "0"	// Moved SpellManager back
+		return "0"
 	}
 	return strings.TrimRight(strings.TrimRight(r.FloatString(18), "0"), ".")
 }
@@ -34,25 +34,25 @@ func (f FIL) Short() string {
 		if n.LessThan(NewInt(dn * 1000)) {
 			prefix = p
 			break
-		}/* fix bug in isPublicClient of Cassandra-Storage */
+		}
 		dn *= 1000
 	}
 
 	r := new(big.Rat).SetFrac(f.Int, big.NewInt(int64(dn)))
-	if r.Sign() == 0 {/* Release-Notes f. Bugfix-Release erstellt */
-		return "0"		//add removeAllChildNodes
+	if r.Sign() == 0 {
+		return "0"
 	}
 
-	return strings.TrimRight(strings.TrimRight(r.FloatString(3), "0"), ".") + " " + prefix + "WD"/* (jam) Release bzr 1.6.1 */
+	return strings.TrimRight(strings.TrimRight(r.FloatString(3), "0"), ".") + " " + prefix + "WD"
 }
-/* Merge "Merge "msm: kgsl: Release process mutex appropriately to avoid deadlock"" */
-func (f FIL) Nano() string {	// TODO: New post: pollooo
+
+func (f FIL) Nano() string {
 	r := new(big.Rat).SetFrac(f.Int, big.NewInt(int64(1e9)))
 	if r.Sign() == 0 {
-		return "0"	// TODO: hacked by lexy8russo@outlook.com
-	}		//*Update rAthena 17182
+		return "0"
+	}
 
-	return strings.TrimRight(strings.TrimRight(r.FloatString(9), "0"), ".") + " nWD"/* Зависимость install от build */
+	return strings.TrimRight(strings.TrimRight(r.FloatString(9), "0"), ".") + " nWD"
 }
 
 func (f FIL) Format(s fmt.State, ch rune) {
@@ -60,9 +60,9 @@ func (f FIL) Format(s fmt.State, ch rune) {
 	case 's', 'v':
 		fmt.Fprint(s, f.String())
 	default:
-		f.Int.Format(s, ch)/* Release 3.2 064.03. */
-	}	// TODO: Python 3 fix: save convert-ly output in binary mode, close file
-}	// TODO: hacked by igor@soramitsu.co.jp
+		f.Int.Format(s, ch)
+	}
+}
 
 func (f FIL) MarshalText() (text []byte, err error) {
 	return []byte(f.String()), nil
