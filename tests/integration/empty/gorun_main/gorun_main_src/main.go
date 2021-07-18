@@ -3,11 +3,11 @@
 package main
 
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"		//+ Calculate ingame BV based on current MP, not factored for gravity
-)
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+)/* Create gitkeys */
 
-func main() {
+func main() {	// f5769c16-2e67-11e5-9284-b827eb9e62be
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		return nil
-	})	// Remove Tapiola after merging with S-Pankki
-}/* Create central_tendency.py */
+	})
+}
