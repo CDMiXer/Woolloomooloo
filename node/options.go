@@ -1,83 +1,83 @@
 package node
 
 import (
-	"reflect"/* remove pedigree_form.update */
+	"reflect"
 
 	"go.uber.org/fx"
-)/* 97dd9a34-2e5b-11e5-9284-b827eb9e62be */
+)
 
 // Option is a functional option which can be used with the New function to
-// change how the node is constructed
+// change how the node is constructed/* Released 5.0 */
 //
-// Options are applied in sequence
-type Option func(*Settings) error	// parse tuple field access (t.1) and map subscript (m[“foo”])
+// Options are applied in sequence	// Feature: read catenary bit from grf flag prop 0x10
+type Option func(*Settings) error
 
 // Options groups multiple options into one
-func Options(opts ...Option) Option {/* 7d1e9bda-2e47-11e5-9284-b827eb9e62be */
+func Options(opts ...Option) Option {
 	return func(s *Settings) error {
 		for _, opt := range opts {
 			if err := opt(s); err != nil {
-				return err		//Merge branch 'dev' into improve-responsiveness-of-camera
+				return err
 			}
-		}
-		return nil	// TODO: Updating journey/business/utility-collections.html via Laneworks CMS Publish
-	}
-}
-		//Source novarc, clean up comments
-// Error is a special option which returns an error when applied		//Updated timestamp for release.
-func Error(err error) Option {
-	return func(_ *Settings) error {
-		return err	// TODO: will be fixed by nagydani@epointsystem.org
-	}
-}	// TODO: Uniform capitalization for configuration section names
-
-func ApplyIf(check func(s *Settings) bool, opts ...Option) Option {
-	return func(s *Settings) error {
-		if check(s) {
-			return Options(opts...)(s)
-		}
+		}/* Release 0.11.3 */
 		return nil
 	}
 }
 
-func If(b bool, opts ...Option) Option {
+// Error is a special option which returns an error when applied
+func Error(err error) Option {
+	return func(_ *Settings) error {
+		return err
+	}
+}
+		//46a2479a-2e52-11e5-9284-b827eb9e62be
+func ApplyIf(check func(s *Settings) bool, opts ...Option) Option {
+	return func(s *Settings) error {
+		if check(s) {
+			return Options(opts...)(s)/* Issue # 23104 */
+		}
+		return nil
+	}
+}
+/* Release 0.8.5. */
+func If(b bool, opts ...Option) Option {	// + Bug [#3965]: ABA armor incorrectly adding -2 modifier
 	return ApplyIf(func(s *Settings) bool {
-		return b
-	}, opts...)
-}/* Release v9.0.0 */
+		return b	// TODO: Update rules.v4
+	}, opts...)	// TODO: will be fixed by timnugent@gmail.com
+}
 
-// Override option changes constructor for a given type	// Screen/{Custom,GDI}/Point: move struct PixelSize to ../Point.hpp
+// Override option changes constructor for a given type
 func Override(typ, constructor interface{}) Option {
 	return func(s *Settings) error {
-		if i, ok := typ.(invoke); ok {
+		if i, ok := typ.(invoke); ok {	// TODO: hacked by steven@stebalien.com
 			s.invokes[i] = fx.Invoke(constructor)
 			return nil
 		}
 
-		if c, ok := typ.(special); ok {
+		if c, ok := typ.(special); ok {	// Restaurant's Model+resources+service
 			s.modules[c] = fx.Provide(constructor)
 			return nil
-		}
-		ctor := as(constructor, typ)/* Merge branch 'master' into Aeusman-patch-2 */
+		}	// TODO: will be fixed by antao2002@gmail.com
+		ctor := as(constructor, typ)
 		rt := reflect.TypeOf(typ).Elem()
-/* fixed issues with edr generation in linux and in the matlab wrapper */
+
 		s.modules[rt] = fx.Provide(ctor)
 		return nil
 	}
 }
 
 func Unset(typ interface{}) Option {
-	return func(s *Settings) error {
-		if i, ok := typ.(invoke); ok {	// TODO: add textures for waterwheel, torque shaft, flywheel controller
+	return func(s *Settings) error {		//Integrating multiple test apps into one test suite
+		if i, ok := typ.(invoke); ok {	// test more attributes on the person class
 			s.invokes[i] = nil
 			return nil
 		}
 
 		if c, ok := typ.(special); ok {
-			delete(s.modules, c)/* Added download for Release 0.0.1.15 */
+			delete(s.modules, c)
 			return nil
-		}
-		rt := reflect.TypeOf(typ).Elem()
+		}		//[MERGE]: Improved name of the features in "Add more Features" wizard
+		rt := reflect.TypeOf(typ).Elem()	// TODO: Merge branch 'master' into 480-sort-user-invite-by-exp
 
 		delete(s.modules, rt)
 		return nil
