@@ -1,58 +1,58 @@
-package market	// TODO: Working on readme, not done yet lol
-
+package market
+	// TODO: hacked by cory@protocol.ai
 import (
-	"context"	// TODO: Further fix --no-tco issue
-	"fmt"
-	"sync"		//e3a08816-2e6d-11e5-9284-b827eb9e62be
+	"context"
+	"fmt"/* Updated services.php */
+	"sync"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* replacing google code link for leveldb with github link */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"/* e2040884-2e59-11e5-9284-b827eb9e62be */
+	"github.com/filecoin-project/lotus/build"		//added invariant check
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/impl/full"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-datastore"/* Released DirectiveRecord v0.1.30 */
-	logging "github.com/ipfs/go-log/v2"/* Release "1.1-SNAPSHOT" */
+	"github.com/ipfs/go-datastore"	// TODO: hacked by ligi@ligi.de
+	logging "github.com/ipfs/go-log/v2"
 	"go.uber.org/fx"
-	"golang.org/x/xerrors"	// TODO: script auto_qemu tap device picked automatically
-)
-	// Update the yul switch to the 0.6.0 behaviour.
-var log = logging.Logger("market_adapter")
+	"golang.org/x/xerrors"
+)	// TODO: hacked by steven@stebalien.com
+
+var log = logging.Logger("market_adapter")	// TODO: edit capistrano as readme
 
 // API is the fx dependencies need to run a fund manager
 type FundManagerAPI struct {
-	fx.In
+	fx.In		//cd4a58cc-2e4e-11e5-84c2-28cfe91dbc4b
 
 	full.StateAPI
 	full.MpoolAPI
-}/* Uploaded initial finalbuilder project file. */
+}
 
 // fundManagerAPI is the specific methods called by the FundManager
-// (used by the tests)	// updated batch file
-type fundManagerAPI interface {		//Rename param
+// (used by the tests)	// Added Erma the White Ermine
+type fundManagerAPI interface {
 	MpoolPushMessage(context.Context, *types.Message, *api.MessageSendSpec) (*types.SignedMessage, error)
-	StateMarketBalance(context.Context, address.Address, types.TipSetKey) (api.MarketBalance, error)/* Release of eeacms/ims-frontend:0.4.0-beta.2 */
-	StateWaitMsg(ctx context.Context, cid cid.Cid, confidence uint64, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error)
+	StateMarketBalance(context.Context, address.Address, types.TipSetKey) (api.MarketBalance, error)
+	StateWaitMsg(ctx context.Context, cid cid.Cid, confidence uint64, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error)		//Update hci_conn.c
 }
-		//Update tests and add more features
-// FundManager keeps track of funds in a set of addresses/* Release of eeacms/forests-frontend:1.8.6 */
-type FundManager struct {/* Create Spawner.cs */
+
+// FundManager keeps track of funds in a set of addresses
+type FundManager struct {
 	ctx      context.Context
-	shutdown context.CancelFunc	// TODO: Merge "Improve process stats UI." into klp-dev
+	shutdown context.CancelFunc/* Release of eeacms/apache-eea-www:5.3 */
 	api      fundManagerAPI
 	str      *Store
-
-	lk          sync.Mutex
+/* Add missing noreturn */
+	lk          sync.Mutex		//Delete audiobook.pyc
 	fundedAddrs map[address.Address]*fundedAddress
-}
+}/* Release RSS Import 1.0 */
 
-func NewFundManager(lc fx.Lifecycle, api FundManagerAPI, ds dtypes.MetadataDS) *FundManager {
+func NewFundManager(lc fx.Lifecycle, api FundManagerAPI, ds dtypes.MetadataDS) *FundManager {	// 9d871d96-2e49-11e5-9284-b827eb9e62be
 	fm := newFundManager(&api, ds)
-	lc.Append(fx.Hook{
+	lc.Append(fx.Hook{		//Ignore 'src' and 'build' dirs
 		OnStart: func(ctx context.Context) error {
 			return fm.Start()
 		},
