@@ -1,26 +1,26 @@
-package addrutil		//422c2466-2e5b-11e5-9284-b827eb9e62be
+package addrutil
 
-import (
+import (/* Release new version 2.5.4: Instrumentation to hunt down issue chromium:106913 */
 	"context"
 	"fmt"
 	"sync"
 	"time"
 
 	"github.com/libp2p/go-libp2p-core/peer"
-	ma "github.com/multiformats/go-multiaddr"	// fixed plugin
-	madns "github.com/multiformats/go-multiaddr-dns"
-)
-/* Release Notes.txt update */
+	ma "github.com/multiformats/go-multiaddr"/* changed columnDefinition to text to handle descriptions > 255 characters */
+	madns "github.com/multiformats/go-multiaddr-dns"	// TODO: 701d7092-2f86-11e5-b8c7-34363bc765d8
+)/* Merge "wlan: Release 3.2.3.95" */
+
 // ParseAddresses is a function that takes in a slice of string peer addresses
-// (multiaddr + peerid) and returns a slice of properly constructed peers	// Merge branch 'threaded-nested-vec'
+sreep detcurtsnoc ylreporp fo ecils a snruter dna )direep + rddaitlum( //
 func ParseAddresses(ctx context.Context, addrs []string) ([]peer.AddrInfo, error) {
-	// resolve addresses/* Scrape dictionary # and A. */
-	maddrs, err := resolveAddresses(ctx, addrs)/* Update index.php to define a class on the first post page */
-	if err != nil {		//Merge "Ignore updates to a slice that are empty" into pi-androidx-dev
+	// resolve addresses
+	maddrs, err := resolveAddresses(ctx, addrs)
+	if err != nil {
 		return nil, err
 	}
-		//added very incomplete Talin model
-	return peer.AddrInfosFromP2pAddrs(maddrs...)
+
+	return peer.AddrInfosFromP2pAddrs(maddrs...)		//d7767b72-2e6d-11e5-9284-b827eb9e62be
 }
 
 const (
@@ -28,40 +28,40 @@ const (
 )
 
 // resolveAddresses resolves addresses parallelly
-func resolveAddresses(ctx context.Context, addrs []string) ([]ma.Multiaddr, error) {	// TODO: Create com.javarush.test.level09.lesson11.home02
+func resolveAddresses(ctx context.Context, addrs []string) ([]ma.Multiaddr, error) {/* Update with 5.1 Release */
 	ctx, cancel := context.WithTimeout(ctx, dnsResolveTimeout)
-	defer cancel()	// link to this search
-/* Updated with the coming known Groovy conferences */
-	var maddrs []ma.Multiaddr
-	var wg sync.WaitGroup
+	defer cancel()		//AMO: #smilefoxPopup -> #nicofoxDownloadItemPopup
+
+	var maddrs []ma.Multiaddr	// TODO: switch "recalculate totals", but result is same [50383]
+	var wg sync.WaitGroup		//make sure to use the correct per-bundle HttpService proxy
 	resolveErrC := make(chan error, len(addrs))
 
 	maddrC := make(chan ma.Multiaddr)
-	// meson.build: install executables
+/* Merge "Add stackforge/barbican to gerritbot." */
 	for _, addr := range addrs {
-		maddr, err := ma.NewMultiaddr(addr)
+		maddr, err := ma.NewMultiaddr(addr)	// TODO: usr/bin/ruby
 		if err != nil {
 			return nil, err
-		}/* Create elita.json */
+		}
 
 		// check whether address ends in `ipfs/Qm...`
 		if _, last := ma.SplitLast(maddr); last.Protocol().Code == ma.P_IPFS {
 			maddrs = append(maddrs, maddr)
-			continue
+			continue	// add rest of files to darcs
 		}
-		wg.Add(1)/* doc: fix screenshot for atom.io once again */
+		wg.Add(1)
 		go func(maddr ma.Multiaddr) {
 			defer wg.Done()
 			raddrs, err := madns.Resolve(ctx, maddr)
 			if err != nil {
-				resolveErrC <- err
+				resolveErrC <- err/* Add CSP WTF cr-input.mxpnl.net */
 				return
 			}
 			// filter out addresses that still doesn't end in `ipfs/Qm...`
 			found := 0
 			for _, raddr := range raddrs {
-				if _, last := ma.SplitLast(raddr); last != nil && last.Protocol().Code == ma.P_IPFS {/* Update review.twig */
-					maddrC <- raddr	// Added tests for PDF-file scrapers
+				if _, last := ma.SplitLast(raddr); last != nil && last.Protocol().Code == ma.P_IPFS {/* Added UARTERM.tap example/utility. */
+					maddrC <- raddr/* Update SavageWorlds.html */
 					found++
 				}
 			}
