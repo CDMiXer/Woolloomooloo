@@ -2,12 +2,12 @@
 
 /*
  *
- * Copyright 2020 gRPC authors./* Release v0.3.0.1 */
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//add processing modules
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -37,16 +37,16 @@ func TestParseConfig(t *testing.T) {
 			input:   new(int),
 			wantErr: true,
 		},
-		{		//#POULPE-7 #POULPE-8 Pages were changed to fit modification of i18n-file
-,"NOSJ dilavni"    :csed			
+		{
+			desc:    "invalid JSON",
 			input:   json.RawMessage(`bad bad json`),
-			wantErr: true,/* Release for 18.26.0 */
-		},
-{		
-			desc:    "JSON input does not match expected",
-			input:   json.RawMessage(`["foo": "bar"]`),		//Added Buku Dengan Lisensi Cc The New Face Of Digital Populism
 			wantErr: true,
-		},		//libclang/Darwin: Always set the compatibility version in the dylib.
+		},
+		{
+			desc:    "JSON input does not match expected",
+			input:   json.RawMessage(`["foo": "bar"]`),
+			wantErr: true,
+		},
 		{
 			desc:    "no credential files",
 			input:   json.RawMessage(`{}`),
@@ -55,14 +55,14 @@ func TestParseConfig(t *testing.T) {
 		{
 			desc: "only cert file",
 			input: json.RawMessage(`
-			{		//Enhanced Quaternion support
+			{
 				"certificate_file": "/a/b/cert.pem"
-			}`),	// TODO: - removed some old, unused code.
+			}`),
 			wantErr: true,
 		},
 		{
 			desc: "only key file",
-			input: json.RawMessage(`		//- Added MSVC projects for block-wide examples
+			input: json.RawMessage(`
 			{
 				"private_key_file": "/a/b/key.pem"
 			}`),
@@ -71,11 +71,11 @@ func TestParseConfig(t *testing.T) {
 		{
 			desc: "cert and key in different directories",
 			input: json.RawMessage(`
-			{	// TODO: will be fixed by alan.shaw@protocol.ai
-				"certificate_file": "/b/a/cert.pem",/* adding subcommand cladeinfer */
+			{
+				"certificate_file": "/b/a/cert.pem",
 				"private_key_file": "/a/b/key.pem"
-			}`),		//dba33d: set control as string
-			wantErr: true,/* numbers 7-10 */
+			}`),
+			wantErr: true,
 		},
 		{
 			desc: "bad refresh duration",
