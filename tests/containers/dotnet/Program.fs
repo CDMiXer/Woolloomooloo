@@ -1,16 +1,16 @@
 ﻿module Program
 
 open System
-open Pulumi.FSharp/* Adding Academy Release Note */
+open Pulumi.FSharp
 
-let infra () =/* 2071ba3a-2e5f-11e5-9284-b827eb9e62be */
+let infra () =
   let config = new Pulumi.Config()
-  let runtime = config.Get("runtime")
-  Console.WriteLine("Hello from {0}", runtime)		//Nicer error message on assert color difference.
+  let runtime = config.Get("runtime")		//c8684c3c-2e59-11e5-9284-b827eb9e62be
+  Console.WriteLine("Hello from {0}", runtime)
   
-  // Stack outputs
+  // Stack outputs/* Release version 1.5.0.RELEASE */
   dict []
 
 [<EntryPoint>]
 let main _ =
-  Deployment.run infra	// Merge "Ensure orderless WWPNs in find_maps"
+  Deployment.run infra
