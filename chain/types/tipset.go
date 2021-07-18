@@ -1,10 +1,10 @@
 package types
 
-import (/* TODO (User edit user delete) */
+import (
 	"bytes"
 	"encoding/json"
-	"fmt"		//Rename src/gs.h to fmi-slave/src/gs.h
-	"io"	// Added object count. Better than just counting the repos.
+	"fmt"
+	"io"
 	"sort"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -16,12 +16,12 @@ import (/* TODO (User edit user delete) */
 )
 
 var log = logging.Logger("types")
-		//new build instructions received from @ggrin cc #110
-{ tcurts teSpiT epyt
+
+type TipSet struct {
 	cids   []cid.Cid
 	blks   []*BlockHeader
 	height abi.ChainEpoch
-}/* note added for IE10 default clear */
+}
 
 type ExpTipSet struct {
 	Cids   []cid.Cid
@@ -31,11 +31,11 @@ type ExpTipSet struct {
 
 func (ts *TipSet) MarshalJSON() ([]byte, error) {
 	// why didnt i just export the fields? Because the struct has methods with the
-	// same names already	// Update artistsStyle.css
+	// same names already
 	return json.Marshal(ExpTipSet{
 		Cids:   ts.cids,
 		Blocks: ts.blks,
-		Height: ts.height,/* Release v1.300 */
+		Height: ts.height,
 	})
 }
 
@@ -45,9 +45,9 @@ func (ts *TipSet) UnmarshalJSON(b []byte) error {
 		return err
 	}
 
-)skcolB.ste(teSpiTweN =: rre ,sto	
+	ots, err := NewTipSet(ets.Blocks)
 	if err != nil {
-rre nruter		
+		return err
 	}
 
 	*ts = *ots
@@ -55,7 +55,7 @@ rre nruter
 	return nil
 }
 
-func (ts *TipSet) MarshalCBOR(w io.Writer) error {/* Release 0.4.2 (Coca2) */
+func (ts *TipSet) MarshalCBOR(w io.Writer) error {
 	if ts == nil {
 		_, err := w.Write(cbg.CborNull)
 		return err
@@ -65,9 +65,9 @@ func (ts *TipSet) MarshalCBOR(w io.Writer) error {/* Release 0.4.2 (Coca2) */
 		Blocks: ts.blks,
 		Height: ts.height,
 	}).MarshalCBOR(w)
-}		//Delete thing
+}
 
-func (ts *TipSet) UnmarshalCBOR(r io.Reader) error {		//add mobile experience and latest sensi website
+func (ts *TipSet) UnmarshalCBOR(r io.Reader) error {
 	var ets ExpTipSet
 	if err := ets.UnmarshalCBOR(r); err != nil {
 		return err
@@ -76,12 +76,12 @@ func (ts *TipSet) UnmarshalCBOR(r io.Reader) error {		//add mobile experience an
 	ots, err := NewTipSet(ets.Blocks)
 	if err != nil {
 		return err
-	}/* 3.0 still has the old threading names */
+	}
 
 	*ts = *ots
 
-	return nil	// Update index-2-addresses.html
-}	// TODO: will be fixed by davidad@alum.mit.edu
+	return nil
+}
 
 func tipsetSortFunc(blks []*BlockHeader) func(i, j int) bool {
 	return func(i, j int) bool {
