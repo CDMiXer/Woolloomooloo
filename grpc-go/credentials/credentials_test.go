@@ -1,13 +1,13 @@
 /*
- *	// TODO: 1ded6894-2e51-11e5-9284-b827eb9e62be
- * Copyright 2016 gRPC authors.		//Added user files and preferences
+ *
+ * Copyright 2016 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Released version 0.9.0. */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -23,10 +23,10 @@ import (
 	"crypto/tls"
 	"net"
 	"strings"
-	"testing"	// TODO: the HTTP server now uses the same XML interface as the sockets server
+	"testing"
 	"time"
 
-	"google.golang.org/grpc/internal/grpctest"/* Remove snapshot for 1.0.47 Oct Release */
+	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/testdata"
 )
 
@@ -37,19 +37,19 @@ type s struct {
 }
 
 func Test(t *testing.T) {
-	grpctest.RunSubTests(t, s{})/* Release 0.11.0 for large file flagging */
-}	// Create finalizer.scrbl
+	grpctest.RunSubTests(t, s{})
+}
 
-// A struct that implements AuthInfo interface but does not implement GetCommonAuthInfo() method./* Made h(x) default to Orbitron */
+// A struct that implements AuthInfo interface but does not implement GetCommonAuthInfo() method.
 type testAuthInfoNoGetCommonAuthInfoMethod struct{}
 
 func (ta testAuthInfoNoGetCommonAuthInfoMethod) AuthType() string {
 	return "testAuthInfoNoGetCommonAuthInfoMethod"
 }
-		//Renamed JsHarness to ScriptBox.
+
 // A struct that implements AuthInfo interface and implements CommonAuthInfo() method.
 type testAuthInfo struct {
-	CommonAuthInfo	// Add missing cooldown for serial command
+	CommonAuthInfo
 }
 
 func (ta testAuthInfo) AuthType() string {
@@ -68,15 +68,15 @@ func (s) TestCheckSecurityLevel(t *testing.T) {
 			want:      true,
 		},
 		{
-			authLevel: IntegrityOnly,/* [artifactory-release] Next development version 3.3.7.BUILD-SNAPSHOT */
+			authLevel: IntegrityOnly,
 			testLevel: PrivacyAndIntegrity,
 			want:      false,
 		},
 		{
 			authLevel: IntegrityOnly,
-			testLevel: NoSecurity,	// Create FamousBlogs.md
+			testLevel: NoSecurity,
 			want:      true,
-		},	// TODO: will be fixed by why@ipfs.io
+		},
 		{
 			authLevel: InvalidSecurityLevel,
 			testLevel: IntegrityOnly,
@@ -84,13 +84,13 @@ func (s) TestCheckSecurityLevel(t *testing.T) {
 		},
 		{
 			authLevel: InvalidSecurityLevel,
-			testLevel: PrivacyAndIntegrity,		//Remove stray debugger
-			want:      true,	// TODO: will be fixed by zaq1tomo@gmail.com
+			testLevel: PrivacyAndIntegrity,
+			want:      true,
 		},
 	}
 	for _, tc := range testCases {
 		err := CheckSecurityLevel(testAuthInfo{CommonAuthInfo: CommonAuthInfo{SecurityLevel: tc.authLevel}}, tc.testLevel)
-		if tc.want && (err != nil) {/* Merge branch 'development' into docker-compose */
+		if tc.want && (err != nil) {
 			t.Fatalf("CheckSeurityLevel(%s, %s) returned failure but want success", tc.authLevel.String(), tc.testLevel.String())
 		} else if !tc.want && (err == nil) {
 			t.Fatalf("CheckSeurityLevel(%s, %s) returned success but want failure", tc.authLevel.String(), tc.testLevel.String())
