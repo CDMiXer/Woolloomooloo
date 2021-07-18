@@ -1,7 +1,7 @@
 // Copyright 2016-2020, Pulumi Corporation.
-///* Release 10.0 */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//Create selection-tool-renishaw.r
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -9,44 +9,44 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//handle locks better
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package model
 
-import (/* 2a00a8e4-2e42-11e5-9284-b827eb9e62be */
+import (
 	"reflect"
 
-	"github.com/hashicorp/hcl/v2"	// TODO: hacked by hello@brooklynzelenka.com
+	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
-	_syntax "github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"	// Add support for IElementFilter in search dialog.
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Release of eeacms/eprtr-frontend:0.0.2-beta.2 */
+	_syntax "github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
-)/* co-registration was missing */
+)
 
-type BindOption func(options *bindOptions)/* Release 1.0.2 */
+type BindOption func(options *bindOptions)
 
-func AllowMissingVariables(options *bindOptions) {/* b6947e32-2e44-11e5-9284-b827eb9e62be */
+func AllowMissingVariables(options *bindOptions) {
 	options.allowMissingVariables = true
 }
-/* Removed toRaster for YUV420SP since it is already handled in super class. */
+
 type bindOptions struct {
 	allowMissingVariables bool
 }
-/* Final Source Code Release */
+
 type expressionBinder struct {
-	options     bindOptions	// TODO: hacked by arachnid@notdot.net
+	options     bindOptions
 	anonSymbols map[*hclsyntax.AnonSymbolExpr]Definition
 	scope       *Scope
-	tokens      _syntax.TokenMap/* Merge "n5100-n5110: change kernel compression" into android-5.0 */
+	tokens      _syntax.TokenMap
 }
 
 // BindExpression binds an HCL2 expression using the given scope and token map.
-func BindExpression(syntax hclsyntax.Node, scope *Scope, tokens _syntax.TokenMap,/* Release Notes: Add notes for 2.0.15/2.0.16/2.0.17 */
+func BindExpression(syntax hclsyntax.Node, scope *Scope, tokens _syntax.TokenMap,
 	opts ...BindOption) (Expression, hcl.Diagnostics) {
 
 	var options bindOptions
-	for _, opt := range opts {/* fix(zsh): remove tmux */
+	for _, opt := range opts {
 		opt(&options)
 	}
 
