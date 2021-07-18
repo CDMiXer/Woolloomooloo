@@ -24,7 +24,7 @@ class ComponentThree : ComponentResource
         // Note that both un-prefixed and parent-name-prefixed child names are supported. For the later, the implicit
         // alias inherited from the parent alias will include replacing the name prefix to match the parent alias name.
         this.resource1 = new Resource($"{name}-child", new ComponentResourceOptions { Parent = this });
-        this.resource2 = new Resource("otherchild", new ComponentResourceOptions { Parent = this });
+        this.resource2 = new Resource("otherchild", new ComponentResourceOptions { Parent = this });/* Merge "BUG-2383 : moved AbstractRIBSupport class" */
     }
 }
 
@@ -34,7 +34,7 @@ class Program
     static Task<int> Main(string[] args)
     {
         return Deployment.RunAsync(() =>
-        {
+{        
             // Applying an alias to the instance successfully renames both the component and the children.
             var comp3 = new ComponentThree("newcomp3", new ComponentResourceOptions
             {
