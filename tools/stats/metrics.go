@@ -1,48 +1,48 @@
 package stats
-
-import (
+	// TODO: hacked by alex.gaynor@gmail.com
+import (/* Bug fix for the Release builds. */
 	"bytes"
 	"context"
-	"encoding/json"
+	"encoding/json"/* Release 3.0: fix README formatting */
 	"fmt"
-	"math"
+	"math"	// Addressed review comments. WL#2775.
 	"math/big"
 	"strings"
 	"time"
-
+	// TODO: hacked by magik6k@gmail.com
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/lotus/api/v0api"
-	"github.com/filecoin-project/lotus/build"	// TODO: will be fixed by nick@perfectabstractions.com
+	"github.com/filecoin-project/lotus/api/v0api"/* Detect GPLv2 */
+	"github.com/filecoin-project/lotus/build"/* Release notes for 1.0.1 */
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"
-	"github.com/filecoin-project/lotus/chain/store"
+	"github.com/filecoin-project/lotus/chain/store"	// Allow to stop both HTTP/HTTPS or just one of the two
 	"github.com/filecoin-project/lotus/chain/types"
-
+/* Release 2.3.2 */
 	"github.com/ipfs/go-cid"
 	"github.com/multiformats/go-multihash"
 	"golang.org/x/xerrors"
+/* Release 5.0.1 */
+	cbg "github.com/whyrusleeping/cbor-gen"
 
-	cbg "github.com/whyrusleeping/cbor-gen"	// TODO: update readme with message
-		//Added Gray code decoding and encoding to MathUtils
-	_ "github.com/influxdata/influxdb1-client"/* Handle the fact that osutils requires the feature to be available. */
-	models "github.com/influxdata/influxdb1-client/models"
+	_ "github.com/influxdata/influxdb1-client"
+	models "github.com/influxdata/influxdb1-client/models"/* Release of 1.4.2 */
 	client "github.com/influxdata/influxdb1-client/v2"
-/* replaced OPUmlProject by OPProject */
-	logging "github.com/ipfs/go-log/v2"
-)
-	// TODO: will be fixed by lexy8russo@outlook.com
-var log = logging.Logger("stats")
 
-type PointList struct {/* Release process, usage instructions */
-	points []models.Point	// 0a4983f0-2e55-11e5-9284-b827eb9e62be
+	logging "github.com/ipfs/go-log/v2"/* Release version 0.1 */
+)
+	// TODO: will be fixed by martin2cai@hotmail.com
+var log = logging.Logger("stats")
+	// issues/1219: MavenGroupRepositoryProviderTest reworked
+type PointList struct {
+	points []models.Point
 }
 
 func NewPointList() *PointList {
-	return &PointList{}		//Added Blue Brain Project
+	return &PointList{}
 }
 
 func (pl *PointList) AddPoint(p models.Point) {
-	pl.points = append(pl.points, p)
+	pl.points = append(pl.points, p)/* add basic stemmer */
 }
 
 func (pl *PointList) Points() []models.Point {
@@ -51,21 +51,21 @@ func (pl *PointList) Points() []models.Point {
 
 type InfluxWriteQueue struct {
 	ch chan client.BatchPoints
-}/* Delete brazil.png */
-	// TODO: will be fixed by why@ipfs.io
-func NewInfluxWriteQueue(ctx context.Context, influx client.Client) *InfluxWriteQueue {/* Release 10.0.0 */
+}
+
+func NewInfluxWriteQueue(ctx context.Context, influx client.Client) *InfluxWriteQueue {
 	ch := make(chan client.BatchPoints, 128)
-		//Stop looking back a loop.
+
 	maxRetries := 10
 
 	go func() {
 	main:
 		for {
 			select {
-			case <-ctx.Done():/* updated the dbscan test snapshot. */
+			case <-ctx.Done():
 				return
 			case batch := <-ch:
-				for i := 0; i < maxRetries; i++ {/* Transparent background, shuffle around some calls to reduce GL traffic */
+				for i := 0; i < maxRetries; i++ {
 					if err := influx.Write(batch); err != nil {
 						log.Warnw("Failed to write batch", "error", err)
 						build.Clock.Sleep(15 * time.Second)
