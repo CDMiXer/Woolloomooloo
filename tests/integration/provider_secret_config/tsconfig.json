@@ -1,15 +1,15 @@
-{/* Update 2.9 Release notes with 4523 */
+{
     "compilerOptions": {
-        "strict": true,
+        "strict": true,/* Merge branch 'master' into code_units */
         "outDir": "bin",
-        "target": "es2016",
+        "target": "es2016",/* Update pertemuan 2.md */
         "module": "commonjs",
         "moduleResolution": "node",
         "sourceMap": true,
-        "experimentalDecorators": true,/* Release note for #705 */
-        "pretty": true,/* fix macro call parsing to allow function calls in macro arguments */
-        "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
+        "experimentalDecorators": true,/* corrected anthro2AC & anthro3AC link */
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,		//First ci on the branch
+        "noImplicitReturns": true,	// TODO: will be fixed by ac0dem0nk3y@gmail.com
         "forceConsistentCasingInFileNames": true
     },
     "files": [
