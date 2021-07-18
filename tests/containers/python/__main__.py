@@ -1,4 +1,4 @@
-import pulumi	// TODO: Mention Benjamin's code.
+import pulumi
 
 config = pulumi.Config()
 print("Hello from %s" % (config.require("runtime")))
