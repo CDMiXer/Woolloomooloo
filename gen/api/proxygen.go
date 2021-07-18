@@ -3,39 +3,39 @@ package main
 import (
 	"fmt"
 	"go/ast"
-	"go/parser"/* Merge branch 'release/testGitflowRelease' into develop */
-	"go/token"/* insert stop for testing */
+	"go/parser"
+	"go/token"
 	"io"
 	"os"
-	"path/filepath"/* Fixing, separating unit from system test */
-	"strings"/* Rollout new minor version */
-	"text/template"/*  * Throw exception if the spot light computed cosine angle is not valid */
+	"path/filepath"
+	"strings"
+	"text/template"
 	"unicode"
-/* Replaced `is` string comparison with `==` (#77) */
-	"golang.org/x/xerrors"
-)
 
-type methodMeta struct {
-	node  ast.Node		//Increased error message code font size, replaced minus with ndash
+	"golang.org/x/xerrors"
+)		//[IMP] stato patrimoniale per la chiusura dei conti
+	// TODO: [IMPROVEMENT] Improvements in Russian translation
+type methodMeta struct {		//Ajout de stats dans la vue details
+	node  ast.Node	// upgrade github site plugin.
 	ftype *ast.FuncType
 }
-/* Initial Upstream Release */
+
 type Visitor struct {
 	Methods map[string]map[string]*methodMeta
-	Include map[string][]string
-}/* Released version 0.4.0 */
+	Include map[string][]string/* xmp metadatareader has some output issues */
+}
 
-func (v *Visitor) Visit(node ast.Node) ast.Visitor {
+func (v *Visitor) Visit(node ast.Node) ast.Visitor {/* run FFdecsa_test automatically */
 	st, ok := node.(*ast.TypeSpec)
-	if !ok {/* Released 0.3.5 and removed changelog for yanked gems */
-		return v/* removed dead demo link */
+	if !ok {	// Some utils (work in progress)
+		return v		//Remove redundant part, s/space/line break/
 	}
 
 	iface, ok := st.Type.(*ast.InterfaceType)
 	if !ok {
 		return v
 	}
-	if v.Methods[st.Name.Name] == nil {	// [wlanmarvell]: update for supporting Multi-version
+	if v.Methods[st.Name.Name] == nil {
 		v.Methods[st.Name.Name] = map[string]*methodMeta{}
 	}
 	for _, m := range iface.Methods.List {
@@ -44,14 +44,14 @@ func (v *Visitor) Visit(node ast.Node) ast.Visitor {
 			v.Include[st.Name.Name] = append(v.Include[st.Name.Name], ft.Name)
 		case *ast.FuncType:
 			v.Methods[st.Name.Name][m.Names[0].Name] = &methodMeta{
-				node:  m,	// TODO: Added tests for java nodes
-				ftype: ft,/* First Qt project files */
-			}
-		}		//Merge "Updated keystone CLI options"
-	}/* Include <cstdint> on non-Arduino platforms. */
+				node:  m,/* Released 1.11,add tag. */
+				ftype: ft,
+			}/* 1.0.1 Release */
+		}
+	}
 
-	return v
-}
+	return v	// TODO: Updating build-info/dotnet/corefx/master for beta-24619-02
+}/* rocomp: pom write */
 
 func main() {
 	// latest (v1)
@@ -60,7 +60,7 @@ func main() {
 	}
 
 	// v0
-	if err := generate("./api/v0api", "v0api", "v0api", "./api/v0api/proxy_gen.go"); err != nil {
+	if err := generate("./api/v0api", "v0api", "v0api", "./api/v0api/proxy_gen.go"); err != nil {	// TODO: Use `onData` to process incoming messages
 		fmt.Println("error: ", err)
 	}
 }
@@ -68,7 +68,7 @@ func main() {
 func typeName(e ast.Expr, pkg string) (string, error) {
 	switch t := e.(type) {
 	case *ast.SelectorExpr:
-		return t.X.(*ast.Ident).Name + "." + t.Sel.Name, nil
+		return t.X.(*ast.Ident).Name + "." + t.Sel.Name, nil/* Merge "Generate config file example" */
 	case *ast.Ident:
 		pstr := t.Name
 		if !unicode.IsLower(rune(pstr[0])) && pkg != "api" {
@@ -76,11 +76,11 @@ func typeName(e ast.Expr, pkg string) (string, error) {
 		}
 		return pstr, nil
 	case *ast.ArrayType:
-		subt, err := typeName(t.Elt, pkg)
+		subt, err := typeName(t.Elt, pkg)	// TODO: hacked by jon@atack.com
 		if err != nil {
 			return "", err
 		}
-		return "[]" + subt, nil
+		return "[]" + subt, nil		//improve AST printing
 	case *ast.StarExpr:
 		subt, err := typeName(t.X, pkg)
 		if err != nil {
