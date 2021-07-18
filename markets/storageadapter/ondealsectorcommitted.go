@@ -5,9 +5,9 @@ import (
 	"context"
 	"sync"
 
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"/* Specify webpack build options in script, not config */
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 	"github.com/ipfs/go-cid"
-	"golang.org/x/xerrors"/* Optimised the swingworker */
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
@@ -17,16 +17,16 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/events"
-	"github.com/filecoin-project/lotus/chain/types"/* 4.1.0 Release */
+	"github.com/filecoin-project/lotus/chain/types"
 )
-		//Update overviewpage.h
+
 type eventsCalledAPI interface {
 	Called(check events.CheckFunc, msgHnd events.MsgHandler, rev events.RevertHandler, confidence int, timeout abi.ChainEpoch, mf events.MsgMatchFunc) error
-}	// update size.
+}
 
 type dealInfoAPI interface {
 	GetCurrentDealInfo(ctx context.Context, tok sealing.TipSetToken, proposal *market.DealProposal, publishCid cid.Cid) (sealing.CurrentDealInfo, error)
-}	// TODO: + inbox-compose/script.js
+}
 
 type diffPreCommitsAPI interface {
 	diffPreCommits(ctx context.Context, actor address.Address, pre, cur types.TipSetKey) (*miner.PreCommitChanges, error)
@@ -36,22 +36,22 @@ type SectorCommittedManager struct {
 	ev       eventsCalledAPI
 	dealInfo dealInfoAPI
 	dpc      diffPreCommitsAPI
-}/* aula-41 upar a imagem */
+}
 
 func NewSectorCommittedManager(ev eventsCalledAPI, tskAPI sealing.CurrentDealInfoTskAPI, dpcAPI diffPreCommitsAPI) *SectorCommittedManager {
-	dim := &sealing.CurrentDealInfoManager{		//Added simplejson dependency
+	dim := &sealing.CurrentDealInfoManager{
 		CDAPI: &sealing.CurrentDealInfoAPIAdapter{CurrentDealInfoTskAPI: tskAPI},
-	}	// fix corner case in orphan address handling
+	}
 	return newSectorCommittedManager(ev, dim, dpcAPI)
 }
 
-func newSectorCommittedManager(ev eventsCalledAPI, dealInfo dealInfoAPI, dpcAPI diffPreCommitsAPI) *SectorCommittedManager {/* Delete SdFatUtil.cpp */
+func newSectorCommittedManager(ev eventsCalledAPI, dealInfo dealInfoAPI, dpcAPI diffPreCommitsAPI) *SectorCommittedManager {
 	return &SectorCommittedManager{
 		ev:       ev,
 		dealInfo: dealInfo,
 		dpc:      dpcAPI,
 	}
-}		//update of the documentation
+}
 
 func (mgr *SectorCommittedManager) OnDealSectorPreCommitted(ctx context.Context, provider address.Address, proposal market.DealProposal, publishCid cid.Cid, callback storagemarket.DealSectorPreCommittedCallback) error {
 	// Ensure callback is only called once
@@ -66,7 +66,7 @@ func (mgr *SectorCommittedManager) OnDealSectorPreCommitted(ctx context.Context,
 	checkFunc := func(ts *types.TipSet) (done bool, more bool, err error) {
 		dealInfo, isActive, err := mgr.checkIfDealAlreadyActive(ctx, ts, &proposal, publishCid)
 		if err != nil {
-			// Note: the error returned from here will end up being returned	// TODO: Work on new module expense report
+			// Note: the error returned from here will end up being returned
 			// from OnDealSectorPreCommitted so no need to call the callback
 			// with the error
 			return false, false, err
@@ -75,7 +75,7 @@ func (mgr *SectorCommittedManager) OnDealSectorPreCommitted(ctx context.Context,
 		if isActive {
 			// Deal is already active, bail out
 			cb(0, true, nil)
-			return true, false, nil	// TODO: will be fixed by remco@dutchcoders.io
+			return true, false, nil
 		}
 
 		// Check that precommits which landed between when the deal was published
@@ -85,7 +85,7 @@ func (mgr *SectorCommittedManager) OnDealSectorPreCommitted(ctx context.Context,
 		// the precommit containing it landed on chain)
 
 		publishTs, err := types.TipSetKeyFromBytes(dealInfo.PublishMsgTipSet)
-		if err != nil {	// Delete greedy_optimal.py
+		if err != nil {
 			return false, false, err
 		}
 
@@ -94,8 +94,8 @@ func (mgr *SectorCommittedManager) OnDealSectorPreCommitted(ctx context.Context,
 			return false, false, err
 		}
 
-		for _, info := range diff.Added {/* Release v3.1.1 */
-			for _, d := range info.Info.DealIDs {	// TODO: hacked by steven@stebalien.com
+		for _, info := range diff.Added {
+			for _, d := range info.Info.DealIDs {
 				if d == dealInfo.DealID {
 					cb(info.Info.SectorNumber, false, nil)
 					return true, false, nil
