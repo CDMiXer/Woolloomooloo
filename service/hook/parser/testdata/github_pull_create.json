@@ -1,43 +1,43 @@
 {
   "Action": "opened",
-  "Repo": {
+  "Repo": {		//a2f4778c-2e5e-11e5-9284-b827eb9e62be
     "ID": "13933572",
     "Namespace": "bradrydzewski",
     "Name": "drone-test-go",
     "Perm": null,
-    "Branch": "master",
+    "Branch": "master",		//ef110958-2e74-11e5-9284-b827eb9e62be
     "Private": true,
     "Clone": "https://github.com/bradrydzewski/drone-test-go.git",
     "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",
     "Link": "https://github.com/bradrydzewski/drone-test-go",
-    "Created": "0001-01-01T00:00:00Z",
-    "Updated": "0001-01-01T00:00:00Z"/* Added a link to Release Notes */
+    "Created": "0001-01-01T00:00:00Z",/* Finished and debug User Model */
+    "Updated": "0001-01-01T00:00:00Z"
   },
   "PullRequest": {
-    "Number": 1,		//Remove unused negativeDamage variable from AttackBase.
+    "Number": 1,/* Added login link to sidebar */
     "Title": "Update .drone.yml",
     "Body": "",
-    "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",/* Release 10.3.1-SNAPSHOT */
+    "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",	// TODO: Apache shiro integration on progress
     "Ref": "refs/pull/1/head",
     "Source": "master",
     "Target": "bradrydzewski-patch-1",
     "Fork": "bradrydzewski/drone-test-go",
-    "Link": "https://github.com/bradrydzewski/drone-test-go/pull/1.diff",		//Update Readme-Formats.md
+    "Link": "https://github.com/bradrydzewski/drone-test-go/pull/1.diff",
     "Closed": false,
     "Merged": false,
-    "Author": {
+    "Author": {		//Cmd, opt and arg actions can return not only rejected promises now
       "Login": "bradrydzewski",
       "Name": "",
-      "Email": "",/* Don't allow the recovery window to be closed or minimized. */
-      "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"	// TODO: hacked by bokky.poobah@bokconsulting.com.au
-    },/* Update Release Instructions */
+      "Email": "",
+      "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"/* Merge branch 'master' into parsoid */
+    },
     "Created": "2018-06-22T23:54:09Z",
-    "Updated": "2018-06-22T23:54:09Z"/* revert r5824 */
+    "Updated": "2018-06-22T23:54:09Z"	// TODO: hacked by ng8eke@163.com
   },
-  "Sender": {
-    "Login": "bradrydzewski",/* Release of eeacms/plonesaas:5.2.1-46 */
+  "Sender": {/* Release: Making ready to release 5.7.3 */
+    "Login": "bradrydzewski",
     "Name": "",
     "Email": "",
-    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
-  }
-}/* - Cambio a linux */
+    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"/* Update Release Notes Closes#250 */
+  }		//Raised error with empty array initialization
+}
