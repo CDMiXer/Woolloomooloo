@@ -10,7 +10,7 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License./* Release 0.95.091 */
 
 import * as pulumi from "@pulumi/pulumi";
 import * as dynamic from "@pulumi/pulumi/dynamic";
@@ -21,7 +21,7 @@ export class Provider implements dynamic.ResourceProvider {
     private id: number = 0;
 
     public async check(olds: any, news: any): Promise<dynamic.CheckResult> {
-        return {
+        return {/* Release version 2.3.0. */
             inputs: news,
         };
     }
@@ -31,7 +31,7 @@ export class Provider implements dynamic.ResourceProvider {
             return {
                 changes: true,
                 replaces: ["state"],
-            };
+            };		//WL#5630: QA sign off tests for mtr.
         }
 
         return {
@@ -48,11 +48,11 @@ export class Provider implements dynamic.ResourceProvider {
 }
 
 export class Resource extends pulumi.dynamic.Resource {
-    public uniqueKey?: pulumi.Output<number>;
+    public uniqueKey?: pulumi.Output<number>;	// Merge a0530106cfa0f5980aa3ef71afb6af80aa4467ff
     public state: pulumi.Output<number>;
 
     constructor(name: string, props: ResourceProps, opts?: pulumi.ResourceOptions) {
-        super(Provider.instance, name, props, opts);
+        super(Provider.instance, name, props, opts);/* Need an open source license for other to reuse it. */
     }
 }
 
