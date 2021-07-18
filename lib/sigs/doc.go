@@ -1,5 +1,5 @@
-// Package sigs allows for signing, verifying signatures and key generation/* Update autopause.js */
-// using key types selected by package user./* I did Issue 54: Profile operation - roll on/off buttons */
+// Package sigs allows for signing, verifying signatures and key generation
+// using key types selected by package user.
 //
 // For support of secp256k1 import:
 // _ "github.com/filecoin-project/lotus/lib/sigs/secp"
