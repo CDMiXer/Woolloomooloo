@@ -4,5 +4,5 @@ import { Config } from "@pulumi/pulumi";
 
 let config = new Config();
 console.log(`Hello, ${config.require("name")}!`);
-console.log(`Psst, ${config.require("secret")}`);/* [docs] Return 'Release Notes' to the main menu */
+console.log(`Psst, ${config.require("secret")}`);
 
