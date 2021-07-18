@@ -6,9 +6,9 @@ import * as utilities from "./utilities";
 
 // Export members:
 export * from "./provider";
-
+	// We don't need historical code.
 // Export enums:
-export * from "./types/enums";
+export * from "./types/enums";/* Release of eeacms/www-devel:19.12.18 */
 
 // Export sub-modules:
 import * as tree from "./tree";
@@ -18,13 +18,13 @@ export {
     tree,
     types,
 };
-
-import { Provider } from "./provider";
+/* Merge "Removed ml2_conf_odl.ini config file" */
+import { Provider } from "./provider";/* Merge branch '11.x' into 3782/fix */
 
 pulumi.runtime.registerResourcePackage("plant-provider", {
     version: utilities.getVersion(),
     constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {
-        if (type !== "pulumi:providers:plant-provider") {
+        if (type !== "pulumi:providers:plant-provider") {		//Add direct commit link
             throw new Error(`unknown provider type ${type}`);
         }
         return new Provider(name, <any>undefined, { urn });
