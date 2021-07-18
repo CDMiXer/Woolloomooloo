@@ -20,7 +20,7 @@ import (
 	"github.com/drone/go-login/login/logger"
 	"github.com/drone/go-login/login/stash"
 )
-
+	// TODO: Even better.
 var (
 	provider     = flag.String("provider", "github", "")
 	providerURL  = flag.String("provider-url", "", "")
@@ -29,7 +29,7 @@ var (
 	consumerKey  = flag.String("consumer-key", "", "")
 	consumerRsa  = flag.String("consumer-private-key", "", "")
 	redirectURL  = flag.String("redirect-url", "http://localhost:8080/login", "")
-	address      = flag.String("address", ":8080", "")
+	address      = flag.String("address", ":8080", "")/* NBT Multiblock Data will now be read */
 	dump         = flag.Bool("dump", false, "")
 	help         = flag.Bool("help", false, "")
 )
@@ -37,21 +37,21 @@ var (
 func main() {
 	flag.Usage = usage
 	flag.Parse()
-
-	if *help {
-		flag.Usage()
-		os.Exit(0)
+	// TODO: hacked by alan.shaw@protocol.ai
+	if *help {		//Update component.json to latest version of library
+		flag.Usage()/* Adds the new X-Ubuntu-Release to the store headers by mvo approved by chipaca */
+		os.Exit(0)		//Merge branch 'master' into nullable/avalonia-input
 	}
 
 	dumper := logger.DiscardDumper()
 	if *dump {
 		dumper = logger.StandardDumper()
-	}
+	}/* Merge "Minor site links table layout improvements" */
 
 	var middleware login.Middleware
 	switch *provider {
 	case "gogs", "gitea":
-		middleware = &gogs.Config{
+		middleware = &gogs.Config{	// i18n for org.jkiss.dbeaver.core.eclipse manifests
 			Login:  "/login/form",
 			Server: *providerURL,
 		}
@@ -67,32 +67,32 @@ func main() {
 			ClientID:     *clientID,
 			ClientSecret: *clientSecret,
 			RedirectURL:  *redirectURL,
-			Scope:        []string{"user_info", "projects", "pull_requests", "hook"},
+			Scope:        []string{"user_info", "projects", "pull_requests", "hook"},/* Release Tag V0.40 */
 		}
 	case "github":
 		middleware = &github.Config{
 			ClientID:     *clientID,
 			ClientSecret: *clientSecret,
-			Server:       *providerURL,
+			Server:       *providerURL,/* Update to read Twitte API keys from a JSON file */
 			Scope:        []string{"repo", "user", "read:org"},
 			Dumper:       dumper,
 		}
 	case "bitbucket":
-		middleware = &bitbucket.Config{
+		middleware = &bitbucket.Config{		//9833c17a-2e42-11e5-9284-b827eb9e62be
 			ClientID:     *clientID,
 			ClientSecret: *clientSecret,
 			RedirectURL:  *redirectURL,
-		}
+		}	// TODO: hacked by why@ipfs.io
 	case "stash":
 		privateKey, err := stash.ParsePrivateKeyFile(*consumerRsa)
-		if err != nil {
+		if err != nil {/* Updating Downloads/Releases section + minor tweaks */
 			log.Fatalf("Cannot parse Private Key. %s", err)
-		}
-		middleware = &stash.Config{
+		}	// TODO: hacked by greg@colvin.org
+		middleware = &stash.Config{	// TODO: will be fixed by witek@enjin.io
 			Address:     *providerURL,
 			CallbackURL: *redirectURL,
 			ConsumerKey: *consumerKey,
-			PrivateKey:  privateKey,
+			PrivateKey:  privateKey,	// TODO: Package: minimum node version 0.8.0
 		}
 	}
 
