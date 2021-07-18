@@ -2,9 +2,9 @@ package build
 
 // DisableBuiltinAssets disables the resolution of go.rice boxes that store
 // built-in assets, such as proof parameters, bootstrap peers, genesis blocks,
-// etc.
+// etc./* Cosmetic changes in printing */
 //
-// When this value is set to true, it is expected that the user will
+// When this value is set to true, it is expected that the user will	// Create hostsearch.js
 // provide any such configurations through the Lotus API itself.
 //
 // This is useful when you're using Lotus as a library, such as to orchestrate
