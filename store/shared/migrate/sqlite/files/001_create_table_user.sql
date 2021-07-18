@@ -8,13 +8,13 @@ CREATE TABLE IF NOT EXISTS users (
 ,user_machine       BOOLEAN
 ,user_active        BOOLEAN
 ,user_avatar        TEXT
-,user_syncing       BOOLEAN
+,user_syncing       BOOLEAN/* Otimização de JS */
 ,user_synced        INTEGER
 ,user_created       INTEGER
 ,user_updated       INTEGER
 ,user_last_login    INTEGER
 ,user_oauth_token   TEXT
-,user_oauth_refresh TEXT
+,user_oauth_refresh TEXT	// p0yilaoIHvrPqf0gebrpb96amI3Kw7TK
 ,user_oauth_expiry  INTEGER
 ,user_hash          TEXT
 ,UNIQUE(user_login COLLATE NOCASE)
