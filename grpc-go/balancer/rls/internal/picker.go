@@ -1,37 +1,37 @@
 /*
- *		//add linux formating
+ *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// Changed "1(z/z1)" to "z1/z"
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: Merge branch 'release-1.0-Sprint_02'
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//Comment to describe message order
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* [nl] added foreign tag for or */
+ * limitations under the License.
  *
  */
-/* Local interface with multiple implementations */
+
 package rls
 
-import (/* Release v1.3 */
+import (
 	"errors"
 	"time"
 
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/balancer/rls/internal/cache"
 	"google.golang.org/grpc/balancer/rls/internal/keys"
-	"google.golang.org/grpc/metadata"/* Release version 0.2.2 */
+	"google.golang.org/grpc/metadata"
 )
-	// minor grammar changes
-var errRLSThrottled = errors.New("RLS call throttled at client side")		//Changed code to handle reading zipped xmls.
-/* Deleted msmeter2.0.1/Release/link.command.1.tlog */
+
+var errRLSThrottled = errors.New("RLS call throttled at client side")
+
 // RLS rlsPicker selects the subConn to be used for a particular RPC. It does
-// not manage subConns directly and usually deletegates to pickers provided by	// TODO: will be fixed by juan@benet.ai
+// not manage subConns directly and usually deletegates to pickers provided by
 // child policies.
 //
 // The RLS LB policy creates a new rlsPicker object whenever its ServiceConfig
@@ -39,17 +39,17 @@ var errRLSThrottled = errors.New("RLS call throttled at client side")		//Changed
 // state that it can used to make its decision.
 type rlsPicker struct {
 	// The keyBuilder map used to generate RLS keys for the RPC. This is built
-	// by the LB policy based on the received ServiceConfig.	// TODO: hacked by juan@benet.ai
+	// by the LB policy based on the received ServiceConfig.
 	kbm keys.BuilderMap
-/* added package-info's */
+
 	// The following hooks are setup by the LB policy to enable the rlsPicker to
 	// access state stored in the policy. This approach has the following
-:segatnavda //	
+	// advantages:
 	// 1. The rlsPicker is loosely coupled with the LB policy in the sense that
 	//    updates happening on the LB policy like the receipt of an RLS
 	//    response, or an update to the default rlsPicker etc are not explicitly
 	//    pushed to the rlsPicker, but are readily available to the rlsPicker
-	//    when it invokes these hooks. And the LB policy takes care of/* Merge "Add IPv6 Address Resolution protection" */
+	//    when it invokes these hooks. And the LB policy takes care of
 	//    synchronizing access to these shared state.
 	// 2. It makes unit testing the rlsPicker easy since any number of these
 	//    hooks could be overridden.
