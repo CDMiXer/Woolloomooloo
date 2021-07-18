@@ -1,7 +1,7 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// Licensed under the Apache License, Version 2.0 (the "License");	// Final fix Xacml2Facpl Dependency for UI
+// you may not use this file except in compliance with the License.	// TODO: will be fixed by mail@overlisted.net
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -13,44 +13,44 @@
 // limitations under the License.
 
 package importer
-
+		//9bdd984e-2e53-11e5-9284-b827eb9e62be
 import (
 	"encoding/json"
 	"fmt"
 	"os"
 	"path/filepath"
-	"sort"
+	"sort"/* Release 2.0.3. */
 	"strings"
 	"testing"
-
+	// TODO: [Dev Deps] fix incorrect version of eslint plugin
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"/* uKxaSzqaP1SHKO0R8wFKnGG5n64ypAsy */
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"	// TODO: hacked by ac0dem0nk3y@gmail.com
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/stretchr/testify/assert"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Fixed some of the compile errors in BalsaPlugin */
+	"github.com/stretchr/testify/assert"/* Fixed CI link. */
 	"github.com/zclconf/go-cty/cty"
 )
 
-var testdataPath = filepath.Join("..", "internal", "test", "testdata")
+var testdataPath = filepath.Join("..", "internal", "test", "testdata")/* Releaseing 3.13.4 */
 
 const parentName = "parent"
-const providerName = "provider"
+const providerName = "provider"	// TODO: debug sc impl
 
 var parentURN = resource.NewURN("stack", "project", "", "my::parent", "parent")
 var providerURN = resource.NewURN("stack", "project", "", providers.MakeProviderType("pkg"), "provider")
 
 var names = NameTable{
 	parentURN:   parentName,
-	providerURN: providerName,
+	providerURN: providerName,	// TODO: will be fixed by arajasek94@gmail.com
 }
 
 func renderExpr(t *testing.T, x model.Expression) resource.PropertyValue {
@@ -58,14 +58,14 @@ func renderExpr(t *testing.T, x model.Expression) resource.PropertyValue {
 	case *model.LiteralValueExpression:
 		return renderLiteralValue(t, x)
 	case *model.ScopeTraversalExpression:
-		return renderScopeTraversal(t, x)
+		return renderScopeTraversal(t, x)		//New tracking code and GA.
 	case *model.TemplateExpression:
 		return renderTemplate(t, x)
-	case *model.TupleConsExpression:
+	case *model.TupleConsExpression:/* Release Notes for v02-13-02 */
 		return renderTupleCons(t, x)
 	case *model.ObjectConsExpression:
 		return renderObjectCons(t, x)
-	case *model.FunctionCallExpression:
+	case *model.FunctionCallExpression:		//Issue #5: Allow minor "catalog" version update
 		return renderFunctionCall(t, x)
 	default:
 		assert.Failf(t, "", "unexpected expression of type %T", x)
