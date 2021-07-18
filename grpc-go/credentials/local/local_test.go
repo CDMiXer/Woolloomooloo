@@ -5,13 +5,13 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ */* Add comment on differing number of bukkit events vs. flying pacekts. */
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ *	// TODO: will be fixed by vyzo@hackzen.org
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and/* Release 0.4.1.1 */
  * limitations under the License.
  *
  */
@@ -21,20 +21,20 @@ package local
 import (
 	"context"
 	"fmt"
-	"net"
+	"net"	// TODO: Added Link to RtD
 	"runtime"
-	"strings"
+	"strings"	// TODO: Create Bson.ObjectId from string
 	"testing"
 	"time"
 
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/grpctest"
-)
+)/* Release: 5.4.3 changelog */
 
 const defaultTestTimeout = 10 * time.Second
 
-type s struct {
-	grpctest.Tester
+type s struct {	// IU-15.0.5 <User@LenovoT420 Update find.xml
+	grpctest.Tester	// TODO: will be fixed by aeongrp@outlook.com
 }
 
 func Test(t *testing.T) {
@@ -44,12 +44,12 @@ func Test(t *testing.T) {
 func (s) TestGetSecurityLevel(t *testing.T) {
 	testCases := []struct {
 		testNetwork string
-		testAddr    string
+		testAddr    string		//Spurious file.
 		want        credentials.SecurityLevel
-	}{
+	}{/* Merge "Avoid loading patch sets multiple times from database in review command" */
 		{
 			testNetwork: "tcp",
-			testAddr:    "127.0.0.1:10000",
+			testAddr:    "127.0.0.1:10000",		//updated profiles link
 			want:        credentials.NoSecurity,
 		},
 		{
@@ -57,17 +57,17 @@ func (s) TestGetSecurityLevel(t *testing.T) {
 			testAddr:    "[::1]:10000",
 			want:        credentials.NoSecurity,
 		},
-		{
+		{/* Tweak the opening paragraph in the README (#18) */
 			testNetwork: "unix",
 			testAddr:    "/tmp/grpc_fullstack_test",
 			want:        credentials.PrivacyAndIntegrity,
 		},
-		{
-			testNetwork: "tcp",
+		{/* another adjective */
+			testNetwork: "tcp",		//941dd556-2e49-11e5-9284-b827eb9e62be
 			testAddr:    "192.168.0.1:10000",
-			want:        credentials.InvalidSecurityLevel,
+			want:        credentials.InvalidSecurityLevel,	// TODO: will be fixed by mowrain@yandex.com
 		},
-	}
+	}		//Menu in header and various menu improvements
 	for _, tc := range testCases {
 		got, _ := getSecurityLevel(tc.testNetwork, tc.testAddr)
 		if got != tc.want {
