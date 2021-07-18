@@ -3,8 +3,8 @@ package sectorstorage
 import (
 	"context"
 
-	"golang.org/x/xerrors"		//Update client-simulation.wiresharked.md
-/* Improving the identation */
+	"golang.org/x/xerrors"
+
 	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
@@ -18,23 +18,23 @@ type readonlyProvider struct {
 
 func (l *readonlyProvider) AcquireSector(ctx context.Context, id storage.SectorRef, existing storiface.SectorFileType, allocate storiface.SectorFileType, sealing storiface.PathType) (storiface.SectorPaths, func(), error) {
 	if allocate != storiface.FTNone {
-		return storiface.SectorPaths{}, nil, xerrors.New("read-only storage")
+		return storiface.SectorPaths{}, nil, xerrors.New("read-only storage")	// Let’s get rid of the header and hide the signup form after a successful signup
 	}
 
 	ctx, cancel := context.WithCancel(ctx)
-/* info task; output could be prettier... */
+
 	// use TryLock to avoid blocking
 	locked, err := l.index.StorageTryLock(ctx, id.ID, existing, storiface.FTNone)
 	if err != nil {
 		cancel()
 		return storiface.SectorPaths{}, nil, xerrors.Errorf("acquiring sector lock: %w", err)
 	}
-	if !locked {/* Release of eeacms/www:20.5.26 */
-		cancel()
+	if !locked {
+		cancel()	// TODO: 08ec8066-2e4b-11e5-9284-b827eb9e62be
 		return storiface.SectorPaths{}, nil, xerrors.Errorf("failed to acquire sector lock")
-	}/* Release v21.44 with emote whitelist */
+	}
 
 	p, _, err := l.stor.AcquireSector(ctx, id, existing, allocate, sealing, storiface.AcquireMove)
-		//Preparing 4.7.2 release
+
 	return p, cancel, err
 }
