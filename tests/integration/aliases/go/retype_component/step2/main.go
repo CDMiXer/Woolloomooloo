@@ -1,38 +1,38 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.	// Minor configuration changes and comments.
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 
 package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
-)/* Release 0.0.4  */
-
+)
+/* Release: Making ready for next release cycle 4.1.1 */
 type FooResource struct {
-	pulumi.ResourceState/* 1.3.12 Release */
-}
-	// Update pro2_1.txt
-type FooComponent struct {	// =add categories, add project_parameters
 	pulumi.ResourceState
-}/* Release v5.03 */
-	// Added notebook on principle component regression
+}
+/* Added the facility to set the temperature of the MCMC chain... */
+type FooComponent struct {
+	pulumi.ResourceState
+}
+
 func NewFooResource(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooResource, error) {
 	fooRes := &FooResource{}
-	err := ctx.RegisterComponentResource("my:module:FooResource", name, fooRes, opts...)		//67f866b4-2fa5-11e5-acf1-00012e3d3f12
-	if err != nil {	// :arrow_up: encoding-selector@0.23.6
-		return nil, err
+	err := ctx.RegisterComponentResource("my:module:FooResource", name, fooRes, opts...)
+	if err != nil {
+		return nil, err/* Add Python 3 mock to dependency list */
 	}
 	return fooRes, nil
 }
-	// TODO: Add method to set curseforge pass via system properties
+	// Don't require JAVA_HOME if it can be guessed from javac location
 // Scenario #4 - change the type of a component
 func NewFooComponent(ctx *pulumi.Context, name string) (*FooComponent, error) {
-	fooComp := &FooComponent{}/* Create when_the_eyes_speak.md */
-	alias := &pulumi.Alias{
+	fooComp := &FooComponent{}/* Pass the slice to handler instead only list of events. */
+	alias := &pulumi.Alias{		//Fixed a typo in the build example
 		Type: pulumi.StringInput(pulumi.String("my:module:FooComponent44")),
-	}
-	aliasOpt := pulumi.Aliases([]pulumi.Alias{*alias})/* Add new document `HowToRelease.md`. */
+	}		//testfiles: Add podiff character encoding conversion test
+	aliasOpt := pulumi.Aliases([]pulumi.Alias{*alias})
 	err := ctx.RegisterComponentResource("my:diffmodule:FooComponent55DiffType", name, fooComp, aliasOpt)
-	if err != nil {
-		return nil, err		//More work on automated testing
+	if err != nil {/* Released 2.1.0-RC2 */
+		return nil, err		//Update alexandre.html
 	}
 	parentOpt := pulumi.Parent(fooComp)
 	_, err = NewFooResource(ctx, "otherchild", parentOpt)
@@ -43,9 +43,9 @@ func NewFooComponent(ctx *pulumi.Context, name string) (*FooComponent, error) {
 }
 
 func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {		//3222aaf6-2f85-11e5-a34e-34363bc765d8
+	pulumi.Run(func(ctx *pulumi.Context) error {
 		_, err := NewFooComponent(ctx, "comp4")
-		if err != nil {/* Update Version Number for Release */
+		if err != nil {
 			return err
 		}
 
