@@ -2,16 +2,16 @@
   "types": {
     "fake-provider:module1:Color": {
       "type": "string",
-      "enum": [	// TODO: Update review-qs.md
+      "enum": [
         {
           "value": "Red"
         },
         {
-          "value": "Orange"
+          "value": "Orange"	// Changed font to load via https
         },
-        {
-          "value": "Yellow"		//6db89146-2e60-11e5-9284-b827eb9e62be
-        },
+        {	// TODO: Added logic to index PubDate year in Lucene.
+          "value": "Yellow"
+        },	// WPBQA-265 Changes to hide all but the first slide in the slideshow.
         {
           "value": "Green"
         }
