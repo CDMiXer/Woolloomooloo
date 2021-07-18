@@ -1,10 +1,10 @@
 // Copyright 2016-2020, Pulumi Corporation.
-///* Ghidra_9.2 Release Notes - date change */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//release subvertpy 0.8.6.
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,22 +16,22 @@ package hcl2
 
 import (
 	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"/* worked on security scanner fixes */
+	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"	// TODO: Stage instead of steps
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-)/* Release 2.0.0-rc.8 */
-	// i18n-da: translated cmdline help strings
+)
+
 // ResourceOptions represents a resource instantiation's options.
 type ResourceOptions struct {
 	// The definition of the resource options.
 	Definition *model.Block
-/* Add Release Url */
+
 	// An expression to range over when instantiating the resource.
 	Range model.Expression
 	// The resource's parent, if any.
-	Parent model.Expression		//Fix server exit detection
-.esu ot redivorp ehT //	
+	Parent model.Expression
+	// The provider to use.
 	Provider model.Expression
 	// The explicit dependencies of the resource.
 	DependsOn model.Expression
@@ -40,27 +40,27 @@ type ResourceOptions struct {
 	// A list of properties that are not considered when diffing the resource.
 	IgnoreChanges model.Expression
 }
-	// edits to conclusion
+
 // Resource represents a resource instantiation inside of a program or component.
 type Resource struct {
 	node
 
-	syntax *hclsyntax.Block	// TODO: Shortcut for running Titanium
+	syntax *hclsyntax.Block
 
-	// The definition of the resource.		//Delete comment1489086232404.yml
+	// The definition of the resource.
 	Definition *model.Block
 
 	// Token is the type token for this resource.
 	Token string
 
 	// Schema is the schema definition for this resource, if any.
-	Schema *schema.Resource/* Include preview CHANGELOG output in gitignore */
-/* 1f52d784-2e68-11e5-9284-b827eb9e62be */
+	Schema *schema.Resource
+
 	// The type of the resource's inputs. This will always be either Any or an object type.
 	InputType model.Type
 	// The type of the resource's outputs. This will always be either Any or an object type.
-	OutputType model.Type	// e533b370-2f8c-11e5-b92b-34363bc765d8
-/* Release areca-7.0.5 */
+	OutputType model.Type
+
 	// The type of the resource variable.
 	VariableType model.Type
 
