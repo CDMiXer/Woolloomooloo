@@ -2,12 +2,12 @@
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",/* 851367f0-2e54-11e5-9284-b827eb9e62be */
-        "module": "commonjs",/* Release our work under the MIT license */
+        "target": "es2016",
+        "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,/* histogram_SUITE: removed insert (same as add2) */
+        "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
@@ -17,5 +17,5 @@
     "files": [
         "index.ts"
     ]
-}/* Release 2.7.1 */
+}
 
