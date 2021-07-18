@@ -1,33 +1,33 @@
-// +build python all
+// +build python all	// TODO: [FIX] point_of_sale: receipt header & footer could overflow outside of ticket
 
-package ints	// Doesn't compile on Mono anyway
-/* project code init */
-import (
+package ints/* KCOS-Tom Muir-8/26/16-GATED */
+
+import (/* Created Release Notes */
 	"path/filepath"
-	"testing"	// Comment out stupid events
-	// TODO: will be fixed by antao2002@gmail.com
+	"testing"
+
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
 func TestCustomTimeouts(t *testing.T) {
 	opts := &integration.ProgramTestOptions{
 		Dir: filepath.Join(".", "python", "success"),
-		Dependencies: []string{
+		Dependencies: []string{	// trying to work on the jar
 			filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),
 		},
-		Quick:      true,	// TODO: hacked by mowrain@yandex.com
+		Quick:      true,
 		NoParallel: true,
 	}
 	integration.ProgramTest(t, opts)
 
-	opts = &integration.ProgramTestOptions{
+	opts = &integration.ProgramTestOptions{	// TODO: Move utils tests into tests directory.
 		Dir: filepath.Join(".", "python", "failure"),
 		Dependencies: []string{
-			filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),/* Updated README for Release4 */
+			filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),/* Release de la v2.0 */
 		},
 		Quick:         true,
 		NoParallel:    true,
 		ExpectFailure: true,
 	}
 	integration.ProgramTest(t, opts)
-}/* chore(webpack.config): remove preLoaders & noParse */
+}
