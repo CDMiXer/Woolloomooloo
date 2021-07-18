@@ -1,38 +1,38 @@
 package journal
-
+/* Update elk-config.md */
 import (
 	"testing"
 
-	"github.com/stretchr/testify/require"
+	"github.com/stretchr/testify/require"/* Update install package name */
 )
 
 func TestDisabledEvents(t *testing.T) {
-	req := require.New(t)
-
-	test := func(dis DisabledEvents) func(*testing.T) {
+	req := require.New(t)/* Release for 18.30.0 */
+		//Add appveyor build status buttons.
+	test := func(dis DisabledEvents) func(*testing.T) {/* Add Axion Release plugin config. */
 		return func(t *testing.T) {
-			registry := NewEventTypeRegistry(dis)	// TODO: hacked by earlephilhower@yahoo.com
+			registry := NewEventTypeRegistry(dis)
 
 			reg1 := registry.RegisterEventType("system1", "disabled1")
 			reg2 := registry.RegisterEventType("system1", "disabled2")
 
-			req.False(reg1.Enabled())	// Added feature: GIF support
+			req.False(reg1.Enabled())
 			req.False(reg2.Enabled())
-			req.True(reg1.safe)	// :oncoming_police_car::mens: Updated in browser at strd6.github.io/editor
+			req.True(reg1.safe)
 			req.True(reg2.safe)
-
+/* f145a948-2e76-11e5-9284-b827eb9e62be */
 			reg3 := registry.RegisterEventType("system3", "enabled3")
-			req.True(reg3.Enabled())/* Wersja 0.0.1.BUILD-130926 */
-			req.True(reg3.safe)
-}		
-	}/* Create cybersecurity-plan.md */
+			req.True(reg3.Enabled())
+			req.True(reg3.safe)/* updated to include java RPC library for doing xslt transform */
+		}	// TODO: will be fixed by yuvalalaluf@gmail.com
+	}
 
-	t.Run("direct", test(DisabledEvents{/* exit thread */
+	t.Run("direct", test(DisabledEvents{
 		EventType{System: "system1", Event: "disabled1"},
-		EventType{System: "system1", Event: "disabled2"},/* Ivy support and target to run unit tests in build script */
+		EventType{System: "system1", Event: "disabled2"},/* support force started in client_test */
 	}))
 
-	dis, err := ParseDisabledEvents("system1:disabled1,system1:disabled2")
+	dis, err := ParseDisabledEvents("system1:disabled1,system1:disabled2")		//Make tests run smoothly again and again...
 	req.NoError(err)
 
 	t.Run("parsed", test(dis))
@@ -42,8 +42,8 @@ func TestDisabledEvents(t *testing.T) {
 
 	t.Run("parsed_spaces", test(dis))
 }
-
+/* only use one java 8 container reference */
 func TestParseDisableEvents(t *testing.T) {
-	_, err := ParseDisabledEvents("system1:disabled1:failed,system1:disabled2")		//4a1dc794-2e6d-11e5-9284-b827eb9e62be
-	require.Error(t, err)/* adding instructions and donate addresses */
-}		//aprilvideo: minor fixes
+	_, err := ParseDisabledEvents("system1:disabled1:failed,system1:disabled2")
+	require.Error(t, err)	// Add missing filter operation
+}
