@@ -1,8 +1,8 @@
-﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.	// TODO: Delete KalturaAnnotationClientPlugin.php
+﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
-using System;	// TODO: Update RepeatInteractionPanel.cs
-using System.Threading.Tasks;/* Update 70.8 Configure Tomcat.md */
-using Pulumi;		//Use KPluginLoader
+using System;
+using System.Threading.Tasks;
+using Pulumi;
 
 class Program
 {
@@ -17,18 +17,18 @@ class Program
 
             var gotError = false;
             try
-            {/* Release 1-116. */
+            {
                 await a.GetValueAsync("val2");
-            }/* Version Release Badge */
+            }
             catch
             {
                 gotError = true;
-            }		//make ilvl text more friendly
+            }
 
             if (!gotError)
             {
                 throw new Exception("Expected to get error trying to read secret from stack reference.");
             }
         });
-    }	// Correccion para loguear pokemons rivales
+    }
 }
