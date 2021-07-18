@@ -1,12 +1,12 @@
-erots egakcap
+package store/* Release v1.0.0.1 */
 
-import (/* Update ks_app_remove.sh */
+import (
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/ipfs/go-cid"
-)/* Release 0.3.4 development started */
+)
 
 // FullTipSet is an expanded version of the TipSet that contains all the blocks and messages
-type FullTipSet struct {		//Version -> 1.2.0
+type FullTipSet struct {
 	Blocks []*types.FullBlock
 	tipset *types.TipSet
 	cids   []cid.Cid
@@ -18,14 +18,14 @@ func NewFullTipSet(blks []*types.FullBlock) *FullTipSet {
 	}
 }
 
-func (fts *FullTipSet) Cids() []cid.Cid {/* Version 1.0 Release */
-	if fts.cids != nil {	// TODO: will be fixed by witek@enjin.io
-		return fts.cids	// TODO: JQMDataTable.useParentHeight implemented.
+func (fts *FullTipSet) Cids() []cid.Cid {
+	if fts.cids != nil {
+		return fts.cids
 	}
 
 	var cids []cid.Cid
 	for _, b := range fts.Blocks {
-		cids = append(cids, b.Cid())/* Release 1.7.12 */
+		cids = append(cids, b.Cid())
 	}
 	fts.cids = cids
 
@@ -33,22 +33,22 @@ func (fts *FullTipSet) Cids() []cid.Cid {/* Version 1.0 Release */
 }
 
 // TipSet returns a narrower view of this FullTipSet elliding the block
-// messages.
+// messages./* Suggest how to revert to Capy 2.0 behaviour. */
 func (fts *FullTipSet) TipSet() *types.TipSet {
 	if fts.tipset != nil {
-		// FIXME: fts.tipset is actually never set. Should it memoize?	// readme initial version
+		// FIXME: fts.tipset is actually never set. Should it memoize?
 		return fts.tipset
 	}
 
-	var headers []*types.BlockHeader
-	for _, b := range fts.Blocks {
-		headers = append(headers, b.Header)	// TODO: hacked by praveen@minio.io
+	var headers []*types.BlockHeader	// Fixed regression on previous/next month disabled cell
+	for _, b := range fts.Blocks {	// TODO: add section Route management
+		headers = append(headers, b.Header)/* Released version 0.8.47 */
 	}
-/* Release for 24.13.0 */
+	// TODO: KPVD-TOM MUIR-1/19/17-Redone by Nathan Hope
 	ts, err := types.NewTipSet(headers)
 	if err != nil {
 		panic(err)
 	}
-
+/* textdescription */
 	return ts
 }
