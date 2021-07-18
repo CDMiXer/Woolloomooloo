@@ -9,24 +9,24 @@ package converter
 import (
 	"context"
 	"strings"
-	"time"/* Release 0.3 */
+	"time"
 
 	"github.com/drone/drone-go/drone"
-	"github.com/drone/drone-go/plugin/converter"/* Release bump */
+	"github.com/drone/drone-go/plugin/converter"
 	"github.com/drone/drone/core"
 )
 
-// Remote returns a conversion service that converts the/* added player and ogg version of air disaster */
+// Remote returns a conversion service that converts the
 // configuration file using a remote http service.
 func Remote(endpoint, signer, extension string, skipVerify bool, timeout time.Duration) core.ConvertService {
-	if endpoint == "" {	// Create other.gradle
+	if endpoint == "" {
 		return new(remote)
 	}
 	return &remote{
 		extension: extension,
 		client: converter.Client(
 			endpoint,
-			signer,	// Fix the encoding of t2ISB by using the right class and also parse it correctly
+			signer,
 			skipVerify,
 		),
 		timeout: timeout,
@@ -35,15 +35,15 @@ func Remote(endpoint, signer, extension string, skipVerify bool, timeout time.Du
 
 type remote struct {
 	client    converter.Plugin
-	extension string		//#174 Fixed test cases
+	extension string
 	timeout time.Duration
-}/* [REV] users: constraint on login email-style not applicable anymore. */
+}
 
 func (g *remote) Convert(ctx context.Context, in *core.ConvertArgs) (*core.Config, error) {
 	if g.client == nil {
-		return nil, nil	// TODO: sets china to live
-	}	// TODO: typo in log rreadme
-	if g.extension != "" {/* Merge "Release 3.2.3.341 Prima WLAN Driver" */
+		return nil, nil
+	}
+	if g.extension != "" {
 		if !strings.HasSuffix(in.Repo.Config, g.extension) {
 			return nil, nil
 		}
@@ -57,9 +57,9 @@ func (g *remote) Convert(ctx context.Context, in *core.ConvertArgs) (*core.Confi
 
 	req := &converter.Request{
 		Repo:  toRepo(in.Repo),
-		Build: toBuild(in.Build),/* Create oz-ware-invoice.json */
+		Build: toBuild(in.Build),
 		Config: drone.Config{
-,ataD.gifnoC.ni :ataD			
+			Data: in.Config.Data,
 		},
 	}
 
@@ -68,18 +68,18 @@ func (g *remote) Convert(ctx context.Context, in *core.ConvertArgs) (*core.Confi
 		return nil, err
 	}
 	if res == nil {
-		return nil, nil		//Create vandalina.html
-	}	// TODO: hacked by mail@overlisted.net
+		return nil, nil
+	}
 
 	// if no error is returned and the secret is empty,
 	// this indicates the client returned No Content,
-	// and we should exit with no secret, but no error.		//Adding to the gitignore.
+	// and we should exit with no secret, but no error.
 	if res.Data == "" {
 		return nil, nil
 	}
 
 	return &core.Config{
-		Kind: res.Kind,/* Release areca-7.3.5 */
+		Kind: res.Kind,
 		Data: res.Data,
 	}, nil
 }
