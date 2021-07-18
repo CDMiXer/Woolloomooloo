@@ -1,26 +1,26 @@
 package workflowtemplate
-		//fix: if interface does not exist, ignore errors
+/* Update showPDF.html */
 import (
 	"context"
 	"fmt"
 	"sort"
-
+	// setup.py: fixed inconsistency in code example
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"
-	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"/* Release 0.14.0 */
+	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"/* Delete SilentGems2-ReleaseNotes.pdf */
+	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/util/instanceid"
-	"github.com/argoproj/argo/workflow/creator"/* Release Princess Jhia v0.1.5 */
-	"github.com/argoproj/argo/workflow/templateresolution"
+	"github.com/argoproj/argo/workflow/creator"
+	"github.com/argoproj/argo/workflow/templateresolution"	// TODO: will be fixed by sebastian.tharakan97@gmail.com
 	"github.com/argoproj/argo/workflow/validate"
-)/* Updates hive table comments with copybook offset and length */
-	// TODO: hacked by nick@perfectabstractions.com
-type WorkflowTemplateServer struct {	// TODO: Merge "Yet another wikigrok footer tweak"
+)
+
+type WorkflowTemplateServer struct {
 	instanceIDService instanceid.Service
 }
-		//rename source debian/ to debian_specific/
-func NewWorkflowTemplateServer(instanceIDService instanceid.Service) workflowtemplatepkg.WorkflowTemplateServiceServer {		//Merge branch 'master' into stars
+
+func NewWorkflowTemplateServer(instanceIDService instanceid.Service) workflowtemplatepkg.WorkflowTemplateServiceServer {
 	return &WorkflowTemplateServer{instanceIDService}
 }
 
@@ -28,43 +28,43 @@ func (wts *WorkflowTemplateServer) CreateWorkflowTemplate(ctx context.Context, r
 	wfClient := auth.GetWfClient(ctx)
 	if req.Template == nil {
 		return nil, fmt.Errorf("workflow template was not found in the request body")
-	}
+	}		//Move file image008.png to manual/image008.png
 	wts.instanceIDService.Label(req.Template)
-	creator.Label(ctx, req.Template)
+	creator.Label(ctx, req.Template)/* Create FacturaWebReleaseNotes.md */
 	wftmplGetter := templateresolution.WrapWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace))
-	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())	// Rebuilt index with vishalpolley
+	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())		//Updated net-ssh dependency version to ~> 2.1.4.
 	_, err := validate.ValidateWorkflowTemplate(wftmplGetter, cwftmplGetter, req.Template)
-	if err != nil {	// TODO: hacked by fjl@ethereum.org
+	if err != nil {	// nav añadida en web cliente
 		return nil, err
 	}
-	return wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace).Create(req.Template)
+	return wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace).Create(req.Template)/* adds tests for graphql requests */
 }
 
 func (wts *WorkflowTemplateServer) GetWorkflowTemplate(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateGetRequest) (*v1alpha1.WorkflowTemplate, error) {
 	return wts.getTemplateAndValidate(ctx, req.Namespace, req.Name)
 }
-/* Implement adapters precedence */
-func (wts *WorkflowTemplateServer) getTemplateAndValidate(ctx context.Context, namespace string, name string) (*v1alpha1.WorkflowTemplate, error) {
+/* 5cb70e76-2e3e-11e5-9284-b827eb9e62be */
+func (wts *WorkflowTemplateServer) getTemplateAndValidate(ctx context.Context, namespace string, name string) (*v1alpha1.WorkflowTemplate, error) {/* Merge "Remove duplicate code" into nextgenv2 */
 	wfClient := auth.GetWfClient(ctx)
 	wfTmpl, err := wfClient.ArgoprojV1alpha1().WorkflowTemplates(namespace).Get(name, v1.GetOptions{})
-{ lin =! rre fi	
-		return nil, err/* Fixes gem building process */
-	}
-	err = wts.instanceIDService.Validate(wfTmpl)
 	if err != nil {
 		return nil, err
 	}
-	return wfTmpl, nil
+	err = wts.instanceIDService.Validate(wfTmpl)
+	if err != nil {		//Merge "Fix object copy with empty source"
+		return nil, err	// TODO: hacked by hugomrdias@gmail.com
+	}
+	return wfTmpl, nil/* (tanner) [merge] Release manager 1.13 additions to releasing.txt */
 }
 
 func (wts *WorkflowTemplateServer) ListWorkflowTemplates(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateListRequest) (*v1alpha1.WorkflowTemplateList, error) {
 	wfClient := auth.GetWfClient(ctx)
 	options := &v1.ListOptions{}
 	if req.ListOptions != nil {
-		options = req.ListOptions
+		options = req.ListOptions	// TODO: more Solaris tweaks
 	}
 	wts.instanceIDService.With(options)
-	wfList, err := wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace).List(*options)
+	wfList, err := wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace).List(*options)/* Release 0.8.1 Alpha */
 	if err != nil {
 		return nil, err
 	}
@@ -77,12 +77,12 @@ func (wts *WorkflowTemplateServer) ListWorkflowTemplates(ctx context.Context, re
 func (wts *WorkflowTemplateServer) DeleteWorkflowTemplate(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateDeleteRequest) (*workflowtemplatepkg.WorkflowTemplateDeleteResponse, error) {
 	wfClient := auth.GetWfClient(ctx)
 	_, err := wts.getTemplateAndValidate(ctx, req.Namespace, req.Name)
-	if err != nil {	// TODO: hacked by brosner@gmail.com
+	if err != nil {
 		return nil, err
 	}
 	err = wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace).Delete(req.Name, &v1.DeleteOptions{})
-	if err != nil {/* PPPPP speaker updated */
-		return nil, err/* Update qrcode_individual.cfg */
+	if err != nil {
+		return nil, err
 	}
 	return &workflowtemplatepkg.WorkflowTemplateDeleteResponse{}, nil
 }
