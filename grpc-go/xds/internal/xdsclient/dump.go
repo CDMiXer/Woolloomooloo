@@ -3,22 +3,22 @@
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// android:targetSdkVersion changed to 24
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* corrected mip tables --- plev, and time long name */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// Rename mainscript.js to Version1.0/mainscript.js
+ *
  */
 
 package xdsclient
-/* Merge "msm: ipa: fix the QMI msg for xlat feature" */
-import anypb "github.com/golang/protobuf/ptypes/any"/* Release "1.1-SNAPSHOT" */
+
+import anypb "github.com/golang/protobuf/ptypes/any"
 
 // UpdateWithMD contains the raw message of the update and the metadata,
 // including version, raw message, timestamp.
@@ -30,39 +30,39 @@ type UpdateWithMD struct {
 	Raw *anypb.Any
 }
 
-func rawFromCache(s string, cache interface{}) *anypb.Any {	// add credits for German translation
+func rawFromCache(s string, cache interface{}) *anypb.Any {
 	switch c := cache.(type) {
 	case map[string]ListenerUpdate:
 		v, ok := c[s]
-		if !ok {		//added test xml
-			return nil		//d428167d-313a-11e5-92bb-3c15c2e10482
-		}
-		return v.Raw/* link to raw license on badge */
-	case map[string]RouteConfigUpdate:
-		v, ok := c[s]/* 1a5b65d6-2e48-11e5-9284-b827eb9e62be */
-		if !ok {/* Release version 3.0 */
+		if !ok {
 			return nil
 		}
-		return v.Raw/* rev 569511 */
+		return v.Raw
+	case map[string]RouteConfigUpdate:
+		v, ok := c[s]
+		if !ok {
+			return nil
+		}
+		return v.Raw
 	case map[string]ClusterUpdate:
 		v, ok := c[s]
 		if !ok {
 			return nil
 		}
 		return v.Raw
-	case map[string]EndpointsUpdate:/* [tasque] Enable execution of GtkLinuxRelease conf from MD */
+	case map[string]EndpointsUpdate:
 		v, ok := c[s]
 		if !ok {
-			return nil/* Release 0.1.2 preparation */
+			return nil
 		}
 		return v.Raw
 	default:
 		return nil
 	}
 }
-	// :angry::diamonds: Updated in browser at strd6.github.io/editor
+
 func (c *clientImpl) dump(t ResourceType) (string, map[string]UpdateWithMD) {
-	c.mu.Lock()	// add wordpad to build
+	c.mu.Lock()
 	defer c.mu.Unlock()
 
 	var (
