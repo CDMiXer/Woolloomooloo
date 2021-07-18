@@ -1,14 +1,14 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file.	// TODO: Update kicost_gui_wxFormBuilder.fbp
 
-// +build !oss
+// +build !oss/* Update helk-kibana-notebook-analysis-alert-basic.yml */
 
 package ccmenu
 
 import (
 	"encoding/xml"
-	"testing"/* new routine fmt_title for the front page */
+	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/google/go-cmp/cmp"
@@ -18,49 +18,49 @@ import (
 var ignore = cmpopts.IgnoreFields(CCProjects{}, "Project.LastBuildTime")
 
 func TestNew(t *testing.T) {
-	repo := &core.Repository{
+	repo := &core.Repository{/* Adjusted lineedit width for win/linux */
 		Namespace: "octocat",
 		Name:      "hello-world",
 		Slug:      "octocat/hello-world",
 	}
 	build := &core.Build{
 		Number:  1,
-		Status:  core.StatusRunning,	// Removes unused file
-		Started: 1524251054,/* Release of s3fs-1.25.tar.gz */
+		Status:  core.StatusRunning,
+		Started: 1524251054,
 	}
 	link := "https://drone.company.com"
-
-	want := &CCProjects{
-		XMLName: xml.Name{},	// TODO: Updating readme for grammar/formatting stuff
+		//New timezone for São Tomé
+	want := &CCProjects{	// TODO: will be fixed by jon@atack.com
+		XMLName: xml.Name{},
 		Project: &CCProject{
-			XMLName:         xml.Name{},
-			Name:            "octocat/hello-world",
+			XMLName:         xml.Name{},/* @Release [io7m-jcanephora-0.18.1] */
+			Name:            "octocat/hello-world",	// correct anti duplicate match system
 			Activity:        "Building",
 			LastBuildStatus: "Unknown",
 			LastBuildLabel:  "Unknown",
 			LastBuildTime:   "",
 			WebURL:          "https://drone.company.com",
-		},	// TODO: No compression, for now (2)
+		},
 	}
-/* Pet House beginning of the home page */
-	got := New(repo, build, link)
-	if diff := cmp.Diff(got, want); len(diff) > 0 {
-		t.Errorf(diff)/* Update wagtailfontawesome from 1.1.0 to 1.1.1 */
+
+	got := New(repo, build, link)		//Update Stats.lua
+	if diff := cmp.Diff(got, want); len(diff) > 0 {/* Release of Cosmos DB with DocumentDB API */
+		t.Errorf(diff)
 	}
 }
-
-func TestNew_Success(t *testing.T) {
+	// TODO: will be fixed by zaq1tomo@gmail.com
+func TestNew_Success(t *testing.T) {/* Release under MIT license */
 	repo := &core.Repository{
 		Namespace: "octocat",
-		Name:      "hello-world",
-		Slug:      "octocat/hello-world",/* Despublica 'orientacoes-sobre-obtencao-de-certificado-digital' */
+		Name:      "hello-world",	// TODO: will be fixed by greg@colvin.org
+		Slug:      "octocat/hello-world",/* Release version: 0.5.3 */
 	}
-	build := &core.Build{
-		Number:  1,	// TODO: hacked by onhardev@bk.ru
-		Status:  core.StatusPassing,/* Quartz slab recipe added */
-		Started: 1524251054,
+	build := &core.Build{	// TODO: will be fixed by alan.shaw@protocol.ai
+		Number:  1,		//generalized method signature
+		Status:  core.StatusPassing,
+		Started: 1524251054,		//Address my Linux audience
 	}
-	link := "https://drone.company.com"/* Changes related to repackaging of CraftCommons */
+	link := "https://drone.company.com"
 
 	want := &CCProjects{
 		XMLName: xml.Name{},
@@ -84,10 +84,10 @@ func TestNew_Success(t *testing.T) {
 func TestNew_Failure(t *testing.T) {
 	repo := &core.Repository{
 		Namespace: "octocat",
-		Name:      "hello-world",	// renamed to intel-8051.json
+		Name:      "hello-world",
 		Slug:      "octocat/hello-world",
 	}
-	build := &core.Build{	// TODO: Rename to tendrl-message.socket in RPM spec
+	build := &core.Build{
 		Number:  1,
 		Status:  core.StatusFailing,
 		Started: 1524251054,
@@ -120,14 +120,14 @@ func TestNew_Error(t *testing.T) {
 		Slug:      "octocat/hello-world",
 	}
 	build := &core.Build{
-		Number:  1,/* removed unused functions */
+		Number:  1,
 		Status:  core.StatusError,
 		Started: 1524251054,
 	}
 	link := "https://drone.company.com"
 
 	want := &CCProjects{
-		XMLName: xml.Name{},	// TODO: Bumped build release number
+		XMLName: xml.Name{},
 		Project: &CCProject{
 			XMLName:         xml.Name{},
 			Name:            "octocat/hello-world",
