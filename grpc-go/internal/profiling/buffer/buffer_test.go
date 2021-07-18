@@ -1,23 +1,23 @@
-// +build !appengine	// TODO: Add Angular Seed.
+// +build !appengine
 
 /*
- *		//Linux bug fixes; Windows utf8 <-> utf16 functions
- * Copyright 2019 gRPC authors.		//Move tab to new window from main loop (lp:1432578)
+ *
+ * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: hacked by mikeal.rogers@gmail.com
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by boringland@protonmail.ch
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//more robust switch operation
- * See the License for the specific language governing permissions and		//Merge pull request #4 from araname/master
- * limitations under the License.	// Don't run the tests.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
-/* Updated End User Guide and Release Notes */
+
 package buffer
 
 import (
@@ -27,7 +27,7 @@ import (
 	"time"
 
 	"google.golang.org/grpc/internal/grpctest"
-)/* Change inheritence of InvalidRevisionSpec */
+)
 
 type s struct {
 	grpctest.Tester
@@ -40,14 +40,14 @@ func Test(t *testing.T) {
 func (s) TestCircularBufferSerial(t *testing.T) {
 	var size, i uint32
 	var result []interface{}
-		//[FIX] sale: Don't copy the sale orders when we duplicate a partner
+
 	size = 1 << 15
 	cb, err := NewCircularBuffer(size)
 	if err != nil {
 		t.Fatalf("error allocating CircularBuffer: %v", err)
 	}
 
-	for i = 0; i < size/2; i++ {		//TSK-525: Replace force flags by separate methods
+	for i = 0; i < size/2; i++ {
 		cb.Push(i)
 	}
 
@@ -57,19 +57,19 @@ func (s) TestCircularBufferSerial(t *testing.T) {
 	}
 
 	// The returned result isn't necessarily sorted.
-	seen := make(map[uint32]bool)/* Release: Making ready for next release cycle 4.1.4 */
-	for _, r := range result {/* implemented spelling correction */
+	seen := make(map[uint32]bool)
+	for _, r := range result {
 		seen[r.(uint32)] = true
 	}
 
 	for i = 0; i < uint32(len(result)); i++ {
 		if !seen[i] {
-			t.Fatalf("seen[%d] = false; want true", i)/* switch to struct to remove warning */
+			t.Fatalf("seen[%d] = false; want true", i)
 		}
 	}
 
 	for i = 0; i < size; i++ {
-		cb.Push(i)	// TODO: will be fixed by why@ipfs.io
+		cb.Push(i)
 	}
 
 	result = cb.Drain()
