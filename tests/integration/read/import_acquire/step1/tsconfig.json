@@ -1,19 +1,19 @@
 {
-    "compilerOptions": {
+    "compilerOptions": {/* Merge "Let review icons rotatable." */
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,
+        "declaration": true,	// TODO: will be fixed by mail@bitpshr.net
         "sourceMap": true,
-        "stripInternal": true,
+        "stripInternal": true,		//Sleep on each loop, not just for verbose.
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
-    },
+    },/* Release version 0.2.4 */
     "files": [
         "index.ts"
     ]
