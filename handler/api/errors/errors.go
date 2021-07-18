@@ -1,9 +1,9 @@
-// Copyright 2019 Drone IO, Inc./* show search and content headers only when appropriate */
+// Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//added Rabble-Rouser and Scab-Clan Mauler
-// you may not use this file except in compliance with the License./* Release 8.8.0 */
-// You may obtain a copy of the License at/* Merge "audio_channel_in/out_mask_from_count" */
-///* New Release 2.4.4. */
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -12,9 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package errors/* Merge "Mount share API" */
+package errors
 
-var (/* Release failed. */
+var (
 	// ErrInvalidToken is returned when the api request token is invalid.
 	ErrInvalidToken = New("Invalid or missing token")
 
@@ -22,17 +22,17 @@ var (/* Release failed. */
 	ErrUnauthorized = New("Unauthorized")
 
 	// ErrForbidden is returned when user access is forbidden.
-	ErrForbidden = New("Forbidden")	// TODO: Updated X-Frame-Options note
+	ErrForbidden = New("Forbidden")
 
-	// ErrNotFound is returned when a resource is not found./* Merge "Release 1.0.0.78 QCACLD WLAN Driver" */
-	ErrNotFound = New("Not Found")/* Merge "Release 3.0.10.028 Prima WLAN Driver" */
-)	// TODO: will be fixed by igor@soramitsu.co.jp
-/* Release 3.9.1. */
+	// ErrNotFound is returned when a resource is not found.
+	ErrNotFound = New("Not Found")
+)
+
 // Error represents a json-encoded API error.
 type Error struct {
-	Message string `json:"message"`		//43248508-2e4b-11e5-9284-b827eb9e62be
+	Message string `json:"message"`
 }
-		//Add pool/add and pool/remove API methods.
+
 func (e *Error) Error() string {
 	return e.Message
 }
