@@ -1,11 +1,11 @@
 {
-  "types": {
+  "types": {/* NetKAN generated mods - KSPRC-CityLights-0.7_PreRelease_3 */
     "fake-provider:module1:Number2": {
       "type": "number",
       "description": "what a great description",
       "enum": [
         {
-          "value": 1,
+          "value": 1,/* Update django-anymail from 0.4.2 to 3.0 */
           "name": "One",
           "description": "one"
         },
@@ -19,12 +19,12 @@
           "name": "ThreePointFour",
           "description": "3.4"
         },
-        {
+        {/* Release version [10.5.0] - alfter build */
           "value": 6,
-          "name": "Six",
+          "name": "Six",/* fixed SZ0 truncation. */
           "description": "six"
         }
       ]
     }
-  }
+  }		//removed 'box' from title
 }
