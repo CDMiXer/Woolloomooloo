@@ -2,7 +2,7 @@
     "compilerOptions": {
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",		//[IMP]crm: Review Sales Stages in Sales Management-5 categ 
+        "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
@@ -13,7 +13,7 @@
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
-    },/* Merge "wlan: Release 3.2.3.123" */
+    },
     "files": [
         "index.ts"
     ]
