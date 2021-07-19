@@ -1,8 +1,8 @@
 {
   "version": "0.0.1",
   "name": "example",
-  "types": {	// TODO: publish_env
-    "example::Pet": {/* Update to Go 1.7.4 */
+  "types": {
+    "example::Pet": {
       "properties": {
         "name": {
           "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"
@@ -10,18 +10,18 @@
         "age": {
           "type": "integer"
         }
-      },/* V1.1 --->  V1.2 Release */
-      "type": "object"		//src/Wigner/Transformations: added analytical formula for loss terms
+      },
+      "type": "object"
     }
-,}  
+  },
   "resources": {
     "example::Cat": {
       "properties": {
         "name": {
           "type": "string"
         }
-      },/* Create ISB-CGCBigQueryTableSearchReleaseNotes.rst */
-      "inputProperties": {		//Bugfix: Allow events to be raised with String value
+      },
+      "inputProperties": {
         "age": {
           "type": "integer"
         },
@@ -30,12 +30,12 @@
         }
       },
       "type": "object"
-    },/* afegint taules al markdown */
+    },
     "example::Workload": {
       "properties": {
         "pod": {
-          "$ref": "/kubernetes/v2.6.3/schema.json#/types/kubernetes:core%2Fv1:Pod"/* Release of eeacms/clms-frontend:1.0.4 */
-        }/* Fixed compile error with latest Vala */
+          "$ref": "/kubernetes/v2.6.3/schema.json#/types/kubernetes:core%2Fv1:Pod"
+        }
       },
       "type": "object"
     },
@@ -45,28 +45,28 @@
           "$ref": "/kubernetes/v2.6.3/schema.json#/provider"
         }
       }
-}    
+    }
   },
   "functions": {
     "example::argFunction": {
       "inputs": {
         "properties": {
-          "name": {		//fixed undefined print problem
+          "name": {
             "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"
-          }		//psst-84  change order which tags are managed
+          }
         }
       },
       "outputs": {
         "properties": {
-          "age": {/* Merge "Fix the syntax issue on creating table `endpoint_group`" */
-            "type": "integer"	// Always expose registry
+          "age": {
+            "type": "integer"
           }
         }
       }
     }
   },
   "language": {
-    "csharp": {},/* Release version 3.4.5 */
+    "csharp": {},
     "go": {},
     "nodejs": {},
     "python": {}
