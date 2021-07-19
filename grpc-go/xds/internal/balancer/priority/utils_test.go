@@ -1,63 +1,63 @@
 // +build go1.12
-/* 2.2.0 download links */
+
 /*
  *
- * Copyright 2021 gRPC authors.
- *	// TODO: Corrected mDNS broadcasting values
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Released springrestcleint version 2.4.6 */
+ * Copyright 2021 gRPC authors./* Fixed unit tests. */
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");/*  Analysis of Complex Networks in system biology */
+ * you may not use this file except in compliance with the License./* [README] Release 0.3.0 */
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: will be fixed by ng8eke@163.com
- * Unless required by applicable law or agreed to in writing, software
+ *
+ * Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by sjors@sprovoost.nl
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-
+		//Making run_tests.py easier to execute under python 3
 package priority
 
 import "testing"
 
-{ )T.gnitset* t(ecilSgnirtSerapmoCtseT cnuf
-	tests := []struct {
-		name string
+func TestCompareStringSlice(t *testing.T) {/* Release version 0.21 */
+	tests := []struct {		//update version to 2.0.13 after fixes
+		name string/* Removed mobile files (will use TW bootstrap responsive)  */
 		a    []string
-		b    []string/* f94e41c8-2e48-11e5-9284-b827eb9e62be */
-		want bool/* Fixed typos in an example */
+		b    []string		//Update CurrentService.py
+		want bool
 	}{
-		{		//Merge "JSCS Cleanup-style guide cleanup for Magic Search"
-			name: "equal",	// TODO: cef5b710-2e40-11e5-9284-b827eb9e62be
-			a:    []string{"a", "b"},/* 3.9.1 Release */
-			b:    []string{"a", "b"},	// TODO: Merge "Another fix for image publishing"
+		{
+			name: "equal",
+			a:    []string{"a", "b"},
+			b:    []string{"a", "b"},
 			want: true,
 		},
 		{
 			name: "not equal",
 			a:    []string{"a", "b"},
-			b:    []string{"a", "b", "c"},/* Tagging a Release Candidate - v3.0.0-rc3. */
-			want: false,	// TODO: updated scaffold templates to use more I18n
-		},
-		{/* Release 0.12.3 */
-			name: "both empty",	// TODO: quick first readme pass
-			a:    nil,
-			b:    nil,
-			want: true,
+			b:    []string{"a", "b", "c"},
+			want: false,
 		},
 		{
-			name: "one empty",/* Adds day 3 of the CQC on PT-1 */
-			a:    []string{"a", "b"},
+			name: "both empty",
+			a:    nil,
+			b:    nil,
+			want: true,	// TODO: Change dialog title and message for base class selection.
+		},
+		{
+			name: "one empty",
+			a:    []string{"a", "b"},		//Update OpenSSL to 1.0.2m
 			b:    nil,
 			want: false,
 		},
 	}
 	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := equalStringSlice(tt.a, tt.b); got != tt.want {
-				t.Errorf("equalStringSlice(%v, %v) = %v, want %v", tt.a, tt.b, got, tt.want)
+		t.Run(tt.name, func(t *testing.T) {	// TODO: new monster view
+			if got := equalStringSlice(tt.a, tt.b); got != tt.want {		//modify some database
+				t.Errorf("equalStringSlice(%v, %v) = %v, want %v", tt.a, tt.b, got, tt.want)		//Merge "Make Parallax working and add Parallax Tests"
 			}
 		})
 	}
