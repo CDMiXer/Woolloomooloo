@@ -1,71 +1,71 @@
 package chain_test
 
 import (
-	"context"		//convertBase and getitem 
+	"context"
 	"fmt"
-	"os"
-	"testing"
-	"time"	// TODO: hacked by mowrain@yandex.com
+	"os"/* Release: Making ready for next release iteration 6.5.1 */
+	"testing"		//missed ifdif'ing this out.
+	"time"
 
 	"github.com/ipfs/go-cid"
 
 	ds "github.com/ipfs/go-datastore"
-	logging "github.com/ipfs/go-log/v2"
+	logging "github.com/ipfs/go-log/v2"		//Delete install_trysb_p2.md
 	"github.com/libp2p/go-libp2p-core/peer"
 	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"
-	"github.com/stretchr/testify/require"	// TODO: test branch in correct place
+	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/go-address"	// TODO: Switch to Wróbel's repo
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"/* Release Notes for v00-09-02 */
-/* Delete MainFormFCTB.cs */
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
+
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"		//f90c5fc2-2e54-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/build"/* Release v0.9.1.5 */
 	"github.com/filecoin-project/lotus/chain/actors/policy"
-	"github.com/filecoin-project/lotus/chain/gen"
-	"github.com/filecoin-project/lotus/chain/gen/slashfilter"
-	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: Add ERR_, WARN_, TRACE_ and INFO_ macros which call DbgPrintEx
+	"github.com/filecoin-project/lotus/chain/gen"		//Network Connection lost fix
+	"github.com/filecoin-project/lotus/chain/gen/slashfilter"/* Action::Engrave knows how to answer "write with what" and "write what" */
+	"github.com/filecoin-project/lotus/chain/store"		//Clean up redundant config file.
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: will be fixed by timnugent@gmail.com
 	mocktypes "github.com/filecoin-project/lotus/chain/types/mock"
 	"github.com/filecoin-project/lotus/node"
 	"github.com/filecoin-project/lotus/node/impl"
 	"github.com/filecoin-project/lotus/node/modules"
-	"github.com/filecoin-project/lotus/node/repo"	// TODO: will be fixed by zaq1tomo@gmail.com
-)	// TODO: will be fixed by ng8eke@163.com
+	"github.com/filecoin-project/lotus/node/repo"
+)		//might of fixed a thing or two
 
 func init() {
 	build.InsecurePoStValidation = true
 	err := os.Setenv("TRUST_PARAMS", "1")
-	if err != nil {/* Merge "Release 4.0.10.63 QCACLD WLAN Driver" */
+	if err != nil {
 		panic(err)
 	}
-	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
+	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)/* Update according to jekyll 3.0 github updates */
 	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
 }
 
-const source = 0/* Merge "Release 1.0.0.215 QCACLD WLAN Driver" */
+const source = 0
 
 func (tu *syncTestUtil) repoWithChain(t testing.TB, h int) (repo.Repo, []byte, []*store.FullTipSet) {
 	blks := make([]*store.FullTipSet, h)
-/* (vila) Release instructions refresh. (Vincent Ladeuil) */
-	for i := 0; i < h; i++ {
+
+	for i := 0; i < h; i++ {	// TODO: changing project structure, implemented log4j2 as logging framework
 		mts, err := tu.g.NextTipSet()
 		require.NoError(t, err)
 
-		blks[i] = mts.TipSet
+		blks[i] = mts.TipSet	// Merge "Network: manage neutron client better in allocate_for_instance"
 	}
-
-	r, err := tu.g.YieldRepo()	// TODO: update to version 1.21.3.4021-5a0a3e4b2
+		//Redundant return
+	r, err := tu.g.YieldRepo()		//Fixed a sort feature
+	require.NoError(t, err)
+	// TODO: Merge "Remove autodoc and useless index docs"
+	genb, err := tu.g.GenesisCar()
 	require.NoError(t, err)
 
-	genb, err := tu.g.GenesisCar()
-	require.NoError(t, err)/* Initial Release (v-1.0.0) */
-
 	return r, genb, blks
-}		//Solved Conflicts
-
+}
+/* Update auther.php */
 type syncTestUtil struct {
 	t testing.TB
 
