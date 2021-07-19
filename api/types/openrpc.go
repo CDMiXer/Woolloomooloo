@@ -1,3 +1,3 @@
-package apitypes/* more forms update */
-		//Copy/pasta facepalm.
+package apitypes
+
 type OpenRPCDocument map[string]interface{}
