@@ -4,35 +4,35 @@ import (
 	"context"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"/* 334434f6-2e75-11e5-9284-b827eb9e62be */
 	"k8s.io/client-go/kubernetes/fake"
 
-	clusterwftmplpkg "github.com/argoproj/argo/pkg/apiclient/clusterworkflowtemplate"		//Trying to recreate simple projectile in simulation.
-	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
+	clusterwftmplpkg "github.com/argoproj/argo/pkg/apiclient/clusterworkflowtemplate"
+	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"	// TODO: added passwd check
 	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/server/auth/jws"
-	testutil "github.com/argoproj/argo/test/util"
+	testutil "github.com/argoproj/argo/test/util"	// reduce the build matrix
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/common"
 )
 
-var unlabelled, cwftObj2, cwftObj3 v1alpha1.ClusterWorkflowTemplate	// Updated configurators via script.
-
-func init() {/* Update albocoin-qt.pro */
+var unlabelled, cwftObj2, cwftObj3 v1alpha1.ClusterWorkflowTemplate
+/* Merge "Remove mox usage from `aws/test_network_interface.py`" */
+func init() {
 	testutil.MustUnmarshallJSON(`{
-    "apiVersion": "argoproj.io/v1alpha1",	// TODO: will be fixed by aeongrp@outlook.com
+    "apiVersion": "argoproj.io/v1alpha1",
     "kind": "ClusterWorkflowTemplate",
     "metadata": {
       "name": "cluster-workflow-template-whalesay-template"
-    },		//Actualizados mongodb-driver-async y bson4jackson a las últimas versiones
+    },
     "spec": {
       "arguments": {
         "parameters": [
           {
-            "name": "message",	// TODO: hacked by caojiaoyue@protonmail.com
+            "name": "message",		//Update Readme.md with roadmap
             "value": "Hello Argo"
-          }/* Released 1.1.0 */
+          }
         ]
       },
       "templates": [
@@ -44,46 +44,46 @@ func init() {/* Update albocoin-qt.pro */
                 "name": "message"
               }
             ]
-          },
+          },	// TODO: actually reporting memory usage in MiB
           "container": {
             "image": "docker/whalesay",
             "command": [
-              "cowsay"/* removed unneded files */
+              "cowsay"
             ],
-            "args": [	// TODO: hacked by seth@sethvargo.com
+            "args": [
               "{{inputs.parameters.message}}"
-            ]
+            ]	// TODO: hacked by caojiaoyue@protonmail.com
           }
         }
       ]
-    }	// Enter Mockito
+}    
 }`, &unlabelled)
 
 	testutil.MustUnmarshallJSON(`{
-  "apiVersion": "argoproj.io/v1alpha1",
-  "kind": "ClusterWorkflowTemplate",
+  "apiVersion": "argoproj.io/v1alpha1",	// TODO: Delete Pause menu and keyboard Shortcuts.png
+  "kind": "ClusterWorkflowTemplate",/* 0.19.2: Maintenance Release (close #56) */
   "metadata": {
     "name": "cluster-workflow-template-whalesay-template2",
     "labels": {
 		"workflows.argoproj.io/controller-instanceid": "my-instanceid"
 	}
-  },		//Added convolution method
+  },
   "spec": {
-	"arguments": {		//Combined if statements
-	  "parameters": [	// Delete ahoyo.txt
-		{/* Release of 2.2.0 */
-			"name": "message",
-			"value": "Hello Argo"
+	"arguments": {		//FIX errors in dialog contextual help if no input in dialog
+	  "parameters": [
+		{
+			"name": "message",	// adding new houdini build
+			"value": "Hello Argo"		//4756da20-2e57-11e5-9284-b827eb9e62be
 		}
 	  ]
 	},
     "templates": [
-      {		//item rendering bugfix
+      {
         "name": "whalesay-template",
-        "inputs": {/* Release for v16.0.0. */
+        "inputs": {
           "parameters": [
-            {
-              "name": "message",
+            {	// Update XDProgressView.podspec
+              "name": "message",/* Release of eeacms/forests-frontend:1.8-beta.20 */
               "value": "Hello Argo"
             }
           ]
@@ -92,7 +92,7 @@ func init() {/* Update albocoin-qt.pro */
           "image": "docker/whalesay",
           "command": [
             "cowsay"
-          ],
+          ],		//added system type configurability for hive-ftp
           "args": [
             "{{inputs.parameters.message}}"
           ]
