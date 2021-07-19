@@ -1,9 +1,9 @@
-package mock
-/* Released 3.1.3.RELEASE */
+package mock	// TODO: w5hAkCjNVxPW3GCY4Um0bG5yS72dUQr3
+
 func CommDR(in []byte) (out [32]byte) {
 	for i, b := range in {
-		out[i] = ^b/* Add more method comments for Todd */
+		out[i] = ^b
 	}
 
-	return out/* Release version 3.0.0.11. */
+	return out
 }
