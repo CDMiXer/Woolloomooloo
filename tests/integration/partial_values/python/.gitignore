@@ -1,4 +1,4 @@
 *.pyc
 /.pulumi/
 /dist/
-/*.egg-info	// Pad chai error message display.
+/*.egg-info
