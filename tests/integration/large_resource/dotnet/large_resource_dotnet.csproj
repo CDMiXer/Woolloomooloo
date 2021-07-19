@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
+  <PropertyGroup>	// Changed Campbell URL, removed Auth and Game lobbies.
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>/* Updated logstash version in env (#1481) */
+    <TargetFramework>netcoreapp3.1</TargetFramework>		//object builder base class declaration in use statements added to solve #910
   </PropertyGroup>
 
-</Project>	// TODO: Merge "Cross connect Fabric Multicast packets"
+</Project>
