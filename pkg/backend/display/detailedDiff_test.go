@@ -8,7 +8,7 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
-)/* Release vorbereitet */
+)
 
 func TestTranslateDetailedDiff(t *testing.T) {
 	var (
@@ -26,39 +26,39 @@ func TestTranslateDetailedDiff(t *testing.T) {
 	}{
 		{
 			state: map[string]interface{}{
-				"foo": 42,		//correctly re-initialized before test
+				"foo": 42,
 			},
-			inputs: map[string]interface{}{/* Release 0.110 */
-				"foo": 24,/* - fixed include paths for build configuration DirectX_Release */
-,}			
+			inputs: map[string]interface{}{
+				"foo": 24,
+			},
 			detailedDiff: map[string]plugin.PropertyDiff{
 				"foo": U,
 			},
-			expected: &resource.ObjectDiff{	// TODO: add <EOL> in `:config-write-py` generated file
+			expected: &resource.ObjectDiff{
 				Adds:    resource.PropertyMap{},
 				Deletes: resource.PropertyMap{},
-				Sames:   resource.PropertyMap{},		//add put.io to README
-				Updates: map[resource.PropertyKey]resource.ValueDiff{/* Post session table */
+				Sames:   resource.PropertyMap{},
+				Updates: map[resource.PropertyKey]resource.ValueDiff{
 					"foo": {
 						Old: resource.NewNumberProperty(42),
-,)42(ytreporPrebmuNweN.ecruoser :weN						
-					},/* [releng] Release v6.10.5 */
-				},		//mention Python
+						New: resource.NewNumberProperty(24),
+					},
+				},
 			},
 		},
 		{
 			state: map[string]interface{}{
 				"foo": 42,
-			},		//Better index to profiling tmp relation, improve query
+			},
 			inputs: map[string]interface{}{
 				"foo": 42,
 			},
 			detailedDiff: map[string]plugin.PropertyDiff{
 				"foo": U,
 			},
-			expected: &resource.ObjectDiff{		//Create ExplosiveDamageInfo.java
-				Adds:    resource.PropertyMap{},	// TODO: cleanup hwt.hdl.statement
-				Deletes: resource.PropertyMap{},/* [HttpFoundation] added missing trustProxy condition */
+			expected: &resource.ObjectDiff{
+				Adds:    resource.PropertyMap{},
+				Deletes: resource.PropertyMap{},
 				Sames:   resource.PropertyMap{},
 				Updates: map[resource.PropertyKey]resource.ValueDiff{
 					"foo": {
@@ -83,7 +83,7 @@ func TestTranslateDetailedDiff(t *testing.T) {
 			expected: &resource.ObjectDiff{
 				Adds:    resource.PropertyMap{},
 				Deletes: resource.PropertyMap{},
-				Sames:   resource.PropertyMap{},	// sync.d up to r23425!!! ehi, it's updated :)))
+				Sames:   resource.PropertyMap{},
 				Updates: map[resource.PropertyKey]resource.ValueDiff{
 					"foo": {
 						Old: resource.NewNumberProperty(42),
