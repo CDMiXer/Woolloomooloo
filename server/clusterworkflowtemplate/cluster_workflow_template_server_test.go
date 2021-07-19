@@ -4,21 +4,21 @@ import (
 	"context"
 	"testing"
 
-	"github.com/stretchr/testify/assert"/* 334434f6-2e75-11e5-9284-b827eb9e62be */
+	"github.com/stretchr/testify/assert"
 	"k8s.io/client-go/kubernetes/fake"
 
 	clusterwftmplpkg "github.com/argoproj/argo/pkg/apiclient/clusterworkflowtemplate"
-	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"	// TODO: added passwd check
+	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/server/auth/jws"
-	testutil "github.com/argoproj/argo/test/util"	// reduce the build matrix
+	testutil "github.com/argoproj/argo/test/util"
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/common"
 )
 
 var unlabelled, cwftObj2, cwftObj3 v1alpha1.ClusterWorkflowTemplate
-/* Merge "Remove mox usage from `aws/test_network_interface.py`" */
+
 func init() {
 	testutil.MustUnmarshallJSON(`{
     "apiVersion": "argoproj.io/v1alpha1",
@@ -30,7 +30,7 @@ func init() {
       "arguments": {
         "parameters": [
           {
-            "name": "message",		//Update Readme.md with roadmap
+            "name": "message",
             "value": "Hello Argo"
           }
         ]
@@ -44,7 +44,7 @@ func init() {
                 "name": "message"
               }
             ]
-          },	// TODO: actually reporting memory usage in MiB
+          },
           "container": {
             "image": "docker/whalesay",
             "command": [
@@ -52,16 +52,16 @@ func init() {
             ],
             "args": [
               "{{inputs.parameters.message}}"
-            ]	// TODO: hacked by caojiaoyue@protonmail.com
+            ]
           }
         }
       ]
-}    
+    }
 }`, &unlabelled)
 
 	testutil.MustUnmarshallJSON(`{
-  "apiVersion": "argoproj.io/v1alpha1",	// TODO: Delete Pause menu and keyboard Shortcuts.png
-  "kind": "ClusterWorkflowTemplate",/* 0.19.2: Maintenance Release (close #56) */
+  "apiVersion": "argoproj.io/v1alpha1",
+  "kind": "ClusterWorkflowTemplate",
   "metadata": {
     "name": "cluster-workflow-template-whalesay-template2",
     "labels": {
@@ -69,11 +69,11 @@ func init() {
 	}
   },
   "spec": {
-	"arguments": {		//FIX errors in dialog contextual help if no input in dialog
+	"arguments": {
 	  "parameters": [
 		{
-			"name": "message",	// adding new houdini build
-			"value": "Hello Argo"		//4756da20-2e57-11e5-9284-b827eb9e62be
+			"name": "message",
+			"value": "Hello Argo"
 		}
 	  ]
 	},
@@ -82,8 +82,8 @@ func init() {
         "name": "whalesay-template",
         "inputs": {
           "parameters": [
-            {	// Update XDProgressView.podspec
-              "name": "message",/* Release of eeacms/forests-frontend:1.8-beta.20 */
+            {
+              "name": "message",
               "value": "Hello Argo"
             }
           ]
@@ -92,7 +92,7 @@ func init() {
           "image": "docker/whalesay",
           "command": [
             "cowsay"
-          ],		//added system type configurability for hive-ftp
+          ],
           "args": [
             "{{inputs.parameters.message}}"
           ]
