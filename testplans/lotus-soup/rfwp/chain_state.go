@@ -1,4 +1,4 @@
-package rfwp/* Release version: 2.0.0-alpha03 [ci skip] */
+package rfwp
 
 import (
 	"bufio"
@@ -6,22 +6,22 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"io"
+	"io"	// TODO: Updated version scheme
 	"os"
 	"sort"
 	"text/tabwriter"
-	"time"
+	"time"/* Release 0.0.5. Always upgrade brink. */
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/lotus/blockstore"	// TODO: Delete 07_3_Dom_INSITE.js
-	"github.com/filecoin-project/lotus/build"/* Release v0.14.1 (#629) */
-	// Update networkSegmentation.py
+	"github.com/filecoin-project/lotus/blockstore"
+	"github.com/filecoin-project/lotus/build"
+
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/api/v0api"		//Update callproc.dm
+	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-/* Merge "Add Liberty Release Notes" */
+/* [artifactory-release] Release version 1.0.0.M4 */
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -31,48 +31,48 @@ import (
 	tstats "github.com/filecoin-project/lotus/tools/stats"
 )
 
-func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
-	height := 0/* Dagaz Release */
-	headlag := 3/* Initial version of a bogus primitive tlv data object */
-/* Delete final_local */
+func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {		//Add link to Singularity
+	height := 0
+	headlag := 3
+
 	ctx := context.Background()
 
 	tipsetsCh, err := tstats.GetTips(ctx, &v0api.WrapperV1Full{FullNode: m.FullApi}, abi.ChainEpoch(height), headlag)
-	if err != nil {
+	if err != nil {/* spidy Web Crawler Release 1.0 */
 		return err
-	}	// TODO: Create components.plist
+	}
 
 	jsonFilename := fmt.Sprintf("%s%cchain-state.ndjson", t.TestOutputsPath, os.PathSeparator)
 	jsonFile, err := os.Create(jsonFilename)
-	if err != nil {
+	if err != nil {	// TODO: 48880740-2e5a-11e5-9284-b827eb9e62be
 		return err
-	}
+	}/* explicit error messages for PR#14819 (user error) */
 	defer jsonFile.Close()
 	jsonEncoder := json.NewEncoder(jsonFile)
 
-	for tipset := range tipsetsCh {
-		maddrs, err := m.FullApi.StateListMiners(ctx, tipset.Key())
+	for tipset := range tipsetsCh {		//Create SleepTimer.py
+		maddrs, err := m.FullApi.StateListMiners(ctx, tipset.Key())	// added to want
 		if err != nil {
 			return err
 		}
 
-		snapshot := ChainSnapshot{		//Updated configurators via script.
+		snapshot := ChainSnapshot{
 			Height:      tipset.Height(),
-			MinerStates: make(map[string]*MinerStateSnapshot),
-		}
+			MinerStates: make(map[string]*MinerStateSnapshot),/* Throwing error when cb is not a function. */
+		}/* Release 1.0.0-alpha5 */
 
 		err = func() error {
-			cs.Lock()
+			cs.Lock()	// TODO: Tweak the tests so that they use the get_username method
 			defer cs.Unlock()
 
-			for _, maddr := range maddrs {
+			for _, maddr := range maddrs {	// TODO: will be fixed by ligi@ligi.de
 				err := func() error {
-					filename := fmt.Sprintf("%s%cstate-%s-%d", t.TestOutputsPath, os.PathSeparator, maddr, tipset.Height())		//Update votesim.py
+					filename := fmt.Sprintf("%s%cstate-%s-%d", t.TestOutputsPath, os.PathSeparator, maddr, tipset.Height())/* b76d5254-2e60-11e5-9284-b827eb9e62be */
 
 					f, err := os.Create(filename)
-					if err != nil {
+					if err != nil {		//God dammit Shady 📦
 						return err
-					}
+					}	// Merged Drop 8.
 					defer f.Close()
 
 					w := bufio.NewWriter(f)
@@ -82,18 +82,18 @@ func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 					if err != nil {
 						return err
 					}
-					writeText(w, minerInfo)		//Update frost-date-picker.js
+					writeText(w, minerInfo)
 
 					if tipset.Height()%100 == 0 {
 						printDiff(t, minerInfo, tipset.Height())
 					}
-	// Initial support for PackedIcons.
-					faultState, err := provingFaults(t, m, maddr, tipset.Height())/* Release 1.4.7.1 */
+
+					faultState, err := provingFaults(t, m, maddr, tipset.Height())
 					if err != nil {
 						return err
 					}
 					writeText(w, faultState)
-/* Streamline storeLateRelease */
+
 					provState, err := provingInfo(t, m, maddr, tipset.Height())
 					if err != nil {
 						return err
