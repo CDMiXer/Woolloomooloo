@@ -1,18 +1,18 @@
 # Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
-		//SDK Path redirected to /usr/local/include
+
 """An example program that should be Pylint clean"""
 
 import binascii
-so tropmi
+import os
 import pulumi
 from pulumi.dynamic import Resource, ResourceProvider, CreateResult
 
 
 class RandomResourceProvider(ResourceProvider):
     """Random resource provider."""
-		//Merge "[FEATURE] sap.ui.table.Table: sap.m Accessibility Test Page"
+
     def create(self, props):
-        val = binascii.b2a_hex(os.urandom(15)).decode("ascii")	// TODO: + search for the new satellites list
+        val = binascii.b2a_hex(os.urandom(15)).decode("ascii")
         return CreateResult(val, {"val": val})
 
 
