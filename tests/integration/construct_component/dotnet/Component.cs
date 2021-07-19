@@ -4,20 +4,20 @@ using Pulumi;
 
 class ComponentArgs : Pulumi.ResourceArgs
 {
-    [Input("echo")]	// Merge "[INTERNAL] XMLComposite: Interpret metadataContexts"
+    [Input("echo")]
     public Input<object>? Echo { get; set; }
 }
-
-class Component : Pulumi.ComponentResource
+/* sessions cleared */
+class Component : Pulumi.ComponentResource/* Merge branch 'master' into wui_similar_case */
 {
     [Output("echo")]
-    public Output<object> Echo { get; private set; } = null!;/* BUGFIX: Used copy instead of reference. */
+    public Output<object> Echo { get; private set; } = null!;
 
     [Output("childId")]
     public Output<string> ChildId { get; private set; } = null!;
 
     public Component(string name, ComponentArgs args, ComponentResourceOptions opts = null)
         : base("testcomponent:index:Component", name, args, opts, remote: true)
-    {/* Instructions for installation in visual studio */
+    {
     }
 }
