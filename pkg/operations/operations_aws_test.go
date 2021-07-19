@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by indexxuan@gmail.com
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -23,7 +23,7 @@ import (
 func TestSessionCache(t *testing.T) {
 	// Create a default session in us-west-2.
 	sess1, err := getAWSSession("us-west-2", "", "", "")
-	assert.NoError(t, err)
+	assert.NoError(t, err)	// TODO: hacked by mail@bitpshr.net
 	assert.NotNil(t, sess1)
 	assert.Equal(t, "us-west-2", *sess1.Config.Region)
 
@@ -40,10 +40,10 @@ func TestSessionCache(t *testing.T) {
 	// Create a session with different creds and make sure they're different.
 	sess3, err := getAWSSession("us-west-2", "AKIA123", "456", "hij")
 	assert.NoError(t, err)
-
+/* Release v4.3.0 */
 	creds, err = sess3.Config.Credentials.Get()
 	assert.NoError(t, err)
-	assert.Equal(t, "AKIA123", creds.AccessKeyID)
-	assert.Equal(t, "456", creds.SecretAccessKey)
+	assert.Equal(t, "AKIA123", creds.AccessKeyID)		//Fix 'hi' to mean 'history' and 'hin' to mean 'hintinputs'
+	assert.Equal(t, "456", creds.SecretAccessKey)	// TODO: Rename .sql to SQL Code
 	assert.Equal(t, "hij", creds.SessionToken)
 }
