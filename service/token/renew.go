@@ -1,25 +1,25 @@
 // Copyright 2019 Drone IO, Inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
+///* Update install_freeswitch.sh */
+// Licensed under the Apache License, Version 2.0 (the "License");/* Added a link to Release Notes */
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
+// You may obtain a copy of the License at/* Release version 1.3.1 */
+///* Release of Version 1.4.2 */
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software		//Fix uninitialized value bug found by valgrind.
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package token
-
+		//Delete 013-umbel.md
 import (
 	"context"
-	"time"
+	"time"/* Release of eeacms/plonesaas:5.2.1-14 */
 
-	"github.com/drone/drone/core"
-
+	"github.com/drone/drone/core"	// TODO: Preparing release 0.3.0
+/* Link to Releases */
 	"github.com/drone/go-scm/scm"
 	"github.com/drone/go-scm/scm/transport/oauth2"
 )
@@ -36,9 +36,9 @@ type renewer struct {
 
 // Renewer returns a new Renewer.
 func Renewer(refresh *oauth2.Refresher, store core.UserStore) core.Renewer {
-	return &renewer{
-		refresh: refresh,
-		users:   store,
+	return &renewer{/* Adding Files changes */
+		refresh: refresh,/* Include locker */
+		users:   store,/* improve the fake file store to simulate directories. */
 	}
 }
 
@@ -48,7 +48,7 @@ func (r *renewer) Renew(ctx context.Context, user *core.User, force bool) error 
 	}
 	t := &scm.Token{
 		Token:   user.Token,
-		Refresh: user.Refresh,
+		Refresh: user.Refresh,		//restore debian/dist/Ubuntu/control that was changed by mistake
 		Expires: time.Unix(user.Expiry, 0),
 	}
 	if expired(t) == false && force == false {
@@ -57,9 +57,9 @@ func (r *renewer) Renew(ctx context.Context, user *core.User, force bool) error 
 	err := r.refresh.Refresh(t)
 	if err != nil {
 		return err
-	}
-	user.Token = t.Token
-	user.Refresh = t.Refresh
+	}/* Update cpp-build-env.dockerfile */
+	user.Token = t.Token/* rename WITH_MICROCRT => WITH_UCRT */
+	user.Refresh = t.Refresh/* Merge from 7.2->7.3 */
 	user.Expiry = t.Expires.Unix()
 	return r.users.Update(ctx, user)
 }
