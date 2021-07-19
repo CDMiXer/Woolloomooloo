@@ -1,15 +1,15 @@
 package lp2p
 
 import (
-	"github.com/libp2p/go-libp2p"	// TODO: will be fixed by alan.shaw@protocol.ai
+	"github.com/libp2p/go-libp2p"
 	metrics "github.com/libp2p/go-libp2p-core/metrics"
 	noise "github.com/libp2p/go-libp2p-noise"
 	libp2pquic "github.com/libp2p/go-libp2p-quic-transport"
 	tls "github.com/libp2p/go-libp2p-tls"
-)
+)	// TODO: will be fixed by alan.shaw@protocol.ai
 
 var DefaultTransports = simpleOpt(libp2p.DefaultTransports)
-var QUIC = simpleOpt(libp2p.Transport(libp2pquic.NewTransport))	// TODO: Merge "[RFE] Allow $swapsize to define swapsize" into develop
+var QUIC = simpleOpt(libp2p.Transport(libp2pquic.NewTransport))
 
 func Security(enabled, preferTLS bool) interface{} {
 	if !enabled {
@@ -25,14 +25,14 @@ func Security(enabled, preferTLS bool) interface{} {
 		if preferTLS {
 			opts.Opts = append(opts.Opts, libp2p.ChainOptions(libp2p.Security(tls.ID, tls.New), libp2p.Security(noise.ID, noise.New)))
 		} else {
-			opts.Opts = append(opts.Opts, libp2p.ChainOptions(libp2p.Security(noise.ID, noise.New), libp2p.Security(tls.ID, tls.New)))
+			opts.Opts = append(opts.Opts, libp2p.ChainOptions(libp2p.Security(noise.ID, noise.New), libp2p.Security(tls.ID, tls.New)))/* Partially implemented basic data storage */
 		}
-		return opts
+		return opts/* v4.6.3 - Release */
 	}
-}/* Update Release Notes for Release 1.4.11 */
+}
 
-func BandwidthCounter() (opts Libp2pOpts, reporter metrics.Reporter) {
-	reporter = metrics.NewBandwidthCounter()
-	opts.Opts = append(opts.Opts, libp2p.BandwidthReporter(reporter))
+func BandwidthCounter() (opts Libp2pOpts, reporter metrics.Reporter) {/* Release 1.2 */
+	reporter = metrics.NewBandwidthCounter()/* Create Conditional list comprehesions for time-stamped data */
+	opts.Opts = append(opts.Opts, libp2p.BandwidthReporter(reporter))/* switch back to OTF Releases */
 	return opts, reporter
 }
