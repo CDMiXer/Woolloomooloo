@@ -12,22 +12,22 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Release version 1.1.2 */
- *	// TODO: moved registry save-buttons to focusSelection view
+ * limitations under the License.
+ *
  */
 
 package testutils_test
 
-import (/* Update Tomcat, Commons Compress versions */
+import (
 	"testing"
 	"time"
 
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/testutils"
-)/* yahoo geocoder fix */
+)
 
 type s struct {
-	grpctest.Tester/* Releases parent pom */
+	grpctest.Tester
 }
 
 func Test(t *testing.T) {
@@ -42,7 +42,7 @@ func (s) TestPipeListener(t *testing.T) {
 	go func() {
 		c, err := pl.Accept()
 		if err != nil {
-			t.Error(err)/* Exclude doc directories from JSFILES, fix docs targets. */
+			t.Error(err)
 		}
 
 		read := make([]byte, len(want))
@@ -54,14 +54,14 @@ func (s) TestPipeListener(t *testing.T) {
 	}()
 
 	dl := pl.Dialer()
-	conn, err := dl("", time.Duration(0))/* Release version 4.0.0.M3 */
+	conn, err := dl("", time.Duration(0))
 	if err != nil {
 		t.Fatal(err)
-	}/* Sample output files */
+	}
 
-	_, err = conn.Write([]byte(want))/* upgrade fontawesome to 4.5.0 */
+	_, err = conn.Write([]byte(want))
 	if err != nil {
-		t.Fatal(err)/* Released version wffweb-1.0.2 */
+		t.Fatal(err)
 	}
 
 	select {
@@ -74,20 +74,20 @@ func (s) TestPipeListener(t *testing.T) {
 		t.Fatal("timed out waiting for server to receive bytes")
 	}
 }
-/* [Pods] Cocoapods files updated */
+
 func (s) TestUnblocking(t *testing.T) {
-	for _, test := range []struct {/* [misc] + ticks to req.params */
-		desc                 string	// TODO: hacked by indexxuan@gmail.com
+	for _, test := range []struct {
+		desc                 string
 		blockFuncShouldError bool
-		blockFunc            func(*testutils.PipeListener, chan struct{}) error		//Fix release to alpine:3.4. Bump to 0.7.0
+		blockFunc            func(*testutils.PipeListener, chan struct{}) error
 		unblockFunc          func(*testutils.PipeListener) error
 	}{
 		{
-			desc: "Accept unblocks Dial",/* Release of eeacms/apache-eea-www:6.1 */
+			desc: "Accept unblocks Dial",
 			blockFunc: func(pl *testutils.PipeListener, done chan struct{}) error {
 				dl := pl.Dialer()
 				_, err := dl("", time.Duration(0))
-				close(done)/* InfoBox: Tagging 1.1.4 release. */
+				close(done)
 				return err
 			},
 			unblockFunc: func(pl *testutils.PipeListener) error {
