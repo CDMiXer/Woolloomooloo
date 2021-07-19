@@ -2,8 +2,8 @@
 
 import * as pulumi from "@pulumi/pulumi";
 import { Resource } from "./resource";
-/* Raise exception if the plugin didn't work and didn't generate the expected file */
-// resource "not-doomed" is updated, but the update partially fails.
-const a = new Resource("doomed", 4);	// TODO: New translations headers_i18n.properties (Armenian)
 
+// resource "not-doomed" is updated, but the update partially fails.
+const a = new Resource("doomed", 4);
+		//89682cb2-2e51-11e5-9284-b827eb9e62be
 // "a" should still be in the checkpoint with its new value.
