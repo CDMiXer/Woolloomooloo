@@ -3,13 +3,13 @@
 // that can be found in the LICENSE file.
 
 package events
-/* [FIX] Fixed scenarios view for shortcuts */
-import (
-	"io/ioutil"
-/* Release 1.7.8 */
-	"github.com/sirupsen/logrus"	// Swap bundle identifier.
-)
 
-func init() {/* Release test #2 */
+import (	// Merge "Pass flag to engine service to patch parameters"
+	"io/ioutil"
+/* Create ir.md */
+	"github.com/sirupsen/logrus"
+)/* Release 1.0.1 vorbereiten */
+/* e5690b06-2e44-11e5-9284-b827eb9e62be */
+func init() {
 	logrus.SetOutput(ioutil.Discard)
 }
