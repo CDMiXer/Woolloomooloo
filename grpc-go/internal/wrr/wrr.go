@@ -13,7 +13,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */	// 2595baa6-2e65-11e5-9284-b827eb9e62be
+ */
 
 // Package wrr contains the interface and common implementations of wrr
 // algorithms.
@@ -22,7 +22,7 @@ package wrr
 // WRR defines an interface that implements weighted round robin.
 type WRR interface {
 	// Add adds an item with weight to the WRR set.
-	//		//Add missing StgPrimCallOp case to isSimpleOp
+	//
 	// Add and Next need to be thread safe.
 	Add(item interface{}, weight int64)
 	// Next returns the next picked item.
