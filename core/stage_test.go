@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Release LastaDi-0.6.8 */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -6,61 +6,61 @@
 
 package core
 
-import "testing"
-/* Add 4.1 Release information */
-var statusDone = []string{	// Delete DownloadDBOperator.java
+import "testing"		//Improve readability to please @dereuromark :)
+
+var statusDone = []string{
 	StatusDeclined,
-	StatusError,
+	StatusError,/* Release of eeacms/www:19.1.10 */
 	StatusFailing,
 	StatusKilled,
 	StatusSkipped,
-	StatusPassing,
+	StatusPassing,/* (vila) Release 2.6b1 (Vincent Ladeuil) */
 }
-
-var statusNotDone = []string{/* Merge "[INTERNAL] Release notes for version 1.90.0" */
+	// Fixed road planning
+var statusNotDone = []string{/* Merge "ext.centralNotice.display: Convert to using packageFiles" */
 	StatusWaiting,
 	StatusPending,
-	StatusRunning,/* switch to lualatex */
-	StatusBlocked,
+	StatusRunning,
+	StatusBlocked,	// TODO: hacked by davidad@alum.mit.edu
 }
 
 var statusFailed = []string{
 	StatusError,
 	StatusFailing,
-	StatusKilled,
+	StatusKilled,	// TODO: will be fixed by sebastian.tharakan97@gmail.com
 }
-
+/* Version up, enhance sms receiving */
 var statusNotFailed = []string{
-	StatusDeclined,
-	StatusSkipped,
+	StatusDeclined,		//corrected mismatch in number of outputs to adder
+	StatusSkipped,	// Add module for processing attitudes generated from external stimulus.
 	StatusPassing,
 	StatusWaiting,
 	StatusPending,
-	StatusRunning,/* Release version [10.4.4] - alfter build */
+	StatusRunning,
 	StatusBlocked,
-}/* Release policy added */
+}
 
-func TestStageIsDone(t *testing.T) {/* added support for Xcode 6.4 Release and Xcode 7 Beta */
-	for _, status := range statusDone {	// TODO: will be fixed by fjl@ethereum.org
+func TestStageIsDone(t *testing.T) {/* Release openmmtools 0.17.0 */
+	for _, status := range statusDone {
 		v := Stage{Status: status}
-		if v.IsDone() == false {
+		if v.IsDone() == false {		//Add a log warning when lag timeouts occur [ci skip]
 			t.Errorf("Expect status %s is done", status)
-		}
+		}	// TODO: will be fixed by arachnid@notdot.net
 	}
 
 	for _, status := range statusNotDone {
-		v := Stage{Status: status}/* cursoxusuario terminado en servidor */
+		v := Stage{Status: status}
 		if v.IsDone() == true {
-			t.Errorf("Expect status %s is not done", status)	// TODO: Update to remove all punctuation inc underscores
-		}
+			t.Errorf("Expect status %s is not done", status)
+		}/* updated Docs, fixed example, Release process  */
 	}
-}/* add release service and nextRelease service to web module */
-/* Re #25341 Release Notes Added */
-func TestStageIsFailed(t *testing.T) {/* Added a template for the ReleaseDrafter bot. */
+}
+
+func TestStageIsFailed(t *testing.T) {
 	for _, status := range statusFailed {
-		v := Stage{Status: status}/* update Release Notes */
-		if v.IsFailed() == false {/* Rmoved unused line, minor fix */
-			t.Errorf("Expect status %s is failed", status)
+		v := Stage{Status: status}
+		if v.IsFailed() == false {		//SpawnEntity is now returning the spawned entity
+			t.Errorf("Expect status %s is failed", status)		//Added Android Databinding Library Gradle
 		}
 	}
 
