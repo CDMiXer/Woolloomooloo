@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>	// TODO: Add a note about date strings to config.
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
+/* Update and rename README.markdown to readme.md */
   <ItemGroup>
   </ItemGroup>
-
-  <ItemGroup>
+/* Run without spring context. */
+  <ItemGroup>/* Merge "[Release notes] Small changes in mitaka release notes" */
     <PackageReference Include="Pulumi.Random" Version="2.*" />
   </ItemGroup>
 
