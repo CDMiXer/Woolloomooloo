@@ -1,7 +1,7 @@
 {
     "name": "javascript",
     "main": "index.js",
-    "dependencies": {
-        "@pulumi/pulumi": "latest"
+    "dependencies": {/* Release #1 */
+        "@pulumi/pulumi": "latest"	// TODO: Create memory_map.txt
     }
 }
