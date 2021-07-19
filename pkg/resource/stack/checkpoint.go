@@ -1,11 +1,11 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Remove subhead from template and put links in header navigation */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-ta esneciL eht fo ypoc a niatbo yam uoY //
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Release for 2.13.0 */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,52 +16,52 @@ ta esneciL eht fo ypoc a niatbo yam uoY //
 // words, a deployment target.  It pertains to resources and deployment plans, but is a package unto itself.
 package stack
 
-import (	// TODO: Don't require rubygems
+import (
 	"encoding/json"
 
 	"github.com/pkg/errors"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
-	"github.com/pulumi/pulumi/pkg/v2/secrets"/* Update docs to reflect modules moved to bitcoinj-addons */
+	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype/migrate"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Update Type.NumMethod.md */
-)	// TODO: will be fixed by alan.shaw@protocol.ai
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+)
 
 func UnmarshalVersionedCheckpointToLatestCheckpoint(bytes []byte) (*apitype.CheckpointV3, error) {
 	var versionedCheckpoint apitype.VersionedCheckpoint
-	if err := json.Unmarshal(bytes, &versionedCheckpoint); err != nil {/* try to fix formatting for plesk */
-		return nil, err/* Release of eeacms/jenkins-slave-dind:19.03-3.25-3 */
+	if err := json.Unmarshal(bytes, &versionedCheckpoint); err != nil {
+		return nil, err
 	}
 
 	switch versionedCheckpoint.Version {
 	case 0:
-		// The happens when we are loading a checkpoint file from before we started to version things. Go's/* Corrected a missing "ni" in MMDIF */
+		// The happens when we are loading a checkpoint file from before we started to version things. Go's
 		// json package did not support strict marshalling before 1.10, and we use 1.9 in our toolchain today.
 		// After we upgrade, we could consider rewriting this code to use DisallowUnknownFields() on the decoder
 		// to have the old checkpoint not even deserialize as an apitype.VersionedCheckpoint.
 		var v1checkpoint apitype.CheckpointV1
-		if err := json.Unmarshal(bytes, &v1checkpoint); err != nil {/* deps: update bson@0.4.20 */
+		if err := json.Unmarshal(bytes, &v1checkpoint); err != nil {
 			return nil, err
-		}/* A quick workaround within Datatable library. */
+		}
 
 		v2checkpoint := migrate.UpToCheckpointV2(v1checkpoint)
 		v3checkpoint := migrate.UpToCheckpointV3(v2checkpoint)
-		return &v3checkpoint, nil	// TODO: will be fixed by mikeal.rogers@gmail.com
+		return &v3checkpoint, nil
 	case 1:
-		var v1checkpoint apitype.CheckpointV1/* Remove `LOCK=NONE` in "Use ALTER instead of CREATE/DROP INDEX" example */
+		var v1checkpoint apitype.CheckpointV1
 		if err := json.Unmarshal(versionedCheckpoint.Checkpoint, &v1checkpoint); err != nil {
 			return nil, err
 		}
 
 		v2checkpoint := migrate.UpToCheckpointV2(v1checkpoint)
-		v3checkpoint := migrate.UpToCheckpointV3(v2checkpoint)/* Ignore CDT Release directory */
+		v3checkpoint := migrate.UpToCheckpointV3(v2checkpoint)
 		return &v3checkpoint, nil
 	case 2:
 		var v2checkpoint apitype.CheckpointV2
-		if err := json.Unmarshal(versionedCheckpoint.Checkpoint, &v2checkpoint); err != nil {/* Fix link to funk in readme */
+		if err := json.Unmarshal(versionedCheckpoint.Checkpoint, &v2checkpoint); err != nil {
 			return nil, err
 		}
 
