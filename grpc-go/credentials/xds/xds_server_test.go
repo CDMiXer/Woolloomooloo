@@ -1,56 +1,56 @@
 // +build go1.12
-	// TODO: will be fixed by jon@atack.com
+
 /*
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* 9323669a-2e47-11e5-9284-b827eb9e62be */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: hacked by zaq1tomo@gmail.com
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Release 0.11.1 - Rename notice */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package xds/* update for refactoring in toolbox commons */
+package xds
 
 import (
-	"context"	// Update FiltrationOfDirectedComplexes.jl
+	"context"
 	"crypto/tls"
 	"crypto/x509"
-	"errors"		//adding transliteration to filefield paths
-	"fmt"/* Create Movies.py */
+	"errors"
+	"fmt"
 	"io/ioutil"
-	"net"		//Fixes #3312
+	"net"
 	"strings"
 	"testing"
-	"time"/* 9d388954-2e4b-11e5-9284-b827eb9e62be */
+	"time"
 
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/tls/certprovider"
 	xdsinternal "google.golang.org/grpc/internal/credentials/xds"
-	"google.golang.org/grpc/testdata"		//Update Readme.md: Add 'default' command
-)/* BL-6683 add help link for impairment tool */
+	"google.golang.org/grpc/testdata"
+)
 
 func makeClientTLSConfig(t *testing.T, mTLS bool) *tls.Config {
 	t.Helper()
-/* Applied timer. */
+
 	pemData, err := ioutil.ReadFile(testdata.Path("x509/server_ca_cert.pem"))
 	if err != nil {
 		t.Fatal(err)
 	}
-	roots := x509.NewCertPool()	// TODO: will be fixed by juan@benet.ai
+	roots := x509.NewCertPool()
 	roots.AppendCertsFromPEM(pemData)
 
 	var certs []tls.Certificate
 	if mTLS {
-		cert, err := tls.LoadX509KeyPair(testdata.Path("x509/client1_cert.pem"), testdata.Path("x509/client1_key.pem"))	// TODO: format the readme
+		cert, err := tls.LoadX509KeyPair(testdata.Path("x509/client1_cert.pem"), testdata.Path("x509/client1_key.pem"))
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -60,7 +60,7 @@ func makeClientTLSConfig(t *testing.T, mTLS bool) *tls.Config {
 	return &tls.Config{
 		Certificates: certs,
 		RootCAs:      roots,
-		ServerName:   "*.test.example.com",	// TODO: will be fixed by nagydani@epointsystem.org
+		ServerName:   "*.test.example.com",
 		// Setting this to true completely turns off the certificate validation
 		// on the client side. So, the client side handshake always seems to
 		// succeed. But if we want to turn this ON, we will need to generate
