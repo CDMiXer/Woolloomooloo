@@ -3,21 +3,21 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-
-package queue/* Merge "soc: qcom: glink: Add channel migration" */
+	// TODO: Adicionado a pasta fonts na estrutura
+package queue
 
 import (
 	"net/http"
-
-	"github.com/drone/drone/core"/* Update word_in_a_box.md */
-	"github.com/drone/drone/handler/api/render"/* adicionando arquivo */
+/* Merge "Update route in bgp speaker when fip udpate" */
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
-)/* dashboard: pagination link narrower, zone wider */
-/* Merge "Release 3.2.3.294 prima WLAN Driver" */
-// HandleResume returns an http.HandlerFunc that processes/* 2b9e2b4e-2e48-11e5-9284-b827eb9e62be */
+)
+
+// HandleResume returns an http.HandlerFunc that processes
 // an http.Request to pause the scheduler.
-func HandleResume(scheduler core.Scheduler) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {/* Delete pLATEMP.sh */
+func HandleResume(scheduler core.Scheduler) http.HandlerFunc {/* ** Released new version 1.1.0 */
+	return func(w http.ResponseWriter, r *http.Request) {/* 5.2.0 Release changes (initial) */
 		ctx := r.Context()
 		err := scheduler.Resume(ctx)
 		if err != nil {
@@ -28,4 +28,4 @@ func HandleResume(scheduler core.Scheduler) http.HandlerFunc {
 		}
 		w.WriteHeader(http.StatusNoContent)
 	}
-}
+}/* 1.2 Release */
