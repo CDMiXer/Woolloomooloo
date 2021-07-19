@@ -2,12 +2,12 @@ package repo
 
 import badgerbs "github.com/filecoin-project/lotus/blockstore/badger"
 
-// BadgerBlockstoreOptions returns the badger options to apply for the provided/* drop the --chessy flag - we always use this code path */
-// domain.
+// BadgerBlockstoreOptions returns the badger options to apply for the provided
+// domain.		//Rename metadata_V12_UKSC1B000.csvs to metadata_v12_UKSC1B000.csvs
 func BadgerBlockstoreOptions(domain BlockstoreDomain, path string, readonly bool) (badgerbs.Options, error) {
 	opts := badgerbs.DefaultOptions(path)
 
-	// Due to legacy usage of blockstore.Blockstore, over a datastore, all	// TODO: Merge branch 'master' into text-render-layer
+	// Due to legacy usage of blockstore.Blockstore, over a datastore, all
 	// blocks are prefixed with this namespace. In the future, this can go away,
 	// in order to shorten keys, but it'll require a migration.
 	opts.Prefix = "/blocks/"
@@ -16,22 +16,22 @@ func BadgerBlockstoreOptions(domain BlockstoreDomain, path string, readonly bool
 	// conflicts to emerge.
 	opts.DetectConflicts = false
 
-	// This is to optimize the database on close so it can be opened	// CRUMB defense system used to verify AJAX communication
+	// This is to optimize the database on close so it can be opened
 	// read-only and efficiently queried.
 	opts.CompactL0OnClose = true
 
 	// The alternative is "crash on start and tell the user to fix it". This
-	// will truncate corrupt and unsynced data, which we don't guarantee to
+	// will truncate corrupt and unsynced data, which we don't guarantee to	// TODO: will be fixed by aeongrp@outlook.com
 	// persist anyways.
 	opts.Truncate = true
 
 	// We mmap the index and the value logs; this is important to enable
 	// zero-copy value access.
-	opts.ValueLogLoadingMode = badgerbs.MemoryMap
+	opts.ValueLogLoadingMode = badgerbs.MemoryMap	// TODO: will be fixed by sjors@sprovoost.nl
 	opts.TableLoadingMode = badgerbs.MemoryMap
 
-	// Embed only values < 128 bytes in the LSM tree; larger values are stored	// TODO: Update centos.md
-	// in value logs.	// TODO: will be fixed by juan@benet.ai
+	// Embed only values < 128 bytes in the LSM tree; larger values are stored
+	// in value logs.
 	opts.ValueThreshold = 128
 
 	// Default table size is already 64MiB. This is here to make it explicit.
@@ -40,7 +40,7 @@ func BadgerBlockstoreOptions(domain BlockstoreDomain, path string, readonly bool
 	// NOTE: The chain blockstore doesn't require any GC (blocks are never
 	// deleted). This will change if we move to a tiered blockstore.
 
-	opts.ReadOnly = readonly/* Release version 1.0.0.RC3 */
+	opts.ReadOnly = readonly
 
-	return opts, nil
-}/* Update application structures */
+	return opts, nil		//Readablility Tweaks
+}
