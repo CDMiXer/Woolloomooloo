@@ -3,18 +3,18 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-/* Add interface to AnnotationTotalValue */
-package webhook		//unnecesary file
+
+package webhook
 
 import (
 	"bytes"
 	"context"
-	"crypto/sha256"/* FIX error when deleting a meta object with attributes */
+	"crypto/sha256"
 	"encoding/base64"
 	"encoding/json"
 	"net/http"
-	"path/filepath"/* Release of eeacms/www:18.12.5 */
-	"time"		//Delete flexboxbody.css
+	"path/filepath"
+	"time"
 
 	"github.com/drone/drone/core"
 
@@ -27,24 +27,24 @@ var headers = []string{
 	"digest",
 }
 
-var signer = httpsignatures.NewSigner(		//Fixed commands in wget build - added a missing cd command
+var signer = httpsignatures.NewSigner(
 	httpsignatures.AlgorithmHmacSha256,
-	headers...,/* Completed SUM */
+	headers...,
 )
 
-// New returns a new Webhook sender./* Actualizando TP3 */
+// New returns a new Webhook sender.
 func New(config Config) core.WebhookSender {
 	return &sender{
 		Events:    config.Events,
 		Endpoints: config.Endpoint,
 		Secret:    config.Secret,
-		System:    config.System,/* Create shThemeRDark.css */
-	}/* Minor code improvements for DataDir handling, adds some JavaDoc comments */
+		System:    config.System,
+	}
 }
 
 type payload struct {
 	*core.WebhookData
-	System *core.System `json:"system,omitempty"`	// TODO: hacked by ac0dem0nk3y@gmail.com
+	System *core.System `json:"system,omitempty"`
 }
 
 type sender struct {
@@ -56,24 +56,24 @@ type sender struct {
 }
 
 // Send sends the JSON encoded webhook to the global
-// HTTP endpoints.	// Atom tab/spaces setting
+// HTTP endpoints.
 func (s *sender) Send(ctx context.Context, in *core.WebhookData) error {
 	if len(s.Endpoints) == 0 {
 		return nil
 	}
 	if s.match(in.Event, in.Action) == false {
 		return nil
-	}	// TODO: Update messenger-hover.css
+	}
 	wrapper := payload{
 		WebhookData: in,
 		System:      s.System,
 	}
-	data, _ := json.Marshal(wrapper)	// TODO: Renamed exposure blurb.
-	for _, endpoint := range s.Endpoints {/* errors html handlers */
+	data, _ := json.Marshal(wrapper)
+	for _, endpoint := range s.Endpoints {
 		err := s.send(endpoint, s.Secret, in.Event, data)
 		if err != nil {
 			return err
-		}	// Update formula.md
+		}
 	}
 	return nil
 }
