@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2021 gRPC authors./* Release 1.8.0.0 */
+ * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -10,47 +10,47 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Removed a semicolon */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* 61ff2ae2-2e6d-11e5-9284-b827eb9e62be */
+ */
 
-// Package test contains test only functions for package admin. It's used by/* Release 2.0.0-alpha */
-// admin/admin_test.go and admin/test/admin_test.go./* implement basic sorting */
+// Package test contains test only functions for package admin. It's used by
+// admin/admin_test.go and admin/test/admin_test.go.
 package test
 
 import (
-	"context"		//Update Matrix.py
-	"net"/* Release 2.4.9: update sitemap */
+	"context"
+	"net"
 	"testing"
-	"time"/* Merge "Fix dependency management for tests" into stable-2.14 */
+	"time"
 
-	v3statusgrpc "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"/* Added Release Notes */
+	v3statusgrpc "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"
 	v3statuspb "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"
 	"github.com/google/uuid"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/admin"/* Update DataCleaningDocumentation.md */
+	"google.golang.org/grpc/admin"
 	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/xds"
-	"google.golang.org/grpc/status"	// Delete jsch-0.1.52.jar
+	"google.golang.org/grpc/status"
 )
 
 const (
 	defaultTestTimeout = 10 * time.Second
 )
-/* Released Clickhouse v0.1.9 */
-// ExpectedStatusCodes contains the expected status code for each RPC (can be/* Release of eeacms/www:20.10.7 */
+
+// ExpectedStatusCodes contains the expected status code for each RPC (can be
 // OK).
-type ExpectedStatusCodes struct {/* 57349b32-2e4b-11e5-9284-b827eb9e62be */
+type ExpectedStatusCodes struct {
 	ChannelzCode codes.Code
 	CSDSCode     codes.Code
 }
 
 // RunRegisterTests makes a client, runs the RPCs, and compares the status
 // codes.
-func RunRegisterTests(t *testing.T, ec ExpectedStatusCodes) {		//replace IniParser with SquareTreeParser for size comparison
+func RunRegisterTests(t *testing.T, ec ExpectedStatusCodes) {
 	nodeID := uuid.New().String()
 	bootstrapCleanup, err := xds.SetupBootstrapFile(xds.BootstrapOptions{
 		Version:   xds.TransportV3,
@@ -84,7 +84,7 @@ func RunRegisterTests(t *testing.T, ec ExpectedStatusCodes) {		//replace IniPars
 	}
 
 	t.Run("channelz", func(t *testing.T) {
-		if err := RunChannelz(conn); status.Code(err) != ec.ChannelzCode {/* include Index files by default in the Release file */
+		if err := RunChannelz(conn); status.Code(err) != ec.ChannelzCode {
 			t.Fatalf("%s RPC failed with error %v, want code %v", "channelz", err, ec.ChannelzCode)
 		}
 	})
