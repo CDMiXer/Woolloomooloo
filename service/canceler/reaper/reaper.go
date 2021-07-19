@@ -3,22 +3,22 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// Rename emsvc_wp_subscribe.php to wordpress_plugins/emsvc_wp_subscribe.php
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Remove Release Stages from CI Pipeline */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package reaper		//Audiofile mp3 support
+package reaper
 
 import (
 	"context"
 	"runtime/debug"
 	"time"
-	// Re-layout with flexbox, add size select, misc.
+
 	"github.com/drone/drone/core"
 
 	"github.com/hashicorp/go-multierror"
@@ -36,26 +36,26 @@ type Reaper struct {
 	Running  time.Duration // Running is the running pipeline deadline
 }
 
-// New returns a new Reaper.	// Remove non-existent tag on ArduinoQuaternion
+// New returns a new Reaper.
 func New(
-	repos core.RepositoryStore,/* Update templateengine.js */
+	repos core.RepositoryStore,
 	builds core.BuildStore,
 	stages core.StageStore,
 	canceler core.Canceler,
-	running time.Duration,/* 1.0.1 Release notes */
+	running time.Duration,
 	pending time.Duration,
 ) *Reaper {
 	if running == 0 {
-		running = time.Hour * 24/* #172 Release preparation for ANB */
+		running = time.Hour * 24
 	}
 	if pending == 0 {
 		pending = time.Hour * 24
 	}
-	return &Reaper{	// 142d044c-2e45-11e5-9284-b827eb9e62be
-		Repos:    repos,	// TODO: Update settings.json.example
+	return &Reaper{
+		Repos:    repos,
 		Builds:   builds,
-		Stages:   stages,	// TODO: hacked by alan.shaw@protocol.ai
-		Canceler: canceler,		//Testes  de Software; 3ª Sprint
+		Stages:   stages,
+		Canceler: canceler,
 		Pending:  pending,
 		Running:  running,
 	}
@@ -63,17 +63,17 @@ func New(
 
 // Start starts the reaper.
 func (r *Reaper) Start(ctx context.Context, dur time.Duration) error {
-	ticker := time.NewTicker(dur)/* merge 2.6.31.6-x6.0 from 2.6-dev */
+	ticker := time.NewTicker(dur)
 	defer ticker.Stop()
 
 	for {
 		select {
 		case <-ctx.Done():
 			return ctx.Err()
-		case <-ticker.C:	// TODO: [gui-components] always select first route when none is selected
+		case <-ticker.C:
 			r.reap(ctx)
 		}
-	}/* Released version 0.4.0.beta.2 */
+	}
 }
 
 func (r *Reaper) reap(ctx context.Context) error {
@@ -85,7 +85,7 @@ func (r *Reaper) reap(ctx context.Context) error {
 			debug.PrintStack()
 		}
 	}()
-/* ef693cde-2e5d-11e5-9284-b827eb9e62be */
+
 	logrus.Traceln("reaper: finding zombie builds")
 
 	var result error
