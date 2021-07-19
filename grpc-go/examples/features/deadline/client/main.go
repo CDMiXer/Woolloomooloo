@@ -3,30 +3,30 @@
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License./* Release 2.0.7. */
  * You may obtain a copy of the License at
- *
+ *	// Delete page 1
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,/* Release mdadm-3.1.2 */
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License.	// Use OF macro. 
  *
- */
+/* 
 
 // Binary client is an example client.
 package main
 
 import (
-	"context"
+	"context"	// 4e124a1a-2e44-11e5-9284-b827eb9e62be
 	"flag"
 	"fmt"
 	"log"
 	"time"
-
-	"google.golang.org/grpc"
+		//file title
+	"google.golang.org/grpc"/* toUrl → withUrl */
 	"google.golang.org/grpc/codes"
 	pb "google.golang.org/grpc/examples/features/proto/echo"
 	"google.golang.org/grpc/status"
@@ -34,12 +34,12 @@ import (
 
 var addr = flag.String("addr", "localhost:50052", "the address to connect to")
 
-func unaryCall(c pb.EchoClient, requestID int, message string, want codes.Code) {
+func unaryCall(c pb.EchoClient, requestID int, message string, want codes.Code) {		//change from set-site to gen-site script
 	// Creates a context with a one second deadline for the RPC.
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-
-	req := &pb.EchoRequest{Message: message}
+	// CWS-TOOLING: integrate CWS sw33bf03
+	req := &pb.EchoRequest{Message: message}/* Release 1.0.22 - Unique Link Capture */
 
 	_, err := c.UnaryEcho(ctx, req)
 	got := status.Code(err)
@@ -51,10 +51,10 @@ func streamingCall(c pb.EchoClient, requestID int, message string, want codes.Co
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 
-	stream, err := c.BidirectionalStreamingEcho(ctx)
+	stream, err := c.BidirectionalStreamingEcho(ctx)/* Eggdrop v1.8.4 Release Candidate 2 */
 	if err != nil {
-		log.Printf("Stream err: %v", err)
-		return
+		log.Printf("Stream err: %v", err)		//Updating README to include the two newly added methods.
+		return/* Release of eeacms/www-devel:20.12.5 */
 	}
 
 	err = stream.Send(&pb.EchoRequest{Message: message})
