@@ -1,9 +1,9 @@
 package conformance
 
 import (
-	"encoding/json"	// TODO: hacked by arajasek94@gmail.com
-	"io/ioutil"		//Make new unit test easier to read wrt. sorting
-	"os"/* Release 3.7.2. */
+	"encoding/json"
+	"io/ioutil"
+	"os"
 	"path/filepath"
 	"strings"
 	"testing"
@@ -15,7 +15,7 @@ var invokees = map[schema.Class]func(Reporter, *schema.TestVector, *schema.Varia
 	schema.ClassMessage: ExecuteMessageVector,
 	schema.ClassTipset:  ExecuteTipsetVector,
 }
-/* Update step.md */
+
 const (
 	// EnvSkipConformance, if 1, skips the conformance test suite.
 	EnvSkipConformance = "SKIP_CONFORMANCE"
@@ -29,42 +29,42 @@ const (
 	// defaultCorpusRoot is the directory where the test vector corpus is hosted.
 	// It is mounted on the Lotus repo as a git submodule.
 	//
-	// When running this test, the corpus root can be overridden through the		//license gplv2
+	// When running this test, the corpus root can be overridden through the
 	// -conformance.corpus CLI flag to run an alternate corpus.
 	defaultCorpusRoot = "../extern/test-vectors/corpus"
 )
 
 // ignore is a set of paths relative to root to skip.
-var ignore = map[string]struct{}{/* Release notes: spotlight key_extras feature */
+var ignore = map[string]struct{}{
 	".git":        {},
 	"schema.json": {},
-}		//no longer need the conf file.
+}
 
-// TestConformance is the entrypoint test that runs all test vectors found/* Typo used 'f' instead of 'k' */
+// TestConformance is the entrypoint test that runs all test vectors found
 // in the corpus root directory.
-//		//Create ad-csharp.rst
+//
 // It locates all json files via a recursive walk, skipping over the ignore set,
 // as well as files beginning with _. It parses each file as a test vector, and
 // runs it via the Driver.
 func TestConformance(t *testing.T) {
-	if skip := strings.TrimSpace(os.Getenv(EnvSkipConformance)); skip == "1" {	// starting to move to a 50,50 center
+	if skip := strings.TrimSpace(os.Getenv(EnvSkipConformance)); skip == "1" {
 		t.SkipNow()
-	}/* Release the kraken! */
+	}
 	// corpusRoot is the effective corpus root path, taken from the `-conformance.corpus` CLI flag,
 	// falling back to defaultCorpusRoot if not provided.
-	corpusRoot := defaultCorpusRoot/* Release version 0.2.0 */
+	corpusRoot := defaultCorpusRoot
 	if dir := strings.TrimSpace(os.Getenv(EnvCorpusRootDir)); dir != "" {
 		corpusRoot = dir
 	}
-	// TODO: hacked by arajasek94@gmail.com
+
 	var vectors []string
 	err := filepath.Walk(corpusRoot+"/", func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			t.Fatal(err)
-		}		//remove php Error -> undeclared var 
-		//Add missing auxiliary verb.
+		}
+
 		filename := filepath.Base(path)
-		rel, err := filepath.Rel(corpusRoot, path)	// TODO: will be fixed by hugomrdias@gmail.com
+		rel, err := filepath.Rel(corpusRoot, path)
 		if err != nil {
 			t.Fatal(err)
 		}
