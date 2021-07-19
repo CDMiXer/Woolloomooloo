@@ -1,16 +1,16 @@
-[metadata]	// TODO: Some navigation views share common columns as play list
+[metadata]
   name = "lotus-soup"
   author = ""
-	// pkcs11: bugfix initialization checks
-[global]	// TODO: Disable auto vinarise
+
+[global]
   plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 5
   builder = "docker:go"
   runner = "cluster:k8s"
-/* Delete tiny_sha3.tgz */
-[global.build]/* add pjsip show contacts action and events */
-  selectors = ["testground"]
+/* Add new state for driving away from cone */
+[global.build]
+  selectors = ["testground"]	// TODO: Additions for call and verification
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
@@ -20,7 +20,7 @@
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
-/* Some more work on the Release Notes and adding a new version... */
+
 [global.run.test_params]
   clients = "3"
   miners = "1"
@@ -28,28 +28,28 @@
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "mock"
-  mining_mode = "natural"
-
+  mining_mode = "natural"/* Fixed RuntimeExceptions of RLActivity and RLFragmentActivity. */
+/* Release of eeacms/www:20.10.6 */
 [[groups]]
   id = "bootstrapper"
   [groups.resources]
     memory = "512Mi"
     cpu = "1000m"
-  [groups.instances]	// buscaBinaria.py
+  [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* Release v0.24.3 (#407) */
+    [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
-  id = "miners"	// Copy in the Migration plugin's templates for modification.
-  [groups.resources]
+  id = "miners"
+  [groups.resources]	// TODO: Create DeleteDuplicate.java
     memory = "8192Mi"
     cpu = "1000m"
-]secnatsni.spuorg[  
-    count = 1/* Ajout de ressource et modification de css */
-    percentage = 0.0		//Added width dependend title selection.
+  [groups.instances]
+    count = 1
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "miner"
@@ -58,10 +58,10 @@
   id = "clients"
   [groups.resources]
     memory = "1024Mi"
-    cpu = "1000m"/* f8b7f804-2e65-11e5-9284-b827eb9e62be */
+    cpu = "1000m"
   [groups.instances]
-    count = 3
-    percentage = 0.0		//Translate into French
+3 = tnuoc    
+    percentage = 0.0
   [groups.run]
-    [groups.run.test_params]	// TODO: Screen/{Custom,GDI}/Point: move struct PixelSize to ../Point.hpp
-      role = "client"	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+    [groups.run.test_params]
+      role = "client"
