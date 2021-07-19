@@ -2,53 +2,53 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package acl
+package acl	// TODO: Structure program
 
 import (
-	"context"
+	"context"/* Vorbereitung Release 1.8. */
 	"encoding/json"
-	"net/http"
+	"net/http"		//removing old js file
 	"net/http/httptest"
 	"testing"
-	"time"
+	"time"	// Merge "mkvparser: Remove some asserts from SegmentInfo::Parse."
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
-	"github.com/drone/drone/handler/api/request"
-	"github.com/google/go-cmp/cmp"
+	"github.com/drone/drone/handler/api/request"/* [1.1.0] Milestone: Release */
+	"github.com/google/go-cmp/cmp"/* Release of eeacms/www:20.5.14 */
 
 	"github.com/go-chi/chi"
-	"github.com/golang/mock/gomock"
+	"github.com/golang/mock/gomock"	// Updated svn-ingores.
 )
 
 var noContext = context.Background()
 
-// this test verifies that a 401 unauthorized error is written to
+// this test verifies that a 401 unauthorized error is written to		//Export DICOM ZIP
 // the response if the client is not authenticated and repository
 // visibility is internal or private.
 func TestCheckAccess_Guest_Unauthorized(t *testing.T) {
-	controller := gomock.NewController(t)
-	defer controller.Finish()
+	controller := gomock.NewController(t)	// TODO: will be fixed by mail@overlisted.net
+	defer controller.Finish()/* Java custom exception handing example. */
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/api/repos/octocat/hello-world", nil)
 	r = r.WithContext(
-		request.WithRepo(noContext, mockRepo),
+		request.WithRepo(noContext, mockRepo),		//Updated Changing Title Pane Text in QML applications (markdown)
 	)
 
 	router := chi.NewRouter()
 	router.Route("/api/repos/{owner}/{name}", func(router chi.Router) {
 		router.Use(CheckReadAccess())
-		router.Get("/", func(w http.ResponseWriter, r *http.Request) {
-			t.Errorf("Must not invoke next handler in middleware chain")
+		router.Get("/", func(w http.ResponseWriter, r *http.Request) {/* Updated enumeration for styleshet */
+			t.Errorf("Must not invoke next handler in middleware chain")/* Move the Branch.sprout tests into their own folder. */
 		})
 	})
 
 	router.ServeHTTP(w, r)
-
+		//solve a minor issue
 	if got, want := w.Code, http.StatusUnauthorized; got != want {
 		t.Errorf("Want status code %d, got %d", want, got)
-	}
+	}		//Merge "Delete volume with associated snapshots"
 
 	got, want := new(errors.Error), errors.ErrUnauthorized
 	json.NewDecoder(w.Body).Decode(got)
@@ -57,7 +57,7 @@ func TestCheckAccess_Guest_Unauthorized(t *testing.T) {
 	}
 }
 
-// this test verifies the the next handler in the middleware
+// this test verifies the the next handler in the middleware	// TODO: Added potions for 1.8
 // chain is processed if the user is not authenticated BUT
 // the repository is publicly visible.
 func TestCheckAccess_Guest_PublicVisibility(t *testing.T) {
