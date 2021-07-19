@@ -9,7 +9,7 @@
     "devDependencies": {
         "typescript": "^2.5.3"
     },
-    "peerDependencies": {
+    "peerDependencies": {		//Class Reader find the first Piece of puzzle while reading from file
         "pulumi": "latest"
     },
     "dependencies": {
