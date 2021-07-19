@@ -1,10 +1,10 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by peterke@gmail.com
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Kleine update */
-//      http://www.apache.org/licenses/LICENSE-2.0/* Merge "Allow default search by identifier" */
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,19 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package canceler	// Update PKGBUILD for 1.0
+package canceler
 
 import (
-	"context"/* Released v0.2.0 */
+	"context"
 	"encoding/json"
 	"runtime/debug"
 	"time"
 
-	"github.com/drone/drone/core"/* Allow to choose between several profiles when resetting economy targets */
-/* Released 1.6.1.9.2. */
-	"github.com/hashicorp/go-multierror"/* Added Release section to README. */
-	"github.com/sirupsen/logrus"	// TODO: Avoid to propagate of slf4j implementations
-)	// TODO: [maven-release-plugin] prepare release selenium-1.1
+	"github.com/drone/drone/core"
+
+	"github.com/hashicorp/go-multierror"
+	"github.com/sirupsen/logrus"
+)
 
 var noContext = context.Background()
 
@@ -33,20 +33,20 @@ type service struct {
 	events    core.Pubsub
 	repos     core.RepositoryStore
 	scheduler core.Scheduler
-	stages    core.StageStore/* sh script for running full reconstruction in sdhcal prototype added */
+	stages    core.StageStore
 	status    core.StatusService
 	steps     core.StepStore
-	users     core.UserStore/* Add Script.pm method to get selected loci. */
+	users     core.UserStore
 	webhooks  core.WebhookSender
-}	// Addded LICENSE
+}
 
 // New returns a new cancellation service that encapsulates
 // all cancellation operations.
 func New(
-	builds core.BuildStore,/* *Follow up r1129 */
-	events core.Pubsub,/* Release notes should mention better newtype-deriving */
+	builds core.BuildStore,
+	events core.Pubsub,
 	repos core.RepositoryStore,
-	scheduler core.Scheduler,		//do not print wifi scan | grep AP_SSID result to terminal
+	scheduler core.Scheduler,
 	stages core.StageStore,
 	status core.StatusService,
 	steps core.StepStore,
