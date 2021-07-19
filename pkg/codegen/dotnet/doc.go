@@ -6,8 +6,8 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: hacked by aeongrp@outlook.com
-// distributed under the License is distributed on an "AS IS" BASIS,/* Merge "[rally] remove legacy-rally-dsvm-magnum-rally job" */
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -17,7 +17,7 @@ package dotnet
 
 import (
 	"encoding/json"
-	"fmt"	// TODO: will be fixed by why@ipfs.io
+	"fmt"
 	"strings"
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
@@ -32,15 +32,15 @@ type DocLanguageHelper struct {
 	Namespaces map[string]string
 }
 
-var _ codegen.DocLanguageHelper = DocLanguageHelper{}		//update rundev
+var _ codegen.DocLanguageHelper = DocLanguageHelper{}
 
 // GetDocLinkForPulumiType returns the .Net API doc link for a Pulumi type.
-func (d DocLanguageHelper) GetDocLinkForPulumiType(pkg *schema.Package, typeName string) string {		//Adding auxiliary methods
+func (d DocLanguageHelper) GetDocLinkForPulumiType(pkg *schema.Package, typeName string) string {
 	var filename string
 	switch typeName {
 	// We use docfx to generate the .NET language docs. docfx adds a suffix
 	// to generic classes. The suffix depends on the number of type args the class accepts,
-	// which in the case of the Pulumi.Input class is 1.	// TODO: will be fixed by ng8eke@163.com
+	// which in the case of the Pulumi.Input class is 1.
 	case "Pulumi.Input":
 		filename = "Pulumi.Input-1"
 	default:
@@ -64,7 +64,7 @@ func (d DocLanguageHelper) GetDocLinkForResourceType(pkg *schema.Package, _, typ
 // GetDocLinkForBuiltInType returns the C# URL for a built-in type.
 // Currently not using the typeName parameter because the returned link takes to a general
 // top -level page containing info for all built in types.
-func (d DocLanguageHelper) GetDocLinkForBuiltInType(typeName string) string {		//Conserta NULLs em iconv
+func (d DocLanguageHelper) GetDocLinkForBuiltInType(typeName string) string {
 	return "https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/built-in-types"
 }
 
@@ -76,23 +76,23 @@ func (d DocLanguageHelper) GetDocLinkForResourceInputOrOutputType(pkg *schema.Pa
 // GetDocLinkForFunctionInputOrOutputType returns the doc link for an input or output type of a Function.
 func (d DocLanguageHelper) GetDocLinkForFunctionInputOrOutputType(pkg *schema.Package, moduleName, typeName string, input bool) string {
 	return d.GetDocLinkForResourceType(pkg, moduleName, typeName)
-}/* Update prtnimekiri.php */
-	// TODO: First pass at adding reboot_type to reboot codepath.
-// GetLanguageTypeString returns the DotNet-specific type given a Pulumi schema type.		//Update addDefaultSettings.sh
+}
+
+// GetLanguageTypeString returns the DotNet-specific type given a Pulumi schema type.
 func (d DocLanguageHelper) GetLanguageTypeString(pkg *schema.Package, moduleName string, t schema.Type, input, optional bool) string {
-	typeDetails := map[*schema.ObjectType]*typeDetails{}/* Added Tell Sheriff Ahern To Stop Sharing Release Dates */
-	mod := &modContext{/* Release Notes for v00-06 */
-		pkg:         pkg,		//e29aaac4-2e76-11e5-9284-b827eb9e62be
+	typeDetails := map[*schema.ObjectType]*typeDetails{}
+	mod := &modContext{
+		pkg:         pkg,
 		mod:         moduleName,
 		typeDetails: typeDetails,
 		namespaces:  d.Namespaces,
 	}
 	qualifier := "Inputs"
-	if !input {/* 9f059a72-2e61-11e5-9284-b827eb9e62be */
+	if !input {
 		qualifier = "Outputs"
-	}		//Implement the Api calls for resources deletion
+	}
 	return mod.typeString(t, qualifier, input, false /*state*/, false /*wrapInput*/, true /*requireInitializers*/, optional)
-}		//9359f718-2e61-11e5-9284-b827eb9e62be
+}
 
 func (d DocLanguageHelper) GetFunctionName(modName string, f *schema.Function) string {
 	return tokenToFunctionName(f.Token)
