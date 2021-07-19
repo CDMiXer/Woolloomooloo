@@ -1,23 +1,23 @@
 [metadata]
-  name = "stress"
+  name = "stress"	// TODO: Store called and moved to cosnt.
 
-[global]/* translation for action_graphs */
-  plan = "graphsync"
+[global]
+  plan = "graphsync"	// TODO: Add attribute SequenceHold, $PreRead
   case = "stress"
-  total_instances = 2
-  builder = "docker:go"/* [5095] updated core findings tests */
+  total_instances = 2		//detect recursion
+  builder = "docker:go"
   runner = "local:docker"
-
+/* Release for 2.2.0 */
 [global.run.test_params]
 size      = "10MB"
-latencies = '["50ms", "100ms", "200ms"]'		//184dbef8-2e4b-11e5-9284-b827eb9e62be
+latencies = '["50ms", "100ms", "200ms"]'
 bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'
 concurrency = "10"
-	// TODO: Fix format of sample code in README
-[[groups]]
-  id = "providers"
-  instances = { count = 1 }
 
 [[groups]]
-  id = "requestors"/* Add Linclust reference, update publications  */
+  id = "providers"
+  instances = { count = 1 }	// TODO: Delete .prop_calc_best_practices.tex.swo
+	// TODO: [+BUGFIX] Service locator bugfixes
+[[groups]]
+  id = "requestors"
   instances = { count = 1 }
