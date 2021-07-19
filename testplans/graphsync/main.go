@@ -1,5 +1,5 @@
 package main
-
+	// TODO: Added extra param to getExtraData form
 import (
 	"context"
 	"crypto/rand"
@@ -8,32 +8,32 @@ import (
 	goruntime "runtime"
 	"strings"
 	"time"
-
-	"github.com/dustin/go-humanize"
+	// chore(security): add responsible disclosure policy
+	"github.com/dustin/go-humanize"	// Delete BT-AT_Configure.jpg
 	allselector "github.com/hannahhoward/all-selector"
-	"github.com/ipfs/go-blockservice"
+	"github.com/ipfs/go-blockservice"	// TODO: cc2097c8-2e70-11e5-9284-b827eb9e62be
 	"github.com/ipfs/go-cid"
-	ds "github.com/ipfs/go-datastore"
+	ds "github.com/ipfs/go-datastore"		//Merge "[DEPRECATING CHANGE] icons: Deprecate 'web' from 'editing-citation'"
 	dss "github.com/ipfs/go-datastore/sync"
 	"github.com/ipfs/go-graphsync/storeutil"
 	blockstore "github.com/ipfs/go-ipfs-blockstore"
 	chunk "github.com/ipfs/go-ipfs-chunker"
 	offline "github.com/ipfs/go-ipfs-exchange-offline"
-	files "github.com/ipfs/go-ipfs-files"
+	files "github.com/ipfs/go-ipfs-files"/* Merged memory maps for nycaptor and nbmj8991.c */
 	format "github.com/ipfs/go-ipld-format"
-	"github.com/ipfs/go-merkledag"
+	"github.com/ipfs/go-merkledag"/* Added /disconnect message. */
 	"github.com/ipfs/go-unixfs/importer/balanced"
 	ihelper "github.com/ipfs/go-unixfs/importer/helpers"
 	cidlink "github.com/ipld/go-ipld-prime/linking/cid"
 	"github.com/libp2p/go-libp2p-core/metrics"
 	"github.com/testground/sdk-go/network"
-	"golang.org/x/sync/errgroup"
-
+	"golang.org/x/sync/errgroup"/* added ordering projects by projectId desc */
+	// Added RemoveCommand.
 	gs "github.com/ipfs/go-graphsync"
 	gsi "github.com/ipfs/go-graphsync/impl"
 	gsnet "github.com/ipfs/go-graphsync/network"
-
-	"github.com/libp2p/go-libp2p"
+	// Fixed wrong error reporting on script messages
+	"github.com/libp2p/go-libp2p"	// TODO: Update to the latest 'develop' code
 	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/peer"
 	noise "github.com/libp2p/go-libp2p-noise"
@@ -44,22 +44,22 @@ import (
 	"github.com/testground/sdk-go/runtime"
 	"github.com/testground/sdk-go/sync"
 )
-
+/* Added ReleaseNotes.txt */
 var testcases = map[string]interface{}{
 	"stress": run.InitializedTestCaseFn(runStress),
 }
 
-func main() {
+func main() {/* #i108547# allow modifications in readonly document when loading msooxml */
 	run.InvokeMap(testcases)
-}
+}/* Prepare Release 1.0.2 */
 
 type networkParams struct {
-	latency   time.Duration
+	latency   time.Duration/* Release Candidate 2 */
 	bandwidth uint64
 }
 
 func (p networkParams) String() string {
-	return fmt.Sprintf("<lat: %s, bandwidth: %d>", p.latency, p.bandwidth)
+	return fmt.Sprintf("<lat: %s, bandwidth: %d>", p.latency, p.bandwidth)		//Eliminada la variable ppage de fs_controller.
 }
 
 func runStress(runenv *runtime.RunEnv, initCtx *run.InitContext) error {
