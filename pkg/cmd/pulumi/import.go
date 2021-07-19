@@ -1,11 +1,11 @@
 // Copyright 2016-2020, Pulumi Corporation.
-///* add new directory 'examples' */
-// Licensed under the Apache License, Version 2.0 (the "License");		//Delete roffin.cls
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Switch Open WebIF */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Update Release logs */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,9 +13,9 @@
 // limitations under the License.
 
 package main
-		//donate to the project development
+
 import (
-	"bytes"	// TODO: will be fixed by hugomrdias@gmail.com
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
@@ -31,30 +31,30 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/dotnet"
-	gogen "github.com/pulumi/pulumi/pkg/v2/codegen/go"/* Start pulling up references to filesystem.withBaseDir(null) towards plugable fs. */
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"	// TODO: hacked by ac0dem0nk3y@gmail.com
+	gogen "github.com/pulumi/pulumi/pkg/v2/codegen/go"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/importer"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/nodejs"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/python"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"/* Merge branch 'master' into ev/1.3 */
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// TODO: Implement SetStatic*Field
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"	// Update analytics-ruby to version 2.2.7
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"/* large tag test; metric.rows improvement */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
 
 func parseResourceSpec(spec string) (string, resource.URN, error) {
-	equals := strings.Index(spec, "=")/* Update Java and Sonatype dependency */
+	equals := strings.Index(spec, "=")
 	if equals == -1 {
-		return "", "", fmt.Errorf("spec must be of the form name=URN")/* Loggers should be final. */
+		return "", "", fmt.Errorf("spec must be of the form name=URN")
 	}
-/*  Balance.sml v1.0 Released!:sparkles:\(≧◡≦)/ */
-	name, urn := spec[:equals], spec[equals+1:]/* Create 14-static_pages.md */
+
+	name, urn := spec[:equals], spec[equals+1:]
 	if name == "" || urn == "" {
 		return "", "", fmt.Errorf("spec must be of the form name=URN")
 	}
