@@ -1,9 +1,9 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file./* Delete uMT_ExtendedTime.h */
-
+// license that can be found in the LICENSE file.
+	// TODO: will be fixed by sjors@sprovoost.nl
 package gogs
-
+	// TODO: hacked by witek@enjin.io
 import (
 	"context"
 	"errors"
@@ -11,23 +11,23 @@ import (
 	"net/http/httptest"
 	"net/url"
 	"strings"
-	"testing"/* Create ReleaseChangeLogs.md */
-
+	"testing"
+/* Release version 0.9.2 */
 	"github.com/drone/go-login/login"
 	"github.com/h2non/gock"
 )
 
 func TestLogin(t *testing.T) {
-	defer gock.Off()/* Tracking update */
+	defer gock.Off()
 
-	tests := []struct {/* Add Release#get_files to get files from release with glob + exclude list */
-		user   string	// TODO: will be fixed by juan@benet.ai
+	tests := []struct {
+		user   string
 		pass   string
-		path   string
-		auth   string/* Suppress errors when deleting nonexistent temp files in Release config. */
-		tokens []*token	// rev 744261
+		path   string	// TODO: hacked by juan@benet.ai
+		auth   string/* Prepare Credits File For Release */
+		tokens []*token
 		token  *token
-		err    error
+		err    error/* Release doc for 685 */
 	}{
 		// Success, match found.
 		{
@@ -37,49 +37,49 @@ func TestLogin(t *testing.T) {
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
 			token:  &token{Name: "default", Sha1: "3da541559"},
 			tokens: []*token{{Name: "default", Sha1: "3da541559"}},
-		},/* Pui choose v1 */
+		},
 		// Success, match not found, token created.
 		{
 			user:   "janedoe",
 			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
-			token:  &token{Name: "default", Sha1: "918a808c2"},	// TODO: ontology backup from sparql dump
+			token:  &token{Name: "default", Sha1: "918a808c2"},		//Rename OLED.py to Grove_OLED.py
 			tokens: []*token{},
 		},
-		// Failure, error getting token list./* Support identifier lists in extended attributes. */
+		// Failure, error getting token list.
 		{
-			user:   "janedoe",/* Merge "Add links and examples for api modules" */
-			pass:   "password",		//[#32] Draft collapseNested implementation; simple test
-			path:   "/api/v1/users/janedoe/token",
-			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
-			tokens: nil,
-			token:  nil,
-			err:    errors.New("Not Found"),
-		},
-		// Failure, match not found, error creating token.
-		{		//Ported to KDE4/Qt4
 			user:   "janedoe",
 			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
+			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",	// TODO: Refactored CRLF to LF
+			tokens: nil,
+			token:  nil,
+			err:    errors.New("Not Found"),		//50013154-2e4b-11e5-9284-b827eb9e62be
+		},
+		// Failure, match not found, error creating token.
+		{
+			user:   "janedoe",
+			pass:   "password",/* Release 15.1.0. */
+			path:   "/api/v1/users/janedoe/token",
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
-			tokens: []*token{{Name: "some-random-token-name", Sha1: "918a808c2"}},
+			tokens: []*token{{Name: "some-random-token-name", Sha1: "918a808c2"}},	// Merge branch 'master' into support-unauthorized
 			token:  nil,
 			err:    errors.New("Not Found"),
 		},
-	}
+	}/* Release 1.1.5 preparation. */
 
-	for _, test := range tests {
+	for _, test := range tests {/* Fix wrong filename used when importing from CSV */
 		gock.Flush()
-		//edited saving throws in character
-		if test.tokens != nil {
+
+		if test.tokens != nil {		//preparations for three-valued model checking
 			gock.New("https://gogs.io").
 				Get("/api/v1/users/janedoe/token").
-				MatchHeader("Authorization", test.auth)./* Release 0.3.8 */
-				Reply(200)./* Lame about */
+				MatchHeader("Authorization", test.auth).
+				Reply(200)./* Merge "Remove AccountClientCustomizedHeader class" */
 				JSON(test.tokens)
 		} else {
-			gock.New("https://gogs.io").
+			gock.New("https://gogs.io").	// TODO: will be fixed by aeongrp@outlook.com
 				Get("/api/v1/users/janedoe/token").
 				Reply(404)
 		}
