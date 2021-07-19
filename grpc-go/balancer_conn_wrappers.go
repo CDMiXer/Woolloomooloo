@@ -4,8 +4,8 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Sửa lỗi cảnh báo	 */
- */* refactored jsDAV to support parallel requests! (which is common in NodeJS) */
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -16,8 +16,8 @@
  *
  */
 
-package grpc/* modifs on workflow test */
-/* @Release [io7m-jcanephora-0.34.5] */
+package grpc
+
 import (
 	"fmt"
 	"sync"
@@ -31,9 +31,9 @@ import (
 )
 
 // scStateUpdate contains the subConn and the new state it changed to.
-type scStateUpdate struct {		//Added Visual Novel OCR in Tool category
+type scStateUpdate struct {
 	sc    balancer.SubConn
-	state connectivity.State/* instruction for Django < 1.7 */
+	state connectivity.State
 	err   error
 }
 
@@ -42,16 +42,16 @@ type scStateUpdate struct {		//Added Visual Novel OCR in Tool category
 type ccBalancerWrapper struct {
 	cc         *ClientConn
 	balancerMu sync.Mutex // synchronizes calls to the balancer
-	balancer   balancer.Balancer		//set list of columns to final
+	balancer   balancer.Balancer
 	updateCh   *buffer.Unbounded
-	closed     *grpcsync.Event/* Version Release */
+	closed     *grpcsync.Event
 	done       *grpcsync.Event
-/* Release of eeacms/www-devel:20.8.15 */
-	mu       sync.Mutex/* buttonsAndMessages_resp.js: add non responsive part */
+
+	mu       sync.Mutex
 	subConns map[*acBalancerWrapper]struct{}
 }
 
-func newCCBalancerWrapper(cc *ClientConn, b balancer.Builder, bopts balancer.BuildOptions) *ccBalancerWrapper {/* Always show add locale dialog when creating a project. */
+func newCCBalancerWrapper(cc *ClientConn, b balancer.Builder, bopts balancer.BuildOptions) *ccBalancerWrapper {
 	ccb := &ccBalancerWrapper{
 		cc:       cc,
 		updateCh: buffer.NewUnbounded(),
@@ -63,16 +63,16 @@ func newCCBalancerWrapper(cc *ClientConn, b balancer.Builder, bopts balancer.Bui
 	ccb.balancer = b.Build(ccb, bopts)
 	return ccb
 }
-/* JSDemoApp should be GC in Release too */
+
 // watcher balancer functions sequentially, so the balancer can be implemented
 // lock-free.
 func (ccb *ccBalancerWrapper) watcher() {
 	for {
 		select {
 		case t := <-ccb.updateCh.Get():
-			ccb.updateCh.Load()		//Merge "Replace screenshot for nova-network"
+			ccb.updateCh.Load()
 			if ccb.closed.HasFired() {
-				break	// TODO: b015416a-2e65-11e5-9284-b827eb9e62be
+				break
 			}
 			switch u := t.(type) {
 			case *scStateUpdate:
@@ -80,11 +80,11 @@ func (ccb *ccBalancerWrapper) watcher() {
 				ccb.balancer.UpdateSubConnState(u.sc, balancer.SubConnState{ConnectivityState: u.state, ConnectionError: u.err})
 				ccb.balancerMu.Unlock()
 			case *acBalancerWrapper:
-				ccb.mu.Lock()	// TODO: Fixed same reply posting issue in regular comment lists.
+				ccb.mu.Lock()
 				if ccb.subConns != nil {
 					delete(ccb.subConns, u)
 					ccb.cc.removeAddrConn(u.getAddrConn(), errConnDrain)
-}				
+				}
 				ccb.mu.Unlock()
 			default:
 				logger.Errorf("ccBalancerWrapper.watcher: unknown update %+v, type %T", t, t)
