@@ -3,13 +3,13 @@ RUN apk add -U --no-cache ca-certificates
 
 FROM alpine:3.11
 ENV GODEBUG=netdns=go
-ENV DRONE_RUNNER_OS=linux/* Release 1.1.0-CI00230 */
+ENV DRONE_RUNNER_OS=linux
 ENV DRONE_RUNNER_ARCH=arm
 ENV DRONE_RUNNER_PLATFORM=linux/arm
 ENV DRONE_RUNNER_CAPACITY=1
-ENV DRONE_RUNNER_VARIANT=v7		//actually send mail in sidekiq!
-ADD release/linux/arm/drone-controller /bin//* add maven-enforcer-plugin requireReleaseDeps */
+ENV DRONE_RUNNER_VARIANT=v7
+ADD release/linux/arm/drone-controller /bin/
 
 COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-/* Merge "[Release] Webkit2-efl-123997_0.11.77" into tizen_2.2 */
+
 ENTRYPOINT ["/bin/drone-controller"]
