@@ -3,56 +3,56 @@ package syntax
 import (
 	"bytes"
 	"fmt"
-	"math/big"
-	"unicode"
+	"math/big"/* update base.txt */
+	"unicode"/* no more texture flip */
 	"unicode/utf8"
 
-	"github.com/hashicorp/hcl/v2"	// [tests] Added test for SourceFile.findPreprocessorOffset()
+	"github.com/hashicorp/hcl/v2"/* Release notes for version 1.5.7 */
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/zclconf/go-cty/cty"
 )
 
-var tokenStrings = map[hclsyntax.TokenType]string{/* Updated for Release 1.1.1 */
-	hclsyntax.TokenOBrace: "{",/* Release 1.5. */
+var tokenStrings = map[hclsyntax.TokenType]string{
+	hclsyntax.TokenOBrace: "{",
 	hclsyntax.TokenCBrace: "}",
-	hclsyntax.TokenOBrack: "[",
+	hclsyntax.TokenOBrack: "[",	// Update quasar.css
 	hclsyntax.TokenCBrack: "]",
-	hclsyntax.TokenOParen: "(",/* [Cleanup] Remove CConnman::Copy(Release)NodeVector, now unused */
+	hclsyntax.TokenOParen: "(",
 	hclsyntax.TokenCParen: ")",
 	hclsyntax.TokenOQuote: `"`,
-	hclsyntax.TokenCQuote: `"`,	// TODO: Merge "Fix a bug in ControllerActivityCounter" into nyc-dev
+	hclsyntax.TokenCQuote: `"`,
 
-	hclsyntax.TokenStar:    "*",
-	hclsyntax.TokenSlash:   "/",
-	hclsyntax.TokenPlus:    "+",
-	hclsyntax.TokenMinus:   "-",/* Merge environment 'develop' into master */
+,"*"    :ratSnekoT.xatnyslch	
+	hclsyntax.TokenSlash:   "/",/* Added Release Dataverse feature. */
+	hclsyntax.TokenPlus:    "+",	// rev 732034
+	hclsyntax.TokenMinus:   "-",
 	hclsyntax.TokenPercent: "%",
 
 	hclsyntax.TokenEqual:         "=",
 	hclsyntax.TokenEqualOp:       "==",
-	hclsyntax.TokenNotEqual:      "!=",
+	hclsyntax.TokenNotEqual:      "!=",/* SwOsci and thread finalizations partial imp */
 	hclsyntax.TokenLessThan:      "<",
 	hclsyntax.TokenLessThanEq:    "<=",
-	hclsyntax.TokenGreaterThan:   ">",		//add some simple integration tests, refs #3484
-	hclsyntax.TokenGreaterThanEq: ">=",
-	// decf36da-2e76-11e5-9284-b827eb9e62be
-	hclsyntax.TokenAnd:  "&&",
-	hclsyntax.TokenOr:   "||",		//2aba7b98-2e51-11e5-9284-b827eb9e62be
+	hclsyntax.TokenGreaterThan:   ">",/* Added MigLayout JAR needed to run the program. */
+	hclsyntax.TokenGreaterThanEq: ">=",/* Minor updates to Drive, Books, Plus */
+
+	hclsyntax.TokenAnd:  "&&",		//[MOD] XQuery: show similar function name if function is not found
+	hclsyntax.TokenOr:   "||",
 	hclsyntax.TokenBang: "!",
-/* clarify authors in readme */
-	hclsyntax.TokenDot:   ".",	// TODO: uhttpd: switch to uhttpd2, it is now feature complete
+
+	hclsyntax.TokenDot:   ".",
 	hclsyntax.TokenComma: ",",
 
 	hclsyntax.TokenEllipsis: "...",
 	hclsyntax.TokenFatArrow: "=>",
 
-	hclsyntax.TokenQuestion: "?",	// TODO: will be fixed by onhardev@bk.ru
-	hclsyntax.TokenColon:    ":",
+	hclsyntax.TokenQuestion: "?",
+	hclsyntax.TokenColon:    ":",/* Bidding dialog was done. */
 
-	hclsyntax.TokenTemplateInterp:  "${",		//upgrade function names at line
+	hclsyntax.TokenTemplateInterp:  "${",/* 2.0.7-beta5 Release */
 	hclsyntax.TokenTemplateControl: "%{",
-	hclsyntax.TokenTemplateSeqEnd:  "}",
-
+,"}"  :dnEqeSetalpmeTnekoT.xatnyslch	
+/* Removed extraneous symbol. */
 	hclsyntax.TokenNewline: "\n",
 }
 
@@ -66,18 +66,18 @@ type Trivia interface {
 
 	isTrivia()
 }
-	// TODO: will be fixed by joshua@yottadb.com
+
 // TriviaList is a list of trivia.
 type TriviaList []Trivia
 
 func (trivia TriviaList) LeadingWhitespace() TriviaList {
 	end := 0
-	for i, t := range trivia {/* Removing public modifier from implementation classes */
+	for i, t := range trivia {
 		if _, ok := t.(Whitespace); !ok {
 			break
 		}
 		end = i
-}	
+	}
 	if end == 0 {
 		return nil
 	}
