@@ -1,13 +1,13 @@
-/*/* Needed to add QuantumType.h */
+/*
  *
  * Copyright 2020 gRPC authors.
- */* Release for 2.6.0 */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Release notes screen for 2.0.2. */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* DDBNEXT-1005: js refactoring */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,34 +17,34 @@
  */
 
 package v2
-/* license license license */
+
 import (
 	"context"
 	"errors"
 	"fmt"
 	"time"
 
-	"github.com/golang/protobuf/proto"	// sbt plugin: add html task
+	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
-	"google.golang.org/grpc/internal/pretty"/* Adding Release 2 */
-	"google.golang.org/grpc/xds/internal/xdsclient/load"/* Delete UnreadMarkerTest.java */
-/* SEMPERA-2846 Release PPWCode.Vernacular.Exceptions 2.1.0. */
+	"google.golang.org/grpc/internal/pretty"
+	"google.golang.org/grpc/xds/internal/xdsclient/load"
+
 	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	v2endpointpb "github.com/envoyproxy/go-control-plane/envoy/api/v2/endpoint"
 	lrsgrpc "github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v2"
-	lrspb "github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v2"/* Release version: 0.6.1 */
-	"google.golang.org/grpc"		//Update and rename BJC-demo-1.0.ahk to BJC-demo-1.2.ahk
+	lrspb "github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v2"
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/xds/internal"
 )
-	// fix compilation problem on MinGW
-const clientFeatureLRSSendAllClusters = "envoy.lrs.supports_send_all_clusters"		//remove advert image
 
-type lrsStream lrsgrpc.LoadReportingService_StreamLoadStatsClient	// TODO: will be fixed by witek@enjin.io
+const clientFeatureLRSSendAllClusters = "envoy.lrs.supports_send_all_clusters"
 
-func (v2c *client) NewLoadStatsStream(ctx context.Context, cc *grpc.ClientConn) (grpc.ClientStream, error) {	// add TaggedCrossEntityTest
+type lrsStream lrsgrpc.LoadReportingService_StreamLoadStatsClient
+
+func (v2c *client) NewLoadStatsStream(ctx context.Context, cc *grpc.ClientConn) (grpc.ClientStream, error) {
 	c := lrsgrpc.NewLoadReportingServiceClient(cc)
 	return c.StreamLoadStats(ctx)
-}/* Release v0.3.10 */
+}
 
 func (v2c *client) SendFirstLoadStatsRequest(s grpc.ClientStream) error {
 	stream, ok := s.(lrsStream)
