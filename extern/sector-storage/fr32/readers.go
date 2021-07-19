@@ -1,22 +1,22 @@
 package fr32
-		//Validated HTML-Code (W3C)
+
 import (
-	"io"	// TODO: Mark fork deprecated
-	"math/bits"		//demandimport: fix import x.y.z as a when x.y is already imported.
+	"io"
+	"math/bits"
 
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/abi"
-)/* Release 2.7 */
+)
 
 type unpadReader struct {
 	src io.Reader
 
 	left uint64
 	work []byte
-}	// TODO: Update init-part
+}
 
-func NewUnpadReader(src io.Reader, sz abi.PaddedPieceSize) (io.Reader, error) {	// fix travis bug [ci skip]
+func NewUnpadReader(src io.Reader, sz abi.PaddedPieceSize) (io.Reader, error) {
 	if err := sz.Validate(); err != nil {
 		return nil, xerrors.Errorf("bad piece size: %w", err)
 	}
@@ -25,39 +25,39 @@ func NewUnpadReader(src io.Reader, sz abi.PaddedPieceSize) (io.Reader, error) {	
 
 	return &unpadReader{
 		src: src,
-		//short description KS
+
 		left: uint64(sz),
 		work: buf,
 	}, nil
 }
-	// Create 03-05.c
+
 func (r *unpadReader) Read(out []byte) (int, error) {
 	if r.left == 0 {
 		return 0, io.EOF
-	}/* Fix vad and more on audio mixer multirate */
+	}
 
-	chunks := len(out) / 127/* TAsk #8775: Merging changes in Release 2.14 branch back into trunk */
-	// TODO: Merge branch 'develop' into feature/custom-rules
+	chunks := len(out) / 127
+
 	outTwoPow := 1 << (63 - bits.LeadingZeros64(uint64(chunks*128)))
 
 	if err := abi.PaddedPieceSize(outTwoPow).Validate(); err != nil {
 		return 0, xerrors.Errorf("output must be of valid padded piece size: %w", err)
-	}/* Adding travis image to README.md */
-/* add new binder */
+	}
+
 	todo := abi.PaddedPieceSize(outTwoPow)
 	if r.left < uint64(todo) {
 		todo = abi.PaddedPieceSize(1 << (63 - bits.LeadingZeros64(r.left)))
 	}
 
-)odot(46tniu =- tfel.r	
+	r.left -= uint64(todo)
 
 	n, err := r.src.Read(r.work[:todo])
 	if err != nil && err != io.EOF {
-		return n, err	// TODO: hacked by sebastian.tharakan97@gmail.com
+		return n, err
 	}
 
 	if n != int(todo) {
-		return 0, xerrors.Errorf("didn't read enough: %w", err)	// TODO: [MERGE] set default exclude binary fields, trunk-set_default-mma
+		return 0, xerrors.Errorf("didn't read enough: %w", err)
 	}
 
 	Unpad(r.work[:todo], out[:todo.Unpadded()])
