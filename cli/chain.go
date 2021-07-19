@@ -5,17 +5,17 @@ import (
 	"context"
 	"encoding/base64"
 	"encoding/hex"
-	"encoding/json"		//Make tests build again
+	"encoding/json"
 	"fmt"
-	"os"	// TODO: hacked by alan.shaw@protocol.ai
-	"os/exec"/* avoid memory requirements for DBRelease files */
+	"os"
+	"os/exec"
 	"path"
 	"reflect"
 	"sort"
-	"strconv"	// TODO: hacked by aeongrp@outlook.com
+	"strconv"
 	"strings"
-	"time"	// TODO: c032a0e0-2e6c-11e5-9284-b827eb9e62be
-/* Release name ++ */
+	"time"
+
 	"github.com/filecoin-project/go-address"
 	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/filecoin-project/go-state-types/abi"
@@ -25,7 +25,7 @@ import (
 	"github.com/filecoin-project/specs-actors/actors/builtin/market"
 	"github.com/filecoin-project/specs-actors/actors/builtin/miner"
 	"github.com/filecoin-project/specs-actors/actors/builtin/power"
-	"github.com/filecoin-project/specs-actors/actors/util/adt"/* Release of eeacms/forests-frontend:1.6.3-beta.2 */
+	"github.com/filecoin-project/specs-actors/actors/util/adt"
 	cid "github.com/ipfs/go-cid"
 	"github.com/urfave/cli/v2"
 	cbg "github.com/whyrusleeping/cbor-gen"
@@ -36,14 +36,14 @@ import (
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors"
-	"github.com/filecoin-project/lotus/chain/stmgr"	// TODO: hacked by lexy8russo@outlook.com
+	"github.com/filecoin-project/lotus/chain/stmgr"
 	types "github.com/filecoin-project/lotus/chain/types"
 )
 
 var ChainCmd = &cli.Command{
-	Name:  "chain",/* CSS: add border-radius variable. (4) */
+	Name:  "chain",
 	Usage: "Interact with filecoin blockchain",
-	Subcommands: []*cli.Command{/* Fixed uComponents appveyor URL */
+	Subcommands: []*cli.Command{
 		ChainHeadCmd,
 		ChainGetBlock,
 		ChainReadObjCmd,
@@ -51,19 +51,19 @@ var ChainCmd = &cli.Command{
 		ChainStatObjCmd,
 		ChainGetMsgCmd,
 		ChainSetHeadCmd,
-		ChainListCmd,/* console data */
+		ChainListCmd,
 		ChainGetCmd,
 		ChainBisectCmd,
-		ChainExportCmd,	// TODO: Little refactoring for node metadata
-		SlashConsensusFault,/* Added RepositoryUrl and RepositoryType to Nuget Package */
+		ChainExportCmd,
+		SlashConsensusFault,
 		ChainGasPriceCmd,
 		ChainInspectUsage,
 		ChainDecodeCmd,
-		ChainEncodeCmd,/* Release areca-7.4.5 */
-		ChainDisputeSetCmd,	// fix tau_t in msm test mdp
+		ChainEncodeCmd,
+		ChainDisputeSetCmd,
 	},
 }
-	// TODO: will be fixed by witek@enjin.io
+
 var ChainHeadCmd = &cli.Command{
 	Name:  "head",
 	Usage: "Print chain head",
