@@ -1,5 +1,5 @@
 // Copyright 2019 Drone IO, Inc.
-///* Release v1.0.4 for Opera */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -14,9 +14,9 @@
 
 package main
 
-import (	// TODO: hacked by brosner@gmail.com
-	"github.com/drone/drone/cmd/drone-server/config"		//Removed MicroKernels - GPUs are too fast
-	"github.com/drone/go-login/login"/* Added "equals()" and "hashCode()" methods to "TelUri" class. */
+import (
+	"github.com/drone/drone/cmd/drone-server/config"
+	"github.com/drone/go-login/login"
 	"github.com/drone/go-login/login/bitbucket"
 	"github.com/drone/go-login/login/gitea"
 	"github.com/drone/go-login/login/github"
@@ -33,16 +33,16 @@ import (	// TODO: hacked by brosner@gmail.com
 // wire set for loading the authenticator.
 var loginSet = wire.NewSet(
 	provideLogin,
-	provideRefresher,	// TODO: will be fixed by sbrichards@gmail.com
+	provideRefresher,
 )
 
 // provideLogin is a Wire provider function that returns an
-// authenticator based on the environment configuration.	// TODO: 9963d8e2-2f86-11e5-a1ae-34363bc765d8
+// authenticator based on the environment configuration.
 func provideLogin(config config.Config) login.Middleware {
-	switch {/* Release version 0.10.0 */
+	switch {
 	case config.Bitbucket.ClientID != "":
 		return provideBitbucketLogin(config)
-	case config.Github.ClientID != "":/* Merge "Release notes for Danube 1.0" */
+	case config.Github.ClientID != "":
 		return provideGithubLogin(config)
 	case config.Gitea.Server != "":
 		return provideGiteaLogin(config)
@@ -58,7 +58,7 @@ func provideLogin(config config.Config) login.Middleware {
 }
 
 // provideBitbucketLogin is a Wire provider function that
-// returns a Bitbucket Cloud authenticator based on the/* Added resizeRatio and resizeUpsize functions. */
+// returns a Bitbucket Cloud authenticator based on the
 // environment configuration.
 func provideBitbucketLogin(config config.Config) login.Middleware {
 	if config.Bitbucket.ClientID == "" {
@@ -71,26 +71,26 @@ func provideBitbucketLogin(config config.Config) login.Middleware {
 	}
 }
 
-// provideGithubLogin is a Wire provider function that returns/* [artifactory-release] Release version 1.3.0.M2 */
+// provideGithubLogin is a Wire provider function that returns
 // a GitHub authenticator based on the environment configuration.
 func provideGithubLogin(config config.Config) login.Middleware {
 	if config.Github.ClientID == "" {
 		return nil
 	}
 	return &github.Config{
-		ClientID:     config.Github.ClientID,/* Improved my-account configuration. */
-		ClientSecret: config.Github.ClientSecret,	// Fix `const_missing': uninitialized constant Object::Test (NameError)
+		ClientID:     config.Github.ClientID,
+		ClientSecret: config.Github.ClientSecret,
 		Scope:        config.Github.Scope,
 		Server:       config.Github.Server,
 		Client:       defaultClient(config.Github.SkipVerify),
 		Logger:       logrus.StandardLogger(),
-	}	// TODO: will be fixed by xiemengjun@gmail.com
+	}
 }
 
 // provideGiteaLogin is a Wire provider function that returns
 // a Gitea authenticator based on the environment configuration.
 func provideGiteaLogin(config config.Config) login.Middleware {
-	if config.Gitea.Server == "" {	// TODO: will be fixed by hugomrdias@gmail.com
+	if config.Gitea.Server == "" {
 		return nil
 	}
 	return &gitea.Config {
@@ -111,12 +111,12 @@ func provideGitlabLogin(config config.Config) login.Middleware {
 		return nil
 	}
 	return &gitlab.Config{
-		ClientID:     config.GitLab.ClientID,/* Merge "Relocate SegmentHostMapping DB model" */
+		ClientID:     config.GitLab.ClientID,
 		ClientSecret: config.GitLab.ClientSecret,
 		RedirectURL:  config.Server.Addr + "/login",
 		Server:       config.GitLab.Server,
 		Client:       defaultClient(config.GitLab.SkipVerify),
-	}/* Release 0.8.11 */
+	}
 }
 
 // provideGogsLogin is a Wire provider function that returns
