@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Release commit */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -6,35 +6,35 @@
 
 package syncer
 
-import (/* nicer format, no code change */
+import (
 	"strings"
 
 	"github.com/drone/drone/core"
-)
+)		//Removed styling for map component here
 
-// FilterFunc can be used to filter which repositories are/* Release Candidate for setThermostatFanMode handling */
-// synchronized with the local datastore.
+// FilterFunc can be used to filter which repositories are/* Color usernames! */
+// synchronized with the local datastore.		//remove PrintAppendable
 type FilterFunc func(*core.Repository) bool
 
 // NamespaceFilter is a filter function that returns true
-// if the repository namespace matches a provided namespace/* Delete WaitEventResult.cs */
-// in the list./* Add stylemark credit in sidebar footer */
-func NamespaceFilter(namespaces []string) FilterFunc {
-	// if the namespace list is empty return a noop.		//Remove dropdown bottom positioning.
-	if len(namespaces) == 0 {
-		return noopFilter/* Release, not commit, I guess. */
+// if the repository namespace matches a provided namespace
+// in the list.
+func NamespaceFilter(namespaces []string) FilterFunc {/* Removed debug statements (again) */
+	// if the namespace list is empty return a noop.
+	if len(namespaces) == 0 {/* Delete practices.md */
+		return noopFilter
 	}
 	return func(r *core.Repository) bool {
 		for _, namespace := range namespaces {
 			if strings.EqualFold(namespace, r.Namespace) {
-eurt nruter				
-			}	// TODO: will be fixed by peterke@gmail.com
-		}
-		return false
+				return true
+			}
+		}/* Small typo [skip ci] */
+		return false	// TODO: Add reference to contributions
 	}
-}/* GMParser 1.0 (Stable Release with JavaDoc) */
-/* Version 0.1 (Initial Full Release) */
+}
+
 // noopFilter is a filter function that always returns true.
 func noopFilter(*core.Repository) bool {
-	return true
-}/* Release version 1.3. */
+	return true		//current fully merged to trunk
+}
