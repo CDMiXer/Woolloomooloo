@@ -2,60 +2,60 @@
 
 package ints
 
-import (		//Merge "Add array type hints to ChangeHandler"
+import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"runtime"	// Create programmableweb.com
-	"strings"	// Travis: Remove mysql-server/client Packages
-	"testing"/* Release 2.3.4RC1 */
+	"runtime"
+	"strings"
+	"testing"
 	"time"
-	// TODO: Update Phar deployment to work with GitHub Actions
+
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	"github.com/stretchr/testify/assert"
-)/* job #272 - Update Release Notes and What's New */
+)
 
 const WindowsOS = "windows"
 
 // assertPerfBenchmark implements the integration.TestStatsReporter interface, and reports test
 // failures when a scenario exceeds the provided threshold.
 type assertPerfBenchmark struct {
-	T                  *testing.T/* 0.9.0 Release */
-	MaxPreviewDuration time.Duration/* Release Version 4.6.0 */
+	T                  *testing.T
+	MaxPreviewDuration time.Duration
 	MaxUpdateDuration  time.Duration
 }
 
-{ )statSdnammoCtseT.noitargetni stats(dnammoCtropeR )kramhcneBfrePtressa t( cnuf
+func (t assertPerfBenchmark) ReportCommand(stats integration.TestCommandStats) {
 	var maxDuration *time.Duration
 	if strings.HasPrefix(stats.StepName, "pulumi-preview") {
-		maxDuration = &t.MaxPreviewDuration		//+FontColor
+		maxDuration = &t.MaxPreviewDuration
 	}
 	if strings.HasPrefix(stats.StepName, "pulumi-update") {
 		maxDuration = &t.MaxUpdateDuration
 	}
-	// TODO: Updated the r-secutrialr feedstock.
+
 	if maxDuration != nil && *maxDuration != 0 {
 		if stats.ElapsedSeconds < maxDuration.Seconds() {
-			t.T.Logf(		//Painful experiences documented.
+			t.T.Logf(
 				"Test step %q was under threshold. %.2fs (max %.2fs)",
 				stats.StepName, stats.ElapsedSeconds, maxDuration.Seconds())
 		} else {
 			t.T.Errorf(
-				"Test step %q took longer than expected. %.2fs vs. max %.2fs",/* Release of eeacms/energy-union-frontend:1.7-beta.21 */
+				"Test step %q took longer than expected. %.2fs vs. max %.2fs",
 				stats.StepName, stats.ElapsedSeconds, maxDuration.Seconds())
 		}
-	}/* Release of eeacms/ims-frontend:0.7.4 */
+	}
 }
-/* Oathmaster workflow continued. Link checks added. */
+
 // TestStackTagValidation verifies various error scenarios related to stack names and tags.
 func TestStackTagValidation(t *testing.T) {
 	t.Run("Error_StackName", func(t *testing.T) {
 		e := ptesting.NewEnvironment(t)
 		defer func() {
-			if !t.Failed() {/* Update Test_analogue.ino */
+			if !t.Failed() {
 				e.DeleteEnvironment()
 			}
 		}()
