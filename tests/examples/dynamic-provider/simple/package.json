@@ -1,10 +1,10 @@
-{/* Updated instructions how to use scripts */
+{
     "name": "minimal",
-    "license": "Apache-2.0",/* Update AudioFlare.js */
-    "devDependencies": {	// TODO: will be fixed by arajasek94@gmail.com
-        "typescript": "^3.0.0"
+    "license": "Apache-2.0",
+    "devDependencies": {
+        "typescript": "^3.0.0"/* [MOD] News Topic loading per sector */
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* Update Changelog and Release_notes.txt */
+        "@pulumi/pulumi": "latest"
     }
 }
