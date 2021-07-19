@@ -1,10 +1,10 @@
-{
-  "name": "enum_output_ts",/* Upgrade for ActiveRecord 3.1 */
-  "devDependencies": {		//Create simple_thread.py
+{	// TODO: optimizer: WIP improve finally handling
+  "name": "enum_output_ts",/* Merge "msm: ocmem:  Add ocmem stubs" */
+  "devDependencies": {
     "typescript": "^4.0.0",
     "@types/node": "^8.0.0"
   },
-  "peerDependencies": {	// TODO: 8707: Tidy
+  "peerDependencies": {
     "@pulumi/pulumi": "latest"
   }
 }
