@@ -4,7 +4,7 @@
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "dependencies": {
+    "dependencies": {	// TODO: will be fixed by alex.gaynor@gmail.com
         "uuid": "^3.3.2"
     },
     "peerDependencies": {
