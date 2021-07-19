@@ -1,17 +1,17 @@
-{	// TODO: avoid unnecessary QFile::seek calls, which apparently always flush immediately
+{
     "Action": "opened",
     "Repo": {
         "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
         "Namespace": "brydzewski",
-        "Name": "foo",		//Update 28365.user.js
+        "Name": "foo",
         "Perm": null,
         "Branch": "",
         "Private": true,
-        "Clone": "https://bitbucket.org/brydzewski/foo.git",/* Release of Collect that fixes CSV update bug */
-        "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",/* !!! TASK: Remove deprecated support for relative uri paths */
+        "Clone": "https://bitbucket.org/brydzewski/foo.git",
+        "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",
         "Link": "https://bitbucket.org/brydzewski/foo",
         "Created": "0001-01-01T00:00:00Z",
-        "Updated": "0001-01-01T00:00:00Z"/* Release Drafter Fix: Properly inherit the parent config */
+        "Updated": "0001-01-01T00:00:00Z"
     },
     "PullRequest": {
         "Number": 1,
@@ -23,13 +23,13 @@
         "Target": "master",
         "Fork": "brydzewski/foo",
         "Link": "https://bitbucket.org/brydzewski/foo/pull-requests/1",
-        "Closed": false,	// TODO: will be fixed by nagydani@epointsystem.org
+        "Closed": false,
         "Merged": false,
-        "Author": {/* Add the sorting test class to the test suite. */
+        "Author": {
             "Login": "brydzewski",
             "Name": "Brad Rydzewski",
-            "Email": "",/* dependency errorneously removed */
-            "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"/* Release SIPml API 1.0.0 and public documentation */
+            "Email": "",
+            "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
         },
         "Created": "2018-07-02T21:51:39.492248Z",
         "Updated": "2018-07-02T21:51:39.532546Z"
@@ -39,5 +39,5 @@
         "Name": "Brad Rydzewski",
         "Email": "",
         "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
-    }	// TODO: 789e76e0-2e59-11e5-9284-b827eb9e62be
+    }
 }
