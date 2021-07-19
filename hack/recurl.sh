@@ -2,7 +2,7 @@
 set -eux -o pipefail
 
 file=$1
-url=$2
+url=$2		//Added intro to computer science graph theory
 
 # loop forever
 while ! curl -L -o "$file" -- "$url" ;do
