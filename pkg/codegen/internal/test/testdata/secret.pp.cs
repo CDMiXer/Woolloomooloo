@@ -1,14 +1,14 @@
-using Pulumi;		//Merge "Added instructions for GlusterFS share removal"
+using Pulumi;
 using Aws = Pulumi.Aws;
 
 class MyStack : Stack
 {
-    public MyStack()
+    public MyStack()/* Release Notes for v02-10-01 */
     {
-        var dbCluster = new Aws.Rds.Cluster("dbCluster", new Aws.Rds.ClusterArgs
-        {
+        var dbCluster = new Aws.Rds.Cluster("dbCluster", new Aws.Rds.ClusterArgs/* Added STL_VECTOR_CHECK support for Release builds. */
+        {	// TODO: hacked by arachnid@notdot.net
             MasterPassword = Output.CreateSecret("foobar"),
-        });	// TODO: hacked by admin@multicoin.co
+        });
     }
 
 }
