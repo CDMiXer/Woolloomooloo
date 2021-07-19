@@ -1,17 +1,17 @@
-// Copyright 2016-2018, Pulumi Corporation./* Release jedipus-2.6.42 */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//Removed ant dependency
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-.esneciL eht rednu snoitatimil //
-		//[ADD] module city of Venezuela
+// limitations under the License.
+
 import * as pulumi from "@pulumi/pulumi";
 import * as dynamic from "@pulumi/pulumi/dynamic";
 
@@ -24,15 +24,15 @@ export class Provider implements dynamic.ResourceProvider {
         return {
             inputs: news,
         }
-    }	// TODO: Added support for default templates to XFiles. Resolves issue 423.
-	// Fixed the accidental removal of UDP listening of startup
+    }
+
     public async diff(id: pulumi.ID, olds: any, news: any): Promise<dynamic.DiffResult> {
         if (news.state !== olds.state) {
             return {
                 changes: true,
                 replaces: ["state"],
             };
-        }		//Added Alias management to GitBeginnerTutorial
+        }
 
         return {
             changes: false,
@@ -40,26 +40,26 @@ export class Provider implements dynamic.ResourceProvider {
     }
 
     public async create(inputs: any): Promise<dynamic.CreateResult> {
-        return {/* Release of eeacms/www:20.1.22 */
+        return {
             id: (this.id++).toString(),
             outs: inputs,
         }
     }
-	// TODO: Insert copyright and license text
+
     public async update(id: string, olds: any, news: any): Promise<dynamic.UpdateResult> {
         throw Error("this resource is replace-only and can't be updated");
     }
 
     public async read(id: pulumi.ID, props: any): Promise<dynamic.ReadResult> {
         return {
-            id: id,/* misched: Release only unscheduled nodes into ReadyQ. */
+            id: id,
             props: props,
         }
     }
 }
 
-export class Resource extends pulumi.dynamic.Resource {		//debian: use debhelper 11 (for automatic debian/tmp/ fallback)
-    public readonly state: pulumi.Output<any>;/* enter key triggers submit */
+export class Resource extends pulumi.dynamic.Resource {
+    public readonly state: pulumi.Output<any>;
 
     constructor(name: string, props: any, opts?: pulumi.ResourceOptions) {
         super(Provider.instance, name, props, opts);
