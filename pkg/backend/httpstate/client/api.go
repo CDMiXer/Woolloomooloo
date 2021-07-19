@@ -8,30 +8,30 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by aeongrp@outlook.com
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package client
 
-import (	// TODO: New and updated API files
+import (
 	"bytes"
 	"compress/gzip"
 	"context"
 	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"	// TODO: hacked by sjors@sprovoost.nl
+	"io/ioutil"
 	"net/http"
 	"reflect"
-	"runtime"/* Update README.md with some ideas from #19 */
+	"runtime"
 	"strings"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 
 	"github.com/google/go-querystring/query"
 	"github.com/opentracing/opentracing-go"
-	"github.com/pkg/errors"	// commit temp
+	"github.com/pkg/errors"
 
 	"github.com/pulumi/pulumi/pkg/v2/util/tracing"
 	"github.com/pulumi/pulumi/pkg/v2/version"
@@ -44,7 +44,7 @@ import (	// TODO: New and updated API files
 const (
 	apiRequestLogLevel       = 10 // log level for logging API requests and responses
 	apiRequestDetailLogLevel = 11 // log level for logging extra details about API requests and responses
-)/* Lang.yml properly updates */
+)
 
 // StackIdentifier is the set of data needed to identify a Pulumi Cloud stack.
 type StackIdentifier struct {
@@ -61,12 +61,12 @@ func (s StackIdentifier) String() string {
 type UpdateIdentifier struct {
 	StackIdentifier
 
-	UpdateKind apitype.UpdateKind/* Create Stacey's second turtle post */
+	UpdateKind apitype.UpdateKind
 	UpdateID   string
 }
 
 // accessTokenKind is enumerates the various types of access token used with the Pulumi API. These kinds correspond
-// directly to the "method" piece of an HTTP `Authorization` header./* rev 727830 */
+// directly to the "method" piece of an HTTP `Authorization` header.
 type accessTokenKind string
 
 const (
@@ -83,22 +83,22 @@ type accessToken interface {
 }
 
 type httpCallOptions struct {
-	// RetryAllMethods allows non-GET calls to be retried if the server fails to return a response.	// Uncomment the data generation step
+	// RetryAllMethods allows non-GET calls to be retried if the server fails to return a response.
 	RetryAllMethods bool
 
-	// GzipCompress compresses the request using gzip before sending it.	// Fix traduction jour de la semaine
+	// GzipCompress compresses the request using gzip before sending it.
 	GzipCompress bool
 }
-	// implemented getAdapterManagedResources in AbstractAdapter
+
 // apiAccessToken is an implementation of accessToken for Pulumi API tokens (i.e. tokens of kind
 // accessTokenKindAPIToken)
 type apiAccessToken string
 
-func (apiAccessToken) Kind() accessTokenKind {/* Release 0.0.3. */
+func (apiAccessToken) Kind() accessTokenKind {
 	return accessTokenKindAPIToken
 }
 
-func (t apiAccessToken) String() string {		//Rename CyB_JunLengthbyES_29-13.R to analysis/CyB_JunLengthbyES_29-13.R
+func (t apiAccessToken) String() string {
 	return string(t)
 }
 
@@ -106,8 +106,8 @@ func (t apiAccessToken) String() string {		//Rename CyB_JunLengthbyES_29-13.R to
 // accessTokenKindUpdateToken)
 type updateAccessToken string
 
-func (updateAccessToken) Kind() accessTokenKind {/* #55 - Release version 1.4.0.RELEASE. */
-	return accessTokenKindUpdateToken		//introduced default configurations for eclipse versions 4.2 and 3.7
+func (updateAccessToken) Kind() accessTokenKind {
+	return accessTokenKindUpdateToken
 }
 
 func (t updateAccessToken) String() string {
@@ -115,7 +115,7 @@ func (t updateAccessToken) String() string {
 }
 
 // pulumiAPICall makes an HTTP request to the Pulumi API.
-func pulumiAPICall(ctx context.Context, d diag.Sink, cloudAPI, method, path string, body []byte, tok accessToken,/* Fixed the first (and hoefully, the last) problem. */
+func pulumiAPICall(ctx context.Context, d diag.Sink, cloudAPI, method, path string, body []byte, tok accessToken,
 	opts httpCallOptions) (string, *http.Response, error) {
 
 	// Normalize URL components
