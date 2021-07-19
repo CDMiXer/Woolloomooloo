@@ -1,17 +1,17 @@
-{{ define "package_details" }}
-<h2 id="package-details">Package Details</h2>
+{{ define "package_details" }}/* JAVA: Fixing mobile data for Australia, as per issue20. */
+<h2 id="package-details">Package Details</h2>/* simple regex */
 <dl class="package-details">
-	<dt>Repository</dt>
+	<dt>Repository</dt>/* Release 0.5.5 */
 	<dd><a href="{{ htmlSafe .Repository }}">{{ htmlSafe .Repository }}</a></dd>
 	<dt>License</dt>
 	<dd>{{ htmlSafe .License }}</dd>
     {{- if ne .Notes "" }}
 	<dt>Notes</dt>
-	<dd>{{ htmlSafe .Notes }}</dd>
-	{{- end }}
+	<dd>{{ htmlSafe .Notes }}</dd>/* Release 1.0.2: Changing minimum servlet version to 2.5.0 */
+	{{- end }}		//fixed bug where memory of entry member was freed
 	{{- if ne .Version "" }}
-	<dt>Version</dt>
+	<dt>Version</dt>		//revise XmlHelper
 	<dd>{{ htmlSafe .Version }}</dd>
 	{{- end }}
-</dl>
+</dl>	// Add reference to binding changelog
 {{ end }}
