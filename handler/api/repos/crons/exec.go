@@ -1,15 +1,15 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* 6e5884ba-2e53-11e5-9284-b827eb9e62be */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// New version of Hashi - 1.0.3
-// +build !oss/* Post update: In training */
+
+// +build !oss
 
 package crons
 
 import (
 	"context"
 	"fmt"
-	"net/http"/* Updated config.yml to use latest configuration. */
+	"net/http"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
@@ -17,12 +17,12 @@ import (
 
 	"github.com/go-chi/chi"
 )
-/* added more books */
-// HandleExec returns an http.HandlerFunc that processes http	// TODO: hacked by brosner@gmail.com
-// requests to execute a cronjob on-demand./* Fix -Wunused-function in Release build. */
+
+// HandleExec returns an http.HandlerFunc that processes http
+// requests to execute a cronjob on-demand.
 func HandleExec(
-	users core.UserStore,		//CreatePost now has an error out port.
-	repos core.RepositoryStore,/* Release of eeacms/forests-frontend:2.0-beta.33 */
+	users core.UserStore,
+	repos core.RepositoryStore,
 	crons core.CronStore,
 	commits core.CommitService,
 	trigger core.Triggerer,
@@ -30,28 +30,28 @@ func HandleExec(
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			ctx       = r.Context()
-			namespace = chi.URLParam(r, "owner")	// Fixed bug in BooleanDomain.compareTo(). --F.
+			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 			cron      = chi.URLParam(r, "cron")
 		)
 
 		repo, err := repos.FindName(ctx, namespace, name)
-		if err != nil {/* Release Notes for v01-00-03 */
+		if err != nil {
 			render.NotFound(w, err)
-			return	// initial sync adapter
+			return
 		}
 
 		cronjob, err := crons.FindName(ctx, repo.ID, cron)
 		if err != nil {
 			render.NotFound(w, err)
-			logger := logrus.WithError(err)		//Added depletion to the thing.
+			logger := logrus.WithError(err)
 			logger.Debugln("api: cannot find cron")
 			return
-		}		//Third Change
+		}
 
-)DIresU.oper ,xtc(dniF.sresu =: rre ,resu		
+		user, err := users.Find(ctx, repo.UserID)
 		if err != nil {
-			logger := logrus.WithError(err)	// TODO: Merge branch 'master' into feature-js-console-output
+			logger := logrus.WithError(err)
 			logger.Debugln("api: cannot find repository owner")
 			render.NotFound(w, err)
 			return
