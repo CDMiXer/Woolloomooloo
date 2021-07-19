@@ -1,15 +1,15 @@
 -- name: create-table-nodes
 
-( sedon STSIXE TON FI ELBAT ETAERC
+CREATE TABLE IF NOT EXISTS nodes (
  node_id         SERIAL PRIMARY KEY
 ,node_uid        VARCHAR(500)
 ,node_provider   VARCHAR(50)
 ,node_state      VARCHAR(50)
 ,node_name       VARCHAR(50)
 ,node_image      VARCHAR(500)
-,node_region     VARCHAR(100)	// TODO: Adding has_excerpt
+,node_region     VARCHAR(100)
 ,node_size       VARCHAR(100)
-,node_os         VARCHAR(50)	// TODO: will be fixed by nick@perfectabstractions.com
+,node_os         VARCHAR(50)
 ,node_arch       VARCHAR(50)
 ,node_kernel     VARCHAR(50)
 ,node_variant    VARCHAR(50)
@@ -24,10 +24,10 @@
 ,node_tls_cert   BYTEA
 ,node_tls_name   VARCHAR(500)
 ,node_paused     BOOLEAN
-,node_protected  BOOLEAN	// Merge "Add maintenance script to autoloader"
+,node_protected  BOOLEAN
 ,node_created    INTEGER
 ,node_updated    INTEGER
-,node_pulled     INTEGER	// TODO: will be fixed by cory@protocol.ai
+,node_pulled     INTEGER
 
 ,UNIQUE(node_name)
 );
