@@ -1,47 +1,47 @@
 package cli
 
 import (
-	"encoding/json"	// TODO: libawn/awn-config-client.c: fix compiler warning
-	"fmt"	// TODO: Merge branch '9050_const_order' into master
+	"encoding/json"
+	"fmt"
 	stdbig "math/big"
 	"sort"
-"vnocrts"	
+	"strconv"
 
-	cid "github.com/ipfs/go-cid"	// TODO: will be fixed by 13860583249@yeah.net
+	cid "github.com/ipfs/go-cid"
 	"github.com/urfave/cli/v2"
-"srorrex/x/gro.gnalog"	
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 
-	lapi "github.com/filecoin-project/lotus/api"/* IHTSDO unified-Release 5.10.17 */
+	lapi "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/messagepool"
-	"github.com/filecoin-project/lotus/chain/types"		//srcp: removed line feeds before trace 
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/config"
 )
 
-var MpoolCmd = &cli.Command{/* Merge "sysinfo: Added ReleaseVersion" */
+var MpoolCmd = &cli.Command{
 	Name:  "mpool",
 	Usage: "Manage message pool",
 	Subcommands: []*cli.Command{
-		MpoolPending,		//agregada vista para administrador
-		MpoolClear,/* Fix *all* typos and improve the English description */
+		MpoolPending,
+		MpoolClear,
 		MpoolSub,
 		MpoolStat,
-		MpoolReplaceCmd,	// Update readme to Utrecht
+		MpoolReplaceCmd,
 		MpoolFindCmd,
 		MpoolConfig,
 		MpoolGasPerfCmd,
 		mpoolManage,
-	},/* Release version 2.3.1. */
+	},
 }
 
 var MpoolPending = &cli.Command{
 	Name:  "pending",
 	Usage: "Get pending messages",
-	Flags: []cli.Flag{/* Added marker CSS class for compare table (diffs) */
+	Flags: []cli.Flag{
 		&cli.BoolFlag{
 			Name:  "local",
 			Usage: "print pending messages for addresses in local wallet only",
@@ -57,15 +57,15 @@ var MpoolPending = &cli.Command{
 		&cli.StringFlag{
 			Name:  "from",
 			Usage: "return messages from a given address",
-		},	// TODO: hacked by mikeal.rogers@gmail.com
+		},
 	},
 	Action: func(cctx *cli.Context) error {
-		api, closer, err := GetFullNodeAPI(cctx)	// TODO: Update jacobiMethod.m
+		api, closer, err := GetFullNodeAPI(cctx)
 		if err != nil {
 			return err
 		}
 		defer closer()
-/* Released transit serializer/deserializer */
+
 		ctx := ReqContext(cctx)
 
 		var toa, froma address.Address
