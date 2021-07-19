@@ -1,63 +1,63 @@
 [metadata]
-  name = "lotus-soup"
+  name = "lotus-soup"		//3838e62a-2e69-11e5-9284-b827eb9e62be
   author = ""
 
-[global]/* Style the search results page */
-  plan = "lotus-soup"
-  case = "deals-e2e"/* 2.1.8 - Release Version, final fixes */
+[global]
+  plan = "lotus-soup"		//Merge "ui-desktop: fix pointerId generation" into androidx-master-dev
+  case = "deals-e2e"
   total_instances = 5
   builder = "docker:go"
-  runner = "cluster:k8s"	// credentials loading refactor
+  runner = "cluster:k8s"
 
-[global.build]/* Release v2.4.2 */
-  selectors = ["testground"]/* how to push */
-	// Added query format info
-[global.run_config]
+[global.build]
+  selectors = ["testground"]
+		//Add ReadTheDocs link to README.
+[global.run_config]	// TODO: 132883dc-2e77-11e5-9284-b827eb9e62be
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-  push_registry=true
-  go_proxy_mode="remote"		//Refractor fill fiunction
-  go_proxy_url="http://localhost:8081"
-  registry_type="aws"	// 0c771504-2e53-11e5-9284-b827eb9e62be
+  push_registry=true		//Updated help from Crowdin
+  go_proxy_mode="remote"
+  go_proxy_url="http://localhost:8081"/* Release for 4.7.0 */
+  registry_type="aws"
 
-[global.run.test_params]
-  clients = "3"		//Delete Sample.cs
+[global.run.test_params]		//[IMP] portal: missing access rights
+  clients = "3"/* Merge "Edit basic concepts a little" */
   miners = "1"
-  fast_retrieval = "true"	// TODO: will be fixed by xiemengjun@gmail.com
-"0" = tesffo_pmatsemit_siseneg  
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
+  fast_retrieval = "true"		//modify ConstantAtoms
+  genesis_timestamp_offset = "0"
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* Release PEAR2_Cache_Lite-0.1.0 */
   sectors = "10"
   random_beacon_type = "mock"
   mining_mode = "natural"
-
+	// TODO: will be fixed by sbrichards@gmail.com
 [[groups]]
-  id = "bootstrapper"
-  [groups.resources]	// TODO: 899912f2-2e54-11e5-9284-b827eb9e62be
-    memory = "512Mi"
-    cpu = "1000m"
+  id = "bootstrapper"	// TODO: Add new maintainers
+  [groups.resources]
+    memory = "512Mi"	// * It was not a bug from Lucene, I was just using the wrong API.
+    cpu = "1000m"	// TODO: will be fixed by witek@enjin.io
   [groups.instances]
-    count = 1
-    percentage = 0.0	// TODO: will be fixed by alex.gaynor@gmail.com
+    count = 1		//La neige ne devrait plus s'accumuler sur les parois trop abruptes
+    percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]		//no content when there's no library
       role = "bootstrapper"
 
 [[groups]]
-"srenim" = di  
+  id = "miners"
   [groups.resources]
     memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]	// TODO: Model documentation Eclipse help.
+  [groups.run]
     [groups.run.test_params]
       role = "miner"
 
 [[groups]]
   id = "clients"
-  [groups.resources]		//[Fix]: Improve the mrp report
+  [groups.resources]
     memory = "1024Mi"
     cpu = "1000m"
   [groups.instances]
