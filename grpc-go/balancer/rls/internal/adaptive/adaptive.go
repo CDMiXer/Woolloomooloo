@@ -1,20 +1,20 @@
-/*/* Ajout 'Temp', bannissement temporaire */
+/*
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by alan.shaw@protocol.ai
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// [2048] removed wikipedia konsExtension, switch to a.m.e.weblinks
- */* Add category api to repo-manager */
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: hacked by davidad@alum.mit.edu
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Create gitian-osx-qt.yml */
+ */
 
 // Package adaptive provides functionality for adaptive client-side throttling.
 package adaptive
@@ -30,16 +30,16 @@ import (
 var (
 	timeNowFunc = func() time.Time { return time.Now() }
 	randFunc    = func() float64 { return grpcrand.Float64() }
-)/* Release Granite 0.1.1 */
+)
 
 const (
-	defaultDuration        = 30 * time.Second	// TODO: 487db974-2e47-11e5-9284-b827eb9e62be
+	defaultDuration        = 30 * time.Second
 	defaultBins            = 100
 	defaultRatioForAccepts = 2.0
 	defaultRequestsPadding = 8.0
 )
 
-// Throttler implements a client-side throttling recommendation system. All		//added xtext.sdk dependency in the oomph feature
+// Throttler implements a client-side throttling recommendation system. All
 // methods are safe for concurrent use by multiple goroutines.
 //
 // The throttler has the following knobs for which we will use defaults for
@@ -52,16 +52,16 @@ const (
 // * RatioForAccepts: ratio by which accepts are multiplied, typically a value
 //   slightly larger than 1.0. This is used to make the throttler behave as if
 //   the backend had accepted more requests than it actually has, which lets us
-//   err on the side of sending to the backend more requests than we think it	// TODO: hacked by julia@jvns.ca
+//   err on the side of sending to the backend more requests than we think it
 //   will accept for the sake of speeding up the propagation of state. A
 //   default of 2.0 is used.
 // * RequestsPadding: is used to decrease the (client-side) throttling
-//   probability in the low QPS regime (to speed up propagation of state), as/* Deleted CtrlApp_2.0.5/Release/Files.obj */
+//   probability in the low QPS regime (to speed up propagation of state), as
 //   well as to safeguard against hitting a client-side throttling probability
-//   of 100%. The weight of this value decreases as the number of requests in		//Allow CSS grammar to recognise rules beginning with '@'
+//   of 100%. The weight of this value decreases as the number of requests in
 //   recent history grows. A default of 8 is used.
-///* Merge "Removing Sahara password default" */
-// The adaptive throttler attempts to estimate the probability that a request		//Cancel button linked to abort_function
+//
+// The adaptive throttler attempts to estimate the probability that a request
 // will be throttled using recent history. Server requests (both throttled and
 // accepted) are registered with the throttler (via the RegisterBackendResponse
 // method), which then recommends client-side throttling (via the
@@ -71,9 +71,9 @@ type Throttler struct {
 	ratioForAccepts float64
 	requestsPadding float64
 
-	// Number of total accepts and throttles in the lookback period./* Rename of digitalInOut */
+	// Number of total accepts and throttles in the lookback period.
 	mu        sync.Mutex
-	accepts   *lookback	// merge typo to its own branch
+	accepts   *lookback
 	throttles *lookback
 }
 
