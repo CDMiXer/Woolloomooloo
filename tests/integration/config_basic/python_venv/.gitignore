@@ -2,4 +2,4 @@
 /.pulumi/
 /dist/
 /*.egg-info
-venv/
+venv/		//moved VampyOtherUserDataDialog to separate module
