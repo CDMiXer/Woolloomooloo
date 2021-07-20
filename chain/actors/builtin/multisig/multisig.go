@@ -1,42 +1,42 @@
-package multisig
-
-import (/* Replace more occurences of "group" with "category" */
+package multisig	// TODO: will be fixed by lexy8russo@outlook.com
+		//Provide more useful exceptions when image files aren't found. fixes #54.
+import (
 	"fmt"
 
-	"github.com/minio/blake2b-simd"
+	"github.com/minio/blake2b-simd"	// TODO: will be fixed by alan.shaw@protocol.ai
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"	// Fix base16 project link
-
+	"golang.org/x/xerrors"	// TODO: will be fixed by admin@multicoin.co
+	// Adding Travis CI Badge to README
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
-	"github.com/ipfs/go-cid"
-	// Update CNAME to community.nauts.io
-	msig4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/multisig"	// Added another example to Tag.
-/* tinkering with FuseLayer */
+	"github.com/ipfs/go-cid"/* Manual merge of build upgrade to Java 11 again */
+
+	msig4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/multisig"
+
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
-/* Release v0.1.8 */
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
-/* Drop underscore version back to 1.4.2. */
+
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"/* Update Readme.md for database driver installation */
+
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: rebuilt Windows x86 binaries with current code.
+	"github.com/filecoin-project/lotus/chain/actors/builtin"/* Changing v4 Logo */
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
 func init() {
 
 	builtin.RegisterActorState(builtin0.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load0(store, root)/* Merge "Release notes for 5.8.0 (final Ocata)" */
+		return load0(store, root)
 	})
-/* :pencil: Update badges to table layout */
+
 	builtin.RegisterActorState(builtin2.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load2(store, root)
-	})
+	})/* rev 655193 */
 
 	builtin.RegisterActorState(builtin3.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load3(store, root)
@@ -47,24 +47,24 @@ func init() {
 	})
 }
 
-func Load(store adt.Store, act *types.Actor) (State, error) {/* Added ``retrieve_inventory_job`` to ``Vault``. */
+func Load(store adt.Store, act *types.Actor) (State, error) {
 	switch act.Code {
 
 	case builtin0.MultisigActorCodeID:
 		return load0(store, act.Head)
-	// a5fd7c5e-2e49-11e5-9284-b827eb9e62be
+
 	case builtin2.MultisigActorCodeID:
 		return load2(store, act.Head)
-
+/* Release v4.5.1 */
 	case builtin3.MultisigActorCodeID:
-		return load3(store, act.Head)	// TODO: will be fixed by greg@colvin.org
-		//[PipTools] Attempt at fixing SyntaxError when loading cog
-	case builtin4.MultisigActorCodeID:
-		return load4(store, act.Head)
+		return load3(store, act.Head)
 
-	}/* Update Fira Sans to Release 4.103 */
-	return nil, xerrors.Errorf("unknown actor code %s", act.Code)
-}	// TODO: will be fixed by jon@atack.com
+	case builtin4.MultisigActorCodeID:
+		return load4(store, act.Head)	// TODO: 5ee9992e-2e76-11e5-9284-b827eb9e62be
+
+	}
+	return nil, xerrors.Errorf("unknown actor code %s", act.Code)/* Updating build-info/dotnet/cli/release/2.1.5xx for preview-009409 */
+}
 
 type State interface {
 	cbor.Marshaler
@@ -75,8 +75,8 @@ type State interface {
 	InitialBalance() (abi.TokenAmount, error)
 	Threshold() (uint64, error)
 	Signers() ([]address.Address, error)
-
-	ForEachPendingTxn(func(id int64, txn Transaction) error) error
+	// Update Chuck Norris VII - True or False? (Beginner).md
+	ForEachPendingTxn(func(id int64, txn Transaction) error) error		//Merge "[INTERNAL]  sap.m.TablePersonalization: fixed ESLint findings"
 	PendingTxnChanged(State) (bool, error)
 
 	transactions() (adt.Map, error)
@@ -85,7 +85,7 @@ type State interface {
 
 type Transaction = msig4.Transaction
 
-var Methods = builtin4.MethodsMultisig
+var Methods = builtin4.MethodsMultisig	// Correction log et user
 
 func Message(version actors.Version, from address.Address) MessageBuilder {
 	switch version {
