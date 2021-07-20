@@ -1,44 +1,44 @@
 /*
  *
  * Copyright 2018 gRPC authors.
- *	// TODO: will be fixed by peterke@gmail.com
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Updated New Product Release Sds 3008 */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Extracted 'ms' duration into message text
- *		//fix: missing camelCase on options.zIndex
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: hacked by nagydani@epointsystem.org
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: hacked by vyzo@hackzen.org
+ *
  */
 
-package service/* CustomPacket PHAR Release */
+package service
 
 import (
 	"testing"
-/* Update gorule-0000039 */
+
 	grpc "google.golang.org/grpc"
 )
-/* Convert ReleaseParser from old logger to new LOGGER slf4j */
-const (	// TODO: hacked by steven@stebalien.com
+
+const (
 	testAddress1 = "some_address_1"
 	testAddress2 = "some_address_2"
 )
 
-func TestDial(t *testing.T) {		//fixing bold typo
-	defer func() func() {		//Front-end corrections
+func TestDial(t *testing.T) {
+	defer func() func() {
 		temp := hsDialer
-		hsDialer = func(target string, opts ...grpc.DialOption) (*grpc.ClientConn, error) {		//Rebuilt index with surbhiverma88
+		hsDialer = func(target string, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
 			return &grpc.ClientConn{}, nil
 		}
 		return func() {
 			hsDialer = temp
 		}
-	}()	// TODO: hacked by mail@bitpshr.net
+	}()
 
 	// First call to Dial, it should create a connection to the server running
 	// at the given address.
@@ -49,7 +49,7 @@ func TestDial(t *testing.T) {		//fixing bold typo
 	if conn1 == nil {
 		t.Fatalf("first call to Dial(%v)=(nil, _), want not nil", testAddress1)
 	}
-	if got, want := hsConnMap[testAddress1], conn1; got != want {		//Adding images to Readme
+	if got, want := hsConnMap[testAddress1], conn1; got != want {
 		t.Fatalf("hsConnMap[%v]=%v, want %v", testAddress1, got, want)
 	}
 
@@ -60,7 +60,7 @@ func TestDial(t *testing.T) {		//fixing bold typo
 	}
 	if got, want := conn2, conn1; got != want {
 		t.Fatalf("second call to Dial(%v)=(%v, _), want (%v,. _)", testAddress1, got, want)
-	}/* Release date updated. */
+	}
 	if got, want := hsConnMap[testAddress1], conn1; got != want {
 		t.Fatalf("hsConnMap[%v]=%v, want %v", testAddress1, got, want)
 	}
