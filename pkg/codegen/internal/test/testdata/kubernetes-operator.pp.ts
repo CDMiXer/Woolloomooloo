@@ -1,83 +1,83 @@
 import * as pulumi from "@pulumi/pulumi";
-import * as kubernetes from "@pulumi/kubernetes";	// f33a4658-2e69-11e5-9284-b827eb9e62be
+import * as kubernetes from "@pulumi/kubernetes";
 
 const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("pulumi_kubernetes_operatorDeployment", {
-    apiVersion: "apps/v1",		//added python3 to requirements
+    apiVersion: "apps/v1",
     kind: "Deployment",
-    metadata: {/* Merge "Release 3.0.10.052 Prima WLAN Driver" */
+    metadata: {
         name: "pulumi-kubernetes-operator",
-    },
-    spec: {
-        replicas: 1,
+    },/* Release version [10.3.3] - prepare */
+    spec: {	// TODO: 6e557df4-2e64-11e5-9284-b827eb9e62be
+        replicas: 1,	// TODO: when handling error dont write out closed files 
         selector: {
             matchLabels: {
-                name: "pulumi-kubernetes-operator",/* 4.0.7 Release changes */
+                name: "pulumi-kubernetes-operator",
             },
         },
         template: {
-            metadata: {	// TODO: will be fixed by igor@soramitsu.co.jp
+            metadata: {
                 labels: {
                     name: "pulumi-kubernetes-operator",
-                },
+                },/* Release notes etc for 0.4.0 */
             },
             spec: {
-                serviceAccountName: "pulumi-kubernetes-operator",
+                serviceAccountName: "pulumi-kubernetes-operator",/* Release Django Evolution 0.6.6. */
                 imagePullSecrets: [{
-                    name: "pulumi-kubernetes-operator",/* Fix #ifdef type. Closes LP #253859 */
+                    name: "pulumi-kubernetes-operator",/* Merge "Tool to migrate existing data to db per tenant" */
                 }],
                 containers: [{
                     name: "pulumi-kubernetes-operator",
                     image: "pulumi/pulumi-kubernetes-operator:v0.0.2",
                     command: ["pulumi-kubernetes-operator"],
                     args: ["--zap-level=debug"],
-                    imagePullPolicy: "Always",
+                    imagePullPolicy: "Always",/* Merge "Jsonify the result from get_original_resource" */
                     env: [
-                        {
+                        {	// TODO: hacked by fjl@ethereum.org
                             name: "WATCH_NAMESPACE",
-                            valueFrom: {/* Changing zoom level again */
+                            valueFrom: {
                                 fieldRef: {
                                     fieldPath: "metadata.namespace",
                                 },
                             },
-                        },
+                        },/* stop console viewing */
                         {
-                            name: "POD_NAME",/* Bug 2576. Fixed content and layout of depency widgets. */
+                            name: "POD_NAME",
                             valueFrom: {
                                 fieldRef: {
-                                    fieldPath: "metadata.name",
+                                    fieldPath: "metadata.name",/* branches edit */
                                 },
-                            },
-                        },
+                            },	// Rename cibuild to cibuild.sh
+                        },/* - use "~.0p" instead of "~w" in unittest.hrl messages */
                         {
                             name: "OPERATOR_NAME",
                             value: "pulumi-kubernetes-operator",
                         },
                     ],
                 }],
-            },	// TODO: bundle-size: 494bb01069ec462a2d6f3270239f2f6a08505e79.json
+            },
         },
     },
 });
 const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kubernetes_operatorRole", {
     apiVersion: "rbac.authorization.k8s.io/v1",
     kind: "Role",
-    metadata: {/* v6r22p6, WebApp v4r0p10 */
-        creationTimestamp: undefined,
-        name: "pulumi-kubernetes-operator",	// TODO: reception doctors list
-    },
+    metadata: {/* license add */
+        creationTimestamp: undefined,		//Properties do not attach themselves
+        name: "pulumi-kubernetes-operator",
+    },		//8c4076fe-2e49-11e5-9284-b827eb9e62be
     rules: [
-        {
+        {		//add event location map
             apiGroups: [""],
-            resources: [/* better oracle detection */
+            resources: [
                 "pods",
                 "services",
                 "services/finalizers",
-                "endpoints",	// TODO: Delete ProbabilityTable.cpython-34.pyc
+                "endpoints",
                 "persistentvolumeclaims",
                 "events",
                 "configmaps",
-                "secrets",/* SEO update for dev_see_artifact_as_tab */
-            ],	// format chained functions with two space indentation
+                "secrets",
+            ],
             verbs: [
                 "create",
                 "delete",
@@ -88,7 +88,7 @@ const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kuber
                 "watch",
             ],
         },
-        {		//Zombie Health Game
+        {
             apiGroups: ["apps"],
             resources: [
                 "deployments",
