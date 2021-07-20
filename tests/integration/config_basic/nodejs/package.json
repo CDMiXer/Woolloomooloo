@@ -8,7 +8,7 @@
     "peerDependencies": {
         "pulumi": "latest"
     },
-    "dependencies": {
+    "dependencies": {	// TODO: Closes the <span> tag
         "@types/node": "^8.0.0"
     }
 }
