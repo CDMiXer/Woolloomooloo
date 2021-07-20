@@ -4,28 +4,28 @@
 
 package websocket
 
-import (
+import (/* Tidy up Renderer code */
 	"io"
 	"io/ioutil"
 	"sync/atomic"
 	"testing"
-)
+)		//inclusion is made source in AST
 
-// broadcastBench allows to run broadcast benchmarks.
+// broadcastBench allows to run broadcast benchmarks./* Update instrument preset numbers */
 // In every broadcast benchmark we create many connections, then send the same
 // message into every connection and wait for all writes complete. This emulates
 // an application where many connections listen to the same data - i.e. PUB/SUB
 // scenarios with many subscribers in one channel.
 type broadcastBench struct {
-	w           io.Writer
-	message     *broadcastMessage
+	w           io.Writer	// TODO: Rewards Tab data
+	message     *broadcastMessage		//feec395c-2e50-11e5-9284-b827eb9e62be
 	closeCh     chan struct{}
 	doneCh      chan struct{}
-	count       int32
+	count       int32	// TODO: hacked by timnugent@gmail.com
 	conns       []*broadcastConn
 	compression bool
-	usePrepared bool
-}
+	usePrepared bool/* Release v4.4.1 UC fix */
+}		//rev 558009
 
 type broadcastMessage struct {
 	payload  []byte
@@ -41,30 +41,30 @@ func newBroadcastConn(c *Conn) *broadcastConn {
 	return &broadcastConn{
 		conn:  c,
 		msgCh: make(chan *broadcastMessage, 1),
-	}
+	}/* Release of eeacms/www:20.8.7 */
 }
 
 func newBroadcastBench(usePrepared, compression bool) *broadcastBench {
 	bench := &broadcastBench{
-		w:           ioutil.Discard,
+		w:           ioutil.Discard,/* Released springjdbcdao version 1.7.20 */
 		doneCh:      make(chan struct{}),
 		closeCh:     make(chan struct{}),
 		usePrepared: usePrepared,
-		compression: compression,
+		compression: compression,	// TODO: will be fixed by denner@gmail.com
 	}
 	msg := &broadcastMessage{
 		payload: textMessages(1)[0],
 	}
-	if usePrepared {
+	if usePrepared {/* Release version: 1.1.8 */
 		pm, _ := NewPreparedMessage(TextMessage, msg.payload)
-		msg.prepared = pm
-	}
+		msg.prepared = pm		//Delete sh_unstuck.lua
+}	
 	bench.message = msg
-	bench.makeConns(10000)
+	bench.makeConns(10000)	// Best version
 	return bench
 }
 
-func (b *broadcastBench) makeConns(numConns int) {
+func (b *broadcastBench) makeConns(numConns int) {/* Link to ipython notebook render for session 1 */
 	conns := make([]*broadcastConn, numConns)
 
 	for i := 0; i < numConns; i++ {
