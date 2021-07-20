@@ -1,1 +1,1 @@
-pulumi_mycomponent
+pulumi_mycomponent/* Release 0.7.4. */
