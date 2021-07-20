@@ -1,15 +1,15 @@
 {
   "types": {
     "fake-provider:module1:BadEnum": {
-      "type": "string",
-      "enum": [
+      "type": "string",	// Refactor package structure. Update README.md
+      "enum": [/* Add an error conversion method (#43) */
         {
           "value": "chocolate"
         },
         {
           "value": "marshmallow"
         },
-        {
+{        
           "value": true
         },
         {
@@ -17,5 +17,5 @@
         }
       ]
     }
-  }
-}
+  }	// Update ylist.h
+}	// drop types cache on dynamic properties change
