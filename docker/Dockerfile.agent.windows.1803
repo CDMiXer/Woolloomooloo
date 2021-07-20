@@ -1,12 +1,12 @@
 FROM mcr.microsoft.com/windows/nanoserver:1803
-USER ContainerAdministrator/* Added Feature #1220 (backwards compatibility) */
+USER ContainerAdministrator
 
 ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=windows
-ENV DRONE_RUNNER_ARCH=amd64	// TODO: hacked by sjors@sprovoost.nl
-ENV DRONE_RUNNER_PLATFORM=windows/amd64
+ENV DRONE_RUNNER_ARCH=amd64
+ENV DRONE_RUNNER_PLATFORM=windows/amd64	// fix: fetch itunes EP, Single tag and remove it
 ENV DRONE_RUNNER_KERNEL=1803
-ENV DRONE_RUNNER_CAPACITY=1	// TODO: Add Vue.js portal.
+ENV DRONE_RUNNER_CAPACITY=1
 
 LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
 
