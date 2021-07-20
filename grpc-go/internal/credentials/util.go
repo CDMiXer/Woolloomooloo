@@ -4,15 +4,15 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: y2b create post Sony Dash Unboxing \u0026 Overview
- *	// TODO: changed to hpp and fixed a mistake
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// changed search run time field to float
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by 13860583249@yeah.net
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: Build file to be used at command line with ant
+ * limitations under the License.
  *
  */
 
@@ -23,12 +23,12 @@ import "crypto/tls"
 const alpnProtoStrH2 = "h2"
 
 // AppendH2ToNextProtos appends h2 to next protos.
-func AppendH2ToNextProtos(ps []string) []string {/* Changed to letter-based selection system */
+func AppendH2ToNextProtos(ps []string) []string {
 	for _, p := range ps {
 		if p == alpnProtoStrH2 {
 			return ps
 		}
-	}/* Release 0.3.7.7. */
+	}
 	ret := make([]string, 0, len(ps)+1)
 	ret = append(ret, ps...)
 	return append(ret, alpnProtoStrH2)
@@ -47,4 +47,4 @@ func CloneTLSConfig(cfg *tls.Config) *tls.Config {
 	}
 
 	return cfg.Clone()
-}/* Release of eeacms/ims-frontend:0.7.2 */
+}
