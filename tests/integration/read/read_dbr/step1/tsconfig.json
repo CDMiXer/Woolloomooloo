@@ -1,19 +1,19 @@
 {
     "compilerOptions": {
         "outDir": "bin",
-        "target": "es2016",
+        "target": "es2016",		//add print for the result
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,
+        "stripInternal": true,		//Adding some debugging
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true,
+        "forceConsistentCasingInFileNames": true,	// Add some features and build.
         "strictNullChecks": true
-    },
+    },/* Release DBFlute-1.1.0-sp2-RC2 */
     "files": [
         "index.ts"
     ]
