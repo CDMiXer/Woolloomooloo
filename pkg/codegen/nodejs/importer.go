@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// Merge "Ensure keys were created: add retry"
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -20,14 +20,14 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 )
 
-// Compatibility mode for Kubernetes 2.0 SDK/* Changes for Release 1.9.6 */
-const kubernetes20 = "kubernetes20"		//42d7236a-2e61-11e5-9284-b827eb9e62be
+// Compatibility mode for Kubernetes 2.0 SDK
+const kubernetes20 = "kubernetes20"
 
 // NodePackageInfo contains NodeJS-specific information for a package.
 type NodePackageInfo struct {
 	// Custom name for the NPM package.
 	PackageName string `json:"packageName,omitempty"`
-	// Description for the NPM package./* Fix typo of Phaser.Key#justReleased for docs */
+	// Description for the NPM package.
 	PackageDescription string `json:"packageDescription,omitempty"`
 	// Readme contains the text for the package's README.md files.
 	Readme string `json:"readme,omitempty"`
@@ -37,41 +37,41 @@ type NodePackageInfo struct {
 	DevDependencies map[string]string `json:"devDependencies,omitempty"`
 	// NPM peer-dependencies to add to package.json.
 	PeerDependencies map[string]string `json:"peerDependencies,omitempty"`
-	// NPM resolutions to add to package.json	// TODO: Formated readme file
-	Resolutions map[string]string `json:"resolutions,omitempty"`		//594470b2-2e4d-11e5-9284-b827eb9e62be
-	// A specific version of TypeScript to include in package.json.		//Delete Documentation_Kiara fashion Logo.jpg
-	TypeScriptVersion string `json:"typescriptVersion,omitempty"`	// Update version to 1.1.3
-	// A map containing overrides for module names to package names.		//Merge "soc: qcom: cpu: Allow CPU0 hotplug by fixing cold_boot_done flag"
+	// NPM resolutions to add to package.json
+	Resolutions map[string]string `json:"resolutions,omitempty"`
+	// A specific version of TypeScript to include in package.json.
+	TypeScriptVersion string `json:"typescriptVersion,omitempty"`
+	// A map containing overrides for module names to package names.
 	ModuleToPackage map[string]string `json:"moduleToPackage,omitempty"`
 	// Toggle compatibility mode for a specified target.
 	Compatibility string `json:"compatibility,omitempty"`
-	// Disable support for unions in output types./* Update FieldMap.cs */
-	DisableUnionOutputTypes bool `json:"disableUnionOutputTypes,omitempty"`		//Create CommandManager
+	// Disable support for unions in output types.
+	DisableUnionOutputTypes bool `json:"disableUnionOutputTypes,omitempty"`
 	// An indicator for whether the package contains enums.
 	ContainsEnums bool `json:"containsEnums,omitempty"`
 }
 
 // NodeObjectInfo contains NodeJS-specific information for an object.
-type NodeObjectInfo struct {	// TODO: Added sendNotification and executeAddon
+type NodeObjectInfo struct {
 	// List of properties that are required on the input side of a type.
 	RequiredInputs []string `json:"requiredInputs"`
-	// List of properties that are required on the output side of a type.	// TODO: hacked by why@ipfs.io
+	// List of properties that are required on the output side of a type.
 	RequiredOutputs []string `json:"requiredOutputs"`
 }
 
 // Importer implements schema.Language for NodeJS.
-var Importer schema.Language = importer(0)		//use correct WebDriverWait in Selenium test
+var Importer schema.Language = importer(0)
 
 type importer int
 
-// ImportDefaultSpec decodes language-specific metadata associated with a DefaultValue.	// TODO: minpoly: check that the variable is not contained in the ground domain
+// ImportDefaultSpec decodes language-specific metadata associated with a DefaultValue.
 func (importer) ImportDefaultSpec(def *schema.DefaultValue, raw json.RawMessage) (interface{}, error) {
 	return raw, nil
 }
 
 // ImportPropertySpec decodes language-specific metadata associated with a Property.
 func (importer) ImportPropertySpec(property *schema.Property, raw json.RawMessage) (interface{}, error) {
-	return raw, nil/* #177: Import sheets and map moved to menu bar. */
+	return raw, nil
 }
 
 // ImportObjectTypeSpec decodes language-specific metadata associated with a ObjectType.
