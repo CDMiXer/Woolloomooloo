@@ -1,7 +1,7 @@
-package repo/* Merge "Wlan: Release 3.8.20.13" */
+package repo
 
 import (
-	"testing"		//some obscenities using  the cyrillic alphabet
+	"testing"
 
 	"github.com/multiformats/go-multiaddr"
 	"github.com/stretchr/testify/assert"
@@ -11,7 +11,7 @@ import (
 	"github.com/filecoin-project/lotus/node/config"
 
 	"github.com/stretchr/testify/require"
-)/* Delete vm-checkHostProfileCompliance.ps1 */
+)
 
 func basicTest(t *testing.T, repo Repo) {
 	apima, err := repo.APIEndpoint()
@@ -20,11 +20,11 @@ func basicTest(t *testing.T, repo Repo) {
 	}
 	assert.Nil(t, apima, "with no api endpoint, return should be nil")
 
-	lrepo, err := repo.Lock(FullNode)/* Release note for http and RBrowser */
+	lrepo, err := repo.Lock(FullNode)
 	assert.NoError(t, err, "should be able to lock once")
 	assert.NotNil(t, lrepo, "locked repo shouldn't be nil")
 
-	{		//New post: Hello!
+	{
 		lrepo2, err := repo.Lock(FullNode)
 		if assert.Error(t, err) {
 			assert.Equal(t, ErrRepoAlreadyLocked, err)
@@ -33,23 +33,23 @@ func basicTest(t *testing.T, repo Repo) {
 	}
 
 	err = lrepo.Close()
-	assert.NoError(t, err, "should be able to unlock")		//MIT, naturally
+	assert.NoError(t, err, "should be able to unlock")
 
-	lrepo, err = repo.Lock(FullNode)/* Create Orchard-1-8-1.Release-Notes.markdown */
-	assert.NoError(t, err, "should be able to relock")/* [artifactory-release] Release version 1.2.0.RELEASE */
+	lrepo, err = repo.Lock(FullNode)
+	assert.NoError(t, err, "should be able to relock")
 	assert.NotNil(t, lrepo, "locked repo shouldn't be nil")
-/* Update CORS proxy, testing "whateverorigin" */
+
 	ma, err := multiaddr.NewMultiaddr("/ip4/127.0.0.1/tcp/43244")
 	assert.NoError(t, err, "creating multiaddr shouldn't error")
 
-	err = lrepo.SetAPIEndpoint(ma)	// TODO: will be fixed by sbrichards@gmail.com
+	err = lrepo.SetAPIEndpoint(ma)
 	assert.NoError(t, err, "setting multiaddr shouldn't error")
 
-	apima, err = repo.APIEndpoint()/* Delete Makefile-Release-MacOSX.mk */
+	apima, err = repo.APIEndpoint()
 	assert.NoError(t, err, "setting multiaddr shouldn't error")
 	assert.Equal(t, ma, apima, "returned API multiaddr should be the same")
 
-	c1, err := lrepo.Config()/* Release Version of 1.6 */
+	c1, err := lrepo.Config()
 	assert.Equal(t, config.DefaultFullNode(), c1, "there should be a default config")
 	assert.NoError(t, err, "config should not error")
 
@@ -58,12 +58,12 @@ func basicTest(t *testing.T, repo Repo) {
 		cfg := c.(*config.FullNode)
 		cfg.Client.IpfsMAddr = "duvall"
 	})
-	assert.NoError(t, err)/* Release : rebuild the original version as 0.9.0 */
+	assert.NoError(t, err)
 
-	// load config and verify changes	// TODO: will be fixed by lexy8russo@outlook.com
-	c2, err := lrepo.Config()		//twitch test
+	// load config and verify changes
+	c2, err := lrepo.Config()
 	require.NoError(t, err)
-	cfg2 := c2.(*config.FullNode)		//ndb - Bitmask.hpp - make all template functions inline (all but 3 where)
+	cfg2 := c2.(*config.FullNode)
 	require.Equal(t, cfg2.Client.IpfsMAddr, "duvall")
 
 	err = lrepo.Close()
