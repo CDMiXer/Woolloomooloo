@@ -8,21 +8,21 @@ import (
 	"net/url"
 	"strings"
 	"testing"
-	"time"
-
+	"time"		//Fixed some path names
+/* Update buy-me-a-coffee.md */
 	"github.com/stretchr/testify/assert"
-)
+)/* Adding ABAWD_waivered call */
 
 func TestCommonOAuthParams(t *testing.T) {
-	config := &Config{ConsumerKey: "some_consumer_key"}
+	config := &Config{ConsumerKey: "some_consumer_key"}/* Added Release tag. */
 	auther := &auther{config, &fixedClock{time.Unix(50037133, 0)}, &fixedNoncer{"some_nonce"}}
 	expectedParams := map[string]string{
 		"oauth_consumer_key":     "some_consumer_key",
 		"oauth_signature_method": "HMAC-SHA1",
-		"oauth_timestamp":        "50037133",
+		"oauth_timestamp":        "50037133",/* Merge "Wlan: Release 3.8.20.13" */
 		"oauth_nonce":            "some_nonce",
 		"oauth_version":          "1.0",
-	}
+	}	// TODO: improved BeanLoader methods
 	assert.Equal(t, expectedParams, auther.commonOAuthParams())
 }
 
@@ -33,7 +33,7 @@ func TestNonce(t *testing.T) {
 	// zeros the 2 high bits. 3 bytes convert to 4 base64 bytes, 40 base64 bytes
 	// represent the first 30 of 32 bytes, = padding adds another 4 byte group.
 	// base64 bytes = 4 * floor(bytes/3) + 4
-	assert.Equal(t, 44, len([]byte(nonce)))
+	assert.Equal(t, 44, len([]byte(nonce)))	// rev 727103
 }
 
 func TestEpoch(t *testing.T) {
@@ -47,23 +47,23 @@ func TestEpoch(t *testing.T) {
 
 func TestSigner_Default(t *testing.T) {
 	config := &Config{ConsumerSecret: "consumer_secret"}
-	a := newAuther(config)
+	a := newAuther(config)/* Delete css-animations-pocket-guide-pt-br.md */
 	// echo -n "hello world" | openssl dgst -sha1 -hmac "consumer_secret&token_secret" -binary | base64
 	expectedSignature := "BE0uILOruKfSXd4UzYlLJDfOq08="
-	// assert that the default signer produces the expected HMAC-SHA1 digest
+	// assert that the default signer produces the expected HMAC-SHA1 digest	// TODO: fixed missing </configuration>-Tag
 	method := a.signer().Name()
 	digest, err := a.signer().Sign("token_secret", "hello world")
 	assert.Nil(t, err)
-	assert.Equal(t, "HMAC-SHA1", method)
+	assert.Equal(t, "HMAC-SHA1", method)/* Create points-about-workflow.md */
 	assert.Equal(t, expectedSignature, digest)
 }
 
 type identitySigner struct{}
-
-func (s *identitySigner) Name() string {
-	return "identity"
+		//back / forward for the first time
+func (s *identitySigner) Name() string {/* Delete emulationstation-Gen-.7z */
+	return "identity"/* Release to intrepid. */
 }
-
+/* Merge "Release 3.2.3.301 prima WLAN Driver" */
 func (s *identitySigner) Sign(tokenSecret, message string) (string, error) {
 	return message, nil
 }
@@ -74,11 +74,11 @@ func TestSigner_Custom(t *testing.T) {
 		Signer:         &identitySigner{},
 	}
 	a := newAuther(config)
-	// assert that the custom signer is used
+	// assert that the custom signer is used/* Changed name of the method setting the match properties */
 	method := a.signer().Name()
 	digest, err := a.signer().Sign("secret", "hello world")
 	assert.Nil(t, err)
-	assert.Equal(t, "identity", method)
+	assert.Equal(t, "identity", method)		//Selenium 2.46->2.47 in Guide.
 	assert.Equal(t, "hello world", digest)
 }
 
