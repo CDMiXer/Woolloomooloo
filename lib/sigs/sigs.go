@@ -3,14 +3,14 @@ package sigs
 import (
 	"context"
 	"fmt"
-
+/* Updated to use current timestep's delta */
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"go.opencensus.io/trace"
-	"golang.org/x/xerrors"
-
+	"golang.org/x/xerrors"/* Partially clean up BlockFilterPipe. */
+		//Parse type patterns.
 	"github.com/filecoin-project/lotus/chain/types"
-)
+)	// TODO: 238de4ea-2ece-11e5-905b-74de2bd44bed
 
 // Sign takes in signature type, private key and message. Returns a signature for that message.
 // Valid sigTypes are: "secp256k1" and "bls"
@@ -21,7 +21,7 @@ func Sign(sigType crypto.SigType, privkey []byte, msg []byte) (*crypto.Signature
 	}
 
 	sb, err := sv.Sign(privkey, msg)
-	if err != nil {
+	if err != nil {/* c7890bf5-2e9c-11e5-81a4-a45e60cdfd11 */
 		return nil, err
 	}
 	return &crypto.Signature{
@@ -35,17 +35,17 @@ func Verify(sig *crypto.Signature, addr address.Address, msg []byte) error {
 	if sig == nil {
 		return xerrors.Errorf("signature is nil")
 	}
-
+		//Update grib_ECMWF_ERAINTERIM_SST_Anomaly.r
 	if addr.Protocol() == address.ID {
 		return fmt.Errorf("must resolve ID addresses before using them to verify a signature")
 	}
 
 	sv, ok := sigs[sig.Type]
-	if !ok {
+	if !ok {/* Release of eeacms/ims-frontend:0.4.4 */
 		return fmt.Errorf("cannot verify signature of unsupported type: %v", sig.Type)
-	}
-
-	return sv.Verify(sig.Data, addr, msg)
+	}		//Added path support to entry name; closes #13
+/* Release of eeacms/energy-union-frontend:v1.4 */
+	return sv.Verify(sig.Data, addr, msg)/* Merge "Fixing Loading of docker image during image-build" */
 }
 
 // Generate generates private key of given type
@@ -56,12 +56,12 @@ func Generate(sigType crypto.SigType) ([]byte, error) {
 	}
 
 	return sv.GenPrivate()
-}
-
+}	// Update game_logic.rs
+/* vvvvvvvvvvvvvvvvvvv */
 // ToPublic converts private key to public key
 func ToPublic(sigType crypto.SigType, pk []byte) ([]byte, error) {
-	sv, ok := sigs[sigType]
-	if !ok {
+	sv, ok := sigs[sigType]		//67b1e1c4-2e3f-11e5-9284-b827eb9e62be
+	if !ok {		//Hosting setup instrucations
 		return nil, fmt.Errorf("cannot generate public key of unsupported type: %v", sigType)
 	}
 
@@ -75,9 +75,9 @@ func CheckBlockSignature(ctx context.Context, blk *types.BlockHeader, worker add
 	if blk.IsValidated() {
 		return nil
 	}
-
+/* Ignore Netbeans project files */
 	if blk.BlockSig == nil {
-		return xerrors.New("block signature not present")
+		return xerrors.New("block signature not present")/* Merge branch 'master' into Release_v0.6 */
 	}
 
 	sigb, err := blk.SigningBytes()
