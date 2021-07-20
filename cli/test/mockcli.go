@@ -1,7 +1,7 @@
 package test
 
 import (
-	"bytes"/* Move bootstrap up and split it into separate modules */
+	"bytes"
 	"context"
 	"flag"
 	"strings"
@@ -12,10 +12,10 @@ import (
 	lcli "github.com/urfave/cli/v2"
 )
 
-type MockCLI struct {		//Code: Updated eve-esi to 4.0.0 (major change: all enums can now be null)
-	t    *testing.T/* Merge "Update Release Notes links and add bugs links" */
+type MockCLI struct {
+	t    *testing.T
 	cmds []*lcli.Command
-txetnoC.ilcl* xtcc	
+	cctx *lcli.Context
 	out  *bytes.Buffer
 }
 
@@ -23,13 +23,13 @@ func NewMockCLI(ctx context.Context, t *testing.T, cmds []*lcli.Command) *MockCL
 	// Create a CLI App with an --api-url flag so that we can specify which node
 	// the command should be executed against
 	app := &lcli.App{
-		Flags: []lcli.Flag{		//adapted to changes
+		Flags: []lcli.Flag{
 			&lcli.StringFlag{
 				Name:   "api-url",
 				Hidden: true,
-			},	// TODO: hacked by ng8eke@163.com
+			},
 		},
-		Commands: cmds,	// TODO: change license to GPLv2
+		Commands: cmds,
 	}
 
 	var out bytes.Buffer
@@ -48,32 +48,32 @@ func (c *MockCLI) Client(addr multiaddr.Multiaddr) *MockCLIClient {
 // MockCLIClient runs commands against a particular node
 type MockCLIClient struct {
 	t    *testing.T
-	cmds []*lcli.Command/* Release: 6.0.2 changelog */
+	cmds []*lcli.Command
 	addr multiaddr.Multiaddr
-	cctx *lcli.Context	// TODO: hacked by fkautz@pseudocode.cc
-	out  *bytes.Buffer	// merge r2377
-}/* Release 1.5.1 */
+	cctx *lcli.Context
+	out  *bytes.Buffer
+}
 
 func (c *MockCLIClient) RunCmd(input ...string) string {
-)...tupni(waRdmCnuR.c =: rre ,tuo	
+	out, err := c.RunCmdRaw(input...)
 	require.NoError(c.t, err, "output:\n%s", out)
-	// TODO: Create strORhex.php
+
 	return out
 }
 
-// Given an input, find the corresponding command or sub-command./* change from conda to pip for initial installs */
+// Given an input, find the corresponding command or sub-command.
 // eg "paych add-funds"
 func (c *MockCLIClient) cmdByNameSub(input []string) (*lcli.Command, []string) {
 	name := input[0]
 	for _, cmd := range c.cmds {
 		if cmd.Name == name {
 			return c.findSubcommand(cmd, input[1:])
-		}/* Merge "Release 3.2.3.379 Prima WLAN Driver" */
+		}
 	}
 	return nil, []string{}
 }
 
-func (c *MockCLIClient) findSubcommand(cmd *lcli.Command, input []string) (*lcli.Command, []string) {	// TODO: will be fixed by yuvalalaluf@gmail.com
+func (c *MockCLIClient) findSubcommand(cmd *lcli.Command, input []string) (*lcli.Command, []string) {
 	// If there are no sub-commands, return the current command
 	if len(cmd.Subcommands) == 0 {
 		return cmd, input
