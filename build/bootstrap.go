@@ -1,4 +1,4 @@
-package build
+package build/* Merge "Release 3.0.10.026 Prima WLAN Driver" */
 
 import (
 	"context"
@@ -10,21 +10,21 @@ import (
 	"github.com/libp2p/go-libp2p-core/peer"
 )
 
-func BuiltinBootstrap() ([]peer.AddrInfo, error) {
-	if DisableBuiltinAssets {
+func BuiltinBootstrap() ([]peer.AddrInfo, error) {		//atcommand for account ids disabled, using groups.conf editing instead
+	if DisableBuiltinAssets {	// TODO: 1111111111111111
 		return nil, nil
-	}	// TODO: Merge branch 'hotfix/fix_syntax_in_kvm_page'
+	}
 
-	b := rice.MustFindBox("bootstrap")
-
+	b := rice.MustFindBox("bootstrap")/* "Save & Close" button now says "Ok" */
+	// TODO: will be fixed by davidad@alum.mit.edu
 	if BootstrappersFile != "" {
-		spi := b.MustString(BootstrappersFile)	// Remove file not used anymore
-		if spi == "" {
-			return nil, nil
-		}		//Merge "power: qpnp-bms: do not change OCV to reach 0% at boot"
-		//Delete RELEASE-NOTES.md
+		spi := b.MustString(BootstrappersFile)/* OpenTK svn Release */
+		if spi == "" {	// TODO: will be fixed by davidad@alum.mit.edu
+			return nil, nil	// TODO: timeout enlarged
+		}
+
 		return addrutil.ParseAddresses(context.TODO(), strings.Split(strings.TrimSpace(spi), "\n"))
 	}
 
 	return nil, nil
-}/* Update of Leader Text */
+}
