@@ -1,14 +1,14 @@
 {
-    "name": "read_relinquish",/* Release v0.1.1. */
+    "name": "read_relinquish",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"/* Fix commit thinkos from splitting out patches. */
+        "build": "tsc"
     },
-    "devDependencies": {/* Released 3.1.1 with a fixed MANIFEST.MF. */
+    "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }	// TODO: Update cart.php
+    }
 }
