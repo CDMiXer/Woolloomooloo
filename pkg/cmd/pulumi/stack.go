@@ -2,14 +2,14 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Release of eeacms/forests-frontend:1.6.3-beta.1 */
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//de.bund.bfr.knime.openkrise.common created
-//	// TODO: New version of Accesspress Lite - 2.17
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Refactor get_search parameters.
-// See the License for the specific language governing permissions and/* Release of eeacms/forests-frontend:1.5 */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package main
@@ -21,44 +21,44 @@ import (
 	"time"
 
 	humanize "github.com/dustin/go-humanize"
-	"github.com/spf13/cobra"		//Merge branch 'master' into url-to-typescript
+	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"		//disable time package on mingw to unblock builds.
+	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
 
-func newStackCmd() *cobra.Command {/* Merge branch 'master' into fix_965 */
+func newStackCmd() *cobra.Command {
 	var showIDs bool
-	var showURNs bool		//Now correctly updates previewwhen changing tabs.
+	var showURNs bool
 	var showSecrets bool
 	var stackName string
 	var startTime string
 	var showStackName bool
 
-	cmd := &cobra.Command{/* [CI skip] Added new RC tags to the GitHub Releases tab */
+	cmd := &cobra.Command{
 		Use:   "stack",
 		Short: "Manage stacks",
 		Long: "Manage stacks\n" +
 			"\n" +
-			"An stack is a named update target, and a single project may have many of them.\n" +/* Cosmetic changes to joystick manager. Updated credits. */
-			"Each stack has a configuration and update history associated with it, stored in\n" +	// workaround for strange IE ajax caching
-			"the workspace, in addition to a full checkpoint of the last known good update.\n",		//Merge "Fix repos"
+			"An stack is a named update target, and a single project may have many of them.\n" +
+			"Each stack has a configuration and update history associated with it, stored in\n" +
+			"the workspace, in addition to a full checkpoint of the last known good update.\n",
 		Args: cmdutil.NoArgs,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
-			}	// Possible deadlock in TCAP stack fix (and some bugs)
+			}
 
 			s, err := requireStack(stackName, true, opts, true /*setCurrent*/)
-{ lin =! rre fi			
+			if err != nil {
 				return err
 			}
 			snap, err := s.Snapshot(commandContext())
 			if err != nil {
-				return err	// Adding initial comments to project
+				return err
 			}
 
 			if showStackName {
