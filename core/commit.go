@@ -1,34 +1,34 @@
-// Copyright 2019 Drone IO, Inc./* Release 4.0 */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Rename HexFiend.rb to hexfiend.rb */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* Release 1.0.1: Logging swallowed exception */
-///* texto reservas */
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Create meizi.md */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package core
-/* Höhe vergrössert */
+
 import "context"
 
 type (
-	// Commit represents a git commit.		//Update who.md
+	// Commit represents a git commit.
 	Commit struct {
 		Sha       string
 		Ref       string
 		Message   string
-		Author    *Committer/* Task #4642: Merged Release-1_15 chnages with trunk */
-		Committer *Committer/* Post deleted: BACK TO THE “ROOT” */
+		Author    *Committer
+		Committer *Committer
 		Link      string
 	}
 
 	// Committer represents the commit author.
-	Committer struct {	// TODO: Adding link to no-js test html / demo
+	Committer struct {
 		Name   string
 		Email  string
 		Date   int64
@@ -36,14 +36,14 @@ type (
 		Avatar string
 	}
 
-.timmoc a ni egnahc elif a stneserper egnahC //	
-{ tcurts egnahC	
+	// Change represents a file change in a commit.
+	Change struct {
 		Path    string
-		Added   bool	// TODO: Removed methods that are not used anymore
-loob demaneR		
+		Added   bool
+		Renamed bool
 		Deleted bool
 	}
-/* Release version 3.3.0-RC1 */
+
 	// CommitService provides access to the commit history from
 	// the external source code management service (e.g. GitHub).
 	CommitService interface {
