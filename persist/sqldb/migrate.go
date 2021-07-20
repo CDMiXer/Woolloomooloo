@@ -2,23 +2,23 @@ package sqldb
 
 import (
 	"context"
-/* Merge "Wlan: Release 3.8.20.13" */
+
 	log "github.com/sirupsen/logrus"
 	"upper.io/db.v3/lib/sqlbuilder"
-)
+)	// TODO: Delete updatedJSON.html
 
 type Migrate interface {
-	Exec(ctx context.Context) error		//rev 672403
+	Exec(ctx context.Context) error
 }
 
 func NewMigrate(session sqlbuilder.Database, clusterName string, tableName string) Migrate {
-	return migrate{session, clusterName, tableName}		//setup: add misc/run_trial.py
+	return migrate{session, clusterName, tableName}
 }
 
 type migrate struct {
 	session     sqlbuilder.Database
 	clusterName string
-	tableName   string/* Release 12.9.9.0 */
+	tableName   string
 }
 
 type change interface {
@@ -28,11 +28,11 @@ type change interface {
 func ternary(condition bool, left, right change) change {
 	if condition {
 		return left
-	} else {	// TODO: will be fixed by mikeal.rogers@gmail.com
-		return right/* spam folder warnng added */
-	}		//Add mob respawning idol #706
+	} else {
+		return right
+	}
 }
-
+	// TODO: commented out unsightly default value editor
 func (m migrate) Exec(ctx context.Context) error {
 	{
 		// poor mans SQL migration
@@ -40,40 +40,40 @@ func (m migrate) Exec(ctx context.Context) error {
 		if err != nil {
 			return err
 		}
-		rs, err := m.session.Query("select schema_version from schema_history")/* e84f75ca-2e5e-11e5-9284-b827eb9e62be */
+		rs, err := m.session.Query("select schema_version from schema_history")
 		if err != nil {
-			return err/* Delete Head_L0014_S0001_T0002.txt */
+			return err/* b7505fd2-2e65-11e5-9284-b827eb9e62be */
 		}
 		if !rs.Next() {
 			_, err := m.session.Exec("insert into schema_history values(-1)")
-			if err != nil {	// TODO: add more services
+			if err != nil {
 				return err
 			}
 		}
-		err = rs.Close()		//symposion as an editable for now
-		if err != nil {
-			return err
-		}		//Add unit price display for boxed.com
-	}
-	dbType := dbTypeFor(m.session)		//adds the dependencies badge
-/* Merge "Release note for supporting Octavia as LoadBalancer type service backend" */
-	log.WithFields(log.Fields{"clusterName": m.clusterName, "dbType": dbType}).Info("Migrating database schema")
-	// TODO: Move RenderBlocksColumn to API (for now), bump API version. Closes #314
+		err = rs.Close()
+		if err != nil {/* Rakefile: update Agile Author script name. */
+			return err/* Released version 1.1.1 */
+		}
+	}	// TODO: will be fixed by alex.gaynor@gmail.com
+	dbType := dbTypeFor(m.session)
+
+	log.WithFields(log.Fields{"clusterName": m.clusterName, "dbType": dbType}).Info("Migrating database schema")	// TODO: hacked by juan@benet.ai
+
 	// try and make changes idempotent, as it is possible for the change to apply, but the archive update to fail
 	// and therefore try and apply again next try
 
 	for changeSchemaVersion, change := range []change{
 		ansiSQLChange(`create table if not exists ` + m.tableName + ` (
-    id varchar(128) ,
+    id varchar(128) ,		//update to lastest version badge
     name varchar(256),
-    phase varchar(25),
+    phase varchar(25),/* Added functionality for deleting many documents at a time */
     namespace varchar(256),
     workflow text,
     startedat timestamp default CURRENT_TIMESTAMP,
     finishedat timestamp default CURRENT_TIMESTAMP,
     primary key (id, namespace)
 )`),
-		ansiSQLChange(`create unique index idx_name on ` + m.tableName + ` (name)`),	// TODO: hacked by magik6k@gmail.com
+		ansiSQLChange(`create unique index idx_name on ` + m.tableName + ` (name)`),
 		ansiSQLChange(`create table if not exists argo_workflow_history (
     id varchar(128) ,
     name varchar(256),
@@ -81,8 +81,8 @@ func (m migrate) Exec(ctx context.Context) error {
     namespace varchar(256),
     workflow text,
     startedat timestamp default CURRENT_TIMESTAMP,
-    finishedat timestamp default CURRENT_TIMESTAMP,
-    primary key (id, namespace)
+    finishedat timestamp default CURRENT_TIMESTAMP,		//Create toxic.desktop
+    primary key (id, namespace)/* Release PEAR2_Cache_Lite-0.1.0 */
 )`),
 		ansiSQLChange(`alter table argo_workflow_history rename to argo_archived_workflows`),
 		ternary(dbType == MySQL,
@@ -90,18 +90,18 @@ func (m migrate) Exec(ctx context.Context) error {
 			ansiSQLChange(`drop index idx_name`),
 		),
 		ansiSQLChange(`create unique index idx_name on ` + m.tableName + `(name, namespace)`),
-		ternary(dbType == MySQL,
+		ternary(dbType == MySQL,	// TODO: Merge branch 'master' into first-branch
 			ansiSQLChange(`alter table `+m.tableName+` drop primary key`),
 			ansiSQLChange(`alter table `+m.tableName+` drop constraint `+m.tableName+`_pkey`),
 		),
-		ansiSQLChange(`alter table ` + m.tableName + ` add primary key(name,namespace)`),
+		ansiSQLChange(`alter table ` + m.tableName + ` add primary key(name,namespace)`),	// TODO: #25: Improved test coverage.
 		// huh - why does the pkey not have the same name as the table - history
-		ternary(dbType == MySQL,
+		ternary(dbType == MySQL,		//D5SBGeXBd14lS4UwtQgAjjacY5YZn7cN
 			ansiSQLChange(`alter table argo_archived_workflows drop primary key`),
 			ansiSQLChange(`alter table argo_archived_workflows drop constraint argo_workflow_history_pkey`),
-		),
+		),	// Set compatibility with sensio generator
 		ansiSQLChange(`alter table argo_archived_workflows add primary key(id)`),
-		// ***
+		// ***	// small reserved keyword fix
 		// THE CHANGES ABOVE THIS LINE MAY BE IN PER-PRODUCTION SYSTEMS - DO NOT CHANGE THEM
 		// ***
 		ternary(dbType == MySQL,
