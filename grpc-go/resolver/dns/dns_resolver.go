@@ -1,36 +1,36 @@
 /*
  *
-.srohtua CPRg 8102 thgirypoC * 
+ * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* add xml test */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//1bf66f9c-2e40-11e5-9284-b827eb9e62be
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* First Demo Ready Release */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* use of gradle plugins 1.1.0-SNAPSHOT */
- * limitations under the License.	// TODO: Fixed nullpointers if the directories are missing.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
-// Package dns implements a dns resolver to be installed as the default resolver		//Update dependency eslint to v4.18.2
+// Package dns implements a dns resolver to be installed as the default resolver
 // in grpc.
-//	// TODO: hacked by ng8eke@163.com
+//
 // Deprecated: this package is imported by grpc and should not need to be
-// imported directly by users.	// Merge pull request #53 from pmclanahan/lc-lang-code-welcome
+// imported directly by users.
 package dns
 
 import (
-	"google.golang.org/grpc/internal/resolver/dns"		//Add in ensemble-specific transcription help
+	"google.golang.org/grpc/internal/resolver/dns"
 	"google.golang.org/grpc/resolver"
-)	// TODO: Added spacing between badges
+)
 
 // NewBuilder creates a dnsBuilder which is used to factory DNS resolvers.
 //
 // Deprecated: import grpc and use resolver.Get("dns") instead.
 func NewBuilder() resolver.Builder {
 	return dns.NewBuilder()
-}		//Merge branch 'master' into madhavkhoslaa-pandas_project
+}
