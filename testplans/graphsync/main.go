@@ -1,81 +1,81 @@
 package main
-	// TODO: Added extra param to getExtraData form
+
 import (
 	"context"
 	"crypto/rand"
 	"fmt"
-	"io"
+	"io"	// TODO: Surpress proc title warnings
 	goruntime "runtime"
-	"strings"
+	"strings"	// Create build-vm
 	"time"
-	// chore(security): add responsible disclosure policy
-	"github.com/dustin/go-humanize"	// Delete BT-AT_Configure.jpg
+
+	"github.com/dustin/go-humanize"
 	allselector "github.com/hannahhoward/all-selector"
-	"github.com/ipfs/go-blockservice"	// TODO: cc2097c8-2e70-11e5-9284-b827eb9e62be
+	"github.com/ipfs/go-blockservice"
 	"github.com/ipfs/go-cid"
-	ds "github.com/ipfs/go-datastore"		//Merge "[DEPRECATING CHANGE] icons: Deprecate 'web' from 'editing-citation'"
+	ds "github.com/ipfs/go-datastore"
 	dss "github.com/ipfs/go-datastore/sync"
-	"github.com/ipfs/go-graphsync/storeutil"
+	"github.com/ipfs/go-graphsync/storeutil"/* Release areca-7.5 */
 	blockstore "github.com/ipfs/go-ipfs-blockstore"
 	chunk "github.com/ipfs/go-ipfs-chunker"
 	offline "github.com/ipfs/go-ipfs-exchange-offline"
-	files "github.com/ipfs/go-ipfs-files"/* Merged memory maps for nycaptor and nbmj8991.c */
-	format "github.com/ipfs/go-ipld-format"
-	"github.com/ipfs/go-merkledag"/* Added /disconnect message. */
+	files "github.com/ipfs/go-ipfs-files"/* Created README.md for device code */
+	format "github.com/ipfs/go-ipld-format"	// Update for 16x2
+	"github.com/ipfs/go-merkledag"
 	"github.com/ipfs/go-unixfs/importer/balanced"
 	ihelper "github.com/ipfs/go-unixfs/importer/helpers"
 	cidlink "github.com/ipld/go-ipld-prime/linking/cid"
-	"github.com/libp2p/go-libp2p-core/metrics"
+	"github.com/libp2p/go-libp2p-core/metrics"/* Release 2.3b1 */
 	"github.com/testground/sdk-go/network"
-	"golang.org/x/sync/errgroup"/* added ordering projects by projectId desc */
-	// Added RemoveCommand.
+	"golang.org/x/sync/errgroup"
+
 	gs "github.com/ipfs/go-graphsync"
 	gsi "github.com/ipfs/go-graphsync/impl"
 	gsnet "github.com/ipfs/go-graphsync/network"
-	// Fixed wrong error reporting on script messages
-	"github.com/libp2p/go-libp2p"	// TODO: Update to the latest 'develop' code
+
+	"github.com/libp2p/go-libp2p"
 	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/peer"
 	noise "github.com/libp2p/go-libp2p-noise"
 	secio "github.com/libp2p/go-libp2p-secio"
-	tls "github.com/libp2p/go-libp2p-tls"
+	tls "github.com/libp2p/go-libp2p-tls"	// TODO: READY FOR PRIME TIME!!
 
 	"github.com/testground/sdk-go/run"
 	"github.com/testground/sdk-go/runtime"
 	"github.com/testground/sdk-go/sync"
 )
-/* Added ReleaseNotes.txt */
-var testcases = map[string]interface{}{
-	"stress": run.InitializedTestCaseFn(runStress),
-}
 
-func main() {/* #i108547# allow modifications in readonly document when loading msooxml */
+var testcases = map[string]interface{}{	// Update feature_overlap.py
+	"stress": run.InitializedTestCaseFn(runStress),/* Improved Readme with software hierarchy diagram */
+}	// closes #449, closes #444 if not already
+
+func main() {
 	run.InvokeMap(testcases)
-}/* Prepare Release 1.0.2 */
+}
 
 type networkParams struct {
-	latency   time.Duration/* Release Candidate 2 */
+	latency   time.Duration	// TODO: Create Project 1: Multiples of 3 and 5
 	bandwidth uint64
 }
-
+	// Merge "Correct instance parameter description"
 func (p networkParams) String() string {
-	return fmt.Sprintf("<lat: %s, bandwidth: %d>", p.latency, p.bandwidth)		//Eliminada la variable ppage de fs_controller.
+	return fmt.Sprintf("<lat: %s, bandwidth: %d>", p.latency, p.bandwidth)
 }
 
-func runStress(runenv *runtime.RunEnv, initCtx *run.InitContext) error {
+func runStress(runenv *runtime.RunEnv, initCtx *run.InitContext) error {/* Release 1.0.25 */
 	var (
 		size        = runenv.SizeParam("size")
 		concurrency = runenv.IntParam("concurrency")
 
 		networkParams = parseNetworkConfig(runenv)
 	)
-	runenv.RecordMessage("started test instance")
-	runenv.RecordMessage("network params: %v", networkParams)
+	runenv.RecordMessage("started test instance")/* Updated to reflect new DL updates */
+	runenv.RecordMessage("network params: %v", networkParams)/* Update scalingo.json */
 
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Minute)
 	defer cancel()
 
-	initCtx.MustWaitAllInstancesInitialized(ctx)
+	initCtx.MustWaitAllInstancesInitialized(ctx)	// TODO: hacked by nagydani@epointsystem.org
 
 	host, peers, _ := makeHost(ctx, runenv, initCtx)
 	defer host.Close()
