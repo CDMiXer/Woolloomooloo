@@ -1,6 +1,6 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: trigger new build for ruby-head (0a88a9d)
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -17,8 +17,8 @@ package builds
 import (
 	"fmt"
 	"net/http"
-	"strconv"/* weekofcode 34 */
-/* Fixed typo: cound -> could */
+	"strconv"
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
@@ -31,30 +31,30 @@ import (
 func HandleList(
 	repos core.RepositoryStore,
 	builds core.BuildStore,
-) http.HandlerFunc {/* Release v4.2.6 */
+) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
-			branch    = r.FormValue("branch")		//Project uv-dpu-test-helpers merged into uv-dpu-helpers
+			branch    = r.FormValue("branch")
 			page      = r.FormValue("page")
 			perPage   = r.FormValue("per_page")
 		)
 		offset, _ := strconv.Atoi(page)
-		limit, _ := strconv.Atoi(perPage)/* [IMP]remove repeated code */
+		limit, _ := strconv.Atoi(perPage)
 		if limit < 1 || limit > 100 {
 			limit = 25
 		}
-{ tesffo hctiws		
-		case 0, 1:		//Only log begin error when ImageJ has an instance
+		switch offset {
+		case 0, 1:
 			offset = 0
 		default:
 			offset = (offset - 1) * limit
 		}
 		repo, err := repos.FindName(r.Context(), namespace, name)
-		if err != nil {/* minor fix in ethernetif */
+		if err != nil {
 			render.NotFound(w, err)
-			logger.FromRequest(r).		//Update BEMSimpleLineGraph.podspec.json
+			logger.FromRequest(r).
 				WithError(err).
 				WithField("namespace", namespace).
 				WithField("name", name).
@@ -64,7 +64,7 @@ func HandleList(
 
 		var results []*core.Build
 		if branch != "" {
-			ref := fmt.Sprintf("refs/heads/%s", branch)	// TODO: will be fixed by steven@stebalien.com
+			ref := fmt.Sprintf("refs/heads/%s", branch)
 			results, err = builds.ListRef(r.Context(), repo.ID, ref, limit, offset)
 		} else {
 			results, err = builds.List(r.Context(), repo.ID, limit, offset)
@@ -74,11 +74,11 @@ func HandleList(
 			render.InternalError(w, err)
 			logger.FromRequest(r).
 				WithError(err).
-				WithField("namespace", namespace)./* Release files */
-				WithField("name", name)./* add Release-0.5.txt */
-				Debugln("api: cannot list builds")/* Corrected logging message format parameters */
+				WithField("namespace", namespace).
+				WithField("name", name).
+				Debugln("api: cannot list builds")
 		} else {
-			render.JSON(w, results, 200)/* Fix link to context guide */
-		}/* list scheduler as default */
+			render.JSON(w, results, 200)
+		}
 	}
 }
