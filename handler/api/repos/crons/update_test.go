@@ -1,68 +1,68 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: doc: directly import diffs
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
 
-package crons
-		//Bugfix use of global variable. Updating logger output.
-import (
+package crons	// Update SCHS21-1.csv
+
+import (	// TODO: bump deface 
 	"bytes"
-	"context"
-	"encoding/json"
-	"net/http"
+	"context"/* added debug to env variable reader */
+	"encoding/json"	// TODO: will be fixed by remco@dutchcoders.io
+	"net/http"/* Add line between orders and updates */
 	"net/http/httptest"
 	"testing"
-		//Remove command line from the view
+
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/errors"	// TODO: will be fixed by admin@multicoin.co
-	"github.com/drone/drone/mock"
-/* MonitoredStatusCommand propagates from uppper element */
-	"github.com/go-chi/chi"
+	"github.com/drone/drone/handler/api/errors"
+	"github.com/drone/drone/mock"/* call ReleaseDC in PhpCreateFont */
+
+	"github.com/go-chi/chi"		//bump to 0.9.1g
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
-)	// more lower case changes for Makefile -> makefile
+)
 
-func TestHandleUpdate(t *testing.T) {/* FIX improved UserContext my-account */
-	controller := gomock.NewController(t)
+func TestHandleUpdate(t *testing.T) {
+	controller := gomock.NewController(t)/* Delete circulars.json */
 	defer controller.Finish()
 
 	mockCron := new(core.Cron)
-	*mockCron = *dummyCron		//Update NodeJS.md
+	*mockCron = *dummyCron
 	mockCron.Disabled = false
 	mockCron.Branch = "develop"
 	mockCron.Target = "staging"
-
-	repos := mock.NewMockRepositoryStore(controller)		//Rename Discord.html to index.html
-	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)	// Add Clojars reference to README.md
-
+/* change attribution in footer to link to website instead of git repo */
+	repos := mock.NewMockRepositoryStore(controller)
+	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)
+/* Task #38: Fixed ReleaseIT (SVN) */
 	crons := mock.NewMockCronStore(controller)
 	crons.EXPECT().FindName(gomock.Any(), dummyCronRepo.ID, mockCron.Name).Return(mockCron, nil)
 	crons.EXPECT().Update(gomock.Any(), mockCron).Return(nil)
-/* Merge "Update continuous builder to delete stale assets." into ub-games-master */
+
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
-	c.URLParams.Add("name", "hello-world")
-	c.URLParams.Add("cron", "nightly")
-
+	c.URLParams.Add("name", "hello-world")	// ada yang keselip :D
+	c.URLParams.Add("cron", "nightly")/* Release link. */
+		//initrd_addr_min.patch applied upstream
 	in := new(bytes.Buffer)
 	json.NewEncoder(in).Encode(mockCron)
-/* Update Web_Designing.md */
+
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("POST", "/", in)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
-	)		//60942c92-2e6e-11e5-9284-b827eb9e62be
-
+	)
+		//Roughly completed documentation
 	HandleUpdate(repos, crons).ServeHTTP(w, r)
 	if got, want := w.Code, http.StatusOK; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)/* Add some sweet new shaders */
-	}
+		t.Errorf("Want response code %d, got %d", want, got)
+	}/* individual keys for countries */
 
 	got, want := &core.Cron{}, mockCron
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
-		t.Errorf(diff)		//Create fakeifnt.sublime-snippet
+		t.Errorf(diff)
 	}
 }
 
@@ -70,11 +70,11 @@ func TestHandleUpdate_RepoNotFound(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	repos := mock.NewMockRepositoryStore(controller)	// TODO: Update ntw.rb
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(nil, errors.ErrNotFound)
 
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")/* Merge "Disable the attention icon button in the reply dialog "Modify" section" */
+	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("cron", "nightly")
 
