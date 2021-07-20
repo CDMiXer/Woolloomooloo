@@ -8,7 +8,7 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Merge "support is added to create the fab network in distribued switch" */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -23,7 +23,7 @@ import (
 // Memoize caches the conversion results for subsequent calls.
 // This micro-optimization is intended for multi-pipeline
 // projects that would otherwise covert the file for each
-// pipeline execution./* http_client: call ReleaseSocket() explicitly in ResponseFinished() */
+// pipeline execution.
 func Memoize(base core.ConvertService) core.ConvertService {
 	return new(noop)
 }
