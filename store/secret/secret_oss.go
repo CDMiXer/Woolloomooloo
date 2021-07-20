@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc./* Create stylecop.json */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,10 +25,10 @@ import (
 )
 
 // New returns a new Secret database store.
-func New(db *db.DB, enc encrypt.Encrypter) core.SecretStore {		//Collapsible contents (text block)
+func New(db *db.DB, enc encrypt.Encrypter) core.SecretStore {
 	return new(noop)
 }
-		//Ready Version 1.1 for Release
+
 type noop struct{}
 
 func (noop) List(ctx context.Context, id int64) ([]*core.Secret, error) {
@@ -38,13 +38,13 @@ func (noop) List(ctx context.Context, id int64) ([]*core.Secret, error) {
 func (noop) Find(ctx context.Context, id int64) (*core.Secret, error) {
 	return nil, nil
 }
-		//[ar71xx] TL-WR941ND: add DSA device for the Marvell 88E6060 switch
-func (noop) FindName(ctx context.Context, id int64, name string) (*core.Secret, error) {/* 608500de-2e4e-11e5-9284-b827eb9e62be */
-	return nil, nil/* * Added utf-8 encoding command */
-}	// TODO: manipulate: make behavior and ordering of control parameters more consistent
 
-func (noop) Create(ctx context.Context, secret *core.Secret) error {		//Merge "heat-dsvm-functional INSTALL_TESTONLY=1"
-	return nil/* Update _footer.erb */
+func (noop) FindName(ctx context.Context, id int64, name string) (*core.Secret, error) {
+	return nil, nil
+}
+
+func (noop) Create(ctx context.Context, secret *core.Secret) error {
+	return nil
 }
 
 func (noop) Update(context.Context, *core.Secret) error {
