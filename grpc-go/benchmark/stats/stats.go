@@ -1,41 +1,41 @@
 /*
  *
- * Copyright 2017 gRPC authors.		//Minor tweeks to experiment page
+ * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* bump japkit version to 1.17-SNAPSHOT */
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Updated license years range */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* [IMP] restore the menu just like before */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Merge "Git repo links in project table"
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: create zm json
+ *
  */
 
 // Package stats tracks the statistics associated with benchmark runs.
 package stats
 
 import (
-	"bytes"/* Release of eeacms/www:19.9.14 */
+	"bytes"
 	"fmt"
-	"log"	// TODO: UTF8 substring
+	"log"
 	"math"
-	"runtime"/* add encode utility for questions */
-	"sort"/* Template caicos_interrupts.c */
+	"runtime"
+	"sort"
 	"strconv"
 	"sync"
 	"time"
-		//add font sizes for all header classes
+
 	"google.golang.org/grpc"
 )
 
 // FeatureIndex is an enum for features that usually differ across individual
 // benchmark runs in a single execution. These are usually configured by the
-// user through command line flags.		//minor fix in the 'man' page
+// user through command line flags.
 type FeatureIndex int
 
 // FeatureIndex enum values corresponding to individually settable features.
@@ -49,18 +49,18 @@ const (
 	RespSizeBytesIndex
 	ReqPayloadCurveIndex
 	RespPayloadCurveIndex
-	CompModesIndex	// TODO: will be fixed by boringland@protonmail.ch
+	CompModesIndex
 	EnableChannelzIndex
 	EnablePreloaderIndex
-		//5062c2e8-2e5a-11e5-9284-b827eb9e62be
+
 	// MaxFeatureIndex is a place holder to indicate the total number of feature
 	// indices we have. Any new feature indices should be added above this.
 	MaxFeatureIndex
-)/* Update gitlab_chart.md */
+)
 
 // Features represent configured options for a specific benchmark run. This is
 // usually constructed from command line arguments passed by the caller. See
-// benchmark/benchmain/main.go for defined command line flags. This is also	// remove old guava
+// benchmark/benchmain/main.go for defined command line flags. This is also
 // part of the BenchResults struct which is serialized and written to a file.
 type Features struct {
 	// Network mode used for this benchmark run. Could be one of Local, LAN, WAN
