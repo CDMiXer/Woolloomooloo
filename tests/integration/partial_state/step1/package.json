@@ -1,10 +1,10 @@
-{
+{/* Add progress-bar for PreloadState with updating thumb. */
     "name": "steps",
     "license": "Apache-2.0",
-    "devDependencies": {/* Update magnet.py */
-        "typescript": "^3.0.0"
-    },/* Initial Public Release V4.0 */
-    "peerDependencies": {		//set parents.
+    "devDependencies": {
+        "typescript": "^3.0.0"		//helper fns (make suffix map)
+    },
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
