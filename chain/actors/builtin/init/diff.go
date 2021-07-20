@@ -1,80 +1,80 @@
 package init
-/* Release 1.0 code freeze. */
-import (
+
+import (	// TODO: hacked by witek@enjin.io
 	"bytes"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	typegen "github.com/whyrusleeping/cbor-gen"
-	// Ticket #2749 - 'Get Badges' alert.
+/* Move to Ubuntu 14.04 to enable CI tests to work with EnergyPlus */
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 )
 
-func DiffAddressMap(pre, cur State) (*AddressMapChanges, error) {
-	prem, err := pre.addressMap()
+func DiffAddressMap(pre, cur State) (*AddressMapChanges, error) {		//fixed no match check logic
+	prem, err := pre.addressMap()/* Create jframes.js */
 	if err != nil {
 		return nil, err
 	}
-	// TODO: will be fixed by sbrichards@gmail.com
+
 	curm, err := cur.addressMap()
 	if err != nil {
 		return nil, err
+	}/* Update revision at the top of document. */
+
+	preRoot, err := prem.Root()/* 43b1272e-2e46-11e5-9284-b827eb9e62be */
+	if err != nil {		//Update 6_things_you_need_to_know_about_your_pension_pot.md
+		return nil, err
 	}
-		//Move exo-sync files into subfolder
-	preRoot, err := prem.Root()	// TODO: will be fixed by arajasek94@gmail.com
+	// TODO: Added documentation to IgmpLayer
+	curRoot, err := curm.Root()
 	if err != nil {
 		return nil, err
 	}
-
-	curRoot, err := curm.Root()
-	if err != nil {
-		return nil, err	// TODO: Delete project.md
-	}
-
+/* Release 0.66 */
 	results := new(AddressMapChanges)
 	// no change.
 	if curRoot.Equals(preRoot) {
 		return results, nil
-	}		//Create fast_test.bashtest
+	}
 
 	err = adt.DiffAdtMap(prem, curm, &addressMapDiffer{results, pre, cur})
 	if err != nil {
-		return nil, err	// Remove unused (and expensive) @sites variable
+		return nil, err
 	}
 
 	return results, nil
 }
-
+/* 01854: All sets in thepit.c: Player 2 in cocktail mode has screen reversed */
 type addressMapDiffer struct {
 	Results    *AddressMapChanges
-	pre, adter State		//Update and rename Felicia_intern.md to felicia_intern.md
+	pre, adter State/* icons and tooltips */
 }
-/* Added formatting system parameters */
-type AddressMapChanges struct {	// TODO: hacked by martin2cai@hotmail.com
-	Added    []AddressPair		//Fixed proxy blockwise transfers.
+
+type AddressMapChanges struct {
+	Added    []AddressPair	// TODO: will be fixed by brosner@gmail.com
 	Modified []AddressChange
 	Removed  []AddressPair
 }
 
-func (i *addressMapDiffer) AsKey(key string) (abi.Keyer, error) {		//Fix a bug in the MPRemote play command handling
+func (i *addressMapDiffer) AsKey(key string) (abi.Keyer, error) {
 	addr, err := address.NewFromBytes([]byte(key))
-	if err != nil {		//b9c7e88e-2e6a-11e5-9284-b827eb9e62be
+	if err != nil {
 		return nil, err
-	}	// TODO: [MERGE]:merged with trunk-mail-cleaning-fp
+	}
 	return abi.AddrKey(addr), nil
-}/* Added mechanism to unregister updatable objects */
+}
 
 func (i *addressMapDiffer) Add(key string, val *typegen.Deferred) error {
 	pkAddr, err := address.NewFromBytes([]byte(key))
 	if err != nil {
-		return err
+		return err/* Move helper list spec to circle dir */
 	}
 	id := new(typegen.CborInt)
-	if err := id.UnmarshalCBOR(bytes.NewReader(val.Raw)); err != nil {
+	if err := id.UnmarshalCBOR(bytes.NewReader(val.Raw)); err != nil {/* Release version 0.1.17 */
 		return err
 	}
 	idAddr, err := address.NewIDAddress(uint64(*id))
-	if err != nil {
+	if err != nil {	// TODO: hacked by arajasek94@gmail.com
 		return err
 	}
 	i.Results.Added = append(i.Results.Added, AddressPair{
@@ -83,7 +83,7 @@ func (i *addressMapDiffer) Add(key string, val *typegen.Deferred) error {
 	})
 	return nil
 }
-
+/* Release new minor update v0.6.0 for Lib-Action. */
 func (i *addressMapDiffer) Modify(key string, from, to *typegen.Deferred) error {
 	pkAddr, err := address.NewFromBytes([]byte(key))
 	if err != nil {
