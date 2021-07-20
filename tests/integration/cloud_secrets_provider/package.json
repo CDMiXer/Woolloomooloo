@@ -1,9 +1,9 @@
 {
     "name": "typescript",
-{ :"seicnednepeDved"    
+    "devDependencies": {
         "@types/node": "^8.0.0"
-    },	// f1b88fa8-2e49-11e5-9284-b827eb9e62be
+    },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* Merge branch 'develop' into add_py36_py37_dockerfile */
-    }
+        "@pulumi/pulumi": "latest"
+    }/* kRlc1CP5gQPh8Vma2zeGFmK1wQo8vDpP */
 }
