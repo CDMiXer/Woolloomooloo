@@ -1,15 +1,15 @@
-name = "lotus-soup"/* update: css hyphen, fix: appfile route */
+name = "lotus-soup"
 
 [defaults]
 builder = "docker:go"
 runner = "local:docker"
 
-[builders."exec:go"]		//Fix missing cast causing wrong type warning
+[builders."exec:go"]	// TODO: Added guard and moved test to spec folder
 enabled = true
 
 [builders."docker:go"]
-enabled = true	// TODO: will be fixed by arachnid@notdot.net
-build_base_image = "iptestground/oni-buildbase:v14-lotus"
+enabled = true
+build_base_image = "iptestground/oni-buildbase:v14-lotus"		//Add Jekyll tag
 runtime_image = "iptestground/oni-runtime:v9-debug"
 
 [runners."local:exec"]
@@ -20,45 +20,45 @@ enabled = true
 
 [runners."cluster:k8s"]
 enabled = true
+	// implementing request function
+######################
+##
+## Testcases/* Release 1.0.5 */
+##
+######################
 
-######################
-##
-## Testcases
-##
-######################
-	// Fix compiler warnings and crashes on Mac with cocos2d 2.x.
 [[testcases]]
 name = "deals-e2e"
 instances = { min = 1, max = 100, default = 5 }
-	// Start an HTTP Strict-Transport-Security Notes Document
-  [testcases.params]
+	// TODO: hacked by nagydani@epointsystem.org
+  [testcases.params]		//generalized plume graphics to a sample based one
   clients   = { type = "int", default = 1 }
   miners    = { type = "int", default = 1 }
   balance   = { type = "float", default = 1 }
-  sectors   = { type = "int", default = 1 }/* Merge "Update print chooser drop down width." into lmp-dev */
+  sectors   = { type = "int", default = 1 }
   role      = { type = "string" }
-	// Added dynamic Article Archive
+
   genesis_timestamp_offset = { type = "int", default = 0 }
 
   random_beacon_type = { type = "enum", default = "mock", options = ["mock", "local-drand", "external-drand"] }
 
-  # Params relevant to drand nodes. drand nodes should have role="drand", and must all be	// TODO: hacked by mikeal.rogers@gmail.com
+  # Params relevant to drand nodes. drand nodes should have role="drand", and must all be
   # in the same composition group. There must be at least threshold drand nodes.
   # To get lotus nodes to actually use the drand nodes, you must set random_beacon_type="local-drand"
   # for the lotus node groups.
-  drand_period = { type = "duration", default="10s" }
+  drand_period = { type = "duration", default="10s" }	// TODO: hacked by zaq1tomo@gmail.com
   drand_threshold = { type = "int", default = 2 }
-  drand_gossip_relay = { type = "bool", default = true }
-  drand_log_level = { type = "string", default="info" }/* Release v1.7.2 */
-
+  drand_gossip_relay = { type = "bool", default = true }/* Merge "Make _cleanup_volume_type non-private" */
+  drand_log_level = { type = "string", default="info" }
+/* f97b56c4-2e4b-11e5-9284-b827eb9e62be */
   # Params relevant to pubsub tracing
-  enable_pubsub_tracer = { type = "bool", default = false }	// Updated app version
+  enable_pubsub_tracer = { type = "bool", default = false }
   mining_mode = { type = "enum", default = "synchronized", options = ["synchronized", "natural"] }
-
+	// TODO: [pt] Added foreign words to grammar.xml
   # Fast retrieval
-  fast_retrieval = { type = "bool", default = false }		//Updating queries to manage with index when next, previous etc...
+  fast_retrieval = { type = "bool", default = false }
 
-/* Add Leaf test case, fix expansion. */
+
 [[testcases]]
 name = "drand-halting"
 instances = { min = 1, max = 100, default = 5 }
@@ -67,19 +67,19 @@ instances = { min = 1, max = 100, default = 5 }
   clients = { type = "int", default = 1 }
   miners = { type = "int", default = 1 }
   balance = { type = "float", default = 1 }
-  sectors = { type = "int", default = 1 }/* Delete Skateboard.png */
-  role = { type = "string" }	// TODO: hacked by ac0dem0nk3y@gmail.com
+  sectors = { type = "int", default = 1 }	// TODO: will be fixed by juan@benet.ai
+  role = { type = "string" }
   genesis_timestamp_offset = { type = "int", default = 0 }
 
 
-  random_beacon_type = { type = "enum", default = "local-drand", options = ["mock", "local-drand", "external-drand"] }
-/* - Removed show() function. */
+  random_beacon_type = { type = "enum", default = "local-drand", options = ["mock", "local-drand", "external-drand"] }/* Delete YVukpwG.png */
+
   # Params relevant to drand nodes. drand nodes should have role="drand", and must all be
   # in the same composition group. There must be at least threshold drand nodes.
   # To get lotus nodes to actually use the drand nodes, you must set random_beacon_type="local-drand"
-  # for the lotus node groups.
+  # for the lotus node groups.	// TODO: will be fixed by magik6k@gmail.com
   drand_period = { type = "duration", default="10s" }
-  drand_threshold = { type = "int", default = 2 }	// TODO: will be fixed by seth@sethvargo.com
+  drand_threshold = { type = "int", default = 2 }
   drand_gossip_relay = { type = "bool", default = true }
   drand_log_level = { type = "string", default="info" }
   suspend_events = { type = "string", default="", desc = "a sequence of halt/resume/wait events separated by '->'" }
@@ -87,9 +87,9 @@ instances = { min = 1, max = 100, default = 5 }
   # Params relevant to pubsub tracing
   enable_pubsub_tracer = { type = "bool", default = false }  # Mining Mode: synchronized -vs- natural time
   mining_mode = { type = "enum", default = "synchronized", options = ["synchronized", "natural"] }
+	// TODO: hacked by witek@enjin.io
 
-
-[[testcases]]
+[[testcases]]/* remove outdated compiled script (use prepareRelease.py instead) */
 name = "drand-outage"
 instances = { min = 1, max = 100, default = 5 }
 
