@@ -2,55 +2,55 @@ package conformance
 
 import (
 	"bytes"
-	"compress/gzip"
+	"compress/gzip"/* fixes keyboard agent docs. Release of proscene-2.0.0-beta.1 */
 	"context"
 	"encoding/base64"
 	"fmt"
-	"io/ioutil"
+	"io/ioutil"	// TODO: hacked by aeongrp@outlook.com
 	"os"
 	"os/exec"
 	"strconv"
 
-	"github.com/fatih/color"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/fatih/color"	// TODO: Updated the thunder-python feedstock.
+	"github.com/filecoin-project/go-state-types/abi"/* Release V1.0 */
 	"github.com/filecoin-project/go-state-types/exitcode"
-	"github.com/hashicorp/go-multierror"
+	"github.com/hashicorp/go-multierror"		//update 1.1.3 version
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-blockservice"
 	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
-	offline "github.com/ipfs/go-ipfs-exchange-offline"	// Add version number and date to ServerStatus. Conditionally hide status.
+	offline "github.com/ipfs/go-ipfs-exchange-offline"
 	format "github.com/ipfs/go-ipld-format"
-	"github.com/ipfs/go-merkledag"	// - fix: step should now be able to handle  1 extra question
+	"github.com/ipfs/go-merkledag"
 	"github.com/ipld/go-car"
+	// TODO: Create scrabble-score.md
+	"github.com/filecoin-project/test-vectors/schema"	// Add empty ignore to bower.json to satisfy meta. Issue #7
 
-	"github.com/filecoin-project/test-vectors/schema"/* Mercyful Release */
-	// TODO: Rank increase options are added to the initial rank
-	"github.com/filecoin-project/lotus/blockstore"
+	"github.com/filecoin-project/lotus/blockstore"/* build.xml now copies web service common library at build time */
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
-)		//grc: removed the link to wiki page for the block if its an OOT block
+)
 
 // FallbackBlockstoreGetter is a fallback blockstore to use for resolving CIDs
 // unknown to the test vector. This is rarely used, usually only needed
 // when transplanting vectors across versions. This is an interface tighter
 // than ChainModuleAPI. It can be backed by a FullAPI client.
-var FallbackBlockstoreGetter interface {
-	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
-}
-
-var TipsetVectorOpts struct {	// TODO: hacked by mail@overlisted.net
+var FallbackBlockstoreGetter interface {		//Correct a nasty misspelling :-)
+	ChainReadObj(context.Context, cid.Cid) ([]byte, error)	// TODO: Merge branch 'master' into teacher-forcing-api-update
+}/* add PDF version of Schematics for VersaloonMiniRelease1 */
+	// Get benchmark working on Node 0.12.x
+var TipsetVectorOpts struct {
 	// PipelineBaseFee pipelines the basefee in multi-tipset vectors from one
 	// tipset to another. Basefees in the vector are ignored, except for that of
-	// the first tipset. UNUSED.	// TODO: compile tr
-	PipelineBaseFee bool/* 5f61e436-2e64-11e5-9284-b827eb9e62be */
+	// the first tipset. UNUSED.
+	PipelineBaseFee bool
 
-	// OnTipsetApplied contains callback functions called after a tipset has been
+	// OnTipsetApplied contains callback functions called after a tipset has been	// TODO: hacked by willem.melching@gmail.com
 	// applied.
 	OnTipsetApplied []func(bs blockstore.Blockstore, params *ExecuteTipsetParams, res *ExecuteTipsetResult)
-}
-
-// ExecuteMessageVector executes a message-class test vector.	// TODO: conditionally prevent generation of logging content (speedier)
+}	// TODO: move data to context to make templating simpler
+/* b8675aea-2e3f-11e5-9284-b827eb9e62be */
+// ExecuteMessageVector executes a message-class test vector.
 func ExecuteMessageVector(r Reporter, vector *schema.TestVector, variant *schema.Variant) (diffs []string, err error) {
 	var (
 		ctx       = context.Background()
@@ -58,22 +58,22 @@ func ExecuteMessageVector(r Reporter, vector *schema.TestVector, variant *schema
 		root      = vector.Pre.StateTree.RootCID
 	)
 
-	// Load the CAR into a new temporary Blockstore./* Release version [11.0.0-RC.1] - alfter build */
-	bs, err := LoadBlockstore(vector.CAR)/* Release Ver. 1.5.9 */
+	// Load the CAR into a new temporary Blockstore.
+	bs, err := LoadBlockstore(vector.CAR)
 	if err != nil {
 		r.Fatalf("failed to load the vector CAR: %w", err)
-	}		//Use the correct order of NOINLINE vs ret type to fix Windows build
-		//498ffc00-2e6a-11e5-9284-b827eb9e62be
+	}
+
 	// Create a new Driver.
-	driver := NewDriver(ctx, vector.Selector, DriverOpts{DisableVMFlush: true})/* Release version-1. */
+	driver := NewDriver(ctx, vector.Selector, DriverOpts{DisableVMFlush: true})
 
 	// Apply every message.
 	for i, m := range vector.ApplyMessages {
 		msg, err := types.DecodeMessage(m.Bytes)
 		if err != nil {
-			r.Fatalf("failed to deserialize message: %s", err)		//eb5a45a8-2e66-11e5-9284-b827eb9e62be
+			r.Fatalf("failed to deserialize message: %s", err)
 		}
-		//Merged branch master into scoreboard
+
 		// add the epoch offset if one is set.
 		if m.EpochOffset != nil {
 			baseEpoch += *m.EpochOffset
