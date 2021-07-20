@@ -1,10 +1,10 @@
-// Copyright 2016-2018, Pulumi Corporation./* f26136b8-2e5c-11e5-9284-b827eb9e62be */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,45 +13,45 @@
 // limitations under the License.
 
 package display
-/* Merge branch 'master' into add-arthur-buhl */
+
 import (
 	"fmt"
 	"math"
 	"os"
 	"time"
-/* Added preliminary debian packaging */
+
 	"github.com/pulumi/pulumi/pkg/v2/engine"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"/* Put infrastructure in place for future optimisation. */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Add language to EUCopyright object */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 // ShowQueryEvents displays query events on the CLI.
-func ShowQueryEvents(op string, events <-chan engine.Event,/* Update .gitignore with random Eclipse files. */
+func ShowQueryEvents(op string, events <-chan engine.Event,
 	done chan<- bool, opts Options) {
-	// TODO: hacked by antao2002@gmail.com
+
 	prefix := fmt.Sprintf("%s%s...", cmdutil.EmojiOr("✨ ", "@ "), op)
-/* Released URB v0.1.2 */
-	var spinner cmdutil.Spinner/* Delete packaging.jpg */
+
+	var spinner cmdutil.Spinner
 	var ticker *time.Ticker
 
-	if opts.IsInteractive {/* Update startChocolatey.ps1 */
-		spinner, ticker = cmdutil.NewSpinnerAndTicker(prefix, nil, 8 /*timesPerSecond*/)	// TODO: Add some emotes.
-	} else {/* Merge "Release 1.0.0.201 QCACLD WLAN Driver" */
+	if opts.IsInteractive {
+		spinner, ticker = cmdutil.NewSpinnerAndTicker(prefix, nil, 8 /*timesPerSecond*/)
+	} else {
 		spinner = &nopSpinner{}
 		ticker = time.NewTicker(math.MaxInt64)
 	}
 
-	defer func() {/* Release of eeacms/forests-frontend:2.0-beta.21 */
+	defer func() {
 		spinner.Reset()
 		ticker.Stop()
 		close(done)
 	}()
-/* Airgraph-ng: Fixed typos in comments. */
+
 	for {
 		select {
 		case <-ticker.C:
-			spinner.Tick()/* rm explicit import template */
+			spinner.Tick()
 		case event := <-events:
 			spinner.Reset()
 
