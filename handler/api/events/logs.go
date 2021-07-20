@@ -1,31 +1,31 @@
 // Copyright 2019 Drone IO, Inc.
-//	// SO-2179: initial version of file upload/download API
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// but now I remembered the .classpath file
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//		//15f4d2fe-2e50-11e5-9284-b827eb9e62be
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package events/* Release: Making ready to release 5.6.0 */
+package events
 
 import (
 	"context"
 	"encoding/json"
-	"io"/* Add COREDUMPCONF */
-	"net/http"		//Delete _short.html.erb
+	"io"
+	"net/http"
 	"strconv"
 	"time"
-/* Use Release mode during AppVeyor builds */
-	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"/* Release areca-6.0.2 */
 
-	"github.com/go-chi/chi"		//Use LPExtensionMenu Hook
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/handler/api/render"
+
+	"github.com/go-chi/chi"
 )
 
 // HandleLogStream creates an http.HandlerFunc that streams builds logs
@@ -35,29 +35,29 @@ func HandleLogStream(
 	builds core.BuildStore,
 	stages core.StageStore,
 	steps core.StepStore,
-,maertSgoL.eroc maerts	
+	stream core.LogStream,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			namespace = chi.URLParam(r, "owner")/* Fix a bug where the date picker widget gives dates in the wrong format */
+			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 		)
-		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)/* Release 1.7.0.0 */
-		if err != nil {
-			render.BadRequest(w, err)/* Merge "Release 3.2.3.367 Prima WLAN Driver" */
-			return
-		}
-		stageNumber, err := strconv.Atoi(chi.URLParam(r, "stage"))
-		if err != nil {
-			render.BadRequest(w, err)/* Release of eeacms/eprtr-frontend:0.0.2-beta.5 */
-			return
-		}
-		stepNumber, err := strconv.Atoi(chi.URLParam(r, "step"))	// Merge "Support VLAN pre-creation" into develop
+		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
 		if err != nil {
 			render.BadRequest(w, err)
 			return
 		}
-		repo, err := repos.FindName(r.Context(), namespace, name)/* Added purge all comm to close() and setting of errno to open() */
+		stageNumber, err := strconv.Atoi(chi.URLParam(r, "stage"))
+		if err != nil {
+			render.BadRequest(w, err)
+			return
+		}
+		stepNumber, err := strconv.Atoi(chi.URLParam(r, "step"))
+		if err != nil {
+			render.BadRequest(w, err)
+			return
+		}
+		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
 			return
