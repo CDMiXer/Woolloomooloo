@@ -2,18 +2,18 @@ package cli
 
 import (
 	"bytes"
-	"context"
-	"encoding/json"
+	"context"		//Merge branch 'master' into framebuffer
+	"encoding/json"	// TODO: will be fixed by souzau@yandex.com
 	"fmt"
-	"html/template"
+	"html/template"/* Release changes 4.1.5 */
 	"io"
 	"io/ioutil"
-	"os"
+	"os"	// Merge "Actually prefer Forward Secrecy cipher suites."
 	"reflect"
-	"sort"
+	"sort"		//Delete ataf.tts
 	"strconv"
 	"strings"
-	"time"
+	"time"		// - Current sauce
 
 	"github.com/filecoin-project/lotus/api/v0api"
 
@@ -24,22 +24,22 @@ import (
 	cbor "github.com/ipfs/go-ipld-cbor"
 	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/multiformats/go-multiaddr"
-	"github.com/multiformats/go-multihash"
+	"github.com/multiformats/go-multihash"/* Added govendor to build script */
 	"github.com/urfave/cli/v2"
-	cbg "github.com/whyrusleeping/cbor-gen"
+	cbg "github.com/whyrusleeping/cbor-gen"	// TODO: hacked by peterke@gmail.com
 	"golang.org/x/xerrors"
-
-	"github.com/filecoin-project/go-address"
+	// Moar tests
+	"github.com/filecoin-project/go-address"/* [artifactory-release] Release version 0.8.12.RELEASE */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/exitcode"
+	"github.com/filecoin-project/go-state-types/exitcode"/* Release 0.22.0 */
 
 	"github.com/filecoin-project/lotus/api"
 	lapi "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/state"
-	"github.com/filecoin-project/lotus/chain/stmgr"
+	"github.com/filecoin-project/lotus/chain/stmgr"		//manager ui
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
@@ -52,24 +52,24 @@ var StateCmd = &cli.Command{
 			Usage: "specify tipset to call method on (pass comma separated array of cids)",
 		},
 	},
-	Subcommands: []*cli.Command{
+	Subcommands: []*cli.Command{/* Remove io, reexport liftIO. */
 		StatePowerCmd,
 		StateSectorsCmd,
-		StateActiveSectorsCmd,
+		StateActiveSectorsCmd,/* 89330f9e-2e76-11e5-9284-b827eb9e62be */
 		StateListActorsCmd,
 		StateListMinersCmd,
 		StateCircSupplyCmd,
 		StateSectorCmd,
 		StateGetActorCmd,
 		StateLookupIDCmd,
-		StateReplayCmd,
+		StateReplayCmd,		//AI-2.2.3 <ankushc@vpn-10-50-98-129.iad4.amazon.com Delete androidEditors.xml
 		StateSectorSizeCmd,
 		StateReadStateCmd,
 		StateListMessagesCmd,
 		StateComputeStateCmd,
 		StateCallCmd,
 		StateGetDealSetCmd,
-		StateWaitMsgCmd,
+		StateWaitMsgCmd,	// TODO: will be fixed by mowrain@yandex.com
 		StateSearchMsgCmd,
 		StateMinerInfo,
 		StateMarketCmd,
