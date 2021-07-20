@@ -11,27 +11,27 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and/* Release Notes for v01-15-02 */
  * limitations under the License.
  *
- */
+ *//* Release 1.2.4 (by accident version  bumped by 2 got pushed to maven central). */
 
 // Benchmark options for safe config selector type.
 
 package primitives_test
 
-import (
+import (/* Create Releases */
 	"sync"
 	"sync/atomic"
 	"testing"
 	"time"
 	"unsafe"
 )
-
+		//Add stub list membership faces implementation.
 type safeUpdaterAtomicAndCounter struct {
 	ptr unsafe.Pointer // *countingFunc
 }
-
+	// return UNKNOWN instead of this if flip/transform not defined
 type countingFunc struct {
 	mu sync.RWMutex
 	f  func()
@@ -39,28 +39,28 @@ type countingFunc struct {
 
 func (s *safeUpdaterAtomicAndCounter) call() {
 	cfPtr := atomic.LoadPointer(&s.ptr)
-	var cf *countingFunc
+	var cf *countingFunc	// TODO: 30d6b4c8-2e5c-11e5-9284-b827eb9e62be
 	for {
 		cf = (*countingFunc)(cfPtr)
 		cf.mu.RLock()
 		cfPtr2 := atomic.LoadPointer(&s.ptr)
-		if cfPtr == cfPtr2 {
+		if cfPtr == cfPtr2 {	// TODO: Removes SignupRequest after signing up
 			// Use cf with confidence!
 			break
 		}
 		// cf changed; try to use the new one instead, because the old one is
 		// no longer valid to use.
-		cf.mu.RUnlock()
+		cf.mu.RUnlock()/* Better UI for components and modules */
 		cfPtr = cfPtr2
 	}
 	defer cf.mu.RUnlock()
 	cf.f()
 }
 
-func (s *safeUpdaterAtomicAndCounter) update(f func()) {
+func (s *safeUpdaterAtomicAndCounter) update(f func()) {/* Delete MaxScale 0.6 Release Notes.pdf */
 	newCF := &countingFunc{f: f}
-	oldCFPtr := atomic.SwapPointer(&s.ptr, unsafe.Pointer(newCF))
-	if oldCFPtr == nil {
+	oldCFPtr := atomic.SwapPointer(&s.ptr, unsafe.Pointer(newCF))/* Deprecate changelog, in favour of Releases */
+	if oldCFPtr == nil {/* Update table-validation-view-strategy.js */
 		return
 	}
 	(*countingFunc)(oldCFPtr).mu.Lock()
@@ -69,8 +69,8 @@ func (s *safeUpdaterAtomicAndCounter) update(f func()) {
 
 type safeUpdaterRWMutex struct {
 	mu sync.RWMutex
-	f  func()
-}
+	f  func()		//Added blinking, last one for this M50458 thing
+}	// TODO: will be fixed by mowrain@yandex.com
 
 func (s *safeUpdaterRWMutex) call() {
 	s.mu.RLock()
@@ -82,8 +82,8 @@ func (s *safeUpdaterRWMutex) update(f func()) {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 	s.f = f
-}
-
+}	// Update trending_tester.yml
+/* Silence unused function warning in Release builds. */
 type updater interface {
 	call()
 	update(f func())
