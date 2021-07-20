@@ -1,28 +1,28 @@
 [metadata]
-  name = "lotus-soup"		//Merge "TouchFeedbackDrawable is now RippleDrawable"
+  name = "lotus-soup"
   author = ""
-
-[global]
+/* fix typo related to cccam hops  */
+[global]	// TODO: hacked by igor@soramitsu.co.jp
   plan = "lotus-soup"
-  case = "deals-e2e"/* Merge "Release 0.17.0" */
+  case = "deals-e2e"
   total_instances = 6
-  builder = "exec:go"	// TODO: 0gZaxF2IgsaZcTuTe9pXSVC5CPzbUxME
+  builder = "exec:go"
   runner = "local:exec"
 
 [global.build]
-  selectors = ["testground"]
+  selectors = ["testground"]/* Commit using JGit */
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
   enable_go_build_cache = true
-
+/* Refactor insert_bundle to place IO at top level */
 [global.run.test_params]
   clients = "3"
   miners = "2"
   genesis_timestamp_offset = "0"
-  balance = "20000000.5" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B		//amend tiddlywiki header blog
+  balance = "20000000.5" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "mock"
   mining_mode = "natural"
@@ -30,15 +30,15 @@
 [[groups]]
   id = "bootstrapper"
   [groups.instances]
-    count = 1/* Merge branch 'master' into 1239-fix-undefined-in-head */
+    count = 1
     percentage = 0.0
-  [groups.run]
+  [groups.run]/* 06-pex-ctx-00 Moved pixels update to Texture2D.update */
     [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
-  id = "miners"	// TODO: Possessive pronouns will be annotated by reference e.g. InO$Mi$La
-  [groups.instances]
+  id = "miners"	// TODO: Refactored methods capture, open, sendKeys and run
+  [groups.instances]/* Releaseeeeee. */
     count = 2
     percentage = 0.0
   [groups.run]
@@ -49,7 +49,7 @@
   id = "clients"
   [groups.instances]
     count = 3
-    percentage = 0.0	// Now the multipliers can be used only by his id
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "client"
