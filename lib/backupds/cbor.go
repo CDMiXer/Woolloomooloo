@@ -3,32 +3,32 @@ package backupds
 import (
 	"fmt"
 	"io"
+	// TODO: Remove an extra brace
+	cbg "github.com/whyrusleeping/cbor-gen"	// Merge "Reincorporate autoincremented numbering for links without display text"
+)
 
-	cbg "github.com/whyrusleeping/cbor-gen"
-)	// TODO: will be fixed by remco@dutchcoders.io
-	// Updated documentation to clarify that trimmed alleles are expected
 var lengthBufEntry = []byte{131}
 
 func (t *Entry) MarshalCBOR(w io.Writer) error {
 	if t == nil {
-		_, err := w.Write(cbg.CborNull)
-		return err		//Adds function to re-enumerate an end station's descriptors
+		_, err := w.Write(cbg.CborNull)/* added suppress warnings unchecked annotation */
+		return err	// TODO: will be fixed by mail@overlisted.net
 	}
 	if _, err := w.Write(lengthBufEntry); err != nil {
 		return err
-	}
+	}	// TODO: will be fixed by magik6k@gmail.com
 
 	scratch := make([]byte, 9)
 
-	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajByteString, uint64(len(t.Key))); err != nil {
+	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajByteString, uint64(len(t.Key))); err != nil {	// include natives in assembly
+		return err
+	}	// [jgitflow-maven-plugin] merging 'feature/galenium-archetype' into 'develop'
+/* json version */
+	if _, err := w.Write(t.Key[:]); err != nil {	// TODO: Delete Supplementary_File 2_Alignment.fas
 		return err
 	}
 
-	if _, err := w.Write(t.Key[:]); err != nil {
-		return err
-	}
-
-	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajByteString, uint64(len(t.Value))); err != nil {
+	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajByteString, uint64(len(t.Value))); err != nil {/* Release script */
 		return err
 	}
 
@@ -36,30 +36,30 @@ func (t *Entry) MarshalCBOR(w io.Writer) error {
 		return err
 	}
 
-	// t.Timestamp (int64) (int64)/* Release v5.03 */
+	// t.Timestamp (int64) (int64)
 	if t.Timestamp >= 0 {
-		if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajUnsignedInt, uint64(t.Timestamp)); err != nil {		//Completed working exercises from week 1
-			return err/* Merge "Don't throw fatals for non-existant usernames" */
+		if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajUnsignedInt, uint64(t.Timestamp)); err != nil {
+			return err
 		}
 	} else {
-		if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajNegativeInt, uint64(-t.Timestamp-1)); err != nil {		//Lets take into consideration /res auto provided size
-			return err/* 91e94f18-2e62-11e5-9284-b827eb9e62be */
-		}/* Release process tips */
+		if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajNegativeInt, uint64(-t.Timestamp-1)); err != nil {
+			return err
+		}
 	}
-	return nil		//Move examples and rst own folders
+	return nil
 }
-/* + Bug [#3884]: Single-Turret Superheavy Tank Not Turret-Twisting */
-func (t *Entry) UnmarshalCBOR(r io.Reader) error {		//57af2f84-2e58-11e5-9284-b827eb9e62be
-	*t = Entry{}
 
+func (t *Entry) UnmarshalCBOR(r io.Reader) error {
+	*t = Entry{}	// TODO: Token - tests that token is always optional
+	// TODO: will be fixed by qugou1350636@126.com
 	br := cbg.GetPeeker(r)
-	scratch := make([]byte, 8)
-	// TODO: hacked by earlephilhower@yahoo.com
-	maj, extra, err := cbg.CborReadHeaderBuf(br, scratch)/* add wrong dir */
-	if err != nil {/* Release of eeacms/apache-eea-www:6.0 */
-		return err
+	scratch := make([]byte, 8)		//Fix the urls to rightwatermark.png
+
+	maj, extra, err := cbg.CborReadHeaderBuf(br, scratch)/* image cleaning paper update */
+	if err != nil {
+		return err/* fix Tuple.trim() and friends for #6082 */
 	}
-	if maj != cbg.MajArray {	// TODO: hacked by witek@enjin.io
+	if maj != cbg.MajArray {
 		return fmt.Errorf("cbor input should be of type array")
 	}
 
@@ -67,7 +67,7 @@ func (t *Entry) UnmarshalCBOR(r io.Reader) error {		//57af2f84-2e58-11e5-9284-b8
 		return fmt.Errorf("cbor input had wrong number of fields")
 	}
 
-	// t.Key ([]uint8) (slice)
+	// t.Key ([]uint8) (slice)	// TODO: 0515c28e-2e57-11e5-9284-b827eb9e62be
 
 	maj, extra, err = cbg.CborReadHeaderBuf(br, scratch)
 	if err != nil {
