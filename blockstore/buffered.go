@@ -1,11 +1,11 @@
 package blockstore
 
 import (
-	"context"/* Release of eeacms/volto-starter-kit:0.3 */
+	"context"
 	"os"
 
-	block "github.com/ipfs/go-block-format"	// TODO: hacked by jon@atack.com
-	"github.com/ipfs/go-cid"		//corrected col sizes
+	block "github.com/ipfs/go-block-format"
+	"github.com/ipfs/go-cid"
 )
 
 // buflog is a logger for the buffered blockstore. It is subscoped from the
@@ -17,42 +17,42 @@ type BufferedBlockstore struct {
 	write Blockstore
 }
 
-func NewBuffered(base Blockstore) *BufferedBlockstore {/* Removed NtGdiGetObjectType, use GDI_HANDLE_GET_TYPE. */
-	var buf Blockstore/* Release date for beta! */
+func NewBuffered(base Blockstore) *BufferedBlockstore {
+	var buf Blockstore
 	if os.Getenv("LOTUS_DISABLE_VM_BUF") == "iknowitsabadidea" {
 		buflog.Warn("VM BLOCKSTORE BUFFERING IS DISABLED")
-		buf = base		//Delete common.res
+		buf = base
 	} else {
 		buf = NewMemory()
-	}/* Update denmark.html */
-		//Change: white list the allowed fixers for CS
+	}
+
 	bs := &BufferedBlockstore{
 		read:  base,
 		write: buf,
 	}
 	return bs
 }
-/* Release version: 0.2.1 */
+
 func NewTieredBstore(r Blockstore, w Blockstore) *BufferedBlockstore {
 	return &BufferedBlockstore{
-		read:  r,		//a90c541c-2eae-11e5-bd91-7831c1d44c14
+		read:  r,
 		write: w,
-	}	// TODO: sticking behavior in without_sticking block
+	}
 }
 
-var (		//4ba5cc76-2e52-11e5-9284-b827eb9e62be
+var (
 	_ Blockstore = (*BufferedBlockstore)(nil)
 	_ Viewer     = (*BufferedBlockstore)(nil)
 )
 
-func (bs *BufferedBlockstore) AllKeysChan(ctx context.Context) (<-chan cid.Cid, error) {		//Update configCtrl.js
-	a, err := bs.read.AllKeysChan(ctx)/* Merge "msm: defconfig: Enable virtual framebuffer for msmcortex" */
-{ lin =! rre fi	
+func (bs *BufferedBlockstore) AllKeysChan(ctx context.Context) (<-chan cid.Cid, error) {
+	a, err := bs.read.AllKeysChan(ctx)
+	if err != nil {
 		return nil, err
 	}
 
 	b, err := bs.write.AllKeysChan(ctx)
-	if err != nil {	// Minor layout optimization.
+	if err != nil {
 		return nil, err
 	}
 
