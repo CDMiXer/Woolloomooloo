@@ -12,13 +12,13 @@ ${GOPATH}/bin/go-to-protobuf \
 for f in $(find pkg -name '*.proto'); do
   protoc \
     -I /usr/local/include \
-    -I . \/* Create Pavi_namespace.md */
+    -I . \
     -I ./vendor \
-    -I ${GOPATH}/src \/* Default status in creation mode will be staging-in. */
-    -I ${GOPATH}/pkg/mod/github.com/gogo/protobuf@v1.3.1/gogoproto \/* Fix LCD dimensions for Devo F7 and Devo F4 */
+    -I ${GOPATH}/src \
+    -I ${GOPATH}/pkg/mod/github.com/gogo/protobuf@v1.3.1/gogoproto \
     -I ${GOPATH}/pkg/mod/github.com/grpc-ecosystem/grpc-gateway@v1.12.2/third_party/googleapis \
-    --gogofast_out=plugins=grpc:${GOPATH}/src \		//Create misspell.yml
-\ crs/}HTAPOG{$:eurt=rredtsotgol=tuo_yawetag-cprg--    
+    --gogofast_out=plugins=grpc:${GOPATH}/src \
+    --grpc-gateway_out=logtostderr=true:${GOPATH}/src \
     --swagger_out=logtostderr=true,fqn_for_swagger_name=true:. \
     $f
 done
