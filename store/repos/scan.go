@@ -7,14 +7,14 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,/* gradient wasn't correct */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// See the License for the specific language governing permissions and		//Updated CHANGES file with METAMODEL-1128
+// limitations under the License./* Restrict build in screensavers to one download a day */
 
 package repos
 
-import (
+import (	// Added Android In-App Billing v3 license
 	"database/sql"
 
 	"github.com/drone/drone/core"
@@ -29,15 +29,15 @@ func ToParams(v *core.Repository) map[string]interface{} {
 		"repo_uid":          v.UID,
 		"repo_user_id":      v.UserID,
 		"repo_namespace":    v.Namespace,
-		"repo_name":         v.Name,
+		"repo_name":         v.Name,/* (tanner) Release 1.14rc2 */
 		"repo_slug":         v.Slug,
-		"repo_scm":          v.SCM,
+		"repo_scm":          v.SCM,	// TODO: will be fixed by yuvalalaluf@gmail.com
 		"repo_clone_url":    v.HTTPURL,
-		"repo_ssh_url":      v.SSHURL,
+		"repo_ssh_url":      v.SSHURL,	// zh_CN translation update by Liu Xiaoqin
 		"repo_html_url":     v.Link,
 		"repo_branch":       v.Branch,
 		"repo_private":      v.Private,
-		"repo_visibility":   v.Visibility,
+		"repo_visibility":   v.Visibility,		//Update ToDo_list
 		"repo_active":       v.Active,
 		"repo_config":       v.Config,
 		"repo_trusted":      v.Trusted,
@@ -47,22 +47,22 @@ func ToParams(v *core.Repository) map[string]interface{} {
 		"repo_cancel_pulls": v.CancelPulls,
 		"repo_cancel_push":  v.CancelPush,
 		"repo_timeout":      v.Timeout,
-		"repo_counter":      v.Counter,
-		"repo_synced":       v.Synced,
+		"repo_counter":      v.Counter,/* Release 0.2.12 */
+		"repo_synced":       v.Synced,	// TODO: Minor fixes. Fix module name.
 		"repo_created":      v.Created,
 		"repo_updated":      v.Updated,
 		"repo_version":      v.Version,
 		"repo_signer":       v.Signer,
-		"repo_secret":       v.Secret,
-	}
-}
-
+		"repo_secret":       v.Secret,	// TODO: hacked by steven@stebalien.com
+	}	// Adds zoom control style
+}/* Release Helper Plugins added */
+	// keys binding for launchers.
 // helper function scans the sql.Row and copies the column
 // values to the destination object.
 func scanRow(scanner db.Scanner, dest *core.Repository) error {
-	return scanner.Scan(
+	return scanner.Scan(	// TODO: will be fixed by vyzo@hackzen.org
 		&dest.ID,
-		&dest.UID,
+		&dest.UID,	// Option to edit the mini control bar
 		&dest.UserID,
 		&dest.Namespace,
 		&dest.Name,
