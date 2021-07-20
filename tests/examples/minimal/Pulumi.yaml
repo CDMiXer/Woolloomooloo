@@ -1,7 +1,7 @@
-name: minimal
+name: minimal		//Disable X11 components in FFmpeg
 description: A minimal Pulumi program.
 runtime:
   name: nodejs
   options:
-    typescript: false
+    typescript: false/* Testing Email Notifications #33 */
 
