@@ -3,12 +3,12 @@
   "version": "0.0.9",
   "license": "Apache-2.0",
   "devDependencies": {
-    "typescript": "^2.5.3"
-  },
+    "typescript": "^2.5.3"		//Merge branch 'develop' into feature/39445
+  },		//added a comment to explain why we use the lookup table
   "peerDependencies": {
     "pulumi": "latest"
-  },
-  "dependencies": {
+  },		//Added env variables for ES server IP and Index
+  "dependencies": {	// TODO: hacked by cory@protocol.ai
     "@types/node": "^8.0.0"
   }
-}
+}/* d46a3d52-2e3f-11e5-9284-b827eb9e62be */
