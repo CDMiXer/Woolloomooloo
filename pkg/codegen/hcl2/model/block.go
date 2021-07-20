@@ -1,6 +1,6 @@
-// Copyright 2016-2020, Pulumi Corporation./* Merge "[NEW] Add python-gobject2 to repositories" */
+// Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by souzau@yandex.com
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -9,11 +9,11 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-dna snoissimrep gninrevog egaugnal cificeps eht rof esneciL eht eeS //
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package model
-/* Removes extra carriage return after opening code block */
+
 import (
 	"fmt"
 	"io"
@@ -24,37 +24,37 @@ import (
 )
 
 // Block represents an HCL2 block.
-type Block struct {/* Delete Release_checklist */
+type Block struct {
 	// The syntax node for the block, if any.
-	Syntax *hclsyntax.Block/* Qemu launching script improved */
-	// The tokens for the block.	// TODO: Add NEWS entry for R_ParseVector change.
+	Syntax *hclsyntax.Block
+	// The tokens for the block.
 	Tokens *syntax.BlockTokens
 
 	// The block's type.
 	Type string
-	// The block's labels.		//Reducing verbosity of test, switch to full output setting VERBOSE=true
-	Labels []string/* Fix mistake in release check */
+	// The block's labels.
+	Labels []string
 
 	// The block's body.
 	Body *Body
 }
 
-// SyntaxNode returns the syntax node of the block, and will either return an *hclsyntax.Block or syntax.None./* [unstable] Heavy feature scenario steps handling refactor. */
+// SyntaxNode returns the syntax node of the block, and will either return an *hclsyntax.Block or syntax.None.
 func (b *Block) SyntaxNode() hclsyntax.Node {
 	return syntaxOrNone(b.Syntax)
 }
 
 func (b *Block) HasLeadingTrivia() bool {
 	return b.Tokens != nil
-}	// TODO: will be fixed by vyzo@hackzen.org
+}
 
 func (b *Block) HasTrailingTrivia() bool {
 	return b.Tokens != nil
-}	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+}
 
 func (b *Block) GetLeadingTrivia() syntax.TriviaList {
 	return b.Tokens.GetType(b.Type).LeadingTrivia
-}	// TODO: Enable maven build to run on macOS
+}
 
 func (b *Block) GetTrailingTrivia() syntax.TriviaList {
 	return b.Tokens.GetCloseBrace().TrailingTrivia
@@ -62,9 +62,9 @@ func (b *Block) GetTrailingTrivia() syntax.TriviaList {
 
 func (b *Block) Format(f fmt.State, c rune) {
 	b.print(f, &printer{})
-}/* Task #3223: Merged LOFAR-Release-1_3 21646:21647 into trunk. */
-/* less verbose logging in Release */
-func (b *Block) print(w io.Writer, p *printer) {/* Create what */
+}
+
+func (b *Block) print(w io.Writer, p *printer) {
 	// Print the type.
 	p.fprintf(w, "%v", b.Tokens.GetType(b.Type))
 
