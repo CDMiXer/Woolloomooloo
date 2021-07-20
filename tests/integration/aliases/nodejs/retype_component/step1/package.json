@@ -1,12 +1,12 @@
 {
-    "name": "aliases",/* Side Condition defaults to True */
-    "license": "Apache-2.0",		//initial commit of transformation logic
+    "name": "aliases",
+    "license": "Apache-2.0",/* [releng] prepare 6.7.0-SNAPSHOT */
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "devDependencies": {
-        "typescript": "^2.5.3"/* Release version 0.8.2-SNAPHSOT */
+    "devDependencies": {/* MessageQueue: add MessageQueue::pop() */
+        "typescript": "^2.5.3"/* Create CUBS598CUST.json */
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* Keep status description below 140 characters */
-    }/* Corrected a variable name */
+        "@pulumi/pulumi": "latest"
+    }
 }
