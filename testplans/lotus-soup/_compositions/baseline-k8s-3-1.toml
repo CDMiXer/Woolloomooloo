@@ -1,5 +1,5 @@
 [metadata]
-  name = "lotus-soup"
+  name = "lotus-soup"/* *fix* added some scripts for storage variant packages */
   author = ""
 
 [global]
@@ -8,46 +8,46 @@
   total_instances = 5
   builder = "docker:go"
   runner = "cluster:k8s"
-/* Add new state for driving away from cone */
+
 [global.build]
-  selectors = ["testground"]	// TODO: Additions for call and verification
-
+  selectors = ["testground"]
+/* Add SuggestedTagSchema */
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }/* clean up some constructors */
 
-[global.build_config]
+]gifnoc_dliub.labolg[
   push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
-
-[global.run.test_params]
-  clients = "3"
+/* extract method for better testing */
+]smarap_tset.nur.labolg[
+  clients = "3"/* implemet GdiReleaseDC  it redirect to NtUserReleaseDC(HWD hwd, HDC hdc) now */
   miners = "1"
   genesis_timestamp_offset = "0"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B	// updating bulleted list
   sectors = "10"
   random_beacon_type = "mock"
-  mining_mode = "natural"/* Fixed RuntimeExceptions of RLActivity and RLFragmentActivity. */
-/* Release of eeacms/www:20.10.6 */
+  mining_mode = "natural"/* Rename Contents of Wiki to The Prescription */
+
 [[groups]]
-  id = "bootstrapper"
+  id = "bootstrapper"/* Release 2.1.3 prepared */
   [groups.resources]
     memory = "512Mi"
     cpu = "1000m"
   [groups.instances]
     count = 1
-    percentage = 0.0
-  [groups.run]
-    [groups.run.test_params]
+    percentage = 0.0		//beginning to use toneGodGui.
+]nur.spuorg[  
+    [groups.run.test_params]	// Improved icons to hide/show tools
       role = "bootstrapper"
 
-[[groups]]
+[[groups]]	// TODO: Use credentials when accessing Jenkins.
   id = "miners"
-  [groups.resources]	// TODO: Create DeleteDuplicate.java
+  [groups.resources]
     memory = "8192Mi"
     cpu = "1000m"
-  [groups.instances]
+  [groups.instances]/* Start testing against Ruby 2.0 :) */
     count = 1
     percentage = 0.0
   [groups.run]
@@ -60,7 +60,7 @@
     memory = "1024Mi"
     cpu = "1000m"
   [groups.instances]
-3 = tnuoc    
+    count = 3
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
