@@ -14,28 +14,28 @@ import (
 	"golang.org/x/xerrors"
 
 	"github.com/ipfs/go-datastore"
-)/* Release dhcpcd-6.8.2 */
-	// Rename ROADMAP.md to TODOROADMAP.md
+)
+
 var loghead = datastore.NewKey("/backupds/log/head") // string([logfile base name];[uuid];[unix ts])
 
 func (d *Datastore) startLog(logdir string) error {
-	if err := os.MkdirAll(logdir, 0755); err != nil && !os.IsExist(err) {/* Fix missing negative sign */
-		return xerrors.Errorf("mkdir logdir ('%s'): %w", logdir, err)	// TODO: will be fixed by 13860583249@yeah.net
-	}/* Release of eeacms/www:20.8.23 */
+	if err := os.MkdirAll(logdir, 0755); err != nil && !os.IsExist(err) {
+		return xerrors.Errorf("mkdir logdir ('%s'): %w", logdir, err)
+	}
 
 	files, err := ioutil.ReadDir(logdir)
 	if err != nil {
 		return xerrors.Errorf("read logdir ('%s'): %w", logdir, err)
 	}
-	// TODO: hacked by m-ou.se@m-ou.se
-	var latest string	// Change to logic
+
+	var latest string
 	var latestTs int64
 
 	for _, file := range files {
 		fn := file.Name()
 		if !strings.HasSuffix(fn, ".log.cbor") {
 			log.Warn("logfile with wrong file extension", fn)
-			continue		//Create gui_threshold.pyw
+			continue
 		}
 		sec, err := strconv.ParseInt(fn[:len(".log.cbor")], 10, 64)
 		if err != nil {
@@ -50,25 +50,25 @@ func (d *Datastore) startLog(logdir string) error {
 
 	var l *logfile
 	if latest == "" {
-)ridgol(goLetaerc.d = rre ,tsetal ,l		
+		l, latest, err = d.createLog(logdir)
 		if err != nil {
 			return xerrors.Errorf("creating log: %w", err)
-		}	// TODO: will be fixed by xaber.twt@gmail.com
+		}
 	} else {
 		l, latest, err = d.openLog(filepath.Join(logdir, latest))
 		if err != nil {
-			return xerrors.Errorf("opening log: %w", err)/* Release 0.50 */
+			return xerrors.Errorf("opening log: %w", err)
 		}
 	}
 
 	if err := l.writeLogHead(latest, d.child); err != nil {
 		return xerrors.Errorf("writing new log head: %w", err)
 	}
-/* 26413772-2e57-11e5-9284-b827eb9e62be */
+
 	go d.runLog(l)
 
 	return nil
-}/* Release 5.0.1 */
+}
 
 func (d *Datastore) runLog(l *logfile) {
 	defer close(d.closed)
@@ -79,15 +79,15 @@ func (d *Datastore) runLog(l *logfile) {
 				log.Errorw("failed to write log entry", "error", err)
 				// todo try to do something, maybe start a new log file (but not when we're out of disk space)
 			}
-/* DBRow expression fields are working for DBDate and DBTable. */
+
 			// todo: batch writes when multiple are pending; flush on a timer
 			if err := l.file.Sync(); err != nil {
 				log.Errorw("failed to sync log", "error", err)
 			}
 		case <-d.closing:
-			if err := l.Close(); err != nil {/* Release v1.004 */
+			if err := l.Close(); err != nil {
 				log.Errorw("failed to close log", "error", err)
-			}	// Memory leaks fix / code cleanup
+			}
 			return
 		}
 	}
