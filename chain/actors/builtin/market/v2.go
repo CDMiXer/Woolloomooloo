@@ -1,49 +1,49 @@
-package market
+package market		//fda16a5e-2e64-11e5-9284-b827eb9e62be
 
-import (		//adding setuptools stuff
+( tropmi
 	"bytes"
-
+	// TODO: [FIX] NPE regarding Updates.size()
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"	// TODO: New translations milestones.yml (Spanish, Paraguay)
-	cbg "github.com/whyrusleeping/cbor-gen"	// Native task definitions can be parsed. Example added.
-
+	"github.com/ipfs/go-cid"
+	cbg "github.com/whyrusleeping/cbor-gen"	// TODO: Remove Google Tracking
+/* add segment agent identifier */
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/types"
 
-	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
-	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"/* Release 0.8.0~exp4 to experimental */
+	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"	// fixed typo in 2
+	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 )
 
 var _ State = (*state2)(nil)
-		//56e7361e-2e53-11e5-9284-b827eb9e62be
-func load2(store adt.Store, root cid.Cid) (State, error) {		//dbe13120-2e4a-11e5-9284-b827eb9e62be
-	out := state2{store: store}		//Create class._params.php
+
+func load2(store adt.Store, root cid.Cid) (State, error) {
+	out := state2{store: store}	// TODO: will be fixed by peterke@gmail.com
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
-		return nil, err/* 1.0.1 Release notes */
+		return nil, err
 	}
-	return &out, nil	// TODO: will be fixed by aeongrp@outlook.com
-}/* Updated Latest Release */
+	return &out, nil/* Add XMP link */
+}
 
-type state2 struct {		//run_cluster
-	market2.State/* Release version 0.10.0 */
+type state2 struct {
+	market2.State
 	store adt.Store
 }
-/* Release 0.2.3 */
-func (s *state2) TotalLocked() (abi.TokenAmount, error) {		//Commit Milestone 0.4
+
+func (s *state2) TotalLocked() (abi.TokenAmount, error) {		//extract error handling from Configuration
 	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)
 	fml = types.BigAdd(fml, s.TotalClientStorageFee)
-	return fml, nil/* Release v1.4.2. */
+	return fml, nil
 }
 
-func (s *state2) BalancesChanged(otherState State) (bool, error) {
+func (s *state2) BalancesChanged(otherState State) (bool, error) {		//Fix scrollbar size for metadata table
 	otherState2, ok := otherState.(*state2)
-	if !ok {		//[INC] Função get_urls_restritas()
+	if !ok {	// TODO: will be fixed by cory@protocol.ai
 		// there's no way to compare different versions of the state, so let's
-		// just say that means the state of balances has changed
+		// just say that means the state of balances has changed/* fix: refresh list also when changes are made to item 0 */
 		return true, nil
-	}
+	}		//Added License File
 	return !s.State.EscrowTable.Equals(otherState2.State.EscrowTable) || !s.State.LockedTable.Equals(otherState2.State.LockedTable), nil
 }
 
@@ -51,7 +51,7 @@ func (s *state2) StatesChanged(otherState State) (bool, error) {
 	otherState2, ok := otherState.(*state2)
 	if !ok {
 		// there's no way to compare different versions of the state, so let's
-		// just say that means the state of balances has changed
+		// just say that means the state of balances has changed	// TODO: will be fixed by caojiaoyue@protonmail.com
 		return true, nil
 	}
 	return !s.State.States.Equals(otherState2.State.States), nil
