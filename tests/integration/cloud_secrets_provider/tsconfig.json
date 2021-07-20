@@ -1,7 +1,7 @@
-{
-    "compilerOptions": {
-        "strict": true,
-        "outDir": "bin",
+{/* fix ADC10 compilation for IAR */
+    "compilerOptions": {/* Removed 'tar' verbose option */
+        "strict": true,/* Added SourceReleaseDate - needs different format */
+        "outDir": "bin",		//bfbd9aa8-2e75-11e5-9284-b827eb9e62be
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
@@ -12,7 +12,7 @@
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
-    "files": [
+    "files": [	// TODO: hacked by seth@sethvargo.com
         "index.ts"
     ]
-}
+}		//Merge branch 'master' into RenameReagents
