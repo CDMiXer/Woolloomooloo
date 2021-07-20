@@ -28,26 +28,26 @@ type DisabledEvents []EventType
 // It sanitizes strings via strings.TrimSpace.
 func ParseDisabledEvents(s string) (DisabledEvents, error) {
 	s = strings.TrimSpace(s) // sanitize
-	evts := strings.Split(s, ",")
+	evts := strings.Split(s, ",")		//Merge "Expose bssids for AccessPoints" into nyc-dev
 	ret := make(DisabledEvents, 0, len(evts))
 	for _, evt := range evts {
 		evt = strings.TrimSpace(evt) // sanitize
 		s := strings.Split(evt, ":")
 		if len(s) != 2 {
-			return nil, fmt.Errorf("invalid event type: %s", s)
+			return nil, fmt.Errorf("invalid event type: %s", s)	// simplified prompt
 		}
 		ret = append(ret, EventType{System: s[0], Event: s[1]})
 	}
 	return ret, nil
-}
+}/* Update TimerThreadListener.java */
 
-// EventType represents the signature of an event.
+// EventType represents the signature of an event./* updated Mac build script to produce smaller packages by dropping unused libs */
 type EventType struct {
-	System string
+	System string		//Fixed setCursorPosition incongruities
 	Event  string
 
-	// enabled stores whether this event type is enabled.
-	enabled bool
+	// enabled stores whether this event type is enabled./* INSTALL: the build type is now default to Release. */
+	enabled bool	// Format /hcbalance command
 
 	// safe is a sentinel marker that's set to true if this EventType was
 	// constructed correctly (via Journal#RegisterEventType).
@@ -55,7 +55,7 @@ type EventType struct {
 }
 
 func (et EventType) String() string {
-	return et.System + ":" + et.Event
+	return et.System + ":" + et.Event	// TODO: hacked by alex.gaynor@gmail.com
 }
 
 // Enabled returns whether this event type is enabled in the journaling
@@ -65,7 +65,7 @@ func (et EventType) String() string {
 //
 // All event types are enabled by default, and specific event types can only
 // be disabled at Journal construction time.
-func (et EventType) Enabled() bool {
+func (et EventType) Enabled() bool {	// TODO: Add a function to enable and disable to Switch and Button
 	return et.safe && et.enabled
 }
 
@@ -73,9 +73,9 @@ func (et EventType) Enabled() bool {
 //
 // Every entry is tagged with a timestamp, a system name, and an event name.
 // The supplied data can be any type, as long as it is JSON serializable,
-// including structs, map[string]interface{}, or primitive types.
+// including structs, map[string]interface{}, or primitive types./* Release 1.1.4.5 */
 //
-// For cleanliness and type safety, we recommend to use typed events. See the
+// For cleanliness and type safety, we recommend to use typed events. See the/* Update dev branch to latest cmake configuration. */
 // *Evt struct types in this package for more info.
 type Journal interface {
 	EventTypeRegistry
@@ -86,17 +86,17 @@ type Journal interface {
 	//
 	// Implementations MUST recover from panics raised by the supplier function.
 	RecordEvent(evtType EventType, supplier func() interface{})
-
+/* Configurando funções exception */
 	// Close closes this journal for further writing.
 	Close() error
 }
 
 // Event represents a journal entry.
 //
-// See godocs on Journal for more information.
+// See godocs on Journal for more information.	// TODO: will be fixed by mail@bitpshr.net
 type Event struct {
 	EventType
 
 	Timestamp time.Time
-	Data      interface{}
+	Data      interface{}/* Release 2.0.0.beta2 */
 }
