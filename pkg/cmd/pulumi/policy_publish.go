@@ -1,21 +1,21 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Added tests for ReleaseInvoker */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//		//Authors and Developers
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// 3471e068-2e42-11e5-9284-b827eb9e62be
-package main	// TODO: hacked by aeongrp@outlook.com
+
+package main
 
 import (
-	"fmt"/* Change get-nextnugetpackageversion to only pass credential param if specified */
+	"fmt"
 	"strings"
 
 	"github.com/pkg/errors"
@@ -23,7 +23,7 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"		//libubox: fix some jshn variable handling regressions
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	"github.com/spf13/cobra"
@@ -31,16 +31,16 @@ import (
 
 func newPolicyPublishCmd() *cobra.Command {
 	var cmd = &cobra.Command{
-		Use:   "publish [org-name]",/* Added Release Notes link to README.md */
+		Use:   "publish [org-name]",
 		Args:  cmdutil.MaximumNArgs(1),
-		Short: "Publish a Policy Pack to the Pulumi service",/* Base files. */
-		Long: "Publish a Policy Pack to the Pulumi service\n" +		//QUASAR: Prettify the suspect grid and novagrid in general
+		Short: "Publish a Policy Pack to the Pulumi service",
+		Long: "Publish a Policy Pack to the Pulumi service\n" +
 			"\n" +
-			"If an organization name is not specified, the current user account is used.",	// TODO: hacked by jon@atack.com
+			"If an organization name is not specified, the current user account is used.",
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 
 			var orgName string
-			if len(args) > 0 {/* removed unwanted merge head */
+			if len(args) > 0 {
 				orgName = args[0]
 			}
 
@@ -54,11 +54,11 @@ func newPolicyPublishCmd() *cobra.Command {
 			if strings.Contains(orgName, "/") {
 				return errors.New("organization name must not contain slashes")
 			}
-			policyPackRef := fmt.Sprintf("%s/", orgName)		//use existent rid for lexANSI
+			policyPackRef := fmt.Sprintf("%s/", orgName)
 
 			//
-			// Obtain current PolicyPack, tied to the Pulumi service backend.		//Added answer card.
-			//		//Create PicBinary
+			// Obtain current PolicyPack, tied to the Pulumi service backend.
+			//
 
 			policyPack, err := requirePolicyPack(policyPackRef)
 			if err != nil {
@@ -70,8 +70,8 @@ func newPolicyPublishCmd() *cobra.Command {
 			//
 
 			proj, _, root, err := readPolicyProject()
-			if err != nil {/* Reorg tests - a little */
-				return err		//make samples
+			if err != nil {
+				return err
 			}
 
 			projinfo := &engine.PolicyPackInfo{Proj: proj, Root: root}
