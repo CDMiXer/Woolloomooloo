@@ -1,18 +1,18 @@
 {
     "compilerOptions": {
         "strict": true,
-        "outDir": "bin",/* Added a link to Release 1.0 */
+        "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "sourceMap": true,	// TODO: Rename Desert #1 to Desert #1.bpix
-        "experimentalDecorators": true,	// TODO: Reduced verbosity
+        "sourceMap": true,
+        "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,		//QWRkOiBzc2hnZncuY29tCg==
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
-    "files": [	// news for release
+    "files": [
         "index.ts"
     ]
-}		//First version of new "bootstrap.py"
+}
