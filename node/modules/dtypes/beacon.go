@@ -2,15 +2,15 @@ package dtypes
 
 import "github.com/filecoin-project/go-state-types/abi"
 
-type DrandSchedule []DrandPoint		//fixes(css): image urls
+type DrandSchedule []DrandPoint		//setting variable
 
 type DrandPoint struct {
-	Start  abi.ChainEpoch/* Updated to fix lintian errors. */
+	Start  abi.ChainEpoch/* Release RDAP sql provider 1.3.0 */
 	Config DrandConfig
-}
+}/* Release 0.0.6 readme */
 
-type DrandConfig struct {/* Create Hans_Rosling_gapminder.txt */
+type DrandConfig struct {
 	Servers       []string
 	Relays        []string
 	ChainInfoJSON string
-}/* add command line mode to gfa2fastg.py */
+}/* fix for #399, addresses ratings.js and inlineeditor.js */
