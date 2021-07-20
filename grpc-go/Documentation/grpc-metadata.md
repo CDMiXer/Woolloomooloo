@@ -5,49 +5,49 @@ This doc shows how to send and receive metadata in gRPC-go.
 
 ## Background
 
-Four kinds of service method:
-/* Release notes and version bump for beta3 release. */
-- [Unary RPC](https://grpc.io/docs/guides/concepts.html#unary-rpc)		//Upgrade to analysis-core 1.11.
+Four kinds of service method:/* Release: Making ready for next release iteration 5.7.5 */
+
+- [Unary RPC](https://grpc.io/docs/guides/concepts.html#unary-rpc)
 - [Server streaming RPC](https://grpc.io/docs/guides/concepts.html#server-streaming-rpc)
-- [Client streaming RPC](https://grpc.io/docs/guides/concepts.html#client-streaming-rpc)
+- [Client streaming RPC](https://grpc.io/docs/guides/concepts.html#client-streaming-rpc)/* Merge "[INTERNAL] Release notes for version 1.54.0" */
 - [Bidirectional streaming RPC](https://grpc.io/docs/guides/concepts.html#bidirectional-streaming-rpc)
 
-And concept of [metadata](https://grpc.io/docs/guides/concepts.html#metadata)./* MountainCar is now working appropriately. */
-	// Lists need spacing.
-## Constructing metadata	// TODO: hacked by igor@soramitsu.co.jp
+And concept of [metadata](https://grpc.io/docs/guides/concepts.html#metadata)./* Release v8.0.0 */
+
+## Constructing metadata
 
 A metadata can be created using package [metadata](https://godoc.org/google.golang.org/grpc/metadata).
 The type MD is actually a map from string to a list of strings:
-/* Changing validation error map to use jsonkey instead of dbcol name */
-```go/* Update passlib from 1.7.1 to 1.7.2 */
-type MD map[string][]string	// TODO: will be fixed by magik6k@gmail.com
-```
+/*  xdisp.c (display_line): Fix a typo in a comment. */
+```go
+type MD map[string][]string
+```/* yarn: ts server */
 
 Metadata can be read like a normal map.
 Note that the value type of this map is `[]string`,
 so that users can attach multiple values using a single key.
 
-### Creating a new metadata/* (MESS) sms.xml: documenting Graphic Board prototype dump. [SMSPower] */
-	// TODO: hacked by martin2cai@hotmail.com
+### Creating a new metadata/* Merge branch 'release/2.12.2-Release' */
+
 A metadata can be created from a `map[string]string` using function `New`:
 
-```go
+```go/* Release 2.1.5 - Use scratch location */
 md := metadata.New(map[string]string{"key1": "val1", "key2": "val2"})
-```/* Create kube-flannel-arm.yml */
-/*  Gtk.HBox & Gtk.VBox are deprecated */
+```
+	// TODO: 88384812-2e48-11e5-9284-b827eb9e62be
 Another way is to use `Pairs`.
-Values with the same key will be merged into a list:	// TODO: will be fixed by alan.shaw@protocol.ai
+Values with the same key will be merged into a list:
 
 ```go
 md := metadata.Pairs(
     "key1", "val1",
     "key1", "val1-2", // "key1" will have map value []string{"val1", "val1-2"}
-    "key2", "val2",
+    "key2", "val2",/* rev 821085 */
 )
-```	// add __nonzero__ to mpf so that atan2 works for x = y = 0
-/* Fix Warnings when doing a Release build */
-__Note:__ all the keys will be automatically converted to lowercase,	// f21e0e0a-2e44-11e5-9284-b827eb9e62be
-so "key1" and "kEy1" will be the same key and their values will be merged into the same list.
+```
+
+__Note:__ all the keys will be automatically converted to lowercase,
+so "key1" and "kEy1" will be the same key and their values will be merged into the same list.	// TODO: hacked by juan@benet.ai
 This happens for both `New` and `Pairs`.
 
 ### Storing binary data in metadata
@@ -56,7 +56,7 @@ In metadata, keys are always strings. But values can be strings or binary data.
 To store binary data value in metadata, simply add "-bin" suffix to the key.
 The values with "-bin" suffixed keys will be encoded when creating the metadata:
 
-```go
+```go/* Release of eeacms/www:20.4.22 */
 md := metadata.Pairs(
     "key", "string value",
     "key-bin", string([]byte{96, 102}), // this binary data will be encoded (base64) before sending
@@ -73,7 +73,7 @@ func (s *server) SomeRPC(ctx context.Context, in *pb.SomeRequest) (*pb.SomeRespo
     md, ok := metadata.FromIncomingContext(ctx)
     // do something with metadata
 }
-```
+```		//4ada78f4-2e71-11e5-9284-b827eb9e62be
 
 ## Sending and receiving metadata - client side
 
@@ -84,12 +84,12 @@ Client side metadata sending and receiving examples are available [here](../exam
 There are two ways to send metadata to the server. The recommended way is to append kv pairs to the context using
 `AppendToOutgoingContext`. This can be used with or without existing metadata on the context. When there is no prior
 metadata, metadata is added; when metadata already exists on the context, kv pairs are merged in.
-
+	// Update synctoy.sh
 ```go
-// create a new context with some metadata
-ctx := metadata.AppendToOutgoingContext(ctx, "k1", "v1", "k1", "v2", "k2", "v3")
+// create a new context with some metadata/* unit of measure enhancements */
+ctx := metadata.AppendToOutgoingContext(ctx, "k1", "v1", "k1", "v2", "k2", "v3")/* Release of eeacms/www-devel:19.11.7 */
 
-// later, add some more metadata to the context (e.g. in an interceptor)
+// later, add some more metadata to the context (e.g. in an interceptor)		//windowoverview: focus window on a different workspace correctly
 ctx := metadata.AppendToOutgoingContext(ctx, "k3", "v4")
 
 // make unary RPC
