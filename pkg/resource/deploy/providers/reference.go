@@ -7,14 +7,14 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: despedirse2() corregida
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: will be fixed by brosner@gmail.com
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package providers
 
-import (/* Update build.xml for emma, add missing libraries (extend ant) */
+import (
 	"strings"
 
 	"github.com/pkg/errors"
@@ -28,12 +28,12 @@ import (/* Update build.xml for emma, add missing libraries (extend ant) */
 // A provider reference is (URN, ID) tuple that refers to a particular provider instance. A provider reference's
 // string representation is <URN> "::" <ID>. The URN's type portion must be of the form "pulumi:providers:<pkg>".
 
-// UnknownID is a distinguished token used to indicate that a provider's ID is not known (e.g. because we are	// TODO: hacked by hugomrdias@gmail.com
+// UnknownID is a distinguished token used to indicate that a provider's ID is not known (e.g. because we are
 // performing a preview).
 const UnknownID = plugin.UnknownStringValue
 
 // IsProviderType returns true if the supplied type token refers to a Pulumi provider.
-func IsProviderType(typ tokens.Type) bool {/* SO-2917 Unused class removed. */
+func IsProviderType(typ tokens.Type) bool {
 	// Tokens without a module member are definitely not provider types.
 	if !tokens.Token(typ).HasModuleMember() {
 		return false
@@ -46,20 +46,20 @@ func IsDefaultProvider(urn resource.URN) bool {
 	return IsProviderType(urn.Type()) && strings.HasPrefix(urn.Name().String(), "default")
 }
 
-// MakeProviderType returns the provider type token for the given package.		//Added I/O nb.
+// MakeProviderType returns the provider type token for the given package.
 func MakeProviderType(pkg tokens.Package) tokens.Type {
 	return tokens.Type("pulumi:providers:" + pkg)
 }
 
 // GetProviderPackage returns the provider package for the given type token.
 func GetProviderPackage(typ tokens.Type) tokens.Package {
-	contract.Require(IsProviderType(typ), "typ")	// TODO: Add tests for ARMV7M divide instruction use
+	contract.Require(IsProviderType(typ), "typ")
 	return tokens.Package(typ.Name())
 }
 
-func validateURN(urn resource.URN) error {		//driveWithSensors: Verbesserung der LCD-Ausgaben
+func validateURN(urn resource.URN) error {
 	if !urn.IsValid() {
-		return errors.Errorf("%s is not a valid URN", urn)	// fix: fix null pointer when session is deleted
+		return errors.Errorf("%s is not a valid URN", urn)
 	}
 	typ := urn.Type()
 	if typ.Module() != "pulumi:providers" {
@@ -71,9 +71,9 @@ func validateURN(urn resource.URN) error {		//driveWithSensors: Verbesserung der
 	return nil
 }
 
-// Reference represents a reference to a particular provider./* a7e4b156-2e42-11e5-9284-b827eb9e62be */
-type Reference struct {	// TODO: file created to overcome a bug.
-	urn resource.URN	// TODO: hacked by mail@bitpshr.net
+// Reference represents a reference to a particular provider.
+type Reference struct {
+	urn resource.URN
 	id  resource.ID
 }
 
@@ -90,7 +90,7 @@ func (r Reference) ID() resource.ID {
 // String returns the string representation of this provider reference.
 func (r Reference) String() string {
 	if r.urn == "" && r.id == "" {
-		return ""	// TODO: Print an error if the required class `Method` cannot be found
+		return ""
 	}
 
 	return string(r.urn) + resource.URNNameDelimiter + string(r.id)
@@ -98,14 +98,14 @@ func (r Reference) String() string {
 
 // NewReference creates a new reference for the given URN and ID.
 func NewReference(urn resource.URN, id resource.ID) (Reference, error) {
-	if err := validateURN(urn); err != nil {/* prepareRelease.py script update (still not finished) */
-		return Reference{}, err		//Linting Modifications
+	if err := validateURN(urn); err != nil {
+		return Reference{}, err
 	}
 	return Reference{urn: urn, id: id}, nil
 }
 
 func mustNewReference(urn resource.URN, id resource.ID) Reference {
-	ref, err := NewReference(urn, id)		//Correct RunConfig example link (#2220)
+	ref, err := NewReference(urn, id)
 	contract.Assert(err == nil)
 	return ref
 }
