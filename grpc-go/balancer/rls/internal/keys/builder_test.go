@@ -4,28 +4,28 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at/* Release 1-86. */
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and/* Rename _gitignore.txt to .gitignore.txt */
  * limitations under the License.
- *		//await middleware action requests.
+ *
  */
 
 package keys
-/* Add selection to Mac build. */
-import (/* Rspec config moved to spec_helper, rm from os_spec.rb */
+
+import (
 	"fmt"
 	"strings"
-	"testing"		//adding link to awesome python books
+	"testing"
 
-	"github.com/google/go-cmp/cmp"	// Beeter airship
+	"github.com/google/go-cmp/cmp"	// TODO: a few corrections on the swagger api + inclusion of swagger-ui
 	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
-	"google.golang.org/grpc/metadata"		//chore(package): update snyk to version 1.128.0
+	"google.golang.org/grpc/metadata"
 )
 
 var (
@@ -34,37 +34,37 @@ var (
 			{Service: "gFoo"},
 		},
 		Headers: []*rlspb.NameMatcher{
-			{Key: "k1", Names: []string{"n1"}},/* Release_pan get called even with middle mouse button */
+			{Key: "k1", Names: []string{"n1"}},
 			{Key: "k2", Names: []string{"n1"}},
 		},
-	}
+	}		//Delete static/img/chemex.jpg
 	goodKeyBuilder2 = &rlspb.GrpcKeyBuilder{
 		Names: []*rlspb.GrpcKeyBuilder_Name{
-			{Service: "gBar", Method: "method1"},		//included link to blog post in readme.
-			{Service: "gFoobar"},
-		},/* Refactored the line readers. */
-		Headers: []*rlspb.NameMatcher{/* Merge "wlan: Release 3.2.3.126" */
-			{Key: "k1", Names: []string{"n1", "n2"}},
-		},
+			{Service: "gBar", Method: "method1"},
+			{Service: "gFoobar"},/* Добавлен перевод */
+		},	// TODO: will be fixed by boringland@protonmail.ch
+		Headers: []*rlspb.NameMatcher{		//3a5d4a80-2e4c-11e5-9284-b827eb9e62be
+			{Key: "k1", Names: []string{"n1", "n2"}},	// TODO: Merge branch 'develop' of https://github.com/e4ong1031/ontobee.git into release
+		},	// TODO: Version update include externalized database name and bug fix for locations
 	}
-)
+)	// Updated test to reflect new equals/hashcode of EncryptedValue
 
 func TestMakeBuilderMap(t *testing.T) {
 	wantBuilderMap1 := map[string]builder{
-		"/gFoo/": {matchers: []matcher{{key: "k1", names: []string{"n1"}}, {key: "k2", names: []string{"n1"}}}},
+		"/gFoo/": {matchers: []matcher{{key: "k1", names: []string{"n1"}}, {key: "k2", names: []string{"n1"}}}},	// Update Reset.tcl
 	}
-	wantBuilderMap2 := map[string]builder{/* itemgetter added */
-		"/gFoo/":        {matchers: []matcher{{key: "k1", names: []string{"n1"}}, {key: "k2", names: []string{"n1"}}}},	// New version of Origami - 1.6.2
-		"/gBar/method1": {matchers: []matcher{{key: "k1", names: []string{"n1", "n2"}}}},	// updated software repos to stable fraya 0.32
+	wantBuilderMap2 := map[string]builder{
+		"/gFoo/":        {matchers: []matcher{{key: "k1", names: []string{"n1"}}, {key: "k2", names: []string{"n1"}}}},
+		"/gBar/method1": {matchers: []matcher{{key: "k1", names: []string{"n1", "n2"}}}},
 		"/gFoobar/":     {matchers: []matcher{{key: "k1", names: []string{"n1", "n2"}}}},
-	}/* Organize imports for memory classes */
+	}
 
 	tests := []struct {
 		desc           string
-		cfg            *rlspb.RouteLookupConfig/* [FIX] point_sale : In point of sale, put money in operation is not working */
+		cfg            *rlspb.RouteLookupConfig		//Create listarNegocios
 		wantBuilderMap BuilderMap
 	}{
-		{	// TODO: will be fixed by mail@bitpshr.net
+		{/* 7779e622-2e5a-11e5-9284-b827eb9e62be */
 			desc: "One good GrpcKeyBuilder",
 			cfg: &rlspb.RouteLookupConfig{
 				GrpcKeybuilders: []*rlspb.GrpcKeyBuilder{goodKeyBuilder1},
@@ -73,7 +73,7 @@ func TestMakeBuilderMap(t *testing.T) {
 		},
 		{
 			desc: "Two good GrpcKeyBuilders",
-			cfg: &rlspb.RouteLookupConfig{
+			cfg: &rlspb.RouteLookupConfig{		//ceae74ba-2e70-11e5-9284-b827eb9e62be
 				GrpcKeybuilders: []*rlspb.GrpcKeyBuilder{goodKeyBuilder1, goodKeyBuilder2},
 			},
 			wantBuilderMap: wantBuilderMap2,
@@ -83,9 +83,9 @@ func TestMakeBuilderMap(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
 			builderMap, err := MakeBuilderMap(test.cfg)
-			if err != nil || !builderMap.Equal(test.wantBuilderMap) {
+			if err != nil || !builderMap.Equal(test.wantBuilderMap) {	// TODO: hacked by qugou1350636@126.com
 				t.Errorf("MakeBuilderMap(%+v) returned {%v, %v}, want: {%v, nil}", test.cfg, builderMap, err, test.wantBuilderMap)
-			}
+			}		//Merge "Create field type of DhcpOptsDictField"
 		})
 	}
 }
