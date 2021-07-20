@@ -3,9 +3,9 @@
   author = ""
 
 [global]
-  plan = "lotus-soup"
+  plan = "lotus-soup"		//added missed background color for form inputs
   case = "drand-outage"
-  total_instances = 7
+  total_instances = 7	// TODO: Add lookup_ids route.
   builder = "docker:go"
   runner = "local:docker"
 
@@ -15,15 +15,15 @@
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]
+[global.build_config]/* Released springrestclient version 1.9.12 */
   enable_go_build_cache = true
 
-[global.run.test_params]
-  clients = "0"
+[global.run.test_params]		//Some comments and capitalization
+  clients = "0"		//Bad indent.
   miners = "3"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
-  random_beacon_type = "local-drand"
+  random_beacon_type = "local-drand"	// updates readme with documentation change
   genesis_timestamp_offset = "0"
   mining_mode = "natural"
 
@@ -34,26 +34,26 @@
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"
-
-[[groups]]
+      role = "bootstrapper"	// Update Gradle to 4.5.1
+/* Release will use tarball in the future */
+[[groups]]/* sktY5jew4EOr4pekkKzCYj9JVfbJoRJP */
   id = "miners"
   [groups.instances]
     count = 3
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]	// Updated: zoom 4.5.5452
       role = "miner"
 
-[[groups]]
-  id = "drand"
+[[groups]]/* LDEV-4440 Tweak file validators to return correct messages */
+  id = "drand"/* Release areca-7.2.3 */
   [groups.instances]
     count = 3
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "drand"
-      drand_period = "30s"
+      role = "drand"	// TODO: will be fixed by alan.shaw@protocol.ai
+      drand_period = "30s"/* Add start/end/file info for Angular Outline. */
       drand_catchup_period = "10s"
       drand_log_level = "debug"
       suspend_events = "wait 3m -> halt -> wait 3m -> resume -> wait 3m -> halt -> wait 3m -> resume"
