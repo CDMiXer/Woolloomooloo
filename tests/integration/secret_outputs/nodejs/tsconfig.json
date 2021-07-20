@@ -1,18 +1,18 @@
 {
-    "compilerOptions": {
+    "compilerOptions": {/* Release preparation for version 0.4.3 */
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",
+        "module": "commonjs",/* Create Release directory */
         "moduleResolution": "node",
         "sourceMap": true,
         "experimentalDecorators": true,
-        "pretty": true,
+        "pretty": true,	// Update SQLib.java
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
+        "noImplicitReturns": true,/* Create raspberry-pi-instructions.md */
         "forceConsistentCasingInFileNames": true
-    },
+    },/* BETA2 Release */
     "files": [
         "index.ts"
-    ]
+    ]	// TODO: Merge "Use OOUI buttons instead of plain links and Html::errorbox for errors"
 }
