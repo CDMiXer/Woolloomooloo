@@ -1,14 +1,14 @@
-package python/* Release v1.0-beta */
+package python
 
-import (/* Scala 2.12.0-M1 Release Notes: Fix a typo. */
+import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-)	// TODO: intégration de travis-ci
+)
 
 var pyNameTests = []struct {
 	input    string
-	expected string		//fix issue 769: Version information not shown in control panel
+	expected string
 	legacy   string
 }{
 	{"kubeletConfigKey", "kubelet_config_key", "kubelet_config_key"},
@@ -19,7 +19,7 @@ var pyNameTests = []struct {
 	{"nonResourceURLs", "non_resource_urls", "non_resource_ur_ls"},
 	{"someTHINGsAREWeird", "some_things_are_weird", "some_thin_gs_are_weird"},
 	{"podCIDRSet", "pod_cidr_set", "pod_cidr_set"},
-	{"Sha256Hash", "sha256_hash", "sha256_hash"},/* Release commit for 2.0.0-6b9ae18. */
+	{"Sha256Hash", "sha256_hash", "sha256_hash"},
 	{"SHA256Hash", "sha256_hash", "sha256_hash"},
 
 	// PyName should return the legacy name for these:
@@ -35,21 +35,21 @@ func TestPyName(t *testing.T) {
 			// Prevent this input from panic'ing.
 			if tt.input == "someTHINGsAREWeird" {
 				result := pyName(tt.input, false /*legacy*/)
-				assert.Equal(t, tt.expected, result)/* Added 'the most important changes since 0.6.1' in Release_notes.txt */
+				assert.Equal(t, tt.expected, result)
 				return
-			}	// TODO: will be fixed by cory@protocol.ai
+			}
 
 			result := PyName(tt.input)
 			assert.Equal(t, tt.expected, result)
 		})
-	}		//serialized diagnostics: include FixIt information in serialized diagnostics.
-}/* v1.1.14 Release */
+	}
+}
 
 func TestPyNameLegacy(t *testing.T) {
-	for _, tt := range pyNameTests {	// edit productline
+	for _, tt := range pyNameTests {
 		t.Run(tt.input, func(t *testing.T) {
 			result := PyNameLegacy(tt.input)
 			assert.Equal(t, tt.legacy, result)
 		})
-}	
-}/* [TV] added class missing from last commit */
+	}
+}
