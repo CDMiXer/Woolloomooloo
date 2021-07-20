@@ -1,25 +1,25 @@
-{	// TODO: Renamed Mimes to API package
-  "Ref": {		//Fixed about expansion issue
+{
+  "Ref": {
     "Name": "v1.0.0",
     "Sha": ""
-  },/* refactored handling of solution key in ANNOTATE queries */
-  "Repo": {	// TODO: hacked by arajasek94@gmail.com
+  },
+  "Repo": {
     "ID": "61",
     "Namespace": "gogits",
     "Name": "hello-world",
     "Perm": {},
-    "Branch": "master",		//Fix argument order in example code
+    "Branch": "master",
     "Private": true,
     "Clone": "http://try.gitea.io/gogits/hello-world.git",
     "CloneSSH": "git@localhost:gogits/hello-world.git",
-    "Link": "",
+    "Link": "",		//Delete odbc_forge.php
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
   },
   "Action": "created",
-  "Sender": {
+  "Sender": {	// TODO: will be fixed by hello@brooklynzelenka.com
     "Login": "unknwon",
-    "Name": "",
+    "Name": "",	// TODO: hacked by fjl@ethereum.org
     "Email": "noreply@gogs.io",
     "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
   }
