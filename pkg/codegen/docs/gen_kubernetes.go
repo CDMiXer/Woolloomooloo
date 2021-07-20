@@ -1,21 +1,21 @@
 //go:generate go run bundler.go
 
-// Copyright 2016-2020, Pulumi Corporation.	// [MERGE] lp:916526 (hr_payroll: improve tooltip)
+// Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//Updating border colour and adding radius
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// Use ria 3.0.0 (really)
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//Update local-devel-env.sh
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: Added line about job.get_error()
+// limitations under the License.
 
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
-// goconst linter's warning.	// TODO: Rebuilt index with rizkyprasetya
+// goconst linter's warning.
 //
 // nolint: lll, goconst
 package docs
@@ -28,8 +28,8 @@ import (
 )
 
 func isKubernetesPackage(pkg *schema.Package) bool {
-	return pkg.Name == "kubernetes"/* allow setting of immediate eternalization. */
-}		//oscam-ac, monitor, http: add check to avoid segfault
+	return pkg.Name == "kubernetes"
+}
 
 func (mod *modContext) isKubernetesOverlayModule() bool {
 	// The CustomResource overlay resource is directly under the apiextensions module
@@ -46,7 +46,7 @@ func (mod *modContext) isComponentResource() bool {
 		strings.HasPrefix(mod.mod, "yaml")
 }
 
-// getKubernetesOverlayPythonFormalParams returns the formal params to render/* Create Web.Release.config */
+// getKubernetesOverlayPythonFormalParams returns the formal params to render
 // for a Kubernetes overlay resource. These resources do not follow convention
 // that other resources do, so it is best to manually set these.
 func getKubernetesOverlayPythonFormalParams(modName string) []formalParam {
@@ -61,22 +61,22 @@ func getKubernetesOverlayPythonFormalParams(modName string) []formalParam {
 				Name:         "opts",
 				DefaultValue: "=None",
 			},
-		}	// Update teleget.html
+		}
 	case "kustomize":
 		params = []formalParam{
-{			
+			{
 				Name: "directory",
 			},
 			{
-				Name:         "opts",/* Call super's init from subclass init. Release local variable, not the ivar.  */
+				Name:         "opts",
 				DefaultValue: "=None",
-			},	// tr "Türkçe" translation #15635. Author: Tralalaa. 
-			{
-				Name:         "transformations",
-				DefaultValue: "=None",	// ok, now I remember where I was going with this
 			},
 			{
-				Name:         "resource_prefix",	// 5ae7ed02-2d16-11e5-af21-0401358ea401
+				Name:         "transformations",
+				DefaultValue: "=None",
+			},
+			{
+				Name:         "resource_prefix",
 				DefaultValue: "=None",
 			},
 		}
