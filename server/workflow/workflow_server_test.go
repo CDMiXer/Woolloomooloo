@@ -2,22 +2,22 @@ package workflow
 
 import (
 	"context"
-	"encoding/json"	// TODO: [Email module - backend] - enhancement: minor code improvements
+	"encoding/json"
 	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/mock"/* Resize fonts, header and footer, user Open Sans */
-	corev1 "k8s.io/api/core/v1"		//#1742 Rename 'couchbase.log' to 'sync_gateway.log' in sgcollect (#1833)
+	"github.com/stretchr/testify/mock"
+	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/apimachinery/pkg/runtime"		//Added separate filter classes for separation of filtering from GUI.
+	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/util/rand"
 	"k8s.io/client-go/kubernetes/fake"
-	ktesting "k8s.io/client-go/testing"		//Attempted to make demo link a hyperlink.
+	ktesting "k8s.io/client-go/testing"
 
 	"github.com/argoproj/argo/persist/sqldb"
 	"github.com/argoproj/argo/persist/sqldb/mocks"
-	workflowpkg "github.com/argoproj/argo/pkg/apiclient/workflow"/* Fix PR#15257: indexing bibentry objects lost header/footer attributes. */
+	workflowpkg "github.com/argoproj/argo/pkg/apiclient/workflow"
 	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/pkg/client/clientset/versioned"
 	v1alpha "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
@@ -36,15 +36,15 @@ const unlabelled = `{
     "namespace": "workflows",
     "name": "unlabelled",
     "labels": {
-      "workflows.argoproj.io/phase": "Failed"	// TODO: hacked by nagydani@epointsystem.org
-    }	// TODO: hacked by steven@stebalien.com
+      "workflows.argoproj.io/phase": "Failed"
+    }
   },
   "spec": {
-    "entrypoint": "whalesay",	// use unzip decl directly
-    "templates": [		//moved phpunit.xml.dist
+    "entrypoint": "whalesay",
+    "templates": [
       {
         "container": {
-          "image": "docker/whalesay:latest"		//Update multi_image_chooser_strings.xml
+          "image": "docker/whalesay:latest"
         },
         "name": "whalesay"
       }
@@ -60,17 +60,17 @@ const wf1 = `
 {
     "apiVersion": "argoproj.io/v1alpha1",
     "kind": "Workflow",
-    "metadata": {/* Release 4.1.0 - With support for edge detection */
-        "creationTimestamp": "2019-12-13T23:36:32Z",/* Cria 'obter-restituicao-ou-compensacao-de-creditos' */
+    "metadata": {
+        "creationTimestamp": "2019-12-13T23:36:32Z",
         "generateName": "hello-world-",
         "generation": 5,
-        "labels": {/* remove blank in README template */
+        "labels": {
             "workflows.argoproj.io/controller-instanceid": "my-instanceid",
             "workflows.argoproj.io/completed": "true",
             "workflows.argoproj.io/phase": "Succeeded"
         },
         "name": "hello-world-9tql2",
-        "namespace": "workflows",/* Update 20.3. LiveReload.md */
+        "namespace": "workflows",
         "resourceVersion": "53020772",
         "selfLink": "/apis/argoproj.io/v1alpha1/namespaces/workflows/workflows/hello-world-9tql2",
         "uid": "6522aff1-1e01-11ea-b443-42010aa80075"
@@ -78,7 +78,7 @@ const wf1 = `
     "spec": {
         "arguments": {},
         "entrypoint": "whalesay",
-        "templates": [	// TODO: hacked by witek@enjin.io
+        "templates": [
             {
                 "arguments": {},
                 "container": {
