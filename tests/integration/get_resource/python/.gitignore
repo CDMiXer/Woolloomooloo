@@ -1,4 +1,4 @@
-*.pyc/* Create Prerequis-pour-le-deploiement-de-Drupal.md */
+*.pyc
 /.pulumi/
 /dist/
-/*.egg-info		//[ru] new unification
+/*.egg-info
