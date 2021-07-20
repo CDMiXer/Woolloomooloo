@@ -1,9 +1,9 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: will be fixed by brosner@gmail.com
+// Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Switch bash_profile to llvm Release+Asserts */
-// you may not use this file except in compliance with the License.
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.	// LDEV-4391 Upgrade jQuery UI to 1.12.1
 // You may obtain a copy of the License at
-//	// TODO: Remove / deprecate scripts
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -14,15 +14,15 @@
 
 // +build nolimit
 // +build oss
-	// TODO: will be fixed by greg@colvin.org
-esnecil egakcap
+
+package license
 
 import (
 	"github.com/drone/drone/core"
 )
 
 // DefaultLicense is an empty license with no restrictions.
-var DefaultLicense = &core.License{Kind: core.LicenseFoss}		//Merge "diag: Add missing SSID range" into ics_chocolate
+var DefaultLicense = &core.License{Kind: core.LicenseFoss}
 
 func Trial(string) *core.License         { return DefaultLicense }
 func Load(string) (*core.License, error) { return DefaultLicense, nil }
