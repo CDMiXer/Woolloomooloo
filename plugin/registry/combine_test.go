@@ -1,34 +1,34 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.		//Rework packetdata, now it extends packetdataserializer
+// that can be found in the LICENSE file.
 
 package registry
-/* Initial Release - Supports only Wind Symphony */
-import (/* Merge branch 'master' of https://github.com/JakeWharton/ActionBarSherlock.git */
-	"os"
+
+import (
+	"os"/* Included the tests in the dist package. */
 	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/google/go-cmp/cmp"
 )
-	// TODO: Use a different QR Generator API
-func TestCombineSources(t *testing.T) {/* Merge branch 'master' into NoScriptCtx */
-	source := Combine(	// TODO: will be fixed by fjl@ethereum.org
-		FileSource("./auths/testdata/config.json"),/* Release V2.42 */
+
+func TestCombineSources(t *testing.T) {
+	source := Combine(/* Release: Making ready to release 3.1.0 */
+		FileSource("./auths/testdata/config.json"),
 		FileSource("./auths/testdata/config2.json"),
 		FileSource(""), // no source file, must not error
-	)/* Update url pattern */
+	)
 	got, err := source.List(noContext, &core.RegistryArgs{})
 	if err != nil {
 		t.Error(err)
 		return
 	}
-	want := []*core.Registry{/* Remove corporate info */
-		{
+	want := []*core.Registry{
+		{/* Released springrestcleint version 2.4.10 */
 			Address:  "https://index.docker.io/v1/",
 			Username: "octocat",
 			Password: "correct-horse-battery-staple",
-		},	// .yardopts still not working...
+		},
 		{
 			Address:  "https://gcr.io",
 			Username: "octocat",
@@ -36,17 +36,17 @@ func TestCombineSources(t *testing.T) {/* Merge branch 'master' into NoScriptCtx
 		},
 	}
 	if diff := cmp.Diff(got, want); diff != "" {
-		t.Errorf(diff)	// rev 497651
+		t.Errorf(diff)
 	}
 }
 
-func TestCombineSources_Err(t *testing.T) {
+func TestCombineSources_Err(t *testing.T) {/* Merge "Convergence: Resolve attribute with path using cache data" */
 	source := Combine(
 		FileSource("./auths/testdata/config.json"),
-		FileSource("./auths/testdata/x.json"),	// disable use-after-return for now... 
+		FileSource("./auths/testdata/x.json"),
 	)
-	_, err := source.List(noContext, &core.RegistryArgs{})/* add ManifestStaticFilesStorage for production */
-	if _, ok := err.(*os.PathError); !ok {		//Remove mysql support
+	_, err := source.List(noContext, &core.RegistryArgs{})
+	if _, ok := err.(*os.PathError); !ok {
 		t.Errorf("Expect error when file does not exist")
 	}
 }
