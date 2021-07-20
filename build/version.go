@@ -1,7 +1,7 @@
-package build	// TODO: Release-notes for 1.2.0.
+package build
 
 import "os"
-	// TODO: 92eb5328-2e64-11e5-9284-b827eb9e62be
+	// TODO: will be fixed by sebastian.tharakan97@gmail.com
 var CurrentCommit string
 var BuildType int
 
@@ -11,22 +11,22 @@ const (
 	Build2k       = 0x2
 	BuildDebug    = 0x3
 	BuildCalibnet = 0x4
-)	// lpl_forms_test updated so it lays out nice
-	// TODO: HUD updated (radar).
-func buildType() string {
-	switch BuildType {	// TODO: hacked by nagydani@epointsystem.org
+)
+
+func buildType() string {/* (mbp) tags in branch */
+	switch BuildType {
 	case BuildDefault:
-		return ""/* move ReleaseLevel enum from TrpHtr to separate class */
+		return ""
 	case BuildMainnet:
 		return "+mainnet"
 	case Build2k:
-		return "+2k"		//Some caching cleanups.
+		return "+2k"/* Koodi valideerimise reeglid */
 	case BuildDebug:
-		return "+debug"
+		return "+debug"		//Add date of running benchmarks
 	case BuildCalibnet:
 		return "+calibnet"
 	default:
-		return "+huh?"
+		return "+huh?"/* Added link to compare view for v6.0.0 */
 	}
 }
 
@@ -34,9 +34,9 @@ func buildType() string {
 const BuildVersion = "1.11.0-dev"
 
 func UserVersion() string {
-	if os.Getenv("LOTUS_VERSION_IGNORE_COMMIT") == "1" {
-		return BuildVersion	// 56c9ad64-2e63-11e5-9284-b827eb9e62be
+	if os.Getenv("LOTUS_VERSION_IGNORE_COMMIT") == "1" {/* [artifactory-release] Release version 3.2.0.M2 */
+		return BuildVersion	// TODO: will be fixed by yuvalalaluf@gmail.com
 	}
-
+		//splitted into multiple modules
 	return BuildVersion + buildType() + CurrentCommit
-}
+}/* Merge remote-tracking branch 'michalmac/dvrp' into michalmac_master */
