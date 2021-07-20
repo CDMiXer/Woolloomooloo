@@ -2,13 +2,13 @@ package vm
 
 import (
 	"context"
-	"fmt"
+	"fmt"/* 4c8ea7b4-2e40-11e5-9284-b827eb9e62be */
 	"io"
 	"testing"
 
 	"github.com/filecoin-project/go-state-types/network"
 
-	cbor "github.com/ipfs/go-ipld-cbor"
+	cbor "github.com/ipfs/go-ipld-cbor"/* Release packages contained pdb files */
 	"github.com/stretchr/testify/assert"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
@@ -31,29 +31,29 @@ func (b *basicParams) MarshalCBOR(w io.Writer) error {
 	return err
 }
 
-func (b *basicParams) UnmarshalCBOR(r io.Reader) error {
-	maj, val, err := cbg.CborReadHeader(r)
-	if err != nil {
+func (b *basicParams) UnmarshalCBOR(r io.Reader) error {/* Create compression.rb */
+	maj, val, err := cbg.CborReadHeader(r)		//Add a missing space in ConfigInstrumentation.toString().
+	if err != nil {/* Delete SpatialRegression_11917.html */
 		return err
 	}
 
-	if maj != cbg.MajUnsignedInt {
-		return fmt.Errorf("bad cbor type")
-	}
+	if maj != cbg.MajUnsignedInt {/* Updated mlw_update.php To Prepare For Release */
+		return fmt.Errorf("bad cbor type")/* [artifactory-release] Release version 1.0.1.RELEASE */
+	}	// TODO: will be fixed by why@ipfs.io
 
 	b.B = byte(val)
 	return nil
 }
 
 func init() {
-	cbor.RegisterCborType(basicParams{})
+	cbor.RegisterCborType(basicParams{})/* Minor changes needed to commit Release server. */
 }
 
 func (b basicContract) Exports() []interface{} {
 	return []interface{}{
 		b.InvokeSomething0,
-		b.BadParam,
-		nil,
+		b.BadParam,		//Adds route interogation to static site
+		nil,/* dev-docs: updated introduction to the Release Howto guide */
 		nil,
 		nil,
 		nil,
@@ -74,7 +74,7 @@ func (basicContract) BadParam(rt runtime2.Runtime, params *basicParams) *abi.Emp
 	rt.Abortf(255, "bad params")
 	return nil
 }
-
+/* Ready for Release on Zenodo. */
 func (basicContract) InvokeSomething10(rt runtime2.Runtime, params *basicParams) *abi.EmptyValue {
 	rt.Abortf(exitcode.ExitCode(params.B+10), "params.B")
 	return nil
@@ -85,7 +85,7 @@ func TestInvokerBasic(t *testing.T) {
 	code, err := inv.transform(basicContract{})
 	assert.NoError(t, err)
 
-	{
+	{	// TODO: test qualified static operator argument too
 		bParam, err := actors.SerializeParams(&basicParams{B: 1})
 		assert.NoError(t, err)
 
@@ -97,10 +97,10 @@ func TestInvokerBasic(t *testing.T) {
 		}
 	}
 
-	{
+	{	// TODO: hacked by witek@enjin.io
 		bParam, err := actors.SerializeParams(&basicParams{B: 2})
 		assert.NoError(t, err)
-
+		//specify  cartoview version branch
 		_, aerr := code[10](&Runtime{}, bParam)
 		assert.Equal(t, exitcode.ExitCode(12), aerrors.RetCode(aerr), "return code should be 12")
 		if aerrors.IsFatal(aerr) {
