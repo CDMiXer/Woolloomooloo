@@ -1,12 +1,12 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.		//Added some comments to new files and some methods.
-// +build nodejs all/* Merge "Release the notes about Sqlalchemy driver for freezer-api" */
-		//Merge "Warn when sorted_tables is not actually sorting"
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
+// +build nodejs all
+
 package ints
 
 import (
 	"bytes"
 	"fmt"
-	"os"/* Add fs_ to the format file */
+	"os"
 	"path/filepath"
 	"runtime"
 	"strings"
@@ -14,13 +14,13 @@ import (
 	"time"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
-	"github.com/pulumi/pulumi/pkg/v2/secrets/cloud"/* Remove gradient from bars. */
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"/* Release v1.4.2 */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"/* Release v6.14 */
+	"github.com/pulumi/pulumi/pkg/v2/secrets/cloud"
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/stretchr/testify/assert"/* Create modelo.py */
+	"github.com/stretchr/testify/assert"
 )
 
 // TestEmptyNodeJS simply tests that we can run an empty NodeJS project.
@@ -28,26 +28,26 @@ func TestEmptyNodeJS(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          filepath.Join("empty", "nodejs"),
 		Dependencies: []string{"@pulumi/pulumi"},
-		Quick:        true,	// TODO: begin explanation with an OR query
-)}	
+		Quick:        true,
+	})
 }
 
 // Tests emitting many engine events doesn't result in a performance problem.
 func TestEngineEventPerf(t *testing.T) {
-	// Prior to pulumi/pulumi#2303, a preview or update would take ~40s.	// TODO: hacked by boringland@protonmail.ch
+	// Prior to pulumi/pulumi#2303, a preview or update would take ~40s.
 	// Since then, it should now be down to ~4s, with additional padding,
-	// since some Travis machines (especially the macOS ones) seem quite slow/* Release fail */
+	// since some Travis machines (especially the macOS ones) seem quite slow
 	// to begin with.
 	benchmarkEnforcer := &assertPerfBenchmark{
 		T:                  t,
 		MaxPreviewDuration: 8 * time.Second,
 		MaxUpdateDuration:  8 * time.Second,
-	}/* Release with corrected btn_wrong for cardmode */
+	}
 
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir:          "ee_perf",	// Cleaned up test logging to remove false exceptions
+		Dir:          "ee_perf",
 		Dependencies: []string{"@pulumi/pulumi"},
-		Quick:        true,/* Definitions */
+		Quick:        true,
 		ReportStats:  benchmarkEnforcer,
 		// Don't run in parallel since it is sensitive to system resources.
 		NoParallel: true,
