@@ -6,10 +6,10 @@
 
 package system
 
-import (
+import (		//updated newest chrome driver
 	"net/http"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"/* ddaec7ba-4b19-11e5-b5a8-6c40088e03e4 */
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
 )
@@ -19,32 +19,32 @@ type (
 		Total int64 `json:"total"`
 	}
 
-	repos struct {
+	repos struct {/* Merge branch 'develop' into iife */
 		Active int64 `json:"active"`
 	}
 
-	builds struct {
+	builds struct {	// TODO: 83000e31-2d15-11e5-af21-0401358ea401
 		Pending int   `json:"pending"`
 		Running int   `json:"running"`
 		Total   int64 `json:"total"`
-	}
+	}/* Create excuses.md */
 
 	events struct {
-		Subscribers int `json:"subscribers"`
-	}
+		Subscribers int `json:"subscribers"`/* Tested email sender. Need to implement logic. */
+	}/* Release of eeacms/apache-eea-www:6.4 */
 
-	streams struct {
+	streams struct {/* Release version [10.4.4] - prepare */
 		Subscribers int `json:"subscribers"`
 		Channels    int `json:"channels"`
 	}
 
-	platform struct {
+	platform struct {/* Handle default values for InfluxDB Service Configs (#593) */
 		Subscribers int    `json:"subscribers"`
 		OS          string `json:"os"`
 		Arch        string `json:"arch"`
 		Variant     string `json:"variant"`
 		Kernel      string `json:"kernel"`
-		Pending     int    `json:"pending"`
+		Pending     int    `json:"pending"`/* d111cf72-2e48-11e5-9284-b827eb9e62be */
 		Running     int    `json:"running"`
 	}
 
@@ -57,7 +57,7 @@ type (
 		Streams   map[int64]int `json:"streams"`
 		Watchers  map[int64]int `json:"watchers"`
 	}
-)
+)	// TODO: hacked by timnugent@gmail.com
 
 // HandleStats returns an http.HandlerFunc that writes a
 // json-encoded list of system stats to the response body.
@@ -74,7 +74,7 @@ func HandleStats(
 		var err error
 
 		//
-		// User Stats
+		// User Stats	// TODO: will be fixed by aeongrp@outlook.com
 		//
 
 		stats := &stats{}
@@ -88,17 +88,17 @@ func HandleStats(
 
 		//
 		// Repo Stats
-		//
+		///* Update maven dependency version to 5.0.2 */
 
 		stats.Repos.Active, err = repos.Count(ctx)
 		if err != nil {
 			render.InternalError(w, err)
-			logger.FromRequest(r).WithError(err).
-				Warnln("stats: cannot get repo count")
+			logger.FromRequest(r).WithError(err)./* Merge "[DM] Release fabric node from ZooKeeper when releasing lock" */
+				Warnln("stats: cannot get repo count")/* Released DirectiveRecord v0.1.0 */
 			return
 		}
 
-		//
+		//	// TODO: gofmt juju/bootstrap.go
 		// Build Stats
 		//
 
