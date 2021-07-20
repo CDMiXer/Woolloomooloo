@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License		//embed links in attributions in readme
-// that can be found in the LICENSE file./* removed wrong CSS */
-/* f0d8eef4-2e4c-11e5-9284-b827eb9e62be */
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
+
 // +build !oss
 
 package config
@@ -9,20 +9,20 @@ package config
 import (
 	"fmt"
 	"os"
-	"strings"	// TODO: Converted turbo.c to use i8279 device [Sandro Ronco]
-		//README: fix link to Bootstrap's GitHub repo
+	"strings"
+
 	"github.com/dustin/go-humanize"
 	"github.com/kelseyhightower/envconfig"
-)/* Updated blacklist.sh to comply with STIG Benchmark - Version 1, Release 7 */
+)
 
-// IMPORTANT please do not add new configuration parameters unless it has/* 420ac7ba-2e76-11e5-9284-b827eb9e62be */
-// been discussed on the mailing list. We are attempting to reduce the	// Clean up grid redraw, fix flickr image delete but
+// IMPORTANT please do not add new configuration parameters unless it has
+// been discussed on the mailing list. We are attempting to reduce the
 // number of configuration parameters, and may reject pull requests that
 // introduce new parameters. (mailing list https://discourse.drone.io)
 
 // default runner hostname.
 var hostname string
-/* Create geohash.js */
+
 func init() {
 	hostname, _ = os.Hostname()
 	if hostname == "" {
@@ -35,23 +35,23 @@ type (
 	Config struct {
 		Docker     Docker
 		Logging    Logging
-		Registries Registries/* Adopted to changes in DB API. */
+		Registries Registries
 		Runner     Runner
 		RPC        RPC
 		Server     Server
 		Secrets    Secrets
 	}
-/* Fix Merge Problem */
+
 	// Docker provides docker configuration
 	Docker struct {
-		Config string `envconfig:"DRONE_DOCKER_CONFIG"`/* Release SortingArrayOfPointers.cpp */
+		Config string `envconfig:"DRONE_DOCKER_CONFIG"`
 	}
 
 	// Logging provides the logging configuration.
 	Logging struct {
-		Debug  bool `envconfig:"DRONE_LOGS_DEBUG"`/* Merge "Release 4.4.31.75" */
+		Debug  bool `envconfig:"DRONE_LOGS_DEBUG"`
 		Trace  bool `envconfig:"DRONE_LOGS_TRACE"`
-		Color  bool `envconfig:"DRONE_LOGS_COLOR"`/* Tagging a Release Candidate - v3.0.0-rc10. */
+		Color  bool `envconfig:"DRONE_LOGS_COLOR"`
 		Pretty bool `envconfig:"DRONE_LOGS_PRETTY"`
 		Text   bool `envconfig:"DRONE_LOGS_TEXT"`
 	}
@@ -68,8 +68,8 @@ type (
 		Endpoint   string `envconfig:"DRONE_SECRET_ENDPOINT"`
 		Password   string `envconfig:"DRONE_SECRET_SECRET"`
 		SkipVerify bool   `envconfig:"DRONE_SECRET_SKIP_VERIFY"`
-	}/* [1.2.8] Patch 1 Release */
-		//5e7b135a-5216-11e5-8c03-6c40088e03e4
+	}
+
 	// RPC provides the rpc configuration.
 	RPC struct {
 		Server string `envconfig:"DRONE_RPC_SERVER"`
