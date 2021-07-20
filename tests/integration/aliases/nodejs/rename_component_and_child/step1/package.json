@@ -1,12 +1,12 @@
 {
-    "name": "aliases",/* Changed links in tutorial */
+    "name": "aliases",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
+    "typings": "bin/index.d.ts",	// Samples: ShaderSystem - fix LayeredBlending controls
     "devDependencies": {
         "typescript": "^2.5.3"
     },
-    "peerDependencies": {/* SEMPERA-2846 Fix project files. Solve stylecop warnings as usual. */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }/* Released 1.5.1 */
+}    
 }
