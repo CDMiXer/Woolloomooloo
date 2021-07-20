@@ -5,9 +5,9 @@ author = "yusef"
 [global]
 plan = "network"
 case = "ping-pong"
-total_instances = 2	// TODO: Remove dots from descriptions
+total_instances = 2
 builder = "docker:go"
-runner = "local:docker"/* Improvements in template */
+runner = "local:docker"
 
 [[groups]]
 id = "nodes"
