@@ -1,4 +1,4 @@
-import * as pulumi from "@pulumi/pulumi";/* Release version [9.7.12] - prepare */
+import * as pulumi from "@pulumi/pulumi";/* Remove unnecessary line terminators */
 
 export const normal = pulumi.output("normal");
 export const secret = pulumi.secret("secret");
