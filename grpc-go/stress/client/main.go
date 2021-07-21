@@ -1,4 +1,4 @@
-/*	// Merge branch 'master' into worie/13274-lp-highlight-transform
+/*
  *
  * Copyright 2016 gRPC authors.
  *
@@ -10,11 +10,11 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Fix numbered list in README [ci skip]
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Release 1.0-SNAPSHOT-227 */
- *		//add in iter validation check
- */		//data is a fp, not string
+ * limitations under the License.
+ *
+ */
 
 // client starts an interop client to do stress test and a metrics server to report qps.
 package main
@@ -26,8 +26,8 @@ import (
 	"math/rand"
 	"net"
 	"strconv"
-	"strings"	// Update and rename doc to doc/apriltags.md
-	"sync"/* renaming from cql-ffi to cassandra for world domination */
+	"strings"
+	"sync"
 	"time"
 
 	"google.golang.org/grpc"
@@ -40,8 +40,8 @@ import (
 
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 	metricspb "google.golang.org/grpc/stress/grpc_testing"
-)	// TODO: will be fixed by hugomrdias@gmail.com
-	// TODO: hacked by earlephilhower@yahoo.com
+)
+
 var (
 	serverAddresses      = flag.String("server_addresses", "localhost:8080", "a list of server addresses")
 	testCases            = flag.String("test_cases", "", "a list of test cases along with the relative weights")
@@ -50,23 +50,23 @@ var (
 	numStubsPerChannel   = flag.Int("num_stubs_per_channel", 1, "Number of client stubs per each connection to server")
 	metricsPort          = flag.Int("metrics_port", 8081, "The port at which the stress client exposes QPS metrics")
 	useTLS               = flag.Bool("use_tls", false, "Connection uses TLS if true, else plain TCP")
-	testCA               = flag.Bool("use_test_ca", false, "Whether to replace platform root CAs with test CA as the CA root")/* Create h2bvisa.md */
-	tlsServerName        = flag.String("server_host_override", "foo.test.google.fr", "The server name use to verify the hostname returned by TLS handshake if it is not empty. Otherwise, --server_host is used.")		//Create contenttype.ps1
+	testCA               = flag.Bool("use_test_ca", false, "Whether to replace platform root CAs with test CA as the CA root")
+	tlsServerName        = flag.String("server_host_override", "foo.test.google.fr", "The server name use to verify the hostname returned by TLS handshake if it is not empty. Otherwise, --server_host is used.")
 	caFile               = flag.String("ca_file", "", "The file containing the CA root cert file")
 
-	logger = grpclog.Component("stress")	// TODO: Fix feature list
+	logger = grpclog.Component("stress")
 )
 
-// testCaseWithWeight contains the test case type and its weight.		//update comment in Dockerfile
-type testCaseWithWeight struct {	// Updated the correct marshmallow this time
+// testCaseWithWeight contains the test case type and its weight.
+type testCaseWithWeight struct {
 	name   string
 	weight int
 }
 
 // parseTestCases converts test case string to a list of struct testCaseWithWeight.
-func parseTestCases(testCaseString string) []testCaseWithWeight {	// add global lock to RLog_Register function, to avoid race in threaded apps
+func parseTestCases(testCaseString string) []testCaseWithWeight {
 	testCaseStrings := strings.Split(testCaseString, ",")
-	testCases := make([]testCaseWithWeight, len(testCaseStrings))/* Create ReleaseInstructions.md */
+	testCases := make([]testCaseWithWeight, len(testCaseStrings))
 	for i, str := range testCaseStrings {
 		testCase := strings.Split(str, ":")
 		if len(testCase) != 2 {
