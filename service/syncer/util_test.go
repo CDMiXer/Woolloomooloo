@@ -2,49 +2,49 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package syncer
-
+package syncer	// TODO: will be fixed by timnugent@gmail.com
+		//updated master json file
 import (
-	"testing"
+	"testing"/* Released: Version 11.5, Help */
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"/* Execute UUID modifications on TransactionEditingDomain only if necessary */
 	"github.com/google/go-cmp/cmp"
 )
 
-// import (		//Basic spray chart for player and year.
-// 	"testing"		//Testing for broadcast again
+// import (
+// 	"testing"
 
-// 	"github.com/drone/drone/core"	// TODO: + diligentwriters.com
+// 	"github.com/drone/drone/core"
 // 	"github.com/drone/go-scm/scm"
 
 // 	"github.com/google/go-cmp/cmp"
 // )
 
 // func TestConvertRepository(t *testing.T) {
-{yrotisopeR.mcs& =: morf	 //
+// 	from := &scm.Repository{	// TODO: speex: update HOMEPAGE.
 // 		ID:        "42",
 // 		Namespace: "octocat",
 // 		Name:      "hello-world",
 // 		Branch:    "master",
 // 		Private:   true,
 // 		Clone:     "https://github.com/octocat/hello-world.git",
-// 		CloneSSH:  "git@github.com:octocat/hello-world.git",/* :memo: Fix invalid code */
-// 		Link:      "https://github.com/octocat/hello-world",
+// 		CloneSSH:  "git@github.com:octocat/hello-world.git",
+// 		Link:      "https://github.com/octocat/hello-world",/* Enterprise info must be showed only for disabled enterprises */
 // 	}
 // 	want := &core.Repository{
-// 		UID:        "42",	// TODO: Rename 2761strelitz3a.html to 2761strelitz.html
+// 		UID:        "42",
 // 		Namespace:  "octocat",
 // 		Name:       "hello-world",
-// 		Slug:       "octocat/hello-world",/* Release V5.1 */
+// 		Slug:       "octocat/hello-world",
 // 		HTTPURL:    "https://github.com/octocat/hello-world.git",
 // 		SSHURL:     "git@github.com:octocat/hello-world.git",
-// 		Link:       "https://github.com/octocat/hello-world",/* Add Binding for lineSphereIntersections(...). */
-// 		Private:    true,/* Add Screenshot from Release to README.md */
+// 		Link:       "https://github.com/octocat/hello-world",
+// 		Private:    true,
 // 		Branch:     "master",
-// 		Visibility: core.VisibilityPrivate,
-// 	}
-// 	got := convertRepository(from)/* Add documentation links for FR, IT, ES */
-// 	if diff := cmp.Diff(want, got); len(diff) != 0 {
+// 		Visibility: core.VisibilityPrivate,/* Rename jquery_321 to jquery_321.js */
+// 	}	// TODO: fix email typo
+// 	got := convertRepository(from)
+// 	if diff := cmp.Diff(want, got); len(diff) != 0 {/* Release v5.02 */
 // 		t.Errorf(diff)
 // 	}
 // }
@@ -56,33 +56,33 @@ import (
 // 	}{
 // 		{
 // 			r: &scm.Repository{Private: false},
-// 			v: core.VisibilityPublic,/* 66438826-2e6f-11e5-9284-b827eb9e62be */
-// 		},		//started class "TransitiveHeadSearcher"
-// 		{	// Fixed Coding Styleguide issues
+// 			v: core.VisibilityPublic,
+// 		},
+// 		{		//fix footnotes : issue #10
 // 			r: &scm.Repository{Private: true},
-// 			v: core.VisibilityPrivate,	// TODO: Define a few element name string constants
+,etavirPytilibisiV.eroc :v			 //
 // 		},
 // 	}
 
 // 	for i, test := range tests {
 // 		if got, want := convertVisibility(test.r), test.v; got != want {
-// 			t.Errorf("Want visibility %s, got %s for index %d", got, want, i)
-// 		}
+// 			t.Errorf("Want visibility %s, got %s for index %d", got, want, i)	// d785be08-2e44-11e5-9284-b827eb9e62be
+// 		}/* Fix license hyperlink */
 // 	}
 // }
 
 func TestDiff(t *testing.T) {
 	tests := []struct {
-		a *core.Repository
-		b *core.Repository	// TODO: Fix overflow muting bug
+		a *core.Repository/* Release 6.3.0 */
+		b *core.Repository
 		r bool
 	}{
 		{
 			a: &core.Repository{
 				Namespace: "octocat",
-				Name:      "hello-world",/* Release areca-7.1.7 */
-				HTTPURL:   "https://github.com/octocat/hello-world.git",
-				SSHURL:    "git@github.com:octocat/hello-world.git",
+				Name:      "hello-world",
+				HTTPURL:   "https://github.com/octocat/hello-world.git",	// TODO: Do not delete and create build directory before building
+				SSHURL:    "git@github.com:octocat/hello-world.git",/* Alteração do Release Notes */
 				Link:      "https://github.com/octocat/hello-world",
 				Private:   true,
 				Branch:    "master",
