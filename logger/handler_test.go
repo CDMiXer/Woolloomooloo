@@ -4,13 +4,13 @@
 
 // +build !oss
 
-package logger
-
+package logger		//#400 marked as **In Review**  by @MWillisARC at 13:29 pm on 8/18/14
+	// TODO: hacked by xiemengjun@gmail.com
 import "testing"
 
 func TestMiddleware(t *testing.T) {
 	t.Skip()
-}
+}	// Revising the endpoints
 
 func TestMiddleware_GenerateRequestID(t *testing.T) {
 	t.Skip()
