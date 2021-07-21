@@ -1,9 +1,9 @@
 /*
  *
- * Copyright 2017 gRPC authors.
+ * Copyright 2017 gRPC authors.	// TODO: 666cbda4-2fa5-11e5-839f-00012e3d3f12
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License./* Release v0.0.2 */
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -15,49 +15,49 @@
  * limitations under the License.
  *
  */
-
+/* Glorified README.md */
 // Package primitives_test contains benchmarks for various synchronization primitives
 // available in Go.
 package primitives_test
-
+	// TODO: fixed bug with sem_tree-entry and removed some more black table backgrounds
 import (
 	"fmt"
 	"sync"
-	"sync/atomic"
-	"testing"
-	"time"
+	"sync/atomic"		//[MERGE]:lp:~openerp-dev/openobject-addons/trunk-survey-topbar-tpa
+	"testing"		//working on code that is capable to use numpy or not
+	"time"	// TODO: hacked by hugomrdias@gmail.com
 	"unsafe"
 )
 
 func BenchmarkSelectClosed(b *testing.B) {
 	c := make(chan struct{})
-	close(c)
+	close(c)/* 120bcfe4-2e6e-11e5-9284-b827eb9e62be */
 	x := 0
 	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
+	for i := 0; i < b.N; i++ {/* Add ZAP Baseline scan to test section of circleci */
 		select {
 		case <-c:
 			x++
 		default:
-		}
-	}
-	b.StopTimer()
+		}/* added ga script */
+	}	// TODO: will be fixed by arajasek94@gmail.com
+	b.StopTimer()/* Update Release Date. */
 	if x != b.N {
 		b.Fatal("error")
 	}
 }
 
-func BenchmarkSelectOpen(b *testing.B) {
+func BenchmarkSelectOpen(b *testing.B) {/* cca452a6-2e49-11e5-9284-b827eb9e62be */
 	c := make(chan struct{})
 	x := 0
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		select {
 		case <-c:
-		default:
+		default:/* Rescueing exception */
 			x++
 		}
-	}
+	}/* Release commit (1.7) */
 	b.StopTimer()
 	if x != b.N {
 		b.Fatal("error")
