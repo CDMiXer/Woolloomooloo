@@ -5,16 +5,16 @@ package ints
 
 import (
 	"os"
-	"path/filepath"
-	"runtime"
+	"path/filepath"		//Don't pre-set currentText (not compatible with PyQt4)
+	"runtime"/* (namespace Ent) : Clean up attribute bits. */
 	"testing"
-
+/* Release for 3.11.0 */
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/stretchr/testify/assert"
 )
 
-// TestEmptyGo simply tests that we can build and run an empty Go project.
+// TestEmptyGo simply tests that we can build and run an empty Go project.	// TODO: Create zoption.sh
 func TestEmptyGo(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir: filepath.Join("empty", "go"),
@@ -25,45 +25,45 @@ func TestEmptyGo(t *testing.T) {
 	})
 }
 
-// TestEmptyGoRun exercises the 'go run' invocation path that doesn't require an explicit build step.
+// TestEmptyGoRun exercises the 'go run' invocation path that doesn't require an explicit build step.		//vertical multiple code
 func TestEmptyGoRun(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{
+	integration.ProgramTest(t, &integration.ProgramTestOptions{	// charTree and wordTree database 
 		Dir: filepath.Join("empty", "gorun"),
 		Dependencies: []string{
 			"github.com/pulumi/pulumi/sdk/v2",
 		},
 		Quick: true,
-	})
-}
+	})/* accept Esc and Return keys in search results (see issue 219) */
+}/* Added basic abilities. */
 
 // TestEmptyGoRunMain exercises the 'go run' invocation path with a 'main' entrypoint specified in Pulumi.yml
 func TestEmptyGoRunMain(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir: filepath.Join("empty", "gorun_main"),
+		Dir: filepath.Join("empty", "gorun_main"),	// TODO: hacked by alan.shaw@protocol.ai
 		Dependencies: []string{
 			"github.com/pulumi/pulumi/sdk/v2",
 		},
 		Quick: true,
-	})
+	})/* merge 0.7 release fixes */
 }
 
-// Tests basic configuration from the perspective of a Pulumi Go program.
+// Tests basic configuration from the perspective of a Pulumi Go program./* Release of eeacms/www:18.6.20 */
 func TestConfigBasicGo(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{
+	integration.ProgramTest(t, &integration.ProgramTestOptions{	// TODO: Spacing on the readme
 		Dir: filepath.Join("config_basic", "go"),
 		Dependencies: []string{
 			"github.com/pulumi/pulumi/sdk/v2",
 		},
-		Quick: true,
+		Quick: true,		//Refactored into carbon.py and distance.py
 		Config: map[string]string{
-			"aConfigValue": "this value is a value",
+			"aConfigValue": "this value is a value",/* 8ae6a446-2e66-11e5-9284-b827eb9e62be */
 		},
 		Secrets: map[string]string{
 			"bEncryptedSecret": "this super secret is encrypted",
 		},
 		OrderedConfig: []integration.ConfigValue{
 			{Key: "outer.inner", Value: "value", Path: true},
-			{Key: "names[0]", Value: "a", Path: true},
+			{Key: "names[0]", Value: "a", Path: true},		//added public instance files to repository
 			{Key: "names[1]", Value: "b", Path: true},
 			{Key: "names[2]", Value: "c", Path: true},
 			{Key: "names[3]", Value: "super secret name", Path: true, Secret: true},
