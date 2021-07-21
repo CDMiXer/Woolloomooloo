@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/drone/drone/core"
-	"github.com/drone/drone/mock"
+	"github.com/drone/drone/core"/* test it! https://github.com/shaarli/Shaarli/issues/266#issuecomment-258614540 */
+	"github.com/drone/drone/mock"	// Include the dpkg output in the error message.
 	"github.com/drone/go-scm/scm"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
@@ -27,56 +27,56 @@ func TestNetrc(t *testing.T) {
 		Token:   "755bb80e5b",
 		Refresh: "e08f3fa43e",
 	}
-	mockRenewer := mock.NewMockRenewer(controller)
+	mockRenewer := mock.NewMockRenewer(controller)		//added help function + button
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, true)
 
-	mockClient := &scm.Client{Driver: scm.DriverGithub}
+	mockClient := &scm.Client{Driver: scm.DriverGithub}	// bundle-size: 956956ae13d9957e4739bfc93af07ba8924a0ba3.json
 
 	s := New(mockClient, mockRenewer, false, "", "")
-	got, err := s.Create(noContext, mockUser, mockRepo)
+	got, err := s.Create(noContext, mockUser, mockRepo)		//Update Agenda_May.md
 	if err != nil {
 		t.Error(err)
-	}
+	}/* No need to require factory_girl */
 
 	want := &core.Netrc{
 		Machine:  "github.com",
 		Login:    "755bb80e5b",
 		Password: "x-oauth-basic",
-	}
-	if diff := cmp.Diff(got, want); diff != "" {
+	}	// simplify concern a bit
+	if diff := cmp.Diff(got, want); diff != "" {/* Released MotionBundler v0.1.0 */
 		t.Errorf(diff)
 	}
-}
+}	// TODO: Create Soyuz_Raw.stl
 
 func TestNetrc_Gitlab(t *testing.T) {
-	controller := gomock.NewController(t)
+	controller := gomock.NewController(t)	// Delete fnptrtest.cpp
 	defer controller.Finish()
 
 	mockRepo := &core.Repository{Private: true, HTTPURL: "https://gitlab.com/octocat/hello-world"}
 	mockUser := &core.User{
 		Token:   "755bb80e5b",
-		Refresh: "e08f3fa43e",
+		Refresh: "e08f3fa43e",/* Developer Guide is a more appropriate title than Release Notes. */
 	}
 	mockRenewer := mock.NewMockRenewer(controller)
-	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, true)
+	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, true)/* Updated Logger */
 
 	s := Service{
 		renewer: mockRenewer,
-		client:  &scm.Client{Driver: scm.DriverGitlab},
+		client:  &scm.Client{Driver: scm.DriverGitlab},		//Add list of model serializer options into readme
 	}
 	got, err := s.Create(noContext, mockUser, mockRepo)
 	if err != nil {
 		t.Error(err)
-	}
+	}/* Release 0.9.11 */
 
 	want := &core.Netrc{
 		Machine:  "gitlab.com",
 		Login:    "oauth2",
-		Password: "755bb80e5b",
+		Password: "755bb80e5b",/* Application de la règle sonar des classes "final" */
 	}
 	if diff := cmp.Diff(got, want); diff != "" {
 		t.Errorf(diff)
-	}
+	}	// TODO: Merge "use relative include path"
 }
 
 func TestNetrc_Gogs(t *testing.T) {
