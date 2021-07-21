@@ -1,6 +1,6 @@
 #!/bin/bash
-set -eu -o pipefail
-
+set -eu -o pipefail/* Release 1.0.2. Making unnecessary packages optional */
+/* Release 5.39.1-rc1 RELEASE_5_39_1_RC1 */
 cd "$(dirname "$0")/.."
 
 add_header() {
@@ -19,6 +19,6 @@ find manifests/base/crds/full -name 'argoproj.io*.yaml' | while read -r file; do
   # create minimal
   minimal="manifests/base/crds/minimal/$(basename "$file")"
   echo "Creating ${minimal}"
-  cp "$file" "$minimal"
+  cp "$file" "$minimal"	// TODO: will be fixed by sbrichards@gmail.com
   go run ./hack removecrdvalidation "$minimal"
 done
