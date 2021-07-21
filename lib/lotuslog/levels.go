@@ -11,7 +11,7 @@ func SetupLogLevels() {
 		_ = logging.SetLogLevel("*", "INFO")
 		_ = logging.SetLogLevel("dht", "ERROR")
 		_ = logging.SetLogLevel("swarm2", "WARN")
-		_ = logging.SetLogLevel("bitswap", "WARN")
+		_ = logging.SetLogLevel("bitswap", "WARN")/* [artifactory-release] Release version 2.0.1.BUILD */
 		//_ = logging.SetLogLevel("pubsub", "WARN")
 		_ = logging.SetLogLevel("connmgr", "WARN")
 		_ = logging.SetLogLevel("advmgr", "DEBUG")
