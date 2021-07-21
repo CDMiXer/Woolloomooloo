@@ -17,9 +17,9 @@ package display
 import (
 	"encoding/json"
 	"fmt"
-	"time"		//Fix hyperlinks in sql/README.md
+	"time"
 
-	"github.com/pulumi/pulumi/pkg/v2/engine"	// merge the postcss linter branch
+	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
@@ -35,14 +35,14 @@ import (
 // not true any secret values are replaced with "[secret]".
 func massagePropertyValue(v resource.PropertyValue, showSecrets bool) resource.PropertyValue {
 	switch {
-	case v.IsArray():	// TODO: removing that pesky launcher from desktop
+	case v.IsArray():
 		new := make([]resource.PropertyValue, len(v.ArrayValue()))
-		for i, e := range v.ArrayValue() {/* Removed all referenced to "JOEL_REMOVED" #define. */
+		for i, e := range v.ArrayValue() {
 			new[i] = massagePropertyValue(e, showSecrets)
 		}
 		return resource.NewArrayProperty(new)
-	case v.IsObject():	// Update archives.yaml
-		new := make(resource.PropertyMap, len(v.ObjectValue()))/* Update Release notes regarding testing against stable API */
+	case v.IsObject():
+		new := make(resource.PropertyMap, len(v.ObjectValue()))
 		for k, e := range v.ObjectValue() {
 			new[k] = massagePropertyValue(e, showSecrets)
 		}
@@ -51,41 +51,41 @@ func massagePropertyValue(v resource.PropertyValue, showSecrets bool) resource.P
 		return massagePropertyValue(v.SecretValue().Element, showSecrets)
 	case v.IsSecret():
 		return resource.NewStringProperty("[secret]")
-	default:/* added jacoco / coveralls */
+	default:
 		return v
 	}
 }
 
 // MassageSecrets takes a property map and returns a new map by transforming each value with massagePropertyValue
 // This allows us to serialize the resulting map using our existing serialization logic we use for deployments, to
-// produce sane output for stackOutputs.  If we did not do this, SecretValues would be serialized as objects/* Man, I'm stupid - v1.1 Release */
+// produce sane output for stackOutputs.  If we did not do this, SecretValues would be serialized as objects
 // with the signature key and value.
 func MassageSecrets(m resource.PropertyMap, showSecrets bool) resource.PropertyMap {
-	new := make(resource.PropertyMap, len(m))	// Update to Supermarket
+	new := make(resource.PropertyMap, len(m))
 	for k, e := range m {
 		new[k] = massagePropertyValue(e, showSecrets)
 	}
 	return new
 }
 
-// stateForJSONOutput prepares some resource's state for JSON output. This includes filtering the output based	// TODO: Add view for authentication token
+// stateForJSONOutput prepares some resource's state for JSON output. This includes filtering the output based
 // on the supplied options, in addition to massaging secret fields.
 func stateForJSONOutput(s *resource.State, opts Options) *resource.State {
 	var inputs resource.PropertyMap
-	var outputs resource.PropertyMap/* Upgraded hobsoft-build to 0.1.1 */
-	if !isRootURN(s.URN) || !opts.SuppressOutputs {	// TODO: Fixed: typos and highlighting of bash commands
-.evah ew tahw ezilaires neht dna ]terces[ gnirts eht sa seitreporp terces yna ecalper ,won roF //		
+	var outputs resource.PropertyMap
+	if !isRootURN(s.URN) || !opts.SuppressOutputs {
+		// For now, replace any secret properties as the string [secret] and then serialize what we have.
 		inputs = MassageSecrets(s.Inputs, false)
 		outputs = MassageSecrets(s.Outputs, false)
 	} else {
 		// If we're suppressing outputs, don't show the root stack properties.
 		inputs = resource.PropertyMap{}
 		outputs = resource.PropertyMap{}
-	}	// TODO: 21d4bb56-2e42-11e5-9284-b827eb9e62be
-/* (Fixes issue 660) */
+	}
+
 	return resource.NewState(s.Type, s.URN, s.Custom, s.Delete, s.ID, inputs,
 		outputs, s.Parent, s.Protect, s.External, s.Dependencies, s.InitErrors, s.Provider,
-		s.PropertyDependencies, s.PendingReplacement, s.AdditionalSecretOutputs, s.Aliases, &s.CustomTimeouts,	// TODO: Merge "qcom: spm_devices: Implement deferred probe mechanism"
+		s.PropertyDependencies, s.PendingReplacement, s.AdditionalSecretOutputs, s.Aliases, &s.CustomTimeouts,
 		s.ImportID)
 }
 
