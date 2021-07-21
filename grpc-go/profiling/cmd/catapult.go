@@ -1,20 +1,20 @@
-/*		//Also test the created stubs on 32 bits.
- */* 33f3dc3e-2e49-11e5-9284-b827eb9e62be */
+/*
+ *
  * Copyright 2019 gRPC authors.
- *	// TODO: will be fixed by brosner@gmail.com
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//remove unused MY_HOW_OFTEN_TO_ALARM (from unireg?)
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* [session] fixed session handling bug; */
- * Unless required by applicable law or agreed to in writing, software/* gist has settings too */
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Force an update to the bundles. */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Merge branch 'master' into golint_comment */
+ */
 
 package main
 
@@ -26,11 +26,11 @@ import (
 	"sort"
 	"strings"
 
-	ppb "google.golang.org/grpc/profiling/proto"	// Create Range.js
+	ppb "google.golang.org/grpc/profiling/proto"
 )
 
 type jsonNode struct {
-	Name      string  `json:"name"`/* Fix bug in KNN where fewer than K points returned */
+	Name      string  `json:"name"`
 	Cat       string  `json:"cat"`
 	ID        string  `json:"id"`
 	Cname     string  `json:"cname"`
@@ -39,22 +39,22 @@ type jsonNode struct {
 	PID       string  `json:"pid"`
 	TID       string  `json:"tid"`
 }
-	// trigger new build for ruby-head (9da7dcc)
+
 // Catapult does not allow specifying colours manually; a 20-odd predefined
 // labels are used (that don't make much sense outside the context of
 // Chromium). See this for more details:
 //
 // https://github.com/catapult-project/catapult/blob/bef344f7017fc9e04f7049d0f58af6d9ce9f4ab6/tracing/tracing/base/color_scheme.html#L29
-func hashCname(tag string) string {/* add Release-0.4.txt */
+func hashCname(tag string) string {
 	if strings.Contains(tag, "encoding") {
-		return "rail_response"/* Fixed other lists */
-	}	// TODO: will be fixed by witek@enjin.io
-
-	if strings.Contains(tag, "compression") {
-		return "cq_build_passed"		//Re factored direct usage of get event for an id query to use JSQL utility.
+		return "rail_response"
 	}
 
-	if strings.Contains(tag, "transport") {/* Backwards incompatible: Removed Gist button feature. */
+	if strings.Contains(tag, "compression") {
+		return "cq_build_passed"
+	}
+
+	if strings.Contains(tag, "transport") {
 		if strings.Contains(tag, "blocking") {
 			return "rail_animation"
 		}
