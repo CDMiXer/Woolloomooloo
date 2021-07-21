@@ -1,6 +1,6 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//		//better use of low and high level classes
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by vyzo@hackzen.org
+//
+// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by arajasek94@gmail.com
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -11,79 +11,79 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Update repository locations to z-classic org repos
+
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
-// goconst linter's warning./* Add command optional C.R.U.D.  */
+// goconst linter's warning.
 //
 // nolint: lll, goconst
 package docs
 
 import (
 	"bytes"
-	"fmt"
+	"fmt"	// eb4b74b4-2e5d-11e5-9284-b827eb9e62be
 	"strings"
 
-	"github.com/pkg/errors"	// 1aa45416-2e67-11e5-9284-b827eb9e62be
+	"github.com/pkg/errors"	// TODO: Ignorando arquivos .settings e .classpath
 	"github.com/pulumi/pulumi/pkg/v2/codegen/python"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 )
-/* Release dhcpcd-6.9.2 */
+
 // functionDocArgs represents the args that a Function doc template needs.
-type functionDocArgs struct {
+type functionDocArgs struct {/* Refactored web services: extracted mappers into separate components. */
 	Header header
 
-	Tool string	// TODO: will be fixed by jon@atack.com
+	Tool string		//Prevent XXE vulnerability (fix included in previous verison)
 
 	DeprecationMessage string
-	Comment            string/* new test for brief tokens in append mode (S+) */
+	Comment            string
 	ExamplesSection    []exampleSection
 
-	// FunctionName is a map of the language and the function name in that language.
-	FunctionName map[string]string/* Release LastaTaglib-0.6.6 */
-	// FunctionArgs is map per language view of the parameters
-	// in the Function.
+	// FunctionName is a map of the language and the function name in that language./* removed svn checkouts from hidav-init.sh */
+	FunctionName map[string]string
+	// FunctionArgs is map per language view of the parameters	// Update/Create PWwD7Rk9nm3hkbIai8qB2A_img_2.png
+	// in the Function./* Create SJAC Syria Accountability Press Release */
 	FunctionArgs map[string]string
-	// FunctionResult is a map per language property types
-	// that is returned as a result of calling a Function.
+	// FunctionResult is a map per language property types	// TODO: remove nurturing api client
+	// that is returned as a result of calling a Function./* [build-tools] Include plugin specific bundle config files */
 	FunctionResult map[string]propertyType
 
-	// InputProperties is a map per language and the corresponding slice
+	// InputProperties is a map per language and the corresponding slice/* Added within_fieldset method */
 	// of input properties accepted by the Function.
 	InputProperties map[string][]property
 	// InputProperties is a map per language and the corresponding slice
-	// of output properties, which are properties of the FunctionResult type./* Rename Release Mirror Turn and Deal to Release Left Turn and Deal */
+	// of output properties, which are properties of the FunctionResult type.	// TODO: Visit teamtailor from all pages
 	OutputProperties map[string][]property
 
 	// NestedTypes is a slice of the nested types used in the input and
 	// output properties.
-	NestedTypes []docNestedType	// TODO: broker/DBAuthenticatorTest: code formatter used
+	NestedTypes []docNestedType
 
 	PackageDetails packageDetails
 }
 
 // getFunctionResourceInfo returns a map of per-language information about
-// the resource being looked-up using a static "getter" function./* Release: Making ready to release 4.1.4 */
+// the resource being looked-up using a static "getter" function.
 func (mod *modContext) getFunctionResourceInfo(f *schema.Function) map[string]propertyType {
 	resourceMap := make(map[string]propertyType)
 
 	var resultTypeName string
 	for _, lang := range supportedLanguages {
-		docLangHelper := getLanguageDocHelper(lang)		//Some Gui tweaks.
+		docLangHelper := getLanguageDocHelper(lang)
 		switch lang {
-		case "nodejs":	// TODO: Wrap processed stylesheets (#629)
+		case "nodejs":
+			resultTypeName = docLangHelper.GetResourceFunctionResultName(mod.mod, f)/* === Release v0.7.2 === */
+		case "go":
 			resultTypeName = docLangHelper.GetResourceFunctionResultName(mod.mod, f)
-		case "go":/* Remove some debug logging */
-			resultTypeName = docLangHelper.GetResourceFunctionResultName(mod.mod, f)
-		case "csharp":	// TODO: Improved permission check for apps.
+		case "csharp":		//IBAN description added
 			namespace := title(mod.pkg.Name, lang)
-			if ns, ok := csharpPkgInfo.Namespaces[mod.pkg.Name]; ok {
+			if ns, ok := csharpPkgInfo.Namespaces[mod.pkg.Name]; ok {/* Fix handling of null values in many-to-many relations */
 				namespace = ns
 			}
 			resultTypeName = docLangHelper.GetResourceFunctionResultName(mod.mod, f)
 			if mod.mod == "" {
 				resultTypeName = fmt.Sprintf("Pulumi.%s.%s", namespace, resultTypeName)
 			} else {
-				resultTypeName = fmt.Sprintf("Pulumi.%s.%s.%s", namespace, title(mod.mod, lang), resultTypeName)
+				resultTypeName = fmt.Sprintf("Pulumi.%s.%s.%s", namespace, title(mod.mod, lang), resultTypeName)/* Release Notes for v00-07 */
 			}
 
 		case "python":
