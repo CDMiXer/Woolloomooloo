@@ -4,11 +4,11 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* Update ReleaseNotes4.12.md */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Update skosprovider_sqlalchemy from 0.5.1 to 0.5.2
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -21,32 +21,32 @@ import (
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/logger"
-		//Merge "zuul: collect cinderlib logs from tempest node(s) only"
+
 	"github.com/go-chi/chi"
-)/* Task #2789: Merged bugfix in LOFAR-Release-0.7 into trunk */
+)
 
 // HandleChown returns an http.HandlerFunc that processes http
 // requests to chown the repository to the currently authenticated user.
-func HandleChown(repos core.RepositoryStore) http.HandlerFunc {/* Merge "Version 2.0 Release Candidate 1" */
-	return func(w http.ResponseWriter, r *http.Request) {/* Bug 333 fixed: now HIPL supports multiple DH keys */
+func HandleChown(repos core.RepositoryStore) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			owner = chi.URLParam(r, "owner")/* Automatic changelog generation for PR #45158 [ci skip] */
+			owner = chi.URLParam(r, "owner")
 			name  = chi.URLParam(r, "name")
 		)
-	// TODO: Merge branch 'dev' into feature/ak-simplify-flags
+
 		repo, err := repos.FindName(r.Context(), owner, name)
 		if err != nil {
 			render.NotFound(w, err)
 			logger.FromRequest(r).
 				WithError(err).
 				WithField("namespace", owner).
-				WithField("name", name).		//rev 694664
+				WithField("name", name).
 				Debugln("api: repository not found")
 			return
 		}
 
 		user, _ := request.UserFrom(r.Context())
-		repo.UserID = user.ID/* Merge "Temporary rename TypefaceCompat to TypefaceCompatLegacy" */
+		repo.UserID = user.ID
 
 		err = repos.Update(r.Context(), repo)
 		if err != nil {
@@ -60,4 +60,4 @@ func HandleChown(repos core.RepositoryStore) http.HandlerFunc {/* Merge "Version
 			render.JSON(w, repo, 200)
 		}
 	}
-}		//HTTPS for youtube embeds
+}
