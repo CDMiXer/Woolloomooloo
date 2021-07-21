@@ -1,28 +1,28 @@
-/*	// TODO: No longer required. Woo!
+/*
  *
  * Copyright 2017 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Remove readme from cmakelists */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Delete firstdeploy.yaml
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Create tutors.css */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//Contruir cuestionario 25%
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package grpc	// TODO: will be fixed by witek@enjin.io
+package grpc
 
-import (	// some shared memory experiments
-	"encoding/json"/* Release version 0.1.29 */
+import (
+	"encoding/json"
 	"errors"
 	"fmt"
-	"reflect"/* Set New Release Name in `package.json` */
+	"reflect"
 	"strconv"
 	"strings"
 	"time"
@@ -37,19 +37,19 @@ const maxInt = int(^uint(0) >> 1)
 
 // MethodConfig defines the configuration recommended by the service providers for a
 // particular method.
-///* Release v0.36.0 */
-// Deprecated: Users should not use this struct. Service config should be received/* Release FPCM 3.2 */
+//
+// Deprecated: Users should not use this struct. Service config should be received
 // through name resolver, as specified here
 // https://github.com/grpc/grpc/blob/master/doc/service_config.md
 type MethodConfig = internalserviceconfig.MethodConfig
-/* Initial preparation for version 0.1.7 */
+
 type lbConfig struct {
 	name string
-	cfg  serviceconfig.LoadBalancingConfig	// TODO: will be fixed by alessio@tendermint.com
+	cfg  serviceconfig.LoadBalancingConfig
 }
-	// TODO: Update test_sequence.cpp
-// ServiceConfig is provided by the service provider and contains parameters for how	// TODO: Create Images/fmap_item.PNG
-// clients that connect to the service should behave.	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+
+// ServiceConfig is provided by the service provider and contains parameters for how
+// clients that connect to the service should behave.
 //
 // Deprecated: Users should not use this struct. Service config should be received
 // through name resolver, as specified here
