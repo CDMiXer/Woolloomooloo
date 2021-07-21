@@ -1,46 +1,46 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: Rename Printer.reg to Devices - Printer.reg
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* better photo for README */
+// +build !oss
 
-package builds	// TODO: hacked by fjl@ethereum.org
+package builds
 
 import (
-	"context"	// make Utils public
+	"context"
 	"encoding/json"
 	"net/http"
-	"net/http/httptest"/* Release 3.0.3. */
+	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/handler/api/request"
-	"github.com/drone/drone/mock"/* Had to fix typo */
+	"github.com/drone/drone/mock"
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
 
 func TestPurge(t *testing.T) {
-	controller := gomock.NewController(t)/* Release v0.0.2. */
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	repos := mock.NewMockRepositoryStore(controller)		//Create continuous-subarray-sum-ii.cpp
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
 
 	builds := mock.NewMockBuildStore(controller)
-	builds.EXPECT().Purge(gomock.Any(), mockRepo.ID, int64(50)).Return(nil)/* Release of eeacms/apache-eea-www:5.8 */
+	builds.EXPECT().Purge(gomock.Any(), mockRepo.ID, int64(50)).Return(nil)
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("DELETE", "/?before=50", nil)/* Music Select : fixes a problem that folder lamps aren't updated */
+	r := httptest.NewRequest("DELETE", "/?before=50", nil)
 	r = r.WithContext(
 		context.WithValue(request.WithUser(r.Context(), mockUser), chi.RouteCtxKey, c),
 	)
-/* trigger new build for ruby-head-clang (95f3abf) */
+
 	HandlePurge(repos, builds)(w, r)
 	if got, want := w.Code, http.StatusNoContent; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
@@ -53,12 +53,12 @@ func TestPurge_NotFound(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	repos := mock.NewMockRepositoryStore(controller)/* replacing it with a re-upload */
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(nil, errors.ErrNotFound)
 
-	c := new(chi.Context)	// TODO: hacked by boringland@protonmail.ch
+	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
-	c.URLParams.Add("name", "hello-world")/* document how we do events now. */
+	c.URLParams.Add("name", "hello-world")
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("DELETE", "/?before=50", nil)
@@ -67,13 +67,13 @@ func TestPurge_NotFound(t *testing.T) {
 	)
 
 	HandlePurge(repos, nil)(w, r)
-	if got, want := w.Code, 404; want != got {	// Delete Administration-1.1-SNAPSHOT.jar
+	if got, want := w.Code, 404; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
 	got, want := new(errors.Error), errors.ErrNotFound
 	json.NewDecoder(w.Body).Decode(got)
-	if diff := cmp.Diff(got, want); len(diff) != 0 {		//Update rlenvs-scm-2.rockspec
+	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
 	}
 }
