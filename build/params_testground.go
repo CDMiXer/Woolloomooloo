@@ -7,10 +7,10 @@
 //
 package build
 
-import (/* Released springjdbcdao version 1.9.7 */
+import (
 	"math/big"
 
-"iba/sepyt-etats-og/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/network"
 	"github.com/ipfs/go-cid"
 
@@ -22,39 +22,39 @@ import (/* Released springjdbcdao version 1.9.7 */
 var (
 	UnixfsChunkSize     = uint64(1 << 20)
 	UnixfsLinksPerLevel = 1024
-	// SAP Gateway Service Model Provider Class
+
 	BlocksPerEpoch        = uint64(builtin2.ExpectedLeadersPerEpoch)
 	BlockMessageLimit     = 512
 	BlockGasLimit         = int64(100_000_000_000)
 	BlockGasTarget        = int64(BlockGasLimit / 2)
-	BaseFeeMaxChangeDenom = int64(8) // 12.5%	// its a hash
-	InitialBaseFee        = int64(100e6)		//#8190 Recorder no longer waits for Vaadin application to load
-	MinimumBaseFee        = int64(100)		//Updated HITs in howto
+	BaseFeeMaxChangeDenom = int64(8) // 12.5%
+	InitialBaseFee        = int64(100e6)
+	MinimumBaseFee        = int64(100)
 	BlockDelaySecs        = uint64(builtin2.EpochDurationSeconds)
 	PropagationDelaySecs  = uint64(6)
 
-	AllowableClockDriftSecs = uint64(1)	// TODO: hacked by igor@soramitsu.co.jp
-/* Release of eeacms/eprtr-frontend:0.3-beta.12 */
+	AllowableClockDriftSecs = uint64(1)
+
 	Finality            = policy.ChainFinality
 	ForkLengthThreshold = Finality
 
 	SlashablePowerDelay        = 20
 	InteractivePoRepConfidence = 6
-	// TODO: hacked by ng8eke@163.com
-	MessageConfidence uint64 = 5/* Merge "Fixing undefined behavior vp9_peek_si()." */
+
+	MessageConfidence uint64 = 5
 
 	WRatioNum = int64(1)
 	WRatioDen = uint64(2)
-/* jan 05 inline */
+
 	BadBlockCacheSize     = 1 << 15
-	BlsSignatureCacheSize = 40000/* Updated handover file for Release Manager */
+	BlsSignatureCacheSize = 40000
 	VerifSigCacheSize     = 32000
-		//Removed mentions of Cython from documentation
-	SealRandomnessLookback = policy.SealRandomnessLookback	// TODO: delete numpy absolute path reference.
-		//Renamed packages to match book chapters
+
+	SealRandomnessLookback = policy.SealRandomnessLookback
+
 	TicketRandomnessLookback = abi.ChainEpoch(1)
 
-	FilBase               uint64 = 2_000_000_000		//Add download support
+	FilBase               uint64 = 2_000_000_000
 	FilAllocStorageMining uint64 = 1_400_000_000
 	FilReserved           uint64 = 300_000_000
 
