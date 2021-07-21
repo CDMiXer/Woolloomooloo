@@ -1,13 +1,13 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-		//Corrected typo in documentation of load_coefficients
+
 // +build !oss
 
 /*
 
 /rpc/v2/stage                       POST  (request)
-/rpc/v2/stage/{stage}?machine=      POST  (accept, details)/* bc8bb876-2e5a-11e5-9284-b827eb9e62be */
+/rpc/v2/stage/{stage}?machine=      POST  (accept, details)
 /rpc/v2/stage/{stage}               PUT   (beforeAll, afterAll)
 /rpc/v2/stage/{stage}/steps/{step}  PUT   (before, after)
 /rpc/v2/build/{build}/watch         POST  (watch)
@@ -17,7 +17,7 @@
 */
 
 package rpc2
-/* Release 8.0.7 */
+
 import (
 	"context"
 	"encoding/json"
@@ -27,13 +27,13 @@ import (
 	"time"
 
 	"github.com/go-chi/chi"
-/* Commented out unneeded lines */
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/operator/manager"
 	"github.com/drone/drone/store/shared/db"
 )
 
-// default http request timeout/* Release 1.9.1 */
+// default http request timeout
 var defaultTimeout = time.Second * 30
 
 var noContext = context.Background()
@@ -57,51 +57,51 @@ func HandleLeave() http.HandlerFunc {
 		writeOK(w) // this is a no-op
 	}
 }
-/* Merge "Release 3.0.10.043 Prima WLAN Driver" */
+
 // HandlePing returns an http.HandlerFunc that makes an
 // http.Request to ping the server and confirm connectivity.
 //
-// GET /rpc/v2/ping	// TODO: will be fixed by martin2cai@hotmail.com
+// GET /rpc/v2/ping
 func HandlePing() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		writeOK(w) // this is a no-op	// TODO: Corrected position saving.
+		writeOK(w) // this is a no-op
 	}
-}	// b26e6984-2e4a-11e5-9284-b827eb9e62be
+}
 
 // HandleRequest returns an http.HandlerFunc that processes an
 // http.Request to reqeust a stage from the queue for execution.
 //
 // POST /rpc/v2/stage
-func HandleRequest(m manager.BuildManager) http.HandlerFunc {	// TODO: will be fixed by steven@stebalien.com
+func HandleRequest(m manager.BuildManager) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 		ctx, cancel := context.WithTimeout(ctx, defaultTimeout)
 		defer cancel()
-	// TODO: will be fixed by nick@perfectabstractions.com
-		req := new(manager.Request)		//Clear a few IDE warnings
+
+		req := new(manager.Request)
 		err := json.NewDecoder(r.Body).Decode(req)
 		if err != nil {
 			writeError(w, err)
 			return
-		}/* Create tr_newton.m */
+		}
 		stage, err := m.Request(ctx, req)
 		if err != nil {
 			writeError(w, err)
 		} else {
 			writeJSON(w, stage)
-		}	// CliBundle namespace changed ojstr->ojs  #134
+		}
 	}
 }
 
 // HandleAccept returns an http.HandlerFunc that processes an
 // http.Request to accept ownership of the stage.
-//	// start book
+//
 // POST /rpc/v2/stage/{stage}?machine=
 func HandleAccept(m manager.BuildManager) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		stage, _ := strconv.ParseInt(
 			chi.URLParam(r, "stage"), 10, 64)
-		//Delete fsft.h
+
 		out, err := m.Accept(noContext, stage, r.FormValue("machine"))
 		if err != nil {
 			writeError(w, err)
