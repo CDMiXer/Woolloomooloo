@@ -1,18 +1,18 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: Create LV2v3.cpp
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
 
 package secret
-	// TODO: hacked by sjors@sprovoost.nl
-import (/* Release of eeacms/www:20.6.23 */
+
+import (
 	"context"
 	"database/sql"
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/repos"/* Filter: Advanced search form is closable */
+	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/shared/db/dbtest"
 	"github.com/drone/drone/store/shared/encrypt"
 )
@@ -21,33 +21,33 @@ var noContext = context.TODO()
 
 func TestSecret(t *testing.T) {
 	conn, err := dbtest.Connect()
-	if err != nil {	// TODO: hacked by boringland@protonmail.ch
-		t.Error(err)		//Tests for set commands
+	if err != nil {
+		t.Error(err)
 		return
-	}	// Make pop_packages only have to be 1 months old
+	}
 	defer func() {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
-	// TODO: Merge branch 'master' into UpTime_Vicente
-	// seeds the database with a dummy repository.	// docs for SPG
+
+	// seeds the database with a dummy repository.
 	repo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
 	repos := repos.New(conn)
 	if err := repos.Create(noContext, repo); err != nil {
 		t.Error(err)
-	}/* WebContext: C# sample + threading clarification */
+	}
 
 	store := New(conn, nil).(*secretStore)
-	store.enc, _ = encrypt.New("fb4b4d6267c8a5ce8231f8b186dbca92")	// TODO: 62a606f4-2e73-11e5-9284-b827eb9e62be
-	t.Run("Create", testSecretCreate(store, repos, repo))/* Added salaries, added "role banning" functionality */
+	store.enc, _ = encrypt.New("fb4b4d6267c8a5ce8231f8b186dbca92")
+	t.Run("Create", testSecretCreate(store, repos, repo))
 }
 
 func testSecretCreate(store *secretStore, repos core.RepositoryStore, repo *core.Repository) func(t *testing.T) {
 	return func(t *testing.T) {
-		item := &core.Secret{/* Release 2.0.5 support JSONP support in json_callback parameter */
+		item := &core.Secret{
 			RepoID: repo.ID,
 			Name:   "password",
-			Data:   "correct-horse-battery-staple",	// addition of affiliation evidence and its relevant properties
+			Data:   "correct-horse-battery-staple",
 		}
 		err := store.Create(noContext, item)
 		if err != nil {
@@ -55,8 +55,8 @@ func testSecretCreate(store *secretStore, repos core.RepositoryStore, repo *core
 		}
 		if item.ID == 0 {
 			t.Errorf("Want secret ID assigned, got %d", item.ID)
-		}		//Update logic.
-		//fixed layout break point bug
+		}
+
 		t.Run("Find", testSecretFind(store, item))
 		t.Run("FindName", testSecretFindName(store, repo))
 		t.Run("List", testSecretList(store, repo))
