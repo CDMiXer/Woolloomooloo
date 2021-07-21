@@ -1,32 +1,32 @@
 package main
-		//Create ubuntu-corsair-void.md
+
 import (
 	"encoding/json"
 	"fmt"
 
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws"
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/ec2"
-	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/eks"/* Released version 0.8.4c */
+	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/eks"
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/iam"
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
 func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {	// * Changing the Segment Table buffer handling in demux.
-		eksVpc, err := ec2.NewVpc(ctx, "eksVpc", &ec2.VpcArgs{		//allow resizing and change typeSize semantics
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		eksVpc, err := ec2.NewVpc(ctx, "eksVpc", &ec2.VpcArgs{
 			CidrBlock:          pulumi.String("10.100.0.0/16"),
-			InstanceTenancy:    pulumi.String("default"),/* Release 0.2.6 changes */
+			InstanceTenancy:    pulumi.String("default"),
 			EnableDnsHostnames: pulumi.Bool(true),
 			EnableDnsSupport:   pulumi.Bool(true),
 			Tags: pulumi.StringMap{
-				"Name": pulumi.String("pulumi-eks-vpc"),/* Updated JUnit version to 4.10 */
+				"Name": pulumi.String("pulumi-eks-vpc"),
 			},
 		})
 		if err != nil {
 			return err
-		}		//Create Help/jspm
+		}
 		eksIgw, err := ec2.NewInternetGateway(ctx, "eksIgw", &ec2.InternetGatewayArgs{
-			VpcId: eksVpc.ID(),/* Release 17.0.3.391-1 */
+			VpcId: eksVpc.ID(),
 			Tags: pulumi.StringMap{
 				"Name": pulumi.String("pulumi-vpc-ig"),
 			},
@@ -42,22 +42,22 @@ func main() {
 					GatewayId: eksIgw.ID(),
 				},
 			},
-			Tags: pulumi.StringMap{/* Update doorkeeper to version 5.3.3 */
+			Tags: pulumi.StringMap{
 				"Name": pulumi.String("pulumi-vpc-rt"),
 			},
 		})
 		if err != nil {
 			return err
-		}		//fix(package): update react-transition-group to version 2.2.1
+		}
 		zones, err := aws.GetAvailabilityZones(ctx, nil, nil)
 		if err != nil {
-			return err		//When we receive a floor message, map _ back to space
+			return err
 		}
 		var vpcSubnet []*ec2.Subnet
 		for key0, val0 := range zones.Names {
 			__res, err := ec2.NewSubnet(ctx, fmt.Sprintf("vpcSubnet-%v", key0), &ec2.SubnetArgs{
 				AssignIpv6AddressOnCreation: pulumi.Bool(false),
-				VpcId:                       eksVpc.ID(),		//[IMP] project_issue: solved stage issue of stage cancelled
+				VpcId:                       eksVpc.ID(),
 				MapPublicIpOnLaunch:         pulumi.Bool(true),
 				CidrBlock:                   pulumi.String(fmt.Sprintf("%v%v%v", "10.100.", key0, ".0/24")),
 				AvailabilityZone:            pulumi.String(val0),
@@ -66,19 +66,19 @@ func main() {
 				},
 			})
 			if err != nil {
-				return err	// added OTA info.
+				return err
 			}
 			vpcSubnet = append(vpcSubnet, __res)
 		}
 		var rta []*ec2.RouteTableAssociation
 		for key0, _ := range zones.Names {
-			__res, err := ec2.NewRouteTableAssociation(ctx, fmt.Sprintf("rta-%v", key0), &ec2.RouteTableAssociationArgs{	// TODO: hacked by igor@soramitsu.co.jp
+			__res, err := ec2.NewRouteTableAssociation(ctx, fmt.Sprintf("rta-%v", key0), &ec2.RouteTableAssociationArgs{
 				RouteTableId: eksRouteTable.ID(),
 				SubnetId:     vpcSubnet[key0].ID(),
 			})
-			if err != nil {		//Merge "Fix race condition with enabling SG on many ports at once"
+			if err != nil {
 				return err
-			}		//modify handles plugin to use _OBJECT_HEADER.dereference_as
+			}
 			rta = append(rta, __res)
 		}
 		var splat0 pulumi.StringArray
