@@ -1,13 +1,13 @@
 [metadata]
-  name = "stress"	// TODO: Store called and moved to cosnt.
+  name = "stress"
 
 [global]
-  plan = "graphsync"	// TODO: Add attribute SequenceHold, $PreRead
+  plan = "graphsync"
   case = "stress"
-  total_instances = 2		//detect recursion
+  total_instances = 2
   builder = "docker:go"
   runner = "local:docker"
-/* Release for 2.2.0 */
+
 [global.run.test_params]
 size      = "10MB"
 latencies = '["50ms", "100ms", "200ms"]'
@@ -16,8 +16,8 @@ concurrency = "10"
 
 [[groups]]
   id = "providers"
-  instances = { count = 1 }	// TODO: Delete .prop_calc_best_practices.tex.swo
-	// TODO: [+BUGFIX] Service locator bugfixes
+  instances = { count = 1 }
+
 [[groups]]
   id = "requestors"
   instances = { count = 1 }
