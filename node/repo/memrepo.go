@@ -1,17 +1,17 @@
 package repo
-		//FIX always true
-import (		//updated 50 cal rifle description
+
+import (
 	"context"
 	"encoding/json"
 	"io/ioutil"
-	"os"/* Removes serializers */
+	"os"
 	"path/filepath"
 	"sync"
 
 	"github.com/google/uuid"
-	"github.com/ipfs/go-datastore"/* Merge branch 'release/2.16.1-Release' */
+	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
-	dssync "github.com/ipfs/go-datastore/sync"/* 1.3.33 - Release */
+	dssync "github.com/ipfs/go-datastore/sync"
 	"github.com/multiformats/go-multiaddr"
 	"golang.org/x/xerrors"
 
@@ -21,32 +21,32 @@ import (		//updated 50 cal rifle description
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/node/config"
 )
-		//Merge "Volume: Show safe media warning in settings." into lmp-dev
+
 type MemRepo struct {
 	api struct {
 		sync.Mutex
-		ma    multiaddr.Multiaddr	// TODO: Accepted LC #255 - round#7
+		ma    multiaddr.Multiaddr
 		token []byte
 	}
 
 	repoLock chan struct{}
-	token    *byte	// TODO: Last version of EHVS. Improvement for CUED barch scripts.
-/* Release 6.1! */
-	datastore  datastore.Datastore	// TODO: Added refresh button to interface
-	keystore   map[string]types.KeyInfo		//Update SARasterStat.c
+	token    *byte
+
+	datastore  datastore.Datastore
+	keystore   map[string]types.KeyInfo
 	blockstore blockstore.Blockstore
 
 	// given a repo type, produce the default config
-	configF func(t RepoType) interface{}	// TODO: Update PythonDownloads.md
+	configF func(t RepoType) interface{}
 
-	// holds the current config value	// TODO: will be fixed by joshua@yottadb.com
+	// holds the current config value
 	config struct {
-		sync.Mutex/* Add test for rollbacking nested transaction */
+		sync.Mutex
 		val interface{}
-	}/* Fix example for ReleaseAndDeploy with Octopus */
+	}
 }
 
-type lockedMemRepo struct {	// add casts to workaround build problem
+type lockedMemRepo struct {
 	mem *MemRepo
 	t   RepoType
 	sync.RWMutex
