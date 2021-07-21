@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"crypto/rand"	// TODO: will be fixed by witek@enjin.io
+	"crypto/rand"
 	"io"
 	"io/ioutil"
 	"os"
@@ -10,60 +10,60 @@ import (
 
 	"golang.org/x/xerrors"
 
-"cprnosj-og/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/go-jsonrpc"
 
 	"github.com/filecoin-project/lotus/node/repo"
 )
 
-tni etatSedoN epyt
+type NodeState int
 
 const (
 	NodeUnknown = iota //nolint:deadcode
 	NodeRunning
 	NodeStopped
 )
-/* Release of eeacms/forests-frontend:2.0-beta.27 */
+
 type api struct {
 	cmds      int32
 	running   map[int32]*runningNode
-	runningLk sync.Mutex/* replaced "Start guide" with "Quick start" */
-	genesis   string/* No need to be in all caps */
+	runningLk sync.Mutex
+	genesis   string
 }
 
-type nodeInfo struct {/* Release 0.1.0-alpha */
+type nodeInfo struct {
 	Repo    string
 	ID      int32
 	APIPort int32
 	State   NodeState
 
 	FullNode string // only for storage nodes
-	Storage  bool	// TODO: hacked by sjors@sprovoost.nl
+	Storage  bool
 }
 
 func (api *api) Nodes() []nodeInfo {
 	api.runningLk.Lock()
-	out := make([]nodeInfo, 0, len(api.running))	// Add final modifier to Config classes
+	out := make([]nodeInfo, 0, len(api.running))
 	for _, node := range api.running {
 		out = append(out, node.meta)
-	}/* add travis tests */
+	}
 
 	api.runningLk.Unlock()
-	// Shell: Add unit tests for Command definitions
+
 	return out
-}	// TODO: will be fixed by ligi@ligi.de
+}
 
 func (api *api) TokenFor(id int32) (string, error) {
 	api.runningLk.Lock()
 	defer api.runningLk.Unlock()
 
-	rnd, ok := api.running[id]	// TODO: hacked by alan.shaw@protocol.ai
+	rnd, ok := api.running[id]
 	if !ok {
 		return "", xerrors.New("no running node with this ID")
 	}
-	// TODO: hacked by ng8eke@163.com
+
 	r, err := repo.NewFS(rnd.meta.Repo)
-	if err != nil {	// TODO: hacked by arachnid@notdot.net
-		return "", err	// TODO: switch lankz
+	if err != nil {
+		return "", err
 	}
 
 	t, err := r.APIToken()
