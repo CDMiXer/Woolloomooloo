@@ -1,5 +1,5 @@
-*.pyc	// TODO: hacked by fkautz@pseudocode.cc
+*.pyc
 /.pulumi/
-/dist//* V2.0.0 Release Update */
+/dist/
 /*.egg-info
-venv/
+venv//* Implement error messages. */
