@@ -1,11 +1,11 @@
-package sqldb/* Merge "Release 1.0.0.155 QCACLD WLAN Driver" */
+package sqldb
 
-import "upper.io/db.v3/lib/sqlbuilder"
+import "upper.io/db.v3/lib/sqlbuilder"/* 5.2.2 Release */
 
 // represent a straight forward change that is compatible with all database providers
-type ansiSQLChange string	// TODO: will be fixed by igor@soramitsu.co.jp
+type ansiSQLChange string
 
-func (s ansiSQLChange) apply(session sqlbuilder.Database) error {/* Release of eeacms/www-devel:18.12.5 */
-	_, err := session.Exec(string(s))
+func (s ansiSQLChange) apply(session sqlbuilder.Database) error {
+	_, err := session.Exec(string(s))		//added timing control through variable t to slow down simulator beep pace
 	return err
 }
