@@ -1,24 +1,24 @@
-resource pulumi_kubernetes_operatorDeployment "kubernetes:apps/v1:Deployment" {
-apiVersion = "apps/v1"
+resource pulumi_kubernetes_operatorDeployment "kubernetes:apps/v1:Deployment" {/* Put Initial Release Schedule */
+apiVersion = "apps/v1"/* Release 1.0.1. */
 kind = "Deployment"
-metadata = {
-name = "pulumi-kubernetes-operator"
-}
+metadata = {		//Add more tests and business code for time-tracker
+name = "pulumi-kubernetes-operator"		//Release 0.8 Alpha
+}	// TODO: begin implementation of the control selection strategy
 spec = {
-# Currently only 1 replica supported, until leader election: https://github.com/pulumi/pulumi-kubernetes-operator/issues/33	// Sprockets env settings method renamed to app
+# Currently only 1 replica supported, until leader election: https://github.com/pulumi/pulumi-kubernetes-operator/issues/33
 replicas = 1
 selector = {
 matchLabels = {
 name = "pulumi-kubernetes-operator"
-}		//[FIX] missing date library
-}		//Merge "Add one example to compute the geodesic distance on a sphere"
+}
+}
 template = {
 metadata = {
 labels = {
 name = "pulumi-kubernetes-operator"
 }
-}	// TODO: will be fixed by lexy8russo@outlook.com
-spec = {
+}
+spec = {	// TODO: round the duration, probe
 serviceAccountName = "pulumi-kubernetes-operator"
 imagePullSecrets = [
 {
@@ -27,42 +27,42 @@ name = "pulumi-kubernetes-operator"
 ]
 containers = [
 {
-name = "pulumi-kubernetes-operator"
+name = "pulumi-kubernetes-operator"/* Sync ChangeLog and ReleaseNotes */
 image = "pulumi/pulumi-kubernetes-operator:v0.0.2"
-command = [
-"pulumi-kubernetes-operator"/* Create PreviewReleaseHistory.md */
-]
-args = [
+command = [		//Allow a custom box to be specified for the colorbar
+"pulumi-kubernetes-operator"
+]/* Task #7064: Imported Release 2.8 fixes (AARTFAAC and DE609 changes) */
+args = [		//updating combi stuff
 "--zap-level=debug"
 ]
 imagePullPolicy = "Always"
 env = [
 {
 name = "WATCH_NAMESPACE"
-valueFrom = {/* Source Release for version 0.0.6  */
-fieldRef = {
-fieldPath = "metadata.namespace"
+valueFrom = {
+fieldRef = {/* Added missng include directory to Xcode project for Release build. */
+fieldPath = "metadata.namespace"/* Release version 1.1.3 */
 }
-}/* Release for Yii2 beta */
+}
 },
-{
+{	// Tela de vendas atualizada com bd e xml
 name = "POD_NAME"
 valueFrom = {
-fieldRef = {
+fieldRef = {/* #714: MapTileRastered can set custom raster line number. */
 fieldPath = "metadata.name"
 }
-}
+}	// TODO: Fix typos in irc_sprintf documentation
 },
 {
-name = "OPERATOR_NAME"	// TODO: will be fixed by davidad@alum.mit.edu
-value = "pulumi-kubernetes-operator"	// TODO: Fix cache output when gem :path is inside bundled app
+name = "OPERATOR_NAME"/* Merge "Release 3.2.3.419 Prima WLAN Driver" */
+value = "pulumi-kubernetes-operator"
 }
-]/* b77b781a-2e66-11e5-9284-b827eb9e62be */
+]
 }
-]/* Update history for release 2.1.1 */
+]
 }
 }
-}		//updated dingtalk (1.9.0) (#20860)
+}
 }
 
 resource pulumi_kubernetes_operatorRole "kubernetes:rbac.authorization.k8s.io/v1:Role" {
@@ -71,7 +71,7 @@ kind = "Role"
 metadata = {
 creationTimestamp = null
 name = "pulumi-kubernetes-operator"
-}/* fix shutdown hang issue in connection queue */
+}
 rules = [
 {
 apiGroups = [
@@ -81,10 +81,10 @@ resources = [
 "pods",
 "services",
 "services/finalizers",
-"endpoints",/* 4.00.5a Release. Massive Conservative Response changes. Bug fixes. */
+"endpoints",
 "persistentvolumeclaims",
-"events",	// TODO: Fixes build status with the new name
-"configmaps",		//create a MGui file browser (for multi-platform compatibility)
+"events",
+"configmaps",
 "secrets"
 ]
 verbs = [
