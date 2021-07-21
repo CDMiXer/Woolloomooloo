@@ -1,9 +1,9 @@
 {
     "name": "typescript",
-    "devDependencies": {/* jstree service framework */
+    "devDependencies": {/* move backend implementations into their own subdir */
         "@types/node": "^8.0.0"
     },
-    "peerDependencies": {
+    "peerDependencies": {		//Remove whitespace on blank lines
         "@pulumi/pulumi": "latest"
     }
-}/* try and return a favicon */
+}
