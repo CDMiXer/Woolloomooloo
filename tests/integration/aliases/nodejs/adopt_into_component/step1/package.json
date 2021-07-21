@@ -7,6 +7,6 @@
         "typescript": "^2.5.3"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* Typo a -> an */
+        "@pulumi/pulumi": "latest"
     }
 }
