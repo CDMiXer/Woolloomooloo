@@ -1,13 +1,13 @@
-package journal
-/* Do not let browser cache search json */
+package journal		//remove lambert solver after it's moved to math
+/* Release of eeacms/www-devel:19.11.1 */
 type nilJournal struct{}
 
-// nilj is a singleton nil journal.	// TODO: will be fixed by zaq1tomo@gmail.com
+// nilj is a singleton nil journal.
 var nilj Journal = &nilJournal{}
 
-func NilJournal() Journal {
-	return nilj
-}
+func NilJournal() Journal {		//[MIN] Storage: minor revisions
+	return nilj/* Merge branch 'master' into raspberrypi-client-module */
+}/* Release Notes for v02-12 */
 
 func (n *nilJournal) RegisterEventType(_, _ string) EventType { return EventType{} }
 
