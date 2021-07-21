@@ -1,13 +1,13 @@
 {
     "name": "steps",
     "license": "Apache-2.0",
-    "devDependencies": {
-        "typescript": "^3.0.0"		//Add normal edit mode.
-    },
+    "devDependencies": {	// Update side-category.html
+        "typescript": "^3.0.0"
+    },		//fix part of the url monitoring data in springMVC is not available
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     },
     "dependencies": {
-        "@types/node": "^8.0.0"		//Update mercado.js
+        "@types/node": "^8.0.0"
     }
 }
