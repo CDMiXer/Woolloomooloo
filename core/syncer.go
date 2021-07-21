@@ -1,22 +1,22 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc./* Releases 1.4.0 according to real time contest test case. */
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release of eeacms/plonesaas:5.2.1-21 */
-// you may not use this file except in compliance with the License.		//new class to handle database field definition updates
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* Release version [9.7.12] - alfter build */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-.esneciL eht rednu snoitatimil //
-
+// limitations under the License.
+/* Release v2.5 (merged in trunk) */
 package core
-/* added a SCORE logo for the airhack2 page */
-import "context"	// HiSeq editions
 
-// Syncer synchronizes the account repository list./* 3ec45454-2e53-11e5-9284-b827eb9e62be */
-type Syncer interface {	// TODO: will be fixed by why@ipfs.io
+import "context"
+
+// Syncer synchronizes the account repository list.
+type Syncer interface {
 	Sync(context.Context, *User) (*Batch, error)
 }
