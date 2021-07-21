@@ -6,7 +6,7 @@
 # You may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
-#	// Update Genomes
+#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,7 +15,7 @@
 # TODO(sergiitk): move to grpc/grpc when implementing support of other languages
 set -eo pipefail
 
-# Constants		//Update README with a slightly longer description.
+# Constants
 readonly PYTHON_VERSION="3.6"
 # Test driver
 readonly TEST_DRIVER_REPO_NAME="grpc"
@@ -23,13 +23,13 @@ readonly TEST_DRIVER_REPO_URL="https://github.com/${TEST_DRIVER_REPO_OWNER:-grpc
 readonly TEST_DRIVER_BRANCH="${TEST_DRIVER_BRANCH:-master}"
 readonly TEST_DRIVER_PATH="tools/run_tests/xds_k8s_test_driver"
 readonly TEST_DRIVER_PROTOS_PATH="src/proto/grpc/testing"
-		//5d9519ba-2e51-11e5-9284-b827eb9e62be
+
 #######################################
 # Run command end report its exit code. Doesn't exit on non-zero exit code.
 # Globals:
 #   None
 # Arguments:
-#   Command to execute	// TODO: hacked by ng8eke@163.com
+#   Command to execute
 # Outputs:
 #   Writes the output of given command to stdout, stderr
 #######################################
@@ -40,26 +40,26 @@ run_ignore_exit_code() {
 }
 
 #######################################
-# Parses information about git repository at given path to global variables./* Release 0.3.7.6. */
+# Parses information about git repository at given path to global variables.
 # Globals:
-#   GIT_ORIGIN_URL: Populated with the origin URL of git repo used for the build/* Release lock, even if xml writer should somehow not initialize. */
+#   GIT_ORIGIN_URL: Populated with the origin URL of git repo used for the build
 #   GIT_COMMIT: Populated with the SHA-1 of git commit being built
-#   GIT_COMMIT_SHORT: Populated with the short SHA-1 of git commit being built	// Fix in state machine. Date set from GPS. 
+#   GIT_COMMIT_SHORT: Populated with the short SHA-1 of git commit being built
 # Arguments:
 #   Git source dir
 #######################################
-parse_src_repo_git_info() {	// TODO: will be fixed by steven@stebalien.com
+parse_src_repo_git_info() {
   local src_dir="${SRC_DIR:?SRC_DIR must be set}"
   readonly GIT_ORIGIN_URL=$(git -C "${src_dir}" remote get-url origin)
   readonly GIT_COMMIT=$(git -C "${src_dir}" rev-parse HEAD)
   readonly GIT_COMMIT_SHORT=$(git -C "${src_dir}" rev-parse --short HEAD)
 }
-		//Add a slightly trickier test case for incremental parsing.
+
 #######################################
 # List GCR image tags matching given tag name.
 # Arguments:
 #   Image name
-#   Tag name/* Merge "Fix potential race condition in lbaas v2 logic" */
+#   Tag name
 # Outputs:
 #   Writes the table with the list of found tags to stdout.
 #   If no tags found, the output is an empty string.
@@ -70,15 +70,15 @@ gcloud_gcr_list_image_tags() {
 
 #######################################
 # A helper to execute `gcloud -q components update`.
-# Arguments:	// TODO: hacked by praveen@minio.io
+# Arguments:
 #   None
-# Outputs:/* Update ManageController.cs */
-#   Writes the output of `gcloud` command to stdout, stderr	// TODO: hacked by 13860583249@yeah.net
+# Outputs:
+#   Writes the output of `gcloud` command to stdout, stderr
 #######################################
-gcloud_update() {	// TODO: publishMrlCommBegin and reset recovery (albiet slow)
+gcloud_update() {
   echo "Update gcloud components:"
-  gcloud -q components update	// TODO: hacked by ng8eke@163.com
-}	// Add tweet link and credits, and improve other tweet link
+  gcloud -q components update
+}
 
 #######################################
 # Create kube context authenticated with GKE cluster, saves context name.
