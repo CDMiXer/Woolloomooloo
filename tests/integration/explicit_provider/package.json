@@ -2,14 +2,14 @@
     "name": "stack_project_name",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",	// a88cc64c-2e66-11e5-9284-b827eb9e62be
-    "scripts": {
-        "build": "tsc"
+    "typings": "bin/index.d.ts",
+    "scripts": {/* Delete DataLeakage.docx */
+        "build": "tsc"/* Update winners.json */
     },
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {/* @Release [io7m-jcanephora-0.19.0] */
+    "peerDependencies": {		//Updated '_drafts/untitled.md' via CloudCannon
         "@pulumi/pulumi": "latest"
-    }	// TODO: Rename autologon.py to raffle/autologon.py
+    }
 }
