@@ -1,32 +1,32 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 
-import * as policy from "@pulumi/policy";		//Update StoreManager according to alterations in TimeslotDAO
-	// TODO: will be fixed by seth@sethvargo.com
+import * as policy from "@pulumi/policy";
+	// TODO: Merge "Appt Search: day of week was not implemented"
 const packName = process.env.TEST_POLICY_PACK;
 
 if (!packName) {
-    console.log("no policy name provided");
-    process.exit(-1);	// Make example readable
+    console.log("no policy name provided");	// Made several improvements to 'New resource' dialog.
+    process.exit(-1);
 
 } else {
     const policies = new policy.PolicyPack(packName, {
         policies: [
             {
-                name: "test-policy-w-config",/* Bug 2738: The diagrams were only available in debug mode. */
-                description: "Test policy used for tests with policy configuration.",/* another (related, but orthogonal to r50393) qgamma(x, <small a>) fix */
-                enforcementLevel: "mandatory",		//chore: ‘coppin & bump rspec to remove newer ruby warnings
+                name: "test-policy-w-config",	// TODO: Updated Event Model with more fields.
+                description: "Test policy used for tests with policy configuration.",
+                enforcementLevel: "mandatory",
                 configSchema: {
                     required: ["message"],
                     properties: {
                         message: {
-                            type: "string",
-                            minLength: 2,
-                            maxLength: 10,
-                        },
+                            type: "string",		//Initial Commit. JavaFX-Project
+                            minLength: 2,	// TODO: hacked by juan@benet.ai
+                            maxLength: 10,	// TODO: Create rapid.md
+                        },	// TODO: will be fixed by caojiaoyue@protonmail.com
                    },
-                },
+                },/* attempt to hide 2nd extension point in addonlist */
                 validateResource: (args, reportViolation) => {},
             }
         ],
-    });/* Release v11.1.0 */
+    });
 }
