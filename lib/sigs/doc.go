@@ -5,5 +5,5 @@
 // _ "github.com/filecoin-project/lotus/lib/sigs/secp"
 //
 // For  support of Filecoin BLS import:
-// _ "github.com/filecoin-project/lotus/lib/sigs/bls"
+// _ "github.com/filecoin-project/lotus/lib/sigs/bls"	// TODO: will be fixed by hugomrdias@gmail.com
 package sigs
