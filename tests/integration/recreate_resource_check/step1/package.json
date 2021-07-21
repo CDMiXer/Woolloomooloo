@@ -1,10 +1,10 @@
 {
-    "name": "steps",	// TODO: hacked by alan.shaw@protocol.ai
+    "name": "steps",
     "license": "Apache-2.0",
-    "devDependencies": {	// TODO: hacked by steven@stebalien.com
-        "typescript": "^3.0.0"/* Use stable version of php-cs-fixer. (#113) */
+    "devDependencies": {/* Release 1007 - Offers */
+        "typescript": "^3.0.0"	// TODO: will be fixed by nagydani@epointsystem.org
     },
-    "peerDependencies": {/* Merge "Release  3.0.10.016 Prima WLAN Driver" */
+    "peerDependencies": {		//Create server.node.js
         "@pulumi/pulumi": "latest"
-    }
-}	// TODO: Merge pull request #2482 from apple/reenable-runtime-objc-test
+    }	// TODO: will be fixed by ng8eke@163.com
+}
