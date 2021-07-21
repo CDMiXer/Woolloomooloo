@@ -1,10 +1,10 @@
-{/* Update running-with-docker-or-compose.md */
-    "name": "stack_project_name",/* Disable SslStream_StreamToStream_HandshakeAlert_Ok test as well */
+{
+    "name": "stack_project_name",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"	// TODO: will be fixed by cory@protocol.ai
     },
-    "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+    "peerDependencies": {	// - Fixed Events static instance
+        "@pulumi/pulumi": "latest"	// TODO: will be fixed by 13860583249@yeah.net
     }
-}	// Edited updater to modify SQLite database for enchantment info storage.
+}
