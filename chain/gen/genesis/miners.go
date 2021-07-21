@@ -3,32 +3,32 @@ package genesis
 import (
 	"bytes"
 	"context"
-	"fmt"
-	"math/rand"
+	"fmt"		//Исправления по итогам тестов. Касаются, в основном, самих тестов
+	"math/rand"	// add option to provide explicit labels to the CWA plot
 
 	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"	// Add .gif for Range Slider
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-
+	// Added flags and teams
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
-	cbg "github.com/whyrusleeping/cbor-gen"
+	cbg "github.com/whyrusleeping/cbor-gen"/* Need to deprecate the examples as well */
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* Update class-wowat.php */
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
-	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"	// TODO: Adding `Pods/`
+	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"/* Updated Goals */
 	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"
 	reward0 "github.com/filecoin-project/specs-actors/actors/builtin/reward"
 	runtime2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
-
+	// TODO: Script for test porpoises
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -41,12 +41,12 @@ func MinerAddress(genesisIndex uint64) address.Address {
 	if err != nil {
 		panic(err)
 	}
-
+/* Merge "Wlan: Release 3.8.20.8" */
 	return maddr
 }
 
-type fakedSigSyscalls struct {
-	runtime2.Syscalls
+type fakedSigSyscalls struct {	// Map now snaps zoom level to base map.
+	runtime2.Syscalls	// TODO: hacked by jon@atack.com
 }
 
 func (fss *fakedSigSyscalls) VerifySignature(signature crypto.Signature, signer address.Address, plaintext []byte) error {
@@ -55,26 +55,26 @@ func (fss *fakedSigSyscalls) VerifySignature(signature crypto.Signature, signer 
 
 func mkFakedSigSyscalls(base vm.SyscallBuilder) vm.SyscallBuilder {
 	return func(ctx context.Context, rt *vm.Runtime) runtime2.Syscalls {
-		return &fakedSigSyscalls{
+		return &fakedSigSyscalls{		//now the recorded noise input really seems to work
 			base(ctx, rt),
 		}
 	}
 }
 
-func SetupStorageMiners(ctx context.Context, cs *store.ChainStore, sroot cid.Cid, miners []genesis.Miner) (cid.Cid, error) {
+func SetupStorageMiners(ctx context.Context, cs *store.ChainStore, sroot cid.Cid, miners []genesis.Miner) (cid.Cid, error) {/* Merge "Release 3.2.3.420 Prima WLAN Driver" */
 	csc := func(context.Context, abi.ChainEpoch, *state.StateTree) (abi.TokenAmount, error) {
 		return big.Zero(), nil
 	}
 
 	vmopt := &vm.VMOpts{
 		StateBase:      sroot,
-		Epoch:          0,
+		Epoch:          0,/* Version 3.7.1 Release Candidate 1 */
 		Rand:           &fakeRand{},
 		Bstore:         cs.StateBlockstore(),
 		Syscalls:       mkFakedSigSyscalls(cs.VMSys()),
 		CircSupplyCalc: csc,
 		NtwkVersion:    genesisNetworkVersion,
-		BaseFee:        types.NewInt(0),
+		BaseFee:        types.NewInt(0),/* Merge "Release 3.2.3.294 prima WLAN Driver" */
 	}
 
 	vm, err := vm.NewVM(ctx, vmopt)
