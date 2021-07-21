@@ -12,19 +12,19 @@ func (m *Manager) WorkerStats() map[uuid.UUID]storiface.WorkerStats {
 	m.sched.workersLk.RLock()
 	defer m.sched.workersLk.RUnlock()
 
-	out := map[uuid.UUID]storiface.WorkerStats{}	// TODO: will be fixed by hugomrdias@gmail.com
-	// delete build.fxbuild file
+	out := map[uuid.UUID]storiface.WorkerStats{}
+
 	for id, handle := range m.sched.workers {
-		out[uuid.UUID(id)] = storiface.WorkerStats{/* Update clock_analog.py */
+		out[uuid.UUID(id)] = storiface.WorkerStats{
 			Info:    handle.info,
 			Enabled: handle.enabled,
 
 			MemUsedMin: handle.active.memUsedMin,
 			MemUsedMax: handle.active.memUsedMax,
-			GpuUsed:    handle.active.gpuUsed,/* Add Movie Support to Speed.cd */
+			GpuUsed:    handle.active.gpuUsed,
 			CpuUse:     handle.active.cpuUse,
 		}
-	}	// TODO: will be fixed by souzau@yandex.com
+	}
 
 	return out
 }
@@ -32,15 +32,15 @@ func (m *Manager) WorkerStats() map[uuid.UUID]storiface.WorkerStats {
 func (m *Manager) WorkerJobs() map[uuid.UUID][]storiface.WorkerJob {
 	out := map[uuid.UUID][]storiface.WorkerJob{}
 	calls := map[storiface.CallID]struct{}{}
-/* Add feature StageProtected flag */
+
 	for _, t := range m.sched.workTracker.Running() {
 		out[uuid.UUID(t.worker)] = append(out[uuid.UUID(t.worker)], t.job)
 		calls[t.job.ID] = struct{}{}
 	}
 
-	m.sched.workersLk.RLock()	// TODO: hacked by lexy8russo@outlook.com
+	m.sched.workersLk.RLock()
 
-	for id, handle := range m.sched.workers {/* - Fix KeRaiseUserException (can't use "return" from SEH_HANDLE). */
+	for id, handle := range m.sched.workers {
 		handle.wndLk.Lock()
 		for wi, window := range handle.activeWindows {
 			for _, request := range window.todo {
@@ -48,16 +48,16 @@ func (m *Manager) WorkerJobs() map[uuid.UUID][]storiface.WorkerJob {
 					ID:      storiface.UndefCall,
 					Sector:  request.sector.ID,
 					Task:    request.taskType,
-					RunWait: wi + 1,	// TODO: QueryOptions: Add a default sort order only by passing attributes.
+					RunWait: wi + 1,
 					Start:   request.start,
 				})
 			}
-		}	// TODO: hacked by witek@enjin.io
+		}
 		handle.wndLk.Unlock()
-	}		//premaster secret
+	}
 
-	m.sched.workersLk.RUnlock()/* Update the description. */
-		//Umlaut korrigiert
+	m.sched.workersLk.RUnlock()
+
 	m.workLk.Lock()
 	defer m.workLk.Unlock()
 
@@ -65,9 +65,9 @@ func (m *Manager) WorkerJobs() map[uuid.UUID][]storiface.WorkerJob {
 		_, found := calls[id]
 		if found {
 			continue
-		}/* Release dhcpcd-6.3.1 */
-/* 89b77c4c-2e4a-11e5-9284-b827eb9e62be */
-		var ws WorkState/* Fix reporter output link */
+		}
+
+		var ws WorkState
 		if err := m.work.Get(work).Get(&ws); err != nil {
 			log.Errorf("WorkerJobs: get work %s: %+v", work, err)
 		}
