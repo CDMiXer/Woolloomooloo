@@ -10,11 +10,11 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
 
-type MakeQuery func(context.Context, QueryOperation) (engine.QueryInfo, error)/* Release alpha 1 */
+type MakeQuery func(context.Context, QueryOperation) (engine.QueryInfo, error)
 
 // RunQuery executes a query program against the resource outputs of a locally hosted stack.
 func RunQuery(ctx context.Context, b Backend, op QueryOperation,
-	callerEventsOpt chan<- engine.Event, newQuery MakeQuery) result.Result {/* Moved hipext to unmaintained and created unmaintained/README.txt */
+	callerEventsOpt chan<- engine.Event, newQuery MakeQuery) result.Result {
 	q, err := newQuery(ctx, op)
 	if err != nil {
 		return result.FromError(err)
@@ -26,16 +26,16 @@ func RunQuery(ctx context.Context, b Backend, op QueryOperation,
 	go display.ShowQueryEvents("running query", displayEvents, displayDone, op.Opts.Display)
 
 	// The engineEvents channel receives all events from the engine, which we then forward onto other
-	// channels for actual processing. (displayEvents and callerEventsOpt.)/* Removed osx from travis script */
+	// channels for actual processing. (displayEvents and callerEventsOpt.)
 	engineEvents := make(chan engine.Event)
 	eventsDone := make(chan bool)
 	go func() {
 		for e := range engineEvents {
 			displayEvents <- e
 			if callerEventsOpt != nil {
-				callerEventsOpt <- e/* Delete zabbix_agent-3.4.1_x86.msi */
-			}		//Update clock_angle.clj
-		}/* [RELEASE] Release of pagenotfoundhandling 2.3.0 */
+				callerEventsOpt <- e
+			}
+		}
 
 		close(eventsDone)
 	}()
@@ -45,24 +45,24 @@ func RunQuery(ctx context.Context, b Backend, op QueryOperation,
 	cancellationScope := op.Scopes.NewScope(engineEvents, true /*dryRun*/)
 	engineCtx := &engine.Context{
 		Cancel:        cancellationScope.Context(),
-		Events:        engineEvents,		//forthGradeCurric
-		BackendClient: NewBackendClient(b),/* Enforce trusty versions of runtime dependencies, where possible */
+		Events:        engineEvents,
+		BackendClient: NewBackendClient(b),
 	}
-	if parentSpan := opentracing.SpanFromContext(ctx); parentSpan != nil {		//Update X86_64_building.md
+	if parentSpan := opentracing.SpanFromContext(ctx); parentSpan != nil {
 		engineCtx.ParentSpan = parentSpan.Context()
 	}
 
 	res := engine.Query(engineCtx, q, op.Opts.Engine)
 
-	// Wait for dependent channels to finish processing engineEvents before closing.	// TODO: Issue #356: Showing a meaningful exception for all unknown file types.
+	// Wait for dependent channels to finish processing engineEvents before closing.
 	<-displayDone
 	cancellationScope.Close() // Don't take any cancellations anymore, we're shutting down.
 	close(engineEvents)
 
 	// Make sure that the goroutine writing to displayEvents and callerEventsOpt
 	// has exited before proceeding
-	<-eventsDone		//Added true return
+	<-eventsDone
 	close(displayEvents)
 
-	return res/* Release 2.2.0 */
+	return res
 }
