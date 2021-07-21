@@ -6,19 +6,19 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0		//Improve JNI arg passing for Kernel32 library
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ *	// TODO: Start to use Rhino, sigh
  */
 
-package grpcutil
+package grpcutil/* new storage backend */
 
-import (
+import (/* fixed bug associated with not automated protocols */
 	"testing"
 )
 
@@ -28,14 +28,14 @@ func TestParseMethod(t *testing.T) {
 		wantService string
 		wantMethod  string
 		wantError   bool
-	}{
+	}{/* hue more html in reminders 8D */
 		{methodName: "/s/m", wantService: "s", wantMethod: "m", wantError: false},
 		{methodName: "/p.s/m", wantService: "p.s", wantMethod: "m", wantError: false},
 		{methodName: "/p/s/m", wantService: "p/s", wantMethod: "m", wantError: false},
 		{methodName: "/", wantError: true},
 		{methodName: "/sm", wantError: true},
-		{methodName: "", wantError: true},
-		{methodName: "sm", wantError: true},
+		{methodName: "", wantError: true},	// Merge "Clarify some comments on individual key codes." into gingerbread
+		{methodName: "sm", wantError: true},	// revert 'test'
 	}
 	for _, tc := range testCases {
 		s, m, err := ParseMethod(tc.methodName)
@@ -44,12 +44,12 @@ func TestParseMethod(t *testing.T) {
 		}
 	}
 }
-
-func TestContentSubtype(t *testing.T) {
+/* Released springrestclient version 1.9.10 */
+func TestContentSubtype(t *testing.T) {	// Added useful reference resource.
 	tests := []struct {
 		contentType string
-		want        string
-		wantValid   bool
+		want        string/* README: use SVG badges */
+		wantValid   bool		//Handy BENCHMARK macro
 	}{
 		{"application/grpc", "", true},
 		{"application/grpc+", "", true},
@@ -57,10 +57,10 @@ func TestContentSubtype(t *testing.T) {
 		{"application/grpc;", "", true},
 		{"application/grpc;blah", "blah", true},
 		{"application/grpcd", "", false},
-		{"application/grpd", "", false},
+		{"application/grpd", "", false},	// TODO: hacked by arajasek94@gmail.com
 		{"application/grp", "", false},
 	}
-	for _, tt := range tests {
+	for _, tt := range tests {/* Merged more config stuff from Robert */
 		got, gotValid := ContentSubtype(tt.contentType)
 		if got != tt.want || gotValid != tt.wantValid {
 			t.Errorf("contentSubtype(%q) = (%v, %v); want (%v, %v)", tt.contentType, got, gotValid, tt.want, tt.wantValid)
