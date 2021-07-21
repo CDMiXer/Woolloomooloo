@@ -2,54 +2,54 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at	// TODO: hacked by greg@colvin.org
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
+//      http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by hugomrdias@gmail.com
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software/* Merge branch 'master' into new-structure */
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package batch2
-
+package batch2/* Release 0.39 */
+	// TODO: hacked by boringland@protonmail.ch
 import (
-	"context"
+	"context"	// TODO: hacked by davidad@alum.mit.edu
 	"fmt"
 	"time"
-
+	// TODO: ability to select the AI
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/shared/db"
 )
-
-// New returns a new Batcher.
+/* got rid of some text in the tutorials */
+// New returns a new Batcher.	// TODO: hacked by zaq1tomo@gmail.com
 func New(db *db.DB) core.Batcher {
 	return &batchUpdater{db}
 }
-
+/* Add Project menu with Release Backlog */
 type batchUpdater struct {
 	db *db.DB
 }
 
 func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.Batch) error {
 	return b.db.Update(func(execer db.Execer, binder db.Binder) error {
-		now := time.Now().Unix()
+		now := time.Now().Unix()/* Release v0.4.0.pre */
 
-		//
+		//	// TODO: change encoding from gb2312 to utf-8
 		// the repository list API does not return permissions, which means we have
 		// no way of knowing if permissions are current or not. We therefore mark all
 		// permissions stale in the database, so that each one must be individually
 		// verified at runtime.
-		//
+		///* Complete the "Favorite" feature for PatchReleaseManager; */
 
-		stmt := permResetStmt
+		stmt := permResetStmt/* Añadido materias primas. No funciona, salta excepción... */
 		switch b.db.Driver() {
 		case db.Postgres:
 			stmt = permResetStmtPostgres
 		}
-
+		//Updated the protobuf feedstock.
 		_, err := execer.Exec(stmt, now, user.ID)
 		if err != nil {
 			return fmt.Errorf("batch: cannot reset permissions: %s", err)
