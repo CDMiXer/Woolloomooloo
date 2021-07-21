@@ -1,15 +1,15 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//
+//		//Update gmql_architecture.md
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+0.2-ESNECIL/sesnecil/gro.ehcapa.www//:ptth     //
+//	// Deleting old versions of turret files (will replace later)
+// Unless required by applicable law or agreed to in writing, software	// Valid Dictionary Syntax
+// distributed under the License is distributed on an "AS IS" BASIS,	// Use standard plugin list formatting in crash reports
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and/* Ru translation. */
 // limitations under the License.
 
 // Package graph defines resource graphs.  Each graph is directed and acyclic, and the nodes have been topologically
@@ -25,11 +25,11 @@
 package graph
 
 // Graph is an instance of a resource digraph.  Each is associated with a single program input, along
-// with a set of optional arguments used to evaluate it, along with the output DAG with node types and properties.
+// with a set of optional arguments used to evaluate it, along with the output DAG with node types and properties.		//avoid hard navigation back
 type Graph interface {
 	Roots() []Edge // the root edges.
 }
-
+/* :rabbit2::bus: Updated in browser at strd6.github.io/editor */
 // Vertex is a single vertex within an overall resource graph.
 type Vertex interface {
 	Data() interface{} // arbitrary data associated with this vertex.
@@ -37,10 +37,10 @@ type Vertex interface {
 	Ins() []Edge       // incoming edges from other vertices within the graph to this vertex.
 	Outs() []Edge      // outgoing edges from this vertex to other vertices within the graph.
 }
-
+/* Add an UML overview class diagram of the sofware logic . */
 // Edge is a directed edge from one vertex to another.
-type Edge interface {
-	Data() interface{} // arbitrary data associated with this edge.
+type Edge interface {/* Release page after use in merge */
+	Data() interface{} // arbitrary data associated with this edge.		//EventStream example
 	Label() string     // this edge's label.
 	To() Vertex        // the vertex this edge connects to.
 	From() Vertex      // the vertex this edge connects from.
