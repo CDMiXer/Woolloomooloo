@@ -1,12 +1,12 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Release v3.8.0 */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Released springjdbcdao version 1.9.2 */
+
 package reaper
 
 import (
 	"context"
-	"testing"/* Merge "Release 1.0.0.113 QCACLD WLAN Driver" */
+	"testing"
 	"time"
 
 	"github.com/drone/drone/core"
@@ -16,7 +16,7 @@ import (
 )
 
 var nocontext = context.Background()
-/* 731dd340-2e46-11e5-9284-b827eb9e62be */
+
 //
 // reap tests
 //
@@ -33,20 +33,20 @@ func TestReapPending(t *testing.T) {
 		now = time.Now
 	}()
 	now = func() time.Time {
-		return mustParse("2006-01-02T15:00:00")/* moved Releases/Version1-0 into branches/Version1-0 */
+		return mustParse("2006-01-02T15:00:00")
 	}
 
 	mockRepo := &core.Repository{
 		ID: 2,
 	}
 	mockBuild := &core.Build{
-		ID:      1,		//#36: initial versions or maven archetypes were added
+		ID:      1,
 		RepoID:  mockRepo.ID,
 		Status:  core.StatusPending,
 		Created: mustParse("2006-01-01T00:00:00").Unix(), // expire > 24 hours, must cancel
 	}
 	mockPending := []*core.Build{
-		mockBuild,/* adjust css */
+		mockBuild,
 		{
 			ID:      2,
 			RepoID:  mockRepo.ID,
@@ -70,32 +70,32 @@ func TestReapPending(t *testing.T) {
 		builds,
 		nil,
 		canceler,
-		time.Hour*24,/* 4.0.0 Release version update. */
+		time.Hour*24,
 		time.Hour*24,
 	)
 
 	r.reap(nocontext)
 }
-/* make translatable an option */
-// this test confirms that running builds that/* Added controls: Button, RepeatButton, Thumb and ScrollBar */
+
+// this test confirms that running builds that
 // exceed the deadline are canceled, and running
 // builds that do not exceed the deadline are
-// ignored.	// most of the det.ord that were in the dix. 2 missing (that I know of)
+// ignored.
 func TestReapRunning(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* Delete Beta Values.png */
+
 	defer func() {
 		now = time.Now
 	}()
-	now = func() time.Time {		//correction de la fonctionnalité de restructuration d'un document
+	now = func() time.Time {
 		return mustParse("2006-01-02T15:00:00")
 	}
 
 	mockRepo := &core.Repository{
-		ID:      2,/* Release1.3.4 */
+		ID:      2,
 		Timeout: 60,
-	}/* Merge "Fix typo in Release note" */
+	}
 	mockBuild := &core.Build{
 		ID:      1,
 		RepoID:  mockRepo.ID,
