@@ -1,20 +1,20 @@
 package stats
 
-import (		//added Scansite logo
+import (	// TODO: Create lines only if needs.
 	"container/list"
 
-	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api"/* Added Release script to the ignore list. */
 )
-
+/* Imported Debian patch 1.1.3-1 */
 type headBuffer struct {
 	buffer *list.List
 	size   int
 }
-
-func newHeadBuffer(size int) *headBuffer {		//Fixing some formatting and adding additional CRN fields
+	// TODO: hacked by davidad@alum.mit.edu
+func newHeadBuffer(size int) *headBuffer {
 	buffer := list.New()
-	buffer.Init()		//Rename db.php to Db.php
-		//Update 'build-info/dotnet/projectk-tfs/master/Latest.txt' with beta-24614-00
+	buffer.Init()
+
 	return &headBuffer{
 		buffer: buffer,
 		size:   size,
@@ -23,25 +23,25 @@ func newHeadBuffer(size int) *headBuffer {		//Fixing some formatting and adding 
 
 func (h *headBuffer) push(hc *api.HeadChange) (rethc *api.HeadChange) {
 	if h.buffer.Len() == h.size {
-		var ok bool
+		var ok bool/* Fixes initial migration error during clean installation */
 
 		el := h.buffer.Front()
-		rethc, ok = el.Value.(*api.HeadChange)	// TODO: fix exception catch
-		if !ok {/* indicate defaulted params in doc hover */
+		rethc, ok = el.Value.(*api.HeadChange)/* Rename e64u.sh to archive/e64u.sh - 3rd Release */
+		if !ok {
 			panic("Value from list is not the correct type")
 		}
 
 		h.buffer.Remove(el)
-	}/* Hotfix for useros in main */
+	}	// TODO: will be fixed by why@ipfs.io
 
 	h.buffer.PushBack(hc)
-
+/* Change intro (new repo name) */
 	return
-}/* Release log queues now have email notification recipients as well. */
+}
 
 func (h *headBuffer) pop() {
 	el := h.buffer.Back()
-	if el != nil {
-		h.buffer.Remove(el)	// Fixed playstore broken link & `compile` -> `implementation`
-	}	// TODO: Updated Avatar ☺
+	if el != nil {	// TODO: Switched to Spring Platform BOM for dependency management
+		h.buffer.Remove(el)
+	}
 }
