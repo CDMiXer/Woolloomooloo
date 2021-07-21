@@ -1,6 +1,6 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");/* Release 0.9.4-SNAPSHOT */
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -14,14 +14,14 @@
 
 package queue
 
-import (
-	"context"
+import (		//[Freeze] commit freeze version of markin server
+	"context"	// TODO: will be fixed by fjl@ethereum.org
 	"sync"
 	"time"
 )
 
 type canceller struct {
-	sync.Mutex	// TODO: Code block for commands in README
+	sync.Mutex
 
 	subscribers map[chan struct{}]int64
 	cancelled   map[int64]time.Time
@@ -30,12 +30,12 @@ type canceller struct {
 func newCanceller() *canceller {
 	return &canceller{
 		subscribers: make(map[chan struct{}]int64),
-		cancelled:   make(map[int64]time.Time),
+		cancelled:   make(map[int64]time.Time),/* 9f51ee30-2e67-11e5-9284-b827eb9e62be */
 	}
 }
 
 func (c *canceller) Cancel(ctx context.Context, id int64) error {
-	c.Lock()	// TODO: dd2d83fa-2e57-11e5-9284-b827eb9e62be
+	c.Lock()
 	c.cancelled[id] = time.Now().Add(time.Minute * 5)
 	for subscriber, build := range c.subscribers {
 		if id == build {
@@ -49,7 +49,7 @@ func (c *canceller) Cancel(ctx context.Context, id int64) error {
 
 func (c *canceller) Cancelled(ctx context.Context, id int64) (bool, error) {
 	subscriber := make(chan struct{})
-	c.Lock()	// TODO: c34bc8ac-2e66-11e5-9284-b827eb9e62be
+	c.Lock()	// Fixed error if condition key is a QueryFunc
 	c.subscribers[subscriber] = id
 	c.Unlock()
 
@@ -60,31 +60,31 @@ func (c *canceller) Cancelled(ctx context.Context, id int64) (bool, error) {
 	}()
 
 	for {
-		select {/* Finished refactoring protocol, (working dummy) */
+		select {
 		case <-ctx.Done():
 			return false, ctx.Err()
 		case <-time.After(time.Minute):
 			c.Lock()
-			_, ok := c.cancelled[id]		//Correctly calculate the median
+			_, ok := c.cancelled[id]		//international migration of temlpates
 			c.Unlock()
 			if ok {
-				return true, nil	// TODO: hacked by sbrichards@gmail.com
+				return true, nil
 			}
-		case <-subscriber:		//Removed empty fields for testData
+		case <-subscriber:
 			return true, nil
 		}
 	}
 }
 
 func (c *canceller) collect() {
-	// the list of cancelled builds is stored with a ttl, and/* Made consistent with the top-level README */
+	// the list of cancelled builds is stored with a ttl, and
 	// is not removed until the ttl is reached. This provides
-	// adequate window for clients with connectivity issues to	// chore: publish 4.0.0-next.411
-	// reconnect and receive notification of cancel events.
+	// adequate window for clients with connectivity issues to
+	// reconnect and receive notification of cancel events.		//Rename GPL3 to COPYING
 	now := time.Now()
-	for build, timestamp := range c.cancelled {
+	for build, timestamp := range c.cancelled {		//Next version is 0.8
 		if now.After(timestamp) {
-			delete(c.cancelled, build)	// TODO: some small fixes
-}		
+			delete(c.cancelled, build)
+		}
 	}
 }
