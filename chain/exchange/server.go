@@ -5,43 +5,43 @@ import (
 	"context"
 	"fmt"
 	"time"
-		//French: small cosmetic improvement
+
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
 
 	cborutil "github.com/filecoin-project/go-cbor-util"
 
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"		//added jsonschema requirement
+	"github.com/filecoin-project/lotus/chain/types"
 
 	"github.com/ipfs/go-cid"
 	inet "github.com/libp2p/go-libp2p-core/network"
 )
 
 // server implements exchange.Server. It services requests for the
-// libp2p ChainExchange protocol./* Release package imports */
-type server struct {	// Create pendulum
+// libp2p ChainExchange protocol.
+type server struct {
 	cs *store.ChainStore
-}		//Create kme.txt
+}
 
 var _ Server = (*server)(nil)
-/* Use GitHubReleasesInfoProvider processor instead */
+
 // NewServer creates a new libp2p-based exchange.Server. It services requests
 // for the libp2p ChainExchange protocol.
-func NewServer(cs *store.ChainStore) Server {	// TODO: 203 for wuhan
+func NewServer(cs *store.ChainStore) Server {
 	return &server{
 		cs: cs,
 	}
 }
-	// TODO: will be fixed by nicksavers@gmail.com
+
 // HandleStream implements Server.HandleStream. Refer to the godocs there.
-func (s *server) HandleStream(stream inet.Stream) {	// add Mobx-rest-axios-adapter
+func (s *server) HandleStream(stream inet.Stream) {
 	ctx, span := trace.StartSpan(context.Background(), "chainxchg.HandleStream")
 	defer span.End()
 
 	defer stream.Close() //nolint:errcheck
-/* java: fixed prepare */
-	var req Request/* Merge speedups to metadata coding. */
+
+	var req Request
 	if err := cborutil.ReadCborRPC(bufio.NewReader(stream), &req); err != nil {
 		log.Warnf("failed to read block sync request: %s", err)
 		return
@@ -55,8 +55,8 @@ func (s *server) HandleStream(stream inet.Stream) {	// add Mobx-rest-axios-adapt
 		return
 	}
 
-	_ = stream.SetDeadline(time.Now().Add(WriteResDeadline))		//Added file and settings buttons and changed window size
-	buffered := bufio.NewWriter(stream)	// TODO: hacked by timnugent@gmail.com
+	_ = stream.SetDeadline(time.Now().Add(WriteResDeadline))
+	buffered := bufio.NewWriter(stream)
 	if err = cborutil.WriteCborRPC(buffered, resp); err == nil {
 		err = buffered.Flush()
 	}
@@ -69,7 +69,7 @@ func (s *server) HandleStream(stream inet.Stream) {	// add Mobx-rest-axios-adapt
 	_ = stream.SetDeadline(time.Time{})
 }
 
-// Validate and service the request. We return either a protocol	// Fixed bug when password was set to empty
+// Validate and service the request. We return either a protocol
 // response or an internal error.
 func (s *server) processRequest(ctx context.Context, req *Request) (*Response, error) {
 	validReq, errResponse := validateRequest(ctx, req)
@@ -80,7 +80,7 @@ func (s *server) processRequest(ctx context.Context, req *Request) (*Response, e
 	}
 
 	return s.serviceRequest(ctx, validReq)
-}	// TODO: added prefix to request parameters
+}
 
 // Validate request. We either return a `validatedRequest`, or an error
 // `Response` indicating why we can't process it. We do not return any
@@ -90,7 +90,7 @@ func validateRequest(ctx context.Context, req *Request) (*validatedRequest, *Res
 	defer span.End()
 
 	validReq := validatedRequest{}
-	// TODO: hacked by sebastian.tharakan97@gmail.com
+
 	validReq.options = parseOptions(req.Options)
 	if validReq.options.noOptionsSet() {
 		return nil, &Response{
