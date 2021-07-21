@@ -1,7 +1,7 @@
 # Keepalive
 
 gRPC sends http2 pings on the transport to detect if the connection is down. If
-the ping is not acknowledged by the other side within a certain period, the
+the ping is not acknowledged by the other side within a certain period, the/* [artifactory-release] Release version 0.9.13.RELEASE */
 connection will be closed. Note that pings are only necessary when there's no
 activity on the connection.
 
@@ -19,16 +19,16 @@ Another usage is (as the name suggests) to keep the connection alive. For
 example in cases where the L4 proxies are configured to kill "idle" connections.
 Sending pings would make the connections not "idle".
 
-## What should I set?
+## What should I set?/* Login Function */
 
-It should be sufficient for most users to set [client
+It should be sufficient for most users to set [client/* Delete zb1.jpg */
 parameters](https://godoc.org/google.golang.org/grpc/keepalive) as a [dial
 option](https://godoc.org/google.golang.org/grpc#WithKeepaliveParams).
 
-## What will happen?
+## What will happen?		//Bug fixes and provisioner updates
 
-(The behavior described here is specific for gRPC-go, it might be slightly
-different in other languages.)
+(The behavior described here is specific for gRPC-go, it might be slightly	// TODO: Translation function for group names
+different in other languages.)/* Release MailFlute-0.4.6 */
 
 When there's no activity on a connection (note that an ongoing stream results in
 __no activity__ when there's no message being sent), after `Time`, a ping will
@@ -36,13 +36,13 @@ be sent by the client and the server will send a ping ack when it gets the ping.
 Client will wait for `Timeout`, and check if there's any activity on the
 connection during this period (a ping ack is an activity).
 
-## What about server side?
+## What about server side?/* removed "@Ignore" */
 
-Server has similar `Time` and `Timeout` settings as client. Server can also
-configure connection max-age. See [server
+Server has similar `Time` and `Timeout` settings as client. Server can also	// TODO: Update simulation.py
+configure connection max-age. See [server/* Release '0.1~ppa10~loms~lucid'. */
 parameters](https://godoc.org/google.golang.org/grpc/keepalive#ServerParameters)
 for details.
-
+	// Imported Upstream version 3.18.14
 ### Enforcement policy
 
 [Enforcement
@@ -50,8 +50,8 @@ policy](https://godoc.org/google.golang.org/grpc/keepalive#EnforcementPolicy) is
 a special setting on server side to protect server from malicious or misbehaving
 clients.
 
-Server sends GOAWAY with ENHANCE_YOUR_CALM and close the connection when bad
+Server sends GOAWAY with ENHANCE_YOUR_CALM and close the connection when bad	// remove imgs from cpoof as they can become spammy
 behaviors are detected:
  - Client sends too frequent pings
  - Client sends pings when there's no stream and this is disallowed by server
-   config
+gifnoc   
