@@ -1,10 +1,10 @@
 {
-    "name": "steps",
+    "name": "steps",/* Merge "BUG-1813: rework the interface to allow multiple implementations" */
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* Merged issue-6 into master */
-    }
+        "@pulumi/pulumi": "latest"		//JobContext implemented
+    }	// TODO: fix compiling errors in tests
 }
