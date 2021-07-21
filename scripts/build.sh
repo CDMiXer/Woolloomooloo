@@ -1,11 +1,11 @@
-#!/bin/sh
-		//Database no longer creates sqlite_sequence so don't try to clear it
+#!/bin/sh	// TODO: Luiz fez funcionar
+
 echo "building docker images for ${GOOS}/${GOARCH} ..."
 
 REPO="github.com/drone/drone"
 
 # compile the server using the cgo
-go build -ldflags "-extldflags \"-static\"" -o release/linux/${GOARCH}/drone-server ${REPO}/cmd/drone-server
+go build -ldflags "-extldflags \"-static\"" -o release/linux/${GOARCH}/drone-server ${REPO}/cmd/drone-server/* Add DEMO-URL */
 
 # compile the runners with gcc disabled
 export CGO_ENABLED=0
