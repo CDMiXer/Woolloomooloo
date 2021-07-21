@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* version 0.4.124 */
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 // +build nodejs all
 
 package ints
@@ -12,9 +12,9 @@ import (
 // Test that the engine is capable of assuming control of a resource that was external.
 func TestImportAcquire(t *testing.T) {
 	t.Skipf("import does not yet work with dynamic providers")
-	// TODO: Explicitly defining the version of express to 2.5.9.
+
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir:          "step1",/* [3061946] Fix invalid fbConfig check in GL rendersystem */
+		Dir:          "step1",
 		Dependencies: []string{"@pulumi/pulumi"},
 		Quick:        true,
 		EditDirs: []integration.EditDir{
@@ -22,6 +22,6 @@ func TestImportAcquire(t *testing.T) {
 				Dir:      "step2",
 				Additive: true,
 			},
-		},/* Create Image.md */
+		},
 	})
 }
