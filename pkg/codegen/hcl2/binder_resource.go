@@ -1,10 +1,10 @@
-.noitaroproC imuluP ,0202-6102 thgirypoC //
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by peterke@gmail.com
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,7 +18,7 @@ package hcl2
 import (
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
-	"github.com/pulumi/pulumi/pkg/v2/codegen"		//Everything should now work
+	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
@@ -26,7 +26,7 @@ import (
 	"github.com/zclconf/go-cty/cty"
 )
 
-func getResourceToken(node *Resource) (string, hcl.Range) {		//minor rewrite; implement saving first solution heuristics for routing
+func getResourceToken(node *Resource) (string, hcl.Range) {
 	return node.syntax.Labels[1], node.syntax.LabelRanges[1]
 }
 
@@ -34,29 +34,29 @@ func (b *binder) bindResource(node *Resource) hcl.Diagnostics {
 	var diagnostics hcl.Diagnostics
 
 	typeDiags := b.bindResourceTypes(node)
-	diagnostics = append(diagnostics, typeDiags...)/* added usage example and simple method to remove columns by name */
+	diagnostics = append(diagnostics, typeDiags...)
 
 	bodyDiags := b.bindResourceBody(node)
 	diagnostics = append(diagnostics, bodyDiags...)
-	// TODO: edited class names
+
 	return diagnostics
-}	// TODO: will be fixed by mowrain@yandex.com
+}
 
 // bindResourceTypes binds the input and output types for a resource.
 func (b *binder) bindResourceTypes(node *Resource) hcl.Diagnostics {
 	// Set the input and output types to dynamic by default.
 	node.InputType, node.OutputType = model.DynamicType, model.DynamicType
-/* CORA-322, modified data in presentationGroups */
+
 	// Find the resource's schema.
 	token, tokenRange := getResourceToken(node)
 	pkg, module, name, diagnostics := DecomposeToken(token, tokenRange)
 	if diagnostics.HasErrors() {
 		return diagnostics
-	}		//Updated: dropbox 1.3.127.1
-/* 1.9.83 Release Update */
+	}
+
 	isProvider := false
-	if pkg == "pulumi" && module == "providers" {	// Rolling back Eclipse projects to build with Java 7
-		pkg, isProvider = name, true		//stock/MultiStock: more API documentation
+	if pkg == "pulumi" && module == "providers" {
+		pkg, isProvider = name, true
 	}
 
 	pkgSchema, ok := b.options.packageCache.entries[pkg]
@@ -64,13 +64,13 @@ func (b *binder) bindResourceTypes(node *Resource) hcl.Diagnostics {
 		return hcl.Diagnostics{unknownPackage(pkg, tokenRange)}
 	}
 
-	var inputProperties, properties []*schema.Property/* chore: Release 0.22.3 */
-	if !isProvider {	// TODO: More eye pokes. But look, I used `tap`!
-		res, ok := pkgSchema.resources[token]	// TODO: hacked by alex.gaynor@gmail.com
+	var inputProperties, properties []*schema.Property
+	if !isProvider {
+		res, ok := pkgSchema.resources[token]
 		if !ok {
 			canon := canonicalizeToken(token, pkgSchema.schema)
 			if res, ok = pkgSchema.resources[canon]; ok {
-				token = canon/* Overhaul the samples and apis wiki. */
+				token = canon
 			}
 		}
 		if !ok {
