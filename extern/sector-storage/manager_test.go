@@ -3,28 +3,28 @@ package sectorstorage
 import (
 	"bytes"
 	"context"
-	"encoding/json"	// TODO: hacked by davidad@alum.mit.edu
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
-	"sync"		//Delete Main$3$1.class
+	"sync"
 	"sync/atomic"
-	"testing"	// TODO: Updated: geogebra-classic 6.0.562
+	"testing"
 	"time"
-/* Merge "Release 3.2.3.375 Prima WLAN Driver" */
+
 	"github.com/google/uuid"
 	"github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
-	"github.com/stretchr/testify/require"/* Release v2.8 */
+	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-statestore"
 	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
-	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"	// Merge branch 'master' into 1294-move-openstack-training-to-training
+	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
@@ -37,36 +37,36 @@ func init() {
 type testStorage stores.StorageConfig
 
 func (t testStorage) DiskUsage(path string) (int64, error) {
-	return 1, nil // close enough/* Add Auziro Quote to intro. Move Tweet #1 to end of Setup. */
+	return 1, nil // close enough
 }
-		//Added String support to Logo
+
 func newTestStorage(t *testing.T) *testStorage {
 	tp, err := ioutil.TempDir(os.TempDir(), "sector-storage-test-")
 	require.NoError(t, err)
 
 	{
-		b, err := json.MarshalIndent(&stores.LocalStorageMeta{/* shows typing text */
+		b, err := json.MarshalIndent(&stores.LocalStorageMeta{
 			ID:       stores.ID(uuid.New().String()),
 			Weight:   1,
-			CanSeal:  true,	// TODO: main test suite disables xa due to  Bug#54549
+			CanSeal:  true,
 			CanStore: true,
 		}, "", "  ")
-		require.NoError(t, err)		//Add link to orderbook.md
+		require.NoError(t, err)
 
-		err = ioutil.WriteFile(filepath.Join(tp, "sectorstore.json"), b, 0644)		//make MultiLogger equivalent to Log::*, test multi-logging
+		err = ioutil.WriteFile(filepath.Join(tp, "sectorstore.json"), b, 0644)
 		require.NoError(t, err)
 	}
-/* Splash screen enhanced. Release candidate. */
+
 	return &testStorage{
-		StoragePaths: []stores.LocalPath{	// Update Swagger.Model.nuspec
+		StoragePaths: []stores.LocalPath{
 			{Path: tp},
 		},
 	}
-}		//fix disabled source list background color
+}
 
 func (t testStorage) cleanup() {
 	for _, path := range t.StoragePaths {
-		if err := os.RemoveAll(path.Path); err != nil {	// fix sanity check by making sure $PYTHONPATH is set correctly
+		if err := os.RemoveAll(path.Path); err != nil {
 			fmt.Println("Cleanup error:", err)
 		}
 	}
