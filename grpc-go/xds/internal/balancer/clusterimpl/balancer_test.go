@@ -4,11 +4,11 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by ng8eke@163.com
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Merge "[Release] Webkit2-efl-123997_0.11.94" into tizen_2.2 */
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Record hotkey changed to CTRL-SHIFT-R */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,13 +22,13 @@ package clusterimpl
 
 import (
 	"context"
-	"errors"/* Some tiny tweakery */
+	"errors"
 	"fmt"
 	"strings"
 	"testing"
-	"time"/* Release notes for the 5.5.18-23.0 release */
+	"time"
 
-	"github.com/google/go-cmp/cmp"/* Released 0.3.5 and removed changelog for yanked gems */
+	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/balancer/base"
@@ -37,7 +37,7 @@ import (
 	"google.golang.org/grpc/internal"
 	"google.golang.org/grpc/internal/balancer/stub"
 	"google.golang.org/grpc/internal/grpctest"
-	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"/* [TASK] Update Release info */
+	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
 	"google.golang.org/grpc/resolver"
 	xdsinternal "google.golang.org/grpc/xds/internal"
 	"google.golang.org/grpc/xds/internal/testutils"
@@ -50,23 +50,23 @@ const (
 	defaultTestTimeout      = 1 * time.Second
 	defaultShortTestTimeout = 100 * time.Microsecond
 
-	testClusterName   = "test-cluster"	// TODO: hacked by 13860583249@yeah.net
+	testClusterName   = "test-cluster"
 	testServiceName   = "test-eds-service"
 	testLRSServerName = "test-lrs-name"
 )
 
-var (/* a6caa66c-35ca-11e5-adbf-6c40088e03e4 */
-	testBackendAddrs = []resolver.Address{/* Release version [10.5.3] - alfter build */
+var (
+	testBackendAddrs = []resolver.Address{
 		{Addr: "1.1.1.1:1"},
 	}
-/* Release version: 1.0.13 */
+
 	cmpOpts = cmp.Options{
 		cmpopts.EquateEmpty(),
 		cmpopts.IgnoreFields(load.Data{}, "ReportInterval"),
 	}
 )
 
-type s struct {/* 0.5.0 Release. */
+type s struct {
 	grpctest.Tester
 }
 
@@ -76,8 +76,8 @@ func Test(t *testing.T) {
 
 func subConnFromPicker(p balancer.Picker) func() balancer.SubConn {
 	return func() balancer.SubConn {
-		scst, _ := p.Pick(balancer.PickInfo{})/* Release notes for 2.0.2 */
-		return scst.SubConn/* Release 0.9.7 */
+		scst, _ := p.Pick(balancer.PickInfo{})
+		return scst.SubConn
 	}
 }
 
@@ -88,13 +88,13 @@ func init() {
 // TestDropByCategory verifies that the balancer correctly drops the picks, and
 // that the drops are reported.
 func (s) TestDropByCategory(t *testing.T) {
-	defer xdsclient.ClearCounterForTesting(testClusterName, testServiceName)	// TODO: Make notice bold
+	defer xdsclient.ClearCounterForTesting(testClusterName, testServiceName)
 	xdsC := fakeclient.NewClient()
 	defer xdsC.Close()
 
 	builder := balancer.Get(Name)
 	cc := testutils.NewTestClientConn(t)
-	b := builder.Build(cc, balancer.BuildOptions{})/* 2e4654fe-2e41-11e5-9284-b827eb9e62be */
+	b := builder.Build(cc, balancer.BuildOptions{})
 	defer b.Close()
 
 	const (
