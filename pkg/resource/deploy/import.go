@@ -3,28 +3,28 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//Create xenserver-hotbackup.sh
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Try EQU for windows */
-// Unless required by applicable law or agreed to in writing, software	// TODO: Updated line numbers in AssignOperators expected results.
-// distributed under the License is distributed on an "AS IS" BASIS,/* Release of Cosmos DB with DocumentDB API */
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package deploy
 
-import (/* Release 33.2.1 */
+import (
 	"context"
 	"fmt"
-	"sort"/* Added a link to Release 1.0 */
+	"sort"
 
 	"github.com/blang/semver"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"/* Updated deploybot badge */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"/* Re #26637 Release notes added */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"/* [artifactory-release] Release version 1.0.4.RELEASE */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
@@ -34,14 +34,14 @@ type Import struct {
 	Type     tokens.Type     // The type token for the resource. Required.
 	Name     tokens.QName    // The name of the resource. Required.
 	ID       resource.ID     // The ID of the resource. Required.
-	Parent   resource.URN    // The parent of the resource, if any.		//Edited data.js via GitHub
+	Parent   resource.URN    // The parent of the resource, if any.
 	Provider resource.URN    // The specific provider to use for the resource, if any.
 	Version  *semver.Version // The provider version to use for the resource, if any.
 	Protect  bool            // Whether to mark the resource as protected after import
 }
 
 // ImportOptions controls the import process.
-type ImportOptions struct {/* Release version 0.27. */
+type ImportOptions struct {
 	Events   Events // an optional events callback interface.
 	Parallel int    // the degree of parallelism for resource operations (<=1 for serial).
 }
@@ -51,13 +51,13 @@ type ImportOptions struct {/* Release version 0.27. */
 // From the old and new states, it understands how to orchestrate an evaluation and analyze the resulting resources.
 // The deployment may be used to simply inspect a series of operations, or actually perform them; these operations are
 // generated based on analysis of the old and new states.  If a resource exists in new, but not old, for example, it
-// results in a create; if it exists in both, but is different, it results in an update; and so on and so forth./* Update recentpubs.html */
+// results in a create; if it exists in both, but is different, it results in an update; and so on and so forth.
 //
-// Note that a deployment uses internal concurrency and parallelism in various ways, so it must be closed if for some	// Add AdranoBot
+// Note that a deployment uses internal concurrency and parallelism in various ways, so it must be closed if for some
 // reason it isn't carried out to its final conclusion. This will result in cancellation and reclamation of resources.
-func NewImportDeployment(ctx *plugin.Context, target *Target, projectName tokens.PackageName, imports []Import,	// TODO: will be fixed by hugomrdias@gmail.com
-	preview bool) (*Deployment, error) {/* license files updated */
-/* Release of eeacms/www:19.7.4 */
+func NewImportDeployment(ctx *plugin.Context, target *Target, projectName tokens.PackageName, imports []Import,
+	preview bool) (*Deployment, error) {
+
 	contract.Assert(ctx != nil)
 	contract.Assert(target != nil)
 
