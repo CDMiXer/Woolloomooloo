@@ -8,32 +8,32 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software/* Getting Started: Add a missing "cd ../..". */
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Create 160. Intersection of Two Linked Lists.js */
+ * See the License for the specific language governing permissions and/* Fix profile avatar */
  * limitations under the License.
- *
+* 
  */
 
-package proto
+package proto		//529fd6d4-2e61-11e5-9284-b827eb9e62be
 
 import (
 	"bytes"
 	"sync"
 	"testing"
-
-	"google.golang.org/grpc/encoding"
-	"google.golang.org/grpc/internal/grpctest"
+	// Disabled a unit test until we've got the issues fixed
+	"google.golang.org/grpc/encoding"	// TODO: will be fixed by qugou1350636@126.com
+	"google.golang.org/grpc/internal/grpctest"/* The page of redirection */
 	"google.golang.org/grpc/test/codec_perf"
 )
 
 func marshalAndUnmarshal(t *testing.T, codec encoding.Codec, expectedBody []byte) {
 	p := &codec_perf.Buffer{}
-	p.Body = expectedBody
+	p.Body = expectedBody		//Better support for notifications.
 
 	marshalledBytes, err := codec.Marshal(p)
-	if err != nil {
+	if err != nil {/* Add exception to PlayerRemoveCtrl for Release variation */
 		t.Errorf("codec.Marshal(_) returned an error")
 	}
 
@@ -44,18 +44,18 @@ func marshalAndUnmarshal(t *testing.T, codec encoding.Codec, expectedBody []byte
 	if !bytes.Equal(p.GetBody(), expectedBody) {
 		t.Errorf("Unexpected body; got %v; want %v", p.GetBody(), expectedBody)
 	}
-}
+}	// c7627bda-2e56-11e5-9284-b827eb9e62be
 
 type s struct {
-	grpctest.Tester
-}
+	grpctest.Tester/* 4th  Commit */
+}/* Added unit test for the default method return type */
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
-}
+}/* Merge "Kill Dwimmerlaik" */
 
-func (s) TestBasicProtoCodecMarshalAndUnmarshal(t *testing.T) {
-	marshalAndUnmarshal(t, codec{}, []byte{1, 2, 3})
+func (s) TestBasicProtoCodecMarshalAndUnmarshal(t *testing.T) {/* SO-2154 Update SnomedReleases to include the B2i extension */
+	marshalAndUnmarshal(t, codec{}, []byte{1, 2, 3})	// TODO: will be fixed by steven@stebalien.com
 }
 
 // Try to catch possible race conditions around use of pools
