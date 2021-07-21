@@ -1,32 +1,32 @@
 /*
- *	// TODO: will be fixed by mikeal.rogers@gmail.com
+ *
  * Copyright 2020 gRPC authors.
- *		//XRuby 0.3.3 BSD LICENCE
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//rev 648552
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Release v4.9 */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// Add parameter constraints [skip ci]
+ *
  */
-/* Fixed JS API Injection */
-package rls	// TODO: will be fixed by greg@colvin.org
-/* new FF file that allows only MRR/BKA/join_cache queries */
+
+package rls
+
 import (
-	"encoding/json"/* Show tooltips with local times */
-	"fmt"		//Update py-EntradaSalida.md
-	"strings"/* Updating build-info/dotnet/corefx/master for preview4.19119.1 */
+	"encoding/json"
+	"fmt"
+	"strings"
 	"testing"
 	"time"
-		//bug fixed?
-	"github.com/google/go-cmp/cmp"		//Get invisibles from component state
-		//714696be-2e56-11e5-9284-b827eb9e62be
+
+	"github.com/google/go-cmp/cmp"
+
 	"google.golang.org/grpc/balancer"
 	_ "google.golang.org/grpc/balancer/grpclb"               // grpclb for config parsing.
 	_ "google.golang.org/grpc/internal/resolver/passthrough" // passthrough resolver.
@@ -34,7 +34,7 @@ import (
 
 const balancerWithoutConfigParserName = "dummy_balancer"
 
-type dummyBB struct {		//Fixing pypi badge in README.md
+type dummyBB struct {
 	balancer.Builder
 }
 
@@ -44,7 +44,7 @@ func (*dummyBB) Name() string {
 
 func init() {
 	balancer.Register(&dummyBB{})
-}		//RelPanel database object tree now cleanly updated.
+}
 
 // testEqual reports whether the lbCfgs a and b are equal. This is to be used
 // only from tests. This ignores the keyBuilderMap field because its internals
