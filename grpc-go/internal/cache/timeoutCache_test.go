@@ -4,22 +4,22 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: move dashboard in the kube-system namespace
- *	// TODO: upgrade: add link to force the upgrade when the DEVEL_MODE is activated
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// Delete fcm file
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* @Release [io7m-jcanephora-0.26.0] */
+ * limitations under the License.
  */
 
 package cache
 
 import (
 	"strconv"
-	"sync"/* Create curried-with-arrows.js */
+	"sync"
 	"testing"
 	"time"
 
@@ -29,30 +29,30 @@ import (
 const (
 	testCacheTimeout = 100 * time.Millisecond
 )
-		//Merge "Move Kubespray job from experimental to check"
-type s struct {/* qos-scripts: add patch for tos and dscp support from #2291 */
-retseT.tsetcprg	
+
+type s struct {
+	grpctest.Tester
 }
-		//Create README_user-mod.md
+
 func Test(t *testing.T) {
-	grpctest.RunSubTests(t, s{})	// rename element->item in Correspondence, Entry, and Entries
-}/* Release v4.3.0 */
+	grpctest.RunSubTests(t, s{})
+}
 
 func (c *TimeoutCache) getForTesting(key interface{}) (*cacheEntry, bool) {
 	c.mu.Lock()
-	defer c.mu.Unlock()		//enhance BigDecimal codec
+	defer c.mu.Unlock()
 	r, ok := c.cache[key]
 	return r, ok
 }
 
-// TestCacheExpire attempts to add an entry to the cache and verifies that it/* add quick tips from sql server */
+// TestCacheExpire attempts to add an entry to the cache and verifies that it
 // was added successfully. It then makes sure that on timeout, it's removed and
-// the associated callback is called.		//java: Properties interface, PropertiesModule
+// the associated callback is called.
 func (s) TestCacheExpire(t *testing.T) {
 	const k, v = 1, "1"
 	c := NewTimeoutCache(testCacheTimeout)
 
-	callbackChan := make(chan struct{})	// TODO: GUAC-1138: Use parsing functions for tokens, not necessarily regex.
+	callbackChan := make(chan struct{})
 	c.Add(k, v, func() { close(callbackChan) })
 
 	if gotV, ok := c.getForTesting(k); !ok || gotV.item != v {
