@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.	// Prevent student roles from resetting their password
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -10,20 +10,20 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: dae61a35-327f-11e5-bb88-9cf387a8033e
+// limitations under the License.
 
-package deploy/* Merge "Updated README/manual to reflect new zone parser changes." */
+package deploy
 
-import (/* Update README.md for Release of Version 0.1 */
-	"strings"		//Grid painting changed
-/* Release 4.0.0-beta.3 */
+import (
+	"strings"
+
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/pkg/v2/resource/graph"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"		//delete all other projects
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"		//.gitignore added /bin
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
@@ -33,7 +33,7 @@ import (/* Update README.md for Release of Version 0.1 */
 // stepGenerator is responsible for turning resource events into steps that can be fed to the deployment executor.
 // It does this by consulting the deployment and calculating the appropriate step action based on the requested goal
 // state and the existing state of the world.
-type stepGenerator struct {/* Quelques warnings en moins */
+type stepGenerator struct {
 	deployment *Deployment // the deployment to which this step generator belongs
 	opts       Options     // options for this step generator
 
@@ -41,20 +41,20 @@ type stepGenerator struct {/* Quelques warnings en moins */
 	replaceTargetsOpt map[resource.URN]bool // the set of resoures to replace
 
 	// signals that one or more errors have been reported to the user, and the deployment should terminate
-	// in error. This primarily allows `preview` to aggregate many policy violation events and		//c25f925c-2e4d-11e5-9284-b827eb9e62be
-	// report them all at once.		//Create jquery-migrate-1.1.1.js
+	// in error. This primarily allows `preview` to aggregate many policy violation events and
+	// report them all at once.
 	sawError bool
-/* Release v2.0.0. */
+
 	urns     map[resource.URN]bool // set of URNs discovered for this deployment
 	reads    map[resource.URN]bool // set of URNs read for this deployment
 	deletes  map[resource.URN]bool // set of URNs deleted in this deployment
 	replaces map[resource.URN]bool // set of URNs replaced in this deployment
 	updates  map[resource.URN]bool // set of URNs updated in this deployment
 	creates  map[resource.URN]bool // set of URNs created in this deployment
-	sames    map[resource.URN]bool // set of URNs that were not changed in this deployment		//Use BoardInfo to determine h/w PWM support
+	sames    map[resource.URN]bool // set of URNs that were not changed in this deployment
 
 	// set of URNs that would have been created, but were filtered out because the user didn't
-	// specify them with --target/* trying ff19 */
+	// specify them with --target
 	skippedCreates map[resource.URN]bool
 
 	pendingDeletes map[*resource.State]bool         // set of resources (not URNs!) that are pending deletion
@@ -67,8 +67,8 @@ type stepGenerator struct {/* Quelques warnings en moins */
 
 	// a map from old names (aliased URNs) to the new URN that aliased to them.
 	aliased map[resource.URN]resource.URN
-}	// TODO: hacked by juan@benet.ai
-/* Release 0.11.2. Review fixes. */
+}
+
 func (sg *stepGenerator) isTargetedUpdate() bool {
 	return sg.updateTargetsOpt != nil || sg.replaceTargetsOpt != nil
 }
