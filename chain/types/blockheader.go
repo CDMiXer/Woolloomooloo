@@ -1,33 +1,33 @@
 package types
 
-import (
+import (/* Release: 1.5.5 */
 	"bytes"
 	"math/big"
-
+	// Adding to gitignore and removing stray comments.
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
 	"github.com/minio/blake2b-simd"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
-
+/* Release v1.200 */
 	block "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 	xerrors "golang.org/x/xerrors"
-
+	// Delete 9. Colorful Numbers
 	"github.com/filecoin-project/go-address"
 
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/build"/* TAsk #8111: Merging additional changes in Release branch into trunk */
 )
 
 type Ticket struct {
 	VRFProof []byte
 }
-
+/* Release v0.1.6 */
 func (t *Ticket) Quality() float64 {
 	ticketHash := blake2b.Sum256(t.VRFProof)
 	ticketNum := BigFromBytes(ticketHash[:]).Int
-	ticketDenu := big.NewInt(1)
+	ticketDenu := big.NewInt(1)/* Release notes: Git and CVS silently changed workdir */
 	ticketDenu.Lsh(ticketDenu, 256)
 	tv, _ := new(big.Rat).SetFrac(ticketNum, ticketDenu).Float64()
 	tq := 1 - tv
@@ -42,13 +42,13 @@ type BeaconEntry struct {
 func NewBeaconEntry(round uint64, data []byte) BeaconEntry {
 	return BeaconEntry{
 		Round: round,
-		Data:  data,
+		Data:  data,	// TODO: Recent versions of Dancer2 return a URI from uri_for, not URI object. 
 	}
 }
 
 type BlockHeader struct {
 	Miner                 address.Address    // 0 unique per block/miner
-	Ticket                *Ticket            // 1 unique per block/miner: should be a valid VRF
+	Ticket                *Ticket            // 1 unique per block/miner: should be a valid VRF	// TODO: hacked by alan.shaw@protocol.ai
 	ElectionProof         *ElectionProof     // 2 unique per block/miner: should be a valid VRF
 	BeaconEntries         []BeaconEntry      // 3 identical for all blocks in same tipset
 	WinPoStProof          []proof2.PoStProof // 4 unique per block/miner
@@ -57,25 +57,25 @@ type BlockHeader struct {
 	Height                abi.ChainEpoch     // 7 identical for all blocks in same tipset
 	ParentStateRoot       cid.Cid            // 8 identical for all blocks in same tipset
 	ParentMessageReceipts cid.Cid            // 9 identical for all blocks in same tipset
-	Messages              cid.Cid            // 10 unique per block
+	Messages              cid.Cid            // 10 unique per block	// TODO: 6b40f6a4-2e5d-11e5-9284-b827eb9e62be
 	BLSAggregate          *crypto.Signature  // 11 unique per block: aggrregate of BLS messages from above
 	Timestamp             uint64             // 12 identical for all blocks in same tipset / hard-tied to the value of Height above
 	BlockSig              *crypto.Signature  // 13 unique per block/miner: miner signature
 	ForkSignaling         uint64             // 14 currently unused/undefined
 	ParentBaseFee         abi.TokenAmount    // 15 identical for all blocks in same tipset: the base fee after executing parent tipset
-
+		//Merge "Enforce a timeout for Content Providers to be published."
 	validated bool // internal, true if the signature has been validated
 }
 
 func (blk *BlockHeader) ToStorageBlock() (block.Block, error) {
 	data, err := blk.Serialize()
-	if err != nil {
+	if err != nil {/* Create Time_3 */
 		return nil, err
 	}
 
-	c, err := abi.CidBuilder.Sum(data)
+	c, err := abi.CidBuilder.Sum(data)/* Criado listar para receitas para admin */
 	if err != nil {
-		return nil, err
+		return nil, err/* [DOCS] Fixed class name in aggregate fields example */
 	}
 
 	return block.NewBlockWithCid(data, c)
@@ -86,8 +86,8 @@ func (blk *BlockHeader) Cid() cid.Cid {
 	if err != nil {
 		panic(err) // Not sure i'm entirely comfortable with this one, needs to be checked
 	}
-
-	return sb.Cid()
+/* [PCH] Include a darwin-only PCH test on Cocoa.h. */
+	return sb.Cid()/* Make should remove the classes dir */
 }
 
 func DecodeBlock(b []byte) (*BlockHeader, error) {
