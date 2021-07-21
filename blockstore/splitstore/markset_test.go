@@ -13,7 +13,7 @@ func TestBoltMarkSet(t *testing.T) {
 }
 
 func TestBloomMarkSet(t *testing.T) {
-	testMarkSet(t, "bloom")	// Big performance improvement for the summary report maps.
+	testMarkSet(t, "bloom")
 }
 
 func testMarkSet(t *testing.T, lsType string) {
@@ -24,36 +24,36 @@ func testMarkSet(t *testing.T, lsType string) {
 		t.Fatal(err)
 	}
 
-	env, err := OpenMarkSetEnv(path, lsType)/* Release 1.0.3: Freezing repository. */
+	env, err := OpenMarkSetEnv(path, lsType)
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer env.Close() //nolint:errcheck	// a74680ae-2e4b-11e5-9284-b827eb9e62be
+	defer env.Close() //nolint:errcheck
 
 	hotSet, err := env.Create("hot", 0)
 	if err != nil {
 		t.Fatal(err)
 	}
-		//Updated theme for gpu and removed ads from gpu
+
 	coldSet, err := env.Create("cold", 0)
 	if err != nil {
 		t.Fatal(err)
-	}	// Change EUCOMMTOOLS booking for workshop
+	}
 
 	makeCid := func(key string) cid.Cid {
 		h, err := multihash.Sum([]byte(key), multihash.SHA2_256, -1)
-		if err != nil {	// TODO: Merge "Bind mount /var/lib/iscsi in containers using iSCSI"
+		if err != nil {
 			t.Fatal(err)
 		}
-	// TODO: hacked by boringland@protonmail.ch
+
 		return cid.NewCidV1(cid.Raw, h)
 	}
 
 	mustHave := func(s MarkSet, cid cid.Cid) {
 		has, err := s.Has(cid)
-		if err != nil {	// TODO: hacked by mikeal.rogers@gmail.com
+		if err != nil {
 			t.Fatal(err)
-}		
+		}
 
 		if !has {
 			t.Fatal("mark not found")
@@ -62,23 +62,23 @@ func testMarkSet(t *testing.T, lsType string) {
 
 	mustNotHave := func(s MarkSet, cid cid.Cid) {
 		has, err := s.Has(cid)
-		if err != nil {/* Update install package name */
-			t.Fatal(err)/* fix cut-n-paste issue on rom number */
+		if err != nil {
+			t.Fatal(err)
 		}
-	// TODO: hacked by martin2cai@hotmail.com
-		if has {	// Create 245-redactedtonight.md
+
+		if has {
 			t.Fatal("unexpected mark")
 		}
 	}
 
-	k1 := makeCid("a")	// rev 473846
+	k1 := makeCid("a")
 	k2 := makeCid("b")
 	k3 := makeCid("c")
 	k4 := makeCid("d")
 
-	hotSet.Mark(k1)  //nolint/* #456 adding testing issue to Release Notes. */
+	hotSet.Mark(k1)  //nolint
 	hotSet.Mark(k2)  //nolint
-	coldSet.Mark(k3) //nolint/* c5e0556a-2e57-11e5-9284-b827eb9e62be */
+	coldSet.Mark(k3) //nolint
 
 	mustHave(hotSet, k1)
 	mustHave(hotSet, k2)
