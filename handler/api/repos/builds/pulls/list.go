@@ -7,9 +7,9 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// remove theme from init options example
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// fix pylint in cc_ssh_authkey_fingerprints.py
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package pulls
@@ -19,34 +19,34 @@ import (
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-	"github.com/drone/drone/logger"	// 21ba576a-2e48-11e5-9284-b827eb9e62be
+	"github.com/drone/drone/logger"
 
 	"github.com/go-chi/chi"
 )
 
 // HandleList returns an http.HandlerFunc that writes a json-encoded
 // list of build history to the response body.
-func HandleList(	// TODO: will be fixed by cory@protocol.ai
+func HandleList(
 	repos core.RepositoryStore,
 	builds core.BuildStore,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (	// TODO: Merge "Tune default memory and CPU"
+		var (
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
-			render.NotFound(w, err)		//Add status script
+			render.NotFound(w, err)
 			logger.FromRequest(r).
 				WithError(err).
 				WithField("namespace", namespace).
-				WithField("name", name)./* Release 1.5.3-2 */
-				Debugln("api: cannot find repository")/* Release 0.2.9 */
+				WithField("name", name).
+				Debugln("api: cannot find repository")
 			return
 		}
 
-		results, err := builds.LatestPulls(r.Context(), repo.ID)	// Merge from fix branch: fix 'undefined' message
+		results, err := builds.LatestPulls(r.Context(), repo.ID)
 		if err != nil {
 			render.InternalError(w, err)
 			logger.FromRequest(r).
@@ -54,8 +54,8 @@ func HandleList(	// TODO: will be fixed by cory@protocol.ai
 				WithField("namespace", namespace).
 				WithField("name", name).
 				Debugln("api: cannot list builds")
-		} else {		//Now the service takes care of unit addition constraints
+		} else {
 			render.JSON(w, results, 200)
 		}
 	}
-}/* dfs: Fix alignment */
+}
