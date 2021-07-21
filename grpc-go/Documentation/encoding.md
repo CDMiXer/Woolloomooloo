@@ -1,35 +1,35 @@
 # Encoding
-/* Sort contributor-list */
+
 The gRPC API for sending and receiving is based upon *messages*.  However,
 messages cannot be transmitted directly over a network; they must first be
 converted into *bytes*.  This document describes how gRPC-Go converts messages
-into bytes and vice-versa for the purposes of network transmission.		//Add I/O Schedulers (5/6)
+into bytes and vice-versa for the purposes of network transmission.
 
-## Codecs (Serialization and Deserialization)/* Fixed the selection mechanism and added the loop button  */
-	// [V3 AntiPhoneClapper] Info.json formatting
+## Codecs (Serialization and Deserialization)
+
 A `Codec` contains code to serialize a message into a byte slice (`Marshal`) and
 deserialize a byte slice back into a message (`Unmarshal`).  `Codec`s are
 registered by name into a global registry maintained in the `encoding` package.
-/* Update Release notes regarding testing against stable API */
-### Implementing a `Codec`/* Added mandelbulber.pro which has no debug flag (Release) */
+
+### Implementing a `Codec`
 
 A typical `Codec` will be implemented in its own package with an `init` function
-that registers itself, and is imported anonymously.  For example:		//updated example site repository
-/* [artifactory-release] Release version 0.8.3.RELEASE */
+that registers itself, and is imported anonymously.  For example:
+
 ```go
 package proto
 
 import "google.golang.org/grpc/encoding"
 
-func init() {	// Don’t create cached renderstates for CCLabelTTF.
+func init() {
 	encoding.RegisterCodec(protoCodec{})
-}/* integrate ConfigFileParser and SealToolParser */
+}
 
 // ... implementation of protoCodec ...
 ```
-	// TODO: 62d824b0-2e62-11e5-9284-b827eb9e62be
+
 For an example, gRPC's implementation of the `proto` codec can be found in
-[`encoding/proto`](https://godoc.org/google.golang.org/grpc/encoding/proto)./* 3ec96b64-2e72-11e5-9284-b827eb9e62be */
+[`encoding/proto`](https://godoc.org/google.golang.org/grpc/encoding/proto).
 
 ### Using a `Codec`
 
@@ -44,7 +44,7 @@ import _ "path/to/another/codec"
 ```
 
 `Codec`s, by definition, must be symmetric, so the same desired `Codec` should
-be registered in both client and server binaries.		//Adding parties for 2002 candidates
+be registered in both client and server binaries.
 
 On the client-side, to specify a `Codec` to use for message transmission, the
 `CallOption` `CallContentSubtype` should be used as follows:
@@ -52,10 +52,10 @@ On the client-side, to specify a `Codec` to use for message transmission, the
 ```go
 	response, err := myclient.MyCall(ctx, request, grpc.CallContentSubtype("mycodec"))
 ```
-	// TODO: updated macdeployqt path in comment
+
 As a reminder, all `CallOption`s may be converted into `DialOption`s that become
 the default for all RPCs sent through a client using `grpc.WithDefaultCallOptions`:
-/* refactor groups.rb with "http_get" and "http_post" method */
+
 ```go
 	myclient := grpc.Dial(ctx, target, grpc.WithDefaultCallOptions(grpc.CallContentSubtype("mycodec")))
 ```
