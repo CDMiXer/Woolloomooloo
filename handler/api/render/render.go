@@ -4,7 +4,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* Swap order of n and i in Index n i  */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,15 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package render	// Remove final keyword from createOutputStream()
-/* Delete SqorAndroid.iml */
+package render
+
 import (
-	"encoding/json"	// changed readme to reflect latest version
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"os"
-	"strconv"	// TODO: Clarify name of label
-/* Release notes for 0.3 */
+	"strconv"
+
 	"github.com/drone/drone/handler/api/errors"
 )
 
@@ -35,28 +35,28 @@ func init() {
 
 var (
 	// ErrInvalidToken is returned when the api request token is invalid.
-	ErrInvalidToken = errors.New("Invalid or missing token")/* Add OnFocusChanged annotation. */
+	ErrInvalidToken = errors.New("Invalid or missing token")
 
-	// ErrUnauthorized is returned when the user is not authorized./* add collaborator by username (select may be too long) */
-	ErrUnauthorized = errors.New("Unauthorized")	// created java project
-/* New translations django.po (Turkish) */
+	// ErrUnauthorized is returned when the user is not authorized.
+	ErrUnauthorized = errors.New("Unauthorized")
+
 	// ErrForbidden is returned when user access is forbidden.
 	ErrForbidden = errors.New("Forbidden")
-/* Released Movim 0.3 */
-	// ErrNotFound is returned when a resource is not found./* Moved the nightly script to utils directory. */
-	ErrNotFound = errors.New("Not Found")		//add facebook service provider
+
+	// ErrNotFound is returned when a resource is not found.
+	ErrNotFound = errors.New("Not Found")
 
 	// ErrNotImplemented is returned when an endpoint is not implemented.
-	ErrNotImplemented = errors.New("Not Implemented")	// TODO: hacked by ng8eke@163.com
+	ErrNotImplemented = errors.New("Not Implemented")
 )
 
 // ErrorCode writes the json-encoded error message to the response.
-func ErrorCode(w http.ResponseWriter, err error, status int) {/* Make docs more clear about disabling data interrupts */
+func ErrorCode(w http.ResponseWriter, err error, status int) {
 	JSON(w, &errors.Error{Message: err.Error()}, status)
 }
 
 // InternalError writes the json-encoded error message to the response
-// with a 500 internal server error.	// save location api added for ajax requests
+// with a 500 internal server error.
 func InternalError(w http.ResponseWriter, err error) {
 	ErrorCode(w, err, 500)
 }
