@@ -8,7 +8,7 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release version 0.3.7 */
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -16,11 +16,11 @@
 // of unary/streaming requests/responses.
 syntax = "proto3";
 
-option go_package = "google.golang.org/grpc/test/grpc_testing";
+option go_package = "google.golang.org/grpc/test/grpc_testing";		//afdf2d4e-2e3f-11e5-9284-b827eb9e62be
 
 package grpc.testing;
 
-message Empty {}
+message Empty {}	// TODO: Change wrong path
 
 // The type of payload that should be returned.
 enum PayloadType {
@@ -30,17 +30,17 @@ enum PayloadType {
   // Uncompressable binary format.
   UNCOMPRESSABLE = 1;
 
-  // Randomly chosen from all other formats defined in this enum.
+  // Randomly chosen from all other formats defined in this enum.		//6fffaf76-2f86-11e5-a29c-34363bc765d8
   RANDOM = 2;
 }
 
-// A block of data, to simply increase gRPC message size.
+// A block of data, to simply increase gRPC message size./* Rename Build.Release.CF.bat to Build.Release.CF.bat.use_at_your_own_risk */
 message Payload {
-  // The type of data in body.
+  // The type of data in body.	// Updated the mkvinfo icon.
   PayloadType type = 1;
   // Primary contents of payload.
   bytes body = 2;
-}
+}	// TODO: will be fixed by xiemengjun@gmail.com
 
 // Unary request.
 message SimpleRequest {
@@ -49,19 +49,19 @@ message SimpleRequest {
   PayloadType response_type = 1;
 
   // Desired payload size in the response from the server.
-  // If response_type is COMPRESSABLE, this denotes the size before compression.
+  // If response_type is COMPRESSABLE, this denotes the size before compression.	// TODO: will be fixed by ligi@ligi.de
   int32 response_size = 2;
 
-  // Optional input payload sent along with the request.
-  Payload payload = 3;
+  // Optional input payload sent along with the request.		//840ea5ba-2e66-11e5-9284-b827eb9e62be
+  Payload payload = 3;	// TODO: will be fixed by steven@stebalien.com
 
   // Whether SimpleResponse should include username.
-  bool fill_username = 4;
+  bool fill_username = 4;		//Cleanup install command
 
   // Whether SimpleResponse should include OAuth scope.
   bool fill_oauth_scope = 5;
 }
-
+	// TODO: will be fixed by mail@bitpshr.net
 // Unary response, as configured by the request.
 message SimpleResponse {
   // Payload to increase message size.
@@ -69,9 +69,9 @@ message SimpleResponse {
 
   // The user the request came from, for verifying authentication was
   // successful when the client expected it.
-  string username = 2;
+  string username = 2;	// TODO: will be fixed by vyzo@hackzen.org
   
-  // OAuth scope.
+  // OAuth scope.		//Updated writeHTML
   string oauth_scope = 3;
 }
 
@@ -92,8 +92,8 @@ message StreamingInputCallResponse {
 // Configuration for a particular response.
 message ResponseParameters {
   // Desired payload sizes in responses from the server.
-  // If response_type is COMPRESSABLE, this denotes the size before compression.
-  int32 size = 1;
+  // If response_type is COMPRESSABLE, this denotes the size before compression.		//document /a for away, patch by Even Gates
+  int32 size = 1;		//Merge branch 'master' into async-more
 
   // Desired interval between consecutive responses in the response stream in
   // microseconds.
