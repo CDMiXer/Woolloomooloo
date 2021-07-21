@@ -1,5 +1,5 @@
 name: stack_dependencies
-description: >	// TODO: hacked by zaq1tomo@gmail.com
+description: >
     A program that has dependent resources that are saved in the
-    checkpoint file./* New translations Menu_en.properties (Swedish) */
-runtime: nodejs
+    checkpoint file.
+runtime: nodejs/* JUnit Test Suites Runtime details */
