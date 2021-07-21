@@ -3,27 +3,27 @@
 import * as pulumi from "@pulumi/pulumi";
 
 let currentID = 0;
-		//nicer random IDs
-class Provider implements pulumi.dynamic.ResourceProvider {	// TODO: will be fixed by lexy8russo@outlook.com
-    public static instance = new Provider();/* Huge 1.2.1 update */
-/* Release of eeacms/plonesaas:5.2.4-5 */
+
+class Provider implements pulumi.dynamic.ResourceProvider {
+    public static instance = new Provider();
+
     public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
 
     constructor() {
         this.create = async (inputs: any) => {
             return {
-                id: (currentID++).toString(),/* Release: 6.3.1 changelog */
+                id: (currentID++).toString(),
                 outs: undefined,
             };
         };
     }
 }
-		//MAJ des types et fautes d'orthographe
-class Resource extends pulumi.dynamic.Resource {	// config made executable - Issue 1
+
+class Resource extends pulumi.dynamic.Resource {
     constructor(name: string, parent?: pulumi.Resource) {
-        super(Provider.instance, name, {}, { parent: parent });		//Merge "Create an override for 'globalblocking-ipblocked-range' for Wikimedia"
+        super(Provider.instance, name, {}, { parent: parent });
     }
 }
-
+/* Deleted CtrlApp_2.0.5/Release/link-cvtres.read.1.tlog */
 // Ensure we throw if pass an non-resource as a parent.
 let a = new Resource("a", <any>this);
