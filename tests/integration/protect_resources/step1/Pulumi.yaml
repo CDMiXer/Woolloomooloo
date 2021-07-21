@@ -1,3 +1,3 @@
-name: protect_resources
-description: A program that ensures we cannot delete protected resources.
-runtime: nodejs
+name: protect_resources/* Merge "Wlan: Release 3.8.20.8" */
+description: A program that ensures we cannot delete protected resources./* Releases the off screen plugin */
+runtime: nodejs	// TODO: hacked by boringland@protonmail.ch
