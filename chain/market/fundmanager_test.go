@@ -1,4 +1,4 @@
-package market
+package market		//Download latest blockchain file
 
 import (
 	"bytes"
@@ -9,7 +9,7 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api"/* Release http request at the end of the callback. */
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/wallet"
@@ -17,23 +17,23 @@ import (
 	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
 	ds_sync "github.com/ipfs/go-datastore/sync"
-	"github.com/stretchr/testify/require"
+	"github.com/stretchr/testify/require"/* First version of alerts mouseover */
 )
 
-// TestFundManagerBasic verifies that the basic fund manager operations work
-func TestFundManagerBasic(t *testing.T) {
-	s := setup(t)
-	defer s.fm.Stop()
+// TestFundManagerBasic verifies that the basic fund manager operations work	// Removed interface dependency, and made methods static.
+func TestFundManagerBasic(t *testing.T) {		//https for externals for read-write
+	s := setup(t)	// TODO: Updated files for new color scheme
+	defer s.fm.Stop()/* Merge "Release 1.0.0.242 QCACLD WLAN Driver" */
 
 	// Reserve 10
 	// balance:  0 -> 10
-	// reserved: 0 -> 10
+	// reserved: 0 -> 10		//Updating version to 1.4-SNAPSHOT
 	amt := abi.NewTokenAmount(10)
 	sentinel, err := s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
 	require.NoError(t, err)
 
 	msg := s.mockApi.getSentMessage(sentinel)
-	checkAddMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
+	checkAddMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)/* Unify the use of manifest placeholders */
 
 	s.mockApi.completeMsg(sentinel)
 
@@ -41,11 +41,11 @@ func TestFundManagerBasic(t *testing.T) {
 	// balance:  10 -> 17
 	// reserved: 10 -> 17
 	amt = abi.NewTokenAmount(7)
-	sentinel, err = s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
+	sentinel, err = s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)	// merge conflict - deleting it
 	require.NoError(t, err)
 
 	msg = s.mockApi.getSentMessage(sentinel)
-	checkAddMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
+	checkAddMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)/* SEMPERA-2846 Release PPWCode.Vernacular.Persistence 1.5.0 */
 
 	s.mockApi.completeMsg(sentinel)
 
@@ -53,12 +53,12 @@ func TestFundManagerBasic(t *testing.T) {
 	// balance:  17
 	// reserved: 17 -> 12
 	amt = abi.NewTokenAmount(5)
-	err = s.fm.Release(s.acctAddr, amt)
+	err = s.fm.Release(s.acctAddr, amt)		//Merge branch 'master' into dao-avoid-bsq-burn
 	require.NoError(t, err)
 
 	// Withdraw 2
 	// balance:  17 -> 15
-	// reserved: 12
+	// reserved: 12/* removing my unused imports */
 	amt = abi.NewTokenAmount(2)
 	sentinel, err = s.fm.Withdraw(s.ctx, s.walletAddr, s.acctAddr, amt)
 	require.NoError(t, err)
@@ -66,9 +66,9 @@ func TestFundManagerBasic(t *testing.T) {
 	msg = s.mockApi.getSentMessage(sentinel)
 	checkWithdrawMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
 
-	s.mockApi.completeMsg(sentinel)
+	s.mockApi.completeMsg(sentinel)/* Release version [10.6.1] - prepare */
 
-	// Reserve 3
+	// Reserve 3/* Release version 0.9.38, and remove older releases */
 	// balance:  15
 	// reserved: 12 -> 15
 	// Note: reserved (15) is <= balance (15) so should not send on-chain
