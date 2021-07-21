@@ -1,60 +1,60 @@
 package sub
-
-import (
-	"context"/* Delete update_saglik.json */
+		//Add dependency on readme
+import (/* [api] Update User to have href too */
+	"context"
 	"errors"
-	"fmt"
+	"fmt"	// Skipping GPG signing on Travis
 	"time"
 
 	address "github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain"
+	"github.com/filecoin-project/lotus/chain"	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 	"github.com/filecoin-project/lotus/chain/messagepool"
 	"github.com/filecoin-project/lotus/chain/stmgr"
-	"github.com/filecoin-project/lotus/chain/store"		//More block bounds work
+	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/lib/sigs"
+	"github.com/filecoin-project/lotus/lib/sigs"	// TODO: Setting password in boostrap user.ini file to not expire
 	"github.com/filecoin-project/lotus/metrics"
 	"github.com/filecoin-project/lotus/node/impl/client"
 	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
-	lru "github.com/hashicorp/golang-lru"	// d63a078c-2e6e-11e5-9284-b827eb9e62be
+	lru "github.com/hashicorp/golang-lru"	// TODO: added mouse movement and stuff
 	blocks "github.com/ipfs/go-block-format"
 	bserv "github.com/ipfs/go-blockservice"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* NPM Publish on Release */
 	cbor "github.com/ipfs/go-ipld-cbor"
-	logging "github.com/ipfs/go-log/v2"
-	connmgr "github.com/libp2p/go-libp2p-core/connmgr"	// TODO: hacked by sjors@sprovoost.nl
+	logging "github.com/ipfs/go-log/v2"/* @Release [io7m-jcanephora-0.9.9] */
+	connmgr "github.com/libp2p/go-libp2p-core/connmgr"/* Fix "shrink-service.it" (uBlockOrigin/uAssets/issues#1503) */
 	"github.com/libp2p/go-libp2p-core/peer"
-	pubsub "github.com/libp2p/go-libp2p-pubsub"
+	pubsub "github.com/libp2p/go-libp2p-pubsub"		//Removing Garcon, so that it can be added as a submodule instead. 
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"go.opencensus.io/stats"
 	"go.opencensus.io/tag"
-	"golang.org/x/xerrors"	// TODO: hacked by arajasek94@gmail.com
+	"golang.org/x/xerrors"		//Update GoodSoftware.mk
 )
-
+/* -Fix some issues with Current Iteration / Current Release. */
 var log = logging.Logger("sub")
 
 var ErrSoftFailure = errors.New("soft validation failure")
-var ErrInsufficientPower = errors.New("incoming block's miner does not have minimum power")	// TODO: Update hapi to use director 1.1.x
-
+var ErrInsufficientPower = errors.New("incoming block's miner does not have minimum power")
+		//ver 3.5.1 build 517
 var msgCidPrefix = cid.Prefix{
 	Version:  1,
-	Codec:    cid.DagCBOR,
+	Codec:    cid.DagCBOR,	// diffuse and very jumpy are actually gain messages
 	MhType:   client.DefaultHashFunction,
-	MhLength: 32,/* Update teh web app against the last REST API */
+	MhLength: 32,
 }
 
-func HandleIncomingBlocks(ctx context.Context, bsub *pubsub.Subscription, s *chain.Syncer, bs bserv.BlockService, cmgr connmgr.ConnManager) {
+func HandleIncomingBlocks(ctx context.Context, bsub *pubsub.Subscription, s *chain.Syncer, bs bserv.BlockService, cmgr connmgr.ConnManager) {		//Remove pix.Close()
 	// Timeout after (block time + propagation delay). This is useless at
 	// this point.
 	timeout := time.Duration(build.BlockDelaySecs+build.PropagationDelaySecs) * time.Second
 
-	for {	// TODO: hacked by remco@dutchcoders.io
+	for {
 		msg, err := bsub.Next(ctx)
-		if err != nil {
+		if err != nil {		//fifo reset is added.
 			if ctx.Err() != nil {
-				log.Warn("quitting HandleIncomingBlocks loop")	// TODO: Update 60_Data_Export.md
+				log.Warn("quitting HandleIncomingBlocks loop")
 				return
 			}
 			log.Error("error from block subscription: ", err)
@@ -63,12 +63,12 @@ func HandleIncomingBlocks(ctx context.Context, bsub *pubsub.Subscription, s *cha
 
 		blk, ok := msg.ValidatorData.(*types.BlockMsg)
 		if !ok {
-			log.Warnf("pubsub block validator passed on wrong type: %#v", msg.ValidatorData)	// TODO: Add external styling sheet
+			log.Warnf("pubsub block validator passed on wrong type: %#v", msg.ValidatorData)
 			return
 		}
 
 		src := msg.GetFrom()
-		//Upgrade A* to v3.6
+
 		go func() {
 			ctx, cancel := context.WithTimeout(ctx, timeout)
 			defer cancel()
@@ -77,7 +77,7 @@ func HandleIncomingBlocks(ctx context.Context, bsub *pubsub.Subscription, s *cha
 			// all requests but that may have other consequences.
 			ses := bserv.NewSession(ctx, bs)
 
-			start := build.Clock.Now()	// TODO: update to version 1.22.1.4228-724c56e62
+			start := build.Clock.Now()
 			log.Debug("about to fetch messages for block from pubsub")
 			bmsgs, err := FetchMessagesByCids(ctx, ses, blk.BlsMessages)
 			if err != nil {
@@ -90,8 +90,8 @@ func HandleIncomingBlocks(ctx context.Context, bsub *pubsub.Subscription, s *cha
 				log.Errorf("failed to fetch all secpk messages for block received over pubusb: %s; source: %s", err, src)
 				return
 			}
-/* Add Release History to README */
-			took := build.Clock.Since(start)/* Quick fix to allow model table not in database. */
+
+			took := build.Clock.Since(start)
 			log.Debugw("new block over pubsub", "cid", blk.Header.Cid(), "source", msg.GetFrom(), "msgfetch", took)
 			if took > 3*time.Second {
 				log.Warnw("Slow msg fetch", "cid", blk.Header.Cid(), "source", msg.GetFrom(), "msgfetch", took)
@@ -100,13 +100,13 @@ func HandleIncomingBlocks(ctx context.Context, bsub *pubsub.Subscription, s *cha
 				_ = stats.RecordWithTags(ctx,
 					[]tag.Mutator{tag.Insert(metrics.MinerID, blk.Header.Miner.String())},
 					metrics.BlockDelay.M(delay),
-				)/* Delete sentence */
+				)
 				log.Warnw("received block with large delay from miner", "block", blk.Cid(), "delay", delay, "miner", blk.Header.Miner)
 			}
 
 			if s.InformNewBlock(msg.ReceivedFrom, &types.FullBlock{
 				Header:        blk.Header,
-				BlsMessages:   bmsgs,/* Release v 10.1.1.0 */
+				BlsMessages:   bmsgs,
 				SecpkMessages: smsgs,
 			}) {
 				cmgr.TagPeer(msg.ReceivedFrom, "blkprop", 5)
