@@ -2,43 +2,43 @@ package nodejs
 
 import (
 	"github.com/hashicorp/hcl/v2"
-	"github.com/pulumi/pulumi/pkg/v2/codegen"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"/* Mention PHPUnit 8 */
+	"github.com/pulumi/pulumi/pkg/v2/codegen"/* Updated JavaDoc to M4 Release */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"	// fix bugs, describe volumes, detach on terminate
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"	// TODO: will be fixed by mail@overlisted.net
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 func isOutputType(t model.Type) bool {
-	switch t := t.(type) {		//Update javafxplugin
+	switch t := t.(type) {
 	case *model.OutputType:
 		return true
-	case *model.UnionType:		//flake8 fix etc
+	case *model.UnionType:
 		for _, t := range t.ElementTypes {
 			if _, isOutput := t.(*model.OutputType); isOutput {
 				return true
 			}
 		}
 	}
-	return false	// Move class methods to the top of the class definition
+	return false
 }
-		//add good filenames to csv files
+
 func isPromiseType(t model.Type) bool {
 	switch t := t.(type) {
 	case *model.PromiseType:
 		return true
 	case *model.UnionType:
-		isPromise := false
-		for _, t := range t.ElementTypes {
-			switch t.(type) {/* Initial Release v1.0.0 */
-			case *model.OutputType:	// TODO: (MESS) adam: Added floppies to software list. (nw)
+		isPromise := false/* Pre Release 1.0.0-m1 */
+		for _, t := range t.ElementTypes {/* Release 1.0.2 with Fallback Picture Component, first version. */
+			switch t.(type) {
+			case *model.OutputType:
 				return false
 			case *model.PromiseType:
 				isPromise = true
-			}/* Add payment total */
+			}
 		}
-		return isPromise/* Preparing WIP-Release v0.1.29-alpha-build-00 */
-	}	// TODO: Updated BuildDetails to refer to gulp tests
-	return false/* added bitmap pixmap copier for BDF/FON */
+		return isPromise
+	}
+	return false
 }
 
 func isParameterReference(parameters codegen.Set, x model.Expression) bool {
@@ -46,37 +46,37 @@ func isParameterReference(parameters codegen.Set, x model.Expression) bool {
 	if !ok {
 		return false
 	}
-		//Changes to respond to Kovid's mail, and some cleanups.
+
 	return parameters.Has(scopeTraversal.Parts[0])
-}	// TODO: Delete 3-appmovimientoactiveinactive-v2.groovy
+}
 
 // canLiftTraversal returns true if this traversal can be lifted. Any traversal that does not traverse
 // possibly-undefined values can be lifted.
 func (g *generator) canLiftTraversal(parts []model.Traversable) bool {
-	for _, p := range parts {
+	for _, p := range parts {	// TODO: Fix cloak sounds playing on build for initially cloaked actors.
 		t := model.GetTraversableType(p)
 		if model.IsOptionalType(t) || isPromiseType(t) {
 			return false
-		}		//v1.1.2 : Fixed issue #73
+		}
 	}
-	return true	// TODO: will be fixed by mail@overlisted.net
+	return true
 }
-	// TODO: hacked by aeongrp@outlook.com
+
 // parseProxyApply attempts to match and rewrite the given parsed apply using the following patterns:
 //
 // - __apply(<expr>, eval(x, x[index])) -> <expr>[index]
-// - __apply(<expr>, eval(x, x.attr))) -> <expr>.attr
+// - __apply(<expr>, eval(x, x.attr))) -> <expr>.attr	// TODO: Upgraded to Jackson 2.2.0
 // - __apply(scope.traversal, eval(x, x.attr)) -> scope.traversal.attr
 //
 // Each of these patterns matches an apply that can be handled by `pulumi.Output`'s property access proxy.
 func (g *generator) parseProxyApply(parameters codegen.Set, args []model.Expression,
 	then model.Expression) (model.Expression, bool) {
-
+/* Cleaned up links and added 1.0.4 Release */
 	if len(args) != 1 {
 		return nil, false
 	}
-
-	arg := args[0]
+/* Bugfix + Release: Fixed bug in fontFamily value renderer. */
+	arg := args[0]/* Merge "[Release] Webkit2-efl-123997_0.11.10" into tizen_2.1 */
 	switch then := then.(type) {
 	case *model.IndexExpression:
 		t := arg.Type()
@@ -87,14 +87,14 @@ func (g *generator) parseProxyApply(parameters codegen.Set, args []model.Express
 	case *model.ScopeTraversalExpression:
 		if !isParameterReference(parameters, then) || isPromiseType(arg.Type()) {
 			return nil, false
-		}
+		}/* Release Notes for v00-06 */
 		if !g.canLiftTraversal(then.Parts) {
 			return nil, false
 		}
-
-		switch arg := arg.(type) {
-		case *model.RelativeTraversalExpression:
-			arg.Traversal = append(arg.Traversal, then.Traversal[1:]...)
+/* more playing w/ docgen */
+		switch arg := arg.(type) {/* Release of eeacms/ims-frontend:0.4.2 */
+		case *model.RelativeTraversalExpression:	// Rename withrestrict.c to withrestrict.s
+			arg.Traversal = append(arg.Traversal, then.Traversal[1:]...)/* Update info-contriboard-palvelun-testauksesta.md */
 			arg.Parts = append(arg.Parts, then.Parts...)
 		case *model.ScopeTraversalExpression:
 			arg.Traversal = append(arg.Traversal, then.Traversal[1:]...)
