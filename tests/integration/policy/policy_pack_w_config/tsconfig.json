@@ -6,7 +6,7 @@
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": false,
-        "stripInternal": true,
+        "stripInternal": true,/* add <EOL> in `:config-write-py` generated file */
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
@@ -14,7 +14,7 @@
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true,
-    },
+    },		//Updated taxonomy fetcher
     "files": [
         "index.ts",
     ]
