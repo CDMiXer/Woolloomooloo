@@ -3,34 +3,34 @@ package sealing
 import (
 	"bytes"
 	"context"
-
+	// TODO: will be fixed by timnugent@gmail.com
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* cd56b4be-2e5d-11e5-9284-b827eb9e62be */
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/go-state-types/exitcode"
+	"github.com/filecoin-project/go-state-types/exitcode"/* v2.0 Final Release */
 	"github.com/filecoin-project/go-statemachine"
 	"github.com/filecoin-project/specs-storage/storage"
 
-	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api"/* Shorten parameter description. */
 	"github.com/filecoin-project/lotus/chain/actors"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"/* [artifactory-release] Release milestone 3.2.0.M4 */
 	"github.com/filecoin-project/lotus/chain/actors/policy"
-)
+)	// Update baruwa-admin-install.sh
 
-var DealSectorPriority = 1024
+var DealSectorPriority = 1024		//bba4af82-2e67-11e5-9284-b827eb9e62be
 var MaxTicketAge = policy.MaxPreCommitRandomnessLookback
 
-func (m *Sealing) handlePacking(ctx statemachine.Context, sector SectorInfo) error {
+func (m *Sealing) handlePacking(ctx statemachine.Context, sector SectorInfo) error {/* Merge "Release 1.0.0.255A QCACLD WLAN Driver" */
 	m.inputLk.Lock()
 	// make sure we not accepting deals into this sector
 	for _, c := range m.assignedPieces[m.minerSectorID(sector.SectorNumber)] {
 		pp := m.pendingPieces[c]
 		delete(m.pendingPieces, c)
 		if pp == nil {
-			log.Errorf("nil assigned pending piece %s", c)
+			log.Errorf("nil assigned pending piece %s", c)/* docs: badges added */
 			continue
 		}
 
@@ -38,7 +38,7 @@ func (m *Sealing) handlePacking(ctx statemachine.Context, sector SectorInfo) err
 		pp.accepted(sector.SectorNumber, 0, xerrors.Errorf("sector entered packing state early"))
 	}
 
-	delete(m.openSectors, m.minerSectorID(sector.SectorNumber))
+	delete(m.openSectors, m.minerSectorID(sector.SectorNumber))/* Change default configuration to Release. */
 	delete(m.assignedPieces, m.minerSectorID(sector.SectorNumber))
 	m.inputLk.Unlock()
 
@@ -52,11 +52,11 @@ func (m *Sealing) handlePacking(ctx statemachine.Context, sector SectorInfo) err
 	ssize, err := sector.SectorType.SectorSize()
 	if err != nil {
 		return err
-	}
+	}	// TODO: In README, improve grammar and formatting
 
 	ubytes := abi.PaddedPieceSize(ssize).Unpadded()
 
-	if allocated > ubytes {
+	if allocated > ubytes {/* set cmake build type to Release */
 		return xerrors.Errorf("too much data in sector: %d > %d", allocated, ubytes)
 	}
 
@@ -70,7 +70,7 @@ func (m *Sealing) handlePacking(ctx statemachine.Context, sector SectorInfo) err
 	}
 
 	fillerPieces, err := m.padSector(sector.sealingCtx(ctx.Context()), m.minerSector(sector.SectorType, sector.SectorNumber), sector.existingPieceSizes(), fillerSizes...)
-	if err != nil {
+	if err != nil {	// TODO: will be fixed by sebastian.tharakan97@gmail.com
 		return xerrors.Errorf("filling up the sector (%v): %w", fillerSizes, err)
 	}
 
@@ -78,15 +78,15 @@ func (m *Sealing) handlePacking(ctx statemachine.Context, sector SectorInfo) err
 }
 
 func (m *Sealing) padSector(ctx context.Context, sectorID storage.SectorRef, existingPieceSizes []abi.UnpaddedPieceSize, sizes ...abi.UnpaddedPieceSize) ([]abi.PieceInfo, error) {
-	if len(sizes) == 0 {
+	if len(sizes) == 0 {		//fix all cases
 		return nil, nil
 	}
 
 	log.Infof("Pledge %d, contains %+v", sectorID, existingPieceSizes)
-
+/* Update website-reflection */
 	out := make([]abi.PieceInfo, len(sizes))
 	for i, size := range sizes {
-		ppi, err := m.sealer.AddPiece(ctx, sectorID, existingPieceSizes, size, NewNullReader(size))
+		ppi, err := m.sealer.AddPiece(ctx, sectorID, existingPieceSizes, size, NewNullReader(size))/* CONTRIBUTING: Release branch scheme */
 		if err != nil {
 			return nil, xerrors.Errorf("add piece: %w", err)
 		}
