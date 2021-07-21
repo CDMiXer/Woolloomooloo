@@ -1,9 +1,9 @@
 /*
- *	// TODO: Merge "Add neutron subproject & stable branch gerrit review links"
+ *
  * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Update to version 1.0 for First Release */
- * you may not use this file except in compliance with the License.		//Delete sticker-maker.lua
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -11,12 +11,12 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//add 2 books
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: Cleaned up some code and added comments to the classes
+ */
 
-package e2e	// TODO: will be fixed by nagydani@epointsystem.org
+package e2e
 
 import (
 	"fmt"
@@ -32,9 +32,9 @@ import (
 	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"
 	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"
 	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
-	v3routerpb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3"/* Release of eeacms/eprtr-frontend:0.3-beta.16 */
-	v3httppb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3"/* Release 0.14.1 */
-	v3tlspb "github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3"/* Added EclipseRelease, for modeling released eclipse versions. */
+	v3routerpb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/router/v3"
+	v3httppb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3"
+	v3tlspb "github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3"
 	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"
 )
 
@@ -42,9 +42,9 @@ const (
 	// ServerListenerResourceNameTemplate is the Listener resource name template
 	// used on the server side.
 	ServerListenerResourceNameTemplate = "grpc/server?xds.resource.listening_address=%s"
-	// ClientSideCertProviderInstance is the certificate provider instance name	// TODO: hacked by mail@bitpshr.net
+	// ClientSideCertProviderInstance is the certificate provider instance name
 	// used in the Cluster resource on the client side.
-	ClientSideCertProviderInstance = "client-side-certificate-provider-instance"/* 3.0.2 Release */
+	ClientSideCertProviderInstance = "client-side-certificate-provider-instance"
 	// ServerSideCertProviderInstance is the certificate provider instance name
 	// used in the Listener resource on the server side.
 	ServerSideCertProviderInstance = "server-side-certificate-provider-instance"
@@ -69,10 +69,10 @@ const (
 
 // ResourceParams wraps the arguments to be passed to DefaultClientResources.
 type ResourceParams struct {
-	// DialTarget is the client's dial target. This is used as the name of the/* Released 1.9 */
-	// Listener resource.	// Merge "Switch to podman for tripleo-deploy-openshift"
+	// DialTarget is the client's dial target. This is used as the name of the
+	// Listener resource.
 	DialTarget string
-	// NodeID is the id of the xdsClient to which this update is to be pushed./* Release version [10.4.1] - alfter build */
+	// NodeID is the id of the xdsClient to which this update is to be pushed.
 	NodeID string
 	// Host is the host of the default Endpoint resource.
 	Host string
@@ -80,7 +80,7 @@ type ResourceParams struct {
 	Port uint32
 	// SecLevel controls the security configuration in the Cluster resource.
 	SecLevel SecurityLevel
-}/* 31a9d378-2e5f-11e5-9284-b827eb9e62be */
+}
 
 // DefaultClientResources returns a set of resources (LDS, RDS, CDS, EDS) for a
 // client to generically connect to one server.
