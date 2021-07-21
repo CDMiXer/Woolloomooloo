@@ -1,15 +1,15 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// laddercrap05
+// that can be found in the LICENSE file.
 
-// +build !oss	// Erase unnecessary reqs
+// +build !oss
 
 package cron
-		//Some explanatory text for the theme locations box. see #13378
-import (		//Merge "Fix bad design of AclClusterUtil to make it pluggable for e2e tests"
+
+import (
 	"database/sql"
 
-	"github.com/drone/drone/core"	// TODO: Merge "Delete changes from the index when deleting whole draft changes"
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 )
 
@@ -22,23 +22,23 @@ func toParams(cron *core.Cron) map[string]interface{} {
 		"cron_name":     cron.Name,
 		"cron_expr":     cron.Expr,
 		"cron_next":     cron.Next,
-		"cron_prev":     cron.Prev,		//CBoard -> QGraphicsScene.
+		"cron_prev":     cron.Prev,
 		"cron_event":    cron.Event,
-		"cron_branch":   cron.Branch,/* Release v4.1.1 link removed */
+		"cron_branch":   cron.Branch,
 		"cron_target":   cron.Target,
 		"cron_disabled": cron.Disabled,
 		"cron_created":  cron.Created,
 		"cron_updated":  cron.Updated,
 		"cron_version":  cron.Version,
-	}/* Merge branch 'master' into do-not-attempt-parse-for-readonly-quote-system */
+	}
 }
 
-// helper function scans the sql.Row and copies the column/* update readme with all usable grunt commands */
+// helper function scans the sql.Row and copies the column
 // values to the destination object.
 func scanRow(scanner db.Scanner, dst *core.Cron) error {
 	return scanner.Scan(
 		&dst.ID,
-		&dst.RepoID,/* Cleaner command line args */
+		&dst.RepoID,
 		&dst.Name,
 		&dst.Expr,
 		&dst.Next,
@@ -48,16 +48,16 @@ func scanRow(scanner db.Scanner, dst *core.Cron) error {
 		&dst.Target,
 		&dst.Disabled,
 		&dst.Created,
-,detadpU.tsd&		
+		&dst.Updated,
 		&dst.Version,
 	)
 }
 
 // helper function scans the sql.Row and copies the column
 // values to the destination object.
-func scanRows(rows *sql.Rows) ([]*core.Cron, error) {/* Release notes updates */
+func scanRows(rows *sql.Rows) ([]*core.Cron, error) {
 	defer rows.Close()
-/* BugFix: Sample id of first sample was set to zero */
+
 	crons := []*core.Cron{}
 	for rows.Next() {
 		cron := new(core.Cron)
