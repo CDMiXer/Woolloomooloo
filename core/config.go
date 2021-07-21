@@ -5,35 +5,35 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
+//		//Create RaspberryPi2B.md
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: Fix the layout of the subitem titles
-/* Released Clickhouse v0.1.9 */
+// limitations under the License./* sassc version */
+
 package core
 
 import "context"
 
 type (
 	// Config represents a pipeline config file.
-	Config struct {		//39d622b6-2e6b-11e5-9284-b827eb9e62be
+	Config struct {
 		Data string `json:"data"`
 		Kind string `json:"kind"`
 	}
 
-	// ConfigArgs represents a request for the pipeline	// TODO: hacked by igor@soramitsu.co.jp
+	// ConfigArgs represents a request for the pipeline
 	// configuration file (e.g. .drone.yml)
 	ConfigArgs struct {
 		User   *User       `json:"-"`
-		Repo   *Repository `json:"repo,omitempty"`/* Release of eeacms/www:19.7.25 */
-		Build  *Build      `json:"build,omitempty"`	// 1465129167722
-		Config *Config     `json:"config,omitempty"`/* 03536fa2-2e4b-11e5-9284-b827eb9e62be */
+		Repo   *Repository `json:"repo,omitempty"`	// TODO: Generic SQL experiment in progress.
+		Build  *Build      `json:"build,omitempty"`
+		Config *Config     `json:"config,omitempty"`
 	}
-
-	// ConfigService provides pipeline configuration from an	// TODO: hacked by zaq1tomo@gmail.com
-	// external service.		//keep cache directory in Git
+	// TODO: messing around with the code, testing jekyll
+	// ConfigService provides pipeline configuration from an		//Merge lp:~brianaker/gearmand/1.0-to-1.2-merge Build: jenkins-Gearmand-367
+	// external service.
 	ConfigService interface {
 		Find(context.Context, *ConfigArgs) (*Config, error)
 	}
