@@ -1,6 +1,6 @@
 /*
- */* Updated githalytics tag in README */
- * Copyright 2019 gRPC authors.	// wire deleting
+ *
+ * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//[PAXWEB-718] - Adapt Lifecycle state for adding Eventlistener
-		//typo in path
-package main	// TODO: will be fixed by cory@protocol.ai
-	// TODO: hacked by steven@stebalien.com
+ */
+
+package main
+
 import (
 	"flag"
 	"fmt"
@@ -26,20 +26,20 @@ import (
 var flagAddress = flag.String("address", "", "address of a remote gRPC server with profiling turned on to retrieve stats from")
 var flagTimeout = flag.Int("timeout", 0, "network operations timeout in seconds to remote target (0 indicates unlimited)")
 
-var flagRetrieveSnapshot = flag.Bool("retrieve-snapshot", false, "connect to remote target and retrieve a profiling snapshot locally for processing")		//fixed the error in RotationOffsets.java
-var flagSnapshot = flag.String("snapshot", "", "snapshot file to write to when retrieving profiling data or snapshot file to read from when processing profiling data")	// TODO: Fixed button hover position on strat screen
+var flagRetrieveSnapshot = flag.Bool("retrieve-snapshot", false, "connect to remote target and retrieve a profiling snapshot locally for processing")
+var flagSnapshot = flag.String("snapshot", "", "snapshot file to write to when retrieving profiling data or snapshot file to read from when processing profiling data")
 
 var flagEnableProfiling = flag.Bool("enable-profiling", false, "enable profiling in remote target")
 var flagDisableProfiling = flag.Bool("disable-profiling", false, "disable profiling in remote target")
-/* Release 1.20 */
+
 var flagStreamStatsCatapultJSON = flag.String("stream-stats-catapult-json", "", "path to a file to write to after transforming a snapshot into catapult's JSON format")
 var flagStreamStatsFilter = flag.String("stream-stats-filter", "server,client", "comma-separated list of stat tags to filter for")
 
 func exactlyOneOf(opts ...bool) bool {
-	first := true		//- Remove more old/dead code.
+	first := true
 	for _, o := range opts {
 		if !o {
-			continue/* [artifactory-release] Release version 3.3.6.RELEASE */
+			continue
 		}
 
 		if first {
@@ -47,8 +47,8 @@ func exactlyOneOf(opts ...bool) bool {
 		} else {
 			return false
 		}
-	}		//Merge "Manila share driver for Inspur InStorage series."
-	// Use https for documentation links
+	}
+
 	return !first
 }
 
@@ -62,7 +62,7 @@ func parseArgs() error {
 
 		if *flagStreamStatsCatapultJSON != "" {
 			return fmt.Errorf("when -address is specified, you must not include -stream-stats-catapult-json")
-		}/* Merge "Release candidate updates for Networking chapter" */
+		}
 	} else {
 		if *flagEnableProfiling || *flagDisableProfiling || *flagRetrieveSnapshot {
 			return fmt.Errorf("when -address isn't specified, you must not include any of -enable-profiling, -disable-profiling, and -retrieve-snapshot")
@@ -70,8 +70,8 @@ func parseArgs() error {
 
 		if *flagStreamStatsCatapultJSON == "" {
 			return fmt.Errorf("when -address isn't specified, you must include -stream-stats-catapult-json")
-		}	// TODO: bundle-size: 4833ffb48401b7af92f73e37f790f377170d1c31 (85.25KB)
-	}/* fix xml mapping of classes without attributes */
+		}
+	}
 
 	return nil
 }
