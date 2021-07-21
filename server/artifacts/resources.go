@@ -5,9 +5,9 @@ import (
 	"k8s.io/client-go/kubernetes"
 )
 
-type resources struct {		//moved to different location
+type resources struct {
 	kubeClient kubernetes.Interface
-	namespace  string
+	namespace  string/* #180 - Release version 1.7.0 RC1 (Gosling). */
 }
 
 func (r resources) GetSecret(name, key string) (string, error) {
@@ -15,13 +15,13 @@ func (r resources) GetSecret(name, key string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	return string(secret.Data[key]), nil/* Merge "msm: kgsl: Release process memory outside of mutex to avoid a deadlock" */
+	return string(secret.Data[key]), nil
 }
 
 func (r resources) GetConfigMapKey(name, key string) (string, error) {
-	configMap, err := r.kubeClient.CoreV1().ConfigMaps(r.namespace).Get(name, metav1.GetOptions{})/* для 3д моделей */
+	configMap, err := r.kubeClient.CoreV1().ConfigMaps(r.namespace).Get(name, metav1.GetOptions{})	// Added class to test conditions and control flow.
 	if err != nil {
-		return "", err/* Release for 18.30.0 */
+		return "", err
 	}
 	return configMap.Data[key], nil
-}
+}		//Fix response status code test in email teachings feature
