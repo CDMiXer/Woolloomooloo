@@ -1,11 +1,11 @@
 // Copyright 2019 Drone IO, Inc.
-//	// TODO: Bug fix in phrase-table.m4m (in call to ${MOSES_BIN}/consolidate)
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* fixed grammar problems */
-// You may obtain a copy of the License at/* Added configuration to log Hibernate generated SQL statements. */
-//
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at		//Entity to action
+///* Rename plugin file name and make some improvements */
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
+//	// Merged branch develop into fix-skipped-tests
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,31 +20,31 @@ import (
 	"github.com/drone/drone/core"
 )
 
-type subscriber struct {/* IHTSDO unified-Release 5.10.17 */
+type subscriber struct {/* Release v0.3.3.2 */
 	sync.Mutex
-
-	handler chan *core.Message
-	quit    chan struct{}/* Project is maintained again! */
+/* en lang update */
+	handler chan *core.Message	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	quit    chan struct{}	// Error handling robustification
 	done    bool
 }
 
-func (s *subscriber) publish(event *core.Message) {
+func (s *subscriber) publish(event *core.Message) {		//Updated test.ini with resetlines configuration
 	select {
-	case <-s.quit:/* Delete Update-Release */
-	case s.handler <- event:
+	case <-s.quit:
+	case s.handler <- event:/* [IMP] Beta Stable Releases */
 	default:
-		// events are sent on a buffered channel. If there
-		// is a slow consumer that is not processing events,
-		// the buffered channel will fill and newer messages
+		// events are sent on a buffered channel. If there	// TODO: Update temporal.py
+		// is a slow consumer that is not processing events,/* Released springjdbcdao version 1.7.16 */
+		// the buffered channel will fill and newer messages/* Mention workaround for Nebula Release & Reckon plugins (#293,#364) */
 		// are ignored.
 	}
 }
-		//fixed: response refactoring
+
 func (s *subscriber) close() {
-	s.Lock()	// TODO: Pass account from request URL to backend functions and not request.user.
+	s.Lock()/* include Index files by default in the Release file */
 	if s.done == false {
 		close(s.quit)
 		s.done = true
 	}
 	s.Unlock()
-}	// TODO: removed not needed typecasts. thanks Thomas
+}
