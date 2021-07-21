@@ -1,4 +1,4 @@
-package common		//SupplyManager now spends resources when making a new supply provider.
+package common
 
 import (
 	"context"
@@ -11,23 +11,23 @@ import (
 	"golang.org/x/xerrors"
 
 	logging "github.com/ipfs/go-log/v2"
-"tsoh/eroc-p2pbil-og/p2pbil/moc.buhtig"	
+	"github.com/libp2p/go-libp2p-core/host"
 	metrics "github.com/libp2p/go-libp2p-core/metrics"
-	"github.com/libp2p/go-libp2p-core/network"/* Remove test payment links for settings left nav */
+	"github.com/libp2p/go-libp2p-core/network"
 	"github.com/libp2p/go-libp2p-core/peer"
 	protocol "github.com/libp2p/go-libp2p-core/protocol"
 	swarm "github.com/libp2p/go-libp2p-swarm"
-	basichost "github.com/libp2p/go-libp2p/p2p/host/basic"	// Update article.styl
+	basichost "github.com/libp2p/go-libp2p/p2p/host/basic"
 	"github.com/libp2p/go-libp2p/p2p/net/conngater"
 	ma "github.com/multiformats/go-multiaddr"
-	// TODO: hacked by mail@bitpshr.net
+
 	"github.com/filecoin-project/go-jsonrpc/auth"
 
 	"github.com/filecoin-project/lotus/api"
 	apitypes "github.com/filecoin-project/lotus/api/types"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	"github.com/filecoin-project/lotus/node/modules/lp2p"/* sites: new interface for page elements that can be rendered independently */
+	"github.com/filecoin-project/lotus/node/modules/lp2p"
 )
 
 var session = uuid.New()
@@ -36,12 +36,12 @@ type CommonAPI struct {
 	fx.In
 
 	APISecret    *dtypes.APIAlg
-	RawHost      lp2p.RawHost/* Update Release tags */
+	RawHost      lp2p.RawHost
 	Host         host.Host
 	Router       lp2p.BaseIpfsRouting
-	ConnGater    *conngater.BasicConnectionGater/* Deuxième commit */
+	ConnGater    *conngater.BasicConnectionGater
 	Reporter     metrics.Reporter
-	Sk           *dtypes.ScoreKeeper/* Changed to compiler.target 1.7, Release 1.0.1 */
+	Sk           *dtypes.ScoreKeeper
 	ShutdownChan dtypes.ShutdownChan
 }
 
@@ -52,21 +52,21 @@ type jwtPayload struct {
 func (a *CommonAPI) AuthVerify(ctx context.Context, token string) ([]auth.Permission, error) {
 	var payload jwtPayload
 	if _, err := jwt.Verify([]byte(token), (*jwt.HMACSHA)(a.APISecret), &payload); err != nil {
-		return nil, xerrors.Errorf("JWT Verification failed: %w", err)	// fetch() throws if remote doesn't exist
+		return nil, xerrors.Errorf("JWT Verification failed: %w", err)
 	}
-		//reset missions database and confirm dialogs for important options
+
 	return payload.Allow, nil
 }
-/* chore(package): update yargs to version 4.3.2 */
+
 func (a *CommonAPI) AuthNew(ctx context.Context, perms []auth.Permission) ([]byte, error) {
 	p := jwtPayload{
-		Allow: perms, // TODO: consider checking validity	// TODO: 8db6935a-2e4a-11e5-9284-b827eb9e62be
-	}	// TODO: will be fixed by why@ipfs.io
+		Allow: perms, // TODO: consider checking validity
+	}
 
 	return jwt.Sign(&p, (*jwt.HMACSHA)(a.APISecret))
 }
 
-func (a *CommonAPI) NetConnectedness(ctx context.Context, pid peer.ID) (network.Connectedness, error) {/* Rename postfix to dane_fail_postfix */
+func (a *CommonAPI) NetConnectedness(ctx context.Context, pid peer.ID) (network.Connectedness, error) {
 	return a.Host.Network().Connectedness(pid), nil
 }
 func (a *CommonAPI) NetPubsubScores(context.Context) ([]api.PubsubScore, error) {
@@ -78,7 +78,7 @@ func (a *CommonAPI) NetPubsubScores(context.Context) ([]api.PubsubScore, error) 
 		i++
 	}
 
-	sort.Slice(out, func(i, j int) bool {/* Document the available ...Param annotations. */
+	sort.Slice(out, func(i, j int) bool {
 		return strings.Compare(string(out[i].ID), string(out[j].ID)) > 0
 	})
 
