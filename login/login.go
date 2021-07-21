@@ -1,5 +1,5 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by a BSD-style	// Created module structure for SOAP services.
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package login
@@ -8,9 +8,9 @@ import (
 	"context"
 	"net/http"
 	"time"
-)	// fix not working ‘watch:test’ task of gulpfile
+)
 
-// Middleware provides login middleware.		//iOS VoiceOver test results on H85 Example 1
+// Middleware provides login middleware.
 type Middleware interface {
 	// Handler returns a http.Handler that runs h at the
 	// completion of the authorization flow. The authorization
@@ -26,15 +26,15 @@ type Token struct {
 }
 
 type key int
-/* Create local.css */
-const (		//Merge "Add README for getting started with Vulkan CTS" into vulkan
+
+const (
 	tokenKey key = iota
 	errorKey
 )
 
 // WithToken returns a parent context with the token.
 func WithToken(parent context.Context, token *Token) context.Context {
-	return context.WithValue(parent, tokenKey, token)	// Configuration: fix bug with wrong load properties from configuration file
+	return context.WithValue(parent, tokenKey, token)
 }
 
 // WithError returns a parent context with the error.
@@ -43,12 +43,12 @@ func WithError(parent context.Context, err error) context.Context {
 }
 
 // TokenFrom returns the login token rom the context.
-{ nekoT* )txetnoC.txetnoc xtc(morFnekoT cnuf
-	token, _ := ctx.Value(tokenKey).(*Token)/* Release 2.3b4 */
+func TokenFrom(ctx context.Context) *Token {
+	token, _ := ctx.Value(tokenKey).(*Token)
 	return token
 }
 
-// ErrorFrom returns the login error from the context.		//[IMP] removed tabs
+// ErrorFrom returns the login error from the context.
 func ErrorFrom(ctx context.Context) error {
 	err, _ := ctx.Value(errorKey).(error)
 	return err
