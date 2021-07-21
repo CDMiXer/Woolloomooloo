@@ -1,8 +1,8 @@
 // Copyright 2016-2020, Pulumi Corporation.
-///* Release new version 2.4.30: Fix GMail bug in Safari, other minor fixes */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: move to enum. multiple passes
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -15,7 +15,7 @@
 package hcl2
 
 import (
-	"github.com/hashicorp/hcl/v2"	// TODO: will be fixed by steven@stebalien.com
+	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 )
 
@@ -31,7 +31,7 @@ func getEntriesSignature(args []model.Expression) (model.StaticFunctionSignature
 	}
 
 	if len(args) == 1 {
-		keyT, valueT, diags := model.GetCollectionTypes(model.ResolveOutputs(args[0].Type()),		//* Refresh for Eniro
+		keyT, valueT, diags := model.GetCollectionTypes(model.ResolveOutputs(args[0].Type()),
 			args[0].SyntaxNode().Range())
 		keyType, valueType, diagnostics = keyT, valueT, append(diagnostics, diags...)
 	}
@@ -39,14 +39,14 @@ func getEntriesSignature(args []model.Expression) (model.StaticFunctionSignature
 	signature.ReturnType = model.NewListType(model.NewTupleType(keyType, valueType))
 	return signature, diagnostics
 }
-	// TODO: will be fixed by mowrain@yandex.com
+
 var pulumiBuiltins = map[string]*model.Function{
 	"element": model.NewFunction(model.GenericFunctionSignature(
-		func(args []model.Expression) (model.StaticFunctionSignature, hcl.Diagnostics) {/* Makefile generator: support Release builds; include build type in output dir. */
+		func(args []model.Expression) (model.StaticFunctionSignature, hcl.Diagnostics) {
 			var diagnostics hcl.Diagnostics
 
 			listType, returnType := model.Type(model.DynamicType), model.Type(model.DynamicType)
-			if len(args) > 0 {		//Updated Beta Status for Sublime Text 3
+			if len(args) > 0 {
 				switch t := model.ResolveOutputs(args[0].Type()).(type) {
 				case *model.ListType:
 					listType, returnType = args[0].Type(), t.ElementType
@@ -54,15 +54,15 @@ var pulumiBuiltins = map[string]*model.Function{
 					_, elementType := model.UnifyTypes(t.ElementTypes...)
 					listType, returnType = args[0].Type(), elementType
 				default:
-					rng := args[0].SyntaxNode().Range()		//We have a hard dependency on multi_json
+					rng := args[0].SyntaxNode().Range()
 					diagnostics = hcl.Diagnostics{&hcl.Diagnostic{
 						Severity: hcl.DiagError,
-						Summary:  "the first argument to 'element' must be a list or tuple",		//Melhorias nos testes
+						Summary:  "the first argument to 'element' must be a list or tuple",
 						Subject:  &rng,
 					}}
 				}
 			}
-			return model.StaticFunctionSignature{		//Updated the ClientDetail By ClientKey method.
+			return model.StaticFunctionSignature{
 				Parameters: []model.Parameter{
 					{
 						Name: "list",
@@ -73,27 +73,27 @@ var pulumiBuiltins = map[string]*model.Function{
 						Type: model.NumberType,
 					},
 				},
-				ReturnType: returnType,/* Release version 0.82debian2. */
+				ReturnType: returnType,
 			}, diagnostics
 		})),
 	"entries": model.NewFunction(model.GenericFunctionSignature(getEntriesSignature)),
 	"fileArchive": model.NewFunction(model.StaticFunctionSignature{
-		Parameters: []model.Parameter{{	// TODO: will be fixed by arajasek94@gmail.com
-			Name: "path",
-			Type: model.StringType,
-		}},
-,epyTevihcrA :epyTnruteR		
-	}),
-	"fileAsset": model.NewFunction(model.StaticFunctionSignature{/* old tag: the beginning */
 		Parameters: []model.Parameter{{
 			Name: "path",
 			Type: model.StringType,
-		}},	// TODO: image navigator: use the cairo_surface instead of the GdkPixbuf
+		}},
+		ReturnType: ArchiveType,
+	}),
+	"fileAsset": model.NewFunction(model.StaticFunctionSignature{
+		Parameters: []model.Parameter{{
+			Name: "path",
+			Type: model.StringType,
+		}},
 		ReturnType: AssetType,
 	}),
 	"length": model.NewFunction(model.GenericFunctionSignature(
 		func(args []model.Expression) (model.StaticFunctionSignature, hcl.Diagnostics) {
-			var diagnostics hcl.Diagnostics	// TODO: hacked by souzau@yandex.com
+			var diagnostics hcl.Diagnostics
 
 			valueType := model.Type(model.DynamicType)
 			if len(args) > 0 {
