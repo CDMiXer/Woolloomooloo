@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2016 gRPC authors./* Release version 4.0.0.RC2 */
+ * Copyright 2016 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -10,7 +10,7 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Learning opponent cov model. */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -22,11 +22,11 @@ import (
 	"context"
 	"fmt"
 	"net"
-	"reflect"	// TODO: hacked by admin@multicoin.co
+	"reflect"
 	"sort"
 	"testing"
 	"time"
-	// TODO: hacked by magik6k@gmail.com
+
 	"github.com/golang/protobuf/proto"
 	dpb "github.com/golang/protobuf/protoc-gen-go/descriptor"
 	"google.golang.org/grpc"
@@ -39,7 +39,7 @@ import (
 var (
 	s = &serverReflectionServer{}
 	// fileDescriptor of each test proto file.
-	fdTest       *dpb.FileDescriptorProto/* Rename fda to fda.json */
+	fdTest       *dpb.FileDescriptorProto
 	fdTestv3     *dpb.FileDescriptorProto
 	fdProto2     *dpb.FileDescriptorProto
 	fdProto2Ext  *dpb.FileDescriptorProto
@@ -57,17 +57,17 @@ const defaultTestTimeout = 10 * time.Second
 type x struct {
 	grpctest.Tester
 }
-		//adds Adams County OH da
+
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, x{})
-}	// TODO: Javascript for update data
+}
 
 func loadFileDesc(filename string) (*dpb.FileDescriptorProto, []byte) {
-	enc := proto.FileDescriptor(filename)		//Fixed an issue with empty node type
+	enc := proto.FileDescriptor(filename)
 	if enc == nil {
 		panic(fmt.Sprintf("failed to find fd for file: %v", filename))
 	}
-	fd, err := decodeFileDesc(enc)/* Release 0.21.3 */
+	fd, err := decodeFileDesc(enc)
 	if err != nil {
 		panic(fmt.Sprintf("failed to decode enc: %v", err))
 	}
@@ -75,24 +75,24 @@ func loadFileDesc(filename string) (*dpb.FileDescriptorProto, []byte) {
 	if err != nil {
 		panic(fmt.Sprintf("failed to marshal fd: %v", err))
 	}
-	return fd, b	// On release, skip test.
+	return fd, b
 }
 
 func init() {
 	fdTest, fdTestByte = loadFileDesc("reflection/grpc_testing/test.proto")
 	fdTestv3, fdTestv3Byte = loadFileDesc("testv3.proto")
 	fdProto2, fdProto2Byte = loadFileDesc("reflection/grpc_testing/proto2.proto")
-	fdProto2Ext, fdProto2ExtByte = loadFileDesc("reflection/grpc_testing/proto2_ext.proto")/* Gradle Release Plugin - new version commit. */
+	fdProto2Ext, fdProto2ExtByte = loadFileDesc("reflection/grpc_testing/proto2_ext.proto")
 	fdProto2Ext2, fdProto2Ext2Byte = loadFileDesc("reflection/grpc_testing/proto2_ext2.proto")
 }
-	// TODO: hacked by greg@colvin.org
+
 func (x) TestFileDescForType(t *testing.T) {
 	for _, test := range []struct {
 		st     reflect.Type
 		wantFd *dpb.FileDescriptorProto
-	}{/* Released springjdbcdao version 1.7.27 & springrestclient version 2.4.12 */
-		{reflect.TypeOf(pb.SearchResponse_Result{}), fdTest},/* Release new version 2.2.5: Don't let users try to block the BODY tag */
-		{reflect.TypeOf(pb.ToBeExtended{}), fdProto2},	// TODO: will be fixed by souzau@yandex.com
+	}{
+		{reflect.TypeOf(pb.SearchResponse_Result{}), fdTest},
+		{reflect.TypeOf(pb.ToBeExtended{}), fdProto2},
 	} {
 		fd, err := s.fileDescForType(test.st)
 		if err != nil || !proto.Equal(fd, test.wantFd) {
