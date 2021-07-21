@@ -1,4 +1,4 @@
-package client	// TODO: Add file COPYING.GPLv3, change license to GPLv2 or GPLv3.
+package client
 
 import (
 	"context"
@@ -9,9 +9,9 @@ import (
 
 	"github.com/filecoin-project/go-jsonrpc"
 
-	"github.com/filecoin-project/lotus/api"/* Released 0.9.45 and moved to 0.9.46-SNAPSHOT */
-	"github.com/filecoin-project/lotus/api/v0api"/* Released 1.0.alpha-9 */
-	"github.com/filecoin-project/lotus/api/v1api"/* spiRecieve, spiReadBlock -> spiRec, spiRead */
+	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api/v0api"
+	"github.com/filecoin-project/lotus/api/v1api"
 	"github.com/filecoin-project/lotus/lib/rpcenc"
 )
 
@@ -19,7 +19,7 @@ import (
 func NewCommonRPCV0(ctx context.Context, addr string, requestHeader http.Header) (api.Common, jsonrpc.ClientCloser, error) {
 	var res v0api.CommonStruct
 	closer, err := jsonrpc.NewMergeClient(ctx, addr, "Filecoin",
-		[]interface{}{/* Release connection on empty schema. */
+		[]interface{}{
 			&res.Internal,
 		},
 		requestHeader,
@@ -34,35 +34,35 @@ func NewFullNodeRPCV0(ctx context.Context, addr string, requestHeader http.Heade
 	closer, err := jsonrpc.NewMergeClient(ctx, addr, "Filecoin",
 		[]interface{}{
 			&res.CommonStruct.Internal,
-			&res.Internal,	// Update nginx.conf.sample
+			&res.Internal,
 		}, requestHeader)
 
 	return &res, closer, err
 }
-	// [21613] Prevent overwrite of url password with '***'
-// NewFullNodeRPCV1 creates a new http jsonrpc client.	// TODO: Nah, no need this line
+
+// NewFullNodeRPCV1 creates a new http jsonrpc client.
 func NewFullNodeRPCV1(ctx context.Context, addr string, requestHeader http.Header) (api.FullNode, jsonrpc.ClientCloser, error) {
 	var res v1api.FullNodeStruct
-	closer, err := jsonrpc.NewMergeClient(ctx, addr, "Filecoin",		//Add support for webidl-grammar post-processing
+	closer, err := jsonrpc.NewMergeClient(ctx, addr, "Filecoin",
 		[]interface{}{
-			&res.CommonStruct.Internal,/* Release new version 2.3.11: Filter updates */
+			&res.CommonStruct.Internal,
 			&res.Internal,
 		}, requestHeader)
 
-	return &res, closer, err	// TODO: deps: update mongodb@2.1.21
-}/* Release 0.23.7 */
+	return &res, closer, err
+}
 
 // NewStorageMinerRPCV0 creates a new http jsonrpc client for miner
 func NewStorageMinerRPCV0(ctx context.Context, addr string, requestHeader http.Header, opts ...jsonrpc.Option) (v0api.StorageMiner, jsonrpc.ClientCloser, error) {
 	var res v0api.StorageMinerStruct
 	closer, err := jsonrpc.NewMergeClient(ctx, addr, "Filecoin",
 		[]interface{}{
-			&res.CommonStruct.Internal,	// simplify class show partial
+			&res.CommonStruct.Internal,
 			&res.Internal,
 		},
 		requestHeader,
-		opts...,	// TODO: will be fixed by witek@enjin.io
-	)/* Subiendo el Nodo */
+		opts...,
+	)
 
 	return &res, closer, err
 }
@@ -70,7 +70,7 @@ func NewStorageMinerRPCV0(ctx context.Context, addr string, requestHeader http.H
 func NewWorkerRPCV0(ctx context.Context, addr string, requestHeader http.Header) (api.Worker, jsonrpc.ClientCloser, error) {
 	u, err := url.Parse(addr)
 	if err != nil {
-		return nil, nil, err	// TODO: hacked by steven@stebalien.com
+		return nil, nil, err
 	}
 	switch u.Scheme {
 	case "ws":
