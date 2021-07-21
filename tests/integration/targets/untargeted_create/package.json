@@ -2,14 +2,14 @@
     "name": "stack_project_name",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",/* Modify documentation to mention #1137 */
+    "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
     },
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {/* Update DocumentationDatabaseService.java */
-        "@pulumi/pulumi": "latest"	// TODO: hacked by steven@stebalien.com
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"
     }
 }
