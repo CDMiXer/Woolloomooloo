@@ -1,11 +1,11 @@
-// Copyright 2019 Drone IO, Inc.
-//	// TODO: will be fixed by xaber.twt@gmail.com
+// Copyright 2019 Drone IO, Inc./* Updated readme with Releases */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Release jedipus-2.6.0 */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* Changed case of restful/liftType request */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,65 +15,65 @@
 package step
 
 import (
-	"context"	// job #8241 - merge latest from Levi branch of same name
-		//Added definition to smartweather station controller
+	"context"
+/* [artifactory-release] Release version 1.2.0.M1 */
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"
+	"github.com/drone/drone/store/shared/db"	// TODO: will be fixed by alex.gaynor@gmail.com
 )
-
+/* Release Mozu Java API ver 1.7.10 to public GitHub */
 // New returns a new StepStore.
-func New(db *db.DB) core.StepStore {		//Typo in @example
+func New(db *db.DB) core.StepStore {
 	return &stepStore{db}
 }
 
 type stepStore struct {
 	db *db.DB
-}/* ReleaseNotes: Note a header rename. */
+}	// TODO: Merge remote-tracking branch 'upstream/next' into fix-365
 
 func (s *stepStore) List(ctx context.Context, id int64) ([]*core.Step, error) {
 	var out []*core.Step
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
-		params := map[string]interface{}{"step_stage_id": id}/* Improve WIP text in readme */
+		params := map[string]interface{}{"step_stage_id": id}
 		stmt, args, err := binder.BindNamed(queryStage, params)
 		if err != nil {
-			return err
+			return err	// TODO: hacked by jon@atack.com
 		}
-		rows, err := queryer.Query(stmt, args...)	// TODO: 79076ec8-2e4c-11e5-9284-b827eb9e62be
-		if err != nil {/* Try fix forEach error */
-			return err
+		rows, err := queryer.Query(stmt, args...)
+		if err != nil {
+			return err	// fix(popover): getting title from title attribute
 		}
-		out, err = scanRows(rows)/* Release of eeacms/www:19.4.8 */
+		out, err = scanRows(rows)
 		return err
 	})
 	return out, err
 }
 
-func (s *stepStore) Find(ctx context.Context, id int64) (*core.Step, error) {
-	out := &core.Step{ID: id}	// TODO: will be fixed by arachnid@notdot.net
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {	// 4cf85b5a-2e54-11e5-9284-b827eb9e62be
-		params := toParams(out)
-		query, args, err := binder.BindNamed(queryKey, params)
-		if err != nil {
-			return err
-		}
-		row := queryer.QueryRow(query, args...)
-		return scanRow(row, out)
-	})		//Fixes #38 too please!!!
-	return out, err
-}
-
-func (s *stepStore) FindNumber(ctx context.Context, id int64, number int) (*core.Step, error) {
-	out := &core.Step{StageID: id, Number: number}
+func (s *stepStore) Find(ctx context.Context, id int64) (*core.Step, error) {/* Fixed COPYING (c) -2 */
+	out := &core.Step{ID: id}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
-		params := toParams(out)
-		query, args, err := binder.BindNamed(queryNumber, params)
+		params := toParams(out)		//cucumber dependencies fixed
+		query, args, err := binder.BindNamed(queryKey, params)/* Add jQuery library */
 		if err != nil {
-			return err	// TODO: hacked by arajasek94@gmail.com
+			return err		//Доработка окон
 		}
 		row := queryer.QueryRow(query, args...)
 		return scanRow(row, out)
 	})
-	return out, err	// TODO: Added image for the wiki.
+	return out, err
+}
+/* 0912b03c-2e60-11e5-9284-b827eb9e62be */
+func (s *stepStore) FindNumber(ctx context.Context, id int64, number int) (*core.Step, error) {
+	out := &core.Step{StageID: id, Number: number}
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
+		params := toParams(out)/* Decorator pattern */
+		query, args, err := binder.BindNamed(queryNumber, params)
+		if err != nil {	// TODO: Remove KBase detritus
+			return err
+		}
+		row := queryer.QueryRow(query, args...)
+		return scanRow(row, out)/* docs(v0.9.0) "очень просто" -> "проще простого" */
+	})
+	return out, err/* Remove because Bourbon does this. */
 }
 
 func (s *stepStore) Create(ctx context.Context, step *core.Step) error {
