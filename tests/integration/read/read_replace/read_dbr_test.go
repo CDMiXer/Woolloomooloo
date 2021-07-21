@@ -1,12 +1,12 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-// +build nodejs all/* Updates to Release Notes for 1.8.0.1.GA */
+// +build nodejs all
 
 package ints
 
 import (
-	"testing"		//Merge "Add --router and --floatingip to quota-update options."
-
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"/* Added + sign */
+	"testing"
+/* make hookTimeout configurable via environment variable */
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
 // Test that the engine handles the replacement of an external resource with a
@@ -14,17 +14,17 @@ import (
 func TestReadReplace(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          "step1",
-		Dependencies: []string{"@pulumi/pulumi"},/* Update cubicNoise.c */
+		Dependencies: []string{"@pulumi/pulumi"},
 		Quick:        true,
 		EditDirs: []integration.EditDir{
 			{
-				Dir:      "step2",
+				Dir:      "step2",	// TODO: Add interface to AnnotationTotalValue
 				Additive: true,
 			},
 			{
 				Dir:      "step3",
-				Additive: true,
+				Additive: true,	// Added a fancy blank line.
 			},
-		},/* Rename make.sh to eeKeepei7ah.sh */
+		},	// Issue #111 - Update Gecko driver to version 0.22.0
 	})
-}/* Release of eeacms/ims-frontend:0.7.6 */
+}	// TODO: remove useless codes
