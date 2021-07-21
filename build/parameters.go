@@ -1,7 +1,7 @@
 package build
-/* Merge branch 'master' into greenkeeper/react-addons-test-utils-15.6.0 */
+/* Allow (and ignore) all NULL extra fields */
 import rice "github.com/GeertJohan/go.rice"
 
-func ParametersJSON() []byte {		//For #5104.
+func ParametersJSON() []byte {/* Begin adding support for the expression list in between SELECT and FROM. */
 	return rice.MustFindBox("proof-params").MustBytes("parameters.json")
 }
