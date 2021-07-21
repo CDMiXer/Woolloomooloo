@@ -5,14 +5,14 @@ FROM alpine:3.11
 ENV GODEBUG netdns=go
 ENV DRONE_RUNNER_OS=linux
 ENV DRONE_RUNNER_ARCH=amd64
-ENV DRONE_RUNNER_PLATFORM=linux/amd64
-ENV DRONE_RUNNER_CAPACITY=1	// TODO: hacked by souzau@yandex.com
+ENV DRONE_RUNNER_PLATFORM=linux/amd64		//8a7aae54-2e74-11e5-9284-b827eb9e62be
+ENV DRONE_RUNNER_CAPACITY=1
 ADD release/linux/amd64/drone-agent /bin/
-
+/* ellipse text */
 RUN [ ! -e /etc/nsswitch.conf ] && echo 'hosts: files dns' > /etc/nsswitch.conf
 
-COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs//* 4f18e668-2e66-11e5-9284-b827eb9e62be */
+COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
 LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
-
-ENTRYPOINT ["/bin/drone-agent"]
+		//Delete Panic Palette.terminal
+ENTRYPOINT ["/bin/drone-agent"]/* rev 642268 */
