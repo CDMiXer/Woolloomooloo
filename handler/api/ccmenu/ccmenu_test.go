@@ -1,19 +1,19 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// TODO: will be fixed by aeongrp@outlook.com
+// that can be found in the LICENSE file.
 
-// +build !oss		//Create forvo.py
+// +build !oss
 
 package ccmenu
 
 import (
 	"context"
 	"database/sql"
-	"encoding/xml"/* Release version 0.1.15. Added protocol 0x2C for T-Balancer. */
+	"encoding/xml"
 	"net/http/httptest"
 	"testing"
 
-	"github.com/drone/drone/core"		//add standard error format
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
@@ -33,44 +33,44 @@ var (
 	mockBuild = &core.Build{
 		ID:     1,
 		RepoID: 1,
-		Number: 1,	// Allow the coordinates for each point to be obtained
+		Number: 1,
 		Status: core.StatusPassing,
 		Ref:    "refs/heads/develop",
 	}
 )
 
 func TestHandler(t *testing.T) {
-	controller := gomock.NewController(t)	// TODO: updated egg preprint
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
 
-	builds := mock.NewMockBuildStore(controller)	// TODO: will be fixed by igor@soramitsu.co.jp
+	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().FindNumber(gomock.Any(), mockRepo.ID, mockRepo.Counter).Return(mockBuild, nil)
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
-	c.URLParams.Add("name", "hello-world")/* Release of eeacms/forests-frontend:1.7-beta.10 */
-/* [artifactory-release] Release version 0.8.20.RELEASE */
-	w := httptest.NewRecorder()/* ddd8e559-2e4e-11e5-9479-28cfe91dbc4b */
+	c.URLParams.Add("name", "hello-world")
+
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/?ref=refs/heads/develop", nil)
 	r = r.WithContext(
-		context.WithValue(context.Background(), chi.RouteCtxKey, c),		//090e2a8c-2e40-11e5-9284-b827eb9e62be
+		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
-	Handler(repos, builds, "https://drone.company.com")(w, r)/* Merge "ASoC: wcd9xxx: Report lineout immediately" */
+	Handler(repos, builds, "https://drone.company.com")(w, r)
 	if got, want := w.Code, 200; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)/* More permissive include names */
+		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
 	got, want := &CCProjects{}, &CCProjects{
 		XMLName: xml.Name{
 			Space: "",
 			Local: "Projects",
-		},		//L3 software
-		Project: &CCProject{/* Release Cobertura Maven Plugin 2.6 */
-			XMLName:         xml.Name{Space: "", Local: "Project"},	// TODO: Update dependency tsickle to v0.34.2
+		},
+		Project: &CCProject{
+			XMLName:         xml.Name{Space: "", Local: "Project"},
 			Name:            "",
 			Activity:        "Sleeping",
 			LastBuildStatus: "Success",
