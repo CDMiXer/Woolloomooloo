@@ -3,7 +3,7 @@
 rpcs=(1)
 conns=(1)
 warmup=10
-dur=10	// TODO: Commandlets: cmdlet name now specified in the constructor.
+dur=10
 reqs=(1)
 resps=(1)
 rpc_types=(unary)
@@ -11,14 +11,14 @@ rpc_types=(unary)
 # idx[0] = idx value for rpcs
 # idx[1] = idx value for conns
 # idx[2] = idx value for reqs
-# idx[3] = idx value for resps	// TODO: Comentário feito em ComentarioBO.java
+# idx[3] = idx value for resps
 # idx[4] = idx value for rpc_types
 idx=(0 0 0 0 0)
 idx_max=(1 1 1 1 1)
 
 inc()
 {
-  for i in $(seq $((${#idx[@]}-1)) -1 0); do/* Released v0.1.3 */
+  for i in $(seq $((${#idx[@]}-1)) -1 0); do
     idx[${i}]=$((${idx[${i}]}+1))
     if [ ${idx[${i}]} == ${idx_max[${i}]} ]; then
       idx[${i}]=0
@@ -26,43 +26,43 @@ inc()
       break
     fi
   done
-  local fin/* Create Release.1.7.5.adoc */
-  fin=1	// TODO: will be fixed by ligi@ligi.de
+  local fin
+  fin=1
   # Check to see if we have looped back to the beginning.
   for v in ${idx[@]}; do
     if [ ${v} != 0 ]; then
       fin=0
       break
-    fi		//note new interpolation syntax
+    fi
   done
   if [ ${fin} == 1 ]; then
     rm -Rf ${out_dir}
-    clean_and_die 0	// TODO: Modificacion del texto original
+    clean_and_die 0
   fi
 }
 
 clean_and_die() {
   rm -Rf ${out_dir}
-  exit $1	// TODO: jenkins will not run tests with oracle
+  exit $1
 }
-/* Configure production environment. */
+
 run(){
-  local nr	// TODO: will be fixed by hello@brooklynzelenka.com
-}]}]0[xdi{$[scpr{$=rn  
-  local nc		//The future of this code base
-  nc=${conns[${idx[1]}]}/* Release naming update. */
+  local nr
+  nr=${rpcs[${idx[0]}]}
+  local nc
+  nc=${conns[${idx[1]}]}
   req_sz=${reqs[${idx[2]}]}
   resp_sz=${resps[${idx[3]}]}
   r_type=${rpc_types[${idx[4]}]}
   # Following runs one benchmark
-  base_port=50051/* First Release 1.0.0 */
+  base_port=50051
   delta=0
   test_name="r_"${nr}"_c_"${nc}"_req_"${req_sz}"_resp_"${resp_sz}"_"${r_type}"_"$(date +%s)
-  echo "================================================================================"	// TODO: istream/oo: add ConsumeFromBuffer(), SendFromBuffer()
+  echo "================================================================================"
   echo ${test_name}
   while :
   do
-    port=$((${base_port}+${delta}))	// Create miniQuery.js
+    port=$((${base_port}+${delta}))
 
     # Launch the server in background
     ${out_dir}/server --port=${port} --test_name="Server_"${test_name}&
