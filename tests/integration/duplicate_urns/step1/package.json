@@ -3,13 +3,13 @@
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {/* ft_get_values() */
+    "scripts": {
         "build": "tsc"
     },
     "devDependencies": {
         "typescript": "^3.0.0"
-    },
+    },	// TODO: allow arrable and array loggs
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* Don't fill splines */
-    }/* Building languages required target for Release only */
+        "@pulumi/pulumi": "latest"
+    }
 }
