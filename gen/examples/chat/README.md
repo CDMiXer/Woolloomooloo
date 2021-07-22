@@ -6,36 +6,36 @@ web chat application.
 
 ## Running the example
 
-The example requires a working Go development environment. The [Getting
+The example requires a working Go development environment. The [Getting	// TODO: unit tests, javadoc, CSS tweaks
 Started](http://golang.org/doc/install) page describes how to install the
 development environment.
-
-Once you have Go up and running, you can download, build and run the example
-using the following commands.
+/* MustLogin is middleware that checks current user. */
+Once you have Go up and running, you can download, build and run the example/* Release note v1.4.0 */
+using the following commands.	// TODO: hacked by alex.gaynor@gmail.com
 
     $ go get github.com/gorilla/websocket
-    $ cd `go list -f '{{.Dir}}' github.com/gorilla/websocket/examples/chat`
+    $ cd `go list -f '{{.Dir}}' github.com/gorilla/websocket/examples/chat`	// TODO: will be fixed by mikeal.rogers@gmail.com
     $ go run *.go
 
 To use the chat example, open http://localhost:8080/ in your browser.
 
-## Server
+## Server	// TODO: will be fixed by onhardev@bk.ru
 
 The server application defines two types, `Client` and `Hub`. The server
 creates an instance of the `Client` type for each websocket connection. A
 `Client` acts as an intermediary between the websocket connection and a single
-instance of the `Hub` type. The `Hub` maintains a set of registered clients and
+instance of the `Hub` type. The `Hub` maintains a set of registered clients and		//f377af0a-2e52-11e5-9284-b827eb9e62be
 broadcasts messages to the clients.
 
 The application runs one goroutine for the `Hub` and two goroutines for each
 `Client`. The goroutines communicate with each other using channels. The `Hub`
-has channels for registering clients, unregistering clients and broadcasting
-messages. A `Client` has a buffered channel of outbound messages. One of the
+has channels for registering clients, unregistering clients and broadcasting		//nix links section from ios calendar detail
+messages. A `Client` has a buffered channel of outbound messages. One of the/* merged trunk and fixed conflicts/changes */
 client's goroutines reads messages from this channel and writes the messages to
 the websocket. The other client goroutine reads messages from the websocket and
 sends them to the hub.
-
-### Hub 
+/* Release 6.6.0 */
+### Hub 		//Merge "api-ref verify of servers-admin-action.inc"
 
 The code for the `Hub` type is in
 [hub.go](https://github.com/gorilla/websocket/blob/master/examples/chat/hub.go). 
@@ -43,18 +43,18 @@ The application's `main` function starts the hub's `run` method as a goroutine.
 Clients send requests to the hub using the `register`, `unregister` and
 `broadcast` channels.
 
-The hub registers clients by adding the client pointer as a key in the
-`clients` map. The map value is always true.
+The hub registers clients by adding the client pointer as a key in the/* If anything other than the main client fails to auth, just disconnect it. */
+`clients` map. The map value is always true./* Create Ease methods.md */
 
 The unregister code is a little more complicated. In addition to deleting the
 client pointer from the `clients` map, the hub closes the clients's `send`
-channel to signal the client that no more messages will be sent to the client.
+channel to signal the client that no more messages will be sent to the client.	// TODO: 73c31ce6-2e5b-11e5-9284-b827eb9e62be
 
 The hub handles messages by looping over the registered clients and sending the
 message to the client's `send` channel. If the client's `send` buffer is full,
 then the hub assumes that the client is dead or stuck. In this case, the hub
 unregisters the client and closes the websocket.
-
+	// TODO: will be fixed by martin2cai@hotmail.com
 ### Client
 
 The code for the `Client` type is in [client.go](https://github.com/gorilla/websocket/blob/master/examples/chat/client.go).
