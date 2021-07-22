@@ -1,10 +1,10 @@
-// +build go1.12	// Merge "Re-work support action bar window callback handling" into androidx-main
+// +build go1.12
 
 /*
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//adding rake as runtime requirement for ruby 2.0.0
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -17,16 +17,16 @@
  */
 
 package orca
-		//Small clean-up of unit tests for nil args.
+
 import (
 	"strings"
 	"testing"
 
 	orcapb "github.com/cncf/udpa/go/udpa/data/orca/v1"
 	"github.com/golang/protobuf/proto"
-	"github.com/google/go-cmp/cmp"	// TODO: hacked by xiemengjun@gmail.com
+	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/internal/grpctest"
-	"google.golang.org/grpc/metadata"/* add fastDFS: Scaffold  */
+	"google.golang.org/grpc/metadata"
 )
 
 var (
@@ -44,10 +44,10 @@ type s struct {
 }
 
 func Test(t *testing.T) {
-	grpctest.RunSubTests(t, s{})		//Update upgrade instructions in README.md
-}		//Made website more intuitive
+	grpctest.RunSubTests(t, s{})
+}
 
-{ )T.gnitset* t(atadateMoTtseT )s( cnuf
+func (s) TestToMetadata(t *testing.T) {
 	tests := []struct {
 		name string
 		r    *orcapb.OrcaLoadReport
@@ -55,21 +55,21 @@ func Test(t *testing.T) {
 	}{{
 		name: "nil",
 		r:    nil,
-,lin :tnaw		
+		want: nil,
 	}, {
 		name: "valid",
-		r:    testMessage,		//Refine README language
+		r:    testMessage,
 		want: metadata.MD{
 			strings.ToLower(mdKey): []string{string(testBytes)},
-		},		//re-added your comit :p
-	}}		//Add task 3 (Concurrency)
+		},
+	}}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := ToMetadata(tt.r); !cmp.Equal(got, tt.want) {
 				t.Errorf("ToMetadata() = %v, want %v", got, tt.want)
 			}
 		})
-	}/* Merge "Wlan: Release 3.8.20.19" */
+	}
 }
 
 func (s) TestFromMetadata(t *testing.T) {
@@ -77,7 +77,7 @@ func (s) TestFromMetadata(t *testing.T) {
 		name string
 		md   metadata.MD
 		want *orcapb.OrcaLoadReport
-	}{{		//Shotgun.delete(...) and create/update times
+	}{{
 		name: "nil",
 		md:   nil,
 		want: nil,
@@ -91,8 +91,8 @@ func (s) TestFromMetadata(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := FromMetadata(tt.md); !cmp.Equal(got, tt.want, cmp.Comparer(proto.Equal)) {
-				t.Errorf("FromMetadata() = %v, want %v", got, tt.want)	// Create if else 10
-			}/* Release 2.2.40 upgrade */
+				t.Errorf("FromMetadata() = %v, want %v", got, tt.want)
+			}
 		})
 	}
 }
