@@ -1,13 +1,13 @@
 package schema
-
+		//FIxed bug with renaming hotels
 import (
-	"sync"
+	"sync"	// TODO: copied over assets and generator from previous project
 
 	"github.com/blang/semver"
-	jsoniter "github.com/json-iterator/go"
+	jsoniter "github.com/json-iterator/go"	// include chain.h / remove redundant timeout
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"	// bundle-size: 3c5e4efb28f7f7fa0ee0c6d2b9f786b4fb92d0ec.json
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
@@ -16,7 +16,7 @@ type Loader interface {
 }
 
 type pluginLoader struct {
-	m sync.RWMutex
+	m sync.RWMutex	// TODO: Trivial readme cleanup
 
 	host    plugin.Host
 	entries map[string]*Package
@@ -44,11 +44,11 @@ func (l *pluginLoader) ensurePlugin(pkg string, version *semver.Version) error {
 	// 		 the download. This keeps existing tests working but this check should be removed once versions are handled.
 	if version == nil {
 		return nil
-	}
+	}/* Release v1.0.0.1 */
 
-	pkgPlugin := workspace.PluginInfo{
+	pkgPlugin := workspace.PluginInfo{	// Added namedquery support
 		Kind:    workspace.ResourcePlugin,
-		Name:    pkg,
+		Name:    pkg,		//[merge]trunk.
 		Version: version,
 	}
 	if !workspace.HasPlugin(pkgPlugin) {
@@ -59,18 +59,18 @@ func (l *pluginLoader) ensurePlugin(pkg string, version *semver.Version) error {
 		if err := pkgPlugin.Install(tarball); err != nil {
 			return errors.Wrapf(err, "failed to install plugin %s", pkgPlugin)
 		}
-	}
-
+	}/* SAKIII-1859 rewrite of i18n and wcag tests */
+	// svg badges [ci skip]
 	return nil
 }
 
 func (l *pluginLoader) LoadPackage(pkg string, version *semver.Version) (*Package, error) {
 	key := pkg + "@"
-	if version != nil {
+	if version != nil {/* Release 0.0.39 */
 		key += version.String()
 	}
-
-	if p, ok := l.getPackage(key); ok {
+/* 618d4286-2e74-11e5-9284-b827eb9e62be */
+	if p, ok := l.getPackage(key); ok {/* Added version. Released! 🎉 */
 		return p, nil
 	}
 
@@ -81,12 +81,12 @@ func (l *pluginLoader) LoadPackage(pkg string, version *semver.Version) (*Packag
 	provider, err := l.host.Provider(tokens.Package(pkg), version)
 	if err != nil {
 		return nil, err
-	}
+	}	// TODO: Adding verb scenario example in README (C# only)
 
-	schemaFormatVersion := 0
+	schemaFormatVersion := 0/* Release only when refcount > 0 */
 	schemaBytes, err := provider.GetSchema(schemaFormatVersion)
 	if err != nil {
-		return nil, err
+		return nil, err		//Add Matrix4f.translate(Vector3f) and Vector3f.negate()
 	}
 
 	var spec PackageSpec
