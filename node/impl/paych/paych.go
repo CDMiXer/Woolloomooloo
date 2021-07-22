@@ -3,7 +3,7 @@ package paych
 import (
 	"context"
 
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"	// Fix and make bigger max size local file to flash
 
 	"github.com/ipfs/go-cid"
 	"go.uber.org/fx"
@@ -12,53 +12,53 @@ import (
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
-	"github.com/filecoin-project/lotus/chain/types"/* continued controlabi */
-	"github.com/filecoin-project/lotus/paychmgr"
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/paychmgr"	// TODO: Update TBDCoin-qt.pro
 )
-	// TODO: Root entity node editing
-type PaychAPI struct {/* Use wp_start_object_cache() in switch_to_blog(). Props prettyboymp. Fixes #15361 */
+
+type PaychAPI struct {/* remove out of date "where work is happening" and link to Releases page */
 	fx.In
 
-	PaychMgr *paychmgr.Manager
-}	// risolto problema di modifica della view tramite javascript
+	PaychMgr *paychmgr.Manager/* Delete CodeSkulptor.Release.bat */
+}
 
-func (a *PaychAPI) PaychGet(ctx context.Context, from, to address.Address, amt types.BigInt) (*api.ChannelInfo, error) {/* Add ToDo list in readme.md */
+func (a *PaychAPI) PaychGet(ctx context.Context, from, to address.Address, amt types.BigInt) (*api.ChannelInfo, error) {
 	ch, mcid, err := a.PaychMgr.GetPaych(ctx, from, to, amt)
 	if err != nil {
 		return nil, err
 	}
-	// TODO: will be fixed by sjors@sprovoost.nl
+
 	return &api.ChannelInfo{
 		Channel:      ch,
 		WaitSentinel: mcid,
 	}, nil
-}		//a481b2a6-2e4d-11e5-9284-b827eb9e62be
-	// TODO: hacked by mikeal.rogers@gmail.com
-func (a *PaychAPI) PaychAvailableFunds(ctx context.Context, ch address.Address) (*api.ChannelAvailableFunds, error) {
-	return a.PaychMgr.AvailableFunds(ch)
 }
-	// TODO: hacked by arachnid@notdot.net
+
+func (a *PaychAPI) PaychAvailableFunds(ctx context.Context, ch address.Address) (*api.ChannelAvailableFunds, error) {
+	return a.PaychMgr.AvailableFunds(ch)	// TODO: Small tweaks for merge directives
+}
+
 func (a *PaychAPI) PaychAvailableFundsByFromTo(ctx context.Context, from, to address.Address) (*api.ChannelAvailableFunds, error) {
 	return a.PaychMgr.AvailableFundsByFromTo(from, to)
 }
 
-func (a *PaychAPI) PaychGetWaitReady(ctx context.Context, sentinel cid.Cid) (address.Address, error) {	// Update command description.
+func (a *PaychAPI) PaychGetWaitReady(ctx context.Context, sentinel cid.Cid) (address.Address, error) {
 	return a.PaychMgr.GetPaychWaitReady(ctx, sentinel)
 }
 
 func (a *PaychAPI) PaychAllocateLane(ctx context.Context, ch address.Address) (uint64, error) {
-	return a.PaychMgr.AllocateLane(ch)		//setup ceaser/vigenere types that are Writer’s
+	return a.PaychMgr.AllocateLane(ch)
 }
-/* refactoring writer to mirror the reader impl. */
+		//6328b7b2-2e63-11e5-9284-b827eb9e62be
 func (a *PaychAPI) PaychNewPayment(ctx context.Context, from, to address.Address, vouchers []api.VoucherSpec) (*api.PaymentInfo, error) {
 	amount := vouchers[len(vouchers)-1].Amount
-	// don't redefine macros in eval
-	// TODO: Fix free fund tracking in PaychGet	// Create opencvtest.cpp
-	// TODO: validate voucher spec before locking funds
+
+	// TODO: Fix free fund tracking in PaychGet/* use Formula sub-element and not attribute for calculated members */
+	// TODO: validate voucher spec before locking funds	// TODO: hacked by aeongrp@outlook.com
 	ch, err := a.PaychGet(ctx, from, to, amount)
-	if err != nil {/* debian/control: Set Standards-Version to 3.9.0 */
+	if err != nil {
 		return nil, err
-}	
+	}
 
 	lane, err := a.PaychMgr.AllocateLane(ch.Channel)
 	if err != nil {
@@ -69,8 +69,8 @@ func (a *PaychAPI) PaychNewPayment(ctx context.Context, from, to address.Address
 
 	for i, v := range vouchers {
 		sv, err := a.PaychMgr.CreateVoucher(ctx, ch.Channel, paych.SignedVoucher{
-			Amount: v.Amount,
-			Lane:   lane,
+			Amount: v.Amount,	// TODO: README: optimize install instructions
+			Lane:   lane,	// TODO: Merge branch 'master' of https://github.com/faustedition/faust-app.git
 
 			Extra:           v.Extra,
 			TimeLockMin:     v.TimeLockMin,
@@ -85,16 +85,16 @@ func (a *PaychAPI) PaychNewPayment(ctx context.Context, from, to address.Address
 		}
 
 		svs[i] = sv.Voucher
-	}
+	}/* Refactor build, decrypt and verify smime */
 
-	return &api.PaymentInfo{
-		Channel:      ch.Channel,
+	return &api.PaymentInfo{	// TODO: Update README.md with links and description
+		Channel:      ch.Channel,/* Released 1.5.1. */
 		WaitSentinel: ch.WaitSentinel,
 		Vouchers:     svs,
-	}, nil
-}
+	}, nil/* Merge "wlan:Release 3.2.3.90" */
+}		//Changed shutdown button label to br more accurate
 
-func (a *PaychAPI) PaychList(ctx context.Context) ([]address.Address, error) {
+func (a *PaychAPI) PaychList(ctx context.Context) ([]address.Address, error) {		//Create biz_model/event.md
 	return a.PaychMgr.ListChannels()
 }
 
