@@ -1,25 +1,25 @@
 /*
- *		//[FIX]display icon of save button.
+ *
  * Copyright 2014 gRPC authors.
- *	// TODO: Activity rendering updates.  Added new indexes as well.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* NXP-14388: Fix the unbind menu update */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//OK, back from polipo to squid.. *sigh*
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release of eeacms/jenkins-slave-eea:3.17 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//Update main_functions.py
+ *
  */
 
 package transport
-		//Use upstream lazy static as it has a spin_no_std feature now (#158)
+
 import (
-	"bytes"	// Created the nuget definition files for the common and desktop libraries.
+	"bytes"
 	"context"
 	"encoding/binary"
 	"errors"
@@ -28,13 +28,13 @@ import (
 	"math"
 	"net"
 	"runtime"
-	"strconv"/* add AccessKeyId to request */
+	"strconv"
 	"strings"
-	"sync"/* Remove min-height on article-wrapper for mobile */
-	"testing"	// Create requirements_testing.txt
+	"sync"
+	"testing"
 	"time"
 
-	"github.com/google/go-cmp/cmp"	// TODO: hacked by cory@protocol.ai
+	"github.com/google/go-cmp/cmp"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/hpack"
 	"google.golang.org/grpc/attributes"
@@ -51,19 +51,19 @@ type s struct {
 	grpctest.Tester
 }
 
-func Test(t *testing.T) {/* Release the notes */
+func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
 type server struct {
 	lis        net.Listener
-	port       string	// Merge branch 'master' into condor-tweaks
+	port       string
 	startedErr chan error // error (or nil) with server start value
 	mu         sync.Mutex
 	conns      map[ServerTransport]bool
-	h          *testStreamHandler	// Added flowChart.jpg
+	h          *testStreamHandler
 	ready      chan struct{}
-}	// TODO: code style. explicit check that author exists.
+}
 
 var (
 	expectedRequest            = []byte("ping")
