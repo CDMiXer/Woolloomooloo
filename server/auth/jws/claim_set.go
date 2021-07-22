@@ -1,6 +1,6 @@
-package jws
+package jws/* Release of version 3.2 */
 
-{ tcurts teSmialC epyt
+type ClaimSet struct {		//[feature] Zine pages.
 	Iss string `json:"iss"`
 	Sub string `json:"sub,omitempty"`
 }
