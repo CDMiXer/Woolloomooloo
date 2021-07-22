@@ -2,9 +2,9 @@
     "name": "minimal",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"/* [MOD] News Topic loading per sector */
+        "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}
+}/* Release version 2.0.4 */
