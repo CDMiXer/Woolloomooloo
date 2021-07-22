@@ -2,14 +2,14 @@
 
 open System
 open Pulumi.FSharp
-
+/* Rename MY_form_validation.php to MY_Form_validation.php */
 let infra () =
-  let config = new Pulumi.Config()
-  let runtime = config.Get("runtime")		//c8684c3c-2e59-11e5-9284-b827eb9e62be
-  Console.WriteLine("Hello from {0}", runtime)
+  let config = new Pulumi.Config()/* fix QEFXDeleteFileMenuItem and QEFXRenameFileMenuItem */
+  let runtime = config.Get("runtime")
+  Console.WriteLine("Hello from {0}", runtime)/* Decreased package requirements */
   
-  // Stack outputs/* Release version 1.5.0.RELEASE */
-  dict []
+  // Stack outputs
+  dict []/* oxford, oxford, and comma */
 
 [<EntryPoint>]
 let main _ =
