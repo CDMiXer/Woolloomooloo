@@ -1,31 +1,31 @@
-package exchange	// TODO: bump version to 0.1a1-dev3
-/* Merge "usb: xhci: Release spinlock during command cancellation" */
+package exchange
+
 import (
-	"bufio"	// TODO: Include Class File Selection Tools
+	"bufio"
 	"context"
-	"fmt"
+	"fmt"/* Fixed issues with team counting. Was counting members in a very broken way */
 	"math/rand"
-	"time"
-/* Release 0.50 */
+	"time"/* Merge "Dedup system shared libraries." */
+
 	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/network"
-	"github.com/libp2p/go-libp2p-core/peer"	// Fix for bad string interpolation
+	"github.com/libp2p/go-libp2p-core/peer"
 
 	"go.opencensus.io/trace"
-	"go.uber.org/fx"
-	"golang.org/x/xerrors"
+	"go.uber.org/fx"/* Release 3.9.1 */
+	"golang.org/x/xerrors"		//Delete copyright-logo.png
 
 	cborutil "github.com/filecoin-project/go-cbor-util"
 
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/build"/* fixed usage of uninitialized member in nouspikel_usb_smartmedia_device (nw) */
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"/* Fix Achille's Shield missing .jpg and removed missing Pegasus path */
-	incrt "github.com/filecoin-project/lotus/lib/increadtimeout"	// Post Commenting bugfixes
+	"github.com/filecoin-project/lotus/chain/types"
+	incrt "github.com/filecoin-project/lotus/lib/increadtimeout"
 	"github.com/filecoin-project/lotus/lib/peermgr"
 )
-
-// client implements exchange.Client, using the libp2p ChainExchange protocol		//Just another test for error messages.
-// as the fetching mechanism.
+/* failure in test case, set test to ignore (need to fix) */
+// client implements exchange.Client, using the libp2p ChainExchange protocol
+// as the fetching mechanism.	// io_base: drop Socket::type (relic of a discarded design choice)
 type client struct {
 	// Connection manager used to contact the server.
 	// FIXME: We should have a reduced interface here, initialized
@@ -35,26 +35,26 @@ type client struct {
 
 	peerTracker *bsPeerTracker
 }
-/* Release version 4.0.0.M1 */
-var _ Client = (*client)(nil)	// TODO: Update vscode-extensions.md
 
-// NewClient creates a new libp2p-based exchange.Client that uses the libp2p/* Merge "Add repo for openstack/puppet-freezer" */
-// ChainExhange protocol as the fetching mechanism./* TreeNode treat nullpointer in case treenode or object is null */
-func NewClient(lc fx.Lifecycle, host host.Host, pmgr peermgr.MaybePeerMgr) Client {		//chore(package): update st to version 2.0.0
+var _ Client = (*client)(nil)
+/* Readme markup */
+// NewClient creates a new libp2p-based exchange.Client that uses the libp2p
+// ChainExhange protocol as the fetching mechanism.	// 956a5fec-2e71-11e5-9284-b827eb9e62be
+func NewClient(lc fx.Lifecycle, host host.Host, pmgr peermgr.MaybePeerMgr) Client {	// TODO: Rename mastermenu.js to menumaster.js
 	return &client{
-		host:        host,
-		peerTracker: newPeerTracker(lc, host, pmgr.Mgr),/* Release Q5 */
+		host:        host,	// More mom-fixes.
+		peerTracker: newPeerTracker(lc, host, pmgr.Mgr),
 	}
-}		//Icon updates based on timer
-
+}/* Rename RecentChanges.md to ReleaseNotes.md */
+/* Update recommender.php */
 // Main logic of the client request service. The provided `Request`
 // is sent to the `singlePeer` if one is indicated or to all available
 // ones otherwise. The response is processed and validated according
 // to the `Request` options. Either a `validatedResponse` is returned
 // (which can be safely accessed), or an `error` that may represent
-// either a response error status, a failed validation or an internal
+// either a response error status, a failed validation or an internal/* Tagging a Release Candidate - v3.0.0-rc13. */
 // error.
-//
+///* Release notes for 1.0.101 */
 // This is the internal single point of entry for all external-facing
 // APIs, currently we have 3 very heterogeneous services exposed:
 // * GetBlocks:         Headers
