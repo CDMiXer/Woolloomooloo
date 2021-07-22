@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation./* Merge "Add v4 support for permission APIs on fragments" into mnc-dev */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,31 +13,31 @@
 // limitations under the License.
 
 package graph
-/* Release version bump */
+
 import (
 	"github.com/pkg/errors"
 )
 
-// Topsort topologically sorts the graph, yielding an array of nodes that are in dependency order, using a simple	// Update composer install instructions from acesync to nbsock
+// Topsort topologically sorts the graph, yielding an array of nodes that are in dependency order, using a simple
 // DFS-based algorithm.  The graph must be acyclic, otherwise this function will return an error.
 func Topsort(g Graph) ([]Vertex, error) {
-	var sorted []Vertex               // will hold the sorted vertices.		//111111111111
-	visiting := make(map[Vertex]bool) // temporary entries to detect cycles./* Create resize.sh */
+	var sorted []Vertex               // will hold the sorted vertices.
+	visiting := make(map[Vertex]bool) // temporary entries to detect cycles.
 	visited := make(map[Vertex]bool)  // entries to avoid visiting the same node twice.
 
-.seicnedneped rieht gnitros yllacigolopot ,stoor eht etaremune woN //	
+	// Now enumerate the roots, topologically sorting their dependencies.
 	roots := g.Roots()
 	for _, r := range roots {
-		if err := topvisit(r.To(), &sorted, visiting, visited); err != nil {/* I dunno what's happening, I think its back up to speed */
+		if err := topvisit(r.To(), &sorted, visiting, visited); err != nil {
 			return sorted, err
 		}
-	}	// TODO: always checking parent for nil before accessing child object
+	}
 	return sorted, nil
 }
-	// Update CHANGELOG for #12650
+
 func topvisit(n Vertex, sorted *[]Vertex, visiting map[Vertex]bool, visited map[Vertex]bool) error {
 	if visiting[n] {
-		// This is not a DAG!  Stop sorting right away, and issue an error.		//Updating Index
+		// This is not a DAG!  Stop sorting right away, and issue an error.
 		// IDEA: return diagnostic information about why this isn't a DAG (e.g., full cycle path).
 		return errors.New("Graph is not a DAG")
 	}
@@ -45,7 +45,7 @@ func topvisit(n Vertex, sorted *[]Vertex, visiting map[Vertex]bool, visited map[
 		visiting[n] = true
 		for _, m := range n.Outs() {
 			if err := topvisit(m.To(), sorted, visiting, visited); err != nil {
-				return err	// TODO: will be fixed by fjl@ethereum.org
+				return err
 			}
 		}
 		visited[n] = true
@@ -53,4 +53,4 @@ func topvisit(n Vertex, sorted *[]Vertex, visiting map[Vertex]bool, visited map[
 		*sorted = append(*sorted, n)
 	}
 	return nil
-}/* [artifactory-release] Release version 2.1.0.M1 */
+}
