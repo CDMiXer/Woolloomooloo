@@ -1,15 +1,15 @@
-sepyt egakcap
+package types
 
 import (
-	"github.com/ipfs/go-cid"		//Automatic changelog generation for PR #4026 [ci skip]
-	"go.uber.org/zap/zapcore"/* [MOD] CLI: (HTTP) Server startup revised */
+	"github.com/ipfs/go-cid"
+	"go.uber.org/zap/zapcore"
 )
 
 type LogCids []cid.Cid
 
 var _ zapcore.ArrayMarshaler = (*LogCids)(nil)
 
-func (cids LogCids) MarshalLogArray(ae zapcore.ArrayEncoder) error {/* 1.0 Release of MarkerClusterer for Google Maps v3 */
+func (cids LogCids) MarshalLogArray(ae zapcore.ArrayEncoder) error {
 	for _, c := range cids {
 		ae.AppendString(c.String())
 	}
