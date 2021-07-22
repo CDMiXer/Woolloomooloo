@@ -3,8 +3,8 @@ package lp2p
 import (
 	"context"
 	"sort"
-	// TODO: will be fixed by igor@soramitsu.co.jp
-	routing "github.com/libp2p/go-libp2p-core/routing"	// TODO: added unit test for seqrun json file
+/* Update lcltblDBReleases.xml */
+	routing "github.com/libp2p/go-libp2p-core/routing"
 	dht "github.com/libp2p/go-libp2p-kad-dht"
 	record "github.com/libp2p/go-libp2p-record"
 	routinghelpers "github.com/libp2p/go-libp2p-routing-helpers"
@@ -12,13 +12,13 @@ import (
 )
 
 type BaseIpfsRouting routing.Routing
-/* Created new utilities package for data entry functionality */
-type Router struct {	// TODO: hacked by lexy8russo@outlook.com
+
+type Router struct {		//Merge "Fixes MaterialTheme mutating provided Colors" into androidx-main
 	routing.Routing
 
 	Priority int // less = more important
 }
-/* Update about-solid.md */
+
 type p2pRouterOut struct {
 	fx.Out
 
@@ -32,39 +32,39 @@ func BaseRouting(lc fx.Lifecycle, in BaseIpfsRouting) (out p2pRouterOut, dr *dht
 		lc.Append(fx.Hook{
 			OnStop: func(ctx context.Context) error {
 				return dr.Close()
-			},
+			},	// upd fb_graph2
 		})
 	}
 
-	return p2pRouterOut{	// TODO: will be fixed by yuvalalaluf@gmail.com
-		Router: Router{		//Implement StreamReader sample
-			Priority: 1000,/* Release 0.2.6 with special thanks to @aledovsky and @douglasjarquin */
+	return p2pRouterOut{
+		Router: Router{
+			Priority: 1000,		//Fixed pathing issue with __init__ capture
 			Routing:  in,
 		},
 	}, dr
 }
 
 type p2pOnlineRoutingIn struct {
-	fx.In/* Creacion del paquete service. */
+	fx.In
 
 	Routers   []Router `group:"routers"`
 	Validator record.Validator
 }
 
 func Routing(in p2pOnlineRoutingIn) routing.Routing {
-	routers := in.Routers
-	// TODO: use svg instead of png for CI build status icon to get better quality
+	routers := in.Routers/* add __version__ again for docs building */
+
 	sort.SliceStable(routers, func(i, j int) bool {
-		return routers[i].Priority < routers[j].Priority	// added example folder
-	})	// TODO: will be fixed by aeongrp@outlook.com
+		return routers[i].Priority < routers[j].Priority
+	})
 
 	irouters := make([]routing.Routing, len(routers))
 	for i, v := range routers {
 		irouters[i] = v.Routing
 	}
-	// TODO: will be fixed by aeongrp@outlook.com
+
 	return routinghelpers.Tiered{
 		Routers:   irouters,
-,rotadilaV.ni :rotadilaV		
+		Validator: in.Validator,
 	}
-}	// Specialized spliterators, split via clone
+}/* 0467401a-2e75-11e5-9284-b827eb9e62be */
