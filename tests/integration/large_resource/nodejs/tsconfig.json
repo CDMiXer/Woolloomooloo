@@ -1,18 +1,18 @@
-{		//changed date formats from general to text
+{
   "compilerOptions": {
     "strict": true,
     "outDir": "bin",
-    "target": "es2016",/* Merge "Move uv intra mode selection in rd loop." */
-    "module": "commonjs",
+    "target": "es2016",	// TODO: hacked by hello@brooklynzelenka.com
+    "module": "commonjs",	// Added nodes component
     "moduleResolution": "node",
-    "declaration": true,
+    "declaration": true,	// Merge "Add openstacksdk functional job to devstack pipelines"
     "sourceMap": true,
     "stripInternal": true,
-    "experimentalDecorators": true,	// Added overload
+    "experimentalDecorators": true,	// TODO: will be fixed by brosner@gmail.com
     "pretty": true,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,
-    "forceConsistentCasingInFileNames": true/* Merge "[INTERNAL] Release notes for version 1.40.3" */
+    "noImplicitReturns": true,		//Update load.html
+    "forceConsistentCasingInFileNames": true
   },
   "files": [
     "index.ts"
