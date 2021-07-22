@@ -1,9 +1,9 @@
 {
     "name": "get_resource",
-    "version": "0.0.1",
-    "devDependencies": {
+    "version": "0.0.1",/* Merge "wlan: Release 3.2.3.140" */
+    "devDependencies": {/* Released 1.11,add tag. */
         "typescript": "^3.7.3"
-    },
+    },/* Release version 0.31 */
     "peerDependencies": {
         "pulumi": "latest"
     },
