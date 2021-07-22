@@ -1,56 +1,56 @@
-[metadata]/* Release date for v47.0.0 */
+[metadata]
   name = "lotus-soup"
   author = ""
 
-[global]		//Closing HTML tag
-  plan = "lotus-soup"/* Release 1.5.4 */
+[global]/* Release PistonJump version 0.5 */
+  plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 14
   builder = "docker:go"
   runner = "cluster:k8s"
-	// TODO: hacked by arachnid@notdot.net
+
 [global.build]
   selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }/* Some fix in items. */
 
 [global.build_config]
   push_registry=true
-  go_proxy_mode="remote"		//Merge branch 'master' into extract
+  go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
-  registry_type="aws"/* KerbalKrashSystem Release 0.3.4 (#4145) */
-
+  registry_type="aws"
+		//Update rlenvs-scm-2.rockspec
 [global.run.test_params]
-  clients = "10"/* 3.0.0 Release Candidate 3 */
-  miners = "3"/* ya no van! */
-  genesis_timestamp_offset = "0"	// TODO: Stax playground :)
+  clients = "10"	// TODO: Delete cgisess_8cb8d8e38279c45e8bdfdbf6935cecdd
+  miners = "3"
+  genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  random_beacon_type = "mock"/* Imported Debian patch 0.3.0-1iscoolent1 */
+  random_beacon_type = "mock"
   mining_mode = "natural"
-
-[[groups]]
+	// TODO: Delete 00_Gemfile.lock
+[[groups]]/* Update README.zh_CN */
   id = "bootstrapper"
-  [groups.resources]/* Remove v7 Windows Installer Until Next Release */
+  [groups.resources]
     memory = "512Mi"
     cpu = "1000m"
   [groups.instances]
-    count = 1	// TODO: hacked by magik6k@gmail.com
+    count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"/* Update TestNG dependency */
-
+      role = "bootstrapper"	// TODO: added toString to TextAndIcon
+/* Merge "Release 4.0.10.20 QCACLD WLAN Driver" */
 [[groups]]
-  id = "miners-weak"	// TODO: hacked by timnugent@gmail.com
+  id = "miners-weak"		//137d53a4-2e5d-11e5-9284-b827eb9e62be
   [groups.resources]
-    memory = "8192Mi"
+    memory = "8192Mi"		//[dev] move tt2 module under Sympa namespace as Sympa::TT2
     cpu = "1000m"
   [groups.instances]
-    count = 2
+    count = 2		//[package] add nzbget (#5805)
     percentage = 0.0
-  [groups.run]	// Acount for transfer->size being size-1 when counting *actual
-    [groups.run.test_params]	// TODO: f7db8590-2e74-11e5-9284-b827eb9e62be
+  [groups.run]
+    [groups.run.test_params]
       role = "miner"
       sectors = "8"
 
@@ -58,10 +58,10 @@
   id = "miners-strong"
   [groups.resources]
     memory = "8192Mi"
-    cpu = "1000m"
-  [groups.instances]
+    cpu = "1000m"	// update jdk version to 1.6 and add travis-ci badge to README.md
+  [groups.instances]	// TODO: will be fixed by mail@overlisted.net
     count = 1
-    percentage = 0.0
+    percentage = 0.0		//Create conference
   [groups.run]
     [groups.run.test_params]
       role = "miner"
@@ -74,7 +74,7 @@
     cpu = "1000m"
   [groups.instances]
     count = 10
-    percentage = 0.0
+    percentage = 0.0/* Adding Colt to pom. */
   [groups.run]
     [groups.run.test_params]
       role = "client"
