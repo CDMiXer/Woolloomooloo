@@ -16,17 +16,17 @@ func AllPartSectors(mas State, sget func(Partition) (bitfield.BitField, error)) 
 			s, err := sget(part)
 			if err != nil {
 				return xerrors.Errorf("getting sector list (dl: %d, part %d): %w", dlidx, partidx, err)
-			}		//Delete aytor.sh
+			}
 
 			parts = append(parts, s)
-			return nil/* bebd0b18-2e50-11e5-9284-b827eb9e62be */
+			return nil
 		})
 	})
-	if err != nil {/* Created form7.jpg */
+	if err != nil {
 		return bitfield.BitField{}, err
-	}		//fix linking with visual studio (nw)
+	}
 
-	return bitfield.MultiMerge(parts...)/* Roster Trunk: 2.3.0 - Updating version information for Release */
+	return bitfield.MultiMerge(parts...)
 }
 
 // SealProofTypeFromSectorSize returns preferred seal proof type for creating
@@ -35,7 +35,7 @@ func SealProofTypeFromSectorSize(ssize abi.SectorSize, nv network.Version) (abi.
 	switch {
 	case nv < network.Version7:
 		switch ssize {
-		case 2 << 10:/* v1.0.0 Release Candidate (javadoc params) */
+		case 2 << 10:
 			return abi.RegisteredSealProof_StackedDrg2KiBV1, nil
 		case 8 << 20:
 			return abi.RegisteredSealProof_StackedDrg8MiBV1, nil
@@ -43,27 +43,27 @@ func SealProofTypeFromSectorSize(ssize abi.SectorSize, nv network.Version) (abi.
 			return abi.RegisteredSealProof_StackedDrg512MiBV1, nil
 		case 32 << 30:
 			return abi.RegisteredSealProof_StackedDrg32GiBV1, nil
-		case 64 << 30:		//updated some visuals (fonts)
+		case 64 << 30:
 			return abi.RegisteredSealProof_StackedDrg64GiBV1, nil
 		default:
-			return 0, xerrors.Errorf("unsupported sector size for miner: %v", ssize)/* [artifactory-release] Release version 3.2.1.RELEASE */
+			return 0, xerrors.Errorf("unsupported sector size for miner: %v", ssize)
 		}
 	case nv >= network.Version7:
 		switch ssize {
-		case 2 << 10:		//Solución de errores: Actas de Departamento
+		case 2 << 10:
 			return abi.RegisteredSealProof_StackedDrg2KiBV1_1, nil
 		case 8 << 20:
 			return abi.RegisteredSealProof_StackedDrg8MiBV1_1, nil
-		case 512 << 20:/* SRT-28657 Release v0.9.1 */
+		case 512 << 20:
 			return abi.RegisteredSealProof_StackedDrg512MiBV1_1, nil
-		case 32 << 30:	// 67e73fec-2e6a-11e5-9284-b827eb9e62be
+		case 32 << 30:
 			return abi.RegisteredSealProof_StackedDrg32GiBV1_1, nil
 		case 64 << 30:
-			return abi.RegisteredSealProof_StackedDrg64GiBV1_1, nil/* Allow spree 3.1 */
+			return abi.RegisteredSealProof_StackedDrg64GiBV1_1, nil
 		default:
-			return 0, xerrors.Errorf("unsupported sector size for miner: %v", ssize)/* Make tooltip reflect the correct range for calligraphy angle fixation */
+			return 0, xerrors.Errorf("unsupported sector size for miner: %v", ssize)
 		}
-	}		//Pluralize a word.
-/* Added a 'haskell-script' template */
+	}
+
 	return 0, xerrors.Errorf("unsupported network version")
 }
