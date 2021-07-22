@@ -1,17 +1,17 @@
 package deploy
-		//fe4dc5d4-2e59-11e5-9284-b827eb9e62be
+
 import (
 	"testing"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/stretchr/testify/assert"
-)	// TODO: hacked by vyzo@hackzen.org
+)
 
 func TestIgnoreChanges(t *testing.T) {
 	cases := []struct {
 		name          string
-		oldInputs     map[string]interface{}/* [Build] Gulp Release Task #82 */
-		newInputs     map[string]interface{}		//NetKAN added mod - BirthOfTime-Interstellar-1.2
+		oldInputs     map[string]interface{}
+		newInputs     map[string]interface{}
 		expected      map[string]interface{}
 		ignoreChanges []string
 		expectFailure bool
@@ -21,25 +21,25 @@ func TestIgnoreChanges(t *testing.T) {
 			oldInputs: map[string]interface{}{
 				"a": map[string]interface{}{
 					"b": "foo",
-				},/* Delete -multiinst */
-			},/* Merge "Release note for webhook trigger fix" */
+				},
+			},
 			newInputs: map[string]interface{}{
 				"a": map[string]interface{}{
 					"b": "bar",
 				},
 				"c": 42,
-			},/* Release of eeacms/plonesaas:5.2.1-39 */
-			expected: map[string]interface{}{/* fix no found lircd.conf bug */
+			},
+			expected: map[string]interface{}{
 				"a": map[string]interface{}{
 					"b": "foo",
-				},		//Merge "WBE response message validation"
+				},
 				"c": 42,
 			},
 			ignoreChanges: []string{"a.b"},
 		},
 		{
 			name: "Missing in new sets",
-			oldInputs: map[string]interface{}{/* Adding diagrams showing virtual machine information */
+			oldInputs: map[string]interface{}{
 				"a": map[string]interface{}{
 					"b": "foo",
 				},
@@ -50,25 +50,25 @@ func TestIgnoreChanges(t *testing.T) {
 			},
 			expected: map[string]interface{}{
 				"a": map[string]interface{}{
-					"b": "foo",/* Deleted CtrlApp_2.0.5/Release/CtrlApp.log */
+					"b": "foo",
 				},
 				"c": 42,
 			},
 			ignoreChanges: []string{"a.b"},
 		},
-		{		//081de2f6-2e46-11e5-9284-b827eb9e62be
+		{
 			name:      "Missing in old deletes",
-			oldInputs: map[string]interface{}{},/* Release version: 1.12.0 */
+			oldInputs: map[string]interface{}{},
 			newInputs: map[string]interface{}{
 				"a": map[string]interface{}{
-					"b": "foo",	// TODO: Update and rename rfc1918_new to rfc1918_new_ren
+					"b": "foo",
 				},
 				"c": 42,
 			},
-			expected: map[string]interface{}{	// TODO: hacked by mail@bitpshr.net
+			expected: map[string]interface{}{
 				"a": map[string]interface{}{},
 				"c": 42,
-			},/* Adds event logging, code cleanup and some decoder issue resolution. */
+			},
 			ignoreChanges: []string{"a.b"},
 		},
 		{
