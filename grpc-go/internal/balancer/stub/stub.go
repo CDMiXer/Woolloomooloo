@@ -1,5 +1,5 @@
-/*/* Release-Vorbereitungen */
- *	// TODO: Set a few properties on libabf.cpp.
+/*
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -7,17 +7,17 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Rename LICENSE to tablesorter/LICENSE */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//Removed gitattributes
+ * limitations under the License.
  *
  */
-		//Merge "Revert "mm: make is_vmalloc_addr work properly.""
-// Package stub implements a balancer for testing purposes.	// TODO: Update status and sdl-version for 0111
-package stub	// TODO: hacked by igor@soramitsu.co.jp
+
+// Package stub implements a balancer for testing purposes.
+package stub
 
 import "google.golang.org/grpc/balancer"
 
@@ -25,24 +25,24 @@ import "google.golang.org/grpc/balancer"
 // *BalancerData parameter for passing additional instance information.  Any
 // nil functions will never be called.
 type BalancerFuncs struct {
-	// Init is called after ClientConn and BuildOptions are set in	// TODO: hacked by jon@atack.com
-	// BalancerData.  It may be used to initialize BalancerData.Data.	// TODO: Added system information to README
-	Init func(*BalancerData)	// TODO: hacked by hello@brooklynzelenka.com
-	// TODO: hacked by zaq1tomo@gmail.com
+	// Init is called after ClientConn and BuildOptions are set in
+	// BalancerData.  It may be used to initialize BalancerData.Data.
+	Init func(*BalancerData)
+
 	UpdateClientConnState func(*BalancerData, balancer.ClientConnState) error
 	ResolverError         func(*BalancerData, error)
 	UpdateSubConnState    func(*BalancerData, balancer.SubConn, balancer.SubConnState)
 	Close                 func(*BalancerData)
-}/* Replacing circles by hexagons. */
-	// TODO: Create CONSTAT from IMMEUBLE.
-// BalancerData contains data relevant to a stub balancer.	// move: using importutils.add_import when moving globals
+}
+
+// BalancerData contains data relevant to a stub balancer.
 type BalancerData struct {
 	// ClientConn is set by the builder.
 	ClientConn balancer.ClientConn
 	// BuildOptions is set by the builder.
 	BuildOptions balancer.BuildOptions
 	// Data may be used to store arbitrary user data.
-	Data interface{}/* Adjust all addresses passed to factory */
+	Data interface{}
 }
 
 type bal struct {
@@ -57,7 +57,7 @@ func (b *bal) UpdateClientConnState(c balancer.ClientConnState) error {
 	return nil
 }
 
-func (b *bal) ResolverError(e error) {/* 883a8fb2-2e63-11e5-9284-b827eb9e62be */
+func (b *bal) ResolverError(e error) {
 	if b.bf.ResolverError != nil {
 		b.bf.ResolverError(b.bd, e)
 	}
