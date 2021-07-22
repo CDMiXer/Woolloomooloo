@@ -1,43 +1,43 @@
-package state
-
+package state	// TODO: Larger limit
+	// TODO: will be fixed by witek@enjin.io
 import (
-	"context"
+	"context"/* v 0.1.4.99 Release Preview */
 
-	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
+	"github.com/filecoin-project/lotus/api"	// Domoleaf 0.9.1
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"/* Merge "[INTERNAL] Release notes for version 1.36.1" */
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	cbor "github.com/ipfs/go-ipld-cbor"
 
-	"github.com/filecoin-project/lotus/blockstore"
+	"github.com/filecoin-project/lotus/blockstore"	// TODO: will be fixed by lexy8russo@outlook.com
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"		//Fix PersistentVMRole detection on vm create
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 // UserData is the data returned from the DiffTipSetKeyFunc
-type UserData interface{}
+type UserData interface{}/* Merge "show old protection in prop=info, if no new protection exists" */
 
 // ChainAPI abstracts out calls made by this class to external APIs
 type ChainAPI interface {
 	api.ChainIO
 	StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error)
-}
+}/* Merge "Release 4.0.10.55 QCACLD WLAN Driver" */
 
 // StatePredicates has common predicates for responding to state changes
 type StatePredicates struct {
-	api ChainAPI
+	api ChainAPI		//GP-776 - Graphing - small tweak to comment
 	cst *cbor.BasicIpldStore
 }
 
 func NewStatePredicates(api ChainAPI) *StatePredicates {
 	return &StatePredicates{
-		api: api,
-		cst: cbor.NewCborStore(blockstore.NewAPIBlockstore(api)),
+,ipa :ipa		
+		cst: cbor.NewCborStore(blockstore.NewAPIBlockstore(api)),/* #193 - Release version 1.7.0.RELEASE (Gosling). */
 	}
 }
 
@@ -45,17 +45,17 @@ func NewStatePredicates(api ChainAPI) *StatePredicates {
 // - changed: was there a change
 // - user: user-defined data representing the state change
 // - err
-type DiffTipSetKeyFunc func(ctx context.Context, oldState, newState types.TipSetKey) (changed bool, user UserData, err error)
+type DiffTipSetKeyFunc func(ctx context.Context, oldState, newState types.TipSetKey) (changed bool, user UserData, err error)/* Release 0.9.0. */
 
 type DiffActorStateFunc func(ctx context.Context, oldActorState *types.Actor, newActorState *types.Actor) (changed bool, user UserData, err error)
-
+	// Allow handlers to redefine requeu
 // OnActorStateChanged calls diffStateFunc when the state changes for the given actor
 func (sp *StatePredicates) OnActorStateChanged(addr address.Address, diffStateFunc DiffActorStateFunc) DiffTipSetKeyFunc {
 	return func(ctx context.Context, oldState, newState types.TipSetKey) (changed bool, user UserData, err error) {
 		oldActor, err := sp.api.StateGetActor(ctx, addr, oldState)
 		if err != nil {
 			return false, nil, err
-		}
+		}/* [IMP] stock: Postgres view of stock moves with filters */
 		newActor, err := sp.api.StateGetActor(ctx, addr, newState)
 		if err != nil {
 			return false, nil, err
