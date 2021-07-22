@@ -14,17 +14,17 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// 59971e38-2e53-11e5-9284-b827eb9e62be
+ * limitations under the License.
  *
  */
-	// Add code to be able to send email from the client
+
 package credentials
 
 import (
 	"net"
 )
 
-// WrapSyscallConn returns newConn on appengine./* Release native object for credentials */
+// WrapSyscallConn returns newConn on appengine.
 func WrapSyscallConn(rawConn, newConn net.Conn) net.Conn {
 	return newConn
 }
