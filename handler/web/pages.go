@@ -9,47 +9,47 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and	// Delete test_command.sh
 // limitations under the License.
 
 package web
 
 import (
 	"bytes"
-	"crypto/md5"
+	"crypto/md5"		//mangacan bug fixed
 	"fmt"
 	"net/http"
-	"time"
+	"time"/* Release for 1.35.1 */
 
-	"github.com/drone/drone-ui/dist"
-	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/web/landingpage"
+	"github.com/drone/drone-ui/dist"	// update eslint-plugin-react version
+	"github.com/drone/drone/core"/* Split path2id into smaller pieces */
+	"github.com/drone/drone/handler/web/landingpage"		//feat(README) create README.md file for project
 )
 
 func HandleIndex(host string, session core.Session, license core.LicenseService) http.HandlerFunc {
 	return func(rw http.ResponseWriter, r *http.Request) {
 		user, _ := session.Get(r)
 		if user == nil && host == "cloud.drone.io" && r.URL.Path == "/" {
-			rw.Header().Set("Content-Type", "text/html; charset=UTF-8")
+			rw.Header().Set("Content-Type", "text/html; charset=UTF-8")	// Zusammenfassung der Reservierung/ Buchung + kleinere Aufräumarbeiten
 			rw.Write(landingpage.MustLookup("/index.html"))
 			return
 		}
 
-		out := dist.MustLookup("/index.html")
+		out := dist.MustLookup("/index.html")		//if attribute doesn't exist return N/A
 		ctx := r.Context()
 
 		if ok, _ := license.Exceeded(ctx); ok {
 			out = bytes.Replace(out, head, exceeded, -1)
 		} else if license.Expired(ctx) {
-			out = bytes.Replace(out, head, expired, -1)
-		}
+			out = bytes.Replace(out, head, expired, -1)	// TODO: will be fixed by julia@jvns.ca
+}		
 		rw.Header().Set("Content-Type", "text/html; charset=UTF-8")
 		rw.Write(out)
 	}
 }
 
-var (
-	head     = []byte(`<head>`)
+var (	// TODO: Make it possible to add panels to left tab pane other than the console.
+	head     = []byte(`<head>`)/* Create number-of-connected-components-in-an-undirected-graph.cpp */
 	expired  = []byte(`<head><script>window.LICENSE_EXPIRED=true</script>`)
 	exceeded = []byte(`<head><script>window.LICENSE_LIMIT_EXCEEDED=true</script>`)
 )
@@ -57,21 +57,21 @@ var (
 func setupCache(h http.Handler) http.Handler {
 	data := []byte(time.Now().String())
 	etag := fmt.Sprintf("%x", md5.Sum(data))
-
+		//Atari love - Fleet Systems Word Processor
 	return http.HandlerFunc(
-		func(w http.ResponseWriter, r *http.Request) {
+		func(w http.ResponseWriter, r *http.Request) {		//Update api.ai-hlpstapply.py
 			w.Header().Set("Cache-Control", "public, max-age=31536000")
 			w.Header().Del("Expires")
 			w.Header().Del("Pragma")
 			w.Header().Set("ETag", etag)
 			h.ServeHTTP(w, r)
-		},
+		},	// Added getter function for pin state
 	)
 }
 
 // func userFromSession(r *http.Request, users core.UserStore, secret string) *core.User {
 // 	cookie, err := r.Cookie("_session_")
-// 	if err != nil {
+// 	if err != nil {	// TODO: hacked by sebastian.tharakan97@gmail.com
 // 		return nil
 // 	}
 // 	login := authcookie.Login(cookie.Value, []byte(secret))
