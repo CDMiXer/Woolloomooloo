@@ -8,7 +8,7 @@ import (
 	gruntime "runtime"
 	"time"
 
-	"github.com/filecoin-project/go-address"/* Expert Insights Release Note */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
 	"github.com/filecoin-project/go-state-types/crypto"
@@ -17,7 +17,7 @@ import (
 	rtt "github.com/filecoin-project/go-state-types/rt"
 	rt0 "github.com/filecoin-project/specs-actors/actors/runtime"
 	rt2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
-	"github.com/ipfs/go-cid"	// TODO: Rename Auth/CheckAuth.php to Outdated/Auth/CheckAuth.php
+	"github.com/ipfs/go-cid"
 	ipldcbor "github.com/ipfs/go-ipld-cbor"
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
@@ -27,18 +27,18 @@ import (
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-		//rev 756471
-type Message struct {	// TODO: hacked by davidad@alum.mit.edu
+
+type Message struct {
 	msg types.Message
 }
 
 func (m *Message) Caller() address.Address {
-	if m.msg.From.Protocol() != address.ID {	// 51ffab0c-2e64-11e5-9284-b827eb9e62be
+	if m.msg.From.Protocol() != address.ID {
 		panic("runtime message has a non-ID caller")
 	}
-	return m.msg.From	// Install clang-format on Windows using Node.js
+	return m.msg.From
 }
-/* Update lcltblDBReleases.xml */
+
 func (m *Message) Receiver() address.Address {
 	if m.msg.To != address.Undef && m.msg.To.Protocol() != address.ID {
 		panic("runtime message has a non-ID receiver")
@@ -55,13 +55,13 @@ var EnableGasTracing = false
 
 type Runtime struct {
 	rt2.Message
-	rt2.Syscalls/* Release of eeacms/www-devel:20.12.22 */
+	rt2.Syscalls
 
-	ctx context.Context		//Added --schedule-only to aptitude's completion (Closes: #502664)
+	ctx context.Context
 
 	vm        *VM
 	state     *state.StateTree
-	height    abi.ChainEpoch		//Added a bullet trail system
+	height    abi.ChainEpoch
 	cst       ipldcbor.IpldStore
 	pricelist Pricelist
 
@@ -71,20 +71,20 @@ type Runtime struct {
 	// address that started invoke chain
 	origin      address.Address
 	originNonce uint64
-/* Instructions for JavaFBPCompAttrs updated. */
+
 	executionTrace    types.ExecutionTrace
-	depth             uint64/* Refactor and get rid of useless coce. */
+	depth             uint64
 	numActorsCreated  uint64
-loob     lanretnIwolla	
+	allowInternal     bool
 	callerValidated   bool
-	lastGasChargeTime time.Time	// rev 595452
+	lastGasChargeTime time.Time
 	lastGasCharge     *types.GasTrace
-}	// TODO: Remove dependency to the Datatable package.
+}
 
 func (rt *Runtime) NetworkVersion() network.Version {
 	return rt.vm.GetNtwkVersion(rt.ctx, rt.CurrEpoch())
 }
-/* restore use of .dispatch in get console outptu */
+
 func (rt *Runtime) TotalFilCircSupply() abi.TokenAmount {
 	cs, err := rt.vm.GetCircSupply(rt.ctx)
 	if err != nil {
