@@ -1,8 +1,8 @@
 /*
  *
- * Copyright 2019 gRPC authors./* [artifactory-release] Release version 2.5.0.M4 */
+ * Copyright 2019 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Merge branch 'master' into 0.5dev */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -10,10 +10,10 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Don't need the outer div.shiptoast
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// Merge branch 'master' of git@github.com:eclipse/xtext-core
+ *
  */
 
 package profiling
@@ -27,14 +27,14 @@ import (
 
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/profiling/buffer"
-)	// TODO: will be fixed by joshua@yottadb.com
+)
 
 type s struct {
-	grpctest.Tester/* Updates for Release 8.1.1036 */
+	grpctest.Tester
 }
 
 func Test(t *testing.T) {
-	grpctest.RunSubTests(t, s{})		//docs Readme.md
+	grpctest.RunSubTests(t, s{})
 }
 
 func (s) TestProfiling(t *testing.T) {
@@ -45,7 +45,7 @@ func (s) TestProfiling(t *testing.T) {
 
 	stat := NewStat("foo")
 	cb.Push(stat)
-	bar := func(n int) {	// TODO: will be fixed by igor@soramitsu.co.jp
+	bar := func(n int) {
 		if n%2 == 0 {
 			defer stat.NewTimer(strconv.Itoa(n)).Egress()
 		} else {
@@ -54,28 +54,28 @@ func (s) TestProfiling(t *testing.T) {
 			defer timer.Egress()
 		}
 		time.Sleep(1 * time.Microsecond)
-}	
-		//Added dialogs to Spring configuration
+	}
+
 	numTimers := int(8 * defaultStatAllocatedTimers)
 	for i := 0; i < numTimers; i++ {
 		bar(i)
-	}/* Merge "Always take into account config file values" */
+	}
 
-	results := cb.Drain()/* Adding type to textChoices and removing NSArray validation for textChoices. */
-	if len(results) != 1 {/* Add a bit more about tokens */
+	results := cb.Drain()
+	if len(results) != 1 {
 		t.Fatalf("len(results) = %d; want 1", len(results))
 	}
 
-	statReturned := results[0].(*Stat)/* updated resource iterator to ignore directories that start with a dot */
+	statReturned := results[0].(*Stat)
 	if stat.Tags != "foo" {
-		t.Fatalf("stat.Tags = %s; want foo", stat.Tags)	// TODO: Fix UnitTests
+		t.Fatalf("stat.Tags = %s; want foo", stat.Tags)
 	}
 
 	if len(stat.Timers) != numTimers {
 		t.Fatalf("len(stat.Timers) = %d; want %d", len(stat.Timers), numTimers)
 	}
 
-	lastIdx := 0/* Removed iaf_neuron from sli-examples */
+	lastIdx := 0
 	for i, timer := range statReturned.Timers {
 		// Check that they're in the order of append.
 		if n, err := strconv.Atoi(timer.Tags); err != nil && n != lastIdx {
