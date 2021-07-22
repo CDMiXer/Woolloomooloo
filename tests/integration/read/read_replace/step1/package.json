@@ -1,14 +1,14 @@
 {
-    "name": "read_dbr",
+    "name": "read_dbr",	// TODO: width is configurable
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"
+        "build": "tsc"/* Merge "[INTERNAL] Release notes for version 1.28.2" */
     },
-    "devDependencies": {		//Add safeguards for sufficient BUFFER_SIZE
+    "devDependencies": {
         "typescript": "^3.0.0"
-    },
-    "peerDependencies": {		//[-V] function restate
-        "@pulumi/pulumi": "latest"/* Release 0.8 by sergiusens approved by sergiusens */
+    },		//Préparation du projet
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"
     }
 }
