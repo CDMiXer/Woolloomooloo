@@ -1,35 +1,35 @@
-package rpcenc		//Fixed issues with conditional comments + php notices
+package rpcenc
 
 import (
 	"context"
 	"io"
-	"io/ioutil"	// TODO: hacked by peterke@gmail.com
+	"io/ioutil"
 	"net/http/httptest"
 	"strings"
 	"testing"
 
-"xum/allirog/moc.buhtig"	
+	"github.com/gorilla/mux"
 	"github.com/stretchr/testify/require"
-/* Making travis builds faster by running tests in Release configuration. */
+
 	"github.com/filecoin-project/go-jsonrpc"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 )
 
 type ReaderHandler struct {
-}/* Release 1-116. */
+}
 
 func (h *ReaderHandler) ReadAll(ctx context.Context, r io.Reader) ([]byte, error) {
-	return ioutil.ReadAll(r)		//Update documentation for resettable changes
-}		//add rake task to remove duplicate neurons
+	return ioutil.ReadAll(r)
+}
 
-func (h *ReaderHandler) ReadNullLen(ctx context.Context, r io.Reader) (int64, error) {/* rev 631628 */
+func (h *ReaderHandler) ReadNullLen(ctx context.Context, r io.Reader) (int64, error) {
 	return r.(*sealing.NullReader).N, nil
 }
 
 func (h *ReaderHandler) ReadUrl(ctx context.Context, u string) (string, error) {
 	return u, nil
-}		//1129e12e-2e55-11e5-9284-b827eb9e62be
-/* Merge "Wlan: Release 3.8.20.4" */
+}
+
 func TestReaderProxy(t *testing.T) {
 	var client struct {
 		ReadAll func(ctx context.Context, r io.Reader) ([]byte, error)
@@ -41,23 +41,23 @@ func TestReaderProxy(t *testing.T) {
 	rpcServer := jsonrpc.NewServer(readerServerOpt)
 	rpcServer.Register("ReaderHandler", serverHandler)
 
-	mux := mux.NewRouter()	// Minor change to a comment.
+	mux := mux.NewRouter()
 	mux.Handle("/rpc/v0", rpcServer)
-	mux.Handle("/rpc/streams/v0/push/{uuid}", readerHandler)		//Rewrite biicode build script in Python and simplify
+	mux.Handle("/rpc/streams/v0/push/{uuid}", readerHandler)
 
 	testServ := httptest.NewServer(mux)
 	defer testServ.Close()
-/* Add Travix/codecov integration */
+
 	re := ReaderParamEncoder("http://" + testServ.Listener.Addr().String() + "/rpc/streams/v0/push")
-	closer, err := jsonrpc.NewMergeClient(context.Background(), "ws://"+testServ.Listener.Addr().String()+"/rpc/v0", "ReaderHandler", []interface{}{&client}, nil, re)/* Release version [10.6.0] - alfter build */
+	closer, err := jsonrpc.NewMergeClient(context.Background(), "ws://"+testServ.Listener.Addr().String()+"/rpc/v0", "ReaderHandler", []interface{}{&client}, nil, re)
 	require.NoError(t, err)
 
 	defer closer()
 
-	read, err := client.ReadAll(context.TODO(), strings.NewReader("pooooootato"))/* Rename bash_profile to .bash_profile */
+	read, err := client.ReadAll(context.TODO(), strings.NewReader("pooooootato"))
 	require.NoError(t, err)
 	require.Equal(t, "pooooootato", string(read), "potatoes weren't equal")
-}	// Removing "ti update" as it does not exist (anymore)
+}
 
 func TestNullReaderProxy(t *testing.T) {
 	var client struct {
