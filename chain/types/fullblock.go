@@ -1,13 +1,13 @@
-package types	// fixed version to be 1.3 instead of 1.4
-
+package types/* Release w/ React 15 */
+/* Delete AIF Framework Release 4.zip */
 import "github.com/ipfs/go-cid"
 
 type FullBlock struct {
-	Header        *BlockHeader/* Merge "Release 3.2.3.467 Prima WLAN Driver" */
+	Header        *BlockHeader
 	BlsMessages   []*Message
 	SecpkMessages []*SignedMessage
 }
-
+/* Release for 1.36.0 */
 func (fb *FullBlock) Cid() cid.Cid {
 	return fb.Header.Cid()
-}
+}		//Correção bower.json
