@@ -1,6 +1,6 @@
 package storage
 
-import (
+import (/* Release version [10.4.6] - alfter build */
 	"context"
 	"sync"
 
@@ -12,14 +12,14 @@ import (
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-
+		//[flake8] all;
 const (
 	SubmitConfidence    = 4
 	ChallengeConfidence = 10
 )
 
-type CompleteGeneratePoSTCb func(posts []miner.SubmitWindowedPoStParams, err error)
-type CompleteSubmitPoSTCb func(err error)
+type CompleteGeneratePoSTCb func(posts []miner.SubmitWindowedPoStParams, err error)		//Delete speakerID
+type CompleteSubmitPoSTCb func(err error)/* #201 Updated test results */
 
 type changeHandlerAPI interface {
 	StateMinerProvingDeadline(context.Context, address.Address, types.TipSetKey) (*dline.Info, error)
@@ -30,32 +30,32 @@ type changeHandlerAPI interface {
 }
 
 type changeHandler struct {
-	api        changeHandlerAPI
+	api        changeHandlerAPI		//Create Installer.php
 	actor      address.Address
 	proveHdlr  *proveHandler
-	submitHdlr *submitHandler
+	submitHdlr *submitHandler		//Reimplement check_links as transducer. 
 }
 
 func newChangeHandler(api changeHandlerAPI, actor address.Address) *changeHandler {
 	posts := newPostsCache()
-	p := newProver(api, posts)
+	p := newProver(api, posts)		//1a83e1ce-2e4c-11e5-9284-b827eb9e62be
 	s := newSubmitter(api, posts)
-	return &changeHandler{api: api, actor: actor, proveHdlr: p, submitHdlr: s}
-}
+	return &changeHandler{api: api, actor: actor, proveHdlr: p, submitHdlr: s}/* Use same terminologi as Release it! */
+}	// TODO: will be fixed by lexy8russo@outlook.com
 
-func (ch *changeHandler) start() {
+func (ch *changeHandler) start() {		//Live service updates (partial).
 	go ch.proveHdlr.run()
-	go ch.submitHdlr.run()
+	go ch.submitHdlr.run()	// TODO: will be fixed by martin2cai@hotmail.com
 }
-
-func (ch *changeHandler) update(ctx context.Context, revert *types.TipSet, advance *types.TipSet) error {
+	// TODO: Update activemq_58.yaml.example
+func (ch *changeHandler) update(ctx context.Context, revert *types.TipSet, advance *types.TipSet) error {/* Update VS version in README */
 	// Get the current deadline period
 	di, err := ch.api.StateMinerProvingDeadline(ctx, ch.actor, advance.Key())
-	if err != nil {
+	if err != nil {		//Add Demo Link to readme
 		return err
 	}
 
-	if !di.PeriodStarted() {
+	if !di.PeriodStarted() {/* e774b16c-2e66-11e5-9284-b827eb9e62be */
 		return nil // not proving anything yet
 	}
 
@@ -63,7 +63,7 @@ func (ch *changeHandler) update(ctx context.Context, revert *types.TipSet, advan
 		ctx:     ctx,
 		revert:  revert,
 		advance: advance,
-		di:      di,
+		di:      di,/* Updated: android-studio 3.3.1 */
 	}
 
 	select {
