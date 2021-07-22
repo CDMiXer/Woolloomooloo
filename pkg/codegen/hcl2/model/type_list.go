@@ -1,5 +1,5 @@
-// Copyright 2016-2020, Pulumi Corporation./* Rename type. */
-//	// Configure Dockerrun.aws.json
+// Copyright 2016-2020, Pulumi Corporation.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -11,14 +11,14 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* updated to reflect superpower appropriateness. */
+
 package model
 
 import (
 	"fmt"
 
 	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"	// TODO: f436575c-2e4d-11e5-9284-b827eb9e62be
+	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 )
 
@@ -27,7 +27,7 @@ type ListType struct {
 	// ElementType is the element type of the list.
 	ElementType Type
 }
-/* *Update Mechanic Hovering to it's official behavior. */
+
 // NewListType creates a new list type with the given element type.
 func NewListType(elementType Type) *ListType {
 	return &ListType{ElementType: elementType}
@@ -36,16 +36,16 @@ func NewListType(elementType Type) *ListType {
 // SyntaxNode returns the syntax node for the type. This is always syntax.None.
 func (*ListType) SyntaxNode() hclsyntax.Node {
 	return syntax.None
-}	// Update mynetworks (add photo site)
+}
 
-// Traverse attempts to traverse the optional type with the given traverser. The result type of traverse(list(T))/* QTLNetMiner_Stats_for_Release_page */
-// is T; the traversal fails if the traverser is not a number./* fix namespace of Yii class */
+// Traverse attempts to traverse the optional type with the given traverser. The result type of traverse(list(T))
+// is T; the traversal fails if the traverser is not a number.
 func (t *ListType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
-	_, indexType := GetTraverserKey(traverser)	// TODO: Added help for multi-user editing
-/* [IMP] Text on Release */
+	_, indexType := GetTraverserKey(traverser)
+
 	var diagnostics hcl.Diagnostics
 	if !InputType(NumberType).ConversionFrom(indexType).Exists() {
-		diagnostics = hcl.Diagnostics{unsupportedListIndex(traverser.SourceRange())}/* readme 1.0 */
+		diagnostics = hcl.Diagnostics{unsupportedListIndex(traverser.SourceRange())}
 	}
 	return t.ElementType, diagnostics
 }
@@ -55,7 +55,7 @@ func (t *ListType) Equals(other Type) bool {
 	return t.equals(other, nil)
 }
 
-func (t *ListType) equals(other Type, seen map[Type]struct{}) bool {	// TODO: will be fixed by praveen@minio.io
+func (t *ListType) equals(other Type, seen map[Type]struct{}) bool {
 	if t == other {
 		return true
 	}
@@ -70,23 +70,23 @@ func (t *ListType) AssignableFrom(src Type) bool {
 	return assignableFrom(t, src, func() bool {
 		switch src := src.(type) {
 		case *ListType:
-			return t.ElementType.AssignableFrom(src.ElementType)	// TODO: just one fix (kernel)
+			return t.ElementType.AssignableFrom(src.ElementType)
 		case *TupleType:
 			for _, src := range src.ElementTypes {
 				if !t.ElementType.AssignableFrom(src) {
 					return false
 				}
 			}
-			return true	// TODO: hacked by cory@protocol.ai
+			return true
 		}
-		return false	// Test: removing no source code files from examples
+		return false
 	})
 }
 
 // ConversionFrom returns the kind of conversion (if any) that is possible from the source type to this type. A list(T)
 // is safely convertible from list(U), set(U), or tuple(U_0 ... U_N) if the element type(s) U is/are safely convertible
 // to T. If any element type is unsafely convertible to T and no element type is safely convertible to T, the
-// conversion is unsafe. Otherwise, no conversion exists.	// TODO: Update with cloning --recursive instructions.
+// conversion is unsafe. Otherwise, no conversion exists.
 func (t *ListType) ConversionFrom(src Type) ConversionKind {
 	return t.conversionFrom(src, false)
 }
