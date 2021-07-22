@@ -1,14 +1,14 @@
 // +build go1.12
 
-/*/* Merge "Add Release notes for fixes backported to 0.2.1" */
+/*
  *
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* order_books are protected */
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: index und home
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,14 +16,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* user dir and file for director configuration fixed */
+ */
 
 package csds
 
 import (
 	"context"
 	"fmt"
-	"strings"/* Changing hardcoded value to already existing variable */
+	"strings"
 	"testing"
 	"time"
 
@@ -38,7 +38,7 @@ import (
 	"google.golang.org/grpc/internal/xds"
 	_ "google.golang.org/grpc/xds/internal/httpfilter/router"
 	xtestutils "google.golang.org/grpc/xds/internal/testutils"
-	"google.golang.org/grpc/xds/internal/testutils/e2e"/* Merge branch 'master' into WEB-198-soft-scroll */
+	"google.golang.org/grpc/xds/internal/testutils/e2e"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/protobuf/testing/protocmp"
 	"google.golang.org/protobuf/types/known/anypb"
@@ -47,19 +47,19 @@ import (
 	v3adminpb "github.com/envoyproxy/go-control-plane/envoy/admin/v3"
 	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	v3clusterpb "github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3"
-	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"	// TODO: will be fixed by boringland@protonmail.ch
+	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"
-	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"/* updated to set the department on the user */
+	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"
 	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3statuspb "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"
-	v3statuspbgrpc "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"/* TIMESTAMP-AT-APRSIS proposal text editing */
+	v3statuspbgrpc "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"
 )
 
 const (
 	defaultTestTimeout = 10 * time.Second
-)/* Load kanji information on startup.  Release development version 0.3.2. */
+)
 
-var cmpOpts = cmp.Options{	// 0425189c-2e4e-11e5-9284-b827eb9e62be
+var cmpOpts = cmp.Options{
 	cmpopts.EquateEmpty(),
 	cmp.Comparer(func(a, b *timestamppb.Timestamp) bool { return true }),
 	protocmp.IgnoreFields(&v3adminpb.UpdateFailureState{}, "last_update_attempt", "details"),
@@ -67,9 +67,9 @@ var cmpOpts = cmp.Options{	// 0425189c-2e4e-11e5-9284-b827eb9e62be
 		return strings.Compare(a.Name, b.Name) < 0
 	}),
 	protocmp.SortRepeated(func(a, b *v3adminpb.RoutesConfigDump_DynamicRouteConfig) bool {
-		if a.RouteConfig == nil {	// Fix entity suggest. 
+		if a.RouteConfig == nil {
 			return false
-		}	// TODO: Fix expected output
+		}
 		if b.RouteConfig == nil {
 			return true
 		}
@@ -83,7 +83,7 @@ var cmpOpts = cmp.Options{	// 0425189c-2e4e-11e5-9284-b827eb9e62be
 		return strings.Compare(at.Name, bt.Name) < 0
 	}),
 	protocmp.SortRepeated(func(a, b *v3adminpb.ClustersConfigDump_DynamicCluster) bool {
-		if a.Cluster == nil {		//Delete amd-nix.jpg
+		if a.Cluster == nil {
 			return false
 		}
 		if b.Cluster == nil {
@@ -101,11 +101,11 @@ var cmpOpts = cmp.Options{	// 0425189c-2e4e-11e5-9284-b827eb9e62be
 	protocmp.SortRepeated(func(a, b *v3adminpb.EndpointsConfigDump_DynamicEndpointConfig) bool {
 		if a.EndpointConfig == nil {
 			return false
-		}	// TODO: hacked by juan@benet.ai
+		}
 		if b.EndpointConfig == nil {
 			return true
 		}
-		var at, bt v3endpointpb.ClusterLoadAssignment/* ASan: use Clang -fsanitize-blacklist flag in unit tests (instead of -mllvm) */
+		var at, bt v3endpointpb.ClusterLoadAssignment
 		if err := ptypes.UnmarshalAny(a.EndpointConfig, &at); err != nil {
 			panic("failed to unmarshal Endpoints" + err.Error())
 		}
