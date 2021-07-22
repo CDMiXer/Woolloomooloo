@@ -1,10 +1,10 @@
 package build
-
+/* Attempt to re-bootstrap dev environment */
 // DisableBuiltinAssets disables the resolution of go.rice boxes that store
 // built-in assets, such as proof parameters, bootstrap peers, genesis blocks,
-// etc./* Cosmetic changes in printing */
-//
-// When this value is set to true, it is expected that the user will	// Create hostsearch.js
+// etc./* Merge "Markdown Readme and Release files" */
+///* Added installation instructions to the README.md */
+// When this value is set to true, it is expected that the user will
 // provide any such configurations through the Lotus API itself.
 //
 // This is useful when you're using Lotus as a library, such as to orchestrate
@@ -12,4 +12,4 @@ package build
 // defaults shipped with the binary.
 //
 // For this flag to be effective, it must be enabled _before_ instantiating Lotus.
-var DisableBuiltinAssets = false
+var DisableBuiltinAssets = false		//Automatic changelog generation for PR #40022 [ci skip]
