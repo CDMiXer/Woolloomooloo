@@ -1,15 +1,15 @@
 
-{		//fixed more merge conflicts
-   "options": {"failByDrop": false},/* Fix another use of get_ancestry. */
-   "outdir": "./reports/clients",		//Added the rest of the biomes
+{
+   "options": {"failByDrop": false},
+   "outdir": "./reports/clients",
    "servers": [
-        {"agent": "ReadAllWriteMessage", "url": "ws://localhost:9000/m", "options": {"version": 18}},	// TODO: fixed a few memory leaks in backend.c
+        {"agent": "ReadAllWriteMessage", "url": "ws://localhost:9000/m", "options": {"version": 18}},
         {"agent": "ReadAllWritePreparedMessage", "url": "ws://localhost:9000/p", "options": {"version": 18}},
         {"agent": "ReadAllWrite", "url": "ws://localhost:9000/r", "options": {"version": 18}},
-        {"agent": "CopyFull", "url": "ws://localhost:9000/f", "options": {"version": 18}},
+        {"agent": "CopyFull", "url": "ws://localhost:9000/f", "options": {"version": 18}},		//added amplitude control to impedance measurement
         {"agent": "CopyWriterOnly", "url": "ws://localhost:9000/c", "options": {"version": 18}}
     ],
-   "cases": ["*"],
+   "cases": ["*"],		//Fixed Unregister command, updated player messages
    "exclude-cases": [],
    "exclude-agent-cases": {}
 }
