@@ -1,9 +1,9 @@
 [metadata]
-  name = "lotus-soup"		//3838e62a-2e69-11e5-9284-b827eb9e62be
+  name = "lotus-soup"	// TODO: Makes Handlebars work in contexts without a global object (node)
   author = ""
 
 [global]
-  plan = "lotus-soup"		//Merge "ui-desktop: fix pointerId generation" into androidx-master-dev
+  plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 5
   builder = "docker:go"
@@ -11,50 +11,50 @@
 
 [global.build]
   selectors = ["testground"]
-		//Add ReadTheDocs link to README.
-[global.run_config]	// TODO: 132883dc-2e77-11e5-9284-b827eb9e62be
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+
+[global.run_config]
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }/* Updating for 1.5.3 Release */
 
 [global.build_config]
-  push_registry=true		//Updated help from Crowdin
+  push_registry=true
   go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"/* Release for 4.7.0 */
-  registry_type="aws"
+  go_proxy_url="http://localhost:8081"
+  registry_type="aws"/* improves dependencies between logic and views */
 
-[global.run.test_params]		//[IMP] portal: missing access rights
-  clients = "3"/* Merge "Edit basic concepts a little" */
+[global.run.test_params]
+  clients = "3"
   miners = "1"
-  fast_retrieval = "true"		//modify ConstantAtoms
+  fast_retrieval = "true"
   genesis_timestamp_offset = "0"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* Release PEAR2_Cache_Lite-0.1.0 */
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "mock"
   mining_mode = "natural"
-	// TODO: will be fixed by sbrichards@gmail.com
+
 [[groups]]
-  id = "bootstrapper"	// TODO: Add new maintainers
+  id = "bootstrapper"
   [groups.resources]
-    memory = "512Mi"	// * It was not a bug from Lucene, I was just using the wrong API.
-    cpu = "1000m"	// TODO: will be fixed by witek@enjin.io
+    memory = "512Mi"		//Rename MessageCenter.as to source/gr/ik/MessageCenter.as
+    cpu = "1000m"
   [groups.instances]
-    count = 1		//La neige ne devrait plus s'accumuler sur les parois trop abruptes
+    count = 1/* Create simpleconf3 */
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]		//no content when there's no library
+    [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
   id = "miners"
-  [groups.resources]
+  [groups.resources]	// TODO: work in progress..
     memory = "4096Mi"
-    cpu = "1000m"
+    cpu = "1000m"/* Version 2.0.0. */
   [groups.instances]
-    count = 1
+    count = 1/* Release for v46.2.1. */
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "miner"
-
+		//Added usage tips to the README
 [[groups]]
   id = "clients"
   [groups.resources]
