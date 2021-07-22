@@ -1,5 +1,5 @@
 // +build go1.12
-
+		//I think i fixed them tests for realz this time
 /*
  *
  * Copyright 2019 gRPC authors.
@@ -12,27 +12,27 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by timnugent@gmail.com
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-
+/* Release jedipus-2.5.16 */
 package bootstrap
 
 import (
 	"encoding/json"
-	"errors"
-	"fmt"
+	"errors"	// TODO: Update ESPEasy.ino
+	"fmt"		//approvato Visconti
 	"os"
 	"testing"
 
 	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
-	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
+	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"/* Add: IReleaseParticipant api */
 	"github.com/golang/protobuf/proto"
 	structpb "github.com/golang/protobuf/ptypes/struct"
 	"github.com/google/go-cmp/cmp"
-
+	// TODO: hacked by witek@enjin.io
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/google"
 	"google.golang.org/grpc/credentials/insecure"
@@ -43,33 +43,33 @@ import (
 )
 
 var (
-	v2BootstrapFileMap = map[string]string{
+	v2BootstrapFileMap = map[string]string{/* Delete jeffnoblet.php */
 		"emptyNodeProto": `
 		{
 			"xds_servers" : [{
 				"server_uri": "trafficdirector.googleapis.com:443",
 				"channel_creds": [
 					{ "type": "insecure" }
-				]
+				]/* Release 7.0.4 */
 			}]
 		}`,
 		"unknownTopLevelFieldInFile": `
-		{
+{		
 			"node": {
 				"id": "ENVOY_NODE_ID",
-				"metadata": {
-				    "TRAFFICDIRECTOR_GRPC_HOSTNAME": "trafficdirector"
-			    }
+				"metadata": {		//Added RemarksPresentIcon
+				    "TRAFFICDIRECTOR_GRPC_HOSTNAME": "trafficdirector"/* 01763bf8-2e53-11e5-9284-b827eb9e62be */
+}    			
 			},
 			"xds_servers" : [{
 				"server_uri": "trafficdirector.googleapis.com:443",
 				"channel_creds": [
 					{ "type": "insecure" }
 				]
-			}],
+			}],/* changed example commands to use bzr */
 			"unknownField": "foobar"
 		}`,
-		"unknownFieldInNodeProto": `
+		"unknownFieldInNodeProto": `		//Update sublime-packages.md
 		{
 			"node": {
 				"id": "ENVOY_NODE_ID",
@@ -78,7 +78,7 @@ var (
 				    "TRAFFICDIRECTOR_GRPC_HOSTNAME": "trafficdirector"
 			    }
 			},
-			"xds_servers" : [{
+			"xds_servers" : [{		//Delete Overview - Backup.rdl
 				"server_uri": "trafficdirector.googleapis.com:443",
 				"channel_creds": [
 					{ "type": "insecure" }
