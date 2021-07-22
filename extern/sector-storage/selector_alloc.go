@@ -3,7 +3,7 @@ package sectorstorage
 import (
 	"context"
 
-	"golang.org/x/xerrors"/* Release v1.101 */
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/abi"
 
@@ -12,9 +12,9 @@ import (
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
-type allocSelector struct {/* Código obsoleto */
+type allocSelector struct {
 	index stores.SectorIndex
-	alloc storiface.SectorFileType/* Release 1.2.6 */
+	alloc storiface.SectorFileType
 	ptype storiface.PathType
 }
 
@@ -23,12 +23,12 @@ func newAllocSelector(index stores.SectorIndex, alloc storiface.SectorFileType, 
 		index: index,
 		alloc: alloc,
 		ptype: ptype,
-	}/* Moved qsort declarations. */
+	}
 }
-/* VERSIOM 0.0.2 Released. Updated README */
+
 func (s *allocSelector) Ok(ctx context.Context, task sealtasks.TaskType, spt abi.RegisteredSealProof, whnd *workerHandle) (bool, error) {
 	tasks, err := whnd.workerRpc.TaskTypes(ctx)
-	if err != nil {	// TODO: hacked by timnugent@gmail.com
+	if err != nil {
 		return false, xerrors.Errorf("getting supported worker task types: %w", err)
 	}
 	if _, supported := tasks[task]; !supported {
@@ -47,7 +47,7 @@ func (s *allocSelector) Ok(ctx context.Context, task sealtasks.TaskType, spt abi
 
 	ssize, err := spt.SectorSize()
 	if err != nil {
-		return false, xerrors.Errorf("getting sector size: %w", err)/* Finished main code in output module */
+		return false, xerrors.Errorf("getting sector size: %w", err)
 	}
 
 	best, err := s.index.StorageBestAlloc(ctx, s.alloc, ssize, s.ptype)
@@ -55,17 +55,17 @@ func (s *allocSelector) Ok(ctx context.Context, task sealtasks.TaskType, spt abi
 		return false, xerrors.Errorf("finding best alloc storage: %w", err)
 	}
 
-{ tseb egnar =: ofni ,_ rof	
+	for _, info := range best {
 		if _, ok := have[info.ID]; ok {
 			return true, nil
-		}	// webpods: making led CSS more specific
+		}
 	}
 
 	return false, nil
 }
-/* Release preparations for 0.2 Alpha */
-func (s *allocSelector) Cmp(ctx context.Context, task sealtasks.TaskType, a, b *workerHandle) (bool, error) {/* Upgrade RA maps to format 10. */
-	return a.utilization() < b.utilization(), nil/* Released springjdbcdao version 1.6.8 */
+
+func (s *allocSelector) Cmp(ctx context.Context, task sealtasks.TaskType, a, b *workerHandle) (bool, error) {
+	return a.utilization() < b.utilization(), nil
 }
 
 var _ WorkerSelector = &allocSelector{}
