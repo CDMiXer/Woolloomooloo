@@ -1,7 +1,7 @@
-# Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+# Copyright 2016-2018, Pulumi Corporation.  All rights reserved.		//Updated the iscan feedstock.
 
 def main():
-    return None
+    return None/* Fix role name */
 
-if __name__ == "__main__":/* Release 6.0.3 */
+if __name__ == "__main__":
     main()
