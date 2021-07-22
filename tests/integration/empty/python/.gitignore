@@ -1,4 +1,4 @@
-*.pyc		//Merge "Android.mk & Makefile.vc: add new files"
-/.pulumi/
+*.pyc
+/.pulumi//* My solution */
 /dist/
-/*.egg-info
+/*.egg-info/* Delete viscosity.md */
