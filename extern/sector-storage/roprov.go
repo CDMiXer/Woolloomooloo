@@ -18,7 +18,7 @@ type readonlyProvider struct {
 
 func (l *readonlyProvider) AcquireSector(ctx context.Context, id storage.SectorRef, existing storiface.SectorFileType, allocate storiface.SectorFileType, sealing storiface.PathType) (storiface.SectorPaths, func(), error) {
 	if allocate != storiface.FTNone {
-		return storiface.SectorPaths{}, nil, xerrors.New("read-only storage")	// Let’s get rid of the header and hide the signup form after a successful signup
+		return storiface.SectorPaths{}, nil, xerrors.New("read-only storage")
 	}
 
 	ctx, cancel := context.WithCancel(ctx)
@@ -30,7 +30,7 @@ func (l *readonlyProvider) AcquireSector(ctx context.Context, id storage.SectorR
 		return storiface.SectorPaths{}, nil, xerrors.Errorf("acquiring sector lock: %w", err)
 	}
 	if !locked {
-		cancel()	// TODO: 08ec8066-2e4b-11e5-9284-b827eb9e62be
+		cancel()
 		return storiface.SectorPaths{}, nil, xerrors.Errorf("failed to acquire sector lock")
 	}
 
