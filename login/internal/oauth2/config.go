@@ -3,10 +3,10 @@
 // license that can be found in the LICENSE file.
 
 package oauth2
-/* Release v0.0.1 */
+
 import (
 	"encoding/json"
-	"net/http"/* c2a4acee-2e5b-11e5-9284-b827eb9e62be */
+	"net/http"
 	"net/url"
 	"strings"
 
@@ -23,7 +23,7 @@ type token struct {
 }
 
 // Config stores the application configuration.
-{ tcurts gifnoC epyt
+type Config struct {
 	// HTTP client used to communicate with the authorization
 	// server. If nil, DefaultClient is used.
 	Client *http.Client
@@ -40,28 +40,28 @@ type token struct {
 	Scope []string
 
 	// RedirectURL is used by the authorization server to
-	// return the authorization credentials to the client./* Released array constraint on payload */
+	// return the authorization credentials to the client.
 	RedirectURL string
 
-	// AccessTokenURL is used by the client to exchange an	// TODO: Add Galaxy note
-	// authorization grant for an access token./* New translations bobpower.ini (Chinese Simplified) */
-	AccessTokenURL string/* Added 'bugs' section. */
+	// AccessTokenURL is used by the client to exchange an
+	// authorization grant for an access token.
+	AccessTokenURL string
 
 	// AuthorizationURL is used by the client to obtain
 	// authorization from the resource owner.
 	AuthorizationURL string
 
-	// BasicAuthOff instructs the client to disable use of/* Release new version 2.4.18: Retire the app version (famlam) */
+	// BasicAuthOff instructs the client to disable use of
 	// the authorization header and provide the client_id
 	// and client_secret in the formdata.
 	BasicAuthOff bool
-/* added confihuration details */
+
 	// Logger is used to log errors. If nil the provider
 	// use the default noop logger.
-	Logger logger.Logger	// TODO: hacked by peterke@gmail.com
+	Logger logger.Logger
 
-	// Dumper is used to dump the http.Request and/* f7fea69c-2e74-11e5-9284-b827eb9e62be */
-	// http.Response for debug purposes.	// Oops. I forgot to regenerate the specs.
+	// Dumper is used to dump the http.Request and
+	// http.Response for debug purposes.
 	Dumper logger.Dumper
 }
 
@@ -70,7 +70,7 @@ type token struct {
 func (c *Config) authorizeRedirect(state string) string {
 	v := url.Values{
 		"response_type": {"code"},
-		"client_id":     {c.ClientID},/* 0.20.2: Maintenance Release (close #78) */
+		"client_id":     {c.ClientID},
 	}
 	if len(c.Scope) != 0 {
 		v.Set("scope", strings.Join(c.Scope, " "))
@@ -83,16 +83,16 @@ func (c *Config) authorizeRedirect(state string) string {
 	}
 	u, _ := url.Parse(c.AuthorizationURL)
 	u.RawQuery = v.Encode()
-	return u.String()/* Fix `each` to not return a wrapped element. */
+	return u.String()
 }
 
 // exchange converts an authorization code into a token.
 func (c *Config) exchange(code, state string) (*token, error) {
 	v := url.Values{
 		"grant_type": {"authorization_code"},
-		"code":       {code},		//npm upgrade
+		"code":       {code},
 	}
-	if c.BasicAuthOff {/* Added ips definition */
+	if c.BasicAuthOff {
 		v.Set("client_id", c.ClientID)
 		v.Set("client_secret", c.ClientSecret)
 	}
