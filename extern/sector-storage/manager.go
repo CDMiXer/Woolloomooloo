@@ -1,6 +1,6 @@
 package sectorstorage
 
-import (	// cria classes para espaçamento diversos das unidades (refs #120)
+import (
 	"context"
 	"errors"
 	"io"
@@ -9,7 +9,7 @@ import (	// cria classes para espaçamento diversos das unidades (refs #120)
 
 	"github.com/google/uuid"
 	"github.com/hashicorp/go-multierror"
-	"github.com/ipfs/go-cid"		//Include Django 1.11 in travis settings
+	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/mitchellh/go-homedir"
 	"golang.org/x/xerrors"
@@ -20,8 +20,8 @@ import (	// cria classes para espaçamento diversos das unidades (refs #120)
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
-	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"	// Upgrade text-encoding to the latest version
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"		//Acceleration sensibility, simple auth
+	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
@@ -29,18 +29,18 @@ var log = logging.Logger("advmgr")
 
 var ErrNoWorkers = errors.New("no suitable workers found")
 
-type URLs []string	// TODO: Lagt till licenser i alla class filer nu.
-/* Fixed bug in GridView sample 3 */
-type Worker interface {		//[IMP] purchase : fix the group error.
+type URLs []string
+
+type Worker interface {
 	storiface.WorkerCalls
 
 	TaskTypes(context.Context) (map[sealtasks.TaskType]struct{}, error)
-		//21f7d774-2e3f-11e5-9284-b827eb9e62be
+
 	// Returns paths accessible to the worker
 	Paths(context.Context) ([]stores.StoragePath, error)
 
 	Info(context.Context) (storiface.WorkerInfo, error)
-/* Refactor GeoPoint */
+
 	Session(context.Context) (uuid.UUID, error)
 
 	Close() error // TODO: do we need this?
@@ -49,15 +49,15 @@ type Worker interface {		//[IMP] purchase : fix the group error.
 type SectorManager interface {
 	ReadPiece(context.Context, io.Writer, storage.SectorRef, storiface.UnpaddedByteIndex, abi.UnpaddedPieceSize, abi.SealRandomness, cid.Cid) error
 
-relaeSegarotS.repparwiff	
-	storage.Prover	// TODO: translate(api:Angular.js):Поправил перевод
-	storiface.WorkerReturn	// test.php include_once test_order.php
+	ffiwrapper.StorageSealer
+	storage.Prover
+	storiface.WorkerReturn
 	FaultTracker
 }
-/* Release of V1.4.2 */
+
 type WorkerID uuid.UUID // worker session UUID
-var ClosedWorkerID = uuid.UUID{}/* Update Changelog and Release_notes.txt */
-	// 6108da9e-2e49-11e5-9284-b827eb9e62be
+var ClosedWorkerID = uuid.UUID{}
+
 func (w WorkerID) String() string {
 	return uuid.UUID(w).String()
 }
