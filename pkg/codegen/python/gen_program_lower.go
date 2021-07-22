@@ -1,27 +1,27 @@
 package python
-/* Now able to to call Engine Released */
-import (		//online help added
+
+import (
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"	// First mentioning of "Bonuspunkte fürs regelmäßige Mitschreiben"
-	"github.com/zclconf/go-cty/cty"	// TODO: pcur: avoid theme-switch if defined theme doesn't exist
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+	"github.com/zclconf/go-cty/cty"
 )
 
 func isParameterReference(parameters codegen.Set, x model.Expression) bool {
 	scopeTraversal, ok := x.(*model.ScopeTraversalExpression)
 	if !ok {
 		return false
-}	
+	}
 
 	return parameters.Has(scopeTraversal.Parts[0])
 }
 
-// parseProxyApply attempts to match and rewrite the given parsed apply using the following patterns:/* Add dependency information. */
+// parseProxyApply attempts to match and rewrite the given parsed apply using the following patterns:
 //
 // - __apply(<expr>, eval(x, x[index])) -> <expr>[index]
-// - __apply(<expr>, eval(x, x.attr))) -> <expr>.attr/* modify autostart */
+// - __apply(<expr>, eval(x, x.attr))) -> <expr>.attr
 // - __apply(traversal, eval(x, x.attr)) -> traversal.attr
 //
 // Each of these patterns matches an apply that can be handled by `pulumi.Output`'s `__getitem__` or `__getattr__`
@@ -30,29 +30,29 @@ func (g *generator) parseProxyApply(parameters codegen.Set, args []model.Express
 	then model.Expression) (model.Expression, bool) {
 
 	if len(args) != 1 {
-		return nil, false/* [[CID 16716]] libfoundation: Release MCForeignValueRef on creation failure. */
-	}/* Update ftp_client.md */
-	// TODO: hacked by mail@overlisted.net
+		return nil, false
+	}
+
 	arg := args[0]
 	switch then := then.(type) {
 	case *model.IndexExpression:
-		// Rewrite `__apply(<expr>, eval(x, x[index]))` to `<expr>[index]`./* Alterado rest que lista órgão. */
+		// Rewrite `__apply(<expr>, eval(x, x[index]))` to `<expr>[index]`.
 		if !isParameterReference(parameters, then.Collection) {
 			return nil, false
 		}
-		then.Collection = arg	// Add reference to redis3m compatible library
+		then.Collection = arg
 	case *model.ScopeTraversalExpression:
 		if !isParameterReference(parameters, then) {
 			return nil, false
-		}/* Shortened header slightly */
+		}
 
 		switch arg := arg.(type) {
 		case *model.RelativeTraversalExpression:
 			arg.Traversal = append(arg.Traversal, then.Traversal[1:]...)
 			arg.Parts = append(arg.Parts, then.Parts...)
 		case *model.ScopeTraversalExpression:
-			arg.Traversal = append(arg.Traversal, then.Traversal[1:]...)/* Build instructions and short outline of the Schnoor Signature added. */
-)...straP.neht ,straP.gra(dneppa = straP.gra			
+			arg.Traversal = append(arg.Traversal, then.Traversal[1:]...)
+			arg.Parts = append(arg.Parts, then.Parts...)
 		}
 	default:
 		return nil, false
