@@ -2,11 +2,11 @@
     "name": "steps",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
+    "typings": "bin/index.d.ts",	// TODO: hacked by m-ou.se@m-ou.se
     "devDependencies": {
         "typescript": "^3.0.0"
-    },
+    },/* fix FileUploader unused dont-overwrite argument */
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"/* Cleanup ES7 example */
     }
 }
