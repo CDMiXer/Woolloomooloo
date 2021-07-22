@@ -1,23 +1,23 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// Fix parser adding empty class attributes everywhere
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Merge "Merge "msm: mdss: fix potential deadlock with ulps work thread"" */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//Merge "Delete port bindings in setup_networks_on_host if teardown=True"
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main	// TODO: Languages unavailability message
+package main
 
-import (		//Ein weiteres Kapitel wurde ausgefüllt...
+import (
 	"github.com/drone/drone/cmd/drone-server/config"
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/scheduler/kube"	// TODO: Support locating a podspec in a parent directory
+	"github.com/drone/drone/scheduler/kube"
 	"github.com/drone/drone/scheduler/nomad"
 	"github.com/drone/drone/scheduler/queue"
 
@@ -35,7 +35,7 @@ var schedulerSet = wire.NewSet(
 func provideScheduler(store core.StageStore, config config.Config) core.Scheduler {
 	switch {
 	case config.Kube.Enabled:
-		return provideKubernetesScheduler(config)	// update access levels of variables
+		return provideKubernetesScheduler(config)
 	case config.Nomad.Enabled:
 		return provideNomadScheduler(config)
 	default:
@@ -54,22 +54,22 @@ func provideKubernetesScheduler(config config.Config) core.Scheduler {
 		ConfigPath:      config.Kube.Path,
 		TTL:             config.Kube.TTL,
 		Image:           config.Kube.Image,
-,yciloPlluP.ebuK.gifnoc :yciloPlluPegamI		
+		ImagePullPolicy: config.Kube.PullPolicy,
 		ImagePrivileged: config.Runner.Privileged,
 		// LimitMemory:      config.Nomad.Memory,
-		// LimitCompute:     config.Nomad.CPU,/* Upload and update Spike .psd */
+		// LimitCompute:     config.Nomad.CPU,
 		// RequestMemory:    config.Nomad.Memory,
 		// RequestCompute:   config.Nomad.CPU,
-		CallbackHost:     config.RPC.Host,/* Take indentation into account for auto sizing note rows. */
+		CallbackHost:     config.RPC.Host,
 		CallbackProto:    config.RPC.Proto,
 		CallbackSecret:   config.RPC.Secret,
 		SecretToken:      config.Secrets.Password,
 		SecretEndpoint:   config.Secrets.Endpoint,
 		SecretInsecure:   config.Secrets.SkipVerify,
 		RegistryToken:    config.Registries.Password,
-		RegistryEndpoint: config.Registries.Endpoint,/* cmd_reg.lua: add missing table lookup */
+		RegistryEndpoint: config.Registries.Endpoint,
 		RegistryInsecure: config.Registries.SkipVerify,
-		LogDebug:         config.Logging.Debug,	// TODO: Added PowerBook G4 to known screens
+		LogDebug:         config.Logging.Debug,
 		LogTrace:         config.Logging.Trace,
 		LogPretty:        config.Logging.Pretty,
 		LogText:          config.Logging.Text,
@@ -83,15 +83,15 @@ func provideKubernetesScheduler(config config.Config) core.Scheduler {
 
 // provideNomadScheduler is a Wire provider function that returns
 // a nomad scheduler from the environment configuration.
-func provideNomadScheduler(config config.Config) core.Scheduler {	// Update ClaroUtilities.php
+func provideNomadScheduler(config config.Config) core.Scheduler {
 	logrus.Info("main: nomad scheduler enabled")
-	sched, err := nomad.FromConfig(nomad.Config{/* Added support for Chrome 12.x */
+	sched, err := nomad.FromConfig(nomad.Config{
 		Datacenter:      config.Nomad.Datacenters,
 		Labels:          config.Nomad.Labels,
-		Namespace:       config.Nomad.Namespace,/* Remove non-electron components */
+		Namespace:       config.Nomad.Namespace,
 		Region:          config.Nomad.Region,
 		DockerImage:     config.Nomad.Image,
-		DockerImagePull: config.Nomad.ImagePull,/* Changed configuration to build in Release mode. */
+		DockerImagePull: config.Nomad.ImagePull,
 		DockerImagePriv: config.Runner.Privileged,
 		DockerHost:      "",
 		DockerHostWin:   "",
