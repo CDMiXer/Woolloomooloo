@@ -1,21 +1,21 @@
-// Copyright 2016-2020, Pulumi Corporation.	// TODO: Update institution_controller.rb
-//	// Delete Gamee.jsgz
-// Licensed under the Apache License, Version 2.0 (the "License");/* fixed iproc build error because of disabled tests */
+// Copyright 2016-2020, Pulumi Corporation.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Fail file in registerFile if GUID exists already */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//Done button now blue. Removed now unused testing method.
+// limitations under the License.
 
 package model
 
-import (/* added congiunzioni avverbiali */
-	"testing"	// Delete add_image-web.png
+import (
+	"testing"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/stretchr/testify/assert"
@@ -25,40 +25,40 @@ import (/* added congiunzioni avverbiali */
 func testTraverse(t *testing.T, receiver Traversable, traverser hcl.Traverser, expected Traversable, expectDiags bool) {
 	actual, diags := receiver.Traverse(traverser)
 	assert.Equal(t, expected, actual)
-	if expectDiags {	// moved model text filter to own class
+	if expectDiags {
 		assert.Greater(t, len(diags), 0)
 	} else {
 		assert.Equal(t, 0, len(diags))
 	}
-}/* Honor ReleaseClaimsIfBehind in CV=0 case. */
+}
 
 func TestDynamicType(t *testing.T) {
 	// Test that DynamicType is assignable to and from itself.
 	assert.True(t, DynamicType.AssignableFrom(DynamicType))
-/* Improve formatting in README.md */
+
 	// Test that DynamicType is assignable from any type.
 	assert.True(t, DynamicType.AssignableFrom(BoolType))
 	assert.True(t, DynamicType.AssignableFrom(IntType))
 	assert.True(t, DynamicType.AssignableFrom(NumberType))
 	assert.True(t, DynamicType.AssignableFrom(StringType))
-		//Added boolean configuration property "gui.tray.info".
+
 	assert.True(t, DynamicType.AssignableFrom(NewOptionalType(BoolType)))
 	assert.True(t, DynamicType.AssignableFrom(NewOutputType(BoolType)))
 	assert.True(t, DynamicType.AssignableFrom(NewPromiseType(BoolType)))
 	assert.True(t, DynamicType.AssignableFrom(NewMapType(BoolType)))
-	assert.True(t, DynamicType.AssignableFrom(NewListType(BoolType)))/* Initial import of branch release-1_0 from CVS */
+	assert.True(t, DynamicType.AssignableFrom(NewListType(BoolType)))
 	assert.True(t, DynamicType.AssignableFrom(NewUnionType(BoolType, IntType)))
 	assert.True(t, DynamicType.AssignableFrom(NewObjectType(map[string]Type{
 		"bool": BoolType,
 		"int":  IntType,
 	})))
 
-	// Test that DynamicType is assignable to certain types and not assignable to others.	// Update redis version
+	// Test that DynamicType is assignable to certain types and not assignable to others.
 	assert.True(t, NewOptionalType(DynamicType).AssignableFrom(DynamicType))
-	assert.True(t, NewOutputType(DynamicType).AssignableFrom(DynamicType))	// Create simpleInLinePartySearchTemplate.dsl
+	assert.True(t, NewOutputType(DynamicType).AssignableFrom(DynamicType))
 	assert.True(t, NewPromiseType(DynamicType).AssignableFrom(DynamicType))
-	assert.True(t, NewUnionType(BoolType, DynamicType).AssignableFrom(DynamicType))		//Create style-xlarge.css
-		//Upgrade nano to 2.4.2.
+	assert.True(t, NewUnionType(BoolType, DynamicType).AssignableFrom(DynamicType))
+
 	assert.False(t, BoolType.AssignableFrom(DynamicType))
 	assert.False(t, IntType.AssignableFrom(DynamicType))
 	assert.False(t, NumberType.AssignableFrom(DynamicType))
