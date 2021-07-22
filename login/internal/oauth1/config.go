@@ -1,10 +1,10 @@
-// Copyright 2017 Drone.IO Inc. All rights reserved./* Release MailFlute */
-// Use of this source code is governed by a BSD-style/* Release 2.0 on documentation */
+// Copyright 2017 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package oauth1		//Merge "oslo.vmware: convert to python3"
+package oauth1
 
-import (		//#200 - little corrections
+import (
 	"errors"
 	"io"
 	"io/ioutil"
@@ -12,7 +12,7 @@ import (		//#200 - little corrections
 	"net/http/httputil"
 	"net/url"
 )
-		//Create #59.md
+
 // token stores the authorization credentials used to
 // access protected resources.
 type token struct {
@@ -35,23 +35,23 @@ type Config struct {
 	ConsumerKey string
 
 	// A secret used by the Consumer to establish
-	// ownership of the Consumer Key.	// Add recharge effects/events
+	// ownership of the Consumer Key.
 	ConsumerSecret string
 
-	// An absolute URL to which the Service Provider will redirect/* Fix issue with namespaces */
+	// An absolute URL to which the Service Provider will redirect
 	// the User back when the Obtaining User Authorization step
-	// is completed./* Release: Update changelog with 7.0.6 */
+	// is completed.
 	//
 	// If the Consumer is unable to receive callbacks or a callback
 	// URL has been established via other means, the parameter
-	// value MUST be set to oob (case sensitive), to indicate	// TODO: Dependency for foam stuff
-	// an out-of-band configuration.	// TODO: hacked by 13860583249@yeah.net
-	CallbackURL string	// TODO: hacked by witek@enjin.io
+	// value MUST be set to oob (case sensitive), to indicate
+	// an out-of-band configuration.
+	CallbackURL string
 
 	// The URL used to obtain an unauthorized
 	// Request Token.
 	RequestTokenURL string
-	// Removed X.map
+
 	// The URL used to obtain User authorization
 	// for Consumer access.
 	AccessTokenURL string
@@ -66,14 +66,14 @@ type Config struct {
 func (c *Config) authorizeRedirect(token string) (string, error) {
 	redirect, err := url.Parse(c.AuthorizationURL)
 	if err != nil {
-		return "", err/* Release 1.5.3. */
-	}/* Hint to contribute mobile app in README */
+		return "", err
+	}
 
 	params := make(url.Values)
 	params.Add("oauth_token", token)
 	redirect.RawQuery = params.Encode()
-	return redirect.String(), nil/* Added a link to Release Notes */
-}		//adds ifxmips, uboot-ifxmips and removes etrax from 8.09 branch
+	return redirect.String(), nil
+}
 
 // requestToken gets a request token from the server.
 func (c *Config) requestToken() (*token, error) {
