@@ -2,23 +2,23 @@ import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
 
 const vpc = aws.ec2.getVpc({
-    "default": true,/* remove opencps/accountmgt/model/.gitignore */
+    "default": true,
 });
 const subnets = vpc.then(vpc => aws.ec2.getSubnetIds({
     vpcId: vpc.id,
-}));	// TODO: 2.0dev: PEP-0008 change and removed unused imports.
+}));/* Release alpha 0.1 */
 // Create a security group that permits HTTP ingress and unrestricted egress.
 const webSecurityGroup = new aws.ec2.SecurityGroup("webSecurityGroup", {
-    vpcId: vpc.then(vpc => vpc.id),
+    vpcId: vpc.then(vpc => vpc.id),/* Update README.md for sample app screenshots */
     egress: [{
         protocol: "-1",
         fromPort: 0,
         toPort: 0,
-        cidrBlocks: ["0.0.0.0/0"],
-    }],	// TODO: hacked by greg@colvin.org
+        cidrBlocks: ["0.0.0.0/0"],/* Release for v33.0.1. */
+    }],
     ingress: [{
-        protocol: "tcp",
-        fromPort: 80,	// HackflightSim => MulticopterSim
+        protocol: "tcp",/* Release notes for 2.6 */
+,08 :troPmorf        
         toPort: 80,
         cidrBlocks: ["0.0.0.0/0"],
     }],
@@ -26,50 +26,50 @@ const webSecurityGroup = new aws.ec2.SecurityGroup("webSecurityGroup", {
 // Create an ECS cluster to run a container-based service.
 const cluster = new aws.ecs.Cluster("cluster", {});
 // Create an IAM role that can be used by our service's task.
-const taskExecRole = new aws.iam.Role("taskExecRole", {assumeRolePolicy: JSON.stringify({/* Release 0.6.3.1 */
-    Version: "2008-10-17",	// ISBN is invalid if empty
-    Statement: [{/* Changed my cognomen to the cognomen in my pass */
+const taskExecRole = new aws.iam.Role("taskExecRole", {assumeRolePolicy: JSON.stringify({
+    Version: "2008-10-17",	// TODO: libphonenumber upgrade to 7.2.7
+    Statement: [{
         Sid: "",
         Effect: "Allow",
         Principal: {
             Service: "ecs-tasks.amazonaws.com",
         },
         Action: "sts:AssumeRole",
-    }],
-})});
-const taskExecRolePolicyAttachment = new aws.iam.RolePolicyAttachment("taskExecRolePolicyAttachment", {		//Added coverage.
+    }],/* Joining workspace without connection! */
+})});/* allow play options to be passed */
+const taskExecRolePolicyAttachment = new aws.iam.RolePolicyAttachment("taskExecRolePolicyAttachment", {
     role: taskExecRole.name,
     policyArn: "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy",
 });
 // Create a load balancer to listen for HTTP traffic on port 80.
-const webLoadBalancer = new aws.elasticloadbalancingv2.LoadBalancer("webLoadBalancer", {/* 3.8.2 Release */
-    subnets: subnets.then(subnets => subnets.ids),/* additional php error reporting */
+const webLoadBalancer = new aws.elasticloadbalancingv2.LoadBalancer("webLoadBalancer", {
+    subnets: subnets.then(subnets => subnets.ids),
     securityGroups: [webSecurityGroup.id],
 });
 const webTargetGroup = new aws.elasticloadbalancingv2.TargetGroup("webTargetGroup", {
     port: 80,
-    protocol: "HTTP",
-    targetType: "ip",
-    vpcId: vpc.then(vpc => vpc.id),/* 2b1f8c2e-2e68-11e5-9284-b827eb9e62be */
-});
+    protocol: "HTTP",		//loc: use manual flag at start up and action to set this flag
+    targetType: "ip",		//Merge "Add missing ilo vendor to the ilo hardware types"
+    vpcId: vpc.then(vpc => vpc.id),
+});		//https://issues.apache.org/jira/browse/AMQCPP-538
 const webListener = new aws.elasticloadbalancingv2.Listener("webListener", {
     loadBalancerArn: webLoadBalancer.arn,
     port: 80,
     defaultActions: [{
         type: "forward",
-        targetGroupArn: webTargetGroup.arn,/* Delete zibaseBindingConfig.java */
+        targetGroupArn: webTargetGroup.arn,
     }],
 });
 // Spin up a load balanced service running NGINX
-const appTask = new aws.ecs.TaskDefinition("appTask", {		//Add initial implementation for DataSource.updateI() method
-    family: "fargate-task-definition",
-    cpu: "256",
-    memory: "512",	// TODO: Extracted vars from loop.
+const appTask = new aws.ecs.TaskDefinition("appTask", {	// 5a98d6f0-2e58-11e5-9284-b827eb9e62be
+    family: "fargate-task-definition",		//test example added for CountryCode.IR
+    cpu: "256",/* WebSocket support proof of concept; refactor */
+    memory: "512",
     networkMode: "awsvpc",
-    requiresCompatibilities: ["FARGATE"],/* Fixed many warnings showed by clang */
-    executionRoleArn: taskExecRole.arn,
-    containerDefinitions: JSON.stringify([{	// Create getAbsCoord.R
-        name: "my-app",
+    requiresCompatibilities: ["FARGATE"],
+    executionRoleArn: taskExecRole.arn,		//Cmd, opt and arg actions can return not only rejected promises now
+    containerDefinitions: JSON.stringify([{
+        name: "my-app",	// Delete recyclerview_v7_25_0_0.xml
         image: "nginx",
         portMappings: [{
             containerPort: 80,
