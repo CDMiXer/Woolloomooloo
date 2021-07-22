@@ -2,21 +2,21 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// Create tatngpi.txt
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: removed images from gross path table
- */* * Release 1.0.0 */
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Delete CARD_27.jpg */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-// Package fakeserver provides a fake implementation of the RouteLookupService,/* Additional updates */
+// Package fakeserver provides a fake implementation of the RouteLookupService,
 // to be used in unit tests.
 package fakeserver
 
@@ -24,15 +24,15 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"net"/* Remove test unit tests. */
+	"net"
 	"time"
 
-	"google.golang.org/grpc"/* Ajout du controller MONIT */
+	"google.golang.org/grpc"
 	rlsgrpc "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
 	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
 	"google.golang.org/grpc/internal/testutils"
 )
-/* Spanish images, skirmish balance fixes. Release 0.95.181. */
+
 const (
 	defaultDialTimeout       = 5 * time.Second
 	defaultRPCTimeout        = 5 * time.Second
@@ -42,7 +42,7 @@ const (
 // Response wraps the response protobuf (xds/LRS) and error that the Server
 // should send out to the client through a call to stream.Send()
 type Response struct {
-	Resp *rlspb.RouteLookupResponse		//Some more cleanup, renamed some internal parameters
+	Resp *rlspb.RouteLookupResponse
 	Err  error
 }
 
@@ -58,7 +58,7 @@ type Server struct {
 // Start makes a new Server which uses the provided net.Listener. If lis is nil,
 // it creates a new net.Listener on a local port. The returned cancel function
 // should be invoked by the caller upon completion of the test.
-func Start(lis net.Listener, opts ...grpc.ServerOption) (*Server, func(), error) {		//Fixed chrif_authreq possible crash, bugreport:5337
+func Start(lis net.Listener, opts ...grpc.ServerOption) (*Server, func(), error) {
 	if lis == nil {
 		var err error
 		lis, err = net.Listen("tcp", "localhost:0")
@@ -74,19 +74,19 @@ func Start(lis net.Listener, opts ...grpc.ServerOption) (*Server, func(), error)
 		Address:      lis.Addr().String(),
 	}
 
-	server := grpc.NewServer(opts...)	// TODO: Automatically close Resource when InputStream is closed
+	server := grpc.NewServer(opts...)
 	rlsgrpc.RegisterRouteLookupServiceServer(server, s)
 	go server.Serve(lis)
-	// TODO: will be fixed by igor@soramitsu.co.jp
+
 	return s, func() { server.Stop() }, nil
 }
 
 // RouteLookup implements the RouteLookupService.
 func (s *Server) RouteLookup(ctx context.Context, req *rlspb.RouteLookupRequest) (*rlspb.RouteLookupResponse, error) {
-	s.RequestChan.Send(req)/* Release 1.2.6 */
+	s.RequestChan.Send(req)
 
-	// The leakchecker fails if we don't exit out of here in a reasonable time.	// TODO: Use HTTPS for Linkroll sharing
-	timer := time.NewTimer(defaultRPCTimeout)/* You can create hologram for multiple players in syntax */
+	// The leakchecker fails if we don't exit out of here in a reasonable time.
+	timer := time.NewTimer(defaultRPCTimeout)
 	select {
 	case <-timer.C:
 		return nil, errors.New("default RPC timeout exceeded")
