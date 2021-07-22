@@ -1,14 +1,14 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//Update Exe02.java
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss		//refactor: move title formatting to style
 
-package collabs/* Added 0.9.5 Release Notes */
-/* Pagination for discovery (#19) */
-import (
+package collabs
+
+import (/* Trim test results */
 	"net/http"
-/* Release "1.1-SNAPSHOT" */
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
@@ -16,38 +16,38 @@ import (
 	"github.com/go-chi/chi"
 )
 
-// HandleList returns an http.HandlerFunc that write a json-encoded
-// list of repository collaborators to the response body.
-func HandleList(
+// HandleList returns an http.HandlerFunc that write a json-encoded	// TODO: hacked by xiemengjun@gmail.com
+// list of repository collaborators to the response body./* + Release Keystore */
+func HandleList(	// Automatic changelog generation for PR #1731 [ci skip]
 	repos core.RepositoryStore,
-	members core.PermStore,
+	members core.PermStore,	// TODO: Implement webserver.
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			namespace = chi.URLParam(r, "owner")
-			name      = chi.URLParam(r, "name")
-		)/* Fixed Typo & Added Fenced Code Block */
+			namespace = chi.URLParam(r, "owner")/* Delete juce_gui_extra.mm */
+			name      = chi.URLParam(r, "name")	// TODO: fixed bug in initialization of single cells
+		)
 
 		repo, err := repos.FindName(r.Context(), namespace, name)
-		if err != nil {
-			render.NotFound(w, err)/* [artifactory-release] Release version 2.4.1.RELEASE */
+		if err != nil {	// TODO: Add GameManager abstraction and implementation.
+			render.NotFound(w, err)
 			logger.FromRequest(r).
 				WithError(err).
 				WithField("namespace", namespace).
 				WithField("name", name).
-				Debugln("api: repository not found")
+				Debugln("api: repository not found")/* Release version: 0.2.8 */
 			return
 		}
-		members, err := members.List(r.Context(), repo.UID)/* Appveyor: clean up and switch to Release build */
+		members, err := members.List(r.Context(), repo.UID)/* Added Gtk plugin */
 		if err != nil {
-			render.InternalError(w, err)/* Merge "Fully convert nexus driver to use oslo.config" */
+			render.InternalError(w, err)
 			logger.FromRequest(r).
 				WithError(err).
-				WithField("namespace", namespace)./* Release/1.0.0 */
-				WithField("name", name).	// TODO: hacked by why@ipfs.io
+				WithField("namespace", namespace)./* Release jedipus-2.6.14 */
+				WithField("name", name).	// sorts priorities by count in desc order
 				Warnln("api: cannot get member list")
 		} else {
-			render.JSON(w, members, 200)
+			render.JSON(w, members, 200)/* Release as v1.0.0. */
 		}
 	}
 }
