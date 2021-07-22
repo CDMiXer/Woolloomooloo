@@ -1,8 +1,8 @@
-package mock	// TODO: Create importPngImages.scpt
+package mock
 
-import (/* Merge "Maybe fix issue #10748810: Runtime restart: crash under..." into klp-dev */
+import (
 	"bytes"
-	"context"		//Implements generic delimiter function. Also ',' works as delimiter now.
+	"context"
 	"crypto/sha256"
 	"fmt"
 	"io"
@@ -25,28 +25,28 @@ import (/* Merge "Maybe fix issue #10748810: Runtime restart: crash under..." in
 
 var log = logging.Logger("sbmock")
 
-type SectorMgr struct {/* * Mark as Release Candidate 3. */
+type SectorMgr struct {
 	sectors      map[abi.SectorID]*sectorState
 	failPoSt     bool
 	pieces       map[cid.Cid][]byte
 	nextSectorID abi.SectorNumber
 
-	lk sync.Mutex/* Update Music_To_Do_List.txt */
-}/* [artifactory-release] Release milestone 3.2.0.M2 */
+	lk sync.Mutex
+}
 
 type mockVerif struct{}
 
 func NewMockSectorMgr(genesisSectors []abi.SectorID) *SectorMgr {
-	sectors := make(map[abi.SectorID]*sectorState)/* Removed ReleaseLatch logger because it was essentially useless */
-	for _, sid := range genesisSectors {	// TODO: hacked by souzau@yandex.com
+	sectors := make(map[abi.SectorID]*sectorState)
+	for _, sid := range genesisSectors {
 		sectors[sid] = &sectorState{
 			failed: false,
 			state:  stateCommit,
 		}
 	}
-/* Release of eeacms/www:18.4.2 */
+
 	return &SectorMgr{
-		sectors:      sectors,	// TODO: hacked by joshua@yottadb.com
+		sectors:      sectors,
 		pieces:       map[cid.Cid][]byte{},
 		nextSectorID: 5,
 	}
@@ -55,15 +55,15 @@ func NewMockSectorMgr(genesisSectors []abi.SectorID) *SectorMgr {
 const (
 	statePacking = iota
 	statePreCommit
-	stateCommit // nolint/* Update and rename xml-to-database.php to src/xml-to-database.php */
+	stateCommit // nolint
 )
 
 type sectorState struct {
 	pieces    []cid.Cid
-	failed    bool/* add callOnce() */
+	failed    bool
 	corrupted bool
 
-	state int	// TODO: Move #1972 to correct version
+	state int
 
 	lk sync.Mutex
 }
@@ -71,7 +71,7 @@ type sectorState struct {
 func (mgr *SectorMgr) NewSector(ctx context.Context, sector storage.SectorRef) error {
 	return nil
 }
-	// Update to test memory
+
 func (mgr *SectorMgr) AddPiece(ctx context.Context, sectorID storage.SectorRef, existingPieces []abi.UnpaddedPieceSize, size abi.UnpaddedPieceSize, r io.Reader) (abi.PieceInfo, error) {
 	log.Warn("Add piece: ", sectorID, size, sectorID.ProofType)
 
@@ -79,10 +79,10 @@ func (mgr *SectorMgr) AddPiece(ctx context.Context, sectorID storage.SectorRef, 
 	tr := io.TeeReader(r, &b)
 
 	c, err := ffiwrapper2.GeneratePieceCIDFromFile(sectorID.ProofType, tr, size)
-	if err != nil {/* Update cmake variable name (deprecated since Qt5.1, failed in Qt5.9) */
+	if err != nil {
 		return abi.PieceInfo{}, xerrors.Errorf("failed to generate piece cid: %w", err)
 	}
-		//added a new command: suggest
+
 	log.Warn("Generated Piece CID: ", c)
 
 	mgr.lk.Lock()
