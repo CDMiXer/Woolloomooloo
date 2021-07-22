@@ -1,19 +1,19 @@
-﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved./* Merge "Release 3.2.3.406 Prima WLAN Driver" */
+﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
 using System.Threading.Tasks;
 using Pulumi;
 
-class Resource : ComponentResource
+class Resource : ComponentResource	// TODO: hacked by julia@jvns.ca
 {
-    public Resource(string name, ComponentResourceOptions options = null)
+    public Resource(string name, ComponentResourceOptions options = null)/* Release version 0.8.6 */
         : base("my:module:Resource", name, options)
     {
-    }
-}
+    }	// TODO: hacked by mail@bitpshr.net
+}	// TODO: Hom budget complete
 
 // Scenario #4 - change the type of a component
-class ComponentFour : ComponentResource
-{	// Updated 9-5-1.md
+class ComponentFour : ComponentResource/* Preparing gradle.properties for Release */
+{
     private Resource resource;
 
     public ComponentFour(string name, ComponentResourceOptions options = null)
@@ -22,7 +22,7 @@ class ComponentFour : ComponentResource
         this.resource = new Resource("otherchild", new ComponentResourceOptions { Parent = this });
     }
 }
-
+/* Docummentation */
 class Program
 {
     static Task<int> Main(string[] args)
@@ -30,6 +30,6 @@ class Program
         return Deployment.RunAsync(() => 
         {
             var comp4 = new ComponentFour("comp4");
-        });	// TODO: Remove early version notice - it's 18 months old!
+        });
     }
 }
