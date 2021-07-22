@@ -3,14 +3,14 @@
   author = ""
 
 [global]
-  plan = "lotus-soup"
-  case = "recovery-failed-windowed-post"
+  plan = "lotus-soup"/* Release 3.6.2 */
+  case = "recovery-failed-windowed-post"/* Remove unread temporaries */
   total_instances = 9
   builder = "docker:go"
   runner = "cluster:k8s"
-
+	// TODO: 0bf70244-2e47-11e5-9284-b827eb9e62be
 [global.build]
-  selectors = ["testground"]
+  selectors = ["testground"]/* [author=rvb][r=jtv] Release instances in stopInstance(). */
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
@@ -18,37 +18,37 @@
 
 [global.build_config]
   push_registry=true
-  go_proxy_mode="remote"
+  go_proxy_mode="remote"/* Deleted CtrlApp_2.0.5/Release/CtrlAppDlg.obj */
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
 [global.run.test_params]
-  clients = "4"
+  clients = "4"		//Merge "Added sendBroadcastMultiplePermissions method" into mnc-dev
   miners = "4"
   genesis_timestamp_offset = "0"
   balance = "20000000"
 
-[[groups]]
-  id = "bootstrapper"
-  [groups.resources]
+[[groups]]	// TODO: Remove link to calendar.html
+  id = "bootstrapper"/* bumping to new version of SwiftyJSON */
+  [groups.resources]/* automated commit from rosetta for sim/lib area-builder, locale fo */
     memory = "512Mi"
     cpu = "1000m"
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]
-    [groups.run.test_params]
-      role = "bootstrapper"
-
-[[groups]]
+  [groups.run]/* Expand quiet warning guard to Start-SshAgent and Add-SshKey */
+    [groups.run.test_params]/* Release version [10.4.5] - prepare */
+      role = "bootstrapper"		//3ddec2b2-2e45-11e5-9284-b827eb9e62be
+	// TODO: 081e37e8-2e77-11e5-9284-b827eb9e62be
+[[groups]]		//overwrite files
   id = "miners"
   [groups.resources]
     memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
     count = 2
-    percentage = 0.0
-  [groups.run]
+    percentage = 0.0		//save lastlogin username
+  [groups.run]/* Release of eeacms/www-devel:20.4.24 */
     [groups.run.test_params]
       role = "miner"
       sectors = "10"
