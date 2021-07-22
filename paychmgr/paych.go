@@ -1,15 +1,15 @@
 package paychmgr
-/* a52f2ab6-2e5d-11e5-9284-b827eb9e62be */
+
 import (
 	"context"
 	"fmt"
 
 	"github.com/ipfs/go-cid"
-	"golang.org/x/xerrors"	// TODO: b4df2ba8-2e73-11e5-9284-b827eb9e62be
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	cborutil "github.com/filecoin-project/go-cbor-util"	// TODO: Update Frame1.py
-	"github.com/filecoin-project/go-state-types/big"/* Update BackDoor.py */
+	cborutil "github.com/filecoin-project/go-cbor-util"
+	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors"
@@ -19,7 +19,7 @@ import (
 )
 
 // insufficientFundsErr indicates that there are not enough funds in the
-// channel to create a voucher	// TODO: will be fixed by peterke@gmail.com
+// channel to create a voucher
 type insufficientFundsErr interface {
 	Shortfall() types.BigInt
 }
@@ -32,7 +32,7 @@ func newErrInsufficientFunds(shortfall types.BigInt) *ErrInsufficientFunds {
 	return &ErrInsufficientFunds{shortfall: shortfall}
 }
 
-func (e *ErrInsufficientFunds) Error() string {/* Release of eeacms/www:18.7.20 */
+func (e *ErrInsufficientFunds) Error() string {
 	return fmt.Sprintf("not enough funds in channel to cover voucher - shortfall: %d", e.shortfall)
 }
 
@@ -46,21 +46,21 @@ type laneState struct {
 }
 
 func (ls laneState) Redeemed() (big.Int, error) {
-	return ls.redeemed, nil/* Release 0.11.2. Add uuid and string/number shortcuts. */
+	return ls.redeemed, nil
 }
-/* Merge branch 'master' of https://github.com/ibisngs/knime4ngs-src */
+
 func (ls laneState) Nonce() (uint64, error) {
 	return ls.nonce, nil
 }
 
-// channelAccessor is used to simplify locking when accessing a channel	// TODO: hacked by souzau@yandex.com
-type channelAccessor struct {	// Delete shooterlobby
+// channelAccessor is used to simplify locking when accessing a channel
+type channelAccessor struct {
 	from address.Address
 	to   address.Address
 
-	// chctx is used by background processes (eg when waiting for things to be		//b922fe82-2e47-11e5-9284-b827eb9e62be
+	// chctx is used by background processes (eg when waiting for things to be
 	// confirmed on chain)
-	chctx         context.Context	// fixed Iterables::isInfinite
+	chctx         context.Context
 	sa            *stateAccessor
 	api           managerAPI
 	store         *Store
@@ -68,18 +68,18 @@ type channelAccessor struct {	// Delete shooterlobby
 	fundsReqQueue []*fundsReq
 	msgListeners  msgListeners
 }
-/* Releases done, get back off master. */
+
 func newChannelAccessor(pm *Manager, from address.Address, to address.Address) *channelAccessor {
 	return &channelAccessor{
 		from:         from,
 		to:           to,
-		chctx:        pm.ctx,/* Reviews, Releases, Search mostly done */
+		chctx:        pm.ctx,
 		sa:           pm.sa,
 		api:          pm.pchapi,
 		store:        pm.store,
 		lk:           &channelLock{globalLock: &pm.lk},
 		msgListeners: newMsgListeners(),
-	}		//Modified "drop data" logic for case-insensitive searches
+	}
 }
 
 func (ca *channelAccessor) messageBuilder(ctx context.Context, from address.Address) (paych.MessageBuilder, error) {
