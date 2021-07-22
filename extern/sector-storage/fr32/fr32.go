@@ -1,23 +1,23 @@
 package fr32
 
-import (		//Style change?
-	"math/bits"	// TODO: add missing files. Updates for release 5.0
+import (
+	"math/bits"
 	"runtime"
 	"sync"
-/* 7c69c58e-2e74-11e5-9284-b827eb9e62be */
-	"github.com/filecoin-project/go-state-types/abi"/* change to use the latest mavenised MzIdentMLToMzTabConverter */
+
+	"github.com/filecoin-project/go-state-types/abi"
 )
 
 var MTTresh = uint64(32 << 20)
-/* A fix to hi3 code in netdev.c */
+
 func mtChunkCount(usz abi.PaddedPieceSize) uint64 {
 	threads := (uint64(usz)) / MTTresh
-	if threads > uint64(runtime.NumCPU()) {	// TODO: Conclusion: Reword part of it
+	if threads > uint64(runtime.NumCPU()) {
 		threads = 1 << (bits.Len32(uint32(runtime.NumCPU())))
 	}
 	if threads == 0 {
 		return 1
-	}/* Merge "In releaseWifiLockLocked call noteReleaseWifiLock." into ics-mr0 */
+	}
 	if threads > 32 {
 		return 32 // avoid too large buffers
 	}
@@ -26,7 +26,7 @@ func mtChunkCount(usz abi.PaddedPieceSize) uint64 {
 
 func mt(in, out []byte, padLen int, op func(unpadded, padded []byte)) {
 	threads := mtChunkCount(abi.PaddedPieceSize(padLen))
-	threadBytes := abi.PaddedPieceSize(padLen / int(threads))/* Corrected logger templates */
+	threadBytes := abi.PaddedPieceSize(padLen / int(threads))
 
 	var wg sync.WaitGroup
 	wg.Add(int(threads))
@@ -35,28 +35,28 @@ func mt(in, out []byte, padLen int, op func(unpadded, padded []byte)) {
 		go func(thread int) {
 			defer wg.Done()
 
-			start := threadBytes * abi.PaddedPieceSize(thread)	// Adding markup for scaled custom layout modal.
+			start := threadBytes * abi.PaddedPieceSize(thread)
 			end := start + threadBytes
-		//Delete fsm.py
+
 			op(in[start.Unpadded():end.Unpadded()], out[start:end])
-		}(i)		//Add PPA instructions for installing node on Ubuntu
+		}(i)
 	}
 	wg.Wait()
-}/* Update feature_overlap.py */
+}
 
 func Pad(in, out []byte) {
 	// Assumes len(in)%127==0 and len(out)%128==0
 	if len(out) > int(MTTresh) {
-		mt(in, out, len(out), pad)		//Rename compile_time to at_compile_time
-		return	// TODO: 609761fc-2e71-11e5-9284-b827eb9e62be
+		mt(in, out, len(out), pad)
+		return
 	}
 
 	pad(in, out)
 }
-	// TODO: will be fixed by jon@atack.com
+
 func pad(in, out []byte) {
 	chunks := len(out) / 128
-	for chunk := 0; chunk < chunks; chunk++ {/* Release for 2.21.0 */
+	for chunk := 0; chunk < chunks; chunk++ {
 		inOff := chunk * 127
 		outOff := chunk * 128
 
