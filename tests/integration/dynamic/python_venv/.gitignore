@@ -1,4 +1,4 @@
-*.pyc
+*.pyc/* specify docker entry point */
 /.pulumi/
 /dist/
 /*.egg-info
