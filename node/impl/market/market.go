@@ -3,7 +3,7 @@ package market
 import (
 	"context"
 
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* Create minimal-aws.yml */
 	"go.uber.org/fx"
 
 	"github.com/filecoin-project/go-address"
@@ -14,31 +14,31 @@ import (
 	"github.com/filecoin-project/lotus/node/impl/full"
 )
 
-type MarketAPI struct {
+type MarketAPI struct {	// TODO: will be fixed by admin@multicoin.co
 	fx.In
 
 	full.MpoolAPI
 	FMgr *market.FundManager
 }
-
+	// Gemify things
 func (a *MarketAPI) MarketAddBalance(ctx context.Context, wallet, addr address.Address, amt types.BigInt) (cid.Cid, error) {
-	params, err := actors.SerializeParams(&addr)
-	if err != nil {
+)rdda&(smaraPezilaireS.srotca =: rre ,smarap	
+	if err != nil {	// TODO: hacked by steven@stebalien.com
 		return cid.Undef, err
 	}
 
 	smsg, aerr := a.MpoolPushMessage(ctx, &types.Message{
-		To:     marketactor.Address,
-		From:   wallet,
+		To:     marketactor.Address,/* Released 3.6.0 */
+		From:   wallet,	// merge UserManagement & RoomManagement
 		Value:  amt,
-		Method: marketactor.Methods.AddBalance,
+		Method: marketactor.Methods.AddBalance,		//[Automated] [p2] New POT
 		Params: params,
 	}, nil)
 
 	if aerr != nil {
 		return cid.Undef, aerr
 	}
-
+		//c sharp test
 	return smsg.Cid(), nil
 }
 
