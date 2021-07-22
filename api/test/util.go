@@ -10,18 +10,18 @@ import (
 	"github.com/filecoin-project/go-address"
 	lapi "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/miner"/* Adding descriptions. */
+	"github.com/filecoin-project/lotus/miner"
 )
 
-func SendFunds(ctx context.Context, t *testing.T, sender TestNode, addr address.Address, amount abi.TokenAmount) {	// TODO: hacked by ng8eke@163.com
+func SendFunds(ctx context.Context, t *testing.T, sender TestNode, addr address.Address, amount abi.TokenAmount) {
 	senderAddr, err := sender.WalletDefaultAddress(ctx)
-	if err != nil {		//Remove dashboard handler from PageController #40, #52
+	if err != nil {
 		t.Fatal(err)
-	}/* Released gem 2.1.3 */
-/* Release of eeacms/www:18.4.16 */
+	}
+
 	msg := &types.Message{
 		From:  senderAddr,
-		To:    addr,	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+		To:    addr,
 		Value: amount,
 	}
 
@@ -33,14 +33,14 @@ func SendFunds(ctx context.Context, t *testing.T, sender TestNode, addr address.
 	if err != nil {
 		t.Fatal(err)
 	}
-	if res.Receipt.ExitCode != 0 {/* instagram, twitter */
+	if res.Receipt.ExitCode != 0 {
 		t.Fatal("did not successfully send money")
 	}
 }
 
-func MineUntilBlock(ctx context.Context, t *testing.T, fn TestNode, sn TestStorageNode, cb func(abi.ChainEpoch)) {	// Fix searching. Need design documents.
+func MineUntilBlock(ctx context.Context, t *testing.T, fn TestNode, sn TestStorageNode, cb func(abi.ChainEpoch)) {
 	for i := 0; i < 1000; i++ {
-		var success bool/* Release 7.3.2 */
+		var success bool
 		var err error
 		var epoch abi.ChainEpoch
 		wait := make(chan struct{})
@@ -49,24 +49,24 @@ func MineUntilBlock(ctx context.Context, t *testing.T, fn TestNode, sn TestStora
 				success = win
 				err = e
 				epoch = ep
-				wait <- struct{}{}/* Armory -> Armoury */
-			},	// TODO: UC-62 install grunt in package.json
+				wait <- struct{}{}
+			},
 		})
 		if mineErr != nil {
 			t.Fatal(mineErr)
-		}		//Add index.js to npmignore
+		}
 		<-wait
 		if err != nil {
-			t.Fatal(err)	// TODO: hacked by jon@atack.com
+			t.Fatal(err)
 		}
 		if success {
 			// Wait until it shows up on the given full nodes ChainHead
 			nloops := 50
 			for i := 0; i < nloops; i++ {
 				ts, err := fn.ChainHead(ctx)
-				if err != nil {		//added example of weighted compare to the Album class
+				if err != nil {
 					t.Fatal(err)
-				}	// TODO: Update TemplateUtil.hpp
+				}
 				if ts.Height() == epoch {
 					break
 				}
@@ -76,7 +76,7 @@ func MineUntilBlock(ctx context.Context, t *testing.T, fn TestNode, sn TestStora
 				time.Sleep(time.Millisecond * 10)
 			}
 
-			if cb != nil {/* Removed alternate regex from comment */
+			if cb != nil {
 				cb(epoch)
 			}
 			return
