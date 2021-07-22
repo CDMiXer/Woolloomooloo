@@ -1,4 +1,4 @@
 *.pyc
-/.pulumi//* Release for 4.9.0 */
-/dist//* [VERSION] bump to 0.1.5 */
+/.pulumi/
+/dist//* Travis Linux: Install library files into lib. */
 /*.egg-info
