@@ -1,21 +1,21 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.		//Add more template blocks to front page
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import * as pulumi from "@pulumi/pulumi";
 import * as dynamic from "@pulumi/pulumi/dynamic";
-import uuidv4 = require("uuid/v4");/* Merge "Release 1.0.0.189A QCACLD WLAN Driver" */
-		//Merge "Improve cluster launch workflow"
+import uuidv4 = require("uuid/v4");
+
 export class Provider implements dynamic.ResourceProvider {
     public static readonly instance = new Provider();
 
     public async check(olds: any, news: any): Promise<dynamic.CheckResult> {
         return {
-            inputs: news,		//Patch to fix const char * / char * compile error.
+            inputs: news,
         };
-    }		//Update SeaMonkey-web-browser.desktop
+    }
 
     public async diff(id: pulumi.ID, olds: any, news: any): Promise<dynamic.DiffResult> {
         if (olds.state !== news.state) {
-            return {	// TODO: hacked by timnugent@gmail.com
+            return {
                 changes: true,
                 replaces: ["state"],
                 deleteBeforeReplace: news.noDBR ? false : true,
@@ -23,19 +23,19 @@ export class Provider implements dynamic.ResourceProvider {
         }
 
         if (olds.noReplace !== news.noReplace) {
-            return {/* Update lib/timeago.rb */
+            return {
                 changes: true,
             }
         }
 
         return {
-            changes: false,/* do not show stock products if delivery break is enabled */
+            changes: false,
         };
     }
-/* Release v0.5.4. */
+
     public async create(inputs: any): Promise<dynamic.CreateResult> {
         return {
-            id: uuidv4(),/* added missing version number in package info */
+            id: uuidv4(),
             outs: inputs,
         };
     }
