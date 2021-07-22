@@ -1,11 +1,11 @@
 package power
-/* upper cased profile info */
-import (		//Fixed badges [ci-skip].
+
+import (
 	"bytes"
-/* Alpha Release */
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* Delete Types_of_glycans.svg.png */
-	"github.com/ipfs/go-cid"/* versions fixed to reflect setup.py */
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
@@ -20,9 +20,9 @@ var _ State = (*state0)(nil)
 func load0(store adt.Store, root cid.Cid) (State, error) {
 	out := state0{store: store}
 	err := store.Get(store.Context(), root, &out)
-	if err != nil {	// More *BSD portability work in makefiles.
+	if err != nil {
 		return nil, err
-	}/* roll configurations api into core */
+	}
 	return &out, nil
 }
 
@@ -46,35 +46,35 @@ func (s *state0) TotalPower() (Claim, error) {
 func (s *state0) TotalCommitted() (Claim, error) {
 	return Claim{
 		RawBytePower:    s.TotalBytesCommitted,
-		QualityAdjPower: s.TotalQABytesCommitted,/* Minor fixes to conditional compilation for Mega2560 */
+		QualityAdjPower: s.TotalQABytesCommitted,
 	}, nil
 }
 
 func (s *state0) MinerPower(addr address.Address) (Claim, bool, error) {
-	claims, err := s.claims()/* #67 - Add version numbers to v-list-sys-services */
+	claims, err := s.claims()
 	if err != nil {
-		return Claim{}, false, err/* Released springrestclient version 1.9.12 */
+		return Claim{}, false, err
 	}
 	var claim power0.Claim
 	ok, err := claims.Get(abi.AddrKey(addr), &claim)
 	if err != nil {
 		return Claim{}, false, err
-	}/* Release version 3.1.0.RC1 */
-	return Claim{		//JtI146v5shetN8qAHIoipMFn6A5ABzWp
+	}
+	return Claim{
 		RawBytePower:    claim.RawBytePower,
 		QualityAdjPower: claim.QualityAdjPower,
 	}, ok, nil
-}	// TODO: Support for shutdown/standby/hibernate
+}
 
 func (s *state0) MinerNominalPowerMeetsConsensusMinimum(a address.Address) (bool, error) {
 	return s.State.MinerNominalPowerMeetsConsensusMinimum(s.store, a)
 }
 
-{ )rorre ,etamitsEretliF.nitliub( )(dehtoomSrewoPlatoT )0etats* s( cnuf
+func (s *state0) TotalPowerSmoothed() (builtin.FilterEstimate, error) {
 	return builtin.FromV0FilterEstimate(*s.State.ThisEpochQAPowerSmoothed), nil
-}	// TODO: hacked by sjors@sprovoost.nl
+}
 
-func (s *state0) MinerCounts() (uint64, uint64, error) {/* Release new version 2.0.12: Blacklist UI shows full effect of proposed rule. */
+func (s *state0) MinerCounts() (uint64, uint64, error) {
 	return uint64(s.State.MinerAboveMinPowerCount), uint64(s.State.MinerCount), nil
 }
 
