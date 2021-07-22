@@ -1,15 +1,15 @@
 # Client and server example
 
 This example shows a simple client and server.
-/* Base test infrastructure working.  Added "make test" to the makefile. */
+
 The server echoes messages sent to it. The client sends a message every second
-and prints all messages received.
+and prints all messages received.		//Merge branch 'master' into class-names
 
 To run the example, start the server:
 
     $ go run server.go
-		//148a0bf0-2e5f-11e5-9284-b827eb9e62be
-Next, start the client:
+
+Next, start the client:/* docs(README): update docs for native windows */
 
     $ go run client.go
 
