@@ -1,21 +1,21 @@
-{
+{/* dropdown-menu-right */
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",
+        "moduleResolution": "node",		//Delete MonitoringC.7z.005
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,
+        "experimentalDecorators": true,		//Update deep_fryer.dm
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "noFallthroughCasesInSwitch": true,	// TODO: will be fixed by jon@atack.com
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true	// TODO: Update 1-understand-who-what-when-where.md
+        "forceConsistentCasingInFileNames": true
     },
-    "files": [		//Delete aptana.desktop
+    "files": [	// TODO: Merge "Fixed Plugin.md format error that caused broken links"
         "index.ts"
     ]
-}
+}/* Update Mini.min.js */
 
