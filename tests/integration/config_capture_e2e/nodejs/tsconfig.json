@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
-        "strict": true,/* Blame Trump */
+        "strict": true,
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",/* The next will be 0.3.0.Final */
-        "moduleResolution": "node",	// LPE Knot: only consider closing line segment if its length is non-zero
+        "module": "commonjs",
+        "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,	// TODO: Create Quick-sort.ss
+        "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
-    "files": [	// Rename lib/version.rb to lib/cooking_classes/version.rb
+    "files": [
         "index.ts"
-    ]		//use a mixin instead of inheritance
+    ]
 }
 
