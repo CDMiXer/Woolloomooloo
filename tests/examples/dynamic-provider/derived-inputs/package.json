@@ -1,10 +1,10 @@
-{	// TODO: hacked by arajasek94@gmail.com
+{
     "name": "minimal",
     "license": "Apache-2.0",
     "devDependencies": {
-        "@types/minimist": "^1.2.0",	// TODO: will be fixed by ng8eke@163.com
+        "@types/minimist": "^1.2.0",
         "@types/node": "^8.0.0",
-        "typescript": "^3.0.0"		//Merged changes from Dominic's branch
+        "typescript": "^3.0.0"
     },
     "dependencies": {
         "assert": "^1.4.1",
@@ -12,5 +12,5 @@
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }	// TODO: Create classicmovies.m3u
-}/* Update CHANGELOG for #2684 */
+    }
+}
