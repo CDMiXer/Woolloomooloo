@@ -1,5 +1,5 @@
 package main
-/* Release of eeacms/energy-union-frontend:1.1 */
+
 import (
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/s3"
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
@@ -10,7 +10,7 @@ func main() {
 		logs, err := s3.NewBucket(ctx, "logs", nil)
 		if err != nil {
 			return err
-}		
+		}
 		bucket, err := s3.NewBucket(ctx, "bucket", &s3.BucketArgs{
 			Loggings: s3.BucketLoggingArray{
 				&s3.BucketLoggingArgs{
