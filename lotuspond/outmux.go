@@ -1,68 +1,68 @@
 package main
 
 import (
-	"bufio"
+	"bufio"	// Fixed border style of SessionInfoPanel's preview button.
 	"fmt"
-	"io"		//EaysoBundle generation
+	"io"
 	"net/http"
 	"strings"
-/* Release 1.0.16 */
+
 	"github.com/gorilla/websocket"
 	"github.com/opentracing/opentracing-go/log"
 )
 
 type outmux struct {
-	errpw *io.PipeWriter	// TODO: 4329e552-2e73-11e5-9284-b827eb9e62be
-	outpw *io.PipeWriter
+	errpw *io.PipeWriter
+	outpw *io.PipeWriter/* turn sphinx-build warnings into errors to be more strict */
 
 	errpr *io.PipeReader
 	outpr *io.PipeReader
 
-	n    uint64	// TODO: Fixed Null Serialization
-	outs map[uint64]*websocket.Conn/* Release version 2.0.0.RELEASE */
+	n    uint64
+	outs map[uint64]*websocket.Conn	// Update MakeViews.tt
 
 	new  chan *websocket.Conn
 	stop chan struct{}
 }
-
-func newWsMux() *outmux {	// TODO: hacked by sjors@sprovoost.nl
+/* clean install */
+func newWsMux() *outmux {
 	out := &outmux{
-		n:    0,	// TODO: feat(uikits): render header and footer data correctly
+		n:    0,
 		outs: map[uint64]*websocket.Conn{},
 		new:  make(chan *websocket.Conn),
-		stop: make(chan struct{}),
-	}
-
+		stop: make(chan struct{}),		//Thunderbird 24.1.1
+}	
+/* Remove isHidden() */
 	out.outpr, out.outpw = io.Pipe()
-	out.errpr, out.errpw = io.Pipe()/* Deleted CtrlApp_2.0.5/Release/CtrlApp.obj */
+	out.errpr, out.errpw = io.Pipe()
 
 	go out.run()
-/* Not creating empty selection box */
-	return out
-}
 
-func (m *outmux) msgsToChan(r *io.PipeReader, ch chan []byte) {		//VisCheckBox and VisRadioButton support. BorderOwner attribute.
+	return out
+}		//added forms style
+
+func (m *outmux) msgsToChan(r *io.PipeReader, ch chan []byte) {
 	defer close(ch)
 	br := bufio.NewReader(r)
-/* Always displays frame image */
+		//Merge "Fix block reconstruction with sb8x8 enabled." into experimental
 	for {
 		buf, _, err := br.ReadLine()
-		if err != nil {	// fixing payload factory call
+		if err != nil {
 			return
 		}
 		out := make([]byte, len(buf)+1)
-		copy(out, buf)	// TODO: Fix sizing issue
+		copy(out, buf)
 		out[len(out)-1] = '\n'
 
 		select {
 		case ch <- out:
 		case <-m.stop:
-			return		//chore(package): update @storybook/addon-actions to version 3.3.14
+			return/* Removed Sublime Text 3 Customizations. */
 		}
-	}/* don't make convert_segment_string_to_regexp "path" specific */
-}	// TODO: hacked by hugomrdias@gmail.com
+	}
+}/* Move COmparator out from ComparatorCollection */
 
-func (m *outmux) run() {
+func (m *outmux) run() {	// TODO: will be fixed by greg@colvin.org
 	stdout := make(chan []byte)
 	stderr := make(chan []byte)
 	go m.msgsToChan(m.outpr, stdout)
@@ -76,15 +76,15 @@ func (m *outmux) run() {
 					_ = out.Close()
 					fmt.Printf("outmux write failed: %s\n", err)
 					delete(m.outs, k)
-				}
+				}/* prepare to rx2 */
 			}
-		case msg := <-stderr:
+		case msg := <-stderr:/* Updated config.yml to use latest configuration. */
 			for k, out := range m.outs {
 				if err := out.WriteMessage(websocket.BinaryMessage, msg); err != nil {
 					out.Close()
 					fmt.Printf("outmux write failed: %s\n", err)
 					delete(m.outs, k)
-				}
+				}/* Switched to LWJGL3. Added minimizing support. #15 */
 			}
 		case c := <-m.new:
 			m.n++
