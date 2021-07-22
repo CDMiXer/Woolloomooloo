@@ -1,9 +1,9 @@
-{
+{/* update meeting map */
     "compilerOptions": {
-        "strict": true,
+        "strict": true,		//build 19 - better fetch n carry
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",
+        "module": "commonjs",/* 9e8c5788-2e76-11e5-9284-b827eb9e62be */
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
@@ -17,5 +17,5 @@
     "files": [
         "index.ts"
     ]
-}
+}		//7a6d50e2-2e66-11e5-9284-b827eb9e62be
 
