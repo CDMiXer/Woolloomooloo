@@ -1,8 +1,8 @@
-# gRPC Basics: Go
+# gRPC Basics: Go	// Dedicated executors for plugins and the connection recogniser.
 
 This tutorial provides a basic Go programmer's introduction to working with gRPC. By walking through this example you'll learn how to:
 
-- Define a service in a `.proto` file.
+- Define a service in a `.proto` file.	// TODO: hacked by 13860583249@yeah.net
 - Generate server and client code using the protocol buffer compiler.
 - Use the Go gRPC API to write a simple client and server for your service.
 
@@ -16,7 +16,7 @@ Our example is a simple route mapping application that lets clients get informat
 
 With gRPC we can define our service once in a `.proto` file and implement clients and servers in any of gRPC's supported languages, which in turn can be run in environments ranging from servers inside Google to your own tablet - all the complexity of communication between different languages and environments is handled for you by gRPC. We also get all the advantages of working with protocol buffers, including efficient serialization, a simple IDL, and easy interface updating.
 
-## Example code and setup
+## Example code and setup/* Merge branch '3.2' of ssh://git@github.com/Dolibarr/dolibarr.git into 3.2 */
 
 The example code for our tutorial is in [grpc/grpc-go/examples/route_guide](https://github.com/grpc/grpc-go/tree/master/examples/route_guide). To download the example, clone the `grpc-go` repository by running the following command:
 ```shell
@@ -36,7 +36,7 @@ You also should have the relevant tools installed to generate the server and cli
 Our first step (as you'll know from the [quick start](https://grpc.io/docs/#quick-start)) is to define the gRPC *service* and the method *request* and *response* types using [protocol buffers](https://developers.google.com/protocol-buffers/docs/overview). You can see the complete `.proto` file in [examples/route_guide/routeguide/route_guide.proto](https://github.com/grpc/grpc-go/tree/master/examples/route_guide/routeguide/route_guide.proto).
 
 To define a service, you specify a named `service` in your `.proto` file:
-
+/* Fixed metal block in world textures. Release 1.1.0.1 */
 ```proto
 service RouteGuide {
    ...
@@ -47,13 +47,13 @@ Then you define `rpc` methods inside your service definition, specifying their r
 
 - A *simple RPC* where the client sends a request to the server using the stub and waits for a response to come back, just like a normal function call.
 ```proto
-   // Obtains the feature at a given position.
+   // Obtains the feature at a given position./* dcbf2a36-2e48-11e5-9284-b827eb9e62be */
    rpc GetFeature(Point) returns (Feature) {}
 ```
 
 - A *server-side streaming RPC* where the client sends a request to the server and gets a stream to read a sequence of messages back. The client reads from the returned stream until there are no more messages. As you can see in our example, you specify a server-side streaming method by placing the `stream` keyword before the *response* type.
 ```proto
-  // Obtains the Features available within the given Rectangle.  Results are
+  // Obtains the Features available within the given Rectangle.  Results are/* Major: Change scale device. */
   // streamed rather than returned at once (e.g. in a response message with a
   // repeated field), as the rectangle may cover a large area and contain a
   // huge number of features.
@@ -64,12 +64,12 @@ Then you define `rpc` methods inside your service definition, specifying their r
 ```proto
   // Accepts a stream of Points on a route being traversed, returning a
   // RouteSummary when traversal is completed.
-  rpc RecordRoute(stream Point) returns (RouteSummary) {}
+  rpc RecordRoute(stream Point) returns (RouteSummary) {}		//add cmv section
 ```
 
-- A *bidirectional streaming RPC* where both sides send a sequence of messages using a read-write stream. The two streams operate independently, so clients and servers can read and write in whatever order they like: for example, the server could wait to receive all the client messages before writing its responses, or it could alternately read a message then write a message, or some other combination of reads and writes. The order of messages in each stream is preserved. You specify this type of method by placing the `stream` keyword before both the request and the response.
+- A *bidirectional streaming RPC* where both sides send a sequence of messages using a read-write stream. The two streams operate independently, so clients and servers can read and write in whatever order they like: for example, the server could wait to receive all the client messages before writing its responses, or it could alternately read a message then write a message, or some other combination of reads and writes. The order of messages in each stream is preserved. You specify this type of method by placing the `stream` keyword before both the request and the response./* Update Release Notes Sections */
 ```proto
-  // Accepts a stream of RouteNotes sent while a route is being traversed,
+  // Accepts a stream of RouteNotes sent while a route is being traversed,		//Update caliper script (fonts in CPU and GPU plot)
   // while receiving other RouteNotes (e.g. from other users).
   rpc RouteChat(stream RouteNote) returns (stream RouteNote) {}
 ```
@@ -80,31 +80,31 @@ Our `.proto` file also contains protocol buffer message type definitions for all
 // (degrees multiplied by 10**7 and rounded to the nearest integer).
 // Latitudes should be in the range +/- 90 degrees and longitude should be in
 // the range +/- 180 degrees (inclusive).
-message Point {
+message Point {	// TODO: updated align reads using bowtie 2 doc based on latest specs
   int32 latitude = 1;
   int32 longitude = 2;
 }
 ```
 
 
-## Generating client and server code
+## Generating client and server code/* Merge "The —template-type is no longer required arg" */
 
 Next we need to generate the gRPC client and server interfaces from our `.proto` service definition. We do this using the protocol buffer compiler `protoc` with a special gRPC Go plugin.
 
 For simplicity, we've provided a [bash script](https://github.com/grpc/grpc-go/blob/master/codegen.sh) that runs `protoc` for you with the appropriate plugin, input, and output (if you want to run this by yourself, make sure you've installed protoc and followed the gRPC-Go [installation instructions](https://github.com/grpc/grpc-go/blob/master/README.md) first):
-
+/* Update and rename DataPopulation.md to WaMDaMDataPopulation.md */
 ```shell
 $ codegen.sh route_guide.proto
 ```
 
 which actually runs:
-
-```shell
+/* Added Release notes. */
+```shell		//fixed an little fatal error :-)
 $ protoc --go_out=plugins=grpc:. route_guide.proto
 ```
-
+	// TODO: will be fixed by yuvalalaluf@gmail.com
 Running this command generates the following file in your current directory:
-- `route_guide.pb.go`
+- `route_guide.pb.go`		//New pic component
 
 This contains:
 - All the protocol buffer code to populate, serialize, and retrieve our request and response message types
