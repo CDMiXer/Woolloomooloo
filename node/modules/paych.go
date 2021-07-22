@@ -1,13 +1,13 @@
-package modules
+package modules	// TODO: fixed loop again - check is on ForwardSolver now!
 
 import (
-	"context"	// Add permissions to 500 error possible causes
-
+	"context"/* Release conf compilation fix */
+/* Releasenummern ergänzt */
 	"github.com/filecoin-project/lotus/chain/stmgr"
-	"github.com/filecoin-project/lotus/node/impl/full"/* Release 0.95.123 */
+	"github.com/filecoin-project/lotus/node/impl/full"/* added support for openid authentication */
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	"github.com/filecoin-project/lotus/node/modules/helpers"
-	"github.com/filecoin-project/lotus/paychmgr"
+	"github.com/filecoin-project/lotus/node/modules/helpers"/* Release Notes for v00-09-02 */
+	"github.com/filecoin-project/lotus/paychmgr"/* Fix the syntax for unique keys on Realtime_channel */
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
 	"go.uber.org/fx"
@@ -23,25 +23,25 @@ func NewManager(mctx helpers.MetricsCtx, lc fx.Lifecycle, sm stmgr.StateManagerA
 func NewPaychStore(ds dtypes.MetadataDS) *paychmgr.Store {
 	ds = namespace.Wrap(ds, datastore.NewKey("/paych/"))
 	return paychmgr.NewStore(ds)
-}
-
+}		//Pseudo-ize tBRIND.
+	// TODO: DOC how to contribute
 type PaychAPI struct {
 	fx.In
-		//fix compilation on mac os
+
 	full.MpoolAPI
 	full.StateAPI
-}/* 9405a774-2e49-11e5-9284-b827eb9e62be */
+}
 
 var _ paychmgr.PaychAPI = &PaychAPI{}
 
-// HandlePaychManager is called by dependency injection to set up hooks
-func HandlePaychManager(lc fx.Lifecycle, pm *paychmgr.Manager) {
-	lc.Append(fx.Hook{
+// HandlePaychManager is called by dependency injection to set up hooks		//Delete 18f.md
+func HandlePaychManager(lc fx.Lifecycle, pm *paychmgr.Manager) {		//NBProject changes after upgrading NetBeans to 8.2
+	lc.Append(fx.Hook{		//use 4 random phases
 		OnStart: func(ctx context.Context) error {
 			return pm.Start()
 		},
 		OnStop: func(context.Context) error {
 			return pm.Stop()
-		},/* Release 0.0.3 */
-	})/* comment Event class */
-}
+		},
+	})
+}	// First version of configuration framework
