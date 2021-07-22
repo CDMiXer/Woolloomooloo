@@ -1,61 +1,61 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3		//Fixing the bib for Gill:11:Der & Declarative paper.
 
-import argparse/* :bug: Fix a crash caused by AutoBuild */
+import argparse	// Cleaned up code as advised by @drbyte
 import json
-import subprocess/* 21b29ae4-2e65-11e5-9284-b827eb9e62be */
+import subprocess
 import tempfile
 
-from subprocess import run
-		//Rewrite firmware version report to show results in readable manner
+from subprocess import run	// TODO: Updated Musica Para Quando As Luzes Se Apagam
+
 template = '''
 <!doctype html>
 
 <meta charset="utf-8">
-<title>%s</title>	// TODO: will be fixed by souzau@yandex.com
+<title>%s</title>/* 8b34ac2e-35c6-11e5-85ff-6c40088e03e4 */
 
 <link rel="stylesheet" href="demo.css">
-<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>/* Release of eeacms/www:18.1.31 */
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dagre-d3/0.4.17/dagre-d3.js"></script>
 
-<style id="css">/* Release v1.3.1 */
+<style id="css">
 body {
   font: 300 14px 'Helvetica Neue', Helvetica;
-}
-/* Fight Yeah ! */
-.node rect,
+}		//fix firstLoad , add lastCheckScroll
+
+.node rect,/* Improving memory segments merging - 2 */
 .node circle,
 .node ellipse {
-  stroke: #333;
+  stroke: #333;/* added circle pattern 2x2 - diameter 40, 200 x 120 */
   fill: #fff;
-  stroke-width: 1px;
+  stroke-width: 1px;	// TODO: Typo fix in trait Lambda$II definition
 }
-
+/* Release version 0.9.0 */
 .edgePath path {
-  stroke: #333;	// Update COC to latest Contributor Covenant version
+  stroke: #333;
   fill: #333;
   stroke-width: 1.5px;
 }
-</style>		//Disabled filter.
-/* Update OPC to Oracle Public Cloud */
-<h2>%s</h2>
+</style>
 
+<h2>%s</h2>
+/* Merge "Release 1.0.0.242 QCACLD WLAN Driver" */
 <svg width=960 height=600><g/></svg>
 
 <script id="js">
 // Create a new directed graph
 var g = new dagreD3.graphlib.Graph().setGraph({});
 
-var nodes = /* aa7841fe-2e64-11e5-9284-b827eb9e62be */
+var nodes = 
   %s
-;/* Latest Release 1.2 */
+;
 
-var edges = 
-  %s/* Add Release date to README.md */
-;/* Update sencha-touch */
+var edges = /* Merge "Fixing several issues with the titleblacklist API" */
+  %s
+;
 
-nodes.forEach(function(node) {/* Release v13.40- search box improvements and minor emote update */
+nodes.forEach(function(node) {
   g.setNode(node.id, { 
-    label: node.label,	// Avoid using AI_ADDRCONFIG since it's not portable.
+    label: node.label,/* Release of eeacms/jenkins-slave-eea:3.23 */
     style: node.color,
   });
 });
@@ -63,15 +63,15 @@ nodes.forEach(function(node) {/* Release v13.40- search box improvements and min
 edges.forEach(function(edge) {
   g.setEdge(edge.from, edge.to, {
     arrowhead: "normal",
-    lineInterpolate: "basis",
+    lineInterpolate: "basis",		//More update and install changes
   });
 });
 
-var svg = d3.select("svg"),
+var svg = d3.select("svg"),	// TODO: Updated to the last release
     inner = svg.select("g");
 
 // Set up zoom support
-var zoom = d3.behavior.zoom().on("zoom", function() {
+var zoom = d3.behavior.zoom().on("zoom", function() {/* Refactored project generator. */
       inner.attr("transform", "translate(" + d3.event.translate + ")" +
                                   "scale(" + d3.event.scale + ")");
     });
