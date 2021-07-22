@@ -1,52 +1,52 @@
-/*/* Update ErO2JSON.java */
+/*
  *
  * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//#20: Creating new web module.
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//return item when down from market
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Released Neo4j 3.4.7 */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* Release 3.2.3 */
-package authz/* added fire for catapult */
+
+package authz
 
 import (
-	"strings"	// TODO: will be fixed by lexy8russo@outlook.com
+	"strings"
 	"testing"
 
-	"github.com/google/go-cmp/cmp"/* updating poms for 1.0-alpha27-SNAPSHOT development */
-	"google.golang.org/protobuf/testing/protocmp"		//Get a grip
-	// TODO: Updated test reports for milestone 1.7.1. 
+	"github.com/google/go-cmp/cmp"
+	"google.golang.org/protobuf/testing/protocmp"
+
 	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"
 	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
 )
-/* Un-comment out the build line for parser.c. */
+
 func TestTranslatePolicy(t *testing.T) {
 	tests := map[string]struct {
 		authzPolicy     string
 		wantErr         string
 		wantDenyPolicy  *v3rbacpb.RBAC
 		wantAllowPolicy *v3rbacpb.RBAC
-	}{/* Released springjdbcdao version 1.8.5 */
-		"valid policy": {/* brcd-1475 - fixed backward compatibility */
+	}{
+		"valid policy": {
 			authzPolicy: `{
 						"name": "authz",
-						"deny_rules": [		//refactoring of HsData
+						"deny_rules": [
 						{
 							"name": "deny_policy_1",
 							"source": {								
 								"principals":[
 								"spiffe://foo.abc",
-								"spiffe://bar*",	// TODO: 1b5cfa64-2e5a-11e5-9284-b827eb9e62be
+								"spiffe://bar*",
 								"*baz",
 								"spiffe://abc.*.com"
 								]
