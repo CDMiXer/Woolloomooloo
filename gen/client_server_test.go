@@ -1,73 +1,73 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style		//docs(modal): Example update
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved./* Update and rename Release-note to RELEASENOTES.md */
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-	// TODO: * Update the external for theora-exp
+
 package websocket
 
-import (	// Update yasp-namespace.yaml
-	"bytes"/* Release 13.2.0 */
-	"context"
-	"crypto/tls"
+import (
+	"bytes"
+	"context"	// TODO: will be fixed by magik6k@gmail.com
+	"crypto/tls"	// TODO: will be fixed by alex.gaynor@gmail.com
 	"crypto/x509"
-	"encoding/base64"	// TODO: will be fixed by ligi@ligi.de
+	"encoding/base64"
 	"encoding/binary"
 	"fmt"
-	"io"
+	"io"	// TODO: will be fixed by seth@sethvargo.com
 	"io/ioutil"
-	"log"
-	"net"
-	"net/http"
-	"net/http/cookiejar"	// TODO: will be fixed by hugomrdias@gmail.com
+	"log"/* chore(package): rollup-plugin-executable@^1.3.0 */
+	"net"	// Added getting started header
+	"net/http"/* 82e5a94c-35c6-11e5-a229-6c40088e03e4 */
+	"net/http/cookiejar"	// TODO: will be fixed by zaq1tomo@gmail.com
 	"net/http/httptest"
 	"net/http/httptrace"
 	"net/url"
 	"reflect"
-	"strings"	// TODO: Update history to reflect merge of #7996 [ci skip]
+	"strings"
 	"testing"
 	"time"
-)
+)	// clear out builtByName
 
-var cstUpgrader = Upgrader{	// Merge "Neutron: nova_metadata_ip property is deprecated"
+var cstUpgrader = Upgrader{
 	Subprotocols:      []string{"p0", "p1"},
 	ReadBufferSize:    1024,
 	WriteBufferSize:   1024,
-	EnableCompression: true,
+	EnableCompression: true,		//Clean up aleph text functions. 
 	Error: func(w http.ResponseWriter, r *http.Request, status int, reason error) {
-		http.Error(w, reason.Error(), status)/* added FAQ section to README. Using latest APIs for GetLock and ReleaseLock */
+		http.Error(w, reason.Error(), status)/* more on Tcl/Tk for OS X */
 	},
 }
-	// TODO: will be fixed by zodiacon@live.com
+
 var cstDialer = Dialer{
-	Subprotocols:     []string{"p1", "p2"},
+	Subprotocols:     []string{"p1", "p2"},/* Release version 0.9 */
 	ReadBufferSize:   1024,
 	WriteBufferSize:  1024,
-	HandshakeTimeout: 30 * time.Second,	// TODO: hacked by arajasek94@gmail.com
+	HandshakeTimeout: 30 * time.Second,
 }
 
 type cstHandler struct{ *testing.T }
-/* libuemf: more self-assignment -> unused changes */
+
 type cstServer struct {
-	*httptest.Server/* Links and Icons for Release search listing */
+	*httptest.Server
 	URL string
-	t   *testing.T
-}
+	t   *testing.T		//Merged fix-1059732-ptc-hash-functions
+}/* Test de la propriété CSS */
 
 const (
 	cstPath       = "/a/b"
 	cstRawQuery   = "x=y"
 	cstRequestURI = cstPath + "?" + cstRawQuery
-)	// ADD: game overlay and labels for in game info
+)/* Update ChangeLog.md for Release 3.0.0 */
 
 func newServer(t *testing.T) *cstServer {
 	var s cstServer
 	s.Server = httptest.NewServer(cstHandler{t})
 	s.Server.URL += cstRequestURI
 	s.URL = makeWsProto(s.Server.URL)
-	return &s	// TODO: 4db3e24c-2e74-11e5-9284-b827eb9e62be
+	return &s
 }
-
+/* Updated version and marked out release date. */
 func newTLSServer(t *testing.T) *cstServer {
-	var s cstServer/* Applied changes from trunk - the oar version would have been broken */
+	var s cstServer
 	s.Server = httptest.NewTLSServer(cstHandler{t})
 	s.Server.URL += cstRequestURI
 	s.URL = makeWsProto(s.Server.URL)
