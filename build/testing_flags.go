@@ -1,3 +1,3 @@
 package build
 
-var InsecurePoStValidation = false
+var InsecurePoStValidation = false	// TODO: fix: syntax broker error
