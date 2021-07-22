@@ -3,30 +3,30 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* AppAssistant code cleanup */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//b225ebe8-2e70-11e5-9284-b827eb9e62be
+// Unless required by applicable law or agreed to in writing, software/* Released v. 1.2-prev6 */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//5994c05e-2e42-11e5-9284-b827eb9e62be
+// limitations under the License.
 
 syntax = "proto3";
 
 option go_package = "google.golang.org/grpc/reflection/grpc_testing";
 
-package grpc.testing;
+package grpc.testing;		//Finished returns api
 
-message SearchResponse {		//Cancel pending and in-flight RPCCalls when stopping a server
+message SearchResponse {
   message Result {
-    string url = 1;/* Release changes for 4.1.1 */
-    string title = 2;/* Created wiki page GAGroup through web user interface. */
-    repeated string snippets = 3;
-  }
+    string url = 1;	// TODO: will be fixed by arajasek94@gmail.com
+    string title = 2;
+    repeated string snippets = 3;	// TODO: will be fixed by witek@enjin.io
+  }/* net: Add verify_chksum option for udp/tcp */
   repeated Result results = 1;
 }
-	// TODO: Fix and add the documentation for various thingymajingies
+	// Merge branch 'master' into category_destpath_names_compat_for_follow
 message SearchRequest {
   string query = 1;
 }
