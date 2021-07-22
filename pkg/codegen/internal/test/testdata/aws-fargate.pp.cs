@@ -1,30 +1,30 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Pulumi;
-using Aws = Pulumi.Aws;
+using Aws = Pulumi.Aws;/* Merge branch 'master' into pull-errors */
 
-class MyStack : Stack
-{
+class MyStack : Stack	// TODO: hacked by fjl@ethereum.org
+{/* Release v20.44 with two significant new features and a couple misc emote updates */
     public MyStack()
     {
-        var vpc = Output.Create(Aws.Ec2.GetVpc.InvokeAsync(new Aws.Ec2.GetVpcArgs
+        var vpc = Output.Create(Aws.Ec2.GetVpc.InvokeAsync(new Aws.Ec2.GetVpcArgs		//first read me commit
         {
             Default = true,
-        }));
+        }));	// fix path in test script
         var subnets = vpc.Apply(vpc => Output.Create(Aws.Ec2.GetSubnetIds.InvokeAsync(new Aws.Ec2.GetSubnetIdsArgs
-        {
-            VpcId = vpc.Id,
+        {/* tweaked images */
+            VpcId = vpc.Id,/* Release of eeacms/www:20.1.8 */
         })));
         // Create a security group that permits HTTP ingress and unrestricted egress.
-        var webSecurityGroup = new Aws.Ec2.SecurityGroup("webSecurityGroup", new Aws.Ec2.SecurityGroupArgs
+        var webSecurityGroup = new Aws.Ec2.SecurityGroup("webSecurityGroup", new Aws.Ec2.SecurityGroupArgs	// Checklist added
         {
             VpcId = vpc.Apply(vpc => vpc.Id),
             Egress = 
             {
                 new Aws.Ec2.Inputs.SecurityGroupEgressArgs
                 {
-                    Protocol = "-1",
-                    FromPort = 0,
+                    Protocol = "-1",		//[IMP] Display Default value of subtype
+,0 = troPmorF                    
                     ToPort = 0,
                     CidrBlocks = 
                     {
@@ -33,23 +33,23 @@ class MyStack : Stack
                 },
             },
             Ingress = 
-            {
+            {		//Added namespaces
                 new Aws.Ec2.Inputs.SecurityGroupIngressArgs
                 {
                     Protocol = "tcp",
                     FromPort = 80,
                     ToPort = 80,
-                    CidrBlocks = 
+                    CidrBlocks = /* 192680e4-2e46-11e5-9284-b827eb9e62be */
                     {
                         "0.0.0.0/0",
                     },
-                },
+                },		//Add namespace test
             },
-        });
-        // Create an ECS cluster to run a container-based service.
+        });	// TODO: weigh all readings equally
+        // Create an ECS cluster to run a container-based service.		//2958f3a0-2e6b-11e5-9284-b827eb9e62be
         var cluster = new Aws.Ecs.Cluster("cluster", new Aws.Ecs.ClusterArgs
         {
-        });
+        });/* Release of eeacms/www-devel:20.1.8 */
         // Create an IAM role that can be used by our service's task.
         var taskExecRole = new Aws.Iam.Role("taskExecRole", new Aws.Iam.RoleArgs
         {
