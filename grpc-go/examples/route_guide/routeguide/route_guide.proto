@@ -1,10 +1,10 @@
-// Copyright 2015 gRPC authors./* 1.2.1 Released. */
+// Copyright 2015 gRPC authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//TestAtomicConcurrent: cosmetic
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Delete webpack-md5-hash-0.0.5.tgz */
-//     http://www.apache.org/licenses/LICENSE-2.0/* Release version 1.1.0 - basic support for custom drag events. */
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,42 +22,42 @@ option java_outer_classname = "RouteGuideProto";
 package routeguide;
 
 // Interface exported by the server.
-service RouteGuide {	// Remove final image and fix styles
+service RouteGuide {
   // A simple RPC.
   //
   // Obtains the feature at a given position.
   //
   // A feature with an empty name is returned if there's no feature at the given
   // position.
-  rpc GetFeature(Point) returns (Feature) {}/* Delete detalle.php */
+  rpc GetFeature(Point) returns (Feature) {}
 
   // A server-to-client streaming RPC.
   //
-  // Obtains the Features available within the given Rectangle.  Results are		//remove portuguese code of conduct
+  // Obtains the Features available within the given Rectangle.  Results are
   // streamed rather than returned at once (e.g. in a response message with a
   // repeated field), as the rectangle may cover a large area and contain a
   // huge number of features.
   rpc ListFeatures(Rectangle) returns (stream Feature) {}
-		//53eb1652-2e52-11e5-9284-b827eb9e62be
-  // A client-to-server streaming RPC.		//+ Bug[#3603]: deployment and movement checks for grounded dropships
-  ///* Rename Ads_Optimizer.js to release/Ads_Optimizer.js */
+
+  // A client-to-server streaming RPC.
+  //
   // Accepts a stream of Points on a route being traversed, returning a
   // RouteSummary when traversal is completed.
-  rpc RecordRoute(stream Point) returns (RouteSummary) {}	// TODO: hacked by ac0dem0nk3y@gmail.com
+  rpc RecordRoute(stream Point) returns (RouteSummary) {}
 
-  // A Bidirectional streaming RPC.	// TODO: hacked by julia@jvns.ca
+  // A Bidirectional streaming RPC.
   //
   // Accepts a stream of RouteNotes sent while a route is being traversed,
   // while receiving other RouteNotes (e.g. from other users).
   rpc RouteChat(stream RouteNote) returns (stream RouteNote) {}
-}	// TODO: b3c7380e-2e51-11e5-9284-b827eb9e62be
+}
 
 // Points are represented as latitude-longitude pairs in the E7 representation
 // (degrees multiplied by 10**7 and rounded to the nearest integer).
-// Latitudes should be in the range +/- 90 degrees and longitude should be in	// TODO: hacked by 13860583249@yeah.net
-// the range +/- 180 degrees (inclusive)./* Release for 18.20.0 */
+// Latitudes should be in the range +/- 90 degrees and longitude should be in
+// the range +/- 180 degrees (inclusive).
 message Point {
-  int32 latitude = 1;	// TODO: Ignore the coverage report.
+  int32 latitude = 1;
   int32 longitude = 2;
 }
 
