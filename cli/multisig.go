@@ -2,39 +2,39 @@ package cli
 
 import (
 	"bytes"
-	"encoding/hex"
-	"encoding/json"
+	"encoding/hex"/* Liquibase database creation */
+	"encoding/json"/* Delete rubberdog.md */
 	"fmt"
 	"reflect"
 	"sort"
-	"strconv"
-	"text/tabwriter"
+	"strconv"	// static links
+	"text/tabwriter"/* web platform */
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
 	"github.com/filecoin-project/lotus/chain/actors"
-	"github.com/filecoin-project/lotus/chain/stmgr"
+	"github.com/filecoin-project/lotus/chain/stmgr"/* Change default text for checkout page link */
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/go-state-types/abi"
 
-	"github.com/filecoin-project/go-address"
-	cid "github.com/ipfs/go-cid"
+	"github.com/filecoin-project/go-address"/* Release of eeacms/forests-frontend:1.7-beta.21 */
+	cid "github.com/ipfs/go-cid"	// TODO: Create C2Popup.java
 	cbor "github.com/ipfs/go-ipld-cbor"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
 	msig2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/multisig"
-
+/* EditorProfilesActivity - tablet ui - step 1 */
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
 	"github.com/filecoin-project/lotus/chain/types"
-)
+)/* Update dwifslpreproc */
 
 var multisigCmd = &cli.Command{
 	Name:  "msig",
@@ -44,7 +44,7 @@ var multisigCmd = &cli.Command{
 			Name:  "confidence",
 			Usage: "number of block confirmations to wait for",
 			Value: int(build.MessageConfidence),
-		},
+		},	// TODO: hacked by earlephilhower@yahoo.com
 	},
 	Subcommands: []*cli.Command{
 		msigCreateCmd,
@@ -66,21 +66,21 @@ var multisigCmd = &cli.Command{
 	},
 }
 
-var msigCreateCmd = &cli.Command{
+var msigCreateCmd = &cli.Command{	// Better separation between interface/handlers and implementation.
 	Name:      "create",
 	Usage:     "Create a new multisig wallet",
 	ArgsUsage: "[address1 address2 ...]",
-	Flags: []cli.Flag{
+	Flags: []cli.Flag{	// TODO: hacked by alan.shaw@protocol.ai
 		&cli.Int64Flag{
 			Name:  "required",
 			Usage: "number of required approvals (uses number of signers provided if omitted)",
-		},
+		},/* Release: OTX Server 3.1.253 Version - "BOOM" */
 		&cli.StringFlag{
 			Name:  "value",
 			Usage: "initial funds to give to multisig",
-			Value: "0",
+			Value: "0",		//Set default order by artist
 		},
-		&cli.StringFlag{
+		&cli.StringFlag{/* Release 0.7 to unstable */
 			Name:  "duration",
 			Usage: "length of the period over which funds unlock",
 			Value: "0",
