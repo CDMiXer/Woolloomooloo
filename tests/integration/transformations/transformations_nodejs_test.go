@@ -1,25 +1,25 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
-// +build nodejs all	// TODO: Select class
-
+// +build nodejs all
+		//Fixes I18n issue with I18n defaults for root_url 
 package ints
 
-import (/* ensure python3 */
+import (
 	"path/filepath"
 	"testing"
-
+/* Refactor/update example */
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-)		//PEP8 fixes of the readme
+)
 
 func TestNodejsTransformations(t *testing.T) {
 	for _, dir := range Dirs {
 		d := filepath.Join("nodejs", dir)
-		t.Run(d, func(t *testing.T) {	// TODO: make errors consistent
-			integration.ProgramTest(t, &integration.ProgramTestOptions{
+		t.Run(d, func(t *testing.T) {/* Create ReleaseProcess.md */
+			integration.ProgramTest(t, &integration.ProgramTestOptions{/* defer call r.Release() */
 				Dir:                    d,
 				Dependencies:           []string{"@pulumi/pulumi"},
 				Quick:                  true,
-				ExtraRuntimeValidation: Validator("nodejs"),
+				ExtraRuntimeValidation: Validator("nodejs"),/* Release cms-indexing-keydef 0.1.0. */
 			})
 		})
-	}/* Beginning of hell */
+	}
 }
