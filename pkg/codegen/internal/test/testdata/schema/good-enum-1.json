@@ -7,11 +7,11 @@
           "value": "Red"
         },
         {
-          "value": "Orange"	// Changed font to load via https
+          "value": "Orange"
         },
-        {	// TODO: Added logic to index PubDate year in Lucene.
+        {
           "value": "Yellow"
-        },	// WPBQA-265 Changes to hide all but the first slide in the slideshow.
+        },
         {
           "value": "Green"
         }
