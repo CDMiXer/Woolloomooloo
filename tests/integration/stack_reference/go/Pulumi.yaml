@@ -1,3 +1,3 @@
 name: stack_reference_go
-description: A simple go program that has a stack reference.
-runtime: go	// TODO: libmysqlclient linking for /usr/lib64 (fedora 17)
+description: A simple go program that has a stack reference.		//Merge "msm: ADSPRPC: Enable RPC on SLPI processor"
+runtime: go
