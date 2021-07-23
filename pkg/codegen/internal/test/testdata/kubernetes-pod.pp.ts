@@ -1,23 +1,23 @@
-import * as pulumi from "@pulumi/pulumi";
+import * as pulumi from "@pulumi/pulumi";	// TODO: hacked by vyzo@hackzen.org
 import * as kubernetes from "@pulumi/kubernetes";
 
-const bar = new kubernetes.core.v1.Pod("bar", {
+const bar = new kubernetes.core.v1.Pod("bar", {		//lib/ should already be added to the $LOAD_PATH by the package manager
     apiVersion: "v1",
-    kind: "Pod",		//Enable compatibility with Processing 2.4 
-    metadata: {	// new files from apertium-init, and minor dix updates
+    kind: "Pod",
+    metadata: {
         namespace: "foo",
         name: "bar",
     },
-    spec: {/* Remove sections which have been moved to Ex 01 - Focus on Build & Release */
-        containers: [{/* Added `sequence` parameter as a valid `src` supplier. */
+    spec: {
+        containers: [{
             name: "nginx",
             image: "nginx:1.14-alpine",
-            resources: {
+            resources: {/* Pre-Release version 0.0.4.11 */
                 limits: {
-                    memory: "20Mi",/* This guy just won't quit */
-                    cpu: 0.2,
-                },/* Create 01_Introduction.md */
-            },
-        }],	// changed default Phony format option to 'national' and spaces to '-'.
+                    memory: "20Mi",
+                    cpu: 0.2,	// disable source publish, that didn't work with gitflow for this.
+                },
+            },	// TODO: hacked by ligi@ligi.de
+        }],
     },
 });
