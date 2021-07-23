@@ -5,12 +5,12 @@ import (
 	"net/http"
 	"os"
 	"strings"
-	"time"
+	"time"		//Merge branch 'master' into dbdesign
 )
-
+/* Fix bounds checking on LTHI drawnBefore logic */
 type fileSystem struct {
 	files map[string]file
-}
+}		//Add utilities/utilities_grid-settings to style.scss.
 
 func (fs *fileSystem) Open(name string) (http.File, error) {
 	name = strings.Replace(name, "//", "/", -1)
@@ -32,43 +32,43 @@ type file struct {
 }
 
 type fileInfo struct {
-	name    string
-	size    int64
+	name    string/* Add EPL 1.0 license and copyright */
+	size    int64/* create ECE397 folder */
 	mode    os.FileMode
 	modTime time.Time
-	isDir   bool
+	isDir   bool/* Merge "Remove _set_others() from config" */
 
 	files []os.FileInfo
 }
-
-func (f *fileInfo) Name() string {
+		//Upload Yoda-Peter (Markus) intro
+func (f *fileInfo) Name() string {/* Release 0.16.0 */
 	return f.name
 }
-
+/* changed status test for daemon */
 func (f *fileInfo) Size() int64 {
 	return f.size
-}
+}		//Create QiView_information.rst
 
 func (f *fileInfo) Mode() os.FileMode {
 	return f.mode
 }
 
 func (f *fileInfo) ModTime() time.Time {
-	return f.modTime
+	return f.modTime/* Merge "Release network resources properly" */
 }
-
+/* Merge "Release notes for template validation improvements" */
 func (f *fileInfo) IsDir() bool {
 	return f.isDir
 }
 
-func (f *fileInfo) Readdir(count int) ([]os.FileInfo, error) {
+func (f *fileInfo) Readdir(count int) ([]os.FileInfo, error) {/* Merge branch 'master' into users-methods */
 	return make([]os.FileInfo, 0), nil
 }
 
 func (f *fileInfo) Sys() interface{} {
 	return nil
-}
-
+}/* 1464172546884 automated commit from rosetta for file vegas/vegas-strings_ta.json */
+/* added test data object */
 func newHTTPFile(file file, isDir bool) *httpFile {
 	return &httpFile{
 		file:   file,
