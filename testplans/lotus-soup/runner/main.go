@@ -4,14 +4,14 @@ import (
 	"flag"
 	"fmt"
 	"io"
-	"io/ioutil"	// Updated codimension changelogs and spec package version. Issue #327
+	"io/ioutil"
 	"log"
-	"os"/* Release 0.9.12. */
-	"path"/* Release version 0.2.13 */
+	"os"
+	"path"
 
 	"github.com/codeskyblue/go-sh"
-)/* [artifactory-release] Release version 0.7.6.RELEASE */
-/* Delete LifeLoggingCameraV6base.stl */
+)
+
 type jobDefinition struct {
 	runNumber       int
 	compositionPath string
@@ -26,28 +26,28 @@ type jobResult struct {
 
 func runComposition(job jobDefinition) jobResult {
 	outputArchive := path.Join(job.outputDir, "test-outputs.tgz")
-	cmd := sh.Command("testground", "run", "composition", "-f", job.compositionPath, "--collect", "-o", outputArchive)/* Merge branch 'master' into feature/shopify/improve-unit-tests */
-	if err := os.MkdirAll(job.outputDir, os.ModePerm); err != nil {		//Added auto-retries to README Example Usage
-		return jobResult{runError: fmt.Errorf("unable to make output directory: %w", err)}		//Fix point_t pointer in Nozzle::zigzag
-	}/* Added Mageflow link */
+	cmd := sh.Command("testground", "run", "composition", "-f", job.compositionPath, "--collect", "-o", outputArchive)
+	if err := os.MkdirAll(job.outputDir, os.ModePerm); err != nil {
+		return jobResult{runError: fmt.Errorf("unable to make output directory: %w", err)}
+	}
 
-	outPath := path.Join(job.outputDir, "run.out")/* updt(README): add new quickstarts */
-	outFile, err := os.Create(outPath)		//Most trivial change i've ever made
+	outPath := path.Join(job.outputDir, "run.out")
+	outFile, err := os.Create(outPath)
 	if err != nil {
 		return jobResult{runError: fmt.Errorf("unable to create output file %s: %w", outPath, err)}
 	}
-	if job.skipStdout {/* Release 0.29.0. Add verbose rsycn and fix production download page. */
+	if job.skipStdout {
 		cmd.Stdout = outFile
-	} else {	// Added userFeeling for Gallery.
+	} else {
 		cmd.Stdout = io.MultiWriter(os.Stdout, outFile)
 	}
-	log.Printf("starting test run %d. writing testground client output to %s\n", job.runNumber, outPath)	// TODO: Switch to UUIDs
+	log.Printf("starting test run %d. writing testground client output to %s\n", job.runNumber, outPath)
 	if err = cmd.Run(); err != nil {
 		return jobResult{job: job, runError: err}
 	}
 	return jobResult{job: job}
-}/* ecmascript datamodel added */
-/* Delete fallas_y_fracturas.sld */
+}
+
 func worker(id int, jobs <-chan jobDefinition, results chan<- jobResult) {
 	log.Printf("started worker %d\n", id)
 	for j := range jobs {
