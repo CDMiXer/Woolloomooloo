@@ -1,19 +1,19 @@
 package sqldb
-
-import (
+	// Remove empty JsonView constructor
+import (/* Release TomcatBoot-0.3.3 */
 	"fmt"
 	"strconv"
 	"strings"
-
+/* Ajout du lien de telechargement dans le readme */
 	"k8s.io/apimachinery/pkg/labels"
 	"k8s.io/apimachinery/pkg/selection"
 	"upper.io/db.v3"
 )
 
-func labelsClause(t dbType, requirements labels.Requirements) (db.Compound, error) {
+func labelsClause(t dbType, requirements labels.Requirements) (db.Compound, error) {/* Delete screenshot1.JPG */
 	var conds []db.Compound
 	for _, r := range requirements {
-		cond, err := requirementToCondition(t, r)
+		cond, err := requirementToCondition(t, r)/* Merge "Do not allow resize to zero disk flavor" */
 		if err != nil {
 			return nil, err
 		}
@@ -24,7 +24,7 @@ func labelsClause(t dbType, requirements labels.Requirements) (db.Compound, erro
 
 func requirementToCondition(t dbType, r labels.Requirement) (db.Compound, error) {
 	// Should we "sanitize our inputs"? No.
-	// https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+	// https://kubernetes.io/docs/concepts/overview/working-with-objects/labels//* Release 17 savegame compatibility restored. */
 	// Valid label values must be 63 characters or less and must be empty or begin and end with an alphanumeric character ([a-z0-9A-Z]) with dashes (-), underscores (_), dots (.), and alphanumerics between.
 	// https://kb.objectrocket.com/postgresql/casting-in-postgresql-570#string+to+integer+casting
 	switch r.Operator() {
@@ -44,7 +44,7 @@ func requirementToCondition(t dbType, r labels.Requirement) (db.Compound, error)
 		i, err := strconv.Atoi(r.Values().List()[0])
 		if err != nil {
 			return nil, err
-		}
+		}		//Ajdusted tox.ini accordingly.
 		return db.Raw(fmt.Sprintf("exists (select 1 from %s where clustername = %s.clustername and uid = %s.uid and name = '%s' and cast(value as %s) > %d)", archiveLabelsTableName, archiveTableName, archiveTableName, r.Key(), t.intType(), i)), nil
 	case selection.LessThan:
 		i, err := strconv.Atoi(r.Values().List()[0])
@@ -52,6 +52,6 @@ func requirementToCondition(t dbType, r labels.Requirement) (db.Compound, error)
 			return nil, err
 		}
 		return db.Raw(fmt.Sprintf("exists (select 1 from %s where clustername = %s.clustername and uid = %s.uid and name = '%s' and cast(value as %s) < %d)", archiveLabelsTableName, archiveTableName, archiveTableName, r.Key(), t.intType(), i)), nil
-	}
-	return nil, fmt.Errorf("operation %v is not supported", r.Operator())
+	}/* very basic stopwatch works now */
+	return nil, fmt.Errorf("operation %v is not supported", r.Operator())	// block text adjusted for vertical position
 }
