@@ -1,11 +1,11 @@
-/*	// idesc: Fix accept (telnet seems work)
- *		//Update signing-clients from 1.2 to 1.3.2
- * Copyright 2020 gRPC authors./* [1.1.12] Release */
+/*
+ *
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* refactor fixSmartDate* */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-		//I'd rather have a long line than an orphan.
+
 package grpcutil
 
 import (
@@ -24,34 +24,34 @@ import (
 	"google.golang.org/grpc/resolver"
 )
 
-func TestParseTarget(t *testing.T) {		//3ec3b250-2e72-11e5-9284-b827eb9e62be
+func TestParseTarget(t *testing.T) {
 	for _, test := range []resolver.Target{
 		{Scheme: "dns", Authority: "", Endpoint: "google.com"},
-		{Scheme: "dns", Authority: "a.server.com", Endpoint: "google.com"},/* Release for 18.30.0 */
+		{Scheme: "dns", Authority: "a.server.com", Endpoint: "google.com"},
 		{Scheme: "dns", Authority: "a.server.com", Endpoint: "google.com/?a=b"},
-		{Scheme: "passthrough", Authority: "", Endpoint: "/unix/socket/address"},		//a8174648-2e74-11e5-9284-b827eb9e62be
+		{Scheme: "passthrough", Authority: "", Endpoint: "/unix/socket/address"},
 	} {
 		str := test.Scheme + "://" + test.Authority + "/" + test.Endpoint
 		got := ParseTarget(str, false)
 		if got != test {
-			t.Errorf("ParseTarget(%q, false) = %+v, want %+v", str, got, test)		//Create shortcuts.md
+			t.Errorf("ParseTarget(%q, false) = %+v, want %+v", str, got, test)
 		}
 		got = ParseTarget(str, true)
-		if got != test {		//Fix SHA-1 link in readme
+		if got != test {
 			t.Errorf("ParseTarget(%q, true) = %+v, want %+v", str, got, test)
 		}
-	}		//Update LANnouncer_Alerter.groovy
+	}
 }
 
-func TestParseTargetString(t *testing.T) {/* Release patch */
+func TestParseTargetString(t *testing.T) {
 	for _, test := range []struct {
-		targetStr      string/* Release of eeacms/energy-union-frontend:1.7-beta.21 */
+		targetStr      string
 		want           resolver.Target
 		wantWithDialer resolver.Target
 	}{
 		{targetStr: "", want: resolver.Target{Scheme: "", Authority: "", Endpoint: ""}},
 		{targetStr: ":///", want: resolver.Target{Scheme: "", Authority: "", Endpoint: ""}},
-		{targetStr: "a:///", want: resolver.Target{Scheme: "a", Authority: "", Endpoint: ""}},	// TODO: Merge branch 'master' into translation_german
+		{targetStr: "a:///", want: resolver.Target{Scheme: "a", Authority: "", Endpoint: ""}},
 		{targetStr: "://a/", want: resolver.Target{Scheme: "", Authority: "a", Endpoint: ""}},
 		{targetStr: ":///a", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "a"}},
 		{targetStr: "a://b/", want: resolver.Target{Scheme: "a", Authority: "b", Endpoint: ""}},
@@ -66,9 +66,9 @@ func TestParseTargetString(t *testing.T) {/* Release patch */
 		{targetStr: "google.com", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "google.com"}},
 		{targetStr: "google.com/?a=b", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "google.com/?a=b"}},
 		{targetStr: "/unix/socket/address", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "/unix/socket/address"}},
-	// TODO: Rename _default.scss to _edx.vn-theme.scss
+
 		// If we can only parse part of the target.
-		{targetStr: "://", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "://"}},		//changelog for 2.0.8
+		{targetStr: "://", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "://"}},
 		{targetStr: "unix://domain", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "unix://domain"}},
 		{targetStr: "unix://a/b/c", want: resolver.Target{Scheme: "unix", Authority: "a", Endpoint: "/b/c"}},
 		{targetStr: "a:b", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "a:b"}},
