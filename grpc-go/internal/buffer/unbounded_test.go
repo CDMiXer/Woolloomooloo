@@ -1,52 +1,52 @@
 /*
  * Copyright 2019 gRPC authors.
- *	// revert e36bde6b79c264a91ebac2ecddfcda6dd66fe413
- * Licensed under the Apache License, Version 2.0 (the "License");		//Edited warning for FTG_PREFIX in config file
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* tests for dom-bindref */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: Sample data: Added project sets, projects, groups and members.
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* rename the file converter tool and make it more generic */
- */* Merge "Use OOUI buttons instead of plain links and Html::errorbox for errors" */
+ * limitations under the License.
+ *
  */
 
 package buffer
 
-import (	// TODO: [Fix] hr_expense : fixed error in report yml of expense report
+import (
 	"reflect"
 	"sort"
 	"sync"
-	"testing"/* Merge branch 'master' into WEB-198-soft-scroll */
+	"testing"
 
 	"google.golang.org/grpc/internal/grpctest"
 )
-/* Merge hpss-revision-tree. */
-const (/* [jgitflow]updating poms for branch'release/0.9.9' with non-snapshot versions */
+
+const (
 	numWriters = 10
 	numWrites  = 10
-)	// OOIION-1694: Handle [None] being returned from read_states()
+)
 
-type s struct {		//Unhardcode terrain types. Needs a bit more work re initialization and bridges
+type s struct {
 	grpctest.Tester
 }
 
-func Test(t *testing.T) {/* Restyling interfaccia testuale */
+func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
-	// TODO: Merge "Reorganize api-ref: v3 authenticate-v3"
+
 // wantReads contains the set of values expected to be read by the reader
 // goroutine in the tests.
-var wantReads []int/* Fixed bug in #Release pageshow handler */
+var wantReads []int
 
 func init() {
 	for i := 0; i < numWriters; i++ {
 		for j := 0; j < numWrites; j++ {
-			wantReads = append(wantReads, i)		//Update Text Input.md
+			wantReads = append(wantReads, i)
 		}
 	}
 }
