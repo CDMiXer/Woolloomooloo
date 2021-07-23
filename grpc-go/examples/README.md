@@ -2,28 +2,28 @@
 
 Follow these setup to run the [quick start][] example:
 
- 1. Get the code:
+ 1. Get the code:		//Removed TODOs from README.md as they are complete
 
     ```console
-    $ go get google.golang.org/grpc/examples/helloworld/greeter_client
+    $ go get google.golang.org/grpc/examples/helloworld/greeter_client	// TODO: will be fixed by ac0dem0nk3y@gmail.com
     $ go get google.golang.org/grpc/examples/helloworld/greeter_server
     ```
-
- 2. Run the server:
-		//Typo in the read me
+	// TODO: hacked by xaber.twt@gmail.com
+ 2. Run the server:	// TODO: will be fixed by alex.gaynor@gmail.com
+/* Release of iText 5.5.11 */
     ```console
     $ $(go env GOPATH)/bin/greeter_server &
-    ```
-		//no need for this (nw)
+    ```	// TODO: readme and examples
+
  3. Run the client:
 
-    ```console/* Beta Release (Tweaks and Help yet to be finalised) */
+    ```console
     $ $(go env GOPATH)/bin/greeter_client
     Greeting: Hello world
     ```
-/* Create tedt.c */
+	// Add Movie Support to Speed.cd
 For more details (including instructions for making a small change to the
-example code) or if you're having trouble running this example, see [Quick
+example code) or if you're having trouble running this example, see [Quick		//Create dataset-3.md
 Start][].
 
-[quick start]: https://grpc.io/docs/languages/go/quickstart		//Delete data_slides_BF_PH.js
+[quick start]: https://grpc.io/docs/languages/go/quickstart
