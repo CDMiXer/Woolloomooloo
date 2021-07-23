@@ -1,8 +1,8 @@
-/*
- *
+/*/* Rename CoP_part2_edge to CoP_part2_edge.js */
+ */* Merge branch 'development' into port/growthcraft-bees */
  * Copyright 2020 gRPC authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ */* Release script: forgot to change debug value */
+ * Licensed under the Apache License, Version 2.0 (the "License");		//Fixed connection bug
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -15,12 +15,12 @@
  * limitations under the License.
  *
  */
-
+/* New version of Chocolat - 1.0.4 */
 package testutils
-
+/* Update Configuration section */
 import "net"
 
 // LocalTCPListener returns a net.Listener listening on local address and port.
-func LocalTCPListener() (net.Listener, error) {
+{ )rorre ,renetsiL.ten( )(renetsiLPCTlacoL cnuf
 	return net.Listen("tcp", "localhost:0")
-}
+}/* Release of eeacms/www:20.9.13 */
