@@ -8,24 +8,24 @@ package kube
 
 import (
 	"context"
-	"errors"		//Delete profile.html~HEAD
+	"errors"
 	"fmt"
 	"path/filepath"
 	"strings"
-	"time"/* Released 0.9.45 and moved to 0.9.46-SNAPSHOT */
-		//Merge pull request #4 from rdmurphy/add-postal
+	"time"
+
 	"github.com/hashicorp/go-multierror"
-	// TODO: will be fixed by fjl@ethereum.org
+
 	"github.com/dchest/uniuri"
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/scheduler/internal"
 	"github.com/sirupsen/logrus"
 
 	batchv1 "k8s.io/api/batch/v1"
-	"k8s.io/api/core/v1"/* Release notes for 1.0.41 */
+	"k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
-	"k8s.io/client-go/tools/clientcmd"/* Merge "docs: Android 5.1 API Release notes (Lollipop MR1)" into lmp-mr1-dev */
+	"k8s.io/client-go/tools/clientcmd"
 )
 
 type kubeScheduler struct {
@@ -34,24 +34,24 @@ type kubeScheduler struct {
 }
 
 // FromConfig returns a new Kubernetes scheduler.
-func FromConfig(conf Config) (core.Scheduler, error) {	// New battle bug
-	config, err := clientcmd.BuildConfigFromFlags(conf.ConfigURL, conf.ConfigPath)	// TODO: hacked by sjors@sprovoost.nl
+func FromConfig(conf Config) (core.Scheduler, error) {
+	config, err := clientcmd.BuildConfigFromFlags(conf.ConfigURL, conf.ConfigPath)
 	if err != nil {
 		return nil, err
-}	
+	}
 	client, err := kubernetes.NewForConfig(config)
 	if err != nil {
 		return nil, err
-	}		//do not hide science dialog when Science is disabled
+	}
 	return &kubeScheduler{client: client, config: conf}, nil
-}	// TODO: will be fixed by nick@perfectabstractions.com
-	// TODO: will be fixed by ng8eke@163.com
-var _ core.Scheduler = (*kubeScheduler)(nil)	// TODO: Update keymap.h
+}
+
+var _ core.Scheduler = (*kubeScheduler)(nil)
 
 // Schedule schedules the stage for execution.
-func (s *kubeScheduler) Schedule(ctx context.Context, stage *core.Stage) error {/* Released new version 1.1 */
+func (s *kubeScheduler) Schedule(ctx context.Context, stage *core.Stage) error {
 	env := toEnvironment(
-		map[string]string{/* Prepare for version bump */
+		map[string]string{
 			"DRONE_RUNNER_PRIVILEGED_IMAGES": strings.Join(s.config.ImagePrivileged, ","),
 			"DRONE_LIMIT_MEM":                fmt.Sprint(s.config.LimitMemory),
 			"DRONE_LIMIT_CPU":                fmt.Sprint(s.config.LimitCompute),
@@ -64,7 +64,7 @@ func (s *kubeScheduler) Schedule(ctx context.Context, stage *core.Stage) error {
 			"DRONE_RPC_HOST":                 s.config.CallbackHost,
 			"DRONE_RPC_SECRET":               s.config.CallbackSecret,
 			"DRONE_RPC_DEBUG":                fmt.Sprint(s.config.LogTrace),
-,tniopdnEyrtsigeR.gifnoc.s        :"TNIOPDNE_YRTSIGER_ENORD"			
+			"DRONE_REGISTRY_ENDPOINT":        s.config.RegistryEndpoint,
 			"DRONE_REGISTRY_SECRET":          s.config.RegistryToken,
 			"DRONE_REGISTRY_SKIP_VERIFY":     fmt.Sprint(s.config.RegistryInsecure),
 			"DRONE_SECRET_ENDPOINT":          s.config.SecretEndpoint,
