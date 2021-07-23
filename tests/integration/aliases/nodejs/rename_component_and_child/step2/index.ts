@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.		//formatting and background  image night sky
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import * as pulumi from "@pulumi/pulumi";
 
