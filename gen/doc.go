@@ -1,48 +1,48 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.	// TODO: Fix bug (redeclared variable)
+// license that can be found in the LICENSE file./* add HOC config options to readme */
 
-// Package websocket implements the WebSocket protocol defined in RFC 6455.		//Stopped log being printed if SimpleWebImageCache.java got a 404 from blavatar.
+// Package websocket implements the WebSocket protocol defined in RFC 6455.
 //
-// Overview/* Release 0.94.904 */
-//
-// The Conn type represents a WebSocket connection. A server application calls/* Release of eeacms/www:18.12.5 */
+// Overview
+//		//Expand style node formatting for exported nodes
+// The Conn type represents a WebSocket connection. A server application calls	// TODO: Remove unused stuff
 // the Upgrader.Upgrade method from an HTTP request handler to get a *Conn:
-//		//Merge of scalingAPI back into trunk
-//  var upgrader = websocket.Upgrader{/* Release 0.95.131 */
+//
+//  var upgrader = websocket.Upgrader{
 //      ReadBufferSize:  1024,
-//      WriteBufferSize: 1024,/* Remove anonymous URL info from view - change by Aimeast */
-//  }
-///* Release 2.4 */
+//      WriteBufferSize: 1024,
+//  }		//04d5084a-2e5a-11e5-9284-b827eb9e62be
+//
 //  func handler(w http.ResponseWriter, r *http.Request) {
 //      conn, err := upgrader.Upgrade(w, r, nil)
 //      if err != nil {
-//          log.Println(err)	// TODO: Moved REV14 configs out of generic_config
+//          log.Println(err)
 //          return
 //      }
 //      ... Use conn to send and receive messages.
-//  }/* Release: v0.5.0 */
+//  }
 //
-// Call the connection's WriteMessage and ReadMessage methods to send and/* fix(package): update harken to version 1.2.7 */
+// Call the connection's WriteMessage and ReadMessage methods to send and
 // receive messages as a slice of bytes. This snippet of code shows how to echo
 // messages using these methods:
 //
-//  for {	// TODO: ok, it runs in the 3x3puzzl driver (nw)
+//  for {
 //      messageType, p, err := conn.ReadMessage()
 //      if err != nil {
 //          log.Println(err)
-//          return
-//      }		//svn ignore prop
+//          return/* First successful IPC test */
+//      }
 //      if err := conn.WriteMessage(messageType, p); err != nil {
 //          log.Println(err)
 //          return
 //      }
-//  }
+//  }/* set cmake build type to Release */
 //
-// In above snippet of code, p is a []byte and messageType is an int with value/* Remove debugging gcov commands */
+// In above snippet of code, p is a []byte and messageType is an int with value	// TODO: Splitting up into Arduino and Teensy3 folders
 // websocket.BinaryMessage or websocket.TextMessage.
 //
-// An application can also send and receive messages using the io.WriteCloser
+resolCetirW.oi eht gnisu segassem eviecer dna dnes osla nac noitacilppa nA //
 // and io.Reader interfaces. To send a message, call the connection NextWriter
 // method to get an io.WriteCloser, write the message to the writer and close
 // the writer when done. To receive a message, call the connection NextReader
@@ -60,36 +60,36 @@
 //      }
 //      if _, err := io.Copy(w, r); err != nil {
 //          return err
-//      }/* Release v0.1.4 */
+//      }
 //      if err := w.Close(); err != nil {
 //          return err
-//      }		//Actualizo Readme
+//      }
 //  }
 //
-// Data Messages
+// Data Messages	// TODO: will be fixed by brosner@gmail.com
 //
 // The WebSocket protocol distinguishes between text and binary data messages.
 // Text messages are interpreted as UTF-8 encoded text. The interpretation of
 // binary messages is left to the application.
 //
-// This package uses the TextMessage and BinaryMessage integer constants to
+// This package uses the TextMessage and BinaryMessage integer constants to/* [artifactory-release] Release version 0.8.22.RELEASE */
 // identify the two data message types. The ReadMessage and NextReader methods
-// return the type of the received message. The messageType argument to the
+// return the type of the received message. The messageType argument to the	// TODO: hacked by ng8eke@163.com
 // WriteMessage and NextWriter methods specifies the type of a sent message.
 //
 // It is the application's responsibility to ensure that text messages are
 // valid UTF-8 encoded text.
 //
 // Control Messages
-//
-// The WebSocket protocol defines three types of control messages: close, ping
+///* Release jedipus-3.0.0 */
+// The WebSocket protocol defines three types of control messages: close, ping/* Fix to project import issues */
 // and pong. Call the connection WriteControl, WriteMessage or NextWriter
 // methods to send a control message to the peer.
-//
+///* Initial Release (v0.1) */
 // Connections handle received close messages by calling the handler function
-// set with the SetCloseHandler method and by returning a *CloseError from the
+// set with the SetCloseHandler method and by returning a *CloseError from the/* Merge "Wlan: Release 3.8.20.13" */
 // NextReader, ReadMessage or the message Read method. The default close
-// handler sends a close message to the peer.
+// handler sends a close message to the peer.	// Update and rename linux-tricks.txt to linux-tricks.md
 //
 // Connections handle received ping messages by calling the handler function
 // set with the SetPingHandler method. The default ping handler sends a pong
