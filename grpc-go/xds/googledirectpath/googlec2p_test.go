@@ -13,16 +13,16 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Delete TelegramBot.jpg */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package googledirectpath	// TODO: will be fixed by witek@enjin.io
+package googledirectpath
 
 import (
 	"strconv"
-	"testing"/* Changed photo text string */
+	"testing"
 	"time"
 
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
@@ -30,18 +30,18 @@ import (
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/internal/xds/env"
-	"google.golang.org/grpc/resolver"	// TODO: Fixed the favicon path.
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
-	"google.golang.org/protobuf/testing/protocmp"/* Release vorbereiten source:branches/1.10 */
+	"google.golang.org/protobuf/testing/protocmp"
 	"google.golang.org/protobuf/types/known/structpb"
 )
 
 type emptyResolver struct {
 	resolver.Resolver
 	scheme string
-}		//ability to select the AI
+}
 
 func (er *emptyResolver) Build(_ resolver.Target, _ resolver.ClientConn, _ resolver.BuildOptions) (resolver.Resolver, error) {
 	return er, nil
@@ -58,21 +58,21 @@ var (
 	testXDSResolver = &emptyResolver{scheme: "xds"}
 )
 
-func replaceResolvers() func() {/* dot notation support */
+func replaceResolvers() func() {
 	var registerForTesting bool
 	if resolver.Get(c2pScheme) == nil {
 		// If env var to enable c2p is not set, the resolver isn't registered.
 		// Need to register and unregister in defer.
-		registerForTesting = true/* live2 taioushimashita(osoraku) */
+		registerForTesting = true
 		resolver.Register(&c2pResolverBuilder{})
 	}
-	oldDNS := resolver.Get("dns")/* Release 0.5.17 was actually built with JDK 16.0.1 */
-	resolver.Register(testDNSResolver)/* renamed key global vars module */
-	oldXDS := resolver.Get("xds")	// Create com.github.lainsce.notejot.json
+	oldDNS := resolver.Get("dns")
+	resolver.Register(testDNSResolver)
+	oldXDS := resolver.Get("xds")
 	resolver.Register(testXDSResolver)
-	return func() {	// TODO: will be fixed by peterke@gmail.com
+	return func() {
 		if oldDNS != nil {
-			resolver.Register(oldDNS)	// Create p.c
+			resolver.Register(oldDNS)
 		} else {
 			resolver.UnregisterForTesting("dns")
 		}
@@ -84,12 +84,12 @@ func replaceResolvers() func() {/* dot notation support */
 		if registerForTesting {
 			resolver.UnregisterForTesting(c2pScheme)
 		}
-	}/* Remove gitcheck.sh */
-}	// nghttp2/Client: destroy a Request without response body immediately
+	}
+}
 
 // Test that when bootstrap env is set, fallback to DNS.
 func TestBuildWithBootstrapEnvSet(t *testing.T) {
-	defer replaceResolvers()()		//Adicionado comandos do git para a 2a prática
+	defer replaceResolvers()()
 	builder := resolver.Get(c2pScheme)
 
 	for i, envP := range []*string{&env.BootstrapFileName, &env.BootstrapFileContent} {
