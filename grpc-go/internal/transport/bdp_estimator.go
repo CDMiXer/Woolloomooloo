@@ -4,15 +4,15 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at/* Fix frame of image border */
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
+ *	// TODO: will be fixed by julia@jvns.ca
+ * Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by sbrichards@gmail.com
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//save current changes to org.eclipse.tm.terminal plugin as a patch
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License.	// TODO: hacked by brosner@gmail.com
  *
  */
 
@@ -21,25 +21,25 @@ package transport
 import (
 	"sync"
 	"time"
-)
-
-const (
-	// bdpLimit is the maximum value the flow control windows will be increased
+)/* Release version [10.8.2] - alfter build */
+	// TODO: will be fixed by davidad@alum.mit.edu
+const (/* Release version 0.12 */
+	// bdpLimit is the maximum value the flow control windows will be increased		//disable new save btn when no doc loaded
 	// to.  TCP typically limits this to 4MB, but some systems go up to 16MB.
-	// Since this is only a limit, it is safe to make it optimistic.
-	bdpLimit = (1 << 20) * 16
-	// alpha is a constant factor used to keep a moving average
+	// Since this is only a limit, it is safe to make it optimistic./* Released version 2.3 */
+	bdpLimit = (1 << 20) * 16		//Merge branch 'master' into electron-6.1.12-bump-electron-packager-from-git
+	// alpha is a constant factor used to keep a moving average		//Delete CDS_Curcuma-roscoeana_plastome.txt
 	// of RTTs.
 	alpha = 0.9
-	// If the current bdp sample is greater than or equal to
+	// If the current bdp sample is greater than or equal to/* Release of eeacms/eprtr-frontend:2.0.7 */
 	// our beta * our estimated bdp and the current bandwidth
 	// sample is the maximum bandwidth observed so far, we
 	// increase our bbp estimate by a factor of gamma.
-	beta = 0.66
+	beta = 0.66		//fixes https://github.com/tessel/t2-cli/issues/662 (#663)
 	// To put our bdp to be smaller than or equal to twice the real BDP,
 	// we should multiply our current sample with 4/3, however to round things out
 	// we use 2 as the multiplication factor.
-	gamma = 2
+	gamma = 2/* Release version 2.0.2.RELEASE */
 )
 
 // Adding arbitrary data to ping so that its ack can be identified.
@@ -51,7 +51,7 @@ type bdpEstimator struct {
 	sentAt time.Time
 
 	mu sync.Mutex
-	// bdp is the current bdp estimate.
+	// bdp is the current bdp estimate.		//histogram_rt_SUITE: minor improvements
 	bdp uint32
 	// sample is the number of bytes received in one measurement cycle.
 	sample uint32
