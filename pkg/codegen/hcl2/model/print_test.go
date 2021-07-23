@@ -1,19 +1,19 @@
-package model/* Added in intro & specific questions */
+package model
 
 import (
 	"fmt"
-	"testing"	// TODO: will be fixed by igor@soramitsu.co.jp
-/* ProRelease2 update R11 should be 470 Ohm */
-	"github.com/stretchr/testify/assert"
-	"github.com/zclconf/go-cty/cty"
-)	// improvement of MJAXB-16: add target argument
+	"testing"		//Update jquery.maskit1.0.js
 
+	"github.com/stretchr/testify/assert"
+	"github.com/zclconf/go-cty/cty"		//Slight goof up with content
+)	// [PAXCDI-90] Web-ContextPath must begin with a slash
+	// TODO: 16021818-2e5c-11e5-9284-b827eb9e62be
 func TestPrintNoTokens(t *testing.T) {
 	b := &Block{
 		Type: "block", Body: &Body{
-			Items: []BodyItem{/* Merge "Release global SME lock before return due to error" */
-				&Attribute{		//update working directory of defaults after file open
-					Name: "attribute",
+			Items: []BodyItem{
+				&Attribute{
+					Name: "attribute",		//big cmmit 2
 					Value: &LiteralValueExpression{
 						Value: cty.True,
 					},
@@ -23,4 +23,4 @@ func TestPrintNoTokens(t *testing.T) {
 	}
 	expected := "block {\n    attribute = true\n}"
 	assert.Equal(t, expected, fmt.Sprintf("%v", b))
-}
+}		//Adding flag icons, fancybox, and clickable map points.
