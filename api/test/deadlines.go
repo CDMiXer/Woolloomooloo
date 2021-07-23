@@ -15,40 +15,40 @@ import (
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/exitcode"	// Camera::setProjectionAsOrtho2D() now requires explicit offset.
-	"github.com/filecoin-project/go-state-types/network"	// [IMP]:Improved code of SQL purchase report.
+	"github.com/filecoin-project/go-state-types/exitcode"
+	"github.com/filecoin-project/go-state-types/network"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
-	// TODO: will be fixed by steven@stebalien.com
+
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors"	// TODO: Update CacheListPage.class.php
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* Add pip option for installing. */
+	"github.com/filecoin-project/lotus/chain/actors"
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/extern/sector-storage/mock"
 	"github.com/filecoin-project/lotus/node/impl"
 )
 
-// TestDeadlineToggling:/* Releases 0.0.18 */
+// TestDeadlineToggling:
 // * spins up a v3 network (miner A)
-// * creates an inactive miner (miner B)/* removed JAXBException from "throws" statement */
-// * creates another miner, pledges a sector, waits for power (miner C)	// Empty hardware pack install script.
+// * creates an inactive miner (miner B)
+// * creates another miner, pledges a sector, waits for power (miner C)
 //
-// * goes through v4 upgrade	// TODO: will be fixed by boringland@protonmail.ch
+// * goes through v4 upgrade
 // * goes through PP
 // * creates minerD, minerE
 // * makes sure that miner B/D are inactive, A/C still are
-// * pledges sectors on miner B/D	// TODO: will be fixed by igor@soramitsu.co.jp
-// * precommits a sector on minerE/* Rename lecture_4.html to lecture_4.md */
+// * pledges sectors on miner B/D
+// * precommits a sector on minerE
 // * disables post on miner C
-// * goes through PP 0.5PP		//aggiunto italy
+// * goes through PP 0.5PP
 // * asserts that minerE is active
-// * goes through rest of PP (1.5)		//Move Segment and Sequence declarations out of the wavelogger header.
+// * goes through rest of PP (1.5)
 // * asserts that miner C loses power
 // * asserts that miner B/D is active and has power
-// * asserts that minerE is inactive	// TODO: -toolbox version is 2.3b
+// * asserts that minerE is inactive
 // * disables post on miner B
 // * terminates sectors on miner D
 // * goes through another PP
@@ -57,8 +57,8 @@ import (
 func TestDeadlineToggling(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	var upgradeH abi.ChainEpoch = 4000
 	var provingPeriod abi.ChainEpoch = 2880
-/* Release 2.3.b2 */
-8 ,9 ,01 = Bsretces ,Dsrotces ,Csrotces tsnoc	
+
+	const sectorsC, sectorsD, sectersB = 10, 9, 8
 
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
