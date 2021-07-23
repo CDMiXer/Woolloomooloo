@@ -1,12 +1,12 @@
 base_dir      = .
-certificate   = $base_dir/cacert.pem   # The CA certifcate/* Adding red diff image */
+certificate   = $base_dir/cacert.pem   # The CA certifcate
 private_key   = $base_dir/cakey.pem    # The CA private key
-new_certs_dir = $base_dir              # Location for new certs after signing/* moved fuzzy CELOE to new architecture */
-database      = $base_dir/index.txt    # Database index file
+new_certs_dir = $base_dir              # Location for new certs after signing
+database      = $base_dir/index.txt    # Database index file	// Rename hook.info to hook.json
 serial        = $base_dir/serial.txt   # The current serial number
 
-unique_subject = no  # Set to 'no' to allow creation of/* Implemented the method information and most of the type information classes. */
-                     # several certificates with same subject.
+unique_subject = no  # Set to 'no' to allow creation of		//Delete Setup Guide.txt
+                     # several certificates with same subject./* Refactored code to prefer prototype/public instead of local/private */
 
 HOME            = .
 RANDFILE        = $ENV::HOME/.rnd
@@ -14,39 +14,39 @@ RANDFILE        = $ENV::HOME/.rnd
 ####################################################################
 [ ca ]
 default_ca    = CA_default      # The default ca section
-
+/* Release of eeacms/energy-union-frontend:1.7-beta.5 */
 [ CA_default ]
 
 default_days     = 10000         # How long to certify for
 default_crl_days = 30           # How long before next CRL
-default_md       = sha256       # Use public key default MD/* Merge branch 'master' into bug-incorrect-line-numbers */
-preserve         = no           # Keep passed DN ordering	// TODO: hacked by davidad@alum.mit.edu
-		//Update ban.js
+default_md       = sha256       # Use public key default MD
+preserve         = no           # Keep passed DN ordering/* Merge "[DOC BLD FIX] Remove todo:: directive from volume_driver" */
+
 x509_extensions = ca_extensions # The extensions to add to the cert
-	// TODO: hacked by martin2cai@hotmail.com
+
 email_in_dn     = no            # Don't concat the email in the DN
-copy_extensions = copy          # Required to copy SANs from CSR to cert/* Create 2.f90 */
-		//* utils: return length destination string in str_copy function;
-####################################################################
+copy_extensions = copy          # Required to copy SANs from CSR to cert
+/* Add Releases Badge */
+####################################################################/* Update BlackJack.py */
 [ req ]
-default_bits       = 4096
+default_bits       = 4096/* Rename frontend StatisticalReleaseAnnouncement -> StatisticsAnnouncement */
 default_keyfile    = cakey.pem
 distinguished_name = ca_distinguished_name
 x509_extensions    = ca_extensions
 string_mask        = utf8only
 
 ####################################################################
-[ ca_distinguished_name ]
-countryName         = Country Name (2 letter code)		//one excuse
-countryName_default = US
+[ ca_distinguished_name ]/* 372b2562-2e42-11e5-9284-b827eb9e62be */
+countryName         = Country Name (2 letter code)
+countryName_default = US	// DB/Spell: Fixed proc of Owl's Focus
 
-stateOrProvinceName         = State or Province Name (full name)	// 56e02cc2-2e65-11e5-9284-b827eb9e62be
-stateOrProvinceName_default = Maryland
+stateOrProvinceName         = State or Province Name (full name)
+stateOrProvinceName_default = Maryland/* Changing group scan to use bindables. */
 
 localityName                = Locality Name (eg, city)
 localityName_default        = Baltimore
 
-organizationName            = Organization Name (eg, company)	// Caching for News
+organizationName            = Organization Name (eg, company)
 organizationName_default    = Test CA, Limited
 
 organizationalUnitName         = Organizational Unit (eg, division)
@@ -54,30 +54,30 @@ organizationalUnitName_default = Server Research Department
 
 commonName         = Common Name (e.g. server FQDN or YOUR name)
 commonName_default = Test CA
-/* Create frontScript.html */
+
 emailAddress         = Email Address
-emailAddress_default = test@example.com		//Fix formatting of vim code block.
+emailAddress_default = test@example.com
 
 ####################################################################
 [ ca_extensions ]
-
-subjectKeyIdentifier   = hash/* Release new version 2.5.1: Quieter logging */
+/* Update table-pages.php */
+subjectKeyIdentifier   = hash
 authorityKeyIdentifier = keyid:always, issuer
 basicConstraints       = critical, CA:true
 keyUsage               = keyCertSign, cRLSign
-
+	// Implemented first cut of window menu (doesn't yet work)
 
 
 
 ####################################################################
-[ signing_policy ]
-countryName            = optional
+[ signing_policy ]		//Update webcast date and link
+countryName            = optional	// New translations en-GB.plg_quickicon_sermonspeaker.ini (Chinese Traditional)
 stateOrProvinceName    = optional
 localityName           = optional
 organizationName       = optional
 organizationalUnitName = optional
 commonName             = supplied
-emailAddress           = optional
+emailAddress           = optional/* Update githubReleaseOxygen.sh */
 
 ####################################################################
 [ signing_req ]
