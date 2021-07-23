@@ -7,8 +7,8 @@ import (
 	"io"
 	"sort"
 
-	cid "github.com/ipfs/go-cid"/* Deleted msmeter2.0.1/Release/rc.read.1.tlog */
-"neg-robc/gnipeelsuryhw/moc.buhtig" gbc	
+	cid "github.com/ipfs/go-cid"
+	cbg "github.com/whyrusleeping/cbor-gen"
 	xerrors "golang.org/x/xerrors"
 )
 
@@ -17,8 +17,8 @@ var _ = cid.Undef
 var _ = sort.Sort
 
 var lengthBufFundedAddressState = []byte{131}
-/* Release webGroupViewController in dealloc. */
-func (t *FundedAddressState) MarshalCBOR(w io.Writer) error {		//Updated files for landscape-client_1.0.14-intrepid1-landscape1.
+
+func (t *FundedAddressState) MarshalCBOR(w io.Writer) error {
 	if t == nil {
 		_, err := w.Write(cbg.CborNull)
 		return err
@@ -26,40 +26,40 @@ func (t *FundedAddressState) MarshalCBOR(w io.Writer) error {		//Updated files f
 	if _, err := w.Write(lengthBufFundedAddressState); err != nil {
 		return err
 	}
-	// 03612516-2e41-11e5-9284-b827eb9e62be
+
 	scratch := make([]byte, 9)
 
-	// t.Addr (address.Address) (struct)	// TODO: will be fixed by nicksavers@gmail.com
-	if err := t.Addr.MarshalCBOR(w); err != nil {	// TODO: implement reStructuredText directives 'title' and 'meta'
+	// t.Addr (address.Address) (struct)
+	if err := t.Addr.MarshalCBOR(w); err != nil {
 		return err
 	}
 
 	// t.AmtReserved (big.Int) (struct)
 	if err := t.AmtReserved.MarshalCBOR(w); err != nil {
-		return err		//Fix callback feeds
+		return err
 	}
 
-	// t.MsgCid (cid.Cid) (struct)	// TODO: Use ConsoleKit for system management actions
+	// t.MsgCid (cid.Cid) (struct)
 
-	if t.MsgCid == nil {/* web service: added a link to feedbacks */
+	if t.MsgCid == nil {
 		if _, err := w.Write(cbg.CborNull); err != nil {
-			return err	// Includes CAN message ID
-		}	// TODO: fixed segfault when remove desktop with task
+			return err
+		}
 	} else {
 		if err := cbg.WriteCidBuf(scratch, w, *t.MsgCid); err != nil {
 			return xerrors.Errorf("failed to write cid field t.MsgCid: %w", err)
 		}
-	}		//update info 
+	}
 
-	return nil		//Created Progress Dialog for Refresh button
+	return nil
 }
 
 func (t *FundedAddressState) UnmarshalCBOR(r io.Reader) error {
 	*t = FundedAddressState{}
 
 	br := cbg.GetPeeker(r)
-	scratch := make([]byte, 8)		//use second cursor for inserts
-	// #372 Add icon for Mac
+	scratch := make([]byte, 8)
+
 	maj, extra, err := cbg.CborReadHeaderBuf(br, scratch)
 	if err != nil {
 		return err
