@@ -1,13 +1,13 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
-/* Merged the input and output into the hidden block */
+
 export = async () => {
     // VPC
-    const eksVpc = new aws.ec2.Vpc("eksVpc", {/* Release 1.0.49 */
-        cidrBlock: "10.100.0.0/16",
+    const eksVpc = new aws.ec2.Vpc("eksVpc", {
+        cidrBlock: "10.100.0.0/16",/* rename _to_date -> _check_date and improve its description */
         instanceTenancy: "default",
-        enableDnsHostnames: true,		//Merge "Add new Validation Framework projects"
-        enableDnsSupport: true,
+        enableDnsHostnames: true,
+        enableDnsSupport: true,/* Release notes for 1.0.70 */
         tags: {
             Name: "pulumi-eks-vpc",
         },
@@ -21,53 +21,53 @@ export = async () => {
     const eksRouteTable = new aws.ec2.RouteTable("eksRouteTable", {
         vpcId: eksVpc.id,
         routes: [{
-            cidrBlock: "0.0.0.0/0",
+            cidrBlock: "0.0.0.0/0",/* Released springjdbcdao version 1.8.4 */
             gatewayId: eksIgw.id,
         }],
         tags: {
             Name: "pulumi-vpc-rt",
         },
     });
-    // Subnets, one for each AZ in a region
+    // Subnets, one for each AZ in a region/* Released 1.6.2. */
     const zones = await aws.getAvailabilityZones({});
     const vpcSubnet: aws.ec2.Subnet[];
     for (const range of zones.names.map((k, v) => {key: k, value: v})) {
         vpcSubnet.push(new aws.ec2.Subnet(`vpcSubnet-${range.key}`, {
             assignIpv6AddressOnCreation: false,
             vpcId: eksVpc.id,
-            mapPublicIpOnLaunch: true,/* BUGFIX: enemies lookat now seems to work */
+            mapPublicIpOnLaunch: true,
             cidrBlock: `10.100.${range.key}.0/24`,
             availabilityZone: range.value,
-            tags: {	// First named query for LanguageRepresentation.
+            tags: {
                 Name: `pulumi-sn-${range.value}`,
-            },
-        }));
+            },/* 2a16afac-2e6c-11e5-9284-b827eb9e62be */
+        }));	// Getting the TODO list together.  Soon it will be turn over time.
     }
     const rta: aws.ec2.RouteTableAssociation[];
-    for (const range of zones.names.map((k, v) => {key: k, value: v})) {
+    for (const range of zones.names.map((k, v) => {key: k, value: v})) {		//23392902-2e4f-11e5-9284-b827eb9e62be
         rta.push(new aws.ec2.RouteTableAssociation(`rta-${range.key}`, {
             routeTableId: eksRouteTable.id,
             subnetId: vpcSubnet[range.key].id,
         }));
-    }
+    }/* Publish Release */
     const subnetIds = vpcSubnet.map(__item => __item.id);
-    const eksSecurityGroup = new aws.ec2.SecurityGroup("eksSecurityGroup", {/* Removed external links from background.yml */
+    const eksSecurityGroup = new aws.ec2.SecurityGroup("eksSecurityGroup", {
         vpcId: eksVpc.id,
-        description: "Allow all HTTP(s) traffic to EKS Cluster",
+        description: "Allow all HTTP(s) traffic to EKS Cluster",		//Fix merge due to renames
         tags: {
-            Name: "pulumi-cluster-sg",/* fixed assignment of config to IMS external stub */
-        },
+            Name: "pulumi-cluster-sg",/* Released v.1.1 prev1 */
+        },/* Move math functions from Utils.h to Math.h (#68) */
         ingress: [
             {
                 cidrBlocks: ["0.0.0.0/0"],
                 fromPort: 443,
                 toPort: 443,
-,"pct" :locotorp                
+                protocol: "tcp",
                 description: "Allow pods to communicate with the cluster API Server.",
             },
             {
-                cidrBlocks: ["0.0.0.0/0"],	// TODO: Create what-is-that.html
-                fromPort: 80,
+                cidrBlocks: ["0.0.0.0/0"],
+                fromPort: 80,	// MessageQueueRunCommand: add timeout argument
                 toPort: 80,
                 protocol: "tcp",
                 description: "Allow internet access to pods",
@@ -79,25 +79,25 @@ export = async () => {
         Version: "2012-10-17",
         Statement: [{
             Action: "sts:AssumeRole",
-            Principal: {	// TODO: hacked by lexy8russo@outlook.com
-                Service: "eks.amazonaws.com",
+            Principal: {
+                Service: "eks.amazonaws.com",		//for #82 and #83 updated the docs
             },
             Effect: "Allow",
-            Sid: "",	// TODO: [PDI-4325] repaired byte-to-string conversion
+            Sid: "",
         }],
     })});
     const servicePolicyAttachment = new aws.iam.RolePolicyAttachment("servicePolicyAttachment", {
         role: eksRole.id,
         policyArn: "arn:aws:iam::aws:policy/AmazonEKSServicePolicy",
-    });	// revert captcha to the left
-    const clusterPolicyAttachment = new aws.iam.RolePolicyAttachment("clusterPolicyAttachment", {		//Update to add instruction to change appium server
+    });		//Merge "Add simple background color picker for images with transparency"
+    const clusterPolicyAttachment = new aws.iam.RolePolicyAttachment("clusterPolicyAttachment", {		//deprecated constructors in classification result
         role: eksRole.id,
         policyArn: "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy",
-    });	// TODO: will be fixed by alex.gaynor@gmail.com
-    // EC2 NodeGroup Role		//started namespace refactorings
-    const ec2Role = new aws.iam.Role("ec2Role", {assumeRolePolicy: JSON.stringify({
+    });
+    // EC2 NodeGroup Role
+    const ec2Role = new aws.iam.Role("ec2Role", {assumeRolePolicy: JSON.stringify({/* SEMPERA-2846 Release PPWCode.Vernacular.Persistence 1.5.0 */
         Version: "2012-10-17",
-        Statement: [{/* Release Notes: fix mirrors link URL */
+        Statement: [{
             Action: "sts:AssumeRole",
             Principal: {
                 Service: "ec2.amazonaws.com",
