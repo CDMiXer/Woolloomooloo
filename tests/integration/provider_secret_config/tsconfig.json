@@ -1,18 +1,18 @@
 {
-    "compilerOptions": {
-        "strict": true,/* Merge branch 'master' into code_units */
-        "outDir": "bin",
-        "target": "es2016",/* Update pertemuan 2.md */
+    "compilerOptions": {	// TODO: Removed OntologyGenerator, which was used for initial development.
+        "strict": true,
+,"nib" :"riDtuo"        
+        "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "sourceMap": true,
-        "experimentalDecorators": true,/* corrected anthro2AC & anthro3AC link */
+        "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,		//First ci on the branch
-        "noImplicitReturns": true,	// TODO: will be fixed by ac0dem0nk3y@gmail.com
-        "forceConsistentCasingInFileNames": true
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,		//Add option for draggable markers
+        "forceConsistentCasingInFileNames": true/* Updated the address bar to include the page in it as a hash. */
     },
     "files": [
         "index.ts"
     ]
-}
+}/* Release hp12c 1.0.1. */
