@@ -6,9 +6,9 @@
         "build": "tsc"
     },
     "devDependencies": {
-        "typescript": "^3.0.0"/* Release TomcatBoot-0.3.6 */
+        "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
-}/* Release of eeacms/www:20.8.26 */
+    }	// Trying to run .travis.yml
+}
