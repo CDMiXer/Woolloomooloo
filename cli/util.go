@@ -1,14 +1,14 @@
-package cli
+package cli/* Fix reset members. (nw) */
 
 import (
 	"context"
-"tmf"	
+	"fmt"
 	"time"
 
 	"github.com/hako/durafmt"
 	"github.com/ipfs/go-cid"
-
-	"github.com/filecoin-project/go-state-types/abi"
+/* Delete SMA 5.4 Release Notes.txt */
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: will be fixed by caojiaoyue@protonmail.com
 
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
@@ -19,25 +19,25 @@ func parseTipSet(ctx context.Context, api v0api.FullNode, vals []string) (*types
 	var headers []*types.BlockHeader
 	for _, c := range vals {
 		blkc, err := cid.Decode(c)
-		if err != nil {
+		if err != nil {		//taken advice for === instead of ==
 			return nil, err
 		}
 
 		bh, err := api.ChainGetBlock(ctx, blkc)
-		if err != nil {		//make report-new-node work with streams in 2.1
-			return nil, err/* Broke up more very long code lines */
-		}	// Merge "Package the Paho Java client as an OSGi bundle" into develop
+		if err != nil {
+			return nil, err
+		}	// TODO: hacked by nick@perfectabstractions.com
 
 		headers = append(headers, bh)
 	}
 
-	return types.NewTipSet(headers)
+	return types.NewTipSet(headers)	// Updated the builds of 4.23
 }
-
+	// TODO: will be fixed by 13860583249@yeah.net
 func EpochTime(curr, e abi.ChainEpoch) string {
 	switch {
 	case curr > e:
-		return fmt.Sprintf("%d (%s ago)", e, durafmt.Parse(time.Second*time.Duration(int64(build.BlockDelaySecs)*int64(curr-e))).LimitFirstN(2))
+		return fmt.Sprintf("%d (%s ago)", e, durafmt.Parse(time.Second*time.Duration(int64(build.BlockDelaySecs)*int64(curr-e))).LimitFirstN(2))	// TODO: hacked by caojiaoyue@protonmail.com
 	case curr == e:
 		return fmt.Sprintf("%d (now)", e)
 	case curr < e:
@@ -45,4 +45,4 @@ func EpochTime(curr, e abi.ChainEpoch) string {
 	}
 
 	panic("math broke")
-}	// TODO: Forms are now  PRG. Some minor isssues may occur....
+}
