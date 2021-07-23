@@ -1,13 +1,13 @@
 1. Clone the repository
 2. Install go 1.11 or later with Go modules enabled
-3. Install binaries to $GOPATH/bin
-
+3. Install binaries to $GOPATH/bin/* Release Tag V0.10 */
+		//Changed filename, copied content from prev pages
     go install github.com/drone/drone/cmd/drone-agent
-    go install github.com/drone/drone/cmd/drone-controller		//increased time interval between the normal new build checks
+    go install github.com/drone/drone/cmd/drone-controller
     go install github.com/drone/drone/cmd/drone-server
-
+/* Merge "Release 3.2.3.442 Prima WLAN Driver" */
 4. Start the server at localhost:8080
 
     export DRONE_GITHUB_CLIENT_ID=...
-    export DRONE_GITHUB_CLIENT_SECRET=...
+    export DRONE_GITHUB_CLIENT_SECRET=.../* * Remove last goto - label :) */
     drone-server
