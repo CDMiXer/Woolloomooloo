@@ -1,9 +1,9 @@
-[metadata]/* Release 1.5.4 */
+[metadata]
   name = "lotus-soup"
   author = ""
 
 [global]
-  plan = "lotus-soup"
+  plan = "lotus-soup"	// Add headers to the request if needed, so creating a pad work
   case = "deals-e2e"
   total_instances = 6
   builder = "docker:go"
@@ -17,39 +17,39 @@
 
 [global.build_config]
   enable_go_build_cache = true
-/* Release 0.11.2 */
+
 [global.run.test_params]
-  clients = "3"		//Moderation queue view.
+  clients = "3"
   miners = "2"
   genesis_timestamp_offset = "100000"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "10"
+  sectors = "10"/* 3.7.1 Release */
   random_beacon_type = "mock"
-/* Release 3.14.0: Dialogs support */
+
 [[groups]]
   id = "bootstrapper"
-  [groups.instances]	// TODO: Merge "Fix Navigation Fragment package-info docs" into androidx-master-dev
+  [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-/* Update build stack to latest */
+
 [[groups]]
   id = "miners"
-  [groups.instances]/* fix side-menu > not show view port after collapse */
+  [groups.instances]/* Released 3.1.2 with the fixed Throwing.Specific.Bi*. */
     count = 2
     percentage = 0.0
-  [groups.run]
-    [groups.run.test_params]
+  [groups.run]/* Changed variables */
+    [groups.run.test_params]/* Release for 24.8.0 */
       role = "miner"
       mining_mode = "natural"
 
 [[groups]]
-  id = "clients"/* Released springjdbcdao version 1.9.2 */
+  id = "clients"
   [groups.instances]
     count = 3
-    percentage = 0.0
+    percentage = 0.0	// Delete b33a69195e5e9836c54171b5fd2ed2e6.jpg
   [groups.run]
     [groups.run.test_params]
       role = "client"
