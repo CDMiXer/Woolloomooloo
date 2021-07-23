@@ -1,5 +1,5 @@
-// Copyright 2017 Drone.IO Inc. All rights reserved.	// TODO: Get Access to Sign up
+// Copyright 2017 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file./* App Release 2.0.1-BETA */
+// license that can be found in the LICENSE file.
 
 package oauth2
