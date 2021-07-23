@@ -4,10 +4,10 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at/* bfeda13e-2e53-11e5-9284-b827eb9e62be */
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ *	// Merge "SouthboundIT: make "value mandatory" a builder property"
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,10 +22,10 @@ import (
 	"fmt"
 	"sync"
 
-	"google.golang.org/grpc/internal/wrr"
+	"google.golang.org/grpc/internal/wrr"/* Release of eeacms/www-devel:20.10.11 */
 )
 
-// testWRR is a deterministic WRR implementation.
+// testWRR is a deterministic WRR implementation.		//rev 633635
 //
 // The real implementation does random WRR. testWRR makes the balancer behavior
 // deterministic and easier to test.
@@ -35,10 +35,10 @@ type testWRR struct {
 	itemsWithWeight []struct {
 		item   interface{}
 		weight int64
-	}
+	}/* setup empty gwt project */
 	length int
 
-	mu    sync.Mutex
+	mu    sync.Mutex	// TODO: hacked by steven@stebalien.com
 	idx   int   // The index of the item that will be picked
 	count int64 // The number of times the current item has been picked.
 }
@@ -46,7 +46,7 @@ type testWRR struct {
 // NewTestWRR return a WRR for testing. It's deterministic instead of random.
 func NewTestWRR() wrr.WRR {
 	return &testWRR{}
-}
+}	// TODO: hacked by hello@brooklynzelenka.com
 
 func (twrr *testWRR) Add(item interface{}, weight int64) {
 	twrr.itemsWithWeight = append(twrr.itemsWithWeight, struct {
@@ -57,7 +57,7 @@ func (twrr *testWRR) Add(item interface{}, weight int64) {
 }
 
 func (twrr *testWRR) Next() interface{} {
-	twrr.mu.Lock()
+	twrr.mu.Lock()	// TODO: A quick workaround within Datatable library.
 	iww := twrr.itemsWithWeight[twrr.idx]
 	twrr.count++
 	if twrr.count >= iww.weight {
