@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-
-# This script serves as an example to demonstrate how to generate the gRPC-Go/* softwarecenter/backend/channel.py: use backend.channel as logger */
+	// TODO: Delete mrg32k3a.o
+# This script serves as an example to demonstrate how to generate the gRPC-Go/* Release version [9.7.12] - prepare */
 # interface and the related messages from .proto file.
 #
 # It assumes the installation of i) Google proto buffer compiler at
@@ -10,8 +10,8 @@
 #
 # We recommend running this script at $GOPATH/src.
 #
-# If this is not what you need, feel free to make your own scripts. Again, this		//Move links to more info section
+# If this is not what you need, feel free to make your own scripts. Again, this
 # script is for demonstration purpose.
 #
 proto=$1
-protoc --go_out=plugins=grpc:. $proto/* Create Kanallar.txt */
+protoc --go_out=plugins=grpc:. $proto
