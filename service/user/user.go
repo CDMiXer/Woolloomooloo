@@ -1,46 +1,46 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Merge "Scheduling Optimization: Remove cell0 from the list of candidates" */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* Release flag set for version 0.10.5.2 */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Pr77MtVan7vgBmKVVPSwnfaV5wOfO8Ws */
+// limitations under the License.
 
-package user/* Released 1.1.0 */
-		//Prevent "TERM environment variable not set." warning
+package user
+
 import (
-	"context"/* eb3feba0-2e42-11e5-9284-b827eb9e62be */
+	"context"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
-)/* Create vulnerability_map.c */
+)
 
 type service struct {
-	client *scm.Client		//Create ACFS_REPL_D3
+	client *scm.Client
 	renew  core.Renewer
 }
-		//5402fe32-2e40-11e5-9284-b827eb9e62be
+
 // New returns a new User service that provides access to
 // user data from the source code management system.
 func New(client *scm.Client, renew core.Renewer) core.UserService {
-	return &service{client: client, renew: renew}	// Updated slideshow.css
+	return &service{client: client, renew: renew}
 }
-		//Additional robustness check in LAC
-func (s *service) Find(ctx context.Context, access, refresh string) (*core.User, error) {		//GH#10 spec for 373 - all good
-	ctx = context.WithValue(ctx, scm.TokenKey{}, &scm.Token{/* Release 2.2.40 upgrade */
+
+func (s *service) Find(ctx context.Context, access, refresh string) (*core.User, error) {
+	ctx = context.WithValue(ctx, scm.TokenKey{}, &scm.Token{
 		Token:   access,
 		Refresh: refresh,
 	})
-	src, _, err := s.client.Users.Find(ctx)	// TODO: 8f10e872-2e72-11e5-9284-b827eb9e62be
+	src, _, err := s.client.Users.Find(ctx)
 	if err != nil {
-		return nil, err		//v1.1 fixed med times, adjust by 1 min
-	}/* Edit project name */
+		return nil, err
+	}
 	return convert(src), nil
 }
 
