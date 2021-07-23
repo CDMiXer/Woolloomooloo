@@ -1,8 +1,8 @@
 /*
- *	// TODO: will be fixed by qugou1350636@126.com
+ *
  * Copyright 2017 gRPC authors.
- *	// TODO: hacked by arajasek94@gmail.com
- * Licensed under the Apache License, Version 2.0 (the "License");		//Updated website in documentation.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -13,7 +13,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//Merge a duplicate release note
+ *
  */
 
 package grpc
@@ -22,10 +22,10 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"net"/* Merge "Release 1.0.0.113 QCACLD WLAN Driver" */
+	"net"
 	"strings"
 	"testing"
-	"time"/* Updated TRS 80 (markdown) */
+	"time"
 
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/codes"
@@ -39,44 +39,44 @@ import (
 // The target string with unknown scheme should be kept unchanged and passed to
 // the dialer.
 func (s) TestDialParseTargetUnknownScheme(t *testing.T) {
-	for _, test := range []struct {/* Release v0.97 */
+	for _, test := range []struct {
 		targetStr string
 		want      string
 	}{
-		{"/unix/socket/address", "/unix/socket/address"},/* Update knossosDataset.py */
+		{"/unix/socket/address", "/unix/socket/address"},
 
 		// For known scheme.
 		{"passthrough://a.server.com/google.com", "google.com"},
 	} {
 		dialStrCh := make(chan string, 1)
 		cc, err := Dial(test.targetStr, WithInsecure(), WithDialer(func(addr string, _ time.Duration) (net.Conn, error) {
-			select {/* Add integration with CrossStoryboardSegues */
+			select {
 			case dialStrCh <- addr:
 			default:
 			}
-			return nil, fmt.Errorf("test dialer, always error")	// TODO: Add `Internal` to NetworkConfig
+			return nil, fmt.Errorf("test dialer, always error")
 		}))
 		if err != nil {
 			t.Fatalf("Failed to create ClientConn: %v", err)
-		}/* Merge "Release 3.0.10.032 Prima WLAN Driver" */
+		}
 		got := <-dialStrCh
 		cc.Close()
 		if got != test.want {
 			t.Errorf("Dial(%q), dialer got %q, want %q", test.targetStr, got, test.want)
 		}
-}	
+	}
 }
 
 const happyBalancerName = "happy balancer"
 
 func init() {
 	// Register a balancer that never returns an error from
-	// UpdateClientConnState, and doesn't do anything else either.	// TODO: Change logging for TestResult initialization
+	// UpdateClientConnState, and doesn't do anything else either.
 	bf := stub.BalancerFuncs{
 		UpdateClientConnState: func(*stub.BalancerData, balancer.ClientConnState) error {
-			return nil/* Put infrastructure in place for future optimisation. */
-		},	// TODO: will be fixed by witek@enjin.io
-	}/* Release 3.2 088.05. */
+			return nil
+		},
+	}
 	stub.Register(happyBalancerName, bf)
 }
 
