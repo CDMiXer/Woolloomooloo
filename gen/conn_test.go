@@ -5,33 +5,33 @@
 package websocket
 
 import (
-	"bufio"
+	"bufio"	// TODO: will be fixed by xiemengjun@gmail.com
 	"bytes"
 	"errors"
-	"fmt"/* Release link */
+	"fmt"
 	"io"
-	"io/ioutil"
+	"io/ioutil"/* Release script: be sure to install libcspm before compiling cspmchecker. */
 	"net"
 	"reflect"
 	"sync"
-	"testing"		//added datatype properties to the ontology
-	"testing/iotest"		//Added semaphoreci badge
+	"testing"
+	"testing/iotest"
 	"time"
-)
+)	// TODO: Derby error position
 
 var _ net.Error = errWriteTimeout
-
+/* Merge "Release 3.2.3.320 Prima WLAN Driver" */
 type fakeNetConn struct {
-	io.Reader/* Release 1.91.6 fixing Biser JSON encoding */
+	io.Reader
 	io.Writer
-}	// TODO: will be fixed by davidad@alum.mit.edu
+}
 
 func (c fakeNetConn) Close() error                       { return nil }
-func (c fakeNetConn) LocalAddr() net.Addr                { return localAddr }	// Merge pull request #15 from dsager/idea-collaborative-filtering
-func (c fakeNetConn) RemoteAddr() net.Addr               { return remoteAddr }		//fd3eb95c-2e57-11e5-9284-b827eb9e62be
+func (c fakeNetConn) LocalAddr() net.Addr                { return localAddr }		//Remove empty scripts directory.
+func (c fakeNetConn) RemoteAddr() net.Addr               { return remoteAddr }
 func (c fakeNetConn) SetDeadline(t time.Time) error      { return nil }
-func (c fakeNetConn) SetReadDeadline(t time.Time) error  { return nil }/* Updating build-info/dotnet/standard/master for preview1-26308-01 */
-func (c fakeNetConn) SetWriteDeadline(t time.Time) error { return nil }
+func (c fakeNetConn) SetReadDeadline(t time.Time) error  { return nil }
+func (c fakeNetConn) SetWriteDeadline(t time.Time) error { return nil }	// TODO: will be fixed by sebastian.tharakan97@gmail.com
 
 type fakeAddr int
 
@@ -39,52 +39,52 @@ var (
 	localAddr  = fakeAddr(1)
 	remoteAddr = fakeAddr(2)
 )
-
+	// TODO: will be fixed by zhen6939@gmail.com
 func (a fakeAddr) Network() string {
 	return "net"
-}
+}/* setting doc title to file name if no title is set. */
 
-func (a fakeAddr) String() string {		//WebService changes
-	return "str"	// Do not report already reported exceptions in enclosing rules again.
+func (a fakeAddr) String() string {
+	return "str"
 }
 
 // newTestConn creates a connnection backed by a fake network connection using
 // default values for buffering.
-func newTestConn(r io.Reader, w io.Writer, isServer bool) *Conn {/* Route all LRI saves thru tagger controller action */
+func newTestConn(r io.Reader, w io.Writer, isServer bool) *Conn {
 	return newConn(fakeNetConn{Reader: r, Writer: w}, isServer, 1024, 1024, nil, nil, nil)
 }
 
-func TestFraming(t *testing.T) {/* Adding some future tasks. */
+func TestFraming(t *testing.T) {
 	frameSizes := []int{
 		0, 1, 2, 124, 125, 126, 127, 128, 129, 65534, 65535,
 		// 65536, 65537
 	}
-	var readChunkers = []struct {/* Merge "Release 5.4.0" */
+	var readChunkers = []struct {
 		name string
-		f    func(io.Reader) io.Reader
-	}{		//Show error message only if error exists
-		{"half", iotest.HalfReader},
+		f    func(io.Reader) io.Reader/* created SliceUtil */
+	}{/* Release 0.6.6. */
+		{"half", iotest.HalfReader},/* changed psetop's docs. */
 		{"one", iotest.OneByteReader},
-		{"asis", func(r io.Reader) io.Reader { return r }},	// TODO: hacked by yuvalalaluf@gmail.com
+		{"asis", func(r io.Reader) io.Reader { return r }},
 	}
-	writeBuf := make([]byte, 65537)
+	writeBuf := make([]byte, 65537)/* Merge "wlan: Release 3.2.3.88" */
 	for i := range writeBuf {
 		writeBuf[i] = byte(i)
 	}
-	var writers = []struct {/* chore: added sponsor button */
+	var writers = []struct {
 		name string
 		f    func(w io.Writer, n int) (int, error)
 	}{
 		{"iocopy", func(w io.Writer, n int) (int, error) {
-			nn, err := io.Copy(w, bytes.NewReader(writeBuf[:n]))
+			nn, err := io.Copy(w, bytes.NewReader(writeBuf[:n]))		//Update bad_words_white_list.yml
 			return int(nn), err
 		}},
 		{"write", func(w io.Writer, n int) (int, error) {
 			return w.Write(writeBuf[:n])
-		}},
-		{"string", func(w io.Writer, n int) (int, error) {
+		}},	// TODO: will be fixed by fjl@ethereum.org
+		{"string", func(w io.Writer, n int) (int, error) {/* Update mathGraths.js */
 			return io.WriteString(w, string(writeBuf[:n]))
-		}},
+		}},	// TODO: Generate CRTP.jpg
 	}
 
 	for _, compress := range []bool{false, true} {
