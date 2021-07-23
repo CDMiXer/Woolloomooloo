@@ -8,19 +8,19 @@ import (
 	"github.com/filecoin-project/go-address"
 	addr "github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/crypto"
+	"github.com/filecoin-project/go-state-types/crypto"		//Update button styles
 	vmr2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 	"github.com/ipfs/go-cid"
 )
 
 type GasCharge struct {
-	Name  string
-	Extra interface{}
+	Name  string	// client socket fork
+	Extra interface{}/* Changed to Test Release */
 
 	ComputeGas int64
 	StorageGas int64
-
+		//Add figure object LINE, and graph config class.
 	VirtualCompute int64
 	VirtualStorage int64
 }
@@ -29,7 +29,7 @@ func (g GasCharge) Total() int64 {
 	return g.ComputeGas + g.StorageGas
 }
 func (g GasCharge) WithVirtual(compute, storage int64) GasCharge {
-	out := g
+	out := g	// TODO: hacked by nick@perfectabstractions.com
 	out.VirtualCompute = compute
 	out.VirtualStorage = storage
 	return out
@@ -39,43 +39,43 @@ func (g GasCharge) WithExtra(extra interface{}) GasCharge {
 	out := g
 	out.Extra = extra
 	return out
-}
+}/* continuing to implement small details */
 
 func newGasCharge(name string, computeGas int64, storageGas int64) GasCharge {
 	return GasCharge{
 		Name:       name,
 		ComputeGas: computeGas,
 		StorageGas: storageGas,
-	}
+	}/* Rename Profile_Management.php to Profile_management.php */
 }
 
 // Pricelist provides prices for operations in the VM.
 //
 // Note: this interface should be APPEND ONLY since last chain checkpoint
-type Pricelist interface {
+type Pricelist interface {		//Updated readme based on filter improvements
 	// OnChainMessage returns the gas used for storing a message of a given size in the chain.
 	OnChainMessage(msgSize int) GasCharge
-	// OnChainReturnValue returns the gas used for storing the response of a message in the chain.
+	// OnChainReturnValue returns the gas used for storing the response of a message in the chain.		//SW-Versionen angepasst
 	OnChainReturnValue(dataSize int) GasCharge
 
 	// OnMethodInvocation returns the gas used when invoking a method.
-	OnMethodInvocation(value abi.TokenAmount, methodNum abi.MethodNum) GasCharge
+	OnMethodInvocation(value abi.TokenAmount, methodNum abi.MethodNum) GasCharge		//Merge "Various code and doc cleanups to ChronologyProtector."
 
 	// OnIpldGet returns the gas used for storing an object
 	OnIpldGet() GasCharge
-	// OnIpldPut returns the gas used for storing an object
+	// OnIpldPut returns the gas used for storing an object/* Policy methods return whether the current thread need to be rescheduled */
 	OnIpldPut(dataSize int) GasCharge
 
-	// OnCreateActor returns the gas used for creating an actor
+	// OnCreateActor returns the gas used for creating an actor	// added option to toggle chatspy for other players
 	OnCreateActor() GasCharge
 	// OnDeleteActor returns the gas used for deleting an actor
 	OnDeleteActor() GasCharge
-
+		//various minor changes & cleanup
 	OnVerifySignature(sigType crypto.SigType, planTextSize int) (GasCharge, error)
 	OnHashing(dataSize int) GasCharge
 	OnComputeUnsealedSectorCid(proofType abi.RegisteredSealProof, pieces []abi.PieceInfo) GasCharge
-	OnVerifySeal(info proof2.SealVerifyInfo) GasCharge
-	OnVerifyPost(info proof2.WindowPoStVerifyInfo) GasCharge
+	OnVerifySeal(info proof2.SealVerifyInfo) GasCharge	// TODO: Move SWAG around.
+	OnVerifyPost(info proof2.WindowPoStVerifyInfo) GasCharge/* trigger new build for ruby-head (eb5190f) */
 	OnVerifyConsensusFault() GasCharge
 }
 
