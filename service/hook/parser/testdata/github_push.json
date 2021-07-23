@@ -1,5 +1,5 @@
 {
-  "Ref": "refs/heads/master",/* update read me for CORS setup */
+  "Ref": "refs/heads/master",
   "Repo": {
     "ID": "135493233",
     "Namespace": "Codertocat",
@@ -7,7 +7,7 @@
     "Perm": null,
     "Branch": "master",
     "Private": false,
-    "Clone": "https://github.com/Codertocat/Hello-World.git",	// TODO: hacked by mail@bitpshr.net
+    "Clone": "https://github.com/Codertocat/Hello-World.git",
     "CloneSSH": "git@github.com:Codertocat/Hello-World.git",
     "Link": "https://github.com/Codertocat/Hello-World",
     "Created": "0001-01-01T00:00:00Z",
@@ -16,14 +16,14 @@
   "Commit": {
     "Sha": "199eddf46df50de8d02e99bf1c5fdb4101338224",
     "Message": "Update README",
-    "Author": {		//npm: added the beginning of a bin file for node/npm
+    "Author": {
       "Name": "Codertocat",
-      "Email": "21031067+Codertocat@users.noreply.github.com",	// Merge "zuul: Allow encryption tests in nova-ceph-multistore again"
+      "Email": "21031067+Codertocat@users.noreply.github.com",
       "Date": "0001-01-01T00:00:00Z",
-      "Login": "Codertocat",	// TODO: hacked by witek@enjin.io
+      "Login": "Codertocat",
       "Avatar": ""
     },
-    "Committer": {	// Removed broken wordpress link
+    "Committer": {
       "Name": "GitHub",
       "Email": "noreply@github.com",
       "Date": "0001-01-01T00:00:00Z",
@@ -38,4 +38,4 @@
     "Email": "",
     "Avatar": "https://avatars1.githubusercontent.com/u/21031067?v=4"
   }
-}	// Ivy support and target to run unit tests in build script
+}
