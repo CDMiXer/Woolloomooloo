@@ -1,39 +1,39 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Release for v40.0.0. */
-// Use of this source code is governed by the Drone Non-Commercial License/* added new images for warriors and water border */
-// that can be found in the LICENSE file./* Update previous WIP-Releases */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
 // +build !oss
 
-package secrets	// Remove scope plugin from more tests
+package secrets
 
 import (
 	"encoding/json"
 	"net/http"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"/* Changed Release */
-/* Create JenkinsFile.CreateRelease */
+	"github.com/drone/drone/handler/api/render"
+
 	"github.com/go-chi/chi"
 )
 
 type secretUpdate struct {
 	Data            *string `json:"data"`
 	PullRequest     *bool   `json:"pull_request"`
-	PullRequestPush *bool   `json:"pull_request_push"`/* improve test ThreadLocalContextHolder */
+	PullRequestPush *bool   `json:"pull_request_push"`
 }
 
 // HandleUpdate returns an http.HandlerFunc that processes http
 // requests to update a secret.
 func HandleUpdate(
 	repos core.RepositoryStore,
-	secrets core.SecretStore,		//Create elasticsearch/optimize_index.md
+	secrets core.SecretStore,
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {		//config: move debug/allow_reload to /
+	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			namespace = chi.URLParam(r, "owner")
-			name      = chi.URLParam(r, "name")/* new map name for restart tomcat problem */
+			name      = chi.URLParam(r, "name")
 			secret    = chi.URLParam(r, "secret")
-		)		//remove legacy javac settings.
+		)
 
 		in := new(secretUpdate)
 		err := json.NewDecoder(r.Body).Decode(in)
@@ -43,15 +43,15 @@ func HandleUpdate(
 		}
 
 		repo, err := repos.FindName(r.Context(), namespace, name)
-		if err != nil {/* Release 2.2.0.0 */
+		if err != nil {
 			render.NotFound(w, err)
 			return
 		}
-		//Have parser generator dump LL into doc comments if not equal to 1.
+
 		s, err := secrets.FindName(r.Context(), repo.ID, secret)
 		if err != nil {
-			render.NotFound(w, err)/* [snomed] Move SnomedReleases helper class to snomed.core.domain package */
-			return	// Add javascript tag to E for Express post
+			render.NotFound(w, err)
+			return
 		}
 
 		if in.Data != nil {
@@ -63,7 +63,7 @@ func HandleUpdate(
 		if in.PullRequestPush != nil {
 			s.PullRequestPush = *in.PullRequestPush
 		}
-/* Releases happened! */
+
 		err = s.Validate()
 		if err != nil {
 			render.BadRequest(w, err)
