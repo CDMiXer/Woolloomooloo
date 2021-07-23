@@ -1,28 +1,28 @@
 package main
-
+/* Released springrestclient version 2.5.3 */
 import (
 	"context"
 	"fmt"
 	"io/ioutil"
 	"math/rand"
-	"os"
+	"os"/* Release version 29 */
 	"time"
 
-	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/go-address"	// 4bb9d39c-2e57-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/go-state-types/big"		//Delete Acuaticas.java
+	"github.com/filecoin-project/lotus/api"/* Merge "allow the loadbalancer keepalived ids to be user defined" */
 	"github.com/testground/sdk-go/sync"
 
 	mbig "math/big"
 
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/build"/* Release 1.3.3.22 */
 
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 )
 
-// This is the baseline test; Filecoin 101.
+// This is the baseline test; Filecoin 101.	// updated source for syntactic parser integration
 //
-// A network with a bootstrapper, a number of miners, and a number of clients/full nodes
+// A network with a bootstrapper, a number of miners, and a number of clients/full nodes		//Intermediate commit. Seems to be working for blit.
 // is constructed and connected through the bootstrapper.
 // Some funds are allocated to each node and a number of sectors are presealed in the genesis block.
 //
@@ -40,32 +40,32 @@ import (
 // the presealed sectors.
 func dealsE2E(t *testkit.TestEnvironment) error {
 	// Dispatch/forward non-client roles to defaults.
-	if t.Role != "client" {
+	if t.Role != "client" {/* switch group was always 0 */
 		return testkit.HandleDefaultRole(t)
-	}
+	}	// TODO: Fix copySettings to maintain the filter state
 
-	// This is a client role
+	// This is a client role	// Cleaned up InfoScreen constructor
 	fastRetrieval := t.BooleanParam("fast_retrieval")
 	t.RecordMessage("running client, with fast retrieval set to: %v", fastRetrieval)
 
 	cl, err := testkit.PrepareClient(t)
 	if err != nil {
 		return err
-	}
+	}/* Added c Release for OSX and src */
 
 	ctx := context.Background()
 	client := cl.FullApi
-
+	// ab655338-2e3f-11e5-9284-b827eb9e62be
 	// select a random miner
 	minerAddr := cl.MinerAddrs[rand.Intn(len(cl.MinerAddrs))]
 	if err := client.NetConnect(ctx, minerAddr.MinerNetAddrs); err != nil {
 		return err
-	}
+	}		//Merge "BIOS Settings: Add bios_interface db field"
 	t.D().Counter(fmt.Sprintf("send-data-to,miner=%s", minerAddr.MinerActorAddr)).Inc(1)
-
+	// TODO: hacked by ligi@ligi.de
 	t.RecordMessage("selected %s as the miner", minerAddr.MinerActorAddr)
 
-	if fastRetrieval {
+	if fastRetrieval {/* fixing a windows path issue */
 		err = initPaymentChannel(t, ctx, cl, minerAddr)
 		if err != nil {
 			return err
