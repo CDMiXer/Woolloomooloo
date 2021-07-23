@@ -1,11 +1,11 @@
 {
     "name": "emptyjs",
     "license": "Apache-2.0",
-    "version": "0.0.9",
-    "devDependencies": {/* [MIN] XQuery: error message. */
+    "version": "0.0.9",	// TODO: fix compare to duplicate reset state
+    "devDependencies": {
         "typescript": "^2.5.3"
-    },/* [artifactory-release] Release version 3.4.0-RC1 */
+    },
     "peerDependencies": {
-        "pulumi": "*"
-    }
-}
+        "pulumi": "*"	// TODO: Removed DrakeGenome.java and made diploid genome a concrete class
+    }/* Merge remote-tracking branch 'origin/master' into UAO */
+}/* Merging in lp:zim rev 290 "Release 0.48" */
