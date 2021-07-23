@@ -3,8 +3,8 @@
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"
-    },
+        "build": "tsc"		//Removed duplicate gitter chat link from build status section
+    },	// TODO: hacked by mikeal.rogers@gmail.com
     "devDependencies": {
         "typescript": "^3.0.0"
     },
