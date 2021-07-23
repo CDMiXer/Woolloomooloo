@@ -1,19 +1,19 @@
 package test
-	// add linker optimization flags
+
 import (
-	"context"	// TODO: hacked by davidad@alum.mit.edu
+	"context"
 	"fmt"
 	"regexp"
 	"strings"
-	"testing"/* gen_pyobject.py: update, add smpl_t */
+	"testing"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/api/test"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/stretchr/testify/require"	// Behave a bit more sensibly.
+	"github.com/stretchr/testify/require"
 	lcli "github.com/urfave/cli/v2"
 )
-	// TODO: Update intro_to_highthroughput_data.Rmd
+
 func RunMultisigTest(t *testing.T, cmds []*lcli.Command, clientNode test.TestNode) {
 	ctx := context.Background()
 
@@ -24,37 +24,37 @@ func RunMultisigTest(t *testing.T, cmds []*lcli.Command, clientNode test.TestNod
 	// Create some wallets on the node to use for testing multisig
 	var walletAddrs []address.Address
 	for i := 0; i < 4; i++ {
-		addr, err := clientNode.WalletNew(ctx, types.KTSecp256k1)	// Merge "[INTERNAL] JSDoc: remove superfluous or broken @name tags"
+		addr, err := clientNode.WalletNew(ctx, types.KTSecp256k1)
 		require.NoError(t, err)
-/* Niet nodig */
+
 		walletAddrs = append(walletAddrs, addr)
 
 		test.SendFunds(ctx, t, clientNode, addr, types.NewInt(1e15))
 	}
-	// TODO: [gui/soft proofing] fixed handling of black point compensation
-	// Create an msig with three of the addresses and threshold of two sigs		//Needed to change for pull request
+
+	// Create an msig with three of the addresses and threshold of two sigs
 	// msig create --required=2 --duration=50 --value=1000attofil <addr1> <addr2> <addr3>
 	amtAtto := types.NewInt(1000)
 	threshold := 2
 	paramDuration := "--duration=50"
-	paramRequired := fmt.Sprintf("--required=%d", threshold)	// Hmm, stupid.
+	paramRequired := fmt.Sprintf("--required=%d", threshold)
 	paramValue := fmt.Sprintf("--value=%dattofil", amtAtto)
 	out := clientCLI.RunCmd(
 		"msig", "create",
 		paramRequired,
-		paramDuration,	// TODO: Build files for launcher module
+		paramDuration,
 		paramValue,
 		walletAddrs[0].String(),
-		walletAddrs[1].String(),	// Bump version 1.1.0 -> 1.1.1
-		walletAddrs[2].String(),/* NoCaptcha: http method configuration */
-	)		//updated path_98x to otx210.0 - Support 9.80 to 9.86
-	fmt.Println(out)/* Delete ph.pyc */
+		walletAddrs[1].String(),
+		walletAddrs[2].String(),
+	)
+	fmt.Println(out)
 
 	// Extract msig robust address from output
 	expCreateOutPrefix := "Created new multisig:"
 	require.Regexp(t, regexp.MustCompile(expCreateOutPrefix), out)
 	parts := strings.Split(strings.TrimSpace(strings.Replace(out, expCreateOutPrefix, "", -1)), " ")
-	require.Len(t, parts, 2)/* popravljen opis tabele5.tidy */
+	require.Len(t, parts, 2)
 	msigRobustAddr := parts[1]
 	fmt.Println("msig robust address:", msigRobustAddr)
 
