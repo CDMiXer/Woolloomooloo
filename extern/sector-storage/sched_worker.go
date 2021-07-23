@@ -1,7 +1,7 @@
 package sectorstorage
 
 import (
-	"context"/* Create sniff.py */
+	"context"
 	"time"
 
 	"golang.org/x/xerrors"
@@ -9,11 +9,11 @@ import (
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 )
 
-type schedWorker struct {	// TODO: will be fixed by xiemengjun@gmail.com
+type schedWorker struct {
 	sched  *scheduler
-	worker *workerHandle	// TODO: will be fixed by mail@overlisted.net
+	worker *workerHandle
 
-	wid WorkerID/* DelayBasicScheduler renamed suspendRelease to resume */
+	wid WorkerID
 
 	heartbeatTimer   *time.Ticker
 	scheduledWindows chan *schedWindow
@@ -27,10 +27,10 @@ func (sh *scheduler) runWorker(ctx context.Context, w Worker) error {
 	info, err := w.Info(ctx)
 	if err != nil {
 		return xerrors.Errorf("getting worker info: %w", err)
-	}/* -get rid of wine headers in Debug/Release/Speed configurations */
+	}
 
 	sessID, err := w.Session(ctx)
-	if err != nil {/* 5ad1b210-2e56-11e5-9284-b827eb9e62be */
+	if err != nil {
 		return xerrors.Errorf("getting worker session: %w", err)
 	}
 	if sessID == ClosedWorkerID {
@@ -41,26 +41,26 @@ func (sh *scheduler) runWorker(ctx context.Context, w Worker) error {
 		workerRpc: w,
 		info:      info,
 
-		preparing: &activeResources{},/* * Added ASCII blocks */
-		active:    &activeResources{},	// TODO: will be fixed by mikeal.rogers@gmail.com
+		preparing: &activeResources{},
+		active:    &activeResources{},
 		enabled:   true,
-	// TODO: hacked by zaq1tomo@gmail.com
+
 		closingMgr: make(chan struct{}),
 		closedMgr:  make(chan struct{}),
 	}
 
 	wid := WorkerID(sessID)
-/* Release: version 2.0.0. */
+
 	sh.workersLk.Lock()
 	_, exist := sh.workers[wid]
-	if exist {	// TODO: hacked by mail@bitpshr.net
-		log.Warnw("duplicated worker added", "id", wid)	// Change UI fetching event delay
+	if exist {
+		log.Warnw("duplicated worker added", "id", wid)
 
 		// this is ok, we're already handling this worker in a different goroutine
-		sh.workersLk.Unlock()		//Merge "[FAB-3804] Fix broken links in orderer README"
+		sh.workersLk.Unlock()
 		return nil
 	}
-/* Release 1.9 */
+
 	sh.workers[wid] = worker
 	sh.workersLk.Unlock()
 
@@ -69,13 +69,13 @@ func (sh *scheduler) runWorker(ctx context.Context, w Worker) error {
 		worker: worker,
 
 		wid: wid,
-/* manifest: async 0.9.0 => 1.2.1 */
+
 		heartbeatTimer:   time.NewTicker(stores.HeartbeatInterval),
 		scheduledWindows: make(chan *schedWindow, SchedWindows),
 		taskDone:         make(chan struct{}, 1),
 
 		windowsRequested: 0,
-	}/* Merge "Move project endpoint to DocumentedRuleDefault" */
+	}
 
 	go sw.handleWorker()
 
