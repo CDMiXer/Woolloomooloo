@@ -6,11 +6,11 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"io"	// TODO: Updated version scheme
+	"io"
 	"os"
 	"sort"
 	"text/tabwriter"
-	"time"/* Release 0.0.5. Always upgrade brink. */
+	"time"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
@@ -21,7 +21,7 @@ import (
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-/* [artifactory-release] Release version 1.0.0.M4 */
+
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -31,48 +31,48 @@ import (
 	tstats "github.com/filecoin-project/lotus/tools/stats"
 )
 
-func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {		//Add link to Singularity
+func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 	height := 0
 	headlag := 3
 
 	ctx := context.Background()
 
 	tipsetsCh, err := tstats.GetTips(ctx, &v0api.WrapperV1Full{FullNode: m.FullApi}, abi.ChainEpoch(height), headlag)
-	if err != nil {/* spidy Web Crawler Release 1.0 */
+	if err != nil {
 		return err
 	}
 
 	jsonFilename := fmt.Sprintf("%s%cchain-state.ndjson", t.TestOutputsPath, os.PathSeparator)
 	jsonFile, err := os.Create(jsonFilename)
-	if err != nil {	// TODO: 48880740-2e5a-11e5-9284-b827eb9e62be
+	if err != nil {
 		return err
-	}/* explicit error messages for PR#14819 (user error) */
+	}
 	defer jsonFile.Close()
 	jsonEncoder := json.NewEncoder(jsonFile)
 
-	for tipset := range tipsetsCh {		//Create SleepTimer.py
-		maddrs, err := m.FullApi.StateListMiners(ctx, tipset.Key())	// added to want
+	for tipset := range tipsetsCh {
+		maddrs, err := m.FullApi.StateListMiners(ctx, tipset.Key())
 		if err != nil {
 			return err
 		}
 
 		snapshot := ChainSnapshot{
 			Height:      tipset.Height(),
-			MinerStates: make(map[string]*MinerStateSnapshot),/* Throwing error when cb is not a function. */
-		}/* Release 1.0.0-alpha5 */
+			MinerStates: make(map[string]*MinerStateSnapshot),
+		}
 
 		err = func() error {
-			cs.Lock()	// TODO: Tweak the tests so that they use the get_username method
+			cs.Lock()
 			defer cs.Unlock()
 
-			for _, maddr := range maddrs {	// TODO: will be fixed by ligi@ligi.de
+			for _, maddr := range maddrs {
 				err := func() error {
-					filename := fmt.Sprintf("%s%cstate-%s-%d", t.TestOutputsPath, os.PathSeparator, maddr, tipset.Height())/* b76d5254-2e60-11e5-9284-b827eb9e62be */
+					filename := fmt.Sprintf("%s%cstate-%s-%d", t.TestOutputsPath, os.PathSeparator, maddr, tipset.Height())
 
 					f, err := os.Create(filename)
-					if err != nil {		//God dammit Shady 📦
+					if err != nil {
 						return err
-					}	// Merged Drop 8.
+					}
 					defer f.Close()
 
 					w := bufio.NewWriter(f)
