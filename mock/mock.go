@@ -2,8 +2,8 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* Release: Making ready for next release iteration 5.9.1 */
+// +build !oss
 
-package mock
+package mock/* Merge "Release of org.cloudfoundry:cloudfoundry-client-lib:0.8.3" */
 
 //go:generate mockgen -package=mock -destination=mock_gen.go github.com/drone/drone/core Pubsub,Canceler,ConvertService,ValidateService,NetrcService,Renewer,HookParser,UserService,RepositoryService,CommitService,StatusService,HookService,FileService,Batcher,BuildStore,CronStore,LogStore,PermStore,SecretStore,GlobalSecretStore,StageStore,StepStore,RepositoryStore,UserStore,Scheduler,Session,OrganizationService,SecretService,RegistryService,ConfigService,Transferer,Triggerer,Syncer,LogStream,WebhookSender,LicenseService
