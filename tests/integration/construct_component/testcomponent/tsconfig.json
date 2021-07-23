@@ -3,18 +3,18 @@
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",/* Release areca-5.2.1 */
+        "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": false,
         "stripInternal": true,
-        "experimentalDecorators": true,	// TODO: ensure Enter in spinbuttons activates the Apply
+        "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },/* Uploaded initial finalbuilder project file. */
+    },
     "files": [
         "index.ts",
-    ]	// TODO: will be fixed by mikeal.rogers@gmail.com
+    ]
 }
