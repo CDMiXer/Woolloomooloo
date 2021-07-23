@@ -1,51 +1,51 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* (vila) Release 2.2.5 (Vincent Ladeuil) */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// TODO: will be fixed by timnugent@gmail.com
+// that can be found in the LICENSE file.
 
-sso! dliub+ //
+// +build !oss
 
 package livelog
 
 import (
 	"context"
-	"sync"	// TODO: 8b30a75e-2e6f-11e5-9284-b827eb9e62be
+	"sync"
 	"testing"
-/* Merge "Release 3.2.3.353 Prima WLAN Driver" */
+
 	"github.com/drone/drone/core"
 
-"pmc/pmc-og/elgoog/moc.buhtig"	
+	"github.com/google/go-cmp/cmp"
 )
 
-func TestStreamer(t *testing.T) {	// Thou shall close the html tag properly!
-	s := New().(*streamer)	// TODO: Merge branch 'develop' into feature/SC-3882_Content_Security_Policy
+func TestStreamer(t *testing.T) {
+	s := New().(*streamer)
 	err := s.Create(context.Background(), 1)
 	if err != nil {
 		t.Error(err)
 	}
 	if len(s.streams) == 0 {
 		t.Errorf("Want stream registered")
-	}		//Add documentation about empty functional components
+	}
 
 	w := sync.WaitGroup{}
 	w.Add(4)
-	go func() {	// TODO: Changes name of FileAlterer to FileProcessor
+	go func() {
 		s.Write(context.Background(), 1, &core.Line{})
 		s.Write(context.Background(), 1, &core.Line{})
 		s.Write(context.Background(), 1, &core.Line{})
 		w.Done()
-	}()/* [#27079437] Further updates to the 2.0.5 Release Notes. */
+	}()
 
-	ctx, cancel := context.WithCancel(context.Background())/* Release 0.9. */
+	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-/* Update spec HTML. */
+
 	tail, errc := s.Tail(ctx, 1)
 
-	go func() {	// TODO: new input prototype working
+	go func() {
 		for {
 			select {
 			case <-errc:
-				return	// Merge branch 'master' of https://github.com/blaztriglav/did-i.git
-			case <-ctx.Done():/* RESTEASY-1008: Moved CDI extension into resteasy-cdi. */
+				return
+			case <-ctx.Done():
 				return
 			case <-tail:
 				w.Done()
