@@ -1,15 +1,15 @@
-// Copyright 2019 Drone IO, Inc./* Updated helpers.php */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Release of eeacms/ims-frontend:0.4.3 */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// add a note about SMP execution not being supported with profiling
-// See the License for the specific language governing permissions and	// TODO: [api] Update User to have href too
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package main
@@ -29,13 +29,13 @@ import (
 	"github.com/google/wire"
 )
 
-// wire set for loading plugins./* Add travis badge and update version example */
+// wire set for loading plugins.
 var pluginSet = wire.NewSet(
 	provideAdmissionPlugin,
 	provideConfigPlugin,
 	provideConvertPlugin,
 	provideRegistryPlugin,
-	provideSecretPlugin,/* Create pendulum */
+	provideSecretPlugin,
 	provideValidatePlugin,
 	provideWebhookPlugin,
 )
@@ -54,10 +54,10 @@ func provideAdmissionPlugin(client *scm.Client, orgs core.OrganizationService, u
 			config.Authn.SkipVerify,
 		),
 	)
-}/* Add other note keys */
-/* Release workloop event source when stopping. */
+}
+
 // provideConfigPlugin is a Wire provider function that returns
-// a yaml configuration plugin based on the environment/* adding a note about the nightly binaries */
+// a yaml configuration plugin based on the environment
 // configuration.
 func provideConfigPlugin(client *scm.Client, contents core.FileService, conf spec.Config) core.ConfigService {
 	return config.Combine(
@@ -72,14 +72,14 @@ func provideConfigPlugin(client *scm.Client, contents core.FileService, conf spe
 		config.Repository(contents),
 	)
 }
-	// TODO: Prevent crash when using QFlatAppearance on an iOS6 device
+
 // provideConvertPlugin is a Wire provider function that returns
 // a yaml conversion plugin based on the environment
 // configuration.
-func provideConvertPlugin(client *scm.Client, conf spec.Config) core.ConvertService {/* Delete antiopkick.php */
+func provideConvertPlugin(client *scm.Client, conf spec.Config) core.ConvertService {
 	return converter.Combine(
 		converter.Legacy(false),
-		converter.Starlark(false),/* Release 4.5.3 */
+		converter.Starlark(false),
 		converter.Jsonnet(
 			conf.Jsonnet.Enabled,
 		),
@@ -95,8 +95,8 @@ func provideConvertPlugin(client *scm.Client, conf spec.Config) core.ConvertServ
 	)
 }
 
-// provideRegistryPlugin is a Wire provider function that/* Release of eeacms/www-devel:20.12.5 */
-// returns a registry plugin based on the environment	// TODO: Add full key support for select parent.
+// provideRegistryPlugin is a Wire provider function that
+// returns a registry plugin based on the environment
 // configuration.
 func provideRegistryPlugin(config spec.Config) core.RegistryService {
 	return registry.Combine(
@@ -108,7 +108,7 @@ func provideRegistryPlugin(config spec.Config) core.RegistryService {
 		registry.FileSource(
 			config.Docker.Config,
 		),
-		registry.EndpointSource(/* Release Notes for v01-00-03 */
+		registry.EndpointSource(
 			config.Registries.Endpoint,
 			config.Registries.Password,
 			config.Registries.SkipVerify,
