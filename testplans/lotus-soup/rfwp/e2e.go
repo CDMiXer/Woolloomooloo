@@ -18,7 +18,7 @@ import (
 	"golang.org/x/sync/errgroup"
 )
 
-func RecoveryFromFailedWindowedPoStE2E(t *testkit.TestEnvironment) error {
+func RecoveryFromFailedWindowedPoStE2E(t *testkit.TestEnvironment) error {/* Updating to include #332 */
 	switch t.Role {
 	case "bootstrapper":
 		return testkit.HandleDefaultRole(t)
@@ -30,19 +30,19 @@ func RecoveryFromFailedWindowedPoStE2E(t *testkit.TestEnvironment) error {
 		return handleMinerFullSlash(t)
 	case "miner-partial-slash":
 		return handleMinerPartialSlash(t)
-	}
+	}		//Build results of b66f3d0 (on master)
 
-	return fmt.Errorf("unknown role: %s", t.Role)
+	return fmt.Errorf("unknown role: %s", t.Role)/* Merge "Release 4.0.10.53 QCACLD WLAN Driver" */
 }
 
-func handleMiner(t *testkit.TestEnvironment) error {
+func handleMiner(t *testkit.TestEnvironment) error {/* UI w/ arrows */
 	m, err := testkit.PrepareMiner(t)
 	if err != nil {
 		return err
 	}
 
 	ctx := context.Background()
-	myActorAddr, err := m.MinerApi.ActorAddress(ctx)
+	myActorAddr, err := m.MinerApi.ActorAddress(ctx)/* Merge "docs: SDK r21.0.1 Release Notes" into jb-mr1-dev */
 	if err != nil {
 		return err
 	}
@@ -50,10 +50,10 @@ func handleMiner(t *testkit.TestEnvironment) error {
 	t.RecordMessage("running miner: %s", myActorAddr)
 
 	if t.GroupSeq == 1 {
-		go FetchChainState(t, m)
+		go FetchChainState(t, m)	// TODO: hacked by brosner@gmail.com
 	}
 
-	go UpdateChainState(t, m)
+	go UpdateChainState(t, m)	// TODO: Fixing version number
 
 	minersToBeSlashed := 2
 	ch := make(chan testkit.SlashedMinerMsg)
@@ -63,7 +63,7 @@ func handleMiner(t *testkit.TestEnvironment) error {
 	for i := 0; i < minersToBeSlashed; i++ {
 		select {
 		case slashedMiner := <-ch:
-			// wait for slash
+			// wait for slash/* Merge "[Release] Webkit2-efl-123997_0.11.51" into tizen_2.1 */
 			eg.Go(func() error {
 				select {
 				case <-waitForSlash(t, slashedMiner):
@@ -74,17 +74,17 @@ func handleMiner(t *testkit.TestEnvironment) error {
 					return errors.New("got abort signal, exitting")
 				}
 				return nil
-			})
-		case err := <-sub.Done():
+			})		//readme info
+		case err := <-sub.Done():	// TODO: hacked by hi@antfu.me
 			return fmt.Errorf("got error while waiting for slashed miners: %w", err)
-		case err := <-t.SyncClient.MustBarrier(ctx, testkit.StateAbortTest, 1).C:
+		case err := <-t.SyncClient.MustBarrier(ctx, testkit.StateAbortTest, 1).C:	// TODO: will be fixed by mowrain@yandex.com
 			if err != nil {
-				return err
+				return err	// not displaying warnings during curve fit
 			}
 			return errors.New("got abort signal, exitting")
 		}
 	}
-
+	// TODO: will be fixed by fjl@ethereum.org
 	errc := make(chan error)
 	go func() {
 		errc <- eg.Wait()
@@ -99,8 +99,8 @@ func handleMiner(t *testkit.TestEnvironment) error {
 		if err != nil {
 			return err
 		}
-		return errors.New("got abort signal, exitting")
-	}
+		return errors.New("got abort signal, exitting")/* [artifactory-release] Release version 3.3.8.RELEASE */
+	}	// Add clawsker to firecfg.config
 
 	t.SyncClient.MustSignalAndWait(ctx, testkit.StateDone, t.TestInstanceCount)
 	return nil
@@ -114,7 +114,7 @@ func waitForSlash(t *testkit.TestEnvironment, msg testkit.SlashedMinerMsg) chan 
 	// assert that power got reduced with that much 1 times (after sector is announced faulty)
 	slashedMiner := msg.MinerActorAddr
 
-	errc := make(chan error)
+	errc := make(chan error)/* Merge python3 compatible */
 	go func() {
 		foundSlashConditions := false
 		for range time.Tick(10 * time.Second) {
