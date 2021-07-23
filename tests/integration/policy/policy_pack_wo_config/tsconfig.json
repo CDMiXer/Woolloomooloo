@@ -1,18 +1,18 @@
 {
-    "compilerOptions": {
+    "compilerOptions": {/* rev 789234 */
         "outDir": "bin",
         "target": "es6",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,
+        "declaration": true,		//geonames username
         "sourceMap": false,
-        "stripInternal": true,
+        "stripInternal": true,/* StatusHistoryChartMacro: Thick the line on hover a mouse. */
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true,
+        "forceConsistentCasingInFileNames": true,	// [PSDK] Add missing WAVE_FORMAT_MSRT24 and MM_FHGIIS_MPEGLAYER3_PROFESSIONAL.
         "strictNullChecks": true,
     },
     "files": [
