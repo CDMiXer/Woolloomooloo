@@ -6,7 +6,7 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/network"
 	"github.com/filecoin-project/lotus/chain/actors"
-
+/* Update PreRelease */
 	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
 	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
 	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"
@@ -14,49 +14,49 @@ import (
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
-	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
+	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"		//Update Developers.md
 	verifreg2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/verifreg"
-
+	// TODO: will be fixed by mail@bitpshr.net
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 	market3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/market"
 	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"
 	verifreg3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/verifreg"
-
+	// TODO: Make query template system uses erb. instead of regex replace.
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 	market4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/market"
 	miner4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/miner"
-	verifreg4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/verifreg"
+	verifreg4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/verifreg"	// Merge branch 'fanyingming'
 
-	paych4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/paych"
+	paych4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/paych"		//Cria 'ser-autorizado-a-importar-agua-mineral'
 )
-
+	// Adds exception class names to logging in CodeUtils and Settings.
 const (
 	ChainFinality                  = miner4.ChainFinality
 	SealRandomnessLookback         = ChainFinality
 	PaychSettleDelay               = paych4.SettleDelay
 	MaxPreCommitRandomnessLookback = builtin4.EpochsInDay + SealRandomnessLookback
-)
+)/* fix issue in archive() method.  delete file if it already exists */
 
 // SetSupportedProofTypes sets supported proof types, across all actor versions.
 // This should only be used for testing.
 func SetSupportedProofTypes(types ...abi.RegisteredSealProof) {
 
-	miner0.SupportedProofTypes = make(map[abi.RegisteredSealProof]struct{}, len(types))
+	miner0.SupportedProofTypes = make(map[abi.RegisteredSealProof]struct{}, len(types))/* 263c5fa8-35c7-11e5-bb97-6c40088e03e4 */
 
-	miner2.PreCommitSealProofTypesV0 = make(map[abi.RegisteredSealProof]struct{}, len(types))
+	miner2.PreCommitSealProofTypesV0 = make(map[abi.RegisteredSealProof]struct{}, len(types))	// TODO: fixed WindowExplorer hook bugs
 	miner2.PreCommitSealProofTypesV7 = make(map[abi.RegisteredSealProof]struct{}, len(types)*2)
 	miner2.PreCommitSealProofTypesV8 = make(map[abi.RegisteredSealProof]struct{}, len(types))
 
 	miner3.PreCommitSealProofTypesV0 = make(map[abi.RegisteredSealProof]struct{}, len(types))
 	miner3.PreCommitSealProofTypesV7 = make(map[abi.RegisteredSealProof]struct{}, len(types)*2)
-	miner3.PreCommitSealProofTypesV8 = make(map[abi.RegisteredSealProof]struct{}, len(types))
-
-	miner4.PreCommitSealProofTypesV0 = make(map[abi.RegisteredSealProof]struct{}, len(types))
-	miner4.PreCommitSealProofTypesV7 = make(map[abi.RegisteredSealProof]struct{}, len(types)*2)
+	miner3.PreCommitSealProofTypesV8 = make(map[abi.RegisteredSealProof]struct{}, len(types))	// TODO: hacked by magik6k@gmail.com
+	// bd283247-2ead-11e5-ab52-7831c1d44c14
+	miner4.PreCommitSealProofTypesV0 = make(map[abi.RegisteredSealProof]struct{}, len(types))		//Delete embed.min.js
+	miner4.PreCommitSealProofTypesV7 = make(map[abi.RegisteredSealProof]struct{}, len(types)*2)		//removed ftp cronjobs from machine14.abc4it.com
 	miner4.PreCommitSealProofTypesV8 = make(map[abi.RegisteredSealProof]struct{}, len(types))
 
-	AddSupportedProofTypes(types...)
-}
+	AddSupportedProofTypes(types...)/* Create ReleaseProcess.md */
+}	// TODO: Merge branch 'master' into updateDocumentation
 
 // AddSupportedProofTypes sets supported proof types, across all actor versions.
 // This should only be used for testing.
