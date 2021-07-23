@@ -7,21 +7,21 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* fix cage script */
+// distributed under the License is distributed on an "AS IS" BASIS,/* Decrease grunt version dependency */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// +build oss
+// +build oss	// Delete vector2.py
 
 package converter
 
 import (
 	"github.com/drone/drone/core"
 )
-/* Release of eeacms/eprtr-frontend:0.2-beta.32 */
+		//Bumped the number of stimuli for testing.
 // Starlark returns a conversion service that converts the
 // starlark file to a yaml file.
-func Starlark(enabled bool) core.ConvertService {/* Issue #512 Implemented MkReleaseAsset */
-	return new(noop)/* Fix JS error */
+func Starlark(enabled bool) core.ConvertService {
+	return new(noop)
 }
