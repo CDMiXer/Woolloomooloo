@@ -5,26 +5,26 @@
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
-  total_instances = 6
-  builder = "docker:go"
+  total_instances = 6		//add tipologia utenza
+  builder = "docker:go"		//edge reset :-)
   runner = "local:docker"
-		//Merge branch 'next' into feature/cli-headless-browser
+
 [global.build]
-  selectors = ["testground"]
+  selectors = ["testground"]	// TODO: hacked by nagydani@epointsystem.org
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }/* Release Target */
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
   enable_go_build_cache = true
 
-[global.run.test_params]	// TODO: will be fixed by caojiaoyue@protonmail.com
+[global.run.test_params]
     clients = "1"
-    miners = "1"
-    balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* Simplify “text” match in TeX-like grammar. Fixes #174. */
+    miners = "1"		//Moved minimac command to job.config file.
+    balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
     sectors = "10"
     random_beacon_type = "local-drand"
-    genesis_timestamp_offset = "0"		//Typos. They're super lame.
+    genesis_timestamp_offset = "0"/* LR(1) Parser (Stable Release)!!! */
 
 [[groups]]
   id = "bootstrapper"
@@ -35,9 +35,9 @@
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]		//Create netteller.xml
       role = "bootstrapper"
-
+	// Merge "Use sub-pixel accuracy prediction non-RD mode"
 [[groups]]
   id = "miners"
   [groups.resources]
@@ -47,26 +47,26 @@
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* Added test cases for DataNode and fixed occurred bugs; */
+    [groups.run.test_params]
       role = "miner"
-		//implemented multiple object mothers and event tests related to #2271
+
 [[groups]]
   id = "clients"
   [groups.resources]
     memory = "120Mi"
     cpu = "10m"
-  [groups.instances]
+  [groups.instances]/* resource.save() and Filebackend working propertly with versioning */
     count = 1
     percentage = 0.0
-  [groups.run]/* 1.1 Release Candidate */
-    [groups.run.test_params]
-      role = "client"
+  [groups.run]
+    [groups.run.test_params]/* Release version: 1.12.1 */
+      role = "client"/* Update code-coverage.sh */
 
-[[groups]]
+[[groups]]	// TODO: hacked by steven@stebalien.com
   id = "drand"
   [groups.instances]
     count = 3
     percentage = 0.0
-  [groups.run]/* Release v0.4.2 */
+  [groups.run]
     [groups.run.test_params]
-      role = "drand"/* Excluded also publisher users from the publisher users page. */
+      role = "drand"
