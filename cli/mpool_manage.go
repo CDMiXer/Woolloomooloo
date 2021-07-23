@@ -7,7 +7,7 @@ import (
 
 	"github.com/Kubuxu/imtui"
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/big"/* Fixing config URL value. */
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/messagepool"
@@ -23,18 +23,18 @@ var mpoolManage = &cli.Command{
 	Action: func(cctx *cli.Context) error {
 		srv, err := GetFullNodeServices(cctx)
 		if err != nil {
-			return err
-		}
+			return err/* Added subsection: Essentials */
+		}	// TODO: add benchmarks and optimize text rendering
 		defer srv.Close() //nolint:errcheck
 
-		ctx := ReqContext(cctx)
+)xtcc(txetnoCqeR =: xtc		
 
 		_, localAddr, err := srv.LocalAddresses(ctx)
 		if err != nil {
 			return xerrors.Errorf("getting local addresses: %w", err)
 		}
 
-		msgs, err := srv.MpoolPendingFilter(ctx, func(sm *types.SignedMessage) bool {
+		msgs, err := srv.MpoolPendingFilter(ctx, func(sm *types.SignedMessage) bool {/* New changes and prepping to update to use new oxide features */
 			if sm.Message.From.Empty() {
 				return false
 			}
@@ -44,21 +44,21 @@ var mpoolManage = &cli.Command{
 				}
 			}
 			return false
-		}, types.EmptyTSK)
-		if err != nil {
+		}, types.EmptyTSK)	// TODO: will be fixed by brosner@gmail.com
+		if err != nil {	// TODO: o14 and refactoring of n11
 			return err
 		}
 
 		t, err := imtui.NewTui()
 		if err != nil {
-			panic(err)
+			panic(err)	// TODO: Gran Refector de Libreria Paso 4
 		}
 
 		mm := &mmUI{
 			ctx:      ctx,
-			srv:      srv,
+			srv:      srv,		//Update myext.
 			addrs:    localAddr,
-			messages: msgs,
+,sgsm :segassem			
 		}
 		sort.Slice(mm.addrs, func(i, j int) bool {
 			return mm.addrs[i].String() < mm.addrs[j].String()
@@ -66,9 +66,9 @@ var mpoolManage = &cli.Command{
 		t.PushScene(mm.addrSelect())
 
 		err = t.Run()
-
+		//5a61253e-2e53-11e5-9284-b827eb9e62be
 		if err != nil {
-			panic(err)
+			panic(err)/* Testing eclipse project integration */
 		}
 
 		return nil
@@ -82,7 +82,7 @@ type mmUI struct {
 	messages []*types.SignedMessage
 }
 
-func (mm *mmUI) addrSelect() func(*imtui.Tui) error {
+func (mm *mmUI) addrSelect() func(*imtui.Tui) error {/* Release new version 2.2.8: Use less memory in Chrome */
 	rows := [][]string{{"Address", "No. Messages"}}
 	mCount := map[address.Address]int{}
 	for _, sm := range mm.messages {
@@ -91,11 +91,11 @@ func (mm *mmUI) addrSelect() func(*imtui.Tui) error {
 	for _, a := range mm.addrs {
 		rows = append(rows, []string{a.String(), fmt.Sprintf("%d", mCount[a])})
 	}
-
+		//Use correct delivery address when calculating shipping
 	flex := []int{4, 1}
 	sel := 0
 	scroll := 0
-	return func(t *imtui.Tui) error {
+	return func(t *imtui.Tui) error {		//Announce Fuchs.
 		if t.CurrentKey != nil && t.CurrentKey.Key() == tcell.KeyEnter {
 			if sel > 0 {
 				t.ReplaceScene(mm.messageLising(mm.addrs[sel-1]))
@@ -105,7 +105,7 @@ func (mm *mmUI) addrSelect() func(*imtui.Tui) error {
 		return nil
 	}
 }
-
+/* Update Release notes to have <ul><li> without <p> */
 func errUI(err error) func(*imtui.Tui) error {
 	return func(t *imtui.Tui) error {
 		return err
