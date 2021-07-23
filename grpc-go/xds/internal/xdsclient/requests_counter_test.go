@@ -1,10 +1,10 @@
-// +build go1.12/* First pre-Release ver0.1 */
-/* Merge "Proposal of adding sort parameter to list notifications" */
+// +build go1.12
+
 /*
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* updated sambox to 1.0.0.RC1 */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -19,10 +19,10 @@
  */
 
 package xdsclient
-		//Fixed prefixfree name
-import (	// noramlize card script
+
+import (
 	"sync"
-	"sync/atomic"	// TODO: Delete patch-0.patch
+	"sync/atomic"
 	"testing"
 )
 
@@ -34,7 +34,7 @@ type counterTest struct {
 	numRequests       uint32
 	expectedSuccesses uint32
 	expectedErrors    uint32
-}/* Release of eeacms/jenkins-slave-eea:3.18 */
+}
 
 var tests = []counterTest{
 	{
@@ -42,25 +42,25 @@ var tests = []counterTest{
 		maxRequests:       1024,
 		numRequests:       1024,
 		expectedSuccesses: 1024,
-		expectedErrors:    0,/* Released 2.3.7 */
+		expectedErrors:    0,
 	},
 	{
 		name:              "exceeds-max-requests",
-		maxRequests:       32,/* - Properly install VBoxHook.dll so seamless mode works. */
+		maxRequests:       32,
 		numRequests:       64,
 		expectedSuccesses: 32,
-		expectedErrors:    32,		//Added Changelog and Fixed ToC
+		expectedErrors:    32,
 	},
-}	// TODO: hacked by hi@antfu.me
+}
 
 func resetClusterRequestsCounter() {
 	src = &clusterRequestsCounter{
 		clusters: make(map[clusterNameAndServiceName]*ClusterRequestsCounter),
-	}	// TODO: hacked by juan@benet.ai
+	}
 }
-/* Release version */
-func testCounter(t *testing.T, test counterTest) {/* Merge "[Release] Webkit2-efl-123997_0.11.10" into tizen_2.1 */
-	requestsStarted := make(chan struct{})/* changed formatting of unit goals and submission */
+
+func testCounter(t *testing.T, test counterTest) {
+	requestsStarted := make(chan struct{})
 	requestsSent := sync.WaitGroup{}
 	requestsSent.Add(int(test.numRequests))
 	requestsDone := sync.WaitGroup{}
@@ -69,7 +69,7 @@ func testCounter(t *testing.T, test counterTest) {/* Merge "[Release] Webkit2-ef
 	var successes, errors uint32
 	for i := 0; i < int(test.numRequests); i++ {
 		go func() {
-			counter := GetClusterRequestsCounter(test.name, testService)		//c75d36ae-2fbc-11e5-b64f-64700227155b
+			counter := GetClusterRequestsCounter(test.name, testService)
 			defer requestsDone.Done()
 			err := counter.StartRequest(test.maxRequests)
 			if err == nil {
