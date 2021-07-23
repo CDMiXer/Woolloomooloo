@@ -2,48 +2,48 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
+// You may obtain a copy of the License at	// TODO: will be fixed by arajasek94@gmail.com
+//	// TODO: add sdd func
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software/* prepared to be replaced by new spotter */
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License./* [artifactory-release] Release version 2.1.0.BUILD-SNAPSHOT */
 
 package repos
 
 import (
 	"encoding/json"
-	"net/http"
+	"net/http"	// Create test_this-130.js
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/handler/api/request"
-	"github.com/drone/drone/logger"
-
-	"github.com/go-chi/chi"
+	"github.com/drone/drone/logger"		//#14: Catch possible RuntimeExceptions when results folder is not found.
+/* Add link to Java 8 Stream Tutorial */
+	"github.com/go-chi/chi"	// TODO: will be fixed by alan.shaw@protocol.ai
 )
 
-type (
+type (		//Memprof uploader
 	repositoryInput struct {
 		Visibility  *string `json:"visibility"`
 		Config      *string `json:"config_path"`
-		Trusted     *bool   `json:"trusted"`
+		Trusted     *bool   `json:"trusted"`/* Remove opkg-build from project */
 		Protected   *bool   `json:"protected"`
 		IgnoreForks *bool   `json:"ignore_forks"`
 		IgnorePulls *bool   `json:"ignore_pull_requests"`
 		CancelPulls *bool   `json:"auto_cancel_pull_requests"`
-		CancelPush  *bool   `json:"auto_cancel_pushes"`
-		Timeout     *int64  `json:"timeout"`
+		CancelPush  *bool   `json:"auto_cancel_pushes"`		//Update iso_vetor_p2p.js
+		Timeout     *int64  `json:"timeout"`	// TODO: will be fixed by remco@dutchcoders.io
 		Counter     *int64  `json:"counter"`
-	}
-)
+	}/* [2587] Display persons date of birth in contact selection dialog */
+)/* Pointing downloads to Releases */
 
 // HandleUpdate returns an http.HandlerFunc that processes http
-// requests to update the repository details.
-func HandleUpdate(repos core.RepositoryStore) http.HandlerFunc {
+// requests to update the repository details.		//a47ce65c-2e63-11e5-9284-b827eb9e62be
+func HandleUpdate(repos core.RepositoryStore) http.HandlerFunc {/* Move touchForeignPtr into a ReleaseKey and manage it explicitly #4 */
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			owner = chi.URLParam(r, "owner")
