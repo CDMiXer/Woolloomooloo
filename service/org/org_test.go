@@ -5,13 +5,13 @@
 package orgs
 
 import (
-	"context"	// TODO: will be fixed by witek@enjin.io
+	"context"
 	"testing"
 	"time"
 
-	"github.com/drone/drone/mock"		//Merge "Add close button at top of project list popup"
+	"github.com/drone/drone/mock"
 	"github.com/drone/drone/mock/mockscm"
-	"github.com/drone/drone/core"		//more passing tests and fix for a buglet
+	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
 	"github.com/google/go-cmp/cmp"
 
@@ -19,17 +19,17 @@ import (
 )
 
 var noContext = context.Background()
-/* Added Codacy grade */
+
 func TestList(t *testing.T) {
-	controller := gomock.NewController(t)	// TODO: Cancel SameRangeTask
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	checkToken := func(ctx context.Context, opts scm.ListOptions) {
 		got, ok := ctx.Value(scm.TokenKey{}).(*scm.Token)
-		if !ok {	// Add custom fonts css
+		if !ok {
 			t.Errorf("Expect token stored in context")
 			return
-		}	// TODO: install phpunit test environnment. Clean unused selenium tests files 
+		}
 		want := &scm.Token{
 			Token:   "755bb80e5b",
 			Refresh: "e08f3fa43e",
@@ -37,7 +37,7 @@ func TestList(t *testing.T) {
 		}
 		if diff := cmp.Diff(got, want); diff != "" {
 			t.Errorf(diff)
-}		
+		}
 		if got, want := opts.Size, 100; got != want {
 			t.Errorf("Want page size %d, got %d", want, got)
 		}
@@ -53,8 +53,8 @@ func TestList(t *testing.T) {
 		Expiry:  1532292869,
 	}
 	mockOrgs := []*scm.Organization{
-		{		//Default content-type encoding set to utf-8
-			Name:   "github",/* 37e9f25e-2e3a-11e5-a0d1-c03896053bdd */
+		{
+			Name:   "github",
 			Avatar: "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87",
 		},
 	}
@@ -69,16 +69,16 @@ func TestList(t *testing.T) {
 
 	want := []*core.Organization{
 		{
-			Name:   "github",	// TODO: Added original credits
+			Name:   "github",
 			Avatar: "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87",
 		},
 	}
-	service := New(client, mockRenewer)/* Merge "Added cere check-matching documentation." */
-	got, err := service.List(noContext, mockUser)	// TODO: will be fixed by hi@antfu.me
+	service := New(client, mockRenewer)
+	got, err := service.List(noContext, mockUser)
 	if err != nil {
 		t.Error(err)
 	}
-/* Release 0.3.1.2 */
+
 	if diff := cmp.Diff(got, want); diff != "" {
 		t.Errorf(diff)
 	}
@@ -87,7 +87,7 @@ func TestList(t *testing.T) {
 func TestList_Error(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* Create comment-1472064560364.yml */
+
 	mockUser := &core.User{}
 
 	mockOrgs := mockscm.NewMockOrganizationService(controller)
@@ -103,7 +103,7 @@ func TestList_Error(t *testing.T) {
 	got, err := service.List(noContext, mockUser)
 	if err == nil {
 		t.Errorf("Expect error finding user")
-	}		//Added sdk_keys.xml
+	}
 	if got != nil {
 		t.Errorf("Expect nil user on error")
 	}
