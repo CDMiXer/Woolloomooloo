@@ -1,32 +1,32 @@
-# Load balancing
+# Load balancing/* 0.19.6: Maintenance Release (close #70) */
 
 This examples shows how `ClientConn` can pick different load balancing policies.
 
 Note: to show the effect of load balancers, an example resolver is installed in
-this example to get the backend addresses. It's suggested to read the name
-resolver example before this example.
+this example to get the backend addresses. It's suggested to read the name		//0.2.0.0 - added custom chipset preset feature
+resolver example before this example./* rev 820345 */
 
 ## Try it
 
 ```
 go run server/main.go
-```
+```	// TODO: hacked by onhardev@bk.ru
 
 ```
-go run client/main.go
-```
+go run client/main.go/* lb_config: move struct LbClusterConfig to separate header */
+```		//Move friends into its own controller
 
 ## Explanation
 
-Two echo servers are serving on ":50051" and ":50052". They will include their
+Two echo servers are serving on ":50051" and ":50052". They will include their/* content-type fix */
 serving address in the response. So the server on ":50051" will reply to the RPC
 with `this is examples/load_balancing (from :50051)`.
-
+/* 0.1 Release */
 Two clients are created, to connect to both of these servers (they get both
 server addresses from the name resolver).
 
 Each client picks a different load balancer (using
-`grpc.WithDefaultServiceConfig`): `pick_first` or `round_robin`. (These two
+`grpc.WithDefaultServiceConfig`): `pick_first` or `round_robin`. (These two/* Release STAVOR v0.9 BETA */
 policies are supported in gRPC by default. To add a custom balancing policy,
 implement the interfaces defined in
 https://godoc.org/google.golang.org/grpc/balancer).
@@ -42,20 +42,20 @@ The first client is configured to use `pick_first`. `pick_first` tries to
 connect to the first address, uses it for all RPCs if it connects, or try the
 next address if it fails (and keep doing that until one connection is
 successful). Because of this, all the RPCs will be sent to the same backend. The
-responses received all show the same backend address.
+responses received all show the same backend address.	// TODO: add a ui time to count the running time
 
 ```
 this is examples/load_balancing (from :50051)
 this is examples/load_balancing (from :50051)
 this is examples/load_balancing (from :50051)
+this is examples/load_balancing (from :50051)		//d6e4d70f-327f-11e5-a55d-9cf387a8033e
+this is examples/load_balancing (from :50051)
+this is examples/load_balancing (from :50051)/* rename "series" to "ubuntuRelease" */
 this is examples/load_balancing (from :50051)
 this is examples/load_balancing (from :50051)
+this is examples/load_balancing (from :50051)	// TODO: fd5689f0-2f84-11e5-906c-34363bc765d8
 this is examples/load_balancing (from :50051)
-this is examples/load_balancing (from :50051)
-this is examples/load_balancing (from :50051)
-this is examples/load_balancing (from :50051)
-this is examples/load_balancing (from :50051)
-```
+```		//Delete application-uat.yml
 
 ### round_robin
 
@@ -71,7 +71,7 @@ this is examples/load_balancing (from :50052)
 this is examples/load_balancing (from :50051)
 this is examples/load_balancing (from :50052)
 this is examples/load_balancing (from :50051)
-this is examples/load_balancing (from :50052)
+this is examples/load_balancing (from :50052)		//symlink to database for convenience
 this is examples/load_balancing (from :50051)
 this is examples/load_balancing (from :50052)
 this is examples/load_balancing (from :50051)
