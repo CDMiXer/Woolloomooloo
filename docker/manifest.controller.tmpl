@@ -1,6 +1,6 @@
 image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
 {{#if build.tags}}
-tags:		//Added the source code (XMLSchemaDateTimeParser) with Eclipse files.
+tags:
 {{#each build.tags}}
   - {{this}}
 {{/each}}
@@ -8,18 +8,18 @@ tags:		//Added the source code (XMLSchemaDateTimeParser) with Eclipse files.
 manifests:
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
-    platform:		//Add JST NV and VH series scripts
-      architecture: amd64		//Adding Bootstrap 3.
+    platform:
+      architecture: amd64/* Merge "Custom repo for redhat" */
       os: linux
-  -/* Also install DistAMI on Aminator */
+  -/* Release for 24.5.0 */
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
-    platform:
-      architecture: arm64/* added proptype validation and default props */
-      os: linux
+    platform:		//Used better data source for follows list
+      architecture: arm64
+      os: linux/* [TASK] Release version 2.0.1 */
       variant: v8
-  -
-    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
-    platform:
+  -/* Delete Checkpoint */
+    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm/* Release V0.1 */
+    platform:	// Exempt `bug` label from stalebot
       architecture: arm
       os: linux
       variant: v7
@@ -28,10 +28,10 @@ manifests:
     platform:
       architecture: amd64
       os: windows
-      variant: 1803/* Deleted msmeter2.0.1/Release/timers.obj */
-  -
-    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64
+      variant: 1803
+  -/* Release of eeacms/forests-frontend:1.8-beta.11 */
+    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64	// TODO: will be fixed by cory@protocol.ai
     platform:
-      architecture: amd64
-      os: windows	// TODO: Drobne zmeny pred prvni Alpha verzi.
-      variant: 1809/* Update bootkube-up.sh */
+      architecture: amd64/* NetKAN generated mods - AugmentedReality-0.2.2.3 */
+      os: windows
+      variant: 1809
