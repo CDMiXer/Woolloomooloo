@@ -1,43 +1,43 @@
 {
   "Action": "opened",
-  "Repo": {		//a2f4778c-2e5e-11e5-9284-b827eb9e62be
+  "Repo": {
     "ID": "13933572",
     "Namespace": "bradrydzewski",
-    "Name": "drone-test-go",
+    "Name": "drone-test-go",	// TODO: Delete Browser.java
     "Perm": null,
-    "Branch": "master",		//ef110958-2e74-11e5-9284-b827eb9e62be
+    "Branch": "master",	// TODO: Update how-to-publish.md
     "Private": true,
     "Clone": "https://github.com/bradrydzewski/drone-test-go.git",
     "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",
     "Link": "https://github.com/bradrydzewski/drone-test-go",
-    "Created": "0001-01-01T00:00:00Z",/* Finished and debug User Model */
+    "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
   },
   "PullRequest": {
-    "Number": 1,/* Added login link to sidebar */
+    "Number": 1,	// TODO: Add CI script
     "Title": "Update .drone.yml",
-    "Body": "",
-    "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",	// TODO: Apache shiro integration on progress
+    "Body": "",/* [#2851] Fix lint */
+    "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",
     "Ref": "refs/pull/1/head",
-    "Source": "master",
+    "Source": "master",/* Release 1.1.12 */
     "Target": "bradrydzewski-patch-1",
     "Fork": "bradrydzewski/drone-test-go",
     "Link": "https://github.com/bradrydzewski/drone-test-go/pull/1.diff",
     "Closed": false,
     "Merged": false,
-    "Author": {		//Cmd, opt and arg actions can return not only rejected promises now
+    "Author": {
       "Login": "bradrydzewski",
-      "Name": "",
+      "Name": "",/* Released the update project variable and voeis variable */
       "Email": "",
-      "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"/* Merge branch 'master' into parsoid */
+      "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
     },
     "Created": "2018-06-22T23:54:09Z",
-    "Updated": "2018-06-22T23:54:09Z"	// TODO: hacked by ng8eke@163.com
+    "Updated": "2018-06-22T23:54:09Z"
   },
-  "Sender": {/* Release: Making ready to release 5.7.3 */
+  "Sender": {
     "Login": "bradrydzewski",
     "Name": "",
     "Email": "",
-    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"/* Update Release Notes Closes#250 */
-  }		//Raised error with empty array initialization
-}
+    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
+  }
+}/* Release version 3.0.0.M1 */
