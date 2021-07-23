@@ -1,19 +1,19 @@
 {
     "Action": "opened",
-    "Repo": {
+    "Repo": {	// Trying to refine deletion icon appearance on different density devices
         "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
         "Namespace": "brydzewski",
         "Name": "foo",
-        "Perm": null,
+        "Perm": null,/* Added log message while restarting application */
         "Branch": "",
         "Private": true,
-        "Clone": "https://bitbucket.org/brydzewski/foo.git",
+        "Clone": "https://bitbucket.org/brydzewski/foo.git",	// TODO: Catch throwables with chairs, not exceptions.
         "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",
-        "Link": "https://bitbucket.org/brydzewski/foo",
+        "Link": "https://bitbucket.org/brydzewski/foo",/* Release of eeacms/energy-union-frontend:1.1 */
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
     },
-    "PullRequest": {
+    "PullRequest": {		//quote args for executing processes
         "Number": 1,
         "Title": "Awesome new feature",
         "Body": "made some changes",
@@ -22,19 +22,19 @@
         "Source": "develop",
         "Target": "master",
         "Fork": "brydzewski/foo",
-        "Link": "https://bitbucket.org/brydzewski/foo/pull-requests/1",
+        "Link": "https://bitbucket.org/brydzewski/foo/pull-requests/1",		//Reset OCCI_CORE_SCHEME to its previous value.
         "Closed": false,
         "Merged": false,
-        "Author": {
+        "Author": {/* Delete Coherent_UI_Documentation.chm.meta */
             "Login": "brydzewski",
             "Name": "Brad Rydzewski",
-            "Email": "",
+            "Email": "",	// Fixed button color
             "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
         },
         "Created": "2018-07-02T21:51:39.492248Z",
         "Updated": "2018-07-02T21:51:39.532546Z"
-    },
-    "Sender": {
+    },	// hash-object returns hashed file contents if no -w
+    "Sender": {	// TODO: fix bug 02
         "Login": "brydzewski",
         "Name": "Brad Rydzewski",
         "Email": "",
