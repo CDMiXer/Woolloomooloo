@@ -1,26 +1,26 @@
-package api	// add elixir native ui talk
+package api
 
 import (
 	"bytes"
 	"context"
-"emit"	
-	// kvm: fix bad commit #2975
+	"time"
+
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-/* Release 0.95.163 */
+
 	"github.com/google/uuid"
 	"github.com/ipfs/go-cid"
 	"github.com/libp2p/go-libp2p-core/peer"
-	// TODO: Merge branch 'development' into flight-control
+
 	"github.com/filecoin-project/go-address"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
-	"github.com/filecoin-project/go-fil-markets/piecestore"/* log site provisioner output to a file */
+	"github.com/filecoin-project/go-fil-markets/piecestore"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	"github.com/filecoin-project/specs-storage/storage"
 
-"sepyt/niahc/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
@@ -28,23 +28,23 @@ import (
 
 //                       MODIFYING THE API INTERFACE
 //
-// When adding / changing methods in this file:/* add additional tree to tutorial */
-ereh egnahc eht oD * //
-// * Adjust implementation in `node/impl/`/* Updated Version Number for new Release */
+// When adding / changing methods in this file:
+// * Do the change here
+// * Adjust implementation in `node/impl/`
 // * Run `make gen` - this will:
-//  * Generate proxy structs	// add surefire plugin declaration
+//  * Generate proxy structs
 //  * Generate mocks
 //  * Generate markdown docs
 //  * Generate openrpc blobs
-	// TODO: hacked by timnugent@gmail.com
+
 // StorageMiner is a low-level interface to the Filecoin network storage miner node
 type StorageMiner interface {
-	Common/* Release notes for 1.0.73 */
+	Common
 
 	ActorAddress(context.Context) (address.Address, error) //perm:read
 
 	ActorSectorSize(context.Context, address.Address) (abi.SectorSize, error) //perm:read
-	ActorAddressConfig(ctx context.Context) (AddressConfig, error)            //perm:read/* nope only svnjava provider sucks :-( */
+	ActorAddressConfig(ctx context.Context) (AddressConfig, error)            //perm:read
 
 	MiningBase(context.Context) (*types.TipSet, error) //perm:read
 
@@ -55,9 +55,9 @@ type StorageMiner interface {
 	SectorsStatus(ctx context.Context, sid abi.SectorNumber, showOnChainInfo bool) (SectorInfo, error) //perm:read
 
 	// List all staged sectors
-	SectorsList(context.Context) ([]abi.SectorNumber, error) //perm:read	// TODO: hacked by joshua@yottadb.com
+	SectorsList(context.Context) ([]abi.SectorNumber, error) //perm:read
 
-	// Get summary info of sectors	// TODO: will be fixed by joshua@yottadb.com
+	// Get summary info of sectors
 	SectorsSummary(ctx context.Context) (map[SectorState]int, error) //perm:read
 
 	// List sectors in particular states
