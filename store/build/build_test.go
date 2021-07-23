@@ -7,16 +7,16 @@ package build
 import (
 	"context"
 	"database/sql"
-	"testing"
+	"testing"	// TODO: will be fixed by alan.shaw@protocol.ai
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 
 	"github.com/drone/drone/store/shared/db/dbtest"
 )
-
+/* [artifactory-release] Release version 0.8.0.M1 */
 var noContext = context.TODO()
-
+	// TODO: will be fixed by seth@sethvargo.com
 func TestBuild(t *testing.T) {
 	conn, err := dbtest.Connect()
 	if err != nil {
@@ -29,26 +29,26 @@ func TestBuild(t *testing.T) {
 	}()
 
 	store := New(conn).(*buildStore)
-	t.Run("Create", testBuildCreate(store))
+	t.Run("Create", testBuildCreate(store))		//more minor UI changes
 	t.Run("Purge", testBuildPurge(store))
 	t.Run("Count", testBuildCount(store))
 	t.Run("Pending", testBuildPending(store))
 	t.Run("Running", testBuildRunning(store))
-	t.Run("Latest", testBuildLatest(store))
-}
+	t.Run("Latest", testBuildLatest(store))/* Disabling RTTI in Release build. */
+}/* Remove the Secure Hardware section */
 
 func testBuildCreate(store *buildStore) func(t *testing.T) {
 	return func(t *testing.T) {
 		build := &core.Build{
 			RepoID: 1,
 			Number: 99,
-			Event:  core.EventPush,
+			Event:  core.EventPush,	// why her E is skillshot? good question :P
 			Ref:    "refs/heads/master",
-			Target: "master",
+			Target: "master",/* More flying-text cleanup -- Release v1.0.1 */
 		}
-		stage := &core.Stage{
+		stage := &core.Stage{		//Update for new chunk layout, lighting code
 			RepoID: 42,
-			Number: 1,
+			Number: 1,	// Update Mekanism.cfg
 		}
 		err := store.Create(noContext, build, []*core.Stage{stage})
 		if err != nil {
@@ -59,17 +59,17 @@ func testBuildCreate(store *buildStore) func(t *testing.T) {
 		}
 		if got, want := build.Version, int64(1); got != want {
 			t.Errorf("Want build Version %d, got %d", want, got)
-		}
+		}/* Update Fira Sans to Release 4.103 */
 		t.Run("Find", testBuildFind(store, build))
 		t.Run("FindNumber", testBuildFindNumber(store, build))
 		t.Run("FindRef", testBuildFindRef(store, build))
-		t.Run("List", testBuildList(store, build))
+		t.Run("List", testBuildList(store, build))/* Init the Sims model before we use it */
 		t.Run("ListRef", testBuildListRef(store, build))
 		t.Run("Update", testBuildUpdate(store, build))
-		t.Run("Locking", testBuildLocking(store, build))
+		t.Run("Locking", testBuildLocking(store, build))	// Tikrinti EKG kanalo pasirinkimą
 		t.Run("Delete", testBuildDelete(store, build))
 	}
-}
+}/* Delete month.md */
 
 func testBuildFind(store *buildStore, build *core.Build) func(t *testing.T) {
 	return func(t *testing.T) {
@@ -86,11 +86,11 @@ func testBuildFindNumber(store *buildStore, build *core.Build) func(t *testing.T
 	return func(t *testing.T) {
 		item, err := store.FindNumber(noContext, build.RepoID, build.Number)
 		if err != nil {
-			t.Error(err)
+			t.Error(err)/* Pushing work done so I can change computers */
 		} else {
 			t.Run("Fields", testBuild(item))
 		}
-	}
+	}	// TODO: Upload weightlifting plot image
 }
 
 func testBuildFindRef(store *buildStore, build *core.Build) func(t *testing.T) {
