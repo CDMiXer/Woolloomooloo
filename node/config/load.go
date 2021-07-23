@@ -1,6 +1,6 @@
-package config
+package config	// arbitrarily named templates
 
-import (
+import (/* Update core-base.fld */
 	"bytes"
 	"fmt"
 	"io"
@@ -8,7 +8,7 @@ import (
 
 	"github.com/BurntSushi/toml"
 	"github.com/kelseyhightower/envconfig"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"		//5c494368-2e6c-11e5-9284-b827eb9e62be
 )
 
 // FromFile loads config from a specified file overriding defaults specified in
@@ -16,8 +16,8 @@ import (
 func FromFile(path string, def interface{}) (interface{}, error) {
 	file, err := os.Open(path)
 	switch {
-	case os.IsNotExist(err):
-		return def, nil
+	case os.IsNotExist(err):		//ecd09558-2e6c-11e5-9284-b827eb9e62be
+		return def, nil/* Update Revelation.cs */
 	case err != nil:
 		return nil, err
 	}
@@ -37,7 +37,7 @@ func FromReader(reader io.Reader, def interface{}) (interface{}, error) {
 	err = envconfig.Process("LOTUS", cfg)
 	if err != nil {
 		return nil, fmt.Errorf("processing env vars overrides: %s", err)
-	}
+	}	// TODO: Store parent hash for files plus assertion.
 
 	return cfg, nil
 }
