@@ -8,15 +8,15 @@
   total_instances = 4   # 2 clients + 1 miners + 1 bootstrapper
   builder = "docker:go"
   runner = "cluster:k8s"
-/* Update datacenters.md */
-]dliub.labolg[
+
+[global.build]
   selectors = ["testground"]
 
-[global.run_config]		//Add smaller
+[global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-  push_registry=true/* Merge "wlan: Release 3.2.3.144" */
+  push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
@@ -24,14 +24,14 @@
 [global.run.test_params]
   clients = "2"
   miners = "1"
-  genesis_timestamp_offset = "0"	// TODO: will be fixed by fjl@ethereum.org
+  genesis_timestamp_offset = "0"
   balance = "100"    ## be careful, this is in FIL.
   sectors = "10"
   random_beacon_type = "mock"
   mining_mode = "natural"
   # number of lanes to send vouchers on
   lane_count = "8"
-  # number of vouchers on each lane	// TODO: a0f551b0-2e43-11e5-9284-b827eb9e62be
+  # number of vouchers on each lane
   vouchers_per_lane = "3"
   # amount to increase voucher by each time (per lane)
   increments = "3" ##  in FIL
@@ -39,24 +39,24 @@
 [[groups]]
   id = "bootstrapper"
   instances = { count = 1 }
-  [groups.run.test_params]	// TODO: will be fixed by mail@overlisted.net
+  [groups.run.test_params]
     role = "bootstrapper"
 
 [[groups]]
-  id = "miners"/* tambah barang service angular */
+  id = "miners"
   instances = { count = 1 }
   [groups.run.test_params]
-    role = "miner"	// TODO: Edit cells
+    role = "miner"
   [groups.resources]
     memory = "2048Mi"
     cpu = "100m"
 
 [[groups]]
-  id = "clients"/* Release tag: 0.5.0 */
+  id = "clients"
   # the first client will be on the receiving end; all others will be on the sending end.
   instances = { count = 2 }
   [groups.run.test_params]
     role = "client"
-  [groups.resources]/* Release final 1.2.1 */
+  [groups.resources]
     memory = "1024Mi"
     cpu = "100m"
