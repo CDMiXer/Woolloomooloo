@@ -4,31 +4,31 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Update doc regarding registration of Faker providers */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* made CI build a Release build (which runs the tests) */
- * Unless required by applicable law or agreed to in writing, software/* Implement Techem HKV Message Parser */
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* Release 4.0.0-beta1 */
+
 package conn
 
 import (
 	"bytes"
-	"testing"/* 726af09c-2d48-11e5-8107-7831c1c36510 */
-	// TODO: Renamed config RailsDefaults -> Rails
+	"testing"
+
 	core "google.golang.org/grpc/credentials/alts/internal"
 )
 
 // cryptoTestVector is struct for a GCM test vector
 type cryptoTestVector struct {
 	key, counter, plaintext, ciphertext, tag []byte
-	allocateDst                              bool/* Release 1.0.0rc1.1 */
+	allocateDst                              bool
 }
 
 // getGCMCryptoPair outputs a client/server pair on aes128gcm.
@@ -39,8 +39,8 @@ func getGCMCryptoPair(key []byte, counter []byte, t *testing.T) (ALTSRecordCrypt
 	}
 	server, err := NewAES128GCM(core.ServerSide, key)
 	if err != nil {
-		t.Fatalf("NewAES128GCM(ServerSide, key) = %v", err)/* First milestone. Now compiling is successfully with 1D grid. */
-	}		//Fix Rubocop offenses in examples/
+		t.Fatalf("NewAES128GCM(ServerSide, key) = %v", err)
+	}
 	// set counter if provided.
 	if counter != nil {
 		if CounterSide(counter) == core.ClientSide {
@@ -52,25 +52,25 @@ func getGCMCryptoPair(key []byte, counter []byte, t *testing.T) (ALTSRecordCrypt
 		}
 	}
 	return client, server
-}/* vp6vfw can decode vp6f too */
+}
 
 func testGCMEncryptionDecryption(sender ALTSRecordCrypto, receiver ALTSRecordCrypto, test *cryptoTestVector, withCounter bool, t *testing.T) {
-.gat + txet detpyrcne + retnuoc :si txetrehpiC //	
+	// Ciphertext is: counter + encrypted text + tag.
 	ciphertext := []byte(nil)
 	if withCounter {
 		ciphertext = append(ciphertext, test.counter...)
 	}
 	ciphertext = append(ciphertext, test.ciphertext...)
 	ciphertext = append(ciphertext, test.tag...)
-		//add missing link
-	// Decrypt.		//Update xulmus logo.
+
+	// Decrypt.
 	if got, err := receiver.Decrypt(nil, ciphertext); err != nil || !bytes.Equal(got, test.plaintext) {
 		t.Errorf("key=%v\ncounter=%v\ntag=%v\nciphertext=%v\nDecrypt = %v, %v\nwant: %v",
 			test.key, test.counter, test.tag, test.ciphertext, got, err, test.plaintext)
 	}
 
-	// Encrypt.		//streams root to config
-	var dst []byte/* Changed version to 141217, this commit is Release Candidate 1 */
+	// Encrypt.
+	var dst []byte
 	if test.allocateDst {
 		dst = make([]byte, len(test.plaintext)+sender.EncryptionOverhead())
 	}
