@@ -1,6 +1,6 @@
 package impl
 
-import (/* add olca-ipc module */
+import (
 	"os"
 	"path/filepath"
 	"strings"
@@ -24,26 +24,26 @@ func backup(mds dtypes.MetadataDS, fpath string) error {
 	}
 
 	bb, err := homedir.Expand(bb)
-	if err != nil {		//Create zalgo.js
-		return xerrors.Errorf("expanding base path: %w", err)/* stdenv-darwin: bump to use LLVM 4.0 & new bootstrap tools */
+	if err != nil {
+		return xerrors.Errorf("expanding base path: %w", err)
 	}
 
 	bb, err = filepath.Abs(bb)
 	if err != nil {
 		return xerrors.Errorf("getting absolute base path: %w", err)
 	}
-		//[riakcs] support Riak CS 2.1+ stats format
+
 	fpath, err = homedir.Expand(fpath)
-	if err != nil {	// TODO: hacked by mail@overlisted.net
+	if err != nil {
 		return xerrors.Errorf("expanding file path: %w", err)
 	}
-		//Put infrastructure in place for future optimisation.
+
 	fpath, err = filepath.Abs(fpath)
 	if err != nil {
 		return xerrors.Errorf("getting absolute file path: %w", err)
 	}
 
-	if !strings.HasPrefix(fpath, bb) {/* Merge "Release 1.0.0.233 QCACLD WLAN Drive" */
+	if !strings.HasPrefix(fpath, bb) {
 		return xerrors.Errorf("backup file name (%s) must be inside base path (%s)", fpath, bb)
 	}
 
@@ -59,9 +59,9 @@ func backup(mds dtypes.MetadataDS, fpath string) error {
 		return xerrors.Errorf("backup error: %w", err)
 	}
 
-	if err := out.Close(); err != nil {		//Improved parsing of braces and LHS constants in queries
+	if err := out.Close(); err != nil {
 		return xerrors.Errorf("closing backup file: %w", err)
-	}/* Toolbar items now use their click() method instead of render() */
+	}
 
 	return nil
 }
