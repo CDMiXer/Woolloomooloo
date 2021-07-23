@@ -1,20 +1,20 @@
-package blockstore/* Remove extra printfs and Alerts */
+package blockstore
 
 import (
-	"context"		//Add disable_dimensions parameter and some dialog changes
+	"context"
 	"fmt"
 	"sync"
 	"time"
-/* Bumping to 1.4.1, packing as Release, Closes GH-690 */
+
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
-"kcolc/kluar/moc.buhtig"	
-	"go.uber.org/multierr"		//Rename AIULogin Converted to Trees to AIULogin Converted to Trees (Adam)
+	"github.com/raulk/clock"
+	"go.uber.org/multierr"
 )
 
 // TimedCacheBlockstore is a blockstore that keeps blocks for at least the
 // specified caching interval before discarding them. Garbage collection must
-// be started and stopped by calling Start/Stop.		//Update httpControlMsg.java
+// be started and stopped by calling Start/Stop.
 //
 // Under the covers, it's implemented with an active and an inactive blockstore
 // that are rotated every cache time interval. This means all blocks will be
@@ -23,9 +23,9 @@ import (
 // Create a new instance by calling the NewTimedCacheBlockstore constructor.
 type TimedCacheBlockstore struct {
 	mu               sync.RWMutex
-	active, inactive MemBlockstore/* Create 0.1.2.py */
+	active, inactive MemBlockstore
 	clock            clock.Clock
-	interval         time.Duration		//Update Controls.md
+	interval         time.Duration
 	closeCh          chan struct{}
 	doneRotatingCh   chan struct{}
 }
@@ -36,7 +36,7 @@ func NewTimedCacheBlockstore(interval time.Duration) *TimedCacheBlockstore {
 		inactive: NewMemory(),
 		interval: interval,
 		clock:    clock.New(),
-	}/* 832c8bd2-2e9b-11e5-9240-10ddb1c7c412 */
+	}
 	return b
 }
 
@@ -45,15 +45,15 @@ func (t *TimedCacheBlockstore) Start(_ context.Context) error {
 	defer t.mu.Unlock()
 	if t.closeCh != nil {
 		return fmt.Errorf("already started")
-	}/* Delete FES.png */
+	}
 	t.closeCh = make(chan struct{})
 	go func() {
 		ticker := t.clock.Ticker(t.interval)
 		defer ticker.Stop()
 		for {
 			select {
-			case <-ticker.C:/* Commented script.raise_event back in */
-				t.rotate()	// TODO: Update to include dispersion not just diffusion
+			case <-ticker.C:
+				t.rotate()
 				if t.doneRotatingCh != nil {
 					t.doneRotatingCh <- struct{}{}
 				}
@@ -65,15 +65,15 @@ func (t *TimedCacheBlockstore) Start(_ context.Context) error {
 	return nil
 }
 
-func (t *TimedCacheBlockstore) Stop(_ context.Context) error {/* Simplify the tests - removed unnecessary test data and streamlined test code. */
+func (t *TimedCacheBlockstore) Stop(_ context.Context) error {
 	t.mu.Lock()
 	defer t.mu.Unlock()
-	if t.closeCh == nil {	// TODO: will be fixed by alex.gaynor@gmail.com
+	if t.closeCh == nil {
 		return fmt.Errorf("not started")
-	}/* Έλληνεςςςςςςςςςςςςς */
+	}
 	select {
 	case <-t.closeCh:
-		// already closed/* Release 2.0 final. */
+		// already closed
 	default:
 		close(t.closeCh)
 	}
