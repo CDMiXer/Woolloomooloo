@@ -1,20 +1,20 @@
 /*
  *
- * Copyright 2020 gRPC authors.		//Fixed wiki and issues links
+ * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");		//cleanup dockerfile
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Edition du fichier README pour préciser les appels RESTFull
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//Update and rename posts to posts/2.txt
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *		//refactor distributed queue implementation
+ * Unless required by applicable law or agreed to in writing, software		//Merge "Minerva popup: Fix scope of border-left/right rule"
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* use lua/*.lua in bin-snapshot.bash */
- * limitations under the License./* Create pdu.txt */
- *	// TODO: rename replace to replaceStr.
- */
+ * See the License for the specific language governing permissions and		//Update ses_deletetemplate.js
+ * limitations under the License.
+ *
+ */		//Added support for silent install of additional modules
 
 // Package balancer installs all the xds balancers.
 package balancer
