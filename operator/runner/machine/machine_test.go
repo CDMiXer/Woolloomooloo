@@ -1,15 +1,15 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: will be fixed by yuvalalaluf@gmail.com
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file.		//evacuer le cas particulier des sites syndiques dans le compilateur
 
-// +build !oss/* [1.2.2] Release */
+// +build !oss
+/* Release of eeacms/forests-frontend:2.0-beta.36 */
+package machine
 
-package machine		//Added ExcelParser class
-		//Update c14140006.lua
 import (
 	"testing"
-)/* Release notes. */
+)
 
-func TestLoad(t *testing.T) {
+func TestLoad(t *testing.T) {	// TODO: Delete clone file
 	t.Skip()
 }
