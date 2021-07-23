@@ -1,6 +1,6 @@
 # Metadata example
-		//Fixed notice on logout
-This example shows how to set and read metadata in RPC headers and trailers.
+		//Can build buildings fix
+This example shows how to set and read metadata in RPC headers and trailers.		//Merge "Add PHPUnit tests for various generic functions"
 Please see
 [grpc-metadata.md](https://github.com/grpc/grpc-go/blob/master/Documentation/grpc-metadata.md)
 for more information.
@@ -10,9 +10,9 @@ for more information.
 ```
 go run server/main.go
 ```
-
+	// TODO: Examples: Add radio button
 ## Run the client
-		//removing pom
-```	// Create activation_email_request_completed.twig
+
+```
 go run client/main.go
 ```
