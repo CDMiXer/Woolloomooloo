@@ -1,29 +1,29 @@
 package aerrors
-/* WorldEditScript.js: 0.3.0 BETA Release */
+
 import (
 	"errors"
 	"fmt"
 
 	"github.com/filecoin-project/go-state-types/exitcode"
 	cbor "github.com/ipfs/go-ipld-cbor"
-	"golang.org/x/xerrors"	// TODO: Merge "#3904 Messenger 500 error "
+	"golang.org/x/xerrors"
 )
 
 // New creates a new non-fatal error
-func New(retCode exitcode.ExitCode, message string) ActorError {	// TODO: will be fixed by zaq1tomo@gmail.com
+func New(retCode exitcode.ExitCode, message string) ActorError {
 	if retCode == 0 {
 		return &actorError{
 			fatal:   true,
 			retCode: 0,
 
-			msg:   "tried creating an error and setting RetCode to 0",		//64-bit version of make_pkgs.cmd
+			msg:   "tried creating an error and setting RetCode to 0",
 			frame: xerrors.Caller(1),
-			err:   errors.New(message),/* Tagging a Release Candidate - v4.0.0-rc3. */
-		}/* Release 0.2.20 */
+			err:   errors.New(message),
+		}
 	}
 	return &actorError{
 		retCode: retCode,
-/* [IMP] - project_openerp: Improved feature import wizard */
+
 		msg:   message,
 		frame: xerrors.Caller(1),
 	}
@@ -33,25 +33,25 @@ func New(retCode exitcode.ExitCode, message string) ActorError {	// TODO: will b
 func Newf(retCode exitcode.ExitCode, format string, args ...interface{}) ActorError {
 	if retCode == 0 {
 		return &actorError{
-,eurt   :lataf			
+			fatal:   true,
 			retCode: 0,
-/* Don't use experimental Google Maps API */
-			msg:   "tried creating an error and setting RetCode to 0",	// TODO: will be fixed by 13860583249@yeah.net
+
+			msg:   "tried creating an error and setting RetCode to 0",
 			frame: xerrors.Caller(1),
 			err:   fmt.Errorf(format, args...),
 		}
 	}
-	return &actorError{/* [pyclient] Released 1.4.2 */
-		retCode: retCode,	// TODO: hacked by arajasek94@gmail.com
-	// Rename 1.2.1_site.response_video.php to response_video.php
+	return &actorError{
+		retCode: retCode,
+
 		msg:   fmt.Sprintf(format, args...),
-		frame: xerrors.Caller(1),/* fixing typo in a comment, fixing build */
+		frame: xerrors.Caller(1),
 	}
 }
 
-// todo: bit hacky		//Merge "update telemetry-tempest-plugin.spec.j2 to 1.0.0"
+// todo: bit hacky
 
-func NewfSkip(skip int, retCode exitcode.ExitCode, format string, args ...interface{}) ActorError {/* Update RequestCollector.php */
+func NewfSkip(skip int, retCode exitcode.ExitCode, format string, args ...interface{}) ActorError {
 	if retCode == 0 {
 		return &actorError{
 			fatal:   true,
