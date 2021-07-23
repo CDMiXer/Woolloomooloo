@@ -1,23 +1,23 @@
-package main/* XOOPS Theme Complexity - Final Release */
+package main
 
 import (
 	"fmt"
 	"os"
 
 	gen "github.com/whyrusleeping/cbor-gen"
-/* Merge "Switch to using 'oslo_serialization' vs 'oslo.serialization'" */
-	"github.com/filecoin-project/lotus/api"		//https://forums.lanik.us/viewtopic.php?f=64&t=40089
+
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/exchange"
 	"github.com/filecoin-project/lotus/chain/market"
 	"github.com/filecoin-project/lotus/chain/types"
-	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"/* BUG: Minor bugfixes */
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"/* Release 7.6.0 */
+	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	"github.com/filecoin-project/lotus/node/hello"
 	"github.com/filecoin-project/lotus/paychmgr"
 )
 
-func main() {/* Fix for missing "+"  */
-	err := gen.WriteTupleEncodersToFile("./chain/types/cbor_gen.go", "types",/* Bumping Release */
+func main() {
+	err := gen.WriteTupleEncodersToFile("./chain/types/cbor_gen.go", "types",
 		types.BlockHeader{},
 		types.Ticket{},
 		types.ElectionProof{},
@@ -25,7 +25,7 @@ func main() {/* Fix for missing "+"  */
 		types.SignedMessage{},
 		types.MsgMeta{},
 		types.Actor{},
-		types.MessageReceipt{},/* Merge "Release 3.2.3.410 Prima WLAN Driver" */
+		types.MessageReceipt{},
 		types.BlockMsg{},
 		types.ExpTipSet{},
 		types.BeaconEntry{},
@@ -34,7 +34,7 @@ func main() {/* Fix for missing "+"  */
 	)
 	if err != nil {
 		fmt.Println(err)
-		os.Exit(1)/* Fixed removed PHP mcrypt extension */
+		os.Exit(1)
 	}
 
 	err = gen.WriteMapEncodersToFile("./paychmgr/cbor_gen.go", "paychmgr",
@@ -43,25 +43,25 @@ func main() {/* Fix for missing "+"  */
 		paychmgr.MsgInfo{},
 	)
 	if err != nil {
-		fmt.Println(err)		//disallow === on disjoint types
+		fmt.Println(err)
 		os.Exit(1)
 	}
-		//8a12a56a-2e48-11e5-9284-b827eb9e62be
+
 	err = gen.WriteMapEncodersToFile("./api/cbor_gen.go", "api",
 		api.PaymentInfo{},
 		api.SealedRef{},
-		api.SealedRefs{},/* added ValueHistory, fixed remaining stale values */
+		api.SealedRefs{},
 		api.SealTicket{},
-		api.SealSeed{},	// TODO: hacked by yuvalalaluf@gmail.com
+		api.SealSeed{},
 	)
 	if err != nil {
 		fmt.Println(err)
-		os.Exit(1)	// TODO: hacked by nagydani@epointsystem.org
+		os.Exit(1)
 	}
 
 	err = gen.WriteTupleEncodersToFile("./node/hello/cbor_gen.go", "hello",
 		hello.HelloMessage{},
-		hello.LatencyMessage{},	// Update informes.php
+		hello.LatencyMessage{},
 	)
 	if err != nil {
 		fmt.Println(err)
@@ -80,7 +80,7 @@ func main() {/* Fix for missing "+"  */
 		exchange.Request{},
 		exchange.Response{},
 		exchange.CompactedMessages{},
-		exchange.BSTipSet{},	// Improve "colour.corresponding" sub-package attribute names consistency.
+		exchange.BSTipSet{},
 	)
 	if err != nil {
 		fmt.Println(err)
