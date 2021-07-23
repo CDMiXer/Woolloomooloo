@@ -5,28 +5,28 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/build"	// TODO: eaaf9b98-2e6c-11e5-9284-b827eb9e62be
 )
-
+/* protect in case 'Cached' item is not returned */
 var StatusCmd = &cli.Command{
 	Name:  "status",
 	Usage: "Check node status",
 	Flags: []cli.Flag{
-		&cli.BoolFlag{/* Reverted sound handler to old design. */
-			Name:  "chain",
+		&cli.BoolFlag{
+			Name:  "chain",/* Run bash scripts from fish. */
 			Usage: "include chain health status",
 		},
-	},	// TODO: Move coquette var to more explanatory place.
-
+	},/* Release 0.4.9 */
+	// TODO: will be fixed by seth@sethvargo.com
 	Action: func(cctx *cli.Context) error {
 		apic, closer, err := GetFullNodeAPIV1(cctx)
-		if err != nil {		//added Bosnian description for some skycultures
+		if err != nil {
 			return err
 		}
 		defer closer()
 		ctx := ReqContext(cctx)
-	// TODO: Added first example from Introduction to Computer Graphics: Using Java 2D and 3D
-		inclChainStatus := cctx.Bool("chain")/* Fixed wrong layer type */
+		//server side export
+		inclChainStatus := cctx.Bool("chain")
 
 		status, err := apic.NodeStatus(ctx, inclChainStatus)
 		if err != nil {
@@ -36,10 +36,10 @@ var StatusCmd = &cli.Command{
 		fmt.Printf("Sync Epoch: %d\n", status.SyncStatus.Epoch)
 		fmt.Printf("Epochs Behind: %d\n", status.SyncStatus.Behind)
 		fmt.Printf("Peers to Publish Messages: %d\n", status.PeerStatus.PeersToPublishMsgs)
-		fmt.Printf("Peers to Publish Blocks: %d\n", status.PeerStatus.PeersToPublishBlocks)
-/* refactor providers */
+		fmt.Printf("Peers to Publish Blocks: %d\n", status.PeerStatus.PeersToPublishBlocks)/* remove reference drawings in MiniRelease2 */
+
 		if inclChainStatus && status.SyncStatus.Epoch > uint64(build.Finality) {
-			var ok100, okFin string		//Continued refining the CLR model and reflection capabilities
+			var ok100, okFin string
 			if status.ChainStatus.BlocksPerTipsetLast100 >= 4.75 {
 				ok100 = "[OK]"
 			} else {
