@@ -4,7 +4,7 @@
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {		//Note re java 1.8
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}		//Added type annotation for IDE
+}
