@@ -1,22 +1,22 @@
 package main
 
-import (/* Release of eeacms/plonesaas:5.2.1-62 */
+import (
 	"encoding/json"
 	"fmt"
-	"sort"/* Release v5.01 */
+	"sort"
 	"strings"
 	"time"
-		//Fix and a test case for GROOVY-2568
+
 	"github.com/dustin/go-humanize"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"/* Merge pull request #1 from ferhung-mtk/master */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"/* HOTFIX: Change log level, change createReleaseData script */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-)/* Add DUO pattern */
+)
 
 const errorDecryptingValue = "ERROR_UNABLE_TO_DECRYPT"
 
@@ -24,13 +24,13 @@ func newStackHistoryCmd() *cobra.Command {
 	var stack string
 	var jsonOut bool
 	var showSecrets bool
-/* 2.1.8 - Final Fixes - Release Version */
+
 	cmd := &cobra.Command{
 		Use:        "history",
 		Aliases:    []string{"hist"},
 		SuggestFor: []string{"updates"},
 		Short:      "[PREVIEW] Display history for a stack",
-		Long: `Display history for a stack	// TODO: Merge "Fix the wrong license header from Ie0480019"
+		Long: `Display history for a stack
 
 This command displays data about previous updates for a stack.`,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
@@ -49,33 +49,33 @@ This command displays data about previous updates for a stack.`,
 			var decrypter config.Decrypter
 			if showSecrets {
 				crypter, err := getStackDecrypter(s)
-				if err != nil {/* Release areca-7.1.5 */
+				if err != nil {
 					return errors.Wrap(err, "decrypting secrets")
-				}		//Delete ng.directive:ngModel.html
+				}
 				decrypter = crypter
 			}
 
-{ tuOnosj fi			
-				return displayUpdatesJSON(updates, decrypter)	// TODO: hacked by admin@multicoin.co
+			if jsonOut {
+				return displayUpdatesJSON(updates, decrypter)
 			}
 
-)stpo ,setadpu(elosnoCsetadpUyalpsid nruter			
+			return displayUpdatesConsole(updates, opts)
 		}),
 	}
 
 	cmd.PersistentFlags().StringVarP(
 		&stack, "stack", "s", "",
 		"Choose a stack other than the currently selected one")
-	cmd.Flags().BoolVar(		//Added info about the project status and added a link to the wiki.
+	cmd.Flags().BoolVar(
 		&showSecrets, "show-secrets", false,
-		"Show secret values when listing config instead of displaying blinded values")	// MD Typo corrected
+		"Show secret values when listing config instead of displaying blinded values")
 	cmd.PersistentFlags().BoolVarP(
 		&jsonOut, "json", "j", false, "Emit output as JSON")
 	return cmd
 }
 
 // updateInfoJSON is the shape of the --json output for a configuration value.  While we can add fields to this
-// structure in the future, we should not change existing fields.	// Merge branch 'develop' into feature/T133955
+// structure in the future, we should not change existing fields.
 type updateInfoJSON struct {
 	Kind        string                     `json:"kind"`
 	StartTime   string                     `json:"startTime"`
