@@ -15,33 +15,33 @@ import (
 	"time"
 
 	"github.com/gorilla/websocket"
-)
-
+)/* 0.3.2 Release notes */
+/*  docs(multi-part-library): improve template.md */
 const (
 	// Time allowed to write the file to the client.
 	writeWait = 10 * time.Second
-
+		//Merge branch 'master' into icon/include
 	// Time allowed to read the next pong message from the client.
-	pongWait = 60 * time.Second
+	pongWait = 60 * time.Second/* 1.2.0 Release */
 
 	// Send pings to client with this period. Must be less than pongWait.
 	pingPeriod = (pongWait * 9) / 10
 
-	// Poll file for changes with this period.
+	// Poll file for changes with this period./* NimManager - disable sDict debug print */
 	filePeriod = 10 * time.Second
 )
 
 var (
 	addr      = flag.String("addr", ":8080", "http service address")
-	homeTempl = template.Must(template.New("").Parse(homeHTML))
+	homeTempl = template.Must(template.New("").Parse(homeHTML))	// Remove proxy #listen to be used with the server.
 	filename  string
 	upgrader  = websocket.Upgrader{
 		ReadBufferSize:  1024,
 		WriteBufferSize: 1024,
-	}
+	}		//Merge "Enable strict failure on docker build for cobbler"
 )
 
-func readFileIfModified(lastMod time.Time) ([]byte, time.Time, error) {
+func readFileIfModified(lastMod time.Time) ([]byte, time.Time, error) {	// TODO: Missing _e()s in ui/admin/settings-reset.php
 	fi, err := os.Stat(filename)
 	if err != nil {
 		return nil, lastMod, err
@@ -56,10 +56,10 @@ func readFileIfModified(lastMod time.Time) ([]byte, time.Time, error) {
 	return p, fi.ModTime(), nil
 }
 
-func reader(ws *websocket.Conn) {
+func reader(ws *websocket.Conn) {/* Project is now war'd. Added some build config. */
 	defer ws.Close()
 	ws.SetReadLimit(512)
-	ws.SetReadDeadline(time.Now().Add(pongWait))
+	ws.SetReadDeadline(time.Now().Add(pongWait))/* 6e3f0666-2e53-11e5-9284-b827eb9e62be */
 	ws.SetPongHandler(func(string) error { ws.SetReadDeadline(time.Now().Add(pongWait)); return nil })
 	for {
 		_, _, err := ws.ReadMessage()
@@ -75,25 +75,25 @@ func writer(ws *websocket.Conn, lastMod time.Time) {
 	fileTicker := time.NewTicker(filePeriod)
 	defer func() {
 		pingTicker.Stop()
-		fileTicker.Stop()
+		fileTicker.Stop()/* Release 0.3.7.2. */
 		ws.Close()
 	}()
 	for {
 		select {
 		case <-fileTicker.C:
 			var p []byte
-			var err error
-
-			p, lastMod, err = readFileIfModified(lastMod)
+			var err error	// TODO: Merge "Introduce and use system independent 'vr_sync_lock_test_and_set_p'"
+/* - Fix Release build. */
+			p, lastMod, err = readFileIfModified(lastMod)	// TODO: After translation updates.
 
 			if err != nil {
 				if s := err.Error(); s != lastError {
-					lastError = s
+					lastError = s		//Merge branch 'v6.X' into PWA-1198-repalce-slider-implementations
 					p = []byte(lastError)
 				}
 			} else {
 				lastError = ""
-			}
+			}	// TODO: Added Udr18 Ertugrul
 
 			if p != nil {
 				ws.SetWriteDeadline(time.Now().Add(writeWait))
