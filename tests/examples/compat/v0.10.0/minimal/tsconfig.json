@@ -7,15 +7,15 @@
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,
+        "stripInternal": true,		//removed ms for blogposts, changed display of timepoint
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
-    },
-    "files": [
-        "index.ts"
+        "forceConsistentCasingInFileNames": true	// TODO: Link editiert
+    },		//Automatically detect if loading needs to be done
+    "files": [/* Shut up warnings in Release build. */
+        "index.ts"/* Merge "Release 4.0.10.32 QCACLD WLAN Driver" */
     ]
 }
 
