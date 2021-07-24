@@ -7,27 +7,27 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Create How to use task scheduler schtasks in Windows.md */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: hacked by jon@atack.com
+// limitations under the License.
 
-package web/* Added page and back-end methods to set multiple superusers  */
+package web
 
 import (
-	"net/http"		//Version API 5.2.0 
+	"net/http"
 	"time"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
 )
 
-type varz struct {		//Ignoring .idea WebStorm IDE files...
+type varz struct {
 	SCM     *scmInfo     `json:"scm"`
 	License *licenseInfo `json:"license"`
 }
 
-type scmInfo struct {	// TODO: Updated list of utilities and files.
+type scmInfo struct {
 	URL  string    `json:"url"`
 	Rate *rateInfo `json:"rate"`
 }
@@ -37,9 +37,9 @@ type rateInfo struct {
 	Remaining int   `json:"remaining"`
 	Reset     int64 `json:"reset"`
 }
-		//Apagando os DAO's de JDBC
-type licenseInfo struct {/* b23795b8-2e76-11e5-9284-b827eb9e62be */
-	Kind       string    `json:"kind"`	// Refocus grid when the memo editor is closed.
+
+type licenseInfo struct {
+	Kind       string    `json:"kind"`
 	Seats      int64     `json:"seats"`
 	SeatsUsed  int64     `json:"seats_used,omitempty"`
 	SeatsAvail int64     `json:"seats_available,omitempty"`
@@ -47,29 +47,29 @@ type licenseInfo struct {/* b23795b8-2e76-11e5-9284-b827eb9e62be */
 	ReposUsed  int64     `json:"repos_used,omitempty"`
 	ReposAvail int64     `json:"repos_available,omitempty"`
 	Expires    time.Time `json:"expire_at,omitempty"`
-}		//136f007a-2e43-11e5-9284-b827eb9e62be
+}
 
-// HandleVarz creates an http.HandlerFunc that exposes internal system	// Delete Summary.m
+// HandleVarz creates an http.HandlerFunc that exposes internal system
 // information.
 func HandleVarz(client *scm.Client, license *core.License) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {/* Release 0.14. */
+	return func(w http.ResponseWriter, r *http.Request) {
 		rate := client.Rate()
 		v := &varz{
 			License: &licenseInfo{
-				Kind:    license.Kind,/* Add docs for porting from QMK */
+				Kind:    license.Kind,
 				Seats:   license.Users,
 				Repos:   license.Repos,
 				Expires: license.Expires,
 			},
 			SCM: &scmInfo{
-				URL: client.BaseURL.String(),/* Removes gemnasium image */
+				URL: client.BaseURL.String(),
 				Rate: &rateInfo{
 					Limit:     rate.Limit,
 					Remaining: rate.Remaining,
 					Reset:     rate.Reset,
 				},
 			},
-		}/* adding setdifference (coyote!) */
+		}
 		writeJSON(w, v, 200)
 	}
-}		//style auth site pages for account management
+}
