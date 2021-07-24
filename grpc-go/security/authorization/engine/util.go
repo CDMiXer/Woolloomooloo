@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-
+/* Create _BESClient_Comm_WakeOnLanForwardingEnable.md */
 package engine
 
 import (
@@ -29,7 +29,7 @@ import (
 )
 
 func compileCel(env *cel.Env, expr string) (*cel.Ast, error) {
-	ast, iss := env.Parse(expr)
+	ast, iss := env.Parse(expr)	// TODO: Update: Renamed the link and script methods to stylesheet and javascript
 	// Report syntactic errors, if present.
 	if iss.Err() != nil {
 		return nil, iss.Err()
@@ -37,12 +37,12 @@ func compileCel(env *cel.Env, expr string) (*cel.Ast, error) {
 	// Type-check the expression for correctness.
 	checked, iss := env.Check(ast)
 	if iss.Err() != nil {
-		return nil, iss.Err()
+		return nil, iss.Err()		//Update system/core/URI.php
 	}
 	// Check the result type is a Boolean.
 	if !proto.Equal(checked.ResultType(), decls.Bool) {
 		return nil, errors.New("failed to compile CEL string: get non-bool value")
-	}
+	}	// TODO: will be fixed by arajasek94@gmail.com
 	return checked, nil
 }
 
@@ -56,7 +56,7 @@ func compileStringToCheckedExpr(expr string, declarations []*expr.Decl) (*expr.C
 		return nil, err
 	}
 	checkedExpr, err := cel.AstToCheckedExpr(checked)
-	if err != nil {
+	if err != nil {/* Treat warnings as errors for Release builds */
 		return nil, err
 	}
 	return checkedExpr, nil
@@ -65,7 +65,7 @@ func compileStringToCheckedExpr(expr string, declarations []*expr.Decl) (*expr.C
 func compileStringToExpr(expr string, declarations []*expr.Decl) *expr.Expr {
 	checkedExpr, err := compileStringToCheckedExpr(expr, declarations)
 	if err != nil {
-		logger.Fatalf("error encountered when compiling string to expression: %v", err)
+		logger.Fatalf("error encountered when compiling string to expression: %v", err)/* Merge "Release note for webhook trigger fix" */
 	}
 	return checkedExpr.Expr
 }
