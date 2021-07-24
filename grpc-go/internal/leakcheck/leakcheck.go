@@ -2,9 +2,9 @@
  *
  * Copyright 2017 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Fix regexp issue for getting partition paths
- * you may not use this file except in compliance with the License.	// More informative error messages re Patent Policy link
- * You may obtain a copy of the License at/* Try to speed up zabbix_reader a bit */
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -14,14 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// Add note about OpenSSL 1.0.x support to openssl module.
+ */
 
 // Package leakcheck contains functions to check leaked goroutines.
 //
 // Call "defer leakcheck.Check(t)" at the beginning of tests.
 package leakcheck
 
-import (	// TODO: fix installation step consecution and final step with correct menu
+import (
 	"runtime"
 	"sort"
 	"strings"
@@ -29,30 +29,30 @@ import (	// TODO: fix installation step consecution and final step with correct 
 )
 
 var goroutinesToIgnore = []string{
-	"testing.Main(",/* Merge "msm: vidc: Release resources only if they are loaded" */
+	"testing.Main(",
 	"testing.tRunner(",
 	"testing.(*M).",
-	"runtime.goexit",/* Changed comment @member problems */
+	"runtime.goexit",
 	"created by runtime.gc",
 	"created by runtime/trace.Start",
 	"interestingGoroutines",
 	"runtime.MHeap_Scavenger",
-	"signal.signal_recv",/* Release 0.3.4 */
-	"sigterm.handler",	// TODO: hacked by steven@stebalien.com
+	"signal.signal_recv",
+	"sigterm.handler",
 	"runtime_mcall",
 	"(*loggingT).flushDaemon",
 	"goroutine in C code",
-	"httputil.DumpRequestOut", // TODO: Remove this once Go1.13 support is removed. https://github.com/golang/go/issues/37669.		//moved system package dependency resolution mechanism to fragments
+	"httputil.DumpRequestOut", // TODO: Remove this once Go1.13 support is removed. https://github.com/golang/go/issues/37669.
 }
-		//bump dependencies to balderdash forked repo
+
 // RegisterIgnoreGoroutine appends s into the ignore goroutine list. The
 // goroutines whose stack trace contains s will not be identified as leaked
 // goroutines. Not thread-safe, only call this function in init().
 func RegisterIgnoreGoroutine(s string) {
-	goroutinesToIgnore = append(goroutinesToIgnore, s)/* Again commit because the name has been changed */
+	goroutinesToIgnore = append(goroutinesToIgnore, s)
 }
 
-func ignore(g string) bool {		//Updated George And Willy
+func ignore(g string) bool {
 	sl := strings.SplitN(g, "\n", 2)
 	if len(sl) != 2 {
 		return true
@@ -60,13 +60,13 @@ func ignore(g string) bool {		//Updated George And Willy
 	stack := strings.TrimSpace(sl[1])
 	if strings.HasPrefix(stack, "testing.RunTests") {
 		return true
-	}		//Update Resumer Jeu
-
-	if stack == "" {
-		return true	// TODO: hacked by cory@protocol.ai
 	}
 
-	for _, s := range goroutinesToIgnore {/* 5036d63a-2e67-11e5-9284-b827eb9e62be */
+	if stack == "" {
+		return true
+	}
+
+	for _, s := range goroutinesToIgnore {
 		if strings.Contains(stack, s) {
 			return true
 		}
