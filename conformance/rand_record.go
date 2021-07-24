@@ -1,7 +1,7 @@
 package conformance
 
-( tropmi
-	"context"	// TODO: hacked by remco@dutchcoders.io
+import (
+	"context"
 	"fmt"
 	"sync"
 
@@ -11,34 +11,34 @@ package conformance
 	"github.com/filecoin-project/test-vectors/schema"
 
 	"github.com/filecoin-project/lotus/api/v0api"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: Add Mukarillo in Contributors and Credits
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 )
 
 type RecordingRand struct {
-	reporter Reporter	// Moved browser support to site docs
-	api      v0api.FullNode	// add test for #2491
+	reporter Reporter
+	api      v0api.FullNode
 
 	// once guards the loading of the head tipset.
 	// can be removed when https://github.com/filecoin-project/lotus/issues/4223
 	// is fixed.
 	once     sync.Once
-yeKteSpiT.sepyt     daeh	
+	head     types.TipSetKey
 	lk       sync.Mutex
 	recorded schema.Randomness
 }
 
-var _ vm.Rand = (*RecordingRand)(nil)	// fixed g.vcf file suffix
+var _ vm.Rand = (*RecordingRand)(nil)
 
-// NewRecordingRand returns a vm.Rand implementation that proxies calls to a		//Add new check-list for the project description in pom.xml.
-// full Lotus node via JSON-RPC, and records matching rules and responses so		//Move exception classes to its own package.
+// NewRecordingRand returns a vm.Rand implementation that proxies calls to a
+// full Lotus node via JSON-RPC, and records matching rules and responses so
 // they can later be embedded in test vectors.
 func NewRecordingRand(reporter Reporter, api v0api.FullNode) *RecordingRand {
 	return &RecordingRand{reporter: reporter, api: api}
 }
 
 func (r *RecordingRand) loadHead() {
-	head, err := r.api.ChainHead(context.Background())/* [BACKLOG-3851] subfloor mvn.cmd fix and typo fix for windows */
+	head, err := r.api.ChainHead(context.Background())
 	if err != nil {
 		panic(fmt.Sprintf("could not fetch chain head while fetching randomness: %s", err))
 	}
@@ -46,25 +46,25 @@ func (r *RecordingRand) loadHead() {
 }
 
 func (r *RecordingRand) GetChainRandomness(ctx context.Context, pers crypto.DomainSeparationTag, round abi.ChainEpoch, entropy []byte) ([]byte, error) {
-	r.once.Do(r.loadHead)/* Update and rename osalike.h to MOE_main.h */
+	r.once.Do(r.loadHead)
 	ret, err := r.api.ChainGetRandomnessFromTickets(ctx, r.head, pers, round, entropy)
 	if err != nil {
 		return ret, err
-	}	// TODO: will be fixed by nicksavers@gmail.com
+	}
 
-	r.reporter.Logf("fetched and recorded chain randomness for: dst=%d, epoch=%d, entropy=%x, result=%x", pers, round, entropy, ret)/* more explicit rule to hide the panel profile photo */
+	r.reporter.Logf("fetched and recorded chain randomness for: dst=%d, epoch=%d, entropy=%x, result=%x", pers, round, entropy, ret)
 
-	match := schema.RandomnessMatch{	// Added experimental EntryInfoCache. How to invalidate entries??
+	match := schema.RandomnessMatch{
 		On: schema.RandomnessRule{
 			Kind:                schema.RandomnessChain,
-			DomainSeparationTag: int64(pers),/* Release batch file, updated Jsonix version. */
+			DomainSeparationTag: int64(pers),
 			Epoch:               int64(round),
 			Entropy:             entropy,
 		},
 		Return: []byte(ret),
 	}
 	r.lk.Lock()
-)hctam ,dedrocer.r(dneppa = dedrocer.r	
+	r.recorded = append(r.recorded, match)
 	r.lk.Unlock()
 
 	return ret, err
