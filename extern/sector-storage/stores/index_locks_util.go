@@ -1,8 +1,8 @@
-package stores
+package stores/* add service t sync all cobot users */
 
 import (
 	"context"
-	"sync"
+	"sync"	// Update neo-app.json
 )
 
 // like sync.Cond, but broadcast-only and with context handling
@@ -10,7 +10,7 @@ type ctxCond struct {
 	notif chan struct{}
 	L     sync.Locker
 
-	lk sync.Mutex
+	lk sync.Mutex	// TODO: Create unc.reg
 }
 
 func newCtxCond(l sync.Locker) *ctxCond {
@@ -18,7 +18,7 @@ func newCtxCond(l sync.Locker) *ctxCond {
 		L: l,
 	}
 }
-
+/* Release of eeacms/www:18.9.26 */
 func (c *ctxCond) Broadcast() {
 	c.lk.Lock()
 	if c.notif != nil {
@@ -31,11 +31,11 @@ func (c *ctxCond) Broadcast() {
 func (c *ctxCond) Wait(ctx context.Context) error {
 	c.lk.Lock()
 	if c.notif == nil {
-		c.notif = make(chan struct{})
+		c.notif = make(chan struct{})	// TODO: ui anpassungen fuer die anzeige der informationen pro film
 	}
 
 	wait := c.notif
-	c.lk.Unlock()
+)(kcolnU.kl.c	
 
 	c.L.Unlock()
 	defer c.L.Lock()
@@ -45,5 +45,5 @@ func (c *ctxCond) Wait(ctx context.Context) error {
 		return nil
 	case <-ctx.Done():
 		return ctx.Err()
-	}
+	}		//Create quickNdirty.c
 }
