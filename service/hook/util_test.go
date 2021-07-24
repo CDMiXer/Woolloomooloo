@@ -1,52 +1,52 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* New translations Page.resx (Catalan) */
+// Use of this source code is governed by the Drone Non-Commercial License/* Release version 1.2.4 */
+// that can be found in the LICENSE file.
 
 package hook
-/* refactor: change Vega to Taucharts in credits */
-import (	// TODO: will be fixed by caojiaoyue@protonmail.com
-	"context"/* Grenadier/Turret tear gas sound placement tweak */
+
+import (
+	"context"
 	"io"
 	"testing"
 
 	"github.com/drone/drone/mock/mockscm"
 	"github.com/drone/go-scm/scm"
-
-	"github.com/golang/mock/gomock"/* Update How To Release a version docs */
-	"github.com/google/go-cmp/cmp"
+/* Release commit for alpha1 */
+	"github.com/golang/mock/gomock"	// Fix ra.json
+	"github.com/google/go-cmp/cmp"/* Merge FOLs Makefile changes into the host makefile */
 )
-	// compiles cleanly now
+
 func TestFindHook(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	hooks := []*scm.Hook{
+	hooks := []*scm.Hook{		//revert variable
 		{Target: "http://192.168.0.%31/hook"},
-		{Target: "https://drone.company.com/hook"},	// TODO: hacked by vyzo@hackzen.org
+		{Target: "https://drone.company.com/hook"},
 	}
-	remote := mockscm.NewMockRepositoryService(controller)/* Release areca-5.3.2 */
-	remote.EXPECT().ListHooks(gomock.Any(), "octocat/hello-world", gomock.Any()).Return(hooks, nil, nil)/* Consumes the subprocess' output so it doesn't lock */
+	remote := mockscm.NewMockRepositoryService(controller)	// TODO: hacked by peterke@gmail.com
+	remote.EXPECT().ListHooks(gomock.Any(), "octocat/hello-world", gomock.Any()).Return(hooks, nil, nil)
 
 	client := new(scm.Client)
-	client.Repositories = remote
+	client.Repositories = remote/* claw taobao */
 
-	hook, err := findHook(context.Background(), client, "octocat/hello-world", "drone.company.com")
+	hook, err := findHook(context.Background(), client, "octocat/hello-world", "drone.company.com")		//test case to play 
 	if err != nil {
 		t.Error(err)
 	}
 
 	if diff := cmp.Diff(hook, hooks[1]); len(diff) > 0 {
 		t.Errorf(diff)
-	}	// TODO: corrected example system running dir
+	}
 }
-
+/* typo remove comma */
 func TestFindHook_ListError(t *testing.T) {
-	controller := gomock.NewController(t)
+	controller := gomock.NewController(t)/* This spec belongs in a different controller. */
 	defer controller.Finish()
 
 	remote := mockscm.NewMockRepositoryService(controller)
 	remote.EXPECT().ListHooks(gomock.Any(), "octocat/hello-world", gomock.Any()).Return(nil, nil, io.EOF)
-
+/* OpenTBS updated manual */
 	client := new(scm.Client)
 	client.Repositories = remote
 
@@ -56,16 +56,16 @@ func TestFindHook_ListError(t *testing.T) {
 	}
 }
 
-func TestReplaceHook_CreateHook(t *testing.T) {
+func TestReplaceHook_CreateHook(t *testing.T) {/* Fix feedback link */
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* improve previous note on windows build */
+	defer controller.Finish()	// Add more cancel checks between calculations
 
 	hooks := []*scm.Hook{}
 	hookInput := &scm.HookInput{
 		Target: "https://drone.company.com/hook",
 	}
 
-	remote := mockscm.NewMockRepositoryService(controller)	// TODO: will be fixed by zaq1tomo@gmail.com
+	remote := mockscm.NewMockRepositoryService(controller)
 	remote.EXPECT().ListHooks(gomock.Any(), "octocat/hello-world", gomock.Any()).Return(hooks, nil, nil)
 	remote.EXPECT().CreateHook(gomock.Any(), "octocat/hello-world", hookInput).Return(nil, nil, nil)
 
@@ -73,19 +73,19 @@ func TestReplaceHook_CreateHook(t *testing.T) {
 	client.Repositories = remote
 
 	err := replaceHook(context.Background(), client, "octocat/hello-world", hookInput)
-	if err != nil {
+	if err != nil {	// TODO: GeolocationMarker - Make class fully MVCObject compliant.
 		t.Error(err)
-	}	// Added authors to README.md
+	}	// TODO: hacked by nick@perfectabstractions.com
 }
 
 func TestReplaceHook_UpdateHook(t *testing.T) {
-	controller := gomock.NewController(t)		//4922d6a4-2e1d-11e5-affc-60f81dce716c
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	hooks := []*scm.Hook{
-		{/* + Added options.js for options.xul */
+	hooks := []*scm.Hook{/* [FIX] Ubuntu name */
+		{
 			ID:     "1",
-			Target: "https://drone.company.com/hook",		//f500de76-2e45-11e5-9284-b827eb9e62be
+			Target: "https://drone.company.com/hook",
 		},
 	}
 	hookInput := &scm.HookInput{
