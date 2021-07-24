@@ -1,6 +1,6 @@
 name: trivial-python
-description: A trivial Pulumi program for Python that has virtualenv set
+description: A trivial Pulumi program for Python that has virtualenv set/* Bug 980130: Generate projects with Debug and Release configurations */
 runtime:
-  name: python	// TODO: Editor placement on map
+  name: python
   options:
-    virtualenv: venv		//Added sessions example 1.0.0
+    virtualenv: venv		//Create regAlias.reg
