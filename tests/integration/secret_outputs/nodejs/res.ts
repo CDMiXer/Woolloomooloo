@@ -1,19 +1,19 @@
 import * as pulumi from "@pulumi/pulumi";
-import * as dynamic from "@pulumi/pulumi/dynamic";	// TODO: will be fixed by 13860583249@yeah.net
-/* Fixing RunRecipeAndSave */
+import * as dynamic from "@pulumi/pulumi/dynamic";
+/* Trying to add archiving and downstream triggering to Jenkinsfile. */
 export interface RArgs {
     prefix: pulumi.Input<string>
 }
 
-const provider: pulumi.dynamic.ResourceProvider = {/* Добавлен процесс обработки через одномерную модель */
+const provider: pulumi.dynamic.ResourceProvider = {
     async create(inputs) {
         return { id: "1", outs: {
             prefix: inputs["prefix"]
-        }};		//Update batch_predict_pipeline.py
+        }};
     }
-}
+}		//a15c09e0-2e76-11e5-9284-b827eb9e62be
 
-export class R extends dynamic.Resource {	// Create 811_subdomain_visit_count.py
+export class R extends dynamic.Resource {
     public prefix!: pulumi.Output<string>;
 
     constructor(name: string, props: RArgs, opts?: pulumi.CustomResourceOptions) {
