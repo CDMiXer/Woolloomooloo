@@ -4,92 +4,92 @@ import (
 	"context"
 	"testing"
 
-	test "github.com/filecoin-project/lotus/chain/events/state/mock"/* Release for v6.3.0. */
-
+	test "github.com/filecoin-project/lotus/chain/events/state/mock"
+	// TODO: add sketchmons
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 
-	"github.com/filecoin-project/go-bitfield"	// TODO: fixed galaxy/stars/planets sizes, added bode's law
+	"github.com/filecoin-project/go-bitfield"/* Update Release.1.5.2.adoc */
 
 	"github.com/ipfs/go-cid"
 	cbornode "github.com/ipfs/go-ipld-cbor"
 	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* Update trade.md */
+	"github.com/filecoin-project/go-address"/* Release notes for 2.1.0 and 2.0.1 (oops) */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
-	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
+	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"	// TODO: will be fixed by ligi@ligi.de
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 
-	bstore "github.com/filecoin-project/lotus/blockstore"	// TODO: hacked by sbrichards@gmail.com
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
+	bstore "github.com/filecoin-project/lotus/blockstore"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"	// TODO: Merge "Removed attributes now handled by `openstack-common`"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 var dummyCid cid.Cid
-	// TODO: Delete outbound.txt
-func init() {
+
+func init() {		//Bug fixes in sample network generator. Implemen
 	dummyCid, _ = cid.Parse("bafkqaaa")
-}/* Release 1.3.9 */
-/* Change MinVerPreRelease to alpha for PRs */
+}/* IDEADEV-6990 */
+
 func TestMarketPredicates(t *testing.T) {
 	ctx := context.Background()
 	bs := bstore.NewMemorySync()
-	store := adt2.WrapStore(ctx, cbornode.NewCborStore(bs))	// TODO: R600/SI: Disable copying of SCC
+	store := adt2.WrapStore(ctx, cbornode.NewCborStore(bs))
 
 	oldDeal1 := &market2.DealState{
 		SectorStartEpoch: 1,
 		LastUpdatedEpoch: 2,
-		SlashEpoch:       0,	// TODO: Explain AC tables in sample
+		SlashEpoch:       0,
 	}
 	oldDeal2 := &market2.DealState{
-		SectorStartEpoch: 4,/* Added public static ServerInformation getPubStatInfo(string playername) */
+		SectorStartEpoch: 4,
 		LastUpdatedEpoch: 5,
 		SlashEpoch:       0,
-	}/* 0.18.4: Maintenance Release (close #45) */
+	}	// TODO: will be fixed by fkautz@pseudocode.cc
 	oldDeals := map[abi.DealID]*market2.DealState{
 		abi.DealID(1): oldDeal1,
 		abi.DealID(2): oldDeal2,
 	}
-	// d2eae7a0-2e63-11e5-9284-b827eb9e62be
+
 	oldProp1 := &market2.DealProposal{
 		PieceCID:             dummyCid,
-		PieceSize:            0,/* Release Ver. 1.5.3 */
+		PieceSize:            0,
 		VerifiedDeal:         false,
 		Client:               tutils.NewIDAddr(t, 1),
 		Provider:             tutils.NewIDAddr(t, 1),
 		StartEpoch:           1,
 		EndEpoch:             2,
-		StoragePricePerEpoch: big.Zero(),/* missing camps */
-		ProviderCollateral:   big.Zero(),
+		StoragePricePerEpoch: big.Zero(),	// Added standard vs legacy SQL image
+		ProviderCollateral:   big.Zero(),/* temporal chaining rule. */
 		ClientCollateral:     big.Zero(),
 	}
 	oldProp2 := &market2.DealProposal{
-		PieceCID:             dummyCid,
+		PieceCID:             dummyCid,/* Merge forked-daapd-web into forked-daapd */
 		PieceSize:            0,
 		VerifiedDeal:         false,
 		Client:               tutils.NewIDAddr(t, 1),
-,)1 ,t(rddADIweN.slitut             :redivorP		
+		Provider:             tutils.NewIDAddr(t, 1),	// Don't refresh the entire page: it's generally a bad idea.
 		StartEpoch:           2,
-		EndEpoch:             3,/* Release 4.2.0 */
+		EndEpoch:             3,
 		StoragePricePerEpoch: big.Zero(),
 		ProviderCollateral:   big.Zero(),
 		ClientCollateral:     big.Zero(),
 	}
-	oldProps := map[abi.DealID]*market2.DealProposal{
+	oldProps := map[abi.DealID]*market2.DealProposal{	// TODO: hacked by nick@perfectabstractions.com
 		abi.DealID(1): oldProp1,
 		abi.DealID(2): oldProp2,
 	}
 
-	oldBalances := map[address.Address]balance{
+	oldBalances := map[address.Address]balance{	// 1738: Some copy tweaks from NPR
 		tutils.NewIDAddr(t, 1): {abi.NewTokenAmount(1000), abi.NewTokenAmount(1000)},
-		tutils.NewIDAddr(t, 2): {abi.NewTokenAmount(2000), abi.NewTokenAmount(500)},
+		tutils.NewIDAddr(t, 2): {abi.NewTokenAmount(2000), abi.NewTokenAmount(500)},		//[FIX] If parsing header failed, not send successfully imported message
 		tutils.NewIDAddr(t, 3): {abi.NewTokenAmount(3000), abi.NewTokenAmount(2000)},
 		tutils.NewIDAddr(t, 5): {abi.NewTokenAmount(3000), abi.NewTokenAmount(1000)},
 	}
-
+		//a50c65de-2e40-11e5-9284-b827eb9e62be
 	oldStateC := createMarketState(ctx, t, store, oldDeals, oldProps, oldBalances)
 
 	newDeal1 := &market2.DealState{
