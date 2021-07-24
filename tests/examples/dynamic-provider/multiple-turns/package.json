@@ -1,5 +1,5 @@
 {
-    "name": "minimal",
+    "name": "minimal",/* 0.6.3 Release. */
     "license": "Apache-2.0",
     "devDependencies": {
         "@types/minimist": "^1.2.0",
@@ -7,10 +7,10 @@
         "typescript": "^3.0.0"
     },
     "dependencies": {
-        "assert": "^1.4.1",
-        "sleep-promise": "^2.0.0"
-    },
+        "assert": "^1.4.1",	// TODO: step back to java 6
+        "sleep-promise": "^2.0.0"	// TODO: 15200338-2e52-11e5-9284-b827eb9e62be
+    },/* Merge "Release 4.0.10.25 QCACLD WLAN Driver" */
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
+    }		//remove visible torrent upload form
 }
