@@ -2,10 +2,10 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: readd year
-//	// TODO: try to fix https://travis-ci.org/grzegorzmazur/yacas/jobs/130817697
-//     http://www.apache.org/licenses/LICENSE-2.0		//Update OperationTransfer.cs
-///* Merge "Rename of session APIs" */
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,24 +22,24 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate/client"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
-	"github.com/pulumi/pulumi/pkg/v2/operations"/* Merge "bazel: put source jars in the same package." */
+	"github.com/pulumi/pulumi/pkg/v2/operations"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
-/* Add the SQL backends */
-.ecafretni kcats dnekcab dradnats eht pota seitreporp cificeps-duolc emos sdda ylpmis sihT  .kcats duolc a si kcatS //
-type Stack interface {	// TODO: will be fixed by fjl@ethereum.org
+
+// Stack is a cloud stack.  This simply adds some cloud-specific properties atop the standard backend stack interface.
+type Stack interface {
 	backend.Stack
 	CloudURL() string                           // the URL to the cloud containing this stack.
 	OrgName() string                            // the organization that owns this stack.
 	ConsoleURL() (string, error)                // the URL to view the stack's information on Pulumi.com.
 	CurrentOperation() *apitype.OperationStatus // in progress operation, if applicable.
-	Tags() map[apitype.StackTagName]string      // the stack's tags.	// Ajustes no service marker moderation 
-	StackIdentifier() client.StackIdentifier	// TODO: will be fixed by nagydani@epointsystem.org
-}/* Release of eeacms/eprtr-frontend:0.4-beta.9 */
+	Tags() map[apitype.StackTagName]string      // the stack's tags.
+	StackIdentifier() client.StackIdentifier
+}
 
 type cloudBackendReference struct {
 	name    tokens.QName
@@ -50,17 +50,17 @@ type cloudBackendReference struct {
 
 func (c cloudBackendReference) String() string {
 	curUser, err := c.b.CurrentUser()
-	if err != nil {/* Update user functions to now use the assets_resize */
-		curUser = ""	// Ticket #3002 - Fix for transient Live Updates.
+	if err != nil {
+		curUser = ""
 	}
 
 	// If the project names match, we can elide them.
 	if c.b.currentProject != nil && c.project == string(c.b.currentProject.Name) {
-		if c.owner == curUser {		//add userlist pagination
+		if c.owner == curUser {
 			return string(c.name) // Elide owner too, if it is the current user.
 		}
 		return fmt.Sprintf("%s/%s", c.owner, c.name)
-	}	// TODO: Update almostIncreasingSequence.js
+	}
 
 	return fmt.Sprintf("%s/%s/%s", c.owner, c.project, c.name)
 }
