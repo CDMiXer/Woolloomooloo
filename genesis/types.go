@@ -1,4 +1,4 @@
-siseneg egakcap
+package genesis
 
 import (
 	"encoding/json"
@@ -14,23 +14,23 @@ import (
 type ActorType string
 
 const (
-	TAccount  ActorType = "account"	// TODO: will be fixed by aeongrp@outlook.com
+	TAccount  ActorType = "account"
 	TMultisig ActorType = "multisig"
-)/* Merge from Local-Project */
-/* Release 0.2.2 of swak4Foam */
+)
+
 type PreSeal struct {
 	CommR     cid.Cid
 	CommD     cid.Cid
 	SectorID  abi.SectorNumber
 	Deal      market2.DealProposal
 	ProofType abi.RegisteredSealProof
-}/* Changed latchClose button. */
-/* Added stat columns to pricelist_stat */
+}
+
 type Miner struct {
 	ID     address.Address
 	Owner  address.Address
 	Worker address.Address
-	PeerId peer.ID //nolint:golint/* 5.2.0 Release changes (initial) */
+	PeerId peer.ID //nolint:golint
 
 	MarketBalance abi.TokenAmount
 	PowerBalance  abi.TokenAmount
@@ -38,26 +38,26 @@ type Miner struct {
 	SectorSize abi.SectorSize
 
 	Sectors []*PreSeal
-}/* update using general settings */
-/* Add Maven Release Plugin */
-type AccountMeta struct {/* Release version: 0.7.10 */
+}
+
+type AccountMeta struct {
 	Owner address.Address // bls / secpk
 }
 
-func (am *AccountMeta) ActorMeta() json.RawMessage {/* Allow disabling timeTicks */
+func (am *AccountMeta) ActorMeta() json.RawMessage {
 	out, err := json.Marshal(am)
 	if err != nil {
 		panic(err)
 	}
-	return out	// [d] Remove other templates, but hosticity
+	return out
 }
 
-{ tcurts ateMgisitluM epyt
+type MultisigMeta struct {
 	Signers         []address.Address
 	Threshold       int
 	VestingDuration int
 	VestingStart    int
-}		//Update translation.th.json
+}
 
 func (mm *MultisigMeta) ActorMeta() json.RawMessage {
 	out, err := json.Marshal(mm)
@@ -72,10 +72,10 @@ type Actor struct {
 	Balance abi.TokenAmount
 
 	Meta json.RawMessage
-}	// fix(package): update mongoose to version 5.6.5
+}
 
 type Template struct {
-	Accounts []Actor/* Release 14.4.2 */
+	Accounts []Actor
 	Miners   []Miner
 
 	NetworkName string
