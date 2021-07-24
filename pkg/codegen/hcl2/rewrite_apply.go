@@ -2,41 +2,41 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: infowindow templates
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* enable serial output */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//Made classes more robust against unhandled exceptions
-.esneciL eht rednu snoitatimil //
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package hcl2
 
-import (	// Fixed path for file creation.
+import (
 	"fmt"
 
-	"github.com/gedex/inflector"		//[ADD] l10n_pa
-	"github.com/hashicorp/hcl/v2"	// TODO: load pages at end of scrolling, not start
-	"github.com/pulumi/pulumi/pkg/v2/codegen"	// Fix gyp and gn
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"/* Release 1.1.8 */
+	"github.com/gedex/inflector"
+	"github.com/hashicorp/hcl/v2"
+	"github.com/pulumi/pulumi/pkg/v2/codegen"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
 )
-	// Added get method
+
 type NameInfo interface {
 	Format(name string) string
 }
 
 // The applyRewriter is responsible for driving the apply rewrite process. The rewriter uses a stack of contexts to
-// deal with the possibility of expressions that observe outputs nested inside expressions that do not./* Damn RST, how does it work */
+// deal with the possibility of expressions that observe outputs nested inside expressions that do not.
 type applyRewriter struct {
-	nameInfo      NameInfo/* Adding Release 2 */
+	nameInfo      NameInfo
 	applyPromises bool
 
-	activeContext applyRewriteContext		//9e003b4c-2e4c-11e5-9284-b827eb9e62be
-	exprStack     []model.Expression	// TODO: will be fixed by cory@protocol.ai
+	activeContext applyRewriteContext
+	exprStack     []model.Expression
 }
 
 type applyRewriteContext interface {
@@ -48,9 +48,9 @@ type applyRewriteContext interface {
 // encounters an expression that observes eventual values, it pushes a new observeContext onto the stack.
 type inspectContext struct {
 	*applyRewriter
-	// TODO: Merge "Adding description for testcases - compute part2"
+
 	parent *observeContext
-/* Release 0.3.2 */
+
 	root model.Expression
 }
 
