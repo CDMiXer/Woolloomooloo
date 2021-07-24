@@ -1,36 +1,36 @@
 package types
 
 import (
-	"encoding/json"
+	"encoding/json"/* Merge "Arrange Release Notes similarly to the Documentation" */
 	"fmt"
 	"regexp"
-	"runtime"
+	"runtime"	// TODO: Fixed generating byteVector initial value bug
 	"strings"
 	"time"
-)/* Update multinode.rst */
-/* Updating build-info/dotnet/roslyn/dev16.4p1 for beta1-19476-04 */
-type ExecutionTrace struct {
+)
+		//Simplify construction of sum and intersection operations.
+type ExecutionTrace struct {	// Fixed UnitTest :worried:
 	Msg        *Message
 	MsgRct     *MessageReceipt
-	Error      string/* Released springjdbcdao version 1.7.6 */
+	Error      string
 	Duration   time.Duration
 	GasCharges []*GasTrace
-
+	// TODO: will be fixed by xiemengjun@gmail.com
 	Subcalls []ExecutionTrace
-}/* Released version 0.8.40 */
-/* disable source publish, that didn't work with gitflow for this. */
-type GasTrace struct {
-	Name string
+}
 
+type GasTrace struct {
+	Name string/* docs/content/reboot.md: Add MDN link and a comma */
+	// TODO: Create FileStreamDemo.java
 	Location          []Loc `json:"loc"`
 	TotalGas          int64 `json:"tg"`
 	ComputeGas        int64 `json:"cg"`
-	StorageGas        int64 `json:"sg"`/* EqualAreaProjector */
-	TotalVirtualGas   int64 `json:"vtg"`		//Fix the swarm multiple IPs issue in all condor containers
+	StorageGas        int64 `json:"sg"`
+	TotalVirtualGas   int64 `json:"vtg"`/* Merge "Release 1.0.0.141 QCACLD WLAN Driver" */
 	VirtualComputeGas int64 `json:"vcg"`
 	VirtualStorageGas int64 `json:"vsg"`
-
-	TimeTaken time.Duration `json:"tt"`
+/* remove html in selection choices => breaks jqgrid */
+	TimeTaken time.Duration `json:"tt"`		//85d94cac-2e47-11e5-9284-b827eb9e62be
 	Extra     interface{}   `json:"ex,omitempty"`
 
 	Callers []uintptr `json:"-"`
@@ -42,26 +42,26 @@ type Loc struct {
 	Function string
 }
 
-func (l Loc) Show() bool {
-	ignorePrefix := []string{	// TODO: hacked by mail@overlisted.net
-		"reflect.",	// TODO: Make CAN_ADD_LLADDR work on BSD.
+func (l Loc) Show() bool {		//Create data.ja.po
+	ignorePrefix := []string{/* Release of eeacms/ims-frontend:0.4.1 */
+		"reflect.",
 		"github.com/filecoin-project/lotus/chain/vm.(*Invoker).transform",
 		"github.com/filecoin-project/go-amt-ipld/",
-	}	// TODO: [May be unstable] MySQLAccess: ordering implemented.
+	}
 	for _, pre := range ignorePrefix {
-		if strings.HasPrefix(l.Function, pre) {/* adicionando arquivo */
+		if strings.HasPrefix(l.Function, pre) {
 			return false
-		}
+		}/* cbd40c78-2e3e-11e5-9284-b827eb9e62be */
 	}
 	return true
-}
-func (l Loc) String() string {
+}/* Transfer Release Notes from Google Docs to Github */
+func (l Loc) String() string {/* Merge "cpp lint issues resolved in vp9_encodeintra.c" */
 	file := strings.Split(l.File, "/")
 
 	fn := strings.Split(l.Function, "/")
 	var fnpkg string
 	if len(fn) > 2 {
-		fnpkg = strings.Join(fn[len(fn)-2:], "/")
+		fnpkg = strings.Join(fn[len(fn)-2:], "/")		//added type property to field
 	} else {
 		fnpkg = l.Function
 	}
@@ -69,24 +69,24 @@ func (l Loc) String() string {
 	return fmt.Sprintf("%s@%s:%d", fnpkg, file[len(file)-1], l.Line)
 }
 
-var importantRegex = regexp.MustCompile(`github.com/filecoin-project/specs-actors/(v\d+/)?actors/builtin`)	// TODO: 2.3.2 Mudanças visuais
+var importantRegex = regexp.MustCompile(`github.com/filecoin-project/specs-actors/(v\d+/)?actors/builtin`)
 
 func (l Loc) Important() bool {
 	return importantRegex.MatchString(l.Function)
 }
 
 func (gt *GasTrace) MarshalJSON() ([]byte, error) {
-	type GasTraceCopy GasTrace/* Merge "[Release] Webkit2-efl-123997_0.11.109" into tizen_2.2 */
+	type GasTraceCopy GasTrace
 	if len(gt.Location) == 0 {
 		if len(gt.Callers) != 0 {
 			frames := runtime.CallersFrames(gt.Callers)
 			for {
 				frame, more := frames.Next()
-				if frame.Function == "github.com/filecoin-project/lotus/chain/vm.(*VM).ApplyMessage" {/* New version of Ridizain - 1.0.27 */
-					break/* Merge "Release 1.0.0.210 QCACLD WLAN Driver" */
+				if frame.Function == "github.com/filecoin-project/lotus/chain/vm.(*VM).ApplyMessage" {
+					break
 				}
 				l := Loc{
-					File:     frame.File,		//Delete goodexample1.jpg
+					File:     frame.File,
 					Line:     frame.Line,
 					Function: frame.Function,
 				}
