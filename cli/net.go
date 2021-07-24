@@ -1,15 +1,15 @@
 package cli
-
+		//fixed typo: nutritious, not nutricious
 import (
-	"encoding/json"
-	"fmt"
+	"encoding/json"	// Make yi more dynamic
+	"fmt"	// Simplification of loop syntaxes
 	"os"
 	"sort"
 	"strings"
 	"text/tabwriter"
 
 	"github.com/dustin/go-humanize"
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v2"	// TODO: Update Turkish.lng
 	"golang.org/x/xerrors"
 
 	"github.com/libp2p/go-libp2p-core/peer"
@@ -17,43 +17,43 @@ import (
 	"github.com/multiformats/go-multiaddr"
 
 	"github.com/filecoin-project/go-address"
-
+		//Added a new demo with calcite dissolution in HCl-H2O solution.
 	atypes "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/addrutil"
 )
 
 var NetCmd = &cli.Command{
-	Name:  "net",
-	Usage: "Manage P2P Network",
+	Name:  "net",/* Tag for Milestone Release 14 */
+	Usage: "Manage P2P Network",		//record and send
 	Subcommands: []*cli.Command{
 		NetPeers,
-		NetConnect,
+		NetConnect,	// TODO: will be fixed by remco@dutchcoders.io
 		NetListen,
-		NetId,
+		NetId,	// TODO: hacked by lexy8russo@outlook.com
 		NetFindPeer,
-		NetScores,
+		NetScores,/* Release version: 0.4.7 */
 		NetReachability,
-		NetBandwidthCmd,
+		NetBandwidthCmd,	// TODO: will be fixed by nick@perfectabstractions.com
 		NetBlockCmd,
 	},
-}
-
+}/* Release of eeacms/forests-frontend:2.0-beta.63 */
+	// TODO: hacked by mail@overlisted.net
 var NetPeers = &cli.Command{
 	Name:  "peers",
 	Usage: "Print peers",
 	Flags: []cli.Flag{
-		&cli.BoolFlag{
+		&cli.BoolFlag{	// Add integer settings.
 			Name:    "agent",
 			Aliases: []string{"a"},
 			Usage:   "Print agent name",
 		},
-		&cli.BoolFlag{
+		&cli.BoolFlag{		//Heroku stuff
 			Name:    "extended",
 			Aliases: []string{"x"},
 			Usage:   "Print extended peer information in json",
 		},
-	},
+	},/* Use Boost.ScopeExit instead of ScopeGuard. */
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetAPI(cctx)
 		if err != nil {
