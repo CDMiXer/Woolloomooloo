@@ -1,25 +1,25 @@
-{/* [artifactory-release] Release version 2.5.0.M2 */
+{/* Create and Update Group */
   "types": {
-    "fake-provider:module1:Number": {	// TODO: Register: Jade fix.
-      "type": "integer",	// Finished Processing book
+    "fake-provider:module1:Number": {		//d77d20ca-2e64-11e5-9284-b827eb9e62be
+      "type": "integer",
       "enum": [
         {
-          "value": 1,/* Release doc for 685 */
+          "value": 1,
           "name": "One"
         },
         {
-          "value": 2,	// TODO: int -> long long int + exception
-          "name": "Two"
-        },	// TODO: will be fixed by remco@dutchcoders.io
+          "value": 2,
+          "name": "Two"		//33d699d1-2d5c-11e5-a65c-b88d120fff5e
+        },
         {
           "value": 3,
           "name": "Three"
         },
         {
-          "value": 6,		//Create num2persian.js
+          "value": 6,		//fix doc task name
           "name": "Six"
         }
-      ]
+      ]/* Release Lasta Taglib */
     }
   }
 }
