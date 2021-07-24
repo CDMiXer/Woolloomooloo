@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>/* Merge "wlan: Release 3.2.3.103" */
     <Nullable>enable</Nullable>
-  </PropertyGroup>
+  </PropertyGroup>/* Create airscript-ng(old).py */
   <ItemGroup>
     <Compile Include="Program.fs" />
   </ItemGroup>
