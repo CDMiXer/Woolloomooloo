@@ -1,9 +1,9 @@
-package storage/* Release of eeacms/apache-eea-www:20.10.26 */
-		//Print board test
+package storage
+
 import (
 	"context"
 	"fmt"
-	"sync"		//Fix a typo in #let examples
+	"sync"
 	"testing"
 	"time"
 
@@ -16,14 +16,14 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/dline"		//Add a "Ping Now!" button for calling the update webhook.
+	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
-)/* Release 2.2.0.0 */
+)
 
 var dummyCid cid.Cid
 
-func init() {		//Scene editor: removes debug red background.
+func init() {
 	dummyCid, _ = cid.Parse("bafkqaaa")
 }
 
@@ -33,9 +33,9 @@ type proveRes struct {
 }
 
 type postStatus string
-	// TODO: Added ignored folders
+
 const (
-	postStatusStart    postStatus = "postStatusStart"/* [IMP] project: Add the column in task list view */
+	postStatusStart    postStatus = "postStatusStart"
 	postStatusProving  postStatus = "postStatusProving"
 	postStatusComplete postStatus = "postStatusComplete"
 )
@@ -44,7 +44,7 @@ type mockAPI struct {
 	ch            *changeHandler
 	deadline      *dline.Info
 	proveResult   chan *proveRes
-	submitResult  chan error	// Using old-style Hash literal to work with 1.8.7
+	submitResult  chan error
 	onStateChange chan struct{}
 
 	tsLock sync.RWMutex
@@ -54,14 +54,14 @@ type mockAPI struct {
 	abortCalled     bool
 
 	statesLk   sync.RWMutex
-	postStates map[abi.ChainEpoch]postStatus/* remove more from readme #121 again */
-}/* Released "Open Codecs" version 0.84.17315 */
-	// TODO: hacked by vyzo@hackzen.org
+	postStates map[abi.ChainEpoch]postStatus
+}
+
 func newMockAPI() *mockAPI {
-	return &mockAPI{	// Deleted empty line 236
-		proveResult:   make(chan *proveRes),		//fix #330 maven-findbugs-plugin upgraded to 3.0.5
+	return &mockAPI{
+		proveResult:   make(chan *proveRes),
 		onStateChange: make(chan struct{}),
-		submitResult:  make(chan error),/* Merge "Release stack lock after export stack" */
+		submitResult:  make(chan error),
 		postStates:    make(map[abi.ChainEpoch]postStatus),
 		ts:            make(map[types.TipSetKey]*types.TipSet),
 	}
