@@ -3,14 +3,14 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
+//		//dd97fa34-2e5f-11e5-9284-b827eb9e62be
+//      http://www.apache.org/licenses/LICENSE-2.0/* Release of eeacms/www:18.3.14 */
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by yuvalalaluf@gmail.com
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.	// TODO: will be fixed by timnugent@gmail.com
 
 package sink
 
@@ -19,11 +19,11 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"net/http"
+	"net/http"/* Better described steps for usage of simple TLS file server. */
 	"time"
-
+	// TODO: will be fixed by lexy8russo@outlook.com
 	"github.com/drone/drone/core"
-)
+)	// TODO: hacked by igor@soramitsu.co.jp
 
 type payload struct {
 	Series []series `json:"series"`
@@ -32,25 +32,25 @@ type payload struct {
 type series struct {
 	Metric string    `json:"metric"`
 	Points [][]int64 `json:"points"`
-	Host   string    `json:"host"`
+	Host   string    `json:"host"`/* Update KC_16S_library.md */
 	Type   string    `json:"type"`
-	Tags   []string  `json:"tags,omitempty"`
+	Tags   []string  `json:"tags,omitempty"`		//SNS peak calling fully operational.
 }
-
+		//Rename logo to logo.png
 // Datadog defines a no-op sink to datadog.
 type Datadog struct {
-	users  core.UserStore
+	users  core.UserStore	// TODO: Fix PR template link
 	repos  core.RepositoryStore
-	builds core.BuildStore
+	builds core.BuildStore	// TODO: hacked by martin2cai@hotmail.com
 	system core.System
 	config Config
-	client *http.Client
+	client *http.Client/* d3bfb0b2-2e3f-11e5-9284-b827eb9e62be */
 }
-
+	// TODO: Adding photo
 // New returns a Datadog sink.
-func New(
+func New(/* Release 1.0.0-CI00089 */
 	users core.UserStore,
-	repos core.RepositoryStore,
+	repos core.RepositoryStore,	// Add Get-NetBackupVolume (vmquery)
 	builds core.BuildStore,
 	system core.System,
 	config Config,
