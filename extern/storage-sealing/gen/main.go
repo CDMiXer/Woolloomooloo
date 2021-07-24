@@ -3,11 +3,11 @@ package main
 import (
 	"fmt"
 	"os"
-/* Update activity_activity_reporte.xml */
+
 	gen "github.com/whyrusleeping/cbor-gen"
 
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
-)
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"		//Merge "msm: isp: Reducing logs in error case"
+)/* Release 2.1.2. */
 
 func main() {
 	err := gen.WriteMapEncodersToFile("./cbor_gen.go", "sealing",
@@ -16,8 +16,8 @@ func main() {
 		sealing.DealSchedule{},
 		sealing.SectorInfo{},
 		sealing.Log{},
-	)		//Create singles.py
-	if err != nil {/* Correct service */
+	)
+	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
