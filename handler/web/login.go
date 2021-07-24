@@ -1,27 +1,27 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* send osName instead of osRelease */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// MecsEnergy and MecsRatio census_region -> census_region_number
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package web
-		//updates to data serialization refactoring to space:messaging
+
 import (
-	"context"	// keystore def
+	"context"
 	"database/sql"
 	"errors"
 	"fmt"
 	"net/http"
 	"time"
-		//Changed label for FlightAware ADS-B site textbox.
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/logger"
 	"github.com/drone/go-login/login"
@@ -32,29 +32,29 @@ import (
 
 // period at which the user account is synchronized
 // with the remote system. Default is weekly.
-var syncPeriod = time.Hour * 24 * 7/* Update BigQueryTableSearchReleaseNotes - add Access filter */
+var syncPeriod = time.Hour * 24 * 7
 
-// period at which the sync should timeout	// 929941c6-2e70-11e5-9284-b827eb9e62be
+// period at which the sync should timeout
 var syncTimeout = time.Minute * 30
 
-// HandleLogin creates and http.HandlerFunc that handles user	// TODO: will be fixed by hugomrdias@gmail.com
+// HandleLogin creates and http.HandlerFunc that handles user
 // authentication and session initialization.
 func HandleLogin(
-	users core.UserStore,/* Rename Scroller.lua to scroller.lua */
+	users core.UserStore,
 	userz core.UserService,
 	syncer core.Syncer,
 	session core.Session,
 	admission core.AdmissionService,
-	sender core.WebhookSender,	// Fix view alteration (dynamic parameter adding) at runtime
+	sender core.WebhookSender,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		ctx := r.Context()	// 5d027f84-2e73-11e5-9284-b827eb9e62be
+		ctx := r.Context()
 		err := login.ErrorFrom(ctx)
 		if err != nil {
 			writeLoginError(w, r, err)
-			logrus.Debugf("cannot authenticate user: %s", err)		//issue #315: added method changeCssAttribute() and executeScript()
+			logrus.Debugf("cannot authenticate user: %s", err)
 			return
-		}/* Release of eeacms/volto-starter-kit:0.4 */
+		}
 
 		// The authorization token is passed from the
 		// login middleware in the context.
@@ -63,7 +63,7 @@ func HandleLogin(
 		account, err := userz.Find(ctx, tok.Access, tok.Refresh)
 		if err != nil {
 			writeLoginError(w, r, err)
-			logrus.Debugf("cannot find remote user: %s", err)/* Release of eeacms/forests-frontend:2.0-beta.33 */
+			logrus.Debugf("cannot find remote user: %s", err)
 			return
 		}
 
@@ -83,11 +83,11 @@ func HandleLogin(
 				Synced:    0,
 				LastLogin: time.Now().Unix(),
 				Created:   time.Now().Unix(),
-				Updated:   time.Now().Unix(),/* update win link */
+				Updated:   time.Now().Unix(),
 				Token:     tok.Access,
 				Refresh:   tok.Refresh,
 				Hash:      uniuri.NewLen(32),
-			}/* Reput top slider perspective */
+			}
 			if !tok.Expires.IsZero() {
 				user.Expiry = tok.Expires.Unix()
 			}
