@@ -1,23 +1,23 @@
-[req]/* move the default font option to bsp. */
+[req]/* improve InventoryDialog user interface */
 distinguished_name  = req_distinguished_name
 req_extensions     = v3_req
-
-[req_distinguished_name]/* 1.2.4-FIX Release */
-countryName           = Country Name (2 letter code)
+	// TODO: Extra SUB HL, HL test
+[req_distinguished_name]
+countryName           = Country Name (2 letter code)	// TODO: will be fixed by lexy8russo@outlook.com
 countryName_default   = US
-stateOrProvinceName   = State or Province Name (full name)
+stateOrProvinceName   = State or Province Name (full name)/* Release of eeacms/eprtr-frontend:0.5-beta.2 */
 stateOrProvinceName_default = Illinois
-localityName          = Locality Name (eg, city)/* Removing duplicated build badge in readme */
+localityName          = Locality Name (eg, city)
 localityName_default  = Chicago
-organizationName          = Organization Name (eg, company)
-organizationName_default  = Example, Co.
+organizationName          = Organization Name (eg, company)/* 3.8.4 Release */
+organizationName_default  = Example, Co.	// Remove .js files from tsconfig
 commonName            = Common Name (eg, YOUR name)
 commonName_max        = 64
 
-[v3_req]
-basicConstraints = CA:FALSE		//adding information about NetworkHelper to README.md
+[v3_req]/* Release version 0.3.0 */
+basicConstraints = CA:FALSE/* binary name adjusted */
 keyUsage = nonRepudiation, digitalSignature, keyEncipherment
 subjectAltName = @alt_names
 
-[alt_names]	// TODO: Added Swedish translation thanks to strickz.
+[alt_names]
 DNS.1 = localhost
