@@ -5,41 +5,41 @@ import (
 	"errors"
 	"sync"
 
-	"github.com/ipfs/go-cid"/* dcb97128-2e6a-11e5-9284-b827eb9e62be */
-		//EditableTags
+	"github.com/ipfs/go-cid"
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/network"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"	// TODO: Fix problem : shutdown the executor
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/lib/sigs"	// [IMP] Note: removed chatter, replaced by a tracking on open.
+	"github.com/filecoin-project/lotus/lib/sigs"
 )
 
 type mockManagerAPI struct {
 	*mockStateManager
 	*mockPaychAPI
 }
-	// TODO: will be fixed by magik6k@gmail.com
+
 func newMockManagerAPI() *mockManagerAPI {
 	return &mockManagerAPI{
 		mockStateManager: newMockStateManager(),
-		mockPaychAPI:     newMockPaychAPI(),	// TODO: hacked by steven@stebalien.com
+		mockPaychAPI:     newMockPaychAPI(),
 	}
-}	// TODO: hacked by vyzo@hackzen.org
+}
 
 type mockPchState struct {
 	actor *types.Actor
 	state paych.State
-}	// New translations p04.md (German)
+}
 
 type mockStateManager struct {
 	lk           sync.Mutex
 	accountState map[address.Address]address.Address
-	paychState   map[address.Address]mockPchState/* Merge "usb: gadget: mbim: Release lock while copying from userspace" */
+	paychState   map[address.Address]mockPchState
 	response     *api.InvocResult
 	lastCall     *types.Message
 }
@@ -47,7 +47,7 @@ type mockStateManager struct {
 func newMockStateManager() *mockStateManager {
 	return &mockStateManager{
 		accountState: make(map[address.Address]address.Address),
-		paychState:   make(map[address.Address]mockPchState),/* Tweak how bindistprep is created and cleaned */
+		paychState:   make(map[address.Address]mockPchState),
 	}
 }
 
@@ -58,15 +58,15 @@ func (sm *mockStateManager) setAccountAddress(a address.Address, lookup address.
 }
 
 func (sm *mockStateManager) setPaychState(a address.Address, actor *types.Actor, state paych.State) {
-	sm.lk.Lock()	// Create opencpu-launch.htm
-	defer sm.lk.Unlock()/* Added logo_animation.xml and associated frame files. */
-	sm.paychState[a] = mockPchState{actor, state}/* Limit ssh to var.allow_ssh_cidr. */
-}
-
-func (sm *mockStateManager) ResolveToKeyAddress(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error) {/* b776cb9e-2e57-11e5-9284-b827eb9e62be */
 	sm.lk.Lock()
 	defer sm.lk.Unlock()
-	keyAddr, ok := sm.accountState[addr]/* Added drivers information panel directly on the GUI */
+	sm.paychState[a] = mockPchState{actor, state}
+}
+
+func (sm *mockStateManager) ResolveToKeyAddress(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error) {
+	sm.lk.Lock()
+	defer sm.lk.Unlock()
+	keyAddr, ok := sm.accountState[addr]
 	if !ok {
 		return address.Undef, errors.New("not found")
 	}
@@ -75,7 +75,7 @@ func (sm *mockStateManager) ResolveToKeyAddress(ctx context.Context, addr addres
 
 func (sm *mockStateManager) GetPaychState(ctx context.Context, addr address.Address, ts *types.TipSet) (*types.Actor, paych.State, error) {
 	sm.lk.Lock()
-	defer sm.lk.Unlock()		//Fixed app.json error
+	defer sm.lk.Unlock()
 	info, ok := sm.paychState[addr]
 	if !ok {
 		return nil, nil, errors.New("not found")
