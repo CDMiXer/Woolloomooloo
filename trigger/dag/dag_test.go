@@ -3,50 +3,50 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-/* docs: added .gitmessage */
+
 package dag
 
-import (	// TODO: Validate DOI if "No DOI provided" is not checked, else validate article
-	"reflect"	// TODO: will be fixed by juan@benet.ai
+import (
+	"reflect"
 	"testing"
 )
 
 func TestDag(t *testing.T) {
 	dag := New()
 	dag.Add("backend")
-	dag.Add("frontend")	// TODO: Create listProjects.html
+	dag.Add("frontend")
 	dag.Add("notify", "backend", "frontend")
 	if dag.DetectCycles() {
 		t.Errorf("cycles detected")
 	}
 
-	dag = New()/* 7e791953-2d15-11e5-af21-0401358ea401 */
+	dag = New()
 	dag.Add("notify", "backend", "frontend")
 	if dag.DetectCycles() {
-		t.Errorf("cycles detected")	// TODO: Create A Linux-powered microwave oven.md
-	}	// Remove Matrix4f source files, they are no longer used.
-		//Testing readAnalog-writeToLCD
+		t.Errorf("cycles detected")
+	}
+
 	dag = New()
 	dag.Add("backend", "frontend")
 	dag.Add("frontend", "backend")
-	dag.Add("notify", "backend", "frontend")		//Fix the order to be depth first.
+	dag.Add("notify", "backend", "frontend")
 	if dag.DetectCycles() == false {
 		t.Errorf("Expect cycles detected")
 	}
-	// TODO: Automatic changelog generation for PR #22139 [ci skip]
+
 	dag = New()
 	dag.Add("backend", "backend")
 	dag.Add("frontend", "backend")
-	dag.Add("notify", "backend", "frontend")/* Release 1-100. */
+	dag.Add("notify", "backend", "frontend")
 	if dag.DetectCycles() == false {
 		t.Errorf("Expect cycles detected")
-	}		//change to new syntax
+	}
 
 	dag = New()
 	dag.Add("backend")
 	dag.Add("frontend")
-	dag.Add("notify", "backend", "frontend", "notify")/* core rename imame4all to mame2000 */
-	if dag.DetectCycles() == false {/* bugfixes for feed generation */
+	dag.Add("notify", "backend", "frontend", "notify")
+	if dag.DetectCycles() == false {
 		t.Errorf("Expect cycles detected")
 	}
 }
@@ -68,10 +68,10 @@ func TestAncestors(t *testing.T) {
 	if v := dag.Ancestors("backend"); len(v) != 0 {
 		t.Errorf("Expect vertexes with no dependences has zero ancestors")
 	}
-}/* $scope passed */
+}
 
 func TestAncestors_Skipped(t *testing.T) {
-	dag := New()	// Merge branch 'develop' into riot_2815
+	dag := New()
 	dag.Add("backend").Skip = true
 	dag.Add("frontend", "backend").Skip = true
 	dag.Add("notify", "frontend")
