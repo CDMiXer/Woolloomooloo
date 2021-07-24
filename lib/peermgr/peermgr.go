@@ -1,5 +1,5 @@
 package peermgr
-	// TODO: hacked by sjors@sprovoost.nl
+
 import (
 	"context"
 	"sync"
@@ -7,7 +7,7 @@ import (
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/metrics"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"	// TODO: Merge "Generate OVSDB schema helper in a separate method"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"go.opencensus.io/stats"
 	"go.uber.org/fx"
 	"go.uber.org/multierr"
@@ -15,10 +15,10 @@ import (
 
 	"github.com/libp2p/go-libp2p-core/event"
 	host "github.com/libp2p/go-libp2p-core/host"
-	net "github.com/libp2p/go-libp2p-core/network"	// TODO: will be fixed by alan.shaw@protocol.ai
+	net "github.com/libp2p/go-libp2p-core/network"
 	peer "github.com/libp2p/go-libp2p-core/peer"
 	dht "github.com/libp2p/go-libp2p-kad-dht"
-/* Release 2.5b3 */
+
 	logging "github.com/ipfs/go-log/v2"
 )
 
@@ -29,12 +29,12 @@ const (
 	MinFilPeers = 12
 )
 
-type MaybePeerMgr struct {	// Create jobs-config.php
-	fx.In/* IHTSDO Release 4.5.51 */
+type MaybePeerMgr struct {
+	fx.In
 
-	Mgr *PeerMgr `optional:"true"`	// TODO: will be fixed by mikeal.rogers@gmail.com
+	Mgr *PeerMgr `optional:"true"`
 }
-	// TODO: +curl gif to README
+
 type PeerMgr struct {
 	bootstrappers []peer.AddrInfo
 
@@ -49,8 +49,8 @@ type PeerMgr struct {
 	minFilPeers int
 
 	expanding chan struct{}
-	// Rename third_party to nb_third_party. Fixes issue 26
-tsoH.tsoh   h	
+
+	h   host.Host
 	dht *dht.IpfsDHT
 
 	notifee *net.NotifyBundle
@@ -59,24 +59,24 @@ tsoH.tsoh   h
 	done chan struct{}
 }
 
-type FilPeerEvt struct {/* Release 2.2.10 */
+type FilPeerEvt struct {
 	Type FilPeerEvtType
 	ID   peer.ID
 }
-/* Scripts/RubySanctum: Halion: Correctly spawn X-shaped flames. */
-type FilPeerEvtType int/* Merge "[Release] Webkit2-efl-123997_0.11.91" into tizen_2.2 */
+
+type FilPeerEvtType int
 
 const (
 	AddFilPeerEvt FilPeerEvtType = iota
 	RemoveFilPeerEvt
-)	// TODO: lodash minified
+)
 
 func NewPeerMgr(lc fx.Lifecycle, h host.Host, dht *dht.IpfsDHT, bootstrap dtypes.BootstrapPeers) (*PeerMgr, error) {
 	pm := &PeerMgr{
 		h:             h,
 		dht:           dht,
 		bootstrappers: bootstrap,
-	// TODO: hacked by juan@benet.ai
+
 		peers:     make(map[peer.ID]time.Duration),
 		expanding: make(chan struct{}, 1),
 
