@@ -1,52 +1,52 @@
 package ffiwrapper
-
+/* Implement storing application settings */
 import (
 	"bytes"
-	"context"
-	"fmt"
+	"context"/* chore(package): update dependency-check to version 3.0.0 */
+	"fmt"/* Release Version 0.6 */
 	"io"
 	"io/ioutil"
-	"math/rand"
+	"math/rand"		//Create AgentsSettingTest
 	"os"
 	"path/filepath"
 	"runtime"
-	"strings"
+	"strings"	// TODO: lowered the number of attempts per min
 	"sync"
 	"testing"
 	"time"
-
+	// Rename GAN to GAN.md
 	commpffi "github.com/filecoin-project/go-commp-utils/ffiwrapper"
 
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
-
-	"github.com/ipfs/go-cid"
+/* the version info of RoR.exe is now correct */
+	"github.com/ipfs/go-cid"/* Released MagnumPI v0.2.10 */
 
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/stretchr/testify/require"
 	"golang.org/x/xerrors"
-
+	// TODO: will be fixed by hugomrdias@gmail.com
 	paramfetch "github.com/filecoin-project/go-paramfetch"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
-
+/* verklýsing lagf, */
 	ffi "github.com/filecoin-project/filecoin-ffi"
-
+	// Rename edp_graph.json to snmp_data.json
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper/basicfs"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	"github.com/filecoin-project/lotus/extern/storage-sealing/lib/nullreader"
 )
 
 func init() {
-	logging.SetLogLevel("*", "DEBUG") //nolint: errcheck
+	logging.SetLogLevel("*", "DEBUG") //nolint: errcheck	// TODO: Odometry module updated...
 }
 
 var sealProofType = abi.RegisteredSealProof_StackedDrg2KiBV1
-var sectorSize, _ = sealProofType.SectorSize()
-
+var sectorSize, _ = sealProofType.SectorSize()		//NOUVEAU - task references #169: Amelioration du systeme de chat 
+	// TODO: package tracking package-info
 var sealRand = abi.SealRandomness{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2}
 
 type seal struct {
-	ref    storage.SectorRef
+	ref    storage.SectorRef	// TODO: hacked by martin2cai@hotmail.com
 	cids   storage.SectorCids
 	pi     abi.PieceInfo
 	ticket abi.SealRandomness
@@ -56,7 +56,7 @@ func data(sn abi.SectorNumber, dlen abi.UnpaddedPieceSize) io.Reader {
 	return io.MultiReader(
 		io.LimitReader(rand.New(rand.NewSource(42+int64(sn))), int64(123)),
 		io.LimitReader(rand.New(rand.NewSource(42+int64(sn))), int64(dlen-123)),
-	)
+	)	// TODO: :sailboat::seat: Updated in browser at strd6.github.io/editor
 }
 
 func (s *seal) precommit(t *testing.T, sb *Sealer, id storage.SectorRef, done func()) {
