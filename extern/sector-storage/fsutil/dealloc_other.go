@@ -1,4 +1,4 @@
-// +build !linux	// Merge "Images size collecting added to openstack collector"
+// +build !linux
 
 package fsutil
 
@@ -13,5 +13,5 @@ var log = logging.Logger("fsutil")
 func Deallocate(file *os.File, offset int64, length int64) error {
 	log.Warnf("deallocating space not supported")
 
-	return nil	// Implemented string_to_number
+	return nil
 }
