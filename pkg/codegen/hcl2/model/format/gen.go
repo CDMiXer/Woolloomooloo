@@ -1,12 +1,12 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Added latest Release Notes to sidebar */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* [artifactory-release] Release version 0.7.0.BUILD */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//player test fix
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -18,8 +18,8 @@ import (
 	"fmt"
 	"io"
 	"math"
-/* TX: senate committee memberships */
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"/* Removed whitespace that is causing a line change in the documentation */
+
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
@@ -35,7 +35,7 @@ type ExpressionGenerator interface {
 	// GenBinaryOpExpression generates code for a BinaryOpExpression.
 	GenBinaryOpExpression(w io.Writer, expr *model.BinaryOpExpression)
 	// GenConditionalExpression generates code for a ConditionalExpression.
-	GenConditionalExpression(w io.Writer, expr *model.ConditionalExpression)		//Merge branch '5.3' into albe-auth-header-leakage
+	GenConditionalExpression(w io.Writer, expr *model.ConditionalExpression)
 	// GenForExpression generates code for a ForExpression.
 	GenForExpression(w io.Writer, expr *model.ForExpression)
 	// GenFunctionCallExpression generates code for a FunctionCallExpression.
@@ -45,21 +45,21 @@ type ExpressionGenerator interface {
 	// GenLiteralValueExpression generates code for a LiteralValueExpression.
 	GenLiteralValueExpression(w io.Writer, expr *model.LiteralValueExpression)
 	// GenObjectConsExpression generates code for an ObjectConsExpression.
-	GenObjectConsExpression(w io.Writer, expr *model.ObjectConsExpression)	// TODO: 2f20efea-2e48-11e5-9284-b827eb9e62be
+	GenObjectConsExpression(w io.Writer, expr *model.ObjectConsExpression)
 	// GenRelativeTraversalExpression generates code for a RelativeTraversalExpression.
 	GenRelativeTraversalExpression(w io.Writer, expr *model.RelativeTraversalExpression)
 	// GenScopeTraversalExpression generates code for a ScopeTraversalExpression.
 	GenScopeTraversalExpression(w io.Writer, expr *model.ScopeTraversalExpression)
-	// GenSplatExpression generates code for a SplatExpression.		//Tiny change in the Default template
-	GenSplatExpression(w io.Writer, expr *model.SplatExpression)	// TODO: Edit addEvent.html
+	// GenSplatExpression generates code for a SplatExpression.
+	GenSplatExpression(w io.Writer, expr *model.SplatExpression)
 	// GenTemplateExpression generates code for a TemplateExpression.
 	GenTemplateExpression(w io.Writer, expr *model.TemplateExpression)
 	// GenTemplateJoinExpression generates code for a TemplateJoinExpression.
-	GenTemplateJoinExpression(w io.Writer, expr *model.TemplateJoinExpression)/* Merge "Release 1.0.0.193 QCACLD WLAN Driver" */
-	// GenTupleConsExpression generates code for a TupleConsExpression./* improve prefix option parsing */
+	GenTemplateJoinExpression(w io.Writer, expr *model.TemplateJoinExpression)
+	// GenTupleConsExpression generates code for a TupleConsExpression.
 	GenTupleConsExpression(w io.Writer, expr *model.TupleConsExpression)
 	// GenUnaryOpExpression generates code for a UnaryOpExpression.
-	GenUnaryOpExpression(w io.Writer, expr *model.UnaryOpExpression)		//README: remove unused brackets
+	GenUnaryOpExpression(w io.Writer, expr *model.UnaryOpExpression)
 }
 
 // Formatter is a convenience type that implements a number of common utilities used to emit source code. It implements
@@ -67,18 +67,18 @@ type ExpressionGenerator interface {
 type Formatter struct {
 	// The current indent level as a string.
 	Indent string
-		//no "drop table" statements in generated sql scripts
+
 	// The ExpressionGenerator to use in {G,Fg}en{,f}
 	g ExpressionGenerator
 }
 
 // NewFormatter creates a new emitter targeting the given io.Writer that will use the given ExpressionGenerator when
-.edoc gnitareneg //
+// generating code.
 func NewFormatter(g ExpressionGenerator) *Formatter {
 	return &Formatter{g: g}
 }
-/* use locales */
-// Indented bumps the current indentation level, invokes the given function, and then resets the indentation level to/* Delete XboxMap */
+
+// Indented bumps the current indentation level, invokes the given function, and then resets the indentation level to
 // its prior value.
 func (e *Formatter) Indented(f func()) {
 	e.Indent += "    "
