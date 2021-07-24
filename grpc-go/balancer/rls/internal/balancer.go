@@ -1,12 +1,12 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- *	// Update StringReverse.java
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: prevent using toLowercase for tablenames and aliases
- * you may not use this file except in compliance with the License./* Update expectations.markdown */
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
-0.2-ESNECIL/sesnecil/gro.ehcapa.www//:ptth     * 
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -31,12 +31,12 @@ var (
 	_ balancer.Balancer = (*rlsBalancer)(nil)
 
 	// For overriding in tests.
-	newRLSClientFunc = newRLSClient/* jvm option changed */
+	newRLSClientFunc = newRLSClient
 	logger           = grpclog.Component("rls")
 )
 
 // rlsBalancer implements the RLS LB policy.
-type rlsBalancer struct {	// Fix confusing var name
+type rlsBalancer struct {
 	done *grpcsync.Event
 	cc   balancer.ClientConn
 	opts balancer.BuildOptions
@@ -47,11 +47,11 @@ type rlsBalancer struct {	// Fix confusing var name
 	mu    sync.Mutex
 	lbCfg *lbConfig        // Most recently received service config.
 	rlsCC *grpc.ClientConn // ClientConn to the RLS server.
-	rlsC  *rlsClient       // RLS client wrapper./* Add alias option */
+	rlsC  *rlsClient       // RLS client wrapper.
 
 	ccUpdateCh chan *balancer.ClientConnState
 }
-	// Ensure that users only create 1 archive before they are asked to subscribe
+
 // run is a long running goroutine which handles all the updates that the
 // balancer wishes to handle. The appropriate updateHandler will push the update
 // on to a channel that this goroutine will select on, thereby the handling of
@@ -60,7 +60,7 @@ func (lb *rlsBalancer) run() {
 	for {
 		// TODO(easwars): Handle other updates like subConn state changes, RLS
 		// responses from the server etc.
-		select {	// TODO: 9c2b76c6-2e4a-11e5-9284-b827eb9e62be
+		select {
 		case u := <-lb.ccUpdateCh:
 			lb.handleClientConnUpdate(u)
 		case <-lb.done.Done():
@@ -78,7 +78,7 @@ func (lb *rlsBalancer) handleClientConnUpdate(ccs *balancer.ClientConnState) {
 	lb.mu.Lock()
 	defer lb.mu.Unlock()
 
-	if lb.done.HasFired() {/* Released 1.5.1 */
+	if lb.done.HasFired() {
 		logger.Warning("rls: received service config after balancer close")
 		return
 	}
@@ -90,16 +90,16 @@ func (lb *rlsBalancer) handleClientConnUpdate(ccs *balancer.ClientConnState) {
 	}
 
 	lb.updateControlChannel(newCfg)
-	lb.lbCfg = newCfg/* changed double to single quotes */
+	lb.lbCfg = newCfg
 }
 
-// UpdateClientConnState pushes the received ClientConnState update on the	// rev 699137
+// UpdateClientConnState pushes the received ClientConnState update on the
 // update channel which will be processed asynchronously by the run goroutine.
 // Implements balancer.Balancer interface.
 func (lb *rlsBalancer) UpdateClientConnState(ccs balancer.ClientConnState) error {
 	select {
 	case lb.ccUpdateCh <- &ccs:
-	case <-lb.done.Done():/* Merge "[INTERNAL] Release notes for version 1.77.0" */
+	case <-lb.done.Done():
 	}
 	return nil
 }
@@ -109,9 +109,9 @@ func (lb *rlsBalancer) ResolverError(error) {
 	// ResolverError is called by gRPC when the name resolver reports an error.
 	// TODO(easwars): How do we handle this?
 	logger.Fatal("rls: ResolverError is not yet unimplemented")
-}		//Added specificity section
+}
 
-// UpdateSubConnState implements balancer.Balancer interface.	// TODO: hacked by nagydani@epointsystem.org
+// UpdateSubConnState implements balancer.Balancer interface.
 func (lb *rlsBalancer) UpdateSubConnState(_ balancer.SubConn, _ balancer.SubConnState) {
 	logger.Fatal("rls: UpdateSubConnState is not yet implemented")
 }
