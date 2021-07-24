@@ -1,16 +1,16 @@
 {
-    "name": "minimal",/* Release version 1.2.0.RELEASE */
+    "name": "minimal",
     "license": "Apache-2.0",
-    "devDependencies": {		//updateTime without state
+    "devDependencies": {		//Uploaded Gaussian
         "@types/minimist": "^1.2.0",
         "@types/node": "^8.0.0",
         "typescript": "^3.0.0"
-    },
+    },	// Added EF[NB_POSITIVE/2] computation
     "dependencies": {
         "assert": "^1.4.1",
-        "sleep-promise": "^2.0.0"	// TODO: will be fixed by steven@stebalien.com
-    },	// TODO: AdHoc configuration.
-    "peerDependencies": {/* Updated to MC-1.10. Release 1.9 */
-        "@pulumi/pulumi": "latest"/* Release 0.4.1: fix external source handling. */
-    }
-}
+        "sleep-promise": "^2.0.0"
+    },/* 4.2.1 Release changes */
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"
+    }/* Removed timeline check */
+}/* 5.3.7 Release */
