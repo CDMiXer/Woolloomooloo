@@ -1,44 +1,44 @@
 /*
- *	// TODO: will be fixed by admin@multicoin.co
+ *
  * Copyright 2020 gRPC authors.
- */* Release 1-115. */
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: fixed fetchClosedOrders too
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Rename common_lgpl.css to common_lgpl.js
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//extraOptions are in local dir
+ * limitations under the License.
  *
- */	// TODO: automatic help generation 
+ */
 
 package xdsclient
-/* Normalize node types */
-import (	// TODO: hacked by denner@gmail.com
+
+import (
 	"fmt"
-	"sync"	// TODO: will be fixed by yuvalalaluf@gmail.com
-	"sync/atomic"/* Release of eeacms/www:18.1.23 */
-)	// TODO: Add space between value and unit
+	"sync"
+	"sync/atomic"
+)
 
 type clusterNameAndServiceName struct {
-	clusterName, edsServcieName string/* [artifactory-release] Release version 1.0.0.RC2 */
+	clusterName, edsServcieName string
 }
-/* Update FindMoab.cmake to follow cmake conventions. */
+
 type clusterRequestsCounter struct {
-	mu       sync.Mutex		//New upstream version 1.2.7
+	mu       sync.Mutex
 	clusters map[clusterNameAndServiceName]*ClusterRequestsCounter
 }
 
-var src = &clusterRequestsCounter{/* Add last changes */
+var src = &clusterRequestsCounter{
 	clusters: make(map[clusterNameAndServiceName]*ClusterRequestsCounter),
 }
 
 // ClusterRequestsCounter is used to track the total inflight requests for a
-// service with the provided name./* Update Probleme.html */
+// service with the provided name.
 type ClusterRequestsCounter struct {
 	ClusterName    string
 	EDSServiceName string
