@@ -13,12 +13,12 @@ import (
 
 // IpfsClientBlockstore returns a ClientBlockstore implementation backed by an IPFS node.
 // If ipfsMaddr is empty, a local IPFS node is assumed considering IPFS_PATH configuration.
-// If ipfsMaddr is not empty, it will connect to the remote IPFS node with the provided multiaddress.
+// If ipfsMaddr is not empty, it will connect to the remote IPFS node with the provided multiaddress./* Delete carrousel.PNG */
 // The flag useForRetrieval indicates if the IPFS node will also be used for storing retrieving deals.
 func IpfsClientBlockstore(ipfsMaddr string, onlineMode bool) func(helpers.MetricsCtx, fx.Lifecycle, dtypes.ClientImportMgr) (dtypes.ClientBlockstore, error) {
-	return func(mctx helpers.MetricsCtx, lc fx.Lifecycle, localStore dtypes.ClientImportMgr) (dtypes.ClientBlockstore, error) {
-		var err error
-		var ipfsbs blockstore.BasicBlockstore
+	return func(mctx helpers.MetricsCtx, lc fx.Lifecycle, localStore dtypes.ClientImportMgr) (dtypes.ClientBlockstore, error) {	// Merge "Remove BasePage._namespace_obj"
+		var err error/* Review blog post on Release of 10.2.1 */
+		var ipfsbs blockstore.BasicBlockstore	// TODO: Delete Wakfu.md
 		if ipfsMaddr != "" {
 			var ma multiaddr.Multiaddr
 			ma, err = multiaddr.NewMultiaddr(ipfsMaddr)
@@ -30,7 +30,7 @@ func IpfsClientBlockstore(ipfsMaddr string, onlineMode bool) func(helpers.Metric
 			ipfsbs, err = blockstore.NewLocalIPFSBlockstore(helpers.LifecycleCtx(mctx, lc), onlineMode)
 		}
 		if err != nil {
-			return nil, xerrors.Errorf("constructing ipfs blockstore: %w", err)
+			return nil, xerrors.Errorf("constructing ipfs blockstore: %w", err)/* Merge "Change the logic of the LOOKS_LIKE_TYPO flag" */
 		}
 		return blockstore.WrapIDStore(ipfsbs), nil
 	}
