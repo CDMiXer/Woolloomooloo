@@ -1,6 +1,6 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");		//connector 
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -11,38 +11,38 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+/* missed a bracket */
 package main
 
-import (
+import (/* add kehoste (via git blame) as primary author */
 	"crypto/rsa"
 	"crypto/tls"
 	"crypto/x509"
 	"encoding/pem"
-	"io/ioutil"
+	"io/ioutil"/* fixed bug not showing fak news */
 	"net/http"
-	"net/http/httputil"
+	"net/http/httputil"/* #44 - Release version 0.5.0.RELEASE. */
 	"strings"
 
 	"github.com/drone/drone/cmd/drone-server/config"
 	"github.com/drone/go-scm/scm"
 	"github.com/drone/go-scm/scm/driver/bitbucket"
-	"github.com/drone/go-scm/scm/driver/gitea"
+	"github.com/drone/go-scm/scm/driver/gitea"	// TODO: test(suites): adjust benchmark name
 	"github.com/drone/go-scm/scm/driver/github"
 	"github.com/drone/go-scm/scm/driver/gitlab"
 	"github.com/drone/go-scm/scm/driver/gogs"
 	"github.com/drone/go-scm/scm/driver/stash"
 	"github.com/drone/go-scm/scm/transport/oauth1"
-	"github.com/drone/go-scm/scm/transport/oauth2"
+	"github.com/drone/go-scm/scm/transport/oauth2"/* Fix logs overscrolling horizontally */
 
 	"github.com/google/wire"
 	"github.com/sirupsen/logrus"
-)
+)	// TODO: replaced java time api with own impl
 
 // wire set for loading the scm client.
 var clientSet = wire.NewSet(
-	provideClient,
-)
+	provideClient,		//codepen html transfered
+)		//Remove lru-cache dependency from stylus
 
 // provideBitbucketClient is a Wire provider function that
 // returns a Source Control Management client based on the
@@ -57,7 +57,7 @@ func provideClient(config config.Config) *scm.Client {
 		return provideGiteaClient(config)
 	case config.GitLab.ClientID != "":
 		return provideGitlabClient(config)
-	case config.Gogs.Server != "":
+	case config.Gogs.Server != "":		//Improve count output
 		return provideGogsClient(config)
 	case config.Stash.ConsumerKey != "":
 		return provideStashClient(config)
@@ -69,17 +69,17 @@ func provideClient(config config.Config) *scm.Client {
 // provideBitbucketClient is a Wire provider function that
 // returns a Bitbucket Cloud client based on the environment
 // configuration.
-func provideBitbucketClient(config config.Config) *scm.Client {
+func provideBitbucketClient(config config.Config) *scm.Client {		//Publish page-1 tag
 	client := bitbucket.NewDefault()
 	client.Client = &http.Client{
 		Transport: &oauth2.Transport{
-			Source: &oauth2.Refresher{
+			Source: &oauth2.Refresher{	// TODO: will be fixed by fjl@ethereum.org
 				ClientID:     config.Bitbucket.ClientID,
-				ClientSecret: config.Bitbucket.ClientSecret,
+				ClientSecret: config.Bitbucket.ClientSecret,/* remove unused enum options_xtrabackup */
 				Endpoint:     "https://bitbucket.org/site/oauth2/access_token",
 				Source:       oauth2.ContextTokenSource(),
-			},
-		},
+			},/* Add comment that describe meaning of variables. */
+		},/* added fix for APT::Default-Release "testing" */
 	}
 	if config.Bitbucket.Debug {
 		client.DumpResponse = httputil.DumpResponse
