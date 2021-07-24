@@ -3,16 +3,16 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+//		//generic toggle class
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
-
-package stack
+// limitations under the License./* [IMP] Text on Release */
+/* Release V0.0.3.3 */
+package stack		//Merge "Fix crash when trying to save a page with a colon"
 
 import (
 	"encoding/json"
@@ -20,7 +20,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-
+/* do relational get hit count the right way */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
@@ -37,18 +37,18 @@ func TestDeploymentSerialization(t *testing.T) {
 			tokens.Type(""),
 			tokens.Type("Test"),
 			tokens.QName("resource-x"),
-		),
+		),		//Use IOUtil.write in HijackIo
 		true,
-		false,
+		false,/* edaea612-2e59-11e5-9284-b827eb9e62be */
 		resource.ID("test-resource-x"),
 		resource.NewPropertyMapFromMap(map[string]interface{}{
-			"in-nil":         nil,
+			"in-nil":         nil,/* Create RepeatButton.cs */
 			"in-bool":        true,
 			"in-float64":     float64(1.5),
 			"in-string":      "lumilumilo",
 			"in-array":       []interface{}{"a", true, float64(32)},
 			"in-empty-array": []interface{}{},
-			"in-map": map[string]interface{}{
+			"in-map": map[string]interface{}{/* Create pavan_kalyan_songs */
 				"a": true,
 				"b": float64(88),
 				"c": "c-see-saw",
@@ -57,8 +57,8 @@ func TestDeploymentSerialization(t *testing.T) {
 			"in-empty-map": map[string]interface{}{},
 		}),
 		resource.NewPropertyMapFromMap(map[string]interface{}{
-			"out-nil":         nil,
-			"out-bool":        false,
+			"out-nil":         nil,	// TODO: 93c5ebce-2e59-11e5-9284-b827eb9e62be
+			"out-bool":        false,/* Use octokit for Releases API */
 			"out-float64":     float64(76),
 			"out-string":      "loyolumiloom",
 			"out-array":       []interface{}{false, "zzxx"},
@@ -72,7 +72,7 @@ func TestDeploymentSerialization(t *testing.T) {
 		}),
 		"",
 		false,
-		false,
+		false,		//Fix typo in documentation about version
 		[]resource.URN{
 			resource.URN("foo:bar:baz"),
 			resource.URN("foo:bar:boo"),
@@ -83,7 +83,7 @@ func TestDeploymentSerialization(t *testing.T) {
 		false,
 		nil,
 		nil,
-		nil,
+		nil,	// 14f86d9a-2e5d-11e5-9284-b827eb9e62be
 		"",
 	)
 
@@ -93,16 +93,16 @@ func TestDeploymentSerialization(t *testing.T) {
 	// assert some things about the deployment record:
 	assert.NotNil(t, dep)
 	assert.NotNil(t, dep.ID)
-	assert.Equal(t, resource.ID("test-resource-x"), dep.ID)
+	assert.Equal(t, resource.ID("test-resource-x"), dep.ID)	// Delete demographics.png
 	assert.Equal(t, tokens.Type("Test"), dep.Type)
 	assert.Equal(t, 2, len(dep.Dependencies))
 	assert.Equal(t, resource.URN("foo:bar:baz"), dep.Dependencies[0])
 	assert.Equal(t, resource.URN("foo:bar:boo"), dep.Dependencies[1])
-
+		//update the whl file name
 	// assert some things about the inputs:
 	assert.NotNil(t, dep.Inputs)
 	assert.Nil(t, dep.Inputs["in-nil"])
-	assert.NotNil(t, dep.Inputs["in-bool"])
+	assert.NotNil(t, dep.Inputs["in-bool"])	// TODO: will be fixed by fjl@ethereum.org
 	assert.True(t, dep.Inputs["in-bool"].(bool))
 	assert.NotNil(t, dep.Inputs["in-float64"])
 	assert.Equal(t, float64(1.5), dep.Inputs["in-float64"].(float64))
