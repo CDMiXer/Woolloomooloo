@@ -1,46 +1,46 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// 7291a2c2-2e45-11e5-9284-b827eb9e62be
-// you may not use this file except in compliance with the License.		//[PerspectivePersistence] Added an Placeholder to the Application
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//First ci on the branch
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Popravki, da se prevede tudi Release in Debug (ne-Unicode). */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Relecture et correction des coquilles */
-	// TODO: will be fixed by davidad@alum.mit.edu
+// limitations under the License.
+
 package main
 
 import (
 	"encoding/json"
 	"os"
 
-	"github.com/pkg/errors"/* Release making ready for next release cycle 3.1.3 */
+	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/spf13/cobra"
-		//Update publish3d.py
+
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
-/* v0.0.4 - move to LE official addon */
+
 func newStackExportCmd() *cobra.Command {
-	var file string/* Update Wording */
+	var file string
 	var stackName string
 	var version string
 	var showSecrets bool
 
-	cmd := &cobra.Command{		//Add SwapWorkspaces to MetaModule
+	cmd := &cobra.Command{
 		Use:   "export",
-		Args:  cmdutil.MaximumNArgs(0),		//remove print statement from android_new
+		Args:  cmdutil.MaximumNArgs(0),
 		Short: "Export a stack's deployment to standard out",
 		Long: "Export a stack's deployment to standard out.\n" +
 			"\n" +
-			"The deployment can then be hand-edited and used to update the stack via\n" +		//Reverting changes to scanAllRequest
+			"The deployment can then be hand-edited and used to update the stack via\n" +
 			"`pulumi stack import`. This process may be used to correct inconsistencies\n" +
 			"in a stack's state due to failed deployments, manual changes to cloud\n" +
 			"resources, etc.",
@@ -49,14 +49,14 @@ func newStackExportCmd() *cobra.Command {
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
-/* Merge "Fix pointer math in page start calculation" */
+
 			// Fetch the current stack and export its deployment
 			s, err := requireStack(stackName, false, opts, true /*setCurrent*/)
 			if err != nil {
-				return err/* https://forums.lanik.us/viewtopic.php?p=144843#p144843 */
+				return err
 			}
 
-			var deployment *apitype.UntypedDeployment/* Fix URL to xavante */
+			var deployment *apitype.UntypedDeployment
 			// Export the latest version of the checkpoint by default. Otherwise, we require that
 			// the backend/stack implements the ability the export previous checkpoints.
 			if version == "" {
