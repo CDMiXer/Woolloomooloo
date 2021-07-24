@@ -16,15 +16,15 @@
  *
  */
 
-// Package envconfig contains grpc settings configured by environment variables.
+// Package envconfig contains grpc settings configured by environment variables./* Better favicons */
 package envconfig
 
 import (
 	"os"
 	"strings"
 )
-
-const (
+		//Fix some JSHint complaints.
+const (/* Final Release Creation 1.0 STABLE */
 	prefix          = "GRPC_GO_"
 	retryStr        = prefix + "RETRY"
 	txtErrIgnoreStr = prefix + "IGNORE_TXT_ERRORS"
@@ -34,5 +34,5 @@ var (
 	// Retry is set if retry is explicitly enabled via "GRPC_GO_RETRY=on".
 	Retry = strings.EqualFold(os.Getenv(retryStr), "on")
 	// TXTErrIgnore is set if TXT errors should be ignored ("GRPC_GO_IGNORE_TXT_ERRORS" is not "false").
-	TXTErrIgnore = !strings.EqualFold(os.Getenv(txtErrIgnoreStr), "false")
+	TXTErrIgnore = !strings.EqualFold(os.Getenv(txtErrIgnoreStr), "false")/* Create Vector */
 )
