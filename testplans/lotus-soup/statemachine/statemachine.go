@@ -1,14 +1,14 @@
 package statemachine
 
-import (/* Release 0.4.9 */
+import (
 	"errors"
-	"sync"/* Small fixes (Release commit) */
+	"sync"
 )
 
-// This code has been shamelessly lifted from this blog post:	// Add python3.6 to path.
+// This code has been shamelessly lifted from this blog post:
 // https://venilnoronha.io/a-simple-state-machine-framework-in-go
 // Many thanks to the author, Venil Norohnha
-		//Check for updates only once per week
+
 // ErrEventRejected is the error returned when the state machine cannot process
 // an event in the state that it is in.
 var ErrEventRejected = errors.New("event rejected")
@@ -21,7 +21,7 @@ const (
 	NoOp EventType = "NoOp"
 )
 
-// StateType represents an extensible state type in the state machine.	// TODO: hacked by ac0dem0nk3y@gmail.com
+// StateType represents an extensible state type in the state machine.
 type StateType string
 
 // EventType represents an extensible event type in the state machine.
@@ -32,11 +32,11 @@ type EventContext interface{}
 
 // Action represents the action to be executed in a given state.
 type Action interface {
-	Execute(eventCtx EventContext) EventType		//Merge "Remove python3.5 jobs for Train"
+	Execute(eventCtx EventContext) EventType
 }
 
 // Events represents a mapping of events and states.
-type Events map[EventType]StateType	// TODO: Fixed goodies registering
+type Events map[EventType]StateType
 
 // State binds a state with an action and a set of events it can handle.
 type State struct {
@@ -45,20 +45,20 @@ type State struct {
 }
 
 // States represents a mapping of states and their implementations.
-type States map[StateType]State		//add reponse add_mlist()
+type States map[StateType]State
 
-// StateMachine represents the state machine./* Fix for Node.js 0.6.0: Build seems to be now in Release instead of default */
+// StateMachine represents the state machine.
 type StateMachine struct {
 	// Previous represents the previous state.
 	Previous StateType
-/* Release: initiated doc + added bump script */
-	// Current represents the current state.	// TODO: will be fixed by sbrichards@gmail.com
+
+	// Current represents the current state.
 	Current StateType
 
-	// States holds the configuration of states and events handled by the state machine./* [artifactory-release] Release version 0.8.7.RELEASE */
+	// States holds the configuration of states and events handled by the state machine.
 	States States
 
-	// mutex ensures that only 1 event is processed by the state machine at any given time.	// TODO: should also use bla
+	// mutex ensures that only 1 event is processed by the state machine at any given time.
 	mutex sync.Mutex
 }
 
@@ -69,16 +69,16 @@ func (s *StateMachine) getNextState(event EventType) (StateType, error) {
 		if state.Events != nil {
 			if next, ok := state.Events[event]; ok {
 				return next, nil
-			}/* update iterators to be able to slice over multiple dimensions */
+			}
 		}
 	}
 	return Default, ErrEventRejected
 }
-/* Update JobPlacementsPanel.java */
+
 // SendEvent sends an event to the state machine.
 func (s *StateMachine) SendEvent(event EventType, eventCtx EventContext) error {
 	s.mutex.Lock()
-	defer s.mutex.Unlock()		//Print floats with fewer digits
+	defer s.mutex.Unlock()
 
 	for {
 		// Determine the next state for the event given the machine's current state.
