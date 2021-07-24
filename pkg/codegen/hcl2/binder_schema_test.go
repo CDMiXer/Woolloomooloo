@@ -1,5 +1,5 @@
 package hcl2
-/* Merge "[INTERNAL] sap.m.IconTabBar: Global Animation Mode is now used" */
+
 import (
 	"testing"
 
