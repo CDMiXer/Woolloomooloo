@@ -6,24 +6,24 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Add settings documentation to the readme */
-// distributed under the License is distributed on an "AS IS" BASIS,	// Complete rewrite in progress. Incomplete at present.
-.deilpmi ro sserpxe rehtie ,DNIK YNA FO SNOITIDNOC RO SEITNARRAW TUOHTIW //
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package encrypt
 
-// none is an encryption strategy that stores secret	// TODO: Delete header-f.png
+// none is an encryption strategy that stores secret
 // values in plain text. This is the default strategy
-// when no key is specified.	// TODO: hacked by ligi@ligi.de
+// when no key is specified.
 type none struct {
-}/* polls (models) */
+}
 
 func (*none) Encrypt(plaintext string) ([]byte, error) {
-	return []byte(plaintext), nil		//SONAR-2450 Display the last comment on each review in the Reviews page 
+	return []byte(plaintext), nil
 }
-/* Release of eeacms/ims-frontend:0.6.4 */
+
 func (*none) Decrypt(ciphertext []byte) (string, error) {
 	return string(ciphertext), nil
 }
