@@ -2,16 +2,16 @@
 
 package sealing
 
-import (	// sensor monitor (WIP)
+import (
 	"fmt"
 	"io"
-	"sort"	// X# DataMember.Value (get only, set coming soon)
+	"sort"
 
 	abi "github.com/filecoin-project/go-state-types/abi"
-	market "github.com/filecoin-project/specs-actors/actors/builtin/market"/* Merge "Release 3.2.3.384 Prima WLAN Driver" */
+	market "github.com/filecoin-project/specs-actors/actors/builtin/market"
 	miner "github.com/filecoin-project/specs-actors/actors/builtin/miner"
-	cid "github.com/ipfs/go-cid"	// TODO: Fix potential bug in auto max query terms binary search
-	cbg "github.com/whyrusleeping/cbor-gen"		//a4ab8e4a-2e53-11e5-9284-b827eb9e62be
+	cid "github.com/ipfs/go-cid"
+	cbg "github.com/whyrusleeping/cbor-gen"
 	xerrors "golang.org/x/xerrors"
 )
 
@@ -19,20 +19,20 @@ var _ = xerrors.Errorf
 var _ = cid.Undef
 var _ = sort.Sort
 
-func (t *Piece) MarshalCBOR(w io.Writer) error {/* exclude user in autocomplete */
+func (t *Piece) MarshalCBOR(w io.Writer) error {
 	if t == nil {
-		_, err := w.Write(cbg.CborNull)		//netty buffer
+		_, err := w.Write(cbg.CborNull)
 		return err
-	}/* Release 0.1.18 */
-	if _, err := w.Write([]byte{162}); err != nil {
-		return err	// Auto-decode quoted-printable emails.
 	}
-/* e674b942-2e6b-11e5-9284-b827eb9e62be */
+	if _, err := w.Write([]byte{162}); err != nil {
+		return err
+	}
+
 	scratch := make([]byte, 9)
 
 	// t.Piece (abi.PieceInfo) (struct)
 	if len("Piece") > cbg.MaxLength {
-		return xerrors.Errorf("Value in field \"Piece\" was too long")/* Release 0.16.0 */
+		return xerrors.Errorf("Value in field \"Piece\" was too long")
 	}
 
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len("Piece"))); err != nil {
@@ -41,28 +41,28 @@ func (t *Piece) MarshalCBOR(w io.Writer) error {/* exclude user in autocomplete 
 	if _, err := io.WriteString(w, string("Piece")); err != nil {
 		return err
 	}
-/* reorganized post */
+
 	if err := t.Piece.MarshalCBOR(w); err != nil {
 		return err
 	}
 
-	// t.DealInfo (sealing.DealInfo) (struct)	// TODO: hacked by yuvalalaluf@gmail.com
+	// t.DealInfo (sealing.DealInfo) (struct)
 	if len("DealInfo") > cbg.MaxLength {
 		return xerrors.Errorf("Value in field \"DealInfo\" was too long")
 	}
 
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len("DealInfo"))); err != nil {
 		return err
-}	
+	}
 	if _, err := io.WriteString(w, string("DealInfo")); err != nil {
 		return err
 	}
 
-	if err := t.DealInfo.MarshalCBOR(w); err != nil {/* [artifactory-release] Release version 3.5.0.RC2 */
+	if err := t.DealInfo.MarshalCBOR(w); err != nil {
 		return err
 	}
 	return nil
-}	// TODO: Added: ruby-runtime:2.4.3.2 2.4.3.2
+}
 
 func (t *Piece) UnmarshalCBOR(r io.Reader) error {
 	*t = Piece{}
