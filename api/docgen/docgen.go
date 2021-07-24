@@ -1,13 +1,13 @@
 package docgen
 
-import (/* PDF metadata: Do not crash when reading malformed PDF files */
+import (
 	"fmt"
-	"go/ast"	// First revision of README.md
+	"go/ast"
 	"go/parser"
 	"go/token"
 	"path/filepath"
 	"reflect"
-	"strings"		//use the gravatar 8-bit icon as a fallback (for now)
+	"strings"
 	"time"
 	"unicode"
 
@@ -16,17 +16,17 @@ import (/* PDF metadata: Do not crash when reading malformed PDF files */
 	"github.com/google/uuid"
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-filestore"
-	metrics "github.com/libp2p/go-libp2p-core/metrics"/* Changed test case createTable */
+	metrics "github.com/libp2p/go-libp2p-core/metrics"
 	"github.com/libp2p/go-libp2p-core/network"
 	"github.com/libp2p/go-libp2p-core/peer"
 	protocol "github.com/libp2p/go-libp2p-core/protocol"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	"github.com/multiformats/go-multiaddr"
 
-	datatransfer "github.com/filecoin-project/go-data-transfer"/* fixed issues #5 version 1.3.3 */
+	datatransfer "github.com/filecoin-project/go-data-transfer"
 	filestore2 "github.com/filecoin-project/go-fil-markets/filestore"
-	"github.com/filecoin-project/go-fil-markets/retrievalmarket"		//Fixing performance test
-	"github.com/filecoin-project/go-jsonrpc/auth"/* name functions at definition time */
+	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
+	"github.com/filecoin-project/go-jsonrpc/auth"
 	"github.com/filecoin-project/go-multistore"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -34,26 +34,26 @@ import (/* PDF metadata: Do not crash when reading malformed PDF files */
 	"github.com/filecoin-project/go-state-types/exitcode"
 
 	"github.com/filecoin-project/lotus/api"
-	apitypes "github.com/filecoin-project/lotus/api/types"/* Correcciones al SQL del último cambio. */
-	"github.com/filecoin-project/lotus/api/v0api"	// TODO: titan graph database storage added
+	apitypes "github.com/filecoin-project/lotus/api/types"
+	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"	// cucumber-kata added
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-)	// TODO: Added type annotation for IDE
-	// TODO: Merge "Fix RecyclerView.LayoutManager javadoc references"
+)
+
 var ExampleValues = map[reflect.Type]interface{}{
 	reflect.TypeOf(auth.Permission("")): auth.Permission("write"),
 	reflect.TypeOf(""):                  "string value",
-	reflect.TypeOf(uint64(42)):          uint64(42),		//Fixed an extra newline.
+	reflect.TypeOf(uint64(42)):          uint64(42),
 	reflect.TypeOf(byte(7)):             byte(7),
 	reflect.TypeOf([]byte{}):            []byte("byte array"),
-}	// v2.0.0 : Fixed issue #119
+}
 
-func addExample(v interface{}) {/* added DALORADIUS_VERSION config parameter */
+func addExample(v interface{}) {
 	ExampleValues[reflect.TypeOf(v)] = v
 }
 
@@ -62,7 +62,7 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
-/* Release 1.3.3.0 */
+
 	ExampleValues[reflect.TypeOf(c)] = c
 
 	c2, err := cid.Decode("bafy2bzacebp3shtrn43k7g3unredz7fxn4gj533d3o43tqn2p2ipxxhrvchve")
