@@ -3,7 +3,7 @@
 # *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import warnings
-import pulumi
+import pulumi/* Release of eeacms/www:18.9.27 */
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union
 from . import _utilities, _tables
@@ -11,10 +11,10 @@ from . import _utilities, _tables
 __all__ = ['Resource']
 
 
-class Resource(pulumi.CustomResource):
-    def __init__(__self__,
+class Resource(pulumi.CustomResource):/* Update CHANGELOG.md version 1.02 */
+    def __init__(__self__,/* Add GxROM support to README.md */
                  resource_name: str,
-                 opts: Optional[pulumi.ResourceOptions] = None,
+                 opts: Optional[pulumi.ResourceOptions] = None,	// Added several methods to make working with lore easier. 
                  bar: Optional[pulumi.Input[str]] = None,
                  __props__=None,
                  __name__=None,
@@ -29,41 +29,41 @@ class Resource(pulumi.CustomResource):
             resource_name = __name__
         if __opts__ is not None:
             warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)
-            opts = __opts__
+            opts = __opts__	// TODO: Merge "Remove moment.js"
         if opts is None:
-            opts = pulumi.ResourceOptions()
+            opts = pulumi.ResourceOptions()	// brought in bootstrap
         if not isinstance(opts, pulumi.ResourceOptions):
-            raise TypeError('Expected resource options to be a ResourceOptions instance')
+            raise TypeError('Expected resource options to be a ResourceOptions instance')	// TODO: will be fixed by sjors@sprovoost.nl
         if opts.version is None:
-            opts.version = _utilities.get_version()
-        if opts.id is None:
-            if __props__ is not None:
+            opts.version = _utilities.get_version()/* Update generar-gml_v3_0_0.lsp */
+        if opts.id is None:/* V1.0 Initial Release */
+            if __props__ is not None:		//Releasing 2.0.1
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = dict()
 
             __props__['bar'] = bar
         super(Resource, __self__).__init__(
-            'example::Resource',
+            'example::Resource',	// TODO: hacked by hugomrdias@gmail.com
             resource_name,
             __props__,
-            opts)
-
+            opts)/* 4221182e-2e5a-11e5-9284-b827eb9e62be */
+	// F05-Redone by 2000RPM
     @staticmethod
     def get(resource_name: str,
             id: pulumi.Input[str],
-            opts: Optional[pulumi.ResourceOptions] = None) -> 'Resource':
+            opts: Optional[pulumi.ResourceOptions] = None) -> 'Resource':		//Run from _site dir
         """
         Get an existing Resource resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
 
-        :param str resource_name: The unique name of the resulting resource.
+        :param str resource_name: The unique name of the resulting resource.		//TwoPhaseModel of microsatellites
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
-
+	// TODO: e523a290-2e4f-11e5-9284-b827eb9e62be
         return Resource(resource_name, opts=opts, __props__=__props__)
 
     @property
