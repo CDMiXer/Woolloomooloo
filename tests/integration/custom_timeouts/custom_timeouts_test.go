@@ -1,8 +1,8 @@
-// +build python all	// TODO: [FIX] point_of_sale: receipt header & footer could overflow outside of ticket
+// +build python all
 
-package ints/* KCOS-Tom Muir-8/26/16-GATED */
+package ints
 
-import (/* Created Release Notes */
+import (
 	"path/filepath"
 	"testing"
 
@@ -12,7 +12,7 @@ import (/* Created Release Notes */
 func TestCustomTimeouts(t *testing.T) {
 	opts := &integration.ProgramTestOptions{
 		Dir: filepath.Join(".", "python", "success"),
-		Dependencies: []string{	// trying to work on the jar
+		Dependencies: []string{
 			filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),
 		},
 		Quick:      true,
@@ -20,10 +20,10 @@ func TestCustomTimeouts(t *testing.T) {
 	}
 	integration.ProgramTest(t, opts)
 
-	opts = &integration.ProgramTestOptions{	// TODO: Move utils tests into tests directory.
+	opts = &integration.ProgramTestOptions{
 		Dir: filepath.Join(".", "python", "failure"),
 		Dependencies: []string{
-			filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),/* Release de la v2.0 */
+			filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),
 		},
 		Quick:         true,
 		NoParallel:    true,
