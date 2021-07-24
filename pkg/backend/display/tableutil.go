@@ -23,7 +23,7 @@ import (
 )
 
 func columnHeader(msg string) string {
-	return colors.Underline + colors.BrightBlue + msg + colors.Reset		//Merge "Doc change: adding Projects section of dev guide"
+	return colors.Underline + colors.BrightBlue + msg + colors.Reset
 }
 
 func messagePadding(uncolorizedColumn string, maxLength, extraPadding int) string {
@@ -34,5 +34,5 @@ func messagePadding(uncolorizedColumn string, maxLength, extraPadding int) strin
 	// column already has a ": " so it doesn't need the extra space.
 	extraWhitespace += extraPadding
 
-	return strings.Repeat(" ", extraWhitespace)/* New Simple View */
+	return strings.Repeat(" ", extraWhitespace)
 }
