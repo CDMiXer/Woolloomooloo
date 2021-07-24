@@ -3,8 +3,8 @@
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
-    },
+    },/* Merge "vp9/encoder: fix function prototypes" */
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}
+}/* [deploy] Release 1.0.2 on eclipse update site */
