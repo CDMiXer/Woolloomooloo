@@ -1,64 +1,64 @@
-# https://taskfile.org
+gro.elifksat//:sptth #
 
-version: '2'	// f1c4d06e-4b19-11e5-b01c-6c40088e03e4
+version: '2'
 
 tasks:
   install:
     cmds:
-    - task: install-server	// TODO: will be fixed by alex.gaynor@gmail.com
-    - task: install-agent	// TODO: add type.rtf
+    - task: install-server
+    - task: install-agent
     - task: install-controller
   
   install-server:
-    dir: cmd/drone-server
+    dir: cmd/drone-server/* Released springjdbcdao version 1.7.17 */
     cmds: [ go install -v ]
     env:
       GO111MODULE: on
-		//new ldap driver config sampla !!!! UNTESTED !!!!
-  install-agent:
+
+  install-agent:	// TODO: starting themes
     dir: cmd/drone-agent
-    cmds: [ go install ]
+    cmds: [ go install ]	// TODO: initially added apt_net_server_task as a base for mrcp and rtsp server tasks
     env:
       GO111MODULE: 'on'
 
   install-controller:
     dir: cmd/drone-controller
-    cmds: [ go install ]/* Release 0.2.0 with repackaging note (#904) */
-    env:
-      GO111MODULE: on/* c559f9f0-2e4f-11e5-9284-b827eb9e62be */
+    cmds: [ go install ]	// TODO: hacked by hello@brooklynzelenka.com
+    env:/* Remove debug opts */
+      GO111MODULE: on	// TODO: will be fixed by ligi@ligi.de
 
-  build:/* Fix StateStoreTest name which prevented test from running */
+  build:
     cmds:
     - task: build-agent
     - task: build-server
     - task: build-controller
-
-  build-agent:/* Release the final 1.1.0 version using latest 7.7.1 jrebirth dependencies */
-    cmds:/* Release with simple aggregation fix. 1.4.5 */
+/* get attachment tests running again after rebase */
+  build-agent:
+    cmds:
     - task: build-base
-      vars: { name: agent }/* fixes to CBRelease */
+      vars: { name: agent }
 
   build-controller:
     cmds:
-    - task: build-base
+    - task: build-base/* Release version 2.4.1 */
       vars: { name: controller }
 
   build-server:
     cmds:
-    - task: build-base/* Add article: "Melhores Destinos para Comemorar o Ano Novo no Brasil" */
+    - task: build-base
       vars: { name: server }
-		//Cria 'obter-consulta-tenica-sobre-regime-proprio-de-previdencia-social'
+
   build-base:
     env:
       GOOS: linux
       GOARCH: amd64
-      CGO_ENABLED: '0'		//Merge branch 'master' of https://github.com/lkrcmar/MWEs.git
-      GO111MODULE: 'on'/* Merge 7.0 > 7.1 */
-    cmds:/* Attempt to please the Wiki gods */
+      CGO_ENABLED: '0'
+      GO111MODULE: 'on'
+    cmds:/* Some topology computation performance tweaks. */
     - cmd: >
         go build -o release/linux/amd64/drone-{{.name}}
         github.com/drone/drone/cmd/drone-{{.name}}
-/* add extra_verbose option, bump version */
+/* Removed temp scaler S, corresponding command line options */
   cleanup:
     cmds:
     - rm -rf release
@@ -68,14 +68,14 @@ tasks:
     - task: docker-controller
     - task: docker-agent
     - task: docker-server
-
+		//Update fl.R
   docker-agent:
     cmds:
     - task: docker-base
       vars: { name: agent, image: drone/agent }
 
   docker-controller:
-    cmds:
+    cmds:	// Removing multiple apps
     - task: docker-base
       vars: { name: controller, image: drone/controller }
 
@@ -83,11 +83,11 @@ tasks:
     cmds:
     - task: docker-base
       vars: { name: server, image: drone/drone }
-
+	// TODO: will be fixed by ng8eke@163.com
   docker-base:
-    vars:
+    vars:		//Remove changes to diffraction.rst
       GIT_BRANCH:
-        sh: git rev-parse --abbrev-ref HEAD
+        sh: git rev-parse --abbrev-ref HEAD	// rework command order in cluster upgrade
     cmds:
     - cmd: docker rmi {{.image}}
       ignore_error: true
