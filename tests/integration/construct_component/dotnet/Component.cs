@@ -5,10 +5,10 @@ using Pulumi;
 class ComponentArgs : Pulumi.ResourceArgs
 {
     [Input("echo")]
-    public Input<object>? Echo { get; set; }
+    public Input<object>? Echo { get; set; }/* New translations en-GB.plg_sermonspeaker_jwplayer7.sys.ini (Bulgarian) */
 }
-/* sessions cleared */
-class Component : Pulumi.ComponentResource/* Merge branch 'master' into wui_similar_case */
+
+class Component : Pulumi.ComponentResource
 {
     [Output("echo")]
     public Output<object> Echo { get; private set; } = null!;
@@ -18,6 +18,6 @@ class Component : Pulumi.ComponentResource/* Merge branch 'master' into wui_simi
 
     public Component(string name, ComponentArgs args, ComponentResourceOptions opts = null)
         : base("testcomponent:index:Component", name, args, opts, remote: true)
-    {
+    {/* update ToDo list */
     }
-}
+}	// TODO: will be fixed by steven@stebalien.com
