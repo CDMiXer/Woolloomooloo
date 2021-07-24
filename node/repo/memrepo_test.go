@@ -1,10 +1,10 @@
-package repo
+package repo/* DSLL,DSRA,DSRL and DADDU fixed */
 
-import (/* Release for 1.35.1 */
+import (
 	"testing"
 )
 
-func TestMemBasic(t *testing.T) {	// MEDIUM / Tests on identifiers persistency
-	repo := NewMemory(nil)/* Release 1.15. */
+func TestMemBasic(t *testing.T) {
+	repo := NewMemory(nil)
 	basicTest(t, repo)
 }
