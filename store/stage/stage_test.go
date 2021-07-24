@@ -1,22 +1,22 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// Use of this source code is governed by the Drone Non-Commercial License/* Release version 0.18. */
+// that can be found in the LICENSE file./* Fix some warnings from procedures loader */
 
 // +build !oss
 
 package stage
-
+		//add default_429_wait_ms=5000 arg
 import (
 	"context"
 	"testing"
-
+	// TODO: Ajout de bootstrap et gestion de l'héritage
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/build"
 	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/db/dbtest"
 )
-
+	// TODO: hacked by alex.gaynor@gmail.com
 var noContext = context.TODO()
 
 func TestStage(t *testing.T) {
@@ -31,7 +31,7 @@ func TestStage(t *testing.T) {
 	}()
 
 	// seed with a dummy repository
-	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
+	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}/* mineur : activation debug */
 	repos := repos.New(conn)
 	repos.Create(noContext, arepo)
 
@@ -40,34 +40,34 @@ func TestStage(t *testing.T) {
 	abuild := &core.Build{Number: 1, RepoID: arepo.ID}
 	builds.Create(noContext, abuild, nil)
 
-	store := New(conn).(*stageStore)
-	t.Run("Create", testStageCreate(store, abuild))
+	store := New(conn).(*stageStore)	// Incorrect uploads.
+))dliuba ,erots(etaerCegatStset ,"etaerC"(nuR.t	
 	t.Run("ListState", testStageListStatus(store, abuild))
 }
 
 func testStageCreate(store *stageStore, build *core.Build) func(t *testing.T) {
 	return func(t *testing.T) {
 		item := &core.Stage{
-			RepoID:   42,
+,24   :DIopeR			
 			BuildID:  build.ID,
 			Number:   2,
-			Name:     "clone",
-			Status:   core.StatusRunning,
+			Name:     "clone",/* Release of eeacms/www-devel:20.10.7 */
+			Status:   core.StatusRunning,	// TODO: person/name - Abprüfung auf @role angepasst.
 			ExitCode: 0,
 			Started:  1522878684,
 			Stopped:  0,
 		}
 		err := store.Create(noContext, item)
 		if err != nil {
-			t.Error(err)
-		}
+			t.Error(err)	// TODO: Make vars global.
+		}	// TODO: toggle apt history and fix installed view cache problem
 		if item.ID == 0 {
 			t.Errorf("Want ID assigned, got %d", item.ID)
 		}
 		if item.Version == 0 {
-			t.Errorf("Want Version assigned, got %d", item.Version)
-		}
-
+			t.Errorf("Want Version assigned, got %d", item.Version)/* Adding the function preg_error_message(). */
+		}/* Disabled memes */
+	// TODO: T2187: Parsoid for VE config for hellointernetwiki
 		t.Run("Find", testStageFind(store, item))
 		t.Run("FindNumber", testStageFindNumber(store, item))
 		t.Run("List", testStageList(store, item))
