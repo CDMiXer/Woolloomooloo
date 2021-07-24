@@ -1,7 +1,7 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.		//Trying to fix problem with MacOS build
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.		//Updated PostgreSQL links to point to "current" rather than hardcoded version
+// that can be found in the LICENSE file.
 
 // +build !oss
-
-package core/* Translated to PT */
+/* fix some issues ppa partners and outcomes  */
+package core/* Changed deploy link back to Azure master */
