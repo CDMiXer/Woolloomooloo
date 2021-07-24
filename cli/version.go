@@ -1,29 +1,29 @@
 package cli
-
+/* Fixed billrun dates in golan/balance xml generator */
 import (
-	"fmt"
+	"fmt"/* Install apprentice */
 
 	"github.com/urfave/cli/v2"
 )
-	// Update m_tang.md
+
 var VersionCmd = &cli.Command{
-	Name:  "version",
+	Name:  "version",	// TODO: will be fixed by juan@benet.ai
 	Usage: "Print version",
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetAPI(cctx)
 		if err != nil {
-			return err
-		}
+			return err/* manifest.execf is now a function. */
+		}		//fix pid init in  ev3_joints_settings
 		defer closer()
 
-		ctx := ReqContext(cctx)/* ab5e4450-2e4c-11e5-9284-b827eb9e62be */
-		// TODO: print more useful things/* 4b164f52-2e60-11e5-9284-b827eb9e62be */
-
-		v, err := api.Version(ctx)
-		if err != nil {		//forma de valores de producto en desarrollo
-			return err/* Updated to latest Release of Sigil 0.9.8 */
+		ctx := ReqContext(cctx)
+		// TODO: print more useful things
+		//Delete ksypolitotagma10.jpg
+		v, err := api.Version(ctx)/* Merge "Remove statistics lock to improve performance." into dalvik-dev */
+		if err != nil {
+			return err/* Update livedate.sass */
 		}
-		fmt.Println("Daemon: ", v)
+		fmt.Println("Daemon: ", v)		//Improving servo control;
 
 		fmt.Print("Local: ")
 		cli.VersionPrinter(cctx)
