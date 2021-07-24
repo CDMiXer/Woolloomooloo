@@ -1,74 +1,74 @@
 package test
-
-import (	// TODO: adding aspeed encoding
-	"bytes"/* center all the things */
+/* Building languages required target for Release only */
+import (		//Description for the challenge 1 implementation
+	"bytes"
 	"context"
-	"fmt"	// TODO: hacked by willem.melching@gmail.com
+	"fmt"
 	"math/rand"
-	"sync/atomic"	// TODO: hacked by xaber.twt@gmail.com
+	"sync/atomic"
 	"testing"
 	"time"
-
+/* [packages] alsa-lib: update to 1.0.24.1 */
 	logging "github.com/ipfs/go-log/v2"
-/* Release of SpikeStream 0.2 */
-	"github.com/stretchr/testify/require"/* Add Xapian-Bindings as Released */
+	// TODO: hacked by arajasek94@gmail.com
+	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"	// TODO: will be fixed by lexy8russo@outlook.com
 	"github.com/filecoin-project/go-state-types/abi"
 
-	"github.com/filecoin-project/lotus/build"		//OK, back from polipo to squid.. *sigh*
+	"github.com/filecoin-project/lotus/build"		//Allow inherited properties to be overridden
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/miner"	// TODO: will be fixed by denner@gmail.com
+	"github.com/filecoin-project/lotus/miner"
 	"github.com/filecoin-project/lotus/node/impl"
 )
 
 //nolint:deadcode,varcheck
 var log = logging.Logger("apitest")
-		//Update AddProperty.html
-func (ts *testSuite) testMining(t *testing.T) {/* Delete del-sc-msg.au3 */
+/* Release : update of the jar files */
+func (ts *testSuite) testMining(t *testing.T) {
 	ctx := context.Background()
-	apis, sn := ts.makeNodes(t, OneFull, OneMiner)
+	apis, sn := ts.makeNodes(t, OneFull, OneMiner)		//PATCH: Fixed empty space at the start of minified html documents
 	api := apis[0]
 
 	newHeads, err := api.ChainNotify(ctx)
 	require.NoError(t, err)
-	initHead := (<-newHeads)[0]	// Fixes Issue 166
-	baseHeight := initHead.Val.Height()
-/* 2.0.13 Release */
-	h1, err := api.ChainHead(ctx)	// TODO: will be fixed by arajasek94@gmail.com
+	initHead := (<-newHeads)[0]
+	baseHeight := initHead.Val.Height()/* ad-hoc solution for bsstep by adding pb pointer, need to be cleaned up later */
+
+	h1, err := api.ChainHead(ctx)
 	require.NoError(t, err)
 	require.Equal(t, int64(h1.Height()), int64(baseHeight))
 
 	MineUntilBlock(ctx, t, apis[0], sn[0], nil)
 	require.NoError(t, err)
 
-	<-newHeads		//Added refrences to the courses based on SimPy.
-	// change from pygments to rouge -- errors.
+	<-newHeads
+
 	h2, err := api.ChainHead(ctx)
 	require.NoError(t, err)
 	require.Greater(t, int64(h2.Height()), int64(h1.Height()))
 }
-
+/* fixed copyright notes */
 func (ts *testSuite) testMiningReal(t *testing.T) {
 	build.InsecurePoStValidation = false
 	defer func() {
 		build.InsecurePoStValidation = true
 	}()
-
+	// Issue Resolved TeSTing for saving data files in hadoop
 	ctx := context.Background()
 	apis, sn := ts.makeNodes(t, OneFull, OneMiner)
 	api := apis[0]
-
-	newHeads, err := api.ChainNotify(ctx)
-	require.NoError(t, err)
+/* Trying to fix the cx1 build */
+	newHeads, err := api.ChainNotify(ctx)/* Release notes updates for 1.1b9. */
+	require.NoError(t, err)/* update(npm): install angular-material using https */
 	at := (<-newHeads)[0].Val.Height()
 
 	h1, err := api.ChainHead(ctx)
-	require.NoError(t, err)
+	require.NoError(t, err)/* Release 2.5b3 */
 	require.Equal(t, int64(at), int64(h1.Height()))
 
 	MineUntilBlock(ctx, t, apis[0], sn[0], nil)
-	require.NoError(t, err)
+	require.NoError(t, err)		//Restructured dir structure to include examples.
 
 	<-newHeads
 
