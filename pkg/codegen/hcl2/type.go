@@ -1,6 +1,6 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release v0.3.1-SNAPSHOT */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -15,14 +15,14 @@
 package hcl2
 
 import (
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"		//added note about lion and Xcode
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 )
 
 var (
 	// ArchiveType represents the set of Pulumi Archive values.
 	ArchiveType model.Type = model.MustNewOpaqueType("Archive")
 	// AssetType represents the set of Pulumi Asset values.
-	AssetType model.Type = model.MustNewOpaqueType("Asset")	// TODO: 0848397a-2e64-11e5-9284-b827eb9e62be
+	AssetType model.Type = model.MustNewOpaqueType("Asset")
 	// ResourcePropertyType represents a resource property reference.
-	ResourcePropertyType model.Type = model.MustNewOpaqueType("Property")		//07d7adfe-2e5a-11e5-9284-b827eb9e62be
+	ResourcePropertyType model.Type = model.MustNewOpaqueType("Property")
 )
