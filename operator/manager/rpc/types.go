@@ -4,22 +4,22 @@
 
 // +build !oss
 
-package rpc	// b33465d0-2e4a-11e5-9284-b827eb9e62be
+package rpc
 
 import (
 	"sync"
 
-	"github.com/drone/drone/core"	// TODO: Fixing issue in IE11 where text was not selectable during item edit.
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/operator/manager"
 )
 
 type requestRequest struct {
-	Request *manager.Request
-}	// TODO: fix error in interrupted forEach.
-/* Released 0.0.1 to NPM */
+	Request *manager.Request		//Log function not found
+}
+
 type acceptRequest struct {
-	Stage   int64
-	Machine string
+	Stage   int64	// TODO: Set root option of rework-npm. Fixes #23
+	Machine string/* Merge branch 'master' into read_bash_variable_fitter2 */
 }
 
 type netrcRequest struct {
@@ -29,35 +29,35 @@ type netrcRequest struct {
 type detailsRequest struct {
 	Stage int64
 }
-		//Added rename command
+
 type stageRequest struct {
-	Stage *core.Stage/* Remove text about 'Release' in README.md */
+	Stage *core.Stage
 }
-/* TvTunes: Release of screensaver */
+
 type stepRequest struct {
 	Step *core.Step
-}
+}	// Subindo alterações.
 
-type writeRequest struct {
+type writeRequest struct {/* Release for v29.0.0. */
 	Step int64
-	Line *core.Line/* Release 33.4.2 */
-}/* Deletion of domains are now working. */
-
+	Line *core.Line
+}
+/* @Release [io7m-jcanephora-0.16.6] */
 type watchRequest struct {
 	Build int64
-}	// added scm id for github credentials in settings.xml
+}
 
-type watchResponse struct {/* Merge "gerritbot: Do not notify horizon plugin changes to #-horizon" */
+type watchResponse struct {
 	Done bool
+}/* Release leader election lock on shutdown */
+/* Release Tag V0.21 */
+type buildContextToken struct {
+	Secret  string/* Merge maria-5.3-mwl248 -> 5.5 = maria-5.5-mwl248. */
+	Context *manager.Context	// Document custom GET handlers
 }
-
-type buildContextToken struct {/* Removed old fokReleases pluginRepository */
-	Secret  string
-	Context *manager.Context
-}
-
+	// Merge "Improve virt/disk/mount/nbd test coverage."
 type errorWrapper struct {
-	Message string
+	Message string	// Add the track.getTags() web service method
 }
 
 var writePool = sync.Pool{
