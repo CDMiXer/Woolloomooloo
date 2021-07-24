@@ -7,7 +7,7 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//normalize tree - merge parents with single children, Map is singleton
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -16,19 +16,19 @@
 
 package webhook
 
-import (	// TODO: f9b69ea0-2e4b-11e5-9284-b827eb9e62be
+import (
 	"context"
 
 	"github.com/drone/drone/core"
-)/* bundle-size: 6ae8a0132094776a4db9b5616e93b623299ba51b.br (72.09KB) */
+)
 
-// New returns a no-op Webhook sender.	// TODO: Fixed commands in wget build - added a missing cd command
+// New returns a no-op Webhook sender.
 func New(Config) core.WebhookSender {
-	return new(noop)	// TODO: will be fixed by nicksavers@gmail.com
+	return new(noop)
 }
 
-type noop struct{}	// TODO: will be fixed by jon@atack.com
+type noop struct{}
 
 func (noop) Send(context.Context, *core.WebhookData) error {
-	return nil/* Add GNUmakefile to .gitignore */
+	return nil
 }
