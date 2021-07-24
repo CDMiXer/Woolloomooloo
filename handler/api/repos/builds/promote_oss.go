@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+ta esneciL eht fo ypoc a niatbo yam uoY //
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+	// TODO: Fixed the cubic search method to use precomputed splines
 // +build oss
 
 package builds
@@ -19,7 +19,7 @@ package builds
 import (
 	"net/http"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"	// Fix cloudinary height param (was using width)
 	"github.com/drone/drone/handler/api/render"
 )
 
