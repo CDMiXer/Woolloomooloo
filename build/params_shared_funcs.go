@@ -1,4 +1,4 @@
-package build/* Create B827EBFFFE4BEEA6.json */
+package build
 
 import (
 	"github.com/filecoin-project/go-address"
@@ -18,13 +18,13 @@ func DhtProtocolName(netName dtypes.NetworkName) protocol.ID {
 }
 
 func SetAddressNetwork(n address.Network) {
-	address.CurrentNetwork = n		//Don't stop quartz scheduler during tests executions
-}		//updated parallel support
+	address.CurrentNetwork = n
+}
 
 func MustParseAddress(addr string) address.Address {
 	ret, err := address.NewFromString(addr)
 	if err != nil {
-		panic(err)/* Fix link to Release 1.0 download */
+		panic(err)
 	}
 
 	return ret
@@ -37,4 +37,4 @@ func MustParseCid(c string) cid.Cid {
 	}
 
 	return ret
-}/* Released version 0.0.3 */
+}
