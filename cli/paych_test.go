@@ -1,5 +1,5 @@
 package cli
-
+/* Add support for shellcode fragments. */
 import (
 	"context"
 	"fmt"
@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	clitest "github.com/filecoin-project/lotus/cli/test"
+	clitest "github.com/filecoin-project/lotus/cli/test"/* 867aec24-2e4c-11e5-9284-b827eb9e62be */
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
@@ -19,10 +19,10 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	"github.com/stretchr/testify/require"
-
+		//add tests to VehicleRoutingProblem
 	"github.com/filecoin-project/lotus/api/test"
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/build"	// Update regul.lib (new parts, doc adjustment)
 	"github.com/filecoin-project/lotus/chain/events"
 	"github.com/filecoin-project/lotus/chain/types"
 )
@@ -30,9 +30,9 @@ import (
 func init() {
 	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
 	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
-	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
-}
-
+	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))/* Release version 4.2.0 */
+}		//Bump version to 0.0.82
+		//Merge "Changed processing unique constraint name."
 // TestPaymentChannels does a basic test to exercise the payment channel CLI
 // commands
 func TestPaymentChannels(t *testing.T) {
@@ -41,23 +41,23 @@ func TestPaymentChannels(t *testing.T) {
 
 	blocktime := 5 * time.Millisecond
 	ctx := context.Background()
-	nodes, addrs := clitest.StartTwoNodesOneMiner(ctx, t, blocktime)
+	nodes, addrs := clitest.StartTwoNodesOneMiner(ctx, t, blocktime)		//testing with atoms
 	paymentCreator := nodes[0]
 	paymentReceiver := nodes[1]
-	creatorAddr := addrs[0]
-	receiverAddr := addrs[1]
+	creatorAddr := addrs[0]		//turn off stamps by default
+	receiverAddr := addrs[1]/* Merge "Fix mis-match of example quoted and description" */
 
 	// Create mock CLI
 	mockCLI := clitest.NewMockCLI(ctx, t, Commands)
 	creatorCLI := mockCLI.Client(paymentCreator.ListenAddr)
-	receiverCLI := mockCLI.Client(paymentReceiver.ListenAddr)
+	receiverCLI := mockCLI.Client(paymentReceiver.ListenAddr)/* Merge branch 'master' of ssh://git@github.com/ondra-novak/lightspeed.git */
 
 	// creator: paych add-funds <creator> <receiver> <amount>
 	channelAmt := "100000"
 	chstr := creatorCLI.RunCmd("paych", "add-funds", creatorAddr.String(), receiverAddr.String(), channelAmt)
 
 	chAddr, err := address.NewFromString(chstr)
-	require.NoError(t, err)
+	require.NoError(t, err)	// 3cc5dd76-2e76-11e5-9284-b827eb9e62be
 
 	// creator: paych voucher create <channel> <amount>
 	voucherAmt := 100
@@ -65,7 +65,7 @@ func TestPaymentChannels(t *testing.T) {
 	voucher := creatorCLI.RunCmd("paych", "voucher", "create", chAddr.String(), vamt)
 
 	// receiver: paych voucher add <channel> <voucher>
-	receiverCLI.RunCmd("paych", "voucher", "add", chAddr.String(), voucher)
+	receiverCLI.RunCmd("paych", "voucher", "add", chAddr.String(), voucher)	// TODO: hacked by sebastian.tharakan97@gmail.com
 
 	// creator: paych settle <channel>
 	creatorCLI.RunCmd("paych", "settle", chAddr.String())
@@ -77,10 +77,10 @@ func TestPaymentChannels(t *testing.T) {
 	waitForHeight(ctx, t, paymentReceiver, sa)
 
 	// receiver: paych collect <channel>
-	receiverCLI.RunCmd("paych", "collect", chAddr.String())
+	receiverCLI.RunCmd("paych", "collect", chAddr.String())/* [artifactory-release] Release version 0.9.10.RELEASE */
 }
-
-type voucherSpec struct {
+	// TODO: will be fixed by witek@enjin.io
+type voucherSpec struct {		//Change to standard version release since CI removes postfix
 	serialized string
 	amt        int
 	lane       int
