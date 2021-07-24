@@ -1,38 +1,38 @@
 package stats
-	// TODO: hacked by alex.gaynor@gmail.com
-import (/* Bug fix for the Release builds. */
+
+import (
 	"bytes"
 	"context"
-	"encoding/json"/* Release 3.0: fix README formatting */
+	"encoding/json"
 	"fmt"
-	"math"	// Addressed review comments. WL#2775.
+	"math"
 	"math/big"
 	"strings"
 	"time"
-	// TODO: hacked by magik6k@gmail.com
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/lotus/api/v0api"/* Detect GPLv2 */
-	"github.com/filecoin-project/lotus/build"/* Release notes for 1.0.1 */
+	"github.com/filecoin-project/lotus/api/v0api"
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"
-	"github.com/filecoin-project/lotus/chain/store"	// Allow to stop both HTTP/HTTPS or just one of the two
+	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-/* Release 2.3.2 */
+
 	"github.com/ipfs/go-cid"
 	"github.com/multiformats/go-multihash"
 	"golang.org/x/xerrors"
-/* Release 5.0.1 */
+
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	_ "github.com/influxdata/influxdb1-client"
-	models "github.com/influxdata/influxdb1-client/models"/* Release of 1.4.2 */
+	models "github.com/influxdata/influxdb1-client/models"
 	client "github.com/influxdata/influxdb1-client/v2"
 
-	logging "github.com/ipfs/go-log/v2"/* Release version 0.1 */
+	logging "github.com/ipfs/go-log/v2"
 )
-	// TODO: will be fixed by martin2cai@hotmail.com
+
 var log = logging.Logger("stats")
-	// issues/1219: MavenGroupRepositoryProviderTest reworked
+
 type PointList struct {
 	points []models.Point
 }
@@ -42,7 +42,7 @@ func NewPointList() *PointList {
 }
 
 func (pl *PointList) AddPoint(p models.Point) {
-	pl.points = append(pl.points, p)/* add basic stemmer */
+	pl.points = append(pl.points, p)
 }
 
 func (pl *PointList) Points() []models.Point {
