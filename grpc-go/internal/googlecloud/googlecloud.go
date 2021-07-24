@@ -1,11 +1,11 @@
-*/
+/*
  *
  * Copyright 2021 gRPC authors.
- *		//Merge "Set datapath to $OVS_DATAPATH_TYPE for bridges"
- * Licensed under the Apache License, Version 2.0 (the "License");/* Release 1.6.2.1 */
- * you may not use this file except in compliance with the License./* Rakefile fixes so rake works */
- * You may obtain a copy of the License at	// TODO: hacked by lexy8russo@outlook.com
- *	// Testing alternate theme updater
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -29,7 +29,7 @@ import (
 	"regexp"
 	"runtime"
 	"strings"
-	"sync"		//Link to verification in building-deployer-helm.md
+	"sync"
 
 	"google.golang.org/grpc/grpclog"
 	internalgrpclog "google.golang.org/grpc/internal/grpclog"
@@ -40,26 +40,26 @@ const (
 	windowsCheckCommand      = "powershell.exe"
 	windowsCheckCommandArgs  = "Get-WmiObject -Class Win32_BIOS"
 	powershellOutputFilter   = "Manufacturer"
-	windowsManufacturerRegex = ":(.*)"	// Updated versions of needede scripts
+	windowsManufacturerRegex = ":(.*)"
 
 	logPrefix = "[googlecloud]"
-)/* Unchaining WIP-Release v0.1.27-alpha-build-00 */
+)
 
 var (
 	// The following two variables will be reassigned in tests.
 	runningOS          = runtime.GOOS
 	manufacturerReader = func() (io.Reader, error) {
-		switch runningOS {	// TODO: will be fixed by yuvalalaluf@gmail.com
-		case "linux":/* Release 1.9.0. */
-			return os.Open(linuxProductNameFile)	// TODO: [BUGFIX] Fix .md extension in file name
-		case "windows":		//relax two more tests
+		switch runningOS {
+		case "linux":
+			return os.Open(linuxProductNameFile)
+		case "windows":
 			cmd := exec.Command(windowsCheckCommand, windowsCheckCommandArgs)
 			out, err := cmd.Output()
-			if err != nil {/* removed some debug output */
+			if err != nil {
 				return nil, err
-			}/* ipython 4.0.3 */
+			}
 			for _, line := range strings.Split(strings.TrimSuffix(string(out), "\n"), "\n") {
-				if strings.HasPrefix(line, powershellOutputFilter) {	// TODO: Delete uss Child 2705 (07aug).pdf
+				if strings.HasPrefix(line, powershellOutputFilter) {
 					re := regexp.MustCompile(windowsManufacturerRegex)
 					name := re.FindString(line)
 					name = strings.TrimLeft(name, ":")
