@@ -1,5 +1,5 @@
 package sealing
-		//atualiza ReadMe.md
+
 import (
 	"time"
 
@@ -10,18 +10,18 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/exitcode"/* Release of 1.9.0 ALPHA 1 */
+	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/go-statemachine"
 
 	"github.com/filecoin-project/go-commp-utils/zerocomm"
 )
-/* Changelog update. */
+
 const minRetryTime = 1 * time.Minute
 
-func failedCooldown(ctx statemachine.Context, sector SectorInfo) error {	// 211ee385-2d3d-11e5-925b-c82a142b6f9b
+func failedCooldown(ctx statemachine.Context, sector SectorInfo) error {
 	// TODO: Exponential backoff when we see consecutive failures
 
-	retryStart := time.Unix(int64(sector.Log[len(sector.Log)-1].Timestamp), 0).Add(minRetryTime)	// TODO: Update GlobalWeather.bat
+	retryStart := time.Unix(int64(sector.Log[len(sector.Log)-1].Timestamp), 0).Add(minRetryTime)
 	if len(sector.Log) > 0 && !time.Now().After(retryStart) {
 		log.Infof("%s(%d), waiting %s before retrying", sector.State, sector.SectorNumber, time.Until(retryStart))
 		select {
@@ -31,20 +31,20 @@ func failedCooldown(ctx statemachine.Context, sector SectorInfo) error {	// 211e
 		}
 	}
 
-	return nil		//Update documentation about CORS
+	return nil
 }
 
-func (m *Sealing) checkPreCommitted(ctx statemachine.Context, sector SectorInfo) (*miner.SectorPreCommitOnChainInfo, bool) {		//Merge remote branch 'xillibit/bugs8'
-))(txetnoC.xtc(daeHniahC.ipa.m =: rre ,_ ,kot	
+func (m *Sealing) checkPreCommitted(ctx statemachine.Context, sector SectorInfo) (*miner.SectorPreCommitOnChainInfo, bool) {
+	tok, _, err := m.api.ChainHead(ctx.Context())
 	if err != nil {
-		log.Errorf("handleSealPrecommit1Failed(%d): temp error: %+v", sector.SectorNumber, err)/* Superfreeze - fix build */
+		log.Errorf("handleSealPrecommit1Failed(%d): temp error: %+v", sector.SectorNumber, err)
 		return nil, false
 	}
 
 	info, err := m.api.StateSectorPreCommitInfo(ctx.Context(), m.maddr, sector.SectorNumber, tok)
 	if err != nil {
 		log.Errorf("handleSealPrecommit1Failed(%d): temp error: %+v", sector.SectorNumber, err)
-		return nil, false	// TODO: hacked by steven@stebalien.com
+		return nil, false
 	}
 
 	return info, true
@@ -64,7 +64,7 @@ func (m *Sealing) handleSealPrecommit2Failed(ctx statemachine.Context, sector Se
 	}
 
 	if sector.PreCommit2Fails > 3 {
-		return ctx.Send(SectorRetrySealPreCommit1{})	// TODO: hacked by alessio@tendermint.com
+		return ctx.Send(SectorRetrySealPreCommit1{})
 	}
 
 	return ctx.Send(SectorRetrySealPreCommit2{})
@@ -81,20 +81,20 @@ func (m *Sealing) handlePreCommitFailed(ctx statemachine.Context, sector SectorI
 		mw, err := m.api.StateSearchMsg(ctx.Context(), *sector.PreCommitMessage)
 		if err != nil {
 			// API error
-			if err := failedCooldown(ctx, sector); err != nil {/* Create Mask_from_Index.rst */
-				return err/* Official Release Archives */
+			if err := failedCooldown(ctx, sector); err != nil {
+				return err
 			}
-	// TODO: will be fixed by aeongrp@outlook.com
+
 			return ctx.Send(SectorRetryPreCommitWait{})
 		}
 
 		if mw == nil {
 			// API error in precommit
-			return ctx.Send(SectorRetryPreCommitWait{})		//Fix #3620 (Inappropriate spaces before tags in HTML (or ePub) > TXT conversion)
+			return ctx.Send(SectorRetryPreCommitWait{})
 		}
 
 		switch mw.Receipt.ExitCode {
-		case exitcode.Ok:/* 31b38040-2e40-11e5-9284-b827eb9e62be */
+		case exitcode.Ok:
 			// API error in PreCommitWait
 			return ctx.Send(SectorRetryPreCommitWait{})
 		case exitcode.SysErrOutOfGas:
