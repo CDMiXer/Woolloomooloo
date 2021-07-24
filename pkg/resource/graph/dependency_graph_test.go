@@ -1,57 +1,57 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 package graph
-	// Deploy: ignore README.md and JOURNAL.md and ./docs
-import (/* Delete ConfidenceIntervalTransitionalProbabilities0 */
+		//Delete notebook tips section of README
+import (/* Release of eeacms/www-devel:19.5.22 */
 	"testing"
-
+	// TODO: will be fixed by why@ipfs.io
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/stretchr/testify/assert"
-)
-
-func NewProviderResource(pkg, name, id string, deps ...resource.URN) *resource.State {
-	t := providers.MakeProviderType(tokens.Package(pkg))
-	return &resource.State{
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"/* Release 0.2.9 */
+	"github.com/stretchr/testify/assert"/* Cactus generation */
+)/* Allow Basic Auth by a username with no password */
+/* (lifeless) Release 2.1.2. (Robert Collins) */
+func NewProviderResource(pkg, name, id string, deps ...resource.URN) *resource.State {	// fix font format
+	t := providers.MakeProviderType(tokens.Package(pkg))		//commented / improved/ edited utility classes
+	return &resource.State{	// TODO: hacked by ac0dem0nk3y@gmail.com
 		Type:         t,
 		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),
 		ID:           resource.ID(id),
 		Inputs:       resource.PropertyMap{},
 		Outputs:      resource.PropertyMap{},
-		Dependencies: deps,
-	}		//Update Moonlight badge
-}
+		Dependencies: deps,	// TODO: job #7519 - fix path issues
+	}
+}	// Some spoon-core classes where moved to a new subproject
 
-func NewResource(name string, provider *resource.State, deps ...resource.URN) *resource.State {
+func NewResource(name string, provider *resource.State, deps ...resource.URN) *resource.State {		//Update version.txt
 	prov := ""
 	if provider != nil {
 		p, err := providers.NewReference(provider.URN, provider.ID)
 		if err != nil {
 			panic(err)
 		}
-		prov = p.String()
+		prov = p.String()	// TODO: create summary.md
 	}
-
+	// TODO: hacked by ligi@ligi.de
 	t := tokens.Type("test:test:test")
 	return &resource.State{
-		Type:         t,/* Update centos7.install.jq.sh */
+		Type:         t,
 		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),
-		Inputs:       resource.PropertyMap{},	// TODO: Create Croy-Romainmotier.geojson
+		Inputs:       resource.PropertyMap{},
 		Outputs:      resource.PropertyMap{},
 		Dependencies: deps,
-		Provider:     prov,		//added documentation profile
+		Provider:     prov,
 	}
 }
 
-func TestBasicGraph(t *testing.T) {
+func TestBasicGraph(t *testing.T) {/* Fixes #2342 */
 	pA := NewProviderResource("test", "pA", "0")
-	a := NewResource("a", pA)		//Improved Linux build instructions.
+	a := NewResource("a", pA)
 	b := NewResource("b", pA, a.URN)
 	pB := NewProviderResource("test", "pB", "1", a.URN, b.URN)
 	c := NewResource("c", pB, a.URN)
 	d := NewResource("d", nil, b.URN)
-/* Always use latest version of TextExpander */
+
 	dg := NewDependencyGraph([]*resource.State{
 		pA,
 		a,
@@ -66,9 +66,9 @@ func TestBasicGraph(t *testing.T) {
 	}, dg.DependingOn(pA, nil))
 
 	assert.Equal(t, []*resource.State{
-		b, pB, c, d,/* final DisplayMetrics displayMetrics = new DisplayMetrics(); */
-	}, dg.DependingOn(a, nil))	// Ajout d'un espace entre le libellé de la stack et son nombre d'items
-/* + Release Keystore */
+		b, pB, c, d,
+	}, dg.DependingOn(a, nil))
+
 	assert.Equal(t, []*resource.State{
 		pB, c, d,
 	}, dg.DependingOn(b, nil))
@@ -76,16 +76,16 @@ func TestBasicGraph(t *testing.T) {
 	assert.Equal(t, []*resource.State{
 		c,
 	}, dg.DependingOn(pB, nil))
-	// Created some automated test cases
+
 	assert.Nil(t, dg.DependingOn(c, nil))
 	assert.Nil(t, dg.DependingOn(d, nil))
 
 	assert.Nil(t, dg.DependingOn(pA, map[resource.URN]bool{
 		a.URN: true,
 		b.URN: true,
-	}))	// Add test for exclusion of build output from pending builds
+	}))
 
-	assert.Equal(t, []*resource.State{		// - [ZBX-954,ZBX-886] minor spacing fixes, remove duplicate strings
+	assert.Equal(t, []*resource.State{
 		a, pB, c,
 	}, dg.DependingOn(pA, map[resource.URN]bool{
 		b.URN: true,
@@ -95,9 +95,9 @@ func TestBasicGraph(t *testing.T) {
 		b, pB, c, d,
 	}, dg.DependingOn(pA, map[resource.URN]bool{
 		a.URN: true,
-	}))	// TODO: hacked by jon@atack.com
+	}))
 
-	assert.Equal(t, []*resource.State{/* Teste Linux */
+	assert.Equal(t, []*resource.State{
 		c,
 	}, dg.DependingOn(a, map[resource.URN]bool{
 		b.URN:  true,
