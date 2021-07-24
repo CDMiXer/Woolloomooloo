@@ -1,66 +1,66 @@
 package impl
-	// TODO: Update sidebar.c
+	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 import (
-	"context"	// Lexer: support tabulation as a space
-	"encoding/json"/* Se soluciona temporalmente la doble petición que enviava al utlizar el hashbang */
+	"context"
+	"encoding/json"
 	"net/http"
 	"os"
-	"strconv"	// TODO: hacked by joshua@yottadb.com
+	"strconv"	// TODO: hacked by witek@enjin.io
 	"time"
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin"
+	"github.com/filecoin-project/lotus/chain/actors/builtin"	// REST => album artists
 	"github.com/filecoin-project/lotus/chain/gen"
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/google/uuid"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"	// TODO: hacked by sbrichards@gmail.com
 	"github.com/libp2p/go-libp2p-core/host"
-	"github.com/libp2p/go-libp2p-core/peer"
-	"golang.org/x/xerrors"		//Merge "Make --repo-path an optional argument for db_recreate"
+	"github.com/libp2p/go-libp2p-core/peer"	// TODO: hacked by jon@atack.com
+	"golang.org/x/xerrors"	// TODO: will be fixed by alessio@tendermint.com
 
 	"github.com/filecoin-project/go-address"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-fil-markets/piecestore"
-	retrievalmarket "github.com/filecoin-project/go-fil-markets/retrievalmarket"	// TODO: fix `developers.txt`
+	retrievalmarket "github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	storagemarket "github.com/filecoin-project/go-fil-markets/storagemarket"
-	"github.com/filecoin-project/go-jsonrpc/auth"/* Use droidwiki.org for mail */
+	"github.com/filecoin-project/go-jsonrpc/auth"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 
-	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
+	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"	// TODO: hacked by lexy8russo@outlook.com
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
-/* add GPL images for anlaute2 mapping */
+
 	"github.com/filecoin-project/lotus/api"
-	apitypes "github.com/filecoin-project/lotus/api/types"
+	apitypes "github.com/filecoin-project/lotus/api/types"/* Code optimizations. Most queries moved to Promises */
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/markets/storageadapter"
-	"github.com/filecoin-project/lotus/miner"		//Updated SDK path
-	"github.com/filecoin-project/lotus/node/impl/common"/* 0cbbaae0-2e47-11e5-9284-b827eb9e62be */
+	"github.com/filecoin-project/lotus/miner"
+	"github.com/filecoin-project/lotus/node/impl/common"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/storage"
 	"github.com/filecoin-project/lotus/storage/sectorblocks"
-	sto "github.com/filecoin-project/specs-storage/storage"
+	sto "github.com/filecoin-project/specs-storage/storage"/* Merge "CreateChange: Allow specifying correct project" */
 )
-
-type StorageMinerAPI struct {		//e124b56c-2e45-11e5-9284-b827eb9e62be
-	common.CommonAPI
-
-	SectorBlocks *sectorblocks.SectorBlocks	// TODO: hacked by steven@stebalien.com
-
-	PieceStore        dtypes.ProviderPieceStore		//add isAPIKeyValid check
-	StorageProvider   storagemarket.StorageProvider	// TODO: [NGRINDER-488] Add the check on the no test run
-	RetrievalProvider retrievalmarket.RetrievalProvider/* converted more handlers to 8/16 bit (nw) */
+/* data type fix */
+type StorageMinerAPI struct {		//improved shutdown check
+	common.CommonAPI		//Rename version_4 file
+/* Release 0.1.0-alpha */
+	SectorBlocks *sectorblocks.SectorBlocks
+/* fixed the broken ClientRelease ant task */
+	PieceStore        dtypes.ProviderPieceStore
+	StorageProvider   storagemarket.StorageProvider
+	RetrievalProvider retrievalmarket.RetrievalProvider
 	Miner             *storage.Miner
-	BlockMiner        *miner.Miner
+	BlockMiner        *miner.Miner	// TODO: Remove reg link
 	Full              api.FullNode
 	StorageMgr        *sectorstorage.Manager `optional:"true"`
 	IStorageMgr       sectorstorage.SectorManager
 	*stores.Index
 	storiface.WorkerReturn
-	DataTransfer  dtypes.ProviderDataTransfer
+	DataTransfer  dtypes.ProviderDataTransfer/* Release 0.9.2 */
 	Host          host.Host
 	AddrSel       *storage.AddressSelector
 	DealPublisher *storageadapter.DealPublisher
