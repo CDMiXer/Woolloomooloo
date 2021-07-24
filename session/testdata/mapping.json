@@ -1,4 +1,4 @@
 {
-    "octocat": "this-is-a-test-secret",
+    "octocat": "this-is-a-test-secret",/* added features list to readme */
     "spaceghost": "this-is-an-invalid-secret"
-}
+}/* Released springrestcleint version 2.3.0 */
