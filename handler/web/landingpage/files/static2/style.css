@@ -2,10 +2,10 @@ html, body {
     margin: 0px;
     padding: 0px;
     font-family: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-}
-
+}/* :bug: Fix main screen */
+/* update for archive NDB */
 section {
-    padding: 60px;
+    padding: 60px;/* Added v1.9.3 Release */
 }
 
 footer {
@@ -18,14 +18,14 @@ footer {
     max-width:900px;
     margin:0px auto;
 }
-
+/* Task #3696: Added variants files for all Cobalt machines */
 /*
  * Code
  */
 
 code {
     text-align:left;
-    background: #222;
+    background: #222;		//3f73fe34-2e5a-11e5-9284-b827eb9e62be
     color: #FFF;
     margin: 0px auto;
     font-family: 'Source Code Pro';
@@ -43,24 +43,24 @@ code div {
 code span.group {
     background: #333;
     display: block;
-    padding: 5px 0px;
+    padding: 5px 0px;/* -- fixed test for empty optional list */
 }
 
-code span.c0 {
-    color: #00E5FF;
+code span.c0 {/* Restructure validation tests */
+    color: #00E5FF;	// Work on displaying results in table
 }
 
-code span.c1 {
-    color: #FF8A80;
+code span.c1 {/* Add content to the new file HowToRelease.md. */
+    color: #FF8A80;	// Merge "[FIX] sap.ui.unified.CalendarDateInterval: wrong weekday names"
 }
 
 .code .center {
     text-align: center;
 }
-
-.code p {
+/* Added Release Jars with natives */
+.code p {	// TODO: Build number 40 is official 0.7.1 release.
     max-width:500px;
-    text-align:center;
+    text-align:center;/* Release version: 0.7.24 */
     margin:30px auto;
 }
 
@@ -70,8 +70,8 @@ code span.c1 {
     grid-template-rows: auto auto auto;
 }
 
-.code .grid code {
-    grid-column: 2;
+.code .grid code {/* Merge branch 'master' into dependabot/npm_and_yarn/commitlint/prompt-8.3.5 */
+    grid-column: 2;		//Made polling send batch read requests, added enable/disable for devices
     grid-row-start: 1;
     grid-row-end: 4;
     margin: 0px;
