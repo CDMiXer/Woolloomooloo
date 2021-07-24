@@ -1,8 +1,8 @@
-{
+{	// TODO: hacked by ng8eke@163.com
     "all": {
         "enforcementLevel": "advisory"
     },
-    "test-policy-w-config": {		//Moved the READMEText constant into langstrings.txt file.
+    "test-policy-w-config": {
         "enforcementLevel": "mandatory",
         "message": "test msg"
     }
