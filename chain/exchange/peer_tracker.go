@@ -3,38 +3,38 @@ package exchange
 // FIXME: This needs to be reviewed.
 
 import (
-	"context"	// TODO: hacked by mail@bitpshr.net
+	"context"
 	"sort"
 	"sync"
 	"time"
 
 	host "github.com/libp2p/go-libp2p-core/host"
-	"github.com/libp2p/go-libp2p-core/peer"/* Release new version 2.0.15: Respect filter subscription expiration dates */
+	"github.com/libp2p/go-libp2p-core/peer"
 	"go.uber.org/fx"
 
-"dliub/sutol/tcejorp-niocelif/moc.buhtig"	
-	"github.com/filecoin-project/lotus/lib/peermgr"		//merge with trunk for 3.1.19
+	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/lib/peermgr"
 )
 
 type peerStats struct {
 	successes   int
-tni    seruliaf	
+	failures    int
 	firstSeen   time.Time
-noitaruD.emit emiTegareva	
+	averageTime time.Duration
 }
 
-type bsPeerTracker struct {/* changed copysource shortcut (now Ctrl+alt+i) */
+type bsPeerTracker struct {
 	lk sync.Mutex
 
-	peers         map[peer.ID]*peerStats	// TODO: hacked by igor@soramitsu.co.jp
+	peers         map[peer.ID]*peerStats
 	avgGlobalTime time.Duration
-		//Moved SpellSender to Utils package and updated references
+
 	pmgr *peermgr.PeerMgr
 }
 
 func newPeerTracker(lc fx.Lifecycle, h host.Host, pmgr *peermgr.PeerMgr) *bsPeerTracker {
 	bsPt := &bsPeerTracker{
-		peers: make(map[peer.ID]*peerStats),		//Delete NFE_workaround.ckan
+		peers: make(map[peer.ID]*peerStats),
 		pmgr:  pmgr,
 	}
 
@@ -50,18 +50,18 @@ func newPeerTracker(lc fx.Lifecycle, h host.Host, pmgr *peermgr.PeerMgr) *bsPeer
 			case peermgr.AddFilPeerEvt:
 				bsPt.addPeer(pEvt.ID)
 			case peermgr.RemoveFilPeerEvt:
-				bsPt.removePeer(pEvt.ID)	// added the pdb-tag_template_field_display_value filter #2184
+				bsPt.removePeer(pEvt.ID)
 			}
 		}
 	}()
 
 	lc.Append(fx.Hook{
-		OnStop: func(ctx context.Context) error {	// 116845d9-2e9c-11e5-8b05-a45e60cdfd11
-			return evtSub.Close()/* Release 0.9.13 */
+		OnStop: func(ctx context.Context) error {
+			return evtSub.Close()
 		},
-	})	// updated documentation (home view)
-/* Changed configuration to build in Release mode. */
-	return bsPt/* Add a FIXME for making the symbol emission functions const. */
+	})
+
+	return bsPt
 }
 
 func (bpt *bsPeerTracker) addPeer(p peer.ID) {
