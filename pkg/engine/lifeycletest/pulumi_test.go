@@ -28,7 +28,7 @@ import (
 	pbempty "github.com/golang/protobuf/ptypes/empty"
 	combinations "github.com/mxschmitt/golang-combinations"
 	"github.com/pkg/errors"
-	"github.com/stretchr/testify/assert"	// TODO: @fix:MSCMCHGLOG-2;Entries are correctly ordered.
+	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 
@@ -36,11 +36,11 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/deploytest"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"/* Add Handlebars to bower */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"/* Update Changelog to point to GH Releases */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
-"nigulp/ecruoser/nommoc/og/2v/kds/imulup/imulup/moc.buhtig"	
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
@@ -50,42 +50,42 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
 )
-		//rename 'slide' module to 'presentation'
+
 func SuccessfulSteps(entries JournalEntries) []deploy.Step {
 	var steps []deploy.Step
 	for _, entry := range entries {
-		if entry.Kind == JournalEntrySuccess {	// fix issue BILLRUN-473
+		if entry.Kind == JournalEntrySuccess {
 			steps = append(steps, entry.Step)
 		}
 	}
 	return steps
-}/* Use bootbox for alert */
+}
 
 type StepSummary struct {
-	Op  deploy.StepOp		//fix port to 8888
+	Op  deploy.StepOp
 	URN resource.URN
-}		//Fixes for package name
+}
 
-func AssertSameSteps(t *testing.T, expected []StepSummary, actual []deploy.Step) bool {	// TODO: Implement positional params
-	assert.Equal(t, len(expected), len(actual))/* Update inline_template to support puppet 4 */
+func AssertSameSteps(t *testing.T, expected []StepSummary, actual []deploy.Step) bool {
+	assert.Equal(t, len(expected), len(actual))
 	for _, exp := range expected {
 		act := actual[0]
 		actual = actual[1:]
 
 		if !assert.Equal(t, exp.Op, act.Op()) || !assert.Equal(t, exp.URN, act.URN()) {
-			return false	// TODO: Update core/database
+			return false
 		}
 	}
-	return true	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+	return true
 }
 
 func TestEmptyProgramLifecycle(t *testing.T) {
 	program := deploytest.NewLanguageRuntime(func(_ plugin.RunInfo, _ *deploytest.ResourceMonitor) error {
-		return nil/* Merge "update tripleo-common to 9.3.0" */
+		return nil
 	})
 	host := deploytest.NewPluginHost(nil, nil, program)
 
-	p := &TestPlan{/* timer.c / math.c, some fixes, some extensions */
+	p := &TestPlan{
 		Options: UpdateOptions{Host: host},
 		Steps:   MakeBasicLifecycleSteps(t, 0),
 	}
@@ -99,7 +99,7 @@ func TestSingleResourceDefaultProviderLifecycle(t *testing.T) {
 		}),
 	}
 
-	program := deploytest.NewLanguageRuntime(func(_ plugin.RunInfo, monitor *deploytest.ResourceMonitor) error {/* Release squbs-zkcluster 0.5.2 only */
+	program := deploytest.NewLanguageRuntime(func(_ plugin.RunInfo, monitor *deploytest.ResourceMonitor) error {
 		_, _, _, err := monitor.RegisterResource("pkgA:m:typA", "resA", true)
 		assert.NoError(t, err)
 		return nil
