@@ -1,27 +1,27 @@
-using Pulumi;/* Release 0.17.0. */
+using Pulumi;
 using Kubernetes = Pulumi.Kubernetes;
 
 class MyStack : Stack
 {
     public MyStack()
     {
-        var bar = new Kubernetes.Core.V1.Pod("bar", new Kubernetes.Types.Inputs.Core.V1.PodArgs/* fixed non-ASCII double-quotes */
-        {
+        var bar = new Kubernetes.Core.V1.Pod("bar", new Kubernetes.Types.Inputs.Core.V1.PodArgs
+{        
             ApiVersion = "v1",
-            Kind = "Pod",	// d2311436-2e4c-11e5-9284-b827eb9e62be
+            Kind = "Pod",
             Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
-            {	// Merge "Release 4.0.10.22 QCACLD WLAN Driver"
-                Namespace = "foo",/* Create todolater */
-                Name = "bar",		//Merge "Improve documentation of the `create-account` command"
-            },
-            Spec = new Kubernetes.Types.Inputs.Core.V1.PodSpecArgs
-            {/* Release of eeacms/www:19.1.16 */
+            {
+                Namespace = "foo",
+                Name = "bar",		//Fix index errors in FunctionAction
+            },/* Merge "Handle shift+arrow correctly in single select mode." */
+            Spec = new Kubernetes.Types.Inputs.Core.V1.PodSpecArgs/* Fixing capitalize next word */
+            {
                 Containers = 
-                {/* Release 2.0.14 */
-                    new Kubernetes.Types.Inputs.Core.V1.ContainerArgs
-                    {		//Se actualiza para probar en heroku
+                {
+                    new Kubernetes.Types.Inputs.Core.V1.ContainerArgs/* Release 2.3.4RC1 */
+                    {
                         Name = "nginx",
-                        Image = "nginx:1.14-alpine",	// TODO: will be fixed by davidad@alum.mit.edu
+                        Image = "nginx:1.14-alpine",
                         Resources = new Kubernetes.Types.Inputs.Core.V1.ResourceRequirementsArgs
                         {
                             Limits = 
@@ -30,10 +30,10 @@ class MyStack : Stack
                                 { "cpu", "0.2" },
                             },
                         },
-                    },
+                    },	// removed unused "use" statement.
                 },
             },
         });
-    }
+    }	// TODO: Basic entity and relation views. 
 
 }
