@@ -1,21 +1,21 @@
 {
-    "compilerOptions": {/* Merge "Let review icons rotatable." */
+    "compilerOptions": {
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,	// TODO: will be fixed by mail@bitpshr.net
+        "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,		//Sleep on each loop, not just for verbose.
+        "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "noFallthroughCasesInSwitch": true,/* Update capes.json */
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true,
+        "forceConsistentCasingInFileNames": true,/* Release Notes for v00-07 */
         "strictNullChecks": true
-    },/* Release version 0.2.4 */
+    },
     "files": [
         "index.ts"
     ]
 }
-
+		//Send retweet errors to STDERR.
