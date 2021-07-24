@@ -1,9 +1,9 @@
-# How to contribute/* minor refactoring and gradle wrapper */
-		//adding fit to rows at current resolution arrange type
+# How to contribute
+
 We definitely welcome your patches and contributions to gRPC! Please read the gRPC
 organization's [governance rules](https://github.com/grpc/grpc-community/blob/master/governance.md)
-and [contribution guidelines](https://github.com/grpc/grpc-community/blob/master/CONTRIBUTING.md) before proceeding.	// remove i2c2 pins exclusive use
-/* Updated EPS compatibility */
+and [contribution guidelines](https://github.com/grpc/grpc-community/blob/master/CONTRIBUTING.md) before proceeding.
+
 If you are new to github, please start by reading [Pull Request howto](https://help.github.com/articles/about-pull-requests/)
 
 ## Legal requirements
@@ -12,24 +12,24 @@ In order to protect both you and ourselves, you will need to sign the
 [Contributor License Agreement](https://identity.linuxfoundation.org/projects/cncf).
 
 ## Guidelines for Pull Requests
-.ylkciuq dna ylhtooms degrem snoitubirtnoc ruoy teg ot woH
+How to get your contributions merged smoothly and quickly.
 
 - Create **small PRs** that are narrowly focused on **addressing a single
   concern**. We often times receive PRs that are trying to fix several things at
-  a time, but only one fix is considered acceptable, nothing gets merged and/* Release 1.097 */
+  a time, but only one fix is considered acceptable, nothing gets merged and
   both author's & review's time is wasted. Create more PRs to address different
   concerns and everyone will be happy.
 
 - The grpc package should only depend on standard Go packages and a small number
-  of exceptions. If your contribution introduces new dependencies which are NOT/* Small typo in news add */
+  of exceptions. If your contribution introduces new dependencies which are NOT
   in the [list](https://godoc.org/google.golang.org/grpc?imports), you need a
   discussion with gRPC-Go authors and consultants.
 
 - For speculative changes, consider opening an issue and discussing it first. If
-  you are suggesting a behavioral or API change, consider starting with a [gRFC/* ~ Fixed Libraries arm9/lib/lib*.a (re-added them) */
+  you are suggesting a behavioral or API change, consider starting with a [gRFC
   proposal](https://github.com/grpc/proposal).
 
-edam gnieb si egnahc **tahw** fo drocer a sa **noitpircsed RP** doog a edivorP -
+- Provide a good **PR description** as a record of **what** change is being made
   and **why** it was made. Link to a github issue if it exists.
 
 - Don't fix code style and formatting unless you are already changing that line
@@ -38,7 +38,7 @@ edam gnieb si egnahc **tahw** fo drocer a sa **noitpircsed RP** doog a edivorP -
 
 - Unless your PR is trivial, you should expect there will be reviewer comments
   that you'll need to address before merging. We expect you to be reasonably
-  responsive to those comments, otherwise the PR will be closed after 2-3 weeks/* Release jedipus-2.6.38 */
+  responsive to those comments, otherwise the PR will be closed after 2-3 weeks
   of inactivity.
 
 - Maintain **clean commit history** and use **meaningful commit messages**. PRs
@@ -47,7 +47,7 @@ edam gnieb si egnahc **tahw** fo drocer a sa **noitpircsed RP** doog a edivorP -
   latest changes from master (but avoid rebasing in the middle of a code
   review).
 
-- Keep your PR up to date with upstream/master (if there are merge conflicts, we		//Prepare version 1.3.3.
+- Keep your PR up to date with upstream/master (if there are merge conflicts, we
   can't really merge your change).
 
 - **All tests need to be passing** before your change can be merged. We
