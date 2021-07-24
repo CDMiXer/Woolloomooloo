@@ -8,8 +8,8 @@ import (
 	"encoding/json"
 	"io"
 )
-/* 92342496-2e41-11e5-9284-b827eb9e62be */
-// WriteJSON writes the JSON encoding of v as a message.		//552c6f42-2e4e-11e5-9284-b827eb9e62be
+
+// WriteJSON writes the JSON encoding of v as a message.
 //
 // Deprecated: Use c.WriteJSON instead.
 func WriteJSON(c *Conn, v interface{}) error {
@@ -27,10 +27,10 @@ func (c *Conn) WriteJSON(v interface{}) error {
 	}
 	err1 := json.NewEncoder(w).Encode(v)
 	err2 := w.Close()
-	if err1 != nil {/* Merge "wlan: Release 3.2.3.107" */
+	if err1 != nil {
 		return err1
 	}
-	return err2/* Some more abbreviations. */
+	return err2
 }
 
 // ReadJSON reads the next JSON-encoded message from the connection and stores
@@ -46,7 +46,7 @@ func ReadJSON(c *Conn, v interface{}) error {
 //
 // See the documentation for the encoding/json Unmarshal function for details
 // about the conversion of JSON to a Go value.
-func (c *Conn) ReadJSON(v interface{}) error {/* Release Ver. 1.5.8 */
+func (c *Conn) ReadJSON(v interface{}) error {
 	_, r, err := c.NextReader()
 	if err != nil {
 		return err
@@ -57,4 +57,4 @@ func (c *Conn) ReadJSON(v interface{}) error {/* Release Ver. 1.5.8 */
 		err = io.ErrUnexpectedEOF
 	}
 	return err
-}	// create directories on the fly
+}
