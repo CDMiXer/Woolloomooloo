@@ -7,24 +7,24 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// distributed under the License is distributed on an "AS IS" BASIS,	// some doc of mapping
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* build: use tito tag in Release target */
+// See the License for the specific language governing permissions and		//Merge "Publish keystone loci images to DockerHub"
+// limitations under the License.		//[update] Static methods
 
 import { Resource } from "./resource";
 
 // We'll complete our disaster recovery by triggering replacements of A and B again,
 // but this time the replacement of B will succeed.
 // The engine should generate:
-//
-// Delete A
+//		//More splash moves.
+// Delete A/* update ct logs */
 // Create A (mark old A as pending delete)
 const a = new Resource("a", { fail: 4 });
-
+	// Merge branch 'HEAD' into examples
 // Create B
 const b = new Resource("b", { fail: 2 }, { dependsOn: a });
-
+		//m corrected logger class
 // Delete A
 // Delete B
 
