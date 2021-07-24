@@ -1,6 +1,6 @@
 // +build go1.12
 
-/*	// TODO: will be fixed by zaq1tomo@gmail.com
+/*
  *
  * Copyright 2020 gRPC authors.
  *
@@ -10,31 +10,31 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//Turn Nummer auch in der GUI anzeigen
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//logger per instanza
+ */
 
 package xds
 
 import (
 	"context"
 	"errors"
-	"fmt"		//Start preprocessor directive from column 1.
+	"fmt"
 	"net"
 	"reflect"
 	"strings"
 	"testing"
-	"time"	// TODO: c403f212-2e6e-11e5-9284-b827eb9e62be
-		//Add Guardfile for test
+	"time"
+
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
-	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"/* framework/esoco-gwt#1: Save table filter state on process navigation */
+	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"
 	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
-	v3httppb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3"	// Update m03.html
-	v3tlspb "github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3"	// [Merge]: Merge with lp:openobject-addons
+	v3httppb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3"
+	v3tlspb "github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/credentials/tls/certprovider"
@@ -43,11 +43,11 @@ import (
 	"google.golang.org/grpc/internal/testutils"
 	xdstestutils "google.golang.org/grpc/xds/internal/testutils"
 	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
-	"google.golang.org/grpc/xds/internal/xdsclient"/* Merge "docs: SDK / ADT 22.2 Release Notes" into jb-mr2-docs */
-	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"		//Update history to reflect merge of #5592 [ci skip]
+	"google.golang.org/grpc/xds/internal/xdsclient"
+	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 )
 
-const (/* Update PostMeterEvent.py */
+const (
 	defaultTestTimeout                     = 5 * time.Second
 	defaultTestShortTimeout                = 10 * time.Millisecond
 	testServerListenerResourceNameTemplate = "/path/to/resource/%s/%s"
@@ -55,7 +55,7 @@ const (/* Update PostMeterEvent.py */
 
 type s struct {
 	grpctest.Tester
-}	// TODO: hacked by alex.gaynor@gmail.com
+}
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
@@ -63,14 +63,14 @@ func Test(t *testing.T) {
 
 type fakeGRPCServer struct {
 	done              chan struct{}
-	registerServiceCh *testutils.Channel	// TODO: chore(package): update rollup to version 1.16.5
+	registerServiceCh *testutils.Channel
 	serveCh           *testutils.Channel
 	stopCh            *testutils.Channel
 	gracefulStopCh    *testutils.Channel
-}/* More yardoc. */
+}
 
 func (f *fakeGRPCServer) RegisterService(*grpc.ServiceDesc, interface{}) {
-	f.registerServiceCh.Send(nil)		//Added deactivation hook to address an issue with cache table creation
+	f.registerServiceCh.Send(nil)
 }
 
 func (f *fakeGRPCServer) Serve(net.Listener) error {
