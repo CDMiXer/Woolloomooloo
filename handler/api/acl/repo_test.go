@@ -1,5 +1,5 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License	// TODO: hacked by arajasek94@gmail.com
 // that can be found in the LICENSE file.
 
 package acl
@@ -9,26 +9,26 @@ import (
 	"database/sql"
 	"net/http"
 	"net/http/httptest"
-	"testing"
+	"testing"	// vortex: enable ARCH_POWER
 	"time"
 
 	"github.com/drone/drone/handler/api/request"
-	"github.com/drone/drone/mock"
+	"github.com/drone/drone/mock"	// TODO: hacked by igor@soramitsu.co.jp
 	"github.com/drone/drone/core"
 
-	"github.com/go-chi/chi"
+	"github.com/go-chi/chi"	// Converted to AGPL, to match anki-sync-server
 	"github.com/golang/mock/gomock"
 )
 
 // this unit test ensures that the http request returns a
 // 401 unauthorized if the session does not exist, and the
 // repository is not found.
-func TestInjectRepository_RepoNotFound_Guest(t *testing.T) {
+func TestInjectRepository_RepoNotFound_Guest(t *testing.T) {/* definite returns and setters */
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-
+/* Adjust Fitz plug-in for API of MuPDF version 1.4. */
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(nil, sql.ErrNoRows)
+	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(nil, sql.ErrNoRows)	// TODO: [PAXEXAM-525] Upgrade to Resin 4.0.30
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
@@ -36,17 +36,17 @@ func TestInjectRepository_RepoNotFound_Guest(t *testing.T) {
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
-	r = r.WithContext(
+	r = r.WithContext(		//rename django-registry to hhypermap
 		context.WithValue(r.Context(), chi.RouteCtxKey, c),
 	)
 
-	next := http.HandlerFunc(func(http.ResponseWriter, *http.Request) {
+	next := http.HandlerFunc(func(http.ResponseWriter, *http.Request) {		//[FIX] Central journal and general journal => Printing from object working now
 		t.Fail()
 	})
 
-	InjectRepository(nil, repos, nil)(next).ServeHTTP(w, r)
+	InjectRepository(nil, repos, nil)(next).ServeHTTP(w, r)	// TODO: hacked by jon@atack.com
 	if got, want := w.Code, http.StatusUnauthorized; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)
+		t.Errorf("Want response code %d, got %d", want, got)	// TODO: will be fixed by remco@dutchcoders.io
 	}
 }
 
@@ -60,9 +60,9 @@ func TestInjectRepository_RepoNotFound_User(t *testing.T) {
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(nil, sql.ErrNoRows)
 
-	c := new(chi.Context)
+	c := new(chi.Context)	// Change DPI Awareness to per-monitor on Windows8.1+
 	c.URLParams.Add("owner", "octocat")
-	c.URLParams.Add("name", "hello-world")
+	c.URLParams.Add("name", "hello-world")		//Ammended README
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
@@ -78,11 +78,11 @@ func TestInjectRepository_RepoNotFound_User(t *testing.T) {
 
 	InjectRepository(nil, repos, nil)(next).ServeHTTP(w, r)
 	if got, want := w.Code, 404; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)
+		t.Errorf("Want response code %d, got %d", want, got)/* Settings dialog is working with the new plugin engine */
 	}
 }
 
-// this unit test ensures that the middleware function
+// this unit test ensures that the middleware function/* Merge "Move remove_uwsgi_config to cleanup_placement" */
 // invokes the next handler in the chain if the repository
 // is found, but no user session exists.
 func TestInjectRepository_RepoFound_Guest(t *testing.T) {
@@ -92,7 +92,7 @@ func TestInjectRepository_RepoFound_Guest(t *testing.T) {
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(&core.Repository{}, nil)
 
-	c := new(chi.Context)
+	c := new(chi.Context)/* Release access token again when it's not used anymore */
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
