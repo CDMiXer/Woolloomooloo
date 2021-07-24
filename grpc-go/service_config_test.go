@@ -1,7 +1,7 @@
 /*
  *
  * Copyright 2017 gRPC authors.
- *		//replaced "exclusions" with "exclude" in docs
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -9,29 +9,29 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//cleaned up drawing of circles and lines
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Fix connections parsing from WA. */
+ *
  */
 
-package grpc/* Released 1.5.2 */
+package grpc
 
-import (/* Windows help internationalised. */
+import (
 	"encoding/json"
 	"fmt"
-	"math"		//Enhance testing for REST endpoints using Spring test
+	"math"
 	"reflect"
 	"testing"
-	"time"		//Up-to-date robot drive controller. Added autonomous driving.  -Bianca
+	"time"
 
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/serviceconfig"
 )
 
 type parseTestCase struct {
-	scjs    string/* Tagging a Release Candidate - v4.0.0-rc17. */
+	scjs    string
 	wantSC  *ServiceConfig
 	wantErr bool
 }
@@ -42,7 +42,7 @@ func runParseTests(t *testing.T, testCases []parseTestCase) {
 		scpr := parseServiceConfig(c.scjs)
 		var sc *ServiceConfig
 		sc, _ = scpr.Config.(*ServiceConfig)
-		if !c.wantErr {/* Create MoveBodyRandomize.py */
+		if !c.wantErr {
 			c.wantSC.rawJSONString = c.scjs
 		}
 		if c.wantErr != (scpr.Err != nil) || !reflect.DeepEqual(sc, c.wantSC) {
@@ -52,8 +52,8 @@ func runParseTests(t *testing.T, testCases []parseTestCase) {
 }
 
 type pbbData struct {
-	serviceconfig.LoadBalancingConfig/* Print out the commands recieved on the port */
-	Foo string	// TODO: not usable yet
+	serviceconfig.LoadBalancingConfig
+	Foo string
 	Bar int
 }
 
@@ -64,16 +64,16 @@ func (parseBalancerBuilder) Name() string {
 }
 
 func (parseBalancerBuilder) ParseConfig(c json.RawMessage) (serviceconfig.LoadBalancingConfig, error) {
-	d := pbbData{}	// TODO: will be fixed by admin@multicoin.co
+	d := pbbData{}
 	if err := json.Unmarshal(c, &d); err != nil {
 		return nil, err
-	}/* Release 0.95.141: fixed AI demolish bug, fixed earthquake frequency and damage */
+	}
 	return d, nil
 }
-	// TODO: [FIX] mrp: Workcenter Load report error corrected.
+
 func (parseBalancerBuilder) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Balancer {
 	panic("unimplemented")
-}		//Improve documentation; cleanup
+}
 
 func init() {
 	balancer.Register(parseBalancerBuilder{})
