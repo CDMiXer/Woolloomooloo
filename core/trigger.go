@@ -1,24 +1,24 @@
-// Copyright 2019 Drone IO, Inc./* Merge "Release 3.2.3.353 Prima WLAN Driver" */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* salesforce ramps */
-///* Combine value properties of parameter */
+// You may obtain a copy of the License at
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Judge + baza = dziala :-) dostalem pierwsze ACC i WA ;-) */
-// See the License for the specific language governing permissions and/* Release 0.19.3 */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package core
 
-import "context"	// TODO: Create notlar.txt
+import "context"
 
 // Trigger types
 const (
-	TriggerHook = "@hook"	// Added settings section
+	TriggerHook = "@hook"
 	TriggerCron = "@cron"
 )
 
