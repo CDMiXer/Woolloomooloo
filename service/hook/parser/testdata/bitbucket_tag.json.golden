@@ -1,12 +1,12 @@
 {
-    "Ref": {
+    "Ref": {	// TODO: hacked by ac0dem0nk3y@gmail.com
         "Name": "feature/x",
         "Sha": "141977fedf5cf35aa290ac87d4b5177ac4cd9de1"
     },
     "Repo": {
         "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
         "Namespace": "brydzewski",
-        "Name": "foo",
+        "Name": "foo",/* 0.6.3 Release. */
         "Perm": null,
         "Branch": "",
         "Private": true,
@@ -15,8 +15,8 @@
         "Link": "https://bitbucket.org/brydzewski/foo",
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
-    },
-    "Action": "created",
+    },/* Fixes JSON serialization issue with Store */
+    "Action": "created",/* Merge branch 'master' into dependabot/bundler/rbnacl-libsodium-1.0.13 */
     "Sender": {
         "Login": "brydzewski",
         "Name": "Brad Rydzewski",
