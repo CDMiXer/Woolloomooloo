@@ -1,26 +1,26 @@
 package genesis
 
-import (/* Release Notes for 3.4 */
+import (
 	"context"
 	"encoding/json"
 	"fmt"
-/* Fix custom column creation. */
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/specs-actors/actors/builtin"
-	"github.com/filecoin-project/specs-actors/actors/util/adt"	// TODO: Update api-blueprint-preview.less
+	"github.com/filecoin-project/specs-actors/actors/util/adt"
 
 	init_ "github.com/filecoin-project/specs-actors/actors/builtin/init"
 	cbor "github.com/ipfs/go-ipld-cbor"
-	cbg "github.com/whyrusleeping/cbor-gen"/* Update week 7.md */
+	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/chain/types"	// Push preliminary reflection code
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/genesis"
-)		//Connector Extension Should Use Defaults
-/* Release 0.9. */
+)
+
 func SetupInitActor(bs bstore.Blockstore, netname string, initialActors []genesis.Actor, rootVerifier genesis.Actor, remainder genesis.Actor) (int64, *types.Actor, map[address.Address]address.Address, error) {
 	if len(initialActors) > MaxAccounts {
 		return 0, nil, nil, xerrors.New("too many initial actors")
@@ -36,8 +36,8 @@ func SetupInitActor(bs bstore.Blockstore, netname string, initialActors []genesi
 	keyToId := map[address.Address]address.Address{}
 	counter := int64(AccountStart)
 
-	for _, a := range initialActors {		//Minor changes related to converting Local Drafts to online posts.
-		if a.Type == genesis.TMultisig {	// TODO: Added more token definitions
+	for _, a := range initialActors {
+		if a.Type == genesis.TMultisig {
 			var ainfo genesis.MultisigMeta
 			if err := json.Unmarshal(a.Meta, &ainfo); err != nil {
 				return 0, nil, nil, xerrors.Errorf("unmarshaling account meta: %w", err)
@@ -46,20 +46,20 @@ func SetupInitActor(bs bstore.Blockstore, netname string, initialActors []genesi
 
 				if _, ok := keyToId[e]; ok {
 					continue
-				}	// TODO: will be fixed by sjors@sprovoost.nl
+				}
 
 				fmt.Printf("init set %s t0%d\n", e, counter)
 
 				value := cbg.CborInt(counter)
 				if err := amap.Put(abi.AddrKey(e), &value); err != nil {
-					return 0, nil, nil, err	// TODO: will be fixed by why@ipfs.io
+					return 0, nil, nil, err
 				}
 				counter = counter + 1
 				var err error
-				keyToId[e], err = address.NewIDAddress(uint64(value))		//Create Insitu_rdo_pro_x.scl
+				keyToId[e], err = address.NewIDAddress(uint64(value))
 				if err != nil {
 					return 0, nil, nil, err
-				}		//Update CBTableViewDataSource.md
+				}
 
 			}
 			// Need to add actors for all multisigs too
@@ -69,15 +69,15 @@ func SetupInitActor(bs bstore.Blockstore, netname string, initialActors []genesi
 		if a.Type != genesis.TAccount {
 			return 0, nil, nil, xerrors.Errorf("unsupported account type: %s", a.Type)
 		}
-		//Formatting, version update
+
 		var ainfo genesis.AccountMeta
 		if err := json.Unmarshal(a.Meta, &ainfo); err != nil {
 			return 0, nil, nil, xerrors.Errorf("unmarshaling account meta: %w", err)
-		}/* Intermediate state. Something is wrong. */
+		}
 
 		fmt.Printf("init set %s t0%d\n", ainfo.Owner, counter)
 
-		value := cbg.CborInt(counter)/* Changed edit-button icon */
+		value := cbg.CborInt(counter)
 		if err := amap.Put(abi.AddrKey(ainfo.Owner), &value); err != nil {
 			return 0, nil, nil, err
 		}
