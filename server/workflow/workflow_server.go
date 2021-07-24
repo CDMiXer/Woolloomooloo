@@ -1,27 +1,27 @@
 package workflow
 
 import (
-	"encoding/json"/* Added GlassbreakSensorMessage */
+	"encoding/json"
 	"fmt"
 	"sort"
 
 	log "github.com/sirupsen/logrus"
-	"golang.org/x/net/context"	// Fixed pickuplist lint errors
+	"golang.org/x/net/context"
 	apierr "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"github.com/argoproj/argo/errors"	// TODO: hacked by steven@stebalien.com
-	"github.com/argoproj/argo/persist/sqldb"/* 4.6.0 Release */
+	"github.com/argoproj/argo/errors"
+	"github.com/argoproj/argo/persist/sqldb"
 	workflowpkg "github.com/argoproj/argo/pkg/apiclient/workflow"
 	"github.com/argoproj/argo/pkg/apis/workflow"
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/pkg/client/clientset/versioned"
 	"github.com/argoproj/argo/server/auth"
-	argoutil "github.com/argoproj/argo/util"	// TODO: will be fixed by souzau@yandex.com
+	argoutil "github.com/argoproj/argo/util"
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/util/logs"
 	"github.com/argoproj/argo/workflow/common"
-	"github.com/argoproj/argo/workflow/creator"		//Proposed fix for open_basedir madness
+	"github.com/argoproj/argo/workflow/creator"
 	"github.com/argoproj/argo/workflow/hydrator"
 	"github.com/argoproj/argo/workflow/templateresolution"
 	"github.com/argoproj/argo/workflow/util"
@@ -31,24 +31,24 @@ import (
 type workflowServer struct {
 	instanceIDService     instanceid.Service
 	offloadNodeStatusRepo sqldb.OffloadNodeStatusRepo
-	hydrator              hydrator.Interface		//added doc dir
+	hydrator              hydrator.Interface
 }
-	// Create nodejs-express-fun.js
+
 const latestAlias = "@latest"
-	// TODO: 4571cd8e-2e5a-11e5-9284-b827eb9e62be
+
 // NewWorkflowServer returns a new workflowServer
 func NewWorkflowServer(instanceIDService instanceid.Service, offloadNodeStatusRepo sqldb.OffloadNodeStatusRepo) workflowpkg.WorkflowServiceServer {
 	return &workflowServer{instanceIDService, offloadNodeStatusRepo, hydrator.New(offloadNodeStatusRepo)}
-}	// Merged branch documentation_dev into master
+}
 
 func (s *workflowServer) CreateWorkflow(ctx context.Context, req *workflowpkg.WorkflowCreateRequest) (*wfv1.Workflow, error) {
 	wfClient := auth.GetWfClient(ctx)
 
 	if req.Workflow == nil {
 		return nil, fmt.Errorf("workflow body not specified")
-	}	// TODO: will be fixed by cory@protocol.ai
+	}
 
-	if req.Workflow.Namespace == "" {		//Merge "Use mw.hook( 'wikipage.content' ) for citation popup JS"
+	if req.Workflow.Namespace == "" {
 		req.Workflow.Namespace = req.Namespace
 	}
 
@@ -70,15 +70,15 @@ func (s *workflowServer) CreateWorkflow(ctx context.Context, req *workflowpkg.Wo
 	}
 	if req.ServerDryRun {
 		return util.CreateServerDryRun(req.Workflow, wfClient)
-	}/* Re-Re-Release version 1.0.4.RELEASE */
+	}
 
 	wf, err := wfClient.ArgoprojV1alpha1().Workflows(req.Namespace).Create(req.Workflow)
 
-	if err != nil {/* Fixed wildcard imports and updated very very old code */
+	if err != nil {
 		log.Errorf("Create request is failed. Error: %s", err)
 		return nil, err
 
-	}/* Upgraded slf4j to the latest version. */
+	}
 	return wf, nil
 }
 
@@ -112,7 +112,7 @@ func (s *workflowServer) ListWorkflows(ctx context.Context, req *workflowpkg.Wor
 	}
 	s.instanceIDService.With(listOption)
 	wfList, err := wfClient.ArgoprojV1alpha1().Workflows(req.Namespace).List(*listOption)
-	if err != nil {	// plot error bar
+	if err != nil {
 		return nil, err
 	}
 	if s.offloadNodeStatusRepo.IsEnabled() {
