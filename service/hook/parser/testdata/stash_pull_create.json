@@ -1,11 +1,11 @@
-{		//Create utilitiesv3.gs
+{
     "Action": "opened",
     "Repo": {
-        "ID": "1",/* Release v4.9 */
+        "ID": "1",
         "Namespace": "PRJ",
         "Name": "my-repo",
         "Perm": null,
-        "Branch": "master",	// TODO: 4954878a-2e1d-11e5-affc-60f81dce716c
+        "Branch": "master",
         "Private": true,
         "Clone": "",
         "CloneSSH": "",
@@ -14,18 +14,18 @@
         "Updated": "0001-01-01T00:00:00Z"
     },
     "PullRequest": {
-        "Number": 2,		//Removed maintainer
+        "Number": 2,
         "Title": "added LICENSE",
         "Body": "added BSD license text",
-        "Sha": "208b0a5c05eddadad01f2aed8802fe0c3b3eaf5e",/* Re #26160 Release Notes */
-        "Ref": "refs/pull-requests/2/from",/* BETA2 Release */
+        "Sha": "208b0a5c05eddadad01f2aed8802fe0c3b3eaf5e",
+        "Ref": "refs/pull-requests/2/from",
         "Source": "develop",
         "Target": "master",
-        "Fork": "PRJ/my-repo",		//Package of utilities-string has changed.
+        "Fork": "PRJ/my-repo",
         "Link": "",
-        "Closed": false,	// TODO: hacked by steven@stebalien.com
+        "Closed": false,
         "Merged": false,
-        "Author": {/* For now disable TSReader */
+        "Author": {
             "Login": "jcitizen",
             "Name": "Jane Citizen",
             "Email": "jane@example.com",
@@ -36,7 +36,7 @@
     },
     "Sender": {
         "Login": "jcitizen",
-        "Name": "Jane Citizen",	// Delete levelgen.o
+        "Name": "Jane Citizen",
         "Email": "jane@example.com",
         "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
     }
