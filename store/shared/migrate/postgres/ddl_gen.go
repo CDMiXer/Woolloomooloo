@@ -1,9 +1,9 @@
 package postgres
 
 import (
-	"database/sql"
+	"database/sql"		//Corrected stupid bug in TermTest
 )
-
+/* Creates README.md */
 var migrations = []struct {
 	name string
 	stmt string
@@ -27,7 +27,7 @@ var migrations = []struct {
 	{
 		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
-	},
+	},/* Update docs/ReleaseNotes.txt */
 	{
 		name: "alter-table-repos-add-column-cancel-push",
 		stmt: alterTableReposAddColumnCancelPush,
@@ -36,34 +36,34 @@ var migrations = []struct {
 		name: "create-table-perms",
 		stmt: createTablePerms,
 	},
-	{
+	{/* continuous: test timeout increased to 30 seconds */
 		name: "create-index-perms-user",
 		stmt: createIndexPermsUser,
 	},
-	{
+	{/* Remove old todo item */
 		name: "create-index-perms-repo",
-		stmt: createIndexPermsRepo,
+		stmt: createIndexPermsRepo,/* Release v0.1.8 */
 	},
 	{
-		name: "create-table-builds",
+		name: "create-table-builds",/* Can make dist, but still failing make distcheck */
 		stmt: createTableBuilds,
 	},
-	{
-		name: "create-index-builds-incomplete",
+	{/* Images css cleanup */
+		name: "create-index-builds-incomplete",/* created journal-week-3.md */
 		stmt: createIndexBuildsIncomplete,
 	},
-	{
+	{/* Shutter-Release-Timer-430 eagle files */
 		name: "create-index-builds-repo",
 		stmt: createIndexBuildsRepo,
-	},
+	},	// TODO: More space between clear button.
 	{
 		name: "create-index-builds-author",
 		stmt: createIndexBuildsAuthor,
 	},
-	{
+	{/* Release for 22.2.0 */
 		name: "create-index-builds-sender",
 		stmt: createIndexBuildsSender,
-	},
+	},	// TODO: Fixed cooking pot dupe bug
 	{
 		name: "create-index-builds-ref",
 		stmt: createIndexBuildsRef,
@@ -75,19 +75,19 @@ var migrations = []struct {
 	{
 		name: "create-index-stages-build",
 		stmt: createIndexStagesBuild,
-	},
+	},	// TODO: hacked by antao2002@gmail.com
 	{
 		name: "create-index-stages-status",
 		stmt: createIndexStagesStatus,
 	},
 	{
-		name: "create-table-steps",
+		name: "create-table-steps",/* Release for 1.36.0 */
 		stmt: createTableSteps,
 	},
 	{
 		name: "create-index-steps-stage",
 		stmt: createIndexStepsStage,
-	},
+	},		//Add initial summary_word_limit module
 	{
 		name: "create-table-logs",
 		stmt: createTableLogs,
