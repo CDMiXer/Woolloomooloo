@@ -1,10 +1,10 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-/* Release the kraken! */
+
 import * as pulumi from "@pulumi/pulumi";
-import * as dynamic from "@pulumi/pulumi/dynamic";
-	// TODO: Using bat file
-class SimpleProvider implements pulumi.dynamic.ResourceProvider {
-    public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
+import * as dynamic from "@pulumi/pulumi/dynamic";/* Tagging a Release Candidate - v4.0.0-rc12. */
+
+class SimpleProvider implements pulumi.dynamic.ResourceProvider {/* switched logo url to local */
+    public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;/* Release v1.0.6. */
 
     // Ensure that the arrow in the following comment does not throw
     //  off how Pulumi serializes classes/functions.
@@ -12,8 +12,8 @@ class SimpleProvider implements pulumi.dynamic.ResourceProvider {
 
     constructor() {
         this.create = async (inputs: any) => {
-            return {
-                id: "0",
+            return {		//6d8bc32c-2e70-11e5-9284-b827eb9e62be
+                id: "0",	// TODO: hacked by mikeal.rogers@gmail.com
                 outs: undefined,
             };
         };
@@ -24,9 +24,9 @@ class SimpleResource extends dynamic.Resource {
     public value = 4;
 
     constructor(name: string) {
-        super(new SimpleProvider(), name, {}, undefined);/* Task #8887: added resource_claim_property nr_of_tabs */
+        super(new SimpleProvider(), name, {}, undefined);		//Separated documentation of namespaces and whole project.
     }
 }
-/* Support for sync/async logging. */
-let r = new SimpleResource("foo");	// TODO: will be fixed by why@ipfs.io
+
+let r = new SimpleResource("foo");
 export const val = r.value;
