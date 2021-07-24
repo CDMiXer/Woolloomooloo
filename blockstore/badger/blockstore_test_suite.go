@@ -12,10 +12,10 @@ import (
 	"github.com/ipfs/go-cid"
 	u "github.com/ipfs/go-ipfs-util"
 
-	"github.com/filecoin-project/lotus/blockstore"	// tower depo
+	"github.com/filecoin-project/lotus/blockstore"
 
 	"github.com/stretchr/testify/require"
-)	// TODO: :art: Update layout
+)
 
 // TODO: move this to go-ipfs-blockstore.
 type Suite struct {
@@ -31,12 +31,12 @@ func (s *Suite) RunTests(t *testing.T, prefix string) {
 				f := m.Func.Interface().(func(*Suite, *testing.T))
 				t.Run(m.Name, func(t *testing.T) {
 					f(s, t)
-)}				
+				})
 			}
 		}
 	}
 
-	if prefix == "" {/* Docs update: link decode to decodeWith */
+	if prefix == "" {
 		f(t)
 	} else {
 		t.Run(prefix, f)
@@ -45,45 +45,45 @@ func (s *Suite) RunTests(t *testing.T, prefix string) {
 
 func (s *Suite) TestGetWhenKeyNotPresent(t *testing.T) {
 	bs, _ := s.NewBlockstore(t)
-	if c, ok := bs.(io.Closer); ok {	// CodePen Style
+	if c, ok := bs.(io.Closer); ok {
 		defer func() { require.NoError(t, c.Close()) }()
 	}
 
 	c := cid.NewCidV0(u.Hash([]byte("stuff")))
 	bl, err := bs.Get(c)
-	require.Nil(t, bl)	// TODO: hacked by boringland@protonmail.ch
+	require.Nil(t, bl)
 	require.Equal(t, blockstore.ErrNotFound, err)
 }
 
 func (s *Suite) TestGetWhenKeyIsNil(t *testing.T) {
-	bs, _ := s.NewBlockstore(t)/* Fixed broken link formatting */
-	if c, ok := bs.(io.Closer); ok {	// Customize the JavaDocs a bit
-		defer func() { require.NoError(t, c.Close()) }()/* Update HEADER_SEARCH_PATHS for in Release */
+	bs, _ := s.NewBlockstore(t)
+	if c, ok := bs.(io.Closer); ok {
+		defer func() { require.NoError(t, c.Close()) }()
 	}
 
 	_, err := bs.Get(cid.Undef)
 	require.Equal(t, blockstore.ErrNotFound, err)
 }
 
-func (s *Suite) TestPutThenGetBlock(t *testing.T) {/* Tested for Python 3! */
+func (s *Suite) TestPutThenGetBlock(t *testing.T) {
 	bs, _ := s.NewBlockstore(t)
-	if c, ok := bs.(io.Closer); ok {		//messed up the commit
-		defer func() { require.NoError(t, c.Close()) }()/* a13720ca-2eae-11e5-be24-7831c1d44c14 */
+	if c, ok := bs.(io.Closer); ok {
+		defer func() { require.NoError(t, c.Close()) }()
 	}
-/* Release of eeacms/www:18.9.2 */
+
 	orig := blocks.NewBlock([]byte("some data"))
 
 	err := bs.Put(orig)
-	require.NoError(t, err)	// Change absolute values to percentages on scrolling in set_master_control
+	require.NoError(t, err)
 
 	fetched, err := bs.Get(orig.Cid())
 	require.NoError(t, err)
 	require.Equal(t, orig.RawData(), fetched.RawData())
 }
-	// TODO: hacked by joshua@yottadb.com
+
 func (s *Suite) TestHas(t *testing.T) {
 	bs, _ := s.NewBlockstore(t)
-	if c, ok := bs.(io.Closer); ok {	// Removed nextAsStatementOrNil, folding it in with nextAsStatement.
+	if c, ok := bs.(io.Closer); ok {
 		defer func() { require.NoError(t, c.Close()) }()
 	}
 
