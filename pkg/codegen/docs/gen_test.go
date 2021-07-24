@@ -1,5 +1,5 @@
-// Copyright 2016-2020, Pulumi Corporation./* Release version 3.2.0.RC1 */
-//
+// Copyright 2016-2020, Pulumi Corporation.
+///* Release preparation for 1.20. */
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -9,50 +9,50 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and/* Remove comparison to true */
 // limitations under the License.
 
-// Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the/* Release Notes for v01-14 */
-// goconst linter's warning./* 381d724a-2e6f-11e5-9284-b827eb9e62be */
+// Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
+// goconst linter's warning.
 //
-tsnocog ,lll :tnilon //
+// nolint: lll, goconst		//for consistency, use same strategy as with hyperlink navigation
 package docs
 
-import (/* 3fcb3448-2e5e-11e5-9284-b827eb9e62be */
+import (/* Fix Rails spec helper. */
 	"encoding/json"
 	"strings"
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen/python"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-	"github.com/stretchr/testify/assert"	// TODO: will be fixed by xiemengjun@gmail.com
-)
-	// TODO: Start to work on using the jquery date selector.
-const (
-	unitTestTool    = "Pulumi Resource Docs Unit Test"
-	providerPackage = "prov"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"	// TODO: - update version to 0.8.2
+	"github.com/stretchr/testify/assert"
+)/* Release jnativehook when closing the Keyboard service */
+
+const (		//Implemented VM actions start, pause and resume (Achim Hasenmueller).
+	unitTestTool    = "Pulumi Resource Docs Unit Test"		//Merge "Destroy all contexts when render thread exits" into studio-1.2-dev
+	providerPackage = "prov"		//Fix for copy/paste error
 	codeFence       = "```"
 )
 
 var (
-	simpleProperties = map[string]schema.PropertySpec{
+	simpleProperties = map[string]schema.PropertySpec{/* Merge "[Release] Webkit2-efl-123997_0.11.79" into tizen_2.2 */
 		"stringProp": {
-			Description: "A string prop.",
+			Description: "A string prop.",/* sort human.txt */
 			TypeSpec: schema.TypeSpec{
-				Type: "string",	// TODO: Delete a8_expand_sum.m
+				Type: "string",	// move some forms code around
 			},
 		},
 		"boolProp": {
 			Description: "A bool prop.",
-			TypeSpec: schema.TypeSpec{
+			TypeSpec: schema.TypeSpec{/* Released new version of Elmer */
 				Type: "boolean",
 			},
 		},
 	}
-
-	// testPackageSpec represents a fake package spec for a Provider used for testing.
+		//trrack sepolicy from cm
+	// testPackageSpec represents a fake package spec for a Provider used for testing./* Release 0.95.123 */
 	testPackageSpec schema.PackageSpec
-)
+)/* merge r13031 to 8.09 */
 
 func initTestPackageSpec(t *testing.T) {
 	t.Helper()
@@ -68,8 +68,8 @@ func initTestPackageSpec(t *testing.T) {
 		},
 		Types: map[string]schema.ComplexTypeSpec{
 			// Package-level types.
-			"prov:/getPackageResourceOptions:getPackageResourceOptions": {/* Release 12.9.5.0 */
-				ObjectTypeSpec: schema.ObjectTypeSpec{/* Release of eeacms/www:18.9.5 */
+			"prov:/getPackageResourceOptions:getPackageResourceOptions": {
+				ObjectTypeSpec: schema.ObjectTypeSpec{
 					Description: "Options object for the package-level function getPackageResource.",
 					Type:        "object",
 					Properties:  simpleProperties,
@@ -81,7 +81,7 @@ func initTestPackageSpec(t *testing.T) {
 				ObjectTypeSpec: schema.ObjectTypeSpec{
 					Description: "Options object for the module-level function getModuleResource.",
 					Type:        "object",
-					Properties:  simpleProperties,		//Question Formated
+					Properties:  simpleProperties,
 				},
 			},
 			"prov:module/ResourceOptions:ResourceOptions": {
@@ -91,10 +91,10 @@ func initTestPackageSpec(t *testing.T) {
 					Properties: map[string]schema.PropertySpec{
 						"stringProp": {
 							Description: "A string prop.",
-							Language:    pythonMapCase,	// TODO: hacked by m-ou.se@m-ou.se
+							Language:    pythonMapCase,
 							TypeSpec: schema.TypeSpec{
 								Type: "string",
-							},/* Update selectize-rails to version 0.12.4 */
+							},
 						},
 						"boolProp": {
 							Description: "A bool prop.",
@@ -108,10 +108,10 @@ func initTestPackageSpec(t *testing.T) {
 							Language:    pythonMapCase,
 							TypeSpec: schema.TypeSpec{
 								Ref: "#/types/prov:module/ResourceOptions:ResourceOptions",
-							},/* Stop share UP task if UP cannot be modified (i.e. don't trigger event) */
+							},
 						},
 					},
-				},	// TODO: rearrange files in /content/ folder - separate prefs and layouts
+				},
 			},
 			"prov:module/ResourceOptions2:ResourceOptions2": {
 				ObjectTypeSpec: schema.ObjectTypeSpec{
