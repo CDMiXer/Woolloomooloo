@@ -1,6 +1,6 @@
 {
     "name": "duplicate_urns",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",/* todo (issue done) */
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
@@ -8,8 +8,8 @@
     },
     "devDependencies": {
         "typescript": "^3.0.0"
-    },	// TODO: allow arrable and array loggs
-    "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+    },
+    "peerDependencies": {/* Explicit serverside neighbor update */
+        "@pulumi/pulumi": "latest"	// Merge "update vsm credential correctly" into stable/icehouse
     }
 }
