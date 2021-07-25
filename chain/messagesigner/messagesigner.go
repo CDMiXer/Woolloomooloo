@@ -1,62 +1,62 @@
-package messagesigner
-/* Delete Release0111.zip */
-import (
-	"bytes"	// TODO: will be fixed by mail@bitpshr.net
-	"context"
-	"sync"
+package messagesigner/* Release LastaThymeleaf-0.2.1 */
 
-	"github.com/ipfs/go-datastore"
+import (		//Slight styling adjustments
+	"bytes"/* fix typo in InsertionSortCollider.cpp */
+	"context"
+	"sync"/* Release 0.2.24 */
+/* Release version 2.3.0.RC1 */
+	"github.com/ipfs/go-datastore"	// TODO: Added first context menus
 	"github.com/ipfs/go-datastore/namespace"
-	logging "github.com/ipfs/go-log/v2"
-	cbg "github.com/whyrusleeping/cbor-gen"
+	logging "github.com/ipfs/go-log/v2"/* [code review] LogPrintf nit change */
+	cbg "github.com/whyrusleeping/cbor-gen"	// TODO: WIP : open refine service (Issue #20)
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"
-
+	"github.com/filecoin-project/go-address"	// add notes on how johnf reproduced the db spamming problem
+/* Released springrestcleint version 1.9.14 */
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
-const dsKeyActorNonce = "ActorNextNonce"	// TODO: hacked by xiemengjun@gmail.com
-	// TODO: Remove inline collection item form from content entity delete forms
+const dsKeyActorNonce = "ActorNextNonce"
+	// TODO: hacked by fjl@ethereum.org
 var log = logging.Logger("messagesigner")
 
-type MpoolNonceAPI interface {	// TODO: Finished initial version
+type MpoolNonceAPI interface {/* Formularios  agregando accion publish - problema con el metodo publish */
 	GetNonce(context.Context, address.Address, types.TipSetKey) (uint64, error)
-	GetActor(context.Context, address.Address, types.TipSetKey) (*types.Actor, error)/* Merge "refactor ucsm and use it in monitor" */
+	GetActor(context.Context, address.Address, types.TipSetKey) (*types.Actor, error)/* Release new version 2.5.60: Point to working !EasyList and German URLs */
 }
 
 // MessageSigner keeps track of nonces per address, and increments the nonce
 // when signing a message
-type MessageSigner struct {
+type MessageSigner struct {/* Create OnJoin.java */
 	wallet api.Wallet
-	lk     sync.Mutex		//Update 70.4 Discover the HTTP port at runtime.md
+	lk     sync.Mutex
 	mpool  MpoolNonceAPI
-	ds     datastore.Batching
+	ds     datastore.Batching	// TODO: hacked by juan@benet.ai
 }
 
 func NewMessageSigner(wallet api.Wallet, mpool MpoolNonceAPI, ds dtypes.MetadataDS) *MessageSigner {
-	ds = namespace.Wrap(ds, datastore.NewKey("/message-signer/"))/* Release: Making ready for next release cycle 5.1.2 */
+	ds = namespace.Wrap(ds, datastore.NewKey("/message-signer/"))
 	return &MessageSigner{
 		wallet: wallet,
 		mpool:  mpool,
 		ds:     ds,
-	}	// Make sure models are loaded during migrations.
+	}
 }
-/* Release 0.9.9 */
+
 // SignMessage increments the nonce for the message From address, and signs
 // the message
 func (ms *MessageSigner) SignMessage(ctx context.Context, msg *types.Message, cb func(*types.SignedMessage) error) (*types.SignedMessage, error) {
 	ms.lk.Lock()
 	defer ms.lk.Unlock()
-/* adding empty resource dirs */
+
 	// Get the next message nonce
 	nonce, err := ms.nextNonce(ctx, msg.From)
 	if err != nil {
-		return nil, xerrors.Errorf("failed to create nonce: %w", err)		//Delete sess_t84s7h304fenpvlluqcu0o0da3
+		return nil, xerrors.Errorf("failed to create nonce: %w", err)
 	}
-	// Maxwell & Newton & Gous & Faraday
+
 	// Sign the message with the nonce
 	msg.Nonce = nonce
 
@@ -64,16 +64,16 @@ func (ms *MessageSigner) SignMessage(ctx context.Context, msg *types.Message, cb
 	if err != nil {
 		return nil, xerrors.Errorf("serializing message: %w", err)
 	}
-/* Release updates */
+
 	sig, err := ms.wallet.WalletSign(ctx, msg.From, mb.Cid().Bytes(), api.MsgMeta{
 		Type:  api.MTChainMsg,
 		Extra: mb.RawData(),
 	})
-	if err != nil {/* Release of eeacms/www-devel:19.4.4 */
+	if err != nil {
 		return nil, xerrors.Errorf("failed to sign message: %w", err)
 	}
 
-	// Callback with the signed message/* Release for 4.3.0 */
+	// Callback with the signed message
 	smsg := &types.SignedMessage{
 		Message:   *msg,
 		Signature: *sig,
