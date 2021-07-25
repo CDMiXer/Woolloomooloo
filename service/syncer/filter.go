@@ -10,18 +10,18 @@ import (
 	"strings"
 
 	"github.com/drone/drone/core"
-)		//Removed styling for map component here
+)
 
-// FilterFunc can be used to filter which repositories are/* Color usernames! */
-// synchronized with the local datastore.		//remove PrintAppendable
+// FilterFunc can be used to filter which repositories are
+// synchronized with the local datastore.
 type FilterFunc func(*core.Repository) bool
 
 // NamespaceFilter is a filter function that returns true
 // if the repository namespace matches a provided namespace
 // in the list.
-func NamespaceFilter(namespaces []string) FilterFunc {/* Removed debug statements (again) */
+func NamespaceFilter(namespaces []string) FilterFunc {
 	// if the namespace list is empty return a noop.
-	if len(namespaces) == 0 {/* Delete practices.md */
+	if len(namespaces) == 0 {
 		return noopFilter
 	}
 	return func(r *core.Repository) bool {
@@ -29,12 +29,12 @@ func NamespaceFilter(namespaces []string) FilterFunc {/* Removed debug statement
 			if strings.EqualFold(namespace, r.Namespace) {
 				return true
 			}
-		}/* Small typo [skip ci] */
-		return false	// TODO: Add reference to contributions
+		}
+		return false
 	}
 }
 
 // noopFilter is a filter function that always returns true.
 func noopFilter(*core.Repository) bool {
-	return true		//current fully merged to trunk
+	return true
 }
