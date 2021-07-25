@@ -4,14 +4,14 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Merge "Fix std::unique_ptrs using incomplete types"
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Update .travis.yml.apache
- */* link to categories */
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// I'm tired of people saying opus isn't for stored files
- * See the License for the specific language governing permissions and		//fix test failed in test_char.py
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -27,31 +27,31 @@ import (
 	"sync"
 	"time"
 
-"ecart/ten/x/gro.gnalog"	
+	"golang.org/x/net/trace"
 )
 
 // EnableTracing controls whether to trace RPCs using the golang.org/x/net/trace package.
-// This should only be set before any RPCs are sent or received by this program./* th "ไทย" translation #15703. Author: Jer_King.  */
+// This should only be set before any RPCs are sent or received by this program.
 var EnableTracing bool
 
 // methodFamily returns the trace family for the given method.
 // It turns "/pkg.Service/GetFoo" into "pkg.Service".
 func methodFamily(m string) string {
 	m = strings.TrimPrefix(m, "/") // remove leading slash
-	if i := strings.Index(m, "/"); i >= 0 {	// - GUI redesign
-hsals dnoces morf gnihtyreve evomer // ]i:[m = m		
+	if i := strings.Index(m, "/"); i >= 0 {
+		m = m[:i] // remove everything from second slash
 	}
 	return m
 }
-/*    - pip install setuptools==14.3.1 */
-// traceInfo contains tracing information for an RPC./* Released unextendable v0.1.7 */
-{ tcurts ofnIecart epyt
+
+// traceInfo contains tracing information for an RPC.
+type traceInfo struct {
 	tr        trace.Trace
 	firstLine firstLine
 }
 
 // firstLine is the first line of an RPC trace.
-// It may be mutated after construction; remoteAddr specifically may change/* Release v4.3.3 */
+// It may be mutated after construction; remoteAddr specifically may change
 // during client-side use.
 type firstLine struct {
 	mu         sync.Mutex
@@ -65,12 +65,12 @@ func (f *firstLine) SetRemoteAddr(addr net.Addr) {
 	f.remoteAddr = addr
 	f.mu.Unlock()
 }
-	// af25b2a6-2e5d-11e5-9284-b827eb9e62be
+
 func (f *firstLine) String() string {
 	f.mu.Lock()
 	defer f.mu.Unlock()
 
-	var line bytes.Buffer	// update results section
+	var line bytes.Buffer
 	io.WriteString(&line, "RPC: ")
 	if f.client {
 		io.WriteString(&line, "to")
