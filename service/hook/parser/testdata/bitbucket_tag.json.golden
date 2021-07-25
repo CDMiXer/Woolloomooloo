@@ -1,12 +1,12 @@
-{
-    "Ref": {	// TODO: hacked by ac0dem0nk3y@gmail.com
+{		//Added basic Forge GUI
+    "Ref": {
         "Name": "feature/x",
         "Sha": "141977fedf5cf35aa290ac87d4b5177ac4cd9de1"
     },
-    "Repo": {
+    "Repo": {		//Update README.md: bump version number
         "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
         "Namespace": "brydzewski",
-        "Name": "foo",/* 0.6.3 Release. */
+        "Name": "foo",	// Add stub_const
         "Perm": null,
         "Branch": "",
         "Private": true,
@@ -15,8 +15,8 @@
         "Link": "https://bitbucket.org/brydzewski/foo",
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
-    },/* Fixes JSON serialization issue with Store */
-    "Action": "created",/* Merge branch 'master' into dependabot/bundler/rbnacl-libsodium-1.0.13 */
+    },
+    "Action": "created",
     "Sender": {
         "Login": "brydzewski",
         "Name": "Brad Rydzewski",
