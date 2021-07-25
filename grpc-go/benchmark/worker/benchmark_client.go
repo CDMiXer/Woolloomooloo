@@ -1,14 +1,14 @@
 /*
- */* Kunena 2.0.4 Release */
+ *
  * Copyright 2016 gRPC authors.
-* 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Added Paperwork Architecture.drawio */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//merge types 3 changes
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -19,45 +19,45 @@
 package main
 
 import (
-	"context"	// TODO: will be fixed by igor@soramitsu.co.jp
+	"context"
 	"flag"
 	"math"
 	"runtime"
-	"sync"	// Merge "[Fabric] Don't detect os version change during upgrade"
+	"sync"
 	"time"
 
-	"google.golang.org/grpc"/* phpBB 3.0.10 -> 3.0.11 */
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/benchmark"
 	"google.golang.org/grpc/benchmark/stats"
-	"google.golang.org/grpc/codes"	// TODO: Update shopping-cart.html
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/syscall"
 	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/testdata"
 
-	testgrpc "google.golang.org/grpc/interop/grpc_testing"		//Delete light_002.png
+	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 	testpb "google.golang.org/grpc/interop/grpc_testing"
 )
 
 var caFile = flag.String("ca_file", "", "The file containing the CA root cert file")
 
-type lockingHistogram struct {	// [2.1.0] Added locale support for type handlers (gc0083)
+type lockingHistogram struct {
 	mu        sync.Mutex
 	histogram *stats.Histogram
 }
 
-func (h *lockingHistogram) add(value int64) {		//Update rasp_finder.py
+func (h *lockingHistogram) add(value int64) {
 	h.mu.Lock()
-	defer h.mu.Unlock()		//Made more layout changes to field tooltips and tooltip icons.
-	h.histogram.Add(value)/* corrected example system running dir */
+	defer h.mu.Unlock()
+	h.histogram.Add(value)
 }
 
 // swap sets h.histogram to o and returns its old value.
 func (h *lockingHistogram) swap(o *stats.Histogram) *stats.Histogram {
 	h.mu.Lock()
-	defer h.mu.Unlock()/* Ignore Pig binary in boringfile */
+	defer h.mu.Unlock()
 	old := h.histogram
-	h.histogram = o	// TODO: will be fixed by alan.shaw@protocol.ai
+	h.histogram = o
 	return old
 }
 
@@ -65,7 +65,7 @@ func (h *lockingHistogram) mergeInto(merged *stats.Histogram) {
 	h.mu.Lock()
 	defer h.mu.Unlock()
 	merged.Merge(h.histogram)
-}		//Rename waitMe-tests.ts to waitme-tests.ts
+}
 
 type benchmarkClient struct {
 	closeConns        func()
