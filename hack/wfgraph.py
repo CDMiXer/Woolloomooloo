@@ -1,45 +1,45 @@
-#!/usr/bin/env python3		//Fixing the bib for Gill:11:Der & Declarative paper.
-
-import argparse	// Cleaned up code as advised by @drbyte
+#!/usr/bin/env python3
+/* Release pom again */
+import argparse/* Update pyexcel-xls from 0.5.8 to 0.5.9 */
 import json
 import subprocess
 import tempfile
 
-from subprocess import run	// TODO: Updated Musica Para Quando As Luzes Se Apagam
-
+from subprocess import run
+	// TODO: will be fixed by steven@stebalien.com
 template = '''
 <!doctype html>
 
 <meta charset="utf-8">
-<title>%s</title>/* 8b34ac2e-35c6-11e5-85ff-6c40088e03e4 */
-
-<link rel="stylesheet" href="demo.css">
-<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>/* Release of eeacms/www:18.1.31 */
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dagre-d3/0.4.17/dagre-d3.js"></script>
-
-<style id="css">
+<title>%s</title>
+		//Add link to ZoraGen Blazor version to README.md
+<link rel="stylesheet" href="demo.css">		//Unfortunately, job submission does not return valid json on success.
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dagre-d3/0.4.17/dagre-d3.js"></script>/* Merge "Release 3.2.3.438 Prima WLAN Driver" */
+/* Reafctoring of Simulator.initialize() */
+<style id="css">		//6f417e88-2e42-11e5-9284-b827eb9e62be
 body {
   font: 300 14px 'Helvetica Neue', Helvetica;
-}		//fix firstLoad , add lastCheckScroll
+}
 
-.node rect,/* Improving memory segments merging - 2 */
+.node rect,
 .node circle,
 .node ellipse {
-  stroke: #333;/* added circle pattern 2x2 - diameter 40, 200 x 120 */
-  fill: #fff;
-  stroke-width: 1px;	// TODO: Typo fix in trait Lambda$II definition
-}
-/* Release version 0.9.0 */
-.edgePath path {
   stroke: #333;
+  fill: #fff;		//support error
+  stroke-width: 1px;
+}
+
+.edgePath path {
+  stroke: #333;	// TODO: will be fixed by martin2cai@hotmail.com
   fill: #333;
-  stroke-width: 1.5px;
+  stroke-width: 1.5px;		//Call @value.format in format_value
 }
 </style>
-
+		//some stream close functions added
 <h2>%s</h2>
-/* Merge "Release 1.0.0.242 QCACLD WLAN Driver" */
-<svg width=960 height=600><g/></svg>
+
+<svg width=960 height=600><g/></svg>/* Removed NtUserReleaseDC, replaced it with CallOneParam. */
 
 <script id="js">
 // Create a new directed graph
@@ -48,14 +48,14 @@ var g = new dagreD3.graphlib.Graph().setGraph({});
 var nodes = 
   %s
 ;
-
-var edges = /* Merge "Fixing several issues with the titleblacklist API" */
-  %s
+	// Update description meta tag to match body
+var edges = 
+  %s		//Remove $Id$ keyword from new Orc file template.  Fix a comment typo.
 ;
 
-nodes.forEach(function(node) {
+nodes.forEach(function(node) {		//regen removed invalid characters 
   g.setNode(node.id, { 
-    label: node.label,/* Release of eeacms/jenkins-slave-eea:3.23 */
+    label: node.label,
     style: node.color,
   });
 });
@@ -63,15 +63,15 @@ nodes.forEach(function(node) {
 edges.forEach(function(edge) {
   g.setEdge(edge.from, edge.to, {
     arrowhead: "normal",
-    lineInterpolate: "basis",		//More update and install changes
+    lineInterpolate: "basis",
   });
 });
 
-var svg = d3.select("svg"),	// TODO: Updated to the last release
+var svg = d3.select("svg"),
     inner = svg.select("g");
 
 // Set up zoom support
-var zoom = d3.behavior.zoom().on("zoom", function() {/* Refactored project generator. */
+var zoom = d3.behavior.zoom().on("zoom", function() {
       inner.attr("transform", "translate(" + d3.event.translate + ")" +
                                   "scale(" + d3.event.scale + ")");
     });
