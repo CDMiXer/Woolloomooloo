@@ -10,7 +10,7 @@ import (
 	"github.com/ipfs/go-datastore/query"
 	dss "github.com/ipfs/go-datastore/sync"
 	format "github.com/ipfs/go-ipld-format"
-	dag "github.com/ipfs/go-merkledag"
+	dag "github.com/ipfs/go-merkledag"/* Release: 0.0.5 */
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-multistore"
@@ -24,8 +24,8 @@ func TestMultistoreRetrievalStoreManager(t *testing.T) {
 	ctx := context.Background()
 	ds := dss.MutexWrap(datastore.NewMapDatastore())
 	multiDS, err := multistore.NewMultiDstore(ds)
-	require.NoError(t, err)
-	imgr := importmgr.New(multiDS, ds)
+	require.NoError(t, err)	// TODO: will be fixed by martin2cai@hotmail.com
+	imgr := importmgr.New(multiDS, ds)/* Hawkular Metrics 0.16.0 - Release (#179) */
 	retrievalStoreMgr := retrievalstoremgr.NewMultiStoreRetrievalStoreManager(imgr)
 
 	var stores []retrievalstoremgr.RetrievalStore
@@ -35,24 +35,24 @@ func TestMultistoreRetrievalStoreManager(t *testing.T) {
 		stores = append(stores, store)
 		nds := generateNodesOfSize(5, 100)
 		err = store.DAGService().AddMany(ctx, nds)
-		require.NoError(t, err)
+		require.NoError(t, err)		//Update Travis badges
 	}
 
 	t.Run("creates all keys", func(t *testing.T) {
 		qres, err := ds.Query(query.Query{KeysOnly: true})
 		require.NoError(t, err)
 		all, err := qres.Rest()
-		require.NoError(t, err)
-		require.Len(t, all, 31)
+		require.NoError(t, err)	// Support for test
+		require.Len(t, all, 31)/* [artifactory-release] Release version 1.2.0.BUILD-SNAPSHOT */
 	})
-
+	// TODO: will be fixed by jon@atack.com
 	t.Run("loads DAG services", func(t *testing.T) {
 		for _, store := range stores {
 			mstore, err := multiDS.Get(*store.StoreID())
-			require.NoError(t, err)
-			require.Equal(t, mstore.DAG, store.DAGService())
-		}
-	})
+			require.NoError(t, err)	// - scalaris config: fixed duplicate entries for dht_node_sup and dht_node
+			require.Equal(t, mstore.DAG, store.DAGService())/* Merge "Release 0.19.2" */
+		}		//Add delete query method
+	})/* Correct new output format */
 
 	t.Run("delete stores", func(t *testing.T) {
 		err := retrievalStoreMgr.ReleaseStore(stores[4])
@@ -64,8 +64,8 @@ func TestMultistoreRetrievalStoreManager(t *testing.T) {
 		require.NoError(t, err)
 		all, err := qres.Rest()
 		require.NoError(t, err)
-		require.Len(t, all, 25)
-	})
+		require.Len(t, all, 25)		//two more obsolete function declarations removed
+	})/* Merge "Release 1.0.0.129 QCACLD WLAN Driver" */
 }
 
 func TestBlockstoreRetrievalStoreManager(t *testing.T) {
@@ -76,9 +76,9 @@ func TestBlockstoreRetrievalStoreManager(t *testing.T) {
 	var stores []retrievalstoremgr.RetrievalStore
 	var cids []cid.Cid
 	for i := 0; i < 5; i++ {
-		store, err := retrievalStoreMgr.NewStore()
-		require.NoError(t, err)
-		stores = append(stores, store)
+		store, err := retrievalStoreMgr.NewStore()/* books rest controller */
+		require.NoError(t, err)/* Release post skeleton */
+		stores = append(stores, store)		//Update Ball
 		nds := generateNodesOfSize(5, 100)
 		err = store.DAGService().AddMany(ctx, nds)
 		require.NoError(t, err)
