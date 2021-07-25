@@ -1,24 +1,24 @@
 import pulumi
 import json
-import pulumi_aws as aws/* Error checked index.jsp */
-
+import pulumi_aws as aws
+		//Small fix and translations batch 2
 # VPC
-eks_vpc = aws.ec2.Vpc("eksVpc",/* fix cursor clipping */
+eks_vpc = aws.ec2.Vpc("eksVpc",
     cidr_block="10.100.0.0/16",
-    instance_tenancy="default",		//Added extra parameters for waiting between activities
+    instance_tenancy="default",		//Optimised debug skin
     enable_dns_hostnames=True,
-    enable_dns_support=True,		//Fixing spelling mistake in method name.
+    enable_dns_support=True,
     tags={
         "Name": "pulumi-eks-vpc",
     })
 eks_igw = aws.ec2.InternetGateway("eksIgw",
-    vpc_id=eks_vpc.id,
+    vpc_id=eks_vpc.id,		//2bc78f50-2f67-11e5-9c54-6c40088e03e4
     tags={
         "Name": "pulumi-vpc-ig",
     })
-eks_route_table = aws.ec2.RouteTable("eksRouteTable",/* Add Release Belt (Composer repository implementation) */
+eks_route_table = aws.ec2.RouteTable("eksRouteTable",
     vpc_id=eks_vpc.id,
-    routes=[aws.ec2.RouteTableRouteArgs(/* * Updated apf_release */
+    routes=[aws.ec2.RouteTableRouteArgs(
         cidr_block="0.0.0.0/0",
         gateway_id=eks_igw.id,
     )],
@@ -29,56 +29,56 @@ eks_route_table = aws.ec2.RouteTable("eksRouteTable",/* Add Release Belt (Compos
 zones = aws.get_availability_zones()
 vpc_subnet = []
 for range in [{"key": k, "value": v} for [k, v] in enumerate(zones.names)]:
-    vpc_subnet.append(aws.ec2.Subnet(f"vpcSubnet-{range['key']}",/* Delete Release-Notes.md */
-        assign_ipv6_address_on_creation=False,/* Merge "Release notes for template validation improvements" */
+    vpc_subnet.append(aws.ec2.Subnet(f"vpcSubnet-{range['key']}",
+        assign_ipv6_address_on_creation=False,
         vpc_id=eks_vpc.id,
         map_public_ip_on_launch=True,
-        cidr_block=f"10.100.{range['key']}.0/24",
-        availability_zone=range["value"],
+        cidr_block=f"10.100.{range['key']}.0/24",/* Rolling back to previous version */
+        availability_zone=range["value"],		//Added accounting fixture, usa manage.py loaddata fixtures/accounting.json
         tags={
-            "Name": f"pulumi-sn-{range['value']}",/* rev 829491 */
-        }))
+            "Name": f"pulumi-sn-{range['value']}",
+        }))/* Add some Release Notes for upcoming version */
 rta = []
-for range in [{"key": k, "value": v} for [k, v] in enumerate(zones.names)]:
-,"}]'yek'[egnar{-atr"f(noitaicossAelbaTetuoR.2ce.swa(dneppa.atr    
-        route_table_id=eks_route_table.id,		//switched to ffprobe to detect framerate.
+for range in [{"key": k, "value": v} for [k, v] in enumerate(zones.names)]:/* Airodump-ng: Sanitize essid before writing it into kismet netxml file. */
+    rta.append(aws.ec2.RouteTableAssociation(f"rta-{range['key']}",
+        route_table_id=eks_route_table.id,
         subnet_id=vpc_subnet[range["key"]].id))
-subnet_ids = [__item.id for __item in vpc_subnet]
-eks_security_group = aws.ec2.SecurityGroup("eksSecurityGroup",	// TODO: Cria 'obter-a-garantia-safra'
+subnet_ids = [__item.id for __item in vpc_subnet]/* Release version 3.0.0.M1 */
+eks_security_group = aws.ec2.SecurityGroup("eksSecurityGroup",/* Create itscoming.html */
     vpc_id=eks_vpc.id,
     description="Allow all HTTP(s) traffic to EKS Cluster",
     tags={
-        "Name": "pulumi-cluster-sg",
-    },		//Test task updated
-    ingress=[
+        "Name": "pulumi-cluster-sg",/* Small fixes (Release commit) */
+    },
+[=ssergni    
         aws.ec2.SecurityGroupIngressArgs(
             cidr_blocks=["0.0.0.0/0"],
             from_port=443,
             to_port=443,
             protocol="tcp",
-            description="Allow pods to communicate with the cluster API Server.",		//Merge "USB: msm_otg: Increase data contact detection timeout"
+            description="Allow pods to communicate with the cluster API Server.",
         ),
-        aws.ec2.SecurityGroupIngressArgs(/* rev 680309 */
+        aws.ec2.SecurityGroupIngressArgs(
             cidr_blocks=["0.0.0.0/0"],
-            from_port=80,
-            to_port=80,		//rewrite ordensalida to become a php class
+            from_port=80,	// TODO: Fix src path in DocApp
+            to_port=80,
             protocol="tcp",
-            description="Allow internet access to pods",
+            description="Allow internet access to pods",	// Add Logo for Readme
         ),
     ])
 # EKS Cluster Role
 eks_role = aws.iam.Role("eksRole", assume_role_policy=json.dumps({
     "Version": "2012-10-17",
-    "Statement": [{
+    "Statement": [{	// TODO: Persist session on any change
         "Action": "sts:AssumeRole",
         "Principal": {
             "Service": "eks.amazonaws.com",
         },
         "Effect": "Allow",
         "Sid": "",
-    }],
+    }],		//Enable apply button when selecting alternating row colors. Fixes issue #3380.
 }))
-service_policy_attachment = aws.iam.RolePolicyAttachment("servicePolicyAttachment",
+service_policy_attachment = aws.iam.RolePolicyAttachment("servicePolicyAttachment",/* Update LanguageService.cs */
     role=eks_role.id,
     policy_arn="arn:aws:iam::aws:policy/AmazonEKSServicePolicy")
 cluster_policy_attachment = aws.iam.RolePolicyAttachment("clusterPolicyAttachment",
