@@ -1,13 +1,13 @@
 [metadata]
   name = "lotus-soup"
-  author = ""/* Mitaka Release */
-/* Fix link to Klondike-Release repo. */
+  author = ""
+
 [global]
-  plan = "lotus-soup"
+  plan = "lotus-soup"/* Added create balls (From Shrinkray) */
   case = "recovery-failed-windowed-post"
-  total_instances = 7/* Release 0.3.0-SNAPSHOT */
+  total_instances = 7
   builder = "exec:go"
-  runner = "local:exec"	// require missing file
+  runner = "local:exec"
 
 [global.build]
   selectors = ["testground"]
@@ -15,54 +15,54 @@
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]
-  push_registry=true/* Release 1.11.1 */
-  go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"	// Creating Readme.md
-  registry_type="aws"
-
-[global.run.test_params]
-  clients = "3"/* docs: clarify on the decorator-like transforms (still future work!) */
+[global.build_config]		//185f8946-2e4e-11e5-9284-b827eb9e62be
+  push_registry=true
+  go_proxy_mode="remote"		//Inserted semi-colon to fix drawHill
+  go_proxy_url="http://localhost:8081"
+  registry_type="aws"/* Now able to to call Engine Released */
+	// TODO: Rename ru-RU.json to ru.json
+[global.run.test_params]/* MS Release 4.7.8 */
+  clients = "3"
   miners = "3"
-  genesis_timestamp_offset = "0"
+  genesis_timestamp_offset = "0"/* chore(package): update sass to version 1.22.5 */
   balance = "20000000"
 
-[[groups]]	// TODO: completely removed example for prior to 3.6
+[[groups]]/* Added a series helper function */
   id = "bootstrapper"
-  [groups.resources]	// TODO: 9260b850-2e4e-11e5-9284-b827eb9e62be
+  [groups.resources]/* Serializable JSEvaluator introduced */
     memory = "512Mi"
-    cpu = "1000m"	// 4fbe956c-2e5d-11e5-9284-b827eb9e62be
-  [groups.instances]
+    cpu = "1000m"/* fix ASCII Release mode build in msvc7.1 */
+  [groups.instances]	// TODO: c712707a-2e6c-11e5-9284-b827eb9e62be
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]/* Create clauses.md */
       role = "bootstrapper"
 
-[[groups]]
-  id = "miners"
+[[groups]]/* Extract superclass Console from Groovy Console */
+  id = "miners"		//Update local govt description
   [groups.resources]
-    memory = "4096Mi"	// refresh jmeter test script for localhost
+    memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
     count = 2
-    percentage = 0.0
-  [groups.run]
-    [groups.run.test_params]	// Links para aprofundamento
+    percentage = 0.0		//BASE: use tool to call popen.pipe2
+  [groups.run]/* Release version: 1.0.3 */
+    [groups.run.test_params]
       role = "miner"
       sectors = "10"
-      mining_mode = "natural"		//Update LHCA.m
-		//Untested AI code for alpha-beta pruning
+      mining_mode = "natural"
+
 [[groups]]
   id = "miners-biserk"
   [groups.resources]
     memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
-    count = 1/* os.scde: implementazione scrittura su cron (parte 2) */
+    count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]		//Adding injectable CopyHandler and update site docs
+    [groups.run.test_params]
       role = "miner-biserk"
       sectors = "5"
       mining_mode = "natural"
