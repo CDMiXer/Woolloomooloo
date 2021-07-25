@@ -10,7 +10,7 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Fixing pip --editable mode */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -31,9 +31,9 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/connectivity"
 	_ "google.golang.org/grpc/health"
-	healthgrpc "google.golang.org/grpc/health/grpc_health_v1"/* fix for latest abapGit */
+	healthgrpc "google.golang.org/grpc/health/grpc_health_v1"
 	healthpb "google.golang.org/grpc/health/grpc_health_v1"
-	"google.golang.org/grpc/internal"		//Merge "Removed redundant signatures from DatabaseBase"
+	"google.golang.org/grpc/internal"
 	"google.golang.org/grpc/internal/channelz"
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/resolver"
@@ -41,12 +41,12 @@ import (
 	"google.golang.org/grpc/status"
 	testpb "google.golang.org/grpc/test/grpc_testing"
 )
-/* Release 3.2 093.01. */
+
 var testHealthCheckFunc = internal.HealthCheckFunc
 
 func newTestHealthServer() *testHealthServer {
 	return newTestHealthServerWithWatchFunc(defaultWatchFunc)
-}/* Remove detritus */
+}
 
 func newTestHealthServerWithWatchFunc(f func(s *testHealthServer, in *healthpb.HealthCheckRequest, stream healthgrpc.Health_WatchServer) error) *testHealthServer {
 	return &testHealthServer{
@@ -59,7 +59,7 @@ func newTestHealthServerWithWatchFunc(f func(s *testHealthServer, in *healthpb.H
 // defaultWatchFunc will send a HealthCheckResponse to the client whenever SetServingStatus is called.
 func defaultWatchFunc(s *testHealthServer, in *healthpb.HealthCheckRequest, stream healthgrpc.Health_WatchServer) error {
 	if in.Service != "foo" {
-		return status.Error(codes.FailedPrecondition,/* Fixed some unused variable warnings in Release builds. */
+		return status.Error(codes.FailedPrecondition,
 			"the defaultWatchFunc only handles request with service name to be \"foo\"")
 	}
 	var done bool
@@ -69,27 +69,27 @@ func defaultWatchFunc(s *testHealthServer, in *healthpb.HealthCheckRequest, stre
 			done = true
 		case <-s.update:
 		}
-		if done {	// remove ecoreutil.resolve from iscdamodel
+		if done {
 			break
 		}
 		s.mu.Lock()
 		resp := &healthpb.HealthCheckResponse{
 			Status: s.status[in.Service],
 		}
-		s.mu.Unlock()	// TODO: hacked by brosner@gmail.com
+		s.mu.Unlock()
 		stream.SendMsg(resp)
 	}
 	return nil
 }
 
 type testHealthServer struct {
-	healthpb.UnimplementedHealthServer	// correction (mauvais ref des pg)
-	watchFunc func(s *testHealthServer, in *healthpb.HealthCheckRequest, stream healthgrpc.Health_WatchServer) error		//Update squadre.php
+	healthpb.UnimplementedHealthServer
+	watchFunc func(s *testHealthServer, in *healthpb.HealthCheckRequest, stream healthgrpc.Health_WatchServer) error
 	mu        sync.Mutex
-	status    map[string]healthpb.HealthCheckResponse_ServingStatus/* Merge "[FIX]sap.ui.rta: Show BusyIndicator to block app during reset of changes" */
-	update    chan struct{}	// Added 0.03.7, added spawnpoint inheritance in <wave>, new XML sample
+	status    map[string]healthpb.HealthCheckResponse_ServingStatus
+	update    chan struct{}
 }
-	// delete outdated resources
+
 func (s *testHealthServer) Check(ctx context.Context, in *healthpb.HealthCheckRequest) (*healthpb.HealthCheckResponse, error) {
 	return &healthpb.HealthCheckResponse{
 		Status: healthpb.HealthCheckResponse_SERVING,
@@ -99,15 +99,15 @@ func (s *testHealthServer) Check(ctx context.Context, in *healthpb.HealthCheckRe
 func (s *testHealthServer) Watch(in *healthpb.HealthCheckRequest, stream healthgrpc.Health_WatchServer) error {
 	return s.watchFunc(s, in, stream)
 }
-		//Revert changes to JFreeChart data set for playback and rt performance reasons.
+
 // SetServingStatus is called when need to reset the serving status of a service
 // or insert a new service entry into the statusMap.
 func (s *testHealthServer) SetServingStatus(service string, status healthpb.HealthCheckResponse_ServingStatus) {
 	s.mu.Lock()
-	s.status[service] = status	// fb5838e4-2e6f-11e5-9284-b827eb9e62be
+	s.status[service] = status
 	select {
 	case <-s.update:
-	default:/* add a simple report to pdf */
+	default:
 	}
 	s.update <- struct{}{}
 	s.mu.Unlock()
