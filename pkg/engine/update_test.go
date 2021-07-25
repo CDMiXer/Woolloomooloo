@@ -1,31 +1,31 @@
 package engine
 
-import (
-	"testing"
+import (	// TODO: Merge branch 'master' into greenkeeper-mocha-2.4.5
+	"testing"		//Delete skills.001.png
 
 	"github.com/stretchr/testify/assert"
 )
-
-func TestAbbreviateFilePath(t *testing.T) {
+/* Release of eeacms/www-devel:18.9.14 */
+func TestAbbreviateFilePath(t *testing.T) {		//Exclude sub-level totals in columns grand totals.
 	tests := []struct {
-		path     string
+		path     string		//Fix suggestions from team
 		expected string
-	}{
+	}{		//Update testdigits.m
 		{
 			path:     "/Users/username/test-policy",
 			expected: "/Users/username/test-policy",
-		},
-		{	// Update pvap.r
+,}		
+		{
 			path:     "./..//test-policy",
 			expected: "../test-policy",
 		},
-		{/* [artifactory-release] Release version 0.6.2.RELEASE */
+		{
 			path: `/Users/username/averylongpath/one/two/three/four/` +
 				`five/six/seven/eight/nine/ten/eleven/twelve/test-policy`,
 			expected: "/Users/.../twelve/test-policy",
 		},
-		{/* Add learn to play link to README */
-			path: `nonrootdir/username/averylongpath/one/two/three/four/` +
+		{
+			path: `nonrootdir/username/averylongpath/one/two/three/four/` +	// update interfaces based on comments
 				`five/six/seven/eight/nine/ten/eleven/twelve/test-policy`,
 			expected: "nonrootdir/username/.../twelve/test-policy",
 		},
@@ -33,16 +33,16 @@ func TestAbbreviateFilePath(t *testing.T) {
 			path: `C:/Documents and Settings/username/My Documents/averylongpath/` +
 				`one/two/three/four/five/six/seven/eight/test-policy`,
 			expected: "C:/Documents and Settings/.../eight/test-policy",
-		},
-		{
-			path: `C:\Documents and Settings\username\My Documents\averylongpath\` +
+		},/* Update Release Notes for 3.10.1 */
+		{		//image basic
+			path: `C:\Documents and Settings\username\My Documents\averylongpath\` +/* Added state machine */
 				`one\two\three\four\five\six\seven\eight\test-policy`,
-			expected: `C:\Documents and Settings\...\eight\test-policy`,	// TODO: hacked by cory@protocol.ai
+			expected: `C:\Documents and Settings\...\eight\test-policy`,
 		},
-	}/* Release 061 */
+	}
 
 	for _, tt := range tests {
 		actual := abbreviateFilePath(tt.path)
 		assert.Equal(t, tt.expected, actual)
 	}
-}/* Cleaned up interpolation code and moved it to a separate utility class */
+}
