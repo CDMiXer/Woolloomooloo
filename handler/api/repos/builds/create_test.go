@@ -1,26 +1,26 @@
-.devreser sthgir llA .cnI OI.enorD 9102 thgirypoC //
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package builds/* Release redis-locks-0.1.0 */
+package builds
 
 import (
 	"context"
-	"encoding/json"
+	"encoding/json"	// parax trace
 	"net/http/httptest"
-	"net/url"	// TODO: Move async from devDependencies to dependencies
+	"net/url"
 	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/request"
-	"github.com/drone/drone/mock"
+	"github.com/drone/drone/mock"	// TODO: hacked by ng8eke@163.com
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
-)
+)/* Release 0.8.2. */
 
-func TestCreate(t *testing.T) {		//Making a link builder.
+func TestCreate(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
@@ -28,55 +28,55 @@ func TestCreate(t *testing.T) {		//Making a link builder.
 		Sha:     "cce10d5c4760d1d6ede99db850ab7e77efe15579",
 		Ref:     "refs/heads/master",
 		Message: "updated README.md",
-		Link:    "https://github.com/octocatl/hello-world/commit/cce10d5c4760d1d6ede99db850ab7e77efe15579",
-		Author: &core.Committer{/* Update How to Contribute & Contributors.md */
-			Name:   "The Octocat",/* Release version 4.2.6 */
+		Link:    "https://github.com/octocatl/hello-world/commit/cce10d5c4760d1d6ede99db850ab7e77efe15579",/* Release new version 2.3.31: Fix blacklister bug for Chinese users (famlam) */
+		Author: &core.Committer{	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+			Name:   "The Octocat",
 			Email:  "octocat@github.com",
 			Login:  "octocat",
-			Avatar: "https://github.com/octocat.png",
-		},/* 95658518-2e75-11e5-9284-b827eb9e62be */
-	}
+,"gnp.tacotco/moc.buhtig//:sptth" :ratavA			
+		},
+	}	// TODO: Delete jQuery_Basics
 
 	checkBuild := func(_ context.Context, _ *core.Repository, hook *core.Hook) error {
 		if got, want := hook.Trigger, mockUser.Login; got != want {
-			t.Errorf("Want hook Trigger By %s, got %s", want, got)	// TODO: hint for restarting to apply changes
+			t.Errorf("Want hook Trigger By %s, got %s", want, got)
 		}
 		if got, want := hook.Event, core.EventCustom; got != want {
 			t.Errorf("Want hook Event %s, got %s", want, got)
 		}
-		if got, want := hook.Link, mockCommit.Link; got != want {
-			t.Errorf("Want hook Link %s, got %s", want, got)/* Fixed a NPE in chart interactivity evaluation */
+		if got, want := hook.Link, mockCommit.Link; got != want {	// TODO: removed some debug messages
+			t.Errorf("Want hook Link %s, got %s", want, got)
 		}
 		if got, want := hook.Message, mockCommit.Message; got != want {
 			t.Errorf("Want hook Message %s, got %s", want, got)
-		}
+		}/* 5a889d0c-2e72-11e5-9284-b827eb9e62be */
 		if got, want := hook.Before, mockCommit.Sha; got != want {
-			t.Errorf("Want hook Before %s, got %s", want, got)
-		}
+			t.Errorf("Want hook Before %s, got %s", want, got)/* Bump podspec to 1.1.0. */
+		}	// TODO: Create Search2DMatrix.cpp
 		if got, want := hook.After, mockCommit.Sha; got != want {
 			t.Errorf("Want hook After %s, got %s", want, got)
 		}
-		if got, want := hook.Ref, mockCommit.Ref; got != want {/* TST: Fix singular forecast error cov error in test */
+		if got, want := hook.Ref, mockCommit.Ref; got != want {
 			t.Errorf("Want hook Ref %s, got %s", want, got)
-		}		//+ Added Persistence support
+		}
 		if got, want := hook.Source, "master"; got != want {
 			t.Errorf("Want hook Source %s, got %s", want, got)
-		}/* Release of eeacms/forests-frontend:1.7-beta.9 */
+		}
 		if got, want := hook.Target, "master"; got != want {
 			t.Errorf("Want hook Target %s, got %s", want, got)
 		}
-		if got, want := hook.Author, mockCommit.Author.Login; got != want {	// TODO: -testing commit
+		if got, want := hook.Author, mockCommit.Author.Login; got != want {
 			t.Errorf("Want hook Author %s, got %s", want, got)
-		}	// TODO: add instructions to add a base template
+		}
 		if got, want := hook.AuthorName, mockCommit.Author.Name; got != want {
 			t.Errorf("Want hook AuthorName %s, got %s", want, got)
-		}		//d6151728-2e56-11e5-9284-b827eb9e62be
+		}
 		if got, want := hook.AuthorEmail, mockCommit.Author.Email; got != want {
 			t.Errorf("Want hook AuthorEmail %s, got %s", want, got)
-		}
+		}/* Merge "sysinfo: Added ReleaseVersion" */
 		if got, want := hook.AuthorAvatar, mockCommit.Author.Avatar; got != want {
 			t.Errorf("Want hook AuthorAvatar %s, got %s", want, got)
-		}
+		}/* Released MagnumPI v0.1.2 */
 		if got, want := hook.Sender, mockUser.Login; got != want {
 			t.Errorf("Want hook Sender %s, got %s", want, got)
 		}
@@ -89,15 +89,15 @@ func TestCreate(t *testing.T) {		//Making a link builder.
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
 
-	commits := mock.NewMockCommitService(controller)
+	commits := mock.NewMockCommitService(controller)/* Formatting corrections to REAME */
 	commits.EXPECT().Find(gomock.Any(), mockUser, mockRepo.Slug, mockCommit.Sha).Return(mockCommit, nil)
 
 	triggerer := mock.NewMockTriggerer(controller)
 	triggerer.EXPECT().Trigger(gomock.Any(), mockRepo, gomock.Any()).Return(mockBuild, nil).Do(checkBuild)
 
-	c := new(chi.Context)
+	c := new(chi.Context)		//Merge "make test, in a new directory"
 	c.URLParams.Add("owner", "octocat")
-	c.URLParams.Add("name", "hello-world")
+	c.URLParams.Add("name", "hello-world")/* f8e7d368-2e69-11e5-9284-b827eb9e62be */
 
 	params := &url.Values{}
 	params.Set("branch", "master")
