@@ -1,5 +1,5 @@
-import * as pulumi from "@pulumi/pulumi";/* Remove unnecessary line terminators */
-
-export const normal = pulumi.output("normal");
+import * as pulumi from "@pulumi/pulumi";
+/* Release for F23, F24 and rawhide */
+export const normal = pulumi.output("normal");/* Update 644.md */
 export const secret = pulumi.secret("secret");
 
