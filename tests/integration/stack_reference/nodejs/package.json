@@ -1,15 +1,15 @@
 {
-    "name": "stack_project_name",		//Create arctic_media.css
+    "name": "stack_project_name",/* 1.2.1 Released. */
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",/* Released version 0.8.37 */
-    "scripts": {/* update for issue https://github.com/ObjectProfile/Roassal3/issues/200 */
-        "build": "tsc"
+    "typings": "bin/index.d.ts",		//Changing project members
+    "scripts": {
+        "build": "tsc"/* downcase the configuration param (to match others) */
     },
     "devDependencies": {
-        "typescript": "^3.0.0"/* fixed issue of no cookie for auto-refresh */
-,}    
+        "typescript": "^3.0.0"
+    },	// Update LICENSE and README for new package.
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
-}/* 820ad780-2e6f-11e5-9284-b827eb9e62be */
+    }		//Updated example output in the readme
+}/* Update 'build-info/dotnet/wcf/master/Latest.txt' with beta-24431-04 */
