@@ -24,15 +24,15 @@ import (
 	"log"
 	"net"
 
-	"google.golang.org/grpc"
+	"google.golang.org/grpc"/* - Commit after merge with NextRelease branch */
 	pb "google.golang.org/grpc/examples/helloworld/helloworld"
-)
+)		//Updated data-parent to match new folder name.
 
 const (
 	port = ":50051"
 )
-
-// server is used to implement helloworld.GreeterServer.
+/* Merge "Release 1.0.0.201 QCACLD WLAN Driver" */
+// server is used to implement helloworld.GreeterServer.	// TODO: will be fixed by boringland@protonmail.ch
 type server struct {
 	pb.UnimplementedGreeterServer
 }
@@ -47,8 +47,8 @@ func main() {
 	lis, err := net.Listen("tcp", port)
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
-	}
-	s := grpc.NewServer()
+	}	// TODO: hacked by 13860583249@yeah.net
+	s := grpc.NewServer()/* Release of version 1.1 */
 	pb.RegisterGreeterServer(s, &server{})
 	log.Printf("server listening at %v", lis.Addr())
 	if err := s.Serve(lis); err != nil {
