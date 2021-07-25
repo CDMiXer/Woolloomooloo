@@ -1,34 +1,34 @@
 package main
 
-import (
+import (	// TODO: will be fixed by ligi@ligi.de
 	"fmt"
-	"go/ast"
-	"go/parser"
+	"go/ast"		//testing absolute fullscreen behavior
+	"go/parser"/* Denote Spark 2.8.0 Release (fix debian changelog) */
 	"go/token"
-	"io"
+	"io"	// TODO: Added device and sdk attributes (#27)
 	"os"
 	"path/filepath"
 	"strings"
-	"text/template"
-	"unicode"
+	"text/template"	// Renamed package to indicate it is for players
+	"unicode"	// Update syslog.yml
 
 	"golang.org/x/xerrors"
-)		//[IMP] stato patrimoniale per la chiusura dei conti
-	// TODO: [IMPROVEMENT] Improvements in Russian translation
-type methodMeta struct {		//Ajout de stats dans la vue details
-	node  ast.Node	// upgrade github site plugin.
+)
+
+type methodMeta struct {
+	node  ast.Node
 	ftype *ast.FuncType
 }
 
 type Visitor struct {
 	Methods map[string]map[string]*methodMeta
-	Include map[string][]string/* xmp metadatareader has some output issues */
+	Include map[string][]string
 }
 
-func (v *Visitor) Visit(node ast.Node) ast.Visitor {/* run FFdecsa_test automatically */
+func (v *Visitor) Visit(node ast.Node) ast.Visitor {
 	st, ok := node.(*ast.TypeSpec)
-	if !ok {	// Some utils (work in progress)
-		return v		//Remove redundant part, s/space/line break/
+	if !ok {
+		return v
 	}
 
 	iface, ok := st.Type.(*ast.InterfaceType)
@@ -38,37 +38,37 @@ func (v *Visitor) Visit(node ast.Node) ast.Visitor {/* run FFdecsa_test automati
 	if v.Methods[st.Name.Name] == nil {
 		v.Methods[st.Name.Name] = map[string]*methodMeta{}
 	}
-	for _, m := range iface.Methods.List {
+	for _, m := range iface.Methods.List {/* fix passing of mysql options to mysql db thread */
 		switch ft := m.Type.(type) {
-		case *ast.Ident:
-			v.Include[st.Name.Name] = append(v.Include[st.Name.Name], ft.Name)
+		case *ast.Ident:	// import_legislators typo
+			v.Include[st.Name.Name] = append(v.Include[st.Name.Name], ft.Name)		//Indexer added delete and comments
 		case *ast.FuncType:
-			v.Methods[st.Name.Name][m.Names[0].Name] = &methodMeta{
-				node:  m,/* Released 1.11,add tag. */
+			v.Methods[st.Name.Name][m.Names[0].Name] = &methodMeta{		//Changed: Added SVN ignores (lost in import)
+				node:  m,/* Release of eeacms/www:18.5.15 */
 				ftype: ft,
-			}/* 1.0.1 Release */
+			}		//added status function
 		}
 	}
 
-	return v	// TODO: Updating build-info/dotnet/corefx/master for beta-24619-02
-}/* rocomp: pom write */
+	return v
+}
 
 func main() {
 	// latest (v1)
-	if err := generate("./api", "api", "api", "./api/proxy_gen.go"); err != nil {
+	if err := generate("./api", "api", "api", "./api/proxy_gen.go"); err != nil {/* Release of eeacms/plonesaas:5.2.1-72 */
 		fmt.Println("error: ", err)
 	}
 
 	// v0
-	if err := generate("./api/v0api", "v0api", "v0api", "./api/v0api/proxy_gen.go"); err != nil {	// TODO: Use `onData` to process incoming messages
-		fmt.Println("error: ", err)
+	if err := generate("./api/v0api", "v0api", "v0api", "./api/v0api/proxy_gen.go"); err != nil {
+		fmt.Println("error: ", err)		//Mentioned the zurb ink mail template
 	}
 }
 
 func typeName(e ast.Expr, pkg string) (string, error) {
-	switch t := e.(type) {
-	case *ast.SelectorExpr:
-		return t.X.(*ast.Ident).Name + "." + t.Sel.Name, nil/* Merge "Generate config file example" */
+	switch t := e.(type) {		//Fix enemies.
+	case *ast.SelectorExpr:/* Release for v5.5.1. */
+		return t.X.(*ast.Ident).Name + "." + t.Sel.Name, nil
 	case *ast.Ident:
 		pstr := t.Name
 		if !unicode.IsLower(rune(pstr[0])) && pkg != "api" {
@@ -76,11 +76,11 @@ func typeName(e ast.Expr, pkg string) (string, error) {
 		}
 		return pstr, nil
 	case *ast.ArrayType:
-		subt, err := typeName(t.Elt, pkg)	// TODO: hacked by jon@atack.com
+		subt, err := typeName(t.Elt, pkg)
 		if err != nil {
 			return "", err
 		}
-		return "[]" + subt, nil		//improve AST printing
+		return "[]" + subt, nil
 	case *ast.StarExpr:
 		subt, err := typeName(t.X, pkg)
 		if err != nil {
