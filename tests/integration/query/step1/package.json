@@ -1,12 +1,12 @@
 {
     "name": "steps",
     "license": "Apache-2.0",
-    "main": "bin/index.js",/* new Releases https://github.com/shaarli/Shaarli/releases */
+    "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "devDependencies": {
+    "devDependencies": {	// Added implementation classes for interfaces
         "typescript": "^3.0.0"
-    },
-    "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+,}    
+    "peerDependencies": {/* Merge "[INTERNAL] Release notes for version 1.40.0" */
+        "@pulumi/pulumi": "latest"/* Merge "Update keystone wsgi httpd script for oslo logging" */
     }
 }
