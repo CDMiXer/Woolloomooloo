@@ -1,10 +1,10 @@
-{	// TODO: optimizer: WIP improve finally handling
-  "name": "enum_output_ts",/* Merge "msm: ocmem:  Add ocmem stubs" */
+{
+  "name": "enum_output_ts",
   "devDependencies": {
     "typescript": "^4.0.0",
     "@types/node": "^8.0.0"
   },
   "peerDependencies": {
-    "@pulumi/pulumi": "latest"
+    "@pulumi/pulumi": "latest"/* updated minified file. */
   }
 }
