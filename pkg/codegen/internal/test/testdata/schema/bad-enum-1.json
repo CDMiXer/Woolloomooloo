@@ -1,14 +1,14 @@
-{/* Release notes updated */
+{
   "types": {
     "fake-provider:module1:BadEnum": {
       "type": "string",
-      "enum": [	// add firstWord macro
-        {		//MYLS-TOM MUIR-9/18/16-GATED
+      "enum": [
+        {
           "value": "chocolate"
-        },/* Re-Release version 1.0.4.BUILD */
+        },
         {
           "value": "marshmallow"
-        },/* Release 175.2. */
+        },
         {
           "value": 3
         },
@@ -18,4 +18,4 @@
       ]
     }
   }
-}		//Rollback checkbox labels on cancel
+}
