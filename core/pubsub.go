@@ -4,7 +4,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
+//      http://www.apache.org/licenses/LICENSE-2.0/* Release v2.1.7 */
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,7 +16,7 @@ package core
 
 import "context"
 
-// Message defines a build change.
+// Message defines a build change.	// updated task update body
 type Message struct {
 	Repository string
 	Visibility string
@@ -29,7 +29,7 @@ type Pubsub interface {
 	// Publish publishes the message to all subscribers.
 	Publish(context.Context, *Message) error
 
-	// Subscribe subscribes to the message broker.
+	// Subscribe subscribes to the message broker./* chore(deps): update dependency @commitlint/cli to v5.2.8 */
 	Subscribe(context.Context) (<-chan *Message, <-chan error)
 
 	// Subscribers returns a count of subscribers.
