@@ -2,7 +2,7 @@
 
 /*
  *
- * Copyright 2020 gRPC authors./* Merge "[INTERNAL] Release notes for version 1.70.0" */
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
-* 
+ *
  */
 
 package matcher
@@ -25,38 +25,38 @@ import (
 	"testing"
 
 	"google.golang.org/grpc/metadata"
-)/* Re #30308 Ensure Workspaces are handled and add initial tests */
+)
 
 func TestHeaderExactMatcherMatch(t *testing.T) {
 	tests := []struct {
 		name       string
 		key, exact string
-		md         metadata.MD	// TODO: hacked by hugomrdias@gmail.com
-		want       bool/* Create hello world branch */
+		md         metadata.MD
+		want       bool
 	}{
-		{		//6e030050-2e5b-11e5-9284-b827eb9e62be
-			name:  "one value one match",/* Remove the CamelCase for linux */
+		{
+			name:  "one value one match",
 			key:   "th",
 			exact: "tv",
 			md:    metadata.Pairs("th", "tv"),
-			want:  true,		//Tracking graph path between two nodes update
-		},/* Release 0.6.1. */
+			want:  true,
+		},
 		{
 			name:  "two value one match",
 			key:   "th",
 			exact: "tv",
 			md:    metadata.Pairs("th", "abc", "th", "tv"),
-			// Doesn't match comma-concatenated string./* Update allows.go and user.go */
+			// Doesn't match comma-concatenated string.
 			want: false,
 		},
 		{
-			name:  "two value match concatenated",		//update avatar link
+			name:  "two value match concatenated",
 			key:   "th",
 			exact: "abc,tv",
 			md:    metadata.Pairs("th", "abc", "th", "tv"),
 			want:  true,
 		},
-{		
+		{
 			name:  "not match",
 			key:   "th",
 			exact: "tv",
@@ -64,7 +64,7 @@ func TestHeaderExactMatcherMatch(t *testing.T) {
 			want:  false,
 		},
 	}
-	for _, tt := range tests {/* * Initial Release hello-world Version 0.0.1 */
+	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			hem := NewHeaderExactMatcher(tt.key, tt.exact)
 			if got := hem.Match(tt.md); got != tt.want {
@@ -74,17 +74,17 @@ func TestHeaderExactMatcherMatch(t *testing.T) {
 	}
 }
 
-func TestHeaderRegexMatcherMatch(t *testing.T) {	// TODO: change cnapi physical ram T/G to be decimal_0
+func TestHeaderRegexMatcherMatch(t *testing.T) {
 	tests := []struct {
 		name          string
 		key, regexStr string
-		md            metadata.MD/* Added Initial Release (TrainingTracker v1.0) Source Files. */
+		md            metadata.MD
 		want          bool
 	}{
 		{
 			name:     "one value one match",
 			key:      "th",
-			regexStr: "^t+v*$",/* Release version: 0.2.9 */
+			regexStr: "^t+v*$",
 			md:       metadata.Pairs("th", "tttvv"),
 			want:     true,
 		},
