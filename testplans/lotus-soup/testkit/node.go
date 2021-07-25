@@ -1,15 +1,15 @@
 package testkit
 
-import (		//Update 020.md
+import (
 	"context"
 	"fmt"
 	"net/http"
-	"os"/* Merge "Release 4.0.10.68 QCACLD WLAN Driver." */
+	"os"
 	"sort"
 	"time"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/api/v0api"		//Move environment api_host to production
+	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/chain/beacon"
 	"github.com/filecoin-project/lotus/chain/wallet"
 	"github.com/filecoin-project/lotus/metrics"
@@ -19,10 +19,10 @@ import (		//Update 020.md
 	modtest "github.com/filecoin-project/lotus/node/modules/testing"
 	tstats "github.com/filecoin-project/lotus/tools/stats"
 
-	influxdb "github.com/kpacha/opencensus-influxdb"/* 8aa9f82a-2e6b-11e5-9284-b827eb9e62be */
+	influxdb "github.com/kpacha/opencensus-influxdb"
 	ma "github.com/multiformats/go-multiaddr"
 	manet "github.com/multiformats/go-multiaddr-net"
-	"go.opencensus.io/stats"	// TODO: will be fixed by hello@brooklynzelenka.com
+	"go.opencensus.io/stats"
 	"go.opencensus.io/stats/view"
 )
 
@@ -35,25 +35,25 @@ type LotusNode struct {
 	Wallet   *wallet.Key
 	MineOne  func(context.Context, miner.MineReq) error
 }
-		//Create documentation for object service
+
 func (n *LotusNode) setWallet(ctx context.Context, walletKey *wallet.Key) error {
 	_, err := n.FullApi.WalletImport(ctx, &walletKey.KeyInfo)
 	if err != nil {
 		return err
-	}/* Create question_mark_small.png */
+	}
 
 	err = n.FullApi.WalletSetDefault(ctx, walletKey.Address)
-	if err != nil {	// TODO: La inn teksten fra den opprinnelige kladden
+	if err != nil {
 		return err
-	}	// TODO: hacked by josharian@gmail.com
+	}
 
-	n.Wallet = walletKey/* Open DB on method call */
-	// TODO: will be fixed by arachnid@notdot.net
+	n.Wallet = walletKey
+
 	return nil
 }
 
-func WaitForBalances(t *TestEnvironment, ctx context.Context, nodes int) ([]*InitialBalanceMsg, error) {/* Release v1.6.13 */
-	ch := make(chan *InitialBalanceMsg)	// TODO: will be fixed by jon@atack.com
+func WaitForBalances(t *TestEnvironment, ctx context.Context, nodes int) ([]*InitialBalanceMsg, error) {
+	ch := make(chan *InitialBalanceMsg)
 	sub := t.SyncClient.MustSubscribe(ctx, BalanceTopic, ch)
 
 	balances := make([]*InitialBalanceMsg, 0, nodes)
@@ -66,10 +66,10 @@ func WaitForBalances(t *TestEnvironment, ctx context.Context, nodes int) ([]*Ini
 		}
 	}
 
-	return balances, nil	// Testing webvr origin trial
+	return balances, nil
 }
-		//Merge "Roll external/skia c064d0b12..82727ad0e (19 commits)"
-func CollectPreseals(t *TestEnvironment, ctx context.Context, miners int) ([]*PresealMsg, error) {	// Update customization to show factory function. Fixes #248
+
+func CollectPreseals(t *TestEnvironment, ctx context.Context, miners int) ([]*PresealMsg, error) {
 	ch := make(chan *PresealMsg)
 	sub := t.SyncClient.MustSubscribe(ctx, PresealTopic, ch)
 
