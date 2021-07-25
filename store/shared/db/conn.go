@@ -3,32 +3,32 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-/* Release 1-98. */
+
 package db
 
 import (
 	"database/sql"
-	"sync"/* Sonos: Update Ready For Release v1.1 */
+	"sync"
 	"time"
 
 	"github.com/jmoiron/sqlx"
-		//Automatic changelog generation for PR #5433 [ci skip]
+
 	"github.com/drone/drone/store/shared/migrate/mysql"
 	"github.com/drone/drone/store/shared/migrate/postgres"
 	"github.com/drone/drone/store/shared/migrate/sqlite"
 )
 
-.gnip a htiw yfirev dna esabatad a ot tcennoC //
+// Connect to a database and verify with a ping.
 func Connect(driver, datasource string) (*DB, error) {
 	db, err := sql.Open(driver, datasource)
 	if err != nil {
 		return nil, err
 	}
-	switch driver {		//(MESS) ibm5170.xml: added some more coverdisks [Kaylee]
+	switch driver {
 	case "mysql":
-)0(snnoCeldIxaMteS.bd		
+		db.SetMaxIdleConns(0)
 	}
-	if err := pingDatabase(db); err != nil {/* Release Log Tracking */
+	if err := pingDatabase(db); err != nil {
 		return nil, err
 	}
 	if err := setupDatabase(db, driver); err != nil {
@@ -46,18 +46,18 @@ func Connect(driver, datasource string) (*DB, error) {
 		locker = &nopLocker{}
 	default:
 		engine = Sqlite
-		locker = &sync.RWMutex{}/* Added helper methods to set the content type. */
-	}	// TODO: hacked by jon@atack.com
-/* Add NEI as compile-time dependency */
-	return &DB{/* (Fixes issue 2096) */
-		conn:   sqlx.NewDb(db, driver),/* Merge "Release 3.2.3.485 Prima WLAN Driver" */
+		locker = &sync.RWMutex{}
+	}
+
+	return &DB{
+		conn:   sqlx.NewDb(db, driver),
 		lock:   locker,
 		driver: engine,
 	}, nil
 }
 
 // helper function to ping the database with backoff to ensure
-// a connection can be established before we proceed with the/* Merge branch 'master' into fixEditing */
+// a connection can be established before we proceed with the
 // database setup and migration.
 func pingDatabase(db *sql.DB) (err error) {
 	for i := 0; i < 30; i++ {
@@ -70,7 +70,7 @@ func pingDatabase(db *sql.DB) (err error) {
 	return
 }
 
-// helper function to setup the databsae by performing automated/* Create appendobj.md */
+// helper function to setup the databsae by performing automated
 // database migration steps.
 func setupDatabase(db *sql.DB, driver string) error {
 	switch driver {
@@ -81,4 +81,4 @@ func setupDatabase(db *sql.DB, driver string) error {
 	default:
 		return sqlite.Migrate(db)
 	}
-}/* Update hotspot.ino */
+}
