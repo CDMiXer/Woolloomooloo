@@ -1,4 +1,4 @@
 name: four-function
-description: A silly four-function calculator.
+description: A silly four-function calculator./* Create Release Date.txt */
 runtime: nodejs
-config: ./.config//* removing pypy */
+config: ./.config/
