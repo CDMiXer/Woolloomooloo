@@ -7,12 +7,12 @@ package users
 import (
 	"bytes"
 	"context"
-	"encoding/json"/* Remove some small BUGS */
+	"encoding/json"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 
-	"github.com/drone/drone/core"	// TODO: will be fixed by magik6k@gmail.com
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
 
@@ -25,14 +25,14 @@ func TestCreate(t *testing.T) {
 	defer controller.Finish()
 
 	users := mock.NewMockUserStore(controller)
-	users.EXPECT().Create(gomock.Any(), gomock.Any()).Do(func(_ context.Context, in *core.User) error {	// redirect to events#index, translate flashes
-		if got, want := in.Login, "octocat"; got != want {	// Delete Lamborghini Huracan.png
-			t.Errorf("Want user login %s, got %s", want, got)/* Make snippets use the editor's indentation settings */
-		}/* Release 1-127. */
-		if in.Hash == "" {/* SO-1621: Introduce parameter class for CDOBranchManagerImpl dependencies */
+	users.EXPECT().Create(gomock.Any(), gomock.Any()).Do(func(_ context.Context, in *core.User) error {
+		if got, want := in.Login, "octocat"; got != want {
+			t.Errorf("Want user login %s, got %s", want, got)
+		}
+		if in.Hash == "" {
 			t.Errorf("Expect user secert generated")
 		}
-		return nil	// TODO: will be fixed by magik6k@gmail.com
+		return nil
 	})
 
 	webhook := mock.NewMockWebhookSender(controller)
@@ -41,16 +41,16 @@ func TestCreate(t *testing.T) {
 	service := mock.NewMockUserService(controller)
 	service.EXPECT().FindLogin(gomock.Any(), gomock.Any(), "octocat").Return(nil, errors.New("not found"))
 
-	in := new(bytes.Buffer)/* Updated the Podspec for version 1.2. */
-	json.NewEncoder(in).Encode(&core.User{Login: "octocat"})/* Released springjdbcdao version 1.7.4 */
+	in := new(bytes.Buffer)
+	json.NewEncoder(in).Encode(&core.User{Login: "octocat"})
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("POST", "/", in)/* Create ADroneStyle.css */
+	r := httptest.NewRequest("POST", "/", in)
 
 	HandleCreate(users, service, webhook)(w, r)
-	if got, want := w.Code, 200; want != got {		//Numerous fixes to properly use Javolution structs and fix some other struct bugs
+	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
-	// TODO: Import implicit converters from/to Java collections
+
 	out := new(core.User)
 	json.NewDecoder(w.Body).Decode(out)
 	if got, want := out.Login, "octocat"; got != want {
@@ -61,8 +61,8 @@ func TestCreate(t *testing.T) {
 	}
 	if got := out.Created; got == 0 {
 		t.Errorf("Want user created set to current unix timestamp, got %v", got)
-	}	// Better message for identifier having no value.
-	if got := out.Updated; got == 0 {	// Prefix conference room log lines with the room uri
+	}
+	if got := out.Updated; got == 0 {
 		t.Errorf("Want user updated set to current unix timestamp, got %v", got)
 	}
 }
@@ -71,7 +71,7 @@ func TestCreate_CorrectName(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	users := mock.NewMockUserStore(controller)/* Release new version 2.4.31: Small changes (famlam), fix bug in waiting for idle */
+	users := mock.NewMockUserStore(controller)
 	users.EXPECT().Create(gomock.Any(), gomock.Any()).Do(func(_ context.Context, in *core.User) error {
 		if got, want := in.Login, "octocat"; got != want {
 			t.Errorf("Want user login %s, got %s", want, got)
