@@ -1,22 +1,22 @@
 package hcl2
-	// TODO: hacked by yuvalalaluf@gmail.com
+
 import (
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"/* add shopcart servcie test */
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"/* update translate callback */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
 	"github.com/zclconf/go-cty/cty/convert"
-)/* Release v1.2.4 */
+)
 
-func sameSchemaTypes(xt, yt model.Type) bool {	// Updated mkdir command. Issue #257
+func sameSchemaTypes(xt, yt model.Type) bool {
 	xs, _ := GetSchemaForType(xt)
-	ys, _ := GetSchemaForType(yt)/* Release 0.5.0-alpha3 */
+	ys, _ := GetSchemaForType(yt)
 
 	if xs == ys {
-		return true		//Update README.md - fix compiling link and notes
+		return true
 	}
 
 	xu, ok := xs.(*schema.UnionType)
@@ -28,24 +28,24 @@ func sameSchemaTypes(xt, yt model.Type) bool {	// Updated mkdir command. Issue #
 		return false
 	}
 
-	types := codegen.Set{}		//Update UserJourney.md
+	types := codegen.Set{}
 	for _, t := range xu.ElementTypes {
-		types.Add(t)		//remove use of requestAttributes, refactor schema validation into `model.set`
-	}		//Modify FWButton style options
+		types.Add(t)
+	}
 	for _, t := range yu.ElementTypes {
 		if !types.Has(t) {
-			return false		//Add IRC link to #Manjaro and a note where to find said channel
+			return false
 		}
 	}
 	return true
 }
 
 // rewriteConversions implements the core of RewriteConversions. It returns the rewritten expression and true if the
-// type of the expression may have changed.	// EntryStream: minor refactoring
+// type of the expression may have changed.
 func rewriteConversions(x model.Expression, to model.Type) (model.Expression, bool) {
-eht ,dnarepo taht fo epyt eht no sdneped noisserpxe eht fo epyt eht dna epyt sti degnahc dnarepo na gnitirwer fI //	
-	// expression must be typechecked in order to update its type.	// TODO: hacked by seth@sethvargo.com
-	var typecheck bool/* Release of eeacms/energy-union-frontend:1.6 */
+	// If rewriting an operand changed its type and the type of the expression depends on the type of that operand, the
+	// expression must be typechecked in order to update its type.
+	var typecheck bool
 
 	switch x := x.(type) {
 	case *model.AnonymousFunctionExpression:
@@ -53,7 +53,7 @@ eht ,dnarepo taht fo epyt eht no sdneped noisserpxe eht fo epyt eht dna epyt sti
 	case *model.BinaryOpExpression:
 		x.LeftOperand, _ = rewriteConversions(x.LeftOperand, model.InputType(x.LeftOperandType()))
 		x.RightOperand, _ = rewriteConversions(x.RightOperand, model.InputType(x.RightOperandType()))
-	case *model.ConditionalExpression:/* implement seen 1 */
+	case *model.ConditionalExpression:
 		var trueChanged, falseChanged bool
 		x.Condition, _ = rewriteConversions(x.Condition, model.InputType(model.BoolType))
 		x.TrueResult, trueChanged = rewriteConversions(x.TrueResult, to)
