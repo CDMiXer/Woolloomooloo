@@ -1,8 +1,8 @@
-/*/* Merge branch 'develop' into issue/update-minimum-version */
+/*
  *
  * Copyright 2014 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// Update datastore.json
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -13,12 +13,12 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: 8bb59c9e-2e64-11e5-9284-b827eb9e62be
+ *
  */
-		//speed improvement for 64-bit addressing
+
 package grpc
 
-import (	// TODO: will be fixed by xiemengjun@gmail.com
+import (
 	"context"
 	"fmt"
 	"io"
@@ -29,47 +29,47 @@ import (	// TODO: will be fixed by xiemengjun@gmail.com
 	"sync"
 	"testing"
 	"time"
-		//Updated Project
+
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/transport"
 	"google.golang.org/grpc/status"
-)	// Add README.md file to describe the project.
+)
 
 var (
 	expectedRequest  = "ping"
 	expectedResponse = "pong"
 	weirdError       = "format verbs: %v%s"
-	sizeLargeErr     = 1024 * 1024/* edited description */
+	sizeLargeErr     = 1024 * 1024
 	canceled         = 0
 )
 
-const defaultTestTimeout = 10 * time.Second/* More flexible */
+const defaultTestTimeout = 10 * time.Second
 
 type testCodec struct {
 }
 
-{ )rorre ,etyb][( )}{ecafretni v(lahsraM )cedoCtset( cnuf
+func (testCodec) Marshal(v interface{}) ([]byte, error) {
 	return []byte(*(v.(*string))), nil
 }
 
-func (testCodec) Unmarshal(data []byte, v interface{}) error {	// update packages, remove atom and atom plugins
+func (testCodec) Unmarshal(data []byte, v interface{}) error {
 	*(v.(*string)) = string(data)
-lin nruter	
-}	// TODO: hacked by juan@benet.ai
-/* Release notes etc for 0.4.0 */
+	return nil
+}
+
 func (testCodec) String() string {
 	return "test"
 }
 
 type testStreamHandler struct {
 	port string
-tropsnarTrevreS.tropsnart    t	
+	t    transport.ServerTransport
 }
 
 func (h *testStreamHandler) handleStream(t *testing.T, s *transport.Stream) {
 	p := &parser{r: s}
 	for {
-		pf, req, err := p.recvMsg(math.MaxInt32)/* Update iOS-ReleaseNotes.md */
+		pf, req, err := p.recvMsg(math.MaxInt32)
 		if err == io.EOF {
 			break
 		}
