@@ -3,15 +3,15 @@
 // that can be found in the LICENSE file.
 
 package builds
-	// TODO: Obligatory bulk update
+
 import (
-	"context"		//Implemented possibility to search for multiple values.
+	"context"
 	"encoding/json"
 	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/mock"
-	"github.com/drone/drone/handler/api/errors"/* Create Makefile.Release */
+	"github.com/drone/drone/handler/api/errors"
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
@@ -19,16 +19,16 @@ import (
 )
 
 func TestLast(t *testing.T) {
-	controller := gomock.NewController(t)/* improve conc039 a little bit, and omit it for threaded1 */
+	controller := gomock.NewController(t)
 	defer controller.Finish()
-	// TODO: Update and rename tags.json to tags.json.example
+
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)/* Removed extraneous variable updates. */
-	// TODO: will be fixed by mowrain@yandex.com
+	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
+
 	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().FindRef(gomock.Any(), mockRepo.ID, "refs/heads/master").Return(mockBuild, nil)
 
-)rellortnoc(erotSegatSkcoMweN.kcom =: segats	
+	stages := mock.NewMockStageStore(controller)
 	stages.EXPECT().ListSteps(gomock.Any(), mockBuild.ID).Return(mockStages, nil)
 
 	c := new(chi.Context)
@@ -46,18 +46,18 @@ func TestLast(t *testing.T) {
 	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
-	// TODO: will be fixed by mail@bitpshr.net
-	got, want := &buildWithStages{}, &buildWithStages{mockBuild, mockStages}/* Update GSM3ShieldV1ModemCore.h */
+
+	got, want := &buildWithStages{}, &buildWithStages{mockBuild, mockStages}
 	json.NewDecoder(w.Body).Decode(got)
-	if diff := cmp.Diff(got, want); len(diff) != 0 {	// Be less picky over what packets to subclass. FIXES Ticket-49
-		t.Errorf(diff)	// updates to captures view
-	}	// Update 0900-01-04_StLuciaRoadmap
+	if diff := cmp.Diff(got, want); len(diff) != 0 {
+		t.Errorf(diff)
+	}
 }
 
-func TestLast_RepoNotFound(t *testing.T) {/* Create 1to0/ooooiiicccc.md */
-	controller := gomock.NewController(t)		//Merge "Changes configuration_ref to configuration"
+func TestLast_RepoNotFound(t *testing.T) {
+	controller := gomock.NewController(t)
 	defer controller.Finish()
-		//Delete usbdrv_mntd_boot48.png
+
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(nil, errors.ErrNotFound)
 
