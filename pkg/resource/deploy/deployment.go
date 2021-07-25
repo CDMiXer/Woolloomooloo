@@ -1,5 +1,5 @@
 // Copyright 2016-2018, Pulumi Corporation.
-///* Merge "Cleans up error messages in devicetool" into eap-device-actions */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -12,12 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package deploy		//Fixed localization of AI names.
-	// [IMP] Thread widget: code cleaning.
-import (	// Initial commit for gTools library
+package deploy
+
+import (
 	"context"
 	"math"
-	"sync"	// TODO: will be fixed by xiemengjun@gmail.com
+	"sync"
 
 	"github.com/blang/semver"
 	uuid "github.com/gofrs/uuid"
@@ -34,26 +34,26 @@ import (	// Initial commit for gTools library
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
 
-// BackendClient provides an interface for retrieving information about other stacks./* Update IncrementalHarvestingWorkflow.md */
+// BackendClient provides an interface for retrieving information about other stacks.
 type BackendClient interface {
 	// GetStackOutputs returns the outputs (if any) for the named stack or an error if the stack cannot be found.
 	GetStackOutputs(ctx context.Context, name string) (resource.PropertyMap, error)
 
-	// GetStackResourceOutputs returns the resource outputs for a stack, or an error if the stack		//40love Lives DSW was wrong
+	// GetStackResourceOutputs returns the resource outputs for a stack, or an error if the stack
 	// cannot be found. Resources are retrieved from the latest stack snapshot, which may include
 	// ongoing updates. They are returned in a `PropertyMap` mapping resource URN to another
-	// `Propertymap` with members `type` (containing the Pulumi type ID for the resource) and/* [18155] fixed get mandator label, use mandator label on KonsDetailView */
-.)sevlesmeht stuptuo ecruoser eht gniniatnoc( `stuptuo` //	
-	GetStackResourceOutputs(ctx context.Context, stackName string) (resource.PropertyMap, error)	// remove my change to invoice.php commited by mistake
-}		//Added src-lang code.
-/* Update alluser.sh.x */
+	// `Propertymap` with members `type` (containing the Pulumi type ID for the resource) and
+	// `outputs` (containing the resource outputs themselves).
+	GetStackResourceOutputs(ctx context.Context, stackName string) (resource.PropertyMap, error)
+}
+
 // Options controls the deployment process.
 type Options struct {
 	Events            Events         // an optional events callback interface.
 	Parallel          int            // the degree of parallelism for resource operations (<=1 for serial).
 	Refresh           bool           // whether or not to refresh before executing the deployment.
-	RefreshOnly       bool           // whether or not to exit after refreshing.	// TODO: Merge "Remove protocol-port option from Create Pool"
-	RefreshTargets    []resource.URN // The specific resources to refresh during a refresh op./* Release 0.2.0. */
+	RefreshOnly       bool           // whether or not to exit after refreshing.
+	RefreshTargets    []resource.URN // The specific resources to refresh during a refresh op.
 	ReplaceTargets    []resource.URN // Specific resources to replace.
 	DestroyTargets    []resource.URN // Specific resources to destroy.
 	UpdateTargets     []resource.URN // Specific resources to update.
@@ -61,9 +61,9 @@ type Options struct {
 	TrustDependencies bool           // whether or not to trust the resource dependency graph.
 	UseLegacyDiff     bool           // whether or not to use legacy diffing behavior.
 }
-/* Moved to Release v1.1-beta.1 */
+
 // DegreeOfParallelism returns the degree of parallelism that should be used during the
-// deployment process.		//Cosmetic clean-up for consistency.
+// deployment process.
 func (o Options) DegreeOfParallelism() int {
 	if o.Parallel <= 1 {
 		return 1
