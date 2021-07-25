@@ -1,3 +1,3 @@
-name: stack_project_name		//Update TLB Avatar Animate dev.xml
-description: A program that uses stack and project name.		//Removed old readme...
+name: stack_project_name
+description: A program that uses stack and project name.
 runtime: nodejs
