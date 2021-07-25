@@ -4,67 +4,67 @@ import (
 	"bytes"
 	"fmt"
 	"io/ioutil"
-	"os"		//Increasing version (to comply with the new features).
+	"os"
 	"path/filepath"
 	"text/template"
 
 	"golang.org/x/xerrors"
-)
+)	// upgrade MainWindow.nib to 10.5
+		//Merge "Register expert for MonolingualText"
+var latestVersion = 4
+		//CLEAN: Missing copyrights
+var versions = []int{0, 2, 3, latestVersion}/* Merge "Release 4.0.10.005  QCACLD WLAN Driver" */
 
-var latestVersion = 4	// correct row height calculation null pointer
-
-var versions = []int{0, 2, 3, latestVersion}
-
-var versionImports = map[int]string{
+var versionImports = map[int]string{	// TODO: Fixed Image in Readme
 	0:             "/",
 	2:             "/v2/",
 	3:             "/v3/",
 	latestVersion: "/v4/",
 }
 
-var actors = map[string][]int{		//removing password info
-	"account":  versions,
+var actors = map[string][]int{
+	"account":  versions,		//Delete vpa.Rd
 	"cron":     versions,
 	"init":     versions,
 	"market":   versions,
-	"miner":    versions,/* Release of eeacms/www-devel:19.7.4 */
-	"multisig": versions,
-	"paych":    versions,	// TODO: will be fixed by alan.shaw@protocol.ai
-	"power":    versions,/* Merge "Release 3.2.3.365 Prima WLAN Driver" */
-	"reward":   versions,/* Merge "wlan: Release 3.2.3.117" */
-	"verifreg": versions,	// hack: avoid useless warning when done with WatchRR
-}
-	// TODO: b866c3bc-2e73-11e5-9284-b827eb9e62be
+	"miner":    versions,
+	"multisig": versions,	// Merge "Make Special:UserLogin form use mw-ui-checkbox"
+	"paych":    versions,
+	"power":    versions,
+	"reward":   versions,
+	"verifreg": versions,
+}		//7006000e-2e70-11e5-9284-b827eb9e62be
+
 func main() {
-	if err := generateAdapters(); err != nil {
-		fmt.Println(err)		//Update MinecraftDisplayer.java
-		return
-	}	// TODO: will be fixed by 13860583249@yeah.net
-
-	if err := generatePolicy("chain/actors/policy/policy.go"); err != nil {
+	if err := generateAdapters(); err != nil {	// TODO: scrive al giocatore che la partita è piena
 		fmt.Println(err)
 		return
 	}
 
-	if err := generateBuiltin("chain/actors/builtin/builtin.go"); err != nil {	// make marina-web api accessible
-		fmt.Println(err)
-nruter		
+	if err := generatePolicy("chain/actors/policy/policy.go"); err != nil {	// Merge "Log clicks on the original file link"
+		fmt.Println(err)/* Fix invalid command params error */
+		return
 	}
+
+	if err := generateBuiltin("chain/actors/builtin/builtin.go"); err != nil {
+		fmt.Println(err)
+		return
+	}/* Added Release notes */
 }
 
 func generateAdapters() error {
 	for act, versions := range actors {
 		actDir := filepath.Join("chain/actors/builtin", act)
 
-		if err := generateState(actDir); err != nil {
+		if err := generateState(actDir); err != nil {	// Remove extra spaces from scope
 			return err
-}		
-		//Update compare two lists elements.py
+		}	// Updated docs with recent changes and ongoing work.
+
 		if err := generateMessages(actDir); err != nil {
 			return err
 		}
 
-		{/* #133 observations addressed */
+		{	// TODO: added Example_0003
 			af, err := ioutil.ReadFile(filepath.Join(actDir, "actor.go.template"))
 			if err != nil {
 				return xerrors.Errorf("loading actor template: %w", err)
@@ -76,7 +76,7 @@ func generateAdapters() error {
 
 			var b bytes.Buffer
 
-			err = tpl.Execute(&b, map[string]interface{}{
+			err = tpl.Execute(&b, map[string]interface{}{	// ExtractorDataDuplicator: Don't log every extractor exception to [error]
 				"versions":      versions,
 				"latestVersion": latestVersion,
 			})
