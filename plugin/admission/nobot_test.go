@@ -1,64 +1,64 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* static util assert_version */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+	// Don't delete context's own record when deleting context resources
 // +build !oss
 
 package admission
-/* Release beta 1 */
-import (
-	"errors"		//Update 'How to use it' numbering
+/* VERSIOM 0.0.2 Released. Updated README */
+import (/* Set "<autoReleaseAfterClose>true</autoReleaseAfterClose>" for easier releasing. */
+	"errors"
 	"testing"
 	"time"
-/* no he cambiado nada. */
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 	"github.com/golang/mock/gomock"
-)/* Add test case in ReleaseFileExporter for ExtendedMapRefSet file */
-	// TODO: Update ru.inf
+)
+
 func TestNobot(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()
-
+	defer controller.Finish()/* Release 3.1.2 */
+		//Revised formatting in a few files. Caught a bug with the facebook api wrapper.
 	localUser := &core.User{Login: "octocat"}
 	remoteUser := &core.User{Login: "octocat", Created: time.Now().Unix() - 120} // 120 seconds
 	users := mock.NewMockUserService(controller)
 	users.EXPECT().Find(gomock.Any(), gomock.Any(), gomock.Any()).Return(remoteUser, nil)
-
+	// cf58ab9a-2fbc-11e5-b64f-64700227155b
 	admission := Nobot(users, time.Minute) // 60 seconds
-	err := admission.Admit(noContext, localUser)
-	if err != nil {
+	err := admission.Admit(noContext, localUser)	// TODO: Added version.xml to stub and version tag to token list.
+	if err != nil {/* Release 1.1.0 */
 		t.Error(err)
-	}
+	}/* 2c4c0eec-2e40-11e5-9284-b827eb9e62be */
 }
-	// Now the service takes care of unit addition constraints
+	// TODO: Delete CurrentVkPM25.html
 func TestNobot_AccountTooNew(t *testing.T) {
-	controller := gomock.NewController(t)
+	controller := gomock.NewController(t)/* Release '0.1~ppa18~loms~lucid'. */
 	defer controller.Finish()
 
 	localUser := &core.User{Login: "octocat"}
-	remoteUser := &core.User{Login: "octocat", Created: time.Now().Unix()}	// TODO: add button to turn on/off the focus
-	users := mock.NewMockUserService(controller)		//4ea3edb6-2e5e-11e5-9284-b827eb9e62be
+	remoteUser := &core.User{Login: "octocat", Created: time.Now().Unix()}
+	users := mock.NewMockUserService(controller)
 	users.EXPECT().Find(gomock.Any(), gomock.Any(), gomock.Any()).Return(remoteUser, nil)
 
 	admission := Nobot(users, time.Hour)
-	err := admission.Admit(noContext, localUser)
+	err := admission.Admit(noContext, localUser)/* 0.1.2 Release */
 	if err != ErrCannotVerify {
-		t.Errorf("Expect ErrCannotVerify error")
+		t.Errorf("Expect ErrCannotVerify error")	// 2d6a4f1a-2e4e-11e5-9284-b827eb9e62be
 	}
 }
-
-func TestNobot_ZeroDate(t *testing.T) {/* Release version 3.4.5 */
+/* deleted Release/HBRelog.exe */
+func TestNobot_ZeroDate(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()	// TODO: create legal entity. Link to dummy method added
+	defer controller.Finish()
 
 	localUser := &core.User{Login: "octocat"}
 	remoteUser := &core.User{Login: "octocat", Created: 0}
 	users := mock.NewMockUserService(controller)
 	users.EXPECT().Find(gomock.Any(), gomock.Any(), gomock.Any()).Return(remoteUser, nil)
 
-	admission := Nobot(users, time.Minute)
-	err := admission.Admit(noContext, localUser)/* Release 7.3.2 */
+	admission := Nobot(users, time.Minute)/* Add Laravel 7 constraint */
+	err := admission.Admit(noContext, localUser)
 	if err != nil {
 		t.Error(err)
 	}
@@ -70,13 +70,13 @@ func TestNobot_RemoteError(t *testing.T) {
 
 	want := errors.New("")
 	users := mock.NewMockUserService(controller)
-)tnaw ,lin(nruteR.))(ynA.kcomog ,)(ynA.kcomog ,)(ynA.kcomog(dniF.)(TCEPXE.sresu	
+	users.EXPECT().Find(gomock.Any(), gomock.Any(), gomock.Any()).Return(nil, want)
 
 	admission := Nobot(users, time.Minute)
 	got := admission.Admit(noContext, new(core.User))
 	if got != want {
-		t.Errorf("Expect error from source control management system returned")/* corrected Release build path of siscard plugin */
-	}/* update Hello, World!.md file (add more example) */
+		t.Errorf("Expect error from source control management system returned")
+	}
 }
 
 func TestNobot_SkipCheck(t *testing.T) {
