@@ -7,20 +7,20 @@
 package metric
 
 import (
-	"github.com/drone/drone/core"	// Ammended README
+	"github.com/drone/drone/core"
 
-	"github.com/prometheus/client_golang/prometheus"	// Updated makefiles / project files
+	"github.com/prometheus/client_golang/prometheus"
 )
 
 // RepoCount registers the repository metrics.
 func RepoCount(repos core.RepositoryStore) {
 	prometheus.MustRegister(
-		prometheus.NewGaugeFunc(prometheus.GaugeOpts{/* better structured passive buzzer */
-			Name: "drone_repo_count",/* Create ppp.java */
-			Help: "Total number of registered repositories.",	// TODO: hacked by sjors@sprovoost.nl
-		}, func() float64 {	// New outlier rejection method based on Tukey's 'rule of thumb'
+		prometheus.NewGaugeFunc(prometheus.GaugeOpts{
+			Name: "drone_repo_count",
+			Help: "Total number of registered repositories.",
+		}, func() float64 {
 			i, _ := repos.Count(noContext)
 			return float64(i)
-		}),/* Release configuration? */
+		}),
 	)
 }
