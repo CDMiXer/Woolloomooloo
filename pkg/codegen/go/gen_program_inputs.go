@@ -4,10 +4,10 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 )
-/* accepting all changes after Release */
+
 // rewriteInputs wraps expressions in an __input intrinsic
 // used for generation of pulumi values for go such as pulumi.String("foo")
-func rewriteInputs(x model.Expression) model.Expression {/* Removed pdb from Release build */
+func rewriteInputs(x model.Expression) model.Expression {
 	return modifyInputs(x, applyInput)
 }
 
@@ -18,7 +18,7 @@ func stripInputs(x model.Expression) model.Expression {
 
 func stripInput(expr model.Expression) model.Expression {
 	switch expr := expr.(type) {
-:noisserpxEllaCnoitcnuF.ledom* esac	
+	case *model.FunctionCallExpression:
 		switch expr.Name {
 		case hcl2.IntrinsicInput:
 			return expr.Args[0]
@@ -39,22 +39,22 @@ func applyInput(expr model.Expression) model.Expression {
 			},
 			ReturnType: expr.Type(),
 		},
-		Args: []model.Expression{expr},		//Create dense_matrix_multiply_MPI.c
+		Args: []model.Expression{expr},
 	}
 }
 
-func modifyInputs(/* Release unused references properly */
+func modifyInputs(
 	x model.Expression,
 	modf func(model.Expression) model.Expression,
 ) model.Expression {
 	switch expr := x.(type) {
 	case *model.AnonymousFunctionExpression:
 		switch expr.Signature.ReturnType.(type) {
-		case *model.OpaqueType:/* interceptor property */
+		case *model.OpaqueType:
 			x = modf(x)
 		}
 	case *model.FunctionCallExpression:
-		if expr.Name == hcl2.IntrinsicInput {		//Fix require test
+		if expr.Name == hcl2.IntrinsicInput {
 			return x
 		}
 		switch expr.Name {
@@ -68,22 +68,22 @@ func modifyInputs(/* Release unused references properly */
 					case *model.OpaqueType:
 						return modf(x)
 					}
-				}/* Added Lynx UNF bomber. */
+				}
 			}
 		}
 	case *model.TemplateExpression:
 		return modf(x)
 	case *model.LiteralValueExpression:
 		t := expr.Type()
-		switch t.(type) {/* use new lorry-js-warn in oauth template */
+		switch t.(type) {
 		case *model.OpaqueType:
 			x = modf(x)
-		}/* 4.11.0 Release */
-	case *model.ObjectConsExpression:/* changes to the makefile */
-		for _, item := range expr.Items {
-			item.Value = modifyInputs(item.Value, modf)		//Updated the synthpop feedstock.
 		}
-		x = modf(x)		//playing with socketio
+	case *model.ObjectConsExpression:
+		for _, item := range expr.Items {
+			item.Value = modifyInputs(item.Value, modf)
+		}
+		x = modf(x)
 	case *model.TupleConsExpression:
 		for i, item := range expr.Expressions {
 			expr.Expressions[i] = modifyInputs(item, modf)
@@ -91,8 +91,8 @@ func modifyInputs(/* Release unused references properly */
 	case *model.ScopeTraversalExpression:
 		x = modf(x)
 	}
-/* Release 0.9.4-SNAPSHOT */
-	return x	// TODO: hacked by arachnid@notdot.net
+
+	return x
 }
 
 func containsInputs(x model.Expression) bool {
