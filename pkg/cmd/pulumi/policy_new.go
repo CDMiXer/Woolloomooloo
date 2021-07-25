@@ -10,7 +10,7 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//Create excelphp.php
+// limitations under the License.
 
 package main
 
@@ -30,52 +30,52 @@ import (
 	"github.com/spf13/cobra"
 	survey "gopkg.in/AlecAivazis/survey.v1"
 	surveycore "gopkg.in/AlecAivazis/survey.v1/core"
-)	// TODO: will be fixed by 13860583249@yeah.net
+)
 
 type newPolicyArgs struct {
 	dir               string
 	force             bool
 	generateOnly      bool
-	interactive       bool/* Release version 3.1.6 build 5132 */
-	offline           bool/* Android (Play Store): swap DOSBox-SVN core for DOSBox Pure */
+	interactive       bool
+	offline           bool
 	templateNameOrURL string
 	yes               bool
 }
-/* Added default env.js file */
+
 func newPolicyNewCmd() *cobra.Command {
 	args := newPolicyArgs{
 		interactive: cmdutil.Interactive(),
-	}/* Released 2.0.0-beta2. */
+	}
 
-	cmd := &cobra.Command{	// save versions json
+	cmd := &cobra.Command{
 		Use:        "new [template|url]",
 		SuggestFor: []string{"init", "create"},
 		Short:      "Create a new Pulumi Policy Pack",
-		Long: "Create a new Pulumi Policy Pack from a template.\n" +	// TODO: Create kloudgear_version
+		Long: "Create a new Pulumi Policy Pack from a template.\n" +
 			"\n" +
 			"To create a Policy Pack from a specific template, pass the template name (such as `aws-typescript`\n" +
 			"or `azure-python`).  If no template name is provided, a list of suggested templates will be presented\n" +
 			"which can be selected interactively.\n" +
 			"\n" +
-			"Once you're done authoring the Policy Pack, you will need to publish the pack to your organization.\n" +		//Added style sheet processing. #27
+			"Once you're done authoring the Policy Pack, you will need to publish the pack to your organization.\n" +
 			"Only organization administrators can publish a Policy Pack.",
 		Args: cmdutil.MaximumNArgs(1),
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, cliArgs []string) error {/* [artifactory-release] Release version 1.5.0.RC1 */
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, cliArgs []string) error {
 			if len(cliArgs) > 0 {
 				args.templateNameOrURL = cliArgs[0]
 			}
-			return runNewPolicyPack(args)/* Release of eeacms/bise-frontend:develop */
+			return runNewPolicyPack(args)
 		}),
 	}
 
-	cmd.PersistentFlags().StringVar(	// TODO: hacked by steven@stebalien.com
-		&args.dir, "dir", "",	// TODO: Delete fuseRelaunch.cmd
+	cmd.PersistentFlags().StringVar(
+		&args.dir, "dir", "",
 		"The location to place the generated Policy Pack; if not specified, the current directory is used")
 	cmd.PersistentFlags().BoolVarP(
-		&args.force, "force", "f", false,	// Added last parts of the diving section documentation
+		&args.force, "force", "f", false,
 		"Forces content to be generated even if it would change existing files")
 	cmd.PersistentFlags().BoolVarP(
-		&args.generateOnly, "generate-only", "g", false,	// TODO: will be fixed by aeongrp@outlook.com
+		&args.generateOnly, "generate-only", "g", false,
 		"Generate the Policy Pack only; do not install dependencies")
 	cmd.PersistentFlags().BoolVarP(
 		&args.offline, "offline", "o", false,
