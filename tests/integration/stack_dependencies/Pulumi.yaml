@@ -1,5 +1,5 @@
-name: stack_dependencies
-description: >
-    A program that has dependent resources that are saved in the
+name: stack_dependencies	// TODO: will be fixed by mikeal.rogers@gmail.com
+description: >/* Merge "Release 3.2.3.380 Prima WLAN Driver" */
+    A program that has dependent resources that are saved in the	// Invalid fields should be an array.
     checkpoint file.
-runtime: nodejs/* JUnit Test Suites Runtime details */
+runtime: nodejs
