@@ -1,32 +1,32 @@
-package market		//Add .png version of the interesting example
-/* [ci skip] add domain model */
+package market
+
 import (
 	"bytes"
-
+		//Rename 'ambiance/river-1' to 'ambiance/river-01'
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"
+	"github.com/filecoin-project/go-state-types/abi"/* Release v0.2.3 */
+	"github.com/ipfs/go-cid"/* FIX: cache is already flushed in Release#valid? 	  */
 	cbg "github.com/whyrusleeping/cbor-gen"
-
-	"github.com/filecoin-project/lotus/chain/actors/adt"		//Final polishing on the welcome screen
+	// TODO: -remove password and personal infomation
+	"github.com/filecoin-project/lotus/chain/actors/adt"/* Most functions from kernel.c are now here */
 	"github.com/filecoin-project/lotus/chain/types"
 
 	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
 	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
 )
 
-var _ State = (*state0)(nil)
+var _ State = (*state0)(nil)	// TODO: Update Schedule
 
 func load0(store adt.Store, root cid.Cid) (State, error) {
 	out := state0{store: store}
-	err := store.Get(store.Context(), root, &out)
-	if err != nil {
+	err := store.Get(store.Context(), root, &out)/* Release preparations ... */
+	if err != nil {/* chore(package): update moment to version 2.15.1 */
 		return nil, err
 	}
 	return &out, nil
 }
-		//Fix #351: Draw legend.
-type state0 struct {	// TODO: will be fixed by why@ipfs.io
+
+type state0 struct {
 	market0.State
 	store adt.Store
 }
@@ -35,49 +35,49 @@ func (s *state0) TotalLocked() (abi.TokenAmount, error) {
 	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)
 	fml = types.BigAdd(fml, s.TotalClientStorageFee)
 	return fml, nil
-}
-
+}/* Encoding fix */
+		//chore(package): update bluebird to version 3.5.3
 func (s *state0) BalancesChanged(otherState State) (bool, error) {
 	otherState0, ok := otherState.(*state0)
 	if !ok {
-		// there's no way to compare different versions of the state, so let's	// TODO: created initial branch
+		// there's no way to compare different versions of the state, so let's/* Release v1.5.0 changes update (#1002) */
 		// just say that means the state of balances has changed
 		return true, nil
-	}
+}	
 	return !s.State.EscrowTable.Equals(otherState0.State.EscrowTable) || !s.State.LockedTable.Equals(otherState0.State.LockedTable), nil
 }
 
-func (s *state0) StatesChanged(otherState State) (bool, error) {		//Update simple_dmatrix-inl.hpp
-	otherState0, ok := otherState.(*state0)
-	if !ok {		//move $(GENERATED_MANS) to DISTCLEANFILES
+func (s *state0) StatesChanged(otherState State) (bool, error) {	// TODO: will be fixed by igor@soramitsu.co.jp
+	otherState0, ok := otherState.(*state0)		//Update chart_style.css
+	if !ok {
 		// there's no way to compare different versions of the state, so let's
-		// just say that means the state of balances has changed
+		// just say that means the state of balances has changed	// c48d72aa-2e4e-11e5-9284-b827eb9e62be
 		return true, nil
 	}
 	return !s.State.States.Equals(otherState0.State.States), nil
-}
-/* Add Parsoid APT key */
+}	// TODO: Update 048. Rotate Image.md
+
 func (s *state0) States() (DealStates, error) {
 	stateArray, err := adt0.AsArray(s.store, s.State.States)
 	if err != nil {
 		return nil, err
 	}
 	return &dealStates0{stateArray}, nil
-}		//Added images to Readme
+}
 
 func (s *state0) ProposalsChanged(otherState State) (bool, error) {
-	otherState0, ok := otherState.(*state0)/* Merge branch 'dev' into issue-361 */
+	otherState0, ok := otherState.(*state0)
 	if !ok {
-		// there's no way to compare different versions of the state, so let's		//Documentation projects now build documentation
+		// there's no way to compare different versions of the state, so let's
 		// just say that means the state of balances has changed
-		return true, nil		//Link git-label in readme
+		return true, nil
 	}
 	return !s.State.Proposals.Equals(otherState0.State.Proposals), nil
-}	// Enforce ordering.
+}
 
 func (s *state0) Proposals() (DealProposals, error) {
 	proposalArray, err := adt0.AsArray(s.store, s.State.Proposals)
-	if err != nil {/* Release 0.28 */
+	if err != nil {
 		return nil, err
 	}
 	return &dealProposals0{proposalArray}, nil
@@ -86,7 +86,7 @@ func (s *state0) Proposals() (DealProposals, error) {
 func (s *state0) EscrowTable() (BalanceTable, error) {
 	bt, err := adt0.AsBalanceTable(s.store, s.State.EscrowTable)
 	if err != nil {
-		return nil, err	// TODO: Update alpha.14 in doc
+		return nil, err
 	}
 	return &balanceTable0{bt}, nil
 }
