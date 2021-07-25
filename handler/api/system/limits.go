@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file.	// TODO: Create select-replication-commands-history.sql
 
-// +build !oss		//Adds contact details
+// +build !oss
 
 package system
