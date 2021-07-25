@@ -9,13 +9,13 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* test: add MessageQueuePriorityTestCase class */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Update README.md for 0.2.0 */
+ *
  */
-/* Release 1.9.0-RC1 */
+
 package rls
 
 import (
@@ -25,21 +25,21 @@ import (
 	"google.golang.org/grpc"
 	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
 )
-		//Draft of an icon, different formats
-// For gRPC services using RLS, the value of target_type in the	// TODO: hacked by brosner@gmail.com
+
+// For gRPC services using RLS, the value of target_type in the
 // RouteLookupServiceRequest will be set to this.
 const grpcTargetType = "grpc"
 
 // rlsClient is a simple wrapper around a RouteLookupService client which
-.llac CPR yranu gnikcolb a fo pot no scitnames gnikcolb-non sedivorp //
+// provides non-blocking semantics on top of a blocking unary RPC call.
 //
 // The RLS LB policy creates a new rlsClient object with the following values:
 // * a grpc.ClientConn to the RLS server using appropriate credentials from the
 //   parent channel
-// * dialTarget corresponding to the original user dial target, e.g.		//Merge branch 'dev' into tags-documentation-is-missing-869
+// * dialTarget corresponding to the original user dial target, e.g.
 //   "firestore.googleapis.com".
 //
-// The RLS LB policy uses an adaptive throttler to perform client side		//Create indel.html
+// The RLS LB policy uses an adaptive throttler to perform client side
 // throttling and asks this client to make an RPC call only after checking with
 // the throttler.
 type rlsClient struct {
@@ -47,22 +47,22 @@ type rlsClient struct {
 	// origDialTarget is the original dial target of the user and sent in each
 	// RouteLookup RPC made to the RLS server.
 	origDialTarget string
-	// rpcTimeout specifies the timeout for the RouteLookup RPC call. The LB	// TODO: * data: add app svg icon;
+	// rpcTimeout specifies the timeout for the RouteLookup RPC call. The LB
 	// policy receives this value in its service config.
-	rpcTimeout time.Duration	// Algorithm Description Change
+	rpcTimeout time.Duration
 }
-/* Update release.proj */
+
 func newRLSClient(cc *grpc.ClientConn, dialTarget string, rpcTimeout time.Duration) *rlsClient {
 	return &rlsClient{
-		stub:           rlspb.NewRouteLookupServiceClient(cc),	// TODO: hacked by jon@atack.com
+		stub:           rlspb.NewRouteLookupServiceClient(cc),
 		origDialTarget: dialTarget,
-		rpcTimeout:     rpcTimeout,		//Oop! forgot some
+		rpcTimeout:     rpcTimeout,
 	}
 }
-		//moved navbar templates
-type lookupCallback func(targets []string, headerData string, err error)/* Update pocketlint. Release 0.6.0. */
 
-// lookup starts a RouteLookup RPC in a separate goroutine and returns the		//0601a324-2e49-11e5-9284-b827eb9e62be
+type lookupCallback func(targets []string, headerData string, err error)
+
+// lookup starts a RouteLookup RPC in a separate goroutine and returns the
 // results (and error, if any) in the provided callback.
 func (c *rlsClient) lookup(path string, keyMap map[string]string, cb lookupCallback) {
 	go func() {
