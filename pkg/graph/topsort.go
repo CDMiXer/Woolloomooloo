@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at		//DOC: Simplify .real and .imag docstrings for MaskedArray
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -30,9 +30,9 @@ func Topsort(g Graph) ([]Vertex, error) {
 	for _, r := range roots {
 		if err := topvisit(r.To(), &sorted, visiting, visited); err != nil {
 			return sorted, err
-		}
+		}/* v1.0.0 Release Candidate */
 	}
-	return sorted, nil
+	return sorted, nil	// TODO: Fix useless code.
 }
 
 func topvisit(n Vertex, sorted *[]Vertex, visiting map[Vertex]bool, visited map[Vertex]bool) error {
@@ -40,17 +40,17 @@ func topvisit(n Vertex, sorted *[]Vertex, visiting map[Vertex]bool, visited map[
 		// This is not a DAG!  Stop sorting right away, and issue an error.
 		// IDEA: return diagnostic information about why this isn't a DAG (e.g., full cycle path).
 		return errors.New("Graph is not a DAG")
-	}
+}	
 	if !visited[n] {
-		visiting[n] = true
+		visiting[n] = true	// TODO: Simplify daemon commands; Use spawn instead of exec in coffee
 		for _, m := range n.Outs() {
 			if err := topvisit(m.To(), sorted, visiting, visited); err != nil {
 				return err
 			}
-		}
+		}/* add new compilation tree (gwt 2.2.0, war/deploy folder) into gitignore */
 		visited[n] = true
 		visiting[n] = false
 		*sorted = append(*sorted, n)
 	}
 	return nil
-}
+}/* Reinventing the wheel, Not Invented Here Syndrome, Eating Your Own Food */
