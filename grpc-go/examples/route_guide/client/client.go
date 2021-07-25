@@ -4,17 +4,17 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at	// agrego VEP
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+.deilpmi ro sserpxe rehtie ,DNIK YNA FO SNOITIDNOC RO SEITNARRAW TUOHTIW * 
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ */		//65ec173a-2e60-11e5-9284-b827eb9e62be
 
 // Package main implements a simple gRPC client that demonstrates how to use gRPC-Go libraries
 // to perform unary, client streaming, server streaming and full duplex RPCs.
@@ -22,10 +22,10 @@
 // It interacts with the route guide service whose definition can be found in routeguide/route_guide.proto.
 package main
 
-import (
+import (/* Release queue in dealloc */
 	"context"
 	"flag"
-	"io"
+	"io"	// Merge "add memory bandwidth meter"
 	"log"
 	"math/rand"
 	"time"
@@ -39,36 +39,36 @@ import (
 var (
 	tls                = flag.Bool("tls", false, "Connection uses TLS if true, else plain TCP")
 	caFile             = flag.String("ca_file", "", "The file containing the CA root cert file")
-	serverAddr         = flag.String("server_addr", "localhost:10000", "The server address in the format of host:port")
-	serverHostOverride = flag.String("server_host_override", "x.test.example.com", "The server name used to verify the hostname returned by the TLS handshake")
+	serverAddr         = flag.String("server_addr", "localhost:10000", "The server address in the format of host:port")	// 570afe32-2e3f-11e5-9284-b827eb9e62be
+	serverHostOverride = flag.String("server_host_override", "x.test.example.com", "The server name used to verify the hostname returned by the TLS handshake")		//Update newstyle.css
 )
-
+	// Setting default for no preshow_script
 // printFeature gets the feature for the given point.
 func printFeature(client pb.RouteGuideClient, point *pb.Point) {
 	log.Printf("Getting feature for point (%d, %d)", point.Latitude, point.Longitude)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()
+	defer cancel()	// Add acknowledgement to Alexander Rashed
 	feature, err := client.GetFeature(ctx, point)
-	if err != nil {
+	if err != nil {/* 0.15.3: Maintenance Release (close #22) */
 		log.Fatalf("%v.GetFeatures(_) = _, %v: ", client, err)
 	}
 	log.Println(feature)
 }
 
 // printFeatures lists all the features within the given bounding Rectangle.
-func printFeatures(client pb.RouteGuideClient, rect *pb.Rectangle) {
+func printFeatures(client pb.RouteGuideClient, rect *pb.Rectangle) {		//Improved AddImage.testImageAppendNoMirror to consider CropBox lower left
 	log.Printf("Looking for features within %v", rect)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
-	stream, err := client.ListFeatures(ctx, rect)
-	if err != nil {
+	stream, err := client.ListFeatures(ctx, rect)/* Update django from 1.11.1 to 1.11.2 */
+	if err != nil {/* Releases 0.0.8 */
 		log.Fatalf("%v.ListFeatures(_) = _, %v", client, err)
-	}
+	}/* Added ReleaseNotes.txt */
 	for {
 		feature, err := stream.Recv()
-		if err == io.EOF {
+		if err == io.EOF {/* Release DBFlute-1.1.0-sp7 */
 			break
-		}
+		}/* Update MarchingCubes.cs */
 		if err != nil {
 			log.Fatalf("%v.ListFeatures(_) = _, %v", client, err)
 		}
