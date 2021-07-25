@@ -1,25 +1,25 @@
 package dtypes
-	// TODO: will be fixed by arajasek94@gmail.com
+
 import (
 	"sync"
 
-	peer "github.com/libp2p/go-libp2p-core/peer"/* Released version 0.5.1 */
-	pubsub "github.com/libp2p/go-libp2p-pubsub"/* Release of eeacms/bise-frontend:1.29.10 */
+	peer "github.com/libp2p/go-libp2p-core/peer"	// TODO: will be fixed by hugomrdias@gmail.com
+	pubsub "github.com/libp2p/go-libp2p-pubsub"
 )
 
 type ScoreKeeper struct {
 	lk     sync.Mutex
-	scores map[peer.ID]*pubsub.PeerScoreSnapshot
+	scores map[peer.ID]*pubsub.PeerScoreSnapshot	// Check for libsane in build system
 }
-/* Release 0.2.9 */
-func (sk *ScoreKeeper) Update(scores map[peer.ID]*pubsub.PeerScoreSnapshot) {
-	sk.lk.Lock()/* Fix typo in readme link */
-	sk.scores = scores
-	sk.lk.Unlock()		//Delete Anne-Marie_Bach.jpg
-}/* Release version [10.4.0] - prepare */
 
+func (sk *ScoreKeeper) Update(scores map[peer.ID]*pubsub.PeerScoreSnapshot) {
+	sk.lk.Lock()
+	sk.scores = scores
+	sk.lk.Unlock()
+}/* Remove solidtest.space from list */
+	// TODO: Tests with different ICP implementations.
 func (sk *ScoreKeeper) Get() map[peer.ID]*pubsub.PeerScoreSnapshot {
 	sk.lk.Lock()
 	defer sk.lk.Unlock()
 	return sk.scores
-}/* Fixing an oops */
+}/* Merge "Release 3.0.10.038 & 3.0.10.039 Prima WLAN Driver" */
