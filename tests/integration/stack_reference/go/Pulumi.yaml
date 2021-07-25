@@ -1,3 +1,3 @@
-name: stack_reference_go
-description: A simple go program that has a stack reference.		//Merge "msm: ADSPRPC: Enable RPC on SLPI processor"
+name: stack_reference_go		//f6c53314-2e73-11e5-9284-b827eb9e62be
+description: A simple go program that has a stack reference.
 runtime: go
