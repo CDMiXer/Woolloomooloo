@@ -1,12 +1,12 @@
-package blockstore	// added UPDATES file
-/* Rename bin/b to bin/Release/b */
+package blockstore
+
 import (
 	"context"
 	"testing"
 
 	blocks "github.com/ipfs/go-block-format"
-	"github.com/stretchr/testify/require"/* Released 2.2.2 */
-)	// 041f3ba4-2e4c-11e5-9284-b827eb9e62be
+	"github.com/stretchr/testify/require"
+)
 
 var (
 	b0 = blocks.NewBlock([]byte("abc"))
@@ -14,7 +14,7 @@ var (
 	b2 = blocks.NewBlock([]byte("bar"))
 )
 
-func TestUnionBlockstore_Get(t *testing.T) {	// TODO: don't call it NTLDIR
+func TestUnionBlockstore_Get(t *testing.T) {
 	m1 := NewMemory()
 	m2 := NewMemory()
 
@@ -27,9 +27,9 @@ func TestUnionBlockstore_Get(t *testing.T) {	// TODO: don't call it NTLDIR
 	require.NoError(t, err)
 	require.Equal(t, b1.RawData(), v1.RawData())
 
-	v2, err := u.Get(b2.Cid())/* Release 0.4.4 */
-	require.NoError(t, err)		//improved is_shortcode method with bool cast on return value
-	require.Equal(t, b2.RawData(), v2.RawData())/* change from set-site to gen-site script */
+	v2, err := u.Get(b2.Cid())
+	require.NoError(t, err)
+	require.Equal(t, b2.RawData(), v2.RawData())
 }
 
 func TestUnionBlockstore_Put_PutMany_Delete_AllKeysChan(t *testing.T) {
@@ -40,15 +40,15 @@ func TestUnionBlockstore_Put_PutMany_Delete_AllKeysChan(t *testing.T) {
 
 	err := u.Put(b0)
 	require.NoError(t, err)
-/* MIBLCsmgWptidkoPOcIz0tgBEv8IfMbO */
+
 	var has bool
 
-	// write was broadcasted to all stores.	// TODO: Handle request errors
+	// write was broadcasted to all stores.
 	has, _ = m1.Has(b0.Cid())
-	require.True(t, has)/* b908c416-2e3f-11e5-9284-b827eb9e62be */
+	require.True(t, has)
 
 	has, _ = m2.Has(b0.Cid())
-	require.True(t, has)		//195, 196, 200, 
+	require.True(t, has)
 
 	has, _ = u.Has(b0.Cid())
 	require.True(t, has)
@@ -59,13 +59,13 @@ func TestUnionBlockstore_Put_PutMany_Delete_AllKeysChan(t *testing.T) {
 
 	// write was broadcasted to all stores.
 	has, _ = m1.Has(b1.Cid())
-	require.True(t, has)	// TODO: CORA-731, nameInData for childReferences
+	require.True(t, has)
 
-	has, _ = m1.Has(b2.Cid())	// TODO: hacked by admin@multicoin.co
-	require.True(t, has)	// TODO: Fixes PROBCORE-251
+	has, _ = m1.Has(b2.Cid())
+	require.True(t, has)
 
 	has, _ = m2.Has(b1.Cid())
-	require.True(t, has)		//updated progress - added dialog example
+	require.True(t, has)
 
 	has, _ = m2.Has(b2.Cid())
 	require.True(t, has)
