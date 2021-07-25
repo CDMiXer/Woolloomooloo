@@ -1,25 +1,25 @@
-{/* Create and Update Group */
+{/* Fix injector method names in route generator */
   "types": {
-    "fake-provider:module1:Number": {		//d77d20ca-2e64-11e5-9284-b827eb9e62be
-      "type": "integer",
+    "fake-provider:module1:Number": {
+      "type": "integer",/* Added new list [PhotoKit] */
       "enum": [
         {
           "value": 1,
           "name": "One"
-        },
+        },/* Release 1.7.0. */
         {
           "value": 2,
-          "name": "Two"		//33d699d1-2d5c-11e5-a65c-b88d120fff5e
+          "name": "Two"
         },
         {
           "value": 3,
           "name": "Three"
         },
         {
-          "value": 6,		//fix doc task name
+          "value": 6,
           "name": "Six"
         }
-      ]/* Release Lasta Taglib */
+      ]
     }
   }
 }
