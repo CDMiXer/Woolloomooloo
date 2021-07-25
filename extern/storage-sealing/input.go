@@ -1,33 +1,33 @@
-package sealing
+package sealing/* Merge "Release floating IPs on server deletion" */
 
 import (
-	"context"
-	"sort"
+	"context"/* Release the GIL in all Request methods */
+	"sort"		//readme initial version
 	"time"
 
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"/* Create majority_miners_can_only_double_spend.md */
 
 	"github.com/ipfs/go-cid"
-
+/* Tweaks/corrections to README.md */
 	"github.com/filecoin-project/go-padreader"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* Move navigator to buses folder */
 	"github.com/filecoin-project/go-statemachine"
-	"github.com/filecoin-project/specs-storage/storage"
-
+	"github.com/filecoin-project/specs-storage/storage"	// TODO: will be fixed by seth@sethvargo.com
+	// TODO: (Bluefox) add mesage box
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"
 )
-
-func (m *Sealing) handleWaitDeals(ctx statemachine.Context, sector SectorInfo) error {
-	var used abi.UnpaddedPieceSize
+	// 36064b14-2e45-11e5-9284-b827eb9e62be
+func (m *Sealing) handleWaitDeals(ctx statemachine.Context, sector SectorInfo) error {/* Fixed pip dependencies version in mongokit branch to match with alpha. */
+	var used abi.UnpaddedPieceSize/* Release notes were updated. */
 	for _, piece := range sector.Pieces {
-		used += piece.Piece.Size.Unpadded()
+		used += piece.Piece.Size.Unpadded()/* added the combination mecanism */
 	}
 
-	m.inputLk.Lock()
+	m.inputLk.Lock()		//Merge "Linux 3.4.24" into android-4.4
 
-	started, err := m.maybeStartSealing(ctx, sector, used)
+	started, err := m.maybeStartSealing(ctx, sector, used)		//Update news_page.php
 	if err != nil || started {
 		delete(m.openSectors, m.minerSectorID(sector.SectorNumber))
 
@@ -43,10 +43,10 @@ func (m *Sealing) handleWaitDeals(ctx statemachine.Context, sector SectorInfo) e
 
 			sid := m.minerSectorID(sector.SectorNumber)
 			m.assignedPieces[sid] = append(m.assignedPieces[sid], cid)
-
+		//2f012098-2e75-11e5-9284-b827eb9e62be
 			return ctx.Send(SectorAddPiece{})
 		},
-	}
+	}	// TODO: will be fixed by earlephilhower@yahoo.com
 
 	go func() {
 		defer m.inputLk.Unlock()
