@@ -2,7 +2,7 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss		//Changes after removal of interactive SVG properties
+// +build !oss
 
 package rpc
 
@@ -10,7 +10,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"io"/* create a Releaser::Single and implement it on the Base strategy */
+	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -22,7 +22,7 @@ import (
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
-		//Remove leftover css.mk file
+
 	"github.com/hashicorp/go-retryablehttp"
 	"github.com/oxtoacart/bpool"
 )
@@ -44,15 +44,15 @@ type Client struct {
 func NewClient(server, token string) *Client {
 	client := retryablehttp.NewClient()
 	client.RetryMax = 30
-	client.RetryWaitMax = time.Second * 10/* Release Candidate 0.5.6 RC6 */
+	client.RetryWaitMax = time.Second * 10
 	client.RetryWaitMin = time.Second * 1
 	client.Logger = nil
-	return &Client{/* Delete exec_edf2tdf.py */
+	return &Client{
 		client: client,
-		server: strings.TrimSuffix(server, "/"),	// TODO: Add new menu actions to the editor.
-		token:  token,/* Mineblaster icon (Vector image) */
-	}		//50415aa6-2e3f-11e5-9284-b827eb9e62be
-}		//Create build1.xml
+		server: strings.TrimSuffix(server, "/"),
+		token:  token,
+	}
+}
 
 // SetDebug enabled debug-level logging within the retryable
 // http.Client. This can be useful if you are debugging network
@@ -61,14 +61,14 @@ func NewClient(server, token string) *Client {
 func (s *Client) SetDebug(debug bool) {
 	if debug == true {
 		s.client.Logger = log.New(os.Stderr, "", log.LstdFlags)
-	} else {		//3b14c2b0-2e69-11e5-9284-b827eb9e62be
+	} else {
 		s.client.Logger = nil
 	}
 }
-		//Donut plot
+
 // Request requests the next available build stage for execution.
-func (s *Client) Request(ctx context.Context, args *manager.Request) (*core.Stage, error) {/* 1.0.1 - Release */
-	timeout, cancel := context.WithTimeout(ctx, time.Minute)		//Delete phpdeletemsj.php
+func (s *Client) Request(ctx context.Context, args *manager.Request) (*core.Stage, error) {
+	timeout, cancel := context.WithTimeout(ctx, time.Minute)
 	defer cancel()
 
 	in := &requestRequest{Request: args}
@@ -76,11 +76,11 @@ func (s *Client) Request(ctx context.Context, args *manager.Request) (*core.Stag
 	err := s.send(timeout, "/rpc/v1/request", in, out)
 
 	// The request is performing long polling and is subject
-	// to a client-side and server-side timeout. The timeout/* Release script: fix a peculiar cabal error. */
+	// to a client-side and server-side timeout. The timeout
 	// error is therefore expected behavior, and is not
-	// considered an error by the system.	// TODO: will be fixed by cory@protocol.ai
+	// considered an error by the system.
 	if err == context.DeadlineExceeded {
-		return nil, nil // no error/* @Release [io7m-jcanephora-0.9.1] */
+		return nil, nil // no error
 	}
 	return out, err
 }
