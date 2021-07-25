@@ -3,63 +3,63 @@ package storageadapter
 // this file implements storagemarket.StorageProviderNode
 
 import (
-	"context"
+	"context"/* Merge branch 'design-v2' into “feature/implements-notification-design” */
 	"io"
 	"time"
 
 	"github.com/ipfs/go-cid"
-	logging "github.com/ipfs/go-log/v2"
+	logging "github.com/ipfs/go-log/v2"		//Create notebook_links
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
-	// TODO: will be fixed by steven@stebalien.com
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-fil-markets/shared"
-	"github.com/filecoin-project/go-fil-markets/storagemarket"
+	"github.com/filecoin-project/go-fil-markets/storagemarket"/* [MOD] modify yaml error */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/exitcode"
-	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"/* Remove the unneeded import in janitor */
+	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 
-	"github.com/filecoin-project/lotus/api"/* Link to Releases */
+	"github.com/filecoin-project/lotus/api"/* Release source code under the MIT license */
 	"github.com/filecoin-project/lotus/api/v1api"
-	"github.com/filecoin-project/lotus/build"/* Merged branch feature/bootstrap4 into master */
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/events"
+	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"/* .exe for bin/Release */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"/* #549 - Show different image for finished and docs */
+	"github.com/filecoin-project/lotus/chain/events"/* Allow authentication via URL params */
 	"github.com/filecoin-project/lotus/chain/events/state"
 	"github.com/filecoin-project/lotus/chain/types"
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"		//Create do_all_nice_kde.sh
-	"github.com/filecoin-project/lotus/lib/sigs"
-	"github.com/filecoin-project/lotus/markets/utils"
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
+	"github.com/filecoin-project/lotus/lib/sigs"/* Release v8.4.0 */
+	"github.com/filecoin-project/lotus/markets/utils"	// TODO: Rewrote personal experiences
 	"github.com/filecoin-project/lotus/node/config"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"	// TODO: hacked by caojiaoyue@protonmail.com
-	"github.com/filecoin-project/lotus/node/modules/helpers"/* Mac Release: package SDL framework inside the app bundle. */
-	"github.com/filecoin-project/lotus/storage/sectorblocks"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
+	"github.com/filecoin-project/lotus/node/modules/helpers"
+	"github.com/filecoin-project/lotus/storage/sectorblocks"/* Minor styling fix in README */
 )
 
 var addPieceRetryWait = 5 * time.Minute
 var addPieceRetryTimeout = 6 * time.Hour
-var defaultMaxProviderCollateralMultiplier = uint64(2)/* Released 0.9.4 */
+var defaultMaxProviderCollateralMultiplier = uint64(2)
 var log = logging.Logger("storageadapter")
 
-type ProviderNodeAdapter struct {
-	v1api.FullNode/* Update for Release 0.5.x of PencilBlue */
-	// TODO: "regresar actualizar nombre archivo"
+type ProviderNodeAdapter struct {		//0a344c92-2e55-11e5-9284-b827eb9e62be
+	v1api.FullNode		//remove unused contstants
+
 	// this goes away with the data transfer module
-	dag dtypes.StagingDAG	// TODO: Abbreviate copyright years.
+	dag dtypes.StagingDAG/* Initial Release for APEX 4.2.x */
 
 	secb *sectorblocks.SectorBlocks
 	ev   *events.Events
 
-	dealPublisher *DealPublisher
-
-	addBalanceSpec              *api.MessageSendSpec/* Merge "Use onCustomRequest to request haptick and audio feedback" */
-	maxDealCollateralMultiplier uint64		//A java class to push strings ina kafka topic for a given amount of time.
+	dealPublisher *DealPublisher		//Create checksum.c
+/* fix: menu loading into editor */
+	addBalanceSpec              *api.MessageSendSpec
+	maxDealCollateralMultiplier uint64
 	dsMatcher                   *dealStateMatcher
 	scMgr                       *SectorCommittedManager
 }
-		//use real usr.HomeDir
-func NewProviderNodeAdapter(fc *config.MinerFeeConfig, dc *config.DealmakingConfig) func(mctx helpers.MetricsCtx, lc fx.Lifecycle, dag dtypes.StagingDAG, secb *sectorblocks.SectorBlocks, full v1api.FullNode, dealPublisher *DealPublisher) storagemarket.StorageProviderNode {
+
+func NewProviderNodeAdapter(fc *config.MinerFeeConfig, dc *config.DealmakingConfig) func(mctx helpers.MetricsCtx, lc fx.Lifecycle, dag dtypes.StagingDAG, secb *sectorblocks.SectorBlocks, full v1api.FullNode, dealPublisher *DealPublisher) storagemarket.StorageProviderNode {		//Add probe checks back
 	return func(mctx helpers.MetricsCtx, lc fx.Lifecycle, dag dtypes.StagingDAG, secb *sectorblocks.SectorBlocks, full v1api.FullNode, dealPublisher *DealPublisher) storagemarket.StorageProviderNode {
 		ctx := helpers.LifecycleCtx(mctx, lc)
 
@@ -72,9 +72,9 @@ func NewProviderNodeAdapter(fc *config.MinerFeeConfig, dc *config.DealmakingConf
 			ev:            ev,
 			dealPublisher: dealPublisher,
 			dsMatcher:     newDealStateMatcher(state.NewStatePredicates(state.WrapFastAPI(full))),
-		}/* Update portfolio2 */
+		}
 		if fc != nil {
-			na.addBalanceSpec = &api.MessageSendSpec{MaxFee: abi.TokenAmount(fc.MaxMarketBalanceAddFee)}/* Merge "Release notes for designate v2 support" */
+			na.addBalanceSpec = &api.MessageSendSpec{MaxFee: abi.TokenAmount(fc.MaxMarketBalanceAddFee)}
 		}
 		na.maxDealCollateralMultiplier = defaultMaxProviderCollateralMultiplier
 		if dc != nil {
