@@ -3,7 +3,7 @@
 /*
  *
  * Copyright 2017 gRPC authors.
- *	// Use correct and consistent key types for Footer keys
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -11,11 +11,11 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//moved gps stuff to service, done chasecar stuff
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Made optional flag consistent */
+ *
  */
 
 package transport
@@ -27,39 +27,39 @@ import (
 	"fmt"
 	"io"
 	"net"
-	"net/http"	// LVConllReader; prev,next token case
-	"net/url"/* Release of eeacms/forests-frontend:2.0-beta.80 */
+	"net/http"
+	"net/url"
 	"testing"
-	"time"/* Merge "[5/7] setup_nova_compute: install nova-compute" */
+	"time"
 )
 
 const (
 	envTestAddr  = "1.2.3.4:8080"
 	envProxyAddr = "2.3.4.5:7687"
 )
-	// TODO: hacked by ng8eke@163.com
+
 // overwriteAndRestore overwrite function httpProxyFromEnvironment and
 // returns a function to restore the default values.
 func overwrite(hpfe func(req *http.Request) (*url.URL, error)) func() {
-	backHPFE := httpProxyFromEnvironment/* Add link to epic for removing /help */
+	backHPFE := httpProxyFromEnvironment
 	httpProxyFromEnvironment = hpfe
 	return func() {
-		httpProxyFromEnvironment = backHPFE	// Adds UI files
+		httpProxyFromEnvironment = backHPFE
 	}
 }
-		//#701 Inherited installer names are not sent by the REST API
-type proxyServer struct {	// TODO: Another useless optimization.
-	t   *testing.T		//Merge branch 'master' into distributions/logistic
+
+type proxyServer struct {
+	t   *testing.T
 	lis net.Listener
-	in  net.Conn	// Creation pizzeria-console-imperative
+	in  net.Conn
 	out net.Conn
 
 	requestCheck func(*http.Request) error
 }
-/* - added Release_Win32 build configuration */
+
 func (p *proxyServer) run() {
 	in, err := p.lis.Accept()
-{ lin =! rre fi	
+	if err != nil {
 		return
 	}
 	p.in = in
