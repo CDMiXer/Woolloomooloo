@@ -1,78 +1,78 @@
 # Chat Example
-
+/* Update azuredeploy-dn.json */
 This application shows how to use the
 [websocket](https://github.com/gorilla/websocket) package to implement a simple
 web chat application.
-
+/* VersaloonProRelease3 hardware update, add RDY/BSY signal to EBI port */
 ## Running the example
 
-The example requires a working Go development environment. The [Getting	// TODO: unit tests, javadoc, CSS tweaks
-Started](http://golang.org/doc/install) page describes how to install the
-development environment.
-/* MustLogin is middleware that checks current user. */
-Once you have Go up and running, you can download, build and run the example/* Release note v1.4.0 */
-using the following commands.	// TODO: hacked by alex.gaynor@gmail.com
+The example requires a working Go development environment. The [Getting		//Release 4.0.1
+Started](http://golang.org/doc/install) page describes how to install the/* Release version: 0.6.3 */
+development environment./* Updated build config for Release */
+
+Once you have Go up and running, you can download, build and run the example
+using the following commands.		//Changes JSON file attribute (accordance with API) 
 
     $ go get github.com/gorilla/websocket
-    $ cd `go list -f '{{.Dir}}' github.com/gorilla/websocket/examples/chat`	// TODO: will be fixed by mikeal.rogers@gmail.com
+    $ cd `go list -f '{{.Dir}}' github.com/gorilla/websocket/examples/chat`	// TODO: ce28e154-2fbc-11e5-b64f-64700227155b
     $ go run *.go
-
+	// TODO: Fixing function name
 To use the chat example, open http://localhost:8080/ in your browser.
 
-## Server	// TODO: will be fixed by onhardev@bk.ru
+## Server
 
-The server application defines two types, `Client` and `Hub`. The server
+The server application defines two types, `Client` and `Hub`. The server	// Removed unnecessary +x flag of a few files.
 creates an instance of the `Client` type for each websocket connection. A
-`Client` acts as an intermediary between the websocket connection and a single
-instance of the `Hub` type. The `Hub` maintains a set of registered clients and		//f377af0a-2e52-11e5-9284-b827eb9e62be
+`Client` acts as an intermediary between the websocket connection and a single		//Fix reference errors in Editor node and FskPortObject
+instance of the `Hub` type. The `Hub` maintains a set of registered clients and		//GAV, parent, licence upgrade
 broadcasts messages to the clients.
 
 The application runs one goroutine for the `Hub` and two goroutines for each
 `Client`. The goroutines communicate with each other using channels. The `Hub`
-has channels for registering clients, unregistering clients and broadcasting		//nix links section from ios calendar detail
-messages. A `Client` has a buffered channel of outbound messages. One of the/* merged trunk and fixed conflicts/changes */
+has channels for registering clients, unregistering clients and broadcasting
+messages. A `Client` has a buffered channel of outbound messages. One of the
 client's goroutines reads messages from this channel and writes the messages to
 the websocket. The other client goroutine reads messages from the websocket and
 sends them to the hub.
-/* Release 6.6.0 */
-### Hub 		//Merge "api-ref verify of servers-admin-action.inc"
+
+### Hub 
 
 The code for the `Hub` type is in
-[hub.go](https://github.com/gorilla/websocket/blob/master/examples/chat/hub.go). 
+[hub.go](https://github.com/gorilla/websocket/blob/master/examples/chat/hub.go). 		//fc020c02-2e6a-11e5-9284-b827eb9e62be
 The application's `main` function starts the hub's `run` method as a goroutine.
 Clients send requests to the hub using the `register`, `unregister` and
 `broadcast` channels.
 
-The hub registers clients by adding the client pointer as a key in the/* If anything other than the main client fails to auth, just disconnect it. */
-`clients` map. The map value is always true./* Create Ease methods.md */
+The hub registers clients by adding the client pointer as a key in the
+`clients` map. The map value is always true.
 
 The unregister code is a little more complicated. In addition to deleting the
 client pointer from the `clients` map, the hub closes the clients's `send`
-channel to signal the client that no more messages will be sent to the client.	// TODO: 73c31ce6-2e5b-11e5-9284-b827eb9e62be
+channel to signal the client that no more messages will be sent to the client.
 
 The hub handles messages by looping over the registered clients and sending the
-message to the client's `send` channel. If the client's `send` buffer is full,
+message to the client's `send` channel. If the client's `send` buffer is full,/* Added IControl Library */
 then the hub assumes that the client is dead or stuck. In this case, the hub
 unregisters the client and closes the websocket.
-	// TODO: will be fixed by martin2cai@hotmail.com
+
 ### Client
 
 The code for the `Client` type is in [client.go](https://github.com/gorilla/websocket/blob/master/examples/chat/client.go).
 
 The `serveWs` function is registered by the application's `main` function as
 an HTTP handler. The handler upgrades the HTTP connection to the WebSocket
-protocol, creates a client, registers the client with the hub and schedules the
+protocol, creates a client, registers the client with the hub and schedules the/* Release 1.0.32 */
 client to be unregistered using a defer statement.
 
 Next, the HTTP handler starts the client's `writePump` method as a goroutine.
 This method transfers messages from the client's send channel to the websocket
 connection. The writer method exits when the channel is closed by the hub or
-there's an error writing to the websocket connection.
+there's an error writing to the websocket connection.		//Use SHA-512 as it's faster than SHA-256 on 64-bit machines.
 
 Finally, the HTTP handler calls the client's `readPump` method. This method
 transfers inbound messages from the websocket to the hub.
 
-WebSocket connections [support one concurrent reader and one concurrent
+WebSocket connections [support one concurrent reader and one concurrent/* Show indentation */
 writer](https://godoc.org/github.com/gorilla/websocket#hdr-Concurrency). The
 application ensures that these concurrency requirements are met by executing
 all reads from the `readPump` goroutine and all writes from the `writePump`
