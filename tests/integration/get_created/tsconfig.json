@@ -1,5 +1,5 @@
 {
-    "compilerOptions": {/* Improved expand/collapse for properties in custom ApiGen theme. */
+    "compilerOptions": {
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
@@ -7,15 +7,15 @@
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,/* Release 7. */
-        "experimentalDecorators": true,	// TODO: will be fixed by cory@protocol.ai
+        "stripInternal": true,
+        "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
     "files": [
-        "index.ts"	// TODO: Fixed height of histogram bar chart
+        "index.ts"
     ]
 }
 
