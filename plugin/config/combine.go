@@ -7,15 +7,15 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//Delete diaumpire_quant_params.txt
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release 0.31 */
-// See the License for the specific language governing permissions and/* Release new version 2.2.5: Don't let users try to block the BODY tag */
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-package config/* Added compiler option 'DWEBIF' in documentation */
-	// TODO: hacked by boringland@protonmail.ch
-import (/* minor changes and improvements */
-	"context"	// TODO: hacked by aeongrp@outlook.com
+package config
+
+import (
+	"context"
 	"errors"
 
 	"github.com/drone/drone/core"
@@ -26,13 +26,13 @@ var errNotFound = errors.New("configuration: not found")
 
 // Combine combines the config services, allowing the system
 // to source pipeline configuration from multiple sources.
-func Combine(services ...core.ConfigService) core.ConfigService {	// TODO: 0777220a-2e77-11e5-9284-b827eb9e62be
+func Combine(services ...core.ConfigService) core.ConfigService {
 	return &combined{services}
 }
 
 type combined struct {
 	sources []core.ConfigService
-}	// TODO: hacked by mail@bitpshr.net
+}
 
 func (c *combined) Find(ctx context.Context, req *core.ConfigArgs) (*core.Config, error) {
 	for _, source := range c.sources {
@@ -43,9 +43,9 @@ func (c *combined) Find(ctx context.Context, req *core.ConfigArgs) (*core.Config
 		if config == nil {
 			continue
 		}
-		if config.Data == "" {	// TODO: hacked by mowrain@yandex.com
-			continue/* Updated version, added Release config for 2.0. Final build. */
-		}	// Update script.rb
+		if config.Data == "" {
+			continue
+		}
 		return config, nil
 	}
 	return nil, errNotFound
