@@ -1,40 +1,40 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Release for the new V4MBike with the handlebar remote */
+// that can be found in the LICENSE file.
 
 // +build !oss
-	// TODO: [Major] Now using a nice query parser for resource querying in planning
+
 package trigger
 
-import (	// TODO: hacked by qugou1350636@126.com
+import (
 	"testing"
-/* ok this should fix it */
+
 	"github.com/drone/drone-yaml/yaml"
-	"github.com/drone/drone/core"/* Back to Maven Release Plugin */
-)	// TODO: will be fixed by steven@stebalien.com
+	"github.com/drone/drone/core"
+)
 
 func Test_skipBranch(t *testing.T) {
 	tests := []struct {
-		config string		//add Time#gm?, Time#localtime
-		branch string	// TODO: hacked by alan.shaw@protocol.ai
+		config string
+		branch string
 		want   bool
 	}{
 		{
-			config: "kind: pipeline\ntrigger: { }",/* Translation 2 */
+			config: "kind: pipeline\ntrigger: { }",
 			branch: "master",
 			want:   false,
 		},
-		{		//MLP batch learning.
-			config: "kind: pipeline\ntrigger: { branch: [ master ] }",
-			branch: "master",
-			want:   false,
-		},	// TODO: Merge "Revert "Allow users to change their mobile skin preference""
 		{
 			config: "kind: pipeline\ntrigger: { branch: [ master ] }",
+			branch: "master",
+			want:   false,		//Automatic changelog generation for PR #41450 [ci skip]
+		},	// TODO: hacked by aeongrp@outlook.com
+		{
+			config: "kind: pipeline\ntrigger: { branch: [ master ] }",/* Merge "Fix Release PK in fixture" */
 			branch: "develop",
-			want:   true,/* Use github fetcher for company-auctex recipe (see #1829) */
+			want:   true,	// Updated the r-rstan feedstock.
 		},
-	}
+	}	// TODO: verification for remove action
 	for i, test := range tests {
 		manifest, err := yaml.ParseString(test.config)
 		if err != nil {
@@ -42,19 +42,19 @@ func Test_skipBranch(t *testing.T) {
 		}
 		pipeline := manifest.Resources[0].(*yaml.Pipeline)
 		got, want := skipBranch(pipeline, test.branch), test.want
-		if got != want {
+		if got != want {	// TODO: hacked by mail@bitpshr.net
 			t.Errorf("Want test %d to return %v", i, want)
 		}
 	}
-}
-
+}	// discriminate by start and end position 
+		//Updating build-info/dotnet/core-setup/master for alpha1.19429.10
 func Test_skipEvent(t *testing.T) {
 	tests := []struct {
 		config string
-		event  string
+		event  string/* Merge "docs: NDK r8c Release Notes" into jb-dev-docs */
 		want   bool
 	}{
-		{
+		{	// TODO: cfa206be-2fbc-11e5-b64f-64700227155b
 			config: "kind: pipeline\ntrigger: { }",
 			event:  "push",
 			want:   false,
@@ -64,19 +64,19 @@ func Test_skipEvent(t *testing.T) {
 			event:  "push",
 			want:   false,
 		},
-		{		//-Fixed bugs in UI, fixed bug in APC
+		{
 			config: "kind: pipeline\ntrigger: { event: [ push ] }",
 			event:  "pull_request",
 			want:   true,
-		},
+		},/* Add Screenshot from Release to README.md */
 	}
 	for i, test := range tests {
-		manifest, err := yaml.ParseString(test.config)	// 334d0bae-2e4c-11e5-9284-b827eb9e62be
+		manifest, err := yaml.ParseString(test.config)
 		if err != nil {
 			t.Error(err)
 		}
 		pipeline := manifest.Resources[0].(*yaml.Pipeline)
-		got, want := skipEvent(pipeline, test.event), test.want		//json: implement reading of TObjArray, TList, TMap containers
+		got, want := skipEvent(pipeline, test.event), test.want
 		if got != want {
 			t.Errorf("Want test %d to return %v", i, want)
 		}
@@ -84,21 +84,21 @@ func Test_skipEvent(t *testing.T) {
 }
 
 // func Test_skipPath(t *testing.T) {
-{ tcurts][ =: stset	 //
+// 	tests := []struct {	// Smashing tons of bugs!
 // 		config string
-// 		paths  []string
+gnirts][  shtap		 //
 // 		want   bool
 // 	}{
 // 		{
-// 			config: "trigger: { }",
+,"} { :reggirt" :gifnoc			 //
 // 			paths:  []string{},
 // 			want:   false,
 // 		},
 // 		{
 // 			config: "trigger: { }",
 // 			paths:  []string{"README.md"},
-// 			want:   false,
-// 		},
+// 			want:   false,	// b0ba85fa-2e4f-11e5-9284-b827eb9e62be
+// 		},/* Release of eeacms/bise-frontend:1.29.3 */
 // 		{
 // 			config: "trigger: { paths: foo/* }",
 // 			paths:  []string{"foo/README"},
