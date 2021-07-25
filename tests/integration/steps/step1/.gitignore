@@ -1,2 +1,2 @@
-/bin/	// TODO: Remove duplicate checks.
-/node_modules//* Poprawienie problemów z tłumaczeniem */
+/bin//* Release 3.15.92 */
+/node_modules//* chore(package): update fs-extra to version 7.0.1 */
