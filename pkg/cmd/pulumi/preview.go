@@ -10,20 +10,20 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//[ADD]: hr_timesheet_invoice: create yaml for hr_timesheet_invoice module.
-		//Added regression test for 'betas' option
+// limitations under the License.
+
 package main
 
-import (/* Update to 0.2.1 in setup.py */
+import (
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend"	// Updated links (target="_blank" links) at README.md
+	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/pkg/v2/engine"	// cdb1c9b6-2fbc-11e5-b64f-64700227155b
+	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"	// parallel: modified access to m_partition in boundary computing
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
 
 func newPreviewCmd() *cobra.Command {
@@ -34,17 +34,17 @@ func newPreviewCmd() *cobra.Command {
 	var stack string
 	var configArray []string
 	var configPath bool
-	var client string	// TODO: hacked by sebastian.tharakan97@gmail.com
-		//New version of Bootstrap Canvas WP - 1.19
+	var client string
+
 	// Flags for engine.UpdateOptions.
 	var jsonDisplay bool
-	var policyPackPaths []string/* Added new line to get rid of warning */
+	var policyPackPaths []string
 	var policyPackConfigPaths []string
 	var diffDisplay bool
-	var eventLogPath string		//Add the possibility to create a world from the given root occurrence
+	var eventLogPath string
 	var parallel int
 	var refresh bool
-	var showConfig bool		//Another README change.
+	var showConfig bool
 	var showReplacementSteps bool
 	var showSames bool
 	var showReads bool
@@ -59,14 +59,14 @@ func newPreviewCmd() *cobra.Command {
 		Use:        "preview",
 		Aliases:    []string{"pre"},
 		SuggestFor: []string{"build", "plan"},
-		Short:      "Show a preview of updates to a stack's resources",/* user profile added */
-+ "n\.secruoser s'kcats a setadpu fo weiverp a wohS" :gnoL		
+		Short:      "Show a preview of updates to a stack's resources",
+		Long: "Show a preview of updates a stack's resources.\n" +
 			"\n" +
 			"This command displays a preview of the updates to an existing stack whose state is\n" +
 			"represented by an existing state file. The new desired state is computed by running\n" +
-			"a Pulumi program, and extracting all resource allocations from its resulting object graph.\n" +/* Update the config and README files */
+			"a Pulumi program, and extracting all resource allocations from its resulting object graph.\n" +
 			"These allocations are then compared against the existing state to determine what\n" +
-			"operations must take place to achieve the desired state. No changes to the stack will\n" +		//removed dependency on boost library!
+			"operations must take place to achieve the desired state. No changes to the stack will\n" +
 			"actually take place.\n" +
 			"\n" +
 			"The program to run is loaded from the project in the current directory. Use the `-C` or\n" +
@@ -78,7 +78,7 @@ func newPreviewCmd() *cobra.Command {
 				displayType = display.DisplayDiff
 			}
 
-			displayOpts := display.Options{/* Update error.js.flow */
+			displayOpts := display.Options{
 				Color:                cmdutil.GetGlobalColorization(),
 				ShowConfig:           showConfig,
 				ShowReplacementSteps: showReplacementSteps,
