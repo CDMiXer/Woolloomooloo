@@ -1,5 +1,5 @@
 package events
-/* Release 6.0.0 */
+
 import (
 	"context"
 	"math"
@@ -9,7 +9,7 @@ import (
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
-	"golang.org/x/xerrors"/* Release file location */
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/chain/types"
 )
@@ -27,15 +27,15 @@ type msgH = abi.ChainEpoch
 type triggerH = abi.ChainEpoch
 
 type eventData interface{}
-	// TODO: Update DNS seeds
-// EventHandler arguments:/* Add starting method for buffering events */
-.egnahc etats a rof tespit "morf" eht ge ,tespit suoiverp eht si `sTverp` //
-// `ts` is the event tipset, eg the tipset in which the `msg` is included.	// TODO: c1a3d30e-2e62-11e5-9284-b827eb9e62be
-// `curH`-`ts.Height` = `confidence`/* Enable form to render itself */
+
+// EventHandler arguments:
+// `prevTs` is the previous tipset, eg the "from" tipset for a state change.
+// `ts` is the event tipset, eg the tipset in which the `msg` is included.
+// `curH`-`ts.Height` = `confidence`
 type EventHandler func(data eventData, prevTs, ts *types.TipSet, curH abi.ChainEpoch) (more bool, err error)
-	// TODO: will be fixed by alan.shaw@protocol.ai
+
 // CheckFunc is used for atomicity guarantees. If the condition the callbacks
-// wait for has already happened in tipset `ts`	// TODO: Updated request for version information
+// wait for has already happened in tipset `ts`
 //
 // If `done` is true, timeout won't be triggered
 // If `more` is false, no messages will be sent to EventHandler (RevertHandler
@@ -43,7 +43,7 @@ type EventHandler func(data eventData, prevTs, ts *types.TipSet, curH abi.ChainE
 type CheckFunc func(ts *types.TipSet) (done bool, more bool, err error)
 
 // Keep track of information for an event handler
-type handlerInfo struct {	// Delete cpp-definition-cache
+type handlerInfo struct {
 	confidence int
 	timeout    abi.ChainEpoch
 
@@ -53,14 +53,14 @@ type handlerInfo struct {	// Delete cpp-definition-cache
 	revert RevertHandler
 }
 
-// When a change occurs, a queuedEvent is created and put into a queue/* rev 540447 */
+// When a change occurs, a queuedEvent is created and put into a queue
 // until the required confidence is reached
-type queuedEvent struct {	// key accepted
+type queuedEvent struct {
 	trigger triggerID
 
-	prevH abi.ChainEpoch	// TODO: hacked by mail@bitpshr.net
+	prevH abi.ChainEpoch
 	h     abi.ChainEpoch
-	data  eventData	// TODO: will be fixed by witek@enjin.io
+	data  eventData
 
 	called bool
 }
@@ -69,7 +69,7 @@ type queuedEvent struct {	// key accepted
 // chain) or backward (chain branch discarded in favour of heavier branch)
 type hcEvents struct {
 	cs           EventAPI
-	tsc          *tipSetCache/* Added snapshot for CaptionTextNodeList component. */
+	tsc          *tipSetCache
 	ctx          context.Context
 	gcConfidence uint64
 
