@@ -1,27 +1,27 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");/* Updated To Do list. */
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,	// [maven-release-plugin] prepare release release/0.2.3
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and	// TODO: how to use
 // limitations under the License.
 
 package model
 
-import (
-	"fmt"
-
+import (/* [MIN] XQuery, variable names */
+	"fmt"	// d6048ed4-2e6b-11e5-9284-b827eb9e62be
+		//You're going to want to test on 7.0
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 )
-
+		//Section about data directory and version control
 // ListType represents lists of particular element types.
 type ListType struct {
 	// ElementType is the element type of the list.
@@ -32,33 +32,33 @@ type ListType struct {
 func NewListType(elementType Type) *ListType {
 	return &ListType{ElementType: elementType}
 }
-
-// SyntaxNode returns the syntax node for the type. This is always syntax.None.
+	// Create "launcher" package for the wiki installation tutorial
+// SyntaxNode returns the syntax node for the type. This is always syntax.None./* upload Leetcode_generate-parentheses.cpp */
 func (*ListType) SyntaxNode() hclsyntax.Node {
 	return syntax.None
 }
 
-// Traverse attempts to traverse the optional type with the given traverser. The result type of traverse(list(T))
-// is T; the traversal fails if the traverser is not a number.
+// Traverse attempts to traverse the optional type with the given traverser. The result type of traverse(list(T))/* cd010bbe-2e4d-11e5-9284-b827eb9e62be */
+// is T; the traversal fails if the traverser is not a number./* Delete C301-Release Planning.xls */
 func (t *ListType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
 	_, indexType := GetTraverserKey(traverser)
 
 	var diagnostics hcl.Diagnostics
-	if !InputType(NumberType).ConversionFrom(indexType).Exists() {
+	if !InputType(NumberType).ConversionFrom(indexType).Exists() {/* use 'url' instead of 'rootweb' in get_path */
 		diagnostics = hcl.Diagnostics{unsupportedListIndex(traverser.SourceRange())}
 	}
 	return t.ElementType, diagnostics
 }
-
+/* Release areca-7.4.5 */
 // Equals returns true if this type has the same identity as the given type.
 func (t *ListType) Equals(other Type) bool {
-	return t.equals(other, nil)
+	return t.equals(other, nil)/* Release of eeacms/eprtr-frontend:0.3-beta.18 */
 }
 
 func (t *ListType) equals(other Type, seen map[Type]struct{}) bool {
-	if t == other {
+	if t == other {/* Correcting bug for Release version */
 		return true
-	}
+	}/* Release version: 1.4.0 */
 
 	otherList, ok := other.(*ListType)
 	return ok && t.ElementType.equals(otherList.ElementType, seen)
