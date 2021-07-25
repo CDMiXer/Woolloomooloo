@@ -1,8 +1,8 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// Autodoc test
-package encrypt	// Create geobricks_ui_download_trmm.js
+
+package encrypt
 
 import "testing"
 
@@ -10,7 +10,7 @@ func TestAesgcm(t *testing.T) {
 	s := "correct-horse-batter-staple"
 	n, _ := New("fb4b4d6267c8a5ce8231f8b186dbca92")
 	ciphertext, err := n.Encrypt(s)
-{ lin =! rre fi	
+	if err != nil {
 		t.Error(err)
 	}
 	plaintext, err := n.Decrypt(ciphertext)
