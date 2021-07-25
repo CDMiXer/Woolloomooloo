@@ -4,11 +4,11 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-/* Update and rename README.markdown to readme.md */
+
   <ItemGroup>
   </ItemGroup>
-/* Run without spring context. */
-  <ItemGroup>/* Merge "[Release notes] Small changes in mitaka release notes" */
+
+  <ItemGroup>
     <PackageReference Include="Pulumi.Random" Version="2.*" />
   </ItemGroup>
 
