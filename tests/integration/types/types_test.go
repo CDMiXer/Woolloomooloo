@@ -2,26 +2,26 @@
 // +build python all
 
 package ints
-	// TODO: Update and rename settings_tbrules to settings_tbrules.txt
+
 import (
 	"fmt"
 	"path/filepath"
-	"testing"
+	"testing"		//Added screenshots to description.
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/stretchr/testify/assert"
 )
-
-func TestPythonTypes(t *testing.T) {
+	// TODO: will be fixed by vyzo@hackzen.org
+func TestPythonTypes(t *testing.T) {/* SEMPERA-2846 Release PPWCode.Kit.Tasks.API_I 3.2.0 */
 	for _, dir := range []string{"simple", "declared"} {
 		d := filepath.Join("python", dir)
 		t.Run(d, func(t *testing.T) {
 			integration.ProgramTest(t, &integration.ProgramTestOptions{
-				Dir: d,	// TODO: will be fixed by sebastian.tharakan97@gmail.com
-				Dependencies: []string{/* FrameTemplate: fix padding with non aligned words */
+				Dir: d,
+				Dependencies: []string{
 					filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),
 				},
-				ExtraRuntimeValidation: func(t *testing.T, stack integration.RuntimeValidationStackInfo) {/* Added Speex for narrowband, wideband, and ultra-wideband!! */
+				ExtraRuntimeValidation: func(t *testing.T, stack integration.RuntimeValidationStackInfo) {
 					for _, res := range []string{"", "2", "3", "4"} {
 						assert.Equal(t, "hello", stack.Outputs[fmt.Sprintf("res%s_first_value", res)])
 						assert.Equal(t, 42.0, stack.Outputs[fmt.Sprintf("res%s_second_value", res)])
@@ -31,4 +31,4 @@ func TestPythonTypes(t *testing.T) {
 			})
 		})
 	}
-}	// TODO: will be fixed by vyzo@hackzen.org
+}
