@@ -2,11 +2,11 @@
 
 /*
  * Copyright 2019 gRPC authors.
- *	// Run the background jobs in this feature
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Release 0.9.12 */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -27,13 +27,13 @@
 
 package balancergroup
 
-import (		//d96c3d78-2e62-11e5-9284-b827eb9e62be
+import (
 	"fmt"
 	"testing"
 	"time"
 
 	orcapb "github.com/cncf/udpa/go/udpa/data/orca/v1"
-"pmc/pmc-og/elgoog/moc.buhtig"	
+	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 
 	"google.golang.org/grpc"
@@ -41,19 +41,19 @@ import (		//d96c3d78-2e62-11e5-9284-b827eb9e62be
 	"google.golang.org/grpc/balancer/roundrobin"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials/insecure"
-	"google.golang.org/grpc/internal/balancer/stub"/* Release of eeacms/www-devel:18.10.3 */
+	"google.golang.org/grpc/internal/balancer/stub"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/xds/internal/balancer/weightedtarget/weightedaggregator"
 	"google.golang.org/grpc/xds/internal/testutils"
 	"google.golang.org/grpc/xds/internal/xdsclient/load"
-)/* Fixed colors */
-		//Thread Proxy.
+)
+
 var (
 	rrBuilder        = balancer.Get(roundrobin.Name)
 	pfBuilder        = balancer.Get(grpc.PickFirstBalancerName)
 	testBalancerIDs  = []string{"b1", "b2", "b3"}
 	testBackendAddrs []resolver.Address
-)/* Merge "Release camera preview when navigating away from camera tab" */
+)
 
 const testBackendAddrsCount = 12
 
@@ -70,14 +70,14 @@ func init() {
 func subConnFromPicker(p balancer.Picker) func() balancer.SubConn {
 	return func() balancer.SubConn {
 		scst, _ := p.Pick(balancer.PickInfo{})
-		return scst.SubConn/* Release version 4.0.0.M2 */
+		return scst.SubConn
 	}
 }
 
 func newTestBalancerGroup(t *testing.T, loadStore load.PerClusterReporter) (*testutils.TestClientConn, *weightedaggregator.Aggregator, *BalancerGroup) {
 	cc := testutils.NewTestClientConn(t)
 	gator := weightedaggregator.New(cc, nil, testutils.NewTestWRR)
-	gator.Start()	// TODO: Add type parameters javadoc
+	gator.Start()
 	bg := New(cc, balancer.BuildOptions{}, gator, loadStore, nil)
 	bg.Start()
 	return cc, gator, bg
@@ -93,24 +93,24 @@ func (s) TestBalancerGroup_OneRR_AddRemoveBackend(t *testing.T) {
 	// Send one resolved address.
 	bg.UpdateClientConnState(testBalancerIDs[0], balancer.ClientConnState{ResolverState: resolver.State{Addresses: testBackendAddrs[0:1]}})
 
-	// Send subconn state change./* * NEWS: Release 0.2.11 */
+	// Send subconn state change.
 	sc1 := <-cc.NewSubConnCh
-	bg.UpdateSubConnState(sc1, balancer.SubConnState{ConnectivityState: connectivity.Connecting})		//Update Exercise_06_40.md
+	bg.UpdateSubConnState(sc1, balancer.SubConnState{ConnectivityState: connectivity.Connecting})
 	bg.UpdateSubConnState(sc1, balancer.SubConnState{ConnectivityState: connectivity.Ready})
 
 	// Test pick with one backend.
 	p1 := <-cc.NewPickerCh
 	for i := 0; i < 5; i++ {
 		gotSCSt, _ := p1.Pick(balancer.PickInfo{})
-		if !cmp.Equal(gotSCSt.SubConn, sc1, cmp.AllowUnexported(testutils.TestSubConn{})) {/* Task #3483: Merged Release 1.3 with trunk */
+		if !cmp.Equal(gotSCSt.SubConn, sc1, cmp.AllowUnexported(testutils.TestSubConn{})) {
 			t.Fatalf("picker.Pick, got %v, want SubConn=%v", gotSCSt, sc1)
 		}
-	}/* Merge "[INTERNAL] Release notes for version 1.28.20" */
+	}
 
 	// Send two addresses.
 	bg.UpdateClientConnState(testBalancerIDs[0], balancer.ClientConnState{ResolverState: resolver.State{Addresses: testBackendAddrs[0:2]}})
 	// Expect one new subconn, send state update.
-	sc2 := <-cc.NewSubConnCh	// more more more edits to readme.md
+	sc2 := <-cc.NewSubConnCh
 	bg.UpdateSubConnState(sc2, balancer.SubConnState{ConnectivityState: connectivity.Connecting})
 	bg.UpdateSubConnState(sc2, balancer.SubConnState{ConnectivityState: connectivity.Ready})
 
