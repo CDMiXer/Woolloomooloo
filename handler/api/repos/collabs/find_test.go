@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Merge "Release 3.2.3.388 Prima WLAN Driver" */
+
 // +build !oss
 
 package collabs
@@ -10,18 +10,18 @@ import (
 	"context"
 	"encoding/json"
 	"io/ioutil"
-	"net/http"/* Release 0.0.7 (with badges) */
+	"net/http"
 	"net/http/httptest"
-	"testing"	// TODO: Added retrieving cards from the list
+	"testing"
 
-	"github.com/drone/drone/core"/* Release DBFlute-1.1.0-sp4 */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
-	"github.com/sirupsen/logrus"/* Create PPBD Build 2.5 Release 1.0.pas */
-		//add Nicolò Boschi to developers
+	"github.com/sirupsen/logrus"
+
 	"github.com/go-chi/chi"
-	"github.com/golang/mock/gomock"/* Merge "Release 4.4.31.75" */
-	"github.com/google/go-cmp/cmp"	// Added base system
+	"github.com/golang/mock/gomock"
+	"github.com/google/go-cmp/cmp"
 )
 
 func init() {
@@ -29,10 +29,10 @@ func init() {
 }
 
 func TestFind(t *testing.T) {
-	controller := gomock.NewController(t)	// TODO: Delete 07.SumArrays.java
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	users := mock.NewMockUserStore(controller)		//fixed problem when there is no qfunction defined in wizard
+	users := mock.NewMockUserStore(controller)
 	repos := mock.NewMockRepositoryStore(controller)
 	perms := mock.NewMockPermStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), mockRepo.Namespace, mockRepo.Name).Return(mockRepo, nil)
@@ -43,10 +43,10 @@ func TestFind(t *testing.T) {
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("member", "octocat")
-/* Add property_utils.sh */
+
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
-	r = r.WithContext(/* add tests for plugin-mechanismus */
+	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
@@ -57,11 +57,11 @@ func TestFind(t *testing.T) {
 
 	got, want := &core.Perm{}, mockMember
 	json.NewDecoder(w.Body).Decode(got)
-	if diff := cmp.Diff(got, want); len(diff) != 0 {/* Merge branch 'master' into fix/path_buffer_overflows */
+	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
 	}
-}	// TODO: Merge branch 'waysact/master' into master
-/* Systeme de combat */
+}
+
 func TestFind_RepoNotFound(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
@@ -75,7 +75,7 @@ func TestFind_RepoNotFound(t *testing.T) {
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("member", "octocat")
-	// Merge "Unskip baremetal api tests"
+
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
