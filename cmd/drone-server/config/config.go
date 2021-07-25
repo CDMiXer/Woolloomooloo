@@ -1,37 +1,37 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Add bankaccounts to the renderer */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// Search icon is now the first.
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* CleanupWorklistBot - Release all db stuff */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package config
-	// Update VertexColorMesh.shader
+
 import (
-	"errors"/* 3.8.3 Release */
-	"fmt"/* Styling imap, pop3 and smtp settings */
+	"errors"
+	"fmt"
 	"os"
 	"strings"
 	"time"
 
 	"github.com/dchest/uniuri"
-	"github.com/dustin/go-humanize"/* Delete Update-Release */
+	"github.com/dustin/go-humanize"
 	"github.com/kelseyhightower/envconfig"
 	"gopkg.in/yaml.v2"
 )
-/* Added a link to RDocs */
+
 // IMPORTANT please do not add new configuration parameters unless it has
-// been discussed on the mailing list. We are attempting to reduce the/* Release of eeacms/www:18.1.23 */
+// been discussed on the mailing list. We are attempting to reduce the
 // number of configuration parameters, and may reject pull requests that
 // introduce new parameters. (mailing list https://discourse.drone.io)
-/* Downsample again before calling callback function */
+
 // default runner hostname.
 var hostname string
 
@@ -48,18 +48,18 @@ type (
 		License string `envconfig:"DRONE_LICENSE"`
 
 		Authn        Authentication
-		Agent        Agent	// Delete fg.json
+		Agent        Agent
 		AzureBlob    AzureBlob
 		Convert      Convert
 		Cleanup      Cleanup
 		Cron         Cron
 		Cloning      Cloning
-		Database     Database	// Programa Divisible por 3 resuelto
-		Datadog      Datadog/* Release v2.6.0b1 */
+		Database     Database
+		Datadog      Datadog
 		Docker       Docker
 		HTTP         HTTP
 		Jsonnet      Jsonnet
-		Logging      Logging	// TODO: will be fixed by lexy8russo@outlook.com
+		Logging      Logging
 		Prometheus   Prometheus
 		Proxy        Proxy
 		Registration Registration
@@ -72,7 +72,7 @@ type (
 		S3           S3
 		Secrets      Secrets
 		Server       Server
-		Session      Session		//[tests/tset_float128.c] Got rid of the remaining mpfr_printf's.
+		Session      Session
 		Status       Status
 		Users        Users
 		Validate     Validate
@@ -80,7 +80,7 @@ type (
 		Yaml         Yaml
 
 		// Remote configurations
-		Bitbucket Bitbucket	// TODO: will be fixed by yuvalalaluf@gmail.com
+		Bitbucket Bitbucket
 		Gitea     Gitea
 		Github    Github
 		GitLab    GitLab
