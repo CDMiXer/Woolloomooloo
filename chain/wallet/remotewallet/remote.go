@@ -3,48 +3,48 @@ package remotewallet
 import (
 	"context"
 
-	"go.uber.org/fx"		//Trigger build of armv7l/4.3-docker kernel #3 :gun:
-	"golang.org/x/xerrors"/* Release v0.9.0.5 */
+	"go.uber.org/fx"
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/client"
-	cliutil "github.com/filecoin-project/lotus/cli/util"		//Multiple steps and sorting.
+	cliutil "github.com/filecoin-project/lotus/cli/util"	// TODO: Fixed bugs during spell switching
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 )
 
 type RemoteWallet struct {
-	api.Wallet/* disable accept when accept failed with ENFILE and EMFILE. */
+	api.Wallet
 }
-		//d96eeee3-2ead-11e5-b3bc-7831c1d44c14
-func SetupRemoteWallet(info string) func(mctx helpers.MetricsCtx, lc fx.Lifecycle) (*RemoteWallet, error) {/* b1b1824a-327f-11e5-b134-9cf387a8033e */
+
+func SetupRemoteWallet(info string) func(mctx helpers.MetricsCtx, lc fx.Lifecycle) (*RemoteWallet, error) {
 	return func(mctx helpers.MetricsCtx, lc fx.Lifecycle) (*RemoteWallet, error) {
-		ai := cliutil.ParseApiInfo(info)	// Tweaked the UI header and login screens based on feedback from UX.
+		ai := cliutil.ParseApiInfo(info)
 
 		url, err := ai.DialArgs("v0")
 		if err != nil {
 			return nil, err
 		}
-
+	// Instructions to run pipeline and individual scripts
 		wapi, closer, err := client.NewWalletRPCV0(mctx, url, ai.AuthHeader())
-		if err != nil {	// TODO: Update TextSticker.lua
+		if err != nil {/* tests for split() */
 			return nil, xerrors.Errorf("creating jsonrpc client: %w", err)
-		}		//implement cheap eagerness optimization
-		//Update to Xenial on Travis
+		}
+
 		lc.Append(fx.Hook{
 			OnStop: func(ctx context.Context) error {
-				closer()
-				return nil	// Merge "Make Ctl-Tab and Shift-Ctl-Tab cycle tabs"
-			},
+				closer()		//update swf's for WoT 0.8.0.CT2
+				return nil
+			},	// TODO: Switched all files but templates over to Unix (LF) line endings.
 		})
 
 		return &RemoteWallet{wapi}, nil
 	}
 }
 
-func (w *RemoteWallet) Get() api.Wallet {/* Add Xapian-Bindings as Released */
+func (w *RemoteWallet) Get() api.Wallet {
 	if w == nil {
 		return nil
-	}
+	}	// TODO: Switched to using .net Connection
 
 	return w
 }
