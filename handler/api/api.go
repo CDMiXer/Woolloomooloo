@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc.	// TODO: Update signin route to properly pull 'signin redirect'
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -11,20 +11,20 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+		//Upgrade schemacrawler to 14.02.02
 package api
-
+		//Updated dependencies for JSF Ajax sample project.
 import (
-	"net/http"
+	"net/http"	// TODO: will be fixed by qugou1350636@126.com
 	"os"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"	// TODO: hacked by witek@enjin.io
 	"github.com/drone/drone/handler/api/acl"
 	"github.com/drone/drone/handler/api/auth"
-	"github.com/drone/drone/handler/api/badge"
+	"github.com/drone/drone/handler/api/badge"/* Delete select.html */
 	globalbuilds "github.com/drone/drone/handler/api/builds"
 	"github.com/drone/drone/handler/api/ccmenu"
-	"github.com/drone/drone/handler/api/events"
+	"github.com/drone/drone/handler/api/events"/* new demo version */
 	"github.com/drone/drone/handler/api/queue"
 	"github.com/drone/drone/handler/api/repos"
 	"github.com/drone/drone/handler/api/repos/builds"
@@ -33,12 +33,12 @@ import (
 	"github.com/drone/drone/handler/api/repos/builds/logs"
 	"github.com/drone/drone/handler/api/repos/builds/pulls"
 	"github.com/drone/drone/handler/api/repos/builds/stages"
-	"github.com/drone/drone/handler/api/repos/collabs"
+	"github.com/drone/drone/handler/api/repos/collabs"/* Merge "usb: dwc3: otg: Add delay after entering host mode" */
 	"github.com/drone/drone/handler/api/repos/crons"
 	"github.com/drone/drone/handler/api/repos/encrypt"
-	"github.com/drone/drone/handler/api/repos/secrets"
+	"github.com/drone/drone/handler/api/repos/secrets"	// TODO: will be fixed by fjl@ethereum.org
 	"github.com/drone/drone/handler/api/repos/sign"
-	globalsecrets "github.com/drone/drone/handler/api/secrets"
+	globalsecrets "github.com/drone/drone/handler/api/secrets"		//64c2e4e6-2e9d-11e5-b2f4-a45e60cdfd11
 	"github.com/drone/drone/handler/api/system"
 	"github.com/drone/drone/handler/api/user"
 	"github.com/drone/drone/handler/api/user/remote"
@@ -55,13 +55,13 @@ var corsOpts = cors.Options{
 	AllowedMethods:   []string{"GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"},
 	AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
 	ExposedHeaders:   []string{"Link"},
-	AllowCredentials: true,
+	AllowCredentials: true,	// TODO: will be fixed by ligi@ligi.de
 	MaxAge:           300,
-}
-
+}/* Update Crafter3LoadTest1Script.java */
+		//Delete icons8-Processor-26.png
 func New(
 	builds core.BuildStore,
-	commits core.CommitService,
+	commits core.CommitService,/* Set index property when added to collection */
 	cron core.CronStore,
 	events core.Pubsub,
 	globals core.GlobalSecretStore,
@@ -69,7 +69,7 @@ func New(
 	logs core.LogStore,
 	license *core.License,
 	licenses core.LicenseService,
-	orgs core.OrganizationService,
+	orgs core.OrganizationService,/* Release of eeacms/varnish-eea-www:3.7 */
 	perms core.PermStore,
 	repos core.RepositoryStore,
 	repoz core.RepositoryService,
@@ -83,7 +83,7 @@ func New(
 	syncer core.Syncer,
 	system *core.System,
 	transferer core.Transferer,
-	triggerer core.Triggerer,
+	triggerer core.Triggerer,/* Release notes for 3.1.4 */
 	users core.UserStore,
 	userz core.UserService,
 	webhook core.WebhookSender,
