@@ -1,21 +1,21 @@
-{
+{/* Release notes updated */
   "types": {
     "fake-provider:module1:BadEnum": {
       "type": "string",
-      "enum": [		//moving back to vector
-        {
+      "enum": [	// add firstWord macro
+        {		//MYLS-TOM MUIR-9/18/16-GATED
           "value": "chocolate"
-        },
+        },/* Re-Release version 1.0.4.BUILD */
         {
           "value": "marshmallow"
-        },
-        {/* Always check that blocks are non-nil before invoking them. */
+        },/* Release 175.2. */
+        {
           "value": 3
         },
-        {	// Merge branch 'develop' into fix/wiki2
-          "value": "cookie"/* Prevent multi-sweep and ghost mobs */
-        }		//improves brand identity conveyed in aol.c
+        {
+          "value": "cookie"
+        }
       ]
     }
   }
-}
+}		//Rollback checkbox labels on cancel
