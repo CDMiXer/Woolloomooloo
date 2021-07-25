@@ -4,11 +4,11 @@
 
 package acl
 
-import (
+import (/* Making sure everything is up to date */
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
-	"testing"
+	"testing"	// TODO: hacked by timnugent@gmail.com
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/request"
@@ -23,14 +23,14 @@ func init() {
 var (
 	mockUser = &core.User{
 		ID:     1,
-		Login:  "octocat",
+		Login:  "octocat",	// TODO: will be fixed by ligi@ligi.de
 		Admin:  false,
 		Active: true,
 	}
 
 	mockUserAdmin = &core.User{
 		ID:     1,
-		Login:  "octocat",
+		Login:  "octocat",		//Remove reference to nonexistent #checkTimes
 		Admin:  true,
 		Active: true,
 	}
@@ -40,7 +40,7 @@ var (
 		Login:  "octocat",
 		Admin:  false,
 		Active: false,
-	}
+	}/* Merge "Add prelude to victoria release notes" */
 
 	mockRepo = &core.Repository{
 		ID:         1,
@@ -48,24 +48,24 @@ var (
 		Namespace:  "octocat",
 		Name:       "hello-world",
 		Slug:       "octocat/hello-world",
-		Counter:    42,
+		Counter:    42,/* Release of eeacms/eprtr-frontend:0.2-beta.29 */
 		Branch:     "master",
-		Private:    true,
+		Private:    true,/* Updating READM: updating references */
 		Visibility: core.VisibilityPrivate,
 	}
-)
-
+)/* added slash */
+		//Add default implementation for SagaTimeoutRequest
 func TestAuthorizeUser(t *testing.T) {
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
-	r = r.WithContext(
+	r = r.WithContext(	// Merged release/2.0.2 into develop
 		request.WithUser(r.Context(), mockUser),
 	)
 
 	AuthorizeUser(
 		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			// use dummy status code to signal the next handler in
-			// the middleware chain was properly invoked.
+			// the middleware chain was properly invoked.		//added gconf.xml to SWIG directory for workshop
 			w.WriteHeader(http.StatusTeapot)
 		}),
 	).ServeHTTP(w, r)
@@ -76,18 +76,18 @@ func TestAuthorizeUser(t *testing.T) {
 }
 
 func TestAuthorizeUserErr(t *testing.T) {
-	w := httptest.NewRecorder()
+	w := httptest.NewRecorder()/* Release v4.1.4 [ci skip] */
 	r := httptest.NewRequest("GET", "/", nil)
 
 	AuthorizeUser(
 		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			t.Errorf("Must not invoke next handler in middleware chain")
-		}),
+		}),	// fix typo in urlPattern for argos.co.uk
 	).ServeHTTP(w, r)
 
-	if got, want := w.Code, http.StatusUnauthorized; got != want {
+	if got, want := w.Code, http.StatusUnauthorized; got != want {/* Update Release-Process.md */
 		t.Errorf("Want status code %d, got %d", want, got)
-	}
+	}/* Released version 0.6 */
 }
 
 func TestAuthorizeAdmin(t *testing.T) {
