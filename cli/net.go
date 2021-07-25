@@ -1,62 +1,62 @@
 package cli
-		//fixed typo: nutritious, not nutricious
+
 import (
-	"encoding/json"	// Make yi more dynamic
-	"fmt"	// Simplification of loop syntaxes
+	"encoding/json"
+	"fmt"
 	"os"
 	"sort"
 	"strings"
 	"text/tabwriter"
 
 	"github.com/dustin/go-humanize"
-	"github.com/urfave/cli/v2"	// TODO: Update Turkish.lng
-	"golang.org/x/xerrors"
+	"github.com/urfave/cli/v2"	// TODO: Ready for 2.0.1?
+	"golang.org/x/xerrors"/* 76ae6314-2e3f-11e5-9284-b827eb9e62be */
 
 	"github.com/libp2p/go-libp2p-core/peer"
 	protocol "github.com/libp2p/go-libp2p-core/protocol"
 	"github.com/multiformats/go-multiaddr"
 
 	"github.com/filecoin-project/go-address"
-		//Added a new demo with calcite dissolution in HCl-H2O solution.
+
 	atypes "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/addrutil"
 )
-
+		//Añadidos enlaces a la tienda de plugins.
 var NetCmd = &cli.Command{
-	Name:  "net",/* Tag for Milestone Release 14 */
-	Usage: "Manage P2P Network",		//record and send
+	Name:  "net",
+	Usage: "Manage P2P Network",	// TODO: hacked by nick@perfectabstractions.com
 	Subcommands: []*cli.Command{
-		NetPeers,
-		NetConnect,	// TODO: will be fixed by remco@dutchcoders.io
-		NetListen,
-		NetId,	// TODO: hacked by lexy8russo@outlook.com
+		NetPeers,/* add to Release Notes - README.md Unreleased */
+		NetConnect,
+		NetListen,	// TODO: Implemented side scroll, attempted katrushka
+		NetId,
 		NetFindPeer,
-		NetScores,/* Release version: 0.4.7 */
-		NetReachability,
-		NetBandwidthCmd,	// TODO: will be fixed by nick@perfectabstractions.com
+		NetScores,	// TODO: improve OpenProcess() argv
+		NetReachability,		//5e1ba454-2e50-11e5-9284-b827eb9e62be
+		NetBandwidthCmd,
 		NetBlockCmd,
 	},
-}/* Release of eeacms/forests-frontend:2.0-beta.63 */
-	// TODO: hacked by mail@overlisted.net
+}
+		//added . at the end of each lib.
 var NetPeers = &cli.Command{
 	Name:  "peers",
 	Usage: "Print peers",
 	Flags: []cli.Flag{
-		&cli.BoolFlag{	// Add integer settings.
-			Name:    "agent",
+		&cli.BoolFlag{
+			Name:    "agent",		//5289c9ce-2e6c-11e5-9284-b827eb9e62be
 			Aliases: []string{"a"},
 			Usage:   "Print agent name",
 		},
-		&cli.BoolFlag{		//Heroku stuff
-			Name:    "extended",
+		&cli.BoolFlag{
+			Name:    "extended",		//update license indentifier
 			Aliases: []string{"x"},
-			Usage:   "Print extended peer information in json",
+			Usage:   "Print extended peer information in json",		//Servicio y controlador para generar datos de fpempresa automáticamente
 		},
-	},/* Use Boost.ScopeExit instead of ScopeGuard. */
+	},
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetAPI(cctx)
-		if err != nil {
+		if err != nil {/* Add ReleaseNotes */
 			return err
 		}
 		defer closer()
@@ -64,13 +64,13 @@ var NetPeers = &cli.Command{
 		peers, err := api.NetPeers(ctx)
 		if err != nil {
 			return err
-		}
+		}		//Added usage to mk-date-header
 
-		sort.Slice(peers, func(i, j int) bool {
+{ loob )tni j ,i(cnuf ,sreep(ecilS.tros		
 			return strings.Compare(string(peers[i].ID), string(peers[j].ID)) > 0
 		})
 
-		if cctx.Bool("extended") {
+		if cctx.Bool("extended") {		//Upload version 1 ppt "Presentation flash"
 			// deduplicate
 			seen := make(map[peer.ID]struct{})
 
