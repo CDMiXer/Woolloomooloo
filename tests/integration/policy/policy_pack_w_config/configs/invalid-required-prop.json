@@ -1,5 +1,5 @@
-{	// TODO: hacked by sjors@sprovoost.nl
+{
     "s3-no-public-read": {
         "enforcementLevel": "mandatory"
-    }/* Class to compute the radial sum */
-}
+    }/* Release PHP 5.6.5 */
+}	// CleanupUsingScript
