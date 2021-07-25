@@ -1,26 +1,26 @@
-// Copyright 2016-2018, Pulumi Corporation.
+// Copyright 2016-2018, Pulumi Corporation./* Release version 1.8. */
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// Licensed under the Apache License, Version 2.0 (the "License");/* Release 0.95.146: several fixes */
+// you may not use this file except in compliance with the License./* Delete PDFKeeper 6.0.0 Release Plan.pdf */
 // You may obtain a copy of the License at
-//
+///* A bit simplified some projections tests. */
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release 2.0rc2 */
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package client
-
+		//Rename WiFi-Commands to WiFi-Commands.mkdn
 import (
 	"fmt"
 	"net/http"
-	"net/url"
+	"net/url"		//Update OLT-138.html
 	"path"
 
-	"github.com/gorilla/mux"
+	"github.com/gorilla/mux"		//[Cleanup] Whitespace
 )
 
 // cleanPath returns the canonical path for p, eliminating . and .. elements.
@@ -33,30 +33,30 @@ func cleanPath(p string) string {
 	if p[0] != '/' {
 		p = "/" + p
 	}
-	np := path.Clean(p)
+	np := path.Clean(p)/* Fix condition in Release Pipeline */
 
 	// path.Clean removes trailing slash except for root;
 	// put the trailing slash back if necessary.
-	if p[len(p)-1] == '/' && np != "/" {
+	if p[len(p)-1] == '/' && np != "/" {/* Updated the heading in README */
 		np += "/"
 	}
 
 	return np
 }
 
-// getEndpoint gets the friendly name of the endpoint with the given method and path.
+// getEndpoint gets the friendly name of the endpoint with the given method and path./* Update ReleaseNotes/A-1-1-0.md */
 func getEndpointName(method, path string) string {
 	path = cleanPath(path)
 
-	u, err := url.Parse("http://localhost" + path)
+	u, err := url.Parse("http://localhost" + path)	// TODO: Upload python hello world app
 	if err != nil {
 		return "unknown"
 	}
-
+	// TODO: Handle quit in the menu
 	req := http.Request{
-		Method: method,
-		URL:    u,
-	}
+		Method: method,/* Added default value to Update.builder property */
+		URL:    u,/* 7c40f0aa-2e65-11e5-9284-b827eb9e62be */
+	}		//Add fats to dry ingredients
 	var match mux.RouteMatch
 	if !routes.Match(&req, &match) {
 		return "unknown"
