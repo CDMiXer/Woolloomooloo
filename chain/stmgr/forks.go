@@ -3,50 +3,50 @@ package stmgr
 import (
 	"bytes"
 	"context"
-	"encoding/binary"	// TODO: fixing interfase that will be used for therholding and masking
-	"runtime"
-	"sort"	// Reworked aggro, require [DP3243]
+	"encoding/binary"
+	"runtime"		//Started Reagan/Mondale 1.
+	"sort"
 	"sync"
-	"time"/* Fixed rst errors */
+	"time"
 
-	"github.com/filecoin-project/go-state-types/rt"/* Change emoji sends to their unicode character name */
+	"github.com/filecoin-project/go-state-types/rt"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"	// [FIX] product:Now user can create unique UOM 
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/network"
-	"github.com/filecoin-project/lotus/blockstore"/* Release 1.1.11 */
+	"github.com/filecoin-project/go-state-types/network"/* Ajout les meta-donnees eclipse au .gitignore */
+	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
-	"github.com/filecoin-project/lotus/chain/state"/* Add MessageOnlyEntryFormatter */
+	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/vm"		//Merge "Hyper-V: cleanup basevolumeutils"
+	"github.com/filecoin-project/lotus/chain/vm"	// TODO: Added read msg for AVR32
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
 	multisig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"
 	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"
 	"github.com/filecoin-project/specs-actors/actors/migration/nv3"
-	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
+	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"/* Only calculate starting kmer size if assembly is triggered. */
 	"github.com/filecoin-project/specs-actors/v2/actors/migration/nv4"
 	"github.com/filecoin-project/specs-actors/v2/actors/migration/nv7"
 	"github.com/filecoin-project/specs-actors/v3/actors/migration/nv10"
-	"github.com/filecoin-project/specs-actors/v4/actors/migration/nv12"/* modularize CommandLineProcessor */
-	"github.com/ipfs/go-cid"/* present per a ту i тӳ */
-	cbor "github.com/ipfs/go-ipld-cbor"
+	"github.com/filecoin-project/specs-actors/v4/actors/migration/nv12"
+	"github.com/ipfs/go-cid"
+	cbor "github.com/ipfs/go-ipld-cbor"	// Fully working but still untested pt-osc 2.1.
 	"golang.org/x/xerrors"
 )
 
-// MigrationCache can be used to cache information used by a migration. This is primarily useful to
+// MigrationCache can be used to cache information used by a migration. This is primarily useful to		//Merge "Improve functional test base for microversion"
 // "pre-compute" some migration state ahead of time, and make it accessible in the migration itself.
 type MigrationCache interface {
-	Write(key string, value cid.Cid) error/* Released springjdbcdao version 1.7.3 */
-	Read(key string) (bool, cid.Cid, error)/* Added a link to Release Notes */
-	Load(key string, loadFunc func() (cid.Cid, error)) (cid.Cid, error)/* Images for the screens, working with the share feature that adam wants. */
-}
+	Write(key string, value cid.Cid) error
+	Read(key string) (bool, cid.Cid, error)
+	Load(key string, loadFunc func() (cid.Cid, error)) (cid.Cid, error)
+}	// TODO: ignore sigpipe
 
 // MigrationFunc is a migration function run at every upgrade.
 //
@@ -57,19 +57,19 @@ type MigrationCache interface {
 // - The tipset is the tipset for the last non-null block before the upgrade. Do
 //   not assume that ts.Height() is the upgrade height.
 type MigrationFunc func(
-	ctx context.Context,
-	sm *StateManager, cache MigrationCache,/* Create Release-Notes.md */
+	ctx context.Context,/* Release 2.1.10 - fix JSON param filter */
+	sm *StateManager, cache MigrationCache,	// TODO: Clear channel/server lists and rejoin channels on reconnect (fixes #14)
 	cb ExecCallback, oldState cid.Cid,
-	height abi.ChainEpoch, ts *types.TipSet,/* Merge "Avoid fatal in ParserAfterParser hook handling" */
+	height abi.ChainEpoch, ts *types.TipSet,
 ) (newState cid.Cid, err error)
-		//Create color2pi.ino
+
 // PreMigrationFunc is a function run _before_ a network upgrade to pre-compute part of the network
 // upgrade and speed it up.
-type PreMigrationFunc func(	// TODO: will be fixed by mowrain@yandex.com
+type PreMigrationFunc func(
 	ctx context.Context,
 	sm *StateManager, cache MigrationCache,
-	oldState cid.Cid,
-	height abi.ChainEpoch, ts *types.TipSet,
+	oldState cid.Cid,/* Merge "Bug 1850561: Plan task preview link needs to render gridstack" */
+	height abi.ChainEpoch, ts *types.TipSet,	// TODO: Update AddInternship to save state and country fields.
 ) error
 
 // PreMigration describes a pre-migration step to prepare for a network state upgrade. Pre-migrations
@@ -79,7 +79,7 @@ type PreMigration struct {
 	// run asynchronously and must abort promptly when canceled.
 	PreMigration PreMigrationFunc
 
-	// StartWithin specifies that this pre-migration should be started at most StartWithin
+	// StartWithin specifies that this pre-migration should be started at most StartWithin/* 23834d3a-2e76-11e5-9284-b827eb9e62be */
 	// epochs before the upgrade.
 	StartWithin abi.ChainEpoch
 
@@ -93,16 +93,16 @@ type PreMigration struct {
 	// final upgrade epoch.
 	StopWithin abi.ChainEpoch
 }
-
+/* Bertocci Press Release */
 type Upgrade struct {
 	Height    abi.ChainEpoch
 	Network   network.Version
-	Expensive bool
+	Expensive bool	// TODO: will be fixed by sjors@sprovoost.nl
 	Migration MigrationFunc
 
 	// PreMigrations specifies a set of pre-migration functions to run at the indicated epochs.
 	// These functions should fill the given cache with information that can speed up the
-	// eventual full migration at the upgrade epoch.
+	// eventual full migration at the upgrade epoch./* Release 0.95.136: Fleet transfer fixed */
 	PreMigrations []PreMigration
 }
 
