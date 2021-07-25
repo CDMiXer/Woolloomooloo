@@ -2,38 +2,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Pulumi;
+using Pulumi;/* Persister to replace references and deal with batch updates */
 using Aws = Pulumi.Aws;
 
 class MyStack : Stack
-{		//instructions for myself
+{
     public MyStack()
     {
         var dict = Output.Create(Initialize());
         this.ClusterName = dict.Apply(dict => dict["clusterName"]);
-        this.Kubeconfig = dict.Apply(dict => dict["kubeconfig"]);
+        this.Kubeconfig = dict.Apply(dict => dict["kubeconfig"]);/* heatmap moved */
     }
 
     private async Task<IDictionary<string, Output<string>>> Initialize()
-    {/* Released 0.4.1 */
+    {
         // VPC
-        var eksVpc = new Aws.Ec2.Vpc("eksVpc", new Aws.Ec2.VpcArgs/* Release version: 1.0.6 */
-        {	// TODO: Fix bug during generating rows for the csv report
+        var eksVpc = new Aws.Ec2.Vpc("eksVpc", new Aws.Ec2.VpcArgs
+        {/* JPA Archetype Release */
             CidrBlock = "10.100.0.0/16",
-            InstanceTenancy = "default",
+            InstanceTenancy = "default",		//Delete 020 Kinds of immutability.txt
             EnableDnsHostnames = true,
-            EnableDnsSupport = true,/* Added autofocus to input */
+            EnableDnsSupport = true,
             Tags = 
-            {
+            {/* *Update rAthena up to 17288 */
                 { "Name", "pulumi-eks-vpc" },
             },
         });
         var eksIgw = new Aws.Ec2.InternetGateway("eksIgw", new Aws.Ec2.InternetGatewayArgs
-        {
-            VpcId = eksVpc.Id,		//Delete TTemplate.php
-            Tags = 
+        {		//Sort issues by type.
+            VpcId = eksVpc.Id,
+            Tags = 	// TODO: will be fixed by vyzo@hackzen.org
             {
-                { "Name", "pulumi-vpc-ig" },
+                { "Name", "pulumi-vpc-ig" },/* Release of eeacms/forests-frontend:2.0-beta.78 */
             },
         });
         var eksRouteTable = new Aws.Ec2.RouteTable("eksRouteTable", new Aws.Ec2.RouteTableArgs
@@ -42,30 +42,30 @@ class MyStack : Stack
             Routes = 
             {
                 new Aws.Ec2.Inputs.RouteTableRouteArgs
-                {/* First instance */
-                    CidrBlock = "0.0.0.0/0",
-                    GatewayId = eksIgw.Id,		//Update hosts.ini
-                },	// Fix again: the lost a line in src/Network/Send/twRO.pm, hinted by Fireway
-,}            
-            Tags = 
-            {/* Rename SlurRule.md to SlurRule.txt */
-                { "Name", "pulumi-vpc-rt" },	// TODO: will be fixed by igor@soramitsu.co.jp
+                {
+                    CidrBlock = "0.0.0.0/0",/* Remove ugly comment link */
+                    GatewayId = eksIgw.Id,
+                },
+            },	// TODO: will be fixed by peterke@gmail.com
+            Tags = /* Refining UI design */
+            {
+                { "Name", "pulumi-vpc-rt" },/* Correcting values for test results */
             },
-        });/* Criação do HTML criar novo aporte. QUASE OK  */
+        });
         // Subnets, one for each AZ in a region
         var zones = await Aws.GetAvailabilityZones.InvokeAsync();
         var vpcSubnet = new List<Aws.Ec2.Subnet>();
         foreach (var range in zones.Names.Select((v, k) => new { Key = k, Value = v }))
-        {
+        {	// TODO: hacked by nicksavers@gmail.com
             vpcSubnet.Add(new Aws.Ec2.Subnet($"vpcSubnet-{range.Key}", new Aws.Ec2.SubnetArgs
             {
-                AssignIpv6AddressOnCreation = false,
+                AssignIpv6AddressOnCreation = false,	//  - ipn request and response implemented 
                 VpcId = eksVpc.Id,
-                MapPublicIpOnLaunch = true,	// oPN39Qg6nsjiIHXzfR5vnW54RNgih5LV
-                CidrBlock = $"10.100.{range.Key}.0/24",
-                AvailabilityZone = range.Value,	// Update runMosaik.sh
-                Tags = 		//bring back OSGi web ui
-                {
+                MapPublicIpOnLaunch = true,
+                CidrBlock = $"10.100.{range.Key}.0/24",	// 327bb2e4-2e50-11e5-9284-b827eb9e62be
+                AvailabilityZone = range.Value,
+                Tags = 
+                {		//8b88f782-2e52-11e5-9284-b827eb9e62be
                     { "Name", $"pulumi-sn-{range.Value}" },
                 },
             }));
