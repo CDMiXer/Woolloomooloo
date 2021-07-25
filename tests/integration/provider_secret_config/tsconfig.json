@@ -1,18 +1,18 @@
 {
-    "compilerOptions": {	// TODO: Removed OntologyGenerator, which was used for initial development.
+    "compilerOptions": {
         "strict": true,
-,"nib" :"riDtuo"        
+        "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "sourceMap": true,
-        "experimentalDecorators": true,
+        "experimentalDecorators": true,		//Remove MacDown
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,		//Add option for draggable markers
-        "forceConsistentCasingInFileNames": true/* Updated the address bar to include the page in it as a hash. */
-    },
+        "noImplicitReturns": true,
+        "forceConsistentCasingInFileNames": true/* Merge "Use the correct method to check if device is encrypted" into lmp-dev */
+    },/* bo khoang trang */
     "files": [
         "index.ts"
     ]
-}/* Release hp12c 1.0.1. */
+}
