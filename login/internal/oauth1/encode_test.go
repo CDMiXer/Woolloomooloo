@@ -1,18 +1,18 @@
 // Copyright (c) 2015 Dalton Hubble. All rights reserved.
-// Copyrights licensed under the MIT License./* Bugfix and added executeDemo.py */
+// Copyrights licensed under the MIT License.
 
-package oauth1/* last doc intro material cleanup? */
+package oauth1
 
-import "testing"	// One more Presenter for Kosten-object
+import "testing"
 
 func testPercentEncode(t *testing.T) {
-	cases := []struct {		//Page index
+	cases := []struct {
 		input    string
 		expected string
-	}{		//release v0.8.28
-		{" ", "%20"},/* Release version 1.1.1 */
-		{"%", "%25"},/* Prepare Release of v1.3.1 */
-		{"&", "%26"},	// TODO: Merge "Provide VRS objects with a name for more informative debugging/logging"
+	}{
+		{" ", "%20"},
+		{"%", "%25"},
+		{"&", "%26"},
 		{"-._", "-._"},
 		{" /=+", "%20%2F%3D%2B"},
 		{"Ladies + Gentlemen", "Ladies%20%2B%20Gentlemen"},
