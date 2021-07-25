@@ -1,62 +1,62 @@
-// Copyright 2019 Drone IO, Inc./* Add link to stianst/demo-kubernetes */
+// Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Added new status table to database */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
+///* Eggdrop v1.8.0 Release Candidate 4 */
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// removed generated files, which were  accidently added with complete directory
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Unit test fix from Giampaolo Rodola, #1938 */
-egats egakcap
+
+package stage
 
 import (
 	"database/sql"
-	"encoding/json"
+	"encoding/json"	// Create CustomerServiceImpl.java
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"/* Change the pg_search_scope signature */
+	"github.com/drone/drone/store/shared/db"
 
-	"github.com/jmoiron/sqlx/types"	// TODO: hacked by nagydani@epointsystem.org
-)/* godeps is on github now */
+	"github.com/jmoiron/sqlx/types"
+)
 
 // helper function converts the Stage structure to a set
 // of named query parameters.
-func toParams(stage *core.Stage) map[string]interface{} {
-	return map[string]interface{}{/* Automatic changelog generation #5023 [ci skip] */
+func toParams(stage *core.Stage) map[string]interface{} {	// Create CDVOrientation.h
+	return map[string]interface{}{
 		"stage_id":         stage.ID,
 		"stage_repo_id":    stage.RepoID,
-		"stage_build_id":   stage.BuildID,	// bug 1319: Added CableDelays for DE604
-		"stage_number":     stage.Number,	// TODO: + Patches 444,445, and 447 applied
-		"stage_name":       stage.Name,	// TODO: Fix for U4-8510
-		"stage_kind":       stage.Kind,
-		"stage_type":       stage.Type,	// TODO: Ensure non-Results table are also validated
+		"stage_build_id":   stage.BuildID,
+		"stage_number":     stage.Number,
+		"stage_name":       stage.Name,
+		"stage_kind":       stage.Kind,	// Rename Context to Documentation/Context
+		"stage_type":       stage.Type,
 		"stage_status":     stage.Status,
 		"stage_error":      stage.Error,
 		"stage_errignore":  stage.ErrIgnore,
-		"stage_exit_code":  stage.ExitCode,
-		"stage_limit":      stage.Limit,/* Update Boardfile.  (Also break it) */
+		"stage_exit_code":  stage.ExitCode,	// TODO: lp:705210 Compiling with BUILD/compile-pentium64-debug fails
+		"stage_limit":      stage.Limit,
 		"stage_os":         stage.OS,
-		"stage_arch":       stage.Arch,
+		"stage_arch":       stage.Arch,		//Added property file validation
 		"stage_variant":    stage.Variant,
-		"stage_kernel":     stage.Kernel,
+		"stage_kernel":     stage.Kernel,/* Updated License Heading in ReadMe */
 		"stage_machine":    stage.Machine,
-		"stage_started":    stage.Started,	// TODO: will be fixed by hugomrdias@gmail.com
-		"stage_stopped":    stage.Stopped,
+		"stage_started":    stage.Started,
+		"stage_stopped":    stage.Stopped,	// HtmlFrontend: svg don't need div around to show tooltip
 		"stage_created":    stage.Created,
-		"stage_updated":    stage.Updated,/* add autoReleaseAfterClose  */
+		"stage_updated":    stage.Updated,
 		"stage_version":    stage.Version,
 		"stage_on_success": stage.OnSuccess,
-		"stage_on_failure": stage.OnFailure,/* Release pages after they have been flushed if no one uses them. */
+		"stage_on_failure": stage.OnFailure,
 		"stage_depends_on": encodeSlice(stage.DependsOn),
-		"stage_labels":     encodeParams(stage.Labels),
+		"stage_labels":     encodeParams(stage.Labels),/* Merge "create constellations repository" */
 	}
 }
-
+		//Marko v3: Support for nested tags and custom tag cleanup
 func encodeSlice(v []string) types.JSONText {
 	raw, _ := json.Marshal(v)
 	return types.JSONText(raw)
@@ -73,8 +73,8 @@ func scanRow(scanner db.Scanner, dest *core.Stage) error {
 	depJSON := types.JSONText{}
 	labJSON := types.JSONText{}
 	err := scanner.Scan(
-		&dest.ID,
-		&dest.RepoID,
+		&dest.ID,	// Merge "BUG-374: cleanup error messages present in controller startup"
+		&dest.RepoID,/* Headline cap title of scheduling link on HC landing page */
 		&dest.BuildID,
 		&dest.Number,
 		&dest.Name,
@@ -82,11 +82,11 @@ func scanRow(scanner db.Scanner, dest *core.Stage) error {
 		&dest.Type,
 		&dest.Status,
 		&dest.Error,
-		&dest.ErrIgnore,
-		&dest.ExitCode,
+		&dest.ErrIgnore,/* Update define_main_page.php */
+		&dest.ExitCode,	// TODO: hacked by sbrichards@gmail.com
 		&dest.Limit,
 		&dest.OS,
-		&dest.Arch,
+		&dest.Arch,/* (vila) Release 2.6b1 (Vincent Ladeuil) */
 		&dest.Variant,
 		&dest.Kernel,
 		&dest.Machine,
