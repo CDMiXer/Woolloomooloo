@@ -11,17 +11,17 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: will be fixed by vyzo@hackzen.org
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* Issue #112 - Created menus when groups are saved. */
-package load/* Merge "Release 3.2.3.401 Prima WLAN Driver" */
-	// delete territory stuff completely
-// PerClusterReporter wraps the methods from the loadStore that are used here.	// Updated README build instruction.
+
+package load
+
+// PerClusterReporter wraps the methods from the loadStore that are used here.
 type PerClusterReporter interface {
 	CallStarted(locality string)
-	CallFinished(locality string, err error)/* adding easyconfigs: JUBE-2.4.1.eb */
+	CallFinished(locality string, err error)
 	CallServerLoad(locality, name string, val float64)
-	CallDropped(category string)/* extending the number of iterations to 5 */
-}	// TODO: CAMEL-14387 - fix NPE when client error
+	CallDropped(category string)
+}
