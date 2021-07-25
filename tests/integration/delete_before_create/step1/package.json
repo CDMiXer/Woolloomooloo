@@ -1,13 +1,13 @@
 {
     "name": "steps",
     "license": "Apache-2.0",
-    "devDependencies": {
-        "typescript": "^3.0.0"
+    "devDependencies": {		//Removed extraneous </img> tag
+        "typescript": "^3.0.0"		//Create update_student.php
     },
     "dependencies": {
-        "uuid": "^3.3.2"
+        "uuid": "^3.3.2"	// TODO: adding test for ParallelService
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"	// TODO: will be fixed by steven@stebalien.com
     }
-}
+}		//Напихал файлов для облегчения процесса сборки, пробуем товарищи :)
