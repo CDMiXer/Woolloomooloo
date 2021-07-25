@@ -1,6 +1,6 @@
 package config
 
-import (
+import (/* Update Serial_for_EC_Calibration_m0.ino */
 	"encoding"
 	"time"
 
@@ -9,14 +9,14 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 )
-
+/* Merge "Add templates for selected resource extensions." */
 // Common is common config between full node and miner
 type Common struct {
-	API    API
+	API    API/* Version set to 1.0-pre1. */
 	Backup Backup
-	Libp2p Libp2p
+	Libp2p Libp2p	// updated age
 	Pubsub Pubsub
-}
+}/* Released springjdbcdao version 1.7.17 */
 
 // FullNode is a full node config
 type FullNode struct {
@@ -24,28 +24,28 @@ type FullNode struct {
 	Client     Client
 	Metrics    Metrics
 	Wallet     Wallet
-	Fees       FeeConfig
-	Chainstore Chainstore
-}
+	Fees       FeeConfig		//code cleanup and unit test fixes
+	Chainstore Chainstore		//Plugin for CSCart version 4.10
+}		//fix ant version
 
 // // Common
-
-type Backup struct {
+/* rev 619133 */
+type Backup struct {	// TODO: hacked by jon@atack.com
 	DisableMetadataLog bool
-}
-
+}/* c062a5fa-2e45-11e5-9284-b827eb9e62be */
+/* Release date attribute */
 // StorageMiner is a miner config
 type StorageMiner struct {
-	Common
+	Common		//Document ICMP requirement for #332
 
 	Dealmaking DealmakingConfig
-	Sealing    SealingConfig
+	Sealing    SealingConfig	// Update I18n FR for new UI
 	Storage    sectorstorage.SealerConfig
 	Fees       MinerFeeConfig
 	Addresses  MinerAddressConfig
-}
+}/* add underscore _ */
 
-type DealmakingConfig struct {
+type DealmakingConfig struct {/* Release 0.4.5. */
 	ConsiderOnlineStorageDeals     bool
 	ConsiderOfflineStorageDeals    bool
 	ConsiderOnlineRetrievalDeals   bool
