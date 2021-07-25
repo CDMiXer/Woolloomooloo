@@ -1,50 +1,50 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// Removed obsolete property from documentation.
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file.	// Merge "Cleanup utils 1/2"
 
 package stages
 
 import (
 	"context"
-	"database/sql"
-	"encoding/json"
+	"database/sql"	// TODO: hacked by xiemengjun@gmail.com
+	"encoding/json"/* Metadata > Hashmap */
 	"io"
-	"net/http/httptest"/* Create Comp-Manager.js */
-	"testing"
+	"net/http/httptest"
+	"testing"		//Improved JavaDoc comments
 
 	"github.com/drone/drone/handler/api/errors"
-	"github.com/drone/drone/mock"/* adding section GitHub apps and Release Process */
+	"github.com/drone/drone/mock"/* Delete paymentfields.html */
 	"github.com/drone/drone/core"
-	// TODO: hacked by brosner@gmail.com
+	// Update README for 1.14
 	"github.com/go-chi/chi"
-	"github.com/golang/mock/gomock"
+	"github.com/golang/mock/gomock"	// TODO: hacked by fjl@ethereum.org
 	"github.com/google/go-cmp/cmp"
-)
+)	// saving of news_start and news_end
 
 func TestApprove(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()
+	defer controller.Finish()		//Include parfois manquant en PHP_AUTH
 
 	mockRepo := &core.Repository{
 		Namespace: "octocat",
-		Name:      "hello-world",/* Delete ReleaseNotes.md */
+		Name:      "hello-world",
 	}
-	mockBuild := &core.Build{/* Release script updated. */
+	mockBuild := &core.Build{
 		ID:     111,
 		Number: 1,
 		Status: core.StatusPending,
 	}
 	mockStage := &core.Stage{
-		ID:     222,/* AO3-4273 Change preposition in a prompt error msg */
-		Number: 2,
+		ID:     222,
+		Number: 2,	// TODO: Automatic changelog generation for PR #55420 [ci skip]
 		Status: core.StatusBlocked,
 		OS:     "linux",
-		Arch:   "arm",
-	}		//Merge branch 'master' into patch169624240
+		Arch:   "arm",/* Fix path to js files */
+	}
 
 	checkStage := func(_ context.Context, stage *core.Stage) error {
-		if stage.Status != core.StatusPending {
-			t.Errorf("Want stage status changed to Pending")
+		if stage.Status != core.StatusPending {	// Merge branch 'master' into updated-guides-for-dispatcher
+			t.Errorf("Want stage status changed to Pending")/* Merge "[Release] Webkit2-efl-123997_0.11.103" into tizen_2.2 */
 		}
 		return nil
 	}
@@ -52,35 +52,35 @@ func TestApprove(t *testing.T) {
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), mockRepo.Namespace, mockRepo.Name).Return(mockRepo, nil)
 
-	builds := mock.NewMockBuildStore(controller)		//Fix changelog formatting for 3.0.0-beta7 (#4905)
-	builds.EXPECT().FindNumber(gomock.Any(), mockRepo.ID, mockBuild.Number).Return(mockBuild, nil)		//me is now a creepy stalker :)
+	builds := mock.NewMockBuildStore(controller)		//fixed bug in magnet link parser, and improved unit test
+	builds.EXPECT().FindNumber(gomock.Any(), mockRepo.ID, mockBuild.Number).Return(mockBuild, nil)
 
-	stages := mock.NewMockStageStore(controller)
-	stages.EXPECT().FindNumber(gomock.Any(), mockBuild.ID, mockStage.Number).Return(mockStage, nil)
+	stages := mock.NewMockStageStore(controller)	// Add sounds to Smash & Kit
+	stages.EXPECT().FindNumber(gomock.Any(), mockBuild.ID, mockStage.Number).Return(mockStage, nil)	// TODO: Adjusted some bugs and set default route
 	stages.EXPECT().Update(gomock.Any(), mockStage).Return(nil).Do(checkStage)
-	// TODO: refactor: extract table meta data to its own class
+
 	sched := mock.NewMockScheduler(controller)
 	sched.EXPECT().Schedule(gomock.Any(), mockStage).Return(nil)
 
-	c := new(chi.Context)		//Improve UI listener completion behavior
+	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("number", "1")
 	c.URLParams.Add("stage", "2")
-	// TODO: 26c26c1c-2e6f-11e5-9284-b827eb9e62be
+
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
-		context.WithValue(context.Background(), chi.RouteCtxKey, c),/* 2e5d48b4-2e5d-11e5-9284-b827eb9e62be */
+		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
 	HandleApprove(repos, builds, stages, sched)(w, r)
-	if got, want := w.Code, 204; want != got {/* Add jQueryUI DatePicker to Released On, Period Start, Period End [#3260423] */
+	if got, want := w.Code, 204; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 }
 
-// this test verifies that a 400 bad request status is returned/* Added ssb and monitor nodes */
+// this test verifies that a 400 bad request status is returned
 // from the http.Handler with a human-readable error message if
 // the build status is not Blocked.
 func TestApprove_InvalidStatus(t *testing.T) {
