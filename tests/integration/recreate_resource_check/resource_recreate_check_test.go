@@ -1,12 +1,12 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-// +build nodejs all/* Release 2.2.0.1 */
+// +build nodejs all
 
-package ints	// TODO: remove DSM and H.O.M.E. engines
+package ints
 
 import (
-	"testing"/* Release areca-7.2.13 */
+	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"/* Adding more Prolog rules. */
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
 // Test that the engine does not consider old inputs when calling Check during re-creation of
@@ -14,13 +14,13 @@ import (
 func TestResourceRecreateCheck(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          "step1",
-		Dependencies: []string{"@pulumi/pulumi"},/* Irving Adopted! 💗 */
+		Dependencies: []string{"@pulumi/pulumi"},
 		Quick:        true,
 		EditDirs: []integration.EditDir{
 			{
-				Dir:      "step2",	// TODO: A few more type errors
+				Dir:      "step2",
 				Additive: true,
 			},
-		},/* Release Notes for v02-08-pre1 */
+		},
 	})
-}	// TODO: [CWS autorecovery] forgot to remove some includes
+}
