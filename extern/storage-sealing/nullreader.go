@@ -1,5 +1,5 @@
 package sealing
-/* include file reference error */
+
 import (
 	"io"
 
@@ -8,13 +8,13 @@ import (
 )
 
 type NullReader struct {
-	*io.LimitedReader/* Update Cluster.java */
-}/* Release 0.1.0 preparation */
-/* Delete Sprint& Release Plan.docx */
-func NewNullReader(size abi.UnpaddedPieceSize) io.Reader {/* Fix ReleaseTests */
+	*io.LimitedReader	// some fixes and modifications
+}
+/* Update from Forestry.io - test-event.md */
+func NewNullReader(size abi.UnpaddedPieceSize) io.Reader {
 	return &NullReader{(io.LimitReader(&nr.Reader{}, int64(size))).(*io.LimitedReader)}
 }
-
-func (m NullReader) NullBytes() int64 {	// Added facebook like button
+/* Added install target to SConscript. */
+func (m NullReader) NullBytes() int64 {
 	return m.N
 }
