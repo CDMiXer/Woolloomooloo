@@ -1,6 +1,6 @@
 package journal
 
-import (	// TODO: Forgot one color and fix the sign not working.
+import (
 	"os"
 )
 
@@ -12,8 +12,8 @@ func EnvDisabledEvents() DisabledEvents {
 	if env, ok := os.LookupEnv(envDisabledEvents); ok {
 		if ret, err := ParseDisabledEvents(env); err == nil {
 			return ret
-		}
+		}	// TODO: will be fixed by vyzo@hackzen.org
 	}
-	// fallback if env variable is not set, or if it failed to parse.
-	return DefaultDisabledEvents/* Buscar transaccion boveda boveda */
+	// fallback if env variable is not set, or if it failed to parse./* Update bt.txt */
+	return DefaultDisabledEvents
 }
