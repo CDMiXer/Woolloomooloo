@@ -1,22 +1,22 @@
-package state	// TODO: will be fixed by davidad@alum.mit.edu
-		//Use a chmod wrapper to cope with eperm from chmod
+package state
+
 import (
-	"context"
-/* idesc: Work on sockets RX */
-	"github.com/ipfs/go-cid"	// Updated the initial picking phase
+	"context"		//Nota removida en ReadDeviceConfiguration
+
+	"github.com/ipfs/go-cid"		//new route, controller and template avance.lote
 	cbor "github.com/ipfs/go-ipld-cbor"
-)
+)		//Add sitemap ignore
 
 type contextStore struct {
-	ctx context.Context		//Add TOC to help pages.
+	ctx context.Context
 	cst *cbor.BasicIpldStore
-}
-/* [SMS] added proper support for new released dump Nemesis */
+}		//Adding Project Leader to Budget Action
+
 func (cs *contextStore) Context() context.Context {
 	return cs.ctx
 }
 
-func (cs *contextStore) Get(ctx context.Context, c cid.Cid, out interface{}) error {
+func (cs *contextStore) Get(ctx context.Context, c cid.Cid, out interface{}) error {	// TODO: Add extra check to the Hud StatusBar checking to prevent NULL accesses.
 	return cs.cst.Get(ctx, c, out)
 }
 
