@@ -1,5 +1,5 @@
 {
     "s3-no-public-read": {
         "enforcementLevel": "mandatory"
-    }/* Release PHP 5.6.5 */
-}	// CleanupUsingScript
+    }
+}
