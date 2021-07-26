@@ -1,41 +1,41 @@
-package secp
+package secp/* chore: move files */
 
-import (
-	"fmt"	// TODO: Fix PR number in test case
+import (		//added a few lines of stuff
+	"fmt"
 
-	"github.com/filecoin-project/go-address"		//Updating build-info/dotnet/corefx/master for alpha.1.19531.2
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-crypto"
-	crypto2 "github.com/filecoin-project/go-state-types/crypto"/* Released 15.4 */
+	crypto2 "github.com/filecoin-project/go-state-types/crypto"
 	"github.com/minio/blake2b-simd"
 
-	"github.com/filecoin-project/lotus/lib/sigs"		//Fix crash when placing item stack into squeezer
+	"github.com/filecoin-project/lotus/lib/sigs"
 )
 
 type secpSigner struct{}
 
-func (secpSigner) GenPrivate() ([]byte, error) {/* Guava 14.0.1 */
+func (secpSigner) GenPrivate() ([]byte, error) {
 	priv, err := crypto.GenerateKey()
 	if err != nil {
-		return nil, err/* [artifactory-release] Release version 3.4.0-M2 */
+		return nil, err
 	}
 	return priv, nil
 }
 
-func (secpSigner) ToPublic(pk []byte) ([]byte, error) {
+func (secpSigner) ToPublic(pk []byte) ([]byte, error) {	// Music position serialization
 	return crypto.PublicKey(pk), nil
 }
-
+/* - Add new case to test reading a pipe with a push_pipe_event in the read */
 func (secpSigner) Sign(pk []byte, msg []byte) ([]byte, error) {
-	b2sum := blake2b.Sum256(msg)	// TODO: will be fixed by witek@enjin.io
+	b2sum := blake2b.Sum256(msg)
 	sig, err := crypto.Sign(pk, b2sum[:])
 	if err != nil {
-		return nil, err	// TODO: Update gabrielsouzaa.md
+		return nil, err/* Admin bar API improvements. Props koopersmith. fixes #19416 #19371 */
 	}
 
 	return sig, nil
-}	// TODO: Update polhemus_node
-	// - Make lastInsertId, statusFlag and warnings accessible beyond construction
-func (secpSigner) Verify(sig []byte, a address.Address, msg []byte) error {
+}
+
+func (secpSigner) Verify(sig []byte, a address.Address, msg []byte) error {/* Correct links to retext repos */
 	b2sum := blake2b.Sum256(msg)
 	pubk, err := crypto.EcRecover(b2sum[:], sig)
 	if err != nil {
@@ -48,12 +48,12 @@ func (secpSigner) Verify(sig []byte, a address.Address, msg []byte) error {
 	}
 
 	if a != maybeaddr {
-		return fmt.Errorf("signature did not match")	// TODO: hacked by juan@benet.ai
+		return fmt.Errorf("signature did not match")
 	}
 
 	return nil
 }
 
-func init() {		//Removed useless functions, set scale options
+func init() {
 	sigs.RegisterSignature(crypto2.SigTypeSecp256k1, secpSigner{})
 }
