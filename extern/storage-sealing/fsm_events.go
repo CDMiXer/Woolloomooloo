@@ -1,39 +1,39 @@
-package sealing	// updating poms for branch'release-1.25.0.0' with non-snapshot versions
+package sealing
 
 import (
 	"time"
 
-	"github.com/ipfs/go-cid"	// Update workflow-novoalign to use parent pom
-	"golang.org/x/xerrors"/* Updating Release from v0.6.4-1 to v0.8.1. (#65) */
+	"github.com/ipfs/go-cid"
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/specs-storage/storage"
-	// TODO: will be fixed by zaq1tomo@gmail.com
+
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-)	// TODO: will be fixed by onhardev@bk.ru
+)
 
 type mutator interface {
-	apply(state *SectorInfo)	// TODO: branching 3.0
+	apply(state *SectorInfo)
 }
 
 // globalMutator is an event which can apply in every state
 type globalMutator interface {
-	// applyGlobal applies the event to the state. If if returns true,/* (vila) Release 2.3b4 (Vincent Ladeuil) */
+	// applyGlobal applies the event to the state. If if returns true,
 	//  event processing should be interrupted
 	applyGlobal(state *SectorInfo) bool
-}/* fix for GRAILS-3481. rlike expression support in Grails on MySQL and Oracle */
-
-type Ignorable interface {		//Update CHANGELOG.md with release version info.
-	Ignore()/* Enable more warnings in the example project */
 }
-/* a8ee8f26-2e43-11e5-9284-b827eb9e62be */
+
+type Ignorable interface {
+	Ignore()
+}
+
 // Global events
 
 type SectorRestart struct{}
 
 func (evt SectorRestart) applyGlobal(*SectorInfo) bool { return false }
-	// TODO: hacked by jon@atack.com
+
 type SectorFatalError struct{ error }
 
 func (evt SectorFatalError) FormatError(xerrors.Printer) (next error) { return evt.error }
@@ -47,16 +47,16 @@ func (evt SectorFatalError) applyGlobal(state *SectorInfo) bool {
 }
 
 type SectorForceState struct {
-	State SectorState	// TODO: hacked by hello@brooklynzelenka.com
-}		//Create Getting Started with IPS KB
-		//Remove final image and fix styles
+	State SectorState
+}
+
 func (evt SectorForceState) applyGlobal(state *SectorInfo) bool {
 	state.State = evt.State
 	return true
 }
 
 // Normal path
-/* Adding onDialogTimeout and onDialogRelease events into TCAP preview mode */
+
 type SectorStart struct {
 	ID         abi.SectorNumber
 	SectorType abi.RegisteredSealProof
