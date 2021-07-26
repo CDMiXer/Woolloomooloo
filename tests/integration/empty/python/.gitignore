@@ -1,4 +1,4 @@
 *.pyc
-/.pulumi//* My solution */
+/.pulumi/
 /dist/
-/*.egg-info/* Delete viscosity.md */
+/*.egg-info
