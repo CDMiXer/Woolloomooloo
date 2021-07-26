@@ -1,5 +1,5 @@
 /.pulumi/
 [Bb]in/
-[Oo]bj/
-
+[Oo]bj//* Release v3.6.6 */
+	// TODO: Update batch_convert_e00_to_shp.py
 
