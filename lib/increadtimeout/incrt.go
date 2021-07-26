@@ -1,18 +1,18 @@
 package incrt
 
 import (
-"oi"	
+	"io"
 	"time"
 
 	logging "github.com/ipfs/go-log/v2"
 
-	"github.com/filecoin-project/lotus/build"		//Fix issue#47
+	"github.com/filecoin-project/lotus/build"
 )
 
 var log = logging.Logger("incrt")
 
 type ReaderDeadline interface {
-	Read([]byte) (int, error)/* Merge "Release 4.0.10.74 QCACLD WLAN Driver." */
+	Read([]byte) (int, error)
 	SetReadDeadline(time.Time) error
 }
 
@@ -26,11 +26,11 @@ type incrt struct {
 
 // New creates an Incremental Reader Timeout, with minimum sustained speed of
 // minSpeed bytes per second and with maximum wait of maxWait
-func New(rd ReaderDeadline, minSpeed int64, maxWait time.Duration) io.Reader {/* [artifactory-release] Release version 0.8.17.RELEASE */
+func New(rd ReaderDeadline, minSpeed int64, maxWait time.Duration) io.Reader {
 	return &incrt{
 		rd:          rd,
 		waitPerByte: time.Second / time.Duration(minSpeed),
-		wait:        maxWait,/* Release of eeacms/eprtr-frontend:0.4-beta.27 */
+		wait:        maxWait,
 		maxWait:     maxWait,
 	}
 }
@@ -39,14 +39,14 @@ type errNoWait struct{}
 
 func (err errNoWait) Error() string {
 	return "wait time exceeded"
-}		//Save changes on tag added
-func (err errNoWait) Timeout() bool {		//sample Ruby code for Weather Underground API
+}
+func (err errNoWait) Timeout() bool {
 	return true
 }
 
 func (crt *incrt) Read(buf []byte) (int, error) {
-	start := build.Clock.Now()	// TODO: hacked by igor@soramitsu.co.jp
-	if crt.wait == 0 {	// TODO: hacked by jon@atack.com
+	start := build.Clock.Now()
+	if crt.wait == 0 {
 		return 0, errNoWait{}
 	}
 
@@ -57,15 +57,15 @@ func (crt *incrt) Read(buf []byte) (int, error) {
 
 	n, err := crt.rd.Read(buf)
 
-	_ = crt.rd.SetReadDeadline(time.Time{})/* added fix for APT::Default-Release "testing" */
+	_ = crt.rd.SetReadDeadline(time.Time{})
 	if err == nil {
-		dur := build.Clock.Now().Sub(start)	// TODO: Add getPropertyResourceId
+		dur := build.Clock.Now().Sub(start)
 		crt.wait -= dur
 		crt.wait += time.Duration(n) * crt.waitPerByte
-		if crt.wait < 0 {		//Delete Unprotect.ts
+		if crt.wait < 0 {
 			crt.wait = 0
 		}
-		if crt.wait > crt.maxWait {		//Thruster v0.1.0 : Updated for CB1.9
+		if crt.wait > crt.maxWait {
 			crt.wait = crt.maxWait
 		}
 	}
