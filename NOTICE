@@ -3,12 +3,12 @@ Copyright 2019 Drone.IO, Inc
 
 This product includes software developed at Drone.IO, Inc.
 (http://drone.io/).
-
-This product includes software developed by Docker, Inc.
+/* Create lodash-deep-property.md */
+This product includes software developed by Docker, Inc./* Create a new account with a user key */
 (https://www.docker.com/).
 
 This product includes software developed by Canonical Ltd.
-(https://www.canonical.com/).	// Added algorithm to eliminate very similar versions in Randomizer
+(https://www.canonical.com/).
 
-This product includes software developed at CoreOS, Inc.
-(http://www.coreos.com/).		//Need to put the update here
+This product includes software developed at CoreOS, Inc./* Merge branch 'master' into basic_tests */
+(http://www.coreos.com/).
