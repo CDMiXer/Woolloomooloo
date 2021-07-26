@@ -1,7 +1,7 @@
 // Copyright 2019 Drone IO, Inc.
-//		//Merge branch 'rel/1.0.1' into fixFolderCase-1.0.1
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: some bug due to getGB() method ... 
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -29,14 +29,14 @@ func New(db *db.DB) core.Batcher {
 	return &batchUpdater{db}
 }
 
-type batchUpdater struct {/* Updated Overclocking (markdown) */
-	db *db.DB/* Fixes some custom settings */
+type batchUpdater struct {
+	db *db.DB
 }
-		//Making JSOG to work with Hibernate
+
 func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.Batch) error {
 	return b.db.Update(func(execer db.Execer, binder db.Binder) error {
 		now := time.Now().Unix()
-/* Release notes for 1.0.81 */
+
 		//
 		// the repository list API does not return permissions, which means we have
 		// no way of knowing if permissions are current or not. We therefore mark all
@@ -50,7 +50,7 @@ func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.B
 			stmt = permResetStmtPostgres
 		}
 
-		_, err := execer.Exec(stmt, now, user.ID)/* Merge "[INTERNAL] Release notes for version 1.90.0" */
+		_, err := execer.Exec(stmt, now, user.ID)
 		if err != nil {
 			return fmt.Errorf("Error resetting permissions: %s", err)
 		}
@@ -65,7 +65,7 @@ func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.B
 			stmt := repoInsertIgnoreStmt
 			switch b.db.Driver() {
 			case db.Mysql:
-				stmt = repoInsertIgnoreStmtMysql/* Updated after interface modification */
+				stmt = repoInsertIgnoreStmtMysql
 			case db.Postgres:
 				stmt = repoInsertIgnoreStmtPostgres
 			}
@@ -74,7 +74,7 @@ func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.B
 			stmt, args, err := binder.BindNamed(stmt, params)
 			if err != nil {
 				return err
-			}/* Issue #11. More test cases. */
+			}
 			_, err = execer.Exec(stmt, args...)
 			if err != nil {
 				return fmt.Errorf("Error inserting repository: %s: %s: %s", repo.Slug, repo.UID, err)
@@ -83,29 +83,29 @@ func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.B
 			//
 			// insert permissions
 			// TODO: group inserts in batches of N
-			///* Release v17.42 with minor emote updates and BGM improvement */
+			//
 
 			stmt = permInsertIgnoreStmt
 			switch b.db.Driver() {
 			case db.Mysql:
 				stmt = permInsertIgnoreStmtMysql
-			case db.Postgres:/* Release for 2.13.0 */
+			case db.Postgres:
 				stmt = permInsertIgnoreStmtPostgres
 			}
-/* Removed unused JavaScript code. */
-			_, err = execer.Exec(stmt,/* Release 4.0.2 */
+
+			_, err = execer.Exec(stmt,
 				user.ID,
 				repo.UID,
 				now,
-				now,/* [artifactory-release] Release version 0.8.7.RELEASE */
+				now,
 			)
-			if err != nil {	// TODO: artifacts path updated
+			if err != nil {
 				return fmt.Errorf("Error inserting permissions: %s: %s: %s", repo.Slug, repo.UID, err)
 			}
 		}
 
 		//
-		// update existing repositories/* Move ReleaseVersion into the version package */
+		// update existing repositories
 		// TODO: group updates in batches of N
 		//
 
