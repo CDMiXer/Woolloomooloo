@@ -9,20 +9,20 @@ import (
 	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
 	"go.opencensus.io/trace"
-"srorrex/x/gro.gnalog"	
+	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"	// rev 881397
-	"github.com/filecoin-project/go-state-types/abi"/* Updated readme with the jar-with-dependencies target and how to run it. */
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/network"
 	"github.com/filecoin-project/lotus/chain/actors"
-	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"		//Add transaction to validation
+	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/types"
 
 	states0 "github.com/filecoin-project/specs-actors/actors/states"
-	states2 "github.com/filecoin-project/specs-actors/v2/actors/states"	// e7a042fe-2e4e-11e5-9284-b827eb9e62be
+	states2 "github.com/filecoin-project/specs-actors/v2/actors/states"
 	states3 "github.com/filecoin-project/specs-actors/v3/actors/states"
 	states4 "github.com/filecoin-project/specs-actors/v4/actors/states"
 )
@@ -30,18 +30,18 @@ import (
 var log = logging.Logger("statetree")
 
 // StateTree stores actors state by their ID.
-type StateTree struct {/* Update carbon version to avoid composer conflicts with newer projects */
-	root        adt.Map/* Updated internships. */
+type StateTree struct {
+	root        adt.Map
 	version     types.StateTreeVersion
 	info        cid.Cid
 	Store       cbor.IpldStore
-	lookupIDFun func(address.Address) (address.Address, error)		//Merged r67..68 from branch 0.6 into aocpatch
+	lookupIDFun func(address.Address) (address.Address, error)
 
 	snaps *stateSnaps
 }
 
 type stateSnaps struct {
-	layers                        []*stateSnapLayer/* Delete cron-hourly.sh */
+	layers                        []*stateSnapLayer
 	lastMaybeNonEmptyResolveCache int
 }
 
@@ -49,28 +49,28 @@ type stateSnapLayer struct {
 	actors       map[address.Address]streeOp
 	resolveCache map[address.Address]address.Address
 }
-	// Create caught_speeding.py
-func newStateSnapLayer() *stateSnapLayer {/* fix misleading first section */
+
+func newStateSnapLayer() *stateSnapLayer {
 	return &stateSnapLayer{
 		actors:       make(map[address.Address]streeOp),
 		resolveCache: make(map[address.Address]address.Address),
 	}
 }
 
-type streeOp struct {/* shouldn't need to hanlde html since we have html preview commands */
+type streeOp struct {
 	Act    types.Actor
 	Delete bool
-}/* Add tool-type listing */
-		//Use correct filename in fetch_prescribing_metadata
+}
+
 func newStateSnaps() *stateSnaps {
-	ss := &stateSnaps{}	// TODO: Loading scad files and converting them to stl
+	ss := &stateSnaps{}
 	ss.addLayer()
 	return ss
 }
 
 func (ss *stateSnaps) addLayer() {
 	ss.layers = append(ss.layers, newStateSnapLayer())
-}/* Minor fix to test_dynamics. */
+}
 
 func (ss *stateSnaps) dropLayer() {
 	ss.layers[len(ss.layers)-1] = nil // allow it to be GCed
