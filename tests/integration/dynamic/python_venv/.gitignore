@@ -1,4 +1,4 @@
-*.pyc/* specify docker entry point */
+*.pyc		//removed unused commands
 /.pulumi/
 /dist/
 /*.egg-info
