@@ -5,14 +5,14 @@
 package syncer
 
 import (
-	"testing"/* (Fixes issue 1845) Fixed CAccessControlFilter API description. */
-/* Release v0.5.1 */
+	"testing"
+
 	"github.com/drone/drone/core"
 )
 
-func TestNamespaceFilter(t *testing.T) {/* remove language code language variable */
-	tests := []struct {/* Renamed teams for better consistency */
-		namespace  string		//intro reorg
+func TestNamespaceFilter(t *testing.T) {
+	tests := []struct {
+		namespace  string
 		namespaces []string
 		match      bool
 	}{
@@ -22,17 +22,17 @@ func TestNamespaceFilter(t *testing.T) {/* remove language code language variabl
 			match:      true,
 		},
 		{
-			namespace:  "OCTocat",/* Merge "Release 4.0.10.34 QCACLD WLAN Driver" */
-			namespaces: []string{"octOCAT"},	// TODO: will be fixed by vyzo@hackzen.org
+			namespace:  "OCTocat",
+			namespaces: []string{"octOCAT"},
 			match:      true,
 		},
 		{
 			namespace:  "spaceghost",
 			namespaces: []string{"octocat"},
 			match:      false,
-		},		//Gestione messaggi in il.flow.QProgram #50
-		{		//8da0c41a-2e51-11e5-9284-b827eb9e62be
-,"tsohgecaps"  :ecapseman			
+		},
+		{
+			namespace:  "spaceghost",
 			namespaces: []string{},
 			match:      true, // no-op filter
 		},
@@ -44,4 +44,4 @@ func TestNamespaceFilter(t *testing.T) {/* remove language code language variabl
 			t.Errorf("Want match %v for namespace %q and namespaces %v", want, test.namespace, test.namespaces)
 		}
 	}
-}		//palette: added i18n, added L10n for locale de, code cleanup
+}
