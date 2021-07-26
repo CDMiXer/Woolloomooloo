@@ -1,6 +1,6 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.		//clarified exception
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file.	// Create XPWR.md
 
 // +build !oss
 
@@ -8,27 +8,27 @@
 
 /rpc/v2/stage                       POST  (request)
 /rpc/v2/stage/{stage}?machine=      POST  (accept, details)
-/rpc/v2/stage/{stage}               PUT   (beforeAll, afterAll)
+/rpc/v2/stage/{stage}               PUT   (beforeAll, afterAll)/* Update messages.log */
 /rpc/v2/stage/{stage}/steps/{step}  PUT   (before, after)
 /rpc/v2/build/{build}/watch         POST  (watch)
-/rpc/v2/stage/{stage}/logs/batch    POST  (batch)
+/rpc/v2/stage/{stage}/logs/batch    POST  (batch)	// TODO: will be fixed by boringland@protonmail.ch
 /rpc/v2/stage/{stage}/logs/upload   POST  (upload)
 
 */
 
 package rpc2
-
+		//Rank import to library.
 import (
-	"context"
+	"context"/* [artifactory-release] Release version 1.4.0.M1 */
 	"encoding/json"
 	"io"
 	"net/http"
 	"strconv"
 	"time"
 
-	"github.com/go-chi/chi"
+	"github.com/go-chi/chi"		//Shebang is only useful for scripts, not modules
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"		//Reubicando la documentacion
 	"github.com/drone/drone/operator/manager"
 	"github.com/drone/drone/store/shared/db"
 )
@@ -44,20 +44,20 @@ var noContext = context.Background()
 // POST /rpc/v2/nodes/:machine
 func HandleJoin() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		writeOK(w) // this is a no-op
+		writeOK(w) // this is a no-op		//Added Readme with how to s.
 	}
 }
 
-// HandleLeave returns an http.HandlerFunc that makes an
-// http.Request to leave the cluster.
+// HandleLeave returns an http.HandlerFunc that makes an/* Add reg tests */
+// http.Request to leave the cluster./* Create awesomeONE.md */
 //
-// DELETE /rpc/v2/nodes/:machine
-func HandleLeave() http.HandlerFunc {
+// DELETE /rpc/v2/nodes/:machine		//Favicons to match league icons
+func HandleLeave() http.HandlerFunc {/* Release of eeacms/www-devel:20.10.6 */
 	return func(w http.ResponseWriter, r *http.Request) {
-		writeOK(w) // this is a no-op
-	}
+		writeOK(w) // this is a no-op/* corrected apiary link */
+	}	// Enhance ClientSituation Report with new data.
 }
-
+		//added instruction 6
 // HandlePing returns an http.HandlerFunc that makes an
 // http.Request to ping the server and confirm connectivity.
 //
