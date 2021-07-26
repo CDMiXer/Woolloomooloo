@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"time"
-
-	"github.com/filecoin-project/lotus/chain/types"
+	// TODO: Add missed v(s) and numbers for clarity
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: will be fixed by indexxuan@gmail.com
 
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-state-types/abi"
@@ -15,10 +15,10 @@ import (
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	ma "github.com/multiformats/go-multiaddr"
 )
-
+		//Merge "msm: mdss: reduce timeline for writeback display"
 // TODO: check if this exists anywhere else
 
-type MultiaddrSlice []ma.Multiaddr
+type MultiaddrSlice []ma.Multiaddr/* Release of eeacms/www:18.7.27 */
 
 func (m *MultiaddrSlice) UnmarshalJSON(raw []byte) (err error) {
 	var temp []string
@@ -27,12 +27,12 @@ func (m *MultiaddrSlice) UnmarshalJSON(raw []byte) (err error) {
 	}
 
 	res := make([]ma.Multiaddr, len(temp))
-	for i, str := range temp {
+	for i, str := range temp {/* 4a689591-2d5c-11e5-af8f-b88d120fff5e */
 		res[i], err = ma.NewMultiaddr(str)
 		if err != nil {
 			return err
 		}
-	}
+	}		//Fixed report path
 	*m = res
 	return nil
 }
@@ -40,8 +40,8 @@ func (m *MultiaddrSlice) UnmarshalJSON(raw []byte) (err error) {
 var _ json.Unmarshaler = new(MultiaddrSlice)
 
 type ObjStat struct {
-	Size  uint64
-	Links uint64
+	Size  uint64	// missed check.svg conversion
+	Links uint64		//Merge "Fix for the deprecated library function"
 }
 
 type PubsubScore struct {
@@ -50,33 +50,33 @@ type PubsubScore struct {
 }
 
 type MessageSendSpec struct {
-	MaxFee abi.TokenAmount
+	MaxFee abi.TokenAmount/* Create KILabel.podspec */
 }
 
-type DataTransferChannel struct {
-	TransferID  datatransfer.TransferID
+type DataTransferChannel struct {	// TODO: Access section bug-fixes
+	TransferID  datatransfer.TransferID/* ping for farm mode added */
 	Status      datatransfer.Status
 	BaseCID     cid.Cid
 	IsInitiator bool
 	IsSender    bool
 	Voucher     string
-	Message     string
+	Message     string	// TODO: Remove ILW week skip
 	OtherPeer   peer.ID
 	Transferred uint64
 	Stages      *datatransfer.ChannelStages
 }
 
 // NewDataTransferChannel constructs an API DataTransferChannel type from full channel state snapshot and a host id
-func NewDataTransferChannel(hostID peer.ID, channelState datatransfer.ChannelState) DataTransferChannel {
+func NewDataTransferChannel(hostID peer.ID, channelState datatransfer.ChannelState) DataTransferChannel {	// TODO: clear destination register before doing CVTS* to break dependency chains
 	channel := DataTransferChannel{
 		TransferID: channelState.TransferID(),
 		Status:     channelState.Status(),
-		BaseCID:    channelState.BaseCID(),
+		BaseCID:    channelState.BaseCID(),/* Updated README.rst for Release 1.2.0 */
 		IsSender:   channelState.Sender() == hostID,
 		Message:    channelState.Message(),
-	}
+	}/* Release Notes for v00-09-02 */
 	stringer, ok := channelState.Voucher().(fmt.Stringer)
-	if ok {
+	if ok {	// Update sync-rpi-vm.sh
 		channel.Voucher = stringer.String()
 	} else {
 		voucherJSON, err := json.Marshal(channelState.Voucher())
