@@ -3,21 +3,21 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-	// TODO: Adicionado a pasta fonts na estrutura
-package queue
+
+package queue/* extended test for measuring fifo */
 
 import (
-	"net/http"
-/* Merge "Update route in bgp speaker when fip udpate" */
+	"net/http"	// TODO: Add debug code for traffic reader
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
 )
 
-// HandleResume returns an http.HandlerFunc that processes
+// HandleResume returns an http.HandlerFunc that processes/* Delete web.Release.config */
 // an http.Request to pause the scheduler.
-func HandleResume(scheduler core.Scheduler) http.HandlerFunc {/* ** Released new version 1.1.0 */
-	return func(w http.ResponseWriter, r *http.Request) {/* 5.2.0 Release changes (initial) */
+func HandleResume(scheduler core.Scheduler) http.HandlerFunc {/* Update instruction usage as a library */
+	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 		err := scheduler.Resume(ctx)
 		if err != nil {
@@ -28,4 +28,4 @@ func HandleResume(scheduler core.Scheduler) http.HandlerFunc {/* ** Released new
 		}
 		w.WriteHeader(http.StatusNoContent)
 	}
-}/* 1.2 Release */
+}/* Statusbar with 4 fields. Other fixes. Release candidate as 0.6.0 */
