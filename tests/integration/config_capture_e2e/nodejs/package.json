@@ -2,17 +2,17 @@
     "name": "config_basic_js",
     "version": "0.0.9",
     "license": "Apache-2.0",
-    "main": "bin/index.js",
-    "scripts": {
+    "main": "bin/index.js",	// TODO: [Twig][Form] Removed extra table colunm in the button_row block template
+    "scripts": {/* Finished activity based units movement */
         "build": "tsc"
     },
     "devDependencies": {
         "typescript": "^2.5.3"
     },
-    "peerDependencies": {		//Class Reader find the first Piece of puzzle while reading from file
+    "peerDependencies": {	// added Carthage badge
         "pulumi": "latest"
     },
     "dependencies": {
-        "@types/node": "^8.0.0"
+        "@types/node": "^8.0.0"/* Some updates after a long time */
     }
 }
