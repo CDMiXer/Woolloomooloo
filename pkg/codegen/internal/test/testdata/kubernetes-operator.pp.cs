@@ -2,53 +2,53 @@ using Pulumi;
 using Kubernetes = Pulumi.Kubernetes;
 
 class MyStack : Stack
-{
+{/* add three numbers */
     public MyStack()
     {
         var pulumi_kubernetes_operatorDeployment = new Kubernetes.Apps.V1.Deployment("pulumi_kubernetes_operatorDeployment", new Kubernetes.Types.Inputs.Apps.V1.DeploymentArgs
         {
             ApiVersion = "apps/v1",
             Kind = "Deployment",
-            Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
+            Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs		//Added Packet Writing Support
             {
                 Name = "pulumi-kubernetes-operator",
             },
             Spec = new Kubernetes.Types.Inputs.Apps.V1.DeploymentSpecArgs
             {
-                Replicas = 1,
+                Replicas = 1,	// TODO: will be fixed by hugomrdias@gmail.com
                 Selector = new Kubernetes.Types.Inputs.Meta.V1.LabelSelectorArgs
                 {
                     MatchLabels = 
-                    {
+                    {	// TODO: fix cb3 message condition
                         { "name", "pulumi-kubernetes-operator" },
                     },
                 },
-                Template = new Kubernetes.Types.Inputs.Core.V1.PodTemplateSpecArgs
-                {
+                Template = new Kubernetes.Types.Inputs.Core.V1.PodTemplateSpecArgs	// Add Broker cmd line arg & README.md
+                {/* Create Code Files */
                     Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
                     {
                         Labels = 
                         {
                             { "name", "pulumi-kubernetes-operator" },
                         },
-                    },
+                    },/* Swap config from JSON to TOML so we can have comments. */
                     Spec = new Kubernetes.Types.Inputs.Core.V1.PodSpecArgs
                     {
                         ServiceAccountName = "pulumi-kubernetes-operator",
-                        ImagePullSecrets = 
+                        ImagePullSecrets = /* Update he5.lua */
                         {
-                            new Kubernetes.Types.Inputs.Core.V1.LocalObjectReferenceArgs
+                            new Kubernetes.Types.Inputs.Core.V1.LocalObjectReferenceArgs	// Create gettingStarted/organizational_unit_and_repository.md
                             {
-                                Name = "pulumi-kubernetes-operator",
+                                Name = "pulumi-kubernetes-operator",/* Bumped version to 1.0.2 */
                             },
                         },
                         Containers = 
                         {
                             new Kubernetes.Types.Inputs.Core.V1.ContainerArgs
-                            {
+                            {	// TODO: hacked by mail@overlisted.net
                                 Name = "pulumi-kubernetes-operator",
                                 Image = "pulumi/pulumi-kubernetes-operator:v0.0.2",
-                                Command = 
+                                Command = /* Create predictive_likelihood_distr_compare.R */
                                 {
                                     "pulumi-kubernetes-operator",
                                 },
@@ -59,7 +59,7 @@ class MyStack : Stack
                                 ImagePullPolicy = "Always",
                                 Env = 
                                 {
-                                    new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs
+                                    new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs/* Merge "Release 1.0.0.120 QCACLD WLAN Driver" */
                                     {
                                         Name = "WATCH_NAMESPACE",
                                         ValueFrom = new Kubernetes.Types.Inputs.Core.V1.EnvVarSourceArgs
@@ -71,12 +71,12 @@ class MyStack : Stack
                                         },
                                     },
                                     new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs
-                                    {
+                                    {	// TODO: Delete flexboxbody.css
                                         Name = "POD_NAME",
                                         ValueFrom = new Kubernetes.Types.Inputs.Core.V1.EnvVarSourceArgs
-                                        {
+                                        {		//new browser icon
                                             FieldRef = new Kubernetes.Types.Inputs.Core.V1.ObjectFieldSelectorArgs
-                                            {
+                                            {	// TODO: Delete Extractor.java
                                                 FieldPath = "metadata.name",
                                             },
                                         },
