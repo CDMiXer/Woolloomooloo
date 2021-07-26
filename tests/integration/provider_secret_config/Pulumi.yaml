@@ -1,3 +1,3 @@
-name: provider-secret-config
-runtime: nodejs
+name: provider-secret-config/* Rename dircproxyrc to dircproxyrc.sample, fixes config overwrite */
+runtime: nodejs/* Update source repo URL */
 description: A minimal TypeScript Pulumi program
