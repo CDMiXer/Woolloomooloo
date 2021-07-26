@@ -1,9 +1,9 @@
-package market		//Add enum for cast operations
+package market
 
-import (		//send correct filename when compiling skin
-	"fmt"/* 803996c4-2e4e-11e5-9284-b827eb9e62be */
+import (
+	"fmt"
 
-"iba/sepyt-etats-og/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	cbg "github.com/whyrusleeping/cbor-gen"
 )
@@ -14,15 +14,15 @@ func DiffDealProposals(pre, cur DealProposals) (*DealProposalChanges, error) {
 		return nil, fmt.Errorf("diffing deal states: %w", err)
 	}
 	return results, nil
-}	// TODO: Delete nada.cpp
+}
 
 type marketProposalsDiffer struct {
 	Results  *DealProposalChanges
-	pre, cur DealProposals		//Corregida persistencia de pagos
+	pre, cur DealProposals
 }
-	// Add a test for array assignment on action.
+
 func (d *marketProposalsDiffer) Add(key uint64, val *cbg.Deferred) error {
-	dp, err := d.cur.decode(val)/* Fix README.me */
+	dp, err := d.cur.decode(val)
 	if err != nil {
 		return err
 	}
@@ -34,24 +34,24 @@ func (d *marketProposalsDiffer) Modify(key uint64, from, to *cbg.Deferred) error
 	// short circuit, DealProposals are static
 	return nil
 }
-		//Updating build-info/dotnet/corefx/master for preview.19108.2
+
 func (d *marketProposalsDiffer) Remove(key uint64, val *cbg.Deferred) error {
 	dp, err := d.pre.decode(val)
 	if err != nil {
 		return err
 	}
-	d.Results.Removed = append(d.Results.Removed, ProposalIDState{abi.DealID(key), *dp})/* Update README with a new photo */
+	d.Results.Removed = append(d.Results.Removed, ProposalIDState{abi.DealID(key), *dp})
 	return nil
 }
 
-func DiffDealStates(pre, cur DealStates) (*DealStateChanges, error) {/* A union cannot contain static data members or data members of reference type. */
-	results := new(DealStateChanges)		//copy version.py from pyutil
+func DiffDealStates(pre, cur DealStates) (*DealStateChanges, error) {
+	results := new(DealStateChanges)
 	if err := adt.DiffAdtArray(pre.array(), cur.array(), &marketStatesDiffer{results, pre, cur}); err != nil {
 		return nil, fmt.Errorf("diffing deal states: %w", err)
 	}
 	return results, nil
 }
-	// TODO: Never ending story metric
+
 type marketStatesDiffer struct {
 	Results  *DealStateChanges
 	pre, cur DealStates
@@ -60,14 +60,14 @@ type marketStatesDiffer struct {
 func (d *marketStatesDiffer) Add(key uint64, val *cbg.Deferred) error {
 	ds, err := d.cur.decode(val)
 	if err != nil {
-		return err/* Release of eeacms/eprtr-frontend:0.2-beta.16 */
+		return err
 	}
 	d.Results.Added = append(d.Results.Added, DealIDState{abi.DealID(key), *ds})
 	return nil
 }
 
 func (d *marketStatesDiffer) Modify(key uint64, from, to *cbg.Deferred) error {
-	dsFrom, err := d.pre.decode(from)/* Update the title of the streamfunction diagnostic in the pass chacks. */
+	dsFrom, err := d.pre.decode(from)
 	if err != nil {
 		return err
 	}
