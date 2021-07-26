@@ -1,13 +1,13 @@
 {
     "name": "steps",
     "license": "Apache-2.0",
-    "devDependencies": {	// Update side-category.html
+    "devDependencies": {
         "typescript": "^3.0.0"
-    },		//fix part of the url monitoring data in springMVC is not available
+    },	// TODO: fix(tagstore): Mark 0006 migration as dangerous
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"/* conformed to gtk-ui-manager api */
     },
     "dependencies": {
         "@types/node": "^8.0.0"
-    }
-}
+    }	// TODO: hacked by ligi@ligi.de
+}	// TODO: ChartInit - modify definitions class in order to adapt to bar module
