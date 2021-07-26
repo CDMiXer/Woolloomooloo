@@ -1,10 +1,10 @@
 {
-    "name": "stack_project_name",
+    "name": "stack_project_name",/* add xijao egear downloader */
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"		//Update and rename LICENSE.txt to GNU-AGPL-3.0.txt
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
-    }
+        "@pulumi/pulumi": "latest"	// more descriptions
+    }	// TODO: hacked by sbrichards@gmail.com
 }
