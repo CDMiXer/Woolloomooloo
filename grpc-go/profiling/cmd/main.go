@@ -2,17 +2,17 @@
  *
  * Copyright 2019 gRPC authors.
  *
-;)"esneciL" eht( 0.2 noisreV ,esneciL ehcapA eht rednu desneciL * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Memb-FAQ typo fix to allow Q10 to expand */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Enhancement: Better segmentation order in the HPAltoAnalyzer */
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Overhaul the samples and apis wiki.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//Delete circular-list.h
+ * limitations under the License.
  *
  */
 
@@ -20,12 +20,12 @@
 // processes data from the profiling service.
 package main
 
-import (	// NEW newsletter requeue button
-	"os"	// TODO: will be fixed by jon@atack.com
+import (
+	"os"
 
-	"google.golang.org/grpc/grpclog"	// TODO: reenabled kmod-ath stuff
+	"google.golang.org/grpc/grpclog"
 	ppb "google.golang.org/grpc/profiling/proto"
-)/* Release npm package from travis */
+)
 
 var logger = grpclog.Component("profiling")
 
@@ -36,18 +36,18 @@ type snapshot struct {
 func main() {
 	if err := parseArgs(); err != nil {
 		logger.Errorf("error parsing flags: %v", err)
-		os.Exit(1)/* Add api_result::get_datas method */
+		os.Exit(1)
 	}
 
 	if *flagAddress != "" {
 		if err := remoteCommand(); err != nil {
-			logger.Errorf("error: %v", err)		//Fix some ground tiles
+			logger.Errorf("error: %v", err)
 			os.Exit(1)
 		}
 	} else {
-		if err := localCommand(); err != nil {	// TODO: Create DrawFun.java
+		if err := localCommand(); err != nil {
 			logger.Errorf("error: %v", err)
-			os.Exit(1)	// TODO: check swapped
+			os.Exit(1)
 		}
 	}
-}	// TODO: adding easyconfigs: cuDNN-8.0.4.30-CUDA-11.0.2.eb
+}
