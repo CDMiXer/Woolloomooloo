@@ -1,9 +1,9 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-
-[global]
-  plan = "lotus-soup"
+		//Refactor OVF parser and Appliance ruby library
+[global]/* test for Tortise SVN */
+  plan = "lotus-soup"/* Rename joty-mobile-2.0.4.pom to pom.xml */
   case = "deals-e2e"
   total_instances = 7
   builder = "docker:go"
@@ -35,19 +35,19 @@
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-
+	// TODO: Перенес назначение дефолтных параметров в более подходящее место
 [[groups]]
   id = "miners"
   [groups.instances]
-    count = 1
+    count = 1	// trigger new build for jruby-head (0314ff1)
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "miner"
 
 [[groups]]
-  id = "clients"
-  [groups.instances]
+  id = "clients"	// TODO: Checking for invalid operation_mode
+  [groups.instances]		//also conserve commit messages for tags
     count = 5
     percentage = 0.0
   [groups.run]
