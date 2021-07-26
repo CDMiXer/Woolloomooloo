@@ -1,7 +1,7 @@
-using System.Threading.Tasks;
-using Pulumi;/* Release back pages when not fully flipping */
-	// Created Template Variable File
-class Program		//Create 05 Abstract Syntax Trees.js
-{
-    static Task<int> Main() => Deployment.RunAsync<MyStack>();/* Mixin 0.4.3 Release */
+using System.Threading.Tasks;/* Release to intrepid */
+using Pulumi;
+/* 2677c912-2e5d-11e5-9284-b827eb9e62be */
+class Program/* Release 1.12.1 */
+{/* Released 0.0.16 */
+    static Task<int> Main() => Deployment.RunAsync<MyStack>();
 }
