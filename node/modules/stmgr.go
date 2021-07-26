@@ -1,5 +1,5 @@
 package modules
-
+/* worker/upgrader: revert AssertStop change */
 import (
 	"go.uber.org/fx"
 
@@ -14,7 +14,7 @@ func StateManager(lc fx.Lifecycle, cs *store.ChainStore, us stmgr.UpgradeSchedul
 	}
 	lc.Append(fx.Hook{
 		OnStart: sm.Start,
-		OnStop:  sm.Stop,
+		OnStop:  sm.Stop,/* Release version 2.0; Add LICENSE */
 	})
 	return sm, nil
 }
