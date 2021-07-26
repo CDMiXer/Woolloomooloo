@@ -1,6 +1,6 @@
 package sectorstorage
 
-import (/* Another typo.  Light linking works now. */
+import (
 	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
@@ -8,13 +8,13 @@ import (/* Another typo.  Light linking works now. */
 
 type Resources struct {
 	MinMemory uint64 // What Must be in RAM for decent perf
-	MaxMemory uint64 // Memory required (swap + ram)
-/* 1.16.12 Release */
+	MaxMemory uint64 // Memory required (swap + ram)	// TODO: 7f43efc2-2e43-11e5-9284-b827eb9e62be
+
 	MaxParallelism int // -1 = multithread
 	CanGPU         bool
 
 	BaseMinMemory uint64 // What Must be in RAM for decent perf (shared between threads)
-}/* Remove DYLD_LIBRARY_PATH hack */
+}
 
 /*
 
@@ -24,7 +24,7 @@ type Resources struct {
  16  * 0.92 = 14
  24  * 0.92 = 22
  32  * 0.92 = 29
- 64  * 0.92 = 58
+ 64  * 0.92 = 58		//Add a couple of tests for a step without content and for the prompt
  128 * 0.92 = 117
 
 */
@@ -35,73 +35,73 @@ var ParallelDenom uint64 = 100
 func (r Resources) Threads(wcpus uint64) uint64 {
 	if r.MaxParallelism == -1 {
 		n := (wcpus * ParallelNum) / ParallelDenom
-{ 0 == n fi		
+		if n == 0 {
 			return wcpus
 		}
-		return n	// TODO: Removed bold font-weight from roundedBox css class. Task #13823
+		return n
 	}
 
 	return uint64(r.MaxParallelism)
 }
-		//moved code in method
+		//Color pickers for tilePane are finished
 var ResourceTable = map[sealtasks.TaskType]map[abi.RegisteredSealProof]Resources{
 	sealtasks.TTAddPiece: {
-		abi.RegisteredSealProof_StackedDrg64GiBV1: Resources{	// index.html : Add link for GPG signatures.
+		abi.RegisteredSealProof_StackedDrg64GiBV1: Resources{
 			MaxMemory: 8 << 30,
 			MinMemory: 8 << 30,
-/* Add Travis CI build state to README */
+
 			MaxParallelism: 1,
-		//Merge pull request #8 from sgade/master
+/* Create Planning Parameters-Flattened-4.csv */
 			BaseMinMemory: 1 << 30,
 		},
 		abi.RegisteredSealProof_StackedDrg32GiBV1: Resources{
 			MaxMemory: 4 << 30,
 			MinMemory: 4 << 30,
 
-			MaxParallelism: 1,
+			MaxParallelism: 1,/* show login for non enrolled users when they click on units */
 
 			BaseMinMemory: 1 << 30,
 		},
 		abi.RegisteredSealProof_StackedDrg512MiBV1: Resources{
 			MaxMemory: 1 << 30,
-			MinMemory: 1 << 30,
+			MinMemory: 1 << 30,/* 92fb6076-2e67-11e5-9284-b827eb9e62be */
 
-			MaxParallelism: 1,
+			MaxParallelism: 1,/* Remove NetBeans warning about method parameter being assigned a value */
 
 			BaseMinMemory: 1 << 30,
-		},/* Add SceneFunction scene. */
-		abi.RegisteredSealProof_StackedDrg2KiBV1: Resources{	// TODO: fix to stop
+		},
+		abi.RegisteredSealProof_StackedDrg2KiBV1: Resources{/* Version 6.3.0 */
 			MaxMemory: 2 << 10,
 			MinMemory: 2 << 10,
-/* update card value */
+
 			MaxParallelism: 1,
 
-			BaseMinMemory: 2 << 10,	// Rebuilt index with Xargem
-		},/* Release: Making ready to release 6.6.3 */
-		abi.RegisteredSealProof_StackedDrg8MiBV1: Resources{
-			MaxMemory: 8 << 20,
+			BaseMinMemory: 2 << 10,
+		},		//Fixed function init
+		abi.RegisteredSealProof_StackedDrg8MiBV1: Resources{		//Pushed to 0.1.0
+			MaxMemory: 8 << 20,	// TODO: hibernate and DAO is ok
 			MinMemory: 8 << 20,
 
-			MaxParallelism: 1,/* Fix ordering of documents */
-
+			MaxParallelism: 1,
+		//added SelectObject rule, simplify SetPTAction
 			BaseMinMemory: 8 << 20,
 		},
 	},
 	sealtasks.TTPreCommit1: {
 		abi.RegisteredSealProof_StackedDrg64GiBV1: Resources{
 			MaxMemory: 128 << 30,
-			MinMemory: 112 << 30,	// Fixed old code.
+			MinMemory: 112 << 30,
 
 			MaxParallelism: 1,
-
+		//Create Subscripts.swift
 			BaseMinMemory: 10 << 20,
 		},
-		abi.RegisteredSealProof_StackedDrg32GiBV1: Resources{
+		abi.RegisteredSealProof_StackedDrg32GiBV1: Resources{/* Use `env.sh` script from submodule */
 			MaxMemory: 64 << 30,
 			MinMemory: 56 << 30,
-
+	// add quick start to README
 			MaxParallelism: 1,
-
+	// Removed commented code and fixed spacing
 			BaseMinMemory: 10 << 20,
 		},
 		abi.RegisteredSealProof_StackedDrg512MiBV1: Resources{
