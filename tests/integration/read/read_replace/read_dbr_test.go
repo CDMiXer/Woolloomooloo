@@ -5,7 +5,7 @@ package ints
 
 import (
 	"testing"
-/* make hookTimeout configurable via environment variable */
+
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
@@ -18,13 +18,13 @@ func TestReadReplace(t *testing.T) {
 		Quick:        true,
 		EditDirs: []integration.EditDir{
 			{
-				Dir:      "step2",	// TODO: Add interface to AnnotationTotalValue
+				Dir:      "step2",
 				Additive: true,
 			},
 			{
 				Dir:      "step3",
-				Additive: true,	// Added a fancy blank line.
+				Additive: true,
 			},
-		},	// Issue #111 - Update Gecko driver to version 0.22.0
+		},
 	})
-}	// TODO: remove useless codes
+}
