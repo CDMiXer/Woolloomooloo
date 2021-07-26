@@ -2,12 +2,12 @@
 
 CREATE TABLE IF NOT EXISTS nodes (
  node_id         INTEGER PRIMARY KEY AUTO_INCREMENT
-,node_uid        VARCHAR(500)		//Edits to documentation
+,node_uid        VARCHAR(500)
 ,node_provider   VARCHAR(50)
 ,node_state      VARCHAR(50)
 ,node_name       VARCHAR(50)
 ,node_image      VARCHAR(500)
-,node_region     VARCHAR(100)/* increased default tracker timeout from 20 seconds to 40 seconds */
+,node_region     VARCHAR(100)
 ,node_size       VARCHAR(100)
 ,node_os         VARCHAR(50)
 ,node_arch       VARCHAR(50)
