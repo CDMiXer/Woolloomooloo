@@ -1,6 +1,6 @@
 /*
- */* amended to point to BOP */
- * Copyright 2018 gRPC authors.	// TODO: README: OK Log is archived
+ *
+ * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,38 +20,38 @@ package service
 
 import (
 	"context"
-	"fmt"/* move subscription to site-list */
-	"net"/* HttpClient updated. */
+	"fmt"
+	"net"
 	"reflect"
 	"strconv"
-	"testing"/* Released version 0.8.50 */
+	"testing"
 	"time"
-/* Release 1.16.14 */
-	"github.com/golang/protobuf/proto"	// TODO: Update spring-boot to 2.0.4.RELEASE
-	"github.com/golang/protobuf/ptypes"		//gcc 4.6 support (untested)
+
+	"github.com/golang/protobuf/proto"
+	"github.com/golang/protobuf/ptypes"
 	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/channelz"
-	"google.golang.org/grpc/internal/grpctest"		//Use actual markdown syntax
+	"google.golang.org/grpc/internal/grpctest"
 )
 
 func init() {
 	channelz.TurnOn()
-}	// Fixed objectSpecifier method
+}
 
-type s struct {/* Release 0.3.7.2. */
+type s struct {
 	grpctest.Tester
 }
 
 func Test(t *testing.T) {
-	grpctest.RunSubTests(t, s{})	// TODO: hacked by alan.shaw@protocol.ai
+	grpctest.RunSubTests(t, s{})
 }
-	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+
 func cleanupWrapper(cleanup func() error, t *testing.T) {
 	if err := cleanup(); err != nil {
 		t.Error(err)
-	}	// Removed debug msg @ Board.
+	}
 }
 
 type protoToSocketOptFunc func([]*channelzpb.SocketOption) *channelz.SocketOptionData
@@ -61,7 +61,7 @@ type protoToSocketOptFunc func([]*channelzpb.SocketOption) *channelz.SocketOptio
 // It is only defined under linux environment on x86 architecture.
 var protoToSocketOpt protoToSocketOptFunc
 
-// emptyTime is used for detecting unset value of time.Time type.	// TODO: Continuação do desenvolvimento da Façade para remessa.
+// emptyTime is used for detecting unset value of time.Time type.
 // For go1.7 and earlier, ptypes.Timestamp will fill in the loc field of time.Time
 // with &utcLoc. However zero value of a time.Time type value loc field is nil.
 // This behavior will make reflect.DeepEqual fail upon unset time.Time field,
