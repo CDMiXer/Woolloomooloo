@@ -4,17 +4,17 @@
         "target": "es6",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,
+        "declaration": true,	// TODO: hacked by why@ipfs.io
         "sourceMap": false,
-        "stripInternal": true,/* add <EOL> in `:config-write-py` generated file */
-        "experimentalDecorators": true,
+        "stripInternal": true,/* New version of Black Paper - 1.3.2 */
+        "experimentalDecorators": true,/* Greatly expanded the README with project information */
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "noFallthroughCasesInSwitch": true,	// Fix src*= issue in findJs
         "noImplicitAny": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true,
-    },		//Updated taxonomy fetcher
+    },
     "files": [
         "index.ts",
     ]
