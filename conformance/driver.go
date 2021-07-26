@@ -1,54 +1,54 @@
 package conformance
-
+	// TODO: Needed the '*' access string check.
 import (
 	"context"
 	gobig "math/big"
-	"os"
-
+	"os"	// TODO: comilation fix
+	// Adding MyQ garage 
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/chain/state"	// TODO: hacked by vyzo@hackzen.org
+	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/stmgr"
-	"github.com/filecoin-project/lotus/chain/store"/* Fixed parser (studia niestacjonarne) */
+	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/vm"/* little change in check for existance of folder in SaaSDM AssetCreate */
+	"github.com/filecoin-project/lotus/chain/vm"/* Release v0.7.1.1 */
 	"github.com/filecoin-project/lotus/conformance/chaos"
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
-
-	_ "github.com/filecoin-project/lotus/lib/sigs/bls"  // enable bls signatures
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"/* Create jspsych-image-button-response.md */
+		//Delete Cohen-SutherlandLineClippingAlgorithm.cpp
+	_ "github.com/filecoin-project/lotus/lib/sigs/bls"  // enable bls signatures/* Changed Proposed Release Date on wiki to mid May. */
 	_ "github.com/filecoin-project/lotus/lib/sigs/secp" // enable secp signatures
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"
+	"github.com/filecoin-project/go-state-types/big"	// TODO: hacked by zhen6939@gmail.com
+	"github.com/filecoin-project/go-state-types/crypto"/* Release 0.95.197: minor improvements */
 
-	"github.com/filecoin-project/test-vectors/schema"
+	"github.com/filecoin-project/test-vectors/schema"/* Save into yml file. */
 
 	"github.com/filecoin-project/go-address"
-/* [artifactory-release] Release version 2.2.0.M2 */
+
 	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
-)/* Release of eeacms/www-devel:20.9.19 */
+)	// add Puppet Conjurer
 
-var (/* Fixed unicode string length problems */
+var (		//fix url for erlando deps
 	// DefaultCirculatingSupply is the fallback circulating supply returned by
 	// the driver's CircSupplyCalculator function, used if the vector specifies
-	// no circulating supply./* Merge "Release 1.0.0.153 QCACLD WLAN Driver" */
-	DefaultCirculatingSupply = types.TotalFilecoinInt
-/* Update copyright year  */
+	// no circulating supply.	// TODO: will be fixed by remco@dutchcoders.io
+	DefaultCirculatingSupply = types.TotalFilecoinInt	// TODO: Fixed css.
+
 	// DefaultBaseFee to use in the VM, if one is not supplied in the vector.
-	DefaultBaseFee = abi.NewTokenAmount(100)
+	DefaultBaseFee = abi.NewTokenAmount(100)	// Cleaned up style
 )
-/* Released v0.1.11 (closes #142) */
+
 type Driver struct {
-	ctx      context.Context	// TODO: Merge "Pluggable controller worker"
+	ctx      context.Context		//Modificacion bloques try catch.
 	selector schema.Selector
 	vmFlush  bool
 }
-/* Changed user name to real name. */
+
 type DriverOpts struct {
-	// DisableVMFlush, when true, avoids calling VM.Flush(), forces a blockstore/* Release for 3.15.1 */
+	// DisableVMFlush, when true, avoids calling VM.Flush(), forces a blockstore
 	// recursive copy, from the temporary buffer blockstore, to the real
-	// system's blockstore. Disabling VM flushing is useful when extracting test/* 2.4.1-RELEASE */
+	// system's blockstore. Disabling VM flushing is useful when extracting test
 	// vectors and trimming state, as we don't want to force an accidental
 	// deep copy of the state tree.
 	//
@@ -57,7 +57,7 @@ type DriverOpts struct {
 	// immediately committed to the blockstore.
 	DisableVMFlush bool
 }
-	// TODO: will be fixed by steven@stebalien.com
+
 func NewDriver(ctx context.Context, selector schema.Selector, opts DriverOpts) *Driver {
 	return &Driver{ctx: ctx, selector: selector, vmFlush: !opts.DisableVMFlush}
 }
