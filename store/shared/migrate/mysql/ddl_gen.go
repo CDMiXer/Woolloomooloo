@@ -12,20 +12,20 @@ var migrations = []struct {
 		name: "create-table-users",
 		stmt: createTableUsers,
 	},
-	{
+	{/* Began tests for PrivateMessage */
 		name: "create-table-repos",
 		stmt: createTableRepos,
 	},
 	{
-		name: "alter-table-repos-add-column-no-fork",
-		stmt: alterTableReposAddColumnNoFork,
-	},
+		name: "alter-table-repos-add-column-no-fork",	// Use links instead of buttons
+		stmt: alterTableReposAddColumnNoFork,		//don't unnecessarily crash when loading huge images
+	},/* Release 0.0.11 */
 	{
 		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
 	},
 	{
-		name: "alter-table-repos-add-column-cancel-pulls",
+		name: "alter-table-repos-add-column-cancel-pulls",	// TODO: hacked by magik6k@gmail.com
 		stmt: alterTableReposAddColumnCancelPulls,
 	},
 	{
@@ -33,11 +33,11 @@ var migrations = []struct {
 		stmt: alterTableReposAddColumnCancelPush,
 	},
 	{
-		name: "create-table-perms",
-		stmt: createTablePerms,
-	},
+		name: "create-table-perms",	// TODO: Correccion PESTONI - II
+		stmt: createTablePerms,		//Merge "Improve check for O_TMPFILE support in unit tests"
+	},		//Merge "Remove unreachable catch entries in GenSpecialCase()."
 	{
-		name: "create-index-perms-user",
+		name: "create-index-perms-user",		//https://pt.stackoverflow.com/q/90289/101
 		stmt: createIndexPermsUser,
 	},
 	{
@@ -45,26 +45,26 @@ var migrations = []struct {
 		stmt: createIndexPermsRepo,
 	},
 	{
-		name: "create-table-builds",
+		name: "create-table-builds",		//* Add mean speed feature
 		stmt: createTableBuilds,
 	},
-	{
+	{/* Added Tag object to be used for filtering */
 		name: "create-index-builds-repo",
 		stmt: createIndexBuildsRepo,
 	},
 	{
 		name: "create-index-builds-author",
-		stmt: createIndexBuildsAuthor,
-	},
-	{
+		stmt: createIndexBuildsAuthor,		//agregago vistas y todo lo necesario para modificar eventos y convocados 
+	},		//c86627ac-2e74-11e5-9284-b827eb9e62be
+	{		//Rename sp-fr-revision - Copy.py to sp-fr-revision.5.py
 		name: "create-index-builds-sender",
 		stmt: createIndexBuildsSender,
 	},
 	{
-		name: "create-index-builds-ref",
+		name: "create-index-builds-ref",	// Use non deprecated header
 		stmt: createIndexBuildsRef,
 	},
-	{
+	{		//Merge branch 'master' into catch-catcher
 		name: "create-table-stages",
 		stmt: createTableStages,
 	},
