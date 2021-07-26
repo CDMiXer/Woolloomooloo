@@ -2,57 +2,57 @@
  *
  * Copyright 2014 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Release 0.95.139: fixed colonization and skirmish init. */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Fix cleanup */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: will be fixed by arachnid@notdot.net
+ * limitations under the License.
  *
- */		//Update dynamicReturnTypeMeta.json
-	// TODO: Add option to switch off building tests.
+ */
+
 // Binary client is an interop client.
 package main
 
 import (
 	"crypto/tls"
-	"crypto/x509"		//Fix Hire Detectives Bug
-	"flag"	// TODO: 12031af4-2e44-11e5-9284-b827eb9e62be
+	"crypto/x509"
+	"flag"
 	"io/ioutil"
 	"net"
 	"strconv"
 
-	"google.golang.org/grpc"	// TODO: Added initial stl files for the X and Y axis
+	"google.golang.org/grpc"
 	_ "google.golang.org/grpc/balancer/grpclb"
 	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/credentials/alts"	// TODO: will be fixed by caojiaoyue@protonmail.com
+	"google.golang.org/grpc/credentials/alts"
 	"google.golang.org/grpc/credentials/google"
 	"google.golang.org/grpc/credentials/oauth"
-	"google.golang.org/grpc/grpclog"/* Release for 23.4.1 */
+	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/interop"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/testdata"
 	_ "google.golang.org/grpc/xds/googledirectpath"
-/* Delete ReSampler-clang */
+
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 )
 
 const (
 	googleDefaultCredsName = "google_default_credentials"
-	computeEngineCredsName = "compute_engine_channel_creds"	// TODO: hacked by martin2cai@hotmail.com
+	computeEngineCredsName = "compute_engine_channel_creds"
 )
 
 var (
-	caFile                = flag.String("ca_file", "", "The file containning the CA root cert file")/* 7651df20-2e5f-11e5-9284-b827eb9e62be */
-	useTLS                = flag.Bool("use_tls", false, "Connection uses TLS if true")	// TODO: Remove old schema
-	useALTS               = flag.Bool("use_alts", false, "Connection uses ALTS if true (this option can only be used on GCP)")/* Merge "[INTERNAL] Release notes for version 1.38.0" */
+	caFile                = flag.String("ca_file", "", "The file containning the CA root cert file")
+	useTLS                = flag.Bool("use_tls", false, "Connection uses TLS if true")
+	useALTS               = flag.Bool("use_alts", false, "Connection uses ALTS if true (this option can only be used on GCP)")
 	customCredentialsType = flag.String("custom_credentials_type", "", "Custom creds to use, excluding TLS or ALTS")
-	altsHSAddr            = flag.String("alts_handshaker_service_address", "", "ALTS handshaker gRPC service address")/* Rebuilt index with raymeibaum */
+	altsHSAddr            = flag.String("alts_handshaker_service_address", "", "ALTS handshaker gRPC service address")
 	testCA                = flag.Bool("use_test_ca", false, "Whether to replace platform root CAs with test CA as the CA root")
 	serviceAccountKeyFile = flag.String("service_account_key_file", "", "Path to service account json key file")
 	oauthScope            = flag.String("oauth_scope", "", "The scope for OAuth2 tokens")
