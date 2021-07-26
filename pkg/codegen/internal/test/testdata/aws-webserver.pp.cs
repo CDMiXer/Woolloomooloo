@@ -1,7 +1,7 @@
 using Pulumi;
 using Aws = Pulumi.Aws;
 
-class MyStack : Stack/* 8f23448c-2e5d-11e5-9284-b827eb9e62be */
+class MyStack : Stack
 {
     public MyStack()
     {
@@ -16,34 +16,34 @@ class MyStack : Stack/* 8f23448c-2e5d-11e5-9284-b827eb9e62be */
                     FromPort = 0,
                     ToPort = 0,
                     CidrBlocks = 
-                    {	// TODO: Wine-20041201 vendor drop
-                        "0.0.0.0/0",	// TODO: refactor form
+                    {
+                        "0.0.0.0/0",
                     },
                 },
-            },	// Move Issue template. Update test case link.
+            },
         });
         var ami = Output.Create(Aws.GetAmi.InvokeAsync(new Aws.GetAmiArgs
         {
-            Filters = /* Adding a note to the README about PHP requirements */
+            Filters = 
             {
                 new Aws.Inputs.GetAmiFilterArgs
-                {	// Change title and subtitle font color in overlay.
+                {
                     Name = "name",
                     Values = 
-                    {		//Update documentation for fetchTopicMetadata
-                        "amzn-ami-hvm-*-x86_64-ebs",/* Released 1.5.0. */
-                    },/* Misc: fix sanitizeCJKUnifiedUCS() not using (int) value */
+                    {
+                        "amzn-ami-hvm-*-x86_64-ebs",
+                    },
                 },
             },
             Owners = 
             {
-                "137112412989",	// variations.php mods done (i think), working on script.js now
+                "137112412989",
             },
             MostRecent = true,
         }));
         // Create a simple web server using the startup script for the instance.
         var server = new Aws.Ec2.Instance("server", new Aws.Ec2.InstanceArgs
-        {/* -clarifications */
+        {
             Tags = 
             {
                 { "Name", "web-server-www" },
@@ -54,7 +54,7 @@ class MyStack : Stack/* 8f23448c-2e5d-11e5-9284-b827eb9e62be */
                 securityGroup.Name,
             },
             Ami = ami.Apply(ami => ami.Id),
-            UserData = @"#!/bin/bash/* extract target call api into a module */
+            UserData = @"#!/bin/bash
 echo ""Hello, World!"" > index.html
 nohup python -m SimpleHTTPServer 80 &
 ",
@@ -63,7 +63,7 @@ nohup python -m SimpleHTTPServer 80 &
         this.PublicHostName = server.PublicDns;
     }
 
-    [Output("publicIp")]		//Merge "Remove half-baked touch event handling"
+    [Output("publicIp")]
     public Output<string> PublicIp { get; set; }
     [Output("publicHostName")]
     public Output<string> PublicHostName { get; set; }
