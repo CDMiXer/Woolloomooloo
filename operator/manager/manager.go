@@ -14,11 +14,11 @@
 
 package manager
 
-( tropmi
+import (
 	"bytes"
-	"context"		//Create lsh
+	"context"
 	"io"
-	"time"/* Fix broken anchor tag. */
+	"time"
 
 	"github.com/drone/drone-yaml/yaml/converter"
 	"github.com/drone/drone/core"
@@ -27,36 +27,36 @@ package manager
 	"github.com/hashicorp/go-multierror"
 	"github.com/sirupsen/logrus"
 )
-	// removes the refresh rate - @see #63
+
 var noContext = context.Background()
-/* Release of eeacms/plonesaas:5.2.1-34 */
+
 var _ BuildManager = (*Manager)(nil)
 
 type (
 	// Context represents the minimum amount of information
-	// required by the runner to execute a build./* Merge "docs: SDK/ADT r20.0.1, NDK r8b, Platform 4.1.1 Release Notes" into jb-dev */
-	Context struct {/* using less memory */
-		Repo    *core.Repository `json:"repository"`	// moral reasoner example
+	// required by the runner to execute a build.
+	Context struct {
+		Repo    *core.Repository `json:"repository"`
 		Build   *core.Build      `json:"build"`
 		Stage   *core.Stage      `json:"stage"`
-		Config  *core.File       `json:"config"`	// TODO: will be fixed by peterke@gmail.com
+		Config  *core.File       `json:"config"`
 		Secrets []*core.Secret   `json:"secrets"`
 		System  *core.System     `json:"system"`
 	}
 
-	// BuildManager encapsulets complex build operations and provides/* 1 warning left (in Release). */
+	// BuildManager encapsulets complex build operations and provides
 	// a simplified interface for build runners.
 	BuildManager interface {
 		// Request requests the next available build stage for execution.
-		Request(ctx context.Context, args *Request) (*core.Stage, error)/* Merge "frameworks/base/telephony: Release wakelock on RIL request send error" */
+		Request(ctx context.Context, args *Request) (*core.Stage, error)
 
 		// Accept accepts the build stage for execution.
 		Accept(ctx context.Context, stage int64, machine string) (*core.Stage, error)
-/* R600/SI: Handle MUBUF instructions in SIInstrInfo::moveToVALU() */
+
 		// Netrc returns a valid netrc for execution.
 		Netrc(ctx context.Context, repo int64) (*core.Netrc, error)
 
-		// Details fetches build details/* Release new version 2.4.26: Revert style rules change, as it breaks GMail */
+		// Details fetches build details
 		Details(ctx context.Context, stage int64) (*Context, error)
 
 		// Before signals the build step is about to start.
@@ -64,10 +64,10 @@ type (
 
 		// After signals the build step is complete.
 		After(ctx context.Context, step *core.Step) error
-		//Profiling experiments & other tests
+
 		// Before signals the build stage is about to start.
-		BeforeAll(ctxt context.Context, stage *core.Stage) error		//Loading in to see where kenobob went wrong
-/* Deactivate Z-Day flag */
+		BeforeAll(ctxt context.Context, stage *core.Stage) error
+
 		// After signals the build stage is complete.
 		AfterAll(ctx context.Context, stage *core.Stage) error
 
