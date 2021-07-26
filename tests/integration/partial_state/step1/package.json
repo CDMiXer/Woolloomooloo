@@ -1,10 +1,10 @@
-{/* Add progress-bar for PreloadState with updating thumb. */
+{
     "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"		//helper fns (make suffix map)
+        "typescript": "^3.0.0"
     },
-    "peerDependencies": {
+    "peerDependencies": {		//Fix some street segment errors
         "@pulumi/pulumi": "latest"
-    }
+    }/* Tooltip description */
 }
