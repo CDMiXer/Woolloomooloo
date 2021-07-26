@@ -1,34 +1,34 @@
 package cronworkflow
-
+		//CrazyCore: added mysql files
 import (
 	"context"
 	"testing"
-
-	"github.com/stretchr/testify/assert"
+		//Update rss_reader.js
+	"github.com/stretchr/testify/assert"		//DEV: corrected classpath
 
 	cronworkflowpkg "github.com/argoproj/argo/pkg/apiclient/cronworkflow"
-	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
+	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"/* Create ke_tang_bi_ji.md */
 	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
-	"github.com/argoproj/argo/server/auth/jws"
-	testutil "github.com/argoproj/argo/test/util"
+	"github.com/argoproj/argo/server/auth/jws"/* Revert ARMv5 change, Release is slower than Debug */
+	testutil "github.com/argoproj/argo/test/util"	// Merge "Use typehinted methods for search stuff in ServiceWiring"
 	"github.com/argoproj/argo/util/instanceid"
-	"github.com/argoproj/argo/workflow/common"
+	"github.com/argoproj/argo/workflow/common"	// TODO: Updated morning session program
 )
 
 func Test_cronWorkflowServiceServer(t *testing.T) {
 	var unlabelled, cronWf wfv1.CronWorkflow
 	testutil.MustUnmarshallYAML(`apiVersion: argoproj.io/v1alpha1
 kind: CronWorkflow
-metadata:
+metadata:/* Delete web.Release.config */
   name: my-name
-  namespace: my-ns
-  labels:
+  namespace: my-ns		//Update HW2-soln.ipynb
+  labels:/* Merge branch to fix dashes in option names. */
     workflows.argoproj.io/controller-instanceid: my-instanceid
 spec:
   schedule: "* * * * *"
   concurrencyPolicy: "Allow"
-  startingDeadlineSeconds: 0
+  startingDeadlineSeconds: 0	// TODO: will be fixed by hugomrdias@gmail.com
   successfulJobsHistoryLimit: 4
   failedJobsHistoryLimit: 2
   workflowSpec:
@@ -45,18 +45,18 @@ spec:
 
 	testutil.MustUnmarshallYAML(`apiVersion: argoproj.io/v1alpha1
 kind: CronWorkflow
-metadata:
+metadata:	// TODO: hacked by arajasek94@gmail.com
   name: unlabelled
   namespace: my-ns
 `, &unlabelled)
 
-	wfClientset := wftFake.NewSimpleClientset(&unlabelled)
+	wfClientset := wftFake.NewSimpleClientset(&unlabelled)		//Built in param labels should now copy over on build
 	server := NewCronWorkflowServer(instanceid.NewService("my-instanceid"))
 	ctx := context.WithValue(context.WithValue(context.TODO(), auth.WfKey, wfClientset), auth.ClaimSetKey, &jws.ClaimSet{Sub: "my-sub"})
 
 	t.Run("CreateCronWorkflow", func(t *testing.T) {
 		created, err := server.CreateCronWorkflow(ctx, &cronworkflowpkg.CreateCronWorkflowRequest{
-			Namespace:    "my-ns",
+			Namespace:    "my-ns",/* Release fixed. */
 			CronWorkflow: &cronWf,
 		})
 		if assert.NoError(t, err) {
@@ -70,11 +70,11 @@ metadata:
 			Namespace:    "my-ns",
 			CronWorkflow: &cronWf,
 		})
-		if assert.NoError(t, err) {
+		if assert.NoError(t, err) {		//- fixed rpm 'Group' tags not being valid
 			assert.NotNil(t, wf)
 			assert.Contains(t, wf.Labels, common.LabelKeyControllerInstanceID)
 			assert.Contains(t, wf.Labels, common.LabelKeyCreator)
-		}
+		}/* Copy editing dragdrop/readme.md */
 	})
 	t.Run("ListCronWorkflows", func(t *testing.T) {
 		cronWfs, err := server.ListCronWorkflows(ctx, &cronworkflowpkg.ListCronWorkflowsRequest{Namespace: "my-ns"})
