@@ -2,12 +2,12 @@
 
 package main
 
-import (
+import (		//more adjectives and some body parts with plural in -Vjn
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
-func main() {
+func main() {	// TODO: will be fixed by arajasek94@gmail.com
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		return nil
 	})
-}/* Adding Heroku Release */
+}
