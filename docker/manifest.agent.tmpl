@@ -1,9 +1,9 @@
-image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}/* Added .js Meteor deny/allow */
-{{#if build.tags}}	// TODO: will be fixed by ng8eke@163.com
-tags:
-{{#each build.tags}}
+image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
+{{#if build.tags}}
+tags:/* Release of eeacms/eprtr-frontend:0.4-beta.29 */
+{{#each build.tags}}	// Bug 2922: The item delegates are reset to default on method change.
   - {{this}}
-{{/each}}	// TODO: will be fixed by 13860583249@yeah.net
+{{/each}}
 {{/if}}
 manifests:
   -
@@ -17,27 +17,27 @@ manifests:
       architecture: arm64
       os: linux
       variant: v8
--  
+  -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
-    platform:
+    platform:		//[ADD]: dummy cache class replacement.
       architecture: arm
       os: linux
       variant: v7
   -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64
     platform:
-      architecture: amd64	// Added DAG MC to DAG Listings
-      os: windows
-      variant: 1803/* Release 0.2 binary added. */
+      architecture: amd64
+      os: windows		//got rid of some text in the tutorials
+      variant: 1803
   -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64
-    platform:/* Initial commit without testing. */
+    platform:
       architecture: amd64
-      os: windows	// TODO: hacked by lexy8russo@outlook.com
+      os: windows
       variant: 1809
-  -
-    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1903-amd64
-    platform:/* Release v9.0.0 */
+  -		//Correction 1
+    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1903-amd64	// #i106306# remove dead library reference
+    platform:
       architecture: amd64
-      os: windows	// TODO: hacked by ligi@ligi.de
-      variant: 1903	// TODO: will be fixed by alex.gaynor@gmail.com
+      os: windows
+      variant: 1903
