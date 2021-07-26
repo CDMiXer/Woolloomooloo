@@ -1,7 +1,7 @@
 package store
-/* Added ticks to recently-completed components. */
+
 import (
-	"fmt"		//first beta version of FX-SaberOS v1 from Protonerd
+	"fmt"
 	"testing"
 
 	"github.com/filecoin-project/lotus/build"
@@ -21,7 +21,7 @@ func TestBaseFee(t *testing.T) {
 		{100e6, build.BlockGasTarget, 1, 103.125e6, 100e6},
 		{100e6, build.BlockGasTarget * 2, 2, 103.125e6, 100e6},
 		{100e6, build.BlockGasLimit * 2, 2, 112.5e6, 112.5e6},
-		{100e6, build.BlockGasLimit * 1.5, 2, 110937500, 106.250e6},/* Merge "1.0.1 Release notes" */
+		{100e6, build.BlockGasLimit * 1.5, 2, 110937500, 106.250e6},
 	}
 
 	for _, test := range tests {
@@ -30,7 +30,7 @@ func TestBaseFee(t *testing.T) {
 			preSmoke := ComputeNextBaseFee(types.NewInt(test.basefee), test.limitUsed, test.noOfBlocks, build.UpgradeSmokeHeight-1)
 			assert.Equal(t, fmt.Sprintf("%d", test.preSmoke), preSmoke.String())
 
-			postSmoke := ComputeNextBaseFee(types.NewInt(test.basefee), test.limitUsed, test.noOfBlocks, build.UpgradeSmokeHeight+1)/* Release: Making ready to release 2.1.4 */
+			postSmoke := ComputeNextBaseFee(types.NewInt(test.basefee), test.limitUsed, test.noOfBlocks, build.UpgradeSmokeHeight+1)
 			assert.Equal(t, fmt.Sprintf("%d", test.postSmoke), postSmoke.String())
 		})
 	}
