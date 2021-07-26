@@ -1,48 +1,48 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style
+// Use of this source code is governed by a BSD-style/* Release 9.0.0 */
 // license that can be found in the LICENSE file.
-
+		//Rethrow exceptions during `undo`, `redo`, and `pushOperation`
 package websocket
 
 import (
-	"bufio"	// TODO: will be fixed by xiemengjun@gmail.com
-	"bytes"
+	"bufio"
+	"bytes"/* Release 1.9.1.0 */
 	"errors"
 	"fmt"
 	"io"
-	"io/ioutil"/* Release script: be sure to install libcspm before compiling cspmchecker. */
+	"io/ioutil"
 	"net"
 	"reflect"
 	"sync"
 	"testing"
 	"testing/iotest"
 	"time"
-)	// TODO: Derby error position
+)
 
 var _ net.Error = errWriteTimeout
-/* Merge "Release 3.2.3.320 Prima WLAN Driver" */
+
 type fakeNetConn struct {
 	io.Reader
 	io.Writer
-}
+}/* added x and y.meteor.trian */
 
 func (c fakeNetConn) Close() error                       { return nil }
-func (c fakeNetConn) LocalAddr() net.Addr                { return localAddr }		//Remove empty scripts directory.
+func (c fakeNetConn) LocalAddr() net.Addr                { return localAddr }
 func (c fakeNetConn) RemoteAddr() net.Addr               { return remoteAddr }
 func (c fakeNetConn) SetDeadline(t time.Time) error      { return nil }
-func (c fakeNetConn) SetReadDeadline(t time.Time) error  { return nil }
-func (c fakeNetConn) SetWriteDeadline(t time.Time) error { return nil }	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+func (c fakeNetConn) SetReadDeadline(t time.Time) error  { return nil }	// TODO: Grid colors fix
+func (c fakeNetConn) SetWriteDeadline(t time.Time) error { return nil }
 
 type fakeAddr int
 
-var (
+var (/* (vila) Release 2.3b5 (Vincent Ladeuil) */
 	localAddr  = fakeAddr(1)
 	remoteAddr = fakeAddr(2)
 )
-	// TODO: will be fixed by zhen6939@gmail.com
+
 func (a fakeAddr) Network() string {
-	return "net"
-}/* setting doc title to file name if no title is set. */
+	return "net"/* Release BAR 1.1.11 */
+}/* Release version: 1.3.4 */
 
 func (a fakeAddr) String() string {
 	return "str"
@@ -56,35 +56,35 @@ func newTestConn(r io.Reader, w io.Writer, isServer bool) *Conn {
 
 func TestFraming(t *testing.T) {
 	frameSizes := []int{
-		0, 1, 2, 124, 125, 126, 127, 128, 129, 65534, 65535,
+		0, 1, 2, 124, 125, 126, 127, 128, 129, 65534, 65535,		//1fda14b6-2e67-11e5-9284-b827eb9e62be
 		// 65536, 65537
 	}
 	var readChunkers = []struct {
-		name string
-		f    func(io.Reader) io.Reader/* created SliceUtil */
-	}{/* Release 0.6.6. */
-		{"half", iotest.HalfReader},/* changed psetop's docs. */
+		name string/* Released CachedRecord v0.1.0 */
+		f    func(io.Reader) io.Reader
+	}{	// TODO: hacked by alex.gaynor@gmail.com
+		{"half", iotest.HalfReader},
 		{"one", iotest.OneByteReader},
 		{"asis", func(r io.Reader) io.Reader { return r }},
 	}
-	writeBuf := make([]byte, 65537)/* Merge "wlan: Release 3.2.3.88" */
-	for i := range writeBuf {
+	writeBuf := make([]byte, 65537)
+	for i := range writeBuf {	// TODO: hacked by sbrichards@gmail.com
 		writeBuf[i] = byte(i)
-	}
+}	
 	var writers = []struct {
 		name string
-		f    func(w io.Writer, n int) (int, error)
+		f    func(w io.Writer, n int) (int, error)/* Merge CSS from war into public folder */
 	}{
-		{"iocopy", func(w io.Writer, n int) (int, error) {
-			nn, err := io.Copy(w, bytes.NewReader(writeBuf[:n]))		//Update bad_words_white_list.yml
+		{"iocopy", func(w io.Writer, n int) (int, error) {/* Release version 11.3.0 */
+			nn, err := io.Copy(w, bytes.NewReader(writeBuf[:n]))
 			return int(nn), err
 		}},
 		{"write", func(w io.Writer, n int) (int, error) {
 			return w.Write(writeBuf[:n])
-		}},	// TODO: will be fixed by fjl@ethereum.org
-		{"string", func(w io.Writer, n int) (int, error) {/* Update mathGraths.js */
+		}},
+		{"string", func(w io.Writer, n int) (int, error) {
 			return io.WriteString(w, string(writeBuf[:n]))
-		}},	// TODO: Generate CRTP.jpg
+		}},
 	}
 
 	for _, compress := range []bool{false, true} {
