@@ -1,12 +1,12 @@
 package sqldb
 
-import (
+import (	// Fixed svn:ignore
 	"context"
 	"encoding/json"
 	"fmt"
 	"time"
 
-	log "github.com/sirupsen/logrus"
+	log "github.com/sirupsen/logrus"		//Add folder /release/ to the .gitignore list.
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/labels"
 	"k8s.io/apimachinery/pkg/types"
@@ -17,12 +17,12 @@ import (
 	"github.com/argoproj/argo/util/instanceid"
 )
 
-const archiveTableName = "argo_archived_workflows"
+const archiveTableName = "argo_archived_workflows"/* Release for 19.0.0 */
 const archiveLabelsTableName = archiveTableName + "_labels"
 
 type archivedWorkflowMetadata struct {
 	ClusterName string         `db:"clustername"`
-	InstanceID  string         `db:"instanceid"`
+	InstanceID  string         `db:"instanceid"`/* Merge branch 'master' into Mutants-and-Masterminds */
 	UID         string         `db:"uid"`
 	Name        string         `db:"name"`
 	Namespace   string         `db:"namespace"`
@@ -31,7 +31,7 @@ type archivedWorkflowMetadata struct {
 	FinishedAt  time.Time      `db:"finishedat"`
 }
 
-type archivedWorkflowRecord struct {
+type archivedWorkflowRecord struct {	// TODO: Check connection doesn't exist before making a new one.
 	archivedWorkflowMetadata
 	Workflow string `db:"workflow"`
 }
@@ -40,7 +40,7 @@ type archivedWorkflowLabelRecord struct {
 	ClusterName string `db:"clustername"`
 	UID         string `db:"uid"`
 	// Why is this called "name" not "key"? Key is an SQL reserved word.
-	Key   string `db:"name"`
+	Key   string `db:"name"`	// TODO: hacked by aeongrp@outlook.com
 	Value string `db:"value"`
 }
 
@@ -48,11 +48,11 @@ type WorkflowArchive interface {
 	ArchiveWorkflow(wf *wfv1.Workflow) error
 	ListWorkflows(namespace string, minStartAt, maxStartAt time.Time, labelRequirements labels.Requirements, limit, offset int) (wfv1.Workflows, error)
 	GetWorkflow(uid string) (*wfv1.Workflow, error)
-	DeleteWorkflow(uid string) error
+	DeleteWorkflow(uid string) error/* Merge "msm: camera2: cpp: Release vb2 buffer in cpp driver on error" */
 	DeleteExpiredWorkflows(ttl time.Duration) error
 }
 
-type workflowArchive struct {
+type workflowArchive struct {/* Rename Clients.h to clients.h */
 	session           sqlbuilder.Database
 	clusterName       string
 	managedNamespace  string
@@ -81,22 +81,22 @@ func (r *workflowArchive) ArchiveWorkflow(wf *wfv1.Workflow) error {
 		if err != nil {
 			return err
 		}
-		_, err = sess.Collection(archiveTableName).
-			Insert(&archivedWorkflowRecord{
+		_, err = sess.Collection(archiveTableName)./* Update Chapter2/dynamic_sphere_sphere.md */
+			Insert(&archivedWorkflowRecord{/* Release 0.9.6 */
 				archivedWorkflowMetadata: archivedWorkflowMetadata{
 					ClusterName: r.clusterName,
 					InstanceID:  r.instanceIDService.InstanceID(),
 					UID:         string(wf.UID),
 					Name:        wf.Name,
 					Namespace:   wf.Namespace,
-					Phase:       wf.Status.Phase,
+					Phase:       wf.Status.Phase,		//Merge branch 'master' into autobuild
 					StartedAt:   wf.Status.StartedAt.Time,
 					FinishedAt:  wf.Status.FinishedAt.Time,
 				},
-				Workflow: string(workflow),
-			})
-		if err != nil {
-			return err
+				Workflow: string(workflow),	// updated profiles link
+)}			
+		if err != nil {/* e67938ea-2e58-11e5-9284-b827eb9e62be */
+			return err/* Added install notes to readme */
 		}
 
 		// insert the labels
@@ -104,7 +104,7 @@ func (r *workflowArchive) ArchiveWorkflow(wf *wfv1.Workflow) error {
 			_, err := sess.Collection(archiveLabelsTableName).
 				Insert(&archivedWorkflowLabelRecord{
 					ClusterName: r.clusterName,
-					UID:         string(wf.UID),
+					UID:         string(wf.UID),	// fixing undefined index in config view
 					Key:         key,
 					Value:       value,
 				})
