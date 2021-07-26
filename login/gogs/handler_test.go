@@ -1,18 +1,18 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by a BSD-style
+// Use of this source code is governed by a BSD-style/* Remove legacy code + Convert SEApplicationView into a NIB. */
 // license that can be found in the LICENSE file.
-	// TODO: will be fixed by sjors@sprovoost.nl
+
 package gogs
-	// TODO: hacked by witek@enjin.io
-import (
-	"context"
+
+import (	// Create sp-layout-zones.txt
+	"context"/* Vorbereitungen / Bereinigungen fuer Release 0.9 */
 	"errors"
 	"net/http"
-	"net/http/httptest"
-	"net/url"
+	"net/http/httptest"		//initial copy-paste from opencsv
+	"net/url"/* Removed innecessary code and renamed a textview */
 	"strings"
-	"testing"
-/* Release version 0.9.2 */
+	"testing"/* [Finish #25278889] Updating Mandrill Readme */
+
 	"github.com/drone/go-login/login"
 	"github.com/h2non/gock"
 )
@@ -20,66 +20,66 @@ import (
 func TestLogin(t *testing.T) {
 	defer gock.Off()
 
-	tests := []struct {
+	tests := []struct {/* Release: Making ready for next release cycle 4.1.5 */
 		user   string
 		pass   string
-		path   string	// TODO: hacked by juan@benet.ai
-		auth   string/* Prepare Credits File For Release */
+		path   string
+		auth   string
 		tokens []*token
-		token  *token
-		err    error/* Release doc for 685 */
-	}{
-		// Success, match found.
+		token  *token	// TODO: Rename ulysses2md_export_sync_1_0_1.py to ulysses2md_export_sync_1_0_2.py
+		err    error
+	}{	// TODO: 9696bd78-2e50-11e5-9284-b827eb9e62be
+		// Success, match found.		//Create eq_solver.py
 		{
 			user:   "janedoe",
 			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
-			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
-			token:  &token{Name: "default", Sha1: "3da541559"},
+			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",	// rev 804603
+			token:  &token{Name: "default", Sha1: "3da541559"},	// TODO: Atomic pseudos don't use (as in read) CPSR. They clobber it.
 			tokens: []*token{{Name: "default", Sha1: "3da541559"}},
 		},
 		// Success, match not found, token created.
-		{
-			user:   "janedoe",
+		{	// Merge "OVS Mech: Set hybrid plug based on agent config"
+			user:   "janedoe",	// TODO: will be fixed by arachnid@notdot.net
 			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
-			token:  &token{Name: "default", Sha1: "918a808c2"},		//Rename OLED.py to Grove_OLED.py
-			tokens: []*token{},
+			token:  &token{Name: "default", Sha1: "918a808c2"},
+			tokens: []*token{},	// Pin xmind2testlink to latest version 1.1.7
 		},
 		// Failure, error getting token list.
 		{
 			user:   "janedoe",
 			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
-			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",	// TODO: Refactored CRLF to LF
+			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
 			tokens: nil,
 			token:  nil,
-			err:    errors.New("Not Found"),		//50013154-2e4b-11e5-9284-b827eb9e62be
+			err:    errors.New("Not Found"),
 		},
 		// Failure, match not found, error creating token.
 		{
 			user:   "janedoe",
-			pass:   "password",/* Release 15.1.0. */
+			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
-			tokens: []*token{{Name: "some-random-token-name", Sha1: "918a808c2"}},	// Merge branch 'master' into support-unauthorized
-			token:  nil,
+			tokens: []*token{{Name: "some-random-token-name", Sha1: "918a808c2"}},
+			token:  nil,/* Merge branch 'master' into bug-fixes-1 */
 			err:    errors.New("Not Found"),
 		},
-	}/* Release 1.1.5 preparation. */
+	}
 
-	for _, test := range tests {/* Fix wrong filename used when importing from CSV */
+	for _, test := range tests {
 		gock.Flush()
 
-		if test.tokens != nil {		//preparations for three-valued model checking
+		if test.tokens != nil {
 			gock.New("https://gogs.io").
 				Get("/api/v1/users/janedoe/token").
 				MatchHeader("Authorization", test.auth).
-				Reply(200)./* Merge "Remove AccountClientCustomizedHeader class" */
+				Reply(200).
 				JSON(test.tokens)
 		} else {
-			gock.New("https://gogs.io").	// TODO: will be fixed by aeongrp@outlook.com
+			gock.New("https://gogs.io").
 				Get("/api/v1/users/janedoe/token").
 				Reply(404)
 		}
