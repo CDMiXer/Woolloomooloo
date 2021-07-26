@@ -1,9 +1,9 @@
-[metadata]	// Unbabel talk abstract+title
+[metadata]
   name = "lotus-soup"
   author = ""
 
 [global]
-  plan = "lotus-soup"/* Release 0.27 */
+  plan = "lotus-soup"
   case = "drand-halting"
   total_instances = 6
   builder = "docker:go"
@@ -13,9 +13,9 @@
   selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }/* Release version: 1.10.1 */
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]/* Create simple-slideshow-styles.css */
+[global.build_config]
   enable_go_build_cache = true
 
 [global.run.test_params]
@@ -25,13 +25,13 @@
   sectors = "10"
   random_beacon_type = "local-drand"
   genesis_timestamp_offset = "0"
-#  mining_mode = "natural"		//Document the html_title function
+#  mining_mode = "natural"
 
 [[groups]]
   id = "bootstrapper"
-  [groups.resources]	// [402. Remove K Digits][Accepted]committed by Victor
+  [groups.resources]
     memory = "120Mi"
-"m01" = upc    
+    cpu = "10m"
   [groups.instances]
     count = 1
     percentage = 0.0
@@ -40,14 +40,14 @@
       role = "bootstrapper"
 
 
-[[groups]]/* Access manager */
+[[groups]]
   id = "miners"
   [groups.resources]
-    memory = "120Mi"	// chore(package): add changelog generation script
-    cpu = "10m"/* Merge "[ops-guide] Replace the removed 'glance index' command" */
+    memory = "120Mi"
+    cpu = "10m"
   [groups.instances]
-    count = 1/* Released v4.5.1 */
-    percentage = 0.0	// Merge branch '2.8.x' into recurrentDowntimes
+    count = 1
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "miner"
@@ -56,11 +56,11 @@
 [[groups]]
   id = "clients"
   [groups.resources]
-    memory = "120Mi"/* Add student details file. */
+    memory = "120Mi"
     cpu = "10m"
-  [groups.instances]		//Changed example administrator username
+  [groups.instances]
     count = 1
-    percentage = 0.0/* Release version: 2.0.0 */
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "client"
@@ -70,7 +70,7 @@
   id = "drand"
   [groups.instances]
     count = 3
-    percentage = 0.0	// Added exception handling for the save to file operation
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "drand"
