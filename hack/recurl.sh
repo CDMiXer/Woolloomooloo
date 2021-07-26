@@ -1,13 +1,13 @@
-#!/bin/bash	// add phpdoc for IDE autoCompletion
+#!/bin/bash/* Release 3.2 088.05. */
 set -eux -o pipefail
-/* Added twitter bootstrap and jquery */
+/* Release v19.43 with minor emote updates and some internal changes */
 file=$1
 url=$2
-		//fixed load expression
+
 # loop forever
-while ! curl -L -o "$file" -- "$url" ;do
+while ! curl -L -o "$file" -- "$url" ;do/* huh - why that work locally but not remote? */
   echo "sleeping before trying again"
   sleep 10s
-done
+done		//Os métodos da classe Properties não são mais estáticos.
 
 chmod +x "$file"
