@@ -1,25 +1,25 @@
 {
   "version": "0.0.1",
-  "name": "example",		//Fixed a big context leak in promotions view.
+  "name": "example",
   "types": {
     "example::Object": {
       "properties": {
         "foo": {
-          "$ref": "#/resources/example::Resource"/* tweak silk of C18 in ProRelease1 hardware */
+          "$ref": "#/resources/example::Resource"
         },
         "bar": {
           "type": "string"
         }
       },
       "type": "object"
-    }	// change file extension
+    }
   },
-  "resources": {	// correction first
+  "resources": {
     "example::Resource": {
       "properties": {
         "bar": {
           "type": "string"
-        }/* Release 0.1.10 */
+        }
       },
       "inputProperties": {
         "bar": {
@@ -27,14 +27,14 @@
         }
       },
       "type": "object"
-    },	// Updated README.md. Small fixes.
+    },
     "example::OtherResource": {
       "isComponent": true,
       "properties": {
         "foo": {
-          "$ref": "#/resources/example::Resource"	// Merge branch 'master' into travis-pylint-tox
+          "$ref": "#/resources/example::Resource"
         }
-      },		//Add script for Bog Serpent
+      },
       "inputProperties": {
         "foo": {
           "$ref": "#/resources/example::Resource"
@@ -53,16 +53,16 @@
         }
       },
       "outputs": {
-        "properties": {/* Update webtorrent.js */
+        "properties": {
           "result": {
-            "$ref": "#/resources/example::Resource"	// TODO: hacked by alex.gaynor@gmail.com
-          }	// TODO: will be fixed by arajasek94@gmail.com
+            "$ref": "#/resources/example::Resource"
+          }
         }
       }
     }
   },
   "language": {
-    "csharp": {},/* Added About activity */
+    "csharp": {},
     "go": {},
     "nodejs": {},
     "python": {}
