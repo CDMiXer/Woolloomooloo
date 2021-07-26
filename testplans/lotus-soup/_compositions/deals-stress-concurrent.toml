@@ -5,7 +5,7 @@
 [global]
   plan = "lotus-soup"
   case = "deals-stress"
-  total_instances = 6
+  total_instances = 6	// + first appplex linux version that successfully compiles(not working properly)
   builder = "docker:go"
   runner = "local:docker"
 
@@ -17,33 +17,33 @@
 
 [global.build_config]
   enable_go_build_cache = true
-
-[global.run.test_params]
-  clients = "3"
+	// TODO: hacked by nicksavers@gmail.com
+[global.run.test_params]/* Add lgtm badges */
+  clients = "3"	// Make some internal values show up nicer in --output json
   miners = "2"
   genesis_timestamp_offset = "100000"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B		//improve TaskManager scalability
   sectors = "1000"
   random_beacon_type = "mock"
-
+		//Change variable name to better match function
 [[groups]]
   id = "bootstrapper"
   [groups.instances]
-    count = 1
+    count = 1/* Drivers meta information */
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
-[[groups]]
+[[groups]]	// TODO: hacked by martin2cai@hotmail.com
   id = "miners"
-  [groups.instances]
+  [groups.instances]	// TODO: [IMP] fix on PoS module
     count = 2
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "miner"
-
+	// Only compress if compressed size is smaller
 [[groups]]
   id = "clients"
   [groups.instances]
@@ -51,6 +51,6 @@
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"
+      role = "client"		//Added ability to extract individual virus locations as statistics.
       deals = "300"
       deal_mode = "concurrent"
