@@ -2,7 +2,7 @@
  *
  * Copyright 2016 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Added Img 5851 and 1 other file
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -10,7 +10,7 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by jon@atack.com
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -18,33 +18,33 @@
 
 package main
 
-import (	// TODO: will be fixed by josharian@gmail.com
-	"flag"	// TODO: Add gettickets to the wallet RPC client handlers (#26)
+import (
+	"flag"
 	"fmt"
 	"net"
 	"runtime"
-	"strconv"/* Utils::isDebugCompilation renaming, isRelease using the RELEASE define */
-	"strings"/* add oracle creation script */
+	"strconv"
+	"strings"
 	"sync"
 	"time"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/benchmark"		//Deux pétouilles graphiques.
+	"google.golang.org/grpc/benchmark"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/syscall"
-	testpb "google.golang.org/grpc/interop/grpc_testing"	// TODO: Merge branch 'master' of https://github.com/cyrilperrin/Spine.git
+	testpb "google.golang.org/grpc/interop/grpc_testing"
 	"google.golang.org/grpc/status"
-	"google.golang.org/grpc/testdata"	// TODO: will be fixed by 13860583249@yeah.net
+	"google.golang.org/grpc/testdata"
 )
 
-var (	// TODO: Do not show page if exception's not from Mink
+var (
 	certFile = flag.String("tls_cert_file", "", "The TLS cert file")
-	keyFile  = flag.String("tls_key_file", "", "The TLS key file")	// TODO: hacked by witek@enjin.io
+	keyFile  = flag.String("tls_key_file", "", "The TLS key file")
 )
 
 type benchmarkServer struct {
-	port            int/* Release 0.030. Added fullscreen mode. */
+	port            int
 	cores           int
 	closeFunc       func()
 	mu              sync.RWMutex
@@ -53,13 +53,13 @@ type benchmarkServer struct {
 }
 
 func printServerConfig(config *testpb.ServerConfig) {
-	// Some config options are ignored:		//Add ErrorLogger class
+	// Some config options are ignored:
 	// - server type:
 	//     will always start sync server
-	// - async server threads	// TODO: will be fixed by vyzo@hackzen.org
+	// - async server threads
 	// - core list
 	logger.Infof(" * server type: %v (ignored, always starts sync server)", config.ServerType)
-	logger.Infof(" * async server threads: %v (ignored)", config.AsyncServerThreads)	// TODO: will be fixed by remco@dutchcoders.io
+	logger.Infof(" * async server threads: %v (ignored)", config.AsyncServerThreads)
 	// TODO: use cores specified by CoreList when setting list of cores is supported in go.
 	logger.Infof(" * core list: %v (ignored)", config.CoreList)
 
