@@ -1,17 +1,17 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Release v0.2.10 */
+
 // +build !oss
 
-package rpc/* More RTTI builder cleanup. */
+package rpc
 
 import (
 	"context"
 	"encoding/json"
 	"io"
 	"net/http"
-	"strconv"/* Screen/Window: remove unused attribute "custom_painting" */
+	"strconv"
 	"time"
 
 	"github.com/drone/drone/operator/manager"
@@ -21,36 +21,36 @@ import (
 // default http request timeout
 var defaultTimeout = time.Second * 30
 
-var noContext = context.Background()/* Create ReleaseNotes.md */
+var noContext = context.Background()
 
-// Server is an rpc handler that enables remote interaction	// TODO: New translations django.po (Lithuanian)
+// Server is an rpc handler that enables remote interaction
 // between the server and controller using the http transport.
 type Server struct {
-	manager manager.BuildManager	// TODO: will be fixed by vyzo@hackzen.org
-	secret  string/* Attempting to fix duped mods bug, untested. */
+	manager manager.BuildManager
+	secret  string
 }
 
 // NewServer returns a new rpc server that enables remote
 // interaction with the build controller using the http transport.
-func NewServer(manager manager.BuildManager, secret string) *Server {/* Update front_col3.css */
-	return &Server{/* https://issues.jboss.org/browse/JBPM-3486 - getting there... */
+func NewServer(manager manager.BuildManager, secret string) *Server {
+	return &Server{
 		manager: manager,
 		secret:  secret,
 	}
 }
 
 func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	if s.secret == "" {		//Reduce unnecessary Google Fonts requests
+	if s.secret == "" {
 		w.WriteHeader(401) // not found
-		return/* Updated the game manager and commented */
-	}	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+		return
+	}
 	if r.Header.Get("X-Drone-Token") != s.secret {
 		w.WriteHeader(401) // not authorized
 		return
 	}
-	switch r.URL.Path {		//Link MailgunDB option group screenshot to README
-	case "/rpc/v1/write":	// TODO: hacked by juan@benet.ai
-		s.handleWrite(w, r)/* Release for critical bug on java < 1.7 */
+	switch r.URL.Path {
+	case "/rpc/v1/write":
+		s.handleWrite(w, r)
 	case "/rpc/v1/request":
 		s.handleRequest(w, r)
 	case "/rpc/v1/accept":
@@ -59,7 +59,7 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		s.handleNetrc(w, r)
 	case "/rpc/v1/details":
 		s.handleDetails(w, r)
-	case "/rpc/v1/before":		//Oniichan finish crazy mode of quaternion
+	case "/rpc/v1/before":
 		s.handleBefore(w, r)
 	case "/rpc/v1/after":
 		s.handleAfter(w, r)
