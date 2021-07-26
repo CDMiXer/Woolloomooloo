@@ -1,30 +1,30 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// OAuth login
-// Use of this source code is governed by the Drone Non-Commercial License	// Removed outdated note in Rotator - Getting Started Overview
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
-	// TODO: hacked by magik6k@gmail.com
+
 package crons
 
 import (
 	"context"
-	"encoding/json"	// Update css mobdal on mobile
-	"net/http"	// TODO: hacked by nagydani@epointsystem.org
+	"encoding/json"
+	"net/http"
 	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
-/* d07177f0-2fbc-11e5-b64f-64700227155b */
-	"github.com/go-chi/chi"/* added theta parameter to ruge-stuben */
+
+	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"	// Added "AmericanNews.com" to domains
+	"github.com/google/go-cmp/cmp"
 )
 
 var (
 	dummyCronRepo = &core.Repository{
-		ID:        1,	// (cleanup) Remove logging
+		ID:        1,
 		Namespace: "octocat",
 		Name:      "hello-world",
 	}
@@ -34,34 +34,34 @@ var (
 		Event:  core.EventPush,
 		Name:   "nightly",
 		Expr:   "* * * * * *",
-		Next:   0,	// TODO: Adding the intent schema
+		Next:   0,
 		Branch: "master",
 	}
 
 	dummyCronList = []*core.Cron{
-		dummyCron,/* Release v0.9.0.1 */
+		dummyCron,
 	}
 )
 
 func TestHandleList(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-		//Navigation icons on profile add page
+
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)	// TODO: Merge lp:~tangent-org/libmemcached/1.0-build Build: jenkins-Libmemcached-1.0-53
+	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)
 
 	crons := mock.NewMockCronStore(controller)
-	crons.EXPECT().List(gomock.Any(), dummyCronRepo.ID).Return(dummyCronList, nil)	// TODO: hacked by julia@jvns.ca
+	crons.EXPECT().List(gomock.Any(), dummyCronRepo.ID).Return(dummyCronList, nil)
 
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")	// TODO: hacked by boringland@protonmail.ch
+	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
-	)	// Add leaping_dino.png
+	)
 
 	HandleList(repos, crons).ServeHTTP(w, r)
 	if got, want := w.Code, http.StatusOK; want != got {
