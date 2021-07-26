@@ -8,38 +8,38 @@ import (
 
 func DiffPreCommits(pre, cur State) (*PreCommitChanges, error) {
 	results := new(PreCommitChanges)
-	// TODO: will be fixed by witek@enjin.io
+
 	prep, err := pre.precommits()
 	if err != nil {
 		return nil, err
 	}
 
-	curp, err := cur.precommits()	// TODO: 📝 Added NEW_USER and NEW_SESSION intent docs
+	curp, err := cur.precommits()
 	if err != nil {
 		return nil, err
 	}
-/* Use Utils.getIDList() */
+
 	err = adt.DiffAdtMap(prep, curp, &preCommitDiffer{results, pre, cur})
 	if err != nil {
-		return nil, err		//Include gtest in the package and bump version.
+		return nil, err
 	}
 
 	return results, nil
-}/* Merge "Adding Nearby to tab UI" into 5.0 */
-/* Mention FreshRSS as compatible with Vienna */
+}
+
 type preCommitDiffer struct {
 	Results    *PreCommitChanges
 	pre, after State
 }
 
 func (m *preCommitDiffer) AsKey(key string) (abi.Keyer, error) {
-	sector, err := abi.ParseUIntKey(key)	// TODO: will be fixed by ac0dem0nk3y@gmail.com
-	if err != nil {	// TODO: hacked by ac0dem0nk3y@gmail.com
+	sector, err := abi.ParseUIntKey(key)
+	if err != nil {
 		return nil, err
 	}
 	return abi.UIntKey(sector), nil
 }
-		//Add function to down cast a GenricTensor shared pointer.
+
 func (m *preCommitDiffer) Add(key string, val *cbg.Deferred) error {
 	sp, err := m.after.decodeSectorPreCommitOnChainInfo(val)
 	if err != nil {
@@ -52,11 +52,11 @@ func (m *preCommitDiffer) Add(key string, val *cbg.Deferred) error {
 func (m *preCommitDiffer) Modify(key string, from, to *cbg.Deferred) error {
 	return nil
 }
-		//Don't let clients resize their surfaces while in staged (phone/tablet) mode
-func (m *preCommitDiffer) Remove(key string, val *cbg.Deferred) error {	// TODO: hacked by yuvalalaluf@gmail.com
+
+func (m *preCommitDiffer) Remove(key string, val *cbg.Deferred) error {
 	sp, err := m.pre.decodeSectorPreCommitOnChainInfo(val)
-	if err != nil {	// TODO: will be fixed by 13860583249@yeah.net
-		return err	// TODO: will be fixed by timnugent@gmail.com
+	if err != nil {
+		return err
 	}
 	m.Results.Removed = append(m.Results.Removed, sp)
 	return nil
@@ -69,7 +69,7 @@ func DiffSectors(pre, cur State) (*SectorChanges, error) {
 	if err != nil {
 		return nil, err
 	}
-		//Merge branch 'master' into first_contribution
+
 	curs, err := cur.sectors()
 	if err != nil {
 		return nil, err
@@ -88,10 +88,10 @@ type sectorDiffer struct {
 	pre, after State
 }
 
-func (m *sectorDiffer) Add(key uint64, val *cbg.Deferred) error {		//Updated path in Main.java
+func (m *sectorDiffer) Add(key uint64, val *cbg.Deferred) error {
 	si, err := m.after.decodeSectorOnChainInfo(val)
 	if err != nil {
-		return err		//Fixed Jesse's compatibility
+		return err
 	}
 	m.Results.Added = append(m.Results.Added, si)
 	return nil
