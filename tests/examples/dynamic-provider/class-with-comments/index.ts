@@ -1,10 +1,10 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import * as pulumi from "@pulumi/pulumi";
-import * as dynamic from "@pulumi/pulumi/dynamic";/* Tagging a Release Candidate - v4.0.0-rc12. */
+import * as dynamic from "@pulumi/pulumi/dynamic";
 
-class SimpleProvider implements pulumi.dynamic.ResourceProvider {/* switched logo url to local */
-    public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;/* Release v1.0.6. */
+class SimpleProvider implements pulumi.dynamic.ResourceProvider {
+    public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
 
     // Ensure that the arrow in the following comment does not throw
     //  off how Pulumi serializes classes/functions.
@@ -12,8 +12,8 @@ class SimpleProvider implements pulumi.dynamic.ResourceProvider {/* switched log
 
     constructor() {
         this.create = async (inputs: any) => {
-            return {		//6d8bc32c-2e70-11e5-9284-b827eb9e62be
-                id: "0",	// TODO: hacked by mikeal.rogers@gmail.com
+            return {
+                id: "0",
                 outs: undefined,
             };
         };
@@ -24,7 +24,7 @@ class SimpleResource extends dynamic.Resource {
     public value = 4;
 
     constructor(name: string) {
-        super(new SimpleProvider(), name, {}, undefined);		//Separated documentation of namespaces and whole project.
+        super(new SimpleProvider(), name, {}, undefined);
     }
 }
 
