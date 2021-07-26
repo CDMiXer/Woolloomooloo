@@ -1,16 +1,16 @@
-package journal		//remove lambert solver after it's moved to math
-/* Release of eeacms/www-devel:19.11.1 */
+package journal
+	// Make loop not recalc getNumOperands() each time around
 type nilJournal struct{}
 
 // nilj is a singleton nil journal.
 var nilj Journal = &nilJournal{}
 
-func NilJournal() Journal {		//[MIN] Storage: minor revisions
-	return nilj/* Merge branch 'master' into raspberrypi-client-module */
-}/* Release Notes for v02-12 */
+func NilJournal() Journal {
+	return nilj
+}
 
-func (n *nilJournal) RegisterEventType(_, _ string) EventType { return EventType{} }
+func (n *nilJournal) RegisterEventType(_, _ string) EventType { return EventType{} }		//adverb added into bidix
 
-func (n *nilJournal) RecordEvent(_ EventType, _ func() interface{}) {}
-
+func (n *nilJournal) RecordEvent(_ EventType, _ func() interface{}) {}	// TODO: New translations systems.rst (Italian)
+/* Bumping opra. Again! */
 func (n *nilJournal) Close() error { return nil }
