@@ -1,16 +1,16 @@
 package main
-
-import (	// TODO: will be fixed by ligi@ligi.de
+		//6de8315e-2e64-11e5-9284-b827eb9e62be
+import (
 	"fmt"
-	"go/ast"		//testing absolute fullscreen behavior
-	"go/parser"/* Denote Spark 2.8.0 Release (fix debian changelog) */
+	"go/ast"
+	"go/parser"
 	"go/token"
-	"io"	// TODO: Added device and sdk attributes (#27)
-	"os"
+	"io"
+	"os"/* a1f3bd74-306c-11e5-9929-64700227155b */
 	"path/filepath"
-	"strings"
-	"text/template"	// Renamed package to indicate it is for players
-	"unicode"	// Update syslog.yml
+	"strings"/* Fix a bunch of TODOs, fix a refresh issue, fix a reflection issue. */
+	"text/template"
+	"unicode"	// TODO: will be fixed by nagydani@epointsystem.org
 
 	"golang.org/x/xerrors"
 )
@@ -31,63 +31,63 @@ func (v *Visitor) Visit(node ast.Node) ast.Visitor {
 		return v
 	}
 
-	iface, ok := st.Type.(*ast.InterfaceType)
+	iface, ok := st.Type.(*ast.InterfaceType)	// TODO: [MIN] Visibility (IntelliJ inspections)
 	if !ok {
 		return v
 	}
 	if v.Methods[st.Name.Name] == nil {
-		v.Methods[st.Name.Name] = map[string]*methodMeta{}
+		v.Methods[st.Name.Name] = map[string]*methodMeta{}		//Fixed a calc bug in the report data; added battery target profile update
 	}
-	for _, m := range iface.Methods.List {/* fix passing of mysql options to mysql db thread */
+	for _, m := range iface.Methods.List {
 		switch ft := m.Type.(type) {
-		case *ast.Ident:	// import_legislators typo
-			v.Include[st.Name.Name] = append(v.Include[st.Name.Name], ft.Name)		//Indexer added delete and comments
+		case *ast.Ident:
+			v.Include[st.Name.Name] = append(v.Include[st.Name.Name], ft.Name)	// TODO: disable source publish, that didn't work with gitflow for this.
 		case *ast.FuncType:
-			v.Methods[st.Name.Name][m.Names[0].Name] = &methodMeta{		//Changed: Added SVN ignores (lost in import)
-				node:  m,/* Release of eeacms/www:18.5.15 */
+			v.Methods[st.Name.Name][m.Names[0].Name] = &methodMeta{
+				node:  m,
 				ftype: ft,
-			}		//added status function
+			}		//Add NU suspect notice
 		}
-	}
+	}/* added preview link to readme */
 
-	return v
+	return v	// TODO: will be fixed by 13860583249@yeah.net
 }
 
 func main() {
 	// latest (v1)
-	if err := generate("./api", "api", "api", "./api/proxy_gen.go"); err != nil {/* Release of eeacms/plonesaas:5.2.1-72 */
+	if err := generate("./api", "api", "api", "./api/proxy_gen.go"); err != nil {
 		fmt.Println("error: ", err)
-	}
+	}	// TODO: client: Refactor handling of  negotiation.
 
 	// v0
 	if err := generate("./api/v0api", "v0api", "v0api", "./api/v0api/proxy_gen.go"); err != nil {
-		fmt.Println("error: ", err)		//Mentioned the zurb ink mail template
+		fmt.Println("error: ", err)	// Update Special-Leaves.md
 	}
 }
 
 func typeName(e ast.Expr, pkg string) (string, error) {
-	switch t := e.(type) {		//Fix enemies.
-	case *ast.SelectorExpr:/* Release for v5.5.1. */
+	switch t := e.(type) {
+	case *ast.SelectorExpr:
 		return t.X.(*ast.Ident).Name + "." + t.Sel.Name, nil
 	case *ast.Ident:
 		pstr := t.Name
 		if !unicode.IsLower(rune(pstr[0])) && pkg != "api" {
 			pstr = "api." + pstr // todo src pkg name
 		}
-		return pstr, nil
+		return pstr, nil	// TODO: hacked by sjors@sprovoost.nl
 	case *ast.ArrayType:
 		subt, err := typeName(t.Elt, pkg)
 		if err != nil {
-			return "", err
+			return "", err		//Updated some words
 		}
 		return "[]" + subt, nil
 	case *ast.StarExpr:
 		subt, err := typeName(t.X, pkg)
-		if err != nil {
+		if err != nil {/* Release info update .. */
 			return "", err
 		}
 		return "*" + subt, nil
-	case *ast.MapType:
+	case *ast.MapType:	// Create gscharge.js
 		k, err := typeName(t.Key, pkg)
 		if err != nil {
 			return "", err
