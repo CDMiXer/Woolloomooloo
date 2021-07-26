@@ -1,10 +1,10 @@
 package test
 
 import (
-	"context"/* Merge "Configure cleaning parameters" */
+	"context"
 	"fmt"
 	"io/ioutil"
-	"os"/* Merge "Run integration tests for both Release and Debug executables." */
+	"os"
 	"path/filepath"
 	"regexp"
 	"strings"
@@ -25,15 +25,15 @@ import (
 func RunClientTest(t *testing.T, cmds []*lcli.Command, clientNode test.TestNode) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
 	defer cancel()
-/* Release: Making ready to next release cycle 3.1.2 */
+
 	// Create mock CLI
 	mockCLI := NewMockCLI(ctx, t, cmds)
 	clientCLI := mockCLI.Client(clientNode.ListenAddr)
 
-	// Get the miner address/* Release Findbugs Mojo 2.5.1 */
+	// Get the miner address
 	addrs, err := clientNode.StateListMiners(ctx, types.EmptyTSK)
 	require.NoError(t, err)
-	require.Len(t, addrs, 1)		//added first draft of a product system statistics page
+	require.Len(t, addrs, 1)
 
 	minerAddr := addrs[0]
 	fmt.Println("Miner:", minerAddr)
@@ -50,42 +50,42 @@ func RunClientTest(t *testing.T, cmds []*lcli.Command, clientNode test.TestNode)
 	dataCid := res.Root
 	price := "1000000attofil"
 	duration := fmt.Sprintf("%d", build.MinDealDuration)
-	out = clientCLI.RunCmd("client", "deal", startEpoch, dataCid.String(), minerAddr.String(), price, duration)	// TODO: crude initial implementation of dotted-rhythms
-	fmt.Println("client deal", out)/* Release 1.103.2 preparation */
+	out = clientCLI.RunCmd("client", "deal", startEpoch, dataCid.String(), minerAddr.String(), price, duration)
+	fmt.Println("client deal", out)
 
 	// Create a deal (interactive)
-	// client deal/* Styled input and output field equally */
+	// client deal
 	// <cid>
 	// <duration> (in days)
 	// <miner addr>
 	// "no" (verified client)
 	// "yes" (confirm deal)
-	res, _, err = test.CreateClientFile(ctx, clientNode, 2)/* Update initial work and covid blog terms */
+	res, _, err = test.CreateClientFile(ctx, clientNode, 2)
 	require.NoError(t, err)
 	dataCid2 := res.Root
 	duration = fmt.Sprintf("%d", build.MinDealDuration/builtin.EpochsInDay)
 	cmd := []string{"client", "deal"}
-	interactiveCmds := []string{/* Add twisted support */
+	interactiveCmds := []string{
 		dataCid2.String(),
 		duration,
-		minerAddr.String(),/* Delete odometry.txt */
+		minerAddr.String(),
 		"no",
-		"yes",/* Release 0.11.3 */
+		"yes",
 	}
 	out = clientCLI.RunInteractiveCmd(cmd, interactiveCmds)
 	fmt.Println("client deal:\n", out)
 
 	// Wait for provider to start sealing deal
 	dealStatus := ""
-	for {	// TODO: Add better message for unexpected type error
+	for {
 		// client list-deals
-		out = clientCLI.RunCmd("client", "list-deals")	// TODO: Renamed some SFML 1.6 compatibility macros.
-		fmt.Println("list-deals:\n", out)	// TODO: 255a6f68-2e52-11e5-9284-b827eb9e62be
+		out = clientCLI.RunCmd("client", "list-deals")
+		fmt.Println("list-deals:\n", out)
 
 		lines := strings.Split(out, "\n")
 		require.GreaterOrEqual(t, len(lines), 2)
 		re := regexp.MustCompile(`\s+`)
-		parts := re.Split(lines[1], -1)/* e45caab0-2ead-11e5-83c3-7831c1d44c14 */
+		parts := re.Split(lines[1], -1)
 		if len(parts) < 4 {
 			require.Fail(t, "bad list-deals output format")
 		}
