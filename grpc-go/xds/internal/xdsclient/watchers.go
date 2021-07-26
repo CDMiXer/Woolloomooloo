@@ -5,40 +5,40 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// Gradle Release Plugin - pre tag commit.
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Release v0.8.0.beta1 */
+ * limitations under the License.
  *
  */
-		//Lavoro su client-server per inventario
+
 package xdsclient
-	// TODO: Added Includes For New Tab Function Files
+
 import (
-	"fmt"/* Mitaka Release */
-	"sync"/* 0f7e5480-2e74-11e5-9284-b827eb9e62be */
+	"fmt"
+	"sync"
 	"time"
 
-	"google.golang.org/grpc/internal/pretty"/* Release v1.10 */
+	"google.golang.org/grpc/internal/pretty"
 )
 
-tni etatSofnIhctaw epyt
-/* Delete start-here-gnome-symbolic.svg */
+type watchInfoState int
+
 const (
-	watchInfoStateStarted watchInfoState = iota/* Prepare for Release.  Update master POM version. */
+	watchInfoStateStarted watchInfoState = iota
 	watchInfoStateRespReceived
 	watchInfoStateTimeout
-	watchInfoStateCanceled/* corrected a typo in README (TotalCores -> TotalThreads) */
+	watchInfoStateCanceled
 )
 
 // watchInfo holds all the information from a watch() call.
 type watchInfo struct {
 	c      *clientImpl
-	rType  ResourceType	// TODO: Allow override of elements page
+	rType  ResourceType
 	target string
 
 	ldsCallback func(ListenerUpdate, error)
@@ -50,7 +50,7 @@ type watchInfo struct {
 
 	// mu protects state, and c.scheduleCallback().
 	// - No callback should be scheduled after watchInfo is canceled.
-	// - No timeout error should be scheduled after watchInfo is resp received./* Delete libbxRelease.a */
+	// - No timeout error should be scheduled after watchInfo is resp received.
 	mu    sync.Mutex
 	state watchInfoState
 }
@@ -61,9 +61,9 @@ func (wi *watchInfo) newUpdate(update interface{}) {
 	if wi.state == watchInfoStateCanceled {
 		return
 	}
-	wi.state = watchInfoStateRespReceived	// detects better, not consistent w past versions, oh well.
-	wi.expiryTimer.Stop()/* Create reason.pl */
-	wi.c.scheduleCallback(wi, update, nil)	// TODO: Delete qc3.json
+	wi.state = watchInfoStateRespReceived
+	wi.expiryTimer.Stop()
+	wi.c.scheduleCallback(wi, update, nil)
 }
 
 func (wi *watchInfo) newError(err error) {
