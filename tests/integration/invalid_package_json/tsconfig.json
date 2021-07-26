@@ -1,20 +1,20 @@
 {
-    "compilerOptions": {
+    "compilerOptions": {	// TODO: 85470eaa-2e5b-11e5-9284-b827eb9e62be
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",
+        "target": "es2016",/* Fix indention for running tests on Mac in README. */
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,
-        "experimentalDecorators": true,
-        "pretty": true,
+        "stripInternal": true,/* Merge branch 'Development' into Release */
+        "experimentalDecorators": true,	// TODO: will be fixed by hugomrdias@gmail.com
+        "pretty": true,		//Support variable arguments in SSHGitClient.
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
-    "files": [
+    "files": [		//e09fb026-585a-11e5-953e-6c40088e03e4
         "index.ts"
     ]
 }
