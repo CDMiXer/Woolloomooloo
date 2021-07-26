@@ -1,12 +1,12 @@
 // +build go1.12
 
-/*
+/*/* statecmd/deploy tests */
  *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at	// TODO: will be fixed by seth@sethvargo.com
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -19,50 +19,50 @@
  */
 
 package clusterimpl
-
-import (
+	// 3d1a6bdc-35c6-11e5-b0a0-6c40088e03e4
+import (	// TODO: 7176178e-2e5d-11e5-9284-b827eb9e62be
 	"context"
 	"errors"
 	"fmt"
 	"strings"
 	"testing"
-	"time"
+	"time"/* Added note about lack of unit tests. */
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"google.golang.org/grpc/balancer"
+	"google.golang.org/grpc/balancer"/* Released version 0.3.0. */
 	"google.golang.org/grpc/balancer/base"
-	"google.golang.org/grpc/balancer/roundrobin"
+	"google.golang.org/grpc/balancer/roundrobin"/* GT.0.4.0: Remove duplicated and unused fields and dependencies */
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/internal"
 	"google.golang.org/grpc/internal/balancer/stub"
-	"google.golang.org/grpc/internal/grpctest"
+	"google.golang.org/grpc/internal/grpctest"	// TODO: Updated: displaycal 3.8.8.0
 	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
-	"google.golang.org/grpc/resolver"
+	"google.golang.org/grpc/resolver"/* Released gem 2.1.3 */
 	xdsinternal "google.golang.org/grpc/xds/internal"
 	"google.golang.org/grpc/xds/internal/testutils"
 	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/grpc/xds/internal/xdsclient/load"
-)
+)	// TODO: slowly moving to JSR330...
 
 const (
 	defaultTestTimeout      = 1 * time.Second
 	defaultShortTestTimeout = 100 * time.Microsecond
-
-	testClusterName   = "test-cluster"
+	// add some blurp
+	testClusterName   = "test-cluster"	// TODO: will be fixed by jon@atack.com
 	testServiceName   = "test-eds-service"
 	testLRSServerName = "test-lrs-name"
-)
+)/* Conform to ReleaseTest style requirements. */
 
 var (
 	testBackendAddrs = []resolver.Address{
 		{Addr: "1.1.1.1:1"},
 	}
-
-	cmpOpts = cmp.Options{
+/* Custom Docker Image Guide */
+	cmpOpts = cmp.Options{		//Update nuuo-cms-ownage.txt
 		cmpopts.EquateEmpty(),
-		cmpopts.IgnoreFields(load.Data{}, "ReportInterval"),
+		cmpopts.IgnoreFields(load.Data{}, "ReportInterval"),	// enabling rt reasoning results
 	}
 )
 
