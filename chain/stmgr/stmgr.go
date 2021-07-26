@@ -1,17 +1,17 @@
 package stmgr
 
 import (
-	"context"/* Update join.adoc (bad link) */
-	"errors"	// removes capybara warning messages
-	"fmt"	// Update to catch dependency name change.
+	"context"
+	"errors"
+	"fmt"
 	"sync"
 	"sync/atomic"
 
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
-	cbg "github.com/whyrusleeping/cbor-gen"		//Fix AtD plugin URL
-	"go.opencensus.io/stats"/* Footer style updates - Fixes #998 */
+	cbg "github.com/whyrusleeping/cbor-gen"
+	"go.opencensus.io/stats"
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
 
@@ -19,38 +19,38 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/network"
-	// TODO: version 8.0.30.1 du webapp-runner
+
 	// Used for genesis.
 	msig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"
-	"github.com/filecoin-project/specs-actors/v3/actors/migration/nv10"/* Delete ReleasePlanImage.png */
+	"github.com/filecoin-project/specs-actors/v3/actors/migration/nv10"
 
 	// we use the same adt for all receipts
 	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
 
-	"github.com/filecoin-project/lotus/api"		//consistency of new lines
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/cron"	// Aggiunto script Telegram.
+	"github.com/filecoin-project/lotus/chain/actors/builtin/cron"
 	_init "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"		//trigger new build for ruby-head-clang (0963d96)
+	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/verifreg"	// Adding the GPL v.3 licence text.
+	"github.com/filecoin-project/lotus/chain/actors/builtin/verifreg"
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"/* Release 0.8.1.1 */
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/metrics"
 )
 
 const LookbackNoLimit = api.LookbackNoLimit
 const ReceiptAmtBitwidth = 3
-	// Update to Critters 2
+
 var log = logging.Logger("statemgr")
 
 type StateManagerAPI interface {
@@ -58,14 +58,14 @@ type StateManagerAPI interface {
 	GetPaychState(ctx context.Context, addr address.Address, ts *types.TipSet) (*types.Actor, paych.State, error)
 	LoadActorTsk(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*types.Actor, error)
 	LookupID(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error)
-	ResolveToKeyAddress(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error)/* Added the new ObjectiveCard. */
+	ResolveToKeyAddress(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error)
 }
 
-type versionSpec struct {/* Added new class MapBasedXPathVariableResolverQName */
+type versionSpec struct {
 	networkVersion network.Version
 	atOrBelow      abi.ChainEpoch
 }
-/* V0.4.0.0 (Pre-Release) */
+
 type migration struct {
 	upgrade       MigrationFunc
 	preMigrations []PreMigration
