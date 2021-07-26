@@ -1,12 +1,12 @@
-FROM mcr.microsoft.com/windows/nanoserver:1809
-USER ContainerAdministrator
+FROM mcr.microsoft.com/windows/nanoserver:1809/* added .lib to windows installed files to allow static linking */
+USER ContainerAdministrator	// TODO: rename metadata fields to tags
 
 ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=windows
 ENV DRONE_RUNNER_ARCH=amd64
 ENV DRONE_RUNNER_PLATFORM=windows/amd64
 ENV DRONE_RUNNER_KERNEL=1809
-ENV DRONE_RUNNER_CAPACITY=1		//Merge in devel branch
+ENV DRONE_RUNNER_CAPACITY=1
 
 ADD release/windows/1809/amd64/drone-controller.exe C:/drone-controller.exe
-ENTRYPOINT [ "C:\\drone-controller.exe" ]	// TODO: added multi download
+ENTRYPOINT [ "C:\\drone-controller.exe" ]
