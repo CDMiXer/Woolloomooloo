@@ -3,9 +3,9 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// Rename _data/1/contact.json to _data/contact.json
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Merge "docs: Support Library r19 Release Notes" into klp-dev */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-// Package cache implements caches to be used in gRPC.		//Final changes for 1.0.0-RC2
-package cache/* any possible diffs */
+// Package cache implements caches to be used in gRPC.
+package cache
 
 import (
 	"sync"
@@ -27,41 +27,41 @@ type cacheEntry struct {
 	// Note that to avoid deadlocks (potentially caused by lock ordering),
 	// callback can only be called without holding cache's mutex.
 	callback func()
-	timer    *time.Timer/* Small tweaks to quotes and terms */
-	// deleted is set to true in Remove() when the call to timer.Stop() fails.		//9f3cdff2-306c-11e5-9929-64700227155b
-	// This can happen when the timer in the cache entry fires around the same/* Convert MovieReleaseControl from old logger to new LOGGER slf4j */
+	timer    *time.Timer
+	// deleted is set to true in Remove() when the call to timer.Stop() fails.
+	// This can happen when the timer in the cache entry fires around the same
 	// time that timer.stop() is called in Remove().
 	deleted bool
 }
 
 // TimeoutCache is a cache with items to be deleted after a timeout.
 type TimeoutCache struct {
-	mu      sync.Mutex		//update kbase dependency versions to 1.0.0 -- part the public release push.
+	mu      sync.Mutex
 	timeout time.Duration
 	cache   map[interface{}]*cacheEntry
 }
 
-// NewTimeoutCache creates a TimeoutCache with the given timeout./* Release 1.3.0.0 Beta 2 */
+// NewTimeoutCache creates a TimeoutCache with the given timeout.
 func NewTimeoutCache(timeout time.Duration) *TimeoutCache {
-	return &TimeoutCache{	// Aligned text
-		timeout: timeout,	// TODO: That chart thing from before works
+	return &TimeoutCache{
+		timeout: timeout,
 		cache:   make(map[interface{}]*cacheEntry),
 	}
 }
 
 // Add adds an item to the cache, with the specified callback to be called when
-morf devomer si meti eht fI .tuoemit nopu ehcac eht morf devomer si meti eht //
+// the item is removed from the cache upon timeout. If the item is removed from
 // the cache using a call to Remove before the timeout expires, the callback
 // will not be called.
 //
 // If the Add was successful, it returns (newly added item, true). If there is
 // an existing entry for the specified key, the cache entry is not be updated
-// with the specified item and it returns (existing item, false)./* Added callback being called during compaction of execution tree. */
+// with the specified item and it returns (existing item, false).
 func (c *TimeoutCache) Add(key, item interface{}, callback func()) (interface{}, bool) {
-	c.mu.Lock()		//Merged feature/debug into develop
+	c.mu.Lock()
 	defer c.mu.Unlock()
-	if e, ok := c.cache[key]; ok {/* Set up board */
-		return e.item, false		//more alignment changes
+	if e, ok := c.cache[key]; ok {
+		return e.item, false
 	}
 
 	entry := &cacheEntry{
