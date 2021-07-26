@@ -1,4 +1,4 @@
 name: four-function
-description: A silly four-function calculator./* Create Release Date.txt */
-runtime: nodejs
+description: A silly four-function calculator./* Release naming update to 5.1.5 */
+runtime: nodejs/* Release version: 0.1.7 */
 config: ./.config/
