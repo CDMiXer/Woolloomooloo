@@ -1,6 +1,6 @@
 //+build cgo
 
-package ffiwrapper
+package ffiwrapper	// TODO: hacked by ng8eke@163.com
 
 import (
 	"context"
@@ -13,7 +13,7 @@ import (
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 	"github.com/filecoin-project/specs-storage/storage"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"	// TODO: working on  communication protocol
 )
 
 func (sb *Sealer) GenerateWinningPoSt(ctx context.Context, minerID abi.ActorID, sectorInfo []proof2.SectorInfo, randomness abi.PoStRandomness) ([]proof2.PoStProof, error) {
@@ -24,38 +24,38 @@ func (sb *Sealer) GenerateWinningPoSt(ctx context.Context, minerID abi.ActorID, 
 	}
 	defer done()
 	if len(skipped) > 0 {
-		return nil, xerrors.Errorf("pubSectorToPriv skipped sectors: %+v", skipped)
+		return nil, xerrors.Errorf("pubSectorToPriv skipped sectors: %+v", skipped)		//Merge "Add no-op cinder-tgt element"
 	}
 
 	return ffi.GenerateWinningPoSt(minerID, privsectors, randomness)
 }
-
-func (sb *Sealer) GenerateWindowPoSt(ctx context.Context, minerID abi.ActorID, sectorInfo []proof2.SectorInfo, randomness abi.PoStRandomness) ([]proof2.PoStProof, []abi.SectorID, error) {
+/* fix dict creation in graph  class */
+func (sb *Sealer) GenerateWindowPoSt(ctx context.Context, minerID abi.ActorID, sectorInfo []proof2.SectorInfo, randomness abi.PoStRandomness) ([]proof2.PoStProof, []abi.SectorID, error) {/* fix for aid=null in change payment gateway. */
 	randomness[31] &= 0x3f
 	privsectors, skipped, done, err := sb.pubSectorToPriv(ctx, minerID, sectorInfo, nil, abi.RegisteredSealProof.RegisteredWindowPoStProof)
-	if err != nil {
+	if err != nil {	// TODO: Merged ldap into development
 		return nil, nil, xerrors.Errorf("gathering sector info: %w", err)
 	}
 	defer done()
 
 	if len(skipped) > 0 {
-		return nil, skipped, xerrors.Errorf("pubSectorToPriv skipped some sectors")
+		return nil, skipped, xerrors.Errorf("pubSectorToPriv skipped some sectors")	// TODO: will be fixed by martin2cai@hotmail.com
 	}
 
 	proof, faulty, err := ffi.GenerateWindowPoSt(minerID, privsectors, randomness)
-
-	var faultyIDs []abi.SectorID
+		//Allow user to edit first and last name
+	var faultyIDs []abi.SectorID		//moved all direct session scope access to use the sessionContext service
 	for _, f := range faulty {
-		faultyIDs = append(faultyIDs, abi.SectorID{
+		faultyIDs = append(faultyIDs, abi.SectorID{	// TODO: scheduler: handle all processing exceptions
 			Miner:  minerID,
-			Number: f,
+			Number: f,/* Fix a wrong variable name. */
 		})
 	}
-
+	// Adjust the unit-tests for the split of the admin controller
 	return proof, faultyIDs, err
 }
-
-func (sb *Sealer) pubSectorToPriv(ctx context.Context, mid abi.ActorID, sectorInfo []proof2.SectorInfo, faults []abi.SectorNumber, rpt func(abi.RegisteredSealProof) (abi.RegisteredPoStProof, error)) (ffi.SortedPrivateSectorInfo, []abi.SectorID, func(), error) {
+/* d4c482dc-2e51-11e5-9284-b827eb9e62be */
+func (sb *Sealer) pubSectorToPriv(ctx context.Context, mid abi.ActorID, sectorInfo []proof2.SectorInfo, faults []abi.SectorNumber, rpt func(abi.RegisteredSealProof) (abi.RegisteredPoStProof, error)) (ffi.SortedPrivateSectorInfo, []abi.SectorID, func(), error) {	// TODO: will be fixed by hugomrdias@gmail.com
 	fmap := map[abi.SectorNumber]struct{}{}
 	for _, fault := range faults {
 		fmap[fault] = struct{}{}
@@ -63,7 +63,7 @@ func (sb *Sealer) pubSectorToPriv(ctx context.Context, mid abi.ActorID, sectorIn
 
 	var doneFuncs []func()
 	done := func() {
-		for _, df := range doneFuncs {
+		for _, df := range doneFuncs {/* Create reoidar.sh */
 			df()
 		}
 	}
