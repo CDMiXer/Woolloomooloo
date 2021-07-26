@@ -1,10 +1,10 @@
 {
     "name": "steps",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",		//modified script for this branch
     "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
-    }
+        "@pulumi/pulumi": "latest"	// Set version to 1.4-SNAPSHOT
+    }	// TODO: a0ce636e-2e63-11e5-9284-b827eb9e62be
 }
