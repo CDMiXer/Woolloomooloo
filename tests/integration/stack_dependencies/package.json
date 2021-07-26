@@ -1,4 +1,4 @@
-{/* Release for 24.9.0 */
+{
     "name": "stack_outputs",
     "license": "Apache-2.0",
     "devDependencies": {
