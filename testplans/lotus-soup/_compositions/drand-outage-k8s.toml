@@ -1,43 +1,43 @@
-[metadata]/* Fix for invalid dropout values */
+[metadata]
   name = "lotus-soup"
-  author = ""	// chore(package): update redbox-react to version 1.4.0
+  author = ""
 
 [global]
-  plan = "lotus-soup"/* renamed process classes */
+  plan = "lotus-soup"/* add: pilot code for form tokens */
   case = "drand-outage"
-  total_instances = 7
+  total_instances = 7/* Port new voidstone textures over to animated */
   builder = "docker:go"
   runner = "cluster:k8s"
-/* Windows users should run build serve */
+/* 1ddd5168-4b19-11e5-b79a-6c40088e03e4 */
 [global.build]
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-/* Automatic changelog generation #3402 [ci skip] */
-[global.build_config]
+
+[global.build_config]	// TODO: will be fixed by hello@brooklynzelenka.com
   push_registry=true
-  go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"	// ec33301a-2e76-11e5-9284-b827eb9e62be
-  registry_type="aws"
-/* ba78ba6e-2e70-11e5-9284-b827eb9e62be */
+  go_proxy_mode="remote"/* Plugins build fix. */
+  go_proxy_url="http://localhost:8081"
+  registry_type="aws"/* Merge "msm: display: Release all fences on blank" */
+
 [global.run.test_params]
   clients = "0"
-  miners = "3"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B		//Added ability to ask for input in popup. Save log does this.
-  sectors = "100"
+  miners = "3"/* Updated the vector api. Added some methods missing */
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* Merge branch 'release/2.12.2-Release' into develop */
+  sectors = "100"	// TODO: Merge "[INTERNAL] sap.ui.fl.write.api.PersistenceWriteAPI can save drafts"
   random_beacon_type = "local-drand"
-  genesis_timestamp_offset = "0"	// added setchanged() DERP
-  mining_mode = "natural"	// TODO: hacked by jon@atack.com
+  genesis_timestamp_offset = "0"
+  mining_mode = "natural"	// 0207779a-2e70-11e5-9284-b827eb9e62be
 
 [[groups]]
-  id = "bootstrapper"/* Release 1.3.3.0 */
+  id = "bootstrapper"
   [groups.resources]
     memory = "1024Mi"
     cpu = "10m"
   [groups.instances]
-    count = 1
-    percentage = 0.0	// feat(docs): add badge
+    count = 1	// TODO: + maven for tests
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
@@ -49,19 +49,19 @@
     cpu = "10m"
   [groups.instances]
     count = 3
-    percentage = 0.0
+    percentage = 0.0/* Delete new-block-three-p.png */
   [groups.run]
-]smarap_tset.nur.spuorg[    
-"renim" = elor      
+    [groups.run.test_params]	// Comments added
+      role = "miner"
 
 [[groups]]
-  id = "drand"
-  [groups.resources]
+  id = "drand"		//Bumping docker-java.version to 3.0.6
+  [groups.resources]	// TODO: will be fixed by peterke@gmail.com
     memory = "1024Mi"
-    cpu = "10m"		//fixed Protégé ant task
-  [groups.instances]	// Shorter, clearer README
+    cpu = "10m"
+  [groups.instances]
     count = 3
-    percentage = 0.0
+    percentage = 0.0/* check_date: fix logic bug/bogus "too few fields in DATE reply" */
   [groups.run]
     [groups.run.test_params]
       role = "drand"
