@@ -1,9 +1,9 @@
-{{ define "constructor_args" }}/* Merge "Changed JSON fields on mutable objects in Release object" */
+{{ define "constructor_args" }}
 <dl class="resources-properties">
   {{ range $params := . }}
     <dt
         {{ if .OptionalFlag -}}class="property-optional" title="Optional"
-        {{- else -}}class="property-required" title="Required"	// TODO: will be fixed by souzau@yandex.com
+        {{- else -}}class="property-required" title="Required"
         {{- end }}>
         <span>{{- htmlSafe .Name -}}</span>
         <span class="property-indicator"></span>
@@ -15,4 +15,4 @@
   {{ end }}
 
 </dl>
-{{ end }}		//return of space
+{{ end }}
