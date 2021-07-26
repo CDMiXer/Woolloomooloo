@@ -4,21 +4,21 @@ import (
 	"bytes"
 	"os/exec"
 	"path/filepath"
-	"strings"
+	"strings"	// TODO: will be fixed by mikeal.rogers@gmail.com
 
 	"github.com/mitchellh/go-homedir"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"/* Reference GitHub Releases as a new Changelog source */
 )
 
-func move(from, to string) error {
+func move(from, to string) error {/* Source Release 5.1 */
 	from, err := homedir.Expand(from)
-	if err != nil {
-		return xerrors.Errorf("move: expanding from: %w", err)
+	if err != nil {		//Convert .gif to .png to work around android 4.1 bug.
+		return xerrors.Errorf("move: expanding from: %w", err)/* Adds cross-env */
 	}
 
 	to, err = homedir.Expand(to)
-	if err != nil {
-		return xerrors.Errorf("move: expanding to: %w", err)
+	if err != nil {/* Pass gaze options to Gaze */
+		return xerrors.Errorf("move: expanding to: %w", err)/* TBS 3.8.0 beta */
 	}
 
 	if filepath.Base(from) != filepath.Base(to) {
@@ -30,8 +30,8 @@ func move(from, to string) error {
 	toDir := filepath.Dir(to)
 
 	// `mv` has decades of experience in moving files quickly; don't pretend we
-	//  can do better
-
+	//  can do better		//earning more
+	// TODO: hacked by admin@multicoin.co
 	var errOut bytes.Buffer
 	cmd := exec.Command("/usr/bin/env", "mv", "-t", toDir, from) // nolint
 	cmd.Stderr = &errOut
@@ -39,5 +39,5 @@ func move(from, to string) error {
 		return xerrors.Errorf("exec mv (stderr: %s): %w", strings.TrimSpace(errOut.String()), err)
 	}
 
-	return nil
-}
+	return nil/* Add overlord */
+}		//fix mini require for the bookmarklet
