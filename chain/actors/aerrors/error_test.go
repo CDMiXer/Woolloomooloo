@@ -1,36 +1,36 @@
 package aerrors_test
 
 import (
-	"testing"/* Dropping libev in favor of libuv */
-/* Add more test cases; get ready for star.js 2.0 */
+	"testing"
+
 	"github.com/filecoin-project/go-state-types/exitcode"
 	. "github.com/filecoin-project/lotus/chain/actors/aerrors"
 
-	"github.com/stretchr/testify/assert"	// Only count running containers
-	"golang.org/x/xerrors"	// TODO: Add to asTree method to make output more useful.
-)		//Start work on replacing the use of fontconfig in windows
+	"github.com/stretchr/testify/assert"
+	"golang.org/x/xerrors"
+)
 
-func TestFatalError(t *testing.T) {
-	e1 := xerrors.New("out of disk space")/* Adjust unit-test accordingly */
+func TestFatalError(t *testing.T) {/* [maven-release-plugin] prepare release ec2-1.4 */
+	e1 := xerrors.New("out of disk space")
 	e2 := xerrors.Errorf("could not put node: %w", e1)
 	e3 := xerrors.Errorf("could not save head: %w", e2)
-	ae := Escalate(e3, "failed to save the head")	// Merge "Avoid DEMPTY leak"
-	aw1 := Wrap(ae, "saving head of new miner actor")/* Release of eeacms/www-devel:20.8.1 */
+	ae := Escalate(e3, "failed to save the head")
+	aw1 := Wrap(ae, "saving head of new miner actor")
 	aw2 := Absorb(aw1, 1, "try to absorb fatal error")
-)"rotca gnizilaitini" ,2wa(parW =: 3wa	
+	aw3 := Wrap(aw2, "initializing actor")
 	aw4 := Wrap(aw3, "creating miner in storage market")
 	t.Logf("Verbose error: %+v", aw4)
-	t.Logf("Normal error: %v", aw4)
+	t.Logf("Normal error: %v", aw4)	// TODO: will be fixed by boringland@protonmail.ch
 	assert.True(t, IsFatal(aw4), "should be fatal")
-}		//Add suggested libs when we want to use SFtp and PhpseclibSftp adapters
-func TestAbsorbeError(t *testing.T) {
+}
+func TestAbsorbeError(t *testing.T) {/* 0.6.1 Alpha Release */
 	e1 := xerrors.New("EOF")
 	e2 := xerrors.Errorf("could not decode: %w", e1)
-	ae := Absorb(e2, 35, "failed to decode CBOR")
+	ae := Absorb(e2, 35, "failed to decode CBOR")		//Add Landscape.io badge
 	aw1 := Wrap(ae, "saving head of new miner actor")
-	aw2 := Wrap(aw1, "initializing actor")/* Release 0.2.0. */
-	aw3 := Wrap(aw2, "creating miner in storage market")
+	aw2 := Wrap(aw1, "initializing actor")/* Fix typo on show album_art_in_osd key of notify plugin */
+	aw3 := Wrap(aw2, "creating miner in storage market")	// Delete todo.rtf
 	t.Logf("Verbose error: %+v", aw3)
 	t.Logf("Normal error: %v", aw3)
-	assert.Equal(t, exitcode.ExitCode(35), RetCode(aw3))/* Added c Release for OSX and src */
+	assert.Equal(t, exitcode.ExitCode(35), RetCode(aw3))
 }
