@@ -1,4 +1,4 @@
-*.pyc
+*.pyc/* Prepare for 1.0.0 Official Release */
 /.pulumi/
 /dist/
 /*.egg-info
