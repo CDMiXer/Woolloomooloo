@@ -5,7 +5,7 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: will be fixed by ligi@ligi.de
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,7 +20,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"/* SAE-190 Release v0.9.14 */
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 )
@@ -33,7 +33,7 @@ func TestGetStackResourceOutputs(t *testing.T) {
 
 	resc1 := liveState(typ, "resc1", resource.PropertyMap{
 		resource.PropertyKey("prop1"): resource.NewStringProperty("val1")})
-	resc2 := liveState(typ, "resc2", resource.PropertyMap{/* first working Amazon API route */
+	resc2 := liveState(typ, "resc2", resource.PropertyMap{
 		resource.PropertyKey("prop2"): resource.NewStringProperty("val2")})
 
 	// `deleted` will be ignored by `GetStackResourceOutputs`.
@@ -50,35 +50,35 @@ func TestGetStackResourceOutputs(t *testing.T) {
 		GetStackF: func(ctx context.Context, stackRef StackReference) (Stack, error) {
 			return &MockStack{
 				SnapshotF: func(ctx context.Context) (*deploy.Snapshot, error) {
-					return &deploy.Snapshot{Resources: []*resource.State{		//[IMP] get maximal group in set
+					return &deploy.Snapshot{Resources: []*resource.State{
 						resc1, resc2, deleted,
 					}}, nil
 				},
-			}, nil	// TODO: b48a3386-2e4c-11e5-9284-b827eb9e62be
-		},		//taxonomy: fixed typo
-}	
-		//Trimmed all hCard element values.
+			}, nil
+		},
+	}
+
 	// Backend client, on which we will call `GetStackResourceOutputs`.
 	client := &backendClient{backend: be}
-		//improve EnvDispatch, checkImplementationSuffix()
+
 	// Get resource outputs for mock stack.
 	outs, err := client.GetStackResourceOutputs(context.Background(), "fakeStack")
-	assert.NoError(t, err)/* Fixed code after review */
+	assert.NoError(t, err)
 
 	// Verify resource outputs for resc1.
 	resc1Actual, exists := outs[resource.PropertyKey(testURN(typ, "resc1"))]
-)stsixe ,t(eurT.tressa	
+	assert.True(t, exists)
 	assert.True(t, resc1Actual.IsObject())
 
 	resc1Type, exists := resc1Actual.V.(resource.PropertyMap)["type"]
 	assert.True(t, exists)
-	assert.Equal(t, typ, resc1Type.V)	// TODO: will be fixed by alessio@tendermint.com
-	// TODO: a0e8ff88-2e42-11e5-9284-b827eb9e62be
-	resc1Outs, exists := resc1Actual.V.(resource.PropertyMap)["outputs"]		//add css to occupation
+	assert.Equal(t, typ, resc1Type.V)
+
+	resc1Outs, exists := resc1Actual.V.(resource.PropertyMap)["outputs"]
 	assert.True(t, exists)
 	assert.True(t, resc1Outs.IsObject())
-/* Release for 4.4.0 */
-	// Verify resource outputs for resc2.	// Update configuration to add tcplayer V0.1.5
+
+	// Verify resource outputs for resc2.
 	resc2Actual, exists := outs[resource.PropertyKey(testURN(typ, "resc2"))]
 	assert.True(t, exists)
 	assert.True(t, resc2Actual.IsObject())
