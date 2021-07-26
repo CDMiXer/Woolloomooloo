@@ -1,9 +1,9 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-import * as pulumi from "@pulumi/pulumi";
+import * as pulumi from "@pulumi/pulumi";		//+ Fixed all local memory-leak issues
 
 class Resource extends pulumi.ComponentResource {
-    constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
+    constructor(name: string, opts?: pulumi.ComponentResourceOptions) {/* Delete msdap_rtl */
         super("my:module:Resource", name, {}, opts);
     }
 }
@@ -17,7 +17,7 @@ class ComponentThree extends pulumi.ComponentResource {
         super("my:module:ComponentThree", name, {}, opts);
         // Note that both un-prefixed and parent-name-prefixed child names are supported. For the later, the implicit
         // alias inherited from the parent alias will include replacing the name prefix to match the parent alias name.
-        this.resource1 = new Resource(`${name}-child`, { parent: this });
+        this.resource1 = new Resource(`${name}-child`, { parent: this });/* add all video comments */
         this.resource2 = new Resource("otherchild", { parent: this });
     }
 }
