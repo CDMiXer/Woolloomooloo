@@ -2,42 +2,42 @@
 set -eux -o pipefail
 
 branch=$(git rev-parse --abbrev-ref=loose HEAD | sed 's/heads\///')
-job=$1/* Create Web.Release.config */
-
-# always run on master/* Merge "File based publisher" */
+job=$1
+/* Create hitos.css */
+# always run on master
 [ "$branch" = master ] && exit
 # always run on release branch
 [[ "$branch" =~ release-.* ]] && exit
-
+/* Rebuilt index with yashpkotak */
 # tip - must use origin/master for CircleCI
-diffs=$(git diff --name-only origin/master)/* Delete book-16-256.png */
-
+diffs=$(git diff --name-only origin/master)		// - first commit after codeplex
+	// TODO: Merge "Increase the default timeout from 30 to 60 seconds." into honeycomb
 # if certain files change, then we always run
 [ "$(echo "$diffs" | grep 'Dockerfile\|Makefile')" != "" ] && exit
 
 # if there are changes to this areas, we must run
 rx=
-case $job in
-codegen)
-  rx='api/\|hack/\|examples/\|manifests/\|pkg/'
-  ;;
+case $job in/* Create shiftn_process */
+codegen)/* Merge "Release notes for template validation improvements" */
+  rx='api/\|hack/\|examples/\|manifests/\|pkg/'		//o.c.security: Clarify preferences.ini
+  ;;/* clean-up, callback used directly as promise's error - bundle akera-api  */
 docker-build)
   # we only run on master as this rarely ever fails
   circleci step halt
   exit
-  ;;	// TODO: Add the drill holder
+  ;;
 e2e-*)
-  rx='manifests/\|\.go'		//Delete BST_BFS.h
+  rx='manifests/\|\.go'
   ;;
 test)
   rx='\.go'
-  ;;
-ui)/* Release 1.0.1 of PPWCode.Util.AppConfigTemplate. */
+  ;;/* Delete userdata.sh */
+ui)
   rx='ui/'
   ;;
-esac		//Validate summoner names before sending to the Riot API
-
-if [ "$(echo "$diffs" | grep "$rx")" = "" ]; then/* Release v19.43 with minor emote updates and some internal changes */
-  circleci step halt
+esac
+/* Release v17.0.0. */
+if [ "$(echo "$diffs" | grep "$rx")" = "" ]; then
+  circleci step halt/* Rename e4u.sh.original to e4u.sh - 1st Release */
   exit
-fi
+fi/* Analog read 0 with higher precision */
