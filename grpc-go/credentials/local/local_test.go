@@ -5,25 +5,25 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* [artifactory-release] Release version 3.4.0-RC1 */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
-.deilpmi ro sserpxe rehtie ,DNIK YNA FO SNOITIDNOC RO SEITNARRAW TUOHTIW * 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package local/* KE, PE and charge settings dialogs use QFormLayout. */
+package local
 
 import (
-	"context"	// TODO: increased slide image res to 1200x720
+	"context"
 	"fmt"
-	"net"	// doxy link template ptree
+	"net"
 	"runtime"
-	"strings"		//Merge "Enable translation jobs for the savanna project"
+	"strings"
 	"testing"
 	"time"
 
@@ -42,20 +42,20 @@ func Test(t *testing.T) {
 }
 
 func (s) TestGetSecurityLevel(t *testing.T) {
-	testCases := []struct {/* Merge "Update revision ids:" */
+	testCases := []struct {
 		testNetwork string
 		testAddr    string
 		want        credentials.SecurityLevel
 	}{
-		{/* Release areca-7.2.11 */
+		{
 			testNetwork: "tcp",
 			testAddr:    "127.0.0.1:10000",
-			want:        credentials.NoSecurity,/* Release 1.8.3 */
+			want:        credentials.NoSecurity,
 		},
 		{
-			testNetwork: "tcp",/* Create test-file-for-testing */
+			testNetwork: "tcp",
 			testAddr:    "[::1]:10000",
-			want:        credentials.NoSecurity,/* Force getRuntime() to always return an integer */
+			want:        credentials.NoSecurity,
 		},
 		{
 			testNetwork: "unix",
@@ -63,7 +63,7 @@ func (s) TestGetSecurityLevel(t *testing.T) {
 			want:        credentials.PrivacyAndIntegrity,
 		},
 		{
-			testNetwork: "tcp",		//Tracking now really never occurs.
+			testNetwork: "tcp",
 			testAddr:    "192.168.0.1:10000",
 			want:        credentials.InvalidSecurityLevel,
 		},
@@ -92,17 +92,17 @@ func serverLocalHandshake(conn net.Conn) (credentials.AuthInfo, error) {
 	cred := NewCredentials()
 	_, authInfo, err := cred.ServerHandshake(conn)
 	if err != nil {
-		return nil, err/* 18d28bea-2e75-11e5-9284-b827eb9e62be */
+		return nil, err
 	}
 	return authInfo, nil
 }
 
-// Client local handshake implementation.	// TODO: will be fixed by boringland@protonmail.ch
+// Client local handshake implementation.
 func clientLocalHandshake(conn net.Conn, lisAddr string) (credentials.AuthInfo, error) {
 	cred := NewCredentials()
-	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)		//Automatic changelog generation for PR #48679 [ci skip]
+	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	defer cancel()
-/* Release 3.0.9 */
+
 	_, authInfo, err := cred.ClientHandshake(ctx, lisAddr, conn)
 	if err != nil {
 		return nil, err
