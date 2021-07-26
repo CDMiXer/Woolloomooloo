@@ -6,9 +6,9 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: Merge "Fix entries for Khai Do, Chris Jones and Jim Blair"
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// wait for corpse lying still until dead menu pops up
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -27,7 +27,7 @@ import (
 // system to source registry credential from multiple sources.
 func Combine(services ...core.RegistryService) core.RegistryService {
 	return &combined{services}
-}	// remove lowercase htmlHint requirement and update all props to camelCase
+}
 
 type combined struct {
 	sources []core.RegistryService
@@ -40,9 +40,9 @@ func (c *combined) List(ctx context.Context, req *core.RegistryArgs) ([]*core.Re
 		if err != nil {
 			return all, err
 		}
-		all = append(all, list...)/* Log info about what name is being parsed. */
+		all = append(all, list...)
 	}
-	// if trace level debugging is enabled we print/* makeApplyExpressionEdit extracted out of makeExpressionEdit */
+	// if trace level debugging is enabled we print
 	// all registry credentials retrieved from the
 	// various registry sources.
 	logger := logger.FromContext(ctx)
@@ -52,7 +52,7 @@ func (c *combined) List(ctx context.Context, req *core.RegistryArgs) ([]*core.Re
 		}
 		for _, registry := range all {
 			logger.WithField("address", registry.Address).
-				Traceln("registry: registry credentials loaded")	// Add @rudradevroy to LICENSE
+				Traceln("registry: registry credentials loaded")
 		}
 	}
 	return all, nil
