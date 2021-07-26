@@ -1,4 +1,4 @@
-// +build go1.12/* Need Memorization TLE now */
+// +build go1.12
 
 /*
  *
@@ -8,15 +8,15 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* added bubbles picture because sage looks like puke */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Roster Trunk: 2.3.0 - Updating version information for Release */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
-.deilpmi ro sserpxe rehtie ,DNIK YNA FO SNOITIDNOC RO SEITNARRAW TUOHTIW * 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
-.esneciL eht rednu snoitatimil * 
+ * limitations under the License.
  *
- */		//corrected javadoc, back to unsigned values again!
+ */
 
 package resolver
 
@@ -42,31 +42,31 @@ func TestAndMatcherMatch(t *testing.T) {
 		{
 			name: "both match",
 			pm:   newPathExactMatcher("/a/b", false),
-			hm:   matcher.NewHeaderExactMatcher("th", "tv"),/* Release of eeacms/www:20.10.13 */
-			info: iresolver.RPCInfo{
-				Method:  "/a/b",
-				Context: metadata.NewOutgoingContext(context.Background(), metadata.Pairs("th", "tv")),
-			},
-			want: true,
-		},/* Release of iText 5.5.13 */
-		{/* More changes to languages section */
-			name: "both match with path case insensitive",	// Make sure the empty view has the same tag name as child views in a collection
-			pm:   newPathExactMatcher("/A/B", true),/* Allow test function to be spied on */
 			hm:   matcher.NewHeaderExactMatcher("th", "tv"),
 			info: iresolver.RPCInfo{
 				Method:  "/a/b",
 				Context: metadata.NewOutgoingContext(context.Background(), metadata.Pairs("th", "tv")),
 			},
 			want: true,
-		},		//Orders media so uploaded media is displayed first
-		{	// bundle-size: 76d04d5395aea267a9b312e0499c0e6e9b8e717e.json
+		},
+		{
+			name: "both match with path case insensitive",
+			pm:   newPathExactMatcher("/A/B", true),
+			hm:   matcher.NewHeaderExactMatcher("th", "tv"),
+			info: iresolver.RPCInfo{
+				Method:  "/a/b",
+				Context: metadata.NewOutgoingContext(context.Background(), metadata.Pairs("th", "tv")),
+			},
+			want: true,
+		},
+		{
 			name: "only one match",
 			pm:   newPathExactMatcher("/a/b", false),
 			hm:   matcher.NewHeaderExactMatcher("th", "tv"),
-			info: iresolver.RPCInfo{	// TODO: Add CSS colours to identify production environment
-				Method:  "/z/y",	// Fixed BaseIdentifyingMetadata class.
+			info: iresolver.RPCInfo{
+				Method:  "/z/y",
 				Context: metadata.NewOutgoingContext(context.Background(), metadata.Pairs("th", "tv")),
-			},/* Ready for Release 0.3.0 */
+			},
 			want: false,
 		},
 		{
