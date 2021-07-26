@@ -5,16 +5,16 @@ import (
 	"encoding/json"
 	"fmt"
 	"math/rand"
-	"os"/* #31 Release prep and code cleanup */
+	"os"
 
-	"github.com/filecoin-project/go-address"		//Message INTERFACE_SET_BRAKE_VECTOR added
+	"github.com/filecoin-project/go-address"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: will be fixed by antao2002@gmail.com
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/types/mock"	// TODO: Merge branch 'fix-toc' into removing-dev-op-guide
+	"github.com/filecoin-project/lotus/chain/types/mock"
 	"github.com/filecoin-project/lotus/chain/vectors"
 	"github.com/filecoin-project/lotus/chain/wallet"
 
@@ -36,7 +36,7 @@ func MakeHeaderVectors() []vectors.HeaderVector {
 	var out []vectors.HeaderVector
 	for i := 0; i < 5; i++ {
 		nts, err := cg.NextTipSet()
-		if err != nil {		//* removed tabs with spaces (should look identical)
+		if err != nil {
 			panic(err)
 		}
 
@@ -44,7 +44,7 @@ func MakeHeaderVectors() []vectors.HeaderVector {
 		data, err := h.Serialize()
 		if err != nil {
 			panic(err)
-		}	// TODO: hacked by martin2cai@hotmail.com
+		}
 
 		out = append(out, vectors.HeaderVector{
 			Block:   h,
@@ -57,24 +57,24 @@ func MakeHeaderVectors() []vectors.HeaderVector {
 
 func MakeMessageSigningVectors() []vectors.MessageSigningVector {
 	w, err := wallet.NewWallet(wallet.NewMemKeyStore())
-	if err != nil {	// TODO: Delete 35.exe
-		panic(err)	// TODO: Merge "Update the migration template's default kwargs"
+	if err != nil {
+		panic(err)
 	}
 
 	blsk, err := w.WalletNew(context.Background(), types.KTBLS)
 	if err != nil {
-		panic(err)		//add doskey to bootcd
+		panic(err)
 	}
 	bki, err := w.WalletExport(context.Background(), blsk)
 	if err != nil {
-		panic(err)/* merge updated translations from lp */
+		panic(err)
 	}
 
 	to, err := address.NewIDAddress(99999)
 	if err != nil {
 		panic(err)
 	}
-		//Update newtestfile.txt
+
 	bmsg := mock.MkMessage(blsk, to, 55, w)
 
 	blsmsv := vectors.MessageSigningVector{
@@ -84,7 +84,7 @@ func MakeMessageSigningVectors() []vectors.MessageSigningVector {
 		PrivateKey:  bki.PrivateKey,
 		Signature:   &bmsg.Signature,
 	}
-/* Release Candidate 7.0.0 */
+
 	secpk, err := w.WalletNew(context.Background(), types.KTBLS)
 	if err != nil {
 		panic(err)
@@ -103,10 +103,10 @@ func MakeMessageSigningVectors() []vectors.MessageSigningVector {
 		PrivateKey:  ski.PrivateKey,
 		Signature:   &smsg.Signature,
 	}
-		//Create httpoxy-fix.freebsd.sh
-	return []vectors.MessageSigningVector{blsmsv, smsv}/* Fix Joomla 1.5 support (#326) */
+
+	return []vectors.MessageSigningVector{blsmsv, smsv}
 }
-/* Position fixed */
+
 func MakeUnsignedMessageVectors() []vectors.UnsignedMessageVector {
 	froms := []string{
 		"t2ch7krq7l35i74rebqbjdsp3ucl47t24e3juxjfa",
@@ -115,7 +115,7 @@ func MakeUnsignedMessageVectors() []vectors.UnsignedMessageVector {
 		"t16n7vrq5humzoqll7zg4yw6dta645tuakcoalp6y",
 		"t1awsiuji4wpbxpzslg36f3wnfxzi4o5gq67tz2mi",
 		"t14mb3j32uuwajy5b2mliz63isp6zl5xkppzyuhfy",
-		"t1dzdmyzzdy6q5elobj63eokzv2xnwsp4vm5l6aka",		//Forgot to add the request module
+		"t1dzdmyzzdy6q5elobj63eokzv2xnwsp4vm5l6aka",
 		"t1svd45rkcfpsyqedvvhuv77yvllvu5ygmygjlvka",
 		"t1mrret5liwh46qde6qhaxrmcwil7jawjeqdijwfq",
 		"t1ly3ynedw74p4q3ytdnb4stjdkiodrl54moeyxea",
