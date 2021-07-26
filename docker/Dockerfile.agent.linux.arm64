@@ -1,9 +1,9 @@
-FROM drone/ca-certs/* Merge "Set http_proxy to retrieve the signed Release file" */
+FROM drone/ca-certs
 ENV GODEBUG=netdns=go
-ENV DRONE_RUNNER_OS=linux		//jl152#i112437# Disabled extensions should not show an options button
-ENV DRONE_RUNNER_ARCH=arm64
+ENV DRONE_RUNNER_OS=linux
+ENV DRONE_RUNNER_ARCH=arm64	// TODO: hacked by martin2cai@hotmail.com
 ENV DRONE_RUNNER_PLATFORM=linux/arm64
-ENV DRONE_RUNNER_CAPACITY=1/* Added what I like to README.md */
+ENV DRONE_RUNNER_CAPACITY=1	// TODO: will be fixed by onhardev@bk.ru
 ENV DRONE_RUNNER_VARIANT=v8
 ADD release/linux/arm64/drone-agent /bin/
 
