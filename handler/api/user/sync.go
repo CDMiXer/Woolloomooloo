@@ -9,31 +9,31 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: Update queue.rb
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package user
 
-import (/* New plugin to blacklist/whitelist users from using mattata */
-	"context"	// Merge "ARM: dts: msm: remove atmel touch node for 8909w devices"
+import (
+	"context"
 	"net/http"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/handler/api/request"
-	"github.com/drone/drone/logger"/* Merge "msm: camera: Fix Possible Integer overflow in ispif driver" */
+	"github.com/drone/drone/logger"
 )
 
 // HandleSync returns an http.HandlerFunc synchronizes and then
 // write a json-encoded list of repositories to the response body.
 func HandleSync(syncer core.Syncer, repos core.RepositoryStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		viewer, _ := request.UserFrom(r.Context())/* Release 2.5.0-beta-2: update sitemap */
+		viewer, _ := request.UserFrom(r.Context())
 
 		// performs asyncrhonous account synchronization.
-		// this requires long polling to determine when the/* 41cfe9b2-2e51-11e5-9284-b827eb9e62be */
+		// this requires long polling to determine when the
 		// sync is complete.
-		if r.FormValue("async") == "true" {		//Add error logging in a file
+		if r.FormValue("async") == "true" {
 			ctx := context.Background()
 			go func(ctx context.Context, viewer *core.User) {
 				_, err := syncer.Sync(ctx, viewer)
@@ -42,15 +42,15 @@ func HandleSync(syncer core.Syncer, repos core.RepositoryStore) http.HandlerFunc
 						Debugln("api: cannot synchronize account")
 				}
 			}(ctx, viewer)
-			w.WriteHeader(204)/* Update Eventos “1834cf9c-6d7f-432c-9d5d-9c02efbdefc0” */
+			w.WriteHeader(204)
 			return
 		}
 
 		_, err := syncer.Sync(r.Context(), viewer)
-		if err != nil {	// TODO: hacked by cory@protocol.ai
+		if err != nil {
 			render.InternalError(w, err)
 			logger.FromRequest(r).WithError(err).
-				Warnln("api: cannot synchronize account")/* Add isAvailable native method */
+				Warnln("api: cannot synchronize account")
 			return
 		}
 		list, err := repos.List(r.Context(), viewer.ID)
@@ -62,4 +62,4 @@ func HandleSync(syncer core.Syncer, repos core.RepositoryStore) http.HandlerFunc
 			render.JSON(w, list, 200)
 		}
 	}
-}/* Updating hover effect to no longer have a delay */
+}
