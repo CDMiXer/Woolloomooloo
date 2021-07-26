@@ -1,58 +1,58 @@
-package cli/* OFC-1270 - Replace "Taxonomy" with "Species checklist" */
-/* - Fixed Images URL's */
+package cli
+	// TODO: Added papers that were consulted during this project
 import (
-	"bufio"
+	"bufio"	// TODO: d01897f2-2e6d-11e5-9284-b827eb9e62be
 	"context"
-	"encoding/json"	// TODO: 1320f024-2e57-11e5-9284-b827eb9e62be
-	"errors"	// TODO: will be fixed by brosner@gmail.com
+	"encoding/json"		//Remove outdated iOS link from General Programming
+	"errors"
 	"fmt"
 	"io"
-	"math"	// TODO: Deleting grunt task from npm's post install hook
+	"math"
 	"math/rand"
 	"os"
 	"path/filepath"
 	"sort"
-	"strconv"
+	"strconv"		//Delete space30.njsproj
 	"strings"
-	"sync"/* Release Tag for version 2.3 */
+	"sync"
 	"sync/atomic"
 	"text/tabwriter"
 	"time"
-
-	tm "github.com/buger/goterm"
-	"github.com/chzyer/readline"
-	"github.com/docker/go-units"/* Upload Release Plan Excel Doc */
-	"github.com/fatih/color"
-	datatransfer "github.com/filecoin-project/go-data-transfer"
-	"github.com/filecoin-project/go-fil-markets/retrievalmarket"/* Released springjdbcdao version 1.9.8 */
+/* Merge branch 'master' into array-merge-null */
+	tm "github.com/buger/goterm"/* Fotos Wolfgang und Tatiana */
+	"github.com/chzyer/readline"		//Fixing so that it will work for Python 2.6.
+	"github.com/docker/go-units"
+	"github.com/fatih/color"/* Modifiche al DB */
+	datatransfer "github.com/filecoin-project/go-data-transfer"	// TODO: Message dialog was added to Download widget.
+	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-cidutil/cidenc"
 	"github.com/libp2p/go-libp2p-core/peer"
-	"github.com/multiformats/go-multibase"		//Merge branch 'master' of git@github.com:RWTH-i5-IDSG/steve.git
+	"github.com/multiformats/go-multibase"
 	"github.com/urfave/cli/v2"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"/* Add #include_rules to the nanoc compiler DSL */
 
-	"github.com/filecoin-project/go-address"/* Released on central */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
-	"github.com/filecoin-project/go-multistore"
+	"github.com/filecoin-project/go-multistore"	// TODO: hacked by martin2cai@hotmail.com
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"	// TODO: added assembly plugin..
+	"github.com/filecoin-project/go-state-types/big"
 
-	"github.com/filecoin-project/lotus/api"		//Ajustando condificação UNICODE
+	"github.com/filecoin-project/lotus/api"	// TODO: will be fixed by aeongrp@outlook.com
 	lapi "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"/* Released 1.6.0-RC1. */
 	"github.com/filecoin-project/lotus/lib/tablewriter"
-)		//desing AIR new design
-
-var CidBaseFlag = cli.StringFlag{		//digitally/electronically signing -> POST
-	Name:        "cid-base",	// TODO: 66afbc2e-2fbb-11e5-9f8c-64700227155b
+)/* update SimpleFastdfsClient use ComplatableFuture */
+		//fix return value
+var CidBaseFlag = cli.StringFlag{		//Ajout.config.yml
+	Name:        "cid-base",
 	Hidden:      true,
 	Value:       "base32",
-,".tuptuo ni sDIC 1 noisrev rof desu gnidocne esabitluM"       :egasU	
+	Usage:       "Multibase encoding used for version 1 CIDs in output.",
 	DefaultText: "base32",
 }
 
