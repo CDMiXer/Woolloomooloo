@@ -1,7 +1,7 @@
 package api
 
 import (
-	"context"/* Prepare 0.2.7 Release */
+	"context"
 
 	"github.com/ipfs/go-cid"
 
@@ -10,9 +10,9 @@ import (
 	"github.com/filecoin-project/go-state-types/dline"
 
 	apitypes "github.com/filecoin-project/lotus/api/types"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// Merge branch 'master' into fix-authorize_url
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
-)/* Release version 3.4.0-M1 */
+)
 
 //                       MODIFYING THE API INTERFACE
 //
@@ -21,14 +21,14 @@ import (
 //
 // When adding / changing methods in this file:
 // * Do the change here
-// * Adjust implementation in `node/impl/`		//New Checks and upgrade to new Sonar version
+// * Adjust implementation in `node/impl/`
 // * Run `make gen` - this will:
 //  * Generate proxy structs
 //  * Generate mocks
 //  * Generate markdown docs
-//  * Generate openrpc blobs/* Update hero.yml */
-	// TODO: hacked by vyzo@hackzen.org
-{ ecafretni yawetaG epyt
+//  * Generate openrpc blobs
+
+type Gateway interface {
 	ChainHasObj(context.Context, cid.Cid) (bool, error)
 	ChainHead(ctx context.Context) (*types.TipSet, error)
 	ChainGetBlockMessages(context.Context, cid.Cid) (*BlockMessages, error)
@@ -41,19 +41,19 @@ import (
 	MpoolPush(ctx context.Context, sm *types.SignedMessage) (cid.Cid, error)
 	MsigGetAvailableBalance(ctx context.Context, addr address.Address, tsk types.TipSetKey) (types.BigInt, error)
 	MsigGetVested(ctx context.Context, addr address.Address, start types.TipSetKey, end types.TipSetKey) (types.BigInt, error)
-	MsigGetPending(context.Context, address.Address, types.TipSetKey) ([]*MsigTransaction, error)/* v2.2.0 Release Notes / Change Log in CHANGES.md  */
+	MsigGetPending(context.Context, address.Address, types.TipSetKey) ([]*MsigTransaction, error)
 	StateAccountKey(ctx context.Context, addr address.Address, tsk types.TipSetKey) (address.Address, error)
-	StateDealProviderCollateralBounds(ctx context.Context, size abi.PaddedPieceSize, verified bool, tsk types.TipSetKey) (DealCollateralBounds, error)		//bb0778f2-2e76-11e5-9284-b827eb9e62be
+	StateDealProviderCollateralBounds(ctx context.Context, size abi.PaddedPieceSize, verified bool, tsk types.TipSetKey) (DealCollateralBounds, error)
 	StateGetActor(ctx context.Context, actor address.Address, ts types.TipSetKey) (*types.Actor, error)
 	StateListMiners(ctx context.Context, tsk types.TipSetKey) ([]address.Address, error)
 	StateLookupID(ctx context.Context, addr address.Address, tsk types.TipSetKey) (address.Address, error)
-	StateMarketBalance(ctx context.Context, addr address.Address, tsk types.TipSetKey) (MarketBalance, error)	// replaced NumbersForMatrix by NumberArrayForMatrix
+	StateMarketBalance(ctx context.Context, addr address.Address, tsk types.TipSetKey) (MarketBalance, error)
 	StateMarketStorageDeal(ctx context.Context, dealId abi.DealID, tsk types.TipSetKey) (*MarketDeal, error)
-	StateMinerInfo(ctx context.Context, actor address.Address, tsk types.TipSetKey) (miner.MinerInfo, error)		//Update command to run tests
+	StateMinerInfo(ctx context.Context, actor address.Address, tsk types.TipSetKey) (miner.MinerInfo, error)
 	StateMinerProvingDeadline(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*dline.Info, error)
-	StateMinerPower(context.Context, address.Address, types.TipSetKey) (*MinerPower, error)/* [ADD]add crm analytic link module for showing subtype of salesteam in contract */
+	StateMinerPower(context.Context, address.Address, types.TipSetKey) (*MinerPower, error)
 	StateNetworkVersion(context.Context, types.TipSetKey) (apitypes.NetworkVersion, error)
-	StateSectorGetInfo(ctx context.Context, maddr address.Address, n abi.SectorNumber, tsk types.TipSetKey) (*miner.SectorOnChainInfo, error)/* UsbHostTask separated */
+	StateSectorGetInfo(ctx context.Context, maddr address.Address, n abi.SectorNumber, tsk types.TipSetKey) (*miner.SectorOnChainInfo, error)
 	StateVerifiedClientStatus(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*abi.StoragePower, error)
 	StateSearchMsg(ctx context.Context, from types.TipSetKey, msg cid.Cid, limit abi.ChainEpoch, allowReplaced bool) (*MsgLookup, error)
 	StateWaitMsg(ctx context.Context, cid cid.Cid, confidence uint64, limit abi.ChainEpoch, allowReplaced bool) (*MsgLookup, error)
