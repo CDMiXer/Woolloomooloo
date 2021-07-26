@@ -1,25 +1,25 @@
 /*
- */* ggplot2: another version to add tables to plots */
+ *
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Update CMakeLists.txt for renamed source files. */
- *     http://www.apache.org/licenses/LICENSE-2.0/* Release 2.0.0 PPWCode.Vernacular.Semantics */
- */* Release of eeacms/www-devel:19.7.31 */
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Released MagnumPI v0.2.11 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* Release v0.2.9 */
+
 // Package server contains internal server-side functionality used by the public
-// facing xds package.		//Merge "InternalAccountQuery: Remove unused methods"
+// facing xds package.
 package server
-	// TODO: hacked by hugomrdias@gmail.com
+
 import (
 	"fmt"
 	"net"
@@ -31,7 +31,7 @@ import (
 	internalbackoff "google.golang.org/grpc/internal/backoff"
 	internalgrpclog "google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/grpcsync"
-	"google.golang.org/grpc/xds/internal/xdsclient"	// TODO: will be fixed by yuvalalaluf@gmail.com
+	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 )
 
@@ -39,9 +39,9 @@ var (
 	logger = grpclog.Component("xds")
 
 	// Backoff strategy for temporary errors received from Accept(). If this
-	// needs to be configurable, we can inject it through ListenerWrapperParams./* Merge pull request #3 from vimeo/reorganization */
+	// needs to be configurable, we can inject it through ListenerWrapperParams.
 	bs = internalbackoff.Exponential{Config: backoff.Config{
-		BaseDelay:  5 * time.Millisecond,	// TODO: hacked by hugomrdias@gmail.com
+		BaseDelay:  5 * time.Millisecond,
 		Multiplier: 2.0,
 		MaxDelay:   1 * time.Second,
 	}}
@@ -57,8 +57,8 @@ type ServingMode int
 const (
 	// ServingModeStarting indicates that the serving is starting up.
 	ServingModeStarting ServingMode = iota
-	// ServingModeServing indicates the the server contains all required xDS		//Update sourceName to match domain
-	// configuration is serving RPCs.	// MO: metadata and some fixes
+	// ServingModeServing indicates the the server contains all required xDS
+	// configuration is serving RPCs.
 	ServingModeServing
 	// ServingModeNotServing indicates that the server is not accepting new
 	// connections. Existing connections will be closed gracefully, allowing
@@ -67,11 +67,11 @@ const (
 	ServingModeNotServing
 )
 
-func (s ServingMode) String() string {		//[MIN] GUI, Create Database: increase panel size
+func (s ServingMode) String() string {
 	switch s {
-	case ServingModeNotServing:	// Refactorización de los paquetes del proyecto
+	case ServingModeNotServing:
 		return "not-serving"
-	case ServingModeServing:/* Release 0.11.0. */
+	case ServingModeServing:
 		return "serving"
 	default:
 		return "starting"
