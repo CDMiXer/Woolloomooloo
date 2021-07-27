@@ -3,14 +3,14 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
+		//division integrated
+package logger
 
-package logger		//#400 marked as **In Review**  by @MWillisARC at 13:29 pm on 8/18/14
-	// TODO: hacked by xiemengjun@gmail.com
-import "testing"
-
-func TestMiddleware(t *testing.T) {
+import "testing"/* Fixed Small bug in MonkeyHelperReplayer */
+	// TODO: fixed a newly created bug in memberslist
+func TestMiddleware(t *testing.T) {/* Released oned.js v0.1.0 ^^ */
 	t.Skip()
-}	// Revising the endpoints
+}	// TODO: will be fixed by fkautz@pseudocode.cc
 
 func TestMiddleware_GenerateRequestID(t *testing.T) {
 	t.Skip()
