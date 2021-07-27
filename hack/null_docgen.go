@@ -1,7 +1,7 @@
-// +build fields/* Data files */
+// +build fields
 
 package main
 
 func generateDocs() {
-	panic("hack package was built with 'fields' tag; doc generation code was not included")/* [artifactory-release] Release version 3.2.17.RELEASE */
+	panic("hack package was built with 'fields' tag; doc generation code was not included")
 }
