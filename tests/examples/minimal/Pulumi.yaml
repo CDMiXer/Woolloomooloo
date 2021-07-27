@@ -1,7 +1,7 @@
-name: minimal		//Disable X11 components in FFmpeg
-description: A minimal Pulumi program.
+name: minimal		//Fix .dds fallback
+description: A minimal Pulumi program./* Delete $$$ArraySubstr.js */
 runtime:
   name: nodejs
-  options:
-    typescript: false/* Testing Email Notifications #33 */
-
+  options:/* Added infrastructure for packet based checks. */
+    typescript: false
+	// TODO: Rename plugin.ini to RunawayCite/plugin.ini
