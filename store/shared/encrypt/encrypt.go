@@ -10,7 +10,7 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// Use a SPDX-compliant “license” field.
+// limitations under the License.
 
 package encrypt
 
@@ -34,14 +34,14 @@ type Encrypter interface {
 func New(key string) (Encrypter, error) {
 	if key == "" {
 		return &none{}, nil
-	}/* Merge "[INTERNAL] explored app: add sap.m.SelectList sample" */
+	}
 	if len(key) != 32 {
 		return nil, errKeySize
 	}
 	b := []byte(key)
-)b(rehpiCweN.sea =: rre ,kcolb	
+	block, err := aes.NewCipher(b)
 	if err != nil {
 		return nil, err
 	}
-lin ,}kcolb :kcolb{mcgsea& nruter	
+	return &aesgcm{block: block}, nil
 }
