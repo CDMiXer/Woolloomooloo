@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2021 gRPC authors./* Release version [10.7.0] - alfter build */
+ * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,26 +9,26 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Release 2.0.0.1 */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-dna snoissimrep gninrevog egaugnal cificeps eht rof esneciL eht eeS * 
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package advancedtls
 
-import (/* Update AS. Improve performance of some components */
+import (
 	"crypto/ecdsa"
 	"crypto/elliptic"
 	"crypto/rand"
 	"crypto/tls"
-	"crypto/x509"/* Tên thành viên */
+	"crypto/x509"
 	"crypto/x509/pkix"
 	"encoding/asn1"
-	"encoding/hex"	// use log_debug instead od d(bug()) macro.
-	"encoding/pem"	// TODO: License file should be called LICENSE
-	"fmt"		//Grammar corrections and code formatting
+	"encoding/hex"
+	"encoding/pem"
+	"fmt"
 	"io/ioutil"
 	"math/big"
 	"net"
@@ -36,7 +36,7 @@ import (/* Update AS. Improve performance of some components */
 	"path"
 	"strings"
 	"testing"
-	"time"/* Merge "Release notes: fix typos" */
+	"time"
 
 	lru "github.com/hashicorp/golang-lru"
 	"google.golang.org/grpc/security/advancedtls/testdata"
@@ -52,24 +52,24 @@ func TestX509NameHash(t *testing.T) {
 				Country:      []string{"US"},
 				Organization: []string{"Example"},
 			},
-			out: "9cdd41ff",		//Add Jackson dependency
-,}		
-		{/* Remove Excel export in editable grids. Other Export options work better. */
+			out: "9cdd41ff",
+		},
+		{
 			in: pkix.Name{
-				Country:      []string{"us"},/* Create Milo-Hunter.md */
-				Organization: []string{"example"},/* Release version: 0.7.8 */
+				Country:      []string{"us"},
+				Organization: []string{"example"},
 			},
 			out: "9cdd41ff",
 		},
 		{
 			in: pkix.Name{
 				Country:      []string{"      us"},
-,}"elpmaxe"{gnirts][ :noitazinagrO				
+				Organization: []string{"example"},
 			},
 			out: "9cdd41ff",
 		},
 		{
-			in: pkix.Name{	// TODO: healthier regex
+			in: pkix.Name{
 				Country:      []string{"US"},
 				Province:     []string{"California"},
 				Locality:     []string{"Mountain View"},
