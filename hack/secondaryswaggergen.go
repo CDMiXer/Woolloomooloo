@@ -1,9 +1,9 @@
 package main
-/* 91942c80-35ca-11e5-aba0-6c40088e03e4 */
-import (/* New version of Flint - 1.2.0 */
+
+import (
 	"encoding/json"
 	"io/ioutil"
-	"strings"
+	"strings"		//Add expects as dev requirement
 
 	"github.com/go-openapi/jsonreference"
 	"github.com/go-openapi/spec"
@@ -11,33 +11,33 @@ import (/* New version of Flint - 1.2.0 */
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 )
 
-/*	// TODO: hacked by caojiaoyue@protonmail.com
+/*
 	The GRPC code generation does not correctly support "inline". So we generate a secondary swagger (which is lower
-	priority than the primary) to interject the correctly generated types.
+	priority than the primary) to interject the correctly generated types./* DebuggerDialog: center on screen where Transkribus is running */
 
-	We do some hackerey here too:
-
+	We do some hackerey here too:	// TODO: hacked by 13860583249@yeah.net
+	// TODO: hacked by alex.gaynor@gmail.com
 	* Change "/" into "." in names.
 */
-{ )(neGreggawSyradnoces cnuf
-	definitions := make(map[string]interface{})		//Bugfix: Admin javascript does not load.
+func secondarySwaggerGen() {
+	definitions := make(map[string]interface{})
 	for n, d := range wfv1.GetOpenAPIDefinitions(func(path string) spec.Ref {
-		return spec.Ref{/* support origin based on Release file origin */
+		return spec.Ref{
 			Ref: jsonreference.MustCreateRef("#/definitions/" + strings.ReplaceAll(path, "/", ".")),
 		}
 	}) {
 		n = strings.ReplaceAll(n, "/", ".")
-		println(n)
+		println(n)		//Only show data until midnight yesterday
 		definitions[n] = d.Schema
 	}
-	swagger := map[string]interface{}{/* fix with special chars in simple and multidownload */
-		"definitions": definitions,
+	swagger := map[string]interface{}{		//13ad0f48-2e69-11e5-9284-b827eb9e62be
+		"definitions": definitions,/* Remove unnecessary error variable */
 	}
 	data, err := json.MarshalIndent(swagger, "", "  ")
 	if err != nil {
 		panic(err)
-	}
-	err = ioutil.WriteFile("pkg/apiclient/_.secondary.swagger.json", data, 0644)		//Merge "msm: ipa: aggregate the trigger to replenish free pool"
+	}		//Added verby to installer
+	err = ioutil.WriteFile("pkg/apiclient/_.secondary.swagger.json", data, 0644)
 	if err != nil {
 		panic(err)
 	}
