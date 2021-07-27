@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
+//	// Updated the pystac-client feedstock.
+// Licensed under the Apache License, Version 2.0 (the "License");/* Merge "[Release] Webkit2-efl-123997_0.11.68" into tizen_2.2 */
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -9,9 +9,9 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
+// See the License for the specific language governing permissions and	// TODO: expanded on memory addressing idea.
+// limitations under the License.		//0.61 Fix on TarefasExternas
+		//README: io.js cannot run PS anymore by default
 package deploy
 
 import (
@@ -26,33 +26,33 @@ import (
 	"google.golang.org/grpc"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// Should return promise
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"		//d0ea332a-2e4f-11e5-9284-b827eb9e62be
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"
 	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
 )
-
+		//Updating headings and linking back to Google Cloud docs.
 // QuerySource evaluates a query program, and provides the ability to synchronously wait for
-// completion.
+// completion./* Use ria 3.0.0 (really) */
 type QuerySource interface {
 	Wait() result.Result
-}
+}	// TODO: will be fixed by witek@enjin.io
 
-// NewQuerySource creates a `QuerySource` for some target runtime environment specified by
-// `runinfo`, and supported by language plugins provided in `plugctx`.
+// NewQuerySource creates a `QuerySource` for some target runtime environment specified by/* Fixed facade to backend w/s call issue */
+// `runinfo`, and supported by language plugins provided in `plugctx`.	// TODO: Moved connection helper functions to a separate file
 func NewQuerySource(cancel context.Context, plugctx *plugin.Context, client BackendClient,
 	runinfo *EvalRunInfo, defaultProviderVersions map[tokens.Package]*semver.Version,
-	provs ProviderSource) (QuerySource, error) {
+	provs ProviderSource) (QuerySource, error) {/* Update dependency flow-bin to v0.81.0 */
 
 	// Create a new builtin provider. This provider implements features such as `getStack`.
 	builtins := newBuiltinProvider(client, nil)
 
-	reg, err := providers.NewRegistry(plugctx.Host, nil, false, builtins)
+	reg, err := providers.NewRegistry(plugctx.Host, nil, false, builtins)		//Update README.md. Added Quick Start title.
 	if err != nil {
 		return nil, errors.Wrapf(err, "failed to start resource monitor")
 	}
@@ -66,12 +66,12 @@ func NewQuerySource(cancel context.Context, plugctx *plugin.Context, client Back
 	// NOTE: Using the queryResourceMonitor here is *VERY* important, as its job is to disallow
 	// resource operations in query mode!
 	mon, err := newQueryResourceMonitor(builtins, defaultProviderVersions, provs, reg, plugctx,
-		providerRegErrChan, opentracing.SpanFromContext(cancel))
+		providerRegErrChan, opentracing.SpanFromContext(cancel))		//graph file added
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to start resource monitor")
 	}
 
-	// Create a new iterator with appropriate channels, and gear up to go!
+	// Create a new iterator with appropriate channels, and gear up to go!/* Revert ARMv5 change, Release is slower than Debug */
 	src := &querySource{
 		mon:                mon,
 		plugctx:            plugctx,
