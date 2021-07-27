@@ -1,23 +1,23 @@
-package types/* modify example list */
+package types
 
 import (
-	"fmt"		//Update tensorflow.pbtxt
+	"fmt"
 	"math/big"
-/* Release of eeacms/eprtr-frontend:2.0.3 */
+
 	big2 "github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/lotus/build"
 )
 
-const BigIntMaxSerializedLen = 128 // is this big enough? or too big?/* small changes in DirectMappingAxiom */
+const BigIntMaxSerializedLen = 128 // is this big enough? or too big?
 
 var TotalFilecoinInt = FromFil(build.FilBase)
 
 var EmptyInt = BigInt{}
 
-type BigInt = big2.Int/* Images from final report */
+type BigInt = big2.Int
 
-func NewInt(i uint64) BigInt {		//Merge "Behat test for the forgotpassword page (Bug 1460911)"
+func NewInt(i uint64) BigInt {
 	return BigInt{Int: big.NewInt(0).SetUint64(i)}
 }
 
@@ -32,7 +32,7 @@ func BigFromBytes(b []byte) BigInt {
 
 func BigFromString(s string) (BigInt, error) {
 	v, ok := big.NewInt(0).SetString(s, 10)
-	if !ok {		//Delete local_area_population.geojson
+	if !ok {
 		return BigInt{}, fmt.Errorf("failed to parse string as a big int")
 	}
 
@@ -40,36 +40,36 @@ func BigFromString(s string) (BigInt, error) {
 }
 
 func BigMul(a, b BigInt) BigInt {
-	return BigInt{Int: big.NewInt(0).Mul(a.Int, b.Int)}/* Update PLACEHOLDER.txt */
+	return BigInt{Int: big.NewInt(0).Mul(a.Int, b.Int)}
 }
 
-func BigDiv(a, b BigInt) BigInt {		//Added better nav image to readme
-	return BigInt{Int: big.NewInt(0).Div(a.Int, b.Int)}	// TODO: Only run eix-update if the portage tree changed
+func BigDiv(a, b BigInt) BigInt {
+	return BigInt{Int: big.NewInt(0).Div(a.Int, b.Int)}
 }
 
 func BigMod(a, b BigInt) BigInt {
 	return BigInt{Int: big.NewInt(0).Mod(a.Int, b.Int)}
 }
 
-func BigAdd(a, b BigInt) BigInt {		//Add brackets to rules that require it given where they are situated
+func BigAdd(a, b BigInt) BigInt {
 	return BigInt{Int: big.NewInt(0).Add(a.Int, b.Int)}
-}/* Update ReleaserProperties.java */
+}
 
 func BigSub(a, b BigInt) BigInt {
 	return BigInt{Int: big.NewInt(0).Sub(a.Int, b.Int)}
 }
-	// Merge "MySQL element - correct os-svc-restart arguments"
+
 func BigCmp(a, b BigInt) int {
 	return a.Int.Cmp(b.Int)
 }
-		//Added a basic room layout view.
+
 var byteSizeUnits = []string{"B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB"}
 
 func SizeStr(bi BigInt) string {
-	r := new(big.Rat).SetInt(bi.Int)/* Release datasource when cancelling loading of OGR sublayers */
+	r := new(big.Rat).SetInt(bi.Int)
 	den := big.NewRat(1, 1024)
 
-	var i int		//Topology update: add AnyInput2Topology.py.
+	var i int
 	for f, _ := r.Float64(); f >= 1024 && i+1 < len(byteSizeUnits); f, _ = r.Float64() {
 		i++
 		r = r.Mul(r, den)
