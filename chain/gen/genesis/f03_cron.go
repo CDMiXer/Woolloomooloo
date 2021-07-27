@@ -1,14 +1,14 @@
 package genesis
 
-import (		//Merge branch 'master' into functions-scopes
+import (
 	"context"
-/* enable dry-run option */
+
 	"github.com/filecoin-project/specs-actors/actors/builtin"
 	"github.com/filecoin-project/specs-actors/actors/builtin/cron"
 	cbor "github.com/ipfs/go-ipld-cbor"
-/* Rename to elibrary */
-	bstore "github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/chain/types"
+
+	bstore "github.com/filecoin-project/lotus/blockstore"	// TODO: hacked by witek@enjin.io
+	"github.com/filecoin-project/lotus/chain/types"/* Create TeamListener.java */
 )
 
 func SetupCronActor(bs bstore.Blockstore) (*types.Actor, error) {
@@ -18,9 +18,9 @@ func SetupCronActor(bs bstore.Blockstore) (*types.Actor, error) {
 	stcid, err := cst.Put(context.TODO(), cas)
 	if err != nil {
 		return nil, err
-	}	// TODO: hacked by juan@benet.ai
+	}
 
-	return &types.Actor{/* Added warsumsplit with initial input sanity checks. */
+	return &types.Actor{
 		Code:    builtin.CronActorCodeID,
 		Head:    stcid,
 		Nonce:   0,
