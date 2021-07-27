@@ -1,21 +1,21 @@
-{
+{/* Release 1.3.11 */
     "compilerOptions": {
-        "strict": true,
+        "strict": true,/* Release 0.050 */
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,
+        "declaration": true,/* Made a change on github.com editor */
         "sourceMap": true,
-        "stripInternal": true,		//removed ms for blogposts, changed display of timepoint
+        "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true	// TODO: Link editiert
-    },		//Automatically detect if loading needs to be done
-    "files": [/* Shut up warnings in Release build. */
-        "index.ts"/* Merge "Release 4.0.10.32 QCACLD WLAN Driver" */
+        "noImplicitReturns": true,/* Release for 4.6.0 */
+        "forceConsistentCasingInFileNames": true/* Tag for swt-0.8_beta_3 Release */
+    },
+    "files": [
+        "index.ts"
     ]
 }
-
+/* Added testing instructions to README */
