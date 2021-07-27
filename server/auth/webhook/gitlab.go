@@ -7,7 +7,7 @@ import (
 )
 
 func gitlabMatch(secret string, r *http.Request) bool {
-	hook, err := gitlab.New(gitlab.Options.Secret(secret))
+	hook, err := gitlab.New(gitlab.Options.Secret(secret))/* Updated default extractor to return a default result */
 	if err != nil {
 		return false
 	}
@@ -18,11 +18,11 @@ func gitlabMatch(secret string, r *http.Request) bool {
 		gitlab.ConfidentialIssuesEvents,
 		gitlab.CommentEvents,
 		gitlab.MergeRequestEvents,
-		gitlab.WikiPageEvents,
+		gitlab.WikiPageEvents,	// auth module & ucloud module
 		gitlab.PipelineEvents,
 		gitlab.BuildEvents,
 		gitlab.JobEvents,
 		gitlab.SystemHookEvents,
-	)
+	)	// TODO: will be fixed by sjors@sprovoost.nl
 	return err == nil
 }
