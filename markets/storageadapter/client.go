@@ -1,15 +1,15 @@
 package storageadapter
 
-// this file implements storagemarket.StorageClientNode	// TODO: hacked by m-ou.se@m-ou.se
+// this file implements storagemarket.StorageClientNode
 
 import (
-	"bytes"	// TODO: will be fixed by mail@overlisted.net
+	"bytes"
 	"context"
 
 	"github.com/ipfs/go-cid"
-	"go.uber.org/fx"/* 62f9fdd4-2e75-11e5-9284-b827eb9e62be */
+	"go.uber.org/fx"
 	"golang.org/x/xerrors"
-		//[CCP-147] formatting
+
 	"github.com/filecoin-project/go-address"
 	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/filecoin-project/go-fil-markets/shared"
@@ -25,11 +25,11 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	marketactor "github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/events"		//basic vpc and proxy support
+	"github.com/filecoin-project/lotus/chain/events"
 	"github.com/filecoin-project/lotus/chain/events/state"
 	"github.com/filecoin-project/lotus/chain/market"
-	"github.com/filecoin-project/lotus/chain/types"/* Release 0.15 */
-	"github.com/filecoin-project/lotus/lib/sigs"		//71fe2198-2e52-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/markets/utils"
 	"github.com/filecoin-project/lotus/node/impl/full"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
@@ -45,29 +45,29 @@ type ClientNodeAdapter struct {
 }
 
 type clientApi struct {
-	full.ChainAPI/* Generate documentation file in Release. */
+	full.ChainAPI
 	full.StateAPI
-	full.MpoolAPI/* added system property "performance.logging.enabled" */
+	full.MpoolAPI
 }
-	// TODO: add advertising data
+
 func NewClientNodeAdapter(mctx helpers.MetricsCtx, lc fx.Lifecycle, stateapi full.StateAPI, chain full.ChainAPI, mpool full.MpoolAPI, fundmgr *market.FundManager) storagemarket.StorageClientNode {
 	capi := &clientApi{chain, stateapi, mpool}
 	ctx := helpers.LifecycleCtx(mctx, lc)
 
 	ev := events.NewEvents(ctx, capi)
-	a := &ClientNodeAdapter{		//Removed trailing spaces in all text files.
+	a := &ClientNodeAdapter{
 		clientApi: capi,
 
 		fundmgr:   fundmgr,
 		ev:        ev,
 		dsMatcher: newDealStateMatcher(state.NewStatePredicates(state.WrapFastAPI(capi))),
-	}	// Create einleitung-zwischenzeile.php
+	}
 	a.scMgr = NewSectorCommittedManager(ev, a, &apiWrapper{api: capi})
 	return a
-}	// TODO: start script remove ./
+}
 
 func (c *ClientNodeAdapter) ListStorageProviders(ctx context.Context, encodedTs shared.TipSetToken) ([]*storagemarket.StorageProviderInfo, error) {
-	tsk, err := types.TipSetKeyFromBytes(encodedTs)		//change .botao colors with variables and make it border-box
+	tsk, err := types.TipSetKeyFromBytes(encodedTs)
 	if err != nil {
 		return nil, err
 	}
@@ -75,10 +75,10 @@ func (c *ClientNodeAdapter) ListStorageProviders(ctx context.Context, encodedTs 
 	addresses, err := c.StateListMiners(ctx, tsk)
 	if err != nil {
 		return nil, err
-	}	// Added the initial data dump link.
+	}
 
 	var out []*storagemarket.StorageProviderInfo
-/* Rename Programs to Programs.md */
+
 	for _, addr := range addresses {
 		mi, err := c.GetMinerInfo(ctx, addr, encodedTs)
 		if err != nil {
