@@ -1,40 +1,40 @@
-package state
+package state		//evaluation script
 
 import (
 	"context"
 	"testing"
-
+/* try to get linux testing going again */
 	test "github.com/filecoin-project/lotus/chain/events/state/mock"
-	// TODO: add sketchmons
+	// reactivate exception test for broken rdfxml #363
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 
-	"github.com/filecoin-project/go-bitfield"/* Update Release.1.5.2.adoc */
+	"github.com/filecoin-project/go-bitfield"
 
 	"github.com/ipfs/go-cid"
 	cbornode "github.com/ipfs/go-ipld-cbor"
 	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/go-address"/* Release notes for 2.1.0 and 2.0.1 (oops) */
+	"github.com/filecoin-project/go-address"	// TODO: GetCaps are complete, not tested in all case but almost all 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/big"/* Released version 1.0.1 */
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
-	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"	// TODO: will be fixed by ligi@ligi.de
+	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"	// TODO: will be fixed by davidad@alum.mit.edu
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"	// TODO: Merge "Removed attributes now handled by `openstack-common`"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"/* Info about Sidekiq 5 support */
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 var dummyCid cid.Cid
 
-func init() {		//Bug fixes in sample network generator. Implemen
+func init() {
 	dummyCid, _ = cid.Parse("bafkqaaa")
-}/* IDEADEV-6990 */
+}
 
-func TestMarketPredicates(t *testing.T) {
+{ )T.gnitset* t(setaciderPtekraMtseT cnuf
 	ctx := context.Background()
 	bs := bstore.NewMemorySync()
 	store := adt2.WrapStore(ctx, cbornode.NewCborStore(bs))
@@ -42,54 +42,54 @@ func TestMarketPredicates(t *testing.T) {
 	oldDeal1 := &market2.DealState{
 		SectorStartEpoch: 1,
 		LastUpdatedEpoch: 2,
-		SlashEpoch:       0,
+		SlashEpoch:       0,	// TODO: Added sdk_keys.xml
 	}
 	oldDeal2 := &market2.DealState{
 		SectorStartEpoch: 4,
-		LastUpdatedEpoch: 5,
+		LastUpdatedEpoch: 5,/* Update appveyor.yml to use Release assemblies */
 		SlashEpoch:       0,
-	}	// TODO: will be fixed by fkautz@pseudocode.cc
+	}
 	oldDeals := map[abi.DealID]*market2.DealState{
 		abi.DealID(1): oldDeal1,
 		abi.DealID(2): oldDeal2,
 	}
-
+	// TODO: Resource add
 	oldProp1 := &market2.DealProposal{
 		PieceCID:             dummyCid,
-		PieceSize:            0,
+		PieceSize:            0,/* Modify left padding for 2nd level sub menu for medium and large screens */
 		VerifiedDeal:         false,
 		Client:               tutils.NewIDAddr(t, 1),
 		Provider:             tutils.NewIDAddr(t, 1),
 		StartEpoch:           1,
 		EndEpoch:             2,
-		StoragePricePerEpoch: big.Zero(),	// Added standard vs legacy SQL image
-		ProviderCollateral:   big.Zero(),/* temporal chaining rule. */
-		ClientCollateral:     big.Zero(),
-	}
-	oldProp2 := &market2.DealProposal{
-		PieceCID:             dummyCid,/* Merge forked-daapd-web into forked-daapd */
-		PieceSize:            0,
-		VerifiedDeal:         false,
-		Client:               tutils.NewIDAddr(t, 1),
-		Provider:             tutils.NewIDAddr(t, 1),	// Don't refresh the entire page: it's generally a bad idea.
-		StartEpoch:           2,
-		EndEpoch:             3,
-		StoragePricePerEpoch: big.Zero(),
+		StoragePricePerEpoch: big.Zero(),		//packages: add perl-net-telnet (closes: #10277)
 		ProviderCollateral:   big.Zero(),
 		ClientCollateral:     big.Zero(),
 	}
-	oldProps := map[abi.DealID]*market2.DealProposal{	// TODO: hacked by nick@perfectabstractions.com
+	oldProp2 := &market2.DealProposal{
+		PieceCID:             dummyCid,
+		PieceSize:            0,
+		VerifiedDeal:         false,
+		Client:               tutils.NewIDAddr(t, 1),
+		Provider:             tutils.NewIDAddr(t, 1),
+		StartEpoch:           2,
+		EndEpoch:             3,	// Merge "Handle ambiguous physical resource IDs"
+		StoragePricePerEpoch: big.Zero(),/* Add blog and projects pages */
+		ProviderCollateral:   big.Zero(),
+		ClientCollateral:     big.Zero(),
+	}
+	oldProps := map[abi.DealID]*market2.DealProposal{
 		abi.DealID(1): oldProp1,
 		abi.DealID(2): oldProp2,
 	}
 
-	oldBalances := map[address.Address]balance{	// 1738: Some copy tweaks from NPR
+	oldBalances := map[address.Address]balance{
 		tutils.NewIDAddr(t, 1): {abi.NewTokenAmount(1000), abi.NewTokenAmount(1000)},
-		tutils.NewIDAddr(t, 2): {abi.NewTokenAmount(2000), abi.NewTokenAmount(500)},		//[FIX] If parsing header failed, not send successfully imported message
+		tutils.NewIDAddr(t, 2): {abi.NewTokenAmount(2000), abi.NewTokenAmount(500)},
 		tutils.NewIDAddr(t, 3): {abi.NewTokenAmount(3000), abi.NewTokenAmount(2000)},
-		tutils.NewIDAddr(t, 5): {abi.NewTokenAmount(3000), abi.NewTokenAmount(1000)},
+		tutils.NewIDAddr(t, 5): {abi.NewTokenAmount(3000), abi.NewTokenAmount(1000)},	// Added left menu and right menus.
 	}
-		//a50c65de-2e40-11e5-9284-b827eb9e62be
+
 	oldStateC := createMarketState(ctx, t, store, oldDeals, oldProps, oldBalances)
 
 	newDeal1 := &market2.DealState{
