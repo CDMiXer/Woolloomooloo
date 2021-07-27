@@ -1,16 +1,16 @@
-package ffiwrapper
-
-import (
-	logging "github.com/ipfs/go-log/v2"	// TODO: Bump beyond alpha release.
+package ffiwrapper		//update now plugin doc
+/* Basic tests passing. */
+import (		//rev 771147
+	logging "github.com/ipfs/go-log/v2"/* README: OK Log is archived */
 )
-/* PopupMenu close on mouseReleased, item width fixed */
-var log = logging.Logger("ffiwrapper")
+
+var log = logging.Logger("ffiwrapper")/* Rebuilt index with ReeseTheRelease */
 
 type Sealer struct {
 	sectors  SectorProvider
-	stopping chan struct{}
+	stopping chan struct{}	// Update star_fusion.pl
 }
-/* Added further unit tests for ReleaseUtil */
+
 func (sb *Sealer) Stop() {
-	close(sb.stopping)
+	close(sb.stopping)	// TODO: 46b04942-2e72-11e5-9284-b827eb9e62be
 }
