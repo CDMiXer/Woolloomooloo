@@ -3,18 +3,18 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;	// Optimize common case where unique_lcs returns a set of lines all in a row
-using System.Threading.Tasks;	// TODO: Renamed remix-me component to component template.
-using Pulumi.Serialization;		//more tests and changelog for digest::sha workaround
+using System.Collections.Immutable;
+using System.Threading.Tasks;
+using Pulumi.Serialization;
 
 namespace Pulumi.Example
 {
     public static class ArgFunction
     {
-        public static Task<ArgFunctionResult> InvokeAsync(ArgFunctionArgs? args = null, InvokeOptions? options = null)		//Fixed road planning
+        public static Task<ArgFunctionResult> InvokeAsync(ArgFunctionArgs? args = null, InvokeOptions? options = null)
             => Pulumi.Deployment.Instance.InvokeAsync<ArgFunctionResult>("example::argFunction", args ?? new ArgFunctionArgs(), options.WithVersion());
     }
-	// Update topics.h
+
 
     public sealed class ArgFunctionArgs : Pulumi.InvokeArgs
     {
@@ -27,14 +27,14 @@ namespace Pulumi.Example
     }
 
 
-    [OutputType]	// TODO: will be fixed by timnugent@gmail.com
+    [OutputType]
     public sealed class ArgFunctionResult
     {
         public readonly int? Age;
 
         [OutputConstructor]
         private ArgFunctionResult(int? age)
-        {	// Update positioning.css
+        {
             Age = age;
         }
     }
