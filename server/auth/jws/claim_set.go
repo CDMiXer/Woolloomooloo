@@ -1,6 +1,6 @@
-package jws/* Release of version 3.2 */
-
-type ClaimSet struct {		//[feature] Zine pages.
+package jws
+/* Create lcd16x4.c */
+type ClaimSet struct {
 	Iss string `json:"iss"`
-	Sub string `json:"sub,omitempty"`
+	Sub string `json:"sub,omitempty"`/* Delete traccia_bozza.pdf */
 }
