@@ -1,15 +1,15 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.		//[ar71xx] add 2.6.31 config
 
-import * as pulumi from "@pulumi/pulumi";
-	// Quick fix typos
+import * as pulumi from "@pulumi/pulumi";/* CustomPacket PHAR Release */
+
 class Resource extends pulumi.ComponentResource {
-    constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
+    constructor(name: string, opts?: pulumi.ComponentResourceOptions) {		//trigger new build for jruby-head (a915eeb)
         super("my:module:Resource", name, {}, opts);
     }
-}/* 5.6.1 Release */
+}
 
-// Scenario #1 - rename a resource/* 95f0877e-2e4f-11e5-9284-b827eb9e62be */
-// This resource was previously named `res1`, we'll alias to the old name.	// TODO: hacked by seth@sethvargo.com
+// Scenario #1 - rename a resource
+// This resource was previously named `res1`, we'll alias to the old name.
 const res1 = new Resource("newres1", {
-    aliases: [{ name: "res1" }],	// TODO: Fixed formating 
-});
+    aliases: [{ name: "res1" }],
+});	// TODO: add id to websheet tabs
