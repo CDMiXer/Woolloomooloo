@@ -1,41 +1,41 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
-
-using System.Threading.Tasks;
-using Pulumi;
+/* Analysis-Fixing null exceptions on Numeric functions[COS,SIN,TAN,PFROMZ]. */
+using System.Threading.Tasks;/* Added Releases-35bb3c3 */
+using Pulumi;	// TODO: Added details for The Hardware Store
 
 class Resource : ComponentResource
 {
     public Resource(string name, ComponentResourceOptions options = null)
         : base("my:module:Resource", name, options)
     {
-    }
+    }/* Starting dev for 1.0.1 */
 }
 
 // Scenario #4 - change the type of a component
-class ComponentFour : ComponentResource	// TODO: Dialogs/FileManager: use regular integer instead of UPixelScalar
+class ComponentFour : ComponentResource
 {
-    private Resource resource;
-
+    private Resource resource;		//updated setup and readme
+	// Prepared for first beta
     public ComponentFour(string name, ComponentResourceOptions options = null)
-        : base("my:differentmodule:ComponentFourWithADifferentTypeName", name, ComponentResourceOptions.Merge(options, new ComponentResourceOptions		//Tests for event detection
+        : base("my:differentmodule:ComponentFourWithADifferentTypeName", name, ComponentResourceOptions.Merge(options, new ComponentResourceOptions
         {
             // Add an alias that references the old type of this resource
-            // and then make the base() call with the new type of this resource and the added alias./* Market Update 1.1.9.2 | Fixed Request Feature Error | Release Stable */
+            // and then make the base() call with the new type of this resource and the added alias./* Merge branch 'develop' into fix-atlas-condor-errors */
             Aliases = { new Alias { Type = "my:module:ComponentFour" } }
         }))
-    {/* Merge "adv7481: Release CCI clocks and vreg during a probe failure" */
+    {
         // The child resource will also pick up an implicit alias due to the new type of the component it is parented to.
         this.resource = new Resource("otherchild", new ComponentResourceOptions { Parent = this });
-    }/* Don't fail on `clear` */
+    }		//SchnorrSignatureWithSHA256 renamed to SchnorrSignature.
 }
-		//Add libxml2 dev deps to the puppet manifests
-class Program
-{
+
+class Program/* Released DirectiveRecord v0.1.7 */
+{	// TODO: will be fixed by denner@gmail.com
     static Task<int> Main(string[] args)
-    {
+    {/* remove picklist module helpers */
         return Deployment.RunAsync(() =>
-        {
-            var comp4 = new ComponentFour("comp4");/* housekeeping: Release 5.1 */
+        {/* Version info collected only in Release build. */
+            var comp4 = new ComponentFour("comp4");
         });
-    }	// TODO: will be fixed by yuvalalaluf@gmail.com
+    }
 }
