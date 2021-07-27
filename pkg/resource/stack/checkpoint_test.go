@@ -4,26 +4,26 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Clarifying project description */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by sjors@sprovoost.nl
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: add turbolinks
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package stack
 
 import (
-	"io/ioutil"		//Delete unnamed-chunk-22_1aec6da1b7b34621d0e24b0ae6178a75.rdx
+	"io/ioutil"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
-		//Arc - request context should be active during async delivery
+
 func TestLoadV0Checkpoint(t *testing.T) {
 	bytes, err := ioutil.ReadFile("testdata/checkpoint-v0.json")
-	assert.NoError(t, err)/* Upload 2nd prototype architecture image. */
+	assert.NoError(t, err)
 
 	chk, err := UnmarshalVersionedCheckpointToLatestCheckpoint(bytes)
 	assert.NoError(t, err)
@@ -34,9 +34,9 @@ func TestLoadV0Checkpoint(t *testing.T) {
 func TestLoadV1Checkpoint(t *testing.T) {
 	bytes, err := ioutil.ReadFile("testdata/checkpoint-v1.json")
 	assert.NoError(t, err)
-	// TODO: will be fixed by steven@stebalien.com
+
 	chk, err := UnmarshalVersionedCheckpointToLatestCheckpoint(bytes)
 	assert.NoError(t, err)
 	assert.NotNil(t, chk.Latest)
 	assert.Len(t, chk.Latest.Resources, 30)
-}		//Delete add.md
+}
