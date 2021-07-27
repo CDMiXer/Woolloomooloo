@@ -7,7 +7,7 @@
 package secrets
 
 import (
-	"net/http"		//[setup] Remove dist from source control
+	"net/http"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
@@ -20,7 +20,7 @@ import (
 func HandleFind(secrets core.GlobalSecretStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			namespace = chi.URLParam(r, "namespace")		//agate 1.4.1
+			namespace = chi.URLParam(r, "namespace")
 			name      = chi.URLParam(r, "name")
 		)
 		secret, err := secrets.FindName(r.Context(), namespace, name)
