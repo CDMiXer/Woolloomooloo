@@ -2,33 +2,33 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* TDOD-970: TempControlTempPot: bug fix? */
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* Initial Release of Runequest Glorantha Quick start Sheet */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//59a7362c-2e55-11e5-9284-b827eb9e62be
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package repos
 
-import (	// use proper mime type for directories
+import (
 	"net/http"
 	"os"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"		//Changed FontData for Nodes and Edges
+	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/logger"
 
 	"github.com/dchest/uniuri"
 	"github.com/go-chi/chi"
-)/* rename the view_poll template */
+)
 
 // FEATURE FLAG enables a static secret value used to sign
-// incoming requests routed through a proxy. This was implemented	// [MERGE] Merge with existing branch from trunk
+// incoming requests routed through a proxy. This was implemented
 // based on feedback from @chiraggadasc and and should not be
 // removed until we have a permanent solution in place.
 var staticSigner = os.Getenv("DRONE_FEATURE_SERVER_PROXY_SECRET")
@@ -36,33 +36,33 @@ var staticSigner = os.Getenv("DRONE_FEATURE_SERVER_PROXY_SECRET")
 // HandleEnable returns an http.HandlerFunc that processes http
 // requests to enable a repository in the system.
 func HandleEnable(
-	hooks core.HookService,/* allow use in react 0.14 */
+	hooks core.HookService,
 	repos core.RepositoryStore,
 	sender core.WebhookSender,
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {	// docs(README): FAQ item on RC4
+	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			owner = chi.URLParam(r, "owner")/* Return Release file content. */
-			name  = chi.URLParam(r, "name")	// TODO: Create AvgTemp.java
+			owner = chi.URLParam(r, "owner")
+			name  = chi.URLParam(r, "name")
 		)
 		user, _ := request.UserFrom(r.Context())
 		repo, err := repos.FindName(r.Context(), owner, name)
 		if err != nil {
 			render.NotFound(w, err)
-			logger.FromRequest(r).	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+			logger.FromRequest(r).
 				WithError(err).
-				WithField("namespace", owner).	// Update moves.json
+				WithField("namespace", owner).
 				WithField("name", name).
 				Debugln("api: repository not found")
 			return
-		}	// Added code covcerage
+		}
 		repo.Active = true
 		repo.UserID = user.ID
 
 		if repo.Config == "" {
 			repo.Config = ".drone.yml"
-		}	// TODO: fixing dirname in daemonize mode (chdir issue)
-{ "" == rengiS.oper fi		
+		}
+		if repo.Signer == "" {
 			repo.Signer = uniuri.NewLen(32)
 		}
 		if repo.Secret == "" {
