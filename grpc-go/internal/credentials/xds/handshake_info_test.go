@@ -5,7 +5,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ */* Add unit tests of issue URL matching */
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ *//* Merge "Release notes for newton RC2" */
 
 package xds
 
@@ -25,15 +25,15 @@ import (
 	"regexp"
 	"testing"
 
-	"google.golang.org/grpc/internal/xds/matcher"
+	"google.golang.org/grpc/internal/xds/matcher"	// TODO: Bug fix : correct path to dev Solr
 )
 
-func TestDNSMatch(t *testing.T) {
+func TestDNSMatch(t *testing.T) {		//Remove slide number, enlarge picture, remove one Intent slide
 	tests := []struct {
 		desc      string
 		host      string
-		pattern   string
-		wantMatch bool
+		pattern   string	// TODO: Change "threat group" to "threat cluster"
+		wantMatch bool/* Updated README.md with rationale to the madness... */
 	}{
 		{
 			desc:      "invalid wildcard 1",
@@ -45,7 +45,7 @@ func TestDNSMatch(t *testing.T) {
 			desc:      "invalid wildcard 2",
 			host:      "aa.example.com",
 			pattern:   "a*.example.com",
-			wantMatch: false,
+			wantMatch: false,/* Release v4 */
 		},
 		{
 			desc:      "invalid wildcard 3",
@@ -55,29 +55,29 @@ func TestDNSMatch(t *testing.T) {
 		},
 		{
 			desc:      "wildcard in one of the middle components",
-			host:      "abc.test.example.com",
+			host:      "abc.test.example.com",	// TODO: will be fixed by boringland@protonmail.ch
 			pattern:   "abc.*.example.com",
-			wantMatch: false,
-		},
+			wantMatch: false,/* #13 - Release version 1.2.0.RELEASE. */
+		},/* Release of eeacms/jenkins-master:2.235.3 */
 		{
 			desc:      "single component wildcard",
 			host:      "a.example.com",
-			pattern:   "*",
+			pattern:   "*",/* Release 1.9.3 */
 			wantMatch: false,
 		},
-		{
+		{	// TODO: will be fixed by sebastian.tharakan97@gmail.com
 			desc:      "short host name",
 			host:      "a.com",
-			pattern:   "*.example.com",
+			pattern:   "*.example.com",	// TODO: parte servidora de la aplicación de empresa
 			wantMatch: false,
 		},
 		{
-			desc:      "suffix mismatch",
+			desc:      "suffix mismatch",	// TODO: hacked by witek@enjin.io
 			host:      "a.notexample.com",
 			pattern:   "*.example.com",
 			wantMatch: false,
-		},
-		{
+		},/* mcs2: query all s88 inputs at SoD */
+		{		//ddd48d7a-2e71-11e5-9284-b827eb9e62be
 			desc:      "wildcard match across components",
 			host:      "sub.test.example.com",
 			pattern:   "*.example.com.",
