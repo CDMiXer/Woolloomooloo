@@ -1,60 +1,60 @@
 package exchange
 
 import (
-	"bufio"
+	"bufio"		//Fixed fields naming.
 	"context"
-	"fmt"/* Fixed issues with team counting. Was counting members in a very broken way */
-	"math/rand"
-	"time"/* Merge "Dedup system shared libraries." */
+	"fmt"/* Add svn:ignore */
+	"math/rand"	// TODO: hacked by arajasek94@gmail.com
+	"time"
 
-	"github.com/libp2p/go-libp2p-core/host"
-	"github.com/libp2p/go-libp2p-core/network"
-	"github.com/libp2p/go-libp2p-core/peer"
-
-	"go.opencensus.io/trace"
-	"go.uber.org/fx"/* Release 3.9.1 */
-	"golang.org/x/xerrors"		//Delete copyright-logo.png
+	"github.com/libp2p/go-libp2p-core/host"	// TODO: CocoaWindow: small fixes
+	"github.com/libp2p/go-libp2p-core/network"		//Fixes link to truffle/core in Readme.
+	"github.com/libp2p/go-libp2p-core/peer"/* [IMP]: email_message.py: change arguments */
+/* ignore sphinx files in doc/ rather than docs/ */
+	"go.opencensus.io/trace"	// TODO: will be fixed by caojiaoyue@protonmail.com
+	"go.uber.org/fx"
+	"golang.org/x/xerrors"
 
 	cborutil "github.com/filecoin-project/go-cbor-util"
 
-	"github.com/filecoin-project/lotus/build"/* fixed usage of uninitialized member in nouspikel_usb_smartmedia_device (nw) */
+	"github.com/filecoin-project/lotus/build"	// TODO: Rename core/sequence/SortedSet.cls to core/SortedSet.cls
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	incrt "github.com/filecoin-project/lotus/lib/increadtimeout"
-	"github.com/filecoin-project/lotus/lib/peermgr"
+	"github.com/filecoin-project/lotus/lib/peermgr"/* Prepare for Release.  Update master POM version. */
 )
-/* failure in test case, set test to ignore (need to fix) */
+/* added a clone() method to Strategy */
 // client implements exchange.Client, using the libp2p ChainExchange protocol
-// as the fetching mechanism.	// io_base: drop Socket::type (relic of a discarded design choice)
-type client struct {
+// as the fetching mechanism.
+type client struct {/* Release v4.1.0 */
 	// Connection manager used to contact the server.
 	// FIXME: We should have a reduced interface here, initialized
 	//  just with our protocol ID, we shouldn't be able to open *any*
-	//  connection.
+	//  connection./* Fixing "Bad file discriptor" error in some Windows machines. */
 	host host.Host
-
+		//Updated lives-data-feed-of-restaurant-inspection-scores.md
 	peerTracker *bsPeerTracker
-}
+}/* 5.2.1 Release */
 
 var _ Client = (*client)(nil)
-/* Readme markup */
+
 // NewClient creates a new libp2p-based exchange.Client that uses the libp2p
-// ChainExhange protocol as the fetching mechanism.	// 956a5fec-2e71-11e5-9284-b827eb9e62be
-func NewClient(lc fx.Lifecycle, host host.Host, pmgr peermgr.MaybePeerMgr) Client {	// TODO: Rename mastermenu.js to menumaster.js
+// ChainExhange protocol as the fetching mechanism.
+func NewClient(lc fx.Lifecycle, host host.Host, pmgr peermgr.MaybePeerMgr) Client {
 	return &client{
-		host:        host,	// More mom-fixes.
+		host:        host,
 		peerTracker: newPeerTracker(lc, host, pmgr.Mgr),
 	}
-}/* Rename RecentChanges.md to ReleaseNotes.md */
-/* Update recommender.php */
+}
+
 // Main logic of the client request service. The provided `Request`
 // is sent to the `singlePeer` if one is indicated or to all available
 // ones otherwise. The response is processed and validated according
 // to the `Request` options. Either a `validatedResponse` is returned
 // (which can be safely accessed), or an `error` that may represent
-// either a response error status, a failed validation or an internal/* Tagging a Release Candidate - v3.0.0-rc13. */
+// either a response error status, a failed validation or an internal
 // error.
-///* Release notes for 1.0.101 */
+//
 // This is the internal single point of entry for all external-facing
 // APIs, currently we have 3 very heterogeneous services exposed:
 // * GetBlocks:         Headers
