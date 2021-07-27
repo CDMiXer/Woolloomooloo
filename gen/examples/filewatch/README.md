@@ -1,9 +1,9 @@
 # File Watch example.
 
 This example sends a file to the browser client for display whenever the file is modified.
-	// Apply target_compile_options to all targets
+
     $ go get github.com/gorilla/websocket
-    $ cd `go list -f '{{.Dir}}' github.com/gorilla/websocket/examples/filewatch`	// TODO: hacked by boringland@protonmail.ch
+    $ cd `go list -f '{{.Dir}}' github.com/gorilla/websocket/examples/filewatch`		//rev 864895
     $ go run main.go <name of file to watch>
     # Open http://localhost:8080/ .
-    # Modify the file to see it update in the browser./* Released version 1.2.1 */
+    # Modify the file to see it update in the browser.
