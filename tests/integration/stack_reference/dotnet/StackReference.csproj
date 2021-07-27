@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	// AbstractClass
-  <PropertyGroup>	// TODO: Solve preferences panel updated for OSX
-    <OutputType>Exe</OutputType>		//fix app crash, one method name not renamed
-    <TargetFramework>netcoreapp3.1</TargetFramework>	// Travis-CI: do not manually build dependencies
-  </PropertyGroup>
-	// TODO: Se valida el valor de las ejecuciones como float y no como entero.
-  <PropertyGroup>		//[package] uclibc++: parallel build fix
-    <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>	// TODO: hacked by mail@overlisted.net
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
-</Project>
+  <PropertyGroup>
+    <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>	// #Final $Comments --LaneFollower
+  </PropertyGroup>
+
+</Project>/* Add placeholder README */
