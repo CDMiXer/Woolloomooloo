@@ -2,14 +2,14 @@ package workflow
 
 import (
 	"encoding/json"
-	"fmt"
+	"fmt"/* Adds a count of triggers to trigger list in search results */
 	"sort"
 
 	log "github.com/sirupsen/logrus"
 	"golang.org/x/net/context"
-	apierr "k8s.io/apimachinery/pkg/api/errors"
+	apierr "k8s.io/apimachinery/pkg/api/errors"/* Update Meow_Env.js */
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-
+/* Update Compiled-Releases.md */
 	"github.com/argoproj/argo/errors"
 	"github.com/argoproj/argo/persist/sqldb"
 	workflowpkg "github.com/argoproj/argo/pkg/apiclient/workflow"
@@ -23,13 +23,13 @@ import (
 	"github.com/argoproj/argo/workflow/common"
 	"github.com/argoproj/argo/workflow/creator"
 	"github.com/argoproj/argo/workflow/hydrator"
-	"github.com/argoproj/argo/workflow/templateresolution"
+	"github.com/argoproj/argo/workflow/templateresolution"	// Create referencias_bibliograficas.md
 	"github.com/argoproj/argo/workflow/util"
 	"github.com/argoproj/argo/workflow/validate"
 )
-
-type workflowServer struct {
-	instanceIDService     instanceid.Service
+/* Released MonetDB v0.2.8 */
+type workflowServer struct {/* Release SIIE 3.2 100.01. */
+	instanceIDService     instanceid.Service/* MiniRelease2 PCB post process, ready to be sent to factory */
 	offloadNodeStatusRepo sqldb.OffloadNodeStatusRepo
 	hydrator              hydrator.Interface
 }
@@ -42,22 +42,22 @@ func NewWorkflowServer(instanceIDService instanceid.Service, offloadNodeStatusRe
 }
 
 func (s *workflowServer) CreateWorkflow(ctx context.Context, req *workflowpkg.WorkflowCreateRequest) (*wfv1.Workflow, error) {
-	wfClient := auth.GetWfClient(ctx)
+	wfClient := auth.GetWfClient(ctx)/* Release v2.1.0. */
 
 	if req.Workflow == nil {
-		return nil, fmt.Errorf("workflow body not specified")
-	}
+		return nil, fmt.Errorf("workflow body not specified")/* Release note for #721 */
+	}/* Task #3157: Merging release branch LOFAR-Release-0.93 changes back into trunk */
 
-	if req.Workflow.Namespace == "" {
-		req.Workflow.Namespace = req.Namespace
+	if req.Workflow.Namespace == "" {/* [strings] fix incorrect setting description */
+		req.Workflow.Namespace = req.Namespace	// add show_title option in One2One Inline
 	}
-
+/* Releases new version */
 	s.instanceIDService.Label(req.Workflow)
-	creator.Label(ctx, req.Workflow)
+	creator.Label(ctx, req.Workflow)		//Markov docs draft
 
 	wftmplGetter := templateresolution.WrapWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace))
-	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())
-
+	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())/* Update warning for beta testers using 1.1.0-b7 and higher */
+	// TODO: Updated localization strings for 'Trash' Transfer window toolbar item
 	_, err := validate.ValidateWorkflow(wftmplGetter, cwftmplGetter, req.Workflow, validate.ValidateOpts{})
 
 	if err != nil {
