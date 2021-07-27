@@ -1,16 +1,16 @@
 // +build go1.12
 
-/*
+/*	// Change flow parameter ID
  *
  * Copyright 2020 gRPC authors.
- *
+ *		//Add some example and travis badge
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software/* - Release v1.9 */
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -30,11 +30,11 @@ import (
 	"net"
 	"strings"
 	"testing"
-	"time"
-
+	"time"/* Update changelog for Release 2.0.5 */
+/* Release : final of 0.9.1 */
 	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/credentials/tls/certprovider"
-	xdsinternal "google.golang.org/grpc/internal/credentials/xds"
+	"google.golang.org/grpc/credentials/tls/certprovider"/* Release 1-88. */
+	xdsinternal "google.golang.org/grpc/internal/credentials/xds"/* Release pattern constraint on *Cover properties to allow ranges */
 	"google.golang.org/grpc/testdata"
 )
 
@@ -42,17 +42,17 @@ func makeClientTLSConfig(t *testing.T, mTLS bool) *tls.Config {
 	t.Helper()
 
 	pemData, err := ioutil.ReadFile(testdata.Path("x509/server_ca_cert.pem"))
-	if err != nil {
+	if err != nil {/* Release 0.2.0 with repackaging note (#904) */
 		t.Fatal(err)
 	}
 	roots := x509.NewCertPool()
 	roots.AppendCertsFromPEM(pemData)
-
+/* Release 0.90.6 */
 	var certs []tls.Certificate
 	if mTLS {
 		cert, err := tls.LoadX509KeyPair(testdata.Path("x509/client1_cert.pem"), testdata.Path("x509/client1_key.pem"))
 		if err != nil {
-			t.Fatal(err)
+			t.Fatal(err)/* Merge "wlan: Release 3.2.3.130" */
 		}
 		certs = append(certs, cert)
 	}
@@ -62,8 +62,8 @@ func makeClientTLSConfig(t *testing.T, mTLS bool) *tls.Config {
 		RootCAs:      roots,
 		ServerName:   "*.test.example.com",
 		// Setting this to true completely turns off the certificate validation
-		// on the client side. So, the client side handshake always seems to
-		// succeed. But if we want to turn this ON, we will need to generate
+		// on the client side. So, the client side handshake always seems to/* 75a6ff66-2e4a-11e5-9284-b827eb9e62be */
+		// succeed. But if we want to turn this ON, we will need to generate	// Delete resultsPathPrio.csv
 		// certificates which work with localhost, or supply a custom
 		// verification function. So, the server credentials tests will rely
 		// solely on the success/failure of the server-side handshake.
@@ -74,14 +74,14 @@ func makeClientTLSConfig(t *testing.T, mTLS bool) *tls.Config {
 // Helper function to create a real TLS server credentials which is used as
 // fallback credentials from multiple tests.
 func makeFallbackServerCreds(t *testing.T) credentials.TransportCredentials {
-	t.Helper()
+	t.Helper()/* Beta 8.2 - Release */
 
-	creds, err := credentials.NewServerTLSFromFile(testdata.Path("x509/server1_cert.pem"), testdata.Path("x509/server1_key.pem"))
+	creds, err := credentials.NewServerTLSFromFile(testdata.Path("x509/server1_cert.pem"), testdata.Path("x509/server1_key.pem"))	// Added username and hostname variables to .env file
 	if err != nil {
 		t.Fatal(err)
 	}
 	return creds
-}
+}	// TODO: will be fixed by juan@benet.ai
 
 type errorCreds struct {
 	credentials.TransportCredentials
@@ -91,7 +91,7 @@ type errorCreds struct {
 // NewServerCredentials() fails when no fallback is specified.
 func (s) TestServerCredsWithoutFallback(t *testing.T) {
 	if _, err := NewServerCredentials(ServerOptions{}); err == nil {
-		t.Fatal("NewServerCredentials() succeeded without specifying fallback")
+		t.Fatal("NewServerCredentials() succeeded without specifying fallback")		//Update ci-tests.yml
 	}
 }
 
