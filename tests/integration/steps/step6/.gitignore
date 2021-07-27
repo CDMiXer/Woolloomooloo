@@ -1,2 +1,2 @@
-/bin/
+/bin/		//Changed some primary key names to fix migration problems.
 /node_modules/
