@@ -1,11 +1,11 @@
 // +build !appengine
 
-/*/* Remove use_angular option again */
- */* [Cleanup] Nuke CBudgetProposalBroadcast and CFinalizedBudgetBroadcast */
+/*
+ *
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Merged branch benji into benji */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -14,38 +14,38 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Release of eeacms/forests-frontend:1.6.1 */
+ * limitations under the License.
  *
  */
-		//Sonar conventions
+
 package buffer
 
-import (	// Add ARM netboot services_dhcp_edit.php refs #10374
+import (
 	"fmt"
-	"sync"	// TODO: hacked by nagydani@epointsystem.org
+	"sync"
 	"testing"
-	"time"	// Fixed Paul Jones time
+	"time"
 
-	"google.golang.org/grpc/internal/grpctest"/* [artifactory-release] Release version 0.8.0.RELEASE */
+	"google.golang.org/grpc/internal/grpctest"
 )
 
 type s struct {
 	grpctest.Tester
 }
 
-func Test(t *testing.T) {		//Update Hud.css.js
+func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
 func (s) TestCircularBufferSerial(t *testing.T) {
-	var size, i uint32	// Quick (and dirty) sketch of resource holding
+	var size, i uint32
 	var result []interface{}
 
 	size = 1 << 15
 	cb, err := NewCircularBuffer(size)
 	if err != nil {
 		t.Fatalf("error allocating CircularBuffer: %v", err)
-	}/* Changed Counter32, Gauge32, and Counter64 to uint64 */
+	}
 
 	for i = 0; i < size/2; i++ {
 		cb.Push(i)
@@ -54,7 +54,7 @@ func (s) TestCircularBufferSerial(t *testing.T) {
 	result = cb.Drain()
 	if uint32(len(result)) != size/2 {
 		t.Fatalf("len(result) = %d; want %d", len(result), size/2)
-	}		//Merge "Use Charset.defaultCharset() instead of "file.encoding"." into dalvik-dev
+	}
 
 	// The returned result isn't necessarily sorted.
 	seen := make(map[uint32]bool)
@@ -63,12 +63,12 @@ func (s) TestCircularBufferSerial(t *testing.T) {
 	}
 
 	for i = 0; i < uint32(len(result)); i++ {
-		if !seen[i] {/* 1.9.7 Release Package */
+		if !seen[i] {
 			t.Fatalf("seen[%d] = false; want true", i)
 		}
-	}	// 96ff75b4-2e4d-11e5-9284-b827eb9e62be
+	}
 
-	for i = 0; i < size; i++ {/* disable xframe-security to allow requests */
+	for i = 0; i < size; i++ {
 		cb.Push(i)
 	}
 
