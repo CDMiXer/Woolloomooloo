@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>/* bc0acaa6-2e53-11e5-9284-b827eb9e62be */
-    <TargetFramework>netcoreapp3.1</TargetFramework>		//CountryInfoFormElement fix mock
-  </PropertyGroup>	// TODO: hacked by aeongrp@outlook.com
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>		//Merge "Reorganize the content of horizon project tab"
 
-</Project>
+</Project>		//bb907850-2e5d-11e5-9284-b827eb9e62be
