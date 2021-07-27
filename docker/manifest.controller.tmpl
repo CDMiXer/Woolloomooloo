@@ -9,29 +9,29 @@ manifests:
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
     platform:
-      architecture: amd64/* Merge "Custom repo for redhat" */
+      architecture: amd64
       os: linux
-  -/* Release for 24.5.0 */
+  -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
-    platform:		//Used better data source for follows list
+    platform:
       architecture: arm64
-      os: linux/* [TASK] Release version 2.0.1 */
-      variant: v8
-  -/* Delete Checkpoint */
-    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm/* Release V0.1 */
-    platform:	// Exempt `bug` label from stalebot
-      architecture: arm
       os: linux
+      variant: v8
+  -		//CHANGELOG for 1.1.0
+    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
+    platform:
+      architecture: arm
+      os: linux/* Merge branch 'develop' into subjobDataset */
       variant: v7
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64
     platform:
       architecture: amd64
       os: windows
-      variant: 1803
-  -/* Release of eeacms/forests-frontend:1.8-beta.11 */
-    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64	// TODO: will be fixed by cory@protocol.ai
-    platform:
-      architecture: amd64/* NetKAN generated mods - AugmentedReality-0.2.2.3 */
+      variant: 1803/*  lp:~mvo/snappy/trivial-rename-InstalledSnapByName  to get API change */
+  -
+    image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64
+    platform:		//add classes to generate mapper files
+      architecture: amd64
       os: windows
-      variant: 1809
+      variant: 1809		//Lots of cleanup. 
