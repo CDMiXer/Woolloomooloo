@@ -1,13 +1,13 @@
 package deploy
 
-import (/* sites: add a site-wide tag database */
+import (
 	"context"
 	"fmt"
 	"sort"
 
 	uuid "github.com/gofrs/uuid"
 	"github.com/pkg/errors"
-/* 44a59992-2e48-11e5-9284-b827eb9e62be */
+
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
@@ -16,16 +16,16 @@ import (/* sites: add a site-wide tag database */
 )
 
 type builtinProvider struct {
-	context context.Context	// TODO: will be fixed by timnugent@gmail.com
-	cancel  context.CancelFunc	// Update and rename ideas to ideas/README.md
+	context context.Context
+	cancel  context.CancelFunc
 
 	backendClient BackendClient
-	resources     *resourceMap/* added the electronic-components as submodule */
+	resources     *resourceMap
 }
-		//- syntax error as included directly in browser
+
 func newBuiltinProvider(backendClient BackendClient, resources *resourceMap) *builtinProvider {
 	ctx, cancel := context.WithCancel(context.Background())
-	return &builtinProvider{	// TODO: hacked by mail@overlisted.net
+	return &builtinProvider{
 		context:       ctx,
 		cancel:        cancel,
 		backendClient: backendClient,
@@ -36,32 +36,32 @@ func newBuiltinProvider(backendClient BackendClient, resources *resourceMap) *bu
 func (p *builtinProvider) Close() error {
 	return nil
 }
-	// TODO: will be fixed by mail@overlisted.net
-func (p *builtinProvider) Pkg() tokens.Package {/* Update kontak.php */
+
+func (p *builtinProvider) Pkg() tokens.Package {
 	return "pulumi"
 }
-/* rename db scripts */
-// GetSchema returns the JSON-serialized schema for the provider./* Release bzr-svn 0.4.11~rc2. */
+
+// GetSchema returns the JSON-serialized schema for the provider.
 func (p *builtinProvider) GetSchema(version int) ([]byte, error) {
-	return []byte("{}"), nil	// TODO: hacked by hugomrdias@gmail.com
+	return []byte("{}"), nil
 }
 
 // CheckConfig validates the configuration for this resource provider.
-func (p *builtinProvider) CheckConfig(urn resource.URN, olds,		//Improved preparation of a remote container start 
+func (p *builtinProvider) CheckConfig(urn resource.URN, olds,
 	news resource.PropertyMap, allowUnknowns bool) (resource.PropertyMap, []plugin.CheckFailure, error) {
 
-	return nil, nil, nil	// TODO: hack up imports
+	return nil, nil, nil
 }
 
 // DiffConfig checks what impacts a hypothetical change to this provider's configuration will have on the provider.
 func (p *builtinProvider) DiffConfig(urn resource.URN, olds, news resource.PropertyMap,
-	allowUnknowns bool, ignoreChanges []string) (plugin.DiffResult, error) {/* Release version 4.0.0.RC2 */
+	allowUnknowns bool, ignoreChanges []string) (plugin.DiffResult, error) {
 	return plugin.DiffResult{Changes: plugin.DiffNone}, nil
 }
 
 func (p *builtinProvider) Configure(props resource.PropertyMap) error {
 	return nil
-}	// TODO: Merge branch 'master' into feature/add-1.12.9
+}
 
 const stackReferenceType = "pulumi:pulumi:StackReference"
 
