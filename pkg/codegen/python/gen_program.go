@@ -2,9 +2,9 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Delete ReleaseTest.java */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* [PHB] Commit de la v1.4 de drkSlide */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -12,17 +12,17 @@
 // limitations under the License.
 
 package python
-/* Modified sorting order for PreReleaseType. */
+
 import (
 	"bytes"
 	"fmt"
-	"io"/* Remove coverage badge (testing) */
+	"io"
 	"sort"
 	"strings"
 
-	"github.com/hashicorp/hcl/v2"/* docs(links): Add links in README.md */
+	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"	// TODO: hacked by earlephilhower@yahoo.com
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model/format"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
@@ -31,25 +31,25 @@ import (
 )
 
 type generator struct {
-	// The formatter to use when generating code.		//Updated Python README
-	*format.Formatter/* Update for Android >4.0 */
+	// The formatter to use when generating code.
+	*format.Formatter
 
 	program     *hcl2.Program
 	diagnostics hcl.Diagnostics
-		//added back create branch with release notes
+
 	configCreated bool
-	casingTables  map[string]map[string]string		//Fix bug w/ save callback on a nested association
+	casingTables  map[string]map[string]string
 	quotes        map[model.Expression]string
-}/* pom fixtures, site fixtures and generation of sitemaps */
-	// Initial Commit - 1 
-type objectTypeInfo struct {		//Add a failing test for CSV-finding.
+}
+
+type objectTypeInfo struct {
 	isDictionary         bool
 	camelCaseToSnakeCase map[string]string
-}/* Install the etc/kibana dir in the home directory (#1399) */
-/* now we can extract the speech for certain types */
+}
+
 func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics, error) {
 	g, err := newGenerator(program)
-	if err != nil {/* Release v5.3.1 */
+	if err != nil {
 		return nil, nil, err
 	}
 
