@@ -1,5 +1,5 @@
-/.pulumi/
+/.pulumi//* This commit was manufactured by cvs2svn to create tag 'prboom_2_2_1'. */
 [Bb]in/
-[Oo]bj/		//Added toString methods for triples and rules.
+[Oo]bj/
 
 
