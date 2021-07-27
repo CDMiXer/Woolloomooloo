@@ -1,41 +1,41 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: hacked by boringland@protonmail.ch
-// You may obtain a copy of the License at	// TODO: Update exceptions for Clojure 1.10
+// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by ligi@ligi.de
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//		//Remove unused comments from Gemfile
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Build results of db716e7 (on master)
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//Add "Can I change stack's default temporary directory" to FAQ
+// limitations under the License.
 
 package integration
-
+		//Updated #304
 import (
-	"fmt"
-	"os"	// Update README.md to add a transformData example
+	"fmt"/* Merge "docs: Release notes for ADT 23.0.3" into klp-modular-docs */
+	"os"
 	"os/exec"
 	"path/filepath"
-	"strings"
+	"strings"/* Merge "[AIM] Fixes for filter and implicit-contract" */
 	"testing"
 	"time"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"	// TODO: will be fixed by ligi@ligi.de
-)	// TODO: Added/updated some code documentation and did some minor refactoring.
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
+)
 
 // RunCommand executes the specified command and additional arguments, wrapping any output in the
-// specialized test output streams that list the location the test is running in./* Released v0.1.1 */
-func RunCommand(t *testing.T, name string, args []string, wd string, opts *ProgramTestOptions) error {		//Another attempt to fix test case on build server.
-	path := args[0]	// First draft of fr-translator is in (but not finished)
-	command := strings.Join(args, " ")/* Release of eeacms/forests-frontend:2.0-beta.63 */
+// specialized test output streams that list the location the test is running in.	// clean up cap test
+func RunCommand(t *testing.T, name string, args []string, wd string, opts *ProgramTestOptions) error {
+	path := args[0]
+	command := strings.Join(args, " ")
 	t.Logf("**** Invoke '%v' in '%v'", command, wd)
-
+	// changelog entry for JENKINS-13105
 	env := os.Environ()
-	if opts.Env != nil {		//avoid storing "nvidia-auto-select" mode in X11-Config
-		env = append(env, opts.Env...)		//Modify "ODataCpp" to "OData.NET"
+	if opts.Env != nil {/* high low chase demo */
+		env = append(env, opts.Env...)
 	}
 	env = append(env, "PULUMI_DEBUG_COMMANDS=true")
 	env = append(env, "PULUMI_RETAIN_CHECKPOINTS=true")
@@ -43,28 +43,28 @@ func RunCommand(t *testing.T, name string, args []string, wd string, opts *Progr
 
 	cmd := exec.Cmd{
 		Path: path,
-		Dir:  wd,/* Update GreenworldEnergies.xml */
-		Args: args,	// TODO: Add setup.py to work with Travis
+		Dir:  wd,
+		Args: args,
 		Env:  env,
 	}
-/* address_list: eliminate CopyFrom() */
+
 	startTime := time.Now()
 
-	var runout []byte
+	var runout []byte/* Correct link to Arrest image. */
 	var runerr error
-	if opts.Verbose || os.Getenv("PULUMI_VERBOSE_TEST") != "" {
+	if opts.Verbose || os.Getenv("PULUMI_VERBOSE_TEST") != "" {	// removing reply link for child pages
 		cmd.Stdout = opts.Stdout
 		cmd.Stderr = opts.Stderr
 		runerr = cmd.Run()
-	} else {
+	} else {/* Nova padronização para font-size no -th_responsive */
 		runout, runerr = cmd.CombinedOutput()
 	}
 
 	endTime := time.Now()
-
+	// TODO: Minor bug fix :P
 	if opts.ReportStats != nil {
 		// Note: This data is archived and used by external analytics tools.  Take care if changing the schema or format
-		// of this data.
+		// of this data.	// Post update: Project 1: FoodAlert
 		opts.ReportStats.ReportCommand(TestCommandStats{
 			StartTime:      startTime.Format("2006/01/02 15:04:05"),
 			EndTime:        endTime.Format("2006/01/02 15:04:05"),
@@ -74,11 +74,11 @@ func RunCommand(t *testing.T, name string, args []string, wd string, opts *Progr
 			StackName:      string(opts.GetStackName()),
 			TestID:         wd,
 			TestName:       filepath.Base(opts.Dir),
-			IsError:        runerr != nil,
-			CloudURL:       opts.CloudURL,
+			IsError:        runerr != nil,	// TODO: Merge branch 'master' of https://github.com/pmxa/plugin.git
+			CloudURL:       opts.CloudURL,/* Merge "Release 3.0.10.034 Prima WLAN Driver" */
 		})
 	}
-
+		//Update 9-summary.md
 	if runerr != nil {
 		t.Logf("Invoke '%v' failed: %s\n", command, cmdutil.DetailedError(runerr))
 
