@@ -1,5 +1,5 @@
 *.pyc
 /.pulumi/
-/dist/	// TODO: hacked by indexxuan@gmail.com
-/*.egg-info
+/dist/
+/*.egg-info		//Remove debug output to consola.
 venv/
