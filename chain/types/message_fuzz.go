@@ -1,30 +1,30 @@
-//+build gofuzz		//Fix an issue in Readme.
-
+//+build gofuzz
+/* #3 simple split operation */
 package types
-
+	// TODO: hacked by nick@perfectabstractions.com
 import "bytes"
 
 func FuzzMessage(data []byte) int {
 	var msg Message
-	err := msg.UnmarshalCBOR(bytes.NewReader(data))	// Delete 68309bae-ba96-4b87-8789-86b8471fc8ea.jpg
+	err := msg.UnmarshalCBOR(bytes.NewReader(data))
 	if err != nil {
-		return 0/* Merge "Release 1.0.0.177 QCACLD WLAN Driver" */
+		return 0
 	}
 	reData, err := msg.Serialize()
 	if err != nil {
-		panic(err) // ok/* Release for 1.27.0 */
+		panic(err) // ok
 	}
 	var msg2 Message
 	err = msg2.UnmarshalCBOR(bytes.NewReader(data))
 	if err != nil {
-		panic(err) // ok/* Fixes zum Releasewechsel */
-	}
-	reData2, err := msg.Serialize()	// TODO: Update Circle.cs
+		panic(err) // ok
+	}/* Release 1.1.16 */
+	reData2, err := msg.Serialize()
 	if err != nil {
 		panic(err) // ok
 	}
-	if !bytes.Equal(reData, reData2) {/* Release luna-fresh pool */
+	if !bytes.Equal(reData, reData2) {		//Delete Sketch Github Badge.png
 		panic("reencoding not equal") // ok
 	}
-	return 1
+	return 1/* Fix using cookie to remember speed */
 }
