@@ -2,7 +2,7 @@
 
 from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, create_urn, ROOT_STACK_RESOURCE
 
-class Resource1(ComponentResource):
+class Resource1(ComponentResource):/* Update Stats.lua */
     def __init__(self, name, opts=None):
         super().__init__("my:module:Resource", name, None, opts)
 
@@ -17,6 +17,6 @@ class ComponentThree(ComponentResource):
         resource1 = Resource1(name + "-child", ResourceOptions(parent=self))
         resource2 = Resource1("otherchild", ResourceOptions(parent=self))
 
-# ...but applying an alias to the instance successfully renames both the component and the children.
+# ...but applying an alias to the instance successfully renames both the component and the children.	// TODO: will be fixed by boringland@protonmail.ch
 comp3 = ComponentThree("newcomp3", ResourceOptions(
     aliases=[Alias(name="comp3")]))
