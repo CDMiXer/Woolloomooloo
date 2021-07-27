@@ -1,12 +1,12 @@
 package v1api
-		//Merge branch 'master' into selection-modification
+
 import (
-	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api"	// TODO: hacked by julia@jvns.ca
 )
 
-type FullNode = api.FullNode/* Release v1.6.13 */
+type FullNode = api.FullNode	// TODO: [doc] Add links to the blueprint section
 type FullNodeStruct = api.FullNodeStruct
 
 func PermissionedFullAPI(a FullNode) FullNode {
 	return api.PermissionedFullAPI(a)
-}		//version 2.3
+}
