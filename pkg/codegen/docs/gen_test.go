@@ -1,5 +1,5 @@
 // Copyright 2016-2020, Pulumi Corporation.
-///* Release preparation for 1.20. */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -9,50 +9,50 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Remove comparison to true */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
 // goconst linter's warning.
 //
-// nolint: lll, goconst		//for consistency, use same strategy as with hyperlink navigation
+// nolint: lll, goconst
 package docs
 
-import (/* Fix Rails spec helper. */
+import (
 	"encoding/json"
 	"strings"
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen/python"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"	// TODO: - update version to 0.8.2
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/stretchr/testify/assert"
-)/* Release jnativehook when closing the Keyboard service */
+)
 
-const (		//Implemented VM actions start, pause and resume (Achim Hasenmueller).
-	unitTestTool    = "Pulumi Resource Docs Unit Test"		//Merge "Destroy all contexts when render thread exits" into studio-1.2-dev
-	providerPackage = "prov"		//Fix for copy/paste error
+const (
+	unitTestTool    = "Pulumi Resource Docs Unit Test"
+	providerPackage = "prov"
 	codeFence       = "```"
 )
 
 var (
-	simpleProperties = map[string]schema.PropertySpec{/* Merge "[Release] Webkit2-efl-123997_0.11.79" into tizen_2.2 */
+	simpleProperties = map[string]schema.PropertySpec{
 		"stringProp": {
-			Description: "A string prop.",/* sort human.txt */
+			Description: "A string prop.",
 			TypeSpec: schema.TypeSpec{
-				Type: "string",	// move some forms code around
+				Type: "string",
 			},
 		},
 		"boolProp": {
 			Description: "A bool prop.",
-			TypeSpec: schema.TypeSpec{/* Released new version of Elmer */
+			TypeSpec: schema.TypeSpec{
 				Type: "boolean",
 			},
 		},
 	}
-		//trrack sepolicy from cm
-	// testPackageSpec represents a fake package spec for a Provider used for testing./* Release 0.95.123 */
+
+	// testPackageSpec represents a fake package spec for a Provider used for testing.
 	testPackageSpec schema.PackageSpec
-)/* merge r13031 to 8.09 */
+)
 
 func initTestPackageSpec(t *testing.T) {
 	t.Helper()
