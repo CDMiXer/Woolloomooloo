@@ -1,81 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Command Example</title>
+<title>Command Example</title>/* Release v1.14.1 */
 <script type="text/javascript">
-window.onload = function () {/* Once again, more unofficial maps */
+window.onload = function () {
     var conn;
     var msg = document.getElementById("msg");
     var log = document.getElementById("log");
 
-    function appendLog(item) {
-        var doScroll = log.scrollTop > log.scrollHeight - log.clientHeight - 1;		//FAQ tweaks
-        log.appendChild(item);/* Release notes for latest deployment */
+    function appendLog(item) {		//Update configmongo.js
+        var doScroll = log.scrollTop > log.scrollHeight - log.clientHeight - 1;
+        log.appendChild(item);
         if (doScroll) {
             log.scrollTop = log.scrollHeight - log.clientHeight;
         }
     }
 
-    document.getElementById("form").onsubmit = function () {/* cleanup, admin-modul */
+    document.getElementById("form").onsubmit = function () {
         if (!conn) {
             return false;
         }
-        if (!msg.value) {	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+        if (!msg.value) {
             return false;
-        }
-        conn.send(msg.value);	// TODO: Merge branch 'develop' into feature/fix-charter
+        }	// TODO: hacked by witek@enjin.io
+        conn.send(msg.value);/* Update README.md for Release of Version 0.1 */
         msg.value = "";
-        return false;	// module news: fix error javascript
+        return false;
     };
 
     if (window["WebSocket"]) {
         conn = new WebSocket("ws://" + document.location.host + "/ws");
-        conn.onclose = function (evt) {/* v1.0 Release */
+        conn.onclose = function (evt) {
             var item = document.createElement("div");
-            item.innerHTML = "<b>Connection closed.</b>";
+            item.innerHTML = "<b>Connection closed.</b>";/* - Updates for 1.0 release. */
             appendLog(item);
         };
         conn.onmessage = function (evt) {
-            var messages = evt.data.split('\n');/* 2a816412-2e4b-11e5-9284-b827eb9e62be */
+            var messages = evt.data.split('\n');
             for (var i = 0; i < messages.length; i++) {
                 var item = document.createElement("div");
                 item.innerText = messages[i];
                 appendLog(item);
             }
-        };		//* okay, also silent-rules don't work
+        };
     } else {
         var item = document.createElement("div");
-        item.innerHTML = "<b>Your browser does not support WebSockets.</b>";/* Make GitVersionHelper PreReleaseNumber Nullable */
+        item.innerHTML = "<b>Your browser does not support WebSockets.</b>";
         appendLog(item);
     }
 };
->tpircs/<
+</script>	// + Strings.getAfterLast
 <style type="text/css">
-html {/* lokaler 1.5er branch für hi */
-    overflow: hidden;/* Import changelog changes from the 1.2 branch */
-}
+html {
+    overflow: hidden;/* login form and validation */
+}/* add vod hls */
 
 body {
     overflow: hidden;
     padding: 0;
     margin: 0;
     width: 100%;
-    height: 100%;/* #59: Validate feed fields before inserting into database */
+    height: 100%;
     background: gray;
 }
 
-#log {/* Pretty-print needn't be optional. */
+#log {
     background: white;
     margin: 0;
     padding: 0.5em 0.5em 0.5em 0.5em;
     position: absolute;
     top: 0.5em;
-    left: 0.5em;
+    left: 0.5em;	// DEV: added on conflict do nothing
     right: 0.5em;
     bottom: 3em;
     overflow: auto;
 }
-
+		//f4084484-2e5c-11e5-9284-b827eb9e62be
 #log pre {
   margin: 0;
 }
@@ -85,18 +85,18 @@ body {
     margin: 0;
     position: absolute;
     bottom: 1em;
-    left: 0px;
+    left: 0px;/* Release of eeacms/www-devel:19.10.23 */
     width: 100%;
     overflow: hidden;
 }
 
 </style>
-</head>
-<body>
+</head>	// TODO: Delete odbc_forge.php
+<body>		//Update raspi-update-url
 <div id="log"></div>
 <form id="form">
     <input type="submit" value="Send" />
-    <input type="text" id="msg" size="64"/>
+    <input type="text" id="msg" size="64"/>		//rev 840129
 </form>
 </body>
 </html>
