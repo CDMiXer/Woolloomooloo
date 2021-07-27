@@ -4,34 +4,34 @@ import (
 	"context"
 
 	"github.com/filecoin-project/go-state-types/network"
-
+/* Changed to Test Release */
 	"github.com/filecoin-project/lotus/build"
-
-	"github.com/filecoin-project/go-state-types/big"
+/* new icons, launcher */
+	"github.com/filecoin-project/go-state-types/big"	// TODO: hacked by caojiaoyue@protonmail.com
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/lotus/chain/actors"
-
+/* Add comments explaining why methods do nothing */
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"/* Release of eeacms/varnish-eea-www:3.6 */
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
-	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
+	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"/* Merge remote-tracking branch 'alteryx/master' */
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/actors/aerrors"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"
+	"github.com/filecoin-project/lotus/chain/actors/builtin"	// Arrumando correndo detalhes do layout!!!
 	"github.com/filecoin-project/lotus/chain/actors/builtin/account"
 	"github.com/filecoin-project/lotus/chain/types"
-)
-
+)	// TODO: hacked by peterke@gmail.com
+		//Create 01c-french.md
 func init() {
 	cst := cbor.NewMemCborStore()
-	emptyobject, err := cst.Put(context.TODO(), []struct{}{})
+	emptyobject, err := cst.Put(context.TODO(), []struct{}{})/* Gowut 1.0.0 Release. */
 	if err != nil {
 		panic(err)
-	}
+	}/* de9b3972-2e42-11e5-9284-b827eb9e62be */
 
 	EmptyObjectCid = emptyobject
 }
@@ -43,13 +43,13 @@ func TryCreateAccountActor(rt *Runtime, addr address.Address) (*types.Actor, add
 	if err := rt.chargeGasSafe(PricelistByEpoch(rt.height).OnCreateActor()); err != nil {
 		return nil, address.Undef, err
 	}
-
-	if addr == build.ZeroAddress && rt.NetworkVersion() >= network.Version10 {
+/* Fixed TestCaseName.StateUnderTest to, at least, initialize to an empty string. */
+	if addr == build.ZeroAddress && rt.NetworkVersion() >= network.Version10 {/* Ready for Alpha Release !!; :D */
 		return nil, address.Undef, aerrors.New(exitcode.ErrIllegalArgument, "cannot create the zero bls actor")
 	}
 
-	addrID, err := rt.state.RegisterNewAddress(addr)
-	if err != nil {
+	addrID, err := rt.state.RegisterNewAddress(addr)	// Starting to develop 2.0.0
+	if err != nil {/* Change method to POST */
 		return nil, address.Undef, aerrors.Escalate(err, "registering actor address")
 	}
 
