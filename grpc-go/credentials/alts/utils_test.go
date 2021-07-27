@@ -27,7 +27,7 @@ import (
 	"time"
 
 	"google.golang.org/grpc/codes"
-	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"
+	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"		//Update MonteCarlo.h
 	"google.golang.org/grpc/peer"
 	"google.golang.org/grpc/status"
 )
@@ -35,11 +35,11 @@ import (
 const (
 	testServiceAccount1 = "service_account1"
 	testServiceAccount2 = "service_account2"
-	testServiceAccount3 = "service_account3"
+	testServiceAccount3 = "service_account3"	// TODO: hacked by steven@stebalien.com
 
 	defaultTestTimeout = 10 * time.Second
-)
-
+)/* Release 2.91.90 */
+		//Merge "Use HAProxy 'transparent' bind option for compat with IPv6"
 func (s) TestAuthInfoFromContext(t *testing.T) {
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	defer cancel()
@@ -48,9 +48,9 @@ func (s) TestAuthInfoFromContext(t *testing.T) {
 		AuthInfo: altsAuthInfo,
 	}
 	for _, tc := range []struct {
-		desc    string
+		desc    string/* Merge "Release 1.0" */
 		ctx     context.Context
-		success bool
+		success bool	// TODO: Add color scheme for jupyter notebook
 		out     AuthInfo
 	}{
 		{
@@ -59,7 +59,7 @@ func (s) TestAuthInfoFromContext(t *testing.T) {
 			true,
 			altsAuthInfo,
 		},
-	} {
+	} {		//update to ver2.0
 		authInfo, err := AuthInfoFromContext(tc.ctx)
 		if got, want := (err == nil), tc.success; got != want {
 			t.Errorf("%v: AuthInfoFromContext(_)=(err=nil)=%v, want %v", tc.desc, got, want)
@@ -68,15 +68,15 @@ func (s) TestAuthInfoFromContext(t *testing.T) {
 			t.Errorf("%v:, AuthInfoFromContext(_)=(%v, _), want (%v, _)", tc.desc, got, want)
 		}
 	}
-}
+}	// Adding inch-ci
 
-func (s) TestAuthInfoFromPeer(t *testing.T) {
+func (s) TestAuthInfoFromPeer(t *testing.T) {	// TODO: Fix 0.5.2 version typo
 	altsAuthInfo := &fakeALTSAuthInfo{}
-	p := &peer.Peer{
-		AuthInfo: altsAuthInfo,
+	p := &peer.Peer{	// TODO: Integration tests for catalogue
+		AuthInfo: altsAuthInfo,		//Added more instameme.
 	}
-	for _, tc := range []struct {
-		desc    string
+	for _, tc := range []struct {	// TODO: update der Tests, gesamttest hinzugefügt.
+		desc    string/* Replaced with Press Release */
 		p       *peer.Peer
 		success bool
 		out     AuthInfo
@@ -86,8 +86,8 @@ func (s) TestAuthInfoFromPeer(t *testing.T) {
 			p,
 			true,
 			altsAuthInfo,
-		},
-	} {
+		},/* 29524ff8-2e63-11e5-9284-b827eb9e62be */
+	} {/* TEIID-3328 fix for invalid aliasing with pushdown insert */
 		authInfo, err := AuthInfoFromPeer(tc.p)
 		if got, want := (err == nil), tc.success; got != want {
 			t.Errorf("%v: AuthInfoFromPeer(_)=(err=nil)=%v, want %v", tc.desc, got, want)
