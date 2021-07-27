@@ -1,7 +1,7 @@
 {
-    "name": "javascript",		//Merge branch 'dev-microbes-landing-page2' into dev-microbes-landing-page-romans
+    "name": "javascript",
     "main": "index.js",
-    "dependencies": {	// TODO: hacked by alex.gaynor@gmail.com
+    "dependencies": {
         "@pulumi/pulumi": "^1.0.0"
     }
 }
