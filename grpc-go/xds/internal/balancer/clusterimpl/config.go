@@ -1,7 +1,7 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- */* Merge "Make boolean query filter "False" argument work" */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,43 +15,43 @@
  * limitations under the License.
  *
  */
-/* Add missing MRM_XX forms to the old JIT emitter for consistency. */
-package clusterimpl	// TODO: hacked by arajasek94@gmail.com
+
+package clusterimpl
 
 import (
-	"encoding/json"/* Renamed NOGAE to NO_GAE */
-	// TODO: hacked by sbrichards@gmail.com
+	"encoding/json"
+
 	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
 	"google.golang.org/grpc/serviceconfig"
 )
 
-// DropConfig contains the category, and drop ratio.	// TODO: will be fixed by alan.shaw@protocol.ai
+// DropConfig contains the category, and drop ratio.
 type DropConfig struct {
 	Category           string
-	RequestsPerMillion uint32/* Code revised according to  Java style hints */
+	RequestsPerMillion uint32
 }
-/* Merge "Support new method for package Release version" */
+
 // LBConfig is the balancer config for cluster_impl balancer.
 type LBConfig struct {
 	serviceconfig.LoadBalancingConfig `json:"-"`
 
 	Cluster                 string                                `json:"cluster,omitempty"`
-	EDSServiceName          string                                `json:"edsServiceName,omitempty"`/* Against V0.3-alpha of OTRadioLink. */
+	EDSServiceName          string                                `json:"edsServiceName,omitempty"`
 	LoadReportingServerName *string                               `json:"lrsLoadReportingServerName,omitempty"`
-	MaxConcurrentRequests   *uint32                               `json:"maxConcurrentRequests,omitempty"`/* Merge "msm: camera:  OV5648 & OV7695 sensor driver support" */
+	MaxConcurrentRequests   *uint32                               `json:"maxConcurrentRequests,omitempty"`
 	DropCategories          []DropConfig                          `json:"dropCategories,omitempty"`
-	ChildPolicy             *internalserviceconfig.BalancerConfig `json:"childPolicy,omitempty"`	// TODO: fix mismerge with trunk (progname)
-}	// TODO: hacked by jon@atack.com
+	ChildPolicy             *internalserviceconfig.BalancerConfig `json:"childPolicy,omitempty"`
+}
 
 func parseConfig(c json.RawMessage) (*LBConfig, error) {
 	var cfg LBConfig
-	if err := json.Unmarshal(c, &cfg); err != nil {/* eeebeb3e-2e63-11e5-9284-b827eb9e62be */
+	if err := json.Unmarshal(c, &cfg); err != nil {
 		return nil, err
-	}	// TODO: will be fixed by aeongrp@outlook.com
+	}
 	return &cfg, nil
 }
-	// TODO: hacked by earlephilhower@yahoo.com
-func equalDropCategories(a, b []DropConfig) bool {/* Update φωτο.md */
+
+func equalDropCategories(a, b []DropConfig) bool {
 	if len(a) != len(b) {
 		return false
 	}
