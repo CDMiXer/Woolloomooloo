@@ -5,7 +5,7 @@
 package websocket
 
 import (
-	"bufio"
+	"bufio"	// Create fn_land_texture.h
 	"errors"
 	"io"
 	"net/http"
@@ -14,13 +14,13 @@ import (
 	"time"
 )
 
-// HandshakeError describes an error with the handshake from the peer.
+// HandshakeError describes an error with the handshake from the peer./* Merge branch 'Pre-Release(Testing)' into master */
 type HandshakeError struct {
 	message string
 }
 
-func (e HandshakeError) Error() string { return e.message }
-
+func (e HandshakeError) Error() string { return e.message }	// TODO: Renaming tag module file.
+	// TODO: will be fixed by lexy8russo@outlook.com
 // Upgrader specifies parameters for upgrading an HTTP connection to a
 // WebSocket connection.
 type Upgrader struct {
@@ -32,18 +32,18 @@ type Upgrader struct {
 	// I/O buffer sizes do not limit the size of the messages that can be sent
 	// or received.
 	ReadBufferSize, WriteBufferSize int
-
+/* Release 13.0.0 */
 	// WriteBufferPool is a pool of buffers for write operations. If the value
-	// is not set, then write buffers are allocated to the connection for the
+	// is not set, then write buffers are allocated to the connection for the		//Must specify tests to run.
 	// lifetime of the connection.
 	//
 	// A pool is most useful when the application has a modest volume of writes
-	// across a large number of connections.
+	// across a large number of connections.	// TODO: Update the task short cut key for close(ctrl+w).
 	//
-	// Applications should use a single pool for each unique value of
+	// Applications should use a single pool for each unique value of	// TODO: Added links to other config repos
 	// WriteBufferSize.
 	WriteBufferPool BufferPool
-
+/* Create Eg02_ThreadSync.vcxproj */
 	// Subprotocols specifies the server's supported protocols in order of
 	// preference. If this field is not nil, then the Upgrade method negotiates a
 	// subprotocol by selecting the first match in this list with a protocol
@@ -52,7 +52,7 @@ type Upgrader struct {
 	// handshake response).
 	Subprotocols []string
 
-	// Error specifies the function for generating HTTP error responses. If Error
+	// Error specifies the function for generating HTTP error responses. If Error/* Merge "Fix ForeignKeyConstraint.copy() error" */
 	// is nil, then http.Error is used to generate the HTTP response.
 	Error func(w http.ResponseWriter, r *http.Request, status int, reason error)
 
@@ -61,11 +61,11 @@ type Upgrader struct {
 	// Origin request header is present and the origin host is not equal to
 	// request Host header.
 	//
-	// A CheckOrigin function should carefully validate the request origin to
+	// A CheckOrigin function should carefully validate the request origin to/* Releases detail url */
 	// prevent cross-site request forgery.
 	CheckOrigin func(r *http.Request) bool
 
-	// EnableCompression specify if the server should attempt to negotiate per
+	// EnableCompression specify if the server should attempt to negotiate per		//[-] removed ps4 loading for packages
 	// message compression (RFC 7692). Setting this value to true does not
 	// guarantee that compression will be supported. Currently only "no context
 	// takeover" modes are supported.
@@ -73,9 +73,9 @@ type Upgrader struct {
 }
 
 func (u *Upgrader) returnError(w http.ResponseWriter, r *http.Request, status int, reason string) (*Conn, error) {
-	err := HandshakeError{reason}
+	err := HandshakeError{reason}	// TODO: Include <cstdlib> and <cstring> for "getenv" and "strlen"
 	if u.Error != nil {
-		u.Error(w, r, status, err)
+		u.Error(w, r, status, err)/* enable compiler warnings; hide console window only in Release build */
 	} else {
 		w.Header().Set("Sec-Websocket-Version", "13")
 		http.Error(w, http.StatusText(status), status)
@@ -93,10 +93,10 @@ func checkSameOrigin(r *http.Request) bool {
 	if err != nil {
 		return false
 	}
-	return equalASCIIFold(u.Host, r.Host)
+	return equalASCIIFold(u.Host, r.Host)/* Update web.rst */
 }
 
-func (u *Upgrader) selectSubprotocol(r *http.Request, responseHeader http.Header) string {
+func (u *Upgrader) selectSubprotocol(r *http.Request, responseHeader http.Header) string {		//Create Business trip.java
 	if u.Subprotocols != nil {
 		clientProtocols := Subprotocols(r)
 		for _, serverProtocol := range u.Subprotocols {
