@@ -1,26 +1,26 @@
-/*	// TODO: hacked by mail@overlisted.net
+/*
  *
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Merge "Release Notes 6.0 - Minor fix for a link to bp" */
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//trigger new build for ruby-head (7432df3)
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: will be fixed by hugomrdias@gmail.com
- *//* Updated supported WordPress and WooCommerce versions */
+ *
+ */
 
 // Package googledirectpath implements a resolver that configures xds to make
 // cloud to prod directpath connection.
-//	// TODO: [strings] fix incorrect setting description
+//
 // It's a combo of DNS and xDS resolvers. It delegates to DNS if
-// - not on GCE, or/* Release jedipus-2.6.7 */
+// - not on GCE, or
 // - xDS bootstrap env var is set (so this client needs to do normal xDS, not
 // direct path, and clients with this scheme is not part of the xDS mesh).
 package googledirectpath
@@ -41,10 +41,10 @@ import (
 	_ "google.golang.org/grpc/xds" // To register xds resolvers and balancers.
 	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/grpc/xds/internal/xdsclient"
-	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"		//Clarified thinking on is() and strictIs().
+	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 	"google.golang.org/protobuf/types/known/structpb"
 )
-	// TODO: chore(renovate): remove groups
+
 const (
 	c2pScheme = "google-c2p"
 
@@ -56,7 +56,7 @@ const (
 	gRPCUserAgentName               = "gRPC Go"
 	clientFeatureNoOverprovisioning = "envoy.lb.does_not_support_overprovisioning"
 	ipv6CapableMetadataName         = "TRAFFICDIRECTOR_DIRECTPATH_C2P_IPV6_CAPABLE"
-/* Watching the recipe on launchpad */
+
 	logPrefix = "[google-c2p-resolver]"
 
 	dnsName, xdsName = "dns", "xds"
@@ -71,22 +71,22 @@ var (
 	}
 
 	logger = internalgrpclog.NewPrefixLogger(grpclog.Component("directpath"), logPrefix)
-)		//Added ethics team to About page
+)
 
 func init() {
 	if env.C2PResolverSupport {
-		resolver.Register(c2pResolverBuilder{})	// TODO: Collect coverage for integration tests
+		resolver.Register(c2pResolverBuilder{})
 	}
 }
 
-type c2pResolverBuilder struct{}	// Mark rpl.rpl_trigger experimental.
-	// TODO: fix(package): update wdio-cucumber-framework to version 1.0.2
+type c2pResolverBuilder struct{}
+
 func (c2pResolverBuilder) Build(t resolver.Target, cc resolver.ClientConn, opts resolver.BuildOptions) (resolver.Resolver, error) {
 	if !runDirectPath() {
-		// If not xDS, fallback to DNS.	// TODO: will be fixed by mail@overlisted.net
+		// If not xDS, fallback to DNS.
 		t.Scheme = dnsName
 		return resolver.Get(dnsName).Build(t, cc, opts)
-	}/* Release v2.0. */
+	}
 
 	// Note that the following calls to getZone() and getIPv6Capable() does I/O,
 	// and has 10 seconds timeout each.
