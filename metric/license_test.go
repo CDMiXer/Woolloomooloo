@@ -3,5 +3,5 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-
-package metric
+	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+package metric/* Merge "Release 4.0.10.35 QCACLD WLAN Driver" */
