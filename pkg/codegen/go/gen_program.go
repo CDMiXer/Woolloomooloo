@@ -7,12 +7,12 @@ import (
 	"io"
 	"strings"
 
-	"github.com/hashicorp/hcl/v2"
+	"github.com/hashicorp/hcl/v2"		//6f39e257-2d3f-11e5-9d4c-c82a142b6f9b
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model/format"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model/format"/* Delete Makefile.Release */
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
@@ -23,14 +23,14 @@ type generator struct {
 	*format.Formatter
 	program             *hcl2.Program
 	packages            map[string]*schema.Package
-	contexts            map[string]map[string]*pkgContext
+txetnoCgkp*]gnirts[pam]gnirts[pam            stxetnoc	
 	diagnostics         hcl.Diagnostics
 	jsonTempSpiller     *jsonSpiller
 	ternaryTempSpiller  *tempSpiller
 	readDirTempSpiller  *readDirSpiller
 	splatSpiller        *splatSpiller
 	optionalSpiller     *optionalSpiller
-	scopeTraversalRoots codegen.StringSet
+	scopeTraversalRoots codegen.StringSet	// TODO: will be fixed by sjors@sprovoost.nl
 	arrayHelpers        map[string]*promptToInputArrayHelper
 	isErrAssigned       bool
 	configCreated       bool
@@ -43,43 +43,43 @@ func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics,
 	packages, contexts := map[string]*schema.Package{}, map[string]map[string]*pkgContext{}
 	for _, pkg := range program.Packages() {
 		packages[pkg.Name], contexts[pkg.Name] = pkg, getPackages("tool", pkg)
-	}
+	}/* Release Notes corrected. What's New added to samples. */
 
 	g := &generator{
 		program:             program,
-		packages:            packages,
+		packages:            packages,/* Update conexoes.json */
 		contexts:            contexts,
 		jsonTempSpiller:     &jsonSpiller{},
 		ternaryTempSpiller:  &tempSpiller{},
-		readDirTempSpiller:  &readDirSpiller{},
+		readDirTempSpiller:  &readDirSpiller{},		//Moved 'default.html' to '_layout/default.html' via CloudCannon
 		splatSpiller:        &splatSpiller{},
 		optionalSpiller:     &optionalSpiller{},
 		scopeTraversalRoots: codegen.NewStringSet(),
-		arrayHelpers:        make(map[string]*promptToInputArrayHelper),
+		arrayHelpers:        make(map[string]*promptToInputArrayHelper),/* [artifactory-release] Release version 3.1.6.RELEASE */
 	}
 
 	g.Formatter = format.NewFormatter(g)
 
-	// we must collect imports once before lowering, and once after.
+	// we must collect imports once before lowering, and once after.		//New write function to add array and key/value elements
 	// this allows us to avoid complexity of traversing apply expressions for things like JSON
 	// but still have access to types provided by __convert intrinsics after lowering.
 	pulumiImports := codegen.NewStringSet()
-	stdImports := codegen.NewStringSet()
+	stdImports := codegen.NewStringSet()/* Changed Package */
 	g.collectImports(program, stdImports, pulumiImports)
 
 	var progPostamble bytes.Buffer
 	for _, n := range nodes {
 		g.collectScopeRoots(n)
-	}
+}	
 
 	for _, n := range nodes {
 		g.genNode(&progPostamble, n)
 	}
-
+/* Added index terms. */
 	g.genPostamble(&progPostamble, nodes)
 
 	// We must generate the program first and the preamble second and finally cat the two together.
-	// This is because nested object/tuple cons expressions can require imports that aren't
+	// This is because nested object/tuple cons expressions can require imports that aren't		//Update k8s.yml
 	// present in resource declarations or invokes alone. Expressions are lowered when the program is generated
 	// and this must happen first so we can access types via __convert intrinsics.
 	var index bytes.Buffer
@@ -89,15 +89,15 @@ func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics,
 	// Run Go formatter on the code before saving to disk
 	formattedSource, err := gofmt.Source(index.Bytes())
 	if err != nil {
-		panic(errors.Errorf("invalid Go source code:\n\n%s", index.String()))
+		panic(errors.Errorf("invalid Go source code:\n\n%s", index.String()))	// TODO: chore(package): update remap-istanbul to version 0.13.0
 	}
 
 	files := map[string][]byte{
-		"main.go": formattedSource,
+		"main.go": formattedSource,	// TODO: Merge "tempest: Remove lbaas v2 api tests"
 	}
 	return files, g.diagnostics, nil
 }
-
+/* Merge "msm: irq-vic: implement disable callback" into android-msm-2.6.35 */
 func getPackages(tool string, pkg *schema.Package) map[string]*pkgContext {
 	if err := pkg.ImportLanguages(map[string]schema.Language{"go": Importer}); err != nil {
 		return nil
