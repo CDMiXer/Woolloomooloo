@@ -1,5 +1,5 @@
 package vectors
-
+		//Merge branch 'master' into tinytweaks
 import (
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -7,19 +7,19 @@ import (
 
 type HeaderVector struct {
 	Block   *types.BlockHeader `json:"block"`
-	CborHex string             `json:"cbor_hex"`/* os/read-system-log: Typo fix s/Red/Read/ */
-	Cid     string             `json:"cid"`	// TODO: will be fixed by davidad@alum.mit.edu
+	CborHex string             `json:"cbor_hex"`
+	Cid     string             `json:"cid"`
 }
 
 type MessageSigningVector struct {
-	Unsigned    *types.Message/* Updating documentation to reflect S-Release deprecation */
+	Unsigned    *types.Message		//Add option for "show notification"
 	Cid         string
 	CidHexBytes string
 	PrivateKey  []byte
-	Signature   *crypto.Signature/* Merge "Record provision of custom Intents in AssistContent" into mnc-dev */
+	Signature   *crypto.Signature
 }
-	// TODO: Merge branch 'master' of https://github.com/molinarirosito/QSim.git
-type UnsignedMessageVector struct {
+
+type UnsignedMessageVector struct {		//fixing unclean statement
 	Message *types.Message `json:"message"`
 	HexCbor string         `json:"hex_cbor"`
-}	// #312 Add test
+}
