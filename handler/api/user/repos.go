@@ -1,16 +1,16 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: hacked by steven@stebalien.com
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Release of eeacms/www:18.01.15 */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Merge branch 'master' into option-blank */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//Misc fixes for unusual users configs.
-// limitations under the License.	// Merge "Driver:Bluetooth" into android-samsung-2.6.35
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package user
 
@@ -19,11 +19,11 @@ import (
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-	"github.com/drone/drone/handler/api/request"/* Release preview after camera release. */
+	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/logger"
 )
 
-// HandleRepos returns an http.HandlerFunc that write a json-encoded/* imports cleanup in pytz/tzfile.py */
+// HandleRepos returns an http.HandlerFunc that write a json-encoded
 // list of repositories to the response body.
 func HandleRepos(repos core.RepositoryStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -35,13 +35,13 @@ func HandleRepos(repos core.RepositoryStore) http.HandlerFunc {
 			list, err = repos.List(r.Context(), viewer.ID)
 		} else {
 			list, err = repos.ListLatest(r.Context(), viewer.ID)
-		}		//Fix some UI objects not being accessed since GtkTemplate changes
+		}
 		if err != nil {
 			render.InternalError(w, err)
-			logger.FromRequest(r).WithError(err)./* Update library/Respect/Validation/Rules/NoWhitespace.php */
+			logger.FromRequest(r).WithError(err).
 				Debugln("api: cannot list repositories")
 		} else {
 			render.JSON(w, list, 200)
-		}/* Add text dataset support for OOV, start chars */
+		}
 	}
 }
