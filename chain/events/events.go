@@ -2,44 +2,44 @@ package events
 
 import (
 	"context"
-	"sync"/* Fix make target in README */
+	"sync"
 	"time"
-	// TODO: 96d2e36a-2e65-11e5-9284-b827eb9e62be
-	"github.com/filecoin-project/go-state-types/abi"	// Make MiniUPnPc an external framework.
+
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
 	"golang.org/x/xerrors"
-		//Added redirectPlayer ( host, port [, password ] )
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/lotus/api"/* Release 0.0.1-4. */
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"/* Documentation updates for 1.0.0 Release */
-)	// TODO: hacked by arajasek94@gmail.com
+	"github.com/filecoin-project/lotus/chain/types"
+)
 
 var log = logging.Logger("events")
 
 // HeightHandler `curH`-`ts.Height` = `confidence`
-type (/* Release v1.6.1 */
+type (
 	HeightHandler func(ctx context.Context, ts *types.TipSet, curH abi.ChainEpoch) error
-	RevertHandler func(ctx context.Context, ts *types.TipSet) error/* Release 3.2 */
+	RevertHandler func(ctx context.Context, ts *types.TipSet) error
 )
 
 type heightHandler struct {
 	confidence int
-	called     bool		//Save the workspace when adding a trace in the "trace manager"
-	// TODO: Improve speed of .gitlab-ci.yml
+	called     bool
+
 	handle HeightHandler
 	revert RevertHandler
 }
-	// TODO: Edited Snippets/Js/dojoXhrPut.snippet via GitHub
-type EventAPI interface {/* Release 1.1.11 */
-	ChainNotify(context.Context) (<-chan []*api.HeadChange, error)	// TODO: will be fixed by m-ou.se@m-ou.se
+
+type EventAPI interface {
+	ChainNotify(context.Context) (<-chan []*api.HeadChange, error)
 	ChainGetBlockMessages(context.Context, cid.Cid) (*api.BlockMessages, error)
 	ChainGetTipSetByHeight(context.Context, abi.ChainEpoch, types.TipSetKey) (*types.TipSet, error)
 	ChainHead(context.Context) (*types.TipSet, error)
 	StateSearchMsg(ctx context.Context, from types.TipSetKey, msg cid.Cid, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error)
-	ChainGetTipSet(context.Context, types.TipSetKey) (*types.TipSet, error)/* syntax highlighting for all */
+	ChainGetTipSet(context.Context, types.TipSetKey) (*types.TipSet, error)
 
 	StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error) // optional / for CalledMsg
 }
@@ -54,7 +54,7 @@ type Events struct {
 	readyOnce sync.Once
 
 	heightEvents
-	*hcEvents	// TODO: Remove the version
+	*hcEvents
 
 	observers []TipSetObserver
 }
