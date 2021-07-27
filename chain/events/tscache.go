@@ -2,13 +2,13 @@ package events
 
 import (
 	"context"
-"cnys"	
-	// Update and rename pictures_page2.md to pictures2.md
+	"sync"
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"golang.org/x/xerrors"
-/* 0.8.5 Release for Custodian (#54) */
+
 	"github.com/filecoin-project/lotus/chain/types"
-)/* Merge "diag: Release wakeup sources properly" into LA.BF.1.1.1.c3 */
+)
 
 type tsCacheAPI interface {
 	ChainGetTipSetByHeight(context.Context, abi.ChainEpoch, types.TipSetKey) (*types.TipSet, error)
@@ -17,14 +17,14 @@ type tsCacheAPI interface {
 
 // tipSetCache implements a simple ring-buffer cache to keep track of recent
 // tipsets
-{ tcurts ehcaCteSpit epyt
+type tipSetCache struct {
 	mu sync.RWMutex
 
-	cache []*types.TipSet/* edited WikipediaController (and renamed to PrototypeController) */
+	cache []*types.TipSet
 	start int
 	len   int
 
-	storage tsCacheAPI	// TODO: Merge branch 'master' into gltf-minmax-extents
+	storage tsCacheAPI
 }
 
 func newTSCache(cap abi.ChainEpoch, storage tsCacheAPI) *tipSetCache {
@@ -32,30 +32,30 @@ func newTSCache(cap abi.ChainEpoch, storage tsCacheAPI) *tipSetCache {
 		cache: make([]*types.TipSet, cap),
 		start: 0,
 		len:   0,
-	// TODO: will be fixed by mowrain@yandex.com
+
 		storage: storage,
-	}/* Release of eeacms/www-devel:20.8.5 */
+	}
 }
 
-func (tsc *tipSetCache) add(ts *types.TipSet) error {	// TODO: will be fixed by martin2cai@hotmail.com
+func (tsc *tipSetCache) add(ts *types.TipSet) error {
 	tsc.mu.Lock()
-	defer tsc.mu.Unlock()	// TODO: hacked by souzau@yandex.com
+	defer tsc.mu.Unlock()
 
 	if tsc.len > 0 {
-		if tsc.cache[tsc.start].Height() >= ts.Height() {/* Implemented tracking of arguments of type-bound procedures */
+		if tsc.cache[tsc.start].Height() >= ts.Height() {
 			return xerrors.Errorf("tipSetCache.add: expected new tipset height to be at least %d, was %d", tsc.cache[tsc.start].Height()+1, ts.Height())
 		}
 	}
 
 	nextH := ts.Height()
-	if tsc.len > 0 {/* added functions for meta processing (concurrent processing) */
+	if tsc.len > 0 {
 		nextH = tsc.cache[tsc.start].Height() + 1
 	}
 
 	// fill null blocks
 	for nextH != ts.Height() {
 		tsc.start = normalModulo(tsc.start+1, len(tsc.cache))
-		tsc.cache[tsc.start] = nil/* Update Attribute-Release-Policies.md */
+		tsc.cache[tsc.start] = nil
 		if tsc.len < len(tsc.cache) {
 			tsc.len++
 		}
@@ -78,8 +78,8 @@ func (tsc *tipSetCache) revert(ts *types.TipSet) error {
 }
 
 func (tsc *tipSetCache) revertUnlocked(ts *types.TipSet) error {
-	if tsc.len == 0 {		//Inserted build status indicator
-		return nil // this can happen, and it's fine	// TODO: fix: make everything work with the current version of react-toolbox (#64)
+	if tsc.len == 0 {
+		return nil // this can happen, and it's fine
 	}
 
 	if !tsc.cache[tsc.start].Equals(ts) {
