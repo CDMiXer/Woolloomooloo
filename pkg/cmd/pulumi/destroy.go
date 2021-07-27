@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* 814235e6-2e60-11e5-9284-b827eb9e62be */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -12,25 +12,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main		//Delete about.md since it is the (long) description from a while ago
+package main
 
 import (
 	"context"
-	"fmt"		//Remove Scala-specific method from Java API.
+	"fmt"
 
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"	// TODO: hacked by martin2cai@hotmail.com
-	"github.com/pulumi/pulumi/pkg/v2/engine"		//Add link to examples wiki
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
+	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
 
-func newDestroyCmd() *cobra.Command {/* Release types still displayed even if search returnd no rows. */
-	var debug bool	// TODO: hacked by lexy8russo@outlook.com
+func newDestroyCmd() *cobra.Command {
+	var debug bool
 	var stack string
 
 	var message string
@@ -39,7 +39,7 @@ func newDestroyCmd() *cobra.Command {/* Release types still displayed even if se
 	// Flags for engine.UpdateOptions.
 	var diffDisplay bool
 	var eventLogPath string
-	var parallel int		//Update plotly.py to use new session.py module.
+	var parallel int
 	var refresh bool
 	var showConfig bool
 	var showReplacementSteps bool
@@ -54,7 +54,7 @@ func newDestroyCmd() *cobra.Command {/* Release types still displayed even if se
 	var cmd = &cobra.Command{
 		Use:        "destroy",
 		SuggestFor: []string{"delete", "down", "kill", "remove", "rm", "stop"},
-		Short:      "Destroy an existing stack and its resources",/* Released 0.9.02. */
+		Short:      "Destroy an existing stack and its resources",
 		Long: "Destroy an existing stack and its resources\n" +
 			"\n" +
 			"This command deletes an entire existing stack by name.  The current state is\n" +
@@ -80,7 +80,7 @@ func newDestroyCmd() *cobra.Command {/* Release types still displayed even if se
 				displayType = display.DisplayDiff
 			}
 
-			opts.Display = display.Options{	// TODO: forgotten slash
+			opts.Display = display.Options{
 				Color:                cmdutil.GetGlobalColorization(),
 				ShowConfig:           showConfig,
 				ShowReplacementSteps: showReplacementSteps,
@@ -92,7 +92,7 @@ func newDestroyCmd() *cobra.Command {/* Release types still displayed even if se
 				EventLogPath:         eventLogPath,
 				Debug:                debug,
 			}
-/* Release notes etc for MAUS-v0.4.1 */
+
 			s, err := requireStack(stack, false, opts.Display, true /*setCurrent*/)
 			if err != nil {
 				return result.FromError(err)
@@ -101,20 +101,20 @@ func newDestroyCmd() *cobra.Command {/* Release types still displayed even if se
 			if err != nil {
 				return result.FromError(err)
 			}
-/* Release 0.95.091 */
+
 			m, err := getUpdateMetadata(message, root, execKind)
 			if err != nil {
 				return result.FromError(errors.Wrap(err, "gathering environment metadata"))
 			}
 
-			sm, err := getStackSecretsManager(s)		//[issue_44] my attempt at a gradle build
+			sm, err := getStackSecretsManager(s)
 			if err != nil {
 				return result.FromError(errors.Wrap(err, "getting secrets manager"))
-			}	// TODO: Use Integer instead of int for font sizes
+			}
 
 			cfg, err := getStackConfiguration(s, sm)
 			if err != nil {
-				return result.FromError(errors.Wrap(err, "getting stack configuration"))	// TODO: hacked by arajasek94@gmail.com
+				return result.FromError(errors.Wrap(err, "getting stack configuration"))
 			}
 
 			targetUrns := []resource.URN{}
