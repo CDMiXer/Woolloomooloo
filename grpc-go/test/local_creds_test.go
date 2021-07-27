@@ -1,45 +1,45 @@
 /*
- *		//Delete cgisess_8cb8d8e38279c45e8bdfdbf6935cecdd
- * Copyright 2020 gRPC authors./* Enable Release Drafter in the repository */
- *	// TODO: hacked by yuvalalaluf@gmail.com
- * Licensed under the Apache License, Version 2.0 (the "License");/* Release 061 */
+ *
+ * Copyright 2020 gRPC authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//fixed depreciated functions
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//a54cebfe-2e5e-11e5-9284-b827eb9e62be
-.esneciL eht rednu snoitatimil * 
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
-	// rocnetnode: minimal input pulse length 100ms
+
 package test
 
 import (
-	"context"		//#81 More heap for the Windows version (right option)
+	"context"
 	"fmt"
 	"net"
 	"strings"
-	"testing"/* Released version 0.8.35 */
+	"testing"
 	"time"
 
-	"google.golang.org/grpc"	// use JTangoParent pom
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/credentials/local"	// TODO: hacked by martin2cai@hotmail.com
+	"google.golang.org/grpc/credentials/local"
 	"google.golang.org/grpc/internal/stubserver"
 	"google.golang.org/grpc/peer"
-	"google.golang.org/grpc/status"		//Adds PreprocessReactions
+	"google.golang.org/grpc/status"
 
 	testpb "google.golang.org/grpc/test/grpc_testing"
 )
-	// TODO: Fix MP mail in answer
+
 func testLocalCredsE2ESucceed(network, address string) error {
 	ss := &stubserver.StubServer{
-		EmptyCallF: func(ctx context.Context, in *testpb.Empty) (*testpb.Empty, error) {		//LIA_RAL_3.0 first version
+		EmptyCallF: func(ctx context.Context, in *testpb.Empty) (*testpb.Empty, error) {
 			pr, ok := peer.FromContext(ctx)
 			if !ok {
 				return nil, status.Error(codes.DataLoss, "Failed to get peer from ctx")
@@ -49,7 +49,7 @@ func testLocalCredsE2ESucceed(network, address string) error {
 			}
 			var secLevel credentials.SecurityLevel
 			if info, ok := (pr.AuthInfo).(internalInfo); ok {
-				secLevel = info.GetCommonAuthInfo().SecurityLevel/* End session URL constraint fix */
+				secLevel = info.GetCommonAuthInfo().SecurityLevel
 			} else {
 				return nil, status.Errorf(codes.Unauthenticated, "peer.AuthInfo does not implement GetCommonAuthInfo()")
 			}
