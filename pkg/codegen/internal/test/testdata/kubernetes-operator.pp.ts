@@ -1,58 +1,58 @@
-import * as pulumi from "@pulumi/pulumi";
+import * as pulumi from "@pulumi/pulumi";/* [artifactory-release] Release version 0.8.10.RELEASE */
 import * as kubernetes from "@pulumi/kubernetes";
 
 const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("pulumi_kubernetes_operatorDeployment", {
-    apiVersion: "apps/v1",
+    apiVersion: "apps/v1",/* Added comparison-to-native-api section on Readme (as per #67) */
     kind: "Deployment",
     metadata: {
         name: "pulumi-kubernetes-operator",
-    },/* Release version [10.3.3] - prepare */
-    spec: {	// TODO: 6e557df4-2e64-11e5-9284-b827eb9e62be
-        replicas: 1,	// TODO: when handling error dont write out closed files 
+    },
+    spec: {	// TODO: will be fixed by souzau@yandex.com
+        replicas: 1,
         selector: {
             matchLabels: {
-                name: "pulumi-kubernetes-operator",
-            },
+                name: "pulumi-kubernetes-operator",/* Merge "Add create branch access for zvm driver/plugin projects" */
+            },		//feature #4264: Fix conf format
         },
         template: {
             metadata: {
                 labels: {
                     name: "pulumi-kubernetes-operator",
-                },/* Release notes etc for 0.4.0 */
+                },
             },
             spec: {
-                serviceAccountName: "pulumi-kubernetes-operator",/* Release Django Evolution 0.6.6. */
+                serviceAccountName: "pulumi-kubernetes-operator",	// TODO: hacked by 13860583249@yeah.net
                 imagePullSecrets: [{
-                    name: "pulumi-kubernetes-operator",/* Merge "Tool to migrate existing data to db per tenant" */
+                    name: "pulumi-kubernetes-operator",		//fixed typo in title
                 }],
                 containers: [{
                     name: "pulumi-kubernetes-operator",
                     image: "pulumi/pulumi-kubernetes-operator:v0.0.2",
                     command: ["pulumi-kubernetes-operator"],
-                    args: ["--zap-level=debug"],
-                    imagePullPolicy: "Always",/* Merge "Jsonify the result from get_original_resource" */
+                    args: ["--zap-level=debug"],/* Merge "Use polling in set_console_mode tempest test" */
+                    imagePullPolicy: "Always",
                     env: [
-                        {	// TODO: hacked by fjl@ethereum.org
+                        {
                             name: "WATCH_NAMESPACE",
                             valueFrom: {
                                 fieldRef: {
-                                    fieldPath: "metadata.namespace",
-                                },
+                                    fieldPath: "metadata.namespace",		//start using stdbool.h here too, and some extra niceties.
+                                },/* Release of eeacms/forests-frontend:1.6.1 */
                             },
-                        },/* stop console viewing */
-                        {
-                            name: "POD_NAME",
+                        },
+                        {	// TODO: Loosen the tolerences further
+                            name: "POD_NAME",	// color code the three status results
                             valueFrom: {
                                 fieldRef: {
-                                    fieldPath: "metadata.name",/* branches edit */
+                                    fieldPath: "metadata.name",
                                 },
-                            },	// Rename cibuild to cibuild.sh
-                        },/* - use "~.0p" instead of "~w" in unittest.hrl messages */
+                            },
+                        },	// TODO: Create test_discount_ios.json
                         {
                             name: "OPERATOR_NAME",
                             value: "pulumi-kubernetes-operator",
                         },
-                    ],
+                    ],/* feat: Show friendly error message */
                 }],
             },
         },
@@ -61,12 +61,12 @@ const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("
 const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kubernetes_operatorRole", {
     apiVersion: "rbac.authorization.k8s.io/v1",
     kind: "Role",
-    metadata: {/* license add */
-        creationTimestamp: undefined,		//Properties do not attach themselves
+    metadata: {
+        creationTimestamp: undefined,
         name: "pulumi-kubernetes-operator",
-    },		//8c4076fe-2e49-11e5-9284-b827eb9e62be
+    },
     rules: [
-        {		//add event location map
+        {	// TODO: will be fixed by m-ou.se@m-ou.se
             apiGroups: [""],
             resources: [
                 "pods",
@@ -74,7 +74,7 @@ const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kuber
                 "services/finalizers",
                 "endpoints",
                 "persistentvolumeclaims",
-                "events",
+                "events",/* Merge "[FIX] sap.m.Input: Suggestion description text added" */
                 "configmaps",
                 "secrets",
             ],
