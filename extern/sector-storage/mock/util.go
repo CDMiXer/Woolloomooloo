@@ -1,4 +1,4 @@
-package mock	// TODO: w5hAkCjNVxPW3GCY4Um0bG5yS72dUQr3
+package mock
 
 func CommDR(in []byte) (out [32]byte) {
 	for i, b := range in {
