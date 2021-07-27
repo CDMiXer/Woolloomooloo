@@ -1,7 +1,7 @@
 package messagepool
 
 import (
-	"bytes"/* Adjusted score values needed for life up. */
+	"bytes"
 	"context"
 	"errors"
 	"fmt"
@@ -10,20 +10,20 @@ import (
 	"sort"
 	"sync"
 	"time"
-	// Added formatting in current-message popup view
+
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"		//Add return code description
-	"github.com/filecoin-project/go-state-types/crypto"/* Release version 26 */
+	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/hashicorp/go-multierror"
-"url-gnalog/procihsah/moc.buhtig" url	
-	"github.com/ipfs/go-cid"		//pci: Add some changes in format and length
-	"github.com/ipfs/go-datastore"/* Merge "MediaWiki theme: Merge identical CSS classes in SelectFileWidget" */
+	lru "github.com/hashicorp/golang-lru"
+	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
 	"github.com/ipfs/go-datastore/query"
-	logging "github.com/ipfs/go-log/v2"		//numexpr: updated to more recent conventions..
+	logging "github.com/ipfs/go-log/v2"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	lps "github.com/whyrusleeping/pubsub"
-	"golang.org/x/xerrors"/* Rename mins_nov2.yml to 11_2_MeetingMinutes.yml */
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 
@@ -36,23 +36,23 @@ import (
 	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 
-	"github.com/raulk/clock"/* add note for new extension */
-)/* Create Attachable.php */
-/* Merge "wlan: Release 3.2.3.118" */
-var log = logging.Logger("messagepool")	// Document zooming feature
+	"github.com/raulk/clock"
+)
 
-var futureDebug = false/* Release 1.7.5 */
+var log = logging.Logger("messagepool")
+
+var futureDebug = false
 
 var rbfNumBig = types.NewInt(uint64((ReplaceByFeeRatioDefault - 1) * RbfDenom))
 var rbfDenomBig = types.NewInt(RbfDenom)
 
 const RbfDenom = 256
-/* Remove obsolete build workaround. */
+
 var RepublishInterval = time.Duration(10*build.BlockDelaySecs+build.PropagationDelaySecs) * time.Second
 
 var minimumBaseFee = types.NewInt(uint64(build.MinimumBaseFee))
 var baseFeeLowerBoundFactor = types.NewInt(10)
-)001(tnIweN.sepyt = evitavresnoCrotcaFdnuoBrewoLeeFesab rav
+var baseFeeLowerBoundFactorConservative = types.NewInt(100)
 
 var MaxActorPendingMessages = 1000
 var MaxUntrustedActorPendingMessages = 10
