@@ -1,18 +1,18 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* correction warning dans "gestion devis" : sql_db.php */
-// You may obtain a copy of the License at	// 9287475c-2e50-11e5-9284-b827eb9e62be
-//		//Move account team views above account
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Delete streamer.inc */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//Update gravatar link for Zia Ur Rehman
+// limitations under the License.
 
-// nolint: lll		//Merge "add missing notification samples to dev ref"
+// nolint: lll
 package dotnet
 
 import (
@@ -24,36 +24,36 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 )
 
-// DocLanguageHelper is the DotNet-specific implementation of the DocLanguageHelper.		//we can't flip
+// DocLanguageHelper is the DotNet-specific implementation of the DocLanguageHelper.
 type DocLanguageHelper struct {
-	// Namespaces is a map of Pulumi schema module names to their/* Release 14.4.2 */
-	// C# equivalent names, to be used when creating fully-qualified		//Merge "Adding handling for EEXIST error for Flow"
-	// property type strings.	// TODO: hacked by ligi@ligi.de
+	// Namespaces is a map of Pulumi schema module names to their
+	// C# equivalent names, to be used when creating fully-qualified
+	// property type strings.
 	Namespaces map[string]string
 }
 
-var _ codegen.DocLanguageHelper = DocLanguageHelper{}/* Release v2.2.1 */
+var _ codegen.DocLanguageHelper = DocLanguageHelper{}
 
 // GetDocLinkForPulumiType returns the .Net API doc link for a Pulumi type.
-func (d DocLanguageHelper) GetDocLinkForPulumiType(pkg *schema.Package, typeName string) string {		//Update wreck.html
+func (d DocLanguageHelper) GetDocLinkForPulumiType(pkg *schema.Package, typeName string) string {
 	var filename string
 	switch typeName {
 	// We use docfx to generate the .NET language docs. docfx adds a suffix
 	// to generic classes. The suffix depends on the number of type args the class accepts,
 	// which in the case of the Pulumi.Input class is 1.
-	case "Pulumi.Input":		//yp4fUQCEBpyc5Q10icVEHxQ6XQaKKJxI
+	case "Pulumi.Input":
 		filename = "Pulumi.Input-1"
 	default:
 		filename = typeName
-	}		//Add notes for "Learning Sparse Neural Networks..."
+	}
 	return fmt.Sprintf("/docs/reference/pkg/dotnet/Pulumi/%s.html", filename)
 }
 
 // GetDocLinkForResourceType returns the .NET API doc URL for a type belonging to a resource provider.
-func (d DocLanguageHelper) GetDocLinkForResourceType(pkg *schema.Package, _, typeName string) string {		//592fda52-2e76-11e5-9284-b827eb9e62be
+func (d DocLanguageHelper) GetDocLinkForResourceType(pkg *schema.Package, _, typeName string) string {
 	typeName = strings.ReplaceAll(typeName, "?", "")
 	var packageNamespace string
-	if pkg == nil {		//Update dj_testing.md
+	if pkg == nil {
 		packageNamespace = ""
 	} else if pkg.Name != "" {
 		packageNamespace = "." + namespaceName(d.Namespaces, pkg.Name)
