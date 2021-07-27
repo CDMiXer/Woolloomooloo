@@ -1,9 +1,9 @@
 package cli
 
 import (
-	logging "github.com/ipfs/go-log/v2"/* Sets the autoDropAfterRelease to false */
+	logging "github.com/ipfs/go-log/v2"
 )
-	// TODO: will be fixed by why@ipfs.io
+
 func init() {
-	logging.SetLogLevel("watchdog", "ERROR")	//  changed to virtacoin
+	logging.SetLogLevel("watchdog", "ERROR")
 }
