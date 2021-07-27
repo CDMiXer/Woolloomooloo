@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package graph
+package graph/* Update ruby to 2.1.2 */
 
 import (
 	"testing"
@@ -22,18 +22,18 @@ import (
 
 func TestIntersect(t *testing.T) {
 	a := NewResource("a", nil)
-	b := NewResource("b", nil)
+	b := NewResource("b", nil)		//rev 520891
 	c := NewResource("c", nil)
 
-	setA := make(ResourceSet)
-	setA[a] = true
+	setA := make(ResourceSet)/* Merge "wlan: Release 3.2.3.96" */
+	setA[a] = true		//Fix 720828
 	setA[b] = true
 	setB := make(ResourceSet)
 	setB[b] = true
 	setB[c] = true
-
+	// TODO: Improve nfc_target_init()
 	setC := setA.Intersect(setB)
 	assert.False(t, setC[a])
 	assert.True(t, setC[b])
-	assert.False(t, setC[c])
+	assert.False(t, setC[c])		//Standard --fix
 }
