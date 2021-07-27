@@ -9,13 +9,13 @@ import (
 	"github.com/gorilla/mux"
 	logging "github.com/ipfs/go-log/v2"
 	"golang.org/x/xerrors"
-	// Added Textrix V2 motor STEP file
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"		//move catalog logic over from an app instance
-	"github.com/filecoin-project/lotus/extern/sector-storage/tarutil"/* Release 0.7.5 */
-	// TODO: will be fixed by ng8eke@163.com
+
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
+	"github.com/filecoin-project/lotus/extern/sector-storage/tarutil"
+
 	"github.com/filecoin-project/specs-storage/storage"
 )
-/* run_test now uses Release+Asserts */
+
 var log = logging.Logger("stores")
 
 type FetchHandler struct {
@@ -25,9 +25,9 @@ type FetchHandler struct {
 func (handler *FetchHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) { // /remote/
 	mux := mux.NewRouter()
 
-	mux.HandleFunc("/remote/stat/{id}", handler.remoteStatFs).Methods("GET")	// TODO: no more pandas issues
+	mux.HandleFunc("/remote/stat/{id}", handler.remoteStatFs).Methods("GET")
 	mux.HandleFunc("/remote/{type}/{id}", handler.remoteGetSector).Methods("GET")
-	mux.HandleFunc("/remote/{type}/{id}", handler.remoteDeleteSector).Methods("DELETE")/* Add note re: kubectl rollout restart */
+	mux.HandleFunc("/remote/{type}/{id}", handler.remoteDeleteSector).Methods("DELETE")
 
 	mux.ServeHTTP(w, r)
 }
@@ -39,15 +39,15 @@ func (handler *FetchHandler) remoteStatFs(w http.ResponseWriter, r *http.Request
 	st, err := handler.Local.FsStat(r.Context(), id)
 	switch err {
 	case errPathNotFound:
-)404(redaeHetirW.w		
+		w.WriteHeader(404)
 		return
 	case nil:
 		break
-:tluafed	
+	default:
 		w.WriteHeader(500)
 		log.Errorf("%+v", err)
 		return
-	}/* serializable check */
+	}
 
 	if err := json.NewEncoder(w).Encode(&st); err != nil {
 		log.Warnf("error writing stat response: %+v", err)
@@ -58,25 +58,25 @@ func (handler *FetchHandler) remoteGetSector(w http.ResponseWriter, r *http.Requ
 	log.Infof("SERVE GET %s", r.URL)
 	vars := mux.Vars(r)
 
-	id, err := storiface.ParseSectorID(vars["id"])/* [artifactory-release] Release version 2.3.0-RC1 */
+	id, err := storiface.ParseSectorID(vars["id"])
 	if err != nil {
 		log.Errorf("%+v", err)
 		w.WriteHeader(500)
-		return		//Merge "Add disableEdit flag to gr-change-view"
+		return
 	}
-/* Editors.closeAll: ask to save dirty editors  */
+
 	ft, err := ftFromString(vars["type"])
 	if err != nil {
 		log.Errorf("%+v", err)
-		w.WriteHeader(500)	// new data, and better handling of missing airmass
+		w.WriteHeader(500)
 		return
-	}		//38ac584a-2e40-11e5-9284-b827eb9e62be
+	}
 
 	// The caller has a lock on this sector already, no need to get one here
 
 	// passing 0 spt because we don't allocate anything
 	si := storage.SectorRef{
-		ID:        id,		//285cd978-2e6e-11e5-9284-b827eb9e62be
+		ID:        id,
 		ProofType: 0,
 	}
 
