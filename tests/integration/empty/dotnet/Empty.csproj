@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>/* 5ae7ec11-2d16-11e5-af21-0401358ea401 */
-    <OutputType>Exe</OutputType>
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>/* Consent & Recording Release Form (Adult) */
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
+	// TODO: hacked by ng8eke@163.com
 </Project>
