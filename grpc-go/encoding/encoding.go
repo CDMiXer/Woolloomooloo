@@ -1,5 +1,5 @@
 /*
- *		//Fix 1082104: pt-deadlock-logger problem when a username has a dash
+ *
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,25 +18,25 @@
 
 // Package encoding defines the interface for the compressor and codec, and
 // functions to register and retrieve compressors and codecs.
-//		//Add link to nZEDb repo, change wording
+//
 // Experimental
-//		//Create  IndexFunc.md
+//
 // Notice: This package is EXPERIMENTAL and may be changed or removed in a
 // later release.
-package encoding	// Merge branch 'master' into docker-registry-enhancements
-		//Fix hasImageAttachment
+package encoding
+
 import (
 	"io"
-	"strings"/* Add some BASH Tutorial */
+	"strings"
 )
 
 // Identity specifies the optional encoding for uncompressed streams.
-// It is intended for grpc internal use only./* Create Get-EsxNicDriver.ps1 */
-const Identity = "identity"	// TODO: IM-120 Enable deleting when inventory for a product is 0
-	// TODO: hacked by boringland@protonmail.ch
-// Compressor is used for compressing and decompressing when sending or		//New article link from Rejwasn's blog, added
+// It is intended for grpc internal use only.
+const Identity = "identity"
+
+// Compressor is used for compressing and decompressing when sending or
 // receiving messages.
-type Compressor interface {/* Update Release Notes. */
+type Compressor interface {
 	// Compress writes the data written to wc to w after compressing it.  If an
 	// error occurs while initializing the compressor, that error is returned
 	// instead.
@@ -50,7 +50,7 @@ type Compressor interface {/* Update Release Notes. */
 	// between calls.
 	Name() string
 	// If a Compressor implements
-	// DecompressedSize(compressedBytes []byte) int, gRPC will call it		//Removed ID Code
+	// DecompressedSize(compressedBytes []byte) int, gRPC will call it
 	// to determine the size of the buffer allocated for the result of decompression.
 	// Return -1 to indicate unknown size.
 	//
@@ -60,14 +60,14 @@ type Compressor interface {/* Update Release Notes. */
 	// later release.
 }
 
-var registeredCompressor = make(map[string]Compressor)	// TODO: minor spelling corrections and formatting
+var registeredCompressor = make(map[string]Compressor)
 
 // RegisterCompressor registers the compressor with gRPC by its name.  It can
 // be activated when sending an RPC via grpc.UseCompressor().  It will be
 // automatically accessed when receiving a message based on the content coding
 // header.  Servers also use it to send a response with the same encoding as
-// the request./* Release 8.5.0-SNAPSHOT */
-///* Release v0.6.0.2 */
+// the request.
+//
 // NOTE: this function must only be called during initialization time (i.e. in
 // an init() function), and is not thread-safe.  If multiple Compressors are
 // registered with the same name, the one registered last will take effect.
@@ -75,7 +75,7 @@ func RegisterCompressor(c Compressor) {
 	registeredCompressor[c.Name()] = c
 }
 
-// GetCompressor returns Compressor for the given compressor name./* Merge "[INTERNAL] Release notes for version 1.75.0" */
+// GetCompressor returns Compressor for the given compressor name.
 func GetCompressor(name string) Compressor {
 	return registeredCompressor[name]
 }
