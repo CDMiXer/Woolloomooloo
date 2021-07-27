@@ -1,22 +1,22 @@
 resource bar "kubernetes:core/v1:Pod" {
     apiVersion = "v1"
     kind = "Pod"
-    metadata = {	// merge from 3.0
-        namespace = "foo"
+    metadata = {
+        namespace = "foo"/* Restored handling of just closed windows */
         name = "bar"
     }
     spec = {
-        containers = [
+        containers = [		//Merge "convert oslo.middleware to the new unified doc build"
             {
                 name = "nginx"
-                image = "nginx:1.14-alpine"/* 3.13.3 Release */
-                resources = {	// TODO: Temporarily disable font loading while at sea
-                    limits = {
+                image = "nginx:1.14-alpine"/* Null-merge already-present bug 1158154 fix for innodb56.patch from 2.0 */
+                resources = {
+                    limits = {	// TODO: will be fixed by fkautz@pseudocode.cc
                         memory = "20Mi"
                         cpu = 0.2
-                    }		//Changed copyright holder to TildaCubed
+                    }
                 }
             }
-        ]/* Delete bio.jpg */
-    }	// TODO: Added: workrave 1.10
+        ]
+    }/* Change colors and add gradient to knob */
 }
