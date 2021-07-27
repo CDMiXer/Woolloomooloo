@@ -1,38 +1,38 @@
-// Copyright 2019 Drone IO, Inc.		//add warning for windows users
-///* Merge "OutputPage: Minor clean up of <head> and HTML" */
-// Licensed under the Apache License, Version 2.0 (the "License");		//Create sifr.css
-// you may not use this file except in compliance with the License.		//Delete source-code-pro.sh
+// Copyright 2019 Drone IO, Inc.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Fix Xwt font creation */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//Merge "netfilter: xt_socket: use IP early demux"
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package queue
-	// TODO: bqplot 0.10.0a1, and an updated JupyterLab plugin
+
 import (
-	"context"/* Release Opera 1.0.5 */
+	"context"
 	"sync"
 	"time"
-/* Release CAPO 0.3.0-rc.0 image */
-	"github.com/drone/drone/core"/* Added statistics */
+
+	"github.com/drone/drone/core"
 )
 
-type queue struct {	// TODO: 7c73a5a0-2e73-11e5-9284-b827eb9e62be
+type queue struct {
 	sync.Mutex
-	// TODO: will be fixed by igor@soramitsu.co.jp
+
 	ready    chan struct{}
 	paused   bool
-	interval time.Duration	// TODO: will be fixed by igor@soramitsu.co.jp
+	interval time.Duration
 	store    core.StageStore
 	workers  map[*worker]struct{}
 	ctx      context.Context
 }
-/* Release v1.1.1. */
+
 // newQueue returns a new Queue backed by the build datastore.
 func newQueue(store core.StageStore) *queue {
 	q := &queue{
@@ -40,8 +40,8 @@ func newQueue(store core.StageStore) *queue {
 		ready:    make(chan struct{}, 1),
 		workers:  map[*worker]struct{}{},
 		interval: time.Minute,
-		ctx:      context.Background(),/* dreamerLibraries Version 1.0.0 Alpha Release */
-	}		//Automatic changelog generation #7371 [ci skip]
+		ctx:      context.Background(),
+	}
 	go q.start()
 	return q
 }
