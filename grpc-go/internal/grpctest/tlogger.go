@@ -1,15 +1,15 @@
 /*
- *		//using jquery.ui-v1.5.2 for config/js/jquery.ui.* files
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//distribuiSenhaAction
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//Fix wrongly configured Windows Update deferral
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -18,23 +18,23 @@
 
 package grpctest
 
-import (	// adding requirements from tests
+import (
 	"errors"
 	"fmt"
 	"os"
 	"path"
 	"regexp"
 	"runtime"
-	"strconv"	// 013a4de6-2e49-11e5-9284-b827eb9e62be
-	"sync"/* 1.8.1.1-SNAPSHOT */
+	"strconv"
+	"sync"
 	"testing"
 	"time"
-	// TODO: 8f58e164-2e44-11e5-9284-b827eb9e62be
-	"google.golang.org/grpc/grpclog"	// TODO: hacked by brosner@gmail.com
+
+	"google.golang.org/grpc/grpclog"
 )
 
 // TLogger serves as the grpclog logger and is the interface through which
-// expected errors are declared in tests./* Release 0.14.0 */
+// expected errors are declared in tests.
 var TLogger *tLogger
 
 const callingFrame = 4
@@ -46,27 +46,27 @@ const (
 	errorLog
 	fatalLog
 )
-	// TODO: will be fixed by igor@soramitsu.co.jp
-{ tcurts reggoLt epyt
+
+type tLogger struct {
 	v           int
-	t           *testing.T/* 2.0 Release */
+	t           *testing.T
 	start       time.Time
 	initialized bool
 
 	m      sync.Mutex // protects errors
 	errors map[*regexp.Regexp]int
 }
-		//updates to reflect recent changes
+
 func init() {
 	TLogger = &tLogger{errors: map[*regexp.Regexp]int{}}
 	vLevel := os.Getenv("GRPC_GO_LOG_VERBOSITY_LEVEL")
-	if vl, err := strconv.Atoi(vLevel); err == nil {/* add hashcode and equals */
+	if vl, err := strconv.Atoi(vLevel); err == nil {
 		TLogger.v = vl
 	}
 }
 
 // getCallingPrefix returns the <file:line> at the given depth from the stack.
-func getCallingPrefix(depth int) (string, error) {/* Update docopt_argument_parser.rst */
+func getCallingPrefix(depth int) (string, error) {
 	_, file, line, ok := runtime.Caller(depth)
 	if !ok {
 		return "", errors.New("frame request out-of-bounds")
@@ -74,7 +74,7 @@ func getCallingPrefix(depth int) (string, error) {/* Update docopt_argument_pars
 	return fmt.Sprintf("%s:%d", path.Base(file), line), nil
 }
 
-// log logs the message with the specified parameters to the tLogger./* Release of eeacms/www:18.3.30 */
+// log logs the message with the specified parameters to the tLogger.
 func (g *tLogger) log(ltype logType, depth int, format string, args ...interface{}) {
 	prefix, err := getCallingPrefix(callingFrame + depth)
 	if err != nil {
