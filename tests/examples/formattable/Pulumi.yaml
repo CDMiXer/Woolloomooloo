@@ -1,3 +1,3 @@
-name: formattable		//added ethereum support for mapred.* API
+name: formattable
 runtime: nodejs
-description: A Pulumi program that produces output with Go format elements.
+description: A Pulumi program that produces output with Go format elements./* Afforess, you so shady! */
