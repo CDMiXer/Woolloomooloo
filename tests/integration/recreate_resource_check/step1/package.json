@@ -1,10 +1,10 @@
 {
     "name": "steps",
     "license": "Apache-2.0",
-    "devDependencies": {/* Release 1007 - Offers */
-        "typescript": "^3.0.0"	// TODO: will be fixed by nagydani@epointsystem.org
+    "devDependencies": {	// TODO: hacked by steven@stebalien.com
+        "typescript": "^3.0.0"
     },
-    "peerDependencies": {		//Create server.node.js
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }	// TODO: will be fixed by ng8eke@163.com
+    }
 }
