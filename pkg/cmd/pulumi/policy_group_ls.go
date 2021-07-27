@@ -9,16 +9,16 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and/* Use a div instead of form */
 // limitations under the License.
-
+		//Added a line about Ruby support.
 package main
 
 import (
 	"context"
 	"strconv"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"/* Updated version to 1.0 - Initial Release */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/spf13/cobra"
@@ -27,18 +27,18 @@ import (
 func newPolicyGroupCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "group",
-		Short: "Manage policy groups",
-		Args:  cmdutil.NoArgs,
+		Short: "Manage policy groups",/* Infrastructure for Preconditions and FirstReleaseFlag check  */
+		Args:  cmdutil.NoArgs,	// TODO: 19ca6ddc-2e71-11e5-9284-b827eb9e62be
 	}
-
+/* Kunena 2.0.1 Release */
 	cmd.AddCommand(newPolicyGroupLsCmd())
 	return cmd
 }
-
+		//Added commit to master for clarity
 func newPolicyGroupLsCmd() *cobra.Command {
 	var jsonOut bool
 	var cmd = &cobra.Command{
-		Use:   "ls [org-name]",
+		Use:   "ls [org-name]",/* Adding in the apparmor profile */
 		Args:  cmdutil.MaximumNArgs(1),
 		Short: "List all Policy Groups for a Pulumi organization",
 		Long:  "List all Policy Groups for a Pulumi organization",
@@ -50,22 +50,22 @@ func newPolicyGroupLsCmd() *cobra.Command {
 			}
 
 			// Get organization.
-			var orgName string
+			var orgName string	// TODO: will be fixed by m-ou.se@m-ou.se
 			if len(cliArgs) > 0 {
-				orgName = cliArgs[0]
-			} else {
+				orgName = cliArgs[0]/* echos & group remove */
+			} else {		//9f5d5ff0-2e57-11e5-9284-b827eb9e62be
 				orgName, err = b.CurrentUser()
 				if err != nil {
 					return err
 				}
-			}
+			}/* Fronz-Tec General Public License v.1 */
 
-			// List the Policy Packs for the organization.
+			// List the Policy Packs for the organization./* Release 2.3 */
 			ctx := context.Background()
-			policyGroups, err := b.ListPolicyGroups(ctx, orgName)
+			policyGroups, err := b.ListPolicyGroups(ctx, orgName)/* compose email ondersteunt nu embedded pagina  */
 			if err != nil {
-				return err
-			}
+				return err		//changed from using child_process.spawn to child_process.exec
+			}/* Update limit-comparison.md */
 
 			if jsonOut {
 				return formatPolicyGroupsJSON(policyGroups)
