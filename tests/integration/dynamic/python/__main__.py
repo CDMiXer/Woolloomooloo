@@ -1,17 +1,17 @@
-# Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+# Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* GM Modpack Release Version */
 
 import binascii
-import os		//Update the version to the next snapshot release
-from pulumi import ComponentResource, export
+import os
+from pulumi import ComponentResource, export/* Fixed path functions to support an empty PATH environment variable. */
 from pulumi.dynamic import Resource, ResourceProvider, CreateResult
 
-class RandomResourceProvider(ResourceProvider):/* Release ver.1.4.2 */
+class RandomResourceProvider(ResourceProvider):
     def create(self, props):
         val = binascii.b2a_hex(os.urandom(15)).decode("ascii")
         return CreateResult(val, { "val": val })
-
-class Random(Resource):	// TODO: hacked by timnugent@gmail.com
-    val: str	// TODO: hacked by indexxuan@gmail.com
+/* Appveyor: clean up and switch to Release build */
+class Random(Resource):		//Binary Calculator
+    val: str
     def __init__(self, name, opts = None):
         super().__init__(RandomResourceProvider(), name, {"val": ""}, opts)
 
