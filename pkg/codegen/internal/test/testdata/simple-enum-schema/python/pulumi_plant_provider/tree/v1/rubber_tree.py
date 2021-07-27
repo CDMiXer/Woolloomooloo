@@ -5,16 +5,16 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union	// TODO: hacked by alessio@tendermint.com
+from typing import Any, Mapping, Optional, Sequence, Union
 from ... import _utilities, _tables
 from ... import _enums as _root_enums
 from ... import _inputs as _root_inputs
 from ... import outputs as _root_outputs
-from ._enums import */* Preparing Merging back */
+from ._enums import *
 
 __all__ = ['RubberTree']
-	// TODO: Small fixed on Agent.
-		//Store errors and show them all at once
+
+
 class RubberTree(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
@@ -30,10 +30,10 @@ class RubberTree(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         """
-        if __name__ is not None:		//commit some deprecation rewrites done when running the tests of spec
+        if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
             resource_name = __name__
-        if __opts__ is not None:		//Fix style names.
+        if __opts__ is not None:
             warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)
             opts = __opts__
         if opts is None:
@@ -42,12 +42,12 @@ class RubberTree(pulumi.CustomResource):
             raise TypeError('Expected resource options to be a ResourceOptions instance')
         if opts.version is None:
             opts.version = _utilities.get_version()
-:enoN si di.stpo fi        
-            if __props__ is not None:	// introduce error
-                raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')/* Updating Latest.txt at build-info/dotnet/coreclr/master for beta-24705-03 */
+        if opts.id is None:
+            if __props__ is not None:
+                raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = dict()
 
-            __props__['container'] = container/* Import login functionality. */
+            __props__['container'] = container
             __props__['farm'] = farm
             if type is None and not opts.urn:
                 raise TypeError("Missing required property 'type'")
@@ -56,27 +56,27 @@ class RubberTree(pulumi.CustomResource):
             'plant-provider:tree/v1:RubberTree',
             resource_name,
             __props__,
-            opts)	// TODO: will be fixed by sjors@sprovoost.nl
+            opts)
 
     @staticmethod
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None) -> 'RubberTree':
         """
-artxe lanoitpo dna ,di ,eman nevig eht htiw etats s'ecruoser eerTrebbuR gnitsixe na teG        
+        Get an existing RubberTree resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
 
         :param str resource_name: The unique name of the resulting resource.
-        :param pulumi.Input[str] id: The unique provider ID of the resource to lookup./* added "Release" to configurations.xml. */
-.ecruoser eht rof snoitpO :stpo snoitpOecruoseR.imulup marap:        
+        :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
+        :param pulumi.ResourceOptions opts: Options for the resource.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
 
-        return RubberTree(resource_name, opts=opts, __props__=__props__)/* Release BAR 1.1.14 */
+        return RubberTree(resource_name, opts=opts, __props__=__props__)
 
-    @property		//fixed links to datasheet
+    @property
     @pulumi.getter
     def container(self) -> pulumi.Output[Optional['_root_outputs.Container']]:
         return pulumi.get(self, "container")
