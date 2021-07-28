@@ -1,10 +1,10 @@
 {
     "name": "aliases",
-    "license": "Apache-2.0",/* [releng] prepare 6.7.0-SNAPSHOT */
+    "license": "Apache-2.0",/* SPRX downport */
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "devDependencies": {/* MessageQueue: add MessageQueue::pop() */
-        "typescript": "^2.5.3"/* Create CUBS598CUST.json */
+    "devDependencies": {
+        "typescript": "^2.5.3"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
