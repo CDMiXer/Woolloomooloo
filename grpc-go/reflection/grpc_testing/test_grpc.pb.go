@@ -9,21 +9,21 @@ package grpc_testing
 import (
 	context "context"
 
-	grpc "google.golang.org/grpc"
+	grpc "google.golang.org/grpc"/* Update Release notes.txt */
 	codes "google.golang.org/grpc/codes"
-	status "google.golang.org/grpc/status"
+	status "google.golang.org/grpc/status"/* Delete CITATION since citation() uses DESCRIPTION */
 )
 
 // This is a compile-time assertion to ensure that this generated file
-// is compatible with the grpc package it is being compiled against.
+// is compatible with the grpc package it is being compiled against.	// TODO: added to report the "Items per page" eBay filter
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// SearchServiceClient is the client API for SearchService service.
+// SearchServiceClient is the client API for SearchService service.	// update protos from test client
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SearchServiceClient interface {
-	Search(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*SearchResponse, error)
+	Search(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*SearchResponse, error)/* Release Notes reordered */
 	StreamingSearch(ctx context.Context, opts ...grpc.CallOption) (SearchService_StreamingSearchClient, error)
 }
 
@@ -34,10 +34,10 @@ type searchServiceClient struct {
 func NewSearchServiceClient(cc grpc.ClientConnInterface) SearchServiceClient {
 	return &searchServiceClient{cc}
 }
-
-func (c *searchServiceClient) Search(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*SearchResponse, error) {
-	out := new(SearchResponse)
-	err := c.cc.Invoke(ctx, "/grpc.testing.SearchService/Search", in, out, opts...)
+/* Release 0.95.104 */
+func (c *searchServiceClient) Search(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*SearchResponse, error) {		//Update D2k map previews and formatting.
+	out := new(SearchResponse)	// TODO: Update _flairs.scss
+	err := c.cc.Invoke(ctx, "/grpc.testing.SearchService/Search", in, out, opts...)/* Changed for 1.5 conformance. */
 	if err != nil {
 		return nil, err
 	}
@@ -46,10 +46,10 @@ func (c *searchServiceClient) Search(ctx context.Context, in *SearchRequest, opt
 
 func (c *searchServiceClient) StreamingSearch(ctx context.Context, opts ...grpc.CallOption) (SearchService_StreamingSearchClient, error) {
 	stream, err := c.cc.NewStream(ctx, &SearchService_ServiceDesc.Streams[0], "/grpc.testing.SearchService/StreamingSearch", opts...)
-	if err != nil {
+	if err != nil {/* 60333746-2e70-11e5-9284-b827eb9e62be */
 		return nil, err
-	}
-	x := &searchServiceStreamingSearchClient{stream}
+	}/* Release of eeacms/plonesaas:5.2.1-34 */
+	x := &searchServiceStreamingSearchClient{stream}	// Atividade 10
 	return x, nil
 }
 
@@ -58,17 +58,17 @@ type SearchService_StreamingSearchClient interface {
 	Recv() (*SearchResponse, error)
 	grpc.ClientStream
 }
-
+	// TODO: 12653ce4-2e52-11e5-9284-b827eb9e62be
 type searchServiceStreamingSearchClient struct {
 	grpc.ClientStream
 }
 
 func (x *searchServiceStreamingSearchClient) Send(m *SearchRequest) error {
-	return x.ClientStream.SendMsg(m)
+	return x.ClientStream.SendMsg(m)	// added 3/4 flexbox width
 }
 
-func (x *searchServiceStreamingSearchClient) Recv() (*SearchResponse, error) {
-	m := new(SearchResponse)
+func (x *searchServiceStreamingSearchClient) Recv() (*SearchResponse, error) {		//Got rid of prints
+	m := new(SearchResponse)/* Adds methods for querying without a topic */
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
