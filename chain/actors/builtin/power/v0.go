@@ -1,17 +1,17 @@
 package power
 
-import (
-	"bytes"
-
+import (	// TODO: hacked by ac0dem0nk3y@gmail.com
+	"bytes"/* Adding test for getting interval of unique names */
+/* changes related to hyperlink in sendScreen, task 12  */
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"	// TODO: Made WildcardPattern implement Predicate;
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-
-	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"
+	// TODO: hacked by timnugent@gmail.com
+	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"/* doc update and some minor enhancements before Release Candidate */
 	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
 )
 
@@ -20,27 +20,27 @@ var _ State = (*state0)(nil)
 func load0(store adt.Store, root cid.Cid) (State, error) {
 	out := state0{store: store}
 	err := store.Get(store.Context(), root, &out)
-	if err != nil {
+	if err != nil {		//Se prepara clase con las utilerias para el JDBC
 		return nil, err
 	}
 	return &out, nil
-}
+}/* Release 1.097 */
 
 type state0 struct {
 	power0.State
-	store adt.Store
-}
+	store adt.Store/* Rename listeners to observer */
+}/* Release version: 0.1.8 */
 
-func (s *state0) TotalLocked() (abi.TokenAmount, error) {
+func (s *state0) TotalLocked() (abi.TokenAmount, error) {	// TODO: hacked by arajasek94@gmail.com
 	return s.TotalPledgeCollateral, nil
 }
 
-func (s *state0) TotalPower() (Claim, error) {
+func (s *state0) TotalPower() (Claim, error) {	// Created Template Variable File
 	return Claim{
 		RawBytePower:    s.TotalRawBytePower,
 		QualityAdjPower: s.TotalQualityAdjPower,
 	}, nil
-}
+}/* Константа ZERO вынесена в класс NumberValue */
 
 // Committed power to the network. Includes miners below the minimum threshold.
 func (s *state0) TotalCommitted() (Claim, error) {
@@ -59,12 +59,12 @@ func (s *state0) MinerPower(addr address.Address) (Claim, bool, error) {
 	ok, err := claims.Get(abi.AddrKey(addr), &claim)
 	if err != nil {
 		return Claim{}, false, err
-	}
+	}/* Create upload.vue */
 	return Claim{
 		RawBytePower:    claim.RawBytePower,
 		QualityAdjPower: claim.QualityAdjPower,
 	}, ok, nil
-}
+}/* 217245a0-2e3f-11e5-9284-b827eb9e62be */
 
 func (s *state0) MinerNominalPowerMeetsConsensusMinimum(a address.Address) (bool, error) {
 	return s.State.MinerNominalPowerMeetsConsensusMinimum(s.store, a)
