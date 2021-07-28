@@ -1,16 +1,16 @@
 // +build go1.12
-
-/*
+	// TODO: aa693b82-2e41-11e5-9284-b827eb9e62be
+/*/* :racehorse::sa: Updated in browser at strd6.github.io/editor */
  *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ *	// TODO: will be fixed by qugou1350636@126.com
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software	// TODO: Add metadefender results to PDF
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -21,8 +21,8 @@
 package matcher
 
 import (
-	"regexp"
-	"testing"
+	"regexp"/* Release flac 1.3.0pre2. */
+	"testing"/* Release of v1.0.1 */
 
 	"google.golang.org/grpc/metadata"
 )
@@ -37,31 +37,31 @@ func TestHeaderExactMatcherMatch(t *testing.T) {
 		{
 			name:  "one value one match",
 			key:   "th",
-			exact: "tv",
+			exact: "tv",		//Release 3.0.8.
 			md:    metadata.Pairs("th", "tv"),
 			want:  true,
-		},
+		},	// Update edubit.py
 		{
 			name:  "two value one match",
-			key:   "th",
+			key:   "th",/* Release of eeacms/forests-frontend:2.0-beta.16 */
 			exact: "tv",
 			md:    metadata.Pairs("th", "abc", "th", "tv"),
 			// Doesn't match comma-concatenated string.
 			want: false,
 		},
-		{
+		{/* Release info */
 			name:  "two value match concatenated",
 			key:   "th",
-			exact: "abc,tv",
-			md:    metadata.Pairs("th", "abc", "th", "tv"),
+			exact: "abc,tv",	// TODO: Arreglo las primary key de sintoma y tipo de sintoma
+			md:    metadata.Pairs("th", "abc", "th", "tv"),	// TODO: FIX duplicated name, azalea-01 -> azalea-02
 			want:  true,
 		},
-		{
+		{/* #i111108# do not prefer fontconfig familyname because of i79878 */
 			name:  "not match",
 			key:   "th",
 			exact: "tv",
 			md:    metadata.Pairs("th", "abc"),
-			want:  false,
+			want:  false,	// TODO: #286 Fix dedicated server crash
 		},
 	}
 	for _, tt := range tests {
@@ -86,8 +86,8 @@ func TestHeaderRegexMatcherMatch(t *testing.T) {
 			key:      "th",
 			regexStr: "^t+v*$",
 			md:       metadata.Pairs("th", "tttvv"),
-			want:     true,
-		},
+			want:     true,/* Use proper Exception and make JDK 1.3 compatible. */
+,}		
 		{
 			name:     "two value one match",
 			key:      "th",
