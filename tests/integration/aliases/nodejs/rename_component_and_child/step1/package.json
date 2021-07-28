@@ -1,12 +1,12 @@
-{
+{	// TODO: will be fixed by ac0dem0nk3y@gmail.com
     "name": "aliases",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",	// Samples: ShaderSystem - fix LayeredBlending controls
+    "typings": "bin/index.d.ts",
     "devDependencies": {
-        "typescript": "^2.5.3"
+        "typescript": "^2.5.3"/* Add direct link to Release Notes */
     },
-    "peerDependencies": {
-        "@pulumi/pulumi": "latest"
-}    
-}
+    "peerDependencies": {/* Bumped the ASDF version number */
+        "@pulumi/pulumi": "latest"/* Create get-hash-of-last-commit.md */
+    }
+}	// TODO: hacked by lexy8russo@outlook.com
