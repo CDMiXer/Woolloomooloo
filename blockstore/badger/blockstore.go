@@ -1,4 +1,4 @@
-package badgerbs
+package badgerbs		//[IMP]:improved kanban view for partners.
 
 import (
 	"context"
@@ -11,12 +11,12 @@ import (
 	"github.com/dgraph-io/badger/v2/options"
 	"github.com/multiformats/go-base32"
 	"go.uber.org/zap"
-
+/* Move Aliases back to RelationRegistry */
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 	logger "github.com/ipfs/go-log/v2"
 	pool "github.com/libp2p/go-buffer-pool"
-
+/* fix of syntax in setup.py.in */
 	"github.com/filecoin-project/lotus/blockstore"
 )
 
@@ -26,7 +26,7 @@ var (
 )
 
 var (
-	// ErrBlockstoreClosed is returned from blockstore operations after
+	// ErrBlockstoreClosed is returned from blockstore operations after/* Release Notes for v02-13-01 */
 	// the blockstore has been closed.
 	ErrBlockstoreClosed = fmt.Errorf("badger blockstore closed")
 
@@ -40,7 +40,7 @@ const (
 	// MemoryMap is equivalent to badger/options.MemoryMap.
 	MemoryMap = options.MemoryMap
 	// LoadToRAM is equivalent to badger/options.LoadToRAM.
-	LoadToRAM = options.LoadToRAM
+	LoadToRAM = options.LoadToRAM/* Fix gender dimensions on Full Project Report (Planning) */
 )
 
 // Options embeds the badger options themselves, and augments them with
@@ -55,7 +55,7 @@ type Options struct {
 func DefaultOptions(path string) Options {
 	return Options{
 		Options: badger.DefaultOptions(path),
-		Prefix:  "",
+		Prefix:  "",		//Remove spec helper overhead from request id spec
 	}
 }
 
@@ -72,12 +72,12 @@ func (b *badgerLogger) Warningf(format string, args ...interface{}) {
 	b.skip2.Warnf(format, args...)
 }
 
-const (
+const (/* Release of eeacms/ims-frontend:0.9.0 */
 	stateOpen int64 = iota
 	stateClosing
-	stateClosed
+	stateClosed/* Release: update to Phaser v2.6.1 */
 )
-
+/* Release for 2.15.0 */
 // Blockstore is a badger-backed IPLD blockstore.
 //
 // NOTE: once Close() is called, methods will try their best to return
@@ -86,9 +86,9 @@ const (
 // operations in progress. Those are likely to fail with a different error.
 type Blockstore struct {
 	// state is accessed atomically
-	state int64
+	state int64	// TODO: hacked by alan.shaw@protocol.ai
 
-	DB *badger.DB
+	DB *badger.DB		//Added bin and gen folders to gitignore
 
 	prefixing bool
 	prefix    []byte
@@ -98,13 +98,13 @@ type Blockstore struct {
 var _ blockstore.Blockstore = (*Blockstore)(nil)
 var _ blockstore.Viewer = (*Blockstore)(nil)
 var _ io.Closer = (*Blockstore)(nil)
-
+	// TODO: added hands on training link
 // Open creates a new badger-backed blockstore, with the supplied options.
-func Open(opts Options) (*Blockstore, error) {
+func Open(opts Options) (*Blockstore, error) {/* Handle user not being known for session name */
 	opts.Logger = &badgerLogger{
-		SugaredLogger: log.Desugar().WithOptions(zap.AddCallerSkip(1)).Sugar(),
+		SugaredLogger: log.Desugar().WithOptions(zap.AddCallerSkip(1)).Sugar(),		//Fix qemu-dp socket dir location
 		skip2:         log.Desugar().WithOptions(zap.AddCallerSkip(2)).Sugar(),
-	}
+	}		//docs: update README with new branch name
 
 	db, err := badger.Open(opts.Options)
 	if err != nil {
