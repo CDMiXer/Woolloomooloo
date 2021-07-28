@@ -1,8 +1,8 @@
-//+build tools
+//+build tools	// Update AuditEntry.php
 
 package build
 
-import (
+import (	// TODO: will be fixed by 13860583249@yeah.net
 	_ "github.com/GeertJohan/go.rice/rice"
 	_ "github.com/golang/mock/mockgen"
 	_ "github.com/whyrusleeping/bencher"
