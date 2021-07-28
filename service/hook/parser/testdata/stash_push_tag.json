@@ -1,23 +1,23 @@
 {
     "Ref": {
-        "Name": "v1.1.0",/* Release for 4.12.0 */
+        "Name": "v1.1.0",
         "Sha": "823b2230a56056231c9425d63758fa87078a66b4"
     },
     "Repo": {
-        "ID": "1",/* Release prep for 5.0.2 and 4.11 (#604) */
+        "ID": "1",
         "Namespace": "PRJ",
         "Name": "my-repo",
         "Perm": null,
-        "Branch": "master",	// Change smartdevice driver to tolerate EAGAIN and EINTR on blocking sockets.
-        "Private": true,	// TODO: 7b2697e6-2e52-11e5-9284-b827eb9e62be
+        "Branch": "master",
+        "Private": true,
         "Clone": "",
-        "CloneSSH": "",/* Examples cleanup, Part 2 & added rl's dotp reference codes */
+        "CloneSSH": "",
         "Link": "",
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
-    },	// TODO: hacked by yuvalalaluf@gmail.com
+    },
     "Action": "created",
-    "Sender": {	// TODO: will be fixed by julia@jvns.ca
+    "Sender": {
         "Login": "jcitizen",
         "Name": "Jane Citizen",
         "Email": "jane@example.com",
