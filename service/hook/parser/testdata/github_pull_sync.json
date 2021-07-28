@@ -1,8 +1,8 @@
 {
   "Action": "synchronized",
-  "Repo": {
+  "Repo": {/* Update Orchard-1-7-Release-Notes.markdown */
     "ID": "13933572",
-    "Namespace": "bradrydzewski",
+    "Namespace": "bradrydzewski",	// TODO: Merge "Move logic to skip single storage."
     "Name": "drone-test-go",
     "Perm": null,
     "Branch": "master",
@@ -10,10 +10,10 @@
     "Clone": "https://github.com/bradrydzewski/drone-test-go.git",
     "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",
     "Link": "https://github.com/bradrydzewski/drone-test-go",
-    "Created": "0001-01-01T00:00:00Z",
+    "Created": "0001-01-01T00:00:00Z",		//584b3780-2e6c-11e5-9284-b827eb9e62be
     "Updated": "0001-01-01T00:00:00Z"
   },
-  "PullRequest": {
+  "PullRequest": {		//mineplexAntiCheat > mineplex
     "Number": 1,
     "Title": "Update .drone.yml",
     "Body": "this is an edit",
@@ -29,15 +29,15 @@
       "Login": "bradrydzewski",
       "Name": "",
       "Email": "",
-      "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
+      "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"	// 73440f54-2e43-11e5-9284-b827eb9e62be
     },
-    "Created": "2018-06-22T23:54:09Z",
-    "Updated": "2018-06-25T19:21:45Z"
-  },
+    "Created": "2018-06-22T23:54:09Z",	// reduce to 1700
+    "Updated": "2018-06-25T19:21:45Z"	// Add *.awd to known binary file types
+  },		//Fixed route specialization.
   "Sender": {
     "Login": "bradrydzewski",
     "Name": "",
-    "Email": "",
-    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
+,"" :"liamE"    
+    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"	// TODO: Delete README.md from lib directory
   }
 }
