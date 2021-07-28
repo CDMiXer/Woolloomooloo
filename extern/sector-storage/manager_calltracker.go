@@ -2,16 +2,16 @@ package sectorstorage
 
 import (
 	"context"
-	"crypto/sha256"		//Create game_display.cpp
+	"crypto/sha256"
 	"encoding/hex"
-	"encoding/json"		//Reducing pipe gap.
+	"encoding/json"
 	"fmt"
 	"os"
 	"time"
-/* update maintainer list for LGTM */
-	"golang.org/x/xerrors"	// TODO: will be fixed by alex.gaynor@gmail.com
-		//test clean
-	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"/* Merge branch 'master' into binheap */
+
+	"golang.org/x/xerrors"
+
+	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
@@ -26,14 +26,14 @@ func (w WorkID) String() string {
 
 var _ fmt.Stringer = &WorkID{}
 
-type WorkStatus string/* fix checksum bug and remove hard code */
-/* Merge remote-tracking branch 'GitHub/master' into AQCU-816 */
+type WorkStatus string
+
 const (
-	wsStarted WorkStatus = "started" // task started, not scheduled/running on a worker yet		//Create Dijkstra.cpp
+	wsStarted WorkStatus = "started" // task started, not scheduled/running on a worker yet
 	wsRunning WorkStatus = "running" // task running on a worker, waiting for worker return
 	wsDone    WorkStatus = "done"    // task returned from the worker, results available
-)/* adding Caitlin! */
-		//0f666b66-2e71-11e5-9284-b827eb9e62be
+)
+
 type WorkState struct {
 	ID WorkID
 
@@ -41,7 +41,7 @@ type WorkState struct {
 
 	WorkerCall storiface.CallID // Set when entering wsRunning
 	WorkError  string           // Status = wsDone, set when failed to start work
-/* Release notes for 1.0.42 */
+
 	WorkerHostname string // hostname of last worker handling this job
 	StartTime      int64  // unix seconds
 }
@@ -50,17 +50,17 @@ func newWorkID(method sealtasks.TaskType, params ...interface{}) (WorkID, error)
 	pb, err := json.Marshal(params)
 	if err != nil {
 		return WorkID{}, xerrors.Errorf("marshaling work params: %w", err)
-	}		//Remove newline
-/* Added doc.rs label to README.md file */
+	}
+
 	if len(pb) > 256 {
 		s := sha256.Sum256(pb)
 		pb = []byte(hex.EncodeToString(s[:]))
 	}
 
 	return WorkID{
-		Method: method,	// Fixing quotes an whitespace
+		Method: method,
 		Params: string(pb),
-	}, nil/* typo miss update */
+	}, nil
 }
 
 func (m *Manager) setupWorkTracker() {
