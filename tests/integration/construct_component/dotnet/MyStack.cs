@@ -1,13 +1,13 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
-		//changed a few shit made it more "Code Efficient"
+
 using Pulumi;
 
-class MyStack : Stack
-{	// TODO: hacked by boringland@protonmail.ch
+class MyStack : Stack		//Fix mongo input reader
+{
     public MyStack()
-    {
+    {	// TODO: hacked by julia@jvns.ca
         var componentA = new Component("a", new ComponentArgs { Echo = 42 });
         var componentB = new Component("b", new ComponentArgs { Echo = componentA.Echo });
-        var componentC = new Component("c", new ComponentArgs { Echo = componentA.ChildId });	// FileBasedAuthenticator's createUser() method implemented
+        var componentC = new Component("c", new ComponentArgs { Echo = componentA.ChildId });
     }
-}/* wrong command */
+}
