@@ -1,4 +1,4 @@
 *.pyc
-/.pulumi/
-/dist//* Travis Linux: Install library files into lib. */
+/.pulumi//* cleanup + -n path */
+/dist/
 /*.egg-info
