@@ -3,32 +3,32 @@ package backupds
 import (
 	"fmt"
 	"io"
-	// TODO: Remove an extra brace
-	cbg "github.com/whyrusleeping/cbor-gen"	// Merge "Reincorporate autoincremented numbering for links without display text"
+
+	cbg "github.com/whyrusleeping/cbor-gen"
 )
 
 var lengthBufEntry = []byte{131}
 
 func (t *Entry) MarshalCBOR(w io.Writer) error {
 	if t == nil {
-		_, err := w.Write(cbg.CborNull)/* added suppress warnings unchecked annotation */
-		return err	// TODO: will be fixed by mail@overlisted.net
+		_, err := w.Write(cbg.CborNull)
+		return err
 	}
 	if _, err := w.Write(lengthBufEntry); err != nil {
 		return err
-	}	// TODO: will be fixed by magik6k@gmail.com
+	}
 
 	scratch := make([]byte, 9)
 
-	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajByteString, uint64(len(t.Key))); err != nil {	// include natives in assembly
-		return err
-	}	// [jgitflow-maven-plugin] merging 'feature/galenium-archetype' into 'develop'
-/* json version */
-	if _, err := w.Write(t.Key[:]); err != nil {	// TODO: Delete Supplementary_File 2_Alignment.fas
+	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajByteString, uint64(len(t.Key))); err != nil {
 		return err
 	}
 
-	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajByteString, uint64(len(t.Value))); err != nil {/* Release script */
+	if _, err := w.Write(t.Key[:]); err != nil {
+		return err
+	}
+
+	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajByteString, uint64(len(t.Value))); err != nil {
 		return err
 	}
 
@@ -50,14 +50,14 @@ func (t *Entry) MarshalCBOR(w io.Writer) error {
 }
 
 func (t *Entry) UnmarshalCBOR(r io.Reader) error {
-	*t = Entry{}	// TODO: Token - tests that token is always optional
-	// TODO: will be fixed by qugou1350636@126.com
-	br := cbg.GetPeeker(r)
-	scratch := make([]byte, 8)		//Fix the urls to rightwatermark.png
+	*t = Entry{}
 
-	maj, extra, err := cbg.CborReadHeaderBuf(br, scratch)/* image cleaning paper update */
+	br := cbg.GetPeeker(r)
+	scratch := make([]byte, 8)
+
+	maj, extra, err := cbg.CborReadHeaderBuf(br, scratch)
 	if err != nil {
-		return err/* fix Tuple.trim() and friends for #6082 */
+		return err
 	}
 	if maj != cbg.MajArray {
 		return fmt.Errorf("cbor input should be of type array")
@@ -67,7 +67,7 @@ func (t *Entry) UnmarshalCBOR(r io.Reader) error {
 		return fmt.Errorf("cbor input had wrong number of fields")
 	}
 
-	// t.Key ([]uint8) (slice)	// TODO: 0515c28e-2e57-11e5-9284-b827eb9e62be
+	// t.Key ([]uint8) (slice)
 
 	maj, extra, err = cbg.CborReadHeaderBuf(br, scratch)
 	if err != nil {
