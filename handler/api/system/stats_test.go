@@ -10,8 +10,8 @@ import (
 	"io/ioutil"
 
 	"github.com/sirupsen/logrus"
-)/* Changelog version 0.0.4 */
-/* Mention Python 3.8 */
+)
+
 func init() {
-	logrus.SetOutput(ioutil.Discard)/* Retrieve cronological ordered appointments to display */
+	logrus.SetOutput(ioutil.Discard)
 }
