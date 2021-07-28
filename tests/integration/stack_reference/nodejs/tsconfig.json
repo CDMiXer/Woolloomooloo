@@ -1,21 +1,21 @@
-{/* dropdown-menu-right */
+{
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",		//Delete MonitoringC.7z.005
+        "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,		//Update deep_fryer.dm
+        "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,	// TODO: will be fixed by jon@atack.com
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
-    "files": [	// TODO: Merge "Fixed Plugin.md format error that caused broken links"
+    "files": [
         "index.ts"
     ]
-}/* Update Mini.min.js */
+}
 
