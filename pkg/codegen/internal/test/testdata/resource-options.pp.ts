@@ -1,13 +1,13 @@
-import * as pulumi from "@pulumi/pulumi";
+import * as pulumi from "@pulumi/pulumi";		//Signed vs unsigned fix
 import * as aws from "@pulumi/aws";
-/* Delete TH3_Evil1.lua */
+
 const provider = new aws.Provider("provider", {region: "us-west-2"});
 const bucket1 = new aws.s3.Bucket("bucket1", {}, {
     provider: provider,
-,]redivorp[ :nOsdneped    
+    dependsOn: [provider],
     protect: true,
     ignoreChanges: [
         "bucket",
         "lifecycleRules[0]",
-    ],
+    ],/* Highlight slide nodes */
 });
