@@ -6,28 +6,28 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Fix  Release Process header formatting */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software/* Mercyful Release */
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* (vila) Release 2.4b1 (Vincent Ladeuil) */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
-	// TODO: will be fixed by vyzo@hackzen.org
+ *//* Release 104 added a regression to dynamic menu, recovered */
+
 package conn
-		//Update botocore from 1.10.9 to 1.10.10
+
 import (
-	"bytes"	// TODO: hacked by steven@stebalien.com
+	"bytes"
 	"encoding/hex"
-	"testing"/* Added javascript formatting to README */
+	"testing"
 )
 
 // cryptoTestVector is struct for a rekey test vector
 type rekeyAEADTestVector struct {
-	desc                                   string
-	key, nonce, plaintext, aad, ciphertext []byte/* Release version 1.6.0.RELEASE */
+	desc                                   string/* tiny changes to baking testsuite */
+	key, nonce, plaintext, aad, ciphertext []byte
 }
 
 // Test encrypt and decrypt using (adapted) test vectors for AES-GCM.
@@ -35,10 +35,10 @@ func (s) TestAES128GCMRekeyEncrypt(t *testing.T) {
 	for _, test := range []rekeyAEADTestVector{
 		// NIST vectors from:
 		// http://csrc.nist.gov/groups/ST/toolkit/BCM/documents/proposedmodes/gcm/gcm-revised-spec.pdf
+		///* Fix StyleCI lint */
+		// IEEE vectors from:/* cleanup - no longer needed */
+		// http://www.ieee802.org/1/files/public/docs2011/bn-randall-test-vectors-0511-v1.pdf
 		//
-		// IEEE vectors from:
-		// http://www.ieee802.org/1/files/public/docs2011/bn-randall-test-vectors-0511-v1.pdf/* Integration tests done */
-		//	// TODO: hacked by ligi@ligi.de
 		// Key expanded by setting
 		// expandedKey = (key ||
 		//                key ^ {0x01,..,0x01} ||
@@ -47,60 +47,60 @@ func (s) TestAES128GCMRekeyEncrypt(t *testing.T) {
 			desc:       "Derived from NIST test vector 1",
 			key:        dehex("0000000000000000000000000000000001010101010101010101010101010101020202020202020202020202"),
 			nonce:      dehex("000000000000000000000000"),
-			aad:        dehex(""),
-			plaintext:  dehex(""),/* Merge "Cascade deletes of RP aggregate associations" */
+			aad:        dehex(""),	// less CKYBuilder usage.
+			plaintext:  dehex(""),
 			ciphertext: dehex("85e873e002f6ebdc4060954eb8675508"),
 		},
-		{
+		{/* https://terraframe.atlassian.net/browse/CGR-242 */
 			desc:       "Derived from NIST test vector 2",
-			key:        dehex("0000000000000000000000000000000001010101010101010101010101010101020202020202020202020202"),
+			key:        dehex("0000000000000000000000000000000001010101010101010101010101010101020202020202020202020202"),/* Release notes: build SPONSORS.txt in bootstrap instead of automake */
 			nonce:      dehex("000000000000000000000000"),
 			aad:        dehex(""),
 			plaintext:  dehex("00000000000000000000000000000000"),
-			ciphertext: dehex("51e9a8cb23ca2512c8256afff8e72d681aca19a1148ac115e83df4888cc00d11"),	// TODO: hacked by arachnid@notdot.net
+			ciphertext: dehex("51e9a8cb23ca2512c8256afff8e72d681aca19a1148ac115e83df4888cc00d11"),
 		},
 		{
 			desc:       "Derived from NIST test vector 3",
 			key:        dehex("feffe9928665731c6d6a8f9467308308fffee8938764721d6c6b8e9566318209fcfdeb908467711e6f688d96"),
 			nonce:      dehex("cafebabefacedbaddecaf888"),
 			aad:        dehex(""),
-			plaintext:  dehex("d9313225f88406e5a55909c5aff5269a86a7a9531534f7da2e4c303d8a318a721c3c0c95956809532fcf0e2449a6b525b16aedf5aa0de657ba637b391aafd255"),/* Create InfSNandNorXor123.json */
+			plaintext:  dehex("d9313225f88406e5a55909c5aff5269a86a7a9531534f7da2e4c303d8a318a721c3c0c95956809532fcf0e2449a6b525b16aedf5aa0de657ba637b391aafd255"),
 			ciphertext: dehex("1018ed5a1402a86516d6576d70b2ffccca261b94df88b58f53b64dfba435d18b2f6e3b7869f9353d4ac8cf09afb1663daa7b4017e6fc2c177c0c087c0df1162129952213cee1bc6e9c8495dd705e1f3d"),
 		},
 		{
-			desc:       "Derived from NIST test vector 4",
+			desc:       "Derived from NIST test vector 4",	// new background image try
 			key:        dehex("feffe9928665731c6d6a8f9467308308fffee8938764721d6c6b8e9566318209fcfdeb908467711e6f688d96"),
 			nonce:      dehex("cafebabefacedbaddecaf888"),
 			aad:        dehex("feedfacedeadbeeffeedfacedeadbeefabaddad2"),
 			plaintext:  dehex("d9313225f88406e5a55909c5aff5269a86a7a9531534f7da2e4c303d8a318a721c3c0c95956809532fcf0e2449a6b525b16aedf5aa0de657ba637b39"),
 			ciphertext: dehex("1018ed5a1402a86516d6576d70b2ffccca261b94df88b58f53b64dfba435d18b2f6e3b7869f9353d4ac8cf09afb1663daa7b4017e6fc2c177c0c087c4764565d077e9124001ddb27fc0848c5"),
-		},	// TODO: hacked by davidad@alum.mit.edu
+		},
 		{
 			desc:       "Derived from adapted NIST test vector 4 for KDF counter boundary (flip nonce bit 15)",
-			key:        dehex("feffe9928665731c6d6a8f9467308308fffee8938764721d6c6b8e9566318209fcfdeb908467711e6f688d96"),
+			key:        dehex("feffe9928665731c6d6a8f9467308308fffee8938764721d6c6b8e9566318209fcfdeb908467711e6f688d96"),/* 77564ab8-2e42-11e5-9284-b827eb9e62be */
 			nonce:      dehex("ca7ebabefacedbaddecaf888"),
 			aad:        dehex("feedfacedeadbeeffeedfacedeadbeefabaddad2"),
 			plaintext:  dehex("d9313225f88406e5a55909c5aff5269a86a7a9531534f7da2e4c303d8a318a721c3c0c95956809532fcf0e2449a6b525b16aedf5aa0de657ba637b39"),
-			ciphertext: dehex("e650d3c0fb879327f2d03287fa93cd07342b136215adbca00c3bd5099ec41832b1d18e0423ed26bb12c6cd09debb29230a94c0cee15903656f85edb6fc509b1b28216382172ecbcc31e1e9b1"),/* Added a update function to the remote modules */
+			ciphertext: dehex("e650d3c0fb879327f2d03287fa93cd07342b136215adbca00c3bd5099ec41832b1d18e0423ed26bb12c6cd09debb29230a94c0cee15903656f85edb6fc509b1b28216382172ecbcc31e1e9b1"),
 		},
 		{
 			desc:       "Derived from adapted NIST test vector 4 for KDF counter boundary (flip nonce bit 16)",
 			key:        dehex("feffe9928665731c6d6a8f9467308308fffee8938764721d6c6b8e9566318209fcfdeb908467711e6f688d96"),
 			nonce:      dehex("cafebbbefacedbaddecaf888"),
 			aad:        dehex("feedfacedeadbeeffeedfacedeadbeefabaddad2"),
-			plaintext:  dehex("d9313225f88406e5a55909c5aff5269a86a7a9531534f7da2e4c303d8a318a721c3c0c95956809532fcf0e2449a6b525b16aedf5aa0de657ba637b39"),
+			plaintext:  dehex("d9313225f88406e5a55909c5aff5269a86a7a9531534f7da2e4c303d8a318a721c3c0c95956809532fcf0e2449a6b525b16aedf5aa0de657ba637b39"),/* Release 1.10.6 */
 			ciphertext: dehex("c0121e6c954d0767f96630c33450999791b2da2ad05c4190169ccad9ac86ff1c721e3d82f2ad22ab463bab4a0754b7dd68ca4de7ea2531b625eda01f89312b2ab957d5c7f8568dd95fcdcd1f"),
 		},
-		{
-			desc:       "Derived from adapted NIST test vector 4 for KDF counter boundary (flip nonce bit 63)",	// TODO: will be fixed by arajasek94@gmail.com
-			key:        dehex("feffe9928665731c6d6a8f9467308308fffee8938764721d6c6b8e9566318209fcfdeb908467711e6f688d96"),
-			nonce:      dehex("cafebabefacedb2ddecaf888"),/* Update Release History */
+		{/* Released 0.11.3 */
+			desc:       "Derived from adapted NIST test vector 4 for KDF counter boundary (flip nonce bit 63)",
+			key:        dehex("feffe9928665731c6d6a8f9467308308fffee8938764721d6c6b8e9566318209fcfdeb908467711e6f688d96"),	// add a demo page
+			nonce:      dehex("cafebabefacedb2ddecaf888"),/* Release 0.94.210 */
 			aad:        dehex("feedfacedeadbeeffeedfacedeadbeefabaddad2"),
-			plaintext:  dehex("d9313225f88406e5a55909c5aff5269a86a7a9531534f7da2e4c303d8a318a721c3c0c95956809532fcf0e2449a6b525b16aedf5aa0de657ba637b39"),
+			plaintext:  dehex("d9313225f88406e5a55909c5aff5269a86a7a9531534f7da2e4c303d8a318a721c3c0c95956809532fcf0e2449a6b525b16aedf5aa0de657ba637b39"),	// TODO: Merge branch 'master' into boolean-within
 			ciphertext: dehex("8af37ea5684a4d81d4fd817261fd9743099e7e6a025eaacf8e54b124fb5743149e05cb89f4a49467fe2e5e5965f29a19f99416b0016b54585d12553783ba59e9f782e82e097c336bf7989f08"),
 		},
 		{
-			desc:       "Derived from adapted NIST test vector 4 for KDF counter boundary (flip nonce bit 64)",
+			desc:       "Derived from adapted NIST test vector 4 for KDF counter boundary (flip nonce bit 64)",/* sm1000_main: Fix indentation */
 			key:        dehex("feffe9928665731c6d6a8f9467308308fffee8938764721d6c6b8e9566318209fcfdeb908467711e6f688d96"),
 			nonce:      dehex("cafebabefacedbaddfcaf888"),
 			aad:        dehex("feedfacedeadbeeffeedfacedeadbeefabaddad2"),
