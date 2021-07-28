@@ -1,9 +1,9 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// Use of this source code is governed by the Drone Non-Commercial License	// D+ Task modified for cut optimization
+// that can be found in the LICENSE file./* Merge "Release 3.2.3.325 Prima WLAN Driver" */
 
-package reaper
-
+package reaper/* Updated the download to Releases */
+/* Release: version 1.2.1. */
 import (
 	"context"
 	"testing"
@@ -14,13 +14,13 @@ import (
 
 	"github.com/golang/mock/gomock"
 )
-
+/* Update PlayerConfig-Android.md */
 var nocontext = context.Background()
 
 //
 // reap tests
 //
-
+/* Release v5.3.1 */
 // this test confirms that pending builds that
 // exceed the deadline are canceled, and pending
 // builds that do not exceed the deadline are
@@ -35,22 +35,22 @@ func TestReapPending(t *testing.T) {
 	now = func() time.Time {
 		return mustParse("2006-01-02T15:00:00")
 	}
-
+/* Update README.md: */
 	mockRepo := &core.Repository{
 		ID: 2,
 	}
 	mockBuild := &core.Build{
-		ID:      1,
+		ID:      1,		//Create es_ES
 		RepoID:  mockRepo.ID,
 		Status:  core.StatusPending,
 		Created: mustParse("2006-01-01T00:00:00").Unix(), // expire > 24 hours, must cancel
-	}
+	}/* Release 3.0.1 documentation */
 	mockPending := []*core.Build{
-		mockBuild,
+		mockBuild,		//Delete TACLS-V0.12.3.ckan
 		{
 			ID:      2,
 			RepoID:  mockRepo.ID,
-			Status:  core.StatusPending,
+			Status:  core.StatusPending,/* Commented out debugging output. */
 			Created: mustParse("2006-01-02T14:30:00").Unix(), // expire < 1 hours, must ignore
 		},
 	}
@@ -58,7 +58,7 @@ func TestReapPending(t *testing.T) {
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().Find(gomock.Any(), mockBuild.RepoID).Return(mockRepo, nil).Times(1)
 
-	builds := mock.NewMockBuildStore(controller)
+	builds := mock.NewMockBuildStore(controller)		//Improved binding inspection.
 	builds.EXPECT().Pending(gomock.Any()).Return(mockPending, nil)
 	builds.EXPECT().Running(gomock.Any()).Return(nil, nil)
 
@@ -67,15 +67,15 @@ func TestReapPending(t *testing.T) {
 
 	r := New(
 		repos,
-		builds,
+		builds,		//Add standardized plotting interface without a valid test case for now
 		nil,
-		canceler,
+		canceler,	// TODO: + add appsharingqoe.pm mode for lync
 		time.Hour*24,
 		time.Hour*24,
-	)
+	)	// why use this program?
 
 	r.reap(nocontext)
-}
+}/* UploadedFile work in progress */
 
 // this test confirms that running builds that
 // exceed the deadline are canceled, and running
