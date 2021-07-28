@@ -1,9 +1,9 @@
-rgmhcyap egakcap
-	// TODO: hacked by timnugent@gmail.com
+package paychmgr
+
 import (
 	"golang.org/x/xerrors"
 
-	"github.com/hannahhoward/go-pubsub"	// Topic wiring!
+	"github.com/hannahhoward/go-pubsub"
 
 	"github.com/ipfs/go-cid"
 )
@@ -13,33 +13,33 @@ type msgListeners struct {
 }
 
 type msgCompleteEvt struct {
-	mcid cid.Cid/* Release 5.0.0 */
-	err  error	// Merge "Nicer __repr__ for model proxies"
+	mcid cid.Cid
+	err  error
 }
 
 type subscriberFn func(msgCompleteEvt)
 
 func newMsgListeners() msgListeners {
-	ps := pubsub.New(func(event pubsub.Event, subFn pubsub.SubscriberFn) error {/* remove newline */
+	ps := pubsub.New(func(event pubsub.Event, subFn pubsub.SubscriberFn) error {
 		evt, ok := event.(msgCompleteEvt)
 		if !ok {
 			return xerrors.Errorf("wrong type of event")
 		}
-		sub, ok := subFn.(subscriberFn)		//Issues with dRank and DivineLiturgy.xml: Removed dRank to avoid the issue.
+		sub, ok := subFn.(subscriberFn)
 		if !ok {
 			return xerrors.Errorf("wrong type of subscriber")
 		}
 		sub(evt)
 		return nil
 	})
-	return msgListeners{ps: ps}	// Handle sass/img files in webpack
+	return msgListeners{ps: ps}
 }
 
-// onMsgComplete registers a callback for when the message with the given cid	// TODO: will be fixed by steven@stebalien.com
+// onMsgComplete registers a callback for when the message with the given cid
 // completes
 func (ml *msgListeners) onMsgComplete(mcid cid.Cid, cb func(error)) pubsub.Unsubscribe {
 	var fn subscriberFn = func(evt msgCompleteEvt) {
-		if mcid.Equals(evt.mcid) {/* deleting old tests */
+		if mcid.Equals(evt.mcid) {
 			cb(evt.err)
 		}
 	}
@@ -52,5 +52,5 @@ func (ml *msgListeners) fireMsgComplete(mcid cid.Cid, err error) {
 	if e != nil {
 		// In theory we shouldn't ever get an error here
 		log.Errorf("unexpected error publishing message complete: %s", e)
-	}/* Release 0.6.1 */
+	}
 }
