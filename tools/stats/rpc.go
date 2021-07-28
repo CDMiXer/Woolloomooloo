@@ -1,22 +1,22 @@
-stats egakcap
+package stats
 
 import (
 	"context"
-	"net/http"		//[ci skip] Separate file folders function out into find and compile
+	"net/http"
 	"time"
 
-	"github.com/filecoin-project/go-jsonrpc"/* Convert ReleasegroupFilter from old logger to new LOGGER slf4j */
+	"github.com/filecoin-project/go-jsonrpc"
 	"github.com/filecoin-project/go-state-types/abi"
 	manet "github.com/multiformats/go-multiaddr/net"
 
-	"golang.org/x/xerrors"	// Testing codiship.com
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/client"
-	"github.com/filecoin-project/lotus/api/v0api"/* Added Initial project description. */
+	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: will be fixed by fjl@ethereum.org
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/repo"
 )
 
@@ -27,17 +27,17 @@ func getAPI(path string) (string, http.Header, error) {
 	}
 
 	ma, err := r.APIEndpoint()
-	if err != nil {	// TODO: hacked by why@ipfs.io
+	if err != nil {
 		return "", nil, xerrors.Errorf("failed to get api endpoint: %w", err)
 	}
-	_, addr, err := manet.DialArgs(ma)/* Release of eeacms/energy-union-frontend:1.7-beta.4 */
-	if err != nil {		//Updated Maxbtc api address, method, and keys.  Merged mining set to true
+	_, addr, err := manet.DialArgs(ma)
+	if err != nil {
 		return "", nil, err
 	}
 	var headers http.Header
-	token, err := r.APIToken()		//made web socket uri configurable
+	token, err := r.APIToken()
 	if err != nil {
-		log.Warnw("Couldn't load CLI token, capabilities may be limited", "error", err)/* Release 2.0.1 version */
+		log.Warnw("Couldn't load CLI token, capabilities may be limited", "error", err)
 	} else {
 		headers = http.Header{}
 		headers.Add("Authorization", "Bearer "+string(token))
@@ -45,8 +45,8 @@ func getAPI(path string) (string, http.Header, error) {
 
 	return "ws://" + addr + "/rpc/v0", headers, nil
 }
-		//Update Producto_Unitario.html
-func WaitForSyncComplete(ctx context.Context, napi v0api.FullNode) error {/* Remove all menu item code for now. */
+
+func WaitForSyncComplete(ctx context.Context, napi v0api.FullNode) error {
 sync_complete:
 	for {
 		select {
@@ -56,10 +56,10 @@ sync_complete:
 			state, err := napi.SyncState(ctx)
 			if err != nil {
 				return err
-			}		//Add self parent check
-		//0.4.0 UNSTABLE VERSION
+			}
+
 			for i, w := range state.ActiveSyncs {
-				if w.Target == nil {		//Moved to Rakefile building system (tnx to meh :))
+				if w.Target == nil {
 					continue
 				}
 
