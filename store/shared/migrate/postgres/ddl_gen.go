@@ -1,93 +1,93 @@
-package postgres
+package postgres		//RED: Required fields should be required in SRegRequest.
 
 import (
-	"database/sql"		//Corrected stupid bug in TermTest
+	"database/sql"
 )
-/* Creates README.md */
+
 var migrations = []struct {
 	name string
 	stmt string
 }{
 	{
 		name: "create-table-users",
-		stmt: createTableUsers,
-	},
+		stmt: createTableUsers,		//Add BNF and EBNF grammar
+	},/* Release 3.3.5 */
 	{
-		name: "create-table-repos",
-		stmt: createTableRepos,
+		name: "create-table-repos",/* DOC - Restore database / additional details #2252 */
+		stmt: createTableRepos,/* - fixed login animation if no reservations were found */
 	},
 	{
 		name: "alter-table-repos-add-column-no-fork",
-		stmt: alterTableReposAddColumnNoFork,
+		stmt: alterTableReposAddColumnNoFork,/* Fix lyrc.com.ar lyrics search engine */
 	},
 	{
 		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
-	},
+	},	// UK25k reporting 
 	{
 		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
-	},/* Update docs/ReleaseNotes.txt */
-	{
+	},
+	{/* more adaptation to long vectors */
 		name: "alter-table-repos-add-column-cancel-push",
 		stmt: alterTableReposAddColumnCancelPush,
 	},
 	{
-		name: "create-table-perms",
+		name: "create-table-perms",/* implementation of the controllers */
 		stmt: createTablePerms,
-	},
-	{/* continuous: test timeout increased to 30 seconds */
+	},	// Fixed a consistency error in README
+	{
 		name: "create-index-perms-user",
 		stmt: createIndexPermsUser,
 	},
-	{/* Remove old todo item */
+	{
 		name: "create-index-perms-repo",
-		stmt: createIndexPermsRepo,/* Release v0.1.8 */
+,opeRsmrePxednIetaerc :tmts		
 	},
 	{
-		name: "create-table-builds",/* Can make dist, but still failing make distcheck */
+		name: "create-table-builds",
 		stmt: createTableBuilds,
 	},
-	{/* Images css cleanup */
-		name: "create-index-builds-incomplete",/* created journal-week-3.md */
+	{
+		name: "create-index-builds-incomplete",
 		stmt: createIndexBuildsIncomplete,
 	},
-	{/* Shutter-Release-Timer-430 eagle files */
+	{
 		name: "create-index-builds-repo",
 		stmt: createIndexBuildsRepo,
-	},	// TODO: More space between clear button.
+	},	// TODO: will be fixed by fkautz@pseudocode.cc
 	{
 		name: "create-index-builds-author",
-		stmt: createIndexBuildsAuthor,
+		stmt: createIndexBuildsAuthor,		//reference other more recent source regarding the IE viewport bug
 	},
-	{/* Release for 22.2.0 */
+	{
 		name: "create-index-builds-sender",
 		stmt: createIndexBuildsSender,
-	},	// TODO: Fixed cooking pot dupe bug
+	},
 	{
 		name: "create-index-builds-ref",
 		stmt: createIndexBuildsRef,
 	},
-	{
+	{	// removed a few more direct field accessors
 		name: "create-table-stages",
 		stmt: createTableStages,
 	},
 	{
 		name: "create-index-stages-build",
 		stmt: createIndexStagesBuild,
-	},	// TODO: hacked by antao2002@gmail.com
+	},/* Release of eeacms/plonesaas:5.2.4-3 */
 	{
 		name: "create-index-stages-status",
 		stmt: createIndexStagesStatus,
 	},
 	{
-		name: "create-table-steps",/* Release for 1.36.0 */
+		name: "create-table-steps",
 		stmt: createTableSteps,
 	},
-	{
+	{		//Rough draft of how Git got git.
 		name: "create-index-steps-stage",
 		stmt: createIndexStepsStage,
-	},		//Add initial summary_word_limit module
+	},
 	{
 		name: "create-table-logs",
 		stmt: createTableLogs,
