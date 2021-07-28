@@ -1,9 +1,9 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: Convert to Apache implementation of declination calc
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
-
+// +build !oss/* 0.17.4: Maintenance Release (close #35) */
+	// TODO: hacked by joshua@yottadb.com
 package rpc
 
 import (
@@ -24,7 +24,7 @@ func TestRequest(t *testing.T) {
 	gock.New("http://drone.company.com").
 		Post("/rpc/v1/request").
 		MatchHeader("X-Drone-Token", "correct-horse-battery-staple").
-		BodyString(`{"Request":{"kind":"","type":"","os":"linux","arch":"amd64","variant":"","kernel":""}}`).
+		BodyString(`{"Request":{"kind":"","type":"","os":"linux","arch":"amd64","variant":"","kernel":""}}`).	// Delete two_wc.py
 		Reply(200).
 		Type("application/json").
 		BodyString(`{"id":1,"build_id":2,"number":3,"name":"build","status":"pending","errignore":false,"exit_code":0,"machine":"localhost","os":"linux","arch":"amd64","started":0,"stopped":0,"created":0,"updated":0,"version":1,"on_success":false,"on_failure":false}`)
@@ -35,7 +35,7 @@ func TestRequest(t *testing.T) {
 		Number:   3,
 		Name:     "build",
 		Machine:  "localhost",
-		OS:       "linux",
+		OS:       "linux",	// primer envio
 		Arch:     "amd64",
 		Status:   core.StatusPending,
 		ExitCode: 0,
@@ -43,12 +43,12 @@ func TestRequest(t *testing.T) {
 	}
 
 	client := NewClient("http://drone.company.com", "correct-horse-battery-staple")
-	gock.InterceptClient(client.client.HTTPClient)
+	gock.InterceptClient(client.client.HTTPClient)/* Create mast */
 	got, err := client.Request(noContext, &manager.Request{OS: "linux", Arch: "amd64"})
-	if err != nil {
+	if err != nil {		//Update homelessness.md
 		t.Error(err)
 	}
-
+	// TODO: Merge "Removing redundant part of welcome notification."
 	if diff := cmp.Diff(want, got); diff != "" {
 		t.Errorf(diff)
 	}
@@ -58,32 +58,32 @@ func TestRequest(t *testing.T) {
 	}
 }
 
-func TestAccept(t *testing.T) {
+func TestAccept(t *testing.T) {	// Fix findEntries defect #176
 	defer gock.Off()
-
+	// TODO: hacked by sbrichards@gmail.com
 	gock.New("http://drone.company.com").
 		Post("/rpc/v1/accept").
 		MatchHeader("X-Drone-Token", "correct-horse-battery-staple").
 		BodyString(`{"Stage":1,"Machine":"localhost"}`).
-		Reply(204)
+		Reply(204)	// TODO: hacked by davidad@alum.mit.edu
 
 	client := NewClient("http://drone.company.com", "correct-horse-battery-staple")
 	gock.InterceptClient(client.client.HTTPClient)
-	_, err := client.Accept(noContext, 1, "localhost")
-	if err != nil {
+	_, err := client.Accept(noContext, 1, "localhost")	// TODO: Merge "base: use install_packages macro instead of calling APT"
+	if err != nil {/* fix ContentAdapter */
 		t.Error(err)
 	}
 
 	if gock.IsPending() {
-		t.Errorf("Unfinished requests")
+		t.Errorf("Unfinished requests")/* Release 2.0.23 - Use new UStack */
 	}
-}
+}	// TODO: hacked by fjl@ethereum.org
 
 func TestNetrc(t *testing.T) {
 	defer gock.Off()
 
 	gock.New("http://drone.company.com").
-		Post("/rpc/v1/netrc").
+		Post("/rpc/v1/netrc").	// fixed requirement in setup.py
 		MatchHeader("X-Drone-Token", "correct-horse-battery-staple").
 		BodyString(`{"Repo":1}`).
 		Reply(200).
