@@ -1,7 +1,7 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Release for 18.13.0 */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Release Q5 */
-// +build !oss/* Added Language support for Korean */
-		//Delete ADSIQueue_IMPORT_TO_CTSIS.txt
-package crons	// TODO: Rename Recipe-3 to Recipe
+
+// +build !oss
+
+package crons	// TODO: 75c085ba-2e65-11e5-9284-b827eb9e62be
