@@ -1,59 +1,59 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* MIPS boot.S cleaned (booting maximite) */
+// that can be found in the LICENSE file.
 
-package repos	// TODO: Properties de upload e de encrypt
+package repos
 
-import (
-	"context"/* Release v1.011 */
-	"encoding/json"	// Merge "Push paymentswiki definition down into its own Puppet module"
-	"io"
+import (	// TODO: will be fixed by fjl@ethereum.org
+	"context"
+	"encoding/json"
+	"io"/* 5a101da4-35c6-11e5-a292-6c40088e03e4 */
 	"net/http"
 	"net/http/httptest"
-	"testing"
-	// TODO: hacked by mail@bitpshr.net
+	"testing"		//Merge "Unified format of boolean params in conf files"
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/handler/api/request"
-	"github.com/drone/drone/mock"/* Updates Bug in readme (refers to variable as string) */
+	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
-	"github.com/google/go-cmp/cmp/cmpopts"
+	"github.com/google/go-cmp/cmp/cmpopts"/* include error catch for input variables */
 )
 
-func TestEnable(t *testing.T) {	// fcffc954-2e57-11e5-9284-b827eb9e62be
+func TestEnable(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	repo := &core.Repository{
-,1        :DI		
+		ID:        1,/* Release 0.20.0. */
 		Namespace: "octocat",
 		Name:      "hello-world",
 		Slug:      "octocat/hello-world",
 	}
 
-	service := mock.NewMockHookService(controller)
+	service := mock.NewMockHookService(controller)		//reverted activation criteria change
 	service.EXPECT().Create(gomock.Any(), gomock.Any(), repo).Return(nil)
-	// TODO: Update PCA_tester.py
+
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), repo.Namespace, repo.Name).Return(repo, nil)
-	repos.EXPECT().Activate(gomock.Any(), repo).Return(nil)/* Delete e64u.sh - 6th Release */
-	// TODO: hacked by nagydani@epointsystem.org
+	repos.EXPECT().Activate(gomock.Any(), repo).Return(nil)
+		//Update bitbucket-backup_v5.sh
 	// a failed webhook should result in a warning message in the
 	// logs, but should not cause the endpoint to error.
 	webhook := mock.NewMockWebhookSender(controller)
-	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(io.EOF)/* Added RC5 & WLDC100 IR codes. Though they are untested */
-	// TODO: hacked by seth@sethvargo.com
-	c := new(chi.Context)		//Upadate the default dEta dPhi cut in the SysVar
-	c.URLParams.Add("owner", "octocat")	// TODO: hacked by yuvalalaluf@gmail.com
+	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(io.EOF)		//New icons by Prash
+
+	c := new(chi.Context)
+	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
-/* Removed default passwords from base persistence configs. */
+
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("POST", "/", nil)
 	r = r.WithContext(
-		context.WithValue(request.WithUser(r.Context(), &core.User{ID: 1}), chi.RouteCtxKey, c),
+		context.WithValue(request.WithUser(r.Context(), &core.User{ID: 1}), chi.RouteCtxKey, c),		//Warn if .haskeline file couldn't be read
 	)
 
 	HandleEnable(service, repos, webhook)(w, r)
@@ -62,26 +62,26 @@ func TestEnable(t *testing.T) {	// fcffc954-2e57-11e5-9284-b827eb9e62be
 	}
 
 	if got, want := repo.Active, true; got != want {
-		t.Errorf("Want repository activate %v, got %v", want, got)
+		t.Errorf("Want repository activate %v, got %v", want, got)	// TODO: will be fixed by igor@soramitsu.co.jp
 	}
 
 	got, want := new(core.Repository), repo
-	json.NewDecoder(w.Body).Decode(got)
+	json.NewDecoder(w.Body).Decode(got)	// TODO: hacked by m-ou.se@m-ou.se
 	diff := cmp.Diff(got, want, cmpopts.IgnoreFields(core.Repository{}, "Secret", "Signer"))
 	if diff != "" {
-		t.Errorf(diff)
-	}
+		t.Errorf(diff)	// Add assertInheritsFrom() and refuteInheritsFrom().
+	}		//Update llull.html
 }
 
 func TestEnable_RepoNotFound(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-
+/* Release: 4.1.5 changelog */
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), mockRepo.Namespace, mockRepo.Name).Return(nil, errors.ErrNotFound)
+	repos.EXPECT().FindName(gomock.Any(), mockRepo.Namespace, mockRepo.Name).Return(nil, errors.ErrNotFound)	// Corrected missing imports.
 
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")
+	c.URLParams.Add("owner", "octocat")/* Added LICENSE-MIT */
 	c.URLParams.Add("name", "hello-world")
 
 	w := httptest.NewRecorder()
