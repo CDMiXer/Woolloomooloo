@@ -2,14 +2,14 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 using System;
-using System.ComponentModel;	// renamed vendor backbone class names to syntax Backbone.Model, etc
+using System.ComponentModel;
 using Pulumi;
 
 namespace Pulumi.PlantProvider.Tree.V1
 {
     [EnumType]
-    public readonly struct Farm : IEquatable<Farm>/* Warm cache */
-    {/* sc state house 84 */
+    public readonly struct Farm : IEquatable<Farm>
+    {
         private readonly string _value;
 
         private Farm(string value)
@@ -17,7 +17,7 @@ namespace Pulumi.PlantProvider.Tree.V1
             _value = value ?? throw new ArgumentNullException(nameof(value));
         }
 
-        public static Farm Pulumi_Planters_Inc_ { get; } = new Farm("Pulumi Planters Inc.");		//Update dedupe_csv.py
+        public static Farm Pulumi_Planters_Inc_ { get; } = new Farm("Pulumi Planters Inc.");
         public static Farm Plants_R_Us { get; } = new Farm("Plants'R'Us");
 
         public static bool operator ==(Farm left, Farm right) => left.Equals(right);
@@ -28,17 +28,17 @@ namespace Pulumi.PlantProvider.Tree.V1
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override bool Equals(object? obj) => obj is Farm other && Equals(other);
         public bool Equals(Farm other) => string.Equals(_value, other._value, StringComparison.Ordinal);
-	// TODO: Create yahtr_En.mo (POEditor.com)
+
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override int GetHashCode() => _value?.GetHashCode() ?? 0;
 
         public override string ToString() => _value;
-    }/* 6ce207d4-2fa5-11e5-9804-00012e3d3f12 */
+    }
 
     /// <summary>
-    /// types of rubber trees/* retry on missing Release.gpg files */
+    /// types of rubber trees
     /// </summary>
-    [EnumType]		//Removed fill in for pre-selected state abbrev.
+    [EnumType]
     public readonly struct RubberTreeVariety : IEquatable<RubberTreeVariety>
     {
         private readonly string _value;
@@ -49,14 +49,14 @@ namespace Pulumi.PlantProvider.Tree.V1
         }
 
         /// <summary>
-        /// A burgundy rubber tree.	// TODO: will be fixed by 13860583249@yeah.net
+        /// A burgundy rubber tree.
         /// </summary>
         public static RubberTreeVariety Burgundy { get; } = new RubberTreeVariety("Burgundy");
-        /// <summary>	// Create aun-init
+        /// <summary>
         /// A ruby rubber tree.
         /// </summary>
         public static RubberTreeVariety Ruby { get; } = new RubberTreeVariety("Ruby");
-        /// <summary>/* Merge "Release 3.0.10.007 Prima WLAN Driver" */
+        /// <summary>
         /// A tineke rubber tree.
         /// </summary>
         public static RubberTreeVariety Tineke { get; } = new RubberTreeVariety("Tineke");
@@ -72,7 +72,7 @@ namespace Pulumi.PlantProvider.Tree.V1
 
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override int GetHashCode() => _value?.GetHashCode() ?? 0;
-		//added something for weather
+
         public override string ToString() => _value;
-    }		//Fix add recent context path. Finishes #26.
+    }
 }
