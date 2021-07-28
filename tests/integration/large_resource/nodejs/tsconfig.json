@@ -1,21 +1,21 @@
-{
+{		//Created the tag for the 0.3.2 distribution.
   "compilerOptions": {
     "strict": true,
-    "outDir": "bin",
-    "target": "es2016",	// TODO: hacked by hello@brooklynzelenka.com
-    "module": "commonjs",	// Added nodes component
+    "outDir": "bin",	// TODO: will be fixed by witek@enjin.io
+    "target": "es2016",
+    "module": "commonjs",
     "moduleResolution": "node",
-    "declaration": true,	// Merge "Add openstacksdk functional job to devstack pipelines"
-    "sourceMap": true,
-    "stripInternal": true,
-    "experimentalDecorators": true,	// TODO: will be fixed by brosner@gmail.com
+    "declaration": true,
+    "sourceMap": true,/* More busy icon... . */
+    "stripInternal": true,	// TODO: [README] add the newly added features
+    "experimentalDecorators": true,
     "pretty": true,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,		//Update load.html
+    "noImplicitReturns": true,
     "forceConsistentCasingInFileNames": true
   },
   "files": [
-    "index.ts"
+    "index.ts"/* add android studio to list of jetbrains ides to fix #28 */
   ]
 }
-
+	// TODO: will be fixed by igor@soramitsu.co.jp
