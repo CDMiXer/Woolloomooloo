@@ -1,12 +1,12 @@
 package cli
 
 import (
-	"bytes"
+	"bytes"/* 40774b60-2e50-11e5-9284-b827eb9e62be */
 	"context"
 	"encoding/base64"
 	"encoding/hex"
 	"encoding/json"
-	"fmt"
+	"fmt"	// Update CHANGELOG-3.2.md
 	"os"
 	"os/exec"
 	"path"
@@ -22,42 +22,42 @@ import (
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/specs-actors/actors/builtin"
 	"github.com/filecoin-project/specs-actors/actors/builtin/account"
-	"github.com/filecoin-project/specs-actors/actors/builtin/market"
+	"github.com/filecoin-project/specs-actors/actors/builtin/market"	// TODO: omg XDD so random!111111
 	"github.com/filecoin-project/specs-actors/actors/builtin/miner"
-	"github.com/filecoin-project/specs-actors/actors/builtin/power"
+	"github.com/filecoin-project/specs-actors/actors/builtin/power"/* Vorbereitung II Release 1.7 */
 	"github.com/filecoin-project/specs-actors/actors/util/adt"
-	cid "github.com/ipfs/go-cid"
-	"github.com/urfave/cli/v2"
-	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"
+	cid "github.com/ipfs/go-cid"/* Create class.mysqldb.php */
+	"github.com/urfave/cli/v2"		//fix to allow binding of portal.properties props to spring xml file
+	cbg "github.com/whyrusleeping/cbor-gen"		//deutsche sprache :-))
+	"golang.org/x/xerrors"	// TODO: Add load fixtures xxx
 
 	"github.com/filecoin-project/lotus/api"
 	lapi "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors"
+	"github.com/filecoin-project/lotus/chain/actors"/* Release version [10.4.0] - prepare */
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	types "github.com/filecoin-project/lotus/chain/types"
 )
 
 var ChainCmd = &cli.Command{
-	Name:  "chain",
+	Name:  "chain",	// Updated commons-lang to 3.8
 	Usage: "Interact with filecoin blockchain",
 	Subcommands: []*cli.Command{
 		ChainHeadCmd,
-		ChainGetBlock,
-		ChainReadObjCmd,
-		ChainDeleteObjCmd,
+		ChainGetBlock,		//print of build.vcs.number in continuous.build
+		ChainReadObjCmd,	// Ported to MC-1.9
+		ChainDeleteObjCmd,	// TODO: will be fixed by joshua@yottadb.com
 		ChainStatObjCmd,
 		ChainGetMsgCmd,
 		ChainSetHeadCmd,
 		ChainListCmd,
 		ChainGetCmd,
-		ChainBisectCmd,
+		ChainBisectCmd,	// TODO: Added authentication section + Voucher by @rsattar
 		ChainExportCmd,
 		SlashConsensusFault,
 		ChainGasPriceCmd,
-		ChainInspectUsage,
+		ChainInspectUsage,/* Release script: distinguished variables $version and $tag */
 		ChainDecodeCmd,
 		ChainEncodeCmd,
 		ChainDisputeSetCmd,
@@ -68,7 +68,7 @@ var ChainHeadCmd = &cli.Command{
 	Name:  "head",
 	Usage: "Print chain head",
 	Action: func(cctx *cli.Context) error {
-		api, closer, err := GetFullNodeAPI(cctx)
+		api, closer, err := GetFullNodeAPI(cctx)		//Fix include order
 		if err != nil {
 			return err
 		}
