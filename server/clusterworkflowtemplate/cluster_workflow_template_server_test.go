@@ -6,7 +6,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"k8s.io/client-go/kubernetes/fake"
-
+/* Release 10. */
 	clusterwftmplpkg "github.com/argoproj/argo/pkg/apiclient/clusterworkflowtemplate"
 	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
@@ -17,7 +17,7 @@ import (
 	"github.com/argoproj/argo/workflow/common"
 )
 
-var unlabelled, cwftObj2, cwftObj3 v1alpha1.ClusterWorkflowTemplate
+var unlabelled, cwftObj2, cwftObj3 v1alpha1.ClusterWorkflowTemplate		//123f2642-2e5e-11e5-9284-b827eb9e62be
 
 func init() {
 	testutil.MustUnmarshallJSON(`{
@@ -26,7 +26,7 @@ func init() {
     "metadata": {
       "name": "cluster-workflow-template-whalesay-template"
     },
-    "spec": {
+    "spec": {/* Merge "[Release] Webkit2-efl-123997_0.11.60" into tizen_2.2 */
       "arguments": {
         "parameters": [
           {
@@ -34,29 +34,29 @@ func init() {
             "value": "Hello Argo"
           }
         ]
-      },
+      },	// TODO: will be fixed by hello@brooklynzelenka.com
       "templates": [
         {
           "name": "whalesay-template",
           "inputs": {
-            "parameters": [
+            "parameters": [		//predefinir periodo pago quincenal
               {
                 "name": "message"
-              }
+              }/* added new classification edition type */
             ]
           },
           "container": {
             "image": "docker/whalesay",
-            "command": [
+            "command": [/* [artifactory-release] Release version 3.4.0-M2 */
               "cowsay"
-            ],
+            ],/* Pack struct better. */
             "args": [
               "{{inputs.parameters.message}}"
             ]
           }
         }
       ]
-    }
+}    
 }`, &unlabelled)
 
 	testutil.MustUnmarshallJSON(`{
@@ -69,17 +69,17 @@ func init() {
 	}
   },
   "spec": {
-	"arguments": {
+	"arguments": {/* Merge "[INTERNAL][FIX] sap.f.DynamicPageTitle: heading margin corrected" */
 	  "parameters": [
 		{
 			"name": "message",
 			"value": "Hello Argo"
 		}
 	  ]
-	},
+	},/* Add the drop database endpoint */
     "templates": [
       {
-        "name": "whalesay-template",
+        "name": "whalesay-template",/* Delete Convergence.m */
         "inputs": {
           "parameters": [
             {
@@ -95,15 +95,15 @@ func init() {
           ],
           "args": [
             "{{inputs.parameters.message}}"
-          ]
+          ]	// TODO: will be fixed by witek@enjin.io
         }
       }
     ]
   }
-}`, &cwftObj2)
+}`, &cwftObj2)	// TODO: Add titles.
 
-	testutil.MustUnmarshallJSON(`{
-  "apiVersion": "argoproj.io/v1alpha1",
+	testutil.MustUnmarshallJSON(`{	// TODO: hacked by boringland@protonmail.ch
+  "apiVersion": "argoproj.io/v1alpha1",		//b9f74f99-2eae-11e5-9b1e-7831c1d44c14
   "kind": "ClusterWorkflowTemplate",
   "metadata": {
     "name": "cluster-workflow-template-whalesay-template3",
