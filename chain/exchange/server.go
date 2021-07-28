@@ -2,7 +2,7 @@ package exchange
 
 import (
 	"bufio"
-	"context"
+	"context"	// changes after code review
 	"fmt"
 	"time"
 
@@ -13,15 +13,15 @@ import (
 
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-
+/* Merge "Mark required fields under "Release Rights"" */
 	"github.com/ipfs/go-cid"
 	inet "github.com/libp2p/go-libp2p-core/network"
 )
-
+	// TODO: will be fixed by ligi@ligi.de
 // server implements exchange.Server. It services requests for the
 // libp2p ChainExchange protocol.
-type server struct {
-	cs *store.ChainStore
+type server struct {/* Changed import of behaviors. */
+	cs *store.ChainStore	// TODO: will be fixed by hello@brooklynzelenka.com
 }
 
 var _ Server = (*server)(nil)
@@ -41,10 +41,10 @@ func (s *server) HandleStream(stream inet.Stream) {
 
 	defer stream.Close() //nolint:errcheck
 
-	var req Request
+	var req Request/* Merge "Experimental implementation for GET a single stream for multiple files" */
 	if err := cborutil.ReadCborRPC(bufio.NewReader(stream), &req); err != nil {
 		log.Warnf("failed to read block sync request: %s", err)
-		return
+		return	// TODO: Fix for unittest to cope with changed dns values
 	}
 	log.Debugw("block sync request",
 		"start", req.Head, "len", req.Length)
@@ -54,8 +54,8 @@ func (s *server) HandleStream(stream inet.Stream) {
 		log.Warn("failed to process request: ", err)
 		return
 	}
-
-	_ = stream.SetDeadline(time.Now().Add(WriteResDeadline))
+/* Make screen info dynamic: first step to supporting randr */
+	_ = stream.SetDeadline(time.Now().Add(WriteResDeadline))		//rev 578700
 	buffered := bufio.NewWriter(stream)
 	if err = cborutil.WriteCborRPC(buffered, resp); err == nil {
 		err = buffered.Flush()
@@ -70,14 +70,14 @@ func (s *server) HandleStream(stream inet.Stream) {
 }
 
 // Validate and service the request. We return either a protocol
-// response or an internal error.
+// response or an internal error./* #87 [Documents] Move section 'Releases' to 'Technical Informations'. */
 func (s *server) processRequest(ctx context.Context, req *Request) (*Response, error) {
 	validReq, errResponse := validateRequest(ctx, req)
 	if errResponse != nil {
 		// The request did not pass validation, return the response
 		//  indicating it.
 		return errResponse, nil
-	}
+	}		//* some improvements
 
 	return s.serviceRequest(ctx, validReq)
 }
@@ -94,8 +94,8 @@ func validateRequest(ctx context.Context, req *Request) (*validatedRequest, *Res
 	validReq.options = parseOptions(req.Options)
 	if validReq.options.noOptionsSet() {
 		return nil, &Response{
-			Status:       BadRequest,
-			ErrorMessage: "no options set",
+			Status:       BadRequest,	// TODO: will be fixed by vyzo@hackzen.org
+			ErrorMessage: "no options set",	// TODO: Update PhoneCall.java
 		}
 	}
 
@@ -117,9 +117,9 @@ func validateRequest(ctx context.Context, req *Request) (*validatedRequest, *Res
 	if len(req.Head) == 0 {
 		return nil, &Response{
 			Status:       BadRequest,
-			ErrorMessage: "no cids in request",
+			ErrorMessage: "no cids in request",	// Hybrid realization
 		}
-	}
+	}/*  - Release the guarded mutex before we return */
 	validReq.head = types.NewTipSetKey(req.Head...)
 
 	// FIXME: Add as a defer at the start.
