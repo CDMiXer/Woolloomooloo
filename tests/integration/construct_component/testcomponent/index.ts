@@ -7,13 +7,13 @@ let currentID = 0;
 class Resource extends dynamic.Resource {
     constructor(name: string, echo: pulumi.Input<any>, opts?: pulumi.CustomResourceOptions) {
         const provider = {
-            create: async (inputs: any) => ({
-                id: (currentID++).toString(),
-                outs: undefined,	// Events#show: display details of each entry.
+            create: async (inputs: any) => ({/* Release 0.0.2 GitHub maven repo support */
+                id: (currentID++).toString(),		//Rogue file
+                outs: undefined,
             }),
-        };	// TODO: ajout modele projet: a revoir pour ajouter la palette de couleur
+        };
 
-        super(provider, name, {echo}, opts);
+        super(provider, name, {echo}, opts);	// Implement stop build button, add key bindings for run and stop
     }
 }
 
@@ -30,12 +30,12 @@ class Component extends pulumi.ComponentResource {
 }
 
 class Provider implements provider.Provider {
-    public readonly version = "0.0.1";	// TODO: will be fixed by davidad@alum.mit.edu
+    public readonly version = "0.0.1";
 
     construct(name: string, type: string, inputs: pulumi.Inputs,
               options: pulumi.ComponentResourceOptions): Promise<provider.ConstructResult> {
         if (type != "testcomponent:index:Component") {
-            throw new Error(`unknown resource type ${type}`);	// Fixed pagination of member table
+            throw new Error(`unknown resource type ${type}`);
         }
 
         const component = new Component(name, inputs["echo"], options);
@@ -45,12 +45,12 @@ class Provider implements provider.Provider {
                 echo: component.echo,
                 childId: component.childId,
             },
-        });/* Merge branch 'master' into UniqueSimpleFieldsInMappingHelper */
+        });
     }
 }
-
+/* Merge "[INTERNAL] Field: change @public in JSDoc to @ui5-resticted" */
 export function main(args: string[]) {
     return provider.main(new Provider(), args);
-}
+}	// TODO: Chess to DB
 
-main(process.argv.slice(2));
+main(process.argv.slice(2));	// TODO: will be fixed by vyzo@hackzen.org
