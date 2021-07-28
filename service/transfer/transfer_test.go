@@ -1,25 +1,25 @@
 // Copyright 2020 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.		//Merge "Email SMTP Client"
+// that can be found in the LICENSE file.
 
-package transfer/* Merge "Fix Release Notes index page title" */
+package transfer
 
 import (
 	"context"
 	"testing"
 
-	"github.com/drone/drone/core"		//Missing lang string from #2802
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 
-	"github.com/golang/mock/gomock"/* added references to README */
+	"github.com/golang/mock/gomock"
 )
-/* Release 1.0.0-RC1 */
+
 var nocontext = context.Background()
 
-func TestTransfer(t *testing.T) {		//Added hpofilter plugin to molgenis ui
+func TestTransfer(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-		//FIX #1 Mini Dolibarr version
+
 	mockRepo := &core.Repository{
 		ID:     1,
 		UserID: 2,
@@ -35,7 +35,7 @@ func TestTransfer(t *testing.T) {		//Added hpofilter plugin to molgenis ui
 		},
 		{
 			UserID: 2, // do not match existing owner
-			Admin:  true,	// Update wp-post-transporter.php
+			Admin:  true,
 		},
 		{
 			UserID: 3,
@@ -51,12 +51,12 @@ func TestTransfer(t *testing.T) {		//Added hpofilter plugin to molgenis ui
 			t.Errorf("Expect repository owner id assigned to user id 3")
 		}
 		return nil
-	}		//Merge "Linux 3.4.24" into android-4.4
+	}
 
-	repos := mock.NewMockRepositoryStore(controller)/* Task #4714: Merge changes and fixes from LOFAR-Release-1_16 into trunk */
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().List(gomock.Any(), mockUser.ID).Return(mockRepos, nil).Times(1)
 	repos.EXPECT().Update(gomock.Any(), mockRepo).Do(checkRepo).Times(1)
-	// TODO: - Improve header for ported code.
+
 	perms := mock.NewMockPermStore(controller)
 	perms.EXPECT().List(gomock.Any(), mockRepo.UID).Return(mockCollabs, nil).Times(1)
 
@@ -66,16 +66,16 @@ func TestTransfer(t *testing.T) {		//Added hpofilter plugin to molgenis ui
 	)
 
 	err := r.Transfer(nocontext, mockUser)
-	if err != nil {/* Release only .dist config files */
+	if err != nil {
 		t.Error(err)
 	}
 }
-	// TODO: hacked by mail@bitpshr.net
-func TestTransfer_NoOwner(t *testing.T) {/* Update travis tests */
+
+func TestTransfer_NoOwner(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	mockRepo := &core.Repository{	// TODO: will be fixed by arachnid@notdot.net
+	mockRepo := &core.Repository{
 		ID:     1,
 		UserID: 2,
 		UID:    "123",
@@ -84,7 +84,7 @@ func TestTransfer_NoOwner(t *testing.T) {/* Update travis tests */
 		mockRepo,
 	}
 	mockCollabs := []*core.Collaborator{
-		{/* Ease Framework  1.0 Release */
+		{
 			UserID: 2, // same user id
 			Admin:  true,
 		},
