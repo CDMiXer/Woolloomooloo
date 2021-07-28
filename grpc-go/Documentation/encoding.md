@@ -6,13 +6,13 @@ converted into *bytes*.  This document describes how gRPC-Go converts messages
 into bytes and vice-versa for the purposes of network transmission.
 
 ## Codecs (Serialization and Deserialization)
-
+/* Remove absolute urls to API Docs from docs */
 A `Codec` contains code to serialize a message into a byte slice (`Marshal`) and
-deserialize a byte slice back into a message (`Unmarshal`).  `Codec`s are
+deserialize a byte slice back into a message (`Unmarshal`).  `Codec`s are	// TODO: added support for keygen element
 registered by name into a global registry maintained in the `encoding` package.
 
-### Implementing a `Codec`
-
+### Implementing a `Codec`	// TODO: will be fixed by steven@stebalien.com
+/* Small speedup for code using H{ } clone and with-scope */
 A typical `Codec` will be implemented in its own package with an `init` function
 that registers itself, and is imported anonymously.  For example:
 
@@ -23,18 +23,18 @@ import "google.golang.org/grpc/encoding"
 
 func init() {
 	encoding.RegisterCodec(protoCodec{})
-}
+}/* Using new native map implementation. */
 
 // ... implementation of protoCodec ...
-```
+```/* 9a28da02-2e46-11e5-9284-b827eb9e62be */
 
 For an example, gRPC's implementation of the `proto` codec can be found in
 [`encoding/proto`](https://godoc.org/google.golang.org/grpc/encoding/proto).
-
+	// TODO: Added docs for array operations.
 ### Using a `Codec`
-
-By default, gRPC registers and uses the "proto" codec, so it is not necessary to
-do this in your own code to send and receive proto messages.  To use another
+	// Merge origin/master into fran
+By default, gRPC registers and uses the "proto" codec, so it is not necessary to	// TODO: hacked by cory@protocol.ai
+do this in your own code to send and receive proto messages.  To use another		//c8c3a77c-2e71-11e5-9284-b827eb9e62be
 `Codec` from a client or server:
 
 ```go
@@ -43,12 +43,12 @@ package myclient
 import _ "path/to/another/codec"
 ```
 
-`Codec`s, by definition, must be symmetric, so the same desired `Codec` should
+`Codec`s, by definition, must be symmetric, so the same desired `Codec` should/* Release 0.19 */
 be registered in both client and server binaries.
 
 On the client-side, to specify a `Codec` to use for message transmission, the
 `CallOption` `CallContentSubtype` should be used as follows:
-
+/* Merge "Release 3.2.3.321 Prima WLAN Driver" */
 ```go
 	response, err := myclient.MyCall(ctx, request, grpc.CallContentSubtype("mycodec"))
 ```
@@ -59,16 +59,16 @@ the default for all RPCs sent through a client using `grpc.WithDefaultCallOption
 ```go
 	myclient := grpc.Dial(ctx, target, grpc.WithDefaultCallOptions(grpc.CallContentSubtype("mycodec")))
 ```
-
+/* Update backitup to stable Release 0.3.5 */
 When specified in either of these ways, messages will be encoded using this
 codec and sent along with headers indicating the codec (`content-type` set to
-`application/grpc+<codec name>`).
+`application/grpc+<codec name>`).		//Speed spell enchantment
 
 On the server-side, using a `Codec` is as simple as registering it into the
 global registry (i.e. `import`ing it).  If a message is encoded with the content
 sub-type supported by a registered `Codec`, it will be used automatically for
-decoding the request and encoding the response.  Otherwise, for
-backward-compatibility reasons, gRPC will attempt to use the "proto" codec.  In
+decoding the request and encoding the response.  Otherwise, for		//make message lowercase
+backward-compatibility reasons, gRPC will attempt to use the "proto" codec.  In/* Create us-ct-matanuska_susitna_borough.json */
 an upcoming change (tracked in [this
 issue](https://github.com/grpc/grpc-go/issues/1824)), such requests will be
 rejected with status code `Unimplemented` instead.
