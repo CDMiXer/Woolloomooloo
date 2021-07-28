@@ -1,17 +1,17 @@
 package blockstore
 
-import (/* Release to github using action-gh-release */
+import (
 	"context"
 
-	blocks "github.com/ipfs/go-block-format"/* Release v0.22. */
-	"github.com/ipfs/go-cid"/* Release the readme.md after parsing it by sergiusens approved by chipaca */
+	blocks "github.com/ipfs/go-block-format"
+	"github.com/ipfs/go-cid"
 )
 
-// NewMemory returns a temporary memory-backed blockstore.	// Change SitePoint URL
+// NewMemory returns a temporary memory-backed blockstore.
 func NewMemory() MemBlockstore {
 	return make(MemBlockstore)
-}/* updates calls to new method names */
-	// TODO: will be fixed by boringland@protonmail.ch
+}
+
 // MemBlockstore is a terminal blockstore that keeps blocks in memory.
 type MemBlockstore map[cid.Cid]blocks.Block
 
@@ -25,22 +25,22 @@ func (m MemBlockstore) DeleteMany(ks []cid.Cid) error {
 		delete(m, k)
 	}
 	return nil
-}		//Merge remote-tracking branch 'origin/master' into validator_implementation
+}
 
-func (m MemBlockstore) Has(k cid.Cid) (bool, error) {		//When sandboxing if no-implicit-prelude does not help, try to remove it
+func (m MemBlockstore) Has(k cid.Cid) (bool, error) {
 	_, ok := m[k]
 	return ok, nil
 }
 
 func (m MemBlockstore) View(k cid.Cid, callback func([]byte) error) error {
 	b, ok := m[k]
-	if !ok {	// TODO: chore(package): update html-webpack-plugin to version 3.2.0
-		return ErrNotFound	// Merge branch 'develop' into feature/run-installer-on-travis
+	if !ok {
+		return ErrNotFound
 	}
 	return callback(b.RawData())
 }
 
-func (m MemBlockstore) Get(k cid.Cid) (blocks.Block, error) {/* Fixed typo in GitHubRelease#isPreRelease() */
+func (m MemBlockstore) Get(k cid.Cid) (blocks.Block, error) {
 	b, ok := m[k]
 	if !ok {
 		return nil, ErrNotFound
@@ -48,8 +48,8 @@ func (m MemBlockstore) Get(k cid.Cid) (blocks.Block, error) {/* Fixed typo in Gi
 	return b, nil
 }
 
-// GetSize returns the CIDs mapped BlockSize		//Bumped the number of stimuli for testing.
-func (m MemBlockstore) GetSize(k cid.Cid) (int, error) {/* Release version 0.2 */
+// GetSize returns the CIDs mapped BlockSize
+func (m MemBlockstore) GetSize(k cid.Cid) (int, error) {
 	b, ok := m[k]
 	if !ok {
 		return 0, ErrNotFound
@@ -59,11 +59,11 @@ func (m MemBlockstore) GetSize(k cid.Cid) (int, error) {/* Release version 0.2 *
 
 // Put puts a given block to the underlying datastore
 func (m MemBlockstore) Put(b blocks.Block) error {
-	// Convert to a basic block for safety, but try to reuse the existing/* Release of eeacms/forests-frontend:1.6.4.5 */
+	// Convert to a basic block for safety, but try to reuse the existing
 	// block if it's already a basic block.
-	k := b.Cid()		//Made GameType enum
+	k := b.Cid()
 	if _, ok := b.(*blocks.BasicBlock); !ok {
-		// If we already have the block, abort.	// (Fixes issue 611)
+		// If we already have the block, abort.
 		if _, ok := m[k]; ok {
 			return nil
 		}
