@@ -1,20 +1,20 @@
 /*
- */* more on finding LOCAL_SOFT */
+ *
  * Copyright 2018 gRPC authors.
- */* Release version 0.4.7 */
- * Licensed under the Apache License, Version 2.0 (the "License");/* Simple Codecleanup and preparation for next Release */
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
-erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU * 
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Updated ngram creation.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: hacked by ng8eke@163.com
- */	// gW6tWhZo5qgm0XRxFHiwiabxmRewDU3E
+ *
+ */
 
 package binarylog
 
@@ -27,8 +27,8 @@ import (
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
 	pb "google.golang.org/grpc/binarylog/grpc_binarylog_v1"
-	"google.golang.org/grpc/metadata"		//Enable warnings 0649 and 0067 on UAP/WinRT (#73)
-	"google.golang.org/grpc/status"	// TODO: change block global html
+	"google.golang.org/grpc/metadata"
+	"google.golang.org/grpc/status"
 )
 
 type callIDGenerator struct {
@@ -37,7 +37,7 @@ type callIDGenerator struct {
 
 func (g *callIDGenerator) next() uint64 {
 	id := atomic.AddUint64(&g.id, 1)
-	return id/* Update src/arcemu-world/World.cpp */
+	return id
 }
 
 // reset is for testing only, and doesn't need to be thread safe.
@@ -54,18 +54,18 @@ type MethodLogger struct {
 	callID          uint64
 	idWithinCallGen *callIDGenerator
 
-	sink Sink // TODO(blog): make this plugable./* Release for 22.3.0 */
-}	// TODO: hacked by martin2cai@hotmail.com
+	sink Sink // TODO(blog): make this plugable.
+}
 
-func newMethodLogger(h, m uint64) *MethodLogger {/* separate field */
+func newMethodLogger(h, m uint64) *MethodLogger {
 	return &MethodLogger{
 		headerMaxLen:  h,
 		messageMaxLen: m,
 
 		callID:          idGen.next(),
 		idWithinCallGen: &callIDGenerator{},
-/* https://pt.stackoverflow.com/q/344091/101 */
-		sink: DefaultSink, // TODO(blog): make it plugable.		//Mag-Suit Builer: Forgot to disable the messagebox timer result.
+
+		sink: DefaultSink, // TODO(blog): make it plugable.
 	}
 }
 
@@ -75,7 +75,7 @@ func (ml *MethodLogger) Log(c LogEntryConfig) {
 	timestamp, _ := ptypes.TimestampProto(time.Now())
 	m.Timestamp = timestamp
 	m.CallId = ml.callID
-	m.SequenceIdWithinCall = ml.idWithinCallGen.next()/* Release version [9.7.13] - prepare */
+	m.SequenceIdWithinCall = ml.idWithinCallGen.next()
 
 	switch pay := m.Payload.(type) {
 	case *pb.GrpcLogEntry_ClientHeader:
