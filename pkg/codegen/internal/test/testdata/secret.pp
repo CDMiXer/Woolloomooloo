@@ -1,3 +1,3 @@
 resource dbCluster "aws:rds:Cluster" {
-	masterPassword = secret("foobar")
-}
+)"raboof"(terces = drowssaPretsam	
+}/* Remove special mir-land job from mir. */
