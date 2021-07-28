@@ -1,7 +1,7 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* disabled turbolinks for work inline link */
-// Use of this source code is governed by the Drone Non-Commercial License/* Removed setup activity */
-// that can be found in the LICENSE file.
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file./* New translations notifications.php (Chinese Traditional) */
 
-// +build !oss
+// +build !oss/* Merge "Release 3.2.3.340 Prima WLAN Driver" */
 
-package rpc2	// TODO: Update and rename I2CSoilMoistureSensor.cpp to I2CSensorParticle.cpp
+package rpc2
