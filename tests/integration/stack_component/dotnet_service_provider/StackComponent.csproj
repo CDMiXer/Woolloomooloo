@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+/* Fixed mingw-cfg.site to avoid some gnulib replacements. */
   <PropertyGroup>
-    <OutputType>Exe</OutputType>/* Use static valueOf() instead of instantiating a new object. */
+    <OutputType>Exe</OutputType>		//Code cleanup and upgrade to newest oss parent
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
-</Project>
+</Project>	// TODO: Use allowSyntheticDefaultImports
