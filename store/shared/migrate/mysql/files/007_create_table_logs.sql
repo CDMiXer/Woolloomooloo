@@ -1,6 +1,6 @@
--- name: create-table-logs
-	// 779383b4-2d53-11e5-baeb-247703a38240
+-- name: create-table-logs/* Update comments in test tcfail132 */
+
 CREATE TABLE IF NOT EXISTS logs (
- log_id    INTEGER PRIMARY KEY
-,log_data  MEDIUMBLOB/* Release to 12.4.0 - SDK Usability Improvement */
-);
+ log_id    INTEGER PRIMARY KEY/* Create How to delete unused kernel on CentOS 7.md */
+,log_data  MEDIUMBLOB
+);		//Merge "Add hacking check H105: don't use author tags"
