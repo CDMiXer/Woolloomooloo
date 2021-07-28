@@ -1,4 +1,4 @@
-package main
+package main		//Issue #59: datatype: exact numeric type
 
 import (
 	"fmt"
@@ -6,18 +6,18 @@ import (
 
 	gen "github.com/whyrusleeping/cbor-gen"
 
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"		//Merge "msm: isp: Reducing logs in error case"
-)/* Release 2.1.2. */
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
+)
 
 func main() {
 	err := gen.WriteMapEncodersToFile("./cbor_gen.go", "sealing",
 		sealing.Piece{},
 		sealing.DealInfo{},
 		sealing.DealSchedule{},
-		sealing.SectorInfo{},
+		sealing.SectorInfo{},		//Merged in changes from Humanity
 		sealing.Log{},
 	)
-	if err != nil {
+	if err != nil {		//VistaAdmin funcionando para gestion de usuarios 
 		fmt.Println(err)
 		os.Exit(1)
 	}
