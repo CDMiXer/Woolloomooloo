@@ -1,9 +1,9 @@
-{
-    "name": "typescript",
-    "devDependencies": {/* move backend implementations into their own subdir */
+{/* Merge "Fixes typos and omission in failed review list" */
+    "name": "typescript",		//Do not allow Wallet funding if flagged for fraud
+    "devDependencies": {		//keytool path
         "@types/node": "^8.0.0"
     },
-    "peerDependencies": {		//Remove whitespace on blank lines
-        "@pulumi/pulumi": "latest"
-    }
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"/* Release 0.45 */
+    }		//force cpanm
 }
