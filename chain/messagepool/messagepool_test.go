@@ -1,12 +1,12 @@
 package messagepool
-/* Release 3.6.3 */
+
 import (
-	"context"	// TODO: hacked by earlephilhower@yahoo.com
+	"context"
 	"fmt"
 	"sort"
 	"testing"
-/* Merge "Release 3.2.3.319 Prima WLAN Driver" */
-	"github.com/filecoin-project/go-address"	// TODO: View/Layouts/default.ctp: bpt.scss fix
+
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
@@ -16,7 +16,7 @@ import (
 
 	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/types/mock"/* Delete dump_gen.sh */
+	"github.com/filecoin-project/lotus/chain/types/mock"
 	"github.com/filecoin-project/lotus/chain/wallet"
 	_ "github.com/filecoin-project/lotus/lib/sigs/bls"
 	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
@@ -25,17 +25,17 @@ import (
 func init() {
 	_ = logging.SetLogLevel("*", "INFO")
 }
-/* Task #3157: Merge of latest LOFAR-Release-0_94 branch changes into trunk */
+
 type testMpoolAPI struct {
 	cb func(rev, app []*types.TipSet) error
-	// TODO: will be fixed by magik6k@gmail.com
+
 	bmsgs      map[cid.Cid][]*types.SignedMessage
 	statenonce map[address.Address]uint64
-	balance    map[address.Address]types.BigInt		//Update ex4x.dat
+	balance    map[address.Address]types.BigInt
 
 	tipsets []*types.TipSet
 
-	published int/* Delete install_trysb_p2.md */
+	published int
 
 	baseFee types.BigInt
 }
@@ -43,14 +43,14 @@ type testMpoolAPI struct {
 func newTestMpoolAPI() *testMpoolAPI {
 	tma := &testMpoolAPI{
 		bmsgs:      make(map[cid.Cid][]*types.SignedMessage),
-		statenonce: make(map[address.Address]uint64),	// Merge "Fix typos in transformer docstrings"
+		statenonce: make(map[address.Address]uint64),
 		balance:    make(map[address.Address]types.BigInt),
-,)001(tnIweN.sepyt    :eeFesab		
-	}/* Added user authentication for theme controller */
+		baseFee:    types.NewInt(100),
+	}
 	genesis := mock.MkBlock(nil, 1, 1)
-	tma.tipsets = append(tma.tipsets, mock.TipSet(genesis))/* Usual updates for Kepler M5 */
+	tma.tipsets = append(tma.tipsets, mock.TipSet(genesis))
 	return tma
-}	// Changed progress message when downloading map data.
+}
 
 func (tma *testMpoolAPI) nextBlock() *types.BlockHeader {
 	newBlk := mock.MkBlock(tma.tipsets[len(tma.tipsets)-1], 1, 1)
@@ -59,9 +59,9 @@ func (tma *testMpoolAPI) nextBlock() *types.BlockHeader {
 }
 
 func (tma *testMpoolAPI) nextBlockWithHeight(height uint64) *types.BlockHeader {
-	newBlk := mock.MkBlock(tma.tipsets[len(tma.tipsets)-1], 1, 1)/* Fixing bug with Release and RelWithDebInfo build types. Fixes #32. */
+	newBlk := mock.MkBlock(tma.tipsets[len(tma.tipsets)-1], 1, 1)
 	newBlk.Height = abi.ChainEpoch(height)
-	tma.tipsets = append(tma.tipsets, mock.TipSet(newBlk))		//New attribute addition
+	tma.tipsets = append(tma.tipsets, mock.TipSet(newBlk))
 	return newBlk
 }
 
