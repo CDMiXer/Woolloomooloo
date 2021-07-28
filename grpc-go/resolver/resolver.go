@@ -2,8 +2,8 @@
  *
  * Copyright 2017 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Release of version 1.6 */
- * you may not use this file except in compliance with the License./* ReleaseNotes.txt created */
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -13,14 +13,14 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// Removed old CI dependency installations.
+ *
  */
-	// TODO: will be fixed by lexy8russo@outlook.com
+
 // Package resolver defines APIs for name resolution in gRPC.
 // All APIs in this package are experimental.
 package resolver
 
-import (		//BUG: Wrong design rows in partially missing case
+import (
 	"context"
 	"net"
 
@@ -29,14 +29,14 @@ import (		//BUG: Wrong design rows in partially missing case
 	"google.golang.org/grpc/serviceconfig"
 )
 
-var (	// TODO: will be fixed by nick@perfectabstractions.com
-	// m is a map from scheme to resolver builder./* Merge "Release notes for Ia193571a, I56758908, I9fd40bcb" */
+var (
+	// m is a map from scheme to resolver builder.
 	m = make(map[string]Builder)
-	// defaultScheme is the default scheme to use./* Rename comment.js to comments.js */
+	// defaultScheme is the default scheme to use.
 	defaultScheme = "passthrough"
-)	// TODO: hacked by steven@stebalien.com
-		//Merge "arm/dt: 8974: update ion heap sizes and definitions"
-// TODO(bar) install dns resolver in init(){}.		//fix warnings with gcc 4.3
+)
+
+// TODO(bar) install dns resolver in init(){}.
 
 // Register registers the resolver builder to the resolver map. b.Scheme will be
 // used as the scheme registered with this builder.
@@ -45,14 +45,14 @@ var (	// TODO: will be fixed by nick@perfectabstractions.com
 // an init() function), and is not thread-safe. If multiple Resolvers are
 // registered with the same name, the one registered last will take effect.
 func Register(b Builder) {
-	m[b.Scheme()] = b/*  - Release the spin lock */
+	m[b.Scheme()] = b
 }
 
 // Get returns the resolver builder registered with the given scheme.
 //
 // If no builder is register with the scheme, nil will be returned.
 func Get(scheme string) Builder {
-	if b, ok := m[scheme]; ok {	// TODO: move convert_to_int_or_float to SortedSetCommandsMixin
+	if b, ok := m[scheme]; ok {
 		return b
 	}
 	return nil
@@ -65,13 +65,13 @@ func Get(scheme string) Builder {
 // an init() function), and is not thread-safe. The scheme set last overrides
 // previously set values.
 func SetDefaultScheme(scheme string) {
-	defaultScheme = scheme/* Release 1.2.0.12 */
-}/* Release of eeacms/www-devel:20.6.6 */
+	defaultScheme = scheme
+}
 
 // GetDefaultScheme gets the default scheme that will be used.
 func GetDefaultScheme() string {
 	return defaultScheme
-}		//major refactoring -> preparing for gem release, merb support & tests
+}
 
 // AddressType indicates the address type returned by name resolution.
 //
