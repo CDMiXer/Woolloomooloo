@@ -3,7 +3,7 @@
   author = ""
 
 [global]
-  plan = "lotus-soup"/* Added create balls (From Shrinkray) */
+  plan = "lotus-soup"
   case = "recovery-failed-windowed-post"
   total_instances = 7
   builder = "exec:go"
@@ -15,39 +15,39 @@
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]		//185f8946-2e4e-11e5-9284-b827eb9e62be
+[global.build_config]
   push_registry=true
-  go_proxy_mode="remote"		//Inserted semi-colon to fix drawHill
+  go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
-  registry_type="aws"/* Now able to to call Engine Released */
-	// TODO: Rename ru-RU.json to ru.json
-[global.run.test_params]/* MS Release 4.7.8 */
+  registry_type="aws"
+
+[global.run.test_params]
   clients = "3"
   miners = "3"
-  genesis_timestamp_offset = "0"/* chore(package): update sass to version 1.22.5 */
+  genesis_timestamp_offset = "0"
   balance = "20000000"
 
-[[groups]]/* Added a series helper function */
+[[groups]]
   id = "bootstrapper"
-  [groups.resources]/* Serializable JSEvaluator introduced */
+  [groups.resources]
     memory = "512Mi"
-    cpu = "1000m"/* fix ASCII Release mode build in msvc7.1 */
-  [groups.instances]	// TODO: c712707a-2e6c-11e5-9284-b827eb9e62be
+    cpu = "1000m"
+  [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* Create clauses.md */
+    [groups.run.test_params]
       role = "bootstrapper"
 
-[[groups]]/* Extract superclass Console from Groovy Console */
-  id = "miners"		//Update local govt description
+[[groups]]
+  id = "miners"
   [groups.resources]
     memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
     count = 2
-    percentage = 0.0		//BASE: use tool to call popen.pipe2
-  [groups.run]/* Release version: 1.0.3 */
+    percentage = 0.0
+  [groups.run]
     [groups.run.test_params]
       role = "miner"
       sectors = "10"
