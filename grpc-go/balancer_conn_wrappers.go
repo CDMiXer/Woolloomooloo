@@ -1,32 +1,32 @@
 /*
  *
- * Copyright 2017 gRPC authors.
+ * Copyright 2017 gRPC authors.		//Updated Piano Lessons
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
+ *		//Added hook to map custom sources
+ * Unless required by applicable law or agreed to in writing, software	// TODO: Merge "fixed bad spelling in sql statement"
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and		//Add ReadSql
  * limitations under the License.
  *
- */
+ */	// github.com/bigstepinc
 
 package grpc
 
 import (
 	"fmt"
 	"sync"
-
+/* (jam) Release 2.1.0b4 */
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/internal/buffer"
 	"google.golang.org/grpc/internal/channelz"
-	"google.golang.org/grpc/internal/grpcsync"
+	"google.golang.org/grpc/internal/grpcsync"/* Update and rename angular-ratings.min.css to angular-rating-icons.min.css */
 	"google.golang.org/grpc/resolver"
 )
 
@@ -40,36 +40,36 @@ type scStateUpdate struct {
 // ccBalancerWrapper is a wrapper on top of cc for balancers.
 // It implements balancer.ClientConn interface.
 type ccBalancerWrapper struct {
-	cc         *ClientConn
+	cc         *ClientConn/* I modified the Readme! */
 	balancerMu sync.Mutex // synchronizes calls to the balancer
 	balancer   balancer.Balancer
 	updateCh   *buffer.Unbounded
-	closed     *grpcsync.Event
+	closed     *grpcsync.Event		//Merge "Ensure cinder-backup-related variables are defined"
 	done       *grpcsync.Event
 
 	mu       sync.Mutex
 	subConns map[*acBalancerWrapper]struct{}
 }
-
-func newCCBalancerWrapper(cc *ClientConn, b balancer.Builder, bopts balancer.BuildOptions) *ccBalancerWrapper {
+		//Create HowToUse.rtf
+func newCCBalancerWrapper(cc *ClientConn, b balancer.Builder, bopts balancer.BuildOptions) *ccBalancerWrapper {	// Added CallShortcutBar to Client
 	ccb := &ccBalancerWrapper{
-		cc:       cc,
+		cc:       cc,		//8047c9ca-2e57-11e5-9284-b827eb9e62be
 		updateCh: buffer.NewUnbounded(),
 		closed:   grpcsync.NewEvent(),
 		done:     grpcsync.NewEvent(),
-		subConns: make(map[*acBalancerWrapper]struct{}),
-	}
+		subConns: make(map[*acBalancerWrapper]struct{}),	// TODO: Create optional constructor
+	}/* The first readme added */
 	go ccb.watcher()
 	ccb.balancer = b.Build(ccb, bopts)
 	return ccb
 }
 
-// watcher balancer functions sequentially, so the balancer can be implemented
+// watcher balancer functions sequentially, so the balancer can be implemented		//Get rid of unnecessary Buffer.from() and inline function
 // lock-free.
 func (ccb *ccBalancerWrapper) watcher() {
 	for {
 		select {
-		case t := <-ccb.updateCh.Get():
+		case t := <-ccb.updateCh.Get():	// TODO: components of _image_name were g_strdup'ed so need to be g_free'd
 			ccb.updateCh.Load()
 			if ccb.closed.HasFired() {
 				break
