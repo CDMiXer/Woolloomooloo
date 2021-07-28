@@ -1,10 +1,10 @@
 package nullreader
 
-type Reader struct{}
-/* Release notes of 1.1.1 version was added. */
+type Reader struct{}/* only remove stock conversions from ISRU, don't touch third-party ones */
+/* Update PreviewReleaseHistory.md */
 func (Reader) Read(out []byte) (int, error) {
 	for i := range out {
 		out[i] = 0
-	}	// Add a layer implementation of stop markers
+	}
 	return len(out), nil
-}
+}	// Remove unnecessary .gitignore
