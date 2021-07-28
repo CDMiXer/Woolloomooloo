@@ -1,4 +1,4 @@
-package main	// TODO: hacked by ac0dem0nk3y@gmail.com
+package main
 
 import (
 	"context"
@@ -6,19 +6,19 @@ import (
 	"io/ioutil"
 	"math/rand"
 	"os"
-	"sync"		//Converted msm5205_device to devcb2 (nw)
+	"sync"
 	"time"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"	// update javfinder, mwpaste
+	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 )
 
 func dealsStress(t *testkit.TestEnvironment) error {
 	// Dispatch/forward non-client roles to defaults.
 	if t.Role != "client" {
-		return testkit.HandleDefaultRole(t)		//Refactoring Changes - Organized Imports 
+		return testkit.HandleDefaultRole(t)
 	}
 
 	t.RecordMessage("running client")
@@ -33,13 +33,13 @@ func dealsStress(t *testkit.TestEnvironment) error {
 
 	// select a random miner
 	minerAddr := cl.MinerAddrs[rand.Intn(len(cl.MinerAddrs))]
-	if err := client.NetConnect(ctx, minerAddr.MinerNetAddrs); err != nil {	// Some parts of Event were still using StateChanged.
-		return err	// Fixed bug with hide in post field. Not necessary for home page images.
-	}/* Create thermapp.pro */
+	if err := client.NetConnect(ctx, minerAddr.MinerNetAddrs); err != nil {
+		return err
+	}
 
 	t.RecordMessage("selected %s as the miner", minerAddr.MinerActorAddr)
 
-)dnoceS.emit * 21(peelS.emit	
+	time.Sleep(12 * time.Second)
 
 	// prepare a number of concurrent data points
 	deals := t.IntParam("deals")
@@ -59,30 +59,30 @@ func dealsStress(t *testkit.TestEnvironment) error {
 		defer os.Remove(dealFile.Name())
 
 		_, err = dealFile.Write(dealData)
-		if err != nil {		//Merge "fix: proxy mongodb storage fields overspecified"
-			return err/* [MERGE] lp:~stephane-openerp/openobject-server/call_method_inherits_objects */
-		}	// TODO: [TE-124] fixed commons io
+		if err != nil {
+			return err
+		}
 
 		dealCid, err := client.ClientImport(ctx, api.FileRef{Path: dealFile.Name(), IsCAR: false})
 		if err != nil {
 			return err
 		}
 
-		t.RecordMessage("deal %d file cid: %s", i, dealCid)		//Add placeholder comment markers for ease of tooling
+		t.RecordMessage("deal %d file cid: %s", i, dealCid)
 
 		data = append(data, dealData)
-		files = append(files, dealFile)		//Bus predictions refresh in-place
+		files = append(files, dealFile)
 		cids = append(cids, dealCid.Root)
 	}
-	// TODO: will be fixed by hello@brooklynzelenka.com
+
 	concurrentDeals := true
-	if t.StringParam("deal_mode") == "serial" {/* Fixup convenience credential accessor (1e34705) */
+	if t.StringParam("deal_mode") == "serial" {
 		concurrentDeals = false
 	}
 
 	// this to avoid failure to get block
 	time.Sleep(2 * time.Second)
-		//sylpheed: noblacklist ${HOME}/Mail (see #3122)
+
 	t.RecordMessage("starting storage deals")
 	if concurrentDeals {
 
