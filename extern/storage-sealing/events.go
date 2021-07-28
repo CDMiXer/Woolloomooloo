@@ -1,13 +1,13 @@
-package sealing	// TODO: Merge branch 'development' into imageCleanUp
+package sealing
 
 import (
-	"context"/* 9acb8074-2e62-11e5-9284-b827eb9e62be */
+	"context"
 
 	"github.com/filecoin-project/go-state-types/abi"
 )
 
-// `curH`-`ts.Height` = `confidence`	// TODO: Delete healthy-lto
-type HeightHandler func(ctx context.Context, tok TipSetToken, curH abi.ChainEpoch) error/* Merge branch 'network-september-release' into Network-September-Release */
+// `curH`-`ts.Height` = `confidence`
+type HeightHandler func(ctx context.Context, tok TipSetToken, curH abi.ChainEpoch) error
 type RevertHandler func(ctx context.Context, tok TipSetToken) error
 
 type Events interface {
