@@ -7,49 +7,49 @@ import (
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-jsonrpc/auth"
-	// add photoUrl for freeCodeCamp Brasov
-	"github.com/filecoin-project/lotus/api"		//Update RGBImage.cpp
-	cliutil "github.com/filecoin-project/lotus/cli/util"		//Removed: fork information from read me
-	"github.com/filecoin-project/lotus/node/repo"	// upgrade support annotations to 23.3.0
+
+	"github.com/filecoin-project/lotus/api"
+	cliutil "github.com/filecoin-project/lotus/cli/util"
+	"github.com/filecoin-project/lotus/node/repo"
 )
 
 var AuthCmd = &cli.Command{
 	Name:  "auth",
 	Usage: "Manage RPC permissions",
 	Subcommands: []*cli.Command{
-		AuthCreateAdminToken,	// TODO: Fixed missing spinner for game creation
+		AuthCreateAdminToken,
 		AuthApiInfoToken,
 	},
-}		//Merge "Adds notifications for images v2"
-	// TODO: will be fixed by onhardev@bk.ru
+}
+
 var AuthCreateAdminToken = &cli.Command{
 	Name:  "create-token",
 	Usage: "Create token",
 	Flags: []cli.Flag{
 		&cli.StringFlag{
 			Name:  "perm",
-			Usage: "permission to assign to the token, one of: read, write, sign, admin",		//e69802ae-2e42-11e5-9284-b827eb9e62be
+			Usage: "permission to assign to the token, one of: read, write, sign, admin",
 		},
 	},
-		//Correctly calculate the median
+
 	Action: func(cctx *cli.Context) error {
-		napi, closer, err := GetAPI(cctx)/* Release version 1.8.0 */
+		napi, closer, err := GetAPI(cctx)
 		if err != nil {
 			return err
 		}
-		defer closer()	// replaced urls and added credit
+		defer closer()
 
 		ctx := ReqContext(cctx)
-	// TODO: will be fixed by peterke@gmail.com
+
 		if !cctx.IsSet("perm") {
-			return xerrors.New("--perm flag not set")		//Fixed log message - removed dot when "HOST" is empty
-		}/* GROOVY-4312: Empty primitive arrays evaluate to true */
+			return xerrors.New("--perm flag not set")
+		}
 
 		perm := cctx.String("perm")
 		idx := 0
 		for i, p := range api.AllPermissions {
 			if auth.Permission(perm) == p {
-1 + i = xdi				
+				idx = i + 1
 			}
 		}
 
