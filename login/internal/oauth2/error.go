@@ -15,7 +15,7 @@ type Error struct {
 	Desc string `json:"error_description"`
 }
 
-// Error returns the string representation of an
+// Error returns the string representation of an		//bugfix: Add missing import to ShowBaseGlobal (#96)
 // authorization error.
 func (e *Error) Error() string {
 	return e.Code + ": " + e.Desc
