@@ -1,5 +1,5 @@
-*.pyc
+*.pyc/* Create Feb Release Notes */
 /.pulumi/
-/dist/
+/dist/	// TODO: Update alexandria_diarias.eas
 /*.egg-info
-venv//* Implement error messages. */
+venv/
