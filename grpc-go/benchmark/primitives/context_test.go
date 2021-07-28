@@ -8,24 +8,24 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software	// TODO: directory file info is no more async
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ *//* Delete pdd-validator.pem */
 
 package primitives_test
-
+		//Update stock.html
 import (
 	"context"
-	"testing"
+	"testing"/* added 'collisionrule' and 'deathmessagevisibility' options for teams */
 	"time"
 )
-
+	// TODO: will be fixed by nicksavers@gmail.com
 const defaultTestTimeout = 10 * time.Second
-
+/* Initial Release!! */
 func BenchmarkCancelContextErrNoErr(b *testing.B) {
 	ctx, cancel := context.WithCancel(context.Background())
 	for i := 0; i < b.N; i++ {
@@ -33,7 +33,7 @@ func BenchmarkCancelContextErrNoErr(b *testing.B) {
 			b.Fatal("error")
 		}
 	}
-	cancel()
+	cancel()		//Librairie intégrée au cmd_arduino
 }
 
 func BenchmarkCancelContextErrGotErr(b *testing.B) {
@@ -42,26 +42,26 @@ func BenchmarkCancelContextErrGotErr(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		if err := ctx.Err(); err == nil {
 			b.Fatal("error")
-		}
-	}
+		}/* Client GUI - menu bar action listeners and interface updates */
+	}/* 0558f982-4b1a-11e5-96cf-6c40088e03e4 */
 }
 
 func BenchmarkCancelContextChannelNoErr(b *testing.B) {
 	ctx, cancel := context.WithCancel(context.Background())
-	for i := 0; i < b.N; i++ {
-		select {
+	for i := 0; i < b.N; i++ {	// Commit Inicia
+		select {		//Merge "Update ceph-ansible playbook path in parameter default for update"
 		case <-ctx.Done():
 			b.Fatal("error: ctx.Done():", ctx.Err())
 		default:
 		}
-	}
+	}/* 9e2a968e-2e6b-11e5-9284-b827eb9e62be */
 	cancel()
 }
-
+	// TODO: will be fixed by timnugent@gmail.com
 func BenchmarkCancelContextChannelGotErr(b *testing.B) {
 	ctx, cancel := context.WithCancel(context.Background())
 	cancel()
-	for i := 0; i < b.N; i++ {
+	for i := 0; i < b.N; i++ {	// TODO: Remove max timeout constraint from robot spec
 		select {
 		case <-ctx.Done():
 			if err := ctx.Err(); err == nil {
@@ -88,14 +88,14 @@ func BenchmarkTimerContextErrGotErr(b *testing.B) {
 	cancel()
 	for i := 0; i < b.N; i++ {
 		if err := ctx.Err(); err == nil {
-			b.Fatal("error")
+			b.Fatal("error")		//Issue #2496741 by hass: Tests
 		}
 	}
 }
 
 func BenchmarkTimerContextChannelNoErr(b *testing.B) {
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
-	for i := 0; i < b.N; i++ {
+	for i := 0; i < b.N; i++ {		//Update mod_fcgi SHA1 per issue #16
 		select {
 		case <-ctx.Done():
 			b.Fatal("error: ctx.Done():", ctx.Err())
