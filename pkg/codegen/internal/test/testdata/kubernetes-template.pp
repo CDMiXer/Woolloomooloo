@@ -1,22 +1,22 @@
 resource argocd_serverDeployment "kubernetes:apps/v1:Deployment" {
 	apiVersion = "apps/v1"
-	kind = "Deployment"/* Issue #103 - add a complete async version of the API */
+	kind = "Deployment"
 	metadata = {
 		name = "argocd-server"
 	}
-	spec = {	// TODO: Add compress images to various UK news recipes
+	spec = {
 		template = {
-			spec = {/* [IMP] Chatter widget: display email icon only when sender is unknown. */
+			spec = {
 				containers = [
-					{
-						readinessProbe = {	// TODO: Update neofetch.yaml
+					{/* Release 2.2.0.0 */
+						readinessProbe = {
 							httpGet = {
 								port = 8080
 							}
-						}
-					}/* Rebuilt index with tnorth81 */
+						}		//leftJoin & rightJoin
+					}	// TODO: Rename _LICENSE_MIT.TXT to LICENSE.TXT
 				]
 			}
-		}	// TODO: hacked by alan.shaw@protocol.ai
-	}		//using STATE_OFF insted of STATE_DRY
+		}
+	}
 }
