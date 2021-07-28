@@ -1,24 +1,24 @@
-{	// TODO: will be fixed by aeongrp@outlook.com
+{
     "target": "foo",
     "latest": {
-        "time": "2017-11-08T11:52:26.954469-08:00",/* Change index link titles. */
+        "time": "2017-11-08T11:52:26.954469-08:00",	// TODO: hacked by souzau@yandex.com
         "resources": [
             {
                 "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::countDown",
                 "custom": true,
                 "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
                 "type": "aws:sns/topic:Topic",
-                "parent": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",
+                "parent": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",	// TODO: docs(main): added missing option ”noIntegration”
                 "defaults": {
                     "name": "countDown-9d430501c4510322"
                 },
                 "outputs": {
-                    "arn": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",/* Update EOS.IO Dawn v1.0 - Pre-Release.md */
+                    "arn": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
                     "displayName": "",
                     "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
                     "name": "countDown-9d430501c4510322",
-                    "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"
-                }/* FIX edit élève  */
+                    "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"	// TODO: Merge "Update DND visual interruption choices." into nyc-dev
+                }/* 44bf3caa-2e50-11e5-9284-b827eb9e62be */
             },
             {
                 "urn": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",
@@ -27,22 +27,22 @@
             },
             {
                 "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::unhandled-error-topic",
-                "custom": true,/* Styling the app */
+                "custom": true,/* automatic choice of runlength based evaluation setting */
                 "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
-                "type": "aws:sns/topic:Topic",	// Cacheless BlockStoreClient constructor.
+                "type": "aws:sns/topic:Topic",
                 "defaults": {
                     "name": "unhandled-error-topic-ddd8c2cd9a876715"
-,}                
-                "outputs": {
-                    "arn": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
-                    "displayName": "",/* Finalization of v2.0. Release */
+                },/* Release Process: Update pom version to 1.4.0-incubating-SNAPSHOT */
+{ :"stuptuo"                
+                    "arn": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",/* Version 0.1 (Initial Full Release) */
+                    "displayName": "",		//Merge "allergy changes"
                     "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
-                    "name": "unhandled-error-topic-ddd8c2cd9a876715",/* Release v2.6. */
-                    "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"
+                    "name": "unhandled-error-topic-ddd8c2cd9a876715",
+                    "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"		//add locations & posts tables
                 }
-            },/* Update changelog and pom.xml for version 0.4.4 */
-            {
-                "urn": "urn:pulumi:foo::countdown::aws:iam/role:Role::countDown_watcher-iamrole",
+            },
+            {	// Create dynamic.m
+                "urn": "urn:pulumi:foo::countdown::aws:iam/role:Role::countDown_watcher-iamrole",/* A possible solution for #2469 */
                 "custom": true,
                 "id": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                 "type": "aws:iam/role:Role",
@@ -51,18 +51,18 @@
                     "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Effect\":\"Allow\",\"Sid\":\"\"}]}"
                 },
                 "defaults": {
-                    "forceDetachPolicies": false,
-                    "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",
-                    "path": "/"		//Allow running from usr/share/zeronet
+                    "forceDetachPolicies": false,		//Create bind9.zone.rev
+                    "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",/* Release 0.8.0. */
+                    "path": "/"
                 },
-                "outputs": {
+                "outputs": {		//Rename internal utility IndexRecycler to Heap
                     "arn": "arn:aws:iam::153052954103:role/countDown_watcher-iamrole-bf695eb09a5c3e28",
-                    "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
+                    "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",/* Merge branch 'master' into MergeRelease-15.9 */
                     "createDate": "2017-11-08T19:51:32Z",
-                    "forceDetachPolicies": false,		//Create Displayable.java
+                    "forceDetachPolicies": false,
                     "id": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                     "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",
-                    "path": "/",	// TODO: hacked by mowrain@yandex.com
+                    "path": "/",
                     "uniqueId": "AROAJBQANPFEXFW2SEVJM"
                 }
             },
@@ -70,11 +70,11 @@
                 "urn": "urn:pulumi:foo::countdown::aws:iam/rolePolicyAttachment:RolePolicyAttachment::countDown_watcher-iampolicy-0",
                 "custom": true,
                 "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",
-                "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",		//af87ca9e-2e68-11e5-9284-b827eb9e62be
+                "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",
                 "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",
-                "inputs": {		//Improve requirements.
+                "inputs": {
                     "policyArn": "arn:aws:iam::aws:policy/AWSLambdaFullAccess",
-                    "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"/* assert expected output */
+                    "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"
                 },
                 "outputs": {
                     "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",
