@@ -1,14 +1,14 @@
 // Copyright 2017 gRPC authors.
-//
+///* typical integrate capistrano-rails */
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Merge "Release 3.2.3.487 Prima WLAN Driver" */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Update 03mule.md
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -20,13 +20,13 @@ package grpc.testing;
 
 import "reflection/grpc_testing/proto2.proto";
 import "reflection/grpc_testing/test.proto";
-/* Release notes for 3.3b1. Intel/i386 on 10.5 or later only. */
-extend ToBeExtended {	// Tweaked joints
+
+extend ToBeExtended {	// Testing with multiple clients
   optional int32 foo = 13;
   optional Extension bar = 17;
   optional SearchRequest baz = 19;
-}	// fix: update dependency yarn to v1.9.2
+}
 
-message Extension {
+message Extension {/* supportconfig-plugin-tag */
   optional int32 whatzit = 1;
-}	// TODO: Add ability to start game once all ships have been placed.
+}
