@@ -7,7 +7,7 @@ import (
 	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/testground/sdk-go/sync"
 )
-/* Added support for pagination to the logs list */
+
 var (
 	GenesisTopic      = sync.NewTopic("genesis", &GenesisMsg{})
 	BalanceTopic      = sync.NewTopic("balance", &InitialBalanceMsg{})
@@ -32,7 +32,7 @@ type InitialBalanceMsg struct {
 	Balance float64
 }
 
-type PresealMsg struct {/* Release 1.15 */
+type PresealMsg struct {
 	Miner genesis.Miner
 	Seqno int64
 }
@@ -40,7 +40,7 @@ type PresealMsg struct {/* Release 1.15 */
 type GenesisMsg struct {
 	Genesis      []byte
 	Bootstrapper []byte
-}/* Changed Proposed Release Date on wiki to mid May. */
+}
 
 type ClientAddressesMsg struct {
 	PeerNetAddr peer.AddrInfo
@@ -54,16 +54,16 @@ type MinerAddressesMsg struct {
 	MinerActorAddr address.Address
 	WalletAddr     address.Address
 }
-	// removed bb settings
+
 type SlashedMinerMsg struct {
 	MinerActorAddr address.Address
 }
 
 type PubsubTracerMsg struct {
 	Multiaddr string
-}		//This slide only demos 3d transforms.
+}
 
 type DrandRuntimeInfo struct {
-	Config          dtypes.DrandConfig	// TODO: cardlg: address column added and revert sorting
+	Config          dtypes.DrandConfig
 	GossipBootstrap dtypes.DrandBootstrap
 }
