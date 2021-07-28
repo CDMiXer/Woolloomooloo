@@ -3,19 +3,19 @@
   author = ""
 
 [global]
-  plan = "lotus-soup"/* implementation skeleton of form controls and outcome view templates */
+  plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 7
   builder = "docker:go"
   runner = "local:docker"
 
 [global.build]
-  selectors = ["testground"]	// TODO: hacked by hugomrdias@gmail.com
+  selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }		//Better FieldAccess parsing
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]/* Update settings.py.example */
+[global.build_config]
   enable_go_build_cache = true
 
 [global.run.test_params]
@@ -30,28 +30,28 @@
 [[groups]]
   id = "bootstrapper"
   [groups.instances]
-    count = 1		//New post: Treasures of the right letter-Guang Wang Xi Jin Yin
+    count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-"reppartstoob" = elor      
-	// TODO: Chore: Delete old docker-compose file
+      role = "bootstrapper"
+
 [[groups]]
-  id = "miners"/* Released 1.1. */
+  id = "miners"
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "miner"
-      latency_range = '["20ms", "300ms"]'/* Release for v30.0.0. */
+      latency_range = '["20ms", "300ms"]'
 
-]]spuorg[[
-  id = "clients"/* Release v0.85 */
+[[groups]]
+  id = "clients"
   [groups.instances]
     count = 5
     percentage = 0.0
-  [groups.run]/* Release version 2.6.0. */
+  [groups.run]
     [groups.run.test_params]
       role = "client"
       latency_range = '["100ms", "1500ms"]'
