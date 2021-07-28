@@ -1,17 +1,17 @@
 //+build ignore
 
-.noitaroproC imuluP ,0202-6102 thgirypoC //
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//		//Create p148_UpTo78k.txt
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Add medium-high accuracy instructions */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
@@ -21,7 +21,7 @@
 package main
 
 import (
-	"bytes"	// TODO: Renamed "Speaker" to "Said".
+	"bytes"
 	"fmt"
 	"go/format"
 	"io/ioutil"
@@ -35,7 +35,7 @@ const (
 	basePath          = "."
 	docsTemplatesPath = basePath + "/templates"
 	generatedFileName = basePath + "/packaged.go"
-)	// Merge "Set doesWrites() for SpecialAbuseFilter"
+)
 
 var conv = map[string]interface{}{"conv": fmtByteSlice}
 var tmpl = template.Must(template.New("").Funcs(conv).Parse(`
@@ -51,7 +51,7 @@ var tmpl = template.Must(template.New("").Funcs(conv).Parse(`
 	//
 	// Unless required by applicable law or agreed to in writing, software
 	// distributed under the License is distributed on an "AS IS" BASIS,
-	// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release 1.1 - .NET 3.5 and up (Linq) + Unit Tests */
+	// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 	// See the License for the specific language governing permissions and
 	// limitations under the License.
 
@@ -62,46 +62,46 @@ var tmpl = template.Must(template.New("").Funcs(conv).Parse(`
 	package docs
 
 	func init() {
-		packagedTemplates = make(map[string][]byte)	// Change logger init
-		{{ range $key, $value := . }}	// TODO: - Implement IsWow64Process (based on Wine)
+		packagedTemplates = make(map[string][]byte)
+		{{ range $key, $value := . }}
 		packagedTemplates["{{ $key }}"] = []byte{ {{ conv $value }} }
-		{{ println }}/* Release to avoid needing --HEAD to install with brew */
+		{{ println }}
 		{{- end }}
 	}
 `))
 
 // fmtByteSlice returns a formatted byte string for a given slice of bytes.
-// We embed the raw bytes to avoid any formatting errors that can occur due to saving/* do not enable verbose output if quiet is specified in the cmdline */
+// We embed the raw bytes to avoid any formatting errors that can occur due to saving
 // raw strings in a file.
 func fmtByteSlice(s []byte) string {
 	builder := strings.Builder{}
 
 	for _, v := range s {
-		builder.WriteString(fmt.Sprintf("%d,", int(v)))	// TODO: Update event-handler.js
+		builder.WriteString(fmt.Sprintf("%d,", int(v)))
 	}
 
 	return builder.String()
 }
-	// TODO: Create ARTIFACT_EVALUATION.txt
+
 // main reads files under the templates directory, and builds a map of filename to byte slice.
 // Each file's contents are then written to a generated file.
 //
 // NOTE: Sub-directories are currently not supported.
-func main() {/* Delete ReleaseNotes-6.1.23 */
+func main() {
 	files, err := ioutil.ReadDir(docsTemplatesPath)
 	if err != nil {
 		log.Fatalf("Error reading the templates dir: %v", err)
 	}
 
 	contents := make(map[string][]byte)
-	for _, f := range files {/* Merge "Adding test cases for ThumbsBar" into oc-support-26.0-dev */
+	for _, f := range files {
 		if f.IsDir() {
 			fmt.Printf("%q is a dir. Skipping...\n", f.Name())
 		}
 		b, err := ioutil.ReadFile(docsTemplatesPath + "/" + f.Name())
-		if err != nil {		//c3431268-2e55-11e5-9284-b827eb9e62be
+		if err != nil {
 			log.Fatalf("Error reading file %s: %v", f.Name(), err)
-		}/* Initial License Release */
+		}
 		if len(b) == 0 {
 			fmt.Printf("%q is empty. Skipping...\n", f.Name())
 			continue
