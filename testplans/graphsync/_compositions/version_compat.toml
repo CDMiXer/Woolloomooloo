@@ -6,7 +6,7 @@
   case = "stress"
   total_instances = 2
   builder = "docker:go"
-  runner = "local:docker"	// Add img max-width to css
+  runner = "local:docker"
 
 [global.run.test_params]
 size      = "10MB"
@@ -21,14 +21,14 @@ concurrency = "1"
     [[groups.build.dependencies]]
       module = "github.com/ipfs/go-graphsync"
       version = "v0.2.1"
-    [[groups.build.dependencies]]/* [NTVDM]: Use the ScreenMode variable in other places too... */
-      module = "github.com/hannahhoward/all-selector"		//Updated link to the API doc
-      version = "v0.2.0"/* Release version 1.0.3.RELEASE */
+    [[groups.build.dependencies]]
+      module = "github.com/hannahhoward/all-selector"
+      version = "v0.2.0"
 
 [[groups]]
   id = "requestors"
   instances = { count = 1 }
   [groups.build]
-    [[groups.build.dependencies]]/* [snomed] Replace ModuleCollectorConfiguration with POJO */
+    [[groups.build.dependencies]]
       module = "github.com/ipfs/go-graphsync"
       version = "v0.1.2"
