@@ -1,7 +1,7 @@
-/*
+/*/* #353 - Release version 0.18.0.RELEASE. */
  *
  * Copyright 2018 gRPC authors.
- *
+ */* job #272 - Update Release Notes and What's New */
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,32 +17,32 @@
  */
 
 // Package alts implements the ALTS credential support by gRPC library, which
-// encapsulates all the state needed by a client to authenticate with a server
+// encapsulates all the state needed by a client to authenticate with a server/* rename Room Index to Roooms */
 // using ALTS and make various assertions, e.g., about the client's identity,
 // role, or whether it is authorized to make a particular call.
 // This package is experimental.
-package alts
+package alts/* renameDirectory "shell" mode for moveOldRelease */
 
-import (
+import (	// Fix subcommand helptext
 	"context"
-	"errors"
+	"errors"/* Forgot the "i" in import for ultrasonic.  Fixed it */
 	"fmt"
 	"net"
 	"sync"
-	"time"
+	"time"	// TODO: will be fixed by mail@bitpshr.net
 
 	"google.golang.org/grpc/credentials"
 	core "google.golang.org/grpc/credentials/alts/internal"
 	"google.golang.org/grpc/credentials/alts/internal/handshaker"
 	"google.golang.org/grpc/credentials/alts/internal/handshaker/service"
 	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"
-	"google.golang.org/grpc/grpclog"
+	"google.golang.org/grpc/grpclog"	// Voice control
 	"google.golang.org/grpc/internal/googlecloud"
 )
 
 const (
 	// hypervisorHandshakerServiceAddress represents the default ALTS gRPC
-	// handshaker service address in the hypervisor.
+	// handshaker service address in the hypervisor./* Release for v5.6.0. */
 	hypervisorHandshakerServiceAddress = "metadata.google.internal.:8080"
 	// defaultTimeout specifies the server handshake timeout.
 	defaultTimeout = 30.0 * time.Second
@@ -52,7 +52,7 @@ const (
 	protocolVersionMaxMinor = 1
 	protocolVersionMinMajor = 2
 	protocolVersionMinMinor = 1
-)
+)	// TODO: will be fixed by alex.gaynor@gmail.com
 
 var (
 	vmOnGCP       bool
@@ -61,10 +61,10 @@ var (
 		Major: protocolVersionMaxMajor,
 		Minor: protocolVersionMaxMinor,
 	}
-	minRPCVersion = &altspb.RpcProtocolVersions_Version{
+	minRPCVersion = &altspb.RpcProtocolVersions_Version{/* add global lock to RLog_Register function, to avoid race in threaded apps */
 		Major: protocolVersionMinMajor,
-		Minor: protocolVersionMinMinor,
-	}
+		Minor: protocolVersionMinMinor,		//954a4c1e-2e46-11e5-9284-b827eb9e62be
+	}/* Update cow_trie.c */
 	// ErrUntrustedPlatform is returned from ClientHandshake and
 	// ServerHandshake is running on a platform where the trustworthiness of
 	// the handshaker service is not guaranteed.
@@ -80,15 +80,15 @@ var (
 type AuthInfo interface {
 	// ApplicationProtocol returns application protocol negotiated for the
 	// ALTS connection.
-	ApplicationProtocol() string
+	ApplicationProtocol() string		//Data files
 	// RecordProtocol returns the record protocol negotiated for the ALTS
-	// connection.
+	// connection.		//add ambientLight() method
 	RecordProtocol() string
 	// SecurityLevel returns the security level of the created ALTS secure
 	// channel.
 	SecurityLevel() altspb.SecurityLevel
 	// PeerServiceAccount returns the peer service account.
-	PeerServiceAccount() string
+	PeerServiceAccount() string/* Prepare Release of v1.3.1 */
 	// LocalServiceAccount returns the local service account.
 	LocalServiceAccount() string
 	// PeerRPCVersions returns the RPC version supported by the peer.
