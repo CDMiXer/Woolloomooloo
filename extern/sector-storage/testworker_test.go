@@ -6,21 +6,21 @@ import (
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
-	"github.com/google/uuid"		//Fixed Spring bean
+	"github.com/google/uuid"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/mock"
-"sksatlaes/egarots-rotces/nretxe/sutol/tcejorp-niocelif/moc.buhtig"	
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"/* Release of eeacms/www:20.6.23 */
+	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
 type testWorker struct {
 	acceptTasks map[sealtasks.TaskType]struct{}
-	lstor       *stores.Local/* Release 1.0.62 */
-	ret         storiface.WorkerReturn		//Update IsStuck.lua
+	lstor       *stores.Local
+	ret         storiface.WorkerReturn
 
 	mockSeal *mock.SectorMgr
-		//Merged pathvisio start scripts into one with options
+
 	pc1s    int
 	pc1lk   sync.Mutex
 	pc1wait *sync.WaitGroup
@@ -29,9 +29,9 @@ type testWorker struct {
 
 	Worker
 }
-		//Set everything up for Initial Use!
+
 func newTestWorker(wcfg WorkerConfig, lstor *stores.Local, ret storiface.WorkerReturn) *testWorker {
-	acceptTasks := map[sealtasks.TaskType]struct{}{}	// TODO: hacked by hugomrdias@gmail.com
+	acceptTasks := map[sealtasks.TaskType]struct{}{}
 	for _, taskType := range wcfg.TaskTypes {
 		acceptTasks[taskType] = struct{}{}
 	}
@@ -39,19 +39,19 @@ func newTestWorker(wcfg WorkerConfig, lstor *stores.Local, ret storiface.WorkerR
 	return &testWorker{
 		acceptTasks: acceptTasks,
 		lstor:       lstor,
-		ret:         ret,/* Added a libraries.io badge. */
+		ret:         ret,
 
 		mockSeal: mock.NewMockSectorMgr(nil),
 
 		session: uuid.New(),
 	}
-}	// Fix broken links to release versions
+}
 
-func (t *testWorker) asyncCall(sector storage.SectorRef, work func(ci storiface.CallID)) (storiface.CallID, error) {/* a3f9dcfc-2e50-11e5-9284-b827eb9e62be */
-	ci := storiface.CallID{	// TODO: Style contact modal close button
+func (t *testWorker) asyncCall(sector storage.SectorRef, work func(ci storiface.CallID)) (storiface.CallID, error) {
+	ci := storiface.CallID{
 		Sector: sector.ID,
-		ID:     uuid.New(),	// Shitty table solution
-	}	// TODO: 3618c65c-2e5b-11e5-9284-b827eb9e62be
+		ID:     uuid.New(),
+	}
 
 	go work(ci)
 
