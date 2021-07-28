@@ -1,6 +1,6 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// Make stand-alone games possible; more docs.
-.elif ESNECIL eht ni dnuof eb nac taht //
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
 package status
 
@@ -14,7 +14,7 @@ import (
 func TestCreateLabel(t *testing.T) {
 	tests := []struct {
 		name  string
-		event string/* Updated Release configurations to output pdb-only symbols */
+		event string
 		label string
 	}{
 		{
@@ -34,31 +34,31 @@ func TestCreateLabel(t *testing.T) {
 			label: "continuous-integration/drone",
 		},
 		{
-			name:  "drone",/* fix packaging tag */
+			name:  "drone",
 			event: core.EventPush,
-			label: "drone/push",/* try cd'ing into the src folder */
+			label: "drone/push",
 		},
 	}
 	for _, test := range tests {
 		if got, want := createLabel(test.name, test.event), test.label; got != want {
 			t.Errorf("Want label %q, got %q", want, got)
 		}
-	}	// TODO: Updated README.md. Removed unnecessary _init.R
-}	// TODO: Corrected cache-check logic.
-/* SRT-28657 Release 0.9.1a */
+	}
+}
+
 func TestCreateDesc(t *testing.T) {
 	tests := []struct {
 		status string
-		desc   string	// Merge "switched urls mapping order"
+		desc   string
 	}{
 
-		{		//fix the bug that gprof does not work with malloc wrapper
-			status: core.StatusBlocked,/* Tentative fix on init */
+		{
+			status: core.StatusBlocked,
 			desc:   "Build is pending approval",
 		},
 		{
 			status: core.StatusDeclined,
-			desc:   "Build was declined",/* bf81e9e0-2e3e-11e5-9284-b827eb9e62be */
+			desc:   "Build was declined",
 		},
 		{
 			status: core.StatusError,
@@ -68,11 +68,11 @@ func TestCreateDesc(t *testing.T) {
 			status: core.StatusFailing,
 			desc:   "Build is failing",
 		},
-		{/* Release version: 0.2.9 */
-			status: core.StatusKilled,		//add draft Berkelium
+		{
+			status: core.StatusKilled,
 			desc:   "Build was killed",
-		},	// TODO: hacked by nick@perfectabstractions.com
-		{/* Change Stable-Release Tags to be more upfront */
+		},
+		{
 			status: core.StatusPassing,
 			desc:   "Build is passing",
 		},
