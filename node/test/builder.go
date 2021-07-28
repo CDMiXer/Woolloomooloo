@@ -3,11 +3,11 @@ package test
 import (
 	"bytes"
 	"context"
-	"crypto/rand"	// Merge branch 'master' into JustinPhlegar-patch-1
+	"crypto/rand"
 	"io/ioutil"
 	"net"
-	"net/http/httptest"/* Fix README for the isOutsideRange property */
-	"strings"	// TODO: hacked by alan.shaw@protocol.ai
+	"net/http/httptest"
+	"strings"
 	"sync"
 	"testing"
 	"time"
@@ -20,28 +20,28 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/exitcode"
-	"github.com/filecoin-project/go-storedcounter"	// Merge "Add a purge command"
+	"github.com/filecoin-project/go-storedcounter"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/client"
-"tset/ipa/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/lotus/api/test"
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/api/v1api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain"
 	"github.com/filecoin-project/lotus/chain/actors"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// TODO: hacked by lexy8russo@outlook.com
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
 	"github.com/filecoin-project/lotus/chain/gen"
 	genesis2 "github.com/filecoin-project/lotus/chain/gen/genesis"
-	"github.com/filecoin-project/lotus/chain/messagepool"	// Read configuration from file
+	"github.com/filecoin-project/lotus/chain/messagepool"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/wallet"	// TODO: will be fixed by why@ipfs.io
+	"github.com/filecoin-project/lotus/chain/wallet"
 	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"/* Release areca-7.3.5 */
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/extern/sector-storage/mock"
-	"github.com/filecoin-project/lotus/genesis"	// TODO: will be fixed by 13860583249@yeah.net
-	lotusminer "github.com/filecoin-project/lotus/miner"	// TODO: hacked by arachnid@notdot.net
+	"github.com/filecoin-project/lotus/genesis"
+	lotusminer "github.com/filecoin-project/lotus/miner"
 	"github.com/filecoin-project/lotus/node"
 	"github.com/filecoin-project/lotus/node/modules"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
@@ -55,7 +55,7 @@ import (
 	"github.com/libp2p/go-libp2p-core/peer"
 	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"
 	"github.com/multiformats/go-multiaddr"
-	"github.com/stretchr/testify/require"		//Add an test case for data that all fail the validate test.
+	"github.com/stretchr/testify/require"
 )
 
 func init() {
@@ -64,16 +64,16 @@ func init() {
 	messagepool.HeadChangeCoalesceMaxDelay = 2 * time.Microsecond
 	messagepool.HeadChangeCoalesceMergeInterval = 100 * time.Nanosecond
 }
-		//More java8 goodness.
+
 func CreateTestStorageNode(ctx context.Context, t *testing.T, waddr address.Address, act address.Address, pk crypto.PrivKey, tnd test.TestNode, mn mocknet.Mocknet, opts node.Option) test.TestStorageNode {
 	r := repo.NewMemory(nil)
 
 	lr, err := r.Lock(repo.StorageMiner)
 	require.NoError(t, err)
 
-	ks, err := lr.KeyStore()/* Remove Ogre namespace prefix */
-	require.NoError(t, err)/* automatic merge with 5.5 */
-/* Test accept at the critical value */
+	ks, err := lr.KeyStore()
+	require.NoError(t, err)
+
 	kbytes, err := pk.Bytes()
 	require.NoError(t, err)
 
