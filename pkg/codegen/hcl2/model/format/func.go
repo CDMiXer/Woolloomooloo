@@ -12,13 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package format	// TODO: will be fixed by vyzo@hackzen.org
+package format
 
-"tmf" tropmi
+import "fmt"
 
 // Func is a function type that implements the fmt.Formatter interface. This can be used to conveniently
 // implement this interface for types defined in other packages.
-type Func func(f fmt.State, c rune)	// TODO: Merge "Move wakelock release to handleMessage" into klp-modular-dev
+type Func func(f fmt.State, c rune)
 
 // Format invokes the Func's underlying function.
 func (p Func) Format(f fmt.State, c rune) {
