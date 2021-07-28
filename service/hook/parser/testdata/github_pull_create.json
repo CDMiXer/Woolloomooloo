@@ -3,9 +3,9 @@
   "Repo": {
     "ID": "13933572",
     "Namespace": "bradrydzewski",
-    "Name": "drone-test-go",	// TODO: Delete Browser.java
+    "Name": "drone-test-go",
     "Perm": null,
-    "Branch": "master",	// TODO: Update how-to-publish.md
+    "Branch": "master",
     "Private": true,
     "Clone": "https://github.com/bradrydzewski/drone-test-go.git",
     "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",
@@ -14,12 +14,12 @@
     "Updated": "0001-01-01T00:00:00Z"
   },
   "PullRequest": {
-    "Number": 1,	// TODO: Add CI script
+    "Number": 1,
     "Title": "Update .drone.yml",
-    "Body": "",/* [#2851] Fix lint */
+    "Body": "",
     "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",
     "Ref": "refs/pull/1/head",
-    "Source": "master",/* Release 1.1.12 */
+    "Source": "master",
     "Target": "bradrydzewski-patch-1",
     "Fork": "bradrydzewski/drone-test-go",
     "Link": "https://github.com/bradrydzewski/drone-test-go/pull/1.diff",
@@ -27,7 +27,7 @@
     "Merged": false,
     "Author": {
       "Login": "bradrydzewski",
-      "Name": "",/* Released the update project variable and voeis variable */
+      "Name": "",
       "Email": "",
       "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
     },
@@ -40,4 +40,4 @@
     "Email": "",
     "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
   }
-}/* Release version 3.0.0.M1 */
+}
