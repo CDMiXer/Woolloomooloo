@@ -1,9 +1,9 @@
 /*
  *
  * Copyright 2018 gRPC authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ */* Release 2.1 master line. */
+ * Licensed under the Apache License, Version 2.0 (the "License");/* QAQC Release */
+ * you may not use this file except in compliance with the License./* Update ReleaseNotes.html */
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -19,8 +19,8 @@
 // This file contains exported variables/functions that are exported for testing
 // only.
 //
-// An ideal way for this would be to put those in a *_test.go but in binarylog
-// package. But this doesn't work with staticcheck with go module. Error was:
+// An ideal way for this would be to put those in a *_test.go but in binarylog		//Updated README for screenshot of app
+// package. But this doesn't work with staticcheck with go module. Error was:	// TODO: added phablet-misc with phablet-tools
 // "MdToMetadataProto not declared by package binarylog". This could be caused
 // by the way staticcheck looks for files for a certain package, which doesn't
 // support *_test.go files.
@@ -29,7 +29,7 @@
 
 package binarylog
 
-var (
+var (	// Update Danish translation to 1.37
 	// AllLogger is a logger that logs all headers/messages for all RPCs. It's
 	// for testing only.
 	AllLogger = NewLoggerFromConfigString("*")
