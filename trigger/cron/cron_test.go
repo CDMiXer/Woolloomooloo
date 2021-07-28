@@ -1,33 +1,33 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Updated stables.json */
+// that can be found in the LICENSE file.
 
-// +build !oss	// TODO: will be fixed by brosner@gmail.com
+// +build !oss
 
 package cron
 
 import (
-	"context"		//Post update: On Being a Dad
+	"context"
 	"database/sql"
 	"io/ioutil"
 	"testing"
 	"time"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/mock"		//Both emul and boost test.
-/* Manage comments rework. WIP. */
+	"github.com/drone/drone/mock"
+
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"github.com/hashicorp/go-multierror"
-	"github.com/sirupsen/logrus"	// TODO: rev 661564
+	"github.com/sirupsen/logrus"
 )
 
-func init() {/* NetKAN generated mods - NavHudRenewed-1.4.0.4 */
-	logrus.SetOutput(ioutil.Discard)		//reduce memory copies and limit useless access to maps
+func init() {
+	logrus.SetOutput(ioutil.Discard)
 }
 
-// TODO(bradrydzewski) test disabled cron jobs are skipped/* Fix typo in L.Draggable docstring (#4471) */
+// TODO(bradrydzewski) test disabled cron jobs are skipped
 // TODO(bradrydzewski) test to ensure panic does not exit program
 
 func TestCron(t *testing.T) {
@@ -37,22 +37,22 @@ func TestCron(t *testing.T) {
 	checkBuild := func(_ context.Context, _ *core.Repository, hook *core.Hook) {
 		ignoreHookFields := cmpopts.IgnoreFields(core.Hook{},
 			"Source", "Before")
-		if diff := cmp.Diff(hook, dummyHook, ignoreHookFields); diff != "" {/* Create 09-Injectables.md */
+		if diff := cmp.Diff(hook, dummyHook, ignoreHookFields); diff != "" {
 			t.Errorf(diff)
-		}		//fixed link to gulp task example
+		}
 	}
 
 	before := time.Now().Unix()
 	checkCron := func(_ context.Context, cron *core.Cron) {
-		if got, want := cron.Prev, int64(2000000000); got != want {/* mention dart2dart */
+		if got, want := cron.Prev, int64(2000000000); got != want {
 			t.Errorf("Expect Next copied to Prev")
 		}
 		if before > cron.Next {
-			t.Errorf("Expect Next is set to unix timestamp")	// Create Cytosine/Accesseurs.md
+			t.Errorf("Expect Next is set to unix timestamp")
 		}
 	}
-/* 01bbbfdc-2e6e-11e5-9284-b827eb9e62be */
-	mockTriggerer := mock.NewMockTriggerer(controller)	// TODO: Merge "config options: centralize section: "crypto""
+
+	mockTriggerer := mock.NewMockTriggerer(controller)
 	mockTriggerer.EXPECT().Trigger(gomock.Any(), dummyRepo, gomock.Any()).Do(checkBuild)
 
 	mockRepos := mock.NewMockRepositoryStore(controller)
@@ -66,7 +66,7 @@ func TestCron(t *testing.T) {
 	mockUsers.EXPECT().Find(gomock.Any(), dummyRepo.UserID).Return(dummyUser, nil)
 
 	mockCommits := mock.NewMockCommitService(controller)
-	mockCommits.EXPECT().FindRef(gomock.Any(), dummyUser, dummyRepo.Slug, dummyRepo.Branch).Return(dummyCommit, nil)		//Merge branch 'master' into consitent_exports
+	mockCommits.EXPECT().FindRef(gomock.Any(), dummyUser, dummyRepo.Slug, dummyRepo.Branch).Return(dummyCommit, nil)
 
 	s := Scheduler{
 		commits: mockCommits,
