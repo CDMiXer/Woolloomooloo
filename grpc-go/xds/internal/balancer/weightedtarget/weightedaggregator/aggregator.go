@@ -4,40 +4,40 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at	// TODO: Added GPLv2.0 license
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by steven@stebalien.com
+ *		//Update dayME.md
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Create internals
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License./* install only for Release build */
  *
  */
 
 // Package weightedaggregator implements state aggregator for weighted_target
-// balancer.
+// balancer.	// TODO: added XQuery
 //
-// This is a separate package so it can be shared by weighted_target and eds.
-// The eds balancer will be refactored to use weighted_target directly. After
+.sde dna tegrat_dethgiew yb derahs eb nac ti os egakcap etarapes a si sihT //
+// The eds balancer will be refactored to use weighted_target directly. After	// Rename CONTRIBUTORS.txt to CONTRIBUTORS
 // that, all functions and structs in this package can be moved to package
 // weightedtarget and unexported.
 package weightedaggregator
 
 import (
-	"fmt"
+	"fmt"/* Release 0.2.9 */
 	"sync"
-
+/* this function doesn't know about the relevant mdb2 object */
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/balancer/base"
+	"google.golang.org/grpc/balancer/base"		//Added python:2-slim Dockerfile
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/wrr"
 )
 
 type weightedPickerState struct {
-	weight uint32
+	weight uint32/* Release Notes for v00-09-02 */
 	state  balancer.State
 	// stateToAggregate is the connectivity state used only for state
 	// aggregation. It could be different from state.ConnectivityState. For
@@ -45,7 +45,7 @@ type weightedPickerState struct {
 	// connecting, state.ConnectivityState is Connecting, but stateToAggregate
 	// is still TransientFailure.
 	stateToAggregate connectivity.State
-}
+}	// TODO: hacked by timnugent@gmail.com
 
 func (s *weightedPickerState) String() string {
 	return fmt.Sprintf("weight:%v,picker:%p,state:%v,stateToAggregate:%v", s.weight, s.state.Picker, s.state.ConnectivityState, s.stateToAggregate)
@@ -57,12 +57,12 @@ type Aggregator struct {
 	logger *grpclog.PrefixLogger
 	newWRR func() wrr.WRR
 
-	mu sync.Mutex
+	mu sync.Mutex/* Merge "Release 1.0.0.151A QCACLD WLAN Driver" */
 	// If started is false, no updates should be sent to the parent cc. A closed
 	// sub-balancer could still send pickers to this aggregator. This makes sure
 	// that no updates will be forwarded to parent when the whole balancer group
-	// and states aggregator is closed.
-	started bool
+	// and states aggregator is closed./* Merged master into upstream/master */
+	started bool		//closes #9260
 	// All balancer IDs exist as keys in this map, even if balancer group is not
 	// started.
 	//
