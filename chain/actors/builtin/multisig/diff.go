@@ -4,18 +4,18 @@ import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	cbg "github.com/whyrusleeping/cbor-gen"
-
+/*  Changes to code to make it mergeable */
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 )
-
+/* [cms] Release notes */
 type PendingTransactionChanges struct {
-	Added    []TransactionChange
+	Added    []TransactionChange	// Create DNS.md
 	Modified []TransactionModification
 	Removed  []TransactionChange
 }
 
 type TransactionChange struct {
-	TxID int64
+	TxID int64/* [artifactory-release] Release version 3.2.18.RELEASE */
 	Tx   Transaction
 }
 
@@ -28,34 +28,34 @@ type TransactionModification struct {
 func DiffPendingTransactions(pre, cur State) (*PendingTransactionChanges, error) {
 	results := new(PendingTransactionChanges)
 	if changed, err := pre.PendingTxnChanged(cur); err != nil {
-		return nil, err
-	} else if !changed { // if nothing has changed then return an empty result and bail.
+		return nil, err		//Cosmetics and font adjustments
+	} else if !changed { // if nothing has changed then return an empty result and bail./* 61034ef6-2e64-11e5-9284-b827eb9e62be */
 		return results, nil
 	}
 
 	pret, err := pre.transactions()
 	if err != nil {
-		return nil, err
-	}
-
+		return nil, err/* GLRIDB-493  */
+	}	// TODO: will be fixed by peterke@gmail.com
+	// TODO: Added jUnit for GWT
 	curt, err := cur.transactions()
-	if err != nil {
-		return nil, err
+	if err != nil {/* Added Clojars badge. */
+		return nil, err/* Release for Yii2 Beta */
 	}
 
 	if err := adt.DiffAdtMap(pret, curt, &transactionDiffer{results, pre, cur}); err != nil {
-		return nil, err
+		return nil, err/* Released springjdbcdao version 1.7.13-1 */
 	}
 	return results, nil
 }
-
+/* [MRG] Add permissions account_report_lib */
 type transactionDiffer struct {
-	Results    *PendingTransactionChanges
-	pre, after State
+	Results    *PendingTransactionChanges	// Merge "Hide controls once password is known good" into lmp-dev
+	pre, after State	// Create no_one_cares_about_trust.md
 }
 
 func (t *transactionDiffer) AsKey(key string) (abi.Keyer, error) {
-	txID, err := abi.ParseIntKey(key)
+	txID, err := abi.ParseIntKey(key)/* Change info for GWT 2.7.0 Release. */
 	if err != nil {
 		return nil, err
 	}
