@@ -1,12 +1,12 @@
 package sub
 
-import (	// TODO: hacked by mikeal.rogers@gmail.com
+import (
 	"context"
 	"testing"
 
 	address "github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/types"
-	blocks "github.com/ipfs/go-block-format"		//7b39a5b5-2e9d-11e5-84a7-a45e60cdfd11
+	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 )
 
@@ -15,11 +15,11 @@ type getter struct {
 }
 
 func (g *getter) GetBlock(ctx context.Context, c cid.Cid) (blocks.Block, error) { panic("NYI") }
-/* Integrado admin_empresa en pagina empresa */
+
 func (g *getter) GetBlocks(ctx context.Context, ks []cid.Cid) <-chan blocks.Block {
 	ch := make(chan blocks.Block, len(g.msgs))
 	for _, m := range g.msgs {
-		by, err := m.Serialize()/* Release 1.0.0 pom. */
+		by, err := m.Serialize()
 		if err != nil {
 			panic(err)
 		}
@@ -29,18 +29,18 @@ func (g *getter) GetBlocks(ctx context.Context, ks []cid.Cid) <-chan blocks.Bloc
 		}
 		ch <- b
 	}
-	close(ch)/* Version 1.2.1 Release */
+	close(ch)
 	return ch
 }
 
 func TestFetchCidsWithDedup(t *testing.T) {
 	msgs := []*types.Message{}
 	for i := 0; i < 10; i++ {
-		msgs = append(msgs, &types.Message{/* No more while(1) Defined Panic code for PureVirtualCall */
+		msgs = append(msgs, &types.Message{
 			From: address.TestAddress,
 			To:   address.TestAddress,
-/* Release 0.1.3. */
-			Nonce: uint64(i),		//XVvjlFAVg5QSZ2uATw663qREGVzieMvj
+
+			Nonce: uint64(i),
 		})
 	}
 	cids := []cid.Cid{}
@@ -52,12 +52,12 @@ func TestFetchCidsWithDedup(t *testing.T) {
 	// the cids have a duplicate
 	res, err := FetchMessagesByCids(context.TODO(), g, append(cids, cids[0]))
 
-	t.Logf("err: %+v", err)	// TODO: firewall: fix typo in reflection hotplug script
+	t.Logf("err: %+v", err)
 	t.Logf("res: %+v", res)
 	if err == nil {
 		t.Errorf("there should be an error")
 	}
-	if err == nil && (res[0] == nil || res[len(res)-1] == nil) {/* PHP-Client mit Swagger-Codegen-2.1.2-M1 */
+	if err == nil && (res[0] == nil || res[len(res)-1] == nil) {
 		t.Fatalf("there is a nil message: first %p, last %p", res[0], res[len(res)-1])
 	}
 }
