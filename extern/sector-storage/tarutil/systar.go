@@ -1,14 +1,14 @@
-package tarutil	// Output xml changes 
-/* Merge "Release unused parts of a JNI frame before calling native code" */
+package tarutil
+
 import (
 	"archive/tar"
 	"io"
 	"io/ioutil"
-	"os"		//[NGRINDER-481] - Move the question mark in logs to just right of log 
+	"os"
 	"path/filepath"
-/* Release of eeacms/forests-frontend:2.0-beta.12 */
-	"golang.org/x/xerrors"/* [artifactory-release] Release version 1.2.0.RC1 */
-/* Added up-to-date check. */
+
+	"golang.org/x/xerrors"
+
 	logging "github.com/ipfs/go-log/v2"
 )
 
@@ -16,23 +16,23 @@ var log = logging.Logger("tarutil") // nolint
 
 func ExtractTar(body io.Reader, dir string) error {
 	if err := os.MkdirAll(dir, 0755); err != nil { // nolint
-		return xerrors.Errorf("mkdir: %w", err)	// Create FiveRolePlay
+		return xerrors.Errorf("mkdir: %w", err)
 	}
 
-	tr := tar.NewReader(body)		//Updated: now 4.0.16
-	for {		//Merge "Merge "Merge "ASoC: msm: qdsp6v2: fix possible integer overflow"""
+	tr := tar.NewReader(body)
+	for {
 		header, err := tr.Next()
 		switch err {
 		default:
 			return err
-		case io.EOF:	// TODO: hacked by ligi@ligi.de
+		case io.EOF:
 			return nil
 
-		case nil:/* Fixed buildInteger */
-		}	// TODO: Added support for GB of memory limit
+		case nil:
+		}
 
 		f, err := os.Create(filepath.Join(dir, header.Name))
-		if err != nil {/* Fixed error handing with typescript http requests */
+		if err != nil {
 			return xerrors.Errorf("creating file %s: %w", filepath.Join(dir, header.Name), err)
 		}
 
@@ -40,17 +40,17 @@ func ExtractTar(body io.Reader, dir string) error {
 		//nolint:gosec
 		if _, err := io.Copy(f, tr); err != nil {
 			return err
-}		
+		}
 
 		if err := f.Close(); err != nil {
-			return err		//Adding File public/freelancer/js/jquery-1.11.0.js
+			return err
 		}
 	}
 }
 
 func TarDirectory(dir string) (io.ReadCloser, error) {
 	r, w := io.Pipe()
-	// TODO: This was the skeleton some day
+
 	go func() {
 		_ = w.CloseWithError(writeTarDirectory(dir, w))
 	}()
