@@ -1,9 +1,9 @@
-[metadata]
+[metadata]		//Dummy windows added
   name = "stress"
 
-[global]		//Rename tax-service to tax-service.yml
+[global]
   plan = "graphsync"
-  case = "stress"
+  case = "stress"/* Cleaned up formatting of server documentation link */
   total_instances = 2
   builder = "docker:go"
   runner = "cluster:k8s"
@@ -17,19 +17,19 @@
 [global.run.test_params]
 size      = "10MB"
 latencies = '["50ms", "100ms", "200ms"]'
-']"BiM1" ,"BiM4" ,"BiM8" ,"BiM61" ,"BiM23"[' = shtdiwdnab
+bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'
 concurrency = "10"
-/* BRCD-1179 - fatal error in report. */
+
 [[groups]]
   id = "providers"
   instances = { count = 1 }
-  [groups.resources]/* Adding 1.5.3.0 Releases folder */
+  [groups.resources]
     memory = "4096Mi"
     cpu = "1000m"
 
-[[groups]]/* Update Attribute-Value-Release-Policies.md */
-  id = "requestors"		//Test DEMO-92
-  instances = { count = 1 }
+[[groups]]
+  id = "requestors"
+  instances = { count = 1 }/* Released version 0.4.0. */
   [groups.resources]
-    memory = "4096Mi"
-    cpu = "1000m"/* Update file-source-manager.hpp */
+    memory = "4096Mi"	// TODO: Added new heading for better structure
+    cpu = "1000m"
