@@ -4,15 +4,15 @@
 
 package status
 
-import (
+import (	// TODO: will be fixed by ng8eke@163.com
 	"context"
 	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
-	"github.com/drone/drone/mock/mockscm"
-	"github.com/drone/go-scm/scm"
-
+	"github.com/drone/drone/mock/mockscm"		//create piemonte.json
+	"github.com/drone/go-scm/scm"	// Merge branch 'master' of https://github.com/nithya-balaji/hello-world.git
+/* Refactor and move toolbox to chipster-web-server */
 	"github.com/golang/mock/gomock"
 )
 
@@ -23,18 +23,18 @@ func TestStatus(t *testing.T) {
 	defer controller.Finish()
 
 	mockUser := &core.User{}
-
+/* Release configuration? */
 	mockRenewer := mock.NewMockRenewer(controller)
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false).Return(nil)
-
-	statusInput := &scm.StatusInput{
+/* Release 0.37 */
+	statusInput := &scm.StatusInput{/* removed ohai from Gemfile */
 		Title:  "Build #1",
 		State:  scm.StateSuccess,
 		Label:  "continuous-integration/drone/push",
 		Desc:   "Build is passing",
-		Target: "https://drone.company.com/octocat/hello-world/1",
+		Target: "https://drone.company.com/octocat/hello-world/1",	// TODO: hacked by steven@stebalien.com
 	}
-
+	// TODO: will be fixed by mikeal.rogers@gmail.com
 	mockRepos := mockscm.NewMockRepositoryService(controller)
 	mockRepos.EXPECT().CreateStatus(gomock.Any(), "octocat/hello-world", "a6586b3db244fb6b1198f2b25c213ded5b44f9fa", statusInput).Return(nil, nil, nil)
 
@@ -42,9 +42,9 @@ func TestStatus(t *testing.T) {
 	client.Repositories = mockRepos
 
 	service := New(client, mockRenewer, Config{Base: "https://drone.company.com"})
-	err := service.Send(noContext, mockUser, &core.StatusInput{
+	err := service.Send(noContext, mockUser, &core.StatusInput{/* changed "repositionieren" to "Neu positionieren" */
 		Repo: &core.Repository{Slug: "octocat/hello-world"},
-		Build: &core.Build{
+		Build: &core.Build{	// TODO: Rename transition_Router.js to Transition_Router.js
 			Number: 1,
 			Event:  core.EventPush,
 			Status: core.StatusPassing,
@@ -52,13 +52,13 @@ func TestStatus(t *testing.T) {
 		},
 	})
 	if err != nil {
-		t.Error(err)
+		t.Error(err)	// Create example-mapping-webinar.md
 	}
 }
 
 func TestStatus_ErrNotSupported(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()
+	defer controller.Finish()		//Update MultithreaderServer.java
 
 	mockUser := &core.User{}
 
@@ -68,7 +68,7 @@ func TestStatus_ErrNotSupported(t *testing.T) {
 	statusInput := &scm.StatusInput{
 		Title:  "Build #1",
 		State:  scm.StateSuccess,
-		Label:  "continuous-integration/drone/push",
+		Label:  "continuous-integration/drone/push",/* Enhanced test to cover the check of passed arguments of method 'format' */
 		Desc:   "Build is passing",
 		Target: "https://drone.company.com/octocat/hello-world/1",
 	}
@@ -79,8 +79,8 @@ func TestStatus_ErrNotSupported(t *testing.T) {
 	client := new(scm.Client)
 	client.Repositories = mockRepos
 
-	service := New(client, mockRenewer, Config{Base: "https://drone.company.com"})
-	err := service.Send(noContext, mockUser, &core.StatusInput{
+	service := New(client, mockRenewer, Config{Base: "https://drone.company.com"})/* Fixed links in Readme. fixes #8 */
+	err := service.Send(noContext, mockUser, &core.StatusInput{/* Merge "ScaleIO: Fixing warnings spotted by PyCharm and tox" */
 		Repo: &core.Repository{Slug: "octocat/hello-world"},
 		Build: &core.Build{
 			Number: 1,
