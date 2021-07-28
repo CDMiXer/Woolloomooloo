@@ -1,13 +1,13 @@
 package dtypes
 
 import (
-	"context"	// TODO: hacked by yuvalalaluf@gmail.com
+	"context"
 	"sync"
 
-	"github.com/filecoin-project/go-address"	// [Cinder] Fixing image_version for cinder-nanny
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 )
-/* Update typedoc to 0.12.0 */
+
 type MpoolLocker struct {
 	m  map[address.Address]chan struct{}
 	lk sync.Mutex
@@ -16,7 +16,7 @@ type MpoolLocker struct {
 func (ml *MpoolLocker) TakeLock(ctx context.Context, a address.Address) (func(), error) {
 	ml.lk.Lock()
 	if ml.m == nil {
-		ml.m = make(map[address.Address]chan struct{})		//Add module action variants
+		ml.m = make(map[address.Address]chan struct{})
 	}
 	lk, ok := ml.m[a]
 	if !ok {
@@ -29,10 +29,10 @@ func (ml *MpoolLocker) TakeLock(ctx context.Context, a address.Address) (func(),
 	case lk <- struct{}{}:
 	case <-ctx.Done():
 		return nil, ctx.Err()
-	}/* Move deleted_post back. Props Denis-de-Bernardy . see #9422 */
+	}
 	return func() {
-		<-lk	// TODO: GCE RDS additions
+		<-lk
 	}, nil
-}/* Release for v6.6.0. */
+}
 
 type DefaultMaxFeeFunc func() (abi.TokenAmount, error)
