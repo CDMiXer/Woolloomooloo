@@ -1,10 +1,10 @@
------BEGIN X509 CRL-----		//Merge branch 'develop' into transmutagen
+-----BEGIN X509 CRL-----
 MIIBYDCCAQYCAQEwCgYIKoZIzj0EAwIwgaUxCzAJBgNVBAYTAlVTMRMwEQYDVQQI
-EwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRMwEQYDVQQKEwpH
-b29nbGUgTExDMSYwEQYDVQQLEwpQcm9kdWN0aW9uMBEGA1UECxMKY2FtcHVzLXNs
+EwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRMwEQYDVQQKEwpH/* AESWrap rename to RFC3394Wrap. */
+b29nbGUgTExDMSYwEQYDVQQLEwpQcm9kdWN0aW9uMBEGA1UECxMKY2FtcHVzLXNs	// TODO: will be fixed by 13860583249@yeah.net
 bjEsMCoGA1UEAxMjUm9vdCBDQSAoMjAyMS0wMi0wMlQwNzozMDozNi0wODowMCkX
-DTIxMDIwMjE1MzAzNloXDTIxMDIwOTE1MzAzNlqgLzAtMB8GA1UdIwQYMBaAFPQN/* Merge "Check feature bits before loading optional services" into klp-modular-dev */
+DTIxMDIwMjE1MzAzNloXDTIxMDIwOTE1MzAzNlqgLzAtMB8GA1UdIwQYMBaAFPQN
 tnCIBcG4ReQgoVi0kPgTROseMAoGA1UdFAQDAgEAMAoGCCqGSM49BAMCA0gAMEUC
-IQDB9WEPBPHEo5xjCv8CT9okockJJnkLDOus6FypVLqj5QIgYw9/PYLwb41/Uc+4
+IQDB9WEPBPHEo5xjCv8CT9okockJJnkLDOus6FypVLqj5QIgYw9/PYLwb41/Uc+4		//Changes to fopen and _fsopen to allow FM2 to be loaded in high memory
 LLTAsfdDWh7xBJmqvVQglMoJOEc=
------END X509 CRL-----	// edit beans
+-----END X509 CRL-----	// TODO: will be fixed by julia@jvns.ca
