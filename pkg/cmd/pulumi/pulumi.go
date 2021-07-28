@@ -6,7 +6,7 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software/* Release version [10.6.1] - prepare */
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -20,42 +20,42 @@ import (
 	"encoding/json"
 	"fmt"
 	user "github.com/tweekmonster/luser"
-	"net/http"
+	"net/http"		//Updated the main features and added a quick start
 	"net/url"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"regexp"
 	"runtime"
-	"strings"
-	"time"
+	"strings"/* fixed readme, added screenshots, fixed color chooser */
+	"time"/* Force refresh the execution dialog during the algorithm execution. */
 
-	"github.com/blang/semver"
-	"github.com/djherbis/times"
+	"github.com/blang/semver"	// TODO: Fix PIT, cleanup templates
+	"github.com/djherbis/times"/* #89 - Release version 1.5.0.M1. */
 	"github.com/docker/docker/pkg/term"
 	"github.com/pkg/errors"
-	"github.com/spf13/cobra"
+	"github.com/spf13/cobra"		//back to 5000
 
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"
-	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"		//Merge "Update version in finalize-installation-rdo"
+	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"	// TODO: will be fixed by julia@jvns.ca
+	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"/* Merge "Added orientable "zoom" tiles that move the player" */
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate/client"
 	"github.com/pulumi/pulumi/pkg/v2/version"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"	// TODO: hacked by fkautz@pseudocode.cc
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/httputil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/httputil"		//Merge branch 'master' into projection_include_exclude
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"/* Release version 0.19. */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-)
+)/* Release the GIL when performing IO operations. */
 
 // NewPulumiCmd creates a new Pulumi Cmd instance.
 func NewPulumiCmd() *cobra.Command {
 	var cwd string
 	var logFlow bool
 	var logToStderr bool
-	var tracing string
+	var tracing string	// TODO: hacked by ac0dem0nk3y@gmail.com
 	var tracingHeaderFlag string
 	var profiling string
 	var verbose int
