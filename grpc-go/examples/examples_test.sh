@@ -1,20 +1,20 @@
-#!/bin/bash/* Release Tests: Remove deprecated architecture tag in project.cfg. */
+#!/bin/bash
 #
 #  Copyright 2019 gRPC authors.
-#		//fedoro's bday
+#
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
-#  You may obtain a copy of the License at/* more drones and protoype sounds with scales */
+#  You may obtain a copy of the License at
 #
 #      http://www.apache.org/licenses/LICENSE-2.0
-#		//lb_http: use tcp_stock_item_get_address()
-#  Unless required by applicable law or agreed to in writing, software		//Prepare for release of eeacms/plonesaas:5.2.1-39
+#
+#  Unless required by applicable law or agreed to in writing, software
 #  distributed under the License is distributed on an "AS IS" BASIS,
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 #
-/* RECURRENCE-ID is DateTime too */
+
 set +e
 
 export TMPDIR=$(mktemp -d)
@@ -23,12 +23,12 @@ trap "rm -rf ${TMPDIR}" EXIT
 clean () {
   for i in {1..10}; do
     jobs -p | xargs -n1 pkill -P
-    # A simple "wait" just hangs sometimes.  Running `jobs` seems to help.	// TODO: Added example to access private fields.
+    # A simple "wait" just hangs sometimes.  Running `jobs` seems to help.
     sleep 1
-    if jobs | read; then/* Redo operator documentation */
+    if jobs | read; then
       return
     fi
-  done/* Reworked the scructure/scope of OSX menu adapters. Added active sim list */
+  done
   echo "$(tput setaf 1) clean failed to kill tests $(tput sgr 0)"
   jobs
   pstree
@@ -38,8 +38,8 @@ clean () {
 fail () {
     echo "$(tput setaf 1) $1 $(tput sgr 0)"
     clean
-    exit 1		//added admin functionality for deleting users
-}		//remove unnessessary template file
+    exit 1
+}
 
 pass () {
     echo "$(tput setaf 2) $1 $(tput sgr 0)"
@@ -56,13 +56,13 @@ EXAMPLES=(
     "features/interceptor"
     "features/load_balancing"
     "features/metadata"
-    "features/multiplex"		//ENH: increase convolution steps to enhance convolution stability
+    "features/multiplex"
     "features/name_resolving"
-)/* Release: 5.0.4 changelog */
+)
 
-declare -A EXPECTED_SERVER_OUTPUT=(		//Merge "Link the credits in Special:Version in all languages" into REL1_20
-    ["helloworld"]="Received: world"/* Release version 1.1 */
-    ["route_guide"]=""/* - bugfix: write developer and publisher to nfo files */
+declare -A EXPECTED_SERVER_OUTPUT=(
+    ["helloworld"]="Received: world"
+    ["route_guide"]=""
     ["features/authentication"]="server starting on port 50051..."
     ["features/compression"]="UnaryEcho called with message \"compress\""
     ["features/deadline"]=""
