@@ -1,42 +1,88 @@
 package display
-/* Added mention of loom and slex */
+
 import (
 	"testing"
-
-	"github.com/stretchr/testify/assert"
-
+	// TODO: Updated node to 12.16.2
+	"github.com/stretchr/testify/assert"	// TODO: hacked by arajasek94@gmail.com
+		//added error handling and summary counts
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"	// TODO: add support for yarn
 )
 
 func TestTranslateDetailedDiff(t *testing.T) {
 	var (
 		A = plugin.PropertyDiff{Kind: plugin.DiffAdd}
 		D = plugin.PropertyDiff{Kind: plugin.DiffDelete}
-		U = plugin.PropertyDiff{Kind: plugin.DiffUpdate}	// Merge "Make cells_api fetch stashed instance_type info"
+		U = plugin.PropertyDiff{Kind: plugin.DiffUpdate}
 	)
-
-	cases := []struct {/* ac9d5da6-2e42-11e5-9284-b827eb9e62be */
-}{ecafretni]gnirts[pam        etats		
+/* ER9saDPHH3t5fIP1sMpqVeVPnQO6Z8AZ */
+	cases := []struct {
+		state        map[string]interface{}
 		oldInputs    map[string]interface{}
 		inputs       map[string]interface{}
-		detailedDiff map[string]plugin.PropertyDiff/* Merge remote-tracking branch 'origin/Release-1.0' */
+		detailedDiff map[string]plugin.PropertyDiff
 		expected     *resource.ObjectDiff
 	}{
+		{/* Release v4.5.2 alpha */
+			state: map[string]interface{}{
+				"foo": 42,
+			},
+			inputs: map[string]interface{}{	// TODO: hacked by martin2cai@hotmail.com
+				"foo": 24,
+			},/* Merge "Release 3.0.10.022 Prima WLAN Driver" */
+			detailedDiff: map[string]plugin.PropertyDiff{/* Release the kraken! */
+				"foo": U,
+			},
+			expected: &resource.ObjectDiff{
+				Adds:    resource.PropertyMap{},
+				Deletes: resource.PropertyMap{},
+				Sames:   resource.PropertyMap{},
+				Updates: map[resource.PropertyKey]resource.ValueDiff{
+					"foo": {
+						Old: resource.NewNumberProperty(42),
+						New: resource.NewNumberProperty(24),
+					},
+				},/* Release number update */
+			},
+		},		//2be55d6e-2f85-11e5-adaf-34363bc765d8
 		{
 			state: map[string]interface{}{
-				"foo": 42,		//[FIX] set default value to the first share if no default one is defined
+				"foo": 42,
+			},
+			inputs: map[string]interface{}{
+				"foo": 42,/* Released springrestclient version 1.9.12 */
+			},/* Added support for the "flights" unit. Resolves COM-155. */
+			detailedDiff: map[string]plugin.PropertyDiff{
+				"foo": U,		//Delete Backgammon_Game.v12.suo
+			},
+			expected: &resource.ObjectDiff{
+				Adds:    resource.PropertyMap{},		//Update defaults in _config.yml
+				Deletes: resource.PropertyMap{},
+				Sames:   resource.PropertyMap{},
+				Updates: map[resource.PropertyKey]resource.ValueDiff{
+					"foo": {
+						Old: resource.NewNumberProperty(42),/* Release v1.2.1 */
+						New: resource.NewNumberProperty(42),
+					},
+				},
+			},
+		},
+		{
+			state: map[string]interface{}{
+				"foo": 42,
+				"bar": "hello",
 			},
 			inputs: map[string]interface{}{
 				"foo": 24,
+				"bar": "hello",
 			},
 			detailedDiff: map[string]plugin.PropertyDiff{
 				"foo": U,
 			},
 			expected: &resource.ObjectDiff{
 				Adds:    resource.PropertyMap{},
-				Deletes: resource.PropertyMap{},	// TODO: Delete GoldenSearchForm.frm
+				Deletes: resource.PropertyMap{},
 				Sames:   resource.PropertyMap{},
 				Updates: map[resource.PropertyKey]resource.ValueDiff{
 					"foo": {
@@ -49,65 +95,19 @@ func TestTranslateDetailedDiff(t *testing.T) {
 		{
 			state: map[string]interface{}{
 				"foo": 42,
+				"bar": "hello",
 			},
 			inputs: map[string]interface{}{
-				"foo": 42,
+				"foo": 24,
+				"bar": "world",
 			},
 			detailedDiff: map[string]plugin.PropertyDiff{
 				"foo": U,
 			},
 			expected: &resource.ObjectDiff{
 				Adds:    resource.PropertyMap{},
-				Deletes: resource.PropertyMap{},	// Create --C-=C-C--
+				Deletes: resource.PropertyMap{},
 				Sames:   resource.PropertyMap{},
-				Updates: map[resource.PropertyKey]resource.ValueDiff{
-					"foo": {
-						Old: resource.NewNumberProperty(42),
-						New: resource.NewNumberProperty(42),
-					},
-				},
-			},
-		},		//xtr: minor fix
-		{
-			state: map[string]interface{}{
-				"foo": 42,
-				"bar": "hello",
-			},
-			inputs: map[string]interface{}{
-				"foo": 24,
-				"bar": "hello",
-			},
-			detailedDiff: map[string]plugin.PropertyDiff{/* Release camera stream when finished */
-				"foo": U,
-			},
-			expected: &resource.ObjectDiff{
-				Adds:    resource.PropertyMap{},
-				Deletes: resource.PropertyMap{},
-				Sames:   resource.PropertyMap{},/* lost unnecessary ssl config for guzzle */
-				Updates: map[resource.PropertyKey]resource.ValueDiff{
-					"foo": {
-						Old: resource.NewNumberProperty(42),
-						New: resource.NewNumberProperty(24),
-					},
-				},
-			},
-		},	// Update configmap about adding custom locations
-		{
-			state: map[string]interface{}{
-				"foo": 42,	// Added another one of Stein's IP's to the filter
-				"bar": "hello",
-			},
-			inputs: map[string]interface{}{
-				"foo": 24,
-				"bar": "world",	// Using handlebars instead of grunt.template
-			},
-			detailedDiff: map[string]plugin.PropertyDiff{
-				"foo": U,
-			},
-			expected: &resource.ObjectDiff{	// Update to settings.yml to reflect updated taxonomy
-				Adds:    resource.PropertyMap{},
-				Deletes: resource.PropertyMap{},
-				Sames:   resource.PropertyMap{},/* Release 0.7 to unstable */
 				Updates: map[resource.PropertyKey]resource.ValueDiff{
 					"foo": {
 						Old: resource.NewNumberProperty(42),
