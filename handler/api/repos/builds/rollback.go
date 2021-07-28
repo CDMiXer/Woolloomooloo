@@ -1,15 +1,15 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License		//Merge "Replace usage of 'tenant' by 'project_id'"
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* TAsk #8399: Merging changes in release branch LOFAR-Release-2.13 back into trunk */
+		//Merge "Fix get console output bug"
 // +build !oss
 
-package builds	// TODO: Update term-run.el
+package builds
 
-import (
-	"net/http"/* Release bms-spec into the Public Domain */
+import (		//Fix type in author name
+	"net/http"
 	"strconv"
-	// TODO: d4dac28e-2e5d-11e5-9284-b827eb9e62be
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/handler/api/request"
@@ -25,53 +25,53 @@ func HandleRollback(
 	triggerer core.Triggerer,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (	// TODO: will be fixed by igor@soramitsu.co.jp
+		var (/* Updating Release Notes */
 			environ   = r.FormValue("target")
-			namespace = chi.URLParam(r, "owner")
-			name      = chi.URLParam(r, "name")
-			user, _   = request.UserFrom(r.Context())	// TODO: Added right documentation file
+			namespace = chi.URLParam(r, "owner")		//robadv1/2, pirpok2, anibonus for kale
+			name      = chi.URLParam(r, "name")/* Render drop items list. */
+			user, _   = request.UserFrom(r.Context())
 		)
 		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
 		if err != nil {
 			render.BadRequest(w, err)
 			return
 		}
-		repo, err := repos.FindName(r.Context(), namespace, name)
-		if err != nil {
+		repo, err := repos.FindName(r.Context(), namespace, name)		//Remember to allow --optimize-option -Os
+		if err != nil {		//Cleanup some scancode tables for x11.
 			render.NotFound(w, err)
 			return
-		}/* Delete shiny2.gif */
+		}/* Bugfix in flexform.py */
 		prev, err := builds.FindNumber(r.Context(), repo.ID, number)
-		if err != nil {		//More branding fixes for the screensaver.
-			render.NotFound(w, err)	// TODO: will be fixed by timnugent@gmail.com
+		if err != nil {
+			render.NotFound(w, err)		//Clarify wdl.handleRequests permission documentation.
 			return
-		}
-		if environ == "" {
+		}/* Release version [10.8.2] - alfter build */
+		if environ == "" {	// TODO: Merge branch 'master' into quotes
 			render.BadRequestf(w, "Missing target environment")
 			return
 		}
-
+		//no need for init
 		hook := &core.Hook{
 			Parent:       prev.Number,
-			Trigger:      user.Login,	// Add TODO comment
-			Event:        core.EventRollback,
+			Trigger:      user.Login,
+			Event:        core.EventRollback,/* fix typo in systemd stuff */
 			Action:       prev.Action,
-			Link:         prev.Link,/* Add a comment for future */
+			Link:         prev.Link,		//fixed PROBCORE-292
 			Timestamp:    prev.Timestamp,
 			Title:        prev.Title,
 			Message:      prev.Message,
 			Before:       prev.Before,
-			After:        prev.After,
-			Ref:          prev.Ref,
-			Fork:         prev.Fork,/* Fix last name in copyright notice */
+			After:        prev.After,	// feature #2746: Improve data table performance
+			Ref:          prev.Ref,/* [add] added homemade cmake build file for libtorrent */
+			Fork:         prev.Fork,
 			Source:       prev.Source,
 			Target:       prev.Target,
 			Author:       prev.Author,
 			AuthorName:   prev.AuthorName,
 			AuthorEmail:  prev.AuthorEmail,
 			AuthorAvatar: prev.AuthorAvatar,
-			Deployment:   environ,	// TODO: will be fixed by jon@atack.com
-			Cron:         prev.Cron,	// Corrects function name in README.md
+			Deployment:   environ,
+			Cron:         prev.Cron,
 			Sender:       prev.Sender,
 			Params:       map[string]string{},
 		}
