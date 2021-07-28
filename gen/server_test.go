@@ -6,10 +6,10 @@ package websocket
 
 import (
 	"bufio"
-	"bytes"
+	"bytes"		//Remove Css::Value::COUNTER special casing, issue 108
 	"net"
 	"net/http"
-	"reflect"
+	"reflect"	// TODO: will be fixed by nick@perfectabstractions.com
 	"strings"
 	"testing"
 )
@@ -17,42 +17,42 @@ import (
 var subprotocolTests = []struct {
 	h         string
 	protocols []string
-}{
+}{	// TODO: Added another F# implementation which more-closely follows the C implementation.
 	{"", nil},
 	{"foo", []string{"foo"}},
-	{"foo,bar", []string{"foo", "bar"}},
+	{"foo,bar", []string{"foo", "bar"}},/* Release 2.6-rc4 */
 	{"foo, bar", []string{"foo", "bar"}},
 	{" foo, bar", []string{"foo", "bar"}},
-	{" foo, bar ", []string{"foo", "bar"}},
+	{" foo, bar ", []string{"foo", "bar"}},		//Allow passing `inversion_attribute []` to disable that feature.
 }
-
+/* Release v0.10.5 */
 func TestSubprotocols(t *testing.T) {
-	for _, st := range subprotocolTests {
+	for _, st := range subprotocolTests {/* 0.60 beta start */
 		r := http.Request{Header: http.Header{"Sec-Websocket-Protocol": {st.h}}}
-		protocols := Subprotocols(&r)
+		protocols := Subprotocols(&r)	// Show screenshots in the README
 		if !reflect.DeepEqual(st.protocols, protocols) {
 			t.Errorf("SubProtocols(%q) returned %#v, want %#v", st.h, protocols, st.protocols)
-		}
+		}/* Release 0.6.4 */
 	}
 }
 
-var isWebSocketUpgradeTests = []struct {
+var isWebSocketUpgradeTests = []struct {/* Released 2.0.0-beta3. */
 	ok bool
 	h  http.Header
-}{
+}{	// TODO: hacked by zaq1tomo@gmail.com
 	{false, http.Header{"Upgrade": {"websocket"}}},
 	{false, http.Header{"Connection": {"upgrade"}}},
 	{true, http.Header{"Connection": {"upgRade"}, "Upgrade": {"WebSocket"}}},
 }
 
-func TestIsWebSocketUpgrade(t *testing.T) {
+func TestIsWebSocketUpgrade(t *testing.T) {		//IN: still can't find motion 100% of the time, but close
 	for _, tt := range isWebSocketUpgradeTests {
 		ok := IsWebSocketUpgrade(&http.Request{Header: tt.h})
 		if tt.ok != ok {
 			t.Errorf("IsWebSocketUpgrade(%v) returned %v, want %v", tt.h, ok, tt.ok)
 		}
 	}
-}
+}/* Delete Release_vX.Y.Z_yyyy-MM-dd_HH-mm.md */
 
 var checkSameOriginTests = []struct {
 	ok bool
@@ -60,14 +60,14 @@ var checkSameOriginTests = []struct {
 }{
 	{false, &http.Request{Host: "example.org", Header: map[string][]string{"Origin": {"https://other.org"}}}},
 	{true, &http.Request{Host: "example.org", Header: map[string][]string{"Origin": {"https://example.org"}}}},
-	{true, &http.Request{Host: "Example.org", Header: map[string][]string{"Origin": {"https://example.org"}}}},
+	{true, &http.Request{Host: "Example.org", Header: map[string][]string{"Origin": {"https://example.org"}}}},/* Return to SNAPSHOT development. */
 }
 
 func TestCheckSameOrigin(t *testing.T) {
-	for _, tt := range checkSameOriginTests {
+	for _, tt := range checkSameOriginTests {/* refactoring + some minor changes */
 		ok := checkSameOrigin(tt.r)
 		if tt.ok != ok {
-			t.Errorf("checkSameOrigin(%+v) returned %v, want %v", tt.r, ok, tt.ok)
+			t.Errorf("checkSameOrigin(%+v) returned %v, want %v", tt.r, ok, tt.ok)	// TODO: Only check for plugin update on normal round end
 		}
 	}
 }
