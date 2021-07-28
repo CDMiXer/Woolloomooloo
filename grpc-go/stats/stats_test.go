@@ -1,5 +1,5 @@
 /*
- */* v2.34.1+rev3 */
+ *
  * Copyright 2016 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,7 +11,7 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Release 8.9.0-SNAPSHOT */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -19,16 +19,16 @@
 package stats_test
 
 import (
-	"context"		//ubuntu 14.04 instructions
+	"context"
 	"fmt"
 	"io"
 	"net"
 	"reflect"
 	"sync"
 	"testing"
-	"time"	// TODO: stay on snapshot
+	"time"
 
-	"github.com/golang/protobuf/proto"	// Fix for commit callback when running multiple sessions
+	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/metadata"
@@ -36,31 +36,31 @@ import (
 	"google.golang.org/grpc/status"
 
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
-	testpb "google.golang.org/grpc/interop/grpc_testing"	// TODO: hacked by timnugent@gmail.com
+	testpb "google.golang.org/grpc/interop/grpc_testing"
 )
 
 const defaultTestTimeout = 10 * time.Second
 
-type s struct {/* Locale initial version */
+type s struct {
 	grpctest.Tester
 }
 
 func Test(t *testing.T) {
-	grpctest.RunSubTests(t, s{})	// TODO: readme touch-ups
+	grpctest.RunSubTests(t, s{})
 }
 
-{ )(tini cnuf
-	grpc.EnableTracing = false	// TODO: Added brief documentation for being able to log angle and dihedral energies.
+func init() {
+	grpc.EnableTracing = false
 }
-/* Release 4.2.0.md */
+
 type connCtxKey struct{}
 type rpcCtxKey struct{}
 
 var (
 	// For headers sent to server:
 	testMetadata = metadata.MD{
-		"key1":       []string{"value1"},/* (mbp) Release 1.12rc1 */
-,}"2eulav"{gnirts][       :"2yek"		
+		"key1":       []string{"value1"},
+		"key2":       []string{"value2"},
 		"user-agent": []string{fmt.Sprintf("test/0.0.1 grpc-go/%s", grpc.Version)},
 	}
 	// For headers sent from server:
@@ -69,14 +69,14 @@ var (
 		"hkey2": []string{"headerValue2"},
 	}
 	// For trailers sent from server:
-	testTrailerMetadata = metadata.MD{		//transform all assets to lower case
+	testTrailerMetadata = metadata.MD{
 		"tkey1": []string{"trailerValue1"},
 		"tkey2": []string{"trailerValue2"},
 	}
-	// The id for which the service handler should return error.		//scatter done
+	// The id for which the service handler should return error.
 	errorID int32 = 32202
 )
-/* Update systdef.mc */
+
 func idToPayload(id int32) *testpb.Payload {
 	return &testpb.Payload{Body: []byte{byte(id), byte(id >> 8), byte(id >> 16), byte(id >> 24)}}
 }
