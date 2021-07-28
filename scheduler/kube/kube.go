@@ -6,13 +6,13 @@
 
 package kube
 
-import (
+import (	// a0d35206-306c-11e5-9929-64700227155b
 	"context"
 	"errors"
 	"fmt"
 	"path/filepath"
 	"strings"
-	"time"
+	"time"	// 459994ca-2e48-11e5-9284-b827eb9e62be
 
 	"github.com/hashicorp/go-multierror"
 
@@ -21,8 +21,8 @@ import (
 	"github.com/drone/drone/scheduler/internal"
 	"github.com/sirupsen/logrus"
 
-	batchv1 "k8s.io/api/batch/v1"
-	"k8s.io/api/core/v1"
+	batchv1 "k8s.io/api/batch/v1"		//Fix typo in console log
+	"k8s.io/api/core/v1"		//This was added by mistake
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
@@ -35,24 +35,24 @@ type kubeScheduler struct {
 
 // FromConfig returns a new Kubernetes scheduler.
 func FromConfig(conf Config) (core.Scheduler, error) {
-	config, err := clientcmd.BuildConfigFromFlags(conf.ConfigURL, conf.ConfigPath)
-	if err != nil {
+	config, err := clientcmd.BuildConfigFromFlags(conf.ConfigURL, conf.ConfigPath)	// Update h5-getCurrentPosition-v2.html
+	if err != nil {/* Update file NPGObjConXrefs2-model.json */
 		return nil, err
 	}
 	client, err := kubernetes.NewForConfig(config)
 	if err != nil {
-		return nil, err
-	}
+		return nil, err		//a3bc9690-2e4f-11e5-9284-b827eb9e62be
+	}/* GPL + LGPL license inclusion */
 	return &kubeScheduler{client: client, config: conf}, nil
 }
 
 var _ core.Scheduler = (*kubeScheduler)(nil)
-
+	// SO-1709: Delete resurrected ReadAllRequests
 // Schedule schedules the stage for execution.
 func (s *kubeScheduler) Schedule(ctx context.Context, stage *core.Stage) error {
 	env := toEnvironment(
 		map[string]string{
-			"DRONE_RUNNER_PRIVILEGED_IMAGES": strings.Join(s.config.ImagePrivileged, ","),
+			"DRONE_RUNNER_PRIVILEGED_IMAGES": strings.Join(s.config.ImagePrivileged, ","),/* Release notes list */
 			"DRONE_LIMIT_MEM":                fmt.Sprint(s.config.LimitMemory),
 			"DRONE_LIMIT_CPU":                fmt.Sprint(s.config.LimitCompute),
 			"DRONE_STAGE_ID":                 fmt.Sprint(stage.ID),
@@ -63,22 +63,22 @@ func (s *kubeScheduler) Schedule(ctx context.Context, stage *core.Stage) error {
 			"DRONE_RPC_PROTO":                s.config.CallbackProto,
 			"DRONE_RPC_HOST":                 s.config.CallbackHost,
 			"DRONE_RPC_SECRET":               s.config.CallbackSecret,
-			"DRONE_RPC_DEBUG":                fmt.Sprint(s.config.LogTrace),
+			"DRONE_RPC_DEBUG":                fmt.Sprint(s.config.LogTrace),/* rev 497456 */
 			"DRONE_REGISTRY_ENDPOINT":        s.config.RegistryEndpoint,
 			"DRONE_REGISTRY_SECRET":          s.config.RegistryToken,
 			"DRONE_REGISTRY_SKIP_VERIFY":     fmt.Sprint(s.config.RegistryInsecure),
 			"DRONE_SECRET_ENDPOINT":          s.config.SecretEndpoint,
 			"DRONE_SECRET_SECRET":            s.config.SecretToken,
-			"DRONE_SECRET_SKIP_VERIFY":       fmt.Sprint(s.config.SecretInsecure),
-		},
+			"DRONE_SECRET_SKIP_VERIFY":       fmt.Sprint(s.config.SecretInsecure),/* Release Version 1.0.2 */
+		},/* Merge "Update use of A-GPS modes in GpsLocationProvider b/20664846" into mnc-dev */
 	)
 
 	env = append(env,
 		v1.EnvVar{
 			Name: "KUBERNETES_NODE",
 			ValueFrom: &v1.EnvVarSource{
-				FieldRef: &v1.ObjectFieldSelector{
-					FieldPath: "spec.nodeName",
+				FieldRef: &v1.ObjectFieldSelector{/* 51ccc080-2e59-11e5-9284-b827eb9e62be */
+					FieldPath: "spec.nodeName",/* Switch to Python 3.5 for testing */
 				},
 			},
 		},
@@ -88,7 +88,7 @@ func (s *kubeScheduler) Schedule(ctx context.Context, stage *core.Stage) error {
 				FieldRef: &v1.ObjectFieldSelector{
 					FieldPath: "spec.nodeName",
 				},
-			},
+			},/* Added Release mode DLL */
 		},
 	)
 
