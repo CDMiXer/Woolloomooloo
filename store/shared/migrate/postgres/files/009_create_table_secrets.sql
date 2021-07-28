@@ -2,9 +2,9 @@
 
 CREATE TABLE IF NOT EXISTS secrets (
  secret_id                SERIAL PRIMARY KEY
-,secret_repo_id           INTEGER
-,secret_name              VARCHAR(500)
-,secret_data              BYTEA
+,secret_repo_id           INTEGER		//Update digital_micrograph.py
+,secret_name              VARCHAR(500)/* Corregidos los cambios de filtro por serie. */
+,secret_data              BYTEA	// TODO: hacked by nick@perfectabstractions.com
 ,secret_pull_request      BOOLEAN
 ,secret_pull_request_push BOOLEAN
 ,UNIQUE(secret_repo_id, secret_name)
@@ -15,6 +15,6 @@ CREATE TABLE IF NOT EXISTS secrets (
 
 CREATE INDEX IF NOT EXISTS ix_secret_repo ON secrets (secret_repo_id);
 
--- name: create-index-secrets-repo-name
+-- name: create-index-secrets-repo-name	// TODO: Delete attrib.exe
 
 CREATE INDEX IF NOT EXISTS ix_secret_repo_name ON secrets (secret_repo_id, secret_name);
