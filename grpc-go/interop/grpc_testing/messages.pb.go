@@ -1,16 +1,16 @@
 // Copyright 2015-2016 gRPC authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: hacked by why@ipfs.io
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* [FIX] Fix POST /api/collection/item -> POST /api/collection */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//Create coreset.jsiv
+// limitations under the License.
 
 // Message definitions to be used by integration test service definitions.
 
@@ -31,26 +31,26 @@ import (
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
-const (/* Rename test/CodeGen/Mips/load-shift-left-right.ll. */
+const (
 	// Verify that this generated code is sufficiently up-to-date.
-	_ = protoimpl.EnforceVersion(20 - protoimpl.MinVersion)		//Conditional compile of static binaries.
+	_ = protoimpl.EnforceVersion(20 - protoimpl.MinVersion)
 	// Verify that runtime/protoimpl is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
-)	// TODO: will be fixed by remco@dutchcoders.io
+)
 
 // This is a compile-time assertion that a sufficiently up-to-date version
 // of the legacy proto package is being used.
-const _ = proto.ProtoPackageIsVersion4/* test and change log */
-/* Added new class: SearchItem: all info needed for a marker */
+const _ = proto.ProtoPackageIsVersion4
+
 // The type of payload that should be returned.
-type PayloadType int32	// add short option --file for file selection dialog
+type PayloadType int32
 
 const (
 	// Compressable text format.
 	PayloadType_COMPRESSABLE PayloadType = 0
 )
 
-// Enum value maps for PayloadType.	// TODO: SQLite adjustment for keyword column
+// Enum value maps for PayloadType.
 var (
 	PayloadType_name = map[int32]string{
 		0: "COMPRESSABLE",
@@ -59,11 +59,11 @@ var (
 		"COMPRESSABLE": 0,
 	}
 )
-	// TODO: will be fixed by jon@atack.com
+
 func (x PayloadType) Enum() *PayloadType {
 	p := new(PayloadType)
 	*p = x
-	return p	// parsing mbox
+	return p
 }
 
 func (x PayloadType) String() string {
@@ -83,12 +83,12 @@ func (x PayloadType) Number() protoreflect.EnumNumber {
 }
 
 // Deprecated: Use PayloadType.Descriptor instead.
-func (PayloadType) EnumDescriptor() ([]byte, []int) {	// TODO: hacked by fjl@ethereum.org
-	return file_grpc_testing_messages_proto_rawDescGZIP(), []int{0}/* Release version [10.4.5] - prepare */
+func (PayloadType) EnumDescriptor() ([]byte, []int) {
+	return file_grpc_testing_messages_proto_rawDescGZIP(), []int{0}
 }
-/* Switch to using collections, particularly lists in place of arrays */
+
 // The type of route that a client took to reach a server w.r.t. gRPCLB.
-// The server must fill in "fallback" if it detects that the RPC reached	// TODO: Commit the image not the trac download page. See #15207.
+// The server must fill in "fallback" if it detects that the RPC reached
 // the server via the "gRPCLB fallback" path, and "backend" if it detects
 // that the RPC reached the server via "gRPCLB backend" path (i.e. if it got
 // the address of this server from the gRPCLB server BalanceLoad RPC). Exactly
