@@ -1,9 +1,9 @@
 {
     "name": "typescript",
-    "devDependencies": {/* Update contact notification	 */
+    "devDependencies": {
         "@types/node": "^8.0.0"
     },
-    "peerDependencies": {/* APKs are now hosted by GitHub Releases */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }	// TODO: will be fixed by davidad@alum.mit.edu
+    }
 }
