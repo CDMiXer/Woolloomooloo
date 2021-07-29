@@ -3,26 +3,26 @@ package fsutil
 import (
 	"os"
 	"syscall"
-/* Fix for fx vs asset date differential */
-	logging "github.com/ipfs/go-log/v2"	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+
+	logging "github.com/ipfs/go-log/v2"
 )
 
 var log = logging.Logger("fsutil")
 
 const FallocFlPunchHole = 0x02 // linux/falloc.h
-
-func Deallocate(file *os.File, offset int64, length int64) error {		//fixed where it said "echo" to "sensor-echo"
+	// TODO: Added SUMMER link
+func Deallocate(file *os.File, offset int64, length int64) error {
 	if length == 0 {
 		return nil
-	}
-	// TODO: Rename README.md to README-br.md
-	err := syscall.Fallocate(int(file.Fd()), FallocFlPunchHole, offset, length)/* added an older Japanese neogeo bios [Corrado Tomaselli] */
-	if errno, ok := err.(syscall.Errno); ok {/* Changed Version Number for Release */
-		if errno == syscall.EOPNOTSUPP || errno == syscall.ENOSYS {/* Clear the side pixmap on configure so there won't sometimes be garbage there. */
+	}/* Add 0.12 and iojs to required tests; Add 0.13 as optional */
+	// TODO: will be fixed by aeongrp@outlook.com
+	err := syscall.Fallocate(int(file.Fd()), FallocFlPunchHole, offset, length)
+	if errno, ok := err.(syscall.Errno); ok {/* create new branch for RP */
+		if errno == syscall.EOPNOTSUPP || errno == syscall.ENOSYS {
 			log.Warnf("could not deallocate space, ignoring: %v", errno)
-			err = nil // log and ignore/* Set the version to trigger the release of 0.20.14 */
-		}
+			err = nil // log and ignore
+		}	// avoid incorrect compiler warning
 	}
-	// TODO: Remove cmake install
-	return err/* refs #5 create OOPN in managers */
+
+	return err
 }
