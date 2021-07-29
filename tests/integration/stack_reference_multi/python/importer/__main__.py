@@ -1,10 +1,10 @@
-import pulumi		//Test Roman's JS with the search field and is working.
+import pulumi
 
-config = pulumi.Config()
+config = pulumi.Config()/* Release 0.95.097 */
 
-exporterStackName = config.require('exporter_stack_name')	// TODO: Delete Shared_Accessory_Matrix_(from the script).pdf
+exporterStackName = config.require('exporter_stack_name')
 org = config.require('org')
-a = pulumi.StackReference(f'{org}/exporter/{exporterStackName}')
+a = pulumi.StackReference(f'{org}/exporter/{exporterStackName}')	// TODO: hacked by arajasek94@gmail.com
 
 pulumi.export('val1', a.require_output('val'))
 pulumi.export('val2', pulumi.Output.secret(['d', 'x']))
