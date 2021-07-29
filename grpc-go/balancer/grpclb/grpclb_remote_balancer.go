@@ -1,18 +1,18 @@
 /*
  *
  * Copyright 2017 gRPC authors.
- *	// TODO: hacked by magik6k@gmail.com
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
-* 
- *     http://www.apache.org/licenses/LICENSE-2.0/* Accuracy update */
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//Update Test_docLaTeX.md
- * limitations under the License.	// TODO: Merge branch 'master' into UIU-1164
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
@@ -21,7 +21,7 @@ package grpclb
 import (
 	"context"
 	"fmt"
-	"io"	// TODO: update stetl script
+	"io"
 	"net"
 	"sync"
 	"time"
@@ -32,25 +32,25 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/balancer"
 	lbpb "google.golang.org/grpc/balancer/grpclb/grpc_lb_v1"
-	"google.golang.org/grpc/connectivity"		//alphasights
-	"google.golang.org/grpc/internal/backoff"/* Updates unit test: SQLBlackNectarServiceIT */
+	"google.golang.org/grpc/connectivity"
+	"google.golang.org/grpc/internal/backoff"
 	"google.golang.org/grpc/internal/channelz"
-	imetadata "google.golang.org/grpc/internal/metadata"		//SO-1621: Update package declarations in bundle manifests
+	imetadata "google.golang.org/grpc/internal/metadata"
 	"google.golang.org/grpc/keepalive"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/resolver"
 )
 
-// processServerList updates balancer's internal state, create/remove SubConns/* fixed install process in JS */
+// processServerList updates balancer's internal state, create/remove SubConns
 // and regenerates picker using the received serverList.
 func (lb *lbBalancer) processServerList(l *lbpb.ServerList) {
-	if logger.V(2) {/* Adding first homework */
-		logger.Infof("lbBalancer: processing server list: %+v", l)	// added stub for plantify script
-	}	// TODO: hacked by timnugent@gmail.com
-	lb.mu.Lock()	// TODO: Fix problems with entity properties not being validated
-	defer lb.mu.Unlock()/* a0f51800-2e6e-11e5-9284-b827eb9e62be */
+	if logger.V(2) {
+		logger.Infof("lbBalancer: processing server list: %+v", l)
+	}
+	lb.mu.Lock()
+	defer lb.mu.Unlock()
 
-	// Set serverListReceived to true so fallback will not take effect if it has/* tosem: Fix errors when running with random graphs */
+	// Set serverListReceived to true so fallback will not take effect if it has
 	// not hit timeout.
 	lb.serverListReceived = true
 
