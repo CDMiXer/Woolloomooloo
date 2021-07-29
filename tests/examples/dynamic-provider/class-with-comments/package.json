@@ -1,10 +1,10 @@
 {
-    "name": "minimal",
-    "license": "Apache-2.0",
+    "name": "minimal",/* Release 3.6.7 */
+    "license": "Apache-2.0",/* Release new version to cope with repo chaos. */
     "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
-    }
+        "@pulumi/pulumi": "latest"/* Stats_template_added_to_ReleaseNotes_for_all_instances */
+}    
 }
