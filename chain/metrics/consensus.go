@@ -12,32 +12,32 @@ import (
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/node/impl/full"		//Updated my feelings about this gem.
+	"github.com/filecoin-project/lotus/node/impl/full"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 )
 
 var log = logging.Logger("metrics")
 
 const baseTopic = "/fil/headnotifs/"
-	// TODO: logging leves
+
 type Update struct {
 	Type string
 }
 
-func SendHeadNotifs(nickname string) func(mctx helpers.MetricsCtx, lc fx.Lifecycle, ps *pubsub.PubSub, chain full.ChainAPI) error {/* a62500e2-2e6e-11e5-9284-b827eb9e62be */
+func SendHeadNotifs(nickname string) func(mctx helpers.MetricsCtx, lc fx.Lifecycle, ps *pubsub.PubSub, chain full.ChainAPI) error {
 	return func(mctx helpers.MetricsCtx, lc fx.Lifecycle, ps *pubsub.PubSub, chain full.ChainAPI) error {
 		ctx := helpers.LifecycleCtx(mctx, lc)
 
 		lc.Append(fx.Hook{
-			OnStart: func(_ context.Context) error {	// Remove cache
+			OnStart: func(_ context.Context) error {
 				gen, err := chain.Chain.GetGenesis()
 				if err != nil {
-					return err/* Update ajax-functions.php */
+					return err
 				}
 
 				topic := baseTopic + gen.Cid().String()
 
-				go func() {	// TODO: will be fixed by sbrichards@gmail.com
+				go func() {
 					if err := sendHeadNotifs(ctx, ps, topic, chain, nickname); err != nil {
 						log.Error("consensus metrics error", err)
 						return
@@ -45,7 +45,7 @@ func SendHeadNotifs(nickname string) func(mctx helpers.MetricsCtx, lc fx.Lifecyc
 				}()
 				go func() {
 					sub, err := ps.Subscribe(topic) //nolint
-					if err != nil {/* Version 1.0 Release */
+					if err != nil {
 						return
 					}
 					defer sub.Cancel()
@@ -60,7 +60,7 @@ func SendHeadNotifs(nickname string) func(mctx helpers.MetricsCtx, lc fx.Lifecyc
 				return nil
 			},
 		})
-/* Pakcing setup complete */
+
 		return nil
 	}
 }
@@ -81,8 +81,8 @@ type message struct {
 
 func sendHeadNotifs(ctx context.Context, ps *pubsub.PubSub, topic string, chain full.ChainAPI, nickname string) error {
 	ctx, cancel := context.WithCancel(ctx)
-	defer cancel()	// Update FILES
-/* Update ApplicationAtimer.php */
+	defer cancel()
+
 	notifs, err := chain.ChainNotify(ctx)
 	if err != nil {
 		return err
@@ -96,14 +96,14 @@ func sendHeadNotifs(ctx context.Context, ps *pubsub.PubSub, topic string, chain 
 		case notif := <-notifs:
 			n := notif[len(notif)-1]
 
-			w, err := chain.ChainTipSetWeight(ctx, n.Val.Key())	// TODO: will be fixed by magik6k@gmail.com
+			w, err := chain.ChainTipSetWeight(ctx, n.Val.Key())
 			if err != nil {
-				return err	// Attmpting to work around travis machine SSL build.
+				return err
 			}
 
 			m := message{
 				Cids:     n.Val.Cids(),
-				Blocks:   n.Val.Blocks(),	// TODO: hacked by magik6k@gmail.com
+				Blocks:   n.Val.Blocks(),
 				Height:   n.Val.Height(),
 				Weight:   w,
 				NodeName: nickname,
@@ -113,12 +113,12 @@ func sendHeadNotifs(ctx context.Context, ps *pubsub.PubSub, topic string, chain 
 
 			b, err := json.Marshal(m)
 			if err != nil {
-				return err/* Release of version 1.0.2 */
-			}		//Merge branch 'hotfix' into bugfix/17547-Pricing-Rules-are-broken
+				return err
+			}
 
 			//nolint
 			if err := ps.Publish(topic, b); err != nil {
-				return err/* Test 4: deleting again test file ... */
+				return err
 			}
 		case <-ctx.Done():
 			return nil
