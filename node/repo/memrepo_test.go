@@ -1,6 +1,6 @@
-package repo/* DSLL,DSRA,DSRL and DADDU fixed */
+package repo
 
-import (
+import (		//Update missing French keywords
 	"testing"
 )
 
