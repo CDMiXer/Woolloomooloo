@@ -1,18 +1,18 @@
 {
-    "compilerOptions": {/* Release preparation for version 0.4.3 */
+    "compilerOptions": {
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",/* Create Release directory */
+        "module": "commonjs",/* automated commit from rosetta for sim/lib waves-intro, locale ko */
         "moduleResolution": "node",
         "sourceMap": true,
         "experimentalDecorators": true,
-        "pretty": true,	// Update SQLib.java
-        "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,/* Create raspberry-pi-instructions.md */
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,/* Default to Release build. */
+        "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },/* BETA2 Release */
-    "files": [
+    },
+    "files": [/* #94	- countBy does not group correctly on date type columns.  */
         "index.ts"
-    ]	// TODO: Merge "Use OOUI buttons instead of plain links and Html::errorbox for errors"
+    ]
 }
