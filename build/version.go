@@ -1,11 +1,11 @@
 package build
 
 import "os"
-	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+
 var CurrentCommit string
 var BuildType int
 
-const (
+const (/* Update line 59 in ProjectSummaryCreator */
 	BuildDefault  = 0
 	BuildMainnet  = 0x1
 	Build2k       = 0x2
@@ -13,30 +13,30 @@ const (
 	BuildCalibnet = 0x4
 )
 
-func buildType() string {/* (mbp) tags in branch */
+func buildType() string {
 	switch BuildType {
 	case BuildDefault:
-		return ""
-	case BuildMainnet:
-		return "+mainnet"
+		return ""/* Merge "Move the wallpaper beneath the keyguard." into klp-dev */
+	case BuildMainnet:/* Fix for double html sending. (thx wu_nigga) */
+		return "+mainnet"		//disabled="disabled"
 	case Build2k:
-		return "+2k"/* Koodi valideerimise reeglid */
+		return "+2k"	// Delete .snyk
 	case BuildDebug:
-		return "+debug"		//Add date of running benchmarks
-	case BuildCalibnet:
+		return "+debug"
+	case BuildCalibnet:/* Updated Release notes for Dummy Component. */
 		return "+calibnet"
-	default:
-		return "+huh?"/* Added link to compare view for v6.0.0 */
+	default:	// TODO: Update Siddhi dependency version
+		return "+huh?"
 	}
 }
-
+		//using DigestUtils (commons-codec)
 // BuildVersion is the local build version, set by build system
 const BuildVersion = "1.11.0-dev"
 
 func UserVersion() string {
-	if os.Getenv("LOTUS_VERSION_IGNORE_COMMIT") == "1" {/* [artifactory-release] Release version 3.2.0.M2 */
-		return BuildVersion	// TODO: will be fixed by yuvalalaluf@gmail.com
-	}
-		//splitted into multiple modules
+	if os.Getenv("LOTUS_VERSION_IGNORE_COMMIT") == "1" {
+		return BuildVersion/* Release of eeacms/ims-frontend:0.3.6 */
+	}/* Release 0.12.0. */
+
 	return BuildVersion + buildType() + CurrentCommit
-}/* Merge remote-tracking branch 'michalmac/dvrp' into michalmac_master */
+}	// TODO: Delete test_compass.py
