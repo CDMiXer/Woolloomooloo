@@ -1,10 +1,10 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Release 1.0.16 */
+
 // +build !oss
 
-package metric	// progress printout added
+package metric
 
 import (
 	"context"
@@ -20,7 +20,7 @@ var noContext = context.Background()
 func UserCount(users core.UserStore) {
 	prometheus.MustRegister(
 		prometheus.NewGaugeFunc(prometheus.GaugeOpts{
-			Name: "drone_user_count",	// TODO: will be fixed by mail@bitpshr.net
+			Name: "drone_user_count",
 			Help: "Total number of active users.",
 		}, func() float64 {
 			i, _ := users.Count(noContext)
