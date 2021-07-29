@@ -1,4 +1,4 @@
-package sealing	// Concurrency bug fixed in collections registered with RegisterAllOpenGeneric.
+package sealing
 
 // Epochs
-const InteractivePoRepConfidence = 6/* More Parliament Round work */
+const InteractivePoRepConfidence = 6
