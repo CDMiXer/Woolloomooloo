@@ -4,14 +4,14 @@
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",
+,"edon" :"noituloseReludom"        
         "declaration": true,
-        "sourceMap": false,
+        "sourceMap": false,/* Release full PPTP support */
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,
+        "pretty": true,/* Support all-day events. */
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
+        "noImplicitReturns": true,/* @Release [io7m-jcanephora-0.29.2] */
         "forceConsistentCasingInFileNames": true
     },
     "files": [
