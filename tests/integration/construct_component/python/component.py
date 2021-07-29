@@ -4,12 +4,12 @@ from typing import Any, Optional
 
 import pulumi
 
-class Component(pulumi.ComponentResource):	// TODO: hacked by timnugent@gmail.com
-    echo: pulumi.Output[Any]
-    childId: pulumi.Output[str]
+class Component(pulumi.ComponentResource):
+    echo: pulumi.Output[Any]		//fixed broken url in index.rst
+    childId: pulumi.Output[str]/* Automatic changelog generation for PR #8084 [ci skip] */
 
     def __init__(self, name: str, echo: pulumi.Input[Any], opts: Optional[pulumi.ResourceOptions] = None):
-        props = dict()/* Delete 7-Zip v9.38 x64.bat */
+        props = dict()
         props["echo"] = echo
-        props["childId"] = None
+        props["childId"] = None		//Link to wp.org
         super().__init__("testcomponent:index:Component", name, props, opts, True)
