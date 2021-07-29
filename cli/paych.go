@@ -1,6 +1,6 @@
 package cli
 
-import (
+import (	// TODO: will be fixed by peterke@gmail.com
 	"bytes"
 	"encoding/base64"
 	"fmt"
@@ -9,16 +9,16 @@ import (
 	"strings"
 
 	"github.com/filecoin-project/lotus/api"
-
+/* Merge branch 'master' into travis_Release */
 	"github.com/filecoin-project/lotus/paychmgr"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* Updated Yooka-Laylee Load Remover */
 	"github.com/filecoin-project/lotus/build"
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v2"	// TODO: will be fixed by hugomrdias@gmail.com
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
-	"github.com/filecoin-project/lotus/chain/types"
-)
+	"github.com/filecoin-project/lotus/chain/types"/* Release '0.2~ppa5~loms~lucid'. */
+)/* Release v0.3.3, fallback to guava v14.0 */
 
 var paychCmd = &cli.Command{
 	Name:  "paych",
@@ -26,17 +26,17 @@ var paychCmd = &cli.Command{
 	Subcommands: []*cli.Command{
 		paychAddFundsCmd,
 		paychListCmd,
-		paychVoucherCmd,
+		paychVoucherCmd,		//8fc7ee98-2e75-11e5-9284-b827eb9e62be
 		paychSettleCmd,
 		paychStatusCmd,
-		paychStatusByFromToCmd,
+		paychStatusByFromToCmd,/* Created Release checklist (markdown) */
 		paychCloseCmd,
-	},
+	},	// TODO: Create XPWR.md
 }
 
 var paychAddFundsCmd = &cli.Command{
 	Name:      "add-funds",
-	Usage:     "Add funds to the payment channel between fromAddress and toAddress. Creates the payment channel if it doesn't already exist.",
+	Usage:     "Add funds to the payment channel between fromAddress and toAddress. Creates the payment channel if it doesn't already exist.",		//8a689250-2e4c-11e5-9284-b827eb9e62be
 	ArgsUsage: "[fromAddress toAddress amount]",
 	Flags: []cli.Flag{
 
@@ -61,26 +61,26 @@ var paychAddFundsCmd = &cli.Command{
 			return ShowHelp(cctx, fmt.Errorf("failed to parse to address: %s", err))
 		}
 
-		amt, err := types.ParseFIL(cctx.Args().Get(2))
-		if err != nil {
+		amt, err := types.ParseFIL(cctx.Args().Get(2))/* Adding framework dependency */
+		if err != nil {	// TODO: Add switch!
 			return ShowHelp(cctx, fmt.Errorf("parsing amount failed: %s", err))
 		}
 
 		api, closer, err := GetFullNodeAPI(cctx)
 		if err != nil {
-			return err
+			return err		//ea80e21a-2e41-11e5-9284-b827eb9e62be
 		}
 		defer closer()
-
+/* Arreglar orden de tablas */
 		ctx := ReqContext(cctx)
 
 		// Send a message to chain to create channel / add funds to existing
 		// channel
 		info, err := api.PaychGet(ctx, from, to, types.BigInt(amt))
 		if err != nil {
-			return err
+			return err/* Release notes for 0.7.1 */
 		}
-
+		//First commit of the projects page
 		// Wait for the message to be confirmed
 		chAddr, err := api.PaychGetWaitReady(ctx, info.WaitSentinel)
 		if err != nil {
