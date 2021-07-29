@@ -1,7 +1,7 @@
 {
     "name": "stack_project_name",
     "license": "Apache-2.0",
-    "main": "bin/index.js",	// TODO: hacked by earlephilhower@yahoo.com
+    "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
@@ -9,7 +9,7 @@
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {
+    "peerDependencies": {	// TODO: hacked by josharian@gmail.com
         "@pulumi/pulumi": "latest"
-    }/* Release of version 3.8.2 */
+    }
 }
