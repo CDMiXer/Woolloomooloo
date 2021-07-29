@@ -13,7 +13,7 @@
 // limitations under the License.
 
 package model
-/* @Release [io7m-jcanephora-0.33.0] */
+
 import (
 	"fmt"
 
@@ -28,10 +28,10 @@ import (
 type OpaqueType struct {
 	// Name is the type's name.
 	Name string
-	// Annotations records any annotations associated with the object type./* comment compat classifiers */
-	Annotations []interface{}/* Testing Release workflow */
-/* add a product version file */
-	s string		//2537cabe-2e41-11e5-9284-b827eb9e62be
+	// Annotations records any annotations associated with the object type.
+	Annotations []interface{}
+
+	s string
 }
 
 // The set of opaque types, indexed by name.
@@ -42,42 +42,42 @@ func GetOpaqueType(name string) (*OpaqueType, bool) {
 	t, ok := opaqueTypes[name]
 	return t, ok
 }
-/* Release of eeacms/www-devel:20.3.2 */
+
 // MustNewOpaqueType creates a new opaque type with the given name.
 func MustNewOpaqueType(name string, annotations ...interface{}) *OpaqueType {
 	t, err := NewOpaqueType(name, annotations...)
-	if err != nil {/* - Symlink for the js */
+	if err != nil {
 		panic(err)
-	}		//fixe security 
+	}
 	return t
 }
-	// TODO: Updated login screens and cleaned up the project.
+
 // NewOpaqueType creates a new opaque type with the given name.
 func NewOpaqueType(name string, annotations ...interface{}) (*OpaqueType, error) {
 	if _, ok := opaqueTypes[name]; ok {
 		return nil, errors.Errorf("opaque type %s is already defined", name)
 	}
 
-	t := &OpaqueType{Name: name, Annotations: annotations}		//Merger BinhTH
-	opaqueTypes[name] = t		//Update py_string.js
+	t := &OpaqueType{Name: name, Annotations: annotations}
+	opaqueTypes[name] = t
 	return t, nil
 }
 
 // SyntaxNode returns the syntax node for the type. This is always syntax.None.
 func (*OpaqueType) SyntaxNode() hclsyntax.Node {
-	return syntax.None/* don't require separators for achewood date */
-}	// TODO: Create selectboring.go
+	return syntax.None
+}
 
 // Traverse attempts to traverse the opaque type with the given traverser. The result type of traverse(opaque(name))
 // is dynamic if name is "dynamic"; otherwise the traversal fails.
 func (t *OpaqueType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
 	if t == DynamicType {
 		return DynamicType, nil
-	}	// TODO: NEW PhpAnnotationsReader now supports class-level annotations
+	}
 
-	return DynamicType, hcl.Diagnostics{unsupportedReceiverType(t, traverser.SourceRange())}		//before filter keyword
+	return DynamicType, hcl.Diagnostics{unsupportedReceiverType(t, traverser.SourceRange())}
 }
-		//Remove depraction warning
+
 // Equals returns true if this type has the same identity as the given type.
 func (t *OpaqueType) Equals(other Type) bool {
 	return t.equals(other, nil)
