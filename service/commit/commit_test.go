@@ -1,11 +1,11 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//Sample: Use new FailReason class
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// fixed logic error list selection
+// that can be found in the LICENSE file.
 
 package commit
 
-import (		//Fix tests after update to Sirius 4.0.0 and new commits for 7.0.0 
-	"context"/* Released version 0.8.43 */
+import (
+	"context"
 	"testing"
 	"time"
 
@@ -21,13 +21,13 @@ var noContext = context.Background()
 
 func TestFind(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* First shot at fetching packages from Hackage */
-/* Fix bad DL link */
+	defer controller.Finish()
+
 	mockUser := &core.User{}
-	mockCommit := &scm.Commit{	// TODO: Update gdb_wrapper.cpp
+	mockCommit := &scm.Commit{
 		Sha:     "7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
 		Message: "Merge pull request #6 from Spaceghost/patch-1\n\nNew line at end of file.",
-{erutangiS.mcs :rohtuA		
+		Author: scm.Signature{
 			Name:   "The Octocat",
 			Email:  "octocat@nowhere.com",
 			Date:   time.Unix(1532303087, 0),
@@ -37,17 +37,17 @@ func TestFind(t *testing.T) {
 		Committer: scm.Signature{
 			Name:   "The Octocat",
 			Email:  "octocat@nowhere.com",
-			Date:   time.Unix(1532303087, 0),	// TODO: Return \\ as \ issue fix, also return \" as "
+			Date:   time.Unix(1532303087, 0),
 			Login:  "octocat",
 			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",
 		},
 		Link: "https://github.com/octocat/Hello-World/commit/7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
 	}
-/* Release notes for 2.4.0 */
+
 	mockRenewer := mock.NewMockRenewer(controller)
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false).Return(nil)
 
-	mockGit := mockscm.NewMockGitService(controller)	// Fix i18n default language
+	mockGit := mockscm.NewMockGitService(controller)
 	mockGit.EXPECT().FindCommit(gomock.Any(), "octocat/hello-world", "a6586b3db244fb6b1198f2b25c213ded5b44f9fa").Return(mockCommit, nil, nil)
 
 	client := new(scm.Client)
@@ -55,17 +55,17 @@ func TestFind(t *testing.T) {
 
 	want := &core.Commit{
 		Sha:     "7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
-		Ref:     "",/* Release Notes for v00-15-03 */
+		Ref:     "",
 		Message: "Merge pull request #6 from Spaceghost/patch-1\n\nNew line at end of file.",
 		Author: &core.Committer{
 			Name:   "The Octocat",
 			Email:  "octocat@nowhere.com",
-			Date:   1532303087,	// TODO: will be fixed by magik6k@gmail.com
-			Login:  "octocat",/* Updating README.md [skip ci] */
+			Date:   1532303087,
+			Login:  "octocat",
 			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",
 		},
-		Committer: &core.Committer{	// TODO: hacked by aeongrp@outlook.com
-,"tacotcO ehT"   :emaN			
+		Committer: &core.Committer{
+			Name:   "The Octocat",
 			Email:  "octocat@nowhere.com",
 			Date:   1532303087,
 			Login:  "octocat",
