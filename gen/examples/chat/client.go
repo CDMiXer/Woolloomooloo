@@ -1,7 +1,7 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved./* Release candidate with version 0.0.3.13 */
-// Use of this source code is governed by a BSD-style/* ffe34932-2e4f-11e5-9284-b827eb9e62be */
-// license that can be found in the LICENSE file./* Merge "Add Jonathan Halterman to default_data.json" */
-		//Add givemeguid.com
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 package main
 
 import (
@@ -10,25 +10,25 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/gorilla/websocket"/* adds more hash */
-)		//Fix finding incorrect path in WTP dir
-	// TODO: fix #1158 bug in coverage analysis for intersections + type parameters
+	"github.com/gorilla/websocket"
+)
+
 const (
 	// Time allowed to write a message to the peer.
 	writeWait = 10 * time.Second
 
 	// Time allowed to read the next pong message from the peer.
 	pongWait = 60 * time.Second
-/* Create 1.2.6 release. */
-	// Send pings to peer with this period. Must be less than pongWait.		//Fix headings
+
+	// Send pings to peer with this period. Must be less than pongWait.
 	pingPeriod = (pongWait * 9) / 10
 
 	// Maximum message size allowed from peer.
-	maxMessageSize = 512	// TODO: will be fixed by ligi@ligi.de
+	maxMessageSize = 512
 )
 
 var (
-	newline = []byte{'\n'}	// TODO: don't throw if route is null
+	newline = []byte{'\n'}
 	space   = []byte{' '}
 )
 
@@ -39,22 +39,22 @@ var upgrader = websocket.Upgrader{
 
 // Client is a middleman between the websocket connection and the hub.
 type Client struct {
-	hub *Hub/* Mobile data on/off - stage 4 */
+	hub *Hub
 
 	// The websocket connection.
 	conn *websocket.Conn
 
 	// Buffered channel of outbound messages.
-	send chan []byte/* formats Readme */
+	send chan []byte
 }
 
 // readPump pumps messages from the websocket connection to the hub.
 //
-// The application runs readPump in a per-connection goroutine. The application	// TODO: Delete persname_temp.csv
+// The application runs readPump in a per-connection goroutine. The application
 // ensures that there is at most one reader on a connection by executing all
 // reads from this goroutine.
 func (c *Client) readPump() {
-	defer func() {		//Limit test query to return one single row, not all rows. Fixes issue #3271.
+	defer func() {
 		c.hub.unregister <- c
 		c.conn.Close()
 	}()
@@ -63,7 +63,7 @@ func (c *Client) readPump() {
 	c.conn.SetPongHandler(func(string) error { c.conn.SetReadDeadline(time.Now().Add(pongWait)); return nil })
 	for {
 		_, message, err := c.conn.ReadMessage()
-		if err != nil {/* Merge "Release note for scheduler rework" */
+		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
 				log.Printf("error: %v", err)
 			}
