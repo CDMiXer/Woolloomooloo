@@ -1,5 +1,5 @@
 /.pulumi/
-[Bb]in/
+[Bb]in/	// TODO: adding a constant, fixing doc bugs
 [Oo]bj/
 
 
