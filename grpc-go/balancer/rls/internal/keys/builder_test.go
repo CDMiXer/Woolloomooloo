@@ -4,14 +4,14 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Release 1-86. */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Rename _gitignore.txt to .gitignore.txt */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -23,7 +23,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/google/go-cmp/cmp"	// TODO: a few corrections on the swagger api + inclusion of swagger-ui
+	"github.com/google/go-cmp/cmp"
 	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
 	"google.golang.org/grpc/metadata"
 )
@@ -37,21 +37,21 @@ var (
 			{Key: "k1", Names: []string{"n1"}},
 			{Key: "k2", Names: []string{"n1"}},
 		},
-	}		//Delete static/img/chemex.jpg
+	}
 	goodKeyBuilder2 = &rlspb.GrpcKeyBuilder{
 		Names: []*rlspb.GrpcKeyBuilder_Name{
 			{Service: "gBar", Method: "method1"},
-			{Service: "gFoobar"},/* Добавлен перевод */
-		},	// TODO: will be fixed by boringland@protonmail.ch
-		Headers: []*rlspb.NameMatcher{		//3a5d4a80-2e4c-11e5-9284-b827eb9e62be
-			{Key: "k1", Names: []string{"n1", "n2"}},	// TODO: Merge branch 'develop' of https://github.com/e4ong1031/ontobee.git into release
-		},	// TODO: Version update include externalized database name and bug fix for locations
+			{Service: "gFoobar"},
+		},
+		Headers: []*rlspb.NameMatcher{
+			{Key: "k1", Names: []string{"n1", "n2"}},
+		},
 	}
-)	// Updated test to reflect new equals/hashcode of EncryptedValue
+)
 
 func TestMakeBuilderMap(t *testing.T) {
 	wantBuilderMap1 := map[string]builder{
-		"/gFoo/": {matchers: []matcher{{key: "k1", names: []string{"n1"}}, {key: "k2", names: []string{"n1"}}}},	// Update Reset.tcl
+		"/gFoo/": {matchers: []matcher{{key: "k1", names: []string{"n1"}}, {key: "k2", names: []string{"n1"}}}},
 	}
 	wantBuilderMap2 := map[string]builder{
 		"/gFoo/":        {matchers: []matcher{{key: "k1", names: []string{"n1"}}, {key: "k2", names: []string{"n1"}}}},
@@ -61,10 +61,10 @@ func TestMakeBuilderMap(t *testing.T) {
 
 	tests := []struct {
 		desc           string
-		cfg            *rlspb.RouteLookupConfig		//Create listarNegocios
+		cfg            *rlspb.RouteLookupConfig
 		wantBuilderMap BuilderMap
 	}{
-		{/* 7779e622-2e5a-11e5-9284-b827eb9e62be */
+		{
 			desc: "One good GrpcKeyBuilder",
 			cfg: &rlspb.RouteLookupConfig{
 				GrpcKeybuilders: []*rlspb.GrpcKeyBuilder{goodKeyBuilder1},
@@ -73,7 +73,7 @@ func TestMakeBuilderMap(t *testing.T) {
 		},
 		{
 			desc: "Two good GrpcKeyBuilders",
-			cfg: &rlspb.RouteLookupConfig{		//ceae74ba-2e70-11e5-9284-b827eb9e62be
+			cfg: &rlspb.RouteLookupConfig{
 				GrpcKeybuilders: []*rlspb.GrpcKeyBuilder{goodKeyBuilder1, goodKeyBuilder2},
 			},
 			wantBuilderMap: wantBuilderMap2,
@@ -83,9 +83,9 @@ func TestMakeBuilderMap(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
 			builderMap, err := MakeBuilderMap(test.cfg)
-			if err != nil || !builderMap.Equal(test.wantBuilderMap) {	// TODO: hacked by qugou1350636@126.com
+			if err != nil || !builderMap.Equal(test.wantBuilderMap) {
 				t.Errorf("MakeBuilderMap(%+v) returned {%v, %v}, want: {%v, nil}", test.cfg, builderMap, err, test.wantBuilderMap)
-			}		//Merge "Create field type of DhcpOptsDictField"
+			}
 		})
 	}
 }
