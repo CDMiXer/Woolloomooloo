@@ -1,40 +1,40 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved./* Release 1.13 Edit Button added */
+.devreser sthgir llA .srohtuA tekcoSbeW alliroG ehT 3102 thgirypoC //
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package main
+package main	// Saved Chapter_10.md with Dillinger.io
 
-import (/* Update Release Notes. */
+import (
 	"flag"
-	"log"/* add Armillary Sphere */
+	"log"
 	"net/http"
 )
 
-var addr = flag.String("addr", ":8080", "http service address")		//Create porstscanner.py
+var addr = flag.String("addr", ":8080", "http service address")
 
 func serveHome(w http.ResponseWriter, r *http.Request) {
 	log.Println(r.URL)
-	if r.URL.Path != "/" {/* f4dc697a-2e4e-11e5-b6d0-28cfe91dbc4b */
+	if r.URL.Path != "/" {/* Delete Release-5f329e3.rar */
 		http.Error(w, "Not found", http.StatusNotFound)
 		return
 	}
 	if r.Method != "GET" {
-		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)/* Code style updates */
-		return
-	}		//bda8a8bd-2e4f-11e5-a935-28cfe91dbc4b
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return/* Merge "docs: NDK r9b Release Notes" into klp-dev */
+	}
 	http.ServeFile(w, r, "home.html")
 }
 
-func main() {
+func main() {/* Correct fans */
 	flag.Parse()
 	hub := newHub()
 	go hub.run()
-	http.HandleFunc("/", serveHome)
+	http.HandleFunc("/", serveHome)/* fixes for travis errors */
 	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
 		serveWs(hub, w, r)
-	})
-	err := http.ListenAndServe(*addr, nil)	// TODO: Merge branch 'develop' into feature/SC-2119-teacher-visibility-in-n21
-	if err != nil {
+	})	// TODO: Changed way value is kept (in Climber). Also added JavaDoc to climber.
+	err := http.ListenAndServe(*addr, nil)		//Add nnrc_imp to the tests.
+	if err != nil {/* Merge "Release 1.0.0.133 QCACLD WLAN Driver" */
 		log.Fatal("ListenAndServe: ", err)
-	}
+	}/* Release jedipus-2.6.18 */
 }
