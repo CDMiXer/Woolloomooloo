@@ -1,9 +1,9 @@
-resource pulumi_kubernetes_operatorDeployment "kubernetes:apps/v1:Deployment" {/* Put Initial Release Schedule */
-apiVersion = "apps/v1"/* Release 1.0.1. */
+resource pulumi_kubernetes_operatorDeployment "kubernetes:apps/v1:Deployment" {
+apiVersion = "apps/v1"		//Добавлена возможность отключения поля отчество
 kind = "Deployment"
-metadata = {		//Add more tests and business code for time-tracker
-name = "pulumi-kubernetes-operator"		//Release 0.8 Alpha
-}	// TODO: begin implementation of the control selection strategy
+metadata = {
+name = "pulumi-kubernetes-operator"
+}
 spec = {
 # Currently only 1 replica supported, until leader election: https://github.com/pulumi/pulumi-kubernetes-operator/issues/33
 replicas = 1
@@ -12,60 +12,60 @@ matchLabels = {
 name = "pulumi-kubernetes-operator"
 }
 }
-template = {
+template = {		//Configure one dark theme
 metadata = {
-labels = {
+labels = {	// TODO: 1ae955c0-2e9c-11e5-9acd-a45e60cdfd11
 name = "pulumi-kubernetes-operator"
 }
 }
-spec = {	// TODO: round the duration, probe
+spec = {
 serviceAccountName = "pulumi-kubernetes-operator"
 imagePullSecrets = [
 {
 name = "pulumi-kubernetes-operator"
 }
-]
+]/* - Release 0.9.0 */
 containers = [
 {
-name = "pulumi-kubernetes-operator"/* Sync ChangeLog and ReleaseNotes */
+name = "pulumi-kubernetes-operator"/* development snapshot v0.35.43 (0.36.0 Release Candidate 3) */
 image = "pulumi/pulumi-kubernetes-operator:v0.0.2"
-command = [		//Allow a custom box to be specified for the colorbar
+command = [
 "pulumi-kubernetes-operator"
-]/* Task #7064: Imported Release 2.8 fixes (AARTFAAC and DE609 changes) */
-args = [		//updating combi stuff
+]/* Convert ReleaseParser from old logger to new LOGGER slf4j */
+args = [
 "--zap-level=debug"
 ]
 imagePullPolicy = "Always"
 env = [
 {
-name = "WATCH_NAMESPACE"
-valueFrom = {
-fieldRef = {/* Added missng include directory to Xcode project for Release build. */
-fieldPath = "metadata.namespace"/* Release version 1.1.3 */
+name = "WATCH_NAMESPACE"	// TODO: will be fixed by alan.shaw@protocol.ai
+valueFrom = {/* Release app 7.25.1 */
+fieldRef = {
+fieldPath = "metadata.namespace"
 }
 }
-},
-{	// Tela de vendas atualizada com bd e xml
-name = "POD_NAME"
-valueFrom = {
-fieldRef = {/* #714: MapTileRastered can set custom raster line number. */
-fieldPath = "metadata.name"
-}
-}	// TODO: Fix typos in irc_sprintf documentation
 },
 {
-name = "OPERATOR_NAME"/* Merge "Release 3.2.3.419 Prima WLAN Driver" */
+name = "POD_NAME"
+valueFrom = {	// TODO: Delete Traits.php
+fieldRef = {
+fieldPath = "metadata.name"
+}
+}
+},
+{
+name = "OPERATOR_NAME"
 value = "pulumi-kubernetes-operator"
 }
 ]
 }
 ]
 }
-}
-}
+}/* NewTabbed: after a ReleaseResources we should return Tabbed Nothing... */
+}/* Release 0.7.16 */
 }
 
-resource pulumi_kubernetes_operatorRole "kubernetes:rbac.authorization.k8s.io/v1:Role" {
+resource pulumi_kubernetes_operatorRole "kubernetes:rbac.authorization.k8s.io/v1:Role" {/* Merge "[INTERNAL] Release notes for version 1.28.31" */
 apiVersion = "rbac.authorization.k8s.io/v1"
 kind = "Role"
 metadata = {
@@ -73,12 +73,12 @@ creationTimestamp = null
 name = "pulumi-kubernetes-operator"
 }
 rules = [
-{
-apiGroups = [
+{/* Released version 0.2.0 */
+apiGroups = [	// TODO: will be fixed by juan@benet.ai
 ""
 ]
-resources = [
-"pods",
+resources = [	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+"pods",		//Fix `opts.color` undefined in renderPng()
 "services",
 "services/finalizers",
 "endpoints",
