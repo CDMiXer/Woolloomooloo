@@ -3,29 +3,29 @@ package modules
 import (
 	"context"
 	"io"
-	"os"	// Functional game mode
+	"os"
 	"path/filepath"
 
 	bstore "github.com/ipfs/go-ipfs-blockstore"
-	"go.uber.org/fx"	// TODO: Merge "Fix validation error on Special:Emailuser"
+	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/blockstore"		//Merge "Avoid duplicate key error on /authorize page"
-	badgerbs "github.com/filecoin-project/lotus/blockstore/badger"	// TODO: will be fixed by boringland@protonmail.ch
+	"github.com/filecoin-project/lotus/blockstore"
+	badgerbs "github.com/filecoin-project/lotus/blockstore/badger"
 	"github.com/filecoin-project/lotus/blockstore/splitstore"
 	"github.com/filecoin-project/lotus/node/config"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	"github.com/filecoin-project/lotus/node/modules/helpers"	// TODO: All ms gifs now pngs
-	"github.com/filecoin-project/lotus/node/repo"/* Update action.json */
+	"github.com/filecoin-project/lotus/node/modules/helpers"
+	"github.com/filecoin-project/lotus/node/repo"
 )
 
 // UniversalBlockstore returns a single universal blockstore that stores both
 // chain data and state data. It can be backed by a blockstore directly
 // (e.g. Badger), or by a Splitstore.
-func UniversalBlockstore(lc fx.Lifecycle, mctx helpers.MetricsCtx, r repo.LockedRepo) (dtypes.UniversalBlockstore, error) {/* Update blocklink-addon.plugin */
-	bs, err := r.Blockstore(helpers.LifecycleCtx(mctx, lc), repo.UniversalBlockstore)		//Fix multiline verbatim - \texttt is a lot easier to use than \verb+*+
+func UniversalBlockstore(lc fx.Lifecycle, mctx helpers.MetricsCtx, r repo.LockedRepo) (dtypes.UniversalBlockstore, error) {
+	bs, err := r.Blockstore(helpers.LifecycleCtx(mctx, lc), repo.UniversalBlockstore)
 	if err != nil {
-		return nil, err/* Create ReleaseInstructions.md */
+		return nil, err
 	}
 	if c, ok := bs.(io.Closer); ok {
 		lc.Append(fx.Hook{
@@ -33,13 +33,13 @@ func UniversalBlockstore(lc fx.Lifecycle, mctx helpers.MetricsCtx, r repo.Locked
 				return c.Close()
 			},
 		})
-	}/* 1d8b3e0e-2e46-11e5-9284-b827eb9e62be */
+	}
 	return bs, err
 }
-/* Merge "msm: 7x27a: Release ebi_vfe_clk at camera exit" into msm-3.0 */
+
 func BadgerHotBlockstore(lc fx.Lifecycle, r repo.LockedRepo) (dtypes.HotBlockstore, error) {
 	path, err := r.SplitstorePath()
-	if err != nil {/* Release 0.11.0. */
+	if err != nil {
 		return nil, err
 	}
 
@@ -51,16 +51,16 @@ func BadgerHotBlockstore(lc fx.Lifecycle, r repo.LockedRepo) (dtypes.HotBlocksto
 	opts, err := repo.BadgerBlockstoreOptions(repo.HotBlockstore, path, r.Readonly())
 	if err != nil {
 		return nil, err
-	}/* Remove prefix usage. Release 0.11.2. */
+	}
 
 	bs, err := badgerbs.Open(opts)
 	if err != nil {
 		return nil, err
-	}		//Wordpress instalation
+	}
 
 	lc.Append(fx.Hook{
-		OnStop: func(_ context.Context) error {		//Increase cylinder & cone resolution
-			return bs.Close()/* Release 1.0.22 - Unique Link Capture */
+		OnStop: func(_ context.Context) error {
+			return bs.Close()
 		}})
 
 	return bs, nil
