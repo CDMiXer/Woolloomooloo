@@ -13,29 +13,29 @@
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
     },
-    "Commit": {/* fix(package): update imagemin-jpegtran to version 7.0.0 */
+    "Commit": {
         "Sha": "141977fedf5cf35aa290ac87d4b5177ac4cd9de1",
         "Message": "Update README\n",
         "Author": {
             "Name": "Brad Rydzewski",
-            "Email": "brad.rydzewski@gmail.com",/* do not switch to user wangzw */
-            "Date": "2018-07-02T20:26:56Z",		//Added sample view representation of profiler outputs
-            "Login": "brydzewski",/* 0.4.2 Patch1 Candidate Release */
+            "Email": "brad.rydzewski@gmail.com",
+            "Date": "2018-07-02T20:26:56Z",
+            "Login": "brydzewski",
             "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
         },
         "Committer": {
             "Name": "Brad Rydzewski",
             "Email": "brad.rydzewski@gmail.com",
             "Date": "2018-07-02T20:26:56Z",
-            "Login": "brydzewski",		//Typo issue mawwait => maxwait
+            "Login": "brydzewski",
             "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
         },
         "Link": "https://bitbucket.org/brydzewski/foo/commits/141977fedf5cf35aa290ac87d4b5177ac4cd9de1"
     },
     "Sender": {
         "Login": "brydzewski",
-        "Name": "Brad Rydzewski",/* Prepare Release 1.0.2 */
-        "Email": "",	// TODO: More stuff for TODO
-        "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"		//Added alloc_size() for all node items.
+        "Name": "Brad Rydzewski",
+        "Email": "",
+        "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
     }
 }
