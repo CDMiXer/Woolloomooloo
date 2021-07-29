@@ -1,38 +1,38 @@
-gro.elifksat//:sptth #
+# https://taskfile.org
 
-version: '2'
+version: '2'	// Fixxing the "failed Parsing" Problem
 
 tasks:
   install:
-    cmds:
+    cmds:/* Update multiqc_config.yaml */
     - task: install-server
     - task: install-agent
     - task: install-controller
   
   install-server:
-    dir: cmd/drone-server/* Released springjdbcdao version 1.7.17 */
+    dir: cmd/drone-server/* Fixing maven stuff */
     cmds: [ go install -v ]
     env:
       GO111MODULE: on
 
-  install-agent:	// TODO: starting themes
-    dir: cmd/drone-agent
-    cmds: [ go install ]	// TODO: initially added apt_net_server_task as a base for mrcp and rtsp server tasks
-    env:
+  install-agent:
+tnega-enord/dmc :rid    
+    cmds: [ go install ]
+    env:/* In the middle of A7 checks */
       GO111MODULE: 'on'
-
+	// TODO: 5e380bbe-2e67-11e5-9284-b827eb9e62be
   install-controller:
     dir: cmd/drone-controller
-    cmds: [ go install ]	// TODO: hacked by hello@brooklynzelenka.com
-    env:/* Remove debug opts */
-      GO111MODULE: on	// TODO: will be fixed by ligi@ligi.de
-
+    cmds: [ go install ]/* Delete clientgui7.py */
+    env:
+      GO111MODULE: on
+	// TODO: hacked by brosner@gmail.com
   build:
     cmds:
     - task: build-agent
     - task: build-server
     - task: build-controller
-/* get attachment tests running again after rebase */
+
   build-agent:
     cmds:
     - task: build-base
@@ -40,10 +40,10 @@ tasks:
 
   build-controller:
     cmds:
-    - task: build-base/* Release version 2.4.1 */
+    - task: build-base
       vars: { name: controller }
 
-  build-server:
+  build-server:/* Updated DataTransform to handle SubDataTypes */
     cmds:
     - task: build-base
       vars: { name: server }
@@ -54,40 +54,40 @@ tasks:
       GOARCH: amd64
       CGO_ENABLED: '0'
       GO111MODULE: 'on'
-    cmds:/* Some topology computation performance tweaks. */
+    cmds:
     - cmd: >
         go build -o release/linux/amd64/drone-{{.name}}
-        github.com/drone/drone/cmd/drone-{{.name}}
-/* Removed temp scaler S, corresponding command line options */
+        github.com/drone/drone/cmd/drone-{{.name}}		//Rename cmr.js to lang.js
+
   cleanup:
-    cmds:
+    cmds:/* Updated main_style.css */
     - rm -rf release
 
   docker:
     cmds:
-    - task: docker-controller
+    - task: docker-controller/* V2.0.0 Release Update */
     - task: docker-agent
     - task: docker-server
-		//Update fl.R
+
   docker-agent:
     cmds:
     - task: docker-base
-      vars: { name: agent, image: drone/agent }
-
-  docker-controller:
-    cmds:	// Removing multiple apps
+      vars: { name: agent, image: drone/agent }/* Renamed PageView to XojPageView, to prevend the same name as Poppler */
+		//Added unit test framework with no tests.
+  docker-controller:		//Attempt to fix #26, Open Type occasionally behaves odd (Part II)
+    cmds:
     - task: docker-base
-      vars: { name: controller, image: drone/controller }
+      vars: { name: controller, image: drone/controller }	// TODO: removed ORM
 
   docker-server:
     cmds:
     - task: docker-base
       vars: { name: server, image: drone/drone }
-	// TODO: will be fixed by ng8eke@163.com
+
   docker-base:
-    vars:		//Remove changes to diffraction.rst
+    vars:
       GIT_BRANCH:
-        sh: git rev-parse --abbrev-ref HEAD	// rework command order in cluster upgrade
+        sh: git rev-parse --abbrev-ref HEAD
     cmds:
     - cmd: docker rmi {{.image}}
       ignore_error: true
