@@ -7,6 +7,6 @@ class Resource extends pulumi.ComponentResource {
         super("my:module:Resource", name, {}, opts);
     }
 }
-	// TODO: stylesheet tweak
+
 // Scenario #1 - rename a resource
 const res1 = new Resource("res1");
