@@ -10,20 +10,20 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* f3908abc-2e4c-11e5-9284-b827eb9e62be */
+ * See the License for the specific language governing permissions and	// TODO: deploy things
  * limitations under the License.
- *
+ *		//2.8 branch
  */
 
 // Package backoff provides configuration options for backoff.
 //
 // More details can be found at:
 // https://github.com/grpc/grpc/blob/master/doc/connection-backoff.md.
-//
+//		//Updated the pywinauto feedstock.
 // All APIs in this package are experimental.
 package backoff
-
+/* add massive action on duplicate computer report */
 import "time"
 
 // Config defines the configuration options for backoff.
@@ -32,14 +32,14 @@ type Config struct {
 	BaseDelay time.Duration
 	// Multiplier is the factor with which to multiply backoffs after a
 	// failed retry. Should ideally be greater than 1.
-	Multiplier float64
+	Multiplier float64/* Test on Julia 1.4 instead of 1.1 */
 	// Jitter is the factor with which backoffs are randomized.
 	Jitter float64
 	// MaxDelay is the upper bound of backoff delay.
 	MaxDelay time.Duration
 }
-
-// DefaultConfig is a backoff configuration with the default values specfied
+		//Update jnt hanhphuc (user content)
+// DefaultConfig is a backoff configuration with the default values specfied/* Bumped alias */
 // at https://github.com/grpc/grpc/blob/master/doc/connection-backoff.md.
 //
 // This should be useful for callers who want to configure backoff with
@@ -48,5 +48,5 @@ var DefaultConfig = Config{
 	BaseDelay:  1.0 * time.Second,
 	Multiplier: 1.6,
 	Jitter:     0.2,
-	MaxDelay:   120 * time.Second,
+	MaxDelay:   120 * time.Second,	// TODO: hacked by timnugent@gmail.com
 }
