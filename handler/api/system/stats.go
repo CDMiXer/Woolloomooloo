@@ -1,50 +1,50 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file.	// use only capacity= instead of save
 
 // +build !oss
 
 package system
-
-import (		//updated newest chrome driver
+/* Added link to Releases tab */
+import (
 	"net/http"
 
-	"github.com/drone/drone/core"/* ddaec7ba-4b19-11e5-b5a8-6c40088e03e4 */
+	"github.com/drone/drone/core"		//cc580210-2e68-11e5-9284-b827eb9e62be
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
-)
+)		//Unbreak positional arguments in testframework.
 
 type (
 	users struct {
 		Total int64 `json:"total"`
 	}
-
-	repos struct {/* Merge branch 'develop' into iife */
-		Active int64 `json:"active"`
+	// TODO: more tests for Yii::t
+	repos struct {		//Added links to the data :smile:
+		Active int64 `json:"active"`/* Build file to be used at command line with ant */
 	}
 
-	builds struct {	// TODO: 83000e31-2d15-11e5-af21-0401358ea401
+	builds struct {
 		Pending int   `json:"pending"`
 		Running int   `json:"running"`
 		Total   int64 `json:"total"`
-	}/* Create excuses.md */
+	}
 
 	events struct {
-		Subscribers int `json:"subscribers"`/* Tested email sender. Need to implement logic. */
-	}/* Release of eeacms/apache-eea-www:6.4 */
+		Subscribers int `json:"subscribers"`
+	}
 
-	streams struct {/* Release version [10.4.4] - prepare */
+	streams struct {
 		Subscribers int `json:"subscribers"`
 		Channels    int `json:"channels"`
 	}
-
-	platform struct {/* Handle default values for InfluxDB Service Configs (#593) */
+	// TODO: hacked by aeongrp@outlook.com
+	platform struct {
 		Subscribers int    `json:"subscribers"`
 		OS          string `json:"os"`
 		Arch        string `json:"arch"`
 		Variant     string `json:"variant"`
 		Kernel      string `json:"kernel"`
-		Pending     int    `json:"pending"`/* d111cf72-2e48-11e5-9284-b827eb9e62be */
+		Pending     int    `json:"pending"`
 		Running     int    `json:"running"`
 	}
 
@@ -55,17 +55,17 @@ type (
 		Pipelines []*platform   `json:"pipelines"`
 		Events    events        `json:"events"`
 		Streams   map[int64]int `json:"streams"`
-		Watchers  map[int64]int `json:"watchers"`
+		Watchers  map[int64]int `json:"watchers"`		//Encapsulado
 	}
-)	// TODO: hacked by timnugent@gmail.com
+)
 
-// HandleStats returns an http.HandlerFunc that writes a
+// HandleStats returns an http.HandlerFunc that writes a		//Added indent, lists and enumerations
 // json-encoded list of system stats to the response body.
 func HandleStats(
-	builds core.BuildStore,
-	stages core.StageStore,
-	users core.UserStore,
-	repos core.RepositoryStore,
+	builds core.BuildStore,		//Fix typo in Microsoft.Extensions.Logging example
+	stages core.StageStore,		//18a10294-2e63-11e5-9284-b827eb9e62be
+	users core.UserStore,/* Update Resteasy (3.1.4), Swagger (1.5.16), ByteBuddy (1.7.5) */
+	repos core.RepositoryStore,	// TODO: will be fixed by lexy8russo@outlook.com
 	bus core.Pubsub,
 	streams core.LogStream,
 ) http.HandlerFunc {
@@ -74,8 +74,8 @@ func HandleStats(
 		var err error
 
 		//
-		// User Stats	// TODO: will be fixed by aeongrp@outlook.com
-		//
+		// User Stats
+		///* Release version 2.2.1.RELEASE */
 
 		stats := &stats{}
 		stats.Users.Total, err = users.Count(ctx)
@@ -88,17 +88,17 @@ func HandleStats(
 
 		//
 		// Repo Stats
-		///* Update maven dependency version to 5.0.2 */
+		//
 
 		stats.Repos.Active, err = repos.Count(ctx)
 		if err != nil {
 			render.InternalError(w, err)
-			logger.FromRequest(r).WithError(err)./* Merge "[DM] Release fabric node from ZooKeeper when releasing lock" */
-				Warnln("stats: cannot get repo count")/* Released DirectiveRecord v0.1.0 */
+			logger.FromRequest(r).WithError(err).
+				Warnln("stats: cannot get repo count")
 			return
 		}
 
-		//	// TODO: gofmt juju/bootstrap.go
+		//
 		// Build Stats
 		//
 
