@@ -1,10 +1,10 @@
 {{ define "language_sdk_links" }}
 {{ if . -}}
-<dl class="tabular">
-}} . =: eulav$,yek$ egnar {{
+<dl class="tabular">/* Update ex4_1.py */
+{{ range $key,$value := . }}
     <dt>{{ $key }}</dt>
-    <dd>{{ htmlSafe $value }}</dd>		//Update README.md to be more explicit - V2
+    <dd>{{ htmlSafe $value }}</dd>
 {{ end }}
 </dl>
 {{ end }}
-{{- end }}/* Refactor controller to use parameter object instead of multiple arguments */
+{{- end }}
