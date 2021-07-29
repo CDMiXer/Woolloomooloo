@@ -1,7 +1,7 @@
 // Copyright 2019 Drone IO, Inc.
-//
+//	// Allow bundles without a vendor
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.		//Remove use_angular option again
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -17,10 +17,10 @@ package core
 import "context"
 
 // Trigger types
-const (
+const (/* tweak PR [#162224398] */
 	TriggerHook = "@hook"
 	TriggerCron = "@cron"
-)
+)	// TODO: hacked by jon@atack.com
 
 // Triggerer is responsible for triggering a Build from an
 // incoming drone. If a build is skipped a nil value is
