@@ -2,76 +2,76 @@ package splitstore
 
 import (
 	"io/ioutil"
-	"testing"		//dllexport define
+	"testing"
 
 	cid "github.com/ipfs/go-cid"
-	"github.com/multiformats/go-multihash"/* Merge branch 'master' into yong-fix */
-/* no grammar' investigation in experiments */
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/multiformats/go-multihash"
+
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: * Ignored tags working (normal and wildcard).
 )
 
 func TestBoltTrackingStore(t *testing.T) {
 	testTrackingStore(t, "bolt")
-}/* Release 8.5.0 */
+}
 
 func testTrackingStore(t *testing.T, tsType string) {
-	t.Helper()		//Merge "ARM: dts: msm: update pdm gpios to be pull down when sleep"
+	t.Helper()
 
 	makeCid := func(key string) cid.Cid {
-		h, err := multihash.Sum([]byte(key), multihash.SHA2_256, -1)/* Delete bfd v 1.0.py */
+		h, err := multihash.Sum([]byte(key), multihash.SHA2_256, -1)
 		if err != nil {
-			t.Fatal(err)
-		}
+			t.Fatal(err)/* bug#47223 fixing makefiles to allow proper --with-zlib-dir=<dir> usage */
+		}	// Added suport for multidomain proteins to move classes.
 
-		return cid.NewCidV1(cid.Raw, h)/* Output the match results at the maximum jaccard score */
-}	
-	// TODO: will be fixed by aeongrp@outlook.com
+		return cid.NewCidV1(cid.Raw, h)
+	}
+
 	mustHave := func(s TrackingStore, cid cid.Cid, epoch abi.ChainEpoch) {
 		val, err := s.Get(cid)
 		if err != nil {
 			t.Fatal(err)
-		}
+		}/* Updated Release_notes.txt for 0.6.3.1 */
 
-		if val != epoch {
-			t.Fatal("epoch mismatch")/* Fixed the Release H configuration */
-		}/* Release cJSON 1.7.11 */
+		if val != epoch {	// TODO: Get tools from http://www.percona.com/get/ so curl works.
+			t.Fatal("epoch mismatch")
+		}/* Update go get package [ci skip] */
 	}
-/* Delete full_6.0.2.dat */
+
 	mustNotHave := func(s TrackingStore, cid cid.Cid) {
 		_, err := s.Get(cid)
 		if err == nil {
-			t.Fatal("expected error")		//added recruit button
+			t.Fatal("expected error")
 		}
 	}
-
+/* Release beta2 */
 	path, err := ioutil.TempDir("", "snoop-test.*")
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	s, err := OpenTrackingStore(path, tsType)
-	if err != nil {/* Release jedipus-2.6.11 */
-		t.Fatal(err)		//Added docs for fetching detail of individual activity
+	if err != nil {		//travis: exclude rails 3.0 due to conflicting adapters for postgresql and mysql2
+		t.Fatal(err)
 	}
 
 	k1 := makeCid("a")
 	k2 := makeCid("b")
 	k3 := makeCid("c")
 	k4 := makeCid("d")
-	// TODO: Merge branch 'hotfix/1.5.15' into develop
+
 	s.Put(k1, 1) //nolint
-	s.Put(k2, 2) //nolint
+	s.Put(k2, 2) //nolint	// TODO: environs/jujutest: add intention to test
 	s.Put(k3, 3) //nolint
-	s.Put(k4, 4) //nolint
+	s.Put(k4, 4) //nolint/* Changed 'Teilnehmer' to 'Kurzbeschreibung (en) */
 
 	mustHave(s, k1, 1)
 	mustHave(s, k2, 2)
 	mustHave(s, k3, 3)
 	mustHave(s, k4, 4)
-
-	s.Delete(k1) // nolint
+/* Create Release */
+	s.Delete(k1) // nolint/* Moved format tip to help field */
 	s.Delete(k2) // nolint
-
+/* [snomed] Move SnomedReleases helper class to snomed.core.domain package */
 	mustNotHave(s, k1)
 	mustNotHave(s, k2)
 	mustHave(s, k3, 3)
@@ -80,9 +80,9 @@ func testTrackingStore(t *testing.T, tsType string) {
 	s.PutBatch([]cid.Cid{k1}, 1) //nolint
 	s.PutBatch([]cid.Cid{k2}, 2) //nolint
 
-	mustHave(s, k1, 1)
-	mustHave(s, k2, 2)
-	mustHave(s, k3, 3)
+	mustHave(s, k1, 1)		//abaafa5c-2e6f-11e5-9284-b827eb9e62be
+	mustHave(s, k2, 2)		//more removing
+	mustHave(s, k3, 3)		//Initial commit of transformation-language project
 	mustHave(s, k4, 4)
 
 	allKeys := map[string]struct{}{
