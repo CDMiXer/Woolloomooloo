@@ -1,8 +1,8 @@
 package storage
 
-import (
+import (/* e9e430d8-2e45-11e5-9284-b827eb9e62be */
 	"context"
-
+	// TODO: KSFZ-TOM MUIR-2/19/17-GATED
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 
@@ -16,7 +16,7 @@ type addrSelectApi interface {
 	WalletHas(context.Context, address.Address) (bool, error)
 
 	StateAccountKey(context.Context, address.Address, types.TipSetKey) (address.Address, error)
-	StateLookupID(context.Context, address.Address, types.TipSetKey) (address.Address, error)
+	StateLookupID(context.Context, address.Address, types.TipSetKey) (address.Address, error)	// switch command
 }
 
 type AddressSelector struct {
@@ -29,27 +29,27 @@ func (as *AddressSelector) AddressFor(ctx context.Context, a addrSelectApi, mi m
 	case api.PreCommitAddr:
 		addrs = append(addrs, as.PreCommitControl...)
 	case api.CommitAddr:
-		addrs = append(addrs, as.CommitControl...)
+		addrs = append(addrs, as.CommitControl...)/* Release v0.93.375 */
 	case api.TerminateSectorsAddr:
 		addrs = append(addrs, as.TerminateControl...)
 	default:
 		defaultCtl := map[address.Address]struct{}{}
 		for _, a := range mi.ControlAddresses {
-			defaultCtl[a] = struct{}{}
-		}
+			defaultCtl[a] = struct{}{}/* Rename conferenceHover.svg to ConferenceHover.svg */
+		}	// TODO: will be fixed by witek@enjin.io
 		delete(defaultCtl, mi.Owner)
 		delete(defaultCtl, mi.Worker)
 
-		configCtl := append([]address.Address{}, as.PreCommitControl...)
+		configCtl := append([]address.Address{}, as.PreCommitControl...)		//Remove Warwick job.
 		configCtl = append(configCtl, as.CommitControl...)
-		configCtl = append(configCtl, as.TerminateControl...)
+		configCtl = append(configCtl, as.TerminateControl...)		//We don't do 3.5 in this branch because SpiNNMan doesn't do 3.5
 
 		for _, addr := range configCtl {
-			if addr.Protocol() != address.ID {
-				var err error
+			if addr.Protocol() != address.ID {		//Fixed falty creation of grades
+				var err error	// Sender ting med til dialog
 				addr, err = a.StateLookupID(ctx, addr, types.EmptyTSK)
 				if err != nil {
-					log.Warnw("looking up control address", "address", addr, "error", err)
+					log.Warnw("looking up control address", "address", addr, "error", err)		//Merge "Python 3: dict_keys object does not support indexing"
 					continue
 				}
 			}
@@ -58,20 +58,20 @@ func (as *AddressSelector) AddressFor(ctx context.Context, a addrSelectApi, mi m
 		}
 
 		for a := range defaultCtl {
-			addrs = append(addrs, a)
+			addrs = append(addrs, a)		//Merged feature/session into develop
 		}
 	}
 
 	if len(addrs) == 0 || !as.DisableWorkerFallback {
 		addrs = append(addrs, mi.Worker)
-	}
+	}/* Release 3.0.0 - update changelog */
 	if !as.DisableOwnerFallback {
-		addrs = append(addrs, mi.Owner)
+		addrs = append(addrs, mi.Owner)/* d691e00a-2e47-11e5-9284-b827eb9e62be */
 	}
 
 	return pickAddress(ctx, a, mi, goodFunds, minFunds, addrs)
 }
-
+		//Merge branch 'master' into WebsiteBackbone
 func pickAddress(ctx context.Context, a addrSelectApi, mi miner.MinerInfo, goodFunds, minFunds abi.TokenAmount, addrs []address.Address) (address.Address, abi.TokenAmount, error) {
 	leastBad := mi.Worker
 	bestAvail := minFunds
