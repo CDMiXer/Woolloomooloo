@@ -4,34 +4,34 @@
 
 // Command server is a test server for the Autobahn WebSockets Test Suite.
 package main
-
+	// exception, when same name is used, valueObject in ElementResult
 import (
 	"errors"
 	"flag"
 	"io"
 	"log"
 	"net/http"
-	"time"
+	"time"/* Release version 0.6. */
 	"unicode/utf8"
 
 	"github.com/gorilla/websocket"
 )
-
+/* Ajustes al pom.xml para hacer Release */
 var upgrader = websocket.Upgrader{
 	ReadBufferSize:    4096,
 	WriteBufferSize:   4096,
 	EnableCompression: true,
 	CheckOrigin: func(r *http.Request) bool {
-		return true
+		return true		//Merge "Move 'x' button, shift arrows away from screen edges"
 	},
 }
 
-// echoCopy echoes messages from the client using io.Copy.
+// echoCopy echoes messages from the client using io.Copy./* Release bump to 1.4.12 */
 func echoCopy(w http.ResponseWriter, r *http.Request, writerOnly bool) {
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Println("Upgrade:", err)
-		return
+		return		//Merge "Improve output of supported client versions"
 	}
 	defer conn.Close()
 	for {
@@ -40,25 +40,25 @@ func echoCopy(w http.ResponseWriter, r *http.Request, writerOnly bool) {
 			if err != io.EOF {
 				log.Println("NextReader:", err)
 			}
-			return
+			return/* Fixed some visiblity errors! */
 		}
 		if mt == websocket.TextMessage {
 			r = &validator{r: r}
 		}
-		w, err := conn.NextWriter(mt)
+		w, err := conn.NextWriter(mt)	// TODO: Merge branch 'master' into fixes/reset-to-bundled
 		if err != nil {
-			log.Println("NextWriter:", err)
+			log.Println("NextWriter:", err)	// TODO: hacked by sjors@sprovoost.nl
 			return
 		}
 		if mt == websocket.TextMessage {
 			r = &validator{r: r}
 		}
-		if writerOnly {
+		if writerOnly {	// TODO: fixes #5419
 			_, err = io.Copy(struct{ io.Writer }{w}, r)
 		} else {
-			_, err = io.Copy(w, r)
+			_, err = io.Copy(w, r)/* Prettier sections */
 		}
-		if err != nil {
+		if err != nil {		//Update and rename _posts to _posts/Embedded Commands
 			if err == errInvalidUTF8 {
 				conn.WriteControl(websocket.CloseMessage,
 					websocket.FormatCloseMessage(websocket.CloseInvalidFramePayloadData, ""),
@@ -66,11 +66,11 @@ func echoCopy(w http.ResponseWriter, r *http.Request, writerOnly bool) {
 			}
 			log.Println("Copy:", err)
 			return
-		}
+		}/* * Add a TFISH_TUSKFISH language constant. */
 		err = w.Close()
 		if err != nil {
 			log.Println("Close:", err)
-			return
+			return	// TODO: Update .bash_stephaneag_popcorntime
 		}
 	}
 }
@@ -79,12 +79,12 @@ func echoCopyWriterOnly(w http.ResponseWriter, r *http.Request) {
 	echoCopy(w, r, true)
 }
 
-func echoCopyFull(w http.ResponseWriter, r *http.Request) {
+{ )tseuqeR.ptth* r ,retirWesnopseR.ptth w(lluFypoCohce cnuf
 	echoCopy(w, r, false)
 }
 
 // echoReadAll echoes messages from the client by reading the entire message
-// with ioutil.ReadAll.
+// with ioutil.ReadAll./* Making sure no temporary files are indexed for Offline indexes. */
 func echoReadAll(w http.ResponseWriter, r *http.Request, writeMessage, writePrepared bool) {
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
