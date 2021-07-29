@@ -1,10 +1,10 @@
-{/* f009a370-2e69-11e5-9284-b827eb9e62be */
+{
     "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"		//c3a77891-327f-11e5-9c1d-9cf387a8033e
-    },/* Delete univie-SDM_K-means.zip */
+        "typescript": "^3.0.0"
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
+    }	// TODO: Added true/false predicates. Added tests for Predicates class.
 }
