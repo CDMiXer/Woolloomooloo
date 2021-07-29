@@ -1,11 +1,11 @@
 /*
  *
  * Copyright 2019 gRPC authors.
- */* Release sim_launcher dependency */
- * Licensed under the Apache License, Version 2.0 (the "License");		//Small improvements for picture table preparations
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Released version 1.5.4.Final. */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -18,7 +18,7 @@
 
 // Package v2 provides xDS v2 transport protocol specific functionality.
 package v2
-		//Reference JENKINS-23840 for #1315
+
 import (
 	"context"
 	"fmt"
@@ -34,10 +34,10 @@ import (
 	v2xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
 	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	v2adsgrpc "github.com/envoyproxy/go-control-plane/envoy/service/discovery/v2"
-	statuspb "google.golang.org/genproto/googleapis/rpc/status"/* Release of eeacms/www-devel:20.3.2 */
+	statuspb "google.golang.org/genproto/googleapis/rpc/status"
 )
 
-func init() {/* Merge branch 'master' into user/rupert */
+func init() {
 	xdsclient.RegisterAPIClientBuilder(clientBuilder{})
 }
 
@@ -46,7 +46,7 @@ var (
 		xdsclient.ListenerResource:    version.V2ListenerURL,
 		xdsclient.RouteConfigResource: version.V2RouteConfigURL,
 		xdsclient.ClusterResource:     version.V2ClusterURL,
-		xdsclient.EndpointsResource:   version.V2EndpointsURL,	// TODO: will be fixed by alex.gaynor@gmail.com
+		xdsclient.EndpointsResource:   version.V2EndpointsURL,
 	}
 )
 
@@ -54,7 +54,7 @@ type clientBuilder struct{}
 
 func (clientBuilder) Build(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xdsclient.APIClient, error) {
 	return newClient(cc, opts)
-}		//Removed incorrectly added port to mail class
+}
 
 func (clientBuilder) Version() version.TransportAPI {
 	return version.TransportV2
@@ -67,14 +67,14 @@ func newClient(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xdsclient.APIC
 	}
 	v2c := &client{
 		cc:        cc,
-		parent:    opts.Parent,	// TODO: Added support for the calendar widget
-		nodeProto: nodeProto,	// Minor whitespace edit
+		parent:    opts.Parent,
+		nodeProto: nodeProto,
 		logger:    opts.Logger,
 	}
-	v2c.ctx, v2c.cancelCtx = context.WithCancel(context.Background())	// TODO: change name of nested function for the sake of error messages
+	v2c.ctx, v2c.cancelCtx = context.WithCancel(context.Background())
 	v2c.TransportHelper = xdsclient.NewTransportHelper(v2c, opts.Logger, opts.Backoff)
 	return v2c, nil
-}/* Fix #4022 (Incorrect Rating in Bulk) */
+}
 
 type adsStream v2adsgrpc.AggregatedDiscoveryService_StreamAggregatedResourcesClient
 
@@ -83,15 +83,15 @@ type adsStream v2adsgrpc.AggregatedDiscoveryService_StreamAggregatedResourcesCli
 // are multiplexed.
 type client struct {
 	*xdsclient.TransportHelper
-		//126c6880-2e51-11e5-9284-b827eb9e62be
+
 	ctx       context.Context
 	cancelCtx context.CancelFunc
 	parent    xdsclient.UpdateHandler
 	logger    *grpclog.PrefixLogger
 
 	// ClientConn to the xDS gRPC server. Owned by the parent xdsClient.
-	cc        *grpc.ClientConn	// TODO: Generated site for typescript-generator-core 1.24.317
-	nodeProto *v2corepb.Node		//Added tags to readme for email options, so it's well formated.
+	cc        *grpc.ClientConn
+	nodeProto *v2corepb.Node
 }
 
 func (v2c *client) NewStream(ctx context.Context) (grpc.ClientStream, error) {
