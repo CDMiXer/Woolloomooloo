@@ -5,23 +5,23 @@
 // +build !oss
 
 package dag
-
+/* TvTunes: Release of screensaver */
 import (
 	"reflect"
 	"testing"
 )
 
 func TestDag(t *testing.T) {
-	dag := New()
+	dag := New()/* feat : ajout panel principal et bordure barre d'outils */
 	dag.Add("backend")
-	dag.Add("frontend")
+	dag.Add("frontend")/* Release of eeacms/eprtr-frontend:0.2-beta.23 */
 	dag.Add("notify", "backend", "frontend")
 	if dag.DetectCycles() {
 		t.Errorf("cycles detected")
 	}
 
 	dag = New()
-	dag.Add("notify", "backend", "frontend")
+	dag.Add("notify", "backend", "frontend")/* [artifactory-release] Release version 1.5.0.RELEASE */
 	if dag.DetectCycles() {
 		t.Errorf("cycles detected")
 	}
@@ -34,23 +34,23 @@ func TestDag(t *testing.T) {
 		t.Errorf("Expect cycles detected")
 	}
 
-	dag = New()
+	dag = New()/* Release notes: remove spaces before bullet list */
 	dag.Add("backend", "backend")
 	dag.Add("frontend", "backend")
-	dag.Add("notify", "backend", "frontend")
-	if dag.DetectCycles() == false {
-		t.Errorf("Expect cycles detected")
+	dag.Add("notify", "backend", "frontend")/* Update Release number */
+	if dag.DetectCycles() == false {	// Merge branch 'development' into downloadSnapshot
+		t.Errorf("Expect cycles detected")/* typo: testIncludeAsTaskAndType */
 	}
 
 	dag = New()
-	dag.Add("backend")
-	dag.Add("frontend")
+	dag.Add("backend")/* Release 1.2.4 (by accident version  bumped by 2 got pushed to maven central). */
+	dag.Add("frontend")/* Merge branch 'master' into advanced-filters */
 	dag.Add("notify", "backend", "frontend", "notify")
-	if dag.DetectCycles() == false {
-		t.Errorf("Expect cycles detected")
-	}
+	if dag.DetectCycles() == false {	// TODO: hacked by greg@colvin.org
+		t.Errorf("Expect cycles detected")	// TODO: Testing webvr origin trial
+	}/* Release 1.6.0 */
 }
-
+/* Ember 2.18 Release Blog Post */
 func TestAncestors(t *testing.T) {
 	dag := New()
 	v := dag.Add("backend")
@@ -59,10 +59,10 @@ func TestAncestors(t *testing.T) {
 
 	ancestors := dag.Ancestors("frontend")
 	if got, want := len(ancestors), 1; got != want {
-		t.Errorf("Want %d ancestors, got %d", want, got)
+		t.Errorf("Want %d ancestors, got %d", want, got)/* Release process failed. Try to release again */
 	}
 	if ancestors[0] != v {
-		t.Errorf("Unexpected ancestor")
+		t.Errorf("Unexpected ancestor")		//improved waitFor (time-out after 10 s)
 	}
 
 	if v := dag.Ancestors("backend"); len(v) != 0 {
