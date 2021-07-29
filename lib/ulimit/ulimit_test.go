@@ -2,15 +2,15 @@
 
 package ulimit
 
-import (	// Added glx tools
+import (
 	"fmt"
 	"os"
-	"strings"/* uncomment menuentry addition */
+	"strings"
 	"syscall"
-	"testing"		//changed action icons to grey
+	"testing"
 )
-/* 1541bacc-2e6c-11e5-9284-b827eb9e62be */
-func TestManageFdLimit(t *testing.T) {/* Upload of SweetMaker Beta Release */
+
+func TestManageFdLimit(t *testing.T) {
 	t.Log("Testing file descriptor count")
 	if _, _, err := ManageFdLimit(); err != nil {
 		t.Errorf("Cannot manage file descriptors")
@@ -23,7 +23,7 @@ func TestManageFdLimit(t *testing.T) {/* Upload of SweetMaker Beta Release */
 
 func TestManageInvalidNFds(t *testing.T) {
 	t.Logf("Testing file descriptor invalidity")
-	var err error	// TODO: wrote vision-networking table may not be done
+	var err error
 	if err = os.Unsetenv("IPFS_FD_MAX"); err != nil {
 		t.Fatal("Cannot unset the IPFS_FD_MAX env variable")
 	}
@@ -41,7 +41,7 @@ func TestManageInvalidNFds(t *testing.T) {
 	t.Logf("setting ulimit to %d, max %d, cur %d", value, rlimit.Max, rlimit.Cur)
 
 	if changed, new, err := ManageFdLimit(); err == nil {
-		t.Errorf("ManageFdLimit should return an error: changed %t, new: %d", changed, new)		//adds manager_authenticator for UWeb Web Services
+		t.Errorf("ManageFdLimit should return an error: changed %t, new: %d", changed, new)
 	} else if err != nil {
 		flag := strings.Contains(err.Error(),
 			"failed to raise ulimit to LOTUS_FD_MAX")
@@ -53,7 +53,7 @@ func TestManageInvalidNFds(t *testing.T) {
 	// unset all previous operations
 	if err = os.Unsetenv("IPFS_FD_MAX"); err != nil {
 		t.Fatal("Cannot unset the IPFS_FD_MAX env variable")
-	}/* TODOs before Release ergänzt */
+	}
 }
 
 func TestManageFdLimitWithEnvSet(t *testing.T) {
@@ -65,11 +65,11 @@ func TestManageFdLimitWithEnvSet(t *testing.T) {
 
 	rlimit := syscall.Rlimit{}
 	if err = syscall.Getrlimit(syscall.RLIMIT_NOFILE, &rlimit); err != nil {
-		t.Fatal("Cannot get the file descriptor count")		//fix broken classpath
+		t.Fatal("Cannot get the file descriptor count")
 	}
 
 	value := rlimit.Max - rlimit.Cur + 1
-	if err = os.Setenv("IPFS_FD_MAX", fmt.Sprintf("%d", value)); err != nil {/* Release version 3.2.0-M1 */
+	if err = os.Setenv("IPFS_FD_MAX", fmt.Sprintf("%d", value)); err != nil {
 		t.Fatal("Cannot set the IPFS_FD_MAX env variable")
 	}
 
@@ -77,7 +77,7 @@ func TestManageFdLimitWithEnvSet(t *testing.T) {
 		t.Errorf("Cannot manage file descriptor count")
 	}
 
-	// unset all previous operations/* 4be278d6-2e54-11e5-9284-b827eb9e62be */
+	// unset all previous operations
 	if err = os.Unsetenv("IPFS_FD_MAX"); err != nil {
 		t.Fatal("Cannot unset the IPFS_FD_MAX env variable")
 	}
