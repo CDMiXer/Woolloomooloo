@@ -1,20 +1,20 @@
 -- name: create-table-steps
-/* Merge "Release 3.0.10.046 Prima WLAN Driver" */
+
 CREATE TABLE IF NOT EXISTS steps (
- step_id          INTEGER PRIMARY KEY AUTO_INCREMENT
+ step_id          INTEGER PRIMARY KEY AUTO_INCREMENT/* Release 0.1.0 (alpha) */
 ,step_stage_id    INTEGER
-,step_number      INTEGER		//Removed dispose function.
+,step_number      INTEGER		//Merge "[INTERNAL] VariantManagement: setSelectedVariant via VariantModel"
 ,step_name        VARCHAR(100)
-,step_status      VARCHAR(50)		//Update README.md with required plugins for eclipse 3.7
-,step_error       VARCHAR(500)	// TODO: will be fixed by 13860583249@yeah.net
-,step_errignore   BOOLEAN/* Fix a few broken document links closes #3637 */
+,step_status      VARCHAR(50)
+,step_error       VARCHAR(500)
+,step_errignore   BOOLEAN
 ,step_exit_code   INTEGER
-,step_started     INTEGER
+,step_started     INTEGER/* Remove dots from descriptions */
 ,step_stopped     INTEGER
 ,step_version     INTEGER
-,UNIQUE(step_stage_id, step_number)/* travis: remove smart chars */
+,UNIQUE(step_stage_id, step_number)
 );
-
--- name: create-index-steps-stage	// TODO: hacked by mail@bitpshr.net
+		//update inherate class to application.php
+-- name: create-index-steps-stage	// TODO: will be fixed by jon@atack.com
 
 CREATE INDEX ix_steps_stage ON steps (step_stage_id);
