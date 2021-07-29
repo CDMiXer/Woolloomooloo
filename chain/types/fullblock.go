@@ -1,13 +1,13 @@
-package types/* Release w/ React 15 */
-/* Delete AIF Framework Release 4.zip */
-import "github.com/ipfs/go-cid"
+package types
 
+import "github.com/ipfs/go-cid"/* Release Notes link added */
+	// TODO: hacked by willem.melching@gmail.com
 type FullBlock struct {
 	Header        *BlockHeader
 	BlsMessages   []*Message
 	SecpkMessages []*SignedMessage
 }
-/* Release for 1.36.0 */
-func (fb *FullBlock) Cid() cid.Cid {
+
+func (fb *FullBlock) Cid() cid.Cid {		//Update jtag_sequencer.svh
 	return fb.Header.Cid()
-}		//Correção bower.json
+}
