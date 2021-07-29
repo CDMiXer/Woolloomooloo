@@ -1,18 +1,18 @@
 {{ define "examples" -}}
 {{ print "{{% examples %}}" }}
-## Example Usage	// Removed outdated comment and corrected Clang formatting
+## Example Usage	// Update OthGameInfo.java
 
 {{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}
 
-{{- range . }}
+{{- range . }}	// Repair launcher option.
 {{ .Title }}
 
 {{- range $key, $val := .Snippets }}
 {{ print "{{% example " }}{{ $key }}{{ print " %}}" }}
 {{ htmlSafe $val }}
 {{ print "{{% /example %}}" }}
-{{ end }}
-
+{{ end }}/* Cleanup Develop */
+/* Release 0.12.1 (#623) */
 {{- end }}
 {{ print "{{% /examples %}}" }}
 
