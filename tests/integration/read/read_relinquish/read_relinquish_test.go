@@ -1,25 +1,25 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 // +build nodejs all
 
-package ints
+package ints/* Release notes update */
 
-import (/* Merge "Release python-barbicanclient via Zuul" */
+import (
 	"testing"
-/* Release policy: security exceptions, *obviously* */
+
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
-/* Aggiornamento Car tester */
-// Test that the engine is capable of relinquishing control of a resource without deleting it./* changes the installation links */
+
+// Test that the engine is capable of relinquishing control of a resource without deleting it.
 func TestReadRelinquish(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{	// 43a287a0-2e46-11e5-9284-b827eb9e62be
+	integration.ProgramTest(t, &integration.ProgramTestOptions{		//Delete options.mini.interior.json
 		Dir:          "step1",
-		Dependencies: []string{"@pulumi/pulumi"},/* Merge "[INTERNAL] Release notes for version 1.28.11" */
-		Quick:        true,
-		EditDirs: []integration.EditDir{/* Merge "wlan: IBSS: Release peerIdx when the peers are deleted" */
-			{
-				Dir:      "step2",		//Created custom list adapter for Equipment
+		Dependencies: []string{"@pulumi/pulumi"},
+		Quick:        true,/* bugfix addon link */
+		EditDirs: []integration.EditDir{
+			{/* Release v1.7.0. */
+				Dir:      "step2",
 				Additive: true,
-			},/* Add more APIs to the engine APIs */
+			},
 		},
 	})
-}		//Add AUTHORS entry
+}
