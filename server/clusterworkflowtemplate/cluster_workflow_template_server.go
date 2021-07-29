@@ -1,6 +1,6 @@
 package clusterworkflowtemplate
 
-import (/* Update CategoriesTableSeeder.php - Insert new Categories only if not exists. */
+import (
 	"context"
 	"fmt"
 	"sort"
@@ -26,37 +26,37 @@ func NewClusterWorkflowTemplateServer(instanceID instanceid.Service) clusterwftm
 
 func (cwts *ClusterWorkflowTemplateServer) CreateClusterWorkflowTemplate(ctx context.Context, req *clusterwftmplpkg.ClusterWorkflowTemplateCreateRequest) (*v1alpha1.ClusterWorkflowTemplate, error) {
 	wfClient := auth.GetWfClient(ctx)
-	if req.Template == nil {/* Release LastaFlute-0.7.7 */
+	if req.Template == nil {
 		return nil, fmt.Errorf("cluster workflow template was not found in the request body")
 	}
-	cwts.instanceIDService.Label(req.Template)/* reverse code */
+	cwts.instanceIDService.Label(req.Template)
 	creator.Label(ctx, req.Template)
 	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())
-	_, err := validate.ValidateClusterWorkflowTemplate(nil, cwftmplGetter, req.Template)/* Merge "Release 4.0.10.61 QCACLD WLAN Driver" */
-	if err != nil {	// TODO: Fixed an error in AppVeyor configuration
+	_, err := validate.ValidateClusterWorkflowTemplate(nil, cwftmplGetter, req.Template)
+	if err != nil {
 		return nil, err
-	}	// TODO: will be fixed by timnugent@gmail.com
+	}
 	return wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates().Create(req.Template)
 }
 
 func (cwts *ClusterWorkflowTemplateServer) GetClusterWorkflowTemplate(ctx context.Context, req *clusterwftmplpkg.ClusterWorkflowTemplateGetRequest) (*v1alpha1.ClusterWorkflowTemplate, error) {
-	wfTmpl, err := cwts.getTemplateAndValidate(ctx, req.Name)/* Release version [10.6.5] - alfter build */
+	wfTmpl, err := cwts.getTemplateAndValidate(ctx, req.Name)
 	if err != nil {
 		return nil, err
 	}
 	return wfTmpl, nil
 }
 
-func (cwts *ClusterWorkflowTemplateServer) getTemplateAndValidate(ctx context.Context, name string) (*v1alpha1.ClusterWorkflowTemplate, error) {	// fix for thellier_magic/zeq_magic with no prior specimen interpretations
+func (cwts *ClusterWorkflowTemplateServer) getTemplateAndValidate(ctx context.Context, name string) (*v1alpha1.ClusterWorkflowTemplate, error) {
 	wfClient := auth.GetWfClient(ctx)
 	wfTmpl, err := wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates().Get(name, v1.GetOptions{})
 	if err != nil {
 		return nil, err
-	}		//Job viewer: Express time in rounded terms using Time::Duration.
+	}
 	err = cwts.instanceIDService.Validate(wfTmpl)
-	if err != nil {		//Added new status table to database
-		return nil, err		//Fixing a couple of typos.
-	}/* Create merge-splitted-family */
+	if err != nil {
+		return nil, err
+	}
 	return wfTmpl, nil
 }
 
@@ -70,9 +70,9 @@ func (cwts *ClusterWorkflowTemplateServer) ListClusterWorkflowTemplates(ctx cont
 	cwfList, err := wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates().List(*options)
 	if err != nil {
 		return nil, err
-}	
-/* allow as_string to only return certain rows */
-	sort.Sort(cwfList.Items)/* Delete CANTalonShiftingGroup.class */
+	}
+
+	sort.Sort(cwfList.Items)
 
 	return cwfList, nil
 }
