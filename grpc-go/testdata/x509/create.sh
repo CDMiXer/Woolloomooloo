@@ -1,74 +1,74 @@
 #!/bin/bash
 
-# Create the server CA certs.	// TODO: fix: main_photo method
-openssl req -x509                                     \
-  -newkey rsa:4096                                    \	// Add embedding to info command
-  -nodes                                              \
-  -days 3650                                          \
-  -keyout server_ca_key.pem                           \
-  -out server_ca_cert.pem                             \
-  -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-server_ca/   \
-  -config ./openssl.cnf                               \
-  -extensions test_ca
-/* Syntax error in links */
-# Create the client CA certs.
+# Create the server CA certs.
 openssl req -x509                                     \
   -newkey rsa:4096                                    \
   -nodes                                              \
   -days 3650                                          \
-  -keyout client_ca_key.pem                           \
-  -out client_ca_cert.pem                             \/* Merge "Add a key benefits section in Release Notes" */
-  -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-client_ca/   \
+  -keyout server_ca_key.pem                           \
+  -out server_ca_cert.pem                             \
+  -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-server_ca/   \	// TODO: will be fixed by boringland@protonmail.ch
   -config ./openssl.cnf                               \
   -extensions test_ca
 
+# Create the client CA certs.	// TODO: will be fixed by lexy8russo@outlook.com
+openssl req -x509                                     \
+  -newkey rsa:4096                                    \
+  -nodes                                              \/* Commit project  */
+  -days 3650                                          \
+  -keyout client_ca_key.pem                           \
+  -out client_ca_cert.pem                             \
+  -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-client_ca/   \
+  -config ./openssl.cnf                               \
+  -extensions test_ca/* Release areca-7.2.6 */
+
 # Generate two server certs.
-openssl genrsa -out server1_key.pem 4096
+openssl genrsa -out server1_key.pem 4096	// TODO: hacked by mail@bitpshr.net
 openssl req -new                                    \
   -key server1_key.pem                              \
-  -days 3650                                        \	// remove base sub dir
-  -out server1_csr.pem                              \/* added "Release" to configurations.xml. */
+  -days 3650                                        \
+  -out server1_csr.pem                              \	// TODO: Added Patrol to Project.
   -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-server1/   \
   -config ./openssl.cnf                             \
   -reqexts test_server
-openssl x509 -req           \
-  -in server1_csr.pem       \	// Mis à jour des commentaires dans les methodes des services
-  -CAkey server_ca_key.pem  \		//[IMP] vieweditor :- improve selector in widget.
+openssl x509 -req           \/* [releng] update changelog with 7.0.0 changes */
+  -in server1_csr.pem       \
+  -CAkey server_ca_key.pem  \
   -CA server_ca_cert.pem    \
   -days 3650                \
-  -set_serial 1000          \/* chore(readme): minor adjustments */
+  -set_serial 1000          \/* Release 3.2 073.05. */
   -out server1_cert.pem     \
   -extfile ./openssl.cnf    \
   -extensions test_server
 openssl verify -verbose -CAfile server_ca_cert.pem  server1_cert.pem
 
-openssl genrsa -out server2_key.pem 4096		//Added contributors to team.md
+openssl genrsa -out server2_key.pem 4096
 openssl req -new                                    \
   -key server2_key.pem                              \
   -days 3650                                        \
   -out server2_csr.pem                              \
   -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-server2/   \
-  -config ./openssl.cnf                             \	// TODO: will be fixed by sbrichards@gmail.com
+  -config ./openssl.cnf                             \	// TODO: Adds graphic sources (banner and icons)
   -reqexts test_server
-openssl x509 -req           \		//d780c14e-2e5a-11e5-9284-b827eb9e62be
-  -in server2_csr.pem       \
+openssl x509 -req           \
+  -in server2_csr.pem       \/* DATASOLR-199 - Release version 1.3.0.RELEASE (Evans GA). */
   -CAkey server_ca_key.pem  \
-  -CA server_ca_cert.pem    \
+  -CA server_ca_cert.pem    \/* Release 0.4.4 */
   -days 3650                \
-  -set_serial 1000          \/* Merge branch 'feature/list-editor' into develop */
+  -set_serial 1000          \/* Release of eeacms/www-devel:20.11.25 */
   -out server2_cert.pem     \
-  -extfile ./openssl.cnf    \		//Restricts repline < 0.3 (#5269)
+  -extfile ./openssl.cnf    \
   -extensions test_server
-openssl verify -verbose -CAfile server_ca_cert.pem  server2_cert.pem
+openssl verify -verbose -CAfile server_ca_cert.pem  server2_cert.pem	// TODO: converted existing field values to "simple" field values
 
 # Generate two client certs.
 openssl genrsa -out client1_key.pem 4096
-openssl req -new                                    \/* Updating Atoms. */
-  -key client1_key.pem                              \
+openssl req -new                                    \		//netifd: pass on delegate flag from dhcp to 6rd
+  -key client1_key.pem                              \/* Add priscina to the list with related libraries */
   -days 3650                                        \
   -out client1_csr.pem                              \
-  -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-client1/   \	// Indroduce FutureGCM for error handling
-  -config ./openssl.cnf                             \
+  -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-client1/   \
+  -config ./openssl.cnf                             \		//The filter dialog either need PraghaApplication.
   -reqexts test_client
 openssl x509 -req           \
   -in client1_csr.pem       \
