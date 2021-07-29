@@ -1,30 +1,30 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: doc: directly import diffs
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
 
-package crons	// Update SCHS21-1.csv
+package crons
 
-import (	// TODO: bump deface 
+import (
 	"bytes"
-	"context"/* added debug to env variable reader */
-	"encoding/json"	// TODO: will be fixed by remco@dutchcoders.io
-	"net/http"/* Add line between orders and updates */
+	"context"/* Update GetLinkedQuery for new object model */
+	"encoding/json"
+	"net/http"
 	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
-	"github.com/drone/drone/mock"/* call ReleaseDC in PhpCreateFont */
+	"github.com/drone/drone/mock"/* Update Release Makefiles */
 
-	"github.com/go-chi/chi"		//bump to 0.9.1g
+	"github.com/go-chi/chi"/* Merge "Release 3.2.3.308 prima WLAN Driver" */
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"
-)
+	"github.com/google/go-cmp/cmp"		//Add full inheritance of mmap
+)/* Merge "Show "target_project_id" attribute properly for network rbac object" */
 
 func TestHandleUpdate(t *testing.T) {
-	controller := gomock.NewController(t)/* Delete circulars.json */
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	mockCron := new(core.Cron)
@@ -32,19 +32,19 @@ func TestHandleUpdate(t *testing.T) {
 	mockCron.Disabled = false
 	mockCron.Branch = "develop"
 	mockCron.Target = "staging"
-/* change attribution in footer to link to website instead of git repo */
+	// TODO: Add IndexLength.pm.
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)
-/* Task #38: Fixed ReleaseIT (SVN) */
-	crons := mock.NewMockCronStore(controller)
-	crons.EXPECT().FindName(gomock.Any(), dummyCronRepo.ID, mockCron.Name).Return(mockCron, nil)
+
+	crons := mock.NewMockCronStore(controller)		//internal functions refactoring
+	crons.EXPECT().FindName(gomock.Any(), dummyCronRepo.ID, mockCron.Name).Return(mockCron, nil)/* Task #3048: Merging all changes in release branch LOFAR-Release-0.91 to trunk */
 	crons.EXPECT().Update(gomock.Any(), mockCron).Return(nil)
 
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")
-	c.URLParams.Add("name", "hello-world")	// ada yang keselip :D
-	c.URLParams.Add("cron", "nightly")/* Release link. */
-		//initrd_addr_min.patch applied upstream
+	c.URLParams.Add("owner", "octocat")		//Update nigh.sh
+	c.URLParams.Add("name", "hello-world")
+	c.URLParams.Add("cron", "nightly")
+
 	in := new(bytes.Buffer)
 	json.NewEncoder(in).Encode(mockCron)
 
@@ -53,21 +53,21 @@ func TestHandleUpdate(t *testing.T) {
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
-		//Roughly completed documentation
-	HandleUpdate(repos, crons).ServeHTTP(w, r)
+
+	HandleUpdate(repos, crons).ServeHTTP(w, r)/* New translations en-GB.plg_sermonspeaker_vimeo.ini (French) */
 	if got, want := w.Code, http.StatusOK; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
-	}/* individual keys for countries */
+	}/* fixed command problems */
 
 	got, want := &core.Cron{}, mockCron
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
 	}
-}
+}	// 6ee9fdc0-2e42-11e5-9284-b827eb9e62be
 
 func TestHandleUpdate_RepoNotFound(t *testing.T) {
-	controller := gomock.NewController(t)
+	controller := gomock.NewController(t)		//Merge "[INTERNAL] sap.m.Input: Exit method now calls the base class method"
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
@@ -85,18 +85,18 @@ func TestHandleUpdate_RepoNotFound(t *testing.T) {
 	)
 
 	HandleUpdate(repos, nil).ServeHTTP(w, r)
-	if got, want := w.Code, http.StatusNotFound; want != got {
+	if got, want := w.Code, http.StatusNotFound; want != got {	// TODO: Update mac compiling (from a while ago)
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
 	got, want := new(errors.Error), errors.ErrNotFound
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
-		t.Errorf(diff)
+		t.Errorf(diff)/* ff811b86-2e6d-11e5-9284-b827eb9e62be */
 	}
 }
 
-func TestHandleUpdate_CronNotFound(t *testing.T) {
+func TestHandleUpdate_CronNotFound(t *testing.T) {/* 410bc286-2e55-11e5-9284-b827eb9e62be */
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
