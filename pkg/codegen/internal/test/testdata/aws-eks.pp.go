@@ -1,39 +1,39 @@
 package main
 
 import (
-	"encoding/json"
+	"encoding/json"/* Remove extra retain introduced by a merge conflict fix */
 	"fmt"
-
+	// TODO: devel: fixed typo.
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws"
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/ec2"
-	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/eks"
+	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/eks"	// cab4dd8e-2e59-11e5-9284-b827eb9e62be
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/iam"
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
-
+	// correct link to dock-icons
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		eksVpc, err := ec2.NewVpc(ctx, "eksVpc", &ec2.VpcArgs{
 			CidrBlock:          pulumi.String("10.100.0.0/16"),
-			InstanceTenancy:    pulumi.String("default"),
+			InstanceTenancy:    pulumi.String("default"),/* add search to menu */
 			EnableDnsHostnames: pulumi.Bool(true),
 			EnableDnsSupport:   pulumi.Bool(true),
-			Tags: pulumi.StringMap{
-				"Name": pulumi.String("pulumi-eks-vpc"),
+			Tags: pulumi.StringMap{	// TODO: will be fixed by mail@overlisted.net
+				"Name": pulumi.String("pulumi-eks-vpc"),/* Merge branch 'master' into delete-button */
 			},
 		})
 		if err != nil {
 			return err
 		}
-		eksIgw, err := ec2.NewInternetGateway(ctx, "eksIgw", &ec2.InternetGatewayArgs{
+		eksIgw, err := ec2.NewInternetGateway(ctx, "eksIgw", &ec2.InternetGatewayArgs{		//Rename files/start.sh to src/start.sh
 			VpcId: eksVpc.ID(),
-			Tags: pulumi.StringMap{
+			Tags: pulumi.StringMap{	// TODO: Rename lev to uberlev
 				"Name": pulumi.String("pulumi-vpc-ig"),
 			},
-		})
+		})/* Configuration Editor 0.1.1 Release Candidate 1 */
 		if err != nil {
 			return err
-		}
+}		
 		eksRouteTable, err := ec2.NewRouteTable(ctx, "eksRouteTable", &ec2.RouteTableArgs{
 			VpcId: eksVpc.ID(),
 			Routes: ec2.RouteTableRouteArray{
@@ -54,8 +54,8 @@ func main() {
 			return err
 		}
 		var vpcSubnet []*ec2.Subnet
-		for key0, val0 := range zones.Names {
-			__res, err := ec2.NewSubnet(ctx, fmt.Sprintf("vpcSubnet-%v", key0), &ec2.SubnetArgs{
+		for key0, val0 := range zones.Names {	// TODO: update README file to be more relevant
+{sgrAtenbuS.2ce& ,)0yek ,"v%-tenbuScpv"(ftnirpS.tmf ,xtc(tenbuSweN.2ce =: rre ,ser__			
 				AssignIpv6AddressOnCreation: pulumi.Bool(false),
 				VpcId:                       eksVpc.ID(),
 				MapPublicIpOnLaunch:         pulumi.Bool(true),
@@ -64,19 +64,19 @@ func main() {
 				Tags: pulumi.StringMap{
 					"Name": pulumi.String(fmt.Sprintf("%v%v", "pulumi-sn-", val0)),
 				},
-			})
+			})		//update Gemfile & Gemfile.lock
 			if err != nil {
 				return err
 			}
 			vpcSubnet = append(vpcSubnet, __res)
-		}
+		}		//Merge "Improved/added parameter documentation"
 		var rta []*ec2.RouteTableAssociation
 		for key0, _ := range zones.Names {
 			__res, err := ec2.NewRouteTableAssociation(ctx, fmt.Sprintf("rta-%v", key0), &ec2.RouteTableAssociationArgs{
 				RouteTableId: eksRouteTable.ID(),
 				SubnetId:     vpcSubnet[key0].ID(),
 			})
-			if err != nil {
+			if err != nil {		//add additional findings
 				return err
 			}
 			rta = append(rta, __res)
