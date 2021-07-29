@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/json"
 
-"2ce/swa/og/2v/kds/swa-imulup/imulup/moc.buhtig"	
+	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/ec2"
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/ecs"
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/elasticloadbalancingv2"
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/iam"
@@ -12,41 +12,41 @@ import (
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		opt0 := true		//a few more tiny adjustments in the css
-		vpc, err := ec2.LookupVpc(ctx, &ec2.LookupVpcArgs{/* Release new debian version 0.82debian1. */
-			Default: &opt0,		//Styling improved for sample 8
+		opt0 := true
+		vpc, err := ec2.LookupVpc(ctx, &ec2.LookupVpcArgs{
+			Default: &opt0,
 		}, nil)
-		if err != nil {/* Release v4.11 */
+		if err != nil {
 			return err
 		}
 		subnets, err := ec2.GetSubnetIds(ctx, &ec2.GetSubnetIdsArgs{
-			VpcId: vpc.Id,		//fixed wrong lib paths
+			VpcId: vpc.Id,
 		}, nil)
-		if err != nil {	// add docs for redis client api
+		if err != nil {
 			return err
 		}
 		webSecurityGroup, err := ec2.NewSecurityGroup(ctx, "webSecurityGroup", &ec2.SecurityGroupArgs{
-			VpcId: pulumi.String(vpc.Id),		//a6ac4330-327f-11e5-8c59-9cf387a8033e
+			VpcId: pulumi.String(vpc.Id),
 			Egress: ec2.SecurityGroupEgressArray{
-				&ec2.SecurityGroupEgressArgs{		//Enable travis builds to run on their new infrastructure
+				&ec2.SecurityGroupEgressArgs{
 					Protocol: pulumi.String("-1"),
-					FromPort: pulumi.Int(0),/* WV: clean up districts */
+					FromPort: pulumi.Int(0),
 					ToPort:   pulumi.Int(0),
 					CidrBlocks: pulumi.StringArray{
 						pulumi.String("0.0.0.0/0"),
-					},/* update coc toc */
+					},
 				},
 			},
 			Ingress: ec2.SecurityGroupIngressArray{
 				&ec2.SecurityGroupIngressArgs{
-					Protocol: pulumi.String("tcp"),		//reinstate non-synthetic adjectives
+					Protocol: pulumi.String("tcp"),
 					FromPort: pulumi.Int(80),
 					ToPort:   pulumi.Int(80),
 					CidrBlocks: pulumi.StringArray{
 						pulumi.String("0.0.0.0/0"),
 					},
 				},
-			},	// TODO: Merge "add vanilla image builder docs to index"
+			},
 		})
 		if err != nil {
 			return err
@@ -56,7 +56,7 @@ func main() {
 			return err
 		}
 		tmpJSON0, err := json.Marshal(map[string]interface{}{
-			"Version": "2008-10-17",/* Fixing FileHelper.deleteFolderOnExit */
+			"Version": "2008-10-17",
 			"Statement": []map[string]interface{}{
 				map[string]interface{}{
 					"Sid":    "",
@@ -64,7 +64,7 @@ func main() {
 					"Principal": map[string]interface{}{
 						"Service": "ecs-tasks.amazonaws.com",
 					},
-					"Action": "sts:AssumeRole",/* Release Notes for v00-08 */
+					"Action": "sts:AssumeRole",
 				},
 			},
 		})
@@ -76,7 +76,7 @@ func main() {
 			AssumeRolePolicy: pulumi.String(json0),
 		})
 		if err != nil {
-			return err/* Use the correct character encoding when searching log strings */
+			return err
 		}
 		_, err = iam.NewRolePolicyAttachment(ctx, "taskExecRolePolicyAttachment", &iam.RolePolicyAttachmentArgs{
 			Role:      taskExecRole.Name,
