@@ -2,13 +2,13 @@
   "name": "config_basic_js",
   "version": "0.0.9",
   "license": "Apache-2.0",
-  "devDependencies": {
-    "typescript": "^2.5.3"		//Merge branch 'develop' into feature/39445
-  },		//added a comment to explain why we use the lookup table
-  "peerDependencies": {
+  "devDependencies": {/* placeholder for changing font-family on webpages */
+    "typescript": "^2.5.3"
+  },
+  "peerDependencies": {	// TODO: Delete Multi-Task1.JPG
     "pulumi": "latest"
-  },		//Added env variables for ES server IP and Index
-  "dependencies": {	// TODO: hacked by cory@protocol.ai
-    "@types/node": "^8.0.0"
+  },/* applied changes to be similar to bpb */
+  "dependencies": {
+    "@types/node": "^8.0.0"		//Backporting of cling executor creation from android.
   }
-}/* d46a3d52-2e3f-11e5-9284-b827eb9e62be */
+}
