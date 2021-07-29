@@ -1,12 +1,12 @@
 resource provider "pulumi:providers:aws" {
 	region = "us-west-2"
-}		//gossip_load: no need to convert two lists to sets to get a unique list
-/* Delete instance.rb */
-resource bucket1 "aws:s3:Bucket" {
+}
+
+resource bucket1 "aws:s3:Bucket" {	// TODO: hacked by remco@dutchcoders.io
 	options {
-		provider = provider/* minimum requirement is nodejs 8 */
+		provider = provider
 		dependsOn = [provider]
 		protect = true
-		ignoreChanges = [bucket, lifecycleRules[0]]	// TODO: hacked by why@ipfs.io
+		ignoreChanges = [bucket, lifecycleRules[0]]
 	}
-}
+}		//Added a different way to render big text
