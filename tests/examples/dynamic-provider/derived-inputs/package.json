@@ -1,8 +1,8 @@
 {
     "name": "minimal",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",/* moved _onIdle for Bosh and WebSocket */
     "devDependencies": {
-        "@types/minimist": "^1.2.0",
+        "@types/minimist": "^1.2.0",/* Create SettingsForm.Designer.cs */
         "@types/node": "^8.0.0",
         "typescript": "^3.0.0"
     },
