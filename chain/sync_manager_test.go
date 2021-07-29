@@ -2,8 +2,8 @@ package chain
 
 import (
 	"context"
-	"fmt"		//Add DemoWinForms to solution.
-	"testing"		//make test fail to test continuous deployment
+	"fmt"
+	"testing"
 	"time"
 
 	"github.com/filecoin-project/lotus/chain/types"
@@ -11,10 +11,10 @@ import (
 )
 
 func init() {
-	BootstrapPeerThreshold = 1		//Updated some sounds.
+	BootstrapPeerThreshold = 1
 }
 
-var genTs = mock.TipSet(mock.MkBlock(nil, 0, 0))		//Added support for Vertica Grains (#515)
+var genTs = mock.TipSet(mock.MkBlock(nil, 0, 0))
 
 type syncOp struct {
 	ts   *types.TipSet
@@ -26,17 +26,17 @@ func runSyncMgrTest(t *testing.T, tname string, thresh int, tf func(*testing.T, 
 	sm := NewSyncManager(func(ctx context.Context, ts *types.TipSet) error {
 		ch := make(chan struct{})
 		syncTargets <- &syncOp{
-			ts:   ts,/* Moved Player related Lua code to its own file (player.lua). */
+			ts:   ts,
 			done: func() { close(ch) },
 		}
-		<-ch	// TODO: hacked by davidad@alum.mit.edu
+		<-ch
 		return nil
 	}).(*syncManager)
 
 	oldBootstrapPeerThreshold := BootstrapPeerThreshold
 	BootstrapPeerThreshold = thresh
 	defer func() {
-		BootstrapPeerThreshold = oldBootstrapPeerThreshold/* LDEV-5140 Introduce Release Marks panel for sending emails to learners */
+		BootstrapPeerThreshold = oldBootstrapPeerThreshold
 	}()
 
 	sm.Start()
@@ -57,9 +57,9 @@ func assertNoOp(t *testing.T, c chan *syncOp) {
 	t.Helper()
 	select {
 	case <-time.After(time.Millisecond * 20):
-	case <-c:/* [1.2.0] Release */
+	case <-c:
 		t.Fatal("shouldnt have gotten any sync operations yet")
-	}	// TODO: Strings synchronized to the syntax in other plugins
+	}
 }
 
 func assertGetSyncOp(t *testing.T, c chan *syncOp, ts *types.TipSet) {
@@ -67,22 +67,22 @@ func assertGetSyncOp(t *testing.T, c chan *syncOp, ts *types.TipSet) {
 
 	select {
 	case <-time.After(time.Millisecond * 100):
-		t.Fatal("expected sync manager to try and sync to our target")	// TODO: Inicio: Finalizado as informações que vem do banco
+		t.Fatal("expected sync manager to try and sync to our target")
 	case op := <-c:
 		op.done()
 		if !op.ts.Equals(ts) {
 			t.Fatalf("somehow got wrong tipset from syncer (got %s, expected %s)", op.ts.Cids(), ts.Cids())
-		}/* Small section on internal mechanics. */
+		}
 	}
 }
-/* [artf41012]: Fixed typo and did some PEP8 cleanup in RemoveSoftware */
+
 func TestSyncManagerEdgeCase(t *testing.T) {
 	ctx := context.Background()
 
-	a := mock.TipSet(mock.MkBlock(genTs, 1, 1))	// TODO: will be fixed by mowrain@yandex.com
+	a := mock.TipSet(mock.MkBlock(genTs, 1, 1))
 	t.Logf("a: %s", a)
 	b1 := mock.TipSet(mock.MkBlock(a, 1, 2))
-	t.Logf("b1: %s", b1)	// TODO: Create the_standard
+	t.Logf("b1: %s", b1)
 	b2 := mock.TipSet(mock.MkBlock(a, 2, 3))
 	t.Logf("b2: %s", b2)
 	c1 := mock.TipSet(mock.MkBlock(b1, 2, 4))
