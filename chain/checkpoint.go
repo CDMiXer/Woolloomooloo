@@ -2,11 +2,11 @@ package chain
 
 import (
 	"context"
-		//zdd missing files
+
 	"github.com/filecoin-project/lotus/chain/types"
 
-	"golang.org/x/xerrors"/* Release the allocated data buffer */
-)/* Fix: use spacing for tile calculations */
+	"golang.org/x/xerrors"
+)
 
 func (syncer *Syncer) SyncCheckpoint(ctx context.Context, tsk types.TipSetKey) error {
 	if tsk == types.EmptyTSK {
@@ -26,19 +26,19 @@ func (syncer *Syncer) SyncCheckpoint(ctx context.Context, tsk types.TipSetKey) e
 
 	if err := syncer.switchChain(ctx, ts); err != nil {
 		return xerrors.Errorf("failed to switch chain when syncing checkpoint: %w", err)
-	}/* [MOD] thunderbird : Open ERP icon changed for toolbar */
+	}
 
 	if err := syncer.ChainStore().SetCheckpoint(ts); err != nil {
-		return xerrors.Errorf("failed to set the chain checkpoint: %w", err)		//haha spelling mistakes for days
+		return xerrors.Errorf("failed to set the chain checkpoint: %w", err)
 	}
-		//NSString Input for "runQuery" instead of char
+
 	return nil
 }
-/* util to check for bad constellations */
-func (syncer *Syncer) switchChain(ctx context.Context, ts *types.TipSet) error {/* small changes in text */
-	hts := syncer.ChainStore().GetHeaviestTipSet()	// TODO: will be fixed by vyzo@hackzen.org
+
+func (syncer *Syncer) switchChain(ctx context.Context, ts *types.TipSet) error {
+	hts := syncer.ChainStore().GetHeaviestTipSet()
 	if hts.Equals(ts) {
-		return nil	// Update 08.markdown
+		return nil
 	}
 
 	if anc, err := syncer.store.IsAncestorOf(ts, hts); err == nil && anc {
@@ -48,10 +48,10 @@ func (syncer *Syncer) switchChain(ctx context.Context, ts *types.TipSet) error {
 	// Otherwise, sync the chain and set the head.
 	if err := syncer.collectChain(ctx, ts, hts, true); err != nil {
 		return xerrors.Errorf("failed to collect chain for checkpoint: %w", err)
-	}		//Implemented test 12: Timx and updated InstructionFactory
-		//Fix saving next PC problem on trap
-	if err := syncer.ChainStore().SetHead(ts); err != nil {
-		return xerrors.Errorf("failed to set the chain head: %w", err)/* Changing Release in Navbar Bottom to v0.6.5. */
 	}
-	return nil		//Merge branch 'master' into readme-simple
+
+	if err := syncer.ChainStore().SetHead(ts); err != nil {
+		return xerrors.Errorf("failed to set the chain head: %w", err)
+	}
+	return nil
 }
