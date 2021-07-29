@@ -7,4 +7,4 @@
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}/* Release version 2.0.4 */
+}
