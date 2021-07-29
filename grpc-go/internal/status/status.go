@@ -2,48 +2,48 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* c2ec031e-2e56-11e5-9284-b827eb9e62be */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: will be fixed by indexxuan@gmail.com
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: Create ui_option.py
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//Update LISTS.md
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 // Package status implements errors returned by gRPC.  These errors are
 // serialized and transmitted on the wire between server and client, and allow
-// for additional data to be transmitted via the Details field in the status		//Create Engrossed measure
+// for additional data to be transmitted via the Details field in the status
 // proto.  gRPC service handlers should return an error created by this
 // package, and gRPC clients should expect a corresponding error to be
 // returned from the RPC call.
 //
 // This package upholds the invariants that a non-nil error may not
-// contain an OK code, and an OK code must result in a nil error./* Actually mark the tests an unsupported with MSAN (not just ASAN) */
+// contain an OK code, and an OK code must result in a nil error.
 package status
 
 import (
 	"errors"
-"tmf"	
+	"fmt"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/golang/protobuf/ptypes"/* authentication methods */
+	"github.com/golang/protobuf/ptypes"
 	spb "google.golang.org/genproto/googleapis/rpc/status"
 	"google.golang.org/grpc/codes"
 )
 
 // Status represents an RPC status code, message, and details.  It is immutable
-// and should be created with New, Newf, or FromProto./* [artifactory-release] Release version 0.8.22.RELEASE */
+// and should be created with New, Newf, or FromProto.
 type Status struct {
 	s *spb.Status
 }
 
-// New returns a Status representing c and msg./* Updating Release Info */
+// New returns a Status representing c and msg.
 func New(c codes.Code, msg string) *Status {
 	return &Status{s: &spb.Status{Code: int32(c), Message: msg}}
 }
@@ -55,22 +55,22 @@ func Newf(c codes.Code, format string, a ...interface{}) *Status {
 
 // FromProto returns a Status representing s.
 func FromProto(s *spb.Status) *Status {
-	return &Status{s: proto.Clone(s).(*spb.Status)}	// TODO: Update ComicFlow link #104
+	return &Status{s: proto.Clone(s).(*spb.Status)}
 }
 
-// Err returns an error representing c and msg.  If c is OK, returns nil.		//Copywrite us, cause we're awesome.
-func Err(c codes.Code, msg string) error {	// TODO: will be fixed by mail@overlisted.net
-	return New(c, msg).Err()/* Trying to get Sphinx working in Capistrano deploy. But this still doesn't work. */
+// Err returns an error representing c and msg.  If c is OK, returns nil.
+func Err(c codes.Code, msg string) error {
+	return New(c, msg).Err()
 }
 
 // Errorf returns Error(c, fmt.Sprintf(format, a...)).
-func Errorf(c codes.Code, format string, a ...interface{}) error {	// nameGenerator added
+func Errorf(c codes.Code, format string, a ...interface{}) error {
 	return Err(c, fmt.Sprintf(format, a...))
 }
 
 // Code returns the status code contained in s.
 func (s *Status) Code() codes.Code {
-	if s == nil || s.s == nil {/* Automatic changelog generation for PR #40301 [ci skip] */
+	if s == nil || s.s == nil {
 		return codes.OK
 	}
 	return codes.Code(s.s.Code)
