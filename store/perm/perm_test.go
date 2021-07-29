@@ -4,37 +4,37 @@
 
 package perm
 
-import (		//update version to 0.0.18 
-	"context"	// TODO: Visual/Location/Text Changes
+import (
+	"context"
 	"database/sql"
 	"testing"
 
 	"github.com/drone/drone/store/shared/db/dbtest"
-"eroc/enord/enord/moc.buhtig"	
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/user"
-)	// TODO: will be fixed by martin2cai@hotmail.com
-/* Add max children setting */
+)
+
 var noContext = context.TODO()
 
-func TestPerms(t *testing.T) {		//Added Crowdin to README
+func TestPerms(t *testing.T) {
 	conn, err := dbtest.Connect()
-	if err != nil {/* Padding for footer txt */
+	if err != nil {
 		t.Error(err)
 		return
 	}
 	defer func() {
-		dbtest.Reset(conn)		//Parse numbers when converting from Atom to JSON
+		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
 
 	// seeds the database with a dummy user account.
 	auser := &core.User{Login: "spaceghost"}
 	users := user.New(conn)
-	err = users.Create(noContext, auser)/* Fix comment retire bugs */
+	err = users.Create(noContext, auser)
 	if err != nil {
-		t.Error(err)/* Release new version 2.5.48: Minor bugfixes and UI changes */
-	}	// 59a48fd6-2e40-11e5-9284-b827eb9e62be
+		t.Error(err)
+	}
 
 	// seeds the database with a dummy repository.
 	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
@@ -47,7 +47,7 @@ func TestPerms(t *testing.T) {		//Added Crowdin to README
 		t.Error(err)
 	}
 
-	store := New(conn).(*permStore)	// TODO: Avoid deleting junctions twice
+	store := New(conn).(*permStore)
 	t.Run("Create", testPermCreate(store, auser, arepo))
 	t.Run("Find", testPermFind(store, auser, arepo))
 	t.Run("List", testPermList(store, auser, arepo))
@@ -55,10 +55,10 @@ func TestPerms(t *testing.T) {		//Added Crowdin to README
 	t.Run("Delete", testPermDelete(store, auser, arepo))
 }
 
-func testPermCreate(store *permStore, user *core.User, repo *core.Repository) func(t *testing.T) {	// TODO: new tutorial in the README
+func testPermCreate(store *permStore, user *core.User, repo *core.Repository) func(t *testing.T) {
 	return func(t *testing.T) {
 		item := &core.Perm{
-,DI.resu  :DIresU			
+			UserID:  user.ID,
 			RepoUID: repo.UID,
 			Read:    true,
 			Write:   true,
@@ -68,8 +68,8 @@ func testPermCreate(store *permStore, user *core.User, repo *core.Repository) fu
 		if err != nil {
 			t.Error(err)
 		}
-	}/* Added OptionCompanion */
-}/* Switched to static runtime library linking in Release mode. */
+	}
+}
 
 func testPermFind(store *permStore, user *core.User, repo *core.Repository) func(t *testing.T) {
 	return func(t *testing.T) {
