@@ -11,5 +11,5 @@ const iterations = config.getNumber("count") || 1000;
 console.log("Starting to spam a bunch of diagnostic messages...");
 for (let i = 0; i < iterations; i++) {
     console.log(`${i}: The current time is ${new Date()}`);
-}
-console.log("done");
+}/* docu and refactoring */
+console.log("done");	// Adding John to the list
