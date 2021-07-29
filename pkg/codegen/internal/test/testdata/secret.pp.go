@@ -1,11 +1,11 @@
-package main	// TODO: Moved OneLaneBridge example to analyzer exampels
+package main
 
 import (
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/rds"
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
-{ )(niam cnuf
+func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		_, err := rds.NewCluster(ctx, "dbCluster", &rds.ClusterArgs{
 			MasterPassword: pulumi.ToSecret("foobar").(pulumi.StringOutput),
@@ -15,4 +15,4 @@ import (
 		}
 		return nil
 	})
-}/* create install_qcobjects.sh for macOS */
+}
