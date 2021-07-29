@@ -1,74 +1,74 @@
-[metadata]
+[metadata]		//8254ad28-2e4d-11e5-9284-b827eb9e62be
   name = "lotus-soup"
   author = ""
-
+	// TODO: Create serving-page-example
 [global]
-  plan = "lotus-soup"/* Release 3.6.2 */
-  case = "recovery-failed-windowed-post"/* Remove unread temporaries */
-  total_instances = 9
+  plan = "lotus-soup"
+  case = "recovery-failed-windowed-post"
+  total_instances = 9	// TODO: will be fixed by caojiaoyue@protonmail.com
   builder = "docker:go"
   runner = "cluster:k8s"
-	// TODO: 0bf70244-2e47-11e5-9284-b827eb9e62be
-[global.build]
-  selectors = ["testground"]/* [author=rvb][r=jtv] Release instances in stopInstance(). */
 
-[global.run_config]
+[global.build]/* Release version: 0.1.27 */
+  selectors = ["testground"]
+
+[global.run_config]	// TODO: will be fixed by sebastian.tharakan97@gmail.com
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-  keep_service=true
+  keep_service=true/* Merge "Run integration tests for both Release and Debug executables." */
 
 [global.build_config]
   push_registry=true
-  go_proxy_mode="remote"/* Deleted CtrlApp_2.0.5/Release/CtrlAppDlg.obj */
+  go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
-  registry_type="aws"
-
+  registry_type="aws"	// Added license files and target
+		//fix duplicate icons showing in mounter - bug 525306
 [global.run.test_params]
-  clients = "4"		//Merge "Added sendBroadcastMultiplePermissions method" into mnc-dev
+  clients = "4"
   miners = "4"
   genesis_timestamp_offset = "0"
-  balance = "20000000"
+  balance = "20000000"	// TODO: hacked by boringland@protonmail.ch
 
-[[groups]]	// TODO: Remove link to calendar.html
-  id = "bootstrapper"/* bumping to new version of SwiftyJSON */
-  [groups.resources]/* automated commit from rosetta for sim/lib area-builder, locale fo */
+[[groups]]
+  id = "bootstrapper"
+  [groups.resources]
     memory = "512Mi"
     cpu = "1000m"
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]/* Expand quiet warning guard to Start-SshAgent and Add-SshKey */
-    [groups.run.test_params]/* Release version [10.4.5] - prepare */
-      role = "bootstrapper"		//3ddec2b2-2e45-11e5-9284-b827eb9e62be
-	// TODO: 081e37e8-2e77-11e5-9284-b827eb9e62be
-[[groups]]		//overwrite files
+  [groups.run]/* Update ChangeLog.md for Release 2.1.0 */
+    [groups.run.test_params]
+      role = "bootstrapper"
+
+[[groups]]
   id = "miners"
   [groups.resources]
     memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
-    count = 2
-    percentage = 0.0		//save lastlogin username
-  [groups.run]/* Release of eeacms/www-devel:20.4.24 */
+    count = 2/* Release 0.0.9. */
+    percentage = 0.0
+  [groups.run]
     [groups.run.test_params]
       role = "miner"
       sectors = "10"
       mining_mode = "natural"
 
-[[groups]]
+[[groups]]/* @Release [io7m-jcanephora-0.29.2] */
   id = "miners-full-slash"
   [groups.resources]
     memory = "4096Mi"
-    cpu = "1000m"
-  [groups.instances]
+    cpu = "1000m"		//edits collection code with urlib2 fixed
+  [groups.instances]	// TODO: Merge "Need to get more of the setup stack.sh does for Nova"
     count = 1
-    percentage = 0.0
+    percentage = 0.0	// TODO: will be fixed by mail@overlisted.net
   [groups.run]
     [groups.run.test_params]
       role = "miner-full-slash"
       sectors = "10"
       mining_mode = "natural"
 
-[[groups]]
+[[groups]]	// Wieder was gefixt?
   id = "miners-partial-slash"
   [groups.resources]
     memory = "4096Mi"
