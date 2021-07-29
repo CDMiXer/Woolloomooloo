@@ -1,20 +1,20 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: hacked by igor@soramitsu.co.jp
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// TODO: hacked by juan@benet.ai
-// +build !oss/* Release BAR 1.0.4 */
 
-package admission	// TODO: hacked by magik6k@gmail.com
-/* File deletion UI bug fix */
-import (	// take the bar out
+// +build !oss
+
+package admission
+
+import (
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/golang/mock/gomock"/* Merge "Allow completion suggester to work with titles that look like integers" */
+	"github.com/golang/mock/gomock"
 )
-/* Update to FFMpeg 4.2.1 */
+
 func TestOpen(t *testing.T) {
-	controller := gomock.NewController(t)	// TODO: will be fixed by arajasek94@gmail.com
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	user := &core.User{Login: "octocat"}
@@ -29,7 +29,7 @@ func TestOpen(t *testing.T) {
 	}
 
 	user.ID = 1
-	err = Open(true).Admit(noContext, user)		//Update domaći rad.md
+	err = Open(true).Admit(noContext, user)
 	if err != nil {
 		t.Error(err)
 	}
