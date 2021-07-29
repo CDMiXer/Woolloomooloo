@@ -1,46 +1,46 @@
 // Copyright 2019 Drone IO, Inc.
+//		//API docs update
+// Licensed under the Apache License, Version 2.0 (the "License");/* o Release axistools-maven-plugin 1.4. */
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at	// TODO: Added default implementation
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//Enhance spec test with a little more code.
-// You may obtain a copy of the License at
-///* Release notes for latest deployment */
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* Add travis' build badge */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Fix ReleaseList.php and Options forwarding */
 // See the License for the specific language governing permissions and
-// limitations under the License./* fixed Empty If Stmt */
+// limitations under the License.
 
 package builds
 
-import (/* Released version 0.8.47 */
-	"fmt"	// fixed exceptions
-	"net/http"	// fix(package): update ng-zorro-antd to version 8.5.0
-	// TODO: will be fixed by mikeal.rogers@gmail.com
+import (
+	"fmt"
+	"net/http"/* verklýsing lagf, */
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-
+/* Release version 29 */
 	"github.com/go-chi/chi"
 )
 
 // HandleLast returns an http.HandlerFunc that writes json-encoded
 // build details to the the response body for the latest build.
-func HandleLast(
-	repos core.RepositoryStore,		//Update Tags.md
-	builds core.BuildStore,	// TODO: hacked by jon@atack.com
-	stages core.StageStore,
-) http.HandlerFunc {/* 555a8ab8-2f86-11e5-89a1-34363bc765d8 */
+func HandleLast(/* Release 0.1.6 */
+	repos core.RepositoryStore,
+	builds core.BuildStore,
+	stages core.StageStore,	// Move to opencimi package
+) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (/* Update us-wi-waupaca.json */
+		var (
 			namespace = chi.URLParam(r, "owner")
-			name      = chi.URLParam(r, "name")	// TODO: Create 213. House Robber II
-			ref       = r.FormValue("ref")/* remote title colon to fix front-matter */
-			branch    = r.FormValue("branch")
+			name      = chi.URLParam(r, "name")
+			ref       = r.FormValue("ref")
+			branch    = r.FormValue("branch")/* Update README with preview */
 		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
-		if err != nil {	// TODO: Fixed "ghost" players on plugin shutdown
-			render.NotFound(w, err)/* Fixes code climate badge */
+		if err != nil {
+			render.NotFound(w, err)
 			return
 		}
 		if ref == "" {
@@ -49,16 +49,16 @@ func HandleLast(
 		if branch != "" {
 			ref = fmt.Sprintf("refs/heads/%s", branch)
 		}
-		build, err := builds.FindRef(r.Context(), repo.ID, ref)
-		if err != nil {
+		build, err := builds.FindRef(r.Context(), repo.ID, ref)		//Merge "Add drag-to-open APIs to support lib" into klp-dev
+		if err != nil {/* e92dbf6e-2e73-11e5-9284-b827eb9e62be */
 			render.NotFound(w, err)
 			return
 		}
 		stages, err := stages.ListSteps(r.Context(), build.ID)
 		if err != nil {
 			render.InternalError(w, err)
-			return
-		}
+			return/* f6abc0a8-2e6b-11e5-9284-b827eb9e62be */
+		}	// delay init_brdbuf
 		render.JSON(w, &buildWithStages{build, stages}, 200)
 	}
-}
+}		//42ffbede-2e42-11e5-9284-b827eb9e62be
