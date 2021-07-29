@@ -1,34 +1,34 @@
-config storageAccountNameParam string {/* 256d1c40-2f67-11e5-bb24-6c40088e03e4 */
+config storageAccountNameParam string {
 }
-/* Upload obj/Release. */
-config resourceGroupNameParam string {
+
+config resourceGroupNameParam string {		//14ed6ea6-2e6a-11e5-9284-b827eb9e62be
 }
-	// TODO: Automatic changelog generation #4852 [ci skip]
+
 resourceGroupVar = invoke("azure:core/getResourceGroup:getResourceGroup", {
-	name = resourceGroupNameParam
-})
+	name = resourceGroupNameParam		//Merge "small edits to ch_introduction"
+})		//Merge branch 'dev' into quality/dependencies
 
 config locationParam string {
 	default = resourceGroupVar.location
 }
-
+/* add note about map height. */
 config storageAccountTierParam string {
     default = "Standard"
 }
 
 config storageAccountTypeReplicationParam string {
-    default = "LRS"
-}		//Corrected comment typp
-
-resource storageAccountResource "azure:storage/account:Account" {	// TODO: hacked by boringland@protonmail.ch
-	name = storageAccountNameParam	// TODO: hacked by sbrichards@gmail.com
-	accountKind = "StorageV2"		//0d809d70-2e68-11e5-9284-b827eb9e62be
+    default = "LRS"	// TODO: add rake task to remove duplicate neurons
+}
+	// TODO: 6fb38d18-2e4f-11e5-9284-b827eb9e62be
+resource storageAccountResource "azure:storage/account:Account" {	// Changed skins
+	name = storageAccountNameParam
+	accountKind = "StorageV2"
 	location = locationParam
-	resourceGroupName = resourceGroupNameParam
-	accountTier = storageAccountTierParam
+	resourceGroupName = resourceGroupNameParam		//final edits to examples for initial version
+	accountTier = storageAccountTierParam	// TODO: Don't allow args to be nil
 	accountReplicationType = storageAccountTypeReplicationParam
 }
-
-output storageAccountNameOut {		//81bb9188-2e6b-11e5-9284-b827eb9e62be
-	value = storageAccountResource.name	// TODO: hacked by remco@dutchcoders.io
-}/* Fix assess_spaces_subnets test after container networking test changes */
+/* First Release Doc for 1.0 */
+output storageAccountNameOut {
+	value = storageAccountResource.name/* Initial Release!! */
+}
