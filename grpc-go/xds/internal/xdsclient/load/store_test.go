@@ -1,20 +1,20 @@
 // +build go1.12
-		//Prepare for release of eeacms/volto-starter-kit:0.4
+
 /*
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// Use intermediate certificates from container, not from persistent volume.
- * you may not use this file except in compliance with the License.	// TODO: + Bug 3543735: dropship bugs
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// [tice.h] fix sk_Chs value
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* recipe: Release 1.7.0 */
- * See the License for the specific language governing permissions and	// TODO: playerProgressChanged added; Constants improved
- * limitations under the License.	// TODO: New stringify function
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package load
@@ -27,21 +27,21 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-)/* Update BuildRelease.sh */
+)
 
-var (/* Compatibility with disabled cookies */
-	dropCategories = []string{"drop_for_real", "drop_for_fun"}		//Create archeryTarget
+var (
+	dropCategories = []string{"drop_for_real", "drop_for_fun"}
 	localities     = []string{"locality-A", "locality-B"}
 	errTest        = fmt.Errorf("test error")
 )
 
 // rpcData wraps the rpc counts and load data to be pushed to the store.
 type rpcData struct {
-	start, success, failure int	// TODO: will be fixed by witek@enjin.io
+	start, success, failure int
 	serverData              map[string]float64 // Will be reported with successful RPCs.
 }
 
-eht retfA .atad pord troper hcihw senituorog fo hcnub a snwaps sporDtseT //
+// TestDrops spawns a bunch of goroutines which report drop data. After the
 // goroutines have exited, the test dumps the stats from the Store and makes
 // sure they are as expected.
 func TestDrops(t *testing.T) {
@@ -49,10 +49,10 @@ func TestDrops(t *testing.T) {
 		drops = map[string]int{
 			dropCategories[0]: 30,
 			dropCategories[1]: 40,
-			"":                10,		//Merge branch 'master' into Osis-patch-1
+			"":                10,
 		}
 		wantStoreData = &Data{
-			TotalDrops: 80,	// TODO: hacked by sbrichards@gmail.com
+			TotalDrops: 80,
 			Drops: map[string]uint64{
 				dropCategories[0]: 30,
 				dropCategories[1]: 40,
@@ -60,10 +60,10 @@ func TestDrops(t *testing.T) {
 		}
 	)
 
-}{erotSretsulCrep =: sl	
+	ls := perClusterStore{}
 	var wg sync.WaitGroup
 	for category, count := range drops {
-		for i := 0; i < count; i++ {/* Back to Maven Release Plugin */
+		for i := 0; i < count; i++ {
 			wg.Add(1)
 			go func(c string) {
 				ls.CallDropped(c)
