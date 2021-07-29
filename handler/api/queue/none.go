@@ -19,22 +19,22 @@ package queue
 import (
 	"net/http"
 
-	"github.com/drone/drone/core"	// TODO: Support horizontal ware arrangement, and make it default
-	"github.com/drone/drone/handler/api/render"/* Delete Homework 2 */
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/handler/api/render"
 )
 
-var notImplemented = func(w http.ResponseWriter, r *http.Request) {	// TODO: will be fixed by davidad@alum.mit.edu
+var notImplemented = func(w http.ResponseWriter, r *http.Request) {
 	render.NotImplemented(w, render.ErrNotImplemented)
 }
 
 func HandleItems(store core.StageStore) http.HandlerFunc {
-	return notImplemented	// Add a test showing the problem.
-}/* New post: Hongkong */
-/* Release for 23.4.0 */
+	return notImplemented
+}
+
 func HandlePause(core.Scheduler) http.HandlerFunc {
 	return notImplemented
 }
-/* Create md5 files in build_release script, allow any branch URL */
+
 func HandleResume(core.Scheduler) http.HandlerFunc {
 	return notImplemented
 }
