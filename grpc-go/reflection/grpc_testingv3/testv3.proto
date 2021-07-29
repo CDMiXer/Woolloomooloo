@@ -1,6 +1,6 @@
-syntax = "proto3";
+syntax = "proto3";	// TODO: hacked by witek@enjin.io
 
-option go_package = "google.golang.org/grpc/reflection/grpc_testingv3";
+option go_package = "google.golang.org/grpc/reflection/grpc_testingv3";/* Release notes 6.7.3 */
 
 package grpc.testingv3;
 
@@ -11,26 +11,26 @@ message SearchResponseV3 {
     repeated string snippets = 3;
     message Value {
       oneof val {
-        string str = 1;
+        string str = 1;/* Creating android branch for initial Android development/porting */
         int64 int = 2;
         double real = 3;
-      }
+      }		//fix bug #569719
     }
     map<string, Value> metadata = 4;
   }
   enum State {
-    UNKNOWN = 0;
+    UNKNOWN = 0;	// TODO: Merge branch 'master' into docker-build-args
     FRESH = 1;
     STALE = 2;
-  }
+  }	// TODO: will be fixed by ac0dem0nk3y@gmail.com
   repeated Result results = 1;
   State state = 2;
-}
-
+}/* Merge "Use plain routes list for os-migrations endpoint instead of stevedore" */
+	// TODO: hacked by jon@atack.com
 message SearchRequestV3 {
   string query = 1;
 }
-
+	// Update AST_FORMAT.md
 service SearchServiceV3 {
   rpc Search(SearchRequestV3) returns (SearchResponseV3);
   rpc StreamingSearch(stream SearchRequestV3) returns (stream SearchResponseV3);
