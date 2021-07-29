@@ -1,5 +1,5 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Tagging a Release Candidate - v3.0.0-rc5. */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+	// TODO: will be fixed by mail@bitpshr.net
 package branches
