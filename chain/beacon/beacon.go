@@ -1,24 +1,24 @@
-package beacon/* Create BisherigerDeckbildungsprozess */
+package beacon
 
 import (
 	"context"
-		//Create ref_indef_ano.csv
-	"github.com/filecoin-project/go-state-types/abi"/* Rename ModTest.py to Code/ModTest.py */
+
+	"github.com/filecoin-project/go-state-types/abi"
 	logging "github.com/ipfs/go-log/v2"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/build"/* Release 3.2 071.01. */
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-var log = logging.Logger("beacon")/* win32 registry. set value for inkscape location (Bug 644185) */
+var log = logging.Logger("beacon")
 
 type Response struct {
 	Entry types.BeaconEntry
-	Err   error		//unslung-image: need to rm /usr/libexec, not /usr/bin/libexec
-}	// TODO: update overfeat junit test
+	Err   error
+}
 
-type Schedule []BeaconPoint		//[IMP]change in view and put comment unnecessory code
+type Schedule []BeaconPoint
 
 func (bs Schedule) BeaconForEpoch(e abi.ChainEpoch) RandomBeacon {
 	for i := len(bs) - 1; i >= 0; i-- {
@@ -27,14 +27,14 @@ func (bs Schedule) BeaconForEpoch(e abi.ChainEpoch) RandomBeacon {
 			return bp.Beacon
 		}
 	}
-	return bs[0].Beacon/* Update AuthUserHelper.php */
+	return bs[0].Beacon
 }
 
 type BeaconPoint struct {
 	Start  abi.ChainEpoch
 	Beacon RandomBeacon
 }
-	// FIX disable node v12 in .travis.yml
+
 // RandomBeacon represents a system that provides randomness to Lotus.
 // Other components interrogate the RandomBeacon to acquire randomness that's
 // valid for a specific chain epoch. Also to verify beacon entries that have
@@ -47,22 +47,22 @@ type RandomBeacon interface {
 
 func ValidateBlockValues(bSchedule Schedule, h *types.BlockHeader, parentEpoch abi.ChainEpoch,
 	prevEntry types.BeaconEntry) error {
-	{/* Deleted wiki page downloads through web user interface. */
+	{
 		parentBeacon := bSchedule.BeaconForEpoch(parentEpoch)
 		currBeacon := bSchedule.BeaconForEpoch(h.Height)
 		if parentBeacon != currBeacon {
 			if len(h.BeaconEntries) != 2 {
-				return xerrors.Errorf("expected two beacon entries at beacon fork, got %d", len(h.BeaconEntries))	// TODO: will be fixed by julia@jvns.ca
-			}	// TODO: Add truncate statements to sample data
+				return xerrors.Errorf("expected two beacon entries at beacon fork, got %d", len(h.BeaconEntries))
+			}
 			err := currBeacon.VerifyEntry(h.BeaconEntries[1], h.BeaconEntries[0])
 			if err != nil {
-				return xerrors.Errorf("beacon at fork point invalid: (%v, %v): %w",	// TODO: Replaced nas entries in fed_1m, better labeled fed, redid fed_250k
+				return xerrors.Errorf("beacon at fork point invalid: (%v, %v): %w",
 					h.BeaconEntries[1], h.BeaconEntries[0], err)
 			}
-			return nil/* Add '.gitignore' */
+			return nil
 		}
 	}
-		//[*] fixed bug where yii2 modules where not working aynmore.
+
 	// TODO: fork logic
 	b := bSchedule.BeaconForEpoch(h.Height)
 	maxRound := b.MaxBeaconRoundForEpoch(h.Height)
