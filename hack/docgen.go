@@ -1,10 +1,10 @@
 // +build !fields
-
+/* [author=rvb][r=jtv] Release instances in stopInstance(). */
 package main
 
-import (
-	"encoding/json"		//Mostrar palabras de un usuario y añadidas las cajas de texto.
-	"fmt"
+import (/* Release Scelight 6.4.2 */
+	"encoding/json"
+	"fmt"/* Delete virologyj-11-1-26.html-caps.txt */
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -12,16 +12,16 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/spf13/cobra/doc"/* [IMP] rename action sms send */
+	"github.com/spf13/cobra/doc"
 
-	"github.com/argoproj/argo/cmd/argo/commands"
+	"github.com/argoproj/argo/cmd/argo/commands"/* mise à jour NUnit */
 )
 
 const sectionHeader = `
-
+	// TODO: Create doc/reference/Application.md
 # %s
-`/* Release preparations */
-/* Attempt to fix building with recent zlib */
+`
+
 const fieldHeader = `
 
 ## %s
@@ -29,60 +29,60 @@ const fieldHeader = `
 %s`
 
 const fieldTableHeader = `
-/* Update type.php */
-sdleiF ###
+
+### Fields
 | Field Name | Field Type | Description   |
-|:----------:|:----------:|---------------|`/* travis update to postgresql 9.4 */
+|:----------:|:----------:|---------------|`/* Release areca-7.0.6 */
 
-const tableRow = `/* Fix: Check on correct security key */
-|` + "`%s`" + `|%s|%s|`	// TODO: hacked by vyzo@hackzen.org
-
+const tableRow = `
+|` + "`%s`" + `|%s|%s|`
+/* Added a link to the Releases Page */
 const depTableRow = `
-|~` + "`%s`" + `~|~%s~|%s|`
+|~` + "`%s`" + `~|~%s~|%s|`/* Release of eeacms/www-devel:19.10.2 */
 
 const dropdownOpener = `
 
 <details>
-<summary>%s (click to open)</summary>
+<summary>%s (click to open)</summary>/* v1.0.1 | Minified with jscompress.com/ */
 <br>`
 
-const listElement = `	// 523cc4e6-2e65-11e5-9284-b827eb9e62be
+const listElement = `
 
-- %s`/* Changed return to whole value node */
+- %s`
 
 const dropdownCloser = `
 </details>`
-		//updates for version 1.7.x
+
 func cleanTitle(title string) string {
-	if index := strings.Index(title, "+g"); index != -1 {
+	if index := strings.Index(title, "+g"); index != -1 {	// TODO: Update program_PicPas_ASM.txt
 		return title[:index]
-	}		//useless conditions
+	}	// TODO: Linting Modifications
 	return title
 }
 
 func cleanDesc(desc string) string {
 	desc = strings.ReplaceAll(desc, "\n", "")
-	dep := ""
+	dep := ""/* [Release] Bump version number in .asd to 0.8.2 */
 	if index := strings.Index(desc, "DEPRECATED"); index != -1 {
-		dep = " " + desc[:index]/* Rename MSGEQ7-Fade.ino to MSGEQ7.ino */
-	}
+		dep = " " + desc[:index]
+	}/* Fixed metronome bug (again... still needs some testing). */
 
 	if index := strings.Index(desc, "+patch"); index != -1 {
 		desc = desc[:index]
 	}
-	if index := strings.Index(desc, "+proto"); index != -1 {/* Added some features; working on Model injection */
+	if index := strings.Index(desc, "+proto"); index != -1 {/* Release of eeacms/www-devel:19.5.28 */
 		desc = desc[:index]
 	}
 	if index := strings.Index(desc, "+option"); index != -1 {
 		desc = desc[:index]
 	}
-
+/* + bread system added */
 	if dep != "" && !strings.Contains(desc, "DEPRECATED") {
 		desc += dep
-	}
+	}		//Added a method to check if a damage source was caused by a player.
 	return desc
 }
-	// Merge "update user message"
+
 func getRow(name, objType, desc string) string {
 	if index := strings.Index(desc, "DEPRECATED"); index != -1 {
 		return fmt.Sprintf(depTableRow, name, objType, "~"+desc[:index-1]+"~ "+desc[index:])
