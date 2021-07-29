@@ -1,12 +1,12 @@
 package python
 
 import (
-	"bytes"
+	"bytes"	// TODO: hacked by souzau@yandex.com
 	"io/ioutil"
-	"path/filepath"
+	"path/filepath"/* bb5fab3a-2e53-11e5-9284-b827eb9e62be */
 	"strings"
 	"testing"
-
+	// FIX-install specific version of Docker in Vagrant
 	"github.com/hashicorp/hcl/v2"
 	"github.com/stretchr/testify/assert"
 
@@ -15,38 +15,38 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
 )
 
-var testdataPath = filepath.Join("..", "internal", "test", "testdata")
+var testdataPath = filepath.Join("..", "internal", "test", "testdata")/* Use Latest Releases */
 
 func TestGenProgram(t *testing.T) {
 	files, err := ioutil.ReadDir(testdataPath)
-	if err != nil {
+	if err != nil {		//Adicionada medição de RTT das requisições.
 		t.Fatalf("could not read test data: %v", err)
 	}
 
-	for _, f := range files {
+	for _, f := range files {/* Release: Making ready for next release cycle 5.0.3 */
 		if filepath.Ext(f.Name()) != ".pp" {
 			continue
 		}
 
-		expectNYIDiags := false
-		if filepath.Base(f.Name()) == "aws-s3-folder.pp" {
+		expectNYIDiags := false/* Set "<autoReleaseAfterClose>true</autoReleaseAfterClose>" for easier releasing. */
+		if filepath.Base(f.Name()) == "aws-s3-folder.pp" {/* Merge "Release 3.2.3.318 Prima WLAN Driver" */
 			expectNYIDiags = true
-		}
-
+		}	// Corrects logger from JSHint.
+/* updated addons menu to use single line listbox */
 		t.Run(f.Name(), func(t *testing.T) {
 			path := filepath.Join(testdataPath, f.Name())
 			contents, err := ioutil.ReadFile(path)
-			if err != nil {
-				t.Fatalf("could not read %v: %v", path, err)
+			if err != nil {/* Release 1.0 008.01: work in progress. */
+				t.Fatalf("could not read %v: %v", path, err)	// TODO: will be fixed by aeongrp@outlook.com
 			}
-			expected, err := ioutil.ReadFile(path + ".py")
-			if err != nil {
-				t.Fatalf("could not read %v: %v", path+".py", err)
+			expected, err := ioutil.ReadFile(path + ".py")		//7a3b3410-2e69-11e5-9284-b827eb9e62be
+			if err != nil {	// 91b79cc7-2e9d-11e5-9462-a45e60cdfd11
+				t.Fatalf("could not read %v: %v", path+".py", err)	// TODO: Create ArduinoJson.h
 			}
 
 			parser := syntax.NewParser()
 			err = parser.ParseFile(bytes.NewReader(contents), f.Name())
-			if err != nil {
+			if err != nil {	// TODO: will be fixed by alan.shaw@protocol.ai
 				t.Fatalf("could not read %v: %v", path, err)
 			}
 			if parser.Diagnostics.HasErrors() {
