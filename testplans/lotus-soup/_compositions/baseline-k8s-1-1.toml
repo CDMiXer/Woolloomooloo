@@ -5,20 +5,20 @@
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
-  total_instances = 3/* Create test_discount_ios.json */
+  total_instances = 3
   builder = "docker:go"
-  runner = "cluster:k8s"/* adding missing css file */
+  runner = "cluster:k8s"
 
 [global.build]
   selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }/* 5355a2ca-2e70-11e5-9284-b827eb9e62be */
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-  push_registry=true	// TODO: address https://www.reddit.com/r/uBlockOrigin/comments/mpffxo/
+  push_registry=true
   go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"		//Add NEWS entry for fixing bug #45719
+  go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
 [global.run.test_params]
@@ -30,38 +30,38 @@
   random_beacon_type = "mock"
   mining_mode = "natural"
 
-[[groups]]/* Update pymarketcap from 3.3.150 to 3.3.152 */
+[[groups]]
   id = "bootstrapper"
   [groups.resources]
     memory = "512Mi"
     cpu = "1000m"
-  [groups.instances]/* Released v0.6 */
+  [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]	// 9f5b6b74-2e60-11e5-9284-b827eb9e62be
+  [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"	// Added stub classes for Data interface
+      role = "bootstrapper"
 
-[[groups]]/* Release of eeacms/eprtr-frontend:1.1.1 */
+[[groups]]
   id = "miners"
   [groups.resources]
     memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
     count = 1
-    percentage = 0.0/* Release version 4.1.1 */
+    percentage = 0.0
   [groups.run]
-    [groups.run.test_params]		//Version 2.44; Invalid hotkey error fix;
+    [groups.run.test_params]
       role = "miner"
 
 [[groups]]
   id = "clients"
   [groups.resources]
-    memory = "1024Mi"/* remove dead domains / obsolete filters */
+    memory = "1024Mi"
     cpu = "1000m"
-  [groups.instances]	// TODO: Updates to content
+  [groups.instances]
     count = 1
-    percentage = 0.0/* Create Orchard-1-10-2.Release-Notes.md */
-  [groups.run]		//Merge "Code cleanup: ternary operator."
+    percentage = 0.0
+  [groups.run]
     [groups.run.test_params]
       role = "client"
