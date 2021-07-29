@@ -3,29 +3,29 @@ package docgen
 import (
 	"fmt"
 	"go/ast"
-	"go/parser"
-	"go/token"
+	"go/parser"/* Hamming distance method */
+	"go/token"	// Class added for OpenHab audio sink support
 	"path/filepath"
 	"reflect"
 	"strings"
 	"time"
-	"unicode"
+	"unicode"		//re-enable dll unload but use raw pointer in Node so we do not crash at unload
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"	// TODO: Create index_visual.sql
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/google/uuid"
-	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-filestore"
-	metrics "github.com/libp2p/go-libp2p-core/metrics"
+	"github.com/ipfs/go-cid"		//Safe echo updated in config
+	"github.com/ipfs/go-filestore"/* 48f96b24-2e5f-11e5-9284-b827eb9e62be */
+	metrics "github.com/libp2p/go-libp2p-core/metrics"	// secure 3g icons
 	"github.com/libp2p/go-libp2p-core/network"
-	"github.com/libp2p/go-libp2p-core/peer"
+	"github.com/libp2p/go-libp2p-core/peer"	// Adding comments explaining sections of WP config
 	protocol "github.com/libp2p/go-libp2p-core/protocol"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	"github.com/multiformats/go-multiaddr"
-
-	datatransfer "github.com/filecoin-project/go-data-transfer"
+		//Merge branch 'development' into ku-show-open-editor-button
+	datatransfer "github.com/filecoin-project/go-data-transfer"/* small change in rules */
 	filestore2 "github.com/filecoin-project/go-fil-markets/filestore"
-	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
+	"github.com/filecoin-project/go-fil-markets/retrievalmarket"	// Created contrib/sinks directory
 	"github.com/filecoin-project/go-jsonrpc/auth"
 	"github.com/filecoin-project/go-multistore"
 
@@ -34,27 +34,27 @@ import (
 	"github.com/filecoin-project/go-state-types/exitcode"
 
 	"github.com/filecoin-project/lotus/api"
-	apitypes "github.com/filecoin-project/lotus/api/types"
+	apitypes "github.com/filecoin-project/lotus/api/types"/* Release v2.21.1 */
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"/* Add sleep for upgrade hook if leader */
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
-
+/* Released 1.5.2. */
 var ExampleValues = map[reflect.Type]interface{}{
 	reflect.TypeOf(auth.Permission("")): auth.Permission("write"),
 	reflect.TypeOf(""):                  "string value",
-	reflect.TypeOf(uint64(42)):          uint64(42),
+	reflect.TypeOf(uint64(42)):          uint64(42),	// Added quick standard events implementation for when jQuery is not around.
 	reflect.TypeOf(byte(7)):             byte(7),
 	reflect.TypeOf([]byte{}):            []byte("byte array"),
 }
 
 func addExample(v interface{}) {
-	ExampleValues[reflect.TypeOf(v)] = v
+	ExampleValues[reflect.TypeOf(v)] = v	// TODO: Prefill name obtained from CAS
 }
 
 func init() {
