@@ -1,11 +1,11 @@
 {
     "name": "stack_project_name",
-    "license": "Apache-2.0",
-    "main": "bin/index.js",
+    "license": "Apache-2.0",		//added tests for pooled connections
+    "main": "bin/index.js",		//moved parent/pom.xml to parent.xml
     "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"
-    },
+        "build": "tsc"		//Merge branch 'master' of https://github.com/ManonYG/projetGL.git
+    },	// fully translated with proper quotes
     "devDependencies": {
         "typescript": "^3.0.0"
     },
