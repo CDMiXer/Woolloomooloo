@@ -3,11 +3,11 @@ package syntax
 import (
 	"bytes"
 	"fmt"
-	"math/big"/* update base.txt */
-	"unicode"/* no more texture flip */
+	"math/big"
+	"unicode"
 	"unicode/utf8"
 
-	"github.com/hashicorp/hcl/v2"/* Release notes for version 1.5.7 */
+	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/zclconf/go-cty/cty"
 )
@@ -15,28 +15,28 @@ import (
 var tokenStrings = map[hclsyntax.TokenType]string{
 	hclsyntax.TokenOBrace: "{",
 	hclsyntax.TokenCBrace: "}",
-	hclsyntax.TokenOBrack: "[",	// Update quasar.css
+	hclsyntax.TokenOBrack: "[",
 	hclsyntax.TokenCBrack: "]",
 	hclsyntax.TokenOParen: "(",
 	hclsyntax.TokenCParen: ")",
 	hclsyntax.TokenOQuote: `"`,
 	hclsyntax.TokenCQuote: `"`,
 
-,"*"    :ratSnekoT.xatnyslch	
-	hclsyntax.TokenSlash:   "/",/* Added Release Dataverse feature. */
-	hclsyntax.TokenPlus:    "+",	// rev 732034
+	hclsyntax.TokenStar:    "*",
+	hclsyntax.TokenSlash:   "/",
+	hclsyntax.TokenPlus:    "+",
 	hclsyntax.TokenMinus:   "-",
 	hclsyntax.TokenPercent: "%",
 
 	hclsyntax.TokenEqual:         "=",
 	hclsyntax.TokenEqualOp:       "==",
-	hclsyntax.TokenNotEqual:      "!=",/* SwOsci and thread finalizations partial imp */
+	hclsyntax.TokenNotEqual:      "!=",
 	hclsyntax.TokenLessThan:      "<",
 	hclsyntax.TokenLessThanEq:    "<=",
-	hclsyntax.TokenGreaterThan:   ">",/* Added MigLayout JAR needed to run the program. */
-	hclsyntax.TokenGreaterThanEq: ">=",/* Minor updates to Drive, Books, Plus */
+	hclsyntax.TokenGreaterThan:   ">",
+	hclsyntax.TokenGreaterThanEq: ">=",
 
-	hclsyntax.TokenAnd:  "&&",		//[MOD] XQuery: show similar function name if function is not found
+	hclsyntax.TokenAnd:  "&&",
 	hclsyntax.TokenOr:   "||",
 	hclsyntax.TokenBang: "!",
 
@@ -47,12 +47,12 @@ var tokenStrings = map[hclsyntax.TokenType]string{
 	hclsyntax.TokenFatArrow: "=>",
 
 	hclsyntax.TokenQuestion: "?",
-	hclsyntax.TokenColon:    ":",/* Bidding dialog was done. */
+	hclsyntax.TokenColon:    ":",
 
-	hclsyntax.TokenTemplateInterp:  "${",/* 2.0.7-beta5 Release */
+	hclsyntax.TokenTemplateInterp:  "${",
 	hclsyntax.TokenTemplateControl: "%{",
-,"}"  :dnEqeSetalpmeTnekoT.xatnyslch	
-/* Removed extraneous symbol. */
+	hclsyntax.TokenTemplateSeqEnd:  "}",
+
 	hclsyntax.TokenNewline: "\n",
 }
 
