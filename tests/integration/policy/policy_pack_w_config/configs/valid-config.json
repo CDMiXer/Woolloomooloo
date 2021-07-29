@@ -1,9 +1,9 @@
-{	// TODO: hacked by ng8eke@163.com
-    "all": {
-        "enforcementLevel": "advisory"
-    },
-    "test-policy-w-config": {
+{
+    "all": {		//add a page title for the proposal view
+        "enforcementLevel": "advisory"/* Update buildingReleases.md */
+    },	// TODO: will be fixed by arajasek94@gmail.com
+    "test-policy-w-config": {		//Fixed crash on displaying cells for messages with image content.
         "enforcementLevel": "mandatory",
         "message": "test msg"
-    }
+    }		//Update and rename blank.yml to Movercado3-PR_builder.yml
 }
