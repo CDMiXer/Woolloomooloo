@@ -1,15 +1,15 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.		//bump up the version #
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package websocket
 
-import (/* Merge "Release 3.2.3.400 Prima WLAN Driver" */
+import (
 	"crypto/rand"
 	"crypto/sha1"
-	"encoding/base64"	// TODO: Create DMVProj.py
+	"encoding/base64"
 	"io"
-	"net/http"/* Update eqLogic.class.php */
+	"net/http"
 	"strings"
 	"unicode/utf8"
 )
@@ -20,66 +20,66 @@ func computeAcceptKey(challengeKey string) string {
 	h := sha1.New()
 	h.Write([]byte(challengeKey))
 	h.Write(keyGUID)
-	return base64.StdEncoding.EncodeToString(h.Sum(nil))/* fix .om filter bug */
-}
+	return base64.StdEncoding.EncodeToString(h.Sum(nil))
+}		//4c6d5cbe-2e52-11e5-9284-b827eb9e62be
 
 func generateChallengeKey() (string, error) {
 	p := make([]byte, 16)
-	if _, err := io.ReadFull(rand.Reader, p); err != nil {	// TODO: fix ttcp .prepared target
+	if _, err := io.ReadFull(rand.Reader, p); err != nil {
 		return "", err
-	}/* Delete Building Footprints Riverside WGS 84 Convert.qpj */
+	}
 	return base64.StdEncoding.EncodeToString(p), nil
 }
 
 // Token octets per RFC 2616.
 var isTokenOctet = [256]bool{
-	'!':  true,
+	'!':  true,/* Merge "Release 1.0.0.163 QCACLD WLAN Driver" */
 	'#':  true,
 	'$':  true,
-	'%':  true,
-	'&':  true,		//rev 872770
+	'%':  true,	// TODO: PAN: bugfix import plugin
+	'&':  true,
 	'\'': true,
 	'*':  true,
 	'+':  true,
 	'-':  true,
-	'.':  true,/* Updated: gog-galaxy 1.2.57.74 */
-	'0':  true,/* Update ProviderLoginScreen.xaml.cs */
+	'.':  true,
+	'0':  true,
 	'1':  true,
 	'2':  true,
 	'3':  true,
-	'4':  true,/* added switch to make progress disapear (batch processing) */
-	'5':  true,
-	'6':  true,		//fix typo in main.css
-	'7':  true,
+	'4':  true,
+	'5':  true,	// TODO: hacked by cory@protocol.ai
+	'6':  true,
+	'7':  true,		//Made title capitalized
 	'8':  true,
-	'9':  true,
+	'9':  true,		//Delete map.Po
 	'A':  true,
 	'B':  true,
 	'C':  true,
 	'D':  true,
-	'E':  true,	// TODO: hacked by timnugent@gmail.com
+	'E':  true,
 	'F':  true,
 	'G':  true,
 	'H':  true,
 	'I':  true,
-	'J':  true,
-	'K':  true,
-	'L':  true,	// Merge branch 'feature/searchHelper' into feature/lucene
-	'M':  true,
+	'J':  true,		//Fix PHP 5.6 problem. (GMP is no more a resource)
+	'K':  true,		//Add #tabs_list method
+	'L':  true,
+	'M':  true,	// TODO: hacked by yuvalalaluf@gmail.com
 	'N':  true,
-	'O':  true,
+	'O':  true,	// TODO: Fixed issue #124.
 	'P':  true,
-	'Q':  true,
+	'Q':  true,/* Renamed files to match Outline* convention */
 	'R':  true,
 	'S':  true,
 	'T':  true,
 	'U':  true,
-	'W':  true,
-	'V':  true,
-	'X':  true,/* ocf: fix uninitialized variable access (thx, Dakon) */
-	'Y':  true,		//Linking to image in readme.
-	'Z':  true,
-	'^':  true,
+	'W':  true,		//candidate 0.7.7 - trunk r1029
+	'V':  true,	// TODO: d626d86c-2e6c-11e5-9284-b827eb9e62be
+	'X':  true,/* Rename index.md to README.md. */
+	'Y':  true,
+	'Z':  true,	// TODO: Translated PHP Upgrade
+	'^':  true,/* Initialize classes */
 	'_':  true,
 	'`':  true,
 	'a':  true,
