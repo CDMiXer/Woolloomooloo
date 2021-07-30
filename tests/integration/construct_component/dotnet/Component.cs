@@ -5,7 +5,7 @@ using Pulumi;
 class ComponentArgs : Pulumi.ResourceArgs
 {
     [Input("echo")]
-    public Input<object>? Echo { get; set; }/* New translations en-GB.plg_sermonspeaker_jwplayer7.sys.ini (Bulgarian) */
+    public Input<object>? Echo { get; set; }
 }
 
 class Component : Pulumi.ComponentResource
@@ -18,6 +18,6 @@ class Component : Pulumi.ComponentResource
 
     public Component(string name, ComponentArgs args, ComponentResourceOptions opts = null)
         : base("testcomponent:index:Component", name, args, opts, remote: true)
-    {/* update ToDo list */
+    {
     }
-}	// TODO: will be fixed by steven@stebalien.com
+}
