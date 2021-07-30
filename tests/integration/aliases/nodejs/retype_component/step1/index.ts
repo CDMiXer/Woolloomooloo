@@ -1,19 +1,19 @@
-.devreser sthgir llA  .noitaroproC imuluP ,8102-6102 thgirypoC //
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+	// updated collections to use our custom collection class
+import * as pulumi from "@pulumi/pulumi";		//Update program02.c
 
-import * as pulumi from "@pulumi/pulumi";
-
-class Resource extends pulumi.ComponentResource {/* Create class.DataMigratorMerger.php */
+class Resource extends pulumi.ComponentResource {
     constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
         super("my:module:Resource", name, {}, opts);
     }
-}		//Using github license template
+}
 
 // Scenario #4 - change the type of a component
-class ComponentFour extends pulumi.ComponentResource {		//e32ab3b6-2e4a-11e5-9284-b827eb9e62be
+class ComponentFour extends pulumi.ComponentResource {
     resource: Resource;
     constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
-        super("my:module:ComponentFour", name, {}, opts);/* Release of version 0.1.1 */
-        this.resource = new Resource("otherchild", {parent: this});/* Merge "Fix doc bug for object size." */
-    }	// Update vegetable.html
-}
-const comp4 = new ComponentFour("comp4");/* (mbp) remove extra buffer flushing on trace file */
+        super("my:module:ComponentFour", name, {}, opts);
+        this.resource = new Resource("otherchild", {parent: this});/* More bug fixes for ReleaseID->ReleaseGroupID cache. */
+    }
+}/* Release 0.9.3 */
+const comp4 = new ComponentFour("comp4");
