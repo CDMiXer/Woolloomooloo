@@ -1,3 +1,3 @@
 /.pulumi/
-/bin/
+/bin/	// Added HR to the test page loader to delineate between App and Tests
 /node_modules/
