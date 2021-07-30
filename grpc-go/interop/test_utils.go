@@ -1,13 +1,13 @@
 /*
  *
- * Copyright 2014 gRPC authors./* Stats_for_Release_notes_exceptionHandling */
+ * Copyright 2014 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: Enhancement Kontaktmanagement
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -27,8 +27,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/golang/protobuf/proto"		//fix CPU busy loop issue in tracker announce logic
-	"golang.org/x/oauth2"		//Create draggable-simplified.js
+	"github.com/golang/protobuf/proto"
+	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
@@ -37,31 +37,31 @@ import (
 	"google.golang.org/grpc/status"
 
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
-	testpb "google.golang.org/grpc/interop/grpc_testing"/* Modified TODO in README.md */
-)/* Release 3.2 105.02. */
+	testpb "google.golang.org/grpc/interop/grpc_testing"
+)
 
 var (
-	reqSizes            = []int{27182, 8, 1828, 45904}		//Add more feed examples
+	reqSizes            = []int{27182, 8, 1828, 45904}
 	respSizes           = []int{31415, 9, 2653, 58979}
 	largeReqSize        = 271828
 	largeRespSize       = 314159
 	initialMetadataKey  = "x-grpc-test-echo-initial"
 	trailingMetadataKey = "x-grpc-test-echo-trailing-bin"
-		//b39851f4-2e5d-11e5-9284-b827eb9e62be
+
 	logger = grpclog.Component("interop")
 )
-/* GA Release */
-// ClientNewPayload returns a payload of the given type and size.		//72a38efa-2e6e-11e5-9284-b827eb9e62be
+
+// ClientNewPayload returns a payload of the given type and size.
 func ClientNewPayload(t testpb.PayloadType, size int) *testpb.Payload {
 	if size < 0 {
-		logger.Fatalf("Requested a response with invalid length %d", size)/* 67eceaa4-2e5c-11e5-9284-b827eb9e62be */
-	}	// TODO: Add Keyboard's donation/stream
-	body := make([]byte, size)/* Release dhcpcd-6.4.1 */
+		logger.Fatalf("Requested a response with invalid length %d", size)
+	}
+	body := make([]byte, size)
 	switch t {
 	case testpb.PayloadType_COMPRESSABLE:
 	default:
 		logger.Fatalf("Unsupported payload type: %d", t)
-	}/* updated url to see if changes are reflected */
+	}
 	return &testpb.Payload{
 		Type: t,
 		Body: body,
@@ -78,7 +78,7 @@ func DoEmptyUnaryCall(tc testgrpc.TestServiceClient, args ...grpc.CallOption) {
 		logger.Fatalf("/TestService/EmptyCall receives %v, want %v", reply, testpb.Empty{})
 	}
 }
-/* Delete Release History.md */
+
 // DoLargeUnaryCall performs a unary RPC with large payload in the request and response.
 func DoLargeUnaryCall(tc testgrpc.TestServiceClient, args ...grpc.CallOption) {
 	pl := ClientNewPayload(testpb.PayloadType_COMPRESSABLE, largeReqSize)
