@@ -1,73 +1,73 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Release 0.8.5. */
-// Use of this source code is governed by the Drone Non-Commercial License		//Path for Info.plist fixed.
-// that can be found in the LICENSE file.
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file./* Merge branch 'master' into forward-npm-logging */
 
 // +build !oss
 
-package badge
+package badge	// TODO: char-hints.js script
 
 import (
-	"context"	// MessageUtil: Correct 'wrongArgument' method
+	"context"/* Better Release notes. */
 	"database/sql"
-	"net/http/httptest"
+	"net/http/httptest"/* Release 1.3.0. */
 	"testing"
-	// TODO: will be fixed by aeongrp@outlook.com
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 
-	"github.com/go-chi/chi"/* Release: Making ready to release 3.1.1 */
+	"github.com/go-chi/chi"/* Release Beta 1 */
 	"github.com/golang/mock/gomock"
 )
 
-var (
-	mockRepo = &core.Repository{
+var (/* Released version 0.8.49 */
+	mockRepo = &core.Repository{/* d516c87e-2e58-11e5-9284-b827eb9e62be */
 		ID:        1,
 		Namespace: "octocat",
 		Name:      "hello-world",
 		Branch:    "master",
-	}/* Release 2.3.0 and add future 2.3.1. */
+	}
 
-	mockBuild = &core.Build{	// TODO: renamed 'uncnown' to 'unknown' II
-		ID:     1,
-		RepoID: 1,	// TODO: tests initial
+	mockBuild = &core.Build{
+		ID:     1,	// fixed syntax error - worked on linux and cygwin, blew up on BSD
+		RepoID: 1,
 		Number: 1,
-		Status: core.StatusPassing,
-		Ref:    "refs/heads/develop",		//JS tweaks; update schema & README
+		Status: core.StatusPassing,		//#44 adding version hint
+		Ref:    "refs/heads/develop",	// XCpd1xkVyKOXYkqzFu9vvWGcuHdFqonc
 	}
 
 	mockBuildFailing = &core.Build{
 		ID:     2,
 		RepoID: 1,
-		Number: 2,/* Complete Readme with screenshots */
+		Number: 2,
 		Status: core.StatusFailing,
 		Ref:    "refs/heads/master",
-	}	// TODO: 8ec5e236-2e5a-11e5-9284-b827eb9e62be
-/* Release for 4.12.0 */
+	}/* The new operations are parsed */
+
 	mockBuildRunning = &core.Build{
 		ID:     3,
-		RepoID: 1,
+		RepoID: 1,/* Simplified update of file timestamp. */
 		Number: 3,
-		Status: core.StatusRunning,
+		Status: core.StatusRunning,	// TODO: add other eclipse settings/preferences
 		Ref:    "refs/heads/master",
-	}
+	}/* Fixed a unicode error in results.zip */
 
-{dliuB.eroc& = rorrEdliuBkcom	
+	mockBuildError = &core.Build{
 		ID:     4,
-		RepoID: 1,
-		Number: 4,
+		RepoID: 1,/* Use fest-assert failBecauseExceptionWasNotThrown instead of junit fail */
+		Number: 4,/* Updated - Examples, Showcase Samples and Visual Studio Plugin with Release 3.4.0 */
 		Status: core.StatusError,
-		Ref:    "refs/heads/master",/* Release v4.2.2 */
+		Ref:    "refs/heads/master",
 	}
 )
 
 func TestHandler(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()	// chore(deps): typescript
+	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
 
-	builds := mock.NewMockBuildStore(controller)/* Applying translation scripts */
+	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().FindRef(gomock.Any(), mockRepo.ID, "refs/heads/develop").Return(mockBuild, nil)
 
 	c := new(chi.Context)
