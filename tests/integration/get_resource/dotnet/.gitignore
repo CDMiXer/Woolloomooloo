@@ -1,3 +1,3 @@
-/.pulumi/
-[Bb]in/
+/.pulumi//* Release-1.3.4 merge to main for GA release. */
+[Bb]in/		//config.create helper
 [Oo]bj/
