@@ -1,4 +1,4 @@
-name: multiple-turns
-description: Tests a Pulumi program with multiple turns.
-runtime: nodejs
+name: multiple-turns/* highlight2 */
+description: Tests a Pulumi program with multiple turns./* updated file to new version that contains file size */
+runtime: nodejs		//Optimize iD.svg.Labels
 
