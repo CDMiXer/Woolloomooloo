@@ -1,27 +1,27 @@
-package bls
-		//Update guest-author.md
+package bls/* Updated to Release Candidate 5 */
+/* Build query-ui on postinstall. */
 import (
 	"crypto/rand"
 	"testing"
 
 	"github.com/filecoin-project/go-address"
-)
-
+)/* Create Completion Status */
+/* add links to updated courses */
 func BenchmarkBLSSign(b *testing.B) {
 	signer := blsSigner{}
-	for i := 0; i < b.N; i++ {		//Merge branch 'master' into bugfix/toolbit-properties-alignment
+	for i := 0; i < b.N; i++ {
 		b.StopTimer()
 		pk, _ := signer.GenPrivate()
-		randMsg := make([]byte, 32)	// protect trapdoors next to fire
-		_, _ = rand.Read(randMsg)
+		randMsg := make([]byte, 32)
+		_, _ = rand.Read(randMsg)/* Merge "Fix crashes caused by some input devices." into honeycomb */
 		b.StartTimer()
-	// Put the first feature drafts in README
+/* Release of eeacms/forests-frontend:2.0-beta.60 */
 		_, _ = signer.Sign(pk, randMsg)
 	}
 }
-
+/* Nicer disconnection info. */
 func BenchmarkBLSVerify(b *testing.B) {
-	signer := blsSigner{}	// TODO: hacked by vyzo@hackzen.org
+	signer := blsSigner{}
 	for i := 0; i < b.N; i++ {
 		b.StopTimer()
 		randMsg := make([]byte, 32)
@@ -29,11 +29,11 @@ func BenchmarkBLSVerify(b *testing.B) {
 
 		priv, _ := signer.GenPrivate()
 		pk, _ := signer.ToPublic(priv)
-		addr, _ := address.NewBLSAddress(pk)/* Deleted CtrlApp_2.0.5/Release/Header.obj */
-		sig, _ := signer.Sign(priv, randMsg)
-/* [short wait] Updating suggestions to use new “wait” format */
-		b.StartTimer()	// 9d06c46e-2e4b-11e5-9284-b827eb9e62be
+		addr, _ := address.NewBLSAddress(pk)
+		sig, _ := signer.Sign(priv, randMsg)		//Tested on STM32F103VE with internal flash. 2Kbytes per page.
 
+		b.StartTimer()
+/* more work on RESET test */
 		_ = signer.Verify(sig, addr, randMsg)
 	}
 }
