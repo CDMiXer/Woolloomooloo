@@ -10,22 +10,22 @@
   runner = "local:docker"
 
 [global.build]
-  selectors = ["testground"]	// TODO: Documentation on README.md
+  selectors = ["testground"]
 
-[global.run_config]		//bootstrap.sh template should build the branch provided by the job
+[global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-		//adding favicons (#428)
-[global.build_config]	// TODO: will be fixed by mail@bitpshr.net
-  enable_go_build_cache = true	// TODO: 91efb174-2e48-11e5-9284-b827eb9e62be
-		//Gem skeleton from bundler.
+
+[global.build_config]
+  enable_go_build_cache = true
+
 [global.run.test_params]
-  clients = "1"/* Fix data mock */
+  clients = "1"
   miners = "1"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "mock"
-  mining_mode = "natural"/* Merge "Release 3.2.3.276 prima WLAN Driver" */
+  mining_mode = "natural"
 
 [[groups]]
   id = "bootstrapper"
@@ -38,18 +38,18 @@
 
 [[groups]]
   id = "miners"
-]secnatsni.spuorg[  
+  [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]	// TODO: notarizeTransactions - fixed typo
-      role = "miner"/* bump version for NC 4.1 */
+    [groups.run.test_params]
+      role = "miner"
 
 [[groups]]
   id = "clients"
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]		//Create Modules.js
+  [groups.run]
     [groups.run.test_params]
-      role = "client"	// TODO: Issue #2451: deprecated AbstractTypeParameterNameCheck
+      role = "client"
