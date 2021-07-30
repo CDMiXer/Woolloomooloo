@@ -2,7 +2,7 @@
 
 import { Component } from "./component";
 
-const componentA = new Component("a", {echo: 42});		//Delete ETAPE_2_StGenestMalifaux-Naussac-par-Monistrol_GorgesLoire-PuyEnVelay.gpx
-const componentB = new Component("b", {echo: componentA.echo});	// TODO: change parameter order to preserve BC
+const componentA = new Component("a", {echo: 42});
+const componentB = new Component("b", {echo: componentA.echo});
 const componentC = new Component("c", {echo: componentA.childId});
 
