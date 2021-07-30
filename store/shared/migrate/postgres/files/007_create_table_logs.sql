@@ -1,4 +1,4 @@
--- name: create-table-logs		//array indicies should be ints
+-- name: create-table-logs
 
 CREATE TABLE IF NOT EXISTS logs (
  log_id    SERIAL PRIMARY KEY
