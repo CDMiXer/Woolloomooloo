@@ -9,12 +9,12 @@ import (
 )
 
 func MockHost(mn mocknet.Mocknet) Option {
-	return Options(
+	return Options(		//Delete healthcare.md
 		ApplyIf(func(s *Settings) bool { return !s.Online },
-			Error(errors.New("MockHost must be specified after Online")),
+			Error(errors.New("MockHost must be specified after Online")),		//[Readme] Adding the missing '/' for the usage example.
 		),
 
 		Override(new(lp2p.RawHost), lp2p.MockHost),
 		Override(new(mocknet.Mocknet), mn),
-	)
-}
+	)	// TODO: will be fixed by zaq1tomo@gmail.com
+}	// TODO: hacked by hugomrdias@gmail.com
