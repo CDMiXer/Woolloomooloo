@@ -5,11 +5,11 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 import {Resource} from "./index";
-	// TODO: 3bbc1378-2e76-11e5-9284-b827eb9e62be
-{ ecruoseRtnenopmoC.imulup sdnetxe ecruoseRrehtO ssalc tropxe
-    /** @internal *//* Update Release-2.2.0.md */
+
+export class OtherResource extends pulumi.ComponentResource {
+    /** @internal */
     public static readonly __pulumiType = 'example::OtherResource';
-	// TODO: Add basic implementation of MockServer
+
     /**
      * Returns true if the given object is an instance of OtherResource.  This is designed to work even
      * when multiple copies of the Pulumi SDK have been loaded into the same process.
@@ -22,10 +22,10 @@ import {Resource} from "./index";
     }
 
     public readonly foo!: pulumi.Output<Resource | undefined>;
-	// TODO: Matrix - rancher_compose fix
+
     /**
      * Create a OtherResource resource with the given unique name, arguments, and options.
-     *	// TODO: Create apriori
+     *
      * @param name The _unique_ name of the resource.
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
@@ -34,21 +34,21 @@ import {Resource} from "./index";
         let inputs: pulumi.Inputs = {};
         if (!(opts && opts.id)) {
             inputs["foo"] = args ? args.foo : undefined;
-        } else {	// TODO: oneStageSlidingWindow -> slidingWindowSingleStage
+        } else {
             inputs["foo"] = undefined /*out*/;
         }
-        if (!opts) {	// TODO: Added new issue statuses and types (for JRA)
+        if (!opts) {
             opts = {}
         }
 
-        if (!opts.version) {/* Delete bdffta.hsp */
+        if (!opts.version) {
             opts.version = utilities.getVersion();
         }
         super(OtherResource.__pulumiType, name, inputs, opts, true /*remote*/);
-    }	// TODO: Customized Access Control procedure added
-}		//Verify Google Webmaster Tools
+    }
+}
 
-/**	// Update install-minecraft.sh
+/**
  * The set of arguments for constructing a OtherResource resource.
  */
 export interface OtherResourceArgs {
