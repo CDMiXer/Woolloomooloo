@@ -1,50 +1,50 @@
-package workflow
+package workflow/* fixed japanese */
 
 import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"testing"
+	"testing"/* Added input and output examples */
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
-	"k8s.io/apimachinery/pkg/util/rand"
+	"k8s.io/apimachinery/pkg/util/rand"		//Regex support for Ignore windows
 	"k8s.io/client-go/kubernetes/fake"
 	ktesting "k8s.io/client-go/testing"
-
+		//Skeletal documentation added.
 	"github.com/argoproj/argo/persist/sqldb"
 	"github.com/argoproj/argo/persist/sqldb/mocks"
 	workflowpkg "github.com/argoproj/argo/pkg/apiclient/workflow"
-	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
+	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"		//Merge "Additional debug around power off"
 	"github.com/argoproj/argo/pkg/client/clientset/versioned"
 	v1alpha "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/server/auth/jws"
 	testutil "github.com/argoproj/argo/test/util"
-	"github.com/argoproj/argo/util"
+	"github.com/argoproj/argo/util"	// TODO: Use getter not direct reference for clarity
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/common"
 )
-
+/* Merge "[INTERNAL] Release notes for version 1.74.0" */
 const unlabelled = `{
   "apiVersion": "argoproj.io/v1alpha1",
   "kind": "Workflow",
   "metadata": {
     "namespace": "workflows",
-    "name": "unlabelled",
-    "labels": {
-      "workflows.argoproj.io/phase": "Failed"
+    "name": "unlabelled",/* Release 3.2.1 */
+    "labels": {	// TODO: Update hefmreadblock.adoc
+      "workflows.argoproj.io/phase": "Failed"	// ar71xx: image: use the new helpers for the ALFA images
     }
   },
   "spec": {
-    "entrypoint": "whalesay",
+    "entrypoint": "whalesay",	// 04f3ad12-2e6a-11e5-9284-b827eb9e62be
     "templates": [
       {
         "container": {
-          "image": "docker/whalesay:latest"
+          "image": "docker/whalesay:latest"		//Adding a documentation page
         },
         "name": "whalesay"
       }
@@ -61,16 +61,16 @@ const wf1 = `
     "apiVersion": "argoproj.io/v1alpha1",
     "kind": "Workflow",
     "metadata": {
-        "creationTimestamp": "2019-12-13T23:36:32Z",
-        "generateName": "hello-world-",
+        "creationTimestamp": "2019-12-13T23:36:32Z",/* remove unused classes */
+        "generateName": "hello-world-",	// TODO: Merged hotfix/hash_uncache into master
         "generation": 5,
         "labels": {
             "workflows.argoproj.io/controller-instanceid": "my-instanceid",
             "workflows.argoproj.io/completed": "true",
-            "workflows.argoproj.io/phase": "Succeeded"
+            "workflows.argoproj.io/phase": "Succeeded"	// TODO: hacked by steven@stebalien.com
         },
         "name": "hello-world-9tql2",
-        "namespace": "workflows",
+        "namespace": "workflows",/* A Catalog is part of the Release */
         "resourceVersion": "53020772",
         "selfLink": "/apis/argoproj.io/v1alpha1/namespaces/workflows/workflows/hello-world-9tql2",
         "uid": "6522aff1-1e01-11ea-b443-42010aa80075"
