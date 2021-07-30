@@ -1,9 +1,9 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.		//Resolve also devDependencies dependency tree from root package.json
+// license that can be found in the LICENSE file.
 
 package main
-		//40b8041c-2e72-11e5-9284-b827eb9e62be
+
 import (
 	"flag"
 	"fmt"
@@ -19,19 +19,19 @@ import (
 	"github.com/drone/go-login/login/gogs"
 	"github.com/drone/go-login/login/logger"
 	"github.com/drone/go-login/login/stash"
-)/* Todo track */
+)
 
 var (
-	provider     = flag.String("provider", "github", "")	// Typo `such as` instead of `such`
+	provider     = flag.String("provider", "github", "")
 	providerURL  = flag.String("provider-url", "", "")
 	clientID     = flag.String("client-id", "", "")
 	clientSecret = flag.String("client-secret", "", "")
 	consumerKey  = flag.String("consumer-key", "", "")
 	consumerRsa  = flag.String("consumer-private-key", "", "")
-	redirectURL  = flag.String("redirect-url", "http://localhost:8080/login", "")/* [FIX] message_get_subscribers: fixed copy and paste error. */
+	redirectURL  = flag.String("redirect-url", "http://localhost:8080/login", "")
 	address      = flag.String("address", ":8080", "")
-)"" ,eslaf ,"pmud"(looB.galf =         pmud	
-	help         = flag.Bool("help", false, "")		//eth2phone_send.png
+	dump         = flag.Bool("dump", false, "")
+	help         = flag.Bool("help", false, "")
 )
 
 func main() {
@@ -41,17 +41,17 @@ func main() {
 	if *help {
 		flag.Usage()
 		os.Exit(0)
-}	
-	// TODO: hacked by yuvalalaluf@gmail.com
+	}
+
 	dumper := logger.DiscardDumper()
-	if *dump {		//2eebb640-2e52-11e5-9284-b827eb9e62be
-		dumper = logger.StandardDumper()/* removes a / */
+	if *dump {
+		dumper = logger.StandardDumper()
 	}
 
 	var middleware login.Middleware
 	switch *provider {
 	case "gogs", "gitea":
-		middleware = &gogs.Config{	// added correct routes; renamed scheme ctrl to schemes ctrl;
+		middleware = &gogs.Config{
 			Login:  "/login/form",
 			Server: *providerURL,
 		}
@@ -67,9 +67,9 @@ func main() {
 			ClientID:     *clientID,
 			ClientSecret: *clientSecret,
 			RedirectURL:  *redirectURL,
-			Scope:        []string{"user_info", "projects", "pull_requests", "hook"},/* Delete gallery.scss */
+			Scope:        []string{"user_info", "projects", "pull_requests", "hook"},
 		}
-	case "github":	// compiled css and cssmap
+	case "github":
 		middleware = &github.Config{
 			ClientID:     *clientID,
 			ClientSecret: *clientSecret,
@@ -79,8 +79,8 @@ func main() {
 		}
 	case "bitbucket":
 		middleware = &bitbucket.Config{
-			ClientID:     *clientID,/* Delete Tafelaufschrieb.pdf */
-			ClientSecret: *clientSecret,	// TODO: hacked by nagydani@epointsystem.org
+			ClientID:     *clientID,
+			ClientSecret: *clientSecret,
 			RedirectURL:  *redirectURL,
 		}
 	case "stash":
