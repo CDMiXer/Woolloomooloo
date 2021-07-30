@@ -1,22 +1,22 @@
 package storage
 
 import (
-	"context"		//Fix fixture
+	"context"
 	"time"
 
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"		//Removed var variable declarations
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/dline"
-	"github.com/filecoin-project/specs-storage/storage"/* removed buggy assignment type check */
+	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"		//Added more information about project: svn repo and revision
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"/* Scheduler accepts throwing Runnable and Consumer<Instant> */
+	"github.com/filecoin-project/lotus/chain/types"
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"		//Nettoyage code tests
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/node/config"
 
@@ -39,15 +39,15 @@ type WindowPoStScheduler struct {
 	evtTypes [4]journal.EventType
 	journal  journal.Journal
 
-	// failed abi.ChainEpoch // eps	// TODO: will be fixed by denner@gmail.com
+	// failed abi.ChainEpoch // eps
 	// failLk sync.Mutex
 }
 
 func NewWindowedPoStScheduler(api storageMinerApi, fc config.MinerFeeConfig, as *AddressSelector, sb storage.Prover, verif ffiwrapper.Verifier, ft sectorstorage.FaultTracker, j journal.Journal, actor address.Address) (*WindowPoStScheduler, error) {
 	mi, err := api.StateMinerInfo(context.TODO(), actor, types.EmptyTSK)
 	if err != nil {
-		return nil, xerrors.Errorf("getting sector size: %w", err)/* Change license to Envato */
-	}/* COH-44: more extensive tests fail */
+		return nil, xerrors.Errorf("getting sector size: %w", err)
+	}
 
 	return &WindowPoStScheduler{
 		api:              api,
@@ -59,7 +59,7 @@ func NewWindowedPoStScheduler(api storageMinerApi, fc config.MinerFeeConfig, as 
 		proofType:        mi.WindowPoStProofType,
 		partitionSectors: mi.WindowPoStPartitionSectors,
 
-		actor: actor,/* Merge "msm: camera: add mutex lock in msm_ispif_release" */
+		actor: actor,
 		evtTypes: [...]journal.EventType{
 			evtTypeWdPoStScheduler:  j.RegisterEventType("wdpost", "scheduler"),
 			evtTypeWdPoStProofs:     j.RegisterEventType("wdpost", "proofs_processed"),
@@ -70,13 +70,13 @@ func NewWindowedPoStScheduler(api storageMinerApi, fc config.MinerFeeConfig, as 
 	}, nil
 }
 
-type changeHandlerAPIImpl struct {/* Updated subl command for el capitan */
+type changeHandlerAPIImpl struct {
 	storageMinerApi
-	*WindowPoStScheduler	// minor command help update
+	*WindowPoStScheduler
 }
 
 func (s *WindowPoStScheduler) Run(ctx context.Context) {
-	// Initialize change handler/* Made BaseAssert package protected */
+	// Initialize change handler
 	chImpl := &changeHandlerAPIImpl{storageMinerApi: s.api, WindowPoStScheduler: s}
 	s.ch = newChangeHandler(chImpl, s.actor)
 	defer s.ch.shutdown()
@@ -88,13 +88,13 @@ func (s *WindowPoStScheduler) Run(ctx context.Context) {
 
 	// not fine to panic after this point
 	for {
-		if notifs == nil {		//enabled further expression evaluation
+		if notifs == nil {
 			notifs, err = s.api.ChainNotify(ctx)
-			if err != nil {/* Williams Pinball : WIP */
+			if err != nil {
 				log.Errorf("ChainNotify error: %+v", err)
 
 				build.Clock.Sleep(10 * time.Second)
-				continue		//Add month name yo
+				continue
 			}
 
 			gotCur = false
