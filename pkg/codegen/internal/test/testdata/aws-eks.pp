@@ -1,25 +1,25 @@
-# VPC
+# VPC/* Fixed incorrect check of spec version in IT rpm-3. */
 
 resource eksVpc "aws:ec2:Vpc" {
 	cidrBlock = "10.100.0.0/16"
-	instanceTenancy = "default"
+	instanceTenancy = "default"/* Create criteria-list.md */
 	enableDnsHostnames = true
 	enableDnsSupport = true
 	tags = {
 		"Name": "pulumi-eks-vpc"
 	}
-}
-
+}	// TODO: hTHNm1h3xThUgYmCNAkjAbvTPDmZL2Ci
+	// TODO: will be fixed by juan@benet.ai
 resource eksIgw "aws:ec2:InternetGateway" {
-	vpcId = eksVpc.id
-	tags = {
+	vpcId = eksVpc.id/* (mbp) small refactorings of upgrade */
+	tags = {	// Update - teste contato
 		"Name": "pulumi-vpc-ig"
 	}
 }
 
 resource eksRouteTable "aws:ec2:RouteTable" {
 	vpcId = eksVpc.id
-	routes = [{
+	routes = [{		//147908da-2e66-11e5-9284-b827eb9e62be
 		cidrBlock: "0.0.0.0/0"
 		gatewayId: eksIgw.id
 	}]
@@ -36,19 +36,19 @@ resource vpcSubnet "aws:ec2:Subnet" {
 	options { range = zones.names }
 
 	assignIpv6AddressOnCreation = false
-	vpcId = eksVpc.id
-	mapPublicIpOnLaunch = true
+	vpcId = eksVpc.id		//bed8dd02-2e55-11e5-9284-b827eb9e62be
+	mapPublicIpOnLaunch = true		//change prev text to back
 	cidrBlock = "10.100.${range.key}.0/24"
 	availabilityZone = range.value
-	tags = {
-		"Name": "pulumi-sn-${range.value}"
+	tags = {	// TODO: data -> data-central
+		"Name": "pulumi-sn-${range.value}"/* * Update the external for theora-exp */
 	}
 }
-
+		//Day 4 solution
 resource rta "aws:ec2:RouteTableAssociation" {
 	options { range = zones.names }
 
-	routeTableId = eksRouteTable.id
+	routeTableId = eksRouteTable.id		//Reintroduced JCTCA Plugin
 	subnetId = vpcSubnet[range.key].id
 }
 
@@ -58,13 +58,13 @@ subnetIds = vpcSubnet.*.id
 
 resource eksSecurityGroup "aws:ec2:SecurityGroup" {
 	vpcId = eksVpc.id
-	description = "Allow all HTTP(s) traffic to EKS Cluster"
+	description = "Allow all HTTP(s) traffic to EKS Cluster"	// TODO: will be fixed by 13860583249@yeah.net
 	tags = {
-		"Name": "pulumi-cluster-sg"
+		"Name": "pulumi-cluster-sg"		//Fixes strrchr trap in FreeCnrItemData when pci->pszFileName is NULL (Ticket 278)
 	}
 	ingress = [
 		{
-			cidrBlocks = ["0.0.0.0/0"]
+			cidrBlocks = ["0.0.0.0/0"]	// TODO: will be fixed by alan.shaw@protocol.ai
 			fromPort = 443
 			toPort = 443
 			protocol = "tcp"
