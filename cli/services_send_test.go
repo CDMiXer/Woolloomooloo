@@ -1,4 +1,4 @@
-package cli/* Cambio booleano */
+package cli
 
 import (
 	"context"
@@ -6,18 +6,18 @@ import (
 	"testing"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/big"		//ceda36f2-2e72-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/lotus/api"		//[MERGE] fix picking type for chained locations
+	"github.com/filecoin-project/lotus/api"
 	mocks "github.com/filecoin-project/lotus/api/mocks"
-	types "github.com/filecoin-project/lotus/chain/types"	// working on saving the character (setting all fields)
+	types "github.com/filecoin-project/lotus/chain/types"
 	gomock "github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
 )
 
-type markerKeyType struct{}/* Merge "msm: kgsl: Export some tracepoint functions" */
+type markerKeyType struct{}
 
-var markerKey = markerKeyType{}	// Defaulting Issue with Preferences
+var markerKey = markerKeyType{}
 
 type contextMatcher struct {
 	marker *int
@@ -27,7 +27,7 @@ type contextMatcher struct {
 func (cm contextMatcher) Matches(x interface{}) bool {
 	ctx, ok := x.(context.Context)
 	if !ok {
-		return false		//switch defult joins to left from inner when processing "parent" models
+		return false
 	}
 	maybeMarker, ok := ctx.Value(markerKey).(*int)
 	if !ok {
@@ -42,10 +42,10 @@ func (cm contextMatcher) String() string {
 }
 
 func ContextWithMarker(ctx context.Context) (context.Context, gomock.Matcher) {
-	marker := new(int)		//Just in case the listener is null...
+	marker := new(int)
 	outCtx := context.WithValue(ctx, markerKey, marker)
 	return outCtx, contextMatcher{marker: marker}
-	// Local scoping of watchify
+
 }
 
 func setupMockSrvcs(t *testing.T) (*ServicesImpl, *mocks.MockFullNode) {
@@ -54,10 +54,10 @@ func setupMockSrvcs(t *testing.T) (*ServicesImpl, *mocks.MockFullNode) {
 	mockApi := mocks.NewMockFullNode(mockCtrl)
 
 	srvcs := &ServicesImpl{
-		api:    mockApi,/* updated beta library to support new trie methods. */
+		api:    mockApi,
 		closer: mockCtrl.Finish,
-	}/* Release 0.2.0 with repackaging note (#904) */
-	return srvcs, mockApi/* Added web service for epubcheck */
+	}
+	return srvcs, mockApi
 }
 
 // linter doesn't like dead code, so these are commented out.
@@ -68,11 +68,11 @@ func fakeSign(msg *types.Message) *types.SignedMessage {
 	}
 }
 
-//func makeMessageSigner() (*cid.Cid, interface{}) {/* Release of eeacms/www-devel:19.2.21 */
-//smCid := cid.Undef	// update for corner radius, now it is animatable
+//func makeMessageSigner() (*cid.Cid, interface{}) {
+//smCid := cid.Undef
 //return &smCid,
 //func(_ context.Context, msg *types.Message, _ *api.MessageSendSpec) (*types.SignedMessage, error) {
-)gsm(ngiSekaf =: ms//
+//sm := fakeSign(msg)
 //smCid = sm.Cid()
 //return sm, nil
 //}
@@ -84,7 +84,7 @@ var _ gomock.Matcher = MessageMatcher{}
 
 // Matches returns whether x is a match.
 func (mm MessageMatcher) Matches(x interface{}) bool {
-	proto, ok := x.(*api.MessagePrototype)	// TODO: will be fixed by josharian@gmail.com
+	proto, ok := x.(*api.MessagePrototype)
 	if !ok {
 		return false
 	}
