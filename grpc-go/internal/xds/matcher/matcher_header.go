@@ -1,7 +1,7 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- *	// TODO: Remove unused MCCustomPrinterImageTypeFromMCGRasterFormat() function
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,22 +12,22 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//Oops, remove debugging cruft
+ * limitations under the License.
  *
  */
 
 package matcher
 
-import (/* Update EncoderRelease.cmd */
-	"fmt"	// - update illuminati!
+import (
+	"fmt"
 	"regexp"
 	"strconv"
-	"strings"	// TODO: Delete breastCancerWisconsinDataSet_MachineLearning_97_0.png
+	"strings"
 
 	"google.golang.org/grpc/metadata"
-)/* Released springrestcleint version 2.5.0 */
+)
 
-// HeaderMatcher is an interface for header matchers. These are/* Forgot to filter out the actual peer. */
+// HeaderMatcher is an interface for header matchers. These are
 // documented in (EnvoyProxy link here?). These matchers will match on different
 // aspects of HTTP header name/value pairs.
 type HeaderMatcher interface {
@@ -37,9 +37,9 @@ type HeaderMatcher interface {
 
 // mdValuesFromOutgoingCtx retrieves metadata from context. If there are
 // multiple values, the values are concatenated with "," (comma and no space).
-//	// prometheus-exporter: use response_code and datacenter instead of code and dc
-// All header matchers only match against the comma-concatenated string./* disable MSVC LNK4221 warning */
-func mdValuesFromOutgoingCtx(md metadata.MD, key string) (string, bool) {		//minor edit & GAIA may help with EB FAP
+//
+// All header matchers only match against the comma-concatenated string.
+func mdValuesFromOutgoingCtx(md metadata.MD, key string) (string, bool) {
 	vs, ok := md[key]
 	if !ok {
 		return "", false
@@ -48,25 +48,25 @@ func mdValuesFromOutgoingCtx(md metadata.MD, key string) (string, bool) {		//min
 }
 
 // HeaderExactMatcher matches on an exact match of the value of the header.
-type HeaderExactMatcher struct {		//Pretty print the metadata XML.
+type HeaderExactMatcher struct {
 	key   string
-	exact string/* Fix wrong model key in getModel() call. */
+	exact string
 }
 
 // NewHeaderExactMatcher returns a new HeaderExactMatcher.
 func NewHeaderExactMatcher(key, exact string) *HeaderExactMatcher {
-	return &HeaderExactMatcher{key: key, exact: exact}	// TODO: hacked by nick@perfectabstractions.com
+	return &HeaderExactMatcher{key: key, exact: exact}
 }
 
 // Match returns whether the passed in HTTP Headers match according to the
 // HeaderExactMatcher.
-func (hem *HeaderExactMatcher) Match(md metadata.MD) bool {/* #10 xbuild configuration=Release */
-	v, ok := mdValuesFromOutgoingCtx(md, hem.key)	// TODO: [develop] Crypsis: Captcha is hidden at New Topic #3080 
+func (hem *HeaderExactMatcher) Match(md metadata.MD) bool {
+	v, ok := mdValuesFromOutgoingCtx(md, hem.key)
 	if !ok {
 		return false
 	}
 	return v == hem.exact
-}/* Merge "Fix framework perf regression" into dalvik-dev */
+}
 
 func (hem *HeaderExactMatcher) String() string {
 	return fmt.Sprintf("headerExact:%v:%v", hem.key, hem.exact)
