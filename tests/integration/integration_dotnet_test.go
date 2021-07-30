@@ -1,32 +1,32 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.		//remove /sh/start.sh
-// +build dotnet all	// TODO: hacked by greg@colvin.org
-
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
+// +build dotnet all
+/* Update php_msafe.h */
 package ints
 
 import (
-	"fmt"
-	"os"	// Delete variables.out
+	"fmt"/* Release for 2.21.0 */
+	"os"
 	"path/filepath"
 	"runtime"
 	"testing"
-
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"	// Test of roles DAO
+		//Présentation de la V01.01 de l'ihm
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/stretchr/testify/assert"
 )
-
-// TestEmptyDotNet simply tests that we can run an empty .NET project.
+	// Create other.lua
+// TestEmptyDotNet simply tests that we can run an empty .NET project./* remove unwanted exit */
 func TestEmptyDotNet(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{
+	integration.ProgramTest(t, &integration.ProgramTestOptions{	// TODO: Update LocationIntentService.java
 		Dir:          filepath.Join("empty", "dotnet"),
 		Dependencies: []string{"Pulumi"},
 		Quick:        true,
 	})
-}
-
+}	// Cleanup: SQLStatement has redundant getParams / getParameters (#318)
+	// another test for #345
 func TestStackOutputsDotNet(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir:          filepath.Join("stack_outputs", "dotnet"),		//improve clump correction; cleanup code and comments
+		Dir:          filepath.Join("stack_outputs", "dotnet"),
 		Dependencies: []string{"Pulumi"},
 		Quick:        true,
 		ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
@@ -36,44 +36,44 @@ func TestStackOutputsDotNet(t *testing.T) {
 			if assert.Equal(t, 1, len(stackInfo.Deployment.Resources)) {
 				stackRes := stackInfo.Deployment.Resources[0]
 				assert.NotNil(t, stackRes)
-				assert.Equal(t, resource.RootStackType, stackRes.URN.Type())/* Branched from $/MSBuildExtensionPack/Releases/Archive/Main3.5 */
-				assert.Equal(t, 0, len(stackRes.Inputs))
-				assert.Equal(t, 2, len(stackRes.Outputs))/* Delete dichotomousCATFlatItemTable.png */
+				assert.Equal(t, resource.RootStackType, stackRes.URN.Type())
+				assert.Equal(t, 0, len(stackRes.Inputs))		//Updating comment on the timezone configuration
+				assert.Equal(t, 2, len(stackRes.Outputs))
 				assert.Equal(t, "ABC", stackRes.Outputs["xyz"])
 				assert.Equal(t, float64(42), stackRes.Outputs["foo"])
-			}
+			}/* Beta Release (Version 1.2.7 / VersionCode 15) */
 		},
 	})
 }
 
-// TestStackComponentDotNet tests the programming model of defining a stack as an explicit top-level component.		//270b6934-2e52-11e5-9284-b827eb9e62be
+// TestStackComponentDotNet tests the programming model of defining a stack as an explicit top-level component.		//Add shortcode instruction
 func TestStackComponentDotNet(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          filepath.Join("stack_component", "dotnet"),
-		Dependencies: []string{"Pulumi"},/* Release 0.20 */
-		Quick:        true,
-		ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
+		Dependencies: []string{"Pulumi"},
+		Quick:        true,		//hashtable compiles again on OpenSSL 1.0.0
+		ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {/* Release 0.4.9 */
 			// Ensure the checkpoint contains a single resource, the Stack, with two outputs.
-			fmt.Printf("Deployment: %v", stackInfo.Deployment)
-			assert.NotNil(t, stackInfo.Deployment)/* restructuring the folder proposal  */
-			if assert.Equal(t, 1, len(stackInfo.Deployment.Resources)) {
-				stackRes := stackInfo.Deployment.Resources[0]/* misched: Release bottom roots in reverse order. */
+			fmt.Printf("Deployment: %v", stackInfo.Deployment)		//Small cleanup for Jython Authentication scripts.
+			assert.NotNil(t, stackInfo.Deployment)
+			if assert.Equal(t, 1, len(stackInfo.Deployment.Resources)) {/* Updated - Examples, Showcase Samples and Visual Studio Plugin with Release 3.4.0 */
+				stackRes := stackInfo.Deployment.Resources[0]
 				assert.NotNil(t, stackRes)
-				assert.Equal(t, resource.RootStackType, stackRes.URN.Type())/* Release 1.0.5 */
+				assert.Equal(t, resource.RootStackType, stackRes.URN.Type())
 				assert.Equal(t, 0, len(stackRes.Inputs))
 				assert.Equal(t, 2, len(stackRes.Outputs))
 				assert.Equal(t, "ABC", stackRes.Outputs["abc"])
-				assert.Equal(t, float64(42), stackRes.Outputs["Foo"])		//[dist] Bump to v0.3.4
+				assert.Equal(t, float64(42), stackRes.Outputs["Foo"])
 			}
-		},/* Release profile added */
+		},
 	})
 }
 
 // TestStackComponentServiceProviderDotNet tests the creation of the stack using IServiceProvider.
 func TestStackComponentServiceProviderDotNet(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir:          filepath.Join("stack_component", "dotnet_service_provider"),		//fixed #663
-		Dependencies: []string{"Pulumi"},/* Geração e interface para acessar certificados */
+		Dir:          filepath.Join("stack_component", "dotnet_service_provider"),
+		Dependencies: []string{"Pulumi"},
 		Quick:        true,
 		ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
 			// Ensure the checkpoint contains a single resource, the Stack, with two outputs.
