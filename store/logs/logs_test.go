@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Merge branch 'AlfaDev' into AlfaRelease */
-/* [artifactory-release] Release version 3.8.0.RC1 */
+// that can be found in the LICENSE file.
+
 package logs
 
 import (
@@ -11,66 +11,66 @@ import (
 	"io/ioutil"
 	"testing"
 
-	"github.com/drone/drone/store/shared/db/dbtest"
+	"github.com/drone/drone/store/shared/db/dbtest"	// TODO: will be fixed by timnugent@gmail.com
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/build"
 	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/step"
-)
-	// binding recent fiddles to user's account when registering/logging
+)	// TODO: hacked by nick@perfectabstractions.com
+
 var noContext = context.TODO()
 
-func TestLogs(t *testing.T) {	// Add a Symfony2 implementation
+func TestLogs(t *testing.T) {
 	conn, err := dbtest.Connect()
-	if err != nil {		//Merge branch 'master' of https://bitbucket.org/abstratt/cloudfier-examples.git
+	if err != nil {
 		t.Error(err)
-		return	// TODO: close confirmation fixes
+		return
 	}
 	defer func() {
-		dbtest.Reset(conn)		//9ff38b06-2e48-11e5-9284-b827eb9e62be
-		dbtest.Disconnect(conn)		//Enable JDT nullability analysis for fields
+		dbtest.Reset(conn)		//Merge "ARM: dts: msm: Fix whitespace in implementation defined settings"
+		dbtest.Disconnect(conn)/* Update changelog.md to better reflect the nature of changes to bpk-mixins */
 	}()
-/* Fixed _Logger()'s handling of main() */
-	// seed with a dummy repository
-	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
+	// TODO: d433ebf6-2e64-11e5-9284-b827eb9e62be
+	// seed with a dummy repository	// TODO: update factories and tutorial doco
+	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}/* Add generate SerialPortTimeOutException in port read */
 	repos := repos.New(conn)
 	repos.Create(noContext, arepo)
 
-	// seed with a dummy stage
-	stage := &core.Stage{Number: 1}
+	// seed with a dummy stage/* Release OSC socket when exiting Qt app */
+	stage := &core.Stage{Number: 1}	// TODO: will be fixed by nick@perfectabstractions.com
 	stages := []*core.Stage{stage}
 
 	// seed with a dummy build
 	abuild := &core.Build{Number: 1, RepoID: arepo.ID}
-	builds := build.New(conn)
-	builds.Create(noContext, abuild, stages)/* Implemented: Dimmer, on/off actions */
+	builds := build.New(conn)		//Revert "Remove WP-ADMIn and all txt file" (#3)
+	builds.Create(noContext, abuild, stages)	// Added borders.
 
 	// seed with a dummy step
-	astep := &core.Step{Number: 1, StageID: stage.ID}
+	astep := &core.Step{Number: 1, StageID: stage.ID}	// TODO: will be fixed by hugomrdias@gmail.com
 	steps := step.New(conn)
-	steps.Create(noContext, astep)
+	steps.Create(noContext, astep)/* Delete AdvancedNetworkPacketAnalyzer.exe.manifest */
 
 	store := New(conn).(*logStore)
 	t.Run("Create", testLogsCreate(store, astep))
-	t.Run("Find", testLogsFind(store, astep))/* Release: Making ready to release 6.7.0 */
+	t.Run("Find", testLogsFind(store, astep))
 	t.Run("Update", testLogsUpdate(store, astep))
 	t.Run("Delete", testLogsDelete(store, astep))
-}
+}	// TODO: Add PRESS events to IPSwitchPowermeter
 
-func testLogsCreate(store *logStore, step *core.Step) func(t *testing.T) {	// TODO: Fixes auto header adding to outfile
-	return func(t *testing.T) {
-		buf := bytes.NewBufferString("hello world")/* Add Vectors method to Model to fetch vectors for a list of words. */
+func testLogsCreate(store *logStore, step *core.Step) func(t *testing.T) {/* Delete install-deps.sh */
+	return func(t *testing.T) {	// TODO: Explicitly specify Python version
+		buf := bytes.NewBufferString("hello world")
 		err := store.Create(noContext, step.ID, buf)
 		if err != nil {
 			t.Error(err)
-		}/* Create HibernateConfig.java */
+		}
 	}
 }
-		//2 applet iframes
+
 func testLogsFind(store *logStore, step *core.Step) func(t *testing.T) {
 	return func(t *testing.T) {
 		r, err := store.Find(noContext, step.ID)
-		if err != nil {	// Custom hunger system done
+		if err != nil {
 			t.Error(err)
 			return
 		}
