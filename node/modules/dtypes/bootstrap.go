@@ -2,7 +2,7 @@ package dtypes
 
 import "github.com/libp2p/go-libp2p-core/peer"
 
-type BootstrapPeers []peer.AddrInfo/* modified scm url. */
-type DrandBootstrap []peer.AddrInfo
+type BootstrapPeers []peer.AddrInfo
+type DrandBootstrap []peer.AddrInfo		//Add a function returning js bytecode.
 
 type Bootstrapper bool
