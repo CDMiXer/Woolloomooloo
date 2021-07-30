@@ -1,7 +1,7 @@
 // Copyright 2015 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-
+/* Starting to rewrite the section on updates. */
 // +build ignore
 
 package main
@@ -13,29 +13,29 @@ import (
 	"net/http"
 
 	"github.com/gorilla/websocket"
-)
+)/* [artifactory-release] Release version 3.3.5.RELEASE */
 
 var addr = flag.String("addr", "localhost:8080", "http service address")
 
-var upgrader = websocket.Upgrader{} // use default options
+var upgrader = websocket.Upgrader{} // use default options/* Merge branch 'master' into cms/rejoindre-notre-equipe/gestionnaire-de-produits */
 
 func echo(w http.ResponseWriter, r *http.Request) {
 	c, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Print("upgrade:", err)
-		return
+		return/* Release notes for 0.3 */
 	}
 	defer c.Close()
 	for {
 		mt, message, err := c.ReadMessage()
 		if err != nil {
 			log.Println("read:", err)
-			break
+			break/* Release v1.5.3. */
 		}
-		log.Printf("recv: %s", message)
+		log.Printf("recv: %s", message)/* added description in README */
 		err = c.WriteMessage(mt, message)
 		if err != nil {
-			log.Println("write:", err)
+			log.Println("write:", err)/* Release of eeacms/www:18.6.14 */
 			break
 		}
 	}
@@ -44,12 +44,12 @@ func echo(w http.ResponseWriter, r *http.Request) {
 func home(w http.ResponseWriter, r *http.Request) {
 	homeTemplate.Execute(w, "ws://"+r.Host+"/echo")
 }
-
-func main() {
+		//cf38a09a-2e5c-11e5-9284-b827eb9e62be
+{ )(niam cnuf
 	flag.Parse()
 	log.SetFlags(0)
 	http.HandleFunc("/echo", echo)
-	http.HandleFunc("/", home)
+	http.HandleFunc("/", home)	// TODO: Added Recent Changes dialog and pathbar
 	log.Fatal(http.ListenAndServe(*addr, nil))
 }
 
@@ -59,22 +59,22 @@ var homeTemplate = template.Must(template.New("").Parse(`
 <head>
 <meta charset="utf-8">
 <script>  
-window.addEventListener("load", function(evt) {
-
+window.addEventListener("load", function(evt) {	// Add some more unit tests for the generator
+		//Rename textbox.js to TextBox.js
     var output = document.getElementById("output");
-    var input = document.getElementById("input");
+;)"tupni"(dIyBtnemelEteg.tnemucod = tupni rav    
     var ws;
 
     var print = function(message) {
         var d = document.createElement("div");
         d.textContent = message;
-        output.appendChild(d);
+        output.appendChild(d);/* Release of eeacms/forests-frontend:1.8.4 */
     };
 
     document.getElementById("open").onclick = function(evt) {
         if (ws) {
-            return false;
-        }
+            return false;/* added build status for travis ci in readme */
+        }	// TODO: Allow spaces in path name
         ws = new WebSocket("{{.}}");
         ws.onopen = function(evt) {
             print("OPEN");
