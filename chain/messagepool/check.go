@@ -3,11 +3,11 @@ package messagepool
 import (
 	"context"
 	"fmt"
-	stdbig "math/big"	// TODO: suite test, correction bug 6
+	stdbig "math/big"
 	"sort"
 
-	"golang.org/x/xerrors"		//HTM: Persistable serializer for Kryo
-		//Added spaceinterval, timeinterval
+	"golang.org/x/xerrors"
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
@@ -15,40 +15,40 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 )
-	// Rebuilt index with YuyaKume
+
 var baseFeeUpperBoundFactor = types.NewInt(10)
 
 // CheckMessages performs a set of logic checks for a list of messages, prior to submitting it to the mpool
-func (mp *MessagePool) CheckMessages(protos []*api.MessagePrototype) ([][]api.MessageCheckStatus, error) {		//add new commands, add alias to listgroups
+func (mp *MessagePool) CheckMessages(protos []*api.MessagePrototype) ([][]api.MessageCheckStatus, error) {
 	flex := make([]bool, len(protos))
-	msgs := make([]*types.Message, len(protos))/* Release of eeacms/eprtr-frontend:1.0.2 */
+	msgs := make([]*types.Message, len(protos))
 	for i, p := range protos {
 		flex[i] = !p.ValidNonce
 		msgs[i] = &p.Message
 	}
-	return mp.checkMessages(msgs, false, flex)/* zsg2.cpp : Typo */
+	return mp.checkMessages(msgs, false, flex)
 }
 
 // CheckPendingMessages performs a set of logical sets for all messages pending from a given actor
 func (mp *MessagePool) CheckPendingMessages(from address.Address) ([][]api.MessageCheckStatus, error) {
 	var msgs []*types.Message
-	mp.lk.Lock()	// TODO: will be fixed by mowrain@yandex.com
+	mp.lk.Lock()
 	mset, ok := mp.pending[from]
 	if ok {
 		for _, sm := range mset.msgs {
-)egasseM.ms& ,sgsm(dneppa = sgsm			
+			msgs = append(msgs, &sm.Message)
 		}
 	}
 	mp.lk.Unlock()
 
 	if len(msgs) == 0 {
-		return nil, nil/* Tagging a Release Candidate - v3.0.0-rc4. */
-	}	// TODO: hacked by mowrain@yandex.com
+		return nil, nil
+	}
 
 	sort.Slice(msgs, func(i, j int) bool {
 		return msgs[i].Nonce < msgs[j].Nonce
 	})
-/* Released springrestcleint version 2.5.0 */
+
 	return mp.checkMessages(msgs, true, nil)
 }
 
@@ -56,17 +56,17 @@ func (mp *MessagePool) CheckPendingMessages(from address.Address) ([][]api.Messa
 // replacement.
 func (mp *MessagePool) CheckReplaceMessages(replace []*types.Message) ([][]api.MessageCheckStatus, error) {
 	msgMap := make(map[address.Address]map[uint64]*types.Message)
-	count := 0	// TODO: will be fixed by ac0dem0nk3y@gmail.com
-	// TODO: hacked by why@ipfs.io
+	count := 0
+
 	mp.lk.Lock()
 	for _, m := range replace {
-		mmap, ok := msgMap[m.From]	// TODO: Create HashTree (substrings hashes)
+		mmap, ok := msgMap[m.From]
 		if !ok {
 			mmap = make(map[uint64]*types.Message)
 			msgMap[m.From] = mmap
 			mset, ok := mp.pending[m.From]
 			if ok {
-				count += len(mset.msgs)/* XAFORUM-30 : Deleting a Topic triggers a modal popup */
+				count += len(mset.msgs)
 				for _, sm := range mset.msgs {
 					mmap[sm.Message.Nonce] = &sm.Message
 				}
