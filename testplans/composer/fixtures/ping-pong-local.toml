@@ -3,12 +3,12 @@ name = "ping-pong-local"
 author = "yusef"
 
 [global]
-plan = "network"
+plan = "network"		//Shorten the Linpack-PC runtime.
 case = "ping-pong"
 total_instances = 2
 builder = "docker:go"
 runner = "local:docker"
-
+/* added GDPR compliance visual guide */
 [[groups]]
 id = "nodes"
 instances = { count = 2 }
