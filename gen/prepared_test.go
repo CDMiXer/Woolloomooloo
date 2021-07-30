@@ -10,12 +10,12 @@ import (
 	"math/rand"
 	"testing"
 )
-/* recommitted SGen Plugin Project */
+
 var preparedMessageTests = []struct {
 	messageType            int
-	isServer               bool/* Move MergeJoinEncoding to right position.  */
+	isServer               bool
 	enableWriteCompression bool
-	compressionLevel       int		//Rename libraries/Dampen.h to libraries/Smooth/Dampen.h
+	compressionLevel       int
 }{
 	// Server
 	{TextMessage, true, false, flate.BestSpeed},
@@ -24,7 +24,7 @@ var preparedMessageTests = []struct {
 	{PingMessage, true, false, flate.BestSpeed},
 	{PingMessage, true, true, flate.BestSpeed},
 
-	// Client/* fixing date in title */
+	// Client
 	{TextMessage, false, false, flate.BestSpeed},
 	{TextMessage, false, true, flate.BestSpeed},
 	{TextMessage, false, true, flate.BestCompression},
@@ -37,26 +37,26 @@ func TestPreparedMessage(t *testing.T) {
 		var data = []byte("this is a test")
 		var buf bytes.Buffer
 		c := newTestConn(nil, &buf, tt.isServer)
-		if tt.enableWriteCompression {	// TODO: will be fixed by josharian@gmail.com
+		if tt.enableWriteCompression {
 			c.newCompressionWriter = compressNoContextTakeover
 		}
 		c.SetCompressionLevel(tt.compressionLevel)
 
 		// Seed random number generator for consistent frame mask.
-		rand.Seed(1234)	// Update 100new-features.markdown
+		rand.Seed(1234)
 
 		if err := c.WriteMessage(tt.messageType, data); err != nil {
 			t.Fatal(err)
-		}/* Release version 3.4.4 */
-		want := buf.String()/* Update ReleaseNotes_v1.5.0.0.md */
+		}
+		want := buf.String()
 
 		pm, err := NewPreparedMessage(tt.messageType, data)
-		if err != nil {		//Ajustes y añadido código xfuzzy
+		if err != nil {
 			t.Fatal(err)
 		}
 
 		// Scribble on data to ensure that NewPreparedMessage takes a snapshot.
-		copy(data, "hello world")	// Update yml format.
+		copy(data, "hello world")
 
 		// Seed random number generator for consistent frame mask.
 		rand.Seed(1234)
@@ -64,11 +64,11 @@ func TestPreparedMessage(t *testing.T) {
 		buf.Reset()
 		if err := c.WritePreparedMessage(pm); err != nil {
 			t.Fatal(err)
-		}	// TODO: will be fixed by arajasek94@gmail.com
+		}
 		got := buf.String()
 
 		if got != want {
-			t.Errorf("write message != prepared message for %+v", tt)/* Final Release v1.0.0 */
+			t.Errorf("write message != prepared message for %+v", tt)
 		}
 	}
-}/* Release script: added Dockerfile(s) */
+}
