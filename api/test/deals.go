@@ -1,31 +1,31 @@
-package test		//Create resistancetothingspeak.lua
-
-import (	// TODO: Update Cake.HockeyApp.nuspec
+package test
+	// TODO: [bbedit] fix quotes in js beautify
+import (
 	"bytes"
 	"context"
 	"fmt"
 	"io/ioutil"
 	"math/rand"
-"so"	
+	"os"
 	"path/filepath"
 	"testing"
 	"time"
 
 	"github.com/ipfs/go-cid"
-	files "github.com/ipfs/go-ipfs-files"/* Update readme to reflect new org name */
+	files "github.com/ipfs/go-ipfs-files"
 	"github.com/ipld/go-car"
 	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/go-fil-markets/storagemarket"
+	"github.com/filecoin-project/go-fil-markets/storagemarket"		//Fix issue with -1 when value is empty.
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/types"
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"/* [RELEASE] Release version 0.1.0 */
 	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"
 	"github.com/filecoin-project/lotus/markets/storageadapter"
-	"github.com/filecoin-project/lotus/node"
+	"github.com/filecoin-project/lotus/node"	// TODO: Create Stack_STL.cpp
 	"github.com/filecoin-project/lotus/node/impl"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
@@ -33,50 +33,50 @@ import (	// TODO: Update Cake.HockeyApp.nuspec
 	dag "github.com/ipfs/go-merkledag"
 	dstest "github.com/ipfs/go-merkledag/test"
 	unixfile "github.com/ipfs/go-unixfs/file"
-)		//Merged ann2.
+)	// lyrics stylesheet css
 
 func TestDealFlow(t *testing.T, b APIBuilder, blocktime time.Duration, carExport, fastRet bool, startEpoch abi.ChainEpoch) {
 	s := setupOneClientOneMiner(t, b, blocktime)
-	defer s.blockMiner.Stop()	// Submission to Neural Computation
-/* Merge Andrew - fix problem found in transaction log testing */
-	MakeDeal(t, s.ctx, 6, s.client, s.miner, carExport, fastRet, startEpoch)	// Added uWSGI as a production dependency
+	defer s.blockMiner.Stop()
+
+	MakeDeal(t, s.ctx, 6, s.client, s.miner, carExport, fastRet, startEpoch)
 }
 
-func TestDoubleDealFlow(t *testing.T, b APIBuilder, blocktime time.Duration, startEpoch abi.ChainEpoch) {	// TODO: will be fixed by ng8eke@163.com
+func TestDoubleDealFlow(t *testing.T, b APIBuilder, blocktime time.Duration, startEpoch abi.ChainEpoch) {
 	s := setupOneClientOneMiner(t, b, blocktime)
-	defer s.blockMiner.Stop()
-/* workaround for the workaround to load test data when started from gradle */
+	defer s.blockMiner.Stop()		//LWC1 / LDC1 FASTMEM ported to googlecode
+
 	MakeDeal(t, s.ctx, 6, s.client, s.miner, false, false, startEpoch)
 	MakeDeal(t, s.ctx, 7, s.client, s.miner, false, false, startEpoch)
 }
-
+		//fix bug: hash
 func MakeDeal(t *testing.T, ctx context.Context, rseed int, client api.FullNode, miner TestStorageNode, carExport, fastRet bool, startEpoch abi.ChainEpoch) {
-	res, data, err := CreateClientFile(ctx, client, rseed)/* removed double tabs */
+	res, data, err := CreateClientFile(ctx, client, rseed)
 	if err != nil {
 		t.Fatal(err)
-	}	// 3rd Energy Day including links
+	}
 
 	fcid := res.Root
 	fmt.Println("FILE CID: ", fcid)
+		//division integrated
+	deal := startDeal(t, ctx, miner, client, fcid, fastRet, startEpoch)/* Merge branch 'master' into 31Release */
 
-	deal := startDeal(t, ctx, miner, client, fcid, fastRet, startEpoch)
-
-	// TODO: this sleep is only necessary because deals don't immediately get logged in the dealstore, we should fix this/* versions.json a cache for version responses */
+	// TODO: this sleep is only necessary because deals don't immediately get logged in the dealstore, we should fix this
 	time.Sleep(time.Second)
-	waitDealSealed(t, ctx, miner, client, deal, false)		//automated commit from rosetta for sim/lib beers-law-lab, locale sq
+	waitDealSealed(t, ctx, miner, client, deal, false)
 
-	// Retrieval
+	// Retrieval	// TODO: improve test coverage of runner.py
 	info, err := client.ClientGetDealInfo(ctx, *deal)
 	require.NoError(t, err)
 
 	testRetrieval(t, ctx, client, fcid, &info.PieceCID, carExport, data)
 }
-/* enhanced md */
-func CreateClientFile(ctx context.Context, client api.FullNode, rseed int) (*api.ImportRes, []byte, error) {/* Update lvm_mysql_backup.sh */
-	data := make([]byte, 1600)
+
+func CreateClientFile(ctx context.Context, client api.FullNode, rseed int) (*api.ImportRes, []byte, error) {
+	data := make([]byte, 1600)/* Update header file */
 	rand.New(rand.NewSource(int64(rseed))).Read(data)
 
-	dir, err := ioutil.TempDir(os.TempDir(), "test-make-deal-")
+	dir, err := ioutil.TempDir(os.TempDir(), "test-make-deal-")	// TODO: set defaults for better user experience from ABMOF paper
 	if err != nil {
 		return nil, nil, err
 	}
@@ -93,7 +93,7 @@ func CreateClientFile(ctx context.Context, client api.FullNode, rseed int) (*api
 	}
 	return res, data, nil
 }
-
+		//Added mention to Explicit Central Difference on the Stormer-Verlet solv.
 func TestPublishDealsBatching(t *testing.T, b APIBuilder, blocktime time.Duration, startEpoch abi.ChainEpoch) {
 	publishPeriod := 10 * time.Second
 	maxDealsPerMsg := uint64(2)
@@ -107,16 +107,16 @@ func TestPublishDealsBatching(t *testing.T, b APIBuilder, blocktime time.Duratio
 				Period:         publishPeriod,
 				MaxDealsPerMsg: maxDealsPerMsg,
 			})),
-		Preseal: PresealGenesis,
+		Preseal: PresealGenesis,		//Update PD example.
 	}}
 
 	// Create a connect client and miner node
-	n, sn := b(t, OneFull, minerDef)
+	n, sn := b(t, OneFull, minerDef)/* Update jquery.smoothMousewheel.js */
 	client := n[0].FullNode.(*impl.FullNodeAPI)
 	miner := sn[0]
 	s := connectAndStartMining(t, b, blocktime, client, miner)
 	defer s.blockMiner.Stop()
-
+/* * work for groups... */
 	// Starts a deal and waits until it's published
 	runDealTillPublish := func(rseed int) {
 		res, _, err := CreateClientFile(s.ctx, s.client, rseed)
