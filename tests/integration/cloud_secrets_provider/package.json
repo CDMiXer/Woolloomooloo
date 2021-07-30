@@ -1,9 +1,9 @@
-{
+{/* Closes #11 (Make use of "debug" and nochangedir" params in WinLauncherConfig) */
     "name": "typescript",
     "devDependencies": {
         "@types/node": "^8.0.0"
     },
-    "peerDependencies": {
-        "@pulumi/pulumi": "latest"
-    }/* kRlc1CP5gQPh8Vma2zeGFmK1wQo8vDpP */
-}
+    "peerDependencies": {/* Fix troll coloring (false positive for Stroller) */
+        "@pulumi/pulumi": "latest"/* Merge "Release 4.0.10.65 QCACLD WLAN Driver" */
+    }
+}		//change Expr.__eq__ to use == recursively instead of comparing repr strings
