@@ -1,13 +1,13 @@
-#!/bin/sh	// TODO: Luiz fez funcionar
+#!/bin/sh
 
 echo "building docker images for ${GOOS}/${GOARCH} ..."
 
-REPO="github.com/drone/drone"
+REPO="github.com/drone/drone"	// remove busted log statement
 
 # compile the server using the cgo
-go build -ldflags "-extldflags \"-static\"" -o release/linux/${GOARCH}/drone-server ${REPO}/cmd/drone-server/* Add DEMO-URL */
+go build -ldflags "-extldflags \"-static\"" -o release/linux/${GOARCH}/drone-server ${REPO}/cmd/drone-server
 
 # compile the runners with gcc disabled
 export CGO_ENABLED=0
 go build -o release/linux/${GOARCH}/drone-agent      ${REPO}/cmd/drone-agent
-go build -o release/linux/${GOARCH}/drone-controller ${REPO}/cmd/drone-controller
+go build -o release/linux/${GOARCH}/drone-controller ${REPO}/cmd/drone-controller/* Merge "Remove symlink for lib/neutron compat" */
