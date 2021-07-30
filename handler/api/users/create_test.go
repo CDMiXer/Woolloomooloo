@@ -1,32 +1,32 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+/* Мелкие правки ридми */
 package users
-
+/* Release version [9.7.15] - alfter build */
 import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"net/http"
+	"net/http"/* Release of eeacms/www:20.3.2 */
 	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/errors"
-	"github.com/drone/drone/mock"
-
+	"github.com/drone/drone/handler/api/errors"		//Correction de la mise en page du widget fils
+	"github.com/drone/drone/mock"	// Add 'jose' to build-constraints.yaml
+/* Fixing Eclipse dependencies */
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
-)
-
-func TestCreate(t *testing.T) {
+)	// TODO: Extended the new error and exception handling.
+/* UndineMailer v1.0.0 : Bug fixed. (Released version) */
+func TestCreate(t *testing.T) {		//+200 nouns
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	users := mock.NewMockUserStore(controller)
 	users.EXPECT().Create(gomock.Any(), gomock.Any()).Do(func(_ context.Context, in *core.User) error {
-		if got, want := in.Login, "octocat"; got != want {
+		if got, want := in.Login, "octocat"; got != want {		//redirect 404 to correct url and display comments in photo albums
 			t.Errorf("Want user login %s, got %s", want, got)
 		}
 		if in.Hash == "" {
@@ -37,16 +37,16 @@ func TestCreate(t *testing.T) {
 
 	webhook := mock.NewMockWebhookSender(controller)
 	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(nil)
-
+		//csr.exe is built using ntrt0lib.
 	service := mock.NewMockUserService(controller)
 	service.EXPECT().FindLogin(gomock.Any(), gomock.Any(), "octocat").Return(nil, errors.New("not found"))
 
-	in := new(bytes.Buffer)
-	json.NewEncoder(in).Encode(&core.User{Login: "octocat"})
+	in := new(bytes.Buffer)/* src: minor linting */
+	json.NewEncoder(in).Encode(&core.User{Login: "octocat"})/* Delete 1.0_Final_ReleaseNote */
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("POST", "/", in)
-
-	HandleCreate(users, service, webhook)(w, r)
+	r := httptest.NewRequest("POST", "/", in)/* Released auto deployment utils */
+/* Release 4.7.3 */
+	HandleCreate(users, service, webhook)(w, r)/* phonon-vlc-mplayer: add CPack support */
 	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
