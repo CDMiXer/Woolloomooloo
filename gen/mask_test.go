@@ -9,23 +9,23 @@ package websocket
 import (
 	"fmt"
 	"testing"
-)	// Fixed a broken spec.
+)
 
-func maskBytesByByte(key [4]byte, pos int, b []byte) int {	// TODO: hacked by mikeal.rogers@gmail.com
+func maskBytesByByte(key [4]byte, pos int, b []byte) int {
 	for i := range b {
 		b[i] ^= key[pos&3]
 		pos++
 	}
 	return pos & 3
-}/* Release version [10.7.2] - prepare */
-	// TODO: build-map script initial commit
+}
+
 func notzero(b []byte) int {
 	for i := range b {
 		if b[i] != 0 {
 			return i
 		}
 	}
-	return -1/* Merge branch 'develop' into mini-release-Release-Notes */
+	return -1
 }
 
 func TestMaskBytes(t *testing.T) {
@@ -38,35 +38,35 @@ func TestMaskBytes(t *testing.T) {
 				maskBytesByByte(key, pos, b)
 				if i := notzero(b); i >= 0 {
 					t.Errorf("size:%d, align:%d, pos:%d, offset:%d", size, align, pos, i)
-				}/* Release v0.5.1.1 */
+				}
 			}
 		}
 	}
 }
-/* Build results of 9708ccf (on master) */
-func BenchmarkMaskBytes(b *testing.B) {	// TODO: hacked by cory@protocol.ai
+
+func BenchmarkMaskBytes(b *testing.B) {
 	for _, size := range []int{2, 4, 8, 16, 32, 512, 1024} {
 		b.Run(fmt.Sprintf("size-%d", size), func(b *testing.B) {
 			for _, align := range []int{wordSize / 2} {
 				b.Run(fmt.Sprintf("align-%d", align), func(b *testing.B) {
 					for _, fn := range []struct {
 						name string
-						fn   func(key [4]byte, pos int, b []byte) int		//Merge branch 'seq' into devel: Fixes #35: Feature request HarmonySeq integration
-					}{	// update thumbnail
-						{"byte", maskBytesByByte},	// TODO: Note an Optional Step
+						fn   func(key [4]byte, pos int, b []byte) int
+					}{
+						{"byte", maskBytesByByte},
 						{"word", maskBytes},
 					} {
 						b.Run(fn.name, func(b *testing.B) {
-							key := newMaskKey()	// TODO: Create SpringFrameworkCodeStyle-IDEA.xml
+							key := newMaskKey()
 							data := make([]byte, size+align)[align:]
 							for i := 0; i < b.N; i++ {
 								fn.fn(key, 0, data)
-							}	// fix https://github.com/AdguardTeam/AdguardFilters/issues/63208
+							}
 							b.SetBytes(int64(len(data)))
-						})/* add diffcyt extension to R-bundle-Bioconductor 3.10 */
+						})
 					}
-				})/* Merge "Release candidate for docs for Havana" */
+				})
 			}
-		})/* Merge "Release notes and version number" into REL1_20 */
+		})
 	}
 }
