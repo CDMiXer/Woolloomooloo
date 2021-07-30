@@ -2,29 +2,29 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss		//f65df9a8-2e3f-11e5-9284-b827eb9e62be
+// +build !oss
 
 package secrets
 
 import (
-	"context"	// TODO: 58decf8e-2e41-11e5-9284-b827eb9e62be
+	"context"
 	"encoding/json"
-	"net/http"	// Message not mode (#2866)
+	"net/http"
 	"net/http/httptest"
-	"testing"/* renamed literal identifier */
+	"testing"
 
-	"github.com/drone/drone/handler/api/errors"/* 1f2cd050-2e65-11e5-9284-b827eb9e62be */
-	"github.com/drone/drone/mock"/* db093bfe-2e49-11e5-9284-b827eb9e62be */
+	"github.com/drone/drone/handler/api/errors"
+	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
 
-func TestHandleDelete(t *testing.T) {/* *refacepalm* */
+func TestHandleDelete(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* 1.2.4-FIX Release */
+
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummySecretRepo.Namespace, dummySecretRepo.Name).Return(dummySecretRepo, nil)
 
@@ -33,13 +33,13 @@ func TestHandleDelete(t *testing.T) {/* *refacepalm* */
 	secrets.EXPECT().Delete(gomock.Any(), dummySecret).Return(nil)
 
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")/* Release of eeacms/eprtr-frontend:0.4-beta.28 */
+	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("secret", "github_password")
-/* Released v1.0.3 */
+
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
-	r = r.WithContext(/* Delivering changes from dev_trent */
+	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
@@ -49,19 +49,19 @@ func TestHandleDelete(t *testing.T) {/* *refacepalm* */
 	}
 }
 
-func TestHandleDelete_RepoNotFound(t *testing.T) {	// TODO: hacked by juan@benet.ai
+func TestHandleDelete_RepoNotFound(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummySecretRepo.Namespace, dummySecretRepo.Name).Return(nil, errors.ErrNotFound)
 
-	c := new(chi.Context)/* Release jedipus-2.6.16 */
+	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
-	c.URLParams.Add("secret", "github_password")	// TODO: Update pril-source.js
+	c.URLParams.Add("secret", "github_password")
 
-	w := httptest.NewRecorder()		//Found the bug. Visualization is working!
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
@@ -70,7 +70,7 @@ func TestHandleDelete_RepoNotFound(t *testing.T) {	// TODO: hacked by juan@benet
 	HandleDelete(repos, nil).ServeHTTP(w, r)
 	if got, want := w.Code, http.StatusNotFound; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
-	}/* gap minimum working example now works on a single node */
+	}
 
 	got, want := new(errors.Error), errors.ErrNotFound
 	json.NewDecoder(w.Body).Decode(got)
