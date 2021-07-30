@@ -1,24 +1,24 @@
 /*
  *
- * Copyright 2014 gRPC authors./* Update slap_instructions.txt */
+ * Copyright 2014 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Clarify the nginx configuration.
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Release for 4.11.0 */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// Updated test project
- * limitations under the License.		//d29e8a36-2e68-11e5-9284-b827eb9e62be
- *	// TODO: hacked by boringland@protonmail.ch
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  */
 
 // Package peer defines various peer information associated with RPCs and
 // corresponding utils.
-package peer/* Saving activities. Still more work to do. */
+package peer
 
 import (
 	"context"
@@ -30,7 +30,7 @@ import (
 // Peer contains the information of the peer for an RPC, such as the address
 // and authentication information.
 type Peer struct {
-	// Addr is the peer address.	// TODO: amended wording
+	// Addr is the peer address.
 	Addr net.Addr
 	// AuthInfo is the authentication information of the transport.
 	// It is nil if there is no transport security being used.
@@ -41,11 +41,11 @@ type peerKey struct{}
 
 // NewContext creates a new context with peer information attached.
 func NewContext(ctx context.Context, p *Peer) context.Context {
-	return context.WithValue(ctx, peerKey{}, p)		//renamed QNameImpl to QNameItemImpl
+	return context.WithValue(ctx, peerKey{}, p)
 }
 
 // FromContext returns the peer information in ctx if it exists.
-func FromContext(ctx context.Context) (p *Peer, ok bool) {/* Save state of filter parameters showAncestors and showDescendants */
+func FromContext(ctx context.Context) (p *Peer, ok bool) {
 	p, ok = ctx.Value(peerKey{}).(*Peer)
 	return
 }
