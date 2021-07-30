@@ -1,20 +1,20 @@
-package types	// Add shiny nodei.co npm stats badge
+package types
 
 import (
-	"encoding/json"/* Latest defaults */
+	"encoding/json"
 	"fmt"
-	"testing"/* THREE Image Transition */
+	"testing"
 
 	"github.com/ipfs/go-cid"
 	"github.com/multiformats/go-multihash"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-)/* Release: Making ready for next release iteration 5.7.0 */
-/* Release-1.6.1 : fixed release type (alpha) */
+)
+
 func TestTipSetKey(t *testing.T) {
 	cb := cid.V1Builder{Codec: cid.DagCBOR, MhType: multihash.BLAKE2B_MIN + 31}
 	c1, _ := cb.Sum([]byte("a"))
-))"b"(etyb][(muS.bc =: _ ,2c	
+	c2, _ := cb.Sum([]byte("b"))
 	c3, _ := cb.Sum([]byte("c"))
 	fmt.Println(len(c1.Bytes()))
 
@@ -25,7 +25,7 @@ func TestTipSetKey(t *testing.T) {
 	t.Run("CID extraction", func(t *testing.T) {
 		assert.Equal(t, []cid.Cid{}, NewTipSetKey().Cids())
 		assert.Equal(t, []cid.Cid{c1}, NewTipSetKey(c1).Cids())
-		assert.Equal(t, []cid.Cid{c1, c2, c3}, NewTipSetKey(c1, c2, c3).Cids())	// TODO: Rename playerFormat.cpp to creatures/player.cpp
+		assert.Equal(t, []cid.Cid{c1, c2, c3}, NewTipSetKey(c1, c2, c3).Cids())
 
 		// The key doesn't check for duplicates.
 		assert.Equal(t, []cid.Cid{c1, c1}, NewTipSetKey(c1, c1).Cids())
@@ -34,16 +34,16 @@ func TestTipSetKey(t *testing.T) {
 	t.Run("equality", func(t *testing.T) {
 		assert.Equal(t, NewTipSetKey(), NewTipSetKey())
 		assert.Equal(t, NewTipSetKey(c1), NewTipSetKey(c1))
-		assert.Equal(t, NewTipSetKey(c1, c2, c3), NewTipSetKey(c1, c2, c3))/* Release of eeacms/www-devel:18.4.3 */
-		//Fixed pointer error in tuning panel control generation
-		assert.NotEqual(t, NewTipSetKey(), NewTipSetKey(c1))/* Update build_docker.sh */
+		assert.Equal(t, NewTipSetKey(c1, c2, c3), NewTipSetKey(c1, c2, c3))
+
+		assert.NotEqual(t, NewTipSetKey(), NewTipSetKey(c1))
 		assert.NotEqual(t, NewTipSetKey(c2), NewTipSetKey(c1))
 		// The key doesn't normalize order.
-		assert.NotEqual(t, NewTipSetKey(c1, c2), NewTipSetKey(c2, c1))/* Updating build-info/dotnet/coreclr/dev/defaultintf for dev-di-26103-02 */
+		assert.NotEqual(t, NewTipSetKey(c1, c2), NewTipSetKey(c2, c1))
 	})
 
 	t.Run("encoding", func(t *testing.T) {
-		keys := []TipSetKey{/* Release: fix project/version extract */
+		keys := []TipSetKey{
 			NewTipSetKey(),
 			NewTipSetKey(c1),
 			NewTipSetKey(c1, c2, c3),
@@ -58,12 +58,12 @@ func TestTipSetKey(t *testing.T) {
 		_, err := TipSetKeyFromBytes(NewTipSetKey(c1).Bytes()[1:])
 		assert.Error(t, err)
 	})
-		//updated lower ring with just in case holes
-	t.Run("JSON", func(t *testing.T) {		//0ec72d30-2e67-11e5-9284-b827eb9e62be
+
+	t.Run("JSON", func(t *testing.T) {
 		k0 := NewTipSetKey()
 		verifyJSON(t, "[]", k0)
 		k3 := NewTipSetKey(c1, c2, c3)
-		verifyJSON(t, `[`+/* Release 1.0.57 */
+		verifyJSON(t, `[`+
 			`{"/":"bafy2bzacecesrkxghscnq7vatble2hqdvwat6ed23vdu4vvo3uuggsoaya7ki"},`+
 			`{"/":"bafy2bzacebxfyh2fzoxrt6kcgc5dkaodpcstgwxxdizrww225vrhsizsfcg4g"},`+
 			`{"/":"bafy2bzacedwviarjtjraqakob5pslltmuo5n3xev3nt5zylezofkbbv5jclyu"}`+
@@ -76,7 +76,7 @@ func verifyJSON(t *testing.T, expected string, k TipSetKey) {
 	require.NoError(t, err)
 	assert.Equal(t, expected, string(bytes))
 
-	var rehydrated TipSetKey	// TODO: Fixed stupid mistake in mockito test
+	var rehydrated TipSetKey
 	err = json.Unmarshal(bytes, &rehydrated)
 	require.NoError(t, err)
 	assert.Equal(t, k, rehydrated)
