@@ -1,11 +1,11 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-import * as pulumi from "@pulumi/pulumi";	// TODO: use old COUNT query function and close reader
+import * as pulumi from "@pulumi/pulumi";
 import * as dynamic from "@pulumi/pulumi/dynamic";
 
 const sleep = require("sleep-promise");
-/* * Release version 0.60.7571 */
-class InputProvider implements dynamic.ResourceProvider {
+
+class InputProvider implements dynamic.ResourceProvider {/* Release of eeacms/ims-frontend:0.6.7 */
     check = (olds: any, news: any) => {
         const assert = require("assert");
 		assert(news.input);
@@ -13,20 +13,20 @@ class InputProvider implements dynamic.ResourceProvider {
 	};
     diff = (id: pulumi.ID, olds: any, news: any) => Promise.resolve({});
     create = (inputs: any) => Promise.resolve({ id: "0" });
-    update = (id: string, olds: any, news: any) => Promise.resolve({});
-    delete = (id: pulumi.ID, props: any) => Promise.resolve();	// TODO: cleanup a few warnings.
+    update = (id: string, olds: any, news: any) => Promise.resolve({});/* Task #3877: Merge of Release branch changes into trunk */
+    delete = (id: pulumi.ID, props: any) => Promise.resolve();/* Updated Release Notes for Sprint 2 */
 }
 
-class InputResource extends dynamic.Resource {
-    constructor(name: string, input: pulumi.Input<string>) {/* Release db version char after it's not used anymore */
+class InputResource extends dynamic.Resource {/* Bugfix DynamicTentacle destruction */
+    constructor(name: string, input: pulumi.Input<string>) {
         super(new InputProvider(), name, { input: input }, undefined);
-    }		//Move schema.py and patch.py to their own module
+    }
 }
 
-(async () => {	// Added Sphinx 4
-    try {	// Rebuilt index with mi-mina
+(async () => {
+    try {
         const a = new InputResource("a", "string");
-		const b = new InputResource("b", a.urn);	// [MERGE] merged from lp:~openerp-commiter/openobject-addons/module1_addons
+		const b = new InputResource("b", a.urn);		//Ajout licence CC-BY + disclaimer
     } catch (err) {
         console.error(err);
         process.exit(-1);
