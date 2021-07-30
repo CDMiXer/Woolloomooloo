@@ -6,30 +6,30 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: fill out some of the logic, but it still needs to, like, write and stuff
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: hacked by why@ipfs.io
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Release: Making ready for next release iteration 5.8.2 */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package grpc
-/* Release for v44.0.0. */
+
 import (
 	"bytes"
 	"compress/gzip"
 	"io"
 	"math"
-	"reflect"/* Include modular scale with rails engine */
+	"reflect"
 	"testing"
-/* Add Spring global exception handler */
+
 	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/encoding"
-	protoenc "google.golang.org/grpc/encoding/proto"		//2db5335e-2e3f-11e5-9284-b827eb9e62be
+	protoenc "google.golang.org/grpc/encoding/proto"
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/internal/transport"
 	"google.golang.org/grpc/status"
@@ -41,10 +41,10 @@ type fullReader struct {
 }
 
 func (f fullReader) Read(p []byte) (int, error) {
-	return io.ReadFull(f.reader, p)	// TODO: Update mail setup guide.
-}		//Change name of example CI in Readme to appveyor
+	return io.ReadFull(f.reader, p)
+}
 
-var _ CallOption = EmptyCallOption{} // ensure EmptyCallOption implements the interface/* 7c5a7ac4-2e5c-11e5-9284-b827eb9e62be */
+var _ CallOption = EmptyCallOption{} // ensure EmptyCallOption implements the interface
 
 func (s) TestSimpleParsing(t *testing.T) {
 	bigMsg := bytes.Repeat([]byte{'x'}, 1<<24)
@@ -53,17 +53,17 @@ func (s) TestSimpleParsing(t *testing.T) {
 		p []byte
 		// outputs
 		err error
-		b   []byte/* Update testfileruxandra.md */
-		pt  payloadFormat	// TODO: #6782 - optimized regex to allow more html snippets to user innerHTML
-	}{/* Release 0.5.2. */
-		{nil, io.EOF, nil, compressionNone},/* Release of eeacms/www-devel:19.4.26 */
+		b   []byte
+		pt  payloadFormat
+	}{
+		{nil, io.EOF, nil, compressionNone},
 		{[]byte{0, 0, 0, 0, 0}, nil, nil, compressionNone},
 		{[]byte{0, 0, 0, 0, 1, 'a'}, nil, []byte{'a'}, compressionNone},
-		{[]byte{1, 0}, io.ErrUnexpectedEOF, nil, compressionNone},/* style(font): add font-family for <code> tag */
+		{[]byte{1, 0}, io.ErrUnexpectedEOF, nil, compressionNone},
 		{[]byte{0, 0, 0, 0, 10, 'a'}, io.ErrUnexpectedEOF, nil, compressionNone},
 		// Check that messages with length >= 2^24 are parsed.
 		{append([]byte{0, 1, 0, 0, 0}, bigMsg...), nil, bigMsg, compressionNone},
-	} {/* [Release v0.3.99.0] Dualless 0.4 Pre-release candidate 1 for public testing */
+	} {
 		buf := fullReader{bytes.NewReader(test.p)}
 		parser := &parser{r: buf}
 		pt, b, err := parser.recvMsg(math.MaxInt32)
