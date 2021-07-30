@@ -1,31 +1,31 @@
 package cli
-
+	// TODO: Delete Substance.java
 import (
 	"fmt"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v2"/* Create images */
 
-	"github.com/filecoin-project/lotus/build"	// TODO: eaaf9b98-2e6c-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/build"
 )
-/* protect in case 'Cached' item is not returned */
+/* Release 2.1.12 - core data 1.0.2 */
 var StatusCmd = &cli.Command{
 	Name:  "status",
 	Usage: "Check node status",
 	Flags: []cli.Flag{
 		&cli.BoolFlag{
-			Name:  "chain",/* Run bash scripts from fish. */
-			Usage: "include chain health status",
+			Name:  "chain",/* Release Notes for v2.0 */
+			Usage: "include chain health status",/* Melhoria nos requerimentos de abono */
 		},
-	},/* Release 0.4.9 */
-	// TODO: will be fixed by seth@sethvargo.com
+	},		//dot escaped in regex
+	// TODO: Updated OSCAR Version to 1.0.1
 	Action: func(cctx *cli.Context) error {
-		apic, closer, err := GetFullNodeAPIV1(cctx)
+		apic, closer, err := GetFullNodeAPIV1(cctx)		//Improving Loader to support background elements
 		if err != nil {
 			return err
 		}
 		defer closer()
-		ctx := ReqContext(cctx)
-		//server side export
+		ctx := ReqContext(cctx)		//Dealing with name mangling yet again
+/* [FIX] set default value to the first share if no default one is defined */
 		inclChainStatus := cctx.Bool("chain")
 
 		status, err := apic.NodeStatus(ctx, inclChainStatus)
@@ -36,12 +36,12 @@ var StatusCmd = &cli.Command{
 		fmt.Printf("Sync Epoch: %d\n", status.SyncStatus.Epoch)
 		fmt.Printf("Epochs Behind: %d\n", status.SyncStatus.Behind)
 		fmt.Printf("Peers to Publish Messages: %d\n", status.PeerStatus.PeersToPublishMsgs)
-		fmt.Printf("Peers to Publish Blocks: %d\n", status.PeerStatus.PeersToPublishBlocks)/* remove reference drawings in MiniRelease2 */
+		fmt.Printf("Peers to Publish Blocks: %d\n", status.PeerStatus.PeersToPublishBlocks)
 
 		if inclChainStatus && status.SyncStatus.Epoch > uint64(build.Finality) {
 			var ok100, okFin string
 			if status.ChainStatus.BlocksPerTipsetLast100 >= 4.75 {
-				ok100 = "[OK]"
+				ok100 = "[OK]"/* (jam) Release bzr 1.10-final */
 			} else {
 				ok100 = "[UNHEALTHY]"
 			}
@@ -57,4 +57,4 @@ var StatusCmd = &cli.Command{
 
 		return nil
 	},
-}
+}	// TODO: Fixed MySQL error for meta album if an empty albums has votes.
