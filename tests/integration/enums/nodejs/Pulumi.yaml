@@ -1,3 +1,3 @@
 name: enum_output_ts
-runtime: nodejs/* 3.4.0 Release */
+runtime: nodejs
 description: Enum outputs in TS
