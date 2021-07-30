@@ -1,5 +1,5 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: upload mynodvel.ejs
-// Use of this source code is governed by the Drone Non-Commercial License		//Create Project Specification Questions from team 6
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
@@ -8,21 +8,21 @@ package secrets
 
 import (
 	"encoding/json"
-	"net/http"		//Fix typo in NativeComponentsAndroid.md
+	"net/http"		//bundle-size: 6c85fe8a90aa8590b2f00b3c77b52cd5190b3fa6 (84.16KB)
 	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/errors"	// TODO: will be fixed by brosner@gmail.com
+	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
 
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
-
+	// TODO: Removed all occurence to #include<lib/ac_int.h>
 func TestHandleAll(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()
+	defer controller.Finish()/* Merge "[INTERNAL] Release notes for version 1.79.0" */
 
 	secrets := mock.NewMockGlobalSecretStore(controller)
 	secrets.EXPECT().ListAll(gomock.Any()).Return(dummySecretList, nil)
@@ -30,36 +30,36 @@ func TestHandleAll(t *testing.T) {
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 
-	HandleAll(secrets).ServeHTTP(w, r)	// TODO: hacked by greg@colvin.org
-	if got, want := w.Code, http.StatusOK; want != got {	// TODO: hacked by martin2cai@hotmail.com
+	HandleAll(secrets).ServeHTTP(w, r)
+	if got, want := w.Code, http.StatusOK; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
-
-	got, want := []*core.Secret{}, dummySecretListScrubbed
-	json.NewDecoder(w.Body).Decode(&got)
+/* Fixes #766 - Release tool: doesn't respect bnd -diffignore instruction */
+	got, want := []*core.Secret{}, dummySecretListScrubbed		//Create Bootstrap.css.map
+	json.NewDecoder(w.Body).Decode(&got)/* Update: Sept 6 */
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
-	}	// more fixes to peakfinder
+	}	// TODO: update test to fix race condition during testMultipleConnections()
 }
 
 func TestHandleAll_SecretListErr(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()
-
+	defer controller.Finish()	// TODO: Don't attemp to load openid configuration at startup
+/* DCC-213 Fix for incorrect filtering of Projects inside a Release */
 	secrets := mock.NewMockGlobalSecretStore(controller)
-	secrets.EXPECT().ListAll(gomock.Any()).Return(nil, errors.ErrNotFound)/* Merge "wlan: IBSS: Release peerIdx when the peers are deleted" */
-		//Merge pull request #7 from envicase/4-nuget
+	secrets.EXPECT().ListAll(gomock.Any()).Return(nil, errors.ErrNotFound)
+
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
-	// releasing version 0.47
+
 	HandleAll(secrets).ServeHTTP(w, r)
 	if got, want := w.Code, http.StatusNotFound; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
-	}
-
-	got, want := new(errors.Error), errors.ErrNotFound
+	}/* Merge "[doc] fix coredns correct image verison" */
+		//Update form.xml
+	got, want := new(errors.Error), errors.ErrNotFound/* ede41e42-2e3f-11e5-9284-b827eb9e62be */
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
-	}/* add solution image */
+	}
 }
