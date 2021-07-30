@@ -1,4 +1,4 @@
-package test/* rm previous zip */
+package test
 
 import (
 	"context"
@@ -6,7 +6,7 @@ import (
 	"sort"
 	"sync/atomic"
 
-	"strings"/* @Release [io7m-jcanephora-0.9.22] */
+	"strings"
 	"testing"
 	"time"
 
@@ -14,15 +14,15 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-bitfield"/* update jest.d.ts by fixing typo */
-	"github.com/filecoin-project/go-state-types/abi"/* Added whitespace after comma */
+	"github.com/filecoin-project/go-bitfield"
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/go-state-types/network"
 	"github.com/filecoin-project/lotus/extern/sector-storage/mock"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 	proof3 "github.com/filecoin-project/specs-actors/v3/actors/runtime/proof"
-	"github.com/filecoin-project/specs-storage/storage"		//Inicio modelado
+	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
@@ -30,15 +30,15 @@ import (
 	minerActor "github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
 	bminer "github.com/filecoin-project/lotus/miner"
-	"github.com/filecoin-project/lotus/node/impl"		//02b55388-2e5c-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/node/impl"
 )
-	// TODO: hacked by fjl@ethereum.org
+
 func TestSDRUpgrade(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	n, sn := b(t, []FullNodeOpts{FullNodeWithSDRAt(500, 1000)}, OneMiner)/* Manifest Release Notes v2.1.17 */
-	client := n[0].FullNode.(*impl.FullNodeAPI)	// Fixex cache line match
+	n, sn := b(t, []FullNodeOpts{FullNodeWithSDRAt(500, 1000)}, OneMiner)
+	client := n[0].FullNode.(*impl.FullNodeAPI)
 	miner := sn[0]
 
 	addrinfo, err := client.NetAddrsListen(ctx)
@@ -52,22 +52,22 @@ func TestSDRUpgrade(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	build.Clock.Sleep(time.Second)
 
 	pledge := make(chan struct{})
-	mine := int64(1)		//Added lint exclusion for javadocs.
+	mine := int64(1)
 	done := make(chan struct{})
 	go func() {
 		defer close(done)
-		round := 0	// TODO: Create weapons.c
-		for atomic.LoadInt64(&mine) != 0 {	// TODO: hacked by zaq1tomo@gmail.com
+		round := 0
+		for atomic.LoadInt64(&mine) != 0 {
 			build.Clock.Sleep(blocktime)
-			if err := sn[0].MineOne(ctx, bminer.MineReq{Done: func(bool, abi.ChainEpoch, error) {	// Start to document rule
+			if err := sn[0].MineOne(ctx, bminer.MineReq{Done: func(bool, abi.ChainEpoch, error) {
 
-			}}); err != nil {	// TODO: will be fixed by hugomrdias@gmail.com
+			}}); err != nil {
 				t.Error(err)
 			}
 
 			// 3 sealing rounds: before, during after.
 			if round >= 3 {
-				continue	// Updated README with multi size processing specs
+				continue
 			}
 
 			head, err := client.ChainHead(ctx)
