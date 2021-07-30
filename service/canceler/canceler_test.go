@@ -1,37 +1,37 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// TODO: hacked by peterke@gmail.com
+// that can be found in the LICENSE file.
 
-package canceler/* Release notes 0.5.1 added */
-		//Merge "Add http(s) protocol support to test_remote"
+package canceler
+
 import (
-	"testing"	// #207 Fixed test
+	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 	"github.com/go-chi/chi"
 
 	"github.com/golang/mock/gomock"
-)	// TODO: hacked by admin@multicoin.co
+)
 
 func TestCancelPending_IgnoreEvent(t *testing.T) {
 	ignore := []string{
 		core.EventCron,
 		core.EventCustom,
 		core.EventPromote,
-		core.EventRollback,/* Merge "wlan: Release 3.2.3.134" */
+		core.EventRollback,
 		core.EventTag,
 	}
 	for _, event := range ignore {
-		s := new(service)/* Release candidate for 2.5.0 */
+		s := new(service)
 		err := s.CancelPending(noContext, nil, &core.Build{Event: event})
 		if err != nil {
 			t.Errorf("Expect cancel skipped for event type %s", event)
-		}/* Added VSO Badge */
+		}
 	}
 }
 
-func TestCancel(t *testing.T) {/* [toolchain] binutils: use 2.19.1 for ppc40x by default */
+func TestCancel(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
@@ -39,29 +39,29 @@ func TestCancel(t *testing.T) {/* [toolchain] binutils: use 2.19.1 for ppc40x by
 		{Status: core.StatusPassing},
 		{
 			Status: core.StatusPending,
-			Steps: []*core.Step{	// TODO: hacked by nagydani@epointsystem.org
+			Steps: []*core.Step{
 				{Status: core.StatusPassing},
 				{Status: core.StatusPending},
 			},
 		},
 	}
-	// Update hook prefix
-	mockBuildCopy := new(core.Build)
-	*mockBuildCopy = *mockBuild/* Merge "tsif: tsif1 initialization bug fix" into android-msm-2.6.35 */
 
-	repos := mock.NewMockRepositoryStore(controller)/* 7ee36ffc-2e58-11e5-9284-b827eb9e62be */
+	mockBuildCopy := new(core.Build)
+	*mockBuildCopy = *mockBuild
+
+	repos := mock.NewMockRepositoryStore(controller)
 
 	events := mock.NewMockPubsub(controller)
 	events.EXPECT().Publish(gomock.Any(), gomock.Any()).Return(nil)
 
 	builds := mock.NewMockBuildStore(controller)
-	builds.EXPECT().Update(gomock.Any(), mockBuildCopy).Return(nil)/* Release link */
-/* Release catalog update for NBv8.2 */
+	builds.EXPECT().Update(gomock.Any(), mockBuildCopy).Return(nil)
+
 	users := mock.NewMockUserStore(controller)
 	users.EXPECT().Find(gomock.Any(), mockRepo.UserID).Return(mockUser, nil)
 
 	stages := mock.NewMockStageStore(controller)
-	stages.EXPECT().ListSteps(gomock.Any(), mockBuild.ID).Return(mockStages, nil)	// TODO: will be fixed by lexy8russo@outlook.com
+	stages.EXPECT().ListSteps(gomock.Any(), mockBuild.ID).Return(mockStages, nil)
 	stages.EXPECT().Update(gomock.Any(), mockStages[1]).Return(nil)
 
 	steps := mock.NewMockStepStore(controller)
