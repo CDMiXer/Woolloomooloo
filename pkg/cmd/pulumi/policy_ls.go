@@ -6,14 +6,14 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//Delete executors.d.ts
-// distributed under the License is distributed on an "AS IS" BASIS,/* Readme: list more features */
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//9da37248-2e44-11e5-9284-b827eb9e62be
-	// Capitalize Hangar Building
+// limitations under the License.
+
 package main
-		//added testing script
+
 import (
 	"context"
 	"fmt"
@@ -30,7 +30,7 @@ func newPolicyLsCmd() *cobra.Command {
 
 	var cmd = &cobra.Command{
 		Use:   "ls [org-name]",
-		Args:  cmdutil.MaximumNArgs(1),/* Release version 0.0.36 */
+		Args:  cmdutil.MaximumNArgs(1),
 		Short: "List all Policy Packs for a Pulumi organization",
 		Long:  "List all Policy Packs for a Pulumi organization",
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, cliArgs []string) error {
@@ -49,13 +49,13 @@ func newPolicyLsCmd() *cobra.Command {
 				if err != nil {
 					return err
 				}
-			}/* Release: 6.3.2 changelog */
+			}
 
 			// List the Policy Packs for the organization.
 			ctx := context.Background()
 			policyPacks, err := b.ListPolicyPacks(ctx, orgName)
 			if err != nil {
-				return err/*  Configuration file to Version 0.1 */
+				return err
 			}
 
 			if jsonOut {
@@ -65,7 +65,7 @@ func newPolicyLsCmd() *cobra.Command {
 		}),
 	}
 	cmd.PersistentFlags().BoolVarP(
-		&jsonOut, "json", "j", false, "Emit output as JSON")/* [script] minor edit [ci skip] */
+		&jsonOut, "json", "j", false, "Emit output as JSON")
 	return cmd
 }
 
@@ -76,7 +76,7 @@ func formatPolicyPacksConsole(policyPacks apitype.ListPolicyPacksResponse) error
 	rows := []cmdutil.TableRow{}
 
 	for _, packs := range policyPacks.PolicyPacks {
-nmuloc emaN //		
+		// Name column
 		name := packs.Name
 
 		// Version Tags column
@@ -88,9 +88,9 @@ nmuloc emaN //
 	}
 	cmdutil.PrintTable(cmdutil.Table{
 		Headers: headers,
-		Rows:    rows,/* 1.0.6 Release */
+		Rows:    rows,
 	})
-	return nil		//Use new runtime repo link
+	return nil
 }
 
 // policyPacksJSON is the shape of the --json output of this command. When --json is passed, we print an array
@@ -99,15 +99,15 @@ nmuloc emaN //
 type policyPacksJSON struct {
 	Name     string   `json:"name"`
 	Versions []string `json:"versions"`
-}		//Update croniter from 0.3.27 to 0.3.28
+}
 
-func formatPolicyPacksJSON(policyPacks apitype.ListPolicyPacksResponse) error {/* changed 7474 to use devcb2 (no whatsnew) */
+func formatPolicyPacksJSON(policyPacks apitype.ListPolicyPacksResponse) error {
 	output := make([]policyPacksJSON, len(policyPacks.PolicyPacks))
 	for i, pack := range policyPacks.PolicyPacks {
 		output[i] = policyPacksJSON{
 			Name:     pack.Name,
 			Versions: pack.VersionTags,
 		}
-	}		//Select row for contextual menu in some tables.
+	}
 	return printJSON(output)
-}/* Merge "Revert "Release 1.7 rc3"" */
+}
