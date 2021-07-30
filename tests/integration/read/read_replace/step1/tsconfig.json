@@ -4,14 +4,14 @@
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,
+        "declaration": true,/* Release of eeacms/plonesaas:5.2.1-28 */
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "pretty": true,	// Make RPi Pinout picture smaller.
+        "noFallthroughCasesInSwitch": true,/* Merge "Release note for KeyCloak OIDC support" */
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true,
+        "forceConsistentCasingInFileNames": true,/* Release of eeacms/www:19.10.9 */
         "strictNullChecks": true
     },
     "files": [
