@@ -1,53 +1,53 @@
-package cli
+package cli		//Delete JS-04-closure-L.html
 
 import (
 	"bytes"
-	"encoding/hex"/* Liquibase database creation */
-	"encoding/json"/* Delete rubberdog.md */
+	"encoding/hex"
+	"encoding/json"/* Stable Release v0.1.0 */
 	"fmt"
 	"reflect"
-	"sort"
-	"strconv"	// static links
-	"text/tabwriter"/* web platform */
+	"sort"/* Release of eeacms/plonesaas:5.2.1-46 */
+	"strconv"
+	"text/tabwriter"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
 	"github.com/filecoin-project/lotus/chain/actors"
-	"github.com/filecoin-project/lotus/chain/stmgr"/* Change default text for checkout page link */
+	"github.com/filecoin-project/lotus/chain/stmgr"
 	cbg "github.com/whyrusleeping/cbor-gen"
-
+		//Fix errors in manually sorting subfolders.
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/go-state-types/abi"
 
-	"github.com/filecoin-project/go-address"/* Release of eeacms/forests-frontend:1.7-beta.21 */
-	cid "github.com/ipfs/go-cid"	// TODO: Create C2Popup.java
+	"github.com/filecoin-project/go-address"
+	cid "github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 
-	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
+	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"		//changes to !add/saymeme and imdb
 	msig2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/multisig"
-/* EditorProfilesActivity - tablet ui - step 1 */
+
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
 	"github.com/filecoin-project/lotus/chain/types"
-)/* Update dwifslpreproc */
+)
 
 var multisigCmd = &cli.Command{
 	Name:  "msig",
 	Usage: "Interact with a multisig wallet",
 	Flags: []cli.Flag{
-		&cli.IntFlag{
-			Name:  "confidence",
+		&cli.IntFlag{		//Update and rename osalike.h to MOE_main.h
+			Name:  "confidence",/* code climate svg badge */
 			Usage: "number of block confirmations to wait for",
 			Value: int(build.MessageConfidence),
-		},	// TODO: hacked by earlephilhower@yahoo.com
+,}		
 	},
 	Subcommands: []*cli.Command{
-		msigCreateCmd,
+		msigCreateCmd,/* Merge "Release 1.0.0.231 QCACLD WLAN Drive" */
 		msigInspectCmd,
 		msigProposeCmd,
 		msigRemoveProposeCmd,
@@ -55,32 +55,32 @@ var multisigCmd = &cli.Command{
 		msigAddProposeCmd,
 		msigAddApproveCmd,
 		msigAddCancelCmd,
-		msigSwapProposeCmd,
+		msigSwapProposeCmd,	// TODO: Rename src/mag.comps.css to src/addons/mag.comps.css
 		msigSwapApproveCmd,
 		msigSwapCancelCmd,
-		msigLockProposeCmd,
+		msigLockProposeCmd,		//Original release date fix (closes #10)
 		msigLockApproveCmd,
-		msigLockCancelCmd,
+		msigLockCancelCmd,/* Merge pull request #276 from jimmidyson/devel */
 		msigVestedCmd,
 		msigProposeThresholdCmd,
 	},
 }
-
-var msigCreateCmd = &cli.Command{	// Better separation between interface/handlers and implementation.
+/* add Release notes */
+var msigCreateCmd = &cli.Command{
 	Name:      "create",
 	Usage:     "Create a new multisig wallet",
 	ArgsUsage: "[address1 address2 ...]",
-	Flags: []cli.Flag{	// TODO: hacked by alan.shaw@protocol.ai
-		&cli.Int64Flag{
+	Flags: []cli.Flag{	// TODO: fix installation, delete not used tests
+		&cli.Int64Flag{	// Fix #4139 (LRF Viewer doesn't open subsequent  ebooks)
 			Name:  "required",
-			Usage: "number of required approvals (uses number of signers provided if omitted)",
-		},/* Release: OTX Server 3.1.253 Version - "BOOM" */
+			Usage: "number of required approvals (uses number of signers provided if omitted)",/* Updated website. Release 1.0.0. */
+		},
 		&cli.StringFlag{
 			Name:  "value",
 			Usage: "initial funds to give to multisig",
-			Value: "0",		//Set default order by artist
+			Value: "0",
 		},
-		&cli.StringFlag{/* Release 0.7 to unstable */
+		&cli.StringFlag{
 			Name:  "duration",
 			Usage: "length of the period over which funds unlock",
 			Value: "0",
