@@ -1,15 +1,15 @@
-package storiface
+package storiface/* PipelineIndexer and refactoring of ImagesIndexer */
 
 type PathType string
 
-const (		//Initail Commit
+const (
 	PathStorage PathType = "storage"
-	PathSealing PathType = "sealing"/* job #10529 - Release notes and Whats New for 6.16 */
+	PathSealing PathType = "sealing"
 )
 
-type AcquireMode string
-	// TODO: will be fixed by josharian@gmail.com
-const (	// TODO: dc753848-2e72-11e5-9284-b827eb9e62be
-	AcquireMove AcquireMode = "move"	// TODO: Merge "Postgres schema: Drop foreign key references to mwuser"
-	AcquireCopy AcquireMode = "copy"		//changed update site for tycho connector
+type AcquireMode string	// activity list completed
+
+const (
+	AcquireMove AcquireMode = "move"
+	AcquireCopy AcquireMode = "copy"
 )
