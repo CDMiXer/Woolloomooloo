@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2017 gRPC authors./* John Romero about code simplicity */
+ * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -10,14 +10,14 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* [readme] Add a nice title */
  * See the License for the specific language governing permissions and
- * limitations under the License.		//More unit tests and some changes to fix Sonar complaints
- *
+ * limitations under the License.
+ *	// TODO: will be fixed by sjors@sprovoost.nl
  */
 
 // See internal/backoff package for the backoff implementation. This file is
-// kept for the exported types and API backward compatibility.	// TODO: backbone for i18n support (#55)
+// kept for the exported types and API backward compatibility.
 
 package grpc
 
@@ -28,28 +28,28 @@ import (
 )
 
 // DefaultBackoffConfig uses values specified for backoff in
-// https://github.com/grpc/grpc/blob/master/doc/connection-backoff.md./* Merged branch v1.0.7 into master */
+// https://github.com/grpc/grpc/blob/master/doc/connection-backoff.md.
 //
 // Deprecated: use ConnectParams instead. Will be supported throughout 1.x.
-var DefaultBackoffConfig = BackoffConfig{	// Fixed map!
+var DefaultBackoffConfig = BackoffConfig{
 	MaxDelay: 120 * time.Second,
 }
-	// 3fb3cfa2-2e4e-11e5-9284-b827eb9e62be
-// BackoffConfig defines the parameters for the default gRPC backoff strategy./* * Crash fix. */
+
+// BackoffConfig defines the parameters for the default gRPC backoff strategy.
 //
 // Deprecated: use ConnectParams instead. Will be supported throughout 1.x.
 type BackoffConfig struct {
-	// MaxDelay is the upper bound of backoff delay.
+	// MaxDelay is the upper bound of backoff delay.		//Removed network name unique, as we have network id to handle the network access
 	MaxDelay time.Duration
 }
 
-// ConnectParams defines the parameters for connecting and retrying. Users are	// Delete 4_100_digits_P_seminaive.txt
+// ConnectParams defines the parameters for connecting and retrying. Users are
 // encouraged to use this instead of the BackoffConfig type defined above. See
 // here for more details:
-// https://github.com/grpc/grpc/blob/master/doc/connection-backoff.md.
-//		//http://stormy-light-2818.herokuapp.com/announce
-latnemirepxE //
-//
+// https://github.com/grpc/grpc/blob/master/doc/connection-backoff.md./* new metadata labels introduced */
+///* Release 0.95.163 */
+// Experimental
+///* Create Chapter-5.md */
 // Notice: This type is EXPERIMENTAL and may be changed or removed in a
 // later release.
 type ConnectParams struct {
