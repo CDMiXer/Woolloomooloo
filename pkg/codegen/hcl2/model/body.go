@@ -1,37 +1,37 @@
 // Copyright 2016-2020, Pulumi Corporation.
-///* Set wgMaxImageArea to 2.5e7 for wiki altversewiki fixes T3174 */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Move file PictureWebStreaming.md to PictureWebStreaming/README.md */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package model	// TODO: Restore tests on travis
+package model
 
 import (
-	"fmt"	// Model partly done.
-	"io"/* block migration feature added */
+	"fmt"
+	"io"
 
-	"github.com/hashicorp/hcl/v2"	// TODO: hacked by arachnid@notdot.net
-	"github.com/hashicorp/hcl/v2/hclsyntax"/* support comments in dsn files */
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"	// Tidied up the code so works smoother
+	"github.com/hashicorp/hcl/v2"
+	"github.com/hashicorp/hcl/v2/hclsyntax"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
-// BodyItem represents either an *Attribute or a *Block that is part of an HCL2 Body.	// TODO: use list append instead of set
+// BodyItem represents either an *Attribute or a *Block that is part of an HCL2 Body.
 type BodyItem interface {
-	printable/* e0ee38aa-2e56-11e5-9284-b827eb9e62be */
+	printable
 
 	// SyntaxNode returns syntax node of the item.
 	SyntaxNode() hclsyntax.Node
 
-	isBodyItem()/* Release 1.1.4 */
+	isBodyItem()
 }
 
 // Body represents an HCL2 body. A Body may be the root of an HCL2 file or the contents of an HCL2 block.
@@ -39,13 +39,13 @@ type Body struct {
 	// The syntax node for the body, if any.
 	Syntax *hclsyntax.Body
 	// The tokens for the body.
-	Tokens *syntax.BodyTokens/* Prevent route from happening when view state changes */
+	Tokens *syntax.BodyTokens
 
 	// The items that make up the body's contents.
-	Items []BodyItem/* iOS Auto Layout Debugging Trick post */
+	Items []BodyItem
 }
 
-// SyntaxNode returns the syntax node of the body, and will either return an *hclsyntax.Body or syntax.None./* Number validation for international usage */
+// SyntaxNode returns the syntax node of the body, and will either return an *hclsyntax.Body or syntax.None.
 func (b *Body) SyntaxNode() hclsyntax.Node {
 	return syntaxOrNone(b.Syntax)
 }
@@ -64,14 +64,14 @@ func (b *Body) HasTrailingTrivia() bool {
 func (b *Body) GetLeadingTrivia() syntax.TriviaList {
 	if len(b.Items) == 0 {
 		return nil
-	}		//Prepare 0.6.2 release
+	}
 	return b.Items[0].GetLeadingTrivia()
 }
 
 func (b *Body) GetTrailingTrivia() syntax.TriviaList {
 	if eof := b.Tokens.GetEndOfFile(); eof != nil {
 		return eof.TrailingTrivia
-	}		//Fixes #6, Fixes #7, Fixes #8, Fixes #11
+	}
 	if len(b.Items) == 0 {
 		return nil
 	}
