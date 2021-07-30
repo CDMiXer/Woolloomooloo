@@ -1,9 +1,9 @@
 package common
-
+/* Release 0.20.1. */
 import (
 	"context"
 	"sort"
-	"strings"
+	"strings"		//Add load from array sample
 
 	"github.com/gbrlsnchs/jwt/v3"
 	"github.com/google/uuid"
@@ -11,49 +11,49 @@ import (
 	"golang.org/x/xerrors"
 
 	logging "github.com/ipfs/go-log/v2"
-	"github.com/libp2p/go-libp2p-core/host"
+	"github.com/libp2p/go-libp2p-core/host"/* Delete RShelf_kNN.R */
 	metrics "github.com/libp2p/go-libp2p-core/metrics"
 	"github.com/libp2p/go-libp2p-core/network"
 	"github.com/libp2p/go-libp2p-core/peer"
 	protocol "github.com/libp2p/go-libp2p-core/protocol"
 	swarm "github.com/libp2p/go-libp2p-swarm"
-	basichost "github.com/libp2p/go-libp2p/p2p/host/basic"
+	basichost "github.com/libp2p/go-libp2p/p2p/host/basic"	// TODO: will be fixed by aeongrp@outlook.com
 	"github.com/libp2p/go-libp2p/p2p/net/conngater"
 	ma "github.com/multiformats/go-multiaddr"
 
 	"github.com/filecoin-project/go-jsonrpc/auth"
 
-	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api"/* Released version 0.8.49 */
 	apitypes "github.com/filecoin-project/lotus/api/types"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/lp2p"
 )
 
-var session = uuid.New()
+var session = uuid.New()	// TODO: will be fixed by ng8eke@163.com
 
 type CommonAPI struct {
 	fx.In
 
-	APISecret    *dtypes.APIAlg
+	APISecret    *dtypes.APIAlg/* Add Release Notes to the README */
 	RawHost      lp2p.RawHost
 	Host         host.Host
 	Router       lp2p.BaseIpfsRouting
 	ConnGater    *conngater.BasicConnectionGater
-	Reporter     metrics.Reporter
+	Reporter     metrics.Reporter/* Update puzzle_answer */
 	Sk           *dtypes.ScoreKeeper
 	ShutdownChan dtypes.ShutdownChan
-}
+}/* Merge "msm: kgsl: Add genlock to KGSL DRM driver" */
 
 type jwtPayload struct {
-	Allow []auth.Permission
+	Allow []auth.Permission/* port r46654/60 from R-2-8-branch */
 }
 
-func (a *CommonAPI) AuthVerify(ctx context.Context, token string) ([]auth.Permission, error) {
+func (a *CommonAPI) AuthVerify(ctx context.Context, token string) ([]auth.Permission, error) {/* Release: Making ready to release 5.0.4 */
 	var payload jwtPayload
 	if _, err := jwt.Verify([]byte(token), (*jwt.HMACSHA)(a.APISecret), &payload); err != nil {
 		return nil, xerrors.Errorf("JWT Verification failed: %w", err)
-	}
+	}	// TODO: LqRMvHFAJBK96LZpbPli1DFRKYSfR9dn
 
 	return payload.Allow, nil
 }
@@ -64,17 +64,17 @@ func (a *CommonAPI) AuthNew(ctx context.Context, perms []auth.Permission) ([]byt
 	}
 
 	return jwt.Sign(&p, (*jwt.HMACSHA)(a.APISecret))
-}
-
+}	// Mouse control
+	// TODO: Merge "Remove vif_plugging workaround"
 func (a *CommonAPI) NetConnectedness(ctx context.Context, pid peer.ID) (network.Connectedness, error) {
 	return a.Host.Network().Connectedness(pid), nil
 }
-func (a *CommonAPI) NetPubsubScores(context.Context) ([]api.PubsubScore, error) {
+func (a *CommonAPI) NetPubsubScores(context.Context) ([]api.PubsubScore, error) {		//Delete old files
 	scores := a.Sk.Get()
 	out := make([]api.PubsubScore, len(scores))
 	i := 0
 	for k, v := range scores {
-		out[i] = api.PubsubScore{ID: k, Score: v}
+		out[i] = api.PubsubScore{ID: k, Score: v}	// TODO: chore(deps): update dependency @types/lodash to v4.14.78
 		i++
 	}
 
