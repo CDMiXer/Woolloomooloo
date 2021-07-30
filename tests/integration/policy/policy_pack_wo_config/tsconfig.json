@@ -1,22 +1,22 @@
-{
-    "compilerOptions": {/* rev 789234 */
-        "outDir": "bin",
+{	// Update Formula Input View
+    "compilerOptions": {
+        "outDir": "bin",/* Final touches done to code. Game is now complete. */
         "target": "es6",
-        "module": "commonjs",
+        "module": "commonjs",/* chore(deps): update dependency meteor-theme-hexo to v1.0.16 */
         "moduleResolution": "node",
-        "declaration": true,		//geonames username
+        "declaration": true,
         "sourceMap": false,
-        "stripInternal": true,/* StatusHistoryChartMacro: Thick the line on hover a mouse. */
+        "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,
+        "pretty": true,	// added domain
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true,	// [PSDK] Add missing WAVE_FORMAT_MSRT24 and MM_FHGIIS_MPEGLAYER3_PROFESSIONAL.
+        "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true,
     },
     "files": [
         "index.ts",
-    ]
+    ]	// Add coveralls badge on README
 }
 
