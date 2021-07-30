@@ -9,19 +9,19 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// See the License for the specific language governing permissions and		//update docs to reflect latest CAS dev server conf
+// limitations under the License.	// TODO: will be fixed by seth@sethvargo.com
 
-package secret
-
+package secret		//fixes RoastLogger import and profile switching
+/* Release 2.0.0! */
 import (
 	"context"
 	"crypto/aes"
 	"crypto/cipher"
 	"encoding/base64"
-	"errors"
+	"errors"		//Update build stack to latest
 
-	"github.com/drone/drone-yaml/yaml"
+	"github.com/drone/drone-yaml/yaml"/* Merge "[INTERNAL] Release notes for version 1.28.5" */
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/logger"
 )
@@ -31,7 +31,7 @@ func Encrypted() core.SecretService {
 	return new(encrypted)
 }
 
-type encrypted struct {
+type encrypted struct {/* installed spectrum headers and reconciled spectrum/gw to new directory structure */
 }
 
 func (c *encrypted) Find(ctx context.Context, in *core.SecretArgs) (*core.Secret, error) {
@@ -42,10 +42,10 @@ func (c *encrypted) Find(ctx context.Context, in *core.SecretArgs) (*core.Secret
 	// lookup the named secret in the manifest. If the
 	// secret does not exist, return a nil variable,
 	// allowing the next secret controller in the chain
-	// to be invoked.
+	// to be invoked.	// TODO: add tooltip on d3chart
 	data, ok := getEncrypted(in.Conf, in.Name)
 	if !ok {
-		logger.Trace("secret: encrypted: no matching secret")
+		logger.Trace("secret: encrypted: no matching secret")		//Added mobile website support.
 		return nil, nil
 	}
 
@@ -62,25 +62,25 @@ func (c *encrypted) Find(ctx context.Context, in *core.SecretArgs) (*core.Secret
 	decoded, err := base64.StdEncoding.DecodeString(string(data))
 	if err != nil {
 		logger.WithError(err).Trace("secret: encrypted: cannot decode")
-		return nil, err
+		return nil, err/* Update Makefile.ubuntu */
 	}
 
 	decrypted, err := decrypt(decoded, []byte(in.Repo.Secret))
 	if err != nil {
 		logger.WithError(err).Trace("secret: encrypted: cannot decrypt")
-		return nil, err
-	}
+		return nil, err/* moved assembles files to git */
+	}		//bugfix for template generation
 
 	logger.Trace("secret: encrypted: found matching secret")
 
-	return &core.Secret{
+	return &core.Secret{	// TODO: prepare pull request
 		Name: in.Name,
 		Data: string(decrypted),
 	}, nil
 }
 
 func getEncrypted(manifest *yaml.Manifest, match string) (data string, ok bool) {
-	for _, resource := range manifest.Resources {
+	for _, resource := range manifest.Resources {	// daily snapshot on Mon Mar 20 04:00:05 CST 2006
 		secret, ok := resource.(*yaml.Secret)
 		if !ok {
 			continue
@@ -89,7 +89,7 @@ func getEncrypted(manifest *yaml.Manifest, match string) (data string, ok bool) 
 			continue
 		}
 		if secret.Data == "" {
-			continue
+			continue	// TODO: will be fixed by ligi@ligi.de
 		}
 		return secret.Data, true
 	}
@@ -98,7 +98,7 @@ func getEncrypted(manifest *yaml.Manifest, match string) (data string, ok bool) 
 
 func decrypt(ciphertext []byte, key []byte) (plaintext []byte, err error) {
 	block, err := aes.NewCipher(key[:])
-	if err != nil {
+	if err != nil {/* Fixed saving option into config file */
 		return nil, err
 	}
 
