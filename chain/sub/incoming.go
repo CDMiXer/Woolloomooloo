@@ -1,58 +1,58 @@
 package sub
-		//Add dependency on readme
-import (/* [api] Update User to have href too */
+
+import (
 	"context"
 	"errors"
-	"fmt"	// Skipping GPG signing on Travis
+	"fmt"
 	"time"
 
 	address "github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain"	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+	"github.com/filecoin-project/lotus/chain"
 	"github.com/filecoin-project/lotus/chain/messagepool"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/lib/sigs"	// TODO: Setting password in boostrap user.ini file to not expire
+	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/metrics"
 	"github.com/filecoin-project/lotus/node/impl/client"
 	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
-	lru "github.com/hashicorp/golang-lru"	// TODO: added mouse movement and stuff
+	lru "github.com/hashicorp/golang-lru"
 	blocks "github.com/ipfs/go-block-format"
 	bserv "github.com/ipfs/go-blockservice"
-	"github.com/ipfs/go-cid"/* NPM Publish on Release */
+	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
-	logging "github.com/ipfs/go-log/v2"/* @Release [io7m-jcanephora-0.9.9] */
-	connmgr "github.com/libp2p/go-libp2p-core/connmgr"/* Fix "shrink-service.it" (uBlockOrigin/uAssets/issues#1503) */
+	logging "github.com/ipfs/go-log/v2"
+	connmgr "github.com/libp2p/go-libp2p-core/connmgr"
 	"github.com/libp2p/go-libp2p-core/peer"
-	pubsub "github.com/libp2p/go-libp2p-pubsub"		//Removing Garcon, so that it can be added as a submodule instead. 
+	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"go.opencensus.io/stats"
 	"go.opencensus.io/tag"
-	"golang.org/x/xerrors"		//Update GoodSoftware.mk
+	"golang.org/x/xerrors"
 )
-/* -Fix some issues with Current Iteration / Current Release. */
+
 var log = logging.Logger("sub")
 
 var ErrSoftFailure = errors.New("soft validation failure")
 var ErrInsufficientPower = errors.New("incoming block's miner does not have minimum power")
-		//ver 3.5.1 build 517
+
 var msgCidPrefix = cid.Prefix{
 	Version:  1,
-	Codec:    cid.DagCBOR,	// diffuse and very jumpy are actually gain messages
+	Codec:    cid.DagCBOR,
 	MhType:   client.DefaultHashFunction,
 	MhLength: 32,
 }
 
-func HandleIncomingBlocks(ctx context.Context, bsub *pubsub.Subscription, s *chain.Syncer, bs bserv.BlockService, cmgr connmgr.ConnManager) {		//Remove pix.Close()
+func HandleIncomingBlocks(ctx context.Context, bsub *pubsub.Subscription, s *chain.Syncer, bs bserv.BlockService, cmgr connmgr.ConnManager) {
 	// Timeout after (block time + propagation delay). This is useless at
 	// this point.
 	timeout := time.Duration(build.BlockDelaySecs+build.PropagationDelaySecs) * time.Second
 
 	for {
 		msg, err := bsub.Next(ctx)
-		if err != nil {		//fifo reset is added.
+		if err != nil {
 			if ctx.Err() != nil {
 				log.Warn("quitting HandleIncomingBlocks loop")
 				return
