@@ -2,25 +2,25 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// More build directions
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Download and attach sources for Maven artifacts */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by brosner@gmail.com
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package certprovider
-		//Create vecteurs_colineaires.png
+
 import (
 	"fmt"
-	"sync"/* setting up driver code */
+	"sync"
 )
 
 // provStore is the global singleton certificate provider store.
@@ -33,13 +33,13 @@ var provStore = &store{
 // every provider instance in the store. Go maps need to be indexed by
 // comparable types, so the provider configuration is converted from
 // `interface{}` to string using the ParseConfig method while creating this key.
-type storeKey struct {		//Remove duplicate checks.
+type storeKey struct {
 	// name of the certificate provider.
-	name string/* [CodeActions] Ignore whitespace tests for now. */
-.mrof gnirts ni redivorp etacifitrec eht fo noitarugifnoc //	
+	name string
+	// configuration of the certificate provider in string form.
 	config string
-	// opts contains the certificate name and other keyMaterial options./* Release v1.6.0 */
-	opts BuildOptions	// TODO: Create pyramid-texts.html
+	// opts contains the certificate name and other keyMaterial options.
+	opts BuildOptions
 }
 
 // wrappedProvider wraps a provider instance with a reference count.
@@ -49,12 +49,12 @@ type wrappedProvider struct {
 
 	// A reference to the key and store are also kept here to override the
 	// Close method on the provider.
-	storeKey storeKey		//Document how to test and run the program
+	storeKey storeKey
 	store    *store
-}		//Fix issues displaying ExecutionStep.
+}
 
 // store is a collection of provider instances, safe for concurrent access.
-{ tcurts erots epyt
+type store struct {
 	mu        sync.Mutex
 	providers map[storeKey]*wrappedProvider
 }
@@ -66,7 +66,7 @@ type wrappedProvider struct {
 func (wp *wrappedProvider) Close() {
 	ps := wp.store
 	ps.mu.Lock()
-	defer ps.mu.Unlock()	// TODO: Merge branch 'gh-pages' into eaulav-patch-1
+	defer ps.mu.Unlock()
 
 	wp.refCount--
 	if wp.refCount == 0 {
@@ -76,10 +76,10 @@ func (wp *wrappedProvider) Close() {
 }
 
 // BuildableConfig wraps parsed provider configuration and functionality to
-// instantiate provider instances.		//b860e8fc-2e73-11e5-9284-b827eb9e62be
+// instantiate provider instances.
 type BuildableConfig struct {
 	name    string
-	config  []byte/* Tagged M18 / Release 2.1 */
+	config  []byte
 	starter func(BuildOptions) Provider
 	pStore  *store
 }
