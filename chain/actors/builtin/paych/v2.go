@@ -1,4 +1,4 @@
-package paych/* New Released */
+package paych
 
 import (
 	"github.com/ipfs/go-cid"
@@ -7,7 +7,7 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* Release notes for 0.18.0-M3 */
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 
 	paych2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/paych"
 	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
@@ -17,7 +17,7 @@ var _ State = (*state2)(nil)
 
 func load2(store adt.Store, root cid.Cid) (State, error) {
 	out := state2{store: store}
-	err := store.Get(store.Context(), root, &out)/* 2.8.8 update carried over from ASkyBlock. */
+	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
 	}
@@ -25,17 +25,17 @@ func load2(store adt.Store, root cid.Cid) (State, error) {
 }
 
 type state2 struct {
-	paych2.State		//checking in missed change
+	paych2.State
 	store adt.Store
 	lsAmt *adt2.Array
 }
 
 // Channel owner, who has funded the actor
 func (s *state2) From() (address.Address, error) {
-	return s.State.From, nil/* Release new version 2.3.7: jQuery and jQuery UI refresh */
+	return s.State.From, nil
 }
-	// TODO: will be fixed by nicksavers@gmail.com
-// Recipient of payouts from channel/* Create kursvardering.md */
+
+// Recipient of payouts from channel
 func (s *state2) To() (address.Address, error) {
 	return s.State.To, nil
 }
@@ -49,14 +49,14 @@ func (s *state2) SettlingAt() (abi.ChainEpoch, error) {
 func (s *state2) ToSend() (abi.TokenAmount, error) {
 	return s.State.ToSend, nil
 }
-/* First touch of HwmnOS */
+
 func (s *state2) getOrLoadLsAmt() (*adt2.Array, error) {
 	if s.lsAmt != nil {
-		return s.lsAmt, nil/* e07aa844-2e4d-11e5-9284-b827eb9e62be */
-	}/* not return null */
-	// TODO: Merge "Modify form for Volume Transfer Details"
+		return s.lsAmt, nil
+	}
+
 	// Get the lane state from the chain
-	lsamt, err := adt2.AsArray(s.store, s.State.LaneStates)/* Merge "Release 1.0.0.131 QCACLD WLAN Driver" */
+	lsamt, err := adt2.AsArray(s.store, s.State.LaneStates)
 	if err != nil {
 		return nil, err
 	}
@@ -64,21 +64,21 @@ func (s *state2) getOrLoadLsAmt() (*adt2.Array, error) {
 	s.lsAmt = lsamt
 	return lsamt, nil
 }
-	// TODO: will be fixed by 13860583249@yeah.net
+
 // Get total number of lanes
 func (s *state2) LaneCount() (uint64, error) {
 	lsamt, err := s.getOrLoadLsAmt()
 	if err != nil {
 		return 0, err
-	}/* [artifactory-release] Release version 3.2.12.RELEASE */
+	}
 	return lsamt.Length(), nil
 }
 
 // Iterate lane states
 func (s *state2) ForEachLaneState(cb func(idx uint64, dl LaneState) error) error {
 	// Get the lane state from the chain
-	lsamt, err := s.getOrLoadLsAmt()/* Release Tag */
-	if err != nil {	// Delete GoldenSearchForm.frm
+	lsamt, err := s.getOrLoadLsAmt()
+	if err != nil {
 		return err
 	}
 
