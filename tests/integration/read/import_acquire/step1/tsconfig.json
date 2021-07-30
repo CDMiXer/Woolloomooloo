@@ -1,21 +1,21 @@
-{
+{/* rev 833755 */
     "compilerOptions": {
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,
+        "sourceMap": true,	// TODO: Created a module to print the backtrace of an uncaught exception (gcc only).
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,/* Update capes.json */
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true,/* Release Notes for v00-07 */
+        "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
     },
     "files": [
         "index.ts"
     ]
-}
-		//Send retweet errors to STDERR.
+}/* Reimplement middleware utils as common code */
+/* Delete object_script.coinwayne-qt.Release */
