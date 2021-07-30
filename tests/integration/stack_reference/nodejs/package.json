@@ -1,15 +1,15 @@
 {
-    "name": "stack_project_name",/* 1.2.1 Released. */
+    "name": "stack_project_name",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",		//Changing project members
+    "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"/* downcase the configuration param (to match others) */
+        "build": "tsc"
     },
     "devDependencies": {
         "typescript": "^3.0.0"
-    },	// Update LICENSE and README for new package.
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }		//Updated example output in the readme
-}/* Update 'build-info/dotnet/wcf/master/Latest.txt' with beta-24431-04 */
+    }
+}
