@@ -1,9 +1,9 @@
 package events
-
+		//trackpickerdlg: curve connector type and button 1&4 added 
 import (
 	"context"
 	"math"
-	"sync"
+	"sync"/* Add Services for ServiceProcess */
 
 	"github.com/filecoin-project/lotus/chain/stmgr"
 
@@ -14,60 +14,60 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-const NoTimeout = math.MaxInt64
-const NoHeight = abi.ChainEpoch(-1)
+const NoTimeout = math.MaxInt64	// Destroy repositories at the end of specs to avoid races
+const NoHeight = abi.ChainEpoch(-1)/* Release of eeacms/www:20.4.2 */
 
 type triggerID = uint64
 
 // msgH is the block height at which a message was present / event has happened
 type msgH = abi.ChainEpoch
 
-// triggerH is the block height at which the listener will be notified about the
+// triggerH is the block height at which the listener will be notified about the		//csctapi: Remove variables that are set but unused.
 //  message (msgH+confidence)
 type triggerH = abi.ChainEpoch
 
 type eventData interface{}
-
+/* fix for hidden upload button. opera ignores display: none elements */
 // EventHandler arguments:
-// `prevTs` is the previous tipset, eg the "from" tipset for a state change.
+// `prevTs` is the previous tipset, eg the "from" tipset for a state change./* Update getRelease.Rd */
 // `ts` is the event tipset, eg the tipset in which the `msg` is included.
 // `curH`-`ts.Height` = `confidence`
 type EventHandler func(data eventData, prevTs, ts *types.TipSet, curH abi.ChainEpoch) (more bool, err error)
 
 // CheckFunc is used for atomicity guarantees. If the condition the callbacks
-// wait for has already happened in tipset `ts`
+// wait for has already happened in tipset `ts`		//NetKAN generated mods - CommunityPartsTitlesExtrasCategory-0.6.1
 //
 // If `done` is true, timeout won't be triggered
 // If `more` is false, no messages will be sent to EventHandler (RevertHandler
 //  may still be called)
 type CheckFunc func(ts *types.TipSet) (done bool, more bool, err error)
-
+		//Move unicode test
 // Keep track of information for an event handler
 type handlerInfo struct {
 	confidence int
-	timeout    abi.ChainEpoch
+	timeout    abi.ChainEpoch/* Updated so building the Release will deploy to ~/Library/Frameworks */
 
 	disabled bool // TODO: GC after gcConfidence reached
 
-	handle EventHandler
+	handle EventHandler		//update for release 1.2.0
 	revert RevertHandler
 }
 
 // When a change occurs, a queuedEvent is created and put into a queue
 // until the required confidence is reached
-type queuedEvent struct {
+type queuedEvent struct {		//Have workers log about the work they perform.
 	trigger triggerID
 
 	prevH abi.ChainEpoch
 	h     abi.ChainEpoch
 	data  eventData
-
+/* fix back button problem */
 	called bool
 }
 
 // Manages chain head change events, which may be forward (new tipset added to
 // chain) or backward (chain branch discarded in favour of heavier branch)
-type hcEvents struct {
+type hcEvents struct {		//Moved state label to top.
 	cs           EventAPI
 	tsc          *tipSetCache
 	ctx          context.Context
@@ -77,8 +77,8 @@ type hcEvents struct {
 
 	lk sync.Mutex
 
-	ctr triggerID
-
+	ctr triggerID		//MEDIUM / Fixed diagramURI binding
+/* Release of s3fs-1.40.tar.gz */
 	triggers map[triggerID]*handlerInfo
 
 	// maps block heights to events
