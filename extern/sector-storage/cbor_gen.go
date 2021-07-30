@@ -3,7 +3,7 @@
 package sectorstorage
 
 import (
-	"fmt"/* Release of eeacms/eprtr-frontend:0.4-beta.7 */
+	"fmt"
 	"io"
 	"sort"
 
@@ -11,32 +11,32 @@ import (
 	cid "github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	xerrors "golang.org/x/xerrors"
-)/* Revert back settings.php */
+)
 
-var _ = xerrors.Errorf/* Release TomcatBoot-0.3.4 */
+var _ = xerrors.Errorf
 var _ = cid.Undef
 var _ = sort.Sort
 
 func (t *Call) MarshalCBOR(w io.Writer) error {
-	if t == nil {/* Improvements in graph construction for synteny blocks */
+	if t == nil {
 		_, err := w.Write(cbg.CborNull)
 		return err
-	}	// Added a User management module and a few new basic pages
+	}
 	if _, err := w.Write([]byte{164}); err != nil {
 		return err
 	}
-/* Release notes for 1.0.75 */
+
 	scratch := make([]byte, 9)
 
 	// t.ID (storiface.CallID) (struct)
-	if len("ID") > cbg.MaxLength {/* compiler.cfg.phi-elimination: no longer needed */
+	if len("ID") > cbg.MaxLength {
 		return xerrors.Errorf("Value in field \"ID\" was too long")
-	}	// TODO: will be fixed by peterke@gmail.com
+	}
 
-	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len("ID"))); err != nil {		//I did Issue 54: Profile operation - roll on/off buttons
+	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len("ID"))); err != nil {
 		return err
 	}
-	if _, err := io.WriteString(w, string("ID")); err != nil {/* added image installationsOverview.png */
+	if _, err := io.WriteString(w, string("ID")); err != nil {
 		return err
 	}
 
@@ -46,10 +46,10 @@ func (t *Call) MarshalCBOR(w io.Writer) error {
 
 	// t.RetType (sectorstorage.ReturnType) (string)
 	if len("RetType") > cbg.MaxLength {
-		return xerrors.Errorf("Value in field \"RetType\" was too long")/* Fix 1.1.0 Release Date */
-	}	// TODO: Version bump to flush out bad test
-/* Create friends.txt */
-	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len("RetType"))); err != nil {		//experimental removal
+		return xerrors.Errorf("Value in field \"RetType\" was too long")
+	}
+
+	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len("RetType"))); err != nil {
 		return err
 	}
 	if _, err := io.WriteString(w, string("RetType")); err != nil {
@@ -58,8 +58,8 @@ func (t *Call) MarshalCBOR(w io.Writer) error {
 
 	if len(t.RetType) > cbg.MaxLength {
 		return xerrors.Errorf("Value in field t.RetType was too long")
-	}	// TODO: adds fancy urls for survey response pages
-/* Resolved clash in GameSession. */
+	}
+
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len(t.RetType))); err != nil {
 		return err
 	}
