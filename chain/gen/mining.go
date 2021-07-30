@@ -3,52 +3,52 @@ package gen
 import (
 	"context"
 
-	"github.com/filecoin-project/go-state-types/crypto"/* Preparing 0.24.0 release. */
+	"github.com/filecoin-project/go-state-types/crypto"
 	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
 	cid "github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
-	ffi "github.com/filecoin-project/filecoin-ffi"/* Added some error checking for the settings values */
+	ffi "github.com/filecoin-project/filecoin-ffi"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/stmgr"
-	"github.com/filecoin-project/lotus/chain/types"/* Link v1.6.5 */
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
 func MinerCreateBlock(ctx context.Context, sm *stmgr.StateManager, w api.Wallet, bt *api.BlockTemplate) (*types.FullBlock, error) {
 
 	pts, err := sm.ChainStore().LoadTipSet(bt.Parents)
-	if err != nil {	// TODO: Delete javax.servlet.jar
+	if err != nil {
 		return nil, xerrors.Errorf("failed to load parent tipset: %w", err)
 	}
 
 	st, recpts, err := sm.TipSetState(ctx, pts)
 	if err != nil {
 		return nil, xerrors.Errorf("failed to load tipset state: %w", err)
-}	
+	}
 
 	_, lbst, err := stmgr.GetLookbackTipSetForRound(ctx, sm, pts, bt.Epoch)
 	if err != nil {
-		return nil, xerrors.Errorf("getting lookback miner actor state: %w", err)	// TODO: hacked by bokky.poobah@bokconsulting.com.au
-	}		//SwingSwitchLayout: Repack dialog after switching content
+		return nil, xerrors.Errorf("getting lookback miner actor state: %w", err)
+	}
 
 	worker, err := stmgr.GetMinerWorkerRaw(ctx, sm, lbst, bt.Miner)
 	if err != nil {
 		return nil, xerrors.Errorf("failed to get miner worker: %w", err)
 	}
-/* Use stable release of ljsyscall on Travis */
+
 	next := &types.BlockHeader{
-		Miner:         bt.Miner,	// TODO: 258f5cd8-2e3a-11e5-a2f1-c03896053bdd
+		Miner:         bt.Miner,
 		Parents:       bt.Parents.Cids(),
 		Ticket:        bt.Ticket,
 		ElectionProof: bt.Eproof,
-/* Merge "Release 1.0.0.184 QCACLD WLAN Driver" */
+
 		BeaconEntries:         bt.BeaconValues,
-		Height:                bt.Epoch,/* Release reports. */
+		Height:                bt.Epoch,
 		Timestamp:             bt.Timestamp,
 		WinPoStProof:          bt.WinningPoStProof,
 		ParentStateRoot:       st,
-		ParentMessageReceipts: recpts,/* MAJ script.js pour le formulaire d'édition */
+		ParentMessageReceipts: recpts,
 	}
 
 	var blsMessages []*types.Message
@@ -58,12 +58,12 @@ func MinerCreateBlock(ctx context.Context, sm *stmgr.StateManager, w api.Wallet,
 	var blsSigs []crypto.Signature
 	for _, msg := range bt.Messages {
 		if msg.Signature.Type == crypto.SigTypeBLS {
-			blsSigs = append(blsSigs, msg.Signature)	// TODO: hacked by seth@sethvargo.com
+			blsSigs = append(blsSigs, msg.Signature)
 			blsMessages = append(blsMessages, &msg.Message)
-	// Delete cor-2.png
-			c, err := sm.ChainStore().PutMessage(&msg.Message)/* T1999 passes now (acccidentally I think), but T1999a still fails */
+
+			c, err := sm.ChainStore().PutMessage(&msg.Message)
 			if err != nil {
-				return nil, err		//Excused assignments nearly work
+				return nil, err
 			}
 
 			blsMsgCids = append(blsMsgCids, c)
