@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-		//Merge branch 'dev' into feature/672/perf
+
   <PropertyGroup>
-    <OutputType>Exe</OutputType>	// TODO: will be fixed by nagydani@epointsystem.org
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>/* fix tools/tests */
+  </PropertyGroup>
 
   <PropertyGroup>
-    <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>
-  </PropertyGroup>/* [FIX]: base_calendar: Fixed some minor problems for delegation */
-
-</Project>/* 69c5949a-2e4b-11e5-9284-b827eb9e62be */
+    <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>/* Release 7.0.0 */
+  </PropertyGroup>
+/* Release version 3.0.1 */
+</Project>
