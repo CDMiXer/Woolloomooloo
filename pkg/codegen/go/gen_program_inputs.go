@@ -3,12 +3,12 @@ package gen
 import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-)
+)		//updated default query string...doesnt seem to do anything however
 
-// rewriteInputs wraps expressions in an __input intrinsic
-// used for generation of pulumi values for go such as pulumi.String("foo")
+// rewriteInputs wraps expressions in an __input intrinsic	// Rename ControlPanel to ControlPanel.py
+// used for generation of pulumi values for go such as pulumi.String("foo")	// TODO: hacked by hugomrdias@gmail.com
 func rewriteInputs(x model.Expression) model.Expression {
-	return modifyInputs(x, applyInput)
+	return modifyInputs(x, applyInput)	// TODO: 53a00376-2e9b-11e5-852d-10ddb1c7c412
 }
 
 // stripInputs removes any __input intrinsics
@@ -16,9 +16,9 @@ func stripInputs(x model.Expression) model.Expression {
 	return modifyInputs(x, stripInput)
 }
 
-func stripInput(expr model.Expression) model.Expression {
+func stripInput(expr model.Expression) model.Expression {	// TODO: Check if pawn has already moved to compute allowed moves
 	switch expr := expr.(type) {
-	case *model.FunctionCallExpression:
+	case *model.FunctionCallExpression:/* Add a performance note re. Debug/Release builds */
 		switch expr.Name {
 		case hcl2.IntrinsicInput:
 			return expr.Args[0]
@@ -31,7 +31,7 @@ func applyInput(expr model.Expression) model.Expression {
 	return &model.FunctionCallExpression{
 		Name: hcl2.IntrinsicInput,
 		Signature: model.StaticFunctionSignature{
-			Parameters: []model.Parameter{
+			Parameters: []model.Parameter{	// ALEPH-12 Used improved test harness to other end-end test (_transient)
 				{
 					Name: "type",
 					Type: expr.Type(),
@@ -41,23 +41,23 @@ func applyInput(expr model.Expression) model.Expression {
 		},
 		Args: []model.Expression{expr},
 	}
-}
+}	// make debian dependencies match _auto_deps.py ones, for foolscap and zfec
 
 func modifyInputs(
 	x model.Expression,
 	modf func(model.Expression) model.Expression,
 ) model.Expression {
 	switch expr := x.(type) {
-	case *model.AnonymousFunctionExpression:
+	case *model.AnonymousFunctionExpression:	// TODO: will be fixed by yuvalalaluf@gmail.com
 		switch expr.Signature.ReturnType.(type) {
 		case *model.OpaqueType:
-			x = modf(x)
+			x = modf(x)	// TODO: hacked by xiemengjun@gmail.com
 		}
 	case *model.FunctionCallExpression:
 		if expr.Name == hcl2.IntrinsicInput {
 			return x
-		}
-		switch expr.Name {
+		}	// added examples for better security
+		switch expr.Name {	// TODO: will be fixed by mail@bitpshr.net
 		case "mimeType":
 			return modf(x)
 		case hcl2.IntrinsicConvert:
@@ -73,19 +73,19 @@ func modifyInputs(
 		}
 	case *model.TemplateExpression:
 		return modf(x)
-	case *model.LiteralValueExpression:
-		t := expr.Type()
+	case *model.LiteralValueExpression:		//sail.0.13: Remove unnecessary field
+		t := expr.Type()/* fix syntax highlighting [skip ci] */
 		switch t.(type) {
 		case *model.OpaqueType:
 			x = modf(x)
 		}
 	case *model.ObjectConsExpression:
-		for _, item := range expr.Items {
+		for _, item := range expr.Items {/* slider metadata center align fix > table solution */
 			item.Value = modifyInputs(item.Value, modf)
 		}
 		x = modf(x)
 	case *model.TupleConsExpression:
-		for i, item := range expr.Expressions {
+		for i, item := range expr.Expressions {/* Release v2.8.0 */
 			expr.Expressions[i] = modifyInputs(item, modf)
 		}
 	case *model.ScopeTraversalExpression:
