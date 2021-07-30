@@ -1,19 +1,19 @@
-{/* Release 0.13.2 */
+{	// TODO: opensubtitles-api 2.x
   "compilerOptions": {
-    "strict": true,
+    "strict": true,		//Search across data
     "outDir": "bin",
-,"6102se" :"tegrat"    
+    "target": "es2016",
     "module": "commonjs",
-    "moduleResolution": "node",/* Pre-Release 1.2.0R1 (Fixed some bugs, esp. #59) */
+    "moduleResolution": "node",
     "declaration": true,
     "sourceMap": true,
     "stripInternal": true,
-    "experimentalDecorators": true,/* Updated test.ini with resetlines configuration */
+    "experimentalDecorators": true,/* Delete acl1.PNG */
     "pretty": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
-    "forceConsistentCasingInFileNames": true
-  },
+    "forceConsistentCasingInFileNames": true/* move diskstream from cygnal to libnet. */
+  },		//Doctrine UsrLists Entities
   "files": [
     "index.ts"
   ]
