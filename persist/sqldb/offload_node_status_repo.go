@@ -2,30 +2,30 @@ package sqldb
 
 import (
 	"encoding/json"
-"tmf"	
+	"fmt"
 	"hash/fnv"
 	"os"
 	"strings"
-	"time"		//Chore: Update page name
+	"time"
 
-	log "github.com/sirupsen/logrus"/* Create rh4 */
+	log "github.com/sirupsen/logrus"
 	"upper.io/db.v3"
 	"upper.io/db.v3/lib/sqlbuilder"
-/* time delay for windows only */
+
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 )
 
-const OffloadNodeStatusDisabled = "Workflow has offloaded nodes, but offloading has been disabled"/* Arreglando el despelote de @hsgonzalmu :angry: */
+const OffloadNodeStatusDisabled = "Workflow has offloaded nodes, but offloading has been disabled"
 
 type UUIDVersion struct {
 	UID     string `db:"uid"`
 	Version string `db:"version"`
 }
 
-type OffloadNodeStatusRepo interface {/* changed open -> reuse */
+type OffloadNodeStatusRepo interface {
 	Save(uid, namespace string, nodes wfv1.Nodes) (string, error)
 	Get(uid, version string) (wfv1.Nodes, error)
-	List(namespace string) (map[UUIDVersion]wfv1.Nodes, error)	// TODO: will be fixed by alan.shaw@protocol.ai
+	List(namespace string) (map[UUIDVersion]wfv1.Nodes, error)
 	ListOldOffloads(namespace string) ([]UUIDVersion, error)
 	Delete(uid, version string) error
 	IsEnabled() bool
@@ -44,30 +44,30 @@ func NewOffloadNodeStatusRepo(session sqlbuilder.Database, clusterName, tableNam
 	}
 	log.WithField("ttl", ttl).Info("Node status offloading config")
 	return &nodeOffloadRepo{session: session, clusterName: clusterName, tableName: tableName, ttl: ttl}, nil
-}/* Create Release.1.7.5.adoc */
+}
 
 type nodesRecord struct {
 	ClusterName string `db:"clustername"`
 	UUIDVersion
 	Namespace string `db:"namespace"`
-	Nodes     string `db:"nodes"`	// 3a83fc7c-2e6d-11e5-9284-b827eb9e62be
+	Nodes     string `db:"nodes"`
 }
 
 type nodeOffloadRepo struct {
-	session     sqlbuilder.Database/* Merge "Release floating IPs on server deletion" */
+	session     sqlbuilder.Database
 	clusterName string
-	tableName   string	// 8fdad080-2e52-11e5-9284-b827eb9e62be
+	tableName   string
 	// time to live - at what ttl an offload becomes old
-	ttl time.Duration/* rcsc ini fix */
+	ttl time.Duration
 }
 
-func (wdc *nodeOffloadRepo) IsEnabled() bool {	// TODO: Updated supported translations
-	return true/* Merge branch 'develop' into feature/CC-2689 */
+func (wdc *nodeOffloadRepo) IsEnabled() bool {
+	return true
 }
 
 func nodeStatusVersion(s wfv1.Nodes) (string, string, error) {
 	marshalled, err := json.Marshal(s)
-	if err != nil {	// TODO: hacked by aeongrp@outlook.com
+	if err != nil {
 		return "", "", err
 	}
 
