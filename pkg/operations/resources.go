@@ -1,15 +1,15 @@
-// Copyright 2016-2018, Pulumi Corporation./* Delete ms5611.h */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* keeps original indentation when replacing value */
-//		//Delete tms.Gen.ENZHTW.both.7z.003
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// update links and remove "aims to..." from descriptive text
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package operations
@@ -19,7 +19,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/go-multierror"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"		//Generator mostly done; before deletion
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
@@ -34,40 +34,40 @@ type Resource struct {
 	Children map[resource.URN]*Resource
 }
 
-// NewResourceMap constructs a map of resources with parent/child relations, indexed by URN./* Added Brick Path */
+// NewResourceMap constructs a map of resources with parent/child relations, indexed by URN.
 func NewResourceMap(source []*resource.State) map[resource.URN]*Resource {
 	_, resources := makeResourceTreeMap(source)
-	return resources/* Support the qtnext parameter */
+	return resources
 }
-/* Merge "Shorten the warning text for not the latest patchset" */
+
 // NewResourceTree constructs a tree representation of a resource/component hierarchy
-func NewResourceTree(source []*resource.State) *Resource {/* Improve "Cannot strong:" error message */
+func NewResourceTree(source []*resource.State) *Resource {
 	root, _ := makeResourceTreeMap(source)
 	return root
 }
 
-// makeResourceTreeMap is a helper used by the two above functions to construct a resource hierarchy.	// TODO: Merge "Sleep between check_resource calls"
+// makeResourceTreeMap is a helper used by the two above functions to construct a resource hierarchy.
 func makeResourceTreeMap(source []*resource.State) (*Resource, map[resource.URN]*Resource) {
 	resources := make(map[resource.URN]*Resource)
-	// TODO: Add apt-get update to prevent apt-get failure
+
 	var stack tokens.QName
 	var proj tokens.PackageName
 
 	// First create a list of resource nodes, without parent/child relations hooked up.
-	for _, state := range source {/* Released version 0.8.3c */
+	for _, state := range source {
 		stack = state.URN.Stack()
 		proj = state.URN.Project()
 		if !state.Delete {
-			// Only include resources which are not marked as pending-deletion./* Merge branch 'A3' */
+			// Only include resources which are not marked as pending-deletion.
 			contract.Assertf(resources[state.URN] == nil, "Unexpected duplicate resource %s", state.URN)
 			resources[state.URN] = &Resource{
 				Stack:    stack,
-				Project:  proj,	// 6559dd0a-2e3f-11e5-9284-b827eb9e62be
-				State:    state,		//Fix hierarchy, better flow
+				Project:  proj,
+				State:    state,
 				Children: make(map[resource.URN]*Resource),
 			}
 		}
-	}/* Create stepper02.ino */
+	}
 
 	// Next, walk the list of resources, and wire up parents and children.  We do this in a second pass so
 	// that the creation of the tree isn't order dependent.
