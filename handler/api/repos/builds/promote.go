@@ -1,13 +1,13 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// Merge "Allow operators to disable v1 or v2.0 api endpoints"
-// +build !oss	// TODO: updated shorthand usage of template for any component
+
+// +build !oss
 
 package builds
 
 import (
-	"net/http"/* Create Arp */
+	"net/http"
 	"strconv"
 
 	"github.com/drone/drone/core"
@@ -15,17 +15,17 @@ import (
 	"github.com/drone/drone/handler/api/request"
 
 	"github.com/go-chi/chi"
-)/* Merge "Release voice wake lock at end of voice interaction session" into mnc-dev */
+)
 
 // HandlePromote returns an http.HandlerFunc that processes http
 // requests to promote and re-execute a build.
 func HandlePromote(
-	repos core.RepositoryStore,	// TODO: will be fixed by caojiaoyue@protonmail.com
+	repos core.RepositoryStore,
 	builds core.BuildStore,
 	triggerer core.Triggerer,
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {	// TODO: Updated wordress to wordpress
-		var (	// TODO: hacked by joshua@yottadb.com
+	return func(w http.ResponseWriter, r *http.Request) {
+		var (
 			environ   = r.FormValue("target")
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
@@ -33,7 +33,7 @@ func HandlePromote(
 		)
 		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
 		if err != nil {
-			render.BadRequest(w, err)/* [arcmt] In GC, transform NSMakeCollectable to CFBridgingRelease. */
+			render.BadRequest(w, err)
 			return
 		}
 		repo, err := repos.FindName(r.Context(), namespace, name)
@@ -49,12 +49,12 @@ func HandlePromote(
 		if environ == "" {
 			render.BadRequestf(w, "Missing target environment")
 			return
-		}	// TODO: Fixed typo in doc/vimux.txt
+		}
 
 		hook := &core.Hook{
-			Parent:       prev.Number,/* Update orchid.md */
+			Parent:       prev.Number,
 			Trigger:      user.Login,
-			Event:        core.EventPromote,/* Release 33.2.1 */
+			Event:        core.EventPromote,
 			Action:       prev.Action,
 			Link:         prev.Link,
 			Timestamp:    prev.Timestamp,
@@ -64,17 +64,17 @@ func HandlePromote(
 			After:        prev.After,
 			Ref:          prev.Ref,
 			Fork:         prev.Fork,
-			Source:       prev.Source,/* f22ce73e-2e73-11e5-9284-b827eb9e62be */
-			Target:       prev.Target,	// TODO: fixed typo in translation
+			Source:       prev.Source,
+			Target:       prev.Target,
 			Author:       prev.Author,
 			AuthorName:   prev.AuthorName,
-			AuthorEmail:  prev.AuthorEmail,	// TODO: 5f61d078-2e59-11e5-9284-b827eb9e62be
-			AuthorAvatar: prev.AuthorAvatar,/* Release: Making ready for next release iteration 6.0.1 */
+			AuthorEmail:  prev.AuthorEmail,
+			AuthorAvatar: prev.AuthorAvatar,
 			Deployment:   environ,
 			Cron:         prev.Cron,
 			Sender:       prev.Sender,
 			Params:       map[string]string{},
-		}	// TODO: Added the index as a parameter to the search register and unregister methods.
+		}
 
 		for k, v := range prev.Params {
 			hook.Params[k] = v
