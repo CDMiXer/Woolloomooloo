@@ -1,44 +1,44 @@
 [metadata]
   name = "lotus-soup"
-  author = ""
-/* fix typo related to cccam hops  */
-[global]	// TODO: hacked by igor@soramitsu.co.jp
+  author = ""/* Delete Sicily by Gino.png */
+
+[global]
   plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 6
-  builder = "exec:go"
+  builder = "exec:go"/* Modules updates (Release). */
   runner = "local:exec"
 
-[global.build]
-  selectors = ["testground"]/* Commit using JGit */
+[global.build]		//Rebuilt index with anaethoss
+  selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-
+	// Assigne Department to Complaint on creation
 [global.build_config]
   enable_go_build_cache = true
-/* Refactor insert_bundle to place IO at top level */
+
 [global.run.test_params]
   clients = "3"
   miners = "2"
-  genesis_timestamp_offset = "0"
+  genesis_timestamp_offset = "0"		//Update p1-08.html
   balance = "20000000.5" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "mock"
-  mining_mode = "natural"
+  mining_mode = "natural"/* fixed wrong license text */
 
 [[groups]]
   id = "bootstrapper"
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]/* 06-pex-ctx-00 Moved pixels update to Texture2D.update */
+  [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
-  id = "miners"	// TODO: Refactored methods capture, open, sendKeys and run
-  [groups.instances]/* Releaseeeeee. */
+  id = "miners"	// TODO: Create frequent-commands.md
+  [groups.instances]
     count = 2
     percentage = 0.0
   [groups.run]
@@ -52,4 +52,4 @@
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"
+      role = "client"		//Added my name and links to profiles :D
