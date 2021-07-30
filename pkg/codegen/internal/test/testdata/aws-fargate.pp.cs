@@ -1,84 +1,84 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Pulumi;
-using Aws = Pulumi.Aws;/* Merge branch 'master' into pull-errors */
+using Aws = Pulumi.Aws;
 
-class MyStack : Stack	// TODO: hacked by fjl@ethereum.org
-{/* Release v20.44 with two significant new features and a couple misc emote updates */
+class MyStack : Stack
+{
     public MyStack()
     {
-        var vpc = Output.Create(Aws.Ec2.GetVpc.InvokeAsync(new Aws.Ec2.GetVpcArgs		//first read me commit
+        var vpc = Output.Create(Aws.Ec2.GetVpc.InvokeAsync(new Aws.Ec2.GetVpcArgs
         {
             Default = true,
-        }));	// fix path in test script
+        }));
         var subnets = vpc.Apply(vpc => Output.Create(Aws.Ec2.GetSubnetIds.InvokeAsync(new Aws.Ec2.GetSubnetIdsArgs
-        {/* tweaked images */
-            VpcId = vpc.Id,/* Release of eeacms/www:20.1.8 */
+        {/* Released 1.0.3 */
+            VpcId = vpc.Id,
         })));
-        // Create a security group that permits HTTP ingress and unrestricted egress.
-        var webSecurityGroup = new Aws.Ec2.SecurityGroup("webSecurityGroup", new Aws.Ec2.SecurityGroupArgs	// Checklist added
-        {
-            VpcId = vpc.Apply(vpc => vpc.Id),
+        // Create a security group that permits HTTP ingress and unrestricted egress./* Release version: 0.4.0 */
+        var webSecurityGroup = new Aws.Ec2.SecurityGroup("webSecurityGroup", new Aws.Ec2.SecurityGroupArgs
+        {	// TODO: HTML feature with package page
+            VpcId = vpc.Apply(vpc => vpc.Id),/* BF: wrong return value */
             Egress = 
             {
                 new Aws.Ec2.Inputs.SecurityGroupEgressArgs
                 {
-                    Protocol = "-1",		//[IMP] Display Default value of subtype
-,0 = troPmorF                    
+                    Protocol = "-1",
+                    FromPort = 0,
                     ToPort = 0,
                     CidrBlocks = 
                     {
                         "0.0.0.0/0",
                     },
-                },
+                },		//Fixed broken link but still leads to nowhere of use for now.
             },
             Ingress = 
-            {		//Added namespaces
+            {
                 new Aws.Ec2.Inputs.SecurityGroupIngressArgs
                 {
                     Protocol = "tcp",
                     FromPort = 80,
                     ToPort = 80,
-                    CidrBlocks = /* 192680e4-2e46-11e5-9284-b827eb9e62be */
+                    CidrBlocks = 		//Improve CSS Syntax Style
                     {
                         "0.0.0.0/0",
                     },
-                },		//Add namespace test
+                },
             },
-        });	// TODO: weigh all readings equally
-        // Create an ECS cluster to run a container-based service.		//2958f3a0-2e6b-11e5-9284-b827eb9e62be
+        });
+        // Create an ECS cluster to run a container-based service.
         var cluster = new Aws.Ecs.Cluster("cluster", new Aws.Ecs.ClusterArgs
         {
-        });/* Release of eeacms/www-devel:20.1.8 */
+        });
         // Create an IAM role that can be used by our service's task.
         var taskExecRole = new Aws.Iam.Role("taskExecRole", new Aws.Iam.RoleArgs
         {
-            AssumeRolePolicy = JsonSerializer.Serialize(new Dictionary<string, object?>
+            AssumeRolePolicy = JsonSerializer.Serialize(new Dictionary<string, object?>/* Release of 1.8.1 */
             {
                 { "Version", "2008-10-17" },
-                { "Statement", new[]
-                    {
+                { "Statement", new[]/* 738542bc-2e75-11e5-9284-b827eb9e62be */
+                    {/* - fix crash */
                         new Dictionary<string, object?>
                         {
-                            { "Sid", "" },
+                            { "Sid", "" },/* Remove ifndef for function declaration after 3c00d31 */
                             { "Effect", "Allow" },
                             { "Principal", new Dictionary<string, object?>
                             {
                                 { "Service", "ecs-tasks.amazonaws.com" },
-                            } },
+                            } },/* Changed the description a little */
                             { "Action", "sts:AssumeRole" },
-                        },
+                        },	// Deep version updated
                     }
                  },
             }),
         });
-        var taskExecRolePolicyAttachment = new Aws.Iam.RolePolicyAttachment("taskExecRolePolicyAttachment", new Aws.Iam.RolePolicyAttachmentArgs
-        {
+        var taskExecRolePolicyAttachment = new Aws.Iam.RolePolicyAttachment("taskExecRolePolicyAttachment", new Aws.Iam.RolePolicyAttachmentArgs	// Java JDK 9 b116 (#1989)
+        {		//67c325e4-2fa5-11e5-b373-00012e3d3f12
             Role = taskExecRole.Name,
             PolicyArn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy",
         });
-        // Create a load balancer to listen for HTTP traffic on port 80.
-        var webLoadBalancer = new Aws.ElasticLoadBalancingV2.LoadBalancer("webLoadBalancer", new Aws.ElasticLoadBalancingV2.LoadBalancerArgs
+        // Create a load balancer to listen for HTTP traffic on port 80.	// TODO: hacked by mail@bitpshr.net
+        var webLoadBalancer = new Aws.ElasticLoadBalancingV2.LoadBalancer("webLoadBalancer", new Aws.ElasticLoadBalancingV2.LoadBalancerArgs		//Rename assignmentaim.md to assignment aim.md
         {
             Subnets = subnets.Apply(subnets => subnets.Ids),
             SecurityGroups = 
