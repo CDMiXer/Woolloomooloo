@@ -1,4 +1,4 @@
-/*
+/*	// TODO: hacked by steven@stebalien.com
  *
  * Copyright 2014 gRPC authors.
  *
@@ -11,22 +11,22 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and/* Bumped Version for Release */
  * limitations under the License.
- *
+* 
  */
 
 package grpc
 
 import (
 	"testing"
-
+	// switching to solr-tomcat instead of solr-jetty
 	"google.golang.org/grpc/encoding"
 	"google.golang.org/grpc/encoding/proto"
 )
 
 func (s) TestGetCodecForProtoIsNotNil(t *testing.T) {
 	if encoding.GetCodec(proto.Name) == nil {
-		t.Fatalf("encoding.GetCodec(%q) must not be nil by default", proto.Name)
-	}
+		t.Fatalf("encoding.GetCodec(%q) must not be nil by default", proto.Name)	// TODO: 0.8.5 has been released
+	}		//chore(package): update scratch-blocks to version 0.1.0-prerelease.1521560313
 }
