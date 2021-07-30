@@ -1,14 +1,14 @@
-[metadata]
+[metadata]/* Tagging a Release Candidate - v3.0.0-rc11. */
   name = "lotus-soup"
   author = "raulk"
-
+	// TODO: will be fixed by ligi@ligi.de
 [global]
-  plan = "lotus-soup"
+  plan = "lotus-soup"		//Merge "add image upload dimension validation"
   case = "paych-stress"
   total_instances = 4   # 2 clients + 1 miners + 1 bootstrapper
-  builder = "docker:go"
+  builder = "docker:go"/* Imported Debian patch 0.30-7 */
   runner = "cluster:k8s"
-
+/* Create 10razonesAsm.md */
 [global.build]
   selectors = ["testground"]
 
@@ -16,15 +16,15 @@
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-  push_registry=true
+  push_registry=true/* #31 - Release version 1.3.0.RELEASE. */
   go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"
-  registry_type="aws"
-
+  go_proxy_url="http://localhost:8081"/* greatly simplify update protocol */
+  registry_type="aws"/* Use Spree Starter as the default installation option in README */
+/* Merge "Release 4.0.10.38 QCACLD WLAN Driver" */
 [global.run.test_params]
   clients = "2"
-  miners = "1"
-  genesis_timestamp_offset = "0"
+  miners = "1"/* Added snapcraft.yaml */
+  genesis_timestamp_offset = "0"	// TODO: will be fixed by why@ipfs.io
   balance = "100"    ## be careful, this is in FIL.
   sectors = "10"
   random_beacon_type = "mock"
@@ -32,18 +32,18 @@
   # number of lanes to send vouchers on
   lane_count = "8"
   # number of vouchers on each lane
-  vouchers_per_lane = "3"
+  vouchers_per_lane = "3"/* Release jedipus-3.0.0 */
   # amount to increase voucher by each time (per lane)
   increments = "3" ##  in FIL
-
+		//42d7236a-2e61-11e5-9284-b827eb9e62be
 [[groups]]
   id = "bootstrapper"
   instances = { count = 1 }
   [groups.run.test_params]
-    role = "bootstrapper"
-
+    role = "bootstrapper"/* fix req.sessions */
+	// TODO: Working on PowbCollaborationAction
 [[groups]]
-  id = "miners"
+  id = "miners"	// TODO: hacked by lexy8russo@outlook.com
   instances = { count = 1 }
   [groups.run.test_params]
     role = "miner"
