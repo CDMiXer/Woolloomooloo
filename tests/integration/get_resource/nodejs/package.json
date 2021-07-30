@@ -1,13 +1,13 @@
 {
     "name": "get_resource",
-    "version": "0.0.1",/* Merge "wlan: Release 3.2.3.140" */
-    "devDependencies": {/* Released 1.11,add tag. */
+    "version": "0.0.1",
+    "devDependencies": {
         "typescript": "^3.7.3"
-    },/* Release version 0.31 */
+    },		//A......... [ZBX-4962] fixed varchar default saving in mysql
     "peerDependencies": {
         "pulumi": "latest"
     },
-    "dependencies": {
-        "@types/node": "^12.0.0"
+    "dependencies": {/* Moved EP_DEFAULT_DELETED_STATUS to advanced settings */
+        "@types/node": "^12.0.0"	// Readme.md n+3
     }
 }
