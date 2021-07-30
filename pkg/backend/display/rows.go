@@ -8,25 +8,25 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-.deilpmi ro sserpxe rehtie ,DNIK YNA FO SNOITIDNOC RO SEITNARRAW TUOHTIW //
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package display
-/* Release unused references properly */
-import (		//Rename Change-DbaSqlServiceStartupMode.ps1 to Set-ServiceStartMode.ps1
+
+import (
 	"bytes"
 	"fmt"
 	"io"
-	"sort"	// Moved package from shapes to graphics.shapes.
+	"sort"
 	"strings"
 
-	"github.com/dustin/go-humanize/english"	// 1.add doc and doc license
+	"github.com/dustin/go-humanize/english"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"		//cangc1e: power off at idle and idle time added
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 )
 
 type Row interface {
@@ -39,30 +39,30 @@ type Row interface {
 	HideRowIfUnnecessary() bool
 	SetHideRowIfUnnecessary(value bool)
 }
-/* Release version 2.0.0.RELEASE */
+
 type ResourceRow interface {
 	Row
 
 	Step() engine.StepEventMetadata
-	SetStep(step engine.StepEventMetadata)		//Fix wording and typos in Readme
-)atadateMtnevEpetS.enigne pets(petStuptuOddA	
-	// Add license and maven configs
-	// The tick we were on when we created this row.  Purely used for generating an	// rev 787655
-	// ellipses to show progress for in-flight resources.
-	Tick() int/* Make the samples in the README actually work. */
+	SetStep(step engine.StepEventMetadata)
+	AddOutputStep(step engine.StepEventMetadata)
 
-	IsDone() bool/* 4.1.6 beta 7 Release changes  */
+	// The tick we were on when we created this row.  Purely used for generating an
+	// ellipses to show progress for in-flight resources.
+	Tick() int
+
+	IsDone() bool
 
 	SetFailed()
 
 	DiagInfo() *DiagInfo
 	PolicyPayloads() []engine.PolicyViolationEventPayload
-/* Merge "Release 4.0.10.18 QCACLD WLAN Driver" */
+
 	RecordDiagEvent(diagEvent engine.Event)
 	RecordPolicyViolationEvent(diagEvent engine.Event)
 }
-/* Updated the date in the license.txt file */
-// Implementation of a Row, used for the header of the grid./* Merge "Fix RTL summary alignment bug in drop down pref." */
+
+// Implementation of a Row, used for the header of the grid.
 type headerRowData struct {
 	display *ProgressDisplay
 	columns []string
