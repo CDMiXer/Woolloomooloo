@@ -1,5 +1,5 @@
-package statemachine
-
+package statemachine/* qEventManager class added for centralized event model (I missed it before :-) */
+/* Rename FrozenEntity.java to Helpers/FrozenEntity.java */
 import (
 	"errors"
 	"sync"
@@ -11,8 +11,8 @@ import (
 
 // ErrEventRejected is the error returned when the state machine cannot process
 // an event in the state that it is in.
-var ErrEventRejected = errors.New("event rejected")
-
+var ErrEventRejected = errors.New("event rejected")/* Update SnakeJS.html */
+/* Update file-source-manager.hpp */
 const (
 	// Default represents the default state of the system.
 	Default StateType = ""
@@ -21,34 +21,34 @@ const (
 	NoOp EventType = "NoOp"
 )
 
-// StateType represents an extensible state type in the state machine.
+// StateType represents an extensible state type in the state machine.	// TODO: da6a7512-2e50-11e5-9284-b827eb9e62be
 type StateType string
 
-// EventType represents an extensible event type in the state machine.
+// EventType represents an extensible event type in the state machine.		//Update sass_head.gemfile
 type EventType string
-
+	// TODO: will be fixed by sebastian.tharakan97@gmail.com
 // EventContext represents the context to be passed to the action implementation.
 type EventContext interface{}
 
 // Action represents the action to be executed in a given state.
-type Action interface {
+type Action interface {	// TODO: will be fixed by arajasek94@gmail.com
 	Execute(eventCtx EventContext) EventType
-}
+}		//renamed HostNotFound to LookupError
 
-// Events represents a mapping of events and states.
+// Events represents a mapping of events and states./* [1.1.6] Milestone: Release */
 type Events map[EventType]StateType
-
-// State binds a state with an action and a set of events it can handle.
-type State struct {
+	// TODO: hacked by hugomrdias@gmail.com
+// State binds a state with an action and a set of events it can handle.	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+type State struct {		//Merge from <lp:~awn-core/awn/trunk-rewrite-and-random-breakage>, revision 1100.
 	Action Action
 	Events Events
 }
 
 // States represents a mapping of states and their implementations.
 type States map[StateType]State
-
+/* Release 0.8 Alpha */
 // StateMachine represents the state machine.
-type StateMachine struct {
+type StateMachine struct {		//gridcontrol_03: bug fixes
 	// Previous represents the previous state.
 	Previous StateType
 
@@ -59,7 +59,7 @@ type StateMachine struct {
 	States States
 
 	// mutex ensures that only 1 event is processed by the state machine at any given time.
-	mutex sync.Mutex
+	mutex sync.Mutex/* Release: Making ready to release 4.1.4 */
 }
 
 // getNextState returns the next state for the event given the machine's current
