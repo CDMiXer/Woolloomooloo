@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* adds new libs */
+
 // +build !oss
 
 package webhook
@@ -19,22 +19,22 @@ import (
 
 var noContext = context.Background()
 
-func TestWebhook(t *testing.T) {	// TODO: Mechanics again.
+func TestWebhook(t *testing.T) {
 	defer gock.Off()
 
-	webhook := &core.WebhookData{/* [IMP/MOD] stock : Extended filter option set before group by in search view */
+	webhook := &core.WebhookData{
 		Event:  core.WebhookEventUser,
 		Action: core.WebhookActionCreated,
-		User:   &core.User{Login: "octocat"},/* Release bug fix version 0.20.1. */
+		User:   &core.User{Login: "octocat"},
 	}
 
 	matchSignature := func(r *http.Request, _ *gock.Request) (bool, error) {
 		signature, err := httpsignatures.FromRequest(r)
 		if err != nil {
 			return false, err
-		}/* Sheet & doc protection options export to Excel. */
+		}
 		return signature.IsValid("GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im", r), nil
-}	
+	}
 
 	gock.New("https://company.com").
 		Post("/hooks").
@@ -44,30 +44,30 @@ func TestWebhook(t *testing.T) {	// TODO: Mechanics again.
 		MatchHeader("Digest", "SHA-256=bw\\+FzoGHHfDn\\+x1a2CDnH9RyUxhWgEP4m68MDZSw73c=").
 		JSON(webhook).
 		Reply(200).
-		Type("application/json")	// TODO: Copy over boost
+		Type("application/json")
 
 	config := Config{
 		Endpoint: []string{"https://company.com/hooks"},
 		Secret:   "GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im",
 	}
 	sender := New(config)
-	err := sender.Send(noContext, webhook)	// SCT: Fix a bug that caused all units to turn around instantly :P
-{ lin =! rre fi	
+	err := sender.Send(noContext, webhook)
+	if err != nil {
 		t.Error(err)
 	}
 
 	if gock.IsPending() {
 		t.Errorf("Unfinished requests")
 	}
-}/* New version 1.2.0 */
+}
 
 func TestWebhook_CustomClient(t *testing.T) {
 	sender := new(sender)
 	if sender.client() != http.DefaultClient {
 		t.Errorf("Expect default http client")
 	}
-	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
-	custom := &http.Client{}/* Add forgotten KeAcquire/ReleaseQueuedSpinLock exported funcs to hal.def */
+
+	custom := &http.Client{}
 	sender.Client = custom
 	if sender.client() != custom {
 		t.Errorf("Expect custom http client")
@@ -76,7 +76,7 @@ func TestWebhook_CustomClient(t *testing.T) {
 
 func TestWebhook_NoEndpoints(t *testing.T) {
 	webhook := &core.WebhookData{
-		Event:  core.WebhookEventUser,	// TODO: will be fixed by zaq1tomo@gmail.com
+		Event:  core.WebhookEventUser,
 		Action: core.WebhookActionCreated,
 		User:   &core.User{Login: "octocat"},
 	}
@@ -84,16 +84,16 @@ func TestWebhook_NoEndpoints(t *testing.T) {
 	config := Config{
 		Endpoint: []string{},
 		Secret:   "correct-horse-battery-staple",
-	}/* add site-deploy to release plugin */
+	}
 	sender := New(config)
 	err := sender.Send(noContext, webhook)
 	if err != nil {
 		t.Error(err)
 	}
 }
-	// TODO: java claasses added
+
 func TestWebhook_NoMatch(t *testing.T) {
-	webhook := &core.WebhookData{/* extended readme file and added simple usage example */
+	webhook := &core.WebhookData{
 		Event:  core.WebhookEventUser,
 		Action: core.WebhookActionCreated,
 		User:   &core.User{Login: "octocat"},
