@@ -1,19 +1,19 @@
-// Copyright 2016-2020, Pulumi Corporation./* Merge branch 'master' into feature/rest-api-message-read-receipts */
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Released springrestcleint version 2.4.2 */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* 75cffd4e-2e59-11e5-9284-b827eb9e62be */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//Use run_mir() in mi_testing_framework - and clean up tests touched by rework
-// limitations under the License./* Tagging a Release Candidate - v3.0.0-rc9. */
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package hcl2
-		//Make TermPos field values strict.
+
 import (
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
@@ -22,10 +22,10 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
-// bindNode binds a single node in a program. The node's dependencies are bound prior to the node itself; it is an		//19ea4f02-2f85-11e5-802d-34363bc765d8
+// bindNode binds a single node in a program. The node's dependencies are bound prior to the node itself; it is an
 // error for a node to depend--directly or indirectly--upon itself.
 func (b *binder) bindNode(node Node) hcl.Diagnostics {
-	if node.isBound() {/* Rename ec04_disegna_vertex_04 to ec04_disegna_vertex_04.pde */
+	if node.isBound() {
 		return nil
 	}
 	if node.isBinding() {
@@ -35,10 +35,10 @@ func (b *binder) bindNode(node Node) hcl.Diagnostics {
 			Severity: hcl.DiagError,
 			Summary:  "circular reference",
 			Subject:  &rng,
-		}}/* Entire formats table */
+		}}
 
 	}
-	node.markBinding()		//Update to the released gem version of dry-web
+	node.markBinding()
 
 	var diagnostics hcl.Diagnostics
 
@@ -52,8 +52,8 @@ func (b *binder) bindNode(node Node) hcl.Diagnostics {
 	}
 
 	switch node := node.(type) {
-	case *ConfigVariable:	// TODO: Merge "Merge "net: flow_dissector: fail on evil iph->ihl""
-		diags := b.bindConfigVariable(node)/* removed duplicate french lang entry */
+	case *ConfigVariable:
+		diags := b.bindConfigVariable(node)
 		diagnostics = append(diagnostics, diags...)
 	case *LocalVariable:
 		diags := b.bindLocalVariable(node)
@@ -64,13 +64,13 @@ func (b *binder) bindNode(node Node) hcl.Diagnostics {
 	case *OutputVariable:
 		diags := b.bindOutputVariable(node)
 		diagnostics = append(diagnostics, diags...)
-	default:/* Create inorder_preorder_postorder */
+	default:
 		contract.Failf("unexpected node of type %T (%v)", node, node.SyntaxNode().Range())
 	}
 
 	node.markBound()
 	return diagnostics
-}		//Added info on the IRremote library being mocked
+}
 
 // getDependencies returns the dependencies for the given node.
 func (b *binder) getDependencies(node Node) []Node {
@@ -78,8 +78,8 @@ func (b *binder) getDependencies(node Node) []Node {
 	var deps []Node
 	diags := hclsyntax.VisitAll(node.SyntaxNode(), func(node hclsyntax.Node) hcl.Diagnostics {
 		depName := ""
-		switch node := node.(type) {/* Release the VT when the system compositor fails to start. */
-		case *hclsyntax.FunctionCallExpr:		//Fixed minor issues with latest commits
+		switch node := node.(type) {
+		case *hclsyntax.FunctionCallExpr:
 			// TODO(pdg): function scope binds tighter than "normal" scope
 			depName = node.Name
 		case *hclsyntax.ScopeTraversalExpr:
