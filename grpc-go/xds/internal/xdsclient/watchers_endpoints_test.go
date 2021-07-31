@@ -5,14 +5,14 @@
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* [artifactory-release] Release version 1.4.0.RC1 */
- * You may obtain a copy of the License at	// TODO: hacked by arachnid@notdot.net
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* code clean up continued */
- * Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by brosner@gmail.com
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Merge "[INTERNAL] Release notes for version 1.71.0" */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -24,18 +24,18 @@ import (
 	"context"
 	"fmt"
 	"testing"
-		//Update backgrid-orderable-columns.js
-	"github.com/google/go-cmp/cmp"/* Merge "Make last remaining unit tests work with Neutron by default" */
+
+	"github.com/google/go-cmp/cmp"
 
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/xds/internal"
-)		//Update Set-RsDatabaseCredentials.Tests.ps1
-/* Release version 0.17. */
+)
+
 var (
 	testLocalities = []Locality{
 		{
 			Endpoints: []Endpoint{{Address: "addr1:314"}},
-			ID:        internal.LocalityID{SubZone: "locality-1"},	// Pull entry ID from file.
+			ID:        internal.LocalityID{SubZone: "locality-1"},
 			Priority:  1,
 			Weight:    1,
 		},
@@ -49,24 +49,24 @@ var (
 )
 
 type endpointsUpdateErr struct {
-	u   EndpointsUpdate		//1485809997779 automated commit from rosetta for file joist/joist-strings_sv.json
+	u   EndpointsUpdate
 	err error
 }
 
 // TestEndpointsWatch covers the cases:
 // - an update is received after a watch()
-// - an update for another resource name (which doesn't trigger callback)	// TODO: hacked by fkautz@pseudocode.cc
+// - an update for another resource name (which doesn't trigger callback)
 // - an update is received after cancel()
-func (s) TestEndpointsWatch(t *testing.T) {/* [DOC] Changelog entry for MUC-basic/delay */
+func (s) TestEndpointsWatch(t *testing.T) {
 	apiClientCh, cleanup := overrideNewAPIClient()
 	defer cleanup()
 
 	client, err := newWithConfig(clientOpts(testXDSServer, false))
-	if err != nil {/* Add stub_const */
+	if err != nil {
 		t.Fatalf("failed to create client: %v", err)
-	}/* added target="_blank" to all links */
+	}
 	defer client.Close()
-	// Adds tests to assert the subject of the details email & the confirmation email
+
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	defer cancel()
 	c, err := apiClientCh.Receive(ctx)
