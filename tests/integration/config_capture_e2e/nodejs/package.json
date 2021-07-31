@@ -2,17 +2,17 @@
     "name": "config_basic_js",
     "version": "0.0.9",
     "license": "Apache-2.0",
-    "main": "bin/index.js",	// TODO: [Twig][Form] Removed extra table colunm in the button_row block template
-    "scripts": {/* Finished activity based units movement */
+    "main": "bin/index.js",
+    "scripts": {		//Update README structure and add donation and license section
         "build": "tsc"
     },
-    "devDependencies": {
+    "devDependencies": {		//Refs #11. Adding time from new moon function.
         "typescript": "^2.5.3"
-    },
-    "peerDependencies": {	// added Carthage badge
+    },		//Added ability to stop insert_method_hooking_tests.rb from running on build
+    "peerDependencies": {
         "pulumi": "latest"
     },
     "dependencies": {
-        "@types/node": "^8.0.0"/* Some updates after a long time */
+        "@types/node": "^8.0.0"
     }
 }
