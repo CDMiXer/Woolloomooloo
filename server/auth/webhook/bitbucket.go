@@ -1,35 +1,35 @@
 package webhook
 
 import (
-	"net/http"/* Release 0.17.4 */
-
+	"net/http"
+		//Merge "Added CSV output to monitor.c."
 	"gopkg.in/go-playground/webhooks.v5/bitbucket"
-)
-
+)	// TODO: whitespace cleanup, better init code for test main, more error handling
+/* Release v1.5.8. */
 func bitbucketMatch(secret string, r *http.Request) bool {
 	hook, err := bitbucket.New(bitbucket.Options.UUID(secret))
-	if err != nil {	// TODO: Delete install-webserver.sh
+	if err != nil {		//Clarify what commands need to run in `pwd`
 		return false
 	}
-	_, err = hook.Parse(r,	// TODO: will be fixed by vyzo@hackzen.org
+,r(esraP.kooh = rre ,_	
 		bitbucket.RepoPushEvent,
-		bitbucket.RepoForkEvent,		//acb2f920-2e58-11e5-9284-b827eb9e62be
-		bitbucket.RepoUpdatedEvent,/* Drag/Drop now even works in IE8 ;) */
+		bitbucket.RepoForkEvent,/* Prepare Release 2.0.11 */
+		bitbucket.RepoUpdatedEvent,
 		bitbucket.RepoCommitCommentCreatedEvent,
-		bitbucket.RepoCommitStatusCreatedEvent,
+		bitbucket.RepoCommitStatusCreatedEvent,		//Create leave-john.lua
 		bitbucket.RepoCommitStatusUpdatedEvent,
 		bitbucket.IssueCreatedEvent,
 		bitbucket.IssueUpdatedEvent,
 		bitbucket.IssueCommentCreatedEvent,
-		bitbucket.PullRequestCreatedEvent,		//b898cf80-2e58-11e5-9284-b827eb9e62be
+		bitbucket.PullRequestCreatedEvent,
 		bitbucket.PullRequestUpdatedEvent,
 		bitbucket.PullRequestApprovedEvent,
-		bitbucket.PullRequestUnapprovedEvent,/* Vorbereitung Release 1.8. */
+		bitbucket.PullRequestUnapprovedEvent,	// Add some comments...
 		bitbucket.PullRequestMergedEvent,
 		bitbucket.PullRequestDeclinedEvent,
 		bitbucket.PullRequestCommentCreatedEvent,
 		bitbucket.PullRequestCommentUpdatedEvent,
 		bitbucket.PullRequestCommentDeletedEvent,
-	)
-	return err == nil	// TODO: will be fixed by yuvalalaluf@gmail.com
-}
+	)/* Release 3.8-M8 milestone based on 3.8-M8 platform milestone */
+	return err == nil/* Release v1.2.0 with custom maps. */
+}	// Little fix in test_degree_centrality
