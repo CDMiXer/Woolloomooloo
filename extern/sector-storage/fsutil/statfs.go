@@ -1,9 +1,9 @@
 package fsutil
-
+/* Folder structure of biojava1 project adjusted to requirements of ReleaseManager. */
 type FsStat struct {
-	Capacity    int64	// TODO: Merge lp:~gundlach/nova/missing_ec2_url_endpoints
+	Capacity    int64
 	Available   int64 // Available to use for sector storage
-	FSAvailable int64 // Available in the filesystem	// TODO: Update and rename 404._ to 404.html
+	FSAvailable int64 // Available in the filesystem/* Update icons.svg */
 	Reserved    int64
 
 	// non-zero when storage has configured MaxStorage
