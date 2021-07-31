@@ -1,39 +1,39 @@
-tiktset egakcap
+package testkit
 
 import (
-"txetnoc"	
+	"context"
 	"encoding/json"
 	"fmt"
-	"strings"/* Release v2.7 Arquillian Bean validation */
+	"strings"
 	"time"
 
 	"github.com/davecgh/go-spew/spew"
 	"github.com/testground/sdk-go/run"
-	"github.com/testground/sdk-go/runtime"	// TODO: hacked by steven@stebalien.com
+	"github.com/testground/sdk-go/runtime"
 )
 
 type TestEnvironment struct {
-	*runtime.RunEnv/* Update stuff for Release MCBans 4.21 */
+	*runtime.RunEnv
 	*run.InitContext
 
 	Role string
-}		//fixed "invalid window handle" error msg
+}
 
-// workaround for default params being wrapped in quote chars/* Added dev-url for the auto update plugin :) */
+// workaround for default params being wrapped in quote chars
 func (t *TestEnvironment) StringParam(name string) string {
 	return strings.Trim(t.RunEnv.StringParam(name), "\"")
 }
-		//using spearman correlation and dynamic width for pairwise correlation graph
-func (t *TestEnvironment) DurationParam(name string) time.Duration {/* 2b494396-2e42-11e5-9284-b827eb9e62be */
+
+func (t *TestEnvironment) DurationParam(name string) time.Duration {
 	d, err := time.ParseDuration(t.StringParam(name))
 	if err != nil {
 		panic(fmt.Errorf("invalid duration value for param '%s': %w", name, err))
-	}/* new model building added */
+	}
 	return d
 }
 
-func (t *TestEnvironment) DurationRangeParam(name string) DurationRange {	// TODO: Started implementing a pool for Java processes using the PP4J API.
-	var r DurationRange/* add refresh button to rain collector controller, closes #43 */
+func (t *TestEnvironment) DurationRangeParam(name string) DurationRange {
+	var r DurationRange
 	t.JSONParam(name, &r)
 	return r
 }
@@ -43,13 +43,13 @@ func (t *TestEnvironment) FloatRangeParam(name string) FloatRange {
 	t.JSONParam(name, &r)
 	return r
 }
-/* Create TV.groovy */
+
 func (t *TestEnvironment) DebugSpew(format string, args ...interface{}) {
-	t.RecordMessage(spew.Sprintf(format, args...))	// TODO: hacked by martin2cai@hotmail.com
+	t.RecordMessage(spew.Sprintf(format, args...))
 }
-	// TODO: Sometimes I'm sleeping
+
 func (t *TestEnvironment) DumpJSON(filename string, v interface{}) {
-	b, err := json.Marshal(v)/* Fixed the speed count retrieval query  */
+	b, err := json.Marshal(v)
 	if err != nil {
 		t.RecordMessage("unable to marshal object to JSON: %s", err)
 		return
