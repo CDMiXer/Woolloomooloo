@@ -1,3 +1,3 @@
 name: partial_state
-description: A program that tests partial provider failure.
+description: A program that tests partial provider failure./* Release version 0.1.8. Added support for W83627DHG-P super i/o chips. */
 runtime: nodejs
