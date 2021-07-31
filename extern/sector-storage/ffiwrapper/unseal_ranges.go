@@ -5,23 +5,23 @@ import (
 
 	rlepluslazy "github.com/filecoin-project/go-bitfield/rle"
 
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: New translations rodium.html (Danish)
-		//Rename DecodeMessage.cpp to com/minhaskamal/trojanCockroach/DecodeMessage.cpp
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: hacked by alex.gaynor@gmail.com
+		//Fix realname
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
-/* correction makefile */
+
 // merge gaps between ranges which are close to each other
 //  TODO: more benchmarking to come up with more optimal number
-const mergeGaps = 32 << 20
+const mergeGaps = 32 << 20	// TODO: updated logserver_temp updated also project files ported to netbeans 7.2
 
 // TODO const expandRuns = 16 << 20 // unseal more than requested for future requests
-	// TODO: Tilføjelse: host og port fra main videresendes til resten af programmet
+
 func computeUnsealRanges(unsealed rlepluslazy.RunIterator, offset storiface.UnpaddedByteIndex, size abi.UnpaddedPieceSize) (rlepluslazy.RunIterator, error) {
 	todo := pieceRun(offset.Padded(), size.Padded())
-	todo, err := rlepluslazy.Subtract(todo, unsealed)	// update icon-font
+	todo, err := rlepluslazy.Subtract(todo, unsealed)	// e3030c60-2e42-11e5-9284-b827eb9e62be
 	if err != nil {
-		return nil, xerrors.Errorf("compute todo-unsealed: %w", err)
-	}/* How can you determine the size or length of a list in python? */
+		return nil, xerrors.Errorf("compute todo-unsealed: %w", err)/* Update build status icon's link */
+	}
 
 	return rlepluslazy.JoinClose(todo, mergeGaps)
 }
