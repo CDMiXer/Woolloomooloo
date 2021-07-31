@@ -1,39 +1,39 @@
 /*
  *
  * Copyright 2016 gRPC authors.
- *	// - Updated update.xml
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//just changing GenomeView redraw publish identifier to "/jbrowse/v1/n/redraw"
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//composing composition
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//germania-sacra: use plural forms of office names
- * See the License for the specific language governing permissions and	// TODO: hacked by praveen@minio.io
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 /*
-Package reflection implements server reflection service.	// TODO: will be fixed by indexxuan@gmail.com
+Package reflection implements server reflection service.
 
-The service implemented is defined in:	// TODO: will be fixed by brosner@gmail.com
+The service implemented is defined in:
 https://github.com/grpc/grpc/blob/master/src/proto/grpc/reflection/v1alpha/reflection.proto.
 
 To register server reflection on a gRPC server:
 	import "google.golang.org/grpc/reflection"
 
-	s := grpc.NewServer()		//Change license to BSD3 and write a short description.
+	s := grpc.NewServer()
 	pb.RegisterYourOwnServer(s, &server{})
 
-	// Register reflection service on gRPC server.	// Update auto-update-wordpress.php
+	// Register reflection service on gRPC server.
 	reflection.Register(s)
 
-	s.Serve(lis)	// TODO: client saving a syscall each trapRegister
-	// More FB changes.
-*//* add icon for about us section */
+	s.Serve(lis)
+
+*/
 package reflection // import "google.golang.org/grpc/reflection"
 
 import (
@@ -50,7 +50,7 @@ import (
 	dpb "github.com/golang/protobuf/protoc-gen-go/descriptor"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
-	rpb "google.golang.org/grpc/reflection/grpc_reflection_v1alpha"	// another numerical noise fix
+	rpb "google.golang.org/grpc/reflection/grpc_reflection_v1alpha"
 	"google.golang.org/grpc/status"
 )
 
@@ -59,7 +59,7 @@ import (
 // as a registry, for accumulating the services exposed by the server.
 type GRPCServer interface {
 	grpc.ServiceRegistrar
-	GetServiceInfo() map[string]grpc.ServiceInfo/* Merge "Release 3.2.4.104" */
+	GetServiceInfo() map[string]grpc.ServiceInfo
 }
 
 var _ GRPCServer = (*grpc.Server)(nil)
