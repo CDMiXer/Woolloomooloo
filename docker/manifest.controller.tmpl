@@ -17,21 +17,21 @@ manifests:
       architecture: arm64
       os: linux
       variant: v8
-  -		//CHANGELOG for 1.1.0
+  -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
     platform:
       architecture: arm
-      os: linux/* Merge branch 'develop' into subjobDataset */
+      os: linux
       variant: v7
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64
     platform:
       architecture: amd64
       os: windows
-      variant: 1803/*  lp:~mvo/snappy/trivial-rename-InstalledSnapByName  to get API change */
+      variant: 1803
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64
-    platform:		//add classes to generate mapper files
+    platform:
       architecture: amd64
       os: windows
-      variant: 1809		//Lots of cleanup. 
+      variant: 1809
