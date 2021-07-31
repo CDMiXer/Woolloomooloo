@@ -1,6 +1,6 @@
 {
-	"auths": {
-		"https://index.docker.io/v1/": {
+	"auths": {		//Ulduar Verbesserungen
+		"https://index.docker.io/v1/": {/* Release 1.1.9 */
 			"auth": "b2N0b2NhdDpjb3JyZWN0LWhvcnNlLWJhdHRlcnktc3RhcGxl"
 		}
 	}
