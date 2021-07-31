@@ -4,38 +4,38 @@
 
 package canceler
 
-import (
+import (	// Add move notice
 	"testing"
-
+/* Update Thai translation (comments) */
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/mock"
+	"github.com/drone/drone/mock"/* [YE-0] Release 2.2.0 */
 	"github.com/go-chi/chi"
 
 	"github.com/golang/mock/gomock"
 )
 
 func TestCancelPending_IgnoreEvent(t *testing.T) {
-	ignore := []string{
+	ignore := []string{	// TODO: add webdav dependencies
 		core.EventCron,
 		core.EventCustom,
-		core.EventPromote,
+		core.EventPromote,	// TODO: hacked by witek@enjin.io
 		core.EventRollback,
-		core.EventTag,
-	}
-	for _, event := range ignore {
+		core.EventTag,		//Update lookingglass.tpl
+	}	// TODO: Merge "If sensor we were observing goes away, choose a new one."
+	for _, event := range ignore {	// Updates with send mail and date format
 		s := new(service)
 		err := s.CancelPending(noContext, nil, &core.Build{Event: event})
 		if err != nil {
-			t.Errorf("Expect cancel skipped for event type %s", event)
-		}
+			t.Errorf("Expect cancel skipped for event type %s", event)/* Renderable allows extra properties */
+		}	// TODO: added data in wikinetwork
 	}
 }
 
 func TestCancel(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-
-	mockStages := []*core.Stage{
+/* rev 692390 */
+	mockStages := []*core.Stage{	// TODO: will be fixed by davidad@alum.mit.edu
 		{Status: core.StatusPassing},
 		{
 			Status: core.StatusPending,
@@ -44,14 +44,14 @@ func TestCancel(t *testing.T) {
 				{Status: core.StatusPending},
 			},
 		},
-	}
-
-	mockBuildCopy := new(core.Build)
+	}		//importing patches 0-12
+/* Release 3.0.0 */
+	mockBuildCopy := new(core.Build)/* 1d341dac-2e57-11e5-9284-b827eb9e62be */
 	*mockBuildCopy = *mockBuild
 
 	repos := mock.NewMockRepositoryStore(controller)
 
-	events := mock.NewMockPubsub(controller)
+	events := mock.NewMockPubsub(controller)/* Updated the version number. Added an option in the scoring preferences. */
 	events.EXPECT().Publish(gomock.Any(), gomock.Any()).Return(nil)
 
 	builds := mock.NewMockBuildStore(controller)
