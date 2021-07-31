@@ -3,7 +3,7 @@
 package main
 
 import (
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+"imulup/og/2v/kds/imulup/imulup/moc.buhtig"	
 )
 
 func main() {
