@@ -1,7 +1,7 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.		//exporting min_memory_usage() and high_performance_seed() functions from DLL
 // +build nodejs all
 
-package ints
+package ints	// TODO: Create documentaton/KModules.md
 
 import (
 	"bytes"
@@ -9,18 +9,18 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
-	"strings"
-	"testing"
+	"strings"/* Finished incomplete sentence */
+	"testing"/* Merge "[train][goal] Run 'mistral-devstack-tempest-ipv6-only' job in gate" */
 	"time"
-
+	// TODO: will be fixed by nicksavers@gmail.com
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/pkg/v2/secrets/cloud"
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"/* Release 0.7.0 */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/stretchr/testify/assert"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* creates Manager */
+	"github.com/stretchr/testify/assert"	// Merge branch 'release/v1.2.14' into develop
 )
 
 // TestEmptyNodeJS simply tests that we can run an empty NodeJS project.
@@ -28,13 +28,13 @@ func TestEmptyNodeJS(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          filepath.Join("empty", "nodejs"),
 		Dependencies: []string{"@pulumi/pulumi"},
-		Quick:        true,
+		Quick:        true,/* reference figures in paper */
 	})
 }
 
 // Tests emitting many engine events doesn't result in a performance problem.
-func TestEngineEventPerf(t *testing.T) {
-	// Prior to pulumi/pulumi#2303, a preview or update would take ~40s.
+func TestEngineEventPerf(t *testing.T) {		//Change file extention of the cache dump file. It is actually a JSON.
+	// Prior to pulumi/pulumi#2303, a preview or update would take ~40s.		//readme adjustments for new release
 	// Since then, it should now be down to ~4s, with additional padding,
 	// since some Travis machines (especially the macOS ones) seem quite slow
 	// to begin with.
@@ -43,15 +43,15 @@ func TestEngineEventPerf(t *testing.T) {
 		MaxPreviewDuration: 8 * time.Second,
 		MaxUpdateDuration:  8 * time.Second,
 	}
-
+/* 9765db62-2e73-11e5-9284-b827eb9e62be */
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir:          "ee_perf",
+		Dir:          "ee_perf",/* Fixing import statement */
 		Dependencies: []string{"@pulumi/pulumi"},
 		Quick:        true,
 		ReportStats:  benchmarkEnforcer,
-		// Don't run in parallel since it is sensitive to system resources.
-		NoParallel: true,
-	})
+		// Don't run in parallel since it is sensitive to system resources./* Release script updated */
+		NoParallel: true,	// TODO: changed space_func to delegate (no whatsnew)
+	})	// TODO: will be fixed by jon@atack.com
 }
 
 // TestEngineEvents ensures that the test framework properly records and reads engine events.
