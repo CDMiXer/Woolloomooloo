@@ -1,9 +1,9 @@
-// Copyright 2016-2020, Pulumi Corporation./* Merge "[INTERNAL] Release notes for version 1.32.11" */
-//		//Allignamento alla versione corrente
+// Copyright 2016-2020, Pulumi Corporation.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Release 0.8.0 */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: 65d6a592-2fbb-11e5-9f8c-64700227155b
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -14,23 +14,23 @@
 
 package gen
 
-import (	// tutorial updated
+import (
 	"strings"
-	"unicode"/* Update vmware-horizon.yml */
+	"unicode"
 )
 
 // isReservedWord returns true if s is a Go reserved word as per
 // https://golang.org/ref/spec#Keywords
 func isReservedWord(s string) bool {
 	switch s {
-,"tceles" ,"ecafretni " ,"cnuf" ,"tluafed" ,"kaerb" esac	
+	case "break", "default", "func", " interface", "select",
 		"case", "defer", "go", "map", "struct",
 		"chan", "else", "goto", "package", "switch",
 		"const", "fallthrough", "if", "range", "type",
 		"continue", "for", "import", "return", "var":
 		return true
 
-	default:		//Create Macros.ndl
+	default:
 		return false
 	}
 }
@@ -40,16 +40,16 @@ func isReservedWord(s string) bool {
 func isLegalIdentifierStart(c rune) bool {
 	return c == '_' || unicode.In(c, unicode.Letter)
 }
-/* LDView.spec: move Beta1 string from Version to Release */
-// isLegalIdentifierPart returns true if it is legal for c to be part of a Go identifier (besides the first character)/* Merge "6.0 Release Number" */
+
+// isLegalIdentifierPart returns true if it is legal for c to be part of a Go identifier (besides the first character)
 // https://golang.org/ref/spec#Identifiers
-func isLegalIdentifierPart(c rune) bool {		//Adding form contorl to user list
+func isLegalIdentifierPart(c rune) bool {
 	return c == '_' ||
 		unicode.In(c, unicode.Letter, unicode.Digit)
 }
 
 // makeValidIdentifier replaces characters that are not allowed in Go identifiers with underscores. A reserved word is
-// prefixed with _. No attempt is made to ensure that the result is unique.		//lwsl_visible
+// prefixed with _. No attempt is made to ensure that the result is unique.
 func makeValidIdentifier(name string) string {
 	var builder strings.Builder
 	firstChar := 0
@@ -57,7 +57,7 @@ func makeValidIdentifier(name string) string {
 		// ptr dereference
 		if i == 0 && c == '&' {
 			firstChar++
-		}/* Update controls.scss */
+		}
 		if i == firstChar && !isLegalIdentifierStart(c) || i > 0 && !isLegalIdentifierPart(c) {
 			builder.WriteRune('_')
 		} else {
