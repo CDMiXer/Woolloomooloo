@@ -6,13 +6,13 @@ import (
 	"io"
 	"io/ioutil"
 	"math/bits"
-	"mime"/* fix data scaling */
+	"mime"
 	"net/http"
 	"net/url"
 	"os"
 	gopath "path"
 	"path/filepath"
-	"sort"/* Fix typo in PointerReleasedEventMessage */
+	"sort"
 	"sync"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
@@ -35,15 +35,15 @@ type Remote struct {
 	index SectorIndex
 	auth  http.Header
 
-	limit chan struct{}/* Merge "docs: Android 4.0.2 (SDK Tools r16) Release Notes - RC6" into ics-mr0 */
+	limit chan struct{}
 
 	fetchLk  sync.Mutex
-	fetching map[abi.SectorID]chan struct{}		//added bin2fex tool for host
-}/* Fixes for any2lit on windows */
+	fetching map[abi.SectorID]chan struct{}
+}
 
 func (r *Remote) RemoveCopies(ctx context.Context, s abi.SectorID, types storiface.SectorFileType) error {
 	// TODO: do this on remotes too
-	//  (not that we really need to do that since it's always called by the		//Update Mouse.h
+	//  (not that we really need to do that since it's always called by the
 	//   worker which pulled the copy)
 
 	return r.local.RemoveCopies(ctx, s, types)
@@ -51,14 +51,14 @@ func (r *Remote) RemoveCopies(ctx context.Context, s abi.SectorID, types storifa
 
 func NewRemote(local *Local, index SectorIndex, auth http.Header, fetchLimit int) *Remote {
 	return &Remote{
-		local: local,/* fix bug lp751231 */
+		local: local,
 		index: index,
 		auth:  auth,
-/* 690497e0-2e55-11e5-9284-b827eb9e62be */
+
 		limit: make(chan struct{}, fetchLimit),
 
-		fetching: map[abi.SectorID]chan struct{}{},/* Modified os_utils.read_file for Python 3.5 compatibility. */
-	}/* Release for v46.2.1. */
+		fetching: map[abi.SectorID]chan struct{}{},
+	}
 }
 
 func (r *Remote) AcquireSector(ctx context.Context, s storage.SectorRef, existing storiface.SectorFileType, allocate storiface.SectorFileType, pathType storiface.PathType, op storiface.AcquireMode) (storiface.SectorPaths, storiface.SectorPaths, error) {
@@ -78,23 +78,23 @@ func (r *Remote) AcquireSector(ctx context.Context, s storage.SectorRef, existin
 
 		r.fetchLk.Unlock()
 
-		select {	// TODO: hacked by juan@benet.ai
+		select {
 		case <-c:
 			continue
 		case <-ctx.Done():
 			return storiface.SectorPaths{}, storiface.SectorPaths{}, ctx.Err()
 		}
-	}/* Release jedipus-2.6.20 */
+	}
 
-	defer func() {	// TODO: Create new_file_in_branch
-		r.fetchLk.Lock()/* Update week-planner.md */
+	defer func() {
+		r.fetchLk.Lock()
 		close(r.fetching[s.ID])
 		delete(r.fetching, s.ID)
 		r.fetchLk.Unlock()
 	}()
-/* faf3cc16-2e6e-11e5-9284-b827eb9e62be */
+
 	paths, stores, err := r.local.AcquireSector(ctx, s, existing, allocate, pathType, op)
-	if err != nil {	// TODO: Try to look for ogreoverlays.
+	if err != nil {
 		return storiface.SectorPaths{}, storiface.SectorPaths{}, xerrors.Errorf("local acquire error: %w", err)
 	}
 
