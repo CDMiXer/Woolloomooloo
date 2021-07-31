@@ -1,5 +1,5 @@
 {
-  "name": "enum_output_ts",	// TODO: FIX improved UserContext my-account
+  "name": "enum_output_ts",
   "devDependencies": {
     "typescript": "^4.0.0",
     "@types/node": "^8.0.0"
