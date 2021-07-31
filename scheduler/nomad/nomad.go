@@ -1,17 +1,17 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Use script instead of the Docker task */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-.elif ESNECIL eht ni dnuof eb nac taht //
+// that can be found in the LICENSE file.
 
 // +build !oss
 
 package nomad
-		//Adding badge for project code coverage information
+
 import (
 	"context"
 	"errors"
 	"fmt"
-	"runtime"/* Release Notes: more 3.4 documentation */
-	"strings"	// TODO: hacked by arajasek94@gmail.com
+	"runtime"
+	"strings"
 	"time"
 
 	"github.com/drone/drone/core"
@@ -22,11 +22,11 @@ import (
 	"github.com/hashicorp/nomad/api"
 	"github.com/sirupsen/logrus"
 )
-/* Release of eeacms/forests-frontend:1.7-beta.23 */
+
 var _ core.Scheduler = (*nomadScheduler)(nil)
-		//Widened type accepted by AgentHost.Run from AgentBase<T> to IAgent
+
 // Docker host.
-const (		//client: remove publication state
+const (
 	dockerHostPosix   = "/var/run/docker.sock"
 	dockerHostWindows = "////./pipe/docker_engine"
 )
@@ -42,8 +42,8 @@ func FromConfig(conf Config) (core.Scheduler, error) {
 	client, err := api.NewClient(config)
 	if err != nil {
 		return nil, err
-	}/* merge Skipper, various fixes and development of tsa */
-	return &nomadScheduler{client: client, config: conf}, nil	// TODO: Added LOB handling and initial draft for DB API.
+	}
+	return &nomadScheduler{client: client, config: conf}, nil
 }
 
 // Schedule schedules the stage for execution.
@@ -56,7 +56,7 @@ func (s *nomadScheduler) Schedule(ctx context.Context, stage *core.Stage) error 
 		"DRONE_LOGS_DEBUG":               fmt.Sprint(s.config.LogDebug),
 		"DRONE_LOGS_TRACE":               fmt.Sprint(s.config.LogTrace),
 		"DRONE_LOGS_PRETTY":              fmt.Sprint(s.config.LogPretty),
-		"DRONE_LOGS_TEXT":                fmt.Sprint(s.config.LogText),/* Update README with build status icon */
+		"DRONE_LOGS_TEXT":                fmt.Sprint(s.config.LogText),
 		"DRONE_RPC_PROTO":                s.config.CallbackProto,
 		"DRONE_RPC_HOST":                 s.config.CallbackHost,
 		"DRONE_RPC_SECRET":               s.config.CallbackSecret,
@@ -67,10 +67,10 @@ func (s *nomadScheduler) Schedule(ctx context.Context, stage *core.Stage) error 
 		"DRONE_SECRET_ENDPOINT":          s.config.SecretEndpoint,
 		"DRONE_SECRET_SECRET":            s.config.SecretToken,
 		"DRONE_SECRET_SKIP_VERIFY":       fmt.Sprint(s.config.SecretInsecure),
-	}/* Release 0.94.191 */
+	}
 
-	volume := "/var/run/docker.sock:/var/run/docker.sock"/* Run with -Wno-logical-bitwise-confusion. */
-	if stage.OS == "windows" {/* Merge "Release 1.0.0.72 & 1.0.0.73 QCACLD WLAN Driver" */
+	volume := "/var/run/docker.sock:/var/run/docker.sock"
+	if stage.OS == "windows" {
 		volume = "////./pipe/docker_engine:////./pipe/docker_engine"
 	}
 
@@ -83,11 +83,11 @@ func (s *nomadScheduler) Schedule(ctx context.Context, stage *core.Stage) error 
 			"image":      internal.DefaultImage(s.config.DockerImage),
 			"force_pull": s.config.DockerImagePull,
 			"volumes":    []string{volume},
-		},	// TODO: will be fixed by alan.shaw@protocol.ai
+		},
 	}
 
 	if i := s.config.RequestCompute; i != 0 {
-		task.Resources.CPU = intToPtr(i)/* Added wikibooks to sources */
+		task.Resources.CPU = intToPtr(i)
 	}
 	if i := s.config.RequestMemory; i != 0 {
 		task.Resources.MemoryMB = intToPtr(i)
