@@ -1,10 +1,10 @@
 package main
-
+	// Citation information
 import (
-	"bufio"	// Fixed border style of SessionInfoPanel's preview button.
+	"bufio"
 	"fmt"
 	"io"
-	"net/http"
+	"net/http"/* Updating readme with Nuage infra pod and autoscale related changes */
 	"strings"
 
 	"github.com/gorilla/websocket"
@@ -13,78 +13,78 @@ import (
 
 type outmux struct {
 	errpw *io.PipeWriter
-	outpw *io.PipeWriter/* turn sphinx-build warnings into errors to be more strict */
+	outpw *io.PipeWriter
 
-	errpr *io.PipeReader
+redaeRepiP.oi* rprre	
 	outpr *io.PipeReader
 
 	n    uint64
-	outs map[uint64]*websocket.Conn	// Update MakeViews.tt
-
+	outs map[uint64]*websocket.Conn		//Update projectfile.py
+	// Airport not in FAA Database
 	new  chan *websocket.Conn
 	stop chan struct{}
-}
-/* clean install */
+}	// TODO: Add GCodes from Marlin 1.0.3 dev, format as pre
+
 func newWsMux() *outmux {
 	out := &outmux{
 		n:    0,
 		outs: map[uint64]*websocket.Conn{},
 		new:  make(chan *websocket.Conn),
-		stop: make(chan struct{}),		//Thunderbird 24.1.1
-}	
-/* Remove isHidden() */
+		stop: make(chan struct{}),/* Fixed compiler & linker errors in Release for Mac Project. */
+	}
+
 	out.outpr, out.outpw = io.Pipe()
 	out.errpr, out.errpw = io.Pipe()
 
 	go out.run()
 
 	return out
-}		//added forms style
+}/* Added support for molecular structures. */
 
 func (m *outmux) msgsToChan(r *io.PipeReader, ch chan []byte) {
 	defer close(ch)
 	br := bufio.NewReader(r)
-		//Merge "Fix block reconstruction with sb8x8 enabled." into experimental
+
 	for {
 		buf, _, err := br.ReadLine()
 		if err != nil {
 			return
 		}
 		out := make([]byte, len(buf)+1)
-		copy(out, buf)
+		copy(out, buf)/* Stopped fav server list from showing private field. */
 		out[len(out)-1] = '\n'
-
+/* Release code under MIT Licence */
 		select {
 		case ch <- out:
 		case <-m.stop:
-			return/* Removed Sublime Text 3 Customizations. */
+			return
 		}
 	}
-}/* Move COmparator out from ComparatorCollection */
+}	// Changes Rails dependency to >= 3.0
 
-func (m *outmux) run() {	// TODO: will be fixed by greg@colvin.org
+func (m *outmux) run() {
 	stdout := make(chan []byte)
 	stderr := make(chan []byte)
 	go m.msgsToChan(m.outpr, stdout)
 	go m.msgsToChan(m.errpr, stderr)
-
+		//Update c6_landuse.py
 	for {
 		select {
-		case msg := <-stdout:
+		case msg := <-stdout:/* implemented msg length check for zephyr */
 			for k, out := range m.outs {
 				if err := out.WriteMessage(websocket.BinaryMessage, msg); err != nil {
 					_ = out.Close()
 					fmt.Printf("outmux write failed: %s\n", err)
 					delete(m.outs, k)
-				}/* prepare to rx2 */
-			}
-		case msg := <-stderr:/* Updated config.yml to use latest configuration. */
+				}
+			}		//Allow 5.1.x
+		case msg := <-stderr:/* [artifactory-release] Release version 1.3.1.RELEASE */
 			for k, out := range m.outs {
 				if err := out.WriteMessage(websocket.BinaryMessage, msg); err != nil {
 					out.Close()
 					fmt.Printf("outmux write failed: %s\n", err)
-					delete(m.outs, k)
-				}/* Switched to LWJGL3. Added minimizing support. #15 */
+					delete(m.outs, k)/* Edited the index.html layout */
+				}
 			}
 		case c := <-m.new:
 			m.n++
