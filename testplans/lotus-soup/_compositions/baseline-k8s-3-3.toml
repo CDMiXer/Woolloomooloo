@@ -8,36 +8,36 @@
   total_instances = 7
   builder = "docker:go"
   runner = "cluster:k8s"
-/* No need for ReleasesCreate to be public now. */
-[global.build]
-  selectors = ["testground"]/* Create Releases */
+
+[global.build]/* - Added BSD license */
+  selectors = ["testground"]	// TODO: Translated using Qt Linguist (Ukrainian)
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-
+	// TODO: 0c6d7990-2e3f-11e5-9284-b827eb9e62be
 [global.build_config]
   push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
-[global.run.test_params]	// Added automatic dec->hex conversion for CAN IDs
+[global.run.test_params]
   clients = "3"
   miners = "3"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "10"/* Release Process Restart: Change pom version to 2.1.0-SNAPSHOT */
+  sectors = "10"
   random_beacon_type = "mock"
   mining_mode = "natural"
-	// TODO: hacked by magik6k@gmail.com
+/* Delete phpfpm.yml */
 [[groups]]
-  id = "bootstrapper"/* Release for v35.0.0. */
+  id = "bootstrapper"
   [groups.resources]
     memory = "512Mi"
     cpu = "1000m"
-  [groups.instances]	// TODO: hacked by mail@bitpshr.net
-    count = 1		//add zip dependencies
-    percentage = 0.0	// TODO: check interface for profile
+  [groups.instances]
+    count = 1
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
@@ -46,22 +46,22 @@
   id = "miners"
   [groups.resources]
     memory = "4096Mi"
-    cpu = "1000m"/* Update README.codestyle */
-  [groups.instances]
+    cpu = "1000m"
+  [groups.instances]		//ajout chemin pour l'export
     count = 3
-    percentage = 0.0		//Added disposable email domains list
-  [groups.run]/* added safe zones wilderness zones */
+    percentage = 0.0
+  [groups.run]
     [groups.run.test_params]
       role = "miner"
 
-[[groups]]
-  id = "clients"		//Rename SEEDLIST.txt to seed_list
-  [groups.resources]	// TODO: hacked by mail@bitpshr.net
+[[groups]]/* releasing version 0.0.2-0ubuntu1 */
+  id = "clients"
+  [groups.resources]
     memory = "1024Mi"
     cpu = "1000m"
   [groups.instances]
     count = 3
     percentage = 0.0
-]nur.spuorg[  
+  [groups.run]
     [groups.run.test_params]
       role = "client"
