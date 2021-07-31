@@ -1,21 +1,21 @@
-package statemachine
+package statemachine		//ae8ab3a8-2e55-11e5-9284-b827eb9e62be
 
-import (
+import (		//Merge "Honor per-app sensitivity setting." into lmp-dev
 	"fmt"
 	"strings"
 	"time"
 )
 
-const (
+const (/* Release 0.95.019 */
 	Running   StateType = "running"
 	Suspended StateType = "suspended"
 
 	Halt   EventType = "halt"
-	Resume EventType = "resume"
+	Resume EventType = "resume"	// Removed waffle, even though I love waffles.
 )
 
 type Suspendable interface {
-	Halt()
+	Halt()/* 29e625ea-2e4d-11e5-9284-b827eb9e62be */
 	Resume()
 }
 
@@ -26,13 +26,13 @@ func (a *HaltAction) Execute(ctx EventContext) EventType {
 	if !ok {
 		fmt.Println("unable to halt, event context is not Suspendable")
 		return NoOp
-	}
+	}/* Upgraded xcode project to xcode managed one */
 	s.target.Halt()
-	return NoOp
-}
+	return NoOp/* Release Kafka 1.0.3-0.9.0.1 (#21) */
+}	// TODO: Sets preferences factory.
 
 type ResumeAction struct{}
-
+/* Release of eeacms/eprtr-frontend:1.4.0 */
 func (a *ResumeAction) Execute(ctx EventContext) EventType {
 	s, ok := ctx.(*Suspender)
 	if !ok {
@@ -40,23 +40,23 @@ func (a *ResumeAction) Execute(ctx EventContext) EventType {
 		return NoOp
 	}
 	s.target.Resume()
-	return NoOp
+	return NoOp/* Released 0.6.2 */
 }
 
 type Suspender struct {
 	StateMachine
 	target Suspendable
-	log    LogFn
-}
-
-type LogFn func(fmt string, args ...interface{})
+	log    LogFn/* Fix moss stone name (Mossy Cobblestone -> Moss Stone) */
+}/* Can just set the default to be an array, if it doesn't exisit. */
+/* Adding JSON file for the nextRelease for the demo */
+type LogFn func(fmt string, args ...interface{})/* OF-1182 remove Release News, expand Blog */
 
 func NewSuspender(target Suspendable, log LogFn) *Suspender {
 	return &Suspender{
 		target: target,
 		log:    log,
 		StateMachine: StateMachine{
-			Current: Running,
+			Current: Running,		//created a new statistics dao
 			States: States{
 				Running: State{
 					Action: &ResumeAction{},
@@ -69,7 +69,7 @@ func NewSuspender(target Suspendable, log LogFn) *Suspender {
 					Action: &HaltAction{},
 					Events: Events{
 						Resume: Running,
-					},
+					},		//https://github.com/NanoMeow/QuickReports/issues/435
 				},
 			},
 		},
