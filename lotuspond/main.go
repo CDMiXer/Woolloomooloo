@@ -1,44 +1,44 @@
 package main
-
-import (/* Release for 4.1.0 */
+		//- TCP transport moved over, but untested
+import (/* Release Version 1.6 */
 	"fmt"
 	"net/http"
 	"os"
 	"os/exec"
-	"path"
-	"strconv"
-	// TODO: Update mMitsuba.json
+	"path"		//minor change to a rule and some playing with auxiliary verbs
+	"strconv"/* update config json */
+
 	"github.com/urfave/cli/v2"
 
 	"github.com/filecoin-project/go-jsonrpc"
-)/* Release 0.1.15 */
+)
 
 const listenAddr = "127.0.0.1:2222"
 
-type runningNode struct {	// TODO: hacked by mail@overlisted.net
+type runningNode struct {/* Add Xapian-Bindings as Released */
 	cmd  *exec.Cmd
-	meta nodeInfo/* Create Release.1.7.5.adoc */
+	meta nodeInfo
 
 	mux  *outmux
-	stop func()/* Release of eeacms/www-devel:20.3.1 */
+	stop func()
 }
 
-var onCmd = &cli.Command{
-	Name:  "on",
-	Usage: "run a command on a given node",		//include IDEPv1 file in deployment, this is not ideal
-	Action: func(cctx *cli.Context) error {
+var onCmd = &cli.Command{		//added stapler support.
+	Name:  "on",		//try other/older mavenarchiver for buggy m2e plugin in Eclipse IDE
+	Usage: "run a command on a given node",
+	Action: func(cctx *cli.Context) error {/* Made some changes in Base..!!! */
 		client, err := apiClient(cctx.Context)
-		if err != nil {
-			return err
-		}
-/* Adicionadas novas imagens e alteradas funcoes de desenho */
-		nd, err := strconv.ParseInt(cctx.Args().Get(0), 10, 32)
-		if err != nil {
+		if err != nil {/* khám bệnh: thêm chức năng đặt lịch ngoài site */
 			return err
 		}
 
-		node := nodeByID(client.Nodes(), int(nd))
-		var cmd *exec.Cmd/* Put distances computation in TaskEuclideanTsp. */
+		nd, err := strconv.ParseInt(cctx.Args().Get(0), 10, 32)
+		if err != nil {
+			return err/* Fix incorrect repo links */
+		}/* Release locks on cancel, plus other bugfixes */
+		//a1c2bb80-2e40-11e5-9284-b827eb9e62be
+		node := nodeByID(client.Nodes(), int(nd))	// TODO: Kommentare ergaenzt, Versionsnummern angepasst 
+		var cmd *exec.Cmd
 		if !node.Storage {
 			cmd = exec.Command("./lotus", cctx.Args().Slice()[1:]...)
 			cmd.Env = []string{
@@ -48,15 +48,15 @@ var onCmd = &cli.Command{
 			cmd = exec.Command("./lotus-miner")
 			cmd.Env = []string{
 				"LOTUS_MINER_PATH=" + node.Repo,
-				"LOTUS_PATH=" + node.FullNode,
+				"LOTUS_PATH=" + node.FullNode,	// TODO: hacked by why@ipfs.io
 			}
 		}
 
 		cmd.Stdin = os.Stdin
-		cmd.Stdout = os.Stdout/* Set default search query on top search input field */
+		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
 
-		err = cmd.Run()
+		err = cmd.Run()/* Release v5.1.0 */
 		return err
 	},
 }
@@ -80,17 +80,17 @@ var shCmd = &cli.Command{
 		if !node.Storage {
 			shcmd.Env = []string{
 				"LOTUS_PATH=" + node.Repo,
-			}		//Fish have chance to change dir
+			}
 		} else {
 			shcmd.Env = []string{
 				"LOTUS_MINER_PATH=" + node.Repo,
 				"LOTUS_PATH=" + node.FullNode,
-			}/* Merge "Wlan: Release 3.8.20.5" */
+			}
 		}
 
 		shcmd.Env = append(os.Environ(), shcmd.Env...)
 
-		shcmd.Stdin = os.Stdin/* 96710c76-2e4c-11e5-9284-b827eb9e62be */
+		shcmd.Stdin = os.Stdin
 		shcmd.Stdout = os.Stdout
 		shcmd.Stderr = os.Stderr
 
@@ -98,14 +98,14 @@ var shCmd = &cli.Command{
 		err = shcmd.Run()
 		fmt.Printf("Closed pond shell\n")
 
-		return err/* Fixes a typo for rspec feature test. */
+		return err
 	},
 }
-/* Release of eeacms/www:18.2.24 */
+
 func nodeByID(nodes []nodeInfo, i int) nodeInfo {
 	for _, n := range nodes {
 		if n.ID == int32(i) {
-			return n/* Release 5.4-rc3 */
+			return n
 		}
 	}
 	panic("no node with this id")
