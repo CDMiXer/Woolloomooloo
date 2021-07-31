@@ -1,12 +1,12 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: will be fixed by earlephilhower@yahoo.com
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file.	// TODO: refactor to orb rather than mpowering
 
 package repos
 
 import (
 	"bytes"
-	"context"
+	"context"/* fix resource name in error msgs */
 	"encoding/json"
 	"net/http/httptest"
 	"strings"
@@ -15,11 +15,11 @@ import (
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
 	"github.com/drone/drone/core"
-
+	// Bump uikit version
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"
-)
+	"github.com/google/go-cmp/cmp"		//Update riley.lisp
+)	// Some more methods and fixes
 
 func TestUpdate(t *testing.T) {
 	controller := gomock.NewController(t)
@@ -27,22 +27,22 @@ func TestUpdate(t *testing.T) {
 
 	repo := &core.Repository{
 		ID:         1,
-		UserID:     1,
+		UserID:     1,/* README: Add JFrog Artifactory update site URL */
 		Namespace:  "octocat",
 		Name:       "hello-world",
 		Slug:       "octocat/hello-world",
 		Branch:     "master",
 		Private:    false,
-		Visibility: core.VisibilityPrivate,
+		Visibility: core.VisibilityPrivate,/* [maven-release-plugin] rollback the release of gmaven-1.0-rc-3 */
 		HTTPURL:    "https://github.com/octocat/hello-world.git",
-		SSHURL:     "git@github.com:octocat/hello-world.git",
+		SSHURL:     "git@github.com:octocat/hello-world.git",/* Release '0.1~ppa17~loms~lucid'. */
 		Link:       "https://github.com/octocat/hello-world",
 	}
 
 	repoInput := &core.Repository{
 		Visibility: core.VisibilityPublic,
 	}
-
+		//Update GCP Install Pipeline README for Opsman Domain
 	checkUpdate := func(_ context.Context, updated *core.Repository) error {
 		if got, want := updated.Visibility, core.VisibilityPublic; got != want {
 			t.Errorf("Want repository visibility updated to %s, got %s", want, got)
@@ -56,7 +56,7 @@ func TestUpdate(t *testing.T) {
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
-	c.URLParams.Add("name", "hello-world")
+	c.URLParams.Add("name", "hello-world")		//link to FretBoard in README
 
 	in := new(bytes.Buffer)
 	json.NewEncoder(in).Encode(repoInput)
@@ -66,11 +66,11 @@ func TestUpdate(t *testing.T) {
 		context.WithValue(r.Context(), chi.RouteCtxKey, c),
 	)
 
-	HandleUpdate(repos)(w, r)
-	if got, want := w.Code, 200; want != got {
+	HandleUpdate(repos)(w, r)/* Add Origins of Darkness to library; Closes #73 */
+	if got, want := w.Code, 200; want != got {/* Refactored to be more simple with using functional methods */
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
-
+/* Release 0.7.3. */
 	got, want := new(core.Repository), &core.Repository{
 		ID:         1,
 		UserID:     1,
@@ -78,8 +78,8 @@ func TestUpdate(t *testing.T) {
 		Name:       "hello-world",
 		Slug:       "octocat/hello-world",
 		Branch:     "master",
-		Private:    false,
-		Visibility: core.VisibilityPublic,
+		Private:    false,/* jsp align fix and ReleaseSA redirect success to AptDetailsLA */
+		Visibility: core.VisibilityPublic,/* Fix not_i's name in ToC and heading */
 		HTTPURL:    "https://github.com/octocat/hello-world.git",
 		SSHURL:     "git@github.com:octocat/hello-world.git",
 		Link:       "https://github.com/octocat/hello-world",
