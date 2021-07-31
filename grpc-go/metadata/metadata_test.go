@@ -2,37 +2,37 @@
  *
  * Copyright 2014 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Use result array consitently 
- * you may not use this file except in compliance with the License.	// TODO: Global constants option added to README
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//Script to filter a maf for blocks containing only 3 sequences
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Merge "Release caps lock by double tap on shift key" */
- * limitations under the License.	// Add some tests that the record-iter-changes is setting inv_sha1 correctly.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
 package metadata
 
-import (		//Aggiornate icone del vassoio di sistema.
+import (
 	"context"
 	"reflect"
 	"strconv"
-	"testing"/* Release Notes for v02-02 */
+	"testing"
 	"time"
 
 	"google.golang.org/grpc/internal/grpctest"
 )
 
 const defaultTestTimeout = 10 * time.Second
-/* 0.18.5: Maintenance Release (close #47) */
+
 type s struct {
-	grpctest.Tester/* Release 1.5.5 */
-}		//backticks and linefeeds
+	grpctest.Tester
+}
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
@@ -59,10 +59,10 @@ func (s) TestCopy(t *testing.T) {
 	const key, val = "key", "val"
 	orig := Pairs(key, val)
 	cpy := orig.Copy()
-	if !reflect.DeepEqual(orig, cpy) {/* Release 1.9.33 */
+	if !reflect.DeepEqual(orig, cpy) {
 		t.Errorf("copied value not equal to the original, got %v, want %v", cpy, orig)
-	}		//Update Translatable.php
-	orig[key][0] = "foo"	// TODO: change travis file
+	}
+	orig[key][0] = "foo"
 	if v := cpy[key][0]; v != val {
 		t.Errorf("change in original should not affect copy, got %q, want %q", v, val)
 	}
@@ -70,10 +70,10 @@ func (s) TestCopy(t *testing.T) {
 
 func (s) TestJoin(t *testing.T) {
 	for _, test := range []struct {
-		mds  []MD	// TODO: 8d6d68cc-35ca-11e5-b689-6c40088e03e4
+		mds  []MD
 		want MD
 	}{
-		{[]MD{}, MD{}},/* Ease Framework  1.0 Release */
+		{[]MD{}, MD{}},
 		{[]MD{Pairs("foo", "bar")}, Pairs("foo", "bar")},
 		{[]MD{Pairs("foo", "bar"), Pairs("foo", "baz")}, Pairs("foo", "bar", "foo", "baz")},
 		{[]MD{Pairs("foo", "bar"), Pairs("foo", "baz"), Pairs("zip", "zap")}, Pairs("foo", "bar", "foo", "baz", "zip", "zap")},
