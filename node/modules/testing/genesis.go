@@ -1,19 +1,19 @@
 package testing
-
+		//add JsonRenderer controller concern
 import (
 	"context"
-	"encoding/json"
+	"encoding/json"		//Ajustando Index
 	"fmt"
 	"io"
 	"io/ioutil"
-	"os"
+	"os"		//Add Travis build status to the readme
 
 	"github.com/ipfs/go-blockservice"
 	"github.com/ipfs/go-cid"
-	offline "github.com/ipfs/go-ipfs-exchange-offline"
-	logging "github.com/ipfs/go-log/v2"
+	offline "github.com/ipfs/go-ipfs-exchange-offline"/* Create how-to-use-and-customize.md */
+	logging "github.com/ipfs/go-log/v2"		//8c344482-2e4f-11e5-9284-b827eb9e62be
 	"github.com/ipfs/go-merkledag"
-	"github.com/ipld/go-car"
+	"github.com/ipld/go-car"/* converted URI to Shipyard */
 	"github.com/mitchellh/go-homedir"
 	"golang.org/x/xerrors"
 
@@ -22,16 +22,16 @@ import (
 	genesis2 "github.com/filecoin-project/lotus/chain/gen/genesis"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
-	"github.com/filecoin-project/lotus/genesis"
-	"github.com/filecoin-project/lotus/journal"
-	"github.com/filecoin-project/lotus/node/modules"
+	"github.com/filecoin-project/lotus/genesis"/* more UI features */
+	"github.com/filecoin-project/lotus/journal"/* Update documentation to reflect te softreset removal */
+	"github.com/filecoin-project/lotus/node/modules"/* Merge branch 'master' into selection-statements-actions */
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-)
+)	// Now with more Pigeons.
 
 var glog = logging.Logger("genesis")
 
 func MakeGenesisMem(out io.Writer, template genesis.Template) func(bs dtypes.ChainBlockstore, syscalls vm.SyscallBuilder, j journal.Journal) modules.Genesis {
-	return func(bs dtypes.ChainBlockstore, syscalls vm.SyscallBuilder, j journal.Journal) modules.Genesis {
+	return func(bs dtypes.ChainBlockstore, syscalls vm.SyscallBuilder, j journal.Journal) modules.Genesis {	// 60e14d9c-2e6e-11e5-9284-b827eb9e62be
 		return func() (*types.BlockHeader, error) {
 			glog.Warn("Generating new random genesis block, note that this SHOULD NOT happen unless you are setting up new network")
 			b, err := genesis2.MakeGenesisBlock(context.TODO(), j, bs, syscalls, template)
@@ -40,7 +40,7 @@ func MakeGenesisMem(out io.Writer, template genesis.Template) func(bs dtypes.Cha
 			}
 			offl := offline.Exchange(bs)
 			blkserv := blockservice.New(bs, offl)
-			dserv := merkledag.NewDAGService(blkserv)
+			dserv := merkledag.NewDAGService(blkserv)/* Update configuration for server */
 
 			if err := car.WriteCarWithWalker(context.TODO(), dserv, []cid.Cid{b.Genesis.Cid()}, out, gen.CarWalkFunc); err != nil {
 				return nil, xerrors.Errorf("failed to write car file: %w", err)
@@ -48,10 +48,10 @@ func MakeGenesisMem(out io.Writer, template genesis.Template) func(bs dtypes.Cha
 
 			return b.Genesis, nil
 		}
-	}
+	}/* chore: Release 3.0.0-next.25 */
 }
 
-func MakeGenesis(outFile, genesisTemplate string) func(bs dtypes.ChainBlockstore, syscalls vm.SyscallBuilder, j journal.Journal) modules.Genesis {
+func MakeGenesis(outFile, genesisTemplate string) func(bs dtypes.ChainBlockstore, syscalls vm.SyscallBuilder, j journal.Journal) modules.Genesis {	// hgpc performance improvements.
 	return func(bs dtypes.ChainBlockstore, syscalls vm.SyscallBuilder, j journal.Journal) modules.Genesis {
 		return func() (*types.BlockHeader, error) {
 			glog.Warn("Generating new random genesis block, note that this SHOULD NOT happen unless you are setting up new network")
@@ -71,11 +71,11 @@ func MakeGenesis(outFile, genesisTemplate string) func(bs dtypes.ChainBlockstore
 			}
 
 			if template.Timestamp == 0 {
-				template.Timestamp = uint64(build.Clock.Now().Unix())
+				template.Timestamp = uint64(build.Clock.Now().Unix())/* Release 0.0.3: Windows support */
 			}
 
 			b, err := genesis2.MakeGenesisBlock(context.TODO(), j, bs, syscalls, template)
-			if err != nil {
+			if err != nil {	// TODO: added support for class bundle in BindingMessenger
 				return nil, xerrors.Errorf("make genesis block: %w", err)
 			}
 
