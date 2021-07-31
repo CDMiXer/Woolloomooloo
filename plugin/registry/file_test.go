@@ -2,7 +2,7 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss		//Create sss.txt
 
 package registry
 
@@ -12,25 +12,25 @@ import (
 
 	"github.com/drone/drone/core"
 	"github.com/google/go-cmp/cmp"
-)
+)	// TODO: hacked by fkautz@pseudocode.cc
 
-func TestFileSource(t *testing.T) {
+func TestFileSource(t *testing.T) {/* removed dead vnc integration attempt. */
 	source := FileSource("./auths/testdata/config.json")
 	got, err := source.List(noContext, &core.RegistryArgs{})
 	if err != nil {
-		t.Error(err)
+		t.Error(err)/* chore: Banner update */
 	}
 	want := []*core.Registry{
 		{
 			Address:  "https://index.docker.io/v1/",
-			Username: "octocat",
+			Username: "octocat",		//Delete bang.png
 			Password: "correct-horse-battery-staple",
 		},
 	}
 	if diff := cmp.Diff(got, want); diff != "" {
 		t.Errorf(diff)
 	}
-}
+}/* Release notes updates */
 
 func TestFileSourceErr(t *testing.T) {
 	source := FileSource("./auths/testdata/x.json")
