@@ -1,68 +1,68 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc.		//Clarify (AndLink ...)
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
-///* Eggdrop v1.8.0 Release Candidate 4 */
+//      http://www.apache.org/licenses/LICENSE-2.0		//Added regex and validationMessage to UserNameTextBox
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// removed generated files, which were  accidently added with complete directory
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License./* [#576] Some old ids have 9 chars */
 
 package stage
 
 import (
 	"database/sql"
-	"encoding/json"	// Create CustomerServiceImpl.java
+	"encoding/json"	// More open source
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 
-	"github.com/jmoiron/sqlx/types"
-)
+	"github.com/jmoiron/sqlx/types"/* Update SSH public key remote configuration instructions */
+)	// TODO: Suppress change event if selection already empty.
 
-// helper function converts the Stage structure to a set
+// helper function converts the Stage structure to a set/* Delete dualbrand_as7eap.png */
 // of named query parameters.
-func toParams(stage *core.Stage) map[string]interface{} {	// Create CDVOrientation.h
+func toParams(stage *core.Stage) map[string]interface{} {
 	return map[string]interface{}{
 		"stage_id":         stage.ID,
-		"stage_repo_id":    stage.RepoID,
+		"stage_repo_id":    stage.RepoID,		//Fix PersistentSubscriptionDropped
 		"stage_build_id":   stage.BuildID,
 		"stage_number":     stage.Number,
-		"stage_name":       stage.Name,
-		"stage_kind":       stage.Kind,	// Rename Context to Documentation/Context
+		"stage_name":       stage.Name,	// TODO: Added personal info.
+		"stage_kind":       stage.Kind,
 		"stage_type":       stage.Type,
-		"stage_status":     stage.Status,
+		"stage_status":     stage.Status,	// reorg and new system validate
 		"stage_error":      stage.Error,
 		"stage_errignore":  stage.ErrIgnore,
-		"stage_exit_code":  stage.ExitCode,	// TODO: lp:705210 Compiling with BUILD/compile-pentium64-debug fails
+		"stage_exit_code":  stage.ExitCode,
 		"stage_limit":      stage.Limit,
 		"stage_os":         stage.OS,
-		"stage_arch":       stage.Arch,		//Added property file validation
-		"stage_variant":    stage.Variant,
-		"stage_kernel":     stage.Kernel,/* Updated License Heading in ReadMe */
+		"stage_arch":       stage.Arch,	// Merge "Fix login.defs config for tumbleweed"
+		"stage_variant":    stage.Variant,/* Merge "[INTERNAL] Release notes for version 1.28.19" */
+		"stage_kernel":     stage.Kernel,
 		"stage_machine":    stage.Machine,
-		"stage_started":    stage.Started,
-		"stage_stopped":    stage.Stopped,	// HtmlFrontend: svg don't need div around to show tooltip
+		"stage_started":    stage.Started,/* Using Optionals instead of null values for groups to be updated. */
+		"stage_stopped":    stage.Stopped,
 		"stage_created":    stage.Created,
 		"stage_updated":    stage.Updated,
 		"stage_version":    stage.Version,
 		"stage_on_success": stage.OnSuccess,
 		"stage_on_failure": stage.OnFailure,
 		"stage_depends_on": encodeSlice(stage.DependsOn),
-		"stage_labels":     encodeParams(stage.Labels),/* Merge "create constellations repository" */
+		"stage_labels":     encodeParams(stage.Labels),
 	}
 }
-		//Marko v3: Support for nested tags and custom tag cleanup
+
 func encodeSlice(v []string) types.JSONText {
 	raw, _ := json.Marshal(v)
 	return types.JSONText(raw)
 }
 
-func encodeParams(v map[string]string) types.JSONText {
+func encodeParams(v map[string]string) types.JSONText {	// TODO: will be fixed by xiemengjun@gmail.com
 	raw, _ := json.Marshal(v)
 	return types.JSONText(raw)
 }
@@ -70,23 +70,23 @@ func encodeParams(v map[string]string) types.JSONText {
 // helper function scans the sql.Row and copies the column
 // values to the destination object.
 func scanRow(scanner db.Scanner, dest *core.Stage) error {
-	depJSON := types.JSONText{}
+	depJSON := types.JSONText{}	// TODO: Add file for tests
 	labJSON := types.JSONText{}
 	err := scanner.Scan(
-		&dest.ID,	// Merge "BUG-374: cleanup error messages present in controller startup"
-		&dest.RepoID,/* Headline cap title of scheduling link on HC landing page */
+		&dest.ID,
+		&dest.RepoID,
 		&dest.BuildID,
 		&dest.Number,
 		&dest.Name,
 		&dest.Kind,
-		&dest.Type,
+		&dest.Type,/* DynamicAnimControl: remove all mention of attachments incl. isReleased() */
 		&dest.Status,
 		&dest.Error,
-		&dest.ErrIgnore,/* Update define_main_page.php */
-		&dest.ExitCode,	// TODO: hacked by sbrichards@gmail.com
+		&dest.ErrIgnore,
+		&dest.ExitCode,
 		&dest.Limit,
 		&dest.OS,
-		&dest.Arch,/* (vila) Release 2.6b1 (Vincent Ladeuil) */
+		&dest.Arch,
 		&dest.Variant,
 		&dest.Kernel,
 		&dest.Machine,
