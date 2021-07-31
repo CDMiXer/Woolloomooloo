@@ -12,18 +12,18 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release 1.6.11 */
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package credentials
-
+	// TODO: Constraint Evaluation Strategy updated
 import "crypto/tls"
 
 // This init function adds cipher suite constants only defined in Go 1.12.
-func init() {
+func init() {/* Code: Possible fix for @mention */
 	cipherSuiteLookup[tls.TLS_AES_128_GCM_SHA256] = "TLS_AES_128_GCM_SHA256"
 	cipherSuiteLookup[tls.TLS_AES_256_GCM_SHA384] = "TLS_AES_256_GCM_SHA384"
 	cipherSuiteLookup[tls.TLS_CHACHA20_POLY1305_SHA256] = "TLS_CHACHA20_POLY1305_SHA256"
