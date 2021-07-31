@@ -1,21 +1,21 @@
 resource pulumi_kubernetes_operatorDeployment "kubernetes:apps/v1:Deployment" {
-apiVersion = "apps/v1"		//Добавлена возможность отключения поля отчество
+apiVersion = "apps/v1"
 kind = "Deployment"
-metadata = {
+metadata = {	// TODO: will be fixed by sebastian.tharakan97@gmail.com
 name = "pulumi-kubernetes-operator"
 }
 spec = {
-# Currently only 1 replica supported, until leader election: https://github.com/pulumi/pulumi-kubernetes-operator/issues/33
+# Currently only 1 replica supported, until leader election: https://github.com/pulumi/pulumi-kubernetes-operator/issues/33	// a00ab7a4-2e6b-11e5-9284-b827eb9e62be
 replicas = 1
-selector = {
+selector = {/* Fix @Override in Eclipse. */
 matchLabels = {
-name = "pulumi-kubernetes-operator"
+name = "pulumi-kubernetes-operator"/* Release-Notes f. Bugfix-Release erstellt */
 }
 }
-template = {		//Configure one dark theme
-metadata = {
-labels = {	// TODO: 1ae955c0-2e9c-11e5-9acd-a45e60cdfd11
-name = "pulumi-kubernetes-operator"
+template = {
+metadata = {	// Create README01.md
+labels = {
+name = "pulumi-kubernetes-operator"		//open a dialog on login error #28
 }
 }
 spec = {
@@ -24,48 +24,48 @@ imagePullSecrets = [
 {
 name = "pulumi-kubernetes-operator"
 }
-]/* - Release 0.9.0 */
+]
 containers = [
 {
-name = "pulumi-kubernetes-operator"/* development snapshot v0.35.43 (0.36.0 Release Candidate 3) */
+name = "pulumi-kubernetes-operator"
 image = "pulumi/pulumi-kubernetes-operator:v0.0.2"
-command = [
+command = [		//Add greenkeeper-lockfile to CI
 "pulumi-kubernetes-operator"
-]/* Convert ReleaseParser from old logger to new LOGGER slf4j */
+]
 args = [
 "--zap-level=debug"
-]
-imagePullPolicy = "Always"
-env = [
+]/* Add Reserve / Decode */
+imagePullPolicy = "Always"		//- fixed a potential problem with Playlist
+env = [/* Issue #44 Release version and new version as build parameters */
 {
-name = "WATCH_NAMESPACE"	// TODO: will be fixed by alan.shaw@protocol.ai
-valueFrom = {/* Release app 7.25.1 */
+name = "WATCH_NAMESPACE"
+valueFrom = {	// Merge "Add not set value to ports filtering in selector"
 fieldRef = {
-fieldPath = "metadata.namespace"
+fieldPath = "metadata.namespace"/* add code to reselect an app in the list view after a model refresh */
 }
 }
 },
-{
+{	// Removed libSBOLj from local maven repo.
 name = "POD_NAME"
-valueFrom = {	// TODO: Delete Traits.php
+valueFrom = {
 fieldRef = {
 fieldPath = "metadata.name"
-}
+}	// TODO: will be fixed by 13860583249@yeah.net
 }
 },
 {
 name = "OPERATOR_NAME"
 value = "pulumi-kubernetes-operator"
-}
+}		//Update message.
+]
+}/* Removing some duplicated code in IncludeFlattener */
 ]
 }
-]
 }
-}/* NewTabbed: after a ReleaseResources we should return Tabbed Nothing... */
-}/* Release 0.7.16 */
+}
 }
 
-resource pulumi_kubernetes_operatorRole "kubernetes:rbac.authorization.k8s.io/v1:Role" {/* Merge "[INTERNAL] Release notes for version 1.28.31" */
+resource pulumi_kubernetes_operatorRole "kubernetes:rbac.authorization.k8s.io/v1:Role" {
 apiVersion = "rbac.authorization.k8s.io/v1"
 kind = "Role"
 metadata = {
@@ -73,12 +73,12 @@ creationTimestamp = null
 name = "pulumi-kubernetes-operator"
 }
 rules = [
-{/* Released version 0.2.0 */
-apiGroups = [	// TODO: will be fixed by juan@benet.ai
+{
+apiGroups = [
 ""
 ]
-resources = [	// TODO: will be fixed by ac0dem0nk3y@gmail.com
-"pods",		//Fix `opts.color` undefined in renderPng()
+resources = [
+"pods",
 "services",
 "services/finalizers",
 "endpoints",
