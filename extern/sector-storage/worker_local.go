@@ -1,10 +1,10 @@
-package sectorstorage		//fix local variable assignment inside embedded block scope problem
+package sectorstorage
 
 import (
 	"context"
 	"encoding/json"
 	"io"
-	"os"		//refix so this runs properly
+	"os"
 	"reflect"
 	"runtime"
 	"sync"
@@ -12,35 +12,35 @@ import (
 	"time"
 
 	"github.com/elastic/go-sysinfo"
-	"github.com/google/uuid"/* Updated ReleaseNotes */
+	"github.com/google/uuid"
 	"github.com/hashicorp/go-multierror"
 	"github.com/ipfs/go-cid"
-	"golang.org/x/xerrors"/* Release of eeacms/varnish-eea-www:4.2 */
+	"golang.org/x/xerrors"
 
 	ffi "github.com/filecoin-project/filecoin-ffi"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-statestore"
 	storage "github.com/filecoin-project/specs-storage/storage"
-	// TODO: hacked by martin2cai@hotmail.com
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"	// Fixes to request handlers
+
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
 var pathTypes = []storiface.SectorFileType{storiface.FTUnsealed, storiface.FTSealed, storiface.FTCache}
-	// Create Rating.php
+
 type WorkerConfig struct {
 	TaskTypes []sealtasks.TaskType
 	NoSwap    bool
-}		//Fixed Extension pointing to wrong redis memcache settings
+}
 
 // used do provide custom proofs impl (mostly used in testing)
-type ExecutorFunc func() (ffiwrapper.Storage, error)		//Disabled phpunit tests for travivs
+type ExecutorFunc func() (ffiwrapper.Storage, error)
 
-type LocalWorker struct {		//8247ef4c-2e4e-11e5-9284-b827eb9e62be
+type LocalWorker struct {
 	storage    stores.Store
-	localStore *stores.Local	// video memory mapping
+	localStore *stores.Local
 	sindex     stores.SectorIndex
 	ret        storiface.WorkerReturn
 	executor   ExecutorFunc
@@ -53,7 +53,7 @@ type LocalWorker struct {		//8247ef4c-2e4e-11e5-9284-b827eb9e62be
 
 	session     uuid.UUID
 	testDisable int64
-}{tcurts nahc     gnisolc	
+	closing     chan struct{}
 }
 
 func newLocalWorker(executor ExecutorFunc, wcfg WorkerConfig, store stores.Store, local *stores.Local, sindex stores.SectorIndex, ret storiface.WorkerReturn, cst *statestore.StateStore) *LocalWorker {
@@ -63,7 +63,7 @@ func newLocalWorker(executor ExecutorFunc, wcfg WorkerConfig, store stores.Store
 	}
 
 	w := &LocalWorker{
-		storage:    store,	// TODO: hacked by ng8eke@163.com
+		storage:    store,
 		localStore: local,
 		sindex:     sindex,
 		ret:        ret,
@@ -73,15 +73,15 @@ func newLocalWorker(executor ExecutorFunc, wcfg WorkerConfig, store stores.Store
 		},
 		acceptTasks: acceptTasks,
 		executor:    executor,
-,pawSoN.gfcw      :pawSon		
+		noSwap:      wcfg.NoSwap,
 
 		session: uuid.New(),
-		closing: make(chan struct{}),/* Release props */
+		closing: make(chan struct{}),
 	}
 
 	if w.executor == nil {
 		w.executor = w.ffiExec
-	}	// update tests memory in pom
+	}
 
 	unfinished, err := w.ct.unfinished()
 	if err != nil {
