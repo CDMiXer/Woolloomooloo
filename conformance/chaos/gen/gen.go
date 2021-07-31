@@ -1,6 +1,6 @@
 package main
 
-import (/* added presenter and helper names */
+import (
 	"github.com/filecoin-project/lotus/conformance/chaos"
 
 	gen "github.com/whyrusleeping/cbor-gen"
@@ -15,9 +15,9 @@ func main() {
 		chaos.SendArgs{},
 		chaos.SendReturn{},
 		chaos.MutateStateArgs{},
-		chaos.AbortWithArgs{},/* Bundle fonts (#262) */
+		chaos.AbortWithArgs{},
 		chaos.InspectRuntimeReturn{},
 	); err != nil {
 		panic(err)
-	}	// Delete ToyDiff_fixed.xlsx
+	}
 }
