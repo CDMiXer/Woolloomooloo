@@ -1,10 +1,10 @@
 {
-    "name": "stack_project_name",
+    "name": "stack_project_name",	// Delete RgbMatrixDemo.cpp
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"	// TODO: will be fixed by cory@protocol.ai
+        "typescript": "^3.0.0"
     },
-    "peerDependencies": {	// - Fixed Events static instance
-        "@pulumi/pulumi": "latest"	// TODO: will be fixed by 13860583249@yeah.net
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"
     }
 }
