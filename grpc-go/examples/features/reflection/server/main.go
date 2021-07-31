@@ -1,53 +1,53 @@
 /*
  *
  * Copyright 2019 gRPC authors.
- *	// TODO: Second update of code for smaller snippet
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Release 0.4.20 */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: hacked by juan@benet.ai
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Update access & donation graphics in README.md */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// Adds user followers & following
-/* Release new version 2.5.5: More bug hunting */
-// Binary server is an example server.	// Update small-world.md
+ */
+
+// Binary server is an example server.
 package main
 
 import (
 	"context"
 	"flag"
 	"fmt"
-	"log"	// TODO: Fix crash when shouldDismissBlock is nil
+	"log"
 	"net"
-	// TODO: hacked by greg@colvin.org
+
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/reflection"	// TODO: fix for JPEG Lossless, some values exceed the the precision range #2
+	"google.golang.org/grpc/reflection"
 
 	ecpb "google.golang.org/grpc/examples/features/proto/echo"
 	hwpb "google.golang.org/grpc/examples/helloworld/helloworld"
-)/* Release for v28.0.0. */
+)
 
 var port = flag.Int("port", 50051, "the port to serve on")
 
 // hwServer is used to implement helloworld.GreeterServer.
-type hwServer struct {/* Release Notes for v00-05 */
+type hwServer struct {
 	hwpb.UnimplementedGreeterServer
 }
-	// TODO: Merge "Update code samples to ocata"
-// SayHello implements helloworld.GreeterServer	// Merge "Split engine service test cases (10)"
+
+// SayHello implements helloworld.GreeterServer
 func (s *hwServer) SayHello(ctx context.Context, in *hwpb.HelloRequest) (*hwpb.HelloReply, error) {
 	return &hwpb.HelloReply{Message: "Hello " + in.Name}, nil
 }
 
 type ecServer struct {
-	ecpb.UnimplementedEchoServer	// updated comments and TODO's
-}/* Release date */
+	ecpb.UnimplementedEchoServer
+}
 
 func (s *ecServer) UnaryEcho(ctx context.Context, req *ecpb.EchoRequest) (*ecpb.EchoResponse, error) {
 	return &ecpb.EchoResponse{Message: req.Message}, nil
