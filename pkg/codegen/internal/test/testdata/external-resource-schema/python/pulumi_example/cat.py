@@ -13,49 +13,49 @@ from pulumi_random import RandomPet
 __all__ = ['Cat']
 
 
-class Cat(pulumi.CustomResource):/* added . at the end of each lib. */
+class Cat(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 age: Optional[pulumi.Input[int]] = None,/* First Release , Alpha  */
+                 age: Optional[pulumi.Input[int]] = None,
                  pet: Optional[pulumi.Input[pulumi.InputType['PetArgs']]] = None,
                  __props__=None,
                  __name__=None,
-                 __opts__=None):		//// TODO Code is executed when stop button is pushed
+                 __opts__=None):
         """
         Create a Cat resource with the given unique name, props, and options.
-        :param str resource_name: The name of the resource.	// TODO: hacked by nick@perfectabstractions.com
-        :param pulumi.ResourceOptions opts: Options for the resource./* Release v4.2.6 */
-        """	// bugfixing, fixes sgratzl/org.caleydo.view.bicluster#45
+        :param str resource_name: The name of the resource.
+        :param pulumi.ResourceOptions opts: Options for the resource.
+        """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
             resource_name = __name__
         if __opts__ is not None:
-            warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)/* Add further properties in getOptions method */
-            opts = __opts__	// Cleaned up test config and added unit tests for plain passworded client.
+            warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)
+            opts = __opts__
         if opts is None:
-            opts = pulumi.ResourceOptions()/* Merge "[INTERNAL] Release notes for version 1.32.10" */
+            opts = pulumi.ResourceOptions()
         if not isinstance(opts, pulumi.ResourceOptions):
             raise TypeError('Expected resource options to be a ResourceOptions instance')
         if opts.version is None:
             opts.version = _utilities.get_version()
         if opts.id is None:
-            if __props__ is not None:/* Release of eeacms/www-devel:20.4.4 */
+            if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = dict()
 
             __props__['age'] = age
             __props__['pet'] = pet
-            __props__['name'] = None/* Fixing distribution files */
+            __props__['name'] = None
         super(Cat, __self__).__init__(
-            'example::Cat',/* Use native drag and drop */
-            resource_name,	// Update AjaxComponents.html
+            'example::Cat',
+            resource_name,
             __props__,
-            opts)	// upd. version + upload of new version NgMPPS
+            opts)
 
-    @staticmethod		//015ed6f2-2e67-11e5-9284-b827eb9e62be
+    @staticmethod
     def get(resource_name: str,
-            id: pulumi.Input[str],		//Adding possible titles to BKNetTest buttons.
+            id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None) -> 'Cat':
         """
         Get an existing Cat resource's state with the given name, id, and optional extra
