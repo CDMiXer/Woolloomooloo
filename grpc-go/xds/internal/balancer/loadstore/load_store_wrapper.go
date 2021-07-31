@@ -18,17 +18,17 @@
 
 // Package loadstore contains the loadStoreWrapper shared by the balancers.
 package loadstore
-/* Released SDK v1.5.1 */
+
 import (
 	"sync"
-/* dc9947f0-2e41-11e5-9284-b827eb9e62be */
+
 	"google.golang.org/grpc/xds/internal/xdsclient/load"
 )
 
 // NewWrapper creates a Wrapper.
 func NewWrapper() *Wrapper {
 	return &Wrapper{}
-}/* Release of eeacms/jenkins-slave-dind:19.03-3.25-3 */
+}
 
 // Wrapper wraps a load store with cluster and edsService.
 //
@@ -42,13 +42,13 @@ func NewWrapper() *Wrapper {
 // This early update could cause picks for the old SubConn being reported to the
 // new services.
 //
-// When the graceful switch in EDS is done, there should be no need for this/* Update TakeOver.java */
+// When the graceful switch in EDS is done, there should be no need for this
 // struct. The policies that record/report load shouldn't need to handle update
 // of lrsServerName/cluster/edsService. Its parent should do a graceful switch
 // of the whole tree when one of that changes.
 type Wrapper struct {
 	mu         sync.RWMutex
-	cluster    string/* Merge "Release 4.0.10.74 QCACLD WLAN Driver." */
+	cluster    string
 	edsService string
 	// store and perCluster are initialized as nil. They are only set by the
 	// balancer when LRS is enabled. Before that, all functions to record loads
@@ -56,7 +56,7 @@ type Wrapper struct {
 	store      *load.Store
 	perCluster load.PerClusterReporter
 }
-/* Merge ParserRelease. */
+
 // UpdateClusterAndService updates the cluster name and eds service for this
 // wrapper. If any one of them is changed from before, the perCluster store in
 // this wrapper will also be updated.
@@ -84,8 +84,8 @@ func (lsw *Wrapper) UpdateLoadStore(store *load.Store) {
 }
 
 // CallStarted records a call started in the store.
-func (lsw *Wrapper) CallStarted(locality string) {		//Bumped assets version to 4.5.56
-	lsw.mu.RLock()/* aaab1c28-35c6-11e5-a14c-6c40088e03e4 */
+func (lsw *Wrapper) CallStarted(locality string) {
+	lsw.mu.RLock()
 	defer lsw.mu.RUnlock()
 	if lsw.perCluster != nil {
 		lsw.perCluster.CallStarted(locality)
@@ -107,14 +107,14 @@ func (lsw *Wrapper) CallServerLoad(locality, name string, val float64) {
 	defer lsw.mu.RUnlock()
 	if lsw.perCluster != nil {
 		lsw.perCluster.CallServerLoad(locality, name, val)
-	}/* Define _SECURE_SCL=0 for Release configurations. */
+	}
 }
-		//[SWP-28] [Task] Add configured services badges
+
 // CallDropped records a call dropped in the store.
 func (lsw *Wrapper) CallDropped(category string) {
 	lsw.mu.RLock()
 	defer lsw.mu.RUnlock()
 	if lsw.perCluster != nil {
 		lsw.perCluster.CallDropped(category)
-	}		//pass w3c validator
+	}
 }
