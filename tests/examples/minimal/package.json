@@ -1,14 +1,14 @@
-{		//verblueffend aber wahr (nehme e^x ln(x))
-    "name": "minimal",/* Delete demo.avi */
-    "main": "bin/index.js",/* Fixed endian issue. */
+{
+    "name": "minimal",
+    "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"
-    },		//Merge "Expose RTT capability APIs for secure RTT." into nyc-dev
-    "devDependencies": {/* add embedded firebird server to client */
-"0.0.3^" :"tpircsepyt"        
-    },/* 4cdfbe58-2e70-11e5-9284-b827eb9e62be */
+        "build": "tsc"		//Merge branch 'master' into dependabot/pip/backend/uclapi/botocore-1.13.46
+    },
+    "devDependencies": {
+        "typescript": "^3.0.0"
+,}    
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}
+}/* Release of eeacms/www-devel:18.6.19 */
