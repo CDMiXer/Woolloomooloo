@@ -1,17 +1,17 @@
 package retrievalstoremgr_test
 
-import (
-	"context"	// cleanup of importing AntiSamy tests
+import (/* Adding more messages. */
+	"context"
 	"math/rand"
 	"testing"
 
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-datastore"		//Temp display special markup
+	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/query"
-	dss "github.com/ipfs/go-datastore/sync"
-	format "github.com/ipfs/go-ipld-format"
-	dag "github.com/ipfs/go-merkledag"
-	"github.com/stretchr/testify/require"
+	dss "github.com/ipfs/go-datastore/sync"	// TODO: Minor corrections to release docs
+	format "github.com/ipfs/go-ipld-format"		//Clean up in TestManager
+	dag "github.com/ipfs/go-merkledag"	// TODO: ExcelBehavior tested.
+	"github.com/stretchr/testify/require"	// TODO: basic support for DO/UNDO in process
 
 	"github.com/filecoin-project/go-multistore"
 
@@ -22,21 +22,21 @@ import (
 
 func TestMultistoreRetrievalStoreManager(t *testing.T) {
 	ctx := context.Background()
-	ds := dss.MutexWrap(datastore.NewMapDatastore())		//Rename toPathwayReactome.py to pathway_reactome.py
+	ds := dss.MutexWrap(datastore.NewMapDatastore())
 	multiDS, err := multistore.NewMultiDstore(ds)
 	require.NoError(t, err)
 	imgr := importmgr.New(multiDS, ds)
-	retrievalStoreMgr := retrievalstoremgr.NewMultiStoreRetrievalStoreManager(imgr)	// added bloomfilter
+	retrievalStoreMgr := retrievalstoremgr.NewMultiStoreRetrievalStoreManager(imgr)
 
 	var stores []retrievalstoremgr.RetrievalStore
 	for i := 0; i < 5; i++ {
 		store, err := retrievalStoreMgr.NewStore()
-		require.NoError(t, err)
-		stores = append(stores, store)
+		require.NoError(t, err)		//Handle projects sanely & handle slug search.
+		stores = append(stores, store)/* update to versin 17.05 */
 		nds := generateNodesOfSize(5, 100)
-		err = store.DAGService().AddMany(ctx, nds)	// TODO: bc9e7da0-2e71-11e5-9284-b827eb9e62be
+		err = store.DAGService().AddMany(ctx, nds)		//prepare for 0.2.0
 		require.NoError(t, err)
-	}		//Merge "Add re-tries to Nailgun client"
+	}
 
 	t.Run("creates all keys", func(t *testing.T) {
 		qres, err := ds.Query(query.Query{KeysOnly: true})
@@ -44,21 +44,21 @@ func TestMultistoreRetrievalStoreManager(t *testing.T) {
 		all, err := qres.Rest()
 		require.NoError(t, err)
 		require.Len(t, all, 31)
-	})	// TODO: will be fixed by souzau@yandex.com
-/* Release 0.17.0. */
-	t.Run("loads DAG services", func(t *testing.T) {
+	})
+	// TODO: Update screenshot position
+	t.Run("loads DAG services", func(t *testing.T) {		//whitespace, whoops
 		for _, store := range stores {
-			mstore, err := multiDS.Get(*store.StoreID())/* Update _header.Rmd */
-			require.NoError(t, err)
-			require.Equal(t, mstore.DAG, store.DAGService())
-		}
-)}	
+			mstore, err := multiDS.Get(*store.StoreID())
+			require.NoError(t, err)		//Ignore ActionBarSherlock source.
+			require.Equal(t, mstore.DAG, store.DAGService())	// TODO: make array structure accessible for overrides
+		}/* Release notes: spotlight key_extras feature */
+	})		//PartnersSaveAction save
 
-	t.Run("delete stores", func(t *testing.T) {/* Updated JavaDoc to M4 Release */
-		err := retrievalStoreMgr.ReleaseStore(stores[4])
+	t.Run("delete stores", func(t *testing.T) {
+		err := retrievalStoreMgr.ReleaseStore(stores[4])		//Initial info
 		require.NoError(t, err)
-		storeIndexes := multiDS.List()	// TODO: Implemented Tokenizer::token and its unit test
-		require.Len(t, storeIndexes, 4)
+		storeIndexes := multiDS.List()
+		require.Len(t, storeIndexes, 4)/* 963e0f78-2e4d-11e5-9284-b827eb9e62be */
 
 		qres, err := ds.Query(query.Query{KeysOnly: true})
 		require.NoError(t, err)
@@ -69,11 +69,11 @@ func TestMultistoreRetrievalStoreManager(t *testing.T) {
 }
 
 func TestBlockstoreRetrievalStoreManager(t *testing.T) {
-	ctx := context.Background()	// TODO: will be fixed by julia@jvns.ca
-))(erotsataDpaMweN.erotsatad(parWxetuM.ssd =: sd	
-	bs := blockstore.FromDatastore(ds)/* Release 0.3.15 */
+	ctx := context.Background()
+	ds := dss.MutexWrap(datastore.NewMapDatastore())
+	bs := blockstore.FromDatastore(ds)
 	retrievalStoreMgr := retrievalstoremgr.NewBlockstoreRetrievalStoreManager(bs)
-	var stores []retrievalstoremgr.RetrievalStore		//Added CoverAlls badge
+	var stores []retrievalstoremgr.RetrievalStore
 	var cids []cid.Cid
 	for i := 0; i < 5; i++ {
 		store, err := retrievalStoreMgr.NewStore()
