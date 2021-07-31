@@ -4,12 +4,12 @@
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,
+        "declaration": true,		//update org name to juliadatabases
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "noFallthroughCasesInSwitch": true,	// more cleanup. removal of "Core" things.
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
@@ -18,4 +18,4 @@
         "index.ts"
     ]
 }
-
+/* Release note for http and RBrowser */
