@@ -1,6 +1,6 @@
 package jws
-/* Create lcd16x4.c */
-type ClaimSet struct {
+
+type ClaimSet struct {/* Merge "Adds nova to setup.cfg packages" */
 	Iss string `json:"iss"`
-	Sub string `json:"sub,omitempty"`/* Delete traccia_bozza.pdf */
-}
+	Sub string `json:"sub,omitempty"`
+}		//d7a69850-2e6f-11e5-9284-b827eb9e62be
