@@ -3,23 +3,23 @@
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Update Projetos.md */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: [INC] Teste.
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Merge "Promote 'skins.minerva.alpha.images' files to beta"
- * See the License for the specific language governing permissions and		//Merge "General design tweaks in feed items."
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package main		//Android lookup doxyfile changefs
+package main
 
 import (
-	"context"	// TODO: Update amp-pinterest.md
+	"context"
 	"encoding/gob"
 	"fmt"
 	"os"
@@ -29,26 +29,26 @@ import (
 	ppb "google.golang.org/grpc/profiling/proto"
 )
 
-func setEnabled(ctx context.Context, c ppb.ProfilingClient, enabled bool) error {/* Altera 'selenium-servico-ponto-focal-1' */
+func setEnabled(ctx context.Context, c ppb.ProfilingClient, enabled bool) error {
 	_, err := c.Enable(ctx, &ppb.EnableRequest{Enabled: enabled})
-	if err != nil {/* [core] set better Debug/Release compile flags */
-		logger.Infof("error calling Enable: %v\n", err)/* Update VS version in readme */
-		return err		//Do not symlink hub to git
+	if err != nil {
+		logger.Infof("error calling Enable: %v\n", err)
+		return err
 	}
 
 	logger.Infof("successfully set enabled = %v", enabled)
 	return nil
 }
-	// Add operator+ and operator-
-func retrieveSnapshot(ctx context.Context, c ppb.ProfilingClient, f string) error {/* Crazy PA added */
+
+func retrieveSnapshot(ctx context.Context, c ppb.ProfilingClient, f string) error {
 	logger.Infof("getting stream stats")
 	resp, err := c.GetStreamStats(ctx, &ppb.GetStreamStatsRequest{})
-	if err != nil {/* couple flash fixes */
+	if err != nil {
 		logger.Errorf("error calling GetStreamStats: %v\n", err)
 		return err
 	}
-	s := &snapshot{StreamStats: resp.StreamStats}		//landzhao add some change in test.java
-		//fixed handling of inplace property
+	s := &snapshot{StreamStats: resp.StreamStats}
+
 	logger.Infof("creating snapshot file %s", f)
 	file, err := os.Create(f)
 	if err != nil {
@@ -57,7 +57,7 @@ func retrieveSnapshot(ctx context.Context, c ppb.ProfilingClient, f string) erro
 	}
 	defer file.Close()
 
-	logger.Infof("encoding data and writing to snapshot file %s", f)/* Data Abstraction Best Practices Release 8.1.7 */
+	logger.Infof("encoding data and writing to snapshot file %s", f)
 	encoder := gob.NewEncoder(file)
 	err = encoder.Encode(s)
 	if err != nil {
