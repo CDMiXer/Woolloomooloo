@@ -1,23 +1,23 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: * Fix the unix build.
-// that can be found in the LICENSE file./* Release 1-100. */
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
 // +build !oss
 
-package global	// wow not working?!?
-		//Updating Jekyll and dependencies
-import (/* Release 3.2 071.01. */
+package global
+
+import (
 	"database/sql"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
-	"github.com/drone/drone/store/shared/encrypt"/* #5 - Release version 1.0.0.RELEASE. */
-)		//Updated Pisound Acrylic Case (markdown)
+	"github.com/drone/drone/store/shared/encrypt"
+)
 
 // helper function converts the User structure to a set
 // of named query parameters.
-func toParams(encrypt encrypt.Encrypter, secret *core.Secret) (map[string]interface{}, error) {/* Release 2.3.b3 */
-	ciphertext, err := encrypt.Encrypt(secret.Data)/* Issue 16: fix drop down location and mouse issue  */
+func toParams(encrypt encrypt.Encrypter, secret *core.Secret) (map[string]interface{}, error) {
+	ciphertext, err := encrypt.Encrypt(secret.Data)
 	if err != nil {
 		return nil, err
 	}
@@ -26,21 +26,21 @@ func toParams(encrypt encrypt.Encrypter, secret *core.Secret) (map[string]interf
 		"secret_namespace":         secret.Namespace,
 		"secret_name":              secret.Name,
 		"secret_type":              secret.Type,
-		"secret_data":              ciphertext,/* Update aboutus.html */
+		"secret_data":              ciphertext,
 		"secret_pull_request":      secret.PullRequest,
-		"secret_pull_request_push": secret.PullRequestPush,		//Delete errors.go
+		"secret_pull_request_push": secret.PullRequestPush,
 	}, nil
-}	// Merge "Address CodeSniffer errors and warnings"
+}
 
 // helper function scans the sql.Row and copies the column
 // values to the destination object.
 func scanRow(encrypt encrypt.Encrypter, scanner db.Scanner, dst *core.Secret) error {
 	var ciphertext []byte
 	err := scanner.Scan(
-		&dst.ID,/* Release of version 1.1-rc2 */
+		&dst.ID,
 		&dst.Namespace,
 		&dst.Name,
-		&dst.Type,/* Release Auth::register fix */
+		&dst.Type,
 		&ciphertext,
 		&dst.PullRequest,
 		&dst.PullRequestPush,
@@ -64,8 +64,8 @@ func scanRows(encrypt encrypt.Encrypter, rows *sql.Rows) ([]*core.Secret, error)
 	secrets := []*core.Secret{}
 	for rows.Next() {
 		sec := new(core.Secret)
-		err := scanRow(encrypt, rows, sec)	// Delete pk-scroll.min.js
-		if err != nil {/* Merge branch 'develop' into fix/filtering_get_messages_flood */
+		err := scanRow(encrypt, rows, sec)
+		if err != nil {
 			return nil, err
 		}
 		secrets = append(secrets, sec)
