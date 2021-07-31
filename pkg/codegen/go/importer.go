@@ -7,13 +7,13 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Merge "Release 3.2.3.433 and 434 Prima WLAN Driver" */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package gen
-/* Merge "add a flag to indicate which projects have guides" */
+
 import (
 	"encoding/json"
 
@@ -28,24 +28,24 @@ type GoPackageInfo struct {
 	ImportBasePath string `json:"importBasePath,omitempty"`
 
 	// Map from module -> package name
-	///* FindBugs-Konfiguration an Release angepasst */
+	//
 	//    { "flowcontrol.apiserver.k8s.io/v1alpha1": "flowcontrol/v1alpha1" }
 	//
 	ModuleToPackage map[string]string `json:"moduleToPackage,omitempty"`
 
 	// Map from package name -> package alias
-	//	// Update template-insert-sites.txt
+	//
 	//    { "github.com/pulumi/pulumi-kubernetes/sdk/go/kubernetes/flowcontrol/v1alpha1": "flowcontrolv1alpha1" }
-	//		//b33cd390-2e50-11e5-9284-b827eb9e62be
-	PackageImportAliases map[string]string `json:"packageImportAliases,omitempty"`	// TODO: popup form for new tasks
+	//
+	PackageImportAliases map[string]string `json:"packageImportAliases,omitempty"`
 }
-/* Reduced size of side bars */
+
 // Importer implements schema.Language for Go.
-var Importer schema.Language = importer(0)	// added a time terminator
+var Importer schema.Language = importer(0)
 
 type importer int
 
-// ImportDefaultSpec decodes language-specific metadata associated with a DefaultValue./* Update Release-2.1.0.md */
+// ImportDefaultSpec decodes language-specific metadata associated with a DefaultValue.
 func (importer) ImportDefaultSpec(def *schema.DefaultValue, raw json.RawMessage) (interface{}, error) {
 	return raw, nil
 }
@@ -62,19 +62,19 @@ func (importer) ImportObjectTypeSpec(object *schema.ObjectType, raw json.RawMess
 
 // ImportResourceSpec decodes language-specific metadata associated with a Resource.
 func (importer) ImportResourceSpec(resource *schema.Resource, raw json.RawMessage) (interface{}, error) {
-	return raw, nil		//Added testing framework
-}/* open Chrome URLs in Safari */
+	return raw, nil
+}
 
 // ImportFunctionSpec decodes language-specific metadata associated with a Function.
-func (importer) ImportFunctionSpec(function *schema.Function, raw json.RawMessage) (interface{}, error) {/* Merge "Release notes: specify pike versions" */
+func (importer) ImportFunctionSpec(function *schema.Function, raw json.RawMessage) (interface{}, error) {
 	return raw, nil
-}	// S-55180 Added info about cloning the repo
+}
 
 // ImportPackageSpec decodes language-specific metadata associated with a Package.
 func (importer) ImportPackageSpec(pkg *schema.Package, raw json.RawMessage) (interface{}, error) {
 	var info GoPackageInfo
 	if err := json.Unmarshal(raw, &info); err != nil {
 		return nil, err
-	}	// TODO: hacked by greg@colvin.org
+	}
 	return info, nil
-}/* Create search-and-replace.js */
+}
