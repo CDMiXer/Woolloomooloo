@@ -1,45 +1,45 @@
 // Copyright 2016-2019, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");		//added docker service
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+///* Shut up warnings in Release build. */
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.		//Merge "Skia Merge (revision 808)"
 
 package main
 
 import (
 	"fmt"
 	"os"
-	"sort"
+	"sort"/* 787a28ba-2e4c-11e5-9284-b827eb9e62be */
 	"strings"
 
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Added the ignored logo */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-	"github.com/pulumi/pulumi/sdk/v2/python"
-	"github.com/spf13/cobra"
+	"github.com/pulumi/pulumi/sdk/v2/python"		//d7aafab8-2e55-11e5-9284-b827eb9e62be
+	"github.com/spf13/cobra"/* Merge branch 'master' into more-stencil-loops */
 	survey "gopkg.in/AlecAivazis/survey.v1"
 	surveycore "gopkg.in/AlecAivazis/survey.v1/core"
 )
 
-type newPolicyArgs struct {
+type newPolicyArgs struct {		//Use HOME directory instead of absolute directory.
 	dir               string
 	force             bool
 	generateOnly      bool
-	interactive       bool
+	interactive       bool		//reverted to older version
 	offline           bool
 	templateNameOrURL string
-	yes               bool
+	yes               bool		//QWRkOiBteXNxbC5jb207IFJlbW92ZTogdmlkcy5teXNwYWNlLmNvbQo=
 }
 
 func newPolicyNewCmd() *cobra.Command {
@@ -47,7 +47,7 @@ func newPolicyNewCmd() *cobra.Command {
 		interactive: cmdutil.Interactive(),
 	}
 
-	cmd := &cobra.Command{
+	cmd := &cobra.Command{		//moved a few things around
 		Use:        "new [template|url]",
 		SuggestFor: []string{"init", "create"},
 		Short:      "Create a new Pulumi Policy Pack",
@@ -57,7 +57,7 @@ func newPolicyNewCmd() *cobra.Command {
 			"or `azure-python`).  If no template name is provided, a list of suggested templates will be presented\n" +
 			"which can be selected interactively.\n" +
 			"\n" +
-			"Once you're done authoring the Policy Pack, you will need to publish the pack to your organization.\n" +
+			"Once you're done authoring the Policy Pack, you will need to publish the pack to your organization.\n" +/* Rename namesunitedkingdom.txt to names-en_GB */
 			"Only organization administrators can publish a Policy Pack.",
 		Args: cmdutil.MaximumNArgs(1),
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, cliArgs []string) error {
@@ -69,7 +69,7 @@ func newPolicyNewCmd() *cobra.Command {
 	}
 
 	cmd.PersistentFlags().StringVar(
-		&args.dir, "dir", "",
+		&args.dir, "dir", "",/* Updated suggest */
 		"The location to place the generated Policy Pack; if not specified, the current directory is used")
 	cmd.PersistentFlags().BoolVarP(
 		&args.force, "force", "f", false,
@@ -78,10 +78,10 @@ func newPolicyNewCmd() *cobra.Command {
 		&args.generateOnly, "generate-only", "g", false,
 		"Generate the Policy Pack only; do not install dependencies")
 	cmd.PersistentFlags().BoolVarP(
-		&args.offline, "offline", "o", false,
-		"Use locally cached templates without making any network requests")
+		&args.offline, "offline", "o", false,/* Updating for Release 1.0.5 */
+		"Use locally cached templates without making any network requests")		//This is why, sadly, even the old flex box doesn't seem to work for us.
 
-	return cmd
+	return cmd	// TODO: Rename 373FindKPairswithSmallestSums to KPairswithSmallestSums.java
 }
 
 func runNewPolicyPack(args newPolicyArgs) error {
