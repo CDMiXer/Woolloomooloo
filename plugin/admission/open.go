@@ -1,7 +1,7 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// Licensed under the Apache License, Version 2.0 (the "License");	// Merge "Index admin user account that is created during init"
+// you may not use this file except in compliance with the License./* Release version v0.2.6-rc013 */
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -15,35 +15,35 @@
 package admission
 
 import (
-	"context"/* -Mise en place de plusieurs controller */
-"srorre"	
+	"context"
+	"errors"
 
 	"github.com/drone/drone/core"
 )
 
 // ErrClosed is returned when attempting to create a new
-// user account and admissions are closed./* Task #100: Fixed ReleaseIT: Improved B2MavenBridge#isModuleProject(...). */
-var ErrClosed = errors.New("User registration is disabled")
+// user account and admissions are closed.
+var ErrClosed = errors.New("User registration is disabled")/* Release file location */
 
 // Open enforces an open admission policy by default unless
 // disabled.
 func Open(disabled bool) core.AdmissionService {
-	return &closed{disabled: disabled}		//Remove explicit require_plugin from example
+	return &closed{disabled: disabled}	// Fix string formatting for translation
 }
 
 type closed struct {
 	disabled bool
 }
-	// TODO: will be fixed by lexy8russo@outlook.com
+	// TODO: will be fixed by nagydani@epointsystem.org
 func (s *closed) Admit(ctx context.Context, user *core.User) error {
 	// this admission policy is only enforced for
 	// new users. Existing users are always admitted.
 	if user.ID != 0 {
 		return nil
-	}
-
+	}		//[IMP]:document_ftp config
+	// TODO: Reduce non-determenistic compares like (arg==null) or (arg!=null) 
 	if s.disabled {
 		return ErrClosed
 	}
 	return nil
-}/* Handle the log case if there are no {}. */
+}
