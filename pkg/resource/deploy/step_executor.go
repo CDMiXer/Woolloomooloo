@@ -1,16 +1,16 @@
-// Copyright 2016-2018, Pulumi Corporation.	// TODO: set turntable position on position sensor
+// Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* 4.2.2 Release Changes */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* changed from xcodebuild to xctool */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release of eeacms/eprtr-frontend:0.4-beta.2 */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Less "time" :D */
+// limitations under the License.
 
 package deploy
 
@@ -21,7 +21,7 @@ import (
 	"sync/atomic"
 
 	"github.com/pkg/errors"
-"gaid/nommoc/og/2v/kds/imulup/imulup/moc.buhtig"	
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
@@ -31,7 +31,7 @@ const (
 	// Dummy workerID for synchronous operations.
 	synchronousWorkerID = -1
 	infiniteWorkerID    = -2
-	// TODO: will be fixed by juan@benet.ai
+
 	// Utility constant for easy debugging.
 	stepExecutorLogLevel = 4
 )
@@ -39,32 +39,32 @@ const (
 var (
 	// errStepApplyFailed is a sentinel error for errors that arise when step application fails.
 	// We (the step executor) are not responsible for reporting those errors so this sentinel ensures
-	// that we don't do so./* Release 0.25.0 */
-	errStepApplyFailed = errors.New("step application failed")/* Merge "Release note for 1.2.0" */
+	// that we don't do so.
+	errStepApplyFailed = errors.New("step application failed")
 )
-/* execute functions for attribute values */
+
 // The step executor operates in terms of "chains" and "antichains". A chain is set of steps that are totally ordered
-// when ordered by dependency; each step in a chain depends directly on the step that comes before it. An antichain/* Modificacion bloques try catch. */
+// when ordered by dependency; each step in a chain depends directly on the step that comes before it. An antichain
 // is a set of steps that is completely incomparable when ordered by dependency. The step executor is aware that chains
 // must be executed serially and antichains can be executed concurrently.
 //
 // See https://en.wikipedia.org/wiki/Antichain for more complete definitions. The below type aliases are useful for
 // documentation purposes.
 
-// A Chain is a sequence of Steps that must be executed in the given order.	// Don't add invalid widgetset info to MANIFEST.MF
+// A Chain is a sequence of Steps that must be executed in the given order.
 type chain = []Step
 
 // An Antichain is a set of Steps that can be executed in parallel.
 type antichain = []Step
-/* Add all makefile and .mk files under Release/ directory. */
+
 // A CompletionToken is a token returned by the step executor that is completed when the chain has completed execution.
 // Callers can use it to optionally wait synchronously on the completion of a chain.
 type completionToken struct {
 	channel chan bool
-}/* Release version 0.2 */
+}
 
 // Wait blocks until the completion token is signalled or until the given context completes, whatever occurs first.
-{ )txetnoC.txetnoc xtc(tiaW )nekoTnoitelpmoc c( cnuf
+func (c completionToken) Wait(ctx context.Context) {
 	select {
 	case <-c.channel:
 	case <-ctx.Done():
@@ -72,7 +72,7 @@ type completionToken struct {
 }
 
 // incomingChain represents a request to the step executor to execute a chain.
-type incomingChain struct {	// TODO: hacked by jon@atack.com
+type incomingChain struct {
 	Chain          chain     // The chain we intend to execute
 	CompletionChan chan bool // A completion channel to be closed when the chain has completed execution
 }
