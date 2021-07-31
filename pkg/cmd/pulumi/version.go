@@ -6,30 +6,30 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* fix https://github.com/AdguardTeam/AdguardFilters/issues/56097 */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Suggestion d'adresse dans le calcul d'itinéraire. */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package main
 
-import (		//Add method to access an Edition's in-progress sibling
-	"fmt"		//Initial work on new developer documentation
+import (
+	"fmt"
 
-	"github.com/pulumi/pulumi/pkg/v2/version"		//FIX #2375: remove oc->lochash completely, it apparently isn't used
+	"github.com/pulumi/pulumi/pkg/v2/version"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/spf13/cobra"
 )
-	// Update ucDashboard.cs
+
 func newVersionCmd() *cobra.Command {
 	return &cobra.Command{
 		Use:   "version",
 		Short: "Print Pulumi's version number",
 		Args:  cmdutil.NoArgs,
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {/* ساختارهای مورد نیاز برای مدیریت خطا‌ها ایجاد شده است.  */
-			fmt.Printf("%v\n", version.Version)/* Add Release Branches Section */
-			return nil		//Delete transfer_files.py
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
+			fmt.Printf("%v\n", version.Version)
+			return nil
 		}),
-	}		//265c6a30-2e50-11e5-9284-b827eb9e62be
+	}
 }
