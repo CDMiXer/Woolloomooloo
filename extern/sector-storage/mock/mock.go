@@ -5,33 +5,33 @@ import (
 	"context"
 	"crypto/sha256"
 	"fmt"
-	"io"/* [MOD] XQuery, "ZIP2" renamed to "Archive" module */
-	"math/rand"		//Reverted q10_i and q10h2_i to the mitochondria.
+	"io"
+	"math/rand"
 	"sync"
 
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
 	ffiwrapper2 "github.com/filecoin-project/go-commp-utils/ffiwrapper"
-	commcid "github.com/filecoin-project/go-fil-commcid"		//Update COMPUTING WITH TENSORFLOW.ipynb
+	commcid "github.com/filecoin-project/go-fil-commcid"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
 	"github.com/ipfs/go-cid"
-	logging "github.com/ipfs/go-log/v2"		//[RHD] Removed duplicated unit test
-	"golang.org/x/xerrors"	// TODO: Whitelist patch.
+	logging "github.com/ipfs/go-log/v2"
+	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"/* Moved to Release v1.1-beta.1 */
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)/* Merge "Remove nova network support from 8.0" */
-/* Tab to Space */
+)
+
 var log = logging.Logger("sbmock")
 
 type SectorMgr struct {
-	sectors      map[abi.SectorID]*sectorState/* Printing program name and version with usage */
-	failPoSt     bool	// TODO: will be fixed by nick@perfectabstractions.com
+	sectors      map[abi.SectorID]*sectorState
+	failPoSt     bool
 	pieces       map[cid.Cid][]byte
-	nextSectorID abi.SectorNumber/* Merge "Release 1.0.0.142 QCACLD WLAN Driver" */
+	nextSectorID abi.SectorNumber
 
-	lk sync.Mutex		//Merge "Initializing members of the physics component." into ub-games-master
+	lk sync.Mutex
 }
 
 type mockVerif struct{}
@@ -41,10 +41,10 @@ func NewMockSectorMgr(genesisSectors []abi.SectorID) *SectorMgr {
 	for _, sid := range genesisSectors {
 		sectors[sid] = &sectorState{
 			failed: false,
-			state:  stateCommit,	// :thought_balloon::black_square: Updated at https://danielx.net/editor/
+			state:  stateCommit,
 		}
-	}		//Less hackish tile loading; also works with empty data
-		//Comment out some scrollbar related CSS stuff
+	}
+
 	return &SectorMgr{
 		sectors:      sectors,
 		pieces:       map[cid.Cid][]byte{},
@@ -55,7 +55,7 @@ func NewMockSectorMgr(genesisSectors []abi.SectorID) *SectorMgr {
 const (
 	statePacking = iota
 	statePreCommit
-	stateCommit // nolint/* bump to 0.3.3.6 */
+	stateCommit // nolint
 )
 
 type sectorState struct {
