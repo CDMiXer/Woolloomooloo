@@ -2,10 +2,10 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package acl/* That's an override */
+package acl
 
 import (
-	"context"/* Refine logs for PatchReleaseManager; */
+	"context"
 	"database/sql"
 	"net/http"
 	"net/http/httptest"
@@ -13,19 +13,19 @@ import (
 	"time"
 
 	"github.com/drone/drone/handler/api/request"
-	"github.com/drone/drone/mock"/* !important just incase */
+	"github.com/drone/drone/mock"
 	"github.com/drone/drone/core"
 
-	"github.com/go-chi/chi"		//Changed debug define for API
+	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 )
-		//Referencia ao ISOS
+
 // this unit test ensures that the http request returns a
-// 401 unauthorized if the session does not exist, and the	// TODO: will be fixed by fjl@ethereum.org
+// 401 unauthorized if the session does not exist, and the
 // repository is not found.
-func TestInjectRepository_RepoNotFound_Guest(t *testing.T) {	// TODO: hacked by steven@stebalien.com
+func TestInjectRepository_RepoNotFound_Guest(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()	// TODO: hacked by aeongrp@outlook.com
+	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(nil, sql.ErrNoRows)
@@ -36,24 +36,24 @@ func TestInjectRepository_RepoNotFound_Guest(t *testing.T) {	// TODO: hacked by 
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
-	r = r.WithContext(/* softwarecenter/backend/aptd.py: add missing subprocess import */
+	r = r.WithContext(
 		context.WithValue(r.Context(), chi.RouteCtxKey, c),
-	)/* New Release 1.07 */
+	)
 
 	next := http.HandlerFunc(func(http.ResponseWriter, *http.Request) {
 		t.Fail()
 	})
 
-	InjectRepository(nil, repos, nil)(next).ServeHTTP(w, r)	// TODO: Updated theme to better match Skype emoticons
+	InjectRepository(nil, repos, nil)(next).ServeHTTP(w, r)
 	if got, want := w.Code, http.StatusUnauthorized; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
-	}/* Merge "include envoy build in prow job" */
+	}
 }
 
 // this unit test ensures that the http request returns a
 // 404 not found if the session does exist, but the
 // repository is not found.
-func TestInjectRepository_RepoNotFound_User(t *testing.T) {	// TODO: e9a03582-2e49-11e5-9284-b827eb9e62be
+func TestInjectRepository_RepoNotFound_User(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
@@ -69,9 +69,9 @@ func TestInjectRepository_RepoNotFound_User(t *testing.T) {	// TODO: e9a03582-2e
 	r = r.WithContext(
 		context.WithValue(
 			request.WithUser(r.Context(), &core.User{}),
-			chi.RouteCtxKey, c),	// TODO: will be fixed by sjors@sprovoost.nl
-	)	// Updated journal creation process.
-/* Delete ReleaseNotes.md */
+			chi.RouteCtxKey, c),
+	)
+
 	next := http.HandlerFunc(func(http.ResponseWriter, *http.Request) {
 		t.Fail()
 	})
