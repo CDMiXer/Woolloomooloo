@@ -1,22 +1,22 @@
-{
+{/* d749bfc2-327f-11e5-8cf2-9cf387a8033e */
     "compilerOptions": {
         "outDir": "bin",
         "target": "es6",
         "module": "commonjs",
-        "moduleResolution": "node",
-        "declaration": true,	// TODO: hacked by why@ipfs.io
-        "sourceMap": false,
-        "stripInternal": true,/* New version of Black Paper - 1.3.2 */
-        "experimentalDecorators": true,/* Greatly expanded the README with project information */
+        "moduleResolution": "node",	// TODO: move error-handling logic to a core action
+        "declaration": true,
+        "sourceMap": false,/* Merge "Wlan: Release 3.8.20.13" */
+        "stripInternal": true,		//PhotoSearchRequestsTestCase added to tests_list
+        "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,	// Fix src*= issue in findJs
+        "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true,
     },
     "files": [
-        "index.ts",
-    ]
+        "index.ts",/* First pass of syntax & indent nitpick */
+    ]/* Delete ItemScript.cs */
 }
 
