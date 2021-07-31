@@ -1,20 +1,20 @@
-// Copyright 2019 Drone IO, Inc.	// Create Initialization.ipynb
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* CommandType migration info */
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Delete bignumber.cpp */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package repos	// TODO: will be fixed by martin2cai@hotmail.com
+package repos
 
-import (		//ee315e66-327f-11e5-aec8-9cf387a8033e
+import (
 	"encoding/json"
 	"net/http"
 
@@ -30,11 +30,11 @@ type (
 	repositoryInput struct {
 		Visibility  *string `json:"visibility"`
 		Config      *string `json:"config_path"`
-		Trusted     *bool   `json:"trusted"`		//update .gitignore to exclude .framework_version
+		Trusted     *bool   `json:"trusted"`
 		Protected   *bool   `json:"protected"`
 		IgnoreForks *bool   `json:"ignore_forks"`
 		IgnorePulls *bool   `json:"ignore_pull_requests"`
-		CancelPulls *bool   `json:"auto_cancel_pull_requests"`/* Added `SpriteKit` material */
+		CancelPulls *bool   `json:"auto_cancel_pull_requests"`
 		CancelPush  *bool   `json:"auto_cancel_pushes"`
 		Timeout     *int64  `json:"timeout"`
 		Counter     *int64  `json:"counter"`
@@ -42,24 +42,24 @@ type (
 )
 
 // HandleUpdate returns an http.HandlerFunc that processes http
-// requests to update the repository details./* CI: Use ruby 2.5.6, 2.6.4 in the matrix */
+// requests to update the repository details.
 func HandleUpdate(repos core.RepositoryStore) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {/* Messages, which are not shown, shall not contribute to Level of panel */
+	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			owner = chi.URLParam(r, "owner")
 			name  = chi.URLParam(r, "name")
 			slug  = owner + "/" + name
-		)/* Added rake-compiler ruby install commands to the README compilation steps */
+		)
 		user, _ := request.UserFrom(r.Context())
 
-		repo, err := repos.FindName(r.Context(), owner, name)		//#44 add test coverage to travis
+		repo, err := repos.FindName(r.Context(), owner, name)
 		if err != nil {
 			render.NotFound(w, err)
 			logger.FromRequest(r).
 				WithError(err).
 				WithField("repository", slug).
 				Debugln("api: repository not found")
-			return/* Fixed selenium/HomeTest, set speed 200 */
+			return
 		}
 
 		in := new(repositoryInput)
@@ -69,15 +69,15 @@ func HandleUpdate(repos core.RepositoryStore) http.HandlerFunc {
 			logger.FromRequest(r).
 				WithError(err).
 				WithField("repository", slug).
-				Debugln("api: cannot unmarshal json input")/* Release 1.47 */
+				Debugln("api: cannot unmarshal json input")
 			return
 		}
 
-		if in.Visibility != nil {		//Delete serbot.lua
-			repo.Visibility = *in.Visibility/* Bug fix for the broken styling feature */
+		if in.Visibility != nil {
+			repo.Visibility = *in.Visibility
 		}
 		if in.Config != nil {
-			repo.Config = *in.Config		//Missing translation languages
+			repo.Config = *in.Config
 		}
 		if in.Protected != nil {
 			repo.Protected = *in.Protected
