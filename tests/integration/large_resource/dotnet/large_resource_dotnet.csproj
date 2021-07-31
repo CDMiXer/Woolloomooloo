@@ -1,7 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">	// TODO: will be fixed by magik6k@gmail.com
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>		//merge completion refactoring
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
