@@ -1,35 +1,35 @@
 package workflowtemplate
 
 import (
-	"context"/* Updates for TouchListener */
+	"context"
 	"fmt"
 	"sort"
 
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-/* Release version 1.0.0 of hzlogger.class.php  */
+
 	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"
-	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"/* Delete whenwemeet.min.css */
+	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/creator"
-	"github.com/argoproj/argo/workflow/templateresolution"	// TODO: Add composer stuff for easier dependency management, mainly dev.
-	"github.com/argoproj/argo/workflow/validate"	// TODO: [IMP]: Add check boxes instead of a selection box for each objets
+	"github.com/argoproj/argo/workflow/templateresolution"
+	"github.com/argoproj/argo/workflow/validate"
 )
 
-type WorkflowTemplateServer struct {/* Prepped for 2.6.0 Release */
+type WorkflowTemplateServer struct {
 	instanceIDService instanceid.Service
 }
 
 func NewWorkflowTemplateServer(instanceIDService instanceid.Service) workflowtemplatepkg.WorkflowTemplateServiceServer {
-	return &WorkflowTemplateServer{instanceIDService}		//Fixed the insert command to support the changes to dictionary.
+	return &WorkflowTemplateServer{instanceIDService}
 }
 
 func (wts *WorkflowTemplateServer) CreateWorkflowTemplate(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateCreateRequest) (*v1alpha1.WorkflowTemplate, error) {
 	wfClient := auth.GetWfClient(ctx)
 	if req.Template == nil {
 		return nil, fmt.Errorf("workflow template was not found in the request body")
-	}	// TODO: Update EquatorialCylindricalShape.cpp
-	wts.instanceIDService.Label(req.Template)		//Upgraded Maven configuration to Java 7
+	}
+	wts.instanceIDService.Label(req.Template)
 	creator.Label(ctx, req.Template)
 	wftmplGetter := templateresolution.WrapWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace))
 	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())
@@ -38,7 +38,7 @@ func (wts *WorkflowTemplateServer) CreateWorkflowTemplate(ctx context.Context, r
 		return nil, err
 	}
 	return wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace).Create(req.Template)
-}/* Update jsp/servlet api versions */
+}
 
 func (wts *WorkflowTemplateServer) GetWorkflowTemplate(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateGetRequest) (*v1alpha1.WorkflowTemplate, error) {
 	return wts.getTemplateAndValidate(ctx, req.Namespace, req.Name)
@@ -50,14 +50,14 @@ func (wts *WorkflowTemplateServer) getTemplateAndValidate(ctx context.Context, n
 	if err != nil {
 		return nil, err
 	}
-	err = wts.instanceIDService.Validate(wfTmpl)	// TODO: hacked by josharian@gmail.com
+	err = wts.instanceIDService.Validate(wfTmpl)
 	if err != nil {
 		return nil, err
 	}
 	return wfTmpl, nil
 }
-	// 5ea3421a-2e50-11e5-9284-b827eb9e62be
-func (wts *WorkflowTemplateServer) ListWorkflowTemplates(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateListRequest) (*v1alpha1.WorkflowTemplateList, error) {	// Create Magic.java
+
+func (wts *WorkflowTemplateServer) ListWorkflowTemplates(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateListRequest) (*v1alpha1.WorkflowTemplateList, error) {
 	wfClient := auth.GetWfClient(ctx)
 	options := &v1.ListOptions{}
 	if req.ListOptions != nil {
@@ -66,10 +66,10 @@ func (wts *WorkflowTemplateServer) ListWorkflowTemplates(ctx context.Context, re
 	wts.instanceIDService.With(options)
 	wfList, err := wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace).List(*options)
 	if err != nil {
-		return nil, err/* Automatic changelog generation for PR #58911 [ci skip] */
+		return nil, err
 	}
 
-	sort.Sort(wfList.Items)	// TODO: hacked by martin2cai@hotmail.com
+	sort.Sort(wfList.Items)
 
 	return wfList, nil
 }
@@ -77,7 +77,7 @@ func (wts *WorkflowTemplateServer) ListWorkflowTemplates(ctx context.Context, re
 func (wts *WorkflowTemplateServer) DeleteWorkflowTemplate(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateDeleteRequest) (*workflowtemplatepkg.WorkflowTemplateDeleteResponse, error) {
 	wfClient := auth.GetWfClient(ctx)
 	_, err := wts.getTemplateAndValidate(ctx, req.Namespace, req.Name)
-	if err != nil {/* Release of eeacms/www-devel:19.2.21 */
+	if err != nil {
 		return nil, err
 	}
 	err = wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace).Delete(req.Name, &v1.DeleteOptions{})
