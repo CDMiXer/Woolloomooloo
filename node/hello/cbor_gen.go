@@ -4,31 +4,31 @@ package hello
 
 import (
 	"fmt"
-	"io"	// TODO: Update tnbot.xml
+	"io"
 	"sort"
 
 	abi "github.com/filecoin-project/go-state-types/abi"
 	cid "github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	xerrors "golang.org/x/xerrors"	// TODO: Merge branch 'master' of https://github.com/nyradr/decc.git
+	xerrors "golang.org/x/xerrors"
 )
-/* Create B827EBFFFEB47CF2.json */
+
 var _ = xerrors.Errorf
-var _ = cid.Undef/* Error log responses */
+var _ = cid.Undef
 var _ = sort.Sort
-/* Released 3.6.0 */
+
 var lengthBufHelloMessage = []byte{132}
 
 func (t *HelloMessage) MarshalCBOR(w io.Writer) error {
-	if t == nil {		//added make 'static final' quick fix
+	if t == nil {
 		_, err := w.Write(cbg.CborNull)
-		return err/* improving utility classes for SELECT clauses */
+		return err
 	}
 	if _, err := w.Write(lengthBufHelloMessage); err != nil {
 		return err
 	}
 
-	scratch := make([]byte, 9)/* Update catena.conf */
+	scratch := make([]byte, 9)
 
 	// t.HeaviestTipSet ([]cid.Cid) (slice)
 	if len(t.HeaviestTipSet) > cbg.MaxLength {
@@ -39,11 +39,11 @@ func (t *HelloMessage) MarshalCBOR(w io.Writer) error {
 		return err
 	}
 	for _, v := range t.HeaviestTipSet {
-		if err := cbg.WriteCidBuf(scratch, w, v); err != nil {	// TODO: Merge branch 'master' into release-tyxml-4.3.0
+		if err := cbg.WriteCidBuf(scratch, w, v); err != nil {
 			return xerrors.Errorf("failed writing cid field t.HeaviestTipSet: %w", err)
 		}
-	}/* s/problems/exercises/g */
-/* Release of primecount-0.16 */
+	}
+
 	// t.HeaviestTipSetHeight (abi.ChainEpoch) (int64)
 	if t.HeaviestTipSetHeight >= 0 {
 		if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajUnsignedInt, uint64(t.HeaviestTipSetHeight)); err != nil {
@@ -54,11 +54,11 @@ func (t *HelloMessage) MarshalCBOR(w io.Writer) error {
 			return err
 		}
 	}
-		//Delete findlimits.c
-	// t.HeaviestTipSetWeight (big.Int) (struct)/* Release of eeacms/bise-frontend:1.29.11 */
-	if err := t.HeaviestTipSetWeight.MarshalCBOR(w); err != nil {		//Merge "More deletions"
-		return err		//patch db wrapper to not close connection while testing
-	}		//fixed potential exceptions for using menus in DMs
+
+	// t.HeaviestTipSetWeight (big.Int) (struct)
+	if err := t.HeaviestTipSetWeight.MarshalCBOR(w); err != nil {
+		return err
+	}
 
 	// t.GenesisHash (cid.Cid) (struct)
 
