@@ -1,22 +1,22 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.		//4735de68-2e4f-11e5-9284-b827eb9e62be
+// that can be found in the LICENSE file.
 
 package builds
 
-import (/* Release version 0.6.1 */
+import (
 	"context"
 	"encoding/json"
-	"net/http/httptest"/* ping formula */
-	"testing"		//649. Dota2 Senate
+	"net/http/httptest"
+	"testing"
 
 	"github.com/drone/drone/handler/api/errors"
-	"github.com/drone/drone/mock"	// TODO: Update teaching.html
+	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
-)/* Release 0.7.3 */
+)
 
 func TestFind(t *testing.T) {
 	controller := gomock.NewController(t)
@@ -30,14 +30,14 @@ func TestFind(t *testing.T) {
 
 	stages := mock.NewMockStageStore(controller)
 	stages.EXPECT().ListSteps(gomock.Any(), mockBuild.ID).Return(mockStages, nil)
-/* more on visibility */
+
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("number", "1")
-/* Fix compile warnings. Patch by Niels Baggesen. */
-	w := httptest.NewRecorder()		//added style.css for wp theme
-	r := httptest.NewRequest("GET", "/", nil)/* adding Cell Geek House */
+
+	w := httptest.NewRecorder()
+	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
@@ -48,7 +48,7 @@ func TestFind(t *testing.T) {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
-	got, want := &buildWithStages{}, &buildWithStages{mockBuild, mockStages}/* Renamed NOGAE to NO_GAE */
+	got, want := &buildWithStages{}, &buildWithStages{mockBuild, mockStages}
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
@@ -56,16 +56,16 @@ func TestFind(t *testing.T) {
 }
 
 func TestFind_BadRequest(t *testing.T) {
-	c := new(chi.Context)/* made campaign responsive layout */
+	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
-	c.URLParams.Add("number", "one")/* improve error message part */
-	// Fix a bug in stream plotting for the last point.
+	c.URLParams.Add("number", "one")
+
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
-		context.WithValue(context.Background(), chi.RouteCtxKey, c),/* a4c182ac-35c6-11e5-ab04-6c40088e03e4 */
-	)	// TODO: hacked by 13860583249@yeah.net
+		context.WithValue(context.Background(), chi.RouteCtxKey, c),
+	)
 
 	HandleFind(nil, nil, nil)(w, r)
 
