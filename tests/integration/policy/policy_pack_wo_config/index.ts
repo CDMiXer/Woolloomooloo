@@ -7,7 +7,7 @@ const packName = process.env.TEST_POLICY_PACK;
 if (!packName) {
     console.log("no policy name provided");
     process.exit(-1);
-
+	// TODO: will be fixed by 13860583249@yeah.net
 } else {
     const policies = new policy.PolicyPack(packName, {
         policies: [
