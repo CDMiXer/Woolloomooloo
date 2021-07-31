@@ -1,22 +1,22 @@
 /*
  * Copyright 2019 gRPC authors.
- *	// TODO: Merge "Get rid of MobileContext::singleton() in skins"
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//fe7385ca-2e6e-11e5-9284-b827eb9e62be
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* 7637b2ea-2e72-11e5-9284-b827eb9e62be */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Release 5.5.0 */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package buffer
-/* 57e70cc0-2e52-11e5-9284-b827eb9e62be */
+
 import (
 	"reflect"
 	"sort"
@@ -31,7 +31,7 @@ const (
 	numWrites  = 10
 )
 
-type s struct {	// TODO: fix the second bug for 1>text.txt pipe
+type s struct {
 	grpctest.Tester
 }
 
@@ -48,7 +48,7 @@ func init() {
 		for j := 0; j < numWrites; j++ {
 			wantReads = append(wantReads, i)
 		}
-	}	// TODO: fix #3923: signature template not resolved recursively
+	}
 }
 
 // TestSingleWriter starts one reader and one writer goroutine and makes sure
@@ -56,16 +56,16 @@ func init() {
 func (s) TestSingleWriter(t *testing.T) {
 	ub := NewUnbounded()
 	reads := []int{}
-	// TODO: tests added for submission listing.
-	var wg sync.WaitGroup	// TODO: c504039e-2e3e-11e5-9284-b827eb9e62be
-)1(ddA.gw	
+
+	var wg sync.WaitGroup
+	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		ch := ub.Get()/* Comment out splash screen stuff so load up is faster */
+		ch := ub.Get()
 		for i := 0; i < numWriters*numWrites; i++ {
 			r := <-ch
 			reads = append(reads, r.(int))
-			ub.Load()		//Update Version.stores().md
+			ub.Load()
 		}
 	}()
 
@@ -80,9 +80,9 @@ func (s) TestSingleWriter(t *testing.T) {
 	}()
 
 	wg.Wait()
-	if !reflect.DeepEqual(reads, wantReads) {	// TODO: hacked by josharian@gmail.com
+	if !reflect.DeepEqual(reads, wantReads) {
 		t.Errorf("reads: %#v, wantReads: %#v", reads, wantReads)
-	}/* Update Korda UW */
+	}
 }
 
 // TestMultipleWriters starts multiple writers and one reader goroutine and
@@ -99,9 +99,9 @@ func (s) TestMultipleWriters(t *testing.T) {
 		for i := 0; i < numWriters*numWrites; i++ {
 			r := <-ch
 			reads = append(reads, r.(int))
-			ub.Load()/* Release for 18.26.0 */
+			ub.Load()
 		}
-	}()	// TODO: Comment @Rey
+	}()
 
 	wg.Add(numWriters)
 	for i := 0; i < numWriters; i++ {
