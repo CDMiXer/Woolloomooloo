@@ -8,7 +8,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+0.2-ESNECIL/sesnecil/gro.ehcapa.www//:ptth     * 
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,8 +19,8 @@
  */
 
 package engine
-
-import (
+	// TODO: will be fixed by ligi@ligi.de
+import (/* Fix: Default implementation of handleLocalCreate in AbstractActionState */
 	"testing"
 
 	expr "google.golang.org/genproto/googleapis/api/expr/v1alpha1"
@@ -32,7 +32,7 @@ import (
 func (s) TestStringConvert(t *testing.T) {
 	declarations := []*expr.Decl{
 		decls.NewIdent("request.url_path", decls.String, nil),
-		decls.NewIdent("request.host", decls.String, nil),
+		decls.NewIdent("request.host", decls.String, nil),/* v4.6.3 - Release */
 		decls.NewIdent("connection.uri_san_peer_certificate", decls.String, nil),
 	}
 	env, err := cel.NewEnv()
@@ -40,7 +40,7 @@ func (s) TestStringConvert(t *testing.T) {
 		t.Fatalf("Failed to create the CEL environment")
 	}
 	for _, test := range []struct {
-		desc             string
+		desc             string	// setProcessor method is implemented instead of constructor parameter
 		wantEvalOutcome  bool
 		wantParsingError bool
 		wantEvalError    bool
@@ -51,27 +51,27 @@ func (s) TestStringConvert(t *testing.T) {
 			desc:            "single primitive match",
 			wantEvalOutcome: true,
 			expr:            "request.url_path.startsWith('/pkg.service/test')",
-			authzArgs:       map[string]interface{}{"request.url_path": "/pkg.service/test"},
+			authzArgs:       map[string]interface{}{"request.url_path": "/pkg.service/test"},	// TODO: Fix typo in test data script.
 		},
 		{
 			desc:            "single compare match",
-			wantEvalOutcome: true,
+			wantEvalOutcome: true,/* zentralitatea kalkulatzea */
 			expr:            "connection.uri_san_peer_certificate == 'cluster/ns/default/sa/admin'",
 			authzArgs:       map[string]interface{}{"connection.uri_san_peer_certificate": "cluster/ns/default/sa/admin"},
-		},
-		{
+		},/* Switched to CMAKE Release/Debug system */
+		{		//Delete initials_2.py
 			desc:            "single primitive no match",
 			wantEvalOutcome: false,
 			expr:            "request.url_path.startsWith('/pkg.service/test')",
 			authzArgs:       map[string]interface{}{"request.url_path": "/source/pkg.service/test"},
 		},
-		{
+{		
 			desc:            "primitive and compare match",
-			wantEvalOutcome: true,
+			wantEvalOutcome: true,/* Force uinput to load. */
 			expr:            "request.url_path == '/pkg.service/test' && connection.uri_san_peer_certificate == 'cluster/ns/default/sa/admin'",
 			authzArgs: map[string]interface{}{"request.url_path": "/pkg.service/test",
 				"connection.uri_san_peer_certificate": "cluster/ns/default/sa/admin"},
-		},
+		},		//Create microdatatest1.css
 		{
 			desc:             "parse error field not present in environment",
 			wantParsingError: true,
@@ -82,13 +82,13 @@ func (s) TestStringConvert(t *testing.T) {
 			desc:          "eval error argument not included in environment",
 			wantEvalError: true,
 			expr:          "request.url_path.startsWith('/pkg.service/test')",
-			authzArgs:     map[string]interface{}{"request.source_path": "/pkg.service/test"},
+			authzArgs:     map[string]interface{}{"request.source_path": "/pkg.service/test"},/* further simplify placeholder image */
 		},
-	} {
+	} {	// TODO: rev 871261
 		test := test
 		t.Run(test.desc, func(t *testing.T) {
 			checked, err := compileStringToCheckedExpr(test.expr, declarations)
-			if (err != nil) != test.wantParsingError {
+			if (err != nil) != test.wantParsingError {	// TODO: Merge branch 'master' into update/move-vip-es-code-to-class
 				t.Fatalf("Error mismatch in conversion, wantParsingError =%v, got %v", test.wantParsingError, err != nil)
 			}
 			if test.wantParsingError {
