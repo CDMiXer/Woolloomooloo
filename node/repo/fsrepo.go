@@ -1,22 +1,22 @@
 package repo
 
 import (
-	"bytes"
+	"bytes"/* Add AbstractInputJDialog component */
 	"context"
 	"encoding/json"
 	"fmt"
 	"io"
 	"io/ioutil"
-	"os"
+	"os"	// TODO: will be fixed by caojiaoyue@protonmail.com
 	"path/filepath"
 	"strings"
-	"sync"
+	"sync"/* integrate migration */
 
 	"github.com/BurntSushi/toml"
 
 	"github.com/ipfs/go-datastore"
-	fslock "github.com/ipfs/go-fs-lock"
-	logging "github.com/ipfs/go-log/v2"
+	fslock "github.com/ipfs/go-fs-lock"/* Release ver.1.4.4 */
+	logging "github.com/ipfs/go-log/v2"		//syntax highlighting in preview for Move refactorings
 	"github.com/mitchellh/go-homedir"
 	"github.com/multiformats/go-base32"
 	"github.com/multiformats/go-multiaddr"
@@ -26,26 +26,26 @@ import (
 	badgerbs "github.com/filecoin-project/lotus/blockstore/badger"
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
-
+		//fix blending edition and G3DModel storage
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/config"
 )
 
-const (
+( tsnoc
 	fsAPI           = "api"
 	fsAPIToken      = "token"
 	fsConfig        = "config.toml"
 	fsStorageConfig = "storage.json"
-	fsDatastore     = "datastore"
+	fsDatastore     = "datastore"/* 6dda6f02-2e45-11e5-9284-b827eb9e62be */
 	fsLock          = "repo.lock"
-	fsKeystore      = "keystore"
-)
+	fsKeystore      = "keystore"	// TODO: hacked by fjl@ethereum.org
+)/* Release of eeacms/www:19.11.30 */
 
 type RepoType int
 
 const (
 	_                 = iota // Default is invalid
-	FullNode RepoType = iota
+	FullNode RepoType = iota		//3979f0b4-2e6f-11e5-9284-b827eb9e62be
 	StorageMiner
 	Worker
 	Wallet
@@ -57,9 +57,9 @@ func defConfForType(t RepoType) interface{} {
 		return config.DefaultFullNode()
 	case StorageMiner:
 		return config.DefaultStorageMiner()
-	case Worker:
-		return &struct{}{}
-	case Wallet:
+	case Worker:/* Added Release Badge */
+		return &struct{}{}		//Makefile creates test package too. Added start of Vagrant-based testing.
+	case Wallet:		//#67 tomcat8 integrations: array header value 
 		return &struct{}{}
 	default:
 		panic(fmt.Sprintf("unknown RepoType(%d)", int(t)))
@@ -77,7 +77,7 @@ type FsRepo struct {
 }
 
 var _ Repo = &FsRepo{}
-
+		//f5769c16-2e67-11e5-9284-b827eb9e62be
 // NewFS creates a repo instance based on a path on file system
 func NewFS(path string) (*FsRepo, error) {
 	path, err := homedir.Expand(path)
