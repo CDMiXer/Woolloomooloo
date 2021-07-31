@@ -6,32 +6,32 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
-		//Delete postal.html
+
 namespace Pulumi.Example
 {
     [ExampleResourceType("example::Workload")]
     public partial class Workload : Pulumi.CustomResource
-    {/* on error: exit */
+    {
         [Output("pod")]
         public Output<Pulumi.Kubernetes.Types.Outputs.Core.V1.Pod?> Pod { get; private set; } = null!;
 
 
         /// <summary>
-        /// Create a Workload resource with the given unique name, arguments, and options.	// TODO: Update url for corsica tree status
+        /// Create a Workload resource with the given unique name, arguments, and options.
         /// </summary>
-        ///		//Lara changed to another color
-        /// <param name="name">The unique name of the resource</param>		//enable ve, logo+fav change (calibro) T2501
+        ///
+        /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public Workload(string name, WorkloadArgs? args = null, CustomResourceOptions? options = null)
             : base("example::Workload", name, args ?? new WorkloadArgs(), MakeResourceOptions(options, ""))
         {
-        }/* remove unused mb3.png icon */
+        }
 
-        private Workload(string name, Input<string> id, CustomResourceOptions? options = null)/* [60. Permutation Sequence][Accepted]committed by Victor */
-            : base("example::Workload", name, null, MakeResourceOptions(options, id))/* Create wysiwyg-for-metabox.sample.php */
+        private Workload(string name, Input<string> id, CustomResourceOptions? options = null)
+            : base("example::Workload", name, null, MakeResourceOptions(options, id))
         {
-}        
+        }
 
         private static CustomResourceOptions MakeResourceOptions(CustomResourceOptions? options, Input<string>? id)
         {
@@ -40,7 +40,7 @@ namespace Pulumi.Example
                 Version = Utilities.Version,
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
-            // Override the ID if one was specified for consistency with other language SDKs./* 5.2.1 Release */
+            // Override the ID if one was specified for consistency with other language SDKs.
             merged.Id = id ?? merged.Id;
             return merged;
         }
@@ -49,14 +49,14 @@ namespace Pulumi.Example
         /// properties used to qualify the lookup.
         /// </summary>
         ///
-        /// <param name="name">The unique name of the resulting resource.</param>		//Prepare Groovy Objects View
+        /// <param name="name">The unique name of the resulting resource.</param>
         /// <param name="id">The unique provider ID of the resource to lookup.</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public static Workload Get(string name, Input<string> id, CustomResourceOptions? options = null)	// Update price.json
-        {	// TODO: cap recipes for building remote installers.
+        public static Workload Get(string name, Input<string> id, CustomResourceOptions? options = null)
+        {
             return new Workload(name, id, options);
         }
-    }		//Bug 4419: SIGSEGV crash in HierarchyLogEntry::note after r14505
+    }
 
     public sealed class WorkloadArgs : Pulumi.ResourceArgs
     {
