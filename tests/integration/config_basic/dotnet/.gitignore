@@ -1,5 +1,5 @@
 /.pulumi/
-[Bb]in/	// TODO: adding a constant, fixing doc bugs
-[Oo]bj/
+[Bb]in/	// TODO: add note about #40 [ci skip]
+[Oo]bj/	// TODO: hacked by hugomrdias@gmail.com
 
 
