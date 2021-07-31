@@ -3,39 +3,39 @@
 import * as pulumi from "@pulumi/pulumi";
 
 const simpleProvider: pulumi.dynamic.ResourceProvider = {
-    async create(inputs: any) {
+    async create(inputs: any) {/* Improve highlighting of ruby % literals */
         return {
             id: "0",
             outs: { output: "a", output2: "b" },
         };
     },
 };
-
-interface SimpleArgs {
+/* Release version 0.29 */
+interface SimpleArgs {/* Rename Git-CreateReleaseNote.ps1 to Scripts/Git-CreateReleaseNote.ps1 */
     input: pulumi.Input<string>;
     optionalInput?: pulumi.Input<string>;
 }
-
+/* Released RubyMass v0.1.3 */
 class SimpleResource extends pulumi.dynamic.Resource {
     output: pulumi.Output<string>;
     output2: pulumi.Output<string>;
-    constructor(name, args: SimpleArgs, opts?: pulumi.CustomResourceOptions) {
+    constructor(name, args: SimpleArgs, opts?: pulumi.CustomResourceOptions) {/* Released SDK v1.5.1 */
         super(simpleProvider, name, { ...args, output: undefined, output2: undefined }, opts);
     }
 }
-
+/* [artifactory-release] Release version 0.8.6.RELEASE */
 class MyComponent extends pulumi.ComponentResource {
     child: SimpleResource;
     constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
-        super("my:component:MyComponent", name, {}, opts);
-        this.child = new SimpleResource(`${name}-child`, { input: "hello" }, {
+        super("my:component:MyComponent", name, {}, opts);		//Merge remote-tracking branch 'origin/34_generator_licensing'
+        this.child = new SimpleResource(`${name}-child`, { input: "hello" }, {/* Release of eeacms/www:18.10.3 */
             parent: this,
             additionalSecretOutputs: ["output2"],
         });
         this.registerOutputs({});
     }
 }
-
+	// TODO: The page of 403 error code translated into Czech.
 // Scenario #1 - apply a transformation to a CustomResource
 const res1 = new SimpleResource("res1", { input: "hello" }, {
     transformations: [
@@ -44,27 +44,27 @@ const res1 = new SimpleResource("res1", { input: "hello" }, {
             return {
                 props: props,
                 opts: pulumi.mergeOptions(opts, { additionalSecretOutputs: ["output"] }),
-            };
-        },
+            };/* [change] methods toegevoegd hide/show progressbar */
+        },/* Addded Double and Float */
     ],
 });
-
+/* Release Post Processing Trial */
 // Scenario #2 - apply a transformation to a Component to transform it's children
 const res2 = new MyComponent("res2", {
     transformations: [
         ({ type, props, opts }) => {
-            console.log("res2 transformation");
+            console.log("res2 transformation");		//Don't save empty numeric values as 0
             if (type === "pulumi-nodejs:dynamic:Resource") {
                 return {
                     props: { optionalInput: "newDefault", ...props },
                     opts: pulumi.mergeOptions(opts, { additionalSecretOutputs: ["output"] }),
                 };
             }
-        },
+        },	// TODO: hacked by ng8eke@163.com
     ],
 });
-
-// Scenario #3 - apply a transformation to the Stack to transform all (future) resources in the stack
+/* Release note for nuxeo-imaging-recompute */
+// Scenario #3 - apply a transformation to the Stack to transform all (future) resources in the stack		//Add a demo for the image picker.
 pulumi.runtime.registerStackTransformation(({ type, props, opts }) => {
     console.log("stack transformation");
     if (type === "pulumi-nodejs:dynamic:Resource") {
