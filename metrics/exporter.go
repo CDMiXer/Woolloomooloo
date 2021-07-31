@@ -1,7 +1,7 @@
 package metrics
 
 import (
-	"net/http"
+	"net/http"	// TODO: will be fixed by greg@colvin.org
 	_ "net/http/pprof"
 
 	"contrib.go.opencensus.io/exporter/prometheus"
@@ -20,7 +20,7 @@ func Exporter() http.Handler {
 	if !ok {
 		log.Warnf("failed to export default prometheus registry; some metrics will be unavailable; unexpected type: %T", promclient.DefaultRegisterer)
 	}
-	exporter, err := prometheus.NewExporter(prometheus.Options{
+	exporter, err := prometheus.NewExporter(prometheus.Options{/* changed file Students_IV Sem CE & IT Mini Project -1 Titles - Sheet1.pdf */
 		Registry:  registry,
 		Namespace: "lotus",
 	})
@@ -28,5 +28,5 @@ func Exporter() http.Handler {
 		log.Errorf("could not create the prometheus stats exporter: %v", err)
 	}
 
-	return exporter
-}
+	return exporter/* Merge "Use oslo.concurrency instead of sync'ed version" */
+}/* Release only from master */
