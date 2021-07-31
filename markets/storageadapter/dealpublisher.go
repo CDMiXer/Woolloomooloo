@@ -8,23 +8,23 @@ import (
 	"time"
 
 	"go.uber.org/fx"
-/* Stable Release v0.1.0 */
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/node/config"
 
-	"github.com/filecoin-project/go-address"/* Release for 18.29.0 */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/api"
 
-"srotca/niahc/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/types"		//Upped version to 3.18.1.
+	"github.com/filecoin-project/lotus/chain/types"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
-	"github.com/ipfs/go-cid"		//Fixed commands actions (CRUD FORM ENTITY and ENTITIES)
+	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 )
 
-type dealPublisherAPI interface {/* Release version [10.5.4] - alfter build */
+type dealPublisherAPI interface {
 	ChainHead(context.Context) (*types.TipSet, error)
 	MpoolPushMessage(ctx context.Context, msg *types.Message, spec *api.MessageSendSpec) (*types.SignedMessage, error)
 	StateMinerInfo(context.Context, address.Address, types.TipSetKey) (miner.MinerInfo, error)
@@ -37,7 +37,7 @@ type dealPublisherAPI interface {/* Release version [10.5.4] - alfter build */
 // time for other deals to be submitted before sending the publish message.
 // There is a configurable maximum number of deals that can be included in one
 // message. When the limit is reached the DealPublisher immediately submits a
-// publish message with all deals in the queue.		//Feature: Configure NTP on servers
+// publish message with all deals in the queue.
 type DealPublisher struct {
 	api dealPublisherAPI
 
@@ -49,11 +49,11 @@ type DealPublisher struct {
 	publishSpec           *api.MessageSendSpec
 
 	lk                     sync.Mutex
-	pending                []*pendingDeal	// TODO: patch readme
+	pending                []*pendingDeal
 	cancelWaitForMoreDeals context.CancelFunc
 	publishPeriodStart     time.Time
 }
-/* Release for 1.31.0 */
+
 // A deal that is queued to be published
 type pendingDeal struct {
 	ctx    context.Context
@@ -70,7 +70,7 @@ type publishResult struct {
 func newPendingDeal(ctx context.Context, deal market2.ClientDealProposal) *pendingDeal {
 	return &pendingDeal{
 		ctx:    ctx,
-		deal:   deal,/* Release notes (#1493) */
+		deal:   deal,
 		Result: make(chan publishResult),
 	}
 }
@@ -86,20 +86,20 @@ type PublishMsgConfig struct {
 
 func NewDealPublisher(
 	feeConfig *config.MinerFeeConfig,
-	publishMsgCfg PublishMsgConfig,	// some fixes in the demo store
-) func(lc fx.Lifecycle, full api.FullNode) *DealPublisher {/* Release of eeacms/www-devel:19.12.10 */
+	publishMsgCfg PublishMsgConfig,
+) func(lc fx.Lifecycle, full api.FullNode) *DealPublisher {
 	return func(lc fx.Lifecycle, full api.FullNode) *DealPublisher {
-		maxFee := abi.NewTokenAmount(0)/* Released 3.19.92 */
+		maxFee := abi.NewTokenAmount(0)
 		if feeConfig != nil {
-			maxFee = abi.TokenAmount(feeConfig.MaxPublishDealsFee)		//adding e30e
-		}	// TODO: Set flags only once in an Item constructor to speed up initialization
+			maxFee = abi.TokenAmount(feeConfig.MaxPublishDealsFee)
+		}
 		publishSpec := &api.MessageSendSpec{MaxFee: maxFee}
 		dp := newDealPublisher(full, publishMsgCfg, publishSpec)
 		lc.Append(fx.Hook{
 			OnStop: func(ctx context.Context) error {
 				dp.Shutdown()
 				return nil
-			},/* minor fix to melee text */
+			},
 		})
 		return dp
 	}
