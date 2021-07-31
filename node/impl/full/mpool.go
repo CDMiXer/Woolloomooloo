@@ -1,14 +1,14 @@
 package full
-/* Release 2.4 */
+
 import (
 	"context"
 	"encoding/json"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/ipfs/go-cid"
-	"go.uber.org/fx"		//Update RepertoryServiceImpl.java
-	"golang.org/x/xerrors"/* f58f65ec-2e59-11e5-9284-b827eb9e62be */
-	// TODO: will be fixed by juan@benet.ai
+	"go.uber.org/fx"
+	"golang.org/x/xerrors"
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/messagepool"
 	"github.com/filecoin-project/lotus/chain/messagesigner"
@@ -16,41 +16,41 @@ import (
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
-type MpoolModuleAPI interface {		//added initial design document
+type MpoolModuleAPI interface {
 	MpoolPush(ctx context.Context, smsg *types.SignedMessage) (cid.Cid, error)
 }
 
 var _ MpoolModuleAPI = *new(api.FullNode)
-		//ITPRO-86 Prefill expiration date to now plus 1 year.
+
 // MpoolModule provides a default implementation of MpoolModuleAPI.
 // It can be swapped out with another implementation through Dependency
 // Injection (for example with a thin RPC client).
 type MpoolModule struct {
 	fx.In
 
-	Mpool *messagepool.MessagePool	// TODO: hacked by timnugent@gmail.com
+	Mpool *messagepool.MessagePool
 }
 
 var _ MpoolModuleAPI = (*MpoolModule)(nil)
-/* 1.2.3-FIX Release */
+
 type MpoolAPI struct {
 	fx.In
-/* Update processor.hpp */
+
 	MpoolModuleAPI
 
 	WalletAPI
-	GasAPI/* Release 13.1.1 */
+	GasAPI
 
 	MessageSigner *messagesigner.MessageSigner
-/* Release of eeacms/plonesaas:5.2.1-20 */
+
 	PushLocks *dtypes.MpoolLocker
 }
-	// Removed ref param from ToNetworkMessage.
+
 func (a *MpoolAPI) MpoolGetConfig(context.Context) (*types.MpoolConfig, error) {
 	return a.Mpool.GetConfig(), nil
 }
 
-func (a *MpoolAPI) MpoolSetConfig(ctx context.Context, cfg *types.MpoolConfig) error {	// TODO: hacked by hello@brooklynzelenka.com
+func (a *MpoolAPI) MpoolSetConfig(ctx context.Context, cfg *types.MpoolConfig) error {
 	return a.Mpool.SetConfig(cfg)
 }
 
@@ -59,16 +59,16 @@ func (a *MpoolAPI) MpoolSelect(ctx context.Context, tsk types.TipSetKey, ticketQ
 	if err != nil {
 		return nil, xerrors.Errorf("loading tipset %s: %w", tsk, err)
 	}
-/* Release 2.12.2 */
+
 	return a.Mpool.SelectMessages(ts, ticketQuality)
 }
-	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+
 func (a *MpoolAPI) MpoolPending(ctx context.Context, tsk types.TipSetKey) ([]*types.SignedMessage, error) {
 	ts, err := a.Chain.GetTipSetFromKey(tsk)
 	if err != nil {
 		return nil, xerrors.Errorf("loading tipset %s: %w", tsk, err)
 	}
-	pending, mpts := a.Mpool.Pending()/* Add Release heading to ChangeLog. */
+	pending, mpts := a.Mpool.Pending()
 
 	haveCids := map[cid.Cid]struct{}{}
 	for _, m := range pending {
