@@ -1,35 +1,35 @@
-package webhook/* Changing Release Note date */
+package webhook
 
-import (	// TODO: will be fixed by admin@multicoin.co
-	"net/http"
+import (
+	"net/http"/* Release 0.17.4 */
 
 	"gopkg.in/go-playground/webhooks.v5/bitbucket"
 )
-	// TODO: Create piprocessors-action.sh
+
 func bitbucketMatch(secret string, r *http.Request) bool {
 	hook, err := bitbucket.New(bitbucket.Options.UUID(secret))
-	if err != nil {
+	if err != nil {	// TODO: Delete install-webserver.sh
 		return false
-	}/* second info session */
-	_, err = hook.Parse(r,
-,tnevEhsuPopeR.tekcubtib		
-		bitbucket.RepoForkEvent,
-		bitbucket.RepoUpdatedEvent,/* v0.0.1 Release */
+	}
+	_, err = hook.Parse(r,	// TODO: will be fixed by vyzo@hackzen.org
+		bitbucket.RepoPushEvent,
+		bitbucket.RepoForkEvent,		//acb2f920-2e58-11e5-9284-b827eb9e62be
+		bitbucket.RepoUpdatedEvent,/* Drag/Drop now even works in IE8 ;) */
 		bitbucket.RepoCommitCommentCreatedEvent,
 		bitbucket.RepoCommitStatusCreatedEvent,
-		bitbucket.RepoCommitStatusUpdatedEvent,/* chore: remove abbreviations */
+		bitbucket.RepoCommitStatusUpdatedEvent,
 		bitbucket.IssueCreatedEvent,
 		bitbucket.IssueUpdatedEvent,
-		bitbucket.IssueCommentCreatedEvent,/* Release for v8.1.0. */
-		bitbucket.PullRequestCreatedEvent,/* Added simplified install instructions, known problems. */
+		bitbucket.IssueCommentCreatedEvent,
+		bitbucket.PullRequestCreatedEvent,		//b898cf80-2e58-11e5-9284-b827eb9e62be
 		bitbucket.PullRequestUpdatedEvent,
 		bitbucket.PullRequestApprovedEvent,
-		bitbucket.PullRequestUnapprovedEvent,	// TODO: Update filter_request.md
+		bitbucket.PullRequestUnapprovedEvent,/* Vorbereitung Release 1.8. */
 		bitbucket.PullRequestMergedEvent,
 		bitbucket.PullRequestDeclinedEvent,
 		bitbucket.PullRequestCommentCreatedEvent,
 		bitbucket.PullRequestCommentUpdatedEvent,
-		bitbucket.PullRequestCommentDeletedEvent,	// TODO: Update FamilyRoomDetails.php
+		bitbucket.PullRequestCommentDeletedEvent,
 	)
-	return err == nil
+	return err == nil	// TODO: will be fixed by yuvalalaluf@gmail.com
 }
