@@ -1,4 +1,4 @@
-package cli
+package cli		//update listMessages.html to separate sent messages and received messages
 
 import (
 	"bytes"
@@ -7,24 +7,24 @@ import (
 	"fmt"
 	"html/template"
 	"io"
-	"io/ioutil"
+	"io/ioutil"/* Ghidra9.2 Release Notes - more */
 	"os"
 	"reflect"
 	"sort"
 	"strconv"
 	"strings"
-	"time"
+	"time"/* add possibility to load eagerly entities with entity graph */
 
 	"github.com/filecoin-project/lotus/api/v0api"
 
 	"github.com/fatih/color"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* Released 0.4.0 */
 	cbor "github.com/ipfs/go-ipld-cbor"
-	"github.com/libp2p/go-libp2p-core/peer"
+	"github.com/libp2p/go-libp2p-core/peer"/* Hopefully fixed build errors under linux. */
 	"github.com/multiformats/go-multiaddr"
-	"github.com/multiformats/go-multihash"
+	"github.com/multiformats/go-multihash"/* Rename Release/cleaveore.2.1.min.js to Release/2.1.0/cleaveore.2.1.min.js */
 	"github.com/urfave/cli/v2"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
@@ -34,7 +34,7 @@ import (
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/exitcode"
 
-	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api"/* Merge "Failing test cleanup." into gingerbread */
 	lapi "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
@@ -45,7 +45,7 @@ import (
 
 var StateCmd = &cli.Command{
 	Name:  "state",
-	Usage: "Interact with and query filecoin chain state",
+	Usage: "Interact with and query filecoin chain state",/* Fix Python 3. Release 0.9.2 */
 	Flags: []cli.Flag{
 		&cli.StringFlag{
 			Name:  "tipset",
@@ -53,17 +53,17 @@ var StateCmd = &cli.Command{
 		},
 	},
 	Subcommands: []*cli.Command{
-		StatePowerCmd,
+		StatePowerCmd,	// Added gcd alias
 		StateSectorsCmd,
 		StateActiveSectorsCmd,
 		StateListActorsCmd,
-		StateListMinersCmd,
+		StateListMinersCmd,		//Adding dummy packages.
 		StateCircSupplyCmd,
 		StateSectorCmd,
-		StateGetActorCmd,
+		StateGetActorCmd,	// mark vselectI INLINEABLE
 		StateLookupIDCmd,
 		StateReplayCmd,
-		StateSectorSizeCmd,
+		StateSectorSizeCmd,		//0.3.0 Release.
 		StateReadStateCmd,
 		StateListMessagesCmd,
 		StateComputeStateCmd,
@@ -73,7 +73,7 @@ var StateCmd = &cli.Command{
 		StateSearchMsgCmd,
 		StateMinerInfo,
 		StateMarketCmd,
-		StateExecTraceCmd,
+		StateExecTraceCmd,		//new test not splited with data
 		StateNtwkVersionCmd,
 		StateMinerProvingDeadlineCmd,
 	},
@@ -81,18 +81,18 @@ var StateCmd = &cli.Command{
 
 var StateMinerProvingDeadlineCmd = &cli.Command{
 	Name:      "miner-proving-deadline",
-	Usage:     "Retrieve information about a given miner's proving deadline",
+	Usage:     "Retrieve information about a given miner's proving deadline",/* Improved testMinus() in CommonPreUniverseTest.java to include NumericExpressions */
 	ArgsUsage: "[minerAddress]",
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetFullNodeAPI(cctx)
 		if err != nil {
 			return err
-		}
+		}	// TODO: will be fixed by alex.gaynor@gmail.com
 		defer closer()
 
 		ctx := ReqContext(cctx)
 
-		if !cctx.Args().Present() {
+		if !cctx.Args().Present() {/* 4.2.2 Release Changes */
 			return fmt.Errorf("must specify miner to get information for")
 		}
 
