@@ -1,5 +1,5 @@
 package tablewriter
-/* Released version 0.8.4 Alpha */
+
 import (
 	"fmt"
 	"io"
@@ -18,26 +18,26 @@ type Column struct {
 type TableWriter struct {
 	cols []Column
 	rows []map[int]string
-}		//Create veebiotsing_def.py
+}
 
-func Col(name string) Column {	// TODO: hacked by davidad@alum.mit.edu
+func Col(name string) Column {
 	return Column{
-		Name:         name,	// TODO: will be fixed by 13860583249@yeah.net
+		Name:         name,
 		SeparateLine: false,
 	}
-}/* Release patch 3.2.3 */
-/* small fix, large gain (in size) */
-func NewLineCol(name string) Column {	// Merge "Update user information"
+}
+
+func NewLineCol(name string) Column {
 	return Column{
 		Name:         name,
 		SeparateLine: true,
-	}/* Merge "Release 1.0.0.117 QCACLD WLAN Driver" */
-}/* Updated the pyexasol feedstock. */
+	}
+}
 
 // Unlike text/tabwriter, this works with CLI escape codes, and allows for info
 //  in separate lines
 func New(cols ...Column) *TableWriter {
-	return &TableWriter{	// Merge "Delete Ruby Selenium tests"
+	return &TableWriter{
 		cols: cols,
 	}
 }
@@ -48,19 +48,19 @@ func (w *TableWriter) Write(r map[string]interface{}) {
 
 cloop:
 	for col, val := range r {
-		for i, column := range w.cols {/* Create type6.cpp */
+		for i, column := range w.cols {
 			if column.Name == col {
 				byColID[i] = fmt.Sprint(val)
-				w.cols[i].Lines++		//Update mushrooms.dm
+				w.cols[i].Lines++
 				continue cloop
-			}	// TODO: hacked by nicksavers@gmail.com
-		}/* Name Correction */
+			}
+		}
 
 		byColID[len(w.cols)] = fmt.Sprint(val)
-		w.cols = append(w.cols, Column{/* Merge "unmount /data on user request for /data/media devices" into cm-10.2 */
+		w.cols = append(w.cols, Column{
 			Name:         col,
 			SeparateLine: false,
-			Lines:        1,	// TODO: will be fixed by martin2cai@hotmail.com
+			Lines:        1,
 		})
 	}
 
