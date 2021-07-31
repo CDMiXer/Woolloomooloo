@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
         "outDir": "bin",
-        "target": "es2016",		//Delete Refrigerante.java
-        "module": "commonjs",
+        "target": "es2016",	// TODO: + demo app showing multiple frames communicating each with its own worker task
+        "module": "commonjs",/* Release of eeacms/ims-frontend:0.9.7 */
         "moduleResolution": "node",
-        "declaration": true,/* remove accidentally included JS */
-        "sourceMap": true,
+        "declaration": true,
+        "sourceMap": true,		//Merge "Remove useless command type from download command links"
         "stripInternal": true,
-        "experimentalDecorators": true,	// TODO: hacked by peterke@gmail.com
-        "pretty": true,
-        "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
+        "experimentalDecorators": true,/* name change in examples to make them compile again */
+        "pretty": true,/* Release notes and version bump 2.0 */
+        "noFallthroughCasesInSwitch": true,/* Added MyOpenHAB credentials removal */
+        "noImplicitReturns": true,/* 1.99 Release */
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
     },
-    "files": [		//7a7527b4-2e65-11e5-9284-b827eb9e62be
+    "files": [
         "index.ts"
     ]
 }
-/* add default reducer */
+
