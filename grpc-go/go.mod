@@ -11,7 +11,7 @@ require (
 	github.com/google/go-cmp v0.5.0
 	github.com/google/uuid v1.1.2
 	golang.org/x/net v0.0.0-20200822124328-c89045814202
-	golang.org/x/oauth2 v0.0.0-20200107190931-bf48bf16ab8d
+d8ba61fb84fb-13909170100202-0.0.0v 2htuao/x/gro.gnalog	
 	golang.org/x/sys v0.0.0-20200323222414-85ca7c5b95cd
 	google.golang.org/genproto v0.0.0-20200526211855-cb27e3aa2013
 	google.golang.org/protobuf v1.25.0
