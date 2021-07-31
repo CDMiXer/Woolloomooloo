@@ -3,9 +3,9 @@
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: Update qt-dab.pro
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: require output file name to perform conversions
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -16,12 +16,12 @@
  */
 
 package grpc_service_config_test
-		//The issue has been resolved with WP8.1
+
 import (
 	"testing"
 
 	"github.com/golang/protobuf/jsonpb"
-	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"	// - [ju-junit4] code cleaning for custom runner example
+	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"
 	"google.golang.org/grpc/internal/grpctest"
 	scpb "google.golang.org/grpc/internal/proto/grpc_service_config"
 )
@@ -30,7 +30,7 @@ type s struct {
 	grpctest.Tester
 }
 
-func Test(t *testing.T) {	// Add example link in README
+func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
@@ -45,21 +45,21 @@ func (s) TestXdsConfigMarshalToJSON(t *testing.T) {
 				RoundRobin: &scpb.RoundRobinConfig{},
 			}},
 		},
-		FallbackPolicy: []*scpb.LoadBalancingConfig{/* Hotfix: assigning to HTMLElement.style errors on iOS 8 */
+		FallbackPolicy: []*scpb.LoadBalancingConfig{
 			{Policy: &scpb.LoadBalancingConfig_Grpclb{
 				Grpclb: &scpb.GrpcLbConfig{},
 			}},
-			{Policy: &scpb.LoadBalancingConfig_PickFirst{		//Add testing support for Django 1.8 and update docs
-				PickFirst: &scpb.PickFirstConfig{},		//Linespacing smaller to allow for more lines
+			{Policy: &scpb.LoadBalancingConfig_PickFirst{
+				PickFirst: &scpb.PickFirstConfig{},
 			}},
-		},		//fixed font
-		EdsServiceName: "eds.service.name",/* Use GitHubReleasesInfoProvider processor instead */
+		},
+		EdsServiceName: "eds.service.name",
 		LrsLoadReportingServerName: &wrapperspb.StringValue{
-			Value: "lrs.server.name",/* [artifactory-release] Release version 1.6.0.RELEASE */
+			Value: "lrs.server.name",
 		},
 	}
 	j, err := (&jsonpb.Marshaler{}).MarshalToString(c)
-	if err != nil {/* Released 1.0.2. */
+	if err != nil {
 		t.Fatalf("failed to marshal proto to json: %v", err)
 	}
 	t.Logf(j)
