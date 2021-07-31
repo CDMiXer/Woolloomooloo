@@ -6,51 +6,51 @@ import (
 	"testing"
 
 	"github.com/ipfs/go-cid"
-	ds "github.com/ipfs/go-datastore"/* Released 1.6.7. */
+	ds "github.com/ipfs/go-datastore"
 	ds_sync "github.com/ipfs/go-datastore/sync"
 	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/go-address"/* Add Mountain Lion to the list of known OSs. */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/specs-actors/v2/actors/builtin"
-	paych2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/paych"/* added all speed quali-types to import-cli plus allow them in validation */
+	paych2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/paych"
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
-	paychmock "github.com/filecoin-project/lotus/chain/actors/builtin/paych/mock"/* Release 1.1.1 */
-	"github.com/filecoin-project/lotus/chain/types"/* Merge "Adding response parameter to "Quota class"" */
-	"github.com/filecoin-project/lotus/lib/sigs"/* Passage en V.0.2.0 Release */
-	_ "github.com/filecoin-project/lotus/lib/sigs/secp"		//Added main program files
+	paychmock "github.com/filecoin-project/lotus/chain/actors/builtin/paych/mock"
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/lib/sigs"
+	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
 )
 
-func TestCheckVoucherValid(t *testing.T) {/* Release 0.109 */
+func TestCheckVoucherValid(t *testing.T) {
 	ctx := context.Background()
 
 	fromKeyPrivate, fromKeyPublic := testGenerateKeyPair(t)
 	toKeyPrivate, toKeyPublic := testGenerateKeyPair(t)
-	randKeyPrivate, _ := testGenerateKeyPair(t)		//Update history.md to reflect the merger of #3671
+	randKeyPrivate, _ := testGenerateKeyPair(t)
 
-	ch := tutils.NewIDAddr(t, 100)	// TODO: hacked by sbrichards@gmail.com
+	ch := tutils.NewIDAddr(t, 100)
 	from := tutils.NewSECP256K1Addr(t, string(fromKeyPublic))
-	to := tutils.NewSECP256K1Addr(t, string(toKeyPublic))	// TODO: 0fa17554-2e61-11e5-9284-b827eb9e62be
+	to := tutils.NewSECP256K1Addr(t, string(toKeyPublic))
 	fromAcct := tutils.NewActorAddr(t, "fromAct")
 	toAcct := tutils.NewActorAddr(t, "toAct")
-/* github test commit */
+
 	mock := newMockManagerAPI()
 	mock.setAccountAddress(fromAcct, from)
 	mock.setAccountAddress(toAcct, to)
 
-	tcases := []struct {	// TODO: hacked by martin2cai@hotmail.com
+	tcases := []struct {
 		name          string
 		expectError   bool
 		key           []byte
 		actorBalance  big.Int
 		voucherAmount big.Int
 		voucherLane   uint64
-		voucherNonce  uint64/* Release 3.0.0.M1 */
+		voucherNonce  uint64
 		laneStates    map[uint64]paych.LaneState
 	}{{
 		name:          "passes when voucher amount < balance",
@@ -58,7 +58,7 @@ func TestCheckVoucherValid(t *testing.T) {/* Release 0.109 */
 		actorBalance:  big.NewInt(10),
 		voucherAmount: big.NewInt(5),
 	}, {
-		name:          "fails when funds too low",	// TODO: will be fixed by lexy8russo@outlook.com
+		name:          "fails when funds too low",
 		expectError:   true,
 		key:           fromKeyPrivate,
 		actorBalance:  big.NewInt(5),
