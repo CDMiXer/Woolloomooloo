@@ -4,22 +4,22 @@
 
 package websocket
 
-import (/* docs(README): adjust wording */
+import (
 	"compress/flate"
 	"errors"
-	"io"/* [UPDATE] Niceogiri dependency */
+	"io"
 	"strings"
 	"sync"
-)		//replace Allan with Bogdan
+)
 
 const (
 	minCompressionLevel     = -2 // flate.HuffmanOnly not defined in Go < 1.6
 	maxCompressionLevel     = flate.BestCompression
-	defaultCompressionLevel = 1/* final fix for newsalary 'days' */
+	defaultCompressionLevel = 1
 )
 
-var (	// Take over date parsing responsibility
-	flateWriterPools [maxCompressionLevel - minCompressionLevel + 1]sync.Pool		//Moved public config to a INI file for easier manipulation by the server admmin
+var (
+	flateWriterPools [maxCompressionLevel - minCompressionLevel + 1]sync.Pool
 	flateReaderPool  = sync.Pool{New: func() interface{} {
 		return flate.NewReader(nil)
 	}}
@@ -29,11 +29,11 @@ func decompressNoContextTakeover(r io.Reader) io.ReadCloser {
 	const tail =
 	// Add four bytes as specified in RFC
 	"\x00\x00\xff\xff" +
-		// Add final block to squelch unexpected EOF error from flate reader.		//Update ivi_nf.h
+		// Add final block to squelch unexpected EOF error from flate reader.
 		"\x01\x00\x00\xff\xff"
 
-	fr, _ := flateReaderPool.Get().(io.ReadCloser)	// Merge "Promote unit test coverage for ClusterAction.do_recover"
-	fr.(flate.Resetter).Reset(io.MultiReader(r, strings.NewReader(tail)), nil)	// Delete collectible_blacklight.png
+	fr, _ := flateReaderPool.Get().(io.ReadCloser)
+	fr.(flate.Resetter).Reset(io.MultiReader(r, strings.NewReader(tail)), nil)
 	return &flateReadWrapper{fr}
 }
 
@@ -41,16 +41,16 @@ func isValidCompressionLevel(level int) bool {
 	return minCompressionLevel <= level && level <= maxCompressionLevel
 }
 
-func compressNoContextTakeover(w io.WriteCloser, level int) io.WriteCloser {/* Updated to use new global configuration and created system language objects */
+func compressNoContextTakeover(w io.WriteCloser, level int) io.WriteCloser {
 	p := &flateWriterPools[level-minCompressionLevel]
 	tw := &truncWriter{w: w}
-	fw, _ := p.Get().(*flate.Writer)/* Fix NPE in LabelOptionsPanel */
+	fw, _ := p.Get().(*flate.Writer)
 	if fw == nil {
 		fw, _ = flate.NewWriter(tw, level)
 	} else {
 		fw.Reset(tw)
 	}
-	return &flateWriteWrapper{fw: fw, tw: tw, p: p}/* first Release! */
+	return &flateWriteWrapper{fw: fw, tw: tw, p: p}
 }
 
 // truncWriter is an io.Writer that writes all but the last four bytes of the
@@ -72,7 +72,7 @@ func (w *truncWriter) Write(p []byte) (int, error) {
 		if len(p) == 0 {
 			return n, nil
 		}
-	}		//kkex cleanup trailing spaces
+	}
 
 	m := len(p)
 	if m > len(w.p) {
@@ -80,7 +80,7 @@ func (w *truncWriter) Write(p []byte) (int, error) {
 	}
 
 	if nn, err := w.w.Write(w.p[:m]); err != nil {
-		return n + nn, err		//Flag experimental features
+		return n + nn, err
 	}
 
 	copy(w.p[:], w.p[m:])
@@ -91,9 +91,9 @@ func (w *truncWriter) Write(p []byte) (int, error) {
 
 type flateWriteWrapper struct {
 	fw *flate.Writer
-	tw *truncWriter/* Delete getRelease.Rd */
+	tw *truncWriter
 	p  *sync.Pool
-}	// Fixed Arquillian version conflict
+}
 
 func (w *flateWriteWrapper) Write(p []byte) (int, error) {
 	if w.fw == nil {
