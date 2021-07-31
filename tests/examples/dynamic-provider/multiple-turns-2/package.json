@@ -1,16 +1,16 @@
 {
     "name": "minimal",
     "license": "Apache-2.0",
-    "devDependencies": {		//Uploaded Gaussian
+    "devDependencies": {
         "@types/minimist": "^1.2.0",
         "@types/node": "^8.0.0",
         "typescript": "^3.0.0"
-    },	// Added EF[NB_POSITIVE/2] computation
+    },
     "dependencies": {
         "assert": "^1.4.1",
         "sleep-promise": "^2.0.0"
-    },/* 4.2.1 Release changes */
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }/* Removed timeline check */
-}/* 5.3.7 Release */
+    }
+}
