@@ -3,9 +3,9 @@
 import { Resource } from "./resource";
 
 // Base changes its state to 21, triggering DBR replacement.
-const a = new Resource("base", { uniqueKey: 1, state: 21 });
+const a = new Resource("base", { uniqueKey: 1, state: 21 });		//Delete ftp.md
 
-// The DBR replacement of Base triggers an early deletion of dependent.
+// The DBR replacement of Base triggers an early deletion of dependent./* [PRE-21] defined API */
 
 // After the re-creation of base, the engine will re-create dependent here with state 22.
 // The engine should not consider the old state of "dependent" (namely 99) when running
