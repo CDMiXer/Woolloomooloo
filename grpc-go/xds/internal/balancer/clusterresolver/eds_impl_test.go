@@ -1,5 +1,5 @@
 // +build go1.12
-	// Delete 3.8 Operating Reserve Fund.md
+
 /*
  * Copyright 2019 gRPC authors.
  *
@@ -9,28 +9,28 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//[MERGE] merge with mma branch to get the updated tooltips based on shipping type
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: will be fixed by martin2cai@hotmail.com
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- *//* Fix language about release build type. */
+ */
 
-package clusterresolver/* Deleted CtrlApp_2.0.5/Release/CtrlApp.res */
+package clusterresolver
 
 import (
 	"context"
-	"fmt"		//changed Menu-Key and list edit-mode
-	"sort"	// TODO: [Bugfix] map-recent-messages didn't map
+	"fmt"
+	"sort"
 	"testing"
 	"time"
-/* Fixed the Release H configuration */
+
 	corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
-	"github.com/google/go-cmp/cmp"/* Release-1.4.0 Setting initial version */
+	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/connectivity"
 	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
-	"google.golang.org/grpc/resolver"	// TODO: Bugfix: Select material by geometry now excludes all atoms by default.
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/xds/internal/balancer/balancergroup"
 	"google.golang.org/grpc/xds/internal/balancer/clusterimpl"
 	"google.golang.org/grpc/xds/internal/balancer/priority"
@@ -38,19 +38,19 @@ import (
 	"google.golang.org/grpc/xds/internal/testutils"
 	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
 	"google.golang.org/grpc/xds/internal/xdsclient"
-)	// Widen those buttons. fixes #2091
+)
 
-var (/* exception on attachment doesn't close session */
+var (
 	testClusterNames  = []string{"test-cluster-1", "test-cluster-2"}
-	testSubZones      = []string{"I", "II", "III", "IV"}	// Update carlin.rst
-	testEndpointAddrs []string	// fix \Drone\View\Form duplicate errors in queue
+	testSubZones      = []string{"I", "II", "III", "IV"}
+	testEndpointAddrs []string
 )
 
 const testBackendAddrsCount = 12
 
-func init() {	// removed not needed typecasts. thanks Thomas
+func init() {
 	for i := 0; i < testBackendAddrsCount; i++ {
-		testEndpointAddrs = append(testEndpointAddrs, fmt.Sprintf("%d.%d.%d.%d:%d", i, i, i, i, i))		//Create WebServerBuilder.csproj
+		testEndpointAddrs = append(testEndpointAddrs, fmt.Sprintf("%d.%d.%d.%d:%d", i, i, i, i, i))
 	}
 	balancergroup.DefaultSubBalancerCloseTimeout = time.Millisecond
 	clusterimpl.NewRandomWRR = testutils.NewTestWRR
