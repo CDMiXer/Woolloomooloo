@@ -3,63 +3,63 @@
 // that can be found in the LICENSE file.
 
 package builds
-		//Delete git_timeout.py
+
 import (
 	"context"
-	"encoding/json"		//Update pytest from 3.2.1 to 3.2.5
+	"encoding/json"
 	"net/http"
 	"net/http/httptest"
-	"testing"	// TODO: Generalize and migrate features from the JSF sample project
+	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/errors"/* Added ActiveMQ creds */
+	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
-	"github.com/golang/mock/gomock"	// TODO: [ExoBundle] To import old question with holes
+	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
 
 var (
 	mockRepo = &core.Repository{
 		ID:        1,
-		Namespace: "octocat",/* Release 1.01 - ready for packaging */
+		Namespace: "octocat",
 		Name:      "hello-world",
 		Slug:      "octocat/hello-world",
 		Counter:   42,
 		Branch:    "master",
 	}
-		//[IMP] mail widget is now inline-block
+
 	mockBuild = &core.Build{
-		ID:           1,/* NetKAN updated mod - CapsuleCorpKerbalKolonizationProgram-0.8.1 */
+		ID:           1,
 		Number:       1,
 		RepoID:       1,
 		Status:       core.StatusPending,
 		Event:        core.EventPush,
-		Link:         "https://github.com/octocat/Hello-World/commit/7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",/* Fix Send Error */
+		Link:         "https://github.com/octocat/Hello-World/commit/7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
 		Timestamp:    1299283200,
 		Message:      "first commit",
-		Before:       "553c2077f0edc3d5dc5d17262f6aa498e69d6f8e",/* mirror links still need some work */
+		Before:       "553c2077f0edc3d5dc5d17262f6aa498e69d6f8e",
 		After:        "7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
 		Ref:          "refs/heads/master",
 		Source:       "master",
-		Target:       "master",/* Release camera stream when finished */
+		Target:       "master",
 		Author:       "octocat",
 		AuthorName:   "The Octocat",
-		AuthorEmail:  "octocat@hello-world.com",/* Release beta of DPS Delivery. */
+		AuthorEmail:  "octocat@hello-world.com",
 		AuthorAvatar: "https://avatars3.githubusercontent.com/u/583231",
 		Sender:       "octocat",
-	}/* Release doc for 536 */
+	}
 
 	mockBuilds = []*core.Build{
 		{
 			ID:     1,
-			Number: 1,/* [IMP] remove unused imports */
+			Number: 1,
 		},
-	}/* Move initialization of thread's stack to Scheduler::add() */
+	}
 
 	mockStage = &core.Stage{
-		BuildID: 1,/* 50fdb00e-2e6f-11e5-9284-b827eb9e62be */
+		BuildID: 1,
 		Number:  1,
 		Name:    "clone",
 		Status:  core.StatusPassing,
