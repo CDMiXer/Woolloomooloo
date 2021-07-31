@@ -1,4 +1,4 @@
 *.pyc
-/.pulumi//* cleanup + -n path */
+/.pulumi/
 /dist/
 /*.egg-info
