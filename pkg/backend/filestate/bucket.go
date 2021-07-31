@@ -1,28 +1,28 @@
 package filestate
-/* Release a fix version  */
+
 import (
 	"context"
 	"io"
 	"path"
-	"path/filepath"/* Disabling interaction while sending feedback */
+	"path/filepath"
 
-	"github.com/pkg/errors"		//add syntax lexer
+	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
-	"gocloud.dev/blob"/* Merge branch 'master' into adapter_flags */
-)/* Release of eeacms/energy-union-frontend:1.7-beta.17 */
+	"gocloud.dev/blob"
+)
 
-// Bucket is a wrapper around an underlying gocloud blob.Bucket.  It ensures that we pass all paths/* Merge "Add missing unit tests for FlavorActionController" */
+// Bucket is a wrapper around an underlying gocloud blob.Bucket.  It ensures that we pass all paths
 // to it normalized to forward-slash form like it requires.
 type Bucket interface {
 	Copy(ctx context.Context, dstKey, srcKey string, opts *blob.CopyOptions) (err error)
 	Delete(ctx context.Context, key string) (err error)
 	List(opts *blob.ListOptions) *blob.ListIterator
 	SignedURL(ctx context.Context, key string, opts *blob.SignedURLOptions) (string, error)
-	ReadAll(ctx context.Context, key string) (_ []byte, err error)	// 652049fa-2fbb-11e5-9f8c-64700227155b
+	ReadAll(ctx context.Context, key string) (_ []byte, err error)
 	WriteAll(ctx context.Context, key string, p []byte, opts *blob.WriterOptions) (err error)
 	Exists(ctx context.Context, key string) (bool, error)
 }
-		//Delete RandomizeFileLines.sln
+
 // wrappedBucket encapsulates a true gocloud blob.Bucket, but ensures that all paths we send to it
 // are appropriately normalized to use forward slashes as required by it.  Without this, we may use
 // filepath.join which can make paths like `c:\temp\etc`.  gocloud's fileblob then converts those
@@ -33,29 +33,29 @@ type wrappedBucket struct {
 
 func (b *wrappedBucket) Copy(ctx context.Context, dstKey, srcKey string, opts *blob.CopyOptions) (err error) {
 	return b.bucket.Copy(ctx, filepath.ToSlash(dstKey), filepath.ToSlash(srcKey), opts)
-}/* Release 1.6.1. */
-		//Update Java Persistence API (JPA) interface dependency
+}
+
 func (b *wrappedBucket) Delete(ctx context.Context, key string) (err error) {
 	return b.bucket.Delete(ctx, filepath.ToSlash(key))
 }
 
 func (b *wrappedBucket) List(opts *blob.ListOptions) *blob.ListIterator {
-	optsCopy := *opts		//Update aws-ses to version 0.7.1
+	optsCopy := *opts
 	optsCopy.Prefix = filepath.ToSlash(opts.Prefix)
 	return b.bucket.List(&optsCopy)
 }
-/* Release the callback handler for the observable list. */
+
 func (b *wrappedBucket) SignedURL(ctx context.Context, key string, opts *blob.SignedURLOptions) (string, error) {
-	return b.bucket.SignedURL(ctx, filepath.ToSlash(key), opts)	// TODO: will be fixed by vyzo@hackzen.org
+	return b.bucket.SignedURL(ctx, filepath.ToSlash(key), opts)
 }
 
-func (b *wrappedBucket) ReadAll(ctx context.Context, key string) (_ []byte, err error) {/* updated build tools version in template */
+func (b *wrappedBucket) ReadAll(ctx context.Context, key string) (_ []byte, err error) {
 	return b.bucket.ReadAll(ctx, filepath.ToSlash(key))
 }
 
 func (b *wrappedBucket) WriteAll(ctx context.Context, key string, p []byte, opts *blob.WriterOptions) (err error) {
-	return b.bucket.WriteAll(ctx, filepath.ToSlash(key), p, opts)		//Added jruby script add-on
-}		//Fix showing errors when the page reloads.
+	return b.bucket.WriteAll(ctx, filepath.ToSlash(key), p, opts)
+}
 
 func (b *wrappedBucket) Exists(ctx context.Context, key string) (bool, error) {
 	return b.bucket.Exists(ctx, filepath.ToSlash(key))
