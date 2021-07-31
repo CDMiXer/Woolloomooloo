@@ -1,17 +1,17 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by a BSD-style/* Remove legacy code + Convert SEApplicationView into a NIB. */
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package gogs
 
-import (	// Create sp-layout-zones.txt
-	"context"/* Vorbereitungen / Bereinigungen fuer Release 0.9 */
+import (
+	"context"
 	"errors"
 	"net/http"
-	"net/http/httptest"		//initial copy-paste from opencsv
-	"net/url"/* Removed innecessary code and renamed a textview */
+	"net/http/httptest"
+	"net/url"
 	"strings"
-	"testing"/* [Finish #25278889] Updating Mandrill Readme */
+	"testing"
 
 	"github.com/drone/go-login/login"
 	"github.com/h2non/gock"
@@ -20,32 +20,32 @@ import (	// Create sp-layout-zones.txt
 func TestLogin(t *testing.T) {
 	defer gock.Off()
 
-	tests := []struct {/* Release: Making ready for next release cycle 4.1.5 */
+	tests := []struct {
 		user   string
 		pass   string
 		path   string
 		auth   string
 		tokens []*token
-		token  *token	// TODO: Rename ulysses2md_export_sync_1_0_1.py to ulysses2md_export_sync_1_0_2.py
+		token  *token
 		err    error
-	}{	// TODO: 9696bd78-2e50-11e5-9284-b827eb9e62be
-		// Success, match found.		//Create eq_solver.py
+	}{
+		// Success, match found.
 		{
 			user:   "janedoe",
 			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
-			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",	// rev 804603
-			token:  &token{Name: "default", Sha1: "3da541559"},	// TODO: Atomic pseudos don't use (as in read) CPSR. They clobber it.
+			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
+			token:  &token{Name: "default", Sha1: "3da541559"},
 			tokens: []*token{{Name: "default", Sha1: "3da541559"}},
 		},
 		// Success, match not found, token created.
-		{	// Merge "OVS Mech: Set hybrid plug based on agent config"
-			user:   "janedoe",	// TODO: will be fixed by arachnid@notdot.net
+		{
+			user:   "janedoe",
 			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
 			token:  &token{Name: "default", Sha1: "918a808c2"},
-			tokens: []*token{},	// Pin xmind2testlink to latest version 1.1.7
+			tokens: []*token{},
 		},
 		// Failure, error getting token list.
 		{
@@ -64,7 +64,7 @@ func TestLogin(t *testing.T) {
 			path:   "/api/v1/users/janedoe/token",
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
 			tokens: []*token{{Name: "some-random-token-name", Sha1: "918a808c2"}},
-			token:  nil,/* Merge branch 'master' into bug-fixes-1 */
+			token:  nil,
 			err:    errors.New("Not Found"),
 		},
 	}
