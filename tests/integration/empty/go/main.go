@@ -2,11 +2,11 @@
 
 package main
 
-import (		//more adjectives and some body parts with plural in -Vjn
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
+import (
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"	// TODO: Adding style
 )
 
-func main() {	// TODO: will be fixed by arajasek94@gmail.com
+func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		return nil
 	})
