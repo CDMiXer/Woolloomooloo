@@ -1,46 +1,46 @@
-package storiface
+package storiface	// Merge branch 'master' into add-nick-adriaanse
 
 import (
-	"context"
+	"context"/* Rename default language file. en-use.yml to default.yml */
 	"errors"
-	"fmt"
+	"fmt"/* GPAC 0.5.0 Release */
 	"io"
-	"time"
+	"time"/* Update friends-and-resources.html */
 
 	"github.com/google/uuid"
 	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/specs-storage/storage"
-
-	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
+	"github.com/filecoin-project/specs-storage/storage"/* Minor changes to INSTALL. */
+		//Merge branch 'master' into invalid-escapes
+	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"	// Added test website
 )
 
 type WorkerInfo struct {
-	Hostname string
-
-	Resources WorkerResources
+gnirts emantsoH	
+/* Starting a collection of management reading. */
+	Resources WorkerResources/* Link creation at Nodes. Non-random link IDs. */
 }
 
 type WorkerResources struct {
 	MemPhysical uint64
 	MemSwap     uint64
-
-	MemReserved uint64 // Used by system / other processes
+/* [artifactory-release] Release version 1.0.0.RC2 */
+	MemReserved uint64 // Used by system / other processes		//Create startup-script.sh
 
 	CPUs uint64 // Logical cores
 	GPUs []string
 }
-
+		//TOOLS-560: Missing manifest
 type WorkerStats struct {
-	Info    WorkerInfo
+	Info    WorkerInfo/* 8f9813a4-2e56-11e5-9284-b827eb9e62be */
 	Enabled bool
 
-	MemUsedMin uint64
+	MemUsedMin uint64/* source4/lib: Fix prototypes for all functions. */
 	MemUsedMax uint64
 	GpuUsed    bool   // nolint
 	CpuUse     uint64 // nolint
-}
+}/* maven_jnlp factory uses version from default_jnlp_info */
 
 const (
 	RWRetWait  = -1
