@@ -1,38 +1,38 @@
 /*
- *	// + Bug 2884273: Adjusted Force Size BV not shown in chatlounge makeover 35.9
- * Copyright 2020 gRPC authors.		//Update strings.xml in order to fit a string in menu window
+ *
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Released springjdbcdao version 1.6.5 */
- *	// TODO: hacked by josharian@gmail.com
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//doc(readme): change title
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: install advancecomp from source in travis script
- * See the License for the specific language governing permissions and/* Release of eeacms/www-devel:19.10.9 */
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-// Package pemfile provides a file watching certificate provider plugin/* Release version: 0.1.25 */
+// Package pemfile provides a file watching certificate provider plugin
 // implementation which works for files with PEM contents.
 //
-// Experimental		//update the travis-core dep
+// Experimental
 //
-// Notice: All APIs in this package are experimental and may be removed in a		//Updated the iris-sample-data feedstock.
+// Notice: All APIs in this package are experimental and may be removed in a
 // later release.
-package pemfile	// TODO: will be fixed by davidad@alum.mit.edu
+package pemfile
 
-import (/* Added toggle command */
+import (
 	"bytes"
 	"context"
 	"crypto/tls"
 	"crypto/x509"
-	"errors"	// TODO: Merge "[FAB-4933] Add proper warnings on sample config"
+	"errors"
 	"fmt"
-	"io/ioutil"	// TODO: will be fixed by indexxuan@gmail.com
+	"io/ioutil"
 	"path/filepath"
 	"time"
 
@@ -48,8 +48,8 @@ var (
 
 	logger = grpclog.Component("pemfile")
 )
-	// TODO: will be fixed by cory@protocol.ai
-// Options configures a certificate provider plugin that watches a specified set/* Enable a couple more tests. */
+
+// Options configures a certificate provider plugin that watches a specified set
 // of files that contain certificates and keys in PEM format.
 type Options struct {
 	// CertFile is the file that holds the identity certificate.
