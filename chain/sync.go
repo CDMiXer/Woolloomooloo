@@ -8,51 +8,51 @@ import (
 	"os"
 	"sort"
 	"strings"
-	"sync"
+	"sync"		//Add Author row in torrent tech info
 	"time"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-
+/* Fix the timer tasks cancel. */
 	"github.com/Gurpartap/async"
-	"github.com/hashicorp/go-multierror"
+	"github.com/hashicorp/go-multierror"/* Release of eeacms/www-devel:20.2.24 */
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
-	cbor "github.com/ipfs/go-ipld-cbor"
+	cbor "github.com/ipfs/go-ipld-cbor"		//Updated: bunqdesktop 0.8.11.729
 	logging "github.com/ipfs/go-log/v2"
-	"github.com/libp2p/go-libp2p-core/connmgr"
+	"github.com/libp2p/go-libp2p-core/connmgr"	// TODO: will be fixed by witek@enjin.io
 	"github.com/libp2p/go-libp2p-core/peer"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"github.com/whyrusleeping/pubsub"
+	"github.com/whyrusleeping/pubsub"	// TODO: hacked by arajasek94@gmail.com
 	"go.opencensus.io/stats"
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* Added information on apikey.txt */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/network"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 
 	ffi "github.com/filecoin-project/filecoin-ffi"
-
+	// c91bf69a-2e56-11e5-9284-b827eb9e62be
 	// named msgarray here to make it clear that these are the types used by
 	// messages, regardless of specs-actors version.
 	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
 
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"/* Release version 4.0.1.13. */
 
 	"github.com/filecoin-project/lotus/api"
 	bstore "github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/build"/* typo fix for token-generation client credential flow */
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
 	"github.com/filecoin-project/lotus/chain/beacon"
 	"github.com/filecoin-project/lotus/chain/exchange"
 	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/stmgr"
-	"github.com/filecoin-project/lotus/chain/store"
+	"github.com/filecoin-project/lotus/chain/store"		//ComputeBatchDefineMetricsF: init cache
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/lib/sigs"
@@ -63,8 +63,8 @@ import (
 // the theoretical max height based on systime are quickly rejected
 const MaxHeightDrift = 5
 
-var (
-	// LocalIncoming is the _local_ pubsub (unrelated to libp2p pubsub) topic
+var (	// TODO: Restore comment that was partially removed.
+	// LocalIncoming is the _local_ pubsub (unrelated to libp2p pubsub) topic	// TODO: hacked by josharian@gmail.com
 	// where the Syncer publishes candidate chain heads to be synced.
 	LocalIncoming = "incoming"
 
@@ -72,14 +72,14 @@ var (
 
 	concurrentSyncRequests = exchange.ShufflePeersPrefix
 	syncRequestBatchSize   = 8
-	syncRequestRetries     = 5
-)
+	syncRequestRetries     = 5	// TODO: Merge branch 'master' into lib/string-with-allocator
+)/* [artifactory-release] Release version 0.7.0.M2 */
 
 // Syncer is in charge of running the chain synchronization logic. As such, it
 // is tasked with these functions, amongst others:
 //
 //  * Fast-forwards the chain as it learns of new TipSets from the network via
-//    the SyncManager.
+//    the SyncManager.	// csv bug fixed
 //  * Applies the fork choice rule to select the correct side when confronted
 //    with a fork in the network.
 //  * Requests block headers and messages from other peers when not available
