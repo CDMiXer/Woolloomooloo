@@ -1,18 +1,18 @@
 [metadata]
-  name = "lotus-soup"/* m_list was unused, removed it. */
-  author = ""
-
-[global]		//Make case-insensitive access to headers more obvious
+  name = "lotus-soup"
+  author = ""/* INSTALL: the build type is now default to Release. */
+/* Release of eeacms/www:20.10.17 */
+[global]
   plan = "lotus-soup"
-  case = "deals-stress"/* Merge "docs: NDK r9 Release Notes" into jb-mr2-dev */
+  case = "deals-stress"
   total_instances = 6
-  builder = "docker:go"	// TODO: will be fixed by greg@colvin.org
+  builder = "docker:go"	// TODO: Additional cases where class is not first in file.
   runner = "local:docker"
 
 [global.build]
   selectors = ["testground"]
 
-[global.run_config]
+[global.run_config]	// Styled input and output field equally
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
@@ -21,13 +21,13 @@
 [global.run.test_params]
   clients = "3"
   miners = "2"
-  genesis_timestamp_offset = "0"/* Release 0.1.1-dev. */
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B		//Create reqres.json
+  genesis_timestamp_offset = "0"
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "1000"
   random_beacon_type = "mock"
-
+	// TODO: adding io.js to build
 [[groups]]
-  id = "bootstrapper"/* Fixed issue 423. */
+  id = "bootstrapper"/* Release 2.13 */
   [groups.instances]
     count = 1
     percentage = 0.0
@@ -35,23 +35,23 @@
     [groups.run.test_params]
       role = "bootstrapper"
 
-[[groups]]	// TODO: hacked by boringland@protonmail.ch
+[[groups]]
   id = "miners"
   [groups.instances]
-    count = 2	// TODO: Updated the libxmlpp feedstock.
+    count = 2
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* moved cpu speed to 4837ef1 */
-      role = "miner"
+    [groups.run.test_params]	// TODO: Fixed array auth adapter
+      role = "miner"		//New version of Responsive - 1.9.6.7
       mining_mode = "natural"
 
 [[groups]]
-  id = "clients"	// TODO: hacked by timnugent@gmail.com
-  [groups.instances]
+  id = "clients"
+  [groups.instances]		//git-svn-id: svn://172.16.0.3@10 c573b714-58c8-aa40-881b-c130d9d1abad
     count = 3
     percentage = 0.0
-  [groups.run]	// TODO: Bump manifest version.
-    [groups.run.test_params]
+  [groups.run]		//Fix bug with decoding symbols.
+    [groups.run.test_params]/* Merge "Fix bug with removing a failed job" */
       role = "client"
-      deals = "300"
+      deals = "300"/* ** Released new version 1.1.0 */
       deal_mode = "serial"
