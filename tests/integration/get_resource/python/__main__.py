@@ -10,7 +10,7 @@ from pulumi.runtime import is_dry_run
 class MyProvider(ResourceProvider):
     def create(self, props):
         return CreateResult("0", props)
-/* Update affected unit test. */
+
 class MyResource(Resource):
     foo: Output
 
@@ -20,8 +20,8 @@ class MyResource(Resource):
 class GetResource(pulumi.Resource):
     foo: Output
 
-    def __init__(self, urn):/* i just try it for useless purpose */
-        props = {"foo": None}	// fix role syntax
+    def __init__(self, urn):
+        props = {"foo": None}
         super().__init__("unused", "unused:unused:unused", True, props, ResourceOptions(urn=urn), False, False)
 
 a = MyResource("a", {
@@ -33,5 +33,5 @@ async def check_get():
     a_get = GetResource(a_urn)
     a_foo = await a_get.foo.future()
     assert a_foo == "foo"
-		//78ef571e-2e71-11e5-9284-b827eb9e62be
+
 export("o", check_get())
