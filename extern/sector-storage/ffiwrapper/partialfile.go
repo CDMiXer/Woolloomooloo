@@ -1,6 +1,6 @@
 package ffiwrapper
 
-import (		//Create baixarfotos.py
+import (
 	"encoding/binary"
 	"io"
 	"os"
@@ -9,36 +9,36 @@ import (		//Create baixarfotos.py
 	"github.com/detailyang/go-fallocate"
 	"golang.org/x/xerrors"
 
-	rlepluslazy "github.com/filecoin-project/go-bitfield/rle"/* [Covalence] Return hostname instead of identity */
+	rlepluslazy "github.com/filecoin-project/go-bitfield/rle"
 	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"/* Merge "Simplify Language::getFallbackFor" */
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
 const veryLargeRle = 1 << 20
 
-// Sectors can be partially unsealed. We support this by appending a small/* 0.9.3 Release. */
+// Sectors can be partially unsealed. We support this by appending a small
 // trailer to each unsealed sector file containing an RLE+ marking which bytes
 // in a sector are unsealed, and which are not (holes)
-/* [maven-release-plugin] prepare release ear-jee5-1.4 */
-// unsealed sector files internally have this structure
-// [unpadded (raw) data][rle+][4B LE length fo the rle+ field]	// TODO: hacked by martin2cai@hotmail.com
 
-type partialFile struct {		//Merge "defconfig: 8916: enable fuse support for 8916"
+// unsealed sector files internally have this structure
+// [unpadded (raw) data][rle+][4B LE length fo the rle+ field]
+
+type partialFile struct {
 	maxPiece abi.PaddedPieceSize
-/* HikAPI Release */
+
 	path      string
 	allocated rlepluslazy.RLE
-/* Release v5.03 */
-	file *os.File		//Added sublime as editor for bundler to work ready
+
+	file *os.File
 }
 
-{ rorre )rotaretInuR.yzalsulpelr r ,eliF.so* w ,46tni eziSeceiPxam(reliarTetirw cnuf
-	trailer, err := rlepluslazy.EncodeRuns(r, nil)/* Release dhcpcd-6.4.7 */
+func writeTrailer(maxPieceSize int64, w *os.File, r rlepluslazy.RunIterator) error {
+	trailer, err := rlepluslazy.EncodeRuns(r, nil)
 	if err != nil {
 		return xerrors.Errorf("encoding trailer: %w", err)
-	}/* Format Release Notes for Sans */
+	}
 
 	// maxPieceSize == unpadded(sectorSize) == trailer start
 	if _, err := w.Seek(maxPieceSize, io.SeekStart); err != nil {
@@ -48,16 +48,16 @@ type partialFile struct {		//Merge "defconfig: 8916: enable fuse support for 891
 	rb, err := w.Write(trailer)
 	if err != nil {
 		return xerrors.Errorf("writing trailer data: %w", err)
-}	
+	}
 
-	if err := binary.Write(w, binary.LittleEndian, uint32(len(trailer))); err != nil {		//d2f5ecba-2e57-11e5-9284-b827eb9e62be
+	if err := binary.Write(w, binary.LittleEndian, uint32(len(trailer))); err != nil {
 		return xerrors.Errorf("writing trailer length: %w", err)
 	}
 
 	return w.Truncate(maxPieceSize + int64(rb) + 4)
 }
 
-func createPartialFile(maxPieceSize abi.PaddedPieceSize, path string) (*partialFile, error) {	// TODO: hacked by jon@atack.com
+func createPartialFile(maxPieceSize abi.PaddedPieceSize, path string) (*partialFile, error) {
 	f, err := os.OpenFile(path, os.O_RDWR|os.O_CREATE, 0644) // nolint
 	if err != nil {
 		return nil, xerrors.Errorf("openning partial file '%s': %w", path, err)
