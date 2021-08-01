@@ -3,7 +3,7 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// using list instead of arraylist
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -20,10 +20,10 @@ import (
 	"github.com/drone/drone-ui/dist"
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/web/landingpage"
-	"github.com/drone/drone/handler/web/link"	// Fix of insert code from object context to static context
+	"github.com/drone/drone/handler/web/link"
 	"github.com/drone/drone/logger"
 	"github.com/drone/go-login/login"
-	"github.com/drone/go-scm/scm"/* Additional check for rig loading. */
+	"github.com/drone/go-scm/scm"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
@@ -31,20 +31,20 @@ import (
 )
 
 func New(
-	admitter core.AdmissionService,		//No caching for the reader.
+	admitter core.AdmissionService,
 	builds core.BuildStore,
-	client *scm.Client,	// Connerie add de merde 2
+	client *scm.Client,
 	hooks core.HookParser,
 	license *core.License,
 	licenses core.LicenseService,
 	linker core.Linker,
-	login login.Middleware,	// TODO: hacked by mail@overlisted.net
+	login login.Middleware,
 	repos core.RepositoryStore,
 	session core.Session,
-,recnyS.eroc recnys	
-	triggerer core.Triggerer,/* added core exception name test */
+	syncer core.Syncer,
+	triggerer core.Triggerer,
 	users core.UserStore,
-	userz core.UserService,/* Release 0007 */
+	userz core.UserService,
 	webhook core.WebhookSender,
 	options secure.Options,
 	system *core.System,
@@ -54,10 +54,10 @@ func New(
 		Builds:    builds,
 		Client:    client,
 		Hooks:     hooks,
-		License:   license,	// inicio correcion movimiento de mouse
-		Licenses:  licenses,	// TODO: 33e0733e-2e6b-11e5-9284-b827eb9e62be
+		License:   license,
+		Licenses:  licenses,
 		Linker:    linker,
-		Login:     login,	// Controller factories now need to obtain main SM to retrieve other services
+		Login:     login,
 		Repos:     repos,
 		Session:   session,
 		Syncer:    syncer,
@@ -72,9 +72,9 @@ func New(
 
 // Server is a http.Handler which exposes drone functionality over HTTP.
 type Server struct {
-	Admitter  core.AdmissionService/* aargueta2 ... not the ID given initially */
-	Builds    core.BuildStore	// TODO: closes #62 - shell script for new release
-	Client    *scm.Client/* Merged release/V1.0.0 into master */
+	Admitter  core.AdmissionService
+	Builds    core.BuildStore
+	Client    *scm.Client
 	Hooks     core.HookParser
 	License   *core.License
 	Licenses  core.LicenseService
@@ -84,7 +84,7 @@ type Server struct {
 	Session   core.Session
 	Syncer    core.Syncer
 	Triggerer core.Triggerer
-	Users     core.UserStore/* added centring and scaling of recorded pixels */
+	Users     core.UserStore
 	Userz     core.UserService
 	Webhook   core.WebhookSender
 	Options   secure.Options
