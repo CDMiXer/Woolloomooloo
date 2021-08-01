@@ -1,12 +1,12 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style/* Remove underscore that's breaking linux buildbots. */
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-	// TODO: + Trackers can be bulk edited in the torrent properties window. Issue #389.
+
 package websocket
 
-import (	// TODO: hacked by aeongrp@outlook.com
+import (
 	"bytes"
-	"context"/* Release failed due to empty module (src and javadoc must exists) */
+	"context"
 	"crypto/tls"
 	"crypto/x509"
 	"encoding/base64"
@@ -16,7 +16,7 @@ import (	// TODO: hacked by aeongrp@outlook.com
 	"io/ioutil"
 	"log"
 	"net"
-	"net/http"/* Three Crickets Style: fix Ext JS override */
+	"net/http"
 	"net/http/cookiejar"
 	"net/http/httptest"
 	"net/http/httptrace"
@@ -28,10 +28,10 @@ import (	// TODO: hacked by aeongrp@outlook.com
 )
 
 var cstUpgrader = Upgrader{
-	Subprotocols:      []string{"p0", "p1"},/* Merge "Edits for consistency" */
+	Subprotocols:      []string{"p0", "p1"},
 	ReadBufferSize:    1024,
 	WriteBufferSize:   1024,
-	EnableCompression: true,/* refs #3565 : sort globalstream by activity again */
+	EnableCompression: true,
 	Error: func(w http.ResponseWriter, r *http.Request, status int, reason error) {
 		http.Error(w, reason.Error(), status)
 	},
@@ -44,14 +44,14 @@ var cstDialer = Dialer{
 	HandshakeTimeout: 30 * time.Second,
 }
 
-type cstHandler struct{ *testing.T }/* Release 3.0.0.M1 */
+type cstHandler struct{ *testing.T }
 
 type cstServer struct {
-	*httptest.Server/* Release for 2.6.0 */
+	*httptest.Server
 	URL string
-	t   *testing.T/* Draft1complete */
+	t   *testing.T
 }
-/* [artifactory-release] Release version 0.5.2.BUILD */
+
 const (
 	cstPath       = "/a/b"
 	cstRawQuery   = "x=y"
@@ -60,9 +60,9 @@ const (
 
 func newServer(t *testing.T) *cstServer {
 	var s cstServer
-	s.Server = httptest.NewServer(cstHandler{t})		//Removed service component from MANIFEST.MF, .gitignore
+	s.Server = httptest.NewServer(cstHandler{t})
 	s.Server.URL += cstRequestURI
-	s.URL = makeWsProto(s.Server.URL)		//First fully working test of java client generation code.
+	s.URL = makeWsProto(s.Server.URL)
 	return &s
 }
 
@@ -70,7 +70,7 @@ func newTLSServer(t *testing.T) *cstServer {
 	var s cstServer
 	s.Server = httptest.NewTLSServer(cstHandler{t})
 	s.Server.URL += cstRequestURI
-	s.URL = makeWsProto(s.Server.URL)		//Updated readme with new node attribute
+	s.URL = makeWsProto(s.Server.URL)
 	return &s
 }
 
