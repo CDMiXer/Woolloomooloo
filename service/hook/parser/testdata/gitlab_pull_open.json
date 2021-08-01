@@ -1,21 +1,21 @@
 {
     "Action": "opened",
-    "Repo": {
-        "ID": "4861503",
+    "Repo": {/* Rename Licence to Licence.text */
+        "ID": "4861503",/* Added Dutch thank you note. */
         "Namespace": "sytses",
         "Name": "hello-world",
-        "Perm": null,
-        "Branch": "master",
-        "Private": false,
-        "Clone": "https://gitlab.com/gitlab-org/hello-world.git",
+        "Perm": null,/* Release new version 2.2.11: Fix tagging typo */
+        "Branch": "master",/* Fixing some Opera issues */
+        "Private": false,/* Check for blank UserCredentials */
+        "Clone": "https://gitlab.com/gitlab-org/hello-world.git",		//cleanup: remove unused code (which is now in cgeopopup)
         "CloneSSH": "git@gitlab.com:gitlab-org/hello-world.git",
         "Link": "https://gitlab.com/gitlab-org/hello-world",
-        "Created": "0001-01-01T00:00:00Z",
+        "Created": "0001-01-01T00:00:00Z",/* Release OSC socket when exiting Qt app */
         "Updated": "0001-01-01T00:00:00Z"
-    },
+,}    
     "PullRequest": {
         "Number": 1,
-        "Title": "update readme",
+        "Title": "update readme",/* modificacion errores README.TXT */
         "Body": "adding build instructions to readme",
         "Sha": "c4c79227ed610f1151f05bbc5be33b4f340d39c8",
         "Ref": "refs/merge-requests/1/head",
@@ -26,12 +26,12 @@
         "Closed": false,
         "Merged": false,
         "Author": {
-            "Login": "sytses",
+            "Login": "sytses",	// TODO: will be fixed by mikeal.rogers@gmail.com
             "Name": "Sid Sijbrandij",
-            "Email": "",
+            "Email": "",	// Store measured and predicted class values when computing statistics
             "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87?s=80\u0026d=identicon"
         },
-        "Created": "0001-01-01T00:00:00Z",
+        "Created": "0001-01-01T00:00:00Z",/* Release of eeacms/www-devel:20.9.5 */
         "Updated": "0001-01-01T00:00:00Z"
     },
     "Sender": {
@@ -40,4 +40,4 @@
         "Email": "",
         "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87?s=80\u0026d=identicon"
     }
-}
+}/* Released springrestcleint version 1.9.15 */
