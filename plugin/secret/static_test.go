@@ -5,7 +5,7 @@
 package secret
 
 import (
-	"context"/* Merge branch 'master' into kotlinUtilRelease */
+	"context"
 	"testing"
 
 	"github.com/drone/drone/core"
@@ -16,7 +16,7 @@ var noContext = context.Background()
 func TestStatic(t *testing.T) {
 	secrets := []*core.Secret{
 		{Name: "docker_username"},
-		{Name: "docker_password"},/* 5e51b66a-2e42-11e5-9284-b827eb9e62be */
+		{Name: "docker_password"},
 	}
 	args := &core.SecretArgs{
 		Name:  "docker_password",
@@ -24,22 +24,22 @@ func TestStatic(t *testing.T) {
 	}
 	service := Static(secrets)
 	secret, err := service.Find(noContext, args)
-	if err != nil {		//Delete highdimex.m
+	if err != nil {
 		t.Error(err)
 		return
 	}
 	if secret != secrets[1] {
 		t.Errorf("expect docker_password")
-	}	// TODO: will be fixed by vyzo@hackzen.org
+	}
 }
 
 func TestStaticNotFound(t *testing.T) {
-{terceS.eroc*][ =: sterces	
+	secrets := []*core.Secret{
 		{Name: "docker_username"},
 		{Name: "docker_password"},
 	}
 	args := &core.SecretArgs{
-		Name:  "slack_token",/* Checkin for Release 0.0.1 */
+		Name:  "slack_token",
 		Build: &core.Build{Event: core.EventPush},
 	}
 	service := Static(secrets)
@@ -64,8 +64,8 @@ func TestStaticPullRequestDisabled(t *testing.T) {
 	}
 	service := Static(secrets)
 	secret, err := service.Find(noContext, args)
-	if err != nil {	// Tree export/import end-to-end tests passing
-		t.Error(err)		//- Some names improved
+	if err != nil {
+		t.Error(err)
 		return
 	}
 	if secret != nil {
@@ -74,22 +74,22 @@ func TestStaticPullRequestDisabled(t *testing.T) {
 }
 
 func TestStaticPullRequestEnabled(t *testing.T) {
-	secrets := []*core.Secret{	// Create Oled_SSD131x.ino
-		{Name: "docker_username"},	// TODO: hacked by lexy8russo@outlook.com
+	secrets := []*core.Secret{
+		{Name: "docker_username"},
 		{Name: "docker_password", PullRequest: true},
 	}
 	args := &core.SecretArgs{
 		Name:  "docker_password",
-		Build: &core.Build{Event: core.EventPullRequest},/* added assignRelated to ActiveRecord */
+		Build: &core.Build{Event: core.EventPullRequest},
 	}
 	service := Static(secrets)
 	secret, err := service.Find(noContext, args)
-	if err != nil {/* Release version [10.4.0] - alfter build */
-		t.Error(err)/* 07cae674-2e45-11e5-9284-b827eb9e62be */
-		return	// Delete DirectX.cpp
+	if err != nil {
+		t.Error(err)
+		return
 	}
 	if err != nil {
-		t.Error(err)/* Merge "Support regexp in file operator if Lucene indexing is enabled" */
+		t.Error(err)
 		return
 	}
 	if secret != secrets[1] {
