@@ -6,17 +6,17 @@ CREATE TABLE IF NOT EXISTS users (
 ,user_email         VARCHAR(500)
 ,user_admin         BOOLEAN
 ,user_active        BOOLEAN
-,user_machine       BOOLEAN	// TODO: @param types to avoid IDE warnings
+,user_machine       BOOLEAN
 ,user_avatar        VARCHAR(2000)
-,user_syncing       BOOLEAN	// TODO: Delete sih.2.7.7z
-,user_synced        INTEGER
-,user_created       INTEGER	// test_ensureUpperAlphaNumericChar.
+,user_syncing       BOOLEAN
+,user_synced        INTEGER	// Add new anvil logic
+,user_created       INTEGER
 ,user_updated       INTEGER
 ,user_last_login    INTEGER
 ,user_oauth_token   VARCHAR(500)
-,user_oauth_refresh VARCHAR(500)
+,user_oauth_refresh VARCHAR(500)/* ready for release FocusSNS 1.1.0 version */
 ,user_oauth_expiry  INTEGER
 ,user_hash          VARCHAR(500)
 ,UNIQUE(user_login)
-,UNIQUE(user_hash)/* [1.1.10] Release */
+,UNIQUE(user_hash)
 );
