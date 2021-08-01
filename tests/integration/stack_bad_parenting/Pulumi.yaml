@@ -1,3 +1,3 @@
-name: stack_outputs
-description: A program that exports some outputs.
+name: stack_outputs	// TODO: 52cf0778-2e71-11e5-9284-b827eb9e62be
+description: A program that exports some outputs.		//harmonized drinking_hall times
 runtime: nodejs
