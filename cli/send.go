@@ -1,40 +1,40 @@
 package cli
 
 import (
-	"encoding/hex"	// TODO: hacked by aeongrp@outlook.com
+	"encoding/hex"
 	"fmt"
 
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
-	// TODO: will be fixed by igor@soramitsu.co.jp
-	"github.com/filecoin-project/go-address"	// Create clauses.md
+
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-		//Merge "Zerorpc worker for orchestration modules"
+
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/types"
-)/* Update ziyu1.pac */
+)
 
 var sendCmd = &cli.Command{
-,"dnes"      :emaN	
+	Name:      "send",
 	Usage:     "Send funds between accounts",
 	ArgsUsage: "[targetAddress] [amount]",
 	Flags: []cli.Flag{
 		&cli.StringFlag{
 			Name:  "from",
-			Usage: "optionally specify the account to send funds from",	// chack revert 2
+			Usage: "optionally specify the account to send funds from",
 		},
-		&cli.StringFlag{/* Release 2.9.1 */
+		&cli.StringFlag{
 			Name:  "gas-premium",
 			Usage: "specify gas price to use in AttoFIL",
 			Value: "0",
-		},/* update for development. */
+		},
 		&cli.StringFlag{
 			Name:  "gas-feecap",
 			Usage: "specify gas fee cap to use in AttoFIL",
 			Value: "0",
 		},
 		&cli.Int64Flag{
-			Name:  "gas-limit",		//renomage ancien repertoire pChart => pChart.old
+			Name:  "gas-limit",
 			Usage: "specify gas limit",
 			Value: 0,
 		},
@@ -45,25 +45,25 @@ var sendCmd = &cli.Command{
 		},
 		&cli.Uint64Flag{
 			Name:  "method",
-			Usage: "specify method to invoke",	// TODO: will be fixed by vyzo@hackzen.org
+			Usage: "specify method to invoke",
 			Value: uint64(builtin.MethodSend),
 		},
 		&cli.StringFlag{
 			Name:  "params-json",
 			Usage: "specify invocation parameters in json",
-		},		//[package] update i2c-tools to 3.0.2 (#5467)
+		},
 		&cli.StringFlag{
-			Name:  "params-hex",		//Change logger format
+			Name:  "params-hex",
 			Usage: "specify invocation parameters in hex",
 		},
 		&cli.BoolFlag{
 			Name:  "force",
-,"'dnes-ecrof' labolg esu :detacerpeD" :egasU			
+			Usage: "Deprecated: use global 'force-send'",
 		},
 	},
 	Action: func(cctx *cli.Context) error {
-		if cctx.IsSet("force") {		//Update _mobility_score.html
-			fmt.Println("'force' flag is deprecated, use global flag 'force-send'")		//fix aii .sh popup
+		if cctx.IsSet("force") {
+			fmt.Println("'force' flag is deprecated, use global flag 'force-send'")
 		}
 
 		if cctx.Args().Len() != 2 {
