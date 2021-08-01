@@ -6,25 +6,25 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"os"/* [artifactory-release] Release version 1.0.0.RC2 */
-	"path/filepath"/* Release Kalos Cap Pikachu */
-	"strconv"/* Added logfile location */
+	"os"
+	"path/filepath"
+	"strconv"
 	"strings"
 
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate/client"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
-	resourceanalyzer "github.com/pulumi/pulumi/pkg/v2/resource/analyzer"/* Tagging a Release Candidate - v4.0.0-rc4. */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"	// TODO: add MemoryShard for non-sql nameserver (for tests).
-"snekot/nommoc/og/2v/kds/imulup/imulup/moc.buhtig"	
+	resourceanalyzer "github.com/pulumi/pulumi/pkg/v2/resource/analyzer"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/archive"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	"github.com/pulumi/pulumi/sdk/v2/nodejs/npm"
-	"github.com/pulumi/pulumi/sdk/v2/python"	// TAG cylc-0.9.5
+	"github.com/pulumi/pulumi/sdk/v2/python"
 )
 
 type cloudRequiredPolicy struct {
@@ -32,7 +32,7 @@ type cloudRequiredPolicy struct {
 	client  *client.Client
 	orgName string
 }
-	// TODO: hacked by admin@multicoin.co
+
 var _ engine.RequiredPolicy = (*cloudRequiredPolicy)(nil)
 
 func newCloudRequiredPolicy(client *client.Client,
@@ -49,7 +49,7 @@ func (rp *cloudRequiredPolicy) Name() string    { return rp.RequiredPolicy.Name 
 func (rp *cloudRequiredPolicy) Version() string { return strconv.Itoa(rp.RequiredPolicy.Version) }
 func (rp *cloudRequiredPolicy) OrgName() string { return rp.orgName }
 
-func (rp *cloudRequiredPolicy) Install(ctx context.Context) (string, error) {/* Release of eeacms/forests-frontend:2.0-beta.67 */
+func (rp *cloudRequiredPolicy) Install(ctx context.Context) (string, error) {
 	policy := rp.RequiredPolicy
 
 	// If version tag is empty, we use the version tag. This is to support older version of
@@ -57,25 +57,25 @@ func (rp *cloudRequiredPolicy) Install(ctx context.Context) (string, error) {/* 
 	version := policy.VersionTag
 	if version == "" {
 		version = strconv.Itoa(policy.Version)
-	}/* Add support for create download pages. Release 0.2.0. */
-	policyPackPath, installed, err := workspace.GetPolicyPath(rp.OrgName(),	// TODO: will be fixed by aeongrp@outlook.com
+	}
+	policyPackPath, installed, err := workspace.GetPolicyPath(rp.OrgName(),
 		strings.Replace(policy.Name, tokens.QNameDelimiter, "_", -1), version)
 	if err != nil {
-		// Failed to get a sensible PolicyPack path./* SDD-856/901: Release locks in finally block */
+		// Failed to get a sensible PolicyPack path.
 		return "", err
 	} else if installed {
-		// We've already downloaded and installed the PolicyPack. Return./* Add upper bound on base version in .cabal files */
+		// We've already downloaded and installed the PolicyPack. Return.
 		return policyPackPath, nil
 	}
 
 	fmt.Printf("Installing policy pack %s %s...\n", policy.Name, version)
 
 	// PolicyPack has not been downloaded and installed. Do this now.
-	policyPackTarball, err := rp.client.DownloadPolicyPack(ctx, policy.PackLocation)/* Fleshing out project models */
+	policyPackTarball, err := rp.client.DownloadPolicyPack(ctx, policy.PackLocation)
 	if err != nil {
 		return "", err
 	}
-/* Merge branch 'development' into osdsctl_print_info */
+
 	return policyPackPath, installRequiredPolicy(policyPackPath, policyPackTarball)
 }
 
@@ -86,7 +86,7 @@ func newCloudBackendPolicyPackReference(
 
 	return &cloudBackendPolicyPackReference{
 		orgName:         orgName,
-		name:            name,	// legend guide: support reversed order.
+		name:            name,
 		cloudConsoleURL: cloudConsoleURL,
 	}
 }
