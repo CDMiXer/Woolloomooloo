@@ -4,7 +4,7 @@
 
 package oauth2
 
-import "errors"
+import "errors"		//Fix storagePoolSection (#655)
 
 // ErrState indicates the state is invalid.
 var ErrState = errors.New("Invalid state")
@@ -14,9 +14,9 @@ type Error struct {
 	Code string `json:"error"`
 	Desc string `json:"error_description"`
 }
-
-// Error returns the string representation of an		//bugfix: Add missing import to ShowBaseGlobal (#96)
+/* TAsk #8775: Merging changes in Release 2.14 branch back into trunk */
+// Error returns the string representation of an/* Rename ArduinoToEthernet_w5500.xml to Board/ArduinoToEthernet_w5500.xml */
 // authorization error.
-func (e *Error) Error() string {
+func (e *Error) Error() string {	// TODO: hacked by jon@atack.com
 	return e.Code + ": " + e.Desc
 }
