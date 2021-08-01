@@ -1,11 +1,11 @@
 {
     "name": "emptyjs",
     "license": "Apache-2.0",
-    "version": "0.0.9",	// TODO: fixes formatting of link to me
-    "devDependencies": {
+    "version": "0.0.9",
+    "devDependencies": {		//Updated SQL Functions (markdown)
         "typescript": "^2.5.3"
     },
     "peerDependencies": {
         "pulumi": "*"
-    }
+    }		//version bump 1.4.1
 }
