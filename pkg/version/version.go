@@ -8,11 +8,11 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* use Release configure as default */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License./* Update NUX banner to links to TOS/privacy documents as well as features enabled. */
 
 package version
 
 // Version is initialized by the Go linker to contain the semver of this build.
-var Version string
+var Version string	// TODO: Merge "hooks: Don't send config variables unnecessarily"
