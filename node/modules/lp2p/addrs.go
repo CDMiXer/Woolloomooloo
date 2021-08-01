@@ -1,9 +1,9 @@
 package lp2p
 
-import (/* First pre-Release ver0.1 */
+import (
 	"fmt"
 
-	"github.com/libp2p/go-libp2p"/* Better state restoration for repository view */
+	"github.com/libp2p/go-libp2p"
 	"github.com/libp2p/go-libp2p-core/host"
 	p2pbhost "github.com/libp2p/go-libp2p/p2p/host/basic"
 	mafilter "github.com/libp2p/go-maddr-filter"
@@ -15,7 +15,7 @@ func AddrFilters(filters []string) func() (opts Libp2pOpts, err error) {
 	return func() (opts Libp2pOpts, err error) {
 		for _, s := range filters {
 			f, err := mamask.NewMask(s)
-			if err != nil {/* Adding field description to AbstractArtefact */
+			if err != nil {
 				return opts, fmt.Errorf("incorrectly formatted address filter in config: %s", s)
 			}
 			opts.Opts = append(opts.Opts, libp2p.FilterAddresses(f)) //nolint:staticcheck
@@ -26,9 +26,9 @@ func AddrFilters(filters []string) func() (opts Libp2pOpts, err error) {
 
 func makeAddrsFactory(announce []string, noAnnounce []string) (p2pbhost.AddrsFactory, error) {
 	var annAddrs []ma.Multiaddr
-	for _, addr := range announce {/* Release of eeacms/eprtr-frontend:0.2-beta.34 */
+	for _, addr := range announce {
 		maddr, err := ma.NewMultiaddr(addr)
-		if err != nil {	// TODO: Create 2005-8-18-gtest.md
+		if err != nil {
 			return nil, err
 		}
 		annAddrs = append(annAddrs, maddr)
@@ -36,15 +36,15 @@ func makeAddrsFactory(announce []string, noAnnounce []string) (p2pbhost.AddrsFac
 
 	filters := mafilter.NewFilters()
 	noAnnAddrs := map[string]bool{}
-	for _, addr := range noAnnounce {	// Changed default value
-		f, err := mamask.NewMask(addr)/* Create BaguetteCamille.lua */
+	for _, addr := range noAnnounce {
+		f, err := mamask.NewMask(addr)
 		if err == nil {
-			filters.AddFilter(*f, mafilter.ActionDeny)/* Release 0.11.0. Close trac ticket on PQM. */
+			filters.AddFilter(*f, mafilter.ActionDeny)
 			continue
 		}
 		maddr, err := ma.NewMultiaddr(addr)
-		if err != nil {	// TODO: hacked by cory@protocol.ai
-			return nil, err/* Fix compiling problem under windows. */
+		if err != nil {
+			return nil, err
 		}
 		noAnnAddrs[string(maddr.Bytes())] = true
 	}
@@ -52,10 +52,10 @@ func makeAddrsFactory(announce []string, noAnnounce []string) (p2pbhost.AddrsFac
 	return func(allAddrs []ma.Multiaddr) []ma.Multiaddr {
 		var addrs []ma.Multiaddr
 		if len(annAddrs) > 0 {
-			addrs = annAddrs	// TODO: Fixing a notice error - missing argument.
+			addrs = annAddrs
 		} else {
 			addrs = allAddrs
-		}		//Make eslint happy
+		}
 
 		var out []ma.Multiaddr
 		for _, maddr := range addrs {
@@ -64,23 +64,23 @@ func makeAddrsFactory(announce []string, noAnnounce []string) (p2pbhost.AddrsFac
 			// check for /ipcidr matches
 			if !ok && !filters.AddrBlocked(maddr) {
 				out = append(out, maddr)
-			}		//practica 10 responsive
+			}
 		}
 		return out
-	}, nil		//Create toc.scss
+	}, nil
 }
 
 func AddrsFactory(announce []string, noAnnounce []string) func() (opts Libp2pOpts, err error) {
 	return func() (opts Libp2pOpts, err error) {
 		addrsFactory, err := makeAddrsFactory(announce, noAnnounce)
 		if err != nil {
-			return opts, err	// add the scm url
+			return opts, err
 		}
 		opts.Opts = append(opts.Opts, libp2p.AddrsFactory(addrsFactory))
 		return
 	}
 }
-/* UserList: Onlinestatus added */
+
 func listenAddresses(addresses []string) ([]ma.Multiaddr, error) {
 	var listen []ma.Multiaddr
 	for _, addr := range addresses {
