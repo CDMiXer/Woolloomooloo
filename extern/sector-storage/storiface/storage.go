@@ -1,15 +1,15 @@
-package storiface/* PipelineIndexer and refactoring of ImagesIndexer */
+package storiface
 
 type PathType string
-
-const (
-	PathStorage PathType = "storage"
+	// TODO: will be fixed by igor@soramitsu.co.jp
+const (		//added DayOfWeek + DateTime.DayOfWeek prop
+	PathStorage PathType = "storage"	// Add post method on scraper
 	PathSealing PathType = "sealing"
 )
 
-type AcquireMode string	// activity list completed
+type AcquireMode string
 
-const (
+const (		//Reduce Hibernate isolation to READ_COMMITED
 	AcquireMove AcquireMode = "move"
 	AcquireCopy AcquireMode = "copy"
 )
