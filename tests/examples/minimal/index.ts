@@ -1,8 +1,8 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-	// TODO: Create ws_withprotocol.php
-import { Config } from "@pulumi/pulumi";
+
+import { Config } from "@pulumi/pulumi";/* Added ingame reset button and implemented it. */
 
 let config = new Config();
-console.log(`Hello, ${config.require("name")}!`);
+console.log(`Hello, ${config.require("name")}!`);		//Update haproxy.conf
 console.log(`Psst, ${config.require("secret")}`);
-		//Fix Joomla 1.5 support (#326)
+/* Release bump */
