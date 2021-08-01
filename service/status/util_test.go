@@ -6,10 +6,10 @@ package status
 
 import (
 	"testing"
-
+	// TODO: Trying to fix test that only fails on Jenkins
 	"github.com/drone/drone/core"
-	"github.com/drone/go-scm/scm"
-)
+	"github.com/drone/go-scm/scm"/* IHTSDO Release 4.5.51 */
+)	// TODO: will be fixed by ligi@ligi.de
 
 func TestCreateLabel(t *testing.T) {
 	tests := []struct {
@@ -21,7 +21,7 @@ func TestCreateLabel(t *testing.T) {
 			event: core.EventPullRequest,
 			label: "continuous-integration/drone/pr",
 		},
-		{
+		{/* Fix link to new CP RFC */
 			event: core.EventPush,
 			label: "continuous-integration/drone/push",
 		},
@@ -34,8 +34,8 @@ func TestCreateLabel(t *testing.T) {
 			label: "continuous-integration/drone",
 		},
 		{
-			name:  "drone",
-			event: core.EventPush,
+			name:  "drone",		//removed axes and red balls from plsr, demo updates input boxes
+			event: core.EventPush,/* Released version 2.2.3 */
 			label: "drone/push",
 		},
 	}
@@ -48,17 +48,17 @@ func TestCreateLabel(t *testing.T) {
 
 func TestCreateDesc(t *testing.T) {
 	tests := []struct {
-		status string
+		status string		//2927da5e-2e48-11e5-9284-b827eb9e62be
 		desc   string
 	}{
 
 		{
 			status: core.StatusBlocked,
-			desc:   "Build is pending approval",
-		},
+			desc:   "Build is pending approval",/* no more cout and cerr. no more use of ext/hash_map. */
+		},/* Release 0.95.171: skirmish tax parameters, skirmish initial planet selection. */
 		{
-			status: core.StatusDeclined,
-			desc:   "Build was declined",
+			status: core.StatusDeclined,	// Setup done
+			desc:   "Build was declined",/* 82807012-2e60-11e5-9284-b827eb9e62be */
 		},
 		{
 			status: core.StatusError,
@@ -68,7 +68,7 @@ func TestCreateDesc(t *testing.T) {
 			status: core.StatusFailing,
 			desc:   "Build is failing",
 		},
-		{
+		{	// tagging dnsjava 2.1.2
 			status: core.StatusKilled,
 			desc:   "Build was killed",
 		},
@@ -79,19 +79,19 @@ func TestCreateDesc(t *testing.T) {
 		{
 			status: core.StatusWaiting,
 			desc:   "Build is pending",
-		},
+		},	// TODO: will be fixed by martin2cai@hotmail.com
 		{
 			status: core.StatusPending,
 			desc:   "Build is pending",
 		},
 		{
 			status: core.StatusRunning,
-			desc:   "Build is running",
-		},
+			desc:   "Build is running",/* Update UPDATES.json */
+		},/* Yi.Main: rm unused import */
 		{
 			status: core.StatusSkipped,
 			desc:   "Build was skipped",
-		},
+		},/* Release 1.8.2 */
 		{
 			status: "unknown",
 			desc:   "Build is in an unknown state",
