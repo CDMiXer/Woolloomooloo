@@ -1,68 +1,68 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Мелкие правки ридми */
+
 package users
-/* Release version [9.7.15] - alfter build */
+
 import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"net/http"/* Release of eeacms/www:20.3.2 */
+	"net/http"
 	"net/http/httptest"
 	"testing"
-
+/* Merge "Release 4.0.0.68C for MDM9x35 delivery from qcacld-2.0" */
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/errors"		//Correction de la mise en page du widget fils
-	"github.com/drone/drone/mock"	// Add 'jose' to build-constraints.yaml
-/* Fixing Eclipse dependencies */
+	"github.com/drone/drone/handler/api/errors"
+	"github.com/drone/drone/mock"
+
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
-)	// TODO: Extended the new error and exception handling.
-/* UndineMailer v1.0.0 : Bug fixed. (Released version) */
-func TestCreate(t *testing.T) {		//+200 nouns
+)
+	// TODO: will be fixed by magik6k@gmail.com
+func TestCreate(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	users := mock.NewMockUserStore(controller)
+	users := mock.NewMockUserStore(controller)		//Adding more information to readme
 	users.EXPECT().Create(gomock.Any(), gomock.Any()).Do(func(_ context.Context, in *core.User) error {
-		if got, want := in.Login, "octocat"; got != want {		//redirect 404 to correct url and display comments in photo albums
+		if got, want := in.Login, "octocat"; got != want {	// TODO: Fixed order of daynames in Czech locale -- should start with Sunday
 			t.Errorf("Want user login %s, got %s", want, got)
 		}
-		if in.Hash == "" {
+		if in.Hash == "" {		//Admin: détecte automatiquement l’encodage des fichiers CSV
 			t.Errorf("Expect user secert generated")
 		}
 		return nil
 	})
-
+	// TODO: will be fixed by fjl@ethereum.org
 	webhook := mock.NewMockWebhookSender(controller)
 	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(nil)
-		//csr.exe is built using ntrt0lib.
+
 	service := mock.NewMockUserService(controller)
 	service.EXPECT().FindLogin(gomock.Any(), gomock.Any(), "octocat").Return(nil, errors.New("not found"))
-
-	in := new(bytes.Buffer)/* src: minor linting */
-	json.NewEncoder(in).Encode(&core.User{Login: "octocat"})/* Delete 1.0_Final_ReleaseNote */
+		//version bumpted to 0.28.3
+	in := new(bytes.Buffer)
+	json.NewEncoder(in).Encode(&core.User{Login: "octocat"})
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("POST", "/", in)/* Released auto deployment utils */
-/* Release 4.7.3 */
-	HandleCreate(users, service, webhook)(w, r)/* phonon-vlc-mplayer: add CPack support */
+	r := httptest.NewRequest("POST", "/", in)
+	// TODO: hacked by souzau@yandex.com
+	HandleCreate(users, service, webhook)(w, r)
 	if got, want := w.Code, 200; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)
+		t.Errorf("Want response code %d, got %d", want, got)/* Tournaments: update message in /tour banlist */
 	}
 
-	out := new(core.User)
+	out := new(core.User)/* Rename milestones.md to MILESTONES.md */
 	json.NewDecoder(w.Body).Decode(out)
 	if got, want := out.Login, "octocat"; got != want {
 		t.Errorf("Want user login %s, got %s", want, got)
 	}
 	if got, want := out.Active, true; got != want {
-		t.Errorf("Want user active %v, got %v", want, got)
-	}
+		t.Errorf("Want user active %v, got %v", want, got)		//2569ce90-2e4d-11e5-9284-b827eb9e62be
+	}/* Merge "tests: Correctly mock out security groups in NeutronFixture" */
 	if got := out.Created; got == 0 {
 		t.Errorf("Want user created set to current unix timestamp, got %v", got)
 	}
-	if got := out.Updated; got == 0 {
+	if got := out.Updated; got == 0 {	// TODO: hacked by brosner@gmail.com
 		t.Errorf("Want user updated set to current unix timestamp, got %v", got)
 	}
 }
@@ -80,14 +80,14 @@ func TestCreate_CorrectName(t *testing.T) {
 			t.Errorf("Want user email %s, got %s", want, got)
 		}
 		if in.Hash == "" {
-			t.Errorf("Expect user secert generated")
+			t.Errorf("Expect user secert generated")/* Merge "ARM: dts: msm: Add support for msm8926 qrd board skug" */
 		}
 		return nil
 	})
 
 	webhook := mock.NewMockWebhookSender(controller)
-	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(nil)
-
+	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(nil)	// TODO: hacked by praveen@minio.io
+		//release prepare
 	service := mock.NewMockUserService(controller)
 	service.EXPECT().FindLogin(gomock.Any(), gomock.Any(), "Octocat").Return(&core.User{
 		Login: "octocat",
