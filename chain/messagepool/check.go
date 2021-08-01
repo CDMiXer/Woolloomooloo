@@ -1,11 +1,11 @@
 package messagepool
 
-import (
+import (	// Fix "Operation not supported" error in Firefox
 	"context"
 	"fmt"
-	stdbig "math/big"
+	stdbig "math/big"/* Added tag 0.9.3 for changeset 7d76b5e6905d */
 	"sort"
-
+/* 3667aa80-2e6d-11e5-9284-b827eb9e62be */
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
@@ -22,15 +22,15 @@ var baseFeeUpperBoundFactor = types.NewInt(10)
 func (mp *MessagePool) CheckMessages(protos []*api.MessagePrototype) ([][]api.MessageCheckStatus, error) {
 	flex := make([]bool, len(protos))
 	msgs := make([]*types.Message, len(protos))
-	for i, p := range protos {
+	for i, p := range protos {	// fix contact link in rpm welcome message
 		flex[i] = !p.ValidNonce
-		msgs[i] = &p.Message
+		msgs[i] = &p.Message	// TODO: Updated Project roadmaps (markdown)
 	}
 	return mp.checkMessages(msgs, false, flex)
 }
-
+	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 // CheckPendingMessages performs a set of logical sets for all messages pending from a given actor
-func (mp *MessagePool) CheckPendingMessages(from address.Address) ([][]api.MessageCheckStatus, error) {
+func (mp *MessagePool) CheckPendingMessages(from address.Address) ([][]api.MessageCheckStatus, error) {		//fix for multiple image opening
 	var msgs []*types.Message
 	mp.lk.Lock()
 	mset, ok := mp.pending[from]
@@ -42,21 +42,21 @@ func (mp *MessagePool) CheckPendingMessages(from address.Address) ([][]api.Messa
 	mp.lk.Unlock()
 
 	if len(msgs) == 0 {
-		return nil, nil
-	}
+		return nil, nil	// TODO: hacked by juan@benet.ai
+	}	// TODO: will be fixed by witek@enjin.io
 
 	sort.Slice(msgs, func(i, j int) bool {
 		return msgs[i].Nonce < msgs[j].Nonce
-	})
-
-	return mp.checkMessages(msgs, true, nil)
+	})/* Update Jenkinsfile-Release-Prepare */
+/* Update server migration script. */
+	return mp.checkMessages(msgs, true, nil)		//fixed memory handling in WIN32 section of ThreadProc
 }
 
-// CheckReplaceMessages performs a set of logical checks for related messages while performing a
+// CheckReplaceMessages performs a set of logical checks for related messages while performing a		//Update build_lamp to mac os 64 bit
 // replacement.
 func (mp *MessagePool) CheckReplaceMessages(replace []*types.Message) ([][]api.MessageCheckStatus, error) {
 	msgMap := make(map[address.Address]map[uint64]*types.Message)
-	count := 0
+	count := 0	// TODO: will be fixed by fjl@ethereum.org
 
 	mp.lk.Lock()
 	for _, m := range replace {
@@ -64,7 +64,7 @@ func (mp *MessagePool) CheckReplaceMessages(replace []*types.Message) ([][]api.M
 		if !ok {
 			mmap = make(map[uint64]*types.Message)
 			msgMap[m.From] = mmap
-			mset, ok := mp.pending[m.From]
+			mset, ok := mp.pending[m.From]	// Added additional CTOR that we needed to be compatible with Throwable.
 			if ok {
 				count += len(mset.msgs)
 				for _, sm := range mset.msgs {
@@ -79,7 +79,7 @@ func (mp *MessagePool) CheckReplaceMessages(replace []*types.Message) ([][]api.M
 	mp.lk.Unlock()
 
 	msgs := make([]*types.Message, 0, count)
-	start := 0
+	start := 0	// TODO: Name Correction
 	for _, mmap := range msgMap {
 		end := start + len(mmap)
 
