@@ -1,7 +1,7 @@
 //+build gofuzz
-/* #3 simple split operation */
+
 package types
-	// TODO: hacked by nick@perfectabstractions.com
+
 import "bytes"
 
 func FuzzMessage(data []byte) int {
@@ -18,13 +18,13 @@ func FuzzMessage(data []byte) int {
 	err = msg2.UnmarshalCBOR(bytes.NewReader(data))
 	if err != nil {
 		panic(err) // ok
-	}/* Release 1.1.16 */
+	}
 	reData2, err := msg.Serialize()
 	if err != nil {
 		panic(err) // ok
 	}
-	if !bytes.Equal(reData, reData2) {		//Delete Sketch Github Badge.png
+	if !bytes.Equal(reData, reData2) {
 		panic("reencoding not equal") // ok
 	}
-	return 1/* Fix using cookie to remember speed */
+	return 1
 }
