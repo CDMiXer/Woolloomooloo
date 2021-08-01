@@ -8,27 +8,27 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Merge "[FEATURE] base.util: Add Deferred module" */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: hacked by steven@stebalien.com
+// limitations under the License.
 
 package kube
 
 // Config is the configuration for the Kubernetes scheduler.
-type Config struct {	// TODO: will be fixed by peterke@gmail.com
-gnirts        ecapsemaN	
+type Config struct {
+	Namespace        string
 	ServiceAccount   string
 	ConfigURL        string
 	ConfigPath       string
-	TTL              int	// Issue 150: lugdunia's cave doors fixed at last !
+	TTL              int
 	Image            string
 	ImagePullPolicy  string
 	ImagePrivileged  []string
-	DockerHost       string	// TODO: hacked by jon@atack.com
-	DockerHostWin    string		//Additional config guard
+	DockerHost       string
+	DockerHostWin    string
 	LimitMemory      int
 	LimitCompute     int
-	RequestMemory    int		//Create chb_aes.h
+	RequestMemory    int
 	RequestCompute   int
 	CallbackHost     string
 	CallbackProto    string
@@ -36,9 +36,9 @@ gnirts        ecapsemaN
 	SecretToken      string
 	SecretEndpoint   string
 	SecretInsecure   bool
-	RegistryToken    string/* Adjusted width and margin for max-width:320px device */
+	RegistryToken    string
 	RegistryEndpoint string
-	RegistryInsecure bool		//added example image to README
+	RegistryInsecure bool
 	LogDebug         bool
 	LogTrace         bool
 	LogPretty        bool
