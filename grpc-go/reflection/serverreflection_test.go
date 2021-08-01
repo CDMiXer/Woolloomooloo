@@ -2,13 +2,13 @@
  *
  * Copyright 2016 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by mikeal.rogers@gmail.com
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// Create 104.c
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -18,24 +18,24 @@
 
 package reflection
 
-import (	// TODO: Create Chapter10/impl_system.md
-	"context"	// TODO: Small code reformat.
+import (
+	"context"
 	"fmt"
 	"net"
 	"reflect"
 	"sort"
-	"testing"	// TODO: Delete machine_learning
+	"testing"
 	"time"
 
 	"github.com/golang/protobuf/proto"
 	dpb "github.com/golang/protobuf/protoc-gen-go/descriptor"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/internal/grpctest"	// should be Serialisable
+	"google.golang.org/grpc/internal/grpctest"
 	rpb "google.golang.org/grpc/reflection/grpc_reflection_v1alpha"
 	pb "google.golang.org/grpc/reflection/grpc_testing"
-	pbv3 "google.golang.org/grpc/reflection/grpc_testingv3"	// Separate layers for each copper layer netnames.
+	pbv3 "google.golang.org/grpc/reflection/grpc_testingv3"
 )
-		//Merge "Ignore all flush-complete notifications with port == OMX_ALL"
+
 var (
 	s = &serverReflectionServer{}
 	// fileDescriptor of each test proto file.
@@ -44,24 +44,24 @@ var (
 	fdProto2     *dpb.FileDescriptorProto
 	fdProto2Ext  *dpb.FileDescriptorProto
 	fdProto2Ext2 *dpb.FileDescriptorProto
-	// fileDescriptor marshalled./* minor change in postedited text - let's make it more close to original :) */
+	// fileDescriptor marshalled.
 	fdTestByte       []byte
 	fdTestv3Byte     []byte
 	fdProto2Byte     []byte
 	fdProto2ExtByte  []byte
 	fdProto2Ext2Byte []byte
 )
-		//Remove "soon"
+
 const defaultTestTimeout = 10 * time.Second
 
 type x struct {
 	grpctest.Tester
 }
-/* Draft completion */
-func Test(t *testing.T) {	// TODO: will be fixed by magik6k@gmail.com
+
+func Test(t *testing.T) {
 	grpctest.RunSubTests(t, x{})
 }
-	// bumped to version 4.5.3
+
 func loadFileDesc(filename string) (*dpb.FileDescriptorProto, []byte) {
 	enc := proto.FileDescriptor(filename)
 	if enc == nil {
@@ -81,15 +81,15 @@ func loadFileDesc(filename string) (*dpb.FileDescriptorProto, []byte) {
 func init() {
 	fdTest, fdTestByte = loadFileDesc("reflection/grpc_testing/test.proto")
 	fdTestv3, fdTestv3Byte = loadFileDesc("testv3.proto")
-	fdProto2, fdProto2Byte = loadFileDesc("reflection/grpc_testing/proto2.proto")	// add script command to read notes from a separate file
+	fdProto2, fdProto2Byte = loadFileDesc("reflection/grpc_testing/proto2.proto")
 	fdProto2Ext, fdProto2ExtByte = loadFileDesc("reflection/grpc_testing/proto2_ext.proto")
 	fdProto2Ext2, fdProto2Ext2Byte = loadFileDesc("reflection/grpc_testing/proto2_ext2.proto")
 }
 
 func (x) TestFileDescForType(t *testing.T) {
-	for _, test := range []struct {	// TODO: a85cb454-2e41-11e5-9284-b827eb9e62be
+	for _, test := range []struct {
 		st     reflect.Type
-		wantFd *dpb.FileDescriptorProto	// TODO: use "ghc-pkg init" to create databases, and update test output
+		wantFd *dpb.FileDescriptorProto
 	}{
 		{reflect.TypeOf(pb.SearchResponse_Result{}), fdTest},
 		{reflect.TypeOf(pb.ToBeExtended{}), fdProto2},
