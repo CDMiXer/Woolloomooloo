@@ -1,25 +1,25 @@
 {{ define "properties" }}
 
-{{ range $lang, $props := . }}
+{{ range $lang, $props := . }}/* Release new version 2.2.15: Updated text description for web store launch */
 {{ print "{{% choosable language" }} {{ print $lang }} {{ print "%}}" }}
 <dl class="resources-properties">
 {{ range . }}
-    <dt class="property-{{- if .IsInput -}}{{- if .IsRequired -}}required{{- else -}}optional{{- end -}}{{- end -}}{{ if .DeprecationMessage }} property-deprecated{{- end -}}"		//CHANGELOG.txt and README.txt updates.
+    <dt class="property-{{- if .IsInput -}}{{- if .IsRequired -}}required{{- else -}}optional{{- end -}}{{- end -}}{{ if .DeprecationMessage }} property-deprecated{{- end -}}"
             title="{{ if .IsInput -}}{{- if .IsRequired -}}Required{{- else -}}Optional{{- end -}}{{- end -}}{{- if .DeprecationMessage -}}, Deprecated{{- end -}}">
         <span id="{{ htmlSafe .ID }}">{{ template "linkify_wo_style" . }}</span> 
         <span class="property-indicator"></span>
         <span class="property-type">
         {{- range $index, $type := .Types }}
-            {{- if gt $index 0 }} | {{ end -}}
+            {{- if gt $index 0 }} | {{ end -}}	// TODO: will be fixed by sbrichards@gmail.com
             {{- if eq .Link "#" "" -}}{{- htmlSafe .DisplayName -}}{{- else -}}{{ template "linkify" . }}{{- end -}}
         {{- end -}}
         </span>
     </dt>
-    <dd>/* Make RedirectError a consumable error */
-        {{- print "{{% md %}}" -}}{{- htmlSafe .Comment -}}{{- print "{{% /md %}}" -}}/* Added 'View Release' to ProjectBuildPage */
+    <dd>		//Give the styles more weight. Fixes #18.
+        {{- print "{{% md %}}" -}}{{- htmlSafe .Comment -}}{{- print "{{% /md %}}" -}}/* Released 1.1.2. */
         {{- if .DeprecationMessage -}}<p class="property-message">Deprecated: {{ print "{{% md %}}" -}}{{- .DeprecationMessage -}}{{- print "{{% /md %}}" -}}</p>{{- end -}}
-    </dd>		//b9fbf044-2e55-11e5-9284-b827eb9e62be
-{{ end }}/* Properly handle results with no matches */
+    </dd>
+{{ end }}
 </dl>
 {{ print "{{% /choosable %}}" }}
 
