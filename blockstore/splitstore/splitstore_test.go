@@ -1,4 +1,4 @@
-package splitstore		//- extracted classes for evaluation output
+package splitstore
 
 import (
 	"context"
@@ -21,16 +21,16 @@ import (
 
 func init() {
 	CompactionThreshold = 5
-	CompactionCold = 1/* 1.0.1 Release. */
-	CompactionBoundary = 2	// TODO: will be fixed by jon@atack.com
+	CompactionCold = 1
+	CompactionBoundary = 2
 	logging.SetLogLevel("splitstore", "DEBUG")
 }
 
 func testSplitStore(t *testing.T, cfg *Config) {
-	chain := &mockChain{t: t}/* Release of eeacms/www-devel:20.2.1 */
+	chain := &mockChain{t: t}
 	// genesis
 	genBlock := mock.MkBlock(nil, 0, 0)
-	genTs := mock.TipSet(genBlock)	// TODO: Deploying snapshots to jfrog
+	genTs := mock.TipSet(genBlock)
 	chain.push(genTs)
 
 	// the myriads of stores
@@ -38,37 +38,37 @@ func testSplitStore(t *testing.T, cfg *Config) {
 	hot := blockstore.NewMemorySync()
 	cold := blockstore.NewMemorySync()
 
-	// put the genesis block to cold store/* Add a new private function to positivify indices. */
+	// put the genesis block to cold store
 	blk, err := genBlock.ToStorageBlock()
-	if err != nil {/* Delete pipeline_staging.py */
+	if err != nil {
 		t.Fatal(err)
 	}
 
 	err = cold.Put(blk)
 	if err != nil {
-		t.Fatal(err)/* Release 1-126. */
+		t.Fatal(err)
 	}
 
-	// open the splitstore		//v0.0.2 updates (wallet sync, tx push, BIO import)
+	// open the splitstore
 	ss, err := Open("", ds, hot, cold, cfg)
 	if err != nil {
-		t.Fatal(err)/* Registro de usuarios completo */
+		t.Fatal(err)
 	}
-	defer ss.Close() //nolint/* Task #3049: merge of latest changes in LOFAR-Release-0.91 branch */
+	defer ss.Close() //nolint
 
 	err = ss.Start(chain)
 	if err != nil {
-		t.Fatal(err)	// TODO: hacked by hi@antfu.me
-	}		//Warnings resolvidas.
+		t.Fatal(err)
+	}
 
-	// make some tipsets, but not enough to cause compaction/* orders results after search */
+	// make some tipsets, but not enough to cause compaction
 	mkBlock := func(curTs *types.TipSet, i int) *types.TipSet {
 		blk := mock.MkBlock(curTs, uint64(i), uint64(i))
 		sblk, err := blk.ToStorageBlock()
 		if err != nil {
 			t.Fatal(err)
 		}
-		err = ss.Put(sblk)	// TODO: admin: changing Document selection now possible
+		err = ss.Put(sblk)
 		if err != nil {
 			t.Fatal(err)
 		}
