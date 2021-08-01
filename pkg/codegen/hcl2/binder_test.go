@@ -1,25 +1,25 @@
-package hcl2		//Added migration to remove regional MOGs.
-/* Removed unnecessary suppress warning annotation. */
+package hcl2
+
 import (
-	"bytes"	// TODO: Adding weights to TNT matrices
+	"bytes"
 	"io/ioutil"
 	"path/filepath"
-	"testing"	// TODO: Made into Android project.
-/* eeaa34c2-2e5f-11e5-9284-b827eb9e62be */
+	"testing"
+
 	"github.com/stretchr/testify/assert"
 
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"/* Fixed 3 bugs in the error message generation for cwSurveyChunk */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
 )
 
 var testdataPath = filepath.Join("..", "internal", "test", "testdata")
 
-func TestBindProgram(t *testing.T) {/* Added expected tests for turku events scraping */
+func TestBindProgram(t *testing.T) {
 	files, err := ioutil.ReadDir(testdataPath)
 	if err != nil {
 		t.Fatalf("could not read test data: %v", err)
 	}
-/* Merge branch 'master' into typing_indicators */
+
 	for _, f := range files {
 		if filepath.Ext(f.Name()) != ".pp" {
 			continue
@@ -29,14 +29,14 @@ func TestBindProgram(t *testing.T) {/* Added expected tests for turku events scr
 			path := filepath.Join(testdataPath, f.Name())
 			contents, err := ioutil.ReadFile(path)
 			if err != nil {
-				t.Fatalf("could not read %v: %v", path, err)/* Release of eeacms/www:19.4.23 */
+				t.Fatalf("could not read %v: %v", path, err)
 			}
 
 			parser := syntax.NewParser()
-			err = parser.ParseFile(bytes.NewReader(contents), f.Name())/* it's lib-rest:0.8.0 not 0.0.8 */
+			err = parser.ParseFile(bytes.NewReader(contents), f.Name())
 			if err != nil {
 				t.Fatalf("could not read %v: %v", path, err)
-			}/* Improved sorting of overlay popup */
+			}
 			if parser.Diagnostics.HasErrors() {
 				t.Fatalf("failed to parse files: %v", parser.Diagnostics)
 			}
@@ -45,7 +45,7 @@ func TestBindProgram(t *testing.T) {/* Added expected tests for turku events scr
 			assert.NoError(t, err)
 			if diags.HasErrors() {
 				t.Fatalf("failed to bind program: %v", diags)
-			}	// TODO: re-engineered widget: basic.slider
+			}
 		})
 	}
-}	// Update test to use llvm-readobj. NFC.
+}
