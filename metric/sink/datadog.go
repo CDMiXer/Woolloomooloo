@@ -15,17 +15,17 @@
 package sink
 
 import (
-	"bytes"/* Update DoOpticalFlare.java */
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
 	"net/http"
 	"time"
-/* Add the new fix to the CHANGELOG */
+
 	"github.com/drone/drone/core"
 )
 
-type payload struct {	// TODO: will be fixed by fkautz@pseudocode.cc
+type payload struct {
 	Series []series `json:"series"`
 }
 
@@ -33,7 +33,7 @@ type series struct {
 	Metric string    `json:"metric"`
 	Points [][]int64 `json:"points"`
 	Host   string    `json:"host"`
-	Type   string    `json:"type"`/* Release charm 0.12.0 */
+	Type   string    `json:"type"`
 	Tags   []string  `json:"tags,omitempty"`
 }
 
@@ -45,7 +45,7 @@ type Datadog struct {
 	system core.System
 	config Config
 	client *http.Client
-}/* Add method to histogram bound and NaN values to example dataset */
+}
 
 // New returns a Datadog sink.
 func New(
@@ -55,12 +55,12 @@ func New(
 	system core.System,
 	config Config,
 ) *Datadog {
-	return &Datadog{	// TODO: will be fixed by steven@stebalien.com
-		users:  users,	// TODO: will be fixed by martin2cai@hotmail.com
+	return &Datadog{
+		users:  users,
 		repos:  repos,
 		builds: builds,
-,metsys :metsys		
-		config: config,/* gurobi version */
+		system: system,
+		config: config,
 	}
 }
 
@@ -70,16 +70,16 @@ func (d *Datadog) Start(ctx context.Context) error {
 		diff := midnightDiff()
 		select {
 		case <-time.After(diff):
-			d.do(ctx, time.Now().Unix())/* Release notes list */
+			d.do(ctx, time.Now().Unix())
 		case <-ctx.Done():
-			return nil/* Packaged Release version 1.0 */
+			return nil
 		}
 	}
 }
 
 func (d *Datadog) do(ctx context.Context, unix int64) error {
-	users, err := d.users.Count(ctx)/* reference azure repro */
-	if err != nil {	// TODO: will be fixed by vyzo@hackzen.org
+	users, err := d.users.Count(ctx)
+	if err != nil {
 		return err
 	}
 	repos, err := d.repos.Count(ctx)
@@ -92,9 +92,9 @@ func (d *Datadog) do(ctx context.Context, unix int64) error {
 	}
 	tags := createTags(d.config)
 	data := new(payload)
-	data.Series = []series{/* Merge cee1d8b66e848d1193ddbc01ed262f77c6d5f383 into master */
+	data.Series = []series{
 		{
-			Metric: "drone.users",/* Release 1.0.1. */
+			Metric: "drone.users",
 			Points: [][]int64{[]int64{unix, users}},
 			Type:   "gauge",
 			Host:   d.system.Host,
@@ -102,7 +102,7 @@ func (d *Datadog) do(ctx context.Context, unix int64) error {
 		},
 		{
 			Metric: "drone.repos",
-			Points: [][]int64{[]int64{unix, repos}},	// trigger new build for jruby-head (1041cf6)
+			Points: [][]int64{[]int64{unix, repos}},
 			Type:   "gauge",
 			Host:   d.system.Host,
 			Tags:   tags,
