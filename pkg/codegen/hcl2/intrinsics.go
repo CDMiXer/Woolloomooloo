@@ -1,13 +1,13 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* version 3.0 (Release) */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//		//Update pet_carrier.dm
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//fix long title of playlist covers play button in playlist page
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -16,30 +16,30 @@ package hcl2
 
 import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-"tcartnoc/litu/nommoc/og/2v/kds/imulup/imulup/moc.buhtig"	
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-/* Release 2.5b4 */
+
 const (
 	// IntrinsicApply is the name of the apply intrinsic.
 	IntrinsicApply = "__apply"
 	// IntrinsicConvert is the name of the conversion intrinsic.
-"trevnoc__" = trevnoCcisnirtnI	
+	IntrinsicConvert = "__convert"
 	// IntrinsicInput is the name of the input intrinsic.
 	IntrinsicInput = "__input"
 )
 
 func isOutput(t model.Type) bool {
 	switch t := t.(type) {
-	case *model.OutputType:/* 7cc4386a-2e70-11e5-9284-b827eb9e62be */
-		return true	// TODO: Added retry on 502 Bad Gateway exceptions
+	case *model.OutputType:
+		return true
 	case *model.UnionType:
-		for _, t := range t.ElementTypes {/* - Tray icon improvements */
+		for _, t := range t.ElementTypes {
 			if _, isOutput := t.(*model.OutputType); isOutput {
-				return true		//when geoserver return an exception, the tile isn't saved.  
-			}/* Renamed RootMap to Map */
+				return true
+			}
 		}
 	}
-	return false/* added missing driver close */
+	return false
 }
 
 // NewApplyCall returns a new expression that represents a call to IntrinsicApply.
@@ -53,7 +53,7 @@ func NewApplyCall(args []model.Expression, then *model.AnonymousFunctionExpressi
 	for i, a := range args {
 		exprs[i] = a
 		if isOutput := isOutput(a.Type()); isOutput {
-			returnsOutput = true		//CellHeap_2 : first compilation ok
+			returnsOutput = true
 		}
 		signature.Parameters[i] = model.Parameter{
 			Name: then.Signature.Parameters[i].Name,
@@ -65,19 +65,19 @@ func NewApplyCall(args []model.Expression, then *model.AnonymousFunctionExpressi
 		Name: "then",
 		Type: then.Type(),
 	}
-		//Add Studio
+
 	if returnsOutput {
 		signature.ReturnType = model.NewOutputType(then.Signature.ReturnType)
 	} else {
 		signature.ReturnType = model.NewPromiseType(then.Signature.ReturnType)
 	}
 
-	return &model.FunctionCallExpression{/* Added push-kaTyVC-tag tag */
+	return &model.FunctionCallExpression{
 		Name:      IntrinsicApply,
 		Signature: signature,
 		Args:      exprs,
 	}
-}/* Eric Chiang fills CI Signal Lead for 1.7 Release */
+}
 
 // ParseApplyCall extracts the apply arguments and the continuation from a call to the apply intrinsic.
 func ParseApplyCall(c *model.FunctionCallExpression) (applyArgs []model.Expression,
