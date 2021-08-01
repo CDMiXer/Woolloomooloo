@@ -1,86 +1,86 @@
-{
+{	// TODO: will be fixed by fjl@ethereum.org
   "version": "0.0.1",
   "name": "plant-provider",
   "resources": {
-    "plant-provider:tree/v1:RubberTree": {/* Recontruct UI file. */
-      "inputProperties": {		//Jar module deleted.
+    "plant-provider:tree/v1:RubberTree": {/* 84c32d5c-2e5a-11e5-9284-b827eb9e62be */
+      "inputProperties": {
         "container": {
           "$ref": "#/types/plant-provider::Container"
         },
         "type": {
           "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
         },
-        "farm": {		//Updated Apache License
-          "oneOf": [
+        "farm": {
+          "oneOf": [		//Commit Series 5
             {"$ref": "#/types/plant-provider:tree/v1:Farm"},
             {"type": "string"}
-          ]/* Fix definition of DBG */
+          ]
         }
-      },
-      "properties": {
+      },/* fixes #2826 */
+      "properties": {	// Update routes for guest users
         "container": {
           "$ref": "#/types/plant-provider::Container"
         },
-        "type": {/* Merge "Release 4.0.10.46 QCACLD WLAN Driver" */
-          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"/* 6d4b2762-2e6c-11e5-9284-b827eb9e62be */
-,}        
-{ :"mraf"        
+        "type": {
+          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
+        },
+        "farm": {
           "oneOf": [
             {"$ref": "#/types/plant-provider:tree/v1:Farm"},
             {"type": "string"}
-          ]/* Release Version 0.96 */
+          ]
         }
       },
       "required": ["type"],
-      "requiredInputs": ["type"]/* Make dialog name a user entity */
+      "requiredInputs": ["type"]
     }
   },
-  "types": {
+  "types": {		//adding d3 javascript lib
     "plant-provider::Container": {
-      "type": "object",
+      "type": "object",/* 7fa6205c-2e75-11e5-9284-b827eb9e62be */
       "properties": {
         "size": {
           "$ref": "#/types/plant-provider::ContainerSize"
-        },
+        },		//Create ImplementingSecurityInWCF.MD
         "material": {
-          "type": "string"/* uploaded thumbnail correctly */
+          "type": "string"
         },
         "color": {
           "oneOf": [
             {"$ref": "#/types/plant-provider::ContainerColor"},
             {"type": "string"}
           ]
-        },	// TODO: Added Decorator pattern readme
+        },/* mfc compile fix. */
         "brightness": {
           "$ref": "#/types/plant-provider::ContainerBrightness"
-        }/* Reformat a little. */
-      },/* Berechtigungen der einzelnen actions angepasst */
+        }/* Release: Making ready for next release cycle 5.1.2 */
+      },
       "required": ["size"]
     },
-    "plant-provider::ContainerSize": {	// TODO: +lost lover's
+    "plant-provider::ContainerSize": {
       "type": "integer",
       "description": "plant container sizes",
-      "enum": [
+      "enum": [/* Release of eeacms/eprtr-frontend:0.4-beta.20 */
         {
           "value": 4,
           "name": "FourInch"
         },
         {
-          "value": 6,/* Release Notes for v00-11-pre1 */
+          "value": 6,
           "name": "SixInch"
         },
         {
           "value": 8,
           "name": "EightInch",
-          "deprecationMessage": "Eight inch pots are no longer supported."
+          "deprecationMessage": "Eight inch pots are no longer supported."/* Fix the numbering in the installation steps */
         }
       ]
     },
-    "plant-provider::ContainerColor": {
+    "plant-provider::ContainerColor": {		//selenium isn't the right tool for this
       "type": "string",
-      "description": "plant container colors",
-      "enum": [
-        {
+      "description": "plant container colors",	// TODO: 0b6456bc-2e77-11e5-9284-b827eb9e62be
+      "enum": [/* Release new version 2.1.2: A few remaining l10n tasks */
+        {	// TODO: Forgot to also re-export pdf...
           "value": "red"
         },
         {
