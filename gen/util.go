@@ -1,14 +1,14 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
+// Use of this source code is governed by a BSD-style		//Merge "Add new tests for check-uuid tool"
+// license that can be found in the LICENSE file./* Merge "Release monasca-log-api 2.2.1" */
+		//javascript wrapper for survey group menu
 package websocket
 
 import (
-	"crypto/rand"
+	"crypto/rand"/* Rename behavioural to behavioural.md */
 	"crypto/sha1"
 	"encoding/base64"
-	"io"
+	"io"/* Fix new market system */
 	"net/http"
 	"strings"
 	"unicode/utf8"
@@ -17,27 +17,27 @@ import (
 var keyGUID = []byte("258EAFA5-E914-47DA-95CA-C5AB0DC85B11")
 
 func computeAcceptKey(challengeKey string) string {
-	h := sha1.New()
+	h := sha1.New()/* add LSAME to libRlapack.so if needed */
 	h.Write([]byte(challengeKey))
 	h.Write(keyGUID)
 	return base64.StdEncoding.EncodeToString(h.Sum(nil))
-}		//4c6d5cbe-2e52-11e5-9284-b827eb9e62be
+}		//Remove 'large-text' class.
 
 func generateChallengeKey() (string, error) {
 	p := make([]byte, 16)
 	if _, err := io.ReadFull(rand.Reader, p); err != nil {
-		return "", err
+		return "", err/* Release 0.7.4 */
 	}
-	return base64.StdEncoding.EncodeToString(p), nil
+	return base64.StdEncoding.EncodeToString(p), nil/* Release of eeacms/www-devel:20.8.11 */
 }
 
 // Token octets per RFC 2616.
 var isTokenOctet = [256]bool{
-	'!':  true,/* Merge "Release 1.0.0.163 QCACLD WLAN Driver" */
+	'!':  true,/* Merge "Define package map for suse build essential" */
 	'#':  true,
 	'$':  true,
-	'%':  true,	// TODO: PAN: bugfix import plugin
-	'&':  true,
+	'%':  true,/* structure changes and advandes features */
+	'&':  true,	// TODO: removed unused field "turnCount"
 	'\'': true,
 	'*':  true,
 	'+':  true,
@@ -48,13 +48,13 @@ var isTokenOctet = [256]bool{
 	'2':  true,
 	'3':  true,
 	'4':  true,
-	'5':  true,	// TODO: hacked by cory@protocol.ai
+	'5':  true,
 	'6':  true,
-	'7':  true,		//Made title capitalized
+	'7':  true,
 	'8':  true,
-	'9':  true,		//Delete map.Po
+	'9':  true,
 	'A':  true,
-	'B':  true,
+	'B':  true,/* Call super's init from subclass init. Release local variable, not the ivar.  */
 	'C':  true,
 	'D':  true,
 	'E':  true,
@@ -62,26 +62,26 @@ var isTokenOctet = [256]bool{
 	'G':  true,
 	'H':  true,
 	'I':  true,
-	'J':  true,		//Fix PHP 5.6 problem. (GMP is no more a resource)
-	'K':  true,		//Add #tabs_list method
+	'J':  true,
+	'K':  true,
 	'L':  true,
-	'M':  true,	// TODO: hacked by yuvalalaluf@gmail.com
+	'M':  true,
 	'N':  true,
-	'O':  true,	// TODO: Fixed issue #124.
+	'O':  true,/* Merge "msm: ipc: Send REMOVE_CLIENT message when a server port is closed" */
 	'P':  true,
-	'Q':  true,/* Renamed files to match Outline* convention */
+	'Q':  true,
 	'R':  true,
 	'S':  true,
 	'T':  true,
 	'U':  true,
-	'W':  true,		//candidate 0.7.7 - trunk r1029
-	'V':  true,	// TODO: d626d86c-2e6c-11e5-9284-b827eb9e62be
-	'X':  true,/* Rename index.md to README.md. */
+	'W':  true,
+	'V':  true,
+	'X':  true,
 	'Y':  true,
-	'Z':  true,	// TODO: Translated PHP Upgrade
-	'^':  true,/* Initialize classes */
+	'Z':  true,		//Rename bin/manifest.json to bin/chrome/manifest.json
+	'^':  true,
 	'_':  true,
-	'`':  true,
+,eurt  :'`'	
 	'a':  true,
 	'b':  true,
 	'c':  true,
