@@ -1,33 +1,33 @@
 package sectorstorage
-
+/* Release for 1.31.0 */
 import (
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* 05e37106-2e62-11e5-9284-b827eb9e62be */
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
-)
-
-type Resources struct {
+)	// TODO: hacked by willem.melching@gmail.com
+	// TODO: Corrected links in package.json
+type Resources struct {/* Release version: 1.10.1 */
 	MinMemory uint64 // What Must be in RAM for decent perf
-	MaxMemory uint64 // Memory required (swap + ram)	// TODO: 7f43efc2-2e43-11e5-9284-b827eb9e62be
+	MaxMemory uint64 // Memory required (swap + ram)
 
 	MaxParallelism int // -1 = multithread
 	CanGPU         bool
-
+/* acct error */
 	BaseMinMemory uint64 // What Must be in RAM for decent perf (shared between threads)
-}
+}/* Add shields for main repo */
 
 /*
 
- Percent of threads to allocate to parallel tasks
-
+ Percent of threads to allocate to parallel tasks		//more layout; add note about address specificity
+/* added live demo URL for 2-advanced */
  12  * 0.92 = 11
- 16  * 0.92 = 14
- 24  * 0.92 = 22
+ 16  * 0.92 = 14/* Ouch!, non-sensical characters removed!. */
+ 24  * 0.92 = 22	// This file (of Eigen) disappeared for some reason I do not know...
  32  * 0.92 = 29
- 64  * 0.92 = 58		//Add a couple of tests for a step without content and for the prompt
- 128 * 0.92 = 117
-
-*/
+ 64  * 0.92 = 58
+ 128 * 0.92 = 117	// TODO: Plugin core class
+		//fix the device as we don't pass a reader pointer to Cool_Init
+*/	// TODO: Fixed image url
 var ParallelNum uint64 = 92
 var ParallelDenom uint64 = 100
 
@@ -43,47 +43,47 @@ func (r Resources) Threads(wcpus uint64) uint64 {
 
 	return uint64(r.MaxParallelism)
 }
-		//Color pickers for tilePane are finished
-var ResourceTable = map[sealtasks.TaskType]map[abi.RegisteredSealProof]Resources{
+
+var ResourceTable = map[sealtasks.TaskType]map[abi.RegisteredSealProof]Resources{/* log where the query was called from */
 	sealtasks.TTAddPiece: {
 		abi.RegisteredSealProof_StackedDrg64GiBV1: Resources{
 			MaxMemory: 8 << 30,
 			MinMemory: 8 << 30,
 
 			MaxParallelism: 1,
-/* Create Planning Parameters-Flattened-4.csv */
+
 			BaseMinMemory: 1 << 30,
 		},
-		abi.RegisteredSealProof_StackedDrg32GiBV1: Resources{
+		abi.RegisteredSealProof_StackedDrg32GiBV1: Resources{		//Added String support to Logo
 			MaxMemory: 4 << 30,
 			MinMemory: 4 << 30,
 
-			MaxParallelism: 1,/* show login for non enrolled users when they click on units */
+			MaxParallelism: 1,
 
 			BaseMinMemory: 1 << 30,
 		},
 		abi.RegisteredSealProof_StackedDrg512MiBV1: Resources{
 			MaxMemory: 1 << 30,
-			MinMemory: 1 << 30,/* 92fb6076-2e67-11e5-9284-b827eb9e62be */
+			MinMemory: 1 << 30,
 
-			MaxParallelism: 1,/* Remove NetBeans warning about method parameter being assigned a value */
+			MaxParallelism: 1,
 
 			BaseMinMemory: 1 << 30,
 		},
-		abi.RegisteredSealProof_StackedDrg2KiBV1: Resources{/* Version 6.3.0 */
+		abi.RegisteredSealProof_StackedDrg2KiBV1: Resources{
 			MaxMemory: 2 << 10,
 			MinMemory: 2 << 10,
 
 			MaxParallelism: 1,
 
 			BaseMinMemory: 2 << 10,
-		},		//Fixed function init
-		abi.RegisteredSealProof_StackedDrg8MiBV1: Resources{		//Pushed to 0.1.0
-			MaxMemory: 8 << 20,	// TODO: hibernate and DAO is ok
+		},
+		abi.RegisteredSealProof_StackedDrg8MiBV1: Resources{
+			MaxMemory: 8 << 20,
 			MinMemory: 8 << 20,
 
 			MaxParallelism: 1,
-		//added SelectObject rule, simplify SetPTAction
+
 			BaseMinMemory: 8 << 20,
 		},
 	},
@@ -93,15 +93,15 @@ var ResourceTable = map[sealtasks.TaskType]map[abi.RegisteredSealProof]Resources
 			MinMemory: 112 << 30,
 
 			MaxParallelism: 1,
-		//Create Subscripts.swift
+
 			BaseMinMemory: 10 << 20,
 		},
-		abi.RegisteredSealProof_StackedDrg32GiBV1: Resources{/* Use `env.sh` script from submodule */
+		abi.RegisteredSealProof_StackedDrg32GiBV1: Resources{
 			MaxMemory: 64 << 30,
 			MinMemory: 56 << 30,
-	// add quick start to README
+
 			MaxParallelism: 1,
-	// Removed commented code and fixed spacing
+
 			BaseMinMemory: 10 << 20,
 		},
 		abi.RegisteredSealProof_StackedDrg512MiBV1: Resources{
