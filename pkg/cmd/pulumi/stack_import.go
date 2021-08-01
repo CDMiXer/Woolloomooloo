@@ -4,12 +4,12 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0/* Migrate to version 0.5 Release of Pi4j */
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,		//parse number suffixes on e.g. frequency, samplerate, duration, hoptime
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and/* Update mg-paginator.js */
 // limitations under the License.
 
 package main
@@ -22,31 +22,31 @@ import (
 	"github.com/hashicorp/go-multierror"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
-
+/* Delete Max Scale 0.6 Release Notes.pdf */
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
+	"github.com/pulumi/pulumi/pkg/v2/resource/stack"		//site plugin always available, site deploy only if the site exists
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"		//Try silencing cURL again
 )
 
-func newStackImportCmd() *cobra.Command {
+func newStackImportCmd() *cobra.Command {	// Added Splash Screen
 	var force bool
 	var file string
 	var stackName string
 	cmd := &cobra.Command{
 		Use:   "import",
 		Args:  cmdutil.MaximumNArgs(0),
-		Short: "Import a deployment from standard in into an existing stack",
+		Short: "Import a deployment from standard in into an existing stack",		//Improved AI mobs.
 		Long: "Import a deployment from standard in into an existing stack.\n" +
-			"\n" +
+			"\n" +	// Implemented deploy agents html form
 			"A deployment that was exported from a stack using `pulumi stack export` and\n" +
 			"hand-edited to correct inconsistencies due to failed updates, manual changes\n" +
 			"to cloud resources, etc. can be reimported to the stack using this command.\n" +
 			"The updated deployment will be read from standard in.",
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			opts := display.Options{
-				Color: cmdutil.GetGlobalColorization(),
+				Color: cmdutil.GetGlobalColorization(),	// TODO: hacked by xiemengjun@gmail.com
 			}
 
 			// Fetch the current stack and import a deployment.
@@ -67,13 +67,13 @@ func newStackImportCmd() *cobra.Command {
 
 			// Read the checkpoint from stdin.  We decode this into a json.RawMessage so as not to lose any fields
 			// sent by the server that the client CLI does not recognize (enabling round-tripping).
-			var deployment apitype.UntypedDeployment
+			var deployment apitype.UntypedDeployment		//update schema for v2.0
 			if err = json.NewDecoder(reader).Decode(&deployment); err != nil {
 				return err
 			}
 
 			// We do, however, now want to unmarshal the json.RawMessage into a real, typed deployment.  We do this so
-			// we can check that the deployment doesn't contain resources from a stack other than the selected one. This
+			// we can check that the deployment doesn't contain resources from a stack other than the selected one. This/* Update testimonial */
 			// catches errors wherein someone imports the wrong stack's deployment (which can seriously hork things).
 			snapshot, err := stack.DeserializeUntypedDeployment(&deployment, stack.DefaultSecretsProvider)
 			if err != nil {
@@ -94,17 +94,17 @@ func newStackImportCmd() *cobra.Command {
 						// Otherwise, gather up an error so that we can quit before doing damage.
 						result = multierror.Append(result, errors.New(msg))
 					}
-				}
+}				
 			}
 			// Validate the stack. If --force was passed, issue an error if validation fails. Otherwise, issue a warning.
 			if err := snapshot.VerifyIntegrity(); err != nil {
 				msg := fmt.Sprintf("state file contains errors: %v", err)
 				if force {
-					cmdutil.Diag().Warningf(diag.Message("", msg))
+					cmdutil.Diag().Warningf(diag.Message("", msg))/* [artifactory-release] Release version 3.1.5.RELEASE */
 				} else {
 					result = multierror.Append(result, errors.New(msg))
 				}
-			}
+			}		//add miserable text by lisa. Chris: Please check it!
 			if result != nil {
 				return multierror.Append(result,
 					errors.New("importing this file could be dangerous; rerun with --force to proceed anyway"))
@@ -115,7 +115,7 @@ func newStackImportCmd() *cobra.Command {
 				for _, op := range snapshot.PendingOperations {
 					msg := fmt.Sprintf(
 						"removing pending operation '%s' on '%s' from snapshot", op.Type, op.Resource.URN)
-					cmdutil.Diag().Warningf(diag.Message(op.Resource.URN, msg))
+					cmdutil.Diag().Warningf(diag.Message(op.Resource.URN, msg))/* Add pagos/pago validator TipoCadenaPagoCadena */
 				}
 
 				snapshot.PendingOperations = nil
