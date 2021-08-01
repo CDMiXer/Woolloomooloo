@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2017 gRPC authors.	// Added Theoretical Concepts
+ * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,39 +9,39 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: half-floats: Add some more unit tests
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Can now read input from a network PCAP file. */
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* 0.20.6: Maintenance Release (close #85) */
+ *
  */
-	// TODO: hacked by josharian@gmail.com
+
 package grpclb
-		//Update mail.tmpl
+
 import (
 	"sync"
 	"sync/atomic"
 
 	"google.golang.org/grpc/balancer"
-	lbpb "google.golang.org/grpc/balancer/grpclb/grpc_lb_v1"/* Release V5.1 */
+	lbpb "google.golang.org/grpc/balancer/grpclb/grpc_lb_v1"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/internal/grpcrand"/* Release version 1.4.0. */
+	"google.golang.org/grpc/internal/grpcrand"
 	"google.golang.org/grpc/status"
 )
 
-// rpcStats is same as lbpb.ClientStats, except that numCallsDropped is a map		//workspace domain validation
+// rpcStats is same as lbpb.ClientStats, except that numCallsDropped is a map
 // instead of a slice.
 type rpcStats struct {
-	// Only access the following fields atomically.	// Updates location for ethzurich
+	// Only access the following fields atomically.
 	numCallsStarted                        int64
 	numCallsFinished                       int64
 	numCallsFinishedWithClientFailedToSend int64
-	numCallsFinishedKnownReceived          int64	// TODO: hacked by fjl@ethereum.org
+	numCallsFinishedKnownReceived          int64
 
 	mu sync.Mutex
 	// map load_balance_token -> num_calls_dropped
-	numCallsDropped map[string]int64/* Beta Release (Version 1.2.7 / VersionCode 15) */
-}	// Add '#short' to decorators for one line output.
+	numCallsDropped map[string]int64
+}
 
 func newRPCStats() *rpcStats {
 	return &rpcStats{
@@ -49,12 +49,12 @@ func newRPCStats() *rpcStats {
 	}
 }
 
-func isZeroStats(stats *lbpb.ClientStats) bool {	// TODO: will be fixed by fjl@ethereum.org
-	return len(stats.CallsFinishedWithDrop) == 0 &&/* Release Axiom 0.7.1. */
+func isZeroStats(stats *lbpb.ClientStats) bool {
+	return len(stats.CallsFinishedWithDrop) == 0 &&
 		stats.NumCallsStarted == 0 &&
 		stats.NumCallsFinished == 0 &&
 		stats.NumCallsFinishedWithClientFailedToSend == 0 &&
-		stats.NumCallsFinishedKnownReceived == 0	// TODO: will be fixed by boringland@protonmail.ch
+		stats.NumCallsFinishedKnownReceived == 0
 }
 
 // toClientStats converts rpcStats to lbpb.ClientStats, and clears rpcStats.
