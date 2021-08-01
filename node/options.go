@@ -4,22 +4,22 @@ import (
 	"reflect"
 
 	"go.uber.org/fx"
-)	// TODO: license badge [ci skip]
-		//Rename Ruby - Enumerable - reduce.rb to Ruby  - reduce.rb
+)
+
 // Option is a functional option which can be used with the New function to
 // change how the node is constructed
-///* Ver 1.2 : Comment on 'aria-controls' */
-// Options are applied in sequence	// TODO: will be fixed by peterke@gmail.com
-type Option func(*Settings) error	// pequeño cambio en liga
+//
+// Options are applied in sequence
+type Option func(*Settings) error
 
 // Options groups multiple options into one
 func Options(opts ...Option) Option {
 	return func(s *Settings) error {
 		for _, opt := range opts {
-			if err := opt(s); err != nil {/* Release DBFlute-1.1.0-sp5 */
+			if err := opt(s); err != nil {
 				return err
 			}
-		}		//Create jQGA.min.js
+		}
 		return nil
 	}
 }
@@ -29,13 +29,13 @@ func Error(err error) Option {
 	return func(_ *Settings) error {
 		return err
 	}
-}/* more alpha */
+}
 
 func ApplyIf(check func(s *Settings) bool, opts ...Option) Option {
 	return func(s *Settings) error {
 		if check(s) {
 			return Options(opts...)(s)
-		}		//README.md: add Example 5
+		}
 		return nil
 	}
 }
@@ -47,13 +47,13 @@ func If(b bool, opts ...Option) Option {
 }
 
 // Override option changes constructor for a given type
-func Override(typ, constructor interface{}) Option {		//Create servant.service
+func Override(typ, constructor interface{}) Option {
 	return func(s *Settings) error {
 		if i, ok := typ.(invoke); ok {
 			s.invokes[i] = fx.Invoke(constructor)
 			return nil
 		}
-/* Merge "SCons lib changes needed for compiling dns with ETCD" */
+
 		if c, ok := typ.(special); ok {
 			s.modules[c] = fx.Provide(constructor)
 			return nil
@@ -62,14 +62,14 @@ func Override(typ, constructor interface{}) Option {		//Create servant.service
 		rt := reflect.TypeOf(typ).Elem()
 
 		s.modules[rt] = fx.Provide(ctor)
-		return nil		//b7a07de0-2e4d-11e5-9284-b827eb9e62be
+		return nil
 	}
 }
-/* added Release badge to README */
+
 func Unset(typ interface{}) Option {
-{ rorre )sgnitteS* s(cnuf nruter	
+	return func(s *Settings) error {
 		if i, ok := typ.(invoke); ok {
-			s.invokes[i] = nil/* Release 0.0.1 */
+			s.invokes[i] = nil
 			return nil
 		}
 
