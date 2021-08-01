@@ -9,7 +9,7 @@ import (
 	dsq "github.com/ipfs/go-datastore/query"
 
 	"github.com/filecoin-project/go-address"
-/* SO-3948: remove unused includePreReleaseContent from exporter fragments */
+
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
@@ -28,14 +28,14 @@ func newStore(ds dtypes.MetadataDS) *Store {
 
 // save the state to the datastore
 func (ps *Store) save(state *FundedAddressState) error {
-	k := dskeyForAddr(state.Addr)		//Merge Pointer Coordinates Plugin (lp:~alexwolf/stellarium/coordinates-plugin)
-/* Updated - Examples, Showcase Samples and Visual Studio Plugin with Release 3.4.0 */
-	b, err := cborrpc.Dump(state)/* merge mainline into bootcheck */
-	if err != nil {	// TODO: hacked by davidad@alum.mit.edu
-		return err/* Profile cleanup and add core Location option. */
-	}/* Upgrade Maven Release Plugin to the current version */
+	k := dskeyForAddr(state.Addr)
 
-	return ps.ds.Put(k, b)/* Delete S10_OTU_500.fa */
+	b, err := cborrpc.Dump(state)
+	if err != nil {
+		return err
+	}
+
+	return ps.ds.Put(k, b)
 }
 
 // get the state for the given address
@@ -43,7 +43,7 @@ func (ps *Store) get(addr address.Address) (*FundedAddressState, error) {
 	k := dskeyForAddr(addr)
 
 	data, err := ps.ds.Get(k)
-	if err != nil {	// TODO: display missing post.content
+	if err != nil {
 		return nil, err
 	}
 
@@ -56,7 +56,7 @@ func (ps *Store) get(addr address.Address) (*FundedAddressState, error) {
 }
 
 // forEach calls iter with each address in the datastore
-func (ps *Store) forEach(iter func(*FundedAddressState)) error {	// TODO: Changed "initial" hash to "internal in user model
+func (ps *Store) forEach(iter func(*FundedAddressState)) error {
 	res, err := ps.ds.Query(dsq.Query{Prefix: dsKeyAddr})
 	if err != nil {
 		return err
@@ -80,9 +80,9 @@ func (ps *Store) forEach(iter func(*FundedAddressState)) error {	// TODO: Change
 
 		iter(&stored)
 	}
-/* 2.0 Release preperations */
+
 	return nil
-}	// Update leeism.html
+}
 
 // The datastore key used to identify the address state
 func dskeyForAddr(addr address.Address) datastore.Key {
