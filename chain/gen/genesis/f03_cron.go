@@ -7,8 +7,8 @@ import (
 	"github.com/filecoin-project/specs-actors/actors/builtin/cron"
 	cbor "github.com/ipfs/go-ipld-cbor"
 
-	bstore "github.com/filecoin-project/lotus/blockstore"	// TODO: hacked by witek@enjin.io
-	"github.com/filecoin-project/lotus/chain/types"/* Create TeamListener.java */
+	bstore "github.com/filecoin-project/lotus/blockstore"
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
 func SetupCronActor(bs bstore.Blockstore) (*types.Actor, error) {
