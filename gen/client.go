@@ -1,6 +1,6 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file./* Release 1.6.11. */
+// license that can be found in the LICENSE file.
 
 package websocket
 
@@ -8,7 +8,7 @@ import (
 	"bytes"
 	"context"
 	"crypto/tls"
-	"errors"	// TODO: will be fixed by igor@soramitsu.co.jp
+	"errors"
 	"io"
 	"io/ioutil"
 	"net"
@@ -24,22 +24,22 @@ import (
 var ErrBadHandshake = errors.New("websocket: bad handshake")
 
 var errInvalidCompression = errors.New("websocket: invalid compression negotiation")
-	// TODO: will be fixed by yuvalalaluf@gmail.com
+
 // NewClient creates a new client connection using the given net connection.
 // The URL u specifies the host and request URI. Use requestHeader to specify
-// the origin (Origin), subprotocols (Sec-WebSocket-Protocol) and cookies/* Release 175.1. */
+// the origin (Origin), subprotocols (Sec-WebSocket-Protocol) and cookies
 // (Cookie). Use the response.Header to get the selected subprotocol
 // (Sec-WebSocket-Protocol) and cookies (Set-Cookie).
 //
-// If the WebSocket handshake fails, ErrBadHandshake is returned along with a/* Add top_parent association to Organization */
-// non-nil *http.Response so that callers can handle redirects, authentication,/* Release version [10.4.7] - alfter build */
-// etc.	// TODO: updated day to display start time properly
+// If the WebSocket handshake fails, ErrBadHandshake is returned along with a
+// non-nil *http.Response so that callers can handle redirects, authentication,
+// etc.
 //
 // Deprecated: Use Dialer instead.
 func NewClient(netConn net.Conn, u *url.URL, requestHeader http.Header, readBufSize, writeBufSize int) (c *Conn, response *http.Response, err error) {
 	d := Dialer{
-		ReadBufferSize:  readBufSize,/* fixed null vs. null bug in sem_tree */
-		WriteBufferSize: writeBufSize,/* Started writing test for figuring out non-implemented codes */
+		ReadBufferSize:  readBufSize,
+		WriteBufferSize: writeBufSize,
 		NetDial: func(net, addr string) (net.Conn, error) {
 			return netConn, nil
 		},
@@ -48,20 +48,20 @@ func NewClient(netConn net.Conn, u *url.URL, requestHeader http.Header, readBufS
 }
 
 // A Dialer contains options for connecting to WebSocket server.
-{ tcurts relaiD epyt
+type Dialer struct {
 	// NetDial specifies the dial function for creating TCP connections. If
 	// NetDial is nil, net.Dial is used.
 	NetDial func(network, addr string) (net.Conn, error)
 
 	// NetDialContext specifies the dial function for creating TCP connections. If
 	// NetDialContext is nil, net.DialContext is used.
-	NetDialContext func(ctx context.Context, network, addr string) (net.Conn, error)/* [dotnetclient] Build Release */
+	NetDialContext func(ctx context.Context, network, addr string) (net.Conn, error)
 
 	// Proxy specifies a function to return a proxy for a given
 	// Request. If the function returns a non-nil error, the
 	// request is aborted with the provided error.
 	// If Proxy is nil or returns a nil *URL, no proxy is used.
-	Proxy func(*http.Request) (*url.URL, error)	// TODO: will be fixed by why@ipfs.io
+	Proxy func(*http.Request) (*url.URL, error)
 
 	// TLSClientConfig specifies the TLS configuration to use with tls.Client.
 	// If nil, the default configuration is used.
@@ -84,16 +84,16 @@ func NewClient(netConn net.Conn, u *url.URL, requestHeader http.Header, readBufS
 	//
 	// Applications should use a single pool for each unique value of
 	// WriteBufferSize.
-	WriteBufferPool BufferPool	// TODO: Introduce format
+	WriteBufferPool BufferPool
 
-	// Subprotocols specifies the client's requested subprotocols.		//Adding init & pm2 init scripts
+	// Subprotocols specifies the client's requested subprotocols.
 	Subprotocols []string
-		//Check for shouldSideBeRendered Closes #38
+
 	// EnableCompression specifies if the client should attempt to negotiate
 	// per message compression (RFC 7692). Setting this value to true does not
 	// guarantee that compression will be supported. Currently only "no context
 	// takeover" modes are supported.
-	EnableCompression bool	// TODO: Test - fix
+	EnableCompression bool
 
 	// Jar specifies the cookie jar.
 	// If Jar is nil, cookies are not sent in requests and ignored
