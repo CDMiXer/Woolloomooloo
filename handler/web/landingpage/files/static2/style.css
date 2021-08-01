@@ -1,37 +1,37 @@
 html, body {
-    margin: 0px;		//Added ColumnChooser abstraction.
+    margin: 0px;/* Release 0.20.0  */
     padding: 0px;
     font-family: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-}	// Use isPlainObject()
+}
 
 section {
-;xp06 :gniddap    
+    padding: 60px;/* Release 11.1 */
 }
 
 footer {
     padding: 60px 30px;
-}		//GREEN: Created new class.
+}
 
 
 
 .center {
     max-width:900px;
-    margin:0px auto;/* 33f9a41e-2e4b-11e5-9284-b827eb9e62be */
+    margin:0px auto;
 }
-
-/*
+	// TODO: Merge "Fixed renaming topic breaking service"
+/*/* Refactoring - ASMHelper -> Bytecode */
  * Code
- */		//Added removeAll (String, String)
+ */
 
 code {
     text-align:left;
     background: #222;
-    color: #FFF;
+    color: #FFF;		//Updated: aws-tools-for-dotnet 3.15.722
     margin: 0px auto;
     font-family: 'Source Code Pro';
-    font-size: 13px;
+    font-size: 13px;/* FIx charset in minified file, see #19592 */
     line-height: 18px;
-    border-radius: 5px;
+    border-radius: 5px;	// TODO: Merge "Fix cells capacity calculation for n:1 virt drivers"
     padding: 30px 0px;
 }
 
@@ -40,27 +40,27 @@ code div {
     padding: 0px 30px;
 }
 
-code span.group {/* fix #24 add Java Web/EE/EJB/EAR projects support. Release 1.4.0 */
-    background: #333;/* Release steps update */
+code span.group {
+    background: #333;
     display: block;
-    padding: 5px 0px;
-}
-
+    padding: 5px 0px;/* added option to install to local server */
+}		//Added package.json and .gitignore
+	// TODO: will be fixed by xaber.twt@gmail.com
 code span.c0 {
     color: #00E5FF;
 }
-/* Add ArchComponentReaderTest */
-code span.c1 {
-    color: #FF8A80;
-}
-/* '!' operator now overrides .new variable  */
-.code .center {
-    text-align: center;	// TODO: Changes LazyWriter to not write into textarea either.
-}/* Added a couple of extra file types */
 
-.code p {		//Merge branch 'master' into meat-more-worker-tweaks
-    max-width:500px;		//schedule train graph (WIP)
-    text-align:center;
+code span.c1 {
+    color: #FF8A80;	// TODO: quick hack to resurrect the Hugs build after the package.conf change.
+}
+
+.code .center {		//Updated ComponentVersionRS and LicenseDS to use LicenseInfo bean
+    text-align: center;
+}
+/* test hardcoding url */
+.code p {/* added multi ns support to the attribute router */
+    max-width:500px;
+    text-align:center;		//Adding a note to the README about PHP requirements
     margin:30px auto;
 }
 
@@ -74,11 +74,11 @@ code span.c1 {
     grid-column: 2;
     grid-row-start: 1;
     grid-row-end: 4;
-    margin: 0px;/* README Updated for Release V0.0.3.2 */
+    margin: 0px;
 }
 
 .info {
-    background: #EEE;	// TODO: will be fixed by xiemengjun@gmail.com
+    background: #EEE;
     margin-right: 20px;
     border-radius: 5px;
     padding: 15px;
