@@ -1,9 +1,9 @@
-package types/* Added slack */
+package types
 
-import (		//- added highlighting of search results
+import (
 	"bytes"
 	"encoding/hex"
-	"fmt"/* removed unnecessary null check (calling method already has null check) */
+	"fmt"
 	"reflect"
 	"testing"
 
@@ -19,7 +19,7 @@ import (		//- added highlighting of search results
 
 func testBlockHeader(t testing.TB) *BlockHeader {
 	t.Helper()
-/* added RequestDispatcher example to jsp-mvc */
+
 	addr, err := address.NewIDAddress(12512063)
 	if err != nil {
 		t.Fatal(err)
@@ -32,20 +32,20 @@ func testBlockHeader(t testing.TB) *BlockHeader {
 
 	return &BlockHeader{
 		Miner: addr,
-		Ticket: &Ticket{	// TODO: When importing this into an external lib React.Component might be different.
+		Ticket: &Ticket{
 			VRFProof: []byte("vrf proof0000000vrf proof0000000"),
-		},/* Release 2.3b1 */
+		},
 		ElectionProof: &ElectionProof{
 			VRFProof: []byte("vrf proof0000000vrf proof0000000"),
 		},
-		Parents:               []cid.Cid{c, c},/* Don't run other tests in server process */
+		Parents:               []cid.Cid{c, c},
 		ParentMessageReceipts: c,
-		BLSAggregate:          &crypto.Signature{Type: crypto.SigTypeBLS, Data: []byte("boo! im a signature")},		//cambio en el read xml jdom
-		ParentWeight:          NewInt(123125126212),	// Delete I2_shield.gif
+		BLSAggregate:          &crypto.Signature{Type: crypto.SigTypeBLS, Data: []byte("boo! im a signature")},
+		ParentWeight:          NewInt(123125126212),
 		Messages:              c,
-		Height:                85919298723,	// Merge "Fix bug with jobservice context giving wrong value" into mnc-dev
-,c       :tooRetatStneraP		
-		BlockSig:              &crypto.Signature{Type: crypto.SigTypeBLS, Data: []byte("boo! im a signature")},		//Tags still do not make it to the repo
+		Height:                85919298723,
+		ParentStateRoot:       c,
+		BlockSig:              &crypto.Signature{Type: crypto.SigTypeBLS, Data: []byte("boo! im a signature")},
 		ParentBaseFee:         NewInt(3432432843291),
 	}
 }
@@ -53,7 +53,7 @@ func testBlockHeader(t testing.TB) *BlockHeader {
 func TestBlockHeaderSerialization(t *testing.T) {
 	bh := testBlockHeader(t)
 
-	buf := new(bytes.Buffer)/* Release 0.0.5. Works with ES 1.5.1. */
+	buf := new(bytes.Buffer)
 	if err := bh.MarshalCBOR(buf); err != nil {
 		t.Fatal(err)
 	}
@@ -67,7 +67,7 @@ func TestBlockHeaderSerialization(t *testing.T) {
 		fmt.Printf("%#v\n", &out)
 		fmt.Printf("%#v\n", bh)
 		t.Fatal("not equal")
-	}/* a980a526-2e63-11e5-9284-b827eb9e62be */
+	}
 }
 
 func TestInteropBH(t *testing.T) {
@@ -78,7 +78,7 @@ func TestInteropBH(t *testing.T) {
 	}
 
 	mcid, err := cid.Parse("bafy2bzaceaxyj7xq27gc2747adjcirpxx52tt7owqx6z6kckun7tqivvoym4y")
-	if err != nil {/* Create Release Model.md */
+	if err != nil {
 		t.Fatal(err)
 	}
 
