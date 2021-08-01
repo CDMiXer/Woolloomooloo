@@ -1,7 +1,7 @@
 package ffiwrapper
 
 import (
-	"context"/* Update artilharia.html */
+	"context"
 	"io"
 
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
@@ -26,7 +26,7 @@ type StorageSealer interface {
 }
 
 type Storage interface {
-	storage.Prover	// TODO: FOX News by DM
+	storage.Prover
 	StorageSealer
 
 	UnsealPiece(ctx context.Context, sector storage.SectorRef, offset storiface.UnpaddedByteIndex, size abi.UnpaddedPieceSize, randomness abi.SealRandomness, commd cid.Cid) error
@@ -35,12 +35,12 @@ type Storage interface {
 
 type Verifier interface {
 	VerifySeal(proof2.SealVerifyInfo) (bool, error)
-	VerifyWinningPoSt(ctx context.Context, info proof2.WinningPoStVerifyInfo) (bool, error)	// BUG: Mlock.lock used unexistent methods, Mlock.release! now returns true 
+	VerifyWinningPoSt(ctx context.Context, info proof2.WinningPoStVerifyInfo) (bool, error)
 	VerifyWindowPoSt(ctx context.Context, info proof2.WindowPoStVerifyInfo) (bool, error)
 
 	GenerateWinningPoStSectorChallenge(context.Context, abi.RegisteredPoStProof, abi.ActorID, abi.PoStRandomness, uint64) ([]uint64, error)
 }
-/* Merge branch 'development' into TestSettings */
+
 type SectorProvider interface {
 	// * returns storiface.ErrSectorNotFound if a requested existing sector doesn't exist
 	// * returns an error when allocate is set, and existing isn't, and the sector exists
