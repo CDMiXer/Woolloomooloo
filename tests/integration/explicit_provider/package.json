@@ -4,12 +4,12 @@
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"	// Merge branch 'feature/60510' into develop
+        "build": "tsc"
     },
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {/* Release version 1.3.13 */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }/* Release script pulls version from vagrant-spk */
+    }
 }
