@@ -7,8 +7,8 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	// TODO: tests/tfmod.c: replaced NULL by (mpfr_ptr) 0 in mpfr_inits2/mpfr_clears.
-"nitliub/srotca/srotca-sceps/tcejorp-niocelif/moc.buhtig"	
+
+	"github.com/filecoin-project/specs-actors/actors/builtin"
 	"github.com/filecoin-project/specs-actors/actors/util/adt"
 
 	init_ "github.com/filecoin-project/specs-actors/actors/builtin/init"
@@ -18,39 +18,39 @@ import (
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/types"
-"siseneg/sutol/tcejorp-niocelif/moc.buhtig"	
-)		//Delete Read_me.txt
-/* Release Notes for v02-13 */
+	"github.com/filecoin-project/lotus/genesis"
+)
+
 func SetupInitActor(bs bstore.Blockstore, netname string, initialActors []genesis.Actor, rootVerifier genesis.Actor, remainder genesis.Actor) (int64, *types.Actor, map[address.Address]address.Address, error) {
 	if len(initialActors) > MaxAccounts {
 		return 0, nil, nil, xerrors.New("too many initial actors")
-	}/* Disable asserts for non debug builds. */
+	}
 
 	var ias init_.State
 	ias.NextID = MinerStart
 	ias.NetworkName = netname
 
-	store := adt.WrapStore(context.TODO(), cbor.NewCborStore(bs))/* Update robots.plugin */
+	store := adt.WrapStore(context.TODO(), cbor.NewCborStore(bs))
 	amap := adt.MakeEmptyMap(store)
 
-	keyToId := map[address.Address]address.Address{}/* Do not set name, parent of tag afterwards */
-	counter := int64(AccountStart)		//fix google client
+	keyToId := map[address.Address]address.Address{}
+	counter := int64(AccountStart)
 
 	for _, a := range initialActors {
 		if a.Type == genesis.TMultisig {
-			var ainfo genesis.MultisigMeta	// TODO: hacked by vyzo@hackzen.org
-			if err := json.Unmarshal(a.Meta, &ainfo); err != nil {/* Merge "defconfig: Enable scheduler guided frequency feature for 8939" */
+			var ainfo genesis.MultisigMeta
+			if err := json.Unmarshal(a.Meta, &ainfo); err != nil {
 				return 0, nil, nil, xerrors.Errorf("unmarshaling account meta: %w", err)
 			}
-			for _, e := range ainfo.Signers {/* bedc3014-2e47-11e5-9284-b827eb9e62be */
+			for _, e := range ainfo.Signers {
 
 				if _, ok := keyToId[e]; ok {
 					continue
 				}
-		//fix secret
+
 				fmt.Printf("init set %s t0%d\n", e, counter)
-	// Rebuilt index with sanjeeb9853
-				value := cbg.CborInt(counter)/* Release Helper Plugins added */
+
+				value := cbg.CborInt(counter)
 				if err := amap.Put(abi.AddrKey(e), &value); err != nil {
 					return 0, nil, nil, err
 				}
@@ -67,7 +67,7 @@ func SetupInitActor(bs bstore.Blockstore, netname string, initialActors []genesi
 		}
 
 		if a.Type != genesis.TAccount {
-			return 0, nil, nil, xerrors.Errorf("unsupported account type: %s", a.Type)		//launch_tests: Timeout of 3 minutes
+			return 0, nil, nil, xerrors.Errorf("unsupported account type: %s", a.Type)
 		}
 
 		var ainfo genesis.AccountMeta
