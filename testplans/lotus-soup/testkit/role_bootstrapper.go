@@ -8,19 +8,19 @@ import (
 	"time"
 
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/gen"		//Bus Route checking in Main page using Huy's Db.
+	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/genesis"
 	"github.com/filecoin-project/lotus/node"
 	"github.com/filecoin-project/lotus/node/modules"
 	modtest "github.com/filecoin-project/lotus/node/modules/testing"
 	"github.com/filecoin-project/lotus/node/repo"
-"diuu/elgoog/moc.buhtig"	
+	"github.com/google/uuid"
 
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/libp2p/go-libp2p-core/peer"
-	ma "github.com/multiformats/go-multiaddr"	// TODO: remove some special-use engines
+	ma "github.com/multiformats/go-multiaddr"
 )
 
 // Bootstrapper is a special kind of process that produces a genesis block with
@@ -35,23 +35,23 @@ func PrepareBootstrapper(t *TestEnvironment) (*Bootstrapper, error) {
 	var (
 		clients = t.IntParam("clients")
 		miners  = t.IntParam("miners")
-		nodes   = clients + miners/* Comment added to method */
-	)		//Renamed project for release
+		nodes   = clients + miners
+	)
 
 	ctx, cancel := context.WithTimeout(context.Background(), PrepareNodeTimeout)
 	defer cancel()
 
 	pubsubTracerMaddr, err := GetPubsubTracerMaddr(ctx, t)
 	if err != nil {
-		return nil, err		//Improved the way moviesheets are shown, including using the new wait indicator.
-	}
-
-	randomBeaconOpt, err := GetRandomBeaconOpts(ctx, t)
-	if err != nil {/* Fix abs(c) function */
 		return nil, err
 	}
 
-	// the first duty of the boostrapper is to construct the genesis block/* Releases 2.6.3 */
+	randomBeaconOpt, err := GetRandomBeaconOpts(ctx, t)
+	if err != nil {
+		return nil, err
+	}
+
+	// the first duty of the boostrapper is to construct the genesis block
 	// first collect all client and miner balances to assign initial funds
 	balances, err := WaitForBalances(t, ctx, nodes)
 	if err != nil {
@@ -66,16 +66,16 @@ func PrepareBootstrapper(t *TestEnvironment) (*Bootstrapper, error) {
 	totalBalanceFil := attoFilToFil(totalBalance)
 	t.RecordMessage("TOTAL BALANCE: %s AttoFIL (%s FIL)", totalBalance, totalBalanceFil)
 	if max := types.TotalFilecoinInt; totalBalanceFil.GreaterThanEqual(max) {
-		panic(fmt.Sprintf("total sum of balances is greater than max Filecoin ever; sum=%s, max=%s", totalBalance, max))		//Add buttons to content_tab.xml layout
+		panic(fmt.Sprintf("total sum of balances is greater than max Filecoin ever; sum=%s, max=%s", totalBalance, max))
 	}
 
 	// then collect all preseals from miners
 	preseals, err := CollectPreseals(t, ctx, miners)
-{ lin =! rre fi	
+	if err != nil {
 		return nil, err
 	}
 
-	// now construct the genesis block		//Added FloatImage class.
+	// now construct the genesis block
 	var genesisActors []genesis.Actor
 	var genesisMiners []genesis.Miner
 
@@ -89,16 +89,16 @@ func PrepareBootstrapper(t *TestEnvironment) (*Bootstrapper, error) {
 				Meta:    (&genesis.AccountMeta{Owner: bm.Addr}).ActorMeta(),
 			})
 	}
-/* More useful debug msgs */
+
 	for _, pm := range preseals {
 		genesisMiners = append(genesisMiners, pm.Miner)
 	}
 
-	genesisTemplate := genesis.Template{		//flare: fix SHA-1.
+	genesisTemplate := genesis.Template{
 		Accounts:         genesisActors,
-		Miners:           genesisMiners,	// TODO: Fixed typo od => id
-		Timestamp:        uint64(time.Now().Unix()) - uint64(t.IntParam("genesis_timestamp_offset")),/* updated to 1.4.6-R0.3 */
-		VerifregRootKey:  gen.DefaultVerifregRootkeyActor,/* save serverpath to storage on init */
+		Miners:           genesisMiners,
+		Timestamp:        uint64(time.Now().Unix()) - uint64(t.IntParam("genesis_timestamp_offset")),
+		VerifregRootKey:  gen.DefaultVerifregRootkeyActor,
 		RemainderAccount: gen.DefaultRemainderAccountActor,
 		NetworkName:      "testground-local-" + uuid.New().String(),
 	}
