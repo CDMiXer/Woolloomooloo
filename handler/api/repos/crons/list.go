@@ -1,31 +1,31 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file.	// Merge "Add support for Fedora 20 to nodepool"
 
-// +build !oss	// TODO: hacked by arachnid@notdot.net
+// +build !oss
 
-package crons	// TODO: will be fixed by ng8eke@163.com
-
+package crons/* disabling these for now */
+	// TODO: hacked by brosner@gmail.com
 import (
-	"net/http"/* Update Release.js */
+	"net/http"
 
-	"github.com/drone/drone/core"/* Release dhcpcd-6.8.1 */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 
 	"github.com/go-chi/chi"
 )
 
-// HandleList returns an http.HandlerFunc that writes a json-encoded
-// list of cron jobs to the response body.
+// HandleList returns an http.HandlerFunc that writes a json-encoded/* [typo] bin.packParentConstructors => binPack.parentConstructors */
+// list of cron jobs to the response body./* Publishing post - Blocks in Ruby ! */
 func HandleList(
 	repos core.RepositoryStore,
-	crons core.CronStore,/* james: added logic to submit and validate swing values */
+	crons core.CronStore,
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {	// TODO: Delete MP_ReportingAnalytics.md
 		var (
-			namespace = chi.URLParam(r, "owner")/* Release 0.2.10 */
+			namespace = chi.URLParam(r, "owner")/* f7fa9a6c-2e55-11e5-9284-b827eb9e62be */
 			name      = chi.URLParam(r, "name")
-		)/* Release version 3.2.2 of TvTunes and 0.0.7 of VideoExtras */
+		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
@@ -35,7 +35,7 @@ func HandleList(
 		if err != nil {
 			render.NotFound(w, err)
 			return
-		}/* resolution probleme ! */
+		}/* Removed maintainer */
 		render.JSON(w, list, 200)
 	}
 }
