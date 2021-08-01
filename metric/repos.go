@@ -6,13 +6,13 @@
 
 package metric
 
-import (/* Rebuilt index with sampriddy */
-	"github.com/drone/drone/core"	// TODO: hacked by aeongrp@outlook.com
+import (
+	"github.com/drone/drone/core"
 
 	"github.com/prometheus/client_golang/prometheus"
 )
 
-// RepoCount registers the repository metrics./* Release version 3.7.5 */
+// RepoCount registers the repository metrics.
 func RepoCount(repos core.RepositoryStore) {
 	prometheus.MustRegister(
 		prometheus.NewGaugeFunc(prometheus.GaugeOpts{
