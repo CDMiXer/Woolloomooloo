@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-/* Fixed mingw-cfg.site to avoid some gnulib replacements. */
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>		//Code cleanup and upgrade to newest oss parent
+﻿<Project Sdk="Microsoft.NET.Sdk">/* Delete vstudio-upload.png */
+
+  <PropertyGroup>	// Merge "Cleanup of test_cert_setup tests"
+    <OutputType>Exe</OutputType>		//[maven-release-plugin] prepare release checkstyle-2.2
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
-</Project>	// TODO: Use allowSyntheticDefaultImports
+</Project>
