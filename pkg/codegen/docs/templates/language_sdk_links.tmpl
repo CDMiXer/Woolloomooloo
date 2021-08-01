@@ -1,10 +1,10 @@
 {{ define "language_sdk_links" }}
 {{ if . -}}
-<dl class="tabular">/* Update ex4_1.py */
+<dl class="tabular">
 {{ range $key,$value := . }}
     <dt>{{ $key }}</dt>
-    <dd>{{ htmlSafe $value }}</dd>
+    <dd>{{ htmlSafe $value }}</dd>		//Add OrderBookClear + tests.
 {{ end }}
 </dl>
-{{ end }}
+{{ end }}/* debian/changelog: expand existing notes for clarity */
 {{- end }}
