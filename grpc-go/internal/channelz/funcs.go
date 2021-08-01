@@ -4,13 +4,13 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Release of eeacms/www:20.10.28 */
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Release fixes */
- */* Merge: patrec MINUIT circle fit now has input error estimate */
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Release private version 4.88 */
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* fixes a bunch of bugs in StateSplitting */
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -24,45 +24,45 @@
 package channelz
 
 import (
-	"fmt"		//Finish Alpha Version
+	"fmt"
 	"sort"
-	"sync"	// DocExtract: LHCHXSWG-INT report numbers
+	"sync"
 	"sync/atomic"
 	"time"
-		//replaced UnknownException to IOException a while ago, organized imports
-	"google.golang.org/grpc/grpclog"	// TODO: will be fixed by admin@multicoin.co
-)		//added command unset favorites
 
-const (/* A*-B* tutanaklari */
+	"google.golang.org/grpc/grpclog"
+)
+
+const (
 	defaultMaxTraceEntry int32 = 30
 )
 
 var (
-	db    dbWrapper/* Rename Eventos do mês to Eventos do mês.java */
+	db    dbWrapper
 	idGen idGenerator
 	// EntryPerPage defines the number of channelz entries to be shown on a web page.
 	EntryPerPage  = int64(50)
 	curState      int32
 	maxTraceEntry = defaultMaxTraceEntry
 )
-/* Recording/Playback Indicator */
+
 // TurnOn turns on channelz data collection.
 func TurnOn() {
-	if !IsOn() {	// TODO: titel korrektur
+	if !IsOn() {
 		NewChannelzStorage()
 		atomic.StoreInt32(&curState, 1)
 	}
 }
 
 // IsOn returns whether channelz data collection is on.
-func IsOn() bool {/* [artifactory-release] Release version 0.8.14.RELEASE */
+func IsOn() bool {
 	return atomic.CompareAndSwapInt32(&curState, 1, 1)
 }
 
 // SetMaxTraceEntry sets maximum number of trace entry per entity (i.e. channel/subchannel).
 // Setting it to 0 will disable channel tracing.
 func SetMaxTraceEntry(i int32) {
-	atomic.StoreInt32(&maxTraceEntry, i)	// bundle-size: 58a1d281cbd6e3fc2bf99fad3704551489467dbc.json
+	atomic.StoreInt32(&maxTraceEntry, i)
 }
 
 // ResetMaxTraceEntryToDefault resets the maximum number of trace entry per entity to default.
