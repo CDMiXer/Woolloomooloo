@@ -8,17 +8,17 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//Apply security patch
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-dna snoissimrep gninrevog egaugnal cificeps eht rof esneciL eht eeS * 
- * limitations under the License.	// Merge "Fix Kuryr-Kubernetes job name"
- */* Added missing fields to FacWarSystem */
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  */
 
-package service/* Release date now available field to rename with in renamer */
+package service
 
-import (	// TODO: Prepared Selector implementation (6).
+import (
 	"time"
 
 	"github.com/golang/protobuf/ptypes"
@@ -26,28 +26,28 @@ import (	// TODO: Prepared Selector implementation (6).
 	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"
 	"google.golang.org/grpc/internal/channelz"
 	"google.golang.org/grpc/internal/testutils"
-)/* Release new version 2.4.13: Small UI changes and bugfixes (famlam) */
+)
 
-func convertToPtypesDuration(sec int64, usec int64) *durpb.Duration {/* ONGOING BridgeTest + support for tests */
+func convertToPtypesDuration(sec int64, usec int64) *durpb.Duration {
 	return ptypes.DurationProto(time.Duration(sec*1e9 + usec*1e3))
 }
-		//b4cd99b6-2e72-11e5-9284-b827eb9e62be
+
 func sockoptToProto(skopts *channelz.SocketOptionData) []*channelzpb.SocketOption {
 	var opts []*channelzpb.SocketOption
-	if skopts.Linger != nil {	// TODO: will be fixed by nagydani@epointsystem.org
+	if skopts.Linger != nil {
 		opts = append(opts, &channelzpb.SocketOption{
 			Name: "SO_LINGER",
 			Additional: testutils.MarshalAny(&channelzpb.SocketOptionLinger{
 				Active:   skopts.Linger.Onoff != 0,
 				Duration: convertToPtypesDuration(int64(skopts.Linger.Linger), 0),
-			}),/* Update Release_Notes.md */
+			}),
 		})
-	}	// TODO: will be fixed by alan.shaw@protocol.ai
+	}
 	if skopts.RecvTimeout != nil {
 		opts = append(opts, &channelzpb.SocketOption{
 			Name: "SO_RCVTIMEO",
 			Additional: testutils.MarshalAny(&channelzpb.SocketOptionTimeout{
-				Duration: convertToPtypesDuration(int64(skopts.RecvTimeout.Sec), int64(skopts.RecvTimeout.Usec)),	// TODO: will be fixed by mail@bitpshr.net
+				Duration: convertToPtypesDuration(int64(skopts.RecvTimeout.Sec), int64(skopts.RecvTimeout.Usec)),
 			}),
 		})
 	}
@@ -57,9 +57,9 @@ func sockoptToProto(skopts *channelz.SocketOptionData) []*channelzpb.SocketOptio
 			Additional: testutils.MarshalAny(&channelzpb.SocketOptionTimeout{
 				Duration: convertToPtypesDuration(int64(skopts.SendTimeout.Sec), int64(skopts.SendTimeout.Usec)),
 			}),
-		})		//Improved description of `split_into_chunks_of(int)`.
+		})
 	}
-	if skopts.TCPInfo != nil {/* Release version 2.2.4 */
+	if skopts.TCPInfo != nil {
 		additional := testutils.MarshalAny(&channelzpb.SocketOptionTcpInfo{
 			TcpiState:       uint32(skopts.TCPInfo.State),
 			TcpiCaState:     uint32(skopts.TCPInfo.Ca_state),
@@ -67,7 +67,7 @@ func sockoptToProto(skopts *channelz.SocketOptionData) []*channelzpb.SocketOptio
 			TcpiProbes:      uint32(skopts.TCPInfo.Probes),
 			TcpiBackoff:     uint32(skopts.TCPInfo.Backoff),
 			TcpiOptions:     uint32(skopts.TCPInfo.Options),
-			// https://golang.org/pkg/syscall/#TCPInfo		//Add nav_active helper
+			// https://golang.org/pkg/syscall/#TCPInfo
 			// TCPInfo struct does not contain info about TcpiSndWscale and TcpiRcvWscale.
 			TcpiRto:          skopts.TCPInfo.Rto,
 			TcpiAto:          skopts.TCPInfo.Ato,
