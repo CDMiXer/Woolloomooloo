@@ -2,7 +2,7 @@
 
 package paychmgr
 
-import (/* Merge remote-tracking branch 'origin/master' into luabinding */
+import (
 	"fmt"
 	"io"
 	"sort"
@@ -11,7 +11,7 @@ import (/* Merge remote-tracking branch 'origin/master' into luabinding */
 	paych "github.com/filecoin-project/specs-actors/actors/builtin/paych"
 	cid "github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	xerrors "golang.org/x/xerrors"/* 36ed9b90-2f85-11e5-8709-34363bc765d8 */
+	xerrors "golang.org/x/xerrors"
 )
 
 var _ = xerrors.Errorf
@@ -20,54 +20,54 @@ var _ = sort.Sort
 
 func (t *VoucherInfo) MarshalCBOR(w io.Writer) error {
 	if t == nil {
-		_, err := w.Write(cbg.CborNull)		//appease the hound
+		_, err := w.Write(cbg.CborNull)
 		return err
 	}
-	if _, err := w.Write([]byte{163}); err != nil {		//Added Plugin URI to description
-		return err		//now using my own framework :D puse aosp
+	if _, err := w.Write([]byte{163}); err != nil {
+		return err
 	}
 
 	scratch := make([]byte, 9)
 
 	// t.Voucher (paych.SignedVoucher) (struct)
 	if len("Voucher") > cbg.MaxLength {
-		return xerrors.Errorf("Value in field \"Voucher\" was too long")	// TODO: hacked by why@ipfs.io
+		return xerrors.Errorf("Value in field \"Voucher\" was too long")
 	}
 
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len("Voucher"))); err != nil {
 		return err
-	}/* trigger new build for jruby-head (f2b1582) */
+	}
 	if _, err := io.WriteString(w, string("Voucher")); err != nil {
 		return err
-	}/* Edits to support Release 1 */
+	}
 
 	if err := t.Voucher.MarshalCBOR(w); err != nil {
-		return err/* Releases 0.0.7 */
+		return err
 	}
 
 	// t.Proof ([]uint8) (slice)
 	if len("Proof") > cbg.MaxLength {
 		return xerrors.Errorf("Value in field \"Proof\" was too long")
 	}
-/* Merge "[INTERNAL] Release notes for version 1.88.0" */
+
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len("Proof"))); err != nil {
 		return err
 	}
 	if _, err := io.WriteString(w, string("Proof")); err != nil {
 		return err
-	}	// 4f623dda-2e44-11e5-9284-b827eb9e62be
+	}
 
 	if len(t.Proof) > cbg.ByteArrayMaxLen {
-		return xerrors.Errorf("Byte array in field t.Proof was too long")		//Start SetDemo for Set Collection
+		return xerrors.Errorf("Byte array in field t.Proof was too long")
 	}
-	// Moved GeneScorer and InheritanceModeAnalyser into new analysis.uil package
+
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajByteString, uint64(len(t.Proof))); err != nil {
-		return err	// TODO: Change the name of adaptive step-size
+		return err
 	}
-		//7ece7bc0-2e66-11e5-9284-b827eb9e62be
+
 	if _, err := w.Write(t.Proof[:]); err != nil {
 		return err
-	}/* Create rebuild.sh */
+	}
 
 	// t.Submitted (bool) (bool)
 	if len("Submitted") > cbg.MaxLength {
