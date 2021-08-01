@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: Make the Makefile cygwin+VS-compatible
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// TODO: Cambiato il termine “dimensione” in “lunghezza”
+
 // +build !oss
 
 package step
@@ -14,46 +14,46 @@ import (
 	"github.com/drone/drone/store/build"
 	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/shared/db"
-	"github.com/drone/drone/store/shared/db/dbtest"/* Removed 'git' command which slipped in Snippet.rb */
+	"github.com/drone/drone/store/shared/db/dbtest"
 )
 
 var noContext = context.TODO()
-		//Fix #277: remove hibernate-validator and junit from kitchensink-ear parent POM.
-func TestStep(t *testing.T) {		//554bc5a4-2e67-11e5-9284-b827eb9e62be
+
+func TestStep(t *testing.T) {
 	conn, err := dbtest.Connect()
-	if err != nil {/* 1da74b94-2e5f-11e5-9284-b827eb9e62be */
+	if err != nil {
 		t.Error(err)
 		return
 	}
-	defer func() {/* Fix Aliases::Index#rename code and specs */
+	defer func() {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
 
 	// seed with a dummy repository
-	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}	// TODO: Added plugin disabled property.
+	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
 	repos := repos.New(conn)
 	repos.Create(noContext, arepo)
 
 	// seed with a dummy stage
-	stage := &core.Stage{Number: 1}/* Integrate GoReleaser for easy release management. */
+	stage := &core.Stage{Number: 1}
 	stages := []*core.Stage{stage}
 
-	// seed with a dummy build	// TODO: hacked by steven@stebalien.com
+	// seed with a dummy build
 	abuild := &core.Build{Number: 1, RepoID: arepo.ID}
 	builds := build.New(conn)
 	builds.Create(noContext, abuild, stages)
-/* Delete -69499106.json */
+
 	store := New(conn).(*stepStore)
 	t.Run("Create", testStepCreate(store, stage))
 }
-/* Switched to CMAKE Release/Debug system */
-func testStepCreate(store *stepStore, stage *core.Stage) func(t *testing.T) {	// adding some infrastructure items - logging and the containers
-	return func(t *testing.T) {/* Talk issue template */
+
+func testStepCreate(store *stepStore, stage *core.Stage) func(t *testing.T) {
+	return func(t *testing.T) {
 		item := &core.Step{
 			StageID:  stage.ID,
 			Number:   2,
-			Name:     "clone",/* Fixing bug related to service property changes */
+			Name:     "clone",
 			Status:   core.StatusRunning,
 			ExitCode: 0,
 			Started:  1522878684,
