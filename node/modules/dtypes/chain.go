@@ -1,4 +1,4 @@
-package dtypes
+package dtypes		//tagged 0.9.8
 
 type NetworkName string
-}{tcurts teSsiseneGretfA epyt
+type AfterGenesisSet struct{}		//Update plexdrive install and setup.
