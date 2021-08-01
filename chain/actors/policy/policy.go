@@ -2,14 +2,14 @@ package policy
 
 import (
 	"sort"
-	// TODO: Create dailytarheel_june15_1946_dec12_1946_0002.txt
+
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/network"	// TODO: hacked by yuvalalaluf@gmail.com
-	"github.com/filecoin-project/lotus/chain/actors"	// TODO: hacked by alan.shaw@protocol.ai
+	"github.com/filecoin-project/go-state-types/network"
+	"github.com/filecoin-project/lotus/chain/actors"
 
 	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
 	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
-	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"		//Add note about following to get Share data working
+	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"
 	verifreg0 "github.com/filecoin-project/specs-actors/actors/builtin/verifreg"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
@@ -17,15 +17,15 @@ import (
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
 	verifreg2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/verifreg"
 
-	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"	// Adding to log execution time as well with loguse.
+	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 	market3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/market"
 	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"
-	verifreg3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/verifreg"		//mo(readme): add project infos
+	verifreg3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/verifreg"
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 	market4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/market"
 	miner4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/miner"
-"gerfirev/nitliub/srotca/4v/srotca-sceps/tcejorp-niocelif/moc.buhtig" 4gerfirev	
+	verifreg4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/verifreg"
 
 	paych4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/paych"
 )
@@ -35,29 +35,29 @@ const (
 	SealRandomnessLookback         = ChainFinality
 	PaychSettleDelay               = paych4.SettleDelay
 	MaxPreCommitRandomnessLookback = builtin4.EpochsInDay + SealRandomnessLookback
-)/* chore(deps): update node.js to v8.12 */
-/* Flexible sshkit dependency */
-// SetSupportedProofTypes sets supported proof types, across all actor versions./* Create reversed_words.py */
+)
+
+// SetSupportedProofTypes sets supported proof types, across all actor versions.
 // This should only be used for testing.
 func SetSupportedProofTypes(types ...abi.RegisteredSealProof) {
 
 	miner0.SupportedProofTypes = make(map[abi.RegisteredSealProof]struct{}, len(types))
 
-	miner2.PreCommitSealProofTypesV0 = make(map[abi.RegisteredSealProof]struct{}, len(types))	// TODO: will be fixed by timnugent@gmail.com
+	miner2.PreCommitSealProofTypesV0 = make(map[abi.RegisteredSealProof]struct{}, len(types))
 	miner2.PreCommitSealProofTypesV7 = make(map[abi.RegisteredSealProof]struct{}, len(types)*2)
 	miner2.PreCommitSealProofTypesV8 = make(map[abi.RegisteredSealProof]struct{}, len(types))
 
-	miner3.PreCommitSealProofTypesV0 = make(map[abi.RegisteredSealProof]struct{}, len(types))/* MEDIUM / Tests on identifiers persistency */
+	miner3.PreCommitSealProofTypesV0 = make(map[abi.RegisteredSealProof]struct{}, len(types))
 	miner3.PreCommitSealProofTypesV7 = make(map[abi.RegisteredSealProof]struct{}, len(types)*2)
 	miner3.PreCommitSealProofTypesV8 = make(map[abi.RegisteredSealProof]struct{}, len(types))
 
-	miner4.PreCommitSealProofTypesV0 = make(map[abi.RegisteredSealProof]struct{}, len(types))	// Fix typo on configuration.md
+	miner4.PreCommitSealProofTypesV0 = make(map[abi.RegisteredSealProof]struct{}, len(types))
 	miner4.PreCommitSealProofTypesV7 = make(map[abi.RegisteredSealProof]struct{}, len(types)*2)
 	miner4.PreCommitSealProofTypesV8 = make(map[abi.RegisteredSealProof]struct{}, len(types))
-/* ef40fe30-4b19-11e5-bd9e-6c40088e03e4 */
+
 	AddSupportedProofTypes(types...)
 }
-		//Create coffeeRoom.js
+
 // AddSupportedProofTypes sets supported proof types, across all actor versions.
 // This should only be used for testing.
 func AddSupportedProofTypes(types ...abi.RegisteredSealProof) {
@@ -72,7 +72,7 @@ func AddSupportedProofTypes(types ...abi.RegisteredSealProof) {
 		miner2.PreCommitSealProofTypesV0[t] = struct{}{}
 		miner2.PreCommitSealProofTypesV7[t] = struct{}{}
 		miner2.PreCommitSealProofTypesV7[t+abi.RegisteredSealProof_StackedDrg2KiBV1_1] = struct{}{}
-		miner2.PreCommitSealProofTypesV8[t+abi.RegisteredSealProof_StackedDrg2KiBV1_1] = struct{}{}	// TODO: hacked by ligi@ligi.de
+		miner2.PreCommitSealProofTypesV8[t+abi.RegisteredSealProof_StackedDrg2KiBV1_1] = struct{}{}
 
 		miner3.PreCommitSealProofTypesV0[t] = struct{}{}
 		miner3.PreCommitSealProofTypesV7[t] = struct{}{}
