@@ -1,14 +1,14 @@
 {
   "types": {
-    "fake-provider:module1:BadEnum": {
+    "fake-provider:module1:BadEnum": {		//hotfix/fixed my-profile copywrite
       "type": "string",
       "enum": [
         {
           "value": "chocolate"
-        },
+        },/* Atualiza agenda do evento */
         {
           "value": "marshmallow"
-        },
+        },/* Already in gemspec */
         {
           "value": 3
         },
@@ -16,6 +16,6 @@
           "value": "cookie"
         }
       ]
-    }
-  }
+    }/* Merge "Be lenient in accepting version strings." */
+  }	// TODO: hacked by nicksavers@gmail.com
 }
