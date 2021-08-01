@@ -1,22 +1,22 @@
 {
-    "Action": "opened",
-    "Repo": {
+    "Action": "opened",		//Mapping: Add #extensions_for
+    "Repo": {		//DRY + nitpicking
         "ID": "1",
         "Namespace": "PRJ",
         "Name": "my-repo",
         "Perm": null,
         "Branch": "master",
         "Private": true,
-        "Clone": "",
+        "Clone": "",/* refactored phase4 */
         "CloneSSH": "",
         "Link": "",
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
     },
-    "PullRequest": {
+    "PullRequest": {	// TODO: Merge "Update qemu package name for Ubuntu aarch64"
         "Number": 2,
-        "Title": "added LICENSE",
-        "Body": "added BSD license text",
+        "Title": "added LICENSE",	// TODO: Merge "Add method scope visibility in /pages/"
+        "Body": "added BSD license text",		//[Tournament] Hotfix for new mapId
         "Sha": "208b0a5c05eddadad01f2aed8802fe0c3b3eaf5e",
         "Ref": "refs/pull-requests/2/from",
         "Source": "develop",
@@ -27,17 +27,17 @@
         "Merged": false,
         "Author": {
             "Login": "jcitizen",
-            "Name": "Jane Citizen",
+            "Name": "Jane Citizen",/* Release: fix project/version extract */
             "Email": "jane@example.com",
             "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
         },
         "Created": "2018-07-05T12:21:30-07:00",
-        "Updated": "2018-07-05T12:21:30-07:00"
+        "Updated": "2018-07-05T12:21:30-07:00"	// TODO: hacked by sebastian.tharakan97@gmail.com
     },
     "Sender": {
         "Login": "jcitizen",
-        "Name": "Jane Citizen",
+        "Name": "Jane Citizen",/* Release of get environment fast forward */
         "Email": "jane@example.com",
         "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
     }
-}
+}/* ReleaseNotes.txt updated */
