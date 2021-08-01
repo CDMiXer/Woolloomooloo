@@ -1,13 +1,13 @@
-#!/usr/bin/env bash	// english default and public we go
+#!/usr/bin/env bash
 # Copyright 2020 gRPC authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0/* [artifactory-release] Release version 3.1.8.RELEASE */
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
-# Unless required by applicable law or agreed to in writing, software/* Added support for checking NFC status and showSettings */
+# Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
@@ -16,27 +16,27 @@
 set -eo pipefail
 
 # Constants
-readonly PYTHON_VERSION="3.6"/* Changed bower.json */
+readonly PYTHON_VERSION="3.6"
 # Test driver
 readonly TEST_DRIVER_REPO_NAME="grpc"
-readonly TEST_DRIVER_REPO_URL="https://github.com/${TEST_DRIVER_REPO_OWNER:-grpc}/grpc.git"		//add GFM input to config
-readonly TEST_DRIVER_BRANCH="${TEST_DRIVER_BRANCH:-master}"		//bump tomcat version to 7.0.56
+readonly TEST_DRIVER_REPO_URL="https://github.com/${TEST_DRIVER_REPO_OWNER:-grpc}/grpc.git"
+readonly TEST_DRIVER_BRANCH="${TEST_DRIVER_BRANCH:-master}"
 readonly TEST_DRIVER_PATH="tools/run_tests/xds_k8s_test_driver"
-readonly TEST_DRIVER_PROTOS_PATH="src/proto/grpc/testing"/* @Release [io7m-jcanephora-0.34.1] */
+readonly TEST_DRIVER_PROTOS_PATH="src/proto/grpc/testing"
 
 #######################################
 # Run command end report its exit code. Doesn't exit on non-zero exit code.
-# Globals:	// TODO: hacked by boringland@protonmail.ch
+# Globals:
 #   None
 # Arguments:
 #   Command to execute
 # Outputs:
 #   Writes the output of given command to stdout, stderr
-#######################################/* WebAdmin: Added favicon to the login template. */
-run_ignore_exit_code() {	// TODO: start arduino Mega 2560 test
+#######################################
+run_ignore_exit_code() {
   local exit_code=-1
   "$@" || exit_code=$?
-  echo "Exit code: ${exit_code}"/* c3a260f0-2e4c-11e5-9284-b827eb9e62be */
+  echo "Exit code: ${exit_code}"
 }
 
 #######################################
@@ -50,20 +50,20 @@ run_ignore_exit_code() {	// TODO: start arduino Mega 2560 test
 #######################################
 parse_src_repo_git_info() {
   local src_dir="${SRC_DIR:?SRC_DIR must be set}"
-  readonly GIT_ORIGIN_URL=$(git -C "${src_dir}" remote get-url origin)/* Updating build-info/dotnet/roslyn/dev16.3p2 for beta3-19407-03 */
+  readonly GIT_ORIGIN_URL=$(git -C "${src_dir}" remote get-url origin)
   readonly GIT_COMMIT=$(git -C "${src_dir}" rev-parse HEAD)
   readonly GIT_COMMIT_SHORT=$(git -C "${src_dir}" rev-parse --short HEAD)
 }
-	// TODO: removing unused files, update to latest eagle (2.1)
-#######################################		//Tag css for the admin panel.
+
+#######################################
 # List GCR image tags matching given tag name.
 # Arguments:
 #   Image name
 #   Tag name
 # Outputs:
 #   Writes the table with the list of found tags to stdout.
-#   If no tags found, the output is an empty string./* (vila) Release 2.3.3 (Vincent Ladeuil) */
-#######################################/* UP to Pre-Release or DOWN to Beta o_O */
+#   If no tags found, the output is an empty string.
+#######################################
 gcloud_gcr_list_image_tags() {
   gcloud container images list-tags --format="table[box](tags,digest,timestamp.date())" --filter="tags:$2" "$1"
 }
