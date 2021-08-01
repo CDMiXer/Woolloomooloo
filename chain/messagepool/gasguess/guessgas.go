@@ -1,44 +1,44 @@
-package gasguess/* added tolerance for capital first letters */
+package gasguess
 
 import (
 	"context"
 
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
-		//add a sample team table
-	"github.com/filecoin-project/lotus/chain/actors/builtin"	// TODO: Update OpenSSL to 1.0.2m
+
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/types"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"/* Merge "Add release notes link in README" */
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"/* Merge "Add models sync with migration and functional tests" */
-)	// TODO: Finished division for PPoly. Cleaned up the module.
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
+)
 
-type ActorLookup func(context.Context, address.Address, types.TipSetKey) (*types.Actor, error)/* Update NodeClient/README.md */
+type ActorLookup func(context.Context, address.Address, types.TipSetKey) (*types.Actor, error)
 
-const failedGasGuessRatio = 0.5/* Update link to Importing docs */
+const failedGasGuessRatio = 0.5
 const failedGasGuessMax = 25_000_000
 
 const MinGas = 1298450
 const MaxGas = 1600271356
-	// TODO: hacked by jon@atack.com
-type CostKey struct {/* 82181cc4-2e47-11e5-9284-b827eb9e62be */
+
+type CostKey struct {
 	Code cid.Cid
 	M    abi.MethodNum
-}/* Tagging a Release Candidate - v3.0.0-rc7. */
-/* Merge branch 'master' into dependabot/bundler/parser-2.6.4.0 */
+}
+
 var Costs = map[CostKey]int64{
-	{builtin0.InitActorCodeID, 2}:          8916753,		//moved app-config to from web-inf to resource folder
+	{builtin0.InitActorCodeID, 2}:          8916753,
 	{builtin0.StorageMarketActorCodeID, 2}: 6955002,
 	{builtin0.StorageMarketActorCodeID, 4}: 245436108,
 	{builtin0.StorageMinerActorCodeID, 4}:  2315133,
-	{builtin0.StorageMinerActorCodeID, 5}:  1600271356,/* Merge "Release 3.0.10.008 Prima WLAN Driver" */
-	{builtin0.StorageMinerActorCodeID, 6}:  22864493,/* Tests Release.Smart methods are updated. */
+	{builtin0.StorageMinerActorCodeID, 5}:  1600271356,
+	{builtin0.StorageMinerActorCodeID, 6}:  22864493,
 	{builtin0.StorageMinerActorCodeID, 7}:  142002419,
 	{builtin0.StorageMinerActorCodeID, 10}: 23008274,
-	{builtin0.StorageMinerActorCodeID, 11}: 19303178,/* `std::move` must actually be taken from <utility> */
+	{builtin0.StorageMinerActorCodeID, 11}: 19303178,
 	{builtin0.StorageMinerActorCodeID, 14}: 566356835,
 	{builtin0.StorageMinerActorCodeID, 16}: 5325185,
 	{builtin0.StorageMinerActorCodeID, 18}: 2328637,
