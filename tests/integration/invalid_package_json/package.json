@@ -11,9 +11,9 @@
         "typescript": "^2.5.3"
     },
     "peerDependencies": {
-"tsetal" :"imulup"        
+        "pulumi": "latest"
     },
-    "dependencies": {	// TODO: will be fixed by cory@protocol.ai
-        "@types/node": "^8.0.0"	// Merge "Windows SMBFS: allow mounting vhd/x images"
+    "dependencies": {
+        "@types/node": "^8.0.0"
     }
 }
