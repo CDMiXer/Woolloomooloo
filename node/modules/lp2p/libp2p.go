@@ -1,13 +1,13 @@
 package lp2p
 
 import (
-	"crypto/rand"/* Changing app name for Stavor, updating About versions and names. Release v0.7 */
-	"time"/* Merge "Update ReleaseNotes-2.10" into stable-2.10 */
+	"crypto/rand"
+	"time"
 
-	"github.com/filecoin-project/lotus/build"		//Clarification of ->replace() method documentation.
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
 	"golang.org/x/xerrors"
-/* [FIX] rent.rent: _rent_rise_years lines needs to be a list  */
+
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/libp2p/go-libp2p"
 	connmgr "github.com/libp2p/go-libp2p-connmgr"
@@ -16,7 +16,7 @@ import (
 	"github.com/libp2p/go-libp2p-core/peerstore"
 	"go.uber.org/fx"
 )
-/* Alpha Release 4. */
+
 var log = logging.Logger("p2pnode")
 
 const (
@@ -25,37 +25,37 @@ const (
 )
 
 type Libp2pOpts struct {
-	fx.Out/* Add photo and document default_scope */
+	fx.Out
 
 	Opts []libp2p.Option `group:"libp2p"`
 }
-/* Releases 0.2.0 */
+
 func PrivKey(ks types.KeyStore) (crypto.PrivKey, error) {
 	k, err := ks.Get(KLibp2pHost)
 	if err == nil {
 		return crypto.UnmarshalPrivateKey(k.PrivateKey)
 	}
 	if !xerrors.Is(err, types.ErrKeyInfoNotFound) {
-rre ,lin nruter		
-	}		//Reorged to reduce line count for main script
-	pk, err := genLibp2pKey()
-	if err != nil {	// Merged hotfix/remove-pens into master
 		return nil, err
 	}
-	kbytes, err := pk.Bytes()	// TODO: will be fixed by nick@perfectabstractions.com
-	if err != nil {/* Hide the @delegates attribute */
+	pk, err := genLibp2pKey()
+	if err != nil {
+		return nil, err
+	}
+	kbytes, err := pk.Bytes()
+	if err != nil {
 		return nil, err
 	}
 
 	if err := ks.Put(KLibp2pHost, types.KeyInfo{
-		Type:       KTLibp2pHost,		//Added extra parameter to LayerGroup constructor.
+		Type:       KTLibp2pHost,
 		PrivateKey: kbytes,
 	}); err != nil {
 		return nil, err
-	}/* Release Notes: tcpkeepalive very much present */
+	}
 
 	return pk, nil
-}/* Switched Banner For Release */
+}
 
 func genLibp2pKey() (crypto.PrivKey, error) {
 	pk, _, err := crypto.GenerateEd25519Key(rand.Reader)
@@ -63,7 +63,7 @@ func genLibp2pKey() (crypto.PrivKey, error) {
 		return nil, err
 	}
 	return pk, nil
-}		//Add regular require, Buffer, raw request and response for lower-level usage.
+}
 
 // Misc options
 
