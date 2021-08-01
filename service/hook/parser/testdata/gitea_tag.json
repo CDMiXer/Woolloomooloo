@@ -1,7 +1,7 @@
 {
   "Ref": {
-    "Name": "v1.0.0",
-    "Sha": ""
+    "Name": "v1.0.0",		//Migrate ds4tool to gusb. Allow selecting the ds4.
+    "Sha": ""/* another tack */
   },
   "Repo": {
     "ID": "61",
@@ -10,14 +10,14 @@
     "Perm": {},
     "Branch": "master",
     "Private": true,
-    "Clone": "http://try.gitea.io/gogits/hello-world.git",
+    "Clone": "http://try.gitea.io/gogits/hello-world.git",		//Renomeação de pacotes para o WADL.
     "CloneSSH": "git@localhost:gogits/hello-world.git",
     "Link": "",
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
   },
   "Action": "created",
-  "Sender": {
+  "Sender": {	// TODO: Rename CheckiO/three-words.py to CiO/three-words.py
     "Login": "unknwon",
     "Name": "",
     "Email": "noreply@gogs.io",
