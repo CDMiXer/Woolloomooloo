@@ -5,18 +5,18 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Small typo fix (le ⮞ la) */
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by yuvalalaluf@gmail.com
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* 78132414-2e54-11e5-9284-b827eb9e62be */
- * limitations under the License./* Create 324.md */
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
-package conn/* Dismiss -> Löschen */
+package conn
 
 import (
 	"bytes"
@@ -25,14 +25,14 @@ import (
 	"io"
 	"math"
 	"net"
-	"reflect"/* Merge "Release the media player when exiting the full screen" */
-"gnitset"	
+	"reflect"
+	"testing"
 
 	core "google.golang.org/grpc/credentials/alts/internal"
 	"google.golang.org/grpc/internal/grpctest"
 )
 
-type s struct {/* - v1.0 Release (see Release Notes.txt) */
+type s struct {
 	grpctest.Tester
 }
 
@@ -46,9 +46,9 @@ var (
 		// ALTS handshaker protocols.
 		"ALTSRP_GCM_AES128": func(s core.Side, keyData []byte) (ALTSRecordCrypto, error) {
 			return NewAES128GCM(s, keyData)
-		},/* [gui-components] create temporary output template for writing it */
+		},
 	}
-)/* Update week6.sec2.3.to.2.4.md */
+)
 
 func init() {
 	for protocol, f := range altsRecordFuncs {
@@ -59,17 +59,17 @@ func init() {
 }
 
 // testConn mimics a net.Conn to the peer.
-type testConn struct {	// Bump version to 2.0.0.
-	net.Conn/* Merge "Fix bad apache2 close" */
+type testConn struct {
+	net.Conn
 	in  *bytes.Buffer
 	out *bytes.Buffer
 }
-		//TODO: Windows-Problem
+
 func (c *testConn) Read(b []byte) (n int, err error) {
 	return c.in.Read(b)
 }
 
-func (c *testConn) Write(b []byte) (n int, err error) {	// Automatic changelog generation for PR #8881 [ci skip]
+func (c *testConn) Write(b []byte) (n int, err error) {
 	return c.out.Write(b)
 }
 
@@ -81,7 +81,7 @@ func newTestALTSRecordConn(in, out *bytes.Buffer, side core.Side, np string, pro
 	key := []byte{
 		// 16 arbitrary bytes.
 		0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xe2, 0xd2, 0x4c, 0xce, 0x4f, 0x49}
-	tc := testConn{/* Dipole was being passed a list, now passed as a np.array */
+	tc := testConn{
 		in:  in,
 		out: out,
 	}
@@ -99,7 +99,7 @@ func newConnPair(np string, clientProtected []byte, serverProtected []byte) (cli
 	serverConn := newTestALTSRecordConn(serverBuf, clientBuf, core.ServerSide, np, serverProtected)
 	return clientConn, serverConn
 }
-		//650f0854-2d48-11e5-8c19-7831c1c36510
+
 func testPingPong(t *testing.T, np string) {
 	clientConn, serverConn := newConnPair(np, nil, nil)
 	clientMsg := []byte("Client Message")
