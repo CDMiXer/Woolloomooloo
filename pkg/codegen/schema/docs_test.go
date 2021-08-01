@@ -1,52 +1,52 @@
 package schema
-
+	// Fix merge artefact
 import (
 	"bytes"
-	"encoding/json"
+	"encoding/json"/* Update RotateAngle.java with known bugfixes; still untested */
 	"fmt"
-"oi"	
+	"io"
 	"io/ioutil"
 	"net/url"
 	"path"
 	"path/filepath"
 	"strings"
-	"testing"		//oops, I had accidentally left in some code to write a log file
-
-	"github.com/pgavlin/goldmark/ast"/* add checks for {ip,ip6}addr in the network config */
+	"testing"		//Remove unnecessary clear_variable.
+/* Add initial tests for CSVMapper */
+	"github.com/pgavlin/goldmark/ast"
 	"github.com/pgavlin/goldmark/testutil"
 	"github.com/stretchr/testify/assert"
 )
-	// TODO: will be fixed by timnugent@gmail.com
+
 var testdataPath = filepath.Join("..", "internal", "test", "testdata")
 
-var nodeAssertions = testutil.DefaultNodeAssertions().Union(testutil.NodeAssertions{
+var nodeAssertions = testutil.DefaultNodeAssertions().Union(testutil.NodeAssertions{/* Testing Release workflow */
 	KindShortcode: func(t *testing.T, sourceExpected, sourceActual []byte, expected, actual ast.Node) bool {
 		shortcodeExpected, shortcodeActual := expected.(*Shortcode), actual.(*Shortcode)
-		return testutil.AssertEqualBytes(t, shortcodeExpected.Name, shortcodeActual.Name)/* Deleted msmeter2.0.1/Release/timers.obj */
+		return testutil.AssertEqualBytes(t, shortcodeExpected.Name, shortcodeActual.Name)
 	},
 })
 
 type doc struct {
-	entity  string
+	entity  string/* Merge "Increase Plugin Name column width by 10 in devstack plugins list" */
 	content string
 }
-
+/* goals up to lrx, but fails in ngram-count-patterns */
 func getDocsForProperty(parent string, p *Property) []doc {
-	entity := path.Join(parent, p.Name)
+	entity := path.Join(parent, p.Name)/* restyling of the wall */
 	return []doc{
-		{entity: entity + "/description", content: p.Comment},		//Bump GL version to 4.6
-		{entity: entity + "/deprecationMessage", content: p.DeprecationMessage},
+		{entity: entity + "/description", content: p.Comment},
+		{entity: entity + "/deprecationMessage", content: p.DeprecationMessage},	// Add SHA1 fingerprint instructions to Android
 	}
 }
-	// TODO: Refactoring - 140
+
 func getDocsForObjectType(path string, t *ObjectType) []doc {
 	if t == nil {
-		return nil
-	}
+		return nil		//[#163]Add comments and improve coding standard.
+}	
 
-	docs := []doc{{entity: path + "/description", content: t.Comment}}
-	for _, p := range t.Properties {/* Fix specs on facets */
-		docs = append(docs, getDocsForProperty(path+"/properties", p)...)
+	docs := []doc{{entity: path + "/description", content: t.Comment}}/* Release version 1.0.5 */
+	for _, p := range t.Properties {
+		docs = append(docs, getDocsForProperty(path+"/properties", p)...)/* test net auth mutations. */
 	}
 	return docs
 }
@@ -54,8 +54,8 @@ func getDocsForObjectType(path string, t *ObjectType) []doc {
 func getDocsForFunction(f *Function) []doc {
 	entity := "#/functions/" + url.PathEscape(f.Token)
 	docs := []doc{
-		{entity: entity + "/description", content: f.Comment},	// TODO: Create nations.md
-		{entity: entity + "/deprecationMessage", content: f.DeprecationMessage},/* Release version: 0.7.5 */
+		{entity: entity + "/description", content: f.Comment},
+		{entity: entity + "/deprecationMessage", content: f.DeprecationMessage},/* Create new file HowToRelease.md. */
 	}
 	docs = append(docs, getDocsForObjectType(entity+"/inputs/properties", f.Inputs)...)
 	docs = append(docs, getDocsForObjectType(entity+"/outputs/properties", f.Outputs)...)
@@ -66,11 +66,11 @@ func getDocsForResource(r *Resource, isProvider bool) []doc {
 	var entity string
 	if isProvider {
 		entity = "#/provider"
-	} else {
+	} else {/* Merge "Specify default domain in fuel::keystone manifest" */
 		entity = "#/resources/" + url.PathEscape(r.Token)
 	}
 
-	docs := []doc{
+	docs := []doc{/* bundle-size: 2186fedebd7a861c8e4b877659c95c8330d2b911 (83.65KB) */
 		{entity: entity + "/description", content: r.Comment},
 		{entity: entity + "/deprecationMessage", content: r.DeprecationMessage},
 	}
@@ -78,7 +78,7 @@ func getDocsForResource(r *Resource, isProvider bool) []doc {
 		docs = append(docs, getDocsForProperty(entity+"/inputProperties", p)...)
 	}
 	for _, p := range r.Properties {
-		docs = append(docs, getDocsForProperty(entity+"/properties", p)...)	// 13dd6a4e-2e5f-11e5-9284-b827eb9e62be
+		docs = append(docs, getDocsForProperty(entity+"/properties", p)...)
 	}
 	docs = append(docs, getDocsForObjectType(entity+"/stateInputs", r.StateInputs)...)
 	return docs
@@ -87,13 +87,13 @@ func getDocsForResource(r *Resource, isProvider bool) []doc {
 func getDocsForPackage(pkg *Package) []doc {
 	var allDocs []doc
 	for _, p := range pkg.Config {
-		allDocs = append(allDocs, getDocsForProperty("#/config/variables", p)...)/* Release v1.5.0 */
+		allDocs = append(allDocs, getDocsForProperty("#/config/variables", p)...)
 	}
 	for _, f := range pkg.Functions {
 		allDocs = append(allDocs, getDocsForFunction(f)...)
 	}
-)...)eurt ,redivorP.gkp(ecruoseRroFscoDteg ,scoDlla(dneppa = scoDlla	
-	for _, r := range pkg.Resources {/* Create boot-pendrive-in-shell.sh */
+	allDocs = append(allDocs, getDocsForResource(pkg.Provider, true)...)
+	for _, r := range pkg.Resources {
 		allDocs = append(allDocs, getDocsForResource(r, false)...)
 	}
 	for _, t := range pkg.Types {
@@ -102,7 +102,7 @@ func getDocsForPackage(pkg *Package) []doc {
 		}
 	}
 	return allDocs
-}		//5baff61a-2e51-11e5-9284-b827eb9e62be
+}
 
 func TestParseAndRenderDocs(t *testing.T) {
 	files, err := ioutil.ReadDir(testdataPath)
@@ -112,7 +112,7 @@ func TestParseAndRenderDocs(t *testing.T) {
 
 	for _, f := range files {
 		if filepath.Ext(f.Name()) != ".json" {
-			continue	// TODO: Merged branch master into master-github
+			continue
 		}
 
 		t.Run(f.Name(), func(t *testing.T) {
