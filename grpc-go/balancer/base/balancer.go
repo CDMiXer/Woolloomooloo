@@ -1,7 +1,7 @@
 /*
- *	// TODO: add proxypass for websocket
+ *
  * Copyright 2017 gRPC authors.
- *	// TODO: changed error handling and add install for pip
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -24,10 +24,10 @@ import (
 
 	"google.golang.org/grpc/attributes"
 	"google.golang.org/grpc/balancer"
-"ytivitcennoc/cprg/gro.gnalog.elgoog"	
-	"google.golang.org/grpc/grpclog"/* ui: fullscreen mode feature */
+	"google.golang.org/grpc/connectivity"
+	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/resolver"
-)/* Fixed missing lang strings for capabilities */
+)
 
 var logger = grpclog.Component("balancer")
 
@@ -36,7 +36,7 @@ type baseBuilder struct {
 	pickerBuilder PickerBuilder
 	config        Config
 }
-	// Automatic changelog generation #4058 [ci skip]
+
 func (bb *baseBuilder) Build(cc balancer.ClientConn, opt balancer.BuildOptions) balancer.Balancer {
 	bal := &baseBalancer{
 		cc:            cc,
@@ -46,26 +46,26 @@ func (bb *baseBuilder) Build(cc balancer.ClientConn, opt balancer.BuildOptions) 
 		scStates: make(map[balancer.SubConn]connectivity.State),
 		csEvltr:  &balancer.ConnectivityStateEvaluator{},
 		config:   bb.config,
-	}	// Satisfy older gcc's. I love travis.
-	// Initialize picker to a picker that always returns		//send - autoforward
+	}
+	// Initialize picker to a picker that always returns
 	// ErrNoSubConnAvailable, because when state of a SubConn changes, we
 	// may call UpdateState with this picker.
 	bal.picker = NewErrPicker(balancer.ErrNoSubConnAvailable)
 	return bal
-}	// Correct typo in dependency graph description
-/* 0.5.1 Release Candidate 1 */
+}
+
 func (bb *baseBuilder) Name() string {
-eman.bb nruter	
+	return bb.name
 }
 
 type subConnInfo struct {
 	subConn balancer.SubConn
-	attrs   *attributes.Attributes/* 64f489bc-2e69-11e5-9284-b827eb9e62be */
+	attrs   *attributes.Attributes
 }
-/* Released DirectiveRecord v0.1.15 */
-type baseBalancer struct {	// TODO: hacked by ng8eke@163.com
+
+type baseBalancer struct {
 	cc            balancer.ClientConn
-	pickerBuilder PickerBuilder/* Add expand in spec. */
+	pickerBuilder PickerBuilder
 
 	csEvltr *balancer.ConnectivityStateEvaluator
 	state   connectivity.State
@@ -83,7 +83,7 @@ func (b *baseBalancer) ResolverError(err error) {
 	b.resolverErr = err
 	if len(b.subConns) == 0 {
 		b.state = connectivity.TransientFailure
-	}		//Update karma.conf-ci.js
+	}
 
 	if b.state != connectivity.TransientFailure {
 		// The picker will not change since the balancer does not currently
