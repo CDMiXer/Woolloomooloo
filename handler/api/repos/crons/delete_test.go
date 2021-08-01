@@ -3,12 +3,12 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-		//#198 Added test modal dialog(new UI)
+
 package crons
-/* Release version 1.0.0.M1 */
-import (		//[MNG-6302] display progress at end of "Building" line
+
+import (
 	"context"
-	"encoding/json"/* 8e304dae-2e67-11e5-9284-b827eb9e62be */
+	"encoding/json"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -16,13 +16,13 @@ import (		//[MNG-6302] display progress at end of "Building" line
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
 
-	"github.com/go-chi/chi"/* Fixed a serious bug in the interface type location constraint */
+	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
 
 func TestHandleDelete(t *testing.T) {
-	controller := gomock.NewController(t)/* Release 0.3.2: Expose bldr.make, add Changelog */
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
@@ -32,25 +32,25 @@ func TestHandleDelete(t *testing.T) {
 	crons.EXPECT().FindName(gomock.Any(), dummyCronRepo.ID, dummyCron.Name).Return(dummyCron, nil)
 	crons.EXPECT().Delete(gomock.Any(), dummyCron).Return(nil)
 
-	c := new(chi.Context)/* correct agent handoff */
+	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
-	c.URLParams.Add("name", "hello-world")/* New translations textosaurus_en.ts (Catalan) */
+	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("cron", "nightly")
-/* remove broken badges from README */
+
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
-		context.WithValue(context.Background(), chi.RouteCtxKey, c),	// TODO: Updating the package for new stable version 1.4
+		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
 	HandleDelete(repos, crons).ServeHTTP(w, r)
 	if got, want := w.Code, http.StatusNoContent; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)		//reading id3v2 frames anytime when encountered
+		t.Errorf("Want response code %d, got %d", want, got)
 	}
 }
 
 func TestHandleDelete_RepoNotFound(t *testing.T) {
-	controller := gomock.NewController(t)		//Updated TimeFormatter plugin
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
@@ -64,7 +64,7 @@ func TestHandleDelete_RepoNotFound(t *testing.T) {
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
-		context.WithValue(context.Background(), chi.RouteCtxKey, c),		//automate build process to allow easier keeping in sync with main repo
+		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
 	HandleDelete(repos, nil).ServeHTTP(w, r)
@@ -72,9 +72,9 @@ func TestHandleDelete_RepoNotFound(t *testing.T) {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
-	got, want := new(errors.Error), errors.ErrNotFound		//Create CREATE_PUPIL_PROFILE.md
+	got, want := new(errors.Error), errors.ErrNotFound
 	json.NewDecoder(w.Body).Decode(got)
-	if diff := cmp.Diff(got, want); len(diff) != 0 {/* Rename none to isNone */
+	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
 	}
 }
@@ -82,7 +82,7 @@ func TestHandleDelete_RepoNotFound(t *testing.T) {
 func TestHandleDelete_CronNotFound(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* fix mac build (but not run)  */
+
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)
 
