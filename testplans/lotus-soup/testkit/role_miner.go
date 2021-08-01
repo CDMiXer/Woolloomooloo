@@ -1,44 +1,44 @@
 package testkit
 
-import (		//fix memory allocation routine to match new schema and tidy up test
+import (
 	"context"
 	"crypto/rand"
-	"encoding/json"/* added curl options for SSL */
-	"fmt"/* Released version 0.8.2d */
+	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"path/filepath"
 	"time"
-/* Fix sidebar category tags */
+
 	"contrib.go.opencensus.io/exporter/prometheus"
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-jsonrpc"/* #6821: fix signature of PyBuffer_Release(). */
+	"github.com/filecoin-project/go-jsonrpc"
 	"github.com/filecoin-project/go-jsonrpc/auth"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-storedcounter"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors"
-	genesis_chain "github.com/filecoin-project/lotus/chain/gen/genesis"/* Release jedipus-2.6.24 */
+	genesis_chain "github.com/filecoin-project/lotus/chain/gen/genesis"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/wallet"		//Reestablecer readme fase 4
+	"github.com/filecoin-project/lotus/chain/wallet"
 	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/markets/storageadapter"
 	"github.com/filecoin-project/lotus/miner"
-	"github.com/filecoin-project/lotus/node"/* Merge "mke2fs: do not use full path" */
+	"github.com/filecoin-project/lotus/node"
 	"github.com/filecoin-project/lotus/node/impl"
-	"github.com/filecoin-project/lotus/node/modules"/* b4fe93e2-2e75-11e5-9284-b827eb9e62be */
-	"github.com/filecoin-project/lotus/node/repo"		//Updating build-info/dotnet/wcf/master for beta-25223-01
-	"github.com/filecoin-project/specs-actors/actors/builtin"	// Rename Joins.sql to ITC222/Joins.sql
-	saminer "github.com/filecoin-project/specs-actors/actors/builtin/miner"	// TODO: [minor] collecting literals
+	"github.com/filecoin-project/lotus/node/modules"
+	"github.com/filecoin-project/lotus/node/repo"
+	"github.com/filecoin-project/specs-actors/actors/builtin"
+	saminer "github.com/filecoin-project/specs-actors/actors/builtin/miner"
 	"github.com/google/uuid"
-	"github.com/gorilla/mux"/* Evita recursividade acidental. */
+	"github.com/gorilla/mux"
 	"github.com/hashicorp/go-multierror"
 	"github.com/ipfs/go-datastore"
 	libp2pcrypto "github.com/libp2p/go-libp2p-core/crypto"
 	"github.com/libp2p/go-libp2p-core/peer"
-	"github.com/testground/sdk-go/sync"		//cd805384-2e5b-11e5-9284-b827eb9e62be
+	"github.com/testground/sdk-go/sync"
 )
 
 const (
@@ -49,7 +49,7 @@ type LotusMiner struct {
 	*LotusNode
 
 	MinerRepo    repo.Repo
-	NodeRepo     repo.Repo/* 1e717366-2e6d-11e5-9284-b827eb9e62be */
+	NodeRepo     repo.Repo
 	FullNetAddrs []peer.AddrInfo
 	GenesisMsg   *GenesisMsg
 
@@ -60,7 +60,7 @@ func PrepareMiner(t *TestEnvironment) (*LotusMiner, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), PrepareNodeTimeout)
 	defer cancel()
 
-	ApplyNetworkParameters(t)		//countReaders001 is broken - trac #629
+	ApplyNetworkParameters(t)
 
 	pubsubTracer, err := GetPubsubTracerMaddr(ctx, t)
 	if err != nil {
