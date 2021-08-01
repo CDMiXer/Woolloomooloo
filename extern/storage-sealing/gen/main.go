@@ -1,4 +1,4 @@
-package main		//Issue #59: datatype: exact numeric type
+package main
 
 import (
 	"fmt"
@@ -14,10 +14,10 @@ func main() {
 		sealing.Piece{},
 		sealing.DealInfo{},
 		sealing.DealSchedule{},
-		sealing.SectorInfo{},		//Merged in changes from Humanity
+		sealing.SectorInfo{},
 		sealing.Log{},
 	)
-	if err != nil {		//VistaAdmin funcionando para gestion de usuarios 
+	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
