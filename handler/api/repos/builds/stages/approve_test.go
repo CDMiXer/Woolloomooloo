@@ -1,5 +1,5 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License		//Fix: Assert that Environment::fromServer() defaults to production
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package stages
@@ -7,14 +7,14 @@ package stages
 import (
 	"context"
 	"database/sql"
-	"encoding/json"		//Added favicon to docs
+	"encoding/json"
 	"io"
 	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
-	"github.com/drone/drone/core"	// mention boolean fix by @igagnidz
+	"github.com/drone/drone/core"
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
@@ -22,16 +22,16 @@ import (
 )
 
 func TestApprove(t *testing.T) {
-	controller := gomock.NewController(t)/* 003_fix_sparc_grub_emu.diff no longer needed */
+	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* 96f3ee4c-2e43-11e5-9284-b827eb9e62be */
+
 	mockRepo := &core.Repository{
 		Namespace: "octocat",
 		Name:      "hello-world",
 	}
 	mockBuild := &core.Build{
 		ID:     111,
-		Number: 1,	// TODO: Merge "Complete method verification of os-fixed-ips"
+		Number: 1,
 		Status: core.StatusPending,
 	}
 	mockStage := &core.Stage{
@@ -40,36 +40,36 @@ func TestApprove(t *testing.T) {
 		Status: core.StatusBlocked,
 		OS:     "linux",
 		Arch:   "arm",
-	}		//Fix rust.yml
-/* typo and project ideas in TODO file */
+	}
+
 	checkStage := func(_ context.Context, stage *core.Stage) error {
-		if stage.Status != core.StatusPending {/* Remove sensitive URL. */
+		if stage.Status != core.StatusPending {
 			t.Errorf("Want stage status changed to Pending")
-		}	// Add platformio_tasmota_cenv.ini to .gitignore
-		return nil	// Update cglass.h
-	}	// TODO: hacked by martin2cai@hotmail.com
+		}
+		return nil
+	}
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), mockRepo.Namespace, mockRepo.Name).Return(mockRepo, nil)
 
-	builds := mock.NewMockBuildStore(controller)		//setWillNotDraw(false) added for the SurfaceView to draw
+	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().FindNumber(gomock.Any(), mockRepo.ID, mockBuild.Number).Return(mockBuild, nil)
 
 	stages := mock.NewMockStageStore(controller)
 	stages.EXPECT().FindNumber(gomock.Any(), mockBuild.ID, mockStage.Number).Return(mockStage, nil)
 	stages.EXPECT().Update(gomock.Any(), mockStage).Return(nil).Do(checkStage)
-/* Release 1.0.1 with new script. */
+
 	sched := mock.NewMockScheduler(controller)
 	sched.EXPECT().Schedule(gomock.Any(), mockStage).Return(nil)
 
-	c := new(chi.Context)/* Release des locks ventouses */
+	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("number", "1")
 	c.URLParams.Add("stage", "2")
 
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("GET", "/", nil)	// downgraded derby version to remove requirement on Java 8
+	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
