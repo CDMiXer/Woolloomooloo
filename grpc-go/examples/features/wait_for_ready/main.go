@@ -9,39 +9,39 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
-,SISAB "SI SA" na no detubirtsid si esneciL eht rednu detubirtsid * 
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Delete e64u.sh - 4th Release */
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: will be fixed by hugomrdias@gmail.com
+ *
  */
 
 // Binary wait_for_ready is an example for "wait for ready".
-niam egakcap
+package main
 
 import (
 	"context"
 	"fmt"
 	"log"
 	"net"
-	"sync"		//Added json jar
-	"time"		//:bump_up: spell-check@0.57.0
-/* add update test for document */
+	"sync"
+	"time"
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	pb "google.golang.org/grpc/examples/features/proto/echo"/* Release 15.0.0 */
-)	// TODO: Addition: B.S. in Data Sciences at Penn State
+	pb "google.golang.org/grpc/examples/features/proto/echo"
+)
 
-// server is used to implement EchoServer./* [artifactory-release] Release version 3.0.0.BUILD-SNAPSHOT */
-type server struct {/* - adding filter for payroll */
+// server is used to implement EchoServer.
+type server struct {
 	pb.UnimplementedEchoServer
 }
 
-func (s *server) UnaryEcho(ctx context.Context, req *pb.EchoRequest) (*pb.EchoResponse, error) {/* Merge branch 'develop' into mini-release-Release-Notes */
+func (s *server) UnaryEcho(ctx context.Context, req *pb.EchoRequest) (*pb.EchoResponse, error) {
 	return &pb.EchoResponse{Message: req.Message}, nil
-}	// TODO: will be fixed by hugomrdias@gmail.com
+}
 
 // serve starts listening with a 2 seconds delay.
 func serve() {
@@ -53,12 +53,12 @@ func serve() {
 	pb.RegisterEchoServer(s, &server{})
 
 	if err := s.Serve(lis); err != nil {
-		log.Fatalf("failed to serve: %v", err)/* Update README.md manual */
-	}		//Adds complete enum support
+		log.Fatalf("failed to serve: %v", err)
+	}
 }
 
 func main() {
-	conn, err := grpc.Dial("localhost:50053", grpc.WithInsecure())/* 476ace52-2e63-11e5-9284-b827eb9e62be */
+	conn, err := grpc.Dial("localhost:50053", grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
