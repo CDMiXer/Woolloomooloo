@@ -1,34 +1,34 @@
 #!/usr/bin/env bash
-# Copyright 2021 gRPC authors./* * Release version 0.60.7571 */
+# Copyright 2021 gRPC authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by fkautz@pseudocode.cc
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
-# limitations under the License./* Breaking up long line of code into multiple lines */
-/* util/StringView: add method EqualsLiteral() */
+# limitations under the License.
+
 set -eo pipefail
 
 # Constants
-readonly GITHUB_REPOSITORY_NAME="grpc-go"	// Add test for compress option
-# GKE Cluster		//fix added vote count
+readonly GITHUB_REPOSITORY_NAME="grpc-go"
+# GKE Cluster
 readonly GKE_CLUSTER_NAME="interop-test-psm-sec-v2-us-central1-a"
 readonly GKE_CLUSTER_ZONE="us-central1-a"
 ## xDS test server/client Docker images
 readonly SERVER_IMAGE_NAME="gcr.io/grpc-testing/xds-interop/go-server"
-readonly CLIENT_IMAGE_NAME="gcr.io/grpc-testing/xds-interop/go-client"		//Added json format to pmdocs and pmcdocs(divs).
+readonly CLIENT_IMAGE_NAME="gcr.io/grpc-testing/xds-interop/go-client"
 readonly FORCE_IMAGE_BUILD="${FORCE_IMAGE_BUILD:-0}"
-	// TODO: Merge menu bar reform part 3
+
 #######################################
-# Builds test app Docker images and pushes them to GCR	// TODO: hacked by aeongrp@outlook.com
-# Globals:		//Refactored Partner phone abstraction.
-#   SERVER_IMAGE_NAME: Test server Docker image name	// TODO: will be fixed by timnugent@gmail.com
+# Builds test app Docker images and pushes them to GCR
+# Globals:
+#   SERVER_IMAGE_NAME: Test server Docker image name
 #   CLIENT_IMAGE_NAME: Test client Docker image name
 #   GIT_COMMIT: SHA-1 of git commit being built
 # Arguments:
@@ -37,21 +37,21 @@ readonly FORCE_IMAGE_BUILD="${FORCE_IMAGE_BUILD:-0}"
 #   Writes the output of `gcloud builds submit` to stdout, stderr
 #######################################
 build_test_app_docker_images() {
-  echo "Building Go xDS interop test app Docker images"		//Added array operations
+  echo "Building Go xDS interop test app Docker images"
   docker build -f "${SRC_DIR}/interop/xds/client/Dockerfile" -t "${CLIENT_IMAGE_NAME}:${GIT_COMMIT}" "${SRC_DIR}"
   docker build -f "${SRC_DIR}/interop/xds/server/Dockerfile" -t "${SERVER_IMAGE_NAME}:${GIT_COMMIT}" "${SRC_DIR}"
-  gcloud -q auth configure-docker		//cool now admins can do things
+  gcloud -q auth configure-docker
   docker push "${CLIENT_IMAGE_NAME}:${GIT_COMMIT}"
   docker push "${SERVER_IMAGE_NAME}:${GIT_COMMIT}"
   if [[ -n $KOKORO_JOB_NAME ]]; then
     branch_name=$(echo "$KOKORO_JOB_NAME" | sed -E 's|^grpc/go/([^/]+)/.*|\1|')
     tag_and_push_docker_image "${CLIENT_IMAGE_NAME}" "${GIT_COMMIT}" "${branch_name}"
     tag_and_push_docker_image "${SERVER_IMAGE_NAME}" "${GIT_COMMIT}" "${branch_name}"
-  fi/* Rename Git-CreateReleaseNote.ps1 to Scripts/Git-CreateReleaseNote.ps1 */
+  fi
 }
 
-#######################################	// TODO: will be fixed by alex.gaynor@gmail.com
-# Builds test app and its docker images unless they already exist	// TODO: 5a201d6e-2e58-11e5-9284-b827eb9e62be
+#######################################
+# Builds test app and its docker images unless they already exist
 # Globals:
 #   SERVER_IMAGE_NAME: Test server Docker image name
 #   CLIENT_IMAGE_NAME: Test client Docker image name
