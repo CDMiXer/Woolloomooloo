@@ -8,8 +8,8 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Corrected html to HTML when appropriate in 02_administration */
- */* Create a-consciencia-infeliz.md */
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,10 +21,10 @@
 package credentials
 
 import (
-	"crypto/tls"/* Add support for embedded CSV files */
+	"crypto/tls"
 	"net/url"
 )
-		//Update PChosts.txt
+
 // SPIFFEIDFromState is a no-op for appengine builds.
 func SPIFFEIDFromState(state tls.ConnectionState) *url.URL {
 	return nil
