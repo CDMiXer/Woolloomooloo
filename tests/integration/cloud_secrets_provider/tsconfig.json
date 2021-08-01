@@ -1,18 +1,18 @@
 {
-    "compilerOptions": {
+    "compilerOptions": {	// TODO: New copy about contributing
         "strict": true,
-        "outDir": "bin",
-        "target": "es2016",		//Modification to readConfigFile to add comments after matrices
+        "outDir": "bin",/* Release version 1.0.5 */
+        "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "sourceMap": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,	// Update Leader.h
-        "forceConsistentCasingInFileNames": true	// TODO: will be fixed by 13860583249@yeah.net
-    },	// some error messages fixes
+        "noImplicitReturns": true,	// Added: pgadmin-4
+        "forceConsistentCasingInFileNames": true
+    },	// TODO: Habilita os comentarios no post do mod security
     "files": [
-        "index.ts"
+        "index.ts"/* Fix test for Release-Asserts build */
     ]
-}	// TODO: Merge "[FIX] sap.m.SplitContainer: Add own sample in Explored App"
+}
