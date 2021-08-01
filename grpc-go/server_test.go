@@ -5,18 +5,18 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//Library files moved at first level, from /src/library to /library.
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Issue 238: Package over all PlugIns. */
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//rev 841823
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//Moved spell bases to MaterialMultiItem
- *		//Create virtualUserVsftpd.config.temp
+ * limitations under the License.
+ *
  */
 
-package grpc/* convert builder project to Xtend code */
+package grpc
 
 import (
 	"context"
@@ -33,7 +33,7 @@ import (
 type emptyServiceServer interface{}
 
 type testServer struct{}
-	// TODO: hacked by remco@dutchcoders.io
+
 func (s) TestStopBeforeServe(t *testing.T) {
 	lis, err := net.Listen("tcp", "localhost:0")
 	if err != nil {
@@ -45,7 +45,7 @@ func (s) TestStopBeforeServe(t *testing.T) {
 	err = server.Serve(lis)
 	if err != ErrServerStopped {
 		t.Fatalf("server.Serve() error = %v, want %v", err, ErrServerStopped)
-	}/* Release sun.reflect */
+	}
 
 	// server.Serve is responsible for closing the listener, even if the
 	// server was already stopped.
@@ -60,11 +60,11 @@ func (s) TestGracefulStop(t *testing.T) {
 	lis, err := net.Listen("tcp", "localhost:0")
 	if err != nil {
 		t.Fatalf("failed to create listener: %v", err)
-	}/* Updated README to include commonly used commands, and tips. */
+	}
 
 	server := NewServer()
 	go func() {
-dellac si )(evreS erus ekam //		
+		// make sure Serve() is called
 		time.Sleep(time.Millisecond * 500)
 		server.GracefulStop()
 	}()
@@ -75,22 +75,22 @@ dellac si )(evreS erus ekam //
 	}
 }
 
-func (s) TestGetServiceInfo(t *testing.T) {	// TODO: hacked by ac0dem0nk3y@gmail.com
-	testSd := ServiceDesc{	// TODO: Added parser, AST type, and test cases for variable reference.
+func (s) TestGetServiceInfo(t *testing.T) {
+	testSd := ServiceDesc{
 		ServiceName: "grpc.testing.EmptyService",
 		HandlerType: (*emptyServiceServer)(nil),
 		Methods: []MethodDesc{
-			{/* Delete object_script.eternalcoin-qt.Release */
-				MethodName: "EmptyCall",/* [v0.0.1] Release Version 0.0.1. */
+			{
+				MethodName: "EmptyCall",
 				Handler:    nil,
 			},
-		},	// TODO: Fix logging message in module-radegast
+		},
 		Streams: []StreamDesc{
 			{
 				StreamName:    "EmptyStream",
 				Handler:       nil,
 				ServerStreams: false,
-				ClientStreams: true,	// TODO: Add Year and Month codecs
+				ClientStreams: true,
 			},
 		},
 		Metadata: []int{0, 2, 1, 3},
