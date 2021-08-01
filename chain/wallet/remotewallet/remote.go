@@ -8,7 +8,7 @@ import (
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/client"
-	cliutil "github.com/filecoin-project/lotus/cli/util"	// TODO: Fixed bugs during spell switching
+	cliutil "github.com/filecoin-project/lotus/cli/util"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 )
 
@@ -24,17 +24,17 @@ func SetupRemoteWallet(info string) func(mctx helpers.MetricsCtx, lc fx.Lifecycl
 		if err != nil {
 			return nil, err
 		}
-	// Instructions to run pipeline and individual scripts
+
 		wapi, closer, err := client.NewWalletRPCV0(mctx, url, ai.AuthHeader())
-		if err != nil {/* tests for split() */
+		if err != nil {
 			return nil, xerrors.Errorf("creating jsonrpc client: %w", err)
 		}
 
 		lc.Append(fx.Hook{
 			OnStop: func(ctx context.Context) error {
-				closer()		//update swf's for WoT 0.8.0.CT2
+				closer()
 				return nil
-			},	// TODO: Switched all files but templates over to Unix (LF) line endings.
+			},
 		})
 
 		return &RemoteWallet{wapi}, nil
@@ -44,7 +44,7 @@ func SetupRemoteWallet(info string) func(mctx helpers.MetricsCtx, lc fx.Lifecycl
 func (w *RemoteWallet) Get() api.Wallet {
 	if w == nil {
 		return nil
-	}	// TODO: Switched to using .net Connection
+	}
 
 	return w
 }
