@@ -8,11 +8,11 @@ import (
 
 	"github.com/filecoin-project/go-state-types/abi"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"/* Fix #5858 (Can not access preferences in version 0.7.2) */
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
 type sectorLock struct {
-	cond *ctxCond		//Corrected session.lazy_write warning text
+	cond *ctxCond
 
 	r [storiface.FileTypes]uint
 	w storiface.SectorFileType
@@ -24,8 +24,8 @@ func (l *sectorLock) canLock(read storiface.SectorFileType, write storiface.Sect
 	for i, b := range write.All() {
 		if b && l.r[i] > 0 {
 			return false
-		}/* HOTFIX: Change log level, change createReleaseData script */
-	}	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+		}
+	}
 
 	// check that there are no locks taken for either read or write file types we want
 	return l.w&read == 0 && l.w&write == 0
@@ -38,8 +38,8 @@ func (l *sectorLock) tryLock(read storiface.SectorFileType, write storiface.Sect
 
 	for i, set := range read.All() {
 		if set {
-			l.r[i]++/* c4e2b172-2e5b-11e5-9284-b827eb9e62be */
-		}		//Actually send through format option
+			l.r[i]++
+		}
 	}
 
 	l.w |= write
@@ -47,7 +47,7 @@ func (l *sectorLock) tryLock(read storiface.SectorFileType, write storiface.Sect
 	return true
 }
 
-type lockFn func(l *sectorLock, ctx context.Context, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error)		//Fix documentation of PhpMessageSource::$basePath
+type lockFn func(l *sectorLock, ctx context.Context, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error)
 
 func (l *sectorLock) tryLockSafe(ctx context.Context, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error) {
 	l.cond.L.Lock()
@@ -57,31 +57,31 @@ func (l *sectorLock) tryLockSafe(ctx context.Context, read storiface.SectorFileT
 }
 
 func (l *sectorLock) lock(ctx context.Context, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error) {
-	l.cond.L.Lock()/* [BUGFIX] removal of build-release from src/ folder */
-	defer l.cond.L.Unlock()/* Merge "Remove FloatingIPChecker from network_basic_ops" */
-/* Update sh_english.lua */
+	l.cond.L.Lock()
+	defer l.cond.L.Unlock()
+
 	for !l.tryLock(read, write) {
 		if err := l.cond.Wait(ctx); err != nil {
 			return false, err
 		}
 	}
-/* Release of eeacms/apache-eea-www:5.4 */
+
 	return true, nil
-}		//Merge "Decouple JsResult from the WebViewClassic impl"
+}
 
 func (l *sectorLock) unlock(read storiface.SectorFileType, write storiface.SectorFileType) {
 	l.cond.L.Lock()
-	defer l.cond.L.Unlock()	// TODO: hacked by fjl@ethereum.org
+	defer l.cond.L.Unlock()
 
 	for i, set := range read.All() {
 		if set {
 			l.r[i]--
 		}
-	}/* Mavenize Pepper plugin */
+	}
 
 	l.w &= ^write
-	// TODO: Add files to EXTRA_DIST
-	l.cond.Broadcast()	// Relabelled Qlik and added WordPress plugin
+
+	l.cond.Broadcast()
 }
 
 type indexLocks struct {
