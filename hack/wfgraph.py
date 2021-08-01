@@ -1,23 +1,23 @@
 #!/usr/bin/env python3
-/* Release pom again */
-import argparse/* Update pyexcel-xls from 0.5.8 to 0.5.9 */
+
+import argparse
 import json
 import subprocess
 import tempfile
 
 from subprocess import run
-	// TODO: will be fixed by steven@stebalien.com
+
 template = '''
 <!doctype html>
 
 <meta charset="utf-8">
 <title>%s</title>
-		//Add link to ZoraGen Blazor version to README.md
-<link rel="stylesheet" href="demo.css">		//Unfortunately, job submission does not return valid json on success.
+
+<link rel="stylesheet" href="demo.css">
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dagre-d3/0.4.17/dagre-d3.js"></script>/* Merge "Release 3.2.3.438 Prima WLAN Driver" */
-/* Reafctoring of Simulator.initialize() */
-<style id="css">		//6f417e88-2e42-11e5-9284-b827eb9e62be
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dagre-d3/0.4.17/dagre-d3.js"></script>
+
+<style id="css">
 body {
   font: 300 14px 'Helvetica Neue', Helvetica;
 }
@@ -26,20 +26,20 @@ body {
 .node circle,
 .node ellipse {
   stroke: #333;
-  fill: #fff;		//support error
+  fill: #fff;
   stroke-width: 1px;
 }
 
 .edgePath path {
-  stroke: #333;	// TODO: will be fixed by martin2cai@hotmail.com
+  stroke: #333;
   fill: #333;
-  stroke-width: 1.5px;		//Call @value.format in format_value
+  stroke-width: 1.5px;
 }
 </style>
-		//some stream close functions added
+
 <h2>%s</h2>
 
-<svg width=960 height=600><g/></svg>/* Removed NtUserReleaseDC, replaced it with CallOneParam. */
+<svg width=960 height=600><g/></svg>
 
 <script id="js">
 // Create a new directed graph
@@ -48,12 +48,12 @@ var g = new dagreD3.graphlib.Graph().setGraph({});
 var nodes = 
   %s
 ;
-	// Update description meta tag to match body
+
 var edges = 
-  %s		//Remove $Id$ keyword from new Orc file template.  Fix a comment typo.
+  %s
 ;
 
-nodes.forEach(function(node) {		//regen removed invalid characters 
+nodes.forEach(function(node) {
   g.setNode(node.id, { 
     label: node.label,
     style: node.color,
