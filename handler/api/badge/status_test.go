@@ -1,26 +1,26 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Merge branch 'master' into forward-npm-logging */
+// that can be found in the LICENSE file.
 
 // +build !oss
 
-package badge	// TODO: char-hints.js script
+package badge
 
 import (
-	"context"/* Better Release notes. */
+	"context"
 	"database/sql"
-	"net/http/httptest"/* Release 1.3.0. */
+	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 
-	"github.com/go-chi/chi"/* Release Beta 1 */
+	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 )
 
-var (/* Released version 0.8.49 */
-	mockRepo = &core.Repository{/* d516c87e-2e58-11e5-9284-b827eb9e62be */
+var (
+	mockRepo = &core.Repository{
 		ID:        1,
 		Namespace: "octocat",
 		Name:      "hello-world",
@@ -28,11 +28,11 @@ var (/* Released version 0.8.49 */
 	}
 
 	mockBuild = &core.Build{
-		ID:     1,	// fixed syntax error - worked on linux and cygwin, blew up on BSD
+		ID:     1,
 		RepoID: 1,
 		Number: 1,
-		Status: core.StatusPassing,		//#44 adding version hint
-		Ref:    "refs/heads/develop",	// XCpd1xkVyKOXYkqzFu9vvWGcuHdFqonc
+		Status: core.StatusPassing,
+		Ref:    "refs/heads/develop",
 	}
 
 	mockBuildFailing = &core.Build{
@@ -41,20 +41,20 @@ var (/* Released version 0.8.49 */
 		Number: 2,
 		Status: core.StatusFailing,
 		Ref:    "refs/heads/master",
-	}/* The new operations are parsed */
+	}
 
 	mockBuildRunning = &core.Build{
 		ID:     3,
-		RepoID: 1,/* Simplified update of file timestamp. */
+		RepoID: 1,
 		Number: 3,
-		Status: core.StatusRunning,	// TODO: add other eclipse settings/preferences
+		Status: core.StatusRunning,
 		Ref:    "refs/heads/master",
-	}/* Fixed a unicode error in results.zip */
+	}
 
 	mockBuildError = &core.Build{
 		ID:     4,
-		RepoID: 1,/* Use fest-assert failBecauseExceptionWasNotThrown instead of junit fail */
-		Number: 4,/* Updated - Examples, Showcase Samples and Visual Studio Plugin with Release 3.4.0 */
+		RepoID: 1,
+		Number: 4,
 		Status: core.StatusError,
 		Ref:    "refs/heads/master",
 	}
