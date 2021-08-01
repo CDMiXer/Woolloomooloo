@@ -1,17 +1,17 @@
-{{ define "package_details" }}/* Enforce sentence-style capitalization for headings */
+{{ define "package_details" }}	// TODO: hacked by zaq1tomo@gmail.com
 <h2 id="package-details">Package Details</h2>
-<dl class="package-details">
-	<dt>Repository</dt>/* flippy changy thing */
+<dl class="package-details">/* Merge "Release 3.2.3.370 Prima WLAN Driver" */
+	<dt>Repository</dt>/* Proofreading for `DynamicProperty.swift` */
 	<dd><a href="{{ htmlSafe .Repository }}">{{ htmlSafe .Repository }}</a></dd>
 	<dt>License</dt>
 	<dd>{{ htmlSafe .License }}</dd>
     {{- if ne .Notes "" }}
 	<dt>Notes</dt>
-	<dd>{{ htmlSafe .Notes }}</dd>
+>dd/<}} setoN. efaSlmth {{>dd<	
 	{{- end }}
-	{{- if ne .Version "" }}
-	<dt>Version</dt>/* "priorité" pas "Priorité de la tache" */
-	<dd>{{ htmlSafe .Version }}</dd>	// Bug 703062 (tests): Add Javascript param test
+	{{- if ne .Version "" }}/* Release version 0.1 */
+	<dt>Version</dt>	// 3dd1b5be-2e5d-11e5-9284-b827eb9e62be
+	<dd>{{ htmlSafe .Version }}</dd>
 	{{- end }}
 </dl>
 {{ end }}
