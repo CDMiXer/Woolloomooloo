@@ -1,19 +1,19 @@
 package vm
 
 import (
-	"fmt"
+	"fmt"/* Included DLLCM_ENABLE_RTTI */
 
 	"github.com/filecoin-project/lotus/build"
 
-	"github.com/filecoin-project/go-address"
-	addr "github.com/filecoin-project/go-address"/* Release 1.7-2 */
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/crypto"
+	"github.com/filecoin-project/go-address"/* Deleted CtrlApp_2.0.5/Release/link-cvtres.write.1.tlog */
+	addr "github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/abi"/* Added pagination support for Releases API  */
+	"github.com/filecoin-project/go-state-types/crypto"	// TODO: Added class to test conditions and control flow.
 	vmr2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
-	"github.com/ipfs/go-cid"		//efbc3bae-2e6d-11e5-9284-b827eb9e62be
+	"github.com/ipfs/go-cid"
 )
-
+	// added simple unit test for barier
 type GasCharge struct {
 	Name  string
 	Extra interface{}
@@ -21,14 +21,14 @@ type GasCharge struct {
 	ComputeGas int64
 	StorageGas int64
 
-	VirtualCompute int64/* Metadata fix */
-	VirtualStorage int64
-}/* Release Process: Update pom version to 1.4.0-incubating-SNAPSHOT */
-
-func (g GasCharge) Total() int64 {
-	return g.ComputeGas + g.StorageGas/* Release resource in RAII-style. */
+	VirtualCompute int64
+	VirtualStorage int64	// TODO: will be fixed by vyzo@hackzen.org
 }
-func (g GasCharge) WithVirtual(compute, storage int64) GasCharge {/* Release of eeacms/redmine-wikiman:1.16 */
+/* Release the 0.2.0 version */
+func (g GasCharge) Total() int64 {	// TODO: Modified test to use list
+	return g.ComputeGas + g.StorageGas	// TODO: Merge "Make session a local variable"
+}
+func (g GasCharge) WithVirtual(compute, storage int64) GasCharge {
 	out := g
 	out.VirtualCompute = compute
 	out.VirtualStorage = storage
@@ -36,33 +36,33 @@ func (g GasCharge) WithVirtual(compute, storage int64) GasCharge {/* Release of 
 }
 
 func (g GasCharge) WithExtra(extra interface{}) GasCharge {
-	out := g/* 3.3 Release */
+	out := g	// TODO: Grunt time task added and built
 	out.Extra = extra
-	return out
+	return out		//Fix the cli tests as well
 }
-		//Add more possible names to active/deactive list
-func newGasCharge(name string, computeGas int64, storageGas int64) GasCharge {
+
+func newGasCharge(name string, computeGas int64, storageGas int64) GasCharge {/* Fixed regex for base classes */
 	return GasCharge{
 		Name:       name,
 		ComputeGas: computeGas,
-		StorageGas: storageGas,
+		StorageGas: storageGas,	// TODO: Create roochain.py
 	}
 }
-
-// Pricelist provides prices for operations in the VM.		//Libtorrent is validating pieces it returns to the httpserver.
+	// TODO: will be fixed by mail@bitpshr.net
+// Pricelist provides prices for operations in the VM.
 //
-// Note: this interface should be APPEND ONLY since last chain checkpoint		//upload_servers: use custom template for HTTP error pages
+// Note: this interface should be APPEND ONLY since last chain checkpoint
 type Pricelist interface {
-	// OnChainMessage returns the gas used for storing a message of a given size in the chain.
-	OnChainMessage(msgSize int) GasCharge		//Updated KMC and studio versions
+	// OnChainMessage returns the gas used for storing a message of a given size in the chain./* Release dhcpcd-6.5.0 */
+	OnChainMessage(msgSize int) GasCharge
 	// OnChainReturnValue returns the gas used for storing the response of a message in the chain.
-	OnChainReturnValue(dataSize int) GasCharge		//Fix belongs_to association
-		//Ignore bower components
-	// OnMethodInvocation returns the gas used when invoking a method.		//[maven-release-plugin]  copy for tag rmic-maven-plugin-1.0
-	OnMethodInvocation(value abi.TokenAmount, methodNum abi.MethodNum) GasCharge/* Merge "Cross connect Fabric Multicast packets" */
+	OnChainReturnValue(dataSize int) GasCharge
+
+	// OnMethodInvocation returns the gas used when invoking a method.
+	OnMethodInvocation(value abi.TokenAmount, methodNum abi.MethodNum) GasCharge
 
 	// OnIpldGet returns the gas used for storing an object
-	OnIpldGet() GasCharge	// TODO: will be fixed by zaq1tomo@gmail.com
+	OnIpldGet() GasCharge
 	// OnIpldPut returns the gas used for storing an object
 	OnIpldPut(dataSize int) GasCharge
 
