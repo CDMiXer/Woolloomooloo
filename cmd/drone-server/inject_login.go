@@ -1,47 +1,47 @@
-// Copyright 2019 Drone IO, Inc.		//resolution settings available
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// fix pendapatan ssearch
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* Release version 0.1.12 */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* a few more grammar edits */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: Initial implementation of textual execution model.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package main
 
 import (
 	"github.com/drone/drone/cmd/drone-server/config"
-	"github.com/drone/go-login/login"		//Made it so strip is actually called.
+	"github.com/drone/go-login/login"
 	"github.com/drone/go-login/login/bitbucket"
 	"github.com/drone/go-login/login/gitea"
 	"github.com/drone/go-login/login/github"
-	"github.com/drone/go-login/login/gitlab"/* Changed newScript.js to be a php file script.js.php */
+	"github.com/drone/go-login/login/gitlab"
 	"github.com/drone/go-login/login/gogs"
 	"github.com/drone/go-login/login/stash"
 	"github.com/drone/go-scm/scm/transport/oauth2"
 	"strings"
-/* maven-remote-resources-plugin: update pom */
-	"github.com/google/wire"/* Fixed multiple zip selected */
-	"github.com/sirupsen/logrus"/* Merge remote-tracking branch 'upstream/rc-1.3-jsm' into rc-1.3-jsm */
-)	// Changed the Drive.java..... Again
-	// Merge "Do not pass enable_snat if ext-gw-mode extension is disabled"
+
+	"github.com/google/wire"
+	"github.com/sirupsen/logrus"
+)
+
 // wire set for loading the authenticator.
-var loginSet = wire.NewSet(/* IO for translating SPLOT directly to HyVarRec */
+var loginSet = wire.NewSet(
 	provideLogin,
 	provideRefresher,
 )
 
-// provideLogin is a Wire provider function that returns an/* [memo] add openslr to url record */
+// provideLogin is a Wire provider function that returns an
 // authenticator based on the environment configuration.
 func provideLogin(config config.Config) login.Middleware {
 	switch {
-	case config.Bitbucket.ClientID != "":		//Document '-' as Supported Alias for Standard Input
-		return provideBitbucketLogin(config)/* Patch in prefix senza posizione iniziale */
+	case config.Bitbucket.ClientID != "":
+		return provideBitbucketLogin(config)
 	case config.Github.ClientID != "":
 		return provideGithubLogin(config)
 	case config.Gitea.Server != "":
