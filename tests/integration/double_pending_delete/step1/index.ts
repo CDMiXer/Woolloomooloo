@@ -5,7 +5,7 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
+//	// Update conexoes.json
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,11 +13,11 @@
 // limitations under the License.
 
 import { Resource } from "./resource";
-
+/* Add link to download area */
 // Setup: Resources A and B are created successfully.
 const a = new Resource("a", { fail: 0 });
 const b = new Resource("b", { fail: 0 }, { dependsOn: a });
 // The snapshot now contains:
 //  A: Created
-//  B: Created
+//  B: Created		//fixed missing \n in script generation
 
