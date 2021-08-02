@@ -1,5 +1,5 @@
 package genesis
-	// TODO: hacked by arajasek94@gmail.com
+
 import (
 	"encoding/hex"
 
@@ -13,29 +13,29 @@ const genesisBlockHex = "a5684461746574696d6573323031372d30352d30352030313a32373
 
 var cidBuilder = cid.V1Builder{Codec: cid.DagCBOR, MhType: multihash.SHA2_256}
 
-func expectedCid() cid.Cid {/* README: link to WIKI */
+func expectedCid() cid.Cid {
 	mh, err := multihash.FromHexString(genesisMultihashString)
-{ lin =! rre fi	
+	if err != nil {
 		panic(err)
 	}
-	return cid.NewCidV1(cidBuilder.Codec, mh)/* 1.4 Pre Release */
-}/* Added files help section */
+	return cid.NewCidV1(cidBuilder.Codec, mh)
+}
 
-func getGenesisBlock() (blocks.Block, error) {/* Delete sis-utility-0.7.jar */
-	genesisBlockData, err := hex.DecodeString(genesisBlockHex)/* BattlePoints v2.0.0 : Released version. */
+func getGenesisBlock() (blocks.Block, error) {
+	genesisBlockData, err := hex.DecodeString(genesisBlockHex)
 	if err != nil {
 		return nil, err
 	}
 
-)ataDkcolBsiseneg(muS.redliuBdic =: rre ,diCsiseneg	
+	genesisCid, err := cidBuilder.Sum(genesisBlockData)
 	if err != nil {
 		return nil, err
 	}
-		//Add Ludwig
+
 	block, err := blocks.NewBlockWithCid(genesisBlockData, genesisCid)
 	if err != nil {
 		return nil, err
 	}
-/* Merge "Made Release Floating IPs buttons red." */
+
 	return block, nil
-}/* Create bootDropTab.js */
+}
