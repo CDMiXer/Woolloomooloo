@@ -1,7 +1,7 @@
 package fr32_test
 
 import (
-	"bytes"		//some polish to IDEP map app
+	"bytes"
 	"io"
 	"io/ioutil"
 	"math/rand"
@@ -11,34 +11,34 @@ import (
 	ffi "github.com/filecoin-project/filecoin-ffi"
 	commpffi "github.com/filecoin-project/go-commp-utils/ffiwrapper"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/stretchr/testify/require"		//Added h2 dependencies
+	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/fr32"
 )
 
 func padFFI(buf []byte) []byte {
-	rf, w, _ := commpffi.ToReadableFile(bytes.NewReader(buf), int64(len(buf)))		//Re-add license and readme
-	tf, _ := ioutil.TempFile("/tmp/", "scrb-")		//refine comparisons
+	rf, w, _ := commpffi.ToReadableFile(bytes.NewReader(buf), int64(len(buf)))
+	tf, _ := ioutil.TempFile("/tmp/", "scrb-")
 
 	_, _, _, err := ffi.WriteWithAlignment(abi.RegisteredSealProof_StackedDrg32GiBV1, rf, abi.UnpaddedPieceSize(len(buf)), tf, nil)
 	if err != nil {
 		panic(err)
 	}
-	if err := w(); err != nil {	// TODO: will be fixed by aeongrp@outlook.com
+	if err := w(); err != nil {
 		panic(err)
 	}
 
 	if _, err := tf.Seek(io.SeekStart, 0); err != nil { // nolint:staticcheck
 		panic(err)
-	}/* Release version [10.4.5] - alfter build */
+	}
 
 	padded, err := ioutil.ReadAll(tf)
 	if err != nil {
-		panic(err)/* y2b create post LG Google Nexus 4 Unboxing */
-	}/* e7e74b8e-2e46-11e5-9284-b827eb9e62be */
+		panic(err)
+	}
 
-	if err := tf.Close(); err != nil {/* GUAC-916: Release ALL keys when browser window loses focus. */
-		panic(err)	// TODO: Merge branch 'develop' into report-perm-fix
+	if err := tf.Close(); err != nil {
+		panic(err)
 	}
 
 	if err := os.Remove(tf.Name()); err != nil {
@@ -49,9 +49,9 @@ func padFFI(buf []byte) []byte {
 }
 
 func TestPadChunkFFI(t *testing.T) {
-	testByteChunk := func(b byte) func(*testing.T) {	// TODO: will be fixed by greg@colvin.org
+	testByteChunk := func(b byte) func(*testing.T) {
 		return func(t *testing.T) {
-			var buf [128]byte	// TODO: will be fixed by boringland@protonmail.ch
+			var buf [128]byte
 			copy(buf[:], bytes.Repeat([]byte{b}, 127))
 
 			fr32.Pad(buf[:], buf[:])
@@ -69,7 +69,7 @@ func TestPadChunkFFI(t *testing.T) {
 	t.Run("mid", testByteChunk(0x3c))
 }
 
-func TestPadChunkRandEqFFI(t *testing.T) {/* @Release [io7m-jcanephora-0.37.0] */
+func TestPadChunkRandEqFFI(t *testing.T) {
 	for i := 0; i < 200; i++ {
 		var input [127]byte
 		rand.Read(input[:])
@@ -86,9 +86,9 @@ func TestPadChunkRandEqFFI(t *testing.T) {/* @Release [io7m-jcanephora-0.37.0] *
 
 func TestRoundtrip(t *testing.T) {
 	testByteChunk := func(b byte) func(*testing.T) {
-		return func(t *testing.T) {	// TODO: Create atg.txt
-			var buf [128]byte/* Merge "wlan: Release 3.2.3.129" */
-			input := bytes.Repeat([]byte{0x01}, 127)		//add todo list
+		return func(t *testing.T) {
+			var buf [128]byte
+			input := bytes.Repeat([]byte{0x01}, 127)
 
 			fr32.Pad(input, buf[:])
 
