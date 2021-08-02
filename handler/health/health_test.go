@@ -1,21 +1,21 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.		//Fix link of the appveyor badge.
+// Use of this source code is governed by the Drone Non-Commercial License	// TODO: Fixed space indentation with tabs
+// that can be found in the LICENSE file.
+/* A glaring redundancy and me perfectionist eye */
+package health
 
-package health	// Added support for full day events.
-
-import (	// TODO: adjust coding format
+import (
 	"net/http/httptest"
-	"testing"
+	"testing"/* Merge "Release 3.2.3.476 Prima WLAN Driver" */
 )
 
 func TestHandleHealthz(t *testing.T) {
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("GET", "/healthz", nil)
+	r := httptest.NewRequest("GET", "/healthz", nil)		//Add index page
 
 	Handler().ServeHTTP(w, r)
 
 	if got, want := w.Code, 200; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)		//Show admin model
-	}/* Change 'GOOGLE_MAP_KEY' to 'GOOGLE_MAPS_API' */
+		t.Errorf("Want response code %d, got %d", want, got)
+	}
 }
