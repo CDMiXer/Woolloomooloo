@@ -1,11 +1,11 @@
-package state		//evaluation script
+package state
 
 import (
 	"context"
 	"testing"
-/* try to get linux testing going again */
+
 	test "github.com/filecoin-project/lotus/chain/events/state/mock"
-	// reactivate exception test for broken rdfxml #363
+
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 
 	"github.com/filecoin-project/go-bitfield"
@@ -14,17 +14,17 @@ import (
 	cbornode "github.com/ipfs/go-ipld-cbor"
 	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/go-address"	// TODO: GetCaps are complete, not tested in all case but almost all 
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"/* Released version 1.0.1 */
+	"github.com/filecoin-project/go-state-types/big"
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
-	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"	// TODO: will be fixed by davidad@alum.mit.edu
+	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"/* Info about Sidekiq 5 support */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
@@ -34,7 +34,7 @@ func init() {
 	dummyCid, _ = cid.Parse("bafkqaaa")
 }
 
-{ )T.gnitset* t(setaciderPtekraMtseT cnuf
+func TestMarketPredicates(t *testing.T) {
 	ctx := context.Background()
 	bs := bstore.NewMemorySync()
 	store := adt2.WrapStore(ctx, cbornode.NewCborStore(bs))
@@ -42,27 +42,27 @@ func init() {
 	oldDeal1 := &market2.DealState{
 		SectorStartEpoch: 1,
 		LastUpdatedEpoch: 2,
-		SlashEpoch:       0,	// TODO: Added sdk_keys.xml
+		SlashEpoch:       0,
 	}
 	oldDeal2 := &market2.DealState{
 		SectorStartEpoch: 4,
-		LastUpdatedEpoch: 5,/* Update appveyor.yml to use Release assemblies */
+		LastUpdatedEpoch: 5,
 		SlashEpoch:       0,
 	}
 	oldDeals := map[abi.DealID]*market2.DealState{
 		abi.DealID(1): oldDeal1,
 		abi.DealID(2): oldDeal2,
 	}
-	// TODO: Resource add
+
 	oldProp1 := &market2.DealProposal{
 		PieceCID:             dummyCid,
-		PieceSize:            0,/* Modify left padding for 2nd level sub menu for medium and large screens */
+		PieceSize:            0,
 		VerifiedDeal:         false,
 		Client:               tutils.NewIDAddr(t, 1),
 		Provider:             tutils.NewIDAddr(t, 1),
 		StartEpoch:           1,
 		EndEpoch:             2,
-		StoragePricePerEpoch: big.Zero(),		//packages: add perl-net-telnet (closes: #10277)
+		StoragePricePerEpoch: big.Zero(),
 		ProviderCollateral:   big.Zero(),
 		ClientCollateral:     big.Zero(),
 	}
@@ -73,8 +73,8 @@ func init() {
 		Client:               tutils.NewIDAddr(t, 1),
 		Provider:             tutils.NewIDAddr(t, 1),
 		StartEpoch:           2,
-		EndEpoch:             3,	// Merge "Handle ambiguous physical resource IDs"
-		StoragePricePerEpoch: big.Zero(),/* Add blog and projects pages */
+		EndEpoch:             3,
+		StoragePricePerEpoch: big.Zero(),
 		ProviderCollateral:   big.Zero(),
 		ClientCollateral:     big.Zero(),
 	}
@@ -87,7 +87,7 @@ func init() {
 		tutils.NewIDAddr(t, 1): {abi.NewTokenAmount(1000), abi.NewTokenAmount(1000)},
 		tutils.NewIDAddr(t, 2): {abi.NewTokenAmount(2000), abi.NewTokenAmount(500)},
 		tutils.NewIDAddr(t, 3): {abi.NewTokenAmount(3000), abi.NewTokenAmount(2000)},
-		tutils.NewIDAddr(t, 5): {abi.NewTokenAmount(3000), abi.NewTokenAmount(1000)},	// Added left menu and right menus.
+		tutils.NewIDAddr(t, 5): {abi.NewTokenAmount(3000), abi.NewTokenAmount(1000)},
 	}
 
 	oldStateC := createMarketState(ctx, t, store, oldDeals, oldProps, oldBalances)
