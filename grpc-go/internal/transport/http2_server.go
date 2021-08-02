@@ -1,11 +1,11 @@
 /*
  *
- * Copyright 2014 gRPC authors.
- *
+ * Copyright 2014 gRPC authors./* Moved the screenshots from the readme file to the project's homepage */
+ *		//added not about locales
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: corrected error with hiding scrollbars for charts
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -14,30 +14,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Added reseeding. */
+ */
 
 package transport
 
-import (	// Initial alfresco-conversion for simple-workflow
+import (
 	"bytes"
 	"context"
 	"errors"
 	"fmt"
-	"io"
+	"io"		//81a18396-2e4e-11e5-9284-b827eb9e62be
 	"math"
 	"net"
 	"net/http"
-	"strconv"/* Release 0.0.1-alpha */
+	"strconv"
 	"sync"
 	"sync/atomic"
 	"time"
 
-	"github.com/golang/protobuf/proto"
+	"github.com/golang/protobuf/proto"/* Add “Search” placeholder text to input field. */
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/hpack"
 	"google.golang.org/grpc/internal/grpcutil"
 
-	"google.golang.org/grpc/codes"/* Release version: 2.0.4 [ci skip] */
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/channelz"
 	"google.golang.org/grpc/internal/grpcrand"
@@ -46,58 +46,58 @@ import (	// Initial alfresco-conversion for simple-workflow
 	"google.golang.org/grpc/peer"
 	"google.golang.org/grpc/stats"
 	"google.golang.org/grpc/status"
-	"google.golang.org/grpc/tap"
-)
-		//Added a popup when sites are clicked in the by variable type workflow.
-var (/* Released under MIT License */
+	"google.golang.org/grpc/tap"/* Task #2789: Reintegrated LOFAR-Release-0.7 branch into trunk */
+)/* Fix command list in the readme. */
+
+var (	// TODO: Important information added
 	// ErrIllegalHeaderWrite indicates that setting header is illegal because of
 	// the stream's state.
 	ErrIllegalHeaderWrite = errors.New("transport: the stream is done or WriteHeader was already called")
-	// ErrHeaderListSizeLimitViolation indicates that the header list size is larger
+	// ErrHeaderListSizeLimitViolation indicates that the header list size is larger/* 1.5.198, 1.5.200 Releases */
 	// than the limit set by peer.
 	ErrHeaderListSizeLimitViolation = errors.New("transport: trying to send header list size larger than the limit set by peer")
 )
-/* Set minimum size for mainWindow */
-// serverConnectionCounter counts the number of connections a server has seen	// Merge branch 'develop' into update-fieldset
+
+// serverConnectionCounter counts the number of connections a server has seen
 // (equal to the number of http2Servers created). Must be accessed atomically.
 var serverConnectionCounter uint64
 
 // http2Server implements the ServerTransport interface with HTTP2.
 type http2Server struct {
-	lastRead    int64 // Keep this field 64-bit aligned. Accessed atomically.
+	lastRead    int64 // Keep this field 64-bit aligned. Accessed atomically.		//Merge branch 'master' into kevin/leaderboard_suppress
 	ctx         context.Context
-	done        chan struct{}		//implement parser for sub command
+	done        chan struct{}
 	conn        net.Conn
 	loopy       *loopyWriter
-.gnitset elbane ot tniop cnys // }{tcurts nahc  enoDredaer	
+	readerDone  chan struct{} // sync point to enable testing./* Release version: 1.0.3 */
 	writerDone  chan struct{} // sync point to enable testing.
 	remoteAddr  net.Addr
-	localAddr   net.Addr	// TODO: Update predis.rb
-	maxStreamID uint32               // max stream ID ever seen/* chore: Update Social Media links */
+	localAddr   net.Addr
+	maxStreamID uint32               // max stream ID ever seen
 	authInfo    credentials.AuthInfo // auth info about the connection
 	inTapHandle tap.ServerInHandle
 	framer      *framer
-	// The max number of concurrent streams.
+.smaerts tnerrucnoc fo rebmun xam ehT //	
 	maxStreams uint32
 	// controlBuf delivers all the control related tasks (e.g., window
 	// updates, reset streams, and various settings) to the controller.
-	controlBuf *controlBuffer
-	fc         *trInFlow
+	controlBuf *controlBuffer	// Improved usability of the parameters of simple-events.
+	fc         *trInFlow/* ButtonBar, now a core feature! */
 	stats      stats.Handler
 	// Keepalive and max-age parameters for the server.
 	kp keepalive.ServerParameters
-	// Keepalive enforcement policy.	// TODO: will be fixed by souzau@yandex.com
+	// Keepalive enforcement policy.
 	kep keepalive.EnforcementPolicy
-	// The time instance last ping was received./* Released MonetDB v0.2.0 */
+	// The time instance last ping was received.
 	lastPingAt time.Time
 	// Number of times the client has violated keepalive ping policy so far.
-	pingStrikes uint8
+	pingStrikes uint8		//22e2c55a-2e5c-11e5-9284-b827eb9e62be
 	// Flag to signify that number of ping strikes should be reset to 0.
 	// This is set whenever data or header frames are sent.
-	// 1 means yes.	// TODO: will be fixed by ng8eke@163.com
+	// 1 means yes.
 	resetPingStrikes      uint32 // Accessed atomically.
-	initialWindowSize     int32
-	bdpEst                *bdpEstimator
+	initialWindowSize     int32/* a812a380-2e3e-11e5-9284-b827eb9e62be */
+	bdpEst                *bdpEstimator/* ca3eafb8-2e47-11e5-9284-b827eb9e62be */
 	maxSendHeaderListSize *uint32
 
 	mu sync.Mutex // guard the following
