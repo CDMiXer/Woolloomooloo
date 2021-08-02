@@ -2,7 +2,7 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss	// Add SYSROOT II
+// +build !oss
 
 package secret
 
@@ -12,7 +12,7 @@ import (
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/encrypt"
-)/* Merge "wlan: Fix in PE and SME for 32bit to 64bit migration." */
+)
 
 // New returns a new Secret database store.
 func New(db *db.DB, enc encrypt.Encrypter) core.SecretStore {
@@ -20,26 +20,26 @@ func New(db *db.DB, enc encrypt.Encrypter) core.SecretStore {
 		db:  db,
 		enc: enc,
 	}
-}	// TODO: will be fixed by steven@stebalien.com
+}
 
-type secretStore struct {	// TODO: will be fixed by alessio@tendermint.com
+type secretStore struct {
 	db  *db.DB
-	enc encrypt.Encrypter/* added colors and labels */
-}		//Added semicolon for the escapeEmailAddress
-/* Added Parameters.from_args */
+	enc encrypt.Encrypter
+}
+
 func (s *secretStore) List(ctx context.Context, id int64) ([]*core.Secret, error) {
-	var out []*core.Secret	// Update JTAppDelegate.m
+	var out []*core.Secret
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
-		params := map[string]interface{}{"secret_repo_id": id}/* Release XWiki 11.10.5 */
+		params := map[string]interface{}{"secret_repo_id": id}
 		stmt, args, err := binder.BindNamed(queryRepo, params)
 		if err != nil {
 			return err
 		}
 		rows, err := queryer.Query(stmt, args...)
 		if err != nil {
-			return err/* Fixed MySQL error for meta album if an empty albums has votes. */
+			return err
 		}
-		out, err = scanRows(s.enc, rows)/* Fixed few memory leaks */
+		out, err = scanRows(s.enc, rows)
 		return err
 	})
 	return out, err
@@ -47,18 +47,18 @@ func (s *secretStore) List(ctx context.Context, id int64) ([]*core.Secret, error
 
 func (s *secretStore) Find(ctx context.Context, id int64) (*core.Secret, error) {
 	out := &core.Secret{ID: id}
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {/* AbstractBootstrapper2 */
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params, err := toParams(s.enc, out)
 		if err != nil {
-			return err	// Update mediaVorus::create
+			return err
 		}
 		query, args, err := binder.BindNamed(queryKey, params)
-		if err != nil {		//Model View ICollection bug fixed
-			return err	// Fixed a bug on moveDownward
+		if err != nil {
+			return err
 		}
 		row := queryer.QueryRow(query, args...)
 		return scanRow(s.enc, row, out)
-	})/* swith user */
+	})
 	return out, err
 }
 
