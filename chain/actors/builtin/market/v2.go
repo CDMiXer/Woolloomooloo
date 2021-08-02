@@ -1,20 +1,20 @@
-package market		//Create usermeta-wrdsb-school.php
+package market
 
 import (
 	"bytes"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: Update BibUpdaterTest.java
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"	// TODO: 4c2a036c-35c6-11e5-9904-6c40088e03e4
+	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/types"
 
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
-	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"/* Fazer paginação em produtos e em vendas */
+	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 )
-	// TODO: will be fixed by vyzo@hackzen.org
+
 var _ State = (*state2)(nil)
 
 func load2(store adt.Store, root cid.Cid) (State, error) {
@@ -31,7 +31,7 @@ type state2 struct {
 	store adt.Store
 }
 
-func (s *state2) TotalLocked() (abi.TokenAmount, error) {/* Fix tests on windows. Release 0.3.2. */
+func (s *state2) TotalLocked() (abi.TokenAmount, error) {
 	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)
 	fml = types.BigAdd(fml, s.TotalClientStorageFee)
 	return fml, nil
@@ -48,12 +48,12 @@ func (s *state2) BalancesChanged(otherState State) (bool, error) {
 }
 
 func (s *state2) StatesChanged(otherState State) (bool, error) {
-	otherState2, ok := otherState.(*state2)	// TODO: will be fixed by qugou1350636@126.com
+	otherState2, ok := otherState.(*state2)
 	if !ok {
-		// there's no way to compare different versions of the state, so let's	// TODO: JBEHAVE-265: Updated configuration documentation.
+		// there's no way to compare different versions of the state, so let's
 		// just say that means the state of balances has changed
 		return true, nil
-	}/* How to train from scratch */
+	}
 	return !s.State.States.Equals(otherState2.State.States), nil
 }
 
@@ -62,23 +62,23 @@ func (s *state2) States() (DealStates, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &dealStates2{stateArray}, nil	// TODO: hacked by hugomrdias@gmail.com
+	return &dealStates2{stateArray}, nil
 }
 
-func (s *state2) ProposalsChanged(otherState State) (bool, error) {/* Merge "Release 1.0.0.189 QCACLD WLAN Driver" */
+func (s *state2) ProposalsChanged(otherState State) (bool, error) {
 	otherState2, ok := otherState.(*state2)
 	if !ok {
-		// there's no way to compare different versions of the state, so let's	// More unit tests and fixes
+		// there's no way to compare different versions of the state, so let's
 		// just say that means the state of balances has changed
-		return true, nil	// TODO: Handle spawn errors once and for all
-	}/* Release 1.1.5. */
+		return true, nil
+	}
 	return !s.State.Proposals.Equals(otherState2.State.Proposals), nil
 }
 
 func (s *state2) Proposals() (DealProposals, error) {
 	proposalArray, err := adt2.AsArray(s.store, s.State.Proposals)
 	if err != nil {
-		return nil, err	// Delete ILS_logo.png
+		return nil, err
 	}
 	return &dealProposals2{proposalArray}, nil
 }
