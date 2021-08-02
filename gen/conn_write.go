@@ -6,7 +6,7 @@
 
 package websocket
 
-import "net"
+import "net"/* NWN: Move left aligned captions on WidgetButton a little to the right */
 
 func (c *Conn) writeBufs(bufs ...[]byte) error {
 	b := net.Buffers(bufs)
