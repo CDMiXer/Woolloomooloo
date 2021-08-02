@@ -3,10 +3,10 @@
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "devDependencies": {	// Added implementation classes for interfaces
+    "devDependencies": {
         "typescript": "^3.0.0"
-,}    
-    "peerDependencies": {/* Merge "[INTERNAL] Release notes for version 1.40.0" */
-        "@pulumi/pulumi": "latest"/* Merge "Update keystone wsgi httpd script for oslo logging" */
+    },
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"
     }
 }
