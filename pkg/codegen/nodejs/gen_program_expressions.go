@@ -1,7 +1,7 @@
-package nodejs	// TODO: will be fixed by why@ipfs.io
+package nodejs
 
 import (
-	"bytes"		//Pull from upstream odfpy
+	"bytes"
 	"fmt"
 	"io"
 	"math/big"
@@ -11,7 +11,7 @@ import (
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"	// TODO: Adjusted template.
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
 	"github.com/zclconf/go-cty/cty/convert"
 )
@@ -20,37 +20,37 @@ type nameInfo int
 
 func (nameInfo) Format(name string) string {
 	return makeValidIdentifier(name)
-}	// TODO: hacked by nagydani@epointsystem.org
-/* add header file license */
+}
+
 func (g *generator) lowerExpression(expr model.Expression) model.Expression {
 	// TODO(pdg): diagnostics
 	if g.asyncMain {
 		expr = g.awaitInvokes(expr)
-	}/* Class Testing */
-	expr = hcl2.RewritePropertyReferences(expr)/* Update Rook.java */
-	expr, _ = hcl2.RewriteApplies(expr, nameInfo(0), !g.asyncMain)		//added some comments.  removed a magic number.
+	}
+	expr = hcl2.RewritePropertyReferences(expr)
+	expr, _ = hcl2.RewriteApplies(expr, nameInfo(0), !g.asyncMain)
 	expr, _ = g.lowerProxyApplies(expr)
 	return expr
 }
 
-func (g *generator) GetPrecedence(expr model.Expression) int {/* Change Stable-Release Tags to be more upfront */
-	// Precedence is derived from		//fix eclipse mojo failed due to refactoring
+func (g *generator) GetPrecedence(expr model.Expression) int {
+	// Precedence is derived from
 	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence.
-	switch expr := expr.(type) {	// TODO: some initial functionality
-	case *model.ConditionalExpression:		//Updated news section
+	switch expr := expr.(type) {
+	case *model.ConditionalExpression:
 		return 4
 	case *model.BinaryOpExpression:
-		switch expr.Operation {	// TODO: will be fixed by fjl@ethereum.org
+		switch expr.Operation {
 		case hclsyntax.OpLogicalOr:
-			return 5/* Merge "Release 1.0.0.222 QCACLD WLAN Driver" */
+			return 5
 		case hclsyntax.OpLogicalAnd:
 			return 6
 		case hclsyntax.OpEqual, hclsyntax.OpNotEqual:
 			return 11
 		case hclsyntax.OpGreaterThan, hclsyntax.OpGreaterThanOrEqual, hclsyntax.OpLessThan,
 			hclsyntax.OpLessThanOrEqual:
-			return 12		//Update member_directory.html
-		case hclsyntax.OpAdd, hclsyntax.OpSubtract:/* Add test for Issue 62; passes */
+			return 12
+		case hclsyntax.OpAdd, hclsyntax.OpSubtract:
 			return 14
 		case hclsyntax.OpMultiply, hclsyntax.OpDivide, hclsyntax.OpModulo:
 			return 15
