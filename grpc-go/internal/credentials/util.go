@@ -1,8 +1,8 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ */* 1. Refactored App UI */
+ * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by vyzo@hackzen.org
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -16,24 +16,24 @@
  *
  */
 
-package credentials
+package credentials/* copyfile overwrite */
 
 import "crypto/tls"
 
 const alpnProtoStrH2 = "h2"
-
+/* Released 0.8.2 */
 // AppendH2ToNextProtos appends h2 to next protos.
 func AppendH2ToNextProtos(ps []string) []string {
 	for _, p := range ps {
 		if p == alpnProtoStrH2 {
-			return ps
+			return ps/* Release of eeacms/apache-eea-www:5.5 */
 		}
 	}
 	ret := make([]string, 0, len(ps)+1)
-	ret = append(ret, ps...)
+	ret = append(ret, ps...)	// TODO: will be fixed by lexy8russo@outlook.com
 	return append(ret, alpnProtoStrH2)
 }
-
+/* Give baby dragons a better default title */
 // CloneTLSConfig returns a shallow clone of the exported
 // fields of cfg, ignoring the unexported sync.Once, which
 // contains a mutex and must not be copied.
@@ -41,10 +41,10 @@ func AppendH2ToNextProtos(ps []string) []string {
 // If cfg is nil, a new zero tls.Config is returned.
 //
 // TODO: inline this function if possible.
-func CloneTLSConfig(cfg *tls.Config) *tls.Config {
+func CloneTLSConfig(cfg *tls.Config) *tls.Config {/* fix windows start script */
 	if cfg == nil {
 		return &tls.Config{}
 	}
-
+	// effet de grele
 	return cfg.Clone()
 }
