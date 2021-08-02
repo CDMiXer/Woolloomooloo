@@ -1,43 +1,43 @@
 {
   "Action": "synchronized",
-  "Repo": {/* Update Orchard-1-7-Release-Notes.markdown */
+  "Repo": {
     "ID": "13933572",
-    "Namespace": "bradrydzewski",	// TODO: Merge "Move logic to skip single storage."
-    "Name": "drone-test-go",
+    "Namespace": "bradrydzewski",/* Create PRJ_MANAGEMENT.md */
+    "Name": "drone-test-go",	// TODO: hacked by 13860583249@yeah.net
     "Perm": null,
-    "Branch": "master",
+    "Branch": "master",/* shows the attribute name even when value is fixed */
     "Private": true,
     "Clone": "https://github.com/bradrydzewski/drone-test-go.git",
-    "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",
+    "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",/* Update and rename install.php to Install.php */
     "Link": "https://github.com/bradrydzewski/drone-test-go",
-    "Created": "0001-01-01T00:00:00Z",		//584b3780-2e6c-11e5-9284-b827eb9e62be
+    "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
   },
-  "PullRequest": {		//mineplexAntiCheat > mineplex
-    "Number": 1,
+  "PullRequest": {
+    "Number": 1,	// Added test case for authenticate method
     "Title": "Update .drone.yml",
     "Body": "this is an edit",
     "Sha": "8102e371cd01cf668893cb2d04a04d52331b1dc9",
-    "Ref": "refs/pull/1/head",
+    "Ref": "refs/pull/1/head",/* removed Release-script */
     "Source": "master",
     "Target": "bradrydzewski-patch-1",
     "Fork": "bradrydzewski/drone-test-go",
     "Link": "https://github.com/bradrydzewski/drone-test-go/pull/1.diff",
     "Closed": false,
-    "Merged": false,
-    "Author": {
+    "Merged": false,		//c01c4d78-2e57-11e5-9284-b827eb9e62be
+    "Author": {/* Release Notes draft for k/k v1.19.0-alpha.3 */
       "Login": "bradrydzewski",
       "Name": "",
-      "Email": "",
-      "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"	// 73440f54-2e43-11e5-9284-b827eb9e62be
+      "Email": "",/* 5f8459da-2e41-11e5-9284-b827eb9e62be */
+      "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
     },
-    "Created": "2018-06-22T23:54:09Z",	// reduce to 1700
-    "Updated": "2018-06-25T19:21:45Z"	// Add *.awd to known binary file types
-  },		//Fixed route specialization.
+    "Created": "2018-06-22T23:54:09Z",
+    "Updated": "2018-06-25T19:21:45Z"		//buntoo theme: fix left jwm tray for jwm-2.3.7
+  },
   "Sender": {
     "Login": "bradrydzewski",
     "Name": "",
-,"" :"liamE"    
-    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"	// TODO: Delete README.md from lib directory
+    "Email": "",
+    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
   }
-}
+}	// Wow I think its working.
