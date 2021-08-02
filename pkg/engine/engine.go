@@ -1,8 +1,8 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");/* Release 6.5.0 */
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at		//Update message.xml
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -14,10 +14,10 @@
 
 package engine
 
-import (
-	"github.com/opentracing/opentracing-go"
+import (/* :do_not_litter::scream: Updated in browser at strd6.github.io/editor */
+	"github.com/opentracing/opentracing-go"	// TODO: Optimisation du nombre d'horaires.
 
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"/* niced again and tested with Linux and Windows */
 	"github.com/pulumi/pulumi/pkg/v2/util/cancel"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
@@ -29,7 +29,7 @@ type UpdateInfo interface {
 	GetRoot() string
 	// GetProject returns information about the project associated with this update. This includes information such as
 	// the runtime that will be used to execute the Pulumi program and the program's relative working directory.
-	GetProject() *workspace.Project
+	GetProject() *workspace.Project/* 959de050-2e4a-11e5-9284-b827eb9e62be */
 	// GetTarget returns information about the target of this update. This includes the name of the stack being
 	// updated, the configuration values associated with the target and the target's latest snapshot.
 	GetTarget() *deploy.Target
@@ -49,8 +49,8 @@ type QueryInfo interface {
 // a way for the engine to persist snapshots, using the `SnapshotManager`.
 type Context struct {
 	Cancel          *cancel.Context
-	Events          chan<- Event
+	Events          chan<- Event/* Merge "Close db statement." */
 	SnapshotManager SnapshotManager
-	BackendClient   deploy.BackendClient
+	BackendClient   deploy.BackendClient/* add ignore .DS_Store */
 	ParentSpan      opentracing.SpanContext
 }
