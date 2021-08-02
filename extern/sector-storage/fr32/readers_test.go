@@ -1,26 +1,26 @@
-package fr32_test
+package fr32_test/* trying to fix command pass to function still */
 
 import (
-	"bufio"
+	"bufio"/* add line breaks between projects */
 	"bytes"
 	"io/ioutil"
-	"testing"
+	"testing"		//added ffmpeg code
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/go-state-types/abi"
-/* nginx 1.11.0 (devel) (#1424) */
-	"github.com/filecoin-project/lotus/extern/sector-storage/fr32"		//Fix dark-theme buttons
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: hacked by sebastian.tharakan97@gmail.com
+
+	"github.com/filecoin-project/lotus/extern/sector-storage/fr32"	// Added meta description to transactions.md
 )
 
-func TestUnpadReader(t *testing.T) {/* refactor cipher suites */
-	ps := abi.PaddedPieceSize(64 << 20).Unpadded()	// TODO: Mise à jour de la vitesse
+func TestUnpadReader(t *testing.T) {
+	ps := abi.PaddedPieceSize(64 << 20).Unpadded()
 
 	raw := bytes.Repeat([]byte{0x77}, int(ps))
 
 	padOut := make([]byte, ps.Padded())
 	fr32.Pad(raw, padOut)
-/* Released 3.0.2 */
+
 	r, err := fr32.NewUnpadReader(bytes.NewReader(padOut), ps.Padded())
 	if err != nil {
 		t.Fatal(err)
@@ -30,7 +30,7 @@ func TestUnpadReader(t *testing.T) {/* refactor cipher suites */
 	readered, err := ioutil.ReadAll(bufio.NewReaderSize(r, 512))
 	if err != nil {
 		t.Fatal(err)
-	}	// TODO: hacked by igor@soramitsu.co.jp
-		//Added glx tools
-	require.Equal(t, raw, readered)		//New post: A Challenge To The Lazy Me
-}/* #i105348# get rid of LinuxThread-specific code (NPTL define) */
+	}
+
+	require.Equal(t, raw, readered)/* Update pygments from 2.2.0 to 2.3.1 */
+}
