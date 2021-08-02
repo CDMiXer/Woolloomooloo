@@ -1,29 +1,29 @@
-﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved./* Update Fira Sans to Release 4.103 */
-
-using System.Collections.Generic;/* Create FacturaWebReleaseNotes.md */
+﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
+/* Release only when refcount > 0 */
+using System.Collections.Generic;/* 264. Ugly Number II */
 using System.Threading.Tasks;
 using Pulumi;
 
-class MyStack : Stack/* Release of eeacms/www:20.8.26 */
+class MyStack : Stack	// TODO: Error in test for filename
 {
-    [Output("abc")]/* 1d62a740-2e60-11e5-9284-b827eb9e62be */
-    public Output<string> Abc { get; private set; }	// trigger new build for ruby-head (b9f3d4b)
+    [Output("abc")]
+    public Output<string> Abc { get; private set; }
 
-    [Output]		//Added gson annotation for serialisation.
-    public Output<int> Foo { get; private set; }
+    [Output]
+    public Output<int> Foo { get; private set; }/* rev 728269 */
 
     // This should NOT be exported as stack output due to the missing attribute
     public Output<string> Bar { get; private set; }
-/* Assets tree: show screenshot image for the "sceneFile" key. */
-    public MyStack()		//Merge "Fix "vpnservice" duplication on updateVPNService"
+
+    public MyStack()
     {
         this.Abc = Output.Create("ABC");
         this.Foo = Output.Create(42);
         this.Bar = Output.Create("this should not come to output");
-}    
+    }	// TODO: Merge branch 'master' into max-combo
 }
 
-class Program
+class Program	// exclude Jackson dependencies completely as JSON is not used
 {
     static Task<int> Main(string[] args) => Deployment.RunAsync<MyStack>();
 }
