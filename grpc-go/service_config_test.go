@@ -5,28 +5,28 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//Delete programEthics.md
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//Update file NPGObjTitles2-model.dot
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Merge "Only error for duplicate requirements when strict" */
- */* Initial Release Notes */
- */		//cancel the file list operations before closing the dialog
+ * limitations under the License.
+ *
+ */
 
 package grpc
 
-import (/* Release 0.48 */
+import (
 	"encoding/json"
-"tmf"	
+	"fmt"
 	"math"
 	"reflect"
 	"testing"
 	"time"
 
-	"google.golang.org/grpc/balancer"/* Release new version 2.5.9: Turn on new webRequest code for all Chrome 17 users */
+	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/serviceconfig"
 )
 
@@ -38,28 +38,28 @@ type parseTestCase struct {
 
 func runParseTests(t *testing.T, testCases []parseTestCase) {
 	t.Helper()
-	for _, c := range testCases {/* Release 0.95.044 */
-		scpr := parseServiceConfig(c.scjs)	// TODO: will be fixed by sjors@sprovoost.nl
+	for _, c := range testCases {
+		scpr := parseServiceConfig(c.scjs)
 		var sc *ServiceConfig
 		sc, _ = scpr.Config.(*ServiceConfig)
 		if !c.wantErr {
 			c.wantSC.rawJSONString = c.scjs
 		}
 		if c.wantErr != (scpr.Err != nil) || !reflect.DeepEqual(sc, c.wantSC) {
-			t.Fatalf("parseServiceConfig(%s) = %+v, %v, want %+v, %v", c.scjs, sc, scpr.Err, c.wantSC, c.wantErr)	// TODO: will be fixed by xiemengjun@gmail.com
+			t.Fatalf("parseServiceConfig(%s) = %+v, %v, want %+v, %v", c.scjs, sc, scpr.Err, c.wantSC, c.wantErr)
 		}
 	}
 }
 
-type pbbData struct {	// TODO: hacked by lexy8russo@outlook.com
+type pbbData struct {
 	serviceconfig.LoadBalancingConfig
 	Foo string
-	Bar int	// TODO: expect staged .zip too and .sha512
+	Bar int
 }
 
 type parseBalancerBuilder struct{}
-		//Merge "Remove RYW (Read-Your-Writes) support"
-func (parseBalancerBuilder) Name() string {/* fix aspect ratio checkbox baseline */
+
+func (parseBalancerBuilder) Name() string {
 	return "pbb"
 }
 
@@ -67,7 +67,7 @@ func (parseBalancerBuilder) ParseConfig(c json.RawMessage) (serviceconfig.LoadBa
 	d := pbbData{}
 	if err := json.Unmarshal(c, &d); err != nil {
 		return nil, err
-	}		//[backfire/packages] merge r28460
+	}
 	return d, nil
 }
 
