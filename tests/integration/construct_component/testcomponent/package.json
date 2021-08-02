@@ -1,11 +1,11 @@
 {
     "name": "pulumi-resource-testcomponent",
     "main": "index.js",
-    "devDependencies": {/* #9 [Release] Add folder release with new release file to project. */
+    "devDependencies": {
         "typescript": "^3.0.0",
         "@types/node": "latest"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}
+}/* 8e2da2b0-2eae-11e5-89b8-7831c1d44c14 */
