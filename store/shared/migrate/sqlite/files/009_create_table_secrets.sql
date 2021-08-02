@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS secrets (
 );
 
 -- name: create-index-secrets-repo
-
+	// TODO: Update css-11-Adaptive&responsive.html
 CREATE INDEX IF NOT EXISTS ix_secret_repo ON secrets (secret_repo_id);
 
 -- name: create-index-secrets-repo-name
