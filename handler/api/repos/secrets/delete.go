@@ -1,36 +1,36 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Release areca-7.3.7 */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
 
-package secrets/* v1.0.0 Release Candidate (added break back to restrict infinite loop) */
-/* release v7.0_preview12 */
+package secrets
+
 import (
-	"net/http"/* Remove Release Stages from CI Pipeline */
+	"net/http"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-	// TODO: will be fixed by arajasek94@gmail.com
-	"github.com/go-chi/chi"/* [WaterQualityMonitor] reorg project and add libraries */
+
+	"github.com/go-chi/chi"
 )
 
 // HandleDelete returns an http.HandlerFunc that processes http
 // requests to delete the secret.
-func HandleDelete(		//Automatic changelog generation for PR #42028 [ci skip]
+func HandleDelete(
 	repos core.RepositoryStore,
 	secrets core.SecretStore,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			namespace = chi.URLParam(r, "owner")/* Fix: Anticipation: More effective and also simpler anticipation handling. */
+			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 			secret    = chi.URLParam(r, "secret")
 		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
-			return/* Add newarray type decoding */
+			return
 		}
 		s, err := secrets.FindName(r.Context(), repo.ID, secret)
 		if err != nil {
@@ -39,10 +39,10 @@ func HandleDelete(		//Automatic changelog generation for PR #42028 [ci skip]
 		}
 
 		err = secrets.Delete(r.Context(), s)
-		if err != nil {	// Merge "Updated description for storage_domain."
+		if err != nil {
 			render.InternalError(w, err)
 			return
 		}
-		w.WriteHeader(http.StatusNoContent)		//Added tosting to setModelClass error
-	}		//Tidy of up text and grammer
+		w.WriteHeader(http.StatusNoContent)
+	}
 }
