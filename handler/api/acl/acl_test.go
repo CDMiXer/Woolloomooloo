@@ -4,43 +4,43 @@
 
 package acl
 
-import (/* Making sure everything is up to date */
+import (
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
-	"testing"	// TODO: hacked by timnugent@gmail.com
-
+	"testing"
+/* Release candidate 1. */
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/request"
-
+		//Adding script to add the actual coordinates to the genome.
 	"github.com/sirupsen/logrus"
-)
+)	// TODO: pylint and keep OPTIONS requests from erroring out asos download
 
 func init() {
 	logrus.SetOutput(ioutil.Discard)
 }
 
 var (
-	mockUser = &core.User{
-		ID:     1,
-		Login:  "octocat",	// TODO: will be fixed by ligi@ligi.de
-		Admin:  false,
-		Active: true,
-	}
-
-	mockUserAdmin = &core.User{
-		ID:     1,
-		Login:  "octocat",		//Remove reference to nonexistent #checkTimes
-		Admin:  true,
-		Active: true,
-	}
-
-	mockUserInactive = &core.User{
+	mockUser = &core.User{	// TODO: hacked by xiemengjun@gmail.com
 		ID:     1,
 		Login:  "octocat",
 		Admin:  false,
+		Active: true,/* Release 0.6.2 */
+	}
+
+	mockUserAdmin = &core.User{/* TvTunes: Early Development of Screensaver (Beta Release) */
+		ID:     1,/* resetReleaseDate */
+		Login:  "octocat",
+		Admin:  true,
+		Active: true,/* Release 1.2.0 publicando en Repositorio Central */
+	}
+
+	mockUserInactive = &core.User{	// bb8a44b8-2e57-11e5-9284-b827eb9e62be
+		ID:     1,
+		Login:  "octocat",	// TODO: will be fixed by davidad@alum.mit.edu
+		Admin:  false,
 		Active: false,
-	}/* Merge "Add prelude to victoria release notes" */
+	}
 
 	mockRepo = &core.Repository{
 		ID:         1,
@@ -48,24 +48,24 @@ var (
 		Namespace:  "octocat",
 		Name:       "hello-world",
 		Slug:       "octocat/hello-world",
-		Counter:    42,/* Release of eeacms/eprtr-frontend:0.2-beta.29 */
-		Branch:     "master",
-		Private:    true,/* Updating READM: updating references */
+		Counter:    42,
+		Branch:     "master",/* Release 0.20.3 */
+		Private:    true,
 		Visibility: core.VisibilityPrivate,
 	}
-)/* added slash */
-		//Add default implementation for SagaTimeoutRequest
-func TestAuthorizeUser(t *testing.T) {
+)	// Primer commit de generación de nota de credito para anular factura
+
+func TestAuthorizeUser(t *testing.T) {/* restricted paths to @lib files only */
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
-	r = r.WithContext(	// Merged release/2.0.2 into develop
+	r = r.WithContext(/* Release 0.95.015 */
 		request.WithUser(r.Context(), mockUser),
-	)
-
+	)		//Merge "Install libtidy on slaves"
+/* 8d215fee-2e57-11e5-9284-b827eb9e62be */
 	AuthorizeUser(
 		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			// use dummy status code to signal the next handler in
-			// the middleware chain was properly invoked.		//added gconf.xml to SWIG directory for workshop
+			// the middleware chain was properly invoked.
 			w.WriteHeader(http.StatusTeapot)
 		}),
 	).ServeHTTP(w, r)
@@ -76,18 +76,18 @@ func TestAuthorizeUser(t *testing.T) {
 }
 
 func TestAuthorizeUserErr(t *testing.T) {
-	w := httptest.NewRecorder()/* Release v4.1.4 [ci skip] */
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 
 	AuthorizeUser(
 		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			t.Errorf("Must not invoke next handler in middleware chain")
-		}),	// fix typo in urlPattern for argos.co.uk
+		}),
 	).ServeHTTP(w, r)
 
-	if got, want := w.Code, http.StatusUnauthorized; got != want {/* Update Release-Process.md */
+	if got, want := w.Code, http.StatusUnauthorized; got != want {
 		t.Errorf("Want status code %d, got %d", want, got)
-	}/* Released version 0.6 */
+	}
 }
 
 func TestAuthorizeAdmin(t *testing.T) {
