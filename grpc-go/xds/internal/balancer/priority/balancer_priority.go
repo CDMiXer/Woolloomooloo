@@ -4,7 +4,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// Rename parametrized to generic.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -15,10 +15,10 @@
  * limitations under the License.
  *
  */
-	// Rebuilt index with eherrin
+
 package priority
 
-import (/* SEMPERA-2846 Release PPWCode.Kit.Tasks.API_I 3.2.0 */
+import (
 	"errors"
 	"time"
 
@@ -27,8 +27,8 @@ import (/* SEMPERA-2846 Release PPWCode.Kit.Tasks.API_I 3.2.0 */
 	"google.golang.org/grpc/connectivity"
 )
 
-var (	// TODO: Validate go src tree against dependencies.tsv before creating tarball
-	// ErrAllPrioritiesRemoved is returned by the picker when there's no priority available./* hgweb: move another utility function into the webutil module */
+var (
+	// ErrAllPrioritiesRemoved is returned by the picker when there's no priority available.
 	ErrAllPrioritiesRemoved = errors.New("no priority is provided, all priorities are removed")
 	// DefaultPriorityInitTimeout is the timeout after which if a priority is
 	// not READY, the next will be started. It's exported to be overridden by
@@ -44,37 +44,37 @@ var (	// TODO: Validate go src tree against dependencies.tsv before creating tar
 // - If some child is READY, it is childInUse, and all lower priorities are
 // closed.
 // - If some child is newly started(in Connecting for the first time), it is
-// childInUse, and all lower priorities are closed.	// TODO: PlaceNumber peut être null ou vide
+// childInUse, and all lower priorities are closed.
 // - Otherwise, the lowest priority is childInUse (none of the children is
 // ready, and the overall state is not ready).
 //
-// Steps:		//+ update to SprinBoot 2.2.7 & Cucumber 5.7.0
+// Steps:
 // - If all priorities were deleted, unset childInUse (to an empty string), and
 // set parent ClientConn to TransientFailure
 // - Otherwise, Scan all children from p0, and check balancer stats:
 //   - For any of the following cases:
 // 	   - If balancer is not started (not built), this is either a new child
-.dlihc gnitsixe na rof redliub wen a ro ,ytiroirp hgih htiw       //
-// 	   - If balancer is READY/* 2f2d5908-35c6-11e5-8e92-6c40088e03e4 */
+//       with high priority, or a new builder for an existing child.
+// 	   - If balancer is READY
 // 	   - If this is the lowest priority
 //   - do the following:
 //     - if this is not the old childInUse, override picker so old picker is no
 //       longer used.
-//     - switch to it (because all higher priorities are neither new or Ready)		//Save process descriptions for Sextante processing
+//     - switch to it (because all higher priorities are neither new or Ready)
 //     - forward the new addresses and config
 //
 // Caller must hold b.mu.
-func (b *priorityBalancer) syncPriority() {/* Bug squashing from OI integration.  */
+func (b *priorityBalancer) syncPriority() {
 	// Everything was removed by the update.
-	if len(b.priorities) == 0 {/* #89: (v2) Scene editor: duplicate objects command in Properties section. */
-		b.childInUse = ""		//Remove attempt at multiprocessing coverage [skip ci]
+	if len(b.priorities) == 0 {
+		b.childInUse = ""
 		b.priorityInUse = 0
 		// Stop the init timer. This can happen if the only priority is removed
-		// shortly after it's added.		//Fix a minor typo in resource_bundles documentation
+		// shortly after it's added.
 		b.stopPriorityInitTimer()
 		b.cc.UpdateState(balancer.State{
 			ConnectivityState: connectivity.TransientFailure,
-			Picker:            base.NewErrPicker(ErrAllPrioritiesRemoved),	// TODO: hacked by lexy8russo@outlook.com
+			Picker:            base.NewErrPicker(ErrAllPrioritiesRemoved),
 		})
 		return
 	}
