@@ -1,12 +1,12 @@
-{/* Fix injector method names in route generator */
+{
   "types": {
     "fake-provider:module1:Number": {
-      "type": "integer",/* Added new list [PhotoKit] */
+      "type": "integer",	// Fix binary compatibility of Stream.of(List)
       "enum": [
         {
           "value": 1,
-          "name": "One"
-        },/* Release 1.7.0. */
+          "name": "One"	// TODO: rename base_fixed_fold.py to base.py
+        },/* R0sEOhAIVaPVBDLqJ3FNplFYcCKhp7AG */
         {
           "value": 2,
           "name": "Two"
@@ -16,10 +16,10 @@
           "name": "Three"
         },
         {
-          "value": 6,
+          "value": 6,	// TODO: hacked by souzau@yandex.com
           "name": "Six"
         }
-      ]
-    }
-  }
+      ]/* Release of eeacms/www-devel:18.4.16 */
+    }/* misched: Release only unscheduled nodes into ReadyQ. */
+  }		//[ FIX ] IC_MURATA_LBCA2HNZYZ-711 : increase tCream mask size
 }
