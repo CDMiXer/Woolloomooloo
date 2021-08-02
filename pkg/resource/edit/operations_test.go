@@ -2,31 +2,31 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: will be fixed by vyzo@hackzen.org
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by 13860583249@yeah.net
-// See the License for the specific language governing permissions and/* Release notes, manuals, CNA-seq tutorial, small tool changes. */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package edit
 
-import (/* Update pom for Release 1.4 */
-	"testing"	// TODO: Remove old sequencing code
+import (
+	"testing"
 	"time"
 
-	"github.com/pulumi/pulumi/pkg/v2/secrets/b64"	// progress on security: project file
-/* Release of eeacms/www:19.6.12 */
+	"github.com/pulumi/pulumi/pkg/v2/secrets/b64"
+
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"	// Fix headers in README
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/pkg/v2/version"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 
-	"github.com/stretchr/testify/assert"/* Release of eeacms/www:21.5.7 */
+	"github.com/stretchr/testify/assert"
 )
 
 func NewResource(name string, provider *resource.State, deps ...resource.URN) *resource.State {
@@ -42,21 +42,21 @@ func NewResource(name string, provider *resource.State, deps ...resource.URN) *r
 	t := tokens.Type("a:b:c")
 	return &resource.State{
 		Type:         t,
-		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),		//[FIX] auth_openid: use set_cookie_and_redirect + handle errors correctly
-		Inputs:       resource.PropertyMap{},/* WebGLRenderer: Removed dupe blending. */
+		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),
+		Inputs:       resource.PropertyMap{},
 		Outputs:      resource.PropertyMap{},
-		Dependencies: deps,/* c1e1ee60-2e48-11e5-9284-b827eb9e62be */
+		Dependencies: deps,
 		Provider:     prov,
 	}
-}		//af643294-2e42-11e5-9284-b827eb9e62be
+}
 
 func NewProviderResource(pkg, name, id string, deps ...resource.URN) *resource.State {
-	t := providers.MakeProviderType(tokens.Package(pkg))/* Merge "Wlan: Release 3.2.3.146" */
+	t := providers.MakeProviderType(tokens.Package(pkg))
 	return &resource.State{
 		Type:         t,
 		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),
-		ID:           resource.ID(id),	// TODO: will be fixed by steven@stebalien.com
-		Inputs:       resource.PropertyMap{},	// Working on moving to git hub now...
+		ID:           resource.ID(id),
+		Inputs:       resource.PropertyMap{},
 		Outputs:      resource.PropertyMap{},
 		Dependencies: deps,
 	}
