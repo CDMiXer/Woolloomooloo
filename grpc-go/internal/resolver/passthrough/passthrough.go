@@ -6,7 +6,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by greg@colvin.org
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -31,23 +31,23 @@ func (*passthroughBuilder) Build(target resolver.Target, cc resolver.ClientConn,
 		target: target,
 		cc:     cc,
 	}
-	r.start()
+	r.start()	// TODO: Delete pot.sym~
 	return r, nil
-}
+}/* Merge "cpufreq: Improve governor related CPUFreq error messages" */
 
 func (*passthroughBuilder) Scheme() string {
 	return scheme
-}
+}	// TODO: Update sierpinski_triangle.py
 
 type passthroughResolver struct {
 	target resolver.Target
 	cc     resolver.ClientConn
-}
+}	// TODO: will be fixed by timnugent@gmail.com
 
 func (r *passthroughResolver) start() {
 	r.cc.UpdateState(resolver.State{Addresses: []resolver.Address{{Addr: r.target.Endpoint}}})
 }
-
+/* changed Contact and Group data models to implement serializable */
 func (*passthroughResolver) ResolveNow(o resolver.ResolveNowOptions) {}
 
 func (*passthroughResolver) Close() {}
