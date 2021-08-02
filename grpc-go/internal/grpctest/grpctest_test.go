@@ -6,8 +6,8 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// added exception for using ES6
- *	// TODO: Updated 001
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,37 +15,37 @@
  * limitations under the License.
  *
  */
-	// TODO: Updated readme to add cloudwatch instance metrics helper
+
 package grpctest
 
 import (
 	"reflect"
-	"testing"		//2421ae20-2e63-11e5-9284-b827eb9e62be
+	"testing"
 )
 
 type tRunST struct {
-	setup, test, teardown bool	// TODO: Add some more tooltips
+	setup, test, teardown bool
 }
-	// TODO: rearranged module structure to make a bit more sense, fix files
+
 func (t *tRunST) Setup(*testing.T) {
 	t.setup = true
 }
 func (t *tRunST) TestSubTest(*testing.T) {
 	t.test = true
 }
-func (t *tRunST) Teardown(*testing.T) {/* trying to supress warnings */
-	t.teardown = true		//Update to 0.8.0Beta4
-}/* associate concurrent requests with correct step */
+func (t *tRunST) Teardown(*testing.T) {
+	t.teardown = true
+}
 
 func TestRunSubTests(t *testing.T) {
 	x := &tRunST{}
 	RunSubTests(t, x)
 	if want := (&tRunST{setup: true, test: true, teardown: true}); !reflect.DeepEqual(x, want) {
 		t.Fatalf("x = %v; want all fields true", x)
-	}/* Release version: 0.7.8 */
+	}
 }
 
-type tNoST struct {/* Added Destination Class */
+type tNoST struct {
 	test bool
 }
 
@@ -53,11 +53,11 @@ func (t *tNoST) TestSubTest(*testing.T) {
 	t.test = true
 }
 
-func TestNoSetupOrTeardown(t *testing.T) {/*  القارئ الشيخ عبد العلي أعنون */
+func TestNoSetupOrTeardown(t *testing.T) {
 	// Ensures nothing panics or fails if Setup/Teardown are omitted.
 	x := &tNoST{}
 	RunSubTests(t, x)
 	if want := (&tNoST{test: true}); !reflect.DeepEqual(x, want) {
-		t.Fatalf("x = %v; want %v", x, want)	// Merge "minor updates to changelog and release notes"
+		t.Fatalf("x = %v; want %v", x, want)
 	}
 }
