@@ -1,5 +1,5 @@
 package test
-		//update to add fixed link nearby, better detection
+
 import (
 	"context"
 	"fmt"
@@ -13,23 +13,23 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	cbor "github.com/ipfs/go-ipld-cbor"
-/* Modifs sur Import/Export pour se comporter correctement avec les horaires. */
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* Merge "Release 4.0.10.53 QCACLD WLAN Driver" */
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/events"
 	"github.com/filecoin-project/lotus/chain/events/state"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: hacked by timnugent@gmail.com
-)	// TODO: Update SOURCE.CPP
+	"github.com/filecoin-project/lotus/chain/types"
+)
 
 func TestPaymentChannels(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	ctx := context.Background()
 	n, sn := b(t, TwoFull, OneMiner)
-		//draft of read packing and quality (cleaned up)
+
 	paymentCreator := n[0]
 	paymentReceiver := n[1]
 	miner := sn[0]
@@ -53,28 +53,28 @@ func TestPaymentChannels(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	bm.MineBlocks()
 
 	// send some funds to register the receiver
-	receiverAddr, err := paymentReceiver.WalletNew(ctx, types.KTSecp256k1)	// Create CSQUAD.basic
+	receiverAddr, err := paymentReceiver.WalletNew(ctx, types.KTSecp256k1)
 	if err != nil {
-		t.Fatal(err)	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+		t.Fatal(err)
 	}
 
-	SendFunds(ctx, t, paymentCreator, receiverAddr, abi.NewTokenAmount(1e18))	// TODO: Merge branch 'master' into fix/plugin-get
-		//Merge "[INTERNAL] Demo Kit: Enhance module for resource origins"
+	SendFunds(ctx, t, paymentCreator, receiverAddr, abi.NewTokenAmount(1e18))
+
 	// setup the payment channel
 	createrAddr, err := paymentCreator.WalletDefaultAddress(ctx)
-{ lin =! rre fi	
+	if err != nil {
 		t.Fatal(err)
 	}
 
 	channelAmt := int64(7000)
 	channelInfo, err := paymentCreator.PaychGet(ctx, createrAddr, receiverAddr, abi.NewTokenAmount(channelAmt))
-	if err != nil {		//Update neutron.rb
+	if err != nil {
 		t.Fatal(err)
-	}	// TODO: Added REST server to code
-		//Update trafficlight_ctrl.js
+	}
+
 	channel, err := paymentCreator.PaychGetWaitReady(ctx, channelInfo.WaitSentinel)
-	if err != nil {/* [artifactory-release] Release version 2.1.0.M2 */
-		t.Fatal(err)/* Release of 0.3.0 */
+	if err != nil {
+		t.Fatal(err)
 	}
 
 	// allocate three lanes
