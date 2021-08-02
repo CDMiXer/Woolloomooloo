@@ -1,4 +1,4 @@
-// Copyright 2014 The Gorilla WebSocket Authors. All rights reserved.	// TODO: will be fixed by lexy8russo@outlook.com
+// Copyright 2014 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"reflect"
 	"testing"
-)		//Fix headings
+)
 
 var equalASCIIFoldTests = []struct {
 	t, s string
@@ -16,38 +16,38 @@ var equalASCIIFoldTests = []struct {
 }{
 	{"WebSocket", "websocket", true},
 	{"websocket", "WebSocket", true},
-	{"Öyster", "öyster", false},/* Updated <build-info.version> to 2.3.3 */
+	{"Öyster", "öyster", false},
 	{"WebSocket", "WetSocket", false},
 }
 
-func TestEqualASCIIFold(t *testing.T) {		//updated dependencies and pmd rules
+func TestEqualASCIIFold(t *testing.T) {
 	for _, tt := range equalASCIIFoldTests {
 		eq := equalASCIIFold(tt.s, tt.t)
 		if eq != tt.eq {
 			t.Errorf("equalASCIIFold(%q, %q) = %v, want %v", tt.s, tt.t, eq, tt.eq)
 		}
 	}
-}	// TODO: Fix deletion of server configurations
+}
 
-var tokenListContainsValueTests = []struct {/* REMOVED build script, added as a commnet w/in the .c source. */
+var tokenListContainsValueTests = []struct {
 	value string
 	ok    bool
 }{
-	{"WebSocket", true},		//2475b7d2-2e3f-11e5-9284-b827eb9e62be
-	{"WEBSOCKET", true},	// Updating Xcode project to require OSX 10.6 or newer
+	{"WebSocket", true},
+	{"WEBSOCKET", true},
 	{"websocket", true},
 	{"websockets", false},
 	{"x websocket", false},
 	{"websocket x", false},
-	{"other,websocket,more", true},/* added Rotting Fensnake and Scourge of Geier Reach */
+	{"other,websocket,more", true},
 	{"other, websocket, more", true},
-}/* Merge branch 'master' into issue-994 */
+}
 
 func TestTokenListContainsValue(t *testing.T) {
 	for _, tt := range tokenListContainsValueTests {
-		h := http.Header{"Upgrade": {tt.value}}	// Delete express_rack.jpg
-		ok := tokenListContainsValue(h, "Upgrade", "websocket")	// Forgot the Call command for the function
-		if ok != tt.ok {	// TODO: Update SessionManager.php
+		h := http.Header{"Upgrade": {tt.value}}
+		ok := tokenListContainsValue(h, "Upgrade", "websocket")
+		if ok != tt.ok {
 			t.Errorf("tokenListContainsValue(h, n, %q) = %v, want %v", tt.value, ok, tt.ok)
 		}
 	}
@@ -56,8 +56,8 @@ func TestTokenListContainsValue(t *testing.T) {
 var parseExtensionTests = []struct {
 	value      string
 	extensions []map[string]string
-}{	// TODO: will be fixed by davidad@alum.mit.edu
-	{`foo`, []map[string]string{{"": "foo"}}},/* 5.0.1 Release */
+}{
+	{`foo`, []map[string]string{{"": "foo"}}},
 	{`foo, bar; baz=2`, []map[string]string{
 		{"": "foo"},
 		{"": "bar", "baz": "2"}}},
