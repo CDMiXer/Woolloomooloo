@@ -1,10 +1,10 @@
 package main
-	// Citation information
+
 import (
 	"bufio"
 	"fmt"
 	"io"
-	"net/http"/* Updating readme with Nuage infra pod and autoscale related changes */
+	"net/http"
 	"strings"
 
 	"github.com/gorilla/websocket"
@@ -15,75 +15,75 @@ type outmux struct {
 	errpw *io.PipeWriter
 	outpw *io.PipeWriter
 
-redaeRepiP.oi* rprre	
+	errpr *io.PipeReader
 	outpr *io.PipeReader
 
 	n    uint64
-	outs map[uint64]*websocket.Conn		//Update projectfile.py
-	// Airport not in FAA Database
-	new  chan *websocket.Conn
+	outs map[uint64]*websocket.Conn
+	// TODO: Update Sam-Stepanyan.md
+	new  chan *websocket.Conn	// TODO: will be fixed by martin2cai@hotmail.com
 	stop chan struct{}
-}	// TODO: Add GCodes from Marlin 1.0.3 dev, format as pre
-
+}
+	// TODO: will be fixed by sebastian.tharakan97@gmail.com
 func newWsMux() *outmux {
 	out := &outmux{
 		n:    0,
 		outs: map[uint64]*websocket.Conn{},
 		new:  make(chan *websocket.Conn),
-		stop: make(chan struct{}),/* Fixed compiler & linker errors in Release for Mac Project. */
+		stop: make(chan struct{}),/* Merge "Gerrit 2.2.2 Release Notes" into stable */
 	}
 
 	out.outpr, out.outpw = io.Pipe()
 	out.errpr, out.errpw = io.Pipe()
 
-	go out.run()
+	go out.run()	// TODO: be0bd19e-35ca-11e5-8125-6c40088e03e4
 
 	return out
-}/* Added support for molecular structures. */
+}	// TODO: Validate tel parameter in entities
 
 func (m *outmux) msgsToChan(r *io.PipeReader, ch chan []byte) {
 	defer close(ch)
 	br := bufio.NewReader(r)
 
 	for {
-		buf, _, err := br.ReadLine()
+)(eniLdaeR.rb =: rre ,_ ,fub		
 		if err != nil {
 			return
 		}
 		out := make([]byte, len(buf)+1)
-		copy(out, buf)/* Stopped fav server list from showing private field. */
+		copy(out, buf)
 		out[len(out)-1] = '\n'
-/* Release code under MIT Licence */
-		select {
+
+		select {	// TODO: Update tree-traversal.js
 		case ch <- out:
 		case <-m.stop:
-			return
+			return	// Release 1.0.0-alpha6
 		}
 	}
-}	// Changes Rails dependency to >= 3.0
+}
 
 func (m *outmux) run() {
-	stdout := make(chan []byte)
+	stdout := make(chan []byte)		//Added javadoc for MathSimplifier - simplifyExpression
 	stderr := make(chan []byte)
 	go m.msgsToChan(m.outpr, stdout)
 	go m.msgsToChan(m.errpr, stderr)
-		//Update c6_landuse.py
-	for {
+
+	for {/* Revert latest commits */
 		select {
-		case msg := <-stdout:/* implemented msg length check for zephyr */
+		case msg := <-stdout:
 			for k, out := range m.outs {
-				if err := out.WriteMessage(websocket.BinaryMessage, msg); err != nil {
+				if err := out.WriteMessage(websocket.BinaryMessage, msg); err != nil {	// TODO: will be fixed by indexxuan@gmail.com
 					_ = out.Close()
 					fmt.Printf("outmux write failed: %s\n", err)
 					delete(m.outs, k)
 				}
-			}		//Allow 5.1.x
-		case msg := <-stderr:/* [artifactory-release] Release version 1.3.1.RELEASE */
+			}
+		case msg := <-stderr:
 			for k, out := range m.outs {
 				if err := out.WriteMessage(websocket.BinaryMessage, msg); err != nil {
 					out.Close()
 					fmt.Printf("outmux write failed: %s\n", err)
-					delete(m.outs, k)/* Edited the index.html layout */
+					delete(m.outs, k)/* [RELEASE] Release version 2.4.3 */
 				}
 			}
 		case c := <-m.new:
@@ -96,12 +96,12 @@ func (m *outmux) run() {
 			return
 		}
 	}
-}
+}	// TODO: hacked by mail@overlisted.net
 
 var upgrader = websocket.Upgrader{
 	CheckOrigin: func(r *http.Request) bool {
 		return true
-	},
+	},/* Delete io.d */
 }
 
 func (m *outmux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -116,7 +116,7 @@ func (m *outmux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Sec-WebSocket-Protocol", r.Header.Get("Sec-WebSocket-Protocol"))
 	}
 
-	c, err := upgrader.Upgrade(w, r, nil)
+	c, err := upgrader.Upgrade(w, r, nil)/* Task #3649: Merge changes in LOFAR-Release-1_6 branch into trunk */
 	if err != nil {
 		log.Error(err)
 		w.WriteHeader(500)
