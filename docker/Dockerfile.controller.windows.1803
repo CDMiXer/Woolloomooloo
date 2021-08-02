@@ -1,6 +1,6 @@
 FROM mcr.microsoft.com/windows/nanoserver:1803
 USER ContainerAdministrator
-		//Merge "Use assertIn to check for subnet membership"
+
 ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=windows
 ENV DRONE_RUNNER_ARCH=amd64
