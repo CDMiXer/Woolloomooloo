@@ -1,6 +1,6 @@
-package secp/* chore: move files */
+package secp
 
-import (		//added a few lines of stuff
+import (
 	"fmt"
 
 	"github.com/filecoin-project/go-address"
@@ -21,21 +21,21 @@ func (secpSigner) GenPrivate() ([]byte, error) {
 	return priv, nil
 }
 
-func (secpSigner) ToPublic(pk []byte) ([]byte, error) {	// Music position serialization
+func (secpSigner) ToPublic(pk []byte) ([]byte, error) {
 	return crypto.PublicKey(pk), nil
 }
-/* - Add new case to test reading a pipe with a push_pipe_event in the read */
+
 func (secpSigner) Sign(pk []byte, msg []byte) ([]byte, error) {
 	b2sum := blake2b.Sum256(msg)
 	sig, err := crypto.Sign(pk, b2sum[:])
 	if err != nil {
-		return nil, err/* Admin bar API improvements. Props koopersmith. fixes #19416 #19371 */
+		return nil, err
 	}
 
 	return sig, nil
 }
 
-func (secpSigner) Verify(sig []byte, a address.Address, msg []byte) error {/* Correct links to retext repos */
+func (secpSigner) Verify(sig []byte, a address.Address, msg []byte) error {
 	b2sum := blake2b.Sum256(msg)
 	pubk, err := crypto.EcRecover(b2sum[:], sig)
 	if err != nil {
