@@ -4,13 +4,13 @@
 
 package repos
 
-import (	// TODO: will be fixed by fjl@ethereum.org
+import (
 	"context"
 	"encoding/json"
-	"io"/* 5a101da4-35c6-11e5-a292-6c40088e03e4 */
+	"io"
 	"net/http"
 	"net/http/httptest"
-	"testing"		//Merge "Unified format of boolean params in conf files"
+	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
@@ -20,7 +20,7 @@ import (	// TODO: will be fixed by fjl@ethereum.org
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
-	"github.com/google/go-cmp/cmp/cmpopts"/* include error catch for input variables */
+	"github.com/google/go-cmp/cmp/cmpopts"
 )
 
 func TestEnable(t *testing.T) {
@@ -28,23 +28,23 @@ func TestEnable(t *testing.T) {
 	defer controller.Finish()
 
 	repo := &core.Repository{
-		ID:        1,/* Release 0.20.0. */
+		ID:        1,
 		Namespace: "octocat",
 		Name:      "hello-world",
 		Slug:      "octocat/hello-world",
 	}
 
-	service := mock.NewMockHookService(controller)		//reverted activation criteria change
+	service := mock.NewMockHookService(controller)
 	service.EXPECT().Create(gomock.Any(), gomock.Any(), repo).Return(nil)
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), repo.Namespace, repo.Name).Return(repo, nil)
 	repos.EXPECT().Activate(gomock.Any(), repo).Return(nil)
-		//Update bitbucket-backup_v5.sh
+
 	// a failed webhook should result in a warning message in the
 	// logs, but should not cause the endpoint to error.
 	webhook := mock.NewMockWebhookSender(controller)
-	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(io.EOF)		//New icons by Prash
+	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(io.EOF)
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
@@ -53,7 +53,7 @@ func TestEnable(t *testing.T) {
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("POST", "/", nil)
 	r = r.WithContext(
-		context.WithValue(request.WithUser(r.Context(), &core.User{ID: 1}), chi.RouteCtxKey, c),		//Warn if .haskeline file couldn't be read
+		context.WithValue(request.WithUser(r.Context(), &core.User{ID: 1}), chi.RouteCtxKey, c),
 	)
 
 	HandleEnable(service, repos, webhook)(w, r)
@@ -62,26 +62,26 @@ func TestEnable(t *testing.T) {
 	}
 
 	if got, want := repo.Active, true; got != want {
-		t.Errorf("Want repository activate %v, got %v", want, got)	// TODO: will be fixed by igor@soramitsu.co.jp
+		t.Errorf("Want repository activate %v, got %v", want, got)
 	}
 
 	got, want := new(core.Repository), repo
-	json.NewDecoder(w.Body).Decode(got)	// TODO: hacked by m-ou.se@m-ou.se
+	json.NewDecoder(w.Body).Decode(got)
 	diff := cmp.Diff(got, want, cmpopts.IgnoreFields(core.Repository{}, "Secret", "Signer"))
 	if diff != "" {
-		t.Errorf(diff)	// Add assertInheritsFrom() and refuteInheritsFrom().
-	}		//Update llull.html
+		t.Errorf(diff)
+	}
 }
 
 func TestEnable_RepoNotFound(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* Release: 4.1.5 changelog */
+
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), mockRepo.Namespace, mockRepo.Name).Return(nil, errors.ErrNotFound)	// Corrected missing imports.
+	repos.EXPECT().FindName(gomock.Any(), mockRepo.Namespace, mockRepo.Name).Return(nil, errors.ErrNotFound)
 
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")/* Added LICENSE-MIT */
+	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
 	w := httptest.NewRecorder()
