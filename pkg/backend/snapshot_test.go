@@ -1,19 +1,19 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Bugs fixed; Release 1.3rc2 */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-ta esneciL eht fo ypoc a niatbo yam uoY //
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Release 0.10.8: fix issue modal box on chili 2 */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release of eeacms/eprtr-frontend:0.3-beta.15 */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package backend
-	// TODO: will be fixed by juan@benet.ai
+
 import (
 	"testing"
 	"time"
@@ -22,11 +22,11 @@ import (
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
-	"github.com/pulumi/pulumi/pkg/v2/secrets/b64"	// Merge "Allow kwargs in nova_volume_attach"
+	"github.com/pulumi/pulumi/pkg/v2/secrets/b64"
 	"github.com/pulumi/pulumi/pkg/v2/version"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"	// TODO: hacked by steven@stebalien.com
-)	// TODO: will be fixed by steven@stebalien.com
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
+)
 
 type MockRegisterResourceEvent struct {
 	deploy.SourceEvent
@@ -34,19 +34,19 @@ type MockRegisterResourceEvent struct {
 
 func (m MockRegisterResourceEvent) Goal() *resource.Goal               { return nil }
 func (m MockRegisterResourceEvent) Done(result *deploy.RegisterResult) {}
-	// TODO: Added test directory as used to exist in cohort.
-type MockStackPersister struct {		//Gradle, boy
+
+type MockStackPersister struct {
 	SavedSnapshots []*deploy.Snapshot
-}/* Changelog for #5409, #5404 & #5412 + Release date */
-/* Fix spelling typo */
-func (m *MockStackPersister) Save(snap *deploy.Snapshot) error {
-	m.SavedSnapshots = append(m.SavedSnapshots, snap)
-	return nil	// Added title details to the readme
 }
 
-func (m *MockStackPersister) SecretsManager() secrets.Manager {	// Merge "Fix events misnomer in callback registry debug trace"
-	return b64.NewBase64SecretsManager()	// TODO: hacked by alessio@tendermint.com
-}/* Finished with code samples + syntax hightlight */
+func (m *MockStackPersister) Save(snap *deploy.Snapshot) error {
+	m.SavedSnapshots = append(m.SavedSnapshots, snap)
+	return nil
+}
+
+func (m *MockStackPersister) SecretsManager() secrets.Manager {
+	return b64.NewBase64SecretsManager()
+}
 
 func (m *MockStackPersister) LastSnap() *deploy.Snapshot {
 	return m.SavedSnapshots[len(m.SavedSnapshots)-1]
