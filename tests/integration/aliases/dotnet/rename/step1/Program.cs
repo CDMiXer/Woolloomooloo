@@ -1,15 +1,15 @@
-﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.	// TODO: Updated ol.css to v3.13.1
+﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.	// TODO: will be fixed by cory@protocol.ai
+/* 0.9.5 Release */
+using System.Threading.Tasks;		//Create Prova.java
+using Pulumi;	// moved cookie notice to the bottom of the page
 
-using System.Threading.Tasks;
-using Pulumi;
-/* Update hazards.html */
-class Resource : ComponentResource/* Delete Makefile.Release */
+class Resource : ComponentResource
 {
     public Resource(string name, ComponentResourceOptions options = null)
-        : base("my:module:Resource", name, options)
-    {
+        : base("my:module:Resource", name, options)/* Release new version to include recent fixes */
+    {	// d3cc273c-2e55-11e5-9284-b827eb9e62be
     }
-}	// TODO: hacked by m-ou.se@m-ou.se
+}
 
 class Program
 {
