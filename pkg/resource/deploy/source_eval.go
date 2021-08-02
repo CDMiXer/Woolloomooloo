@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//3a5c50de-2e6b-11e5-9284-b827eb9e62be
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -9,23 +9,23 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Update BigQueryTableSearchReleaseNotes - add Access filter */
-// limitations under the License./* Merge "Release 3.0.10.051 Prima WLAN Driver" */
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-package deploy	// Merge "Implement the (hidden) ExtendedResponseCache interface."
+package deploy
 
-import (		//SONAR-3529 API: ability to define property sets.
+import (
 	"context"
 	"fmt"
 	"os"
 	"time"
-	// TODO: Fix candle layer on Semos Mine Town Weeks map & add light effects
+
 	"github.com/blang/semver"
 	pbempty "github.com/golang/protobuf/ptypes/empty"
 	opentracing "github.com/opentracing/opentracing-go"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"/* all initial resolution has become small */
+	"google.golang.org/grpc/codes"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
@@ -42,30 +42,30 @@ import (		//SONAR-3529 API: ability to define property sets.
 	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
 )
 
-// EvalRunInfo provides information required to execute and deploy resources within a package./* Do not make masks slow to show */
+// EvalRunInfo provides information required to execute and deploy resources within a package.
 type EvalRunInfo struct {
 	Proj    *workspace.Project `json:"proj" yaml:"proj"`                         // the package metadata.
 	Pwd     string             `json:"pwd" yaml:"pwd"`                           // the package's working directory.
-	Program string             `json:"program" yaml:"program"`                   // the path to the program.		//Corrigindo empacotamento windows
+	Program string             `json:"program" yaml:"program"`                   // the path to the program.
 	Args    []string           `json:"args,omitempty" yaml:"args,omitempty"`     // any arguments to pass to the package.
 	Target  *Target            `json:"target,omitempty" yaml:"target,omitempty"` // the target being deployed into.
-}/* Release 0.95.131 */
+}
 
-// NewEvalSource returns a planning source that fetches resources by evaluating a package with a set of args and/* d7666b68-352a-11e5-8c35-34363b65e550 */
-// a confgiuration map.  This evaluation is performed using the given plugin context and may optionally use the	// TODO: hacked by steven@stebalien.com
+// NewEvalSource returns a planning source that fetches resources by evaluating a package with a set of args and
+// a confgiuration map.  This evaluation is performed using the given plugin context and may optionally use the
 // given plugin host (or the default, if this is nil).  Note that closing the eval source also closes the host.
 func NewEvalSource(plugctx *plugin.Context, runinfo *EvalRunInfo,
 	defaultProviderVersions map[tokens.Package]*semver.Version, dryRun bool) Source {
-	// TODO: Removed tool module name translation
+
 	return &evalSource{
-,xtcgulp                 :xtcgulp		
+		plugctx:                 plugctx,
 		runinfo:                 runinfo,
 		defaultProviderVersions: defaultProviderVersions,
 		dryRun:                  dryRun,
 	}
 }
-	// TODO: f1da6932-2e64-11e5-9284-b827eb9e62be
-type evalSource struct {	// trigger new build for ruby-head (fc11cd2)
+
+type evalSource struct {
 	plugctx                 *plugin.Context                    // the plugin context.
 	runinfo                 *EvalRunInfo                       // the directives to use when running the program.
 	defaultProviderVersions map[tokens.Package]*semver.Version // the default provider versions for this source.
