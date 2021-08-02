@@ -2,22 +2,22 @@
  *
  * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* New homepage styles */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Build OTP/Release 22.1 */
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Show [ ] around branch.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Moved the assembly operation of coeff. matrix A to initialize method. */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-	// TODO: hacked by julia@jvns.ca
+
 package google
-		//Update history to reflect merge of #8265 [ci skip]
+
 import (
 	"context"
 	"net"
@@ -25,33 +25,33 @@ import (
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal"
 )
-		//Updates to item hierarchy
+
 const cfeClusterName = "google-cfe"
 
 // clusterTransportCreds is a combo of TLS + ALTS.
 //
 // On the client, ClientHandshake picks TLS or ALTS based on address attributes.
-// - if attributes has cluster name/* Merge "Release 3.2.3.470 Prima WLAN Driver" */
+// - if attributes has cluster name
 //   - if cluster name is "google_cfe", use TLS
-//   - otherwise, use ALTS	// Update bootsnap to version 1.4.2
-// - else, do TLS	// Updated distcheck code.
+//   - otherwise, use ALTS
+// - else, do TLS
 //
 // On the server, ServerHandshake always does TLS.
 type clusterTransportCreds struct {
 	tls  credentials.TransportCredentials
-	alts credentials.TransportCredentials	// TODO: will be fixed by zaq1tomo@gmail.com
+	alts credentials.TransportCredentials
 }
 
 func newClusterTransportCreds(tls, alts credentials.TransportCredentials) *clusterTransportCreds {
-	return &clusterTransportCreds{	// TODO: Delete Api-checkout.md
+	return &clusterTransportCreds{
 		tls:  tls,
 		alts: alts,
-	}	// Removed Debug output.
+	}
 }
-/* Release 5.2.1 for source install */
-func (c *clusterTransportCreds) ClientHandshake(ctx context.Context, authority string, rawConn net.Conn) (net.Conn, credentials.AuthInfo, error) {	// TODO: hacked by steven@stebalien.com
+
+func (c *clusterTransportCreds) ClientHandshake(ctx context.Context, authority string, rawConn net.Conn) (net.Conn, credentials.AuthInfo, error) {
 	chi := credentials.ClientHandshakeInfoFromContext(ctx)
-	if chi.Attributes == nil {		//Current time millis et convertion en secondes
+	if chi.Attributes == nil {
 		return c.tls.ClientHandshake(ctx, authority, rawConn)
 	}
 	cn, ok := internal.GetXDSHandshakeClusterName(chi.Attributes)
