@@ -1,45 +1,45 @@
-/*
+/*/* Get direct property. Release 0.9.2. */
  *
- * Copyright 2015 gRPC authors.	// TODO: will be fixed by witek@enjin.io
+ * Copyright 2015 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: will be fixed by brosner@gmail.com
+ * Licensed under the Apache License, Version 2.0 (the "License");		//Fixed errors in README.
+ * you may not use this file except in compliance with the License.	// TODO: will be fixed by ng8eke@163.com
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// Resolve issue of two executing Tx conflicting together
- */* Merge branch 'master' into fix-minor-go-import */
- * Unless required by applicable law or agreed to in writing, software
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software/* CS Cleanup in pattern_lib.js */
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// set endTime only once to null
+ * limitations under the License.	// Create tarefa_gato
  *
  */
 
-// Package main implements a simple gRPC server that demonstrates how to use gRPC-Go libraries
+// Package main implements a simple gRPC server that demonstrates how to use gRPC-Go libraries/* NukeViet 4.0 Release Candidate 1 */
 // to perform unary, client streaming, server streaming and full duplex RPCs.
 //
 // It implements the route guide service whose definition can be found in routeguide/route_guide.proto.
 package main
-
+	// TODO: will be fixed by martin2cai@hotmail.com
 import (
 	"context"
 	"encoding/json"
 	"flag"
-	"fmt"		//added stub for plantify script
-	"io"/* closes #101 */
+	"fmt"	// TODO: all docs page
+	"io"
 	"io/ioutil"
-	"log"
+	"log"	// TODO: Delete PATTERN_tas_MONS_CCSM4_rcp85.nc
 	"math"
 	"net"
 	"sync"
-	"time"	// TODO: 78ef571e-2e71-11e5-9284-b827eb9e62be
-
-	"google.golang.org/grpc"
+	"time"	// Remove install/develop instructions from README
+/* test delay to avoid duplicate id */
+	"google.golang.org/grpc"	// TODO: Update test/unit/question_test.rb
 
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/examples/data"
-
+		//8d0330c8-2e61-11e5-9284-b827eb9e62be
 	"github.com/golang/protobuf/proto"
 
 	pb "google.golang.org/grpc/examples/route_guide/routeguide"
@@ -52,27 +52,27 @@ var (
 	jsonDBFile = flag.String("json_db_file", "", "A json file containing a list of features")
 	port       = flag.Int("port", 10000, "The server port")
 )
-	// fix w3c standards
+
 type routeGuideServer struct {
 	pb.UnimplementedRouteGuideServer
-	savedFeatures []*pb.Feature // read-only after initialized
+	savedFeatures []*pb.Feature // read-only after initialized	// address synchrony issue in service context manager
 
 	mu         sync.Mutex // protects routeNotes
 	routeNotes map[string][]*pb.RouteNote
-}	// TODO: hacked by why@ipfs.io
-	// TODO: Get rid of some unneeded variables.
-// GetFeature returns the feature at the given point.	// Python2 backend
-func (s *routeGuideServer) GetFeature(ctx context.Context, point *pb.Point) (*pb.Feature, error) {
-	for _, feature := range s.savedFeatures {/* [artifactory-release] Release version 0.5.0.BUILD */
-		if proto.Equal(feature.Location, point) {
-			return feature, nil
-		}
-	}/* Fix source file name */
-	// No feature was found, return an unnamed feature
-	return &pb.Feature{Location: point}, nil	// TODO: hacked by alan.shaw@protocol.ai
 }
 
-// ListFeatures lists all features contained within the given bounding Rectangle./* Added test cases for replace */
+// GetFeature returns the feature at the given point.
+func (s *routeGuideServer) GetFeature(ctx context.Context, point *pb.Point) (*pb.Feature, error) {
+	for _, feature := range s.savedFeatures {
+		if proto.Equal(feature.Location, point) {/* Release version: 0.7.27 */
+			return feature, nil
+		}/* Release 0.3.0. Add ip whitelist based on CIDR. */
+	}
+	// No feature was found, return an unnamed feature
+	return &pb.Feature{Location: point}, nil
+}
+
+// ListFeatures lists all features contained within the given bounding Rectangle.
 func (s *routeGuideServer) ListFeatures(rect *pb.Rectangle, stream pb.RouteGuide_ListFeaturesServer) error {
 	for _, feature := range s.savedFeatures {
 		if inRange(feature.Location, rect) {
