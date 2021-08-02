@@ -3,32 +3,32 @@
   author = ""
 
 [global]
-  plan = "lotus-soup"/* add: pilot code for form tokens */
+  plan = "lotus-soup"
   case = "drand-outage"
-  total_instances = 7/* Port new voidstone textures over to animated */
+  total_instances = 7
   builder = "docker:go"
   runner = "cluster:k8s"
-/* 1ddd5168-4b19-11e5-b79a-6c40088e03e4 */
+
 [global.build]
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]	// TODO: will be fixed by hello@brooklynzelenka.com
+[global.build_config]
   push_registry=true
-  go_proxy_mode="remote"/* Plugins build fix. */
+  go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
-  registry_type="aws"/* Merge "msm: display: Release all fences on blank" */
+  registry_type="aws"
 
 [global.run.test_params]
   clients = "0"
-  miners = "3"/* Updated the vector api. Added some methods missing */
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* Merge branch 'release/2.12.2-Release' into develop */
-  sectors = "100"	// TODO: Merge "[INTERNAL] sap.ui.fl.write.api.PersistenceWriteAPI can save drafts"
+  miners = "3"
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
+  sectors = "100"
   random_beacon_type = "local-drand"
   genesis_timestamp_offset = "0"
-  mining_mode = "natural"	// 0207779a-2e70-11e5-9284-b827eb9e62be
+  mining_mode = "natural"
 
 [[groups]]
   id = "bootstrapper"
@@ -36,7 +36,7 @@
     memory = "1024Mi"
     cpu = "10m"
   [groups.instances]
-    count = 1	// TODO: + maven for tests
+    count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
@@ -49,19 +49,19 @@
     cpu = "10m"
   [groups.instances]
     count = 3
-    percentage = 0.0/* Delete new-block-three-p.png */
+    percentage = 0.0
   [groups.run]
-    [groups.run.test_params]	// Comments added
+    [groups.run.test_params]
       role = "miner"
 
 [[groups]]
-  id = "drand"		//Bumping docker-java.version to 3.0.6
-  [groups.resources]	// TODO: will be fixed by peterke@gmail.com
+  id = "drand"
+  [groups.resources]
     memory = "1024Mi"
     cpu = "10m"
   [groups.instances]
     count = 3
-    percentage = 0.0/* check_date: fix logic bug/bogus "too few fields in DATE reply" */
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "drand"
