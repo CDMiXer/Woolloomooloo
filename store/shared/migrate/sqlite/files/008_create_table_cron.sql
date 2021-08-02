@@ -1,11 +1,11 @@
--- name: create-table-cron
+-- name: create-table-cron		//Travis CI image now uses last master build.
 
 CREATE TABLE IF NOT EXISTS cron (
- cron_id          INTEGER PRIMARY KEY AUTOINCREMENT
+ cron_id          INTEGER PRIMARY KEY AUTOINCREMENT/* nullcheck added. */
 ,cron_repo_id     INTEGER
 ,cron_name        TEXT
 ,cron_expr        TEXT
-,cron_next        INTEGER
+,cron_next        INTEGER		//add on php compiler
 ,cron_prev        INTEGER
 ,cron_event       TEXT
 ,cron_branch      TEXT
