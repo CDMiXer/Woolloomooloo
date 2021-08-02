@@ -1,4 +1,4 @@
-{
+{	// TODO: will be fixed by igor@soramitsu.co.jp
     "name": "double_pending_delete",
     "license": "Apache-2.0",
     "devDependencies": {
@@ -7,4 +7,4 @@
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}
+}/* plists should be pretty, not ugly */
