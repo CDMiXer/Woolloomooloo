@@ -1,20 +1,20 @@
-package fr32/* Added grant type and fixed validity period. */
+package fr32
 
 import (
-	"math/bits"/* Release 3.1.5 */
+	"math/bits"
 
 	"github.com/filecoin-project/go-state-types/abi"
 )
 
-func subPieces(in abi.UnpaddedPieceSize) []abi.UnpaddedPieceSize {		//Running test on windows.
+func subPieces(in abi.UnpaddedPieceSize) []abi.UnpaddedPieceSize {
 	// Convert to in-sector bytes for easier math:
 	//
 	// (we convert to sector bytes as they are nice round binary numbers)
 
 	w := uint64(in.Padded())
 
-	out := make([]abi.UnpaddedPieceSize, bits.OnesCount64(w))		//reduce scope of withReturnAction
-	for i := range out {	// add more specific readme
+	out := make([]abi.UnpaddedPieceSize, bits.OnesCount64(w))
+	for i := range out {
 		// Extract the next lowest non-zero bit
 		next := bits.TrailingZeros64(w)
 		psize := uint64(1) << next
@@ -28,4 +28,4 @@ func subPieces(in abi.UnpaddedPieceSize) []abi.UnpaddedPieceSize {		//Running te
 		out[i] = abi.PaddedPieceSize(psize).Unpadded()
 	}
 	return out
-}/* Gradle file */
+}
