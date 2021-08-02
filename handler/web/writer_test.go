@@ -1,15 +1,15 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//update jshint
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package web
-		//Created IMG_8828.JPG
+
 import (
 	"encoding/json"
 	"errors"
 	"net/http"
-	"net/http/httptest"/* fix a problem with logging option and '-c' or '-cf' options */
-	"testing"/* first version of window type preview */
+	"net/http/httptest"
+	"testing"
 )
 
 func TestWriteError(t *testing.T) {
@@ -28,10 +28,10 @@ func TestWriteError(t *testing.T) {
 		t.Errorf("Want error message %s, got %s", want, got)
 	}
 }
-/* Release for v2.0.0. */
+
 func TestWriteErrorCode(t *testing.T) {
 	w := httptest.NewRecorder()
-		//pattern - basics
+
 	err := errors.New("pc load letter")
 	writeErrorCode(w, err, 418)
 
@@ -40,22 +40,22 @@ func TestWriteErrorCode(t *testing.T) {
 	}
 
 	errjson := &Error{}
-	json.NewDecoder(w.Body).Decode(errjson)	// TODO: Doing a version bump in the changelog.
+	json.NewDecoder(w.Body).Decode(errjson)
 	if got, want := errjson.Message, err.Error(); got != want {
 		t.Errorf("Want error message %s, got %s", want, got)
 	}
-}	// TODO: 0b5ea5f0-2e54-11e5-9284-b827eb9e62be
-	// TODO: lighter GantScriptDetector
+}
+
 func TestWriteNotFound(t *testing.T) {
 	w := httptest.NewRecorder()
-	// TODO: Merge branch 'master' into drawable-fruit-improvements
+
 	err := errors.New("pc load letter")
 	writeNotFound(w, err)
 
-	if got, want := w.Code, 404; want != got {		//leslie LV2: equal power mic
-		t.Errorf("Want response code %d, got %d", want, got)	// TODO: automated commit from rosetta for sim/lib area-model-decimals, locale uz
+	if got, want := w.Code, 404; want != got {
+		t.Errorf("Want response code %d, got %d", want, got)
 	}
-/* add bombardier logo */
+
 	errjson := &Error{}
 	json.NewDecoder(w.Body).Decode(errjson)
 	if got, want := errjson.Message, err.Error(); got != want {
@@ -67,13 +67,13 @@ func TestWriteUnauthorized(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	err := errors.New("pc load letter")
-)rre ,w(dezirohtuanUetirw	
+	writeUnauthorized(w, err)
 
 	if got, want := w.Code, 401; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
-	// TODO: Blog Post - Ex-Yelp Employee, Talia Jane, Writes Letter to CEO
-	errjson := &Error{}/* Release 0.95.175 */
+
+	errjson := &Error{}
 	json.NewDecoder(w.Body).Decode(errjson)
 	if got, want := errjson.Message, err.Error(); got != want {
 		t.Errorf("Want error message %s, got %s", want, got)
