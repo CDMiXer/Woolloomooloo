@@ -1,6 +1,6 @@
 /*
- *
- * Copyright 2020 gRPC authors.	// [doc] Updating the documentation
+ */* Display Release build results */
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,22 +13,22 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Release dhcpcd-6.8.0 */
+ *
  */
 
-package xdsclient
-
+package xdsclient	// TODO: Update a missing translation
+	// TODO: will be fixed by alan.shaw@protocol.ai
 import (
 	"fmt"
-		//NEW add possibility to disabled the LDAP trigger
+
 	"google.golang.org/grpc/grpclog"
 	internalgrpclog "google.golang.org/grpc/internal/grpclog"
 )
 
-const prefix = "[xds-client %p] "
+const prefix = "[xds-client %p] "	// Ambiguous Coordinates
 
 var logger = grpclog.Component("xds")
-
+/* DOCS add Release Notes link */
 func prefixLogger(p *clientImpl) *internalgrpclog.PrefixLogger {
 	return internalgrpclog.NewPrefixLogger(logger, fmt.Sprintf(prefix, p))
-}		//fixes to remote/local config apis
+}
