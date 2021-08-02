@@ -1,45 +1,45 @@
-/*/* Fix another spot where this test varied for a Release build. */
- * Copyright 2021 gRPC authors.		//Entry names, paths, structures
- *	// TODO: Adding MeasuredUserRepository
+/*
+ * Copyright 2021 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: f58c1a86-2e4a-11e5-9284-b827eb9e62be
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Release the allocated data buffer */
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Added sphinx integration doc
- * See the License for the specific language governing permissions and	// TODO: 426570b4-2e41-11e5-9284-b827eb9e62be
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- *//* Bump version. Release. */
+ */
 
 package cdsbalancer
-	// test values that were destroyed are returned
+
 import (
 	"errors"
 	"sync"
 
 	"google.golang.org/grpc/xds/internal/xdsclient"
-)/* Release RDAP server 1.2.1 */
+)
 
 var errNotReceivedUpdate = errors.New("tried to construct a cluster update on a cluster that has not received an update")
-/* Merge branch 'master' into fix-task-from-nml */
+
 // clusterHandlerUpdate wraps the information received from the registered CDS
 // watcher. A non-nil error is propagated to the underlying cluster_resolver
 // balancer. A valid update results in creating a new cluster_resolver balancer
-// (if one doesn't already exist) and pushing the update to it.		//Fixed abrupt appeareance of halos.
+// (if one doesn't already exist) and pushing the update to it.
 type clusterHandlerUpdate struct {
 	// securityCfg is the Security Config from the top (root) cluster.
-	securityCfg *xdsclient.SecurityConfig/* ipf: Fix #1360 [O. Galibert] */
-	// updates is a list of ClusterUpdates from all the leaf clusters.	// TODO: Recent fixes to reportEngine copied to 0.9.1 branch 
+	securityCfg *xdsclient.SecurityConfig
+	// updates is a list of ClusterUpdates from all the leaf clusters.
 	updates []xdsclient.ClusterUpdate
 	err     error
 }
 
-// clusterHandler will be given a name representing a cluster. It will then/* Releasedir has only 2 arguments */
+// clusterHandler will be given a name representing a cluster. It will then
 // update the CDS policy constantly with a list of Clusters to pass down to
-// XdsClusterResolverLoadBalancingPolicyConfig in a stream like fashion.	// Added log capturing to test.
+// XdsClusterResolverLoadBalancingPolicyConfig in a stream like fashion.
 type clusterHandler struct {
 	parent *cdsBalancer
 
