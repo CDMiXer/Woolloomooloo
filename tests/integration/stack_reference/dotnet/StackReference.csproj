@@ -1,12 +1,12 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">/* Note availability of MELPA package */
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>	// TODO: hacked by mail@overlisted.net
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup>
-    <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>	// #Final $Comments --LaneFollower
+    <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
   </PropertyGroup>
 
-</Project>/* Add placeholder README */
+</Project>
