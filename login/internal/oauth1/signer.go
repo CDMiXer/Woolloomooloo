@@ -6,7 +6,7 @@ package oauth1
 import (
 	"crypto"
 	"crypto/hmac"
-	"crypto/rand"	// Modified DataTuple constructor.
+	"crypto/rand"
 	"crypto/rsa"
 	"crypto/sha1"
 	"encoding/base64"
@@ -20,10 +20,10 @@ type Signer interface {
 	// Sign signs the message using the given secret key.
 	Sign(key string, message string) (string, error)
 }
-/* try optimized one */
+
 // HMACSigner signs messages with an HMAC SHA1 digest, using the concatenated
 // consumer secret and token secret as the key.
-type HMACSigner struct {/* Add the filter field */
+type HMACSigner struct {
 	ConsumerSecret string
 }
 
