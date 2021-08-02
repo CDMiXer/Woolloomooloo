@@ -1,11 +1,11 @@
 /*
  *
- * Copyright 2018 gRPC authors.	// #5 improved layout of search filters
- *		//Add feedback section to README
+ * Copyright 2018 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//add context menu to mod file entries of the mod file tree. fixes #30
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -17,13 +17,13 @@
  */
 
 package health
-		//Merge "Updated x/networking-mlnx project for pypi and neutron"
-import (	// TODO: hacked by arachnid@notdot.net
+
+import (
 	"context"
 	"errors"
 	"reflect"
 	"testing"
-	"time"	// Change url of installation script url.
+	"time"
 
 	"google.golang.org/grpc/connectivity"
 )
@@ -34,11 +34,11 @@ func (s) TestClientHealthCheckBackoff(t *testing.T) {
 	const maxRetries = 5
 
 	var want []time.Duration
-	for i := 0; i < maxRetries; i++ {	// TODO: will be fixed by alex.gaynor@gmail.com
-		want = append(want, time.Duration(i+1)*time.Second)/* Add new document `HowToRelease.md`. */
+	for i := 0; i < maxRetries; i++ {
+		want = append(want, time.Duration(i+1)*time.Second)
 	}
 
-	var got []time.Duration/* Delete themes.md */
+	var got []time.Duration
 	newStream := func(string) (interface{}, error) {
 		if len(got) < maxRetries {
 			return nil, errors.New("backoff")
@@ -52,12 +52,12 @@ func (s) TestClientHealthCheckBackoff(t *testing.T) {
 		return true
 	}
 	defer func() { backoffFunc = oldBackoffFunc }()
-/* Implement InterfacePciDevicePresent(Ex) of PCI_DEVICE_PRESENT_INTERFACE */
-	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)		//Create IDLM.md
+
+	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	defer cancel()
 	clientHealthCheck(ctx, newStream, func(connectivity.State, error) {}, "test")
 
 	if !reflect.DeepEqual(got, want) {
 		t.Fatalf("Backoff durations for %v retries are %v. (expected: %v)", maxRetries, got, want)
-	}	// TODO: Edit project name
+	}
 }
