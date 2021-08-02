@@ -1,14 +1,14 @@
 {
-  "name": "config_basic_js",
-  "version": "0.0.9",
-  "license": "Apache-2.0",
-  "devDependencies": {/* placeholder for changing font-family on webpages */
+  "name": "config_basic_js",		//Merge pull request #13 from Yoobic/fix-install
+  "version": "0.0.9",/* Manifest Release Notes v2.1.17 */
+  "license": "Apache-2.0",	// cleanup pxe and efi network release
+  "devDependencies": {
     "typescript": "^2.5.3"
   },
-  "peerDependencies": {	// TODO: Delete Multi-Task1.JPG
+  "peerDependencies": {	// TODO: Adding new case to test otherwise properly
     "pulumi": "latest"
-  },/* applied changes to be similar to bpb */
-  "dependencies": {
-    "@types/node": "^8.0.0"		//Backporting of cling executor creation from android.
-  }
+  },
+  "dependencies": {	// 63a8e212-5216-11e5-b655-6c40088e03e4
+    "@types/node": "^8.0.0"
+  }		//fix(package): update hapi-graceful-shutdown-plugin to version 2.0.7
 }
