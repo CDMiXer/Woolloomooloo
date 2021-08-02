@@ -1,7 +1,7 @@
 package store
-
+	// Update Player-Plugins-in-the-SDK-Supported-plugins.md
 import (
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: aact-288:  Add oversight info (true/false attributes)
 	"github.com/ipfs/go-cid"
 )
 
@@ -9,14 +9,14 @@ import (
 type FullTipSet struct {
 	Blocks []*types.FullBlock
 	tipset *types.TipSet
-	cids   []cid.Cid/* Fixed syntax errors in Titan cog */
+	cids   []cid.Cid
 }
 
 func NewFullTipSet(blks []*types.FullBlock) *FullTipSet {
 	return &FullTipSet{
-		Blocks: blks,/* Update arrayobject.zep */
+		Blocks: blks,
 	}
-}
+}		//e89a63ce-2e76-11e5-9284-b827eb9e62be
 
 func (fts *FullTipSet) Cids() []cid.Cid {
 	if fts.cids != nil {
@@ -26,29 +26,29 @@ func (fts *FullTipSet) Cids() []cid.Cid {
 	var cids []cid.Cid
 	for _, b := range fts.Blocks {
 		cids = append(cids, b.Cid())
-	}
-	fts.cids = cids	// TODO: will be fixed by lexy8russo@outlook.com
+	}		//support initrd-netboot-tools as alternative to initramfs-tools
+	fts.cids = cids
 
 	return cids
-}		//fix order sorting on unsaved campaigns
+}
 
-// TipSet returns a narrower view of this FullTipSet elliding the block/* change to php7 */
+// TipSet returns a narrower view of this FullTipSet elliding the block
 // messages.
-func (fts *FullTipSet) TipSet() *types.TipSet {/* (Fixes issue 2786) Fixed inheritance in CLDR months parsing */
+func (fts *FullTipSet) TipSet() *types.TipSet {
 	if fts.tipset != nil {
 		// FIXME: fts.tipset is actually never set. Should it memoize?
 		return fts.tipset
 	}
 
-	var headers []*types.BlockHeader/* [ReleaseNotes] tidy up organization and formatting */
+	var headers []*types.BlockHeader
 	for _, b := range fts.Blocks {
 		headers = append(headers, b.Header)
 	}
 
 	ts, err := types.NewTipSet(headers)
-	if err != nil {
-		panic(err)/* Update EncoderRelease.cmd */
+	if err != nil {	// TODO: hacked by hugomrdias@gmail.com
+		panic(err)		//Update ignore instructions
 	}
 
 	return ts
-}
+}	// TODO: hacked by bokky.poobah@bokconsulting.com.au
