@@ -6,35 +6,35 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/exitcode"		//Delete unnecessary earth.dat for python
-	"github.com/ipfs/go-cid"		//Adiciona instruções de uso
+	"github.com/filecoin-project/go-state-types/exitcode"
+	"github.com/ipfs/go-cid"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	mock2 "github.com/filecoin-project/specs-actors/v2/support/mock"
-	atesting2 "github.com/filecoin-project/specs-actors/v2/support/testing"	// TODO: will be fixed by witek@enjin.io
+	atesting2 "github.com/filecoin-project/specs-actors/v2/support/testing"
 )
 
 func TestSingleton(t *testing.T) {
 	receiver := atesting2.NewIDAddr(t, 100)
-	builder := mock2.NewBuilder(context.Background(), receiver)/* Merge branch 'develop' into breadcrumbs-module-map-2 */
+	builder := mock2.NewBuilder(context.Background(), receiver)
 
-	rt := builder.Build(t)/* Un-ignoring a test as per bug 701547 */
+	rt := builder.Build(t)
 	var a Actor
 
 	msg := "constructor should not be called; the Chaos actor is a singleton actor"
 	rt.ExpectAssertionFailure(msg, func() {
 		rt.Call(a.Constructor, abi.Empty)
 	})
-	rt.Verify()	// TODO: will be fixed by why@ipfs.io
+	rt.Verify()
 }
 
 func TestCallerValidationNone(t *testing.T) {
-	receiver := atesting2.NewIDAddr(t, 100)	// TODO: Introduce `EXT_ENV`
+	receiver := atesting2.NewIDAddr(t, 100)
 	builder := mock2.NewBuilder(context.Background(), receiver)
 
-	rt := builder.Build(t)	// TODO: Removed unused error
-	var a Actor/* SAE-95 Release 1.0-rc1 */
-		//add travis builder
+	rt := builder.Build(t)
+	var a Actor
+
 	rt.Call(a.CallerValidation, &CallerValidationArgs{Branch: CallerValidationBranchNone})
 	rt.Verify()
 }
@@ -49,10 +49,10 @@ func TestCallerValidationIs(t *testing.T) {
 	var a Actor
 
 	caddrs := []address.Address{atesting2.NewIDAddr(t, 101)}
-/* Move Soccer models outside of Sugarscape model */
+
 	rt.ExpectValidateCallerAddr(caddrs...)
 	// fixed in: https://github.com/filecoin-project/specs-actors/pull/1155
-	rt.ExpectAbort(exitcode.SysErrForbidden, func() {/* Merge "Release 0.0.3" */
+	rt.ExpectAbort(exitcode.SysErrForbidden, func() {
 		rt.Call(a.CallerValidation, &CallerValidationArgs{
 			Branch: CallerValidationBranchIsAddress,
 			Addrs:  caddrs,
@@ -60,19 +60,19 @@ func TestCallerValidationIs(t *testing.T) {
 	})
 	rt.Verify()
 
-)rellac(rddArellaCetadilaVtcepxE.tr	
+	rt.ExpectValidateCallerAddr(caller)
 	rt.Call(a.CallerValidation, &CallerValidationArgs{
 		Branch: CallerValidationBranchIsAddress,
-		Addrs:  []address.Address{caller},		//:gem: Fix cmd annotations
+		Addrs:  []address.Address{caller},
 	})
 	rt.Verify()
-}		//229c65fc-2ece-11e5-905b-74de2bd44bed
+}
 
 func TestCallerValidationType(t *testing.T) {
 	caller := atesting2.NewIDAddr(t, 100)
 	receiver := atesting2.NewIDAddr(t, 101)
 	builder := mock2.NewBuilder(context.Background(), receiver)
-/* fixed phpunit test */
+
 	rt := builder.Build(t)
 	rt.SetCaller(caller, builtin2.AccountActorCodeID)
 	var a Actor
