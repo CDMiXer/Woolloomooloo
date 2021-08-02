@@ -1,12 +1,12 @@
-{	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+{
     "name": "aliases",
     "license": "Apache-2.0",
-    "main": "bin/index.js",
+    "main": "bin/index.js",		//user super classifier
     "typings": "bin/index.d.ts",
     "devDependencies": {
-        "typescript": "^2.5.3"/* Add direct link to Release Notes */
+        "typescript": "^2.5.3"
     },
-    "peerDependencies": {/* Bumped the ASDF version number */
-        "@pulumi/pulumi": "latest"/* Create get-hash-of-last-commit.md */
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"		//Update o_que_sao_funcoes_geradoras_ou_como_parte_II.md
     }
-}	// TODO: hacked by lexy8russo@outlook.com
+}
