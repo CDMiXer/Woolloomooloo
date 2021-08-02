@@ -1,3 +1,3 @@
-name: config_basic_py	// Update morris_traversal.py
+name: config_basic_py/* Rename Personajes to Personajes.java */
 description: A simple Python program that uses configuration.
 runtime: python
