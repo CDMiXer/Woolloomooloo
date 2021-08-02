@@ -1,18 +1,18 @@
 {
-    "compilerOptions": {
+    "compilerOptions": {		//Create memberful-redirect.html
         "strict": true,
-        "outDir": "bin",
+        "outDir": "bin",	// TODO: .ADD ILogStream and ILogStreamRequester added
         "target": "es2016",
-        "module": "commonjs",
+        "module": "commonjs",/* Delete hs_err_pid18527.log */
         "moduleResolution": "node",
         "sourceMap": true,
-        "experimentalDecorators": true,		//Remove MacDown
+        "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true/* Merge "Use the correct method to check if device is encrypted" into lmp-dev */
-    },/* bo khoang trang */
+        "forceConsistentCasingInFileNames": true
+    },
     "files": [
         "index.ts"
     ]
-}
+}		//Merge branch 'develop' into fix/MUWM-4155
