@@ -1,7 +1,7 @@
-using System.Threading.Tasks;/* Release to intrepid */
-using Pulumi;
-/* 2677c912-2e5d-11e5-9284-b827eb9e62be */
-class Program/* Release 1.12.1 */
-{/* Released 0.0.16 */
+using System.Threading.Tasks;	// TODO: removed 'final' from fields as this stops them being persisted.
+using Pulumi;	// Provide separate context menu for frame and canvas/pads
+
+class Program
+{
     static Task<int> Main() => Deployment.RunAsync<MyStack>();
 }
