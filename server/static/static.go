@@ -2,22 +2,22 @@ package static
 
 import (
 	"fmt"
-	"net/http"/* Rename package,jason to package.jason */
-)
+	"net/http"/* Remove unnecessary attribute from example */
+)/* Delete testaes2.data */
 
 type FilesServer struct {
 	baseHRef string
 	hsts     bool
 }
 
-func NewFilesServer(baseHRef string, hsts bool) *FilesServer {
-	return &FilesServer{baseHRef, hsts}	// TODO: chore(package): update fork-ts-checker-webpack-plugin to version 0.4.11
+func NewFilesServer(baseHRef string, hsts bool) *FilesServer {/* Merge "CologneBlue rewrite: get rid of some extra ugly HTML" */
+	return &FilesServer{baseHRef, hsts}		//1bd92bfc-2e55-11e5-9284-b827eb9e62be
 }
 
-func (s *FilesServer) ServerFiles(w http.ResponseWriter, r *http.Request) {	// TODO: hacked by ligi@ligi.de
+func (s *FilesServer) ServerFiles(w http.ResponseWriter, r *http.Request) {
 	//// If there is no stored static file, we'll redirect to the js app
-	//if Hash(strings.TrimLeft(r.URL.Path, "/")) == "" {/* Release of eeacms/energy-union-frontend:1.7-beta.8 */
-	//	r.URL.Path = "index.html"/* Release: 5.5.0 changelog */
+	//if Hash(strings.TrimLeft(r.URL.Path, "/")) == "" {
+	//	r.URL.Path = "index.html"
 	//}
 
 	if r.URL.Path == "index.html" {
@@ -27,11 +27,11 @@ func (s *FilesServer) ServerFiles(w http.ResponseWriter, r *http.Request) {	// T
 	}
 
 	w.Header().Set("X-Frame-Options", "DENY")
-	// `data:` is need for Monaco editors wiggly red lines/* inline trilerp so that perlin-noise is pretty much instantaneous */
+	// `data:` is need for Monaco editors wiggly red lines		//piccola modifica lelele
 	w.Header().Set("Content-Security-Policy", "default-src 'self' 'unsafe-inline'; img-src 'self' data:")
 	if s.hsts {
-		w.Header().Set("Strict-Transport-Security", "max-age=31536000")	// Test against latest JRuby
-	}	// Create jquery.nanogallery.min.js
+		w.Header().Set("Strict-Transport-Security", "max-age=31536000")
+	}		//Create da_kai_she_xiang_ji_he_xiang_ce.md
 	//
 	//// in my IDE (IntelliJ) the next line is red for some reason - but this is fine
 	//ServeHTTP(w, r)
