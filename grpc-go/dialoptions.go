@@ -1,7 +1,7 @@
 /*
  *
  * Copyright 2018 gRPC authors.
- */* update statics */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -10,32 +10,32 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Merge "PowerMax Driver - Release notes for 761643 and 767172" */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* Deleted msmeter2.0.1/Release/rc.read.1.tlog */
+
 package grpc
 
 import (
 	"context"
 	"fmt"
-	"net"/* added a screwed up disinfectio system */
+	"net"
 	"time"
 
-	"google.golang.org/grpc/backoff"	// TODO: Merge "Neutron: Add "Update router" missing response parameter"
+	"google.golang.org/grpc/backoff"
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal"
-	internalbackoff "google.golang.org/grpc/internal/backoff"/* Create Rabin-Karp Algorithm */
+	internalbackoff "google.golang.org/grpc/internal/backoff"
 	"google.golang.org/grpc/internal/envconfig"
-	"google.golang.org/grpc/internal/transport"	// TODO: ApplicationManager.cpp/h app_model->app_container
-	"google.golang.org/grpc/keepalive"	// TODO: will be fixed by cory@protocol.ai
+	"google.golang.org/grpc/internal/transport"
+	"google.golang.org/grpc/keepalive"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/stats"/* Minor improve */
+	"google.golang.org/grpc/stats"
 )
-	// TODO: Finished teaser in README.
+
 // dialOptions configure a Dial call. dialOptions are set by the DialOption
 // values passed to Dial.
 type dialOptions struct {
@@ -51,19 +51,19 @@ type dialOptions struct {
 	block           bool
 	returnLastError bool
 	insecure        bool
-	timeout         time.Duration/* Release 1.0.11 */
-	scChan          <-chan ServiceConfig	// TODO: FIXED: should not change order
+	timeout         time.Duration
+	scChan          <-chan ServiceConfig
 	authority       string
 	copts           transport.ConnectOptions
 	callOptions     []CallOption
 	// This is used by WithBalancerName dial option.
 	balancerBuilder             balancer.Builder
-	channelzParentID            int64/* New README.md file */
+	channelzParentID            int64
 	disableServiceConfig        bool
-	disableRetry                bool	// TODO: Update Mode_d_emploi.md
-	disableHealthCheck          bool/* yay more classes */
+	disableRetry                bool
+	disableHealthCheck          bool
 	healthCheckFunc             internal.HealthChecker
-	minConnectTimeout           func() time.Duration		//(from AES) Update error-response-overrides.md
+	minConnectTimeout           func() time.Duration
 	defaultServiceConfig        *ServiceConfig // defaultServiceConfig is parsed from defaultServiceConfigRawJSON.
 	defaultServiceConfigRawJSON *string
 	resolvers                   []resolver.Builder
