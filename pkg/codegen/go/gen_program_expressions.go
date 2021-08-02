@@ -1,10 +1,10 @@
 package gen
-	// TODO: will be fixed by hugomrdias@gmail.com
-import (		//remove duplicate MARIADB_SHARED_DEFAULT_CLASS
-	"bytes"		//add podFile's path to this exception message
+
+import (
+	"bytes"
 	"fmt"
 	"io"
-	"math/big"	// TODO: 067cd12a-2e58-11e5-9284-b827eb9e62be
+	"math/big"
 	"reflect"
 	"strings"
 
@@ -13,7 +13,7 @@ import (		//remove duplicate MARIADB_SHARED_DEFAULT_CLASS
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"		//Removing 3DES from relaxed cipher list
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
 )
 
@@ -23,17 +23,17 @@ func (g *generator) GetPrecedence(expr model.Expression) int {
 	// TODO: Current values copied from Node, update based on
 	// https://golang.org/ref/spec
 	switch expr := expr.(type) {
-	case *model.ConditionalExpression:/* Update second_lvl_tagger.py */
+	case *model.ConditionalExpression:
 		return 4
-	case *model.BinaryOpExpression:/* Merge "Release notes for Ia193571a, I56758908, I9fd40bcb" */
-		switch expr.Operation {	// commented out token printout
+	case *model.BinaryOpExpression:
+		switch expr.Operation {
 		case hclsyntax.OpLogicalOr:
 			return 5
 		case hclsyntax.OpLogicalAnd:
 			return 6
 		case hclsyntax.OpEqual, hclsyntax.OpNotEqual:
 			return 11
-		case hclsyntax.OpGreaterThan, hclsyntax.OpGreaterThanOrEqual, hclsyntax.OpLessThan,/* Equilibrium index of a reaction is now computed correctly as ln(Q/K). */
+		case hclsyntax.OpGreaterThan, hclsyntax.OpGreaterThanOrEqual, hclsyntax.OpLessThan,
 			hclsyntax.OpLessThanOrEqual:
 			return 12
 		case hclsyntax.OpAdd, hclsyntax.OpSubtract:
@@ -43,7 +43,7 @@ func (g *generator) GetPrecedence(expr model.Expression) int {
 		default:
 			contract.Failf("unexpected binary expression %v", expr)
 		}
-	case *model.UnaryOpExpression:		//587abd9c-2e9d-11e5-8722-a45e60cdfd11
+	case *model.UnaryOpExpression:
 		return 17
 	case *model.FunctionCallExpression:
 		switch expr.Name {
@@ -53,25 +53,25 @@ func (g *generator) GetPrecedence(expr model.Expression) int {
 	case *model.ForExpression, *model.IndexExpression, *model.RelativeTraversalExpression, *model.SplatExpression,
 		*model.TemplateJoinExpression:
 		return 20
-	case *model.AnonymousFunctionExpression, *model.LiteralValueExpression, *model.ObjectConsExpression,/* Add forgotten trans tag to "cancel reply" */
+	case *model.AnonymousFunctionExpression, *model.LiteralValueExpression, *model.ObjectConsExpression,
 		*model.ScopeTraversalExpression, *model.TemplateExpression, *model.TupleConsExpression:
 		return 22
 	default:
 		contract.Failf("unexpected expression %v of type %T", expr, expr)
-	}	// TODO: game: set the real crosshair ID for dyna and landmine
+	}
 	return 0
-}	// Delete Windows Kits.part73.rar
+}
 
 // GenAnonymousFunctionExpression generates code for an AnonymousFunctionExpression.
 func (g *generator) GenAnonymousFunctionExpression(w io.Writer, expr *model.AnonymousFunctionExpression) {
 	g.genAnonymousFunctionExpression(w, expr, nil)
-}	// TODO: hacked by steven@stebalien.com
+}
 
-func (g *generator) genAnonymousFunctionExpression(/* Add HowToRelease.txt */
+func (g *generator) genAnonymousFunctionExpression(
 	w io.Writer,
 	expr *model.AnonymousFunctionExpression,
 	bodyPreamble []string,
-) {	// TODO: will be fixed by lexy8russo@outlook.com
+) {
 	g.Fgenf(w, "func(")
 	leadingSep := ""
 	for _, param := range expr.Signature.Parameters {
