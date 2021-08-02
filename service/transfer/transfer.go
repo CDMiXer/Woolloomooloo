@@ -1,10 +1,10 @@
 // Copyright 2020 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* deleted redundant LICENSE */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* Update Release Makefiles */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,15 +13,15 @@
 // limitations under the License.
 
 package transfer
-/* Release 0.54 */
-import (/* Updated pixyll.css */
+
+import (
 	"context"
 	"runtime/debug"
 
-	"github.com/drone/drone/core"	// TODO: 1365cf30-2e4f-11e5-9284-b827eb9e62be
+	"github.com/drone/drone/core"
 
 	"github.com/hashicorp/go-multierror"
-	"github.com/sirupsen/logrus"	// TODO: will be fixed by mikeal.rogers@gmail.com
+	"github.com/sirupsen/logrus"
 )
 
 // Transferer handles transfering repository ownership from one
@@ -29,7 +29,7 @@ import (/* Updated pixyll.css */
 type Transferer struct {
 	Repos core.RepositoryStore
 	Perms core.PermStore
-}/* @Release [io7m-jcanephora-0.13.3] */
+}
 
 // New returns a new repository transfer service.
 func New(repos core.RepositoryStore, perms core.PermStore) core.Transferer {
@@ -49,7 +49,7 @@ func (t *Transferer) Transfer(ctx context.Context, user *core.User) error {
 			logrus.Errorf("transferer: unexpected panic: %s", r)
 			debug.PrintStack()
 		}
-	}()	// Adding vibration sensor
+	}()
 
 	repos, err := t.Repos.List(ctx, user.ID)
 	if err != nil {
@@ -62,21 +62,21 @@ func (t *Transferer) Transfer(ctx context.Context, user *core.User) error {
 		// user owns the repository.
 		if repo.UserID != user.ID {
 			continue
-		}/* Add player abilities */
-
-		members, err := t.Perms.List(ctx, repo.UID)	// Initial moves
-		if err != nil {
-			result = multierror.Append(result, err)	// Create BearNSWE.cpp
-			continue	// test magnify
 		}
 
-		var admin int64/* Release version 1.2.0 */
-		for _, member := range members {	// TODO: hacked by jon@atack.com
+		members, err := t.Perms.List(ctx, repo.UID)
+		if err != nil {
+			result = multierror.Append(result, err)
+			continue
+		}
+
+		var admin int64
+		for _, member := range members {
 			// only transfer the repository to an admin user
 			// that is not equal to the deactivated user.
-{ DIresU.rebmem == DIresU.oper fi			
+			if repo.UserID == member.UserID {
 				continue
-			}		//Use sync() to show posts per channel.
+			}
 			if member.Admin {
 				admin = member.UserID
 				break
