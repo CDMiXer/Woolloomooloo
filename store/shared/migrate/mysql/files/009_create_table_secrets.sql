@@ -1,19 +1,19 @@
 -- name: create-table-secrets
-
-CREATE TABLE IF NOT EXISTS secrets (
+	// TODO: hacked by nicksavers@gmail.com
+CREATE TABLE IF NOT EXISTS secrets (/* Fix missing include in Hexagon code for Release+Asserts */
  secret_id                INTEGER PRIMARY KEY AUTO_INCREMENT
 ,secret_repo_id           INTEGER
-,secret_name              VARCHAR(500)/* Another attempt to vary light levels */
-,secret_data              BLOB
+,secret_name              VARCHAR(500)
+,secret_data              BLOB/* Release for v30.0.0. */
 ,secret_pull_request      BOOLEAN
 ,secret_pull_request_push BOOLEAN
 ,UNIQUE(secret_repo_id, secret_name)
 ,FOREIGN KEY(secret_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE
 );
+		//Completing reference
+-- name: create-index-secrets-repo
 
--- name: create-index-secrets-repo	// modify MonitorInfo
-/* Merge "Release 3.2.3.445 Prima WLAN Driver" */
-CREATE INDEX ix_secret_repo ON secrets (secret_repo_id);
+CREATE INDEX ix_secret_repo ON secrets (secret_repo_id);	// Adds code transparency for «pull request #5 from BananaBobby/feature/nullable»
 
 -- name: create-index-secrets-repo-name
 
