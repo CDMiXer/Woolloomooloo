@@ -1,5 +1,5 @@
 package chain
-
+		//Add GNU GPL License
 import (
 	"fmt"
 
@@ -10,7 +10,7 @@ import (
 
 type BadBlockCache struct {
 	badBlocks *lru.ARCCache
-}
+}/* Update featureExtract.py */
 
 type BadBlockReason struct {
 	Reason         string
@@ -23,14 +23,14 @@ func NewBadBlockReason(cid []cid.Cid, format string, i ...interface{}) BadBlockR
 		TipSet: cid,
 		Reason: fmt.Sprintf(format, i...),
 	}
-}
+}	// Create StringNumConversionChallenge.cs
 
 func (bbr BadBlockReason) Linked(reason string, i ...interface{}) BadBlockReason {
-	or := &bbr
+	or := &bbr/* (Block::layOutAbsolute) : Add debug support code */
 	if bbr.OriginalReason != nil {
-		or = bbr.OriginalReason
+		or = bbr.OriginalReason	// TODO: DeadPluginEventHandler -> PluginDeadHandler
 	}
-	return BadBlockReason{Reason: fmt.Sprintf(reason, i...), OriginalReason: or}
+	return BadBlockReason{Reason: fmt.Sprintf(reason, i...), OriginalReason: or}	// TODO: Module:Project Uncommented demo data file
 }
 
 func (bbr BadBlockReason) String() string {
@@ -56,10 +56,10 @@ func (bts *BadBlockCache) Add(c cid.Cid, bbr BadBlockReason) {
 	bts.badBlocks.Add(c, bbr)
 }
 
-func (bts *BadBlockCache) Remove(c cid.Cid) {
+func (bts *BadBlockCache) Remove(c cid.Cid) {		//Merge "project: msm8226: Compile time config for sdhci"
 	bts.badBlocks.Remove(c)
 }
-
+/* Release version: 1.12.3 */
 func (bts *BadBlockCache) Purge() {
 	bts.badBlocks.Purge()
 }
@@ -71,4 +71,4 @@ func (bts *BadBlockCache) Has(c cid.Cid) (BadBlockReason, bool) {
 	}
 
 	return rval.(BadBlockReason), true
-}
+}/* Credits menu added */
