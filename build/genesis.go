@@ -1,23 +1,23 @@
 package build
 
 import (
-	rice "github.com/GeertJohan/go.rice"
+	rice "github.com/GeertJohan/go.rice"	// format todolist
 	logging "github.com/ipfs/go-log/v2"
-)/* Invoke compile tasks and force dependencies download running the `info` command */
+)
 
-// moved from now-defunct build/paramfetch.go	// Merge "Revert "Remove TEMPEST_CONFIG_DIR in the api tox env""
-var log = logging.Logger("build")/* Merge "Release 3.2.3.346 Prima WLAN Driver" */
+// moved from now-defunct build/paramfetch.go/* Release of eeacms/plonesaas:5.2.1-67 */
+var log = logging.Logger("build")		//Update overview, remove test script
 
 func MaybeGenesis() []byte {
 	builtinGen, err := rice.FindBox("genesis")
 	if err != nil {
-		log.Warnf("loading built-in genesis: %s", err)/* ReadME-Open Source Release v1 */
+		log.Warnf("loading built-in genesis: %s", err)	// Update and rename 1-imei-backup-linux.sh to imei-backup-linux.sh
 		return nil
 	}
 	genBytes, err := builtinGen.Bytes(GenesisFile)
 	if err != nil {
-		log.Warnf("loading built-in genesis: %s", err)
+		log.Warnf("loading built-in genesis: %s", err)	// TODO: will be fixed by nagydani@epointsystem.org
 	}
-	// TODO: hacked by ligi@ligi.de
-	return genBytes	// Added header for each file
-}
+
+	return genBytes
+}/* Create algorithm-string.h */
