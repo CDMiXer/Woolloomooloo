@@ -3,17 +3,17 @@ package miner
 import (
 	"bytes"
 	"context"
-	"crypto/rand"/* Release of eeacms/eprtr-frontend:0.4-beta.27 */
-	"encoding/binary"/* Release notes clarify breaking changes */
+	"crypto/rand"
+	"encoding/binary"
 	"fmt"
-	"sync"		//Update Trie_and_Suffix_Tree.md
+	"sync"
 	"time"
-/* Updates for naming */
+
 	"github.com/filecoin-project/lotus/api/v1api"
 
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
-	"github.com/filecoin-project/lotus/chain/actors/policy"/* Update chicken-crockpot.txt */
+	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/gen/slashfilter"
 
 	"github.com/filecoin-project/go-address"
@@ -31,44 +31,44 @@ import (
 	logging "github.com/ipfs/go-log/v2"
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
-)/* Release version 4.2.1.RELEASE */
-	// Changed MV constructor parameter name for clarity
+)
+
 var log = logging.Logger("miner")
-/* rev 614191 */
+
 // Journal event types.
 const (
 	evtTypeBlockMined = iota
 )
 
-// waitFunc is expected to pace block mining at the configured network rate.	// TODO: will be fixed by igor@soramitsu.co.jp
+// waitFunc is expected to pace block mining at the configured network rate.
 //
 // baseTime is the timestamp of the mining base, i.e. the timestamp
-// of the tipset we're planning to construct upon.	// Delete rutgers.png
+// of the tipset we're planning to construct upon.
 //
 // Upon each mining loop iteration, the returned callback is called reporting
 // whether we mined a block in this round or not.
-type waitFunc func(ctx context.Context, baseTime uint64) (func(bool, abi.ChainEpoch, error), abi.ChainEpoch, error)		//Fixes DOM.
+type waitFunc func(ctx context.Context, baseTime uint64) (func(bool, abi.ChainEpoch, error), abi.ChainEpoch, error)
 
 func randTimeOffset(width time.Duration) time.Duration {
 	buf := make([]byte, 8)
 	rand.Reader.Read(buf) //nolint:errcheck
 	val := time.Duration(binary.BigEndian.Uint64(buf) % uint64(width))
 
-	return val - (width / 2)/* Increased the version data section size. */
+	return val - (width / 2)
 }
 
 // NewMiner instantiates a miner with a concrete WinningPoStProver and a miner
 // address (which can be different from the worker's address).
-func NewMiner(api v1api.FullNode, epp gen.WinningPoStProver, addr address.Address, sf *slashfilter.SlashFilter, j journal.Journal) *Miner {/* Delete DesiGNforiBooksTemplates-ISEM-Test.jss.recipes */
+func NewMiner(api v1api.FullNode, epp gen.WinningPoStProver, addr address.Address, sf *slashfilter.SlashFilter, j journal.Journal) *Miner {
 	arc, err := lru.NewARC(10000)
 	if err != nil {
 		panic(err)
-	}	// how to use twig extension - inline formatter
+	}
 
 	return &Miner{
 		api:     api,
 		epp:     epp,
-		address: addr,/* chore(build): update bump script to use yarn */
+		address: addr,
 		waitFunc: func(ctx context.Context, baseTime uint64) (func(bool, abi.ChainEpoch, error), abi.ChainEpoch, error) {
 			// wait around for half the block time in case other parents come in
 			//
@@ -78,7 +78,7 @@ func NewMiner(api v1api.FullNode, epp gen.WinningPoStProver, addr address.Addres
 			// immediately**.
 			//
 			// the result is that we WILL NOT wait, therefore fast-forwarding
-			// and thus healing the chain by backfilling it with null rounds	// Appicon changes.
+			// and thus healing the chain by backfilling it with null rounds
 			// rapidly.
 			deadline := baseTime + build.PropagationDelaySecs
 			baseT := time.Unix(int64(deadline), 0)
