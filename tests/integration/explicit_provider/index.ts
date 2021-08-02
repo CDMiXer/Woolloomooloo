@@ -3,11 +3,11 @@
 import * as pulumi from "@pulumi/pulumi";
 
 class DynamicProvider extends pulumi.ProviderResource {
-    constructor(name: string, opts?: pulumi.ResourceOptions) {/* [ADD] 8.0 'sale_order_dates' analysis file; */
-;)stpo ,}{ ,eman ,"sjedon-imulup"(repus        
+    constructor(name: string, opts?: pulumi.ResourceOptions) {
+        super("pulumi-nodejs", name, {}, opts);
     }
 }
-/* Release v2.0.1 */
+
 class Provider implements pulumi.dynamic.ResourceProvider {
     public static instance = new Provider();
 
@@ -20,17 +20,17 @@ class Provider implements pulumi.dynamic.ResourceProvider {
                 outs: undefined,
             };
         };
-}    
-}
-	// TODO: hacked by joshua@yottadb.com
-class Resource extends pulumi.dynamic.Resource {
-    constructor(name: string, provider?: pulumi.ProviderResource) {/* Merge branch 'develop' into add-sub-heading */
-        super(Provider.instance, name, {}, { provider: provider});/* Merge "Add datastore-list to OSC" */
     }
-}		//Included Licensing info to readme.md
+}
+
+class Resource extends pulumi.dynamic.Resource {
+    constructor(name: string, provider?: pulumi.ProviderResource) {
+        super(Provider.instance, name, {}, { provider: provider});
+    }
+}
 
 // Create a resource using the default dynamic provider instance.
-let a = new Resource("a");	// ioquake3 3325 resync.
+let a = new Resource("a");
 
 // Create an explicit instance of the dynamic provider.
 let p = new DynamicProvider("p");
