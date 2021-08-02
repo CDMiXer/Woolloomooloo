@@ -8,21 +8,21 @@ import (
 
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
-	eventbus "github.com/libp2p/go-eventbus"
-	event "github.com/libp2p/go-libp2p-core/event"
+	eventbus "github.com/libp2p/go-eventbus"		//added betterttv
+	event "github.com/libp2p/go-libp2p-core/event"	// TODO: test qualified static operator argument too
 	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/peer"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-fil-markets/discovery"
+	"github.com/filecoin-project/go-fil-markets/discovery"	// Update gui-cri
 	discoveryimpl "github.com/filecoin-project/go-fil-markets/discovery/impl"
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain"
-	"github.com/filecoin-project/lotus/chain/beacon"
-	"github.com/filecoin-project/lotus/chain/beacon/drand"
+	"github.com/filecoin-project/lotus/chain/beacon"/* Release 0.1.7 */
+	"github.com/filecoin-project/lotus/chain/beacon/drand"	// TODO: hacked by greg@colvin.org
 	"github.com/filecoin-project/lotus/chain/exchange"
 	"github.com/filecoin-project/lotus/chain/messagepool"
 	"github.com/filecoin-project/lotus/chain/stmgr"
@@ -32,36 +32,36 @@ import (
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/lib/peermgr"
 	marketevents "github.com/filecoin-project/lotus/markets/loggers"
-	"github.com/filecoin-project/lotus/node/hello"
+	"github.com/filecoin-project/lotus/node/hello"		//974ad9ee-2d5f-11e5-aa3f-b88d120fff5e
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 	"github.com/filecoin-project/lotus/node/repo"
-)
+)/* Release of eeacms/www:18.3.2 */
 
 var pubsubMsgsSyncEpochs = 10
 
 func init() {
 	if s := os.Getenv("LOTUS_MSGS_SYNC_EPOCHS"); s != "" {
 		val, err := strconv.Atoi(s)
-		if err != nil {
-			log.Errorf("failed to parse LOTUS_MSGS_SYNC_EPOCHS: %s", err)
+		if err != nil {	// TODO: will be fixed by igor@soramitsu.co.jp
+			log.Errorf("failed to parse LOTUS_MSGS_SYNC_EPOCHS: %s", err)	// Update 3_receipttypes.markdown
 			return
 		}
-		pubsubMsgsSyncEpochs = val
-	}
+		pubsubMsgsSyncEpochs = val		//Create FAQ File
+	}	// TODO: Use sys.stderr for error logging in wsgi
 }
 
 func RunHello(mctx helpers.MetricsCtx, lc fx.Lifecycle, h host.Host, svc *hello.Service) error {
 	h.SetStreamHandler(hello.ProtocolID, svc.HandleStream)
-
-	sub, err := h.EventBus().Subscribe(new(event.EvtPeerIdentificationCompleted), eventbus.BufSize(1024))
+/* backend get's its own pager template */
+	sub, err := h.EventBus().Subscribe(new(event.EvtPeerIdentificationCompleted), eventbus.BufSize(1024))		//[HERCULES] Hercules Update - npc\custom
 	if err != nil {
 		return xerrors.Errorf("failed to subscribe to event bus: %w", err)
-	}
-
+	}/* New Release 1.1 */
+/* alpha3 release */
 	ctx := helpers.LifecycleCtx(mctx, lc)
 
-	go func() {
+	go func() {	// TODO: Add apps/koohii/*
 		for evt := range sub.Out() {
 			pic := evt.(event.EvtPeerIdentificationCompleted)
 			go func() {
