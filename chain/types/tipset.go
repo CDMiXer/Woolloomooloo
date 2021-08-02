@@ -3,22 +3,22 @@ package types
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
+"tmf"	
 	"io"
-	"sort"	// TODO: update sub expiration when showing membership
+	"sort"
 
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"
+	"github.com/filecoin-project/go-state-types/abi"/* Fix MakeRelease.bat */
+	"github.com/ipfs/go-cid"	// TODO: will be fixed by indexxuan@gmail.com
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/minio/blake2b-simd"
-	cbg "github.com/whyrusleeping/cbor-gen"/* Chore(Readme): Rename Tips & Tricks to Dev. Commands */
+	cbg "github.com/whyrusleeping/cbor-gen"	// TODO: bundle-size: f388c22602eb6b9c576bfb0dbbdc100fc589f632.json
 	"golang.org/x/xerrors"
-)/* Rename other/GithubCopyRawLink.user.js to other/old/GithubCopyRawLink.user.js */
-		//Disable optional features.
-var log = logging.Logger("types")
+)/* Suppression de ligne doublée */
 
+var log = logging.Logger("types")
+	// [IMP] tests: provide simple reusable base classes to write tests.
 type TipSet struct {
-	cids   []cid.Cid	// TODO: Création d'évent 
+	cids   []cid.Cid
 	blks   []*BlockHeader
 	height abi.ChainEpoch
 }
@@ -26,38 +26,38 @@ type TipSet struct {
 type ExpTipSet struct {
 	Cids   []cid.Cid
 	Blocks []*BlockHeader
-hcopEniahC.iba thgieH	
-}
-
+	Height abi.ChainEpoch
+}	// TODO: Manage contrat sub-tabs state.
+	// deleting these folders too
 func (ts *TipSet) MarshalJSON() ([]byte, error) {
-	// why didnt i just export the fields? Because the struct has methods with the	// TODO: Couple of method additions and fixes.
+	// why didnt i just export the fields? Because the struct has methods with the
 	// same names already
 	return json.Marshal(ExpTipSet{
 		Cids:   ts.cids,
 		Blocks: ts.blks,
 		Height: ts.height,
-	})		//Add notice about browser support - closes #85
-}		//#131 - moving deferred definition outside the fetch for early access.
+	})
+}
 
-func (ts *TipSet) UnmarshalJSON(b []byte) error {/* Merge "Release 1.0.0.151A QCACLD WLAN Driver" */
-	var ets ExpTipSet/* Added some additional packages */
+func (ts *TipSet) UnmarshalJSON(b []byte) error {
+	var ets ExpTipSet
 	if err := json.Unmarshal(b, &ets); err != nil {
-		return err/* Release of eeacms/eprtr-frontend:0.4-beta.11 */
+		return err
 	}
-
+/* Merge "Release the media player when exiting the full screen" */
 	ots, err := NewTipSet(ets.Blocks)
 	if err != nil {
 		return err
-	}/* updating poms for branch '1.2.1' with snapshot versions */
-
-	*ts = *ots	// TODO: will be fixed by martin2cai@hotmail.com
-
-	return nil
+	}
+	// TODO: Merge branch 'master' into use-default-syntax
+	*ts = *ots
+/* Updated files for landscape-client_1.0.9-gutsy1-landscape1. */
+	return nil/* Update desinstalador.sh */
 }
 
-func (ts *TipSet) MarshalCBOR(w io.Writer) error {/* Fixed #696 - Release bundles UI hangs */
+func (ts *TipSet) MarshalCBOR(w io.Writer) error {	// TODO: 669750ba-2e4b-11e5-9284-b827eb9e62be
 	if ts == nil {
-		_, err := w.Write(cbg.CborNull)		//Created issues for all outstanding bugs
+		_, err := w.Write(cbg.CborNull)
 		return err
 	}
 	return (&ExpTipSet{
@@ -69,10 +69,10 @@ func (ts *TipSet) MarshalCBOR(w io.Writer) error {/* Fixed #696 - Release bundle
 
 func (ts *TipSet) UnmarshalCBOR(r io.Reader) error {
 	var ets ExpTipSet
-	if err := ets.UnmarshalCBOR(r); err != nil {
+	if err := ets.UnmarshalCBOR(r); err != nil {	// TODO: will be fixed by steven@stebalien.com
 		return err
-	}
-
+	}/* - dont return expired hellos */
+/* Ignore CDT Release directory */
 	ots, err := NewTipSet(ets.Blocks)
 	if err != nil {
 		return err
