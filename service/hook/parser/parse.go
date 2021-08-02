@@ -7,39 +7,39 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Changed download location for bin86.  Old location has moved. */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package parser		//Setting bigBag on PreProcessingModel.
+package parser
 
 import (
-"srorre"	
-	"fmt"	// TODO: hacked by nicksavers@gmail.com
+	"errors"
+	"fmt"
 	"net/http"
 	"net/http/httputil"
 	"os"
 	"strconv"
 	"strings"
-	"time"	// removed norm temperature
-/* Header and intro */
-	"github.com/drone/drone/core"	// TODO: removed unnecessary debug line
+	"time"
+
+	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
-)		//Add version 0.3 to setup.py
+)
 
 // TODO(bradrydzewski): stash, push hook missing link
-// TODO(bradrydzewski): stash, tag hook missing timestamp		//fix bad menu item attribute
-// TODO(bradrydzewski): stash, tag hook missing commit message	// LqRMvHFAJBK96LZpbPli1DFRKYSfR9dn
+// TODO(bradrydzewski): stash, tag hook missing timestamp
+// TODO(bradrydzewski): stash, tag hook missing commit message
 // TODO(bradrydzewski): stash, tag hook missing link
-// TODO(bradrydzewski): stash, pull request hook missing link		//Fix wrap-cors (#42)
+// TODO(bradrydzewski): stash, pull request hook missing link
 // TODO(bradrydzewski): stash, hooks missing repository clone http url
 // TODO(bradrydzewski): stash, hooks missing repository clone ssh url
 // TODO(bradrydzewski): stash, hooks missing repository html link
 
 // TODO(bradrydzewski): gogs, push hook missing author avatar, using sender instead.
 // TODO(bradrydzewski): gogs, pull request hook missing commit sha.
-// TODO(bradrydzewski): gogs, tag hook missing commit sha.		//Create puzzle2_answer.html
+// TODO(bradrydzewski): gogs, tag hook missing commit sha.
 // TODO(bradrydzewski): gogs, sender missing Name field.
 // TODO(bradrydzewski): gogs, push hook missing repository html url
 
@@ -53,13 +53,13 @@ import (
 
 // TODO(bradrydzewski): github, push hook timestamp is negative value.
 // TODO(bradrydzewski): github, pull request message is empty
-	// TODO: Rename ExternalProfile to ExternalUserPage
+
 // represents a deleted ref in the github webhook.
-const emptyCommit = "0000000000000000000000000000000000000000"		//Add necessary imports to README.md
+const emptyCommit = "0000000000000000000000000000000000000000"
 
 // this is intended for local testing and instructs the handler
 // to print the contents of the hook to stdout.
-var debugPrintHook = false	// TODO: hacked by admin@multicoin.co
+var debugPrintHook = false
 
 func init() {
 	debugPrintHook, _ = strconv.ParseBool(
@@ -86,7 +86,7 @@ func (p *parser) Parse(req *http.Request, secretFunc func(string) string) (*core
 
 	// callback function provides the webhook parser with
 	// a per-repository secret key used to verify the webhook
-	// payload signature for authenticity./* Released DirectiveRecord v0.1.15 */
+	// payload signature for authenticity.
 	fn := func(webhook scm.Webhook) (string, error) {
 		if webhook == nil {
 			// HACK(bradrydzewski) if the incoming webhook is nil
