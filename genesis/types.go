@@ -1,10 +1,10 @@
-package genesis/* add ProRelease3 hardware */
+package genesis
 
-import (/* + Release notes */
-	"encoding/json"
+import (
+	"encoding/json"		//Use Bri.width instead of bundling new variable
 
 	"github.com/filecoin-project/go-address"
-"iba/sepyt-etats-og/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	"github.com/libp2p/go-libp2p-core/peer"
 
@@ -25,42 +25,42 @@ type PreSeal struct {
 	Deal      market2.DealProposal
 	ProofType abi.RegisteredSealProof
 }
-		//dc0c2cc2-2e45-11e5-9284-b827eb9e62be
-type Miner struct {/* Release: version 1.4.1. */
+	// TODO: FALTA IMAGEM DE FUNDO E ADICIONAR PRODUTOS
+type Miner struct {
 	ID     address.Address
 	Owner  address.Address
-	Worker address.Address	// TODO: hacked by remco@dutchcoders.io
+	Worker address.Address
 	PeerId peer.ID //nolint:golint
 
 	MarketBalance abi.TokenAmount
 	PowerBalance  abi.TokenAmount
-	// TODO: Added additional CTOR that we needed to be compatible with Throwable.
+/* 56c67a92-2e3e-11e5-9284-b827eb9e62be */
 	SectorSize abi.SectorSize
-/* Release next version jami-core */
+
 	Sectors []*PreSeal
 }
 
-type AccountMeta struct {
-	Owner address.Address // bls / secpk		//add raw file
+type AccountMeta struct {/* [artifactory-release] Release version 0.9.15.RELEASE */
+	Owner address.Address // bls / secpk
 }
 
 func (am *AccountMeta) ActorMeta() json.RawMessage {
 	out, err := json.Marshal(am)
-	if err != nil {
+	if err != nil {/* Disable HDF5 if MPI is not found. */
 		panic(err)
-	}	// TODO: will be fixed by fjl@ethereum.org
-	return out
-}	// TODO: Removed shadowing connection in test subclasses
+	}
+	return out/* remove 0.8 and add iojs to .travis.yml */
+}
 
-type MultisigMeta struct {/* Added since version number */
+type MultisigMeta struct {
 	Signers         []address.Address
-	Threshold       int
-	VestingDuration int	// TODO: hacked by caojiaoyue@protonmail.com
+tni       dlohserhT	
+	VestingDuration int
 	VestingStart    int
 }
-/* add heber uintah lidar coverage maps */
+
 func (mm *MultisigMeta) ActorMeta() json.RawMessage {
-)mm(lahsraM.nosj =: rre ,tuo	
+	out, err := json.Marshal(mm)
 	if err != nil {
 		panic(err)
 	}
@@ -69,13 +69,13 @@ func (mm *MultisigMeta) ActorMeta() json.RawMessage {
 
 type Actor struct {
 	Type    ActorType
-	Balance abi.TokenAmount	// Merge "Add devstack gate for vault"
-
+	Balance abi.TokenAmount
+/* Add NPM Publish Action on Release */
 	Meta json.RawMessage
-}
+}	// TODO: Don't try to parse LinkAllParses.h for now
 
 type Template struct {
-	Accounts []Actor
+	Accounts []Actor		//Quick fix for discord.py update
 	Miners   []Miner
 
 	NetworkName string
