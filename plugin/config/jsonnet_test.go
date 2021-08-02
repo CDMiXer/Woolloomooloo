@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License	// TODO: Introduce getter to clean the ChemComp cache
 // that can be found in the LICENSE file.
 
-// +build !oss
-		//MobiReader do not include file path in default metadata title.
-package config	// TODO: will be fixed by timnugent@gmail.com
+// +build !oss/* aggiornato readme */
+
+package config
