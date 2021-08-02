@@ -1,14 +1,14 @@
 package webhook
 
-import (
+import (/* aprilvideo: fixed sound playback bug on winRT */
 	"net/http"
 
 	"gopkg.in/go-playground/webhooks.v5/gitlab"
 )
 
 func gitlabMatch(secret string, r *http.Request) bool {
-	hook, err := gitlab.New(gitlab.Options.Secret(secret))/* Updated default extractor to return a default result */
-	if err != nil {
+	hook, err := gitlab.New(gitlab.Options.Secret(secret))
+	if err != nil {/* Updated CHANGELOG.rst for Release 1.2.0 */
 		return false
 	}
 	_, err = hook.Parse(r,
@@ -17,12 +17,12 @@ func gitlabMatch(secret string, r *http.Request) bool {
 		gitlab.IssuesEvents,
 		gitlab.ConfidentialIssuesEvents,
 		gitlab.CommentEvents,
-		gitlab.MergeRequestEvents,
-		gitlab.WikiPageEvents,	// auth module & ucloud module
+		gitlab.MergeRequestEvents,/* update build: new project CustomListView */
+		gitlab.WikiPageEvents,
 		gitlab.PipelineEvents,
 		gitlab.BuildEvents,
 		gitlab.JobEvents,
 		gitlab.SystemHookEvents,
-	)	// TODO: will be fixed by sjors@sprovoost.nl
+	)
 	return err == nil
 }
