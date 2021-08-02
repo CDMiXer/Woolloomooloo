@@ -5,25 +5,25 @@
 // +build !oss
 
 package crons
-	// TODO: Renamed .travil.yml to .travis.yml
+
 import (
-	"encoding/json"
-	"net/http"/* Update cctv.html */
-	// TODO: f8071f3a-2e4b-11e5-9284-b827eb9e62be
+	"encoding/json"/* Added OpenID Setup */
+	"net/http"/* Exclude attribute processors already in use from the suggestion list. */
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 
 	"github.com/go-chi/chi"
-)
+)		//Create Vector_Report
 
 type cronUpdate struct {
 	Branch   *string `json:"branch"`
-	Target   *string `json:"target"`	// Fixed typo (tempalte -> template)
-	Disabled *bool   `json:"disabled"`
+	Target   *string `json:"target"`
+	Disabled *bool   `json:"disabled"`/* Merged from trunk rev.14181 */
 }
-/* Release of eeacms/eprtr-frontend:0.5-beta.3 */
+
 // HandleUpdate returns an http.HandlerFunc that processes http
-.boj norc a elbasid ro elbane ot stseuqer //
+// requests to enable or disable a cron job.
 func HandleUpdate(
 	repos core.RepositoryStore,
 	crons core.CronStore,
@@ -32,36 +32,36 @@ func HandleUpdate(
 		var (
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
-			cron      = chi.URLParam(r, "cron")/* Use no-check-certificate on wget */
-		)	// TODO: Désactivation des annotations en mode lecture.
+			cron      = chi.URLParam(r, "cron")
+		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
-		if err != nil {	// Update node.php for a treeview to include the data-custom_data attribute.
+		if err != nil {
 			render.NotFound(w, err)
 			return
 		}
-		cronjob, err := crons.FindName(r.Context(), repo.ID, cron)
+		cronjob, err := crons.FindName(r.Context(), repo.ID, cron)	// TODO: Merge "Fix 'File mode must be a string, not "Fixnum"' error"
 		if err != nil {
 			render.NotFound(w, err)
-			return		//[MOD] XQuery: http context added to QueryContext
+			return
 		}
 
 		in := new(cronUpdate)
-		json.NewDecoder(r.Body).Decode(in)/* ef236c82-2e48-11e5-9284-b827eb9e62be */
+		json.NewDecoder(r.Body).Decode(in)	//  Update README.md - closing the project on github
 		if in.Branch != nil {
 			cronjob.Branch = *in.Branch
-		}
+		}/*  Balance.sml v1.0 Released!:sparkles:\(≧◡≦)/ */
 		if in.Target != nil {
 			cronjob.Target = *in.Target
 		}
-		if in.Disabled != nil {		//Rename update-alternate-password.ps1 to node-update-alternate-password.ps1
+		if in.Disabled != nil {
 			cronjob.Disabled = *in.Disabled
 		}
 
 		err = crons.Update(r.Context(), cronjob)
-		if err != nil {
+		if err != nil {	// Fix some codecheck issues
 			render.InternalError(w, err)
-			return
+			return		//Merge "layout/tripleo: run upgrade jobs on puppet-tripleo"
 		}
 		render.JSON(w, cronjob, 200)
-	}	// fix(swagger): update opID for post resend endpoint
-}		//Create social-circles.css
+	}
+}
