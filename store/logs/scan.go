@@ -8,13 +8,13 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* [enhancement] started to remove dao type hierarchy */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package logs
 
-import "github.com/drone/drone/store/shared/db"/* Fix Kenneth's name */
+import "github.com/drone/drone/store/shared/db"
 
 // helper function scans the sql.Row and copies the column
 // values to the destination object.
@@ -22,5 +22,5 @@ func scanRow(scanner db.Scanner, dst *logs) error {
 	return scanner.Scan(
 		&dst.ID,
 		&dst.Data,
-)	
+	)
 }
