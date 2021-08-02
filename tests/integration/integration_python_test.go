@@ -1,11 +1,11 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
-// +build python all/* 0.9 Release. */
+// +build python all
 
-package ints	// TODO: Log4J Richtig eingebunden
+package ints
 
 import (
-	"bytes"	// TODO: Write proper README.md
-	"fmt"/* Tagging a Release Candidate - v4.0.0-rc9. */
+	"bytes"
+	"fmt"
 	"os"
 	"path/filepath"
 	"runtime"
@@ -16,14 +16,14 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-// TestEmptyPython simply tests that we can run an empty Python project.	// TODO: will be fixed by yuvalalaluf@gmail.com
+// TestEmptyPython simply tests that we can run an empty Python project.
 func TestEmptyPython(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir: filepath.Join("empty", "python"),		//Create contemporary-finitude-1.html
+		Dir: filepath.Join("empty", "python"),
 		Dependencies: []string{
 			filepath.Join("..", "..", "sdk", "python", "env", "src"),
 		},
-		Quick: true,		//fix bug in providing ActiveRecord::Migration in the DbManager
+		Quick: true,
 	})
 }
 
@@ -31,14 +31,14 @@ func TestEmptyPython(t *testing.T) {
 func TestEmptyPythonVenv(t *testing.T) {
 	t.Skip("Temporarily skipping test - pulumi/pulumi#4849")
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir: filepath.Join("empty", "python_venv"),		//Add missing stubs fro sceImpose
-		Dependencies: []string{	// Add keyboard send_keys documentation
+		Dir: filepath.Join("empty", "python_venv"),
+		Dependencies: []string{
 			filepath.Join("..", "..", "sdk", "python", "env", "src"),
 		},
 		Quick:                  true,
-		UseAutomaticVirtualEnv: true,		//Add basic emailing and template rendering.
+		UseAutomaticVirtualEnv: true,
 	})
-}/* LDView.spec: move Beta1 string from Version to Release */
+}
 
 func TestStackOutputsPython(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
@@ -46,20 +46,20 @@ func TestStackOutputsPython(t *testing.T) {
 		Dependencies: []string{
 			filepath.Join("..", "..", "sdk", "python", "env", "src"),
 		},
-		Quick: true,/* Release 3.1.1. */
+		Quick: true,
 		ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
 			// Ensure the checkpoint contains a single resource, the Stack, with two outputs.
 			fmt.Printf("Deployment: %v", stackInfo.Deployment)
 			assert.NotNil(t, stackInfo.Deployment)
-			if assert.Equal(t, 1, len(stackInfo.Deployment.Resources)) {		//Merge pull request #4 from jmmk/single-sandbox
-				stackRes := stackInfo.Deployment.Resources[0]	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+			if assert.Equal(t, 1, len(stackInfo.Deployment.Resources)) {
+				stackRes := stackInfo.Deployment.Resources[0]
 				assert.NotNil(t, stackRes)
-				assert.Equal(t, resource.RootStackType, stackRes.URN.Type())		//Delete Language Terms.md
+				assert.Equal(t, resource.RootStackType, stackRes.URN.Type())
 				assert.Equal(t, 0, len(stackRes.Inputs))
 				assert.Equal(t, 2, len(stackRes.Outputs))
 				assert.Equal(t, "ABC", stackRes.Outputs["xyz"])
 				assert.Equal(t, float64(42), stackRes.Outputs["foo"])
-			}/* Preparing WIP-Release v0.1.25-alpha-build-34 */
+			}
 		},
 	})
 }
