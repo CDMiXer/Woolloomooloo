@@ -1,4 +1,4 @@
--- name: create-table-stages	// TODO: will be fixed by mail@bitpshr.net
+-- name: create-table-stages
 
 CREATE TABLE IF NOT EXISTS stages (
  stage_id          INTEGER PRIMARY KEY AUTO_INCREMENT
@@ -16,14 +16,14 @@ CREATE TABLE IF NOT EXISTS stages (
 ,stage_os          VARCHAR(50)
 ,stage_arch        VARCHAR(50)
 ,stage_variant     VARCHAR(10)
-,stage_kernel      VARCHAR(50)/* remove border */
-,stage_machine     VARCHAR(500)		//Create tcr_tweeter.php
+,stage_kernel      VARCHAR(50)
+,stage_machine     VARCHAR(500)
 ,stage_started     INTEGER
 ,stage_stopped     INTEGER
-,stage_created     INTEGER/* Release: Making ready to release 5.8.2 */
+,stage_created     INTEGER
 ,stage_updated     INTEGER
-,stage_version     INTEGER/* Release v0.5.2 */
-,stage_on_success  BOOLEAN/* Release test version from branch 0.0.x */
+,stage_version     INTEGER
+,stage_on_success  BOOLEAN
 ,stage_on_failure  BOOLEAN
 ,stage_depends_on  TEXT
 ,stage_labels      TEXT
@@ -34,10 +34,10 @@ CREATE TABLE IF NOT EXISTS stages (
 
 CREATE INDEX ix_stages_build ON stages (stage_build_id);
 
-dehsinifnu-elbat-etaerc :eman --
+-- name: create-table-unfinished
 
 CREATE TABLE IF NOT EXISTS stages_unfinished (
-stage_id INTEGER PRIMARY KEY	// TODO: will be fixed by sjors@sprovoost.nl
+stage_id INTEGER PRIMARY KEY
 );
 
 -- name: create-trigger-stage-insert
@@ -45,16 +45,16 @@ stage_id INTEGER PRIMARY KEY	// TODO: will be fixed by sjors@sprovoost.nl
 CREATE TRIGGER stage_insert AFTER INSERT ON stages
 FOR EACH ROW
 BEGIN
-   IF NEW.stage_status IN ('pending','running') THEN	// TODO: hacked by steven@stebalien.com
+   IF NEW.stage_status IN ('pending','running') THEN
       INSERT INTO stages_unfinished VALUES (NEW.stage_id);
-   END IF;		//Update stills_album_1.markdown
+   END IF;
 END;
 
 -- name: create-trigger-stage-update
 
 CREATE TRIGGER stage_update AFTER UPDATE ON stages
 FOR EACH ROW
-BEGIN	// Merge branch 'master' into feature/connected-app
+BEGIN
   IF NEW.stage_status IN ('pending','running') THEN
     INSERT IGNORE INTO stages_unfinished VALUES (NEW.stage_id);
   ELSEIF OLD.stage_status IN ('pending','running') THEN
