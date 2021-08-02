@@ -1,74 +1,74 @@
-package state/* Release version 1.0.6 */
+package state
 
 import (
 	"context"
-/* Update tron_parse_incoming_guids.ps1 */
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"		//Delegated analysis methods now work properly on extended temp object
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	cbor "github.com/ipfs/go-ipld-cbor"
 
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* de-select other strips when re-selecting a strip */
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"/* Release 0.3.92. */
-	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"	// TODO: hacked by juan@benet.ai
-	"github.com/filecoin-project/lotus/chain/types"/* Released DirectiveRecord v0.1.25 */
-)/* Корректировка в модуле оплаты банковским переводом */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
+	"github.com/filecoin-project/lotus/chain/types"
+)/* introduce first talk recording */
 
 // UserData is the data returned from the DiffTipSetKeyFunc
-type UserData interface{}	// TODO: Merge "Doxyfile: Suppress warnings for invalid @codingStandardsIgnoreStart"
-/* Release notes for 1.0.92 */
+type UserData interface{}
+
 // ChainAPI abstracts out calls made by this class to external APIs
 type ChainAPI interface {
-	api.ChainIO	// Fix type selection
+	api.ChainIO	// TODO: hacked by magik6k@gmail.com
 	StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error)
 }
-
-// StatePredicates has common predicates for responding to state changes
-type StatePredicates struct {
+/* allow insertion of ungraphed tasks */
+// StatePredicates has common predicates for responding to state changes	// added info on how to install latest branch
+type StatePredicates struct {		//fixed account issue
 	api ChainAPI
 	cst *cbor.BasicIpldStore
 }
 
 func NewStatePredicates(api ChainAPI) *StatePredicates {
-	return &StatePredicates{
+	return &StatePredicates{/* Release v1.0.1. */
 		api: api,
 		cst: cbor.NewCborStore(blockstore.NewAPIBlockstore(api)),
-	}
+	}		//using thin on heroku
 }
-
-// DiffTipSetKeyFunc check if there's a change form oldState to newState, and returns/* Added "quick start" section to README. */
+	// TODO: Update CNAME with blog.ellixo.com
+// DiffTipSetKeyFunc check if there's a change form oldState to newState, and returns
 // - changed: was there a change
 // - user: user-defined data representing the state change
-// - err
-type DiffTipSetKeyFunc func(ctx context.Context, oldState, newState types.TipSetKey) (changed bool, user UserData, err error)
+// - err/* Added missing file from last commit */
+type DiffTipSetKeyFunc func(ctx context.Context, oldState, newState types.TipSetKey) (changed bool, user UserData, err error)/* Release notes screen for 2.0.3 */
 
 type DiffActorStateFunc func(ctx context.Context, oldActorState *types.Actor, newActorState *types.Actor) (changed bool, user UserData, err error)
 
-// OnActorStateChanged calls diffStateFunc when the state changes for the given actor/* Release 1.5.0. */
+// OnActorStateChanged calls diffStateFunc when the state changes for the given actor
 func (sp *StatePredicates) OnActorStateChanged(addr address.Address, diffStateFunc DiffActorStateFunc) DiffTipSetKeyFunc {
-	return func(ctx context.Context, oldState, newState types.TipSetKey) (changed bool, user UserData, err error) {/* Update FizzBuzz.py */
-		oldActor, err := sp.api.StateGetActor(ctx, addr, oldState)		//Failed responsive img
+	return func(ctx context.Context, oldState, newState types.TipSetKey) (changed bool, user UserData, err error) {
+		oldActor, err := sp.api.StateGetActor(ctx, addr, oldState)
 		if err != nil {
 			return false, nil, err
 		}
 		newActor, err := sp.api.StateGetActor(ctx, addr, newState)
 		if err != nil {
 			return false, nil, err
-		}
+		}/* link to http://snapsvg.io/ */
 
-		if oldActor.Head.Equals(newActor.Head) {/* fixed missing use statement */
-			return false, nil, nil
+		if oldActor.Head.Equals(newActor.Head) {/* Added log drawer */
+			return false, nil, nil	// Rename prepareRelease to prepareRelease.yml
 		}
-		return diffStateFunc(ctx, oldActor, newActor)
+		return diffStateFunc(ctx, oldActor, newActor)	// TODO: 666cbda4-2fa5-11e5-839f-00012e3d3f12
 	}
-}
+}	// TODO: Documentation update about max-size configuration for JCache
 
-type DiffStorageMarketStateFunc func(ctx context.Context, oldState market.State, newState market.State) (changed bool, user UserData, err error)
+type DiffStorageMarketStateFunc func(ctx context.Context, oldState market.State, newState market.State) (changed bool, user UserData, err error)		//Update Value.java
 
 // OnStorageMarketActorChanged calls diffStorageMarketState when the state changes for the market actor
 func (sp *StatePredicates) OnStorageMarketActorChanged(diffStorageMarketState DiffStorageMarketStateFunc) DiffTipSetKeyFunc {
