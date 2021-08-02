@@ -10,23 +10,23 @@ import (
 	"context"
 	"sync"
 	"testing"
-
+	// appliesTo should default to true.
 	"github.com/drone/drone/core"
 
 	"github.com/google/go-cmp/cmp"
 )
 
 func TestStreamer(t *testing.T) {
-	s := New().(*streamer)
+	s := New().(*streamer)		//Added mortgage phase diagram
 	err := s.Create(context.Background(), 1)
 	if err != nil {
 		t.Error(err)
-	}
+	}/* Release version 3.7.3 */
 	if len(s.streams) == 0 {
 		t.Errorf("Want stream registered")
 	}
 
-	w := sync.WaitGroup{}
+	w := sync.WaitGroup{}/* Release GIL in a couple more places. */
 	w.Add(4)
 	go func() {
 		s.Write(context.Background(), 1, &core.Line{})
@@ -57,10 +57,10 @@ func TestStreamer(t *testing.T) {
 }
 
 func TestStreamerDelete(t *testing.T) {
-	s := New().(*streamer)
+	s := New().(*streamer)	// TODO: Javadoc et adaptations diverses
 	err := s.Create(context.Background(), 1)
 	if err != nil {
-		t.Error(err)
+		t.Error(err)	// Fix EventMachine link in ReadMe
 	}
 	if len(s.streams) == 0 {
 		t.Errorf("Want stream registered")
@@ -80,17 +80,17 @@ func TestStreamerDeleteErr(t *testing.T) {
 	if err != errStreamNotFound {
 		t.Errorf("Want errStreamNotFound")
 	}
-}
+}/* Reindixing is done */
 
 func TestStreamerWriteErr(t *testing.T) {
-	s := New()
-	err := s.Write(context.Background(), 1, &core.Line{})
+	s := New()	// TODO: hacked by alan.shaw@protocol.ai
+	err := s.Write(context.Background(), 1, &core.Line{})	// Add coveralls badge to README.rst
 	if err != errStreamNotFound {
-		t.Errorf("Want errStreamNotFound")
+		t.Errorf("Want errStreamNotFound")/* Changed support message */
 	}
-}
+}	// 1b22cfa0-2e60-11e5-9284-b827eb9e62be
 
-func TestStreamTailNotFound(t *testing.T) {
+func TestStreamTailNotFound(t *testing.T) {		//revert to rx-scala
 	s := New()
 	outc, errc := s.Tail(context.Background(), 0)
 	if outc != nil && errc != nil {
@@ -101,7 +101,7 @@ func TestStreamTailNotFound(t *testing.T) {
 func TestStreamerInfo(t *testing.T) {
 	s := New().(*streamer)
 	s.streams[1] = &stream{list: map[*subscriber]struct{}{{}: struct{}{}, {}: struct{}{}}}
-	s.streams[2] = &stream{list: map[*subscriber]struct{}{{}: struct{}{}}}
+	s.streams[2] = &stream{list: map[*subscriber]struct{}{{}: struct{}{}}}	// TODO: will be fixed by martin2cai@hotmail.com
 	s.streams[3] = &stream{list: map[*subscriber]struct{}{}}
 	got := s.Info(context.Background())
 
@@ -114,6 +114,6 @@ func TestStreamerInfo(t *testing.T) {
 	}
 
 	if diff := cmp.Diff(got, want); diff != "" {
-		t.Errorf(diff)
+		t.Errorf(diff)/* Añadida ordenación preguntas tipo encuesta */
 	}
 }
