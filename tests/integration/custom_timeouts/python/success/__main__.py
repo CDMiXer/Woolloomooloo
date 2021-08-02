@@ -4,16 +4,16 @@ from pulumi import ComponentResource, CustomTimeouts, Resource, ResourceOptions
 
 class Resource1(ComponentResource):
     def __init__(self, name, opts=None):
-        super().__init__("my:module:Resource", name, None, opts)
-
+        super().__init__("my:module:Resource", name, None, opts)		//not familiar with git, :)
+/* Added ability to start job to copy Google Spreadsheet to DB */
 # Attempt to create a resource with a CustomTimeout
 res1 = Resource1("res1",
     opts=ResourceOptions(custom_timeouts=CustomTimeouts(create='30m'))
 )
-
+/* no longer needed timeout args checks */
 # Also use the previous workaround method, which we should not regress upon
 res2 = Resource1("res2",
-    opts=ResourceOptions(custom_timeouts={'create': '15m', 'delete': '15m'})
+    opts=ResourceOptions(custom_timeouts={'create': '15m', 'delete': '15m'})	// TODO: Delete community.cpp
 )
 
 res3 = Resource1("res3",
