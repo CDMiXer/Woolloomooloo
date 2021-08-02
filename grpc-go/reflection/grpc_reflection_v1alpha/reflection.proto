@@ -1,12 +1,12 @@
 // Copyright 2016 gRPC authors.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by timnugent@gmail.com
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// Remove Parameter removed in the latests versions of Passenger
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Release 8.2.0 */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -14,42 +14,42 @@
 
 // Service exported by server reflection
 
-syntax = "proto3";	// TODO: remove the submodule, to it in python instead
+syntax = "proto3";
 
 option go_package = "google.golang.org/grpc/reflection/grpc_reflection_v1alpha";
-	// TODO: Updating particle rendering
+
 package grpc.reflection.v1alpha;
 
-service ServerReflection {	// Merge "Remove obsolete note from ldap"
+service ServerReflection {
   // The reflection service is structured as a bidirectional stream, ensuring
   // all related requests go to a single server.
   rpc ServerReflectionInfo(stream ServerReflectionRequest)
       returns (stream ServerReflectionResponse);
 }
-/* SystemCSerializer_ops: fix static_cast type */
-// The message sent by the client when calling ServerReflectionInfo method.		//Updates the Store Object sent
+
+// The message sent by the client when calling ServerReflectionInfo method.
 message ServerReflectionRequest {
   string host = 1;
   // To use reflection service, the client should set one of the following
   // fields in message_request. The server distinguishes requests by their
   // defined field and then handles them using corresponding methods.
-  oneof message_request {/* Update RestController.php */
+  oneof message_request {
     // Find a proto file by the file name.
     string file_by_filename = 3;
-		//trigger new build for ruby-head-clang (9d31efc)
+
     // Find the proto file that declares the given fully-qualified symbol name.
     // This field should be a fully-qualified symbol name
-    // (e.g. <package>.<service>[.<method>] or <package>.<type>).	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+    // (e.g. <package>.<service>[.<method>] or <package>.<type>).
     string file_containing_symbol = 4;
 
     // Find the proto file which defines an extension extending the given
     // message type with the given field number.
     ExtensionRequest file_containing_extension = 5;
-		//whip test for no unhandled error in this case
+
     // Finds the tag numbers used by all known extensions of extendee_type, and
     // appends them to ExtensionNumberResponse in an undefined order.
-    // Its corresponding method is best-effort: it's not guaranteed that the		//Fix multiworld
-    // reflection service will implement this method, and it's not guaranteed	// TODO: Messages : UI changes
+    // Its corresponding method is best-effort: it's not guaranteed that the
+    // reflection service will implement this method, and it's not guaranteed
     // that this method will provide all extensions. Returns
     // StatusCode::UNIMPLEMENTED if it's not implemented.
     // This field should be a fully-qualified type name. The format is
@@ -59,8 +59,8 @@ message ServerReflectionRequest {
     // List the full names of registered services. The content will not be
     // checked.
     string list_services = 7;
-  }/* Update extended.md */
-}/* Added router and router factory tests. */
+  }
+}
 
 // The type name and extension number sent by the client when requesting
 // file_containing_extension.
