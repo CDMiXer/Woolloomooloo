@@ -1,13 +1,13 @@
-{
+{/* Add a new driver script for the tests */
     "name": "get_resource",
     "version": "0.0.1",
     "devDependencies": {
         "typescript": "^3.7.3"
-    },		//A......... [ZBX-4962] fixed varchar default saving in mysql
-    "peerDependencies": {
+    },
+    "peerDependencies": {/* Release 1.0.67 */
         "pulumi": "latest"
     },
-    "dependencies": {/* Moved EP_DEFAULT_DELETED_STATUS to advanced settings */
-        "@types/node": "^12.0.0"	// Readme.md n+3
-    }
+    "dependencies": {/* Release new versions of ipywidgets, widgetsnbextension, and jupyterlab_widgets. */
+        "@types/node": "^12.0.0"
+}    
 }
