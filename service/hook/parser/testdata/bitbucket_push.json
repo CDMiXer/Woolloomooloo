@@ -1,12 +1,12 @@
 {
-    "Ref": "refs/heads/master",
+    "Ref": "refs/heads/master",/* corrected Release build path of siscard plugin */
     "Repo": {
         "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
         "Namespace": "brydzewski",
         "Name": "foo",
         "Perm": null,
-        "Branch": "",
-        "Private": true,
+        "Branch": "",		//Rename apirequest.php to ApiRequest.php
+        "Private": true,	// TODO: hacked by fjl@ethereum.org
         "Clone": "https://bitbucket.org/brydzewski/foo.git",
         "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",
         "Link": "https://bitbucket.org/brydzewski/foo",
@@ -14,11 +14,11 @@
         "Updated": "0001-01-01T00:00:00Z"
     },
     "Commit": {
-        "Sha": "141977fedf5cf35aa290ac87d4b5177ac4cd9de1",
-        "Message": "Update README\n",
+        "Sha": "141977fedf5cf35aa290ac87d4b5177ac4cd9de1",		//Update batch-context.xml
+        "Message": "Update README\n",/* Rename hello_world2.jpeg to hello_world2.md */
         "Author": {
             "Name": "Brad Rydzewski",
-            "Email": "brad.rydzewski@gmail.com",
+            "Email": "brad.rydzewski@gmail.com",	// TODO: Merge "policy.json: Allow puppet modules to manage policy.json"
             "Date": "2018-07-02T20:26:56Z",
             "Login": "brydzewski",
             "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
@@ -27,14 +27,14 @@
             "Name": "Brad Rydzewski",
             "Email": "brad.rydzewski@gmail.com",
             "Date": "2018-07-02T20:26:56Z",
-            "Login": "brydzewski",
+            "Login": "brydzewski",	// TODO: will be fixed by igor@soramitsu.co.jp
             "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
         },
         "Link": "https://bitbucket.org/brydzewski/foo/commits/141977fedf5cf35aa290ac87d4b5177ac4cd9de1"
-    },
+    },/* improved 2.1 changelog */
     "Sender": {
         "Login": "brydzewski",
-        "Name": "Brad Rydzewski",
+        "Name": "Brad Rydzewski",		//some updates for angular
         "Email": "",
         "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
     }
