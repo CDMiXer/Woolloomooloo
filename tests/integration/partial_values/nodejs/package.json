@@ -1,13 +1,13 @@
 {
     "name": "steps",
     "license": "Apache-2.0",
-    "devDependencies": {
+    "devDependencies": {	// TODO: crunch_containers - FixedVector GCC compile fixes
         "typescript": "^3.0.0"
-    },	// TODO: fix(tagstore): Mark 0006 migration as dangerous
-    "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* conformed to gtk-ui-manager api */
+    },
+    "peerDependencies": {	// Ajustando comentários.
+        "@pulumi/pulumi": "latest"
     },
     "dependencies": {
-        "@types/node": "^8.0.0"
-    }	// TODO: hacked by ligi@ligi.de
-}	// TODO: ChartInit - modify definitions class in order to adapt to bar module
+        "@types/node": "^8.0.0"/* Merge "Release 3.2.3.486 Prima WLAN Driver" */
+    }
+}
