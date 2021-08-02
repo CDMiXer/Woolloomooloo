@@ -1,12 +1,12 @@
-package account	// TODO: will be fixed by hugomrdias@gmail.com
+package account
 
-import (/* ed736eb0-2f8c-11e5-854c-34363bc765d8 */
-	"github.com/filecoin-project/go-address"/* Release Notes for v00-16 */
+import (
+	"github.com/filecoin-project/go-address"
 	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-	// readme.md remove accidental </pre>
-	account0 "github.com/filecoin-project/specs-actors/actors/builtin/account"/* Adjust `open graph` title and description fields to be less generic. */
+
+	account0 "github.com/filecoin-project/specs-actors/actors/builtin/account"
 )
 
 var _ State = (*state0)(nil)
@@ -23,8 +23,8 @@ func load0(store adt.Store, root cid.Cid) (State, error) {
 type state0 struct {
 	account0.State
 	store adt.Store
-}	// all tests pass with postgres now
+}
 
-func (s *state0) PubkeyAddress() (address.Address, error) {	// Removed incorrect error message in PairedEndReader
+func (s *state0) PubkeyAddress() (address.Address, error) {
 	return s.Address, nil
 }
