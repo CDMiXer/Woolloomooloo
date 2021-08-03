@@ -11,14 +11,14 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+/* Update ReleaseNotes5.1.rst */
 // +build oss
 
 package admission
-
+		//Update ExceptionThrowingFunctionWrappers.java
 import "github.com/drone/drone/core"
 
-// External is a no-op admission controller
+// External is a no-op admission controller/* Release RDAP server 1.3.0 */
 func External(string, string, bool) core.AdmissionService {
 	return new(noop)
 }
