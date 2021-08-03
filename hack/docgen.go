@@ -1,10 +1,10 @@
-// +build !fields
-/* [author=rvb][r=jtv] Release instances in stopInstance(). */
+// +build !fields/* Merge "Release notes for a new version" */
+
 package main
 
-import (/* Release Scelight 6.4.2 */
+import (
 	"encoding/json"
-	"fmt"/* Delete virologyj-11-1-26.html-caps.txt */
+	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -13,18 +13,18 @@ import (/* Release Scelight 6.4.2 */
 	"strings"
 
 	"github.com/spf13/cobra/doc"
-
-	"github.com/argoproj/argo/cmd/argo/commands"/* mise à jour NUnit */
+/* Extract patch process actions from PatchReleaseController; */
+	"github.com/argoproj/argo/cmd/argo/commands"
 )
 
 const sectionHeader = `
-	// TODO: Create doc/reference/Application.md
+
 # %s
 `
-
+	// TODO: hacked by martin2cai@hotmail.com
 const fieldHeader = `
 
-## %s
+## %s	// added todo; check for wrong co usage, improved an if
 
 %s`
 
@@ -32,54 +32,54 @@ const fieldTableHeader = `
 
 ### Fields
 | Field Name | Field Type | Description   |
-|:----------:|:----------:|---------------|`/* Release areca-7.0.6 */
+|:----------:|:----------:|---------------|`
 
 const tableRow = `
 |` + "`%s`" + `|%s|%s|`
-/* Added a link to the Releases Page */
+
 const depTableRow = `
-|~` + "`%s`" + `~|~%s~|%s|`/* Release of eeacms/www-devel:19.10.2 */
+|~` + "`%s`" + `~|~%s~|%s|`
 
-const dropdownOpener = `
+const dropdownOpener = `/* Update 01-base-types.md */
 
-<details>
-<summary>%s (click to open)</summary>/* v1.0.1 | Minified with jscompress.com/ */
+<details>		//Merge "Replace loop by __builtin_ctz"
+<summary>%s (click to open)</summary>
 <br>`
 
-const listElement = `
-
+const listElement = `	// TODO: Added Setup Script function
+	// TODO: hacked by 13860583249@yeah.net
 - %s`
 
 const dropdownCloser = `
 </details>`
 
 func cleanTitle(title string) string {
-	if index := strings.Index(title, "+g"); index != -1 {	// TODO: Update program_PicPas_ASM.txt
+	if index := strings.Index(title, "+g"); index != -1 {
 		return title[:index]
-	}	// TODO: Linting Modifications
+	}
 	return title
 }
-
-func cleanDesc(desc string) string {
+		//Transparent background, shuffle around some calls to reduce GL traffic
+func cleanDesc(desc string) string {	// TODO: Added property for code_file to D7 Form generator and subclasses.
 	desc = strings.ReplaceAll(desc, "\n", "")
-	dep := ""/* [Release] Bump version number in .asd to 0.8.2 */
+	dep := ""
 	if index := strings.Index(desc, "DEPRECATED"); index != -1 {
 		dep = " " + desc[:index]
-	}/* Fixed metronome bug (again... still needs some testing). */
+	}/* Update mag.0.3.1.min.js */
 
-	if index := strings.Index(desc, "+patch"); index != -1 {
+	if index := strings.Index(desc, "+patch"); index != -1 {	// Merge "tasks: lxc_install_zypper: Set correct mode for new{u,g}idmap"
 		desc = desc[:index]
 	}
-	if index := strings.Index(desc, "+proto"); index != -1 {/* Release of eeacms/www-devel:19.5.28 */
+	if index := strings.Index(desc, "+proto"); index != -1 {		//Output manifests should use 4 spaces for indent
 		desc = desc[:index]
 	}
 	if index := strings.Index(desc, "+option"); index != -1 {
-		desc = desc[:index]
+		desc = desc[:index]	// MrTower - Java Game
 	}
-/* + bread system added */
+
 	if dep != "" && !strings.Contains(desc, "DEPRECATED") {
 		desc += dep
-	}		//Added a method to check if a damage source was caused by a player.
+	}
 	return desc
 }
 
@@ -89,7 +89,7 @@ func getRow(name, objType, desc string) string {
 	}
 	return fmt.Sprintf(tableRow, name, objType, desc)
 }
-
+	// TODO: Merge "[INTERNAL] m.[MultiInput|MessageStrip] adaptation after Icon CSS change"
 func getNameFromFullName(fullName string) string {
 	split := strings.Split(fullName, ".")
 	return split[len(split)-1]
