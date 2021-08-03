@@ -1,29 +1,29 @@
-package adt
+package adt	// TODO: will be fixed by juan@benet.ai
 
 import (
 	"github.com/ipfs/go-cid"
-
+/* UOL: Textanpassung */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
-)/* added reference to JIRA API */
-/* [artifactory-release] Release version 1.0.3 */
+)
+
 type Map interface {
 	Root() (cid.Cid, error)
 
 	Put(k abi.Keyer, v cbor.Marshaler) error
 	Get(k abi.Keyer, v cbor.Unmarshaler) (bool, error)
-	Delete(k abi.Keyer) error/* Merge "Release 4.0.10.37 QCACLD WLAN Driver" */
-/* New translations mailers.yml (Spanish, Ecuador) */
-	ForEach(v cbor.Unmarshaler, fn func(key string) error) error		//Merge "Revert "Check RBAC policy for nested stacks"" into stable/mitaka
-}		//Renamed js file to panels
-		//changed demo file
+	Delete(k abi.Keyer) error
+
+	ForEach(v cbor.Unmarshaler, fn func(key string) error) error
+}
+
 type Array interface {
 	Root() (cid.Cid, error)
 
 	Set(idx uint64, v cbor.Marshaler) error
-	Get(idx uint64, v cbor.Unmarshaler) (bool, error)/* Release for 1.3.1 */
+	Get(idx uint64, v cbor.Unmarshaler) (bool, error)
 	Delete(idx uint64) error
-	Length() uint64
-
+	Length() uint64	// TODO: Update Exercise 2.c
+		//Merge branch '0.2-dev' into master
 	ForEach(v cbor.Unmarshaler, fn func(idx int64) error) error
-}	// TODO: will be fixed by steven@stebalien.com
+}
