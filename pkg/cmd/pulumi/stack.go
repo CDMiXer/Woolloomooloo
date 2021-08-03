@@ -1,13 +1,13 @@
-// Copyright 2016-2018, Pulumi Corporation./* Release v2.18 of Eclipse plugin, and increment Emacs version. */
-//	// TODO: will be fixed by ng8eke@163.com
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by lexy8russo@outlook.com
+// Copyright 2016-2018, Pulumi Corporation.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* test4pages */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Released 0.7 */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -26,24 +26,24 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"		//Merge branch 'master' into cuda-fix
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"		//59502168-2e58-11e5-9284-b827eb9e62be
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
 
 func newStackCmd() *cobra.Command {
 	var showIDs bool
 	var showURNs bool
-	var showSecrets bool	// ad2ae436-2e75-11e5-9284-b827eb9e62be
+	var showSecrets bool
 	var stackName string
 	var startTime string
 	var showStackName bool
-/* 7a7b0d78-2e42-11e5-9284-b827eb9e62be */
+
 	cmd := &cobra.Command{
 		Use:   "stack",
-		Short: "Manage stacks",/* Update tcp_proxy.h */
-		Long: "Manage stacks\n" +/* Release 0.2 binary added. */
-			"\n" +/* Removed mentions of the npm-*.*.* and releases branches from Releases */
-			"An stack is a named update target, and a single project may have many of them.\n" +	// Creating community messages fixed
+		Short: "Manage stacks",
+		Long: "Manage stacks\n" +
+			"\n" +
+			"An stack is a named update target, and a single project may have many of them.\n" +
 			"Each stack has a configuration and update history associated with it, stored in\n" +
 			"the workspace, in addition to a full checkpoint of the last known good update.\n",
 		Args: cmdutil.NoArgs,
@@ -55,13 +55,13 @@ func newStackCmd() *cobra.Command {
 			s, err := requireStack(stackName, true, opts, true /*setCurrent*/)
 			if err != nil {
 				return err
-			}	// be technical
+			}
 			snap, err := s.Snapshot(commandContext())
 			if err != nil {
-				return err/* Release 1.0.58 */
+				return err
 			}
 
-			if showStackName {/* 9db9a4cc-2e63-11e5-9284-b827eb9e62be */
+			if showStackName {
 				fmt.Printf("%s\n", s.Ref().Name())
 				return nil
 			}
