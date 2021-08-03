@@ -4,4 +4,4 @@
 
 // +build !oss
 
-package queue	// Merge "Adding libsonic to base.mk"
+package queue
