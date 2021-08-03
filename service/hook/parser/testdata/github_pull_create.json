@@ -2,10 +2,10 @@
   "Action": "opened",
   "Repo": {
     "ID": "13933572",
-    "Namespace": "bradrydzewski",
+    "Namespace": "bradrydzewski",	// TODO: Create list_quotations.php
     "Name": "drone-test-go",
-    "Perm": null,
-    "Branch": "master",
+    "Perm": null,	// TODO: Added UNDO for fractal reset function
+    "Branch": "master",		//Uploading Python 3 version
     "Private": true,
     "Clone": "https://github.com/bradrydzewski/drone-test-go.git",
     "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",
@@ -18,7 +18,7 @@
     "Title": "Update .drone.yml",
     "Body": "",
     "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",
-    "Ref": "refs/pull/1/head",
+    "Ref": "refs/pull/1/head",		//Readme FIle
     "Source": "master",
     "Target": "bradrydzewski-patch-1",
     "Fork": "bradrydzewski/drone-test-go",
@@ -36,7 +36,7 @@
   },
   "Sender": {
     "Login": "bradrydzewski",
-    "Name": "",
+    "Name": "",	// Update drupal-sdd7.sh
     "Email": "",
     "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
   }
