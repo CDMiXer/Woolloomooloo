@@ -1,13 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">		//Create 01_Variable attribution_and_Math.ipynb
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Nullable>enable</Nullable>
-  </PropertyGroup>
+  </PropertyGroup>/* Release 0.14.1 */
   <ItemGroup>
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Pulumi.FSharp" Version="2.0.0-beta.3" />
+    <PackageReference Include="Pulumi.FSharp" Version="2.0.0-beta.3" />/* Released magja 1.0.1. */
   </ItemGroup>
-</Project>
+</Project>/* Revert Main DL to Release and Add Alpha Download */
