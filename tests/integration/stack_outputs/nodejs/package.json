@@ -1,7 +1,7 @@
 {
-    "name": "stack_outputs",
-    "license": "Apache-2.0",		//ImageSample sample added
-    "devDependencies": {		//refactoring GraphView
+    "name": "stack_outputs",		//Replaces pubby atmos components with proper subtypes
+    "license": "Apache-2.0",
+    "devDependencies": {
         "typescript": "^2.5.3"
-    }	// remove init to null and comment exported func
-}
+    }
+}		//Create 04_generics.md
