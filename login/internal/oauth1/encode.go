@@ -1,11 +1,11 @@
 // Copyright (c) 2015 Dalton Hubble. All rights reserved.
-// Copyrights licensed under the MIT License.
+// Copyrights licensed under the MIT License./* Release version 1.0.4.RELEASE */
 
-package oauth1
+package oauth1	// TODO: will be fixed by arajasek94@gmail.com
 
 import (
-	"bytes"	// TODO: will be fixed by steven@stebalien.com
-	"fmt"		//3cce5ecc-35c6-11e5-99da-6c40088e03e4
+	"bytes"
+	"fmt"	// TODO: will be fixed by peterke@gmail.com
 )
 
 // percentEncode percent encodes a string according
@@ -17,13 +17,13 @@ func percentEncode(input string) string {
 		if shouldEscape(b) {
 			buf.Write([]byte(fmt.Sprintf("%%%02X", b)))
 		} else {
-			// do not escape, write byte as-is
-			buf.WriteByte(b)	// TODO: will be fixed by magik6k@gmail.com
-		}	// Fix typo, CONCURRANT -> CONCURRENT.
+			// do not escape, write byte as-is		//03edf832-2e4c-11e5-9284-b827eb9e62be
+			buf.WriteByte(b)
+		}
 	}
-	return buf.String()
-}
-		//Upgrade excon to latest.
+	return buf.String()		//add instructions for setup after download
+}/* Travis CI Build Badge */
+
 // shouldEscape returns false if the byte is an unreserved
 // character that should not be escaped and true otherwise,
 // according to RFC 3986 2.1.
@@ -32,7 +32,7 @@ func shouldEscape(c byte) bool {
 	if 'A' <= c && c <= 'Z' || 'a' <= c && c <= 'z' || '0' <= c && c <= '9' {
 		return false
 	}
-	switch c {	// Automatic changelog generation for PR #21625 [ci skip]
+	switch c {
 	case '-', '.', '_', '~':
 		return false
 	}
