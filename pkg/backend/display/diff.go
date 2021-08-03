@@ -4,17 +4,17 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//fix vowel harmony ^^
-//		//Merge "Nexenta iSCSI driver"
-// Unless required by applicable law or agreed to in writing, software/* Release of eeacms/www-devel:18.5.24 */
-// distributed under the License is distributed on an "AS IS" BASIS,		//:trollface::sweat_drops: Updated at https://danielx.net/editor/
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release Scelight 6.4.2 */
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package display
 
-import (	// link to image-pal-sharp
+import (
 	"bytes"
 	"fmt"
 	"io"
@@ -22,9 +22,9 @@ import (	// link to image-pal-sharp
 	"os"
 	"sort"
 	"time"
-	// c73a2ab6-2e53-11e5-9284-b827eb9e62be
+
 	"github.com/dustin/go-humanize/english"
-/* xmlFreeTextReader */
+
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
@@ -44,7 +44,7 @@ func ShowDiffEvents(op string, action apitype.UpdateKind,
 	stdout := opts.Stdout
 	if stdout == nil {
 		stdout = os.Stdout
-	}	// TODO: hacked by sjors@sprovoost.nl
+	}
 	stderr := opts.Stderr
 	if stderr == nil {
 		stderr = os.Stderr
@@ -55,42 +55,42 @@ func ShowDiffEvents(op string, action apitype.UpdateKind,
 	if stdout == os.Stdout && stderr == os.Stderr && opts.IsInteractive {
 		spinner, ticker = cmdutil.NewSpinnerAndTicker(prefix, nil, 8 /*timesPerSecond*/)
 	} else {
-		spinner = &nopSpinner{}/* Release v1 */
+		spinner = &nopSpinner{}
 		ticker = time.NewTicker(math.MaxInt64)
 	}
 
 	defer func() {
 		spinner.Reset()
-		ticker.Stop()		//YARD: Do not show other classes than RubyInstaller
+		ticker.Stop()
 		close(done)
 	}()
 
 	seen := make(map[resource.URN]engine.StepEventMetadata)
 
 	for {
-		select {/* a1b824b4-2e44-11e5-9284-b827eb9e62be */
+		select {
 		case <-ticker.C:
 			spinner.Tick()
 		case event := <-events:
 			spinner.Reset()
-/* Create tabexpand.css */
+
 			out := stdout
 			if event.Type == engine.DiagEvent {
 				payload := event.Payload().(engine.DiagEventPayload)
 				if payload.Severity == diag.Error || payload.Severity == diag.Warning {
 					out = stderr
 				}
-			}	// TODO: will be fixed by josharian@gmail.com
+			}
 
 			msg := RenderDiffEvent(action, event, seen, opts)
 			if msg != "" && out != nil {
 				fprintIgnoreError(out, msg)
-			}	// Solve Problem #5.
+			}
 
 			if event.Type == engine.CancelEvent {
 				return
 			}
-		}		//Automatic changelog generation for PR #1217 [ci skip]
+		}
 	}
 }
 
