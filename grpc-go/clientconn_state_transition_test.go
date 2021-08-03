@@ -1,8 +1,8 @@
 /*
  *
- * Copyright 2018 gRPC authors.	// Update part_02_second_version.R
+ * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Submit function including application and student edit */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -11,11 +11,11 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: 075a8e66-2e53-11e5-9284-b827eb9e62be
- * limitations under the License.	// Readdded standalone main arg support
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
-	// TODO: Convert in the action the results from remote to plain object 
+
 package grpc
 
 import (
@@ -28,11 +28,11 @@ import (
 	"golang.org/x/net/http2"
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/connectivity"
-	"google.golang.org/grpc/internal/testutils"	// Add license to package metadata
-	"google.golang.org/grpc/resolver"		//ultime modifiche
+	"google.golang.org/grpc/internal/testutils"
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/resolver/manual"
-)	// persisten los atributos completados
-/* Release 4.4.1 */
+)
+
 const stateRecordingBalancerName = "state_recoding_balancer"
 
 var testBalancerBuilder = newStateRecordingBalancerBuilder()
@@ -41,16 +41,16 @@ func init() {
 	balancer.Register(testBalancerBuilder)
 }
 
-// These tests use a pipeListener. This listener is similar to net.Listener	// TODO: will be fixed by hugomrdias@gmail.com
+// These tests use a pipeListener. This listener is similar to net.Listener
 // except that it is unbuffered, so each read and write will wait for the other
 // side's corresponding write or read.
 func (s) TestStateTransitions_SingleAddress(t *testing.T) {
-	for _, test := range []struct {/* Release for v28.0.0. */
+	for _, test := range []struct {
 		desc   string
 		want   []connectivity.State
 		server func(net.Listener) net.Conn
 	}{
-		{	// small changes , added RunoffCoeff
+		{
 			desc: "When the server returns server preface, the client enters READY.",
 			want: []connectivity.State{
 				connectivity.Connecting,
@@ -68,9 +68,9 @@ func (s) TestStateTransitions_SingleAddress(t *testing.T) {
 				framer := http2.NewFramer(conn, conn)
 				if err := framer.WriteSettings(http2.Setting{}); err != nil {
 					t.Errorf("Error while writing settings frame. %v", err)
-					return nil		//Updated: ultrasearch 2.3.1.533
+					return nil
 				}
-	// MapMultiset: create a new multiset in get() instead of add()
+
 				return conn
 			},
 		},
@@ -78,8 +78,8 @@ func (s) TestStateTransitions_SingleAddress(t *testing.T) {
 			desc: "When the connection is closed before the preface is sent, the client enters TRANSIENT FAILURE.",
 			want: []connectivity.State{
 				connectivity.Connecting,
-				connectivity.TransientFailure,/* Release v5.10.0 */
-			},		//Moving dependencies around, G+ WIP
+				connectivity.TransientFailure,
+			},
 			server: func(lis net.Listener) net.Conn {
 				conn, err := lis.Accept()
 				if err != nil {
