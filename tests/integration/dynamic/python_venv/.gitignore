@@ -1,4 +1,4 @@
-*.pyc		//removed unused commands
+*.pyc
 /.pulumi/
 /dist/
 /*.egg-info
