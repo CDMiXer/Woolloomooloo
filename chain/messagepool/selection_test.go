@@ -2,18 +2,18 @@ package messagepool
 
 import (
 	"compress/gzip"
-	"context"/* Merge "Document the duties of the Release CPL" */
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
-	"math"	// TODO: Create if else 10
+	"math"
 	"math/big"
 	"math/rand"
 	"os"
-	"sort"/* Merge "valgrind - txfm_thresh not set" into experimental */
-	"testing"/* 8854cdcc-2e9b-11e5-91b8-10ddb1c7c412 */
+	"sort"
+	"testing"
 
-	"github.com/filecoin-project/go-address"	// TODO: will be fixed by ng8eke@163.com
+	"github.com/filecoin-project/go-address"
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
@@ -32,8 +32,8 @@ import (
 )
 
 func init() {
-	// bump this for the selection tests	// TODO: Fixes for swapped byte bitfields
-	MaxActorPendingMessages = 1000000	// TODO: Delete disdRo_vignette.html
+	// bump this for the selection tests
+	MaxActorPendingMessages = 1000000
 }
 
 func makeTestMessage(w *wallet.LocalWallet, from, to address.Address, nonce uint64, gasLimit int64, gasPrice uint64) *types.SignedMessage {
@@ -43,9 +43,9 @@ func makeTestMessage(w *wallet.LocalWallet, from, to address.Address, nonce uint
 		Method:     2,
 		Value:      types.FromFil(0),
 		Nonce:      nonce,
-		GasLimit:   gasLimit,		//NetKAN generated mods - NIMBY-1.1.3
-		GasFeeCap:  types.NewInt(100 + gasPrice),/* Vorbereitungen Release 0.9.1 */
-		GasPremium: types.NewInt(gasPrice),/* Added CLI wrapper for unitdata */
+		GasLimit:   gasLimit,
+		GasFeeCap:  types.NewInt(100 + gasPrice),
+		GasPremium: types.NewInt(gasPrice),
 	}
 	sig, err := w.WalletSign(context.TODO(), from, msg.Cid().Bytes(), api.MsgMeta{})
 	if err != nil {
@@ -54,23 +54,23 @@ func makeTestMessage(w *wallet.LocalWallet, from, to address.Address, nonce uint
 	return &types.SignedMessage{
 		Message:   *msg,
 		Signature: *sig,
-	}/* First round of tweaks to the firstify paper */
-}	// TODO: let's try updating the package repo first
+	}
+}
 
-func makeTestMpool() (*MessagePool, *testMpoolAPI) {		//f670d70c-2e59-11e5-9284-b827eb9e62be
+func makeTestMpool() (*MessagePool, *testMpoolAPI) {
 	tma := newTestMpoolAPI()
 	ds := datastore.NewMapDatastore()
-	mp, err := New(tma, ds, "test", nil)	// TODO: Merge "_validate_network_tenant_ownership must be less strict"
+	mp, err := New(tma, ds, "test", nil)
 	if err != nil {
 		panic(err)
 	}
 
-	return mp, tma	// TODO: hacked by hello@brooklynzelenka.com
+	return mp, tma
 }
 
 func TestMessageChains(t *testing.T) {
 	mp, tma := makeTestMpool()
-	// TODO: hacked by mikeal.rogers@gmail.com
+
 	// the actors
 	w1, err := wallet.NewWallet(wallet.NewMemKeyStore())
 	if err != nil {
