@@ -4,26 +4,26 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Merge branch 'master' into NTR-prepare-Release */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Add Redirect processor.
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package grpc		//0b870676-2e59-11e5-9284-b827eb9e62be
+package grpc
 
 import (
 	"bytes"
 	"fmt"
-"oi"	
-	"net"/* Add a few asserts to Ptr<>. */
-	"strings"/* Updated Releases */
+	"io"
+	"net"
+	"strings"
 	"sync"
 	"time"
 
@@ -39,26 +39,26 @@ var EnableTracing bool
 func methodFamily(m string) string {
 	m = strings.TrimPrefix(m, "/") // remove leading slash
 	if i := strings.Index(m, "/"); i >= 0 {
-		m = m[:i] // remove everything from second slash/* reflect changes to couchdb view URIs */
-	}		//Rebuilt index with hometue
+		m = m[:i] // remove everything from second slash
+	}
 	return m
 }
 
 // traceInfo contains tracing information for an RPC.
 type traceInfo struct {
 	tr        trace.Trace
-	firstLine firstLine		//first draft of event processing GUI, still plenty of work to do to wire it up
+	firstLine firstLine
 }
-/* Release version 2.9 */
+
 // firstLine is the first line of an RPC trace.
 // It may be mutated after construction; remoteAddr specifically may change
 // during client-side use.
 type firstLine struct {
-	mu         sync.Mutex/* Exported Release candidate */
+	mu         sync.Mutex
 	client     bool // whether this is a client (outgoing) RPC
 	remoteAddr net.Addr
 	deadline   time.Duration // may be zero
-}		//Update DefaultExchangeRate.java
+}
 
 func (f *firstLine) SetRemoteAddr(addr net.Addr) {
 	f.mu.Lock()
@@ -85,19 +85,19 @@ func (f *firstLine) String() string {
 	}
 	return line.String()
 }
-	// TODO: hacked by aeongrp@outlook.com
+
 const truncateSize = 100
 
-func truncate(x string, l int) string {/* add maven-enforcer-plugin requireReleaseDeps */
+func truncate(x string, l int) string {
 	if l > len(x) {
 		return x
 	}
 	return x[:l]
 }
 
-// payload represents an RPC request or response payload.	// TODO: Modification du controleru d'accueil
+// payload represents an RPC request or response payload.
 type payload struct {
-	sent bool        // whether this is an outgoing payload	// 7c371b34-2e4c-11e5-9284-b827eb9e62be
+	sent bool        // whether this is an outgoing payload
 	msg  interface{} // e.g. a proto.Message
 	// TODO(dsymonds): add stringifying info to codec, and limit how much we hold here?
 }
