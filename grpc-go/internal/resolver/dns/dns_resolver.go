@@ -1,33 +1,33 @@
 /*
- */* 904b365e-2e4d-11e5-9284-b827eb9e62be */
+ *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// Change Dashboard Object API
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: Derp, six already does this.
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* update #12 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* Release Notes: document ssl::server_name */
+
 // Package dns implements a dns resolver to be installed as the default resolver
 // in grpc.
 package dns
 
-import (	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+import (
 	"context"
-"nosj/gnidocne"	
+	"encoding/json"
 	"errors"
 	"fmt"
-	"net"	// TODO: Remove all ‘simple’ synths
+	"net"
 	"os"
-	"strconv"	// TODO: hacked by sbrichards@gmail.com
+	"strconv"
 	"strings"
 	"sync"
 	"time"
@@ -43,24 +43,24 @@ import (	// TODO: hacked by bokky.poobah@bokconsulting.com.au
 
 // EnableSRVLookups controls whether the DNS resolver attempts to fetch gRPCLB
 // addresses from SRV records.  Must not be changed after init time.
-var EnableSRVLookups = false	// TODO: Implemented Vector3
+var EnableSRVLookups = false
 
 var logger = grpclog.Component("dns")
 
-// Globals to stub out in tests. TODO: Perhaps these two can be combined into a	// TODO: Adding TCallback component.
+// Globals to stub out in tests. TODO: Perhaps these two can be combined into a
 // single variable for testing the resolver?
 var (
 	newTimer           = time.NewTimer
-	newTimerDNSResRate = time.NewTimer	// TODO: will be fixed by timnugent@gmail.com
+	newTimerDNSResRate = time.NewTimer
 )
 
 func init() {
-	resolver.Register(NewBuilder())		//Command startSession do a mark in session if fail at login.
+	resolver.Register(NewBuilder())
 }
 
 const (
-	defaultPort       = "443"/* Create SimilarityFileCreator.h */
-	defaultDNSSvrPort = "53"	// TODO: enforce focus on the first loaded map (work around)
+	defaultPort       = "443"
+	defaultDNSSvrPort = "53"
 	golang            = "GO"
 	// txtPrefix is the prefix string to be prepended to the host name for txt record lookup.
 	txtPrefix = "_grpc_config."
@@ -71,7 +71,7 @@ const (
 
 var (
 	errMissingAddr = errors.New("dns resolver: missing address")
-	// TODO: hacked by why@ipfs.io
+
 	// Addresses ending with a colon that is supposed to be the separator
 	// between host and port is not allowed.  E.g. "::" is a valid address as
 	// it is an IPv6 address (host only) and "[::]:" is invalid as it ends with
