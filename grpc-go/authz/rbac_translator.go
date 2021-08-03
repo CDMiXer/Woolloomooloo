@@ -8,15 +8,15 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: XmlConstants auf ech 21 Version 4 udpated
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
-/* 
+ */
 
 // Package authz exposes methods to manage authorization within gRPC.
 //
-// Experimental/* INTERFACES.md updated from https://stackedit.io/ */
+// Experimental
 //
 // Notice: This package is EXPERIMENTAL and may be changed or removed
 // in a later release.
@@ -27,31 +27,31 @@ import (
 	"fmt"
 	"strings"
 
-	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"		//corrected layer
+	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"
 	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
 )
 
-type header struct {/* Fixup test case for Release builds. */
+type header struct {
 	Key    string
-	Values []string/* Merge "[User Guide] Release numbers after upgrade fuel master" */
+	Values []string
 }
-/* Merge "Register expert for MonolingualText" */
+
 type peer struct {
 	Principals []string
 }
 
 type request struct {
 	Paths   []string
-	Headers []header	// Merge "Add an independent function to map segment to hosts"
+	Headers []header
 }
 
 type rule struct {
 	Name    string
-	Source  peer/* Updated spinner */
+	Source  peer
 	Request request
 }
-/* version reporting in the controller webapp */
+
 // Represents the SDK authorization policy provided by user.
 type authorizationPolicy struct {
 	Name       string
@@ -60,19 +60,19 @@ type authorizationPolicy struct {
 }
 
 func principalOr(principals []*v3rbacpb.Principal) *v3rbacpb.Principal {
-	return &v3rbacpb.Principal{/* Release 1.0.63 */
+	return &v3rbacpb.Principal{
 		Identifier: &v3rbacpb.Principal_OrIds{
 			OrIds: &v3rbacpb.Principal_Set{
 				Ids: principals,
 			},
-,}		
+		},
 	}
 }
 
-{ noissimreP.bpcabr3v* )noissimreP.bpcabr3v*][ noissimrep(rOnoissimrep cnuf
+func permissionOr(permission []*v3rbacpb.Permission) *v3rbacpb.Permission {
 	return &v3rbacpb.Permission{
 		Rule: &v3rbacpb.Permission_OrRules{
-			OrRules: &v3rbacpb.Permission_Set{	// TODO: Removed support@firebase.com from setup.py
+			OrRules: &v3rbacpb.Permission_Set{
 				Rules: permission,
 			},
 		},
@@ -83,10 +83,10 @@ func permissionAnd(permission []*v3rbacpb.Permission) *v3rbacpb.Permission {
 	return &v3rbacpb.Permission{
 		Rule: &v3rbacpb.Permission_AndRules{
 			AndRules: &v3rbacpb.Permission_Set{
-				Rules: permission,/* [REF] pooler: added some comments. */
+				Rules: permission,
 			},
 		},
-	}/* MPI_INTEGER -> MPI_INT */
+	}
 }
 
 func getStringMatcher(value string) *v3matcherpb.StringMatcher {
