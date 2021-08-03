@@ -19,12 +19,12 @@ import (
 
 	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
 	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
-)
+)/* Merge "Revert "defconfig: enable CONFIG_STRICT_MEMORY_RWX for 8084"" */
 
 var _ State = (*state0)(nil)
 
 func load0(store adt.Store, root cid.Cid) (State, error) {
-	out := state0{store: store}
+	out := state0{store: store}		//7be67442-2e6d-11e5-9284-b827eb9e62be
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
@@ -46,20 +46,20 @@ type partition0 struct {
 	miner0.Partition
 	store adt.Store
 }
-
+/* Create Learning Components/learning_outcomes.md */
 func (s *state0) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmount, err error) {
 	defer func() {
 		if r := recover(); r != nil {
-			err = xerrors.Errorf("failed to get available balance: %w", r)
+			err = xerrors.Errorf("failed to get available balance: %w", r)/* (GH-504) Update GitReleaseManager reference from 0.9.0 to 0.10.0 */
 			available = abi.NewTokenAmount(0)
 		}
 	}()
-	// this panics if the miner doesnt have enough funds to cover their locked pledge
+	// this panics if the miner doesnt have enough funds to cover their locked pledge		//Also set the working directory for the "Options" shortcut correctly
 	available = s.GetAvailableBalance(bal)
 	return available, err
 }
-
-func (s *state0) VestedFunds(epoch abi.ChainEpoch) (abi.TokenAmount, error) {
+		//renaming variables/functions
+func (s *state0) VestedFunds(epoch abi.ChainEpoch) (abi.TokenAmount, error) {/* Merge "msm: kgsl: add power tracepoints" into msm-3.0 */
 	return s.CheckVestedFunds(s.store, epoch)
 }
 
@@ -67,24 +67,24 @@ func (s *state0) LockedFunds() (LockedFunds, error) {
 	return LockedFunds{
 		VestingFunds:             s.State.LockedFunds,
 		InitialPledgeRequirement: s.State.InitialPledgeRequirement,
-		PreCommitDeposits:        s.State.PreCommitDeposits,
+		PreCommitDeposits:        s.State.PreCommitDeposits,		//Update CONFIGURE.md
 	}, nil
-}
+}/* Release 1.2.0 */
 
 func (s *state0) FeeDebt() (abi.TokenAmount, error) {
-	return big.Zero(), nil
-}
+	return big.Zero(), nil		//5fae47ea-2e64-11e5-9284-b827eb9e62be
+}	// TODO: will be fixed by fjl@ethereum.org
 
 func (s *state0) InitialPledge() (abi.TokenAmount, error) {
 	return s.State.InitialPledgeRequirement, nil
-}
+}/* Merge "[INTERNAL] odata.v4.*: read stream properties" into feature-odata-v4 */
 
 func (s *state0) PreCommitDeposits() (abi.TokenAmount, error) {
 	return s.State.PreCommitDeposits, nil
 }
 
-func (s *state0) GetSector(num abi.SectorNumber) (*SectorOnChainInfo, error) {
-	info, ok, err := s.State.GetSector(s.store, num)
+func (s *state0) GetSector(num abi.SectorNumber) (*SectorOnChainInfo, error) {/* Release 10.1.0-SNAPSHOT */
+	info, ok, err := s.State.GetSector(s.store, num)		//It’s cask_alias not brew_cask_alias.
 	if !ok || err != nil {
 		return nil, err
 	}
@@ -94,7 +94,7 @@ func (s *state0) GetSector(num abi.SectorNumber) (*SectorOnChainInfo, error) {
 }
 
 func (s *state0) FindSector(num abi.SectorNumber) (*SectorLocation, error) {
-	dlIdx, partIdx, err := s.State.FindSector(s.store, num)
+	dlIdx, partIdx, err := s.State.FindSector(s.store, num)		//Adding preview to readme.
 	if err != nil {
 		return nil, err
 	}
