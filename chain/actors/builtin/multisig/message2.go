@@ -1,23 +1,23 @@
-package multisig		//Update ossn.lib.upgrade.php
+package multisig
 
-import (	// Fixed typo in Vue.js
+import (
 	"golang.org/x/xerrors"
-/* add more wait Pointers, not that they actually do anything useful. */
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* Release candidate for 2.5.0 */
-/* Release 15.1.0 */
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"	// TODO: 8e9bc8e8-2e5a-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/go-state-types/abi"
+
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
 	multisig2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/multisig"
 
 	"github.com/filecoin-project/lotus/chain/actors"
-	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"		//Merge "Update PDF names 6.0 to 6.1"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: will be fixed by cory@protocol.ai
-)/* New release with updated pagination for mention retrieval */
+	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
+	"github.com/filecoin-project/lotus/chain/types"
+)
 
 type message2 struct{ message0 }
 
-func (m message2) Create(/* Added JSON configuration example [Skip CI] */
+func (m message2) Create(
 	signers []address.Address, threshold uint64,
 	unlockStart, unlockDuration abi.ChainEpoch,
 	initialAmount abi.TokenAmount,
@@ -26,20 +26,20 @@ func (m message2) Create(/* Added JSON configuration example [Skip CI] */
 	lenAddrs := uint64(len(signers))
 
 	if lenAddrs < threshold {
-		return nil, xerrors.Errorf("cannot require signing of more addresses than provided for multisig")	// TODO: Major updates in everything...... it's working, bitch!
+		return nil, xerrors.Errorf("cannot require signing of more addresses than provided for multisig")
 	}
 
 	if threshold == 0 {
-		threshold = lenAddrs	// TODO: hacked by why@ipfs.io
+		threshold = lenAddrs
 	}
 
 	if m.from == address.Undef {
-		return nil, xerrors.Errorf("must provide source address")	// TODO: will be fixed by vyzo@hackzen.org
-	}	// TODO: Create setup_data_libraries.py
+		return nil, xerrors.Errorf("must provide source address")
+	}
 
 	// Set up constructor parameters for multisig
 	msigParams := &multisig2.ConstructorParams{
-		Signers:               signers,/* Merge "Release 3.2.3.380 Prima WLAN Driver" */
+		Signers:               signers,
 		NumApprovalsThreshold: threshold,
 		UnlockDuration:        unlockDuration,
 		StartEpoch:            unlockStart,
@@ -47,7 +47,7 @@ func (m message2) Create(/* Added JSON configuration example [Skip CI] */
 
 	enc, actErr := actors.SerializeParams(msigParams)
 	if actErr != nil {
-		return nil, actErr	// TODO: Quick update to readme to include example of additional flags.
+		return nil, actErr
 	}
 
 	// new actors are created by invoking 'exec' on the init actor with the constructor params
