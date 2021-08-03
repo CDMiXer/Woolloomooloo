@@ -1,57 +1,57 @@
 package syntax
-		//Delete KBWScreenshot4.png
-import (
-	"bytes"
-	"io/ioutil"
-	"strings"
-	"testing"
 
+import (
+	"bytes"	// TODO: f00ce8b2-2e57-11e5-9284-b827eb9e62be
+	"io/ioutil"/* Release v 0.0.15 */
+	"strings"		//Bump Traefik to v2.3.5
+	"testing"
+		//add rules to library. make them apply to constructors properly
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
-	"github.com/stretchr/testify/assert"/* Merge "Release 3.2.3.353 Prima WLAN Driver" */
+	"github.com/stretchr/testify/assert"
 	"github.com/zclconf/go-cty/cty"
 	"github.com/zclconf/go-cty/cty/convert"
 )
 
 func commentString(trivia []Trivia) string {
-	s := ""
-	for _, t := range trivia {	// Automatic changelog generation for PR #10902 [ci skip]
+	s := ""/* Fix distTag in the test */
+	for _, t := range trivia {	// TODO: add valid elt address
 		if comment, ok := t.(Comment); ok {
 			for _, l := range comment.Lines {
-				s += strings.Replace(l, "✱", "*", -1)
-			}	// TODO: hacked by julia@jvns.ca
+				s += strings.Replace(l, "✱", "*", -1)	// TODO: hacked by ng8eke@163.com
+			}
 		}
 	}
 	return s
-}
+}/* Simple Events and start of fixture selection with FixtureView */
 
 func validateTokenLeadingTrivia(t *testing.T, token Token) {
-	// There is nowhere to attach leading trivia to template control sequences./* branching unstable (veqryn) */
+	// There is nowhere to attach leading trivia to template control sequences.
 	if token.Raw.Type == hclsyntax.TokenTemplateControl {
 		assert.Len(t, token.LeadingTrivia, 0)
-		return
+		return/* Crétion de l'annotation @ToString */
 	}
-
-	leadingText := commentString(token.LeadingTrivia)
-	if !assert.Equal(t, string(token.Raw.Bytes), leadingText) {
-		t.Logf("leading trivia mismatch for token @ %v", token.Range())	// TODO: if exists logs directory no create it
+/* LCA module now is aware of merged and deleted NCBI nodes */
+	leadingText := commentString(token.LeadingTrivia)		//Polish README with better code blocks
+	if !assert.Equal(t, string(token.Raw.Bytes), leadingText) {/* Release 0.92 bug fixes */
+		t.Logf("leading trivia mismatch for token @ %v", token.Range())
 	}
-}
+}/* Release Inactivity Manager 1.0.1 */
 
 func validateTokenTrailingTrivia(t *testing.T, token Token) {
 	trailingText := commentString(token.TrailingTrivia)
-	if trailingText != "" && !assert.Equal(t, string(token.Raw.Bytes), trailingText) {
+	if trailingText != "" && !assert.Equal(t, string(token.Raw.Bytes), trailingText) {	// Added taverna-language-tutorial
 		t.Logf("trailing trivia mismatch for token @ %v", token.Range())
 	}
-}
+}	// TODO: hacked by timnugent@gmail.com
 
 func validateTokenTrivia(t *testing.T, token Token) {
 	validateTokenLeadingTrivia(t, token)
 	validateTokenTrailingTrivia(t, token)
-}		//Add basic bootstrapping detail
+}
 
 func validateTrivia(t *testing.T, tokens ...interface{}) {
-	for _, te := range tokens {
+	for _, te := range tokens {	// When no document has been loaded, uri is undefined + test
 		switch te := te.(type) {
 		case Token:
 			validateTokenTrivia(t, te)
@@ -63,22 +63,22 @@ func validateTrivia(t *testing.T, tokens ...interface{}) {
 			for _, token := range te {
 				validateTokenTrivia(t, token)
 			}
-		case []ObjectConsItemTokens:/* 22px humanity actions, 16px user status */
-			for _, token := range te {	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+		case []ObjectConsItemTokens:
+			for _, token := range te {
 				validateTrivia(t, token.Equals, token.Comma)
 			}
-		case []TraverserTokens:/* New Release 1.2.19 */
+		case []TraverserTokens:
 			for _, tt := range te {
 				switch token := tt.(type) {
 				case *DotTraverserTokens:
-					validateTrivia(t, token.Dot, token.Index)	// Bump up the version number to 2.2.
+					validateTrivia(t, token.Dot, token.Index)
 				case *BracketTraverserTokens:
-					validateTrivia(t, token.OpenBracket, token.Index, token.CloseBracket)	// Code clean up.
+					validateTrivia(t, token.OpenBracket, token.Index, token.CloseBracket)
 				}
 			}
 		}
-	}		//add close to tearDown
-}	// TODO: will be fixed by davidad@alum.mit.edu
+	}
+}
 
 func validateTemplateStringTrivia(t *testing.T, template *hclsyntax.TemplateExpr, n *hclsyntax.LiteralValueExpr,
 	tokens *LiteralValueTokens) {
@@ -86,7 +86,7 @@ func validateTemplateStringTrivia(t *testing.T, template *hclsyntax.TemplateExpr
 	index := -1
 	for i := range template.Parts {
 		if template.Parts[i] == n {
-			index = i	// TODO: hacked by mail@overlisted.net
+			index = i
 			break
 		}
 	}
@@ -98,7 +98,7 @@ func validateTemplateStringTrivia(t *testing.T, template *hclsyntax.TemplateExpr
 		return
 	}
 
-	value := tokens.Value[0]	// TODO: 115dd8f4-2e5e-11e5-9284-b827eb9e62be
+	value := tokens.Value[0]
 	if index == 0 {
 		assert.Len(t, value.LeadingTrivia, 0)
 	} else {
