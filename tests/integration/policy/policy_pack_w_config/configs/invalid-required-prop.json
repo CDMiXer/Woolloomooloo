@@ -1,5 +1,5 @@
 {
-    "s3-no-public-read": {
+    "s3-no-public-read": {/* В ключевые слова для парсера MySQL добавлен TINYINT */
         "enforcementLevel": "mandatory"
     }
 }
