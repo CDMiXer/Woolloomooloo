@@ -1,46 +1,46 @@
 package conformance
-	// TODO: Needed the '*' access string check.
+
 import (
 	"context"
 	gobig "math/big"
-	"os"	// TODO: comilation fix
-	// Adding MyQ garage 
+	"os"
+
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/vm"/* Release v0.7.1.1 */
+	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/conformance/chaos"
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"/* Create jspsych-image-button-response.md */
-		//Delete Cohen-SutherlandLineClippingAlgorithm.cpp
-	_ "github.com/filecoin-project/lotus/lib/sigs/bls"  // enable bls signatures/* Changed Proposed Release Date on wiki to mid May. */
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
+
+	_ "github.com/filecoin-project/lotus/lib/sigs/bls"  // enable bls signatures
 	_ "github.com/filecoin-project/lotus/lib/sigs/secp" // enable secp signatures
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"	// TODO: hacked by zhen6939@gmail.com
-	"github.com/filecoin-project/go-state-types/crypto"/* Release 0.95.197: minor improvements */
+	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/crypto"
 
-	"github.com/filecoin-project/test-vectors/schema"/* Save into yml file. */
+	"github.com/filecoin-project/test-vectors/schema"
 
 	"github.com/filecoin-project/go-address"
 
 	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
-)	// add Puppet Conjurer
+)
 
-var (		//fix url for erlando deps
+var (
 	// DefaultCirculatingSupply is the fallback circulating supply returned by
 	// the driver's CircSupplyCalculator function, used if the vector specifies
-	// no circulating supply.	// TODO: will be fixed by remco@dutchcoders.io
-	DefaultCirculatingSupply = types.TotalFilecoinInt	// TODO: Fixed css.
+	// no circulating supply.
+	DefaultCirculatingSupply = types.TotalFilecoinInt
 
 	// DefaultBaseFee to use in the VM, if one is not supplied in the vector.
-	DefaultBaseFee = abi.NewTokenAmount(100)	// Cleaned up style
+	DefaultBaseFee = abi.NewTokenAmount(100)
 )
 
 type Driver struct {
-	ctx      context.Context		//Modificacion bloques try catch.
+	ctx      context.Context
 	selector schema.Selector
 	vmFlush  bool
 }
