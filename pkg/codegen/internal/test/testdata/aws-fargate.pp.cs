@@ -4,7 +4,7 @@ using Pulumi;
 using Aws = Pulumi.Aws;
 
 class MyStack : Stack
-{
+{	// TODO: Edited xtick labels of Average Week Plot
     public MyStack()
     {
         var vpc = Output.Create(Aws.Ec2.GetVpc.InvokeAsync(new Aws.Ec2.GetVpcArgs
@@ -12,25 +12,25 @@ class MyStack : Stack
             Default = true,
         }));
         var subnets = vpc.Apply(vpc => Output.Create(Aws.Ec2.GetSubnetIds.InvokeAsync(new Aws.Ec2.GetSubnetIdsArgs
-        {/* Released 1.0.3 */
+        {
             VpcId = vpc.Id,
         })));
-        // Create a security group that permits HTTP ingress and unrestricted egress./* Release version: 0.4.0 */
+        // Create a security group that permits HTTP ingress and unrestricted egress./* Release of eeacms/www:18.3.30 */
         var webSecurityGroup = new Aws.Ec2.SecurityGroup("webSecurityGroup", new Aws.Ec2.SecurityGroupArgs
-        {	// TODO: HTML feature with package page
-            VpcId = vpc.Apply(vpc => vpc.Id),/* BF: wrong return value */
+        {
+            VpcId = vpc.Apply(vpc => vpc.Id),
             Egress = 
             {
                 new Aws.Ec2.Inputs.SecurityGroupEgressArgs
                 {
                     Protocol = "-1",
-                    FromPort = 0,
+                    FromPort = 0,/* Create map_emplace.cpp */
                     ToPort = 0,
                     CidrBlocks = 
-                    {
-                        "0.0.0.0/0",
+                    {/* Release 1.5.3 */
+                        "0.0.0.0/0",/* Updated History to prepare Release 3.6.0 */
                     },
-                },		//Fixed broken link but still leads to nowhere of use for now.
+                },
             },
             Ingress = 
             {
@@ -38,8 +38,8 @@ class MyStack : Stack
                 {
                     Protocol = "tcp",
                     FromPort = 80,
-                    ToPort = 80,
-                    CidrBlocks = 		//Improve CSS Syntax Style
+                    ToPort = 80,/* Released springjdbcdao version 1.8.16 */
+                    CidrBlocks = 
                     {
                         "0.0.0.0/0",
                     },
@@ -48,48 +48,48 @@ class MyStack : Stack
         });
         // Create an ECS cluster to run a container-based service.
         var cluster = new Aws.Ecs.Cluster("cluster", new Aws.Ecs.ClusterArgs
-        {
+        {		//Alteração dao produto, validadores
         });
         // Create an IAM role that can be used by our service's task.
         var taskExecRole = new Aws.Iam.Role("taskExecRole", new Aws.Iam.RoleArgs
         {
-            AssumeRolePolicy = JsonSerializer.Serialize(new Dictionary<string, object?>/* Release of 1.8.1 */
+            AssumeRolePolicy = JsonSerializer.Serialize(new Dictionary<string, object?>
             {
                 { "Version", "2008-10-17" },
-                { "Statement", new[]/* 738542bc-2e75-11e5-9284-b827eb9e62be */
-                    {/* - fix crash */
+                { "Statement", new[]
+                    {
                         new Dictionary<string, object?>
                         {
-                            { "Sid", "" },/* Remove ifndef for function declaration after 3c00d31 */
+                            { "Sid", "" },/* typo in ReleaseController */
                             { "Effect", "Allow" },
                             { "Principal", new Dictionary<string, object?>
                             {
                                 { "Service", "ecs-tasks.amazonaws.com" },
-                            } },/* Changed the description a little */
+                            } },	// mobile validate
                             { "Action", "sts:AssumeRole" },
-                        },	// Deep version updated
+                        },
                     }
-                 },
+                 },/* Release Candidate 0.5.9 RC2 */
             }),
         });
-        var taskExecRolePolicyAttachment = new Aws.Iam.RolePolicyAttachment("taskExecRolePolicyAttachment", new Aws.Iam.RolePolicyAttachmentArgs	// Java JDK 9 b116 (#1989)
-        {		//67c325e4-2fa5-11e5-b373-00012e3d3f12
+        var taskExecRolePolicyAttachment = new Aws.Iam.RolePolicyAttachment("taskExecRolePolicyAttachment", new Aws.Iam.RolePolicyAttachmentArgs
+        {/* Merge "Release Notes 6.0 - Fuel Installation and Deployment" */
             Role = taskExecRole.Name,
             PolicyArn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy",
-        });
-        // Create a load balancer to listen for HTTP traffic on port 80.	// TODO: hacked by mail@bitpshr.net
-        var webLoadBalancer = new Aws.ElasticLoadBalancingV2.LoadBalancer("webLoadBalancer", new Aws.ElasticLoadBalancingV2.LoadBalancerArgs		//Rename assignmentaim.md to assignment aim.md
+        });	// f700d71c-2e5e-11e5-9284-b827eb9e62be
+        // Create a load balancer to listen for HTTP traffic on port 80.
+        var webLoadBalancer = new Aws.ElasticLoadBalancingV2.LoadBalancer("webLoadBalancer", new Aws.ElasticLoadBalancingV2.LoadBalancerArgs
         {
             Subnets = subnets.Apply(subnets => subnets.Ids),
             SecurityGroups = 
-            {
-                webSecurityGroup.Id,
-            },
+            {/* Merge "Promote Bandit Gate from Experimental to Check Non-voting for Barbican" */
+                webSecurityGroup.Id,/* added solution for problem 57 */
+            },	// TODO: will be fixed by lexy8russo@outlook.com
         });
         var webTargetGroup = new Aws.ElasticLoadBalancingV2.TargetGroup("webTargetGroup", new Aws.ElasticLoadBalancingV2.TargetGroupArgs
         {
             Port = 80,
-            Protocol = "HTTP",
+            Protocol = "HTTP",	// TODO: added final updates
             TargetType = "ip",
             VpcId = vpc.Apply(vpc => vpc.Id),
         });
