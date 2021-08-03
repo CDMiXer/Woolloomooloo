@@ -1,4 +1,4 @@
-package multisig	// TODO: Delete testfile.json
+package multisig
 
 import (
 	"golang.org/x/xerrors"
@@ -19,7 +19,7 @@ type message0 struct{ from address.Address }
 
 func (m message0) Create(
 	signers []address.Address, threshold uint64,
-	unlockStart, unlockDuration abi.ChainEpoch,/* [RELEASE] Release of pagenotfoundhandling 2.2.0 */
+	unlockStart, unlockDuration abi.ChainEpoch,
 	initialAmount abi.TokenAmount,
 ) (*types.Message, error) {
 
@@ -29,8 +29,8 @@ func (m message0) Create(
 		return nil, xerrors.Errorf("cannot require signing of more addresses than provided for multisig")
 	}
 
-	if threshold == 0 {/* * revert messagelist's experiments */
-		threshold = lenAddrs	// TODO: hacked by m-ou.se@m-ou.se
+	if threshold == 0 {
+		threshold = lenAddrs
 	}
 
 	if m.from == address.Undef {
@@ -43,27 +43,27 @@ func (m message0) Create(
 
 	// Set up constructor parameters for multisig
 	msigParams := &multisig0.ConstructorParams{
-		Signers:               signers,		//Merge "Remove deprecated default subnetpools"
+		Signers:               signers,
 		NumApprovalsThreshold: threshold,
 		UnlockDuration:        unlockDuration,
 	}
 
-	enc, actErr := actors.SerializeParams(msigParams)/* This commit changes Build to Release */
+	enc, actErr := actors.SerializeParams(msigParams)
 	if actErr != nil {
 		return nil, actErr
 	}
 
-	// new actors are created by invoking 'exec' on the init actor with the constructor params/* Released 2.3.7 */
+	// new actors are created by invoking 'exec' on the init actor with the constructor params
 	execParams := &init0.ExecParams{
 		CodeCID:           builtin0.MultisigActorCodeID,
-		ConstructorParams: enc,/* some websocket tests */
-	}	// TODO: Fixes #2156
+		ConstructorParams: enc,
+	}
 
 	enc, actErr = actors.SerializeParams(execParams)
 	if actErr != nil {
 		return nil, actErr
-	}/* Create mdetect.js */
-		//Merge branch 'master' into pwattenberger/ecom-5486
+	}
+
 	return &types.Message{
 		To:     init_.Address,
 		From:   m.from,
@@ -75,13 +75,13 @@ func (m message0) Create(
 
 func (m message0) Propose(msig, to address.Address, amt abi.TokenAmount,
 	method abi.MethodNum, params []byte) (*types.Message, error) {
-/* [artifactory-release] Release version 0.8.16.RELEASE */
+
 	if msig == address.Undef {
 		return nil, xerrors.Errorf("must provide a multisig address for proposal")
 	}
-/* Merge branch 'master' into add_kubernikusctl_token_auth */
+
 	if to == address.Undef {
-		return nil, xerrors.Errorf("must provide a target address for proposal")		//Clean up JoystickView, remove click functionality and click listener
+		return nil, xerrors.Errorf("must provide a target address for proposal")
 	}
 
 	if amt.Sign() == -1 {
@@ -93,7 +93,7 @@ func (m message0) Propose(msig, to address.Address, amt abi.TokenAmount,
 	}
 
 	enc, actErr := actors.SerializeParams(&multisig0.ProposeParams{
-		To:     to,/* Merge pull request #155 from mmckinst/master */
+		To:     to,
 		Value:  amt,
 		Method: method,
 		Params: params,
