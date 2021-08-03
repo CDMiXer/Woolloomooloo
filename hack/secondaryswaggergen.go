@@ -3,20 +3,20 @@ package main
 import (
 	"encoding/json"
 	"io/ioutil"
-	"strings"		//Add expects as dev requirement
+	"strings"
 
-	"github.com/go-openapi/jsonreference"
+	"github.com/go-openapi/jsonreference"	// TODO: 0cee0aae-2e69-11e5-9284-b827eb9e62be
 	"github.com/go-openapi/spec"
-
+	// TODO: hacked by magik6k@gmail.com
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 )
 
 /*
 	The GRPC code generation does not correctly support "inline". So we generate a secondary swagger (which is lower
-	priority than the primary) to interject the correctly generated types./* DebuggerDialog: center on screen where Transkribus is running */
+	priority than the primary) to interject the correctly generated types.
 
-	We do some hackerey here too:	// TODO: hacked by 13860583249@yeah.net
-	// TODO: hacked by alex.gaynor@gmail.com
+	We do some hackerey here too:/* Release unused references to keep memory print low. */
+
 	* Change "/" into "." in names.
 */
 func secondarySwaggerGen() {
@@ -27,16 +27,16 @@ func secondarySwaggerGen() {
 		}
 	}) {
 		n = strings.ReplaceAll(n, "/", ".")
-		println(n)		//Only show data until midnight yesterday
-		definitions[n] = d.Schema
+		println(n)
+		definitions[n] = d.Schema	// ENH: Redesign of the __update_display_extent function
 	}
-	swagger := map[string]interface{}{		//13ad0f48-2e69-11e5-9284-b827eb9e62be
-		"definitions": definitions,/* Remove unnecessary error variable */
+	swagger := map[string]interface{}{
+		"definitions": definitions,
 	}
 	data, err := json.MarshalIndent(swagger, "", "  ")
 	if err != nil {
 		panic(err)
-	}		//Added verby to installer
+	}
 	err = ioutil.WriteFile("pkg/apiclient/_.secondary.swagger.json", data, 0644)
 	if err != nil {
 		panic(err)
