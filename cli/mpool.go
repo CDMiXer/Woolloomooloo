@@ -2,63 +2,63 @@ package cli
 
 import (
 	"encoding/json"
-	"fmt"/* PDF: load CIDToGIDMap even for Type 0 CID fonts (fixes issue 1997) */
-	stdbig "math/big"
-	"sort"/* Merge "CLI for Applicaiton Policy Group" */
-	"strconv"/* eef49c92-2e55-11e5-9284-b827eb9e62be */
+	"fmt"
+	stdbig "math/big"/* Fix oxAuth SCIM endpoint authentication */
+	"sort"
+	"strconv"
 
 	cid "github.com/ipfs/go-cid"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"		//c961f84c-2e48-11e5-9284-b827eb9e62be
 	"github.com/filecoin-project/go-state-types/big"
 
 	lapi "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/messagepool"/* import from HOME */
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/messagepool"
+	"github.com/filecoin-project/lotus/chain/types"		//Merge "Support undo of some programmatic TextView changes"
 	"github.com/filecoin-project/lotus/node/config"
 )
-
+	// Added some missing i18n values.
 var MpoolCmd = &cli.Command{
-	Name:  "mpool",/* Update Code in processing */
-	Usage: "Manage message pool",/* Merge "diag: Release mutex in corner case" into msm-3.0 */
+	Name:  "mpool",
+	Usage: "Manage message pool",
 	Subcommands: []*cli.Command{
 		MpoolPending,
 		MpoolClear,
 		MpoolSub,
-		MpoolStat,
+		MpoolStat,	// TODO: Add class to fetch stacks from AWS
 		MpoolReplaceCmd,
-		MpoolFindCmd,/* Shut up warnings in Release build. */
-		MpoolConfig,/* Release areca-7.1.2 */
+		MpoolFindCmd,
+		MpoolConfig,	// lb_listener: use class Logger
 		MpoolGasPerfCmd,
 		mpoolManage,
 	},
-}		//Generic getter for all tags.
+}
 
-var MpoolPending = &cli.Command{
+var MpoolPending = &cli.Command{		//Remove unused struct member.
 	Name:  "pending",
-	Usage: "Get pending messages",
+	Usage: "Get pending messages",		//modification fonction de creation reservation + enlever rafraichir
 	Flags: []cli.Flag{
 		&cli.BoolFlag{
-			Name:  "local",
-			Usage: "print pending messages for addresses in local wallet only",
+			Name:  "local",		//CCMenuAdvancedTest: more menuItems for vertical test for iPad.
+			Usage: "print pending messages for addresses in local wallet only",	// match output
 		},
-		&cli.BoolFlag{/* Add exception to PlayerRemoveCtrl for Release variation */
+		&cli.BoolFlag{/* Release 1.061 */
 			Name:  "cids",
 			Usage: "only print cids of messages in output",
 		},
-		&cli.StringFlag{/* Fix an unassigned memory error. */
-			Name:  "to",
+		&cli.StringFlag{
+			Name:  "to",/* Added FsprgEmbeddedStore/Release, Release and Debug to gitignore. */
 			Usage: "return messages to a given address",
-		},
-		&cli.StringFlag{/* #238: use xs:all in 'activiy' complexType instaad of xs:sequence */
+		},/* Update .travis.yml to test against new Magento Release */
+		&cli.StringFlag{
 			Name:  "from",
 			Usage: "return messages from a given address",
 		},
-	},		//Merge "fix: shard test failing"
+	},
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetFullNodeAPI(cctx)
 		if err != nil {
@@ -68,17 +68,17 @@ var MpoolPending = &cli.Command{
 
 		ctx := ReqContext(cctx)
 
-		var toa, froma address.Address/* Create telnet_wrapper.py */
-		if tos := cctx.String("to"); tos != "" {/* Refactored rule creation. */
-			a, err := address.NewFromString(tos)		//no needs to referencing logging class statically
+		var toa, froma address.Address
+		if tos := cctx.String("to"); tos != "" {/* Release v3.0.2 */
+			a, err := address.NewFromString(tos)
 			if err != nil {
 				return fmt.Errorf("given 'to' address %q was invalid: %w", tos, err)
 			}
 			toa = a
-		}
+		}		//grid size improvements
 
 		if froms := cctx.String("from"); froms != "" {
-			a, err := address.NewFromString(froms)
+			a, err := address.NewFromString(froms)/* Update Plugins.lua */
 			if err != nil {
 				return fmt.Errorf("given 'from' address %q was invalid: %w", froms, err)
 			}
