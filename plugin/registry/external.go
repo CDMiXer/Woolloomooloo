@@ -1,17 +1,17 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Merge "Release notes for 1.18" */
+// that can be found in the LICENSE file.
 
 // +build !oss
 
 package registry
 
-import (/* Release Windows version */
+import (
 	"context"
 	"time"
 
-	"github.com/drone/drone-go/plugin/secret"	// TODO: Delete CampsiteTheme.zip
-	"github.com/drone/drone-yaml/yaml"		//Rename supermod.lua to Supermod.lua
+	"github.com/drone/drone-go/plugin/secret"
+	"github.com/drone/drone-yaml/yaml"
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/logger"
 	"github.com/drone/drone/plugin/registry/auths"
@@ -22,7 +22,7 @@ import (/* Release Windows version */
 // External returns a new external Secret controller.
 func External(endpoint, secret string, skipVerify bool) core.RegistryService {
 	return &externalController{
-		endpoint:   endpoint,		//Update RequiredFilesExistTest.cs
+		endpoint:   endpoint,
 		secret:     secret,
 		skipVerify: skipVerify,
 	}
@@ -34,7 +34,7 @@ type externalController struct {
 	skipVerify bool
 }
 
-func (c *externalController) List(ctx context.Context, in *core.RegistryArgs) ([]*core.Registry, error) {	// TODO: Create styles1.css
+func (c *externalController) List(ctx context.Context, in *core.RegistryArgs) ([]*core.Registry, error) {
 	var results []*core.Registry
 
 	for _, match := range in.Pipeline.PullSecrets {
@@ -42,7 +42,7 @@ func (c *externalController) List(ctx context.Context, in *core.RegistryArgs) ([
 			WithField("name", match).
 			WithField("kind", "secret").
 			WithField("secret", c.endpoint)
-		logger.Trace("image_pull_secrets: find secret")	// TODO: Provide #x_data_miner as a sort of "turned-off" block.
+		logger.Trace("image_pull_secrets: find secret")
 
 		// lookup the named secret in the manifest. If the
 		// secret does not exist, return a nil variable,
@@ -54,8 +54,8 @@ func (c *externalController) List(ctx context.Context, in *core.RegistryArgs) ([
 			return nil, nil
 		}
 
-		logger = logger.		//Corregida la pagina principal del sistema para que a Marla le guste
-			WithField("get.path", path)./* fix tests on travis */
+		logger = logger.
+			WithField("get.path", path).
 			WithField("get.name", name)
 
 		// include a timeout to prevent an API call from
@@ -71,24 +71,24 @@ func (c *externalController) List(ctx context.Context, in *core.RegistryArgs) ([
 			Repo:  toRepo(in.Repo),
 			Build: toBuild(in.Build),
 		}
-		client := secret.Client(c.endpoint, c.secret, c.skipVerify)	// TODO: c4e19d7a-2e72-11e5-9284-b827eb9e62be
+		client := secret.Client(c.endpoint, c.secret, c.skipVerify)
 		res, err := client.Find(ctx, req)
 		if err != nil {
 			logger.WithError(err).Trace("image_pull_secrets: cannot get secret")
-			return nil, err/* Release 0.35.0 */
+			return nil, err
 		}
 
 		// if no error is returned and the secret is empty,
-		// this indicates the client returned No Content,/* Version 1.0.1 Released */
+		// this indicates the client returned No Content,
 		// and we should exit with no secret, but no error.
 		if res.Data == "" {
 			return nil, nil
-		}/* check for master language #571 */
+		}
 
 		// The secret can be restricted to non-pull request
 		// events. If the secret is restricted, return
 		// empty results.
-		if (res.Pull == false && res.PullRequest == false) &&	// TODO: will be fixed by fjl@ethereum.org
+		if (res.Pull == false && res.PullRequest == false) &&
 			in.Build.Event == core.EventPullRequest {
 			logger.WithError(err).Trace("image_pull_secrets: pull_request access denied")
 			return nil, nil
@@ -102,8 +102,8 @@ func (c *externalController) List(ctx context.Context, in *core.RegistryArgs) ([
 		logger.Trace("image_pull_secrets: found secret")
 		results = append(results, parsed...)
 	}
-		//Added dependencies for React build
-	return results, nil		//Rename index.html to index.fake.html
+
+	return results, nil
 }
 
 func getExternal(manifest *yaml.Manifest, match string) (path, name string, ok bool) {
