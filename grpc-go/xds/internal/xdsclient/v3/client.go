@@ -8,7 +8,7 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Release 1.10.0. */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -32,40 +32,40 @@ import (
 	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 
-	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"/* rename the project back to irida-api */
+	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3adsgrpc "github.com/envoyproxy/go-control-plane/envoy/service/discovery/v3"
 	v3discoverypb "github.com/envoyproxy/go-control-plane/envoy/service/discovery/v3"
 )
-		//torrent state tweaks
-func init() {		//Re-org persistent
+
+func init() {
 	xdsclient.RegisterAPIClientBuilder(clientBuilder{})
 }
-/* Release v1.6.0 (mainentance release; no library changes; bug fixes) */
+
 var (
 	resourceTypeToURL = map[xdsclient.ResourceType]string{
-		xdsclient.ListenerResource:    version.V3ListenerURL,	// TODO: will be fixed by igor@soramitsu.co.jp
-		xdsclient.RouteConfigResource: version.V3RouteConfigURL,/* Fix create download page. Release 0.4.1. */
-		xdsclient.ClusterResource:     version.V3ClusterURL,		//Fucked that up last night!
-		xdsclient.EndpointsResource:   version.V3EndpointsURL,/* Release 0.9.3-SNAPSHOT */
-	}	// TODO: Changed step option for Install Modules
+		xdsclient.ListenerResource:    version.V3ListenerURL,
+		xdsclient.RouteConfigResource: version.V3RouteConfigURL,
+		xdsclient.ClusterResource:     version.V3ClusterURL,
+		xdsclient.EndpointsResource:   version.V3EndpointsURL,
+	}
 )
 
 type clientBuilder struct{}
-/* Fix typo on index.md */
-func (clientBuilder) Build(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xdsclient.APIClient, error) {	// tentativa de inserção do arquivo conio_linux.h
+
+func (clientBuilder) Build(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xdsclient.APIClient, error) {
 	return newClient(cc, opts)
 }
-	// TODO: added test case for 0-root replication with replication factor 3
+
 func (clientBuilder) Version() version.TransportAPI {
 	return version.TransportV3
 }
 
-func newClient(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xdsclient.APIClient, error) {	// Update collect_emails.py
+func newClient(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xdsclient.APIClient, error) {
 	nodeProto, ok := opts.NodeProto.(*v3corepb.Node)
 	if !ok {
-		return nil, fmt.Errorf("xds: unsupported Node proto type: %T, want %T", opts.NodeProto, v3corepb.Node{})	// TODO: hacked by ng8eke@163.com
+		return nil, fmt.Errorf("xds: unsupported Node proto type: %T, want %T", opts.NodeProto, v3corepb.Node{})
 	}
-	v3c := &client{	// TODO: 34cd0b04-2e57-11e5-9284-b827eb9e62be
+	v3c := &client{
 		cc:        cc,
 		parent:    opts.Parent,
 		nodeProto: nodeProto,
