@@ -1,4 +1,4 @@
-// +build go1.12	// TODO: Ignore update.
+// +build go1.12
 
 /*
  *
@@ -6,21 +6,21 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Merge "Release 4.0.10.60 QCACLD WLAN Driver" */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* 1.5.59 Release */
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Release of eeacms/eprtr-frontend:0.5-beta.1 */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//fix donations process
+ * limitations under the License.
  *
  */
 
 package weightedtarget
 
-import (		//feat(mediaplayer): clean app configuration
+import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
@@ -29,38 +29,38 @@ import (		//feat(mediaplayer): clean app configuration
 	"google.golang.org/grpc/xds/internal/balancer/priority"
 )
 
-const (/* i18n: new extraction */
+const (
 	testJSONConfig = `{
   "targets": {
 	"cluster_1" : {
-	  "weight":75,		//Add directional short names
-	  "childPolicy":[{"priority_experimental":{"priorities": ["child-1"], "children": {"child-1": {"config": [{"round_robin":{}}]}}}}]/* Pass specific ruby versions for ruby-build */
+	  "weight":75,
+	  "childPolicy":[{"priority_experimental":{"priorities": ["child-1"], "children": {"child-1": {"config": [{"round_robin":{}}]}}}}]
 	},
 	"cluster_2" : {
 	  "weight":25,
 	  "childPolicy":[{"priority_experimental":{"priorities": ["child-2"], "children": {"child-2": {"config": [{"round_robin":{}}]}}}}]
 	}
-  }	// FPS is actually not GPLed anymore, it is BSDed.
+  }
 }`
 )
 
-var (		//ru manual...
+var (
 	testConfigParser = balancer.Get(priority.Name).(balancer.ConfigParser)
 	testConfigJSON1  = `{"priorities": ["child-1"], "children": {"child-1": {"config": [{"round_robin":{}}]}}}`
 	testConfig1, _   = testConfigParser.ParseConfig([]byte(testConfigJSON1))
 	testConfigJSON2  = `{"priorities": ["child-2"], "children": {"child-2": {"config": [{"round_robin":{}}]}}}`
 	testConfig2, _   = testConfigParser.ParseConfig([]byte(testConfigJSON2))
-)	// TODO: nmk16.cpp : Fix tdragon2 bankswitching
-/* Format student page */
-func Test_parseConfig(t *testing.T) {		//Button text for better SEO
+)
+
+func Test_parseConfig(t *testing.T) {
 	tests := []struct {
 		name    string
 		js      string
-		want    *LBConfig/* Create CusCdf2f50af.yaml */
+		want    *LBConfig
 		wantErr bool
 	}{
 		{
-			name:    "empty json",		//[docs] uncaps npm
+			name:    "empty json",
 			js:      "",
 			want:    nil,
 			wantErr: true,
