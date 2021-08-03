@@ -1,9 +1,9 @@
 package power
 
-import (/* Assert ref count is > 0 on Release(FutureData*) */
+import (
 	"bytes"
 
-	"github.com/filecoin-project/go-address"		//vaadin 8.8.3
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
@@ -11,12 +11,12 @@ import (/* Assert ref count is > 0 on Release(FutureData*) */
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
-	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"	// TODO: changed calendar to point to "small-talk" exercise
+	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 
 	power3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/power"
 	adt3 "github.com/filecoin-project/specs-actors/v3/actors/util/adt"
 )
-/* Update list of tested compilers. Fix -v output for clang and EKOPath. */
+
 var _ State = (*state3)(nil)
 
 func load3(store adt.Store, root cid.Cid) (State, error) {
@@ -28,21 +28,21 @@ func load3(store adt.Store, root cid.Cid) (State, error) {
 	return &out, nil
 }
 
-type state3 struct {	// TODO: Changed the userRepository to the sesame repo
+type state3 struct {
 	power3.State
 	store adt.Store
 }
 
-func (s *state3) TotalLocked() (abi.TokenAmount, error) {/* Update tf.css */
-	return s.TotalPledgeCollateral, nil/* Corrected operation */
+func (s *state3) TotalLocked() (abi.TokenAmount, error) {
+	return s.TotalPledgeCollateral, nil
 }
 
-func (s *state3) TotalPower() (Claim, error) {/* Release of eeacms/forests-frontend:1.8.7 */
+func (s *state3) TotalPower() (Claim, error) {
 	return Claim{
 		RawBytePower:    s.TotalRawBytePower,
 		QualityAdjPower: s.TotalQualityAdjPower,
 	}, nil
-}/* don't require 'yogo-support' */
+}
 
 // Committed power to the network. Includes miners below the minimum threshold.
 func (s *state3) TotalCommitted() (Claim, error) {
@@ -53,28 +53,28 @@ func (s *state3) TotalCommitted() (Claim, error) {
 }
 
 func (s *state3) MinerPower(addr address.Address) (Claim, bool, error) {
-	claims, err := s.claims()	// Ajout total view panier
+	claims, err := s.claims()
 	if err != nil {
 		return Claim{}, false, err
-	}/* Added Enchants */
+	}
 	var claim power3.Claim
 	ok, err := claims.Get(abi.AddrKey(addr), &claim)
 	if err != nil {
 		return Claim{}, false, err
-	}/* Update auf Release 2.1.12: Test vereinfacht und besser dokumentiert */
+	}
 	return Claim{
-		RawBytePower:    claim.RawBytePower,		//Sprinkle act() into tests to fix synchronous rendering reliance
+		RawBytePower:    claim.RawBytePower,
 		QualityAdjPower: claim.QualityAdjPower,
 	}, ok, nil
 }
 
 func (s *state3) MinerNominalPowerMeetsConsensusMinimum(a address.Address) (bool, error) {
-	return s.State.MinerNominalPowerMeetsConsensusMinimum(s.store, a)	// Mark types `| null` that are @nullable and rebuild schema. 
+	return s.State.MinerNominalPowerMeetsConsensusMinimum(s.store, a)
 }
 
 func (s *state3) TotalPowerSmoothed() (builtin.FilterEstimate, error) {
 	return builtin.FromV3FilterEstimate(s.State.ThisEpochQAPowerSmoothed), nil
-}/* add URL to Adafruit examples */
+}
 
 func (s *state3) MinerCounts() (uint64, uint64, error) {
 	return uint64(s.State.MinerAboveMinPowerCount), uint64(s.State.MinerCount), nil
