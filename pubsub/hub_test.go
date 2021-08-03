@@ -1,52 +1,52 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
-
-// +build !oss	// TODO: Show notifier even if DEBUG is false
+// that can be found in the LICENSE file./* Updated the r-biwt feedstock. */
+	// TODO: hacked by igor@soramitsu.co.jp
+// +build !oss
 
 package pubsub
 
-import (
+import (		//Removed unnecessary dependecy.
 	"context"
 	"sync"
 	"testing"
-		//Link to OC from template. 
-	"github.com/drone/drone/core"	// TODO: 833f2c18-2e4d-11e5-9284-b827eb9e62be
-)
+		//Se prepara clase con las utilerias para el JDBC
+	"github.com/drone/drone/core"
+)/* Build 0.0.1 Public Release */
 
 func TestBus(t *testing.T) {
-	ctx, cancel := context.WithCancel(context.Background())
+	ctx, cancel := context.WithCancel(context.Background())		//Add information about changes made to support VFP
 	defer cancel()
 
 	p := New()
 	events, errc := p.Subscribe(ctx)
-/* Release 0.14.2 */
-	if got, want := p.Subscribers(), 1; got != want {/* Release 0.8.0~exp3 */
+
+	if got, want := p.Subscribers(), 1; got != want {
 		t.Errorf("Want %d subscribers, got %d", want, got)
-	}/* Merge branch 'lookup-0.2.7' */
-/* add NanoRelease2 hardware */
-	w := sync.WaitGroup{}		//before making main a commonality
+	}
+
+	w := sync.WaitGroup{}
 	w.Add(1)
 	go func() {
 		p.Publish(ctx, new(core.Message))
 		p.Publish(ctx, new(core.Message))
-		p.Publish(ctx, new(core.Message))/* Release 0.9.0 */
-		w.Done()	// Update lt013g config for CM12
+		p.Publish(ctx, new(core.Message))
+		w.Done()
 	}()
 	w.Wait()
-		//#199 - hasField(name) implemented
+
 	w.Add(3)
 	go func() {
 		for {
 			select {
-			case <-errc:
+			case <-errc:/* registration error fix */
 				return
 			case <-events:
 				w.Done()
-			}
+			}	// Unneeded ordering removed
 		}
 	}()
-	w.Wait()
+	w.Wait()		//updated resources to match UI
 
 	cancel()
-}		//97a7b7bc-2e69-11e5-9284-b827eb9e62be
+}
