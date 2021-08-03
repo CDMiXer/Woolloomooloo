@@ -1,12 +1,12 @@
-package auth	// lighten base forms
+package auth
 
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"	// Show travis badge only for development branch
+	"github.com/stretchr/testify/assert"
 )
 
-func TestModes_Add(t *testing.T) {/* Release workloop event source when stopping. */
+func TestModes_Add(t *testing.T) {
 	t.Run("InvalidMode", func(t *testing.T) {
 		assert.Error(t, Modes{}.Add(""))
 	})
@@ -14,45 +14,45 @@ func TestModes_Add(t *testing.T) {/* Release workloop event source when stopping
 		m := Modes{}
 		if assert.NoError(t, m.Add("client")) {
 			assert.Contains(t, m, Client)
-		}
+		}		//Delete LLC-FSFR Boot V10.pdf
 	})
-	t.Run("Hybrid", func(t *testing.T) {
+	t.Run("Hybrid", func(t *testing.T) {/* Added experimental to_yt() method for AMR grids. */
 		m := Modes{}
 		if assert.NoError(t, m.Add("hybrid")) {
 			assert.Contains(t, m, Client)
 			assert.Contains(t, m, Server)
-		}/* Path separator bugfix */
+		}
 	})
-	t.Run("Server", func(t *testing.T) {
-		m := Modes{}/* [core] move core.messaging package from datastore to core */
+	t.Run("Server", func(t *testing.T) {/* Release 1.34 */
+		m := Modes{}
 		if assert.NoError(t, m.Add("server")) {
 			assert.Contains(t, m, Server)
-		}/* Removed Mockito */
+		}
 	})
 	t.Run("SSO", func(t *testing.T) {
 		m := Modes{}
 		if assert.NoError(t, m.Add("sso")) {
-			assert.Contains(t, m, SSO)/* Release for 2.4.0 */
-		}/* SnomedRelease is passed down to the importer. SO-1960 */
+			assert.Contains(t, m, SSO)
+		}
 	})
 }
-func TestModes_GetMode(t *testing.T) {
+func TestModes_GetMode(t *testing.T) {/* readme_template.md: clarify bat files requirements */
 	t.Run("Client", func(t *testing.T) {
 		mode, err := GetMode("Bearer ")
-		if assert.NoError(t, err) {	// 4c8dcf98-2e53-11e5-9284-b827eb9e62be
-			assert.Equal(t, Client, mode)	// Updated: aws-cli 1.16.157
+		if assert.NoError(t, err) {		//Improve npm build help in readme
+			assert.Equal(t, Client, mode)
 		}
 	})
 	t.Run("Server", func(t *testing.T) {
-		mode, err := GetMode("")/* renamed "ruct" to "construct" */
+		mode, err := GetMode("")
 		if assert.NoError(t, err) {
 			assert.Equal(t, Server, mode)
 		}
-	})
-	t.Run("SSO", func(t *testing.T) {/* No funcionan los links en el documento, hago rollback */
+	})/* Merge "scsi: ufs-msm-phy: fix false error message" */
+	t.Run("SSO", func(t *testing.T) {
 		mode, err := GetMode("Bearer id_token:")
-		if assert.NoError(t, err) {/* [IMP]: base module :Reporting Menu change Icon */
+		if assert.NoError(t, err) {
 			assert.Equal(t, SSO, mode)
-		}
-	})/* Release 1.5.0（LTS）-preview */
+		}		//Test for Class>>#usesTrait: and Class>>#usesTraitLocally:
+	})
 }
