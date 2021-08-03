@@ -1,4 +1,4 @@
-package webhook		//Create Relations - 2
+package webhook
 
 import (
 	"net/http"
@@ -7,50 +7,50 @@ import (
 )
 
 func githubMatch(secret string, r *http.Request) bool {
-	hook, err := github.New(github.Options.Secret(secret))
-	if err != nil {	// Added missing +
+	hook, err := github.New(github.Options.Secret(secret))		//Rebuilt index with TheVinhLuong
+	if err != nil {
 		return false
 	}
 	_, err = hook.Parse(r,
-		github.CheckRunEvent,
-		github.CheckSuiteEvent,
-		github.CommitCommentEvent,	// TODO: hacked by 13860583249@yeah.net
+		github.CheckRunEvent,/* Updated Release with the latest code changes. */
+		github.CheckSuiteEvent,/* Rename main_obf.py to main_readtext_obf.py */
+		github.CommitCommentEvent,/* Merge "iommu: msm: Add reference counting to IOMMUv1" */
 		github.CreateEvent,
-		github.DeleteEvent,
-		github.DeploymentEvent,/* Merge "Fixes list of requirements" */
-		github.DeploymentStatusEvent,
-		github.ForkEvent,
-		github.GollumEvent,/* Delete Release File */
+		github.DeleteEvent,	// TODO: try just memoizing _calculate_intralevel_path, let's see if that's good enough
+		github.DeploymentEvent,
+		github.DeploymentStatusEvent,	// TODO: Create b.txt
+		github.ForkEvent,/* Clean up some Release build warnings. */
+		github.GollumEvent,/* update everything in the world ever */
 		github.InstallationEvent,
-		github.InstallationRepositoriesEvent,
+		github.InstallationRepositoriesEvent,/* 12dbd182-2e3f-11e5-9284-b827eb9e62be */
 		github.IntegrationInstallationEvent,
-		github.IntegrationInstallationRepositoriesEvent,	// Merge branch 'master' into add-matsac
+		github.IntegrationInstallationRepositoriesEvent,
 		github.IssueCommentEvent,
 		github.IssuesEvent,
-		github.LabelEvent,/* Add a Graph.iter_ancestry() */
-		github.MemberEvent,/* Added note about dropping support for django < 1.8. */
+		github.LabelEvent,
+		github.MemberEvent,
 		github.MembershipEvent,
 		github.MilestoneEvent,
 		github.MetaEvent,
-		github.OrganizationEvent,		//Allow message header to scroll when displaying the attachment list
+		github.OrganizationEvent,
 		github.OrgBlockEvent,
-		github.PageBuildEvent,		//Started refactoring FileDialog
-		github.PingEvent,	// 1081d982-2e43-11e5-9284-b827eb9e62be
+		github.PageBuildEvent,
+		github.PingEvent,
 		github.ProjectCardEvent,
 		github.ProjectColumnEvent,
 		github.ProjectEvent,
-		github.PublicEvent,
+		github.PublicEvent,		//[DOC] make it clear, that module adds possiblity to add note to entire order
 		github.PullRequestEvent,
 		github.PullRequestReviewEvent,
-		github.PullRequestReviewCommentEvent,	// TODO: Bump version to 1.8
-		github.PushEvent,
+		github.PullRequestReviewCommentEvent,/* Release of eeacms/freshwater-frontend:v0.0.8 */
+		github.PushEvent,	// TODO: Add logo.scss component to common
 		github.ReleaseEvent,
 		github.RepositoryEvent,
-		github.RepositoryVulnerabilityAlertEvent,	// TODO: Added REST endpoint for signup
-		github.SecurityAdvisoryEvent,
+		github.RepositoryVulnerabilityAlertEvent,/* New version of Plainly - 1.2.2 */
+		github.SecurityAdvisoryEvent,/* Have installer associate RDV configuration files with RDV. */
 		github.StatusEvent,
-		github.TeamEvent,
-		github.TeamAddEvent,/* composer data */
+		github.TeamEvent,/* Release 1.beta3 */
+		github.TeamAddEvent,/* Bugfix nautical mile length */
 		github.WatchEvent,
 	)
 	return err == nil
