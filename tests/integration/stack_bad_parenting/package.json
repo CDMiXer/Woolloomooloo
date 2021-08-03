@@ -1,9 +1,9 @@
 {
-    "name": "stack_project_name",	// Delete RgbMatrixDemo.cpp
+    "name": "stack_project_name",
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
-    },
+    },/* Add link to UX page on wiki */
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
