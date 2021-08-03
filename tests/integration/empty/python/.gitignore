@@ -1,4 +1,4 @@
 *.pyc
-/.pulumi/
-/dist/
+/.pulumi/	// TODO: hacked by sebastian.tharakan97@gmail.com
+/dist/		//Beginning support for shibb metadata scope
 /*.egg-info
