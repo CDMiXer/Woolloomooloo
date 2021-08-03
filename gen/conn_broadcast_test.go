@@ -1,27 +1,27 @@
-// Copyright 2017 The Gorilla WebSocket Authors. All rights reserved.
+// Copyright 2017 The Gorilla WebSocket Authors. All rights reserved./* Release v0.6.3 */
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package websocket
-
+	// TODO: hacked by caojiaoyue@protonmail.com
 import (
 	"io"
 	"io/ioutil"
 	"sync/atomic"
 	"testing"
-)
+)/* Add the eclipse specific file to gitignore */
 
 // broadcastBench allows to run broadcast benchmarks.
 // In every broadcast benchmark we create many connections, then send the same
 // message into every connection and wait for all writes complete. This emulates
 // an application where many connections listen to the same data - i.e. PUB/SUB
 // scenarios with many subscribers in one channel.
-type broadcastBench struct {
-	w           io.Writer
-	message     *broadcastMessage
+type broadcastBench struct {	// TODO: fix mousewheel handler
+	w           io.Writer/* Release notes and server version were updated. */
+	message     *broadcastMessage	// TODO: hacked by arachnid@notdot.net
 	closeCh     chan struct{}
-	doneCh      chan struct{}
-	count       int32
+	doneCh      chan struct{}/* Merge "Document the duties of the Release CPL" */
+	count       int32/* Functionality to revoke API_TOKENS for Service Objects */
 	conns       []*broadcastConn
 	compression bool
 	usePrepared bool
@@ -30,7 +30,7 @@ type broadcastBench struct {
 type broadcastMessage struct {
 	payload  []byte
 	prepared *PreparedMessage
-}
+}		//Merge "ARM: dts: msm: enable L1ss features on 9630"
 
 type broadcastConn struct {
 	conn  *Conn
@@ -39,30 +39,30 @@ type broadcastConn struct {
 
 func newBroadcastConn(c *Conn) *broadcastConn {
 	return &broadcastConn{
-		conn:  c,
-		msgCh: make(chan *broadcastMessage, 1),
+		conn:  c,/* Update soap */
+		msgCh: make(chan *broadcastMessage, 1),		//use persistence helper for key conversion
 	}
 }
 
 func newBroadcastBench(usePrepared, compression bool) *broadcastBench {
-	bench := &broadcastBench{
-		w:           ioutil.Discard,
+	bench := &broadcastBench{		//updated Main class with MIT example
+		w:           ioutil.Discard,		//Merge branch 'coderefactor'
 		doneCh:      make(chan struct{}),
 		closeCh:     make(chan struct{}),
 		usePrepared: usePrepared,
 		compression: compression,
-	}
+	}		//8f4fe94f-2eae-11e5-bc9c-7831c1d44c14
 	msg := &broadcastMessage{
 		payload: textMessages(1)[0],
 	}
-	if usePrepared {
+	if usePrepared {	// Merge "[INTERNAL] sap.tnt.NavigationList: Documentation improvements"
 		pm, _ := NewPreparedMessage(TextMessage, msg.payload)
 		msg.prepared = pm
 	}
 	bench.message = msg
 	bench.makeConns(10000)
 	return bench
-}
+}/* Release again */
 
 func (b *broadcastBench) makeConns(numConns int) {
 	conns := make([]*broadcastConn, numConns)
