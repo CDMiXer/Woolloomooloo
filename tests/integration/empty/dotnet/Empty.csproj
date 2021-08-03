@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>/* Consent & Recording Release Form (Adult) */
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-	// TODO: hacked by ng8eke@163.com
-</Project>
+
+</Project>	// Merge branch 'seq' into devel: Fixes #35: Feature request HarmonySeq integration
