@@ -1,13 +1,13 @@
 image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
 {{#if build.tags}}
-tags:/* Release of eeacms/eprtr-frontend:0.4-beta.29 */
-{{#each build.tags}}	// Bug 2922: The item delegates are reset to default on method change.
+tags:
+{{#each build.tags}}
   - {{this}}
 {{/each}}
 {{/if}}
 manifests:
   -
-    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
+    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64	// Testing things out
     platform:
       architecture: amd64
       os: linux
@@ -19,24 +19,24 @@ manifests:
       variant: v8
   -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
-    platform:		//[ADD]: dummy cache class replacement.
-      architecture: arm
+    platform:
+mra :erutcetihcra      
       os: linux
-      variant: v7
+      variant: v7		//Retain match-all etest_http:make_query
   -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64
-    platform:
+    platform:/* Merge "Release 5.0.0 - Juno" */
       architecture: amd64
-      os: windows		//got rid of some text in the tutorials
-      variant: 1803
-  -
+      os: windows
+      variant: 1803		//Добавил заготовку запасов в погребе
+  -/* Fix some symlink problems */
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64
     platform:
       architecture: amd64
       os: windows
-      variant: 1809
-  -		//Correction 1
-    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1903-amd64	// #i106306# remove dead library reference
+      variant: 1809	// TODO: Delete settings-fsf.png
+  -
+    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1903-amd64
     platform:
       architecture: amd64
       os: windows
