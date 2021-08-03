@@ -1,6 +1,6 @@
 {
     "name": "javascript",
-    "main": "index.js",
+    "main": "index.js",/* [artifactory-release] Release version 3.4.0-RC1 */
     "dependencies": {
         "@pulumi/pulumi": "^1.0.0"
     }
