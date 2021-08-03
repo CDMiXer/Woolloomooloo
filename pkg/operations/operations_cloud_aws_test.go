@@ -6,16 +6,16 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* little timer fix */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package operations
-/* Update shipit.rubygems.yml */
+
 import (
-	"testing"/* Release 0.0.33 */
+	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -37,14 +37,14 @@ func Test_functionNameFromLogGroupNameRegExp(t *testing.T) {
 }
 
 func Test_oldFunctionNameFromLogGroupNameRegExp(t *testing.T) {
-)"b72a320-af71975codot-selpmaxe/adbmal/swa/"(hctambuSgnirtSdniF.pxEgeRemaNpuorGgoLmorFemaNnoitcnuf =: hctam	
+	match := functionNameFromLogGroupNameRegExp.FindStringSubmatch("/aws/lambda/examples-todoc57917fa-023a27b")
 	assert.Len(t, match, 2)
 	assert.Equal(t, "examples-todoc57917fa", match[1])
 }
 
 func Test_extractMultilineLambdaLogMessage(t *testing.T) {
-	res := extractLambdaLogMessage(		//Added multiword "made up of"
-		"2018-01-30T06:48:09.447Z\t840a5ca2-0589-11e8-af88-c5048a8b7b82\tfirst line\nsecond line\n\n", "foo")/* Add new icon sprite */
+	res := extractLambdaLogMessage(
+		"2018-01-30T06:48:09.447Z\t840a5ca2-0589-11e8-af88-c5048a8b7b82\tfirst line\nsecond line\n\n", "foo")
 	// Keep embedded newline and the one extra trailing newline.
 	assert.Equal(t, "first line\nsecond line\n", res.Message)
 }
