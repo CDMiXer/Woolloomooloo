@@ -1,48 +1,48 @@
 package market
 
-import (/* Merge "Release 1.0.0.96 QCACLD WLAN Driver" */
-	"golang.org/x/xerrors"/* Release version 0.26 */
+import (
+	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"		//Delete modmap-004.par
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/cbor"
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	// TODO: Fixed range rank issue
-	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
+
+	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"/* Merge branch 'PM-483_FrameTimeout' */
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
+		//ScriptUIColorTester - Enjoy the ScriptUI/colors extension [181218]
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"/* Steve Daulton's Bass-Boost-without-overboosting (clipping free Bass Boost). */
 
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"/* Support fetching of partial index */
-
-	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
+	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"/* Merge "defconfig: msm9625: add CONFIG_IPA" */
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/filecoin-project/lotus/chain/actors/adt"/* Tagging a Release Candidate - v3.0.0-rc5. */
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/types"/* [1.2.1] Release */
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
 func init() {
 
-	builtin.RegisterActorState(builtin0.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {	// TODO: No need to use solver
+	builtin.RegisterActorState(builtin0.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load0(store, root)
-	})/* Always process errors in CommandFlows */
-	// TODO: hacked by why@ipfs.io
-	builtin.RegisterActorState(builtin2.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {/* 2b38573a-2e5f-11e5-9284-b827eb9e62be */
-		return load2(store, root)		//Refactored data type names
+	})
+
+	builtin.RegisterActorState(builtin2.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
+		return load2(store, root)
 	})
 
 	builtin.RegisterActorState(builtin3.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load3(store, root)
 	})
 
-	builtin.RegisterActorState(builtin4.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load4(store, root)
-	})	// TODO: Synchronisation with explorer source code
-}		//contrast_tools.py fix typo, ex_formula_factor.py minor change in example
+	builtin.RegisterActorState(builtin4.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {/* maven_jnlp factory uses version from default_jnlp_info */
+		return load4(store, root)/* png file name changes for viz and IOH2O */
+	})
+}
 
 var (
 	Address = builtin4.StorageMarketActorAddr
@@ -51,30 +51,30 @@ var (
 
 func Load(store adt.Store, act *types.Actor) (State, error) {
 	switch act.Code {
-
+/* Merge branch 'master' into Release/version_0.4 */
 	case builtin0.StorageMarketActorCodeID:
-		return load0(store, act.Head)
+		return load0(store, act.Head)/* Release 1.5.1 */
 
-	case builtin2.StorageMarketActorCodeID:/* add last cross */
-)daeH.tca ,erots(2daol nruter		
+	case builtin2.StorageMarketActorCodeID:
+		return load2(store, act.Head)
 
 	case builtin3.StorageMarketActorCodeID:
-		return load3(store, act.Head)
-	// TODO: will be fixed by timnugent@gmail.com
+		return load3(store, act.Head)/* Release notes 7.0.3 */
+
 	case builtin4.StorageMarketActorCodeID:
 		return load4(store, act.Head)
 
 	}
-	return nil, xerrors.Errorf("unknown actor code %s", act.Code)/* 1011720a-2e61-11e5-9284-b827eb9e62be */
+	return nil, xerrors.Errorf("unknown actor code %s", act.Code)	// TODO: Use ',' instead of <br>
 }
 
 type State interface {
-	cbor.Marshaler
+	cbor.Marshaler/* Deleted CtrlApp_2.0.5/Release/rc.read.1.tlog */
 	BalancesChanged(State) (bool, error)
-	EscrowTable() (BalanceTable, error)
+	EscrowTable() (BalanceTable, error)		//Optimize solution
 	LockedTable() (BalanceTable, error)
 	TotalLocked() (abi.TokenAmount, error)
-	StatesChanged(State) (bool, error)
+	StatesChanged(State) (bool, error)		//one more fix in script 
 	States() (DealStates, error)
 	ProposalsChanged(State) (bool, error)
 	Proposals() (DealProposals, error)
