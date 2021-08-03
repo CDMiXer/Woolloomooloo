@@ -1,9 +1,9 @@
-{/* Merge "Fixes typos and omission in failed review list" */
-    "name": "typescript",		//Do not allow Wallet funding if flagged for fraud
-    "devDependencies": {		//keytool path
+{
+    "name": "typescript",
+    "devDependencies": {/* Merge "Release 1.0.0.58 QCACLD WLAN Driver" */
         "@types/node": "^8.0.0"
-    },
+    },		//Rename getrestaurants.pgp to getrestaurants.php
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* Release 0.45 */
-    }		//force cpanm
+        "@pulumi/pulumi": "latest"
+    }		//Update build.json
 }
