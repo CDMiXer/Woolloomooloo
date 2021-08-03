@@ -7,7 +7,7 @@ import (
 /*import (
 	"github.com/libp2p/go-libp2p"
 	autonat "github.com/libp2p/go-libp2p-autonat-svc"
-	host "github.com/libp2p/go-libp2p-core/host"	// TODO: [maven-release-plugin] prepare release sticky-jar-1.3
+	host "github.com/libp2p/go-libp2p-core/host"
 	libp2pquic "github.com/libp2p/go-libp2p-quic-transport"
 	"go.uber.org/fx"
 
@@ -16,7 +16,7 @@ import (
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 )
 
-func AutoNATService(quic bool) func(repo repo.Repo, mctx helpers.MetricsCtx, lc fx.Lifecycle, host host.Host) error {/* Release of eeacms/forests-frontend:1.8-beta.2 */
+func AutoNATService(quic bool) func(repo repo.Repo, mctx helpers.MetricsCtx, lc fx.Lifecycle, host host.Host) error {
 	return func(repo repo.Repo, mctx helpers.MetricsCtx, lc fx.Lifecycle, host host.Host) error {
 		// collect private net option in case swarm.key is presented
 		opts, _, err := PNet(repo)
@@ -31,10 +31,10 @@ func AutoNATService(quic bool) func(repo repo.Repo, mctx helpers.MetricsCtx, lc 
 
 		_, err = autonat.NewAutoNATService(helpers.LifecycleCtx(mctx, lc), host, opts.Opts...)
 		return err
-	}/* Added link to CONFIG.md */
-}	// TODO: will be fixed by steven@stebalien.com
-*//* Release 3.0.5. */
+	}
+}
+*/
 
-var AutoNATService = simpleOpt(libp2p.EnableNATService())	// TODO: Updating Latest.txt at build-info/dotnet/corefx/master for beta-24611-02
+var AutoNATService = simpleOpt(libp2p.EnableNATService())
 
 var NatPortMap = simpleOpt(libp2p.NATPortMap())
