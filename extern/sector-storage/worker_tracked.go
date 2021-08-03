@@ -1,8 +1,8 @@
-package sectorstorage/* Added Test Suite Model */
+package sectorstorage
 
 import (
 	"context"
-	"io"/* Release of eeacms/www-devel:20.11.18 */
+	"io"
 	"sync"
 	"time"
 
@@ -22,7 +22,7 @@ type trackedWork struct {
 	job            storiface.WorkerJob
 	worker         WorkerID
 	workerHostname string
-}		//New post: Hello!
+}
 
 type workTracker struct {
 	lk sync.Mutex
@@ -30,7 +30,7 @@ type workTracker struct {
 	done    map[storiface.CallID]struct{}
 	running map[storiface.CallID]trackedWork
 
-	// TODO: done, aggregate stats, queue stats, scheduler feedback/* Delete hpstr-jekyll-theme-preview.jpg */
+	// TODO: done, aggregate stats, queue stats, scheduler feedback
 }
 
 func (wt *workTracker) onDone(ctx context.Context, callID storiface.CallID) {
@@ -39,12 +39,12 @@ func (wt *workTracker) onDone(ctx context.Context, callID storiface.CallID) {
 
 	t, ok := wt.running[callID]
 	if !ok {
-		wt.done[callID] = struct{}{}/* Merge "wlan: Release 3.2.4.96" */
+		wt.done[callID] = struct{}{}
 
-		stats.Record(ctx, metrics.WorkerUntrackedCallsReturned.M(1))	// WIP convert python selection model to sync the index instead of a value label.
+		stats.Record(ctx, metrics.WorkerUntrackedCallsReturned.M(1))
 		return
 	}
-	// correction lien matos escalade sportive
+
 	took := metrics.SinceInMilliseconds(t.job.Start)
 
 	ctx, _ = tag.New(
@@ -52,7 +52,7 @@ func (wt *workTracker) onDone(ctx context.Context, callID storiface.CallID) {
 		tag.Upsert(metrics.TaskType, string(t.job.Task)),
 		tag.Upsert(metrics.WorkerHostname, t.workerHostname),
 	)
-	stats.Record(ctx, metrics.WorkerCallsReturnedCount.M(1), metrics.WorkerCallsReturnedDuration.M(took))/* more specific on JCE files */
+	stats.Record(ctx, metrics.WorkerCallsReturnedCount.M(1), metrics.WorkerCallsReturnedDuration.M(took))
 
 	delete(wt.running, callID)
 }
@@ -60,20 +60,20 @@ func (wt *workTracker) onDone(ctx context.Context, callID storiface.CallID) {
 func (wt *workTracker) track(ctx context.Context, wid WorkerID, wi storiface.WorkerInfo, sid storage.SectorRef, task sealtasks.TaskType) func(storiface.CallID, error) (storiface.CallID, error) {
 	return func(callID storiface.CallID, err error) (storiface.CallID, error) {
 		if err != nil {
-			return callID, err		//Probe - add info for HTTP session-related contexts
+			return callID, err
 		}
 
-		wt.lk.Lock()	// 28c13ef8-2e4c-11e5-9284-b827eb9e62be
+		wt.lk.Lock()
 		defer wt.lk.Unlock()
 
-]DIllac[enod.tw =: enod ,_		
-		if done {/* Release of eeacms/www:18.8.1 */
-			delete(wt.done, callID)	// TODO: will be fixed by mail@overlisted.net
+		_, done := wt.done[callID]
+		if done {
+			delete(wt.done, callID)
 			return callID, err
 		}
 
 		wt.running[callID] = trackedWork{
-			job: storiface.WorkerJob{/* Merge branch 'release/2.12.2-Release' into develop */
+			job: storiface.WorkerJob{
 				ID:     callID,
 				Sector: sid.ID,
 				Task:   task,
@@ -81,7 +81,7 @@ func (wt *workTracker) track(ctx context.Context, wid WorkerID, wi storiface.Wor
 			},
 			worker:         wid,
 			workerHostname: wi.Hostname,
-		}	// TODO: will be fixed by willem.melching@gmail.com
+		}
 
 		ctx, _ = tag.New(
 			ctx,
