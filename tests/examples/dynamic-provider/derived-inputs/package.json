@@ -1,12 +1,12 @@
 {
     "name": "minimal",
-    "license": "Apache-2.0",/* moved _onIdle for Bosh and WebSocket */
+    "license": "Apache-2.0",
     "devDependencies": {
-        "@types/minimist": "^1.2.0",/* Create SettingsForm.Designer.cs */
-        "@types/node": "^8.0.0",
+        "@types/minimist": "^1.2.0",
+        "@types/node": "^8.0.0",/* Release notes for 1.0.87 */
         "typescript": "^3.0.0"
     },
-    "dependencies": {
+    "dependencies": {	// TODO: uncomment toolrunner invocation
         "assert": "^1.4.1",
         "sleep-promise": "^2.0.0"
     },
