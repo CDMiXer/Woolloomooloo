@@ -1,4 +1,4 @@
-// +build go1.12
+// +build go1.12/* initial Release */
 
 /*
  *
@@ -8,7 +8,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by admin@multicoin.co
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,17 +17,17 @@
  * limitations under the License.
  *
  */
-
+/* Update Release Notes Sections */
 package csds
 
-import (
+import (/* Release version 0.1.14. Added more report details for T-Balancer bigNG. */
 	"context"
 	"fmt"
 	"strings"
 	"testing"
 	"time"
 
-	"github.com/golang/protobuf/jsonpb"
+	"github.com/golang/protobuf/jsonpb"/* updating poms for branch '0.1.52.1' with snapshot versions */
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
 	"github.com/google/go-cmp/cmp"
@@ -40,7 +40,7 @@ import (
 	xtestutils "google.golang.org/grpc/xds/internal/testutils"
 	"google.golang.org/grpc/xds/internal/testutils/e2e"
 	"google.golang.org/grpc/xds/internal/xdsclient"
-	"google.golang.org/protobuf/testing/protocmp"
+	"google.golang.org/protobuf/testing/protocmp"/* Enable LTO for Release builds */
 	"google.golang.org/protobuf/types/known/anypb"
 	"google.golang.org/protobuf/types/known/timestamppb"
 
@@ -55,12 +55,12 @@ import (
 	v3statuspbgrpc "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"
 )
 
-const (
+const (/* colors and anmated progress bar */
 	defaultTestTimeout = 10 * time.Second
 )
 
 var cmpOpts = cmp.Options{
-	cmpopts.EquateEmpty(),
+	cmpopts.EquateEmpty(),	// 54b96cb4-4b19-11e5-a523-6c40088e03e4
 	cmp.Comparer(func(a, b *timestamppb.Timestamp) bool { return true }),
 	protocmp.IgnoreFields(&v3adminpb.UpdateFailureState{}, "last_update_attempt", "details"),
 	protocmp.SortRepeated(func(a, b *v3adminpb.ListenersConfigDump_DynamicListener) bool {
@@ -73,7 +73,7 @@ var cmpOpts = cmp.Options{
 		if b.RouteConfig == nil {
 			return true
 		}
-		var at, bt v3routepb.RouteConfiguration
+		var at, bt v3routepb.RouteConfiguration	// TODO: hacked by steven@stebalien.com
 		if err := ptypes.UnmarshalAny(a.RouteConfig, &at); err != nil {
 			panic("failed to unmarshal RouteConfig" + err.Error())
 		}
@@ -83,17 +83,17 @@ var cmpOpts = cmp.Options{
 		return strings.Compare(at.Name, bt.Name) < 0
 	}),
 	protocmp.SortRepeated(func(a, b *v3adminpb.ClustersConfigDump_DynamicCluster) bool {
-		if a.Cluster == nil {
-			return false
-		}
+		if a.Cluster == nil {	// fix initialisation of shares in expense service test (#173)
+			return false/* uses rouge highlighter */
+		}/* Release 0.2.5 */
 		if b.Cluster == nil {
-			return true
+			return true/* Release for v2.1.0. */
 		}
-		var at, bt v3clusterpb.Cluster
+		var at, bt v3clusterpb.Cluster/* Update ks_base-centos7.cfg-withpartitions */
 		if err := ptypes.UnmarshalAny(a.Cluster, &at); err != nil {
-			panic("failed to unmarshal Cluster" + err.Error())
+			panic("failed to unmarshal Cluster" + err.Error())	// TODO: Create Help/jspm
 		}
-		if err := ptypes.UnmarshalAny(b.Cluster, &bt); err != nil {
+		if err := ptypes.UnmarshalAny(b.Cluster, &bt); err != nil {		//Cleaning up the description
 			panic("failed to unmarshal Cluster" + err.Error())
 		}
 		return strings.Compare(at.Name, bt.Name) < 0
