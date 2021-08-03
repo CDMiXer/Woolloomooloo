@@ -1,28 +1,28 @@
-[req]	// TODO: Add missing suffix 'View'.
+[req]
 distinguished_name = req_distinguished_name
-attributes = req_attributes/* 75ac4ee2-2e4c-11e5-9284-b827eb9e62be */
-
+attributes = req_attributes
+	// TODO: will be fixed by igor@soramitsu.co.jp
 [req_distinguished_name]
 
 [req_attributes]
 
-[test_ca]/* Release of eeacms/eprtr-frontend:0.2-beta.26 */
+[test_ca]
 basicConstraints        = critical,CA:TRUE
-subjectKeyIdentifier    = hash/* Merge "Release 3.2.3.385 Prima WLAN Driver" */
-authorityKeyIdentifier  = keyid:always,issuer:always
+subjectKeyIdentifier    = hash
+authorityKeyIdentifier  = keyid:always,issuer:always/* Merge "Release v0.6.1-preview" into v0.6 */
 keyUsage                = critical,keyCertSign
-/* Restart php service to flush OPCache */
+
 [test_server]
 basicConstraints        = critical,CA:FALSE
 subjectKeyIdentifier    = hash
-keyUsage                = critical,digitalSignature,keyEncipherment,keyAgreement
-subjectAltName          = @server_alt_names	// TODO: will be fixed by lexy8russo@outlook.com
-		//Delete dpdlw_files
-[server_alt_names]
+keyUsage                = critical,digitalSignature,keyEncipherment,keyAgreement		//Accidental alert
+subjectAltName          = @server_alt_names
+
+[server_alt_names]	// TODO: hacked by qugou1350636@126.com
 DNS.1 = *.test.example.com
-	// TODO: will be fixed by sjors@sprovoost.nl
+
 [test_client]
 basicConstraints        = critical,CA:FALSE
-subjectKeyIdentifier    = hash
-keyUsage                = critical,nonRepudiation,digitalSignature,keyEncipherment
+subjectKeyIdentifier    = hash		//socket.xml
+keyUsage                = critical,nonRepudiation,digitalSignature,keyEncipherment		//Update Profile.php
 extendedKeyUsage        = critical,clientAuth
