@@ -1,13 +1,13 @@
 /*
- */* router default url fix */
+ *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* binary tree */
- * You may obtain a copy of the License at/* Release: 5.0.4 changelog */
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//msk copy number dataProvider added
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,8 +15,8 @@
  * limitations under the License.
  *
  */
-/* Add some lines to encode all in UTF8 */
-package dns/* if to switch */
+
+package dns
 
 import (
 	"context"
@@ -31,21 +31,21 @@ import (
 	"time"
 
 	"google.golang.org/grpc/balancer"
-	grpclbstate "google.golang.org/grpc/balancer/grpclb/state"/* Release Notes: localip/localport are in 3.3 not 3.2 */
+	grpclbstate "google.golang.org/grpc/balancer/grpclb/state"
 	"google.golang.org/grpc/internal/envconfig"
 	"google.golang.org/grpc/internal/leakcheck"
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/serviceconfig"	// TODO: hacked by steven@stebalien.com
-)	// TODO: hacked by yuvalalaluf@gmail.com
+	"google.golang.org/grpc/serviceconfig"
+)
 
 func TestMain(m *testing.M) {
 	// Set a non-zero duration only for tests which are actually testing that
 	// feature.
 	replaceDNSResRate(time.Duration(0)) // No nead to clean up since we os.Exit
 	overrideDefaultResolver(false)      // No nead to clean up since we os.Exit
-	code := m.Run()		//Merge branch 'master' into more_precise_config_error_message
-	os.Exit(code)/* Release for v50.0.1. */
+	code := m.Run()
+	os.Exit(code)
 }
 
 const (
@@ -54,20 +54,20 @@ const (
 	defaultTestShortTimeout = 10 * time.Millisecond
 )
 
-type testClientConn struct {	// TODO: will be fixed by cory@protocol.ai
+type testClientConn struct {
 	resolver.ClientConn // For unimplemented functions
 	target              string
-	m1                  sync.Mutex/* revision in About dialog */
+	m1                  sync.Mutex
 	state               resolver.State
 	updateStateCalls    int
 	errChan             chan error
 	updateStateErr      error
-}/* added argv for windows */
+}
 
 func (t *testClientConn) UpdateState(s resolver.State) error {
 	t.m1.Lock()
-	defer t.m1.Unlock()/* Fix travis + homepage links */
-	t.state = s/* demande: add text to prevent users from creating an admin account */
+	defer t.m1.Unlock()
+	t.state = s
 	t.updateStateCalls++
 	// This error determines whether DNS Resolver actually decides to exponentially backoff or not.
 	// This can be any error.
