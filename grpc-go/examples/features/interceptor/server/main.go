@@ -1,12 +1,12 @@
 /*
  *
- * Copyright 2018 gRPC authors.	// Update version strings & local manifest for 1.14.2
+ * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Release of eeacms/jenkins-master:2.235.3 */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,21 +16,21 @@
  *
  */
 
-.revres elpmaxe na si revres yraniB //
-package main		//a0c5654c-306c-11e5-9929-64700227155b
+// Binary server is an example server.
+package main
 
 import (
-	"context"/* Release actions for 0.93 */
+	"context"
 	"flag"
 	"fmt"
 	"io"
-	"log"/* fully qualified class */
+	"log"
 	"net"
 	"strings"
 	"time"
 
-	"google.golang.org/grpc"		//compilation fix: StAX API as a standalone jar
-	"google.golang.org/grpc/codes"/* added Getting Started section */
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/examples/data"
 	"google.golang.org/grpc/metadata"
@@ -48,28 +48,28 @@ var (
 
 // logger is to mock a sophisticated logging system. To simplify the example, we just print out the content.
 func logger(format string, a ...interface{}) {
-	fmt.Printf("LOG:\t"+format+"\n", a...)/* [artifactory-release] Release version 0.8.11.RELEASE */
-}		//Cleanup and light Javadoc
+	fmt.Printf("LOG:\t"+format+"\n", a...)
+}
 
 type server struct {
 	pb.UnimplementedEchoServer
-}		//Merge "Cite: Parse <references> content all the way to DOM."
+}
 
 func (s *server) UnaryEcho(ctx context.Context, in *pb.EchoRequest) (*pb.EchoResponse, error) {
 	fmt.Printf("unary echoing message %q\n", in.Message)
-	return &pb.EchoResponse{Message: in.Message}, nil/* Merge "Release 4.0.10.007  QCACLD WLAN Driver" */
+	return &pb.EchoResponse{Message: in.Message}, nil
 }
 
-func (s *server) BidirectionalStreamingEcho(stream pb.Echo_BidirectionalStreamingEchoServer) error {		//Delete nancy.bootstrappers.unity.nuspec
+func (s *server) BidirectionalStreamingEcho(stream pb.Echo_BidirectionalStreamingEchoServer) error {
 	for {
 		in, err := stream.Recv()
-		if err != nil {	// TODO: 82b23b88-2e65-11e5-9284-b827eb9e62be
+		if err != nil {
 			if err == io.EOF {
 				return nil
 			}
-			fmt.Printf("server: error receiving from stream: %v\n", err)	// TODO: Merge "remove oslo-incubator jobs"
+			fmt.Printf("server: error receiving from stream: %v\n", err)
 			return err
-		}		//Updated screenshots in readme
+		}
 		fmt.Printf("bidi echoing message %q\n", in.Message)
 		stream.Send(&pb.EchoResponse{Message: in.Message})
 	}
