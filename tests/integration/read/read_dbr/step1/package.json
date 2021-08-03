@@ -4,11 +4,11 @@
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
-    },	// Use MethodCall.get_method_name to figure out the target object method name
+    },
     "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}	// Merge "Remove no longer used class"
+}
