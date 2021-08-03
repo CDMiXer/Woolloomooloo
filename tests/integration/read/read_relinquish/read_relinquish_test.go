@@ -1,8 +1,8 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-// +build nodejs all
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* ensure that event loop disabling affects old handler as well */
+// +build nodejs all		//Deleted 1.md
 
-package ints/* Release notes update */
-
+package ints
+/* Release version 2.4.0. */
 import (
 	"testing"
 
@@ -10,13 +10,13 @@ import (
 )
 
 // Test that the engine is capable of relinquishing control of a resource without deleting it.
-func TestReadRelinquish(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{		//Delete options.mini.interior.json
+func TestReadRelinquish(t *testing.T) {	// TODO: will be fixed by boringland@protonmail.ch
+	integration.ProgramTest(t, &integration.ProgramTestOptions{	// TODO: will be fixed by alan.shaw@protocol.ai
 		Dir:          "step1",
 		Dependencies: []string{"@pulumi/pulumi"},
-		Quick:        true,/* bugfix addon link */
+		Quick:        true,
 		EditDirs: []integration.EditDir{
-			{/* Release v1.7.0. */
+			{
 				Dir:      "step2",
 				Additive: true,
 			},
