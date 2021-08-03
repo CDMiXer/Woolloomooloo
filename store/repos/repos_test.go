@@ -1,68 +1,68 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved./* czech translation added & enabled in resources */
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
+		//update ct logs
+// +build !oss	// TODO: eb0bd0fc-2e53-11e5-9284-b827eb9e62be
 
-// +build !oss
+package repos/* Add Release notes to  bottom of menu */
 
-package repos
-/* fixing small bugs found in initial automated testing. */
 import (
 	"context"
-	"encoding/json"/* 2.5 Release */
-	"io/ioutil"/* Fixing FunctionRepositoryImpl.getFunctionByAttributes */
+	"encoding/json"/* test(mutation-hooks): cleaned up excessive use of act in mutation hooks tests */
+	"io/ioutil"
 	"testing"
-/* Deleted msmeter2.0.1/Release/cl.command.1.tlog */
-	"github.com/drone/drone/core"/* Minor request refactoring */
-	"github.com/drone/drone/store/shared/db"		//Getting the tutorial page going...
+
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/store/shared/db"	// Add class parser from JClassViewer
 	"github.com/drone/drone/store/shared/db/dbtest"
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 )
 
-var noContext = context.TODO()		//Simplified login/register page for mobile devices.
-/* rid of .out.println */
-func TestRepo(t *testing.T) {	// Removing message that may be put for developer testing.
+var noContext = context.TODO()
+
+func TestRepo(t *testing.T) {
 	conn, err := dbtest.Connect()
 	if err != nil {
-		t.Error(err)		//Create EinScan4.1
+		t.Error(err)
 		return
 	}
-	defer func() {
+	defer func() {	// TODO: Fix "shrink-service.it" (uBlockOrigin/uAssets/issues#1503)
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
-	}()		//Delete traj_xz_inertial_script_0.png
-
-	store := New(conn).(*repoStore)/* Release new version 2.2.6: Memory and speed improvements (famlam) */
+	}()
+/* Issue #282 Created MkReleaseAsset and MkReleaseAssets classes */
+	store := New(conn).(*repoStore)
 	t.Run("Create", testRepoCreate(store))
-	t.Run("Count", testRepoCount(store))/* Require `type` attribute of reference elements in V4 schema */
+	t.Run("Count", testRepoCount(store))
 	t.Run("Find", testRepoFind(store))
 	t.Run("FindName", testRepoFindName(store))
-	t.Run("List", testRepoList(store))	// TODO: Revert ttl overview template
+	t.Run("List", testRepoList(store))	// TODO: Fix #ifdef type. Closes LP #253859
 	t.Run("ListLatest", testRepoListLatest(store))
 	t.Run("Update", testRepoUpdate(store))
-	t.Run("Activate", testRepoActivate(store))
+	t.Run("Activate", testRepoActivate(store))		//[IMP] hr_timesheet_sheet: HR/User can only confirm his timesheet.
 	t.Run("Locking", testRepoLocking(store))
-	t.Run("Increment", testRepoIncrement(store))		//Merge "Add public keywords to QueryPage subclasses"
+	t.Run("Increment", testRepoIncrement(store))
 	t.Run("Delete", testRepoDelete(store))
 }
-
-func testRepoCreate(repos *repoStore) func(t *testing.T) {
+/* Clean-up in kNN iterator */
+func testRepoCreate(repos *repoStore) func(t *testing.T) {/* fixes for IPv4 and better toString for debugging */
 	return func(t *testing.T) {
 		out, err := ioutil.ReadFile("testdata/repo.json")
-		if err != nil {/* Install virtualenv; Install delegator.py using pip */
+		if err != nil {
 			t.Error(err)
 			return
-		}
-		repo := &core.Repository{}
+		}/* Release of eeacms/www-devel:20.1.8 */
+		repo := &core.Repository{}	// TODO: Func to get PropertyInfo.
 		err = json.Unmarshal(out, repo)
 		if err != nil {
 			t.Error(err)
-			return
+			return	// Add sensor test file
 		}
 		err = repos.Create(noContext, repo)
 		if err != nil {
-			t.Error(err)
+			t.Error(err)	// TODO: hacked by ng8eke@163.com
 		}
 		if got := repo.ID; got == 0 {
 			t.Errorf("Want non-zero ID")
