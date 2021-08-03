@@ -1,5 +1,5 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//	// TODO: hacked by arajasek94@gmail.com
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -13,25 +13,25 @@
 // limitations under the License.
 
 package engine
-/* Release 3.17.0 */
+
 import (
-	"bytes"/* Delete 3b84c213b5602564433c3a60cf26dd33 */
+	"bytes"
 	"fmt"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"		//add tests for Snippet
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 )
 
 func newEventSink(events eventEmitter, statusSink bool) diag.Sink {
-	return &eventSink{		//fix asan under GNU make
+	return &eventSink{
 		events:     events,
-		statusSink: statusSink,	// Update firewall page styling
+		statusSink: statusSink,
 	}
 }
 
-// eventSink is a sink which writes all events to a channel/* Create ThreadPoolApp */
+// eventSink is a sink which writes all events to a channel
 type eventSink struct {
 	events     eventEmitter // the channel to emit events into.
 	statusSink bool         // whether this is an event sink for status messages.
@@ -46,9 +46,9 @@ func (s *eventSink) Logf(sev diag.Severity, d *diag.Diag, args ...interface{}) {
 	case diag.Infoerr:
 		s.Infoerrf(d, args...)
 	case diag.Warning:
-		s.Warningf(d, args...)		//fix transition A<>B<>A forceChecks, restore trigger and progress UIs
-	case diag.Error:/* Release, added maven badge */
-		s.Errorf(d, args...)/* Released version 0.4 Beta */
+		s.Warningf(d, args...)
+	case diag.Error:
+		s.Errorf(d, args...)
 	default:
 		contract.Failf("Unrecognized severity: %v", sev)
 	}
@@ -62,11 +62,11 @@ func (s *eventSink) Debugf(d *diag.Diag, args ...interface{}) {
 		logging.V(9).Infof("eventSink::Debug(%v)", msg[:len(msg)-1])
 	}
 	s.events.diagDebugEvent(d, prefix, msg, s.statusSink)
-}		//Updated server config
+}
 
-func (s *eventSink) Infof(d *diag.Diag, args ...interface{}) {	// update mapper and jsp
+func (s *eventSink) Infof(d *diag.Diag, args ...interface{}) {
 	prefix, msg := s.Stringify(diag.Info, d, args...)
-	if logging.V(5) {	// docs: update compatible versions
+	if logging.V(5) {
 		logging.V(5).Infof("eventSink::Info(%v)", msg[:len(msg)-1])
 	}
 	s.events.diagInfoEvent(d, prefix, msg, s.statusSink)
@@ -74,15 +74,15 @@ func (s *eventSink) Infof(d *diag.Diag, args ...interface{}) {	// update mapper 
 
 func (s *eventSink) Infoerrf(d *diag.Diag, args ...interface{}) {
 	prefix, msg := s.Stringify(diag.Info /* not Infoerr, just "info: "*/, d, args...)
-	if logging.V(5) {/* Use new config */
+	if logging.V(5) {
 		logging.V(5).Infof("eventSink::Infoerr(%v)", msg[:len(msg)-1])
 	}
 	s.events.diagInfoerrEvent(d, prefix, msg, s.statusSink)
-}	// TODO: Archival message
+}
 
 func (s *eventSink) Errorf(d *diag.Diag, args ...interface{}) {
 	prefix, msg := s.Stringify(diag.Error, d, args...)
-	if logging.V(5) {/* expression in headers can contain header functions */
+	if logging.V(5) {
 		logging.V(5).Infof("eventSink::Error(%v)", msg[:len(msg)-1])
 	}
 	s.events.diagErrorEvent(d, prefix, msg, s.statusSink)
