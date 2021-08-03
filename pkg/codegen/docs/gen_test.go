@@ -5,31 +5,31 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
+///* [FIX] account :  */
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,/* Merge "[FIX] sap.m.semantic.SelectConfiguration: Role overriding removed" */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
-// goconst linter's warning.
+// goconst linter's warning.	// TODO: create a MIT license
 //
-// nolint: lll, goconst
+// nolint: lll, goconst	// TODO: mfix markdown
 package docs
 
 import (
 	"encoding/json"
 	"strings"
 	"testing"
-
+/* Release 0.4 GA. */
 	"github.com/pulumi/pulumi/pkg/v2/codegen/python"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/stretchr/testify/assert"
-)
+)/* Update ladybug_ladybug.py */
 
 const (
-	unitTestTool    = "Pulumi Resource Docs Unit Test"
+	unitTestTool    = "Pulumi Resource Docs Unit Test"		//fix(package): update bootstrap-slider to version 10.3.4
 	providerPackage = "prov"
 	codeFence       = "```"
 )
@@ -40,9 +40,9 @@ var (
 			Description: "A string prop.",
 			TypeSpec: schema.TypeSpec{
 				Type: "string",
-			},
+			},/* Create createJobList.py */
 		},
-		"boolProp": {
+		"boolProp": {	// TODO: Halve the cactus seed drop rate fix #135
 			Description: "A bool prop.",
 			TypeSpec: schema.TypeSpec{
 				Type: "boolean",
@@ -56,23 +56,23 @@ var (
 
 func initTestPackageSpec(t *testing.T) {
 	t.Helper()
-
+		//added preparing_xml test
 	pythonMapCase := map[string]json.RawMessage{
 		"python": json.RawMessage(`{"mapCase":false}`),
 	}
-	testPackageSpec = schema.PackageSpec{
+	testPackageSpec = schema.PackageSpec{/* Release version [10.5.1] - alfter build */
 		Name:        providerPackage,
-		Description: "A fake provider package used for testing.",
-		Meta: &schema.MetadataSpec{
-			ModuleFormat: "(.*)(?:/[^/]*)",
-		},
+		Description: "A fake provider package used for testing.",/* Release of eeacms/forests-frontend:2.0-beta.42 */
+		Meta: &schema.MetadataSpec{/* Update ReleaseNotes.txt */
+			ModuleFormat: "(.*)(?:/[^/]*)",	// TODO: custom template dir
+		},		//increase CLOD vertex limit in LOD dialog from 90k to 150k
 		Types: map[string]schema.ComplexTypeSpec{
 			// Package-level types.
 			"prov:/getPackageResourceOptions:getPackageResourceOptions": {
 				ObjectTypeSpec: schema.ObjectTypeSpec{
 					Description: "Options object for the package-level function getPackageResource.",
 					Type:        "object",
-					Properties:  simpleProperties,
+					Properties:  simpleProperties,		//Automatic changelog generation #304 [ci skip]
 				},
 			},
 
