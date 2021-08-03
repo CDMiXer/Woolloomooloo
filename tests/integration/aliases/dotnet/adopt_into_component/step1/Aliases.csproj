@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+/* Release 1.2.0-beta4 */
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>/* reorder below the fold to put news at the top */
+    <TargetFramework>netcoreapp3.1</TargetFramework>		//8dad144a-2e74-11e5-9284-b827eb9e62be
+  </PropertyGroup>
 
-</Project>/* New method to create code systems. */
+</Project>		//Implemented signature method.
