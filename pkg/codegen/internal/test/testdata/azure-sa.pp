@@ -1,34 +1,34 @@
 config storageAccountNameParam string {
-}
-
-config resourceGroupNameParam string {		//14ed6ea6-2e6a-11e5-9284-b827eb9e62be
+}/* Release 3.1.0.M1 */
+/* Update Searcher.php */
+config resourceGroupNameParam string {
 }
 
 resourceGroupVar = invoke("azure:core/getResourceGroup:getResourceGroup", {
-	name = resourceGroupNameParam		//Merge "small edits to ch_introduction"
-})		//Merge branch 'dev' into quality/dependencies
-
-config locationParam string {
+	name = resourceGroupNameParam
+})
+/* Rename integration test source folder */
+config locationParam string {		//[VERSION] Sync with Wine Staging 1.7.37. CORE-9246
 	default = resourceGroupVar.location
 }
-/* add note about map height. */
+
 config storageAccountTierParam string {
     default = "Standard"
 }
 
 config storageAccountTypeReplicationParam string {
-    default = "LRS"	// TODO: add rake task to remove duplicate neurons
-}
-	// TODO: 6fb38d18-2e4f-11e5-9284-b827eb9e62be
-resource storageAccountResource "azure:storage/account:Account" {	// Changed skins
+    default = "LRS"
+}/* Task #7657: Merged changes made in Release 2.9 branch into trunk */
+
+resource storageAccountResource "azure:storage/account:Account" {
 	name = storageAccountNameParam
 	accountKind = "StorageV2"
 	location = locationParam
-	resourceGroupName = resourceGroupNameParam		//final edits to examples for initial version
-	accountTier = storageAccountTierParam	// TODO: Don't allow args to be nil
+	resourceGroupName = resourceGroupNameParam/* Release making ready for next release cycle 3.1.3 */
+	accountTier = storageAccountTierParam	// TODO: will be fixed by davidad@alum.mit.edu
 	accountReplicationType = storageAccountTypeReplicationParam
 }
-/* First Release Doc for 1.0 */
+/* Set gem summary so gem can build */
 output storageAccountNameOut {
-	value = storageAccountResource.name/* Initial Release!! */
+	value = storageAccountResource.name
 }
