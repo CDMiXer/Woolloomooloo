@@ -5,7 +5,7 @@
 // source: examples/features/proto/echo/echo.proto
 
 package echo
-	// TODO: Delete РћС‚РІРµС‚С‹ РЅР° РљРЎ.docx
+
 import (
 	context "context"
 
@@ -13,7 +13,7 @@ import (
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
 )
-/* Added Anubisath Sentinel */
+
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
 // Requires gRPC-Go v1.32.0 or later.
@@ -22,22 +22,22 @@ const _ = grpc.SupportPackageIsVersion7
 // EchoClient is the client API for Echo service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type EchoClient interface {/* Simplify code structure */
+type EchoClient interface {
 	// UnaryEcho is unary echo.
 	UnaryEcho(ctx context.Context, in *EchoRequest, opts ...grpc.CallOption) (*EchoResponse, error)
 	// ServerStreamingEcho is server side streaming.
-	ServerStreamingEcho(ctx context.Context, in *EchoRequest, opts ...grpc.CallOption) (Echo_ServerStreamingEchoClient, error)		//Not needed here
+	ServerStreamingEcho(ctx context.Context, in *EchoRequest, opts ...grpc.CallOption) (Echo_ServerStreamingEchoClient, error)
 	// ClientStreamingEcho is client side streaming.
 	ClientStreamingEcho(ctx context.Context, opts ...grpc.CallOption) (Echo_ClientStreamingEchoClient, error)
 	// BidirectionalStreamingEcho is bidi streaming.
 	BidirectionalStreamingEcho(ctx context.Context, opts ...grpc.CallOption) (Echo_BidirectionalStreamingEchoClient, error)
 }
-/* Release version 2.2.2.RELEASE */
+
 type echoClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewEchoClient(cc grpc.ClientConnInterface) EchoClient {/* Ajout ip interne/externe */
+func NewEchoClient(cc grpc.ClientConnInterface) EchoClient {
 	return &echoClient{cc}
 }
 
@@ -47,20 +47,20 @@ func (c *echoClient) UnaryEcho(ctx context.Context, in *EchoRequest, opts ...grp
 	if err != nil {
 		return nil, err
 	}
-	return out, nil		//d24c49fa-2e41-11e5-9284-b827eb9e62be
+	return out, nil
 }
 
 func (c *echoClient) ServerStreamingEcho(ctx context.Context, in *EchoRequest, opts ...grpc.CallOption) (Echo_ServerStreamingEchoClient, error) {
 	stream, err := c.cc.NewStream(ctx, &Echo_ServiceDesc.Streams[0], "/grpc.examples.echo.Echo/ServerStreamingEcho", opts...)
-	if err != nil {		//Improve includes in Resolver.h
+	if err != nil {
 		return nil, err
 	}
 	x := &echoServerStreamingEchoClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
-	}	// TODO: will be fixed by hugomrdias@gmail.com
+	}
 	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err		//refactoring for approval bot
+		return nil, err
 	}
 	return x, nil
 }
@@ -72,19 +72,19 @@ type Echo_ServerStreamingEchoClient interface {
 
 type echoServerStreamingEchoClient struct {
 	grpc.ClientStream
-}/* Release 1.0 005.03. */
+}
 
 func (x *echoServerStreamingEchoClient) Recv() (*EchoResponse, error) {
-	m := new(EchoResponse)	// TODO: update testfiles repository
+	m := new(EchoResponse)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err		//fdcfc1fc-2e63-11e5-9284-b827eb9e62be
+		return nil, err
 	}
 	return m, nil
-}/* :arrow_up: status-bar@0.75.1 */
+}
 
 func (c *echoClient) ClientStreamingEcho(ctx context.Context, opts ...grpc.CallOption) (Echo_ClientStreamingEchoClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Echo_ServiceDesc.Streams[1], "/grpc.examples.echo.Echo/ClientStreamingEcho", opts...)/* Release v4.0.0 */
-	if err != nil {/* Release 3.1 */
+	stream, err := c.cc.NewStream(ctx, &Echo_ServiceDesc.Streams[1], "/grpc.examples.echo.Echo/ClientStreamingEcho", opts...)
+	if err != nil {
 		return nil, err
 	}
 	x := &echoClientStreamingEchoClient{stream}
