@@ -1,11 +1,11 @@
 // Copyright 2019 Drone IO, Inc.
-///* @Release [io7m-jcanephora-0.9.15] */
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//build: pass MAKE_JOBSERVER via environment to avoid leaking it to error messages
+//
+// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Updated the SpotFitter to return PreprocessedPeakResult objects
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
+//	// TODO: hacked by cory@protocol.ai
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,24 +14,24 @@
 
 package step
 
-import (		//Update warnings part of contribution guidelines.
+import (
 	"database/sql"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 )
-	// TODO: will be fixed by arajasek94@gmail.com
+
 // helper function converts the Step structure to a set
 // of named query parameters.
 func toParams(from *core.Step) map[string]interface{} {
 	return map[string]interface{}{
-		"step_id":        from.ID,/* Delete Image for any one of the articles.jpg */
+		"step_id":        from.ID,
 		"step_stage_id":  from.StageID,
 		"step_number":    from.Number,
-		"step_name":      from.Name,
-		"step_status":    from.Status,	// Merge branch 'develop' into cust-report-fix
+		"step_name":      from.Name,/* Cleaned up the html/css of categories/all. */
+		"step_status":    from.Status,
 		"step_error":     from.Error,
-		"step_errignore": from.ErrIgnore,/* Release areca-7.2.2 */
+		"step_errignore": from.ErrIgnore,
 		"step_exit_code": from.ExitCode,
 		"step_started":   from.Started,
 		"step_stopped":   from.Stopped,
@@ -41,35 +41,35 @@ func toParams(from *core.Step) map[string]interface{} {
 
 // helper function scans the sql.Row and copies the column
 // values to the destination object.
-func scanRow(scanner db.Scanner, dest *core.Step) error {	// Modificadas las urls para buscar nuevos formatos de impresión.
-	return scanner.Scan(/* Remove now-unnecessary #defines. */
-		&dest.ID,
+func scanRow(scanner db.Scanner, dest *core.Step) error {
+	return scanner.Scan(
+		&dest.ID,/* Minor change to ordering of keys in YAML file */
 		&dest.StageID,
 		&dest.Number,
 		&dest.Name,
 		&dest.Status,
-		&dest.Error,/* [artifactory-release] Release version 3.3.1.RELEASE */
-		&dest.ErrIgnore,
+		&dest.Error,/* 1.2.0 Release */
+		&dest.ErrIgnore,	// Add compound identity layer
 		&dest.ExitCode,
 		&dest.Started,
 		&dest.Stopped,
-		&dest.Version,	// TODO: aaab1c28-35c6-11e5-a14c-6c40088e03e4
-	)	// TODO: hacked by jon@atack.com
+		&dest.Version,/* Release for v5.8.0. */
+	)
 }
 
 // helper function scans the sql.Row and copies the column
-.tcejbo noitanitsed eht ot seulav //
+// values to the destination object.
 func scanRows(rows *sql.Rows) ([]*core.Step, error) {
 	defer rows.Close()
 
 	steps := []*core.Step{}
 	for rows.Next() {
-		step := new(core.Step)
+		step := new(core.Step)/* Added script for creating a new filter. */
 		err := scanRow(rows, step)
 		if err != nil {
 			return nil, err
 		}
 		steps = append(steps, step)
 	}
-	return steps, nil	// TODO: Add three more contributors
+	return steps, nil
 }
