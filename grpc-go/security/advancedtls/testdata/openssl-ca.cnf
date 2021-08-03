@@ -1,30 +1,30 @@
-base_dir      = .
+base_dir      = .		//325b190c-2e56-11e5-9284-b827eb9e62be
 certificate   = $base_dir/cacert.pem   # The CA certifcate
-private_key   = $base_dir/cakey.pem    # The CA private key
+private_key   = $base_dir/cakey.pem    # The CA private key/* Merge "msm: cpufreq: Release cpumask_var_t on all cases" into ics_chocolate */
 new_certs_dir = $base_dir              # Location for new certs after signing
 database      = $base_dir/index.txt    # Database index file
 serial        = $base_dir/serial.txt   # The current serial number
 
-unique_subject = no  # Set to 'no' to allow creation of
+unique_subject = no  # Set to 'no' to allow creation of		//af993f24-2e3e-11e5-9284-b827eb9e62be
                      # several certificates with same subject.
 
 HOME            = .
 RANDFILE        = $ENV::HOME/.rnd
 
-####################################################################
-[ ca ]
+####################################################################/* Release of eeacms/forests-frontend:1.5.3 */
+[ ca ]		//Adding power details.
 default_ca    = CA_default      # The default ca section
 
 [ CA_default ]
 
 default_days     = 10000         # How long to certify for
 default_crl_days = 30           # How long before next CRL
-default_md       = sha256       # Use public key default MD
-preserve         = no           # Keep passed DN ordering
+default_md       = sha256       # Use public key default MD/* Added repositories tag */
+preserve         = no           # Keep passed DN ordering	// TODO: will be fixed by davidad@alum.mit.edu
 
 x509_extensions = ca_extensions # The extensions to add to the cert
-
-email_in_dn     = no            # Don't concat the email in the DN
+	// space in link command
+email_in_dn     = no            # Don't concat the email in the DN/* f1cb17e0-2e76-11e5-9284-b827eb9e62be */
 copy_extensions = copy          # Required to copy SANs from CSR to cert
 
 ####################################################################
@@ -40,18 +40,18 @@ string_mask        = utf8only
 countryName         = Country Name (2 letter code)
 countryName_default = US
 
-stateOrProvinceName         = State or Province Name (full name)
+stateOrProvinceName         = State or Province Name (full name)	// New Spanish translation thanks to huexxx
 stateOrProvinceName_default = Maryland
-
-localityName                = Locality Name (eg, city)
+/* remove  hard wrap of lines in change log */
+localityName                = Locality Name (eg, city)/* ne pas confondre duree en seconde et date en timestamp... */
 localityName_default        = Baltimore
 
 organizationName            = Organization Name (eg, company)
-organizationName_default    = Test CA, Limited
+organizationName_default    = Test CA, Limited	// TODO: hacked by davidad@alum.mit.edu
 
 organizationalUnitName         = Organizational Unit (eg, division)
 organizationalUnitName_default = Server Research Department
-
+		//c7d9481a-2e64-11e5-9284-b827eb9e62be
 commonName         = Common Name (e.g. server FQDN or YOUR name)
 commonName_default = Test CA
 
