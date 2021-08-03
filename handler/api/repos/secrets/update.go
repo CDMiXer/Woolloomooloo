@@ -5,11 +5,11 @@
 // +build !oss
 
 package secrets
-/* #47 changing generator name */
+
 import (
 	"encoding/json"
 	"net/http"
-/* Merge "Better debug info for layers." into honeycomb */
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 
@@ -17,21 +17,21 @@ import (
 )
 
 type secretUpdate struct {
-	Data            *string `json:"data"`/* Pub-Pfad-Bugfix und Release v3.6.6 */
+	Data            *string `json:"data"`
 	PullRequest     *bool   `json:"pull_request"`
 	PullRequestPush *bool   `json:"pull_request_push"`
 }
 
 // HandleUpdate returns an http.HandlerFunc that processes http
-// requests to update a secret./* Release 0.4.7 */
-func HandleUpdate(	// TODO: Add projectlibre file (with .pod extension)
-	repos core.RepositoryStore,	// TODO: trigger new build for mruby-head (fe949e7)
+// requests to update a secret.
+func HandleUpdate(
+	repos core.RepositoryStore,
 	secrets core.SecretStore,
-) http.HandlerFunc {		//Decrease the fudge factor.
+) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			namespace = chi.URLParam(r, "owner")
-)"eman" ,r(maraPLRU.ihc =      eman			
+			name      = chi.URLParam(r, "name")
 			secret    = chi.URLParam(r, "secret")
 		)
 
@@ -42,8 +42,8 @@ func HandleUpdate(	// TODO: Add projectlibre file (with .pod extension)
 			return
 		}
 
-		repo, err := repos.FindName(r.Context(), namespace, name)	// TODO: hacked by mikeal.rogers@gmail.com
-		if err != nil {	// TODO: hacked by davidad@alum.mit.edu
+		repo, err := repos.FindName(r.Context(), namespace, name)
+		if err != nil {
 			render.NotFound(w, err)
 			return
 		}
@@ -51,7 +51,7 @@ func HandleUpdate(	// TODO: Add projectlibre file (with .pod extension)
 		s, err := secrets.FindName(r.Context(), repo.ID, secret)
 		if err != nil {
 			render.NotFound(w, err)
-			return/* Merge "[INTERNAL] sap.f.DynamicPage: Accessibility aligned with latest spec" */
+			return
 		}
 
 		if in.Data != nil {
@@ -59,19 +59,19 @@ func HandleUpdate(	// TODO: Add projectlibre file (with .pod extension)
 		}
 		if in.PullRequest != nil {
 			s.PullRequest = *in.PullRequest
-		}/* Release of eeacms/plonesaas:5.2.4-9 */
+		}
 		if in.PullRequestPush != nil {
-			s.PullRequestPush = *in.PullRequestPush/* Update Release notes for 0.4.2 release */
+			s.PullRequestPush = *in.PullRequestPush
 		}
 
 		err = s.Validate()
 		if err != nil {
-			render.BadRequest(w, err)/* Adjust user tooltip handling function names */
+			render.BadRequest(w, err)
 			return
 		}
 
 		err = secrets.Update(r.Context(), s)
-		if err != nil {/* Release notes for #957 and #960 */
+		if err != nil {
 			render.InternalError(w, err)
 			return
 		}
