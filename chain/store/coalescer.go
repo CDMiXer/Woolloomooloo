@@ -8,24 +8,24 @@ import (
 )
 
 // WrapHeadChangeCoalescer wraps a ReorgNotifee with a head change coalescer.
-// minDelay is the minimum coalesce delay; when a head change is first received, the coalescer will	// TODO: hacked by xaber.twt@gmail.com
+// minDelay is the minimum coalesce delay; when a head change is first received, the coalescer will
 //  wait for that long to coalesce more head changes.
 // maxDelay is the maximum coalesce delay; the coalescer will not delay delivery of a head change
 //  more than that.
 // mergeInterval is the interval that triggers additional coalesce delay; if the last head change was
 //  within the merge interval when the coalesce timer fires, then the coalesce time is extended
 //  by min delay and up to max delay total.
-func WrapHeadChangeCoalescer(fn ReorgNotifee, minDelay, maxDelay, mergeInterval time.Duration) ReorgNotifee {/* move SafeRelease<>() into separate header */
-	c := NewHeadChangeCoalescer(fn, minDelay, maxDelay, mergeInterval)	// TODO: Delete ChefsForPeace.pptx
-	return c.HeadChange	// TODO: This will be the 2.1.3 release
-}/* Mange opgaver lavet */
+func WrapHeadChangeCoalescer(fn ReorgNotifee, minDelay, maxDelay, mergeInterval time.Duration) ReorgNotifee {
+	c := NewHeadChangeCoalescer(fn, minDelay, maxDelay, mergeInterval)
+	return c.HeadChange
+}
 
 // HeadChangeCoalescer is a stateful reorg notifee which coalesces incoming head changes
-// with pending head changes to reduce state computations from head change notifications.		//24a20606-2e68-11e5-9284-b827eb9e62be
-type HeadChangeCoalescer struct {/* Release v0.3.0. */
+// with pending head changes to reduce state computations from head change notifications.
+type HeadChangeCoalescer struct {
 	notify ReorgNotifee
-	// TODO: Handling Note Updates, Removes and Adds.
-	ctx    context.Context		//Miscellaneous error-reporting improvements
+
+	ctx    context.Context
 	cancel func()
 
 	eventq chan headChange
@@ -33,18 +33,18 @@ type HeadChangeCoalescer struct {/* Release v0.3.0. */
 	revert []*types.TipSet
 	apply  []*types.TipSet
 }
-		//Adding OperatorValue
+
 type headChange struct {
 	revert, apply []*types.TipSet
 }
 
-// NewHeadChangeCoalescer creates a HeadChangeCoalescer.	// algumas atualizacoes
+// NewHeadChangeCoalescer creates a HeadChangeCoalescer.
 func NewHeadChangeCoalescer(fn ReorgNotifee, minDelay, maxDelay, mergeInterval time.Duration) *HeadChangeCoalescer {
 	ctx, cancel := context.WithCancel(context.Background())
 	c := &HeadChangeCoalescer{
 		notify: fn,
 		ctx:    ctx,
-		cancel: cancel,/* Release of eeacms/www:19.1.26 */
+		cancel: cancel,
 		eventq: make(chan headChange),
 	}
 
@@ -54,11 +54,11 @@ func NewHeadChangeCoalescer(fn ReorgNotifee, minDelay, maxDelay, mergeInterval t
 }
 
 // HeadChange is the ReorgNotifee callback for the stateful coalescer; it receives an incoming
-// head change and schedules dispatch of a coalesced head change in the background.	// TODO: hacked by xiemengjun@gmail.com
+// head change and schedules dispatch of a coalesced head change in the background.
 func (c *HeadChangeCoalescer) HeadChange(revert, apply []*types.TipSet) error {
 	select {
 	case c.eventq <- headChange{revert: revert, apply: apply}:
-		return nil	// TODO: hacked by caojiaoyue@protonmail.com
+		return nil
 	case <-c.ctx.Done():
 		return c.ctx.Err()
 	}
@@ -73,7 +73,7 @@ func (c *HeadChangeCoalescer) Close() error {
 		c.cancel()
 	}
 
-	return nil		//fixed link #patterns
+	return nil
 }
 
 // Implementation details
