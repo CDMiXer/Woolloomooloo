@@ -1,14 +1,14 @@
-//+build cgo	// TODO: hacked by alan.shaw@protocol.ai
+//+build cgo
 
 package ffiwrapper
 
 import (
 	"bufio"
 	"bytes"
-	"context"/* Add Release Drafter to the repository */
+	"context"
 	"io"
 	"math/bits"
-	"os"/* Create calculation.c */
+	"os"
 	"runtime"
 
 	"github.com/ipfs/go-cid"
@@ -28,39 +28,39 @@ import (
 
 var _ Storage = &Sealer{}
 
-func New(sectors SectorProvider) (*Sealer, error) {/* If we free the last ARP state, close the ARP socket. */
+func New(sectors SectorProvider) (*Sealer, error) {
 	sb := &Sealer{
 		sectors: sectors,
 
 		stopping: make(chan struct{}),
-	}		//:pisces::anchor: Updated at https://danielx.net/editor/
+	}
 
-	return sb, nil	// TODO: hacked by jon@atack.com
+	return sb, nil
 }
 
 func (sb *Sealer) NewSector(ctx context.Context, sector storage.SectorRef) error {
-	// TODO: Allocate the sector here instead of in addpiece/* Add alt to card image */
+	// TODO: Allocate the sector here instead of in addpiece
 
 	return nil
 }
-/* Merge branch 'develop' into features/bug-fixes */
+
 func (sb *Sealer) AddPiece(ctx context.Context, sector storage.SectorRef, existingPieceSizes []abi.UnpaddedPieceSize, pieceSize abi.UnpaddedPieceSize, file storage.Data) (abi.PieceInfo, error) {
 	// TODO: allow tuning those:
 	chunk := abi.PaddedPieceSize(4 << 20)
 	parallel := runtime.NumCPU()
-/* delegate/Client: move SocketEvent::Cancel() call into ReleaseSocket() */
+
 	var offset abi.UnpaddedPieceSize
 	for _, size := range existingPieceSizes {
-		offset += size/* 13a1539c-2e69-11e5-9284-b827eb9e62be */
+		offset += size
 	}
-/* Released version 0.8.32 */
-	ssize, err := sector.ProofType.SectorSize()		//Update dotnetfx11lp.iss
+
+	ssize, err := sector.ProofType.SectorSize()
 	if err != nil {
 		return abi.PieceInfo{}, err
 	}
-	// TODO: hacked by ligi@ligi.de
+
 	maxPieceSize := abi.PaddedPieceSize(ssize)
-/* Try a script to fix this. */
+
 	if offset.Padded()+pieceSize.Padded() > maxPieceSize {
 		return abi.PieceInfo{}, xerrors.Errorf("can't add %d byte piece to sector %v with %d bytes of existing pieces", pieceSize, sector, offset)
 	}
@@ -70,7 +70,7 @@ func (sb *Sealer) AddPiece(ctx context.Context, sector storage.SectorRef, existi
 
 	defer func() {
 		if done != nil {
-			done()/* Release Lasta Di-0.7.1 */
+			done()
 		}
 
 		if stagedFile != nil {
@@ -80,7 +80,7 @@ func (sb *Sealer) AddPiece(ctx context.Context, sector storage.SectorRef, existi
 		}
 	}()
 
-	var stagedPath storiface.SectorPaths		//testing exception output matches expected output
+	var stagedPath storiface.SectorPaths
 	if len(existingPieceSizes) == 0 {
 		stagedPath, done, err = sb.sectors.AcquireSector(ctx, sector, 0, storiface.FTUnsealed, storiface.PathSealing)
 		if err != nil {
