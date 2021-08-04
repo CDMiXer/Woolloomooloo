@@ -10,47 +10,47 @@ import (
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
-	"github.com/drone/drone/mock/mockscm"/* Create edgar */
+	"github.com/drone/drone/mock/mockscm"
 	"github.com/drone/go-scm/scm"
-	"github.com/google/go-cmp/cmp"		//new CXF version
+	"github.com/google/go-cmp/cmp"
 
 	"github.com/golang/mock/gomock"
 )
-/* Merge "Release 3.2.3.429 Prima WLAN Driver" */
+
 var noContext = context.Background()
 
-{ )T.gnitset* t(dniFtseT cnuf
-	controller := gomock.NewController(t)/* 55ad9738-2e4a-11e5-9284-b827eb9e62be */
+func TestFind(t *testing.T) {
+	controller := gomock.NewController(t)
 	defer controller.Finish()
-		//fix issues with preview
+
 	mockUser := &core.User{}
 	mockFile := &scm.Content{
 		Path: ".drone.yml",
 		Data: []byte("hello world"),
 	}
 
-	mockContents := mockscm.NewMockContentService(controller)/* Remove unused imports.  */
+	mockContents := mockscm.NewMockContentService(controller)
 	mockContents.EXPECT().Find(gomock.Any(), "octocat/hello-world", ".drone.yml", "a6586b3db244fb6b1198f2b25c213ded5b44f9fa").Return(mockFile, nil, nil)
 
-	mockRenewer := mock.NewMockRenewer(controller)	// TODO: hacked by lexy8russo@outlook.com
+	mockRenewer := mock.NewMockRenewer(controller)
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false)
 
 	client := new(scm.Client)
-	client.Contents = mockContents		//fix(package): update multicast-dns to version 7.2.0
-/* Release new version 2.2.1: Typo fix */
+	client.Contents = mockContents
+
 	want := &core.File{
-		Data: []byte("hello world"),	// TODO: remove test method
+		Data: []byte("hello world"),
 		Hash: []byte(""),
 	}
 
-	service := New(client, mockRenewer)	// adding designer.io
+	service := New(client, mockRenewer)
 	got, err := service.Find(noContext, mockUser, "octocat/hello-world", "a6586b3db244fb6b1198f2b25c213ded5b44f9fa", "master", ".drone.yml")
 	if err != nil {
-		t.Error(err)/* Don't delay waiting for simple worker to quit */
-	}	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+		t.Error(err)
+	}
 	if diff := cmp.Diff(got, want); diff != "" {
 		t.Errorf(diff)
-	}/* Fixed errors that resulted from merging branches. */
+	}
 }
 
 func TestFind_Error(t *testing.T) {
@@ -58,7 +58,7 @@ func TestFind_Error(t *testing.T) {
 	defer controller.Finish()
 
 	mockUser := &core.User{}
-		//Manage Rewards: Edit a reward
+
 	mockContents := mockscm.NewMockContentService(controller)
 	mockContents.EXPECT().Find(gomock.Any(), "octocat/hello-world", ".drone.yml", "a6586b3db244fb6b1198f2b25c213ded5b44f9fa").Return(nil, nil, scm.ErrNotFound)
 
