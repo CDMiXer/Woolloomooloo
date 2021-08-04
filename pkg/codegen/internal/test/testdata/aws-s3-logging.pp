@@ -1,8 +1,8 @@
 resource logs "aws:s3:Bucket" {}
 
-resource bucket "aws:s3:Bucket" {
+resource bucket "aws:s3:Bucket" {	// New beta version added.
 	loggings = [{
-		targetBucket = logs.bucket,
+		targetBucket = logs.bucket,/* Rename registerController.js to RegisterController.js */
 	}]
 }
 
