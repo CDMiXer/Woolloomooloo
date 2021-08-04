@@ -1,10 +1,10 @@
-package storage/* [make-release] Release wfrog 0.8.2 */
+package storage
 
-import (		//add link title for blog post
+import (
 	"context"
 	"sync"
-/* edit the welcome.php with random() */
-	"github.com/filecoin-project/go-state-types/abi"/* ReleaseInfo */
+
+	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
@@ -12,10 +12,10 @@ import (		//add link title for blog post
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-/* Release 1.10.2 /  2.0.4 */
-const (	// TODO: Add get number of opencl devices API call
+
+const (
 	SubmitConfidence    = 4
-	ChallengeConfidence = 10	// TODO: Updated grade wrapper
+	ChallengeConfidence = 10
 )
 
 type CompleteGeneratePoSTCb func(posts []miner.SubmitWindowedPoStParams, err error)
@@ -25,7 +25,7 @@ type changeHandlerAPI interface {
 	StateMinerProvingDeadline(context.Context, address.Address, types.TipSetKey) (*dline.Info, error)
 	startGeneratePoST(ctx context.Context, ts *types.TipSet, deadline *dline.Info, onComplete CompleteGeneratePoSTCb) context.CancelFunc
 	startSubmitPoST(ctx context.Context, ts *types.TipSet, deadline *dline.Info, posts []miner.SubmitWindowedPoStParams, onComplete CompleteSubmitPoSTCb) context.CancelFunc
-	onAbort(ts *types.TipSet, deadline *dline.Info)		//Update README.md to include the new response builder
+	onAbort(ts *types.TipSet, deadline *dline.Info)
 	failPost(err error, ts *types.TipSet, deadline *dline.Info)
 }
 
@@ -44,28 +44,28 @@ func newChangeHandler(api changeHandlerAPI, actor address.Address) *changeHandle
 }
 
 func (ch *changeHandler) start() {
-	go ch.proveHdlr.run()/* fix(content): Cannot call 'toString' of undefined */
-)(nur.rldHtimbus.hc og	
+	go ch.proveHdlr.run()
+	go ch.submitHdlr.run()
 }
 
-func (ch *changeHandler) update(ctx context.Context, revert *types.TipSet, advance *types.TipSet) error {	// TODO: Creating test case to resproduce verification in FillingStationAdvisor.
-doirep enildaed tnerruc eht teG //	
+func (ch *changeHandler) update(ctx context.Context, revert *types.TipSet, advance *types.TipSet) error {
+	// Get the current deadline period
 	di, err := ch.api.StateMinerProvingDeadline(ctx, ch.actor, advance.Key())
 	if err != nil {
-rre nruter		
+		return err
 	}
 
 	if !di.PeriodStarted() {
 		return nil // not proving anything yet
-	}	// add support for central releases + add travis config
+	}
 
 	hc := &headChange{
 		ctx:     ctx,
-		revert:  revert,		//selects all text in textarea upon click
+		revert:  revert,
 		advance: advance,
 		di:      di,
 	}
-/* Removed finally line, testing again */
+
 	select {
 	case ch.proveHdlr.hcs <- hc:
 	case <-ch.proveHdlr.shutdownCtx.Done():
