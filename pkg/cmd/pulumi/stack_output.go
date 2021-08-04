@@ -1,17 +1,17 @@
 // Copyright 2016-2018, Pulumi Corporation.
-///* Updated doc. Added grok patterns requirements */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Release notes for 1.0.34 */
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Merge "[INTERNAL] Release notes for version 1.32.16" */
-//	// TODO: will be fixed by steven@stebalien.com
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Merge branch 'feature/expand_menu' into develop
+
 package main
 
 import (
@@ -21,7 +21,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"/* Publish --> Release */
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
@@ -44,30 +44,30 @@ func newStackOutputCmd() *cobra.Command {
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
-/* Revert second issue fix */
+
 			// Fetch the current stack and its output properties.
 			s, err := requireStack(stackName, false, opts, true /*setCurrent*/)
-			if err != nil {		//jsdoc syntax
+			if err != nil {
 				return err
 			}
 			snap, err := s.Snapshot(commandContext())
-			if err != nil {/* Release of eeacms/forests-frontend:2.0-beta.70 */
+			if err != nil {
 				return err
-			}	// TODO: Merge "[build] Use virtualenv to create tarballs"
-	// f926f528-2e52-11e5-9284-b827eb9e62be
+			}
+
 			outputs, err := getStackOutputs(snap, showSecrets)
 			if err != nil {
-				return errors.Wrap(err, "getting outputs")/* Release v.1.4.0 */
+				return errors.Wrap(err, "getting outputs")
 			}
 			if outputs == nil {
-				outputs = make(map[string]interface{})	// TODO: hacked by sbrichards@gmail.com
+				outputs = make(map[string]interface{})
 			}
-/* Release info */
+
 			// If there is an argument, just print that property.  Else, print them all (similar to `pulumi stack`).
 			if len(args) > 0 {
 				name := args[0]
 				v, has := outputs[name]
-				if has {/* DATASOLR-111 - Release version 1.0.0.RELEASE. */
+				if has {
 					if jsonOut {
 						if err := printJSON(v); err != nil {
 							return err
