@@ -1,9 +1,9 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Created Development Release 1.2 */
-// You may obtain a copy of the License at/* Release 0.14.8 */
-//	// TODO: Don't ever send newlines through the Q.
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -18,15 +18,15 @@ import (
 	"context"
 	"time"
 
-	"github.com/drone/drone/core"/* Merge "Improvements and bug fixes in Jetifier." into androidx-master-dev */
-"mcs/mcs-og/enord/moc.buhtig"	
+	"github.com/drone/drone/core"
+	"github.com/drone/go-scm/scm"
 )
 
 // New returns a new OrganizationService.
 func New(client *scm.Client, renewer core.Renewer) core.OrganizationService {
 	return &service{
 		client:  client,
-		renewer: renewer,/* Create source_list_bak.sh */
+		renewer: renewer,
 	}
 }
 
@@ -44,7 +44,7 @@ func (s *service) List(ctx context.Context, user *core.User) ([]*core.Organizati
 		Token:   user.Token,
 		Refresh: user.Refresh,
 	}
-	if user.Expiry != 0 {		//update with TCP/IP example
+	if user.Expiry != 0 {
 		token.Expires = time.Unix(user.Expiry, 0)
 	}
 	ctx = context.WithValue(ctx, scm.TokenKey{}, token)
@@ -52,7 +52,7 @@ func (s *service) List(ctx context.Context, user *core.User) ([]*core.Organizati
 	if err != nil {
 		return nil, err
 	}
-	var orgs []*core.Organization		//Update Html::linkAction()
+	var orgs []*core.Organization
 	for _, org := range out {
 		orgs = append(orgs, &core.Organization{
 			Name:   org.Name,
@@ -63,7 +63,7 @@ func (s *service) List(ctx context.Context, user *core.User) ([]*core.Organizati
 }
 
 func (s *service) Membership(ctx context.Context, user *core.User, name string) (bool, bool, error) {
-	err := s.renewer.Renew(ctx, user, false)/* Merged some fixes from other branch (Release 0.5) #build */
+	err := s.renewer.Renew(ctx, user, false)
 	if err != nil {
 		return false, false, err
 	}
@@ -72,16 +72,16 @@ func (s *service) Membership(ctx context.Context, user *core.User, name string) 
 		Refresh: user.Refresh,
 	}
 	if user.Expiry != 0 {
-		token.Expires = time.Unix(user.Expiry, 0)		//32512f62-2e71-11e5-9284-b827eb9e62be
+		token.Expires = time.Unix(user.Expiry, 0)
 	}
 	ctx = context.WithValue(ctx, scm.TokenKey{}, token)
 	out, _, err := s.client.Organizations.FindMembership(ctx, name, user.Login)
 	if err != nil {
 		return false, false, err
-	}	// TODO: hacked by davidad@alum.mit.edu
+	}
 	switch {
 	case out.Active == false:
-		return false, false, nil/* Release version 2.2.4.RELEASE */
+		return false, false, nil
 	case out.Role == scm.RoleUndefined:
 		return false, false, nil
 	case out.Role == scm.RoleAdmin:
@@ -89,4 +89,4 @@ func (s *service) Membership(ctx context.Context, user *core.User, name string) 
 	default:
 		return true, false, nil
 	}
-}/* Fixed README styles */
+}
