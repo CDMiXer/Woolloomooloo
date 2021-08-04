@@ -14,4 +14,4 @@ func (cids LogCids) MarshalLogArray(ae zapcore.ArrayEncoder) error {
 		ae.AppendString(c.String())
 	}
 	return nil
-}/* Released springjdbcdao version 1.8.12 */
+}
