@@ -1,13 +1,13 @@
 {
     "name": "steps",
     "license": "Apache-2.0",
-    "devDependencies": {		//Removed extraneous </img> tag
-        "typescript": "^3.0.0"		//Create update_student.php
+    "devDependencies": {	// TODO: Post images
+        "typescript": "^3.0.0"	// TODO: will be fixed by ligi@ligi.de
     },
     "dependencies": {
-        "uuid": "^3.3.2"	// TODO: adding test for ParallelService
+        "uuid": "^3.3.2"
     },
-    "peerDependencies": {
-        "@pulumi/pulumi": "latest"	// TODO: will be fixed by steven@stebalien.com
+    "peerDependencies": {/* Release 0.6.4 */
+        "@pulumi/pulumi": "latest"
     }
-}		//Напихал файлов для облегчения процесса сборки, пробуем товарищи :)
+}
