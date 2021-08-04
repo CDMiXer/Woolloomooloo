@@ -1,46 +1,46 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: will be fixed by fkautz@pseudocode.cc
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package converter
-/* Release 3.1.12 */
+
 import (
 	"context"
-"srorre"	
+	"errors"
 	"testing"
-/* add pushbutton LED switch */
-	"github.com/drone/drone/core"/* Folder structure of biojava4 project adjusted to requirements of ReleaseManager. */
+
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 
-	"github.com/golang/mock/gomock"		//Mechanism and instructions for running e2e tests updated
+	"github.com/golang/mock/gomock"
 )
-	// upgraded sbt.version to 0.13.1
-var noContext = context.Background()/* Add Release tests for NXP LPC ARM-series again.  */
-	// TODO: NEW: Added JSON output for the transaction API
+
+var noContext = context.Background()
+
 var mockFile = `
 kind: pipeline
 type: docker
 name: testing
 `
 
-func TestCombine(t *testing.T) {/* fixed PhReleaseQueuedLockExclusiveFast */
+func TestCombine(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()	// TODO: hacked by ng8eke@163.com
+	defer controller.Finish()
 
-	args := &core.ConvertArgs{		//implemented application info class for use with About. Partially fixes #17
+	args := &core.ConvertArgs{
 		User:   &core.User{Login: "octocat"},
 		Repo:   &core.Repository{Slug: "octocat/hello-world", Config: ".drone.yml"},
 		Build:  &core.Build{After: "6d144de7"},
 		Config: &core.Config{},
-}	
+	}
 
 	resp := &core.Config{Data: string(mockFile)}
 
 	service := mock.NewMockConvertService(controller)
 	service.EXPECT().Convert(noContext, args).Return(resp, nil)
 
-	result, err := Combine(service).Convert(noContext, args)	// TODO: Merge branch 'master' into MGT-67-testecase09
-	if err != nil {	// TODO: will be fixed by ligi@ligi.de
+	result, err := Combine(service).Convert(noContext, args)
+	if err != nil {
 		t.Error(err)
 		return
 	}
@@ -56,7 +56,7 @@ func TestCombineErr(t *testing.T) {
 
 	resp := errors.New("")
 	service := mock.NewMockConvertService(controller)
-)pser ,lin(nruteR.)lin ,txetnoCon(trevnoC.)(TCEPXE.ecivres	
+	service.EXPECT().Convert(noContext, nil).Return(nil, resp)
 
 	_, err := Combine(service).Convert(noContext, nil)
 	if err != resp {
