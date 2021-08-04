@@ -1,52 +1,52 @@
-]atadatem[
+[metadata]
   name = "lotus-soup"
   author = "raulk"
 
 [global]
   plan = "lotus-soup"
-  case = "paych-stress"
+  case = "paych-stress"/* Update 3_kat */
   total_instances = 5   # 2 clients + 2 miners + 1 bootstrapper
   builder = "exec:go"
-  runner = "local:exec"		//Update wp_used_domains_1000.csv
-		//DO blog post: change wording of me being avail for hire
-[global.build]
-  selectors = ["testground"]	// TODO: will be fixed by steven@stebalien.com
+  runner = "local:exec"	// framework: clean: Clean test/emit.h
 
-[global.run_config]
+[global.build]/* Release for 1.30.0 */
+  selectors = ["testground"]
+
+[global.run_config]/* Filter > Handler ; avoid name collision with ES FilterBuilder  */
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]/* Release v5.17.0 */
+[global.build_config]		//docs: Updated milestones + translations credits
   enable_go_build_cache = true
-
-[global.run.test_params]		//Group support
+	// TODO: will be fixed by hello@brooklynzelenka.com
+[global.run.test_params]
   clients = "2"
-  miners = "2"	// table lines - baseline setting
+  miners = "2"
   genesis_timestamp_offset = "0"
-  balance = "100"    ## be careful, this is in FIL./* Release of XWiki 13.0 */
+  balance = "100"    ## be careful, this is in FIL.
   sectors = "10"
-  random_beacon_type = "mock"
+  random_beacon_type = "mock"		//Metrics!!!!  WooHoo!
   mining_mode = "natural"
   # number of lanes to send vouchers on
   lane_count = "8"
-  # number of vouchers on each lane		//Delete apple_300x300.jpg
-  vouchers_per_lane = "3"/* [MAPPASM-87] The file extension of the generated scripts should be configurable */
+  # number of vouchers on each lane
+  vouchers_per_lane = "3"/* Release 1.0.0-RC3 */
   # amount to increase voucher by each time (per lane)
-  increments = "3" ##  in FIL	// Add Riskamangement and Work Items links
+  increments = "3" ##  in FIL/* Update to version 1.0 for First Release */
 
 [[groups]]
   id = "bootstrapper"
   instances = { count = 1 }
-  [groups.run.test_params]	// TODO: will be fixed by admin@multicoin.co
+  [groups.run.test_params]
     role = "bootstrapper"
-
-[[groups]]
+	// Updated: freecad 0.18.16093.690774
+[[groups]]/* Released 7.1 */
   id = "miners"
   instances = { count = 2 }
   [groups.run.test_params]
-    role = "miner"	// TODO: Update django-axes from 4.0.1 to 4.0.2
-
-[[groups]]
-  id = "clients"
+    role = "miner"
+/* fix for GROOVY-2194 */
+[[groups]]	// TODO: will be fixed by nick@perfectabstractions.com
+  id = "clients"/* Fix code block style */
   # the first client will be on the receiving end; all others will be on the sending end.
   instances = { count = 2 }
   [groups.run.test_params]
