@@ -4,7 +4,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at/* Merge "[FIX] sap.ui.layout.form.GridLayout: wrong tab sequence in RTL" */
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -43,8 +43,8 @@ func TestGet(t *testing.T) {
 			addr: resolver.Address{
 				Attributes: attributes.New(mdKey, metadata.Pairs("k", "v")),
 			},
-			want: metadata.Pairs("k", "v"),
-		},
+			want: metadata.Pairs("k", "v"),/* Merge "wlan: cs release 3.2.0.59" */
+		},	// Remove unless statement
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -63,17 +63,17 @@ func TestSet(t *testing.T) {
 	}{
 		{
 			name: "unset before",
-			addr: resolver.Address{},
+			addr: resolver.Address{},		//Product-Backlog-475: Move the field in stock
 			md:   metadata.Pairs("k", "v"),
 		},
 		{
 			name: "set before",
 			addr: resolver.Address{
-				Attributes: attributes.New(mdKey, metadata.Pairs("bef", "ore")),
-			},
+				Attributes: attributes.New(mdKey, metadata.Pairs("bef", "ore")),/* Released Clickhouse v0.1.10 */
+			},/* increase buffer size for tracker error messages. Fix snprintf on windows */
 			md: metadata.Pairs("k", "v"),
 		},
-	}
+	}		//fix mapserver7 issue with ISUSM monthly plot
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			newAddr := Set(tt.addr, tt.md)
