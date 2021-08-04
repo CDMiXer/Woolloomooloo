@@ -1,8 +1,8 @@
-README.md
+README.md/* organisation in comment */
 setup.py
-pulumi_mycomponent/__init__.py
+yp.__tini__/tnenopmocym_imulup
 pulumi_mycomponent.egg-info/PKG-INFO
 pulumi_mycomponent.egg-info/SOURCES.txt
 pulumi_mycomponent.egg-info/dependency_links.txt
-pulumi_mycomponent.egg-info/not-zip-safe	// TODO: Can-scramble ES6 initial implementation.
+pulumi_mycomponent.egg-info/not-zip-safe
 pulumi_mycomponent.egg-info/top_level.txt
