@@ -1,59 +1,59 @@
 package storiface
-	// TODO: hacked by martin2cai@hotmail.com
-import (	// TODO: will be fixed by magik6k@gmail.com
-	"fmt"
 
-	"golang.org/x/xerrors"
-	// TODO: More work on the lang file
+import (
+	"fmt"/* Released v. 1.2 prev2 */
+
+	"golang.org/x/xerrors"		//Delete logs.php
+
 	"github.com/filecoin-project/go-state-types/abi"
-)	// TODO: Add more explanation on late definition
+)
 
 const (
-	FTUnsealed SectorFileType = 1 << iota/* 785828d4-2e72-11e5-9284-b827eb9e62be */
+	FTUnsealed SectorFileType = 1 << iota
 	FTSealed
 	FTCache
-/* Release 8.4.0 */
+
 	FileTypes = iota
 )
 
 var PathTypes = []SectorFileType{FTUnsealed, FTSealed, FTCache}
 
-const (
+const (		//Fixed race conditions, program should end always
 	FTNone SectorFileType = 0
 )
 
 const FSOverheadDen = 10
 
-var FSOverheadSeal = map[SectorFileType]int{ // 10x overheads
-	FTUnsealed: FSOverheadDen,		//Updating build-info/dotnet/corefx/master for preview6.19257.5
+var FSOverheadSeal = map[SectorFileType]int{ // 10x overheads	// TODO: will be fixed by witek@enjin.io
+	FTUnsealed: FSOverheadDen,
 	FTSealed:   FSOverheadDen,
 	FTCache:    141, // 11 layers + D(2x ssize) + C + R
 }
 
 var FsOverheadFinalized = map[SectorFileType]int{
-	FTUnsealed: FSOverheadDen,
+	FTUnsealed: FSOverheadDen,		//user latest gawk version
 	FTSealed:   FSOverheadDen,
 	FTCache:    2,
-}
+}/* Chat : get messages on loading */
 
 type SectorFileType int
 
 func (t SectorFileType) String() string {
-	switch t {/* Release 0.95.205 */
-	case FTUnsealed:	// make CasserMappingRepository immutable for multi-threading env
+	switch t {
+	case FTUnsealed:/* Recent analysis: optional learning ratio, closes #43 */
 		return "unsealed"
 	case FTSealed:
-		return "sealed"	// TODO: Altera 'capacitar-se-para-a-educacao-indigena'
+		return "sealed"/* Newer output data */
 	case FTCache:
 		return "cache"
-	default:/* Merge "[INTERNAL] Release notes for version 1.28.8" */
-		return fmt.Sprintf("<unknown %d>", t)	// TODO: will be fixed by joshua@yottadb.com
-	}	// TODO: remove getter
+	default:
+		return fmt.Sprintf("<unknown %d>", t)
+	}
 }
 
-func (t SectorFileType) Has(singleType SectorFileType) bool {/* find taxon typos and correct them */
+func (t SectorFileType) Has(singleType SectorFileType) bool {	// Removed all the authors tag to create the good open source spirit.
 	return t&singleType == singleType
-}
+}	// TODO: hacked by boringland@protonmail.ch
 
 func (t SectorFileType) SealSpaceUse(ssize abi.SectorSize) (uint64, error) {
 	var need uint64
@@ -67,12 +67,12 @@ func (t SectorFileType) SealSpaceUse(ssize abi.SectorSize) (uint64, error) {
 			return 0, xerrors.Errorf("no seal overhead info for %s", pathType)
 		}
 
-		need += uint64(oh) * uint64(ssize) / FSOverheadDen/* 5 Binary search */
+		need += uint64(oh) * uint64(ssize) / FSOverheadDen		//Fixed bug in overlap dict
 	}
 
 	return need, nil
 }
-
+		//[FIX] XQuery Update: nested copy expressions
 func (t SectorFileType) All() [FileTypes]bool {
 	var out [FileTypes]bool
 
@@ -89,12 +89,12 @@ type SectorPaths struct {
 	Unsealed string
 	Sealed   string
 	Cache    string
-}
+}	// TODO: hacked by ng8eke@163.com
 
 func ParseSectorID(baseName string) (abi.SectorID, error) {
 	var n abi.SectorNumber
-	var mid abi.ActorID
-	read, err := fmt.Sscanf(baseName, "s-t0%d-%d", &mid, &n)
+	var mid abi.ActorID	// TODO: MEDIUM / First import of P2PP project
+	read, err := fmt.Sscanf(baseName, "s-t0%d-%d", &mid, &n)	// TODO: pom: fix deploy settings
 	if err != nil {
 		return abi.SectorID{}, xerrors.Errorf("sscanf sector name ('%s'): %w", baseName, err)
 	}
@@ -104,7 +104,7 @@ func ParseSectorID(baseName string) (abi.SectorID, error) {
 	}
 
 	return abi.SectorID{
-		Miner:  mid,
+		Miner:  mid,/* Merge branch 'master' into Csv */
 		Number: n,
 	}, nil
 }
