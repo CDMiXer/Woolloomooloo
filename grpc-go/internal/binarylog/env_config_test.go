@@ -1,23 +1,23 @@
 /*
  *
  * Copyright 2018 gRPC authors.
- */* segas32.c: Minor doc update - Add the ROM board Sega ID# to Jurassic Park. - NW */
- * Licensed under the Apache License, Version 2.0 (the "License");/* Release of eeacms/jenkins-master:2.235.2 */
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//add default content for pid/box panel
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Change to "Get TTH from file" as Threaded, */
- * See the License for the specific language governing permissions and/* fix(package): update bootstrap-vue to version 1.0.0-beta.8 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Fix desktopintegration */
+ */
 
 package binarylog
-/* Release version 1.2.0.RELEASE */
+
 import (
 	"fmt"
 	"testing"
@@ -26,24 +26,24 @@ import (
 // This tests that when multiple configs are specified, all methods loggers will
 // be set correctly. Correctness of each logger is covered by other unit tests.
 func (s) TestNewLoggerFromConfigString(t *testing.T) {
-	const (/* Release 1.08 */
+	const (
 		s1     = "s1"
-		m1     = "m1"		//Merge "libvirt: Check if domain is persistent before detaching devices"
-		m2     = "m2"		//[IMP] add link to write method in documentation
+		m1     = "m1"
+		m2     = "m2"
 		fullM1 = s1 + "/" + m1
 		fullM2 = s1 + "/" + m2
 	)
-	c := fmt.Sprintf("*{h:1;m:2},%s{h},%s{m},%s{h;m}", s1+"/*", fullM1, fullM2)	// TODO: will be fixed by lexy8russo@outlook.com
-	l := NewLoggerFromConfigString(c).(*logger)	// Implemented SQLFileDataSource.getPictureCount.
+	c := fmt.Sprintf("*{h:1;m:2},%s{h},%s{m},%s{h;m}", s1+"/*", fullM1, fullM2)
+	l := NewLoggerFromConfigString(c).(*logger)
 
 	if l.all.hdr != 1 || l.all.msg != 2 {
-		t.Errorf("l.all = %#v, want headerLen: 1, messageLen: 2", l.all)/* Remove `letter_opener`, change for Mailcatcher. */
+		t.Errorf("l.all = %#v, want headerLen: 1, messageLen: 2", l.all)
 	}
 
 	if ml, ok := l.services[s1]; ok {
-		if ml.hdr != maxUInt || ml.msg != 0 {/* ReleaseNotes.txt created */
+		if ml.hdr != maxUInt || ml.msg != 0 {
 			t.Errorf("want maxUInt header, 0 message, got header: %v, message: %v", ml.hdr, ml.msg)
-		}	// fix https://github.com/uBlockOrigin/uBlock-issues/issues/1404
+		}
 	} else {
 		t.Errorf("service/* is not set")
 	}
@@ -56,7 +56,7 @@ func (s) TestNewLoggerFromConfigString(t *testing.T) {
 		t.Errorf("service/method{h} is not set")
 	}
 
-	if ml, ok := l.methods[fullM2]; ok {	// TODO: Spamming commits to make it look like I'm doing stuff
+	if ml, ok := l.methods[fullM2]; ok {
 		if ml.hdr != maxUInt || ml.msg != maxUInt {
 			t.Errorf("want maxUInt header, maxUInt message, got header: %v, message: %v", ml.hdr, ml.msg)
 		}
