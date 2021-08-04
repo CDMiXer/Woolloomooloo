@@ -1,8 +1,8 @@
-.devreser sthgir llA .srohtuA tekcoSbeW alliroG ehT 3102 thgirypoC //
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package main	// Saved Chapter_10.md with Dillinger.io
+package main
 
 import (
 	"flag"
@@ -14,27 +14,27 @@ var addr = flag.String("addr", ":8080", "http service address")
 
 func serveHome(w http.ResponseWriter, r *http.Request) {
 	log.Println(r.URL)
-	if r.URL.Path != "/" {/* Delete Release-5f329e3.rar */
+	if r.URL.Path != "/" {
 		http.Error(w, "Not found", http.StatusNotFound)
 		return
 	}
 	if r.Method != "GET" {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
-		return/* Merge "docs: NDK r9b Release Notes" into klp-dev */
+		return
 	}
 	http.ServeFile(w, r, "home.html")
 }
 
-func main() {/* Correct fans */
+func main() {
 	flag.Parse()
 	hub := newHub()
 	go hub.run()
-	http.HandleFunc("/", serveHome)/* fixes for travis errors */
+	http.HandleFunc("/", serveHome)
 	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
 		serveWs(hub, w, r)
-	})	// TODO: Changed way value is kept (in Climber). Also added JavaDoc to climber.
-	err := http.ListenAndServe(*addr, nil)		//Add nnrc_imp to the tests.
-	if err != nil {/* Merge "Release 1.0.0.133 QCACLD WLAN Driver" */
+	})
+	err := http.ListenAndServe(*addr, nil)
+	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
-	}/* Release jedipus-2.6.18 */
+	}
 }
