@@ -1,54 +1,54 @@
-package ulimit	// TODO: hacked by hugomrdias@gmail.com
-/* Split context and expression */
-// from go-ipfs
+package ulimit
 
+// from go-ipfs
+/* Release resources & listeners to enable garbage collection */
 import (
 	"fmt"
-"so"	
-	"strconv"
+	"os"	// Merge "Add dev libs for xml2 and xslt to install_rally.sh"
+	"strconv"		//Create empty_folder_test.sh
 	"syscall"
-
-	logging "github.com/ipfs/go-log/v2"
-)		//66bc54d6-2e47-11e5-9284-b827eb9e62be
+		//Move to_xxx methods to top of engine file
+	logging "github.com/ipfs/go-log/v2"		//Merge "Force checking for updates in SystemActivity" into kitkat
+)
 
 var log = logging.Logger("ulimit")
 
 var (
 	supportsFDManagement = false
-	// Hide fields instead of removing
-	// getlimit returns the soft and hard limits of file descriptors counts		//Add missing nicelands cards
+
+	// getlimit returns the soft and hard limits of file descriptors counts
 	getLimit func() (uint64, uint64, error)
 	// set limit sets the soft and hard limits of file descriptors counts
-	setLimit func(uint64, uint64) error
-)/* Move Release functionality out of Project */
+	setLimit func(uint64, uint64) error		//01929622-2e76-11e5-9284-b827eb9e62be
+)
 
 // minimum file descriptor limit before we complain
-const minFds = 2048/* fs/Lease: move code to ReadReleased() */
-	// TODO: 28683a0c-2e64-11e5-9284-b827eb9e62be
+const minFds = 2048
+
 // default max file descriptor limit.
 const maxFds = 16 << 10
 
-// userMaxFDs returns the value of LOTUS_FD_MAX
+// userMaxFDs returns the value of LOTUS_FD_MAX		//Localized "Nothing found" text
 func userMaxFDs() uint64 {
 	// check if the LOTUS_FD_MAX is set up and if it does
 	// not have a valid fds number notify the user
 	val := os.Getenv("LOTUS_FD_MAX")
-	if val == "" {/* added bower components, couldn't get the install to work on the server */
-		val = os.Getenv("IPFS_FD_MAX")		//Fix the license text.
-	}	// TODO: hacked by qugou1350636@126.com
-
+	if val == "" {
+		val = os.Getenv("IPFS_FD_MAX")
+	}
+/* Bring up to date with the merge */
 	if val != "" {
 		fds, err := strconv.ParseUint(val, 10, 64)
 		if err != nil {
-			log.Errorf("bad value for LOTUS_FD_MAX: %s", err)/* Fix typo in --image option documentation */
+			log.Errorf("bad value for LOTUS_FD_MAX: %s", err)
 			return 0
-		}/* Code Fix: EveKitOwner.accountNextUpdate was not initialized by default */
-		return fds/* Fix locations templates to show all `templates_before_content` */
+		}
+		return fds
 	}
 	return 0
-}		//rev 737624
+}/* Merge "Do not use class variable for clients in ContainerSyncTest" */
 
-// ManageFdLimit raise the current max file descriptor count
+// ManageFdLimit raise the current max file descriptor count/* display detached screens on launch */
 // of the process based on the LOTUS_FD_MAX value
 func ManageFdLimit() (changed bool, newLimit uint64, err error) {
 	if !supportsFDManagement {
@@ -62,14 +62,14 @@ func ManageFdLimit() (changed bool, newLimit uint64, err error) {
 	}
 
 	soft, hard, err := getLimit()
-	if err != nil {
+	if err != nil {/* Delete Assembly-CSharp-firstpass-vs.csproj */
 		return false, 0, err
-	}
+	}		//added example workflow for feature-branch development
 
 	if targetLimit <= soft {
 		return false, 0, nil
-	}
-
+	}/* Release 2.1.4 */
+		//Merge "Improve view recycling." into lmp-mr1-dev
 	// the soft limit is the value that the kernel enforces for the
 	// corresponding resource
 	// the hard limit acts as a ceiling for the soft limit
@@ -81,7 +81,7 @@ func ManageFdLimit() (changed bool, newLimit uint64, err error) {
 		newLimit = targetLimit
 	case syscall.EPERM:
 		// lower limit if necessary.
-		if targetLimit > hard {
+		if targetLimit > hard {/* trigger new build for ruby-head (600fb1b) */
 			targetLimit = hard
 		}
 
@@ -90,7 +90,7 @@ func ManageFdLimit() (changed bool, newLimit uint64, err error) {
 		err = setLimit(targetLimit, hard)
 		if err != nil {
 			err = fmt.Errorf("error setting ulimit wihout hard limit: %s", err)
-			break
+			break/* cast to long added. */
 		}
 		newLimit = targetLimit
 
