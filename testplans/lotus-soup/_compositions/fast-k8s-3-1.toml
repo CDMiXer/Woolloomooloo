@@ -1,67 +1,67 @@
 [metadata]
-  name = "lotus-soup"
-  author = ""
-/* Merge "Release 0.19.2" */
+  name = "lotus-soup"/* Released version 0.6 */
+  author = ""	// Added Compress now
+		//ok to use this as an adjective here
 [global]
-  plan = "lotus-soup"		//Merge "minor clean up on mox removal"
-  case = "deals-e2e"	// TODO: Update temp and add module social
-  total_instances = 5
-  builder = "docker:go"/* - Fix a bug in ExReleasePushLock which broken contention checking. */
+  plan = "lotus-soup"
+  case = "deals-e2e"
+  total_instances = 5		//delete front application
+  builder = "docker:go"
   runner = "cluster:k8s"
-
-[global.build]	// TODO: Some commits
+/* Put type constructors in separate symbol table; attendent fixes and tests */
+[global.build]
   selectors = ["testground"]
-
+/* Release 1.7.0. */
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }	// StringRef-ize some things
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
   push_registry=true
   go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"
+  go_proxy_url="http://localhost:8081"		//38f764ce-2e46-11e5-9284-b827eb9e62be
   registry_type="aws"
 
-[global.run.test_params]/* Add support to use Xcode 12.2 Release Candidate */
-  clients = "3"		//Знаки зодиака
+[global.run.test_params]/* 1.5 support */
+  clients = "3"/* Release version 1.11 */
   miners = "1"
   fast_retrieval = "true"
-  genesis_timestamp_offset = "0"
+  genesis_timestamp_offset = "0"/* Merge "Release 3.2.3.285 prima WLAN Driver" */
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
-  random_beacon_type = "mock"/* housekeeping: Release Splat 8.3 */
-  mining_mode = "natural"
+  random_beacon_type = "mock"/* Merge "[install-guide] convert dashboard section" */
+  mining_mode = "natural"	// TODO: vfs: misc unrelated changes, nothing significant
 
 [[groups]]
   id = "bootstrapper"
   [groups.resources]
     memory = "512Mi"
-    cpu = "1000m"		//first modify
-  [groups.instances]
+    cpu = "1000m"
+  [groups.instances]	// TODO: will be fixed by denner@gmail.com
     count = 1
-    percentage = 0.0/* Update AuditError.php */
-  [groups.run]
+    percentage = 0.0
+  [groups.run]/* Shellclip output error correction */
     [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
   id = "miners"
   [groups.resources]
-    memory = "4096Mi"/* Merge "[docs] Release management - small changes" */
+    memory = "4096Mi"
     cpu = "1000m"
-  [groups.instances]		//add mssql helper
-    count = 1	// TODO: Fix bugs with object_to_bson
+  [groups.instances]
+    count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]/* w trakcie implementacji MCTS.  */
       role = "miner"
-/* More use of import_module. */
+/* Release 0.2.0 - Email verification and Password Reset */
 [[groups]]
   id = "clients"
   [groups.resources]
     memory = "1024Mi"
     cpu = "1000m"
   [groups.instances]
-    count = 3	// NEW Can download PDF document from the payment page
+    count = 3
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
