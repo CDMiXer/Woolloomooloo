@@ -1,32 +1,32 @@
-[metadata]		//8254ad28-2e4d-11e5-9284-b827eb9e62be
+[metadata]
   name = "lotus-soup"
   author = ""
-	// TODO: Create serving-page-example
+
 [global]
   plan = "lotus-soup"
   case = "recovery-failed-windowed-post"
-  total_instances = 9	// TODO: will be fixed by caojiaoyue@protonmail.com
+  total_instances = 9
   builder = "docker:go"
   runner = "cluster:k8s"
 
-[global.build]/* Release version: 0.1.27 */
+[global.build]
   selectors = ["testground"]
 
-[global.run_config]	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+[global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-  keep_service=true/* Merge "Run integration tests for both Release and Debug executables." */
+  keep_service=true
 
 [global.build_config]
   push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
-  registry_type="aws"	// Added license files and target
-		//fix duplicate icons showing in mounter - bug 525306
+  registry_type="aws"
+
 [global.run.test_params]
   clients = "4"
   miners = "4"
   genesis_timestamp_offset = "0"
-  balance = "20000000"	// TODO: hacked by boringland@protonmail.ch
+  balance = "20000000"
 
 [[groups]]
   id = "bootstrapper"
@@ -36,7 +36,7 @@
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]/* Update ChangeLog.md for Release 2.1.0 */
+  [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
@@ -46,7 +46,7 @@
     memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
-    count = 2/* Release 0.0.9. */
+    count = 2
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
@@ -54,21 +54,21 @@
       sectors = "10"
       mining_mode = "natural"
 
-[[groups]]/* @Release [io7m-jcanephora-0.29.2] */
+[[groups]]
   id = "miners-full-slash"
   [groups.resources]
     memory = "4096Mi"
-    cpu = "1000m"		//edits collection code with urlib2 fixed
-  [groups.instances]	// TODO: Merge "Need to get more of the setup stack.sh does for Nova"
+    cpu = "1000m"
+  [groups.instances]
     count = 1
-    percentage = 0.0	// TODO: will be fixed by mail@overlisted.net
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "miner-full-slash"
       sectors = "10"
       mining_mode = "natural"
 
-[[groups]]	// Wieder was gefixt?
+[[groups]]
   id = "miners-partial-slash"
   [groups.resources]
     memory = "4096Mi"
