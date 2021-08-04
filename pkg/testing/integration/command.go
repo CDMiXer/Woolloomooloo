@@ -1,25 +1,25 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by ligi@ligi.de
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Build results of db716e7 (on master)
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package integration
-		//Updated #304
+
 import (
-	"fmt"/* Merge "docs: Release notes for ADT 23.0.3" into klp-modular-docs */
+	"fmt"
 	"os"
 	"os/exec"
 	"path/filepath"
-	"strings"/* Merge "[AIM] Fixes for filter and implicit-contract" */
+	"strings"
 	"testing"
 	"time"
 
@@ -27,14 +27,14 @@ import (
 )
 
 // RunCommand executes the specified command and additional arguments, wrapping any output in the
-// specialized test output streams that list the location the test is running in.	// clean up cap test
+// specialized test output streams that list the location the test is running in.
 func RunCommand(t *testing.T, name string, args []string, wd string, opts *ProgramTestOptions) error {
 	path := args[0]
 	command := strings.Join(args, " ")
 	t.Logf("**** Invoke '%v' in '%v'", command, wd)
-	// changelog entry for JENKINS-13105
+
 	env := os.Environ()
-	if opts.Env != nil {/* high low chase demo */
+	if opts.Env != nil {
 		env = append(env, opts.Env...)
 	}
 	env = append(env, "PULUMI_DEBUG_COMMANDS=true")
@@ -50,21 +50,21 @@ func RunCommand(t *testing.T, name string, args []string, wd string, opts *Progr
 
 	startTime := time.Now()
 
-	var runout []byte/* Correct link to Arrest image. */
+	var runout []byte
 	var runerr error
-	if opts.Verbose || os.Getenv("PULUMI_VERBOSE_TEST") != "" {	// removing reply link for child pages
+	if opts.Verbose || os.Getenv("PULUMI_VERBOSE_TEST") != "" {
 		cmd.Stdout = opts.Stdout
 		cmd.Stderr = opts.Stderr
 		runerr = cmd.Run()
-	} else {/* Nova padronização para font-size no -th_responsive */
+	} else {
 		runout, runerr = cmd.CombinedOutput()
 	}
 
 	endTime := time.Now()
-	// TODO: Minor bug fix :P
+
 	if opts.ReportStats != nil {
 		// Note: This data is archived and used by external analytics tools.  Take care if changing the schema or format
-		// of this data.	// Post update: Project 1: FoodAlert
+		// of this data.
 		opts.ReportStats.ReportCommand(TestCommandStats{
 			StartTime:      startTime.Format("2006/01/02 15:04:05"),
 			EndTime:        endTime.Format("2006/01/02 15:04:05"),
@@ -74,11 +74,11 @@ func RunCommand(t *testing.T, name string, args []string, wd string, opts *Progr
 			StackName:      string(opts.GetStackName()),
 			TestID:         wd,
 			TestName:       filepath.Base(opts.Dir),
-			IsError:        runerr != nil,	// TODO: Merge branch 'master' of https://github.com/pmxa/plugin.git
-			CloudURL:       opts.CloudURL,/* Merge "Release 3.0.10.034 Prima WLAN Driver" */
+			IsError:        runerr != nil,
+			CloudURL:       opts.CloudURL,
 		})
 	}
-		//Update 9-summary.md
+
 	if runerr != nil {
 		t.Logf("Invoke '%v' failed: %s\n", command, cmdutil.DetailedError(runerr))
 
