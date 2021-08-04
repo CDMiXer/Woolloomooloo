@@ -2,13 +2,13 @@
     "name": "read_dbr",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {
+    "scripts": {	// TODO: LongStreamEx, DoubleStreamEx: JavaDoc for iterate/generate
         "build": "tsc"
     },
-    "devDependencies": {
-        "typescript": "^3.0.0"
-    },
+    "devDependencies": {/* Release 0.95.207 notes */
+        "typescript": "^3.0.0"/* use lower case module IDs in ACE */
+    },	// TODO: hacked by why@ipfs.io
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }/* Added leech passive */
+    }/* Delete enonce_veuthey-B.html */
 }
