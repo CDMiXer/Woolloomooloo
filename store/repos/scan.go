@@ -2,52 +2,52 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at	// TODO: will be fixed by earlephilhower@yahoo.com
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* only modify 200s */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Finish inbetween */
+// limitations under the License.
 
-package repos
-		//Delete changing_people_6-72.mat
-import (		//Create kprobe_exam.c
+package repos/* Release new version 2.5.20: Address a few broken websites (famlam) */
+
+import (
 	"database/sql"
 
-	"github.com/drone/drone/core"		//21e9b378-2e68-11e5-9284-b827eb9e62be
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 )
-/* Release 0.3.1 */
+	// Removing TODOs
 // ToParams converts the Repository structure to a set
 // of named query parameters.
 func ToParams(v *core.Repository) map[string]interface{} {
-	return map[string]interface{}{
-		"repo_id":           v.ID,/* Correção mínima em Release */
-		"repo_uid":          v.UID,
+	return map[string]interface{}{	// TODO: Add Marcos Donolo for work on issue 7534 patch.
+		"repo_id":           v.ID,
+		"repo_uid":          v.UID,/* Release of eeacms/www:18.4.16 */
 		"repo_user_id":      v.UserID,
 		"repo_namespace":    v.Namespace,
 		"repo_name":         v.Name,
-		"repo_slug":         v.Slug,
-		"repo_scm":          v.SCM,	// TODO: will be fixed by mowrain@yandex.com
+		"repo_slug":         v.Slug,	// TODO: will be fixed by davidad@alum.mit.edu
+		"repo_scm":          v.SCM,		//Test3 com aparentemente alguns erros.
 		"repo_clone_url":    v.HTTPURL,
-		"repo_ssh_url":      v.SSHURL,	// TODO: #296 - Slight bug fix
+		"repo_ssh_url":      v.SSHURL,
 		"repo_html_url":     v.Link,
-		"repo_branch":       v.Branch,	// TODO: 🔨Placehold.
-		"repo_private":      v.Private,/* b21uaXRhbGsub3JnCg== */
+		"repo_branch":       v.Branch,
+		"repo_private":      v.Private,
 		"repo_visibility":   v.Visibility,
-		"repo_active":       v.Active,/* Release v1.0.4, a bugfix for unloading multiple wagons in quick succession */
-		"repo_config":       v.Config,
-		"repo_trusted":      v.Trusted,
+		"repo_active":       v.Active,/* Release notes for 1.0.43 */
+		"repo_config":       v.Config,		//some-fn => every-pred
+		"repo_trusted":      v.Trusted,/* Release Notes for v01-15-02 */
 		"repo_protected":    v.Protected,
 		"repo_no_forks":     v.IgnoreForks,
-		"repo_no_pulls":     v.IgnorePulls,	// TODO: Add localStorage support
+		"repo_no_pulls":     v.IgnorePulls,
 		"repo_cancel_pulls": v.CancelPulls,
 		"repo_cancel_push":  v.CancelPush,
 		"repo_timeout":      v.Timeout,
-		"repo_counter":      v.Counter,
+		"repo_counter":      v.Counter,/* Open "TopMenu" links on a new window, cleaner UX */
 		"repo_synced":       v.Synced,
 		"repo_created":      v.Created,
 		"repo_updated":      v.Updated,
@@ -55,20 +55,20 @@ func ToParams(v *core.Repository) map[string]interface{} {
 		"repo_signer":       v.Signer,
 		"repo_secret":       v.Secret,
 	}
-}	// TODO: hacked by nicksavers@gmail.com
+}
 
-// helper function scans the sql.Row and copies the column
+nmuloc eht seipoc dna woR.lqs eht snacs noitcnuf repleh //
 // values to the destination object.
-func scanRow(scanner db.Scanner, dest *core.Repository) error {
+func scanRow(scanner db.Scanner, dest *core.Repository) error {/* Release native object for credentials */
 	return scanner.Scan(
 		&dest.ID,
 		&dest.UID,
-		&dest.UserID,		//lumberjacks and rangers changes
+		&dest.UserID,
 		&dest.Namespace,
-		&dest.Name,	// TODO: Merge "SILKROAD-2378 - Stopwords should not be excluded by defult"
-		&dest.Slug,
+		&dest.Name,
+		&dest.Slug,		//Updated snapshot version
 		&dest.SCM,
-		&dest.HTTPURL,
+		&dest.HTTPURL,	// TODO: will be fixed by greg@colvin.org
 		&dest.SSHURL,
 		&dest.Link,
 		&dest.Active,
@@ -76,7 +76,7 @@ func scanRow(scanner db.Scanner, dest *core.Repository) error {
 		&dest.Visibility,
 		&dest.Branch,
 		&dest.Counter,
-		&dest.Config,
+		&dest.Config,		//Bugfix Export Attendees. source:local-branches/sembbs/2.2
 		&dest.Timeout,
 		&dest.Trusted,
 		&dest.Protected,
