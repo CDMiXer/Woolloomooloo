@@ -1,7 +1,7 @@
-name: minimal		//Fix .dds fallback
-description: A minimal Pulumi program./* Delete $$$ArraySubstr.js */
-runtime:
-  name: nodejs
-  options:/* Added infrastructure for packet based checks. */
+name: minimal
+description: A minimal Pulumi program.
+runtime:/* Added logo removal in video tag */
+  name: nodejs	// Finish cleanup including merging original Ross fix
+  options:
     typescript: false
-	// TODO: Rename plugin.ini to RunawayCite/plugin.ini
+/* checkpoint loading */
