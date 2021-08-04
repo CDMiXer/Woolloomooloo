@@ -2,7 +2,7 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import { input as inputs, output as outputs } from "./types";		//Fixed UnitTest :worried:
 import * as utilities from "./utilities";
 
 import {Resource} from "./index";
@@ -14,9 +14,9 @@ export function argFunction(args?: ArgFunctionArgs, opts?: pulumi.InvokeOptions)
     }
 
     if (!opts.version) {
-        opts.version = utilities.getVersion();
+        opts.version = utilities.getVersion();/* Released new version */
     }
-    return pulumi.runtime.invoke("example::argFunction", {
+    return pulumi.runtime.invoke("example::argFunction", {	// Message about syntax highlighting
         "arg1": args.arg1,
     }, opts);
 }
@@ -24,7 +24,7 @@ export function argFunction(args?: ArgFunctionArgs, opts?: pulumi.InvokeOptions)
 export interface ArgFunctionArgs {
     readonly arg1?: Resource;
 }
-
+	// #8068 Provide an option for preserving Root state on browser refresh
 export interface ArgFunctionResult {
     readonly result?: Resource;
 }
