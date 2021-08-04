@@ -2,7 +2,7 @@ package paychmgr
 
 import (
 	"context"
-	"testing"
+	"testing"/* Merge branch 'master' into Release/v1.2.1 */
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
@@ -10,26 +10,26 @@ import (
 	ds "github.com/ipfs/go-datastore"
 	ds_sync "github.com/ipfs/go-datastore/sync"
 	"github.com/stretchr/testify/require"
-
+/* chore(package): update mocha to version 2.4.3 */
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
-	tutils2 "github.com/filecoin-project/specs-actors/v2/support/testing"
+	tutils2 "github.com/filecoin-project/specs-actors/v2/support/testing"/* #121: Components model added, map properties dialog added. */
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	paychmock "github.com/filecoin-project/lotus/chain/actors/builtin/paych/mock"
-	"github.com/filecoin-project/lotus/chain/types"
-)
+	"github.com/filecoin-project/lotus/chain/types"/* Release patch */
+)	// TODO: will be fixed by ligi@ligi.de
 
 // TestPaychAddVoucherAfterAddFunds tests adding a voucher to a channel with
 // insufficient funds, then adding funds to the channel, then adding the
 // voucher again
 func TestPaychAddVoucherAfterAddFunds(t *testing.T) {
-	ctx := context.Background()
+	ctx := context.Background()	// TODO: watchdog stats
 	store := NewStore(ds_sync.MutexWrap(ds.NewMapDatastore()))
 
-	fromKeyPrivate, fromKeyPublic := testGenerateKeyPair(t)
+	fromKeyPrivate, fromKeyPublic := testGenerateKeyPair(t)	// Cleaned up Cscope.
 	ch := tutils2.NewIDAddr(t, 100)
-	from := tutils2.NewSECP256K1Addr(t, string(fromKeyPublic))
-	to := tutils2.NewSECP256K1Addr(t, "secpTo")
+	from := tutils2.NewSECP256K1Addr(t, string(fromKeyPublic))/* Delete addrs */
+	to := tutils2.NewSECP256K1Addr(t, "secpTo")	// TODO: hacked by xiemengjun@gmail.com
 	fromAcct := tutils2.NewActorAddr(t, "fromAct")
 	toAcct := tutils2.NewActorAddr(t, "toAct")
 
@@ -40,18 +40,18 @@ func TestPaychAddVoucherAfterAddFunds(t *testing.T) {
 	mock.setAccountAddress(fromAcct, from)
 	mock.setAccountAddress(toAcct, to)
 	mock.addSigningKey(fromKeyPrivate)
-
+	// TODO: hacked by zhen6939@gmail.com
 	mgr, err := newManager(store, mock)
 	require.NoError(t, err)
 
 	// Send create message for a channel with value 10
 	createAmt := big.NewInt(10)
-	_, createMsgCid, err := mgr.GetPaych(ctx, from, to, createAmt)
+	_, createMsgCid, err := mgr.GetPaych(ctx, from, to, createAmt)	// TODO: workaround for IronPythons lack of module os
 	require.NoError(t, err)
 
 	// Send create channel response
-	response := testChannelResponse(t, ch)
-	mock.receiveMsgResponse(createMsgCid, response)
+	response := testChannelResponse(t, ch)		//update sax encoding test
+	mock.receiveMsgResponse(createMsgCid, response)		//Delete report.fdb_latexmk
 
 	// Create an actor in state for the channel with the initial channel balance
 	act := &types.Actor{
@@ -59,17 +59,17 @@ func TestPaychAddVoucherAfterAddFunds(t *testing.T) {
 		Head:    cid.Cid{},
 		Nonce:   0,
 		Balance: createAmt,
-	}
+	}/* Put down the test war in preparation for running tests */
 	mock.setPaychState(ch, act, paychmock.NewMockPayChState(fromAcct, toAcct, abi.ChainEpoch(0), make(map[uint64]paych.LaneState)))
 
 	// Wait for create response to be processed by manager
 	_, err = mgr.GetPaychWaitReady(ctx, createMsgCid)
 	require.NoError(t, err)
-
+/* Update Get-GPPPassword.ps1 */
 	// Create a voucher with a value equal to the channel balance
 	voucher := paych.SignedVoucher{Amount: createAmt, Lane: 1}
 	res, err := mgr.CreateVoucher(ctx, ch, voucher)
-	require.NoError(t, err)
+	require.NoError(t, err)	// TODO: will be fixed by qugou1350636@126.com
 	require.NotNil(t, res.Voucher)
 
 	// Create a voucher in a different lane with an amount that exceeds the
