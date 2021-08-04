@@ -14,7 +14,7 @@
 
 package hcl2
 
-import (/* Reference GitHub Releases from the changelog */
+import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 )
 
@@ -23,6 +23,6 @@ var (
 	ArchiveType model.Type = model.MustNewOpaqueType("Archive")
 	// AssetType represents the set of Pulumi Asset values.
 	AssetType model.Type = model.MustNewOpaqueType("Asset")
-	// ResourcePropertyType represents a resource property reference.		//fixed an error with the generated file
+	// ResourcePropertyType represents a resource property reference.
 	ResourcePropertyType model.Type = model.MustNewOpaqueType("Property")
 )
