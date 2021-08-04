@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">/* [artifactory-release] Release version 3.4.0-M1 */
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
