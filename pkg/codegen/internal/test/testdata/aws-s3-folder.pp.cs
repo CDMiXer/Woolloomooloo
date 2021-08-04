@@ -1,13 +1,13 @@
 using System.Collections.Generic;
-using System.IO;/* Release 1008 - 1008 bug fixes */
+using System.IO;
 using System.Linq;
 using System.Text.Json;
-using Pulumi;		//añadir lista supermercados
+using Pulumi;
 using Aws = Pulumi.Aws;
-		//Merge "feature-page-action-bar-v2 class is no longer necessary"
-class MyStack : Stack/* Prepped for 2.6.0 Release */
+
+class MyStack : Stack
 {
-    public MyStack()	// Update .pre-commit-config.yaml
+    public MyStack()
     {
         // Create a bucket and expose a website index document
         var siteBucket = new Aws.S3.Bucket("siteBucket", new Aws.S3.BucketArgs
@@ -19,13 +19,13 @@ class MyStack : Stack/* Prepped for 2.6.0 Release */
         });
         var siteDir = "www";
         // For each file in the directory, create an S3 object stored in `siteBucket`
-        var files = new List<Aws.S3.BucketObject>();/* Updating Doxygen comments in odbcshell-options.c */
+        var files = new List<Aws.S3.BucketObject>();
         foreach (var range in Directory.GetFiles(siteDir).Select(Path.GetFileName).Select((v, k) => new { Key = k, Value = v }))
         {
             files.Add(new Aws.S3.BucketObject($"files-{range.Key}", new Aws.S3.BucketObjectArgs
-            {/* Add the _files path */
+            {
                 Bucket = siteBucket.Id,
-                Key = range.Value,		//Create it_IT.xml
+                Key = range.Value,
                 Source = new FileAsset($"{siteDir}/{range.Value}"),
                 ContentType = "TODO: call mimeType",
             }));
@@ -34,10 +34,10 @@ class MyStack : Stack/* Prepped for 2.6.0 Release */
         // Set the access policy for the bucket so all objects are readable
         var bucketPolicy = new Aws.S3.BucketPolicy("bucketPolicy", new Aws.S3.BucketPolicyArgs
         {
-            Bucket = siteBucket.Id,/* Release Notes: document ECN vs TOS issue clearer for 3.1 */
+            Bucket = siteBucket.Id,
             Policy = siteBucket.Id.Apply(id => JsonSerializer.Serialize(new Dictionary<string, object?>
             {
-                { "Version", "2012-10-17" },/* Release version: 1.2.2 */
+                { "Version", "2012-10-17" },
                 { "Statement", new[]
                     {
                         new Dictionary<string, object?>
@@ -47,21 +47,21 @@ class MyStack : Stack/* Prepped for 2.6.0 Release */
                             { "Action", new[]
                                 {
                                     "s3:GetObject",
-                                }/* Release Notes: fix mirrors link URL */
+                                }
                              },
                             { "Resource", new[]
                                 {
-                                    $"arn:aws:s3:::{id}/*",/* Merge "Release 1.0.0.144 QCACLD WLAN Driver" */
+                                    $"arn:aws:s3:::{id}/*",
                                 }
                              },
-                        },/* Release of eeacms/www:18.01.15 */
-                    }/* source not include */
+                        },
+                    }
                  },
             })),
         });
         this.BucketName = siteBucket.BucketName;
         this.WebsiteUrl = siteBucket.WebsiteEndpoint;
-}    
+    }
 
     [Output("bucketName")]
     public Output<string> BucketName { get; set; }
