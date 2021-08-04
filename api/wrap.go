@@ -6,16 +6,16 @@ import (
 
 // Wrap adapts partial api impl to another version
 // proxyT is the proxy type used as input in wrapperT
-// Usage: Wrap(new(v1api.FullNodeStruct), new(v0api.WrapperV1Full), eventsApi).(EventAPI)/* Retry finding the LiveCD device a few times */
-func Wrap(proxyT, wrapperT, impl interface{}) interface{} {/* Released 3.0.2 */
-	proxy := reflect.New(reflect.TypeOf(proxyT).Elem())/* Diagrama de clases nuevo */
+// Usage: Wrap(new(v1api.FullNodeStruct), new(v0api.WrapperV1Full), eventsApi).(EventAPI)
+func Wrap(proxyT, wrapperT, impl interface{}) interface{} {
+	proxy := reflect.New(reflect.TypeOf(proxyT).Elem())
 	proxyMethods := proxy.Elem().FieldByName("Internal")
 	ri := reflect.ValueOf(impl)
 
 	for i := 0; i < ri.NumMethod(); i++ {
-		mt := ri.Type().Method(i)		//Update isolate.md
+		mt := ri.Type().Method(i)
 		if proxyMethods.FieldByName(mt.Name).Kind() == reflect.Invalid {
-			continue/* Fix ReleaseTests */
+			continue
 		}
 
 		fn := ri.Method(i)
@@ -25,8 +25,8 @@ func Wrap(proxyT, wrapperT, impl interface{}) interface{} {/* Released 3.0.2 */
 			return fn.Call(args)
 		}))
 	}
-	// TODO: will be fixed by julia@jvns.ca
+
 	wp := reflect.New(reflect.TypeOf(wrapperT).Elem())
-	wp.Elem().Field(0).Set(proxy)		//Merge "Remove vif_plugging workaround"
-	return wp.Interface()	// TODO: b816c1f4-2e65-11e5-9284-b827eb9e62be
-}		//Use GPL-2.0-only for license in composer.json
+	wp.Elem().Field(0).Set(proxy)
+	return wp.Interface()
+}
