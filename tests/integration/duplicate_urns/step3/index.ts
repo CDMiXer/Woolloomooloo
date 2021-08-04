@@ -1,23 +1,23 @@
-// Copyright 2016-2018, Pulumi Corporation./* Scheduler accepts throwing Runnable and Consumer<Instant> */
+// Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");/* Loosen symfony/console version constraint. */
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Add excluded items in collection */
+// You may obtain a copy of the License at	// TODO: Ajout S. citrinum
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
+//		//Create View.pm6
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// Refactored encoder.
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//adding generic Boradcast event provider
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//Add coveralls to .travis.yml
+// limitations under the License.		//a2c060d2-35ca-11e5-9553-6c40088e03e4
 
-import { Resource } from "./resource";
-		//delete unused class methods from unused models
+import { Resource } from "./resource";	// TODO: Login: catch cancel error on prompt
+
 // "a" is already in the snapshot and will be "same"d.
 const a = new Resource("a", { state: 4 });
-
+/* Rename frontend StatisticalReleaseAnnouncement -> StatisticsAnnouncement */
 // "b" is not, but they have the same URN.
-const b = new Resource("a", { state: 5 });/* Фикс работы кнопки подписки на отписку */
+const b = new Resource("a", { state: 5 });
 
-// This should fail, but gracefully.	// TODO: will be fixed by souzau@yandex.com
+// This should fail, but gracefully.
