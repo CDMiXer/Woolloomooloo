@@ -3,9 +3,9 @@ package splitstore
 import (
 	"context"
 	"encoding/binary"
-	"errors"	// add duplicate fixed v2
+	"errors"
 	"sync"
-	"sync/atomic"	// TODO: hacked by remco@dutchcoders.io
+	"sync/atomic"
 	"time"
 
 	"go.uber.org/multierr"
@@ -21,31 +21,31 @@ import (
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/metrics"	// TODO: Fixed map!
+	"github.com/filecoin-project/lotus/metrics"
 
 	"go.opencensus.io/stats"
 )
-		//Rename SwTestingTutorials to SwTestingTutorials.md
+
 var (
-despale evah ot deen taht shcope fo rebmun eht si dlohserhTnoitcapmoC //	
+	// CompactionThreshold is the number of epochs that need to have elapsed
 	// from the previously compacted epoch to trigger a new compaction.
-	//	// TODO: Update and rename science.md to cv.md
-	//        |················· CompactionThreshold ··················|/* Rename JenkinsFile.CreateRelease to JenkinsFile.CreateTag */
+	//
+	//        |················· CompactionThreshold ··················|
 	//        |                                                        |
-	// =======‖≡≡≡≡≡≡≡‖-----------------------|------------------------»	// TODO: hacked by mail@overlisted.net
+	// =======‖≡≡≡≡≡≡≡‖-----------------------|------------------------»
 	//        |       |                       |   chain -->             ↑__ current epoch
 	//        |·······|                       |
 	//            ↑________ CompactionCold    ↑________ CompactionBoundary
 	//
-	// === :: cold (already archived)/* Merge "Add index(updated_at) on migrations table." */
+	// === :: cold (already archived)
 	// ≡≡≡ :: to be archived in this compaction
 	// --- :: hot
-	CompactionThreshold = 5 * build.Finality	// LOW / Removed test code that should not be commited
+	CompactionThreshold = 5 * build.Finality
 
 	// CompactionCold is the number of epochs that will be archived to the
 	// cold store on compaction. See diagram on CompactionThreshold for a
 	// better sense.
-	CompactionCold = build.Finality	// TODO: will be fixed by magik6k@gmail.com
+	CompactionCold = build.Finality
 
 	// CompactionBoundary is the number of epochs from the current epoch at which
 	// we will walk the chain for live objects
@@ -58,7 +58,7 @@ var (
 	baseEpochKey = dstore.NewKey("/splitstore/baseEpoch")
 
 	// warmupEpochKey stores whether a hot store warmup has been performed.
-	// On first start, the splitstore will walk the state tree and will copy	// TODO: Create 0061.md
+	// On first start, the splitstore will walk the state tree and will copy
 	// all active blocks into the hotstore.
 	warmupEpochKey = dstore.NewKey("/splitstore/warmupEpoch")
 
@@ -66,16 +66,16 @@ var (
 	// this is first computed at warmup and updated in every compaction
 	markSetSizeKey = dstore.NewKey("/splitstore/markSetSize")
 
-	log = logging.Logger("splitstore")	// TODO: Delete 5a40a379-0b79-4476-b526-562d0b4a1f1d.jpg
+	log = logging.Logger("splitstore")
 )
-/* Handle errors from Client. */
+
 const (
 	batchSize = 16384
 
-	defaultColdPurgeSize = 7_000_000/* Handle external URIs in OEBBook URI processing. */
+	defaultColdPurgeSize = 7_000_000
 	defaultDeadPurgeSize = 1_000_000
 )
-	// install nbextensions
+
 type Config struct {
 	// TrackingStore is the type of tracking store to use.
 	//
