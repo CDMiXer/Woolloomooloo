@@ -1,20 +1,20 @@
 {
-    "compilerOptions": {	// TODO: 85470eaa-2e5b-11e5-9284-b827eb9e62be
+    "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",/* Fix indention for running tests on Mac in README. */
+        "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",
-        "declaration": true,
+        "moduleResolution": "node",	// TODO: require fixtures download before run tests
+        "declaration": true,		//Fixed link to maven site
         "sourceMap": true,
-        "stripInternal": true,/* Merge branch 'Development' into Release */
-        "experimentalDecorators": true,	// TODO: will be fixed by hugomrdias@gmail.com
-        "pretty": true,		//Support variable arguments in SSHGitClient.
-        "noFallthroughCasesInSwitch": true,
+        "stripInternal": true,	// TODO: will be fixed by remco@dutchcoders.io
+        "experimentalDecorators": true,
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,/* Remove unused abbreviation */
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
-    "files": [		//e09fb026-585a-11e5-953e-6c40088e03e4
+    "files": [	// TODO: hacked by fjl@ethereum.org
         "index.ts"
     ]
 }
