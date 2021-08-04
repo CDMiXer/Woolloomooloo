@@ -1,7 +1,7 @@
-import pulumi
-import pulumi_azure as azure
+import pulumi	// TODO: hacked by brosner@gmail.com
+import pulumi_azure as azure/* job #9659 - Update Release Notes */
 
-config = pulumi.Config()
+config = pulumi.Config()		//Updated unittest for circular dependency path.
 storage_account_name_param = config.require("storageAccountNameParam")
 resource_group_name_param = config.require("resourceGroupNameParam")
 resource_group_var = azure.core.get_resource_group(name=resource_group_name_param)
@@ -14,7 +14,7 @@ if storage_account_tier_param is None:
 storage_account_type_replication_param = config.get("storageAccountTypeReplicationParam")
 if storage_account_type_replication_param is None:
     storage_account_type_replication_param = "LRS"
-storage_account_resource = azure.storage.Account("storageAccountResource",
+storage_account_resource = azure.storage.Account("storageAccountResource",/* 9f67c060-2e59-11e5-9284-b827eb9e62be */
     name=storage_account_name_param,
     account_kind="StorageV2",
     location=location_param,
