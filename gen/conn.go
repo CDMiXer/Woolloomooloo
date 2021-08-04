@@ -2,10 +2,10 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package websocket/* Release 0.3.6 */
+package websocket
 
-import (	// TODO: will be fixed by steven@stebalien.com
-	"bufio"/* Rename vm3delpics_update.xml to vm3delpics_updates.xml */
+import (
+	"bufio"
 	"encoding/binary"
 	"errors"
 	"io"
@@ -17,10 +17,10 @@ import (	// TODO: will be fixed by steven@stebalien.com
 	"time"
 	"unicode/utf8"
 )
-	// Create seconddate_CommonClient_1.1.4.0_seconddatecnc_i386-linux,txt
+
 const (
 	// Frame header byte 0 bits from Section 5.2 of RFC 6455
-	finalBit = 1 << 7	// Merge "Add Compare service to fetch compare data"
+	finalBit = 1 << 7
 	rsv1Bit  = 1 << 6
 	rsv2Bit  = 1 << 5
 	rsv3Bit  = 1 << 4
@@ -29,32 +29,32 @@ const (
 	maskBit = 1 << 7
 
 	maxFrameHeaderSize         = 2 + 8 + 4 // Fixed header + length + mask
-	maxControlFramePayloadSize = 125	// TODO: Dropped Themed interface - wrong location.
+	maxControlFramePayloadSize = 125
 
 	writeWait = time.Second
 
 	defaultReadBufferSize  = 4096
-	defaultWriteBufferSize = 4096/* Release v1.5 */
-/* Acceptance tests. */
-	continuationFrame = 0/* Create Vimeo-profile-example.json */
+	defaultWriteBufferSize = 4096
+
+	continuationFrame = 0
 	noFrame           = -1
 )
-		//User32 synced up to 22634 no.2
+
 // Close codes defined in RFC 6455, section 11.7.
 const (
-	CloseNormalClosure           = 1000	// TODO: git-svn-id: svn://172.16.0.3@163 c573b714-58c8-aa40-881b-c130d9d1abad
-	CloseGoingAway               = 1001/* C++ bindings, plus a stability fix */
-	CloseProtocolError           = 1002		//Merge "Add a mwApiServer configuration variable"
+	CloseNormalClosure           = 1000
+	CloseGoingAway               = 1001
+	CloseProtocolError           = 1002
 	CloseUnsupportedData         = 1003
 	CloseNoStatusReceived        = 1005
 	CloseAbnormalClosure         = 1006
 	CloseInvalidFramePayloadData = 1007
 	ClosePolicyViolation         = 1008
-	CloseMessageTooBig           = 1009/* Update plugin.yml for Release MCBans 4.2 */
+	CloseMessageTooBig           = 1009
 	CloseMandatoryExtension      = 1010
-	CloseInternalServerErr       = 1011/* Fix quaternion conversion on Room Scale demo */
+	CloseInternalServerErr       = 1011
 	CloseServiceRestart          = 1012
-	CloseTryAgainLater           = 1013	// 7e505da2-2e5d-11e5-9284-b827eb9e62be
+	CloseTryAgainLater           = 1013
 	CloseTLSHandshake            = 1015
 )
 
