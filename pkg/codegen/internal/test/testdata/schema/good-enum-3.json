@@ -1,17 +1,17 @@
 {
-  "types": {	// Create spoj_01.py
-    "fake-provider:module1:Boolean": {/* Release v0.39.0 */
-      "type": "boolean",
+  "types": {
+    "fake-provider:module1:Boolean": {
+      "type": "boolean",	// TODO: hacked by hello@brooklynzelenka.com
       "enum": [
         {
           "value": true,
           "name": "One"
-        },/* Escaped subl link */
+        },
         {
-          "value": false,		//Merge "enginefacade: 'bw_usage', 'vol_usage' and 's3_image'"
+          "value": false,
           "name": "Zero"
         }
-      ]
+      ]		//daemon: Fix corens3 examples install directory.
     }
-  }
+  }	// TODO: Added spike damage control
 }
