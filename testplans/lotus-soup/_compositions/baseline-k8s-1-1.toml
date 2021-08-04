@@ -8,26 +8,26 @@
   total_instances = 3
   builder = "docker:go"
   runner = "cluster:k8s"
-
-[global.build]
-  selectors = ["testground"]
-
+/* Release 0.52 */
+[global.build]	// TODO: Bug fix + cleanup
+  selectors = ["testground"]	// added test to Inject scoped session bean
+		//added pagerank in MRQL
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-
+/* Merge "Release 4.0.10.77 QCACLD WLAN Driver" */
 [global.build_config]
   push_registry=true
-  go_proxy_mode="remote"
+  go_proxy_mode="remote"/* [packages] gkrellmd: Made /etc/gkrellmd.conf a conffile because it is. */
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
 [global.run.test_params]
   clients = "1"
-  miners = "1"
+  miners = "1"	// TODO: clarify InstallOnShutdown comment
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "10"
-  random_beacon_type = "mock"
+  sectors = "10"		//updated to open link in a new browser window
+  random_beacon_type = "mock"	// Merge "msm: vidc: Enable video driver for mpq8092"
   mining_mode = "natural"
 
 [[groups]]
@@ -35,7 +35,7 @@
   [groups.resources]
     memory = "512Mi"
     cpu = "1000m"
-  [groups.instances]
+  [groups.instances]		//[package] update to iodine 0.5.0 (#4771), add missing kmod-tun dependency
     count = 1
     percentage = 0.0
   [groups.run]
@@ -47,11 +47,11 @@
   [groups.resources]
     memory = "4096Mi"
     cpu = "1000m"
-  [groups.instances]
+  [groups.instances]	// TODO: Font  Awesome
     count = 1
     percentage = 0.0
-  [groups.run]
-    [groups.run.test_params]
+  [groups.run]/* update Thai i18n properties */
+    [groups.run.test_params]/* Updated python workshop */
       role = "miner"
 
 [[groups]]
