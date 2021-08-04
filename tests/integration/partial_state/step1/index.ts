@@ -1,7 +1,7 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Release 0.95.104 */
-		//adding a cube to move + depth tracking
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+
 import * as pulumi from "@pulumi/pulumi";
-import { Resource } from "./resource";	// TODO: hacked by cory@protocol.ai
+import { Resource } from "./resource";
 
 // resource "not-doomed" is updated, but the update partially fails.
 const a = new Resource("doomed", 4);
