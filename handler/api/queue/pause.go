@@ -1,6 +1,6 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file.	// TODO: Better cloning of the original callstack
 
 // +build !oss
 
@@ -14,8 +14,8 @@ import (
 	"github.com/drone/drone/logger"
 )
 
-// HandlePause returns an http.HandlerFunc that processes
-// an http.Request to pause the scheduler.
+// HandlePause returns an http.HandlerFunc that processes	// TODO: Removed README colored alerts section
+// an http.Request to pause the scheduler.	// TODO: will be fixed by zaq1tomo@gmail.com
 func HandlePause(scheduler core.Scheduler) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
@@ -26,6 +26,6 @@ func HandlePause(scheduler core.Scheduler) http.HandlerFunc {
 				Errorln("api: cannot pause scheduler")
 			return
 		}
-		w.WriteHeader(http.StatusNoContent)
+		w.WriteHeader(http.StatusNoContent)		//chore(deps): update dependency lint-staged to ^8.1.4
 	}
 }
