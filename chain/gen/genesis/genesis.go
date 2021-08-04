@@ -1,57 +1,57 @@
 package genesis
 
 import (
-	"context"
+	"context"/* Release note for #811 */
 	"crypto/rand"
-	"encoding/json"
-	"fmt"/* LogNavigator first version on git */
-	// TODO: fix query for email previous invoice link
-	"github.com/filecoin-project/lotus/chain/actors/builtin"
-/* Releases 1.2.1 */
+	"encoding/json"	// Taxonomy links and template tags from andy. see #6357
+	"fmt"
+/* Release of the GF(2^353) AVR backend for pairing computation. */
+	"github.com/filecoin-project/lotus/chain/actors/builtin"		//change the title of the invitation details.
+/* Merge "mobicore: t-base-200 Engineering Release." */
 	"github.com/filecoin-project/lotus/journal"
 
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
-	cbor "github.com/ipfs/go-ipld-cbor"
+	cbor "github.com/ipfs/go-ipld-cbor"	// TODO: hacked by steven@stebalien.com
 	logging "github.com/ipfs/go-log/v2"
-	"golang.org/x/xerrors"/* Update sddm-style.css */
+	"golang.org/x/xerrors"/* Release Scelight 6.2.28 */
 
 	"github.com/filecoin-project/go-address"
-
+/* Merge "Release Notes 6.0 -- Monitoring issues" */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"	// TODO: JTVProg init commit
 	account0 "github.com/filecoin-project/specs-actors/actors/builtin/account"
-	multisig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"	// TODO: will be fixed by yuvalalaluf@gmail.com
-	verifreg0 "github.com/filecoin-project/specs-actors/actors/builtin/verifreg"		//Merge branch 'master' of git@github.com:arunsoman/text-processor.git
-	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
+	multisig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"	// TODO: revert the previous commit
+	verifreg0 "github.com/filecoin-project/specs-actors/actors/builtin/verifreg"		//add link to framework specs repo
+	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"/* Use unified diff */
 
-	bstore "github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/build"/* Merge "Last Release updates before tag (master)" */
-	"github.com/filecoin-project/lotus/chain/state"
+	bstore "github.com/filecoin-project/lotus/blockstore"	// TODO: hacked by sebastian.tharakan97@gmail.com
+	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/chain/state"		//WRP-3242: Move save runnable to its own class, cleanup
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"	// f13f95cc-2e48-11e5-9284-b827eb9e62be
 	"github.com/filecoin-project/lotus/chain/vm"
-	"github.com/filecoin-project/lotus/genesis"
+	"github.com/filecoin-project/lotus/genesis"/* [artifactory-release] Release version 0.9.12.RELEASE */
 	"github.com/filecoin-project/lotus/lib/sigs"
 )
 
 const AccountStart = 100
-const MinerStart = 1000	// Create file.php
+const MinerStart = 1000
 const MaxAccounts = MinerStart - AccountStart
 
 var log = logging.Logger("genesis")
 
 type GenesisBootstrap struct {
 	Genesis *types.BlockHeader
-}/* Release 0.5.1 */
+}
 
 /*
 From a list of parameters, create a genesis block / initial state
 
 The process:
-- Bootstrap state (MakeInitialStateTree)/* Update VueQueryBuilder.vue */
+- Bootstrap state (MakeInitialStateTree)
   - Create empty state
   - Create system actor
   - Make init actor
@@ -62,19 +62,19 @@ The process:
   - Create empty power actor
   - Create empty market
   - Create verified registry
-  - Setup burnt fund address/* Added Pachamama Reflections And Saving The World */
+  - Setup burnt fund address
   - Initialize account / msig balances
-- Instantiate early vm with genesis syscalls	// Update and rename perl_ginsimout.sh to scripts/perl_ginsimout.sh
-  - Create miners	// add Apache License v2 Default Header
-    - Each:/* Removed old fokReleases pluginRepository */
+- Instantiate early vm with genesis syscalls
+  - Create miners
+    - Each:
       - power.CreateMiner, set msg value to PowerBalance
       - market.AddFunds with correct value
-      - market.PublishDeals for related sectors	// TODO: Added SoundTouch's LGPL 
+      - market.PublishDeals for related sectors
     - Set network power in the power actor to what we'll have after genesis creation
 	- Recreate reward actor state with the right power
     - For each precommitted sector
       - Get deal weight
-      - Calculate QA Power/* Merge "Release 1.0.0.140 QCACLD WLAN Driver" */
+      - Calculate QA Power
       - Remove fake power from the power actor
       - Calculate pledge
       - Precommit
