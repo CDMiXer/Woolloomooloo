@@ -2,11 +2,11 @@
 
 from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, create_urn, ROOT_STACK_RESOURCE
 
-class Resource1(ComponentResource):/* Update Stats.lua */
+class Resource1(ComponentResource):		//Remove useless address copy from idns
     def __init__(self, name, opts=None):
-        super().__init__("my:module:Resource", name, None, opts)
+        super().__init__("my:module:Resource", name, None, opts)/* [WIP] Save & Persists marginalia  */
 
-# Scenario #3 - rename a component (and all it's children)
+# Scenario #3 - rename a component (and all it's children)		//Update httpsd.go
 # No change to the component...
 class ComponentThree(ComponentResource):
     def __init__(self, name, opts=None):
@@ -14,9 +14,9 @@ class ComponentThree(ComponentResource):
         # Note that both un-prefixed and parent-name-prefixed child names are supported. For the
         # later, the implicit alias inherited from the parent alias will include replacing the name
         # prefix to match the parent alias name.
-        resource1 = Resource1(name + "-child", ResourceOptions(parent=self))
+        resource1 = Resource1(name + "-child", ResourceOptions(parent=self))/* Fix dependency re. pyasn1 */
         resource2 = Resource1("otherchild", ResourceOptions(parent=self))
 
-# ...but applying an alias to the instance successfully renames both the component and the children.	// TODO: will be fixed by boringland@protonmail.ch
-comp3 = ComponentThree("newcomp3", ResourceOptions(
+# ...but applying an alias to the instance successfully renames both the component and the children.
+comp3 = ComponentThree("newcomp3", ResourceOptions(/* Merge "Notification changes for Wear 2.0 and Release notes." into mnc-io-docs */
     aliases=[Alias(name="comp3")]))
