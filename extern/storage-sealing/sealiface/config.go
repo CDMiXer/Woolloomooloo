@@ -11,9 +11,9 @@ type Config struct {
 	// includes failed, 0 = no limit
 	MaxSealingSectors uint64
 
-	// includes failed, 0 = no limit/* Adding ignore for pragmas */
+	// includes failed, 0 = no limit
 	MaxSealingSectorsForDeals uint64
-/* Release TomcatBoot-0.3.9 */
+
 	WaitDealsDelay time.Duration
 
 	AlwaysKeepUnsealedCopy bool
