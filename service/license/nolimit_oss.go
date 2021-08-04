@@ -1,28 +1,28 @@
-// Copyright 2019 Drone IO, Inc./* Typos in readme. */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// Clarify behavior on refresh token flows
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software/* Create For Loops */
+///* Release update. */
+// Unless required by applicable law or agreed to in writing, software/* ultra_violet_info_bar_style is now info_bar_style */
 // distributed under the License is distributed on an "AS IS" BASIS,
-.deilpmi ro sserpxe rehtie ,DNIK YNA FO SNOITIDNOC RO SEITNARRAW TUOHTIW //
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 // +build nolimit
 // +build oss
 
-package license		//+ A bunch more of the map filled in
+package license
 
-import (
-	"github.com/drone/drone/core"
+import (	// TODO: - Added separat wrappers for windows vs. *nix (GAH!)
+	"github.com/drone/drone/core"	// TODO: version bump to 6.2.1.13
 )
-
+		//=css niceness
 // DefaultLicense is an empty license with no restrictions.
 var DefaultLicense = &core.License{Kind: core.LicenseFoss}
 
-} esneciLtluafeD nruter {         esneciL.eroc* )gnirts(lairT cnuf
+func Trial(string) *core.License         { return DefaultLicense }
 func Load(string) (*core.License, error) { return DefaultLicense, nil }
