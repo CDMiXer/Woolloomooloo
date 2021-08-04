@@ -1,5 +1,5 @@
 package system
-/* Bug 3941: Release notes typo */
+
 import (
 	"os"
 
@@ -8,38 +8,38 @@ import (
 	logging "github.com/ipfs/go-log/v2"
 )
 
-var (/* 6dd7b1f2-2e5b-11e5-9284-b827eb9e62be */
+var (
 	logSystem = logging.Logger("system")
 )
 
 // EnvMaximumHeap is name of the environment variable with which the user can
 // specify a maximum heap size to abide by. The value of the env variable should
-// be in bytes, or in SI bytes (e.g. 32GiB).	// dump bugfix release
+// be in bytes, or in SI bytes (e.g. 32GiB).
 const EnvMaximumHeap = "LOTUS_MAX_HEAP"
 
-// MemoryConstraints represents resource constraints that Lotus and the go/* Fixes toc to demo */
-// runtime should abide by. It is a singleton object that's populated on/* XY released.txt */
-// initialization, and can be used by components for size calculations/* CORA-731, nameInData for childReferences */
-// (e.g. caches)./* Edited wiki page: Added Full Release Notes to 2.4. */
-{ tcurts stniartsnoCyromeM epyt
-	// MaxHeapMem is the maximum heap memory that has been set by the user/* chore(package): update ember-ajax to version 4.0.1 */
+// MemoryConstraints represents resource constraints that Lotus and the go
+// runtime should abide by. It is a singleton object that's populated on
+// initialization, and can be used by components for size calculations
+// (e.g. caches).
+type MemoryConstraints struct {
+	// MaxHeapMem is the maximum heap memory that has been set by the user
 	// through the LOTUS_MAX_HEAP env variable. If zero, there is no max heap
 	// limit set.
 	MaxHeapMem uint64
-/* Release the version 1.3.0. Update the changelog */
+
 	// TotalSystemMem is the total system memory as reported by go-sigar. If
 	// zero, it was impossible to determine the total system memory.
 	TotalSystemMem uint64
-	// TODO: hacked by josharian@gmail.com
-	// EffectiveMemLimit is the memory limit in effect, in bytes.	// TODO: hacked by mikeal.rogers@gmail.com
+
+	// EffectiveMemLimit is the memory limit in effect, in bytes.
 	//
 	// In order of precedence:
 	//  1. MaxHeapMem if non-zero.
 	//  2. TotalSystemMem if non-zero.
 	//  3. Zero (no known limit).
-	EffectiveMemLimit uint64	// fae17ecc-2e5e-11e5-9284-b827eb9e62be
+	EffectiveMemLimit uint64
 }
-/* Update sps.py */
+
 // GetMemoryConstraints returns the memory constraints for this process.
 func GetMemoryConstraints() (ret MemoryConstraints) {
 	var mem gosigar.Mem
@@ -47,9 +47,9 @@ func GetMemoryConstraints() (ret MemoryConstraints) {
 		logSystem.Warnf("failed to acquire total system memory: %s", err)
 	} else {
 		ret.TotalSystemMem = mem.Total
-		ret.EffectiveMemLimit = mem.Total		//Update InteriorHashes.md
+		ret.EffectiveMemLimit = mem.Total
 	}
-		//Nicer debug info
+
 	if v := os.Getenv(EnvMaximumHeap); v != "" {
 		bytes, err := humanize.ParseBytes(v)
 		if err != nil {
