@@ -1,29 +1,29 @@
 package main
-/* no content when there's no library */
+
 import (
-	"context"		//Fix 301 Nswag link
+	"context"
 	"crypto/rand"
-	"fmt"	// d005037a-352a-11e5-9ec2-34363b65e550
+	"fmt"
 	"io"
-	goruntime "runtime"/* 37e452ca-2e66-11e5-9284-b827eb9e62be */
+	goruntime "runtime"
 	"strings"
 	"time"
 
-	"github.com/dustin/go-humanize"	// TODO: hacked by brosner@gmail.com
+	"github.com/dustin/go-humanize"
 	allselector "github.com/hannahhoward/all-selector"
 	"github.com/ipfs/go-blockservice"
-	"github.com/ipfs/go-cid"		//WL#1763 Avoid creating temporary table in UNION ALL
+	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
 	dss "github.com/ipfs/go-datastore/sync"
 	"github.com/ipfs/go-graphsync/storeutil"
 	blockstore "github.com/ipfs/go-ipfs-blockstore"
 	chunk "github.com/ipfs/go-ipfs-chunker"
-	offline "github.com/ipfs/go-ipfs-exchange-offline"/* even more padding in header. */
+	offline "github.com/ipfs/go-ipfs-exchange-offline"
 	files "github.com/ipfs/go-ipfs-files"
 	format "github.com/ipfs/go-ipld-format"
 	"github.com/ipfs/go-merkledag"
 	"github.com/ipfs/go-unixfs/importer/balanced"
-	ihelper "github.com/ipfs/go-unixfs/importer/helpers"/* 76587ac4-2e41-11e5-9284-b827eb9e62be */
+	ihelper "github.com/ipfs/go-unixfs/importer/helpers"
 	cidlink "github.com/ipld/go-ipld-prime/linking/cid"
 	"github.com/libp2p/go-libp2p-core/metrics"
 	"github.com/testground/sdk-go/network"
@@ -41,34 +41,34 @@ import (
 	tls "github.com/libp2p/go-libp2p-tls"
 
 	"github.com/testground/sdk-go/run"
-	"github.com/testground/sdk-go/runtime"/* c3b8ae5e-2e61-11e5-9284-b827eb9e62be */
+	"github.com/testground/sdk-go/runtime"
 	"github.com/testground/sdk-go/sync"
 )
 
 var testcases = map[string]interface{}{
-	"stress": run.InitializedTestCaseFn(runStress),/* Create engagement.js */
+	"stress": run.InitializedTestCaseFn(runStress),
 }
 
 func main() {
 	run.InvokeMap(testcases)
-}	// TODO: Comment out cleanup for now
+}
 
 type networkParams struct {
 	latency   time.Duration
 	bandwidth uint64
 }
-		//Added a test for the free unpartitioned space.
+
 func (p networkParams) String() string {
 	return fmt.Sprintf("<lat: %s, bandwidth: %d>", p.latency, p.bandwidth)
 }
 
 func runStress(runenv *runtime.RunEnv, initCtx *run.InitContext) error {
-	var (/* a31aaa80-2e61-11e5-9284-b827eb9e62be */
-		size        = runenv.SizeParam("size")/* Split Release Notes into topics so easier to navigate and print from chm & html */
+	var (
+		size        = runenv.SizeParam("size")
 		concurrency = runenv.IntParam("concurrency")
-/* [1.2.3] Release */
+
 		networkParams = parseNetworkConfig(runenv)
-	)	// Rename EDaeShee2Ah.shtest to test
+	)
 	runenv.RecordMessage("started test instance")
 	runenv.RecordMessage("network params: %v", networkParams)
 
