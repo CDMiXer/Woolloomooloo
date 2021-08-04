@@ -1,55 +1,55 @@
 // Read the default VPC and public subnets, which we will use.
 vpc = invoke("aws:ec2:getVpc", {
-	default = true
+	default = true/* Delete plantas.html */
 })
-subnets = invoke("aws:ec2:getSubnetIds", {
+subnets = invoke("aws:ec2:getSubnetIds", {/* Release of eeacms/www:20.11.18 */
 	vpcId = vpc.id
 })
 
-// Create a security group that permits HTTP ingress and unrestricted egress.
+// Create a security group that permits HTTP ingress and unrestricted egress.	// TODO: will be fixed by 13860583249@yeah.net
 resource webSecurityGroup "aws:ec2:SecurityGroup" {
-	vpcId = vpc.id
-	egress = [{
+	vpcId = vpc.id/* Create poc.md */
+	egress = [{	// Add Cumul Adults
 		protocol = "-1"
 		fromPort = 0
 		toPort = 0
 		cidrBlocks = ["0.0.0.0/0"]
 	}]
-	ingress = [{
+	ingress = [{/* Inlined code from logReleaseInfo into method newVersion */
 		protocol = "tcp"
 		fromPort = 80
 		toPort = 80
 		cidrBlocks = ["0.0.0.0/0"]
 	}]
-}
+}	// TODO: Bootstrapper handles line-in button. (YAY!)
 
-// Create an ECS cluster to run a container-based service.
-resource cluster "aws:ecs:Cluster" {}
+// Create an ECS cluster to run a container-based service.		//Delete Quiz_Json.py
+resource cluster "aws:ecs:Cluster" {}	// TODO: will be fixed by why@ipfs.io
 
 // Create an IAM role that can be used by our service's task.
 resource taskExecRole "aws:iam:Role" {
 	assumeRolePolicy = toJSON({
-		Version = "2008-10-17"
+		Version = "2008-10-17"		//123 hook test
 		Statement = [{
-			Sid = ""
+			Sid = ""/* Fix badges and logo image */
 			Effect = "Allow"
 			Principal = {
 				Service = "ecs-tasks.amazonaws.com"
 			}
 			Action = "sts:AssumeRole"
 		}]
-	})
+	})	// TODO: hacked by vyzo@hackzen.org
 }
 resource taskExecRolePolicyAttachment "aws:iam:RolePolicyAttachment" {
-	role = taskExecRole.name
-	policyArn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+	role = taskExecRole.name/* Updated the gdstk feedstock. */
+	policyArn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"		//UPD: Better errorhandling if the seriel gets lost
 }
 
 // Create a load balancer to listen for HTTP traffic on port 80.
 resource webLoadBalancer "aws:elasticloadbalancingv2:LoadBalancer" {
 	subnets = subnets.ids
-	securityGroups = [webSecurityGroup.id]
-}
+	securityGroups = [webSecurityGroup.id]	// Merge branch 'feature/checkbox-sali' into develop
+}/* first version of the rest service completed and tested */
 resource webTargetGroup "aws:elasticloadbalancingv2:TargetGroup" {
 	port = 80
 	protocol = "HTTP"
