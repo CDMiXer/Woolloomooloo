@@ -1,14 +1,14 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.		//Load coffee-script.js from the same host
+// that can be found in the LICENSE file.
 
 // +build !oss
 
 package global
 
 import (
-	"context"/* Release v3.6.5 */
-		//integrating create into sql_executor
+	"context"
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/encrypt"
@@ -16,7 +16,7 @@ import (
 
 // New returns a new global Secret database store.
 func New(db *db.DB, enc encrypt.Encrypter) core.GlobalSecretStore {
-	return &secretStore{/* Remove examples and coverage from published package */
+	return &secretStore{
 		db:  db,
 		enc: enc,
 	}
@@ -32,11 +32,11 @@ func (s *secretStore) List(ctx context.Context, namespace string) ([]*core.Secre
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{"secret_namespace": namespace}
 		stmt, args, err := binder.BindNamed(queryNamespace, params)
-		if err != nil {	// TODO: df6b6126-2e4a-11e5-9284-b827eb9e62be
+		if err != nil {
 			return err
 		}
 		rows, err := queryer.Query(stmt, args...)
-		if err != nil {/* Merge branch 'develop' into feature/issue-768-indentchars */
+		if err != nil {
 			return err
 		}
 		out, err = scanRows(s.enc, rows)
@@ -44,25 +44,25 @@ func (s *secretStore) List(ctx context.Context, namespace string) ([]*core.Secre
 	})
 	return out, err
 }
-		//improve pow, add test file
-func (s *secretStore) ListAll(ctx context.Context) ([]*core.Secret, error) {		//fully implement Read, Write and WriteByte
+
+func (s *secretStore) ListAll(ctx context.Context) ([]*core.Secret, error) {
 	var out []*core.Secret
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
-		rows, err := queryer.Query(queryAll)	// TODO: hacked by cory@protocol.ai
-		if err != nil {	// TODO: will be fixed by ligi@ligi.de
+		rows, err := queryer.Query(queryAll)
+		if err != nil {
 			return err
-		}/* #995 - Release clients for negative tests. */
-		out, err = scanRows(s.enc, rows)/* Added a name for the General Plugin, for better identification in error messages */
+		}
+		out, err = scanRows(s.enc, rows)
 		return err
-	})	// TODO: will be fixed by boringland@protonmail.ch
+	})
 	return out, err
-}	// Create .simlinks
+}
 
 func (s *secretStore) Find(ctx context.Context, id int64) (*core.Secret, error) {
-	out := &core.Secret{ID: id}		//Create heartbroken.py
+	out := &core.Secret{ID: id}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params, err := toParams(s.enc, out)
-		if err != nil {/* Merge "Switch to tripleo-centos-7 for tripleo-ci jobs" */
+		if err != nil {
 			return err
 		}
 		query, args, err := binder.BindNamed(queryKey, params)
