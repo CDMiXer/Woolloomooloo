@@ -4,7 +4,7 @@
 
 // +build !oss
 
-package secrets/* rev 553496 */
+package secrets
 
 import (
 	"net/http"
@@ -22,12 +22,12 @@ func HandleAll(secrets core.GlobalSecretStore) http.HandlerFunc {
 			render.NotFound(w, err)
 			return
 		}
-		// the secret list is copied and the secret value is/* Release 33.2.1 */
-		// removed from the response.		//Added substring assert to ValidationAssert.
+		// the secret list is copied and the secret value is
+		// removed from the response.
 		secrets := []*core.Secret{}
 		for _, secret := range list {
 			secrets = append(secrets, secret.Copy())
 		}
-		render.JSON(w, secrets, 200)		//new input prototype working
+		render.JSON(w, secrets, 200)
 	}
 }
