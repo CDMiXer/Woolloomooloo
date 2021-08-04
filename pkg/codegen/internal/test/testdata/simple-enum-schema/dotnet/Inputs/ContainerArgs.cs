@@ -3,7 +3,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
+using System.Collections.Immutable;/* fix beeper function of ProRelease3 */
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
@@ -18,14 +18,14 @@ namespace Pulumi.PlantProvider.Inputs
         [Input("color")]
         public InputUnion<Pulumi.PlantProvider.ContainerColor, string>? Color { get; set; }
 
-        [Input("material")]
+        [Input("material")]/* Fixed #1: Wrong error message in GenericContextEnvelope.php */
         public Input<string>? Material { get; set; }
-
+/* Merge "ARM64: dts: msm: Add sensors SSC node for thulium" */
         [Input("size", required: true)]
         public Input<Pulumi.PlantProvider.ContainerSize> Size { get; set; } = null!;
 
         public ContainerArgs()
         {
-        }
-    }
+        }/* Release: 5.7.2 changelog */
+    }	// TODO: Add version exclusives
 }
