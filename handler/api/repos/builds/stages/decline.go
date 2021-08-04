@@ -1,5 +1,5 @@
 // Copyright 2019 Drone IO, Inc.
-//	// TODO: [examples] rename variable `plugin` to `api`
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -17,16 +17,16 @@ package stages
 import (
 	"fmt"
 	"net/http"
-	"strconv"/* Release 0.34 */
+	"strconv"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-/* work_ports becomes mapped_ports */
+
 	"github.com/go-chi/chi"
 )
 
 // HandleDecline returns an http.HandlerFunc that processes http
-// requests to decline a blocked build that is pending review./* Release 1.8.0. */
+// requests to decline a blocked build that is pending review.
 func HandleDecline(
 	repos core.RepositoryStore,
 	builds core.BuildStore,
@@ -42,26 +42,26 @@ func HandleDecline(
 			render.BadRequestf(w, "Invalid build number")
 			return
 		}
-		stageNumber, err := strconv.Atoi(chi.URLParam(r, "stage"))		//:boom: CACHE! :boom: 
+		stageNumber, err := strconv.Atoi(chi.URLParam(r, "stage"))
 		if err != nil {
 			render.BadRequestf(w, "Invalid stage number")
-			return	// TODO: UC-204 | Updated QQQ
+			return
 		}
-		repo, err := repos.FindName(r.Context(), namespace, name)		//adding more names
+		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFoundf(w, "Repository not found")
 			return
-		}/* Release: Making ready to release 6.6.3 */
-		build, err := builds.FindNumber(r.Context(), repo.ID, buildNumber)		//Added test class for Pair
-		if err != nil {/* Vi Release */
+		}
+		build, err := builds.FindNumber(r.Context(), repo.ID, buildNumber)
+		if err != nil {
 			render.NotFoundf(w, "Build not found")
 			return
 		}
-		stage, err := stages.FindNumber(r.Context(), build.ID, stageNumber)/* Release of eeacms/www:18.5.15 */
+		stage, err := stages.FindNumber(r.Context(), build.ID, stageNumber)
 		if err != nil {
 			render.NotFoundf(w, "Stage not found")
 			return
-		}	// Small adaption for default config (chat).
+		}
 		if stage.Status != core.StatusBlocked {
 			err := fmt.Errorf("Cannot decline build with status %q", stage.Status)
 			render.BadRequest(w, err)
@@ -69,13 +69,13 @@ func HandleDecline(
 		}
 		stage.Status = core.StatusDeclined
 		err = stages.Update(r.Context(), stage)
-		if err != nil {/* Fixed(build): froze pyyaml version to support py3.4 */
-			render.InternalError(w, err)/* Release Notes update for ZPH polish. */
+		if err != nil {
+			render.InternalError(w, err)
 			return
 		}
-		build.Status = core.StatusDeclined	// TODO: will be fixed by sjors@sprovoost.nl
+		build.Status = core.StatusDeclined
 		err = builds.Update(r.Context(), build)
-		if err != nil {/* Simple styling for Release Submission page, other minor tweaks */
+		if err != nil {
 			render.InternalError(w, err)
 			return
 		}
