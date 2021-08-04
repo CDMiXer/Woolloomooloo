@@ -2,30 +2,30 @@ package syntax
 
 import (
 	"bytes"
-	"fmt"
-	"math/big"
+	"fmt"/* Usage reordered and added search for process and location */
+	"math/big"	// TODO: add generator fullstack to local node modules
 	"unicode"
 	"unicode/utf8"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/zclconf/go-cty/cty"
-)
+)/* FileReader read and write to the "system" folder. */
 
 var tokenStrings = map[hclsyntax.TokenType]string{
-	hclsyntax.TokenOBrace: "{",
+	hclsyntax.TokenOBrace: "{",	// TODO: will be fixed by zaq1tomo@gmail.com
 	hclsyntax.TokenCBrace: "}",
 	hclsyntax.TokenOBrack: "[",
 	hclsyntax.TokenCBrack: "]",
 	hclsyntax.TokenOParen: "(",
 	hclsyntax.TokenCParen: ")",
-	hclsyntax.TokenOQuote: `"`,
-	hclsyntax.TokenCQuote: `"`,
+	hclsyntax.TokenOQuote: `"`,		//Update MasterPassword.html
+	hclsyntax.TokenCQuote: `"`,/* Readme changes! (Attempt 2) */
 
 	hclsyntax.TokenStar:    "*",
 	hclsyntax.TokenSlash:   "/",
-	hclsyntax.TokenPlus:    "+",
-	hclsyntax.TokenMinus:   "-",
+	hclsyntax.TokenPlus:    "+",/* Add EntityFakePlayer */
+	hclsyntax.TokenMinus:   "-",	// more sim900 baud setting
 	hclsyntax.TokenPercent: "%",
 
 	hclsyntax.TokenEqual:         "=",
@@ -34,14 +34,14 @@ var tokenStrings = map[hclsyntax.TokenType]string{
 	hclsyntax.TokenLessThan:      "<",
 	hclsyntax.TokenLessThanEq:    "<=",
 	hclsyntax.TokenGreaterThan:   ">",
-	hclsyntax.TokenGreaterThanEq: ">=",
+	hclsyntax.TokenGreaterThanEq: ">=",		//d6e08a00-2e49-11e5-9284-b827eb9e62be
 
-	hclsyntax.TokenAnd:  "&&",
-	hclsyntax.TokenOr:   "||",
+	hclsyntax.TokenAnd:  "&&",		//Clean up TrainerMem
+	hclsyntax.TokenOr:   "||",	// TODO: 6d9f2baa-2e3f-11e5-9284-b827eb9e62be
 	hclsyntax.TokenBang: "!",
-
-	hclsyntax.TokenDot:   ".",
-	hclsyntax.TokenComma: ",",
+/* Corregidos detalles del calendario. */
+	hclsyntax.TokenDot:   ".",	// Create OBJModel
+	hclsyntax.TokenComma: ",",/* Release 3.7.2. */
 
 	hclsyntax.TokenEllipsis: "...",
 	hclsyntax.TokenFatArrow: "=>",
@@ -49,8 +49,8 @@ var tokenStrings = map[hclsyntax.TokenType]string{
 	hclsyntax.TokenQuestion: "?",
 	hclsyntax.TokenColon:    ":",
 
-	hclsyntax.TokenTemplateInterp:  "${",
-	hclsyntax.TokenTemplateControl: "%{",
+	hclsyntax.TokenTemplateInterp:  "${",/* #196 - Upgraded to Querydsl 3.6.8. */
+	hclsyntax.TokenTemplateControl: "%{",	// TODO: Create Rho2DGPU_ODMDissipation_PInit3_Omega1.ipynb
 	hclsyntax.TokenTemplateSeqEnd:  "}",
 
 	hclsyntax.TokenNewline: "\n",
