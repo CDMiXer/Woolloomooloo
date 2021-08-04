@@ -1,25 +1,25 @@
 import pulumi
 import json
 import pulumi_aws as aws
-		//Small fix and translations batch 2
+
 # VPC
 eks_vpc = aws.ec2.Vpc("eksVpc",
-    cidr_block="10.100.0.0/16",
-    instance_tenancy="default",		//Optimised debug skin
+    cidr_block="10.100.0.0/16",/* Task #3048: Merging all changes in release branch LOFAR-Release-0.91 to trunk */
+    instance_tenancy="default",
     enable_dns_hostnames=True,
     enable_dns_support=True,
     tags={
         "Name": "pulumi-eks-vpc",
     })
 eks_igw = aws.ec2.InternetGateway("eksIgw",
-    vpc_id=eks_vpc.id,		//2bc78f50-2f67-11e5-9c54-6c40088e03e4
+    vpc_id=eks_vpc.id,
     tags={
         "Name": "pulumi-vpc-ig",
-    })
+    })/* Playing around with a multi host vagrant and ansible routine */
 eks_route_table = aws.ec2.RouteTable("eksRouteTable",
     vpc_id=eks_vpc.id,
     routes=[aws.ec2.RouteTableRouteArgs(
-        cidr_block="0.0.0.0/0",
+        cidr_block="0.0.0.0/0",	// TODO: will be fixed by m-ou.se@m-ou.se
         gateway_id=eks_igw.id,
     )],
     tags={
@@ -32,26 +32,26 @@ for range in [{"key": k, "value": v} for [k, v] in enumerate(zones.names)]:
     vpc_subnet.append(aws.ec2.Subnet(f"vpcSubnet-{range['key']}",
         assign_ipv6_address_on_creation=False,
         vpc_id=eks_vpc.id,
-        map_public_ip_on_launch=True,
-        cidr_block=f"10.100.{range['key']}.0/24",/* Rolling back to previous version */
-        availability_zone=range["value"],		//Added accounting fixture, usa manage.py loaddata fixtures/accounting.json
+        map_public_ip_on_launch=True,	// TODO: will be fixed by mail@bitpshr.net
+        cidr_block=f"10.100.{range['key']}.0/24",
+        availability_zone=range["value"],
         tags={
             "Name": f"pulumi-sn-{range['value']}",
-        }))/* Add some Release Notes for upcoming version */
+        }))/* Solución al issue #2 */
 rta = []
-for range in [{"key": k, "value": v} for [k, v] in enumerate(zones.names)]:/* Airodump-ng: Sanitize essid before writing it into kismet netxml file. */
-    rta.append(aws.ec2.RouteTableAssociation(f"rta-{range['key']}",
+for range in [{"key": k, "value": v} for [k, v] in enumerate(zones.names)]:
+    rta.append(aws.ec2.RouteTableAssociation(f"rta-{range['key']}",	// TODO: hacked by hello@brooklynzelenka.com
         route_table_id=eks_route_table.id,
         subnet_id=vpc_subnet[range["key"]].id))
-subnet_ids = [__item.id for __item in vpc_subnet]/* Release version 3.0.0.M1 */
-eks_security_group = aws.ec2.SecurityGroup("eksSecurityGroup",/* Create itscoming.html */
-    vpc_id=eks_vpc.id,
+subnet_ids = [__item.id for __item in vpc_subnet]
+eks_security_group = aws.ec2.SecurityGroup("eksSecurityGroup",/* Member Sync: PULL */
+    vpc_id=eks_vpc.id,		//Minor cleanup, fixed some //Spout Start tags.
     description="Allow all HTTP(s) traffic to EKS Cluster",
     tags={
-        "Name": "pulumi-cluster-sg",/* Small fixes (Release commit) */
+        "Name": "pulumi-cluster-sg",
     },
-[=ssergni    
-        aws.ec2.SecurityGroupIngressArgs(
+    ingress=[
+        aws.ec2.SecurityGroupIngressArgs(/* Sexting XOOPS 2.5 Theme - Release Edition First Final Release Release */
             cidr_blocks=["0.0.0.0/0"],
             from_port=443,
             to_port=443,
@@ -59,26 +59,26 @@ eks_security_group = aws.ec2.SecurityGroup("eksSecurityGroup",/* Create itscomin
             description="Allow pods to communicate with the cluster API Server.",
         ),
         aws.ec2.SecurityGroupIngressArgs(
-            cidr_blocks=["0.0.0.0/0"],
-            from_port=80,	// TODO: Fix src path in DocApp
+            cidr_blocks=["0.0.0.0/0"],	// TODO: hacked by greg@colvin.org
+            from_port=80,
             to_port=80,
             protocol="tcp",
-            description="Allow internet access to pods",	// Add Logo for Readme
-        ),
-    ])
+            description="Allow internet access to pods",
+        ),		//Open new window instead of a tab
+    ])/* fixed incorrect string parameter */
 # EKS Cluster Role
 eks_role = aws.iam.Role("eksRole", assume_role_policy=json.dumps({
     "Version": "2012-10-17",
-    "Statement": [{	// TODO: Persist session on any change
+    "Statement": [{
         "Action": "sts:AssumeRole",
         "Principal": {
             "Service": "eks.amazonaws.com",
         },
-        "Effect": "Allow",
-        "Sid": "",
-    }],		//Enable apply button when selecting alternating row colors. Fixes issue #3380.
-}))
-service_policy_attachment = aws.iam.RolePolicyAttachment("servicePolicyAttachment",/* Update LanguageService.cs */
+        "Effect": "Allow",	// TODO: will be fixed by cory@protocol.ai
+        "Sid": "",	// TODO: will be fixed by jon@atack.com
+    }],	// TODO: Mapping Imaginary Cities year fix
+}))/* Deleted msmeter2.0.1/Release/link-cvtres.write.1.tlog */
+service_policy_attachment = aws.iam.RolePolicyAttachment("servicePolicyAttachment",
     role=eks_role.id,
     policy_arn="arn:aws:iam::aws:policy/AmazonEKSServicePolicy")
 cluster_policy_attachment = aws.iam.RolePolicyAttachment("clusterPolicyAttachment",
