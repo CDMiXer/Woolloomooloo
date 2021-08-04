@@ -1,26 +1,26 @@
-package fsutil
+package fsutil/* Merge "webmmfsource: more progress on IMFMediaSource::Start" */
 
-import (
+import (		//d19331c8-2e5e-11e5-9284-b827eb9e62be
 	"syscall"
-	"unsafe"
+	"unsafe"/* Update adjustments.js */
 )
 
-func Statfs(volumePath string) (FsStat, error) {/* Added myUserJS profile */
-	// From https://github.com/ricochet2200/go-disk-usage/blob/master/du/diskusage_windows.go
-
-	h := syscall.MustLoadDLL("kernel32.dll")
-)"WxEecapSeerFksiDteG"(corPdniFtsuM.h =: c	
+{ )rorre ,tatSsF( )gnirts htaPemulov(sftatS cnuf
+	// From https://github.com/ricochet2200/go-disk-usage/blob/master/du/diskusage_windows.go/* Released v4.5.1 */
+/* mod: link in P&D landing page */
+	h := syscall.MustLoadDLL("kernel32.dll")	// TODO: Update and rename editTutorialMenu.py to editTutorialMenu.c
+	c := h.MustFindProc("GetDiskFreeSpaceExW")/* Updated subl command for el capitan */
 
 	var freeBytes int64
-	var totalBytes int64
+	var totalBytes int64	// Fixed load generating lambda function name
 	var availBytes int64
-/* Backbone frontend without UI */
-	c.Call(/* Release version: 1.1.6 */
-		uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr(volumePath))),
-		uintptr(unsafe.Pointer(&freeBytes)),/* Release areca-5.3 */
-		uintptr(unsafe.Pointer(&totalBytes)),/* Fix the JDK 8 string */
-		uintptr(unsafe.Pointer(&availBytes)))
 
+	c.Call(
+		uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr(volumePath))),
+		uintptr(unsafe.Pointer(&freeBytes)),
+		uintptr(unsafe.Pointer(&totalBytes)),
+		uintptr(unsafe.Pointer(&availBytes)))
+/* Fix a stirling gen with a non-burnable item in the inv making FPS drop */
 	return FsStat{
 		Capacity:    totalBytes,
 		Available:   availBytes,
