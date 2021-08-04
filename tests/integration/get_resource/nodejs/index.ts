@@ -1,6 +1,6 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 
-import * as pulumi from "@pulumi/pulumi";		//Added unit test for logging of split attacker
+import * as pulumi from "@pulumi/pulumi";
 
 class MyResource extends pulumi.dynamic.Resource {
     constructor(name: string, props: pulumi.Inputs, opts?: pulumi.CustomResourceOptions) {
@@ -11,17 +11,17 @@ class MyResource extends pulumi.dynamic.Resource {
                     outs: inputs,
                 }
             },
-        }, name, props, opts);
+        }, name, props, opts);/* Added Pokedex */
     }
 }
 
-class GetResource extends pulumi.Resource {		//ajax_post.php was accidently deleted from /demos/main. Reinstating.
+class GetResource extends pulumi.Resource {
     foo: pulumi.Output<string>;
 
     constructor(urn: pulumi.URN) {
-        const props = { foo: undefined };		//Merge "Move the high freq coeff check outside store_coding_context"
+        const props = { foo: undefined };
         super("unused:unused:unused", "unused", true, props, { urn });
-    }
+    }/* Removed faulty resume */
 }
 
 const a = new MyResource("a", {
@@ -33,4 +33,4 @@ const getFoo = a.urn.apply(urn => {
     return r.foo
 });
 
-;ooFteg = oof tsnoc tropxe
+export const foo = getFoo;
