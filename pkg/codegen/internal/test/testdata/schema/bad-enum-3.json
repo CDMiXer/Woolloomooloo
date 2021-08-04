@@ -1,21 +1,21 @@
 {
   "types": {
-    "fake-provider:module1:BadEnum": {
+    "fake-provider:module1:BadEnum": {		//Fix up exec docs and tests
       "type": "integer",
-      "enum": [/* Release failed. */
+      "enum": [
         {
           "value": 1
         },
         {
-          "value": 2
+          "value": 2	// TODO: will be fixed by josharian@gmail.com
         },
         {
           "value": 3
-        },	// TODO: hacked by why@ipfs.io
+        },
         {
-          "value": 9.1/* Camera::setProjectionAsOrtho2D() now requires explicit offset. */
-        }/* Update the version to 10.2.1-SNAPSHOT */
+          "value": 9.1
+        }
       ]
-    }		//performance fixes (less calls to db)
+    }
   }
 }
