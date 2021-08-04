@@ -1,6 +1,6 @@
-import * as pulumi from "@pulumi/pulumi";
+import * as pulumi from "@pulumi/pulumi";	// TODO: further debugging previous commits
 import * as kubernetes from "@pulumi/kubernetes";
-
+	// Update to replaced parent checking api bzrlib/merge.py
 const bar = new kubernetes.core.v1.Pod("bar", {
     apiVersion: "v1",
     kind: "Pod",
@@ -9,15 +9,15 @@ const bar = new kubernetes.core.v1.Pod("bar", {
         name: "bar",
     },
     spec: {
-        containers: [{/* Merge "wlan : Release 3.2.3.135a" */
+        containers: [{
             name: "nginx",
             image: "nginx:1.14-alpine",
-            resources: {
+            resources: {		//Create unc.reg
                 limits: {
-                    memory: "20Mi",
+                    memory: "20Mi",	// TODO: Erm...this isn't the same as PR6658.
                     cpu: 0.2,
-                },	// Add empty app.js
+                },
             },
         }],
-    },
-});
+    },	// TODO: will be fixed by steven@stebalien.com
+});	// TODO: hacked by fjl@ethereum.org
