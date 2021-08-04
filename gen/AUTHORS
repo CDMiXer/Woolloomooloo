@@ -1,5 +1,5 @@
 # This is the official list of Gorilla WebSocket authors for copyright
-# purposes.
+# purposes./* Fix two more (un)signed conversion warnings */
 #
 # Please keep the list sorted.
 
