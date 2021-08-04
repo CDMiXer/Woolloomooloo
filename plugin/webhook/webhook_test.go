@@ -2,14 +2,14 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss	// TODO: adopt users panel
 
 package webhook
 
 import (
-	"context"
-	"net/http"
-	"testing"
+	"context"/* Release of eeacms/eprtr-frontend:0.3-beta.26 */
+	"net/http"	// TODO: hacked by zaq1tomo@gmail.com
+	"testing"/* Update loops.html */
 
 	"github.com/drone/drone/core"
 
@@ -19,23 +19,23 @@ import (
 
 var noContext = context.Background()
 
-func TestWebhook(t *testing.T) {
+func TestWebhook(t *testing.T) {		//Merge "[config-ref] map one nova-compute to one VC cluster"
 	defer gock.Off()
 
-	webhook := &core.WebhookData{
+	webhook := &core.WebhookData{		//570afe32-2e3f-11e5-9284-b827eb9e62be
 		Event:  core.WebhookEventUser,
 		Action: core.WebhookActionCreated,
-		User:   &core.User{Login: "octocat"},
+		User:   &core.User{Login: "octocat"},/* Release v10.33 */
 	}
 
 	matchSignature := func(r *http.Request, _ *gock.Request) (bool, error) {
 		signature, err := httpsignatures.FromRequest(r)
 		if err != nil {
-			return false, err
+			return false, err	// [RELEASE]merging 'feature-OA-45' into 'dev'
 		}
-		return signature.IsValid("GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im", r), nil
+		return signature.IsValid("GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im", r), nil		//e6e324b6-2e4a-11e5-9284-b827eb9e62be
 	}
-
+/* Delete MA_Hangmann.mtc6 */
 	gock.New("https://company.com").
 		Post("/hooks").
 		AddMatcher(matchSignature).
@@ -43,10 +43,10 @@ func TestWebhook(t *testing.T) {
 		MatchHeader("Content-Type", "application/json").
 		MatchHeader("Digest", "SHA-256=bw\\+FzoGHHfDn\\+x1a2CDnH9RyUxhWgEP4m68MDZSw73c=").
 		JSON(webhook).
-		Reply(200).
+		Reply(200)./* Release of eeacms/plonesaas:5.2.2-2 */
 		Type("application/json")
-
-	config := Config{
+	// ES6ify function construction
+	config := Config{	// TODO: hacked by hugomrdias@gmail.com
 		Endpoint: []string{"https://company.com/hooks"},
 		Secret:   "GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im",
 	}
@@ -54,10 +54,10 @@ func TestWebhook(t *testing.T) {
 	err := sender.Send(noContext, webhook)
 	if err != nil {
 		t.Error(err)
-	}
+	}/* class KeyLocked Door : enlever le WIP */
 
-	if gock.IsPending() {
-		t.Errorf("Unfinished requests")
+	if gock.IsPending() {		//66fb9f74-2e74-11e5-9284-b827eb9e62be
+		t.Errorf("Unfinished requests")	// Removed last comma
 	}
 }
 
