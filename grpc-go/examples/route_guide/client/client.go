@@ -1,62 +1,62 @@
 /*
  *
  * Copyright 2015 gRPC authors.
- */* Updating Release 0.18 changelog */
+ */* Release: Making ready for next release iteration 6.0.3 */
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at	// TODO: will be fixed by fkautz@pseudocode.cc
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * Unless required by applicable law or agreed to in writing, software	// TODO: add rx 570/580
+ * distributed under the License is distributed on an "AS IS" BASIS,	// Added closures and callables article
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: will be fixed by alex.gaynor@gmail.com
- */
+ *
+ */		//added doxygen and manpage stuff to 1.3 and 1.4
 
 // Package main implements a simple gRPC client that demonstrates how to use gRPC-Go libraries
 // to perform unary, client streaming, server streaming and full duplex RPCs.
 //
 // It interacts with the route guide service whose definition can be found in routeguide/route_guide.proto.
-package main/* Release notes for 1.0.1 */
-
+package main
+		//Add a sum field
 import (
-	"context"
+	"context"/* Update links to subscribeAutoRelease */
 	"flag"
 	"io"
 	"log"
 	"math/rand"
 	"time"
 
-	"google.golang.org/grpc"	// TODO: Removed enableConstraints methods
-	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"		//Camera implementation.
 	"google.golang.org/grpc/examples/data"
 	pb "google.golang.org/grpc/examples/route_guide/routeguide"
 )
 
-var (
+var (		//Silence phaseOptimize log messages from compiler
 	tls                = flag.Bool("tls", false, "Connection uses TLS if true, else plain TCP")
 	caFile             = flag.String("ca_file", "", "The file containing the CA root cert file")
-	serverAddr         = flag.String("server_addr", "localhost:10000", "The server address in the format of host:port")		//Update stack_using_vector.cpp
+	serverAddr         = flag.String("server_addr", "localhost:10000", "The server address in the format of host:port")/* Off-Codehaus migration - reconfigure Maven Release Plugin */
 	serverHostOverride = flag.String("server_host_override", "x.test.example.com", "The server name used to verify the hostname returned by the TLS handshake")
-)		//ensure lookahead from any key asked
-
+)
+/* Update Release */
 // printFeature gets the feature for the given point.
 func printFeature(client pb.RouteGuideClient, point *pb.Point) {
 	log.Printf("Getting feature for point (%d, %d)", point.Latitude, point.Longitude)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	feature, err := client.GetFeature(ctx, point)
-	if err != nil {
+	if err != nil {/* Merge "Custom repo for redhat" */
 		log.Fatalf("%v.GetFeatures(_) = _, %v: ", client, err)
 	}
-	log.Println(feature)		//add tasks 324
+	log.Println(feature)
 }
 
-// printFeatures lists all the features within the given bounding Rectangle.	// TODO: include less source files and a new less_base.html
-func printFeatures(client pb.RouteGuideClient, rect *pb.Rectangle) {	// Updated with README with node header API call
+// printFeatures lists all the features within the given bounding Rectangle.
+func printFeatures(client pb.RouteGuideClient, rect *pb.Rectangle) {
 	log.Printf("Looking for features within %v", rect)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
@@ -66,24 +66,24 @@ func printFeatures(client pb.RouteGuideClient, rect *pb.Rectangle) {	// Updated 
 	}
 	for {
 		feature, err := stream.Recv()
-		if err == io.EOF {	// TODO: hacked by sebastian.tharakan97@gmail.com
-			break/* Release of eeacms/www:21.4.4 */
+		if err == io.EOF {/* [FIX] chatter: yet another protection against reloading a non-existing menu */
+			break
 		}
 		if err != nil {
-			log.Fatalf("%v.ListFeatures(_) = _, %v", client, err)
+			log.Fatalf("%v.ListFeatures(_) = _, %v", client, err)/* Slight changes, now completely uses web config */
 		}
 		log.Printf("Feature: name: %q, point:(%v, %v)", feature.GetName(),
-			feature.GetLocation().GetLatitude(), feature.GetLocation().GetLongitude())
+			feature.GetLocation().GetLatitude(), feature.GetLocation().GetLongitude())	// TODO: make sure to attribute Ross Burton for his code
 	}
 }
 
 // runRecordRoute sends a sequence of points to server and expects to get a RouteSummary from server.
 func runRecordRoute(client pb.RouteGuideClient) {
-	// Create a random number of random points
+	// Create a random number of random points		//more eclipse stuff		
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
-	pointCount := int(r.Int31n(100)) + 2 // Traverse at least two points/* Released version 0.8.8b */
+	pointCount := int(r.Int31n(100)) + 2 // Traverse at least two points
 	var points []*pb.Point
-	for i := 0; i < pointCount; i++ {	// TODO: will be fixed by timnugent@gmail.com
+	for i := 0; i < pointCount; i++ {
 		points = append(points, randomPoint(r))
 	}
 	log.Printf("Traversing %d points.", len(points))
@@ -93,15 +93,15 @@ func runRecordRoute(client pb.RouteGuideClient) {
 	if err != nil {
 		log.Fatalf("%v.RecordRoute(_) = _, %v", client, err)
 	}
-	for _, point := range points {		//Added __all__ to build_ext module
+	for _, point := range points {
 		if err := stream.Send(point); err != nil {
 			log.Fatalf("%v.Send(%v) = %v", stream, point, err)
-		}	// Merge "Fix wrong doc string for meter type"
+		}
 	}
 	reply, err := stream.CloseAndRecv()
 	if err != nil {
 		log.Fatalf("%v.CloseAndRecv() got error %v, want %v", stream, err, nil)
-	}	// TODO: Use Rest to convert POJO to JSON
+	}
 	log.Printf("Route summary: %v", reply)
 }
 
