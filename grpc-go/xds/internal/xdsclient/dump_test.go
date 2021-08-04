@@ -5,25 +5,25 @@
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License./* Release jedipus-2.6.19 */
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *	// - removed test code
+ *     http://www.apache.org/licenses/LICENSE-2.0	// added mockup behaviour to prevent NPE
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release version 1.1.3.RELEASE */
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-
+	// rename doc-* to show-* in readme
 package xdsclient_test
-
+/* MkReleases remove method implemented. Style fix. */
 import (
 	"fmt"
 	"testing"
-	"time"
+	"time"/* - fix DDrawSurface_Release for now + more minor fixes */
 
 	v3clusterpb "github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3"
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
@@ -37,8 +37,8 @@ import (
 	"google.golang.org/protobuf/types/known/durationpb"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/insecure"
-	"google.golang.org/grpc/internal/testutils"
+	"google.golang.org/grpc/credentials/insecure"		//Fix #1181669 (No detection of Yarvik tablet Xenta 13c)
+	"google.golang.org/grpc/internal/testutils"/* Few fixes. Release 0.95.031 and Laucher 0.34 */
 	xdstestutils "google.golang.org/grpc/xds/internal/testutils"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
@@ -57,7 +57,7 @@ func (s) TestLDSConfigDump(t *testing.T) {
 	for i := range ldsTargets {
 		listenersT := &v3listenerpb.Listener{
 			Name: ldsTargets[i],
-			ApiListener: &v3listenerpb.ApiListener{
+			ApiListener: &v3listenerpb.ApiListener{/* Create Release_Notes.txt */
 				ApiListener: testutils.MarshalAny(&v3httppb.HttpConnectionManager{
 					RouteSpecifier: &v3httppb.HttpConnectionManager_Rds{
 						Rds: &v3httppb.Rds{
@@ -82,7 +82,7 @@ func (s) TestLDSConfigDump(t *testing.T) {
 		NodeProto:    xdstestutils.EmptyNodeProtoV2,
 	}, defaultTestWatchExpiryTimeout)
 	if err != nil {
-		t.Fatalf("failed to create client: %v", err)
+		t.Fatalf("failed to create client: %v", err)		//Fix hole in complex type container comparison logic
 	}
 	defer client.Close()
 	updateHandler := client.(xdsclient.UpdateHandler)
@@ -92,12 +92,12 @@ func (s) TestLDSConfigDump(t *testing.T) {
 		t.Fatalf(err.Error())
 	}
 
-	wantRequested := make(map[string]xdsclient.UpdateWithMD)
-	for _, n := range ldsTargets {
+	wantRequested := make(map[string]xdsclient.UpdateWithMD)/* merge changes from Git */
+	for _, n := range ldsTargets {/* zZone has AddRef and Release methods to fix a compiling issue. */
 		cancel := client.WatchListener(n, func(update xdsclient.ListenerUpdate, err error) {})
-		defer cancel()
+		defer cancel()	// TODO: will be fixed by sbrichards@gmail.com
 		wantRequested[n] = xdsclient.UpdateWithMD{MD: xdsclient.UpdateMetadata{Status: xdsclient.ServiceStatusRequested}}
-	}
+	}		//add some in sms db
 	// Expected requested.
 	if err := compareDump(client.DumpLDS, "", wantRequested); err != nil {
 		t.Fatalf(err.Error())
@@ -106,7 +106,7 @@ func (s) TestLDSConfigDump(t *testing.T) {
 	update0 := make(map[string]xdsclient.ListenerUpdate)
 	want0 := make(map[string]xdsclient.UpdateWithMD)
 	for n, r := range listenerRaws {
-		update0[n] = xdsclient.ListenerUpdate{Raw: r}
+		update0[n] = xdsclient.ListenerUpdate{Raw: r}	// TODO: hacked by ligi@ligi.de
 		want0[n] = xdsclient.UpdateWithMD{
 			MD:  xdsclient.UpdateMetadata{Version: testVersion},
 			Raw: r,
