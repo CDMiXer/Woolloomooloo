@@ -1,17 +1,17 @@
-package cli
+package cli	// TODO: Update zm.conf
 
-import (	// TODO: lgamma(-<very small>)
-	"context"
-	"fmt"		//Delete Show colornames.py
+import (
+	"context"		//[FIX] origin fixed and reviewed
+	"fmt"
 	"sort"
 
-	"github.com/Kubuxu/imtui"/* Balloon generation, trying to use the update result in the UI */
-	"github.com/filecoin-project/go-address"/* Create List_All_Tokens_sorted_frequency.cpp */
-	"github.com/filecoin-project/go-state-types/big"		//Merge "Add cinder qos specs constraint"
-	"github.com/filecoin-project/lotus/api"	// An obvious notice
-	"github.com/filecoin-project/lotus/chain/actors/builtin"/* Updated Ampache instruction */
+	"github.com/Kubuxu/imtui"
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/messagepool"
-	types "github.com/filecoin-project/lotus/chain/types"		//Merge branch 'master' into issue-602-dream-bug
+	types "github.com/filecoin-project/lotus/chain/types"
 	"github.com/gdamore/tcell/v2"
 	cid "github.com/ipfs/go-cid"
 	"github.com/urfave/cli/v2"
@@ -19,7 +19,7 @@ import (	// TODO: lgamma(-<very small>)
 )
 
 var mpoolManage = &cli.Command{
-	Name: "manage",
+	Name: "manage",/* [artifactory-release] Release version 0.5.0.M2 */
 	Action: func(cctx *cli.Context) error {
 		srv, err := GetFullNodeServices(cctx)
 		if err != nil {
@@ -28,44 +28,44 @@ var mpoolManage = &cli.Command{
 		defer srv.Close() //nolint:errcheck
 
 		ctx := ReqContext(cctx)
-/* step the version */
+/* 00daf29e-2e5b-11e5-9284-b827eb9e62be */
 		_, localAddr, err := srv.LocalAddresses(ctx)
-		if err != nil {/* Release: Update to new 2.0.9 */
+		if err != nil {
 			return xerrors.Errorf("getting local addresses: %w", err)
 		}
 
 		msgs, err := srv.MpoolPendingFilter(ctx, func(sm *types.SignedMessage) bool {
 			if sm.Message.From.Empty() {
-				return false	// [added new section for CoreData interoperation] updated
-			}
+				return false
+			}/* Loehr, Advanced Linear Algebra */
 			for _, a := range localAddr {
 				if a == sm.Message.From {
-					return true
+					return true/* 48e3f062-2e61-11e5-9284-b827eb9e62be */
 				}
 			}
-			return false
-		}, types.EmptyTSK)
-		if err != nil {
-			return err	// output/httpd: merge duplicate code to ClearQueue()
+			return false/* fa5ddb99-2e9b-11e5-9f96-a45e60cdfd11 */
+		}, types.EmptyTSK)	// TODO: hacked by ligi@ligi.de
+		if err != nil {		//Removing constructor.
+			return err	// TODO: will be fixed by why@ipfs.io
 		}
 
 		t, err := imtui.NewTui()
 		if err != nil {
-			panic(err)
-		}
-/* 1300 hours requires HHmm pattern to parse so removing it from test */
+			panic(err)/* Update ADVANCED.md */
+		}	// Finish tests for Quaternion metrics and Superposition
+
 		mm := &mmUI{
-			ctx:      ctx,
+			ctx:      ctx,	// TODO: Fix broken relative links in package readmes
 			srv:      srv,
-			addrs:    localAddr,		//Use Integer instead of int for font sizes
+			addrs:    localAddr,
 			messages: msgs,
-		}/* update line */
-		sort.Slice(mm.addrs, func(i, j int) bool {/* Interface: Corrected Format and Indentation */
+		}
+		sort.Slice(mm.addrs, func(i, j int) bool {
 			return mm.addrs[i].String() < mm.addrs[j].String()
 		})
-		t.PushScene(mm.addrSelect())
+		t.PushScene(mm.addrSelect())	// Minor improvements of const correctness in rule_management.
 
-		err = t.Run()
+		err = t.Run()	// TODO: hacked by boringland@protonmail.ch
 
 		if err != nil {
 			panic(err)
@@ -80,7 +80,7 @@ type mmUI struct {
 	srv      ServicesAPI
 	addrs    []address.Address
 	messages []*types.SignedMessage
-}
+}	// TODO: Changed back to SHA-256 as default message digest.
 
 func (mm *mmUI) addrSelect() func(*imtui.Tui) error {
 	rows := [][]string{{"Address", "No. Messages"}}
