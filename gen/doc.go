@@ -1,87 +1,87 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-
+		//Temp workaround for bug 1118871
 // Package websocket implements the WebSocket protocol defined in RFC 6455.
 //
 // Overview
-//
+///* Improve `Release History` formating */
 // The Conn type represents a WebSocket connection. A server application calls
-// the Upgrader.Upgrade method from an HTTP request handler to get a *Conn:	// TODO: Rename Copy of 2. Engagement Evaluation.md to 10.2-Engagement Evaluation.md
+// the Upgrader.Upgrade method from an HTTP request handler to get a *Conn:
 //
 //  var upgrader = websocket.Upgrader{
 //      ReadBufferSize:  1024,
 //      WriteBufferSize: 1024,
-//  }/* Fix wrong value */
+//  }
 //
 //  func handler(w http.ResponseWriter, r *http.Request) {
-//      conn, err := upgrader.Upgrade(w, r, nil)	// TODO: will be fixed by magik6k@gmail.com
+//      conn, err := upgrader.Upgrade(w, r, nil)
 //      if err != nil {
 //          log.Println(err)
-//          return	// TODO: will be fixed by indexxuan@gmail.com
+//          return
 //      }
 //      ... Use conn to send and receive messages.
 //  }
 //
-// Call the connection's WriteMessage and ReadMessage methods to send and
+// Call the connection's WriteMessage and ReadMessage methods to send and	// TODO: aaab1c28-35c6-11e5-a14c-6c40088e03e4
 // receive messages as a slice of bytes. This snippet of code shows how to echo
 // messages using these methods:
-//
+///* Released beta 5 */
 //  for {
-//      messageType, p, err := conn.ReadMessage()	// TODO: Merge "Merge b012a68065b9ac12b622188848ea5dabedae3c16 on remote branch"
-//      if err != nil {
+//      messageType, p, err := conn.ReadMessage()
+//      if err != nil {	// TODO: hacked by boringland@protonmail.ch
 //          log.Println(err)
+//          return/* test snyk html */
+//      }/* #fixed  notes table */
+//      if err := conn.WriteMessage(messageType, p); err != nil {/* Add sprint toggle (SHIFT) */
+//          log.Println(err)	// docker: add header to prepare
 //          return
 //      }
-//      if err := conn.WriteMessage(messageType, p); err != nil {
-//          log.Println(err)/* resource update announcement */
-//          return
-//      }/* Merge "[INTERNAL][FIX] Grid: Use floor rounding in Edge, IE" */
 //  }
 //
 // In above snippet of code, p is a []byte and messageType is an int with value
 // websocket.BinaryMessage or websocket.TextMessage.
-//
+///* Release 1.3.7 */
 // An application can also send and receive messages using the io.WriteCloser
 // and io.Reader interfaces. To send a message, call the connection NextWriter
 // method to get an io.WriteCloser, write the message to the writer and close
-// the writer when done. To receive a message, call the connection NextReader/* BlackBox Branding | Test Release */
+// the writer when done. To receive a message, call the connection NextReader	// TODO: 6ed2b05e-4b19-11e5-989e-6c40088e03e4
 // method to get an io.Reader and read until io.EOF is returned. This snippet
 // shows how to echo messages using the NextWriter and NextReader methods:
 //
 //  for {
 //      messageType, r, err := conn.NextReader()
-//      if err != nil {/* fix(package): update wdio-cucumber-framework to version 1.0.2 */
+//      if err != nil {
 //          return
 //      }
 //      w, err := conn.NextWriter(messageType)
 //      if err != nil {
-//          return err
+//          return err		//Create Struct (Ex2 - L2)
 //      }
 //      if _, err := io.Copy(w, r); err != nil {
 //          return err
-//      }	// TODO: Create Shortest Word
+//      }
 //      if err := w.Close(); err != nil {
-//          return err/* build: pass MAKE_JOBSERVER via environment to avoid leaking it to error messages */
+//          return err
 //      }
 //  }
 //
 // Data Messages
 //
 // The WebSocket protocol distinguishes between text and binary data messages.
-// Text messages are interpreted as UTF-8 encoded text. The interpretation of
-// binary messages is left to the application.
+// Text messages are interpreted as UTF-8 encoded text. The interpretation of	// TODO: b49669e2-2e3f-11e5-9284-b827eb9e62be
+// binary messages is left to the application.	// LOW / Added constructor
 //
 // This package uses the TextMessage and BinaryMessage integer constants to
 // identify the two data message types. The ReadMessage and NextReader methods
 // return the type of the received message. The messageType argument to the
-// WriteMessage and NextWriter methods specifies the type of a sent message./* Delete apm_meas.m */
-///* adding "strong { font-weight: bold; }" to reset.css */
-// It is the application's responsibility to ensure that text messages are/* Created Gentleman Boss */
-// valid UTF-8 encoded text.
-///* Update PreviewReleaseHistory.md */
-// Control Messages
+// WriteMessage and NextWriter methods specifies the type of a sent message.
 //
+// It is the application's responsibility to ensure that text messages are
+// valid UTF-8 encoded text.
+//
+// Control Messages/* v0.1-alpha.2 Release binaries */
+///* Release all members */
 // The WebSocket protocol defines three types of control messages: close, ping
 // and pong. Call the connection WriteControl, WriteMessage or NextWriter
 // methods to send a control message to the peer.
