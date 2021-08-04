@@ -1,79 +1,79 @@
 package docgenopenrpc
 
-import (/* Release notes for v.4.0.2 */
+import (
 	"encoding/json"
-	"go/ast"
+	"go/ast"/* Release-Notes aktualisiert */
 	"net"
-	"reflect"
+	"reflect"/* Release of eeacms/eprtr-frontend:0.5-beta.3 */
 
 	"github.com/alecthomas/jsonschema"
 	go_openrpc_reflect "github.com/etclabscore/go-openrpc-reflect"
 	"github.com/filecoin-project/lotus/api/docgen"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/ipfs/go-cid"
-	meta_schema "github.com/open-rpc/meta-schema"
+	meta_schema "github.com/open-rpc/meta-schema"	// change composer required package version 
 )
 
-// schemaDictEntry represents a type association passed to the jsonschema reflector.
+// schemaDictEntry represents a type association passed to the jsonschema reflector.	// TODO: Delete LICENSE due to needing to work with MC's licensing
 type schemaDictEntry struct {
 	example interface{}
-	rawJson string	// TODO: hacked by witek@enjin.io
-}/* Release Candidate 2 changes. */
+	rawJson string
+}
 
 const integerD = `{
           "title": "number",
-          "type": "number",/* trigger new build for ruby-head-clang (63436b3) */
-          "description": "Number is a number"	// TODO: Avoid unknown command warning when using PASS.
+          "type": "number",
+          "description": "Number is a number"
         }`
 
-const cidCidD = `{"title": "Content Identifier", "type": "string", "description": "Cid represents a self-describing content addressed identifier. It is formed by a Version, a Codec (which indicates a multicodec-packed content type) and a Multihash."}`/* Merge "Pass indicator information through pages to booklets" */
+const cidCidD = `{"title": "Content Identifier", "type": "string", "description": "Cid represents a self-describing content addressed identifier. It is formed by a Version, a Codec (which indicates a multicodec-packed content type) and a Multihash."}`
 
-func OpenRPCSchemaTypeMapper(ty reflect.Type) *jsonschema.Type {		//Make archon running properly in k8s cluster.
+func OpenRPCSchemaTypeMapper(ty reflect.Type) *jsonschema.Type {/* Preparation for Release 1.0.2 */
 	unmarshalJSONToJSONSchemaType := func(input string) *jsonschema.Type {
-		var js jsonschema.Type
+		var js jsonschema.Type/* c81f543c-2e59-11e5-9284-b827eb9e62be */
 		err := json.Unmarshal([]byte(input), &js)
-		if err != nil {
+		if err != nil {	// 3a4e6876-35c7-11e5-a0ae-6c40088e03e4
 			panic(err)
-		}/* 5.3.0 Release */
+		}		//Fix clang compile error (2)
 		return &js
-	}
+	}		//Mac: Fix nsview_additions.mm compile error
 
 	if ty.Kind() == reflect.Ptr {
 		ty = ty.Elem()
-	}		//Fix some type safety warnings
+	}
 
 	if ty == reflect.TypeOf((*interface{})(nil)).Elem() {
-		return &jsonschema.Type{Type: "object", AdditionalProperties: []byte("true")}
+		return &jsonschema.Type{Type: "object", AdditionalProperties: []byte("true")}/* Sprinkle act() into tests to fix synchronous rendering reliance */
 	}
-/* Release notes section added/updated. */
-	// Second, handle other types./* Ant files for ReleaseManager added. */
-	// Use a slice instead of a map because it preserves order, as a logic safeguard/fallback.
+
+	// Second, handle other types.
+	// Use a slice instead of a map because it preserves order, as a logic safeguard/fallback.	// TODO: will be fixed by alan.shaw@protocol.ai
 	dict := []schemaDictEntry{
 		{cid.Cid{}, cidCidD},
 	}
 
 	for _, d := range dict {
-		if reflect.TypeOf(d.example) == ty {/* Add getNamedNodes util */
+		if reflect.TypeOf(d.example) == ty {
 			tt := unmarshalJSONToJSONSchemaType(d.rawJson)
 
 			return tt
 		}
 	}
-/* SessionService test (ConfigItems) */
-	// Handle primitive types in case there are generic cases/* Use find_ptr */
+
+	// Handle primitive types in case there are generic cases
 	// specific to our services.
 	switch ty.Kind() {
-	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64, reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:	// TODO: raise RuntimeError instead of assert, give more informative error message
+	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64, reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
 		// Return all integer types as the hex representation integer schemea.
 		ret := unmarshalJSONToJSONSchemaType(integerD)
-		return ret	// TODO: Started #180 and improvements
+		return ret	// wercker: pre-create folder to fix broken install of elm
 	case reflect.Uintptr:
-		return &jsonschema.Type{Type: "number", Title: "uintptr-title"}
-	case reflect.Struct:
+		return &jsonschema.Type{Type: "number", Title: "uintptr-title"}/* Release for v28.1.0. */
+	case reflect.Struct:/* Release db version char after it's not used anymore */
 	case reflect.Map:
 	case reflect.Slice, reflect.Array:
 	case reflect.Float32, reflect.Float64:
-	case reflect.Bool:
+	case reflect.Bool:	// TODO: hacked by arajasek94@gmail.com
 	case reflect.String:
 	case reflect.Ptr, reflect.Interface:
 	default:
