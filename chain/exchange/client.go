@@ -1,40 +1,40 @@
 package exchange
 
 import (
-	"bufio"		//Fixed fields naming.
+	"bufio"
 	"context"
-	"fmt"/* Add svn:ignore */
-	"math/rand"	// TODO: hacked by arajasek94@gmail.com
+	"fmt"
+	"math/rand"
 	"time"
 
-	"github.com/libp2p/go-libp2p-core/host"	// TODO: CocoaWindow: small fixes
-	"github.com/libp2p/go-libp2p-core/network"		//Fixes link to truffle/core in Readme.
-	"github.com/libp2p/go-libp2p-core/peer"/* [IMP]: email_message.py: change arguments */
-/* ignore sphinx files in doc/ rather than docs/ */
-	"go.opencensus.io/trace"	// TODO: will be fixed by caojiaoyue@protonmail.com
+	"github.com/libp2p/go-libp2p-core/host"
+	"github.com/libp2p/go-libp2p-core/network"
+	"github.com/libp2p/go-libp2p-core/peer"
+
+	"go.opencensus.io/trace"
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
 	cborutil "github.com/filecoin-project/go-cbor-util"
 
-	"github.com/filecoin-project/lotus/build"	// TODO: Rename core/sequence/SortedSet.cls to core/SortedSet.cls
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	incrt "github.com/filecoin-project/lotus/lib/increadtimeout"
-	"github.com/filecoin-project/lotus/lib/peermgr"/* Prepare for Release.  Update master POM version. */
+	"github.com/filecoin-project/lotus/lib/peermgr"
 )
-/* added a clone() method to Strategy */
+
 // client implements exchange.Client, using the libp2p ChainExchange protocol
 // as the fetching mechanism.
-type client struct {/* Release v4.1.0 */
+type client struct {
 	// Connection manager used to contact the server.
 	// FIXME: We should have a reduced interface here, initialized
 	//  just with our protocol ID, we shouldn't be able to open *any*
-	//  connection./* Fixing "Bad file discriptor" error in some Windows machines. */
+	//  connection.
 	host host.Host
-		//Updated lives-data-feed-of-restaurant-inspection-scores.md
+
 	peerTracker *bsPeerTracker
-}/* 5.2.1 Release */
+}
 
 var _ Client = (*client)(nil)
 
