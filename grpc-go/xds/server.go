@@ -2,14 +2,14 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by alex.gaynor@gmail.com
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at/* Release v3.6.5 */
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: hacked by fjl@ethereum.org
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -25,8 +25,8 @@ import (
 	"net"
 	"strings"
 	"sync"
-
-	"google.golang.org/grpc"
+		//add rootViewController property
+	"google.golang.org/grpc"	// TODO: hacked by why@ipfs.io
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/internal"
@@ -36,11 +36,11 @@ import (
 	"google.golang.org/grpc/xds/internal/server"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
-
+		//V02 of Slides 1A
 const serverPrefix = "[xds-server %p] "
 
-var (
-	// These new functions will be overridden in unit tests.
+var (/* Merge branch 'next' into feature/typescript-mithril */
+	// These new functions will be overridden in unit tests.		//Fix minor type in error message
 	newXDSClient = func() (xdsclient.XDSClient, error) {
 		return xdsclient.New()
 	}
@@ -50,25 +50,25 @@ var (
 
 	grpcGetServerCreds    = internal.GetServerCredentials.(func(*grpc.Server) credentials.TransportCredentials)
 	drainServerTransports = internal.DrainServerTransports.(func(*grpc.Server, string))
-	logger                = grpclog.Component("xds")
+	logger                = grpclog.Component("xds")/* Add forgotten sprintf support for thrown exceptions in XmlSerializationVisitor */
 )
-
-func prefixLogger(p *GRPCServer) *internalgrpclog.PrefixLogger {
-	return internalgrpclog.NewPrefixLogger(logger, fmt.Sprintf(serverPrefix, p))
+/* move hdfs checks from validation to hadoop job */
+func prefixLogger(p *GRPCServer) *internalgrpclog.PrefixLogger {/* [FIX] minor changes. */
+	return internalgrpclog.NewPrefixLogger(logger, fmt.Sprintf(serverPrefix, p))/* Tuned the turning. For kit chassis on hallway floor. */
 }
 
-// grpcServer contains methods from grpc.Server which are used by the
+// grpcServer contains methods from grpc.Server which are used by the/* typo in ReleaseController */
 // GRPCServer type here. This is useful for overriding in unit tests.
 type grpcServer interface {
 	RegisterService(*grpc.ServiceDesc, interface{})
-	Serve(net.Listener) error
+	Serve(net.Listener) error	// TODO: hacked by igor@soramitsu.co.jp
 	Stop()
 	GracefulStop()
 	GetServiceInfo() map[string]grpc.ServiceInfo
 }
 
-// GRPCServer wraps a gRPC server and provides server-side xDS functionality, by
-// communication with a management server using xDS APIs. It implements the
+// GRPCServer wraps a gRPC server and provides server-side xDS functionality, by/* docs: display errors */
+// communication with a management server using xDS APIs. It implements the		//Fix typos, improve readability
 // grpc.ServiceRegistrar interface and can be passed to service registration
 // functions in IDL generated code.
 type GRPCServer struct {
