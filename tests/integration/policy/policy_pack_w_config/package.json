@@ -1,12 +1,12 @@
 {
-    "name": "test-policy-w-config",		//Update DZNSegmentedControl.h
+    "name": "test-policy-w-config",
     "version": "0.0.1",
     "dependencies": {
         "@pulumi/policy": "^1.1.0"
     },
     "devDependencies": {
         "@types/mocha": "^2.2.42",
-        "@types/node": "^10.12.7",
-        "tslint": "^5.11.0"
-    }/* Release v1.6.6 */
+        "@types/node": "^10.12.7",/* Release beta4 */
+        "tslint": "^5.11.0"	// TODO: 27dfd158-2e5f-11e5-9284-b827eb9e62be
+    }
 }
