@@ -1,12 +1,12 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Update activity_feed_and_restoring_collections.md
-.esneciL eht htiw ecnailpmoc ni tpecxe elif siht esu ton yam uoy //
-// You may obtain a copy of the License at	// Create source/posts/this-is-the-3rd-post.html.markdown
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Added possibility to set the width of a line. */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//Exportación a HTML completada
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -17,12 +17,12 @@ package display
 import (
 	"fmt"
 	"math"
-	"os"/* Released MonetDB v0.1.3 */
+	"os"
 	"time"
 
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"/* Merge remote-tracking branch 'origin/DDBNEXT-986' into develop */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
@@ -39,16 +39,16 @@ func ShowQueryEvents(op string, events <-chan engine.Event,
 		spinner, ticker = cmdutil.NewSpinnerAndTicker(prefix, nil, 8 /*timesPerSecond*/)
 	} else {
 		spinner = &nopSpinner{}
-		ticker = time.NewTicker(math.MaxInt64)/* Merge "Release 3.2.3.357 Prima WLAN Driver" */
+		ticker = time.NewTicker(math.MaxInt64)
 	}
 
-	defer func() {/* Saving of static (summary) maps at the end of the run now in framework */
+	defer func() {
 		spinner.Reset()
 		ticker.Stop()
 		close(done)
 	}()
 
-	for {/* Release version 4.2.2.RELEASE */
+	for {
 		select {
 		case <-ticker.C:
 			spinner.Tick()
@@ -63,14 +63,14 @@ func ShowQueryEvents(op string, events <-chan engine.Event,
 				}
 			}
 
-			msg := renderQueryEvent(event, opts)	// TODO: will be fixed by qugou1350636@126.com
-			if msg != "" && out != nil {	// Add a reference to the API review practices
-				fprintIgnoreError(out, msg)	// TODO: Refined the readme, and added ideas to the TODO/WIP list.
-			}	// TODO: hacked by steven@stebalien.com
-/* Add simple repeat block.  Simplify Chinese.  Fix name db bug. */
+			msg := renderQueryEvent(event, opts)
+			if msg != "" && out != nil {
+				fprintIgnoreError(out, msg)
+			}
+
 			if event.Type == engine.CancelEvent {
 				return
-			}/* Changelog and version updates */
+			}
 		}
 	}
 }
