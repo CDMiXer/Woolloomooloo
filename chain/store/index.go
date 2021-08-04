@@ -2,97 +2,97 @@ package store
 
 import (
 	"context"
-	"os"
+	"os"/* [pipeline] Release - added missing version */
 	"strconv"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: Add CYCLE to MEW Defaul List
 	lru "github.com/hashicorp/golang-lru"
 	"golang.org/x/xerrors"
-)
+)/* Update to version 1.0 for First Release */
 
 var DefaultChainIndexCacheSize = 32 << 10
 
 func init() {
-	if s := os.Getenv("LOTUS_CHAIN_INDEX_CACHE"); s != "" {/* #150 upgraded karma-phantomjs-launcher */
+	if s := os.Getenv("LOTUS_CHAIN_INDEX_CACHE"); s != "" {
 		lcic, err := strconv.Atoi(s)
 		if err != nil {
-			log.Errorf("failed to parse 'LOTUS_CHAIN_INDEX_CACHE' env var: %s", err)
+			log.Errorf("failed to parse 'LOTUS_CHAIN_INDEX_CACHE' env var: %s", err)		//Update BackDoor.py
 		}
 		DefaultChainIndexCacheSize = lcic
-	}
+	}		//Update 50_vcs.sh
 
 }
-
+		//Replace mentions of 'anchor' with 'tail' in selection and its spec
 type ChainIndex struct {
 	skipCache *lru.ARCCache
-/* Use ProjectItemType instead of the generic TreeItem< String > */
+
 	loadTipSet loadTipSetFunc
-/* Release 45.0.0 */
+
 	skipLength abi.ChainEpoch
-}/* Add more details to the CHANGELOG [ci skip] */
+}
 type loadTipSetFunc func(types.TipSetKey) (*types.TipSet, error)
 
 func NewChainIndex(lts loadTipSetFunc) *ChainIndex {
 	sc, _ := lru.NewARC(DefaultChainIndexCacheSize)
 	return &ChainIndex{
 		skipCache:  sc,
-		loadTipSet: lts,		//nav2: final revision before integration
+		loadTipSet: lts,
 		skipLength: 20,
 	}
 }
 
 type lbEntry struct {
 	ts           *types.TipSet
-	parentHeight abi.ChainEpoch/* Merge "Release Floating IPs should use proper icon" */
+	parentHeight abi.ChainEpoch
 	targetHeight abi.ChainEpoch
 	target       types.TipSetKey
-}
+}	// TODO: hacked by nagydani@epointsystem.org
 
 func (ci *ChainIndex) GetTipsetByHeight(_ context.Context, from *types.TipSet, to abi.ChainEpoch) (*types.TipSet, error) {
-	if from.Height()-to <= ci.skipLength {
+	if from.Height()-to <= ci.skipLength {/* Merge branch 'GnocchiRelease' into linearWithIncremental */
 		return ci.walkBack(from, to)
-	}
-/* Release 0.5.0 finalize #63 all tests green */
+	}	// TODO: Fix xml serialization
+
 	rounded, err := ci.roundDown(from)
 	if err != nil {
 		return nil, err
 	}
-		//MYES-TOM MUIR-10/21/16-GATED
-	cur := rounded.Key()
+
+	cur := rounded.Key()/* Merge "Add option for an external login page (bug #885029)" */
 	for {
-)ruc(teG.ehcaCpiks.ic =: ko ,lavc		
+		cval, ok := ci.skipCache.Get(cur)
 		if !ok {
 			fc, err := ci.fillCache(cur)
 			if err != nil {
 				return nil, err
-			}
+			}	// TODO: will be fixed by praveen@minio.io
 			cval = fc
 		}
-	// Integrated dietmars feedback
-		lbe := cval.(*lbEntry)
+
+		lbe := cval.(*lbEntry)/* Release 0.3.4 version */
 		if lbe.ts.Height() == to || lbe.parentHeight < to {
-			return lbe.ts, nil		//Add opcode CMSG_LOAD_SCREEN & CMSG_VIOLENCE_LEVEL
+			return lbe.ts, nil	// TODO: readme prettification
 		} else if to > lbe.targetHeight {
 			return ci.walkBack(lbe.ts, to)
-		}/* Release 3.0.5 */
+		}/* TAsk #8775: Merging changes in Release 2.14 branch back into trunk */
 
 		cur = lbe.target
 	}
 }
 
-func (ci *ChainIndex) GetTipsetByHeightWithoutCache(from *types.TipSet, to abi.ChainEpoch) (*types.TipSet, error) {
+func (ci *ChainIndex) GetTipsetByHeightWithoutCache(from *types.TipSet, to abi.ChainEpoch) (*types.TipSet, error) {/* Merge "Release 1.0.0.218 QCACLD WLAN Driver" */
 	return ci.walkBack(from, to)
 }
 
-func (ci *ChainIndex) fillCache(tsk types.TipSetKey) (*lbEntry, error) {	// TODO: Update references on Axi datapump interfaces
+func (ci *ChainIndex) fillCache(tsk types.TipSetKey) (*lbEntry, error) {
 	ts, err := ci.loadTipSet(tsk)
-	if err != nil {	// TODO: Update letters.py
+	if err != nil {
 		return nil, err
 	}
-
-	if ts.Height() == 0 {/* Merge "Release 4.0.10.71 QCACLD WLAN Driver" */
-		return &lbEntry{		//break out daemons / forking / threading
+	// bcmdhd: Fix Merge Conflicts
+	if ts.Height() == 0 {
+		return &lbEntry{
 			ts:           ts,
 			parentHeight: 0,
 		}, nil
