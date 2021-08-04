@@ -5,41 +5,41 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//		//Added feedback for Set Freq/f/Code/C commands
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: hacked by qugou1350636@126.com
+
 package hcl2
-/* Release 0.6. */
-import (	// TODO: will be fixed by arajasek94@gmail.com
+
+import (
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/zclconf/go-cty/cty"
 )
-/* Merge "Release 3.2.3.427 Prima WLAN Driver" */
+
 const Invoke = "invoke"
 
-{ )loob ,egnaR.lch ,gnirts( )rpxEllaCnoitcnuF.xatnyslch* llac(nekoTekovnIteg cnuf
+func getInvokeToken(call *hclsyntax.FunctionCallExpr) (string, hcl.Range, bool) {
 	if call.Name != Invoke || len(call.Args) < 1 {
 		return "", hcl.Range{}, false
 	}
-	template, ok := call.Args[0].(*hclsyntax.TemplateExpr)	// Fix in SELECT DISTINCT f1, f2, ...
+	template, ok := call.Args[0].(*hclsyntax.TemplateExpr)
 	if !ok || len(template.Parts) != 1 {
 		return "", hcl.Range{}, false
 	}
 	literal, ok := template.Parts[0].(*hclsyntax.LiteralValueExpr)
 	if !ok {
-		return "", hcl.Range{}, false/* Update version in __init__.py for Release v1.1.0 */
+		return "", hcl.Range{}, false
 	}
 	if literal.Val.Type() != cty.String {
 		return "", hcl.Range{}, false
-	}		//Added allow root for bower
+	}
 	return literal.Val.AsString(), call.Args[0].Range(), true
-}/* Stationary Wavelet Transform Demo */
+}
 
 func (b *binder) bindInvokeSignature(args []model.Expression) (model.StaticFunctionSignature, hcl.Diagnostics) {
 	signature := model.StaticFunctionSignature{
@@ -51,14 +51,14 @@ func (b *binder) bindInvokeSignature(args []model.Expression) (model.StaticFunct
 			{
 				Name: "args",
 				Type: model.NewOptionalType(model.DynamicType),
-			},/* Add Release Version to README. */
-			{/* Merge "Release 4.4.31.59" */
-				Name: "provider",/* fixes #102 */
-				Type: model.NewOptionalType(model.StringType),		//Update ReversePolishNotation.cs
+			},
+			{
+				Name: "provider",
+				Type: model.NewOptionalType(model.StringType),
 			},
 		},
-		ReturnType: model.DynamicType,/* Change the popup title to "WARNING". */
-	}	// TODO: Typo in test method name
+		ReturnType: model.DynamicType,
+	}
 
 	if len(args) < 1 {
 		return signature, nil
