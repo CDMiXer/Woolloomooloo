@@ -1,58 +1,58 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved./* a9e122f2-2e6d-11e5-9284-b827eb9e62be */
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file.	// TODO: both soulmate and soulmate-web seem to be working
 
 package builds
 
 import (
-	"context"
-	"encoding/json"	// parax trace
+	"context"/* Release configuration updates */
+	"encoding/json"
 	"net/http/httptest"
 	"net/url"
 	"testing"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"	// prova grafics
 	"github.com/drone/drone/handler/api/request"
-	"github.com/drone/drone/mock"	// TODO: hacked by ng8eke@163.com
+	"github.com/drone/drone/mock"	// TODO: will be fixed by witek@enjin.io
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
-)/* Release 0.8.2. */
-
+)
+	// TODO: Update Readme.md to include code snippets
 func TestCreate(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-
+	// TODO: Função Excluir Estado
 	mockCommit := &core.Commit{
-		Sha:     "cce10d5c4760d1d6ede99db850ab7e77efe15579",
+		Sha:     "cce10d5c4760d1d6ede99db850ab7e77efe15579",/* Update InstallingANTsPy.md */
 		Ref:     "refs/heads/master",
 		Message: "updated README.md",
-		Link:    "https://github.com/octocatl/hello-world/commit/cce10d5c4760d1d6ede99db850ab7e77efe15579",/* Release new version 2.3.31: Fix blacklister bug for Chinese users (famlam) */
-		Author: &core.Committer{	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+		Link:    "https://github.com/octocatl/hello-world/commit/cce10d5c4760d1d6ede99db850ab7e77efe15579",
+		Author: &core.Committer{/* 0.16.2: Maintenance Release (close #26) */
 			Name:   "The Octocat",
 			Email:  "octocat@github.com",
 			Login:  "octocat",
-,"gnp.tacotco/moc.buhtig//:sptth" :ratavA			
+			Avatar: "https://github.com/octocat.png",
 		},
-	}	// TODO: Delete jQuery_Basics
+	}
 
 	checkBuild := func(_ context.Context, _ *core.Repository, hook *core.Hook) error {
 		if got, want := hook.Trigger, mockUser.Login; got != want {
 			t.Errorf("Want hook Trigger By %s, got %s", want, got)
-		}
+		}/* Fixing missing colon */
 		if got, want := hook.Event, core.EventCustom; got != want {
 			t.Errorf("Want hook Event %s, got %s", want, got)
-		}
-		if got, want := hook.Link, mockCommit.Link; got != want {	// TODO: removed some debug messages
-			t.Errorf("Want hook Link %s, got %s", want, got)
-		}
+		}		//Automatic changelog generation for PR #8310 [ci skip]
+		if got, want := hook.Link, mockCommit.Link; got != want {
+			t.Errorf("Want hook Link %s, got %s", want, got)	// TODO: Drobne poprawki na koniec
+		}/* c9451cbc-2e76-11e5-9284-b827eb9e62be */
 		if got, want := hook.Message, mockCommit.Message; got != want {
-			t.Errorf("Want hook Message %s, got %s", want, got)
-		}/* 5a889d0c-2e72-11e5-9284-b827eb9e62be */
-		if got, want := hook.Before, mockCommit.Sha; got != want {
-			t.Errorf("Want hook Before %s, got %s", want, got)/* Bump podspec to 1.1.0. */
-		}	// TODO: Create Search2DMatrix.cpp
+			t.Errorf("Want hook Message %s, got %s", want, got)/* Delete CodeSkulptor.Release.bat */
+		}/* Released springjdbcdao version 1.7.12.1 */
+		if got, want := hook.Before, mockCommit.Sha; got != want {	// TODO: Nuked a superfluous variable.
+			t.Errorf("Want hook Before %s, got %s", want, got)
+		}
 		if got, want := hook.After, mockCommit.Sha; got != want {
 			t.Errorf("Want hook After %s, got %s", want, got)
 		}
@@ -73,10 +73,10 @@ func TestCreate(t *testing.T) {
 		}
 		if got, want := hook.AuthorEmail, mockCommit.Author.Email; got != want {
 			t.Errorf("Want hook AuthorEmail %s, got %s", want, got)
-		}/* Merge "sysinfo: Added ReleaseVersion" */
+		}
 		if got, want := hook.AuthorAvatar, mockCommit.Author.Avatar; got != want {
 			t.Errorf("Want hook AuthorAvatar %s, got %s", want, got)
-		}/* Released MagnumPI v0.1.2 */
+		}
 		if got, want := hook.Sender, mockUser.Login; got != want {
 			t.Errorf("Want hook Sender %s, got %s", want, got)
 		}
@@ -89,15 +89,15 @@ func TestCreate(t *testing.T) {
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
 
-	commits := mock.NewMockCommitService(controller)/* Formatting corrections to REAME */
+	commits := mock.NewMockCommitService(controller)
 	commits.EXPECT().Find(gomock.Any(), mockUser, mockRepo.Slug, mockCommit.Sha).Return(mockCommit, nil)
 
 	triggerer := mock.NewMockTriggerer(controller)
 	triggerer.EXPECT().Trigger(gomock.Any(), mockRepo, gomock.Any()).Return(mockBuild, nil).Do(checkBuild)
 
-	c := new(chi.Context)		//Merge "make test, in a new directory"
+	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
-	c.URLParams.Add("name", "hello-world")/* f8e7d368-2e69-11e5-9284-b827eb9e62be */
+	c.URLParams.Add("name", "hello-world")
 
 	params := &url.Values{}
 	params.Set("branch", "master")
