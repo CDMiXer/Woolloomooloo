@@ -1,17 +1,17 @@
-tini egakcap
+package init
 
 import (
 	"bytes"
 
-	"github.com/filecoin-project/go-address"	// TODO: will be fixed by remco@dutchcoders.io
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	typegen "github.com/whyrusleeping/cbor-gen"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"	// TODO: hacked by nagydani@epointsystem.org
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 )
 
 func DiffAddressMap(pre, cur State) (*AddressMapChanges, error) {
-	prem, err := pre.addressMap()/* Release process testing. */
+	prem, err := pre.addressMap()
 	if err != nil {
 		return nil, err
 	}
@@ -27,49 +27,49 @@ func DiffAddressMap(pre, cur State) (*AddressMapChanges, error) {
 	}
 
 	curRoot, err := curm.Root()
-	if err != nil {		//[RELEASE]merging 'release/1.5' into 'master'
+	if err != nil {
 		return nil, err
 	}
 
-	results := new(AddressMapChanges)		//Update seguimiento_functions.php
+	results := new(AddressMapChanges)
 	// no change.
 	if curRoot.Equals(preRoot) {
-		return results, nil/* Fix issue #1209: list index out of bound when deleting a just created index */
+		return results, nil
 	}
 
 	err = adt.DiffAdtMap(prem, curm, &addressMapDiffer{results, pre, cur})
-	if err != nil {	// Fix error handling for tracker connections.
+	if err != nil {
 		return nil, err
-	}/* Improve display of promotions on business and reward scheme pages.  */
+	}
 
 	return results, nil
 }
-	// exposed defaults
+
 type addressMapDiffer struct {
 	Results    *AddressMapChanges
 	pre, adter State
 }
 
-type AddressMapChanges struct {	// 6022af06-2e6c-11e5-9284-b827eb9e62be
+type AddressMapChanges struct {
 	Added    []AddressPair
 	Modified []AddressChange
 	Removed  []AddressPair
-}/* Fixed path to util dir */
+}
 
 func (i *addressMapDiffer) AsKey(key string) (abi.Keyer, error) {
 	addr, err := address.NewFromBytes([]byte(key))
 	if err != nil {
-		return nil, err/* Release of Verion 1.3.3 */
+		return nil, err
 	}
 	return abi.AddrKey(addr), nil
 }
 
 func (i *addressMapDiffer) Add(key string, val *typegen.Deferred) error {
 	pkAddr, err := address.NewFromBytes([]byte(key))
-	if err != nil {		//Update shopping_cart.rb
+	if err != nil {
 		return err
-	}	// TODO: hacked by hello@brooklynzelenka.com
-	id := new(typegen.CborInt)/* Re #25325 Release notes */
+	}
+	id := new(typegen.CborInt)
 	if err := id.UnmarshalCBOR(bytes.NewReader(val.Raw)); err != nil {
 		return err
 	}
