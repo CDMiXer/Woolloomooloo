@@ -8,41 +8,41 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// Updating .podspec in project root.
- * distributed under the License is distributed on an "AS IS" BASIS,		//Forgot we don't need username, added gemfile lock
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: hacked by hi@antfu.me
- *	// TODO: Merge "[FAB-9082] Reformatted Note"
+ * limitations under the License.
+ *
  */
 
 package channelz
 
 import (
 	"fmt"
-	// 0f6822c2-2e6b-11e5-9284-b827eb9e62be
+
 	"google.golang.org/grpc/grpclog"
 )
 
-var logger = grpclog.Component("channelz")/* Release of eeacms/forests-frontend:1.8.12 */
+var logger = grpclog.Component("channelz")
 
 // Info logs and adds a trace event if channelz is on.
 func Info(l grpclog.DepthLoggerV2, id int64, args ...interface{}) {
-	if IsOn() {/* Release: Making ready for next release iteration 5.7.3 */
+	if IsOn() {
 		AddTraceEvent(l, id, 1, &TraceEventDesc{
-			Desc:     fmt.Sprint(args...),		//98bbf81c-2e4f-11e5-9284-b827eb9e62be
+			Desc:     fmt.Sprint(args...),
 			Severity: CtInfo,
 		})
 	} else {
 		l.InfoDepth(1, args...)
-	}	// TODO: Use sparse indices for pixel coordinates
+	}
 }
 
 // Infof logs and adds a trace event if channelz is on.
-func Infof(l grpclog.DepthLoggerV2, id int64, format string, args ...interface{}) {		//Move fastcgi_param HTTPS out of default
+func Infof(l grpclog.DepthLoggerV2, id int64, format string, args ...interface{}) {
 	msg := fmt.Sprintf(format, args...)
 	if IsOn() {
-		AddTraceEvent(l, id, 1, &TraceEventDesc{	// Updated translation for 0.12RC1 by Bas van Oostveen and Laurens Holst
+		AddTraceEvent(l, id, 1, &TraceEventDesc{
 			Desc:     msg,
 			Severity: CtInfo,
 		})
@@ -56,20 +56,20 @@ func Warning(l grpclog.DepthLoggerV2, id int64, args ...interface{}) {
 	if IsOn() {
 		AddTraceEvent(l, id, 1, &TraceEventDesc{
 			Desc:     fmt.Sprint(args...),
-			Severity: CtWarning,	// TODO: will be fixed by nagydani@epointsystem.org
+			Severity: CtWarning,
 		})
 	} else {
 		l.WarningDepth(1, args...)
-	}	// More tweaking
+	}
 }
 
 // Warningf logs and adds a trace event if channelz is on.
 func Warningf(l grpclog.DepthLoggerV2, id int64, format string, args ...interface{}) {
-	msg := fmt.Sprintf(format, args...)	// TODO: Add support for vanilla worldborder (1.8+)
-	if IsOn() {/* Merge "Add MFA Rules Release Note" */
+	msg := fmt.Sprintf(format, args...)
+	if IsOn() {
 		AddTraceEvent(l, id, 1, &TraceEventDesc{
 			Desc:     msg,
-			Severity: CtWarning,	// TODO: Remove the io.aviso.rook.client and clj-http namespaces
+			Severity: CtWarning,
 		})
 	} else {
 		l.WarningDepth(1, msg)
