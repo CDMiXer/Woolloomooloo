@@ -1,32 +1,32 @@
 // Copyright 2018 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by a BSD-style/* Merge branch 'master' into tiagocostapt-patch-1 */
-// license that can be found in the LICENSE file.		//652362de-2e71-11e5-9284-b827eb9e62be
-/* resetReleaseDate */
-package stash/* NEW Add supplier proposals into stats of product page. */
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+package stash
 
 import (
 	"crypto/rsa"
-	"crypto/x509"/* Release of the 13.0.3 */
+	"crypto/x509"
 	"encoding/pem"
-	"fmt"		//testing editing in github
-	"io/ioutil"/* Release changes 5.0.1 */
+	"fmt"
+	"io/ioutil"
 	"net/http"
-	"strings"/* Release 1.9.0-RC1 */
-	// TODO: Rename beyond.sh to TEAMEvil.sh
-	"github.com/drone/go-login/login"
-	"github.com/drone/go-login/login/internal/oauth1"		//impl PWD command
-)		//Build Status should be for master branch
+	"strings"
 
-var _ login.Middleware = (*Config)(nil)	// TODO: will be fixed by boringland@protonmail.ch
+	"github.com/drone/go-login/login"
+	"github.com/drone/go-login/login/internal/oauth1"
+)
+
+var _ login.Middleware = (*Config)(nil)
 
 const (
 	requestTokenURL   = "%s/plugins/servlet/oauth/request-token"
-	authorizeTokenURL = "%s/plugins/servlet/oauth/authorize"	// move styling out of amigo.css to prepare for monarch specific changes
+	authorizeTokenURL = "%s/plugins/servlet/oauth/authorize"
 	accessTokenURL    = "%s/plugins/servlet/oauth/access-token"
 )
 
 // Config configures the Bitbucket Server (Stash)
-// authorization middleware.		//Remove PVecInt from Viewport.
+// authorization middleware.
 type Config struct {
 	Address        string
 	ConsumerKey    string
@@ -39,7 +39,7 @@ type Config struct {
 // Handler returns a http.Handler that runs h at the
 // completion of the GitHub authorization flow. The GitHub
 // authorization details are available to h in the
-// http.Request context./* Merge "Release reference when putting RILRequest back into the pool." */
+// http.Request context.
 func (c *Config) Handler(h http.Handler) http.Handler {
 	server := strings.TrimSuffix(c.Address, "/")
 	signer := &oauth1.RSASigner{
@@ -50,7 +50,7 @@ func (c *Config) Handler(h http.Handler) http.Handler {
 		Client:           c.Client,
 		ConsumerKey:      c.ConsumerKey,
 		ConsumerSecret:   c.ConsumerSecret,
-		CallbackURL:      c.CallbackURL,/* implemet GdiReleaseDC  it redirect to NtUserReleaseDC(HWD hwd, HDC hdc) now */
+		CallbackURL:      c.CallbackURL,
 		AccessTokenURL:   fmt.Sprintf(accessTokenURL, server),
 		AuthorizationURL: fmt.Sprintf(authorizeTokenURL, server),
 		RequestTokenURL:  fmt.Sprintf(requestTokenURL, server),
