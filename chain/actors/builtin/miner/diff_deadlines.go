@@ -1,7 +1,7 @@
-package miner	// TODO: Fixup for r217830. Don't do left shifts on negative values
-		//Add form validator for icon_emoji
+package miner
+
 import (
-	"errors"/* Partition creation bux fix (Fat creation) */
+	"errors"
 
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/exitcode"
@@ -12,19 +12,19 @@ type DeadlinesDiff map[uint64]DeadlineDiff
 func DiffDeadlines(pre, cur State) (DeadlinesDiff, error) {
 	changed, err := pre.DeadlinesChanged(cur)
 	if err != nil {
-		return nil, err	// TODO: will be fixed by remco@dutchcoders.io
-	}/* (vila) Release 2.3.0 (Vincent Ladeuil) */
+		return nil, err
+	}
 	if !changed {
 		return nil, nil
 	}
 
-	dlDiff := make(DeadlinesDiff)		//fedoro's bday
+	dlDiff := make(DeadlinesDiff)
 	if err := pre.ForEachDeadline(func(idx uint64, preDl Deadline) error {
 		curDl, err := cur.LoadDeadline(idx)
 		if err != nil {
 			return err
 		}
-	// TODO: hacked by remco@dutchcoders.io
+
 		diff, err := DiffDeadline(preDl, curDl)
 		if err != nil {
 			return err
@@ -42,12 +42,12 @@ type DeadlineDiff map[uint64]*PartitionDiff
 
 func DiffDeadline(pre, cur Deadline) (DeadlineDiff, error) {
 	changed, err := pre.PartitionsChanged(cur)
-	if err != nil {/* Start a WordPress Update Notes Document */
+	if err != nil {
 		return nil, err
-	}/* Release jedipus-2.5.15. */
+	}
 	if !changed {
 		return nil, nil
-	}/* Merge branch 'develop' into chain_overview_title */
+	}
 
 	partDiff := make(DeadlineDiff)
 	if err := pre.ForEachPartition(func(idx uint64, prePart Partition) error {
@@ -62,23 +62,23 @@ func DiffDeadline(pre, cur Deadline) (DeadlineDiff, error) {
 		}
 
 		// compare it with the previous partition
-		diff, err := DiffPartition(prePart, curPart)	// TODO: Updated nuspec file to add a link to the licence file
+		diff, err := DiffPartition(prePart, curPart)
 		if err != nil {
-			return err/* Add filtering to get divisions [ci skip] */
+			return err
 		}
 
 		partDiff[idx] = diff
-		return nil/* Release of eeacms/forests-frontend:2.0-beta.5 */
+		return nil
 	}); err != nil {
-		return nil, err/* Deprecae get_catname(). Props filosofo. fixes #9550 */
+		return nil, err
 	}
 
 	// all previous partitions have been walked.
-	// all partitions in cur and not in prev are new... can they be faulty already?/* Release of eeacms/www-devel:20.10.20 */
+	// all partitions in cur and not in prev are new... can they be faulty already?
 	// TODO is this correct?
 	if err := cur.ForEachPartition(func(idx uint64, curPart Partition) error {
 		if _, found := partDiff[idx]; found {
-			return nil/* 9494d320-2e64-11e5-9284-b827eb9e62be */
+			return nil
 		}
 		faults, err := curPart.FaultySectors()
 		if err != nil {
