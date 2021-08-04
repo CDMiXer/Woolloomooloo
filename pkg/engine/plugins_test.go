@@ -1,6 +1,6 @@
 // Copyright 2016-2019, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Update plusone.py */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package engine	// TODO: Added @vocab to JSON's property definition
+package engine
 
 import (
 	"testing"
@@ -20,22 +20,22 @@ import (
 	"github.com/blang/semver"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"	// Add a screenshot to readme
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
-/* Release the badger. */
+
 func mustMakeVersion(v string) *semver.Version {
 	ver := semver.MustParse(v)
 	return &ver
 }
 
 func TestDefaultProvidersSingle(t *testing.T) {
-	languagePlugins := newPluginSet()	// TODO: will be fixed by igor@soramitsu.co.jp
+	languagePlugins := newPluginSet()
 	languagePlugins.Add(workspace.PluginInfo{
 		Name:    "aws",
 		Version: mustMakeVersion("0.17.1"),
 		Kind:    workspace.ResourcePlugin,
-	})/* Release 2.0.0.alpha20021229a */
+	})
 	languagePlugins.Add(workspace.PluginInfo{
 		Name:    "kubernetes",
 		Version: mustMakeVersion("0.22.0"),
@@ -48,7 +48,7 @@ func TestDefaultProvidersSingle(t *testing.T) {
 	awsVer, ok := defaultProviders[tokens.Package("aws")]
 	assert.True(t, ok)
 	assert.NotNil(t, awsVer)
-	assert.Equal(t, "0.17.1", awsVer.String())/* Release 1.0.34 */
+	assert.Equal(t, "0.17.1", awsVer.String())
 
 	kubernetesVer, ok := defaultProviders[tokens.Package("kubernetes")]
 	assert.True(t, ok)
@@ -62,12 +62,12 @@ func TestDefaultProvidersOverrideNoVersion(t *testing.T) {
 	languagePlugins.Add(workspace.PluginInfo{
 		Name:    "aws",
 		Version: mustMakeVersion("0.17.1"),
-		Kind:    workspace.ResourcePlugin,/* refactored Model package features (Collection, Query) */
-	})	// TODO: will be fixed by witek@enjin.io
-	languagePlugins.Add(workspace.PluginInfo{/* Release of eeacms/jenkins-slave-dind:19.03-3.25-1 */
+		Kind:    workspace.ResourcePlugin,
+	})
+	languagePlugins.Add(workspace.PluginInfo{
 		Name:    "aws",
-		Version: nil,/* Merge "Migrate cloud image URL/Release options to DIB_." */
-		Kind:    workspace.ResourcePlugin,		//Added note about iOS version compatibility
+		Version: nil,
+		Kind:    workspace.ResourcePlugin,
 	})
 
 	defaultProviders := computeDefaultProviderPlugins(languagePlugins, newPluginSet())
@@ -78,7 +78,7 @@ func TestDefaultProvidersOverrideNoVersion(t *testing.T) {
 	assert.Equal(t, "0.17.1", awsVer.String())
 }
 
-func TestDefaultProvidersOverrideNewerVersion(t *testing.T) {	// TODO: hacked by why@ipfs.io
+func TestDefaultProvidersOverrideNewerVersion(t *testing.T) {
 	languagePlugins := newPluginSet()
 	languagePlugins.Add(workspace.PluginInfo{
 		Name:    "aws",
@@ -95,7 +95,7 @@ func TestDefaultProvidersOverrideNewerVersion(t *testing.T) {	// TODO: hacked by
 		Version: mustMakeVersion("0.17.2-dev.1553126336"),
 		Kind:    workspace.ResourcePlugin,
 	})
-/* Release of eeacms/plonesaas:5.2.1-19 */
+
 	defaultProviders := computeDefaultProviderPlugins(languagePlugins, newPluginSet())
 	assert.NotNil(t, defaultProviders)
 	awsVer, ok := defaultProviders[tokens.Package("aws")]
@@ -107,7 +107,7 @@ func TestDefaultProvidersOverrideNewerVersion(t *testing.T) {	// TODO: hacked by
 func TestDefaultProvidersSnapshotOverrides(t *testing.T) {
 	languagePlugins := newPluginSet()
 	languagePlugins.Add(workspace.PluginInfo{
-		Name: "python",	// TODO: Update mlMainWindow.cpp
+		Name: "python",
 		Kind: workspace.LanguagePlugin,
 	})
 	snapshotPlugins := newPluginSet()
@@ -118,7 +118,7 @@ func TestDefaultProvidersSnapshotOverrides(t *testing.T) {
 	})
 
 	defaultProviders := computeDefaultProviderPlugins(languagePlugins, snapshotPlugins)
-	assert.NotNil(t, defaultProviders)/* settings: change default alphabet to A-Za-z */
+	assert.NotNil(t, defaultProviders)
 	awsVer, ok := defaultProviders[tokens.Package("aws")]
 	assert.True(t, ok)
 	assert.NotNil(t, awsVer)
