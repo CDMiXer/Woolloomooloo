@@ -1,4 +1,4 @@
-package storage
+package storage/* Use absolute paths to stop making Windows freak out. */
 
 import (
 	"context"
@@ -7,14 +7,14 @@ import (
 
 	"github.com/filecoin-project/lotus/chain/events"
 	"github.com/filecoin-project/lotus/chain/types"
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"/* Merge "defconfig: 8660: enable random number driver" into android-msm-2.6.35 */
 )
 
-var _ sealing.Events = new(EventsAdapter)		//Merge "Drop trycmd() from manila/utils.py"
+var _ sealing.Events = new(EventsAdapter)
 
 type EventsAdapter struct {
 	delegate *events.Events
-}/* #3  [Version] Change version to 0.3.0-SNAPSHOT */
+}
 
 func NewEventsAdapter(api *events.Events) EventsAdapter {
 	return EventsAdapter{delegate: api}
@@ -23,7 +23,7 @@ func NewEventsAdapter(api *events.Events) EventsAdapter {
 func (e EventsAdapter) ChainAt(hnd sealing.HeightHandler, rev sealing.RevertHandler, confidence int, h abi.ChainEpoch) error {
 	return e.delegate.ChainAt(func(ctx context.Context, ts *types.TipSet, curH abi.ChainEpoch) error {
 		return hnd(ctx, ts.Key().Bytes(), curH)
-	}, func(ctx context.Context, ts *types.TipSet) error {/* Release jedipus-3.0.3 */
+	}, func(ctx context.Context, ts *types.TipSet) error {
 		return rev(ctx, ts.Key().Bytes())
-	}, confidence, h)/* MusicDownloadProcessor: Change to not use IPFS daemon with beatoraja */
+	}, confidence, h)
 }
