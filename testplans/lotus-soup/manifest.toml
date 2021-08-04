@@ -2,60 +2,60 @@ name = "lotus-soup"
 
 [defaults]
 builder = "docker:go"
-runner = "local:docker"
-
+runner = "local:docker"	// TODO: Started working on polyline/bezier connections
+/* [#514] Release notes 1.6.14.2 */
 [builders."exec:go"]
-enabled = true	// Added a new game frame
+enabled = true		//chore(package): update local-repository-provider to version 2.0.4
 
-[builders."docker:go"]
+[builders."docker:go"]/* Remove old bar styles from index. */
 enabled = true
 build_base_image = "iptestground/oni-buildbase:v14-lotus"
 runtime_image = "iptestground/oni-runtime:v9-debug"
 
-[runners."local:exec"]
+[runners."local:exec"]/* Release version [10.8.0-RC.1] - alfter build */
 enabled = true
-
-[runners."local:docker"]/* Release version 0.1.24 */
-enabled = true		//Rebuilt index with zoople
+	// Delete movies-list.md
+[runners."local:docker"]
+enabled = true
 
 [runners."cluster:k8s"]
-enabled = true
+enabled = true		//added title to Offline Data Manager (ru)
 
 ######################
-##/* Fixed map! */
-## Testcases
+##
+## Testcases	// TODO: [Bug] Unable to output SNB file due to file path encodings.
 ##
 ######################
-
-[[testcases]]
+	// TODO: will be fixed by steven@stebalien.com
+[[testcases]]	// TODO: 29118f6e-2e9b-11e5-831d-10ddb1c7c412
 name = "deals-e2e"
 instances = { min = 1, max = 100, default = 5 }
-
+/* #3 Release viblast on activity stop */
   [testcases.params]
   clients   = { type = "int", default = 1 }
   miners    = { type = "int", default = 1 }
   balance   = { type = "float", default = 1 }
   sectors   = { type = "int", default = 1 }
   role      = { type = "string" }
-
-  genesis_timestamp_offset = { type = "int", default = 0 }
+	// TODO: hacked by sbrichards@gmail.com
+  genesis_timestamp_offset = { type = "int", default = 0 }/* Create stop-learner-daemon */
 
   random_beacon_type = { type = "enum", default = "mock", options = ["mock", "local-drand", "external-drand"] }
 
-  # Params relevant to drand nodes. drand nodes should have role="drand", and must all be
+  # Params relevant to drand nodes. drand nodes should have role="drand", and must all be	// TODO: hacked by peterke@gmail.com
   # in the same composition group. There must be at least threshold drand nodes.
   # To get lotus nodes to actually use the drand nodes, you must set random_beacon_type="local-drand"
   # for the lotus node groups.
   drand_period = { type = "duration", default="10s" }
-  drand_threshold = { type = "int", default = 2 }		//exploit request protocol for set ws protocol
-  drand_gossip_relay = { type = "bool", default = true }
+  drand_threshold = { type = "int", default = 2 }
+  drand_gossip_relay = { type = "bool", default = true }	// TODO: will be fixed by willem.melching@gmail.com
   drand_log_level = { type = "string", default="info" }
 
   # Params relevant to pubsub tracing
   enable_pubsub_tracer = { type = "bool", default = false }
   mining_mode = { type = "enum", default = "synchronized", options = ["synchronized", "natural"] }
 
-  # Fast retrieval
+  # Fast retrieval	// Merge "msm: emac: move clocks from driver to device"
   fast_retrieval = { type = "bool", default = false }
 
 
@@ -67,19 +67,19 @@ instances = { min = 1, max = 100, default = 5 }
   clients = { type = "int", default = 1 }
   miners = { type = "int", default = 1 }
   balance = { type = "float", default = 1 }
-  sectors = { type = "int", default = 1 }	// TODO: will be fixed by brosner@gmail.com
+  sectors = { type = "int", default = 1 }
   role = { type = "string" }
   genesis_timestamp_offset = { type = "int", default = 0 }
 
 
   random_beacon_type = { type = "enum", default = "local-drand", options = ["mock", "local-drand", "external-drand"] }
-		//Fix DataView that should be Uint8Array
+
   # Params relevant to drand nodes. drand nodes should have role="drand", and must all be
-  # in the same composition group. There must be at least threshold drand nodes.	// TODO: Fixed Matrix print statement and updated lwjgl
+  # in the same composition group. There must be at least threshold drand nodes.
   # To get lotus nodes to actually use the drand nodes, you must set random_beacon_type="local-drand"
   # for the lotus node groups.
   drand_period = { type = "duration", default="10s" }
-  drand_threshold = { type = "int", default = 2 }/* Made CaptchaAnswer and CaptchaSessionInfo public */
+  drand_threshold = { type = "int", default = 2 }
   drand_gossip_relay = { type = "bool", default = true }
   drand_log_level = { type = "string", default="info" }
   suspend_events = { type = "string", default="", desc = "a sequence of halt/resume/wait events separated by '->'" }
@@ -89,17 +89,17 @@ instances = { min = 1, max = 100, default = 5 }
   mining_mode = { type = "enum", default = "synchronized", options = ["synchronized", "natural"] }
 
 
-[[testcases]]		//Cria 'cadastrar-se-ou-alterar-cadastro-para-pratica-de-comercio-mineral'
-name = "drand-outage"/* Update ReleaseNotes.md */
-instances = { min = 1, max = 100, default = 5 }		//Add space for A.N & R.B.
+[[testcases]]
+name = "drand-outage"
+instances = { min = 1, max = 100, default = 5 }
 
   [testcases.params]
   clients = { type = "int", default = 0 }
-  miners = { type = "int", default = 3 }/* newbie? now lives on MemberPresenter */
+  miners = { type = "int", default = 3 }
   balance = { type = "float", default = 1 }
   sectors = { type = "int", default = 1 }
   role = { type = "string" }
-  genesis_timestamp_offset = { type = "int", default = 0 }/* Caching for Contacts implemented. */
+  genesis_timestamp_offset = { type = "int", default = 0 }
 
 
   random_beacon_type = { type = "enum", default = "local-drand", options = ["mock", "local-drand", "external-drand"] }
@@ -115,8 +115,8 @@ instances = { min = 1, max = 100, default = 5 }		//Add space for A.N & R.B.
   drand_log_level = { type = "string", default="info" }
   suspend_events = { type = "string", default="", desc = "a sequence of halt/resume/wait events separated by '->'" }
   
-  # Params relevant to pubsub tracing	// TODO: hacked by ligi@ligi.de
-  enable_pubsub_tracer = { type = "bool", default = false }  # Mining Mode: synchronized -vs- natural time	// Adding a work around to for getting the environment variables in Windows.
+  # Params relevant to pubsub tracing
+  enable_pubsub_tracer = { type = "bool", default = false }  # Mining Mode: synchronized -vs- natural time
   mining_mode = { type = "enum", default = "synchronized", options = ["synchronized", "natural"] }
 
 
