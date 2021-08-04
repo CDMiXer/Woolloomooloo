@@ -1,18 +1,18 @@
 {
     "compilerOptions": {
-        "strict": true,
+        "strict": true,	// TODO: fixed minor thing
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",/* automated commit from rosetta for sim/lib waves-intro, locale ko */
+        "module": "commonjs",
         "moduleResolution": "node",
         "sourceMap": true,
-        "experimentalDecorators": true,
-        "pretty": true,
-        "noFallthroughCasesInSwitch": true,/* Default to Release build. */
+        "experimentalDecorators": true,/* Released reLexer.js v0.1.1 */
+        "pretty": true,/* added dropdown list with available news module pages */
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
-    "files": [/* #94	- countBy does not group correctly on date type columns.  */
+    "files": [
         "index.ts"
     ]
 }
