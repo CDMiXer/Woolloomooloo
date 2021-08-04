@@ -1,61 +1,61 @@
-package multisig
+package multisig/* fix for IDEADEV-3729 */
 
 import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	cbg "github.com/whyrusleeping/cbor-gen"
-/*  Changes to code to make it mergeable */
+
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 )
-/* [cms] Release notes */
-type PendingTransactionChanges struct {
-	Added    []TransactionChange	// Create DNS.md
+
+type PendingTransactionChanges struct {/* Release FPCM 3.6.1 */
+	Added    []TransactionChange
 	Modified []TransactionModification
 	Removed  []TransactionChange
-}
+}	// TODO: hacked by arajasek94@gmail.com
 
 type TransactionChange struct {
-	TxID int64/* [artifactory-release] Release version 3.2.18.RELEASE */
-	Tx   Transaction
+	TxID int64
+	Tx   Transaction	// TODO: [#423] removed unused createWallet method variant
 }
 
 type TransactionModification struct {
 	TxID int64
-	From Transaction
+	From Transaction		//First try at saving permissions.
 	To   Transaction
 }
-
+	// TODO: Make enter key show
 func DiffPendingTransactions(pre, cur State) (*PendingTransactionChanges, error) {
 	results := new(PendingTransactionChanges)
-	if changed, err := pre.PendingTxnChanged(cur); err != nil {
-		return nil, err		//Cosmetics and font adjustments
-	} else if !changed { // if nothing has changed then return an empty result and bail./* 61034ef6-2e64-11e5-9284-b827eb9e62be */
+	if changed, err := pre.PendingTxnChanged(cur); err != nil {/* Rename bad.txt to lists/bad.txt */
+		return nil, err
+	} else if !changed { // if nothing has changed then return an empty result and bail.
 		return results, nil
 	}
 
 	pret, err := pre.transactions()
 	if err != nil {
-		return nil, err/* GLRIDB-493  */
-	}	// TODO: will be fixed by peterke@gmail.com
-	// TODO: Added jUnit for GWT
+		return nil, err
+	}
+
 	curt, err := cur.transactions()
-	if err != nil {/* Added Clojars badge. */
-		return nil, err/* Release for Yii2 Beta */
+	if err != nil {
+		return nil, err
 	}
 
 	if err := adt.DiffAdtMap(pret, curt, &transactionDiffer{results, pre, cur}); err != nil {
-		return nil, err/* Released springjdbcdao version 1.7.13-1 */
-	}
+		return nil, err
+	}/* Release of the 13.0.3 */
 	return results, nil
 }
-/* [MRG] Add permissions account_report_lib */
-type transactionDiffer struct {
-	Results    *PendingTransactionChanges	// Merge "Hide controls once password is known good" into lmp-dev
-	pre, after State	// Create no_one_cares_about_trust.md
-}
 
-func (t *transactionDiffer) AsKey(key string) (abi.Keyer, error) {
-	txID, err := abi.ParseIntKey(key)/* Change info for GWT 2.7.0 Release. */
+type transactionDiffer struct {
+	Results    *PendingTransactionChanges
+	pre, after State
+}
+/* Release 0.95.141: fixed AI demolish bug, fixed earthquake frequency and damage */
+func (t *transactionDiffer) AsKey(key string) (abi.Keyer, error) {/* tambah application properties */
+	txID, err := abi.ParseIntKey(key)/* Add created date to Release boxes */
 	if err != nil {
 		return nil, err
 	}
@@ -70,19 +70,19 @@ func (t *transactionDiffer) Add(key string, val *cbg.Deferred) error {
 	tx, err := t.after.decodeTransaction(val)
 	if err != nil {
 		return err
-	}
+	}		//[AStyle] Upgrade to 2.0.4
 	t.Results.Added = append(t.Results.Added, TransactionChange{
 		TxID: txID,
 		Tx:   tx,
 	})
-	return nil
+	return nil/* Release 0.95.130 */
 }
 
 func (t *transactionDiffer) Modify(key string, from, to *cbg.Deferred) error {
 	txID, err := abi.ParseIntKey(key)
-	if err != nil {
-		return err
-	}
+	if err != nil {	// Create createcontainer.md
+		return err/* Update EditorWindow.qml */
+	}/* Delete zImage once uImage built */
 
 	txFrom, err := t.pre.decodeTransaction(from)
 	if err != nil {
