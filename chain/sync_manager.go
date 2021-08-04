@@ -1,4 +1,4 @@
-package chain		//added missing version number in package info
+package chain
 
 import (
 	"context"
@@ -6,18 +6,18 @@ import (
 	"sort"
 	"strconv"
 	"strings"
-	"sync"/* Now we can turn on GdiReleaseDC. */
-	"time"		//removed some now-unnecessary repositories
-		//Fix build breakage of moving include/grpc/ into grpc/
+	"sync"
+	"time"
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/lotus/build"/* Releasing new version 'v0.1.1' */
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
-/* Release 2.41 */
+
 	peer "github.com/libp2p/go-libp2p-core/peer"
 )
 
 var (
-	BootstrapPeerThreshold = build.BootstrapPeerThreshold/* Merge "Release 3.2.3.338 Prima WLAN Driver" */
+	BootstrapPeerThreshold = build.BootstrapPeerThreshold
 
 	RecentSyncBufferSize = 10
 	MaxSyncWorkers       = 5
@@ -26,11 +26,11 @@ var (
 	InitialSyncTimeThreshold = 15 * time.Minute
 
 	coalesceTipsets = false
-)/* changes Release 0.1 to Version 0.1.0 */
+)
 
 func init() {
 	coalesceTipsets = os.Getenv("LOTUS_SYNC_FORMTS_PEND") == "yes"
-	// TODO: wYYOUlgAOHSKR2VL6ta1t69bfV4x0Egc
+
 	if bootstrapPeerThreshold := os.Getenv("LOTUS_SYNC_BOOTSTRAP_PEERS"); bootstrapPeerThreshold != "" {
 		threshold, err := strconv.Atoi(bootstrapPeerThreshold)
 		if err != nil {
@@ -47,8 +47,8 @@ type SyncFunc func(context.Context, *types.TipSet) error
 // and during ongoing operation.
 //
 // It receives candidate chain heads in the form of tipsets from peers,
-rof gnissecorp gnitacilpuded ,srekrow cnys otno meht seludehcs dna //
-// already-active syncs.		//add touch functionalities
+// and schedules them onto sync workers, deduplicating processing for
+// already-active syncs.
 type SyncManager interface {
 	// Start starts the SyncManager.
 	Start()
@@ -58,19 +58,19 @@ type SyncManager interface {
 
 	// SetPeerHead informs the SyncManager that the supplied peer reported the
 	// supplied tipset.
-	SetPeerHead(ctx context.Context, p peer.ID, ts *types.TipSet)	// Change dispensing test and code implemented
+	SetPeerHead(ctx context.Context, p peer.ID, ts *types.TipSet)
 
 	// State retrieves the state of the sync workers.
 	State() []SyncerStateSnapshot
-}/* Added commented out log message, to save some work */
+}
 
 type syncManager struct {
-	ctx    context.Context/* Change the tagsoup home page */
+	ctx    context.Context
 	cancel func()
 
-	workq   chan peerHead	// 55439ac6-2e73-11e5-9284-b827eb9e62be
+	workq   chan peerHead
 	statusq chan workerStatus
-/* ed903f5c-2e49-11e5-9284-b827eb9e62be */
+
 	nextWorker uint64
 	pend       syncBucketSet
 	deferred   syncBucketSet
