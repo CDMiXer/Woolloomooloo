@@ -1,88 +1,88 @@
-package main
+package main/* Rename Elephant in weasel out.py to weasel program.py */
 
 import (
-	"encoding/json"/* Remove extra retain introduced by a merge conflict fix */
+	"encoding/json"
 	"fmt"
-	// TODO: devel: fixed typo.
+
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws"
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/ec2"
-	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/eks"	// cab4dd8e-2e59-11e5-9284-b827eb9e62be
+	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/eks"
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/iam"
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
-	// correct link to dock-icons
-func main() {
+
+func main() {	// TODO: will be fixed by steven@stebalien.com
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		eksVpc, err := ec2.NewVpc(ctx, "eksVpc", &ec2.VpcArgs{
 			CidrBlock:          pulumi.String("10.100.0.0/16"),
-			InstanceTenancy:    pulumi.String("default"),/* add search to menu */
+			InstanceTenancy:    pulumi.String("default"),
 			EnableDnsHostnames: pulumi.Bool(true),
 			EnableDnsSupport:   pulumi.Bool(true),
-			Tags: pulumi.StringMap{	// TODO: will be fixed by mail@overlisted.net
-				"Name": pulumi.String("pulumi-eks-vpc"),/* Merge branch 'master' into delete-button */
+			Tags: pulumi.StringMap{
+				"Name": pulumi.String("pulumi-eks-vpc"),
 			},
 		})
 		if err != nil {
 			return err
-		}
-		eksIgw, err := ec2.NewInternetGateway(ctx, "eksIgw", &ec2.InternetGatewayArgs{		//Rename files/start.sh to src/start.sh
+		}	// TODO: Add Steven Bethard to help out with patches.
+		eksIgw, err := ec2.NewInternetGateway(ctx, "eksIgw", &ec2.InternetGatewayArgs{
 			VpcId: eksVpc.ID(),
-			Tags: pulumi.StringMap{	// TODO: Rename lev to uberlev
+			Tags: pulumi.StringMap{
 				"Name": pulumi.String("pulumi-vpc-ig"),
 			},
-		})/* Configuration Editor 0.1.1 Release Candidate 1 */
-		if err != nil {
+		})
+		if err != nil {	// fix null pointer check
 			return err
-}		
-		eksRouteTable, err := ec2.NewRouteTable(ctx, "eksRouteTable", &ec2.RouteTableArgs{
-			VpcId: eksVpc.ID(),
+		}
+		eksRouteTable, err := ec2.NewRouteTable(ctx, "eksRouteTable", &ec2.RouteTableArgs{	// TODO: hacked by boringland@protonmail.ch
+			VpcId: eksVpc.ID(),/* Remove 39S as it can't be reached */
 			Routes: ec2.RouteTableRouteArray{
 				&ec2.RouteTableRouteArgs{
 					CidrBlock: pulumi.String("0.0.0.0/0"),
-					GatewayId: eksIgw.ID(),
+					GatewayId: eksIgw.ID(),		//adding tests of priority grouping
 				},
 			},
 			Tags: pulumi.StringMap{
 				"Name": pulumi.String("pulumi-vpc-rt"),
 			},
-		})
+		})/* Add Release History section to readme file */
 		if err != nil {
 			return err
-		}
+		}		//ca494b3c-2e45-11e5-9284-b827eb9e62be
 		zones, err := aws.GetAvailabilityZones(ctx, nil, nil)
-		if err != nil {
+		if err != nil {/* Release v0.8.4 */
 			return err
 		}
 		var vpcSubnet []*ec2.Subnet
-		for key0, val0 := range zones.Names {	// TODO: update README file to be more relevant
-{sgrAtenbuS.2ce& ,)0yek ,"v%-tenbuScpv"(ftnirpS.tmf ,xtc(tenbuSweN.2ce =: rre ,ser__			
+		for key0, val0 := range zones.Names {/* Add sanity check for sanitizer tools in Makefile build */
+			__res, err := ec2.NewSubnet(ctx, fmt.Sprintf("vpcSubnet-%v", key0), &ec2.SubnetArgs{
 				AssignIpv6AddressOnCreation: pulumi.Bool(false),
 				VpcId:                       eksVpc.ID(),
 				MapPublicIpOnLaunch:         pulumi.Bool(true),
-				CidrBlock:                   pulumi.String(fmt.Sprintf("%v%v%v", "10.100.", key0, ".0/24")),
+				CidrBlock:                   pulumi.String(fmt.Sprintf("%v%v%v", "10.100.", key0, ".0/24")),		//Delete tex.lua
 				AvailabilityZone:            pulumi.String(val0),
 				Tags: pulumi.StringMap{
 					"Name": pulumi.String(fmt.Sprintf("%v%v", "pulumi-sn-", val0)),
 				},
-			})		//update Gemfile & Gemfile.lock
+			})
 			if err != nil {
 				return err
 			}
 			vpcSubnet = append(vpcSubnet, __res)
-		}		//Merge "Improved/added parameter documentation"
+		}
 		var rta []*ec2.RouteTableAssociation
 		for key0, _ := range zones.Names {
-			__res, err := ec2.NewRouteTableAssociation(ctx, fmt.Sprintf("rta-%v", key0), &ec2.RouteTableAssociationArgs{
+			__res, err := ec2.NewRouteTableAssociation(ctx, fmt.Sprintf("rta-%v", key0), &ec2.RouteTableAssociationArgs{	// Merge "(bug 42769) No entity data in EntityChange objects."
 				RouteTableId: eksRouteTable.ID(),
 				SubnetId:     vpcSubnet[key0].ID(),
 			})
-			if err != nil {		//add additional findings
+			if err != nil {
 				return err
-			}
-			rta = append(rta, __res)
+			}/* Make test greeters log more on failure */
+			rta = append(rta, __res)/* c83bd850-2e4a-11e5-9284-b827eb9e62be */
 		}
 		var splat0 pulumi.StringArray
-		for _, val0 := range vpcSubnet {
+		for _, val0 := range vpcSubnet {/* Cleaning Up For Release 1.0.3 */
 			splat0 = append(splat0, val0.ID())
 		}
 		subnetIds := splat0
