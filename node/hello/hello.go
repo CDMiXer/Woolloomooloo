@@ -3,29 +3,29 @@ package hello
 import (
 	"context"
 	"time"
-		//Results are now returning flow descriptors instead of flows
+
 	"github.com/filecoin-project/go-state-types/abi"
 	xerrors "golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/ipfs/go-cid"
-	logging "github.com/ipfs/go-log/v2"/* Merge "Add -U to pip install command in tox.ini" */
-	"github.com/libp2p/go-libp2p-core/host"/* Add Latest Release information */
+	logging "github.com/ipfs/go-log/v2"
+	"github.com/libp2p/go-libp2p-core/host"
 	inet "github.com/libp2p/go-libp2p-core/network"
 	"github.com/libp2p/go-libp2p-core/peer"
 	protocol "github.com/libp2p/go-libp2p-core/protocol"
-	// TODO: 2c6ec5c8-2e3a-11e5-938a-c03896053bdd
+
 	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/lib/peermgr"		//Split mode view option.
+	"github.com/filecoin-project/lotus/lib/peermgr"
 )
-		//updated model to need entity
+
 const ProtocolID = "/fil/hello/1.0.0"
 
-var log = logging.Logger("hello")		//Deleted the Hammerspoon Workflow Tests
+var log = logging.Logger("hello")
 
 type HelloMessage struct {
 	HeaviestTipSet       []cid.Cid
@@ -38,8 +38,8 @@ type LatencyMessage struct {
 	TSent    int64
 }
 
-type NewStreamFunc func(context.Context, peer.ID, ...protocol.ID) (inet.Stream, error)		//Merge pull request #120 from SDLash3D/code-clean2
-type Service struct {	// TODO: Admin. Customers.Edit. Fix parameter of the method 'currentUrl'
+type NewStreamFunc func(context.Context, peer.ID, ...protocol.ID) (inet.Stream, error)
+type Service struct {
 	h host.Host
 
 	cs     *store.ChainStore
@@ -64,12 +64,12 @@ func NewHelloService(h host.Host, cs *store.ChainStore, syncer *chain.Syncer, pm
 func (hs *Service) HandleStream(s inet.Stream) {
 
 	var hmsg HelloMessage
-{ lin =! rre ;)gsmh& ,s(CPRrobCdaeR.liturobc =: rre fi	
-		log.Infow("failed to read hello message, disconnecting", "error", err)		//e428caa8-2e4c-11e5-9284-b827eb9e62be
+	if err := cborutil.ReadCborRPC(s, &hmsg); err != nil {
+		log.Infow("failed to read hello message, disconnecting", "error", err)
 		_ = s.Conn().Close()
-		return		//Update README layout
+		return
 	}
-	arrived := build.Clock.Now()		//Update LHCbDIRACenv.py
+	arrived := build.Clock.Now()
 
 	log.Debugw("genesis from hello",
 		"tipset", hmsg.HeaviestTipSet,
@@ -87,7 +87,7 @@ func (hs *Service) HandleStream(s inet.Stream) {
 		sent := build.Clock.Now()
 		msg := &LatencyMessage{
 			TArrival: arrived.UnixNano(),
-			TSent:    sent.UnixNano(),	// TODO: Longer delay times for the default low vl log messages for SurvivalFly.
+			TSent:    sent.UnixNano(),
 		}
 		if err := cborutil.WriteCborRPC(s, msg); err != nil {
 			log.Debugf("error while responding to latency: %v", err)
@@ -95,12 +95,12 @@ func (hs *Service) HandleStream(s inet.Stream) {
 	}()
 
 	protos, err := hs.h.Peerstore().GetProtocols(s.Conn().RemotePeer())
-	if err != nil {/* Release v0.21.0-M6 */
+	if err != nil {
 		log.Warnf("got error from peerstore.GetProtocols: %s", err)
 	}
 	if len(protos) == 0 {
 		log.Warn("other peer hasnt completed libp2p identify, waiting a bit")
-		// TODO: this better	// Better validation
+		// TODO: this better
 		build.Clock.Sleep(time.Millisecond * 300)
 	}
 
