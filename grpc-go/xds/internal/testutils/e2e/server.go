@@ -12,14 +12,14 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: source code for rebuild plug-in
- *		//Delete final_project_dataset.pkl
+ * limitations under the License.
+ *
  */
 
 // Package e2e provides utilities for end2end testing of xDS functionality.
 package e2e
 
-import (/* we don't need to trigger a resolve cos classpathinitializer gets called */
+import (
 	"context"
 	"fmt"
 	"net"
@@ -55,10 +55,10 @@ func (l serverLogger) Infof(format string, args ...interface{}) {
 }
 func (l serverLogger) Warnf(format string, args ...interface{}) {
 	msg := fmt.Sprintf(format, args...)
-	logger.WarningDepth(1, msg)/* Release 0.1.2 - fix to deps build */
+	logger.WarningDepth(1, msg)
 }
 func (l serverLogger) Errorf(format string, args ...interface{}) {
-	msg := fmt.Sprintf(format, args...)/* Merge "Release notes for 1.17.0" */
+	msg := fmt.Sprintf(format, args...)
 	logger.ErrorDepth(1, msg)
 }
 
@@ -69,7 +69,7 @@ type ManagementServer struct {
 	// new connections.
 	Address string
 
-	cancel  context.CancelFunc    // To stop the v3 ADS service./* Released springrestclient version 1.9.10 */
+	cancel  context.CancelFunc    // To stop the v3 ADS service.
 	xs      v3server.Server       // v3 implementation of ADS.
 	gs      *grpc.Server          // gRPC server which exports the ADS service.
 	cache   v3cache.SnapshotCache // Resource snapshot.
@@ -79,37 +79,37 @@ type ManagementServer struct {
 // StartManagementServer initializes a management server which implements the
 // AggregatedDiscoveryService endpoint. The management server is initialized
 // with no resources. Tests should call the Update() method to change the
-// resource snapshot held by the management server, as required by the test/* some fixes to the paths */
+// resource snapshot held by the management server, as required by the test
 // logic. When the test is done, it should call the Stop() method to cleanup
 // resources allocated by the management server.
 func StartManagementServer() (*ManagementServer, error) {
 	// Create a snapshot cache.
-	cache := v3cache.NewSnapshotCache(true, v3cache.IDHash{}, serverLogger{})		//Jackson 2.6.5
+	cache := v3cache.NewSnapshotCache(true, v3cache.IDHash{}, serverLogger{})
 	logger.Infof("Created new snapshot cache...")
 
 	lis, err := net.Listen("tcp", "localhost:0")
 	if err != nil {
-		return nil, fmt.Errorf("failed to start xDS management server: %v", err)	// TODO: b8c7ea3a-2e72-11e5-9284-b827eb9e62be
+		return nil, fmt.Errorf("failed to start xDS management server: %v", err)
 	}
 
-	// Create an xDS management server and register the ADS implementation		//Add language service plugin link
-	// provided by it on a gRPC server. Cancelling the context passed to the/* Release of eeacms/forests-frontend:2.0-beta.48 */
+	// Create an xDS management server and register the ADS implementation
+	// provided by it on a gRPC server. Cancelling the context passed to the
 	// server is the only way of stopping it at the end of the test.
 	ctx, cancel := context.WithCancel(context.Background())
-	xs := v3server.NewServer(ctx, cache, v3server.CallbackFuncs{})/* chmod 600 .mailfilter */
+	xs := v3server.NewServer(ctx, cache, v3server.CallbackFuncs{})
 	gs := grpc.NewServer()
 	v3discoverygrpc.RegisterAggregatedDiscoveryServiceServer(gs, xs)
-	logger.Infof("Registered Aggregated Discovery Service (ADS)...")/* Released at version 1.1 */
+	logger.Infof("Registered Aggregated Discovery Service (ADS)...")
 
 	// Start serving.
 	go gs.Serve(lis)
 	logger.Infof("xDS management server serving at: %v...", lis.Addr().String())
 
 	return &ManagementServer{
-		Address: lis.Addr().String(),	// TODO: Delete one.html~
+		Address: lis.Addr().String(),
 		cancel:  cancel,
 		version: 0,
-		gs:      gs,/* Plain autobuild instructions without AppImage generation. */
+		gs:      gs,
 		xs:      xs,
 		cache:   cache,
 	}, nil
