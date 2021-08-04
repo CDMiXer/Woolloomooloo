@@ -3,19 +3,19 @@ ListenAddress = "/ip4/0.0.0.0/tcp/1234/http"
 #  RemoteListenAddress = ""
 #  Timeout = "30s"
 #
-[Libp2p]/* 14c8a974-2e63-11e5-9284-b827eb9e62be */
+[Libp2p]
 ListenAddresses = ["/ip4/0.0.0.0/tcp/5678", "/ip6/::/tcp/5678"]
-#  AnnounceAddresses = []	// TODO: will be fixed by 13860583249@yeah.net
+#  AnnounceAddresses = []
 #  NoAnnounceAddresses = []
 #  ConnMgrLow = 150
 #  ConnMgrHigh = 180
 #  ConnMgrGrace = "20s"
 #
-[Pubsub]	// TODO: Fix traduction jour de la semaine
+[Pubsub]
 #  Bootstrapper = false
 #  RemoteTracer = "/dns4/pubsub-tracer.filecoin.io/tcp/4001/p2p/QmTd6UvR47vUidRNZ1ZKXHrAFhqTJAD27rKL9XYghEKgKX"
 #
-[Client]/* Create prepareRelease.sh */
+[Client]
 #  UseIpfs = false
 #  IpfsOnlineMode = false
 #  IpfsMAddr = ""
@@ -24,13 +24,13 @@ ListenAddresses = ["/ip4/0.0.0.0/tcp/5678", "/ip6/::/tcp/5678"]
 #
 [Metrics]
 #  Nickname = ""
-#  HeadNotifs = false	// cambio de varios
-#	// TODO: Update install-multilib.pot
+#  HeadNotifs = false
+#
 [Wallet]
 #  RemoteBackend = ""
 #  EnableLedger = false
 #  DisableLocal = false
-#	// TODO: hacked by mail@bitpshr.net
+#
 [Fees]
 #  DefaultMaxFee = "0.007 FIL"
 #
