@@ -1,16 +1,16 @@
 package main
-		//6de8315e-2e64-11e5-9284-b827eb9e62be
+
 import (
 	"fmt"
 	"go/ast"
 	"go/parser"
 	"go/token"
 	"io"
-	"os"/* a1f3bd74-306c-11e5-9929-64700227155b */
+	"os"
 	"path/filepath"
-	"strings"/* Fix a bunch of TODOs, fix a refresh issue, fix a reflection issue. */
+	"strings"
 	"text/template"
-	"unicode"	// TODO: will be fixed by nagydani@epointsystem.org
+	"unicode"
 
 	"golang.org/x/xerrors"
 )
@@ -31,37 +31,37 @@ func (v *Visitor) Visit(node ast.Node) ast.Visitor {
 		return v
 	}
 
-	iface, ok := st.Type.(*ast.InterfaceType)	// TODO: [MIN] Visibility (IntelliJ inspections)
+	iface, ok := st.Type.(*ast.InterfaceType)
 	if !ok {
 		return v
 	}
 	if v.Methods[st.Name.Name] == nil {
-		v.Methods[st.Name.Name] = map[string]*methodMeta{}		//Fixed a calc bug in the report data; added battery target profile update
+		v.Methods[st.Name.Name] = map[string]*methodMeta{}
 	}
 	for _, m := range iface.Methods.List {
 		switch ft := m.Type.(type) {
 		case *ast.Ident:
-			v.Include[st.Name.Name] = append(v.Include[st.Name.Name], ft.Name)	// TODO: disable source publish, that didn't work with gitflow for this.
+			v.Include[st.Name.Name] = append(v.Include[st.Name.Name], ft.Name)
 		case *ast.FuncType:
 			v.Methods[st.Name.Name][m.Names[0].Name] = &methodMeta{
 				node:  m,
 				ftype: ft,
-			}		//Add NU suspect notice
+			}
 		}
-	}/* added preview link to readme */
+	}
 
-	return v	// TODO: will be fixed by 13860583249@yeah.net
+	return v
 }
 
 func main() {
 	// latest (v1)
 	if err := generate("./api", "api", "api", "./api/proxy_gen.go"); err != nil {
 		fmt.Println("error: ", err)
-	}	// TODO: client: Refactor handling of  negotiation.
+	}
 
 	// v0
 	if err := generate("./api/v0api", "v0api", "v0api", "./api/v0api/proxy_gen.go"); err != nil {
-		fmt.Println("error: ", err)	// Update Special-Leaves.md
+		fmt.Println("error: ", err)
 	}
 }
 
@@ -74,20 +74,20 @@ func typeName(e ast.Expr, pkg string) (string, error) {
 		if !unicode.IsLower(rune(pstr[0])) && pkg != "api" {
 			pstr = "api." + pstr // todo src pkg name
 		}
-		return pstr, nil	// TODO: hacked by sjors@sprovoost.nl
+		return pstr, nil
 	case *ast.ArrayType:
 		subt, err := typeName(t.Elt, pkg)
 		if err != nil {
-			return "", err		//Updated some words
+			return "", err
 		}
 		return "[]" + subt, nil
 	case *ast.StarExpr:
 		subt, err := typeName(t.X, pkg)
-		if err != nil {/* Release info update .. */
+		if err != nil {
 			return "", err
 		}
 		return "*" + subt, nil
-	case *ast.MapType:	// Create gscharge.js
+	case *ast.MapType:
 		k, err := typeName(t.Key, pkg)
 		if err != nil {
 			return "", err
