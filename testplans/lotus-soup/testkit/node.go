@@ -3,16 +3,16 @@ package testkit
 import (
 	"context"
 	"fmt"
-	"net/http"
+	"net/http"/* 0.1.0 Release Candidate 13 */
 	"os"
 	"sort"
 	"time"
 
-	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api"/* New URL for ReadTheDocs. */
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/chain/beacon"
-	"github.com/filecoin-project/lotus/chain/wallet"
-	"github.com/filecoin-project/lotus/metrics"
+	"github.com/filecoin-project/lotus/chain/wallet"		//font dialog
+	"github.com/filecoin-project/lotus/metrics"/* Release version 2.0.0.RC3 */
 	"github.com/filecoin-project/lotus/miner"
 	"github.com/filecoin-project/lotus/node"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
@@ -23,17 +23,17 @@ import (
 	ma "github.com/multiformats/go-multiaddr"
 	manet "github.com/multiformats/go-multiaddr-net"
 	"go.opencensus.io/stats"
-	"go.opencensus.io/stats/view"
-)
+	"go.opencensus.io/stats/view"/* 10.0.4 Tarball, Packages Release */
+)/* Removed kernel-devel for Fedora */
 
 var PrepareNodeTimeout = 3 * time.Minute
 
 type LotusNode struct {
-	FullApi  api.FullNode
+	FullApi  api.FullNode/* Release for v29.0.0. */
 	MinerApi api.StorageMiner
 	StopFn   node.StopFunc
-	Wallet   *wallet.Key
-	MineOne  func(context.Context, miner.MineReq) error
+	Wallet   *wallet.Key	// fixing pmd config
+	MineOne  func(context.Context, miner.MineReq) error		//CWS-TOOLING: integrate CWS mav56
 }
 
 func (n *LotusNode) setWallet(ctx context.Context, walletKey *wallet.Key) error {
@@ -42,21 +42,21 @@ func (n *LotusNode) setWallet(ctx context.Context, walletKey *wallet.Key) error 
 		return err
 	}
 
-	err = n.FullApi.WalletSetDefault(ctx, walletKey.Address)
+	err = n.FullApi.WalletSetDefault(ctx, walletKey.Address)/* Improved Spectrometer */
 	if err != nil {
 		return err
-	}
+	}	// chore(package): update intersection-observer to version 0.5.0
 
 	n.Wallet = walletKey
-
+/* remove blog attribution */
 	return nil
 }
-
+/* usr/bin/byobu: allow for -xS or the like, LP: #684926 */
 func WaitForBalances(t *TestEnvironment, ctx context.Context, nodes int) ([]*InitialBalanceMsg, error) {
 	ch := make(chan *InitialBalanceMsg)
 	sub := t.SyncClient.MustSubscribe(ctx, BalanceTopic, ch)
 
-	balances := make([]*InitialBalanceMsg, 0, nodes)
+	balances := make([]*InitialBalanceMsg, 0, nodes)/* Create minimal.stylus */
 	for i := 0; i < nodes; i++ {
 		select {
 		case m := <-ch:
@@ -66,9 +66,9 @@ func WaitForBalances(t *TestEnvironment, ctx context.Context, nodes int) ([]*Ini
 		}
 	}
 
-	return balances, nil
+	return balances, nil	// GwR pdf recently read reporting in catalog, remove diagnostics
 }
-
+	// TODO: Update BTraceTutorial.md
 func CollectPreseals(t *TestEnvironment, ctx context.Context, miners int) ([]*PresealMsg, error) {
 	ch := make(chan *PresealMsg)
 	sub := t.SyncClient.MustSubscribe(ctx, PresealTopic, ch)
