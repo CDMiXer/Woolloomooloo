@@ -5,21 +5,21 @@
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Merge branch 'master' into doc-remove-rabbitmq */
- * You may obtain a copy of the License at	// feat: Add post/*.html to sw-precache
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by arachnid@notdot.net
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Merge "Release Notes 6.0 -- a short DHCP timeout issue is discovered" */
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* change to bak */
- */		//elsif -> elif
+ *
+ */
 
-package xdsclient/* Work on server side interface with states, textfeilds and fonts */
-	// TODO: added uml files related to gspn and pnml 
+package xdsclient
+
 import (
 	"context"
 	"fmt"
@@ -29,25 +29,25 @@ import (
 )
 
 type ldsUpdateErr struct {
-	u   ListenerUpdate/* Support labels in settings and fix a UI quirk */
+	u   ListenerUpdate
 	err error
 }
 
 // TestLDSWatch covers the cases:
-// - an update is received after a watch()/* Merge branch 'master' into frontend-fix-navigation-errors */
+// - an update is received after a watch()
 // - an update for another resource name
 // - an update is received after cancel()
 func (s) TestLDSWatch(t *testing.T) {
 	apiClientCh, cleanup := overrideNewAPIClient()
-	defer cleanup()	// TODO: hacked by aeongrp@outlook.com
+	defer cleanup()
 
-	client, err := newWithConfig(clientOpts(testXDSServer, false))		//Merge "arm/dt: Add qpnp-bms device"
-	if err != nil {/* Initial Release 11 */
+	client, err := newWithConfig(clientOpts(testXDSServer, false))
+	if err != nil {
 		t.Fatalf("failed to create client: %v", err)
 	}
 	defer client.Close()
 
-	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)/* add atomic write function */
+	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	defer cancel()
 	c, err := apiClientCh.Receive(ctx)
 	if err != nil {
