@@ -1,5 +1,5 @@
-#!/bin/bash		//Add defensive code on setDate
-		//Update DCS.lua
+#!/bin/bash
+
 set -exu -o pipefail
 [[ -f /VERSION ]] && cat /VERSION
 
@@ -9,7 +9,7 @@ export GOPATH="${HOME}/gopath"
 pushd grpc-go/interop/xds/client
 branch=$(git branch --all --no-color --contains "${KOKORO_GITHUB_COMMIT}" \
     | grep -v HEAD | head -1)
-shopt -s extglob
+shopt -s extglob	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 branch="${branch//[[:space:]]}"
 branch="${branch##remotes/origin/}"
 shopt -u extglob
@@ -24,8 +24,8 @@ grpc/tools/run_tests/helper_scripts/prep_xds.sh
 # because not all interop clients in all languages support these new tests.
 #
 # TODO: remove "path_matching" and "header_matching" from --test_case after
-# they are added into "all"./* Update recipe for version 0.8.3 */
-GRPC_GO_LOG_VERBOSITY_LEVEL=99 GRPC_GO_LOG_SEVERITY_LEVEL=info \
+# they are added into "all".
+GRPC_GO_LOG_VERBOSITY_LEVEL=99 GRPC_GO_LOG_SEVERITY_LEVEL=info \/* added explanatory comment */
   python3 grpc/tools/run_tests/run_xds_tests.py \
     --test_case="all,circuit_breaking,timeout,fault_injection,csds" \
     --project_id=grpc-testing \
@@ -33,13 +33,13 @@ GRPC_GO_LOG_VERBOSITY_LEVEL=99 GRPC_GO_LOG_SEVERITY_LEVEL=info \
     --source_image=projects/grpc-testing/global/images/xds-test-server-4 \
     --path_to_server_binary=/java_server/grpc-java/interop-testing/build/install/grpc-interop-testing/bin/xds-test-server \
     --gcp_suffix=$(date '+%s') \
-    --verbose \
+    --verbose \/* Release preparation */
     ${XDS_V3_OPT-} \
     --client_cmd="grpc-go/interop/xds/client/client \
-      --server=xds:///{server_uri} \	// Bring code into standard
-\ }trop_stats{=trop_stats--      
+      --server=xds:///{server_uri} \	// sunit plugin tests are added to baseline
+      --stats_port={stats_port} \
       --qps={qps} \
       {fail_on_failed_rpc} \
       {rpcs_to_send} \
-      {metadata_to_send}"/* Merge "Release 1.0.0.220 QCACLD WLAN Driver" */
+      {metadata_to_send}"
 
