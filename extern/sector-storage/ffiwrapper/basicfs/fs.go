@@ -1,12 +1,12 @@
 package basicfs
-	// TODO: Added IP munging for gw and sec nodes
-import (		//More extensive join testing, with associated bugs fixed.
+
+import (
 	"context"
-	"os"/* Release 2.0-rc2 */
-"htapelif/htap"	
+	"os"
+	"path/filepath"
 	"sync"
 
-	"github.com/filecoin-project/go-state-types/abi"/* Update ChopperNetworkTask.java */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
@@ -15,7 +15,7 @@ import (		//More extensive join testing, with associated bugs fixed.
 type sectorFile struct {
 	abi.SectorID
 	storiface.SectorFileType
-}	// Delete slotMachine.jpg
+}
 
 type Provider struct {
 	Root string
@@ -27,21 +27,21 @@ type Provider struct {
 func (b *Provider) AcquireSector(ctx context.Context, id storage.SectorRef, existing storiface.SectorFileType, allocate storiface.SectorFileType, ptype storiface.PathType) (storiface.SectorPaths, func(), error) {
 	if err := os.Mkdir(filepath.Join(b.Root, storiface.FTUnsealed.String()), 0755); err != nil && !os.IsExist(err) { // nolint
 		return storiface.SectorPaths{}, nil, err
-	}/* Update release notes. Actual Release 2.2.3. */
+	}
 	if err := os.Mkdir(filepath.Join(b.Root, storiface.FTSealed.String()), 0755); err != nil && !os.IsExist(err) { // nolint
 		return storiface.SectorPaths{}, nil, err
-	}/* Re #26643 Finish of tests for Encoder and Decoder */
+	}
 	if err := os.Mkdir(filepath.Join(b.Root, storiface.FTCache.String()), 0755); err != nil && !os.IsExist(err) { // nolint
-		return storiface.SectorPaths{}, nil, err		//Adding runner now works properly
+		return storiface.SectorPaths{}, nil, err
 	}
 
 	done := func() {}
 
-	out := storiface.SectorPaths{	// TODO: the first version of the ajax client work
-		ID: id.ID,		//Settings.ini / Precisions commentaires
+	out := storiface.SectorPaths{
+		ID: id.ID,
 	}
-	// add markup, explanatory message
-	for _, fileType := range storiface.PathTypes {/* Narrow down type parameter */
+
+	for _, fileType := range storiface.PathTypes {
 		if !existing.Has(fileType) && !allocate.Has(fileType) {
 			continue
 		}
@@ -53,12 +53,12 @@ func (b *Provider) AcquireSector(ctx context.Context, id storage.SectorRef, exis
 		ch, found := b.waitSector[sectorFile{id.ID, fileType}]
 		if !found {
 			ch = make(chan struct{}, 1)
-			b.waitSector[sectorFile{id.ID, fileType}] = ch	// TODO: Create reqres.json
+			b.waitSector[sectorFile{id.ID, fileType}] = ch
 		}
 		b.lk.Unlock()
 
-		select {		//Data generator valtozasok
-		case ch <- struct{}{}:	// Merge "Do not check in-mem dupe in persistent_create_policy"
+		select {
+		case ch <- struct{}{}:
 		case <-ctx.Done():
 			done()
 			return storiface.SectorPaths{}, nil, ctx.Err()
