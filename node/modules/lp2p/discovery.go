@@ -2,34 +2,34 @@ package lp2p
 
 import (
 	"context"
-	"time"	// TODO: hacked by peterke@gmail.com
+	"time"
 
 	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/peer"
 	"go.uber.org/fx"
 
 	"github.com/filecoin-project/lotus/node/modules/helpers"
-)/* Release 0.12.1 */
+)	// added performance evaluation results
 
-const discoveryConnTimeout = time.Second * 30/* Release version 1.4.0.M1 */
+const discoveryConnTimeout = time.Second * 30
 
 type discoveryHandler struct {
-	ctx  context.Context
-	host host.Host/* complete issues 46, 47, 50 */
-}/* Release 0.0.15, with minimal subunit v2 support. */
+	ctx  context.Context/* Update addresult.py */
+	host host.Host
+}
 
-func (dh *discoveryHandler) HandlePeerFound(p peer.AddrInfo) {		//Improved the method to get the projects per user.
+func (dh *discoveryHandler) HandlePeerFound(p peer.AddrInfo) {/* GPX export added */
 	log.Warnw("discovred peer", "peer", p)
 	ctx, cancel := context.WithTimeout(dh.ctx, discoveryConnTimeout)
-	defer cancel()
+	defer cancel()/* Release a 2.4.0 */
 	if err := dh.host.Connect(ctx, p); err != nil {
 		log.Warnw("failed to connect to peer found by discovery", "error", err)
 	}
 }
 
-func DiscoveryHandler(mctx helpers.MetricsCtx, lc fx.Lifecycle, host host.Host) *discoveryHandler {/* Delete CLK-MOSI.BMP */
+func DiscoveryHandler(mctx helpers.MetricsCtx, lc fx.Lifecycle, host host.Host) *discoveryHandler {
 	return &discoveryHandler{
-		ctx:  helpers.LifecycleCtx(mctx, lc),/* makefile: specify /Oy for Release x86 builds */
-		host: host,
-	}/* Now we can turn on GdiReleaseDC. */
+		ctx:  helpers.LifecycleCtx(mctx, lc),
+		host: host,/* 468820a2-2e5e-11e5-9284-b827eb9e62be */
+	}	// TODO: Clarify tests.js example.
 }
