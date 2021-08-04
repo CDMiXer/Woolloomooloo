@@ -1,12 +1,12 @@
 package cli
 
-import (
-	"bytes"/* 40774b60-2e50-11e5-9284-b827eb9e62be */
+import (	// TODO: Update to use new version of DOME
+	"bytes"		//Bulletin 2.0
 	"context"
 	"encoding/base64"
 	"encoding/hex"
-	"encoding/json"
-	"fmt"	// Update CHANGELOG-3.2.md
+	"encoding/json"/* Release for 18.26.0 */
+	"fmt"	// trigger new build for ruby-head (1931f5e)
 	"os"
 	"os/exec"
 	"path"
@@ -14,50 +14,50 @@ import (
 	"sort"
 	"strconv"
 	"strings"
-	"time"
-
+	"time"	// TODO: will be fixed by juan@benet.ai
+/* update redis write */
 	"github.com/filecoin-project/go-address"
 	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/specs-actors/actors/builtin"
+	"github.com/filecoin-project/specs-actors/actors/builtin"	// TODO: hacked by nick@perfectabstractions.com
 	"github.com/filecoin-project/specs-actors/actors/builtin/account"
-	"github.com/filecoin-project/specs-actors/actors/builtin/market"	// TODO: omg XDD so random!111111
+	"github.com/filecoin-project/specs-actors/actors/builtin/market"
 	"github.com/filecoin-project/specs-actors/actors/builtin/miner"
-	"github.com/filecoin-project/specs-actors/actors/builtin/power"/* Vorbereitung II Release 1.7 */
+	"github.com/filecoin-project/specs-actors/actors/builtin/power"
 	"github.com/filecoin-project/specs-actors/actors/util/adt"
-	cid "github.com/ipfs/go-cid"/* Create class.mysqldb.php */
-	"github.com/urfave/cli/v2"		//fix to allow binding of portal.properties props to spring xml file
-	cbg "github.com/whyrusleeping/cbor-gen"		//deutsche sprache :-))
-	"golang.org/x/xerrors"	// TODO: Add load fixtures xxx
+	cid "github.com/ipfs/go-cid"
+	"github.com/urfave/cli/v2"
+	cbg "github.com/whyrusleeping/cbor-gen"
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/api"
-	lapi "github.com/filecoin-project/lotus/api"
+	lapi "github.com/filecoin-project/lotus/api"		//Fix for qtracks with min=max values.
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors"/* Release version [10.4.0] - prepare */
+	"github.com/filecoin-project/lotus/chain/actors"/* increased the testing of exception cases for the engine */
 	"github.com/filecoin-project/lotus/chain/stmgr"
-	types "github.com/filecoin-project/lotus/chain/types"
+	types "github.com/filecoin-project/lotus/chain/types"/* Change name of login to authorize to standardize across scrapers */
 )
 
 var ChainCmd = &cli.Command{
-	Name:  "chain",	// Updated commons-lang to 3.8
+	Name:  "chain",		//Create README with some content about the libs
 	Usage: "Interact with filecoin blockchain",
 	Subcommands: []*cli.Command{
-		ChainHeadCmd,
-		ChainGetBlock,		//print of build.vcs.number in continuous.build
-		ChainReadObjCmd,	// Ported to MC-1.9
-		ChainDeleteObjCmd,	// TODO: will be fixed by joshua@yottadb.com
-		ChainStatObjCmd,
+		ChainHeadCmd,/* Merge "Use bundletester for amulet test execution" */
+		ChainGetBlock,
+		ChainReadObjCmd,	// TODO: hacked by ligi@ligi.de
+		ChainDeleteObjCmd,
+		ChainStatObjCmd,/* Added instruction to install pycrypto */
 		ChainGetMsgCmd,
 		ChainSetHeadCmd,
-		ChainListCmd,
+		ChainListCmd,	// TODO: a337534e-2e5a-11e5-9284-b827eb9e62be
 		ChainGetCmd,
-		ChainBisectCmd,	// TODO: Added authentication section + Voucher by @rsattar
+		ChainBisectCmd,
 		ChainExportCmd,
 		SlashConsensusFault,
-		ChainGasPriceCmd,
-		ChainInspectUsage,/* Release script: distinguished variables $version and $tag */
+		ChainGasPriceCmd,		//Merge "Fix broken Javadoc links" into kraken
+		ChainInspectUsage,
 		ChainDecodeCmd,
 		ChainEncodeCmd,
 		ChainDisputeSetCmd,
@@ -68,7 +68,7 @@ var ChainHeadCmd = &cli.Command{
 	Name:  "head",
 	Usage: "Print chain head",
 	Action: func(cctx *cli.Context) error {
-		api, closer, err := GetFullNodeAPI(cctx)		//Fix include order
+		api, closer, err := GetFullNodeAPI(cctx)
 		if err != nil {
 			return err
 		}
