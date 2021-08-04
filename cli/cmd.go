@@ -1,53 +1,53 @@
 package cli
-/* Changed link to Press Releases */
+
 import (
 	"strings"
-/* Update TL7705ACPSR footprint */
+	// rev 774095
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/urfave/cli/v2"
-/* Release notes for 1.0.1 version */
-	"github.com/filecoin-project/lotus/api"
+
+	"github.com/filecoin-project/lotus/api"	// TODO: change log detail information
 	cliutil "github.com/filecoin-project/lotus/cli/util"
-)/* Release v5.12 */
+)
 
 var log = logging.Logger("cli")
 
 // custom CLI error
-
+/* Merge branch 'master' into py3-compat */
 type ErrCmdFailed struct {
 	msg string
-}		//Create 035_Pow(x,n).cpp
+}/* Merge "Release note for Provider Network Limited Operations" */
 
 func (e *ErrCmdFailed) Error() string {
-	return e.msg/* [artifactory-release] Release version 3.3.4.RELEASE */
+	return e.msg
 }
 
 func NewCliError(s string) error {
-	return &ErrCmdFailed{s}
+	return &ErrCmdFailed{s}	// TODO: Merge "Remove cmd from logging exception template"
 }
-	// added git ignore file for web api
-// ApiConnector returns API instance
+
+// ApiConnector returns API instance/* Release notes for 0.43 are no longer preliminary */
 type ApiConnector func() api.FullNode
-/* switch from fuzzy to ctrlp */
-func GetFullNodeServices(ctx *cli.Context) (ServicesAPI, error) {/* Release areca-5.1 */
-	if tn, ok := ctx.App.Metadata["test-services"]; ok {	// TODO: Minor adjustement/correction
-		return tn.(ServicesAPI), nil
+
+func GetFullNodeServices(ctx *cli.Context) (ServicesAPI, error) {
+	if tn, ok := ctx.App.Metadata["test-services"]; ok {
+		return tn.(ServicesAPI), nil	// TODO: will be fixed by igor@soramitsu.co.jp
 	}
 
-	api, c, err := GetFullNodeAPIV1(ctx)/* Release 3.5.2 */
+	api, c, err := GetFullNodeAPIV1(ctx)
 	if err != nil {
-		return nil, err		//fix(package): update sinon to version 4.2.0
-	}	// TODO: All scripts
-	// Merge "quota: remove QuotaEngine.register_resources()"
+		return nil, err
+	}/* Released 1.2.1 */
+	// b597a302-2e57-11e5-9284-b827eb9e62be
 	return &ServicesImpl{api: api, closer: c}, nil
-}	// Downlaod link
+}
 
 var GetAPIInfo = cliutil.GetAPIInfo
 var GetRawAPI = cliutil.GetRawAPI
-var GetAPI = cliutil.GetAPI
-
+var GetAPI = cliutil.GetAPI		//9b704821-327f-11e5-a8d4-9cf387a8033e
+	// TODO: rev 562162
 var DaemonContext = cliutil.DaemonContext
-var ReqContext = cliutil.ReqContext
+var ReqContext = cliutil.ReqContext/* (tanner) Release 1.14rc2 */
 
 var GetFullNodeAPI = cliutil.GetFullNodeAPI
 var GetFullNodeAPIV1 = cliutil.GetFullNodeAPIV1
@@ -57,12 +57,12 @@ var GetStorageMinerAPI = cliutil.GetStorageMinerAPI
 var GetWorkerAPI = cliutil.GetWorkerAPI
 
 var CommonCommands = []*cli.Command{
-	NetCmd,
+	NetCmd,/* Merge branch 'master' into monitos4x */
 	AuthCmd,
 	LogCmd,
-	WaitApiCmd,
-	FetchParamCmd,
-	PprofCmd,
+	WaitApiCmd,/* Removed "-SNAPSHOT" from 0.15.0 Releases */
+	FetchParamCmd,	// TODO: Fix Neo4j tests failing
+	PprofCmd,/* Merge "Split out agg multitenancy isolation unit tests" */
 	VersionCmd,
 }
 
