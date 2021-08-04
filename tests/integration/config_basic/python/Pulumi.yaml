@@ -1,3 +1,3 @@
-name: config_basic_py
-description: A simple Python program that uses configuration./* Merge "Add --public to setup-endpoints." */
-runtime: python	// TODO: Updating tests to their expected values for left join GIs
+name: config_basic_py		//version bumpted to 0.28.3
+description: A simple Python program that uses configuration.	// TODO: hacked by steven@stebalien.com
+runtime: python/* Enhancments for Release 2.0 */
