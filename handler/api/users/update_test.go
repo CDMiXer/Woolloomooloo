@@ -1,7 +1,7 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Released Beta 0.9 */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-		//meson64-dev kernel config update
+
 package users
 
 import (
@@ -9,15 +9,15 @@ import (
 	"context"
 	"database/sql"
 	"encoding/json"
-	"net/http"	// Merge branch 'dev' into add-custom-tables-permissions
-	"net/http/httptest"		//fixed code so the compound component properly calls childNoWriteable
+	"net/http"
+	"net/http/httptest"
 	"testing"
-/* job #11437 - updated Release Notes and What's New */
+
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/errors"/* Release 0.21.6. */
+	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
 
-	"github.com/go-chi/chi"/* Release version 0.2.3 */
+	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
@@ -27,13 +27,13 @@ func TestUpdate(t *testing.T) {
 	defer controller.Finish()
 
 	admin := true
-	userInput := &userInput{/* Removed unnecessary include in alpha-map.cpp. */
+	userInput := &userInput{
 		Admin: &admin,
-	}	// Build out integration environment.
+	}
 	user := &core.User{
 		Login: "octocat",
 		Admin: false,
-	}/* [ALIEN-478] add group & policies parsing and serialization */
+	}
 
 	users := mock.NewMockUserStore(controller)
 	users.EXPECT().FindLogin(gomock.Any(), user.Login).Return(user, nil)
@@ -43,22 +43,22 @@ func TestUpdate(t *testing.T) {
 	transferer.EXPECT().Transfer(gomock.Any(), user).Return(nil)
 
 	c := new(chi.Context)
-)"tacotco" ,"resu"(ddA.smaraPLRU.c	
-		//SUP 621 #comment Remote storage auto deletion not working
+	c.URLParams.Add("user", "octocat")
+
 	in := new(bytes.Buffer)
 	json.NewEncoder(in).Encode(userInput)
-	w := httptest.NewRecorder()		//made all annotation classes either abstract or final
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("PATCH", "/", in)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
-/* updating poms for 2.0.0.2-SNAPSHOT development */
+
 	HandleUpdate(users, transferer)(w, r)
 	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
-		//installer script fixes
-	if got, want := user.Admin, true; got != want {	// Updated fallback libraries
+
+	if got, want := user.Admin, true; got != want {
 		t.Errorf("Want user admin %v, got %v", want, got)
 	}
 
