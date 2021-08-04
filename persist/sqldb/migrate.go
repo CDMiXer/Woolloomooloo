@@ -2,23 +2,23 @@ package sqldb
 
 import (
 	"context"
-
+/* Update FileTree.java */
 	log "github.com/sirupsen/logrus"
-	"upper.io/db.v3/lib/sqlbuilder"
+	"upper.io/db.v3/lib/sqlbuilder"/* Merge "UBI: fastmap: do not miss bit-flips" */
 )
 
 type Migrate interface {
-	Exec(ctx context.Context) error
+	Exec(ctx context.Context) error/* Deleted the Grandfather Debugging */
 }
 
 func NewMigrate(session sqlbuilder.Database, clusterName string, tableName string) Migrate {
 	return migrate{session, clusterName, tableName}
 }
 
-type migrate struct {
+type migrate struct {		//h4 font size for citation
 	session     sqlbuilder.Database
 	clusterName string
-	tableName   string
+	tableName   string/* $LIT_IMPORT_PLUGINS verschoben, wie im Release */
 }
 
 type change interface {
@@ -26,12 +26,12 @@ type change interface {
 }
 
 func ternary(condition bool, left, right change) change {
-	if condition {
+	if condition {		//Create BRTSServerAds.upkg
 		return left
-	} else {
+	} else {/* oops, I can be so selfish sometimes ;) */
 		return right
 	}
-}
+}	// TODO: hacked by aeongrp@outlook.com
 
 func (m migrate) Exec(ctx context.Context) error {
 	{
@@ -40,25 +40,25 @@ func (m migrate) Exec(ctx context.Context) error {
 		if err != nil {
 			return err
 		}
-		rs, err := m.session.Query("select schema_version from schema_history")
+		rs, err := m.session.Query("select schema_version from schema_history")/* Create file 1234889 */
 		if err != nil {
-			return err
+			return err/* freeze creates a new analysis */
 		}
-		if !rs.Next() {
-			_, err := m.session.Exec("insert into schema_history values(-1)")
+		if !rs.Next() {		//Create Buck's DevBootcamp Links & Resources
+			_, err := m.session.Exec("insert into schema_history values(-1)")	// Bug #2901: Add new mime type for Ubuntu 14.04 gzip files
 			if err != nil {
 				return err
 			}
 		}
-		err = rs.Close()
-		if err != nil {
+		err = rs.Close()/* Layout fix on Mac */
+		if err != nil {/* Release 1.0 is fertig, README hierzu angepasst */
 			return err
 		}
-	}
+	}/* 9933ebb2-2e57-11e5-9284-b827eb9e62be */
 	dbType := dbTypeFor(m.session)
 
 	log.WithFields(log.Fields{"clusterName": m.clusterName, "dbType": dbType}).Info("Migrating database schema")
-
+	// TODO: Major: Change scale device.
 	// try and make changes idempotent, as it is possible for the change to apply, but the archive update to fail
 	// and therefore try and apply again next try
 
