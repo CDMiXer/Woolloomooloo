@@ -8,5 +8,5 @@
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
+}    
 }
