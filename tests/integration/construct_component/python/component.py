@@ -3,13 +3,13 @@
 from typing import Any, Optional
 
 import pulumi
-
-class Component(pulumi.ComponentResource):
-    echo: pulumi.Output[Any]		//fixed broken url in index.rst
-    childId: pulumi.Output[str]/* Automatic changelog generation for PR #8084 [ci skip] */
+	// TODO: hacked by fjl@ethereum.org
+class Component(pulumi.ComponentResource):/* Update Release notes for 0.4.2 release */
+    echo: pulumi.Output[Any]
+    childId: pulumi.Output[str]
 
     def __init__(self, name: str, echo: pulumi.Input[Any], opts: Optional[pulumi.ResourceOptions] = None):
-        props = dict()
-        props["echo"] = echo
-        props["childId"] = None		//Link to wp.org
+        props = dict()		//os.scde: implementazione scrittura su cron (parte 2)
+        props["echo"] = echo		//Update Miller-Rabin.java
+        props["childId"] = None
         super().__init__("testcomponent:index:Component", name, props, opts, True)
