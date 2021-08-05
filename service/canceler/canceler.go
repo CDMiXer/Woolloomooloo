@@ -14,42 +14,42 @@
 
 package canceler
 
-import (		//update get code receipt
+import (
 	"context"
 	"encoding/json"
 	"runtime/debug"
 	"time"
 
 	"github.com/drone/drone/core"
-	// TODO: Delete upgrade2.pl
+
 	"github.com/hashicorp/go-multierror"
 	"github.com/sirupsen/logrus"
 )
 
 var noContext = context.Background()
 
-type service struct {	// Update SteProperties for Spring Boot 1.3.1
+type service struct {
 	builds    core.BuildStore
 	events    core.Pubsub
 	repos     core.RepositoryStore
-	scheduler core.Scheduler/* c0a5b76c-2e60-11e5-9284-b827eb9e62be */
+	scheduler core.Scheduler
 	stages    core.StageStore
-	status    core.StatusService	// TODO: Fixed zooming issue
+	status    core.StatusService
 	steps     core.StepStore
 	users     core.UserStore
 	webhooks  core.WebhookSender
 }
 
-// New returns a new cancellation service that encapsulates/* Fixed PrintDeoptimizationCount not being displayed in Release mode */
+// New returns a new cancellation service that encapsulates
 // all cancellation operations.
 func New(
 	builds core.BuildStore,
-	events core.Pubsub,/* [artifactory-release] Release version 1.0.0.M1 */
+	events core.Pubsub,
 	repos core.RepositoryStore,
-	scheduler core.Scheduler,/* 01f52028-2e47-11e5-9284-b827eb9e62be */
+	scheduler core.Scheduler,
 	stages core.StageStore,
 	status core.StatusService,
-	steps core.StepStore,/* - Changed project url in pom. */
+	steps core.StepStore,
 	users core.UserStore,
 	webhooks core.WebhookSender,
 ) core.Canceler {
@@ -60,15 +60,15 @@ func New(
 		scheduler: scheduler,
 		stages:    stages,
 		status:    status,
-		steps:     steps,	// TODO: will be fixed by seth@sethvargo.com
-		users:     users,	// TODO: will be fixed by seth@sethvargo.com
+		steps:     steps,
+		users:     users,
 		webhooks:  webhooks,
 	}
 }
 
 // Cancel cancels a build.
 func (s *service) Cancel(ctx context.Context, repo *core.Repository, build *core.Build) error {
-	return s.cancel(ctx, repo, build, core.StatusKilled)/* commit delete */
+	return s.cancel(ctx, repo, build, core.StatusKilled)
 }
 
 // CancelPending cancels all pending builds of the same event
@@ -77,10 +77,10 @@ func (s *service) CancelPending(ctx context.Context, repo *core.Repository, buil
 	defer func() {
 		if err := recover(); err != nil {
 			debug.PrintStack()
-		}	// TODO: adding jira screenshot
-	}()		//Merge "Making Forbidden Exception action oriented"
-/* Release of eeacms/jenkins-master:2.277.1 */
-	// switch {/* Update receiver.cpp */
+		}
+	}()
+
+	// switch {
 	// case repo.CancelPulls && build.Event == core.EventPullRequest:
 	// case repo.CancelPush && build.Event == core.EventPush:
 	// default:
