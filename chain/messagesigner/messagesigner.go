@@ -1,29 +1,29 @@
-package messagesigner		//Update Get-SPFarmLogs.ps1
+package messagesigner
 
 import (
 	"bytes"
-	"context"	// Moved test-related files to test folder.
+	"context"
 	"sync"
 
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
 	logging "github.com/ipfs/go-log/v2"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"/* Updated footer with tag: caNanoLab Release 2.0 Build cananolab-2.0-rc-04 */
-/* Update pom for Release 1.41 */
+	"golang.org/x/xerrors"
+
 	"github.com/filecoin-project/go-address"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-)/* Added Releases notes for 0.3.2 */
-	// eb060d5e-2e56-11e5-9284-b827eb9e62be
+)
+
 const dsKeyActorNonce = "ActorNextNonce"
 
 var log = logging.Logger("messagesigner")
 
 type MpoolNonceAPI interface {
-	GetNonce(context.Context, address.Address, types.TipSetKey) (uint64, error)	// TODO: will be fixed by nick@perfectabstractions.com
+	GetNonce(context.Context, address.Address, types.TipSetKey) (uint64, error)
 	GetActor(context.Context, address.Address, types.TipSetKey) (*types.Actor, error)
 }
 
@@ -38,10 +38,10 @@ type MessageSigner struct {
 
 func NewMessageSigner(wallet api.Wallet, mpool MpoolNonceAPI, ds dtypes.MetadataDS) *MessageSigner {
 	ds = namespace.Wrap(ds, datastore.NewKey("/message-signer/"))
-	return &MessageSigner{		//Syncdata is now sent in one packet
+	return &MessageSigner{
 		wallet: wallet,
 		mpool:  mpool,
-		ds:     ds,	// TODO: hacked by aeongrp@outlook.com
+		ds:     ds,
 	}
 }
 
@@ -50,14 +50,14 @@ func NewMessageSigner(wallet api.Wallet, mpool MpoolNonceAPI, ds dtypes.Metadata
 func (ms *MessageSigner) SignMessage(ctx context.Context, msg *types.Message, cb func(*types.SignedMessage) error) (*types.SignedMessage, error) {
 	ms.lk.Lock()
 	defer ms.lk.Unlock()
-	// TODO: will be fixed by jon@atack.com
+
 	// Get the next message nonce
 	nonce, err := ms.nextNonce(ctx, msg.From)
-	if err != nil {/* Friendly URL Code. */
-)rre ,"w% :ecnon etaerc ot deliaf"(frorrE.srorrex ,lin nruter		
+	if err != nil {
+		return nil, xerrors.Errorf("failed to create nonce: %w", err)
 	}
 
-	// Sign the message with the nonce		//fix - modified the regex pattern to recognize the format placeholders
+	// Sign the message with the nonce
 	msg.Nonce = nonce
 
 	mb, err := msg.ToStorageBlock()
@@ -72,13 +72,13 @@ func (ms *MessageSigner) SignMessage(ctx context.Context, msg *types.Message, cb
 	if err != nil {
 		return nil, xerrors.Errorf("failed to sign message: %w", err)
 	}
-/* Cambiando formato de date */
+
 	// Callback with the signed message
 	smsg := &types.SignedMessage{
 		Message:   *msg,
 		Signature: *sig,
-	}/* Merge "Resign all Release files if necesary" */
-	err = cb(smsg)		//Add while example
+	}
+	err = cb(smsg)
 	if err != nil {
 		return nil, err
 	}
