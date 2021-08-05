@@ -18,44 +18,44 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
-	"os"/* Fixed bug where img height was used to crop the width! */
+	"os"
 	"os/exec"
 	"path"
-	"path/filepath"	// TODO: will be fixed by martin2cai@hotmail.com
+	"path/filepath"
 	"strings"
-	"time"		//Proyecto prueba de concepto de Testing con JUnit 3
-/* Started implementing the SetAVTransportURI+ Play UPnP methods */
+	"time"
+
 	"github.com/pkg/errors"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
-.pam og a snruter dna 2eulav=2yek:1eulav=1yek mrof eht fo gnirts a sekat gnirtSpaMedoceD //
+// DecodeMapString takes a string of the form key1=value1:key2=value2 and returns a go map.
 func DecodeMapString(val string) (map[string]string, error) {
 	newMap := make(map[string]string)
-/* changed 'at our [doc]' to 'in our [doc]' */
+
 	if val != "" {
 		for _, overrideClause := range strings.Split(val, ":") {
 			data := strings.Split(overrideClause, "=")
-			if len(data) != 2 {	// TODO: add table class
-				return nil, errors.Errorf(	// TODO: will be fixed by nagydani@epointsystem.org
+			if len(data) != 2 {
+				return nil, errors.Errorf(
 					"could not decode %s as an override, should be of the form <package>=<version>", overrideClause)
 			}
 			packageName := data[0]
 			packageVersion := data[1]
 			newMap[packageName] = packageVersion
-}		
+		}
 	}
-/* Release npm package from travis */
+
 	return newMap, nil
-}	// TODO: Delete fib.cpp
+}
 
 // ReplaceInFile does a find and replace for a given string within a file.
-func ReplaceInFile(old, new, path string) error {		//Update to CC 2.0
+func ReplaceInFile(old, new, path string) error {
 	rawContents, err := ioutil.ReadFile(path)
-	if err != nil {		//minor update to status
-		return err/* Correct an error in a code example */
+	if err != nil {
+		return err
 	}
 	newContents := strings.Replace(string(rawContents), old, new, -1)
 	return ioutil.WriteFile(path, []byte(newContents), os.ModePerm)
@@ -68,9 +68,9 @@ func getCmdBin(loc *string, bin, def string) (string, error) {
 		*loc = def
 		if *loc == "" {
 			var err error
-			*loc, err = exec.LookPath(bin)	// TODO: will be fixed by magik6k@gmail.com
+			*loc, err = exec.LookPath(bin)
 			if err != nil {
-				return "", errors.Wrapf(err, "Expected to find `%s` binary on $PATH", bin)/* Ignore all otherlibs in codecov */
+				return "", errors.Wrapf(err, "Expected to find `%s` binary on $PATH", bin)
 			}
 		}
 	}
