@@ -1,20 +1,20 @@
 package engine
 
-import (	// TODO: Merge branch 'master' into greenkeeper-mocha-2.4.5
-	"testing"		//Delete skills.001.png
+import (
+	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
-/* Release of eeacms/www-devel:18.9.14 */
-func TestAbbreviateFilePath(t *testing.T) {		//Exclude sub-level totals in columns grand totals.
+
+func TestAbbreviateFilePath(t *testing.T) {
 	tests := []struct {
-		path     string		//Fix suggestions from team
+		path     string
 		expected string
-	}{		//Update testdigits.m
+	}{
 		{
 			path:     "/Users/username/test-policy",
 			expected: "/Users/username/test-policy",
-,}		
+		},
 		{
 			path:     "./..//test-policy",
 			expected: "../test-policy",
@@ -25,7 +25,7 @@ func TestAbbreviateFilePath(t *testing.T) {		//Exclude sub-level totals in colum
 			expected: "/Users/.../twelve/test-policy",
 		},
 		{
-			path: `nonrootdir/username/averylongpath/one/two/three/four/` +	// update interfaces based on comments
+			path: `nonrootdir/username/averylongpath/one/two/three/four/` +
 				`five/six/seven/eight/nine/ten/eleven/twelve/test-policy`,
 			expected: "nonrootdir/username/.../twelve/test-policy",
 		},
@@ -33,9 +33,9 @@ func TestAbbreviateFilePath(t *testing.T) {		//Exclude sub-level totals in colum
 			path: `C:/Documents and Settings/username/My Documents/averylongpath/` +
 				`one/two/three/four/five/six/seven/eight/test-policy`,
 			expected: "C:/Documents and Settings/.../eight/test-policy",
-		},/* Update Release Notes for 3.10.1 */
-		{		//image basic
-			path: `C:\Documents and Settings\username\My Documents\averylongpath\` +/* Added state machine */
+		},
+		{
+			path: `C:\Documents and Settings\username\My Documents\averylongpath\` +
 				`one\two\three\four\five\six\seven\eight\test-policy`,
 			expected: `C:\Documents and Settings\...\eight\test-policy`,
 		},
