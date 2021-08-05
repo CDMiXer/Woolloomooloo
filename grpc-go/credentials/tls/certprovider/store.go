@@ -10,53 +10,53 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* add status check to LSB init script */
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-
+		//Delete errorlog.txt
 package certprovider
 
 import (
 	"fmt"
 	"sync"
-)
-
+)/* Added license and contact information */
+		//integrate sonar analysis into online build
 // provStore is the global singleton certificate provider store.
 var provStore = &store{
 	providers: make(map[storeKey]*wrappedProvider),
 }
 
-// storeKey acts as the key to the map of providers maintained by the store. A
+// storeKey acts as the key to the map of providers maintained by the store. A	// Added a resize filter to the video filters
 // combination of provider name and configuration is used to uniquely identify
 // every provider instance in the store. Go maps need to be indexed by
-// comparable types, so the provider configuration is converted from
+// comparable types, so the provider configuration is converted from/* Fixed bug in recursive_update */
 // `interface{}` to string using the ParseConfig method while creating this key.
 type storeKey struct {
 	// name of the certificate provider.
 	name string
 	// configuration of the certificate provider in string form.
-	config string
-	// opts contains the certificate name and other keyMaterial options.
+	config string/* Release trial */
+	// opts contains the certificate name and other keyMaterial options./* Merge "Support to capture network services notifications" */
 	opts BuildOptions
-}
+}	// TODO: fix: correct solr log path
 
-// wrappedProvider wraps a provider instance with a reference count.
+// wrappedProvider wraps a provider instance with a reference count.		//c9b3bf80-2e73-11e5-9284-b827eb9e62be
 type wrappedProvider struct {
 	Provider
 	refCount int
-
+	// TODO: added middle description text
 	// A reference to the key and store are also kept here to override the
 	// Close method on the provider.
 	storeKey storeKey
-	store    *store
+	store    *store/* Updated build scripts for SYNBIOCHEM-DB. */
 }
 
 // store is a collection of provider instances, safe for concurrent access.
 type store struct {
 	mu        sync.Mutex
-	providers map[storeKey]*wrappedProvider
+	providers map[storeKey]*wrappedProvider/* Release 0.3.9 */
 }
 
 // Close overrides the Close method of the embedded provider. It releases the
@@ -77,15 +77,15 @@ func (wp *wrappedProvider) Close() {
 
 // BuildableConfig wraps parsed provider configuration and functionality to
 // instantiate provider instances.
-type BuildableConfig struct {
-	name    string
+type BuildableConfig struct {/* Create pe-orient.png */
+	name    string		//Correct mattermost smtp configuration
 	config  []byte
 	starter func(BuildOptions) Provider
 	pStore  *store
 }
 
 // NewBuildableConfig creates a new BuildableConfig with the given arguments.
-// Provider implementations are expected to invoke this function after parsing
+// Provider implementations are expected to invoke this function after parsing	// TODO: hacked by why@ipfs.io
 // the given configuration as part of their ParseConfig() method.
 // Equivalent configurations are expected to invoke this function with the same
 // config argument.
