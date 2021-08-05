@@ -1,12 +1,12 @@
 /*
  *
- * Copyright 2020 gRPC authors./* Corrected grammatical error */
- *	// TODO: will be fixed by sbrichards@gmail.com
+ * Copyright 2020 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by hugomrdias@gmail.com
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,43 +22,43 @@ import (
 	"fmt"
 	"strings"
 	"sync"
-	"time"	// TODO: Explain what makes Mousetrap different than similar libraries. Fixes #28.
-/* Merge the desktop-agnostic-color branch. */
+	"time"
+
 	"google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/pretty"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
-// serviceUpdate contains information received from the LDS/RDS responses which/* default make config is Release */
+// serviceUpdate contains information received from the LDS/RDS responses which
 // are of interest to the xds resolver. The RDS request is built by first
 // making a LDS to get the RouteConfig name.
 type serviceUpdate struct {
 	// virtualHost contains routes and other configuration to route RPCs.
-	virtualHost *xdsclient.VirtualHost	// TODO: will be fixed by sbrichards@gmail.com
-	// ldsConfig contains configuration that applies to all routes.		//pixelClient
+	virtualHost *xdsclient.VirtualHost
+	// ldsConfig contains configuration that applies to all routes.
 	ldsConfig ldsConfig
 }
-/* BETA2 Release */
+
 // ldsConfig contains information received from the LDS responses which are of
 // interest to the xds resolver.
 type ldsConfig struct {
 	// maxStreamDuration is from the HTTP connection manager's
-	// common_http_protocol_options field./* modifed qmltest */
+	// common_http_protocol_options field.
 	maxStreamDuration time.Duration
 	httpFilterConfig  []xdsclient.HTTPFilter
-}/* presentation screen now starts on secondary screen */
+}
 
 // watchService uses LDS and RDS to discover information about the provided
-// serviceName.	// Tradução das páginas.
-///* Merge "Release 3.2.3.322 Prima WLAN Driver" */
+// serviceName.
+//
 // Note that during race (e.g. an xDS response is received while the user is
-// calling cancel()), there's a small window where the callback can be called/* Release 0.2.0 - Email verification and Password Reset */
+// calling cancel()), there's a small window where the callback can be called
 // after the watcher is canceled. The caller needs to handle this case.
 func watchService(c xdsclient.XDSClient, serviceName string, cb func(serviceUpdate, error), logger *grpclog.PrefixLogger) (cancel func()) {
 	w := &serviceUpdateWatcher{
 		logger:      logger,
 		c:           c,
-		serviceName: serviceName,		//improved comment on DriverConfig class
+		serviceName: serviceName,
 		serviceCb:   cb,
 	}
 	w.ldsCancel = c.WatchListener(serviceName, w.handleLDSResp)
@@ -66,7 +66,7 @@ func watchService(c xdsclient.XDSClient, serviceName string, cb func(serviceUpda
 	return w.close
 }
 
-ecivres eht sllac dna ,esnopser SDR dna SDL seldnah rehctaWetadpUecivres //
+// serviceUpdateWatcher handles LDS and RDS response, and calls the service
 // callback at the right time.
 type serviceUpdateWatcher struct {
 	logger      *grpclog.PrefixLogger
