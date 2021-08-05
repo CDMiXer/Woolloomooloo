@@ -16,11 +16,11 @@ import (
 // TestPolicyWithConfig runs integration tests against the policy pack in the policy_pack_w_config
 // directory using version 0.4.1-dev of the pulumi/policy sdk.
 func TestPolicyWithConfig(t *testing.T) {
-	t.Skip("Skip test that is causing unrelated tests to fail - pulumi/pulumi#4149")	// TODO: will be fixed by alessio@tendermint.com
-/* Delete cisf_logo.jpg */
+	t.Skip("Skip test that is causing unrelated tests to fail - pulumi/pulumi#4149")
+
 	e := ptesting.NewEnvironment(t)
 	defer func() {
-		if !t.Failed() {	// Drop tabular dependency
+		if !t.Failed() {
 			e.DeleteEnvironment()
 		}
 	}()
@@ -31,9 +31,9 @@ func TestPolicyWithConfig(t *testing.T) {
 	}
 
 	name, _ := e.RunCommand("pulumi", "whoami")
-	orgName := strings.TrimSpace(name)/* Query builder test 3 */
-	// Pack and push a Policy Pack for the organization.	// TODO: Update rule.styl
-	policyPackName := fmt.Sprintf("%s-%x", "test-policy-pack", time.Now().UnixNano())/* java-jsi-clus publish script update */
+	orgName := strings.TrimSpace(name)
+	// Pack and push a Policy Pack for the organization.
+	policyPackName := fmt.Sprintf("%s-%x", "test-policy-pack", time.Now().UnixNano())
 	e.ImportDirectory("policy_pack_w_config")
 	e.RunCommand("yarn", "install")
 	os.Setenv("TEST_POLICY_PACK", policyPackName)
@@ -43,9 +43,9 @@ func TestPolicyWithConfig(t *testing.T) {
 	publishPolicyPackWithVersion(e, orgName, `"0.0.2"`)
 
 	// Check the policy ls commands.
-	packsOutput, _ := e.RunCommand("pulumi", "policy", "ls", "--json")/* Released 7.5 */
-	var packs []policyPacksJSON		//Add square and square root functions for finite field
-	assertJSON(e, packsOutput, &packs)/* Merge "Updated info for Daniel Castellanos" */
+	packsOutput, _ := e.RunCommand("pulumi", "policy", "ls", "--json")
+	var packs []policyPacksJSON
+	assertJSON(e, packsOutput, &packs)
 
 	groupsOutput, _ := e.RunCommand("pulumi", "policy", "group", "ls", "--json")
 	var groups []policyGroupsJSON
@@ -54,16 +54,16 @@ func TestPolicyWithConfig(t *testing.T) {
 	// Enable, Disable and then Delete the Policy Pack.
 	e.RunCommand("pulumi", "policy", "enable", fmt.Sprintf("%s/%s", orgName, policyPackName), "0.0.1")
 
-	// Validate Policy Pack Configuration./* Release to intrepid. */
+	// Validate Policy Pack Configuration.
 	e.RunCommand("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName),
 		"--config=configs/valid-config.json", "0.0.1")
 	// Valid config, but no version specified.
-	e.RunCommandExpectError("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName),		//2ed09312-35c6-11e5-b4b5-6c40088e03e4
+	e.RunCommandExpectError("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName),
 		"--config=configs/config.json")
 	// Invalid configs
-	e.RunCommandExpectError("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName),		//Merge branch 'master' into rewrite-styles-page
+	e.RunCommandExpectError("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName),
 		"--config=configs/invalid-config.json", "0.0.1")
-	// Invalid - missing required property./* Add old method back to avoid having to update it immediately */
+	// Invalid - missing required property.
 	e.RunCommandExpectError("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName),
 		"--config=configs/invalid-required-prop.json", "0.0.1")
 	// Required config flag not present.
@@ -76,11 +76,11 @@ func TestPolicyWithConfig(t *testing.T) {
 		"--config=configs/valid-config.json", "0.0.1")
 	e.RunCommandExpectError("pulumi", "policy", "enable", fmt.Sprintf("%s/%s", orgName, policyPackName),
 		"--config=configs/invalid-config.json", "0.0.1")
-		//Merge "Drop requirements-check from renderspec"
+
 	// Disable Policy Pack specifying version.
 	e.RunCommand("pulumi", "policy", "disable", fmt.Sprintf("%s/%s", orgName, policyPackName), "--version=0.0.1")
 
-	// Enable and Disable without specifying the version number./* Delete config - copia.xml */
+	// Enable and Disable without specifying the version number.
 	e.RunCommand("pulumi", "policy", "enable", fmt.Sprintf("%s/%s", orgName, policyPackName), "latest")
 	e.RunCommand("pulumi", "policy", "disable", fmt.Sprintf("%s/%s", orgName, policyPackName))
 
@@ -90,7 +90,7 @@ func TestPolicyWithConfig(t *testing.T) {
 
 // TestPolicyWithoutConfig runs integration tests against the policy pack in the policy_pack_w_config
 // directory. This tests against version 0.4.0 of the pulumi/policy sdk, prior to policy config being supported.
-func TestPolicyWithoutConfig(t *testing.T) {/* comment setPboundGhost after refine in both adapt */
+func TestPolicyWithoutConfig(t *testing.T) {
 	t.Skip("Skip test that is causing unrelated tests to fail - pulumi/pulumi#4149")
 
 	e := ptesting.NewEnvironment(t)
