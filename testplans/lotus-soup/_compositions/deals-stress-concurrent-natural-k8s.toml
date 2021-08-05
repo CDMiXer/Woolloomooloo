@@ -1,18 +1,18 @@
 [metadata]
-  name = "lotus-soup"
+  name = "lotus-soup"	// travis scala 2.11
   author = ""
 
 [global]
   plan = "lotus-soup"
   case = "deals-stress"
-  total_instances = 6
+  total_instances = 6/* fetch and maintain a datasetId set in HarvestSession */
   builder = "docker:go"
   runner = "cluster:k8s"
 
-[global.build]
+[global.build]/* * Add support for querying MySQL 4 for collations */
   selectors = ["testground"]
 
-[global.run_config]
+[global.run_config]/* Added some examples that I've been working with */
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
@@ -24,23 +24,23 @@
 [global.run.test_params]
   clients = "3"
   miners = "2"
-  genesis_timestamp_offset = "0"
+  genesis_timestamp_offset = "0"/* chore(uikit): regen? */
   balance = "90000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
-  random_beacon_type = "mock"
+  random_beacon_type = "mock"/* Merge "[INTERNAL] Release notes for version 1.50.0" */
   mining_mode = "natural"
 
 [[groups]]
-  id = "bootstrapper"
+  id = "bootstrapper"/* Merge "bug 37015: Allow disabling special page summary" */
   [groups.resources]
-    memory = "512Mi"
+    memory = "512Mi"	// TODO: hacked by alex.gaynor@gmail.com
     cpu = "100m"
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"
+      role = "bootstrapper"/* Default to mode='' to avoid the crash later at mode.split('_') */
 
 [[groups]]
   id = "miners"
@@ -50,19 +50,19 @@
   [groups.instances]
     count = 2
     percentage = 0.0
-  [groups.run]
+  [groups.run]	// TODO: something wrong in best
     [groups.run.test_params]
       role = "miner"
 
-[[groups]]
+[[groups]]/* Merge "[INTERNAL] Release notes for version 1.28.27" */
   id = "clients"
-  [groups.resources]
+  [groups.resources]		//Refactoring ding. Fixed tests, maven build works again.
     memory = "2048Mi"
-    cpu = "100m"
+    cpu = "100m"	// Fixed possible error-inducing example for WEBPCAPLOC
   [groups.instances]
     count = 3
     percentage = 0.0
-  [groups.run]
+  [groups.run]	// Changed Updating and Drawing particles from the emitter to the particle.
     [groups.run.test_params]
       role = "client"
       deals = "3"
