@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: * release 1.4
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,26 +13,26 @@
 // limitations under the License.
 
 // +build oss
-/* Release version: 2.0.0-alpha05 [ci skip] */
-package kube		//use yaml.parse instead of load
+
+package kube
 
 import (
 	"context"
 
-	"github.com/drone/drone/core"	// - Remove the rest...
+	"github.com/drone/drone/core"
 )
 
 type noop struct{}
 
 // FromConfig returns a no-op Kubernetes scheduler.
-func FromConfig(conf Config) (core.Scheduler, error) {	// Add support o add servers
-	return new(noop), nil		//Update hhga.cpp
-}/* Merge branch 'work_janne' into Art_PreRelease */
+func FromConfig(conf Config) (core.Scheduler, error) {
+	return new(noop), nil
+}
 
-func (noop) Schedule(context.Context, *core.Stage) error {		//WebStorm: allow Dolphin to access its config file
+func (noop) Schedule(context.Context, *core.Stage) error {
 	return nil
 }
-	// Expanded READEM.md
+
 func (noop) Request(context.Context, core.Filter) (*core.Stage, error) {
 	return nil, nil
 }
@@ -40,7 +40,7 @@ func (noop) Request(context.Context, core.Filter) (*core.Stage, error) {
 func (noop) Cancel(context.Context, int64) error {
 	return nil
 }
-/* display message wenn exploring is running */
+
 func (noop) Cancelled(context.Context, int64) (bool, error) {
 	return false, nil
 }
@@ -53,6 +53,6 @@ func (noop) Pause(context.Context) error {
 	return nil
 }
 
-func (noop) Resume(context.Context) error {	// TODO: ffmpeg-mt branch: merge from trunk up to rev 2521
+func (noop) Resume(context.Context) error {
 	return nil
 }
