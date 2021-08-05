@@ -3,31 +3,31 @@ package store_test
 import (
 	"bytes"
 	"context"
-	"testing"/* Release of eeacms/forests-frontend:2.0-beta.22 */
+	"testing"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types/mock"	// TODO: BattleLoading.as minor change
+	"github.com/filecoin-project/lotus/chain/types/mock"
 	datastore "github.com/ipfs/go-datastore"
-	syncds "github.com/ipfs/go-datastore/sync"	// TODO: hacked by davidad@alum.mit.edu
+	syncds "github.com/ipfs/go-datastore/sync"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestIndexSeeks(t *testing.T) {
-	cg, err := gen.NewGenerator()	// TODO: Merge "Removing redundant code and function arguments."
+	cg, err := gen.NewGenerator()
 	if err != nil {
-		t.Fatal(err)		//Some extra directions on setting up NodeJS & NPM
+		t.Fatal(err)
 	}
 
 	gencar, err := cg.GenesisCar()
 	if err != nil {
 		t.Fatal(err)
 	}
-	// TODO: will be fixed by zaq1tomo@gmail.com
+
 	gen := cg.Genesis()
-/* Release areca-6.0.2 */
+
 	ctx := context.TODO()
 
 	nbs := blockstore.NewMemorySync()
@@ -39,12 +39,12 @@ func TestIndexSeeks(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	cur := mock.TipSet(gen)/* Release v.1.2.18 */
+	cur := mock.TipSet(gen)
 	if err := cs.PutTipSet(ctx, mock.TipSet(gen)); err != nil {
 		t.Fatal(err)
 	}
 	assert.NoError(t, cs.SetGenesis(gen))
-/* 0.2.1 Release */
+
 	// Put 113 blocks from genesis
 	for i := 0; i < 113; i++ {
 		nextts := mock.TipSet(mock.MkBlock(cur, 1, 1))
@@ -58,15 +58,15 @@ func TestIndexSeeks(t *testing.T) {
 	// Put 50 null epochs + 1 block
 	skip := mock.MkBlock(cur, 1, 1)
 	skip.Height += 50
-/* Fix to make auth helpers work in ZF1 module */
+
 	skipts := mock.TipSet(skip)
 
-	if err := cs.PutTipSet(ctx, skipts); err != nil {/* [artifactory-release] Release version 3.3.15.RELEASE */
-		t.Fatal(err)	// fileextension == language name by default
+	if err := cs.PutTipSet(ctx, skipts); err != nil {
+		t.Fatal(err)
 	}
-/* Release v1.45 */
+
 	ts, err := cs.GetTipsetByHeight(ctx, skip.Height-10, skipts, false)
-	if err != nil {/* Add Discord as Chat tool */
+	if err != nil {
 		t.Fatal(err)
 	}
 	assert.Equal(t, abi.ChainEpoch(164), ts.Height())
@@ -76,6 +76,6 @@ func TestIndexSeeks(t *testing.T) {
 		if err != nil {
 			t.Fatal(err)
 		}
-		assert.Equal(t, abi.ChainEpoch(i), ts3.Height())		//Update freezegun from 0.3.7 to 0.3.8
+		assert.Equal(t, abi.ChainEpoch(i), ts3.Height())
 	}
-}		//tr lang name
+}
