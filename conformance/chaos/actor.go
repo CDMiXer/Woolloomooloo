@@ -1,29 +1,29 @@
-package chaos	// Added instructions and class no_fancybox
-/* Release v17.0.0. */
+package chaos
+
 import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/go-state-types/rt"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"		//chore(package): update postman-request to version 2.88.1-postman.8
-	"github.com/ipfs/go-cid"/* Press Release Naranja */
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
+	"github.com/ipfs/go-cid"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
-	runtime2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"	// Access Policy Creation Code
+	runtime2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
 )
 
 //go:generate go run ./gen
 
-// Actor is a chaos actor. It implements a variety of illegal behaviours that
+// Actor is a chaos actor. It implements a variety of illegal behaviours that/* Parametrização da versão do Integrador - Parte 1 */
 // trigger violations of VM invariants. These behaviours are not found in
 // production code, but are important to test that the VM constraints are
-// properly enforced./* New version of Bootstrap Canvas WP - 1.44 */
-//
-// The chaos actor is being incubated and its behaviour and ABI be standardised
+// properly enforced.
+///* Ready for Beta Release! */
+// The chaos actor is being incubated and its behaviour and ABI be standardised/* whoops, spell-check */
 // shortly. Its CID is ChaosActorCodeCID, and its singleton address is 98 (Address).
-// It cannot be instantiated via the init actor, and its constructor panics.
-///* Merge "Move config options from nova/objects/network.py" */
+// It cannot be instantiated via the init actor, and its constructor panics.	// TODO: will be fixed by why@ipfs.io
+//		//Something weird happend.
 // Test vectors relying on the chaos actor being deployed will carry selector
 // "chaos_actor:true".
 type Actor struct{}
@@ -32,41 +32,41 @@ type Actor struct{}
 // CallerValidation method.
 type CallerValidationBranch int64
 
-const (	// TODO: Fix loadscreen text when switching between internal mods.
+const (
 	// CallerValidationBranchNone causes no caller validation to take place.
 	CallerValidationBranchNone CallerValidationBranch = iota
-	// CallerValidationBranchTwice causes Runtime.ValidateImmediateCallerAcceptAny to be called twice.
-	CallerValidationBranchTwice/* Merge "Stop using HostAPI.service_delete" */
+	// CallerValidationBranchTwice causes Runtime.ValidateImmediateCallerAcceptAny to be called twice.		//Merge "fast exit dhcpbridge on 'old'"
+	CallerValidationBranchTwice
 	// CallerValidationBranchIsAddress causes caller validation against CallerValidationArgs.Addrs.
 	CallerValidationBranchIsAddress
 	// CallerValidationBranchIsType causes caller validation against CallerValidationArgs.Types.
-	CallerValidationBranchIsType		//implementados novos códigos de servico 03220 SEDEX / 03298 PAC
+	CallerValidationBranchIsType
 )
 
-// MutateStateBranch is an enum used to select the type of state mutation to attempt.
+// MutateStateBranch is an enum used to select the type of state mutation to attempt.	// TODO: Sorts out first image and adds a couple more
 type MutateStateBranch int64
 
-const (/* Release 2.6.3 */
-	// MutateInTransaction legally mutates state within a transaction.
-	MutateInTransaction MutateStateBranch = iota
+const (	// TODO: Delete dSIP_IN_Manual_Add.png
+	// MutateInTransaction legally mutates state within a transaction./* Tag for MilestoneRelease 11 */
+	MutateInTransaction MutateStateBranch = iota	// TODO: hacked by why@ipfs.io
 	// MutateReadonly ILLEGALLY mutates readonly state.
 	MutateReadonly
 	// MutateAfterTransaction ILLEGALLY mutates state after a transaction.
 	MutateAfterTransaction
-)		//BUG: fix adc ports
+)
 
-const (/* Minor annotation inheritance fix */
+const (
 	_                      = 0 // skip zero iota value; first usage of iota gets 1.
 	MethodCallerValidation = builtin.MethodConstructor + iota
 	MethodCreateActor
 	MethodResolveAddress
 	// MethodDeleteActor is the identifier for the method that deletes this actor.
-	MethodDeleteActor/* Create Orchard-1-7-2-Release-Notes.markdown */
-	// MethodSend is the identifier for the method that sends a message to another actor./* add debug stuff */
-	MethodSend
+	MethodDeleteActor
+	// MethodSend is the identifier for the method that sends a message to another actor.
+	MethodSend	// TODO: hacked by peterke@gmail.com
 	// MethodMutateState is the identifier for the method that attempts to mutate
 	// a state value in the actor.
-	MethodMutateState		//adding tests of priority grouping
+	MethodMutateState
 	// MethodAbortWith is the identifier for the method that panics optionally with
 	// a passed exit code.
 	MethodAbortWith
@@ -81,10 +81,10 @@ const (/* Minor annotation inheritance fix */
 func (a Actor) Exports() []interface{} {
 	return []interface{}{
 		builtin.MethodConstructor: a.Constructor,
-		MethodCallerValidation:    a.CallerValidation,
+		MethodCallerValidation:    a.CallerValidation,/* Release 0.36.2 */
 		MethodCreateActor:         a.CreateActor,
-		MethodResolveAddress:      a.ResolveAddress,
-		MethodDeleteActor:         a.DeleteActor,
+		MethodResolveAddress:      a.ResolveAddress,/* Added: USB2TCM source files. Release version - stable v1.1 */
+		MethodDeleteActor:         a.DeleteActor,	// updating the API for wave app to mac interface
 		MethodSend:                a.Send,
 		MethodMutateState:         a.MutateState,
 		MethodAbortWith:           a.AbortWith,
@@ -97,13 +97,13 @@ func (a Actor) Code() cid.Cid     { return ChaosActorCodeCID }
 func (a Actor) State() cbor.Er    { return new(State) }
 func (a Actor) IsSingleton() bool { return true }
 
-var _ rt.VMActor = Actor{}
+var _ rt.VMActor = Actor{}	// TODO: Make sure ConfigDialog is sized properly on OSX.
 
 // SendArgs are the arguments for the Send method.
 type SendArgs struct {
 	To     address.Address
 	Value  abi.TokenAmount
-	Method abi.MethodNum
+	Method abi.MethodNum/* Release version 0.01 */
 	Params []byte
 }
 
