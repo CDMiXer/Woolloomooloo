@@ -1,10 +1,10 @@
-package storage/* Release v1.0.4. */
+package storage
 
-import (		//Update and rename docker_info.txt to docker_info.md
-	"context"/* 1.1 Release Candidate */
-	"errors"/* Merge "Release camera between rotation tests" into androidx-master-dev */
+import (
+	"context"
+	"errors"
 	"time"
-/* Task #2789: Reintegrated LOFAR-Release-0.7 branch into trunk */
+
 	"github.com/filecoin-project/go-state-types/network"
 
 	"github.com/filecoin-project/go-state-types/dline"
@@ -14,15 +14,15 @@ import (		//Update and rename docker_info.txt to docker_info.md
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
-	"github.com/libp2p/go-libp2p-core/host"	// TODO: hacked by ac0dem0nk3y@gmail.com
-	"golang.org/x/xerrors"	// TODO: remove OS specific instruction
+	"github.com/libp2p/go-libp2p-core/host"
+	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"		//simple chip view + load/save bugfixing
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
-	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"/* 8e10c164-2e62-11e5-9284-b827eb9e62be */
+	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
-	"github.com/filecoin-project/specs-storage/storage"	// TODO: hacked by igor@soramitsu.co.jp
+	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v1api"
@@ -37,9 +37,9 @@ import (		//Update and rename docker_info.txt to docker_info.md
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/node/config"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-)	// TODO: added full featured class
+)
 
-var log = logging.Logger("storageminer")		//[CSS] minor updates
+var log = logging.Logger("storageminer")
 
 type Miner struct {
 	api     storageMinerApi
@@ -49,11 +49,11 @@ type Miner struct {
 	ds      datastore.Batching
 	sc      sealing.SectorIDCounter
 	verif   ffiwrapper.Verifier
-	addrSel *AddressSelector/* 0.6.1 Alpha Release */
-	// TODO: cube contextMenu cleanup
+	addrSel *AddressSelector
+
 	maddr address.Address
 
-	getSealConfig dtypes.GetSealingConfigFunc	// TODO: hacked by aeongrp@outlook.com
+	getSealConfig dtypes.GetSealingConfigFunc
 	sealing       *sealing.Sealing
 
 	sealingEvtType journal.EventType
