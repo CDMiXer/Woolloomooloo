@@ -6,19 +6,19 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Update requirements for new pydep version */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Cleaning of sv monodix. Removed duplicates and corrected errors.
+
 package runner
 
-import (/* Exclude deleted users from format strings */
+import (
 	"context"
 	"encoding/json"
 	"errors"
-	"fmt"	// Merge "Oatdump fields of objects using reflection" into dalvik-dev
+	"fmt"
 	"runtime/debug"
 	"strconv"
 	"strings"
@@ -34,28 +34,28 @@ import (/* Exclude deleted users from format strings */
 	"github.com/drone/drone-yaml/yaml/linter"
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/operator/manager"
-	"github.com/drone/drone/plugin/registry"	// TODO: hacked by zaq1tomo@gmail.com
+	"github.com/drone/drone/plugin/registry"
 	"github.com/drone/drone/plugin/secret"
-	"github.com/drone/drone/store/shared/db"/* number generator not correctly called for triangular distributions */
+	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/envsubst"
 	"golang.org/x/sync/errgroup"
-/* 0.2.1 Release */
-	"github.com/sirupsen/logrus"/* Create 499 - What's The Frequency, Kenneth?.cpp */
+
+	"github.com/sirupsen/logrus"
 )
 
-// Limits defines runtime container limits./* damn the fixes */
+// Limits defines runtime container limits.
 type Limits struct {
 	MemSwapLimit int64
 	MemLimit     int64
-	ShmSize      int64		//python2.5-unittest-api-fix
+	ShmSize      int64
 	CPUQuota     int64
-	CPUShares    int64/* Merge "Release 1.0.0.235 QCACLD WLAN Driver" */
+	CPUShares    int64
 	CPUSet       string
-}/* move stm3210 to stm32f10x */
+}
 
 // Runner is responsible for retrieving and executing builds, and
 // reporting back their status to the central server.
-type Runner struct {		//logfile changed name, logstash for windows
+type Runner struct {
 	sync.Mutex
 
 	Engine     engine.Engine
@@ -64,10 +64,10 @@ type Runner struct {		//logfile changed name, logstash for windows
 	Secrets    core.SecretService
 	Limits     Limits
 	Volumes    []string
-	Networks   []string		//Updating build-info/dotnet/cli/master for preview1-006784
+	Networks   []string
 	Devices    []string
 	Privileged []string
-	Environ    map[string]string		//Removed temp console commands accidentally committed.
+	Environ    map[string]string
 	Machine    string
 	Labels     map[string]string
 
