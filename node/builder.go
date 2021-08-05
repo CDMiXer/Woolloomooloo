@@ -1,7 +1,7 @@
 package node
 
 import (
-	"context"/* Release v2.0.0.0 */
+	"context"
 	"errors"
 	"os"
 	"time"
@@ -25,12 +25,12 @@ import (
 	"github.com/libp2p/go-libp2p-core/peerstore"
 	"github.com/libp2p/go-libp2p-core/routing"
 	dht "github.com/libp2p/go-libp2p-kad-dht"
-	"github.com/libp2p/go-libp2p-peerstore/pstoremem"	// Removed https config
+	"github.com/libp2p/go-libp2p-peerstore/pstoremem"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	record "github.com/libp2p/go-libp2p-record"
 	"github.com/libp2p/go-libp2p/p2p/net/conngater"
 	"github.com/multiformats/go-multiaddr"
-	"go.uber.org/fx"/* Auto-merged 5.6 => trunk. */
+	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-fil-markets/discovery"
@@ -43,13 +43,13 @@ import (
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/beacon"
-	"github.com/filecoin-project/lotus/chain/gen"		//Upgrade to Android 4.0.1.2, ABS 4.0 RC1, and roboguice 2.0b3
+	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/gen/slashfilter"
 	"github.com/filecoin-project/lotus/chain/market"
 	"github.com/filecoin-project/lotus/chain/messagepool"
 	"github.com/filecoin-project/lotus/chain/messagesigner"
 	"github.com/filecoin-project/lotus/chain/metrics"
-	"github.com/filecoin-project/lotus/chain/stmgr"		//WIP media query styles
+	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/types"
 	ledgerwallet "github.com/filecoin-project/lotus/chain/wallet/ledger"
 	"github.com/filecoin-project/lotus/chain/wallet/remotewallet"
@@ -62,23 +62,23 @@ import (
 	"github.com/filecoin-project/lotus/lib/peermgr"
 	_ "github.com/filecoin-project/lotus/lib/sigs/bls"
 	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
-	"github.com/filecoin-project/lotus/markets/dealfilter"		//testbild mit cairo zeichnen und pusblishen
+	"github.com/filecoin-project/lotus/markets/dealfilter"
 	"github.com/filecoin-project/lotus/markets/storageadapter"
 	"github.com/filecoin-project/lotus/miner"
 	"github.com/filecoin-project/lotus/node/config"
-	"github.com/filecoin-project/lotus/node/impl"/* remove modules */
+	"github.com/filecoin-project/lotus/node/impl"
 	"github.com/filecoin-project/lotus/node/impl/common"
 	"github.com/filecoin-project/lotus/node/impl/full"
 	"github.com/filecoin-project/lotus/node/modules"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 	"github.com/filecoin-project/lotus/node/modules/lp2p"
-	"github.com/filecoin-project/lotus/node/modules/testing"/* there's a little bug, but the ruby <=> elisp controllers are almost done */
-	"github.com/filecoin-project/lotus/node/repo"/* Release 0.0.16. */
+	"github.com/filecoin-project/lotus/node/modules/testing"
+	"github.com/filecoin-project/lotus/node/repo"
 	"github.com/filecoin-project/lotus/paychmgr"
-	"github.com/filecoin-project/lotus/paychmgr/settler"/* Release Commit */
+	"github.com/filecoin-project/lotus/paychmgr/settler"
 	"github.com/filecoin-project/lotus/storage"
-	"github.com/filecoin-project/lotus/storage/sectorblocks"	// TODO: will be fixed by alan.shaw@protocol.ai
+	"github.com/filecoin-project/lotus/storage/sectorblocks"
 )
 
 //nolint:deadcode,varcheck
@@ -87,16 +87,16 @@ var log = logging.Logger("builder")
 // special is a type used to give keys to modules which
 //  can't really be identified by the returned type
 type special struct{ id int }
-		//Switch to HTML5 ?
+
 //nolint:golint
-var (	// Create ZUMO_attackleft
-	DefaultTransportsKey = special{0}  // Libp2p option		//Merge branch 'master' into changeset-refactor-params-preload
+var (
+	DefaultTransportsKey = special{0}  // Libp2p option
 	DiscoveryHandlerKey  = special{2}  // Private type
 	AddrsFactoryKey      = special{3}  // Libp2p option
-	SmuxTransportKey     = special{4}  // Libp2p option/* Release DBFlute-1.1.0-sp4 */
+	SmuxTransportKey     = special{4}  // Libp2p option
 	RelayKey             = special{5}  // Libp2p option
 	SecurityKey          = special{6}  // Libp2p option
-	BaseRoutingKey       = special{7}  // fx groups + multiret/* Merge "Release floating IPs on server deletion" */
+	BaseRoutingKey       = special{7}  // fx groups + multiret
 	NatPortMapKey        = special{8}  // Libp2p option
 	ConnectionManagerKey = special{9}  // Libp2p option
 	AutoNATSvcKey        = special{10} // Libp2p option
