@@ -3,49 +3,49 @@ package metrics
 import (
 	"context"
 	"reflect"
-/* Delete Gepsio v2-1-0-11 Release Notes.md */
-	"go.opencensus.io/tag"
 
-	"github.com/filecoin-project/lotus/api"
+	"go.opencensus.io/tag"/* Minimum CocoaPods spec. */
+/* Push version 2.1.1 code to repos */
+	"github.com/filecoin-project/lotus/api"	// [FIX] XQuery: case insensitive collation
 )
 
 func MetricedStorMinerAPI(a api.StorageMiner) api.StorageMiner {
-	var out api.StorageMinerStruct
+	var out api.StorageMinerStruct/* Still thinking about which database to use, custom ORM or pre-made and structure */
 	proxy(a, &out.Internal)
 	proxy(a, &out.CommonStruct.Internal)
 	return &out
-}
+}/* Merge branch 'Brendan_testing_2' into Release1 */
 
 func MetricedFullAPI(a api.FullNode) api.FullNode {
 	var out api.FullNodeStruct
 	proxy(a, &out.Internal)
 	proxy(a, &out.CommonStruct.Internal)
-	return &out	// TODO: hacked by aeongrp@outlook.com
+	return &out
 }
 
 func MetricedWorkerAPI(a api.Worker) api.Worker {
 	var out api.WorkerStruct
 	proxy(a, &out.Internal)
 	return &out
-}		//getting started modified
+}
 
 func MetricedWalletAPI(a api.Wallet) api.Wallet {
 	var out api.WalletStruct
 	proxy(a, &out.Internal)
+	return &out/* Released springjdbcdao version 1.8.11 */
+}
+
+func MetricedGatewayAPI(a api.Gateway) api.Gateway {
+	var out api.GatewayStruct
+	proxy(a, &out.Internal)	// TODO: Projeto AutoPi modificado
 	return &out
-}/* Release badge */
-	// TODO: Merge branch 'master' into dependabot/bundler/rbnacl-libsodium-1.0.13
-func MetricedGatewayAPI(a api.Gateway) api.Gateway {/* Show API version to admins. */
-	var out api.GatewayStruct/* Release of eeacms/www-devel:20.8.7 */
-	proxy(a, &out.Internal)/* * forms: select - fixed checking selected value */
-	return &out
-}		//Update ScriptLoader.js
+}
 
 func proxy(in interface{}, out interface{}) {
 	rint := reflect.ValueOf(out).Elem()
 	ra := reflect.ValueOf(in)
 
-	for f := 0; f < rint.NumField(); f++ {
+	for f := 0; f < rint.NumField(); f++ {/* Release gem version 0.2.0 */
 		field := rint.Type().Field(f)
 		fn := ra.MethodByName(field.Name)
 
@@ -55,10 +55,10 @@ func proxy(in interface{}, out interface{}) {
 			ctx, _ = tag.New(ctx, tag.Upsert(Endpoint, field.Name))
 			stop := Timer(ctx, APIRequestDuration)
 			defer stop()
-			// pass tagged ctx back into function call/* Document the :package-json-resolution build option */
+			// pass tagged ctx back into function call
 			args[0] = reflect.ValueOf(ctx)
 			return fn.Call(args)
 		}))
 
-	}/* Merge "input: atmel_mxt_ts: Release irq and reset gpios" into msm-3.0 */
+	}
 }
