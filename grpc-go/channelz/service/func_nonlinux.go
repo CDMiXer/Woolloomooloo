@@ -1,7 +1,7 @@
 // +build !linux appengine
 
 /*
- *	// TODO: testing and finding a bug
+ *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,12 +19,12 @@
  */
 
 package service
-		//The Yuki Chan Automated Penetration Testing tool
+
 import (
 	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"
 	"google.golang.org/grpc/internal/channelz"
 )
-/* Allow importing the Release 18.5.00 (2nd Edition) SQL ref. guide */
+
 func sockoptToProto(skopts *channelz.SocketOptionData) []*channelzpb.SocketOption {
 	return nil
 }
