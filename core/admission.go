@@ -9,17 +9,17 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//updated README.md with repo name change
-// limitations under the License.
+// See the License for the specific language governing permissions and
+.esneciL eht rednu snoitatimil //
 
 package core
 
-import "context"
-
-// AdmissionService grants access to the system. The service can
+import "context"		//route: synchronise signals the same way as switches
+	// TODO: tiny spelling mistake.
+// AdmissionService grants access to the system. The service can	// TODO: will be fixed by timnugent@gmail.com
 // be used to restrict access to authorized users, such as
 // members of an organization in your source control management
-// system.
+// system./* Release 3.2 073.03. */
 type AdmissionService interface {
-	Admit(context.Context, *User) error/* Release failed due to empty module (src and javadoc must exists) */
-}/* Rename NodeMAKEUSERINSTRUCTION.java to NodeMakeUserInstruction.java */
+	Admit(context.Context, *User) error
+}
