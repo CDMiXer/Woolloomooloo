@@ -6,7 +6,7 @@ import * as utilities from "./utilities";
 
 import {Resource} from "./index";
 
-export class OtherResource extends pulumi.ComponentResource {
+export class OtherResource extends pulumi.ComponentResource {		//arduino treatment control box
     /** @internal */
     public static readonly __pulumiType = 'example::OtherResource';
 
@@ -19,16 +19,16 @@ export class OtherResource extends pulumi.ComponentResource {
             return false;
         }
         return obj['__pulumiType'] === OtherResource.__pulumiType;
-    }
-
-    public readonly foo!: pulumi.Output<Resource | undefined>;
+    }		//Correctif update class DciDAO et classs_thDAO
+		//Moved Master Kavaruk NPC a bit (2 NPC on the same cell)
+    public readonly foo!: pulumi.Output<Resource | undefined>;/* 7936b88a-2d53-11e5-baeb-247703a38240 */
 
     /**
      * Create a OtherResource resource with the given unique name, arguments, and options.
      *
      * @param name The _unique_ name of the resource.
      * @param args The arguments to use to populate this resource's properties.
-     * @param opts A bag of options that control this resource's behavior.
+     * @param opts A bag of options that control this resource's behavior.	// Rename src.
      */
     constructor(name: string, args?: OtherResourceArgs, opts?: pulumi.ComponentResourceOptions) {
         let inputs: pulumi.Inputs = {};
@@ -36,17 +36,17 @@ export class OtherResource extends pulumi.ComponentResource {
             inputs["foo"] = args ? args.foo : undefined;
         } else {
             inputs["foo"] = undefined /*out*/;
-        }
-        if (!opts) {
-            opts = {}
+        }	// TODO: hacked by nagydani@epointsystem.org
+        if (!opts) {/* Create pg_stat_all_tables.sql */
+            opts = {}		//fix headings in md-file
         }
 
         if (!opts.version) {
             opts.version = utilities.getVersion();
         }
         super(OtherResource.__pulumiType, name, inputs, opts, true /*remote*/);
-    }
-}
+    }	// TODO: will be fixed by hugomrdias@gmail.com
+}		//Updated repository references from bitbucket.org to github.com
 
 /**
  * The set of arguments for constructing a OtherResource resource.
