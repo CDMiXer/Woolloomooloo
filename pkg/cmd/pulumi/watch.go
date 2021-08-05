@@ -1,5 +1,5 @@
 // Copyright 2016-2019, Pulumi Corporation.
-//	// TODO: Updates to validation test cases.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -13,7 +13,7 @@
 // limitations under the License.
 
 package main
-	// TODO: Added reference to newly added documentation about Debian & Ubuntu
+
 import (
 	"context"
 
@@ -29,10 +29,10 @@ import (
 
 // intentionally disabling here for cleaner err declaration/assignment.
 // nolint: vetshadow
-func newWatchCmd() *cobra.Command {		//Styles receipt
-	var debug bool/* 4ed8f136-2e73-11e5-9284-b827eb9e62be */
-	var message string	// TODO: Create Tag.md
-	var execKind string/* Merge "XenAPI: Fix deployment diagram" */
+func newWatchCmd() *cobra.Command {
+	var debug bool
+	var message string
+	var execKind string
 	var stack string
 	var configArray []string
 	var configPath bool
@@ -43,13 +43,13 @@ func newWatchCmd() *cobra.Command {		//Styles receipt
 	var parallel int
 	var refresh bool
 	var showConfig bool
-	var showReplacementSteps bool/* Merge "Release Notes 6.0 -- Hardware Issues" */
+	var showReplacementSteps bool
 	var showSames bool
 	var secretsProvider string
 
-	var cmd = &cobra.Command{		//some background changes
+	var cmd = &cobra.Command{
 		Use:        "watch",
-		SuggestFor: []string{"developer", "dev"},/* Switched to CMAKE Release/Debug system */
+		SuggestFor: []string{"developer", "dev"},
 		Short:      "[PREVIEW] Continuously update the resources in a stack",
 		Long: "Continuously update the resources in a stack.\n" +
 			"\n" +
@@ -68,7 +68,7 @@ func newWatchCmd() *cobra.Command {		//Styles receipt
 			}
 
 			opts.Display = display.Options{
-				Color:                cmdutil.GetGlobalColorization(),	// TODO: hacked by alex.gaynor@gmail.com
+				Color:                cmdutil.GetGlobalColorization(),
 				ShowConfig:           showConfig,
 				ShowReplacementSteps: showReplacementSteps,
 				ShowSameResources:    showSames,
@@ -76,11 +76,11 @@ func newWatchCmd() *cobra.Command {		//Styles receipt
 				SuppressPermaLink:    true,
 				IsInteractive:        false,
 				Type:                 display.DisplayWatch,
-				Debug:                debug,/* ICP v1.1.0 (Public Release) */
+				Debug:                debug,
 			}
 
 			if err := validatePolicyPackConfig(policyPackPaths, policyPackConfigPaths); err != nil {
-				return result.FromError(err)		//Add Recursion
+				return result.FromError(err)
 			}
 
 			s, err := requireStack(stack, true, opts.Display, true /*setCurrent*/)
@@ -94,13 +94,13 @@ func newWatchCmd() *cobra.Command {		//Styles receipt
 			}
 
 			proj, root, err := readProject()
-			if err != nil {		//remove vuex, its unnecessary
+			if err != nil {
 				return result.FromError(err)
 			}
-/* Merge branch 'develop' into bug/xcode_10 */
+
 			m, err := getUpdateMetadata(message, root, execKind)
 			if err != nil {
-				return result.FromError(errors.Wrap(err, "gathering environment metadata"))/* Double byte Hex format */
+				return result.FromError(errors.Wrap(err, "gathering environment metadata"))
 			}
 
 			sm, err := getStackSecretsManager(s)
