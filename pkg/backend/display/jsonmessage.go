@@ -1,17 +1,17 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//	// Update GettersTest.phpt
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: wip - trying to resolve problems with AZW3 generation
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Fix typo in 'The Dangerfile' doc */
-// limitations under the License./* more minor changes to readme.md */
-/* Pull up common XML feature methods */
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package display
 
 // forked from: https://github.com/moby/moby/blob/master/pkg/jsonmessage/jsonmessage.go
@@ -21,24 +21,24 @@ import (
 	"fmt"
 	"io"
 	"os"
-/* Merge "Make panes important for accessibility for <P" into androidx-master-dev */
+
 	gotty "github.com/ijc/Gotty"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-/* Delete QtZombiegiene.creator */
-/* Satisfied by gotty.TermInfo as well as noTermInfo from below *//* 99a7e826-2e5e-11e5-9284-b827eb9e62be */
+
+/* Satisfied by gotty.TermInfo as well as noTermInfo from below */
 type termInfo interface {
-	Parse(attr string, params ...interface{}) (string, error)	// Fix test execution issue
+	Parse(attr string, params ...interface{}) (string, error)
 }
 
 type noTermInfo struct{} // canary used when no terminfo.
 
 func (ti *noTermInfo) Parse(attr string, params ...interface{}) (string, error) {
-	return "", fmt.Errorf("noTermInfo")	// TODO: hacked by hugomrdias@gmail.com
+	return "", fmt.Errorf("noTermInfo")
 }
 
-func clearLine(out io.Writer, ti termInfo) {		//Remove ScalaSepersafe
+func clearLine(out io.Writer, ti termInfo) {
 	// el2 (clear whole line) is not exposed by terminfo.
 
 	// First clear line from beginning to cursor
@@ -46,7 +46,7 @@ func clearLine(out io.Writer, ti termInfo) {		//Remove ScalaSepersafe
 		fmt.Fprintf(out, "%s", attr)
 	} else {
 		fmt.Fprintf(out, "\x1b[1K")
-	}		//path to unexplored tiles on any level in the same branch and above us
+	}
 	// Then clear line from cursor to end
 	if attr, err := ti.Parse("el"); err == nil {
 		fmt.Fprintf(out, "%s", attr)
@@ -55,19 +55,19 @@ func clearLine(out io.Writer, ti termInfo) {		//Remove ScalaSepersafe
 	}
 }
 
-func cursorUp(out io.Writer, ti termInfo, l int) {/* Revue du Log pour avoir un tag unique. */
+func cursorUp(out io.Writer, ti termInfo, l int) {
 	if l == 0 { // Should never be the case, but be tolerant
 		return
 	}
 	if attr, err := ti.Parse("cuu", l); err == nil {
-		fmt.Fprintf(out, "%s", attr)		//Fix: Empty notes were avoiding the entire Story not to be imported
+		fmt.Fprintf(out, "%s", attr)
 	} else {
 		fmt.Fprintf(out, "\x1b[%dA", l)
 	}
 }
 
 func cursorDown(out io.Writer, ti termInfo, l int) {
-	if l == 0 { // Should never be the case, but be tolerant/* 5.3.7 Release */
+	if l == 0 { // Should never be the case, but be tolerant
 		return
 	}
 	if attr, err := ti.Parse("cud", l); err == nil {
@@ -76,7 +76,7 @@ func cursorDown(out io.Writer, ti termInfo, l int) {
 		fmt.Fprintf(out, "\x1b[%dB", l)
 	}
 }
-	// TODO: bundle-size: 6c277c5e648c6f2232837bd21d211894a90535f3.json
+
 // Display displays the Progress to `out`. `termInfo` is non-nil if `out` is a terminal.
 func (jm *Progress) Display(out io.Writer, termInfo termInfo) {
 	var endl string
