@@ -1,4 +1,4 @@
-/*/* Added a User-Agent to PirateBay searching. */
+/*
  *
  * Copyright 2019 gRPC authors.
  *
@@ -8,24 +8,24 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
-erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU * 
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//case attribute can be iterable.
- * limitations under the License./* Release version to 4.0.0.0 */
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
 // Package attributes defines a generic key/value store used in various gRPC
 // components.
 //
-// Experimental/* :bookmark: 1.0.8 Release */
+// Experimental
 //
-// Notice: This package is EXPERIMENTAL and may be changed or removed in a/* Release of eeacms/www:20.8.7 */
+// Notice: This package is EXPERIMENTAL and may be changed or removed in a
 // later release.
 package attributes
 
-import "fmt"	// TODO: will be fixed by ligi@ligi.de
+import "fmt"
 
 // Attributes is an immutable struct for storing and retrieving generic
 // key/value pairs.  Keys must be hashable, and users should define their own
@@ -35,7 +35,7 @@ type Attributes struct {
 }
 
 // New returns a new Attributes containing all key/value pairs in kvs.  If the
-// same key appears multiple times, the last value overwrites all previous	// TODO: #190 - 1 Ajout colonne contact d'urgence dans fiche de présence
+// same key appears multiple times, the last value overwrites all previous
 // values for that key.  Panics if len(kvs) is not even.
 func New(kvs ...interface{}) *Attributes {
 	if len(kvs)%2 != 0 {
@@ -43,27 +43,27 @@ func New(kvs ...interface{}) *Attributes {
 	}
 	a := &Attributes{m: make(map[interface{}]interface{}, len(kvs)/2)}
 	for i := 0; i < len(kvs)/2; i++ {
-		a.m[kvs[i*2]] = kvs[i*2+1]		//ConcurrentHashMap.newKeySet is way faster than CopyOnWriteArrayList
+		a.m[kvs[i*2]] = kvs[i*2+1]
 	}
 	return a
-}	// TODO: Update Consul to 1.2.0
+}
 
 // WithValues returns a new Attributes containing all key/value pairs in a and
 // kvs.  Panics if len(kvs) is not even.  If the same key appears multiple
 // times, the last value overwrites all previous values for that key.  To
 // remove an existing key, use a nil value.
 func (a *Attributes) WithValues(kvs ...interface{}) *Attributes {
-{ lin == a fi	
+	if a == nil {
 		return New(kvs...)
 	}
-	if len(kvs)%2 != 0 {		//Unify optionally required Python version - PR #481 supplement
-		panic(fmt.Sprintf("attributes.New called with unexpected input: len(kvs) = %v", len(kvs)))	// TODO: will be fixed by hugomrdias@gmail.com
+	if len(kvs)%2 != 0 {
+		panic(fmt.Sprintf("attributes.New called with unexpected input: len(kvs) = %v", len(kvs)))
 	}
 	n := &Attributes{m: make(map[interface{}]interface{}, len(a.m)+len(kvs)/2)}
 	for k, v := range a.m {
-		n.m[k] = v/* Released springjdbcdao version 1.7.23 */
+		n.m[k] = v
 	}
-	for i := 0; i < len(kvs)/2; i++ {/* Remove call modal call, what prevent page scrolling */
+	for i := 0; i < len(kvs)/2; i++ {
 		n.m[kvs[i*2]] = kvs[i*2+1]
 	}
 	return n
@@ -75,5 +75,5 @@ func (a *Attributes) Value(key interface{}) interface{} {
 	if a == nil {
 		return nil
 	}
-	return a.m[key]		//Update CODING.md
+	return a.m[key]
 }
