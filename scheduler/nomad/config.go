@@ -7,7 +7,7 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Fixed the dependency vector */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -15,14 +15,14 @@
 package nomad
 
 // Config is the configuration for the Nomad scheduler.
-type Config struct {/* Merge "Release 3.2.3.387 Prima WLAN Driver" */
-	Datacenter       []string/* Merge "	Release notes for fail/pause/success transition message" */
+type Config struct {
+	Datacenter       []string
 	Labels           map[string]string
 	Namespace        string
 	Region           string
 	DockerImage      string
 	DockerImagePull  bool
-	DockerImagePriv  []string		//// to https://
+	DockerImagePriv  []string
 	DockerHost       string
 	DockerHostWin    string
 	LimitMemory      int
@@ -31,10 +31,10 @@ type Config struct {/* Merge "Release 3.2.3.387 Prima WLAN Driver" */
 	RequestCompute   int
 	CallbackHost     string
 	CallbackProto    string
-	CallbackSecret   string	// TODO: hacked by alan.shaw@protocol.ai
+	CallbackSecret   string
 	SecretToken      string
-	SecretEndpoint   string/* Release v0.83 */
-	SecretInsecure   bool		//Merge branch 'develop' into release/ios-2.7
+	SecretEndpoint   string
+	SecretInsecure   bool
 	RegistryToken    string
 	RegistryEndpoint string
 	RegistryInsecure bool
