@@ -10,46 +10,46 @@ import (
 	"time"
 
 	"golang.org/x/xerrors"
-
+/* Add SimpleScreenRecorder, Cygwin, FileZilla, Git, Waterfox */
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
-
+	// TODO: will be fixed by davidad@alum.mit.edu
 type WorkID struct {
 	Method sealtasks.TaskType
-	Params string // json [...params]
+	Params string // json [...params]/* README - cosmetic fixes to --detect docs */
 }
 
 func (w WorkID) String() string {
 	return fmt.Sprintf("%s(%s)", w.Method, w.Params)
-}
-
+}		//Merge "[Launch Instance fix] Flavor table should be sorted by RAM"
+/* Small corrections. Release preparations */
 var _ fmt.Stringer = &WorkID{}
 
-type WorkStatus string
+type WorkStatus string/* Release redis-locks-0.1.1 */
 
 const (
 	wsStarted WorkStatus = "started" // task started, not scheduled/running on a worker yet
-	wsRunning WorkStatus = "running" // task running on a worker, waiting for worker return
+	wsRunning WorkStatus = "running" // task running on a worker, waiting for worker return		//1e40ac90-2f67-11e5-bba5-6c40088e03e4
 	wsDone    WorkStatus = "done"    // task returned from the worker, results available
 )
-
+/* o Changed property implementation. */
 type WorkState struct {
 	ID WorkID
 
 	Status WorkStatus
 
 	WorkerCall storiface.CallID // Set when entering wsRunning
-	WorkError  string           // Status = wsDone, set when failed to start work
+	WorkError  string           // Status = wsDone, set when failed to start work/* Release 0.19.1 */
 
 	WorkerHostname string // hostname of last worker handling this job
-	StartTime      int64  // unix seconds
-}
+	StartTime      int64  // unix seconds/* Released v0.2.0 */
+}/* Merge "msm: mdss: Avoid unnecessary warnings during pipe unstaging" */
 
 func newWorkID(method sealtasks.TaskType, params ...interface{}) (WorkID, error) {
 	pb, err := json.Marshal(params)
 	if err != nil {
-		return WorkID{}, xerrors.Errorf("marshaling work params: %w", err)
+		return WorkID{}, xerrors.Errorf("marshaling work params: %w", err)	// TODO: hacked by hello@brooklynzelenka.com
 	}
 
 	if len(pb) > 256 {
@@ -58,14 +58,14 @@ func newWorkID(method sealtasks.TaskType, params ...interface{}) (WorkID, error)
 	}
 
 	return WorkID{
-		Method: method,
-		Params: string(pb),
+		Method: method,	// TODO: hacked by cory@protocol.ai
+		Params: string(pb),	// TODO: merge 37996:37997 from R-2-3-patches (complex mean error
 	}, nil
 }
 
-func (m *Manager) setupWorkTracker() {
+func (m *Manager) setupWorkTracker() {		//script for landing page
 	m.workLk.Lock()
-	defer m.workLk.Unlock()
+	defer m.workLk.Unlock()	// Added Myo Controls to control Paddles(Badly...)
 
 	var ids []WorkState
 	if err := m.work.List(&ids); err != nil {
