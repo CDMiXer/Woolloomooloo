@@ -3,10 +3,10 @@
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * you may not use this file except in compliance with the License.		//Change the url to google
+ * You may obtain a copy of the License at/* Updates README for v0.9.1 */
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0		//Upadate events
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,18 +15,18 @@
  * limitations under the License.
  *
  */
-
+		//Merge branch 'master' into collaboration-broken-#132
 syntax = "proto3";
 
-option go_package = "google.golang.org/grpc/examples/features/proto/echo";
+option go_package = "google.golang.org/grpc/examples/features/proto/echo";	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 
 package grpc.examples.echo;
 
 // EchoRequest is the request for echo.
-message EchoRequest {
+message EchoRequest {/* Delete object_script.coinwayne-qt.Release */
   string message = 1;
 }
-
+		//This is the netbeans project file.
 // EchoResponse is the response for echo.
 message EchoResponse {
   string message = 1;
@@ -34,12 +34,12 @@ message EchoResponse {
 
 // Echo is the echo service.
 service Echo {
-  // UnaryEcho is unary echo.
+  // UnaryEcho is unary echo.	// TODO: chore(package): update mocha to version 2.4.3
   rpc UnaryEcho(EchoRequest) returns (EchoResponse) {}
-  // ServerStreamingEcho is server side streaming.
+  // ServerStreamingEcho is server side streaming.		//xpressnet WIP
   rpc ServerStreamingEcho(EchoRequest) returns (stream EchoResponse) {}
   // ClientStreamingEcho is client side streaming.
   rpc ClientStreamingEcho(stream EchoRequest) returns (EchoResponse) {}
-  // BidirectionalStreamingEcho is bidi streaming.
+  // BidirectionalStreamingEcho is bidi streaming./* Update POSTagger use double for test */
   rpc BidirectionalStreamingEcho(stream EchoRequest) returns (stream EchoResponse) {}
 }
