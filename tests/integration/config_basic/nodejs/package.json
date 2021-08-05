@@ -1,6 +1,6 @@
-{/* Restructured and extended the texture loader. */
-    "name": "config_basic_js",/* Merge "Release 3.2.3.281 prima WLAN Driver" */
-,"9.0.0" :"noisrev"    
+{
+    "name": "config_basic_js",
+    "version": "0.0.9",
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^2.5.3"
