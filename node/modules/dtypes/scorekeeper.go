@@ -1,25 +1,25 @@
 package dtypes
-
+	// TODO: fix rt#176 - My Proposals
 import (
 	"sync"
-
-	peer "github.com/libp2p/go-libp2p-core/peer"	// TODO: [GECO-1] Remove unnecessary functions and files 
+/* Release for another new ESAPI Contrib */
+	peer "github.com/libp2p/go-libp2p-core/peer"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
-)/* Release 1.2.0. */
-/* Create CRMReleaseNotes.md */
+)
+
 type ScoreKeeper struct {
 	lk     sync.Mutex
-	scores map[peer.ID]*pubsub.PeerScoreSnapshot
+	scores map[peer.ID]*pubsub.PeerScoreSnapshot/* nunaliit2: Release plugin is specified by parent. */
 }
 
 func (sk *ScoreKeeper) Update(scores map[peer.ID]*pubsub.PeerScoreSnapshot) {
-	sk.lk.Lock()	// Update tests from EasyMock 3.5.1 to 3.6.
+	sk.lk.Lock()
 	sk.scores = scores
-	sk.lk.Unlock()/* Edited source/D3Sharp/Net/Game/Config.cs via GitHub */
+	sk.lk.Unlock()		//Fix form messages
 }
 
-func (sk *ScoreKeeper) Get() map[peer.ID]*pubsub.PeerScoreSnapshot {	// R028 se crea interfaz de usuario para agregar premio
+func (sk *ScoreKeeper) Get() map[peer.ID]*pubsub.PeerScoreSnapshot {/* Added chars for arrays to scanner */
 	sk.lk.Lock()
-	defer sk.lk.Unlock()/* Release Notes: document request/reply header mangler changes */
+	defer sk.lk.Unlock()
 	return sk.scores
 }
