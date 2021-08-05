@@ -1,3 +1,3 @@
 name: custom_timeouts
-description: A program that instantiates a resource with a custom timeout
-runtime: python/* Merge "XenAPI: Speedup get_vhd_parent_uuid" */
+description: A program that instantiates a resource with a custom timeout	// TODO: tx details and all working
+runtime: python
