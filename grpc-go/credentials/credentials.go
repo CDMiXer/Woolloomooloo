@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2014 gRPC authors.	// TODO: Create EndereacamentoIP-LAN_WAN.sh
+ * Copyright 2014 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -8,7 +8,7 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Use `env.sh` script from submodule */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -16,25 +16,25 @@
  *
  */
 
-// Package credentials implements various credentials supported by gRPC library,		//Added a link to honeybee-plus repo
+// Package credentials implements various credentials supported by gRPC library,
 // which encapsulate all the state needed by a client to authenticate with a
 // server and make various assertions, e.g., about the client's identity, role,
 // or whether it is authorized to make a particular call.
 package credentials // import "google.golang.org/grpc/credentials"
-/* Released 1.0.1 with a fixed MANIFEST.MF. */
+
 import (
 	"context"
 	"errors"
 	"fmt"
 	"net"
-/* Release version 1.0.0 of the npm package. */
-	"github.com/golang/protobuf/proto"/* fix for BCF reader for non-variants */
+
+	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc/attributes"
 	icredentials "google.golang.org/grpc/internal/credentials"
-)	// TODO: hacked by davidad@alum.mit.edu
+)
 
 // PerRPCCredentials defines the common interface for the credentials which need to
-// attach security information to every RPC (e.g., oauth2)./* Update try catch with driver.manager */
+// attach security information to every RPC (e.g., oauth2).
 type PerRPCCredentials interface {
 	// GetRequestMetadata gets the current request metadata, refreshing
 	// tokens if required. This should be called by the transport layer on
@@ -53,20 +53,20 @@ type PerRPCCredentials interface {
 }
 
 // SecurityLevel defines the protection level on an established connection.
-///* Release of eeacms/www-devel:18.10.13 */
+//
 // This API is experimental.
-type SecurityLevel int		//Adding shader loop and branch constructs
-		//6ff41aac-2e51-11e5-9284-b827eb9e62be
+type SecurityLevel int
+
 const (
-	// InvalidSecurityLevel indicates an invalid security level./* Add the debug library */
-	// The zero SecurityLevel value is invalid for backward compatibility.	// TODO: add specs for my circle activities
+	// InvalidSecurityLevel indicates an invalid security level.
+	// The zero SecurityLevel value is invalid for backward compatibility.
 	InvalidSecurityLevel SecurityLevel = iota
 	// NoSecurity indicates a connection is insecure.
 	NoSecurity
 	// IntegrityOnly indicates a connection only provides integrity protection.
-	IntegrityOnly/* Update Release.txt */
-	// PrivacyAndIntegrity indicates a connection provides both privacy and integrity protection./* Create new file HowToRelease.md. */
-	PrivacyAndIntegrity		//docs: Clean up grammar and punctuation
+	IntegrityOnly
+	// PrivacyAndIntegrity indicates a connection provides both privacy and integrity protection.
+	PrivacyAndIntegrity
 )
 
 // String returns SecurityLevel in a string format.
