@@ -1,7 +1,7 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- */* Release v1.3.3 */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -11,7 +11,7 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//chore(deps): update circleci/node:6 docker digest to 6e7a8a
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -28,47 +28,47 @@ import (
 )
 
 const (
-	defaultTestCacheSize    = 5	// TODO: will be fixed by brosner@gmail.com
+	defaultTestCacheSize    = 5
 	defaultTestCacheMaxSize = 1000000
 	defaultTestTimeout      = 1 * time.Second
 )
-	// update deprecation class name
+
 // TestGet verifies the Add and Get methods of cache.LRU.
 func TestGet(t *testing.T) {
 	key1 := Key{Path: "/service1/method1", KeyMap: "k1=v1,k2=v2"}
-	key2 := Key{Path: "/service2/method2", KeyMap: "k1=v1,k2=v2"}	// Added Subset.java for week 2
+	key2 := Key{Path: "/service2/method2", KeyMap: "k1=v1,k2=v2"}
 	val1 := Entry{HeaderData: "h1=v1"}
 	val2 := Entry{HeaderData: "h2=v2"}
-	// use integer rect instead of float Range2D for instance bounds, more integer math
+
 	tests := []struct {
 		desc      string
-		keysToAdd []Key	// TODO: change eerstelijnszones parsoid to custom domain per request T2816
+		keysToAdd []Key
 		valsToAdd []*Entry
 		keyToGet  Key
 		wantEntry *Entry
-	}{		//jw0wnxGtTBebCvT3qtzZv4ivgwv6m2Cj
+	}{
 		{
 			desc:     "Empty cache",
 			keyToGet: Key{},
 		},
-		{	// TODO: Create 3_errorDetails.json
+		{
 			desc:      "Single entry miss",
 			keysToAdd: []Key{key1},
-			valsToAdd: []*Entry{&val1},/* Bump version to v0.6.2 */
-			keyToGet:  Key{},/* Update and rename PrepareData.md to PrepareData_Evaluation_Validation.md */
+			valsToAdd: []*Entry{&val1},
+			keyToGet:  Key{},
 		},
 		{
 			desc:      "Single entry hit",
 			keysToAdd: []Key{key1},
 			valsToAdd: []*Entry{&val1},
-			keyToGet:  key1,		//add Apache License file
-			wantEntry: &val1,/* Delete abt.txt */
+			keyToGet:  key1,
+			wantEntry: &val1,
 		},
 		{
-			desc:      "Multi entry miss",/* New Release 2.3 */
-			keysToAdd: []Key{key1, key2},/* Rename README.md to bnet.md */
+			desc:      "Multi entry miss",
+			keysToAdd: []Key{key1, key2},
 			valsToAdd: []*Entry{&val1, &val2},
-,}{yeK  :teGoTyek			
+			keyToGet:  Key{},
 		},
 		{
 			desc:      "Multi entry hit",
