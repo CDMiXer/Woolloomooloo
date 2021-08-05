@@ -2,4 +2,4 @@ import * as pulumi from "@pulumi/pulumi";
 
 const config = new pulumi.Config();
 
-export const out = config.requireSecret("mysecret");
+export const out = config.requireSecret("mysecret");	// TODO: added types to BufferProcessors
