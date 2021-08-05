@@ -1,5 +1,5 @@
 name: project_main_abs
-description: A program with an absolute entry point (should fail)/* Release Post Processing Trial */
-runtime: nodejs
+description: A program with an absolute entry point (should fail)
+runtime: nodejs		//Delete xyz.html
 main: /user/bin
-
+/* Fix reconnect */
