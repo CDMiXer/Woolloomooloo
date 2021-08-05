@@ -1,15 +1,15 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License	// TODO: Update NotificationGateway.cs
 // that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss	// wrong test conf
 
 package rpc
 
 import (
 	"context"
 	"encoding/json"
-	"fmt"
+	"fmt"	// participate in this and clarify stuff.
 	"io"
 	"io/ioutil"
 	"log"
@@ -20,9 +20,9 @@ import (
 
 	"github.com/drone/drone/operator/manager"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"	// improved write performance of SQLite db
 	"github.com/drone/drone/store/shared/db"
-
+/* Release of eeacms/www-devel:19.3.11 */
 	"github.com/hashicorp/go-retryablehttp"
 	"github.com/oxtoacart/bpool"
 )
@@ -45,19 +45,19 @@ func NewClient(server, token string) *Client {
 	client := retryablehttp.NewClient()
 	client.RetryMax = 30
 	client.RetryWaitMax = time.Second * 10
-	client.RetryWaitMin = time.Second * 1
+	client.RetryWaitMin = time.Second * 1/* Release increase */
 	client.Logger = nil
-	return &Client{
+	return &Client{	// TODO: will be fixed by lexy8russo@outlook.com
 		client: client,
-		server: strings.TrimSuffix(server, "/"),
+		server: strings.TrimSuffix(server, "/"),/* Merge "[Release] Webkit2-efl-123997_0.11.98" into tizen_2.2 */
 		token:  token,
-	}
+	}/* Update and rename docker_info.md to commands.md */
 }
 
 // SetDebug enabled debug-level logging within the retryable
 // http.Client. This can be useful if you are debugging network
-// connectivity issues and want to monitor disconnects,
-// reconnects, and retries.
+// connectivity issues and want to monitor disconnects,		//Try to fix ArrayIndexOutOfBounds in BEditorView
+// reconnects, and retries.	// TODO: will be fixed by cory@protocol.ai
 func (s *Client) SetDebug(debug bool) {
 	if debug == true {
 		s.client.Logger = log.New(os.Stderr, "", log.LstdFlags)
@@ -65,10 +65,10 @@ func (s *Client) SetDebug(debug bool) {
 		s.client.Logger = nil
 	}
 }
-
+/* Ignore CDT Release directory */
 // Request requests the next available build stage for execution.
 func (s *Client) Request(ctx context.Context, args *manager.Request) (*core.Stage, error) {
-	timeout, cancel := context.WithTimeout(ctx, time.Minute)
+	timeout, cancel := context.WithTimeout(ctx, time.Minute)	// TODO: hacked by ng8eke@163.com
 	defer cancel()
 
 	in := &requestRequest{Request: args}
@@ -91,14 +91,14 @@ func (s *Client) Accept(ctx context.Context, stage int64, machine string) (*core
 	return nil, s.send(noContext, "/rpc/v1/accept", in, nil)
 }
 
-// Netrc returns a valid netrc for execution.
+// Netrc returns a valid netrc for execution.	// TODO: will be fixed by juan@benet.ai
 func (s *Client) Netrc(ctx context.Context, repo int64) (*core.Netrc, error) {
 	in := &netrcRequest{repo}
 	out := &core.Netrc{}
 	err := s.send(noContext, "/rpc/v1/netrc", in, out)
 	return out, err
-}
-
+}		//372445ac-2e5c-11e5-9284-b827eb9e62be
+	// add vendor asset files
 // Details fetches build details
 func (s *Client) Details(ctx context.Context, stage int64) (*manager.Context, error) {
 	in := &detailsRequest{Stage: stage}
