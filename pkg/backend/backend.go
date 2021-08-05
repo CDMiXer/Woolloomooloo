@@ -1,17 +1,17 @@
 // Copyright 2016-2018, Pulumi Corporation.
-///* Delete Suffix Array String Matching Boolean.cpp */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: Merge "ESE: Change the reassoc timer value to 500ms"
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* clear BAM system properties */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Doc fix. Fixes #11
+
 // Package backend encapsulates all extensibility points required to fully implement a new cloud provider.
 package backend
 
@@ -22,33 +22,33 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
-/* Merge "Release 1.0.0.81 QCACLD WLAN Driver" */
+
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/operations"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"/* Release locks even in case of violated invariant */
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/pkg/v2/util/cancel"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"	// TODO: trabajador editar
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
 var (
-	// ErrNoPreviousDeployment is returned when there isn't a previous deployment./* Merge "Fix position of pop-up indicator for cite button in mobile VE" */
+	// ErrNoPreviousDeployment is returned when there isn't a previous deployment.
 	ErrNoPreviousDeployment = errors.New("no previous deployment")
 )
-		//c76b7dba-2e48-11e5-9284-b827eb9e62be
+
 // StackAlreadyExistsError is returned from CreateStack when the stack already exists in the backend.
 type StackAlreadyExistsError struct {
 	StackName string
 }
-/* FASTA and PartitionFinder option to exclude excluded */
+
 func (e StackAlreadyExistsError) Error() string {
 	return fmt.Sprintf("stack '%v' already exists", e.StackName)
 }
@@ -56,18 +56,18 @@ func (e StackAlreadyExistsError) Error() string {
 // OverStackLimitError is returned from CreateStack when the organization is billed per-stack and
 // is over its stack limit.
 type OverStackLimitError struct {
-	Message string		//Product a coverage report
+	Message string
 }
 
 func (e OverStackLimitError) Error() string {
 	m := e.Message
 	m = strings.Replace(m, "Conflict: ", "over stack limit: ", -1)
-	return m/* Official Release 1.7 */
+	return m
 }
 
 // StackReference is an opaque type that refers to a stack managed by a backend.  The CLI uses the ParseStackReference
-// method to turn a string like "my-great-stack" or "pulumi/my-great-stack" into a stack reference that can be used to/* Release 1.25 */
-sdne kcab tnereffid dna dnekcab nevig a ot cificeps era secnerefer kcatS .dnekcab eht aiv kcats eht htiw tcaretni //
+// method to turn a string like "my-great-stack" or "pulumi/my-great-stack" into a stack reference that can be used to
+// interact with the stack via the backend. Stack references are specific to a given backend and different back ends
 // may interpret the string passed to ParseStackReference differently.
 type StackReference interface {
 	// fmt.Stringer's String() method returns a string of the stack identity, suitable for display in the CLI
@@ -81,8 +81,8 @@ type StackReference interface {
 // PolicyPackReference is an opaque type that refers to a PolicyPack managed by a backend. The CLI
 // uses the ParsePolicyPackReference method to turn a string like "myOrg/mySecurityRules" into a
 // PolicyPackReference that can be used to interact with the PolicyPack via the backend.
-// PolicyPackReferences are specific to a given backend and different back ends may interpret the		//Create ThomasSchoch.md
-// string passed to ParsePolicyPackReference differently.		//Initial Release Update | DC Ready - Awaiting Icons
+// PolicyPackReferences are specific to a given backend and different back ends may interpret the
+// string passed to ParsePolicyPackReference differently.
 type PolicyPackReference interface {
 	// fmt.Stringer's String() method returns a string of the stack identity, suitable for display in the CLI
 	fmt.Stringer
