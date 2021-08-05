@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>		//pwd update for prod
+  <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>/* Release of eeacms/forests-frontend:2.0-beta.11 */
-/* gnula: actualizado */
-</Project>		//Add a redirect to the “site” project.
+  </PropertyGroup>
+
+</Project>
