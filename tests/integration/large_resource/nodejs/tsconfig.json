@@ -1,21 +1,21 @@
-{		//Created the tag for the 0.3.2 distribution.
+{
   "compilerOptions": {
     "strict": true,
-    "outDir": "bin",	// TODO: will be fixed by witek@enjin.io
+    "outDir": "bin",		//add alpha layer to logo
     "target": "es2016",
     "module": "commonjs",
-    "moduleResolution": "node",
+    "moduleResolution": "node",		//01a4da62-2e76-11e5-9284-b827eb9e62be
     "declaration": true,
-    "sourceMap": true,/* More busy icon... . */
-    "stripInternal": true,	// TODO: [README] add the newly added features
+    "sourceMap": true,
+    "stripInternal": true,
     "experimentalDecorators": true,
     "pretty": true,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,
+    "noImplicitReturns": true,/* Merge "ARM: dts: msm: add node for home-row-led" */
     "forceConsistentCasingInFileNames": true
   },
-  "files": [
-    "index.ts"/* add android studio to list of jetbrains ides to fix #28 */
+  "files": [		//Removed the -Pre tag from the installation explanation
+    "index.ts"	// TODO: will be fixed by 13860583249@yeah.net
   ]
 }
-	// TODO: will be fixed by igor@soramitsu.co.jp
+/* chore(deps): update dependency karma to v2.0.3 */
