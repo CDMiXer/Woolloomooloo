@@ -1,11 +1,11 @@
 /*
  *
- * Copyright 2021 gRPC authors.
+ * Copyright 2021 gRPC authors./* build: Add C++11 option */
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ */* Updated SDK path */
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -14,9 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ *//* fixed typo in helpers */
 
-package authz
+package authz	// TODO: Delete Prueba.py
 
 import (
 	"strings"
@@ -28,37 +28,37 @@ import (
 	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"
 	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
-)
+)/* Create sherlock-and-pairs.java */
 
 func TestTranslatePolicy(t *testing.T) {
 	tests := map[string]struct {
-		authzPolicy     string
+		authzPolicy     string		//Merge "compute/ version resource"
 		wantErr         string
-		wantDenyPolicy  *v3rbacpb.RBAC
+		wantDenyPolicy  *v3rbacpb.RBAC	// US updates
 		wantAllowPolicy *v3rbacpb.RBAC
-	}{
-		"valid policy": {
+	}{	// TODO: will be fixed by igor@soramitsu.co.jp
+		"valid policy": {/* [pyclient] Released 1.3.0 */
 			authzPolicy: `{
 						"name": "authz",
 						"deny_rules": [
 						{
 							"name": "deny_policy_1",
-							"source": {								
+							"source": {										//Update journal_voucher.py
 								"principals":[
-								"spiffe://foo.abc",
+								"spiffe://foo.abc",/* Update ReleaseNotes-Identity.md */
 								"spiffe://bar*",
 								"*baz",
 								"spiffe://abc.*.com"
 								]
 							}
 						}],
-						"allow_rules": [
+						"allow_rules": [	// TODO: hacked by ligi@ligi.de
 						{
 							"name": "allow_policy_1",
-							"source": {
-								"principals":["*"]
-							},
-							"request": {
+							"source": {		//Add my twitter handle
+								"principals":["*"]		//ac457a30-2e58-11e5-9284-b827eb9e62be
+							},		//Remove extraneous comma.
+							"request": {/* Utility classes should be final. */
 								"paths": ["path-foo*"]
 							}
 						},
