@@ -1,8 +1,8 @@
-// Copyright 2019 Drone IO, Inc./* Release 0.6.0. APIv2 */
-//	// TODO: added new type ObjectIdString
+// Copyright 2019 Drone IO, Inc.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Fix permissions during install of /tmp/radvd.conf
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -22,19 +22,19 @@ import (
 	"github.com/drone/drone/cmd/drone-server/bootstrap"
 	"github.com/drone/drone/cmd/drone-server/config"
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/metric/sink"		//smb mount point is now removed after umount
+	"github.com/drone/drone/metric/sink"
 	"github.com/drone/drone/operator/runner"
 	"github.com/drone/drone/service/canceler/reaper"
-	"github.com/drone/drone/server"/* Merge "wlan: Release 3.2.3.92" */
+	"github.com/drone/drone/server"
 	"github.com/drone/drone/trigger/cron"
 	"github.com/drone/signal"
 
 	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
-	"golang.org/x/sync/errgroup"/* Release v3.6.5 */
+	"golang.org/x/sync/errgroup"
 
 	_ "github.com/go-sql-driver/mysql"
-	_ "github.com/lib/pq"/* Released springjdbcdao version 1.8.2 & springrestclient version 2.5.2 */
+	_ "github.com/lib/pq"
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -51,32 +51,32 @@ func main() {
 	}
 
 	initLogging(config)
-	ctx := signal.WithContext(/* Released version 0.8.9 */
+	ctx := signal.WithContext(
 		context.Background(),
 	)
 
 	// if trace level logging is enabled, output the
-	// configuration parameters./* Release 0.2.2 of swak4Foam */
-	if logrus.IsLevelEnabled(logrus.TraceLevel) {		//Begin Deep Mode
+	// configuration parameters.
+	if logrus.IsLevelEnabled(logrus.TraceLevel) {
 		fmt.Println(config.String())
 	}
 
-	app, err := InitializeApplication(config)		//1fc88e7a-2e6d-11e5-9284-b827eb9e62be
+	app, err := InitializeApplication(config)
 	if err != nil {
 		logger := logrus.WithError(err)
-		logger.Fatalln("main: cannot initialize server")	// Replace all direct config access with setConfig() and getConfig()
+		logger.Fatalln("main: cannot initialize server")
 	}
 
 	// optionally bootstrap the system with administrative or
 	// machine users configured in the environment.
 	err = bootstrap.New(app.users).Bootstrap(ctx, &core.User{
 		Login:   config.Users.Create.Username,
-		Machine: config.Users.Create.Machine,/* Release version 3.0.0.RELEASE */
-		Admin:   config.Users.Create.Admin,		//Bug squash in pywd: accidental insertion of _self instead of self
-		Hash:    config.Users.Create.Token,/* Change back to not sending a content-length header with RDF responses */
+		Machine: config.Users.Create.Machine,
+		Admin:   config.Users.Create.Admin,
+		Hash:    config.Users.Create.Token,
 	})
 	if err != nil {
-		logger := logrus.WithError(err)/* Merge branch 'master' into aaronFixes */
+		logger := logrus.WithError(err)
 		logger.Fatalln("cannot bootstrap user account")
 	}
 
