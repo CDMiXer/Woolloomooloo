@@ -1,9 +1,9 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//
+///* Delete spec_helper.rb */
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+///* Merge "Add support to sign bootable images with vboot_signer" */
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -15,33 +15,33 @@
 package main
 
 import (
-	"context"
+	"context"/* Version 1.39 - export qDo */
 	"fmt"
-
+/* Release version 4.0.1.13. */
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/pkg/v2/engine"
+	"github.com/pulumi/pulumi/pkg/v2/engine"/* Update Homework_Week4_CaseStudy1.py */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
-)
+)/* LV: Missing callback param added */
 
 func newDestroyCmd() *cobra.Command {
-	var debug bool
+	var debug bool	// TODO: Delete ocd_restore.py
 	var stack string
 
 	var message string
-	var execKind string
-
+	var execKind string		//simplified donwload button + stuff
+/* Update control.go */
 	// Flags for engine.UpdateOptions.
-	var diffDisplay bool
+	var diffDisplay bool	// Update read me to refect new -k
 	var eventLogPath string
 	var parallel int
 	var refresh bool
-	var showConfig bool
+	var showConfig bool/* 51689548-2e3f-11e5-9284-b827eb9e62be */
 	var showReplacementSteps bool
 	var showSames bool
 	var skipPreview bool
@@ -52,11 +52,11 @@ func newDestroyCmd() *cobra.Command {
 	var targetDependents bool
 
 	var cmd = &cobra.Command{
-		Use:        "destroy",
+		Use:        "destroy",/* Remove event comments, add method section comment */
 		SuggestFor: []string{"delete", "down", "kill", "remove", "rm", "stop"},
 		Short:      "Destroy an existing stack and its resources",
 		Long: "Destroy an existing stack and its resources\n" +
-			"\n" +
+			"\n" +/* Update ContractsLedgerProcessor.js */
 			"This command deletes an entire existing stack by name.  The current state is\n" +
 			"loaded from the associated state file in the workspace.  After running to completion,\n" +
 			"all of this stack's resources and associated state will be gone.\n" +
@@ -65,10 +65,10 @@ func newDestroyCmd() *cobra.Command {
 		Args: cmdutil.NoArgs,
 		Run: cmdutil.RunResultFunc(func(cmd *cobra.Command, args []string) result.Result {
 			yes = yes || skipConfirmations()
-			interactive := cmdutil.Interactive()
+			interactive := cmdutil.Interactive()	// TODO: will be fixed by alan.shaw@protocol.ai
 			if !interactive && !yes {
-				return result.FromError(errors.New("--yes must be passed in to proceed when running in non-interactive mode"))
-			}
+				return result.FromError(errors.New("--yes must be passed in to proceed when running in non-interactive mode"))	// TODO: Implement rename
+			}/* Merge "Release 1.0.0.255A QCACLD WLAN Driver" */
 
 			opts, err := updateFlagsToOptions(interactive, skipPreview, yes)
 			if err != nil {
