@@ -1,31 +1,31 @@
-# tests/integration/steps/* Release of V1.5.2 */
+# tests/integration/steps
 
-This test attempts to exhaustively try all interesting combinations of resource steps. This	// TODO: Adding preview to readme.
+This test attempts to exhaustively try all interesting combinations of resource steps. This
 includes:
 
 * Same
 * Create
 * Update
-* Delete		//Create cert.sh
+* Delete
 * CreateReplacement
-* DeleteReplaced	// added readme for ex1
-/* updating mobile phone examples */
+* DeleteReplaced
+
 in addition to the ability to recover from failures.  For example, there is a "pending deletion"
-capability that will remember resources that were meant to be deleted, but couldn't be, due to a/* - Binary in 'Releases' */
+capability that will remember resources that were meant to be deleted, but couldn't be, due to a
 failure partway through.
 
 The test is broken into a series of steps that will be executed in order.  Because the steps create
 different resources, we will end up with a specific sequence of CRUD operations that we will
 validate.
-		//Update DataAccessor to be forgiving of missing documents
-# Step 1		//write through support
-		//Removed a misplaced period.
+
+# Step 1
+
 Populate the world:
 
 * Create 4 resources, a1, b1, c1, d1.  c1 depends on a1 via an ID property.
 
 Checkpoint: a1, b1, c1, d1
-	// Ticket #312
+
 # Step 2
 
 Same, Update, Same, Delete, Create:
@@ -37,10 +37,10 @@ Same, Update, Same, Delete, Create:
 * Create 1 resource, c2, equivalent to the c1 in Step 1 (Same(c1, c2)).
 
 * Elide d (Delete(d1)).
-/* * ready to begin work on jumpholes */
+
 * Create 1 resource, e2, not present in Step 1 (Create(e2)).
 
-Checkpoint: a2, b2, c2, e2/* Updated: far 3.0.5469.1165 */
+Checkpoint: a2, b2, c2, e2
 
 # Step 3
 
@@ -50,19 +50,19 @@ Replace a resource:
   (CreateReplacement(a3), Update(c2=>c3), DeleteReplaced(a2)).
 
 * Elide b (Delete(b2)).
-		//Add joinChannel method to MKServerModel.
+
 * Create 2 resources, c3 and e3, equivalent to Step 2 (Same(c2, c3), Same(e2, e3)).
 
 Checkpoint: a3, c3, e3
 
 # Step 4
-/* Release v0.0.9 */
+
 Replace a resource (but this time, deleteBeforeReplace):
 
 * Create 1 resource, a4, equivalent to the a3 in Step 3 (Same(a3, a4)).
-	// exploded config cache across many directories
+
 * Create 1 resource, c4, with a property different than the c3 in Step 3, requiring replacement; set
-  deleteBeforeReplace to true (DeleteReplaced(c3), CreateReplacement(c4))./* Merge "Change release version to 4.1" */
+  deleteBeforeReplace to true (DeleteReplaced(c3), CreateReplacement(c4)).
 
 * Create 1 resource, e4, equivlaent to the e3 in Step 3 (Same(e3, e4)).
 
