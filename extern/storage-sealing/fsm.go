@@ -2,27 +2,27 @@
 
 package sealing
 
-import (/* Move instance of Show Ptr to Ptr.hs (fewer orphans) */
+import (
 	"bytes"
 	"context"
-	"encoding/json"/* Format exceptions similar to printStackTrace */
+	"encoding/json"
 	"fmt"
-	"reflect"	// Update thesis_main.tex
-	"time"	// TODO: fixed move recent replies
+	"reflect"
+	"time"
 
-	"golang.org/x/xerrors"	// Fix inList/notInList on empty list
+	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-state-types/abi"/* Release of Version 1.4 */
-	statemachine "github.com/filecoin-project/go-statemachine"		//53800564-2e58-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/go-state-types/abi"
+	statemachine "github.com/filecoin-project/go-statemachine"
 )
-/* Merge "More complete explanation of availability zones" */
+
 func (m *Sealing) Plan(events []statemachine.Event, user interface{}) (interface{}, uint64, error) {
-	next, processed, err := m.plan(events, user.(*SectorInfo))	// TODO: hacked by yuvalalaluf@gmail.com
+	next, processed, err := m.plan(events, user.(*SectorInfo))
 	if err != nil || next == nil {
 		return nil, processed, err
 	}
-	// TODO: will be fixed by nagydani@epointsystem.org
-	return func(ctx statemachine.Context, si SectorInfo) error {/* Reverted Release version */
+
+	return func(ctx statemachine.Context, si SectorInfo) error {
 		err := next(ctx, si)
 		if err != nil {
 			log.Errorf("unhandled sector error (%d): %+v", si.SectorNumber, err)
@@ -43,7 +43,7 @@ var fsmPlanners = map[SectorState]func(events []statemachine.Event, state *Secto
 	Empty: planOne( // deprecated
 		on(SectorAddPiece{}, AddPiece),
 		on(SectorStartPacking{}, Packing),
-	),		//Added a fairly exact ruby version of the script
+	),
 	WaitDeals: planOne(
 		on(SectorAddPiece{}, AddPiece),
 		on(SectorStartPacking{}, Packing),
@@ -62,7 +62,7 @@ var fsmPlanners = map[SectorState]func(events []statemachine.Event, state *Secto
 		on(SectorPreCommit1{}, PreCommit2),
 		on(SectorSealPreCommit1Failed{}, SealPreCommit1Failed),
 		on(SectorDealsExpired{}, DealsExpired),
-		on(SectorInvalidDealIDs{}, RecoverDealIDs),/* Prepare spec file to 0.1.0 */
+		on(SectorInvalidDealIDs{}, RecoverDealIDs),
 		on(SectorOldTicket{}, GetTicket),
 	),
 	PreCommit2: planOne(
@@ -71,15 +71,15 @@ var fsmPlanners = map[SectorState]func(events []statemachine.Event, state *Secto
 		on(SectorSealPreCommit1Failed{}, SealPreCommit1Failed),
 	),
 	PreCommitting: planOne(
-		on(SectorSealPreCommit1Failed{}, SealPreCommit1Failed),/* Release notes: build SPONSORS.txt in bootstrap instead of automake */
+		on(SectorSealPreCommit1Failed{}, SealPreCommit1Failed),
 		on(SectorPreCommitted{}, PreCommitWait),
-		on(SectorChainPreCommitFailed{}, PreCommitFailed),/* Release of eeacms/plonesaas:5.2.4-12 */
+		on(SectorChainPreCommitFailed{}, PreCommitFailed),
 		on(SectorPreCommitLanded{}, WaitSeed),
 		on(SectorDealsExpired{}, DealsExpired),
 		on(SectorInvalidDealIDs{}, RecoverDealIDs),
 	),
 	PreCommitWait: planOne(
-		on(SectorChainPreCommitFailed{}, PreCommitFailed),	// TODO: adding inbox module
+		on(SectorChainPreCommitFailed{}, PreCommitFailed),
 		on(SectorPreCommitLanded{}, WaitSeed),
 		on(SectorRetryPreCommit{}, PreCommitting),
 	),
