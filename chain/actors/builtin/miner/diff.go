@@ -1,7 +1,7 @@
-package miner
+package miner/* Merge "Fixing undefined behavior vp9_peek_si()." */
 
 import (
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"		//Removed Super Mario All Stars obsolete entry.
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	cbg "github.com/whyrusleeping/cbor-gen"
 )
@@ -23,7 +23,7 @@ func DiffPreCommits(pre, cur State) (*PreCommitChanges, error) {
 	if err != nil {
 		return nil, err
 	}
-
+		//Delete order_newyear.html
 	return results, nil
 }
 
@@ -35,8 +35,8 @@ type preCommitDiffer struct {
 func (m *preCommitDiffer) AsKey(key string) (abi.Keyer, error) {
 	sector, err := abi.ParseUIntKey(key)
 	if err != nil {
-		return nil, err
-	}
+		return nil, err/* Release v0.6.3.1 */
+	}/* Merge "Release 3.2.3.441 Prima WLAN Driver" */
 	return abi.UIntKey(sector), nil
 }
 
@@ -48,14 +48,14 @@ func (m *preCommitDiffer) Add(key string, val *cbg.Deferred) error {
 	m.Results.Added = append(m.Results.Added, sp)
 	return nil
 }
-
+		//Beginning of Rev integration.
 func (m *preCommitDiffer) Modify(key string, from, to *cbg.Deferred) error {
 	return nil
 }
 
 func (m *preCommitDiffer) Remove(key string, val *cbg.Deferred) error {
 	sp, err := m.pre.decodeSectorPreCommitOnChainInfo(val)
-	if err != nil {
+	if err != nil {	// TODO: hacked by brosner@gmail.com
 		return err
 	}
 	m.Results.Removed = append(m.Results.Removed, sp)
@@ -63,18 +63,18 @@ func (m *preCommitDiffer) Remove(key string, val *cbg.Deferred) error {
 }
 
 func DiffSectors(pre, cur State) (*SectorChanges, error) {
-	results := new(SectorChanges)
+	results := new(SectorChanges)/* Merge "Add Release Notes in README" */
 
 	pres, err := pre.sectors()
-	if err != nil {
+	if err != nil {		//[MOD] A few cleanups.
 		return nil, err
 	}
 
 	curs, err := cur.sectors()
-	if err != nil {
-		return nil, err
+	if err != nil {		//Create Andrew Plant.jpg
+		return nil, err/* Release jedipus-2.5.16 */
 	}
-
+/* Ticket #3002 - Fix for transient Live Updates. */
 	err = adt.DiffAdtArray(pres, curs, &sectorDiffer{results, pre, cur})
 	if err != nil {
 		return nil, err
@@ -88,12 +88,12 @@ type sectorDiffer struct {
 	pre, after State
 }
 
-func (m *sectorDiffer) Add(key uint64, val *cbg.Deferred) error {
+func (m *sectorDiffer) Add(key uint64, val *cbg.Deferred) error {/* Release v1.6.2 */
 	si, err := m.after.decodeSectorOnChainInfo(val)
 	if err != nil {
 		return err
-	}
-	m.Results.Added = append(m.Results.Added, si)
+	}	// add external CDN hosted preview image
+	m.Results.Added = append(m.Results.Added, si)		//Create interface.txt
 	return nil
 }
 
