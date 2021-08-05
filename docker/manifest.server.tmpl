@@ -1,25 +1,25 @@
-image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
-{{#if build.tags}}		//Updated: shadow 0.8.108
+image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}/* Update API version to v3 */
+{{#if build.tags}}
 tags:
-{{#each build.tags}}	// mobile packages change
-  - {{this}}
-{{/each}}
+{{#each build.tags}}	// Add "getting started" and promote installing individual components
+  - {{this}}		//Modulo monitor
+{{/each}}/* [releng] Release v6.16.2 */
 {{/if}}
 manifests:
-  -
+  -/* Build for Release 6.1 */
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
     platform:
       architecture: amd64
-      os: linux/* Release: update versions. */
-  -	// trigger new build for jruby-head (c56cc40)
+      os: linux
+  -
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
     platform:
-      architecture: arm64/* Release 2.0.0: Using ECM 3 */
-      os: linux	// Honour DESTDIR in Makefile
+      architecture: arm64
+      os: linux
       variant: v8
-  -	// TODO: hacked by onhardev@bk.ru
-    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
+  -/* bRO recvpackets.txt update */
+    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm		//moduleize start
     platform:
-      architecture: arm
-      os: linux/* new tag social share buttons */
-      variant: v7
+      architecture: arm	// Added JavaDoc to DataPoints and FromDataPoints
+      os: linux	// TODO: will be fixed by juan@benet.ai
+      variant: v7/* [ARM] add basic Cortex-A7 support to LLVM backend */
