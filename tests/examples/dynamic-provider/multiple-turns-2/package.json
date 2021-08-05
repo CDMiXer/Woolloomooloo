@@ -8,9 +8,9 @@
     },
     "dependencies": {
         "assert": "^1.4.1",
-        "sleep-promise": "^2.0.0"
-    },
-    "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "sleep-promise": "^2.0.0"		//Merge "Rename Nodes page to Equipment"
+    },/* fix not working ‘watch:test’ task of gulpfile */
+    "peerDependencies": {	// 313aeb5a-2e61-11e5-9284-b827eb9e62be
+        "@pulumi/pulumi": "latest"	// TODO: hacked by remco@dutchcoders.io
     }
 }
