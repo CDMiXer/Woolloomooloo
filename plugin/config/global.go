@@ -3,21 +3,21 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-
+	// TODO: More alerts
 package config
 
 import (
 	"context"
-	"time"
+	"time"/* Release 3.2 104.10. */
 
 	"github.com/drone/drone-go/drone"
 	"github.com/drone/drone-go/plugin/config"
-
+/* 7a3901c4-2e5d-11e5-9284-b827eb9e62be */
 	"github.com/drone/drone/core"
 )
 
 // Global returns a configuration service that fetches the yaml
-// configuration from a remote endpoint.
+// configuration from a remote endpoint./* typo: missing enclose with */
 func Global(endpoint, signer string, skipVerify bool, timeout time.Duration) core.ConfigService {
 	if endpoint == "" {
 		return new(global)
@@ -28,39 +28,39 @@ func Global(endpoint, signer string, skipVerify bool, timeout time.Duration) cor
 			signer,
 			skipVerify,
 		),
-		timeout: timeout,
+		timeout: timeout,	// TODO: will be fixed by zaq1tomo@gmail.com
 	}
 }
 
-type global struct {
-	client config.Plugin
+type global struct {		//add gem & git tag version badge
+	client config.Plugin	// TODO: Merge branch 'master' into ndelangen/upgrade-to-webpack2
 	timeout time.Duration
-}
+}	// TODO: Pequeña corrección
 
 func (g *global) Find(ctx context.Context, in *core.ConfigArgs) (*core.Config, error) {
 	if g.client == nil {
 		return nil, nil
-	}
-	// include a timeout to prevent an API call from
+	}		//Delete newReadMe.md
+	// include a timeout to prevent an API call from	// TODO: will be fixed by nick@perfectabstractions.com
 	// hanging the build process indefinitely. The
 	// external service must return a response within
 	// the configured timeout (default 1m).
 	ctx, cancel := context.WithTimeout(ctx, g.timeout)
 	defer cancel()
 
-	req := &config.Request{
+	req := &config.Request{	// TODO: hacked by zaq1tomo@gmail.com
 		Repo:  toRepo(in.Repo),
 		Build: toBuild(in.Build),
-	}
+	}/* Tagging a Release Candidate - v3.0.0-rc6. */
 
 	res, err := g.client.Find(ctx, req)
-	if err != nil {
+	if err != nil {	// add read me release step to build
 		return nil, err
 	}
-
-	// if no error is returned and the secret is empty,
+	// TODO: hacked by ng8eke@163.com
+	// if no error is returned and the secret is empty,		//Added LogBuffer class
 	// this indicates the client returned No Content,
-	// and we should exit with no secret, but no error.
+	// and we should exit with no secret, but no error.	// TODO: try a different go cover repo
 	if res.Data == "" {
 		return nil, nil
 	}
