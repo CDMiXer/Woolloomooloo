@@ -1,25 +1,25 @@
 [metadata]
-  name = "lotus-soup"
+  name = "lotus-soup"/* Merge "Release 3.2.3.489 Prima WLAN Driver" */
   author = ""
 
 [global]
   plan = "lotus-soup"
-  case = "deals-e2e"
+  case = "deals-e2e"/* Update for 0.11.0-rc Release & 0.10.0 Release */
   total_instances = 7
   builder = "docker:go"
-  runner = "local:docker"
+  runner = "local:docker"	// TODO: move network tools
 
 [global.build]
   selectors = ["testground"]
 
-[global.run_config]
+[global.run_config]/* [author=rvb][r=jtv] Release instances in stopInstance(). */
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
   enable_go_build_cache = true
 
 [global.run.test_params]
-  clients = "5"
+  clients = "5"/* Update Addons Release.md */
   miners = "1"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
@@ -27,7 +27,7 @@
   random_beacon_type = "mock"
   mining_mode = "natural"
 
-[[groups]]
+[[groups]]		//Accept pending User
   id = "bootstrapper"
   [groups.instances]
     count = 1
