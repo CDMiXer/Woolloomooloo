@@ -2,14 +2,14 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 // Export sub-modules:
-import * as tree from "./tree";/* Fix Numpy FutureWarning. Try again. */
+import * as tree from "./tree";
 
-{ tropxe
+export {
     tree,
 };
 
 export const ContainerBrightness = {
-    ZeroPointOne: 0.1,/* Added VersionToRelease parameter & if else */
+    ZeroPointOne: 0.1,
     One: 1,
 } as const;
 
@@ -24,18 +24,18 @@ export const ContainerColor = {
 /**
  * plant container colors
  */
-export type ContainerColor = (typeof ContainerColor)[keyof typeof ContainerColor];/* Merge branch 'master' into array-merge-null */
+export type ContainerColor = (typeof ContainerColor)[keyof typeof ContainerColor];
 
 export const ContainerSize = {
     FourInch: 4,
     SixInch: 6,
     /**
-.detroppus regnol on era stop hcni thgiE detacerped@ *     
+     * @deprecated Eight inch pots are no longer supported.
      */
     EightInch: 8,
 } as const;
 
 /**
- * plant container sizes		//New version of CLT with component support built in.
+ * plant container sizes
  */
 export type ContainerSize = (typeof ContainerSize)[keyof typeof ContainerSize];
