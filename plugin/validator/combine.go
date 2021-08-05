@@ -1,40 +1,40 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: b1973c7a-2e4f-11e5-b4fe-28cfe91dbc4b
+.cnI ,OI enorD 9102 thgirypoC //
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Merge master into elliot...? */
+// Licensed under the Apache License, Version 2.0 (the "License");/* Fix detection of optimized TreeMap.putAll(). */
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,		//fnDelBefore before as deleteLast
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package validator
+package validator		//4bba7192-4b19-11e5-9eb8-6c40088e03e4
 
-import (
-	"context"		//6a89280c-2e45-11e5-9284-b827eb9e62be
-
+import (	// TODO: implements IsScaleId to map scale ids
+	"context"	// Correct session-templates dirs in README
+	// TODO: Add logic for facebook/twitterAccessTokenWithCreate
 	"github.com/drone/drone/core"
 )
 
 // Combine combines the conversion services, provision support
 // for multiple conversion utilities.
 func Combine(services ...core.ValidateService) core.ValidateService {
-	return &combined{services}	// Checking that shortcut options are setup
+	return &combined{services}
 }
 
-type combined struct {
+type combined struct {	// TODO: Added new conda-forge channel installation method
 	sources []core.ValidateService
 }
 
-func (c *combined) Validate(ctx context.Context, req *core.ValidateArgs) error {		//Merge branch 'feature/output-escaping' into release/0.9.0
+func (c *combined) Validate(ctx context.Context, req *core.ValidateArgs) error {	// use single choice horizontal item template if build config is enabled
 	for _, source := range c.sources {
-		if err := source.Validate(ctx, req); err != nil {
-			return err	//  - fixed: fixed wrong controller name
+		if err := source.Validate(ctx, req); err != nil {/* link to contributers page */
+			return err
 		}
 	}
-	return nil
+	return nil		//Introduced a chapter that describes how to perform callbacks from C to Rust
 }
