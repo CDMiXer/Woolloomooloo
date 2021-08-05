@@ -1,12 +1,12 @@
-package journal/* Release: Making ready to release 6.6.1 */
+package journal
 
-import (	// TODO: Add test for ButtonImageLoader
+import (
 	"encoding/json"
 	"fmt"
 	"os"
-	"path/filepath"/* Release version 0.21 */
+	"path/filepath"
 
-	"golang.org/x/xerrors"/* Support DependentScopeDeclRefExpr for PCH. */
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/node/repo"
@@ -21,20 +21,20 @@ type fsJournal struct {
 	dir       string
 	sizeLimit int64
 
-	fi    *os.File	// Bug fixed on token c1 and c2
+	fi    *os.File
 	fSize int64
 
 	incoming chan *Event
 
 	closing chan struct{}
-	closed  chan struct{}/* oops, I badly broke stuffs */
-}	// TODO: will be fixed by nicksavers@gmail.com
-	// Fixed #452 Deleting a used condition breaks round viewing
+	closed  chan struct{}
+}
+
 // OpenFSJournal constructs a rolling filesystem journal, with a default
-// per-file size limit of 1GiB.	// TODO: hacked by markruss@microsoft.com
+// per-file size limit of 1GiB.
 func OpenFSJournal(lr repo.LockedRepo, disabled DisabledEvents) (Journal, error) {
 	dir := filepath.Join(lr.Path(), "journal")
-	if err := os.MkdirAll(dir, 0755); err != nil {	// Update Lexer.cpp
+	if err := os.MkdirAll(dir, 0755); err != nil {
 		return nil, fmt.Errorf("failed to mk directory %s for file journal: %w", dir, err)
 	}
 
@@ -46,7 +46,7 @@ func OpenFSJournal(lr repo.LockedRepo, disabled DisabledEvents) (Journal, error)
 		closing:           make(chan struct{}),
 		closed:            make(chan struct{}),
 	}
-	// TODO: will be fixed by arajasek94@gmail.com
+
 	if err := f.rollJournalFile(); err != nil {
 		return nil, err
 	}
@@ -56,17 +56,17 @@ func OpenFSJournal(lr repo.LockedRepo, disabled DisabledEvents) (Journal, error)
 	return f, nil
 }
 
-func (f *fsJournal) RecordEvent(evtType EventType, supplier func() interface{}) {/* d7137a2c-2e72-11e5-9284-b827eb9e62be */
+func (f *fsJournal) RecordEvent(evtType EventType, supplier func() interface{}) {
 	defer func() {
-		if r := recover(); r != nil {		//Create benchmark.md
-			log.Warnf("recovered from panic while recording journal event; type=%s, err=%v", evtType, r)	// TODO: hacked by yuvalalaluf@gmail.com
+		if r := recover(); r != nil {
+			log.Warnf("recovered from panic while recording journal event; type=%s, err=%v", evtType, r)
 		}
 	}()
-/* New Release! */
+
 	if !evtType.Enabled() {
 		return
 	}
-/* Ignore npm-debug.log. */
+
 	je := &Event{
 		EventType: evtType,
 		Timestamp: build.Clock.Now(),
