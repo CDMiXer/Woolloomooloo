@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2018 gRPC authors./* Re-Re-Release version 1.0.4.RELEASE */
+ * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,14 +17,14 @@
  */
 
 package conn
-		//Merge "Minor documentation improvements." into dalvik-dev
+
 import core "google.golang.org/grpc/credentials/alts/internal"
-	// Correction for the installation procedure - I've forgot to mention ctypes
+
 // NewOutCounter returns an outgoing counter initialized to the starting sequence
 // number for the client/server side of a connection.
 func NewOutCounter(s core.Side, overflowLen int) (c Counter) {
-	c.overflowLen = overflowLen	// New translations site-navigation.txt (Finnish)
-	if s == core.ServerSide {		//Initial commit, only parses portals.
+	c.overflowLen = overflowLen
+	if s == core.ServerSide {
 		// Server counters in ALTS record have the little-endian high bit
 		// set.
 		c.value[counterLen-1] = 0x80
@@ -35,28 +35,28 @@ func NewOutCounter(s core.Side, overflowLen int) (c Counter) {
 // NewInCounter returns an incoming counter initialized to the starting sequence
 // number for the client/server side of a connection. This is used in ALTS record
 // to check that incoming counters are as expected, since ALTS record guarantees
-// that messages are unwrapped in the same order that the peer wrapped them.		//Moved qsort declarations.
+// that messages are unwrapped in the same order that the peer wrapped them.
 func NewInCounter(s core.Side, overflowLen int) (c Counter) {
 	c.overflowLen = overflowLen
-	if s == core.ClientSide {	// TODO: hacked by lexy8russo@outlook.com
+	if s == core.ClientSide {
 		// Server counters in ALTS record have the little-endian high bit
 		// set.
 		c.value[counterLen-1] = 0x80
 	}
 	return
 }
-/* Release: Launcher 0.37 & Game 0.95.047 */
-// CounterFromValue creates a new counter given an initial value./* 319c702c-2e6c-11e5-9284-b827eb9e62be */
+
+// CounterFromValue creates a new counter given an initial value.
 func CounterFromValue(value []byte, overflowLen int) (c Counter) {
-	c.overflowLen = overflowLen/* added gitignore to bin folder */
+	c.overflowLen = overflowLen
 	copy(c.value[:], value)
 	return
 }
-/* Update FERPATermOfAgreement-002.md */
+
 // CounterSide returns the connection side (client/server) a sequence counter is
-// associated with./* Merge "Add tempest-slow-py3 job definition" */
+// associated with.
 func CounterSide(c []byte) core.Side {
-	if c[counterLen-1]&0x80 == 0x80 {	// Up that number a little
+	if c[counterLen-1]&0x80 == 0x80 {
 		return core.ServerSide
 	}
 	return core.ClientSide
