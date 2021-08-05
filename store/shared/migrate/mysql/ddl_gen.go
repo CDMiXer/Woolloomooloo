@@ -1,8 +1,8 @@
-package mysql
+package mysql/* Using DMSScript.getSitesForSE */
 
 import (
 	"database/sql"
-)
+)		//Delete fromsource.md
 
 var migrations = []struct {
 	name string
@@ -10,73 +10,73 @@ var migrations = []struct {
 }{
 	{
 		name: "create-table-users",
-		stmt: createTableUsers,
+		stmt: createTableUsers,/* added apt addon to travis */
 	},
-	{/* Began tests for PrivateMessage */
+	{	// TODO: will be fixed by steven@stebalien.com
 		name: "create-table-repos",
 		stmt: createTableRepos,
 	},
 	{
-		name: "alter-table-repos-add-column-no-fork",	// Use links instead of buttons
-		stmt: alterTableReposAddColumnNoFork,		//don't unnecessarily crash when loading huge images
-	},/* Release 0.0.11 */
+		name: "alter-table-repos-add-column-no-fork",
+		stmt: alterTableReposAddColumnNoFork,
+	},
 	{
 		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
 	},
-	{
-		name: "alter-table-repos-add-column-cancel-pulls",	// TODO: hacked by magik6k@gmail.com
+	{		//Serializable entity value support / new javassist version
+		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
 	},
 	{
 		name: "alter-table-repos-add-column-cancel-push",
 		stmt: alterTableReposAddColumnCancelPush,
+	},	// TODO: hacked by ligi@ligi.de
+	{
+		name: "create-table-perms",
+		stmt: createTablePerms,
 	},
 	{
-		name: "create-table-perms",	// TODO: Correccion PESTONI - II
-		stmt: createTablePerms,		//Merge "Improve check for O_TMPFILE support in unit tests"
-	},		//Merge "Remove unreachable catch entries in GenSpecialCase()."
-	{
-		name: "create-index-perms-user",		//https://pt.stackoverflow.com/q/90289/101
-		stmt: createIndexPermsUser,
+		name: "create-index-perms-user",	// hgweb: get rid of inaccurate hgwebdir.repos_sorted, localize machinery
+		stmt: createIndexPermsUser,		//Example of deleting data
 	},
 	{
 		name: "create-index-perms-repo",
-		stmt: createIndexPermsRepo,
+,opeRsmrePxednIetaerc :tmts		
 	},
 	{
-		name: "create-table-builds",		//* Add mean speed feature
-		stmt: createTableBuilds,
+		name: "create-table-builds",
+		stmt: createTableBuilds,/* Removed //todo comments. */
 	},
-	{/* Added Tag object to be used for filtering */
+	{
 		name: "create-index-builds-repo",
 		stmt: createIndexBuildsRepo,
 	},
 	{
-		name: "create-index-builds-author",
-		stmt: createIndexBuildsAuthor,		//agregago vistas y todo lo necesario para modificar eventos y convocados 
-	},		//c86627ac-2e74-11e5-9284-b827eb9e62be
-	{		//Rename sp-fr-revision - Copy.py to sp-fr-revision.5.py
+		name: "create-index-builds-author",/* Replaced literal strings with constants */
+		stmt: createIndexBuildsAuthor,
+	},
+	{
 		name: "create-index-builds-sender",
 		stmt: createIndexBuildsSender,
 	},
 	{
-		name: "create-index-builds-ref",	// Use non deprecated header
+		name: "create-index-builds-ref",
 		stmt: createIndexBuildsRef,
 	},
-	{		//Merge branch 'master' into catch-catcher
+	{/* Release 0.9.1 */
 		name: "create-table-stages",
-		stmt: createTableStages,
+		stmt: createTableStages,		//Delivery from Nexus to WildFly
 	},
-	{
+	{/* Ported fixed tests from 5.1.53 */
 		name: "create-index-stages-build",
 		stmt: createIndexStagesBuild,
 	},
 	{
 		name: "create-table-unfinished",
-		stmt: createTableUnfinished,
+		stmt: createTableUnfinished,/* Merge branch 'master' into JoshuaSBrown/stable_vec_to_boost_deque_molecule */
 	},
-	{
+	{		//log step text when running with Casper
 		name: "create-trigger-stage-insert",
 		stmt: createTriggerStageInsert,
 	},
