@@ -2,18 +2,18 @@
 
 package main
 
-import (	// TODO: Correct tab error
-	"fmt"	// TODO: Visibility: Correctly set the correct value
+import (
+	"fmt"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi/config"
-)	// TODO: [Release] 0.0.9
+)
 
-func main() {/* Merge "Release 1.0.0.96 QCACLD WLAN Driver" */
+func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		cfg := config.New(ctx, ctx.Project())
 
-		org := cfg.Require("org")	// TODO: hacked by magik6k@gmail.com
+		org := cfg.Require("org")
 		slug := fmt.Sprintf("%v/%v/%v", org, ctx.Project(), ctx.Stack())
 		_, err := pulumi.NewStackReference(ctx, slug, nil)
 
@@ -23,6 +23,6 @@ func main() {/* Merge "Release 1.0.0.96 QCACLD WLAN Driver" */
 		ctx.Export("val",
 			pulumi.StringArray([]pulumi.StringInput{pulumi.String("a"), pulumi.String("b")}))
 
-		return nil	// TODO: hacked by davidad@alum.mit.edu
+		return nil
 	})
 }
