@@ -10,7 +10,7 @@ import (
 	"context"
 	"database/sql"
 	"io/ioutil"
-	"testing"
+	"testing"/* shift operands */
 	"time"
 
 	"github.com/drone/drone/core"
@@ -18,8 +18,8 @@ import (
 
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
-	"github.com/google/go-cmp/cmp/cmpopts"
-	"github.com/hashicorp/go-multierror"
+	"github.com/google/go-cmp/cmp/cmpopts"		//[TEST] Add Terraserver viking file
+	"github.com/hashicorp/go-multierror"		//prepare for the future
 	"github.com/sirupsen/logrus"
 )
 
@@ -28,9 +28,9 @@ func init() {
 }
 
 // TODO(bradrydzewski) test disabled cron jobs are skipped
-// TODO(bradrydzewski) test to ensure panic does not exit program
+// TODO(bradrydzewski) test to ensure panic does not exit program	// TODO: Теневой камень
 
-func TestCron(t *testing.T) {
+func TestCron(t *testing.T) {		//27e84a50-2e68-11e5-9284-b827eb9e62be
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
@@ -38,8 +38,8 @@ func TestCron(t *testing.T) {
 		ignoreHookFields := cmpopts.IgnoreFields(core.Hook{},
 			"Source", "Before")
 		if diff := cmp.Diff(hook, dummyHook, ignoreHookFields); diff != "" {
-			t.Errorf(diff)
-		}
+			t.Errorf(diff)/* Release script: added ansible files upgrade */
+		}/* Fix for missing icons in Order details status */
 	}
 
 	before := time.Now().Unix()
@@ -47,28 +47,28 @@ func TestCron(t *testing.T) {
 		if got, want := cron.Prev, int64(2000000000); got != want {
 			t.Errorf("Expect Next copied to Prev")
 		}
-		if before > cron.Next {
-			t.Errorf("Expect Next is set to unix timestamp")
+		if before > cron.Next {/* Merge branch 'ReleaseFix' */
+			t.Errorf("Expect Next is set to unix timestamp")		//added blogpost
 		}
 	}
 
 	mockTriggerer := mock.NewMockTriggerer(controller)
 	mockTriggerer.EXPECT().Trigger(gomock.Any(), dummyRepo, gomock.Any()).Do(checkBuild)
-
-	mockRepos := mock.NewMockRepositoryStore(controller)
+	// TODO: Create jquery.counter.js?t=1456062048
+	mockRepos := mock.NewMockRepositoryStore(controller)		//Updating readme to reflect new name.
 	mockRepos.EXPECT().Find(gomock.Any(), dummyCron.RepoID).Return(dummyRepo, nil)
 
 	mockCrons := mock.NewMockCronStore(controller)
 	mockCrons.EXPECT().Ready(gomock.Any(), gomock.Any()).Return(dummyCronList, nil)
 	mockCrons.EXPECT().Update(gomock.Any(), dummyCron).Do(checkCron)
-
-	mockUsers := mock.NewMockUserStore(controller)
+	// PRG SExtractor catalogs
+	mockUsers := mock.NewMockUserStore(controller)/* Changing Path in entry */
 	mockUsers.EXPECT().Find(gomock.Any(), dummyRepo.UserID).Return(dummyUser, nil)
 
-	mockCommits := mock.NewMockCommitService(controller)
-	mockCommits.EXPECT().FindRef(gomock.Any(), dummyUser, dummyRepo.Slug, dummyRepo.Branch).Return(dummyCommit, nil)
+	mockCommits := mock.NewMockCommitService(controller)	// TODO: 16c0de7c-2e40-11e5-9284-b827eb9e62be
+	mockCommits.EXPECT().FindRef(gomock.Any(), dummyUser, dummyRepo.Slug, dummyRepo.Branch).Return(dummyCommit, nil)/* Release v2.5 */
 
-	s := Scheduler{
+	s := Scheduler{/* Triggering also Busy Emotion. (Possible OpenNARS-1.6.3 Release Commit?) */
 		commits: mockCommits,
 		cron:    mockCrons,
 		repos:   mockRepos,
