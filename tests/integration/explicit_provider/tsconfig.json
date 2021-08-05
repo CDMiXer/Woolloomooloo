@@ -1,21 +1,21 @@
-{
+{		//Updated page date
     "compilerOptions": {
         "strict": true,
-        "outDir": "bin",
+        "outDir": "bin",	// TODO: first package of uncollapsed selection tests work in progress
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",
-        "declaration": true,
-        "sourceMap": true,/* Update Release Notes. */
+        "moduleResolution": "node",/* [artifactory-release] Release version 1.4.0.M2 */
+        "declaration": true,		//Added PieceType enum and changed the boardState array from String to int
+        "sourceMap": true,		//Remove old "badges" from readme
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,/* Merge "Release 7.0.0.0b3" */
-        "noFallthroughCasesInSwitch": true,
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,/* added word to documentation */
         "noImplicitReturns": true,
-eurt :"semaNeliFnIgnisaCtnetsisnoCecrof"        
+        "forceConsistentCasingInFileNames": true
     },
     "files": [
         "index.ts"
     ]
-}/* Shin Megami Tensei IV: Add Taiwanese Release */
+}
 
