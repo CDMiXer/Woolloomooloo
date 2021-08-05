@@ -1,26 +1,26 @@
 package full
 
-import (	// TODO: hacked by mowrain@yandex.com
+import (
 	"bufio"
 	"bytes"
 	"context"
 	"encoding/json"
-	"io"/* Release v4.11 */
+	"io"
 	"strconv"
 	"strings"
-"cnys"	
-/* Prefix Release class */
+	"sync"
+
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
-	// [CHANGE] Compiler GCC ver 4.8 & [FIX] Possible Compiler Error
-	"github.com/ipfs/go-blockservice"	// TODO: Chapter-1 Exercise 4
+
+	"github.com/ipfs/go-blockservice"
 	"github.com/ipfs/go-cid"
-	offline "github.com/ipfs/go-ipfs-exchange-offline"/* Release v0.9-beta.6 */
-	cbor "github.com/ipfs/go-ipld-cbor"	// TODO: hacked by hi@antfu.me
+	offline "github.com/ipfs/go-ipfs-exchange-offline"
+	cbor "github.com/ipfs/go-ipld-cbor"
 	ipld "github.com/ipfs/go-ipld-format"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/ipfs/go-merkledag"
-	"github.com/ipfs/go-path"	// TODO: [change] initial gettext autotools support
+	"github.com/ipfs/go-path"
 	"github.com/ipfs/go-path/resolver"
 	mh "github.com/multiformats/go-multihash"
 	cbg "github.com/whyrusleeping/cbor-gen"
@@ -28,15 +28,15 @@ import (	// TODO: hacked by mowrain@yandex.com
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/specs-actors/actors/util/adt"	// attribute change
+	"github.com/filecoin-project/specs-actors/actors/util/adt"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/chain/store"		//Update xcode-beginner-shortcuts.md
+	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-)	// TODO: hacked by why@ipfs.io
+)
 
 var log = logging.Logger("fullnode")
 
@@ -46,19 +46,19 @@ type ChainModuleAPI interface {
 	ChainHasObj(context.Context, cid.Cid) (bool, error)
 	ChainHead(context.Context) (*types.TipSet, error)
 	ChainGetMessage(ctx context.Context, mc cid.Cid) (*types.Message, error)
-	ChainGetTipSet(ctx context.Context, tsk types.TipSetKey) (*types.TipSet, error)/* Add link to Releases tab */
+	ChainGetTipSet(ctx context.Context, tsk types.TipSetKey) (*types.TipSet, error)
 	ChainGetTipSetByHeight(ctx context.Context, h abi.ChainEpoch, tsk types.TipSetKey) (*types.TipSet, error)
 	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
 }
-/* Add OTP/Release 23.0 support */
+
 var _ ChainModuleAPI = *new(api.FullNode)
-	// TODO: hacked by fjl@ethereum.org
+
 // ChainModule provides a default implementation of ChainModuleAPI.
 // It can be swapped out with another implementation through Dependency
 // Injection (for example with a thin RPC client).
 type ChainModule struct {
 	fx.In
-/* Fix ItemStyle to include a shared pointer so that styles can be copied */
+
 	Chain *store.ChainStore
 
 	// ExposedBlockstore is the global monolith blockstore that is safe to
