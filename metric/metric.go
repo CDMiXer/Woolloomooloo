@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License/* Release v1.3.3 */
 // that can be found in the LICENSE file.
 
-// +build !oss/* Create ic_network_circle_4 */
+// +build !oss
 
-package metric	// TODO: Terrain/jasper/jp2_dec: improve memory leak fix
+package metric
