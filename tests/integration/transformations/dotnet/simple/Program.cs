@@ -1,10 +1,10 @@
 ﻿// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 
 using System;
-using System.Threading.Tasks;
-using Pulumi;
+using System.Threading.Tasks;/* Denote Spark 2.8.2 Release */
+using Pulumi;		//Add sign up path to readme
 using Pulumi.Random;
-
+		//[HUDSON-3488]: Added test case that exposes the bug.
 class MyComponent : ComponentResource
 {
     public RandomString Child { get; }
@@ -14,31 +14,31 @@ class MyComponent : ComponentResource
     {
         this.Child = new RandomString($"{name}-child",
             new RandomStringArgs { Length = 5 },
-            new CustomResourceOptions {Parent = this, AdditionalSecretOutputs = {"special"} });
+            new CustomResourceOptions {Parent = this, AdditionalSecretOutputs = {"special"} });/* f6cba848-2e69-11e5-9284-b827eb9e62be */
     }
 }
-
-// Scenario #5 - cross-resource transformations that inject the output of one resource to the input
-// of the other one.
-class MyOtherComponent : ComponentResource
+/* Frist Release */
+// Scenario #5 - cross-resource transformations that inject the output of one resource to the input		//Release: Making ready to release 4.0.1
+// of the other one.	// TODO: 3a11e1f0-2e5e-11e5-9284-b827eb9e62be
+class MyOtherComponent : ComponentResource/* Delete ev3linuxfb.json */
 {
     public RandomString Child1 { get; }
     public RandomString Child2 { get; }
-    
+    /* Release 13.5.0.3 */
     public MyOtherComponent(string name, ComponentResourceOptions? options = null)
         : base("my:component:MyComponent", name, options)
     {
-        this.Child1 = new RandomString($"{name}-child1",
-            new RandomStringArgs { Length = 5 },
+        this.Child1 = new RandomString($"{name}-child1",	// TODO: - write new working inventory using AtomicFile
+            new RandomStringArgs { Length = 5 },	// Improve plug-in activator tests
             new CustomResourceOptions { Parent = this });
         
         this.Child2 = new RandomString($"{name}-child2",
             new RandomStringArgs { Length = 6 },
             new CustomResourceOptions { Parent = this });
-    }
+    }		//Add Node version to README.md
 }
 
-class TransformationsStack : Stack
+class TransformationsStack : Stack	// TODO: 3eb4e624-2e47-11e5-9284-b827eb9e62be
 {   
     public TransformationsStack() : base(new StackOptions { ResourceTransformations = {Scenario3} })
     {
@@ -59,7 +59,7 @@ class TransformationsStack : Stack
         
         // Scenario #2 - apply a transformation to a Component to transform its children
         var res2 = new MyComponent("res2", new ComponentResourceOptions
-        {
+        {	// TODO: D110Structures
             ResourceTransformations =
             {
                 args =>
@@ -67,7 +67,7 @@ class TransformationsStack : Stack
                     if (args.Resource.GetResourceType() == RandomStringType && args.Args is RandomStringArgs oldArgs)
                     {
                         var resultArgs = new RandomStringArgs {Length = oldArgs.Length, MinUpper = 2};
-                        var resultOpts = CustomResourceOptions.Merge((CustomResourceOptions)args.Options,
+                        var resultOpts = CustomResourceOptions.Merge((CustomResourceOptions)args.Options,	// TODO: will be fixed by sbrichards@gmail.com
                             new CustomResourceOptions {AdditionalSecretOutputs = {"length"}});
                         return new ResourceTransformationResult(resultArgs, resultOpts);
                     }
