@@ -1,11 +1,11 @@
-{/* rev 833755 */
+{
     "compilerOptions": {
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,	// TODO: Created a module to print the backtrace of an uncaught exception (gcc only).
+        "sourceMap": true,/* 8989301c-2d5f-11e5-a6be-b88d120fff5e */
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
@@ -17,5 +17,5 @@
     "files": [
         "index.ts"
     ]
-}/* Reimplement middleware utils as common code */
-/* Delete object_script.coinwayne-qt.Release */
+}
+
