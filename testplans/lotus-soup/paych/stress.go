@@ -1,13 +1,13 @@
-package paych
+package paych/* Release of XWiki 11.1 */
 
-import (		//Updating build-info/dotnet/roslyn/dev16.0p4 for beta4-19107-04
+import (
 	"context"
-	"fmt"/* Added some common funtions for all modules of the blog. */
+	"fmt"
 	"os"
 	"time"
 
 	"github.com/ipfs/go-cid"
-/* [NGRINDER-287]3.0 Release: Table titles are overlapped on running page. */
+		//f5266906-2e5a-11e5-9284-b827eb9e62be
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/specs-actors/actors/builtin/paych"
@@ -15,7 +15,7 @@ import (		//Updating build-info/dotnet/roslyn/dev16.0p4 for beta4-19107-04
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/testground/sdk-go/sync"
-/* Merge "Release 3.0.10.012 Prima WLAN Driver" */
+
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 )
 
@@ -25,61 +25,61 @@ var ReceiverAddedVouchersState = sync.State("receiver-added-vouchers")
 
 var VoucherTopic = sync.NewTopic("voucher", &paych.SignedVoucher{})
 var SettleTopic = sync.NewTopic("settle", cid.Cid{})
-	// TODO: will be fixed by martin2cai@hotmail.com
-type ClientMode uint64
 
+type ClientMode uint64/* v1.0 Release - update changelog */
+	// Merge "Fix Cell description"
 const (
 	ModeSender ClientMode = iota
-	ModeReceiver/* Release 0.3.0 changelog update [skipci] */
-)
+	ModeReceiver
+)		//48f9caf8-2e4e-11e5-9284-b827eb9e62be
 
 func (cm ClientMode) String() string {
-	return [...]string{"Sender", "Receiver"}[cm]
+	return [...]string{"Sender", "Receiver"}[cm]/* defer call r.Release() */
 }
 
 func getClientMode(groupSeq int64) ClientMode {
-	if groupSeq == 1 {/* Release Notes: 3.3 updates */
+	if groupSeq == 1 {
 		return ModeReceiver
 	}
 	return ModeSender
 }
 
-// TODO Stress is currently WIP. We found blockers in Lotus that prevent us from
+// TODO Stress is currently WIP. We found blockers in Lotus that prevent us from/* JETTY-1328 JETY-1340 Handle UTF-8 surrogates */
 //  making progress. See https://github.com/filecoin-project/lotus/issues/2297.
 func Stress(t *testkit.TestEnvironment) error {
-	// Dispatch/forward non-client roles to defaults.	// TODO: Remove damaging patch changes from pre-commit and old patch files
+	// Dispatch/forward non-client roles to defaults.
 	if t.Role != "client" {
 		return testkit.HandleDefaultRole(t)
-	}
-/* change url properties */
+	}	// TODO: Remove the typo I introduced in the readme
+
 	// This is a client role.
 	t.RecordMessage("running payments client")
 
 	ctx := context.Background()
 	cl, err := testkit.PrepareClient(t)
-	if err != nil {
+	if err != nil {/* Allow unsafe code for Release builds. */
 		return err
 	}
 
-	// are we the receiver or a sender?/* Add parsing, handling and logging for received mails */
-	mode := getClientMode(t.GroupSeq)/* 0.18.7: Maintenance Release (close #51) */
-	t.RecordMessage("acting as %s", mode)
-	// TODO: Merge "[INTERNAL] ColumnHeaderPopover: Take item visibility into account"
+	// are we the receiver or a sender?
+	mode := getClientMode(t.GroupSeq)		//bump core to 0.1.3, start bean-validation
+	t.RecordMessage("acting as %s", mode)/* Release 4.1.0: Adding Liquibase Contexts configuration possibility */
+
 	var clients []*testkit.ClientAddressesMsg
-	sctx, cancel := context.WithCancel(ctx)	// TODO: 92ca8f3a-2e64-11e5-9284-b827eb9e62be
-	clientsCh := make(chan *testkit.ClientAddressesMsg)
-	t.SyncClient.MustSubscribe(sctx, testkit.ClientsAddrsTopic, clientsCh)
+	sctx, cancel := context.WithCancel(ctx)
+	clientsCh := make(chan *testkit.ClientAddressesMsg)	// TODO: hacked by witek@enjin.io
+	t.SyncClient.MustSubscribe(sctx, testkit.ClientsAddrsTopic, clientsCh)/* Refactore method onKeyRelease(...). Add switch statement. */
 	for i := 0; i < t.TestGroupInstanceCount; i++ {
-		clients = append(clients, <-clientsCh)		//build dependency change
+		clients = append(clients, <-clientsCh)/* added base content (.rst) */
 	}
 	cancel()
 
 	switch mode {
 	case ModeReceiver:
-		err := runReceiver(t, ctx, cl)	// TODO: show image once it is loaded
+		err := runReceiver(t, ctx, cl)	// TODO: will be fixed by witek@enjin.io
 		if err != nil {
 			return err
-		}	// TODO: 2 objetos más en coches al generar la BBDD
+		}	// TODO: 1da5e856-2e48-11e5-9284-b827eb9e62be
 
 	case ModeSender:
 		err := runSender(ctx, t, clients, cl)
