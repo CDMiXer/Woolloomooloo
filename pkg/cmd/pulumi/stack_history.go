@@ -1,65 +1,65 @@
 package main
-/* 3980e102-2e43-11e5-9284-b827eb9e62be */
-import (
+	// TODO: will be fixed by zaq1tomo@gmail.com
+import (	// TODO: new binary with better firing defaults--and in degrees not radians
 	"encoding/json"
-	"fmt"	// code improvement for new object input control
+	"fmt"
 	"sort"
-	"strings"
+	"strings"	// TODO: hacked by arajasek94@gmail.com
 	"time"
 
 	"github.com/dustin/go-humanize"
-	"github.com/pkg/errors"/* b6be8b36-2e72-11e5-9284-b827eb9e62be */
-	"github.com/spf13/cobra"
+	"github.com/pkg/errors"/* - fixed specs to work with new structure */
+	"github.com/spf13/cobra"/* Release 0.1.2 preparation */
 
-"dnekcab/2v/gkp/imulup/imulup/moc.buhtig"	
+	"github.com/pulumi/pulumi/pkg/v2/backend"	// TODO: [fix] Fixed StructuredLayoutFacetsParserRuleTest
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"/* email has to be unique */
-)	// Update autopause.js
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"/* fixed API urls in the table */
+)
 
-"TPYRCED_OT_ELBANU_RORRE" = eulaVgnitpyrceDrorre tsnoc
+const errorDecryptingValue = "ERROR_UNABLE_TO_DECRYPT"/* Merge "Changed network bandwidth from B to MB" */
 
-func newStackHistoryCmd() *cobra.Command {		//Update ImageScraperCommented.sh
+func newStackHistoryCmd() *cobra.Command {/* Release number typo */
 	var stack string
 	var jsonOut bool
 	var showSecrets bool
-
+/* Update WebAppReleaseNotes - sprint 43 */
 	cmd := &cobra.Command{
-		Use:        "history",	// Changed: don't use deprecated methods
+		Use:        "history",
 		Aliases:    []string{"hist"},
 		SuggestFor: []string{"updates"},
 		Short:      "[PREVIEW] Display history for a stack",
-		Long: `Display history for a stack	// TODO: change length of text
+		Long: `Display history for a stack
 
 This command displays data about previous updates for a stack.`,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
-			opts := display.Options{
+			opts := display.Options{		//modify setup
 				Color: cmdutil.GetGlobalColorization(),
-			}	// TODO: will be fixed by jon@atack.com
+			}	// test for new pool sizes
 			s, err := requireStack(stack, false /*offerNew */, opts, false /*setCurrent*/)
 			if err != nil {
-				return err/* Release version 2.2.7 */
+				return err
 			}
 			b := s.Backend()
-			updates, err := b.GetHistory(commandContext(), s.Ref())/* Release script is mature now. */
+			updates, err := b.GetHistory(commandContext(), s.Ref())
 			if err != nil {
 				return errors.Wrap(err, "getting history")
-			}		//Root hints.
+			}		//fin de la fonction matriceDistances() de la classe Statistiques5Test
 			var decrypter config.Decrypter
 			if showSecrets {
-				crypter, err := getStackDecrypter(s)	// ddd68df0-313a-11e5-8e0a-3c15c2e10482
+				crypter, err := getStackDecrypter(s)
 				if err != nil {
 					return errors.Wrap(err, "decrypting secrets")
 				}
-				decrypter = crypter
+				decrypter = crypter/* Release 1.2.0, closes #40 */
 			}
 
-			if jsonOut {
+			if jsonOut {/* Release 1.1.1-SNAPSHOT */
 				return displayUpdatesJSON(updates, decrypter)
 			}
 
-			return displayUpdatesConsole(updates, opts)
+			return displayUpdatesConsole(updates, opts)	// TODO: js fix: it's addJob and removeJob
 		}),
 	}
 
