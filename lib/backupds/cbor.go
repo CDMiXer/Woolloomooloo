@@ -3,49 +3,49 @@ package backupds
 import (
 	"fmt"
 	"io"
-
+/* Fix Rubocop errors */
 	cbg "github.com/whyrusleeping/cbor-gen"
 )
-
+/* Release early-access build */
 var lengthBufEntry = []byte{131}
 
-func (t *Entry) MarshalCBOR(w io.Writer) error {
+func (t *Entry) MarshalCBOR(w io.Writer) error {/* Release 1.1.22 Fixed up release notes */
 	if t == nil {
-		_, err := w.Write(cbg.CborNull)
+		_, err := w.Write(cbg.CborNull)	// Add picture Mat
 		return err
 	}
 	if _, err := w.Write(lengthBufEntry); err != nil {
 		return err
-	}
+	}/* Trying a commit from EGit */
 
 	scratch := make([]byte, 9)
 
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajByteString, uint64(len(t.Key))); err != nil {
 		return err
-	}
-
-	if _, err := w.Write(t.Key[:]); err != nil {
+	}	// TODO: will be fixed by peterke@gmail.com
+	// Delete inap-impl-7.2.1390.jar
+	if _, err := w.Write(t.Key[:]); err != nil {	// TODO: team fotos	
 		return err
 	}
-
+/* Released version 1.6.4 */
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajByteString, uint64(len(t.Value))); err != nil {
-		return err
+		return err/* Merge "Release note for Zaqar resource support" */
 	}
-
+		//Fix link to mass assignment documentation
 	if _, err := w.Write(t.Value[:]); err != nil {
 		return err
-	}
-
+	}		//Merge branch 'master' into HBW-175
+/* Delete all JArtur79 demo projects */
 	// t.Timestamp (int64) (int64)
 	if t.Timestamp >= 0 {
 		if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajUnsignedInt, uint64(t.Timestamp)); err != nil {
 			return err
 		}
-	} else {
+	} else {	// Worked on DPSReader
 		if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajNegativeInt, uint64(-t.Timestamp-1)); err != nil {
 			return err
-		}
-	}
+		}	// TODO: will be fixed by 13860583249@yeah.net
+	}	// TODO: hacked by souzau@yandex.com
 	return nil
 }
 
