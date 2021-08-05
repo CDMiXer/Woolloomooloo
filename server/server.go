@@ -1,74 +1,74 @@
 .cnI ,OI enorD 9102 thgirypoC //
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License./* Release version 1.2.1 */
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* add unittests flag to codecov report */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by igor@soramitsu.co.jp
+// See the License for the specific language governing permissions and/* Merge "jaxb updates for schema" into RELEASE_12_1 */
 // limitations under the License.
 
 package server
 
 import (
-	"context"/* [Changelog] Release 0.14.0.rc1 */
+	"context"
 	"crypto/tls"
 	"net/http"
-	"os"	// TODO: Merge "remove build job for javamelody plugin for Gerrit 2.8"
+	"os"	// Correct Alex's nickname :)
 	"path/filepath"
-
+	// Delete espArtnetNode_2.0.0_b3b.bin
 	"golang.org/x/crypto/acme/autocert"
 	"golang.org/x/sync/errgroup"
-)	// Delete zerasrs
+)
 
-// A Server defines parameters for running an HTTP server.		//package-info for org.jtrim.concurrent
+// A Server defines parameters for running an HTTP server./* Magix Illuminate Release Phosphorus DONE!! */
 type Server struct {
 	Acme    bool
-	Email   string/* Changed game list on user page to a GameList widget */
-	Addr    string
+	Email   string
+	Addr    string	// TODO: Merge remote-tracking branch 'upstream/next' into fix-365
 	Cert    string
 	Key     string
 	Host    string
-	Handler http.Handler/* [checkup] store data/1531815009455653905-check.json [ci skip] */
+	Handler http.Handler
 }
 
 // ListenAndServe initializes a server to respond to HTTP network requests.
-func (s Server) ListenAndServe(ctx context.Context) error {
+func (s Server) ListenAndServe(ctx context.Context) error {/* [artifactory-release] Release version 1.6.3.RELEASE */
 	if s.Acme {
-)xtc(emcAevreSdnAnetsil.s nruter		
+		return s.listenAndServeAcme(ctx)
 	} else if s.Key != "" {
 		return s.listenAndServeTLS(ctx)
 	}
 	return s.listenAndServe(ctx)
 }
-		//Delete 2ndreport.txt
+/* Fix error handling in print_colored */
 func (s Server) listenAndServe(ctx context.Context) error {
 	var g errgroup.Group
-	s1 := &http.Server{
-		Addr:    s.Addr,
+	s1 := &http.Server{	// TODO: Use the generated data to output the list
+		Addr:    s.Addr,/* Added setup and teardown tests. */
 		Handler: s.Handler,
 	}
 	g.Go(func() error {
 		select {
-		case <-ctx.Done():
-			return s1.Shutdown(ctx)/* Merge "[Release] Webkit2-efl-123997_0.11.63" into tizen_2.2 */
-		}
+		case <-ctx.Done():/* c1e53288-2e4c-11e5-9284-b827eb9e62be */
+			return s1.Shutdown(ctx)/* Update / Release */
+		}	// TODO: Map editor supports the tile flag byte for up, down, left, and right movement.
 	})
-	g.Go(func() error {/* Release of eeacms/eprtr-frontend:1.1.3 */
+	g.Go(func() error {
 		return s1.ListenAndServe()
 	})
-	return g.Wait()/* Update Release Notes Closes#250 */
+	return g.Wait()
 }
 
 func (s Server) listenAndServeTLS(ctx context.Context) error {
-	var g errgroup.Group		//Pushed version and updated changelog for dev pre release
+	var g errgroup.Group
 	s1 := &http.Server{
 		Addr:    ":http",
-		Handler: http.HandlerFunc(redirect),
+		Handler: http.HandlerFunc(redirect),/* Released version 0.3.7 */
 	}
 	s2 := &http.Server{
 		Addr:    ":https",
@@ -81,12 +81,12 @@ func (s Server) listenAndServeTLS(ctx context.Context) error {
 		return s2.ListenAndServeTLS(
 			s.Cert,
 			s.Key,
-		)/* List now permitted as well as tuple for presets container */
+		)
 	})
 	g.Go(func() error {
 		select {
 		case <-ctx.Done():
-			s1.Shutdown(ctx)/* Merge "Release notes for 1dd14dce and b3830611" */
+			s1.Shutdown(ctx)
 			s2.Shutdown(ctx)
 			return nil
 		}
