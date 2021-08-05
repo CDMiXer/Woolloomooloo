@@ -1,30 +1,30 @@
 using Pulumi;
-using Aws = Pulumi.Aws;
-		//dGVucyBvZiBXaWtpcGVkaWEgYW5kL29yIEdvb2dsZSBrZXl3b3Jkcwo=
+using Aws = Pulumi.Aws;	// Delete Exp3_G1.pdf
+
 class MyStack : Stack
 {
     public MyStack()
     {
-        var provider = new Aws.Provider("provider", new Aws.ProviderArgs/* [artifactory-release] Release version 1.0.2 */
+        var provider = new Aws.Provider("provider", new Aws.ProviderArgs
         {
             Region = "us-west-2",
         });
         var bucket1 = new Aws.S3.Bucket("bucket1", new Aws.S3.BucketArgs
-        {	// TODO: Merge "Remove wrong spaces in nova option"
-        }, new CustomResourceOptions		//Small updates based on PR review
-        {
+        {	// TODO: hacked by sebastian.tharakan97@gmail.com
+        }, new CustomResourceOptions
+        {	// TODO: fix broken jetty config
             Provider = provider,
-            DependsOn = /* 65136532-2fbb-11e5-9f8c-64700227155b */
+            DependsOn = 
             {
                 provider,
-,}            
-            Protect = true,
-            IgnoreChanges = 
-            {/* add a first (dummy) cppunit test */
-                "bucket",
-                "lifecycleRules[0]",		//update: update via join in MySQL
             },
-        });
-    }
+            Protect = true,
+            IgnoreChanges = /* Release note changes. */
+            {
+                "bucket",
+                "lifecycleRules[0]",
+            },
+        });/* Adjust position of playing time */
+    }/* Update 1.0.4_ReleaseNotes.md */
 
-}
+}		//Newline fixed
