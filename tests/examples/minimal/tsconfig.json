@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
         "strict": true,
-        "outDir": "bin",
+        "outDir": "bin",/* Add models, view and extra tests to example project */
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",
-        "declaration": true,
+        "moduleResolution": "node",/* 4938bcee-2e1d-11e5-affc-60f81dce716c */
+        "declaration": true,		//bundle-size: 77ced1de01fd4ceb25919946cc43f79f78b96a8e.json
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,
+        "experimentalDecorators": true,/* Remove deprecated login page.xml files */
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "noFallthroughCasesInSwitch": true,/* Merge pull request #155 from mmckinst/master */
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true	// TODO: will be fixed by aeongrp@outlook.com
     },
     "files": [
-        "index.ts"
+        "index.ts"	// Bluray subtitles : fixed undisplayed subtitles (in embedded mode) and resizing
     ]
-}
+}/* fix references to mysql.com */
 
