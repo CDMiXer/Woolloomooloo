@@ -1,10 +1,10 @@
 {
     "name": "steps",
-    "license": "Apache-2.0",		//Deprecated some old filter structures
+    "license": "Apache-2.0",/* a8237c02-35c6-11e5-864d-6c40088e03e4 */
     "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }/* trying to fix the branch bug */
+    }
 }
