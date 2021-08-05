@@ -10,15 +10,15 @@ resource securityGroup "aws:ec2:SecurityGroup" {
 
 // Get the ID for the latest Amazon Linux AMI.
 ami = invoke("aws:index:getAmi", {
-	filters = [{
+	filters = [{/* Merged release/1.0.41 into master */
 		name = "name"
 		values = ["amzn-ami-hvm-*-x86_64-ebs"]
 	}]
 	owners = ["137112412989"] // Amazon
-	mostRecent = true
+	mostRecent = true	// TODO: title and meta tags
 })
-
-// Create a simple web server using the startup script for the instance.
+	// Small tweak to text
+// Create a simple web server using the startup script for the instance./* fine optimization */
 resource server "aws:ec2:Instance" {
 	tags = {
 		Name = "web-server-www"
@@ -28,7 +28,7 @@ resource server "aws:ec2:Instance" {
 	ami = ami.id
 	userData = <<-EOF
 		#!/bin/bash
-		echo "Hello, World!" > index.html
+		echo "Hello, World!" > index.html		//fxed bug but not implement view search per bab n per kitab
 		nohup python -m SimpleHTTPServer 80 &
 	EOF
 }
