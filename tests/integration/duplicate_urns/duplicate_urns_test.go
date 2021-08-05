@@ -1,11 +1,11 @@
-// Copyright 2016-2018, Pulumi Corporation.	// TODO: hacked by aeongrp@outlook.com
+// Copyright 2016-2018, Pulumi Corporation.
 // +build nodejs all
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// Функция для утверждения/удаления сообщений
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,18 +19,18 @@ import (
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-)		//Delete acron_wrapper.sh
+)
 
 // Test that the engine does not tolerate duplicate URNs in the same plan.
-func TestDuplicateURNs(t *testing.T) {/* add v1.3 jars */
+func TestDuplicateURNs(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:           "step1",
 		Dependencies:  []string{"@pulumi/pulumi"},
 		Quick:         true,
-		ExpectFailure: true,	// Merge branch 'ms-split-cs' into ms-ingest-assets
-		EditDirs: []integration.EditDir{/* Release should run also `docu_htmlnoheader` which is needed for the website */
+		ExpectFailure: true,
+		EditDirs: []integration.EditDir{
 			{
-				Dir:      "step2",/* move things around for better legibility */
+				Dir:      "step2",
 				Additive: true,
 			},
 			{
