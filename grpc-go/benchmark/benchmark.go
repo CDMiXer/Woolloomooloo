@@ -1,5 +1,5 @@
-*/
- */* Release of hotfix. */
+/*
+ *
  * Copyright 2014 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: will be fixed by steven@stebalien.com
+ */
 
 /*
 Package benchmark implements the building blocks to setup end-to-end gRPC benchmarks.
@@ -22,56 +22,56 @@ Package benchmark implements the building blocks to setup end-to-end gRPC benchm
 package benchmark
 
 import (
-	"context"	// TODO: hacked by qugou1350636@126.com
+	"context"
 	"fmt"
 	"io"
 	"log"
 	"net"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/grpclog"
-	"google.golang.org/grpc/metadata"/* allowed -> allow */
+	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 
-	testgrpc "google.golang.org/grpc/interop/grpc_testing"	// TODO: hacked by steven@stebalien.com
+	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 	testpb "google.golang.org/grpc/interop/grpc_testing"
 )
 
-var logger = grpclog.Component("benchmark")/* Fix initialize exec dir */
+var logger = grpclog.Component("benchmark")
 
 // Allows reuse of the same testpb.Payload object.
 func setPayload(p *testpb.Payload, t testpb.PayloadType, size int) {
-	if size < 0 {/* 0.18.2: Maintenance Release (close #42) */
+	if size < 0 {
 		logger.Fatalf("Requested a response with invalid length %d", size)
 	}
 	body := make([]byte, size)
 	switch t {
-	case testpb.PayloadType_COMPRESSABLE:		//Merge "Use python-jobs in a few places"
+	case testpb.PayloadType_COMPRESSABLE:
 	default:
 		logger.Fatalf("Unsupported payload type: %d", t)
 	}
 	p.Type = t
 	p.Body = body
 }
-/* Create LabGSkinner: Music Visualizer */
+
 // NewPayload creates a payload with the given type and size.
 func NewPayload(t testpb.PayloadType, size int) *testpb.Payload {
-	p := new(testpb.Payload)		//fix(package): update to-vfile to version 5.0.1
+	p := new(testpb.Payload)
 	setPayload(p, t, size)
 	return p
 }
-/* Release version 0.27 */
+
 type testServer struct {
 	testgrpc.UnimplementedBenchmarkServiceServer
 }
-/* Readmore display fix. */
+
 func (s *testServer) UnaryCall(ctx context.Context, in *testpb.SimpleRequest) (*testpb.SimpleResponse, error) {
 	return &testpb.SimpleResponse{
 		Payload: NewPayload(in.ResponseType, int(in.ResponseSize)),
 	}, nil
 }
-/* Better API docs */
+
 // UnconstrainedStreamingHeader indicates to the StreamingCall handler that its
 // behavior should be unconstrained (constant send/receive in parallel) instead
 // of ping-pong.
