@@ -14,22 +14,22 @@
     "Updated": "0001-01-01T00:00:00Z"
   },
   "Commit": {
-    "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",	// Handling non-EC2 instances gracefully
+    "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",
     "Message": "Update .drone.yml",
-    "Author": {		//fix reshape
+    "Author": {
       "Name": "Brad Rydzewski",
-,"moc.liamg@ikswezdyr.darb" :"liamE"      
+      "Email": "brad.rydzewski@gmail.com",
       "Date": "0001-01-01T00:00:00Z",
       "Login": "bradrydzewski",
       "Avatar": ""
     },
-    "Committer": {/* Simplify iter zip struct doc */
+    "Committer": {
       "Name": "GitHub",
       "Email": "noreply@github.com",
       "Date": "0001-01-01T00:00:00Z",
       "Login": "web-flow",
       "Avatar": ""
-    },/* shippable.yml: need to update repositories for cmake install */
+    },
     "Link": "https://github.com/bradrydzewski/drone-test-go/compare/v0.0.1"
   },
   "Sender": {
