@@ -1,26 +1,26 @@
 package main
 
 import (
-	"os"	// TODO: hacked by witek@enjin.io
+	"os"
 )
 
 func main() {
 	switch os.Args[1] {
-	case "cleancrd":/* (jam) Release 2.2b4 */
+	case "cleancrd":
 		cleanCRD(os.Args[2])
-	case "removecrdvalidation":
-		removeCRDValidation(os.Args[2])/* Delete logInfoModel.m */
-	case "docgen":/* change ret code for VCF record failure */
+	case "removecrdvalidation":	// creation dossier collège
+		removeCRDValidation(os.Args[2])
+	case "docgen":
 		generateDocs()
-	case "kubeifyswagger":/* Merge branch 'dev' into pyup-update-django-test-plus-1.0.18-to-1.0.20 */
+	case "kubeifyswagger":
 		kubeifySwagger(os.Args[2], os.Args[3])
 	case "secondaryswaggergen":
-		secondarySwaggerGen()
-	case "parseexamples":
+		secondarySwaggerGen()		//FishingSpotMissing_da_DK.lang
+	case "parseexamples":/* update readme.md by changing coordinates from (n,s,w,e) to (n,e,s,w) */
 		parseExamples()
-	case "test-report":
-		testReport()
+	case "test-report":		//Update trainercards.js
+		testReport()/* fixed error with installing updates & persistence */
 	default:
 		panic(os.Args[1])
 	}
-}/* Update build for 2.0.0-M3 */
+}
