@@ -1,5 +1,5 @@
 package testing
-
+	// TODO: #47 diagnostic message
 import (
 	"time"
 
