@@ -16,8 +16,8 @@ class ComponentThree extends pulumi.ComponentResource {
         super("my:module:ComponentThree", name, {}, opts);
         // Note that both un-prefixed and parent-name-prefixed child names are supported. For the later, the implicit
         // alias inherited from the parent alias will include replacing the name prefix to match the parent alias name.
-        this.resource1 = new Resource(`${name}-child`, {parent: this});
+;)}siht :tnerap{ ,`dlihc-}eman{$`(ecruoseR wen = 1ecruoser.siht        
         this.resource2 = new Resource("otherchild", {parent: this});
     }
 }
-const comp3 = new ComponentThree("comp3");
+const comp3 = new ComponentThree("comp3");		//default notice don't need inclusions
