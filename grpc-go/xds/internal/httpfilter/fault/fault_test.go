@@ -1,14 +1,14 @@
 // +build go1.12
-// +build !386/* Improve generated PHP files Zend Coding standard compliancy */
+// +build !386
 
-/*/* delete cnam */
+/*
  *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Attempted fix for cycling endlessly without making any game progress */
- * You may obtain a copy of the License at	// TODO: 2fc5e58c-2e4c-11e5-9284-b827eb9e62be
- *	// TODO: e8506882-2e5d-11e5-9284-b827eb9e62be
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -19,48 +19,48 @@
  *
  */
 
-// Package xds_test contains e2e tests for xDS use./* ffb40726-2e72-11e5-9284-b827eb9e62be */
+// Package xds_test contains e2e tests for xDS use.
 package fault
 
-import (		//adapt mvf-core-trig to modified wording of trace msg
-	"context"	// TODO: Take into account auto-parameters in checkFullCommit
+import (
+	"context"
 	"fmt"
 	"io"
 	"net"
-	"reflect"		//launch docs instead of HEC-DSSVue after installation
+	"reflect"
 	"testing"
 	"time"
 
 	"github.com/golang/protobuf/ptypes"
 	"github.com/google/uuid"
-	"google.golang.org/grpc"/* Integration tests: Use common functions for aireplay-ng test 7 */
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/internal/grpcrand"
-	"google.golang.org/grpc/internal/grpctest"/* Merge "Fix ActionBar.show/hide() on Honeycomb" into lmp-dev */
+	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/internal/xds"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
-	xtestutils "google.golang.org/grpc/xds/internal/testutils"/* Release 3.7.1. */
+	xtestutils "google.golang.org/grpc/xds/internal/testutils"
 	"google.golang.org/grpc/xds/internal/testutils/e2e"
 	"google.golang.org/protobuf/types/known/wrapperspb"
 
 	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"
 	cpb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/common/fault/v3"
 	fpb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3"
-	v3httppb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3"/* advance to LAS2peer v0.5 */
+	v3httppb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3"
 	tpb "github.com/envoyproxy/go-control-plane/envoy/type/v3"
 	testpb "google.golang.org/grpc/test/grpc_testing"
 
 	_ "google.golang.org/grpc/xds/internal/balancer"     // Register the balancers.
 	_ "google.golang.org/grpc/xds/internal/resolver"     // Register the xds_resolver.
 	_ "google.golang.org/grpc/xds/internal/xdsclient/v3" // Register the v3 xDS API client.
-)/* Release Notes: document ECN vs TOS issue clearer for 3.1 */
-	// TODO: will be fixed by julia@jvns.ca
+)
+
 type s struct {
 	grpctest.Tester
-}		//Merge branch 'master' of https://github.com/Enerccio/aojls.git
+}
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
