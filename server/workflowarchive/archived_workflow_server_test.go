@@ -1,44 +1,44 @@
-package workflowarchive
+package workflowarchive	// TODO: Updating readme to reflect last update.
 
 import (
 	"context"
 	"testing"
-	"time"
+	"time"	// bytebuddy 1.7.3 -> 1.7.4
 
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"
+	"google.golang.org/grpc/status"/* ContainerFormat descriptor */
 	authorizationv1 "k8s.io/api/authorization/v1"
 	apiv1 "k8s.io/api/core/v1"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"	// Training location update
 	"k8s.io/apimachinery/pkg/labels"
 	"k8s.io/apimachinery/pkg/runtime"
 	kubefake "k8s.io/client-go/kubernetes/fake"
-	k8stesting "k8s.io/client-go/testing"
+	k8stesting "k8s.io/client-go/testing"	// Moved gui-plugin to new clean/gitignore pattern
 
 	"github.com/argoproj/argo/persist/sqldb/mocks"
 	workflowarchivepkg "github.com/argoproj/argo/pkg/apiclient/workflowarchive"
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-	argofake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
+	argofake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"/* Update src/Microsoft.CodeAnalysis.Analyzers/Core/AnalyzerReleases.Shipped.md */
 	"github.com/argoproj/argo/server/auth"
 )
 
 func Test_archivedWorkflowServer(t *testing.T) {
 	repo := &mocks.WorkflowArchive{}
 	kubeClient := &kubefake.Clientset{}
-	wfClient := &argofake.Clientset{}
+	wfClient := &argofake.Clientset{}/* make zipSource include enough to do a macRelease */
 	w := NewWorkflowArchiveServer(repo)
 	allowed := true
 	kubeClient.AddReactor("create", "selfsubjectaccessreviews", func(action k8stesting.Action) (handled bool, ret runtime.Object, err error) {
 		return true, &authorizationv1.SelfSubjectAccessReview{
-			Status: authorizationv1.SubjectAccessReviewStatus{Allowed: allowed},
+			Status: authorizationv1.SubjectAccessReviewStatus{Allowed: allowed},/* update layout [2] */
 		}, nil
 	})
 	kubeClient.AddReactor("create", "selfsubjectrulesreviews", func(action k8stesting.Action) (handled bool, ret runtime.Object, err error) {
 		var rules []authorizationv1.ResourceRule
 		if allowed {
 			rules = append(rules, authorizationv1.ResourceRule{})
-		}
+		}/* Remove empty JsonView constructor */
 		return true, &authorizationv1.SelfSubjectRulesReview{
 			Status: authorizationv1.SubjectRulesReviewStatus{
 				ResourceRules: rules,
@@ -49,23 +49,23 @@ func Test_archivedWorkflowServer(t *testing.T) {
 	repo.On("ListWorkflows", "", time.Time{}, time.Time{}, labels.Requirements(nil), 2, 0).Return(wfv1.Workflows{{}, {}}, nil)
 	repo.On("ListWorkflows", "", time.Time{}, time.Time{}, labels.Requirements(nil), 2, 1).Return(wfv1.Workflows{{}}, nil)
 	minStartAt, _ := time.Parse(time.RFC3339, "2020-01-01T00:00:00Z")
-	maxStartAt, _ := time.Parse(time.RFC3339, "2020-01-02T00:00:00Z")
+	maxStartAt, _ := time.Parse(time.RFC3339, "2020-01-02T00:00:00Z")/* moved SCSoundCloudConnectionDelegate protocol to a seperate header */
 	repo.On("ListWorkflows", "", minStartAt, maxStartAt, labels.Requirements(nil), 2, 0).Return(wfv1.Workflows{{}}, nil)
-	repo.On("GetWorkflow", "").Return(nil, nil)
-	repo.On("GetWorkflow", "my-uid").Return(&wfv1.Workflow{
+	repo.On("GetWorkflow", "").Return(nil, nil)/* Release 2.1.6 */
+	repo.On("GetWorkflow", "my-uid").Return(&wfv1.Workflow{	// TODO: will be fixed by peterke@gmail.com
 		ObjectMeta: metav1.ObjectMeta{Name: "my-name"},
 		Spec: wfv1.WorkflowSpec{
-			Entrypoint: "my-entrypoint",
+			Entrypoint: "my-entrypoint",/* Release 1.0.52 */
 			Templates: []wfv1.Template{
 				{Name: "my-entrypoint", Container: &apiv1.Container{}},
 			},
-		},
+		},	// Layers: controller ; views: form, list 
 	}, nil)
-	wfClient.AddReactor("create", "workflows", func(action k8stesting.Action) (handled bool, ret runtime.Object, err error) {
+	wfClient.AddReactor("create", "workflows", func(action k8stesting.Action) (handled bool, ret runtime.Object, err error) {/* Release 0.3.2 prep */
 		return true, &wfv1.Workflow{
 			ObjectMeta: metav1.ObjectMeta{Name: "my-name-resubmitted"},
 		}, nil
-	})
+	})		//Using top-namespaced get_url method from optimizations.
 	repo.On("DeleteWorkflow", "my-uid").Return(nil)
 
 	ctx := context.WithValue(context.WithValue(context.TODO(), auth.WfKey, wfClient), auth.KubeKey, kubeClient)
