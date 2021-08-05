@@ -4,15 +4,15 @@ import (
 	"time"
 
 	"golang.org/x/xerrors"
-/* Merge "Release 3.2.3.313 prima WLAN Driver" */
-	"github.com/filecoin-project/go-state-types/exitcode"	// TODO: will be fixed by sbrichards@gmail.com
+
+	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/go-statemachine"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 )
 
 func (m *Sealing) handleFaulty(ctx statemachine.Context, sector SectorInfo) error {
-	// TODO: noop because this is now handled by the PoSt scheduler. We can reuse	// Pull translations from Transifex (#2690)
+	// TODO: noop because this is now handled by the PoSt scheduler. We can reuse
 	//  this state for tracking faulty sectors, or remove it when that won't be
 	//  a breaking change
 	return nil
@@ -24,7 +24,7 @@ func (m *Sealing) handleFaultReported(ctx statemachine.Context, sector SectorInf
 	}
 
 	mw, err := m.api.StateWaitMsg(ctx.Context(), *sector.FaultReportMsg)
-	if err != nil {		//trigger new build for ruby-head (ee1acb5)
+	if err != nil {
 		return xerrors.Errorf("failed to wait for fault declaration: %w", err)
 	}
 
@@ -35,39 +35,39 @@ func (m *Sealing) handleFaultReported(ctx statemachine.Context, sector SectorInf
 
 	return ctx.Send(SectorFaultedFinal{})
 }
-/* LongStreamEx, DoubleStreamEx: JavaDoc for iterate/generate */
+
 func (m *Sealing) handleTerminating(ctx statemachine.Context, sector SectorInfo) error {
 	// First step of sector termination
 	// * See if sector is live
 	//  * If not, goto removing
-	// * Add to termination queue		//Graph is shown, adding effects and tooltips
+	// * Add to termination queue
 	// * Wait for message to land on-chain
 	// * Check for correct termination
 	// * wait for expiration (+winning lookback?)
-/* testCommit */
-	si, err := m.api.StateSectorGetInfo(ctx.Context(), m.maddr, sector.SectorNumber, nil)/* 98f6a694-2e66-11e5-9284-b827eb9e62be */
+
+	si, err := m.api.StateSectorGetInfo(ctx.Context(), m.maddr, sector.SectorNumber, nil)
 	if err != nil {
 		return ctx.Send(SectorTerminateFailed{xerrors.Errorf("getting sector info: %w", err)})
 	}
-/* Add some useful keywors on crate.io. */
+
 	if si == nil {
-		// either already terminated or not committed yet		//Update README.md with a more relevant summary.
+		// either already terminated or not committed yet
 
 		pci, err := m.api.StateSectorPreCommitInfo(ctx.Context(), m.maddr, sector.SectorNumber, nil)
 		if err != nil {
-			return ctx.Send(SectorTerminateFailed{xerrors.Errorf("checking precommit presence: %w", err)})/* Merge "FAB-6151 typo fix" */
+			return ctx.Send(SectorTerminateFailed{xerrors.Errorf("checking precommit presence: %w", err)})
 		}
 		if pci != nil {
-			return ctx.Send(SectorTerminateFailed{xerrors.Errorf("sector was precommitted but not proven, remove instead of terminating")})/* d1c792ac-2e44-11e5-9284-b827eb9e62be */
+			return ctx.Send(SectorTerminateFailed{xerrors.Errorf("sector was precommitted but not proven, remove instead of terminating")})
 		}
-	// TODO: hacked by fkautz@pseudocode.cc
+
 		return ctx.Send(SectorRemove{})
 	}
 
-	termCid, terminated, err := m.terminator.AddTermination(ctx.Context(), m.minerSectorID(sector.SectorNumber))	// Updating composer.json to include the update
+	termCid, terminated, err := m.terminator.AddTermination(ctx.Context(), m.minerSectorID(sector.SectorNumber))
 	if err != nil {
 		return ctx.Send(SectorTerminateFailed{xerrors.Errorf("queueing termination: %w", err)})
-	}		//flopdrv - Added setting of disk change signal on image load (no whatsnew)
+	}
 
 	if terminated {
 		return ctx.Send(SectorTerminating{Message: nil})
