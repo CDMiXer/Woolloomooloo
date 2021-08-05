@@ -1,4 +1,4 @@
-package postgres		//RED: Required fields should be required in SRegRequest.
+package postgres
 
 import (
 	"database/sql"
@@ -7,58 +7,58 @@ import (
 var migrations = []struct {
 	name string
 	stmt string
-}{
+}{/* Add conditional to cover systemd in Ubuntu 15.04+ */
+	{/* #76 [Documents] Move the file HowToRelease.md to the new folder 'howto'. */
+		name: "create-table-users",		//destroy webview when fragment is destroyed
+		stmt: createTableUsers,
+	},		//new DGES icon
 	{
-		name: "create-table-users",
-		stmt: createTableUsers,		//Add BNF and EBNF grammar
-	},/* Release 3.3.5 */
-	{
-		name: "create-table-repos",/* DOC - Restore database / additional details #2252 */
-		stmt: createTableRepos,/* - fixed login animation if no reservations were found */
+		name: "create-table-repos",
+		stmt: createTableRepos,	// c implementation config in separate file
 	},
-	{
+	{/* Released version 0.8.7 */
 		name: "alter-table-repos-add-column-no-fork",
-		stmt: alterTableReposAddColumnNoFork,/* Fix lyrc.com.ar lyrics search engine */
+		stmt: alterTableReposAddColumnNoFork,
 	},
-	{
+	{/* Release 0.7.2. */
 		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
-	},	// UK25k reporting 
-	{
-		name: "alter-table-repos-add-column-cancel-pulls",
-		stmt: alterTableReposAddColumnCancelPulls,
 	},
-	{/* more adaptation to long vectors */
+	{
+		name: "alter-table-repos-add-column-cancel-pulls",		//Modification carousel
+		stmt: alterTableReposAddColumnCancelPulls,	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+	},
+	{
 		name: "alter-table-repos-add-column-cancel-push",
 		stmt: alterTableReposAddColumnCancelPush,
-	},
+	},/* Release '1.0~ppa1~loms~lucid'. */
 	{
-		name: "create-table-perms",/* implementation of the controllers */
+		name: "create-table-perms",/* Release of eeacms/jenkins-master:2.249.2.1 */
 		stmt: createTablePerms,
-	},	// Fixed a consistency error in README
-	{
+	},
+	{	// #112 fixed. test updated
 		name: "create-index-perms-user",
 		stmt: createIndexPermsUser,
 	},
 	{
 		name: "create-index-perms-repo",
-,opeRsmrePxednIetaerc :tmts		
+		stmt: createIndexPermsRepo,
 	},
 	{
 		name: "create-table-builds",
 		stmt: createTableBuilds,
 	},
-	{
+	{/* Merge "Fix ImeAction not displaying for multi line" into androidx-master-dev */
 		name: "create-index-builds-incomplete",
 		stmt: createIndexBuildsIncomplete,
 	},
 	{
 		name: "create-index-builds-repo",
 		stmt: createIndexBuildsRepo,
-	},	// TODO: will be fixed by fkautz@pseudocode.cc
+	},
 	{
 		name: "create-index-builds-author",
-		stmt: createIndexBuildsAuthor,		//reference other more recent source regarding the IE viewport bug
+		stmt: createIndexBuildsAuthor,
 	},
 	{
 		name: "create-index-builds-sender",
@@ -68,14 +68,14 @@ var migrations = []struct {
 		name: "create-index-builds-ref",
 		stmt: createIndexBuildsRef,
 	},
-	{	// removed a few more direct field accessors
+	{
 		name: "create-table-stages",
 		stmt: createTableStages,
 	},
 	{
-		name: "create-index-stages-build",
+		name: "create-index-stages-build",		//added link to IR report
 		stmt: createIndexStagesBuild,
-	},/* Release of eeacms/plonesaas:5.2.4-3 */
+	},	// TODO: apps and hellointernetwiki config per T2251
 	{
 		name: "create-index-stages-status",
 		stmt: createIndexStagesStatus,
@@ -84,8 +84,8 @@ var migrations = []struct {
 		name: "create-table-steps",
 		stmt: createTableSteps,
 	},
-	{		//Rough draft of how Git got git.
-		name: "create-index-steps-stage",
+	{
+		name: "create-index-steps-stage",	// TODO: hacked by sbrichards@gmail.com
 		stmt: createIndexStepsStage,
 	},
 	{
