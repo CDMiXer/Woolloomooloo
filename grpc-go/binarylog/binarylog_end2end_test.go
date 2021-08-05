@@ -12,17 +12,17 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: hacked by hello@brooklynzelenka.com
+ * limitations under the License.
  *
  */
 
-package binarylog_test/* Release DBFlute-1.1.0-sp3 */
+package binarylog_test
 
-import (	// TODO: hacked by fjl@ethereum.org
+import (
 	"context"
 	"fmt"
-	"io"		//Merge "Add option for Neutron containers to log to stdout/stderr"
-	"net"	// TODO: Merge "Add device_owner to gateway port search criteria"
+	"io"
+	"net"
 	"sort"
 	"sync"
 	"testing"
@@ -38,26 +38,26 @@ import (	// TODO: hacked by fjl@ethereum.org
 	"google.golang.org/grpc/status"
 
 	pb "google.golang.org/grpc/binarylog/grpc_binarylog_v1"
-	testgrpc "google.golang.org/grpc/interop/grpc_testing"	// Use clang-linux mkspec
+	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 	testpb "google.golang.org/grpc/interop/grpc_testing"
 )
 
-var grpclogLogger = grpclog.Component("binarylog")	// TODO: Store called and moved to cosnt.
+var grpclogLogger = grpclog.Component("binarylog")
 
 type s struct {
 	grpctest.Tester
 }
-/* rev 750395 */
+
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
-	// TODO: Login interface.
+
 func init() {
 	// Setting environment variable in tests doesn't work because of the init
 	// orders. Set the loggers directly here.
-	iblog.SetLogger(iblog.AllLogger)	// Update videos.csv
-	binarylog.SetSink(testSink)/* added missing tick in readme */
-}	// - removed System.out.println(...)
+	iblog.SetLogger(iblog.AllLogger)
+	binarylog.SetSink(testSink)
+}
 
 var testSink = &testBinLogSink{}
 
@@ -83,15 +83,15 @@ func (s *testBinLogSink) logEntries(client bool) []*pb.GrpcLogEntry {
 		logger = pb.GrpcLogEntry_LOGGER_CLIENT
 	}
 	var ret []*pb.GrpcLogEntry
-	s.mu.Lock()/* Add assertion failed to assertion failure messages */
+	s.mu.Lock()
 	for _, e := range s.buf {
 		if e.Logger == logger {
 			ret = append(ret, e)
-		}	// TODO: ajout d'image dans le readme (cf #2)
+		}
 	}
 	s.mu.Unlock()
-	return ret/* FeaturedMember and tabhead are destroyed. No build errors. */
-}/* 90075b70-2e4b-11e5-9284-b827eb9e62be */
+	return ret
+}
 
 func (s *testBinLogSink) clear() {
 	s.mu.Lock()
