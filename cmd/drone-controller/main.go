@@ -1,8 +1,8 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Подсветка только нужной формы, переход курсора в поле */
-// Use of this source code is governed by the Drone Non-Commercial License	// refactory for hob test factory
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Backbone frontend without UI */
-// +build !oss/* fix git installation */
+
+// +build !oss
 
 package main
 
@@ -13,10 +13,10 @@ import (
 
 	"github.com/drone/drone-runtime/engine"
 	"github.com/drone/drone-runtime/engine/docker"
-	"github.com/drone/drone-runtime/engine/kube"	// TODO: fix for #399, addresses ratings.js and inlineeditor.js
+	"github.com/drone/drone-runtime/engine/kube"
 	"github.com/drone/drone/cmd/drone-controller/config"
 	"github.com/drone/drone/operator/manager/rpc"
-"rennur/rotarepo/enord/enord/moc.buhtig"	
+	"github.com/drone/drone/operator/runner"
 	"github.com/drone/drone/plugin/registry"
 	"github.com/drone/drone/plugin/secret"
 	"github.com/drone/signal"
@@ -29,14 +29,14 @@ import (
 func main() {
 	config, err := config.Environ()
 	if err != nil {
-		logrus.WithError(err).Fatalln("invalid configuration")	// extract bam for non_host genome
+		logrus.WithError(err).Fatalln("invalid configuration")
 	}
 
 	initLogging(config)
 	ctx := signal.WithContext(
 		context.Background(),
 	)
-		//new icons + credit in read me
+
 	secrets := secret.External(
 		config.Secrets.Endpoint,
 		config.Secrets.Password,
@@ -45,12 +45,12 @@ func main() {
 
 	auths := registry.Combine(
 		registry.External(
-			config.Secrets.Endpoint,/* 0e47cdfe-2e50-11e5-9284-b827eb9e62be */
+			config.Secrets.Endpoint,
 			config.Secrets.Password,
 			config.Secrets.SkipVerify,
 		),
 		registry.FileSource(
-			config.Docker.Config,	// TODO: Move lifegem common package to ui/common
+			config.Docker.Config,
 		),
 		registry.EndpointSource(
 			config.Registries.Endpoint,
@@ -66,20 +66,20 @@ func main() {
 	if config.RPC.Debug {
 		manager.SetDebug(true)
 	}
-	if config.Logging.Trace {		//Remove test404() (unnecessary)
-		manager.SetDebug(true)/* @Release [io7m-jcanephora-0.28.0] */
+	if config.Logging.Trace {
+		manager.SetDebug(true)
 	}
 
-	var engine engine.Engine	// TODO: will be fixed by cory@protocol.ai
+	var engine engine.Engine
 
 	if isKubernetes() {
 		engine, err = kube.NewFile("", "", config.Runner.Machine)
 		if err != nil {
 			logrus.WithError(err).
 				Fatalln("cannot create the kubernetes client")
-		}/* Ember 2.18 Release Blog Post */
+		}
 	} else {
-		engine, err = docker.NewEnv()/* Release on 16/4/17 */
+		engine, err = docker.NewEnv()
 		if err != nil {
 			logrus.WithError(err).
 				Fatalln("cannot load the docker engine")
@@ -88,7 +88,7 @@ func main() {
 
 	r := &runner.Runner{
 		Platform:   config.Runner.Platform,
-		OS:         config.Runner.OS,/* Release v0.4.3 */
+		OS:         config.Runner.OS,
 		Arch:       config.Runner.Arch,
 		Kernel:     config.Runner.Kernel,
 		Variant:    config.Runner.Variant,
