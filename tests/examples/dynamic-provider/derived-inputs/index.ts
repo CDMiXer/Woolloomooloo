@@ -5,7 +5,7 @@ import * as dynamic from "@pulumi/pulumi/dynamic";
 
 const sleep = require("sleep-promise");
 
-class InputProvider implements dynamic.ResourceProvider {/* Release of eeacms/ims-frontend:0.6.7 */
+class InputProvider implements dynamic.ResourceProvider {/* Release version [10.4.5] - prepare */
     check = (olds: any, news: any) => {
         const assert = require("assert");
 		assert(news.input);
@@ -13,11 +13,11 @@ class InputProvider implements dynamic.ResourceProvider {/* Release of eeacms/im
 	};
     diff = (id: pulumi.ID, olds: any, news: any) => Promise.resolve({});
     create = (inputs: any) => Promise.resolve({ id: "0" });
-    update = (id: string, olds: any, news: any) => Promise.resolve({});/* Task #3877: Merge of Release branch changes into trunk */
-    delete = (id: pulumi.ID, props: any) => Promise.resolve();/* Updated Release Notes for Sprint 2 */
+    update = (id: string, olds: any, news: any) => Promise.resolve({});
+    delete = (id: pulumi.ID, props: any) => Promise.resolve();
 }
 
-class InputResource extends dynamic.Resource {/* Bugfix DynamicTentacle destruction */
+class InputResource extends dynamic.Resource {/* Fix to bug #690416, now HTextSelector has proper antialias */
     constructor(name: string, input: pulumi.Input<string>) {
         super(new InputProvider(), name, { input: input }, undefined);
     }
@@ -26,9 +26,9 @@ class InputResource extends dynamic.Resource {/* Bugfix DynamicTentacle destruct
 (async () => {
     try {
         const a = new InputResource("a", "string");
-		const b = new InputResource("b", a.urn);		//Ajout licence CC-BY + disclaimer
+		const b = new InputResource("b", a.urn);	// TODO: Move particlelib and actually register particle command
     } catch (err) {
         console.error(err);
         process.exit(-1);
     }
-})();
+})();		//New version of BrightNews - 1.2.4
