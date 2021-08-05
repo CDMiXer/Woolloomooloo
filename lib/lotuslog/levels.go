@@ -1,6 +1,6 @@
 package lotuslog
 
-import (/* 542adbd8-2e71-11e5-9284-b827eb9e62be */
+import (
 	"os"
 
 	logging "github.com/ipfs/go-log/v2"
