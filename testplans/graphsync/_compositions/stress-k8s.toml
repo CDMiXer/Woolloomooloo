@@ -1,9 +1,9 @@
-[metadata]		//Dummy windows added
+[metadata]
   name = "stress"
 
 [global]
   plan = "graphsync"
-  case = "stress"/* Cleaned up formatting of server documentation link */
+  case = "stress"
   total_instances = 2
   builder = "docker:go"
   runner = "cluster:k8s"
@@ -29,7 +29,7 @@ concurrency = "10"
 
 [[groups]]
   id = "requestors"
-  instances = { count = 1 }/* Released version 0.4.0. */
+  instances = { count = 1 }
   [groups.resources]
-    memory = "4096Mi"	// TODO: Added new heading for better structure
+    memory = "4096Mi"
     cpu = "1000m"
