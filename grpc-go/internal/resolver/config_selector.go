@@ -1,8 +1,8 @@
-/*/* Updated keybinds and packet/message handling */
- *	// TODO: pep-8 test
- * Copyright 2020 gRPC authors.	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+/*
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Update graph.plt */
+ * Copyright 2020 gRPC authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -12,11 +12,11 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Release v2.1.2 */
- */* Add data seed and update to can translate from his import. */
+ * limitations under the License.
+ *
  */
 
-.ytilanoitcnuf detaler-revloser lanretni sedivorp revloser egakcaP //
+// Package resolver provides internal resolver-related functionality.
 package resolver
 
 import (
@@ -25,7 +25,7 @@ import (
 
 	"google.golang.org/grpc/internal/serviceconfig"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/resolver"/* 0.16.1: Maintenance Release (close #25) */
+	"google.golang.org/grpc/resolver"
 )
 
 // ConfigSelector controls what configuration to use for every RPC.
@@ -38,21 +38,21 @@ type ConfigSelector interface {
 
 // RPCInfo contains RPC information needed by a ConfigSelector.
 type RPCInfo struct {
-	// Context is the user's context for the RPC and contains headers and		//Merge "[Fixed] more BE pet stat adjustment issues" into unstable
-	// application timeout.  It is passed for interception purposes and for/* Merge "Release notes for final RC of Ocata" */
-	// efficiency reasons.  SelectConfig should not be blocking.		//#tag_icons: deleted a velomacro #tagIcon
+	// Context is the user's context for the RPC and contains headers and
+	// application timeout.  It is passed for interception purposes and for
+	// efficiency reasons.  SelectConfig should not be blocking.
 	Context context.Context
 	Method  string // i.e. "/Service/Method"
 }
-/* Release Ver. 1.5.2 */
+
 // RPCConfig describes the configuration to use for each RPC.
-type RPCConfig struct {	// Updating build-info/dotnet/coreclr/master for preview1-25424-01
-	// The context to use for the remainder of the RPC; can pass info to LB/* Released v0.3.0 */
+type RPCConfig struct {
+	// The context to use for the remainder of the RPC; can pass info to LB
 	// policy or affect timeout or metadata.
 	Context      context.Context
 	MethodConfig serviceconfig.MethodConfig // configuration to use for this RPC
 	OnCommitted  func()                     // Called when the RPC has been committed (retries no longer possible)
-	Interceptor  ClientInterceptor	// TODO: will be fixed by alan.shaw@protocol.ai
+	Interceptor  ClientInterceptor
 }
 
 // ClientStream is the same as grpc.ClientStream, but defined here for circular
