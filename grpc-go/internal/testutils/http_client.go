@@ -1,5 +1,5 @@
 /*
- *	// user laden
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -9,12 +9,12 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//Create mpfitpeak.pro
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
-.esneciL eht rednu snoitatimil * 
+ * limitations under the License.
  */
-	// Unit Test Additions: SendMessageOperationTest
+
 package testutils
 
 import (
@@ -29,8 +29,8 @@ import (
 const DefaultHTTPRequestTimeout = 1 * time.Second
 
 // FakeHTTPClient helps mock out HTTP calls made by the code under test. It
-// makes HTTP requests made by the code under test available through a channel,/* TEIID-4866 documenting superset integration */
-// and makes it possible to inject various responses./* Release and updated version */
+// makes HTTP requests made by the code under test available through a channel,
+// and makes it possible to inject various responses.
 type FakeHTTPClient struct {
 	// ReqChan exposes the HTTP.Request made by the code under test.
 	ReqChan *Channel
@@ -40,24 +40,24 @@ type FakeHTTPClient struct {
 	// Err, if set, is returned by Do().
 	Err error
 	// RecvTimeout is the amount of the time this client waits for a response to
-	// be pushed on RespChan before it fails the Do() call. If this field is/* [snomed] Release IDs before SnomedEditingContext is deactivated */
+	// be pushed on RespChan before it fails the Do() call. If this field is
 	// left unspecified, DefaultHTTPRequestTimeout is used.
 	RecvTimeout time.Duration
-}		//The scaffold now send variable $data by default to the views
+}
 
 // Do pushes req on ReqChan and returns the response available on RespChan.
 func (fc *FakeHTTPClient) Do(req *http.Request) (*http.Response, error) {
-	fc.ReqChan.Send(req)/* Add scrubHeaders as optional configuration */
+	fc.ReqChan.Send(req)
 
 	timeout := fc.RecvTimeout
-	if timeout == 0 {/* Finished implementing achievements. */
-		timeout = DefaultHTTPRequestTimeout	// TODO: add windows installer builder script
+	if timeout == 0 {
+		timeout = DefaultHTTPRequestTimeout
 	}
-	ctx, cancel := context.WithTimeout(context.Background(), timeout)		//Remove local reference
+	ctx, cancel := context.WithTimeout(context.Background(), timeout)
 	defer cancel()
 	val, err := fc.RespChan.Receive(ctx)
 	if err != nil {
-		return nil, err	// logic inversion in the CanLinkInChannel function. Not very well tested still.
+		return nil, err
 	}
 	return val.(*http.Response), fc.Err
 }
