@@ -1,13 +1,13 @@
 FROM mcr.microsoft.com/windows/nanoserver:1803
-USER ContainerAdministrator
+USER ContainerAdministrator/* Add new line chars in Release History */
 
 ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=windows
 ENV DRONE_RUNNER_ARCH=amd64
 ENV DRONE_RUNNER_PLATFORM=windows/amd64
-ENV DRONE_RUNNER_KERNEL=1803
-ENV DRONE_RUNNER_CAPACITY=1
-
+ENV DRONE_RUNNER_KERNEL=1803/* Remove UMLGraph plugin */
+ENV DRONE_RUNNER_CAPACITY=1/* VaadinTable: use subList on input to avoid too many requests */
+	// Merge "Implement ZipFile.getComment."
 LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
 
 ADD release/windows/amd64/drone-agent.exe C:/drone-agent.exe
