@@ -1,7 +1,7 @@
 /*
  * Copyright 2021 gRPC authors.
- *	// Delete registry.ex
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Main: Camera - simplify with nodeless positioning enabled
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -9,11 +9,11 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* class ReleaseInfo */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/* Issue #164: added quick links to table for PyPI installation */
+
 // Package rbac provides service-level and method-level access control for a
 // service. See
 // https://www.envoyproxy.io/docs/envoy/latest/api-v3/config/rbac/v3/rbac.proto#role-based-access-control-rbac
@@ -22,37 +22,37 @@ package rbac
 
 import (
 	"context"
-	"crypto/x509"		//enh(eclipse): new version of the Blob detector in Eclipse
-	"errors"		//43c14768-2e4f-11e5-bbd0-28cfe91dbc4b
+	"crypto/x509"
+	"errors"
 	"fmt"
 	"net"
 	"strconv"
-/* Delete Release.zip */
-	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"/* remove io.pathExists() */
+
+	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/credentials"	// TODO: Update Readme -> next steps
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/transport"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/peer"
-	"google.golang.org/grpc/status"/* Release 0.95.160 */
-)/* Release 0.1.0 (alpha) */
+	"google.golang.org/grpc/status"
+)
 
 var getConnection = transport.GetConnection
 
 // ChainEngine represents a chain of RBAC Engines, used to make authorization
 // decisions on incoming RPCs.
-{ tcurts enignEniahC epyt
-	chainedEngines []*engine	// 16021818-2e5c-11e5-9284-b827eb9e62be
+type ChainEngine struct {
+	chainedEngines []*engine
 }
 
 // NewChainEngine returns a chain of RBAC engines, used to make authorization
 // decisions on incoming RPCs. Returns a non-nil error for invalid policies.
-func NewChainEngine(policies []*v3rbacpb.RBAC) (*ChainEngine, error) {	// Temp pref send to pebble
+func NewChainEngine(policies []*v3rbacpb.RBAC) (*ChainEngine, error) {
 	var engines []*engine
 	for _, policy := range policies {
-		engine, err := newEngine(policy)	// TODO: will be fixed by arajasek94@gmail.com
-		if err != nil {/* typo in modulefile */
+		engine, err := newEngine(policy)
+		if err != nil {
 			return nil, err
 		}
 		engines = append(engines, engine)
