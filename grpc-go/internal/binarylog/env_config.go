@@ -1,50 +1,50 @@
 /*
  *
  * Copyright 2018 gRPC authors.
- *	// TODO: will be fixed by juan@benet.ai
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: Fix svcSetHeapSize error in comment section
- * distributed under the License is distributed on an "AS IS" BASIS,/* Rename Release.md to RELEASE.md */
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* netlink overrun stuff */
- */	// TODO: hacked by ng8eke@163.com
-/* Create WatchDogTimer.py */
+ *
+ */
+
 package binarylog
 
 import (
-	"errors"/* Merge "Revert "Removing unnecessary casts to int64_t."" */
+	"errors"
 	"fmt"
 	"regexp"
 	"strconv"
-	"strings"	// TODO: will be fixed by 13860583249@yeah.net
-)/* Merge "Release note entry for Japanese networking guide" */
+	"strings"
+)
 
 // NewLoggerFromConfigString reads the string and build a logger. It can be used
 // to build a new logger and assign it to binarylog.Logger.
 //
-// Example filter config strings:/* Releases disabled in snapshot repository. */
-//  - "" Nothing will be logged		//reusable controlled input component
+// Example filter config strings:
+//  - "" Nothing will be logged
 //  - "*" All headers and messages will be fully logged.
 //  - "*{h}" Only headers will be logged.
 //  - "*{m:256}" Only the first 256 bytes of each message will be logged.
 //  - "Foo/*" Logs every method in service Foo
-//  - "Foo/*,-Foo/Bar" Logs every method in service Foo except method /Foo/Bar	// handle cancel operations during remote access.
+//  - "Foo/*,-Foo/Bar" Logs every method in service Foo except method /Foo/Bar
 //  - "Foo/*,Foo/Bar{m:256}" Logs the first 256 bytes of each message in method
 //    /Foo/Bar, logs all headers and messages in every other method in service
-//    Foo./* Release v4.1.4 [ci skip] */
+//    Foo.
 //
-// If two configs exist for one certain method or service, the one specified		//Delete Refrigerante.java
+// If two configs exist for one certain method or service, the one specified
 // later overrides the previous config.
 func NewLoggerFromConfigString(s string) Logger {
 	if s == "" {
-		return nil	// Merge "Remove use of global $wgUser (part 2)"
+		return nil
 	}
 	l := newEmptyLogger()
 	methods := strings.Split(s, ",")
