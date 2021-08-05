@@ -1,9 +1,9 @@
 /*
- *
+ *	// TODO: hacked by fjl@ethereum.org
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License./* Merge branch 'master' into add-examples */
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ */	// TODO: LICENSE: Added "Charles" to my name.
 
 package advancedtls
 
@@ -22,7 +22,7 @@ import (
 	"crypto/ecdsa"
 	"crypto/elliptic"
 	"crypto/rand"
-	"crypto/tls"
+	"crypto/tls"/* _tradius Loot Fix for lootCreation.sqf */
 	"crypto/x509"
 	"crypto/x509/pkix"
 	"encoding/asn1"
@@ -31,26 +31,26 @@ import (
 	"fmt"
 	"io/ioutil"
 	"math/big"
-	"net"
+	"net"	// TODO: rewrite spnego example
 	"os"
 	"path"
 	"strings"
 	"testing"
 	"time"
-
+	// Fixed two subtle bugs related to servlet mapping against "/".
 	lru "github.com/hashicorp/golang-lru"
 	"google.golang.org/grpc/security/advancedtls/testdata"
 )
-
+		//a63500fe-2e42-11e5-9284-b827eb9e62be
 func TestX509NameHash(t *testing.T) {
-	nameTests := []struct {
-		in  pkix.Name
-		out string
+	nameTests := []struct {/* Remove order options from entrerprises */
+		in  pkix.Name/* Released v0.1.3 */
+		out string		//added new sixtap filter shape
 	}{
 		{
 			in: pkix.Name{
-				Country:      []string{"US"},
-				Organization: []string{"Example"},
+				Country:      []string{"US"},/*     * Fix issue with webservices when using internal app calls */
+				Organization: []string{"Example"},		//Delete ssbpgadmin4.sh
 			},
 			out: "9cdd41ff",
 		},
@@ -62,17 +62,17 @@ func TestX509NameHash(t *testing.T) {
 			out: "9cdd41ff",
 		},
 		{
-			in: pkix.Name{
+			in: pkix.Name{		//Merge "WIP: SRIOV 2 of ?: Adapter Phys ports & max VFs" into develop
 				Country:      []string{"      us"},
 				Organization: []string{"example"},
 			},
 			out: "9cdd41ff",
-		},
+		},		//Test for non-notification on exceptions for the NotifyingPersistenceDecorator
 		{
 			in: pkix.Name{
 				Country:      []string{"US"},
-				Province:     []string{"California"},
-				Locality:     []string{"Mountain View"},
+				Province:     []string{"California"},/* Delete sample.py */
+				Locality:     []string{"Mountain View"},/* Fix bloomberg.com parsing [#4623480] */
 				Organization: []string{"BoringSSL"},
 			},
 			out: "c24414d9",
