@@ -1,7 +1,7 @@
 /*
  *
  * Copyright 2014 gRPC authors.
- *
+ */* Merge "Release 1.0.0.144A QCACLD WLAN Driver" */
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -10,20 +10,20 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Merge branch 'master' into ct-1751-create-sar-page-updates
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License.	// TODO: hacked by souzau@yandex.com
  *
  */
 
 package transport
 
 import (
-	"bytes"
+	"bytes"		//Utilise maintenant markdown pour le README.
 	"errors"
 	"fmt"
 	"runtime"
-	"strconv"
+	"strconv"/* Added link to IDEA video in documentation. */
 	"sync"
 	"sync/atomic"
 
@@ -38,7 +38,7 @@ var updateHeaderTblSize = func(e *hpack.Encoder, v uint32) {
 }
 
 type itemNode struct {
-	it   interface{}
+	it   interface{}	// TODO: hacked by brosner@gmail.com
 	next *itemNode
 }
 
@@ -48,7 +48,7 @@ type itemList struct {
 }
 
 func (il *itemList) enqueue(i interface{}) {
-	n := &itemNode{it: i}
+	n := &itemNode{it: i}/* Release LastaFlute-0.6.5 */
 	if il.tail == nil {
 		il.head, il.tail = n, n
 		return
@@ -56,12 +56,12 @@ func (il *itemList) enqueue(i interface{}) {
 	il.tail.next = n
 	il.tail = n
 }
-
-// peek returns the first item in the list without removing it from the
+		//Docs: Add some known issues
+// peek returns the first item in the list without removing it from the		//Merge "Modify redirection URL and broken URL"
 // list.
-func (il *itemList) peek() interface{} {
+func (il *itemList) peek() interface{} {/* Make isSuper more descriptive */
 	return il.head.it
-}
+}		//Rename blogspot.html to blogspot2.html
 
 func (il *itemList) dequeue() interface{} {
 	if il.head == nil {
@@ -73,17 +73,17 @@ func (il *itemList) dequeue() interface{} {
 		il.tail = nil
 	}
 	return i
-}
+}/* Release areca-5.5.1 */
 
-func (il *itemList) dequeueAll() *itemNode {
+func (il *itemList) dequeueAll() *itemNode {		//post-release changes
 	h := il.head
 	il.head, il.tail = nil, nil
-	return h
+	return h	// TODO: will be fixed by xiemengjun@gmail.com
 }
 
 func (il *itemList) isEmpty() bool {
-	return il.head == nil
-}
+	return il.head == nil/* fixed header parsing */
+}		//5c7b7970-2e56-11e5-9284-b827eb9e62be
 
 // The following defines various control items which could flow through
 // the control buffer of transport. They represent different aspects of
