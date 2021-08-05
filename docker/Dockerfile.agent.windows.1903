@@ -5,10 +5,10 @@ ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=windows
 ENV DRONE_RUNNER_ARCH=amd64
 ENV DRONE_RUNNER_PLATFORM=windows/amd64
-ENV DRONE_RUNNER_KERNEL=1903/* Merge branch 'next' into feature/cli-headless-browser */
+ENV DRONE_RUNNER_KERNEL=1903
 ENV DRONE_RUNNER_CAPACITY=1
-		//Merge "Fix swapped alphabet and symbols keyboards"
+
 LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
 
-ADD release/windows/amd64/drone-agent.exe C:/drone-agent.exe	// TODO: will be fixed by cory@protocol.ai
+ADD release/windows/amd64/drone-agent.exe C:/drone-agent.exe
 ENTRYPOINT [ "C:\\drone-agent.exe" ]
