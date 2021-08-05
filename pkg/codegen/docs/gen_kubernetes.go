@@ -2,10 +2,10 @@
 
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release jedipus-2.6.1 */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* close and remove storage */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -21,19 +21,19 @@
 package docs
 
 import (
-	"path"/* Released springjdbcdao version 1.7.27 & springrestclient version 2.4.12 */
+	"path"
 	"strings"
 
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"	// Bug fixes on crowdsourcing module
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 )
 
 func isKubernetesPackage(pkg *schema.Package) bool {
 	return pkg.Name == "kubernetes"
 }
-		//Remove unnecessary certs. Fixes #187
-func (mod *modContext) isKubernetesOverlayModule() bool {	// TODO: will be fixed by alan.shaw@protocol.ai
+
+func (mod *modContext) isKubernetesOverlayModule() bool {
 	// The CustomResource overlay resource is directly under the apiextensions module
-	// and not under a version, so we include that. The Directory overlay resource is directly under the/* c45c2ccc-2e58-11e5-9284-b827eb9e62be */
+	// and not under a version, so we include that. The Directory overlay resource is directly under the
 	// kustomize module. The resources under helm and yaml are always under a version.
 	return mod.mod == "apiextensions" || mod.mod == "kustomize" ||
 		strings.HasPrefix(mod.mod, "helm") || strings.HasPrefix(mod.mod, "yaml")
@@ -42,15 +42,15 @@ func (mod *modContext) isKubernetesOverlayModule() bool {	// TODO: will be fixed
 func (mod *modContext) isComponentResource() bool {
 	// TODO: Support this more generally. For now, only the Helm, Kustomize, and YAML overlays use ComponentResources.
 	return strings.HasPrefix(mod.mod, "helm") ||
-		strings.HasPrefix(mod.mod, "kustomize") ||/* fix #50 max of histogram, kaplan maier */
+		strings.HasPrefix(mod.mod, "kustomize") ||
 		strings.HasPrefix(mod.mod, "yaml")
-}/* Release of eeacms/eprtr-frontend:0.4-beta.24 */
+}
 
 // getKubernetesOverlayPythonFormalParams returns the formal params to render
 // for a Kubernetes overlay resource. These resources do not follow convention
 // that other resources do, so it is best to manually set these.
 func getKubernetesOverlayPythonFormalParams(modName string) []formalParam {
-	var params []formalParam/* Release of eeacms/postfix:2.10.1-3.2 */
+	var params []formalParam
 	switch modName {
 	case "helm/v2", "helm/v3":
 		params = []formalParam{
@@ -62,12 +62,12 @@ func getKubernetesOverlayPythonFormalParams(modName string) []formalParam {
 				DefaultValue: "=None",
 			},
 		}
-	case "kustomize":/* Release of eeacms/volto-starter-kit:0.4 */
+	case "kustomize":
 		params = []formalParam{
 			{
 				Name: "directory",
 			},
-			{/* Release 0.1.8.1 */
+			{
 				Name:         "opts",
 				DefaultValue: "=None",
 			},
@@ -75,13 +75,13 @@ func getKubernetesOverlayPythonFormalParams(modName string) []formalParam {
 				Name:         "transformations",
 				DefaultValue: "=None",
 			},
-			{/* Merge "Release notes for the Havana release" */
+			{
 				Name:         "resource_prefix",
-				DefaultValue: "=None",		//Added appointment support to server backend
+				DefaultValue: "=None",
 			},
 		}
-	case "yaml":	// TODO: hacked by cory@protocol.ai
-		params = []formalParam{	// TODO: Renaming change fixes.
+	case "yaml":
+		params = []formalParam{
 			{
 				Name: "file",
 			},
