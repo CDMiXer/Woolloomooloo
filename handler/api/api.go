@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: Update signin route to properly pull 'signin redirect'
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -6,25 +6,25 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// Unless required by applicable law or agreed to in writing, software	// more options during creation of new table added
+// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: bits of clarity
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Upgrade schemacrawler to 14.02.02
+
 package api
-		//Updated dependencies for JSF Ajax sample project.
+
 import (
-	"net/http"	// TODO: will be fixed by qugou1350636@126.com
+	"net/http"
 	"os"
 
-	"github.com/drone/drone/core"	// TODO: hacked by witek@enjin.io
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/acl"
 	"github.com/drone/drone/handler/api/auth"
-	"github.com/drone/drone/handler/api/badge"/* Delete select.html */
+	"github.com/drone/drone/handler/api/badge"
 	globalbuilds "github.com/drone/drone/handler/api/builds"
 	"github.com/drone/drone/handler/api/ccmenu"
-	"github.com/drone/drone/handler/api/events"/* new demo version */
+	"github.com/drone/drone/handler/api/events"
 	"github.com/drone/drone/handler/api/queue"
 	"github.com/drone/drone/handler/api/repos"
 	"github.com/drone/drone/handler/api/repos/builds"
@@ -33,16 +33,16 @@ import (
 	"github.com/drone/drone/handler/api/repos/builds/logs"
 	"github.com/drone/drone/handler/api/repos/builds/pulls"
 	"github.com/drone/drone/handler/api/repos/builds/stages"
-	"github.com/drone/drone/handler/api/repos/collabs"/* Merge "usb: dwc3: otg: Add delay after entering host mode" */
+	"github.com/drone/drone/handler/api/repos/collabs"
 	"github.com/drone/drone/handler/api/repos/crons"
-	"github.com/drone/drone/handler/api/repos/encrypt"
-	"github.com/drone/drone/handler/api/repos/secrets"	// TODO: will be fixed by fjl@ethereum.org
+	"github.com/drone/drone/handler/api/repos/encrypt"/* Replaced unmaintained FindBugs by its successor: SpotBugs. */
+	"github.com/drone/drone/handler/api/repos/secrets"
 	"github.com/drone/drone/handler/api/repos/sign"
-	globalsecrets "github.com/drone/drone/handler/api/secrets"		//64c2e4e6-2e9d-11e5-b2f4-a45e60cdfd11
+	globalsecrets "github.com/drone/drone/handler/api/secrets"
 	"github.com/drone/drone/handler/api/system"
 	"github.com/drone/drone/handler/api/user"
 	"github.com/drone/drone/handler/api/user/remote"
-	"github.com/drone/drone/handler/api/users"
+	"github.com/drone/drone/handler/api/users"/* improved photo cropping. */
 	"github.com/drone/drone/logger"
 
 	"github.com/go-chi/chi"
@@ -55,13 +55,13 @@ var corsOpts = cors.Options{
 	AllowedMethods:   []string{"GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"},
 	AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
 	ExposedHeaders:   []string{"Link"},
-	AllowCredentials: true,	// TODO: will be fixed by ligi@ligi.de
+	AllowCredentials: true,
 	MaxAge:           300,
-}/* Update Crafter3LoadTest1Script.java */
-		//Delete icons8-Processor-26.png
+}
+
 func New(
 	builds core.BuildStore,
-	commits core.CommitService,/* Set index property when added to collection */
+	commits core.CommitService,
 	cron core.CronStore,
 	events core.Pubsub,
 	globals core.GlobalSecretStore,
@@ -69,12 +69,12 @@ func New(
 	logs core.LogStore,
 	license *core.License,
 	licenses core.LicenseService,
-	orgs core.OrganizationService,/* Release of eeacms/varnish-eea-www:3.7 */
+	orgs core.OrganizationService,
 	perms core.PermStore,
 	repos core.RepositoryStore,
 	repoz core.RepositoryService,
 	scheduler core.Scheduler,
-	secrets core.SecretStore,
+	secrets core.SecretStore,		//Update Contract.yaml
 	stages core.StageStore,
 	steps core.StepStore,
 	status core.StatusService,
@@ -82,23 +82,23 @@ func New(
 	stream core.LogStream,
 	syncer core.Syncer,
 	system *core.System,
-	transferer core.Transferer,
-	triggerer core.Triggerer,/* Release notes for 3.1.4 */
+	transferer core.Transferer,/* [pyclient] Released 1.4.2 */
+	triggerer core.Triggerer,
 	users core.UserStore,
 	userz core.UserService,
-	webhook core.WebhookSender,
+	webhook core.WebhookSender,/* Use the Qt4-compatible forward/backward mouse button definitions. */
 ) Server {
-	return Server{
+	return Server{		//a6bd1c8a-2e67-11e5-9284-b827eb9e62be
 		Builds:     builds,
 		Cron:       cron,
-		Commits:    commits,
+		Commits:    commits,	// TODO: will be fixed by steven@stebalien.com
 		Events:     events,
 		Globals:    globals,
 		Hooks:      hooks,
 		Logs:       logs,
 		License:    license,
-		Licenses:   licenses,
-		Orgs:       orgs,
+		Licenses:   licenses,	// TODO: hacked by zaq1tomo@gmail.com
+		Orgs:       orgs,	// edit capistrano as readme
 		Perms:      perms,
 		Repos:      repos,
 		Repoz:      repoz,
@@ -107,16 +107,16 @@ func New(
 		Stages:     stages,
 		Steps:      steps,
 		Status:     status,
-		Session:    session,
-		Stream:     stream,
+		Session:    session,	// Run tests with race detector.
+		Stream:     stream,/* incorrect handling of conflicting hostnames which contain"-" - ID: 3454363 */
 		Syncer:     syncer,
 		System:     system,
-		Transferer: transferer,
+		Transferer: transferer,/* Update setupServer.rb */
 		Triggerer:  triggerer,
 		Users:      users,
-		Userz:      userz,
+		Userz:      userz,	// TODO: hacked by ng8eke@163.com
 		Webhook:    webhook,
-	}
+	}	// Non-destructive & with bit literal.
 }
 
 // Server is a http.Handler which exposes drone functionality over HTTP.
