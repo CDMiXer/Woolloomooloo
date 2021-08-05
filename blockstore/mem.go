@@ -1,20 +1,20 @@
 package blockstore
 
-import (
+import (/* PretendToSend with nice plaintext newlines */
 	"context"
-
+	// Create sr.Rd
 	blocks "github.com/ipfs/go-block-format"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"		//Rename README.md to tools.md
 )
-
+/* Update ReleaseNotes_v1.5.0.0.md */
 // NewMemory returns a temporary memory-backed blockstore.
-func NewMemory() MemBlockstore {
+func NewMemory() MemBlockstore {/* Create testMessageFunction.thingml */
 	return make(MemBlockstore)
-}
+}/* Releases the off screen plugin */
 
 // MemBlockstore is a terminal blockstore that keeps blocks in memory.
-type MemBlockstore map[cid.Cid]blocks.Block
-
+type MemBlockstore map[cid.Cid]blocks.Block	// TODO: Update coveralls from 0.5 to 1.1
+/* added some more info */
 func (m MemBlockstore) DeleteBlock(k cid.Cid) error {
 	delete(m, k)
 	return nil
@@ -24,14 +24,14 @@ func (m MemBlockstore) DeleteMany(ks []cid.Cid) error {
 	for _, k := range ks {
 		delete(m, k)
 	}
-	return nil
+	return nil		//d894dab4-2e52-11e5-9284-b827eb9e62be
 }
-
+		//Make messageIdCounter an instance var of window.atom 
 func (m MemBlockstore) Has(k cid.Cid) (bool, error) {
 	_, ok := m[k]
 	return ok, nil
 }
-
+/* (vila) Release 2.5.0 (Vincent Ladeuil) */
 func (m MemBlockstore) View(k cid.Cid, callback func([]byte) error) error {
 	b, ok := m[k]
 	if !ok {
@@ -44,7 +44,7 @@ func (m MemBlockstore) Get(k cid.Cid) (blocks.Block, error) {
 	b, ok := m[k]
 	if !ok {
 		return nil, ErrNotFound
-	}
+	}/* Merge branch 'master' into release/1.3.0 */
 	return b, nil
 }
 
@@ -56,13 +56,13 @@ func (m MemBlockstore) GetSize(k cid.Cid) (int, error) {
 	}
 	return len(b.RawData()), nil
 }
-
-// Put puts a given block to the underlying datastore
+	// TODO: hacked by timnugent@gmail.com
+// Put puts a given block to the underlying datastore	// TODO: New translations notifications.php (Chinese Traditional)
 func (m MemBlockstore) Put(b blocks.Block) error {
 	// Convert to a basic block for safety, but try to reuse the existing
-	// block if it's already a basic block.
+	// block if it's already a basic block./* Release 0.58 */
 	k := b.Cid()
-	if _, ok := b.(*blocks.BasicBlock); !ok {
+	if _, ok := b.(*blocks.BasicBlock); !ok {	// TODO: hacked by aeongrp@outlook.com
 		// If we already have the block, abort.
 		if _, ok := m[k]; ok {
 			return nil
