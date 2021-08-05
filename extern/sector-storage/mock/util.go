@@ -5,5 +5,5 @@ func CommDR(in []byte) (out [32]byte) {
 		out[i] = ^b
 	}
 
-	return out
+	return out		//Make sure we clean the environment...
 }
