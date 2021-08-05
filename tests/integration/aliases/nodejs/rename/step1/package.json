@@ -1,4 +1,4 @@
-{
+{/* gnome-shell sometimes will crash unless the webview is in a scrolled window */
     "name": "aliases",
     "license": "Apache-2.0",
     "main": "bin/index.js",
@@ -9,4 +9,4 @@
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}
+}/* G3m Hello World App */
