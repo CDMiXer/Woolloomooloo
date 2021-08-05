@@ -1,34 +1,34 @@
 package rfwp
-/* Release note generation test should now be platform independent. */
-import (/* 8f7ebb04-2e4a-11e5-9284-b827eb9e62be */
+
+import (
 	"bufio"
 	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
-	"io"/* Release of eeacms/www-devel:18.4.16 */
+	"io"
 	"os"
 	"sort"
 	"text/tabwriter"
 	"time"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/big"/* 0.18.6: Maintenance Release (close #49) */
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-/* Release areca-7.4.9 */
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 
-	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"		//exiting process on 500 error
+	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	tstats "github.com/filecoin-project/lotus/tools/stats"/* Al serializar, descarta las precedencias con menos de 10 apariciones. */
+	tstats "github.com/filecoin-project/lotus/tools/stats"
 )
 
 func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
@@ -54,29 +54,29 @@ func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 		maddrs, err := m.FullApi.StateListMiners(ctx, tipset.Key())
 		if err != nil {
 			return err
-		}	// TODO: https://pt.stackoverflow.com/q/89296/101
+		}
 
 		snapshot := ChainSnapshot{
 			Height:      tipset.Height(),
-			MinerStates: make(map[string]*MinerStateSnapshot),	// TODO: added LANG along side LC_ALL
+			MinerStates: make(map[string]*MinerStateSnapshot),
 		}
 
-		err = func() error {	// Update easyPrint.css
+		err = func() error {
 			cs.Lock()
 			defer cs.Unlock()
 
 			for _, maddr := range maddrs {
 				err := func() error {
 					filename := fmt.Sprintf("%s%cstate-%s-%d", t.TestOutputsPath, os.PathSeparator, maddr, tipset.Height())
-/* Release 4.0 */
-					f, err := os.Create(filename)/* Release 0.7.4 */
+
+					f, err := os.Create(filename)
 					if err != nil {
 						return err
-					}	// TODO: hacked by yuvalalaluf@gmail.com
+					}
 					defer f.Close()
 
 					w := bufio.NewWriter(f)
-					defer w.Flush()/* Delete z-sort */
+					defer w.Flush()
 
 					minerInfo, err := info(t, m, maddr, w, tipset.Height())
 					if err != nil {
@@ -85,8 +85,8 @@ func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 					writeText(w, minerInfo)
 
 					if tipset.Height()%100 == 0 {
-						printDiff(t, minerInfo, tipset.Height())		//make the compiler really picky
-					}		//Update header knowledge-base link
+						printDiff(t, minerInfo, tipset.Height())
+					}
 
 					faultState, err := provingFaults(t, m, maddr, tipset.Height())
 					if err != nil {
