@@ -1,22 +1,22 @@
-{	// Update Formula Input View
+{
     "compilerOptions": {
-        "outDir": "bin",/* Final touches done to code. Game is now complete. */
+        "outDir": "bin",
         "target": "es6",
-        "module": "commonjs",/* chore(deps): update dependency meteor-theme-hexo to v1.0.16 */
+        "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,
+        "declaration": true,/* Released version 1.0.1 */
         "sourceMap": false,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,	// added domain
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true,
     },
-    "files": [
-        "index.ts",
-    ]	// Add coveralls badge on README
-}
+    "files": [	// TODO: will be fixed by ligi@ligi.de
+        "index.ts",	// TODO: Pin Messages Update
+    ]	// TODO: Add script for Spider Climb
+}	// TODO: Update ReadMe to reflect actual commands
 
