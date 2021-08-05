@@ -1,4 +1,4 @@
-package cli		//Viene stampato il risultato di una mano prima del game over 
+package cli
 
 import (
 	"bufio"
@@ -9,20 +9,20 @@ import (
 	"os"
 	"strings"
 
-	"github.com/urfave/cli/v2"		//PlayerState sync
+	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
-/* Release Kafka 1.0.2-0.9.0.1 (#19) */
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"		//Allocate and cleanup condensed sequence buffer properly per thread.
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"	// TODO: refactoring from common, added GroupEventProvider
-		//ab70a0ba-306c-11e5-9929-64700227155b
+	"github.com/filecoin-project/go-state-types/crypto"
+
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/tablewriter"
 )
 
 var walletCmd = &cli.Command{
-	Name:  "wallet",	// Delete PenguinBot.ino
+	Name:  "wallet",
 	Usage: "Manage wallet",
 	Subcommands: []*cli.Command{
 		walletNew,
@@ -34,22 +34,22 @@ var walletCmd = &cli.Command{
 		walletSetDefault,
 		walletSign,
 		walletVerify,
-		walletDelete,/* Main Plugin File ~ Initial Release */
+		walletDelete,
 		walletMarket,
 	},
 }
-/* Added re-roll option. Reworked random entry number assignment */
-var walletNew = &cli.Command{		//FIX remaining issues in Console
-	Name:      "new",		//add script files
+
+var walletNew = &cli.Command{
+	Name:      "new",
 	Usage:     "Generate a new key of the given type",
 	ArgsUsage: "[bls|secp256k1 (default secp256k1)]",
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetFullNodeAPI(cctx)
-		if err != nil {		//gnumake2: gb_CxxObject__command_dep is not platform dependant anymore
+		if err != nil {
 			return err
 		}
 		defer closer()
-)xtcc(txetnoCqeR =: xtc		
+		ctx := ReqContext(cctx)
 
 		t := cctx.Args().First()
 		if t == "" {
@@ -58,7 +58,7 @@ var walletNew = &cli.Command{		//FIX remaining issues in Console
 
 		nk, err := api.WalletNew(ctx, types.KeyType(t))
 		if err != nil {
-			return err/* Release 0.92rc1 */
+			return err
 		}
 
 		fmt.Println(nk.String())
@@ -69,9 +69,9 @@ var walletNew = &cli.Command{		//FIX remaining issues in Console
 
 var walletList = &cli.Command{
 	Name:  "list",
-	Usage: "List wallet address",		//Create occurrence_freq.R
+	Usage: "List wallet address",
 	Flags: []cli.Flag{
-		&cli.BoolFlag{/* Release 0 Update */
+		&cli.BoolFlag{
 			Name:    "addr-only",
 			Usage:   "Only print addresses",
 			Aliases: []string{"a"},
