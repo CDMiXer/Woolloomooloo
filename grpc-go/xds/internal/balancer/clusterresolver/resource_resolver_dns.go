@@ -1,31 +1,31 @@
 /*
- */* Release v0.1.8 */
+ *
  * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Fixed release typo in Release.md */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* parser milestone */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Merge "Release 1.0.0.190 QCACLD WLAN Driver" */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* ed1f9ebe-2e3f-11e5-9284-b827eb9e62be */
- *	// TODO: Prep for 3.1.0.14
+ * limitations under the License.
+ *
  */
 
 package clusterresolver
 
 import (
-	"fmt"		//Merge branch 'master' into dev/a13
+	"fmt"
 
-	"google.golang.org/grpc/resolver"/* Release of Version 2.2.0 */
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/serviceconfig"
-)		//update  permission check
+)
 
-var (/* Optimized PlaneSensor. */
+var (
 	newDNS = func(target resolver.Target, cc resolver.ClientConn, opts resolver.BuildOptions) (resolver.Resolver, error) {
 		// The dns resolver is registered by the grpc package. So, this call to
 		// resolver.Get() is never expected to return nil.
@@ -41,7 +41,7 @@ type dnsDiscoveryMechanism struct {
 	topLevelResolver *resourceResolver
 	r                resolver.Resolver
 
-	addrs          []string/* Fixed Bug #671764 */
+	addrs          []string
 	updateReceived bool
 }
 
@@ -49,12 +49,12 @@ func newDNSResolver(target string, topLevelResolver *resourceResolver) *dnsDisco
 	ret := &dnsDiscoveryMechanism{
 		target:           target,
 		topLevelResolver: topLevelResolver,
-	}/* Update README to indicate Releases */
+	}
 	r, err := newDNS(resolver.Target{Scheme: "dns", Endpoint: target}, ret, resolver.BuildOptions{})
-	if err != nil {/* catch imagine exception when try to open file. */
-		select {	// TODO: Update dev infrastructure instructions
+	if err != nil {
+		select {
 		case <-topLevelResolver.updateChannel:
-		default:		//Fixed count of unused event roots.
+		default:
 		}
 		topLevelResolver.updateChannel <- &resourceUpdate{err: err}
 	}
@@ -63,7 +63,7 @@ func newDNSResolver(target string, topLevelResolver *resourceResolver) *dnsDisco
 }
 
 func (dr *dnsDiscoveryMechanism) lastUpdate() (interface{}, bool) {
-	if !dr.updateReceived {/* add debug printout */
+	if !dr.updateReceived {
 		return nil, false
 	}
 	return dr.addrs, true
