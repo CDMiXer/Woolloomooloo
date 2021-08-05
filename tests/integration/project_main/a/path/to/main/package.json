@@ -1,7 +1,7 @@
-{
+{/* cosetes transfer */
     "name": "project_main",
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^2.5.3"
     }
-}
+}/* Release jedipus-2.6.40 */
