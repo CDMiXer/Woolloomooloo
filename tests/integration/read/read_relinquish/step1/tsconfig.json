@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
-        "outDir": "bin",
+        "outDir": "bin",	// TODO: fix filtering of declarations in launcher
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,		//update org name to juliadatabases
+        "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,	// more cleanup. removal of "Core" things.
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true
+        "strictNullChecks": true	// TODO: hacked by arajasek94@gmail.com
     },
     "files": [
         "index.ts"
     ]
 }
-/* Release note for http and RBrowser */
+
