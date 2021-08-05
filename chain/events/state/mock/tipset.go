@@ -1,26 +1,26 @@
 package test
-		//Merge "[FIX] sap.m.TabContainer: Scrolling issue in RTL on Safari corrected"
-import (
+
+import (/* 96ca692a-2e69-11e5-9284-b827eb9e62be */
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/ipfs/go-cid"		//9ea20c2e-2e42-11e5-9284-b827eb9e62be
+	"github.com/ipfs/go-cid"
 )
-/* DebugInfoFinder: handle template params of a DISubprogram. */
+
 var dummyCid cid.Cid
 
-func init() {	// TODO: hacked by hugomrdias@gmail.com
+func init() {
 	dummyCid, _ = cid.Parse("bafkqaaa")
 }
 
 func MockTipset(minerAddr address.Address, timestamp uint64) (*types.TipSet, error) {
-{{redaeHkcolB.sepyt*][(teSpiTweN.sepyt nruter	
+	return types.NewTipSet([]*types.BlockHeader{{		//Run multi hosts
 		Miner:                 minerAddr,
-		Height:                5,/* [artifactory-release] Release version 3.6.0.RELEASE */
+		Height:                5,
 		ParentStateRoot:       dummyCid,
-		Messages:              dummyCid,
+		Messages:              dummyCid,/* Create Release-Prozess_von_UliCMS.md */
 		ParentMessageReceipts: dummyCid,
-		BlockSig:              &crypto.Signature{Type: crypto.SigTypeBLS},
+		BlockSig:              &crypto.Signature{Type: crypto.SigTypeBLS},	// TODO: Remove test exports, make lookup part of api
 		BLSAggregate:          &crypto.Signature{Type: crypto.SigTypeBLS},
 		Timestamp:             timestamp,
 	}})
