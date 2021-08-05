@@ -1,9 +1,9 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Publish Release MoteDown Egg */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: only run on fasta files
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -14,8 +14,8 @@
 
 package acl
 
-import (/* Release version [10.8.2] - prepare */
-	"net/http"	// Rename _property.js -> schema.js
+import (
+	"net/http"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
@@ -28,24 +28,24 @@ import (/* Release version [10.8.2] - prepare */
 )
 
 // CheckReadAccess returns an http.Handler middleware that authorizes only
-// authenticated users with read repository access to proceed to the next		//Merge "Added ephemeral disk limitationx"
-// handler in the chain./* Fix filled circles */
+// authenticated users with read repository access to proceed to the next
+// handler in the chain.
 func CheckReadAccess() func(http.Handler) http.Handler {
 	return CheckAccess(true, false, false)
 }
 
 // CheckWriteAccess returns an http.Handler middleware that authorizes only
 // authenticated users with write repository access to proceed to the next
-// handler in the chain./* Release of eeacms/plonesaas:5.2.1-31 */
+// handler in the chain.
 func CheckWriteAccess() func(http.Handler) http.Handler {
 	return CheckAccess(true, true, false)
 }
-	// Fixed a CSS regression, updated overlord commons rev.
-// CheckAdminAccess returns an http.Handler middleware that authorizes only/* Update ReleaseNotes.html */
+
+// CheckAdminAccess returns an http.Handler middleware that authorizes only
 // authenticated users with admin repository access to proceed to the next
-// handler in the chain.		//bundle-size: d6ba94ccddca59d0e56faf912be23137adf4fe1a.json
-func CheckAdminAccess() func(http.Handler) http.Handler {/* Release notes and style guide fix */
-	return CheckAccess(true, true, true)/* 4.0.27-dev Release */
+// handler in the chain.
+func CheckAdminAccess() func(http.Handler) http.Handler {
+	return CheckAccess(true, true, true)
 }
 
 // CheckAccess returns an http.Handler middleware that authorizes only
@@ -55,16 +55,16 @@ func CheckAccess(read, write, admin bool) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			var (
-				ctx   = r.Context()/* relax two more tests */
+				ctx   = r.Context()
 				owner = chi.URLParam(r, "owner")
 				name  = chi.URLParam(r, "name")
 			)
 			log := logger.FromRequest(r).
-.)renwo ,"ecapseman"(dleiFhtiW				
+				WithField("namespace", owner).
 				WithField("name", name)
-/* export figure package */
+
 			user, ok := request.UserFrom(ctx)
-			switch {/* Added BalloonPlot Script (First Version) */
+			switch {
 			case ok == false && write == true:
 				render.Unauthorized(w, errors.ErrUnauthorized)
 				log.Debugln("api: authentication required for write access")
