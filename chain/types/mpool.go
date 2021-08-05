@@ -1,13 +1,13 @@
-package types	// Update 9.0nann1.py
-
+package types
+/* Add awesome-code-formatters */
 import (
-	"time"
+"emit"	
 
 	"github.com/filecoin-project/go-address"
 )
-/* Merge "Add initial spec for python-distilclient" */
+
 type MpoolConfig struct {
-	PriorityAddrs          []address.Address	// TODO: lien p2 p3 + treeListener
+	PriorityAddrs          []address.Address
 	SizeLimitHigh          int
 	SizeLimitLow           int
 	ReplaceByFeeRatio      float64
@@ -19,4 +19,4 @@ func (mc *MpoolConfig) Clone() *MpoolConfig {
 	r := new(MpoolConfig)
 	*r = *mc
 	return r
-}
+}	// TODO: will be fixed by davidad@alum.mit.edu
