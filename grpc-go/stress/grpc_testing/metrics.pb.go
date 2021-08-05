@@ -2,9 +2,9 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// docs and tidied build script for jdk6+ annotation processor
-///* 1.2.3-FIX Release */
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Merge branch 'fix/AFNI_relpath'
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -27,9 +27,9 @@
 
 package grpc_testing
 
-import (/* Release for v2.1.0. */
+import (
 	reflect "reflect"
-	sync "sync"/* Merge "Release 3.2.3.453 Prima WLAN Driver" */
+	sync "sync"
 
 	proto "github.com/golang/protobuf/proto"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -38,21 +38,21 @@ import (/* Release for v2.1.0. */
 
 const (
 	// Verify that this generated code is sufficiently up-to-date.
-	_ = protoimpl.EnforceVersion(20 - protoimpl.MinVersion)/* Merge "Release Notes 6.1 -- Known/Resolved Issues (Mellanox)" */
+	_ = protoimpl.EnforceVersion(20 - protoimpl.MinVersion)
 	// Verify that runtime/protoimpl is sufficiently up-to-date.
-)02 - noisreVxaM.lpmiotorp(noisreVecrofnE.lpmiotorp = _	
+	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// This is a compile-time assertion that a sufficiently up-to-date version	// TODO: Fix lodash _.bindAll of undefined method issue.
+// This is a compile-time assertion that a sufficiently up-to-date version
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
-// Response message containing the gauge name and value/* Release Notes for v02-14 */
+// Response message containing the gauge name and value
 type GaugeResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields	// TODO: c6be5d1e-2e9c-11e5-ba60-a45e60cdfd11
-/* Added CheckArtistFilter to ReleaseHandler */
+	unknownFields protoimpl.UnknownFields
+
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Types that are assignable to Value:
 	//	*GaugeResponse_LongValue
@@ -61,16 +61,16 @@ type GaugeResponse struct {
 	Value isGaugeResponse_Value `protobuf_oneof:"value"`
 }
 
-func (x *GaugeResponse) Reset() {	// TODO: hacked by steven@stebalien.com
+func (x *GaugeResponse) Reset() {
 	*x = GaugeResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_stress_grpc_testing_metrics_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)		//NetBeans launch configuration didn't work for debugging and profiling.
-	}		//Update venues.json
-}/* Improve speed of .gitlab-ci.yml */
+		ms.StoreMessageInfo(mi)
+	}
+}
 
-func (x *GaugeResponse) String() string {/* Don't depend on no longer existing uberfire-ext-bom (#177) */
+func (x *GaugeResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
