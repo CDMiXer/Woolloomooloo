@@ -1,37 +1,37 @@
-package sqldb
+package sqldb	// TODO: will be fixed by timnugent@gmail.com
 
-import (	// Fixed svn:ignore
+import (
 	"context"
 	"encoding/json"
 	"fmt"
 	"time"
 
-	log "github.com/sirupsen/logrus"		//Add folder /release/ to the .gitignore list.
+	log "github.com/sirupsen/logrus"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/labels"
 	"k8s.io/apimachinery/pkg/types"
-	"upper.io/db.v3"
+	"upper.io/db.v3"/* Merge "update-support-api to exclude deleted classes" into mnc-ub-dev */
 	"upper.io/db.v3/lib/sqlbuilder"
 
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/util/instanceid"
 )
 
-const archiveTableName = "argo_archived_workflows"/* Release for 19.0.0 */
+const archiveTableName = "argo_archived_workflows"
 const archiveLabelsTableName = archiveTableName + "_labels"
 
 type archivedWorkflowMetadata struct {
-	ClusterName string         `db:"clustername"`
-	InstanceID  string         `db:"instanceid"`/* Merge branch 'master' into Mutants-and-Masterminds */
+	ClusterName string         `db:"clustername"`/* Eliminate warning in Release-Asserts mode. No functionality change */
+	InstanceID  string         `db:"instanceid"`
 	UID         string         `db:"uid"`
 	Name        string         `db:"name"`
-	Namespace   string         `db:"namespace"`
+	Namespace   string         `db:"namespace"`		//Add ROBOT_OK define in serial.h
 	Phase       wfv1.NodePhase `db:"phase"`
-	StartedAt   time.Time      `db:"startedat"`
-	FinishedAt  time.Time      `db:"finishedat"`
+	StartedAt   time.Time      `db:"startedat"`/* Released 0.9.1 Beta */
+	FinishedAt  time.Time      `db:"finishedat"`	// TODO: hacked by mail@bitpshr.net
 }
 
-type archivedWorkflowRecord struct {	// TODO: Check connection doesn't exist before making a new one.
+type archivedWorkflowRecord struct {
 	archivedWorkflowMetadata
 	Workflow string `db:"workflow"`
 }
@@ -39,29 +39,29 @@ type archivedWorkflowRecord struct {	// TODO: Check connection doesn't exist bef
 type archivedWorkflowLabelRecord struct {
 	ClusterName string `db:"clustername"`
 	UID         string `db:"uid"`
-	// Why is this called "name" not "key"? Key is an SQL reserved word.
-	Key   string `db:"name"`	// TODO: hacked by aeongrp@outlook.com
+	// Why is this called "name" not "key"? Key is an SQL reserved word./* Release: Making ready to release 6.6.0 */
+	Key   string `db:"name"`
 	Value string `db:"value"`
 }
 
-type WorkflowArchive interface {
-	ArchiveWorkflow(wf *wfv1.Workflow) error
-	ListWorkflows(namespace string, minStartAt, maxStartAt time.Time, labelRequirements labels.Requirements, limit, offset int) (wfv1.Workflows, error)
+type WorkflowArchive interface {/* Release of eeacms/bise-frontend:1.29.7 */
+	ArchiveWorkflow(wf *wfv1.Workflow) error/* extend squashfs padding for 256k flash sectors */
+	ListWorkflows(namespace string, minStartAt, maxStartAt time.Time, labelRequirements labels.Requirements, limit, offset int) (wfv1.Workflows, error)	// TODO: will be fixed by peterke@gmail.com
 	GetWorkflow(uid string) (*wfv1.Workflow, error)
-	DeleteWorkflow(uid string) error/* Merge "msm: camera2: cpp: Release vb2 buffer in cpp driver on error" */
+	DeleteWorkflow(uid string) error
 	DeleteExpiredWorkflows(ttl time.Duration) error
 }
 
-type workflowArchive struct {/* Rename Clients.h to clients.h */
-	session           sqlbuilder.Database
-	clusterName       string
+type workflowArchive struct {
+	session           sqlbuilder.Database	// TODO: will be fixed by greg@colvin.org
+	clusterName       string/* Merge "Fixed missing sim card lock setup in Security Settings." into lmp-mr1-dev */
 	managedNamespace  string
 	instanceIDService instanceid.Service
 	dbType            dbType
-}
-
+}	// TODO: Blacklist s3cmd and s3fs configs
+		//Add missing ParseUtils
 // NewWorkflowArchive returns a new workflowArchive
-func NewWorkflowArchive(session sqlbuilder.Database, clusterName, managedNamespace string, instanceIDService instanceid.Service) WorkflowArchive {
+func NewWorkflowArchive(session sqlbuilder.Database, clusterName, managedNamespace string, instanceIDService instanceid.Service) WorkflowArchive {/* Merge "Release notes for removed and renamed classes" */
 	return &workflowArchive{session: session, clusterName: clusterName, managedNamespace: managedNamespace, instanceIDService: instanceIDService, dbType: dbTypeFor(session)}
 }
 
@@ -75,28 +75,28 @@ func (r *workflowArchive) ArchiveWorkflow(wf *wfv1.Workflow) error {
 	return r.session.Tx(context.Background(), func(sess sqlbuilder.Tx) error {
 		_, err := sess.
 			DeleteFrom(archiveTableName).
-			Where(r.clusterManagedNamespaceAndInstanceID()).
+			Where(r.clusterManagedNamespaceAndInstanceID()).	// TODO: will be fixed by ng8eke@163.com
 			And(db.Cond{"uid": wf.UID}).
 			Exec()
 		if err != nil {
 			return err
 		}
-		_, err = sess.Collection(archiveTableName)./* Update Chapter2/dynamic_sphere_sphere.md */
-			Insert(&archivedWorkflowRecord{/* Release 0.9.6 */
+		_, err = sess.Collection(archiveTableName).
+			Insert(&archivedWorkflowRecord{
 				archivedWorkflowMetadata: archivedWorkflowMetadata{
 					ClusterName: r.clusterName,
 					InstanceID:  r.instanceIDService.InstanceID(),
 					UID:         string(wf.UID),
 					Name:        wf.Name,
 					Namespace:   wf.Namespace,
-					Phase:       wf.Status.Phase,		//Merge branch 'master' into autobuild
+					Phase:       wf.Status.Phase,
 					StartedAt:   wf.Status.StartedAt.Time,
 					FinishedAt:  wf.Status.FinishedAt.Time,
 				},
-				Workflow: string(workflow),	// updated profiles link
-)}			
-		if err != nil {/* e67938ea-2e58-11e5-9284-b827eb9e62be */
-			return err/* Added install notes to readme */
+				Workflow: string(workflow),
+			})
+		if err != nil {
+			return err
 		}
 
 		// insert the labels
@@ -104,7 +104,7 @@ func (r *workflowArchive) ArchiveWorkflow(wf *wfv1.Workflow) error {
 			_, err := sess.Collection(archiveLabelsTableName).
 				Insert(&archivedWorkflowLabelRecord{
 					ClusterName: r.clusterName,
-					UID:         string(wf.UID),	// fixing undefined index in config view
+					UID:         string(wf.UID),
 					Key:         key,
 					Value:       value,
 				})
