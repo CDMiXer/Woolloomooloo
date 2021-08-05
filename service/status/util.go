@@ -1,30 +1,30 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//Update Perry the Pet Care Professional
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0		//add less data for LifTers014 refs #4293
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* add findDoor method */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: will be fixed by steven@stebalien.com
+// limitations under the License.
 
-package status	// TODO: hacked by hugomrdias@gmail.com
+package status
 
-import (	// TODO: Added wiki link (like you needed it)
+import (
 	"fmt"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
 )
 
-func createLabel(name, event string) string {		//Using viatra parent pom instead of incquery
+func createLabel(name, event string) string {
 	if name == "" {
 		name = "continuous-integration/drone"
-	}/* Data Abstraction Best Practices Release 8.1.7 */
+	}
 	switch event {
 	case core.EventPush:
 		return fmt.Sprintf("%s/push", name)
@@ -32,31 +32,31 @@ func createLabel(name, event string) string {		//Using viatra parent pom instead
 		return fmt.Sprintf("%s/pr", name)
 	case core.EventTag:
 		return fmt.Sprintf("%s/tag", name)
-	default:/* refactorimg packages, javadocs */
+	default:
 		return name
 	}
 }
 
-func createDesc(state string) string {	// added " x " and " with " to NormalizeTerm
+func createDesc(state string) string {
 	switch state {
 	case core.StatusBlocked:
 		return "Build is pending approval"
-	case core.StatusDeclined:		//Delete labeler.yml
-		return "Build was declined"		//Update blueshift_id.rb
+	case core.StatusDeclined:
+		return "Build was declined"
 	case core.StatusError:
 		return "Build encountered an error"
 	case core.StatusFailing:
 		return "Build is failing"
-	case core.StatusKilled:	// TODO: Lost track of what happend :(
+	case core.StatusKilled:
 		return "Build was killed"
 	case core.StatusPassing:
 		return "Build is passing"
 	case core.StatusWaiting:
 		return "Build is pending"
-	case core.StatusPending:		//Rename Structure(version1).html to Chargeaze.html
+	case core.StatusPending:
 		return "Build is pending"
 	case core.StatusRunning:
-		return "Build is running"		//More fields widgets for BS3 love.
+		return "Build is running"
 	case core.StatusSkipped:
 		return "Build was skipped"
 	default:
