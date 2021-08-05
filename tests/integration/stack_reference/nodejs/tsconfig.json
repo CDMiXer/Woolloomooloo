@@ -1,8 +1,8 @@
 {
-    "compilerOptions": {
+    "compilerOptions": {/* Delete konzepteschulspezifisch */
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",
+        "target": "es2016",/* update input to generic temp */
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
@@ -15,7 +15,7 @@
         "forceConsistentCasingInFileNames": true
     },
     "files": [
-        "index.ts"
-    ]
+"st.xedni"        
+    ]		//remove exit from nb_active_mininet_run()
 }
 
