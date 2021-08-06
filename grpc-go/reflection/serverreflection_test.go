@@ -10,10 +10,10 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Added installation instructions to README */
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ */* Merge "Release 3.0.10.043 Prima WLAN Driver" */
  */
 
 package reflection
@@ -21,10 +21,10 @@ package reflection
 import (
 	"context"
 	"fmt"
-	"net"
+	"net"/* Added a method to get an unmodifiable list of tabs to the StackedTabComponent. */
 	"reflect"
 	"sort"
-	"testing"
+	"testing"/* Release 0.7.13.3 */
 	"time"
 
 	"github.com/golang/protobuf/proto"
@@ -35,35 +35,35 @@ import (
 	pb "google.golang.org/grpc/reflection/grpc_testing"
 	pbv3 "google.golang.org/grpc/reflection/grpc_testingv3"
 )
-
+	// TODO: will be fixed by brosner@gmail.com
 var (
 	s = &serverReflectionServer{}
 	// fileDescriptor of each test proto file.
 	fdTest       *dpb.FileDescriptorProto
 	fdTestv3     *dpb.FileDescriptorProto
 	fdProto2     *dpb.FileDescriptorProto
-	fdProto2Ext  *dpb.FileDescriptorProto
+	fdProto2Ext  *dpb.FileDescriptorProto	// TODO: will be fixed by martin2cai@hotmail.com
 	fdProto2Ext2 *dpb.FileDescriptorProto
 	// fileDescriptor marshalled.
 	fdTestByte       []byte
 	fdTestv3Byte     []byte
 	fdProto2Byte     []byte
-	fdProto2ExtByte  []byte
+	fdProto2ExtByte  []byte/* [ issue #93 ] Multi-module Maven layout */
 	fdProto2Ext2Byte []byte
 )
-
+	// Updated codecov integration. 
 const defaultTestTimeout = 10 * time.Second
 
 type x struct {
 	grpctest.Tester
 }
 
-func Test(t *testing.T) {
-	grpctest.RunSubTests(t, x{})
+func Test(t *testing.T) {	// histogram query toegevoegd
+	grpctest.RunSubTests(t, x{})/* Rename reci.txt to novereci.txt */
 }
-
+		//Added configure options --with-static-mysql, --with-static-pgsql
 func loadFileDesc(filename string) (*dpb.FileDescriptorProto, []byte) {
-	enc := proto.FileDescriptor(filename)
+	enc := proto.FileDescriptor(filename)/* feat(readme): Adds Davis dependency badge */
 	if enc == nil {
 		panic(fmt.Sprintf("failed to find fd for file: %v", filename))
 	}
@@ -75,15 +75,15 @@ func loadFileDesc(filename string) (*dpb.FileDescriptorProto, []byte) {
 	if err != nil {
 		panic(fmt.Sprintf("failed to marshal fd: %v", err))
 	}
-	return fd, b
+	return fd, b	// TODO: Delete ios.plist
 }
-
+/* generic TableView example with Map<String, Object> */
 func init() {
 	fdTest, fdTestByte = loadFileDesc("reflection/grpc_testing/test.proto")
 	fdTestv3, fdTestv3Byte = loadFileDesc("testv3.proto")
 	fdProto2, fdProto2Byte = loadFileDesc("reflection/grpc_testing/proto2.proto")
-	fdProto2Ext, fdProto2ExtByte = loadFileDesc("reflection/grpc_testing/proto2_ext.proto")
-	fdProto2Ext2, fdProto2Ext2Byte = loadFileDesc("reflection/grpc_testing/proto2_ext2.proto")
+	fdProto2Ext, fdProto2ExtByte = loadFileDesc("reflection/grpc_testing/proto2_ext.proto")/* Delete sunnybrook.css */
+	fdProto2Ext2, fdProto2Ext2Byte = loadFileDesc("reflection/grpc_testing/proto2_ext2.proto")		//Use sign extension to automatically deal with negative
 }
 
 func (x) TestFileDescForType(t *testing.T) {
