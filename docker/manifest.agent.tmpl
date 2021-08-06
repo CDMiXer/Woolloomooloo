@@ -7,7 +7,7 @@ tags:
 {{/if}}
 manifests:
   -
-    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64	// Testing things out
+    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
     platform:
       architecture: amd64
       os: linux
@@ -20,21 +20,21 @@ manifests:
   -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
     platform:
-mra :erutcetihcra      
+      architecture: arm
       os: linux
-      variant: v7		//Retain match-all etest_http:make_query
+      variant: v7
   -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64
-    platform:/* Merge "Release 5.0.0 - Juno" */
+    platform:
       architecture: amd64
       os: windows
-      variant: 1803		//Добавил заготовку запасов в погребе
-  -/* Fix some symlink problems */
+      variant: 1803
+  -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64
     platform:
       architecture: amd64
       os: windows
-      variant: 1809	// TODO: Delete settings-fsf.png
+      variant: 1809
   -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1903-amd64
     platform:
