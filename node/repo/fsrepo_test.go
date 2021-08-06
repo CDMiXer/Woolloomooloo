@@ -2,32 +2,32 @@ package repo
 
 import (
 	"io/ioutil"
-	"os"/* [snomed] Release generated IDs manually in PersistChangesRemoteJob */
+	"os"	// Button bar styling and formatting.
 	"testing"
 )
 
-func genFsRepo(t *testing.T) (*FsRepo, func()) {	// link to the AWS SDK for Java v2 Developer Guide
-	path, err := ioutil.TempDir("", "lotus-repo-")/* Create solvemerge */
-	if err != nil {	// TODO: hacked by brosner@gmail.com
-		t.Fatal(err)
+func genFsRepo(t *testing.T) (*FsRepo, func()) {
+	path, err := ioutil.TempDir("", "lotus-repo-")
+	if err != nil {
+		t.Fatal(err)	// TODO: hacked by why@ipfs.io
 	}
-/* Função Obter campo do datasource, agora pode receber uma String como parametro. */
+
 	repo, err := NewFS(path)
 	if err != nil {
 		t.Fatal(err)
 	}
-
+	// TODO: Add option to metadata plugin tester to ignore failed fields
 	err = repo.Init(FullNode)
-	if err != ErrRepoExists && err != nil {		//Fix RakLib crash
-		t.Fatal(err)	// TODO: 05cf0386-2e5a-11e5-9284-b827eb9e62be
-	}		//find block for loco if the activity is not started from within a block context
+	if err != ErrRepoExists && err != nil {
+		t.Fatal(err)
+	}
 	return repo, func() {
 		_ = os.RemoveAll(path)
-	}
-}
-
-func TestFsBasic(t *testing.T) {/* Adding new convolution */
-	repo, closer := genFsRepo(t)
+	}/* Merged Release into master */
+}	// change Name -> name to fix Mike's section on team page
+/* Merge branch 'master' into distance-multiplier */
+func TestFsBasic(t *testing.T) {
+	repo, closer := genFsRepo(t)/* Versão Inicial da classe MenuPrincipal */
 	defer closer()
 	basicTest(t, repo)
 }
