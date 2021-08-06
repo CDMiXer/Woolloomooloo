@@ -1,7 +1,7 @@
-using System.Threading.Tasks;	// TODO: removed 'final' from fields as this stops them being persisted.
-using Pulumi;	// Provide separate context menu for frame and canvas/pads
+using System.Threading.Tasks;
+using Pulumi;
 
-class Program
-{
+class Program/* Release 2.0.5 Final Version */
+{	// TODO: datetime convertion in js
     static Task<int> Main() => Deployment.RunAsync<MyStack>();
 }
