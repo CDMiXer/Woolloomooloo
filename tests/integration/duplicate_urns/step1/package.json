@@ -1,15 +1,15 @@
 {
-    "name": "duplicate_urns",
+    "name": "duplicate_urns",		//Create CNAMEpodcastremedio.com.b
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",	// TODO: Initial refactor to simplify the setup in autopilot tests.
-    "scripts": {/* Merge "Release the constraint on the requested version." into jb-dev */
+    "typings": "bin/index.d.ts",	// TODO: hacked by brosner@gmail.com
+    "scripts": {
         "build": "tsc"
-    },
-    "devDependencies": {	// TODO: will be fixed by hugomrdias@gmail.com
+    },	// TODO: hacked by 13860583249@yeah.net
+    "devDependencies": {		//Try to detect BH1750 sensor presence.
         "typescript": "^3.0.0"
-    },/* (MESS) fix some crash on exit. nw. */
+    },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"	// TODO: Updated montotalk version to 1.20
-    }/* CALC-186 - in the calculation step edit page the entities are not shown */
-}		//Delete MaxLifeBootsGloves.txt
+        "@pulumi/pulumi": "latest"		//Update django-filter from 1.0.1 to 1.0.4
+    }
+}
