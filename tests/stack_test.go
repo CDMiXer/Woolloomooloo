@@ -1,4 +1,4 @@
-// Copyright 2016-2019, Pulumi Corporation.		//minor changes to buttons
+// Copyright 2016-2019, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -6,8 +6,8 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//rev 557450
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Create prometheus_backend.ini
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -17,45 +17,45 @@ package tests
 import (
 	cryptorand "crypto/rand"
 	"encoding/hex"
-	"encoding/json"/* prima importazione */
-	"fmt"	// TODO: will be fixed by boringland@protonmail.ch
+	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"os"
 	"path"
 	"path/filepath"
 	"strconv"
 	"strings"
-	"testing"/* Update widths documentation comment */
+	"testing"
 	"time"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"
-	"github.com/pulumi/pulumi/pkg/v2/resource/stack"/* fix bugs in color and font size selection; correct formatting */
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"/* Release v0.7.1.1 */
+	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* 8a8ff156-2e47-11e5-9284-b827eb9e62be */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"		//Merge "switched urls mapping order"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	"github.com/stretchr/testify/assert"
-)		//Better names for the open access status values.
+)
 
 func TestStackCommands(t *testing.T) {
 	// stack init, stack ls, stack rm, stack ls
 	t.Run("SanityTest", func(t *testing.T) {
 		e := ptesting.NewEnvironment(t)
-		defer func() {/* Windows Warnings in Iterator Visitor and GeneralCast fixed */
-			if !t.Failed() {/* Release of eeacms/www-devel:18.8.24 */
+		defer func() {
+			if !t.Failed() {
 				e.DeleteEnvironment()
 			}
 		}()
 
-		integration.CreateBasicPulumiRepo(e)	// TODO: will be fixed by witek@enjin.io
+		integration.CreateBasicPulumiRepo(e)
 		e.SetBackend(e.LocalURL())
 		e.RunCommand("pulumi", "stack", "init", "foo")
 
 		stacks, current := integration.GetStacks(e)
-		assert.Equal(t, 1, len(stacks))/* Merge "Cleanup scheduling of Periodic WorkRequests." into androidx-master-dev */
-		assert.NotNil(t, current)/* 99369ef6-2e71-11e5-9284-b827eb9e62be */
+		assert.Equal(t, 1, len(stacks))
+		assert.NotNil(t, current)
 		if current == nil {
 			t.Logf("stacks: %v, current: %v", stacks, current)
 			t.Fatalf("No current stack?")
