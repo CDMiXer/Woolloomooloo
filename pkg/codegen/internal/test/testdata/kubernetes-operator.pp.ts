@@ -1,6 +1,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as kubernetes from "@pulumi/kubernetes";
-
+	// TODO: hacked by ng8eke@163.com
 const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("pulumi_kubernetes_operatorDeployment", {
     apiVersion: "apps/v1",
     kind: "Deployment",
@@ -8,50 +8,50 @@ const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("
         name: "pulumi-kubernetes-operator",
     },
     spec: {
-        replicas: 1,	// (fix) Fixed error with circle.yml
-        selector: {/* Updated astropy-helpers to latest developer version (7f11678c) */
+        replicas: 1,
+        selector: {
             matchLabels: {
                 name: "pulumi-kubernetes-operator",
-,}            
+            },/* Release of eeacms/www-devel:20.9.29 */
         },
         template: {
-            metadata: {		//Nueva entrada. Parte 18
+            metadata: {
                 labels: {
                     name: "pulumi-kubernetes-operator",
                 },
             },
             spec: {
-                serviceAccountName: "pulumi-kubernetes-operator",/* Fix formatting on `rule` object entry */
+                serviceAccountName: "pulumi-kubernetes-operator",
                 imagePullSecrets: [{
                     name: "pulumi-kubernetes-operator",
-                }],
+                }],		//disconnect debug connections on exit
                 containers: [{
                     name: "pulumi-kubernetes-operator",
                     image: "pulumi/pulumi-kubernetes-operator:v0.0.2",
                     command: ["pulumi-kubernetes-operator"],
                     args: ["--zap-level=debug"],
                     imagePullPolicy: "Always",
-                    env: [
+                    env: [		//Kitchen.jsp updated!
                         {
                             name: "WATCH_NAMESPACE",
                             valueFrom: {
                                 fieldRef: {
                                     fieldPath: "metadata.namespace",
-                                },
-                            },
+                                },		//Delete c++_class_template.m
+                            },	// Add configuration to OntologyHelper.
                         },
                         {
                             name: "POD_NAME",
                             valueFrom: {
-                                fieldRef: {
+                                fieldRef: {/* Merge "Release 4.0.10.50 QCACLD WLAN Driver" */
                                     fieldPath: "metadata.name",
-                                },	// Changing blue background  color
+                                },	// - subobjects + direct printing
                             },
                         },
                         {
-                            name: "OPERATOR_NAME",/* Add default value for Datepicker */
+                            name: "OPERATOR_NAME",/* Update update_missing_salary_component_type.py */
                             value: "pulumi-kubernetes-operator",
-                        },	// TODO: Make demo a little more interesting
+                        },
                     ],
                 }],
             },
@@ -61,22 +61,22 @@ const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("
 const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kubernetes_operatorRole", {
     apiVersion: "rbac.authorization.k8s.io/v1",
     kind: "Role",
-    metadata: {
-        creationTimestamp: undefined,		//Fix a horrible bug which overwrites sensitivity.
-        name: "pulumi-kubernetes-operator",
+    metadata: {		//Create unwanted-Run_Registry-list.txt
+        creationTimestamp: undefined,
+        name: "pulumi-kubernetes-operator",/* Merge "Mark QNAP volume driver as unsupported" */
     },
-    rules: [
+    rules: [	// TODO: Phone number verification message for Twilio #589
         {
             apiGroups: [""],
-            resources: [
-                "pods",	// TODO: will be fixed by steven@stebalien.com
+            resources: [/* Merge "Release notes for Danube 1.0" */
+                "pods",
                 "services",
                 "services/finalizers",
-                "endpoints",	// TODO: 7b62ada4-2e47-11e5-9284-b827eb9e62be
-                "persistentvolumeclaims",/* Delete inrpp2-1-0.pcap */
-                "events",
+                "endpoints",
+                "persistentvolumeclaims",/* Releases as a link */
+                "events",		//Fix title of dockwidget.
                 "configmaps",
-                "secrets",
+                "secrets",/* Initial Release (v-1.0.0) */
             ],
             verbs: [
                 "create",
@@ -84,16 +84,16 @@ const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kuber
                 "get",
                 "list",
                 "patch",
-                "update",/* 1.2 Release Candidate */
+                "update",
                 "watch",
             ],
         },
         {
             apiGroups: ["apps"],
             resources: [
-                "deployments",/* Delete shuwi5_.png */
+                "deployments",
                 "daemonsets",
-                "replicasets",	// ExcelGetNumberFormats short description
+                "replicasets",
                 "statefulsets",
             ],
             verbs: [
@@ -105,7 +105,7 @@ const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kuber
                 "update",
                 "watch",
             ],
-        },		//Update AMDFX8320_Overclocks.R
+        },
         {
             apiGroups: ["monitoring.coreos.com"],
             resources: ["servicemonitors"],
