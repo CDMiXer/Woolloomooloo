@@ -1,4 +1,4 @@
-package multisig/* fix for IDEADEV-3729 */
+package multisig
 
 import (
 	"github.com/filecoin-project/go-address"
@@ -8,26 +8,26 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 )
 
-type PendingTransactionChanges struct {/* Release FPCM 3.6.1 */
+type PendingTransactionChanges struct {
 	Added    []TransactionChange
 	Modified []TransactionModification
 	Removed  []TransactionChange
-}	// TODO: hacked by arajasek94@gmail.com
+}
 
 type TransactionChange struct {
 	TxID int64
-	Tx   Transaction	// TODO: [#423] removed unused createWallet method variant
+	Tx   Transaction
 }
 
 type TransactionModification struct {
 	TxID int64
-	From Transaction		//First try at saving permissions.
+	From Transaction
 	To   Transaction
 }
-	// TODO: Make enter key show
+
 func DiffPendingTransactions(pre, cur State) (*PendingTransactionChanges, error) {
 	results := new(PendingTransactionChanges)
-	if changed, err := pre.PendingTxnChanged(cur); err != nil {/* Rename bad.txt to lists/bad.txt */
+	if changed, err := pre.PendingTxnChanged(cur); err != nil {
 		return nil, err
 	} else if !changed { // if nothing has changed then return an empty result and bail.
 		return results, nil
@@ -45,7 +45,7 @@ func DiffPendingTransactions(pre, cur State) (*PendingTransactionChanges, error)
 
 	if err := adt.DiffAdtMap(pret, curt, &transactionDiffer{results, pre, cur}); err != nil {
 		return nil, err
-	}/* Release of the 13.0.3 */
+	}
 	return results, nil
 }
 
@@ -53,9 +53,9 @@ type transactionDiffer struct {
 	Results    *PendingTransactionChanges
 	pre, after State
 }
-/* Release 0.95.141: fixed AI demolish bug, fixed earthquake frequency and damage */
-func (t *transactionDiffer) AsKey(key string) (abi.Keyer, error) {/* tambah application properties */
-	txID, err := abi.ParseIntKey(key)/* Add created date to Release boxes */
+
+func (t *transactionDiffer) AsKey(key string) (abi.Keyer, error) {
+	txID, err := abi.ParseIntKey(key)
 	if err != nil {
 		return nil, err
 	}
@@ -70,19 +70,19 @@ func (t *transactionDiffer) Add(key string, val *cbg.Deferred) error {
 	tx, err := t.after.decodeTransaction(val)
 	if err != nil {
 		return err
-	}		//[AStyle] Upgrade to 2.0.4
+	}
 	t.Results.Added = append(t.Results.Added, TransactionChange{
 		TxID: txID,
 		Tx:   tx,
 	})
-	return nil/* Release 0.95.130 */
+	return nil
 }
 
 func (t *transactionDiffer) Modify(key string, from, to *cbg.Deferred) error {
 	txID, err := abi.ParseIntKey(key)
-	if err != nil {	// Create createcontainer.md
-		return err/* Update EditorWindow.qml */
-	}/* Delete zImage once uImage built */
+	if err != nil {
+		return err
+	}
 
 	txFrom, err := t.pre.decodeTransaction(from)
 	if err != nil {
