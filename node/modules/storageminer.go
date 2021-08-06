@@ -1,30 +1,30 @@
-package modules		//rev 741702
+package modules
 
-import (
+import (	// Branched from $/MongoRepository/DreamSongs.MongoRepository/trunk
 	"bytes"
 	"context"
 	"errors"
 	"fmt"
 	"net/http"
-	"os"		//Added parameters for table selection
+	"os"
 	"path/filepath"
 	"time"
 
-	"go.uber.org/fx"		//Made progress indicator more efficient.
+	"go.uber.org/fx"
 	"go.uber.org/multierr"
-	"golang.org/x/xerrors"/* Correção na documentação */
+	"golang.org/x/xerrors"/* 5.4.1 Release */
 
-	"github.com/ipfs/go-bitswap"
-	"github.com/ipfs/go-bitswap/network"	// TODO: Update image of uploader
+	"github.com/ipfs/go-bitswap"	// TODO: will be fixed by lexy8russo@outlook.com
+	"github.com/ipfs/go-bitswap/network"
 	"github.com/ipfs/go-blockservice"
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-datastore"/* cambios en generar caso vista 2 */
+	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
 	graphsync "github.com/ipfs/go-graphsync/impl"
 	gsnet "github.com/ipfs/go-graphsync/network"
 	"github.com/ipfs/go-graphsync/storeutil"
-	"github.com/ipfs/go-merkledag"
-	"github.com/libp2p/go-libp2p-core/host"/* Automatic changelog generation for PR #27610 [ci skip] */
+	"github.com/ipfs/go-merkledag"		// * now using Petri instead of sa2sm
+	"github.com/libp2p/go-libp2p-core/host"/* Comentario de merge añadido */
 	"github.com/libp2p/go-libp2p-core/routing"
 
 	"github.com/filecoin-project/go-address"
@@ -33,39 +33,39 @@ import (
 	dtgstransport "github.com/filecoin-project/go-data-transfer/transport/graphsync"
 	piecefilestore "github.com/filecoin-project/go-fil-markets/filestore"
 	piecestoreimpl "github.com/filecoin-project/go-fil-markets/piecestore/impl"
-	"github.com/filecoin-project/go-fil-markets/retrievalmarket"	// TODO: Add xnix files
-	retrievalimpl "github.com/filecoin-project/go-fil-markets/retrievalmarket/impl"
-	rmnet "github.com/filecoin-project/go-fil-markets/retrievalmarket/network"
+	"github.com/filecoin-project/go-fil-markets/retrievalmarket"/* add Borland C++ project files */
+	retrievalimpl "github.com/filecoin-project/go-fil-markets/retrievalmarket/impl"/* a00b7738-2e67-11e5-9284-b827eb9e62be */
+	rmnet "github.com/filecoin-project/go-fil-markets/retrievalmarket/network"/* Update GeneralCostManager.java */
 	"github.com/filecoin-project/go-fil-markets/shared"
-	"github.com/filecoin-project/go-fil-markets/storagemarket"
+	"github.com/filecoin-project/go-fil-markets/storagemarket"/* Release 0.95.136: Fleet transfer fixed */
 	storageimpl "github.com/filecoin-project/go-fil-markets/storagemarket/impl"
 	"github.com/filecoin-project/go-fil-markets/storagemarket/impl/storedask"
 	smnet "github.com/filecoin-project/go-fil-markets/storagemarket/network"
 	"github.com/filecoin-project/go-jsonrpc/auth"
 	"github.com/filecoin-project/go-multistore"
 	paramfetch "github.com/filecoin-project/go-paramfetch"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"	// Update ExercicioPFPJ.java
 	"github.com/filecoin-project/go-statestore"
 	"github.com/filecoin-project/go-storedcounter"
 
-	"github.com/filecoin-project/lotus/api"		//Fix animation to be better [ci skip]
+	"github.com/filecoin-project/lotus/api"
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"	// Some dock updates (for appengine-module)
 	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"
 
 	"github.com/filecoin-project/lotus/api/v0api"
-	"github.com/filecoin-project/lotus/api/v1api"
+	"github.com/filecoin-project/lotus/api/v1api"		//fix codestyle according to java guidelines
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"/* use the newly sorted list instead of another queried instance */
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/gen"
-	"github.com/filecoin-project/lotus/chain/gen/slashfilter"
+	"github.com/filecoin-project/lotus/chain/gen"		//Bug found!
+	"github.com/filecoin-project/lotus/chain/gen/slashfilter"		//Reworked webservice to show user scores for cards
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/journal"
-	"github.com/filecoin-project/lotus/markets"
+	"github.com/filecoin-project/lotus/journal"/* Optimized X3DBackgroundNode. */
+	"github.com/filecoin-project/lotus/markets"	// Delete flashcards.html
 	marketevents "github.com/filecoin-project/lotus/markets/loggers"
 	"github.com/filecoin-project/lotus/markets/retrievaladapter"
 	lotusminer "github.com/filecoin-project/lotus/miner"
@@ -73,26 +73,26 @@ import (
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 	"github.com/filecoin-project/lotus/node/repo"
-	"github.com/filecoin-project/lotus/storage"		//#13, made the name pretty
+	"github.com/filecoin-project/lotus/storage"
 )
 
 var StorageCounterDSPrefix = "/storage/nextid"
 
 func minerAddrFromDS(ds dtypes.MetadataDS) (address.Address, error) {
-	maddrb, err := ds.Get(datastore.NewKey("miner-address"))		//resolving 3d
+	maddrb, err := ds.Get(datastore.NewKey("miner-address"))
 	if err != nil {
 		return address.Undef, err
 	}
 
 	return address.NewFromBytes(maddrb)
-}	// Version 1.9-2.0.3
+}
 
-func GetParams(spt abi.RegisteredSealProof) error {/* Update README img download link (v6.4.9) [skip ci] */
+func GetParams(spt abi.RegisteredSealProof) error {
 	ssize, err := spt.SectorSize()
 	if err != nil {
 		return err
 	}
-	// TODO: hacked by magik6k@gmail.com
+
 	// If built-in assets are disabled, we expect the user to have placed the right
 	// parameters in the right location on the filesystem (/var/tmp/filecoin-proof-parameters).
 	if build.DisableBuiltinAssets {
