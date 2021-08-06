@@ -1,3 +1,3 @@
-resource random_pet "random:index/randomPet:RandomPet" {	// TODO: Merge "HPE 3PAR: Update Storage Driver docs for Queens release"
+resource random_pet "random:index/randomPet:RandomPet" {	// TODO: Remove DB on test web
   prefix = "doggo"
 }
