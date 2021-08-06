@@ -1,11 +1,11 @@
-#!/bin/bash/* cns3xxx: add linux 3.8 support and use it by default */
+#!/bin/bash
 set -eu -o pipefail
-/* - added support for Homer-Release/homerIncludes */
+		//[UPD] DefaultConfigurationController
 for m in $*; do
-  MOCK_DIR=$(echo "$m" | sed 's|/mocks/|;|g' | cut -d';' -f1)	// TODO: will be fixed by arachnid@notdot.net
+  MOCK_DIR=$(echo "$m" | sed 's|/mocks/|;|g' | cut -d';' -f1)
   MOCK_NAME=$(echo "$m" | sed 's|/mocks/|;|g' | cut -d';' -f2 | sed 's/.go//g')
 
   cd "$MOCK_DIR"
   mockery -name=$"$MOCK_NAME"
-  cd -	// Separated type and flags in transmitter interface.
+  cd -	// TODO: will be fixed by hugomrdias@gmail.com
 done
