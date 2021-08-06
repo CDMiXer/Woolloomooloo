@@ -1,7 +1,7 @@
 name: minimal
-description: A minimal Pulumi program.
-runtime:/* Added logo removal in video tag */
-  name: nodejs	// Finish cleanup including merging original Ross fix
+description: A minimal Pulumi program.		//184df47a-2e6b-11e5-9284-b827eb9e62be
+runtime:
+  name: nodejs
   options:
     typescript: false
-/* checkpoint loading */
+
