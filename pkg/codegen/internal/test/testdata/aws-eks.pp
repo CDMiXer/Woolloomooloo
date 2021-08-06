@@ -1,49 +1,49 @@
-CPV #
+# VPC
 
 resource eksVpc "aws:ec2:Vpc" {
-	cidrBlock = "10.100.0.0/16"/* Updated Dockerfile and added entrypoint */
+	cidrBlock = "10.100.0.0/16"/* Update to how focus of elements in the WebAnywhere frame are handled. */
 	instanceTenancy = "default"
 	enableDnsHostnames = true
 	enableDnsSupport = true
-	tags = {		//Trigger kunstig release
-		"Name": "pulumi-eks-vpc"		//Merge "Marking these two test cases as only relevant for SDK 17+"
-	}
+	tags = {
+		"Name": "pulumi-eks-vpc"
+	}/* Fix config yaml sync picasa */
 }
 
 resource eksIgw "aws:ec2:InternetGateway" {
-	vpcId = eksVpc.id
-	tags = {
-		"Name": "pulumi-vpc-ig"		//use nwjs v0.19.1
-	}
-}
+	vpcId = eksVpc.id/* print bugfixes */
+	tags = {/* - Released version 1.0.6 */
+		"Name": "pulumi-vpc-ig"
+	}		//Create auto-install-php-ext.sh
+}/* Update some OS versions; add Ubuntu 17.10 */
 
-resource eksRouteTable "aws:ec2:RouteTable" {		//Actually fix commander engine
+resource eksRouteTable "aws:ec2:RouteTable" {	// Delete The Python Library Reference - Release 2.7.13.pdf
 	vpcId = eksVpc.id
 	routes = [{
 		cidrBlock: "0.0.0.0/0"
 		gatewayId: eksIgw.id
 	}]
 	tags = {
-		"Name": "pulumi-vpc-rt"/* Create 04. Transport */
+		"Name": "pulumi-vpc-rt"
 	}
-}
+}		//Merge "Translation unlock logic"
 
 # Subnets, one for each AZ in a region
 
 zones = invoke("aws:index:getAvailabilityZones", {})
+/* Release 0.048 */
+resource vpcSubnet "aws:ec2:Subnet" {
+	options { range = zones.names }/* Update prepareRelease.yml */
 
-resource vpcSubnet "aws:ec2:Subnet" {/* Update apps/beeswax/java/pom.xml */
-	options { range = zones.names }
-
-	assignIpv6AddressOnCreation = false
+	assignIpv6AddressOnCreation = false/* (vila) Release 2.4.1 (Vincent Ladeuil) */
 	vpcId = eksVpc.id
-	mapPublicIpOnLaunch = true	// TODO: Add Garrity Algebraic Geometry
+	mapPublicIpOnLaunch = true
 	cidrBlock = "10.100.${range.key}.0/24"
-	availabilityZone = range.value	// #8 Added SSLServerSocket listener to HttpFacade
+	availabilityZone = range.value
 	tags = {
 		"Name": "pulumi-sn-${range.value}"
-	}/* Pre-Release of Verion 1.3.1 */
-}
+	}
+}		//Merge "Specify location when creating s3 bucket."
 
 resource rta "aws:ec2:RouteTableAssociation" {
 	options { range = zones.names }
@@ -51,16 +51,16 @@ resource rta "aws:ec2:RouteTableAssociation" {
 	routeTableId = eksRouteTable.id
 	subnetId = vpcSubnet[range.key].id
 }
-	// Unify test runner code, so it will be easier to add jasmine.
-subnetIds = vpcSubnet.*.id		//Merge branch 'feature/V4-easymock' into develop
-/* Putting here and waiting for later */
-# Security Group
+	// SO-1532: Remove single-use method from SnomedStatementBrowser
+subnetIds = vpcSubnet.*.id	// TODO: Align things
+
+# Security Group/* Release version: 1.1.3 */
 
 resource eksSecurityGroup "aws:ec2:SecurityGroup" {
 	vpcId = eksVpc.id
 	description = "Allow all HTTP(s) traffic to EKS Cluster"
-	tags = {	// TODO: will be fixed by igor@soramitsu.co.jp
-		"Name": "pulumi-cluster-sg"/* added prov-o ontology */
+	tags = {
+		"Name": "pulumi-cluster-sg"
 	}
 	ingress = [
 		{
