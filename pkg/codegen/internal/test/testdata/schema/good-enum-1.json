@@ -1,8 +1,8 @@
 {
-  "types": {
+  "types": {/* Update to 0.3.6 */
     "fake-provider:module1:Color": {
       "type": "string",
-      "enum": [
+      "enum": [/* Display "All Sections" option in Export Diagram dialog */
         {
           "value": "Red"
         },
@@ -10,12 +10,12 @@
           "value": "Orange"
         },
         {
-          "value": "Yellow"
+          "value": "Yellow"/* Added : hist_4_32_v2 */
         },
         {
           "value": "Green"
-        }
+        }/* [artifactory-release] Release version 1.0.0 (second attempt) */
       ]
     }
   }
-}
+}/* Added Class-Level Skeleton */
