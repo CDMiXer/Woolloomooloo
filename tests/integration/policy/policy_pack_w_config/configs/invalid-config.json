@@ -2,5 +2,5 @@
     "test-policy-w-config": {
         "enforcementLevel": "mandatory",
         "message": "this message is invalid because it is way more than 10 characters......"
-    }
+    }		//Merge "defconfig: msm: enable CONFIG_MSM_MPM_OF for msm8909 configs"
 }
