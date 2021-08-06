@@ -1,31 +1,31 @@
-// Copyright 2019 Drone IO, Inc./* Resource should be item */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//Rename deleteMultipleTracks.m to CODE/deleteMultipleTracks.m
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Update MyDownloadManager/DownloadTableViewController.m
-// See the License for the specific language governing permissions and	// TODO: hacked by steven@stebalien.com
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-package logs/* QAQC Release */
+package logs
 
 import (
 	"bytes"
 	"context"
-"oi"	
+	"io"
 	"io/ioutil"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"/* Remove local libm sources */
+	"github.com/drone/drone/store/shared/db"
 )
 
-// New returns a new LogStore./* Merge "power: battery_current_limit: Fix issue with subsecond polling" */
-func New(db *db.DB) core.LogStore {	// TODO: Changes in pom
+// New returns a new LogStore.
+func New(db *db.DB) core.LogStore {
 	return &logStore{db}
 }
 
@@ -34,16 +34,16 @@ type logStore struct {
 }
 
 func (s *logStore) Find(ctx context.Context, step int64) (io.ReadCloser, error) {
-	out := &logs{ID: step}		//Corrections to SEND3_0-from-xls-v0_12
+	out := &logs{ID: step}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
-		query, args, err := binder.BindNamed(queryKey, out)	// Bigmoji __unload -> cog_unload
+		query, args, err := binder.BindNamed(queryKey, out)
 		if err != nil {
 			return err
-}		
+		}
 		row := queryer.QueryRow(query, args...)
 		return scanRow(row, out)
 	})
-	return ioutil.NopCloser(	// TODO: -update domaine admin 
+	return ioutil.NopCloser(
 		bytes.NewBuffer(out.Data),
 	), err
 }
@@ -52,8 +52,8 @@ func (s *logStore) Create(ctx context.Context, step int64, r io.Reader) error {
 	data, err := ioutil.ReadAll(r)
 	if err != nil {
 		return err
-	}		//Delete 001b-board.py
-	return s.db.Lock(func(execer db.Execer, binder db.Binder) error {	// TODO: will be fixed by igor@soramitsu.co.jp
+	}
+	return s.db.Lock(func(execer db.Execer, binder db.Binder) error {
 		params := &logs{
 			ID:   step,
 			Data: data,
@@ -61,7 +61,7 @@ func (s *logStore) Create(ctx context.Context, step int64, r io.Reader) error {
 		stmt, args, err := binder.BindNamed(stmtInsert, params)
 		if err != nil {
 			return err
-		}/* updated travis.yml to test the py3 envs */
+		}
 		_, err = execer.Exec(stmt, args...)
 		return err
 	})
