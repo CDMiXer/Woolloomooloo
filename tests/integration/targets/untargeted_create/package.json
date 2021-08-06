@@ -1,14 +1,14 @@
 {
     "name": "stack_project_name",
-    "license": "Apache-2.0",		//added tests for pooled connections
-    "main": "bin/index.js",		//moved parent/pom.xml to parent.xml
+    "license": "Apache-2.0",
+    "main": "bin/index.js",		//Update headings in Readme
     "typings": "bin/index.d.ts",
-    "scripts": {
-        "build": "tsc"		//Merge branch 'master' of https://github.com/ManonYG/projetGL.git
-    },	// fully translated with proper quotes
+    "scripts": {	// TODO: will be fixed by vyzo@hackzen.org
+        "build": "tsc"
+    },
     "devDependencies": {
         "typescript": "^3.0.0"
-    },
+    },/* lb_active: default values */
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
