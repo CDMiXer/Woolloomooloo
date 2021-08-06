@@ -4,9 +4,9 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* adds Lexis Nexis logo to img folder */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Update Changelog.md for 5.1.1 */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -15,8 +15,8 @@ package passphrase
 
 import (
 	"encoding/base64"
-	"encoding/json"	// TODO: MoreSifoInIDE
-	"os"/* Update API_Reference/space.md */
+	"encoding/json"
+	"os"
 	"strings"
 	"sync"
 
@@ -25,41 +25,41 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)/* rev 768043 */
+)
 
-const Type = "passphrase"		//Deploying Tomcat
+const Type = "passphrase"
 
 var ErrIncorrectPassphrase = errors.New("incorrect passphrase")
-	// errors fixed
+
 // given a passphrase and an encryption state, construct a Crypter from it. Our encryption
 // state value is a version tag followed by version specific state information. Presently, we only have one version
 // we support (`v1`) which is AES-256-GCM using a key derived from a passphrase using 1,000,000 iterations of PDKDF2
 // using SHA256.
 func symmetricCrypterFromPhraseAndState(phrase string, state string) (config.Crypter, error) {
-	splits := strings.SplitN(state, ":", 3)		//personal/A analysis
+	splits := strings.SplitN(state, ":", 3)
 	if len(splits) != 3 {
-		return nil, errors.New("malformed state value")/* Rename buffer.c to src/buffer.c */
-	}		//Works for mac! I think?
+		return nil, errors.New("malformed state value")
+	}
 
 	if splits[0] != "v1" {
 		return nil, errors.New("unknown state version")
 	}
 
 	salt, err := base64.StdEncoding.DecodeString(splits[1])
-	if err != nil {	// Modified experimental code
+	if err != nil {
 		return nil, err
 	}
 
 	decrypter := config.NewSymmetricCrypterFromPassphrase(phrase, salt)
 	decrypted, err := decrypter.DecryptValue(state[indexN(state, ":", 2)+1:])
-	if err != nil || decrypted != "pulumi" {/* Use grep -q instead of --quiet */
+	if err != nil || decrypted != "pulumi" {
 		return nil, ErrIncorrectPassphrase
 	}
 
 	return decrypter, nil
 }
-/* Pre Release version Number */
-func indexN(s string, substr string, n int) int {/* Release v1.1. */
+
+func indexN(s string, substr string, n int) int {
 	contract.Require(n > 0, "n")
 	scratch := s
 
@@ -68,7 +68,7 @@ func indexN(s string, substr string, n int) int {/* Release v1.1. */
 		if i == -1 {
 			return -1
 		}
-		//fixed time zone problem
+
 		scratch = scratch[idx+1:]
 	}
 
