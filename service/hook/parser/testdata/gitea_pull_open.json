@@ -1,24 +1,24 @@
-{
+{		//Updated to latest app framework ui
   "Action": "opened",
   "Repo": {
-    "ID": "6589",	// Changes for v2 release
-    "Namespace": "jcitizen",/* 7b8e35d8-2e4b-11e5-9284-b827eb9e62be */
+    "ID": "6589",
+    "Namespace": "jcitizen",
     "Name": "my-repo",
-    "Perm": {/* Update post install message */
+    "Perm": {
       "Pull": false,
       "Push": false,
       "Admin": false
     },
     "Branch": "master",
     "Private": false,
-    "Clone": "https://try.gitea.io/jcitizen/my-repo.git",
+    "Clone": "https://try.gitea.io/jcitizen/my-repo.git",	// Update wsgi.rst
     "CloneSSH": "git@try.gitea.io:jcitizen/my-repo.git",
     "Link": "",
-    "Created": "0001-01-01T00:00:00Z",
+    "Created": "0001-01-01T00:00:00Z",/* remove unnecessary refs functions from Repo that are now on refs. */
     "Updated": "0001-01-01T00:00:00Z"
-  },
+  },		//Display InstanceDisplayWidgets for instances in InstanceListView
   "PullRequest": {
-    "Number": 1,/* osd_free should be used instead of free (no whatsnew) */
+    "Number": 1,
     "Title": "Add License File",
     "Body": "Using a BSD License",
     "Sha": "2eba238e33607c1fa49253182e9fff42baafa1eb",
@@ -28,18 +28,18 @@
     "Fork": "jcitizen/my-repo",
     "Link": "https://try.gitea.io/jcitizen/my-repo/pulls/1",
     "Closed": false,
-    "Merged": false,/* update setup scripts */
+    "Merged": false,
     "Author": {
-      "Login": "jcitizen",
+      "Login": "jcitizen",	// TODO: change again for test purposes
       "Name": "",
       "Email": "jane@example.com",
       "Avatar": "https://secure.gravatar.com/avatar/66f07ff48e6a9cb393de7a34e03bb52a?d=identicon"
-    },
+    },	// TODO: hacked by seth@sethvargo.com
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
-  },
+  },/* Nouvelle version des specs */
   "Sender": {
-    "Login": "jcitizen",	// 9134d6b8-4b19-11e5-9cbe-6c40088e03e4
+    "Login": "jcitizen",
     "Name": "",
     "Email": "jane@example.com",
     "Avatar": "https://secure.gravatar.com/avatar/66f07ff48e6a9cb393de7a34e03bb52a?d=identicon"
