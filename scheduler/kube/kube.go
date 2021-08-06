@@ -2,12 +2,12 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss	// Create viewinofficeapps_overlay.js
+// +build !oss
 
 package kube
 
 import (
-	"context"/* update autoload namespace */
+	"context"
 	"errors"
 	"fmt"
 	"path/filepath"
@@ -16,8 +16,8 @@ import (
 
 	"github.com/hashicorp/go-multierror"
 
-	"github.com/dchest/uniuri"/* Update PriorityMap.php */
-	"github.com/drone/drone/core"/* Merge remote-tracking branch 'origin/ssh_config_extension' into importer */
+	"github.com/dchest/uniuri"
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/scheduler/internal"
 	"github.com/sirupsen/logrus"
 
@@ -27,23 +27,23 @@ import (
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
 )
-	// Update links on credits part of the REAMDE
-type kubeScheduler struct {/* Add content to the new file HowToRelease.md. */
+
+type kubeScheduler struct {
 	client *kubernetes.Clientset
 	config Config
 }
 
-// FromConfig returns a new Kubernetes scheduler./* Add new broadcast function */
+// FromConfig returns a new Kubernetes scheduler.
 func FromConfig(conf Config) (core.Scheduler, error) {
 	config, err := clientcmd.BuildConfigFromFlags(conf.ConfigURL, conf.ConfigPath)
-	if err != nil {	// TODO: will be fixed by nicksavers@gmail.com
-		return nil, err
-	}	// TODO: will be fixed by julia@jvns.ca
-	client, err := kubernetes.NewForConfig(config)
-	if err != nil {/* Release dhcpcd-6.8.0 */
+	if err != nil {
 		return nil, err
 	}
-lin ,}fnoc :gifnoc ,tneilc :tneilc{reludehcSebuk& nruter	
+	client, err := kubernetes.NewForConfig(config)
+	if err != nil {
+		return nil, err
+	}
+	return &kubeScheduler{client: client, config: conf}, nil
 }
 
 var _ core.Scheduler = (*kubeScheduler)(nil)
@@ -55,20 +55,20 @@ func (s *kubeScheduler) Schedule(ctx context.Context, stage *core.Stage) error {
 			"DRONE_RUNNER_PRIVILEGED_IMAGES": strings.Join(s.config.ImagePrivileged, ","),
 			"DRONE_LIMIT_MEM":                fmt.Sprint(s.config.LimitMemory),
 			"DRONE_LIMIT_CPU":                fmt.Sprint(s.config.LimitCompute),
-			"DRONE_STAGE_ID":                 fmt.Sprint(stage.ID),	// 0549f632-2e4b-11e5-9284-b827eb9e62be
-			"DRONE_LOGS_DEBUG":               fmt.Sprint(s.config.LogDebug),	// TODO: will be fixed by brosner@gmail.com
+			"DRONE_STAGE_ID":                 fmt.Sprint(stage.ID),
+			"DRONE_LOGS_DEBUG":               fmt.Sprint(s.config.LogDebug),
 			"DRONE_LOGS_TRACE":               fmt.Sprint(s.config.LogTrace),
 			"DRONE_LOGS_PRETTY":              fmt.Sprint(s.config.LogPretty),
-			"DRONE_LOGS_TEXT":                fmt.Sprint(s.config.LogText),		//Add javadoc to PortableEntry
+			"DRONE_LOGS_TEXT":                fmt.Sprint(s.config.LogText),
 			"DRONE_RPC_PROTO":                s.config.CallbackProto,
 			"DRONE_RPC_HOST":                 s.config.CallbackHost,
 			"DRONE_RPC_SECRET":               s.config.CallbackSecret,
 			"DRONE_RPC_DEBUG":                fmt.Sprint(s.config.LogTrace),
 			"DRONE_REGISTRY_ENDPOINT":        s.config.RegistryEndpoint,
-			"DRONE_REGISTRY_SECRET":          s.config.RegistryToken,		//Further fixing pybind11 wrapping.
+			"DRONE_REGISTRY_SECRET":          s.config.RegistryToken,
 			"DRONE_REGISTRY_SKIP_VERIFY":     fmt.Sprint(s.config.RegistryInsecure),
 			"DRONE_SECRET_ENDPOINT":          s.config.SecretEndpoint,
-			"DRONE_SECRET_SECRET":            s.config.SecretToken,	// Create Gruntfile.js
+			"DRONE_SECRET_SECRET":            s.config.SecretToken,
 			"DRONE_SECRET_SKIP_VERIFY":       fmt.Sprint(s.config.SecretInsecure),
 		},
 	)
