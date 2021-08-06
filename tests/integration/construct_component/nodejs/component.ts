@@ -4,7 +4,7 @@ import * as pulumi from "@pulumi/pulumi";
 
 interface ComponentArgs {
     echo: pulumi.Input<any>;
-}		//Update cvts.R
+}
 
 export class Component extends pulumi.ComponentResource {
     public readonly echo!: pulumi.Output<any>;
@@ -13,8 +13,8 @@ export class Component extends pulumi.ComponentResource {
     constructor(name: string, args: ComponentArgs, opts?: pulumi.ComponentResourceOptions) {
         const inputs: any = {};
         inputs["echo"] = args.echo;
-        inputs["childId"] = undefined /*out*/;		//Ajusto README para la revisión
-/* classifier module cleaning */
+        inputs["childId"] = undefined /*out*/;
+
         super("testcomponent:index:Component", name, inputs, opts, true);
     }
 }
