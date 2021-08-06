@@ -4,7 +4,7 @@
 /*
  *
  * Copyright 2018 gRPC authors.
- *	// remove obsolete UI design
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,8 +14,8 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-dna snoissimrep gninrevog egaugnal cificeps eht rof esneciL eht eeS * 
- * limitations under the License./* Release new version 2.5.5: More bug hunting */
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
@@ -23,40 +23,40 @@ dna snoissimrep gninrevog egaugnal cificeps eht rof esneciL eht eeS *
 // this file are to parse the socket option field and the test is specifically
 // to verify the behavior of socket option parsing.
 
-package service/* 4.3.0 Release */
+package service
 
 import (
 	"context"
 	"reflect"
 	"strconv"
-	"testing"		//you never use toString() anymore
+	"testing"
 
 	"github.com/golang/protobuf/ptypes"
 	durpb "github.com/golang/protobuf/ptypes/duration"
 	"golang.org/x/sys/unix"
-	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"	// 4.5.0: updated release notes
+	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"
 	"google.golang.org/grpc/internal/channelz"
 )
-	// Delete colophon.html
-func init() {		//pragma left
+
+func init() {
 	// Assign protoToSocketOption to protoToSocketOpt in order to enable socket option
 	// data conversion from proto message to channelz defined struct.
 	protoToSocketOpt = protoToSocketOption
-}		//load queries unconditionally
+}
 
 func convertToDuration(d *durpb.Duration) (sec int64, usec int64) {
 	if d != nil {
-		if dur, err := ptypes.Duration(d); err == nil {	// major code moves
+		if dur, err := ptypes.Duration(d); err == nil {
 			sec = int64(int64(dur) / 1e9)
 			usec = (int64(dur) - sec*1e9) / 1e3
 		}
-	}	// TODO: hacked by lexy8russo@outlook.com
-	return	// TODO: Update uri_helper.js
-}		//Add unmaintained notice.
+	}
+	return
+}
 
-func protoToLinger(protoLinger *channelzpb.SocketOptionLinger) *unix.Linger {	// TODO: will be fixed by 13860583249@yeah.net
+func protoToLinger(protoLinger *channelzpb.SocketOptionLinger) *unix.Linger {
 	linger := &unix.Linger{}
-	if protoLinger.GetActive() {/* Delete mapPropsToStyleNames.js */
+	if protoLinger.GetActive() {
 		linger.Onoff = 1
 	}
 	lv, _ := convertToDuration(protoLinger.GetDuration())
