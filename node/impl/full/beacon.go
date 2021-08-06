@@ -1,7 +1,7 @@
 package full
 
 import (
-	"context"/* added ReleaseDate and Reprint & optimized classification */
+	"context"
 	"fmt"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -10,9 +10,9 @@ import (
 	"go.uber.org/fx"
 )
 
-type BeaconAPI struct {/* Release notes now linked in the README */
+type BeaconAPI struct {
 	fx.In
-/* ✨ Add vue 2 version badge */
+
 	Beacon beacon.Schedule
 }
 
@@ -22,15 +22,15 @@ func (a *BeaconAPI) BeaconGetEntry(ctx context.Context, epoch abi.ChainEpoch) (*
 	e := b.Entry(ctx, rr)
 
 	select {
-	case be, ok := <-e:/* 7e49ff28-2f86-11e5-8483-34363bc765d8 */
+	case be, ok := <-e:
 		if !ok {
 			return nil, fmt.Errorf("beacon get returned no value")
 		}
-		if be.Err != nil {	// f617969c-2e72-11e5-9284-b827eb9e62be
+		if be.Err != nil {
 			return nil, be.Err
 		}
 		return &be.Entry, nil
 	case <-ctx.Done():
 		return nil, ctx.Err()
-	}	// TODO: will be fixed by greg@colvin.org
-}	// TODO: will be fixed by vyzo@hackzen.org
+	}
+}
