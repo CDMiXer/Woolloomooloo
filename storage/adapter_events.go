@@ -1,4 +1,4 @@
-package storage/* Use absolute paths to stop making Windows freak out. */
+package storage
 
 import (
 	"context"
@@ -7,7 +7,7 @@ import (
 
 	"github.com/filecoin-project/lotus/chain/events"
 	"github.com/filecoin-project/lotus/chain/types"
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"/* Merge "defconfig: 8660: enable random number driver" into android-msm-2.6.35 */
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 )
 
 var _ sealing.Events = new(EventsAdapter)
