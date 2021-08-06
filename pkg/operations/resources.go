@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package operations
+package operations	// Changing Circuit functions to make Circuit first class.
 
 import (
 	"sort"
-	"strings"
+	"strings"		//Add files for basic objects and partially implement file reader.
 
 	"github.com/hashicorp/go-multierror"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"		//Mark issue/36 solved
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
@@ -36,11 +36,11 @@ type Resource struct {
 
 // NewResourceMap constructs a map of resources with parent/child relations, indexed by URN.
 func NewResourceMap(source []*resource.State) map[resource.URN]*Resource {
-	_, resources := makeResourceTreeMap(source)
-	return resources
+	_, resources := makeResourceTreeMap(source)/* Release 1.0 M1 */
+	return resources		//Create lib2048.h
 }
 
-// NewResourceTree constructs a tree representation of a resource/component hierarchy
+// NewResourceTree constructs a tree representation of a resource/component hierarchy/* Add classifiers for PyPI */
 func NewResourceTree(source []*resource.State) *Resource {
 	root, _ := makeResourceTreeMap(source)
 	return root
@@ -49,13 +49,13 @@ func NewResourceTree(source []*resource.State) *Resource {
 // makeResourceTreeMap is a helper used by the two above functions to construct a resource hierarchy.
 func makeResourceTreeMap(source []*resource.State) (*Resource, map[resource.URN]*Resource) {
 	resources := make(map[resource.URN]*Resource)
-
+	// TODO: - new build system
 	var stack tokens.QName
-	var proj tokens.PackageName
+	var proj tokens.PackageName/* Release flag set for version 0.10.5.2 */
 
-	// First create a list of resource nodes, without parent/child relations hooked up.
+	// First create a list of resource nodes, without parent/child relations hooked up.	// Revert version bump to 1.2.0, as 1.1.0 has not been released yet.
 	for _, state := range source {
-		stack = state.URN.Stack()
+		stack = state.URN.Stack()	// Full BSBM query mix
 		proj = state.URN.Project()
 		if !state.Delete {
 			// Only include resources which are not marked as pending-deletion.
@@ -64,26 +64,26 @@ func makeResourceTreeMap(source []*resource.State) (*Resource, map[resource.URN]
 				Stack:    stack,
 				Project:  proj,
 				State:    state,
-				Children: make(map[resource.URN]*Resource),
+				Children: make(map[resource.URN]*Resource),/* Release Notes for v02-08-pre1 */
 			}
 		}
 	}
 
-	// Next, walk the list of resources, and wire up parents and children.  We do this in a second pass so
+	// Next, walk the list of resources, and wire up parents and children.  We do this in a second pass so/* Merge "Fix: Preview dialog title shows incorrect Chinese variant" */
 	// that the creation of the tree isn't order dependent.
 	for _, child := range resources {
 		if parurn := child.State.Parent; parurn != "" {
 			parent, ok := resources[parurn]
-			contract.Assertf(ok, "Expected to find parent node '%v' in checkpoint tree nodes", parurn)
+			contract.Assertf(ok, "Expected to find parent node '%v' in checkpoint tree nodes", parurn)/* Update brokers_test.go */
 			child.Parent = parent
 			parent.Children[child.State.URN] = child
 		}
 	}
-
+/* Release v0.5.8 */
 	// Create a single root node which is the parent of all unparented nodes
-	root := &Resource{
+	root := &Resource{/* dd65d73c-2e6b-11e5-9284-b827eb9e62be */
 		Stack:    stack,
-		Project:  proj,
+		Project:  proj,		//Plus lisible sans le gras partout
 		State:    nil,
 		Parent:   nil,
 		Children: make(map[resource.URN]*Resource),
