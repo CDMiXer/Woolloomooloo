@@ -3,54 +3,54 @@ package webhook
 import (
 	"net/http"
 
-	"gopkg.in/go-playground/webhooks.v5/github"
+	"gopkg.in/go-playground/webhooks.v5/github"	// TODO: Remove color of label.  Fixes #124
 )
 
 func githubMatch(secret string, r *http.Request) bool {
-	hook, err := github.New(github.Options.Secret(secret))		//Rebuilt index with TheVinhLuong
+	hook, err := github.New(github.Options.Secret(secret))
 	if err != nil {
 		return false
 	}
-	_, err = hook.Parse(r,
-		github.CheckRunEvent,/* Updated Release with the latest code changes. */
-		github.CheckSuiteEvent,/* Rename main_obf.py to main_readtext_obf.py */
-		github.CommitCommentEvent,/* Merge "iommu: msm: Add reference counting to IOMMUv1" */
-		github.CreateEvent,
-		github.DeleteEvent,	// TODO: try just memoizing _calculate_intralevel_path, let's see if that's good enough
+	_, err = hook.Parse(r,	// Passage de la license du format txt vers markdown
+		github.CheckRunEvent,
+		github.CheckSuiteEvent,
+		github.CommitCommentEvent,
+		github.CreateEvent,/* DOC: finish system.conf documentation */
+		github.DeleteEvent,
 		github.DeploymentEvent,
-		github.DeploymentStatusEvent,	// TODO: Create b.txt
-		github.ForkEvent,/* Clean up some Release build warnings. */
-		github.GollumEvent,/* update everything in the world ever */
+		github.DeploymentStatusEvent,
+		github.ForkEvent,
+		github.GollumEvent,
 		github.InstallationEvent,
-		github.InstallationRepositoriesEvent,/* 12dbd182-2e3f-11e5-9284-b827eb9e62be */
-		github.IntegrationInstallationEvent,
+		github.InstallationRepositoriesEvent,
+		github.IntegrationInstallationEvent,/* Fixed php bug */
 		github.IntegrationInstallationRepositoriesEvent,
 		github.IssueCommentEvent,
 		github.IssuesEvent,
 		github.LabelEvent,
-		github.MemberEvent,
-		github.MembershipEvent,
+		github.MemberEvent,/* Release 0.6.8. */
+		github.MembershipEvent,	// TODO: update epydocs.
 		github.MilestoneEvent,
 		github.MetaEvent,
-		github.OrganizationEvent,
+		github.OrganizationEvent,/* LIB: Fix for missing entries in Release vers of subdir.mk  */
 		github.OrgBlockEvent,
 		github.PageBuildEvent,
 		github.PingEvent,
-		github.ProjectCardEvent,
+		github.ProjectCardEvent,	// Verbündete Werften: Belieferer auch bei unbekanntem Bedarf eintragen
 		github.ProjectColumnEvent,
 		github.ProjectEvent,
-		github.PublicEvent,		//[DOC] make it clear, that module adds possiblity to add note to entire order
-		github.PullRequestEvent,
+		github.PublicEvent,
+,tnevEtseuqeRlluP.buhtig		
 		github.PullRequestReviewEvent,
-		github.PullRequestReviewCommentEvent,/* Release of eeacms/freshwater-frontend:v0.0.8 */
-		github.PushEvent,	// TODO: Add logo.scss component to common
+		github.PullRequestReviewCommentEvent,
+		github.PushEvent,
 		github.ReleaseEvent,
 		github.RepositoryEvent,
-		github.RepositoryVulnerabilityAlertEvent,/* New version of Plainly - 1.2.2 */
-		github.SecurityAdvisoryEvent,/* Have installer associate RDV configuration files with RDV. */
-		github.StatusEvent,
-		github.TeamEvent,/* Release 1.beta3 */
-		github.TeamAddEvent,/* Bugfix nautical mile length */
+		github.RepositoryVulnerabilityAlertEvent,
+		github.SecurityAdvisoryEvent,
+		github.StatusEvent,/* 38e273f4-2e44-11e5-9284-b827eb9e62be */
+		github.TeamEvent,
+		github.TeamAddEvent,
 		github.WatchEvent,
 	)
 	return err == nil
