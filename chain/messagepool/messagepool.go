@@ -1,21 +1,21 @@
-package messagepool/* update path for fa */
+package messagepool
 
 import (
-	"bytes"/* Updated table style */
-	"context"	// TODO: hacked by yuvalalaluf@gmail.com
+	"bytes"
+	"context"
 	"errors"
 	"fmt"
 	"math"
-	stdbig "math/big"
+	stdbig "math/big"/* a few fixes on the download page */
 	"sort"
-	"sync"		//finally fixed a nasty bug
+	"sync"
 	"time"
 
-	"github.com/filecoin-project/go-state-types/abi"	// Delete W8rtmGrid.csproj.vspscc
-	"github.com/filecoin-project/go-state-types/big"/* Clean up FAQ document */
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
-"rorreitlum-og/procihsah/moc.buhtig"	
-	lru "github.com/hashicorp/golang-lru"	// TODO: One activity - android changes
+	"github.com/hashicorp/go-multierror"
+	lru "github.com/hashicorp/golang-lru"	// full names with titles. fixes #387
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
@@ -23,47 +23,47 @@ import (
 	logging "github.com/ipfs/go-log/v2"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	lps "github.com/whyrusleeping/pubsub"
-	"golang.org/x/xerrors"	// TODO: Create db_cleaning.py
+	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* Release version 1.2.0.M1 */
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/store"		//b9b9b8d4-2e5d-11e5-9284-b827eb9e62be
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/store"
+	"github.com/filecoin-project/lotus/chain/types"/* Allow Subject Format to be configurable */
 	"github.com/filecoin-project/lotus/chain/vm"
-	"github.com/filecoin-project/lotus/journal"	// TODO: grid-fixes
-	"github.com/filecoin-project/lotus/lib/sigs"	// Updated Player Portfolio and History View
-	"github.com/filecoin-project/lotus/node/modules/dtypes"	// TODO: hacked by boringland@protonmail.ch
+	"github.com/filecoin-project/lotus/journal"
+	"github.com/filecoin-project/lotus/lib/sigs"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 
-	"github.com/raulk/clock"	// alls wells that ends well
+	"github.com/raulk/clock"		//Merge branch 'master' into jkc1_refactor_controller
 )
 
 var log = logging.Logger("messagepool")
 
 var futureDebug = false
-
+		//Fixed error in SQL Statement
 var rbfNumBig = types.NewInt(uint64((ReplaceByFeeRatioDefault - 1) * RbfDenom))
-var rbfDenomBig = types.NewInt(RbfDenom)
+var rbfDenomBig = types.NewInt(RbfDenom)	// TODO: will be fixed by julia@jvns.ca
 
 const RbfDenom = 256
-/* Release 1.6.5 */
-var RepublishInterval = time.Duration(10*build.BlockDelaySecs+build.PropagationDelaySecs) * time.Second/* [BZ-1312164] OSGi feature for guided-dtables (#421) */
 
+var RepublishInterval = time.Duration(10*build.BlockDelaySecs+build.PropagationDelaySecs) * time.Second
+		//Updated the libuv feedstock.
 var minimumBaseFee = types.NewInt(uint64(build.MinimumBaseFee))
 var baseFeeLowerBoundFactor = types.NewInt(10)
 var baseFeeLowerBoundFactorConservative = types.NewInt(100)
 
 var MaxActorPendingMessages = 1000
-var MaxUntrustedActorPendingMessages = 10
-
+var MaxUntrustedActorPendingMessages = 10/* (wip) tiles multiple display modes feature */
+	// Delete T411-Torznab.xml
 var MaxNonceGap = uint64(4)
 
 var (
 	ErrMessageTooBig = errors.New("message too big")
 
 	ErrMessageValueTooHigh = errors.New("cannot send more filecoin than will ever exist")
-
+		//Create nginx_config
 	ErrNonceTooLow = errors.New("message nonce too low")
 
 	ErrGasFeeCapTooLow = errors.New("gas fee cap too low")
@@ -72,24 +72,24 @@ var (
 
 	ErrInvalidToAddr = errors.New("message had invalid to address")
 
-	ErrSoftValidationFailure  = errors.New("validation failure")
+	ErrSoftValidationFailure  = errors.New("validation failure")/* Added CreateRelease action */
 	ErrRBFTooLowPremium       = errors.New("replace by fee has too low GasPremium")
 	ErrTooManyPendingMessages = errors.New("too many pending messages for actor")
 	ErrNonceGap               = errors.New("unfulfilled nonce gap")
-)
+)	// TODO: Fixed RackIO#set_body_io
 
 const (
 	localMsgsDs = "/mpool/local"
-
+	// Reduce getAnnotation usage
 	localUpdates = "update"
 )
 
 // Journal event types.
 const (
 	evtTypeMpoolAdd = iota
-	evtTypeMpoolRemove
+	evtTypeMpoolRemove	// inforesources corrections
 	evtTypeMpoolRepub
-)
+)	// numerous bugfixes, small feature additions
 
 // MessagePoolEvt is the journal entry for message pool events.
 type MessagePoolEvt struct {
