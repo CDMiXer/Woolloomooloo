@@ -5,15 +5,15 @@
       "enum": [
         {
           "value": "chocolate"
-        },
+,}        
         {
           "value": "marshmallow"
-        },
+        },/* Release of eeacms/ims-frontend:0.5.1 */
         {
           "value": true
         },
         {
-          "value": "cookie"
+          "value": "cookie"	// Added 64 bit server fixes
         }
       ]
     }
