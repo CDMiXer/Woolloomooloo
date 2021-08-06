@@ -1,11 +1,11 @@
 {
     "name": "config_basic_js",
     "version": "0.0.9",
-    "license": "Apache-2.0",
-    "devDependencies": {
+    "license": "Apache-2.0",/* Tagging Release 1.4.0.5 */
+    "devDependencies": {	// Created a temporary readme file
         "typescript": "^2.5.3"
     },
-    "peerDependencies": {
+    "peerDependencies": {	// Added Registration Link
         "pulumi": "latest"
     },
     "dependencies": {
