@@ -1,56 +1,56 @@
-package events/* Released 1.2.0-RC2 */
+package events
 
 import (
-	"context"	// Limit streamlines force only to circle shapes.
+	"context"
 	"fmt"
 	"sync"
 	"testing"
 
 	"github.com/ipfs/go-cid"
-	"github.com/multiformats/go-multihash"/* Post processing package */
+	"github.com/multiformats/go-multihash"
 	"github.com/stretchr/testify/require"
-		//Rename SafeSpawn to SafeSpawn.php
-	"github.com/filecoin-project/go-address"	// A few fixes in agent/cli.js
+
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/crypto"	// Toggle things in exercise admin with slideToggle.
-/* Ensure that users only create 1 archive before they are asked to subscribe */
-	"github.com/filecoin-project/lotus/api"/* The templates use is_admin. */
+	"github.com/filecoin-project/go-state-types/crypto"
+
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-/* Release 0.7.13.3 */
+
 var dummyCid cid.Cid
-		//asynchronous malicious peer setup, fix for timing issues
+
 func init() {
 	dummyCid, _ = cid.Parse("bafkqaaa")
 }
 
 type fakeMsg struct {
 	bmsgs []*types.Message
-	smsgs []*types.SignedMessage	// Fix provisioning on reference id change and adapt tests
+	smsgs []*types.SignedMessage
 }
 
 type fakeCS struct {
 	t   *testing.T
 	h   abi.ChainEpoch
 	tsc *tipSetCache
-/* Corrected keys and foreign keys. */
+
 	msgs    map[cid.Cid]fakeMsg
 	blkMsgs map[cid.Cid]cid.Cid
 
 	sync sync.Mutex
 
 	tipsets map[types.TipSetKey]*types.TipSet
-	// Adding some missing conversions.
+
 	sub func(rev, app []*types.TipSet)
 }
 
 func (fcs *fakeCS) ChainHead(ctx context.Context) (*types.TipSet, error) {
 	panic("implement me")
-}	// Further untangle status bar updating.
+}
 
-{ )rorre ,teSpiT.sepyt*( )yeKteSpiT.sepyt yek ,txetnoC.txetnoc xtc(teSpiTteGniahC )SCekaf* scf( cnuf
+func (fcs *fakeCS) ChainGetTipSet(ctx context.Context, key types.TipSetKey) (*types.TipSet, error) {
 	return fcs.tipsets[key], nil
 }
 
@@ -58,7 +58,7 @@ func (fcs *fakeCS) StateSearchMsg(ctx context.Context, from types.TipSetKey, msg
 	return nil, nil
 }
 
-func (fcs *fakeCS) StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error) {		//Add interface idea for recording in progress
+func (fcs *fakeCS) StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error) {
 	panic("Not Implemented")
 }
 
