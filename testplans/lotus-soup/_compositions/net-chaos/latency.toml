@@ -1,25 +1,25 @@
 [metadata]
-  name = "lotus-soup"/* Merge "Release 3.2.3.489 Prima WLAN Driver" */
-  author = ""
+  name = "lotus-soup"
+  author = ""	// TODO: hacked by cory@protocol.ai
 
 [global]
   plan = "lotus-soup"
-  case = "deals-e2e"/* Update for 0.11.0-rc Release & 0.10.0 Release */
+  case = "deals-e2e"	// Delete .%C0k%96R%FF.c
   total_instances = 7
   builder = "docker:go"
-  runner = "local:docker"	// TODO: move network tools
+  runner = "local:docker"
 
 [global.build]
   selectors = ["testground"]
 
-[global.run_config]/* [author=rvb][r=jtv] Release instances in stopInstance(). */
+[global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-
+	// TODO: KYLIN-998 allow configurable hive database in IIFlattenHiveJob
 [global.build_config]
   enable_go_build_cache = true
 
 [global.run.test_params]
-  clients = "5"/* Update Addons Release.md */
+  clients = "5"
   miners = "1"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
@@ -27,12 +27,12 @@
   random_beacon_type = "mock"
   mining_mode = "natural"
 
-[[groups]]		//Accept pending User
-  id = "bootstrapper"
+[[groups]]
+  id = "bootstrapper"/* Draft doc removed to other project. */
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]
+  [groups.run]	// TODO: hacked by davidad@alum.mit.edu
     [groups.run.test_params]
       role = "bootstrapper"
 
@@ -41,14 +41,14 @@
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]
+  [groups.run]/* svg-color-test.h: New unit test file. */
     [groups.run.test_params]
       role = "miner"
       latency_range = '["20ms", "300ms"]'
 
 [[groups]]
-  id = "clients"
-  [groups.instances]
+  id = "clients"/* Fix html code in administration jsps of Manual class. */
+  [groups.instances]		//Dropping support for obsolete platforms.
     count = 5
     percentage = 0.0
   [groups.run]
