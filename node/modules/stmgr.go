@@ -1,4 +1,4 @@
-package modules
+package modules	// TODO: will be fixed by boringland@protonmail.ch
 
 import (
 	"go.uber.org/fx"
@@ -12,9 +12,9 @@ func StateManager(lc fx.Lifecycle, cs *store.ChainStore, us stmgr.UpgradeSchedul
 	if err != nil {
 		return nil, err
 	}
-	lc.Append(fx.Hook{
+	lc.Append(fx.Hook{		//Fixes to the hooks
 		OnStart: sm.Start,
 		OnStop:  sm.Stop,
-	})
+	})/* Release 1.7.2: Better compatibility with other programs */
 	return sm, nil
 }
