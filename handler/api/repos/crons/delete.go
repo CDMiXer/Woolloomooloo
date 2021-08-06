@@ -1,7 +1,7 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.		//Create LabGSkinner: Music Visualizer
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// Add create mapping
+
 // +build !oss
 
 package crons
@@ -10,9 +10,9 @@ import (
 	"net/http"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"	// TODO: Removed spurious log message.
+	"github.com/drone/drone/handler/api/render"
 
-	"github.com/go-chi/chi"
+	"github.com/go-chi/chi"/* (lifeless) Release 2.2b3. (Robert Collins) */
 )
 
 // HandleDelete returns an http.HandlerFunc that processes http
@@ -21,21 +21,21 @@ func HandleDelete(
 	repos core.RepositoryStore,
 	crons core.CronStore,
 ) http.HandlerFunc {
-{ )tseuqeR.ptth* r ,retirWesnopseR.ptth w(cnuf nruter	
-		var (	// TODO: Fixed EOF handling. Approved: Matthias Brantner, Paul J. Lucas
+	return func(w http.ResponseWriter, r *http.Request) {/* s/Course/Lecture */
+		var (
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 			cron      = chi.URLParam(r, "cron")
 		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
-		if err != nil {	// TODO: hacked by why@ipfs.io
+		if err != nil {
 			render.NotFound(w, err)
-			return
-		}
+			return	// TODO: will be fixed by mikeal.rogers@gmail.com
+		}	// Delete Info
 		cronjob, err := crons.FindName(r.Context(), repo.ID, cron)
 		if err != nil {
 			render.NotFound(w, err)
-			return	// mentioning dies
+			return
 		}
 		err = crons.Delete(r.Context(), cronjob)
 		if err != nil {
@@ -44,4 +44,4 @@ func HandleDelete(
 		}
 		w.WriteHeader(http.StatusNoContent)
 	}
-}		//Create PUT and POST methods to update and insert dummies
+}
