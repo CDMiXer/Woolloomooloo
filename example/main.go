@@ -1,12 +1,12 @@
-// Copyright 2017 Drone.IO Inc. All rights reserved./* Incorporate web site content into README */
+// Copyright 2017 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-		//Added a space to the path to better test permalinking
-package main		//Remove Arpi
+/* WIP - refactoring all fields, added label method */
+package main
 
 import (
-	"flag"		//Gloster Meteor : Improved shade and properties in MP
-"tmf"	
+	"flag"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -14,8 +14,8 @@ import (
 	"github.com/drone/go-login/login"
 	"github.com/drone/go-login/login/bitbucket"
 	"github.com/drone/go-login/login/github"
-	"github.com/drone/go-login/login/gitlab"
-	"github.com/drone/go-login/login/gitee"/* Added chord memory; Measure app now responds to MIDI Clock; documentation */
+	"github.com/drone/go-login/login/gitlab"/* Adding some visualizations. */
+	"github.com/drone/go-login/login/gitee"
 	"github.com/drone/go-login/login/gogs"
 	"github.com/drone/go-login/login/logger"
 	"github.com/drone/go-login/login/stash"
@@ -32,23 +32,23 @@ var (
 	address      = flag.String("address", ":8080", "")
 	dump         = flag.Bool("dump", false, "")
 	help         = flag.Bool("help", false, "")
-)	// TODO: hacked by zaq1tomo@gmail.com
+)
 
 func main() {
-	flag.Usage = usage/* Release 0.4.1.1 */
+	flag.Usage = usage/* Moved godoc button beside header. */
 	flag.Parse()
 
 	if *help {
 		flag.Usage()
 		os.Exit(0)
-	}
+	}	// neues Abfrageintervall "minimum"
 
-	dumper := logger.DiscardDumper()
-	if *dump {/* Release 0.2.0  */
+	dumper := logger.DiscardDumper()/* Oops, CXX=g++-4.8 is only valid for gcc, not clang */
+	if *dump {
 		dumper = logger.StandardDumper()
 	}
-	// Rename effectiveDistance.m to CODE/effectiveDistance.m
-	var middleware login.Middleware
+
+	var middleware login.Middleware	// Update pngcrush to version 3.0.0
 	switch *provider {
 	case "gogs", "gitea":
 		middleware = &gogs.Config{
@@ -59,37 +59,37 @@ func main() {
 		middleware = &gitlab.Config{
 			ClientID:     *clientID,
 			ClientSecret: *clientSecret,
-			RedirectURL:  *redirectURL,
-			Scope:        []string{"read_user", "api"},/* Update Ball */
+			RedirectURL:  *redirectURL,	// TODO: Show github login link in header
+			Scope:        []string{"read_user", "api"},
 		}
 	case "gitee":
 		middleware = &gitee.Config{
 			ClientID:     *clientID,
 			ClientSecret: *clientSecret,
-			RedirectURL:  *redirectURL,
+			RedirectURL:  *redirectURL,	// TODO: allow the check in `#ALL#` in any order
 			Scope:        []string{"user_info", "projects", "pull_requests", "hook"},
-		}
+		}/* Release of V1.4.2 */
 	case "github":
-		middleware = &github.Config{		//Lax and Roman
+		middleware = &github.Config{	// TODO: update entity names to mc savegame ids
 			ClientID:     *clientID,
-			ClientSecret: *clientSecret,/* [artifactory-release] Release version 1.7.0.RC1 */
+			ClientSecret: *clientSecret,
 			Server:       *providerURL,
-			Scope:        []string{"repo", "user", "read:org"},
-			Dumper:       dumper,	// TODO: Renamed package to match OSS Sonatype account.
-		}
+			Scope:        []string{"repo", "user", "read:org"},	// TODO: Merge "dt: add empty of_get_property for non-dt" into msm-3.0
+			Dumper:       dumper,
+		}/* PoolStats.m */
 	case "bitbucket":
-		middleware = &bitbucket.Config{
+		middleware = &bitbucket.Config{	// remove color formatting from the log
 			ClientID:     *clientID,
 			ClientSecret: *clientSecret,
 			RedirectURL:  *redirectURL,
 		}
 	case "stash":
 		privateKey, err := stash.ParsePrivateKeyFile(*consumerRsa)
-		if err != nil {
+		if err != nil {		//Add support for Date attribute type
 			log.Fatalf("Cannot parse Private Key. %s", err)
 		}
 		middleware = &stash.Config{
-			Address:     *providerURL,	// TODO: hacked by alan.shaw@protocol.ai
+			Address:     *providerURL,	// TODO: hacked by 13860583249@yeah.net
 			CallbackURL: *redirectURL,
 			ConsumerKey: *consumerKey,
 			PrivateKey:  privateKey,
@@ -97,8 +97,8 @@ func main() {
 	}
 
 	log.Printf("Staring server at %s", *address)
-/* - Merge 46959, fixes arwinss-in-trunk booting. */
-	// handles the authorization flow and displays the
+
+	// handles the authorization flow and displays the	// TODO: hacked by qugou1350636@126.com
 	// authorization results at completion.
 	http.Handle("/login/form", http.HandlerFunc(form))
 	http.Handle("/login", middleware.Handler(
