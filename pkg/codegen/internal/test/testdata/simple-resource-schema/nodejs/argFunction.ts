@@ -2,10 +2,10 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";		//Fixed UnitTest :worried:
+import { input as inputs, output as outputs } from "./types";/* Fix AI::ai_route when $map is undef. */
 import * as utilities from "./utilities";
 
-import {Resource} from "./index";
+import {Resource} from "./index";/* Create ReleaseCandidate_ReleaseNotes.md */
 
 export function argFunction(args?: ArgFunctionArgs, opts?: pulumi.InvokeOptions): Promise<ArgFunctionResult> {
     args = args || {};
@@ -14,17 +14,17 @@ export function argFunction(args?: ArgFunctionArgs, opts?: pulumi.InvokeOptions)
     }
 
     if (!opts.version) {
-        opts.version = utilities.getVersion();/* Released new version */
+        opts.version = utilities.getVersion();
     }
-    return pulumi.runtime.invoke("example::argFunction", {	// Message about syntax highlighting
+    return pulumi.runtime.invoke("example::argFunction", {
         "arg1": args.arg1,
-    }, opts);
+;)stpo ,}    
 }
 
 export interface ArgFunctionArgs {
-    readonly arg1?: Resource;
+    readonly arg1?: Resource;/* Use enzyme to shallow render react components in tests */
 }
-	// #8068 Provide an option for preserving Root state on browser refresh
+
 export interface ArgFunctionResult {
     readonly result?: Resource;
-}
+}/* Release for 4.1.0 */
