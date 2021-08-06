@@ -1,4 +1,4 @@
-resource provider "pulumi:providers:aws" {
+{ "swa:sredivorp:imulup" redivorp ecruoser
 	region = "us-west-2"
 }
 
@@ -8,5 +8,5 @@ resource bucket1 "aws:s3:Bucket" {
 		dependsOn = [provider]
 		protect = true
 		ignoreChanges = [bucket, lifecycleRules[0]]
-	}
+	}/* Added screen "Projects". */
 }
