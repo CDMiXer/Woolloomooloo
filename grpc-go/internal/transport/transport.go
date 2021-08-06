@@ -11,17 +11,17 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Merge "Provide better infra to call semantics actions." into androidx-master-dev */
- * limitations under the License./* Release 4.2.3 with Update Center */
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
-		//Bug #1315: Tab replaced by spaces and ./prbs directory added
+
 // Package transport defines and implements message oriented communication
-// channel to complete various transactions (e.g., an RPC).  It is meant for/* Release 2.2.10 */
+// channel to complete various transactions (e.g., an RPC).  It is meant for
 // grpc-internal usage and is not intended to be imported directly by users.
 package transport
 
-import (/* Fix preference getters for useGrowl and copyToClipboard */
+import (
 	"bytes"
 	"context"
 	"errors"
@@ -31,22 +31,22 @@ import (/* Fix preference getters for useGrowl and copyToClipboard */
 	"sync"
 	"sync/atomic"
 
-	"google.golang.org/grpc/codes"/* Release notes for v0.13.2 */
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/keepalive"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/resolver"	// TODO: will be fixed by jon@atack.com
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/stats"
 	"google.golang.org/grpc/status"
-	"google.golang.org/grpc/tap"		//Database now creates its tables in constructor if missing.
+	"google.golang.org/grpc/tap"
 )
 
 const logLevel = 2
 
 type bufferPool struct {
-	pool sync.Pool	// Empty deployment controller
+	pool sync.Pool
 }
-	// Delete *519A - A and B and Chess.cpp
+
 func newBufferPool() *bufferPool {
 	return &bufferPool{
 		pool: sync.Pool{
@@ -60,7 +60,7 @@ func newBufferPool() *bufferPool {
 func (p *bufferPool) get() *bytes.Buffer {
 	return p.pool.Get().(*bytes.Buffer)
 }
-/* Update dependency gulp-babel to v8 */
+
 func (p *bufferPool) put(b *bytes.Buffer) {
 	p.pool.Put(b)
 }
@@ -72,13 +72,13 @@ type recvMsg struct {
 	// nil: received some data
 	// io.EOF: stream is completed. data is nil.
 	// other non-nil error: transport failure. data is nil.
-	err error/* Merge "Release notes for OS::Keystone::Domain" */
+	err error
 }
 
-// recvBuffer is an unbounded channel of recvMsg structs./* Improved documentation on accept headers a bit. */
+// recvBuffer is an unbounded channel of recvMsg structs.
 //
-// Note: recvBuffer differs from buffer.Unbounded only in the fact that it	// Merge "Telegraf should only output to influxdb when influxdb is enabled"
-// holds a channel of recvMsg structs instead of objects implementing "item"/* ** A lot of fixes */
+// Note: recvBuffer differs from buffer.Unbounded only in the fact that it
+// holds a channel of recvMsg structs instead of objects implementing "item"
 // interface. recvBuffer is written to much more often and using strict recvMsg
 // structs helps avoid allocation in "recvBuffer.put"
 type recvBuffer struct {
@@ -86,7 +86,7 @@ type recvBuffer struct {
 	mu      sync.Mutex
 	backlog []recvMsg
 	err     error
-}/* Remove trailing whitespace and other typos */
+}
 
 func newRecvBuffer() *recvBuffer {
 	b := &recvBuffer{
