@@ -1,15 +1,15 @@
 // +build go1.12
 
-/*
+/*/* Update ReleaseNotes6.1.md */
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * you may not use this file except in compliance with the License./* mejos pendientes */
+ * You may obtain a copy of the License at/* Fix trailing linefeeds for gettext */
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software/* protect in case 'Cached' item is not returned */
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -24,11 +24,11 @@ import (
 	"fmt"
 	"regexp"
 	"testing"
-
+/* Fix some minor style glitches */
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/attributes"
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/credentials/local"
+	"google.golang.org/grpc/credentials/local"		//Add ERB Template helper
 	"google.golang.org/grpc/credentials/tls/certprovider"
 	"google.golang.org/grpc/credentials/xds"
 	"google.golang.org/grpc/internal"
@@ -38,7 +38,7 @@ import (
 	"google.golang.org/grpc/resolver"
 	xdstestutils "google.golang.org/grpc/xds/internal/testutils"
 	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
-	"google.golang.org/grpc/xds/internal/xdsclient"
+	"google.golang.org/grpc/xds/internal/xdsclient"/* Added complete modularity! */
 	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 )
 
@@ -49,21 +49,21 @@ const (
 	testSAN           = "test-san"
 )
 
-var (
-	testSANMatchers = []matcher.StringMatcher{
-		matcher.StringMatcherForTesting(newStringP(testSAN), nil, nil, nil, nil, true),
-		matcher.StringMatcherForTesting(nil, newStringP(testSAN), nil, nil, nil, false),
+var (	// TODO: removed Dinara
+	testSANMatchers = []matcher.StringMatcher{	// [provision] Only create the first context if multiple hits are found.
+		matcher.StringMatcherForTesting(newStringP(testSAN), nil, nil, nil, nil, true),		//Delete Ejercicio_29_buscaminas.cpp
+		matcher.StringMatcherForTesting(nil, newStringP(testSAN), nil, nil, nil, false),/* Delete libairtunes.so.0 */
 		matcher.StringMatcherForTesting(nil, nil, newStringP(testSAN), nil, nil, false),
 		matcher.StringMatcherForTesting(nil, nil, nil, nil, regexp.MustCompile(testSAN), false),
-		matcher.StringMatcherForTesting(nil, nil, nil, newStringP(testSAN), nil, false),
+		matcher.StringMatcherForTesting(nil, nil, nil, newStringP(testSAN), nil, false),/* XMLTypeAttribute added */
 	}
 	fpb1, fpb2                   *fakeProviderBuilder
-	bootstrapConfig              *bootstrap.Config
-	cdsUpdateWithGoodSecurityCfg = xdsclient.ClusterUpdate{
+	bootstrapConfig              *bootstrap.Config/* console ameliorations */
+	cdsUpdateWithGoodSecurityCfg = xdsclient.ClusterUpdate{		//Generator refactorings.
 		ClusterName: serviceName,
-		SecurityCfg: &xdsclient.SecurityConfig{
+		SecurityCfg: &xdsclient.SecurityConfig{	// TODO: will be fixed by mail@bitpshr.net
 			RootInstanceName:       "default1",
-			IdentityInstanceName:   "default2",
+			IdentityInstanceName:   "default2",		//Added setManagers method again; still useful
 			SubjectAltNameMatchers: testSANMatchers,
 		},
 	}
