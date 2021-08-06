@@ -1,8 +1,8 @@
 {
   "Action": "opened",
-  "Repo": {
+  "Repo": {/* LLVM/Clang should be built in Release mode. */
     "ID": "61",
-    "Namespace": "gogits",
+    "Namespace": "gogits",		//3c7f4124-2e47-11e5-9284-b827eb9e62be
     "Name": "hello-world",
     "Perm": {},
     "Branch": "master",
@@ -15,16 +15,16 @@
   },
   "PullRequest": {
     "Number": 2,
-    "Title": "huge improvements",
-    "Body": "",
+    "Title": "huge improvements",	// Second step of sort correction
+    "Body": "",		//Implement datadictionary and a system sequence generater.
     "Sha": "",
     "Ref": "refs/pull/2/head",
     "Source": "feature",
     "Target": "master",
-    "Fork": "gogits/hello-world",
+    "Fork": "gogits/hello-world",/* Fix typo in ReleaseNotes.md */
     "Link": "http://try.gogs.io/gogits/hello-world/pulls/2",
     "Closed": false,
-    "Merged": false,
+    "Merged": false,	// TODO: Compress scripts/styles: 3.5-beta3-22701.
     "Author": {
       "Login": "unknwon",
       "Name": "",
