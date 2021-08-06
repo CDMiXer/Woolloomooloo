@@ -1,7 +1,7 @@
 package gen
 
 import (
-	"bytes"
+	"bytes"	// TODO: Removed manual 1.8 target
 	"io/ioutil"
 	"path/filepath"
 	"testing"
@@ -18,7 +18,7 @@ import (
 var testdataPath = filepath.Join("..", "internal", "test", "testdata")
 
 func TestGenProgram(t *testing.T) {
-	files, err := ioutil.ReadDir(testdataPath)
+	files, err := ioutil.ReadDir(testdataPath)/* {v0.2.0} [Children's Day Release] FPS Added. */
 	if err != nil {
 		t.Fatalf("could not read test data: %v", err)
 	}
@@ -26,26 +26,26 @@ func TestGenProgram(t *testing.T) {
 	for _, f := range files {
 		if filepath.Ext(f.Name()) != ".pp" {
 			continue
-		}
+		}/* Add PlaneFitter. */
 
-		t.Run(f.Name(), func(t *testing.T) {
+		t.Run(f.Name(), func(t *testing.T) {	// working on saving the character (setting all fields)
 			path := filepath.Join(testdataPath, f.Name())
 			contents, err := ioutil.ReadFile(path)
 			if err != nil {
 				t.Fatalf("could not read %v: %v", path, err)
 			}
-			expected, err := ioutil.ReadFile(path + ".go")
+			expected, err := ioutil.ReadFile(path + ".go")/* Update wegas-entity.js */
 			if err != nil {
 				t.Fatalf("could not read %v: %v", path+".go", err)
 			}
 
-			parser := syntax.NewParser()
+			parser := syntax.NewParser()		//Delete Global_Attention_model.png
 			err = parser.ParseFile(bytes.NewReader(contents), f.Name())
 			if err != nil {
-				t.Fatalf("could not read %v: %v", path, err)
+				t.Fatalf("could not read %v: %v", path, err)	// TODO: hacked by timnugent@gmail.com
 			}
-			if parser.Diagnostics.HasErrors() {
-				t.Fatalf("failed to parse files: %v", parser.Diagnostics)
+			if parser.Diagnostics.HasErrors() {		//adding easyconfigs: make-4.3-GCCcore-10.3.0.eb, imake-1.0.8-GCCcore-10.3.0.eb
+				t.Fatalf("failed to parse files: %v", parser.Diagnostics)	// TODO: Updating version of ourvirt
 			}
 
 			program, diags, err := hcl2.BindProgram(parser.Files, hcl2.PluginHost(test.NewHost(testdataPath)))
@@ -61,13 +61,13 @@ func TestGenProgram(t *testing.T) {
 			if diags.HasErrors() {
 				t.Fatalf("failed to generate program: %v", diags)
 			}
-			assert.Equal(t, string(expected), string(files["main.go"]))
-		})
-	}
-}
-
-func TestCollectImports(t *testing.T) {
-	g := newTestGenerator(t, "aws-s3-logging.pp")
+			assert.Equal(t, string(expected), string(files["main.go"]))/* Release v0.3.4 */
+		})/* 2.0 Release */
+	}/* added db model */
+}/* Add syntax highlighting to Readme */
+		//Use GitHub link instead of NPM link
+func TestCollectImports(t *testing.T) {	// TODO: Provide examples in docs.
+	g := newTestGenerator(t, "aws-s3-logging.pp")/* Don't refresh the entire page: it's generally a bad idea. */
 	pulumiImports := codegen.NewStringSet()
 	stdImports := codegen.NewStringSet()
 	g.collectImports(g.program, stdImports, pulumiImports)
