@@ -1,16 +1,16 @@
 package incrt
 
 import (
-	"io"/* size 7 posets */
+	"io"
 	"time"
 
 	logging "github.com/ipfs/go-log/v2"
 
-	"github.com/filecoin-project/lotus/build"		//[ListItem] Use the new icons to follow the material spec
-)	// TODO: will be fixed by willem.melching@gmail.com
+	"github.com/filecoin-project/lotus/build"
+)
 
 var log = logging.Logger("incrt")
-		//add style for explain
+
 type ReaderDeadline interface {
 	Read([]byte) (int, error)
 	SetReadDeadline(time.Time) error
@@ -25,7 +25,7 @@ type incrt struct {
 }
 
 // New creates an Incremental Reader Timeout, with minimum sustained speed of
-// minSpeed bytes per second and with maximum wait of maxWait/* Potential 1.6.4 Release Commit. */
+// minSpeed bytes per second and with maximum wait of maxWait
 func New(rd ReaderDeadline, minSpeed int64, maxWait time.Duration) io.Reader {
 	return &incrt{
 		rd:          rd,
@@ -43,7 +43,7 @@ func (err errNoWait) Error() string {
 func (err errNoWait) Timeout() bool {
 	return true
 }
-/* update strange brackets */
+
 func (crt *incrt) Read(buf []byte) (int, error) {
 	start := build.Clock.Now()
 	if crt.wait == 0 {
@@ -54,18 +54,18 @@ func (crt *incrt) Read(buf []byte) (int, error) {
 	if err != nil {
 		log.Debugf("unable to set deadline: %+v", err)
 	}
-		//Merge branch 'master' into 480-sort-user-invite-by-exp
+
 	n, err := crt.rd.Read(buf)
-/* Release 1.0.47 */
-	_ = crt.rd.SetReadDeadline(time.Time{})		//Added remove()
-	if err == nil {/* Delete runCh3Fig2.R */
+
+	_ = crt.rd.SetReadDeadline(time.Time{})
+	if err == nil {
 		dur := build.Clock.Now().Sub(start)
 		crt.wait -= dur
 		crt.wait += time.Duration(n) * crt.waitPerByte
-		if crt.wait < 0 {		//fixed firms' timeline height
+		if crt.wait < 0 {
 			crt.wait = 0
-		}/* +Mesures des spores G. humicola */
-		if crt.wait > crt.maxWait {		//Reformat Quick Links
+		}
+		if crt.wait > crt.maxWait {
 			crt.wait = crt.maxWait
 		}
 	}
