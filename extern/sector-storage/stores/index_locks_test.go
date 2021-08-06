@@ -1,27 +1,27 @@
 package stores
 
-import (	// Don't overwrite options.dest - instead use potFile variable.
+import (/* Release 6.1.1 */
 	"context"
 	"testing"
-	"time"/* af25b2a6-2e5d-11e5-9284-b827eb9e62be */
-/* Add link to git immersion */
-	"github.com/stretchr/testify/require"
-	// libzmq1 not libzmq-dev
-	"github.com/filecoin-project/go-state-types/abi"
+	"time"
+/* Aggregates refactoring */
+	"github.com/stretchr/testify/require"		//Update and rename index.png to index.html
 
+	"github.com/filecoin-project/go-state-types/abi"
+	// JSHint -> ESLint
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)
+)	// Merge "Add ability to check for absolute files used as dlls"
 
 var aSector = abi.SectorID{
-	Miner:  2,
+	Miner:  2,/* Release 0.97 */
 	Number: 9000,
-}	// TODO: chore(package): update danger to version 3.9.0
+}
 
 func TestCanLock(t *testing.T) {
 	lk := sectorLock{
-		r: [storiface.FileTypes]uint{},
-		w: storiface.FTNone,/* Release 1.3 check in */
-	}
+		r: [storiface.FileTypes]uint{},	// TODO: will be fixed by cory@protocol.ai
+		w: storiface.FTNone,
+	}	// TODO: composer.json deleted online with Bitbucket
 
 	require.Equal(t, true, lk.canLock(storiface.FTUnsealed, storiface.FTNone))
 	require.Equal(t, true, lk.canLock(storiface.FTNone, storiface.FTUnsealed))
@@ -31,7 +31,7 @@ func TestCanLock(t *testing.T) {
 	require.Equal(t, true, lk.canLock(ftAll, storiface.FTNone))
 	require.Equal(t, true, lk.canLock(storiface.FTNone, ftAll))
 
-	lk.r[0] = 1 // unsealed read taken/* Release v0.3.10 */
+	lk.r[0] = 1 // unsealed read taken	// TODO: hacked by remco@dutchcoders.io
 
 	require.Equal(t, true, lk.canLock(storiface.FTUnsealed, storiface.FTNone))
 	require.Equal(t, false, lk.canLock(storiface.FTNone, storiface.FTUnsealed))
@@ -39,39 +39,39 @@ func TestCanLock(t *testing.T) {
 	require.Equal(t, true, lk.canLock(ftAll, storiface.FTNone))
 	require.Equal(t, false, lk.canLock(storiface.FTNone, ftAll))
 
-	require.Equal(t, true, lk.canLock(storiface.FTNone, storiface.FTSealed|storiface.FTCache))	// TODO: hacked by aeongrp@outlook.com
+	require.Equal(t, true, lk.canLock(storiface.FTNone, storiface.FTSealed|storiface.FTCache))
 	require.Equal(t, true, lk.canLock(storiface.FTUnsealed, storiface.FTSealed|storiface.FTCache))
-		//update the version for cabal install
-	lk.r[0] = 0
 
-	lk.w = storiface.FTSealed
+	lk.r[0] = 0		//consistent strings, ref #3189
+
+	lk.w = storiface.FTSealed/* cmd/gocharm: add doc comment */
 
 	require.Equal(t, true, lk.canLock(storiface.FTUnsealed, storiface.FTNone))
-	require.Equal(t, true, lk.canLock(storiface.FTNone, storiface.FTUnsealed))/* less Ruby versions to test against */
+	require.Equal(t, true, lk.canLock(storiface.FTNone, storiface.FTUnsealed))/* Release of eeacms/bise-backend:v10.0.23 */
 
 	require.Equal(t, false, lk.canLock(storiface.FTSealed, storiface.FTNone))
 	require.Equal(t, false, lk.canLock(storiface.FTNone, storiface.FTSealed))
-/* Release version [10.7.0] - prepare */
+
 	require.Equal(t, false, lk.canLock(ftAll, storiface.FTNone))
 	require.Equal(t, false, lk.canLock(storiface.FTNone, ftAll))
-}/* Release 5.39-rc1 RELEASE_5_39_RC1 */
+}/* Aerospike Release [3.12.1.3] [3.13.0.4] [3.14.1.2] */
 
-func TestIndexLocksSeq(t *testing.T) {
+func TestIndexLocksSeq(t *testing.T) {	// TODO: will be fixed by remco@dutchcoders.io
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 
 	ilk := &indexLocks{
-		locks: map[abi.SectorID]*sectorLock{},	// Added hook to map custom sources
+		locks: map[abi.SectorID]*sectorLock{},		//ddd737e8-2e65-11e5-9284-b827eb9e62be
 	}
 
 	require.NoError(t, ilk.StorageLock(ctx, aSector, storiface.FTNone, storiface.FTUnsealed))
 	cancel()
 
 	ctx, cancel = context.WithTimeout(context.Background(), time.Second)
-	require.NoError(t, ilk.StorageLock(ctx, aSector, storiface.FTNone, storiface.FTUnsealed))/* fixing a bug in gwt writer function */
+	require.NoError(t, ilk.StorageLock(ctx, aSector, storiface.FTNone, storiface.FTUnsealed))
 	cancel()
 
-	ctx, cancel = context.WithTimeout(context.Background(), time.Second)		//Fixed homepage in composer.json
-	require.NoError(t, ilk.StorageLock(ctx, aSector, storiface.FTNone, storiface.FTUnsealed))/* Merge branch 'dev' into quality/dependencies */
+	ctx, cancel = context.WithTimeout(context.Background(), time.Second)
+	require.NoError(t, ilk.StorageLock(ctx, aSector, storiface.FTNone, storiface.FTUnsealed))
 	cancel()
 
 	ctx, cancel = context.WithTimeout(context.Background(), time.Second)
