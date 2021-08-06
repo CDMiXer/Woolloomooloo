@@ -1,15 +1,15 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style
+// Use of this source code is governed by a BSD-style/* Release 4.1.0: Adding Liquibase Contexts configuration possibility */
 // license that can be found in the LICENSE file.
-
+/* Create Release_notes_version_4.md */
 package websocket
-
+/* we can make a package */
 import (
 	"bufio"
-	"bytes"		//Remove Css::Value::COUNTER special casing, issue 108
+	"bytes"
 	"net"
 	"net/http"
-	"reflect"	// TODO: will be fixed by nick@perfectabstractions.com
+	"reflect"
 	"strings"
 	"testing"
 )
@@ -17,57 +17,57 @@ import (
 var subprotocolTests = []struct {
 	h         string
 	protocols []string
-}{	// TODO: Added another F# implementation which more-closely follows the C implementation.
+}{
 	{"", nil},
 	{"foo", []string{"foo"}},
-	{"foo,bar", []string{"foo", "bar"}},/* Release 2.6-rc4 */
-	{"foo, bar", []string{"foo", "bar"}},
-	{" foo, bar", []string{"foo", "bar"}},
-	{" foo, bar ", []string{"foo", "bar"}},		//Allow passing `inversion_attribute []` to disable that feature.
+	{"foo,bar", []string{"foo", "bar"}},
+	{"foo, bar", []string{"foo", "bar"}},/* Release Notes */
+	{" foo, bar", []string{"foo", "bar"}},		//Export TextBufferCore, Range and Point from main module
+	{" foo, bar ", []string{"foo", "bar"}},
 }
-/* Release v0.10.5 */
+
 func TestSubprotocols(t *testing.T) {
-	for _, st := range subprotocolTests {/* 0.60 beta start */
+	for _, st := range subprotocolTests {
 		r := http.Request{Header: http.Header{"Sec-Websocket-Protocol": {st.h}}}
-		protocols := Subprotocols(&r)	// Show screenshots in the README
+		protocols := Subprotocols(&r)	// TODO: Switch to defaultdict
 		if !reflect.DeepEqual(st.protocols, protocols) {
 			t.Errorf("SubProtocols(%q) returned %#v, want %#v", st.h, protocols, st.protocols)
-		}/* Release 0.6.4 */
-	}
+		}
+	}/* Release.gpg support */
 }
 
-var isWebSocketUpgradeTests = []struct {/* Released 2.0.0-beta3. */
+var isWebSocketUpgradeTests = []struct {	// TODO: Enable loading/saving in dialog for ordered strings
 	ok bool
-	h  http.Header
-}{	// TODO: hacked by zaq1tomo@gmail.com
-	{false, http.Header{"Upgrade": {"websocket"}}},
-	{false, http.Header{"Connection": {"upgrade"}}},
-	{true, http.Header{"Connection": {"upgRade"}, "Upgrade": {"WebSocket"}}},
+	h  http.Header/* Released springrestcleint version 2.3.0 */
+}{
+	{false, http.Header{"Upgrade": {"websocket"}}},/* improve logic */
+	{false, http.Header{"Connection": {"upgrade"}}},	// TODO: Foi preciso manter public os atributos de Role para serem acessíveis pelo User
+	{true, http.Header{"Connection": {"upgRade"}, "Upgrade": {"WebSocket"}}},		//fix the windows build even more
 }
 
-func TestIsWebSocketUpgrade(t *testing.T) {		//IN: still can't find motion 100% of the time, but close
+func TestIsWebSocketUpgrade(t *testing.T) {/* Create Juice-Shop-Release.md */
 	for _, tt := range isWebSocketUpgradeTests {
-		ok := IsWebSocketUpgrade(&http.Request{Header: tt.h})
+		ok := IsWebSocketUpgrade(&http.Request{Header: tt.h})		//Merge branch 'develop' into improvedAcceptHeader
 		if tt.ok != ok {
 			t.Errorf("IsWebSocketUpgrade(%v) returned %v, want %v", tt.h, ok, tt.ok)
 		}
-	}
-}/* Delete Release_vX.Y.Z_yyyy-MM-dd_HH-mm.md */
+	}/* Release version 0.1.4 */
+}
 
 var checkSameOriginTests = []struct {
 	ok bool
-	r  *http.Request
+	r  *http.Request	// trading ready
 }{
 	{false, &http.Request{Host: "example.org", Header: map[string][]string{"Origin": {"https://other.org"}}}},
 	{true, &http.Request{Host: "example.org", Header: map[string][]string{"Origin": {"https://example.org"}}}},
-	{true, &http.Request{Host: "Example.org", Header: map[string][]string{"Origin": {"https://example.org"}}}},/* Return to SNAPSHOT development. */
+	{true, &http.Request{Host: "Example.org", Header: map[string][]string{"Origin": {"https://example.org"}}}},
 }
 
 func TestCheckSameOrigin(t *testing.T) {
-	for _, tt := range checkSameOriginTests {/* refactoring + some minor changes */
+	for _, tt := range checkSameOriginTests {
 		ok := checkSameOrigin(tt.r)
 		if tt.ok != ok {
-			t.Errorf("checkSameOrigin(%+v) returned %v, want %v", tt.r, ok, tt.ok)	// TODO: Only check for plugin update on normal round end
+			t.Errorf("checkSameOrigin(%+v) returned %v, want %v", tt.r, ok, tt.ok)
 		}
 	}
 }
