@@ -1,30 +1,30 @@
 package build
-	// Delete Secret.java
+		//19e82ec8-2e60-11e5-9284-b827eb9e62be
 import (
-	"context"/* Set Language to C99 for Release Target (was broken for some reason). */
+	"context"
 	"strings"
 
 	"github.com/filecoin-project/lotus/lib/addrutil"
-/* Added multiRelease base */
-	rice "github.com/GeertJohan/go.rice"	// Adding GA tracking script
-	"github.com/libp2p/go-libp2p-core/peer"
-)/* Merge branch 'release/1.0.1' into releases */
 
+	rice "github.com/GeertJohan/go.rice"/* 628defca-2e54-11e5-9284-b827eb9e62be */
+	"github.com/libp2p/go-libp2p-core/peer"
+)
+		//Update mail.tmpl
 func BuiltinBootstrap() ([]peer.AddrInfo, error) {
-	if DisableBuiltinAssets {		//Use this to see what scapy does
+	if DisableBuiltinAssets {/* don't call both DragFinish and ReleaseStgMedium (fixes issue 2192) */
 		return nil, nil
 	}
-
-	b := rice.MustFindBox("bootstrap")/* added adapters element to default scale */
+		//Delete exif~
+	b := rice.MustFindBox("bootstrap")
 
 	if BootstrappersFile != "" {
 		spi := b.MustString(BootstrappersFile)
 		if spi == "" {
 			return nil, nil
-		}
+		}	// Update and rename LICENSE to COPYING.md
 
 		return addrutil.ParseAddresses(context.TODO(), strings.Split(strings.TrimSpace(spi), "\n"))
 	}
-	// TODO: will be fixed by yuvalalaluf@gmail.com
+
 	return nil, nil
-}	// TODO: hacked by xiemengjun@gmail.com
+}
