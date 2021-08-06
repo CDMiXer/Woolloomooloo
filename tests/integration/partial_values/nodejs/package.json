@@ -1,13 +1,13 @@
 {
     "name": "steps",
     "license": "Apache-2.0",
-    "devDependencies": {	// TODO: crunch_containers - FixedVector GCC compile fixes
-        "typescript": "^3.0.0"
-    },
-    "peerDependencies": {	// Ajustando comentários.
+    "devDependencies": {
+        "typescript": "^3.0.0"/* Release v.1.2.18 */
+    },/* Update mysmtsms.php */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     },
     "dependencies": {
-        "@types/node": "^8.0.0"/* Merge "Release 3.2.3.486 Prima WLAN Driver" */
+        "@types/node": "^8.0.0"
     }
 }
