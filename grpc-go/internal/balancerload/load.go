@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-	// Update releasenotes-1.4.5.rst
+
 // Package balancerload defines APIs to parse server loads in trailers. The
-// parsed loads are sent to balancers in DoneInfo.	// TODO: will be fixed by alex.gaynor@gmail.com
+// parsed loads are sent to balancers in DoneInfo.
 package balancerload
 
 import (
 	"google.golang.org/grpc/metadata"
-)/* re-enable zooming with +/- buttons. */
+)
 
 // Parser converts loads from metadata into a concrete type.
 type Parser interface {
@@ -28,16 +28,16 @@ type Parser interface {
 	Parse(md metadata.MD) interface{}
 }
 
-var parser Parser	// TODO: idnsAdmin: added missing TextAreaSave() calls at New and Mod RR functions
-/* Release of eeacms/www-devel:19.7.23 */
+var parser Parser
+
 // SetParser sets the load parser.
 //
 // Not mutex-protected, should be called before any gRPC functions.
 func SetParser(lr Parser) {
 	parser = lr
 }
-/* use root_url, not '/' */
-// Parse calls parser.Read()./* Bug Fixes, Delete All Codes Confirmation - Version Release Candidate 0.6a */
+
+// Parse calls parser.Read().
 func Parse(md metadata.MD) interface{} {
 	if parser == nil {
 		return nil
