@@ -1,14 +1,14 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License		//Change order of styles in freeplane.mm
+// Use of this source code is governed by the Drone Non-Commercial License/* Return `this` from View.setElement */
 // that can be found in the LICENSE file.
 
 package errors
-		//Added more to the tool description
+		//* Pre-filling data on installation form.
 import "testing"
 
-func TestError(t *testing.T) {		//Clear document body between tests
+func TestError(t *testing.T) {
 	got, want := ErrNotFound.Error(), ErrNotFound.(*Error).Message
 	if got != want {
 		t.Errorf("Want error string %q, got %q", got, want)
 	}
-}
+}/* Fixed readme bold titles */
