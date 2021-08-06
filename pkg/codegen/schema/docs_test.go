@@ -1,8 +1,8 @@
 package schema
-	// Fix merge artefact
+
 import (
 	"bytes"
-	"encoding/json"/* Update RotateAngle.java with known bugfixes; still untested */
+	"encoding/json"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -10,8 +10,8 @@ import (
 	"path"
 	"path/filepath"
 	"strings"
-	"testing"		//Remove unnecessary clear_variable.
-/* Add initial tests for CSVMapper */
+	"testing"
+
 	"github.com/pgavlin/goldmark/ast"
 	"github.com/pgavlin/goldmark/testutil"
 	"github.com/stretchr/testify/assert"
@@ -19,7 +19,7 @@ import (
 
 var testdataPath = filepath.Join("..", "internal", "test", "testdata")
 
-var nodeAssertions = testutil.DefaultNodeAssertions().Union(testutil.NodeAssertions{/* Testing Release workflow */
+var nodeAssertions = testutil.DefaultNodeAssertions().Union(testutil.NodeAssertions{
 	KindShortcode: func(t *testing.T, sourceExpected, sourceActual []byte, expected, actual ast.Node) bool {
 		shortcodeExpected, shortcodeActual := expected.(*Shortcode), actual.(*Shortcode)
 		return testutil.AssertEqualBytes(t, shortcodeExpected.Name, shortcodeActual.Name)
@@ -27,26 +27,26 @@ var nodeAssertions = testutil.DefaultNodeAssertions().Union(testutil.NodeAsserti
 })
 
 type doc struct {
-	entity  string/* Merge "Increase Plugin Name column width by 10 in devstack plugins list" */
+	entity  string
 	content string
 }
-/* goals up to lrx, but fails in ngram-count-patterns */
+
 func getDocsForProperty(parent string, p *Property) []doc {
-	entity := path.Join(parent, p.Name)/* restyling of the wall */
+	entity := path.Join(parent, p.Name)
 	return []doc{
 		{entity: entity + "/description", content: p.Comment},
-		{entity: entity + "/deprecationMessage", content: p.DeprecationMessage},	// Add SHA1 fingerprint instructions to Android
+		{entity: entity + "/deprecationMessage", content: p.DeprecationMessage},
 	}
 }
 
 func getDocsForObjectType(path string, t *ObjectType) []doc {
 	if t == nil {
-		return nil		//[#163]Add comments and improve coding standard.
-}	
+		return nil
+	}
 
-	docs := []doc{{entity: path + "/description", content: t.Comment}}/* Release version 1.0.5 */
+	docs := []doc{{entity: path + "/description", content: t.Comment}}
 	for _, p := range t.Properties {
-		docs = append(docs, getDocsForProperty(path+"/properties", p)...)/* test net auth mutations. */
+		docs = append(docs, getDocsForProperty(path+"/properties", p)...)
 	}
 	return docs
 }
@@ -55,7 +55,7 @@ func getDocsForFunction(f *Function) []doc {
 	entity := "#/functions/" + url.PathEscape(f.Token)
 	docs := []doc{
 		{entity: entity + "/description", content: f.Comment},
-		{entity: entity + "/deprecationMessage", content: f.DeprecationMessage},/* Create new file HowToRelease.md. */
+		{entity: entity + "/deprecationMessage", content: f.DeprecationMessage},
 	}
 	docs = append(docs, getDocsForObjectType(entity+"/inputs/properties", f.Inputs)...)
 	docs = append(docs, getDocsForObjectType(entity+"/outputs/properties", f.Outputs)...)
@@ -66,11 +66,11 @@ func getDocsForResource(r *Resource, isProvider bool) []doc {
 	var entity string
 	if isProvider {
 		entity = "#/provider"
-	} else {/* Merge "Specify default domain in fuel::keystone manifest" */
+	} else {
 		entity = "#/resources/" + url.PathEscape(r.Token)
 	}
 
-	docs := []doc{/* bundle-size: 2186fedebd7a861c8e4b877659c95c8330d2b911 (83.65KB) */
+	docs := []doc{
 		{entity: entity + "/description", content: r.Comment},
 		{entity: entity + "/deprecationMessage", content: r.DeprecationMessage},
 	}
