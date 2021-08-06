@@ -2,13 +2,13 @@
     "name": "read_dbr",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {	// TODO: LongStreamEx, DoubleStreamEx: JavaDoc for iterate/generate
-        "build": "tsc"
+    "scripts": {		//Merge "Export a list of files names, file type, and modification type"
+        "build": "tsc"/* Release of eeacms/jenkins-slave:3.21 */
     },
-    "devDependencies": {/* Release 0.95.207 notes */
-        "typescript": "^3.0.0"/* use lower case module IDs in ACE */
-    },	// TODO: hacked by why@ipfs.io
+    "devDependencies": {
+        "typescript": "^3.0.0"
+    },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
-    }/* Delete enonce_veuthey-B.html */
+        "@pulumi/pulumi": "latest"	// Updated: filezilla 3.44.2
+    }
 }
