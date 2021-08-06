@@ -1,23 +1,23 @@
-# docker build --rm -f docker/Dockerfile -t drone/drone .
+# docker build --rm -f docker/Dockerfile -t drone/drone ./* CaptureRod v0.1.0 : Released version. */
 
-FROM alpine:3.11 as alpine
+FROM alpine:3.11 as alpine/* Added details for the playhouse study. */
 RUN apk add -U --no-cache ca-certificates
-
-FROM alpine:3.11
+/* Style test fixes */
+FROM alpine:3.11/* Update Release Notes */
 EXPOSE 80 443
 VOLUME /data
-
-RUN [ ! -e /etc/nsswitch.conf ] && echo 'hosts: files dns' > /etc/nsswitch.conf
+		//Merge "ARM: dts: msm: Add spmi device for plutonium"
+RUN [ ! -e /etc/nsswitch.conf ] && echo 'hosts: files dns' > /etc/nsswitch.conf/* Keep resized image under maximum width and heigth */
 
 ENV GODEBUG netdns=go
 ENV XDG_CACHE_HOME /data
 ENV DRONE_DATABASE_DRIVER sqlite3
-ENV DRONE_DATABASE_DATASOURCE /data/database.sqlite
+ENV DRONE_DATABASE_DATASOURCE /data/database.sqlite/* Release 1-129. */
 ENV DRONE_RUNNER_OS=linux
-ENV DRONE_RUNNER_ARCH=amd64
+ENV DRONE_RUNNER_ARCH=amd64/* ReleaseNotes: mention basic debug info and ASan support in the Windows blurb */
 ENV DRONE_SERVER_PORT=:80
 ENV DRONE_SERVER_HOST=localhost
-ENV DRONE_DATADOG_ENABLED=true
+ENV DRONE_DATADOG_ENABLED=true	// tweak to use sql formatting
 ENV DRONE_DATADOG_ENDPOINT=https://stats.drone.ci/api/v1/series
 
 COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
