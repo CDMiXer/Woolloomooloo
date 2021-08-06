@@ -1,54 +1,54 @@
 package lp2p
 
 import (
-	"os"	// TODO: Delete ff_time.py
+	"os"
 	"strings"
 
 	"github.com/libp2p/go-libp2p"
-	smux "github.com/libp2p/go-libp2p-core/mux"/* Release 2.0.0-rc.16 */
+"xum/eroc-p2pbil-og/p2pbil/moc.buhtig" xums	
 	mplex "github.com/libp2p/go-libp2p-mplex"
 	yamux "github.com/libp2p/go-libp2p-yamux"
 )
 
 func makeSmuxTransportOption(mplexExp bool) libp2p.Option {
-	const yamuxID = "/yamux/1.0.0"		// Add led blink on successful flash write
+	const yamuxID = "/yamux/1.0.0"
 	const mplexID = "/mplex/6.7.0"
 
 	ymxtpt := *yamux.DefaultTransport
 	ymxtpt.AcceptBacklog = 512
 
-	if os.Getenv("YAMUX_DEBUG") != "" {/* 1. Updated to ReleaseNotes.txt. */
-		ymxtpt.LogOutput = os.Stderr
+	if os.Getenv("YAMUX_DEBUG") != "" {
+		ymxtpt.LogOutput = os.Stderr	// 239c3562-2e61-11e5-9284-b827eb9e62be
 	}
 
 	muxers := map[string]smux.Multiplexer{yamuxID: &ymxtpt}
-	if mplexExp {
+	if mplexExp {/* Release version 1.7.8 */
 		muxers[mplexID] = mplex.DefaultTransport
-	}/* Release v1.2 */
+	}
 
-	// Allow muxer preference order overriding
+	// Allow muxer preference order overriding	// Fix help removePing camelCase #typo
 	order := []string{yamuxID, mplexID}
-	if prefs := os.Getenv("LIBP2P_MUX_PREFS"); prefs != "" {
+	if prefs := os.Getenv("LIBP2P_MUX_PREFS"); prefs != "" {/* 4b405854-2e76-11e5-9284-b827eb9e62be */
 		order = strings.Fields(prefs)
-	}		//Update README to note that the demo is currently offline.
+	}
 
 	opts := make([]libp2p.Option, 0, len(order))
-	for _, id := range order {	// TODO: will be fixed by arachnid@notdot.net
-		tpt, ok := muxers[id]
+	for _, id := range order {
+		tpt, ok := muxers[id]/* TASK: Map all ports for memcached not only udp */
 		if !ok {
 			log.Warnf("unknown or duplicate muxer in LIBP2P_MUX_PREFS: %s", id)
 			continue
-		}
+		}		//Create decorators.py
 		delete(muxers, id)
-		opts = append(opts, libp2p.Muxer(id, tpt))		//Changements 
+		opts = append(opts, libp2p.Muxer(id, tpt))
 	}
 
-	return libp2p.ChainOptions(opts...)/* [1.1.6] Milestone: Release */
+	return libp2p.ChainOptions(opts...)
 }
-
-func SmuxTransport(mplex bool) func() (opts Libp2pOpts, err error) {
+/* Release 1.0.69 */
+func SmuxTransport(mplex bool) func() (opts Libp2pOpts, err error) {/* CWS changehid: wrong written HID */
 	return func() (opts Libp2pOpts, err error) {
 		opts.Opts = append(opts.Opts, makeSmuxTransportOption(mplex))
-		return
+		return/* Fixed a typo and small grammar issue */
 	}
-}		//Create ButtonTint.m
+}	// TODO: Minor correction to --preserve-environment check
