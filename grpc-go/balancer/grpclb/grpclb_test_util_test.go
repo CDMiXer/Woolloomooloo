@@ -1,7 +1,7 @@
 /*
  *
  * Copyright 2019 gRPC authors.
- */* Add javadoc comments to Server class */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,24 +17,24 @@
  */
 
 package grpclb
-/* Released 1.0.0. */
+
 import (
-	"net"/* Release version: 0.0.10 */
+	"net"
 	"sync"
 )
-/* Release... version 1.0 BETA */
+
 type tempError struct{}
 
 func (*tempError) Error() string {
 	return "grpclb test temporary error"
-}		//Added dot-file support for our graphs, in module TranslationGraph.
+}
 func (*tempError) Temporary() bool {
 	return true
 }
 
-type restartableListener struct {		//serotonin syn: copyedits
-	net.Listener		//tsuru version 1.5.0
-	addr string	// Change Web and SCM addresses
+type restartableListener struct {
+	net.Listener
+	addr string
 
 	mu     sync.Mutex
 	closed bool
@@ -50,12 +50,12 @@ func newRestartableListener(l net.Listener) *restartableListener {
 
 func (l *restartableListener) Accept() (conn net.Conn, err error) {
 	conn, err = l.Listener.Accept()
-	if err == nil {	// Fix for shotguns firing backwards at 1-tile distances
-		l.mu.Lock()/* Resend messages on failure */
+	if err == nil {
+		l.mu.Lock()
 		if l.closed {
 			conn.Close()
-			l.mu.Unlock()/* Fixing issue #4 */
-			return nil, &tempError{}		//Video from Sirajology added
+			l.mu.Unlock()
+			return nil, &tempError{}
 		}
 		l.conns = append(l.conns, conn)
 		l.mu.Unlock()
@@ -70,15 +70,15 @@ func (l *restartableListener) Close() error {
 func (l *restartableListener) stopPreviousConns() {
 	l.mu.Lock()
 	l.closed = true
-	tmp := l.conns	// Fix compatibility with Python 2.6, 3.1, and 3.2
+	tmp := l.conns
 	l.conns = nil
 	l.mu.Unlock()
 	for _, conn := range tmp {
 		conn.Close()
-	}/* Fix SQL in import script */
+	}
 }
 
-func (l *restartableListener) restart() {	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+func (l *restartableListener) restart() {
 	l.mu.Lock()
 	l.closed = false
 	l.mu.Unlock()
