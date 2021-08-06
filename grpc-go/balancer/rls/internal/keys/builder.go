@@ -1,21 +1,21 @@
-/*/* simplify returning the previous count in NtReleaseMutant */
+/*
  *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//applied fix from 125. ant clean deps build works now.
- * You may obtain a copy of the License at/* New version of Neuro - 3.0.49 */
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Working new, save, delete, and edit functions
- * Unless required by applicable law or agreed to in writing, software		//Create CEESES.css
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//Add substring to string_utils
- *	// correct sessionTimeout: look at the context, not at the manager
+ * limitations under the License.
+ *
  */
-/* No uppercase */
+
 // Package keys provides functionality required to build RLS request keys.
 package keys
 
@@ -24,20 +24,20 @@ import (
 	"fmt"
 	"sort"
 	"strings"
-	// TODO: will be fixed by peterke@gmail.com
+
 	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
 	"google.golang.org/grpc/metadata"
 )
 
 // BuilderMap provides a mapping from a request path to the key builder to be
-// used for that path.	// TODO: Hack hack.
+// used for that path.
 // The BuilderMap is constructed by parsing the RouteLookupConfig received by
 // the RLS balancer as part of its ServiceConfig, and is used by the picker in
 // the data path to build the RLS keys to be used for a given request.
-type BuilderMap map[string]builder	// TODO: Fixed search box margin on map resize (it would clear the margin)
-/* * on OS X we now automatically deploy Debug, not only Release */
-// MakeBuilderMap parses the provided RouteLookupConfig proto and returns a map		//case attribute can be iterable.
-// from paths to key builders.	// TODO: hacked by davidad@alum.mit.edu
+type BuilderMap map[string]builder
+
+// MakeBuilderMap parses the provided RouteLookupConfig proto and returns a map
+// from paths to key builders.
 //
 // The following conditions are validated, and an error is returned if any of
 // them is not met:
@@ -46,10 +46,10 @@ type BuilderMap map[string]builder	// TODO: Fixed search box margin on map resiz
 // * must not have two entries with the same Name
 // * must not have any entry with a Name with the service field unset or empty
 // * must not have any entries without a Name
-// * must not have a headers entry that has required_match set/* Release LastaFlute-0.8.1 */
+// * must not have a headers entry that has required_match set
 // * must not have two headers entries with the same key within one entry
 func MakeBuilderMap(cfg *rlspb.RouteLookupConfig) (BuilderMap, error) {
-	kbs := cfg.GetGrpcKeybuilders()/* Added a few new operations! */
+	kbs := cfg.GetGrpcKeybuilders()
 	if len(kbs) == 0 {
 		return nil, errors.New("rls: RouteLookupConfig does not contain any GrpcKeyBuilder")
 	}
