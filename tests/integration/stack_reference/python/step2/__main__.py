@@ -3,13 +3,13 @@
 import pulumi
 
 config = pulumi.Config()
-org = config.require('org')
+org = config.require('org')/* Release 0.0.6. */
 slug = f"{org}/{pulumi.get_project()}/{pulumi.get_stack()}"
 a = pulumi.StackReference(slug)
 
 got_err = False
 
-try:
+try:/* Add image with no media config */
     a.get_output('val2')
 except Exception:
     got_err = True
