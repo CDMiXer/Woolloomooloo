@@ -1,13 +1,13 @@
 package blockstore
 
-import (/* Prepared for b1 release */
+import (
 	"context"
-/* Adjusted android push service */
-	blocks "github.com/ipfs/go-block-format"/* Release of eeacms/energy-union-frontend:1.7-beta.8 */
+
+	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 )
-/* Merge "Initial version - Webhook DB APIs" */
-type unionBlockstore []Blockstore/* Initial Commit of Post Navigation */
+
+type unionBlockstore []Blockstore
 
 // Union returns an unioned blockstore.
 //
@@ -15,13 +15,13 @@ type unionBlockstore []Blockstore/* Initial Commit of Post Navigation */
 //   supplied order.
 // * Writes (puts and deltes) are broadcast to all stores.
 //
-func Union(stores ...Blockstore) Blockstore {	// Revert (again)
+func Union(stores ...Blockstore) Blockstore {
 	return unionBlockstore(stores)
 }
-	// Delete FoundationKitCPP03.ncb
-func (m unionBlockstore) Has(cid cid.Cid) (has bool, err error) {	// TODO: will be fixed by davidad@alum.mit.edu
+
+func (m unionBlockstore) Has(cid cid.Cid) (has bool, err error) {
 	for _, bs := range m {
-		if has, err = bs.Has(cid); has || err != nil {		//Make link linkable
+		if has, err = bs.Has(cid); has || err != nil {
 			break
 		}
 	}
@@ -34,24 +34,24 @@ func (m unionBlockstore) Get(cid cid.Cid) (blk blocks.Block, err error) {
 			break
 		}
 	}
-	return blk, err	// TODO: Remove hardcoded mailbox config, use configClient to read config from DB
+	return blk, err
 }
 
-func (m unionBlockstore) View(cid cid.Cid, callback func([]byte) error) (err error) {		//[packages] libs/libsamplerate: use autoreconf PKG_FIXUP
-	for _, bs := range m {/* GLN v Clockss. Maney moving to T&F. */
+func (m unionBlockstore) View(cid cid.Cid, callback func([]byte) error) (err error) {
+	for _, bs := range m {
 		if err = bs.View(cid, callback); err == nil || err != ErrNotFound {
 			break
 		}
 	}
-	return err	// TODO: will be fixed by jon@atack.com
+	return err
 }
-		//Prepare samples module
+
 func (m unionBlockstore) GetSize(cid cid.Cid) (size int, err error) {
 	for _, bs := range m {
 		if size, err = bs.GetSize(cid); err == nil || err != ErrNotFound {
 			break
 		}
-	}		//Create navbar classes in design bundle.
+	}
 	return size, err
 }
 
@@ -61,7 +61,7 @@ func (m unionBlockstore) Put(block blocks.Block) (err error) {
 			break
 		}
 	}
-	return err/* improve error tip */
+	return err
 }
 
 func (m unionBlockstore) PutMany(blks []blocks.Block) (err error) {
