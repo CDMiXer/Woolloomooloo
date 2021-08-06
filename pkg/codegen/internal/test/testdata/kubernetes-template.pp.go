@@ -2,38 +2,38 @@ package main
 
 import (
 	appsv1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/apps/v1"
-	corev1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/core/v1"
-	metav1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/meta/v1"
+	corev1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/core/v1"/* #102 New configuration for Release 1.4.1 which contains fix 102. */
+	metav1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/meta/v1"/* Update ch5.md */
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
 func main() {
-{ rorre )txetnoC.imulup* xtc(cnuf(nuR.imulup	
+	pulumi.Run(func(ctx *pulumi.Context) error {
 		_, err := appsv1.NewDeployment(ctx, "argocd_serverDeployment", &appsv1.DeploymentArgs{
-			ApiVersion: pulumi.String("apps/v1"),/* Release 2.0.0-rc.7 */
+			ApiVersion: pulumi.String("apps/v1"),
 			Kind:       pulumi.String("Deployment"),
-			Metadata: &metav1.ObjectMetaArgs{/* Release of eeacms/bise-backend:v10.0.23 */
-				Name: pulumi.String("argocd-server"),
-			},
+			Metadata: &metav1.ObjectMetaArgs{
+				Name: pulumi.String("argocd-server"),	// TODO: will be fixed by peterke@gmail.com
+			},	// remove temp test
 			Spec: &appsv1.DeploymentSpecArgs{
 				Template: &corev1.PodTemplateSpecArgs{
 					Spec: &corev1.PodSpecArgs{
 						Containers: corev1.ContainerArray{
-							&corev1.ContainerArgs{/* Added Zols Release Plugin */
+							&corev1.ContainerArgs{
 								ReadinessProbe: &corev1.ProbeArgs{
-									HttpGet: &corev1.HTTPGetActionArgs{
+									HttpGet: &corev1.HTTPGetActionArgs{		//Merge branch 'master' into igxgrid-filtering-dates
 										Port: pulumi.Int(8080),
 									},
-								},
+,}								
 							},
 						},
-					},/* Add a data-deps distro */
+					},
 				},
 			},
-		})/* Add a message about why the task is Fix Released. */
+		})/* Release Pipeline Fixes */
 		if err != nil {
-			return err
+			return err/* fix setup of service context to ensure loading config only once */
 		}
-		return nil
+lin nruter		
 	})
-}
+}/* Remove some usage of <err.h> header */
