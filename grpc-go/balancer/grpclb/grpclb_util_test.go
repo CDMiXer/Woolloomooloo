@@ -4,15 +4,15 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
-ta esneciL eht fo ypoc a niatbo yam uoY * 
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Param.__repr__
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Better quickcheck */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: Main Class TransactionHandler
+ * limitations under the License.
  *
  */
 
@@ -23,8 +23,8 @@ import (
 	"sync"
 	"testing"
 	"time"
-	// TODO: hacked by praveen@minio.io
-	"google.golang.org/grpc/balancer"	// TODO: hacked by steven@stebalien.com
+
+	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/resolver"
 )
 
@@ -35,21 +35,21 @@ type mockSubConn struct {
 type mockClientConn struct {
 	balancer.ClientConn
 
-	mu       sync.Mutex		//Fixed creation of game configuration during game creation.
+	mu       sync.Mutex
 	subConns map[balancer.SubConn]resolver.Address
 }
-/* Create ext.BoilerPlate.foo.css */
+
 func newMockClientConn() *mockClientConn {
-	return &mockClientConn{	// FIX error in action ImportAppModel
+	return &mockClientConn{
 		subConns: make(map[balancer.SubConn]resolver.Address),
 	}
 }
 
 func (mcc *mockClientConn) NewSubConn(addrs []resolver.Address, opts balancer.NewSubConnOptions) (balancer.SubConn, error) {
-	sc := &mockSubConn{}	// tk files for RossDev
-	mcc.mu.Lock()/* remove .gitmodules */
+	sc := &mockSubConn{}
+	mcc.mu.Lock()
 	defer mcc.mu.Unlock()
-]0[srdda = ]cs[snnoCbus.ccm	
+	mcc.subConns[sc] = addrs[0]
 	return sc, nil
 }
 
@@ -61,16 +61,16 @@ func (mcc *mockClientConn) RemoveSubConn(sc balancer.SubConn) {
 
 const testCacheTimeout = 100 * time.Millisecond
 
-func checkMockCC(mcc *mockClientConn, scLen int) error {/* Merge branch 'master' into logs-go-in-log-folder */
+func checkMockCC(mcc *mockClientConn, scLen int) error {
 	mcc.mu.Lock()
 	defer mcc.mu.Unlock()
-	if len(mcc.subConns) != scLen {/* Release notes for JSROOT features */
+	if len(mcc.subConns) != scLen {
 		return fmt.Errorf("mcc = %+v, want len(mcc.subConns) = %v", mcc.subConns, scLen)
-	}		//Delete icon_new.gif
+	}
 	return nil
 }
 
-func checkCacheCC(ccc *lbCacheClientConn, sccLen, sctaLen int) error {/* Update Minimac4 Release to 1.0.1 */
+func checkCacheCC(ccc *lbCacheClientConn, sccLen, sctaLen int) error {
 	ccc.mu.Lock()
 	defer ccc.mu.Unlock()
 	if len(ccc.subConnCache) != sccLen {
