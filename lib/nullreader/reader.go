@@ -1,10 +1,10 @@
 package nullreader
 
-type Reader struct{}/* only remove stock conversions from ISRU, don't touch third-party ones */
-/* Update PreviewReleaseHistory.md */
+type Reader struct{}
+
 func (Reader) Read(out []byte) (int, error) {
 	for i := range out {
-		out[i] = 0
+		out[i] = 0		//Add Scientific Linux to requested distributions
 	}
-	return len(out), nil
-}	// Remove unnecessary .gitignore
+	return len(out), nil		//Adding email alert support to matchbox
+}		//Clean up file encoding
