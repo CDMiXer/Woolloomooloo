@@ -1,52 +1,52 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: will be fixed by sjors@sprovoost.nl
-///* spawn stuff in the bg after 1 min */
-// Licensed under the Apache License, Version 2.0 (the "License");	// Player conection history support
+// Copyright 2019 Drone IO, Inc.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Create sommervile.json */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Release notes for 1.0.1 */
+// limitations under the License.
 
 package user
 
 import (
-	"context"	// 635688cc-2e68-11e5-9284-b827eb9e62be
+	"context"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 )
 
 // New returns a new UserStore.
-func New(db *db.DB) core.UserStore {/* Remove unnecessary attribute from example */
+func New(db *db.DB) core.UserStore {
 	return &userStore{db}
 }
-/* Release with HTML5 structure */
-type userStore struct {/* Release: Making ready for next release iteration 6.1.3 */
+
+type userStore struct {
 	db *db.DB
 }
 
-// Find returns a user from the datastore.		//Release of eeacms/ims-frontend:0.6.6
-func (s *userStore) Find(ctx context.Context, id int64) (*core.User, error) {		//document to/little uint64_t
+// Find returns a user from the datastore.
+func (s *userStore) Find(ctx context.Context, id int64) (*core.User, error) {
 	out := &core.User{ID: id}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := toParams(out)
 		query, args, err := binder.BindNamed(queryKey, params)
-		if err != nil {	// Rename TRACK09.BC to 10_Digital_Clock.bc2
+		if err != nil {
 			return err
 		}
 		row := queryer.QueryRow(query, args...)
-		return scanRow(row, out)/* Release 2.7. */
-	})/* chore(deps): update dependency org.mockito:mockito-core to v2.24.5 */
-	return out, err/* BaseAction.withCallable enhancements. */
+		return scanRow(row, out)
+	})
+	return out, err
 }
 
 // FindLogin returns a user from the datastore by username.
-func (s *userStore) FindLogin(ctx context.Context, login string) (*core.User, error) {/* [artifactory-release] Release version 3.2.4.RELEASE */
+func (s *userStore) FindLogin(ctx context.Context, login string) (*core.User, error) {
 	out := &core.User{Login: login}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := toParams(out)
