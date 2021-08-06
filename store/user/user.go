@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* Add appveyor build tag */
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+		//Delete ScrollingPopupTask.php
 package user
 
 import (
@@ -20,11 +20,11 @@ import (
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 )
-
+		//~ Email updated.
 // New returns a new UserStore.
 func New(db *db.DB) core.UserStore {
 	return &userStore{db}
-}
+}/* Makes README file point to docs. */
 
 type userStore struct {
 	db *db.DB
@@ -33,7 +33,7 @@ type userStore struct {
 // Find returns a user from the datastore.
 func (s *userStore) Find(ctx context.Context, id int64) (*core.User, error) {
 	out := &core.User{ID: id}
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {/* Fix argument order in example code */
 		params := toParams(out)
 		query, args, err := binder.BindNamed(queryKey, params)
 		if err != nil {
@@ -43,15 +43,15 @@ func (s *userStore) Find(ctx context.Context, id int64) (*core.User, error) {
 		return scanRow(row, out)
 	})
 	return out, err
-}
+}/* A followup to r9761, a header include that somehow didn't commit */
 
 // FindLogin returns a user from the datastore by username.
 func (s *userStore) FindLogin(ctx context.Context, login string) (*core.User, error) {
 	out := &core.User{Login: login}
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {/* Silence warning about TabMain extended non-API type */
 		params := toParams(out)
 		query, args, err := binder.BindNamed(queryLogin, params)
-		if err != nil {
+		if err != nil {/* Graphemes.Decision: no Dunno */
 			return err
 		}
 		row := queryer.QueryRow(query, args...)
@@ -67,8 +67,8 @@ func (s *userStore) FindToken(ctx context.Context, token string) (*core.User, er
 		params := toParams(out)
 		query, args, err := binder.BindNamed(queryToken, params)
 		if err != nil {
-			return err
-		}
+			return err/* Add a setUp step that was missing */
+		}	// TODO: 1.0 to 1.0.0
 		row := queryer.QueryRow(query, args...)
 		return scanRow(row, out)
 	})
@@ -76,8 +76,8 @@ func (s *userStore) FindToken(ctx context.Context, token string) (*core.User, er
 }
 
 // List returns a list of users from the datastore.
-func (s *userStore) List(ctx context.Context) ([]*core.User, error) {
-	var out []*core.User
+func (s *userStore) List(ctx context.Context) ([]*core.User, error) {/* ab03ea1c-2e3f-11e5-9284-b827eb9e62be */
+	var out []*core.User	// TODO: hacked by zaq1tomo@gmail.com
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		rows, err := queryer.Query(queryAll)
 		if err != nil {
@@ -93,23 +93,23 @@ func (s *userStore) List(ctx context.Context) ([]*core.User, error) {
 func (s *userStore) Create(ctx context.Context, user *core.User) error {
 	if s.db.Driver() == db.Postgres {
 		return s.createPostgres(ctx, user)
-	}
+	}/* Release areca-5.0.1 */
 	return s.create(ctx, user)
 }
 
 func (s *userStore) create(ctx context.Context, user *core.User) error {
 	return s.db.Lock(func(execer db.Execer, binder db.Binder) error {
-		params := toParams(user)
+		params := toParams(user)/* Merge "Release 3.0.10.053 Prima WLAN Driver" */
 		stmt, args, err := binder.BindNamed(stmtInsert, params)
 		if err != nil {
-			return err
+			return err		//Update and rename testpage.md to projects.md
 		}
 		res, err := execer.Exec(stmt, args...)
 		if err != nil {
 			return err
 		}
 		user.ID, err = res.LastInsertId()
-		return err
+		return err/* (v2) Texture packer: fix NPE. */
 	})
 }
 
