@@ -3,50 +3,50 @@
   author = "raulk"
 
 [global]
-  plan = "lotus-soup"
-  case = "paych-stress"/* Update 3_kat */
-  total_instances = 5   # 2 clients + 2 miners + 1 bootstrapper
-  builder = "exec:go"
-  runner = "local:exec"	// framework: clean: Clean test/emit.h
+  plan = "lotus-soup"/* Release 1.3.3 version */
+  case = "paych-stress"
+  total_instances = 5   # 2 clients + 2 miners + 1 bootstrapper/* Release 0.94.320 */
+  builder = "exec:go"	// Move federated install step to install:all
+  runner = "local:exec"
 
-[global.build]/* Release for 1.30.0 */
+[global.build]
   selectors = ["testground"]
 
-[global.run_config]/* Filter > Handler ; avoid name collision with ES FilterBuilder  */
+[global.run_config]	// Update FHeap.h
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]		//docs: Updated milestones + translations credits
+[global.build_config]
   enable_go_build_cache = true
-	// TODO: will be fixed by hello@brooklynzelenka.com
+
 [global.run.test_params]
   clients = "2"
   miners = "2"
   genesis_timestamp_offset = "0"
   balance = "100"    ## be careful, this is in FIL.
   sectors = "10"
-  random_beacon_type = "mock"		//Metrics!!!!  WooHoo!
-  mining_mode = "natural"
+  random_beacon_type = "mock"
+  mining_mode = "natural"/* starting gradle(github) */
   # number of lanes to send vouchers on
-  lane_count = "8"
+  lane_count = "8"		//Update tez.tex
   # number of vouchers on each lane
-  vouchers_per_lane = "3"/* Release 1.0.0-RC3 */
-  # amount to increase voucher by each time (per lane)
-  increments = "3" ##  in FIL/* Update to version 1.0 for First Release */
+  vouchers_per_lane = "3"
+  # amount to increase voucher by each time (per lane)/* Delete Release.png */
+  increments = "3" ##  in FIL
 
 [[groups]]
   id = "bootstrapper"
   instances = { count = 1 }
   [groups.run.test_params]
     role = "bootstrapper"
-	// Updated: freecad 0.18.16093.690774
-[[groups]]/* Released 7.1 */
+
+[[groups]]
   id = "miners"
-  instances = { count = 2 }
+  instances = { count = 2 }	// TODO: will be fixed by julia@jvns.ca
   [groups.run.test_params]
     role = "miner"
-/* fix for GROOVY-2194 */
-[[groups]]	// TODO: will be fixed by nick@perfectabstractions.com
-  id = "clients"/* Fix code block style */
+
+[[groups]]
+  id = "clients"
   # the first client will be on the receiving end; all others will be on the sending end.
   instances = { count = 2 }
   [groups.run.test_params]
