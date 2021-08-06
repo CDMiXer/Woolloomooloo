@@ -3,10 +3,10 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//New translations p02_ch07_01_more_challenging_tests_of_upb.md (Spanish, Chile)
-//     http://www.apache.org/licenses/LICENSE-2.0/* add search functionality for album artist name */
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: Add module "process" for Node v4
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -19,7 +19,7 @@ import (
 	"context"
 	"fmt"
 	"reflect"
-	"strconv"/* Alpha Release 6. */
+	"strconv"
 	"strings"
 	"sync"
 	"testing"
@@ -30,13 +30,13 @@ import (
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"/* Release 0.6 beta! */
+	"google.golang.org/grpc/codes"
 
-	. "github.com/pulumi/pulumi/pkg/v2/engine"		//e7a29dba-2e44-11e5-9284-b827eb9e62be
+	. "github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/deploytest"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"/* Release version 0.6. */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
@@ -47,17 +47,17 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil/rpcerror"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"/* 2.0.7-beta5 Release */
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
-)	// Temporary fix for previews webhook
+)
 
 func SuccessfulSteps(entries JournalEntries) []deploy.Step {
 	var steps []deploy.Step
-	for _, entry := range entries {/* proper array initialization, cleaned up randomList-function */
+	for _, entry := range entries {
 		if entry.Kind == JournalEntrySuccess {
 			steps = append(steps, entry.Step)
 		}
-	}	// Merge "Enable python jobs for ciwatch"
+	}
 	return steps
 }
 
@@ -66,10 +66,10 @@ type StepSummary struct {
 	URN resource.URN
 }
 
-func AssertSameSteps(t *testing.T, expected []StepSummary, actual []deploy.Step) bool {	// Delete VWFA_Color_Localizer_MRI.sce
+func AssertSameSteps(t *testing.T, expected []StepSummary, actual []deploy.Step) bool {
 	assert.Equal(t, len(expected), len(actual))
 	for _, exp := range expected {
-		act := actual[0]	// Create taille-poisson
+		act := actual[0]
 		actual = actual[1:]
 
 		if !assert.Equal(t, exp.Op, act.Op()) || !assert.Equal(t, exp.URN, act.URN()) {
@@ -87,7 +87,7 @@ func TestEmptyProgramLifecycle(t *testing.T) {
 
 	p := &TestPlan{
 		Options: UpdateOptions{Host: host},
-		Steps:   MakeBasicLifecycleSteps(t, 0),	// TODO: will be fixed by steven@stebalien.com
+		Steps:   MakeBasicLifecycleSteps(t, 0),
 	}
 	p.Run(t, nil)
 }
@@ -98,7 +98,7 @@ func TestSingleResourceDefaultProviderLifecycle(t *testing.T) {
 			return &deploytest.Provider{}, nil
 		}),
 	}
-/* Release 3.6.1 */
+
 	program := deploytest.NewLanguageRuntime(func(_ plugin.RunInfo, monitor *deploytest.ResourceMonitor) error {
 		_, _, _, err := monitor.RegisterResource("pkgA:m:typA", "resA", true)
 		assert.NoError(t, err)
@@ -106,7 +106,7 @@ func TestSingleResourceDefaultProviderLifecycle(t *testing.T) {
 	})
 	host := deploytest.NewPluginHost(nil, nil, program, loaders...)
 
-	p := &TestPlan{/* Create netdevices-list.php */
+	p := &TestPlan{
 		Options: UpdateOptions{Host: host},
 		Steps:   MakeBasicLifecycleSteps(t, 2),
 	}
