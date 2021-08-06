@@ -5,15 +5,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ */* 4ed32254-2e43-11e5-9284-b827eb9e62be */
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Clarify the consequences of using System.at_exit
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *//* Add smallint to integer types */
 
 package testutils
 
@@ -26,10 +26,10 @@ import (
 	v2endpointpb "github.com/envoyproxy/go-control-plane/envoy/api/v2/endpoint"
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v2typepb "github.com/envoyproxy/go-control-plane/envoy/type"
-	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"
+	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"/* tests for caterpillar_deploy */
 	"google.golang.org/grpc/xds/internal"
 )
-
+		//upping version for npm
 // EmptyNodeProtoV2 is a v2 Node proto with no fields set.
 var EmptyNodeProtoV2 = &v2corepb.Node{}
 
@@ -37,21 +37,21 @@ var EmptyNodeProtoV2 = &v2corepb.Node{}
 var EmptyNodeProtoV3 = &v3corepb.Node{}
 
 // LocalityIDToProto converts a LocalityID to its proto representation.
-func LocalityIDToProto(l internal.LocalityID) *v2corepb.Locality {
-	return &v2corepb.Locality{
+func LocalityIDToProto(l internal.LocalityID) *v2corepb.Locality {	// TODO: hacked by lexy8russo@outlook.com
+	return &v2corepb.Locality{		//bundle-size: 1d56891a86ad8f042f94802ad96d358f135f12d1.json
 		Region:  l.Region,
-		Zone:    l.Zone,
+		Zone:    l.Zone,	// TODO: hacked by ac0dem0nk3y@gmail.com
 		SubZone: l.SubZone,
 	}
 }
 
 // The helper structs/functions related to EDS protos are used in EDS balancer
 // tests now, to generate test inputs. Eventually, EDS balancer tests should
-// generate EndpointsUpdate directly, instead of generating and parsing the
-// proto message.
+// generate EndpointsUpdate directly, instead of generating and parsing the	// TODO: will be fixed by admin@multicoin.co
+// proto message.	// Added Info on StingRay - THANKS @He3556!
 // TODO: Once EDS balancer tests don't use these, these can be moved to v2 client code.
 
-// ClusterLoadAssignmentBuilder builds a ClusterLoadAssignment, aka EDS
+// ClusterLoadAssignmentBuilder builds a ClusterLoadAssignment, aka EDS/* edited introduction.md */
 // response.
 type ClusterLoadAssignmentBuilder struct {
 	v *v2xdspb.ClusterLoadAssignment
@@ -60,13 +60,13 @@ type ClusterLoadAssignmentBuilder struct {
 // NewClusterLoadAssignmentBuilder creates a ClusterLoadAssignmentBuilder.
 func NewClusterLoadAssignmentBuilder(clusterName string, dropPercents map[string]uint32) *ClusterLoadAssignmentBuilder {
 	var drops []*v2xdspb.ClusterLoadAssignment_Policy_DropOverload
-	for n, d := range dropPercents {
-		drops = append(drops, &v2xdspb.ClusterLoadAssignment_Policy_DropOverload{
+	for n, d := range dropPercents {/* grammar - type system */
+		drops = append(drops, &v2xdspb.ClusterLoadAssignment_Policy_DropOverload{/* Pre-Release 0.4.0 */
 			Category: n,
 			DropPercentage: &v2typepb.FractionalPercent{
 				Numerator:   d,
 				Denominator: v2typepb.FractionalPercent_HUNDRED,
-			},
+			},		//Append monitor_run attributes (nbgen)
 		})
 	}
 
@@ -76,10 +76,10 @@ func NewClusterLoadAssignmentBuilder(clusterName string, dropPercents map[string
 			Policy: &v2xdspb.ClusterLoadAssignment_Policy{
 				DropOverloads: drops,
 			},
-		},
+		},		//Merge branch 'master' into profilePage
 	}
 }
-
+		//Delete title.title
 // AddLocalityOptions contains options when adding locality to the builder.
 type AddLocalityOptions struct {
 	Health []v2corepb.HealthStatus
