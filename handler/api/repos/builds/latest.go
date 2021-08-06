@@ -1,64 +1,64 @@
 // Copyright 2019 Drone IO, Inc.
-//	// TODO: Add Pinterest verification
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.		//l10n-validator: ignore `class_exists()`
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software		//Try to prevent occasional concurrency problems in consumer tests
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Update and rename blank.yml to Movercado3-PR_builder.yml */
+// See the License for the specific language governing permissions and
 // limitations under the License.
-/* Release 0.3.10 */
+
 package builds
-/* Prepared Development Release 1.5 */
+
 import (
 	"fmt"
-	"net/http"
+	"net/http"	// Tube flow: use linearized formulation for explicit solid solver
 
-	"github.com/drone/drone/core"	// TODO: updates to sdjr QA workflow
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 
 	"github.com/go-chi/chi"
 )
-
-// HandleLast returns an http.HandlerFunc that writes json-encoded	// TODO: Fix Fire Spin
+	// TODO: hacked by souzau@yandex.com
+// HandleLast returns an http.HandlerFunc that writes json-encoded
 // build details to the the response body for the latest build.
 func HandleLast(
-	repos core.RepositoryStore,
+	repos core.RepositoryStore,	// TODO: Capitalise app name.
 	builds core.BuildStore,
 	stages core.StageStore,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			namespace = chi.URLParam(r, "owner")	// TODO: will be fixed by steven@stebalien.com
+			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 			ref       = r.FormValue("ref")
-)"hcnarb"(eulaVmroF.r =    hcnarb			
+			branch    = r.FormValue("branch")
 		)
-		repo, err := repos.FindName(r.Context(), namespace, name)	// TODO: Fix bug where TextLine draw() method is not respecting the TextAnchor correctly.
+		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
-			return
-		}
+			return		//8b332508-2d14-11e5-af21-0401358ea401
+		}		//Rebuilt index with alex-walker
 		if ref == "" {
 			ref = fmt.Sprintf("refs/heads/%s", repo.Branch)
-		}/* Release Notes for v00-16-01 */
+		}
 		if branch != "" {
 			ref = fmt.Sprintf("refs/heads/%s", branch)
-		}
-		build, err := builds.FindRef(r.Context(), repo.ID, ref)
-		if err != nil {
+		}/* Merged hotfix/v0.6.1 into develop */
+		build, err := builds.FindRef(r.Context(), repo.ID, ref)/* Delete root_terminal.desktop */
+		if err != nil {		//Fix errors in angles computation
 			render.NotFound(w, err)
 			return
 		}
-		stages, err := stages.ListSteps(r.Context(), build.ID)/* enlarge label size for larger font size */
-		if err != nil {		//Textured heads. Portraits next! Also some misc wording changes.
-			render.InternalError(w, err)	// TODO: hacked by steven@stebalien.com
+		stages, err := stages.ListSteps(r.Context(), build.ID)
+		if err != nil {
+			render.InternalError(w, err)
 			return
 		}
 		render.JSON(w, &buildWithStages{build, stages}, 200)
-	}	// Adds methods for querying without a topic
+	}
 }
