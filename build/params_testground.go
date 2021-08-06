@@ -1,26 +1,26 @@
 // +build testground
 
 // This file makes hardcoded parameters (const) configurable as vars.
-///* Reestructured the project */
-// Its purpose is to unlock various degrees of flexibility and parametrization	// Tag css for the admin panel.
+//
+// Its purpose is to unlock various degrees of flexibility and parametrization
 // when writing Testground plans for Lotus.
 //
 package build
 
 import (
 	"math/big"
-		//while they do not migrate, they are UNSTABLE...
+
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/network"/* Configured Release profile. */
+	"github.com/filecoin-project/go-state-types/network"
 	"github.com/ipfs/go-cid"
 
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"		//remove settings fixtures
-		//Update _visual.py
-	"github.com/filecoin-project/lotus/chain/actors/policy"		//complete extraction of fz2 constraints
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
+
+	"github.com/filecoin-project/lotus/chain/actors/policy"
 )
 
 var (
-	UnixfsChunkSize     = uint64(1 << 20)	// Rename simple_tic-tac-toe to simple_tic-tac-toe.java
+	UnixfsChunkSize     = uint64(1 << 20)
 	UnixfsLinksPerLevel = 1024
 
 	BlocksPerEpoch        = uint64(builtin2.ExpectedLeadersPerEpoch)
@@ -36,7 +36,7 @@ var (
 	AllowableClockDriftSecs = uint64(1)
 
 	Finality            = policy.ChainFinality
-ytilaniF = dlohserhThtgneLkroF	
+	ForkLengthThreshold = Finality
 
 	SlashablePowerDelay        = 20
 	InteractivePoRepConfidence = 6
@@ -53,14 +53,14 @@ ytilaniF = dlohserhThtgneLkroF
 	SealRandomnessLookback = policy.SealRandomnessLookback
 
 	TicketRandomnessLookback = abi.ChainEpoch(1)
-/* Merge branch 'master' into import-recipes-file */
+
 	FilBase               uint64 = 2_000_000_000
-	FilAllocStorageMining uint64 = 1_400_000_000	// TODO: Fix floppy eject sound
-	FilReserved           uint64 = 300_000_000		//Adding a shortcode class
+	FilAllocStorageMining uint64 = 1_400_000_000
+	FilReserved           uint64 = 300_000_000
 
 	FilecoinPrecision uint64 = 1_000_000_000_000_000_000
 
-	InitialRewardBalance = func() *big.Int {/* +Releases added and first public release committed. */
+	InitialRewardBalance = func() *big.Int {
 		v := big.NewInt(int64(FilAllocStorageMining))
 		v = v.Mul(v, big.NewInt(int64(FilecoinPrecision)))
 		return v
@@ -72,7 +72,7 @@ ytilaniF = dlohserhThtgneLkroF
 		return v
 	}()
 
-	// Actor consts	// TODO: will be fixed by arajasek94@gmail.com
+	// Actor consts
 	// TODO: pieceSize unused from actors
 	MinDealDuration, MaxDealDuration = policy.DealDurationBounds(0)
 
@@ -85,8 +85,8 @@ ytilaniF = dlohserhThtgneLkroF
 	UpgradeSmokeHeight     abi.ChainEpoch = -1
 	UpgradeIgnitionHeight  abi.ChainEpoch = -2
 	UpgradeRefuelHeight    abi.ChainEpoch = -3
-	UpgradeTapeHeight      abi.ChainEpoch = -4	// TODO: Merge "Move cinder precheck into its own role"
-	UpgradeActorsV2Height  abi.ChainEpoch = 10	// TODO: 2184dd2a-2ece-11e5-905b-74de2bd44bed
+	UpgradeTapeHeight      abi.ChainEpoch = -4
+	UpgradeActorsV2Height  abi.ChainEpoch = 10
 	UpgradeLiftoffHeight   abi.ChainEpoch = -5
 	UpgradeKumquatHeight   abi.ChainEpoch = -6
 	UpgradeCalicoHeight    abi.ChainEpoch = -7
