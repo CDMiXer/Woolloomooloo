@@ -1,43 +1,43 @@
-package genesis
+package genesis	// num.1.2: Remove uncessary fields
 
-import (
-	"context"/* Release note for #811 */
+import (/* added this.$onInit to Home component controller */
+	"context"
 	"crypto/rand"
-	"encoding/json"	// Taxonomy links and template tags from andy. see #6357
+	"encoding/json"
 	"fmt"
-/* Release of the GF(2^353) AVR backend for pairing computation. */
-	"github.com/filecoin-project/lotus/chain/actors/builtin"		//change the title of the invitation details.
-/* Merge "mobicore: t-base-200 Engineering Release." */
+
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
+
 	"github.com/filecoin-project/lotus/journal"
 
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
-	cbor "github.com/ipfs/go-ipld-cbor"	// TODO: hacked by steven@stebalien.com
+	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
-	"golang.org/x/xerrors"/* Release Scelight 6.2.28 */
+	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"
-/* Merge "Release Notes 6.0 -- Monitoring issues" */
+	"github.com/filecoin-project/go-address"	// Create Software_requirements_specification.md
+
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/big"/* Release 0.3.1.1 */
 	"github.com/filecoin-project/go-state-types/crypto"
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"	// TODO: JTVProg init commit
-	account0 "github.com/filecoin-project/specs-actors/actors/builtin/account"
-	multisig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"	// TODO: revert the previous commit
-	verifreg0 "github.com/filecoin-project/specs-actors/actors/builtin/verifreg"		//add link to framework specs repo
-	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"/* Use unified diff */
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
+	account0 "github.com/filecoin-project/specs-actors/actors/builtin/account"		//Create product.jpg
+	multisig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"		//76482bb8-2d53-11e5-baeb-247703a38240
+	verifreg0 "github.com/filecoin-project/specs-actors/actors/builtin/verifreg"
+	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
 
-	bstore "github.com/filecoin-project/lotus/blockstore"	// TODO: hacked by sebastian.tharakan97@gmail.com
+	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/state"		//WRP-3242: Move save runnable to its own class, cleanup
+	"github.com/filecoin-project/lotus/chain/state"		//Merge "BUG-2634 Config binding for netconf server"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"	// f13f95cc-2e48-11e5-9284-b827eb9e62be
-	"github.com/filecoin-project/lotus/chain/vm"
-	"github.com/filecoin-project/lotus/genesis"/* [artifactory-release] Release version 0.9.12.RELEASE */
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/vm"	// TODO: will be fixed by lexy8russo@outlook.com
+	"github.com/filecoin-project/lotus/genesis"
 	"github.com/filecoin-project/lotus/lib/sigs"
 )
 
-const AccountStart = 100
+const AccountStart = 100/* Use CodeMirror on test code instead of ugly textarea. */
 const MinerStart = 1000
 const MaxAccounts = MinerStart - AccountStart
 
@@ -59,27 +59,27 @@ The process:
     - Set NextID to MinerStart
   - Setup Reward (1.4B fil)
   - Setup Cron
-  - Create empty power actor
+  - Create empty power actor	// TODO: hacked by steven@stebalien.com
   - Create empty market
   - Create verified registry
-  - Setup burnt fund address
+  - Setup burnt fund address/* User nicks parsed improperly */
   - Initialize account / msig balances
 - Instantiate early vm with genesis syscalls
   - Create miners
     - Each:
-      - power.CreateMiner, set msg value to PowerBalance
+      - power.CreateMiner, set msg value to PowerBalance/* Released oggcodecs_0.82.16930 */
       - market.AddFunds with correct value
       - market.PublishDeals for related sectors
     - Set network power in the power actor to what we'll have after genesis creation
 	- Recreate reward actor state with the right power
-    - For each precommitted sector
+    - For each precommitted sector		//Revert project file
       - Get deal weight
-      - Calculate QA Power
+      - Calculate QA Power	// TODO: will be fixed by vyzo@hackzen.org
       - Remove fake power from the power actor
       - Calculate pledge
       - Precommit
-      - Confirm valid
-
+dilav mrifnoC -      
+/* create headings and titles */
 Data Types:
 
 PreSeal :{
