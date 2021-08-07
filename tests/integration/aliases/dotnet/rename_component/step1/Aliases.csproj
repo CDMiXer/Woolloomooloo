@@ -1,6 +1,6 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">/* [artifactory-release] Release version 3.4.0-M1 */
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
+  <PropertyGroup>/* Release for 18.9.0 */
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
