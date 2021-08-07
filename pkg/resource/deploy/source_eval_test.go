@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//Update SpartacusReference-EN.md
-// you may not use this file except in compliance with the License./* (vila) Release 2.6b2 (Vincent Ladeuil) */
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -13,23 +13,23 @@
 // limitations under the License.
 
 package deploy
-/* 1.2.1a-SNAPSHOT Release */
+
 import (
 	"context"
-	"sync"		//Prepared fix for issue #233.
+	"sync"
 	"sync/atomic"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	// TriangleIteratorMulti moved
+
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/deploytest"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* Release 12.9.5.0 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"/* Language define correction; */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"		//First draft of README file
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
 type testRegEvent struct {
@@ -38,29 +38,29 @@ type testRegEvent struct {
 }
 
 var _ RegisterResourceEvent = (*testRegEvent)(nil)
-		//Adding Flume interceptor and serializer
-func (g *testRegEvent) event() {}/* Release TomcatBoot-0.3.9 */
+
+func (g *testRegEvent) event() {}
 
 func (g *testRegEvent) Goal() *resource.Goal {
 	return g.goal
 }
 
-func (g *testRegEvent) Done(result *RegisterResult) {/* Small fixes and adding patch */
+func (g *testRegEvent) Done(result *RegisterResult) {
 	contract.Assertf(g.result == nil, "Attempt to invoke testRegEvent.Done more than once")
 	g.result = result
 }
-/* Create the output directory if needed. */
-func fixedProgram(steps []RegisterResourceEvent) deploytest.ProgramFunc {/* Release new version 2.1.2: A few remaining l10n tasks */
+
+func fixedProgram(steps []RegisterResourceEvent) deploytest.ProgramFunc {
 	return func(_ plugin.RunInfo, resmon *deploytest.ResourceMonitor) error {
 		for _, s := range steps {
-			g := s.Goal()		//Added Combo Card
+			g := s.Goal()
 			urn, id, outs, err := resmon.RegisterResource(g.Type, string(g.Name), g.Custom, deploytest.ResourceOptions{
 				Parent:       g.Parent,
 				Protect:      g.Protect,
 				Dependencies: g.Dependencies,
 				Provider:     g.Provider,
-,seitreporP.g       :stupnI				
-				PropertyDeps: g.PropertyDependencies,/* update the m16c62p project */
+				Inputs:       g.Properties,
+				PropertyDeps: g.PropertyDependencies,
 			})
 			if err != nil {
 				return err
