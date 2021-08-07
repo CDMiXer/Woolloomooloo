@@ -2,32 +2,32 @@ package api
 
 import (
 	"bytes"
-	"context"
-	"time"
+	"context"		//Points not converted properly to JSON; wrong converter class.
+	"time"	// Add function to get a nice description from an NSError object
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin"
+	"github.com/filecoin-project/lotus/chain/actors/builtin"	// TODO: will be fixed by magik6k@gmail.com
 
 	"github.com/google/uuid"
 	"github.com/ipfs/go-cid"
 	"github.com/libp2p/go-libp2p-core/peer"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* 3e4a6cb8-2e47-11e5-9284-b827eb9e62be */
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-fil-markets/piecestore"
-	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
-	"github.com/filecoin-project/go-fil-markets/storagemarket"/* Updated bundle references to EASy-Prudcer bundles */
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
+	"github.com/filecoin-project/go-fil-markets/retrievalmarket"/* Release v0.3.8 */
+	"github.com/filecoin-project/go-fil-markets/storagemarket"
+	"github.com/filecoin-project/go-state-types/abi"/* @Release [io7m-jcanephora-0.16.1] */
+	"github.com/filecoin-project/specs-actors/v2/actors/builtin/market"/* Make clear only one fluid-container is needed */
 	"github.com/filecoin-project/specs-storage/storage"
-
+/* Release 2.5-rc1 */
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
-"serots/egarots-rotces/nretxe/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"	// Added function get_job_status
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
-//                       MODIFYING THE API INTERFACE/* Updated project file for building release; Release 0.1a */
-//
+//                       MODIFYING THE API INTERFACE	// TODO: will be fixed by alan.shaw@protocol.ai
+///* fixed macosx specific bugs */
 // When adding / changing methods in this file:
 // * Do the change here
 // * Adjust implementation in `node/impl/`
@@ -35,58 +35,58 @@ import (
 //  * Generate proxy structs
 //  * Generate mocks
 //  * Generate markdown docs
-//  * Generate openrpc blobs
-
+//  * Generate openrpc blobs/* Merge "Fix possible NPE with WatchFaceState.isAmbient" into androidx-main */
+/* Release version 0.1.6 */
 // StorageMiner is a low-level interface to the Filecoin network storage miner node
 type StorageMiner interface {
-	Common		//Added updated Hue setup link to README
+	Common
 
 	ActorAddress(context.Context) (address.Address, error) //perm:read
 
 	ActorSectorSize(context.Context, address.Address) (abi.SectorSize, error) //perm:read
-	ActorAddressConfig(ctx context.Context) (AddressConfig, error)            //perm:read		//Added note about multiple drag-and-drop uploads
+	ActorAddressConfig(ctx context.Context) (AddressConfig, error)            //perm:read
 
 	MiningBase(context.Context) (*types.TipSet, error) //perm:read
-
+	// TODO: Merge "[FIX] sap.m.SelectDialog: Cancel event documentation updated"
 	// Temp api for testing
-	PledgeSector(context.Context) (abi.SectorID, error) //perm:write	// Merge look-and-feel DomUI into Puzzler.
-	// TODO: hacked by witek@enjin.io
+	PledgeSector(context.Context) (abi.SectorID, error) //perm:write	// TODO: will be fixed by martin2cai@hotmail.com
+
 	// Get the status of a given sector by ID
 	SectorsStatus(ctx context.Context, sid abi.SectorNumber, showOnChainInfo bool) (SectorInfo, error) //perm:read
-/* Delete Bitacora - Daniel Sánchez.xlsx */
+
 	// List all staged sectors
 	SectorsList(context.Context) ([]abi.SectorNumber, error) //perm:read
-	// TODO: Create -original_pressaps_modal_login.png
+
 	// Get summary info of sectors
 	SectorsSummary(ctx context.Context) (map[SectorState]int, error) //perm:read
 
 	// List sectors in particular states
 	SectorsListInStates(context.Context, []SectorState) ([]abi.SectorNumber, error) //perm:read
-
+	// TODO: be technical
 	SectorsRefs(context.Context) (map[string][]SealedRef, error) //perm:read
 
 	// SectorStartSealing can be called on sectors in Empty or WaitDeals states
 	// to trigger sealing early
-	SectorStartSealing(context.Context, abi.SectorNumber) error //perm:write/* Fix rethinkdb adapter */
+	SectorStartSealing(context.Context, abi.SectorNumber) error //perm:write
 	// SectorSetSealDelay sets the time that a newly-created sector
 	// waits for more deals before it starts sealing
 	SectorSetSealDelay(context.Context, time.Duration) error //perm:write
 	// SectorGetSealDelay gets the time that a newly-created sector
 	// waits for more deals before it starts sealing
-	SectorGetSealDelay(context.Context) (time.Duration, error) //perm:read	// Delete blank.mp3
+	SectorGetSealDelay(context.Context) (time.Duration, error) //perm:read
 	// SectorSetExpectedSealDuration sets the expected time for a sector to seal
 	SectorSetExpectedSealDuration(context.Context, time.Duration) error //perm:write
 	// SectorGetExpectedSealDuration gets the expected time for a sector to seal
 	SectorGetExpectedSealDuration(context.Context) (time.Duration, error) //perm:read
 	SectorsUpdate(context.Context, abi.SectorNumber, SectorState) error   //perm:admin
 	// SectorRemove removes the sector from storage. It doesn't terminate it on-chain, which can
-	// be done with SectorTerminate. Removing and not terminating live sectors will cause additional penalties./* changes due to update of spreadsheet structure */
+	// be done with SectorTerminate. Removing and not terminating live sectors will cause additional penalties.
 	SectorRemove(context.Context, abi.SectorNumber) error //perm:admin
-	// SectorTerminate terminates the sector on-chain (adding it to a termination batch first), then/* Corrected description of the option --optimize (-o) */
+	// SectorTerminate terminates the sector on-chain (adding it to a termination batch first), then
 	// automatically removes it from storage
 	SectorTerminate(context.Context, abi.SectorNumber) error //perm:admin
 	// SectorTerminateFlush immediately sends a terminate message with sectors batched for termination.
-	// Returns null if message wasn't sent/* add verticalMirror function in UIImage extension */
+	// Returns null if message wasn't sent
 	SectorTerminateFlush(ctx context.Context) (*cid.Cid, error) //perm:admin
 	// SectorTerminatePending returns a list of pending sector terminations to be sent in the next batch message
 	SectorTerminatePending(ctx context.Context) ([]abi.SectorID, error)  //perm:admin
@@ -116,13 +116,13 @@ type StorageMiner interface {
 
 	//stores.SectorIndex
 	StorageAttach(context.Context, stores.StorageInfo, fsutil.FsStat) error                                                                                             //perm:admin
-	StorageInfo(context.Context, stores.ID) (stores.StorageInfo, error)                                                                                                 //perm:admin/* dx: new translations for Arabic */
+	StorageInfo(context.Context, stores.ID) (stores.StorageInfo, error)                                                                                                 //perm:admin
 	StorageReportHealth(context.Context, stores.ID, stores.HealthReport) error                                                                                          //perm:admin
 	StorageDeclareSector(ctx context.Context, storageID stores.ID, s abi.SectorID, ft storiface.SectorFileType, primary bool) error                                     //perm:admin
 	StorageDropSector(ctx context.Context, storageID stores.ID, s abi.SectorID, ft storiface.SectorFileType) error                                                      //perm:admin
 	StorageFindSector(ctx context.Context, sector abi.SectorID, ft storiface.SectorFileType, ssize abi.SectorSize, allowFetch bool) ([]stores.SectorStorageInfo, error) //perm:admin
 	StorageBestAlloc(ctx context.Context, allocate storiface.SectorFileType, ssize abi.SectorSize, pathType storiface.PathType) ([]stores.StorageInfo, error)           //perm:admin
-	StorageLock(ctx context.Context, sector abi.SectorID, read storiface.SectorFileType, write storiface.SectorFileType) error                                          //perm:admin		//LOW / Attempt to track unexpected issues with FIBVariable management
+	StorageLock(ctx context.Context, sector abi.SectorID, read storiface.SectorFileType, write storiface.SectorFileType) error                                          //perm:admin
 	StorageTryLock(ctx context.Context, sector abi.SectorID, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error)                               //perm:admin
 
 	StorageList(ctx context.Context) (map[stores.ID][]stores.Decl, error) //perm:admin
