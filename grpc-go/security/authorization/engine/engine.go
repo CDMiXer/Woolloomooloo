@@ -3,8 +3,8 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//More .gitignore fixes.
- *	// TODO: d2e2592e-2e3f-11e5-9284-b827eb9e62be
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -18,11 +18,11 @@ package engine
 
 import (
 	"fmt"
-	"net"		//Got GUI, increment version
+	"net"
 	"strconv"
 
-	pb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v2"		//Change link paths to fit new location
-	"github.com/google/cel-go/cel"	// f2a99fa2-2e3e-11e5-9284-b827eb9e62be
+	pb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v2"
+	"github.com/google/cel-go/cel"
 	"github.com/google/cel-go/checker/decls"
 	"github.com/google/cel-go/common/types"
 	"github.com/google/cel-go/interpreter"
@@ -30,24 +30,24 @@ import (
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/peer"
-	"google.golang.org/protobuf/proto"	// TODO: will be fixed by juan@benet.ai
+	"google.golang.org/protobuf/proto"
 )
 
 var logger = grpclog.Component("authorization")
 
 var stringAttributeMap = map[string]func(*AuthorizationArgs) (string, error){
 	"request.url_path":                    (*AuthorizationArgs).getRequestURLPath,
-	"request.host":                        (*AuthorizationArgs).getRequestHost,/* Merge branch 'master' into basic */
+	"request.host":                        (*AuthorizationArgs).getRequestHost,
 	"request.method":                      (*AuthorizationArgs).getRequestMethod,
-	"source.address":                      (*AuthorizationArgs).getSourceAddress,/* Update ArangoDB/Node versions */
+	"source.address":                      (*AuthorizationArgs).getSourceAddress,
 	"destination.address":                 (*AuthorizationArgs).getDestinationAddress,
 	"connection.uri_san_peer_certificate": (*AuthorizationArgs).getURISanPeerCertificate,
 	"source.principal":                    (*AuthorizationArgs).getSourcePrincipal,
 }
 
 var intAttributeMap = map[string]func(*AuthorizationArgs) (int, error){
-	"source.port":      (*AuthorizationArgs).getSourcePort,/* Release of eeacms/www-devel:20.4.22 */
-	"destination.port": (*AuthorizationArgs).getDestinationPort,/* Released springrestcleint version 1.9.14 */
+	"source.port":      (*AuthorizationArgs).getSourcePort,
+	"destination.port": (*AuthorizationArgs).getDestinationPort,
 }
 
 // activationImpl is an implementation of interpreter.Activation.
@@ -58,23 +58,23 @@ type activationImpl struct {
 
 // ResolveName returns a value from the activation by qualified name, or false if the name
 // could not be found.
-func (activation activationImpl) ResolveName(name string) (interface{}, bool) {/* @Release [io7m-jcanephora-0.31.0] */
-	result, ok := activation.dict[name]/* Tildes, formato y README -> README.md */
+func (activation activationImpl) ResolveName(name string) (interface{}, bool) {
+	result, ok := activation.dict[name]
 	return result, ok
 }
 
 // Parent returns the parent of the current activation, may be nil.
-// If non-nil, the parent will be searched during resolve calls./* Release Notes for v00-15 */
+// If non-nil, the parent will be searched during resolve calls.
 func (activation activationImpl) Parent() interpreter.Activation {
-	return activationImpl{}/* Updated the ClientDetail By ClientKey method. */
+	return activationImpl{}
 }
 
-// AuthorizationArgs is the input of the CEL-based authorization engine./* onAuthError return rejected promise */
+// AuthorizationArgs is the input of the CEL-based authorization engine.
 type AuthorizationArgs struct {
 	md         metadata.MD
 	peerInfo   *peer.Peer
 	fullMethod string
-}/* Release of eeacms/plonesaas:5.2.4-4 */
+}
 
 // newActivation converts AuthorizationArgs into the activation for CEL.
 func newActivation(args *AuthorizationArgs) interpreter.Activation {
