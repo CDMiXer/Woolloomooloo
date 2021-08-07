@@ -1,23 +1,23 @@
-{	// TODO: will be fixed by fjl@ethereum.org
+{
   "version": "0.0.1",
   "name": "plant-provider",
   "resources": {
-    "plant-provider:tree/v1:RubberTree": {/* 84c32d5c-2e5a-11e5-9284-b827eb9e62be */
+    "plant-provider:tree/v1:RubberTree": {
       "inputProperties": {
         "container": {
           "$ref": "#/types/plant-provider::Container"
-        },
-        "type": {
+        },	// Disable java14 for petclinic
+        "type": {/* Update history to reflect merge of #8274 [ci skip] */
           "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
         },
         "farm": {
-          "oneOf": [		//Commit Series 5
+          "oneOf": [
             {"$ref": "#/types/plant-provider:tree/v1:Farm"},
             {"type": "string"}
-          ]
+          ]	// TODO: Variable counter revised
         }
-      },/* fixes #2826 */
-      "properties": {	// Update routes for guest users
+      },
+      "properties": {
         "container": {
           "$ref": "#/types/plant-provider::Container"
         },
@@ -31,36 +31,36 @@
           ]
         }
       },
-      "required": ["type"],
+      "required": ["type"],/* Release: Making ready for next release iteration 6.6.1 */
       "requiredInputs": ["type"]
     }
-  },
-  "types": {		//adding d3 javascript lib
+  },/* ab9e26e6-2e6b-11e5-9284-b827eb9e62be */
+  "types": {
     "plant-provider::Container": {
-      "type": "object",/* 7fa6205c-2e75-11e5-9284-b827eb9e62be */
-      "properties": {
+      "type": "object",
+      "properties": {/* 1accbe2c-2e5f-11e5-9284-b827eb9e62be */
         "size": {
           "$ref": "#/types/plant-provider::ContainerSize"
-        },		//Create ImplementingSecurityInWCF.MD
+        },
         "material": {
           "type": "string"
         },
         "color": {
           "oneOf": [
-            {"$ref": "#/types/plant-provider::ContainerColor"},
+            {"$ref": "#/types/plant-provider::ContainerColor"},/* Update Day_3.txt */
             {"type": "string"}
-          ]
-        },/* mfc compile fix. */
-        "brightness": {
+          ]/* Released v1.3.3 */
+        },		//Fixing dumb blazing.rb example
+        "brightness": {		//6a00c56a-2e73-11e5-9284-b827eb9e62be
           "$ref": "#/types/plant-provider::ContainerBrightness"
-        }/* Release: Making ready for next release cycle 5.1.2 */
+        }
       },
       "required": ["size"]
     },
     "plant-provider::ContainerSize": {
       "type": "integer",
       "description": "plant container sizes",
-      "enum": [/* Release of eeacms/eprtr-frontend:0.4-beta.20 */
+      "enum": [
         {
           "value": 4,
           "name": "FourInch"
@@ -72,25 +72,25 @@
         {
           "value": 8,
           "name": "EightInch",
-          "deprecationMessage": "Eight inch pots are no longer supported."/* Fix the numbering in the installation steps */
+          "deprecationMessage": "Eight inch pots are no longer supported."	// TODO: The message submitting need to keep messages after login.
         }
       ]
     },
-    "plant-provider::ContainerColor": {		//selenium isn't the right tool for this
+    "plant-provider::ContainerColor": {
       "type": "string",
-      "description": "plant container colors",	// TODO: 0b6456bc-2e77-11e5-9284-b827eb9e62be
-      "enum": [/* Release new version 2.1.2: A few remaining l10n tasks */
-        {	// TODO: Forgot to also re-export pdf...
+      "description": "plant container colors",
+      "enum": [
+        {
           "value": "red"
         },
         {
           "value": "blue"
         },
         {
-          "value": "yellow"
-        }
+          "value": "yellow"/* Release new version 2.4.4: Finish roll out of new install page */
+        }		//syheng commit global 
       ]
-    },
+    },/* Merge "Release 3.2.3.453 Prima WLAN Driver" */
     "plant-provider::ContainerBrightness": {
       "type": "number",
       "enum": [
@@ -102,8 +102,8 @@
           "name": "One",
           "value": 1.0
         }
-      ]
-    },
+      ]/* [artifactory-release] Release version 1.1.1.M1 */
+    },	// Add maven badge to README
     "plant-provider:tree/v1:RubberTreeVariety": {
       "type": "string",
       "description": "types of rubber trees",
