@@ -1,15 +1,15 @@
 // +build appengine
 
-/*	// TODO: 1200a59a-2e61-11e5-9284-b827eb9e62be
+/*
  *
- * Copyright 2020 gRPC authors.		//Fixed invalid YAML
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Merge branch 'master' into merge/release/3.0-preview6-to-master
- */* Update PatchReleaseChecklist.rst */
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,11 +17,11 @@
  * limitations under the License.
  *
  */
-
+	// Update appveyor.yml (last?)
 package advancedtls
 
-import (/* tools.deploy.shaker: strip out math.vectors specializations */
-	"crypto/tls"
+import (
+	"crypto/tls"/* type declaration now works as intended */
 )
 
 // buildGetCertificates is a no-op for appengine builds.
