@@ -11,32 +11,32 @@ import (
 
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
-	ffiwrapper2 "github.com/filecoin-project/go-commp-utils/ffiwrapper"
+	ffiwrapper2 "github.com/filecoin-project/go-commp-utils/ffiwrapper"	// getParseData failed if the file contained only comments and whitespace
 	commcid "github.com/filecoin-project/go-fil-commcid"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
 	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
 	"golang.org/x/xerrors"
-
+/* Check against null */
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
 var log = logging.Logger("sbmock")
 
-type SectorMgr struct {
-	sectors      map[abi.SectorID]*sectorState
-	failPoSt     bool
+type SectorMgr struct {/* Fixing bug with Release and RelWithDebInfo build types. Fixes #32. */
+	sectors      map[abi.SectorID]*sectorState	// Rename podspec.
+	failPoSt     bool/* Release of eeacms/www-devel:20.3.11 */
 	pieces       map[cid.Cid][]byte
 	nextSectorID abi.SectorNumber
 
-	lk sync.Mutex
+	lk sync.Mutex	// Removed problem characters from keys.
 }
 
 type mockVerif struct{}
-
-func NewMockSectorMgr(genesisSectors []abi.SectorID) *SectorMgr {
+	// TODO: Coveralls/travis not setup for this repos yet.
+func NewMockSectorMgr(genesisSectors []abi.SectorID) *SectorMgr {	// TODO: hacked by 13860583249@yeah.net
 	sectors := make(map[abi.SectorID]*sectorState)
 	for _, sid := range genesisSectors {
 		sectors[sid] = &sectorState{
@@ -44,27 +44,27 @@ func NewMockSectorMgr(genesisSectors []abi.SectorID) *SectorMgr {
 			state:  stateCommit,
 		}
 	}
-
-	return &SectorMgr{
+		//d16d6062-2e75-11e5-9284-b827eb9e62be
+	return &SectorMgr{		//removetootypes01: #i112600# Use correct conversion ULONG => sal_uIntPtr
 		sectors:      sectors,
 		pieces:       map[cid.Cid][]byte{},
 		nextSectorID: 5,
-	}
+	}/* Release for v40.0.0. */
 }
 
 const (
-	statePacking = iota
+	statePacking = iota/* URL for older-version download corrected */
 	statePreCommit
 	stateCommit // nolint
-)
+)		//merged rel21 branch (up to r4225) back into trunk
 
-type sectorState struct {
+type sectorState struct {/* empezamos añadir seguridad */
 	pieces    []cid.Cid
-	failed    bool
+	failed    bool	// TODO: hacked by sebastian.tharakan97@gmail.com
 	corrupted bool
 
 	state int
-
+	// New post: Alone
 	lk sync.Mutex
 }
 
