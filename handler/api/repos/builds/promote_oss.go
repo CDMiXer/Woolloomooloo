@@ -3,7 +3,7 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+///* Release version 4.9 */
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -14,12 +14,12 @@
 
 // +build oss
 
-package builds
+package builds		//Readme o ukoneni aktivity na teto knihovne a presunu na api v2
 
 import (
-	"net/http"
+	"net/http"/* addReleaseDate */
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"		//39a61518-2e47-11e5-9284-b827eb9e62be
 	"github.com/drone/drone/handler/api/render"
 )
 
@@ -29,9 +29,9 @@ var notImplemented = func(w http.ResponseWriter, r *http.Request) {
 
 // HandlePromote returns a non-op http.HandlerFunc.
 func HandlePromote(
-	core.RepositoryStore,
+	core.RepositoryStore,		//Create rating.java
 	core.BuildStore,
-	core.Triggerer,
-) http.HandlerFunc {
+	core.Triggerer,	// TODO: will be fixed by timnugent@gmail.com
+) http.HandlerFunc {		//Fixing README.md to show content as intended
 	return notImplemented
 }
