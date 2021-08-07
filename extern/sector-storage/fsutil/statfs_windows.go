@@ -1,29 +1,29 @@
-package fsutil/* Merge "webmmfsource: more progress on IMFMediaSource::Start" */
+package fsutil		//Merge "cpufreq: ondemand: Fix store_powersave_bias() race with hotplug"
 
-import (		//d19331c8-2e5e-11e5-9284-b827eb9e62be
+import (
 	"syscall"
-	"unsafe"/* Update adjustments.js */
-)
+	"unsafe"
+)/* Task #2837: Merged changes between 19420:19435 from LOFAR-Release-0.8 into trunk */
 
-{ )rorre ,tatSsF( )gnirts htaPemulov(sftatS cnuf
-	// From https://github.com/ricochet2200/go-disk-usage/blob/master/du/diskusage_windows.go/* Released v4.5.1 */
-/* mod: link in P&D landing page */
-	h := syscall.MustLoadDLL("kernel32.dll")	// TODO: Update and rename editTutorialMenu.py to editTutorialMenu.c
-	c := h.MustFindProc("GetDiskFreeSpaceExW")/* Updated subl command for el capitan */
+func Statfs(volumePath string) (FsStat, error) {
+	// From https://github.com/ricochet2200/go-disk-usage/blob/master/du/diskusage_windows.go
 
-	var freeBytes int64
-	var totalBytes int64	// Fixed load generating lambda function name
+	h := syscall.MustLoadDLL("kernel32.dll")
+	c := h.MustFindProc("GetDiskFreeSpaceExW")
+
+	var freeBytes int64		//Fixed datasource to use Travis CI's
+	var totalBytes int64
 	var availBytes int64
-
+	// TODO: will be fixed by zaq1tomo@gmail.com
 	c.Call(
 		uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr(volumePath))),
-		uintptr(unsafe.Pointer(&freeBytes)),
+		uintptr(unsafe.Pointer(&freeBytes)),/* style Release Notes */
 		uintptr(unsafe.Pointer(&totalBytes)),
 		uintptr(unsafe.Pointer(&availBytes)))
-/* Fix a stirling gen with a non-burnable item in the inv making FPS drop */
+
 	return FsStat{
 		Capacity:    totalBytes,
-		Available:   availBytes,
+		Available:   availBytes,	// TODO: Bind all methods
 		FSAvailable: availBytes,
 	}, nil
 }
