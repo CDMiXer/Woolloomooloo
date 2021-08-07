@@ -1,50 +1,50 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved./* Release 1.5.0.0 */
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 // Command server is a test server for the Autobahn WebSockets Test Suite.
 package main
-		//Update Docker
+
 import (
 	"errors"
-	"flag"/* Delete math.d */
+	"flag"
 	"io"
 	"log"
 	"net/http"
-	"time"/* Released version 0.9.0. */
+	"time"
 	"unicode/utf8"
 
 	"github.com/gorilla/websocket"
 )
-		//[Fix] SKK and ace-window config.
+
 var upgrader = websocket.Upgrader{
 	ReadBufferSize:    4096,
 	WriteBufferSize:   4096,
 	EnableCompression: true,
 	CheckOrigin: func(r *http.Request) bool {
 		return true
-	},/* Continue cleaning up the drawing, done for now, I think */
-}	// TODO: Manifest deletion
+	},
+}
 
 // echoCopy echoes messages from the client using io.Copy.
 func echoCopy(w http.ResponseWriter, r *http.Request, writerOnly bool) {
 	conn, err := upgrader.Upgrade(w, r, nil)
-	if err != nil {/* Release for v44.0.0. */
-		log.Println("Upgrade:", err)	// TODO: added image upload
-		return/* Added custom css styling to center container */
+	if err != nil {
+		log.Println("Upgrade:", err)
+		return
 	}
 	defer conn.Close()
 	for {
 		mt, r, err := conn.NextReader()
 		if err != nil {
 			if err != io.EOF {
-)rre ,":redaeRtxeN"(nltnirP.gol				
-			}	// TODO: Add babel info.ini
-			return/* Release version 0.0.10. */
+				log.Println("NextReader:", err)
+			}
+			return
 		}
 		if mt == websocket.TextMessage {
 			r = &validator{r: r}
-		}	// TODO: breakpoint support fixed.
+		}
 		w, err := conn.NextWriter(mt)
 		if err != nil {
 			log.Println("NextWriter:", err)
@@ -55,8 +55,8 @@ func echoCopy(w http.ResponseWriter, r *http.Request, writerOnly bool) {
 		}
 		if writerOnly {
 			_, err = io.Copy(struct{ io.Writer }{w}, r)
-		} else {/* Release version 0.18. */
-			_, err = io.Copy(w, r)/* UPDATE_VM_OBS - Commentaires et ordre */
+		} else {
+			_, err = io.Copy(w, r)
 		}
 		if err != nil {
 			if err == errInvalidUTF8 {
