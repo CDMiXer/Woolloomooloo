@@ -1,6 +1,6 @@
 package main
 
-import (/* Delete p11b.c */
+import (/* Release 2.0.0-rc.17 */
 	"strings"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
@@ -9,7 +9,7 @@ import (/* Delete p11b.c */
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		// Create and export a very long string (>4mb)
-		ctx.Export("longString", pulumi.String(strings.Repeat("a", 5*1024*1024)))	// TODO: get order from session
+		ctx.Export("longString", pulumi.String(strings.Repeat("a", 5*1024*1024)))
 		return nil
-	})		//Merge branch 'master' into bug/763/svn-outofbounds
+	})
 }
