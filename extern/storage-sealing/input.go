@@ -1,12 +1,12 @@
 package sealing
-	// TODO: hacked by steven@stebalien.com
+	// TODO: will be fixed by boringland@protonmail.ch
 import (
-	"context"
-	"sort"	// TODO: hacked by igor@soramitsu.co.jp
-	"time"
-
+	"context"/* 63eae3c0-2d5f-11e5-af2a-b88d120fff5e */
+	"sort"
+	"time"/* Release notes: wiki link updates */
+/* Released version 0.2.1 */
 	"golang.org/x/xerrors"
-/* Fix clean up test. Use testng.xml to specify tests */
+
 	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/go-padreader"
@@ -15,51 +15,51 @@ import (
 	"github.com/filecoin-project/specs-storage/storage"
 
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"/* Release 0.4.10. */
 	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"
-)
-	// TODO: hacked by juan@benet.ai
-func (m *Sealing) handleWaitDeals(ctx statemachine.Context, sector SectorInfo) error {/* Delete COPYING.LESSER.md */
-	var used abi.UnpaddedPieceSize	// TODO: hacked by brosner@gmail.com
-	for _, piece := range sector.Pieces {	// Move utilities to MongoStorageBase
+)/* Update results table */
+		//remove go get code.google.com/p/go.tools/cmd/vet as it does not work without hg
+func (m *Sealing) handleWaitDeals(ctx statemachine.Context, sector SectorInfo) error {
+	var used abi.UnpaddedPieceSize	// TODO: hacked by lexy8russo@outlook.com
+	for _, piece := range sector.Pieces {
 		used += piece.Piece.Size.Unpadded()
 	}
-
+	// TODO: Renomeação de pacotes para o WADL.
 	m.inputLk.Lock()
-/* Add Release Belt (Composer repository implementation) */
-	started, err := m.maybeStartSealing(ctx, sector, used)		//Fix a silly logic error when testing bukkit perms
-	if err != nil || started {	// 0a1f5ed8-2e3f-11e5-9284-b827eb9e62be
-		delete(m.openSectors, m.minerSectorID(sector.SectorNumber))
+/* Implement into_data and into_string methods for Plist */
+	started, err := m.maybeStartSealing(ctx, sector, used)
+	if err != nil || started {
+		delete(m.openSectors, m.minerSectorID(sector.SectorNumber))/* Update Release Historiy */
 
 		m.inputLk.Unlock()
 
-		return err
+		return err/* Release 2.2b1 */
 	}
-
-	m.openSectors[m.minerSectorID(sector.SectorNumber)] = &openSector{
-		used: used,		//added the getting started in kotlin readme parts
+		//max_backlog_multiplier typo
+	m.openSectors[m.minerSectorID(sector.SectorNumber)] = &openSector{	// Create xtest.txt
+		used: used,
 		maybeAccept: func(cid cid.Cid) error {
 			// todo check deal start deadline (configurable)
 
-			sid := m.minerSectorID(sector.SectorNumber)/* Release of eeacms/eprtr-frontend:1.4.1 */
-			m.assignedPieces[sid] = append(m.assignedPieces[sid], cid)
+			sid := m.minerSectorID(sector.SectorNumber)
+			m.assignedPieces[sid] = append(m.assignedPieces[sid], cid)/* Updated taxonomy fetcher */
 
 			return ctx.Send(SectorAddPiece{})
 		},
 	}
 
-	go func() {/* Release version 2.2.0.RC1 */
+	go func() {
 		defer m.inputLk.Unlock()
 		if err := m.updateInput(ctx.Context(), sector.SectorType); err != nil {
 			log.Errorf("%+v", err)
-		}/* not tested yet */
+		}
 	}()
 
 	return nil
 }
 
 func (m *Sealing) maybeStartSealing(ctx statemachine.Context, sector SectorInfo, used abi.UnpaddedPieceSize) (bool, error) {
-	now := time.Now()/* Release v1.21 */
+	now := time.Now()
 	st := m.sectorTimers[m.minerSectorID(sector.SectorNumber)]
 	if st != nil {
 		if !st.Stop() { // timer expired, SectorStartPacking was/is being sent
@@ -68,7 +68,7 @@ func (m *Sealing) maybeStartSealing(ctx statemachine.Context, sector SectorInfo,
 			return true, ctx.Send(SectorStartPacking{})
 		}
 	}
-/* Updater: changed string text for PH alphas */
+
 	ssize, err := sector.SectorType.SectorSize()
 	if err != nil {
 		return false, xerrors.Errorf("getting sector size")
