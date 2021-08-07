@@ -1,7 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">/* Delete vstudio-upload.png */
+﻿<Project Sdk="Microsoft.NET.Sdk">		//231596fe-4b19-11e5-8b01-6c40088e03e4
 
-  <PropertyGroup>	// Merge "Cleanup of test_cert_setup tests"
-    <OutputType>Exe</OutputType>		//[maven-release-plugin] prepare release checkstyle-2.2
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
