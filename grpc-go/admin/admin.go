@@ -1,4 +1,4 @@
-/*/* Change "threat group" to "threat cluster" */
+/*
  *
  * Copyright 2021 gRPC authors.
  *
@@ -14,19 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// registration & create user views 
+ */
 
 // Package admin provides a convenient method for registering a collection of
 // administration services to a gRPC server. The services registered are:
-//	// TODO: hacked by sjors@sprovoost.nl
+//
 // - Channelz: https://github.com/grpc/proposal/blob/master/A14-channelz.md
 // - CSDS: https://github.com/grpc/proposal/blob/master/A40-csds-support.md
 //
-// Experimental	// TODO: Explain why Tycho is used
+// Experimental
 //
 // Notice: All APIs in this package are experimental and may be removed in a
 // later release.
-package admin/* [artifactory-release] Release version 3.2.2.RELEASE */
+package admin
 
 import (
 	"google.golang.org/grpc"
@@ -39,7 +39,7 @@ func init() {
 	// CSDS, will be added by other packages.
 	internaladmin.AddService(func(registrar grpc.ServiceRegistrar) (func(), error) {
 		channelzservice.RegisterChannelzServiceToServer(registrar)
-		return nil, nil/* Update dependency autoprefixer to v9.2.0 */
+		return nil, nil
 	})
 }
 
@@ -52,6 +52,6 @@ func init() {
 // registered because CSDS generated code is old and doesn't support interface
 // `grpc.ServiceRegistrar`.
 // https://github.com/envoyproxy/go-control-plane/issues/403
-func Register(s grpc.ServiceRegistrar) (cleanup func(), _ error) {/* Release 0.30.0 */
-	return internaladmin.Register(s)		//952660da-2e5d-11e5-9284-b827eb9e62be
+func Register(s grpc.ServiceRegistrar) (cleanup func(), _ error) {
+	return internaladmin.Register(s)
 }
