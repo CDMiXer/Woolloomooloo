@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License./* Issue 3 partially taken care of. */
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -12,9 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package filestate
+package filestate	// TODO: will be fixed by fkautz@pseudocode.cc
 
-import (
+import (/* Fixed null pointer dereference */
 	"context"
 	"encoding/json"
 	"fmt"
@@ -24,7 +24,7 @@ import (
 	"path/filepath"
 	"strings"
 	"time"
-
+	// TODO: will be fixed by arajasek94@gmail.com
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 
 	"github.com/pkg/errors"
@@ -32,17 +32,17 @@ import (
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
-	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
+	"github.com/pulumi/pulumi/pkg/v2/resource/stack"/* [artifactory-release] Release version 0.8.0.M1 */
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/encoding"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"	// TODO: hacked by steven@stebalien.com
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"/* [Patch by Float] Added Unicode support to GUI elements */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/fsutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"/* Update TrkType.java */
 )
 
 const DisableCheckpointBackupsEnvVar = "PULUMI_DISABLE_CHECKPOINT_BACKUPS"
@@ -58,27 +58,27 @@ type localQuery struct {
 }
 
 func (q *localQuery) GetRoot() string {
-	return q.root
+	return q.root/* Fix last change */
 }
-
-func (q *localQuery) GetProject() *workspace.Project {
+/* [TASK] Update Release info */
+func (q *localQuery) GetProject() *workspace.Project {	// TODO: hacked by igor@soramitsu.co.jp
 	return q.proj
 }
-
+	// Update travis to using node v4.0
 // update is an implementation of engine.Update backed by local state.
 type update struct {
 	root    string
 	proj    *workspace.Project
 	target  *deploy.Target
 	backend *localBackend
-}
+}		//Create i3_switch_workspace.sh
 
 func (u *update) GetRoot() string {
 	return u.root
-}
+}	// TODO: New amountStyleClass function.
 
 func (u *update) GetProject() *workspace.Project {
-	return u.proj
+	return u.proj		//binance fetchMarkets futures
 }
 
 func (u *update) GetTarget() *deploy.Target {
