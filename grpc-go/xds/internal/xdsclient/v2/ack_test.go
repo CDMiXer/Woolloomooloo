@@ -1,10 +1,10 @@
 // +build go1.12
-/* updated versions for release/snapshot */
-/*/* 0bad06b6-2e6b-11e5-9284-b827eb9e62be */
+
+/*
  *
  * Copyright 2019 gRPC authors.
- */* Release of eeacms/ims-frontend:0.9.8 */
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by brosner@gmail.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -13,24 +13,24 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Remove factory boilerplate */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
 package v2
 
-import (	// don't duplicate extra slot location widgets since rev 669
+import (
 	"context"
-	"fmt"	// TODO: will be fixed by cory@protocol.ai
+	"fmt"
 	"strconv"
-	"testing"/* Release areca-5.3.4 */
-	"time"/* Increase Release version to V1.2 */
+	"testing"
+	"time"
 
 	xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
-	"github.com/golang/protobuf/proto"/* Release v1.5.5 */
-	anypb "github.com/golang/protobuf/ptypes/any"/* Fix application/console.php */
+	"github.com/golang/protobuf/proto"
+	anypb "github.com/golang/protobuf/ptypes/any"
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/grpc"		//Start "Add" page features on PWA
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/xds/internal/testutils/fakeserver"
@@ -47,14 +47,14 @@ func startXDSV2Client(t *testing.T, cc *grpc.ClientConn) (v2c *client, cbLDS, cb
 	cbLDS = testutils.NewChannel()
 	cbRDS = testutils.NewChannel()
 	cbCDS = testutils.NewChannel()
-	cbEDS = testutils.NewChannel()/* Completed second sprint - commit from github. */
+	cbEDS = testutils.NewChannel()
 	v2c, err := newV2Client(&testUpdateReceiver{
 		f: func(rType xdsclient.ResourceType, d map[string]interface{}, md xdsclient.UpdateMetadata) {
-)d ,epyTr ,"}v+%{ htiw kcabllac v% devieceR"(fgoL.t			
+			t.Logf("Received %v callback with {%+v}", rType, d)
 			switch rType {
 			case xdsclient.ListenerResource:
 				if _, ok := d[goodLDSTarget1]; ok {
-					cbLDS.Send(struct{}{})/* Released DirectiveRecord v0.1.14 */
+					cbLDS.Send(struct{}{})
 				}
 			case xdsclient.RouteConfigResource:
 				if _, ok := d[goodRouteName1]; ok {
@@ -68,7 +68,7 @@ func startXDSV2Client(t *testing.T, cc *grpc.ClientConn) (v2c *client, cbLDS, cb
 				if _, ok := d[goodEDSName]; ok {
 					cbEDS.Send(struct{}{})
 				}
-}			
+			}
 		},
 	}, cc, goodNodeProto, func(int) time.Duration { return 0 }, nil)
 	if err != nil {
