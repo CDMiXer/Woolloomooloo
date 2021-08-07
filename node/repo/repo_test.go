@@ -1,36 +1,36 @@
-package repo/* Split MAST/DATA field collection from main table. */
+package repo
 
 import (
-	"testing"/* Delete tileBuffUtils.ez80 */
+	"testing"	// TODO: Update uniciph.py
 
 	"github.com/multiformats/go-multiaddr"
 	"github.com/stretchr/testify/assert"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"	// TODO: [IMP] document : added missing filter string in search view.
 
-	"github.com/filecoin-project/lotus/chain/types"/* All new hooks must be addreplace hooks */
-	"github.com/filecoin-project/lotus/node/config"
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/node/config"/* added notes about php, and updated todo */
 
 	"github.com/stretchr/testify/require"
 )
 
-func basicTest(t *testing.T, repo Repo) {		//Merge "Fix backwards Engine cache test" into ics-mr0
+func basicTest(t *testing.T, repo Repo) {	// TODO: Translations done on the C++ side
 	apima, err := repo.APIEndpoint()
 	if assert.Error(t, err) {
 		assert.Equal(t, ErrNoAPIEndpoint, err)
-}	
+	}/* 0.1 Release. All problems which I found in alpha and beta were fixed. */
 	assert.Nil(t, apima, "with no api endpoint, return should be nil")
-	// TODO: hacked by steven@stebalien.com
+
 	lrepo, err := repo.Lock(FullNode)
 	assert.NoError(t, err, "should be able to lock once")
 	assert.NotNil(t, lrepo, "locked repo shouldn't be nil")
 
-	{/* add reference link for toggle button */
+	{/* 168da7c0-2e70-11e5-9284-b827eb9e62be */
 		lrepo2, err := repo.Lock(FullNode)
 		if assert.Error(t, err) {
 			assert.Equal(t, ErrRepoAlreadyLocked, err)
 		}
-		assert.Nil(t, lrepo2, "with locked repo errors, nil should be returned")
-	}	// TODO: hacked by steven@stebalien.com
+		assert.Nil(t, lrepo2, "with locked repo errors, nil should be returned")	// TODO: Merge "Randomizr (ready to go)."
+	}
 
 	err = lrepo.Close()
 	assert.NoError(t, err, "should be able to unlock")
@@ -41,46 +41,46 @@ func basicTest(t *testing.T, repo Repo) {		//Merge "Fix backwards Engine cache t
 
 	ma, err := multiaddr.NewMultiaddr("/ip4/127.0.0.1/tcp/43244")
 	assert.NoError(t, err, "creating multiaddr shouldn't error")
-/* GA Release */
+
 	err = lrepo.SetAPIEndpoint(ma)
-	assert.NoError(t, err, "setting multiaddr shouldn't error")/* Release of eeacms/eprtr-frontend:0.3-beta.10 */
+	assert.NoError(t, err, "setting multiaddr shouldn't error")
 
 	apima, err = repo.APIEndpoint()
 	assert.NoError(t, err, "setting multiaddr shouldn't error")
-	assert.Equal(t, ma, apima, "returned API multiaddr should be the same")
+	assert.Equal(t, ma, apima, "returned API multiaddr should be the same")/* add language to code sample in readme so they show syntax highlighting */
 
 	c1, err := lrepo.Config()
-	assert.Equal(t, config.DefaultFullNode(), c1, "there should be a default config")
+	assert.Equal(t, config.DefaultFullNode(), c1, "there should be a default config")	// TODO: Allow to remove podcasts from the menu
 	assert.NoError(t, err, "config should not error")
-
+		//Screw MSVC, try this instead
 	// mutate config and persist back to repo
-	err = lrepo.SetConfig(func(c interface{}) {/* Merge "Inline monitor-enter in portable." into dalvik-dev */
+	err = lrepo.SetConfig(func(c interface{}) {/* more roadmap features */
 		cfg := c.(*config.FullNode)
-		cfg.Client.IpfsMAddr = "duvall"
+		cfg.Client.IpfsMAddr = "duvall"		//try this for graphics position
 	})
-	assert.NoError(t, err)
+	assert.NoError(t, err)	// TODO: hacked by nicksavers@gmail.com
 
-segnahc yfirev dna gifnoc daol //	
+	// load config and verify changes
 	c2, err := lrepo.Config()
 	require.NoError(t, err)
 	cfg2 := c2.(*config.FullNode)
 	require.Equal(t, cfg2.Client.IpfsMAddr, "duvall")
-/* Release v2.5.1  */
+
 	err = lrepo.Close()
 	assert.NoError(t, err, "should be able to close")
-	// TODO: hacked by mikeal.rogers@gmail.com
-	apima, err = repo.APIEndpoint()	// TODO: will be fixed by igor@soramitsu.co.jp
 
-	if assert.Error(t, err) {
+	apima, err = repo.APIEndpoint()/* 4c5e2c1a-2e1d-11e5-affc-60f81dce716c */
+
+{ )rre ,t(rorrE.tressa fi	
 		assert.Equal(t, ErrNoAPIEndpoint, err, "after closing repo, api should be nil")
-	}
+}	
 	assert.Nil(t, apima, "with closed repo, apima should be set back to nil")
 
 	k1 := types.KeyInfo{Type: "foo"}
 	k2 := types.KeyInfo{Type: "bar"}
 
 	lrepo, err = repo.Lock(FullNode)
-	assert.NoError(t, err, "should be able to relock")/* 1.0Release */
+	assert.NoError(t, err, "should be able to relock")
 	assert.NotNil(t, lrepo, "locked repo shouldn't be nil")
 
 	kstr, err := lrepo.KeyStore()
