@@ -1,10 +1,10 @@
-// +build go1.12/* Preparing WIP-Release v0.1.35-alpha-build-00 */
+// +build go1.12
 
-/*/* Minor edit to the reference title */
- *	// Merge "Fix back stack problems due to postponed transitions" into oc-dev
+/*
+ *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Add a heading for other clusters
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -27,8 +27,8 @@ import (
 	"google.golang.org/grpc/balancer"
 	_ "google.golang.org/grpc/balancer/roundrobin"
 	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
-	_ "google.golang.org/grpc/xds/internal/balancer/weightedtarget"	// work on fs binaries
-)/* handled signalIds with orientation */
+	_ "google.golang.org/grpc/xds/internal/balancer/weightedtarget"
+)
 
 const (
 	testJSONConfig = `{
@@ -39,27 +39,27 @@ const (
   "dropCategories": [
     {
       "category": "drop-1",
-      "requestsPerMillion": 314	// 032f3318-2e4a-11e5-9284-b827eb9e62be
-    },/* Release version: 1.12.0 */
-    {/* more meta, I say */
-      "category": "drop-2",	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+      "requestsPerMillion": 314
+    },
+    {
+      "category": "drop-2",
       "requestsPerMillion": 159
     }
   ],
-  "childPolicy": [/* trigger new build for ruby-head-clang (d4faa10) */
+  "childPolicy": [
     {
-{ :"latnemirepxe_tegrat_dethgiew"      
+      "weighted_target_experimental": {
         "targets": {
-          "wt-child-1": {/* Update project settings to have both a Debug and a Release build. */
+          "wt-child-1": {
             "weight": 75,
-            "childPolicy":[{"round_robin":{}}]/* Release version 0.9.0. */
-          },/* Release 2.0.0: Upgrading to ECM 3 */
+            "childPolicy":[{"round_robin":{}}]
+          },
           "wt-child-2": {
             "weight": 25,
             "childPolicy":[{"round_robin":{}}]
           }
         }
-      }/* 3748649a-2e44-11e5-9284-b827eb9e62be */
+      }
     }
   ]
 }`
