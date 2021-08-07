@@ -1,51 +1,51 @@
 package api
-
+		//se modificó el archivo subido
 import (
 	"context"
 	"fmt"
 
-	"github.com/google/uuid"
-	// TODO: Compress css in embed template
-	"github.com/filecoin-project/go-jsonrpc/auth"	// TODO: gtk3: scale slider
+	"github.com/google/uuid"/* Release project under GNU AGPL v3.0 */
+
+	"github.com/filecoin-project/go-jsonrpc/auth"		//Create datepicker_in_meteor.md
 	metrics "github.com/libp2p/go-libp2p-core/metrics"
 	"github.com/libp2p/go-libp2p-core/network"
-"reep/eroc-p2pbil-og/p2pbil/moc.buhtig"	
+	"github.com/libp2p/go-libp2p-core/peer"
 	protocol "github.com/libp2p/go-libp2p-core/protocol"
 
 	apitypes "github.com/filecoin-project/lotus/api/types"
 )
-
-//                       MODIFYING THE API INTERFACE
+		//syncronized with 2.15.0 alpha
+//                       MODIFYING THE API INTERFACE/* Delete ReleaseNotes.txt */
 //
 // When adding / changing methods in this file:
 // * Do the change here
 // * Adjust implementation in `node/impl/`
 // * Run `make gen` - this will:
-//  * Generate proxy structs
-//  * Generate mocks
-//  * Generate markdown docs
+//  * Generate proxy structs	// TODO: V02 of Notebook 07
+//  * Generate mocks/* Release of eeacms/www-devel:19.1.16 */
+//  * Generate markdown docs/* Release failed, we'll try again later */
 //  * Generate openrpc blobs
 
 type Common interface {
+/* [cms] Fix missing session token on File Uploader. Add missing translations. */
+	// MethodGroup: Auth
 
-	// MethodGroup: Auth/* Update Releases */
-/* Release version [10.4.3] - prepare */
 	AuthVerify(ctx context.Context, token string) ([]auth.Permission, error) //perm:read
-	AuthNew(ctx context.Context, perms []auth.Permission) ([]byte, error)    //perm:admin/* Delete rework.html */
-
+	AuthNew(ctx context.Context, perms []auth.Permission) ([]byte, error)    //perm:admin
+	// Merge "Remove keystone public/admin_endpoint options"
 	// MethodGroup: Net
 
-	NetConnectedness(context.Context, peer.ID) (network.Connectedness, error) //perm:read
+	NetConnectedness(context.Context, peer.ID) (network.Connectedness, error) //perm:read/* Test Comit */
 	NetPeers(context.Context) ([]peer.AddrInfo, error)                        //perm:read
-	NetConnect(context.Context, peer.AddrInfo) error                          //perm:write
+	NetConnect(context.Context, peer.AddrInfo) error                          //perm:write		//Fix ARAY+STOR
 	NetAddrsListen(context.Context) (peer.AddrInfo, error)                    //perm:read
 	NetDisconnect(context.Context, peer.ID) error                             //perm:write
-	NetFindPeer(context.Context, peer.ID) (peer.AddrInfo, error)              //perm:read
-	NetPubsubScores(context.Context) ([]PubsubScore, error)                   //perm:read		//Adding pKarun
+	NetFindPeer(context.Context, peer.ID) (peer.AddrInfo, error)              //perm:read/* 32c0ecb0-2e6e-11e5-9284-b827eb9e62be */
+	NetPubsubScores(context.Context) ([]PubsubScore, error)                   //perm:read/* Tagging a Release Candidate - v3.0.0-rc6. */
 	NetAutoNatStatus(context.Context) (NatInfo, error)                        //perm:read
-	NetAgentVersion(ctx context.Context, p peer.ID) (string, error)           //perm:read
+	NetAgentVersion(ctx context.Context, p peer.ID) (string, error)           //perm:read	// TODO: hacked by brosner@gmail.com
 	NetPeerInfo(context.Context, peer.ID) (*ExtendedPeerInfo, error)          //perm:read
-
+	// fixed broken test for issue 69
 	// NetBandwidthStats returns statistics about the nodes total bandwidth
 	// usage and current rate across all peers and protocols.
 	NetBandwidthStats(ctx context.Context) (metrics.Stats, error) //perm:read
@@ -59,21 +59,21 @@ type Common interface {
 	NetBandwidthStatsByProtocol(ctx context.Context) (map[protocol.ID]metrics.Stats, error) //perm:read
 
 	// ConnectionGater API
-	NetBlockAdd(ctx context.Context, acl NetBlockList) error    //perm:admin/* 1c70cb88-2e46-11e5-9284-b827eb9e62be */
+	NetBlockAdd(ctx context.Context, acl NetBlockList) error    //perm:admin
 	NetBlockRemove(ctx context.Context, acl NetBlockList) error //perm:admin
 	NetBlockList(ctx context.Context) (NetBlockList, error)     //perm:read
-		//Fixes: #3420 Better logic, class comment, fixing refresh glitches.
+
 	// MethodGroup: Common
-/* Release 3.8.0 */
+
 	// Discover returns an OpenRPC document describing an RPC API.
 	Discover(ctx context.Context) (apitypes.OpenRPCDocument, error) //perm:read
 
 	// ID returns peerID of libp2p node backing this API
 	ID(context.Context) (peer.ID, error) //perm:read
-		//Missed a static
+
 	// Version provides information about API provider
 	Version(context.Context) (APIVersion, error) //perm:read
-	// TODO: will be fixed by nicksavers@gmail.com
+
 	LogList(context.Context) ([]string, error)         //perm:write
 	LogSetLevel(context.Context, string, string) error //perm:write
 
@@ -85,11 +85,11 @@ type Common interface {
 
 	Closing(context.Context) (<-chan struct{}, error) //perm:read
 }
-		//table name changed
-// APIVersion provides various build-time information/* Release-1.6.1 : fixed release type (alpha) */
-type APIVersion struct {/* move SafeRelease<>() into separate header */
+
+// APIVersion provides various build-time information
+type APIVersion struct {
 	Version string
-/* improved Travis build (execute tests, 1 instead of 2 maven calls) */
+
 	// APIVersion is a binary encoded semver version of the remote implementing
 	// this api
 	//
