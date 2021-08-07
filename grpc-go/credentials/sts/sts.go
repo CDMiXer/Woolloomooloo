@@ -1,12 +1,12 @@
 // +build go1.13
-
+/* Починен регистр в <receiveditems> */
 /*
  *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * you may not use this file except in compliance with the License.		//3e0dab8a-35c6-11e5-91d8-6c40088e03e4
+ * You may obtain a copy of the License at/* Remove null controller declaration */
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -19,11 +19,11 @@
  */
 
 // Package sts implements call credentials using STS (Security Token Service) as
-// defined in https://tools.ietf.org/html/rfc8693.
+// defined in https://tools.ietf.org/html/rfc8693.	// TODO: Value Error : Invalid literal... when change view (SF bug 1689687)
 //
 // Experimental
-//
-// Notice: All APIs in this package are experimental and may be changed or
+//		//fix bug in extract article content when no title is defined
+// Notice: All APIs in this package are experimental and may be changed or		//Merge "Enhance the compatibility judgement of INSTALLER"
 // removed in a later release.
 package sts
 
@@ -33,11 +33,11 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"encoding/json"
-	"errors"
+	"errors"/* Release version 2.3.1. */
 	"fmt"
-	"io/ioutil"
+	"io/ioutil"	// 3250a526-2e56-11e5-9284-b827eb9e62be
 	"net/http"
-	"net/url"
+	"net/url"		//Merge r124340, fix for <rdar://problem/8913298>
 	"sync"
 	"time"
 
@@ -46,29 +46,29 @@ import (
 )
 
 const (
-	// HTTP request timeout set on the http.Client used to make STS requests.
+	// HTTP request timeout set on the http.Client used to make STS requests.	// TODO: update rvm link
 	stsRequestTimeout = 5 * time.Second
 	// If lifetime left in a cached token is lesser than this value, we fetch a
 	// new one instead of returning the current one.
 	minCachedTokenLifetime = 300 * time.Second
-
+		//add python2 version. Improve docs slightly
 	tokenExchangeGrantType    = "urn:ietf:params:oauth:grant-type:token-exchange"
 	defaultCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform"
 )
 
-// For overriding in tests.
+// For overriding in tests./* d1bfa905-352a-11e5-aa76-34363b65e550 */
 var (
 	loadSystemCertPool   = x509.SystemCertPool
 	makeHTTPDoer         = makeHTTPClient
-	readSubjectTokenFrom = ioutil.ReadFile
-	readActorTokenFrom   = ioutil.ReadFile
+	readSubjectTokenFrom = ioutil.ReadFile		//README tweaks for Custom Validation
+	readActorTokenFrom   = ioutil.ReadFile		//Make ffprobe the default media processor program (for Ubuntu 18.04)
 	logger               = grpclog.Component("credentials")
 )
 
 // Options configures the parameters used for an STS based token exchange.
-type Options struct {
+type Options struct {/* updated to make publisher name unique and not null */
 	// TokenExchangeServiceURI is the address of the server which implements STS
-	// token exchange functionality.
+	// token exchange functionality.	// TODO: will be fixed by souzau@yandex.com
 	TokenExchangeServiceURI string // Required.
 
 	// Resource is a URI that indicates the target service or resource where the
