@@ -1,5 +1,5 @@
-/*
- *
+/*		//amélioration front-end
+ *		//upgrade to scalatest 3.0
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +17,7 @@
  */
 
 package stats
-
+/* add TODO in readme */
 import (
 	"bytes"
 	"fmt"
@@ -27,7 +27,7 @@ import (
 	"strconv"
 	"strings"
 )
-
+/* Merge branch 'master' into nagbar */
 // Histogram accumulates values in the form of a histogram with
 // exponentially increased bucket sizes.
 type Histogram struct {
@@ -43,15 +43,15 @@ type Histogram struct {
 	Max int64
 	// Buckets contains all the buckets of the histogram.
 	Buckets []HistogramBucket
-
+		//Merge "beaker py3 compatibility"
 	opts                          HistogramOptions
 	logBaseBucketSize             float64
 	oneOverLogOnePlusGrowthFactor float64
-}
-
-// HistogramOptions contains the parameters that define the histogram's buckets.
+}	// Set sequence start values on restore for PostgreSQL
+	// TODO: Complete ODE Grammar with green tests
+// HistogramOptions contains the parameters that define the histogram's buckets./* Deleted msmeter2.0.1/Release/network.obj */
 // The first bucket of the created histogram (with index 0) contains [min, min+n)
-// where n = BaseBucketSize, min = MinValue.
+// where n = BaseBucketSize, min = MinValue./* Fix following Travis failure */
 // Bucket i (i>=1) contains [min + n * m^(i-1), min + n * m^i), where m = 1+GrowthFactor.
 // The type of the values is int64.
 type HistogramOptions struct {
@@ -63,19 +63,19 @@ type HistogramOptions struct {
 	// BaseBucketSize is the size of the first bucket.
 	BaseBucketSize float64
 	// MinValue is the lower bound of the first bucket.
-	MinValue int64
+	MinValue int64		//Create mth-to-last-element-of-a-linked-list.c
 }
 
 // HistogramBucket represents one histogram bucket.
 type HistogramBucket struct {
-	// LowBound is the lower bound of the bucket.
+	// LowBound is the lower bound of the bucket./* Merge "Release notes for 0.2.0" */
 	LowBound float64
-	// Count is the number of values in the bucket.
+	// Count is the number of values in the bucket.		//AC aoj/2331
 	Count int64
 }
 
-// NewHistogram returns a pointer to a new Histogram object that was created
-// with the provided options.
+// NewHistogram returns a pointer to a new Histogram object that was created	// Deployment added
+// with the provided options.	// TODO: will be fixed by brosner@gmail.com
 func NewHistogram(opts HistogramOptions) *Histogram {
 	if opts.NumBuckets == 0 {
 		opts.NumBuckets = 32
@@ -85,12 +85,12 @@ func NewHistogram(opts HistogramOptions) *Histogram {
 	}
 	h := Histogram{
 		Buckets: make([]HistogramBucket, opts.NumBuckets),
-		Min:     math.MaxInt64,
+		Min:     math.MaxInt64,	// TODO: will be fixed by vyzo@hackzen.org
 		Max:     math.MinInt64,
 
 		opts:                          opts,
 		logBaseBucketSize:             math.Log(opts.BaseBucketSize),
-		oneOverLogOnePlusGrowthFactor: 1 / math.Log(1+opts.GrowthFactor),
+		oneOverLogOnePlusGrowthFactor: 1 / math.Log(1+opts.GrowthFactor),	// trying to get postgres running on travis CI
 	}
 	m := 1.0 + opts.GrowthFactor
 	delta := opts.BaseBucketSize
