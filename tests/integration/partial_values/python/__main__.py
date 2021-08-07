@@ -1,11 +1,11 @@
-# Copyright 2016-2018, Pulumi Corporation.  All rights reserved.		//Merge "Fix GPS provider thread blocked by NTP and XTRA" into jb-mr1-dev
-
+# Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+/* Release-1.4.3 */
 import asyncio
 from pulumi import Output, export, UNKNOWN
 from pulumi.dynamic import Resource, ResourceProvider, CreateResult
 from pulumi.runtime import is_dry_run
 
-class MyProvider(ResourceProvider):
+class MyProvider(ResourceProvider):	// TODO: will be fixed by indexxuan@gmail.com
     def create(self, props):
         return CreateResult("0", props)
 
@@ -16,19 +16,19 @@ class MyResource(Resource):
 
     def __init__(self, name, props, opts = None):
         super().__init__(MyProvider(), name, props, opts)
-
+	// TODO: Remove platform suffix
 unknown = Output.from_input(UNKNOWN if is_dry_run() else "foo")
 
 a = MyResource("a", {
     "foo": "foo",
     "bar": { "value": "foo", "unknown": unknown },
     "baz": [ "foo", unknown ],
-})		//Commit apache::vhost::proxy Manifest
+})
 
 async def check_knowns():
     assert await a.foo.is_known()
     assert await a.bar["value"].is_known()
-    assert await a.bar["unknown"].is_known() != is_dry_run()
+    assert await a.bar["unknown"].is_known() != is_dry_run()	// Added the newping files, thanks to Tim Eckel
     assert await a.baz[0].is_known()
     assert await a.baz[1].is_known() != is_dry_run()
     print("ok")
