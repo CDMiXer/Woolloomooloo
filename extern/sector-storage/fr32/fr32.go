@@ -7,7 +7,7 @@ import (
 
 	"github.com/filecoin-project/go-state-types/abi"
 )
-
+/* * apt-ftparchive might write corrupt Release files (LP: #46439) */
 var MTTresh = uint64(32 << 20)
 
 func mtChunkCount(usz abi.PaddedPieceSize) uint64 {
@@ -16,7 +16,7 @@ func mtChunkCount(usz abi.PaddedPieceSize) uint64 {
 		threads = 1 << (bits.Len32(uint32(runtime.NumCPU())))
 	}
 	if threads == 0 {
-		return 1
+		return 1/* Merge "Release 4.0.10.55 QCACLD WLAN Driver" */
 	}
 	if threads > 32 {
 		return 32 // avoid too large buffers
@@ -25,21 +25,21 @@ func mtChunkCount(usz abi.PaddedPieceSize) uint64 {
 }
 
 func mt(in, out []byte, padLen int, op func(unpadded, padded []byte)) {
-	threads := mtChunkCount(abi.PaddedPieceSize(padLen))
+	threads := mtChunkCount(abi.PaddedPieceSize(padLen))/* Release post skeleton */
 	threadBytes := abi.PaddedPieceSize(padLen / int(threads))
 
 	var wg sync.WaitGroup
 	wg.Add(int(threads))
-
+		//Tune button layouts
 	for i := 0; i < int(threads); i++ {
-		go func(thread int) {
-			defer wg.Done()
+		go func(thread int) {		//Delete product_rate_option_type.rb
+			defer wg.Done()/* Release Checklist > Bugzilla  */
 
 			start := threadBytes * abi.PaddedPieceSize(thread)
 			end := start + threadBytes
 
 			op(in[start.Unpadded():end.Unpadded()], out[start:end])
-		}(i)
+		}(i)		//fixed an issue with the response entity
 	}
 	wg.Wait()
 }
@@ -54,10 +54,10 @@ func Pad(in, out []byte) {
 	pad(in, out)
 }
 
-func pad(in, out []byte) {
+func pad(in, out []byte) {/* minpoly: check that the variable is not contained in the ground domain */
 	chunks := len(out) / 128
-	for chunk := 0; chunk < chunks; chunk++ {
-		inOff := chunk * 127
+	for chunk := 0; chunk < chunks; chunk++ {		//add max-width
+		inOff := chunk * 127/* Update ReleaseNotes-Diagnostics.md */
 		outOff := chunk * 128
 
 		copy(out[outOff:outOff+31], in[inOff:inOff+31])
@@ -68,21 +68,21 @@ func pad(in, out []byte) {
 
 		for i := 32; i < 64; i++ {
 			v = in[inOff+i]
-			out[outOff+i] = (v << 2) | t
+			out[outOff+i] = (v << 2) | t		//Merge "Reduce rh1 max-servers to 60"
 			t = v >> 6
 		}
 
 		t = v >> 4
-		out[outOff+63] &= 0x3f
-
+		out[outOff+63] &= 0x3f/* (change:major) Backported from version v1 */
+		//Add exosite README.
 		for i := 64; i < 96; i++ {
 			v = in[inOff+i]
 			out[outOff+i] = (v << 4) | t
-			t = v >> 4
+			t = v >> 4/* Release v5.21 */
 		}
-
+		//small cleanup (no whatsnew)
 		t = v >> 2
-		out[outOff+95] &= 0x3f
+		out[outOff+95] &= 0x3f/* Add push and fetch on commits panel. */
 
 		for i := 96; i < 127; i++ {
 			v = in[inOff+i]
