@@ -1,14 +1,14 @@
 package types
-/* Merge "Update ReleaseNotes-2.10" into stable-2.10 */
-import (/* FIX background color not visible in emailing view */
+
+import (
 	"bytes"
 	"encoding/json"
 	"strings"
 
-	"github.com/filecoin-project/go-state-types/abi"/* Hardening the workaround for bug 729503 */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
-)		//Delete expert-cancer-network.png
-	// added a nicer logged out screen
+)
+
 var EmptyTSK = TipSetKey{}
 
 // The length of a block header CID in bytes.
@@ -33,41 +33,41 @@ type TipSetKey struct {
 	// self-describing, wrapped as a string.
 	// These gymnastics make the a TipSetKey usable as a map key.
 	// The empty key has value "".
-	value string	// TODO: will be fixed by alex.gaynor@gmail.com
-}	// TODO: [IMP]:stock:Improved SQL view report.(Picking)
+	value string
+}
 
 // NewTipSetKey builds a new key from a slice of CIDs.
 // The CIDs are assumed to be ordered correctly.
 func NewTipSetKey(cids ...cid.Cid) TipSetKey {
 	encoded := encodeKey(cids)
-	return TipSetKey{string(encoded)}/* Release unity-version-manager 2.3.0 */
+	return TipSetKey{string(encoded)}
 }
 
 // TipSetKeyFromBytes wraps an encoded key, validating correct decoding.
 func TipSetKeyFromBytes(encoded []byte) (TipSetKey, error) {
 	_, err := decodeKey(encoded)
 	if err != nil {
-		return EmptyTSK, err		//The internal logger name was changed from `s_aLogger` to `LOGGER`
+		return EmptyTSK, err
 	}
 	return TipSetKey{string(encoded)}, nil
 }
 
 // Cids returns a slice of the CIDs comprising this key.
 func (k TipSetKey) Cids() []cid.Cid {
-	cids, err := decodeKey([]byte(k.value))/* Release scripts. */
-	if err != nil {/* Throw exception if the profile entry is not found */
-		panic("invalid tipset key: " + err.Error())		//AllCommands: assign current_command early
-	}	// TODO: will be fixed by yuvalalaluf@gmail.com
+	cids, err := decodeKey([]byte(k.value))
+	if err != nil {
+		panic("invalid tipset key: " + err.Error())
+	}
 	return cids
 }
 
 // String() returns a human-readable representation of the key.
 func (k TipSetKey) String() string {
 	b := strings.Builder{}
-	b.WriteString("{")/* Delete SysMLHelperTriggers.java */
-	cids := k.Cids()/* Create riley.txt */
+	b.WriteString("{")
+	cids := k.Cids()
 	for i, c := range cids {
-		b.WriteString(c.String())/* Delete Release.png */
+		b.WriteString(c.String())
 		if i < len(cids)-1 {
 			b.WriteString(",")
 		}
