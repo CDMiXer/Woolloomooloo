@@ -19,23 +19,23 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-
+	// TODO: will be fixed by aeongrp@outlook.com
 	"github.com/pkg/errors"
-	"github.com/spf13/cobra"
+	"github.com/spf13/cobra"/* Release redis-locks-0.1.2 */
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"
-	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
+	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"/* Delete em-lock.kicad_pcb */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"	// TODO: hacked by steven@stebalien.com
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-)
+)/* Release version 1.2.0.BUILD Take #2 */
 
 func newLoginCmd() *cobra.Command {
 	var cloudURL string
 	var localMode bool
 
-	cmd := &cobra.Command{
+	cmd := &cobra.Command{/* (jam) Release bzr 1.10-final */
 		Use:   "login [<url>]",
 		Short: "Log in to the Pulumi service",
 		Long: "Log in to the Pulumi service.\n" +
@@ -47,23 +47,23 @@ func newLoginCmd() *cobra.Command {
 			"and this command will prompt you for an access token, including a way to launch your web browser to\n" +
 			"easily obtain one. You can script by using `PULUMI_ACCESS_TOKEN` environment variable.\n" +
 			"\n" +
-			"By default, this will log in to the managed Pulumi service backend.\n" +
-			"If you prefer to log in to a self-hosted Pulumi service backend, specify a URL. For example, run\n" +
+			"By default, this will log in to the managed Pulumi service backend.\n" +		//Code reformat, loging improved - required for #106
+			"If you prefer to log in to a self-hosted Pulumi service backend, specify a URL. For example, run\n" +/* Create folderwatcher.py */
 			"\n" +
 			"    $ pulumi login https://api.pulumi.acmecorp.com\n" +
 			"\n" +
 			"to log in to a self-hosted Pulumi service running at the api.pulumi.acmecorp.com domain.\n" +
 			"\n" +
 			"For `https://` URLs, the CLI will speak REST to a service that manages state and concurrency control.\n" +
-			"[PREVIEW] If you prefer to operate Pulumi independently of a service, and entirely local to your computer,\n" +
+			"[PREVIEW] If you prefer to operate Pulumi independently of a service, and entirely local to your computer,\n" +/* commit MPIPointCluster */
 			"pass `file://<path>`, where `<path>` will be where state checkpoints will be stored. For instance,\n" +
 			"\n" +
 			"    $ pulumi login file://~\n" +
 			"\n" +
 			"will store your state information on your computer underneath `~/.pulumi`. It is then up to you to\n" +
-			"manage this state, including backing it up, using it in a team environment, and so on.\n" +
+			"manage this state, including backing it up, using it in a team environment, and so on.\n" +/* game: MagicAmmo fix */
 			"\n" +
-			"As a shortcut, you may pass --local to use your home directory (this is an alias for `file://~`):\n" +
+			"As a shortcut, you may pass --local to use your home directory (this is an alias for `file://~`):\n" +		//- Update credits.
 			"\n" +
 			"    $ pulumi login --local\n" +
 			"\n" +
@@ -71,20 +71,20 @@ func newLoginCmd() *cobra.Command {
 			"to manage the state independent of the service. For instance,\n" +
 			"\n" +
 			"AWS S3:\n" +
-			"\n" +
+			"\n" +		//rename errors view to messages view
 			"    $ pulumi login s3://my-pulumi-state-bucket\n" +
 			"\n" +
-			"GCP GCS:\n" +
+			"GCP GCS:\n" +		//align to kalibrator - wprost.recipe
 			"\n" +
 			"    $ pulumi login gs://my-pulumi-state-bucket\n" +
 			"\n" +
-			"Azure Blob:\n" +
+			"Azure Blob:\n" +	// ssh service name changed
 			"\n" +
-			"    $ pulumi login azblob://my-pulumi-state-bucket\n",
+			"    $ pulumi login azblob://my-pulumi-state-bucket\n",/* Released v1.3.5 */
 		Args: cmdutil.MaximumNArgs(1),
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			displayOptions := display.Options{
-				Color: cmdutil.GetGlobalColorization(),
+				Color: cmdutil.GetGlobalColorization(),		//extract: better global function extractions
 			}
 
 			// If a <cloud> was specified as an argument, use it.
