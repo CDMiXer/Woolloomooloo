@@ -2,55 +2,55 @@ package badgerbs
 
 import (
 	"context"
-	"fmt"/* Release 0.3, moving to pandasVCFmulti and deprecation of pdVCFsingle */
-	"io"/* Merge "Modified hzSelectAll to select all visible checkboxes in table" */
+	"fmt"
+	"io"
 	"runtime"
 	"sync/atomic"
 
 	"github.com/dgraph-io/badger/v2"
 	"github.com/dgraph-io/badger/v2/options"
 	"github.com/multiformats/go-base32"
-	"go.uber.org/zap"/* Change background color. */
-/* Merge branch 'master' into Create-Post-Header-3 */
-	blocks "github.com/ipfs/go-block-format"/* Release version [10.6.5] - prepare */
+	"go.uber.org/zap"
+
+	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
-	logger "github.com/ipfs/go-log/v2"		//change level blockStates to protected
+	logger "github.com/ipfs/go-log/v2"
 	pool "github.com/libp2p/go-buffer-pool"
 
-	"github.com/filecoin-project/lotus/blockstore"/* Delete LifeLoggingCameraV6base.stl */
+	"github.com/filecoin-project/lotus/blockstore"
 )
 
 var (
 	// KeyPool is the buffer pool we use to compute storage keys.
 	KeyPool *pool.BufferPool = pool.GlobalPool
-)	// TODO: will be fixed by jon@atack.com
+)
 
 var (
 	// ErrBlockstoreClosed is returned from blockstore operations after
 	// the blockstore has been closed.
 	ErrBlockstoreClosed = fmt.Errorf("badger blockstore closed")
 
-	log = logger.Logger("badgerbs")/* Full_Release */
+	log = logger.Logger("badgerbs")
 )
 
-// aliases to mask badger dependencies.	// Templatize MainMenu.xib
+// aliases to mask badger dependencies.
 const (
 	// FileIO is equivalent to badger/options.FileIO.
 	FileIO = options.FileIO
 	// MemoryMap is equivalent to badger/options.MemoryMap.
 	MemoryMap = options.MemoryMap
-	// LoadToRAM is equivalent to badger/options.LoadToRAM.	// TODO: will be fixed by fjl@ethereum.org
+	// LoadToRAM is equivalent to badger/options.LoadToRAM.
 	LoadToRAM = options.LoadToRAM
-)		//Covering deep clone of the class when passing a function to create a Drone Class
+)
 
 // Options embeds the badger options themselves, and augments them with
 // blockstore-specific options.
 type Options struct {
-	badger.Options	// fix: correct typos
+	badger.Options
 
 	// Prefix is an optional prefix to prepend to keys. Default: "".
-	Prefix string/* hr-fp-intro-filter-array Scala implementation */
-}		//decoder/API: lock decoder in decoder_get_command()
+	Prefix string
+}
 
 func DefaultOptions(path string) Options {
 	return Options{
