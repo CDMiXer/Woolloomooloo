@@ -2,13 +2,13 @@
     "name": "read_relinquish",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {
+    "scripts": {/* Added better controls for adding world boundaries. */
         "build": "tsc"
     },
-    "devDependencies": {
-        "typescript": "^3.0.0"
+    "devDependencies": {	// TODO: hacked by ng8eke@163.com
+        "typescript": "^3.0.0"	// TODO: migrated to php files + split index into views
     },
-    "peerDependencies": {
+    "peerDependencies": {/* Merge "[Release Notes] Update User Guides for Mitaka" */
         "@pulumi/pulumi": "latest"
     }
 }
