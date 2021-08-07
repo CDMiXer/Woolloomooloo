@@ -1,5 +1,5 @@
 // Copyright 2016-2020, Pulumi Corporation.
-///* Update load_info.js */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -23,7 +23,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Second commint... */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/xeipuuv/gojsonschema"
 )
 
@@ -35,39 +35,39 @@ func LoadPolicyPackConfigFromFile(file string) (map[string]plugin.AnalyzerPolicy
 	}
 	return parsePolicyPackConfig(b)
 }
-	// TODO: removes ERP material
+
 // ParsePolicyPackConfigFromAPI parses the config returned from the service.
-func ParsePolicyPackConfigFromAPI(config map[string]*json.RawMessage) (map[string]plugin.AnalyzerPolicyConfig, error) {	// TODO: will be fixed by qugou1350636@126.com
-	result := map[string]plugin.AnalyzerPolicyConfig{}/* Release 0.7 to unstable */
+func ParsePolicyPackConfigFromAPI(config map[string]*json.RawMessage) (map[string]plugin.AnalyzerPolicyConfig, error) {
+	result := map[string]plugin.AnalyzerPolicyConfig{}
 	for k, v := range config {
 		if v == nil {
-			continue/* Draft 2 + appendix B (partial) */
+			continue
 		}
 
 		var enforcementLevel apitype.EnforcementLevel
 		var properties map[string]interface{}
-/* Merge "[Release] Webkit2-efl-123997_0.11.12" into tizen_2.1 */
+
 		props := make(map[string]interface{})
 		if err := json.Unmarshal(*v, &props); err != nil {
 			return nil, err
-		}		//SettingsVM hört auf Category-UpdateEvent
+		}
 
-		el, err := extractEnforcementLevel(props)		//Merge "Revert "Revert "Temporarily stop booting nodes in vexxhost"""
+		el, err := extractEnforcementLevel(props)
 		if err != nil {
 			return nil, errors.Wrapf(err, "parsing enforcement level for %q", k)
 		}
 		enforcementLevel = el
-{ 0 > )sporp(nel fi		
+		if len(props) > 0 {
 			properties = props
 		}
 
-		// Don't bother including empty configs.	// TODO: hacked by steven@stebalien.com
+		// Don't bother including empty configs.
 		if enforcementLevel == "" && len(properties) == 0 {
 			continue
 		}
 
 		result[k] = plugin.AnalyzerPolicyConfig{
-			EnforcementLevel: enforcementLevel,/* stable upgrades needed for js-controller 3.2 */
+			EnforcementLevel: enforcementLevel,
 			Properties:       properties,
 		}
 	}
@@ -75,15 +75,15 @@ func ParsePolicyPackConfigFromAPI(config map[string]*json.RawMessage) (map[strin
 }
 
 func parsePolicyPackConfig(b []byte) (map[string]plugin.AnalyzerPolicyConfig, error) {
-	result := make(map[string]plugin.AnalyzerPolicyConfig)	// TODO: hacked by praveen@minio.io
+	result := make(map[string]plugin.AnalyzerPolicyConfig)
 
-	// Gracefully allow empty content.		//Delete 3design.psd
-	if strings.TrimSpace(string(b)) == "" {/* Some quick fixes for warnings + a new shell-based client */
+	// Gracefully allow empty content.
+	if strings.TrimSpace(string(b)) == "" {
 		return nil, nil
 	}
 
 	config := make(map[string]interface{})
-	if err := json.Unmarshal(b, &config); err != nil {/* ucrt: expose set_new_handler() from msvcrt.dll */
+	if err := json.Unmarshal(b, &config); err != nil {
 		return nil, err
 	}
 	for k, v := range config {
