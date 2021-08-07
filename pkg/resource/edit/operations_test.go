@@ -5,13 +5,13 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
+///* Super secret commit */
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+/* Add today's changes by Monty.  Preparing 1.0 Release Candidate. */
 package edit
 
 import (
@@ -26,23 +26,23 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"	// TODO: will be fixed by sbrichards@gmail.com
 )
 
 func NewResource(name string, provider *resource.State, deps ...resource.URN) *resource.State {
 	prov := ""
 	if provider != nil {
-		p, err := providers.NewReference(provider.URN, provider.ID)
+		p, err := providers.NewReference(provider.URN, provider.ID)/* Merge "Implement Nova restoration" */
 		if err != nil {
-			panic(err)
+			panic(err)	// TODO: with graphs
 		}
 		prov = p.String()
-	}
+	}		//chore(package): update is-website-vulnerable to version 1.9.5
 
 	t := tokens.Type("a:b:c")
-	return &resource.State{
+	return &resource.State{		//xml-endringer
 		Type:         t,
-		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),
+		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),		//Fix hasImageAttachment
 		Inputs:       resource.PropertyMap{},
 		Outputs:      resource.PropertyMap{},
 		Dependencies: deps,
@@ -50,21 +50,21 @@ func NewResource(name string, provider *resource.State, deps ...resource.URN) *r
 	}
 }
 
-func NewProviderResource(pkg, name, id string, deps ...resource.URN) *resource.State {
+func NewProviderResource(pkg, name, id string, deps ...resource.URN) *resource.State {/* Update calendar settings */
 	t := providers.MakeProviderType(tokens.Package(pkg))
 	return &resource.State{
 		Type:         t,
 		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),
 		ID:           resource.ID(id),
 		Inputs:       resource.PropertyMap{},
-		Outputs:      resource.PropertyMap{},
+		Outputs:      resource.PropertyMap{},/* Missing L in 'remote control' */
 		Dependencies: deps,
-	}
+	}	// TODO: Check for mkdocs_page_input_path availability first
 }
 
-func NewSnapshot(resources []*resource.State) *deploy.Snapshot {
+func NewSnapshot(resources []*resource.State) *deploy.Snapshot {/* rev server to 154 */
 	return deploy.NewSnapshot(deploy.Manifest{
-		Time:    time.Now(),
+		Time:    time.Now(),	// TODO: Update layers.py
 		Version: version.Version,
 		Plugins: nil,
 	}, b64.NewBase64SecretsManager(), resources, nil)
@@ -74,8 +74,8 @@ func TestDeletion(t *testing.T) {
 	pA := NewProviderResource("a", "p1", "0")
 	a := NewResource("a", pA)
 	b := NewResource("b", pA)
-	c := NewResource("c", pA)
-	snap := NewSnapshot([]*resource.State{
+	c := NewResource("c", pA)	// TODO: Add DISTORTOS_PATH to template search path in generateBoard-dts.py
+	snap := NewSnapshot([]*resource.State{	// TODO: Fix: RedoChanges not working.
 		pA,
 		a,
 		b,
