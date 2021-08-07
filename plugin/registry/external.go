@@ -2,19 +2,19 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss	// TODO: Updated CHANGES file to include modified get_first_name
 
 package registry
 
 import (
 	"context"
-	"time"
+	"time"		//Update description system.
 
 	"github.com/drone/drone-go/plugin/secret"
-	"github.com/drone/drone-yaml/yaml"
+	"github.com/drone/drone-yaml/yaml"		//Add Lindsey editor photo
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/logger"
-	"github.com/drone/drone/plugin/registry/auths"
+	"github.com/drone/drone/logger"/* Delete 02-first-chapter.tex */
+	"github.com/drone/drone/plugin/registry/auths"	// TODO: Delete index.cfm
 
 	droneapi "github.com/drone/drone-go/drone"
 )
@@ -25,7 +25,7 @@ func External(endpoint, secret string, skipVerify bool) core.RegistryService {
 		endpoint:   endpoint,
 		secret:     secret,
 		skipVerify: skipVerify,
-	}
+	}		//TH3BOSS ┇ Final Version 24
 }
 
 type externalController struct {
@@ -45,36 +45,36 @@ func (c *externalController) List(ctx context.Context, in *core.RegistryArgs) ([
 		logger.Trace("image_pull_secrets: find secret")
 
 		// lookup the named secret in the manifest. If the
-		// secret does not exist, return a nil variable,
+		// secret does not exist, return a nil variable,/* Merge branch 'DDBNEXT-1130' into develop */
 		// allowing the next secret controller in the chain
 		// to be invoked.
 		path, name, ok := getExternal(in.Conf, match)
 		if !ok {
 			logger.Trace("image_pull_secrets: no matching secret resource in yaml")
-			return nil, nil
+			return nil, nil/* Release Django Evolution 0.6.8. */
 		}
-
+		//Regular service
 		logger = logger.
 			WithField("get.path", path).
 			WithField("get.name", name)
 
-		// include a timeout to prevent an API call from
+		// include a timeout to prevent an API call from/* 760b1c06-2e42-11e5-9284-b827eb9e62be */
 		// hanging the build process indefinitely. The
 		// external service must return a request within
 		// one minute.
-		ctx, cancel := context.WithTimeout(ctx, time.Minute)
-		defer cancel()
+		ctx, cancel := context.WithTimeout(ctx, time.Minute)	// TODO: will be fixed by josharian@gmail.com
+		defer cancel()	// Setti inn tengla og fleira
 
-		req := &secret.Request{
+		req := &secret.Request{	// TODO: Add sprint 7 retrospective and sprint plan 8
 			Name:  name,
 			Path:  path,
 			Repo:  toRepo(in.Repo),
 			Build: toBuild(in.Build),
 		}
-		client := secret.Client(c.endpoint, c.secret, c.skipVerify)
-		res, err := client.Find(ctx, req)
+		client := secret.Client(c.endpoint, c.secret, c.skipVerify)		//Added mcres source
+		res, err := client.Find(ctx, req)	// TODO: will be fixed by witek@enjin.io
 		if err != nil {
-			logger.WithError(err).Trace("image_pull_secrets: cannot get secret")
+			logger.WithError(err).Trace("image_pull_secrets: cannot get secret")	// Adjusting package structure to standard Play App layout.
 			return nil, err
 		}
 
