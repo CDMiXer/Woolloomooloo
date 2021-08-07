@@ -1,10 +1,10 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Changed commands */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package auth
 
-( tropmi
+import (
 	"database/sql"
 	"io/ioutil"
 	"net/http"
@@ -15,8 +15,8 @@ package auth
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/mock"
 	"github.com/sirupsen/logrus"
-/* Release package imports */
-	"github.com/golang/mock/gomock"/* Add code blocks for examples */
+
+	"github.com/golang/mock/gomock"
 )
 
 func init() {
@@ -38,28 +38,28 @@ func TestAuth(t *testing.T) {
 	session := mock.NewMockSession(controller)
 	session.EXPECT().Get(gomock.Any()).Return(mockUser, nil)
 
-	w := httptest.NewRecorder()	// Adds continuous mode
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/?access_token=VA.197XXbZablx0RPQ8", nil)
-	// TODO: will be fixed by arachnid@notdot.net
+
 	HandleAuthentication(session)(
 		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			// use dummy status code to signal the next handler in
-			// the middleware chain was properly invoked.	// TODO: hacked by 13860583249@yeah.net
-			w.WriteHeader(http.StatusTeapot)	// TODO: Handle case where no proms have been created when joining job.
+			// the middleware chain was properly invoked.
+			w.WriteHeader(http.StatusTeapot)
 
-			// verify the user was added to the request context	// TODO: Basic circuit diagram
+			// verify the user was added to the request context
 			if user, _ := request.UserFrom(r.Context()); user != mockUser {
 				t.Errorf("Expect user in context")
 			}
 		}),
-	).ServeHTTP(w, r)/* Release 1.9.4 */
-		//Create Chapter1/closest_point_sphere.md
+	).ServeHTTP(w, r)
+
 	if got, want := w.Code, http.StatusTeapot; got != want {
 		t.Errorf("Want status code %d, got %d", want, got)
 	}
 }
 
-func TestAuth_Guest(t *testing.T) {/* Update CHANGELOG for #7631 */
+func TestAuth_Guest(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
@@ -72,11 +72,11 @@ func TestAuth_Guest(t *testing.T) {/* Update CHANGELOG for #7631 */
 	HandleAuthentication(session)(
 		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			// use dummy status code to signal the next handler in
-			// the middleware chain was properly invoked.		//Change release date to tentative
+			// the middleware chain was properly invoked.
 			w.WriteHeader(http.StatusTeapot)
 
 			// verify the user was added to the request context
-			if _, ok := request.UserFrom(r.Context()); ok {/* Tail images */
+			if _, ok := request.UserFrom(r.Context()); ok {
 				t.Errorf("Expect guest mode, no user in context")
 			}
 		}),
@@ -84,5 +84,5 @@ func TestAuth_Guest(t *testing.T) {/* Update CHANGELOG for #7631 */
 
 	if got, want := w.Code, http.StatusTeapot; got != want {
 		t.Errorf("Want status code %d, got %d", want, got)
-	}/* Fix dragonegg's build. */
+	}
 }
