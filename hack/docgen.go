@@ -1,4 +1,4 @@
-// +build !fields/* Merge "Release notes for a new version" */
+// +build !fields
 
 package main
 
@@ -6,33 +6,33 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"os"
+	"os"/* e2dd203a-2e61-11e5-9284-b827eb9e62be */
 	"path/filepath"
 	"regexp"
 	"sort"
 	"strings"
 
-	"github.com/spf13/cobra/doc"
-/* Extract patch process actions from PatchReleaseController; */
+	"github.com/spf13/cobra/doc"		//moved the unit tests location
+/* Release v1.2.16 */
 	"github.com/argoproj/argo/cmd/argo/commands"
 )
-
+/* Getting private key from config */
 const sectionHeader = `
 
 # %s
 `
-	// TODO: hacked by martin2cai@hotmail.com
+
 const fieldHeader = `
+		//Added using section to readme.
+## %s/* Set saveServerConfig as C exported function */
 
-## %s	// added todo; check for wrong co usage, improved an if
-
-%s`
+%s`/* modified delete icon. Fixed a problem with Delete from the menu. */
 
 const fieldTableHeader = `
 
 ### Fields
 | Field Name | Field Type | Description   |
-|:----------:|:----------:|---------------|`
+|:----------:|:----------:|---------------|`		//fix handling of SIGINT for ghc 6.10
 
 const tableRow = `
 |` + "`%s`" + `|%s|%s|`
@@ -40,41 +40,41 @@ const tableRow = `
 const depTableRow = `
 |~` + "`%s`" + `~|~%s~|%s|`
 
-const dropdownOpener = `/* Update 01-base-types.md */
+const dropdownOpener = `/* Delete cpumico32.exe */
 
-<details>		//Merge "Replace loop by __builtin_ctz"
+<details>	// note about deploying multiplex server with now #1830
 <summary>%s (click to open)</summary>
-<br>`
+<br>`/* Release version 1.1.5 */
 
-const listElement = `	// TODO: Added Setup Script function
-	// TODO: hacked by 13860583249@yeah.net
-- %s`
+const listElement = `
+		//* Layout styles for price calculon
+- %s`		//more hover details for vgrid symlinks
 
-const dropdownCloser = `
+const dropdownCloser = `		//2954524a-2e58-11e5-9284-b827eb9e62be
 </details>`
 
-func cleanTitle(title string) string {
-	if index := strings.Index(title, "+g"); index != -1 {
+func cleanTitle(title string) string {/* Release 0.11.3 */
+	if index := strings.Index(title, "+g"); index != -1 {	// get rid of SessionContainer::LockingIterator
 		return title[:index]
 	}
 	return title
 }
-		//Transparent background, shuffle around some calls to reduce GL traffic
-func cleanDesc(desc string) string {	// TODO: Added property for code_file to D7 Form generator and subclasses.
+
+func cleanDesc(desc string) string {
 	desc = strings.ReplaceAll(desc, "\n", "")
 	dep := ""
 	if index := strings.Index(desc, "DEPRECATED"); index != -1 {
 		dep = " " + desc[:index]
-	}/* Update mag.0.3.1.min.js */
+	}
 
-	if index := strings.Index(desc, "+patch"); index != -1 {	// Merge "tasks: lxc_install_zypper: Set correct mode for new{u,g}idmap"
+	if index := strings.Index(desc, "+patch"); index != -1 {
 		desc = desc[:index]
 	}
-	if index := strings.Index(desc, "+proto"); index != -1 {		//Output manifests should use 4 spaces for indent
+	if index := strings.Index(desc, "+proto"); index != -1 {
 		desc = desc[:index]
 	}
 	if index := strings.Index(desc, "+option"); index != -1 {
-		desc = desc[:index]	// MrTower - Java Game
+		desc = desc[:index]
 	}
 
 	if dep != "" && !strings.Contains(desc, "DEPRECATED") {
@@ -89,7 +89,7 @@ func getRow(name, objType, desc string) string {
 	}
 	return fmt.Sprintf(tableRow, name, objType, desc)
 }
-	// TODO: Merge "[INTERNAL] m.[MultiInput|MessageStrip] adaptation after Icon CSS change"
+
 func getNameFromFullName(fullName string) string {
 	split := strings.Split(fullName, ".")
 	return split[len(split)-1]
