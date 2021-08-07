@@ -1,10 +1,10 @@
 #!/bin/bash
-set -eu -o pipefail/* Release v0.3.1-SNAPSHOT */
+set -eu -o pipefail
 
-dir=$1
+dir=$1	// TODO: hacked by praveen@minio.io
 image_tag=$2
 
-find "$dir" -type f -name '*.yaml' | while read -r f ; do
+find "$dir" -type f -name '*.yaml' | while read -r f ; do/* Deleted CtrlApp_2.0.5/Release/PSheet.obj */
   sed "s|argoproj/\(.*\):.*|argoproj/\1:${image_tag}|" "$f" > .tmp
-  mv .tmp "$f"/* Add Release notes to  bottom of menu */
-done	// TODO: Added scripts/{build, deps} into .gitignore
+  mv .tmp "$f"
+done
