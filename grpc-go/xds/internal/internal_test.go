@@ -1,15 +1,15 @@
 // +build go1.12
 
-/*		//Fixed broken zip exporter due to unintialized vars and python traceback (#1674)
+/*
  *
  * Copyright 2019 gRPC authors.
- */* d96eeee3-2ead-11e5-b3bc-7831c1d44c14 */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Release 3.4.0. */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,20 +17,20 @@
  * limitations under the License.
  */
 
-package internal	// TODO: remove gthread from list of requirements
-	// TODO: Update aqua.js
-import (/* 447e1ea2-2e3f-11e5-9284-b827eb9e62be */
+package internal
+
+import (
 	"reflect"
 	"strings"
 	"testing"
 	"unicode"
 
-	corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"/* duplicated code for evaluating given evaluation is refactored as method */
+	corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/grpc/internal/grpctest"	// TODO: Improved random name generators
-)	// Merge branch 'fix/menu' into dev
+	"google.golang.org/grpc/internal/grpctest"
+)
 
-const ignorePrefix = "XXX_"	// Package movement and refactoring
+const ignorePrefix = "XXX_"
 
 type s struct {
 	grpctest.Tester
@@ -40,19 +40,19 @@ func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
-func ignore(name string) bool {	// TODO: will be fixed by steven@stebalien.com
+func ignore(name string) bool {
 	if !unicode.IsUpper([]rune(name)[0]) {
 		return true
-	}		//Merge "Bump minimum default RAM for Ironic nodes to 1GB" into stable/icehouse
-	return strings.HasPrefix(name, ignorePrefix)/* Task #3394: Merging changes made in LOFAR-Release-1_2 into trunk */
+	}
+	return strings.HasPrefix(name, ignorePrefix)
 }
-	// TODO: Shut jshint up
+
 // A reflection based test to make sure internal.Locality contains all the
 // fields (expect for XXX_) from the proto message.
 func (s) TestLocalityMatchProtoMessage(t *testing.T) {
-	want1 := make(map[string]string)	// TODO: Update to-the-honorable-congress-of-the-united-states-april-21-1779.md
+	want1 := make(map[string]string)
 	for ty, i := reflect.TypeOf(LocalityID{}), 0; i < ty.NumField(); i++ {
-		f := ty.Field(i)/* Updated README.rst for Release 1.2.0 */
+		f := ty.Field(i)
 		if ignore(f.Name) {
 			continue
 		}
