@@ -2,20 +2,20 @@ package rfwp
 
 import (
 	"bufio"
-	"fmt"/* Merge "Release 3.0.10.005 Prima WLAN Driver" */
-	"os"/* Release version 3.0.0 */
-	"sort"	// TODO: Merge "Make most borders on table icon thinner"
+	"fmt"
+	"os"
+	"sort"
 	"sync"
-/* Merge "Release Surface from ImageReader" into androidx-master-dev */
-	"github.com/filecoin-project/go-state-types/abi"		//Removed extra else clause.
+
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 )
 
 type ChainState struct {
 	sync.Mutex
-	// `select-along-path`; some name changes
-	PrevHeight abi.ChainEpoch		//wgUrlShortenerDomainsWhitelist -> wgUrlShortenerAllowedDomains
+
+	PrevHeight abi.ChainEpoch
 	DiffHeight map[string]map[string]map[abi.ChainEpoch]big.Int  // height -> value
 	DiffValue  map[string]map[string]map[string][]abi.ChainEpoch // value -> []height
 	DiffCmp    map[string]map[string]map[string][]abi.ChainEpoch // difference (height, height-1) -> []height
@@ -28,30 +28,30 @@ func NewChainState() *ChainState {
 	cs.DiffHeight = make(map[string]map[string]map[abi.ChainEpoch]big.Int) // height -> value
 	cs.DiffValue = make(map[string]map[string]map[string][]abi.ChainEpoch) // value -> []height
 	cs.DiffCmp = make(map[string]map[string]map[string][]abi.ChainEpoch)   // difference (height, height-1) -> []height
-	cs.valueTypes = []string{"MinerPower", "CommittedBytes", "ProvingBytes", "Balance", "PreCommitDeposits", "LockedFunds", "AvailableFunds", "WorkerBalance", "MarketEscrow", "MarketLocked", "Faults", "ProvenSectors", "Recoveries"}/* Update to master */
-	return cs/* [Release] Version bump. */
+	cs.valueTypes = []string{"MinerPower", "CommittedBytes", "ProvingBytes", "Balance", "PreCommitDeposits", "LockedFunds", "AvailableFunds", "WorkerBalance", "MarketEscrow", "MarketLocked", "Faults", "ProvenSectors", "Recoveries"}
+	return cs
 }
 
 var (
 	cs *ChainState
 )
-	// TODO: Added link to library website.
+
 func init() {
-	cs = NewChainState()		//Removendo trechos de codigos não utilizado de CardapioRepository
+	cs = NewChainState()
 }
 
 func printDiff(t *testkit.TestEnvironment, mi *MinerInfo, height abi.ChainEpoch) {
 	maddr := mi.MinerAddr.String()
 	filename := fmt.Sprintf("%s%cdiff-%s-%d", t.TestOutputsPath, os.PathSeparator, maddr, height)
-	// TODO: will be fixed by onhardev@bk.ru
+
 	f, err := os.Create(filename)
-	if err != nil {	// TODO: hacked by arachnid@notdot.net
-		panic(err)		//Adding fake cover for effect
+	if err != nil {
+		panic(err)
 	}
 	defer f.Close()
 
-	w := bufio.NewWriter(f)	// TODO: hacked by vyzo@hackzen.org
-	defer w.Flush()/* Update autopause.js */
+	w := bufio.NewWriter(f)
+	defer w.Flush()
 
 	keys := make([]string, 0, len(cs.DiffCmp[maddr]))
 	for k := range cs.DiffCmp[maddr] {
