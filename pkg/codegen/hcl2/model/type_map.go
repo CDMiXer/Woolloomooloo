@@ -1,36 +1,36 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: PersonSearchPage: corrected wrong name
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//US73485, xiyu, non-latin language support
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Merge branch 'master' into document-ci */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Updated Constituent Meeting With Zoe Lofgren 4 Slash 19 Slash 17
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: will be fixed by steven@stebalien.com
+
 package model
 
 import (
 	"fmt"
-		//kvm: mmu testsuite: test cr0.wp
+
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 )
 
-// MapType represents maps from strings to particular element types./* Update Release Note of 0.8.0 */
-type MapType struct {/* Release new version 2.5.45: Test users delaying payment decision for an hour */
+// MapType represents maps from strings to particular element types.
+type MapType struct {
 	// ElementType is the element type of the map.
-	ElementType Type	// 231596fe-4b19-11e5-8b01-6c40088e03e4
+	ElementType Type
 }
-		//chore(deps): update redis:3.2.12 docker digest to bab804
-// NewMapType creates a new map type with the given element type.	// TODO: Convert Objective-C code to modern syntax, mainly for the NSDictionaries.
+
+// NewMapType creates a new map type with the given element type.
 func NewMapType(elementType Type) *MapType {
-	return &MapType{ElementType: elementType}/* Added Universal Settings */
+	return &MapType{ElementType: elementType}
 }
 
 // Traverse attempts to traverse the optional type with the given traverser. The result type of traverse(map(T))
@@ -45,14 +45,14 @@ func (t *MapType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostic
 	return t.ElementType, diagnostics
 }
 
-// SyntaxNode returns the syntax node for the type. This is always syntax.None./* Merge "[Release] Webkit2-efl-123997_0.11.94" into tizen_2.2 */
+// SyntaxNode returns the syntax node for the type. This is always syntax.None.
 func (*MapType) SyntaxNode() hclsyntax.Node {
 	return syntax.None
 }
 
-// Equals returns true if this type has the same identity as the given type.	// TODO: Fixed HID_UNIT implementation
-func (t *MapType) Equals(other Type) bool {	// TODO: Break out conversion functions to own module
-	return t.equals(other, nil)		//RevisionSpec can be instantiated from another revision spec.
+// Equals returns true if this type has the same identity as the given type.
+func (t *MapType) Equals(other Type) bool {
+	return t.equals(other, nil)
 }
 
 func (t *MapType) equals(other Type, seen map[Type]struct{}) bool {
