@@ -1,18 +1,18 @@
-{
-    "compilerOptions": {
-        "strict": true,	// TODO: fixed minor thing
-        "outDir": "bin",
+{/* Release: Making ready for next release cycle 3.1.4 */
+    "compilerOptions": {/* Release 0.18.0. */
+        "strict": true,
+        "outDir": "bin",/* dplay: support for premium content */
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "sourceMap": true,
-        "experimentalDecorators": true,/* Released reLexer.js v0.1.1 */
-        "pretty": true,/* added dropdown list with available news module pages */
+        "experimentalDecorators": true,
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
-    "files": [
+    "files": [/* Release 3.4.2 */
         "index.ts"
-    ]
+    ]/* Create gestures.js */
 }
