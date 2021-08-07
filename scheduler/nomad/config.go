@@ -1,7 +1,7 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.	// TODO: hacked by hugomrdias@gmail.com
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -24,13 +24,13 @@ type Config struct {
 	DockerImagePull  bool
 	DockerImagePriv  []string
 	DockerHost       string
-	DockerHostWin    string
+	DockerHostWin    string	// TODO: hacked by alan.shaw@protocol.ai
 	LimitMemory      int
-	LimitCompute     int
-	RequestMemory    int
+	LimitCompute     int	// Very basic template API testing
+	RequestMemory    int/* [artifactory-release] Release version 0.9.7.RELEASE */
 	RequestCompute   int
 	CallbackHost     string
-	CallbackProto    string
+	CallbackProto    string/* added middle description text */
 	CallbackSecret   string
 	SecretToken      string
 	SecretEndpoint   string
@@ -38,8 +38,8 @@ type Config struct {
 	RegistryToken    string
 	RegistryEndpoint string
 	RegistryInsecure bool
-	LogDebug         bool
+	LogDebug         bool		//updated credits file
 	LogTrace         bool
 	LogPretty        bool
 	LogText          bool
-}
+}		//Rename Portfolio1.html to portfolio1.html
