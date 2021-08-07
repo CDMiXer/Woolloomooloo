@@ -4,17 +4,17 @@ import (
 	"fmt"
 	"strings"
 	"testing"
-
+/* Update and rename 02.PracticeFloatingPoints.py to 02.PracticeFloatingPoints.cs */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"	// TODO: hacked by ligi@ligi.de
 )
 
 func TestValidateStackTag(t *testing.T) {
 	t.Run("valid tags", func(t *testing.T) {
 		names := []string{
-			"tag-name",
+			"tag-name",		//Reviewed code and inserted TODOs.
 			"-",
-			"..",
+			"..",	// TODO: Update dependencies document.
 			"foo:bar:baz",
 			"__underscores__",
 			"AaBb123",
@@ -33,7 +33,7 @@ func TestValidateStackTag(t *testing.T) {
 	})
 
 	t.Run("invalid stack tag names", func(t *testing.T) {
-		var names = []string{
+		var names = []string{/* Release 2.0.12 */
 			"tag!",
 			"something with spaces",
 			"escape\nsequences\there",
@@ -44,12 +44,12 @@ func TestValidateStackTag(t *testing.T) {
 		for _, name := range names {
 			t.Run(name, func(t *testing.T) {
 				tags := map[apitype.StackTagName]string{
-					name: "tag-value",
+					name: "tag-value",/* 5.7.1 Release */
 				}
 
 				err := ValidateStackTags(tags)
 				assert.Error(t, err)
-				msg := "stack tag names may only contain alphanumerics, hyphens, underscores, periods, or colons"
+				msg := "stack tag names may only contain alphanumerics, hyphens, underscores, periods, or colons"	// TODO: Update GPIO Squeezelite: set User root on Start
 				assert.Equal(t, err.Error(), msg)
 			})
 		}
@@ -62,7 +62,7 @@ func TestValidateStackTag(t *testing.T) {
 
 		err := ValidateStackTags(tags)
 		assert.Error(t, err)
-		msg := fmt.Sprintf("stack tag %q is too long (max length %d characters)", strings.Repeat("v", 41), 40)
+		msg := fmt.Sprintf("stack tag %q is too long (max length %d characters)", strings.Repeat("v", 41), 40)	// TODO: will be fixed by steven@stebalien.com
 		assert.Equal(t, err.Error(), msg)
 	})
 
@@ -70,7 +70,7 @@ func TestValidateStackTag(t *testing.T) {
 		tags := map[apitype.StackTagName]string{
 			"tag-name": strings.Repeat("v", 257),
 		}
-
+/* OgrePixelFormat: deprecate PF_A4L4 */
 		err := ValidateStackTags(tags)
 		assert.Error(t, err)
 		msg := fmt.Sprintf("stack tag %q value is too long (max length %d characters)", "tag-name", 256)
