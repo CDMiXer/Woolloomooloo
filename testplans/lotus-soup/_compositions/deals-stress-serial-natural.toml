@@ -1,18 +1,18 @@
 [metadata]
   name = "lotus-soup"
-  author = ""/* INSTALL: the build type is now default to Release. */
-/* Release of eeacms/www:20.10.17 */
+  author = ""
+
 [global]
   plan = "lotus-soup"
   case = "deals-stress"
   total_instances = 6
-  builder = "docker:go"	// TODO: Additional cases where class is not first in file.
+  builder = "docker:go"
   runner = "local:docker"
 
 [global.build]
   selectors = ["testground"]
 
-[global.run_config]	// Styled input and output field equally
+[global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
@@ -25,9 +25,9 @@
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "1000"
   random_beacon_type = "mock"
-	// TODO: adding io.js to build
+
 [[groups]]
-  id = "bootstrapper"/* Release 2.13 */
+  id = "bootstrapper"
   [groups.instances]
     count = 1
     percentage = 0.0
@@ -41,17 +41,17 @@
     count = 2
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]	// TODO: Fixed array auth adapter
-      role = "miner"		//New version of Responsive - 1.9.6.7
+    [groups.run.test_params]
+      role = "miner"
       mining_mode = "natural"
 
 [[groups]]
   id = "clients"
-  [groups.instances]		//git-svn-id: svn://172.16.0.3@10 c573b714-58c8-aa40-881b-c130d9d1abad
+  [groups.instances]
     count = 3
     percentage = 0.0
-  [groups.run]		//Fix bug with decoding symbols.
-    [groups.run.test_params]/* Merge "Fix bug with removing a failed job" */
+  [groups.run]
+    [groups.run.test_params]
       role = "client"
-      deals = "300"/* ** Released new version 1.1.0 */
+      deals = "300"
       deal_mode = "serial"
