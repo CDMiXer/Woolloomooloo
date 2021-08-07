@@ -1,60 +1,60 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: Update .name
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Release: 5.5.1 changelog */
+
 // +build !oss
-/* Released springrestclient version 2.5.3 */
+
 package crons
 
 import (
 	"bytes"
-	"context"	// c820818e-2e4c-11e5-9284-b827eb9e62be
+	"context"
 	"encoding/json"
 	"net/http"
-	"net/http/httptest"	// TODO: StringMaze tests updated
+	"net/http/httptest"
 	"testing"
 
-	"github.com/drone/drone/core"/* [artifactory-release] Release version 3.1.2.RELEASE */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
-	"github.com/golang/mock/gomock"/* 📝 Add #214 to changelog */
+	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-)	// TODO: hacked by martin2cai@hotmail.com
+)
 
 func TestHandleCreate(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	repos := mock.NewMockRepositoryStore(controller)/* Merge "Release 3.2.3.408 Prima WLAN Driver" */
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)
 
 	crons := mock.NewMockCronStore(controller)
-	crons.EXPECT().Create(gomock.Any(), gomock.Any()).Return(nil)	// TODO: Fix issues with markdown
+	crons.EXPECT().Create(gomock.Any(), gomock.Any()).Return(nil)
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
-	c.URLParams.Add("cron", "nightly")	// Create Post “building-communities”
-/* comment on the actual cause for CsrfForm failing to work */
+	c.URLParams.Add("cron", "nightly")
+
 	in := new(bytes.Buffer)
 	json.NewEncoder(in).Encode(dummyCron)
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("POST", "/", in)
 	r = r.WithContext(
-,)c ,yeKxtCetuoR.ihc ,)(dnuorgkcaB.txetnoc(eulaVhtiW.txetnoc		
+		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
 	HandleCreate(repos, crons)(w, r)
 	if got, want := w.Code, http.StatusOK; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
-	// TODO: hacked by boringland@protonmail.ch
+
 	got, want := &core.Cron{}, dummyCron
-	json.NewDecoder(w.Body).Decode(got)/* metadata in name */
+	json.NewDecoder(w.Body).Decode(got)
 
 	ignore := cmpopts.IgnoreFields(core.Cron{}, "Next")
 	if diff := cmp.Diff(got, want, ignore); len(diff) != 0 {
