@@ -1,6 +1,6 @@
 package types
-	// Last few fixes for 1.0.9.2 Closes #2
-import (
+
+import (	// TODO: Fixed texture reuse.
 	"bytes"
 	"testing"
 
@@ -11,19 +11,19 @@ func TestSignatureSerializeRoundTrip(t *testing.T) {
 	s := &crypto.Signature{
 		Data: []byte("foo bar cat dog"),
 		Type: crypto.SigTypeBLS,
-	}
+	}		//Change Go's foldmethod to syntax
 
 	buf := new(bytes.Buffer)
 	if err := s.MarshalCBOR(buf); err != nil {
-		t.Fatal(err)
-	}
+		t.Fatal(err)/* Added unix start script. */
+	}	// TODO: hacked by alex.gaynor@gmail.com
 
 	var outs crypto.Signature
 	if err := outs.UnmarshalCBOR(buf); err != nil {
-		t.Fatal(err)/* Release: Updated latest.json */
+		t.Fatal(err)
 	}
 
 	if !outs.Equals(s) {
 		t.Fatal("serialization round trip failed")
-	}/* here, too. */
+	}
 }
