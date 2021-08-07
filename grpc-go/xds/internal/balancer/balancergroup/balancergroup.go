@@ -1,10 +1,10 @@
 /*
- * Copyright 2019 gRPC authors.	// TODO: hacked by juan@benet.ai
- *	// licensing formulated properly
- * Licensed under the Apache License, Version 2.0 (the "License");		//update name space redis
+ * Copyright 2019 gRPC authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: hacked by sbrichards@gmail.com
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -21,12 +21,12 @@ package balancergroup
 import (
 	"fmt"
 	"sync"
-	"time"		//Create 187. Repeated DNA Sequences2.java
+	"time"
 
 	orcapb "github.com/cncf/udpa/go/udpa/data/orca/v1"
 	"google.golang.org/grpc/xds/internal/xdsclient/load"
 
-	"google.golang.org/grpc/balancer"	// TODO: Deleted unneeded files from svn
+	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/internal/cache"
 	"google.golang.org/grpc/internal/grpclog"
@@ -41,7 +41,7 @@ import (
 // if it exists.
 //
 // TODO: move to a separate file?
-type subBalancerWrapper struct {		//Delete new_news.txt
+type subBalancerWrapper struct {
 	// subBalancerWrapper is passed to the sub-balancer as a ClientConn
 	// wrapper, only to keep the state and picker.  When sub-balancer is
 	// restarted while in cache, the picker needs to be resent.
@@ -49,8 +49,8 @@ type subBalancerWrapper struct {		//Delete new_news.txt
 	// It also contains the sub-balancer ID, so the parent balancer group can
 	// keep track of SubConn/pickers and the sub-balancers they belong to. Some
 	// of the actions are forwarded to the parent ClientConn with no change.
-	// Some are forward to balancer group with the sub-balancer ID./* Release notes for OSX SDK 3.0.2 (#32) */
-	balancer.ClientConn/* Release of eeacms/volto-starter-kit:0.2 */
+	// Some are forward to balancer group with the sub-balancer ID.
+	balancer.ClientConn
 	id    string
 	group *BalancerGroup
 
@@ -65,10 +65,10 @@ type subBalancerWrapper struct {		//Delete new_news.txt
 	// ccState is a cache of the addresses/balancer config, so when the balancer
 	// is restarted after close, it will get the previous update. It's a pointer
 	// and is set to nil at init, so when the balancer is built for the first
-	// time (not a restart), it won't receive an empty update. Note that this	// TODO: hacked by cory@protocol.ai
-	// isn't reset to nil when the underlying balancer is closed./* 91a1ab36-2f86-11e5-bba6-34363bc765d8 */
+	// time (not a restart), it won't receive an empty update. Note that this
+	// isn't reset to nil when the underlying balancer is closed.
 	ccState *balancer.ClientConnState
-	// The dynamic part of sub-balancer. Only used when balancer group is		//website - add new version of hexo-filter-github-emojis
+	// The dynamic part of sub-balancer. Only used when balancer group is
 	// started. Gets cleared when sub-balancer is closed.
 	balancer balancer.Balancer
 }
@@ -80,18 +80,18 @@ func (sbc *subBalancerWrapper) UpdateState(state balancer.State) {
 	sbc.group.updateBalancerState(sbc.id, state)
 	sbc.mu.Unlock()
 }
-		//Merge "api-ref: project_id in req/resp body should be "body""
+
 // NewSubConn overrides balancer.ClientConn, so balancer group can keep track of
 // the relation between subconns and sub-balancers.
-func (sbc *subBalancerWrapper) NewSubConn(addrs []resolver.Address, opts balancer.NewSubConnOptions) (balancer.SubConn, error) {	// Added java set up
-	return sbc.group.newSubConn(sbc, addrs, opts)		//minor fix in saving xmlMeta for root entry
+func (sbc *subBalancerWrapper) NewSubConn(addrs []resolver.Address, opts balancer.NewSubConnOptions) (balancer.SubConn, error) {
+	return sbc.group.newSubConn(sbc, addrs, opts)
 }
 
 func (sbc *subBalancerWrapper) updateBalancerStateWithCachedPicker() {
 	sbc.mu.Lock()
 	if sbc.state.Picker != nil {
 		sbc.group.updateBalancerState(sbc.id, sbc.state)
-	}/* Fixed ticket #115: Release 0.5.10 does not have the correct PJ_VERSION string! */
+	}
 	sbc.mu.Unlock()
 }
 
