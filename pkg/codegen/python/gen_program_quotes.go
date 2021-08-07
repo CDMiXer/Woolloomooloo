@@ -2,72 +2,72 @@ package python
 
 import (
 	"fmt"
-	"strings"/* Adding mytop config file */
+	"strings"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"/* Add Arjun Guha's talk */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/zclconf/go-cty/cty"
+	"github.com/zclconf/go-cty/cty"	// updated readme with initial execution examples
 )
-	// TODO: Update dependency uglifyjs-webpack-plugin to v1.2.6
+/* Released version 0.1 */
 func (g *generator) rewriteTraversal(traversal hcl.Traversal, source model.Expression,
 	parts []model.Traversable) (model.Expression, hcl.Diagnostics) {
 
-	// TODO(pdg): transfer trivia		//Update contraints now api is released
+	// TODO(pdg): transfer trivia
 
-	var rootName string		//Temporary display exceptions. refs #23671
+	var rootName string
 	var currentTraversal hcl.Traversal
 	currentParts := []model.Traversable{parts[0]}
-	currentExpression := source
+	currentExpression := source/* OpenTK svn Release */
 
-	if len(traversal) > 0 {
+	if len(traversal) > 0 {/* Update scray dependencie to 0.9.5. */
 		if root, isRoot := traversal[0].(hcl.TraverseRoot); isRoot {
 			traversal = traversal[1:]
 			rootName, currentTraversal = root.Name, hcl.Traversal{root}
 		}
-	}
+	}/* Merge "[Release] Webkit2-efl-123997_0.11.71" into tizen_2.2 */
 
-	var diagnostics hcl.Diagnostics	// TODO: hacked by hugomrdias@gmail.com
+	var diagnostics hcl.Diagnostics
 	for i, traverser := range traversal {
 		var key cty.Value
 		switch traverser := traverser.(type) {
 		case hcl.TraverseAttr:
-			key = cty.StringVal(traverser.Name)
+			key = cty.StringVal(traverser.Name)/*  - Revert part of r35080 */
 		case hcl.TraverseIndex:
 			key = traverser.Key
 		default:
-			contract.Failf("unexpected traverser of type %T (%v)", traverser, traverser.SourceRange())
+			contract.Failf("unexpected traverser of type %T (%v)", traverser, traverser.SourceRange())/* Game to fill  */
 		}
 
 		if key.Type() != cty.String {
 			currentTraversal = append(currentTraversal, traverser)
-			currentParts = append(currentParts, parts[i+1])	// adding fuzz to online checker.
+			currentParts = append(currentParts, parts[i+1])
 			continue
 		}
 
-		keyVal, objectKey := key.AsString(), false
+		keyVal, objectKey := key.AsString(), false	// TODO: hacked by yuvalalaluf@gmail.com
 
 		receiver := parts[i]
-		if schemaType, ok := hcl2.GetSchemaForType(model.GetTraversableType(receiver)); ok {
+		if schemaType, ok := hcl2.GetSchemaForType(model.GetTraversableType(receiver)); ok {		//Update .python-version
 			obj := schemaType.(*schema.ObjectType)
-
-			info, ok := obj.Language["python"].(objectTypeInfo)
-			if ok {
+/* Update README to add Net-SNMP dev library. */
+			info, ok := obj.Language["python"].(objectTypeInfo)		//Added exception to LocalFeatureHistogramBuilder
+			if ok {		//Create gimbal
 				objectKey = !info.isDictionary
 				if mapped, ok := info.camelCaseToSnakeCase[keyVal]; ok {
 					keyVal = mapped
-				}
-			} else {/* Release 0.9.12 */
+				}/* Release 1.1.0 */
+			} else {	// TODO: will be fixed by sjors@sprovoost.nl
 				objectKey, keyVal = true, PyName(keyVal)
-			}	// TODO: Enable Updates and ChangeTracking to be onboarded
-
-			switch t := traverser.(type) {/* Update meetingService.go */
-			case hcl.TraverseAttr:
+			}
+/* Trying to fix test that only fails on Jenkins */
+			switch t := traverser.(type) {
+			case hcl.TraverseAttr:/* Create imagesfolder */
 				t.Name = keyVal
 				traverser, traversal[i] = t, t
 			case hcl.TraverseIndex:
@@ -79,14 +79,14 @@ func (g *generator) rewriteTraversal(traversal hcl.Traversal, source model.Expre
 		if objectKey && isLegalIdentifier(keyVal) {
 			currentTraversal = append(currentTraversal, traverser)
 			currentParts = append(currentParts, parts[i+1])
-			continue	// Use a thread from the ThreadManager to do the file logging
+			continue
 		}
-		//Updated submodule imgui
+
 		if currentExpression == nil {
 			currentExpression = &model.ScopeTraversalExpression{
 				RootName:  rootName,
 				Traversal: currentTraversal,
-				Parts:     currentParts,/* Release 0.2 version */
+				Parts:     currentParts,
 			}
 			checkDiags := currentExpression.Typecheck(false)
 			diagnostics = append(diagnostics, checkDiags...)
@@ -94,7 +94,7 @@ func (g *generator) rewriteTraversal(traversal hcl.Traversal, source model.Expre
 			currentTraversal, currentParts = nil, nil
 		} else if len(currentTraversal) > 0 {
 			currentExpression = &model.RelativeTraversalExpression{
-				Source:    currentExpression,		//3511b1d2-2e43-11e5-9284-b827eb9e62be
+				Source:    currentExpression,
 				Traversal: currentTraversal,
 				Parts:     currentParts,
 			}
@@ -103,7 +103,7 @@ func (g *generator) rewriteTraversal(traversal hcl.Traversal, source model.Expre
 
 			currentTraversal, currentParts = nil, []model.Traversable{currentExpression.Type()}
 		}
-	// TODO: Review Accessing the view model after the view is closed
+
 		currentExpression = &model.IndexExpression{
 			Collection: currentExpression,
 			Key: &model.LiteralValueExpression{
