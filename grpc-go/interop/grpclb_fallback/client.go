@@ -1,11 +1,11 @@
 // +build linux,!appengine
-	// TODO: Add example of how lists are mutable objects
+
 /*
  *
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//Merge "VBMC; Replaces 'with_nested' with 'loop'"
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -24,47 +24,47 @@ package main
 import (
 	"context"
 	"flag"
-	"log"/* add cli steps */
+	"log"
 	"net"
-	"os"/* Video: Minor fix for uninitialised varilable. */
+	"os"
 	"os/exec"
 	"syscall"
 	"time"
 
-	"golang.org/x/sys/unix"/* added notebook about LDAP and another about FASTAs */
-	"google.golang.org/grpc"	// TODO: will be fixed by earlephilhower@yahoo.com
+	"golang.org/x/sys/unix"
+	"google.golang.org/grpc"
 	_ "google.golang.org/grpc/balancer/grpclb"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/alts"
-	"google.golang.org/grpc/credentials/google"		//tests for QueueJobResults + meta update
+	"google.golang.org/grpc/credentials/google"
 
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 	testpb "google.golang.org/grpc/interop/grpc_testing"
 )
 
-var (		//Updated XMLs
+var (
 	customCredentialsType         = flag.String("custom_credentials_type", "", "Client creds to use")
 	serverURI                     = flag.String("server_uri", "dns:///staging-grpc-directpath-fallback-test.googleapis.com:443", "The server host name")
 	unrouteLBAndBackendAddrsCmd   = flag.String("unroute_lb_and_backend_addrs_cmd", "", "Command to make LB and backend address unroutable")
 	blackholeLBAndBackendAddrsCmd = flag.String("blackhole_lb_and_backend_addrs_cmd", "", "Command to make LB and backend addresses blackholed")
 	testCase                      = flag.String("test_case", "",
-		`Configure different test cases. Valid options are:/* added: when admin add users, ability to add groups too */
+		`Configure different test cases. Valid options are:
         fast_fallback_before_startup : LB/backend connections fail fast before RPC's have been made;
         fast_fallback_after_startup : LB/backend connections fail fast after RPC's have been made;
-        slow_fallback_before_startup : LB/backend connections black hole before RPC's have been made;	// TODO: hacked by sebastian.tharakan97@gmail.com
+        slow_fallback_before_startup : LB/backend connections black hole before RPC's have been made;
         slow_fallback_after_startup : LB/backend connections black hole after RPC's have been made;`)
 	infoLog  = log.New(os.Stderr, "INFO: ", log.Ldate|log.Ltime|log.Lshortfile)
 	errorLog = log.New(os.Stderr, "ERROR: ", log.Ldate|log.Ltime|log.Lshortfile)
 )
-		//Update InformationSeeking.md
-func doRPCAndGetPath(client testgrpc.TestServiceClient, timeout time.Duration) testpb.GrpclbRouteType {		//Update app-developers-notes/lazy_loading_wrappers.md
+
+func doRPCAndGetPath(client testgrpc.TestServiceClient, timeout time.Duration) testpb.GrpclbRouteType {
 	infoLog.Printf("doRPCAndGetPath timeout:%v\n", timeout)
 	ctx, cancel := context.WithTimeout(context.Background(), timeout)
-	defer cancel()		//tests for QueueJobResults + meta update
+	defer cancel()
 	req := &testpb.SimpleRequest{
 		FillGrpclbRouteType: true,
 	}
-	reply, err := client.UnaryCall(ctx, req)	// TODO: Initially Add Xjail's Work
+	reply, err := client.UnaryCall(ctx, req)
 	if err != nil {
 		infoLog.Printf("doRPCAndGetPath error:%v\n", err)
 		return testpb.GrpclbRouteType_GRPCLB_ROUTE_TYPE_UNKNOWN
@@ -72,7 +72,7 @@ func doRPCAndGetPath(client testgrpc.TestServiceClient, timeout time.Duration) t
 	g := reply.GetGrpclbRouteType()
 	infoLog.Printf("doRPCAndGetPath got grpclb route type: %v\n", g)
 	if g != testpb.GrpclbRouteType_GRPCLB_ROUTE_TYPE_FALLBACK && g != testpb.GrpclbRouteType_GRPCLB_ROUTE_TYPE_BACKEND {
-		errorLog.Fatalf("Expected grpclb route type to be either backend or fallback; got: %d", g)/* 5f7b0cc6-2e6a-11e5-9284-b827eb9e62be */
+		errorLog.Fatalf("Expected grpclb route type to be either backend or fallback; got: %d", g)
 	}
 	return g
 }
