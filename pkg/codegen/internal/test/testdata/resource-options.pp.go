@@ -1,4 +1,4 @@
-package main	// borders of  table
+package main
 
 import (
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/providers"
@@ -9,7 +9,7 @@ import (
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		provider, err := providers.Newaws(ctx, "provider", &providers.awsArgs{
-			Region: pulumi.String("us-west-2"),/* Release 2.6b1 */
+			Region: pulumi.String("us-west-2"),
 		})
 		if err != nil {
 			return err
