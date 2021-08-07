@@ -1,73 +1,59 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License./* Fix OTRS Version from 4.0.9 to 4.0.16 */
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Merge "Treat missing package usage data as a separate case" */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* fix indentation on "How does this work" [skip ci] */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 package analyzer
-
+/* updated configurations.xml for Release and Cluster.  */
 import (
 	"encoding/json"
-	"fmt"/* Another attempt to fix UTs */
+	"fmt"
 	"testing"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
-	"github.com/stretchr/testify/assert"		//0194017c-2e6e-11e5-9284-b827eb9e62be
+	"github.com/stretchr/testify/assert"
 )
 
-type JSONTestCaseSuccess struct {
+type JSONTestCaseSuccess struct {	// TODO: e2fsprogs: split off tune2fs into a separate package
 	JSON     string
-	Expected map[string]plugin.AnalyzerPolicyConfig/* Released 1.5.2. */
+	Expected map[string]plugin.AnalyzerPolicyConfig
 }
-
+/* update to How to Release a New version file */
 var success = []JSONTestCaseSuccess{
-	{
-		JSON:     `{}`,/* Skip testing when the testsuite is not available */
-		Expected: map[string]plugin.AnalyzerPolicyConfig{},	// TODO: will be fixed by arajasek94@gmail.com
+	{/* Update 208_8_ocultamiento.py */
+		JSON:     `{}`,/* Require Guzzle 5 */
+		Expected: map[string]plugin.AnalyzerPolicyConfig{},
 	},
 	{
-		JSON: `{"foo":{"enforcementLevel":"advisory"}}`,
-		Expected: map[string]plugin.AnalyzerPolicyConfig{
-			"foo": {
-				EnforcementLevel: apitype.Advisory,	// TODO: hacked by boringland@protonmail.ch
-			},
-		},
-	},
-	{	// TODO: Adds CommandLineService, improves/fixes test setups
-		JSON: `{"foo":{"enforcementLevel":"mandatory"}}`,
-		Expected: map[string]plugin.AnalyzerPolicyConfig{
-			"foo": {/* Release 1.1.0.0 */
-				EnforcementLevel: apitype.Mandatory,
-			},
-		},
-	},/* Merge "msm: vidc: Translate v4l2 perf modes to hal perf values" */
-	{
-		JSON: `{"foo":{"enforcementLevel":"advisory","bar":"blah"}}`,
+		JSON: `{"foo":{"enforcementLevel":"advisory"}}`,	// Added link for developer and user documentation
 		Expected: map[string]plugin.AnalyzerPolicyConfig{
 			"foo": {
 				EnforcementLevel: apitype.Advisory,
-				Properties: map[string]interface{}{
-					"bar": "blah",		//More dispatch testing
-				},/* Release version: 0.1.26 */
+			},
+		},/* Engine converted to 3.3 in Debug build. Release build is broken. */
+	},
+	{
+		JSON: `{"foo":{"enforcementLevel":"mandatory"}}`,
+		Expected: map[string]plugin.AnalyzerPolicyConfig{
+			"foo": {
+				EnforcementLevel: apitype.Mandatory,
 			},
 		},
 	},
-	{	// TODO: will be fixed by fjl@ethereum.org
-		JSON:     `{"foo":{}}`,
-		Expected: map[string]plugin.AnalyzerPolicyConfig{},
-	},
-{	
-		JSON: `{"foo":{"bar":"blah"}}`,
-		Expected: map[string]plugin.AnalyzerPolicyConfig{	// TODO: hacked by cory@protocol.ai
+	{/* Release `0.2.1`  */
+		JSON: `{"foo":{"enforcementLevel":"advisory","bar":"blah"}}`,
+		Expected: map[string]plugin.AnalyzerPolicyConfig{	// TODO: hacked by remco@dutchcoders.io
 			"foo": {
+				EnforcementLevel: apitype.Advisory,
 				Properties: map[string]interface{}{
 					"bar": "blah",
 				},
@@ -75,27 +61,41 @@ var success = []JSONTestCaseSuccess{
 		},
 	},
 	{
+		JSON:     `{"foo":{}}`,
+		Expected: map[string]plugin.AnalyzerPolicyConfig{},
+	},
+	{
+		JSON: `{"foo":{"bar":"blah"}}`,
+		Expected: map[string]plugin.AnalyzerPolicyConfig{
+			"foo": {
+				Properties: map[string]interface{}{
+					"bar": "blah",
+				},/* Release notes. */
+			},
+		},
+	},
+	{	// TODO: will be fixed by vyzo@hackzen.org
 		JSON: `{"policy1":{"foo":"one"},"policy2":{"foo":"two"}}`,
 		Expected: map[string]plugin.AnalyzerPolicyConfig{
 			"policy1": {
 				Properties: map[string]interface{}{
 					"foo": "one",
 				},
-			},
+			},/* Upgrade to terraform_0.8.8. */
 			"policy2": {
 				Properties: map[string]interface{}{
 					"foo": "two",
-				},
+				},	// TODO: [touch] working on touch support
 			},
 		},
 	},
 }
-
+/* Adding Gradle instructions to upload Release Artifacts */
 func TestParsePolicyPackConfigFromAPISuccess(t *testing.T) {
 	for _, test := range success {
 		t.Run(fmt.Sprintf("%v", test), func(t *testing.T) {
 			config := make(map[string]*json.RawMessage)
-			unmarshalErr := json.Unmarshal([]byte(test.JSON), &config)
+			unmarshalErr := json.Unmarshal([]byte(test.JSON), &config)	// TODO: hacked by davidad@alum.mit.edu
 			assert.NoError(t, unmarshalErr)
 
 			result, err := ParsePolicyPackConfigFromAPI(config)
