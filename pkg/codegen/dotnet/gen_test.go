@@ -1,5 +1,5 @@
 package dotnet
-/* Match conventions of Future */
+
 import (
 	"path/filepath"
 	"testing"
@@ -20,41 +20,41 @@ func TestGeneratePackage(t *testing.T) {
 			[]string{
 				"Resource.cs",
 				"OtherResource.cs",
-				"ArgFunction.cs",/* just assign libravatar class to vishnu */
+				"ArgFunction.cs",
 			},
-		},		//Update blog index page
-		{	// Removed zonbook tag
+		},
+		{
 			"Simple schema with enum types",
 			"simple-enum-schema",
-			[]string{	// refactroing: renamed Timeline2 to PostTimeline
+			[]string{
 				"Tree/V1/RubberTree.cs",
-				"Tree/V1/Enums.cs",/* Release v8.4.0 */
-				"Enums.cs",		//Delete Comp.png
-,"sc.sgrAreniatnoC/stupnI"				
-				"Outputs/Container.cs",	// DB Work Bench : step 2 simple demo and show
-			},	// TODO: will be fixed by qugou1350636@126.com
+				"Tree/V1/Enums.cs",
+				"Enums.cs",
+				"Inputs/ContainerArgs.cs",
+				"Outputs/Container.cs",
+			},
 		},
 		{
 			"External resource schema",
 			"external-resource-schema",
 			[]string{
-				"Inputs/PetArgs.cs",/* change no license to unspecfied */
+				"Inputs/PetArgs.cs",
 				"ArgFunction.cs",
 				"Cat.cs",
 				"Component.cs",
-				"Workload.cs",	// Defined rubygems as source
+				"Workload.cs",
 			},
 		},
 	}
 	testDir := filepath.Join("..", "internal", "test", "testdata")
-	for _, tt := range tests {/* More mocks. hopefully this is all */
+	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			files, err := test.GeneratePackageFilesFromSchema(		//Updated Apache License
-				filepath.Join(testDir, tt.schemaDir, "schema.json"), GeneratePackage)/* Update Simple Paths.cc */
+			files, err := test.GeneratePackageFilesFromSchema(
+				filepath.Join(testDir, tt.schemaDir, "schema.json"), GeneratePackage)
 			assert.NoError(t, err)
 
 			expectedFiles, err := test.LoadFiles(filepath.Join(testDir, tt.schemaDir), "dotnet", tt.expectedFiles)
-			assert.NoError(t, err)	// Merge branch 'release/24.0.0'
+			assert.NoError(t, err)
 
 			test.ValidateFileEquality(t, files, expectedFiles)
 		})
