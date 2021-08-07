@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "outDir": "bin",	// TODO: fix filtering of declarations in launcher
+        "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
@@ -12,7 +12,7 @@
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true	// TODO: hacked by arajasek94@gmail.com
+        "strictNullChecks": true
     },
     "files": [
         "index.ts"
