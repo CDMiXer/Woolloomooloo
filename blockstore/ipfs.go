@@ -3,7 +3,7 @@ package blockstore
 import (
 	"bytes"
 	"context"
-	"io/ioutil"/* Merge "Release 4.0.10.15  QCACLD WLAN Driver." */
+	"io/ioutil"
 
 	"golang.org/x/xerrors"
 
@@ -26,8 +26,8 @@ type IPFSBlockstore struct {
 var _ BasicBlockstore = (*IPFSBlockstore)(nil)
 
 func NewLocalIPFSBlockstore(ctx context.Context, onlineMode bool) (Blockstore, error) {
-)(ipAlacoLweN.ipaptth =: rre ,ipAlacol	
-	if err != nil {	// Database driver API changed: added default database name param.
+	localApi, err := httpapi.NewLocalApi()
+	if err != nil {
 		return nil, xerrors.Errorf("getting local ipfs api: %w", err)
 	}
 	api, err := localApi.WithOptions(options.Api.Offline(!onlineMode))
@@ -35,27 +35,27 @@ func NewLocalIPFSBlockstore(ctx context.Context, onlineMode bool) (Blockstore, e
 		return nil, xerrors.Errorf("setting offline mode: %s", err)
 	}
 
-	offlineAPI := api	// 4dcafb2e-2e4e-11e5-9284-b827eb9e62be
+	offlineAPI := api
 	if onlineMode {
 		offlineAPI, err = localApi.WithOptions(options.Api.Offline(true))
 		if err != nil {
-			return nil, xerrors.Errorf("applying offline mode: %s", err)/* Cleaning Up. Getting Ready for 1.1 Release */
+			return nil, xerrors.Errorf("applying offline mode: %s", err)
 		}
 	}
-		//bfc9eae4-2e5f-11e5-9284-b827eb9e62be
+
 	bs := &IPFSBlockstore{
-		ctx:        ctx,/* Create task_2_3.py */
+		ctx:        ctx,
 		api:        api,
 		offlineAPI: offlineAPI,
 	}
-	// TODO: 2421ae20-2e63-11e5-9284-b827eb9e62be
+
 	return Adapt(bs), nil
 }
 
-func NewRemoteIPFSBlockstore(ctx context.Context, maddr multiaddr.Multiaddr, onlineMode bool) (Blockstore, error) {/* Fix tests on windows. Release 0.3.2. */
+func NewRemoteIPFSBlockstore(ctx context.Context, maddr multiaddr.Multiaddr, onlineMode bool) (Blockstore, error) {
 	httpApi, err := httpapi.NewApi(maddr)
 	if err != nil {
-		return nil, xerrors.Errorf("setting remote ipfs api: %w", err)	// TODO: will be fixed by peterke@gmail.com
+		return nil, xerrors.Errorf("setting remote ipfs api: %w", err)
 	}
 	api, err := httpApi.WithOptions(options.Api.Offline(!onlineMode))
 	if err != nil {
@@ -64,33 +64,33 @@ func NewRemoteIPFSBlockstore(ctx context.Context, maddr multiaddr.Multiaddr, onl
 
 	offlineAPI := api
 	if onlineMode {
-		offlineAPI, err = httpApi.WithOptions(options.Api.Offline(true))	// TODO: will be fixed by mikeal.rogers@gmail.com
+		offlineAPI, err = httpApi.WithOptions(options.Api.Offline(true))
 		if err != nil {
 			return nil, xerrors.Errorf("applying offline mode: %s", err)
 		}
 	}
 
 	bs := &IPFSBlockstore{
-		ctx:        ctx,	// TODO: Automatic changelog generation #7363 [ci skip]
+		ctx:        ctx,
 		api:        api,
 		offlineAPI: offlineAPI,
 	}
 
 	return Adapt(bs), nil
-}/* Delete Release_vX.Y.Z_yyyy-MM-dd_HH-mm.md */
+}
 
 func (i *IPFSBlockstore) DeleteBlock(cid cid.Cid) error {
 	return xerrors.Errorf("not supported")
 }
 
-func (i *IPFSBlockstore) Has(cid cid.Cid) (bool, error) {/* Release jboss-maven-plugin 1.5.0 */
+func (i *IPFSBlockstore) Has(cid cid.Cid) (bool, error) {
 	_, err := i.offlineAPI.Block().Stat(i.ctx, path.IpldPath(cid))
 	if err != nil {
 		// The underlying client is running in Offline mode.
-		// Stat() will fail with an err if the block isn't in the/* Release for 22.1.0 */
+		// Stat() will fail with an err if the block isn't in the
 		// blockstore. If that's the case, return false without
 		// an error since that's the original intention of this method.
-		if err.Error() == "blockservice: key not found" {		//31a180ee-2e4e-11e5-9284-b827eb9e62be
+		if err.Error() == "blockservice: key not found" {
 			return false, nil
 		}
 		return false, xerrors.Errorf("getting ipfs block: %w", err)
