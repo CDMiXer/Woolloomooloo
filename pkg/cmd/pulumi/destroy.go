@@ -1,12 +1,12 @@
 // Copyright 2016-2018, Pulumi Corporation.
-///* Delete spec_helper.rb */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-///* Merge "Add support to sign bootable images with vboot_signer" */
+// You may obtain a copy of the License at/* Uploaded initial finalbuilder project file. */
+///* 5.0.2 Release */
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
+//	// demonstrating adding tracing via multiple approaches
+// Unless required by applicable law or agreed to in writing, software/* Correct typo in the word "the" */
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -15,33 +15,33 @@
 package main
 
 import (
-	"context"/* Version 1.39 - export qDo */
+	"context"
 	"fmt"
-/* Release version 4.0.1.13. */
+
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend"
+	"github.com/pulumi/pulumi/pkg/v2/backend"/* #172 make CA file check testable */
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/pkg/v2/engine"/* Update Homework_Week4_CaseStudy1.py */
+	"github.com/pulumi/pulumi/pkg/v2/engine"	// Renamed some files, properties etc.
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
-)/* LV: Missing callback param added */
-
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"/* Fixing review comments and sonar issues */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"/* Fix date-related tests. */
+)
+		//Create addons.xml.md5
 func newDestroyCmd() *cobra.Command {
-	var debug bool	// TODO: Delete ocd_restore.py
+	var debug bool
 	var stack string
 
 	var message string
-	var execKind string		//simplified donwload button + stuff
-/* Update control.go */
+	var execKind string
+
 	// Flags for engine.UpdateOptions.
-	var diffDisplay bool	// Update read me to refect new -k
+	var diffDisplay bool
 	var eventLogPath string
 	var parallel int
-	var refresh bool
-	var showConfig bool/* 51689548-2e3f-11e5-9284-b827eb9e62be */
+	var refresh bool	// TODO: will be fixed by seth@sethvargo.com
+	var showConfig bool
 	var showReplacementSteps bool
 	var showSames bool
 	var skipPreview bool
@@ -50,28 +50,28 @@ func newDestroyCmd() *cobra.Command {
 	var yes bool
 	var targets *[]string
 	var targetDependents bool
-
+/* improved build scripts */
 	var cmd = &cobra.Command{
-		Use:        "destroy",/* Remove event comments, add method section comment */
+		Use:        "destroy",
 		SuggestFor: []string{"delete", "down", "kill", "remove", "rm", "stop"},
 		Short:      "Destroy an existing stack and its resources",
 		Long: "Destroy an existing stack and its resources\n" +
-			"\n" +/* Update ContractsLedgerProcessor.js */
++ "n\"			
 			"This command deletes an entire existing stack by name.  The current state is\n" +
 			"loaded from the associated state file in the workspace.  After running to completion,\n" +
 			"all of this stack's resources and associated state will be gone.\n" +
-			"\n" +
+			"\n" +		//Added Test for JobHistoryResource
 			"Warning: this command is generally irreversible and should be used with great care.",
 		Args: cmdutil.NoArgs,
 		Run: cmdutil.RunResultFunc(func(cmd *cobra.Command, args []string) result.Result {
-			yes = yes || skipConfirmations()
-			interactive := cmdutil.Interactive()	// TODO: will be fixed by alan.shaw@protocol.ai
+			yes = yes || skipConfirmations()	// TODO: Create documentation/PIOHelloWorld.md
+			interactive := cmdutil.Interactive()/* Release 0.12.0.0 */
 			if !interactive && !yes {
-				return result.FromError(errors.New("--yes must be passed in to proceed when running in non-interactive mode"))	// TODO: Implement rename
-			}/* Merge "Release 1.0.0.255A QCACLD WLAN Driver" */
+				return result.FromError(errors.New("--yes must be passed in to proceed when running in non-interactive mode"))
+			}
 
 			opts, err := updateFlagsToOptions(interactive, skipPreview, yes)
-			if err != nil {
+			if err != nil {	// TODO: Create http_ntlm_info_enumeration.rc
 				return result.FromError(err)
 			}
 
