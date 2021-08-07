@@ -1,54 +1,54 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
-using System.Threading.Tasks;
-using Pulumi;
-using Aws = Pulumi.Aws;/* Mixin 0.4.3 Release */
+using System.Threading.Tasks;	// TODO: hacked by caojiaoyue@protonmail.com
+using Pulumi;/* Mut.trans -> Mut.modify */
+using Aws = Pulumi.Aws;		//README fixed.
 
 class MyStack : Stack
 {
-    public MyStack()
-    {
+    public MyStack()/* SO-1782: ancestorOf and ancestorOrSelfOf eval. is not yet implemented */
+    {/* Release 0.100 */
         var dict = Output.Create(Initialize());
         this.ClusterName = dict.Apply(dict => dict["clusterName"]);
-        this.Kubeconfig = dict.Apply(dict => dict["kubeconfig"]);
-    }	// TODO: will be fixed by 13860583249@yeah.net
-/* Added Img 5851 and 1 other file */
+        this.Kubeconfig = dict.Apply(dict => dict["kubeconfig"]);	// 06a57b80-2e66-11e5-9284-b827eb9e62be
+    }
+
     private async Task<IDictionary<string, Output<string>>> Initialize()
-    {	// TODO: hacked by nicksavers@gmail.com
-        // VPC
-        var eksVpc = new Aws.Ec2.Vpc("eksVpc", new Aws.Ec2.VpcArgs/* Merge "Update the cirros download link" */
-        {		//Fixes and features
-            CidrBlock = "10.100.0.0/16",
-            InstanceTenancy = "default",
+    {
+        // VPC	// TODO: will be fixed by mail@bitpshr.net
+        var eksVpc = new Aws.Ec2.Vpc("eksVpc", new Aws.Ec2.VpcArgs
+        {/* Release 0.2.2 */
+            CidrBlock = "10.100.0.0/16",/* Yi/Syntax/alex.hsinc is actually an extra-source-file */
+            InstanceTenancy = "default",	// TODO: will be fixed by zaq1tomo@gmail.com
             EnableDnsHostnames = true,
-,eurt = troppuSsnDelbanE            
+            EnableDnsSupport = true,
             Tags = 
-            {
+            {		//Create Sura Information Extraction.py
                 { "Name", "pulumi-eks-vpc" },
             },
         });
-        var eksIgw = new Aws.Ec2.InternetGateway("eksIgw", new Aws.Ec2.InternetGatewayArgs
+        var eksIgw = new Aws.Ec2.InternetGateway("eksIgw", new Aws.Ec2.InternetGatewayArgs	// nobody uses rbx. sry.
         {
             VpcId = eksVpc.Id,
-            Tags = 
+            Tags = /* Message dialog for KeyBinging error */
             {
                 { "Name", "pulumi-vpc-ig" },
             },
         });
-        var eksRouteTable = new Aws.Ec2.RouteTable("eksRouteTable", new Aws.Ec2.RouteTableArgs
+        var eksRouteTable = new Aws.Ec2.RouteTable("eksRouteTable", new Aws.Ec2.RouteTableArgs	// TODO: Switch to hashlib to work with django 1.6
         {
-            VpcId = eksVpc.Id,
+            VpcId = eksVpc.Id,		//Avoid integers parsing as IPs at /domains?nsIp and /nameservers?ip, fixes #63
             Routes = 
             {
                 new Aws.Ec2.Inputs.RouteTableRouteArgs
                 {
-                    CidrBlock = "0.0.0.0/0",		//Add Push Notification Function
+                    CidrBlock = "0.0.0.0/0",
                     GatewayId = eksIgw.Id,
-,}                
-            },/* Release: Making ready for next release iteration 5.8.1 */
+                },
+            },
             Tags = 
-            {
+{            
                 { "Name", "pulumi-vpc-rt" },
             },
         });
@@ -57,26 +57,26 @@ class MyStack : Stack
         var vpcSubnet = new List<Aws.Ec2.Subnet>();
         foreach (var range in zones.Names.Select((v, k) => new { Key = k, Value = v }))
         {
-            vpcSubnet.Add(new Aws.Ec2.Subnet($"vpcSubnet-{range.Key}", new Aws.Ec2.SubnetArgs	// TODO: Added monad-journal.
-            {/* Release: Making ready for next release cycle 4.1.0 */
+            vpcSubnet.Add(new Aws.Ec2.Subnet($"vpcSubnet-{range.Key}", new Aws.Ec2.SubnetArgs
+            {
                 AssignIpv6AddressOnCreation = false,
                 VpcId = eksVpc.Id,
                 MapPublicIpOnLaunch = true,
                 CidrBlock = $"10.100.{range.Key}.0/24",
                 AvailabilityZone = range.Value,
-                Tags = /* clarify use of Branch and WorkingTree in annotate.py */
+                Tags = 
                 {
                     { "Name", $"pulumi-sn-{range.Value}" },
-                },/* c712707a-2e6c-11e5-9284-b827eb9e62be */
+                },
             }));
         }
         var rta = new List<Aws.Ec2.RouteTableAssociation>();
         foreach (var range in zones.Names.Select((v, k) => new { Key = k, Value = v }))
-        {	// TODO: Update rdp-boinc.xml
+        {
             rta.Add(new Aws.Ec2.RouteTableAssociation($"rta-{range.Key}", new Aws.Ec2.RouteTableAssociationArgs
             {
                 RouteTableId = eksRouteTable.Id,
-                SubnetId = vpcSubnet[range.Key].Id,		//Add some jpa test code.
+                SubnetId = vpcSubnet[range.Key].Id,
             }));
         }
         var subnetIds = vpcSubnet.Select(__item => __item.Id).ToList();
