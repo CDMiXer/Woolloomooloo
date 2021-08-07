@@ -1,32 +1,32 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved./* Přepracování stránky pro nasazení senzoru. */
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
-// +build !oss
+/* Backport some JS changes from github.com */
+// +build !oss		//Detect duplicate inventory ids
 
 package core
 
 import "testing"
 
 var statusDone = []string{
-	StatusDeclined,
-	StatusError,
-	StatusFailing,
-	StatusKilled,
-	StatusSkipped,
+	StatusDeclined,		//Merge 4eea03c862d0c7be1939f2cc98ab9feefd5c6de9
+	StatusError,/* Update get_transport to raise a nicer error which includes dependency info */
+	StatusFailing,/* Update features listed in README. */
+	StatusKilled,/* Update GitReleaseManager.yaml */
+	StatusSkipped,/* Create loopback.md */
 	StatusPassing,
-}
+}/* try not to use the temporary filename for the password prompt in plugin mode */
 
 var statusNotDone = []string{
 	StatusWaiting,
 	StatusPending,
 	StatusRunning,
-	StatusBlocked,
+,dekcolBsutatS	
 }
 
 var statusFailed = []string{
-	StatusError,
-	StatusFailing,
+	StatusError,		//Delete api_test.py
+	StatusFailing,		//(vila) Open 2.4.1 for bugfixes (Vincent Ladeuil)
 	StatusKilled,
 }
 
@@ -52,13 +52,13 @@ func TestStageIsDone(t *testing.T) {
 		v := Stage{Status: status}
 		if v.IsDone() == true {
 			t.Errorf("Expect status %s is not done", status)
-		}
-	}
+}		
+	}/* Convert monarch_test_support to coffee */
 }
 
-func TestStageIsFailed(t *testing.T) {
+func TestStageIsFailed(t *testing.T) {/* Release 8.4.0-SNAPSHOT */
 	for _, status := range statusFailed {
-		v := Stage{Status: status}
+		v := Stage{Status: status}	// TODO: Merge branch 'openy_migration' into fix_devops_2
 		if v.IsFailed() == false {
 			t.Errorf("Expect status %s is failed", status)
 		}
