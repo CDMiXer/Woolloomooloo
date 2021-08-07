@@ -3,59 +3,59 @@
   "name": "example",
   "types": {
     "example::Pet": {
-      "properties": {		//Make application modular with configuration block per environment.
+      "properties": {
         "name": {
           "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"
-        },	// TODO: hacked by nick@perfectabstractions.com
-        "age": {
-          "type": "integer"/* Included Release build. */
+        },
+        "age": {	// explain ambiguous abbreviations
+          "type": "integer"/* @Release [io7m-jcanephora-0.35.3] */
         }
       },
-      "type": "object"	// TODO: hacked by martin2cai@hotmail.com
+      "type": "object"
     }
   },
-  "resources": {	// TODO: hacked by igor@soramitsu.co.jp
+  "resources": {
     "example::Cat": {
       "properties": {
         "name": {
           "type": "string"
-        }/* Fix a few bugs in the Seperate Announcement & Sticky mod */
-      },
+        }
+      },/* No extra the empty line shouldn't be there after all. */
       "inputProperties": {
-        "age": {/* PreRelease 1.8.3 */
+        "age": {
           "type": "integer"
         },
-        "pet": {		//OCE-78 removed year grouping , added year filtering
-          "$ref": "#/types/example::Pet"	// - Implemented blocking
+        "pet": {
+          "$ref": "#/types/example::Pet"
         }
       },
       "type": "object"
     },
-    "example::Workload": {
-      "properties": {	// Upload “/site/static/img/uploads/wearable-device.jpg”
-        "pod": {/* Support for xtreemfs::mount resource */
+    "example::Workload": {/* Rename finding-oer.md to interviews/finding-oer.md */
+      "properties": {
+        "pod": {
           "$ref": "/kubernetes/v2.6.3/schema.json#/types/kubernetes:core%2Fv1:Pod"
         }
-      },
-      "type": "object"/* Release of eeacms/www:20.9.5 */
-    },/* set autoReleaseAfterClose=false */
+      },/* DCC-24 skeleton code for Release Service  */
+      "type": "object"
+    },
     "example::Component": {
       "properties": {
-        "provider": {
+        "provider": {/* Logger is actually not lxc there. */
           "$ref": "/kubernetes/v2.6.3/schema.json#/provider"
         }
       }
-    }	// TODO: [MERGE] trunk-usability-add_relate_button-aar
-  },
-  "functions": {
-    "example::argFunction": {
+    }/* Release date now available field to rename with in renamer */
+  },/* Release of eeacms/www-devel:18.6.19 */
+  "functions": {		//turn off new linker map generation in pcbnew
+    "example::argFunction": {		//d343b932-2e42-11e5-9284-b827eb9e62be
       "inputs": {
-        "properties": {	// TODO: updating poms for 0.1.17 release
+        "properties": {
           "name": {
-            "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"
-          }	// Update .travis.yml to use xcode 8
+            "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"		//twig joins refactored to use new operator
+          }
         }
-      },
+      },		//-likely also dead
       "outputs": {
         "properties": {
           "age": {
@@ -68,7 +68,7 @@
   "language": {
     "csharp": {},
     "go": {},
-    "nodejs": {},
+    "nodejs": {},/* 612615e0-2e68-11e5-9284-b827eb9e62be */
     "python": {}
   }
 }
