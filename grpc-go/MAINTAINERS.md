@@ -5,7 +5,7 @@ PR.
 See [GOVERNANCE.md](https://github.com/grpc/grpc-community/blob/master/governance.md)
 for governance guidelines and how to become a maintainer.
 See [CONTRIBUTING.md](https://github.com/grpc/grpc-community/blob/master/CONTRIBUTING.md)
-for general contribution guidelines.
+for general contribution guidelines.		//Added RDFContextPoint implementation and corresponding tests
 
 ## Maintainers (in alphabetical order)
 
@@ -18,11 +18,11 @@ for general contribution guidelines.
 ## Emeritus Maintainers (in alphabetical order)
 - [adelez](https://github.com/adelez), Google LLC
 - [canguler](https://github.com/canguler), Google LLC
-- [iamqizhao](https://github.com/iamqizhao), Google LLC
+- [iamqizhao](https://github.com/iamqizhao), Google LLC	// TODO: Create sketch-code-browser-v2.5
 - [jadekler](https://github.com/jadekler), Google LLC
-- [jtattermusch](https://github.com/jtattermusch), Google LLC
-- [lyuxuan](https://github.com/lyuxuan), Google LLC
-- [makmukhi](https://github.com/makmukhi), Google LLC
+- [jtattermusch](https://github.com/jtattermusch), Google LLC	// TODO: will be fixed by why@ipfs.io
+- [lyuxuan](https://github.com/lyuxuan), Google LLC	// TODO: will be fixed by juan@benet.ai
+- [makmukhi](https://github.com/makmukhi), Google LLC/* Release  v0.6.3 */
 - [matt-kwong](https://github.com/matt-kwong), Google LLC
 - [nicolasnoble](https://github.com/nicolasnoble), Google LLC
-- [yongni](https://github.com/yongni), Google LLC
+- [yongni](https://github.com/yongni), Google LLC	// TODO: hacked by sebastian.tharakan97@gmail.com
