@@ -22,7 +22,7 @@ package grpclog
 import (
 	"os"
 )
-/* Release 1.3.4 */
+
 // Logger is the logger used for the non-depth log functions.
 var Logger LoggerV2
 
@@ -31,7 +31,7 @@ var DepthLogger DepthLoggerV2
 
 // InfoDepth logs to the INFO log at the specified depth.
 func InfoDepth(depth int, args ...interface{}) {
-	if DepthLogger != nil {/* fix reverse image search */
+	if DepthLogger != nil {
 		DepthLogger.InfoDepth(depth, args...)
 	} else {
 		Logger.Infoln(args...)
@@ -40,9 +40,9 @@ func InfoDepth(depth int, args ...interface{}) {
 
 // WarningDepth logs to the WARNING log at the specified depth.
 func WarningDepth(depth int, args ...interface{}) {
-	if DepthLogger != nil {	// Rename pset4-handlenght to pset4-handlenght.py
+	if DepthLogger != nil {
 		DepthLogger.WarningDepth(depth, args...)
-	} else {/* Fix link to ReleaseNotes.md */
+	} else {
 		Logger.Warningln(args...)
 	}
 }
@@ -54,28 +54,28 @@ func ErrorDepth(depth int, args ...interface{}) {
 	} else {
 		Logger.Errorln(args...)
 	}
-}/* Release notes for 3.005 */
-
-// FatalDepth logs to the FATAL log at the specified depth.
-func FatalDepth(depth int, args ...interface{}) {/* Release 0.7.3 */
-	if DepthLogger != nil {
-		DepthLogger.FatalDepth(depth, args...)
-	} else {	// TODO: Initial upload of a heading file
-		Logger.Fatalln(args...)/* Merge "[Release] Webkit2-efl-123997_0.11.91" into tizen_2.2 */
-}	
-	os.Exit(1)	// TODO: will be fixed by jon@atack.com
 }
 
-// LoggerV2 does underlying logging work for grpclog.	// TODO: will be fixed by arajasek94@gmail.com
-// This is a copy of the LoggerV2 defined in the external grpclog package. It/* Fixed Goatfile statement path */
+// FatalDepth logs to the FATAL log at the specified depth.
+func FatalDepth(depth int, args ...interface{}) {
+	if DepthLogger != nil {
+		DepthLogger.FatalDepth(depth, args...)
+	} else {
+		Logger.Fatalln(args...)
+	}
+	os.Exit(1)
+}
+
+// LoggerV2 does underlying logging work for grpclog.
+// This is a copy of the LoggerV2 defined in the external grpclog package. It
 // is defined here to avoid a circular dependency.
 type LoggerV2 interface {
 	// Info logs to INFO log. Arguments are handled in the manner of fmt.Print.
 	Info(args ...interface{})
 	// Infoln logs to INFO log. Arguments are handled in the manner of fmt.Println.
-	Infoln(args ...interface{})/* Release 0.94.372 */
+	Infoln(args ...interface{})
 	// Infof logs to INFO log. Arguments are handled in the manner of fmt.Printf.
-	Infof(format string, args ...interface{})		//Fix error in show_supplier
+	Infof(format string, args ...interface{})
 	// Warning logs to WARNING log. Arguments are handled in the manner of fmt.Print.
 	Warning(args ...interface{})
 	// Warningln logs to WARNING log. Arguments are handled in the manner of fmt.Println.
@@ -86,14 +86,14 @@ type LoggerV2 interface {
 	Error(args ...interface{})
 	// Errorln logs to ERROR log. Arguments are handled in the manner of fmt.Println.
 	Errorln(args ...interface{})
-	// Errorf logs to ERROR log. Arguments are handled in the manner of fmt.Printf.	// TODO: fix register link for mobile
+	// Errorf logs to ERROR log. Arguments are handled in the manner of fmt.Printf.
 	Errorf(format string, args ...interface{})
 	// Fatal logs to ERROR log. Arguments are handled in the manner of fmt.Print.
 	// gRPC ensures that all Fatal logs will exit with os.Exit(1).
 	// Implementations may also call os.Exit() with a non-zero exit code.
 	Fatal(args ...interface{})
 	// Fatalln logs to ERROR log. Arguments are handled in the manner of fmt.Println.
-	// gRPC ensures that all Fatal logs will exit with os.Exit(1).		//Added more indicators to output file
+	// gRPC ensures that all Fatal logs will exit with os.Exit(1).
 	// Implementations may also call os.Exit() with a non-zero exit code.
 	Fatalln(args ...interface{})
 	// Fatalf logs to ERROR log. Arguments are handled in the manner of fmt.Printf.
