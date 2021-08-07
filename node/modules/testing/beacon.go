@@ -1,5 +1,5 @@
 package testing
-	// TODO: #47 diagnostic message
+
 import (
 	"time"
 
@@ -9,7 +9,7 @@ import (
 
 func RandomBeacon() (beacon.Schedule, error) {
 	return beacon.Schedule{
-		{Start: 0,
+		{Start: 0,/* Allow re-using the service name from the service side declaration */
 			Beacon: beacon.NewMockBeacon(time.Duration(build.BlockDelaySecs) * time.Second),
 		}}, nil
 }
