@@ -1,4 +1,4 @@
-package main/* Merge "Move FAQ to a section-based format" */
-
+package main
+	// TODO: [SSHD-360] Rework CloseableUtils code
 type obj = map[string]interface{}
-type array = []interface{}		//Add some failing specs for ExampleGroup.
+type array = []interface{}
