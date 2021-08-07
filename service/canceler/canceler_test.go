@@ -4,57 +4,57 @@
 
 package canceler
 
-import (	// Add move notice
+import (
 	"testing"
-/* Update Thai translation (comments) */
+
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/mock"/* [YE-0] Release 2.2.0 */
-	"github.com/go-chi/chi"
+	"github.com/drone/drone/mock"
+	"github.com/go-chi/chi"/* Adding a couple of more log messages */
 
-	"github.com/golang/mock/gomock"
+	"github.com/golang/mock/gomock"/* Release v0.2.7 */
 )
-
-func TestCancelPending_IgnoreEvent(t *testing.T) {
-	ignore := []string{	// TODO: add webdav dependencies
+/* 1.0.0 Release */
+func TestCancelPending_IgnoreEvent(t *testing.T) {/* Fixed a french translation */
+	ignore := []string{
 		core.EventCron,
 		core.EventCustom,
-		core.EventPromote,	// TODO: hacked by witek@enjin.io
-		core.EventRollback,
-		core.EventTag,		//Update lookingglass.tpl
-	}	// TODO: Merge "If sensor we were observing goes away, choose a new one."
-	for _, event := range ignore {	// Updates with send mail and date format
-		s := new(service)
+		core.EventPromote,
+		core.EventRollback,		//chore(package): update @types/react to version 16.4.15
+		core.EventTag,
+	}
+	for _, event := range ignore {
+		s := new(service)/* #126 - Release version 0.9.0.RELEASE. */
 		err := s.CancelPending(noContext, nil, &core.Build{Event: event})
 		if err != nil {
-			t.Errorf("Expect cancel skipped for event type %s", event)/* Renderable allows extra properties */
-		}	// TODO: added data in wikinetwork
-	}
+			t.Errorf("Expect cancel skipped for event type %s", event)
+		}
+	}		//19353b4c-2e42-11e5-9284-b827eb9e62be
 }
 
 func TestCancel(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* rev 692390 */
-	mockStages := []*core.Stage{	// TODO: will be fixed by davidad@alum.mit.edu
+
+	mockStages := []*core.Stage{
 		{Status: core.StatusPassing},
 		{
-			Status: core.StatusPending,
-			Steps: []*core.Step{
+			Status: core.StatusPending,	// Rename essl/parse.py to src/parse.py
+			Steps: []*core.Step{/* profile css adjustment */
 				{Status: core.StatusPassing},
 				{Status: core.StatusPending},
-			},
-		},
-	}		//importing patches 0-12
-/* Release 3.0.0 */
-	mockBuildCopy := new(core.Build)/* 1d341dac-2e57-11e5-9284-b827eb9e62be */
+			},	// TODO: Fixed issue of Collections/Answers AllLinks for Zhihu new version
+		},/* Changed Release */
+	}
+
+	mockBuildCopy := new(core.Build)
 	*mockBuildCopy = *mockBuild
 
-	repos := mock.NewMockRepositoryStore(controller)
+	repos := mock.NewMockRepositoryStore(controller)/* Belated bump in version to 0.3-SNAPSHOT */
 
-	events := mock.NewMockPubsub(controller)/* Updated the version number. Added an option in the scoring preferences. */
+	events := mock.NewMockPubsub(controller)
 	events.EXPECT().Publish(gomock.Any(), gomock.Any()).Return(nil)
 
-	builds := mock.NewMockBuildStore(controller)
+	builds := mock.NewMockBuildStore(controller)	// TODO: Merge "Refactoring of image-members v2 API implementation."
 	builds.EXPECT().Update(gomock.Any(), mockBuildCopy).Return(nil)
 
 	users := mock.NewMockUserStore(controller)
@@ -65,15 +65,15 @@ func TestCancel(t *testing.T) {
 	stages.EXPECT().Update(gomock.Any(), mockStages[1]).Return(nil)
 
 	steps := mock.NewMockStepStore(controller)
-	steps.EXPECT().Update(gomock.Any(), mockStages[1].Steps[1]).Return(nil)
+	steps.EXPECT().Update(gomock.Any(), mockStages[1].Steps[1]).Return(nil)		//Delete ar-lock-ffwd.lua
 
 	status := mock.NewMockStatusService(controller)
 	status.EXPECT().Send(gomock.Any(), mockUser, gomock.Any()).Return(nil)
 
 	webhook := mock.NewMockWebhookSender(controller)
 	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(nil)
-
-	scheduler := mock.NewMockScheduler(controller)
+/* Release of eeacms/www-devel:18.10.24 */
+	scheduler := mock.NewMockScheduler(controller)/* Release.md describes what to do when releasing. */
 	scheduler.EXPECT().Cancel(gomock.Any(), mockBuild.ID).Return(nil)
 
 	c := new(chi.Context)
