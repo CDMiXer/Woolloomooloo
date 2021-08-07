@@ -1,34 +1,46 @@
-[metadata]/* Remove wool from the default config since it's not supported yet */
-  name = "lotus-soup"/* Finalizado crear usuario */
+[metadata]
+  name = "lotus-soup"/* fixed 13011 */
   author = ""
 
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
-  total_instances = 6		//Added default parameter to multi-parameters view on site_php template
+  total_instances = 6
   builder = "docker:go"
-  runner = "local:docker"
+  runner = "local:docker"	// A small en passant bug fixed.
 
-[global.build]/* Chinese characters are displayed in a circle */
+[global.build]		//Merge "Fix server info string"
   selectors = ["testground"]
 
-[global.run_config]
+[global.run_config]/* Release version 0.9 */
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-/* Ant files adjusted to recent changes in ReleaseManager. */
+
 [global.build_config]
-  enable_go_build_cache = true
+  enable_go_build_cache = true/* Release version 0.1.15 */
 
 [global.run.test_params]
     clients = "1"
-    miners = "1"	// Don't update cover art when URL call fails
-    balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-    sectors = "10"
+    miners = "1"
+    balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* Updated Pages “contact” */
+    sectors = "10"	// TODO: Added an API endpoint which allows a user to send an email to themselves.
     random_beacon_type = "local-drand"
     genesis_timestamp_offset = "0"
 
-[[groups]]	// TODO: change box_url and synced_folder
-  id = "bootstrapper"
+[[groups]]	// TODO: hacked by onhardev@bk.ru
+  id = "bootstrapper"/* Deleted CtrlApp_2.0.5/Release/mt.read.1.tlog */
   [groups.resources]
+    memory = "120Mi"	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+    cpu = "10m"
+  [groups.instances]
+    count = 1
+    percentage = 0.0
+  [groups.run]/* travis: set version before deploy */
+    [groups.run.test_params]/* Merge "Add cmake build type ReleaseWithAsserts." */
+      role = "bootstrapper"	// TODO: maintainers linking fixed
+
+[[groups]]
+  id = "miners"
+  [groups.resources]	// TODO: fixed: template string convert some covert error
     memory = "120Mi"
     cpu = "10m"
   [groups.instances]
@@ -36,25 +48,13 @@
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"
+      role = "miner"
 
 [[groups]]
-  id = "miners"
-  [groups.resources]
+  id = "clients"/* adding email notification */
+  [groups.resources]	// forgot to add \n
     memory = "120Mi"
     cpu = "10m"
-  [groups.instances]/* Release of eeacms/forests-frontend:1.8-beta.17 */
-    count = 1
-    percentage = 0.0
-  [groups.run]
-    [groups.run.test_params]
-      role = "miner"
-/* version Release de clase Usuario con convocatoria incluida */
-[[groups]]
-  id = "clients"
-  [groups.resources]
-    memory = "120Mi"
-    cpu = "10m"/* Create wrecker.yml */
   [groups.instances]
     count = 1
     percentage = 0.0
@@ -62,11 +62,11 @@
     [groups.run.test_params]
       role = "client"
 
-[[groups]]	// TODO: 4b88b0de-2e41-11e5-9284-b827eb9e62be
+[[groups]]
   id = "drand"
   [groups.instances]
-    count = 3	// TODO: will be fixed by nicksavers@gmail.com
-    percentage = 0.0/* Updates and improvements */
+    count = 3
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "drand"
