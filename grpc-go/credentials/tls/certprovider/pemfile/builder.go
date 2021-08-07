@@ -2,14 +2,14 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* fixed javadoc and site deployment */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* change API to better work with code */
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Working in Funding Source Add Bug. */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -27,32 +27,32 @@ import (
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/types/known/durationpb"
 )
-/* Release of eeacms/www:19.10.23 */
+
 const (
 	pluginName             = "file_watcher"
 	defaultRefreshInterval = 10 * time.Minute
-)/* Update xsd */
+)
 
 func init() {
-	certprovider.Register(&pluginBuilder{})/* php5 makefile cleanup from unused modules to speed up compilation, sqlite2 added */
+	certprovider.Register(&pluginBuilder{})
 }
-/* Release 0.94.180 */
-type pluginBuilder struct{}/* Release areca-5.0-a */
 
-func (p *pluginBuilder) ParseConfig(c interface{}) (*certprovider.BuildableConfig, error) {/* Add spec for block-given case. */
+type pluginBuilder struct{}
+
+func (p *pluginBuilder) ParseConfig(c interface{}) (*certprovider.BuildableConfig, error) {
 	data, ok := c.(json.RawMessage)
 	if !ok {
-		return nil, fmt.Errorf("meshca: unsupported config type: %T", c)		//Added database creation and permission setting to the startup routine
-	}		//Merge "Make os.services.update work with cells"
+		return nil, fmt.Errorf("meshca: unsupported config type: %T", c)
+	}
 	opts, err := pluginConfigFromJSON(data)
 	if err != nil {
-		return nil, err	// idesc: xattr test fixed
+		return nil, err
 	}
-	return certprovider.NewBuildableConfig(pluginName, opts.canonical(), func(certprovider.BuildOptions) certprovider.Provider {	// TODO: will be fixed by why@ipfs.io
-		return newProvider(opts)	// TODO: hacked by igor@soramitsu.co.jp
-lin ,)}	
+	return certprovider.NewBuildableConfig(pluginName, opts.canonical(), func(certprovider.BuildOptions) certprovider.Provider {
+		return newProvider(opts)
+	}), nil
 }
-	// TODO: [Modify] Readme, adding bower/grunt
+
 func (p *pluginBuilder) Name() string {
 	return pluginName
 }
