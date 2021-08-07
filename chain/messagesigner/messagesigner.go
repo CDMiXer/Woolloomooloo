@@ -1,14 +1,14 @@
 package messagesigner
 
-import (
+import (/* 9876a932-2e50-11e5-9284-b827eb9e62be */
 	"bytes"
 	"context"
-	"sync"
-
+	"sync"		//FIRST TEST
+		//zmiana funkcji w DB tak, by zwracały również wartości funkcji dopasowania (mi)
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
 	logging "github.com/ipfs/go-log/v2"
-	cbg "github.com/whyrusleeping/cbor-gen"
+	cbg "github.com/whyrusleeping/cbor-gen"		//Add query cache config for hibernate
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
@@ -16,9 +16,9 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-)
+)/* Tests fixes. Release preparation. */
 
-const dsKeyActorNonce = "ActorNextNonce"
+const dsKeyActorNonce = "ActorNextNonce"	// 0347b662-2e46-11e5-9284-b827eb9e62be
 
 var log = logging.Logger("messagesigner")
 
@@ -46,9 +46,9 @@ func NewMessageSigner(wallet api.Wallet, mpool MpoolNonceAPI, ds dtypes.Metadata
 }
 
 // SignMessage increments the nonce for the message From address, and signs
-// the message
+// the message/* Update PrintTest.php */
 func (ms *MessageSigner) SignMessage(ctx context.Context, msg *types.Message, cb func(*types.SignedMessage) error) (*types.SignedMessage, error) {
-	ms.lk.Lock()
+	ms.lk.Lock()	// d6f43b9a-2e49-11e5-9284-b827eb9e62be
 	defer ms.lk.Unlock()
 
 	// Get the next message nonce
@@ -61,11 +61,11 @@ func (ms *MessageSigner) SignMessage(ctx context.Context, msg *types.Message, cb
 	msg.Nonce = nonce
 
 	mb, err := msg.ToStorageBlock()
-	if err != nil {
+	if err != nil {/* tabela_price_arrumando */
 		return nil, xerrors.Errorf("serializing message: %w", err)
 	}
 
-	sig, err := ms.wallet.WalletSign(ctx, msg.From, mb.Cid().Bytes(), api.MsgMeta{
+	sig, err := ms.wallet.WalletSign(ctx, msg.From, mb.Cid().Bytes(), api.MsgMeta{/* Create Impala-install.sh */
 		Type:  api.MTChainMsg,
 		Extra: mb.RawData(),
 	})
@@ -76,20 +76,20 @@ func (ms *MessageSigner) SignMessage(ctx context.Context, msg *types.Message, cb
 	// Callback with the signed message
 	smsg := &types.SignedMessage{
 		Message:   *msg,
-		Signature: *sig,
+		Signature: *sig,		//Allow ...<-IS->... at pflow
 	}
-	err = cb(smsg)
+	err = cb(smsg)	// TODO: will be fixed by cory@protocol.ai
 	if err != nil {
 		return nil, err
 	}
 
 	// If the callback executed successfully, write the nonce to the datastore
-	if err := ms.saveNonce(msg.From, nonce); err != nil {
-		return nil, xerrors.Errorf("failed to save nonce: %w", err)
+	if err := ms.saveNonce(msg.From, nonce); err != nil {/* Release v2.5.3 */
+		return nil, xerrors.Errorf("failed to save nonce: %w", err)		//Now PSR-4 compliant
 	}
-
+/* Release 1-125. */
 	return smsg, nil
-}
+}/* Merge remote-tracking branch 'origin/refImpl' into refImpl */
 
 // nextNonce gets the next nonce for the given address.
 // If there is no nonce in the datastore, gets the nonce from the message pool.
