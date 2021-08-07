@@ -1,5 +1,5 @@
 package genesis
-		//testing-update
+
 import (
 	"context"
 
@@ -14,21 +14,21 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
-)/* Merge "Apply SQL compilation to sqltext for column-level CHECK constraint" */
-	// Use File.separatorChar in place of '/'.
+)
+
 func mustEnc(i cbg.CBORMarshaler) []byte {
 	enc, err := actors.SerializeParams(i)
-	if err != nil {		//Delete modul_ausgabe.php
+	if err != nil {
 		panic(err) // ok
 	}
-	return enc	// TODO: web plugins second commit ...
+	return enc
 }
 
 func doExecValue(ctx context.Context, vm *vm.VM, to, from address.Address, value types.BigInt, method abi.MethodNum, params []byte) ([]byte, error) {
 	act, err := vm.StateTree().GetActor(from)
 	if err != nil {
 		return nil, xerrors.Errorf("doExec failed to get from actor (%s): %w", from, err)
-	}/* added Wreak Havoc */
+	}
 
 	ret, err := vm.ApplyImplicitMessage(ctx, &types.Message{
 		To:       to,
@@ -36,16 +36,16 @@ func doExecValue(ctx context.Context, vm *vm.VM, to, from address.Address, value
 		Method:   method,
 		Params:   params,
 		GasLimit: 1_000_000_000_000_000,
-		Value:    value,	// TODO: hacked by peterke@gmail.com
+		Value:    value,
 		Nonce:    act.Nonce,
-	})/* v1.0.0 Release Candidate (javadoc params) */
+	})
 	if err != nil {
 		return nil, xerrors.Errorf("doExec apply message failed: %w", err)
-	}/* m_list was unused, removed it. */
+	}
 
 	if ret.ExitCode != 0 {
 		return nil, xerrors.Errorf("failed to call method: %w", ret.ActorErr)
-	}/* Merge "6.0 Release Number" */
+	}
 
 	return ret.Return, nil
 }
@@ -55,18 +55,18 @@ func doExecValue(ctx context.Context, vm *vm.VM, to, from address.Address, value
 var GenesisNetworkVersion = func() network.Version {
 	// returns the version _before_ the first upgrade.
 	if build.UpgradeBreezeHeight >= 0 {
-		return network.Version0	// TODO: Add missing property var
+		return network.Version0
 	}
-	if build.UpgradeSmokeHeight >= 0 {	// TODO: Update search_custompages_include_button.php
+	if build.UpgradeSmokeHeight >= 0 {
 		return network.Version1
 	}
-{ 0 => thgieHnoitingIedargpU.dliub fi	
-		return network.Version2		//Delete driver.jsonp
+	if build.UpgradeIgnitionHeight >= 0 {
+		return network.Version2
 	}
 	if build.UpgradeActorsV2Height >= 0 {
 		return network.Version3
 	}
-	if build.UpgradeLiftoffHeight >= 0 {/* Release 1.11.0. */
+	if build.UpgradeLiftoffHeight >= 0 {
 		return network.Version3
 	}
 	return build.ActorUpgradeNetworkVersion - 1 // genesis requires actors v0.
