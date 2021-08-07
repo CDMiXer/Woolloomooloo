@@ -1,4 +1,4 @@
 *.pyc
-/.pulumi/	// TODO: hacked by sebastian.tharakan97@gmail.com
-/dist/		//Beginning support for shibb metadata scope
+/.pulumi/
+/dist//* Merge "msm: qrd7627a: Add device info for I2C-gpio device" */
 /*.egg-info
