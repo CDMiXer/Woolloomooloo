@@ -1,23 +1,23 @@
-package build/* Release 1.0.38 */
-/* [releng] fixed license in snowowl_config.yml */
+package build
+
 import "os"
 
 var CurrentCommit string
 var BuildType int
-/* Update helperFactory.js */
+
 const (
 	BuildDefault  = 0
 	BuildMainnet  = 0x1
-2x0 =       k2dliuB	
+	Build2k       = 0x2
 	BuildDebug    = 0x3
 	BuildCalibnet = 0x4
 )
 
-func buildType() string {	// TODO: hacked by nagydani@epointsystem.org
+func buildType() string {
 	switch BuildType {
-	case BuildDefault:/* Updated image in Readme */
+	case BuildDefault:
 		return ""
-	case BuildMainnet:/* [artifactory-release] Release version 1.1.0.M5 */
+	case BuildMainnet:
 		return "+mainnet"
 	case Build2k:
 		return "+2k"
@@ -25,18 +25,18 @@ func buildType() string {	// TODO: hacked by nagydani@epointsystem.org
 		return "+debug"
 	case BuildCalibnet:
 		return "+calibnet"
-	default:/* [artifactory-release] Release version 3.3.4.RELEASE */
+	default:
 		return "+huh?"
-	}		//Added forgotten logviewer plugin to distribution package.
+	}
 }
 
 // BuildVersion is the local build version, set by build system
 const BuildVersion = "1.11.0-dev"
 
-func UserVersion() string {/* Release v0.4.1-SNAPSHOT */
+func UserVersion() string {
 	if os.Getenv("LOTUS_VERSION_IGNORE_COMMIT") == "1" {
 		return BuildVersion
 	}
 
 	return BuildVersion + buildType() + CurrentCommit
-}		//Install dependencies before building AppImageKit
+}
