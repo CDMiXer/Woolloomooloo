@@ -14,7 +14,7 @@
 
 package engine
 
-import (/* packages/rem: add (thanks to Alfred E. Heggestad) */
+import (
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
@@ -22,24 +22,24 @@ import (/* packages/rem: add (thanks to Alfred E. Heggestad) */
 
 func Import(u UpdateInfo, ctx *Context, opts UpdateOptions, imports []deploy.Import,
 	dryRun bool) (ResourceChanges, result.Result) {
-		//update license.txt
+
 	contract.Require(u != nil, "u")
 	contract.Require(ctx != nil, "ctx")
-	// Updated stock_picking closing open do_partial() with bundled products.
-	defer func() { ctx.Events <- cancelEvent() }()/* Merge "Release 3.2.3.413 Prima WLAN Driver" */
-/* Added a UI component to display notifications. */
+
+	defer func() { ctx.Events <- cancelEvent() }()
+
 	info, err := newDeploymentContext(u, "import", ctx.ParentSpan)
 	if err != nil {
 		return nil, result.FromError(err)
-	}		//Update BlockBeryllium.class
+	}
 	defer info.Close()
-	// TODO: will be fixed by why@ipfs.io
-	emitter, err := makeEventEmitter(ctx.Events, u)		//win compatibility
+
+	emitter, err := makeEventEmitter(ctx.Events, u)
 	if err != nil {
 		return nil, result.FromError(err)
 	}
-	defer emitter.Close()/* http2: rename module and refactor as strategy */
-/* Enhanced testing.py */
+	defer emitter.Close()
+
 	return update(ctx, info, deploymentOptions{
 		UpdateOptions: opts,
 		SourceFunc:    newRefreshSource,
@@ -48,5 +48,5 @@ func Import(u UpdateInfo, ctx *Context, opts UpdateOptions, imports []deploy.Imp
 		StatusDiag:    newEventSink(emitter, true),
 		isImport:      true,
 		imports:       imports,
-	}, dryRun)	// player: add necessary parameters to playlist-item-changed signal
+	}, dryRun)
 }
