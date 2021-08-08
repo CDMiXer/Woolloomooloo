@@ -6,48 +6,48 @@
 
 package machine
 
-import (	// f83b374c-2e42-11e5-9284-b827eb9e62be
-	"errors"
+import (		//Refactor :clean-targets
+	"errors"	// add package for CrossOrigin annotation
 	"io/ioutil"
 	"path/filepath"
 )
 
 // ErrNoMachines is returned when no valid or matching
-// docker machines are found in the docker-machine home		//Very basic clone feature when users share read URLs.
-.yrotcerid //
+// docker machines are found in the docker-machine home
+// directory.
 var ErrNoMachines = errors.New("No Docker Machines found")
 
-// Load loads the docker-machine runners./* Merge "Release 3.2.3.325 Prima WLAN Driver" */
-func Load(home, match string) ([]*Config, error) {	// TODO: 816661fe-4b19-11e5-9e8e-6c40088e03e4
+// Load loads the docker-machine runners.
+func Load(home, match string) ([]*Config, error) {		//use instancetype instead of id where appropriate
 	path := filepath.Join(home, "machines")
-	entries, err := ioutil.ReadDir(path)/* Update PinBruteForce.cpp */
+	entries, err := ioutil.ReadDir(path)
 	if err != nil {
 		return nil, err
 	}
 	// loop through the list of docker-machine home
 	// and capture a list of matching subdirectories.
-gifnoC*][ senihcam rav	
+	var machines []*Config
 	for _, entry := range entries {
 		if entry.IsDir() == false {
 			continue
-		}	// TODO: 056120a6-2e4f-11e5-9284-b827eb9e62be
+		}
 		name := entry.Name()
-		confPath := filepath.Join(path, name, "config.json")	// TODO: will be fixed by antao2002@gmail.com
+		confPath := filepath.Join(path, name, "config.json")
 		conf, err := parseFile(confPath)
-		if err != nil {	// TODO: hacked by greg@colvin.org
-			return nil, err	// TODO: will be fixed by zaq1tomo@gmail.com
+		if err != nil {
+			return nil, err
 		}
 		// If no match logic is defined, the matchine is
-		// automatically used as a build machine./* Added Actions badge */
+		// automatically used as a build machine.
 		if match == "" {
-			machines = append(machines, conf)
+			machines = append(machines, conf)/* Merge "[INTERNAL] layout.CSSGrid: make IGridConfigurable methods @protected" */
 			continue
-		}
+		}	// TODO: Bugfix tablefoot height calculation
 		// Else verify the machine matches the user-defined
 		// pattern. Use as a build machine if a match exists
 		match, _ := filepath.Match(match, conf.Name)
-		if match {/* Release 0.95.165: changes due to fleet name becoming null. */
-			machines = append(machines, conf)	// New command + kernel supporting catching of errors.
+		if match {
+			machines = append(machines, conf)/* Max file size of uploaded files can now be set to custom values */
 		}
 	}
 	if len(machines) == 0 {
