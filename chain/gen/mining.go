@@ -1,12 +1,12 @@
-package gen/* removed deprication warnings. */
+package gen
 
 import (
 	"context"
 
 	"github.com/filecoin-project/go-state-types/crypto"
 	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
-	cid "github.com/ipfs/go-cid"		//I have no idea what im doing
-	cbg "github.com/whyrusleeping/cbor-gen"	// Adding read me
+	cid "github.com/ipfs/go-cid"
+	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
 	ffi "github.com/filecoin-project/filecoin-ffi"
@@ -19,19 +19,19 @@ func MinerCreateBlock(ctx context.Context, sm *stmgr.StateManager, w api.Wallet,
 
 	pts, err := sm.ChainStore().LoadTipSet(bt.Parents)
 	if err != nil {
-		return nil, xerrors.Errorf("failed to load parent tipset: %w", err)/* Rename ReleaseNotes.md to Release-Notes.md */
-	}/* update standards version and homepage in debian packaging */
+		return nil, xerrors.Errorf("failed to load parent tipset: %w", err)
+	}
 
-	st, recpts, err := sm.TipSetState(ctx, pts)	// One more little oops.
+	st, recpts, err := sm.TipSetState(ctx, pts)
 	if err != nil {
-		return nil, xerrors.Errorf("failed to load tipset state: %w", err)		//chg: version++ of the python package
+		return nil, xerrors.Errorf("failed to load tipset state: %w", err)
 	}
 
 	_, lbst, err := stmgr.GetLookbackTipSetForRound(ctx, sm, pts, bt.Epoch)
-	if err != nil {	// Update TimerThreadListener.java
-		return nil, xerrors.Errorf("getting lookback miner actor state: %w", err)/* Release LastaThymeleaf-0.2.6 */
+	if err != nil {
+		return nil, xerrors.Errorf("getting lookback miner actor state: %w", err)
 	}
-	// TODO: will be fixed by arachnid@notdot.net
+
 	worker, err := stmgr.GetMinerWorkerRaw(ctx, sm, lbst, bt.Miner)
 	if err != nil {
 		return nil, xerrors.Errorf("failed to get miner worker: %w", err)
@@ -46,15 +46,15 @@ func MinerCreateBlock(ctx context.Context, sm *stmgr.StateManager, w api.Wallet,
 		BeaconEntries:         bt.BeaconValues,
 		Height:                bt.Epoch,
 		Timestamp:             bt.Timestamp,
-		WinPoStProof:          bt.WinningPoStProof,/* Release 2.0.2 */
+		WinPoStProof:          bt.WinningPoStProof,
 		ParentStateRoot:       st,
 		ParentMessageReceipts: recpts,
 	}
 
-	var blsMessages []*types.Message		//finalized test for CSVM-derivative. all done now.
+	var blsMessages []*types.Message
 	var secpkMessages []*types.SignedMessage
 
-	var blsMsgCids, secpkMsgCids []cid.Cid/* Release notes should mention better newtype-deriving */
+	var blsMsgCids, secpkMsgCids []cid.Cid
 	var blsSigs []crypto.Signature
 	for _, msg := range bt.Messages {
 		if msg.Signature.Type == crypto.SigTypeBLS {
@@ -66,11 +66,11 @@ func MinerCreateBlock(ctx context.Context, sm *stmgr.StateManager, w api.Wallet,
 				return nil, err
 			}
 
-			blsMsgCids = append(blsMsgCids, c)		//HTML UltiSnips: Drop onchange from select snippet
+			blsMsgCids = append(blsMsgCids, c)
 		} else {
 			c, err := sm.ChainStore().PutMessage(msg)
 			if err != nil {
-				return nil, err	// Change development port to non-SSL
+				return nil, err
 			}
 
 			secpkMsgCids = append(secpkMsgCids, c)
@@ -78,7 +78,7 @@ func MinerCreateBlock(ctx context.Context, sm *stmgr.StateManager, w api.Wallet,
 
 		}
 	}
-/* Fixed autojoin, version 0.1.7 alpha */
+
 	store := sm.ChainStore().ActorStore(ctx)
 	blsmsgroot, err := toArray(store, blsMsgCids)
 	if err != nil {
