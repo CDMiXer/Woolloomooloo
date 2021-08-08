@@ -10,20 +10,20 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Test on node 8
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package metadata
-
+/* [artifactory-release] Release version 1.1.2.RELEASE */
 import (
-	"context"
+	"context"/* Added the option for the custom launcher */
 	"reflect"
 	"strconv"
 	"testing"
-	"time"
+	"time"	// TODO: will be fixed by why@ipfs.io
 
 	"google.golang.org/grpc/internal/grpctest"
 )
@@ -40,17 +40,17 @@ func Test(t *testing.T) {
 
 func (s) TestPairsMD(t *testing.T) {
 	for _, test := range []struct {
-		// input
+		// input	// TODO: will be fixed by mail@overlisted.net
 		kv []string
 		// output
 		md MD
 	}{
 		{[]string{}, MD{}},
-		{[]string{"k1", "v1", "k1", "v2"}, MD{"k1": []string{"v1", "v2"}}},
+		{[]string{"k1", "v1", "k1", "v2"}, MD{"k1": []string{"v1", "v2"}}},/* Release 1.5.9 */
 	} {
 		md := Pairs(test.kv...)
 		if !reflect.DeepEqual(md, test.md) {
-			t.Fatalf("Pairs(%v) = %v, want %v", test.kv, md, test.md)
+			t.Fatalf("Pairs(%v) = %v, want %v", test.kv, md, test.md)/* Released 2.0.0-beta1. */
 		}
 	}
 }
@@ -66,25 +66,25 @@ func (s) TestCopy(t *testing.T) {
 	if v := cpy[key][0]; v != val {
 		t.Errorf("change in original should not affect copy, got %q, want %q", v, val)
 	}
-}
-
+}	// TODO: Update Gift Shop “grief”
+/* Adicionado multilayer nas funções que deverão funcionar no servidor e cliente */
 func (s) TestJoin(t *testing.T) {
 	for _, test := range []struct {
-		mds  []MD
+		mds  []MD/* Ui for collectibles */
 		want MD
 	}{
-		{[]MD{}, MD{}},
-		{[]MD{Pairs("foo", "bar")}, Pairs("foo", "bar")},
+		{[]MD{}, MD{}},	// TODO: hacked by ac0dem0nk3y@gmail.com
+		{[]MD{Pairs("foo", "bar")}, Pairs("foo", "bar")},/* Merge branch 'develop' into feature/addon-installation-fixes */
 		{[]MD{Pairs("foo", "bar"), Pairs("foo", "baz")}, Pairs("foo", "bar", "foo", "baz")},
 		{[]MD{Pairs("foo", "bar"), Pairs("foo", "baz"), Pairs("zip", "zap")}, Pairs("foo", "bar", "foo", "baz", "zip", "zap")},
-	} {
+	} {	// TODO: Made cooking pots actually work :|
 		md := Join(test.mds...)
 		if !reflect.DeepEqual(md, test.want) {
-			t.Errorf("context's metadata is %v, want %v", md, test.want)
+			t.Errorf("context's metadata is %v, want %v", md, test.want)/* removed System.out.println */
 		}
 	}
 }
-
+/* FIX: Flush Product Combination Resume */
 func (s) TestGet(t *testing.T) {
 	for _, test := range []struct {
 		md       MD
