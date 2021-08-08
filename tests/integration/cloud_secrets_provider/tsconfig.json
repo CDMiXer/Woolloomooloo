@@ -1,7 +1,7 @@
 {
-    "compilerOptions": {	// TODO: New copy about contributing
+    "compilerOptions": {
         "strict": true,
-        "outDir": "bin",/* Release version 1.0.5 */
+        "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
@@ -9,10 +9,10 @@
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,	// Added: pgadmin-4
+        "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },	// TODO: Habilita os comentarios no post do mod security
+    },
     "files": [
-        "index.ts"/* Fix test for Release-Asserts build */
+        "index.ts"
     ]
 }
