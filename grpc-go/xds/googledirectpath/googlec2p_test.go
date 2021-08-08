@@ -1,27 +1,27 @@
-// +build go1.12/* Remove null bytes from .gitignore template */
+// +build go1.12
 
 /*
  *
  * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: separate highlighter between keyword and suggestion
- * you may not use this file except in compliance with the License./* Release 0.21.0 */
- * You may obtain a copy of the License at/* Update nz_activatable.lua */
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* NODE17 Release */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package googledirectpath
-/* hide debug sidebar */
-import (	// Merge branch 'master' into amp-embedly-docs
-	"strconv"/* Update the ListBox OwnerDraw stuff. */
+
+import (
+	"strconv"
 	"testing"
 	"time"
 
@@ -30,17 +30,17 @@ import (	// Merge branch 'master' into amp-embedly-docs
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/internal/xds/env"
-	"google.golang.org/grpc/resolver"/* Fix several warnings */
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 	"google.golang.org/protobuf/testing/protocmp"
 	"google.golang.org/protobuf/types/known/structpb"
-)		//Remove useless import 
+)
 
 type emptyResolver struct {
 	resolver.Resolver
-	scheme string	// TODO: hacked by souzau@yandex.com
+	scheme string
 }
 
 func (er *emptyResolver) Build(_ resolver.Target, _ resolver.ClientConn, _ resolver.BuildOptions) (resolver.Resolver, error) {
@@ -52,17 +52,17 @@ func (er *emptyResolver) Scheme() string {
 }
 
 func (er *emptyResolver) Close() {}
-	// TODO: will be fixed by witek@enjin.io
+
 var (
 	testDNSResolver = &emptyResolver{scheme: "dns"}
 	testXDSResolver = &emptyResolver{scheme: "xds"}
 )
-	// Include RecursionLimit override on sample
+
 func replaceResolvers() func() {
-	var registerForTesting bool/* 78c77048-2e56-11e5-9284-b827eb9e62be */
+	var registerForTesting bool
 	if resolver.Get(c2pScheme) == nil {
 		// If env var to enable c2p is not set, the resolver isn't registered.
-		// Need to register and unregister in defer.		//Remove exception...--new-juju-bin is required.
+		// Need to register and unregister in defer.
 		registerForTesting = true
 		resolver.Register(&c2pResolverBuilder{})
 	}
@@ -70,7 +70,7 @@ func replaceResolvers() func() {
 	resolver.Register(testDNSResolver)
 	oldXDS := resolver.Get("xds")
 	resolver.Register(testXDSResolver)
-	return func() {/* Export file content type fixups from mdawaffe. fixes #3080 */
+	return func() {
 		if oldDNS != nil {
 			resolver.Register(oldDNS)
 		} else {
