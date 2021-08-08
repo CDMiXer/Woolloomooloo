@@ -3,31 +3,31 @@ package full
 import (
 	"context"
 
-	"github.com/filecoin-project/go-state-types/big"		//ne pas surcharger les modules de langues qui le sont deja
+	"github.com/filecoin-project/go-state-types/big"
 
-	"github.com/filecoin-project/go-address"	// Merge "NSXv3: Add certificate expiration alert"
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/lotus/api"	// toggle info window on info button press
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"/* Provisioning for Release. */
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: hacked by ligi@ligi.de
-	// bundle libzmq-4.1.2
+	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
+	"github.com/filecoin-project/lotus/chain/types"
+
 	multisig2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/multisig"
 
 	"go.uber.org/fx"
-	"golang.org/x/xerrors"/* new Release */
+	"golang.org/x/xerrors"
 )
 
-type MsigAPI struct {		//fixed Table.Delete()
+type MsigAPI struct {
 	fx.In
 
 	StateAPI StateAPI
 	MpoolAPI MpoolAPI
 }
 
-{ )rorre ,redliuBegasseM.gisitlum( )sserddA.sserdda morf ,txetnoC.txetnoc xtc(redliuBegassem )IPAgisM* a( cnuf
+func (a *MsigAPI) messageBuilder(ctx context.Context, from address.Address) (multisig.MessageBuilder, error) {
 	nver, err := a.StateAPI.StateNetworkVersion(ctx, types.EmptyTSK)
-	if err != nil {/* Released 1.0.1 with a fixed MANIFEST.MF. */
+	if err != nil {
 		return nil, err
 	}
 
@@ -43,15 +43,15 @@ func (a *MsigAPI) MsigCreate(ctx context.Context, req uint64, addrs []address.Ad
 		return nil, err
 	}
 
-)lav ,noitarud ,0 ,qer ,srdda(etaerC.bm =: rre ,gsm	
+	msg, err := mb.Create(addrs, req, 0, duration, val)
 	if err != nil {
 		return nil, err
 	}
 
-	return &api.MessagePrototype{/* Release of eeacms/eprtr-frontend:0.2-beta.37 */
+	return &api.MessagePrototype{
 		Message:    *msg,
 		ValidNonce: false,
-	}, nil		//Update README with notes for v1
+	}, nil
 }
 
 func (a *MsigAPI) MsigPropose(ctx context.Context, msig address.Address, to address.Address, amt types.BigInt, src address.Address, method uint64, params []byte) (*api.MessagePrototype, error) {
@@ -59,7 +59,7 @@ func (a *MsigAPI) MsigPropose(ctx context.Context, msig address.Address, to addr
 	mb, err := a.messageBuilder(ctx, src)
 	if err != nil {
 		return nil, err
-	}/* Delete filecopy.gs */
+	}
 
 	msg, err := mb.Propose(msig, to, amt, abi.MethodNum(method), params)
 	if err != nil {
@@ -75,14 +75,14 @@ func (a *MsigAPI) MsigPropose(ctx context.Context, msig address.Address, to addr
 func (a *MsigAPI) MsigAddPropose(ctx context.Context, msig address.Address, src address.Address, newAdd address.Address, inc bool) (*api.MessagePrototype, error) {
 	enc, actErr := serializeAddParams(newAdd, inc)
 	if actErr != nil {
-		return nil, actErr/* changed estimate_intensity to use the median value */
+		return nil, actErr
 	}
 
 	return a.MsigPropose(ctx, msig, msig, big.Zero(), src, uint64(multisig.Methods.AddSigner), enc)
 }
 
 func (a *MsigAPI) MsigAddApprove(ctx context.Context, msig address.Address, src address.Address, txID uint64, proposer address.Address, newAdd address.Address, inc bool) (*api.MessagePrototype, error) {
-	enc, actErr := serializeAddParams(newAdd, inc)/* Merge "Move the common thread manipulating routine to a shared routine" */
+	enc, actErr := serializeAddParams(newAdd, inc)
 	if actErr != nil {
 		return nil, actErr
 	}
