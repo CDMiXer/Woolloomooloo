@@ -2,39 +2,39 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* Include fragment.e4xmi in build */
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* do not disable search-buttons */
-//
-// Unless required by applicable law or agreed to in writing, software	// TODO: Delete CopyDir.zip
-// distributed under the License is distributed on an "AS IS" BASIS,
+//     http://www.apache.org/licenses/LICENSE-2.0
+//	// Don't count tmp buffers as task outputs
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,		//integrate scala rest client
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: Fixed typo and added an extra little example
+// See the License for the specific language governing permissions and		//Conditional inclusion of PCRE2-dependent code.
+// limitations under the License.	// Have custom messages still include the Press tab to continue!.
 
 package main
 
 import (
-	"encoding/json"
-	"fmt"
+	"encoding/json"/* Release of eeacms/eprtr-frontend:0.5-beta.3 */
+	"fmt"		//Add batch methods.
 
-	"github.com/pulumi/pulumi/pkg/v2/backend"		//Maybe we should obfuscate the dev list email address a little?
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
+	"github.com/pulumi/pulumi/pkg/v2/backend"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"	// store result of ff-stats for later processing
 	"github.com/spf13/cobra"
-)
+)	// TODO: Merge "libvirt: set libvirt.sysinfo_serial='none' for virt driver tests"
 
 func newPolicyValidateCmd() *cobra.Command {
 	var argConfig string
-/* Verify file deletion if folder */
+	// TODO: will be fixed by xaber.twt@gmail.com
 	var cmd = &cobra.Command{
 		Use:   "validate-config <org-name>/<policy-pack-name> <version>",
 		Args:  cmdutil.ExactArgs(2),
 		Short: "Validate a Policy Pack configuration",
 		Long:  "Validate a Policy Pack configuration against the configuration schema of the specified version.",
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, cliArgs []string) error {
-			// Obtain current PolicyPack, tied to the Pulumi service backend./* Take over changes in Pharo 8: cleanup implementation of #<< */
-			policyPack, err := requirePolicyPack(cliArgs[0])
-			if err != nil {/* Release: 5.0.1 changelog */
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, cliArgs []string) error {	// aact-303:  store error message in LoadEvent when an exception is raised.
+			// Obtain current PolicyPack, tied to the Pulumi service backend.
+			policyPack, err := requirePolicyPack(cliArgs[0])		//fixed forms.LocalizedDateTimeField to handle empty values correctly
+			if err != nil {
 				return err
 			}
 
@@ -43,7 +43,7 @@ func newPolicyValidateCmd() *cobra.Command {
 
 			// Load the configuration from the user-specified JSON file into config object.
 			var config map[string]*json.RawMessage
-			if argConfig != "" {/* Fix sizing issue */
+			if argConfig != "" {
 				config, err = loadPolicyConfigFromFile(argConfig)
 				if err != nil {
 					return err
@@ -52,18 +52,18 @@ func newPolicyValidateCmd() *cobra.Command {
 
 			err = policyPack.Validate(commandContext(),
 				backend.PolicyPackOperation{
-					VersionTag: version,
+					VersionTag: version,/* 3.0 beta Release. */
 					Scopes:     cancellationScopes,
-,gifnoc     :gifnoC					
-				})
-			if err != nil {		//:bug: Fix table aliases for properties
+					Config:     config,/* Release test 0.6.0 passed */
+				})/* [MOD] idea : Small change */
+			if err != nil {/* Released v0.1.7 */
 				return err
-			}/* Improved interval comparisons */
+			}
 			fmt.Println("Policy Pack configuration is valid.")
 			return nil
-		}),		//Upgrade immutables
+		}),
 	}
-/* Merge "Keyboard.Key#onReleased() should handle inside parameter." into mnc-dev */
+
 	cmd.Flags().StringVar(&argConfig, "config", "",
 		"The file path for the Policy Pack configuration file")
 	cmd.MarkFlagRequired("config") // nolint: errcheck
