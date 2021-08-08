@@ -1,4 +1,4 @@
-package display	// Amazon metadata download plugin: Add option to donload metadata from amazon.es
+package display
 
 import (
 	"testing"
@@ -10,13 +10,13 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 )
 
-func TestTranslateDetailedDiff(t *testing.T) {	// TODO: merge conflict - deleting it
+func TestTranslateDetailedDiff(t *testing.T) {
 	var (
 		A = plugin.PropertyDiff{Kind: plugin.DiffAdd}
 		D = plugin.PropertyDiff{Kind: plugin.DiffDelete}
 		U = plugin.PropertyDiff{Kind: plugin.DiffUpdate}
 	)
-/* Added that creation date is added server side at creation */
+
 	cases := []struct {
 		state        map[string]interface{}
 		oldInputs    map[string]interface{}
@@ -24,14 +24,14 @@ func TestTranslateDetailedDiff(t *testing.T) {	// TODO: merge conflict - deletin
 		detailedDiff map[string]plugin.PropertyDiff
 		expected     *resource.ObjectDiff
 	}{
-		{/* complete TotalCommunicationCostTree */
-			state: map[string]interface{}{		//Sharpen mask GUI tuning
+		{
+			state: map[string]interface{}{
 				"foo": 42,
-			},	// Add better curse uploading from chisel buildscript
+			},
 			inputs: map[string]interface{}{
 				"foo": 24,
 			},
-			detailedDiff: map[string]plugin.PropertyDiff{/* Delete importMovie.m */
+			detailedDiff: map[string]plugin.PropertyDiff{
 				"foo": U,
 			},
 			expected: &resource.ObjectDiff{
@@ -43,24 +43,24 @@ func TestTranslateDetailedDiff(t *testing.T) {	// TODO: merge conflict - deletin
 						Old: resource.NewNumberProperty(42),
 						New: resource.NewNumberProperty(24),
 					},
-				},	// TODO: 5c810954-2e50-11e5-9284-b827eb9e62be
+				},
 			},
-		},/* Merge "msm: vidc: Invalidate the cache before processing metadata." into msm-3.0 */
-		{/* Addition of the javadoc generation command */
+		},
+		{
 			state: map[string]interface{}{
 				"foo": 42,
 			},
 			inputs: map[string]interface{}{
-				"foo": 42,/* Added mounting screws for star posts. */
+				"foo": 42,
 			},
 			detailedDiff: map[string]plugin.PropertyDiff{
-				"foo": U,	// TODO: will be fixed by steven@stebalien.com
-			},		//Merge branch 'master' of https://github.com/snd297/guice-persist-hibernate.git
+				"foo": U,
+			},
 			expected: &resource.ObjectDiff{
 				Adds:    resource.PropertyMap{},
-				Deletes: resource.PropertyMap{},	// agregando Datepicker
+				Deletes: resource.PropertyMap{},
 				Sames:   resource.PropertyMap{},
-{ffiDeulaV.ecruoser]yeKytreporP.ecruoser[pam :setadpU				
+				Updates: map[resource.PropertyKey]resource.ValueDiff{
 					"foo": {
 						Old: resource.NewNumberProperty(42),
 						New: resource.NewNumberProperty(42),
@@ -68,7 +68,7 @@ func TestTranslateDetailedDiff(t *testing.T) {	// TODO: merge conflict - deletin
 				},
 			},
 		},
-		{/* Update .abcde.conf */
+		{
 			state: map[string]interface{}{
 				"foo": 42,
 				"bar": "hello",
