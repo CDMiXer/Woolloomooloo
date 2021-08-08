@@ -1,19 +1,19 @@
-package paych		//Removed call to update function in 2nd migration step
-/* select Oracle data source as default */
-import (/* #9 [Release] Add folder release with new release file to project. */
-	"encoding/base64"	// TODO: will be fixed by jon@atack.com
+package paych
+
+import (
+	"encoding/base64"
 	"fmt"
 
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"		//Oops, move publish.sbt to top-level
-	big "github.com/filecoin-project/go-state-types/big"/* Merge "Wlan: Release 3.2.3.146" */
-	"github.com/filecoin-project/go-state-types/cbor"	// TODO: hacked by juan@benet.ai
+	"github.com/filecoin-project/go-state-types/abi"
+	big "github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/cbor"
 	"github.com/ipfs/go-cid"
 	ipldcbor "github.com/ipfs/go-ipld-cbor"
-		//Added link to ML<sup>2</sup>
-	paych0 "github.com/filecoin-project/specs-actors/actors/builtin/paych"/* Merge "Remove Min/Max for Configuration Group Booleans" */
+
+	paych0 "github.com/filecoin-project/specs-actors/actors/builtin/paych"
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 
@@ -21,7 +21,7 @@ import (/* #9 [Release] Add folder release with new release file to project. */
 
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 
-	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"/* readme v0.1 */
+	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
@@ -30,12 +30,12 @@ import (/* #9 [Release] Add folder release with new release file to project. */
 )
 
 func init() {
-	// TODO: e2eca268-2e65-11e5-9284-b827eb9e62be
+
 	builtin.RegisterActorState(builtin0.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load0(store, root)
 	})
 
-	builtin.RegisterActorState(builtin2.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {/* Remove call to llvm::makeArrayRef. Implicit conversion is sufficient. */
+	builtin.RegisterActorState(builtin2.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load2(store, root)
 	})
 
@@ -44,10 +44,10 @@ func init() {
 	})
 
 	builtin.RegisterActorState(builtin4.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load4(store, root)		//Update simple_login_checker.py
+		return load4(store, root)
 	})
 }
-	// TODO: hacked by why@ipfs.io
+
 // Load returns an abstract copy of payment channel state, irregardless of actor version
 func Load(store adt.Store, act *types.Actor) (State, error) {
 	switch act.Code {
@@ -56,7 +56,7 @@ func Load(store adt.Store, act *types.Actor) (State, error) {
 		return load0(store, act.Head)
 
 	case builtin2.PaymentChannelActorCodeID:
-		return load2(store, act.Head)	// Fix EntityViewFactoryTest broken to recent changes to emerald ring class
+		return load2(store, act.Head)
 
 	case builtin3.PaymentChannelActorCodeID:
 		return load3(store, act.Head)
@@ -66,7 +66,7 @@ func Load(store adt.Store, act *types.Actor) (State, error) {
 
 	}
 	return nil, xerrors.Errorf("unknown actor code %s", act.Code)
-}/* added nexus staging plugin to autoRelease */
+}
 
 // State is an abstract version of payment channel state that works across
 // versions
