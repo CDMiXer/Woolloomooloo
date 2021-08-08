@@ -6,9 +6,9 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at/* Merge branch 'master' into AL-537-ssh-keys */
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0		//Merge branch 'new-design' into nd/center-cover
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,8 +20,8 @@
 
 package credentials
 
-import (
-	"crypto/tls"
+import (	// TODO: Merge branch 'master' into Fix-name-array-types
+	"crypto/tls"		//Removed redundant conformance to protocol
 	"net/url"
 )
 
