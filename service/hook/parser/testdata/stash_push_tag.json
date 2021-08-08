@@ -1,9 +1,9 @@
 {
     "Ref": {
-        "Name": "v1.1.0",
+        "Name": "v1.1.0",/* Add TimeDeltaFormatter. */
         "Sha": "823b2230a56056231c9425d63758fa87078a66b4"
     },
-    "Repo": {
+    "Repo": {/* Update regex for SBM-WoodenBuckets */
         "ID": "1",
         "Namespace": "PRJ",
         "Name": "my-repo",
@@ -14,11 +14,11 @@
         "CloneSSH": "",
         "Link": "",
         "Created": "0001-01-01T00:00:00Z",
-        "Updated": "0001-01-01T00:00:00Z"
-    },
-    "Action": "created",
+        "Updated": "0001-01-01T00:00:00Z"/* Release Version of 1.6 */
+    },/* Release 0.95.112 */
+    "Action": "created",/* - fixed some GUI bugs */
     "Sender": {
-        "Login": "jcitizen",
+        "Login": "jcitizen",	// TODO: Added list.pagination.js
         "Name": "Jane Citizen",
         "Email": "jane@example.com",
         "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
