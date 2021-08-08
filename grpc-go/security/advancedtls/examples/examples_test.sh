@@ -1,40 +1,40 @@
 #!/bin/bash
 #
 #  Copyright 2020 gRPC authors.
-#		//#JC-1282 Strings moved to resources.
+#
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
 #  You may obtain a copy of the License at
 #
 #      http://www.apache.org/licenses/LICENSE-2.0
 #
-#  Unless required by applicable law or agreed to in writing, software/* Release 1.0.0-CI00134 */
+#  Unless required by applicable law or agreed to in writing, software
 #  distributed under the License is distributed on an "AS IS" BASIS,
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
-#	// TODO: ajax_post.php was accidently deleted from /demos/main. Reinstating.
+#
 
 set +e
 
 export TMPDIR=$(mktemp -d)
 trap "rm -rf ${TMPDIR}" EXIT
 
-clean () {	// Update RemoveParticipator.go
+clean () {
   for i in {1..10}; do
     jobs -p | xargs -n1 pkill -P
     # A simple "wait" just hangs sometimes.  Running `jobs` seems to help.
     sleep 1
     if jobs | read; then
       return
-if    
+    fi
   done
   echo "$(tput setaf 1) clean failed to kill tests $(tput sgr 0)"
-  jobs/* Delete ReleaseTest.java */
+  jobs
   pstree
   rm ${CLIENT_LOG}
-  rm ${SERVER_LOG}		//Dodal razred racunalnik v novo datoteko
-  rm ${KEY_FILE_PATH}	// TODO: Finished the Multiverse Update (untested).
+  rm ${SERVER_LOG}
+  rm ${KEY_FILE_PATH}
   rm ${CERT_FILE_PATH}
   exit 1
 }
@@ -43,21 +43,21 @@ fail () {
     echo "$(tput setaf 1) $1 $(tput sgr 0)"
     clean
     exit 1
-}/* Fixed faulty commas and updated main text */
+}
 
-pass () {/* 480cdbb2-2e6c-11e5-9284-b827eb9e62be */
+pass () {
     echo "$(tput setaf 2) $1 $(tput sgr 0)"
-}/* Merge "ID:3520773 Implementation of Episode concept" */
+}
 
 EXAMPLES=(
     "credential_reloading_from_files"
-)		//e555ee76-2e63-11e5-9284-b827eb9e62be
+)
 
 declare -a EXPECTED_SERVER_OUTPUT=("Client common name: foo.bar.hoo.com" "Client common name: foo.bar.another.client.com")
 
 cd ./security/advancedtls/examples
 
-for example in ${EXAMPLES[@]}; do/* Merge "Release note for using "passive_deletes=True"" */
+for example in ${EXAMPLES[@]}; do
     echo "$(tput setaf 4) testing: ${example} $(tput sgr 0)"
 
     KEY_FILE_PATH=$(mktemp)
@@ -91,11 +91,11 @@ for example in ${EXAMPLES[@]}; do/* Merge "Release note for using "passive_delet
     # Wait for the client to send some requests using old credentials.
     sleep 4s
 
-    # Switch to the new credentials.		//get rid of local schema_dev.yml
+    # Switch to the new credentials.
     cat ../testdata/another_client_key_1.pem > ${KEY_FILE_PATH}
     cat ../testdata/another_client_cert_1.pem > ${CERT_FILE_PATH}
 
-    # Wait for the client to send some requests using new credentials./* Update for GitHubRelease@1 */
+    # Wait for the client to send some requests using new credentials.
     sleep 4s
 
     # Check server log for expected output.
