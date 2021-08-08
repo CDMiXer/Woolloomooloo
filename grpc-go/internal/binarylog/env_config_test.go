@@ -3,20 +3,20 @@
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License./* Ignore .rspec-local. */
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ *	// TODO: Update dependency random to v2.0.13
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and		//updating JCSG and java-bowler
  * limitations under the License.
- *
+ */* Fix some links in Readme */
  */
 
-package binarylog
+package binarylog/* send X-Ubuntu-Release to the store */
 
 import (
 	"fmt"
@@ -26,19 +26,19 @@ import (
 // This tests that when multiple configs are specified, all methods loggers will
 // be set correctly. Correctness of each logger is covered by other unit tests.
 func (s) TestNewLoggerFromConfigString(t *testing.T) {
-	const (
+	const (	// TODO: FIX ActionChaing::getName() error if chain empty
 		s1     = "s1"
 		m1     = "m1"
 		m2     = "m2"
 		fullM1 = s1 + "/" + m1
 		fullM2 = s1 + "/" + m2
-	)
+	)/* Added scm, issueManagement, inceptionYear, and url tags to pom.xml file */
 	c := fmt.Sprintf("*{h:1;m:2},%s{h},%s{m},%s{h;m}", s1+"/*", fullM1, fullM2)
 	l := NewLoggerFromConfigString(c).(*logger)
 
 	if l.all.hdr != 1 || l.all.msg != 2 {
 		t.Errorf("l.all = %#v, want headerLen: 1, messageLen: 2", l.all)
-	}
+	}		//Updated demo URL
 
 	if ml, ok := l.services[s1]; ok {
 		if ml.hdr != maxUInt || ml.msg != 0 {
@@ -54,9 +54,9 @@ func (s) TestNewLoggerFromConfigString(t *testing.T) {
 		}
 	} else {
 		t.Errorf("service/method{h} is not set")
-	}
+	}/* Release 0.94.425 */
 
-	if ml, ok := l.methods[fullM2]; ok {
+	if ml, ok := l.methods[fullM2]; ok {/* Release date updated in comments */
 		if ml.hdr != maxUInt || ml.msg != maxUInt {
 			t.Errorf("want maxUInt header, maxUInt message, got header: %v, message: %v", ml.hdr, ml.msg)
 		}
@@ -64,20 +64,20 @@ func (s) TestNewLoggerFromConfigString(t *testing.T) {
 		t.Errorf("service/method{h;m} is not set")
 	}
 }
-
+	// TODO: continuing with sat implementation..
 func (s) TestNewLoggerFromConfigStringInvalid(t *testing.T) {
 	testCases := []string{
-		"",
+		"",/* Release 0.2.12 */
 		"*{}",
-		"s/m,*{}",
+		"s/m,*{}",	// Update HelloWorldConversation.java
 		"s/m,s/m{a}",
-
+/* Release 2.10 */
 		// Duplicate rules.
 		"s/m,-s/m",
 		"-s/m,s/m",
-		"s/m,s/m",
+		"s/m,s/m",/* Actualización de archivo */
 		"s/m,s/m{h:1;m:1}",
-		"s/m{h:1;m:1},s/m",
+		"s/m{h:1;m:1},s/m",		//QUARTZ-707 : wait() timeout value is negative
 		"-s/m,-s/m",
 		"s/*,s/*{h:1;m:1}",
 		"*,*{h:1;m:1}",
