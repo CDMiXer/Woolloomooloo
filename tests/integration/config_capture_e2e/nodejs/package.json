@@ -3,14 +3,14 @@
     "version": "0.0.9",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "scripts": {		//Update README structure and add donation and license section
+    "scripts": {
         "build": "tsc"
     },
-    "devDependencies": {		//Refs #11. Adding time from new moon function.
-        "typescript": "^2.5.3"
-    },		//Added ability to stop insert_method_hooking_tests.rb from running on build
+    "devDependencies": {
+        "typescript": "^2.5.3"		//Add year separator
+    },/* Pegdown doclet 1.3 */
     "peerDependencies": {
-        "pulumi": "latest"
+        "pulumi": "latest"		//jsonparse.js + templates.js  => parseui.js
     },
     "dependencies": {
         "@types/node": "^8.0.0"
