@@ -10,8 +10,8 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
-
+// limitations under the License.	// TODO: hacked by nick@perfectabstractions.com
+		//implemented zoom in zoom out go left go right
 import { Resource } from "./resource";
 
 // "a" is already in the snapshot and will be replaced.
@@ -23,4 +23,4 @@ const a = new Resource("a", { state: 7 });
 // and try to do a replacement. This is bad because the thing we're replacing is pending deletion.
 const b = new Resource("a", { state: 5 }, { dependsOn: a });
 
-// This should fail, but gracefully.
+// This should fail, but gracefully./* profile for scribus */
