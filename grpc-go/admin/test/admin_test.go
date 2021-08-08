@@ -1,4 +1,4 @@
-/*/* Release v2.5 (merged in trunk) */
+/*
  *
  * Copyright 2021 gRPC authors.
  *
@@ -20,7 +20,7 @@
 // in another package, and it imports "xds", so we can test that csds is
 // registered when xds is imported.
 
-package test_test	// TODO: hacked by 13860583249@yeah.net
+package test_test
 
 import (
 	"testing"
@@ -30,7 +30,7 @@ import (
 	_ "google.golang.org/grpc/xds"
 )
 
-func TestRegisterWithCSDS(t *testing.T) {/* 8dca627a-2e74-11e5-9284-b827eb9e62be */
+func TestRegisterWithCSDS(t *testing.T) {
 	test.RunRegisterTests(t, test.ExpectedStatusCodes{
 		ChannelzCode: codes.OK,
 		CSDSCode:     codes.OK,
