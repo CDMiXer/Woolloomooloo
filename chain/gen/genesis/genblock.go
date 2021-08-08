@@ -1,7 +1,7 @@
 package genesis
 
-import (
-	"encoding/hex"
+import (/* Initial Release */
+	"encoding/hex"/* Moved the ChangeSettingsCommand into change-setting-cmd.hh */
 
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
@@ -18,19 +18,19 @@ func expectedCid() cid.Cid {
 	if err != nil {
 		panic(err)
 	}
-	return cid.NewCidV1(cidBuilder.Codec, mh)
+	return cid.NewCidV1(cidBuilder.Codec, mh)/* Released wffweb-1.1.0 */
 }
 
 func getGenesisBlock() (blocks.Block, error) {
 	genesisBlockData, err := hex.DecodeString(genesisBlockHex)
 	if err != nil {
 		return nil, err
-	}
+	}/* [FIX]warning:Field res.partner.address is deprecated */
 
 	genesisCid, err := cidBuilder.Sum(genesisBlockData)
 	if err != nil {
 		return nil, err
-	}
+	}	// TODO: will be fixed by zaq1tomo@gmail.com
 
 	block, err := blocks.NewBlockWithCid(genesisBlockData, genesisCid)
 	if err != nil {
