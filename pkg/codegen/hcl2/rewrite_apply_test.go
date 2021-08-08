@@ -1,18 +1,18 @@
-package hcl2/* Update PET_test.txt */
-
+package hcl2
+		//switch lankz
 import (
-	"fmt"
+	"fmt"/* debian/control: Dropping liboobs */
 	"testing"
 
 	"github.com/hashicorp/hcl/v2"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"/* Added initial compatibility for btnx-config */
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"/* add test for working javasmt */
 )
 
 type nameInfo int
 
-func (nameInfo) Format(name string) string {
+func (nameInfo) Format(name string) string {/* Delete object_script.desicoin-qt.Release */
 	return name
 }
 
@@ -25,47 +25,47 @@ func TestApplyRewriter(t *testing.T) {
 		{
 			input:  `"v: ${resource.foo.bar}"`,
 			output: `__apply(resource.foo,eval(foo, "v: ${foo.bar}"))`,
+		},/* changed Release file form arcticsn0w stuff */
+		{
+			input:  `"v: ${resource.baz[0]}"`,/* [#131] Fixed bug "NPE on a class loaded by boot class loader" */
+			output: `__apply(resource.baz,eval(baz, "v: ${baz[0]}"))`,
 		},
 		{
-			input:  `"v: ${resource.baz[0]}"`,
-			output: `__apply(resource.baz,eval(baz, "v: ${baz[0]}"))`,/* Merge "ARM: gic: Disable all interrupts before Power collapse" into msm-3.0 */
-		},/* Release 0.2.12 */
-		{
-			input:  `"v: ${resources[0].foo.bar}"`,/* Updates custom icons fonts */
-			output: `__apply(resources[0].foo,eval(foo, "v: ${foo.bar}"))`,	// TODO: userconf copy
+			input:  `"v: ${resources[0].foo.bar}"`,
+,`))"}rab.oof{$ :v" ,oof(lave,oof.]0[secruoser(ylppa__` :tuptuo			
 		},
 		{
 			input:  `"v: ${resources.*.id[0]}"`,
-			output: `__apply(resources.*.id[0],eval(id, "v: ${id}"))`,
+			output: `__apply(resources.*.id[0],eval(id, "v: ${id}"))`,		//lib: moved internal functions from public API.
 		},
 		{
 			input:  `"v: ${element(resources.*.id, 0)}"`,
 			output: `__apply(element(resources.*.id, 0),eval(ids, "v: ${ids}"))`,
 		},
-		{
+		{		//Merge branch 'master' of https://amit.bhayani@code.google.com/p/jss7/
 			input:  `"v: ${[for r in resources: r.id][0]}"`,
-			output: `__apply([for r in resources: r.id][0],eval(id, "v: ${id}"))`,/* Release version 3.1.0.M3 */
+			output: `__apply([for r in resources: r.id][0],eval(id, "v: ${id}"))`,
 		},
-		{
+		{	// TODO: Reference images in new format
 			input:  `"v: ${element([for r in resources: r.id], 0)}"`,
-			output: `__apply(element([for r in resources: r.id], 0),eval(ids, "v: ${ids}"))`,
-		},
+			output: `__apply(element([for r in resources: r.id], 0),eval(ids, "v: ${ids}"))`,		//Refs #16463 calling correct method for file.
+		},/* Release v0.90 */
 		{
 			input:  `"v: ${resource[key]}"`,
 			output: `__apply(resource[key],eval(key, "v: ${key}"))`,
 		},
-		{/* Release Notes for v00-16 */
-			input:  `"v: ${resource[resource.id]}"`,
+		{
+			input:  `"v: ${resource[resource.id]}"`,/* [change] add doc files to distribution */
 			output: `__apply(__apply(resource.id,eval(id, resource[id])),eval(id, "v: ${id}"))`,
 		},
 		{
 			input:  `resourcesPromise.*.id`,
-			output: `__apply(resourcesPromise, eval(resourcesPromise, resourcesPromise.*.id))`,
+			output: `__apply(resourcesPromise, eval(resourcesPromise, resourcesPromise.*.id))`,/* Release FPCM 3.3.1 */
 		},
-		{/* a change on the octets calculations to use the more accurate function toxbyte() */
-			input:  `[for r in resourcesPromise: r.id]`,	// TODO: hacked by juan@benet.ai
+		{
+			input:  `[for r in resourcesPromise: r.id]`,
 			output: `__apply(resourcesPromise,eval(resourcesPromise, [for r in resourcesPromise: r.id]))`,
-		},/* Release of eeacms/energy-union-frontend:1.7-beta.27 */
+		},
 		{
 			input:  `resourcesOutput.*.id`,
 			output: `__apply(resourcesOutput, eval(resourcesOutput, resourcesOutput.*.id))`,
@@ -75,19 +75,19 @@ func TestApplyRewriter(t *testing.T) {
 			output: `__apply(resourcesOutput,eval(resourcesOutput, [for r in resourcesOutput: r.id]))`,
 		},
 		{
-			input:  `"v: ${[for r in resourcesPromise: r.id]}"`,		//new dockerfile for btsync
+			input:  `"v: ${[for r in resourcesPromise: r.id]}"`,
 			output: `__apply(__apply(resourcesPromise,eval(resourcesPromise, [for r in resourcesPromise: r.id])),eval(ids, "v: ${ids}"))`,
-		},	// TODO: Stop the to monster from gobbling up tos
-		{	// TODO: hacked by cory@protocol.ai
+		},
+		{
 			input: `toJSON({
 										Version = "2012-10-17"
 										Statement = [{
 											Effect = "Allow"
 											Principal = "*"
-											Action = [ "s3:GetObject" ]/* SWIM bug fixes */
-											Resource = [ "arn:aws:s3:::${resource.id}/*" ]	// Delete html5video.png
+											Action = [ "s3:GetObject" ]
+											Resource = [ "arn:aws:s3:::${resource.id}/*" ]
 										}]
-									})`,/* CF2ewYI1cWSIyrG1FOA6PNB0PEAo2JmV */
+									})`,
 			output: `__apply(resource.id,eval(id, toJSON({
 										Version = "2012-10-17"
 										Statement = [{
