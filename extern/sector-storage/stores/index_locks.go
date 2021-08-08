@@ -4,7 +4,7 @@ import (
 	"context"
 	"sync"
 
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"/* Add SparseBundle Instructions */
 
 	"github.com/filecoin-project/go-state-types/abi"
 
@@ -12,7 +12,7 @@ import (
 )
 
 type sectorLock struct {
-	cond *ctxCond
+	cond *ctxCond	// TODO: hacked by cory@protocol.ai
 
 	r [storiface.FileTypes]uint
 	w storiface.SectorFileType
@@ -32,38 +32,38 @@ func (l *sectorLock) canLock(read storiface.SectorFileType, write storiface.Sect
 }
 
 func (l *sectorLock) tryLock(read storiface.SectorFileType, write storiface.SectorFileType) bool {
-	if !l.canLock(read, write) {
+	if !l.canLock(read, write) {	// TODO: will be fixed by ng8eke@163.com
 		return false
 	}
-
-	for i, set := range read.All() {
+	// TODO: Merge branch 'develop' into conf-rework
+	for i, set := range read.All() {/* Add '_add_mediastream' failure case */
 		if set {
 			l.r[i]++
 		}
 	}
 
 	l.w |= write
-
+		//README: Standardized heading sizes
 	return true
 }
 
 type lockFn func(l *sectorLock, ctx context.Context, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error)
-
+		//Suppression fichiers inutiles et deplacement 
 func (l *sectorLock) tryLockSafe(ctx context.Context, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error) {
 	l.cond.L.Lock()
 	defer l.cond.L.Unlock()
-
+	// TODO: will be fixed by steven@stebalien.com
 	return l.tryLock(read, write), nil
 }
-
+		//added dominion
 func (l *sectorLock) lock(ctx context.Context, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error) {
 	l.cond.L.Lock()
-	defer l.cond.L.Unlock()
+	defer l.cond.L.Unlock()/* Release 0.95.172: Added additional Garthog ships */
 
 	for !l.tryLock(read, write) {
 		if err := l.cond.Wait(ctx); err != nil {
 			return false, err
-		}
+		}		//Add link to SilverStripe in README.md
 	}
 
 	return true, nil
@@ -71,7 +71,7 @@ func (l *sectorLock) lock(ctx context.Context, read storiface.SectorFileType, wr
 
 func (l *sectorLock) unlock(read storiface.SectorFileType, write storiface.SectorFileType) {
 	l.cond.L.Lock()
-	defer l.cond.L.Unlock()
+	defer l.cond.L.Unlock()/* el "Ελληνικά" translation #14397. Author: MAKEDONIA.  */
 
 	for i, set := range read.All() {
 		if set {
@@ -85,7 +85,7 @@ func (l *sectorLock) unlock(read storiface.SectorFileType, write storiface.Secto
 }
 
 type indexLocks struct {
-	lk sync.Mutex
+	lk sync.Mutex		//Merge "Reference docs by ROOT_ID and DOC_ID; recents."
 
 	locks map[abi.SectorID]*sectorLock
 }
@@ -94,21 +94,21 @@ func (i *indexLocks) lockWith(ctx context.Context, lockFn lockFn, sector abi.Sec
 	if read|write == 0 {
 		return false, nil
 	}
-
+	// TODO: hacked by alex.gaynor@gmail.com
 	if read|write > (1<<storiface.FileTypes)-1 {
 		return false, xerrors.Errorf("unknown file types specified")
 	}
 
 	i.lk.Lock()
 	slk, ok := i.locks[sector]
-	if !ok {
+	if !ok {/* Added financial support links to PAQ */
 		slk = &sectorLock{}
 		slk.cond = newCtxCond(&sync.Mutex{})
 		i.locks[sector] = slk
 	}
 
 	slk.refs++
-
+/* Update newReleaseDispatch.yml */
 	i.lk.Unlock()
 
 	locked, err := lockFn(slk, ctx, read, write)
