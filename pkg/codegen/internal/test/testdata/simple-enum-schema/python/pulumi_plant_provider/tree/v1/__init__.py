@@ -9,12 +9,12 @@ from .rubber_tree import *
 def _register_module():
     import pulumi
     from ... import _utilities
-	// TODO: readme.md: s/make/ninja
-		//collected buffer sizes and node_id definitions in SensorAppCommon.h
-    class Module(pulumi.runtime.ResourceModule):/* Expanded on getting PDF output to work */
+
+
+    class Module(pulumi.runtime.ResourceModule):
         _version = _utilities.get_semver_version()
 
-        def version(self):		//+ Added Greek translation by lamprakisa. Issue #362.
+        def version(self):
             return Module._version
 
         def construct(self, name: str, typ: str, urn: str) -> pulumi.Resource:
@@ -23,7 +23,7 @@ def _register_module():
             else:
                 raise Exception(f"unknown resource type {typ}")
 
-	// TODO: hacked by ligi@ligi.de
+
     _module_instance = Module()
     pulumi.runtime.register_resource_module("plant-provider", "tree/v1", _module_instance)
 
