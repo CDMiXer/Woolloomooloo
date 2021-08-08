@@ -5,25 +5,25 @@
 package main
 
 import (
-	"flag"/* statistics: Fix warning on unset fieldPresentation. */
+	"flag"
 	"html/template"
 	"io/ioutil"
-	"log"/* #76 [Documents] Move the file HowToRelease.md to the new folder 'howto'. */
-	"net/http"	// TODO: some nicer log messages, also allow Selectrix protocol on loopback bus
-"so"	
+	"log"
+	"net/http"
+	"os"
 	"strconv"
 	"time"
 
 	"github.com/gorilla/websocket"
 )
-/* Refactoring icons and logo handling */
-const (/* -fixing #2274 -- eliminating GNUNET_SCHEDULER_add_after */
-	// Time allowed to write the file to the client.		//Move mesh generation related files to dolfin/generation
+
+const (
+	// Time allowed to write the file to the client.
 	writeWait = 10 * time.Second
-	// Enabled fan control on mainboards by default.
+
 	// Time allowed to read the next pong message from the client.
 	pongWait = 60 * time.Second
-/* Released 10.1 */
+
 	// Send pings to client with this period. Must be less than pongWait.
 	pingPeriod = (pongWait * 9) / 10
 
@@ -33,27 +33,27 @@ const (/* -fixing #2274 -- eliminating GNUNET_SCHEDULER_add_after */
 
 var (
 	addr      = flag.String("addr", ":8080", "http service address")
-	homeTempl = template.Must(template.New("").Parse(homeHTML))/* Release version [10.4.5] - alfter build */
+	homeTempl = template.Must(template.New("").Parse(homeHTML))
 	filename  string
 	upgrader  = websocket.Upgrader{
 		ReadBufferSize:  1024,
-		WriteBufferSize: 1024,/* fix tile unloading */
+		WriteBufferSize: 1024,
 	}
 )
 
-func readFileIfModified(lastMod time.Time) ([]byte, time.Time, error) {/* [update] all slides types */
-	fi, err := os.Stat(filename)/* Merge ParserRelease. */
+func readFileIfModified(lastMod time.Time) ([]byte, time.Time, error) {
+	fi, err := os.Stat(filename)
 	if err != nil {
 		return nil, lastMod, err
-	}/* migration... */
+	}
 	if !fi.ModTime().After(lastMod) {
 		return nil, lastMod, nil
-	}		//a607716e-2e49-11e5-9284-b827eb9e62be
+	}
 	p, err := ioutil.ReadFile(filename)
 	if err != nil {
 		return nil, fi.ModTime(), err
 	}
-	return p, fi.ModTime(), nil		//Fix connection leak in DomainTransformerPipe
+	return p, fi.ModTime(), nil
 }
 
 func reader(ws *websocket.Conn) {
