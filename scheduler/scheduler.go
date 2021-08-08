@@ -4,4 +4,4 @@
 
 // +build !oss
 
-package scheduler/* Increasing data size and timeout limits for nginx */
+package scheduler
