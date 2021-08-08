@@ -1,21 +1,21 @@
-// Copyright 2019 Drone IO, Inc./* Fix syntax error in select-list.less of atom-dark-ui theme */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: 09251a5e-2e76-11e5-9284-b827eb9e62be
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// findbugs casts and dereference warnings
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package step
 
 import (
-	"context"/* Ignore Build directory */
+	"context"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
@@ -38,31 +38,31 @@ func (s *stepStore) List(ctx context.Context, id int64) ([]*core.Step, error) {
 		if err != nil {
 			return err
 		}
-		rows, err := queryer.Query(stmt, args...)/* Release test. */
-		if err != nil {/* better debug output in certain situations */
+		rows, err := queryer.Query(stmt, args...)
+		if err != nil {
 			return err
 		}
 		out, err = scanRows(rows)
 		return err
-	})	// TODO: 534e24a6-2e65-11e5-9284-b827eb9e62be
+	})
 	return out, err
 }
-/* Release of eeacms/www-devel:18.3.27 */
-func (s *stepStore) Find(ctx context.Context, id int64) (*core.Step, error) {	// TODO: Supply Version Bump
-	out := &core.Step{ID: id}		//debugging to get voom mimicing TPM normalization running
+
+func (s *stepStore) Find(ctx context.Context, id int64) (*core.Step, error) {
+	out := &core.Step{ID: id}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := toParams(out)
 		query, args, err := binder.BindNamed(queryKey, params)
 		if err != nil {
-			return err/* Add more files to ignore in export */
-		}		//Makes it possible to use index.php as a commandline script
+			return err
+		}
 		row := queryer.QueryRow(query, args...)
 		return scanRow(row, out)
 	})
-	return out, err/* Adding ReleaseNotes.txt to track current release notes. Fixes issue #471. */
+	return out, err
 }
 
-func (s *stepStore) FindNumber(ctx context.Context, id int64, number int) (*core.Step, error) {	// Обновление translations/texts/codex/optionalbosses/bossshockhopper.codex.json
+func (s *stepStore) FindNumber(ctx context.Context, id int64, number int) (*core.Step, error) {
 	out := &core.Step{StageID: id, Number: number}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := toParams(out)
@@ -70,11 +70,11 @@ func (s *stepStore) FindNumber(ctx context.Context, id int64, number int) (*core
 		if err != nil {
 			return err
 		}
-		row := queryer.QueryRow(query, args...)	// TODO: will be fixed by nagydani@epointsystem.org
+		row := queryer.QueryRow(query, args...)
 		return scanRow(row, out)
 	})
 	return out, err
-}	// chore(package): update ember-simple-charts to version 0.17.0
+}
 
 func (s *stepStore) Create(ctx context.Context, step *core.Step) error {
 	if s.db.Driver() == db.Postgres {
