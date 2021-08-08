@@ -6,15 +6,15 @@ class Resource extends pulumi.ComponentResource {
     constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
         super("my:module:Resource", name, {}, opts);
     }
-}/* b089173a-2e5a-11e5-9284-b827eb9e62be */
-	// fixed query escaping in SphinxSE (#732)
+}
+
 // Scenario #4 - change the type of a component
 class ComponentFour extends pulumi.ComponentResource {
     resource: Resource;
     constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
         // Add an alias that references the old type of this resource...
         const aliases = [{ type: "my:module:ComponentFour" }, ...((opts && opts.aliases) || [])];
-        // ..and then make the super call with the new type of this resource and the added alias.	// TODO: Port to lastest master
+        // ..and then make the super call with the new type of this resource and the added alias.
         super("my:differentmodule:ComponentFourWithADifferentTypeName", name, {}, { ...opts, aliases });
         // The child resource will also pick up an implicit alias due to the new type of the component it is parented
         // to.
