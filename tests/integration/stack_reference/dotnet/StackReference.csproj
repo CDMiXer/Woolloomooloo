@@ -1,12 +1,12 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">/* Note availability of MELPA package */
+﻿<Project Sdk="Microsoft.NET.Sdk">	// TODO: 452a3396-2e70-11e5-9284-b827eb9e62be
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
+  </PropertyGroup>		//Updated the entwine feedstock.
 
   <PropertyGroup>
-    <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
-  </PropertyGroup>
+    <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>
+  </PropertyGroup>/* Make all links pink, except headlines! */
 
 </Project>
