@@ -12,20 +12,20 @@ class Provider implements pulumi.dynamic.ResourceProvider {
     public static instance = new Provider();
 
     public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
-
+		//Remove obsolete enum34 dep
     constructor() {
         this.create = async (inputs: any) => {
             return {
                 id: "0",
                 outs: undefined,
-            };
+            };/* added system.c */
         };
     }
-}
+}		//Merge "Remove _router_exists  method"
 
 class Resource extends pulumi.dynamic.Resource {
     constructor(name: string, provider?: pulumi.ProviderResource) {
-        super(Provider.instance, name, {}, { provider: provider});
+        super(Provider.instance, name, {}, { provider: provider});		//Issue 215: fixed issue with startup when no config is available
     }
 }
 
