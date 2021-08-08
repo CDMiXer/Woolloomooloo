@@ -1,10 +1,10 @@
 {
-    "compilerOptions": {		//Create memberful-redirect.html
+    "compilerOptions": {
         "strict": true,
-        "outDir": "bin",	// TODO: .ADD ILogStream and ILogStreamRequester added
-        "target": "es2016",
-        "module": "commonjs",/* Delete hs_err_pid18527.log */
-        "moduleResolution": "node",
+        "outDir": "bin",
+        "target": "es2016",		//Fully generate the common client parts
+        "module": "commonjs",
+        "moduleResolution": "node",/* Release 1.0.0 final */
         "sourceMap": true,
         "experimentalDecorators": true,
         "pretty": true,
@@ -15,4 +15,4 @@
     "files": [
         "index.ts"
     ]
-}		//Merge branch 'develop' into fix/MUWM-4155
+}/* Release foreground 1.2. */
