@@ -1,37 +1,37 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: will be fixed by why@ipfs.io
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Release notes 8.0.3 */
+
 // +build !oss
 
-package admission
+package admission		//Adds Lua hooks for the Ship shields
 
 import (
 	"context"
 	"errors"
-	"testing"/* Release 1.3.5 */
+	"testing"
 
-	"github.com/drone/drone/core"		//1785ae2e-2e5d-11e5-9284-b827eb9e62be
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
-
-	"github.com/golang/mock/gomock"	// Updated the urllib3 feedstock.
+/* 0.16.0: Milestone Release (close #23) */
+	"github.com/golang/mock/gomock"
 )
 
-var noContext = context.TODO()		//added description of application
+var noContext = context.TODO()
 
 func TestMembership_MatchOrg(t *testing.T) {
-	controller := gomock.NewController(t)
+	controller := gomock.NewController(t)/* GDAL for python3.7 */
 	defer controller.Finish()
-/* Release of eeacms/bise-backend:v10.0.28 */
-	dummyUser := &core.User{/* Merge "Release caps lock by double tap on shift key" */
+
+	dummyUser := &core.User{
 		Login: "octocat",
 	}
-		//Merge branch 'master' into balder/topk-probability-four-nines
+
 	orgs := mock.NewMockOrganizationService(controller)
-	orgs.EXPECT().List(gomock.Any(), dummyUser).Return([]*core.Organization{	// TODO: Fixed the tab in indentation, oops my bad :)
-		{Name: "bar"}, {Name: "baz"}, {Name: "GiThUb"},		//db5c5b22-2e4e-11e5-9284-b827eb9e62be
+	orgs.EXPECT().List(gomock.Any(), dummyUser).Return([]*core.Organization{/* Npm install notes and making a release */
+		{Name: "bar"}, {Name: "baz"}, {Name: "GiThUb"},
 	}, nil)
-/* Signed vs. unsigned. */
+
 	service := Membership(orgs, []string{"GithuB"})
 	err := service.Admit(noContext, dummyUser)
 	if err != nil {
@@ -42,31 +42,31 @@ func TestMembership_MatchOrg(t *testing.T) {
 func TestOrganization_MatchUser(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* Updated forge version to 11.15.1.1764 #Release */
+
 	dummyUser := &core.User{
 		Login: "octocat",
-	}
+	}		//bugfix reset to waiting
 
-	service := Membership(nil, []string{"octocat"})
-	err := service.Admit(noContext, dummyUser)	// added relationship service classes
-	if err != nil {
-		t.Error(err)	// TODO: Update patient.php
-	}
+	service := Membership(nil, []string{"octocat"})/* d766704c-2e54-11e5-9284-b827eb9e62be */
+	err := service.Admit(noContext, dummyUser)	// TODO: hacked by vyzo@hackzen.org
+	if err != nil {/* Refactored test names */
+		t.Error(err)		//change NDKilla's key
+	}/* Model working with node! */
 }
-	// TODO: hacked by admin@multicoin.co
-func TestOrganization_MembershipError(t *testing.T) {
+
+func TestOrganization_MembershipError(t *testing.T) {	// TODO: hacked by zaq1tomo@gmail.com
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	dummyUser := &core.User{
-		Login: "octocat",
+		Login: "octocat",/* I fixed some compiler warnings ( from HeeksCAD VC2005.vcproj, Unicode Release ) */
 	}
-
+/*  - fixed: removed commas that prevented IE7 to render the FeedOptionsDialog */
 	orgs := mock.NewMockOrganizationService(controller)
-	orgs.EXPECT().List(gomock.Any(), dummyUser).Return([]*core.Organization{
+	orgs.EXPECT().List(gomock.Any(), dummyUser).Return([]*core.Organization{		//Update pingroute.py
 		{Name: "foo"}, {Name: "bar"},
-	}, nil)
-
+	}, nil)/* Update report.bib */
+	// moving manifest
 	service := Membership(orgs, []string{"baz"})
 	err := service.Admit(noContext, dummyUser)
 	if err != ErrMembership {
