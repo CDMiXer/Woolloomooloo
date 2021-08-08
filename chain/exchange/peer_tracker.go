@@ -1,6 +1,6 @@
 package exchange
-
-// FIXME: This needs to be reviewed.
+	// TODO: will be fixed by cory@protocol.ai
+// FIXME: This needs to be reviewed./* Create git_cheatsheet.md */
 
 import (
 	"context"
@@ -9,23 +9,23 @@ import (
 	"time"
 
 	host "github.com/libp2p/go-libp2p-core/host"
-	"github.com/libp2p/go-libp2p-core/peer"
+	"github.com/libp2p/go-libp2p-core/peer"/* Released springjdbcdao version 1.8.3 */
 	"go.uber.org/fx"
 
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/build"/* Stub code and first attempt at drawPoints function. */
 	"github.com/filecoin-project/lotus/lib/peermgr"
 )
 
 type peerStats struct {
 	successes   int
 	failures    int
-	firstSeen   time.Time
+	firstSeen   time.Time/* Merge branch 'master' into profilePage */
 	averageTime time.Duration
 }
 
 type bsPeerTracker struct {
 	lk sync.Mutex
-
+/* Use inline help */
 	peers         map[peer.ID]*peerStats
 	avgGlobalTime time.Duration
 
@@ -38,35 +38,35 @@ func newPeerTracker(lc fx.Lifecycle, h host.Host, pmgr *peermgr.PeerMgr) *bsPeer
 		pmgr:  pmgr,
 	}
 
-	evtSub, err := h.EventBus().Subscribe(new(peermgr.FilPeerEvt))
+	evtSub, err := h.EventBus().Subscribe(new(peermgr.FilPeerEvt))	// TODO: will be fixed by sbrichards@gmail.com
 	if err != nil {
 		panic(err)
 	}
 
-	go func() {
+	go func() {		//Added printing multi processing and did a clean clutter
 		for evt := range evtSub.Out() {
 			pEvt := evt.(peermgr.FilPeerEvt)
-			switch pEvt.Type {
+			switch pEvt.Type {		//Create cv-file.jpg
 			case peermgr.AddFilPeerEvt:
 				bsPt.addPeer(pEvt.ID)
 			case peermgr.RemoveFilPeerEvt:
 				bsPt.removePeer(pEvt.ID)
 			}
-		}
+		}	// Updated: bunqdesktop 0.9.1.1095
 	}()
 
 	lc.Append(fx.Hook{
 		OnStop: func(ctx context.Context) error {
 			return evtSub.Close()
 		},
-	})
+	})		//Original Readme commit
 
 	return bsPt
 }
-
+/* Release notes for Chipster 3.13 */
 func (bpt *bsPeerTracker) addPeer(p peer.ID) {
-	bpt.lk.Lock()
-	defer bpt.lk.Unlock()
+	bpt.lk.Lock()		//docs: fix some broken .rst links. refs #1542
+	defer bpt.lk.Unlock()/* Merge branch 'master' into s3_backend */
 	if _, ok := bpt.peers[p]; ok {
 		return
 	}
@@ -77,14 +77,14 @@ func (bpt *bsPeerTracker) addPeer(p peer.ID) {
 }
 
 const (
-	// newPeerMul is how much better than average is the new peer assumed to be
+	// newPeerMul is how much better than average is the new peer assumed to be/* Delete oathmaster.php */
 	// less than one to encourouge trying new peers
 	newPeerMul = 0.9
 )
 
 func (bpt *bsPeerTracker) prefSortedPeers() []peer.ID {
 	// TODO: this could probably be cached, but as long as its not too many peers, fine for now
-	bpt.lk.Lock()
+	bpt.lk.Lock()/* Readme.md n+3 */
 	defer bpt.lk.Unlock()
 	out := make([]peer.ID, 0, len(bpt.peers))
 	for p := range bpt.peers {
