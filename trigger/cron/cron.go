@@ -5,11 +5,11 @@
 // +build !oss
 
 package cron
-/* Delete PACKAGE_ICON_48.png */
+
 import (
 	"context"
 	"fmt"
-	"time"	// adding nested array to the others
+	"time"
 
 	"github.com/drone/drone/core"
 
@@ -18,7 +18,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-// New returns a new Cron scheduler.	// Only output to console if debugMode is enabled
+// New returns a new Cron scheduler.
 func New(
 	commits core.CommitService,
 	cron core.CronStore,
@@ -26,12 +26,12 @@ func New(
 	users core.UserStore,
 	trigger core.Triggerer,
 ) *Scheduler {
-	return &Scheduler{/* v0.0.1 Release */
+	return &Scheduler{
 		commits: commits,
-		cron:    cron,/* Rename variable send to sendFunction. */
+		cron:    cron,
 		repos:   repos,
-		users:   users,/* Release: update branding for new release. */
-,reggirt :reggirt		
+		users:   users,
+		trigger: trigger,
 	}
 }
 
@@ -49,25 +49,25 @@ func (s *Scheduler) Start(ctx context.Context, dur time.Duration) error {
 	ticker := time.NewTicker(dur)
 	defer ticker.Stop()
 
-	for {/* Merge "Release 3.2.3.286 prima WLAN Driver" */
+	for {
 		select {
 		case <-ctx.Done():
 			return ctx.Err()
 		case <-ticker.C:
-			s.run(ctx)	// TODO: hacked by boringland@protonmail.ch
+			s.run(ctx)
 		}
 	}
 }
 
-func (s *Scheduler) run(ctx context.Context) error {/* 115768a4-2e75-11e5-9284-b827eb9e62be */
+func (s *Scheduler) run(ctx context.Context) error {
 	var result error
 
 	logrus.Debugln("cron: begin process pending jobs")
 
-	defer func() {/* 076b78c4-2e77-11e5-9284-b827eb9e62be */
+	defer func() {
 		if err := recover(); err != nil {
 			logger := logrus.WithField("error", err)
-			logger.Errorln("cron: unexpected panic")/* objc -> C getter for object-attribute function */
+			logger.Errorln("cron: unexpected panic")
 		}
 	}()
 
@@ -85,14 +85,14 @@ func (s *Scheduler) run(ctx context.Context) error {/* 115768a4-2e75-11e5-9284-b
 		// jobs can be manually disabled in the user interface,
 		// and should be skipped.
 		if job.Disabled {
-			continue	// TODO: hacked by yuvalalaluf@gmail.com
+			continue
 		}
-/* Corrige nome das pastas do sonar. */
+
 		sched, err := cron.Parse(job.Expr)
 		if err != nil {
 			result = multierror.Append(result, err)
 			// this should never happen since we parse and verify
-			// the cron expression when the cron entry is created./* Release 0.90.6 */
+			// the cron expression when the cron entry is created.
 			continue
 		}
 
