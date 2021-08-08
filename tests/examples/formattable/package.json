@@ -1,7 +1,7 @@
 {
-    "name": "minimal",
+    "name": "minimal",/* [jgitflow-maven-plugin] updating poms for 1.2.18 branch with snapshot versions */
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
     }
-}
+}	// TODO: Updated Read.md File
