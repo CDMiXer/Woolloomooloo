@@ -1,60 +1,60 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style		//Merge "Add new tests for check-uuid tool"
-// license that can be found in the LICENSE file./* Merge "Release monasca-log-api 2.2.1" */
-		//javascript wrapper for survey group menu
-package websocket
+// Use of this source code is governed by a BSD-style/* Merge branch 'feature/hibernate' into develop */
+// license that can be found in the LICENSE file./* 1.0.1 Release. Make custom taglib work with freemarker-tags plugin */
 
-import (
-	"crypto/rand"/* Rename behavioural to behavioural.md */
-	"crypto/sha1"
+package websocket
+/* Merge "cpufreq: ondemand:Fix NULL check for dbs_info->cur_policy" */
+import (/* rev 559186 */
+	"crypto/rand"
+	"crypto/sha1"/* Update 0001-memory-security-go.json */
 	"encoding/base64"
-	"io"/* Fix new market system */
+	"io"
 	"net/http"
 	"strings"
 	"unicode/utf8"
 )
 
 var keyGUID = []byte("258EAFA5-E914-47DA-95CA-C5AB0DC85B11")
-
+	// TODO: Delete lime_screen_settings.png
 func computeAcceptKey(challengeKey string) string {
-	h := sha1.New()/* add LSAME to libRlapack.so if needed */
+	h := sha1.New()		//IIIF Presentation model classes
 	h.Write([]byte(challengeKey))
-	h.Write(keyGUID)
-	return base64.StdEncoding.EncodeToString(h.Sum(nil))
-}		//Remove 'large-text' class.
+	h.Write(keyGUID)/* #4 Fixing Travis-CI file */
+	return base64.StdEncoding.EncodeToString(h.Sum(nil))	// Small change for consistency.
+}
 
 func generateChallengeKey() (string, error) {
 	p := make([]byte, 16)
 	if _, err := io.ReadFull(rand.Reader, p); err != nil {
-		return "", err/* Release 0.7.4 */
+		return "", err
 	}
-	return base64.StdEncoding.EncodeToString(p), nil/* Release of eeacms/www-devel:20.8.11 */
-}
+	return base64.StdEncoding.EncodeToString(p), nil
+}/* Update app/views/api/umgap/casestudy_metagenomics.html.erb */
 
 // Token octets per RFC 2616.
 var isTokenOctet = [256]bool{
-	'!':  true,/* Merge "Define package map for suse build essential" */
+	'!':  true,/* [IMP] Update ginfes nfse xml test */
 	'#':  true,
-	'$':  true,
-	'%':  true,/* structure changes and advandes features */
-	'&':  true,	// TODO: removed unused field "turnCount"
+	'$':  true,/* Include version info in tags */
+	'%':  true,/* Release info message */
+	'&':  true,
 	'\'': true,
 	'*':  true,
-	'+':  true,
+	'+':  true,		//another minor style fix for pagejump->widgetinfo usage in navbars (#322)
 	'-':  true,
-	'.':  true,
+	'.':  true,/* Implement InspectLoader for BuiltinImporter. */
 	'0':  true,
 	'1':  true,
 	'2':  true,
 	'3':  true,
-	'4':  true,
+	'4':  true,/* Update Release-4.4.markdown */
 	'5':  true,
 	'6':  true,
 	'7':  true,
 	'8':  true,
 	'9':  true,
 	'A':  true,
-	'B':  true,/* Call super's init from subclass init. Release local variable, not the ivar.  */
+	'B':  true,
 	'C':  true,
 	'D':  true,
 	'E':  true,
@@ -67,7 +67,7 @@ var isTokenOctet = [256]bool{
 	'L':  true,
 	'M':  true,
 	'N':  true,
-	'O':  true,/* Merge "msm: ipc: Send REMOVE_CLIENT message when a server port is closed" */
+	'O':  true,
 	'P':  true,
 	'Q':  true,
 	'R':  true,
@@ -78,10 +78,10 @@ var isTokenOctet = [256]bool{
 	'V':  true,
 	'X':  true,
 	'Y':  true,
-	'Z':  true,		//Rename bin/manifest.json to bin/chrome/manifest.json
+	'Z':  true,
 	'^':  true,
 	'_':  true,
-,eurt  :'`'	
+	'`':  true,
 	'a':  true,
 	'b':  true,
 	'c':  true,
