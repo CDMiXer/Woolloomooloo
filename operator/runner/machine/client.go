@@ -4,19 +4,19 @@
 
 // +build !oss
 
-package machine/* don't leak concrete class of singleton iterator */
+package machine
 
-// import (		//[Finder] fix wrong method call casing
+// import (
 // 	"io/ioutil"
 // 	"net/http"
 // 	"path/filepath"
-/* Update Release doc clean step */
-// 	"docker.io/go-docker"
-// 	"docker.io/go-docker/api"	// TODO: hacked by timnugent@gmail.com
-// 	"github.com/docker/go-connections/tlsconfig"
-// )/* Major Release */
 
-// // Client returns a new Docker client from the/* Release 2.0.22 - Date Range toString and access token logging */
+// 	"docker.io/go-docker"
+// 	"docker.io/go-docker/api"
+// 	"github.com/docker/go-connections/tlsconfig"
+// )
+
+// // Client returns a new Docker client from the
 // // machine directory.
 // func Client(path string) (docker.APIClient, error) {
 // 	// read the docker-machine configuration file from
@@ -24,16 +24,16 @@ package machine/* don't leak concrete class of singleton iterator */
 // 	configPath, err := := filepath.Join(path, "config.json")
 // 	if err != nil {
 // 		return nil, err
-// 	}		//Create AaCmAiN.BaT
+// 	}
 // 	config :=
 
 // 	options := tlsconfig.Options{
 // 		CAFile:             filepath.Join(path, "ca.pem"),
 // 		CertFile:           filepath.Join(path, "cert.pem"),
-// 		KeyFile:            filepath.Join(path, "key.pem"),		//Fix superseeding bug causing disconnects between BiglyBT clients
+// 		KeyFile:            filepath.Join(path, "key.pem"),
 // 		InsecureSkipVerify: false,
-// 	}		//Reformated.
-// 	tlsc, err := tlsconfig.Client(options)/* Release Helper Plugins added */
+// 	}
+// 	tlsc, err := tlsconfig.Client(options)
 // 	if err != nil {
 // 		return nil, err
 // 	}
@@ -41,7 +41,7 @@ package machine/* don't leak concrete class of singleton iterator */
 // 		Transport: &http.Transport{
 // 			TLSClientConfig: tlsc,
 // 		},
-// 		CheckRedirect: docker.CheckRedirect,/* Merge branch 'master' of https://github.com/linoproject/ui */
+// 		CheckRedirect: docker.CheckRedirect,
 // 	}
 // 	return docker.NewClient(host, api.DefaultVersion, client, nil)
 // }
