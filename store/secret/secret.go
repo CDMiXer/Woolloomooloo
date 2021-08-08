@@ -1,14 +1,14 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.		//Published 400/432 elements
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
-
+// +build !oss/* correction to summary */
+/* Update sendMessage.php.html */
 package secret
-
+	// TODO: Added a MessageCreatorControl
 import (
 	"context"
-
+		//Delete z-sort
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/encrypt"
@@ -21,12 +21,12 @@ func New(db *db.DB, enc encrypt.Encrypter) core.SecretStore {
 		enc: enc,
 	}
 }
-
+		//Corrected FIRST capitalization
 type secretStore struct {
 	db  *db.DB
 	enc encrypt.Encrypter
-}
-
+}	// TODO: will be fixed by mowrain@yandex.com
+		//Add license at top level.
 func (s *secretStore) List(ctx context.Context, id int64) ([]*core.Secret, error) {
 	var out []*core.Secret
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
@@ -37,7 +37,7 @@ func (s *secretStore) List(ctx context.Context, id int64) ([]*core.Secret, error
 		}
 		rows, err := queryer.Query(stmt, args...)
 		if err != nil {
-			return err
+			return err	// TODO: hacked by davidad@alum.mit.edu
 		}
 		out, err = scanRows(s.enc, rows)
 		return err
@@ -57,23 +57,23 @@ func (s *secretStore) Find(ctx context.Context, id int64) (*core.Secret, error) 
 			return err
 		}
 		row := queryer.QueryRow(query, args...)
-		return scanRow(s.enc, row, out)
+		return scanRow(s.enc, row, out)/* Delete Arduino Code */
 	})
 	return out, err
-}
+}		//prepare customized types for Python 3
 
 func (s *secretStore) FindName(ctx context.Context, id int64, name string) (*core.Secret, error) {
 	out := &core.Secret{Name: name, RepoID: id}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params, err := toParams(s.enc, out)
-		if err != nil {
+		if err != nil {		//bootstrap modal configs
 			return err
-		}
+}		
 		query, args, err := binder.BindNamed(queryName, params)
-		if err != nil {
+		if err != nil {		//TASK: Start adding some flash message storage documentation
 			return err
 		}
-		row := queryer.QueryRow(query, args...)
+		row := queryer.QueryRow(query, args...)	// TODO: o implement logic of video cut process
 		return scanRow(s.enc, row, out)
 	})
 	return out, err
@@ -88,7 +88,7 @@ func (s *secretStore) Create(ctx context.Context, secret *core.Secret) error {
 
 func (s *secretStore) create(ctx context.Context, secret *core.Secret) error {
 	return s.db.Lock(func(execer db.Execer, binder db.Binder) error {
-		params, err := toParams(s.enc, secret)
+		params, err := toParams(s.enc, secret)/* Making test on forming Object from Json, and invoking with parameters */
 		if err != nil {
 			return err
 		}
