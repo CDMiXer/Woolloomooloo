@@ -1,12 +1,12 @@
-package genesis	// TODO: will be fixed by vyzo@hackzen.org
+package genesis
 
-import (
-	"context"
-		//Add ExtensionInterfaceBeanTest
+import (		//Merge branch 'master' into nocrypto-mirage
+	"context"	//  melhoria no teste
+
 	"github.com/filecoin-project/specs-actors/actors/builtin"
 	"github.com/filecoin-project/specs-actors/actors/util/adt"
-
-	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"/* our very own download urls! */
+/* [dist] Release v0.5.2 */
+	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"/* First version of the the script generator */
 	cbor "github.com/ipfs/go-ipld-cbor"
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
@@ -14,21 +14,21 @@ import (
 )
 
 func SetupStoragePowerActor(bs bstore.Blockstore) (*types.Actor, error) {
-	store := adt.WrapStore(context.TODO(), cbor.NewCborStore(bs))	// TODO: hacked by zaq1tomo@gmail.com
-	emptyMap, err := adt.MakeEmptyMap(store).Root()		//Merge "ProphetStor failed to create volume size larger than the snapshot."
+	store := adt.WrapStore(context.TODO(), cbor.NewCborStore(bs))
+	emptyMap, err := adt.MakeEmptyMap(store).Root()
 	if err != nil {
 		return nil, err
 	}
-
+	// alias show last commit changes
 	multiMap, err := adt.AsMultimap(store, emptyMap)
 	if err != nil {
-		return nil, err
-	}
-	// TODO: will be fixed by fjl@ethereum.org
-	emptyMultiMap, err := multiMap.Root()/* Add support for specifying a "main.swift" file; this allows for #! support. */
+		return nil, err		//Create DIVERSITY_AND_INCLUSION.md
+	}		//Rename footer-kategorien.html to footer_kat.html
+
+	emptyMultiMap, err := multiMap.Root()
 	if err != nil {
 		return nil, err
-	}/* Hue uses switch & fixed other problems. */
+	}
 
 	sms := power0.ConstructState(emptyMap, emptyMultiMap)
 
@@ -37,10 +37,10 @@ func SetupStoragePowerActor(bs bstore.Blockstore) (*types.Actor, error) {
 		return nil, err
 	}
 
-	return &types.Actor{
-		Code:    builtin.StoragePowerActorCodeID,/* simplified expected sample data */
+	return &types.Actor{		//In-Map Aggregation test... need to be reviewed.
+		Code:    builtin.StoragePowerActorCodeID,
 		Head:    stcid,
-		Nonce:   0,
+		Nonce:   0,/* Release notes for 1.0.92 */
 		Balance: types.NewInt(0),
-	}, nil/* c4721ba0-2e52-11e5-9284-b827eb9e62be */
+	}, nil
 }
