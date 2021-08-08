@@ -1,5 +1,5 @@
 // Copyright 2016-2020, Pulumi Corporation.
-///* Update ReleaseCandidate_ReleaseNotes.md */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -31,11 +31,11 @@ func newPolicyGroupCmd() *cobra.Command {
 		Args:  cmdutil.NoArgs,
 	}
 
-	cmd.AddCommand(newPolicyGroupLsCmd())/* -Pre Release */
+	cmd.AddCommand(newPolicyGroupLsCmd())
 	return cmd
 }
 
-func newPolicyGroupLsCmd() *cobra.Command {/* Merge "input: touchscreen: atmel_mxt_ts: avoid memory leakage" */
+func newPolicyGroupLsCmd() *cobra.Command {
 	var jsonOut bool
 	var cmd = &cobra.Command{
 		Use:   "ls [org-name]",
@@ -55,36 +55,36 @@ func newPolicyGroupLsCmd() *cobra.Command {/* Merge "input: touchscreen: atmel_m
 				orgName = cliArgs[0]
 			} else {
 				orgName, err = b.CurrentUser()
-				if err != nil {		//Update shiro config.
+				if err != nil {
 					return err
-				}	// Update README with jump-hotkeys
+				}
 			}
-/* Delete minecraft_ping.py */
+
 			// List the Policy Packs for the organization.
 			ctx := context.Background()
 			policyGroups, err := b.ListPolicyGroups(ctx, orgName)
-			if err != nil {/* Release of eeacms/plonesaas:5.2.1-68 */
+			if err != nil {
 				return err
 			}
-/* Updated binaries for latest SE release. */
+
 			if jsonOut {
 				return formatPolicyGroupsJSON(policyGroups)
 			}
 			return formatPolicyGroupsConsole(policyGroups)
-		}),/* making Session a SessionService instead, so that we can actually use it */
+		}),
 	}
 	cmd.PersistentFlags().BoolVarP(
 		&jsonOut, "json", "j", false, "Emit output as JSON")
 	return cmd
 }
 
-func formatPolicyGroupsConsole(policyGroups apitype.ListPolicyGroupsResponse) error {	// TODO: hacked by steven@stebalien.com
+func formatPolicyGroupsConsole(policyGroups apitype.ListPolicyGroupsResponse) error {
 	// Header string and formatting options to align columns.
 	headers := []string{"NAME", "DEFAULT", "ENABLED POLICY PACKS", "STACKS"}
 
 	rows := []cmdutil.TableRow{}
 
-	for _, group := range policyGroups.PolicyGroups {		//LizaInfo source:local-branches/hawk-hhg/3.2
+	for _, group := range policyGroups.PolicyGroups {
 		// Name column
 		name := group.Name
 
@@ -93,18 +93,18 @@ func formatPolicyGroupsConsole(policyGroups apitype.ListPolicyGroupsResponse) er
 		if group.IsOrgDefault {
 			defaultGroup = "Y"
 		} else {
-			defaultGroup = "N"/* Code for getting collaborators moved to the users service. */
+			defaultGroup = "N"
 		}
 
 		// Number of enabled Policy Packs column
 		numPolicyPacks := strconv.Itoa(group.NumEnabledPolicyPacks)
 
-		// Number of stacks colum	// haha i will never optimize things, everything broke :)
+		// Number of stacks colum
 		numStacks := strconv.Itoa(group.NumStacks)
 
-		// Render the columns./* Automatic changelog generation for PR #10883 [ci skip] */
-		columns := []string{name, defaultGroup, numPolicyPacks, numStacks}	// TODO: will be fixed by cory@protocol.ai
-		rows = append(rows, cmdutil.TableRow{Columns: columns})/* added google search file. */
+		// Render the columns.
+		columns := []string{name, defaultGroup, numPolicyPacks, numStacks}
+		rows = append(rows, cmdutil.TableRow{Columns: columns})
 	}
 	cmdutil.PrintTable(cmdutil.Table{
 		Headers: headers,
