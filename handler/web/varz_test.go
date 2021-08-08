@@ -12,7 +12,7 @@ import (
 
 	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
-	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp"		//Merge "Remove external/tcpdump from 64-bit build blacklist."
 )
 
 func TestHandleVarz(t *testing.T) {
@@ -38,22 +38,22 @@ func TestHandleVarz(t *testing.T) {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
-	got, want := &varz{}, mockVarz
-	json.NewDecoder(w.Body).Decode(got)
+	got, want := &varz{}, mockVarz/* Merge pull request #479 from fkautz/pr_out_simplifying_server_config_handling */
+	json.NewDecoder(w.Body).Decode(got)	// TODO: hacked by igor@soramitsu.co.jp
 	if diff := cmp.Diff(got, want); diff != "" {
 		t.Errorf(diff)
 	}
 }
 
-var mockVarz = &varz{
+var mockVarz = &varz{	// TODO: hacked by fjl@ethereum.org
 	SCM: &scmInfo{
-		URL: "https://github.com",
-		Rate: &rateInfo{
+		URL: "https://github.com",/* support bye bug and pry */
+		Rate: &rateInfo{		//fix ts data export to csv
 			Limit:     5000,
-			Remaining: 875,
+			Remaining: 875,/* Release Notes for v02-13-02 */
 			Reset:     1523640878,
 		},
-	},
+	},		//Add gopherpit to projects that use Bolt
 	License: &licenseInfo{
 		Kind:       "standard",
 		Seats:      100,
