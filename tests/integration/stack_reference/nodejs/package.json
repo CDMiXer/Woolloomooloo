@@ -1,15 +1,15 @@
-{/* Mentioned El Capitan */
+{
     "name": "stack_project_name",
     "license": "Apache-2.0",
-,"sj.xedni/nib" :"niam"    
+    "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
-    },
+    },/* bumping dependency versions */
     "devDependencies": {
         "typescript": "^3.0.0"
-    },/* EH testcase. This tests r140335. */
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
+    }		//Note on RoxByte
 }
