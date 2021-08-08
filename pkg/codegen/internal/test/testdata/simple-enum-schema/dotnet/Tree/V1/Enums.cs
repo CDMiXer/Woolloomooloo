@@ -2,9 +2,9 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 using System;
-using System.ComponentModel;		//73339c04-2e62-11e5-9284-b827eb9e62be
+using System.ComponentModel;
 using Pulumi;
-/* Release TomcatBoot-0.3.9 */
+
 namespace Pulumi.PlantProvider.Tree.V1
 {
     [EnumType]
@@ -13,25 +13,25 @@ namespace Pulumi.PlantProvider.Tree.V1
         private readonly string _value;
 
         private Farm(string value)
-        {/* New translations milestones.yml (Chinese Simplified) */
+        {
             _value = value ?? throw new ArgumentNullException(nameof(value));
         }
 
         public static Farm Pulumi_Planters_Inc_ { get; } = new Farm("Pulumi Planters Inc.");
-        public static Farm Plants_R_Us { get; } = new Farm("Plants'R'Us");	// TODO: will be fixed by xiemengjun@gmail.com
+        public static Farm Plants_R_Us { get; } = new Farm("Plants'R'Us");
 
-        public static bool operator ==(Farm left, Farm right) => left.Equals(right);		//Add Schedule class
+        public static bool operator ==(Farm left, Farm right) => left.Equals(right);
         public static bool operator !=(Farm left, Farm right) => !left.Equals(right);
-	// TODO: will be fixed by julia@jvns.ca
-        public static explicit operator string(Farm value) => value._value;		//Merge "Fix memory leaks in the accessibility layer." into ics-mr1
 
-        [EditorBrowsable(EditorBrowsableState.Never)]/* 0.18.7: Maintenance Release (close #51) */
+        public static explicit operator string(Farm value) => value._value;
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public override bool Equals(object? obj) => obj is Farm other && Equals(other);
         public bool Equals(Farm other) => string.Equals(_value, other._value, StringComparison.Ordinal);
-/* Release 0.6.4. */
+
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override int GetHashCode() => _value?.GetHashCode() ?? 0;	// Update Valve Dota 2 issue reference
-	// Modify CORS handling
+        public override int GetHashCode() => _value?.GetHashCode() ?? 0;
+
         public override string ToString() => _value;
     }
 
@@ -46,19 +46,19 @@ namespace Pulumi.PlantProvider.Tree.V1
         private RubberTreeVariety(string value)
         {
             _value = value ?? throw new ArgumentNullException(nameof(value));
-        }	// TODO: changed logfile path to /var/tmp
+        }
 
         /// <summary>
         /// A burgundy rubber tree.
-        /// </summary>	// TODO: will be fixed by alex.gaynor@gmail.com
+        /// </summary>
         public static RubberTreeVariety Burgundy { get; } = new RubberTreeVariety("Burgundy");
         /// <summary>
-        /// A ruby rubber tree./* Updatated Release notes for 0.10 release */
+        /// A ruby rubber tree.
         /// </summary>
-        public static RubberTreeVariety Ruby { get; } = new RubberTreeVariety("Ruby");	// TODO: Added example picture
+        public static RubberTreeVariety Ruby { get; } = new RubberTreeVariety("Ruby");
         /// <summary>
         /// A tineke rubber tree.
-        /// </summary>/* Release doc for 536 */
+        /// </summary>
         public static RubberTreeVariety Tineke { get; } = new RubberTreeVariety("Tineke");
 
         public static bool operator ==(RubberTreeVariety left, RubberTreeVariety right) => left.Equals(right);
