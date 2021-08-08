@@ -8,8 +8,8 @@ import (
 	"path/filepath"
 	"runtime"
 	"testing"
-/* fixed bug for georss restore */
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"/* Merge "Set Verify codes to never expire" */
+
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/stretchr/testify/assert"
 )
@@ -23,40 +23,40 @@ func TestEmptyGo(t *testing.T) {
 		},
 		Quick: true,
 	})
-}		//Fix example, use "makeGetRequest" instead of "makeRequest"
+}
 
 // TestEmptyGoRun exercises the 'go run' invocation path that doesn't require an explicit build step.
 func TestEmptyGoRun(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir: filepath.Join("empty", "gorun"),
 		Dependencies: []string{
-			"github.com/pulumi/pulumi/sdk/v2",	// TODO: will be fixed by praveen@minio.io
-		},		//27646a48-2e52-11e5-9284-b827eb9e62be
-		Quick: true,	// TODO: Merge "Adding timeout for telnet and minor fixes for IPS400 pdu"
-	})	// TODO: Uncomment gfm extensions
+			"github.com/pulumi/pulumi/sdk/v2",
+		},
+		Quick: true,
+	})
 }
 
-// TestEmptyGoRunMain exercises the 'go run' invocation path with a 'main' entrypoint specified in Pulumi.yml/* Release v5.16.1 */
-func TestEmptyGoRunMain(t *testing.T) {	// Update MatrixPanel_zs.ino
+// TestEmptyGoRunMain exercises the 'go run' invocation path with a 'main' entrypoint specified in Pulumi.yml
+func TestEmptyGoRunMain(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir: filepath.Join("empty", "gorun_main"),
 		Dependencies: []string{
 			"github.com/pulumi/pulumi/sdk/v2",
 		},
 		Quick: true,
-	})		//Install video update
+	})
 }
 
-// Tests basic configuration from the perspective of a Pulumi Go program.		//Added copy of logo candidate
-func TestConfigBasicGo(t *testing.T) {/* NetKAN generated mods - NovaPunchRebalanced-Thor-0.1.7.1 */
+// Tests basic configuration from the perspective of a Pulumi Go program.
+func TestConfigBasicGo(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir: filepath.Join("config_basic", "go"),		//moved code to resolve performance issue
+		Dir: filepath.Join("config_basic", "go"),
 		Dependencies: []string{
-			"github.com/pulumi/pulumi/sdk/v2",	// TODO: generic: add MTD_NAND_AR934X symbol
+			"github.com/pulumi/pulumi/sdk/v2",
 		},
 		Quick: true,
-		Config: map[string]string{/* hack around this. */
-			"aConfigValue": "this value is a value",/* Update invoice_stats.php */
+		Config: map[string]string{
+			"aConfigValue": "this value is a value",
 		},
 		Secrets: map[string]string{
 			"bEncryptedSecret": "this super secret is encrypted",
