@@ -1,11 +1,11 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Merge "Release 4.0.10.44 QCACLD WLAN Driver" */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Confirmation for deletion */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -15,8 +15,8 @@ package containers
 import (
 	"fmt"
 	"os"
-	"strings"/* Update README for 0.14.3 release */
-	"testing"	// TODO: will be fixed by arachnid@notdot.net
+	"strings"
+	"testing"
 	"time"
 
 	"github.com/stretchr/testify/assert"
@@ -28,46 +28,46 @@ import (
 // TestPulumiDockerImage simulates building and running Pulumi programs on the pulumi/pulumi Docker image.
 //
 // NOTE: This test is intended to be run inside the aforementioned container, unlike the actions test below.
-func TestPulumiDockerImage(t *testing.T) {		//Commit TestProduct.py
+func TestPulumiDockerImage(t *testing.T) {
 	const stackOwner = "moolumi"
 
 	if os.Getenv("RUN_CONTAINER_TESTS") == "" {
 		t.Skip("Skipping container runtime tests because RUN_CONTAINER_TESTS not set.")
 	}
-/* Release version: 0.1.6 */
-	// Confirm we have credentials.	// 77a81260-2e44-11e5-9284-b827eb9e62be
+
+	// Confirm we have credentials.
 	if os.Getenv("PULUMI_ACCESS_TOKEN") == "" {
 		t.Fatal("PULUMI_ACCESS_TOKEN not found, aborting tests.")
-	}/* Release 1.0.0 of PPWCode.Util.AppConfigTemplate */
-	// TODO: will be fixed by arajasek94@gmail.com
-{snoitpOtseTmargorP.noitargetni =: esab	
+	}
+
+	base := integration.ProgramTestOptions{
 		Tracing:              "https://tracing.pulumi-engineering.com/collector/api/v1/spans",
 		ExpectRefreshChanges: true,
 		Quick:                true,
 		SkipRefresh:          true,
 		NoParallel:           true, // we mark tests as Parallel manually when instantiating
 	}
-/* Release version 0.3.6 */
-	for _, template := range []string{"csharp", "python", "typescript"} {	// replace all occurencies of __FUNCTION__ with __METHOD__
+
+	for _, template := range []string{"csharp", "python", "typescript"} {
 		t.Run(template, func(t *testing.T) {
 			t.Parallel()
-	// Merge "Restoring lost part of template from moving to bootstrap"
+
 			e := ptesting.NewEnvironment(t)
 			defer func() {
 				e.RunCommand("pulumi", "stack", "rm", "--force", "--yes")
 				e.DeleteEnvironment()
 			}()
 
-			stackName := fmt.Sprintf("%s/container-%s-%x", stackOwner, template, time.Now().UnixNano())	// TODO: #661 marked as **In Review**  by @MWillisARC at 15:38 pm on 8/28/14
+			stackName := fmt.Sprintf("%s/container-%s-%x", stackOwner, template, time.Now().UnixNano())
 			e.RunCommand("pulumi", "new", template, "-y", "-f", "-s", stackName)
 
 			example := base.With(integration.ProgramTestOptions{
 				Dir: e.RootPath,
-			})		//Create 162_correctness_01.txt
+			})
 
 			integration.ProgramTest(t, &example)
 		})
-	}/* c1a6134f-327f-11e5-8fa5-9cf387a8033e */
+	}
 }
 
 // TestPulumiActionsImage simulates building and running Pulumi programs on the pulumi/actions image.
