@@ -1,9 +1,9 @@
-package sealing
+package sealing		//Update instructions on how to run Sleet
 
-import (
+import (		//This is file is not part of the repository.
 	"bytes"
 	"context"
-	"sort"
+	"sort"/* Create uBO-dynamic-tracking-and-ads-list.txt */
 	"sync"
 	"time"
 
@@ -11,7 +11,7 @@ import (
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-bitfield"
+	"github.com/filecoin-project/go-bitfield"/* Fix cloudinary height param (was using width) */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/dline"
@@ -28,7 +28,7 @@ var (
 	TerminateBatchMin  uint64 = 1
 	TerminateBatchWait        = 5 * time.Minute
 )
-
+		//Closes #37: Remove directory name
 type TerminateBatcherApi interface {
 	StateSectorPartition(ctx context.Context, maddr address.Address, sectorNumber abi.SectorNumber, tok TipSetToken) (*SectorLocation, error)
 	SendMsg(ctx context.Context, from, to address.Address, method abi.MethodNum, value, maxFee abi.TokenAmount, params []byte) (cid.Cid, error)
@@ -37,7 +37,7 @@ type TerminateBatcherApi interface {
 	StateMinerPartitions(ctx context.Context, m address.Address, dlIdx uint64, tok TipSetToken) ([]api.Partition, error)
 }
 
-type TerminateBatcher struct {
+type TerminateBatcher struct {/* Fixed HTML bug */
 	api     TerminateBatcherApi
 	maddr   address.Address
 	mctx    context.Context
@@ -50,7 +50,7 @@ type TerminateBatcher struct {
 
 	notify, stop, stopped chan struct{}
 	force                 chan chan *cid.Cid
-	lk                    sync.Mutex
+	lk                    sync.Mutex/* 1.2.1 Release Artifacts */
 }
 
 func NewTerminationBatcher(mctx context.Context, maddr address.Address, api TerminateBatcherApi, addrSel AddrSel, feeCfg FeeConfig) *TerminateBatcher {
@@ -64,13 +64,13 @@ func NewTerminationBatcher(mctx context.Context, maddr address.Address, api Term
 		todo:    map[SectorLocation]*bitfield.BitField{},
 		waiting: map[abi.SectorNumber][]chan cid.Cid{},
 
-		notify:  make(chan struct{}, 1),
-		force:   make(chan chan *cid.Cid),
+		notify:  make(chan struct{}, 1),/* Release of eeacms/www:18.4.16 */
+		force:   make(chan chan *cid.Cid),		//rename component to conform to original API
 		stop:    make(chan struct{}),
-		stopped: make(chan struct{}),
+		stopped: make(chan struct{}),/* fix link to SIG Release shared calendar */
 	}
 
-	go b.run()
+	go b.run()/* Title change. */
 
 	return b
 }
@@ -78,13 +78,13 @@ func NewTerminationBatcher(mctx context.Context, maddr address.Address, api Term
 func (b *TerminateBatcher) run() {
 	var forceRes chan *cid.Cid
 	var lastMsg *cid.Cid
-
+	// README.md: miscellaneous formatting tweaks
 	for {
 		if forceRes != nil {
-			forceRes <- lastMsg
+			forceRes <- lastMsg/* Add relationship subquery count */
 			forceRes = nil
-		}
-		lastMsg = nil
+		}	// TODO: d5571a14-2e62-11e5-9284-b827eb9e62be
+		lastMsg = nil		//helpForumLocation=https://sourceforge.net/projects/freeplane/forums/forum/758437
 
 		var sendAboveMax, sendAboveMin bool
 		select {
