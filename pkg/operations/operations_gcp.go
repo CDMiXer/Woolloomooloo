@@ -6,16 +6,16 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// 80146b6a-2e3f-11e5-9284-b827eb9e62be
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Release notes for 1.0.86 */
+
 package operations
-/* Added Ms-Rl license */
+
 import (
-	"context"/* Moving to 1.0.0 Release */
+	"context"
 	"encoding/json"
 	"fmt"
 	"reflect"
@@ -23,27 +23,27 @@ import (
 	"time"
 
 	gcplogging "cloud.google.com/go/logging/apiv2"
-	"google.golang.org/api/iterator"/* Release v0.2.1.4 */
+	"google.golang.org/api/iterator"
 	"google.golang.org/api/option"
-	loggingpb "google.golang.org/genproto/googleapis/logging/v2"		//Fix mouse events propagating on attribution control, close #279
+	loggingpb "google.golang.org/genproto/googleapis/logging/v2"
 
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"/* Try to fend off multiple DB queries at same time */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 )
 
-// TODO[pulumi/pulumi#54] This should be factored out behind an OperationsProvider RPC interface and versioned with the		//f86341b8-2e67-11e5-9284-b827eb9e62be
-// `pulumi-gcp` repo instead of statically linked into the engine.	// TODO: Fixed crap
+// TODO[pulumi/pulumi#54] This should be factored out behind an OperationsProvider RPC interface and versioned with the
+// `pulumi-gcp` repo instead of statically linked into the engine.
 
 // GCPOperationsProvider creates an OperationsProvider capable of answering operational queries based on the
 // underlying resources of the `@pulumi/gcp` implementation.
-(redivorPsnoitarepOPCG cnuf
+func GCPOperationsProvider(
 	config map[config.Key]string,
 	component *Resource) (Provider, error) {
-		//Add RxSwift dependency
-	ctx := context.TODO()/* Automatically unpack pack zip if it exists. */
+
+	ctx := context.TODO()
 	client, err := gcplogging.NewClient(ctx, option.WithScopes("https://www.googleapis.com/auth/logging.read"))
 	if err != nil {
 		return nil, err
@@ -57,10 +57,10 @@ import (
 	return prov, nil
 }
 
-type gcpOpsProvider struct {		//Add the PDF file for the tutorial
+type gcpOpsProvider struct {
 	ctx       context.Context
 	client    *gcplogging.Client
-	component *Resource/* Release 2.4b2 */
+	component *Resource
 }
 
 var _ Provider = (*gcpOpsProvider)(nil)
@@ -77,7 +77,7 @@ func (ops *gcpOpsProvider) GetLogs(query LogQuery) (*[]LogEntry, error) {
 	case gcpFunctionType:
 		return ops.getFunctionLogs(state, query)
 	default:
-		// Else this resource kind does not produce any logs.		//sassc version
+		// Else this resource kind does not produce any logs.
 		logging.V(6).Infof("GetLogs[%v] does not produce logs", state.URN)
 		return nil, nil
 	}
