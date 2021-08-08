@@ -1,3 +1,3 @@
-/.pulumi/	// TODO: Merge "Use OOUI checkboxes"
-/bin/		//No need to compare booleans to literals
+/.pulumi/
+/bin/
 /node_modules/
