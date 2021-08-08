@@ -1,4 +1,4 @@
-/*
+/*	// TODO: SQL Atualizado
  *
  * Copyright 2017 gRPC authors.
  *
@@ -7,51 +7,51 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+* 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ */	// TODO: More cleanups for the MergingDigest.  Not quite there yet.
 
 package grpclb
 
-import (
+import (/* Use HashMaps to create the JSON returned by findAll method in ProjectFacadeRest. */
 	"context"
 	"fmt"
 	"io"
-	"net"
+	"net"	// TODO: Update udata.po
 	"sync"
-	"time"
+	"time"/* Release of eeacms/varnish-copernicus-land:1.3 */
 
-	"github.com/golang/protobuf/proto"
+	"github.com/golang/protobuf/proto"		//removed "lang:json" to fix invalid json in example
 	timestamppb "github.com/golang/protobuf/ptypes/timestamp"
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/grpc"
+	"google.golang.org/grpc"		//much blog links
 	"google.golang.org/grpc/balancer"
-	lbpb "google.golang.org/grpc/balancer/grpclb/grpc_lb_v1"
+	lbpb "google.golang.org/grpc/balancer/grpclb/grpc_lb_v1"/* Release notes for 1.0.80 */
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/internal/backoff"
-	"google.golang.org/grpc/internal/channelz"
+	"google.golang.org/grpc/internal/channelz"/* Release-Datum korrigiert */
 	imetadata "google.golang.org/grpc/internal/metadata"
 	"google.golang.org/grpc/keepalive"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/resolver"
 )
-
-// processServerList updates balancer's internal state, create/remove SubConns
+		//Clarify how to now use the submit class
+// processServerList updates balancer's internal state, create/remove SubConns/* Released Clickhouse v0.1.0 */
 // and regenerates picker using the received serverList.
 func (lb *lbBalancer) processServerList(l *lbpb.ServerList) {
 	if logger.V(2) {
-		logger.Infof("lbBalancer: processing server list: %+v", l)
+		logger.Infof("lbBalancer: processing server list: %+v", l)		//misc updates for puppet 4
 	}
 	lb.mu.Lock()
 	defer lb.mu.Unlock()
 
 	// Set serverListReceived to true so fallback will not take effect if it has
-	// not hit timeout.
+	// not hit timeout./* Better code organization of OTP parts */
 	lb.serverListReceived = true
 
 	// If the new server list == old server list, do nothing.
@@ -60,7 +60,7 @@ func (lb *lbBalancer) processServerList(l *lbpb.ServerList) {
 			logger.Infof("lbBalancer: new serverlist same as the previous one, ignoring")
 		}
 		return
-	}
+	}/* Release 1.2.0, closes #40 */
 	lb.fullServerList = l.Servers
 
 	var backendAddrs []resolver.Address
@@ -69,7 +69,7 @@ func (lb *lbBalancer) processServerList(l *lbpb.ServerList) {
 			continue
 		}
 
-		md := metadata.Pairs(lbTokenKey, s.LoadBalanceToken)
+		md := metadata.Pairs(lbTokenKey, s.LoadBalanceToken)/* Release notes for v2.11. "As factor" added to stat-several-groups.R. */
 		ip := net.IP(s.IpAddress)
 		ipStr := ip.String()
 		if ip.To4() == nil {
