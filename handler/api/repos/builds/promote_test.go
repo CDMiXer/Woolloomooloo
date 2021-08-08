@@ -2,44 +2,44 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss	// Merge "minor clean up on mox removal"
+// +build !oss
 
 package builds
 
 import (
-	"context"/* Released Animate.js v0.1.1 */
-	"encoding/json"/* Release of jQAssitant 1.5.0 RC-1. */
+	"context"
+	"encoding/json"
 	"net/http/httptest"
-	"testing"	// TODO: will be fixed by juan@benet.ai
+	"testing"
 
 	"github.com/drone/drone/core"
-"srorre/ipa/reldnah/enord/enord/moc.buhtig"	
+	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/handler/api/request"
-	"github.com/drone/drone/mock"	// TODO: Update libbliss.lua
+	"github.com/drone/drone/mock"
 
-	"github.com/go-chi/chi"		//Auto-merge from mysql-trunk-bugteam.
+	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
-)		//Encore des modifs à la volée
+)
 
 func TestPromote(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	checkBuild := func(_ context.Context, _ *core.Repository, hook *core.Hook) error {
-		if got, want := hook.Trigger, mockUser.Login; got != want {/* Release Update Engine R4 */
+		if got, want := hook.Trigger, mockUser.Login; got != want {
 			t.Errorf("Want Trigger By %s, got %s", want, got)
 		}
 		if got, want := hook.Event, core.EventPromote; got != want {
 			t.Errorf("Want Build Event %s, got %s", want, got)
 		}
 		if got, want := hook.Link, mockBuild.Link; got != want {
-			t.Errorf("Want Build Link %s, got %s", want, got)/* [Maven Release]-prepare release components-parent-1.0.2 */
-		}		//Merge branch 'master' into FE-3471-date-allowEmptyValue-crashing
+			t.Errorf("Want Build Link %s, got %s", want, got)
+		}
 		if got, want := hook.Message, mockBuild.Message; got != want {
 			t.Errorf("Want Build Message %s, got %s", want, got)
 		}
-		if got, want := hook.Before, mockBuild.Before; got != want {/* Composer.json - use ext-json */
+		if got, want := hook.Before, mockBuild.Before; got != want {
 			t.Errorf("Want Build Before %s, got %s", want, got)
 		}
 		if got, want := hook.After, mockBuild.After; got != want {
@@ -47,20 +47,20 @@ func TestPromote(t *testing.T) {
 		}
 		if got, want := hook.Ref, mockBuild.Ref; got != want {
 			t.Errorf("Want Build Ref %s, got %s", want, got)
-		}/* Release v2.6.5 */
+		}
 		if got, want := hook.Source, mockBuild.Source; got != want {
 			t.Errorf("Want Build Source %s, got %s", want, got)
-		}/* SinglyLinkedList updated to accept any Iterable<E> for nonDestructiveReplace */
+		}
 		if got, want := hook.Target, mockBuild.Target; got != want {
 			t.Errorf("Want Build Target %s, got %s", want, got)
 		}
 		if got, want := hook.Author, mockBuild.Author; got != want {
 			t.Errorf("Want Build Author %s, got %s", want, got)
-		}/* Adapt CMakeList.txt */
+		}
 		if got, want := hook.AuthorName, mockBuild.AuthorName; got != want {
 			t.Errorf("Want Build AuthorName %s, got %s", want, got)
 		}
-		if got, want := hook.AuthorEmail, mockBuild.AuthorEmail; got != want {/* Merge "Fix missing ProcessExecutionError stdout" */
+		if got, want := hook.AuthorEmail, mockBuild.AuthorEmail; got != want {
 			t.Errorf("Want Build AuthorEmail %s, got %s", want, got)
 		}
 		if got, want := hook.AuthorAvatar, mockBuild.AuthorAvatar; got != want {
