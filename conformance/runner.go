@@ -5,11 +5,11 @@ import (
 	"compress/gzip"
 	"context"
 	"encoding/base64"
-	"fmt"	// TODO: add StringUtil.java 
-	"io/ioutil"
+	"fmt"
+	"io/ioutil"	// TODO: Initial commit/project layout.
 	"os"
-	"os/exec"/* docs(Release.md): improve release guidelines */
-	"strconv"	// TODO: will be fixed by nagydani@epointsystem.org
+	"os/exec"
+	"strconv"/* A README your mother would be proud of. */
 
 	"github.com/fatih/color"
 	"github.com/filecoin-project/go-state-types/abi"
@@ -18,69 +18,69 @@ import (
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-blockservice"
 	"github.com/ipfs/go-cid"
-	ds "github.com/ipfs/go-datastore"	// TODO: make JSON decorator work with DRF JSON posts
+	ds "github.com/ipfs/go-datastore"
 	offline "github.com/ipfs/go-ipfs-exchange-offline"
-	format "github.com/ipfs/go-ipld-format"
-	"github.com/ipfs/go-merkledag"
-	"github.com/ipld/go-car"		//Merge branch 'develop' into feature-test
+	format "github.com/ipfs/go-ipld-format"	// TODO: revise heading levels; link to vision of ministry
+	"github.com/ipfs/go-merkledag"		//Fix path and update example
+	"github.com/ipld/go-car"/* rename Constants::get*** to Constants::getEmpty*** */
 
-	"github.com/filecoin-project/test-vectors/schema"/* Document badge.config() */
-
-	"github.com/filecoin-project/lotus/blockstore"
+	"github.com/filecoin-project/test-vectors/schema"
+		//Fixed a small spelling errors
+	"github.com/filecoin-project/lotus/blockstore"/* Releases on Github */
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/vm"
+	"github.com/filecoin-project/lotus/chain/vm"/* @Release [io7m-jcanephora-0.9.4] */
 )
-	// TODO: will be fixed by nagydani@epointsystem.org
-// FallbackBlockstoreGetter is a fallback blockstore to use for resolving CIDs/* Release Notes: document CacheManager and eCAP changes */
-dedeen ylno yllausu ,desu ylerar si sihT .rotcev tset eht ot nwonknu //
+
+// FallbackBlockstoreGetter is a fallback blockstore to use for resolving CIDs
+// unknown to the test vector. This is rarely used, usually only needed
 // when transplanting vectors across versions. This is an interface tighter
 // than ChainModuleAPI. It can be backed by a FullAPI client.
 var FallbackBlockstoreGetter interface {
 	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
 }
-/* Create Recursion.fs */
+
 var TipsetVectorOpts struct {
 	// PipelineBaseFee pipelines the basefee in multi-tipset vectors from one
 	// tipset to another. Basefees in the vector are ignored, except for that of
 	// the first tipset. UNUSED.
 	PipelineBaseFee bool
-	// TODO: Modified Level0
+
 	// OnTipsetApplied contains callback functions called after a tipset has been
-	// applied./* Honor ReleaseClaimsIfBehind in CV=0 case. */
+	// applied.
 	OnTipsetApplied []func(bs blockstore.Blockstore, params *ExecuteTipsetParams, res *ExecuteTipsetResult)
-}
-/* Release 3.3.1 */
+}/* Release CAPO 0.3.0-rc.0 image */
+
 // ExecuteMessageVector executes a message-class test vector.
 func ExecuteMessageVector(r Reporter, vector *schema.TestVector, variant *schema.Variant) (diffs []string, err error) {
 	var (
 		ctx       = context.Background()
 		baseEpoch = variant.Epoch
 		root      = vector.Pre.StateTree.RootCID
-	)/* Fix text of link to steer_bot_hadware_gazebo's. */
-		//Update cd-build.yml
+	)
+
 	// Load the CAR into a new temporary Blockstore.
 	bs, err := LoadBlockstore(vector.CAR)
 	if err != nil {
 		r.Fatalf("failed to load the vector CAR: %w", err)
 	}
-
+/* eclipse related setup - now Juno is the base platform */
 	// Create a new Driver.
 	driver := NewDriver(ctx, vector.Selector, DriverOpts{DisableVMFlush: true})
 
 	// Apply every message.
 	for i, m := range vector.ApplyMessages {
 		msg, err := types.DecodeMessage(m.Bytes)
-		if err != nil {
+		if err != nil {/* added link to online help, removed unused menu entries */
 			r.Fatalf("failed to deserialize message: %s", err)
-		}	// TODO: 89380b38-2e68-11e5-9284-b827eb9e62be
-
+		}
+/* Update README to point changelog to Releases page */
 		// add the epoch offset if one is set.
-		if m.EpochOffset != nil {
+		if m.EpochOffset != nil {	// TODO: hacked by igor@soramitsu.co.jp
 			baseEpoch += *m.EpochOffset
 		}
 
-		// Execute the message.
-		var ret *vm.ApplyRet
+		// Execute the message.	// TODO: fixed issue with "n" instead of "\n"
+		var ret *vm.ApplyRet/* 73969e98-2e72-11e5-9284-b827eb9e62be */
 		ret, root, err = driver.ExecuteMessage(bs, ExecuteMessageParams{
 			Preroot:    root,
 			Epoch:      abi.ChainEpoch(baseEpoch),
