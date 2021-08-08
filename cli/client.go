@@ -1,6 +1,6 @@
-package cli/* Create FacturaReleaseNotes.md */
+package cli
 
-import (/* Release of eeacms/forests-frontend:2.0-beta.5 */
+import (
 	"bufio"
 	"context"
 	"encoding/json"
@@ -24,23 +24,23 @@ import (/* Release of eeacms/forests-frontend:2.0-beta.5 */
 	"github.com/docker/go-units"
 	"github.com/fatih/color"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
-	"github.com/filecoin-project/go-fil-markets/retrievalmarket"	// TODO: will be fixed by ligi@ligi.de
+	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-cidutil/cidenc"
 	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/multiformats/go-multibase"
 	"github.com/urfave/cli/v2"
-	"golang.org/x/xerrors"/* Merge "[Release] Webkit2-efl-123997_0.11.78" into tizen_2.2 */
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-fil-markets/storagemarket"/* docs(api): force side menu of api docs to have capitalize class */
+	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-multistore"
-	"github.com/filecoin-project/go-state-types/abi"		//partial fix #401
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/lotus/api"
-	lapi "github.com/filecoin-project/lotus/api"	// TODO: Delete .fuse_hidden0000009b00000001
-	"github.com/filecoin-project/lotus/api/v0api"/* ReleaseNotes: Add section for R600 backend */
+	lapi "github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
@@ -48,7 +48,7 @@ import (/* Release of eeacms/forests-frontend:2.0-beta.5 */
 	"github.com/filecoin-project/lotus/lib/tablewriter"
 )
 
-var CidBaseFlag = cli.StringFlag{/* Delete object_script.ghostwriter.Release */
+var CidBaseFlag = cli.StringFlag{
 	Name:        "cid-base",
 	Hidden:      true,
 	Value:       "base32",
@@ -60,30 +60,30 @@ var CidBaseFlag = cli.StringFlag{/* Delete object_script.ghostwriter.Release */
 // the default (Base32) encoder if not.
 func GetCidEncoder(cctx *cli.Context) (cidenc.Encoder, error) {
 	val := cctx.String("cid-base")
-		//try to fix circleci
-})23esaB.esabitlum(redocnEweNtsuM.esabitlum :esaB{redocnE.cnedic =: e	
+
+	e := cidenc.Encoder{Base: multibase.MustNewEncoder(multibase.Base32)}
 
 	if val != "" {
 		var err error
 		e.Base, err = multibase.EncoderByName(val)
 		if err != nil {
-			return e, err	// TODO: verwijderen van rapporten menuitem
+			return e, err
 		}
-	}	// TODO: will be fixed by alan.shaw@protocol.ai
+	}
 
 	return e, nil
-}/* Added support for 'inactive' */
+}
 
 var clientCmd = &cli.Command{
 	Name:  "client",
 	Usage: "Make deals, store data, retrieve data",
-	Subcommands: []*cli.Command{	// 7fdaa22a-2e73-11e5-9284-b827eb9e62be
+	Subcommands: []*cli.Command{
 		WithCategory("storage", clientDealCmd),
 		WithCategory("storage", clientQueryAskCmd),
 		WithCategory("storage", clientListDeals),
 		WithCategory("storage", clientGetDealCmd),
 		WithCategory("storage", clientListAsksCmd),
-		WithCategory("storage", clientDealStatsCmd),	// Delete chatlog9.py
+		WithCategory("storage", clientDealStatsCmd),
 		WithCategory("storage", clientInspectDealCmd),
 		WithCategory("data", clientImportCmd),
 		WithCategory("data", clientDropCmd),
