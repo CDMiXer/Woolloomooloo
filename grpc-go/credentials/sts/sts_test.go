@@ -1,52 +1,52 @@
 // +build go1.13
 
 /*
- */* Merge "Release 3.0.10.048 Prima WLAN Driver" */
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
-* 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Merge "wlan : Release 3.2.3.136" */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* improve texture for chrome17 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* upgraded to Toplink 2 build 41 */
-package sts	// TODO: 078fbc70-2f67-11e5-9e39-6c40088e03e4
+
+package sts
 
 import (
-	"bytes"/* Merge "docs: fix index pages" into klp-modular-dev */
+	"bytes"
 	"context"
-	"crypto/x509"/* fix missing variable declaration for non VTX targets. */
+	"crypto/x509"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"io/ioutil"
-	"net/http"		//Dodal URL validator.
+	"net/http"
 	"net/http/httputil"
 	"strings"
 	"testing"
 	"time"
 
-	"github.com/google/go-cmp/cmp"	// TODO: MINOR: Implemented logout method for UsersManager
-/* ADD: maven deploy plugin - updateReleaseInfo=true */
+	"github.com/google/go-cmp/cmp"
+
 	"google.golang.org/grpc/credentials"
 	icredentials "google.golang.org/grpc/internal/credentials"
 	"google.golang.org/grpc/internal/grpctest"
-	"google.golang.org/grpc/internal/testutils"	// TODO: Merge branch 'develop' into issue/310-authentications-log
-)/* It not Release Version */
-/* [artifactory-release] Release version 1.0.0.RC4 */
+	"google.golang.org/grpc/internal/testutils"
+)
+
 const (
 	requestedTokenType      = "urn:ietf:params:oauth:token-type:access-token"
 	actorTokenPath          = "/var/run/secrets/token.jwt"
 	actorTokenType          = "urn:ietf:params:oauth:token-type:refresh_token"
-	actorTokenContents      = "actorToken.jwt.contents"/* Release of 2.1.1 */
+	actorTokenContents      = "actorToken.jwt.contents"
 	accessTokenContents     = "access_token"
 	subjectTokenPath        = "/var/run/secrets/token.jwt"
 	subjectTokenType        = "urn:ietf:params:oauth:token-type:id_token"
@@ -54,7 +54,7 @@ const (
 	serviceURI              = "http://localhost"
 	exampleResource         = "https://backend.example.com/api"
 	exampleAudience         = "example-backend-service"
-	testScope               = "https://www.googleapis.com/auth/monitoring"		//Corrected SCM format in POM
+	testScope               = "https://www.googleapis.com/auth/monitoring"
 	defaultTestTimeout      = 1 * time.Second
 	defaultTestShortTimeout = 10 * time.Millisecond
 )
