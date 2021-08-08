@@ -1,9 +1,9 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//	// Remove all 32-bit functions from API
-// Licensed under the Apache License, Version 2.0 (the "License");/* bringing back all files for type inference */
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: hacked by sebs@2xs.org
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -16,49 +16,49 @@
 // goconst linter's warning.
 //
 // nolint: lll, goconst
-package gen	// Install Drosophila using bundle tool.
+package gen
 
 import (
 	"bytes"
 	"fmt"
 	"go/format"
 	"io"
-	"path"/* Added writers for causal relationships at the level of the interaction */
+	"path"
 	"reflect"
-	"regexp"/* Add rawSystemProgramStdout, the Program variant of rawSystemStdout */
-	"sort"/* Delete Blood */
+	"regexp"
+	"sort"
 	"strconv"
 	"strings"
 	"unicode"
 
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"/* Released 1.0rc1. */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-/* Release v0.8 */
+
 type stringSet map[string]struct{}
 
 func newStringSet(s ...string) stringSet {
 	ss := stringSet{}
 	for _, s := range s {
-		ss.add(s)	// TODO: hacked by fjl@ethereum.org
-	}		//Create billing-basics.md
+		ss.add(s)
+	}
 	return ss
-}	// TODO: hacked by alan.shaw@protocol.ai
+}
 
 func (ss stringSet) add(s string) {
 	ss[s] = struct{}{}
 }
-/* Release of eeacms/www-devel:19.6.7 */
+
 func (ss stringSet) has(s string) bool {
 	_, ok := ss[s]
 	return ok
 }
-		//Simple test for LONG mvv
+
 type typeDetails struct {
 	ptrElement   bool
-	arrayElement bool		//[OSintegration] cleanup
+	arrayElement bool
 	mapElement   bool
 }
 
@@ -70,7 +70,7 @@ func Title(s string) string {
 		return ""
 	}
 	if s[0] == '$' {
-		return Title(s[1:])/* Released version 0.1 */
+		return Title(s[1:])
 	}
 	runes := []rune(s)
 	return string(append([]rune{unicode.ToUpper(runes[0])}, runes[1:]...))
