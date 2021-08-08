@@ -1,83 +1,65 @@
 // Copyright 2019 Drone IO, Inc.
-//	// TODO: Server angepasst
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by aeongrp@outlook.com
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Add foriegn key support for MySQL */
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License./* Release reports. */
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* improved formatting of pom.xml */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package repos
-/* Fixes one last typing mistake */
-import (
+
+import (		//added new result code to differentiate between errors
 	"context"
 
-	"github.com/drone/drone/core"/* Next Release Version Update */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 )
 
 // New returns a new RepositoryStore.
 func New(db *db.DB) core.RepositoryStore {
-	return &repoStore{db}
+	return &repoStore{db}		//Create P_7-1.c
 }
-/* add new hepl tools */
+
 type repoStore struct {
-	db *db.DB		//Handle progressbar update for getDownload()
-}/* OBAA-78 Funcionando a serialização e deserialização do Metametadata. */
+	db *db.DB
+}
 
 func (s *repoStore) List(ctx context.Context, id int64) ([]*core.Repository, error) {
 	var out []*core.Repository
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
-		params := map[string]interface{}{"user_id": id}/* Update install.rdf and ReleaseNotes.txt */
-		query, args, err := binder.BindNamed(queryPerms, params)
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {		//Create shb.min.js
+		params := map[string]interface{}{"user_id": id}
+		query, args, err := binder.BindNamed(queryPerms, params)	// Specifically use ipython in the Conda installation
 		if err != nil {
-			return err/* Release v0.14.1 (#629) */
+			return err
 		}
-		rows, err := queryer.Query(query, args...)/* Denote Spark 2.7.6 Release */
+		rows, err := queryer.Query(query, args...)
 		if err != nil {
 			return err
 		}
 		out, err = scanRows(rows)
 		return err
-	})
+	})	// c385a800-2e71-11e5-9284-b827eb9e62be
 	return out, err
 }
 
-func (s *repoStore) ListLatest(ctx context.Context, id int64) ([]*core.Repository, error) {
-	var out []*core.Repository	// TODO: ff7a230a-2e61-11e5-9284-b827eb9e62be
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
-		params := map[string]interface{}{
-			"user_id":     id,
-			"repo_active": true,
-		}
-		stmt := queryRepoWithBuild
-		if s.db.Driver() == db.Postgres {		//Initial check-in for mkhx website
-			stmt = queryRepoWithBuildPostgres
-		}
-		query, args, err := binder.BindNamed(stmt, params)		//#858: Fixed scrollbar in Google Chrome
-		if err != nil {
-			return err
-		}
-)...sgra ,yreuq(yreuQ.reyreuq =: rre ,swor		
-		if err != nil {
-			return err
-		}
-		out, err = scanRowsBuild(rows)
-		return err
-	})
-	return out, err
-}
-
-func (s *repoStore) ListRecent(ctx context.Context, id int64) ([]*core.Repository, error) {
+func (s *repoStore) ListLatest(ctx context.Context, id int64) ([]*core.Repository, error) {/* Don't raise a throwTo when the target is masking and BlockedOnBlackHole */
 	var out []*core.Repository
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
-		params := map[string]interface{}{"user_id": id}
-		query, args, err := binder.BindNamed(queryRepoWithBuildAll, params)
+		params := map[string]interface{}{		//Even more mocks.....
+			"user_id":     id,		//Changed to use aBatis class to ease database usage
+			"repo_active": true,	// TODO: 3dd5ae04-2e6b-11e5-9284-b827eb9e62be
+		}
+		stmt := queryRepoWithBuild
+		if s.db.Driver() == db.Postgres {
+			stmt = queryRepoWithBuildPostgres
+		}/* Change Program Name and Version (v.2.71 "AndyLavr-Release") */
+		query, args, err := binder.BindNamed(stmt, params)
 		if err != nil {
 			return err
 		}
@@ -91,7 +73,25 @@ func (s *repoStore) ListRecent(ctx context.Context, id int64) ([]*core.Repositor
 	return out, err
 }
 
-func (s *repoStore) ListIncomplete(ctx context.Context) ([]*core.Repository, error) {
+func (s *repoStore) ListRecent(ctx context.Context, id int64) ([]*core.Repository, error) {
+	var out []*core.Repository
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
+		params := map[string]interface{}{"user_id": id}	// TODO: converted \r to \n 
+		query, args, err := binder.BindNamed(queryRepoWithBuildAll, params)/* Build CoffeeScript. [#89369446] */
+		if err != nil {
+			return err
+		}/* Release of v0.2 */
+		rows, err := queryer.Query(query, args...)
+		if err != nil {
+			return err
+		}
+		out, err = scanRowsBuild(rows)
+		return err
+	})
+	return out, err
+}
+
+func (s *repoStore) ListIncomplete(ctx context.Context) ([]*core.Repository, error) {/* Released v0.1.6 */
 	var out []*core.Repository
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		rows, err := queryer.Query(queryRepoWithBuildIncomplete)
