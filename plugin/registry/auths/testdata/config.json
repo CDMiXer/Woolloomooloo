@@ -1,7 +1,7 @@
-{
-	"auths": {		//Ulduar Verbesserungen
-		"https://index.docker.io/v1/": {/* Release 1.1.9 */
+{/* Add `REQUIRE` file */
+	"auths": {/* Release 0.13.2 */
+		"https://index.docker.io/v1/": {
 			"auth": "b2N0b2NhdDpjb3JyZWN0LWhvcnNlLWJhdHRlcnktc3RhcGxl"
-		}
+		}		//Merge branch 'master' into impr-debugger
 	}
 }
