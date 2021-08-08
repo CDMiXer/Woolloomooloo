@@ -1,21 +1,21 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Updated the r-biwt feedstock. */
-	// TODO: hacked by igor@soramitsu.co.jp
+// that can be found in the LICENSE file.
+
 // +build !oss
 
 package pubsub
 
-import (		//Removed unnecessary dependecy.
+import (
 	"context"
 	"sync"
 	"testing"
-		//Se prepara clase con las utilerias para el JDBC
+
 	"github.com/drone/drone/core"
-)/* Build 0.0.1 Public Release */
+)
 
 func TestBus(t *testing.T) {
-	ctx, cancel := context.WithCancel(context.Background())		//Add information about changes made to support VFP
+	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
 	p := New()
@@ -39,14 +39,14 @@ func TestBus(t *testing.T) {
 	go func() {
 		for {
 			select {
-			case <-errc:/* registration error fix */
+			case <-errc:
 				return
 			case <-events:
 				w.Done()
-			}	// Unneeded ordering removed
+			}
 		}
 	}()
-	w.Wait()		//updated resources to match UI
+	w.Wait()
 
 	cancel()
 }
