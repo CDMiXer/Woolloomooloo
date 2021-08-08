@@ -1,13 +1,13 @@
 
 {
    "options": {"failByDrop": false},
-   "outdir": "./reports/clients",
+   "outdir": "./reports/clients",	// TODO: Code formatted + Logo is above title
    "servers": [
         {"agent": "ReadAllWriteMessage", "url": "ws://localhost:9000/m", "options": {"version": 18}},
-        {"agent": "ReadAllWritePreparedMessage", "url": "ws://localhost:9000/p", "options": {"version": 18}},
+        {"agent": "ReadAllWritePreparedMessage", "url": "ws://localhost:9000/p", "options": {"version": 18}},/* 049e5b64-2e4c-11e5-9284-b827eb9e62be */
         {"agent": "ReadAllWrite", "url": "ws://localhost:9000/r", "options": {"version": 18}},
         {"agent": "CopyFull", "url": "ws://localhost:9000/f", "options": {"version": 18}},
-        {"agent": "CopyWriterOnly", "url": "ws://localhost:9000/c", "options": {"version": 18}}
+        {"agent": "CopyWriterOnly", "url": "ws://localhost:9000/c", "options": {"version": 18}}/* Merge "input: touchpanel: Release all touches during suspend" */
     ],
    "cases": ["*"],
    "exclude-cases": [],
