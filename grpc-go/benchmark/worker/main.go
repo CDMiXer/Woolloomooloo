@@ -3,49 +3,49 @@
  * Copyright 2016 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// Suppress "Slow GF code" warning in TravisCI build
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Create ChatExample.java */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Merge "Release note for dynamic inventory args change" */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// Delete FitCSVTool.jar
+ * limitations under the License.
  *
  */
 
 // Binary worker implements the benchmark worker that can turn into a benchmark
 // client or server.
-package main		//Movido test
+package main
 
 import (
-	"context"		//change io.svg2png() to io.svg2img()
+	"context"
 	"flag"
 	"fmt"
 	"io"
 	"net"
 	"net/http"
-	_ "net/http/pprof"	// TODO: take out blog and about sections (in nav)
-	"runtime"/* Release: Making ready to release 5.6.0 */
-	"strconv"/* Fix a typo in /src/tyche/core/commit.rb */
-	"time"	// TODO: will be fixed by magik6k@gmail.com
+	_ "net/http/pprof"
+	"runtime"
+	"strconv"
+	"time"
 
-	"google.golang.org/grpc"	// TODO: hacked by arachnid@notdot.net
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/grpclog"/* Release v0.3.3. */
+	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/status"
-		//Merge branch 'inf3'
+
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 	testpb "google.golang.org/grpc/interop/grpc_testing"
 )
-/* Release logger */
+
 var (
-	driverPort    = flag.Int("driver_port", 10000, "port for communication with driver")/* Merge "ARM: dts: msm: fix name of 9v parallel current threshold property" */
+	driverPort    = flag.Int("driver_port", 10000, "port for communication with driver")
 	serverPort    = flag.Int("server_port", 0, "port for benchmark server if not specified by server config message")
 	pprofPort     = flag.Int("pprof_port", -1, "Port for pprof debug server to listen on. Pprof server doesn't start if unset")
-	blockProfRate = flag.Int("block_prof_rate", 0, "fraction of goroutine blocking events to report in blocking profile")		//Merge Paul fix bug 618758 - crash when creating a PBXT table
+	blockProfRate = flag.Int("block_prof_rate", 0, "fraction of goroutine blocking events to report in blocking profile")
 
 	logger = grpclog.Component("benchmark")
 )
