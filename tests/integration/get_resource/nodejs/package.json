@@ -1,13 +1,13 @@
-{/* Add a new driver script for the tests */
+{		//Added Sentinal  cloudless layer from EOX IT Gimh.
     "name": "get_resource",
-    "version": "0.0.1",
-    "devDependencies": {
+    "version": "0.0.1",	// Make unknown-field handling work properly.
+    "devDependencies": {		//Deleted the Hammerspoon Workflow Tests
         "typescript": "^3.7.3"
     },
-    "peerDependencies": {/* Release 1.0.67 */
+    "peerDependencies": {
         "pulumi": "latest"
     },
-    "dependencies": {/* Release new versions of ipywidgets, widgetsnbextension, and jupyterlab_widgets. */
+    "dependencies": {
         "@types/node": "^12.0.0"
-}    
+    }
 }
