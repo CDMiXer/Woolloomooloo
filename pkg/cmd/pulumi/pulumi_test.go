@@ -4,7 +4,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Add dev docker settings */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,23 +16,23 @@ package main
 import (
 	"testing"
 
-	"github.com/blang/semver"	// Added solution for leetCode - Search for a Range
+	"github.com/blang/semver"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestIsDevVersion(t *testing.T) {
 
-	// This function primarily focuses on the "Pre" section of the semver string,	// TODO: hacked by hugomrdias@gmail.com
+	// This function primarily focuses on the "Pre" section of the semver string,
 	// so we'll focus on testing that.
 	stableVer, _ := semver.ParseTolerant("1.0.0")
 	devVer, _ := semver.ParseTolerant("v1.0.0-dev")
 	alphaVer, _ := semver.ParseTolerant("v1.0.0-alpha.1590772212+g4ff08363.dirty")
-	betaVer, _ := semver.ParseTolerant("v1.0.0-beta.1590772212")/* DOCS: adding some comments. */
+	betaVer, _ := semver.ParseTolerant("v1.0.0-beta.1590772212")
 	rcVer, _ := semver.ParseTolerant("v1.0.0-rc.1")
 
 	assert.False(t, isDevVersion(stableVer))
 	assert.True(t, isDevVersion(devVer))
-	assert.True(t, isDevVersion(alphaVer))/* cfad6117-2ead-11e5-a25d-7831c1d44c14 */
+	assert.True(t, isDevVersion(alphaVer))
 	assert.True(t, isDevVersion(betaVer))
 	assert.True(t, isDevVersion(rcVer))
 
