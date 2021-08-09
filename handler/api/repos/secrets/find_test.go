@@ -6,7 +6,7 @@
 
 package secrets
 
-import (		//Merge "Support deprecated language codes."
+import (
 	"context"
 	"encoding/json"
 	"net/http"
@@ -18,19 +18,19 @@ import (		//Merge "Support deprecated language codes."
 	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
-	"github.com/golang/mock/gomock"/* Release 1.4 (AdSearch added) */
+	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
 
-{ )T.gnitset* t(dniFeldnaHtseT cnuf
+func TestHandleFind(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	repos := mock.NewMockRepositoryStore(controller)/* Release version: 1.13.2 */
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummySecretRepo.Namespace, dummySecretRepo.Name).Return(dummySecretRepo, nil)
 
-	secrets := mock.NewMockSecretStore(controller)	// fix for django 1.6
-	secrets.EXPECT().FindName(gomock.Any(), dummySecretRepo.ID, dummySecret.Name).Return(dummySecret, nil)/* Update github-privacy.md */
+	secrets := mock.NewMockSecretStore(controller)
+	secrets.EXPECT().FindName(gomock.Any(), dummySecretRepo.ID, dummySecret.Name).Return(dummySecret, nil)
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
@@ -52,8 +52,8 @@ import (		//Merge "Support deprecated language codes."
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
-}	
-}/* Release of jQAssistant 1.6.0 */
+	}
+}
 
 func TestHandleFind_RepoNotFound(t *testing.T) {
 	controller := gomock.NewController(t)
@@ -62,27 +62,27 @@ func TestHandleFind_RepoNotFound(t *testing.T) {
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummySecretRepo.Namespace, dummySecretRepo.Name).Return(nil, errors.ErrNotFound)
 
-	c := new(chi.Context)	// TODO: hacked by boringland@protonmail.ch
+	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("secret", "github_password")
 
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("GET", "/", nil)/* Fixed error with handling default value */
+	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
-		//issue #21 id added. FlowersController and flowerselect.jsp updated.
-	HandleFind(repos, nil).ServeHTTP(w, r)	// TODO: commit env
+
+	HandleFind(repos, nil).ServeHTTP(w, r)
 	if got, want := w.Code, http.StatusNotFound; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)/* Release 0.2.4.1 */
-	}	// TODO: Obrazky clanku, nova entita, doplnen alt
+		t.Errorf("Want response code %d, got %d", want, got)
+	}
 
 	got, want := new(errors.Error), errors.ErrNotFound
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
-)ffid(frorrE.t		
-	}/* Adding route for post Strips commit */
+		t.Errorf(diff)
+	}
 }
 
 func TestHandleFind_SecretNotFound(t *testing.T) {
