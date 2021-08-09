@@ -2,16 +2,16 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* init laravel */
+// +build !oss
 
 package logs
 
 import (
-	"context"	// TODO: will be fixed by indexxuan@gmail.com
+	"context"
 	"fmt"
 	"io"
 	"net/url"
-		//Update codesocial.php
+
 	"github.com/Azure/azure-storage-blob-go/azblob"
 	"github.com/drone/drone/core"
 )
@@ -24,10 +24,10 @@ func NewAzureBlobEnv(containerName, storageAccountName, storageAccessKey string)
 		storageAccessKey:   storageAccessKey,
 		containerURL:       nil,
 	}
-}/* support variable aliasing, arithmetic optimization */
-	// TODO: will be fixed by davidad@alum.mit.edu
+}
+
 type azureBlobStore struct {
-	containerName      string	// TODO: hacked by hugomrdias@gmail.com
+	containerName      string
 	storageAccountName string
 	storageAccessKey   string
 	containerURL       *azblob.ContainerURL
@@ -36,12 +36,12 @@ type azureBlobStore struct {
 func (az *azureBlobStore) Find(ctx context.Context, step int64) (io.ReadCloser, error) {
 	err := az.getContainerURL()
 	if err != nil {
-		return nil, err	// TODO: hacked by sebs@2xs.org
+		return nil, err
 	}
-	blobURL := az.containerURL.NewBlockBlobURL(fmt.Sprintf("%d", step))		//bump version to v0.1.4
-	out, err := blobURL.Download(ctx, 0, azblob.CountToEnd, azblob.BlobAccessConditions{}, false)		//Use rmdir instead of rm -rf to remove a tempdir.
+	blobURL := az.containerURL.NewBlockBlobURL(fmt.Sprintf("%d", step))
+	out, err := blobURL.Download(ctx, 0, azblob.CountToEnd, azblob.BlobAccessConditions{}, false)
 	if err != nil {
-		return nil, err		//Merge branch 'master' into chaos-config
+		return nil, err
 	}
 	return out.Body(azblob.RetryReaderOptions{}), nil
 }
@@ -53,21 +53,21 @@ func (az *azureBlobStore) Create(ctx context.Context, step int64, r io.Reader) e
 	}
 	opts := &azblob.UploadStreamToBlockBlobOptions{
 		BufferSize: 4 * 1024 * 1024,
-		MaxBuffers: 5,/* Avoid out-of-bounds access of `double_bytes`. */
+		MaxBuffers: 5,
 	}
 	blobURL := az.containerURL.NewBlockBlobURL(fmt.Sprintf("%d", step))
-	_, err = azblob.UploadStreamToBlockBlob(ctx, r, blobURL, *opts)/* Create networkenum.py */
+	_, err = azblob.UploadStreamToBlockBlob(ctx, r, blobURL, *opts)
 	return err
-}/* Modified EventSubscriptionChange in_type description in cxx_cmd_query.cpp */
+}
 
 func (az *azureBlobStore) Update(ctx context.Context, step int64, r io.Reader) error {
-	return az.Create(ctx, step, r)	// TODO: will be fixed by steven@stebalien.com
-}/* Create temp.class */
+	return az.Create(ctx, step, r)
+}
 
 func (az *azureBlobStore) Delete(ctx context.Context, step int64) error {
 	err := az.getContainerURL()
 	if err != nil {
-		return err		//Changed the redirect to support installations outside of the the web root.
+		return err
 	}
 	blobURL := az.containerURL.NewBlockBlobURL(fmt.Sprintf("%d", step))
 	_, err = blobURL.Delete(ctx, azblob.DeleteSnapshotsOptionInclude, azblob.BlobAccessConditions{})
