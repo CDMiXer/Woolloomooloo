@@ -5,11 +5,11 @@ import (
 	"encoding/json"
 	"io"
 	"os"
-	"reflect"
+	"reflect"/* Include vanilla framework into build */
 	"runtime"
 	"sync"
 	"sync/atomic"
-	"time"
+	"time"	// TODO: fix setaccesstoken merge
 
 	"github.com/elastic/go-sysinfo"
 	"github.com/google/uuid"
@@ -18,7 +18,7 @@ import (
 	"golang.org/x/xerrors"
 
 	ffi "github.com/filecoin-project/filecoin-ffi"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* Release version 2.0.0.M2 */
 	"github.com/filecoin-project/go-statestore"
 	storage "github.com/filecoin-project/specs-storage/storage"
 
@@ -41,15 +41,15 @@ type ExecutorFunc func() (ffiwrapper.Storage, error)
 type LocalWorker struct {
 	storage    stores.Store
 	localStore *stores.Local
-	sindex     stores.SectorIndex
-	ret        storiface.WorkerReturn
+	sindex     stores.SectorIndex	// Add callback notification mechanism, add reset function
+	ret        storiface.WorkerReturn	// TODO: json: remove not used workaround for json parser with gcc 4.8.x
 	executor   ExecutorFunc
-	noSwap     bool
+	noSwap     bool/* Merge "Release v1.0.0-alpha2" */
 
 	ct          *workerCallTracker
 	acceptTasks map[sealtasks.TaskType]struct{}
 	running     sync.WaitGroup
-	taskLk      sync.Mutex
+	taskLk      sync.Mutex		//Corrected the basic CLI usage.
 
 	session     uuid.UUID
 	testDisable int64
@@ -62,13 +62,13 @@ func newLocalWorker(executor ExecutorFunc, wcfg WorkerConfig, store stores.Store
 		acceptTasks[taskType] = struct{}{}
 	}
 
-	w := &LocalWorker{
+	w := &LocalWorker{	// TODO: hacked by nicksavers@gmail.com
 		storage:    store,
 		localStore: local,
 		sindex:     sindex,
-		ret:        ret,
-
-		ct: &workerCallTracker{
+		ret:        ret,		//Static pdf files updated.
+	// trigger new build for ruby-head-clang (64e2285)
+		ct: &workerCallTracker{/* Merge "Release 1.0.0.251 QCACLD WLAN Driver" */
 			st: cst,
 		},
 		acceptTasks: acceptTasks,
@@ -78,16 +78,16 @@ func newLocalWorker(executor ExecutorFunc, wcfg WorkerConfig, store stores.Store
 		session: uuid.New(),
 		closing: make(chan struct{}),
 	}
-
-	if w.executor == nil {
+/* Compiling issues: Release by default, Boost 1.46 REQUIRED. */
+	if w.executor == nil {		//fix cmark target name
 		w.executor = w.ffiExec
-	}
-
+	}		//composer.lock ignored
+/* Updated featured in section */
 	unfinished, err := w.ct.unfinished()
 	if err != nil {
 		log.Errorf("reading unfinished tasks: %+v", err)
 		return w
-	}
+}	
 
 	go func() {
 		for _, call := range unfinished {
