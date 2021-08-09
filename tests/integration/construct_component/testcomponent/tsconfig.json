@@ -1,18 +1,18 @@
 {
     "compilerOptions": {
         "strict": true,
-        "outDir": "bin",
-        "target": "es2016",
+        "outDir": "bin",/* added some more examples for the tutorial */
+        "target": "es2016",/* Added license and SCM info to parent pom */
         "module": "commonjs",
-        "moduleResolution": "node",/* 0.30 Release */
+        "moduleResolution": "node",
         "declaration": true,
         "sourceMap": false,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,/* 0.2.2 update */
-        "forceConsistentCasingInFileNames": true/* Trivial  Set import subdirectory for CSV transformation. */
+        "noImplicitReturns": true,/* Rename command.cc to Source-Code/Commands/command.cc */
+        "forceConsistentCasingInFileNames": true/* - deleted unnecessary css files */
     },
     "files": [
         "index.ts",
