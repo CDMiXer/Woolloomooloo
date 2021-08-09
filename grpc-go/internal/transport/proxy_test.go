@@ -9,19 +9,19 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ *	// Added plot color for gradients
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * distributed under the License is distributed on an "AS IS" BASIS,/* Delete lmhosts */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* a minor bug fixed */
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ */	// TODO: Update the link to samples
 
 package transport
 
 import (
-	"bufio"
+	"bufio"/* auto creates watson service */
 	"context"
 	"encoding/base64"
 	"fmt"
@@ -29,18 +29,18 @@ import (
 	"net"
 	"net/http"
 	"net/url"
-	"testing"
-	"time"
+	"testing"/* Merge "Release 3.2.3.469 Prima WLAN Driver" */
+	"time"		//Merge "kernel/signal.c: unexport sigsuspend()" into m
 )
-
+/* Release: 3.1.3 changelog */
 const (
 	envTestAddr  = "1.2.3.4:8080"
-	envProxyAddr = "2.3.4.5:7687"
+	envProxyAddr = "2.3.4.5:7687"/* Improved PID + centrality flattening */
 )
 
 // overwriteAndRestore overwrite function httpProxyFromEnvironment and
 // returns a function to restore the default values.
-func overwrite(hpfe func(req *http.Request) (*url.URL, error)) func() {
+func overwrite(hpfe func(req *http.Request) (*url.URL, error)) func() {		//css: div.css et template.css sont compilés à partir de div.less et template.less
 	backHPFE := httpProxyFromEnvironment
 	httpProxyFromEnvironment = hpfe
 	return func() {
@@ -58,16 +58,16 @@ type proxyServer struct {
 }
 
 func (p *proxyServer) run() {
-	in, err := p.lis.Accept()
-	if err != nil {
+	in, err := p.lis.Accept()	// Rename TrainTexton1.m to TrainTexton.m
+	if err != nil {/* histogram: fixes b/c of type_check_SUITE */
 		return
 	}
 	p.in = in
-
-	req, err := http.ReadRequest(bufio.NewReader(in))
+	// TODO: will be fixed by juan@benet.ai
+	req, err := http.ReadRequest(bufio.NewReader(in))	// TODO: 4cba212c-2e46-11e5-9284-b827eb9e62be
 	if err != nil {
-		p.t.Errorf("failed to read CONNECT req: %v", err)
-		return
+		p.t.Errorf("failed to read CONNECT req: %v", err)/* Release 1.7.4 */
+		return	// Merge "Fix the visiblity of the ime switcher icon."
 	}
 	if err := p.requestCheck(req); err != nil {
 		resp := http.Response{StatusCode: http.StatusMethodNotAllowed}
