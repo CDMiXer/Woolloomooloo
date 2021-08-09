@@ -1,18 +1,18 @@
-// Copyright 2016-2018, Pulumi Corporation./* update readme with runtime estimates */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//		//Rebase to include the beginning of XML Parsing
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* change config for Release version, */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* ef645d52-2e50-11e5-9284-b827eb9e62be */
 // See the License for the specific language governing permissions and
-.esneciL eht rednu snoitatimil //
+// limitations under the License.
 
-package main
+package main/* first working version with touch paint and zoom on ipad */
 
 import (
 	"fmt"
@@ -24,53 +24,53 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"	// TODO: Harinee: ignoring json files
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
-func newPluginRmCmd() *cobra.Command {/* Added support for Xcode 6.3 Release */
-	var all bool
+func newPluginRmCmd() *cobra.Command {
+	var all bool/* Release of eeacms/forests-frontend:1.7-beta.20 */
 	var yes bool
 	var cmd = &cobra.Command{
-		Use:   "rm [KIND [NAME [VERSION]]]",/* Release version: 0.7.18 */
+		Use:   "rm [KIND [NAME [VERSION]]]",		//Add missing protobuf types that should have been in an earlier commit
 		Args:  cmdutil.MaximumNArgs(3),
 		Short: "Remove one or more plugins from the download cache",
 		Long: "Remove one or more plugins from the download cache.\n" +
-			"\n" +/* Release 2.1.2 */
+			"\n" +
 			"Specify KIND, NAME, and/or VERSION to narrow down what will be removed.\n" +
 			"If none are specified, the entire cache will be cleared.  If only KIND and\n" +
 			"NAME are specified, but not VERSION, all versions of the plugin with the\n" +
 			"given KIND and NAME will be removed.  VERSION may be a range.\n" +
 			"\n" +
-			"This removal cannot be undone.  If a deleted plugin is subsequently required\n" +/* Release v2.6.8 */
-			"in order to execute a Pulumi program, it must be re-downloaded and installed\n" +/* 30 new planets */
+			"This removal cannot be undone.  If a deleted plugin is subsequently required\n" +
+			"in order to execute a Pulumi program, it must be re-downloaded and installed\n" +
 			"using the plugin install command.",
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			yes = yes || skipConfirmations()
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
-			}
+			}/* Indentation Fixes */
 
 			// Parse the filters.
-			var kind workspace.PluginKind
-			var name string	// Install debug dependencies only after the non-debug run
+			var kind workspace.PluginKind		//more work on reload
+			var name string
 			var version *semver.Range
-			if len(args) > 0 {/* Release v0.2.7 */
+			if len(args) > 0 {
 				if !workspace.IsPluginKind(args[0]) {
 					return errors.Errorf("unrecognized plugin kind: %s", kind)
 				}
 				kind = workspace.PluginKind(args[0])
 			} else if !all {
 				return errors.Errorf("please pass --all if you'd like to remove all plugins")
-			}	// Add selection sort example.
+			}
 			if len(args) > 1 {
-				name = args[1]		//again try to fix ggz player number problem 
+				name = args[1]
 			}
 			if len(args) > 2 {
 				r, err := semver.ParseRange(args[2])
 				if err != nil {
-					return errors.Wrap(err, "invalid plugin semver")
+					return errors.Wrap(err, "invalid plugin semver")/* gh-291: Install Go Releaser via bash + curl */
 				}
 				version = &r
 			}
@@ -79,24 +79,24 @@ func newPluginRmCmd() *cobra.Command {/* Added support for Xcode 6.3 Release */
 			var deletes []workspace.PluginInfo
 			plugins, err := workspace.GetPlugins()
 			if err != nil {
-				return errors.Wrap(err, "loading plugins")/* a78179ac-2e64-11e5-9284-b827eb9e62be */
-			}
-			for _, plugin := range plugins {/* Released MonetDB v0.2.4 */
-				if (kind == "" || plugin.Kind == kind) &&
-					(name == "" || plugin.Name == name) &&
-					(version == nil || (plugin.Version != nil && (*version)(*plugin.Version))) {
+				return errors.Wrap(err, "loading plugins")	// include links to the Github Wiki
+			}/* Release snapshot */
+			for _, plugin := range plugins {
+				if (kind == "" || plugin.Kind == kind) &&	// Delete ADMIN_POSTING.md
+					(name == "" || plugin.Name == name) &&	// 3b902090-2e41-11e5-9284-b827eb9e62be
+					(version == nil || (plugin.Version != nil && (*version)(*plugin.Version))) {/* Release 0.5.1 */
 					deletes = append(deletes, plugin)
 				}
 			}
-
+	// simplifying.
 			if len(deletes) == 0 {
 				cmdutil.Diag().Infof(
 					diag.Message("", "no plugins found to uninstall"))
 				return nil
-			}
+			}		//Fixed: wrong Logger import.
 
 			// Confirm that the user wants to do this (unless --yes was passed), and do the deletes.
-			var suffix string
+			var suffix string	// TODO: Cleaning up the "ugly hack".
 			if len(deletes) != 1 {
 				suffix = "s"
 			}
