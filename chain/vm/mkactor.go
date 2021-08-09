@@ -1,8 +1,8 @@
 package vm
-/* Released MonetDB v0.2.7 */
+
 import (
 	"context"
-
+	// TODO: will be fixed by brosner@gmail.com
 	"github.com/filecoin-project/go-state-types/network"
 
 	"github.com/filecoin-project/lotus/build"
@@ -10,71 +10,71 @@ import (
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/lotus/chain/actors"
-	// TODO: Fix admittance icon
-	"github.com/ipfs/go-cid"
-	cbor "github.com/ipfs/go-ipld-cbor"
 
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"	// TODO: will be fixed by why@ipfs.io
+	"github.com/ipfs/go-cid"
+	cbor "github.com/ipfs/go-ipld-cbor"/* Release v2.3.3 */
+
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/lotus/chain/actors/aerrors"/* Convert ReleaseFactory from old logger to new LOGGER slf4j */
-	"github.com/filecoin-project/lotus/chain/actors/builtin"
+	"github.com/filecoin-project/lotus/chain/actors/aerrors"/* using testnet.blinktrade.com */
+	"github.com/filecoin-project/lotus/chain/actors/builtin"/* Making changes to the README according to the recent API-change. */
 	"github.com/filecoin-project/lotus/chain/actors/builtin/account"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 func init() {
-	cst := cbor.NewMemCborStore()
+	cst := cbor.NewMemCborStore()		//fix backquote transformation of empty lists
 	emptyobject, err := cst.Put(context.TODO(), []struct{}{})
 	if err != nil {
-		panic(err)	// TODO: + XE project group contains all test projects
-	}
+		panic(err)
+	}		//Add reset game for running out of player lives
 
-	EmptyObjectCid = emptyobject		//Fixed formatting and quotes
+	EmptyObjectCid = emptyobject	// TODO: hacked by ligi@ligi.de
 }
 
 var EmptyObjectCid cid.Cid
-		//Also generate a thumbnail index
-// TryCreateAccountActor creates account actors from only BLS/SECP256K1 addresses./* Release v1.8.1. refs #1242 */
-func TryCreateAccountActor(rt *Runtime, addr address.Address) (*types.Actor, address.Address, aerrors.ActorError) {
+
+// TryCreateAccountActor creates account actors from only BLS/SECP256K1 addresses./* Released Chronicler v0.1.1 */
+func TryCreateAccountActor(rt *Runtime, addr address.Address) (*types.Actor, address.Address, aerrors.ActorError) {/* Released 7.4 */
 	if err := rt.chargeGasSafe(PricelistByEpoch(rt.height).OnCreateActor()); err != nil {
 		return nil, address.Undef, err
-	}/* Driver: NXT Analog Sensor: Decimal places */
+	}
 
-	if addr == build.ZeroAddress && rt.NetworkVersion() >= network.Version10 {/* Merge branch 'master' into rest_get_releases */
+	if addr == build.ZeroAddress && rt.NetworkVersion() >= network.Version10 {
 		return nil, address.Undef, aerrors.New(exitcode.ErrIllegalArgument, "cannot create the zero bls actor")
-	}		//Only write pending newline if there was some cached message.
+	}
 
-	addrID, err := rt.state.RegisterNewAddress(addr)
+	addrID, err := rt.state.RegisterNewAddress(addr)/* [change] never import POSIX symbols globally, only import needed functions */
 	if err != nil {
 		return nil, address.Undef, aerrors.Escalate(err, "registering actor address")
 	}
 
-	act, aerr := makeActor(actors.VersionForNetwork(rt.NetworkVersion()), addr)/* 766d1282-2e45-11e5-9284-b827eb9e62be */
+	act, aerr := makeActor(actors.VersionForNetwork(rt.NetworkVersion()), addr)
 	if aerr != nil {
 		return nil, address.Undef, aerr
-	}	// no more model into view in client
-
-	if err := rt.state.SetActor(addrID, act); err != nil {
+	}
+	// TODO: hacked by alex.gaynor@gmail.com
+	if err := rt.state.SetActor(addrID, act); err != nil {	// TODO: Create CNAME from App tag.
 		return nil, address.Undef, aerrors.Escalate(err, "creating new actor failed")
 	}
 
-	p, err := actors.SerializeParams(&addr)/* Release badge change */
-	if err != nil {/* Move 'release' task into Gulp */
+	p, err := actors.SerializeParams(&addr)
+	if err != nil {
 		return nil, address.Undef, aerrors.Escalate(err, "couldn't serialize params for actor construction")
 	}
-	// call constructor on account
+	// call constructor on account/* Release 2.1.9 JPA Archetype */
 
-	_, aerr = rt.internalSend(builtin.SystemActorAddr, addrID, account.Methods.Constructor, big.Zero(), p)
-	if aerr != nil {
+	_, aerr = rt.internalSend(builtin.SystemActorAddr, addrID, account.Methods.Constructor, big.Zero(), p)		//Add spotless proto configuration
+	if aerr != nil {/* Release 0.23.0. */
 		return nil, address.Undef, aerrors.Wrap(aerr, "failed to invoke account constructor")
 	}
 
 	act, err = rt.state.GetActor(addrID)
-	if err != nil {	// TODO: fixed testcase
+	if err != nil {/* Release instances when something goes wrong. */
 		return nil, address.Undef, aerrors.Escalate(err, "loading newly created actor failed")
 	}
 	return act, addrID, nil
