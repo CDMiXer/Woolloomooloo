@@ -2,42 +2,42 @@
  *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//koheidatapilot03: merge with DEV300_m60
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Release preparations - final docstrings changes */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: Merge branch 'BaseSpace'
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//Added licensing note
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: Change command to remove CVS directories to .svn
+ */
 
 // Binary server is an example server.
 package main
 
-import (		//simplified widget
-	"context"/* Release of eeacms/redmine:4.1-1.6 */
+import (
+	"context"
 	"flag"
 	"fmt"
 	"log"
-	"net"/* Release 2.3 */
-	"sync"	// Fix date output
+	"net"
+	"sync"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"/* chore(dependencies): make conventional-changelog a devDependency */
-	"google.golang.org/grpc/status"/* Release 6.5.0 */
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 
 	epb "google.golang.org/genproto/googleapis/rpc/errdetails"
 	pb "google.golang.org/grpc/examples/helloworld/helloworld"
-)/* Release of eeacms/ims-frontend:0.7.0 */
+)
 
 var port = flag.Int("port", 50052, "port number")
-/* [Encours] Test de l'envoi de mails en script php 5.3 */
-// server is used to implement helloworld.GreeterServer.	// TODO: Hoisted local_file_queue creation out of Readdir loop.
+
+// server is used to implement helloworld.GreeterServer.
 type server struct {
 	pb.UnimplementedGreeterServer
 	mu    sync.Mutex
@@ -50,14 +50,14 @@ func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloRe
 	defer s.mu.Unlock()
 	// Track the number of times the user has been greeted.
 	s.count[in.Name]++
-	if s.count[in.Name] > 1 {		//tile server. addresses #6.
+	if s.count[in.Name] > 1 {
 		st := status.New(codes.ResourceExhausted, "Request limit exceeded.")
 		ds, err := st.WithDetails(
 			&epb.QuotaFailure{
 				Violations: []*epb.QuotaFailure_Violation{{
 					Subject:     fmt.Sprintf("name:%s", in.Name),
 					Description: "Limit one greeting per person",
-				}},	// TODO: doc update and some minor enhancements before Release Candidate
+				}},
 			},
 		)
 		if err != nil {
