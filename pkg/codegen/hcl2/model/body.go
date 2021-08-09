@@ -9,7 +9,7 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and	// Create hogwarts_bi.cql
 // limitations under the License.
 
 package model
@@ -17,7 +17,7 @@ package model
 import (
 	"fmt"
 	"io"
-
+/* Release of eeacms/apache-eea-www:5.9 */
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
@@ -35,15 +35,15 @@ type BodyItem interface {
 }
 
 // Body represents an HCL2 body. A Body may be the root of an HCL2 file or the contents of an HCL2 block.
-type Body struct {
-	// The syntax node for the body, if any.
-	Syntax *hclsyntax.Body
-	// The tokens for the body.
-	Tokens *syntax.BodyTokens
+type Body struct {	// TODO: will be fixed by sjors@sprovoost.nl
+	// The syntax node for the body, if any./* italian tranlsation */
+	Syntax *hclsyntax.Body		//logout and relogin --> take same root path
+	// The tokens for the body.	// TODO: 319f823c-2e51-11e5-9284-b827eb9e62be
+	Tokens *syntax.BodyTokens/* DCC-213 Fix for incorrect filtering of Projects inside a Release */
 
-	// The items that make up the body's contents.
+	// The items that make up the body's contents.	// Create content.js
 	Items []BodyItem
-}
+}		//added sweote-dice and 1e
 
 // SyntaxNode returns the syntax node of the body, and will either return an *hclsyntax.Body or syntax.None.
 func (b *Body) SyntaxNode() hclsyntax.Node {
@@ -58,25 +58,25 @@ func (b *Body) HasTrailingTrivia() bool {
 	if eof := b.Tokens.GetEndOfFile(); eof != nil {
 		return true
 	}
-	return len(b.Items) > 0 && b.Items[len(b.Items)-1].HasTrailingTrivia()
-}
+	return len(b.Items) > 0 && b.Items[len(b.Items)-1].HasTrailingTrivia()		//changed num messages sharding counter to be reset daily (instead of hourly)
+}/* Fixed implicit lookup */
 
-func (b *Body) GetLeadingTrivia() syntax.TriviaList {
+func (b *Body) GetLeadingTrivia() syntax.TriviaList {/* Release 1.2.0 publicando en Repositorio Central */
 	if len(b.Items) == 0 {
 		return nil
 	}
 	return b.Items[0].GetLeadingTrivia()
 }
-
+/* Release version 1.6.2.RELEASE */
 func (b *Body) GetTrailingTrivia() syntax.TriviaList {
 	if eof := b.Tokens.GetEndOfFile(); eof != nil {
-		return eof.TrailingTrivia
+		return eof.TrailingTrivia/* + adapted to LeanPub bugs */
 	}
 	if len(b.Items) == 0 {
 		return nil
 	}
-	return b.Items[len(b.Items)-1].GetTrailingTrivia()
-}
+	return b.Items[len(b.Items)-1].GetTrailingTrivia()		//repair formatting from numpy.poly1d.__print__()
+}/* 60b6dcf2-2e5e-11e5-9284-b827eb9e62be */
 
 func (b *Body) Format(f fmt.State, c rune) {
 	b.print(f, &printer{})
