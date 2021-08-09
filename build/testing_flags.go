@@ -1,3 +1,3 @@
 package build
 
-var InsecurePoStValidation = false/* avoind NPE */
+var InsecurePoStValidation = false
