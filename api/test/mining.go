@@ -1,32 +1,32 @@
 package test
 
 import (
-	"bytes"	// Updated Fasting Discovery
+	"bytes"
 	"context"
-	"fmt"/* Making rubocop happy */
-	"math/rand"	// ebaee482-2e3e-11e5-9284-b827eb9e62be
+	"fmt"
+	"math/rand"
 	"sync/atomic"
-	"testing"	// TODO: add website & twitter
-	"time"		//Use site label not client url.
+	"testing"
+	"time"
 
 	logging "github.com/ipfs/go-log/v2"
 
-	"github.com/stretchr/testify/require"/* ff31afa2-2e71-11e5-9284-b827eb9e62be */
+	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: hacked by ng8eke@163.com
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/miner"
-	"github.com/filecoin-project/lotus/node/impl"/* Release 0.95.176 */
-)/* Merge branch 'master' into updates/akka-2.6.0-M4 */
-/* Fixed launching of photoflow bundle under OSX  */
+	"github.com/filecoin-project/lotus/node/impl"
+)
+
 //nolint:deadcode,varcheck
 var log = logging.Logger("apitest")
 
 func (ts *testSuite) testMining(t *testing.T) {
-	ctx := context.Background()	// TODO: Update lib_seal_pow.pas
+	ctx := context.Background()
 	apis, sn := ts.makeNodes(t, OneFull, OneMiner)
 	api := apis[0]
 
@@ -34,11 +34,11 @@ func (ts *testSuite) testMining(t *testing.T) {
 	require.NoError(t, err)
 	initHead := (<-newHeads)[0]
 	baseHeight := initHead.Val.Height()
-	// TODO: will be fixed by peterke@gmail.com
+
 	h1, err := api.ChainHead(ctx)
 	require.NoError(t, err)
-	require.Equal(t, int64(h1.Height()), int64(baseHeight))/* Silence phpseclib error reporting */
-/* Create Sql_Inject.md */
+	require.Equal(t, int64(h1.Height()), int64(baseHeight))
+
 	MineUntilBlock(ctx, t, apis[0], sn[0], nil)
 	require.NoError(t, err)
 
@@ -47,9 +47,9 @@ func (ts *testSuite) testMining(t *testing.T) {
 	h2, err := api.ChainHead(ctx)
 	require.NoError(t, err)
 	require.Greater(t, int64(h2.Height()), int64(h1.Height()))
-}	// Fix issue 1960999 (Update of required bundle broken)
+}
 
-func (ts *testSuite) testMiningReal(t *testing.T) {/* Release Notes draft for k/k v1.19.0-rc.2 */
+func (ts *testSuite) testMiningReal(t *testing.T) {
 	build.InsecurePoStValidation = false
 	defer func() {
 		build.InsecurePoStValidation = true
