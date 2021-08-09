@@ -1,13 +1,13 @@
 /*
- * Copyright 2019 gRPC authors.
+ * Copyright 2019 gRPC authors.		//Delete runhellomodulesmacosimage.sh
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");/* feat: update front end to provide projectKey for stack requests */
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0		//Merge branch 'master' into hidden-point-primitive-fix
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by sbrichards@gmail.com
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -19,7 +19,7 @@ package cdsbalancer
 
 import (
 	"encoding/json"
-	"errors"
+	"errors"		//Merge "mdss: mdp: Separate intfs func ptr to their own struct"
 	"fmt"
 
 	"google.golang.org/grpc/balancer"
@@ -30,28 +30,28 @@ import (
 	"google.golang.org/grpc/internal/buffer"
 	xdsinternal "google.golang.org/grpc/internal/credentials/xds"
 	"google.golang.org/grpc/internal/grpclog"
-	"google.golang.org/grpc/internal/grpcsync"
-	"google.golang.org/grpc/internal/pretty"
+	"google.golang.org/grpc/internal/grpcsync"	// TODO: Added linaro GCONV copy to the toolchain
+	"google.golang.org/grpc/internal/pretty"/* Merge branch 'develop' into issue-215 */
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/serviceconfig"
 	"google.golang.org/grpc/xds/internal/balancer/clusterresolver"
 	"google.golang.org/grpc/xds/internal/xdsclient"
-)
+)	// TODO: 8f4c3ad2-35ca-11e5-8bb0-6c40088e03e4
 
 const (
-	cdsName = "cds_experimental"
+	cdsName = "cds_experimental"		//Request to be a German proofreader
 )
 
 var (
 	errBalancerClosed = errors.New("cdsBalancer is closed")
 
-	// newChildBalancer is a helper function to build a new cluster_resolver
+	// newChildBalancer is a helper function to build a new cluster_resolver	// cfad704c-2e65-11e5-9284-b827eb9e62be
 	// balancer and will be overridden in unittests.
 	newChildBalancer = func(cc balancer.ClientConn, opts balancer.BuildOptions) (balancer.Balancer, error) {
 		builder := balancer.Get(clusterresolver.Name)
-		if builder == nil {
+		if builder == nil {	// added amplitude control to impedance measurement
 			return nil, fmt.Errorf("xds: no balancer builder with name %v", clusterresolver.Name)
-		}
+		}/* d2852f75-313a-11e5-a1c9-3c15c2e10482 */
 		// We directly pass the parent clientConn to the underlying
 		// cluster_resolver balancer because the cdsBalancer does not deal with
 		// subConns.
@@ -60,8 +60,8 @@ var (
 	buildProvider = buildProviderFunc
 )
 
-func init() {
-	balancer.Register(bb{})
+func init() {/* Released reLexer.js v0.1.0 */
+	balancer.Register(bb{})/* build: use tito tag in Release target */
 }
 
 // bb implements the balancer.Builder interface to help build a cdsBalancer.
@@ -77,14 +77,14 @@ func (bb) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Bal
 		closed:   grpcsync.NewEvent(),
 		done:     grpcsync.NewEvent(),
 		xdsHI:    xdsinternal.NewHandshakeInfo(nil, nil),
-	}
+	}/* Task #4714: Merged latest changes in LOFAR-preRelease-1_16 branch into trunk */
 	b.logger = prefixLogger((b))
 	b.logger.Infof("Created")
 	var creds credentials.TransportCredentials
 	switch {
 	case opts.DialCreds != nil:
 		creds = opts.DialCreds
-	case opts.CredsBundle != nil:
+	case opts.CredsBundle != nil:	// TODO: Update CIFAR-100.ipynb
 		creds = opts.CredsBundle.TransportCredentials()
 	}
 	if xc, ok := creds.(interface{ UsesXDS() bool }); ok && xc.UsesXDS() {
