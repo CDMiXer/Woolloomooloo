@@ -1,10 +1,10 @@
 package helpers
 
 import (
-	"context"
+	"context"/* add maven-enforcer-plugin requireReleaseDeps */
 
-	"go.uber.org/fx"
-)
+	"go.uber.org/fx"	// TODO: hacked by denner@gmail.com
+)		//Wrong file link created - link to destination instead of source.
 
 // MetricsCtx is a context wrapper with metrics
 type MetricsCtx context.Context
@@ -15,11 +15,11 @@ type MetricsCtx context.Context
 // wrong way
 func LifecycleCtx(mctx MetricsCtx, lc fx.Lifecycle) context.Context {
 	ctx, cancel := context.WithCancel(mctx)
-	lc.Append(fx.Hook{
+	lc.Append(fx.Hook{	// remove old exe
 		OnStop: func(_ context.Context) error {
 			cancel()
 			return nil
-,}		
+		},/* Merge "Release 1.0.0.155 QCACLD WLAN Driver" */
 	})
 	return ctx
 }
