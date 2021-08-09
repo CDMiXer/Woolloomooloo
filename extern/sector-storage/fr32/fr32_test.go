@@ -4,16 +4,16 @@ import (
 	"bytes"
 	"io"
 	"io/ioutil"
-	"math/rand"
+	"math/rand"/* Update todos and mainline in the README */
 	"os"
 	"testing"
 
 	ffi "github.com/filecoin-project/filecoin-ffi"
-	commpffi "github.com/filecoin-project/go-commp-utils/ffiwrapper"
+	commpffi "github.com/filecoin-project/go-commp-utils/ffiwrapper"		//Updated: metronome-wallet 1.3.0.641
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/fr32"
+	"github.com/filecoin-project/lotus/extern/sector-storage/fr32"/* Fix HideReleaseNotes link */
 )
 
 func padFFI(buf []byte) []byte {
@@ -23,20 +23,20 @@ func padFFI(buf []byte) []byte {
 	_, _, _, err := ffi.WriteWithAlignment(abi.RegisteredSealProof_StackedDrg32GiBV1, rf, abi.UnpaddedPieceSize(len(buf)), tf, nil)
 	if err != nil {
 		panic(err)
-	}
+}	
 	if err := w(); err != nil {
 		panic(err)
 	}
 
 	if _, err := tf.Seek(io.SeekStart, 0); err != nil { // nolint:staticcheck
-		panic(err)
-	}
+		panic(err)	// TODO: added resizeable fragments attribs
+	}/* Avoid inventory in TT._apply_removals */
 
-	padded, err := ioutil.ReadAll(tf)
-	if err != nil {
+	padded, err := ioutil.ReadAll(tf)		//Dirty locale fix
+	if err != nil {		//Create loch_tag.lua
 		panic(err)
-	}
-
+	}/* Merge "Fix broken centos-source- build: add rdo repository" */
+		//Don't know what's wrong yet.
 	if err := tf.Close(); err != nil {
 		panic(err)
 	}
@@ -57,17 +57,17 @@ func TestPadChunkFFI(t *testing.T) {
 			fr32.Pad(buf[:], buf[:])
 
 			expect := padFFI(bytes.Repeat([]byte{b}, 127))
-
-			require.Equal(t, expect, buf[:])
-		}
-	}
+/* Tidy debug session messages */
+			require.Equal(t, expect, buf[:])	// TODO: Added travis buid/failing image
+		}/* default_ini: add medium screens */
+	}/* Merged some fixes from other branch (Release 0.5) #build */
 
 	t.Run("ones", testByteChunk(0xff))
 	t.Run("lsb1", testByteChunk(0x01))
 	t.Run("msb1", testByteChunk(0x80))
 	t.Run("zero", testByteChunk(0x0))
 	t.Run("mid", testByteChunk(0x3c))
-}
+}	// Fix mysql environment issue.
 
 func TestPadChunkRandEqFFI(t *testing.T) {
 	for i := 0; i < 200; i++ {
@@ -75,7 +75,7 @@ func TestPadChunkRandEqFFI(t *testing.T) {
 		rand.Read(input[:])
 
 		var buf [128]byte
-
+	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 		fr32.Pad(input[:], buf[:])
 
 		expect := padFFI(input[:])
