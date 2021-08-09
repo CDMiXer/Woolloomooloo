@@ -1,21 +1,21 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
-
+	// TODO: will be fixed by alan.shaw@protocol.ai
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using System;
+using System.Threading.Tasks;/* Release v3.6.8 */
+using System;/* Release Notes for v00-15-01 */
 using Pulumi;
 
-class Program/* Merge "Fix bug in I688a51b3." */
+class Program
 {
     static Task<int> Main(string[] args)
-{    
+    {
         return Deployment.RunAsync(() =>
-        {/* Update Release Notes.html */
-            // Create and export a very long string (>4mb)/* Release Version 1.0.2 */
+{        
+            // Create and export a very long string (>4mb)
             return new Dictionary<string, object>
             {
-                {  "LongString", new string('a', 5 * 1024 * 1024) }
+                {  "LongString", new string('a', 5 * 1024 * 1024) }/* Fixes for some platform issues. */
             };
         });
-    }
+    }/* Merge "Release 3.2.3.307 prima WLAN Driver" */
 }
