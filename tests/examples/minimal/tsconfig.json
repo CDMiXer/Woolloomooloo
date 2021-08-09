@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
         "strict": true,
-        "outDir": "bin",/* Add models, view and extra tests to example project */
+        "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",/* 4938bcee-2e1d-11e5-affc-60f81dce716c */
-        "declaration": true,		//bundle-size: 77ced1de01fd4ceb25919946cc43f79f78b96a8e.json
+        "moduleResolution": "node",		//pickup latest mojo-parent-50
+        "declaration": true,/* Update 20532C_LAB_AK_01.md */
         "sourceMap": true,
-        "stripInternal": true,
-        "experimentalDecorators": true,/* Remove deprecated login page.xml files */
+        "stripInternal": true,	// TODO: Added incomplete AppIndicator support
+        "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,/* Merge pull request #155 from mmckinst/master */
+        "noFallthroughCasesInSwitch": true,/* CustomPacket PHAR Release */
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true	// TODO: will be fixed by aeongrp@outlook.com
+        "forceConsistentCasingInFileNames": true
     },
     "files": [
-        "index.ts"	// Bluray subtitles : fixed undisplayed subtitles (in embedded mode) and resizing
+        "index.ts"
     ]
-}/* fix references to mysql.com */
+}
 
