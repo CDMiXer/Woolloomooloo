@@ -1,40 +1,40 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License	// TODO: readme verbeterd
 // that can be found in the LICENSE file.
 
 package user
-	// 443ef6a8-35c6-11e5-b1c8-6c40088e03e4
+/* Created Giotto - détail.jpg */
 import (
-	"encoding/json"	// autosync function
+	"encoding/json"
 	"net/http/httptest"
 	"testing"
-/* Create stub chat text plugin and link into Twirlip main */
-	"github.com/drone/drone/handler/api/request"/* Update Impressum */
+
+	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/core"
 
-	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp"		//Merge "smw.dataItem() JavaScript Prototype classes"
 )
 
 func TestFind(t *testing.T) {
-	mockUser := &core.User{/* Release for 3.15.1 */
-		ID:    1,	// Added a reference to cessionarioCommittente in Invoice
-		Login: "octocat",
-	}
+	mockUser := &core.User{		//fixing multiple keys
+		ID:    1,
+		Login: "octocat",	// TODO: removes patch set statistics, moves review id in diff view title
+	}/* Task #3157: Merge of latest LOFAR-Release-0_94 branch changes into trunk */
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/api/user", nil)
 	r = r.WithContext(
 		request.WithUser(r.Context(), mockUser),
-	)
+)	
 
 	HandleFind()(w, r)
 	if got, want := w.Code, 200; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)
-	}
-/* 1.0.4Release */
+		t.Errorf("Want response code %d, got %d", want, got)	// a7ecbb28-2e4f-11e5-9284-b827eb9e62be
+	}/* Add dumpcsv command */
+
 	got, want := &core.User{}, mockUser
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
-	}/* Pre-Release 2.43 */
-}
+	}
+}		//Rename settings.py to settings.py.sample
