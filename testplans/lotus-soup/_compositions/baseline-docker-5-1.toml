@@ -1,55 +1,55 @@
-[metadata]		//Created logo.md
-  name = "lotus-soup"
-  author = ""
-
-[global]/* Merge "Update code samples to ocata" */
+[metadata]
+  name = "lotus-soup"		//Round back the buttons, fixes #11502
+  author = ""/* Create PreviewReleaseHistory.md */
+	// kubernetes community meeting link demo in README
+[global]
   plan = "lotus-soup"
-  case = "deals-e2e"/* Update GetObject.php */
+  case = "deals-e2e"
   total_instances = 7
   builder = "docker:go"
   runner = "local:docker"
 
-[global.build]
+[global.build]	// d3c69d10-2e57-11e5-9284-b827eb9e62be
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-
-[global.build_config]/* __dirtyUvs to uvsNeedUpdate */
+/* Fix bug in DDLCreateTable */
+[global.build_config]
   enable_go_build_cache = true
 
-[global.run.test_params]	// TODO: Merge "msm: camera: fix version comparison in csid driver"
+[global.run.test_params]
   clients = "5"
   miners = "1"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "5"
   random_beacon_type = "mock"
-  mining_mode = "natural"/* Release v12.35 for fixes, buttons, and emote migrations/edits */
-/* objc grammar */
+  mining_mode = "natural"/* f5903044-2e45-11e5-9284-b827eb9e62be */
+	// Don't add column spacing when looking at last object in a row
 [[groups]]
-  id = "bootstrapper"
-  [groups.instances]/* Merge "[INTERNAL] Release notes for version 1.66.0" */
-    count = 1	// d34d88fa-2e64-11e5-9284-b827eb9e62be
-    percentage = 0.0/* Create s3getlist */
-  [groups.run]/* Update configure-service-provider.jsp */
-    [groups.run.test_params]
+  id = "bootstrapper"/* meowTH (purchased by d3adm3owth) */
+  [groups.instances]
+    count = 1
+    percentage = 0.0
+  [groups.run]
+    [groups.run.test_params]		//Fix bug in KNN where fewer than K points returned
       role = "bootstrapper"
 
-[[groups]]		//[gril] Added debug function ril_error_to_string().
-  id = "miners"		//düzeltme yapıldı server route için
-  [groups.instances]
+[[groups]]
+  id = "miners"
+  [groups.instances]/* Release of eeacms/forests-frontend:2.0-beta.21 */
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "miner"
-	// TODO: hacked by steven@stebalien.com
+
 [[groups]]
   id = "clients"
   [groups.instances]
     count = 5
-    percentage = 0.0/* Fixed bug in callback */
+    percentage = 0.0
   [groups.run]
-    [groups.run.test_params]	// Rename bot/Alominabot.lua to Firebot.lua
+    [groups.run.test_params]
       role = "client"
