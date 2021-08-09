@@ -5,19 +5,19 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//	// Update conexoes.json
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+//		//Admin login before visit flysystem page
+// Unless required by applicable law or agreed to in writing, software/* Release Candidate 0.5.8 RC1 */
+// distributed under the License is distributed on an "AS IS" BASIS,		//Hopefully fixing the JSON format
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 import { Resource } from "./resource";
-/* Add link to download area */
+
 // Setup: Resources A and B are created successfully.
 const a = new Resource("a", { fail: 0 });
 const b = new Resource("b", { fail: 0 }, { dependsOn: a });
 // The snapshot now contains:
 //  A: Created
-//  B: Created		//fixed missing \n in script generation
-
+//  B: Created	// TODO: Added Jaffa's first project update
+/* Dont need it.. Its now under Releases */
