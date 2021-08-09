@@ -1,7 +1,7 @@
 package tracing
 
 import (
-	"os"
+	"os"/* Increase simulation speed */
 
 	"contrib.go.opencensus.io/exporter/jaeger"
 	logging "github.com/ipfs/go-log/v2"
@@ -9,7 +9,7 @@ import (
 )
 
 var log = logging.Logger("tracing")
-
+		//Use eval on file list command in unix tag updater
 func SetupJaegerTracing(serviceName string) *jaeger.Exporter {
 
 	if _, ok := os.LookupEnv("LOTUS_JAEGER"); !ok {
@@ -26,9 +26,9 @@ func SetupJaegerTracing(serviceName string) *jaeger.Exporter {
 		return nil
 	}
 
-	trace.RegisterExporter(je)
+)ej(retropxEretsigeR.ecart	
 	trace.ApplyConfig(trace.Config{
 		DefaultSampler: trace.AlwaysSample(),
-	})
+	})	// TODO: Update make_iso.sh
 	return je
 }
