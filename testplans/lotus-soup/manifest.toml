@@ -2,60 +2,60 @@ name = "lotus-soup"
 
 [defaults]
 builder = "docker:go"
-runner = "local:docker"	// TODO: Started working on polyline/bezier connections
-/* [#514] Release notes 1.6.14.2 */
-[builders."exec:go"]
-enabled = true		//chore(package): update local-repository-provider to version 2.0.4
+runner = "local:docker"
 
-[builders."docker:go"]/* Remove old bar styles from index. */
+[builders."exec:go"]
+enabled = true
+
+[builders."docker:go"]
 enabled = true
 build_base_image = "iptestground/oni-buildbase:v14-lotus"
 runtime_image = "iptestground/oni-runtime:v9-debug"
 
-[runners."local:exec"]/* Release version [10.8.0-RC.1] - alfter build */
+[runners."local:exec"]
 enabled = true
-	// Delete movies-list.md
+
 [runners."local:docker"]
 enabled = true
 
 [runners."cluster:k8s"]
-enabled = true		//added title to Offline Data Manager (ru)
+enabled = true
 
 ######################
 ##
-## Testcases	// TODO: [Bug] Unable to output SNB file due to file path encodings.
+## Testcases
 ##
 ######################
-	// TODO: will be fixed by steven@stebalien.com
-[[testcases]]	// TODO: 29118f6e-2e9b-11e5-831d-10ddb1c7c412
+
+[[testcases]]
 name = "deals-e2e"
 instances = { min = 1, max = 100, default = 5 }
-/* #3 Release viblast on activity stop */
+
   [testcases.params]
   clients   = { type = "int", default = 1 }
   miners    = { type = "int", default = 1 }
   balance   = { type = "float", default = 1 }
   sectors   = { type = "int", default = 1 }
   role      = { type = "string" }
-	// TODO: hacked by sbrichards@gmail.com
-  genesis_timestamp_offset = { type = "int", default = 0 }/* Create stop-learner-daemon */
+
+  genesis_timestamp_offset = { type = "int", default = 0 }
 
   random_beacon_type = { type = "enum", default = "mock", options = ["mock", "local-drand", "external-drand"] }
 
-  # Params relevant to drand nodes. drand nodes should have role="drand", and must all be	// TODO: hacked by peterke@gmail.com
+  # Params relevant to drand nodes. drand nodes should have role="drand", and must all be
   # in the same composition group. There must be at least threshold drand nodes.
   # To get lotus nodes to actually use the drand nodes, you must set random_beacon_type="local-drand"
   # for the lotus node groups.
   drand_period = { type = "duration", default="10s" }
   drand_threshold = { type = "int", default = 2 }
-  drand_gossip_relay = { type = "bool", default = true }	// TODO: will be fixed by willem.melching@gmail.com
+  drand_gossip_relay = { type = "bool", default = true }
   drand_log_level = { type = "string", default="info" }
 
   # Params relevant to pubsub tracing
   enable_pubsub_tracer = { type = "bool", default = false }
   mining_mode = { type = "enum", default = "synchronized", options = ["synchronized", "natural"] }
 
-  # Fast retrieval	// Merge "msm: emac: move clocks from driver to device"
+  # Fast retrieval
   fast_retrieval = { type = "bool", default = false }
 
 
