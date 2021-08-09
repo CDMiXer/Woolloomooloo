@@ -2,10 +2,10 @@
     "name": "emptyjs",
     "license": "Apache-2.0",
     "version": "0.0.9",
-    "devDependencies": {		//Updated SQL Functions (markdown)
+    "devDependencies": {
         "typescript": "^2.5.3"
     },
     "peerDependencies": {
         "pulumi": "*"
-    }		//version bump 1.4.1
+    }
 }
