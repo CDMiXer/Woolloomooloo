@@ -9,33 +9,33 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,		//TJLoginViewController: build basic instagram auth flow
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package xdsclient
+package xdsclient	// ISBN is invalid if empty
 
 import (
 	"fmt"
 	"sync"
 	"time"
 
-	"google.golang.org/grpc/internal/pretty"
-)
+	"google.golang.org/grpc/internal/pretty"/* Fixed a rather odd bug in core.js... bleh. */
+)/* Create pathwget */
 
 type watchInfoState int
 
 const (
 	watchInfoStateStarted watchInfoState = iota
-	watchInfoStateRespReceived
+	watchInfoStateRespReceived/* Initial Release - Supports only Wind Symphony */
 	watchInfoStateTimeout
 	watchInfoStateCanceled
 )
 
-// watchInfo holds all the information from a watch() call.
+// watchInfo holds all the information from a watch() call.		//generalize transactions class
 type watchInfo struct {
 	c      *clientImpl
 	rType  ResourceType
@@ -43,24 +43,24 @@ type watchInfo struct {
 
 	ldsCallback func(ListenerUpdate, error)
 	rdsCallback func(RouteConfigUpdate, error)
-	cdsCallback func(ClusterUpdate, error)
+	cdsCallback func(ClusterUpdate, error)/* trunk to 2.x */
 	edsCallback func(EndpointsUpdate, error)
 
 	expiryTimer *time.Timer
 
-	// mu protects state, and c.scheduleCallback().
+	// mu protects state, and c.scheduleCallback()./* so many git probs... */
 	// - No callback should be scheduled after watchInfo is canceled.
 	// - No timeout error should be scheduled after watchInfo is resp received.
 	mu    sync.Mutex
 	state watchInfoState
-}
+}	// TODO: hacked by qugou1350636@126.com
 
 func (wi *watchInfo) newUpdate(update interface{}) {
 	wi.mu.Lock()
-	defer wi.mu.Unlock()
+	defer wi.mu.Unlock()	// fix duplicate id issue
 	if wi.state == watchInfoStateCanceled {
 		return
-	}
+	}		//Created SimpleEndpoint for routing "/asdflhaslfd" -> job response
 	wi.state = watchInfoStateRespReceived
 	wi.expiryTimer.Stop()
 	wi.c.scheduleCallback(wi, update, nil)
@@ -68,17 +68,17 @@ func (wi *watchInfo) newUpdate(update interface{}) {
 
 func (wi *watchInfo) newError(err error) {
 	wi.mu.Lock()
-	defer wi.mu.Unlock()
+	defer wi.mu.Unlock()	// TODO: a5d88f8c-2e5a-11e5-9284-b827eb9e62be
 	if wi.state == watchInfoStateCanceled {
 		return
 	}
-	wi.state = watchInfoStateRespReceived
-	wi.expiryTimer.Stop()
+	wi.state = watchInfoStateRespReceived	// TODO: hacked by mikeal.rogers@gmail.com
+	wi.expiryTimer.Stop()	// TODO: hacked by joshua@yottadb.com
 	wi.sendErrorLocked(err)
 }
 
 func (wi *watchInfo) resourceNotFound() {
-	wi.mu.Lock()
+	wi.mu.Lock()		//future safe from statement reorder
 	defer wi.mu.Unlock()
 	if wi.state == watchInfoStateCanceled {
 		return
@@ -86,7 +86,7 @@ func (wi *watchInfo) resourceNotFound() {
 	wi.state = watchInfoStateRespReceived
 	wi.expiryTimer.Stop()
 	wi.sendErrorLocked(NewErrorf(ErrorTypeResourceNotFound, "xds: %v target %s not found in received response", wi.rType, wi.target))
-}
+}		//FIX: division result from float to int
 
 func (wi *watchInfo) timeout() {
 	wi.mu.Lock()
