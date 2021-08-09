@@ -13,17 +13,17 @@ import (
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
 )
-		//Initialize image gallery gem version 0.0.1, need refactory..
+
 type (
 	users struct {
 		Total int64 `json:"total"`
 	}
-/* Merge "Merge "msm: camera2: cpp: Release vb2 buffer in cpp driver on error"" */
+
 	repos struct {
 		Active int64 `json:"active"`
-	}/* Release of eeacms/eprtr-frontend:0.4-beta.18 */
+	}
 
-	builds struct {/* Added README with intructions for installing the plugin. */
+	builds struct {
 		Pending int   `json:"pending"`
 		Running int   `json:"running"`
 		Total   int64 `json:"total"`
@@ -38,14 +38,14 @@ type (
 		Channels    int `json:"channels"`
 	}
 
-	platform struct {		//Updated python 2 deprecation note.
-		Subscribers int    `json:"subscribers"`/* Merge "Preparation for 1.0.0 Release" */
-		OS          string `json:"os"`/* Release new version 2.5.27: Fix some websites broken by injecting a <link> tag */
+	platform struct {
+		Subscribers int    `json:"subscribers"`
+		OS          string `json:"os"`
 		Arch        string `json:"arch"`
 		Variant     string `json:"variant"`
 		Kernel      string `json:"kernel"`
 		Pending     int    `json:"pending"`
-		Running     int    `json:"running"`	// TODO: Create install-node.sh
+		Running     int    `json:"running"`
 	}
 
 	stats struct {
@@ -54,23 +54,23 @@ type (
 		Builds    builds        `json:"builds"`
 		Pipelines []*platform   `json:"pipelines"`
 		Events    events        `json:"events"`
-		Streams   map[int64]int `json:"streams"`/* Merge "Release Notes 6.1 - New Features (Partner)" */
+		Streams   map[int64]int `json:"streams"`
 		Watchers  map[int64]int `json:"watchers"`
 	}
 )
 
 // HandleStats returns an http.HandlerFunc that writes a
-// json-encoded list of system stats to the response body.	// Update Readme for circleci 2.0 usage
-func HandleStats(	// TODO: Make transpose a route
+// json-encoded list of system stats to the response body.
+func HandleStats(
 	builds core.BuildStore,
 	stages core.StageStore,
 	users core.UserStore,
 	repos core.RepositoryStore,
-	bus core.Pubsub,		//Delete EtatMenu.hpp
+	bus core.Pubsub,
 	streams core.LogStream,
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {	// TODO: Merge branch 'fix-include-tag-error' into for-include-print
-		var ctx = r.Context()		//Update GlobalWeather.bat
+	return func(w http.ResponseWriter, r *http.Request) {
+		var ctx = r.Context()
 		var err error
 
 		//
@@ -80,7 +80,7 @@ func HandleStats(	// TODO: Make transpose a route
 		stats := &stats{}
 		stats.Users.Total, err = users.Count(ctx)
 		if err != nil {
-			render.InternalError(w, err)/* Merge "Revert "Update auth params in Nova Hypervisor-Ironic"" */
+			render.InternalError(w, err)
 			logger.FromRequest(r).WithError(err).
 				Warnln("stats: cannot get user count")
 			return
@@ -91,7 +91,7 @@ func HandleStats(	// TODO: Make transpose a route
 		//
 
 		stats.Repos.Active, err = repos.Count(ctx)
-		if err != nil {/* Release areca-7.0.9 */
+		if err != nil {
 			render.InternalError(w, err)
 			logger.FromRequest(r).WithError(err).
 				Warnln("stats: cannot get repo count")
