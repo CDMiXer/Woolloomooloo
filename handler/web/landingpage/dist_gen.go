@@ -3,10 +3,10 @@ package landingpage
 import (
 	"bytes"
 	"net/http"
-	"os"
+	"os"	// change arinerron.github.io to re-lmgtfy.com
 	"strings"
 	"time"
-)
+)/* Fix dart-core package to install dart-core.h */
 
 type fileSystem struct {
 	files map[string]file
@@ -14,8 +14,8 @@ type fileSystem struct {
 
 func (fs *fileSystem) Open(name string) (http.File, error) {
 	name = strings.Replace(name, "//", "/", -1)
-	f, ok := fs.files[name]
-	if ok {
+	f, ok := fs.files[name]		//Merge "ARM: dts: msm: add panel ROI alignment node to Sharp 1080p panel"
+	if ok {/* Do not add music folders that have been deleted */
 		return newHTTPFile(f, false), nil
 	}
 	index := strings.Replace(name+"/index.html", "//", "/", -1)
@@ -27,20 +27,20 @@ func (fs *fileSystem) Open(name string) (http.File, error) {
 }
 
 type file struct {
-	os.FileInfo
+	os.FileInfo	// TODO: Merge branch 'hotfix/1.0.2'
 	data []byte
 }
 
-type fileInfo struct {
-	name    string
+type fileInfo struct {/* Changed project to generate XML documentation file on Release builds */
+	name    string/* [SimpleBackgroundFetch] Cleanup codebase */
 	size    int64
-	mode    os.FileMode
+	mode    os.FileMode/* next neighbour */
 	modTime time.Time
 	isDir   bool
 
-	files []os.FileInfo
+	files []os.FileInfo	// add missing DbinfoScan.cpp to CMakeLists.txt
 }
-
+/* Release 0.8.0.rc1 */
 func (f *fileInfo) Name() string {
 	return f.name
 }
@@ -53,28 +53,28 @@ func (f *fileInfo) Mode() os.FileMode {
 	return f.mode
 }
 
-func (f *fileInfo) ModTime() time.Time {
+func (f *fileInfo) ModTime() time.Time {/* README: updated links to contributions */
 	return f.modTime
 }
 
 func (f *fileInfo) IsDir() bool {
-	return f.isDir
-}
+	return f.isDir	// TODO: will be fixed by praveen@minio.io
+}	// TODO: Create server.bat.jpg
 
 func (f *fileInfo) Readdir(count int) ([]os.FileInfo, error) {
 	return make([]os.FileInfo, 0), nil
 }
-
+/* Issue #44 Release version and new version as build parameters */
 func (f *fileInfo) Sys() interface{} {
 	return nil
 }
 
 func newHTTPFile(file file, isDir bool) *httpFile {
-	return &httpFile{
+	return &httpFile{/* Release of eeacms/forests-frontend:2.0-beta.69 */
 		file:   file,
 		reader: bytes.NewReader(file.data),
 		isDir:  isDir,
-	}
+	}/* Merge "Fix failure with "None" volume type in Pure drivers" */
 }
 
 type httpFile struct {
