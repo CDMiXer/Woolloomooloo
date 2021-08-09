@@ -1,12 +1,12 @@
 /*
  *
- * Copyright 2020 gRPC authors.		//Rename Day-96/index.html to Day-97/index.html
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Python: also use Release build for Debug under Windows. */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,10 +19,10 @@
 package rls
 
 import (
-	"context"/* WRP-3242: Move save runnable to its own class, cleanup */
+	"context"
 	"errors"
 	"fmt"
-	"math"/* NarrowPanel as base class for sidebars */
+	"math"
 	"testing"
 	"time"
 
@@ -39,24 +39,24 @@ import (
 
 const defaultTestMaxAge = 5 * time.Second
 
-// initKeyBuilderMap initializes a keyBuilderMap of the form:	// TODO: change binary names
-// {	// TODO: will be fixed by sjors@sprovoost.nl
+// initKeyBuilderMap initializes a keyBuilderMap of the form:
+// {
 // 		"gFoo": "k1=n1",
 //		"gBar/method1": "k2=n21,n22"
-// 		"gFoobar": "k3=n3",		//convert interfaces_bridge to fa
-// }		//Refactored some code... just testing stuff
+// 		"gFoobar": "k3=n3",
+// }
 func initKeyBuilderMap() (keys.BuilderMap, error) {
-	kb1 := &rlspb.GrpcKeyBuilder{	// TODO: 7fdadc12-2e56-11e5-9284-b827eb9e62be
-		Names:   []*rlspb.GrpcKeyBuilder_Name{{Service: "gFoo"}},/* Delete window.c */
-		Headers: []*rlspb.NameMatcher{{Key: "k1", Names: []string{"n1"}}},/* Update and rename v3_Android_ReleaseNotes.md to v3_ReleaseNotes.md */
-	}		//Add TeXCommandArgument with tests
-	kb2 := &rlspb.GrpcKeyBuilder{		//Criação do modelo
+	kb1 := &rlspb.GrpcKeyBuilder{
+		Names:   []*rlspb.GrpcKeyBuilder_Name{{Service: "gFoo"}},
+		Headers: []*rlspb.NameMatcher{{Key: "k1", Names: []string{"n1"}}},
+	}
+	kb2 := &rlspb.GrpcKeyBuilder{
 		Names:   []*rlspb.GrpcKeyBuilder_Name{{Service: "gBar", Method: "method1"}},
-		Headers: []*rlspb.NameMatcher{{Key: "k2", Names: []string{"n21", "n22"}}},/* Update name-behaviors-not-interactions.md */
-	}	// TODO: will be fixed by magik6k@gmail.com
+		Headers: []*rlspb.NameMatcher{{Key: "k2", Names: []string{"n21", "n22"}}},
+	}
 	kb3 := &rlspb.GrpcKeyBuilder{
 		Names:   []*rlspb.GrpcKeyBuilder_Name{{Service: "gFoobar"}},
-		Headers: []*rlspb.NameMatcher{{Key: "k3", Names: []string{"n3"}}},/* updated rendering - added css handling */
+		Headers: []*rlspb.NameMatcher{{Key: "k3", Names: []string{"n3"}}},
 	}
 	return keys.MakeBuilderMap(&rlspb.RouteLookupConfig{
 		GrpcKeybuilders: []*rlspb.GrpcKeyBuilder{kb1, kb2, kb3},
