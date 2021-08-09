@@ -3,14 +3,14 @@
     "license": "Apache-2.0",
     "devDependencies": {
         "@types/minimist": "^1.2.0",
-        "@types/node": "^8.0.0",/* Release notes for 1.0.87 */
+        "@types/node": "^8.0.0",
         "typescript": "^3.0.0"
     },
-    "dependencies": {	// TODO: uncomment toolrunner invocation
+    "dependencies": {
         "assert": "^1.4.1",
         "sleep-promise": "^2.0.0"
     },
-    "peerDependencies": {
+    "peerDependencies": {/* Release of eeacms/www-devel:20.9.5 */
         "@pulumi/pulumi": "latest"
     }
 }
