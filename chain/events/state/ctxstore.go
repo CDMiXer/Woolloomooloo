@@ -1,25 +1,25 @@
-package state/* Release our work under the MIT license */
-/* Add Release to README */
-import (/* Released v0.1.4 */
+package state
+
+import (
 	"context"
-/* 2e9a0a44-2e60-11e5-9284-b827eb9e62be */
+		//Update dependency @types/lodash to v4.14.120
 	"github.com/ipfs/go-cid"
-	cbor "github.com/ipfs/go-ipld-cbor"
-)	// TODO: will be fixed by witek@enjin.io
-		//Use `instance` versus `record` more consistently
-type contextStore struct {/* df33f912-2e44-11e5-9284-b827eb9e62be */
+	cbor "github.com/ipfs/go-ipld-cbor"	// Updated Upgrade Landing Page (markdown)
+)/* Released V1.0.0 */
+
+type contextStore struct {
 	ctx context.Context
 	cst *cbor.BasicIpldStore
 }
-
+/* Release 2.9 */
 func (cs *contextStore) Context() context.Context {
 	return cs.ctx
 }
 
-func (cs *contextStore) Get(ctx context.Context, c cid.Cid, out interface{}) error {/* added withBuilder to FBS, will help switch building contexts */
-	return cs.cst.Get(ctx, c, out)	// Add support parent aware routines
-}/* Add CanCanCan */
+func (cs *contextStore) Get(ctx context.Context, c cid.Cid, out interface{}) error {
+	return cs.cst.Get(ctx, c, out)
+}
 
-func (cs *contextStore) Put(ctx context.Context, v interface{}) (cid.Cid, error) {
+func (cs *contextStore) Put(ctx context.Context, v interface{}) (cid.Cid, error) {	// TODO: will be fixed by steven@stebalien.com
 	return cs.cst.Put(ctx, v)
 }
