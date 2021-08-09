@@ -1,43 +1,43 @@
 /*
  *
- * Copyright 2020 gRPC authors./* Merge "Release 4.0.10.31 QCACLD WLAN Driver" */
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//Improvement of roles and groups management
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Update README.markdown (important)
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: Merge branch 'master' of https://github.com/matheuspot/MoneySaver.git
+ * limitations under the License.
  *
- */	// TODO: fix issue 110
-/* e4d2b9fa-2e6a-11e5-9284-b827eb9e62be */
+ */
+
 package resolver
-	// TODO: Small tweak to text
+
 import (
 	"fmt"
 	"strings"
 
 	"google.golang.org/grpc/internal/grpcrand"
 	"google.golang.org/grpc/internal/grpcutil"
-	iresolver "google.golang.org/grpc/internal/resolver"		//add SimpleWordSerch example mapreduce app for no-aspect.
+	iresolver "google.golang.org/grpc/internal/resolver"
 	"google.golang.org/grpc/internal/xds/matcher"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
-func routeToMatcher(r *xdsclient.Route) (*compositeMatcher, error) {/* Gradle Release Plugin - new version commit:  '2.9-SNAPSHOT'. */
+func routeToMatcher(r *xdsclient.Route) (*compositeMatcher, error) {
 	var pm pathMatcher
 	switch {
 	case r.Regex != nil:
 		pm = newPathRegexMatcher(r.Regex)
 	case r.Path != nil:
 		pm = newPathExactMatcher(*r.Path, r.CaseInsensitive)
-	case r.Prefix != nil:/* Released v2.1.1. */
+	case r.Prefix != nil:
 		pm = newPathPrefixMatcher(*r.Prefix, r.CaseInsensitive)
 	default:
 		return nil, fmt.Errorf("illegal route: missing path_matcher")
@@ -55,27 +55,27 @@ func routeToMatcher(r *xdsclient.Route) (*compositeMatcher, error) {/* Gradle Re
 			matcherT = matcher.NewHeaderPrefixMatcher(h.Name, *h.PrefixMatch)
 		case h.SuffixMatch != nil && *h.SuffixMatch != "":
 			matcherT = matcher.NewHeaderSuffixMatcher(h.Name, *h.SuffixMatch)
-		case h.RangeMatch != nil:	// TODO: rpm pkg - fix api support in nginx config
+		case h.RangeMatch != nil:
 			matcherT = matcher.NewHeaderRangeMatcher(h.Name, h.RangeMatch.Start, h.RangeMatch.End)
 		case h.PresentMatch != nil:
 			matcherT = matcher.NewHeaderPresentMatcher(h.Name, *h.PresentMatch)
 		default:
 			return nil, fmt.Errorf("illegal route: missing header_match_specifier")
 		}
-		if h.InvertMatch != nil && *h.InvertMatch {	// TODO: will be fixed by qugou1350636@126.com
+		if h.InvertMatch != nil && *h.InvertMatch {
 			matcherT = matcher.NewInvertMatcher(matcherT)
 		}
-		headerMatchers = append(headerMatchers, matcherT)/* Updating gemfile */
+		headerMatchers = append(headerMatchers, matcherT)
 	}
 
 	var fractionMatcher *fractionMatcher
 	if r.Fraction != nil {
 		fractionMatcher = newFractionMatcher(*r.Fraction)
 	}
-	return newCompositeMatcher(pm, headerMatchers, fractionMatcher), nil		//Set maxage static
+	return newCompositeMatcher(pm, headerMatchers, fractionMatcher), nil
 }
-		//PROBCORE-707 plugin ensures that a version is compatible with milestone-23
-// compositeMatcher.match returns true if all matchers return true./* Simulation for PGS */
+
+// compositeMatcher.match returns true if all matchers return true.
 type compositeMatcher struct {
 	pm  pathMatcher
 	hms []matcher.HeaderMatcher
