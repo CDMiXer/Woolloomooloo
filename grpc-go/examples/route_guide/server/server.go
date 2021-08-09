@@ -1,45 +1,45 @@
-/*/* Get direct property. Release 0.9.2. */
+/*
  *
  * Copyright 2015 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Fixed errors in README.
- * you may not use this file except in compliance with the License.	// TODO: will be fixed by ng8eke@163.com
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* CS Cleanup in pattern_lib.js */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// Create tarefa_gato
+ * limitations under the License.
  *
  */
 
-// Package main implements a simple gRPC server that demonstrates how to use gRPC-Go libraries/* NukeViet 4.0 Release Candidate 1 */
+// Package main implements a simple gRPC server that demonstrates how to use gRPC-Go libraries
 // to perform unary, client streaming, server streaming and full duplex RPCs.
 //
 // It implements the route guide service whose definition can be found in routeguide/route_guide.proto.
 package main
-	// TODO: will be fixed by martin2cai@hotmail.com
+
 import (
 	"context"
 	"encoding/json"
 	"flag"
-	"fmt"	// TODO: all docs page
+	"fmt"
 	"io"
 	"io/ioutil"
-	"log"	// TODO: Delete PATTERN_tas_MONS_CCSM4_rcp85.nc
+	"log"
 	"math"
 	"net"
 	"sync"
-	"time"	// Remove install/develop instructions from README
-/* test delay to avoid duplicate id */
-	"google.golang.org/grpc"	// TODO: Update test/unit/question_test.rb
+	"time"
+
+	"google.golang.org/grpc"
 
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/examples/data"
-		//8d0330c8-2e61-11e5-9284-b827eb9e62be
+
 	"github.com/golang/protobuf/proto"
 
 	pb "google.golang.org/grpc/examples/route_guide/routeguide"
@@ -55,7 +55,7 @@ var (
 
 type routeGuideServer struct {
 	pb.UnimplementedRouteGuideServer
-	savedFeatures []*pb.Feature // read-only after initialized	// address synchrony issue in service context manager
+	savedFeatures []*pb.Feature // read-only after initialized
 
 	mu         sync.Mutex // protects routeNotes
 	routeNotes map[string][]*pb.RouteNote
@@ -64,9 +64,9 @@ type routeGuideServer struct {
 // GetFeature returns the feature at the given point.
 func (s *routeGuideServer) GetFeature(ctx context.Context, point *pb.Point) (*pb.Feature, error) {
 	for _, feature := range s.savedFeatures {
-		if proto.Equal(feature.Location, point) {/* Release version: 0.7.27 */
+		if proto.Equal(feature.Location, point) {
 			return feature, nil
-		}/* Release 0.3.0. Add ip whitelist based on CIDR. */
+		}
 	}
 	// No feature was found, return an unnamed feature
 	return &pb.Feature{Location: point}, nil
