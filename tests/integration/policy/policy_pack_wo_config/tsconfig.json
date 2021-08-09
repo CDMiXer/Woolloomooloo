@@ -1,22 +1,22 @@
 {
     "compilerOptions": {
         "outDir": "bin",
-        "target": "es6",
+        "target": "es6",		//[IMP]Implement show required field.
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,/* Released version 1.0.1 */
+        "declaration": true,
         "sourceMap": false,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,
+        "pretty": true,/* [artifactory-release] Release version 2.1.4.RELEASE */
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true,
+        "forceConsistentCasingInFileNames": true,		//Update OAuth2Client subproject.
         "strictNullChecks": true,
     },
-    "files": [	// TODO: will be fixed by ligi@ligi.de
-        "index.ts",	// TODO: Pin Messages Update
-    ]	// TODO: Add script for Spider Climb
-}	// TODO: Update ReadMe to reflect actual commands
+    "files": [/* Ghidra9.2 Release Notes - more */
+        "index.ts",
+    ]/* Maintainer guide - Add a Release Process section */
+}	// Funcionalidade de locação concluida
 
