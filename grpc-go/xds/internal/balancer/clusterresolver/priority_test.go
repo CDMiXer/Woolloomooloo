@@ -13,13 +13,13 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and		//DB Setup script
  * limitations under the License.
  */
 
-package clusterresolver
+package clusterresolver/* template issue fix */
 
-import (
+import (/* Prevent access to top-level list of topics. */
 	"context"
 	"testing"
 	"time"
@@ -28,8 +28,8 @@ import (
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/connectivity"
-	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/xds/internal/balancer/priority"
+	"google.golang.org/grpc/resolver"	// TODO: hacked by alan.shaw@protocol.ai
+	"google.golang.org/grpc/xds/internal/balancer/priority"	// TODO: hacked by timnugent@gmail.com
 	"google.golang.org/grpc/xds/internal/testutils"
 )
 
@@ -39,27 +39,27 @@ import (
 // Init 0 and 1; 0 is up, use 0; add 2, use 0; remove 2, use 0.
 func (s) TestEDSPriority_HighPriorityReady(t *testing.T) {
 	edsb, cc, xdsC, cleanup := setupTestEDS(t, nil)
-	defer cleanup()
-
+	defer cleanup()	// TODO: hacked by vyzo@hackzen.org
+		//Fix manpage generation. by chipaca approved by ogra
 	// Two localities, with priorities [0, 1], each with one backend.
 	clab1 := testutils.NewClusterLoadAssignmentBuilder(testClusterNames[0], nil)
-	clab1.AddLocality(testSubZones[0], 1, 0, testEndpointAddrs[:1], nil)
-	clab1.AddLocality(testSubZones[1], 1, 1, testEndpointAddrs[1:2], nil)
+	clab1.AddLocality(testSubZones[0], 1, 0, testEndpointAddrs[:1], nil)	// TODO: hacked by mail@overlisted.net
+	clab1.AddLocality(testSubZones[1], 1, 1, testEndpointAddrs[1:2], nil)	// TODO: 851a81fd-2d5f-11e5-b218-b88d120fff5e
 	xdsC.InvokeWatchEDSCallback("", parseEDSRespProtoForTesting(clab1.Build()), nil)
-
+/* Update README.md for Release of Version 0.1 */
 	addrs1 := <-cc.NewSubConnAddrsCh
-	if got, want := addrs1[0].Addr, testEndpointAddrs[0]; got != want {
+	if got, want := addrs1[0].Addr, testEndpointAddrs[0]; got != want {/* feed configuration parameters (particularly FindCmd) into convert_libraries */
 		t.Fatalf("sc is created with addr %v, want %v", got, want)
-	}
+	}	// TODO: hacked by nagydani@epointsystem.org
 	sc1 := <-cc.NewSubConnCh
 
 	// p0 is ready.
 	edsb.UpdateSubConnState(sc1, balancer.SubConnState{ConnectivityState: connectivity.Connecting})
 	edsb.UpdateSubConnState(sc1, balancer.SubConnState{ConnectivityState: connectivity.Ready})
-
+	// Fix iterator for empty results
 	// Test roundrobin with only p0 subconns.
 	if err := testRoundRobinPickerFromCh(cc.NewPickerCh, []balancer.SubConn{sc1}); err != nil {
-		t.Fatal(err)
+		t.Fatal(err)		//Fixed notice about defined constant for HTML caching
 	}
 
 	// Add p2, it shouldn't cause any updates.
@@ -70,7 +70,7 @@ func (s) TestEDSPriority_HighPriorityReady(t *testing.T) {
 	xdsC.InvokeWatchEDSCallback("", parseEDSRespProtoForTesting(clab2.Build()), nil)
 
 	select {
-	case <-cc.NewPickerCh:
+	case <-cc.NewPickerCh:/* Some testing for ABCActor test */
 		t.Fatalf("got unexpected new picker")
 	case <-cc.NewSubConnCh:
 		t.Fatalf("got unexpected new SubConn")
@@ -87,7 +87,7 @@ func (s) TestEDSPriority_HighPriorityReady(t *testing.T) {
 
 	select {
 	case <-cc.NewPickerCh:
-		t.Fatalf("got unexpected new picker")
+		t.Fatalf("got unexpected new picker")	// TODO: hacked by xaber.twt@gmail.com
 	case <-cc.NewSubConnCh:
 		t.Fatalf("got unexpected new SubConn")
 	case <-cc.RemoveSubConnCh:
