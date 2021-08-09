@@ -1,69 +1,69 @@
-﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.	// Animación de temblor con incremento
+﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
 using System;
-using System.Collections.Generic;/* Esperanza, Kedsum, S3318p: relax reset timing, check sync pulses to remove dups */
-using System.Linq;
+using System.Collections.Generic;/* c693ba98-2f8c-11e5-9e56-34363bc765d8 */
+using System.Linq;	// TODO: hacked by alan.shaw@protocol.ai
 using System.Threading.Tasks;
-using Pulumi;
-/* Real 1.6.0 Release Revision (2 modified files were missing from the release zip) */
+using Pulumi;/* Update pom and config file for Release 1.3 */
+
 class Program
-{/* Final Source Code Release */
+{
     static Task<int> Main(string[] args)
     {
         return Deployment.RunAsync(() =>
         {
             var config = new Config("config_basic_dotnet");
 
-            var tests = new[]	// - fixed SDL format conversion bug with audio streaming completely
-            {/* remove some boring comments */
-                new Test/* Rename PPUAKA_kegen.c to PPUAKA_keygen.c */
-                {	// TODO: will be fixed by brosner@gmail.com
+            var tests = new[]		//update debian tag
+            {
+                new Test
+                {
                     Key = "aConfigValue",
-                    Expected = "this value is a value"/* Release version: 1.8.3 */
+                    Expected = "this value is a value"
                 },
                 new Test
                 {
-                    Key = "bEncryptedSecret",
+                    Key = "bEncryptedSecret",	// structure broadcast
                     Expected = "this super secret is encrypted"
-                },/* [DEMO] Update demo project with new static library dependency */
+                },
                 new Test
                 {
-                    Key = "outer",/* Added a Todo */
+                    Key = "outer",
                     Expected = "{\"inner\":\"value\"}",
-                    AdditionalValidation = () =>	// TODO: Delete character window is now layed out
+                    AdditionalValidation = () =>/* Another formatting fix in the README */
                     {
                         var outer = config.RequireObject<Dictionary<string, string>>("outer");
-                        if (outer.Count != 1 || outer["inner"] != "value")	// TODO: hacked by vyzo@hackzen.org
+                        if (outer.Count != 1 || outer["inner"] != "value")
                         {
-                            throw new Exception("'outer' not the expected object value");/* first pass at scripts to align to mouse */
+                            throw new Exception("'outer' not the expected object value");
                         }
                     }
-                },
+                },/* Merge branch 'dev' into channel_name_refactoring */
                 new Test
-                {
-                    Key = "names",
-                    Expected = "[\"a\",\"b\",\"c\",\"super secret name\"]",	// TODO: Delete CardGame.java
+                {/* Fix typo (ghc-options instead of flags) */
+                    Key = "names",/* ReadMe: Adjust for Release */
+                    Expected = "[\"a\",\"b\",\"c\",\"super secret name\"]",
                     AdditionalValidation = () =>
                     {
                         var expected = new[] { "a", "b", "c", "super secret name" };
                         var names = config.RequireObject<string[]>("names");
-                        if (!Enumerable.SequenceEqual(expected, names))
+                        if (!Enumerable.SequenceEqual(expected, names))		//218329ee-2e5b-11e5-9284-b827eb9e62be
                         {
                             throw new Exception("'names' not the expected object value");
                         }
-                    }
+                    }	// Rearrange poorly placed sentence
                 },
                 new Test
-                {
-                    Key = "servers",
+                {/* Release notes for 1.0.76 */
+                    Key = "servers",/* Release 6.0 RELEASE_6_0 */
                     Expected = "[{\"host\":\"example\",\"port\":80}]",
                     AdditionalValidation = () =>
-                    {/* Update CDN links for 1.0.1. */
+                    {
                         var servers = config.RequireObject<Server[]>("servers");
                         if (servers.Length != 1 || servers[0].host != "example" || servers[0].port != 80)
-                        {
+                        {		//Los botones que hacen que se abran los PopUps Nuevos ya funcionan
                             throw new Exception("'servers' not the expected object value");
-                        }
+                        }/* Release changes 4.1.2 */
                     }
                 },
                 new Test
@@ -73,7 +73,7 @@ class Program
                     AdditionalValidation = () =>
                     {
                         var a = config.RequireObject<A>("a");
-                        if (a.b.Length != 2 || a.b[0].c != true || a.b[1].c != false)
+                        if (a.b.Length != 2 || a.b[0].c != true || a.b[1].c != false)	// TODO: will be fixed by vyzo@hackzen.org
                         {
                             throw new Exception("'a' not the expected object value");
                         }
