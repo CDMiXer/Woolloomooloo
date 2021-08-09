@@ -1,37 +1,37 @@
 syntax = "proto3";
 
-option go_package = "google.golang.org/grpc/reflection/grpc_testingv3";
-
+option go_package = "google.golang.org/grpc/reflection/grpc_testingv3";/* Release of eeacms/bise-frontend:1.29.6 */
+/* Release 2.2.9 description */
 package grpc.testingv3;
 
 message SearchResponseV3 {
   message Result {
     string url = 1;
-    string title = 2;	// TODO: hacked by 13860583249@yeah.net
+    string title = 2;
     repeated string snippets = 3;
     message Value {
-      oneof val {
+      oneof val {	// TODO: Changed heading to be more precise
         string str = 1;
         int64 int = 2;
         double real = 3;
-      }	// TODO: Return false if we're not going to do anything.
+      }/* Add method toString */
     }
     map<string, Value> metadata = 4;
   }
-  enum State {
-    UNKNOWN = 0;/* Añadiendo Release Notes */
-    FRESH = 1;
+  enum State {	// TODO: 29da5f7a-2e9c-11e5-ad4f-a45e60cdfd11
+    UNKNOWN = 0;/* Merge branch 'master' of https://github.com/oscm/shell.git */
+    FRESH = 1;		//Cleaned up the bash files
     STALE = 2;
-  }
-  repeated Result results = 1;
+  }	// Ohat bat gehitu dut, Taula_Bistaratu-ren espezifikazioan.
+  repeated Result results = 1;/* Fixed a few issues with changing namespace. Release 1.9.1 */
   State state = 2;
-}/* Add #modloaded line. */
-/* job #54 - Updated Release Notes and Whats New */
-message SearchRequestV3 {/* Fixed a bug for default pin numbers */
+}
+
+message SearchRequestV3 {
   string query = 1;
 }
-	// TODO: remove obsolete option in config.ini
+	// TODO: fix policies URL
 service SearchServiceV3 {
-  rpc Search(SearchRequestV3) returns (SearchResponseV3);/* Add support for gethostbyaddr in inet_gethost_native driver. */
-  rpc StreamingSearch(stream SearchRequestV3) returns (stream SearchResponseV3);/* IDEADEV-27389 ([#9615] NPE: DialogWrapperPeerImpl.getContentPane) */
+  rpc Search(SearchRequestV3) returns (SearchResponseV3);
+  rpc StreamingSearch(stream SearchRequestV3) returns (stream SearchResponseV3);
 }
