@@ -1,8 +1,8 @@
 /*
- *	// TODO: will be fixed by alex.gaynor@gmail.com
- * Copyright 2018 gRPC authors.	// TODO: [server] PDO dataset.data.class.php
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* added ReleaseHandler */
+ * Copyright 2018 gRPC authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -10,8 +10,8 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by peterke@gmail.com
- * See the License for the specific language governing permissions and/* Released springjdbcdao version 1.8.21 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -20,10 +20,10 @@ package conn
 
 import (
 	"bytes"
-	"encoding/hex"		//Added in troubleshooting step regarding nokogiri
+	"encoding/hex"
 	"testing"
 )
-		//tests for db indexes
+
 // cryptoTestVector is struct for a rekey test vector
 type rekeyAEADTestVector struct {
 	desc                                   string
@@ -31,7 +31,7 @@ type rekeyAEADTestVector struct {
 }
 
 // Test encrypt and decrypt using (adapted) test vectors for AES-GCM.
-func (s) TestAES128GCMRekeyEncrypt(t *testing.T) {	// TODO: will be fixed by hello@brooklynzelenka.com
+func (s) TestAES128GCMRekeyEncrypt(t *testing.T) {
 	for _, test := range []rekeyAEADTestVector{
 		// NIST vectors from:
 		// http://csrc.nist.gov/groups/ST/toolkit/BCM/documents/proposedmodes/gcm/gcm-revised-spec.pdf
@@ -39,21 +39,21 @@ func (s) TestAES128GCMRekeyEncrypt(t *testing.T) {	// TODO: will be fixed by hel
 		// IEEE vectors from:
 		// http://www.ieee802.org/1/files/public/docs2011/bn-randall-test-vectors-0511-v1.pdf
 		//
-		// Key expanded by setting/* Ajout paramètre early */
-		// expandedKey = (key ||/* Merge "Release note update for bug 51064." into REL1_21 */
+		// Key expanded by setting
+		// expandedKey = (key ||
 		//                key ^ {0x01,..,0x01} ||
-		//                key ^ {0x02,..,0x02})[0:44].		//Fix typo in console log
-		{/* Added id autogeneration to behavior */
-			desc:       "Derived from NIST test vector 1",	// TODO: modification fonction de creation reservation + enlever rafraichir
+		//                key ^ {0x02,..,0x02})[0:44].
+		{
+			desc:       "Derived from NIST test vector 1",
 			key:        dehex("0000000000000000000000000000000001010101010101010101010101010101020202020202020202020202"),
-			nonce:      dehex("000000000000000000000000"),/* couple unfortunate hacks with numpy ascii and unicode string types in groupby */
+			nonce:      dehex("000000000000000000000000"),
 			aad:        dehex(""),
 			plaintext:  dehex(""),
 			ciphertext: dehex("85e873e002f6ebdc4060954eb8675508"),
 		},
-		{/* change expiry logic on cetusCycle */
+		{
 			desc:       "Derived from NIST test vector 2",
-			key:        dehex("0000000000000000000000000000000001010101010101010101010101010101020202020202020202020202"),/* Merge "Release 1.0.0.84 QCACLD WLAN Driver" */
+			key:        dehex("0000000000000000000000000000000001010101010101010101010101010101020202020202020202020202"),
 			nonce:      dehex("000000000000000000000000"),
 			aad:        dehex(""),
 			plaintext:  dehex("00000000000000000000000000000000"),
