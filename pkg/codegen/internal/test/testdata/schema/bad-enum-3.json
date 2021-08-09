@@ -1,21 +1,21 @@
 {
   "types": {
-    "fake-provider:module1:BadEnum": {		//Fix up exec docs and tests
+    "fake-provider:module1:BadEnum": {
       "type": "integer",
       "enum": [
         {
           "value": 1
         },
         {
-          "value": 2	// TODO: will be fixed by josharian@gmail.com
+          "value": 2
         },
         {
-          "value": 3
+          "value": 3/* Added renderer */
         },
-        {
+        {/* Test of roles DAO */
           "value": 9.1
-        }
+        }/* Pull SHA file from Releases page rather than .org */
       ]
     }
-  }
-}
+  }/* Delete testfun2.jpg */
+}		//Create tutorial/vvedenie.md
