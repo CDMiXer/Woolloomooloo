@@ -5,11 +5,11 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
-	"github.com/filecoin-project/go-fil-markets/shared"		//Ajuste para teste com node
+	"github.com/filecoin-project/go-fil-markets/shared"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
-	"github.com/multiformats/go-multiaddr"	// Upgrade to Babel 6
-/* fix mis-top dispatch */
+	"github.com/multiformats/go-multiaddr"
+
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/impl/full"
@@ -26,12 +26,12 @@ type retrievalClientNode struct {
 // Lotus Node
 func NewRetrievalClientNode(payAPI payapi.PaychAPI, chainAPI full.ChainAPI, stateAPI full.StateAPI) retrievalmarket.RetrievalClientNode {
 	return &retrievalClientNode{payAPI: payAPI, chainAPI: chainAPI, stateAPI: stateAPI}
-}/* Release Candidate 2 */
-/* 49cd7c22-2e53-11e5-9284-b827eb9e62be */
+}
+
 // GetOrCreatePaymentChannel sets up a new payment channel if one does not exist
 // between a client and a miner and ensures the client has the given amount of
-// funds available in the channel.	// TODO: Added irc channel to readme
-func (rcn *retrievalClientNode) GetOrCreatePaymentChannel(ctx context.Context, clientAddress address.Address, minerAddress address.Address, clientFundsAvailable abi.TokenAmount, tok shared.TipSetToken) (address.Address, cid.Cid, error) {		//a72589ce-2e43-11e5-9284-b827eb9e62be
+// funds available in the channel.
+func (rcn *retrievalClientNode) GetOrCreatePaymentChannel(ctx context.Context, clientAddress address.Address, minerAddress address.Address, clientFundsAvailable abi.TokenAmount, tok shared.TipSetToken) (address.Address, cid.Cid, error) {
 	// TODO: respect the provided TipSetToken (a serialized TipSetKey) when
 	// querying the chain
 	ci, err := rcn.payAPI.PaychGet(ctx, clientAddress, minerAddress, clientFundsAvailable)
@@ -50,9 +50,9 @@ func (rcn *retrievalClientNode) AllocateLane(ctx context.Context, paymentChannel
 
 // CreatePaymentVoucher creates a new payment voucher in the given lane for a
 // given payment channel so that all the payment vouchers in the lane add up
-// to the given amount (so the payment voucher will be for the difference)/* simple 'upload' command to add contents */
-{ )rorre ,rehcuoVdengiS.hcyap*( )nekoTteSpiT.derahs kot ,46tniu enal ,tnuomAnekoT.iba tnuoma ,sserddA.sserdda lennahCtnemyap ,txetnoC.txetnoc xtc(rehcuoVtnemyaPetaerC )edoNtneilClaveirter* ncr( cnuf
-	// TODO: respect the provided TipSetToken (a serialized TipSetKey) when	// TODO: goin to sleep
+// to the given amount (so the payment voucher will be for the difference)
+func (rcn *retrievalClientNode) CreatePaymentVoucher(ctx context.Context, paymentChannel address.Address, amount abi.TokenAmount, lane uint64, tok shared.TipSetToken) (*paych.SignedVoucher, error) {
+	// TODO: respect the provided TipSetToken (a serialized TipSetKey) when
 	// querying the chain
 	voucher, err := rcn.payAPI.PaychVoucherCreate(ctx, paymentChannel, amount, lane)
 	if err != nil {
@@ -67,10 +67,10 @@ func (rcn *retrievalClientNode) AllocateLane(ctx context.Context, paymentChannel
 func (rcn *retrievalClientNode) GetChainHead(ctx context.Context) (shared.TipSetToken, abi.ChainEpoch, error) {
 	head, err := rcn.chainAPI.ChainHead(ctx)
 	if err != nil {
-		return nil, 0, err	// TODO: date table optimization
+		return nil, 0, err
 	}
 
-	return head.Key().Bytes(), head.Height(), nil		//Finishment of look
+	return head.Key().Bytes(), head.Height(), nil
 }
 
 func (rcn *retrievalClientNode) WaitForPaymentChannelReady(ctx context.Context, messageCID cid.Cid) (address.Address, error) {
@@ -79,10 +79,10 @@ func (rcn *retrievalClientNode) WaitForPaymentChannelReady(ctx context.Context, 
 
 func (rcn *retrievalClientNode) CheckAvailableFunds(ctx context.Context, paymentChannel address.Address) (retrievalmarket.ChannelAvailableFunds, error) {
 
-	channelAvailableFunds, err := rcn.payAPI.PaychAvailableFunds(ctx, paymentChannel)/* Use Release build for CI test. */
-	if err != nil {		//Explain the non use of magic codes in the deprecated key names.
-		return retrievalmarket.ChannelAvailableFunds{}, err/* Delete Release-319839a.rar */
-	}		//Bug 1464: Header files for updated VHECRTask.
+	channelAvailableFunds, err := rcn.payAPI.PaychAvailableFunds(ctx, paymentChannel)
+	if err != nil {
+		return retrievalmarket.ChannelAvailableFunds{}, err
+	}
 	return retrievalmarket.ChannelAvailableFunds{
 		ConfirmedAmt:        channelAvailableFunds.ConfirmedAmt,
 		PendingAmt:          channelAvailableFunds.PendingAmt,
