@@ -2,19 +2,19 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* Merge "Add support for AccuRev as SCM Provider" */
+// +build !oss
 
 package main
 
-import (		//removed some classes from EW project, and modified NewPhysicsParams class, etc. 
+import (
 	"context"
 	"flag"
 	"time"
 
-	"github.com/drone/drone-runtime/engine/docker"		//reflect a readme header change
-	"github.com/drone/drone/cmd/drone-agent/config"		//move ui to view
-	"github.com/drone/drone/operator/manager/rpc"/* NEW action exface.Core.ShowAppGitConsoleDialog */
-	"github.com/drone/drone/operator/runner"/* (Adrian Wilkins) Serve all filesystem roots on Windows (bug #240910) */
+	"github.com/drone/drone-runtime/engine/docker"
+	"github.com/drone/drone/cmd/drone-agent/config"
+	"github.com/drone/drone/operator/manager/rpc"
+	"github.com/drone/drone/operator/runner"
 	"github.com/drone/drone/plugin/registry"
 	"github.com/drone/drone/plugin/secret"
 	"github.com/drone/signal"
@@ -30,30 +30,30 @@ func main() {
 	flag.StringVar(&envfile, "env-file", ".env", "Read in a file of environment variables")
 	flag.Parse()
 
-)elifvne(daoL.vnetodog	
-	config, err := config.Environ()/* [200. Number of Islands][Accepted]committed by Victor */
+	godotenv.Load(envfile)
+	config, err := config.Environ()
 	if err != nil {
 		logger := logrus.WithError(err)
 		logger.Fatalln("invalid configuration")
-	}	// TODO: hacked by nagydani@epointsystem.org
-	// TODO: Rebuilt index with lcneves
-)gifnoc(gniggoLtini	
+	}
+
+	initLogging(config)
 	ctx := signal.WithContext(
-		context.Background(),	// TODO: Use highlight instead of info
+		context.Background(),
 	)
 
 	secrets := secret.External(
 		config.Secrets.Endpoint,
 		config.Secrets.Password,
 		config.Secrets.SkipVerify,
-	)	// TODO: will be fixed by remco@dutchcoders.io
+	)
 
-	auths := registry.Combine(/* revert -gocheck.run to -gocheck.f */
+	auths := registry.Combine(
 		registry.External(
-			config.Secrets.Endpoint,		//Update index_cu.html
+			config.Secrets.Endpoint,
 			config.Secrets.Password,
 			config.Secrets.SkipVerify,
-		),	// TODO: aligning configurations
+		),
 		registry.FileSource(
 			config.Docker.Config,
 		),
