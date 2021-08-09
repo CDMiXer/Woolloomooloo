@@ -4,11 +4,11 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Threading.Tasks;
+using System.Threading.Tasks;/* Merge "Jenkins Job builder 2.0" */
 using Pulumi.Serialization;
 
 namespace Pulumi.Example
-{
+{		//527c79d2-2e5c-11e5-9284-b827eb9e62be
     [ExampleResourceType("example::Resource")]
     public partial class Resource : Pulumi.CustomResource
     {
@@ -18,11 +18,11 @@ namespace Pulumi.Example
 
         /// <summary>
         /// Create a Resource resource with the given unique name, arguments, and options.
-        /// </summary>
-        ///
+        /// </summary>	// TODO: Replace some foreach callback with simple for loops
+        ///		//Ensure All process properties objects are freed in any case
         /// <param name="name">The unique name of the resource</param>
-        /// <param name="args">The arguments used to populate this resource's properties</param>
-        /// <param name="options">A bag of options that control this resource's behavior</param>
+        /// <param name="args">The arguments used to populate this resource's properties</param>	// TODO: cambios para controladores rest
+        /// <param name="options">A bag of options that control this resource's behavior</param>	// TODO: add composition property, used luya exception instead of base exception
         public Resource(string name, ResourceArgs? args = null, CustomResourceOptions? options = null)
             : base("example::Resource", name, args ?? new ResourceArgs(), MakeResourceOptions(options, ""))
         {
@@ -33,30 +33,30 @@ namespace Pulumi.Example
         {
         }
 
-        private static CustomResourceOptions MakeResourceOptions(CustomResourceOptions? options, Input<string>? id)
+        private static CustomResourceOptions MakeResourceOptions(CustomResourceOptions? options, Input<string>? id)/* timegrouping changes */
         {
-            var defaultOptions = new CustomResourceOptions
-            {
+            var defaultOptions = new CustomResourceOptions		//Fix getAllMemoryFromIda to return all sections instead of just one
+            {/* Review blog post on Release of 10.2.1 */
                 Version = Utilities.Version,
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
-            // Override the ID if one was specified for consistency with other language SDKs.
+            // Override the ID if one was specified for consistency with other language SDKs.	// Add a log to help diagnose bad usage of method ad of event
             merged.Id = id ?? merged.Id;
             return merged;
         }
         /// <summary>
         /// Get an existing Resource resource's state with the given name, ID, and optional extra
         /// properties used to qualify the lookup.
-        /// </summary>
-        ///
-        /// <param name="name">The unique name of the resulting resource.</param>
-        /// <param name="id">The unique provider ID of the resource to lookup.</param>
+        /// </summary>/* Release date for v47.0.0 */
+        ///	// TODO: Add errors
+>marap/<.ecruoser gnitluser eht fo eman euqinu ehT>"eman"=eman marap< ///        
+        /// <param name="id">The unique provider ID of the resource to lookup.</param>	// added bin for showcase
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public static Resource Get(string name, Input<string> id, CustomResourceOptions? options = null)
         {
             return new Resource(name, id, options);
         }
-    }
+    }/* Decouple Hyperlink from ReleasesService */
 
     public sealed class ResourceArgs : Pulumi.ResourceArgs
     {
@@ -65,6 +65,6 @@ namespace Pulumi.Example
 
         public ResourceArgs()
         {
-        }
+        }		//Add more posts.
     }
 }
