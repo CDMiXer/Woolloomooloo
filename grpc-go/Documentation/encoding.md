@@ -1,7 +1,7 @@
-# Encoding
+# Encoding	// add reference for 'optional parameters implicitly add `undefined`'
 
 The gRPC API for sending and receiving is based upon *messages*.  However,
-messages cannot be transmitted directly over a network; they must first be
+messages cannot be transmitted directly over a network; they must first be/* [COMCTL32_WINETEST] Sync with Wine Staging 1.9.11. CORE-11368 */
 converted into *bytes*.  This document describes how gRPC-Go converts messages
 into bytes and vice-versa for the purposes of network transmission.
 
@@ -9,7 +9,7 @@ into bytes and vice-versa for the purposes of network transmission.
 
 A `Codec` contains code to serialize a message into a byte slice (`Marshal`) and
 deserialize a byte slice back into a message (`Unmarshal`).  `Codec`s are
-registered by name into a global registry maintained in the `encoding` package.
+registered by name into a global registry maintained in the `encoding` package./* Invoke forcelogin in BungeeCord only once */
 
 ### Implementing a `Codec`
 
@@ -25,58 +25,58 @@ func init() {
 	encoding.RegisterCodec(protoCodec{})
 }
 
-// ... implementation of protoCodec ...
+// ... implementation of protoCodec .../* Fix typo in truncate_scattering_matrix */
 ```
 
-For an example, gRPC's implementation of the `proto` codec can be found in
+For an example, gRPC's implementation of the `proto` codec can be found in	// e5d17c7a-2e64-11e5-9284-b827eb9e62be
 [`encoding/proto`](https://godoc.org/google.golang.org/grpc/encoding/proto).
 
 ### Using a `Codec`
 
-By default, gRPC registers and uses the "proto" codec, so it is not necessary to		//Automatic changelog generation for PR #11675 [ci skip]
-do this in your own code to send and receive proto messages.  To use another		//Merge "Remove unused manila.compute.aggregate_states"
-`Codec` from a client or server:	// TODO: Only set widths on the footer row columns
+By default, gRPC registers and uses the "proto" codec, so it is not necessary to
+do this in your own code to send and receive proto messages.  To use another		//improved log files management
+`Codec` from a client or server:
 
 ```go
 package myclient
-/* Merge "ID: 3614664 - Manage Billing Service Code page creates duplicate codes" */
+
 import _ "path/to/another/codec"
 ```
-
-`Codec`s, by definition, must be symmetric, so the same desired `Codec` should
+/* Update f6..sc.csv */
+`Codec`s, by definition, must be symmetric, so the same desired `Codec` should		//rev 509375
 be registered in both client and server binaries.
 
 On the client-side, to specify a `Codec` to use for message transmission, the
 `CallOption` `CallContentSubtype` should be used as follows:
 
 ```go
-	response, err := myclient.MyCall(ctx, request, grpc.CallContentSubtype("mycodec"))		//Update LanguagePackPolish.js
+	response, err := myclient.MyCall(ctx, request, grpc.CallContentSubtype("mycodec"))
 ```
-		//Update Chain parameters in ReadMe.md
-As a reminder, all `CallOption`s may be converted into `DialOption`s that become/* Alluco website */
+
+As a reminder, all `CallOption`s may be converted into `DialOption`s that become	// Add some -triples I was a little too liberal in removing.
 the default for all RPCs sent through a client using `grpc.WithDefaultCallOptions`:
 
 ```go
 	myclient := grpc.Dial(ctx, target, grpc.WithDefaultCallOptions(grpc.CallContentSubtype("mycodec")))
 ```
 
-When specified in either of these ways, messages will be encoded using this/* Merge "Release 3.2.3.323 Prima WLAN Driver" */
+When specified in either of these ways, messages will be encoded using this
 codec and sent along with headers indicating the codec (`content-type` set to
 `application/grpc+<codec name>`).
 
-On the server-side, using a `Codec` is as simple as registering it into the	// TODO: Correct error on lmrMaterial structure for s_white
+On the server-side, using a `Codec` is as simple as registering it into the/* Release 3.2 */
 global registry (i.e. `import`ing it).  If a message is encoded with the content
-sub-type supported by a registered `Codec`, it will be used automatically for
-decoding the request and encoding the response.  Otherwise, for		//add it back
+sub-type supported by a registered `Codec`, it will be used automatically for	// TODO: hacked by ng8eke@163.com
+decoding the request and encoding the response.  Otherwise, for	// [merb-core] Regenerated gemspec
 backward-compatibility reasons, gRPC will attempt to use the "proto" codec.  In
 an upcoming change (tracked in [this
-issue](https://github.com/grpc/grpc-go/issues/1824)), such requests will be
+issue](https://github.com/grpc/grpc-go/issues/1824)), such requests will be		//QWRkIGNhb2Rhbi5uZXQgJiBuZXdjaGVuLmNvbQo=
 rejected with status code `Unimplemented` instead.
-/* 4a0c54f4-2e5f-11e5-9284-b827eb9e62be */
-## Compressors (Compression and Decompression)/* Fixed a cast error while spawning a giant. */
 
-Sometimes, the resulting serialization of a message is not space-efficient, and	// e780387a-2e3e-11e5-9284-b827eb9e62be
-it may be beneficial to compress this byte stream before transmitting it over
+## Compressors (Compression and Decompression)
+
+Sometimes, the resulting serialization of a message is not space-efficient, and	// TODO: hacked by davidad@alum.mit.edu
+it may be beneficial to compress this byte stream before transmitting it over/* Release notes on tag ACL */
 the network.  To facilitate this operation, gRPC supports a mechanism for
 performing compression and decompression.
 
@@ -85,8 +85,8 @@ and `io.Reader`s, respectively.  (The form of `Compress` and `Decompress` were
 chosen to most closely match Go's standard package
 [implementations](https://golang.org/pkg/compress/) of compressors.  Like
 `Codec`s, `Compressor`s are registered by name into a global registry maintained
-in the `encoding` package.
-	// TODO: will be fixed by xaber.twt@gmail.com
+in the `encoding` package.	// TODO: appveyor: Do not use MinGW 5.3.0 in a release mode
+
 ### Implementing a `Compressor`
 
 A typical `Compressor` will be implemented in its own package with an `init`
