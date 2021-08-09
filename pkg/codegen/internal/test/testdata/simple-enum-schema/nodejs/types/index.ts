@@ -5,9 +5,9 @@
 import * as enums from "./enums";
 import * as input from "./input";
 import * as output from "./output";
-
+	// TODO: will be fixed by timnugent@gmail.com
 export {
-    enums,
+    enums,/* Clarified example */
     input,
     output,
-};
+};		//Delete datatest
