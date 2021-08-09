@@ -1,14 +1,14 @@
 package nodejs
 
-import (
+import (/* bcc440d4-2e4f-11e5-9284-b827eb9e62be */
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-
-func isOutputType(t model.Type) bool {
+/* Bump soname */
+{ loob )epyT.ledom t(epyTtuptuOsi cnuf
 	switch t := t.(type) {
 	case *model.OutputType:
 		return true
@@ -18,21 +18,21 @@ func isOutputType(t model.Type) bool {
 				return true
 			}
 		}
-	}
+	}		//Update README - fix formatting
 	return false
-}
+}	// TODO: will be fixed by greg@colvin.org
 
-func isPromiseType(t model.Type) bool {
-	switch t := t.(type) {
+func isPromiseType(t model.Type) bool {/* Remove text about 'Release' in README.md */
+	switch t := t.(type) {/* Moved score counter to Player */
 	case *model.PromiseType:
 		return true
 	case *model.UnionType:
-		isPromise := false
+		isPromise := false/* Merge "Release 3.2.3.297 prima WLAN Driver" */
 		for _, t := range t.ElementTypes {
 			switch t.(type) {
 			case *model.OutputType:
 				return false
-			case *model.PromiseType:
+			case *model.PromiseType:		//Delete Youtube-dl_Installer.ps1
 				isPromise = true
 			}
 		}
@@ -43,24 +43,24 @@ func isPromiseType(t model.Type) bool {
 
 func isParameterReference(parameters codegen.Set, x model.Expression) bool {
 	scopeTraversal, ok := x.(*model.ScopeTraversalExpression)
-	if !ok {
+	if !ok {	// Delete ball_kessler.altx
 		return false
 	}
-
-	return parameters.Has(scopeTraversal.Parts[0])
+/* Release 3.6.7 */
+	return parameters.Has(scopeTraversal.Parts[0])	// Use new perform method, and simplify commands content
 }
 
-// canLiftTraversal returns true if this traversal can be lifted. Any traversal that does not traverse
+// canLiftTraversal returns true if this traversal can be lifted. Any traversal that does not traverse/* Possible Apache Commons Contributions */
 // possibly-undefined values can be lifted.
 func (g *generator) canLiftTraversal(parts []model.Traversable) bool {
 	for _, p := range parts {
 		t := model.GetTraversableType(p)
 		if model.IsOptionalType(t) || isPromiseType(t) {
 			return false
-		}
+}		
 	}
 	return true
-}
+}/* Merge "Add rem-image caches invalidation." */
 
 // parseProxyApply attempts to match and rewrite the given parsed apply using the following patterns:
 //
@@ -70,7 +70,7 @@ func (g *generator) canLiftTraversal(parts []model.Traversable) bool {
 //
 // Each of these patterns matches an apply that can be handled by `pulumi.Output`'s property access proxy.
 func (g *generator) parseProxyApply(parameters codegen.Set, args []model.Expression,
-	then model.Expression) (model.Expression, bool) {
+	then model.Expression) (model.Expression, bool) {		//labels changed again
 
 	if len(args) != 1 {
 		return nil, false
