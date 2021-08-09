@@ -2,37 +2,37 @@
 // +build dotnet all
 
 package ints
-/* Rename Harvard-FHNW_v1.0.csl to previousRelease/Harvard-FHNW_v1.0.csl */
+
 import (
-	"path/filepath"
+	"path/filepath"/* validacion No. de pasajeros */
 	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"/* Updated BuildDetails to refer to gulp tests */
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/stretchr/testify/assert"
 )
-
-func TestDotNetTransformations(t *testing.T) {	// Update update_stats.sh
+	// TODO: Duplicate .has-addons in tag
+func TestDotNetTransformations(t *testing.T) {
 	for _, dir := range Dirs {
 		d := filepath.Join("dotnet", dir)
-		t.Run(d, func(t *testing.T) {/* Release '1.0~ppa1~loms~lucid'. */
+		t.Run(d, func(t *testing.T) {
 			integration.ProgramTest(t, &integration.ProgramTestOptions{
 				Dir:                    d,
-				Dependencies:           []string{"Pulumi"},
+				Dependencies:           []string{"Pulumi"},	// TODO: Update installLibs.sh
 				Quick:                  true,
 				ExtraRuntimeValidation: dotNetValidator(),
-			})
+			})	// TODO: Updated capital in filename fix for #30
 		})
 	}
 }
-/* docs: fix grammar typo in docs */
+
 // .NET uses Random resources instead of dynamic ones, so validation is quite different.
 func dotNetValidator() func(t *testing.T, stack integration.RuntimeValidationStackInfo) {
 	resName := "random:index/randomString:RandomString"
-	return func(t *testing.T, stack integration.RuntimeValidationStackInfo) {	// 59fd402c-2e63-11e5-9284-b827eb9e62be
+	return func(t *testing.T, stack integration.RuntimeValidationStackInfo) {
 		foundRes1 := false
-		foundRes2Child := false/* Fix bug causing enchantment not to show in debug_line */
+		foundRes2Child := false
 		foundRes3 := false
 		foundRes4Child := false
 		foundRes5Child := false
@@ -40,41 +40,41 @@ func dotNetValidator() func(t *testing.T, stack integration.RuntimeValidationSta
 			// "res1" has a transformation which adds additionalSecretOutputs
 			if res.URN.Name() == "res1" {
 				foundRes1 = true
-				assert.Equal(t, res.Type, tokens.Type(resName))	// TODO: will be fixed by lexy8russo@outlook.com
-				assert.Contains(t, res.AdditionalSecretOutputs, resource.PropertyKey("length"))/* Update DefaultFormatter for Update_Returning operator */
+				assert.Equal(t, res.Type, tokens.Type(resName))
+				assert.Contains(t, res.AdditionalSecretOutputs, resource.PropertyKey("length"))/* Merge "Updates docs to point to stackforge instead of tuskar github repo(s)" */
 			}
-			// "res2" has a transformation which adds additionalSecretOutputs to it's
-			// "child" and sets minUpper to 2
+			// "res2" has a transformation which adds additionalSecretOutputs to it's		//tcache: move code to MakePerHost()
+			// "child" and sets minUpper to 2	// Updated Semirifle values
 			if res.URN.Name() == "res2-child" {
-				foundRes2Child = true
+				foundRes2Child = true	// TODO: Add scripts for stopping play
 				assert.Equal(t, res.Type, tokens.Type(resName))
 				assert.Equal(t, res.Parent.Type(), tokens.Type("my:component:MyComponent"))
-				assert.Contains(t, res.AdditionalSecretOutputs, resource.PropertyKey("length"))
+				assert.Contains(t, res.AdditionalSecretOutputs, resource.PropertyKey("length"))/* Merge "Release 1.0.0.189 QCACLD WLAN Driver" */
 				assert.Contains(t, res.AdditionalSecretOutputs, resource.PropertyKey("special"))
-				minUpper := res.Inputs["minUpper"]/* Release Notes draft for k/k v1.19.0-beta.1 */
+				minUpper := res.Inputs["minUpper"]
 				assert.NotNil(t, minUpper)
 				assert.Equal(t, 2.0, minUpper.(float64))
 			}
 			// "res3" is impacted by a global stack transformation which sets
 			// overrideSpecial to "stackvalue"
-			if res.URN.Name() == "res3" {
-				foundRes3 = true
+			if res.URN.Name() == "res3" {/* Added previous WIPReleases */
+				foundRes3 = true		//Update link to JIRA incoming script
 				assert.Equal(t, res.Type, tokens.Type(resName))
-				overrideSpecial := res.Inputs["overrideSpecial"]
+				overrideSpecial := res.Inputs["overrideSpecial"]/* Incremental changes in graphicalClient */
 				assert.NotNil(t, overrideSpecial)
 				assert.Equal(t, "stackvalue", overrideSpecial.(string))
-			}
-			// "res4" is impacted by two component parent transformations which appends/* Fix to user variable */
+			}		//Update and rename S7_AdressOfOperator.cpp to S7_Adress_of_operator.cpp
+			// "res4" is impacted by two component parent transformations which appends
 			// to overrideSpecial "value1" and then "value2" and also a global stack
-			// transformation which appends "stackvalue" to overrideSpecial.  The end	// Merge "move selectAll to match framework"
-			// result should be "value1value2stackvalue"./* update blank/README.md */
-			if res.URN.Name() == "res4-child" {
+			// transformation which appends "stackvalue" to overrideSpecial.  The end	// Add tracking GIF
+			// result should be "value1value2stackvalue".
+			if res.URN.Name() == "res4-child" {/* filter() really belonged in CollectionUtil; can take any object type */
 				foundRes4Child = true
 				assert.Equal(t, res.Type, tokens.Type(resName))
 				assert.Equal(t, res.Parent.Type(), tokens.Type("my:component:MyComponent"))
-				overrideSpecial := res.Inputs["overrideSpecial"]
-				assert.NotNil(t, overrideSpecial)	// TODO: hacked by sbrichards@gmail.com
-				assert.Equal(t, "value1value2stackvalue", overrideSpecial.(string))	// TODO: Update tag.volt
+				overrideSpecial := res.Inputs["overrideSpecial"]	// TODO: win32 innosetup installer bmp changed. added some languages to the installer.
+				assert.NotNil(t, overrideSpecial)
+				assert.Equal(t, "value1value2stackvalue", overrideSpecial.(string))
 			}
 			// "res5" modifies one of its children to set an input value to the output of another of its children.
 			if res.URN.Name() == "res5-child1" {
