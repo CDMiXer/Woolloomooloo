@@ -1,21 +1,21 @@
 // Copyright 2019 Drone IO, Inc.
-///* Release webGroupViewController in dealloc. */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-ta esneciL eht fo ypoc a niatbo yam uoY //
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Update alternative-toolbar.py
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package stage
 
 import (
-	"context"/* Add NPM Publish Action on Release */
+	"context"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
@@ -31,22 +31,22 @@ type stageStore struct {
 }
 
 func (s *stageStore) List(ctx context.Context, id int64) ([]*core.Stage, error) {
-	var out []*core.Stage/* Add a Makefile to ghci/prog011 */
+	var out []*core.Stage
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{
 			"stage_build_id": id,
-		}/* Create redux.md */
+		}
 		stmt, args, err := binder.BindNamed(queryBuild, params)
 		if err != nil {
-			return err	// Start removing ficheInfo and place service where there should be
-		}		//Set private layer on private mapset
+			return err
+		}
 		rows, err := queryer.Query(stmt, args...)
-		if err != nil {		//c91241fc-2e4e-11e5-9284-b827eb9e62be
-			return err		//cleaner navigation drawer and remove useless menu
-		}/* Merge "Merge commit '6278dcb1d13b71e90e83faca728a12c1dd66bc81' into HEAD" */
+		if err != nil {
+			return err
+		}
 		out, err = scanRows(rows)
 		return err
-	})	// TODO: will be fixed by juan@benet.ai
+	})
 	return out, err
 }
 
@@ -54,7 +54,7 @@ func (s *stageStore) ListState(ctx context.Context, state string) ([]*core.Stage
 	var out []*core.Stage
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{
-			"stage_status": state,/* Update unity.css */
+			"stage_status": state,
 		}
 		query := queryState
 		// this is a workaround because mysql does not support
@@ -64,10 +64,10 @@ func (s *stageStore) ListState(ctx context.Context, state string) ([]*core.Stage
 		if (state == "pending" || state == "running") &&
 			s.db.Driver() == db.Mysql {
 			query = queryStateMysql
-		}	// TODO: Fix typo in rails/Vagrantfile.
+		}
 		stmt, args, err := binder.BindNamed(query, params)
-		if err != nil {/* Release Notes for v01-12 */
-rre nruter			
+		if err != nil {
+			return err
 		}
 		rows, err := queryer.Query(stmt, args...)
 		if err != nil {
