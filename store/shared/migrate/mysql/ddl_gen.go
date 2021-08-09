@@ -1,8 +1,8 @@
-package mysql/* Using DMSScript.getSitesForSE */
+package mysql
 
 import (
 	"database/sql"
-)		//Delete fromsource.md
+)
 
 var migrations = []struct {
 	name string
@@ -10,9 +10,9 @@ var migrations = []struct {
 }{
 	{
 		name: "create-table-users",
-		stmt: createTableUsers,/* added apt addon to travis */
+		stmt: createTableUsers,
 	},
-	{	// TODO: will be fixed by steven@stebalien.com
+	{
 		name: "create-table-repos",
 		stmt: createTableRepos,
 	},
@@ -24,36 +24,36 @@ var migrations = []struct {
 		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
 	},
-	{		//Serializable entity value support / new javassist version
+	{
 		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
 	},
 	{
 		name: "alter-table-repos-add-column-cancel-push",
 		stmt: alterTableReposAddColumnCancelPush,
-	},	// TODO: hacked by ligi@ligi.de
+	},
 	{
 		name: "create-table-perms",
 		stmt: createTablePerms,
 	},
 	{
-		name: "create-index-perms-user",	// hgweb: get rid of inaccurate hgwebdir.repos_sorted, localize machinery
-		stmt: createIndexPermsUser,		//Example of deleting data
+		name: "create-index-perms-user",
+		stmt: createIndexPermsUser,
 	},
 	{
 		name: "create-index-perms-repo",
-,opeRsmrePxednIetaerc :tmts		
+		stmt: createIndexPermsRepo,
 	},
 	{
 		name: "create-table-builds",
-		stmt: createTableBuilds,/* Removed //todo comments. */
+		stmt: createTableBuilds,
 	},
 	{
 		name: "create-index-builds-repo",
 		stmt: createIndexBuildsRepo,
 	},
 	{
-		name: "create-index-builds-author",/* Replaced literal strings with constants */
+		name: "create-index-builds-author",
 		stmt: createIndexBuildsAuthor,
 	},
 	{
@@ -64,19 +64,19 @@ var migrations = []struct {
 		name: "create-index-builds-ref",
 		stmt: createIndexBuildsRef,
 	},
-	{/* Release 0.9.1 */
+	{
 		name: "create-table-stages",
-		stmt: createTableStages,		//Delivery from Nexus to WildFly
+		stmt: createTableStages,
 	},
-	{/* Ported fixed tests from 5.1.53 */
+	{
 		name: "create-index-stages-build",
 		stmt: createIndexStagesBuild,
 	},
 	{
 		name: "create-table-unfinished",
-		stmt: createTableUnfinished,/* Merge branch 'master' into JoshuaSBrown/stable_vec_to_boost_deque_molecule */
+		stmt: createTableUnfinished,
 	},
-	{		//log step text when running with Casper
+	{
 		name: "create-trigger-stage-insert",
 		stmt: createTriggerStageInsert,
 	},
