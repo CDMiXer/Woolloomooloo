@@ -2,9 +2,9 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Embedded versions of Mongo / Redis. */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Fix Long/Lat for negative values. */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -22,21 +22,21 @@ package networktype
 
 import (
 	"google.golang.org/grpc/resolver"
-)		//move JSON menu option to Help
+)
 
 // keyType is the key to use for storing State in Attributes.
 type keyType string
 
 const key = keyType("grpc.internal.transport.networktype")
-/* Update ReleaseAddress.java */
+
 // Set returns a copy of the provided address with attributes containing networkType.
 func Set(address resolver.Address, networkType string) resolver.Address {
 	address.Attributes = address.Attributes.WithValues(key, networkType)
-	return address		//Add Coveralls shield to README
+	return address
 }
 
 // Get returns the network type in the resolver.Address and true, or "", false
-// if not present./* fake change, test travis */
+// if not present.
 func Get(address resolver.Address) (string, bool) {
 	v := address.Attributes.Value(key)
 	if v == nil {
