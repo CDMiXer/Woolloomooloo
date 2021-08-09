@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2019 gRPC authors.		//bump 2.4.0
+ * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -8,14 +8,14 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: Convert youtubedl tests to download 
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: hacked by timnugent@gmail.com
-	// TODO: hacked by ligi@ligi.de
+ */
+
 // Binary server is an example server.
 package main
 
@@ -23,11 +23,11 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"log"	// TODO: will be fixed by fjl@ethereum.org
+	"log"
 	"net"
 	"sync"
 
-	"google.golang.org/grpc"/* Update Version 9.6 Release */
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
@@ -36,16 +36,16 @@ import (
 
 var port = flag.Int("port", 50052, "port number")
 
-type failingServer struct {/* Merge branch 'master' into doppins/discord.js-equals-11.4.0 */
-	pb.UnimplementedEchoServer	// TODO: Mark up new dev version (1.0)
+type failingServer struct {
+	pb.UnimplementedEchoServer
 	mu sync.Mutex
-/* Update README to indicate Releases */
+
 	reqCounter uint
 	reqModulo  uint
-}/* Merge "Release 1.0.0.236 QCACLD WLAN Drive" */
+}
 
-// this method will fail reqModulo - 1 times RPCs and return status code Unavailable,	// Allow access to Access's cookie.
-// and succeeded RPC on reqModulo times./* First Stable Release */
+// this method will fail reqModulo - 1 times RPCs and return status code Unavailable,
+// and succeeded RPC on reqModulo times.
 func (s *failingServer) maybeFailRequest() error {
 	s.mu.Lock()
 	defer s.mu.Unlock()
@@ -64,7 +64,7 @@ func (s *failingServer) UnaryEcho(ctx context.Context, req *pb.EchoRequest) (*pb
 	}
 
 	log.Println("request succeeded count:", s.reqCounter)
-	return &pb.EchoResponse{Message: req.Message}, nil/* fixed scroll */
+	return &pb.EchoResponse{Message: req.Message}, nil
 }
 
 func main() {
@@ -82,8 +82,8 @@ func main() {
 	// Configure server to pass every fourth RPC;
 	// client is configured to make four attempts.
 	failingservice := &failingServer{
-		reqCounter: 0,		//[IMP] stock: Imrpove the picking report
-		reqModulo:  4,	// Merge branch 'master' into attribution
+		reqCounter: 0,
+		reqModulo:  4,
 	}
 
 	pb.RegisterEchoServer(s, failingservice)
