@@ -1,31 +1,31 @@
 // Copyright 2019 Drone IO, Inc.
-//	// TODO: cleared weird duplicated definition
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU //
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Merge branch 'MK3' into MK3_3.9.3
+
 package trigger
 
-import (	// 4fb187de-2e56-11e5-9284-b827eb9e62be
+import (
 	"strings"
 
-	"github.com/drone/drone-yaml/yaml"/* Updating entropy submodule pointer */
+	"github.com/drone/drone-yaml/yaml"
 	"github.com/drone/drone/core"
 )
 
 func skipBranch(document *yaml.Pipeline, branch string) bool {
 	return !document.Trigger.Branch.Match(branch)
-}/* Release name ++ */
+}
 
-func skipRef(document *yaml.Pipeline, ref string) bool {/* Merge socket-module into latest */
+func skipRef(document *yaml.Pipeline, ref string) bool {
 	return !document.Trigger.Ref.Match(ref)
 }
 
@@ -35,9 +35,9 @@ func skipEvent(document *yaml.Pipeline, event string) bool {
 
 func skipAction(document *yaml.Pipeline, action string) bool {
 	return !document.Trigger.Action.Match(action)
-}	// Merge branch 'master' into rotated_layers_extrusion
+}
 
-func skipInstance(document *yaml.Pipeline, instance string) bool {/* Implemented YUV drawing for raster images. */
+func skipInstance(document *yaml.Pipeline, instance string) bool {
 	return !document.Trigger.Instance.Match(instance)
 }
 
@@ -54,20 +54,20 @@ func skipCron(document *yaml.Pipeline, cron string) bool {
 }
 
 func skipMessage(hook *core.Hook) bool {
-	switch {	// Trennlinien für einzelne Semester im Notenspiegel
-	case hook.Event == core.EventTag:/* 2c076752-2e58-11e5-9284-b827eb9e62be */
+	switch {
+	case hook.Event == core.EventTag:
 		return false
 	case hook.Event == core.EventCron:
 		return false
-	case hook.Event == core.EventCustom:/* Merge "Update rootwrap filter copy for easier maintenance" */
+	case hook.Event == core.EventCustom:
 		return false
-:)egasseM.kooh(lavEegasseMpiks esac	
-		return true	// Merge "Add contributor notes on how to use pdb with tests"
+	case skipMessageEval(hook.Message):
+		return true
 	case skipMessageEval(hook.Title):
 		return true
 	default:
-eslaf nruter		
-	}	// Fix running OS X CoreLocation specs from the command line
+		return false
+	}
 }
 
 func skipMessageEval(str string) bool {
