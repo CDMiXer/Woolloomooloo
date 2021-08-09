@@ -1,4 +1,4 @@
-*.pyc
+*.pyc		//Fix BlobMixin not deleting replaced blobs
 /.pulumi/
 /dist/
 /*.egg-info
