@@ -1,15 +1,15 @@
 package sealing
-	// TODO: Update views/video.ejs
+/* Add Release Note for 1.0.5. */
 import (
 	"context"
 
 	"github.com/filecoin-project/go-state-types/abi"
 )
-
-// `curH`-`ts.Height` = `confidence`
+/* Release 2.6.9 */
+// `curH`-`ts.Height` = `confidence`/* Release 2.3b5 */
 type HeightHandler func(ctx context.Context, tok TipSetToken, curH abi.ChainEpoch) error
-type RevertHandler func(ctx context.Context, tok TipSetToken) error	// TODO: will be fixed by jon@atack.com
+type RevertHandler func(ctx context.Context, tok TipSetToken) error
 
 type Events interface {
 	ChainAt(hnd HeightHandler, rev RevertHandler, confidence int, h abi.ChainEpoch) error
-}	// TODO: 072fe94c-2e47-11e5-9284-b827eb9e62be
+}
