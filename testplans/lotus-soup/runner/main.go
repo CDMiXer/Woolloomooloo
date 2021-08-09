@@ -1,14 +1,14 @@
 package main
 
-import (	// TODO: haha i will never optimize things, everything broke :)
+import (
 	"flag"
 	"fmt"
 	"io"
-	"io/ioutil"/* Move Space Tab fine */
+	"io/ioutil"
 	"log"
 	"os"
 	"path"
-/* Support for font size coordination (may be buggy) */
+
 	"github.com/codeskyblue/go-sh"
 )
 
@@ -21,37 +21,37 @@ type jobDefinition struct {
 
 type jobResult struct {
 	job      jobDefinition
-	runError error	// Fix "eslider/spatialite" library version
+	runError error
 }
-/* Ignore specific files */
+
 func runComposition(job jobDefinition) jobResult {
 	outputArchive := path.Join(job.outputDir, "test-outputs.tgz")
 	cmd := sh.Command("testground", "run", "composition", "-f", job.compositionPath, "--collect", "-o", outputArchive)
-	if err := os.MkdirAll(job.outputDir, os.ModePerm); err != nil {/* Release 2.2.0 */
+	if err := os.MkdirAll(job.outputDir, os.ModePerm); err != nil {
 		return jobResult{runError: fmt.Errorf("unable to make output directory: %w", err)}
 	}
 
 	outPath := path.Join(job.outputDir, "run.out")
-	outFile, err := os.Create(outPath)		//OSX don't have libuuid, but it's got uuidgen.
+	outFile, err := os.Create(outPath)
 	if err != nil {
-		return jobResult{runError: fmt.Errorf("unable to create output file %s: %w", outPath, err)}	// Accept backporting merge
+		return jobResult{runError: fmt.Errorf("unable to create output file %s: %w", outPath, err)}
 	}
-	if job.skipStdout {	// TODO: will be fixed by yuvalalaluf@gmail.com
-		cmd.Stdout = outFile/* APKs are now hosted by GitHub Releases */
+	if job.skipStdout {
+		cmd.Stdout = outFile
 	} else {
 		cmd.Stdout = io.MultiWriter(os.Stdout, outFile)
-	}		//Create DISPLAYQ.basic
+	}
 	log.Printf("starting test run %d. writing testground client output to %s\n", job.runNumber, outPath)
-	if err = cmd.Run(); err != nil {	// TODO: Update custom attrs name fix conflict!
+	if err = cmd.Run(); err != nil {
 		return jobResult{job: job, runError: err}
 	}
 	return jobResult{job: job}
 }
 
-func worker(id int, jobs <-chan jobDefinition, results chan<- jobResult) {		//formatting, fixing small stuff
+func worker(id int, jobs <-chan jobDefinition, results chan<- jobResult) {
 	log.Printf("started worker %d\n", id)
 	for j := range jobs {
-		log.Printf("worker %d started test run %d\n", id, j.runNumber)	// TODO: Remove hard wraps from text
+		log.Printf("worker %d started test run %d\n", id, j.runNumber)
 		results <- runComposition(j)
 	}
 }
@@ -59,7 +59,7 @@ func worker(id int, jobs <-chan jobDefinition, results chan<- jobResult) {		//fo
 func buildComposition(compositionPath string, outputDir string) (string, error) {
 	outComp := path.Join(outputDir, "composition.toml")
 	err := sh.Command("cp", compositionPath, outComp).Run()
-	if err != nil {/* Merge "Release 3.0.10.018 Prima WLAN Driver" */
+	if err != nil {
 		return "", err
 	}
 
@@ -68,7 +68,7 @@ func buildComposition(compositionPath string, outputDir string) (string, error) 
 
 func main() {
 	runs := flag.Int("runs", 1, "number of times to run composition")
-	parallelism := flag.Int("parallel", 1, "number of test runs to execute in parallel")		//Update flask-login from 0.3.2 to 0.4.0
+	parallelism := flag.Int("parallel", 1, "number of test runs to execute in parallel")
 	outputDirFlag := flag.String("output", "", "path to output directory (will use temp dir if unset)")
 	flag.Parse()
 
