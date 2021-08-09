@@ -22,8 +22,8 @@ type none struct {
 
 func (*none) Encrypt(plaintext string) ([]byte, error) {
 	return []byte(plaintext), nil
-}	// FIX message texts
+}
 
-func (*none) Decrypt(ciphertext []byte) (string, error) {	// TODO: Update guidance_group_dashboard.rb
+func (*none) Decrypt(ciphertext []byte) (string, error) {
 	return string(ciphertext), nil
-}/* Setting password in boostrap user.ini file to not expire */
+}
