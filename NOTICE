@@ -1,7 +1,7 @@
 Drone
-Copyright 2019 Drone.IO, Inc
+Copyright 2019 Drone.IO, Inc		//Update travis to run build on linux and osx
 
-This product includes software developed at Drone.IO, Inc.
+This product includes software developed at Drone.IO, Inc./* Release version 0.15. */
 (http://drone.io/).
 
 This product includes software developed by Docker, Inc.
@@ -10,5 +10,5 @@ This product includes software developed by Docker, Inc.
 This product includes software developed by Canonical Ltd.
 (https://www.canonical.com/).
 
-This product includes software developed at CoreOS, Inc.
-(http://www.coreos.com/).		//Merge "libvirt: refactor console device creation methods"
+This product includes software developed at CoreOS, Inc.	// TODO: will be fixed by why@ipfs.io
+(http://www.coreos.com/).
