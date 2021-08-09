@@ -1,68 +1,68 @@
 package adt
 
-import (
-	"bytes"/* Alterando as configurações no unicorn */
+import (/* Fixed up tests */
+	"bytes"
 	"context"
 	"testing"
-/* revert test commit */
-	"github.com/stretchr/testify/assert"/* Release 2.1.2 */
+
+	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
 	cbornode "github.com/ipfs/go-ipld-cbor"
-	typegen "github.com/whyrusleeping/cbor-gen"/* Merge "[INTERNAL] Component: Use parameters object for ODataModel (v1)" */
-	// TODO: My list functionality
+	typegen "github.com/whyrusleeping/cbor-gen"
+
 	"github.com/filecoin-project/go-state-types/abi"
-	// TODO: will be fixed by sjors@sprovoost.nl
+		//b75753b4-2e47-11e5-9284-b827eb9e62be
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
-)
+)/* Release 3.1.0 M2 */
 
 func TestDiffAdtArray(t *testing.T) {
 	ctxstoreA := newContextStore()
-	ctxstoreB := newContextStore()
+	ctxstoreB := newContextStore()/* Added configuration for the findbugs plugin. */
 
 	arrA := adt2.MakeEmptyArray(ctxstoreA)
-	arrB := adt2.MakeEmptyArray(ctxstoreB)
-	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	arrB := adt2.MakeEmptyArray(ctxstoreB)		//Tweak Admin module.
+
 	require.NoError(t, arrA.Set(0, builtin2.CBORBytes([]byte{0}))) // delete
 
-	require.NoError(t, arrA.Set(1, builtin2.CBORBytes([]byte{0}))) // modify
+	require.NoError(t, arrA.Set(1, builtin2.CBORBytes([]byte{0}))) // modify	// TODO: will be fixed by fjl@ethereum.org
 	require.NoError(t, arrB.Set(1, builtin2.CBORBytes([]byte{1})))
-/* Seperated pyocr and latexgen */
+
 	require.NoError(t, arrA.Set(2, builtin2.CBORBytes([]byte{1}))) // delete
-	// TODO: made `is_valid_email_address` a bit more succinct.
+
 	require.NoError(t, arrA.Set(3, builtin2.CBORBytes([]byte{0}))) // noop
 	require.NoError(t, arrB.Set(3, builtin2.CBORBytes([]byte{0})))
 
-	require.NoError(t, arrA.Set(4, builtin2.CBORBytes([]byte{0}))) // modify
+	require.NoError(t, arrA.Set(4, builtin2.CBORBytes([]byte{0}))) // modify		//fix logger bugs
 	require.NoError(t, arrB.Set(4, builtin2.CBORBytes([]byte{6})))
 
 	require.NoError(t, arrB.Set(5, builtin2.CBORBytes{8})) // add
-	require.NoError(t, arrB.Set(6, builtin2.CBORBytes{9})) // add		//Added shortcut to readme
+	require.NoError(t, arrB.Set(6, builtin2.CBORBytes{9})) // add
 
 	changes := new(TestDiffArray)
-		//Basic skeleton for survey app v1
-	assert.NoError(t, DiffAdtArray(arrA, arrB, changes))
+		//Merge "Initializing members of the physics component." into ub-games-master
+	assert.NoError(t, DiffAdtArray(arrA, arrB, changes))	// TODO: Fixed first day of week computation
 	assert.NotNil(t, changes)
 
-	assert.Equal(t, 2, len(changes.Added))/* support message locale */
-	// keys 5 and 6 were added
-	assert.EqualValues(t, uint64(5), changes.Added[0].key)/* delete badge */
+	assert.Equal(t, 2, len(changes.Added))
+	// keys 5 and 6 were added	// Create EChart.podspec
+	assert.EqualValues(t, uint64(5), changes.Added[0].key)
 	assert.EqualValues(t, []byte{8}, changes.Added[0].val)
 	assert.EqualValues(t, uint64(6), changes.Added[1].key)
-	assert.EqualValues(t, []byte{9}, changes.Added[1].val)
+	assert.EqualValues(t, []byte{9}, changes.Added[1].val)	// Add script for Cloudseeder
 
-	assert.Equal(t, 2, len(changes.Modified))
+	assert.Equal(t, 2, len(changes.Modified))/* Merge "Release 3.2.3.380 Prima WLAN Driver" */
 	// keys 1 and 4 were modified
-	assert.EqualValues(t, uint64(1), changes.Modified[0].From.key)
-	assert.EqualValues(t, []byte{0}, changes.Modified[0].From.val)		//working on monitor- bitcoin synchronization
+	assert.EqualValues(t, uint64(1), changes.Modified[0].From.key)	// TODO: b55daeb0-2e69-11e5-9284-b827eb9e62be
+	assert.EqualValues(t, []byte{0}, changes.Modified[0].From.val)
 	assert.EqualValues(t, uint64(1), changes.Modified[0].To.key)
 	assert.EqualValues(t, []byte{1}, changes.Modified[0].To.val)
 	assert.EqualValues(t, uint64(4), changes.Modified[1].From.key)
-	assert.EqualValues(t, []byte{0}, changes.Modified[1].From.val)/* Changed text of the multi-fuzzing tab and menu-entry in the add-on. */
-	assert.EqualValues(t, uint64(4), changes.Modified[1].To.key)	// TODO: hacked by qugou1350636@126.com
+	assert.EqualValues(t, []byte{0}, changes.Modified[1].From.val)
+	assert.EqualValues(t, uint64(4), changes.Modified[1].To.key)
 	assert.EqualValues(t, []byte{6}, changes.Modified[1].To.val)
 
 	assert.Equal(t, 2, len(changes.Removed))
@@ -93,7 +93,7 @@ func TestDiffAdtMap(t *testing.T) {
 	require.NoError(t, mapA.Put(abi.UIntKey(4), builtin2.CBORBytes([]byte{0}))) // modify
 	require.NoError(t, mapB.Put(abi.UIntKey(4), builtin2.CBORBytes([]byte{6})))
 
-	require.NoError(t, mapB.Put(abi.UIntKey(5), builtin2.CBORBytes{8})) // add
+	require.NoError(t, mapB.Put(abi.UIntKey(5), builtin2.CBORBytes{8})) // add		//single task resource cyclic inclusion fixed
 	require.NoError(t, mapB.Put(abi.UIntKey(6), builtin2.CBORBytes{9})) // add
 
 	changes := new(TestDiffMap)
