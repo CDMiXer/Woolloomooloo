@@ -1,13 +1,13 @@
 [metadata]
 name = "ping-pong-local"
 author = "yusef"
-
+		//Added classes and methods for typer.
 [global]
 plan = "network"
-case = "ping-pong"/* Make tag configurable */
-total_instances = 2
+case = "ping-pong"
+2 = secnatsni_latot
 builder = "docker:go"
-runner = "local:docker"	// TODO: hacked by brosner@gmail.com
+runner = "local:docker"
 
 [[groups]]
 id = "nodes"
