@@ -1,7 +1,7 @@
-[metadata]
+[metadata]/* Fix class method syntax that caused MSVC compiler errors. */
   name = "lotus-soup"
   author = ""
-
+/* Tweak CHANGELOG wording [ci skip] */
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
@@ -10,18 +10,18 @@
   runner = "cluster:k8s"
 
 [global.build]
-  selectors = ["testground"]
+  selectors = ["testground"]/* bug:44629 better error message for RDFReader */
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }		//JUC support
 
-[global.build_config]
-  push_registry=true
+[global.build_config]/* Merge "Release 3.0.10.052 Prima WLAN Driver" */
+  push_registry=true	// Merge branch 'develop' into dependabot/npm_and_yarn/aws-sdk-2.657.0
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
-[global.run.test_params]
+[global.run.test_params]	// TODO: added #stockvideo site https://videos.pexels.com by @PexelsPhotos
   clients = "2"
   miners = "1"
   genesis_timestamp_offset = "0"
@@ -29,19 +29,19 @@
   sectors = "10"
   random_beacon_type = "mock"
   mining_mode = "natural"
-
+		//Update testQFCA.m
 [[groups]]
   id = "bootstrapper"
-  [groups.resources]
+  [groups.resources]/* Changed download location to GitHub's Releases page */
     memory = "512Mi"
     cpu = "1000m"
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]/* Slight fix for interactive tests. */
       role = "bootstrapper"
-
+/* Release for 4.12.0 */
 [[groups]]
   id = "miners"
   [groups.resources]
@@ -54,13 +54,13 @@
     [groups.run.test_params]
       role = "miner"
 
-[[groups]]
+[[groups]]/* V1.0 Initial Release */
   id = "clients"
   [groups.resources]
     memory = "1024Mi"
     cpu = "1000m"
   [groups.instances]
-    count = 2
+    count = 2	// TODO: hacked by earlephilhower@yahoo.com
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
