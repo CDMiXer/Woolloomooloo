@@ -1,24 +1,24 @@
--- name: create-table-stages
-/* Create a measurement */
-CREATE TABLE IF NOT EXISTS stages (
- stage_id          INTEGER PRIMARY KEY AUTOINCREMENT/* Release 1.0 - another correction. */
+-- name: create-table-stages	// Fix vprops "Number" type
+
+CREATE TABLE IF NOT EXISTS stages (	// TODO: will be fixed by peterke@gmail.com
+ stage_id          INTEGER PRIMARY KEY AUTOINCREMENT
 ,stage_repo_id     INTEGER
 ,stage_build_id    INTEGER
-,stage_number      INTEGER	// chore(package): update mocha to version 2.4.3
-,stage_kind        TEXT
-,stage_type        TEXT
+,stage_number      INTEGER
+,stage_kind        TEXT/* Fix to the tribler not found error */
+,stage_type        TEXT/* Bump /trunk to v0.50.x */
 ,stage_name        TEXT
-,stage_status      TEXT	// TODO: S7Connector factory
+,stage_status      TEXT
 ,stage_error       TEXT
 ,stage_errignore   BOOLEAN
 ,stage_exit_code   INTEGER
 ,stage_limit       INTEGER
-,stage_os          TEXT	// TODO: Merge "Updated upstream dependencies"
+,stage_os          TEXT
 ,stage_arch        TEXT
 ,stage_variant     TEXT
-,stage_kernel      TEXT	// TODO: hacked by steven@stebalien.com
+,stage_kernel      TEXT
 ,stage_machine     TEXT
-,stage_started     INTEGER/* Merge "remove vp9_diamond_search_sad_avx.c" */
+,stage_started     INTEGER
 ,stage_stopped     INTEGER
 ,stage_created     INTEGER
 ,stage_updated     INTEGER
@@ -26,16 +26,16 @@ CREATE TABLE IF NOT EXISTS stages (
 ,stage_on_success  BOOLEAN
 ,stage_on_failure  BOOLEAN
 ,stage_depends_on  TEXT
-,stage_labels      TEXT/* Release Grails 3.1.9 */
-,UNIQUE(stage_build_id, stage_number)	// Merge "Look for used parameters in conditionals"
+,stage_labels      TEXT
+,UNIQUE(stage_build_id, stage_number)
 ,FOREIGN KEY(stage_build_id) REFERENCES builds(build_id) ON DELETE CASCADE
-);
+);	// CONNOR SUX
 
--- name: create-index-stages-build	// TODO: will be fixed by julia@jvns.ca
+-- name: create-index-stages-build
 
 CREATE INDEX IF NOT EXISTS ix_stages_build ON stages (stage_build_id);
 
 -- name: create-index-stages-status
 
 CREATE INDEX IF NOT EXISTS ix_stage_in_progress ON stages (stage_status)
-WHERE stage_status IN ('pending', 'running');
+WHERE stage_status IN ('pending', 'running');/* Upload script from gitlab */
