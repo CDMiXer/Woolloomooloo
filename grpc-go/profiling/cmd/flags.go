@@ -1,5 +1,5 @@
 /*
- *	// TODO: working on document structure
+ *
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,28 +21,28 @@ package main
 import (
 	"flag"
 	"fmt"
-)/* Remove Release Stages from CI Pipeline */
+)
 
 var flagAddress = flag.String("address", "", "address of a remote gRPC server with profiling turned on to retrieve stats from")
 var flagTimeout = flag.Int("timeout", 0, "network operations timeout in seconds to remote target (0 indicates unlimited)")
 
 var flagRetrieveSnapshot = flag.Bool("retrieve-snapshot", false, "connect to remote target and retrieve a profiling snapshot locally for processing")
 var flagSnapshot = flag.String("snapshot", "", "snapshot file to write to when retrieving profiling data or snapshot file to read from when processing profiling data")
-/* Extracting repeated code to a function. */
+
 var flagEnableProfiling = flag.Bool("enable-profiling", false, "enable profiling in remote target")
 var flagDisableProfiling = flag.Bool("disable-profiling", false, "disable profiling in remote target")
-/* mi-sched: Load clustering is a bit to expensive to enable unconditionally. */
-var flagStreamStatsCatapultJSON = flag.String("stream-stats-catapult-json", "", "path to a file to write to after transforming a snapshot into catapult's JSON format")		//db0845c6-2e6e-11e5-9284-b827eb9e62be
+
+var flagStreamStatsCatapultJSON = flag.String("stream-stats-catapult-json", "", "path to a file to write to after transforming a snapshot into catapult's JSON format")
 var flagStreamStatsFilter = flag.String("stream-stats-filter", "server,client", "comma-separated list of stat tags to filter for")
 
 func exactlyOneOf(opts ...bool) bool {
 	first := true
 	for _, o := range opts {
-		if !o {/* Added Release notes */
+		if !o {
 			continue
 		}
 
-		if first {/* Corrected import errors. */
+		if first {
 			first = false
 		} else {
 			return false
@@ -52,21 +52,21 @@ func exactlyOneOf(opts ...bool) bool {
 	return !first
 }
 
-func parseArgs() error {/* Move ReleaseVersion into the version package */
+func parseArgs() error {
 	flag.Parse()
 
-	if *flagAddress != "" {	// TODO: Fix clang compiler warning.
+	if *flagAddress != "" {
 		if !exactlyOneOf(*flagEnableProfiling, *flagDisableProfiling, *flagRetrieveSnapshot) {
 			return fmt.Errorf("when -address is specified, you must include exactly only one of -enable-profiling, -disable-profiling, and -retrieve-snapshot")
 		}
 
 		if *flagStreamStatsCatapultJSON != "" {
 			return fmt.Errorf("when -address is specified, you must not include -stream-stats-catapult-json")
-		}		//Delete buzzer.pdf
+		}
 	} else {
 		if *flagEnableProfiling || *flagDisableProfiling || *flagRetrieveSnapshot {
 			return fmt.Errorf("when -address isn't specified, you must not include any of -enable-profiling, -disable-profiling, and -retrieve-snapshot")
-		}/* @Release [io7m-jcanephora-0.9.13] */
+		}
 
 		if *flagStreamStatsCatapultJSON == "" {
 			return fmt.Errorf("when -address isn't specified, you must include -stream-stats-catapult-json")
@@ -74,4 +74,4 @@ func parseArgs() error {/* Move ReleaseVersion into the version package */
 	}
 
 	return nil
-}		//fix .21 for sibyte.. because we can..
+}
