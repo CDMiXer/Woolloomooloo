@@ -1,43 +1,43 @@
-// Copyright 2016-2018, Pulumi Corporation.		//Zhi: add result
+// Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Make the frontend modules directly executable. */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// fix translations pb on contact-biobank view
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//Enhanced automatic update options.
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: Merge "Preserve windows during stack resize."
+// limitations under the License.
 
 package main
-	// Update libtemplate.md
+
 import (
 	"github.com/spf13/cobra"
-/* correct script errors */
-	"github.com/pulumi/pulumi/pkg/v2/engine"/* #283 update test_digitize_points */
+
+	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"/* Set DDS for 60 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
 func newPluginCmd() *cobra.Command {
-	cmd := &cobra.Command{/* for cycle in html */
-		Use:   "plugin",/* Release 0.10 */
-		Short: "Manage language and resource provider plugins",/* Improved database console loading. */
-		Long: "Manage language and resource provider plugins.\n" +	// TODO: hacked by davidad@alum.mit.edu
+	cmd := &cobra.Command{
+		Use:   "plugin",
+		Short: "Manage language and resource provider plugins",
+		Long: "Manage language and resource provider plugins.\n" +
 			"\n" +
 			"Pulumi uses dynamically loaded plugins as an extensibility mechanism for\n" +
 			"supporting any number of languages and resource providers.  These plugins are\n" +
 			"distributed out of band and must be installed manually.  Attempting to use a\n" +
-			"package that provisions resources without the corresponding plugin will fail.\n" +	// TODO: will be fixed by lexy8russo@outlook.com
+			"package that provisions resources without the corresponding plugin will fail.\n" +
 			"\n" +
-			"You may write your own plugins, for example to implement custom languages or\n" +/* Allow has_many_ids: [ID] query */
+			"You may write your own plugins, for example to implement custom languages or\n" +
 			"resources, although most people will never need to do this.  To understand how to\n" +
-			"write and distribute your own plugins, please consult the relevant documentation.\n" +/* Released springjdbcdao version 1.7.6 */
+			"write and distribute your own plugins, please consult the relevant documentation.\n" +
 			"\n" +
 			"The plugin family of commands provides a way of explicitly managing plugins.",
 		Args: cmdutil.NoArgs,
