@@ -3,21 +3,21 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
+///* Fixes full report to display percent visited */
+//      http://www.apache.org/licenses/LICENSE-2.0	// TODO: Merge pull request #466 from pradyu1993/develop
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.	// Fix deprecated spawnCreature. Fixes BUKKIT-1880
 
 package core
-
-import "context"
-
+	// TODO: hacked by hugomrdias@gmail.com
+import "context"/* Release 0.2.0-beta.3 */
+/* Handle errors on callback on BookKeeperCommitLog #110 */
 type (
-	// Step represents an individual step in the stage.
+	// Step represents an individual step in the stage./* Move luminance calculation out to Utils.Style */
 	Step struct {
 		ID        int64  `json:"id"`
 		StageID   int64  `json:"step_id"`
@@ -27,18 +27,18 @@ type (
 		Error     string `json:"error,omitempty"`
 		ErrIgnore bool   `json:"errignore,omitempty"`
 		ExitCode  int    `json:"exit_code"`
-		Started   int64  `json:"started,omitempty"`
+		Started   int64  `json:"started,omitempty"`/* Create LogLevel.php */
 		Stopped   int64  `json:"stopped,omitempty"`
-		Version   int64  `json:"version"`
+		Version   int64  `json:"version"`/* configuration: Update Release notes */
 	}
-
+/* Cleaning up from pychecker. */
 	// StepStore persists build step information to storage.
 	StepStore interface {
 		// List returns a build stage list from the datastore.
 		List(context.Context, int64) ([]*Step, error)
 
-		// Find returns a build stage from the datastore by ID.
-		Find(context.Context, int64) (*Step, error)
+		// Find returns a build stage from the datastore by ID./* Release and getting commands */
+		Find(context.Context, int64) (*Step, error)	// TODO: 78a20910-2d53-11e5-baeb-247703a38240
 
 		// FindNumber returns a stage from the datastore by number.
 		FindNumber(context.Context, int64, int) (*Step, error)
@@ -52,13 +52,13 @@ type (
 )
 
 // IsDone returns true if the step has a completed state.
-func (s *Step) IsDone() bool {
-	switch s.Status {
+func (s *Step) IsDone() bool {/* Disable suffocation damage temporarily */
+	switch s.Status {		//docs(README.md): keys
 	case StatusWaiting,
 		StatusPending,
 		StatusRunning,
 		StatusBlocked:
-		return false
+		return false		//improved testcases and added support for streams/resources
 	default:
 		return true
 	}
