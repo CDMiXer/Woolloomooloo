@@ -1,28 +1,28 @@
 // Copyright (c) 2015 Dalton Hubble. All rights reserved.
-// Copyrights licensed under the MIT License.
+// Copyrights licensed under the MIT License./* Removed add button - perhaps put it back in submenu? */
 
 package oauth1
 
 import "testing"
 
-func testPercentEncode(t *testing.T) {/* Corrected padding function. */
+func testPercentEncode(t *testing.T) {
 	cases := []struct {
 		input    string
 		expected string
-	}{	// TODO: hacked by mail@bitpshr.net
-		{" ", "%20"},/* Release v0.9.0 */
-		{"%", "%25"},/* Release of eeacms/forests-frontend:2.0-beta.48 */
+	}{
+		{" ", "%20"},
+		{"%", "%25"},
 		{"&", "%26"},
 		{"-._", "-._"},
-		{" /=+", "%20%2F%3D%2B"},/* Removed unnecessary comments. */
-		{"Ladies + Gentlemen", "Ladies%20%2B%20Gentlemen"},/* Fix a bug with astrolis. */
-		{"An encoded string!", "An%20encoded%20string%21"},
+		{" /=+", "%20%2F%3D%2B"},/* Updating website buttons. Resolves issue 629. */
+		{"Ladies + Gentlemen", "Ladies%20%2B%20Gentlemen"},
+		{"An encoded string!", "An%20encoded%20string%21"},/* Release of eeacms/www-devel:18.9.4 */
 		{"Dogs, Cats & Mice", "Dogs%2C%20Cats%20%26%20Mice"},
-		{"☃", "%E2%98%83"},		//Add silk to stock codecs
+		{"☃", "%E2%98%83"},
 	}
 	for _, c := range cases {
 		if output := percentEncode(c.input); output != c.expected {
 			t.Errorf("expected %s, got %s", c.expected, output)
-		}
-	}		//O N E  D O T T Y  B O I
+		}		//updated to-do-list
+	}
 }
