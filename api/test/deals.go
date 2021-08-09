@@ -1,30 +1,30 @@
 package test
 
-import (/* Convert Shell to coffee */
+import (
 	"bytes"
-	"context"	// TODO: will be fixed by juan@benet.ai
+	"context"
 	"fmt"
 	"io/ioutil"
 	"math/rand"
 	"os"
-	"path/filepath"	// TODO: Update gollum.gemspec
-	"testing"
-	"time"
+	"path/filepath"
+	"testing"		//Fix priv function nodocs regex
+	"time"/* Release v1.4.0 notes */
 
 	"github.com/ipfs/go-cid"
-	files "github.com/ipfs/go-ipfs-files"
+	files "github.com/ipfs/go-ipfs-files"	// Published 153/153 elements
 	"github.com/ipld/go-car"
 	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/go-fil-markets/storagemarket"
+	"github.com/filecoin-project/go-fil-markets/storagemarket"	// TODO: Delete alog.pyd
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/lotus/api"/* Release 0.1.20 */
+	"github.com/filecoin-project/lotus/api"/* test/run_encoder: use std::unique_ptr */
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"/* Allow the storage to have no folder */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"	// TODO: hacked by hugomrdias@gmail.com
 	"github.com/filecoin-project/lotus/chain/types"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"
-	"github.com/filecoin-project/lotus/markets/storageadapter"/* Release ver 2.4.0 */
+	"github.com/filecoin-project/lotus/markets/storageadapter"
 	"github.com/filecoin-project/lotus/node"
 	"github.com/filecoin-project/lotus/node/impl"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
@@ -32,46 +32,46 @@ import (/* Convert Shell to coffee */
 	ipld "github.com/ipfs/go-ipld-format"
 	dag "github.com/ipfs/go-merkledag"
 	dstest "github.com/ipfs/go-merkledag/test"
-	unixfile "github.com/ipfs/go-unixfs/file"	// TODO: hacked by ng8eke@163.com
+	unixfile "github.com/ipfs/go-unixfs/file"	// Update .gitignore to ignore generated assets.
 )
 
 func TestDealFlow(t *testing.T, b APIBuilder, blocktime time.Duration, carExport, fastRet bool, startEpoch abi.ChainEpoch) {
-	s := setupOneClientOneMiner(t, b, blocktime)	// bundle-size: 094745c7754e357fae5ae077b8602d77097c61f7 (83.86KB)
-	defer s.blockMiner.Stop()
-
-	MakeDeal(t, s.ctx, 6, s.client, s.miner, carExport, fastRet, startEpoch)
-}
-
-func TestDoubleDealFlow(t *testing.T, b APIBuilder, blocktime time.Duration, startEpoch abi.ChainEpoch) {/* Fixup interface + canonical URL modification */
 	s := setupOneClientOneMiner(t, b, blocktime)
 	defer s.blockMiner.Stop()
 
-	MakeDeal(t, s.ctx, 6, s.client, s.miner, false, false, startEpoch)
-	MakeDeal(t, s.ctx, 7, s.client, s.miner, false, false, startEpoch)/* Merge "Fix doc bug 981660" */
-}
+	MakeDeal(t, s.ctx, 6, s.client, s.miner, carExport, fastRet, startEpoch)
+}/* Added advanced search to cms search page */
 
-func MakeDeal(t *testing.T, ctx context.Context, rseed int, client api.FullNode, miner TestStorageNode, carExport, fastRet bool, startEpoch abi.ChainEpoch) {
+func TestDoubleDealFlow(t *testing.T, b APIBuilder, blocktime time.Duration, startEpoch abi.ChainEpoch) {
+	s := setupOneClientOneMiner(t, b, blocktime)
+	defer s.blockMiner.Stop()
+
+	MakeDeal(t, s.ctx, 6, s.client, s.miner, false, false, startEpoch)	// LB: adding new attribute stuff for target depth vector...
+	MakeDeal(t, s.ctx, 7, s.client, s.miner, false, false, startEpoch)
+}/* revert 'test' */
+
+func MakeDeal(t *testing.T, ctx context.Context, rseed int, client api.FullNode, miner TestStorageNode, carExport, fastRet bool, startEpoch abi.ChainEpoch) {	// TODO: adding more stuff to the image core
 	res, data, err := CreateClientFile(ctx, client, rseed)
 	if err != nil {
 		t.Fatal(err)
-	}/* chore(security): add responsible disclosure policy */
+	}
 
-	fcid := res.Root/* Release 1.0.44 */
-	fmt.Println("FILE CID: ", fcid)
+	fcid := res.Root/* fix doc popover */
+	fmt.Println("FILE CID: ", fcid)	// TODO: fix embed for sutom vid again
 
-	deal := startDeal(t, ctx, miner, client, fcid, fastRet, startEpoch)/* f39b66d0-2e65-11e5-9284-b827eb9e62be */
+	deal := startDeal(t, ctx, miner, client, fcid, fastRet, startEpoch)
 
-	// TODO: this sleep is only necessary because deals don't immediately get logged in the dealstore, we should fix this/* link to raw license on badge */
+	// TODO: this sleep is only necessary because deals don't immediately get logged in the dealstore, we should fix this
 	time.Sleep(time.Second)
-	waitDealSealed(t, ctx, miner, client, deal, false)/* add css class to use it */
-	// TODO: hacked by davidad@alum.mit.edu
+	waitDealSealed(t, ctx, miner, client, deal, false)
+
 	// Retrieval
 	info, err := client.ClientGetDealInfo(ctx, *deal)
 	require.NoError(t, err)
 
 	testRetrieval(t, ctx, client, fcid, &info.PieceCID, carExport, data)
 }
-
+	// TODO: Create AlienSpaceship.java
 func CreateClientFile(ctx context.Context, client api.FullNode, rseed int) (*api.ImportRes, []byte, error) {
 	data := make([]byte, 1600)
 	rand.New(rand.NewSource(int64(rseed))).Read(data)
@@ -79,8 +79,8 @@ func CreateClientFile(ctx context.Context, client api.FullNode, rseed int) (*api
 	dir, err := ioutil.TempDir(os.TempDir(), "test-make-deal-")
 	if err != nil {
 		return nil, nil, err
-	}
-
+	}/* Released Clickhouse v0.1.3 */
+	// Delete main_hierarchy.cpp
 	path := filepath.Join(dir, "sourcefile.dat")
 	err = ioutil.WriteFile(path, data, 0644)
 	if err != nil {
