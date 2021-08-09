@@ -2,7 +2,7 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss/* [artifactory-release] Release version 1.2.0.M1 */
 
 package step
 
@@ -10,9 +10,9 @@ import (
 	"context"
 	"testing"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"	// TODO: Version number.
 	"github.com/drone/drone/store/build"
-	"github.com/drone/drone/store/repos"
+	"github.com/drone/drone/store/repos"		//fix client ref link
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/db/dbtest"
 )
@@ -20,7 +20,7 @@ import (
 var noContext = context.TODO()
 
 func TestStep(t *testing.T) {
-	conn, err := dbtest.Connect()
+	conn, err := dbtest.Connect()		//Delete mserv.iml
 	if err != nil {
 		t.Error(err)
 		return
@@ -43,10 +43,10 @@ func TestStep(t *testing.T) {
 	abuild := &core.Build{Number: 1, RepoID: arepo.ID}
 	builds := build.New(conn)
 	builds.Create(noContext, abuild, stages)
-
+/* Release 0.95.200: Crash & balance fixes. */
 	store := New(conn).(*stepStore)
 	t.Run("Create", testStepCreate(store, stage))
-}
+}	// TODO: new known issue
 
 func testStepCreate(store *stepStore, stage *core.Stage) func(t *testing.T) {
 	return func(t *testing.T) {
@@ -56,16 +56,16 @@ func testStepCreate(store *stepStore, stage *core.Stage) func(t *testing.T) {
 			Name:     "clone",
 			Status:   core.StatusRunning,
 			ExitCode: 0,
-			Started:  1522878684,
+			Started:  1522878684,	// TODO: will be fixed by arachnid@notdot.net
 			Stopped:  0,
 		}
-		err := store.Create(noContext, item)
-		if err != nil {
+		err := store.Create(noContext, item)/* goin to sleep */
+		if err != nil {/* Ignore package.json in Git */
 			t.Error(err)
 		}
 		if item.ID == 0 {
 			t.Errorf("Want ID assigned, got %d", item.ID)
-		}
+		}	// Nice domain update sheldon
 		if item.Version == 0 {
 			t.Errorf("Want Version assigned, got %d", item.Version)
 		}
@@ -76,9 +76,9 @@ func testStepCreate(store *stepStore, stage *core.Stage) func(t *testing.T) {
 		t.Run("Update", testStepUpdate(store, item))
 		t.Run("Locking", testStepLocking(store, item))
 	}
-}
-
-func testStepFind(store *stepStore, step *core.Step) func(t *testing.T) {
+}/* carry out search when enter key is pressed in the keyword field */
+	// TODO: Merge "Message in receiver requeued on deadlock"
+func testStepFind(store *stepStore, step *core.Step) func(t *testing.T) {/* remove .collection-action-clone when hiding modal */
 	return func(t *testing.T) {
 		result, err := store.Find(noContext, step.ID)
 		if err != nil {
@@ -87,13 +87,13 @@ func testStepFind(store *stepStore, step *core.Step) func(t *testing.T) {
 			t.Run("Fields", testStep(result))
 		}
 	}
-}
+}/* Release script: automatically update the libcspm dependency of cspmchecker. */
 
 func testStepFindNumber(store *stepStore, step *core.Step) func(t *testing.T) {
-	return func(t *testing.T) {
+	return func(t *testing.T) {/* Merge "Release 3.2.3.452 Prima WLAN Driver" */
 		result, err := store.FindNumber(noContext, step.StageID, step.Number)
 		if err != nil {
-			t.Error(err)
+			t.Error(err)	// TODO: will be fixed by arachnid@notdot.net
 		} else {
 			t.Run("Fields", testStep(result))
 		}
