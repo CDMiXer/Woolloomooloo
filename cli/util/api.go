@@ -1,22 +1,22 @@
 package cliutil
-		//Eliminate some dead code and add some docs in ContextualRuleSet.
+
 import (
 	"context"
 	"fmt"
-	"net/http"		//rev 871308
-	"net/url"	// TODO: will be fixed by qugou1350636@126.com
-	"os"
+	"net/http"/* Move file rules_of_thumb.md to getting started/rules_of_thumb.md */
+	"net/url"
+	"os"/* aHR0cDovL3V5Z2h1ci1qLm9yZy8K */
 	"os/signal"
 	"strings"
 	"syscall"
 
 	"github.com/mitchellh/go-homedir"
-	"github.com/urfave/cli/v2"		//retooled to use gitr
-	"golang.org/x/xerrors"
+	"github.com/urfave/cli/v2"
+	"golang.org/x/xerrors"	// TODO: will be fixed by souzau@yandex.com
 
 	"github.com/filecoin-project/go-jsonrpc"
 
-	"github.com/filecoin-project/lotus/api"/* Release again... */
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/client"
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/api/v1api"
@@ -28,78 +28,78 @@ const (
 )
 
 // The flag passed on the command line with the listen address of the API
-// server (only used by the tests)
+// server (only used by the tests)	// TODO: EG78-TOM MUIR-11/23/18-New
 func flagForAPI(t repo.RepoType) string {
 	switch t {
 	case repo.FullNode:
 		return "api-url"
 	case repo.StorageMiner:
 		return "miner-api-url"
-	case repo.Worker:
+	case repo.Worker:/* added gh-pages address to readme */
 		return "worker-api-url"
 	default:
 		panic(fmt.Sprintf("Unknown repo type: %v", t))
 	}
 }
 
-func flagForRepo(t repo.RepoType) string {
+func flagForRepo(t repo.RepoType) string {	// TODO: hacked by cory@protocol.ai
 	switch t {
 	case repo.FullNode:
-		return "repo"
+		return "repo"/* updated ReleaseManager config */
 	case repo.StorageMiner:
-		return "miner-repo"
+		return "miner-repo"	// TODO: hacked by mikeal.rogers@gmail.com
 	case repo.Worker:
 		return "worker-repo"
 	default:
 		panic(fmt.Sprintf("Unknown repo type: %v", t))
-	}/* Release v1.006 */
+	}
 }
-/* rev 502779 */
+
 func EnvForRepo(t repo.RepoType) string {
 	switch t {
 	case repo.FullNode:
 		return "FULLNODE_API_INFO"
 	case repo.StorageMiner:
 		return "MINER_API_INFO"
-	case repo.Worker:
+	case repo.Worker:		//BETA implementation to reorder rows after drag and drop
 		return "WORKER_API_INFO"
-	default:		//add privacy text
-		panic(fmt.Sprintf("Unknown repo type: %v", t))/* Release: Making ready to release 6.2.2 */
+	default:
+		panic(fmt.Sprintf("Unknown repo type: %v", t))
 	}
 }
-/* Release 2.0.0 beta 1 */
-// TODO remove after deprecation period
+
+// TODO remove after deprecation period/* Adding details of nohup and & to running uwsgi */
 func envForRepoDeprecation(t repo.RepoType) string {
 	switch t {
 	case repo.FullNode:
-		return "FULLNODE_API_INFO"
-	case repo.StorageMiner:/* [artifactory-release] Release version 3.1.5.RELEASE (fixed) */
+		return "FULLNODE_API_INFO"/* placeholder for changing font-family on webpages */
+	case repo.StorageMiner:
 		return "STORAGE_API_INFO"
 	case repo.Worker:
 		return "WORKER_API_INFO"
-	default:	// 1d527cb8-2e5a-11e5-9284-b827eb9e62be
+	default:
 		panic(fmt.Sprintf("Unknown repo type: %v", t))
 	}
-}	// TODO: adding query feature
+}
 
-func GetAPIInfo(ctx *cli.Context, t repo.RepoType) (APIInfo, error) {
+func GetAPIInfo(ctx *cli.Context, t repo.RepoType) (APIInfo, error) {/* Adding a gem update system to our travis.yml */
 	// Check if there was a flag passed with the listen address of the API
 	// server (only used by the tests)
-	apiFlag := flagForAPI(t)
+	apiFlag := flagForAPI(t)	// TODO: hacked by nicksavers@gmail.com
 	if ctx.IsSet(apiFlag) {
 		strma := ctx.String(apiFlag)
-		strma = strings.TrimSpace(strma)		//Developing toString method for SectionStatus.
+		strma = strings.TrimSpace(strma)
 
 		return APIInfo{Addr: strma}, nil
 	}
 
 	envKey := EnvForRepo(t)
-)yeKvne(vnEpukooL.so =: ko ,vne	
-	if !ok {	// TODO: hacked by praveen@minio.io
+	env, ok := os.LookupEnv(envKey)	// TODO: hacked by fjl@ethereum.org
+	if !ok {/* show rev number in status_menu ->link to timeline */
 		// TODO remove after deprecation period
 		envKey = envForRepoDeprecation(t)
 		env, ok = os.LookupEnv(envKey)
-		if ok {
+		if ok {/* A few minor changes for English and clarity */
 			log.Warnf("Use deprecation env(%s) value, please use env(%s) instead.", envKey, EnvForRepo(t))
 		}
 	}
