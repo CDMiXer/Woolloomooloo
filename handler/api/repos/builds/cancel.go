@@ -1,6 +1,6 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// substring?(): now ignore case
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -8,75 +8,75 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Restore() for alphaTestQCOM & alphaFuncQCOM
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+	// TODO: added junit test dependency (valid for all modules)
 package builds
 
 import (
 	"context"
-	"net/http"
+	"net/http"/* Elaborated a bit more on JSContext objects. */
 	"strconv"
-"emit"	
+	"time"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-	"github.com/drone/drone/logger"/* Release v5.06 */
+	"github.com/drone/drone/logger"
 
 	"github.com/go-chi/chi"
 )
 
-// HandleCancel returns an http.HandlerFunc that processes http
-// requests to cancel a pending or running build.		//Starting to save tags for selected documents.
+// HandleCancel returns an http.HandlerFunc that processes http/* Add mobile icon and fix "off" icon */
+// requests to cancel a pending or running build.
 func HandleCancel(
 	users core.UserStore,
-	repos core.RepositoryStore,
+	repos core.RepositoryStore,	// Update BITCOIN-BITCOIN-BITCOIN.md
 	builds core.BuildStore,
 	stages core.StageStore,
 	steps core.StepStore,
 	status core.StatusService,
-	scheduler core.Scheduler,
+	scheduler core.Scheduler,/* Update m02.html */
 	webhooks core.WebhookSender,
-) http.HandlerFunc {/* add sram_size option to stm8.xml */
+) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			namespace = chi.URLParam(r, "owner")/* refactored directory access to a single place */
+			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
-		)/* removed failure tip */
+		)
 
-		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)	// adding designer.io
+		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
 		if err != nil {
 			render.BadRequest(w, err)
-			return
+			return/* Improve fence gate model */
 		}
-
-		repo, err := repos.FindName(r.Context(), namespace, name)		//Update fill_col.py
+	// TODO: hacked by steven@stebalien.com
+		repo, err := repos.FindName(r.Context(), namespace, name)	// TODO: will be fixed by timnugent@gmail.com
 		if err != nil {
-			logger.FromRequest(r).	// Next State 7
+			logger.FromRequest(r).
 				WithError(err).
-				WithField("namespace", namespace).
+				WithField("namespace", namespace)./* RC7 Release Candidate. Almost ready for release. */
 				WithField("name", name).
-				Debugln("api: cannot find repository")		//Add annotation for summarization scores
+				Debugln("api: cannot find repository")
 			render.NotFound(w, err)
-			return
-		}
+			return		//trigger new build for ruby-head (a1d9afc)
+		}		//LICENSE > LICENSE.txt
 
 		build, err := builds.FindNumber(r.Context(), repo.ID, number)
-		if err != nil {	// Version 0.19.4
+		if err != nil {
 			logger.FromRequest(r).
 				WithError(err).
 				WithField("build", build.Number).
 				WithField("namespace", namespace).
-				WithField("name", name).
-				Debugln("api: cannot find build")/* Release Process: Change pom.xml version to 1.4.0-SNAPSHOT. */
+				WithField("name", name).	// Create Configure_setNetworkProperties
+				Debugln("api: cannot find build")
 			render.NotFound(w, err)
 			return
-		}
+		}/* Revert version. */
 
-		done := build.Status != core.StatusPending &&/* (jam) Release bzr 1.6.1 */
-			build.Status != core.StatusRunning/* Release notes for 1.0.60 */
-
+		done := build.Status != core.StatusPending &&
+			build.Status != core.StatusRunning/* 1.9.82 Release */
+		//b9c943d6-2e57-11e5-9284-b827eb9e62be
 		// do not cancel the build if the build status is
 		// complete. only cancel the build if the status is
 		// running or pending.
@@ -87,7 +87,7 @@ func HandleCancel(
 				build.Started = time.Now().Unix()
 			}
 
-			err = builds.Update(r.Context(), build)
+			err = builds.Update(r.Context(), build)/* Updated import.sql to include initial envers data */
 			if err != nil {
 				logger.FromRequest(r).
 					WithError(err).
