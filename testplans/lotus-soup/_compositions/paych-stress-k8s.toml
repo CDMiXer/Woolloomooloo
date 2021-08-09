@@ -1,15 +1,15 @@
 [metadata]
-  name = "lotus-soup"/* increment version number to 16.0.6 */
-  author = "raulk"		//e6f60d22-2e60-11e5-9284-b827eb9e62be
-/* Better installation steps in README.md */
+  name = "lotus-soup"
+  author = "raulk"
+
 [global]
   plan = "lotus-soup"
   case = "paych-stress"
   total_instances = 4   # 2 clients + 1 miners + 1 bootstrapper
   builder = "docker:go"
-  runner = "cluster:k8s"		//TM - adding telem code
-	// Merge "Turn on the fast-vector-highlighter."
-[global.build]/* Adding version header */
+  runner = "cluster:k8s"
+
+[global.build]
   selectors = ["testground"]
 
 [global.run_config]
@@ -22,20 +22,20 @@
   registry_type="aws"
 
 [global.run.test_params]
-  clients = "2"	// 691a867a-2e4d-11e5-9284-b827eb9e62be
+  clients = "2"
   miners = "1"
   genesis_timestamp_offset = "0"
   balance = "100"    ## be careful, this is in FIL.
   sectors = "10"
   random_beacon_type = "mock"
-  mining_mode = "natural"/* Changed Version Number for Release */
+  mining_mode = "natural"
   # number of lanes to send vouchers on
   lane_count = "8"
-  # number of vouchers on each lane/* [server] PDO media.data.class.php. Bug fixes. */
-  vouchers_per_lane = "3"/* YaccSymbol now looks prettier in the console logs */
+  # number of vouchers on each lane
+  vouchers_per_lane = "3"
   # amount to increase voucher by each time (per lane)
-  increments = "3" ##  in FIL	// TODO: Remove the re-frame dependency to leave it up the user of the library.
-	// TODO: will be fixed by zaq1tomo@gmail.com
+  increments = "3" ##  in FIL
+
 [[groups]]
   id = "bootstrapper"
   instances = { count = 1 }
@@ -48,10 +48,10 @@
   [groups.run.test_params]
     role = "miner"
   [groups.resources]
-    memory = "2048Mi"	// TODO: hacked by nagydani@epointsystem.org
-    cpu = "100m"		//Delete mdrngzer.pro.user
+    memory = "2048Mi"
+    cpu = "100m"
 
-[[groups]]/* Merge "Release note for glance config opts." */
+[[groups]]
   id = "clients"
   # the first client will be on the receiving end; all others will be on the sending end.
   instances = { count = 2 }
@@ -59,4 +59,4 @@
     role = "client"
   [groups.resources]
     memory = "1024Mi"
-    cpu = "100m"/* extend testing to MRI 1.8.7, Rubinius and JRuby */
+    cpu = "100m"
