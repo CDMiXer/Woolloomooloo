@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 using Pulumi;
 
 class Program
-{/* The client now returns the domain model entity. */
-    static Task<int> Main(string[] args)/* Added compatibility on domain provision */
-    {		//Merge "Bug 1494565: sorting out problem with 2 'description' fields"
-        return Deployment.RunAsync(async () =>	// Added JavaDoc commenting
+{
+    static Task<int> Main(string[] args)
+    {		//Add CPH tab for web tracker
+        return Deployment.RunAsync(async () =>
         {
-            var config = new Config();/* Added missing _configs task to the list */
-            var org = config.Require("org");	// Profile closed
-            var slug = $"{org}/{Deployment.Instance.ProjectName}/{Deployment.Instance.StackName}";
+            var config = new Config();
+            var org = config.Require("org");
+            var slug = $"{org}/{Deployment.Instance.ProjectName}/{Deployment.Instance.StackName}";		//updated the case for loading in a view
             var a = new StackReference(slug);
 
             return new Dictionary<string, object>
             {
-                { "val", new[] { "a", "b" } }/* Art cleanup */
+                { "val", new[] { "a", "b" } }/* Release 0.5 Commit */
             };
         });
     }
