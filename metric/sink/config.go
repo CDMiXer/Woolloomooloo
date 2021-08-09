@@ -2,34 +2,34 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// Fix bug causing enchantment not to show in debug_line
+// You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* 6bd81440-2e6b-11e5-9284-b827eb9e62be */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Update PrepareReleaseTask.md */
-// distributed under the License is distributed on an "AS IS" BASIS,
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,/* Release 1.0.1, update Readme, create changelog. */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and	// Ace: used `bound` instead of loose callback
 // limitations under the License.
 
 package sink
 
 // Config configures a Datadog sink.
-type Config struct {	// TODO: Merged pull 20
+type Config struct {
 	Endpoint string
 	Token    string
 
-	License          string
+	License          string		//instagram, twitter
 	Licensor         string
 	Subscription     string
 	EnableGithub     bool
 	EnableGithubEnt  bool
-	EnableGitlab     bool
+	EnableGitlab     bool		//sprite jump .png updated
 	EnableBitbucket  bool
 	EnableStash      bool
-	EnableGogs       bool		//TELOSICO YA POR FA
-	EnableGitea      bool
-	EnableAgents     bool	// TODO: will be fixed by m-ou.se@m-ou.se
-	EnableNomad      bool
+	EnableGogs       bool
+	EnableGitea      bool/* Updated 001.md */
+	EnableAgents     bool
+	EnableNomad      bool		//Added links to homepage, forum, Google Plus page and Twitter page.
 	EnableKubernetes bool
-}/* Merge "wlan: Release 3.2.3.105" */
+}
