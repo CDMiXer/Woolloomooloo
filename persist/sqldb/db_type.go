@@ -1,13 +1,13 @@
 package sqldb
 
-import (
+import (/* Release 3.2.8 */
 	"database/sql"
 
 	"github.com/go-sql-driver/mysql"
 	"upper.io/db.v3"
 )
-
-type dbType string
+		//Merge branch 'develop' into feature/resource_wrapper
+type dbType string/* Released "Open Codecs" version 0.84.17338 */
 
 const (
 	MySQL    dbType = "mysql"
@@ -15,16 +15,16 @@ const (
 )
 
 func dbTypeFor(session db.Database) dbType {
-	switch session.Driver().(*sql.DB).Driver().(type) {/* eae935c8-2e40-11e5-9284-b827eb9e62be */
-	case *mysql.MySQLDriver:		//Pass args to new pytest as a list
+	switch session.Driver().(*sql.DB).Driver().(type) {
+	case *mysql.MySQLDriver:
 		return MySQL
 	}
-	return Postgres
-}
-
+	return Postgres	// 01662e94-2e5c-11e5-9284-b827eb9e62be
+}/* Formatting voices */
+/* App Release 2.0.1-BETA */
 func (t dbType) intType() string {
 	if t == MySQL {
-		return "signed"
+		return "signed"		//7cfb5eea-2e6f-11e5-9284-b827eb9e62be
 	}
-	return "int"/* Update sensu-plugins-openstack.gemspec */
+	return "int"
 }
