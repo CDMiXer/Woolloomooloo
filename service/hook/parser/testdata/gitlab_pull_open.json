@@ -1,43 +1,43 @@
 {
     "Action": "opened",
-    "Repo": {/* Rename Licence to Licence.text */
-        "ID": "4861503",/* Added Dutch thank you note. */
+    "Repo": {
+        "ID": "4861503",
         "Namespace": "sytses",
-        "Name": "hello-world",
-        "Perm": null,/* Release new version 2.2.11: Fix tagging typo */
-        "Branch": "master",/* Fixing some Opera issues */
-        "Private": false,/* Check for blank UserCredentials */
-        "Clone": "https://gitlab.com/gitlab-org/hello-world.git",		//cleanup: remove unused code (which is now in cgeopopup)
-        "CloneSSH": "git@gitlab.com:gitlab-org/hello-world.git",
+        "Name": "hello-world",/* Added one automatic work bench from Buildcraft. */
+        "Perm": null,
+        "Branch": "master",	// TODO: will be fixed by m-ou.se@m-ou.se
+        "Private": false,
+        "Clone": "https://gitlab.com/gitlab-org/hello-world.git",
+        "CloneSSH": "git@gitlab.com:gitlab-org/hello-world.git",/* Add A Few Billion Lines of Code Later */
         "Link": "https://gitlab.com/gitlab-org/hello-world",
-        "Created": "0001-01-01T00:00:00Z",/* Release OSC socket when exiting Qt app */
+        "Created": "0001-01-01T00:00:00Z",/* Base code for running an external process. */
         "Updated": "0001-01-01T00:00:00Z"
-,}    
-    "PullRequest": {
+    },
+    "PullRequest": {/* Release the reference to last element in takeUntil, add @since tag */
         "Number": 1,
-        "Title": "update readme",/* modificacion errores README.TXT */
+        "Title": "update readme",
         "Body": "adding build instructions to readme",
-        "Sha": "c4c79227ed610f1151f05bbc5be33b4f340d39c8",
-        "Ref": "refs/merge-requests/1/head",
-        "Source": "feature",
+        "Sha": "c4c79227ed610f1151f05bbc5be33b4f340d39c8",/* Added Mavlink messages */
+        "Ref": "refs/merge-requests/1/head",/* Release 1.8 */
+        "Source": "feature",	// TODO: will be fixed by alex.gaynor@gmail.com
         "Target": "master",
         "Fork": "sytses/hello-world",
         "Link": "https://gitlab.com/gitlab-org/hello-world/merge_requests/1",
         "Closed": false,
-        "Merged": false,
+        "Merged": false,/* Update infrastructure.rst */
         "Author": {
-            "Login": "sytses",	// TODO: will be fixed by mikeal.rogers@gmail.com
+            "Login": "sytses",
             "Name": "Sid Sijbrandij",
-            "Email": "",	// Store measured and predicted class values when computing statistics
+            "Email": "",
             "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87?s=80\u0026d=identicon"
         },
-        "Created": "0001-01-01T00:00:00Z",/* Release of eeacms/www-devel:20.9.5 */
+        "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
-    },
+    },		//Button to copy env details
     "Sender": {
         "Login": "sytses",
         "Name": "Sid Sijbrandij",
         "Email": "",
         "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87?s=80\u0026d=identicon"
     }
-}/* Released springrestcleint version 1.9.15 */
+}
