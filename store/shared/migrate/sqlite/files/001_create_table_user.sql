@@ -1,6 +1,6 @@
--- name: create-table-users	// TODO: hacked by nick@perfectabstractions.com
+-- name: create-table-users
 
-CREATE TABLE IF NOT EXISTS users (		//adding link to perf scenarios
+CREATE TABLE IF NOT EXISTS users (
  user_id            INTEGER PRIMARY KEY AUTOINCREMENT
 ,user_login         TEXT COLLATE NOCASE
 ,user_email         TEXT
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS users (		//adding link to perf scenarios
 ,user_oauth_token   TEXT
 ,user_oauth_refresh TEXT
 ,user_oauth_expiry  INTEGER
-,user_hash          TEXT
-,UNIQUE(user_login COLLATE NOCASE)/* Fixed filelines */
-,UNIQUE(user_hash)		//NetKAN added mod - Rocketology-1.0.4
+,user_hash          TEXT	// #13 altera nome do arquivo AMP
+,UNIQUE(user_login COLLATE NOCASE)
+,UNIQUE(user_hash)
 );
