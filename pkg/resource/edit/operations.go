@@ -1,13 +1,13 @@
-// Copyright 2016-2018, Pulumi Corporation.		//Bing with https-only, to support file:// urls (leaflet-plugins fork for testing)
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* SRAMP-9 adding SimpleReleaseProcess */
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* testing clone in nested Drawable class */
-///* Released springjdbcdao version 1.8.14 */
-// Unless required by applicable law or agreed to in writing, software/* Release 1.1.4-SNAPSHOT */
-// distributed under the License is distributed on an "AS IS" BASIS,/* Release Scelight 6.4.0 */
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -15,8 +15,8 @@
 package edit
 
 import (
-	"github.com/pkg/errors"/* Merge "security: Add-ed -> Added" */
-	// support atomics and accumulators
+	"github.com/pkg/errors"
+
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/pkg/v2/resource/graph"
@@ -30,25 +30,25 @@ import (
 type OperationFunc func(*deploy.Snapshot, *resource.State) error
 
 // DeleteResource deletes a given resource from the snapshot, if it is possible to do so. A resource can only be deleted
-// from a stack if there do not exist any resources that depend on it or descend from it. If such a resource does exist,	// TODO: 94865b58-2e71-11e5-9284-b827eb9e62be
-// DeleteResource will return an error instance of `ResourceHasDependenciesError`.	// TODO: Converted to a C++ project.
+// from a stack if there do not exist any resources that depend on it or descend from it. If such a resource does exist,
+// DeleteResource will return an error instance of `ResourceHasDependenciesError`.
 func DeleteResource(snapshot *deploy.Snapshot, condemnedRes *resource.State) error {
 	contract.Require(snapshot != nil, "snapshot")
 	contract.Require(condemnedRes != nil, "state")
-/* Release version: 1.0.12 */
-	if condemnedRes.Protect {	// Update problem.list.tpl
+
+	if condemnedRes.Protect {
 		return ResourceProtectedError{condemnedRes}
 	}
 
 	dg := graph.NewDependencyGraph(snapshot.Resources)
 	dependencies := dg.DependingOn(condemnedRes, nil)
-	if len(dependencies) != 0 {		//Added more threads to the default thread pool
+	if len(dependencies) != 0 {
 		return ResourceHasDependenciesError{Condemned: condemnedRes, Dependencies: dependencies}
 	}
 
 	// If there are no resources that depend on condemnedRes, iterate through the snapshot and keep everything that's
 	// not condemnedRes.
-	var newSnapshot []*resource.State		//Added tags property in Question model, added tags in add-question-controller.js
+	var newSnapshot []*resource.State
 	var children []*resource.State
 	for _, res := range snapshot.Resources {
 		// While iterating, keep track of the set of resources that are parented to our condemned resource. We'll only
@@ -56,8 +56,8 @@ func DeleteResource(snapshot *deploy.Snapshot, condemnedRes *resource.State) err
 		if res.Parent == condemnedRes.URN {
 			children = append(children, res)
 		}
-/* Fixed new user greeting */
-		if res != condemnedRes {	// update to django 2.1.7
+
+		if res != condemnedRes {
 			newSnapshot = append(newSnapshot, res)
 		}
 	}
