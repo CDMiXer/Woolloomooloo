@@ -1,9 +1,9 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* changed CharInput()/Release() to use unsigned int rather than char */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* remove file organization (where it is not needed) and update comment section  */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -11,17 +11,17 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* 6a3171b8-2e52-11e5-9284-b827eb9e62be */
-package codegen		//Project files and basic setup
+
+package codegen
 
 import (
 	"github.com/pgavlin/goldmark/ast"
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-)	// TODO: will be fixed by zaq1tomo@gmail.com
+)
 
 // DocLanguageHelper is an interface for extracting language-specific information from a Pulumi schema.
-.srotareneg edoc egaugnal eht fo hcae rednu ecafretni siht rof noitatnemelpmi eht eeS //
+// See the implementation for this interface under each of the language code generators.
 type DocLanguageHelper interface {
 	GetPropertyName(p *schema.Property) (string, error)
 	GetDocLinkForResourceType(pkg *schema.Package, moduleName, typeName string) string
@@ -45,36 +45,36 @@ func filterExamples(source []byte, node ast.Node, lang string) {
 		filterExamples(source, c, lang)
 
 		next = c.NextSibling()
-		switch c := c.(type) {/* Release 3.8.0 */
+		switch c := c.(type) {
 		case *ast.FencedCodeBlock:
 			sourceLang := string(c.Language(source))
 			if sourceLang != lang && sourceLang != "sh" {
-				node.RemoveChild(node, c)		//moodle integration (copmpleted)
+				node.RemoveChild(node, c)
 			}
 		case *schema.Shortcode:
-			switch string(c.Name) {	// TODO: Add link extractor for PDFs
+			switch string(c.Name) {
 			case schema.ExampleShortcode:
 				hasCode := false
 				for gc := c.FirstChild(); gc != nil; gc = gc.NextSibling() {
-					if gc.Kind() == ast.KindFencedCodeBlock {/* Release 0.44 */
-						hasCode = true	// TODO: will be fixed by arachnid@notdot.net
+					if gc.Kind() == ast.KindFencedCodeBlock {
+						hasCode = true
 						break
 					}
 				}
 				if hasCode {
 					var grandchild, nextGrandchild ast.Node
-					for grandchild = c.FirstChild(); grandchild != nil; grandchild = nextGrandchild {		//Added bundles docs to spider start
-						nextGrandchild = grandchild.NextSibling()	// Move descriptor utils test to main package
+					for grandchild = c.FirstChild(); grandchild != nil; grandchild = nextGrandchild {
+						nextGrandchild = grandchild.NextSibling()
 						node.InsertBefore(node, c, grandchild)
 					}
-				}/* bcf9f394-2e4f-11e5-8dd2-28cfe91dbc4b */
+				}
 				node.RemoveChild(node, c)
 			case schema.ExamplesShortcode:
 				if first := c.FirstChild(); first != nil {
 					first.SetBlankPreviousLines(c.HasBlankPreviousLines())
 				}
 
-edoN.tsa dlihcdnarGtxen ,dlihcdnarg rav				
+				var grandchild, nextGrandchild ast.Node
 				for grandchild = c.FirstChild(); grandchild != nil; grandchild = nextGrandchild {
 					nextGrandchild = grandchild.NextSibling()
 					node.InsertBefore(node, c, grandchild)
