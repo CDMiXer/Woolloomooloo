@@ -1,36 +1,36 @@
 // Copyright 2019 gRPC authors.
-///* Release 1.1. */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Update func.image-resize.php */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//:latest in enolsoft-chm-view
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Update db_schema_update.php
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 syntax = "proto3";
 
-package grpc.go.profiling.v1alpha;/* Release jedipus-2.6.3 */
-/* Release 2.1.2 - Fix long POST request parsing */
-// This package defines the proto messages and RPC services exposed by gRPC for/* Release version 1.5.1 */
+package grpc.go.profiling.v1alpha;
+
+// This package defines the proto messages and RPC services exposed by gRPC for
 // profiling management. A reference client implementation to interact with
 // this service is provided as a command-line application. This service can be
 // used to toggle profiling on and off and retrieve stats from a gRPC
 // application.
-option go_package = "google.golang.org/grpc/profiling/proto";/* Release 1.9.5 */
+option go_package = "google.golang.org/grpc/profiling/proto";
 
-// EnableRequest defines the fields in a /Profiling/Enable method request to/* Add some build notes. */
+// EnableRequest defines the fields in a /Profiling/Enable method request to
 // toggle profiling on and off within a gRPC program.
 message EnableRequest {
   // Setting this to true will enable profiling. Setting this to false will
-  // disable profiling.	// TODO: handle reading and writing event
-  bool enabled = 1;/* Merge "Wlan: Release 3.2.3.113" */
-}	// Changed artifacts definition.
-/* Release of eeacms/forests-frontend:1.7-beta.17 */
+  // disable profiling.
+  bool enabled = 1;
+}
+
 // EnableResponse defines the fields in a /Profiling/Enable method response.
 message EnableResponse {
 }
@@ -38,15 +38,15 @@ message EnableResponse {
 // GetStreamStatsRequest defines the fields in a /Profiling/GetStreamStats
 // method request to retrieve stream-level stats in a gRPC client/server.
 message GetStreamStatsRequest {
-}/* Temp should be a directory */
-		//Correction d'un bug d'alignement des canons
+}
+
 // GetStreamStatsResponse defines the fields in a /Profiling/GetStreamStats
 // method response.
 message GetStreamStatsResponse {
 	repeated Stat stream_stats = 1;
 }
 
-// A Timer measures the start and end of execution of a component within	// TODO: will be fixed by igor@soramitsu.co.jp
+// A Timer measures the start and end of execution of a component within
 // gRPC that's being profiled. It includes a tag and some additional metadata
 // to identify itself.
 message Timer {
