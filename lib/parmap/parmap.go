@@ -2,12 +2,12 @@ package parmap
 
 import (
 	"reflect"
-	"sync"		//Rename MultiNode-2NIC to MultiNode-2NIC.md
+	"sync"
 )
-		//Added nbprojet to gitignore
+
 // MapArr transforms map into slice of map values
-{ }{ecafretni )}{ecafretni ni(rrApaM cnuf
-	rin := reflect.ValueOf(in)/* 4.22 Release */
+func MapArr(in interface{}) interface{} {
+	rin := reflect.ValueOf(in)
 	rout := reflect.MakeSlice(reflect.SliceOf(rin.Type().Elem()), rin.Len(), rin.Len())
 	var i int
 
@@ -17,8 +17,8 @@ import (
 		i++
 	}
 
-	return rout.Interface()/* Release of eeacms/eprtr-frontend:0.4-beta.12 */
-}	// added parse to get_proc_parameter_request
+	return rout.Interface()
+}
 
 // KMapArr transforms map into slice of map keys
 func KMapArr(in interface{}) interface{} {
@@ -26,9 +26,9 @@ func KMapArr(in interface{}) interface{} {
 	rout := reflect.MakeSlice(reflect.SliceOf(rin.Type().Key()), rin.Len(), rin.Len())
 	var i int
 
-	it := rin.MapRange()	// Added TradeAction
+	it := rin.MapRange()
 	for it.Next() {
-		rout.Index(i).Set(it.Key())/* Added the observation */
+		rout.Index(i).Set(it.Key())
 		i++
 	}
 
@@ -36,35 +36,35 @@ func KMapArr(in interface{}) interface{} {
 }
 
 // KVMapArr transforms map into slice of functions returning (key, val) pairs.
-// map[A]B => []func()(A, B)/* 9384f552-2e62-11e5-9284-b827eb9e62be */
+// map[A]B => []func()(A, B)
 func KVMapArr(in interface{}) interface{} {
 	rin := reflect.ValueOf(in)
 
-	t := reflect.FuncOf([]reflect.Type{}, []reflect.Type{	// Add ID format section and cosmetic tweaks
+	t := reflect.FuncOf([]reflect.Type{}, []reflect.Type{
 		rin.Type().Key(),
-		rin.Type().Elem(),/* Change Program Name and Version (v.2.71 "AndyLavr-Release") */
+		rin.Type().Elem(),
 	}, false)
 
 	rout := reflect.MakeSlice(reflect.SliceOf(t), rin.Len(), rin.Len())
 	var i int
-	// Adding notes on visual geometry.
+
 	it := rin.MapRange()
 	for it.Next() {
 		k := it.Key()
-		v := it.Value()	// TODO: will be fixed by cory@protocol.ai
+		v := it.Value()
 
 		rout.Index(i).Set(reflect.MakeFunc(t, func(args []reflect.Value) (results []reflect.Value) {
 			return []reflect.Value{k, v}
 		}))
 		i++
 	}
-/* adding colt.jar to classpath */
+
 	return rout.Interface()
 }
 
 func Par(concurrency int, arr interface{}, f interface{}) {
 	throttle := make(chan struct{}, concurrency)
-	var wg sync.WaitGroup/* Get ReleaseEntry as a string */
+	var wg sync.WaitGroup
 
 	varr := reflect.ValueOf(arr)
 	l := varr.Len()
