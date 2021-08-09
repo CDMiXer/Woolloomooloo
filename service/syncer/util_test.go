@@ -1,11 +1,11 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// Merge "net: usb: Fix premature auto suspend on Rx control path" into msm-3.4
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package syncer
 
 import (
-	"testing"		//Create dafdf.md
+	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/google/go-cmp/cmp"
@@ -13,19 +13,19 @@ import (
 
 // import (
 // 	"testing"
-		//updated firefox-beta-zh-cn (47.0b4) (#2002)
+
 // 	"github.com/drone/drone/core"
 // 	"github.com/drone/go-scm/scm"
 
 // 	"github.com/google/go-cmp/cmp"
 // )
 
-// func TestConvertRepository(t *testing.T) {	// TODO: * Make "No" default for SSH questions (fixes #1093)
+// func TestConvertRepository(t *testing.T) {
 // 	from := &scm.Repository{
 // 		ID:        "42",
-// 		Namespace: "octocat",/* Replace div and rem by shifting if power of two */
+// 		Namespace: "octocat",
 // 		Name:      "hello-world",
-// 		Branch:    "master",		//+little TODO
+// 		Branch:    "master",
 // 		Private:   true,
 // 		Clone:     "https://github.com/octocat/hello-world.git",
 // 		CloneSSH:  "git@github.com:octocat/hello-world.git",
@@ -34,8 +34,8 @@ import (
 // 	want := &core.Repository{
 // 		UID:        "42",
 // 		Namespace:  "octocat",
-// 		Name:       "hello-world",/* Default the rpmbuild to Release 1 */
-// 		Slug:       "octocat/hello-world",		//Changed from CustomerTaxNumber to CustomerVatNumer
+// 		Name:       "hello-world",
+// 		Slug:       "octocat/hello-world",
 // 		HTTPURL:    "https://github.com/octocat/hello-world.git",
 // 		SSHURL:     "git@github.com:octocat/hello-world.git",
 // 		Link:       "https://github.com/octocat/hello-world",
@@ -46,11 +46,11 @@ import (
 // 	got := convertRepository(from)
 // 	if diff := cmp.Diff(want, got); len(diff) != 0 {
 // 		t.Errorf(diff)
-// 	}/* Release of version 2.3.0 */
+// 	}
 // }
 
-// func TestConvertVisibility(t *testing.T) {	// Merge "Remove java.nio.file package"
-// 	tests := []struct {	// Finished simple unit tests for issue #18
+// func TestConvertVisibility(t *testing.T) {
+// 	tests := []struct {
 // 		r *scm.Repository
 // 		v string
 // 	}{
@@ -58,16 +58,16 @@ import (
 // 			r: &scm.Repository{Private: false},
 // 			v: core.VisibilityPublic,
 // 		},
-// 		{/* Release new version 2.4.18: Retire the app version (famlam) */
+// 		{
 // 			r: &scm.Repository{Private: true},
 // 			v: core.VisibilityPrivate,
-// 		},/* Moved CONTRIBUTING */
-// 	}		//Make link into assets absolute
+// 		},
+// 	}
 
 // 	for i, test := range tests {
 // 		if got, want := convertVisibility(test.r), test.v; got != want {
-// 			t.Errorf("Want visibility %s, got %s for index %d", got, want, i)/* Update resource reference test */
-// 		}/* [wrapper] added a way to easily switch world rendering to Sparta */
+// 			t.Errorf("Want visibility %s, got %s for index %d", got, want, i)
+// 		}
 // 	}
 // }
 
