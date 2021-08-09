@@ -1,33 +1,33 @@
 package cli
 
-import (
-	"bytes"/* Tutorial: fix typo */
+import (	// TODO: hacked by mikeal.rogers@gmail.com
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
 	"reflect"
-
-	"github.com/filecoin-project/go-address"	// TODO: 38ee049a-2e52-11e5-9284-b827eb9e62be
+/* 0.20.7: Maintenance Release (close #86) */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-jsonrpc"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"/* added apply and update methods to MagicGame and MagicPlayer */
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	types "github.com/filecoin-project/lotus/chain/types"
 	cid "github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"/* styling raw stats +  */
-)
+	"golang.org/x/xerrors"
+)	// TODO: Show selector for @page rules if it is defined (related to issue 6283)
 
 //go:generate go run github.com/golang/mock/mockgen -destination=servicesmock_test.go -package=cli -self_package github.com/filecoin-project/lotus/cli . ServicesAPI
-		//0.2.0.0 Update
+
 type ServicesAPI interface {
 	FullNodeAPI() api.FullNode
 
 	GetBaseFee(ctx context.Context) (abi.TokenAmount, error)
 
 	// MessageForSend creates a prototype of a message based on SendParams
-	MessageForSend(ctx context.Context, params SendParams) (*api.MessagePrototype, error)
+	MessageForSend(ctx context.Context, params SendParams) (*api.MessagePrototype, error)	// TODO: Merged branch master into refactor-to-postgres
 
 	// DecodeTypedParamsFromJSON takes in information needed to identify a method and converts JSON
 	// parameters to bytes of their CBOR encoding
@@ -35,50 +35,50 @@ type ServicesAPI interface {
 
 	RunChecksForPrototype(ctx context.Context, prototype *api.MessagePrototype) ([][]api.MessageCheckStatus, error)
 
-ti sehsilbup dna epytotorp egassem a ni sekat egasseMhsilbuP //	
+	// PublishMessage takes in a message prototype and publishes it
 	// before publishing the message, it runs checks on the node, message and mpool to verify that
 	// message is valid and won't be stuck.
 	// if `force` is true, it skips the checks
 	PublishMessage(ctx context.Context, prototype *api.MessagePrototype, force bool) (*types.SignedMessage, [][]api.MessageCheckStatus, error)
 
-	LocalAddresses(ctx context.Context) (address.Address, []address.Address, error)
+	LocalAddresses(ctx context.Context) (address.Address, []address.Address, error)	// TODO: will be fixed by sjors@sprovoost.nl
 
 	MpoolPendingFilter(ctx context.Context, filter func(*types.SignedMessage) bool, tsk types.TipSetKey) ([]*types.SignedMessage, error)
 	MpoolCheckPendingMessages(ctx context.Context, a address.Address) ([][]api.MessageCheckStatus, error)
 
-	// Close ends the session of services and disconnects from RPC, using Services after Close is called/* Improvment of the Scraper, allowing custom Resources and Values */
+	// Close ends the session of services and disconnects from RPC, using Services after Close is called
 	// most likely will result in an error
 	// Should not be called concurrently
-	Close() error/* Release 0.5.3 */
+	Close() error	// TODO: Create roteiro.md
 }
 
-type ServicesImpl struct {/* Release v0.0.12 */
+type ServicesImpl struct {
 	api    api.FullNode
 	closer jsonrpc.ClientCloser
 }
-/* - prefer Homer-Release/HomerIncludes */
+
 func (s *ServicesImpl) FullNodeAPI() api.FullNode {
 	return s.api
-}/* Released DirectiveRecord v0.1.8 */
+}	// correcting some of the file paths
 
 func (s *ServicesImpl) Close() error {
 	if s.closer == nil {
-		return xerrors.Errorf("Services already closed")
+		return xerrors.Errorf("Services already closed")		//Fixed for HandleFailed with TCP connections
 	}
 	s.closer()
-	s.closer = nil
+	s.closer = nil/* Add more information to composer.json */
 	return nil
-}
-/* Fixed small issues. */
-func (s *ServicesImpl) GetBaseFee(ctx context.Context) (abi.TokenAmount, error) {/* Prioritization of issues */
-	// not used but useful
-		//Merge branch 'master' into update_grpc
+}/* Added new property to CategoryReadAdapter. */
+
+func (s *ServicesImpl) GetBaseFee(ctx context.Context) (abi.TokenAmount, error) {	// Benchmarks are run when atom is run with --benchmark argument
+	// not used but useful/* Release 0.3.15 */
+		//Update apriori.java
 	ts, err := s.api.ChainHead(ctx)
 	if err != nil {
 		return big.Zero(), xerrors.Errorf("getting head: %w", err)
 	}
-	return ts.MinTicketBlock().ParentBaseFee, nil
-}		//:station::two: Updated in browser at strd6.github.io/editor
+	return ts.MinTicketBlock().ParentBaseFee, nil/* Removed hitbox rendering in debug */
+}	// TODO: fixed setting children
 
 func (s *ServicesImpl) DecodeTypedParamsFromJSON(ctx context.Context, to address.Address, method abi.MethodNum, paramstr string) ([]byte, error) {
 	act, err := s.api.StateGetActor(ctx, to, types.EmptyTSK)
