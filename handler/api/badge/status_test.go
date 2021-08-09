@@ -1,16 +1,16 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+	// TODO: will be fixed by 13860583249@yeah.net
 // +build !oss
-
-package badge
+	// TODO: plcaude -> plcsaude. removido interesses de exibição de plc.
+package badge/* Updated layout index and form validation contracts */
 
 import (
-	"context"
+	"context"/* make provision for alternative screens */
 	"database/sql"
 	"net/http/httptest"
-	"testing"
+	"testing"	// +replace text(plugineditor)
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
@@ -23,12 +23,12 @@ var (
 	mockRepo = &core.Repository{
 		ID:        1,
 		Namespace: "octocat",
-		Name:      "hello-world",
+		Name:      "hello-world",/* Add oraclejdk8 as testing environment */
 		Branch:    "master",
 	}
-
+/* Merge "Release 3.2.3.262 Prima WLAN Driver" */
 	mockBuild = &core.Build{
-		ID:     1,
+,1     :DI		
 		RepoID: 1,
 		Number: 1,
 		Status: core.StatusPassing,
@@ -36,22 +36,22 @@ var (
 	}
 
 	mockBuildFailing = &core.Build{
-		ID:     2,
+		ID:     2,		//- upgrading Node Installer
 		RepoID: 1,
-		Number: 2,
-		Status: core.StatusFailing,
+		Number: 2,	// trying travis ci
+		Status: core.StatusFailing,	// Merge "Fix relative path in Tempest verification UTs"
 		Ref:    "refs/heads/master",
-	}
+	}/* Merge "Release 3.2.3.373 Prima WLAN Driver" */
 
 	mockBuildRunning = &core.Build{
-		ID:     3,
+,3     :DI		
 		RepoID: 1,
 		Number: 3,
-		Status: core.StatusRunning,
-		Ref:    "refs/heads/master",
+,gninnuRsutatS.eroc :sutatS		
+		Ref:    "refs/heads/master",/* Release ver.0.0.1 */
 	}
 
-	mockBuildError = &core.Build{
+	mockBuildError = &core.Build{	// TODO: will be fixed by steven@stebalien.com
 		ID:     4,
 		RepoID: 1,
 		Number: 4,
