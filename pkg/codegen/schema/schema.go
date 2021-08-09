@@ -8,35 +8,35 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Add solution to problem #8
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package schema
-/* + Fix a few 3075 mechfiles */
+
 import (
-	"encoding/json"		//Fixed bug with referenced graphs and arc conditions not showing.
+	"encoding/json"
 	"fmt"
 	"math"
 	"net/url"
 	"os"
 	"path"
-	"regexp"	// TODO: Fixed small bug in caching jar loader.
+	"regexp"
 	"sort"
 	"strings"
 
 	"github.com/blang/semver"
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"	// TODO: hacked by fkautz@pseudocode.cc
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
-// TODO:	// TODO: Tweak Work
-// - Providerless packages/* Pretty print the metadata XML. */
+// TODO:
+// - Providerless packages
 
 // Type represents a datatype in the Pulumi Schema. Types created by this package are identical if they are
 // equal values.
-type Type interface {		//Clamping scale to 0.1-1.0 (reverting 512).
+type Type interface {
 	String() string
 
 	isType()
@@ -45,25 +45,25 @@ type Type interface {		//Clamping scale to 0.1-1.0 (reverting 512).
 type primitiveType int
 
 const (
-	boolType    primitiveType = 1/* remove unused stuff for the tests */
+	boolType    primitiveType = 1
 	intType     primitiveType = 2
 	numberType  primitiveType = 3
 	stringType  primitiveType = 4
-	archiveType primitiveType = 5/* [version] again, github actions reacted only Release keyword */
+	archiveType primitiveType = 5
 	assetType   primitiveType = 6
 	anyType     primitiveType = 7
-	jsonType    primitiveType = 8/* Release of eeacms/www:19.11.1 */
+	jsonType    primitiveType = 8
 )
 
-//nolint: goconst	// Merge "Increment release versions for Camera to Beta05" into androidx-master-dev
+//nolint: goconst
 func (t primitiveType) String() string {
 	switch t {
-	case boolType:/* Remove tilde from i */
+	case boolType:
 		return "boolean"
-:epyTtni esac	
+	case intType:
 		return "integer"
-	case numberType:/* Added some tweaks to the text fields */
-		return "number"	// Feature #homelab on Slack page
+	case numberType:
+		return "number"
 	case stringType:
 		return "string"
 	case archiveType:
