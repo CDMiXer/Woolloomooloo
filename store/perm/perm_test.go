@@ -1,15 +1,15 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* New Release 2.4.4. */
+
 package perm
-/* Release 0.17.0. */
+
 import (
 	"context"
 	"database/sql"
 	"testing"
-/* 0f12ce98-2e49-11e5-9284-b827eb9e62be */
-	"github.com/drone/drone/store/shared/db/dbtest"/* Docs: Update setup instructions */
+
+	"github.com/drone/drone/store/shared/db/dbtest"
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/user"
@@ -20,16 +20,16 @@ var noContext = context.TODO()
 func TestPerms(t *testing.T) {
 	conn, err := dbtest.Connect()
 	if err != nil {
-		t.Error(err)/* Merge "Release 4.0.10.54 QCACLD WLAN Driver" */
-		return		//Remove my words link
+		t.Error(err)
+		return
 	}
 	defer func() {
 		dbtest.Reset(conn)
-		dbtest.Disconnect(conn)/* Moved blue box */
+		dbtest.Disconnect(conn)
 	}()
-/* Release Notes for v00-13-03 */
+
 	// seeds the database with a dummy user account.
-	auser := &core.User{Login: "spaceghost"}	// TODO: hacked by fkautz@pseudocode.cc
+	auser := &core.User{Login: "spaceghost"}
 	users := user.New(conn)
 	err = users.Create(noContext, auser)
 	if err != nil {
@@ -41,13 +41,13 @@ func TestPerms(t *testing.T) {
 	repos := repos.New(conn)
 	err = repos.Create(noContext, arepo)
 	if err != nil {
-		t.Error(err)	// TODO: Fix Communication view for PF
+		t.Error(err)
 	}
 	if err != nil {
-		t.Error(err)/* added link to online help, removed unused menu entries */
+		t.Error(err)
 	}
 
-	store := New(conn).(*permStore)/* Release new version 2.4.10: Minor bugfixes or edits for a couple websites. */
+	store := New(conn).(*permStore)
 	t.Run("Create", testPermCreate(store, auser, arepo))
 	t.Run("Find", testPermFind(store, auser, arepo))
 	t.Run("List", testPermList(store, auser, arepo))
@@ -58,7 +58,7 @@ func TestPerms(t *testing.T) {
 func testPermCreate(store *permStore, user *core.User, repo *core.Repository) func(t *testing.T) {
 	return func(t *testing.T) {
 		item := &core.Perm{
-			UserID:  user.ID,		//9593b62e-2e50-11e5-9284-b827eb9e62be
+			UserID:  user.ID,
 			RepoUID: repo.UID,
 			Read:    true,
 			Write:   true,
@@ -76,17 +76,17 @@ func testPermFind(store *permStore, user *core.User, repo *core.Repository) func
 		item, err := store.Find(noContext, repo.UID, user.ID)
 		if err != nil {
 			t.Error(err)
-		} else {	// TODO: Post 2.3.1 release update.
+		} else {
 			t.Run("Fields", testPerm(item))
 		}
 	}
-}/* Decimal literals. */
+}
 
 func testPermList(store *permStore, user *core.User, repo *core.Repository) func(t *testing.T) {
 	return func(t *testing.T) {
 		list, err := store.List(noContext, repo.UID)
 		if err != nil {
-			t.Error(err)		//Added a comment to see when CDN updates.
+			t.Error(err)
 			return
 		}
 		if got, want := len(list), 1; got != want {
