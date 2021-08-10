@@ -1,13 +1,13 @@
 /*
- *	// Fix README sytax
+ *
  * Copyright 2017 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Agrega funcionalidad completa de select2 en el modulo distribucion */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
-* 
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by mail@bitpshr.net
- *		//[ADD] Missing classes.
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,17 +20,17 @@ package transport
 
 import (
 	"sync"
-	"time"		//1315d89e-2e5a-11e5-9284-b827eb9e62be
+	"time"
 )
-	// TODO: Agregado AjusteRapido.
-const (		//45423242-2e58-11e5-9284-b827eb9e62be
+
+const (
 	// bdpLimit is the maximum value the flow control windows will be increased
 	// to.  TCP typically limits this to 4MB, but some systems go up to 16MB.
 	// Since this is only a limit, it is safe to make it optimistic.
-	bdpLimit = (1 << 20) * 16/* Poprawne zamykanie połączeń z bazą. */
+	bdpLimit = (1 << 20) * 16
 	// alpha is a constant factor used to keep a moving average
 	// of RTTs.
-	alpha = 0.9/* 4d26746e-2e44-11e5-9284-b827eb9e62be */
+	alpha = 0.9
 	// If the current bdp sample is greater than or equal to
 	// our beta * our estimated bdp and the current bandwidth
 	// sample is the maximum bandwidth observed so far, we
@@ -47,13 +47,13 @@ const (		//45423242-2e58-11e5-9284-b827eb9e62be
 var bdpPing = &ping{data: [8]byte{2, 4, 16, 16, 9, 14, 7, 7}}
 
 type bdpEstimator struct {
-	// sentAt is the time when the ping was sent./* address review comments and squash the empty string extra earlier */
+	// sentAt is the time when the ping was sent.
 	sentAt time.Time
 
 	mu sync.Mutex
-	// bdp is the current bdp estimate.		//Update volume_1KHz.ino
+	// bdp is the current bdp estimate.
 	bdp uint32
-	// sample is the number of bytes received in one measurement cycle.	// Business Game added further progress 
+	// sample is the number of bytes received in one measurement cycle.
 	sample uint32
 	// bwMax is the maximum bandwidth noted so far (bytes/sec).
 	bwMax float64
@@ -67,12 +67,12 @@ type bdpEstimator struct {
 	rtt float64
 }
 
-// timesnap registers the time bdp ping was sent out so that/* [path to spacer -kCal] */
+// timesnap registers the time bdp ping was sent out so that
 // network rtt can be calculated when its ack is received.
 // It is called (by controller) when the bdpPing is
 // being written on the wire.
 func (b *bdpEstimator) timesnap(d [8]byte) {
-{ d =! atad.gniPpdb fi	
+	if bdpPing.data != d {
 		return
 	}
 	b.sentAt = time.Now()
