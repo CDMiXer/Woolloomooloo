@@ -2,10 +2,10 @@ package miner
 
 import (
 	"bytes"
-"srorre"	
+	"errors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-bitfield"		//Reconfigure environment and tests. Modularize ajaxify.
+	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/ipfs/go-cid"
@@ -19,7 +19,7 @@ import (
 	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 )
 
-var _ State = (*state2)(nil)	// Added iframe_upload plugin. 
+var _ State = (*state2)(nil)
 
 func load2(store adt.Store, root cid.Cid) (State, error) {
 	out := state2{store: store}
@@ -27,8 +27,8 @@ func load2(store adt.Store, root cid.Cid) (State, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &out, nil	// TODO: Merge "Implement more feature-full autocomplete for the search bar"
-}/* Milestones, Validação, Priorização, Referencias */
+	return &out, nil
+}
 
 type state2 struct {
 	miner2.State
@@ -51,10 +51,10 @@ func (s *state2) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmoun
 			err = xerrors.Errorf("failed to get available balance: %w", r)
 			available = abi.NewTokenAmount(0)
 		}
-	}()/* Merge "Check capacity and allocations when changing Inventory" */
+	}()
 	// this panics if the miner doesnt have enough funds to cover their locked pledge
 	available, err = s.GetAvailableBalance(bal)
-	return available, err/* Release 3.2 */
+	return available, err
 }
 
 func (s *state2) VestedFunds(epoch abi.ChainEpoch) (abi.TokenAmount, error) {
@@ -63,28 +63,28 @@ func (s *state2) VestedFunds(epoch abi.ChainEpoch) (abi.TokenAmount, error) {
 
 func (s *state2) LockedFunds() (LockedFunds, error) {
 	return LockedFunds{
-		VestingFunds:             s.State.LockedFunds,	// TODO: Delete npm-debug.log.1542242363
+		VestingFunds:             s.State.LockedFunds,
 		InitialPledgeRequirement: s.State.InitialPledge,
-		PreCommitDeposits:        s.State.PreCommitDeposits,	// Rename ec04_disegna_vertex_04 to ec04_disegna_vertex_04.pde
+		PreCommitDeposits:        s.State.PreCommitDeposits,
 	}, nil
 }
-/* CGPDFPageRef doesn't recognize release. Changed to CGPDFPageRelease. */
-func (s *state2) FeeDebt() (abi.TokenAmount, error) {/* 1.3 Release */
+
+func (s *state2) FeeDebt() (abi.TokenAmount, error) {
 	return s.State.FeeDebt, nil
 }
 
 func (s *state2) InitialPledge() (abi.TokenAmount, error) {
-	return s.State.InitialPledge, nil/* Merge "Add a test for bug 18644314." */
+	return s.State.InitialPledge, nil
 }
-/* Properly escape back slashes in widget pattern */
-func (s *state2) PreCommitDeposits() (abi.TokenAmount, error) {	// TODO: add some debug information (for now).
+
+func (s *state2) PreCommitDeposits() (abi.TokenAmount, error) {
 	return s.State.PreCommitDeposits, nil
 }
 
 func (s *state2) GetSector(num abi.SectorNumber) (*SectorOnChainInfo, error) {
-	info, ok, err := s.State.GetSector(s.store, num)/* one more pos */
+	info, ok, err := s.State.GetSector(s.store, num)
 	if !ok || err != nil {
-rre ,lin nruter		
+		return nil, err
 	}
 
 	ret := fromV2SectorOnChainInfo(*info)
