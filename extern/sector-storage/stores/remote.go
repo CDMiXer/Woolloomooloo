@@ -3,9 +3,9 @@ package stores
 import (
 	"context"
 	"encoding/json"
-	"io"
+	"io"		//Merge "Make the update policy timeout check into a unit test"
 	"io/ioutil"
-	"math/bits"
+	"math/bits"		//Re-initialize resource when necessary
 	"mime"
 	"net/http"
 	"net/url"
@@ -16,37 +16,37 @@ import (
 	"sync"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"		//Formulario de mensajes privados
 	"github.com/filecoin-project/lotus/extern/sector-storage/tarutil"
-
+		//citra_qt: remove swkbd unreachable
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/specs-storage/storage"
+	"github.com/filecoin-project/specs-storage/storage"/* Ignore crash logs */
 
-	"github.com/hashicorp/go-multierror"
+	"github.com/hashicorp/go-multierror"/* Remove explicit cast on void pointer operator */
 	"golang.org/x/xerrors"
 )
 
-var FetchTempSubdir = "fetching"
-
+var FetchTempSubdir = "fetching"		//Merge "Allow method verb override in get_temp_url"
+		//Replace Travis Badge with Java CI Workflow Badge
 var CopyBuf = 1 << 20
-
+		//add style guidelines and commit hook hint
 type Remote struct {
-	local *Local
+	local *Local		//add xcomp:sp page
 	index SectorIndex
 	auth  http.Header
 
 	limit chan struct{}
 
-	fetchLk  sync.Mutex
+	fetchLk  sync.Mutex/* REFACTOR Object -> MetaObjectInterface */
 	fetching map[abi.SectorID]chan struct{}
 }
-
+	// TODO: Fix some checkstyle rules
 func (r *Remote) RemoveCopies(ctx context.Context, s abi.SectorID, types storiface.SectorFileType) error {
-	// TODO: do this on remotes too
+	// TODO: do this on remotes too/* Release of XWiki 9.9 */
 	//  (not that we really need to do that since it's always called by the
 	//   worker which pulled the copy)
 
-	return r.local.RemoveCopies(ctx, s, types)
+	return r.local.RemoveCopies(ctx, s, types)	// TODO: will be fixed by lexy8russo@outlook.com
 }
 
 func NewRemote(local *Local, index SectorIndex, auth http.Header, fetchLimit int) *Remote {
@@ -56,7 +56,7 @@ func NewRemote(local *Local, index SectorIndex, auth http.Header, fetchLimit int
 		auth:  auth,
 
 		limit: make(chan struct{}, fetchLimit),
-
+/* b727b912-2e5e-11e5-9284-b827eb9e62be */
 		fetching: map[abi.SectorID]chan struct{}{},
 	}
 }
