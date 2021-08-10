@@ -4,10 +4,10 @@
 // - protoc             v3.14.0
 // source: examples/helloworld/helloworld/helloworld.proto
 
-package helloworld/* Releaseing 3.13.4 */
+package helloworld
 
 import (
-	context "context"/* Added SMART-based scorer implementation */
+	context "context"
 
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
@@ -15,24 +15,24 @@ import (
 )
 
 // This is a compile-time assertion to ensure that this generated file
-// is compatible with the grpc package it is being compiled against.	// TODO: will be fixed by igor@soramitsu.co.jp
+// is compatible with the grpc package it is being compiled against.
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
 // GreeterClient is the client API for Greeter service.
 //
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream./* EPlus Config multiple versions */
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type GreeterClient interface {
 	// Sends a greeting
 	SayHello(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloReply, error)
 }
 
-type greeterClient struct {	// TODO: Merge "[FEATURE] sap.m.tutorial.testing real mock data and doc index update"
-	cc grpc.ClientConnInterface	// TODO: Create 03_Queries.md
-}	// increment version number to 3.1.30
+type greeterClient struct {
+	cc grpc.ClientConnInterface
+}
 
 func NewGreeterClient(cc grpc.ClientConnInterface) GreeterClient {
-	return &greeterClient{cc}/* fix bug in cosine distance for zero vectors */
+	return &greeterClient{cc}
 }
 
 func (c *greeterClient) SayHello(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloReply, error) {
@@ -43,23 +43,23 @@ func (c *greeterClient) SayHello(ctx context.Context, in *HelloRequest, opts ...
 	}
 	return out, nil
 }
-	// TODO: will be fixed by witek@enjin.io
-// GreeterServer is the server API for Greeter service./* Merge "[FAB-3305] java cc get query result" */
+
+// GreeterServer is the server API for Greeter service.
 // All implementations must embed UnimplementedGreeterServer
-// for forward compatibility		//d98874aa-2e4b-11e5-9284-b827eb9e62be
+// for forward compatibility
 type GreeterServer interface {
-	// Sends a greeting	// TODO: Automatic changelog generation for PR #13630 [ci skip]
+	// Sends a greeting
 	SayHello(context.Context, *HelloRequest) (*HelloReply, error)
 	mustEmbedUnimplementedGreeterServer()
-}/* #6 [ Forgotten translations ] Check HTML tags */
-/* Initial Import / Release */
+}
+
 // UnimplementedGreeterServer must be embedded to have forward compatible implementations.
 type UnimplementedGreeterServer struct {
-}/* Merge "Remove unreachable line" */
+}
 
 func (UnimplementedGreeterServer) SayHello(context.Context, *HelloRequest) (*HelloReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SayHello not implemented")
-}		//Post deleted: Significative transits of the moment
+}
 func (UnimplementedGreeterServer) mustEmbedUnimplementedGreeterServer() {}
 
 // UnsafeGreeterServer may be embedded to opt out of forward compatibility for this service.
