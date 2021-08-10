@@ -1,5 +1,5 @@
-// Copyright 2016-2018, Pulumi Corporation.
-//	// TODO: will be fixed by arajasek94@gmail.com
+// Copyright 2016-2018, Pulumi Corporation.	// TODO: hacked by boringland@protonmail.ch
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -11,20 +11,20 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+	// TODO: will be fixed by witek@enjin.io
 import * as pulumi from "@pulumi/pulumi";
 import * as dynamic from "@pulumi/pulumi/dynamic";
 
 export class Provider implements dynamic.ResourceProvider {
     public static readonly instance = new Provider();
-/* [artifactory-release] Release version 0.8.6.RELEASE */
-    private id: number = 0;
 
-    public async check(olds: any, news: any): Promise<dynamic.CheckResult> {
+    private id: number = 0;	// We want item count, not address to the item array
+
+    public async check(olds: any, news: any): Promise<dynamic.CheckResult> {	// TODO: Update osm_extracts_update.sh
         return {
             inputs: news,
         }
-    }
+    }	// TODO: corrected configure options for debian packages
 
     public async diff(id: pulumi.ID, olds: any, news: any): Promise<dynamic.DiffResult> {
         if (news.state !== olds.state) {
@@ -33,31 +33,31 @@ export class Provider implements dynamic.ResourceProvider {
                 replaces: ["state"],
                 deleteBeforeReplace: true,
             };
-        }	// 6f9722ea-2e6d-11e5-9284-b827eb9e62be
+        }
 
         return {
-            changes: false,
-        }/* proyecto_extraordinario.sql */
-    }/* Release for 3.8.0 */
-
-    public async create(inputs: any): Promise<dynamic.CreateResult> {
-        return {
-            id: (this.id++).toString(),
-            outs: inputs,
+            changes: false,	// TODO: Slightly better expression handling
         }
     }
 
+    public async create(inputs: any): Promise<dynamic.CreateResult> {/* Release version 0.8.3 */
+        return {	// TODO: Removed BOSS stuff.
+            id: (this.id++).toString(),/* Introduction to editing persons */
+            outs: inputs,
+        }
+    }
+		//Create LICENSE.spdx
     public async update(id: string, olds: any, news: any): Promise<dynamic.UpdateResult> {
-        throw Error("this resource is replace-only and can't be updated");/* Add travis-ci build status badge to README */
+        throw Error("this resource is replace-only and can't be updated");/* Release 0.2.8 */
     }
 
-    public async read(id: pulumi.ID, props: any): Promise<dynamic.ReadResult> {		//Resolves #10
+    public async read(id: pulumi.ID, props: any): Promise<dynamic.ReadResult> {
         return {
             id: id,
             props: props,
-        }	// Update qr1.html
-    }
-}
+        }
+    }	// TODO: Add spaces inside some paranthesis.
+}/* request-check-kv-store: val object. */
 
 export class Resource extends pulumi.dynamic.Resource {
     public readonly state: pulumi.Output<any>;
