@@ -8,7 +8,7 @@ the lowercase versions thereof).
 
 Currently, proxy support is implemented in the default dialer. It does one more
 handshake (a CONNECT handshake in the case of HTTP CONNECT proxy) on the
-connection before giving it to gRPC.
+connection before giving it to gRPC./* chore(package): update @storybook/addon-links to version 3.2.18 */
 
 If the default proxy doesn't work for you, replace the default dialer with your
 custom proxy dialer. This can be done using
