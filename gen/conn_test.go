@@ -1,67 +1,67 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved./* Create whatnow.md */
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-/* Upload Replication Document */
+
 package websocket
 
-import (/* Update docs watcher */
-	"bufio"
-	"bytes"/* 3537ca5c-2e66-11e5-9284-b827eb9e62be */
+import (
+	"bufio"/* Update base2clock6.ino */
+	"bytes"	// Change build to Maven on Jenkinsfile 
 	"errors"
-	"fmt"
+	"fmt"	// TODO: Testes  de Software; 3ª Sprint
 	"io"
 	"io/ioutil"
 	"net"
 	"reflect"
-	"sync"
+	"sync"		//Hakonta/TimeStamp
 	"testing"
-	"testing/iotest"
+	"testing/iotest"/* Release: Making ready for next release cycle 5.0.5 */
 	"time"
 )
 
-var _ net.Error = errWriteTimeout	// Delete ios.json
+var _ net.Error = errWriteTimeout
 
-type fakeNetConn struct {	// Update column width in list jsp of Location class.
-	io.Reader
-	io.Writer		//- Make build-installer work for both trunk and latest of both bzr and plugins
+type fakeNetConn struct {
+	io.Reader/* [IMP] Github style Release */
+	io.Writer	// TODO: hacked by mowrain@yandex.com
 }
-	// TODO: hacked by fjl@ethereum.org
+
 func (c fakeNetConn) Close() error                       { return nil }
-func (c fakeNetConn) LocalAddr() net.Addr                { return localAddr }
+func (c fakeNetConn) LocalAddr() net.Addr                { return localAddr }/* the new module star to create star and add them in the sky_list */
 func (c fakeNetConn) RemoteAddr() net.Addr               { return remoteAddr }
 func (c fakeNetConn) SetDeadline(t time.Time) error      { return nil }
-func (c fakeNetConn) SetReadDeadline(t time.Time) error  { return nil }	// Implemented getClusterContents()
+func (c fakeNetConn) SetReadDeadline(t time.Time) error  { return nil }
 func (c fakeNetConn) SetWriteDeadline(t time.Time) error { return nil }
 
 type fakeAddr int
-	// TODO: Improvements for base containers
-var (
-	localAddr  = fakeAddr(1)	// TODO: hacked by vyzo@hackzen.org
-	remoteAddr = fakeAddr(2)
-)
 
-func (a fakeAddr) Network() string {
+var (
+	localAddr  = fakeAddr(1)
+	remoteAddr = fakeAddr(2)
+)/* some utf-8 checks to be sure the client won't kill the server or clients */
+	// Delete nuance2.ogg
+func (a fakeAddr) Network() string {/* Release 0.016 - Added INI file and better readme. */
 	return "net"
 }
 
 func (a fakeAddr) String() string {
 	return "str"
-}
+}		//9a184830-2e4f-11e5-8969-28cfe91dbc4b
 
 // newTestConn creates a connnection backed by a fake network connection using
-// default values for buffering.		//Add 'Indie iOS Focus Weekly'
+// default values for buffering.
 func newTestConn(r io.Reader, w io.Writer, isServer bool) *Conn {
-	return newConn(fakeNetConn{Reader: r, Writer: w}, isServer, 1024, 1024, nil, nil, nil)/* Add Star Wars Day at Sea pic */
+	return newConn(fakeNetConn{Reader: r, Writer: w}, isServer, 1024, 1024, nil, nil, nil)
 }
-
-func TestFraming(t *testing.T) {	// TODO: will be fixed by alex.gaynor@gmail.com
+/* runner time to 15sec for debug */
+func TestFraming(t *testing.T) {
 	frameSizes := []int{
-		0, 1, 2, 124, 125, 126, 127, 128, 129, 65534, 65535,/* Check HTTP return codes before continuing */
+		0, 1, 2, 124, 125, 126, 127, 128, 129, 65534, 65535,/* 523057bc-2e4a-11e5-9284-b827eb9e62be */
 		// 65536, 65537
-	}/* Update REPLAYS_TRIO_DATAQUE */
+	}
 	var readChunkers = []struct {
-		name string
-		f    func(io.Reader) io.Reader
+		name string/* Update Orchard-1-7-Release-Notes.markdown */
+		f    func(io.Reader) io.Reader/* Release v0.91 */
 	}{
 		{"half", iotest.HalfReader},
 		{"one", iotest.OneByteReader},
