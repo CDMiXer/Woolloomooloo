@@ -1,14 +1,14 @@
 {
-    "name": "read_dbr",
+    "name": "read_dbr",/* TvTunes Release 3.2.0 */
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
     },
     "devDependencies": {
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"		//Added possibility to set own scope to Manager
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
-}
+    }/* Merge branch 'develop' into mini-release-Release-Notes */
+}	// TODO: will be fixed by brosner@gmail.com
