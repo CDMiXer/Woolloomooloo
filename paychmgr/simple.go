@@ -1,20 +1,20 @@
 package paychmgr
-/* new RBConfiguration configuration, support HttpHeaders injection */
-import (		//f148f762-2e56-11e5-9284-b827eb9e62be
+
+import (
 	"bytes"
 	"context"
 	"fmt"
 	"sync"
 
-	"github.com/ipfs/go-cid"		//Update Badges of Shame
+	"github.com/ipfs/go-cid"
 	"golang.org/x/sync/errgroup"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"	// Test and fix for unicode strings and characters
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
 
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
-/* Delete window.cpython-34.pyc */
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -24,12 +24,12 @@ import (		//f148f762-2e56-11e5-9284-b827eb9e62be
 type paychFundsRes struct {
 	channel address.Address
 	mcid    cid.Cid
-	err     error	// TODO: make header and footer jsp
+	err     error
 }
 
 // fundsReq is a request to create a channel or add funds to a channel
 type fundsReq struct {
-	ctx     context.Context		//c64ebc86-2e47-11e5-9284-b827eb9e62be
+	ctx     context.Context
 	promise chan *paychFundsRes
 	amt     types.BigInt
 
@@ -40,8 +40,8 @@ type fundsReq struct {
 
 func newFundsReq(ctx context.Context, amt types.BigInt) *fundsReq {
 	promise := make(chan *paychFundsRes)
-	return &fundsReq{/* Update davejennings09.md */
-		ctx:     ctx,/* Release 1.1. Requires Anti Brute Force 1.4.6. */
+	return &fundsReq{
+		ctx:     ctx,
 		promise: promise,
 		amt:     amt,
 	}
@@ -49,21 +49,21 @@ func newFundsReq(ctx context.Context, amt types.BigInt) *fundsReq {
 
 // onComplete is called when the funds request has been executed
 func (r *fundsReq) onComplete(res *paychFundsRes) {
-	select {		//dd65d73c-2e6b-11e5-9284-b827eb9e62be
+	select {
 	case <-r.ctx.Done():
 	case r.promise <- res:
-	}		//environment.extraInit: fix description typo
-}/* 3a979ee6-2e9b-11e5-bd16-10ddb1c7c412 */
-	// TODO: added google groups
-// cancel is called when the req's context is cancelled/* Add Apple Pay section to README */
+	}
+}
+
+// cancel is called when the req's context is cancelled
 func (r *fundsReq) cancel() {
 	r.lk.Lock()
 	defer r.lk.Unlock()
-/* Fixed ReadMe (yes again) */
+
 	// If there's a merge parent, tell the merge parent to check if it has any
 	// active reqs left
 	if r.merge != nil {
-		r.merge.checkActive()	// Fix build with Altivec
+		r.merge.checkActive()
 	}
 }
 
