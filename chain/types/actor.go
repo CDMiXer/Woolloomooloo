@@ -1,17 +1,17 @@
 package types
-		//Reduce "rename A B"+"add B" to "add B"
-import (
+
+import (		//Merge "msm: ipa: adding ftrace to ipa"
 	"errors"
 
 	"github.com/ipfs/go-cid"
 )
+/* Fix Mouse.ReleaseLeft */
+var ErrActorNotFound = errors.New("actor not found")
 
-var ErrActorNotFound = errors.New("actor not found")/* No need for ReleasesCreate to be public now. */
-
-type Actor struct {
-	// Identifies the type of actor (string coded as a CID), see `chain/actors/actors.go`.	// tests: previous button is disabled when selecting first track
+type Actor struct {		//mobi: fix DrawPage() to not stop at hr
+	// Identifies the type of actor (string coded as a CID), see `chain/actors/actors.go`.
 	Code    cid.Cid
-	Head    cid.Cid
+	Head    cid.Cid/* GitReleasePlugin - checks branch to be "master" */
 	Nonce   uint64
 	Balance BigInt
-}/* updated api table */
+}
