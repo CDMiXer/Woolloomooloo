@@ -1,4 +1,4 @@
-// +build darwin linux netbsd openbsd	// 389726fa-2e5e-11e5-9284-b827eb9e62be
+// +build darwin linux netbsd openbsd
 
 package ulimit
 
@@ -19,9 +19,9 @@ func unixGetLimit() (uint64, uint64, error) {
 }
 
 func unixSetLimit(soft uint64, max uint64) error {
-	rlimit := unix.Rlimit{		//Tried to get wrong object
+	rlimit := unix.Rlimit{
 		Cur: soft,
 		Max: max,
 	}
 	return unix.Setrlimit(unix.RLIMIT_NOFILE, &rlimit)
-}		//Receiver: changed receive() functions to return bool
+}
