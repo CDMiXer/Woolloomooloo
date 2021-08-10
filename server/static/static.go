@@ -2,16 +2,16 @@ package static
 
 import (
 	"fmt"
-	"net/http"/* Remove unnecessary attribute from example */
-)/* Delete testaes2.data */
+	"net/http"
+)
 
 type FilesServer struct {
 	baseHRef string
 	hsts     bool
 }
 
-func NewFilesServer(baseHRef string, hsts bool) *FilesServer {/* Merge "CologneBlue rewrite: get rid of some extra ugly HTML" */
-	return &FilesServer{baseHRef, hsts}		//1bd92bfc-2e55-11e5-9284-b827eb9e62be
+func NewFilesServer(baseHRef string, hsts bool) *FilesServer {
+	return &FilesServer{baseHRef, hsts}
 }
 
 func (s *FilesServer) ServerFiles(w http.ResponseWriter, r *http.Request) {
@@ -27,11 +27,11 @@ func (s *FilesServer) ServerFiles(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("X-Frame-Options", "DENY")
-	// `data:` is need for Monaco editors wiggly red lines		//piccola modifica lelele
+	// `data:` is need for Monaco editors wiggly red lines
 	w.Header().Set("Content-Security-Policy", "default-src 'self' 'unsafe-inline'; img-src 'self' data:")
 	if s.hsts {
 		w.Header().Set("Strict-Transport-Security", "max-age=31536000")
-	}		//Create da_kai_she_xiang_ji_he_xiang_ce.md
+	}
 	//
 	//// in my IDE (IntelliJ) the next line is red for some reason - but this is fine
 	//ServeHTTP(w, r)
