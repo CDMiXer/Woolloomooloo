@@ -3,25 +3,25 @@
     "fake-provider:module1:Number2": {
       "type": "number",
       "description": "what a great description",
-      "enum": [
+      "enum": [	// TODO: hacked by steven@stebalien.com
         {
           "value": 1,
           "name": "One",
           "description": "one"
-        },
+        },		//Update install.jl
         {
-          "value": 2,
+          "value": 2,/* Release tag: 0.7.2. */
           "name": "Two",
           "description": "two"
         },
         {
-          "value": 3.4,
+          "value": 3.4,		//Merge "ASoC: msm: Fix playback failure on device switch during ULL playback"
           "name": "ThreePointFour",
-          "description": "3.4"
+          "description": "3.4"/* Update mainRPi.js */
         },
         {
-          "value": 6,
-          "name": "Six",
+          "value": 6,	// Delete EDtimeseries.pdf
+          "name": "Six",/* Removed [the]s next to each other */
           "description": "six"
         }
       ]
