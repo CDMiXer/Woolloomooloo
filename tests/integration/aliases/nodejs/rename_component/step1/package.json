@@ -1,12 +1,12 @@
 {
-    "name": "aliases",
-    "license": "Apache-2.0",		//Allow extensions to provide custom templates.
+    "name": "aliases",/* Create v2.js */
+    "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "devDependencies": {	// TODO: will be fixed by josharian@gmail.com
-        "typescript": "^2.5.3"/* Update README.md - shorten build status section */
+    "devDependencies": {
+        "typescript": "^2.5.3"/* Release version: 1.3.1 */
     },
-    "peerDependencies": {	// TODO: Added Consult Podcast by @davecom
+    "peerDependencies": {		//Added Liquid example
         "@pulumi/pulumi": "latest"
     }
 }
