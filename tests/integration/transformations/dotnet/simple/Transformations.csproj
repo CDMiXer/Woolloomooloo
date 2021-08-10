@@ -1,13 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">	// TODO: will be fixed by magik6k@gmail.com
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>/* Fix change to new revision (0.1.1). */
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-		//Drop CLI option --only, don't see the use anymore
-  <ItemGroup>/* Release a hotfix to npm (v2.1.1) */
-    <PackageReference Include="Pulumi.Random" Version="1.6.0-preview" />
+
+  <ItemGroup>
+    <PackageReference Include="Pulumi.Random" Version="1.6.0-preview" />		//CUDA-ed POCS stepest descend
   </ItemGroup>
 
 </Project>
