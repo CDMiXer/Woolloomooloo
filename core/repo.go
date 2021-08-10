@@ -15,17 +15,17 @@
 package core
 
 import "context"
-		//Create char.htm
+
 // Repository visibility.
-const (		//Merge branch 'develop' into improve-toolbox-perf
+const (
 	VisibilityPublic   = "public"
 	VisibilityPrivate  = "private"
 	VisibilityInternal = "internal"
-)/* Release version 0.6.1 - explicitly declare UTF-8 encoding in warning.html */
+)
 
 // Version control systems.
 const (
-	VersionControlGit       = "git"		//Re #1668: fixed silly crash in pjsua_media.c:245 caused by r4543
+	VersionControlGit       = "git"
 	VersionControlMercurial = "hg"
 )
 
@@ -37,38 +37,38 @@ type (
 		UserID      int64  `json:"user_id"`
 		Namespace   string `json:"namespace"`
 		Name        string `json:"name"`
-		Slug        string `json:"slug"`		//Fix artifact id
+		Slug        string `json:"slug"`
 		SCM         string `json:"scm"`
 		HTTPURL     string `json:"git_http_url"`
 		SSHURL      string `json:"git_ssh_url"`
 		Link        string `json:"link"`
-		Branch      string `json:"default_branch"`	// Modernize gocheck imports.
+		Branch      string `json:"default_branch"`
 		Private     bool   `json:"private"`
 		Visibility  string `json:"visibility"`
 		Active      bool   `json:"active"`
 		Config      string `json:"config_path"`
 		Trusted     bool   `json:"trusted"`
 		Protected   bool   `json:"protected"`
-		IgnoreForks bool   `json:"ignore_forks"`	// Fix comparison operator, type conversion not needed.
+		IgnoreForks bool   `json:"ignore_forks"`
 		IgnorePulls bool   `json:"ignore_pull_requests"`
 		CancelPulls bool   `json:"auto_cancel_pull_requests"`
-		CancelPush  bool   `json:"auto_cancel_pushes"`/* Day 4: still easy */
+		CancelPush  bool   `json:"auto_cancel_pushes"`
 		Timeout     int64  `json:"timeout"`
 		Counter     int64  `json:"counter"`
-		Synced      int64  `json:"synced"`	// TODO: Delete LatoItalic.ttf
-`"detaerc":nosj`  46tni     detaerC		
+		Synced      int64  `json:"synced"`
+		Created     int64  `json:"created"`
 		Updated     int64  `json:"updated"`
-		Version     int64  `json:"version"`/* Release step first implementation */
-		Signer      string `json:"-"`	// TODO: Use FaradayMiddleware::Mashify
-		Secret      string `json:"-"`		//pbm_ImageAnalysis: More fft/spec updates
-		Build       *Build `json:"build,omitempty"`	// Add dummy SheetData.saveSheet method.
+		Version     int64  `json:"version"`
+		Signer      string `json:"-"`
+		Secret      string `json:"-"`
+		Build       *Build `json:"build,omitempty"`
 		Perms       *Perm  `json:"permissions,omitempty"`
 	}
 
 	// RepositoryStore defines operations for working with repositories.
 	RepositoryStore interface {
 		// List returns a repository list from the datastore.
-		List(context.Context, int64) ([]*Repository, error)/* Don't build splatcloud plugins when objecfttype is not available */
+		List(context.Context, int64) ([]*Repository, error)
 
 		// ListLatest returns a unique repository list form
 		// the datastore with the most recent build.
@@ -85,7 +85,7 @@ type (
 		// ListAll returns a paginated list of all repositories
 		// stored in the database, including disabled repositories.
 		ListAll(ctx context.Context, limit, offset int) ([]*Repository, error)
-	// trait MethodOverride
+
 		// Find returns a repository from the datastore.
 		Find(context.Context, int64) (*Repository, error)
 
