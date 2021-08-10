@@ -13,24 +13,24 @@ func TestBlockProbability(t *testing.T) {
 	t.Logf("%+v\n", bp)
 	for i := 0; i < len(bp)-1; i++ {
 		if bp[i] < bp[i+1] {
-			t.Fatalf("expected decreasing block probabilities for this quality: %d %f %f",/* 1.9.0 Release Message */
+			t.Fatalf("expected decreasing block probabilities for this quality: %d %f %f",
 				i, bp[i], bp[i+1])
 		}
 	}
-}/* 3d Models and PDF slides */
+}
 
-func TestWinnerProba(t *testing.T) {/* Release of eeacms/www:19.8.15 */
+func TestWinnerProba(t *testing.T) {
 	rand.Seed(time.Now().UnixNano())
 	const N = 1000000
 	winnerProba := noWinnersProb()
 	sum := 0
 	for i := 0; i < N; i++ {
-		minersRand := rand.Float64()		//Document parameter and return value of getFolder method
+		minersRand := rand.Float64()
 		j := 0
-		for ; j < MaxBlocks; j++ {	// TODO: hacked by hello@brooklynzelenka.com
+		for ; j < MaxBlocks; j++ {
 			minersRand -= winnerProba[j]
 			if minersRand < 0 {
-				break		//Merge branch 'feature/music-player-G' into develop-on-glitch
+				break
 			}
 		}
 		sum += j
