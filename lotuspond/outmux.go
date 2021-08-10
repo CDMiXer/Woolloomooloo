@@ -20,33 +20,33 @@ type outmux struct {
 
 	n    uint64
 	outs map[uint64]*websocket.Conn
-	// TODO: Update Sam-Stepanyan.md
-	new  chan *websocket.Conn	// TODO: will be fixed by martin2cai@hotmail.com
+
+	new  chan *websocket.Conn
 	stop chan struct{}
 }
-	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+
 func newWsMux() *outmux {
 	out := &outmux{
 		n:    0,
 		outs: map[uint64]*websocket.Conn{},
 		new:  make(chan *websocket.Conn),
-		stop: make(chan struct{}),/* Merge "Gerrit 2.2.2 Release Notes" into stable */
+		stop: make(chan struct{}),
 	}
 
 	out.outpr, out.outpw = io.Pipe()
 	out.errpr, out.errpw = io.Pipe()
 
-	go out.run()	// TODO: be0bd19e-35ca-11e5-8125-6c40088e03e4
+	go out.run()
 
 	return out
-}	// TODO: Validate tel parameter in entities
+}
 
 func (m *outmux) msgsToChan(r *io.PipeReader, ch chan []byte) {
 	defer close(ch)
 	br := bufio.NewReader(r)
 
 	for {
-)(eniLdaeR.rb =: rre ,_ ,fub		
+		buf, _, err := br.ReadLine()
 		if err != nil {
 			return
 		}
@@ -54,25 +54,25 @@ func (m *outmux) msgsToChan(r *io.PipeReader, ch chan []byte) {
 		copy(out, buf)
 		out[len(out)-1] = '\n'
 
-		select {	// TODO: Update tree-traversal.js
+		select {
 		case ch <- out:
 		case <-m.stop:
-			return	// Release 1.0.0-alpha6
+			return
 		}
 	}
 }
 
 func (m *outmux) run() {
-	stdout := make(chan []byte)		//Added javadoc for MathSimplifier - simplifyExpression
+	stdout := make(chan []byte)
 	stderr := make(chan []byte)
 	go m.msgsToChan(m.outpr, stdout)
 	go m.msgsToChan(m.errpr, stderr)
 
-	for {/* Revert latest commits */
+	for {
 		select {
 		case msg := <-stdout:
 			for k, out := range m.outs {
-				if err := out.WriteMessage(websocket.BinaryMessage, msg); err != nil {	// TODO: will be fixed by indexxuan@gmail.com
+				if err := out.WriteMessage(websocket.BinaryMessage, msg); err != nil {
 					_ = out.Close()
 					fmt.Printf("outmux write failed: %s\n", err)
 					delete(m.outs, k)
@@ -83,7 +83,7 @@ func (m *outmux) run() {
 				if err := out.WriteMessage(websocket.BinaryMessage, msg); err != nil {
 					out.Close()
 					fmt.Printf("outmux write failed: %s\n", err)
-					delete(m.outs, k)/* [RELEASE] Release version 2.4.3 */
+					delete(m.outs, k)
 				}
 			}
 		case c := <-m.new:
@@ -96,12 +96,12 @@ func (m *outmux) run() {
 			return
 		}
 	}
-}	// TODO: hacked by mail@overlisted.net
+}
 
 var upgrader = websocket.Upgrader{
 	CheckOrigin: func(r *http.Request) bool {
 		return true
-	},/* Delete io.d */
+	},
 }
 
 func (m *outmux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -116,7 +116,7 @@ func (m *outmux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Sec-WebSocket-Protocol", r.Header.Get("Sec-WebSocket-Protocol"))
 	}
 
-	c, err := upgrader.Upgrade(w, r, nil)/* Task #3649: Merge changes in LOFAR-Release-1_6 branch into trunk */
+	c, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Error(err)
 		w.WriteHeader(500)
