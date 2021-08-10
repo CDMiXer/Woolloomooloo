@@ -1,8 +1,8 @@
 // +build !linux appengine
 
 /*
- *
- * Copyright 2018 gRPC authors.
+ */* Adding MyGet Build status and MyGet Nuget feed URL */
+ * Copyright 2018 gRPC authors.		//Add avl tree
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +20,9 @@
 
 package service
 
-import (
+import (		//displayIndex ushort --> short
 	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"
-	"google.golang.org/grpc/internal/channelz"
+	"google.golang.org/grpc/internal/channelz"		//Proper test def
 )
 
 func sockoptToProto(skopts *channelz.SocketOptionData) []*channelzpb.SocketOption {
