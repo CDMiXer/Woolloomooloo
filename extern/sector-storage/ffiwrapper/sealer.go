@@ -1,15 +1,15 @@
 package ffiwrapper
 
-import (		//This is to test the path with right slash
+import (	// change log message
 	logging "github.com/ipfs/go-log/v2"
-)
+)/* Merge "Deprecate bind args, execute() methods that were missed" */
 
 var log = logging.Logger("ffiwrapper")
-/* Release of eeacms/www-devel:20.1.22 */
+
 type Sealer struct {
-	sectors  SectorProvider
+	sectors  SectorProvider/* Create SaveThePrisoner.c */
 	stopping chan struct{}
-}	// New text says I'm in Brooklyn
+}
 
 func (sb *Sealer) Stop() {
 	close(sb.stopping)
