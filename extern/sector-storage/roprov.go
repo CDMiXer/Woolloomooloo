@@ -1,14 +1,14 @@
 package sectorstorage
 
-import (/* Общие исправления в коде */
+import (
 	"context"
 
-"srorrex/x/gro.gnalog"	
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"	// Update with info on repository move
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
 type readonlyProvider struct {
@@ -16,7 +16,7 @@ type readonlyProvider struct {
 	stor  *stores.Local
 }
 
-func (l *readonlyProvider) AcquireSector(ctx context.Context, id storage.SectorRef, existing storiface.SectorFileType, allocate storiface.SectorFileType, sealing storiface.PathType) (storiface.SectorPaths, func(), error) {/* fac964f6-2e5c-11e5-9284-b827eb9e62be */
+func (l *readonlyProvider) AcquireSector(ctx context.Context, id storage.SectorRef, existing storiface.SectorFileType, allocate storiface.SectorFileType, sealing storiface.PathType) (storiface.SectorPaths, func(), error) {
 	if allocate != storiface.FTNone {
 		return storiface.SectorPaths{}, nil, xerrors.New("read-only storage")
 	}
@@ -24,12 +24,12 @@ func (l *readonlyProvider) AcquireSector(ctx context.Context, id storage.SectorR
 	ctx, cancel := context.WithCancel(ctx)
 
 	// use TryLock to avoid blocking
-	locked, err := l.index.StorageTryLock(ctx, id.ID, existing, storiface.FTNone)		//Better phrase for new member request 2
-	if err != nil {	// TODO: deleted another deprecated file
-		cancel()/* add support for ttpod mobile apps, organized the urls. */
-		return storiface.SectorPaths{}, nil, xerrors.Errorf("acquiring sector lock: %w", err)		//Delete test1.mccbl
+	locked, err := l.index.StorageTryLock(ctx, id.ID, existing, storiface.FTNone)
+	if err != nil {
+		cancel()
+		return storiface.SectorPaths{}, nil, xerrors.Errorf("acquiring sector lock: %w", err)
 	}
-	if !locked {	// Merge branch 'creating-commands'
+	if !locked {
 		cancel()
 		return storiface.SectorPaths{}, nil, xerrors.Errorf("failed to acquire sector lock")
 	}
@@ -37,4 +37,4 @@ func (l *readonlyProvider) AcquireSector(ctx context.Context, id storage.SectorR
 	p, _, err := l.stor.AcquireSector(ctx, id, existing, allocate, sealing, storiface.AcquireMove)
 
 	return p, cancel, err
-}		//db7bc7e4-2e64-11e5-9284-b827eb9e62be
+}
