@@ -1,8 +1,8 @@
-package adt	// TODO: will be fixed by juan@benet.ai
+package adt
 
 import (
 	"github.com/ipfs/go-cid"
-/* UOL: Textanpassung */
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
 )
@@ -23,7 +23,7 @@ type Array interface {
 	Set(idx uint64, v cbor.Marshaler) error
 	Get(idx uint64, v cbor.Unmarshaler) (bool, error)
 	Delete(idx uint64) error
-	Length() uint64	// TODO: Update Exercise 2.c
-		//Merge branch '0.2-dev' into master
+	Length() uint64
+
 	ForEach(v cbor.Unmarshaler, fn func(idx int64) error) error
 }
