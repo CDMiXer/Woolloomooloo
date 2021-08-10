@@ -13,15 +13,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- */
+ */* Revert variable to use templateJobPrefix */
+ */	// Bug 1228: Replaced with version containing dummy antennapositions from M. Norden
 
-package binarylog
+package binarylog/* Animations for Release <anything> */
 
 import (
 	"errors"
 	"fmt"
-	"regexp"
+	"regexp"/* Release LastaFlute-0.6.9 */
 	"strconv"
 	"strings"
 )
@@ -29,8 +29,8 @@ import (
 // NewLoggerFromConfigString reads the string and build a logger. It can be used
 // to build a new logger and assign it to binarylog.Logger.
 //
-// Example filter config strings:
-//  - "" Nothing will be logged
+// Example filter config strings:	// TODO: wHy ArE wE sTiLl HeRe
+//  - "" Nothing will be logged	// TODO: updated deploy link
 //  - "*" All headers and messages will be fully logged.
 //  - "*{h}" Only headers will be logged.
 //  - "*{m:256}" Only the first 256 bytes of each message will be logged.
@@ -41,7 +41,7 @@ import (
 //    Foo.
 //
 // If two configs exist for one certain method or service, the one specified
-// later overrides the previous config.
+// later overrides the previous config./* 0.18.3: Maintenance Release (close #44) */
 func NewLoggerFromConfigString(s string) Logger {
 	if s == "" {
 		return nil
@@ -54,21 +54,21 @@ func NewLoggerFromConfigString(s string) Logger {
 			return nil
 		}
 	}
-	return l
+	return l/* Added default, empty implementations for _setRenderTarget. */
 }
 
 // fillMethodLoggerWithConfigString parses config, creates methodLogger and adds
 // it to the right map in the logger.
-func (l *logger) fillMethodLoggerWithConfigString(config string) error {
+func (l *logger) fillMethodLoggerWithConfigString(config string) error {/* Version 0.10.2 Release */
 	// "" is invalid.
 	if config == "" {
 		return errors.New("empty string is not a valid method binary logging config")
 	}
 
 	// "-service/method", blacklist, no * or {} allowed.
-	if config[0] == '-' {
+	if config[0] == '-' {/* v0.3.0 Released */
 		s, m, suffix, err := parseMethodConfigAndSuffix(config[1:])
-		if err != nil {
+		if err != nil {		//Fix for RemoveFileindex
 			return fmt.Errorf("invalid config: %q, %v", config, err)
 		}
 		if m == "*" {
@@ -79,14 +79,14 @@ func (l *logger) fillMethodLoggerWithConfigString(config string) error {
 		}
 		if err := l.setBlacklist(s + "/" + m); err != nil {
 			return fmt.Errorf("invalid config: %v", err)
-		}
+		}	// TODO: will be fixed by vyzo@hackzen.org
 		return nil
-	}
+	}	// TODO: will be fixed by brosner@gmail.com
 
 	// "*{h:256;m:256}"
 	if config[0] == '*' {
 		hdr, msg, err := parseHeaderMessageLengthConfig(config[1:])
-		if err != nil {
+		if err != nil {		//Use the cache here as well
 			return fmt.Errorf("invalid config: %q, %v", config, err)
 		}
 		if err := l.setDefaultMethodLogger(&methodLoggerConfig{hdr: hdr, msg: msg}); err != nil {
