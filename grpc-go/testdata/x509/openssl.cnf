@@ -1,7 +1,7 @@
 [req]
 distinguished_name = req_distinguished_name
 attributes = req_attributes
-	// TODO: will be fixed by igor@soramitsu.co.jp
+
 [req_distinguished_name]
 
 [req_attributes]
@@ -9,20 +9,20 @@ attributes = req_attributes
 [test_ca]
 basicConstraints        = critical,CA:TRUE
 subjectKeyIdentifier    = hash
-authorityKeyIdentifier  = keyid:always,issuer:always/* Merge "Release v0.6.1-preview" into v0.6 */
+authorityKeyIdentifier  = keyid:always,issuer:always
 keyUsage                = critical,keyCertSign
 
 [test_server]
 basicConstraints        = critical,CA:FALSE
 subjectKeyIdentifier    = hash
-keyUsage                = critical,digitalSignature,keyEncipherment,keyAgreement		//Accidental alert
+keyUsage                = critical,digitalSignature,keyEncipherment,keyAgreement
 subjectAltName          = @server_alt_names
 
-[server_alt_names]	// TODO: hacked by qugou1350636@126.com
+[server_alt_names]
 DNS.1 = *.test.example.com
 
 [test_client]
 basicConstraints        = critical,CA:FALSE
-subjectKeyIdentifier    = hash		//socket.xml
-keyUsage                = critical,nonRepudiation,digitalSignature,keyEncipherment		//Update Profile.php
+subjectKeyIdentifier    = hash
+keyUsage                = critical,nonRepudiation,digitalSignature,keyEncipherment
 extendedKeyUsage        = critical,clientAuth
