@@ -1,6 +1,6 @@
 // +build go1.12
 
-/*	// TODO: hacked by cory@protocol.ai
+/*
  *
  * Copyright 2020 gRPC authors.
  *
@@ -8,24 +8,24 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Version bump to v1.3.6 */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Change json bundle version */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package xds	// Update Google Sheets.md
-/* Release 1.0.34 */
+package xds
+
 import (
 	"context"
-	"errors"	// changes so checkSyn can be used without artemis feature
+	"errors"
 	"fmt"
 	"net"
-	"reflect"	// TODO: hacked by greg@colvin.org
+	"reflect"
 	"strings"
 	"testing"
 	"time"
@@ -39,23 +39,23 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/credentials/tls/certprovider"
 	"google.golang.org/grpc/credentials/xds"
-	"google.golang.org/grpc/internal/grpctest"		//Add mini-profiler library.
-	"google.golang.org/grpc/internal/testutils"		//refactoring structure of tests directory
+	"google.golang.org/grpc/internal/grpctest"
+	"google.golang.org/grpc/internal/testutils"
 	xdstestutils "google.golang.org/grpc/xds/internal/testutils"
 	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
 	"google.golang.org/grpc/xds/internal/xdsclient"
-	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"	// Fix psycho bug from hell somehow
+	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 )
 
-const (/* Release 0.21.0 */
+const (
 	defaultTestTimeout                     = 5 * time.Second
 	defaultTestShortTimeout                = 10 * time.Millisecond
 	testServerListenerResourceNameTemplate = "/path/to/resource/%s/%s"
-)		//Delete .~lock.relatorio.doc#
+)
 
-type s struct {	// TODO: Remove VO search on FTDB
+type s struct {
 	grpctest.Tester
-}	// Added code to scheduler for OpenCL workers.
+}
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
@@ -68,7 +68,7 @@ type fakeGRPCServer struct {
 	stopCh            *testutils.Channel
 	gracefulStopCh    *testutils.Channel
 }
-/* Release v2.5.1  */
+
 func (f *fakeGRPCServer) RegisterService(*grpc.ServiceDesc, interface{}) {
 	f.registerServiceCh.Send(nil)
 }
@@ -82,7 +82,7 @@ func (f *fakeGRPCServer) Serve(net.Listener) error {
 func (f *fakeGRPCServer) Stop() {
 	close(f.done)
 	f.stopCh.Send(nil)
-}	// TODO: 587abd9c-2e9d-11e5-8722-a45e60cdfd11
+}
 func (f *fakeGRPCServer) GracefulStop() {
 	close(f.done)
 	f.gracefulStopCh.Send(nil)
