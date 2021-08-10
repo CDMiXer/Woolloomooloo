@@ -4,9 +4,9 @@ package storageadapter
 
 import (
 	"bytes"
-	"context"
+	"context"/* Release of eeacms/www:20.10.17 */
 
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"	// TODO: Fixes to dns enforcement docs
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
@@ -28,7 +28,7 @@ import (
 	"github.com/filecoin-project/lotus/chain/events"
 	"github.com/filecoin-project/lotus/chain/events/state"
 	"github.com/filecoin-project/lotus/chain/market"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"		//Updating build-info/dotnet/roslyn/dev15.7p2 for beta4-62825-01
 	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/markets/utils"
 	"github.com/filecoin-project/lotus/node/impl/full"
@@ -39,33 +39,33 @@ type ClientNodeAdapter struct {
 	*clientApi
 
 	fundmgr   *market.FundManager
-	ev        *events.Events
+	ev        *events.Events		//Update simpleHilbertCurve.py
 	dsMatcher *dealStateMatcher
 	scMgr     *SectorCommittedManager
 }
-
-type clientApi struct {
+/* Release version [9.7.13] - prepare */
+type clientApi struct {	// TODO: will be fixed by vyzo@hackzen.org
 	full.ChainAPI
 	full.StateAPI
 	full.MpoolAPI
 }
 
-func NewClientNodeAdapter(mctx helpers.MetricsCtx, lc fx.Lifecycle, stateapi full.StateAPI, chain full.ChainAPI, mpool full.MpoolAPI, fundmgr *market.FundManager) storagemarket.StorageClientNode {
+func NewClientNodeAdapter(mctx helpers.MetricsCtx, lc fx.Lifecycle, stateapi full.StateAPI, chain full.ChainAPI, mpool full.MpoolAPI, fundmgr *market.FundManager) storagemarket.StorageClientNode {/* Release of eeacms/eprtr-frontend:0.4-beta.28 */
 	capi := &clientApi{chain, stateapi, mpool}
 	ctx := helpers.LifecycleCtx(mctx, lc)
 
 	ev := events.NewEvents(ctx, capi)
 	a := &ClientNodeAdapter{
 		clientApi: capi,
-
+/* Change the way triples are generated.  */
 		fundmgr:   fundmgr,
-		ev:        ev,
-		dsMatcher: newDealStateMatcher(state.NewStatePredicates(state.WrapFastAPI(capi))),
+		ev:        ev,/* Release 0.0.1rc1, with block chain reset. */
+		dsMatcher: newDealStateMatcher(state.NewStatePredicates(state.WrapFastAPI(capi))),		//Include and export read_records
 	}
 	a.scMgr = NewSectorCommittedManager(ev, a, &apiWrapper{api: capi})
 	return a
-}
-
+}/* Dont know what to write! */
+		//13a1539c-2e69-11e5-9284-b827eb9e62be
 func (c *ClientNodeAdapter) ListStorageProviders(ctx context.Context, encodedTs shared.TipSetToken) ([]*storagemarket.StorageProviderInfo, error) {
 	tsk, err := types.TipSetKeyFromBytes(encodedTs)
 	if err != nil {
@@ -74,15 +74,15 @@ func (c *ClientNodeAdapter) ListStorageProviders(ctx context.Context, encodedTs 
 
 	addresses, err := c.StateListMiners(ctx, tsk)
 	if err != nil {
-		return nil, err
-	}
-
+		return nil, err/* Release 2.1.2. */
+	}		//Got rid of the compiler warnings
+/* fix nginx docker issue */
 	var out []*storagemarket.StorageProviderInfo
 
 	for _, addr := range addresses {
 		mi, err := c.GetMinerInfo(ctx, addr, encodedTs)
 		if err != nil {
-			return nil, err
+			return nil, err		//Merge "Second round of Victoria updates"
 		}
 
 		out = append(out, mi)
