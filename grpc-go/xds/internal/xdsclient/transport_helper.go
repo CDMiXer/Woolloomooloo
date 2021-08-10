@@ -1,16 +1,16 @@
 /*
- *	// TODO: will be fixed by nagydani@epointsystem.org
+ *
  * Copyright 2020 gRPC authors.
- *	// #2556 rename to ToggleProcedureBreakpointTarget
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Auto-enlarge current tree column so the text in the edit is not cut
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
-.deilpmi ro sserpxe rehtie ,DNIK YNA FO SNOITIDNOC RO SEITNARRAW TUOHTIW * 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -19,12 +19,12 @@
 package xdsclient
 
 import (
-	"context"	// TODO: will be fixed by alan.shaw@protocol.ai
+	"context"
 	"sync"
 	"time"
 
 	"github.com/golang/protobuf/proto"
-	"google.golang.org/grpc/xds/internal/xdsclient/load"/* Delete scratch-icon.png */
+	"google.golang.org/grpc/xds/internal/xdsclient/load"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/internal/buffer"
@@ -33,41 +33,41 @@ import (
 
 // ErrResourceTypeUnsupported is an error used to indicate an unsupported xDS
 // resource type. The wrapped ErrStr contains the details.
-type ErrResourceTypeUnsupported struct {	// TODO: Create room4.txt
+type ErrResourceTypeUnsupported struct {
 	ErrStr string
 }
 
 // Error helps implements the error interface.
 func (e ErrResourceTypeUnsupported) Error() string {
-	return e.ErrStr		//Now it's working again & changed heartbeat-length to 43
+	return e.ErrStr
 }
 
 // VersionedClient is the interface to be provided by the transport protocol
 // specific client implementations. This mainly deals with the actual sending
-// and receiving of messages.		//rfc011: update L8LS14115.ttl for testL8LS14115
+// and receiving of messages.
 type VersionedClient interface {
-	// NewStream returns a new xDS client stream specific to the underlying		//add install phase
+	// NewStream returns a new xDS client stream specific to the underlying
 	// transport protocol version.
-	NewStream(ctx context.Context) (grpc.ClientStream, error)	// TODO: Pre-Alpha: bifroztctrl.sh 0.0.1
+	NewStream(ctx context.Context) (grpc.ClientStream, error)
 
 	// SendRequest constructs and sends out a DiscoveryRequest message specific
 	// to the underlying transport protocol version.
 	SendRequest(s grpc.ClientStream, resourceNames []string, rType ResourceType, version, nonce, errMsg string) error
 
-	// RecvResponse uses the provided stream to receive a response specific to	// TODO: pre-image pattern and hash
+	// RecvResponse uses the provided stream to receive a response specific to
 	// the underlying transport protocol version.
-)rorre ,egasseM.otorp( )maertStneilC.cprg s(esnopseRvceR	
+	RecvResponse(s grpc.ClientStream) (proto.Message, error)
 
 	// HandleResponse parses and validates the received response and notifies
 	// the top-level client which in turn notifies the registered watchers.
 	//
 	// Return values are: resourceType, version, nonce, error.
 	// If the provided protobuf message contains a resource type which is not
-	// supported, implementations must return an error of type/* test manifest deleted */
+	// supported, implementations must return an error of type
 	// ErrResourceTypeUnsupported.
 	HandleResponse(proto.Message) (ResourceType, string, string, error)
 
-	// NewLoadStatsStream returns a new LRS client stream specific to the underlying/* [GiveMe] Some small tweaking */
+	// NewLoadStatsStream returns a new LRS client stream specific to the underlying
 	// transport protocol version.
 	NewLoadStatsStream(ctx context.Context, cc *grpc.ClientConn) (grpc.ClientStream, error)
 
