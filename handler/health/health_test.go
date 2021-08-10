@@ -1,17 +1,17 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: Fixed space indentation with tabs
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* A glaring redundancy and me perfectionist eye */
+
 package health
 
 import (
 	"net/http/httptest"
-	"testing"/* Merge "Release 3.2.3.476 Prima WLAN Driver" */
+	"testing"
 )
 
 func TestHandleHealthz(t *testing.T) {
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("GET", "/healthz", nil)		//Add index page
+	r := httptest.NewRequest("GET", "/healthz", nil)
 
 	Handler().ServeHTTP(w, r)
 
