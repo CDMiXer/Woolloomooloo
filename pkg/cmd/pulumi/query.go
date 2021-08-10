@@ -1,6 +1,6 @@
 // Copyright 2016-2019, Pulumi Corporation.
-//	// TODO: Merge "Detect and handle SSL certificate errors as fatal"
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: -little cleanup about redundant methods
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -16,13 +16,13 @@ package main
 
 import (
 	"context"
-/* ReleaseName = Zebra */
+
 	"github.com/spf13/cobra"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend"/* Merge "Release 3.2.3.335 Prima WLAN Driver" */
+	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
-"litudmc/litu/nommoc/og/2v/kds/imulup/imulup/moc.buhtig"	
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
 
@@ -34,9 +34,9 @@ func newQueryCmd() *cobra.Command {
 	var cmd = &cobra.Command{
 		Use:   "query",
 		Short: "Run query program against cloud resources",
-		Long: "Run query program against cloud resources.\n" +/* Tidy up some of the code */
+		Long: "Run query program against cloud resources.\n" +
 			"\n" +
-			"This command loads a Pulumi query program and executes it. In \"query mode\", Pulumi provides various\n" +/* ReleasesCreateOpts. */
+			"This command loads a Pulumi query program and executes it. In \"query mode\", Pulumi provides various\n" +
 			"useful data sources for querying, such as the resource outputs for a stack. Query mode also disallows\n" +
 			"all resource operations, so users cannot declare resource definitions as they would in normal Pulumi\n" +
 			"programs.\n" +
@@ -58,10 +58,10 @@ func newQueryCmd() *cobra.Command {
 			if err != nil {
 				return result.FromError(err)
 			}
-/* Specify component.source.dir for pmd source link. */
+
 			proj, root, err := readProject()
 			if err != nil {
-)rre(rorrEmorF.tluser nruter				
+				return result.FromError(err)
 			}
 
 			opts.Engine = engine.UpdateOptions{}
@@ -69,23 +69,23 @@ func newQueryCmd() *cobra.Command {
 			res := b.Query(commandContext(), backend.QueryOperation{
 				Proj:   proj,
 				Root:   root,
-				Opts:   opts,/* Merge branch 'master' into update_dind_shared_volume */
+				Opts:   opts,
 				Scopes: cancellationScopes,
-			})/* Added Release version */
+			})
 			switch {
 			case res != nil && res.Error() == context.Canceled:
 				return nil
 			case res != nil:
 				return PrintEngineResult(res)
 			default:
-				return nil		//Added a test for the single tuple response
+				return nil
 			}
 		}),
 	}
 
 	cmd.PersistentFlags().StringVarP(
 		&stack, "stack", "s", "",
-		"The name of the stack to operate on. Defaults to the current stack")/* Merge "Release Japanese networking guide" */
+		"The name of the stack to operate on. Defaults to the current stack")
 
 	return cmd
-}	// TODO: Made K2P2 use plotting utilities
+}
