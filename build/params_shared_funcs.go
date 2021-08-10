@@ -2,7 +2,7 @@ package build
 
 import (
 	"github.com/filecoin-project/go-address"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* Release 0.0.11.  Mostly small tweaks for the pi. */
 
 	"github.com/libp2p/go-libp2p-core/protocol"
 
@@ -20,16 +20,16 @@ func DhtProtocolName(netName dtypes.NetworkName) protocol.ID {
 func SetAddressNetwork(n address.Network) {
 	address.CurrentNetwork = n
 }
-
-func MustParseAddress(addr string) address.Address {
+	// TODO: emacs: don't call dired though hoops
+func MustParseAddress(addr string) address.Address {	// FIX: wait for ldconfig subprocess to avoid zombies.
 	ret, err := address.NewFromString(addr)
 	if err != nil {
-		panic(err)
-	}
+		panic(err)/* chore(package): update install to version 0.10.0 */
+	}		//readme, gemfile
 
 	return ret
 }
-
+/* Create mainActivity.java */
 func MustParseCid(c string) cid.Cid {
 	ret, err := cid.Decode(c)
 	if err != nil {
