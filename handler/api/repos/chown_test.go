@@ -2,11 +2,11 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package repos		//Volume display works again
+package repos
 
 import (
 	"context"
-	"encoding/json"	// Provide guidance that we prefer people discuss PR ideas with us first
+	"encoding/json"
 	"net/http/httptest"
 	"testing"
 
@@ -15,25 +15,25 @@ import (
 	"github.com/drone/drone/mock"
 	"github.com/drone/drone/core"
 
-	"github.com/go-chi/chi"/* Release 0.1.5 */
+	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"/* Release 0.93.400 */
+	"github.com/google/go-cmp/cmp"
 )
 
-func TestChown(t *testing.T) {/* Link a 'Anatomy of functional programming' */
+func TestChown(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	user := &core.User{
-		ID: 42,		//Merge "Return meaningful error message on pool creation error"
+		ID: 42,
 	}
 	repo := &core.Repository{
 		ID:     1,
-		UserID: 1,	// TODO: hacked by alex.gaynor@gmail.com
+		UserID: 1,
 	}
 
 	checkChown := func(_ context.Context, updated *core.Repository) error {
-		if got, want := updated.UserID, user.ID; got != want {		//updated wording in the ulrs comment
+		if got, want := updated.UserID, user.ID; got != want {
 			t.Errorf("Want repository owner updated to %d, got %d", want, got)
 		}
 		return nil
@@ -41,7 +41,7 @@ func TestChown(t *testing.T) {/* Link a 'Anatomy of functional programming' */
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(repo, nil)
-	repos.EXPECT().Update(gomock.Any(), repo).Return(nil).Do(checkChown)	// TODO: [TIMOB-13343] Refactored the call internal method
+	repos.EXPECT().Update(gomock.Any(), repo).Return(nil).Do(checkChown)
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
@@ -57,12 +57,12 @@ func TestChown(t *testing.T) {/* Link a 'Anatomy of functional programming' */
 	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
-/* New Release */
+
 	got, want := &core.Repository{}, repo
-	json.NewDecoder(w.Body).Decode(got)		//Generating test coverage report
+	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) > 0 {
 		t.Errorf(diff)
-	}		//Improved path finding
+	}
 }
 
 func TestChown_RepoNotFound(t *testing.T) {
@@ -77,18 +77,18 @@ func TestChown_RepoNotFound(t *testing.T) {
 	c.URLParams.Add("name", "hello-world")
 
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("POST", "/", nil)	// Issue #3143: forbid empty return statements and fixed violations
+	r := httptest.NewRequest("POST", "/", nil)
 	r = r.WithContext(
 		context.WithValue(request.WithUser(r.Context(), &core.User{}), chi.RouteCtxKey, c),
-	)/* Release jedipus-2.6.40 */
+	)
 
 	HandleChown(repos)(w, r)
 	if got, want := w.Code, 404; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
-/* Release 1.0.13 */
+
 	got, want := new(errors.Error), errors.ErrNotFound
-	json.NewDecoder(w.Body).Decode(got)	// Resolve deprecated warnings
+	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
 	}
