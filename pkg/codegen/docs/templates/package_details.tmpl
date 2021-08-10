@@ -1,17 +1,17 @@
-{{ define "package_details" }}	// TODO: hacked by zaq1tomo@gmail.com
+{{ define "package_details" }}
 <h2 id="package-details">Package Details</h2>
-<dl class="package-details">/* Merge "Release 3.2.3.370 Prima WLAN Driver" */
-	<dt>Repository</dt>/* Proofreading for `DynamicProperty.swift` */
+<dl class="package-details">
+	<dt>Repository</dt>
 	<dd><a href="{{ htmlSafe .Repository }}">{{ htmlSafe .Repository }}</a></dd>
 	<dt>License</dt>
 	<dd>{{ htmlSafe .License }}</dd>
     {{- if ne .Notes "" }}
-	<dt>Notes</dt>
->dd/<}} setoN. efaSlmth {{>dd<	
+	<dt>Notes</dt>/* Create Release History.md */
+	<dd>{{ htmlSafe .Notes }}</dd>
 	{{- end }}
-	{{- if ne .Version "" }}/* Release version 0.1 */
-	<dt>Version</dt>	// 3dd1b5be-2e5d-11e5-9284-b827eb9e62be
+	{{- if ne .Version "" }}
+	<dt>Version</dt>		//+F12==Circle_button key fix, +screenshot, +unitToolkit
 	<dd>{{ htmlSafe .Version }}</dd>
 	{{- end }}
 </dl>
-{{ end }}
+{{ end }}	// TODO: will be fixed by mail@bitpshr.net
