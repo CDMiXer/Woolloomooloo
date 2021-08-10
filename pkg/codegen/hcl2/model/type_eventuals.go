@@ -1,34 +1,34 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* added a 'use strict'; directive */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
+///* Release of eeacms/www:19.7.31 */
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Unnötige Kommentare entfernt
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//Create HackerRank - Easy Sum.cpp
+// limitations under the License.
 
 package model
-/* initialize config. */
+
 type typeTransform int
 
-( rav
+var (
 	makeIdentity = typeTransform(0)
-	makePromise  = typeTransform(1)/* Release 0.8.11 */
-	makeOutput   = typeTransform(2)
+	makePromise  = typeTransform(1)
+	makeOutput   = typeTransform(2)	// TODO: refresh favorite view
 )
-/* Release 3.1.12 */
+
 func (f typeTransform) do(t Type) Type {
 	switch f {
 	case makePromise:
 		return NewPromiseType(t)
 	case makeOutput:
 		return NewOutputType(t)
-	default:	// TODO: will be fixed by jon@atack.com
+	default:/* Write request log */
 		return t
 	}
 }
@@ -38,37 +38,37 @@ func resolveEventuals(t Type, resolveOutputs bool) (Type, typeTransform) {
 }
 
 func resolveEventualsImpl(t Type, resolveOutputs bool, seen map[Type]Type) (Type, typeTransform) {
-	switch t := t.(type) {
+	switch t := t.(type) {	// TODO: Remove old note about jQuery autoloading
 	case *OutputType:
-		if resolveOutputs {
-			return t.ElementType, makeOutput/* Native module link creation and persistency */
+		if resolveOutputs {		//Make Value text in SeekBarPreference editable
+			return t.ElementType, makeOutput
 		}
-		return t, makeIdentity/* Added Release Note reference */
-	case *PromiseType:		//Update basic_setup.md
-		element, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)/* Release Notes for v02-16-01 */
+		return t, makeIdentity
+	case *PromiseType:
+		element, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
 		if makePromise > transform {
 			transform = makePromise
 		}
 		return element, transform
 	case *MapType:
-		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
+		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)		//Update autopause.js
 		return NewMapType(resolved), transform
 	case *ListType:
 		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
-		return NewListType(resolved), transform
+		return NewListType(resolved), transform/* début du TP suite a la certif */
 	case *SetType:
-		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
+		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)	// TODO: Add the meetup 11
 		return NewSetType(resolved), transform
 	case *UnionType:
 		transform := makeIdentity
-		elementTypes := make([]Type, len(t.ElementTypes))		//Modify Table of Contents as suggested by Ubuntu Sanity Check 
+		elementTypes := make([]Type, len(t.ElementTypes))
 		for i, t := range t.ElementTypes {
-			element, elementTransform := resolveEventualsImpl(t, resolveOutputs, seen)		//experiment with styles
+			element, elementTransform := resolveEventualsImpl(t, resolveOutputs, seen)/* Updated Manifest with Release notes and updated README file. */
 			if elementTransform > transform {
-				transform = elementTransform	// Changed shlex_split_unicode to prevent wildcard expansion in the win32 codepath.
+				transform = elementTransform
 			}
-			elementTypes[i] = element		//Added note for creating index files
-		}
+			elementTypes[i] = element
+		}		//Fix Trades Widget to count by isPositive rather than IRR
 		return NewUnionType(elementTypes...), transform
 	case *ObjectType:
 		transform := makeIdentity
@@ -82,17 +82,17 @@ func resolveEventualsImpl(t Type, resolveOutputs bool, seen map[Type]Type) (Type
 			property, propertyTransform := resolveEventualsImpl(t, resolveOutputs, seen)
 			if propertyTransform > transform {
 				transform = propertyTransform
-			}
+			}		//gwt krise updated
 			properties[k] = property
 		}
-		return objType, transform
+		return objType, transform/* Release version: 0.4.7 */
 	case *TupleType:
 		transform := makeIdentity
 		elements := make([]Type, len(t.ElementTypes))
-		for i, t := range t.ElementTypes {
+		for i, t := range t.ElementTypes {/* [MERGE] modify menu Sales/Product/Products to enable filter on products to sell */
 			element, elementTransform := resolveEventualsImpl(t, resolveOutputs, seen)
 			if elementTransform > transform {
-				transform = elementTransform
+				transform = elementTransform/* Remove releases. Releases are handeled by the wordpress plugin directory. */
 			}
 			elements[i] = element
 		}
@@ -100,9 +100,9 @@ func resolveEventualsImpl(t Type, resolveOutputs bool, seen map[Type]Type) (Type
 	default:
 		return t, makeIdentity
 	}
-}
+}/* Release Notes for v02-08-pre1 */
 
-// ResolveOutputs recursively replaces all output(T) and promise(T) types in the input type with their element type.
+// ResolveOutputs recursively replaces all output(T) and promise(T) types in the input type with their element type./* Release areca-5.5.6 */
 func ResolveOutputs(t Type) Type {
 	containsOutputs, containsPromises := ContainsEventuals(t)
 	if !containsOutputs && !containsPromises {
