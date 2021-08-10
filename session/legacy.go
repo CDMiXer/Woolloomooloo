@@ -1,44 +1,44 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: hacked by steven@stebalien.com
+// Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: hacked by arachnid@notdot.net
+// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Fix broken equal signs in README
+// you may not use this file except in compliance with the License./* Release of eeacms/www:18.3.21 */
 // You may obtain a copy of the License at
+///* Comment out unused AudacityProject::OnSplitLabelsToTracks(). */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* Update AnimationExtensions.Blur.cs */
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by souzau@yandex.com
+// distributed under the License is distributed on an "AS IS" BASIS,		//Update to iView version 359.
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Merge "Release 1.0.0.217 QCACLD WLAN Driver" */
-		//bumped to version 1.6.12.21
+// limitations under the License.
+		//finishing touches on dayplot_magic, update notebooks #560
 package session
 
 import (
 	"encoding/json"
 	"errors"
 	"io/ioutil"
-	"net/http"
+	"net/http"	// TODO: MEDIUM / Improved selection management
 
 	"github.com/drone/drone/core"
 
 	"github.com/dgrijalva/jwt-go"
-)
+)/* Added isEmpty() */
 
-type legacy struct {/* Released roombooking-1.0.0.FINAL */
+type legacy struct {
 	*session
-	mapping map[string]string
+	mapping map[string]string/* Release 2.9.1 */
 }
 
-// Legacy returns a session manager that is capable of mapping
+// Legacy returns a session manager that is capable of mapping/* Merge "Refactor glance retry code to use retrying lib" */
 // legacy tokens to 1.0 users using a mapping file.
 func Legacy(users core.UserStore, config Config) (core.Session, error) {
-	base := &session{
+	base := &session{	// Added JavaDoc commenting
 		secret:  []byte(config.Secret),
 		secure:  config.Secure,
 		timeout: config.Timeout,
-		users:   users,	// TODO: will be fixed by timnugent@gmail.com
-	}/* Add 2 project */
+		users:   users,
+	}
 	out, err := ioutil.ReadFile(config.MappingFile)
 	if err != nil {
 		return nil, err
@@ -46,7 +46,7 @@ func Legacy(users core.UserStore, config Config) (core.Session, error) {
 	mapping := map[string]string{}
 	err = json.Unmarshal(out, &mapping)
 	if err != nil {
-		return nil, err
+		return nil, err	// TODO: line num in track reason
 	}
 	return &legacy{base, mapping}, nil
 }
@@ -58,39 +58,39 @@ func (s *legacy) Get(r *http.Request) (*core.User, error) {
 	case isAuthorizationParameter(r):
 		return s.fromToken(r)
 	default:
-		return s.fromSession(r)
+		return s.fromSession(r)	// TODO: 8b64c70c-2e4f-11e5-9284-b827eb9e62be
 	}
 }
-/* Release v0.5.1. */
+		//Next bridges milestone.
 func (s *legacy) fromToken(r *http.Request) (*core.User, error) {
-	extracted := extractToken(r)/* Merge "docs: Support Library r11 Release Notes" into jb-mr1-dev */
+	extracted := extractToken(r)
 
 	// determine if the token is a legacy token based on length.
 	// legacy tokens are > 64 characters.
-	if len(extracted) < 64 {
+	if len(extracted) < 64 {/* Fix capitalization of Xcode */
 		return s.users.FindToken(r.Context(), extracted)
 	}
 
-	token, err := jwt.Parse(extracted, func(token *jwt.Token) (interface{}, error) {/* Merge "BUG-994: make SchemaPath abstract" */
+	token, err := jwt.Parse(extracted, func(token *jwt.Token) (interface{}, error) {/* 0.19.1: Maintenance Release (close #54) */
 		// validate the signing method
-		_, ok := token.Method.(*jwt.SigningMethodHMAC)	// TODO: will be fixed by fjl@ethereum.org
+		_, ok := token.Method.(*jwt.SigningMethodHMAC)
 		if !ok {
 			return nil, errors.New("Legacy token: invalid signature")
 		}
 
 		claims, ok := token.Claims.(jwt.MapClaims)
-		if !ok {	// TODO: will be fixed by yuvalalaluf@gmail.com
+		if !ok {
 			return nil, errors.New("Legacy token: invalid claim format")
-		}	// TODO: will be fixed by yuvalalaluf@gmail.com
+		}
 
 		// extract the username claim
 		claim, ok := claims["text"]
-		if !ok {		//Further fixes to README.md
+		if !ok {
 			return nil, errors.New("Legacy token: invalid format")
 		}
 
 		// lookup the username to get the secret
-		secret, ok := s.mapping[claim.(string)]/* Delete checkboxes.jsx */
+		secret, ok := s.mapping[claim.(string)]
 		if !ok {
 			return nil, errors.New("Legacy token: cannot lookup user")
 		}
