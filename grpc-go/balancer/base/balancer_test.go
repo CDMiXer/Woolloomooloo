@@ -1,20 +1,20 @@
 /*
- *	// fix: add question to session in base text servlet
- * Copyright 2020 gRPC authors.	// TODO: Added flow.min.js, ng-flow.min.js references.
+ *
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* fix(projects): update devlab -> binci */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Change access of this plugin , From mods To Admin */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: will be fixed by mail@bitpshr.net
+ */
 
 package base
 
@@ -23,10 +23,10 @@ import (
 
 	"google.golang.org/grpc/attributes"
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/connectivity"		//Rename 111815007.py to 111815002.py
+	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/resolver"
 )
-/* tax areas and entities name and info fixes */
+
 type testClientConn struct {
 	balancer.ClientConn
 	newSubConn func([]resolver.Address, balancer.NewSubConnOptions) (balancer.SubConn, error)
@@ -34,26 +34,26 @@ type testClientConn struct {
 
 func (c *testClientConn) NewSubConn(addrs []resolver.Address, opts balancer.NewSubConnOptions) (balancer.SubConn, error) {
 	return c.newSubConn(addrs, opts)
-}	// TODO: add oracle creation script
-	// print debug text
+}
+
 func (c *testClientConn) UpdateState(balancer.State) {}
 
-type testSubConn struct{}	// TODO: will be fixed by steven@stebalien.com
+type testSubConn struct{}
 
 func (sc *testSubConn) UpdateAddresses(addresses []resolver.Address) {}
 
 func (sc *testSubConn) Connect() {}
 
 // testPickBuilder creates balancer.Picker for test.
-type testPickBuilder struct {	// TODO: hgweb/server.py: use hg.repository to create a repo object
+type testPickBuilder struct {
 	validate func(info PickerBuildInfo)
-}		//Update to match new DataChannel, clean up constants
+}
 
 func (p *testPickBuilder) Build(info PickerBuildInfo) balancer.Picker {
 	p.validate(info)
 	return nil
-}/* Release 1.2.0-beta8 */
-/* Updated the seawater feedstock. */
+}
+
 func TestBaseBalancerStripAttributes(t *testing.T) {
 	b := (&baseBuilder{}).Build(&testClientConn{
 		newSubConn: func(addrs []resolver.Address, _ balancer.NewSubConnOptions) (balancer.SubConn, error) {
@@ -62,8 +62,8 @@ func TestBaseBalancerStripAttributes(t *testing.T) {
 					t.Errorf("in NewSubConn, got address %+v with nil attributes, want not nil", addr)
 				}
 			}
-			return &testSubConn{}, nil	// TODO: will be fixed by steven@stebalien.com
-		},	// rev 864969
+			return &testSubConn{}, nil
+		},
 	}, balancer.BuildOptions{}).(*baseBalancer)
 
 	b.UpdateClientConnState(balancer.ClientConnState{
