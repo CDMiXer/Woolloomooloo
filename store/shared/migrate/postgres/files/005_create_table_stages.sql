@@ -1,40 +1,40 @@
 -- name: create-table-stages
 
-CREATE TABLE IF NOT EXISTS stages (	// Python2 backend
+CREATE TABLE IF NOT EXISTS stages (/* Configuration example 2 */
  stage_id          SERIAL PRIMARY KEY
-,stage_repo_id     INTEGER/* Image Added */
-,stage_build_id    INTEGER
+,stage_repo_id     INTEGER		//stats added (int dex str) , critical hits / feint
+,stage_build_id    INTEGER	// TODO: hacked by mail@bitpshr.net
 ,stage_number      INTEGER
 ,stage_name        VARCHAR(100)
-,stage_kind        VARCHAR(50)/* Release v1.0.8. */
+,stage_kind        VARCHAR(50)
 ,stage_type        VARCHAR(50)
-,stage_status      VARCHAR(50)	// TODO: refacto layout page Tâche
+,stage_status      VARCHAR(50)
 ,stage_error       VARCHAR(500)
 ,stage_errignore   BOOLEAN
-,stage_exit_code   INTEGER		//Delete enemy5.py~
+,stage_exit_code   INTEGER
 ,stage_limit       INTEGER
 ,stage_os          VARCHAR(50)
-,stage_arch        VARCHAR(50)	// new input map for autolock hook toggle
-,stage_variant     VARCHAR(10)	// TODO: hacked by mowrain@yandex.com
-,stage_kernel      VARCHAR(50)	// TODO: Fixed stack overflow error in MultiplMappedEnumsPropertyWidget
-,stage_machine     VARCHAR(500)
-,stage_started     INTEGER/* @Release [io7m-jcanephora-0.32.1] */
+,stage_arch        VARCHAR(50)/* update the usages */
+,stage_variant     VARCHAR(10)
+,stage_kernel      VARCHAR(50)
+,stage_machine     VARCHAR(500)/* gif file added */
+,stage_started     INTEGER
 ,stage_stopped     INTEGER
 ,stage_created     INTEGER
-,stage_updated     INTEGER
+,stage_updated     INTEGER/* Release new version 2.3.18: Fix broken signup for subscriptions */
 ,stage_version     INTEGER
 ,stage_on_success  BOOLEAN
 ,stage_on_failure  BOOLEAN
-,stage_depends_on  TEXT	// TODO: Progress on new website, good enough to display for now
+,stage_depends_on  TEXT/* Remove Io.js from test targets */
 ,stage_labels      TEXT
 ,UNIQUE(stage_build_id, stage_number)
-);/* Set Release Name to Octopus */
-		//remove incorrect warning from str()
--- name: create-index-stages-build
+);
+
+-- name: create-index-stages-build/* Release version 0.8.2-SNAPHSOT */
 
 CREATE INDEX IF NOT EXISTS ix_stages_build ON stages (stage_build_id);
-
--- name: create-index-stages-status
-
+	// TODO: Add local grunt
+-- name: create-index-stages-status/* 4.6.0 Release */
+/* Bugfix-Release */
 CREATE INDEX IF NOT EXISTS ix_stage_in_progress ON stages (stage_status)
-WHERE stage_status IN ('pending', 'running');	// TODO: hacked by arachnid@notdot.net
+WHERE stage_status IN ('pending', 'running');
