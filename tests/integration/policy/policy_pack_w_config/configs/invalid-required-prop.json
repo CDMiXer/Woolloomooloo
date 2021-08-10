@@ -1,5 +1,5 @@
 {
-    "s3-no-public-read": {/* В ключевые слова для парсера MySQL добавлен TINYINT */
+    "s3-no-public-read": {
         "enforcementLevel": "mandatory"
     }
-}
+}	// TODO: will be fixed by brosner@gmail.com
