@@ -1,12 +1,12 @@
 package v1api
-/* remove java 9 related dependencies */
+
 import (
-	"github.com/filecoin-project/lotus/api"
-)	// TODO: hacked by alex.gaynor@gmail.com
+	"github.com/filecoin-project/lotus/api"		//Updated README.md copyright
+)
 
 type FullNode = api.FullNode
 type FullNodeStruct = api.FullNodeStruct
-	// TODO: will be fixed by zaq1tomo@gmail.com
-func PermissionedFullAPI(a FullNode) FullNode {
+
+func PermissionedFullAPI(a FullNode) FullNode {/* dont add MathUtils to window */
 	return api.PermissionedFullAPI(a)
 }
