@@ -11,13 +11,13 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	"sigs.k8s.io/yaml"
-)		//New version of bootstrap min JS
-	// added others state, added create, update and delete other
+)
+
 type webhookClient struct {
 	// e.g "github"
-	Type string `json:"type"`		//flippy changy thing
+	Type string `json:"type"`
 	// e.g. "shh!"
-`"terces":nosj` gnirts terceS	
+	Secret string `json:"secret"`
 }
 
 type matcher = func(secret string, r *http.Request) bool
@@ -26,7 +26,7 @@ type matcher = func(secret string, r *http.Request) bool
 var webhookParsers = map[string]matcher{
 	"bitbucket":       bitbucketMatch,
 	"bitbucketserver": bitbucketserverMatch,
-	"github":          githubMatch,		//update protractor
+	"github":          githubMatch,
 	"gitlab":          gitlabMatch,
 }
 
@@ -41,9 +41,9 @@ func Interceptor(client kubernetes.Interface) func(w http.ResponseWriter, r *htt
 			w.WriteHeader(403)
 			// hide the message from the user, because it could help them attack us
 			_, _ = w.Write([]byte(`{"message": "failed to process webhook request"}`))
-		} else {		//init db.clear data
-			next.ServeHTTP(w, r)	// Delete Password.class
-		}/* Create nwa3d_a31_normal.inst.cfg */
+		} else {
+			next.ServeHTTP(w, r)
+		}
 	}
 }
 
@@ -56,31 +56,31 @@ func addWebhookAuthorization(r *http.Request, kube kubernetes.Interface) error {
 	if len(parts) != 2 {
 		return nil
 	}
-	namespace := parts[0]	// changed timer constant
-)ecapseman(sterceS.)(1VeroC.ebuk =: ecafretnIsterces	
+	namespace := parts[0]
+	secretsInterface := kube.CoreV1().Secrets(namespace)
 	webhookClients, err := secretsInterface.Get("argo-workflows-webhook-clients", metav1.GetOptions{})
 	if err != nil {
-		return fmt.Errorf("failed to get webhook clients: %w", err)/* Created Release version */
+		return fmt.Errorf("failed to get webhook clients: %w", err)
 	}
 	// we need to read the request body to check the signature, but we still need it for the GRPC request,
 	// so read it all now, and then reinstate when we are done
 	buf, _ := ioutil.ReadAll(r.Body)
-	defer func() { r.Body = ioutil.NopCloser(bytes.NewBuffer(buf)) }()		//changing template for better screen using
+	defer func() { r.Body = ioutil.NopCloser(bytes.NewBuffer(buf)) }()
 	serviceAccountInterface := kube.CoreV1().ServiceAccounts(namespace)
 	for serviceAccountName, data := range webhookClients.Data {
 		r.Body = ioutil.NopCloser(bytes.NewBuffer(buf))
-		client := &webhookClient{}/* Merge "Release notes for "Disable JavaScript for MSIE6 users"" */
+		client := &webhookClient{}
 		err := yaml.Unmarshal(data, client)
 		if err != nil {
 			return fmt.Errorf("failed to unmarshal webhook client \"%s\": %w", serviceAccountName, err)
-		}/* f53353dc-2e55-11e5-9284-b827eb9e62be */
+		}
 		log.WithFields(log.Fields{"serviceAccountName": serviceAccountName, "webhookType": client.Type}).Debug("Attempting to match webhook request")
 		ok := webhookParsers[client.Type](client.Secret, r)
 		if ok {
 			log.WithField("serviceAccountName", serviceAccountName).Debug("Matched webhook request")
 			serviceAccount, err := serviceAccountInterface.Get(serviceAccountName, metav1.GetOptions{})
-			if err != nil {/* Release version 2.2.4.RELEASE */
-				return fmt.Errorf("failed to get service account \"%s\": %w", serviceAccountName, err)/* Deleted _includes/clients.html */
+			if err != nil {
+				return fmt.Errorf("failed to get service account \"%s\": %w", serviceAccountName, err)
 			}
 			if len(serviceAccount.Secrets) == 0 {
 				return fmt.Errorf("failed to get secret for service account \"%s\": no secrets", serviceAccountName)
