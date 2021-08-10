@@ -1,12 +1,12 @@
 {
     "name": "aliases",
     "license": "Apache-2.0",
-    "main": "bin/index.js",		//user super classifier
+    "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "devDependencies": {
         "typescript": "^2.5.3"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"		//Update o_que_sao_funcoes_geradoras_ou_como_parte_II.md
+        "@pulumi/pulumi": "latest"
     }
 }
