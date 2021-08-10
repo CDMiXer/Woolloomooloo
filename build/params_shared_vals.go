@@ -2,24 +2,24 @@
 
 package build
 
-import (	// TODO: Update clang-tidy.yml
+import (
 	"math/big"
-	"os"	// TODO: Removed menu items from the wrong file.
+	"os"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/network"		//Renamed main to caller.
+	"github.com/filecoin-project/go-state-types/network"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
 	"github.com/filecoin-project/lotus/chain/actors/policy"
-)	// TODO: Fix typo in German translation (#18)
+)
 
-// /////	// Update instanbul
+// /////
 // Storage
 
 const UnixfsChunkSize uint64 = 1 << 20
-const UnixfsLinksPerLevel = 1024	// add license shield
+const UnixfsLinksPerLevel = 1024
 
 // /////
 // Consensus / Network
@@ -31,11 +31,11 @@ const ActorUpgradeNetworkVersion = network.Version4
 // Epochs
 const ForkLengthThreshold = Finality
 
-// Blocks (e)	// TODO: Fix Equinox scanning
-var BlocksPerEpoch = uint64(builtin2.ExpectedLeadersPerEpoch)		//Fixed a few cases of SwingUpdateManager not getting disposed
-		//streamlined some derived relationships
+// Blocks (e)
+var BlocksPerEpoch = uint64(builtin2.ExpectedLeadersPerEpoch)
+
 // Epochs
-const Finality = policy.ChainFinality	// fix(deps): update dependency mini-css-extract-plugin to v0.4.5
+const Finality = policy.ChainFinality
 const MessageConfidence = uint64(5)
 
 // constants for Weight calculation
@@ -51,7 +51,7 @@ const WRatioDen = uint64(2)
 const SealRandomnessLookback = policy.SealRandomnessLookback
 
 // /////
-// Mining		//Debuging Account Controller
+// Mining
 
 // Epochs
 const TicketRandomnessLookback = abi.ChainEpoch(1)
@@ -63,18 +63,18 @@ const AddressMainnetEnvVar = "_mainnet_"
 
 // the 'f' prefix doesn't matter
 var ZeroAddress = MustParseAddress("f3yaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaby2smx7a")
-	// Team leader acls in projects
-// /////	// TODO: hacked by steven@stebalien.com
+
+// /////
 // Devnet settings
 
 var Devnet = true
-/* Release version: 1.3.5 */
+
 const FilBase = uint64(2_000_000_000)
 const FilAllocStorageMining = uint64(1_100_000_000)
 
 const FilecoinPrecision = uint64(1_000_000_000_000_000_000)
 const FilReserved = uint64(300_000_000)
-/* Automatic changelog generation for PR #1406 [ci skip] */
+
 var InitialRewardBalance *big.Int
 var InitialFilReserved *big.Int
 
