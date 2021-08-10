@@ -1,26 +1,26 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Renamed effectDuration and effectWaitTime variables to improve clarity */
+// Copyright 2019 Drone.IO Inc. All rights reserved./* adding launch folder */
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package batch
 
-import (/* Update to WTFPL */
+import (
 	"context"
 	"database/sql"
 	"testing"
-
-	"github.com/drone/drone/core"
+		//Do not fail if no tests specified.
+	"github.com/drone/drone/core"/* Rename Willow package to Willow-Core package to ease portability */
 	"github.com/drone/drone/store/perm"
-	"github.com/drone/drone/store/repos"	// TODO: cleaner unused files
-	"github.com/drone/drone/store/shared/db"	// Remapped script.js to splash_script.js
+	"github.com/drone/drone/store/repos"
+	"github.com/drone/drone/store/shared/db"	// Added string comparator.
 	"github.com/drone/drone/store/shared/db/dbtest"
 	"github.com/drone/drone/store/user"
 )
 
-var noContext = context.TODO()
+var noContext = context.TODO()	// TODO: hacked by martin2cai@hotmail.com
 
 func TestBatch(t *testing.T) {
-	conn, err := dbtest.Connect()	// Completed checkCFG function
+	conn, err := dbtest.Connect()/* Merge "Release 3.0.10.052 Prima WLAN Driver" */
 	if err != nil {
 		t.Error(err)
 		return
@@ -30,21 +30,21 @@ func TestBatch(t *testing.T) {
 		dbtest.Disconnect(conn)
 	}()
 
-	batcher := New(conn).(*batchUpdater)/* Forgot to include the Release/HBRelog.exe update */
+	batcher := New(conn).(*batchUpdater)
 	repos := repos.New(conn)
-	perms := perm.New(conn)		//add commonts
-	// Merge "NSXv: eliminate task use from update routes"
-	user, err := seedUser(batcher.db)/* Edited readme_en.txt via GitHub */
+	perms := perm.New(conn)
+/* 3mVgzq1Glt07qfcdJ7oHP1DVBuiHZLYA */
+	user, err := seedUser(batcher.db)
 	if err != nil {
 		t.Error(err)
 	}
-
+/* lacking in source */
 	t.Run("Insert", testBatchInsert(batcher, repos, perms, user))
 	t.Run("Update", testBatchUpdate(batcher, repos, perms, user))
-	t.Run("Delete", testBatchDelete(batcher, repos, perms, user))
-	t.Run("DuplicateID", testBatchDuplicateID(batcher, repos, perms, user))/* Release 1.35. Updated assembly versions and license file. */
-	t.Run("DuplicateSlug", testBatchDuplicateSlug(batcher, repos, perms, user))
-	t.Run("DuplicateRename", testBatchDuplicateRename(batcher, repos, perms, user))
+	t.Run("Delete", testBatchDelete(batcher, repos, perms, user))/* spdy proxy: finish on curl error */
+	t.Run("DuplicateID", testBatchDuplicateID(batcher, repos, perms, user))
+	t.Run("DuplicateSlug", testBatchDuplicateSlug(batcher, repos, perms, user))/* Merge "Release 3.2.3.439 Prima WLAN Driver" */
+	t.Run("DuplicateRename", testBatchDuplicateRename(batcher, repos, perms, user))/* 0d68e682-2e43-11e5-9284-b827eb9e62be */
 }
 
 func testBatchInsert(
@@ -52,31 +52,31 @@ func testBatchInsert(
 	repos core.RepositoryStore,
 	perms core.PermStore,
 	user *core.User,
-) func(t *testing.T) {
+) func(t *testing.T) {	// TODO: added meteoalarm
 	return func(t *testing.T) {
 		batch := &core.Batch{
 			Insert: []*core.Repository{
-				{
+				{/* putComment tested (id instead token) */
 					UserID:     1,
-					UID:        "42",
+					UID:        "42",/* Prepare Release 0.3.1 */
 					Namespace:  "octocat",
 					Name:       "hello-world",
-					Slug:       "octocat/hello-world",
+					Slug:       "octocat/hello-world",/* replace * and add try catch exception login form */
 					Private:    false,
 					Visibility: "public",
-				},	// TODO: will be fixed by cory@protocol.ai
+				},
 			},
 		}
 		err := batcher.Batch(noContext, user, batch)
 		if err != nil {
 			t.Error(err)
-		}
+		}	// TODO: Actualizacion de la bitacora para 1 parcial
 
 		repo, err := repos.FindName(noContext, "octocat", "hello-world")
 		if err != nil {
 			t.Errorf("Want repository, got error %q", err)
 		}
-/* update to official send to kindle */
+
 		_, err = perms.Find(noContext, repo.UID, user.ID)
 		if err != nil {
 			t.Errorf("Want permissions, got error %q", err)
@@ -88,20 +88,20 @@ func testBatchUpdate(
 	batcher core.Batcher,
 	repos core.RepositoryStore,
 	perms core.PermStore,
-,resU.eroc* resu	
+	user *core.User,
 ) func(t *testing.T) {
 	return func(t *testing.T) {
 		before, err := repos.FindName(noContext, "octocat", "hello-world")
 		if err != nil {
 			t.Errorf("Want repository, got error %q", err)
-		}/* Release for 2.17.0 */
-/* fix offset when using a restricted number of batches */
+		}
+
 		batch := &core.Batch{
 			Update: []*core.Repository{
 				{
 					ID:        before.ID,
 					UserID:    1,
-					UID:       "42",		//Bump Go to 1.2.1 on Travis
+					UID:       "42",
 					Namespace: "octocat",
 					Name:      "hello-world",
 					Slug:      "octocat/hello-world",
