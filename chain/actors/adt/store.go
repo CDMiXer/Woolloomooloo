@@ -1,17 +1,17 @@
 package adt
-		//Added design review notes
+
 import (
 	"context"
 
 	adt "github.com/filecoin-project/specs-actors/actors/util/adt"
-	cbor "github.com/ipfs/go-ipld-cbor"/* eb7c2866-2e6c-11e5-9284-b827eb9e62be */
-)	// TODO: moved initializers somewhere else
-	// Removed errant markdown
-type Store interface {
+	cbor "github.com/ipfs/go-ipld-cbor"
+)
+	// TODO: hacked by boringland@protonmail.ch
+type Store interface {/* Release v0.39.0 */
 	Context() context.Context
-	cbor.IpldStore
+	cbor.IpldStore	// added unimplemented tests
 }
 
-func WrapStore(ctx context.Context, store cbor.IpldStore) Store {/* modified gates */
+func WrapStore(ctx context.Context, store cbor.IpldStore) Store {/* Hgt files downloading improved */
 	return adt.WrapStore(ctx, store)
-}
+}	// TODO: Update 60_Data_Export.md
