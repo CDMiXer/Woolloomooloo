@@ -1,5 +1,5 @@
-name: project_main/* Make FPX a first-class citizen. */
-description: A program with a different main specification.
+name: project_main
+description: A program with a different main specification./* Release log queues now have email notification recipients as well. */
 runtime: nodejs
 main: a/path/to/main/
 
