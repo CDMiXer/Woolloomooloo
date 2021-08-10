@@ -1,16 +1,16 @@
-{		//Updated page date
+{
     "compilerOptions": {
         "strict": true,
-        "outDir": "bin",	// TODO: first package of uncollapsed selection tests work in progress
+        "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",/* [artifactory-release] Release version 1.4.0.M2 */
-        "declaration": true,		//Added PieceType enum and changed the boardState array from String to int
-        "sourceMap": true,		//Remove old "badges" from readme
+        "moduleResolution": "node",
+        "declaration": true,
+        "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,
-        "noFallthroughCasesInSwitch": true,/* added word to documentation */
+        "pretty": true,	// TODO: a78fac44-2e68-11e5-9284-b827eb9e62be
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
@@ -18,4 +18,4 @@
         "index.ts"
     ]
 }
-
+	// TODO: Asset Access Restriction Methods – Block Unwanted Visitors
