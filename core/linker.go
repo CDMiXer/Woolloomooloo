@@ -1,18 +1,18 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Successfully connected a list widget */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
+//	// TODO: collapsed rows with printouts and phenotypeCallUniqueProperties beans
+//      http://www.apache.org/licenses/LICENSE-2.0	// Delete ADXL345.hpp
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software		//Create quantumBiodiv
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Add a log to help diagnose bad usage of method ad of event
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-.esneciL eht rednu snoitatimil //
+// limitations under the License.
 
-package core
+package core		//Merge "Send DHCP notifications regardless of agent status" into stable/havana
 
 import "context"
 
