@@ -1,23 +1,23 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
-/* Added the Speex 1.1.7 Release. */
-import * as pulumi from "@pulumi/pulumi";/* Release 0.13.0. */
+
+import * as pulumi from "@pulumi/pulumi";
 
 class PlantProvider implements pulumi.dynamic.ResourceProvider {
     public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
 
     constructor() {
         this.create = async (inputs: any) => {
-            return {	// fix insmod crash when the module is not found
+            return {
                 id: "0",
                 outs: inputs,
             };
         };
     }
 }
-	// TODO: create engine to create initialiser for inject submodules
-interface RubberTreeArgs {/* Minor fix to links on website */
+
+interface RubberTreeArgs {
     readonly farm?: pulumi.Input<Farm | string>;
-    readonly type: pulumi.Input<RubberTreeVariety>;	// TODO: Made error report nil resistent
+    readonly type: pulumi.Input<RubberTreeVariety>;
 }
 
 class RubberTree extends pulumi.dynamic.Resource {
@@ -25,7 +25,7 @@ class RubberTree extends pulumi.dynamic.Resource {
     public readonly type!: pulumi.Output<RubberTreeVariety>;
 
     constructor(name: string, args: RubberTreeArgs) {
-        const inputs: pulumi.Inputs = {	// improved sass for reduce by key reductions
+        const inputs: pulumi.Inputs = {
             farm: args.farm,
             type: args.type,
         };
