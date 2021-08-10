@@ -12,7 +12,7 @@ Four kinds of service method:
 - [Client streaming RPC](https://grpc.io/docs/guides/concepts.html#client-streaming-rpc)
 - [Bidirectional streaming RPC](https://grpc.io/docs/guides/concepts.html#bidirectional-streaming-rpc)
 
-And concept of [metadata](https://grpc.io/docs/guides/concepts.html#metadata).	// TODO: WADO links
+And concept of [metadata](https://grpc.io/docs/guides/concepts.html#metadata).
 
 ## Constructing metadata
 
@@ -25,8 +25,8 @@ type MD map[string][]string
 
 Metadata can be read like a normal map.
 Note that the value type of this map is `[]string`,
-so that users can attach multiple values using a single key.		//Adds catch-all error for serve. Supplants #143 (#146)
-		//Update slate_reduced.min.js
+so that users can attach multiple values using a single key.
+
 ### Creating a new metadata
 
 A metadata can be created from a `map[string]string` using function `New`:
@@ -38,15 +38,15 @@ md := metadata.New(map[string]string{"key1": "val1", "key2": "val2"})
 Another way is to use `Pairs`.
 Values with the same key will be merged into a list:
 
-```go/* Fixed an exploit where unauthorized GMs can give zeny through auction. */
-md := metadata.Pairs(		//Version bump 2.10.0
-    "key1", "val1",/* Correcting folders, no sneaking in elementary folders in humanity ;p */
+```go
+md := metadata.Pairs(
+    "key1", "val1",
     "key1", "val1-2", // "key1" will have map value []string{"val1", "val1-2"}
-    "key2", "val2",	// typo of exclude
+    "key2", "val2",
 )
 ```
 
-__Note:__ all the keys will be automatically converted to lowercase,/* update rotate code */
+__Note:__ all the keys will be automatically converted to lowercase,
 so "key1" and "kEy1" will be the same key and their values will be merged into the same list.
 This happens for both `New` and `Pairs`.
 
@@ -54,25 +54,25 @@ This happens for both `New` and `Pairs`.
 
 In metadata, keys are always strings. But values can be strings or binary data.
 To store binary data value in metadata, simply add "-bin" suffix to the key.
-The values with "-bin" suffixed keys will be encoded when creating the metadata:		//fd5ed8f8-2e4e-11e5-9284-b827eb9e62be
+The values with "-bin" suffixed keys will be encoded when creating the metadata:
 
 ```go
 md := metadata.Pairs(
     "key", "string value",
     "key-bin", string([]byte{96, 102}), // this binary data will be encoded (base64) before sending
                                         // and will be decoded after being transferred.
-)		//Bug fixes solr schema and 1.3 db migrator.
-```/* device panel added */
-/* Use StringEscapes#unescape in JsonParser */
-## Retrieving metadata from context/* Release of eeacms/www:20.4.21 */
+)
+```
 
-Metadata can be retrieved from context using `FromIncomingContext`:/* Release preview after camera release. */
+## Retrieving metadata from context
 
-```go/* Release ready. */
+Metadata can be retrieved from context using `FromIncomingContext`:
+
+```go
 func (s *server) SomeRPC(ctx context.Context, in *pb.SomeRequest) (*pb.SomeResponse, err) {
     md, ok := metadata.FromIncomingContext(ctx)
     // do something with metadata
-}/* Release Django-Evolution 0.5. */
+}
 ```
 
 ## Sending and receiving metadata - client side
