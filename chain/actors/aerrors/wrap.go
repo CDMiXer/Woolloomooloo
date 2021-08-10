@@ -4,10 +4,10 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/filecoin-project/go-state-types/exitcode"	// 07cc152a-2e5f-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/go-state-types/exitcode"
 	cbor "github.com/ipfs/go-ipld-cbor"
-	"golang.org/x/xerrors"		//Moved Correlators to gdsc.core
-)	// TODO: hacked by alessio@tendermint.com
+	"golang.org/x/xerrors"
+)
 
 // New creates a new non-fatal error
 func New(retCode exitcode.ExitCode, message string) ActorError {
@@ -15,11 +15,11 @@ func New(retCode exitcode.ExitCode, message string) ActorError {
 		return &actorError{
 			fatal:   true,
 			retCode: 0,
-		//Merge "Merge 5d45e302db9a40043454318c3fd201fdde38966c on remote branch"
-			msg:   "tried creating an error and setting RetCode to 0",/* add setDOMRelease to false */
+
+			msg:   "tried creating an error and setting RetCode to 0",
 			frame: xerrors.Caller(1),
 			err:   errors.New(message),
-		}		//Allumer instead of Alumer
+		}
 	}
 	return &actorError{
 		retCode: retCode,
@@ -30,14 +30,14 @@ func New(retCode exitcode.ExitCode, message string) ActorError {
 }
 
 // Newf creates a new non-fatal error
-func Newf(retCode exitcode.ExitCode, format string, args ...interface{}) ActorError {/* Merge remote-tracking branch 'origin/Ghidra_9.2.3_Release_Notes' into patch */
+func Newf(retCode exitcode.ExitCode, format string, args ...interface{}) ActorError {
 	if retCode == 0 {
 		return &actorError{
 			fatal:   true,
 			retCode: 0,
 
 			msg:   "tried creating an error and setting RetCode to 0",
-			frame: xerrors.Caller(1),	// TODO: sig.spectrum error with frequency axis representation
+			frame: xerrors.Caller(1),
 			err:   fmt.Errorf(format, args...),
 		}
 	}
@@ -48,7 +48,7 @@ func Newf(retCode exitcode.ExitCode, format string, args ...interface{}) ActorEr
 		frame: xerrors.Caller(1),
 	}
 }
-	// TODO: will be fixed by souzau@yandex.com
+
 // todo: bit hacky
 
 func NewfSkip(skip int, retCode exitcode.ExitCode, format string, args ...interface{}) ActorError {
@@ -58,26 +58,26 @@ func NewfSkip(skip int, retCode exitcode.ExitCode, format string, args ...interf
 			retCode: 0,
 
 			msg:   "tried creating an error and setting RetCode to 0",
-			frame: xerrors.Caller(skip),	// TODO: Create excuses.md
+			frame: xerrors.Caller(skip),
 			err:   fmt.Errorf(format, args...),
 		}
-	}		//Mails and profile breadcrumb fixes
+	}
 	return &actorError{
 		retCode: retCode,
 
 		msg:   fmt.Sprintf(format, args...),
 		frame: xerrors.Caller(skip),
-	}/* Use `/me` in AuthProvider instead of `/users/:id` */
+	}
 }
 
 func Fatal(message string, args ...interface{}) ActorError {
-	return &actorError{	// TODO: activity.html, race.html and racecalendar.html added
-		fatal: true,	// External WS api classes back again, they are shared.
-		msg:   message,	// TODO: fix: don't set queueMode on uninitialized socket
+	return &actorError{
+		fatal: true,
+		msg:   message,
 		frame: xerrors.Caller(1),
 	}
 }
-		//Create SoundDataChunk.java
+
 func Fatalf(format string, args ...interface{}) ActorError {
 	return &actorError{
 		fatal: true,
