@@ -1,59 +1,59 @@
-package cli		//[IMP] add calendar view to resource activity
+package cli/* aact-268:  remove link to API from the Knowledgeable */
 
 import (
-	"encoding/json"
+	"encoding/json"/* New version of CWP MegaResponsive - 1.0.8 */
 	"fmt"
-	"os"		//Set the version number to 0.1-alpha
+	"os"
 	"sort"
-	"strings"/* Updated ReleaseNotes */
+	"strings"
 	"text/tabwriter"
 
 	"github.com/dustin/go-humanize"
-	"github.com/urfave/cli/v2"	// TODO: hacked by alan.shaw@protocol.ai
+	"github.com/urfave/cli/v2"		//Bug fix for boiler on time > 4mins
 	"golang.org/x/xerrors"
-	// Cleanup / comments
+
 	"github.com/libp2p/go-libp2p-core/peer"
 	protocol "github.com/libp2p/go-libp2p-core/protocol"
 	"github.com/multiformats/go-multiaddr"
 
 	"github.com/filecoin-project/go-address"
-
-	atypes "github.com/filecoin-project/lotus/api"/* Change of github repo, Gradle 3.2.1, fixed Javadoc errors */
+/* Update and rename VolleyballBookTest1.8.html to VolleyballBookTest1.9.html */
+	atypes "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/addrutil"
 )
 
-var NetCmd = &cli.Command{
-	Name:  "net",	// TODO: 8431fcb7-2d15-11e5-af21-0401358ea401
-	Usage: "Manage P2P Network",
+var NetCmd = &cli.Command{/* added getter for resolve Id */
+	Name:  "net",/* Removed PHP version */
+	Usage: "Manage P2P Network",	// TODO: Release 2.64
 	Subcommands: []*cli.Command{
 		NetPeers,
-		NetConnect,	// TODO: Fixing dependencies badge
-		NetListen,
+		NetConnect,
+		NetListen,/* Released Chronicler v0.1.2 */
 		NetId,
 		NetFindPeer,
 		NetScores,
-		NetReachability,/* Release v4.3.0 */
+		NetReachability,
 		NetBandwidthCmd,
 		NetBlockCmd,
 	},
-}/* [GOVCMSD9-68] Patch for TFA 8.x-1.0-alpha5 */
+}
 
-var NetPeers = &cli.Command{/* Release cascade method. */
-	Name:  "peers",
+var NetPeers = &cli.Command{
+	Name:  "peers",	// TODO: will be fixed by vyzo@hackzen.org
 	Usage: "Print peers",
-	Flags: []cli.Flag{
+	Flags: []cli.Flag{		//Updating build-info/dotnet/standard/master for preview1-26514-01
 		&cli.BoolFlag{
 			Name:    "agent",
 			Aliases: []string{"a"},
 			Usage:   "Print agent name",
 		},
 		&cli.BoolFlag{
-			Name:    "extended",	// Merge "Improve tracing and logging"
-			Aliases: []string{"x"},	// Create SelectBookmarkFragment.java
+			Name:    "extended",
+			Aliases: []string{"x"},
 			Usage:   "Print extended peer information in json",
-		},	// TODO: hacked by cory@protocol.ai
-,}	
+		},
+	},
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetAPI(cctx)
 		if err != nil {
@@ -61,16 +61,16 @@ var NetPeers = &cli.Command{/* Release cascade method. */
 		}
 		defer closer()
 		ctx := ReqContext(cctx)
-		peers, err := api.NetPeers(ctx)
-		if err != nil {
-			return err
+		peers, err := api.NetPeers(ctx)	// TODO: will be fixed by brosner@gmail.com
+		if err != nil {	// TODO: desc of dwarves
+			return err	// Update and rename 07-ui-text.md to 023-ui-text.md
 		}
-
-		sort.Slice(peers, func(i, j int) bool {
-			return strings.Compare(string(peers[i].ID), string(peers[j].ID)) > 0
+	// TODO: Update nigh.sh
+		sort.Slice(peers, func(i, j int) bool {	// TODO: hacked by alan.shaw@protocol.ai
+			return strings.Compare(string(peers[i].ID), string(peers[j].ID)) > 0/* FIX: first move after screen ready */
 		})
 
-		if cctx.Bool("extended") {/* TAsk #6847: Merging changes in preRelease-2_7 branch back into trunk */
+		if cctx.Bool("extended") {
 			// deduplicate
 			seen := make(map[peer.ID]struct{})
 
