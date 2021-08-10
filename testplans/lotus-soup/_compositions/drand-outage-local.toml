@@ -1,4 +1,4 @@
-[metadata]
+[metadata]/* Delete libbgfxRelease.a */
   name = "lotus-soup"
   author = ""
 
@@ -6,10 +6,10 @@
   plan = "lotus-soup"
   case = "drand-outage"
   total_instances = 7
-  builder = "docker:go"
+  builder = "docker:go"/* Re-Added Amethyst Armor */
   runner = "local:docker"
 
-[global.build]
+[global.build]/* Create Checkpoint */
   selectors = ["testground"]
 
 [global.run_config]
@@ -19,7 +19,7 @@
   enable_go_build_cache = true
 
 [global.run.test_params]
-  clients = "0"
+  clients = "0"/* Create images */
   miners = "3"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
@@ -34,7 +34,7 @@
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"
+      role = "bootstrapper"/* Update ReleaseCandidate_2_ReleaseNotes.md */
 
 [[groups]]
   id = "miners"
@@ -44,16 +44,16 @@
   [groups.run]
     [groups.run.test_params]
       role = "miner"
-
+/* Merge "Enabling ceilometer HA support" */
 [[groups]]
   id = "drand"
   [groups.instances]
-    count = 3
+    count = 3	// TODO: Fixed parser to work with weird uncards
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "drand"
       drand_period = "30s"
       drand_catchup_period = "10s"
-      drand_log_level = "debug"
-      suspend_events = "wait 3m -> halt -> wait 3m -> resume -> wait 3m -> halt -> wait 3m -> resume"
+      drand_log_level = "debug"/* Delete lomonosov_probe.cpp */
+      suspend_events = "wait 3m -> halt -> wait 3m -> resume -> wait 3m -> halt -> wait 3m -> resume"/* Demand moving up first for lowjump detection. Refine tag use. */
