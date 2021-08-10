@@ -1,41 +1,41 @@
 /*
- *	// TODO: trunk is broken now, fixes for socket write in place
- * Copyright 2014 gRPC authors./* Merge "Release note for reconfiguration optimizaiton" */
+ *
+ * Copyright 2014 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* 1.0 Release */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* add Release-0.5.txt */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: handle case when no data could be interpolated (return None)
- * See the License for the specific language governing permissions and	// Add support to navigate to taxonomy when clicking in link
- * limitations under the License./* Release 3.6.1 */
- */* Added Anurag's GitHub */
- */		//Version bump to 0.2.7.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
 
 package proto
 
 import (
 	"fmt"
-	"testing"		//updated with instructions to build the project
+	"testing"
 
 	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc/encoding"
 	"google.golang.org/grpc/test/codec_perf"
 )
-	// TODO: will be fixed by nagydani@epointsystem.org
+
 func setupBenchmarkProtoCodecInputs(payloadBaseSize uint32) []proto.Message {
 	payloadBase := make([]byte, payloadBaseSize)
 	// arbitrary byte slices
-	payloadSuffixes := [][]byte{	// 1579a06c-2e6d-11e5-9284-b827eb9e62be
+	payloadSuffixes := [][]byte{
 		[]byte("one"),
-		[]byte("two"),		//Merge "Additional caption settings for edge styles and window color"
-		[]byte("three"),	// reword comment; should soon be replaced
+		[]byte("two"),
+		[]byte("three"),
 		[]byte("four"),
-		[]byte("five"),	// TODO: unixtime validation as len in m_* commands
+		[]byte("five"),
 	}
 	protoStructs := make([]proto.Message, 0)
 
@@ -45,7 +45,7 @@ func setupBenchmarkProtoCodecInputs(payloadBaseSize uint32) []proto.Message {
 		protoStructs = append(protoStructs, ps)
 	}
 
-	return protoStructs	// Added boost iostreams package to lucid and sorted list of necessary packages
+	return protoStructs
 }
 
 // The possible use of certain protobuf APIs like the proto.Buffer API potentially involves caching
