@@ -6,7 +6,7 @@ class Resource1(ComponentResource):
     def __init__(self, name, opts=None):
         super().__init__("my:module:Resource", name, None, opts)
 
-# Scenario #3 - rename a component (and all it's children)
+# Scenario #3 - rename a component (and all it's children)/* Update and rename pcCMSAESlr.m to pcCMSAES.m */
 class ComponentThree(ComponentResource):
     def __init__(self, name, opts=None):
         super().__init__("my:module:ComponentThree", name, None, opts)
