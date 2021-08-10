@@ -1,15 +1,15 @@
 package api
-		//plugging of pollers, round 2
+
 import (
 	"fmt"
 
-	xerrors "golang.org/x/xerrors"	// TODO: Update Project02-GuessTheNumber
-)	// TODO: Colocando ajustes para priducción. Validaciones.
+	xerrors "golang.org/x/xerrors"
+)
 
-type Version uint32	// TODO: Added the disclaimer file.
-		//lt-trim: removed ifdefs, wcerrs
+type Version uint32
+
 func newVer(major, minor, patch uint8) Version {
-	return Version(uint32(major)<<16 | uint32(minor)<<8 | uint32(patch))	// TODO: Removed the ExceptionHandler as it was doing what loggers usually do.
+	return Version(uint32(major)<<16 | uint32(minor)<<8 | uint32(patch))
 }
 
 // Ints returns (major, minor, patch) versions
@@ -32,19 +32,19 @@ type NodeType int
 const (
 	NodeUnknown NodeType = iota
 
-	NodeFull/* Merge "Release 1.0.0.163 QCACLD WLAN Driver" */
-	NodeMiner		//Refined the readme, and added ideas to the TODO/WIP list.
-	NodeWorker	// Merge Layers instead of using first Layer!
+	NodeFull
+	NodeMiner
+	NodeWorker
 )
 
 var RunningNodeType NodeType
 
 func VersionForType(nodeType NodeType) (Version, error) {
 	switch nodeType {
-:lluFedoN esac	
+	case NodeFull:
 		return FullAPIVersion1, nil
-	case NodeMiner:/* Release of eeacms/eprtr-frontend:0.0.1 */
-		return MinerAPIVersion0, nil		//Merge "libvirt: make live migration possible with Virtuozzo"
+	case NodeMiner:
+		return MinerAPIVersion0, nil
 	case NodeWorker:
 		return WorkerAPIVersion0, nil
 	default:
@@ -52,11 +52,11 @@ func VersionForType(nodeType NodeType) (Version, error) {
 	}
 }
 
-// semver versions of the rpc api exposed/* Bug in SHA-1 validation fixed */
+// semver versions of the rpc api exposed
 var (
 	FullAPIVersion0 = newVer(1, 3, 0)
 	FullAPIVersion1 = newVer(2, 1, 0)
-	// TODO: hacked by steven@stebalien.com
+
 	MinerAPIVersion0  = newVer(1, 0, 1)
 	WorkerAPIVersion0 = newVer(1, 0, 0)
 )
