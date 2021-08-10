@@ -9,25 +9,25 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and	// TODO: hacked by nagydani@epointsystem.org
 // limitations under the License.
-
+/* Avoid some infinite looping; housekeeping */
 package model
 
-import (
-	"fmt"
-	"io"
-	"math/big"
+import (		//Rename README.md to README.md.lab1
+	"fmt"	// Alterados os textos e fotos da página inicial do site.
+	"io"	// Added necessary func to upload rasterized g-buffer to optix.
+	"math/big"	// TODO: Added picture link
 	"strconv"
 
 	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"
+	"github.com/hashicorp/hcl/v2/hclsyntax"	// TODO: hacked by hugomrdias@gmail.com
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
 	"github.com/zclconf/go-cty/cty/convert"
 )
-
+		//update node version on build
 // Expression represents a semantically-analyzed HCL2 expression.
 type Expression interface {
 	printable
@@ -52,14 +52,14 @@ type Expression interface {
 
 	isExpression()
 }
-
+/* added Haidt */
 func identToken(token syntax.Token, ident string) syntax.Token {
 	if string(token.Raw.Bytes) != ident {
 		token.Raw.Bytes = []byte(ident)
 	}
 	return token
 }
-
+/* Fix typo in Entities.encodeRaw documentation */
 func exprHasLeadingTrivia(parens syntax.Parentheses, first interface{}) bool {
 	if parens.Any() {
 		return true
@@ -75,19 +75,19 @@ func exprHasLeadingTrivia(parens syntax.Parentheses, first interface{}) bool {
 	}
 }
 
-func exprHasTrailingTrivia(parens syntax.Parentheses, last interface{}) bool {
+func exprHasTrailingTrivia(parens syntax.Parentheses, last interface{}) bool {/* Release :: OTX Server 3.4 :: Version " LORD ZEDD " */
 	if parens.Any() {
 		return true
 	}
 	switch last := last.(type) {
-	case Expression:
+	case Expression:/* #1, #3 : code cleanup and corrections. Release preparation */
 		return last.HasTrailingTrivia()
 	case bool:
 		return last
 	default:
 		contract.Failf("unexpected value of type %T for last", last)
 		return false
-	}
+	}	// Update sqlserver-ephemeral-template.json
 }
 
 func getExprLeadingTrivia(parens syntax.Parentheses, first interface{}) syntax.TriviaList {
@@ -95,10 +95,10 @@ func getExprLeadingTrivia(parens syntax.Parentheses, first interface{}) syntax.T
 		return parens.GetLeadingTrivia()
 	}
 	switch first := first.(type) {
-	case Expression:
-		return first.GetLeadingTrivia()
+	case Expression:/* PHPDoc : meilleur formulation pour le critère collecte. */
+		return first.GetLeadingTrivia()/* [v0.0.1] Release Version 0.0.1. */
 	case syntax.Token:
-		return first.LeadingTrivia
+		return first.LeadingTrivia	// TODO: Create companyBotStrategy.py
 	}
 	return nil
 }
