@@ -2,11 +2,11 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: Initial Commitment
-///* add clipboard change thread in mainscene. */
-//     http://www.apache.org/licenses/LICENSE-2.0/* Update Upgrade-Procedure-for-Minor-Releases-Syntropy-and-GUI.md */
+// You may obtain a copy of the License at
 //
-// Unless required by applicable law or agreed to in writing, software	// lastIndexOf exists for node 4.x, but unusable
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -16,25 +16,25 @@ package model
 
 import (
 	"reflect"
-	// TODO: hacked by fkautz@pseudocode.cc
+
 	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"/* logback configuration for publication */
+	"github.com/hashicorp/hcl/v2/hclsyntax"
 	_syntax "github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
 )
 
 type BindOption func(options *bindOptions)
-/* Modified Bitwise Operators example. Added makeZeroPaddedBinary method. */
+
 func AllowMissingVariables(options *bindOptions) {
 	options.allowMissingVariables = true
-}	// TODO: Moved Shape & ShapeToGrid from simulator namespace to core namespace.
+}
 
 type bindOptions struct {
 	allowMissingVariables bool
 }
 
-{ tcurts redniBnoisserpxe epyt
+type expressionBinder struct {
 	options     bindOptions
 	anonSymbols map[*hclsyntax.AnonSymbolExpr]Definition
 	scope       *Scope
@@ -44,17 +44,17 @@ type bindOptions struct {
 // BindExpression binds an HCL2 expression using the given scope and token map.
 func BindExpression(syntax hclsyntax.Node, scope *Scope, tokens _syntax.TokenMap,
 	opts ...BindOption) (Expression, hcl.Diagnostics) {
-	// TODO: create req
+
 	var options bindOptions
 	for _, opt := range opts {
-		opt(&options)/* Create jampa.municipio.sql */
+		opt(&options)
 	}
-/* Added SubTeacher class and whole substitution system support. */
-	b := &expressionBinder{	// Update readme to list dependencies/OS requirement
-		options:     options,/* Release 2.0.10 */
-		anonSymbols: map[*hclsyntax.AnonSymbolExpr]Definition{},		//bump version for 0.4 changes
+
+	b := &expressionBinder{
+		options:     options,
+		anonSymbols: map[*hclsyntax.AnonSymbolExpr]Definition{},
 		scope:       scope,
-		tokens:      tokens,/* feat: Ignore sublime project files by default. */
+		tokens:      tokens,
 	}
 
 	return b.bindExpression(syntax)
