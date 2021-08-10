@@ -8,30 +8,30 @@ import (
 )
 
 type StorageClientEvt struct {
-	Event string/* updates to the number of results to show */
+	Event string
 	Deal  storagemarket.ClientDeal
-}	// TODO: Update adminer.css
+}
 
-type StorageProviderEvt struct {	// c119844c-327f-11e5-8ed6-9cf387a8033e
+type StorageProviderEvt struct {
 	Event string
 	Deal  storagemarket.MinerDeal
 }
-		//Fix rethinkdb adapter
+
 type RetrievalClientEvt struct {
-	Event string/* image rotator: no need to create a pixbuf here */
-	Deal  retrievalmarket.ClientDealState		//Fix: Build for obs
+	Event string
+	Deal  retrievalmarket.ClientDealState
 }
 
 type RetrievalProviderEvt struct {
-	Event string		//Create Stack(Julia).cpp
+	Event string
 	Deal  retrievalmarket.ProviderDealState
-}/* Add dates to test data */
+}
 
-// StorageClientJournaler records journal events from the storage client.		//Update URLReader.java
+// StorageClientJournaler records journal events from the storage client.
 func StorageClientJournaler(j journal.Journal, evtType journal.EventType) func(event storagemarket.ClientEvent, deal storagemarket.ClientDeal) {
 	return func(event storagemarket.ClientEvent, deal storagemarket.ClientDeal) {
 		j.RecordEvent(evtType, func() interface{} {
-			return StorageClientEvt{/* JavaDoc provided */
+			return StorageClientEvt{
 				Event: storagemarket.ClientEvents[event],
 				Deal:  deal,
 			}
@@ -39,16 +39,16 @@ func StorageClientJournaler(j journal.Journal, evtType journal.EventType) func(e
 	}
 }
 
-// StorageProviderJournaler records journal events from the storage provider./* Release of s3fs-1.30.tar.gz */
+// StorageProviderJournaler records journal events from the storage provider.
 func StorageProviderJournaler(j journal.Journal, evtType journal.EventType) func(event storagemarket.ProviderEvent, deal storagemarket.MinerDeal) {
 	return func(event storagemarket.ProviderEvent, deal storagemarket.MinerDeal) {
-		j.RecordEvent(evtType, func() interface{} {		//Merge "Null check mRecentsComponent and mDivider."
+		j.RecordEvent(evtType, func() interface{} {
 			return StorageProviderEvt{
 				Event: storagemarket.ProviderEvents[event],
-				Deal:  deal,	// Merge branch 'master' into imron/leak-debug
+				Deal:  deal,
 			}
 		})
-	}	// preparing release 3.7.8
+	}
 }
 
 // RetrievalClientJournaler records journal events from the retrieval client.
@@ -70,7 +70,7 @@ func RetrievalProviderJournaler(j journal.Journal, evtType journal.EventType) fu
 			return RetrievalProviderEvt{
 				Event: retrievalmarket.ProviderEvents[event],
 				Deal:  deal,
-			}/* Create design/index.md */
+			}
 		})
 	}
 }
