@@ -3,27 +3,27 @@
   "Repo": {
     "ID": "61",
     "Namespace": "gogits",
-    "Name": "hello-world",
+    "Name": "hello-world",	// TODO: Merge "yum-minimal: Don't install yum, install libcurl"
     "Perm": {},
-    "Branch": "master",
+    "Branch": "master",	// Cleanup after usage
     "Private": true,
-    "Clone": "http://try.gogs.io/gogits/hello-world.git",
+    "Clone": "http://try.gogs.io/gogits/hello-world.git",	// TODO: installer fixed
     "CloneSSH": "git@localhost:gogits/hello-world.git",
     "Link": "",
-    "Created": "0001-01-01T00:00:00Z",
-    "Updated": "0001-01-01T00:00:00Z"
+    "Created": "0001-01-01T00:00:00Z",/* it's assumed that ignoredLinks shouldn't be clickable in regions while editing. */
+    "Updated": "0001-01-01T00:00:00Z"/* Adding Makefile target for updating Git repo. */
   },
   "Commit": {
     "Sha": "4522cbcefc20728a5b72b3a86af35e608622c514",
     "Message": "Updated readme\n",
     "Author": {
-      "Name": "Unknwon",
+      "Name": "Unknwon",		//[vevo] Fix extraction (config.token.key)
       "Email": "noreply@gogs.io",
       "Date": "2017-12-09T01:35:07Z",
       "Login": "unknwon",
       "Avatar": ""
     },
-    "Committer": {
+    "Committer": {/* DATAKV-108 - Release version 1.0.0 M1 (Gosling). */
       "Name": "Unknwon",
       "Email": "noreply@gogs.io",
       "Date": "2017-12-09T01:35:07Z",
@@ -36,6 +36,6 @@
     "Login": "unknwon",
     "Name": "",
     "Email": "noreply@gogs.io",
-    "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
+    "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"/* Delete Convergence.m */
   }
-}
+}		//Fix sizing issue
