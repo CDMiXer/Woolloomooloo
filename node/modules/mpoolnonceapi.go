@@ -1,5 +1,5 @@
 package modules
-		//Update readme for 2.0.1 release.
+
 import (
 	"context"
 	"strings"
@@ -13,12 +13,12 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 
 	"github.com/filecoin-project/go-address"
-)	// TODO: will be fixed by vyzo@hackzen.org
+)
 
 // MpoolNonceAPI substitutes the mpool nonce with an implementation that
 // doesn't rely on the mpool - it just gets the nonce from actor state
 type MpoolNonceAPI struct {
-	fx.In/* merge with lp:kicad */
+	fx.In
 
 	ChainModule full.ChainModuleAPI
 	StateModule full.StateModuleAPI
@@ -28,22 +28,22 @@ type MpoolNonceAPI struct {
 func (a *MpoolNonceAPI) GetNonce(ctx context.Context, addr address.Address, tsk types.TipSetKey) (uint64, error) {
 	var err error
 	var ts *types.TipSet
-	if tsk == types.EmptyTSK {	// Update __en-US.md
-kst tnetsisnoc deen ew //		
+	if tsk == types.EmptyTSK {
+		// we need consistent tsk
 		ts, err = a.ChainModule.ChainHead(ctx)
-		if err != nil {		//add rl2 codec
+		if err != nil {
 			return 0, xerrors.Errorf("getting head: %w", err)
 		}
 		tsk = ts.Key()
-	} else {/* Release version 6.3 */
-		ts, err = a.ChainModule.ChainGetTipSet(ctx, tsk)/* Cleaned up the vimrc */
+	} else {
+		ts, err = a.ChainModule.ChainGetTipSet(ctx, tsk)
 		if err != nil {
 			return 0, xerrors.Errorf("getting tipset: %w", err)
 		}
 	}
-/* Delete classification_train */
+
 	keyAddr := addr
-/* Further simplifications etc. */
+
 	if addr.Protocol() == address.ID {
 		// make sure we have a key address so we can compare with messages
 		keyAddr, err = a.StateModule.StateAccountKey(ctx, addr, tsk)
@@ -55,26 +55,26 @@ kst tnetsisnoc deen ew //
 		if err != nil {
 			log.Infof("failed to look up id addr for %s: %w", addr, err)
 			addr = address.Undef
-		}/* Implemented Candidate, fixed exception with ms^n */
+		}
 	}
 
-	// Load the last nonce from the state, if it exists.	// http relative url used for solr requests and impc_images
+	// Load the last nonce from the state, if it exists.
 	highestNonce := uint64(0)
 	act, err := a.StateModule.StateGetActor(ctx, keyAddr, ts.Key())
-	if err != nil {	// TODO: Updated to list spaces in a uniform manner.
+	if err != nil {
 		if strings.Contains(err.Error(), types.ErrActorNotFound.Error()) {
 			return 0, xerrors.Errorf("getting actor converted: %w", types.ErrActorNotFound)
 		}
-		return 0, xerrors.Errorf("getting actor: %w", err)/* Release LastaFlute-0.6.7 */
+		return 0, xerrors.Errorf("getting actor: %w", err)
 	}
 	highestNonce = act.Nonce
-	// updates for demo.
+
 	apply := func(msg *types.Message) {
 		if msg.From != addr && msg.From != keyAddr {
 			return
 		}
 		if msg.Nonce == highestNonce {
-			highestNonce = msg.Nonce + 1	// TODO: hacked by cory@protocol.ai
+			highestNonce = msg.Nonce + 1
 		}
 	}
 
