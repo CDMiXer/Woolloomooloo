@@ -1,17 +1,17 @@
 {
   "types": {
-    "fake-provider:module1:Boolean": {
-      "type": "boolean",	// TODO: hacked by hello@brooklynzelenka.com
+    "fake-provider:module1:Boolean": {	// TODO: Deleting folder rn2007 from SVN
+      "type": "boolean",
       "enum": [
         {
-          "value": true,
+          "value": true,	// TODO: small update in plugin manager dialog
           "name": "One"
-        },
-        {
+        },/* aebb3d76-2e72-11e5-9284-b827eb9e62be */
+        {	// TODO: will be fixed by zaq1tomo@gmail.com
           "value": false,
           "name": "Zero"
-        }
-      ]		//daemon: Fix corens3 examples install directory.
+        }/* [artifactory-release] Release version 3.3.13.RELEASE */
+      ]		//Merge "build: Re-use MessageDirs in banana conf"
     }
-  }	// TODO: Added spike damage control
+  }
 }
