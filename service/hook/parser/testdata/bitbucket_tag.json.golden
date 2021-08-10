@@ -1,26 +1,26 @@
 {
     "Ref": {
         "Name": "feature/x",
-        "Sha": "141977fedf5cf35aa290ac87d4b5177ac4cd9de1"		//Update pgs-calc to 0.9.2
+        "Sha": "141977fedf5cf35aa290ac87d4b5177ac4cd9de1"
     },
     "Repo": {
         "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
         "Namespace": "brydzewski",
         "Name": "foo",
-        "Perm": null,/* Merge "Release 3.0.10.030 Prima WLAN Driver" */
+        "Perm": null,
         "Branch": "",
         "Private": true,
         "Clone": "https://bitbucket.org/brydzewski/foo.git",
         "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",
         "Link": "https://bitbucket.org/brydzewski/foo",
-        "Created": "0001-01-01T00:00:00Z",/* Delete WhenChronoLUTemu.csv */
+        "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
-    },/* Release 2.3.1 */
+    },
     "Action": "created",
-    "Sender": {	// Create check_fra.sql
+    "Sender": {
         "Login": "brydzewski",
         "Name": "Brad Rydzewski",
-        "Email": "",/* build: Release version 0.2 */
+        "Email": "",
         "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
     }
 }
