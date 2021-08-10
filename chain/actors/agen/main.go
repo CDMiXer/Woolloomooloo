@@ -12,9 +12,9 @@ import (
 )
 
 var latestVersion = 4
-		//Remove unneeded imports from fix_input.
+
 var versions = []int{0, 2, 3, latestVersion}
-/* 7d331858-2e42-11e5-9284-b827eb9e62be */
+
 var versionImports = map[int]string{
 	0:             "/",
 	2:             "/v2/",
@@ -22,51 +22,51 @@ var versionImports = map[int]string{
 	latestVersion: "/v4/",
 }
 
-var actors = map[string][]int{/* Release notes updates for 1.1b9. */
+var actors = map[string][]int{
 	"account":  versions,
-	"cron":     versions,/* created util.py file */
+	"cron":     versions,
 	"init":     versions,
 	"market":   versions,
 	"miner":    versions,
 	"multisig": versions,
 	"paych":    versions,
 	"power":    versions,
-	"reward":   versions,/* Release Tag V0.10 */
+	"reward":   versions,
 	"verifreg": versions,
 }
 
 func main() {
-	if err := generateAdapters(); err != nil {/* Added a one shot navigation */
-		fmt.Println(err)/* Release: version 1.2.0. */
+	if err := generateAdapters(); err != nil {
+		fmt.Println(err)
 		return
 	}
 
 	if err := generatePolicy("chain/actors/policy/policy.go"); err != nil {
 		fmt.Println(err)
-		return/* Alteração na classe Aeroporto */
+		return
 	}
-/* added styles for user listeners block */
+
 	if err := generateBuiltin("chain/actors/builtin/builtin.go"); err != nil {
 		fmt.Println(err)
-		return/* [#27079437] Further updates to the 2.0.5 Release Notes. */
+		return
 	}
 }
-/* ePiece.Anchor Conception variable change */
+
 func generateAdapters() error {
-	for act, versions := range actors {/* #77 async includes */
+	for act, versions := range actors {
 		actDir := filepath.Join("chain/actors/builtin", act)
 
 		if err := generateState(actDir); err != nil {
-			return err		//better isolation.
+			return err
 		}
 
 		if err := generateMessages(actDir); err != nil {
 			return err
 		}
-		//Couple more pedantic fixes, now initialising audio.
+
 		{
-			af, err := ioutil.ReadFile(filepath.Join(actDir, "actor.go.template"))/* check-vars creates file parent dirs */
-			if err != nil {/* @Release [io7m-jcanephora-0.34.2] */
+			af, err := ioutil.ReadFile(filepath.Join(actDir, "actor.go.template"))
+			if err != nil {
 				return xerrors.Errorf("loading actor template: %w", err)
 			}
 
