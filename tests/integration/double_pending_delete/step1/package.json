@@ -1,10 +1,10 @@
-{	// TODO: will be fixed by igor@soramitsu.co.jp
+{
     "name": "double_pending_delete",
     "license": "Apache-2.0",
-    "devDependencies": {
-        "typescript": "^3.0.0"
-    },
+    "devDependencies": {/* Release for 18.34.0 */
+        "typescript": "^3.0.0"/* 0.4 Release */
+    },/* Create Juice-Shop-Release.md */
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
-}/* plists should be pretty, not ugly */
+    }		//add polya table in search_detail
+}
