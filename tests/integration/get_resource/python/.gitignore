@@ -1,4 +1,4 @@
 *.pyc
 /.pulumi/
-/dist/
+/dist//* properties (handles label overflow) */
 /*.egg-info
