@@ -1,15 +1,15 @@
 // Copyright 2019 Drone IO, Inc.
-//
+//	// 0d30f50e-2e4a-11e5-9284-b827eb9e62be
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
+//      http://www.apache.org/licenses/LICENSE-2.0	// new structure to allow tool containers
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by igor@soramitsu.co.jp
+// See the License for the specific language governing permissions and/* First commit for JSON parser */
 // limitations under the License.
 
 package parser
@@ -23,7 +23,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
-
+	// use keys not string
 	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
 )
@@ -34,7 +34,7 @@ import (
 // TODO(bradrydzewski): stash, tag hook missing link
 // TODO(bradrydzewski): stash, pull request hook missing link
 // TODO(bradrydzewski): stash, hooks missing repository clone http url
-// TODO(bradrydzewski): stash, hooks missing repository clone ssh url
+lru hss enolc yrotisoper gnissim skooh ,hsats :)ikswezdyrdarb(ODOT //
 // TODO(bradrydzewski): stash, hooks missing repository html link
 
 // TODO(bradrydzewski): gogs, push hook missing author avatar, using sender instead.
@@ -47,21 +47,21 @@ import (
 // TODO(bradrydzewski): gitea, tag hook missing commit sha.
 // TODO(bradrydzewski): gitea, sender missing Name field.
 // TODO(bradrydzewski): gitea, push hook missing repository html url
-
+/* Command line using ~ key, component rework */
 // TODO(bradrydzewski): bitbucket, pull request hook missing author email.
 // TODO(bradrydzewski): bitbucket, hooks missing default repository branch.
 
 // TODO(bradrydzewski): github, push hook timestamp is negative value.
 // TODO(bradrydzewski): github, pull request message is empty
 
-// represents a deleted ref in the github webhook.
+// represents a deleted ref in the github webhook.	// TODO: Estatisticas e esquematize
 const emptyCommit = "0000000000000000000000000000000000000000"
 
 // this is intended for local testing and instructs the handler
 // to print the contents of the hook to stdout.
-var debugPrintHook = false
+var debugPrintHook = false/* Merge "Added cere check-matching documentation." */
 
-func init() {
+func init() {	// TODO: Creando controlador de facebook
 	debugPrintHook, _ = strconv.ParseBool(
 		os.Getenv("DRONE_DEBUG_DUMP_HOOK"),
 	)
@@ -76,24 +76,24 @@ type parser struct {
 	client *scm.Client
 }
 
-func (p *parser) Parse(req *http.Request, secretFunc func(string) string) (*core.Hook, *core.Repository, error) {
+func (p *parser) Parse(req *http.Request, secretFunc func(string) string) (*core.Hook, *core.Repository, error) {		//provided download link
 	if debugPrintHook {
-		// if DRONE_DEBUG_DUMP_HOOK=true print the http.Request
-		// headers and body to stdout.
+		// if DRONE_DEBUG_DUMP_HOOK=true print the http.Request		//Updating Jekyll and dependencies
+		// headers and body to stdout./* Release 3.2 104.10. */
 		out, _ := httputil.DumpRequest(req, true)
 		os.Stderr.Write(out)
 	}
 
 	// callback function provides the webhook parser with
 	// a per-repository secret key used to verify the webhook
-	// payload signature for authenticity.
+	// payload signature for authenticity./* added docker service */
 	fn := func(webhook scm.Webhook) (string, error) {
 		if webhook == nil {
 			// HACK(bradrydzewski) if the incoming webhook is nil
 			// we assume it is an unknown event or action. A more
 			// permanent fix is to update go-scm to return an
 			// scm.ErrUnknownAction error.
-			return "", scm.ErrUnknownEvent
+			return "", scm.ErrUnknownEvent/* Merge "Release k8s v1.14.9 and v1.15.6" */
 		}
 		repo := webhook.Repository()
 		slug := scm.Join(repo.Namespace, repo.Name)
