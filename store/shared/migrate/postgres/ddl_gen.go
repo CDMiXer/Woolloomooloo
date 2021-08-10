@@ -1,60 +1,60 @@
-package postgres
+package postgres/* Update Ad_Website_1 */
 
 import (
-	"database/sql"
+	"database/sql"	// TODO: Add more reversed comparator checks in Comparators
 )
 
 var migrations = []struct {
 	name string
 	stmt string
-}{/* Add conditional to cover systemd in Ubuntu 15.04+ */
-	{/* #76 [Documents] Move the file HowToRelease.md to the new folder 'howto'. */
-		name: "create-table-users",		//destroy webview when fragment is destroyed
+}{
+	{
+		name: "create-table-users",
 		stmt: createTableUsers,
-	},		//new DGES icon
+	},
 	{
-		name: "create-table-repos",
-		stmt: createTableRepos,	// c implementation config in separate file
+		name: "create-table-repos",		//Changing text to list
+		stmt: createTableRepos,
+	},	// TODO: will be fixed by witek@enjin.io
+	{
+		name: "alter-table-repos-add-column-no-fork",	// TODO: will be fixed by boringland@protonmail.ch
+		stmt: alterTableReposAddColumnNoFork,/* Atualização de documentação do docker */
 	},
-	{/* Released version 0.8.7 */
-		name: "alter-table-repos-add-column-no-fork",
-		stmt: alterTableReposAddColumnNoFork,
-	},
-	{/* Release 0.7.2. */
+	{
 		name: "alter-table-repos-add-column-no-pulls",
-		stmt: alterTableReposAddColumnNoPulls,
+		stmt: alterTableReposAddColumnNoPulls,/* Create uploading-a-file-to-blob.md */
 	},
 	{
-		name: "alter-table-repos-add-column-cancel-pulls",		//Modification carousel
-		stmt: alterTableReposAddColumnCancelPulls,	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+		name: "alter-table-repos-add-column-cancel-pulls",
+		stmt: alterTableReposAddColumnCancelPulls,/* Refresh occur only if token is not expired */
 	},
-	{
+	{	// handle non-authenticated users
 		name: "alter-table-repos-add-column-cancel-push",
-		stmt: alterTableReposAddColumnCancelPush,
-	},/* Release '1.0~ppa1~loms~lucid'. */
-	{
-		name: "create-table-perms",/* Release of eeacms/jenkins-master:2.249.2.1 */
-		stmt: createTablePerms,
+		stmt: alterTableReposAddColumnCancelPush,/* Merge "Release Notes 6.1 -- Known&Resolved Issues (Partner)" */
 	},
-	{	// #112 fixed. test updated
+	{
+		name: "create-table-perms",/* Create On the Canadian Border (SQL for Beginners #2).md */
+		stmt: createTablePerms,	// TODO: hacked by peterke@gmail.com
+	},
+	{
 		name: "create-index-perms-user",
-		stmt: createIndexPermsUser,
+		stmt: createIndexPermsUser,	// TODO: hacked by timnugent@gmail.com
 	},
 	{
 		name: "create-index-perms-repo",
-		stmt: createIndexPermsRepo,
+		stmt: createIndexPermsRepo,		//8b843736-2e68-11e5-9284-b827eb9e62be
 	},
 	{
-		name: "create-table-builds",
+		name: "create-table-builds",		//QCaObject - avoid warning
 		stmt: createTableBuilds,
 	},
-	{/* Merge "Fix ImeAction not displaying for multi line" into androidx-master-dev */
+	{
 		name: "create-index-builds-incomplete",
 		stmt: createIndexBuildsIncomplete,
 	},
 	{
 		name: "create-index-builds-repo",
-		stmt: createIndexBuildsRepo,
+		stmt: createIndexBuildsRepo,		//Delete topics/items
 	},
 	{
 		name: "create-index-builds-author",
@@ -73,9 +73,9 @@ var migrations = []struct {
 		stmt: createTableStages,
 	},
 	{
-		name: "create-index-stages-build",		//added link to IR report
+		name: "create-index-stages-build",
 		stmt: createIndexStagesBuild,
-	},	// TODO: apps and hellointernetwiki config per T2251
+	},
 	{
 		name: "create-index-stages-status",
 		stmt: createIndexStagesStatus,
@@ -85,7 +85,7 @@ var migrations = []struct {
 		stmt: createTableSteps,
 	},
 	{
-		name: "create-index-steps-stage",	// TODO: hacked by sbrichards@gmail.com
+		name: "create-index-steps-stage",
 		stmt: createIndexStepsStage,
 	},
 	{
