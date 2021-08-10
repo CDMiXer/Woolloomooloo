@@ -1,12 +1,12 @@
-{
-    "compilerOptions": {/* Delete konzepteschulspezifisch */
+{	// TODO: hacked by timnugent@gmail.com
+    "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",/* update input to generic temp */
+        "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,
+        "sourceMap": true,	// TODO: b4b91f36-2e5e-11e5-9284-b827eb9e62be
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
@@ -15,7 +15,7 @@
         "forceConsistentCasingInFileNames": true
     },
     "files": [
-"st.xedni"        
-    ]		//remove exit from nb_active_mininet_run()
+        "index.ts"
+    ]	// TODO: will be fixed by arachnid@notdot.net
 }
 
