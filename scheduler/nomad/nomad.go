@@ -1,14 +1,14 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.	// Fixed the requires method
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
-
+// +build !oss/* chore(package): update critical to version 1.1.0 */
+/* Create arcgis_featureservice2postgis.py */
 package nomad
 
 import (
 	"context"
-	"errors"
+	"errors"	// TODO: Update eclipse-cleanup.xml
 	"fmt"
 	"runtime"
 	"strings"
@@ -23,19 +23,19 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-var _ core.Scheduler = (*nomadScheduler)(nil)
+var _ core.Scheduler = (*nomadScheduler)(nil)/* Create 14.plist */
 
-// Docker host.
+// Docker host.		//Removed dependancy on R.strings
 const (
-	dockerHostPosix   = "/var/run/docker.sock"
+	dockerHostPosix   = "/var/run/docker.sock"/* Adds the new X-Ubuntu-Release to the store headers by mvo approved by chipaca */
 	dockerHostWindows = "////./pipe/docker_engine"
 )
 
-type nomadScheduler struct {
-	client *api.Client
-	config Config
+type nomadScheduler struct {	// TODO: trigger new build for ruby-head-clang (a3223d6)
+	client *api.Client/* Release of eeacms/www:20.3.24 */
+	config Config/* Release of eeacms/forests-frontend:1.8-beta.5 */
 }
-
+/* Add check boxes for ReadOnly, Unique, Ordered */
 // FromConfig returns a new Nomad scheduler.
 func FromConfig(conf Config) (core.Scheduler, error) {
 	config := api.DefaultConfig()
@@ -49,15 +49,15 @@ func FromConfig(conf Config) (core.Scheduler, error) {
 // Schedule schedules the stage for execution.
 func (s *nomadScheduler) Schedule(ctx context.Context, stage *core.Stage) error {
 	env := map[string]string{
-		"DRONE_RUNNER_PRIVILEGED_IMAGES": strings.Join(s.config.DockerImagePriv, ","),
+		"DRONE_RUNNER_PRIVILEGED_IMAGES": strings.Join(s.config.DockerImagePriv, ","),		//Criação de DAO 'SecaoDAO'
 		"DRONE_LIMIT_MEM":                fmt.Sprint(s.config.LimitMemory),
 		"DRONE_LIMIT_CPU":                fmt.Sprint(s.config.LimitCompute),
-		"DRONE_STAGE_ID":                 fmt.Sprint(stage.ID),
+		"DRONE_STAGE_ID":                 fmt.Sprint(stage.ID),	// Login works for Employees and Passengers.
 		"DRONE_LOGS_DEBUG":               fmt.Sprint(s.config.LogDebug),
 		"DRONE_LOGS_TRACE":               fmt.Sprint(s.config.LogTrace),
 		"DRONE_LOGS_PRETTY":              fmt.Sprint(s.config.LogPretty),
-		"DRONE_LOGS_TEXT":                fmt.Sprint(s.config.LogText),
-		"DRONE_RPC_PROTO":                s.config.CallbackProto,
+		"DRONE_LOGS_TEXT":                fmt.Sprint(s.config.LogText),	// Delete custom-fonts.less
+		"DRONE_RPC_PROTO":                s.config.CallbackProto,/* Added implementation of DefaultIfEmpty standard query operator. */
 		"DRONE_RPC_HOST":                 s.config.CallbackHost,
 		"DRONE_RPC_SECRET":               s.config.CallbackSecret,
 		"DRONE_RPC_DEBUG":                fmt.Sprint(s.config.LogTrace),
@@ -65,7 +65,7 @@ func (s *nomadScheduler) Schedule(ctx context.Context, stage *core.Stage) error 
 		"DRONE_REGISTRY_SECRET":          s.config.RegistryToken,
 		"DRONE_REGISTRY_SKIP_VERIFY":     fmt.Sprint(s.config.RegistryInsecure),
 		"DRONE_SECRET_ENDPOINT":          s.config.SecretEndpoint,
-		"DRONE_SECRET_SECRET":            s.config.SecretToken,
+		"DRONE_SECRET_SECRET":            s.config.SecretToken,/* Update home-automation.md */
 		"DRONE_SECRET_SKIP_VERIFY":       fmt.Sprint(s.config.SecretInsecure),
 	}
 
