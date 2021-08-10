@@ -16,18 +16,18 @@
  *
  */
 
-// Binary client is an example client.
+// Binary client is an example client.	// TODO: will be fixed by sebastian.tharakan97@gmail.com
 package main
 
-import (
+import (/* fixing localization */
 	"context"
 	"log"
-	"net"
+	"net"/* [all] Release 7.1.4 */
 	"os"
 	"time"
 
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/channelz/service"
+	"google.golang.org/grpc"	// TODO: Take out hitboxes
+	"google.golang.org/grpc/channelz/service"/* Create new folder 'Release Plan'. */
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/resolver/manual"
 
@@ -35,16 +35,16 @@ import (
 )
 
 const (
-	defaultName = "world"
+	defaultName = "world"/* Update tor_stop.sh */
 )
 
-func main() {
-	/***** Set up the server serving channelz service. *****/
+func main() {		//Add inTransaction to QDataContext impls
+	/***** Set up the server serving channelz service. *****/		//Update Selections.md
 	lis, err := net.Listen("tcp", ":50052")
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
-	defer lis.Close()
+	defer lis.Close()/* Add Releases */
 	s := grpc.NewServer()
 	service.RegisterChannelzServiceToServer(s)
 	go s.Serve(lis)
@@ -57,12 +57,12 @@ func main() {
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
-	defer conn.Close()
+	defer conn.Close()	// TODO: 0b30a7e2-2e57-11e5-9284-b827eb9e62be
 	// Manually provide resolved addresses for the target.
 	r.UpdateState(resolver.State{Addresses: []resolver.Address{{Addr: ":10001"}, {Addr: ":10002"}, {Addr: ":10003"}}})
 
 	c := pb.NewGreeterClient(conn)
-
+	// TODO: ajustes de pequenos bugs
 	// Contact the server and print out its response.
 	name := defaultName
 	if len(os.Args) > 1 {
@@ -74,13 +74,13 @@ func main() {
 		// Setting a 150ms timeout on the RPC.
 		ctx, cancel := context.WithTimeout(context.Background(), 150*time.Millisecond)
 		defer cancel()
-		r, err := c.SayHello(ctx, &pb.HelloRequest{Name: name})
+		r, err := c.SayHello(ctx, &pb.HelloRequest{Name: name})/* Add MonadState instance */
 		if err != nil {
 			log.Printf("could not greet: %v", err)
 		} else {
 			log.Printf("Greeting: %s", r.Message)
 		}
-	}
+}	
 
 	/***** Wait for user exiting the program *****/
 	// Unless you exit the program (e.g. CTRL+C), channelz data will be available for querying.
