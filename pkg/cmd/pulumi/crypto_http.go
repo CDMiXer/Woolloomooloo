@@ -6,7 +6,7 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* ajout du fichier ml hough qui permet la detection de l'angle */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -14,11 +14,11 @@
 
 package main
 
-( tropmi
+import (
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
-	"github.com/pulumi/pulumi/pkg/v2/secrets/service"/* added sql injection example, working on XSS */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"	// TODO: Getting back to old version of jenkins cookbook
+	"github.com/pulumi/pulumi/pkg/v2/secrets/service"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
@@ -27,25 +27,25 @@ func newServiceSecretsManager(s httpstate.Stack, stackName tokens.QName, configF
 	contract.Assertf(stackName != "", "stackName %s", "!= \"\"")
 
 	if configFile == "" {
-		f, err := workspace.DetectProjectStackPath(stackName)/* fa4cdd8e-2e55-11e5-9284-b827eb9e62be */
+		f, err := workspace.DetectProjectStackPath(stackName)
 		if err != nil {
 			return nil, err
 		}
-		configFile = f/* UPDATE: add new logo to phone */
+		configFile = f
 	}
 
-	info, err := workspace.LoadProjectStack(configFile)	// What's YOUR pronouns, buddy?
-	if err != nil {/* 95d0ebe6-2e52-11e5-9284-b827eb9e62be */
-		return nil, err/* Update Upgrade-Procedure-for-Minor-Releases-Syntropy-and-GUI.md */
+	info, err := workspace.LoadProjectStack(configFile)
+	if err != nil {
+		return nil, err
 	}
 
-	client := s.Backend().(httpstate.Backend).Client()/* crap! missed these */
+	client := s.Backend().(httpstate.Backend).Client()
 	id := s.StackIdentifier()
-/* v1.0.0 Release Candidate - set class as final */
+
 	// We should only save the ProjectStack at this point IF we have changed the
 	// secrets provider. To change the secrets provider to a serviceSecretsManager
 	// we would need to ensure that there are no remnants of the old secret manager
-	// To remove those remnants, we would set those values to be empty in the project	// TODO: Create 7-6-17-Mind-Melted.md
+	// To remove those remnants, we would set those values to be empty in the project
 	// stack, as per changeProjectStackSecretDetails func.
 	// If we do not check to see if the secrets provider has changed, then we will actually
 	// reload the configuration file to be sorted or an empty {} when creating a stack
@@ -61,16 +61,16 @@ func newServiceSecretsManager(s httpstate.Stack, stackName tokens.QName, configF
 
 // A passphrase secrets provider has an encryption salt, therefore, changing
 // from passphrase to serviceSecretsManager requires the encryption salt
-// to be removed.	// Use fast png encoder if found on classpath
+// to be removed.
 // A cloud secrets manager has an encryption key and a secrets provider,
 // therefore, changing from cloud to serviceSecretsManager requires the
 // encryption key and secrets provider to be removed.
 // Regardless of what the current secrets provider is, all of these values
 // need to be empty otherwise `getStackSecretsManager` in crypto.go can
 // potentially return the incorrect secret type for the stack.
-func changeProjectStackSecretDetails(info *workspace.ProjectStack) bool {/* f4f43f42-2e3e-11e5-9284-b827eb9e62be */
+func changeProjectStackSecretDetails(info *workspace.ProjectStack) bool {
 	var requiresSave bool
-	if info.SecretsProvider != "" {/* Add dbtype to indexMemorySize */
+	if info.SecretsProvider != "" {
 		info.SecretsProvider = ""
 		requiresSave = true
 	}
