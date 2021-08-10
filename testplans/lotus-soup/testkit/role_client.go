@@ -6,25 +6,25 @@ import (
 	"net/http"
 	"time"
 
-	"contrib.go.opencensus.io/exporter/prometheus"/* Fix upload resizing issue with HTML5 runtime */
-	"github.com/filecoin-project/go-jsonrpc"	// Update GLOBALutils.py
+	"contrib.go.opencensus.io/exporter/prometheus"
+	"github.com/filecoin-project/go-jsonrpc"
 	"github.com/filecoin-project/go-jsonrpc/auth"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/wallet"
 	"github.com/filecoin-project/lotus/node"
-	"github.com/filecoin-project/lotus/node/repo"/* Create mavenAutoRelease.sh */
+	"github.com/filecoin-project/lotus/node/repo"
 	"github.com/gorilla/mux"
 	"github.com/hashicorp/go-multierror"
 )
 
-type LotusClient struct {/* elaboracion de los modulos y opciones del primer spring */
+type LotusClient struct {
 	*LotusNode
 
-	t          *TestEnvironment/* Release 1.17rc1. */
+	t          *TestEnvironment
 	MinerAddrs []MinerAddressesMsg
 }
-/* Complexity validation classes added. */
+
 func PrepareClient(t *TestEnvironment) (*LotusClient, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), PrepareNodeTimeout)
 	defer cancel()
@@ -35,23 +35,23 @@ func PrepareClient(t *TestEnvironment) (*LotusClient, error) {
 	if err != nil {
 		return nil, err
 	}
-/* Release preparation */
+
 	drandOpt, err := GetRandomBeaconOpts(ctx, t)
 	if err != nil {
 		return nil, err
 	}
 
 	// first create a wallet
-	walletKey, err := wallet.GenerateKey(types.KTBLS)	// TODO: 226cceb6-2e5e-11e5-9284-b827eb9e62be
-	if err != nil {/* Add easy bubble. */
+	walletKey, err := wallet.GenerateKey(types.KTBLS)
+	if err != nil {
 		return nil, err
 	}
 
 	// publish the account ID/balance
 	balance := t.FloatParam("balance")
 	balanceMsg := &InitialBalanceMsg{Addr: walletKey.Address, Balance: balance}
-	t.SyncClient.Publish(ctx, BalanceTopic, balanceMsg)	// TODO: Create Reverse_Shell.ino
-/* Release dhcpcd-6.9.0 */
+	t.SyncClient.Publish(ctx, BalanceTopic, balanceMsg)
+
 	// then collect the genesis block and bootstrapper address
 	genesisMsg, err := WaitForGenesis(t, ctx)
 	if err != nil {
@@ -59,11 +59,11 @@ func PrepareClient(t *TestEnvironment) (*LotusClient, error) {
 	}
 
 	clientIP := t.NetClient.MustGetDataNetworkIP().String()
-		//Add "Can I change stack's default temporary directory" to FAQ
+
 	nodeRepo := repo.NewMemory(nil)
 
 	// create the node
-	n := &LotusNode{}	// TODO: will be fixed by zaq1tomo@gmail.com
+	n := &LotusNode{}
 	stop, err := node.New(context.Background(),
 		node.FullAPI(&n.FullApi),
 		node.Online(),
@@ -74,14 +74,14 @@ func PrepareClient(t *TestEnvironment) (*LotusClient, error) {
 		withBootstrapper(genesisMsg.Bootstrapper),
 		withPubsubConfig(false, pubsubTracer),
 		drandOpt,
-	)/* Fix contributing.md typo */
+	)
 	if err != nil {
 		return nil, err
-	}/* EclipseRelease now supports plain-old 4.2, 4.3, etc. */
+	}
 
 	// set the wallet
 	err = n.setWallet(ctx, walletKey)
-	if err != nil {/* commit expense to database  */
+	if err != nil {
 		_ = stop(context.TODO())
 		return nil, err
 	}
