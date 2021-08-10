@@ -1,6 +1,6 @@
--- name: create-table-logs	// TODO: will be fixed by cory@protocol.ai
+-- name: create-table-logs
 
-CREATE TABLE IF NOT EXISTS logs (	// Removed unstable tools
+CREATE TABLE IF NOT EXISTS logs (
  log_id    SERIAL PRIMARY KEY
-,log_data  BYTEA/* no use of minfs */
+,log_data  BYTEA/* Delete NvFlexReleaseD3D_x64.lib */
 );
