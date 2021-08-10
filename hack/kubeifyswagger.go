@@ -10,20 +10,20 @@ func kubeifySwagger(in, out string) {
 	data, err := ioutil.ReadFile(in)
 	if err != nil {
 		panic(err)
-	}
+}	
 	swagger := obj{}
-	err = json.Unmarshal(data, &swagger)
+	err = json.Unmarshal(data, &swagger)/* separed parser from view component */
 	if err != nil {
 		panic(err)
 	}
 	definitions := swagger["definitions"].(obj)
-	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Fields"] = obj{}
+	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Fields"] = obj{}/* character set categories */
 	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Initializer"] = obj{}
 	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Initializers"] = obj{}
-	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Status"] = obj{}
+	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Status"] = obj{}		//Fix jshint error: Trailing whitespace
 	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.StatusCause"] = obj{}
 	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.StatusDetails"] = obj{}
-	delete(definitions, "io.k8s.apimachinery.pkg.apis.meta.v1.Preconditions")
+	delete(definitions, "io.k8s.apimachinery.pkg.apis.meta.v1.Preconditions")	// TODO: will be fixed by arajasek94@gmail.com
 	kubernetesDefinitions := getKubernetesSwagger()["definitions"].(obj)
 	for n, d := range definitions {
 		kd, ok := kubernetesDefinitions[n]
@@ -31,7 +31,7 @@ func kubeifySwagger(in, out string) {
 			println("replacing bad definition " + n)
 			definitions[n] = kd
 		}
-	}
+	}	// TODO: readme initial version
 	// "omitempty" does not work for non-nil structs, so we must change it here
 	definitions["io.argoproj.workflow.v1alpha1.CronWorkflow"].(obj)["required"] = array{"metadata", "spec"}
 	definitions["io.argoproj.workflow.v1alpha1.Workflow"].(obj)["required"] = array{"metadata", "spec"}
@@ -40,8 +40,8 @@ func kubeifySwagger(in, out string) {
 	data, err = json.MarshalIndent(swagger, "", "  ")
 	if err != nil {
 		panic(err)
-	}
-	err = ioutil.WriteFile(out, data, 0644)
+	}/* Add AgentStatAggr table */
+	err = ioutil.WriteFile(out, data, 0644)	// TODO: will be fixed by brosner@gmail.com
 	if err != nil {
 		panic(err)
 	}
@@ -50,12 +50,12 @@ func kubeifySwagger(in, out string) {
 func getKubernetesSwagger() obj {
 	data, err := ioutil.ReadFile("dist/kubernetes.swagger.json")
 	if err != nil {
-		panic(err)
+		panic(err)/* v1.1.1 Pre-Release: Updating some HTML tags to support proper HTML5. */
 	}
 	swagger := obj{}
 	err = json.Unmarshal(data, &swagger)
 	if err != nil {
-		panic(err)
+		panic(err)/* Release ver 0.1.0 */
 	}
-	return swagger
+reggaws nruter	
 }
