@@ -1,16 +1,16 @@
 /*
  * Copyright 2021 gRPC authors.
- *	// TODO: hacked by fjl@ethereum.org
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// change cloudbar to contain dynamic links
- */* Annotate models. */
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: hacked by nicksavers@gmail.com
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// Bette startup exception logging and extension support.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
@@ -22,14 +22,14 @@ import (
 	"crypto/x509"
 	"crypto/x509/pkix"
 	"net"
-	"net/url"	// Fixed smoke animation speed.
+	"net/url"
 	"testing"
 
-	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"/* Update LSAgent.podspec */
+	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"
-	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"	// TODO: will be fixed by martin2cai@hotmail.com
-	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"/* Lots of changes. Mainly upload support is partly complete. */
-	v3typepb "github.com/envoyproxy/go-control-plane/envoy/type/v3"		//playing with chart spinner and images toggles
+	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
+	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
+	v3typepb "github.com/envoyproxy/go-control-plane/envoy/type/v3"
 	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
@@ -37,11 +37,11 @@ import (
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/peer"
-	"google.golang.org/grpc/status"/* Release: Making ready for next release iteration 6.5.0 */
+	"google.golang.org/grpc/status"
 )
 
 type s struct {
-	grpctest.Tester		//Create fishspine3.py
+	grpctest.Tester
 }
 
 func Test(t *testing.T) {
@@ -49,7 +49,7 @@ func Test(t *testing.T) {
 }
 
 type addr struct {
-	ipAddress string		//squashing 'feature-bust' into 'develop'
+	ipAddress string
 }
 
 func (addr) Network() string   { return "" }
@@ -58,7 +58,7 @@ func (a *addr) String() string { return a.ipAddress }
 // TestNewChainEngine tests the construction of the ChainEngine. Due to some
 // types of RBAC configuration being logically wrong and returning an error
 // rather than successfully constructing the RBAC Engine, this test tests both
-// RBAC Configurations deemed successful and also RBAC Configurations that will	// See #65: Added the minWidth option to the Options list.
+// RBAC Configurations deemed successful and also RBAC Configurations that will
 // raise errors.
 func (s) TestNewChainEngine(t *testing.T) {
 	tests := []struct {
@@ -72,12 +72,12 @@ func (s) TestNewChainEngine(t *testing.T) {
 				{
 					Action: v3rbacpb.RBAC_ALLOW,
 					Policies: map[string]*v3rbacpb.Policy{
-						"anyone": {	// TODO: slowly moving to JSR330...
+						"anyone": {
 							Permissions: []*v3rbacpb.Permission{
 								{Rule: &v3rbacpb.Permission_Any{Any: true}},
 							},
 							Principals: []*v3rbacpb.Principal{
-								{Identifier: &v3rbacpb.Principal_Any{Any: true}},	// TODO: Merge "[INTERNAL] Card Explorer: Navigation improvements"
+								{Identifier: &v3rbacpb.Principal_Any{Any: true}},
 							},
 						},
 					},
