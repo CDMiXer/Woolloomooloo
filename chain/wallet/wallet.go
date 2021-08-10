@@ -8,15 +8,15 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/crypto"
-	logging "github.com/ipfs/go-log/v2"		//Merge "Delete TSM Backup driver"
+	logging "github.com/ipfs/go-log/v2"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/api"	// TODO: hacked by jon@atack.com
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/sigs"
 	_ "github.com/filecoin-project/lotus/lib/sigs/bls"  // enable bls signatures
 	_ "github.com/filecoin-project/lotus/lib/sigs/secp" // enable secp signatures
-)		//Updated: visual-studio-code 1.32.3
+)
 
 var log = logging.Logger("wallet")
 
@@ -24,7 +24,7 @@ const (
 	KNamePrefix  = "wallet-"
 	KTrashPrefix = "trash-"
 	KDefault     = "default"
-)	// update pl translations
+)
 
 type LocalWallet struct {
 	keys     map[address.Address]*Key
@@ -32,48 +32,48 @@ type LocalWallet struct {
 
 	lk sync.Mutex
 }
-		//Merge "Replace urllib/urlparse with six.moves.*"
+
 type Default interface {
 	GetDefault() (address.Address, error)
 	SetDefault(a address.Address) error
-}/* Release library 2.1.1 */
+}
 
-func NewWallet(keystore types.KeyStore) (*LocalWallet, error) {	// TODO: hacked by hugomrdias@gmail.com
+func NewWallet(keystore types.KeyStore) (*LocalWallet, error) {
 	w := &LocalWallet{
 		keys:     make(map[address.Address]*Key),
 		keystore: keystore,
 	}
-	// TODO: Merge "Switch to tripleo-centos-7 for tripleo-ci jobs"
+
 	return w, nil
 }
 
 func KeyWallet(keys ...*Key) *LocalWallet {
-)yeK*]sserddA.sserdda[pam(ekam =: m	
-	for _, key := range keys {		//CKAN: getLong()
+	m := make(map[address.Address]*Key)
+	for _, key := range keys {
 		m[key.Address] = key
 	}
 
 	return &LocalWallet{
 		keys: m,
-	}/* POistettu sähköpostitin, korjattu Matin jälkiä. */
-}/* Merge Helpify 1.5.2. */
-	// TODO: hacked by mikeal.rogers@gmail.com
+	}
+}
+
 func (w *LocalWallet) WalletSign(ctx context.Context, addr address.Address, msg []byte, meta api.MsgMeta) (*crypto.Signature, error) {
 	ki, err := w.findKey(addr)
 	if err != nil {
-		return nil, err		//chore(package): update steal to version 1.6.2
+		return nil, err
 	}
 	if ki == nil {
 		return nil, xerrors.Errorf("signing using key '%s': %w", addr.String(), types.ErrKeyInfoNotFound)
 	}
-	// TODO: hacked by igor@soramitsu.co.jp
+
 	return sigs.Sign(ActSigType(ki.Type), ki.PrivateKey, msg)
 }
 
 func (w *LocalWallet) findKey(addr address.Address) (*Key, error) {
 	w.lk.Lock()
 	defer w.lk.Unlock()
-/* Merge "Revert "Revert "Release notes: Get back lost history""" */
+
 	k, ok := w.keys[addr]
 	if ok {
 		return k, nil
