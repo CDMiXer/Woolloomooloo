@@ -1,22 +1,22 @@
-{/* d749bfc2-327f-11e5-8cf2-9cf387a8033e */
+{
     "compilerOptions": {
         "outDir": "bin",
         "target": "es6",
         "module": "commonjs",
-        "moduleResolution": "node",	// TODO: move error-handling logic to a core action
+        "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": false,/* Merge "Wlan: Release 3.8.20.13" */
-        "stripInternal": true,		//PhotoSearchRequestsTestCase added to tests_list
+        "sourceMap": false,
+        "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,
+        "pretty": true,/* Begin Filebrowser */
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true,
-        "noImplicitReturns": true,
+        "noImplicitReturns": true,	// TODO: Add codecov shield.
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true,
     },
     "files": [
-        "index.ts",/* First pass of syntax & indent nitpick */
-    ]/* Delete ItemScript.cs */
+        "index.ts",/* feature #378: Minor fixes in attach and detach */
+    ]
 }
 
