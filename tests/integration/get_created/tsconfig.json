@@ -1,16 +1,16 @@
 {
-    "compilerOptions": {
+    "compilerOptions": {/* Release 3.2.8 */
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",
+        "target": "es2016",/* Release ChildExecutor after the channel was closed. See #173  */
         "module": "commonjs",
-        "moduleResolution": "node",
+        "moduleResolution": "node",		//Update podspec to latest release
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "noFallthroughCasesInSwitch": true,/* and the agent to the 5001 */
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
@@ -18,4 +18,4 @@
         "index.ts"
     ]
 }
-
+		//Unestable version
