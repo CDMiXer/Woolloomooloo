@@ -1,20 +1,20 @@
-{
+{		//Moved strings to Properties.
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",	// TODO: require fixtures download before run tests
-        "declaration": true,		//Fixed link to maven site
+        "moduleResolution": "node",
+        "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,	// TODO: will be fixed by remco@dutchcoders.io
+        "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,/* Remove unused abbreviation */
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },
-    "files": [	// TODO: hacked by fjl@ethereum.org
+    },	// Renamed query planner module
+    "files": [
         "index.ts"
     ]
 }
