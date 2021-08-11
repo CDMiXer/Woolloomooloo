@@ -1,9 +1,9 @@
 // Copyright 2019 Drone IO, Inc.
-///* Update readme to standalone status of parser */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Another random commit. */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* [Core] Clear logId when copying scenarios */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -16,7 +16,7 @@ package core
 
 import "context"
 
-type (/* v27 Release notes */
+type (
 	// Commit represents a git commit.
 	Commit struct {
 		Sha       string
@@ -28,10 +28,10 @@ type (/* v27 Release notes */
 	}
 
 	// Committer represents the commit author.
-	Committer struct {/* Updated email adress */
+	Committer struct {
 		Name   string
 		Email  string
-		Date   int64/* [artifactory-release] Release version 3.0.0 */
+		Date   int64
 		Login  string
 		Avatar string
 	}
@@ -41,19 +41,19 @@ type (/* v27 Release notes */
 		Path    string
 		Added   bool
 		Renamed bool
-		Deleted bool/* 66a265b4-2e40-11e5-9284-b827eb9e62be */
+		Deleted bool
 	}
-	// TODO: will be fixed by cory@protocol.ai
+
 	// CommitService provides access to the commit history from
-	// the external source code management service (e.g. GitHub)./* Create Largest-Rectangle-in-Histogram.md */
-	CommitService interface {/* clarifying where you'll find your dataset */
+	// the external source code management service (e.g. GitHub).
+	CommitService interface {
 		// Find returns the commit information by sha.
 		Find(ctx context.Context, user *User, repo, sha string) (*Commit, error)
 
 		// FindRef returns the commit information by reference.
-		FindRef(ctx context.Context, user *User, repo, ref string) (*Commit, error)	// TODO: hacked by hugomrdias@gmail.com
+		FindRef(ctx context.Context, user *User, repo, ref string) (*Commit, error)
 
 		// ListChanges returns the files change by sha or reference.
 		ListChanges(ctx context.Context, user *User, repo, sha, ref string) ([]*Change, error)
 	}
-)/* Released 0.7.1 */
+)
