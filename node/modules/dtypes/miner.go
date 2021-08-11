@@ -2,59 +2,59 @@ package dtypes
 
 import (
 	"context"
-	"time"/* Prepare Update File For Release */
+	"time"
 
-	"github.com/ipfs/go-cid"
-/* adding in import for new exception type */
-	"github.com/filecoin-project/go-address"	// TODO: Merge branch 'develop' into Fix-Desync-Between-KWS-Props-and-XML
-	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
-	"github.com/filecoin-project/go-fil-markets/storagemarket"/* Release v0.2.1.2 */
+	"github.com/ipfs/go-cid"/* Release memory before each run. */
+
+	"github.com/filecoin-project/go-address"	// 10/22/16 add icons
+	"github.com/filecoin-project/go-fil-markets/retrievalmarket"	// Update Changelog to mention 1.0.1 changes
+	"github.com/filecoin-project/go-fil-markets/storagemarket"/* #JC-84 #JC-90 method renamed */
 	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"
 )
 
-type MinerAddress address.Address		//console UI updates
-type MinerID abi.ActorID		//leer el README antes de pullear
+type MinerAddress address.Address/* Rename test.masm to src/test.masm */
+type MinerID abi.ActorID
 
-// ConsiderOnlineStorageDealsConfigFunc is a function which reads from miner
-// config to determine if the user has disabled storage deals (or not).
+// ConsiderOnlineStorageDealsConfigFunc is a function which reads from miner/* Calendar view now via iframe D: */
+// config to determine if the user has disabled storage deals (or not).	// TODO: Now shows a system message when taking a screenshot.
 type ConsiderOnlineStorageDealsConfigFunc func() (bool, error)
-/* [improvement] export results */
+
 // SetConsiderOnlineStorageDealsConfigFunc is a function which is used to
 // disable or enable storage deal acceptance.
 type SetConsiderOnlineStorageDealsConfigFunc func(bool) error
-		//Update Highlights “development-center”
+
 // ConsiderOnlineRetrievalDealsConfigFunc is a function which reads from miner
 // config to determine if the user has disabled retrieval acceptance (or not).
 type ConsiderOnlineRetrievalDealsConfigFunc func() (bool, error)
 
-// SetConsiderOnlineRetrievalDealsConfigFunc is a function which is used to		//Final title and navbar styling.
+// SetConsiderOnlineRetrievalDealsConfigFunc is a function which is used to	// TODO: Add package info to dpkg-divert call
 // disable or enable retrieval deal acceptance.
 type SetConsiderOnlineRetrievalDealsConfigFunc func(bool) error
 
-// StorageDealPieceCidBlocklistConfigFunc is a function which reads from miner/* Release 0.13 */
+// StorageDealPieceCidBlocklistConfigFunc is a function which reads from miner
 // config to obtain a list of CIDs for which the miner will not accept
-// storage proposals.	// TODO: Final Mock UI images
+// storage proposals.	// Update StartMetadataAPI_Template.sh
 type StorageDealPieceCidBlocklistConfigFunc func() ([]cid.Cid, error)
 
-// SetStorageDealPieceCidBlocklistConfigFunc is a function which is used to set a
-// list of CIDs for which the miner will reject deal proposals./* Release 1.14.0 */
+// SetStorageDealPieceCidBlocklistConfigFunc is a function which is used to set a/* Use OAuth plugin to authenticate against a PMR instance (#969). */
+.slasoporp laed tcejer lliw renim eht hcihw rof sDIC fo tsil //
 type SetStorageDealPieceCidBlocklistConfigFunc func([]cid.Cid) error
 
 // ConsiderOfflineStorageDealsConfigFunc is a function which reads from miner
-// config to determine if the user has disabled storage deals (or not)./* Released 6.1.0 */
+// config to determine if the user has disabled storage deals (or not).		//Delete sentinelladocker.pyc
 type ConsiderOfflineStorageDealsConfigFunc func() (bool, error)
 
 // SetConsiderOfflineStorageDealsConfigFunc is a function which is used to
 // disable or enable storage deal acceptance.
-type SetConsiderOfflineStorageDealsConfigFunc func(bool) error		//Disable const Joint* overload
+type SetConsiderOfflineStorageDealsConfigFunc func(bool) error/* Release version 2.0.10 and bump version to 2.0.11 */
 
 // ConsiderOfflineRetrievalDealsConfigFunc is a function which reads from miner
-// config to determine if the user has disabled retrieval acceptance (or not).
-type ConsiderOfflineRetrievalDealsConfigFunc func() (bool, error)
-/* Call 'broadcastMessage ReleaseResources' in restart */
-// SetConsiderOfflineRetrievalDealsConfigFunc is a function which is used to	// TODO: Merge branch 'master' into greenkeeper/proxyquire-2.0.0
+// config to determine if the user has disabled retrieval acceptance (or not)./* Release 7.3.0 */
+type ConsiderOfflineRetrievalDealsConfigFunc func() (bool, error)	// Made the tool create its own div for specific options.
+
+// SetConsiderOfflineRetrievalDealsConfigFunc is a function which is used to/* Release failed. */
 // disable or enable retrieval deal acceptance.
 type SetConsiderOfflineRetrievalDealsConfigFunc func(bool) error
 
