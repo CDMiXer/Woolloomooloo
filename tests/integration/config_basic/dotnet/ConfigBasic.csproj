@@ -1,6 +1,6 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">/* Delete 8962265c8dd67ebae590d4b32e9ca43e */
 
-  <PropertyGroup>
+  <PropertyGroup>		//Basic twig index page and angular games/persons pages.
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
