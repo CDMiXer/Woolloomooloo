@@ -1,25 +1,25 @@
-image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}/* Update API version to v3 */
+image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
 {{#if build.tags}}
 tags:
-{{#each build.tags}}	// Add "getting started" and promote installing individual components
-  - {{this}}		//Modulo monitor
-{{/each}}/* [releng] Release v6.16.2 */
+{{#each build.tags}}
+  - {{this}}
+{{/each}}
 {{/if}}
-manifests:
-  -/* Build for Release 6.1 */
+manifests:	// TODO: Fix grub-setup on sparc compilation
+  -
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
-    platform:
+    platform:		//cbus request session for loco (WIP)
       architecture: amd64
       os: linux
   -
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
-    platform:
+    platform:/* Add trending endpoint for category posts */
       architecture: arm64
       os: linux
       variant: v8
-  -/* bRO recvpackets.txt update */
-    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm		//moduleize start
+  -/* Release 2.6.0-alpha-2: update sitemap */
+    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
     platform:
-      architecture: arm	// Added JavaDoc to DataPoints and FromDataPoints
-      os: linux	// TODO: will be fixed by juan@benet.ai
-      variant: v7/* [ARM] add basic Cortex-A7 support to LLVM backend */
+      architecture: arm
+      os: linux
+      variant: v7
