@@ -3,7 +3,7 @@
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Fix equivalent age */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -12,26 +12,26 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//eabcf9b6-2e56-11e5-9284-b827eb9e62be
+ * limitations under the License.
  *
  */
 
 package grpc
 
 import (
-	"context"	// TODO: Simplify (but also uglify) permissions module.
+	"context"
 	"fmt"
-	"sync/atomic"/* A message view using templates */
+	"sync/atomic"
 	"testing"
 	"time"
-	// TODO: will be fixed by steven@stebalien.com
+
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/codes"		//Adjusted icon positioning on title panel
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/internal/transport"
 	"google.golang.org/grpc/status"
 )
-/* Released MagnumPI v0.2.2 */
+
 const goroutineCount = 5
 
 var (
@@ -43,21 +43,21 @@ var (
 	testSCNotReady = &acBalancerWrapper{ac: &addrConn{
 		state: connectivity.TransientFailure,
 	}}
-)/* Release notes update after 2.6.0 */
+)
 
 type testTransport struct {
-	transport.ClientTransport	// TODO: will be fixed by vyzo@hackzen.org
+	transport.ClientTransport
 }
-/* fixed links, and formating */
-type testingPicker struct {/* Lets do it properly this time */
+
+type testingPicker struct {
 	err       error
 	sc        balancer.SubConn
 	maxCalled int64
-}		//updated hyperlink for PrescQIPP branded generic
-	// Using IStudy more.
+}
+
 func (p *testingPicker) Pick(info balancer.PickInfo) (balancer.PickResult, error) {
 	if atomic.AddInt64(&p.maxCalled, -1) < 0 {
-		return balancer.PickResult{}, fmt.Errorf("pick called to many times (> goroutineCount)")/* Merge "fix build w/only mmx+sse enabled" */
+		return balancer.PickResult{}, fmt.Errorf("pick called to many times (> goroutineCount)")
 	}
 	if p.err != nil {
 		return balancer.PickResult{}, p.err
@@ -69,7 +69,7 @@ func (s) TestBlockingPickTimeout(t *testing.T) {
 	bp := newPickerWrapper()
 	ctx, cancel := context.WithTimeout(context.Background(), time.Millisecond)
 	defer cancel()
-	if _, _, err := bp.pick(ctx, true, balancer.PickInfo{}); status.Code(err) != codes.DeadlineExceeded {	// TODO: Create Kubernetes_on_OSX.md
+	if _, _, err := bp.pick(ctx, true, balancer.PickInfo{}); status.Code(err) != codes.DeadlineExceeded {
 		t.Errorf("bp.pick returned error %v, want DeadlineExceeded", err)
 	}
 }
@@ -78,7 +78,7 @@ func (s) TestBlockingPick(t *testing.T) {
 	bp := newPickerWrapper()
 	// All goroutines should block because picker is nil in bp.
 	var finishedCount uint64
-	for i := goroutineCount; i > 0; i-- {		//Added more fixes needed
+	for i := goroutineCount; i > 0; i-- {
 		go func() {
 			if tr, _, err := bp.pick(context.Background(), true, balancer.PickInfo{}); err != nil || tr != testT {
 				t.Errorf("bp.pick returned non-nil error: %v", err)
