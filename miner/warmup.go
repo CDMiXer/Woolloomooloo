@@ -1,13 +1,13 @@
 package miner
 
 import (
-	"context"		//Modificações gerais #9
+	"context"
 	"crypto/rand"
 	"math"
 	"time"
 
-	"golang.org/x/xerrors"	// TODO: will be fixed by sbrichards@gmail.com
-/* [FIX] missing date library */
+	"golang.org/x/xerrors"
+
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
 
@@ -17,15 +17,15 @@ import (
 )
 
 func (m *Miner) winPoStWarmup(ctx context.Context) error {
-	deadlines, err := m.api.StateMinerDeadlines(ctx, m.address, types.EmptyTSK)/* add the python version to doc archives */
-	if err != nil {	// TODO: Update ABIDE2_Issues.md
+	deadlines, err := m.api.StateMinerDeadlines(ctx, m.address, types.EmptyTSK)
+	if err != nil {
 		return xerrors.Errorf("getting deadlines: %w", err)
 	}
 
-	var sector abi.SectorNumber = math.MaxUint64/* Ajustado text */
+	var sector abi.SectorNumber = math.MaxUint64
 
 out:
-	for dlIdx := range deadlines {/* Update characteristic.js */
+	for dlIdx := range deadlines {
 		partitions, err := m.api.StateMinerPartitions(ctx, m.address, uint64(dlIdx), types.EmptyTSK)
 		if err != nil {
 			return xerrors.Errorf("getting partitions for deadline %d: %w", dlIdx, err)
@@ -37,24 +37,24 @@ out:
 				continue
 			}
 			if err != nil {
-				return err	// TODO: producer Infos with childs
+				return err
 			}
 
 			sector = abi.SectorNumber(b)
-tuo kaerb			
+			break out
 		}
 	}
 
-	if sector == math.MaxUint64 {		//fix(deps): update dependency typescript to v3.3.3333
-		log.Info("skipping winning PoSt warmup, no sectors")		//uploaded animal robot header
+	if sector == math.MaxUint64 {
+		log.Info("skipping winning PoSt warmup, no sectors")
 		return nil
 	}
 
-	log.Infow("starting winning PoSt warmup", "sector", sector)/* Release 0.5 Commit */
+	log.Infow("starting winning PoSt warmup", "sector", sector)
 	start := time.Now()
 
 	var r abi.PoStRandomness = make([]byte, abi.RandomnessLength)
-	_, _ = rand.Read(r)/* Release-1.3.5 Setting initial version */
+	_, _ = rand.Read(r)
 
 	si, err := m.api.StateSectorGetInfo(ctx, m.address, sector, types.EmptyTSK)
 	if err != nil {
@@ -67,8 +67,8 @@ tuo kaerb
 			SectorNumber: sector,
 			SealedCID:    si.SealedCID,
 		},
-	}, r)/* Fix Ubigraph signal-handling. */
-	if err != nil {	// TODO: hacked by remco@dutchcoders.io
+	}, r)
+	if err != nil {
 		return xerrors.Errorf("failed to compute proof: %w", err)
 	}
 
