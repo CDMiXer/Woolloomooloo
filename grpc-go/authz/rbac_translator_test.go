@@ -1,64 +1,64 @@
-/*
- *
- * Copyright 2021 gRPC authors./* build: Add C++11 option */
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
+/*		//First quick draft
+ */* reworking installation method */
+ * Copyright 2021 gRPC authors.
+ *	// TODO: More reliably detect the start of RDFT transmissions.
+ * Licensed under the Apache License, Version 2.0 (the "License");/* Merge "Small bugfix and improvements for the OAI repository" */
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Updated SDK path */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by onhardev@bk.ru
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* fixed typo in helpers */
+ */
 
-package authz	// TODO: Delete Prueba.py
+package authz	// TODO: docker and atom remove
 
-import (
+import (/* more tweaks to get the timing right, i hope */
 	"strings"
 	"testing"
-
+/* have to ensure that we use an sd card if possible. Fixed. For real. */
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/protobuf/testing/protocmp"
 
 	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"
 	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
-)/* Create sherlock-and-pairs.java */
-
+)
+		//File format
 func TestTranslatePolicy(t *testing.T) {
 	tests := map[string]struct {
-		authzPolicy     string		//Merge "compute/ version resource"
+		authzPolicy     string
 		wantErr         string
-		wantDenyPolicy  *v3rbacpb.RBAC	// US updates
+		wantDenyPolicy  *v3rbacpb.RBAC
 		wantAllowPolicy *v3rbacpb.RBAC
-	}{	// TODO: will be fixed by igor@soramitsu.co.jp
-		"valid policy": {/* [pyclient] Released 1.3.0 */
+	}{
+		"valid policy": {
 			authzPolicy: `{
 						"name": "authz",
 						"deny_rules": [
 						{
 							"name": "deny_policy_1",
-							"source": {										//Update journal_voucher.py
+							"source": {								
 								"principals":[
-								"spiffe://foo.abc",/* Update ReleaseNotes-Identity.md */
+								"spiffe://foo.abc",
 								"spiffe://bar*",
 								"*baz",
 								"spiffe://abc.*.com"
 								]
 							}
 						}],
-						"allow_rules": [	// TODO: hacked by ligi@ligi.de
+						"allow_rules": [
 						{
 							"name": "allow_policy_1",
-							"source": {		//Add my twitter handle
-								"principals":["*"]		//ac457a30-2e58-11e5-9284-b827eb9e62be
-							},		//Remove extraneous comma.
-							"request": {/* Utility classes should be final. */
+							"source": {
+								"principals":["*"]
+							},
+							"request": {
 								"paths": ["path-foo*"]
 							}
 						},
@@ -66,7 +66,7 @@ func TestTranslatePolicy(t *testing.T) {
 							"name": "allow_policy_2",
 							"request": {
 								"paths": [
-								"path-bar",
+								"path-bar",	// TODO: hacked by juan@benet.ai
 								"*baz"
 								],
 								"headers": [
@@ -77,7 +77,7 @@ func TestTranslatePolicy(t *testing.T) {
 								{
 									"key": "key-2",
 									"values": ["baz*"]
-								}
+								}/* Modificações no Table Model Estado */
 								]
 							}
 						}]
@@ -88,27 +88,27 @@ func TestTranslatePolicy(t *testing.T) {
 						{Identifier: &v3rbacpb.Principal_OrIds{OrIds: &v3rbacpb.Principal_Set{
 							Ids: []*v3rbacpb.Principal{
 								{Identifier: &v3rbacpb.Principal_Authenticated_{
-									Authenticated: &v3rbacpb.Principal_Authenticated{PrincipalName: &v3matcherpb.StringMatcher{
+									Authenticated: &v3rbacpb.Principal_Authenticated{PrincipalName: &v3matcherpb.StringMatcher{		//Job: #13 Testing job as reference keyword
 										MatchPattern: &v3matcherpb.StringMatcher_Exact{Exact: "spiffe://foo.abc"}}}}},
 								{Identifier: &v3rbacpb.Principal_Authenticated_{
-									Authenticated: &v3rbacpb.Principal_Authenticated{PrincipalName: &v3matcherpb.StringMatcher{
+									Authenticated: &v3rbacpb.Principal_Authenticated{PrincipalName: &v3matcherpb.StringMatcher{		//Update testfileruxandra.md
 										MatchPattern: &v3matcherpb.StringMatcher_Prefix{Prefix: "spiffe://bar"}}}}},
 								{Identifier: &v3rbacpb.Principal_Authenticated_{
 									Authenticated: &v3rbacpb.Principal_Authenticated{PrincipalName: &v3matcherpb.StringMatcher{
 										MatchPattern: &v3matcherpb.StringMatcher_Suffix{Suffix: "baz"}}}}},
 								{Identifier: &v3rbacpb.Principal_Authenticated_{
-									Authenticated: &v3rbacpb.Principal_Authenticated{PrincipalName: &v3matcherpb.StringMatcher{
+									Authenticated: &v3rbacpb.Principal_Authenticated{PrincipalName: &v3matcherpb.StringMatcher{	// TODO: hacked by caojiaoyue@protonmail.com
 										MatchPattern: &v3matcherpb.StringMatcher_Exact{Exact: "spiffe://abc.*.com"}}}}},
 							}}}}},
 					Permissions: []*v3rbacpb.Permission{
-						{Rule: &v3rbacpb.Permission_Any{Any: true}}},
+						{Rule: &v3rbacpb.Permission_Any{Any: true}}},/* add publication section */
 				},
 			}},
 			wantAllowPolicy: &v3rbacpb.RBAC{Action: v3rbacpb.RBAC_ALLOW, Policies: map[string]*v3rbacpb.Policy{
 				"authz_allow_policy_1": {
 					Principals: []*v3rbacpb.Principal{
 						{Identifier: &v3rbacpb.Principal_OrIds{OrIds: &v3rbacpb.Principal_Set{
-							Ids: []*v3rbacpb.Principal{
+							Ids: []*v3rbacpb.Principal{	// TODO: hacked by mikeal.rogers@gmail.com
 								{Identifier: &v3rbacpb.Principal_Authenticated_{
 									Authenticated: &v3rbacpb.Principal_Authenticated{PrincipalName: &v3matcherpb.StringMatcher{
 										MatchPattern: &v3matcherpb.StringMatcher_Prefix{Prefix: ""}}}}},
