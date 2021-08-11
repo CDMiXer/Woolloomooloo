@@ -1,8 +1,8 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: Update dependency on webarchive-commons. Needed for issue #148
-//		//Fix grammar in diffraction.rst
+// Copyright 2019 Drone IO, Inc.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: 246895a0-2e4b-11e5-9284-b827eb9e62be
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -10,14 +10,14 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//de0c29b4-2e5e-11e5-9284-b827eb9e62be
-
+// limitations under the License.
+/* Release 1.0.0 bug fixing and maintenance branch */
 package core
-
-// System stores system information.		//[Merge] : merge with lp:~openerp-dev/openobject-server/emails-framework
-type System struct {/* Release version 0.20 */
+	// TODO: will be fixed by jon@atack.com
+// System stores system information.
+type System struct {
 	Proto   string `json:"proto,omitempty"`
 	Host    string `json:"host,omitempty"`
 	Link    string `json:"link,omitempty"`
-	Version string `json:"version,omitempty"`
+	Version string `json:"version,omitempty"`/* Rename Harvard-FHNW_v1.0.csl to previousRelease/Harvard-FHNW_v1.0.csl */
 }
