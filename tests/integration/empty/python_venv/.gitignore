@@ -1,5 +1,5 @@
-*.pyc
-/.pulumi/
-/dist//* ok, it's not markdown :) */
-/*.egg-info
-venv/		//Delete ColorBasics.h
+*.pyc/* Fixed gradle and maven dependencies */
+/.pulumi/		//Revert changes to test.js
+/dist/
+/*.egg-info/* Release version 0.5.1 of the npm package. */
+venv/
