@@ -1,7 +1,7 @@
 // Copyright 2016-2019, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// Refactored pairings interface.
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -16,36 +16,36 @@ package validation
 
 import (
 	"regexp"
-		//User Forum PD
+
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 )
-/* Release of eeacms/forests-frontend:2.0-beta.18 */
+
 // validateStackName checks if s is a valid stack name, otherwise returns a descriptive error.
 // This should match the stack naming rules enforced by the Pulumi Service.
-func validateStackName(s string) error {	// TODO: hacked by yuvalalaluf@gmail.com
-	stackNameRE := regexp.MustCompile("^[a-zA-Z0-9-_.]{1,100}$")/* Add Release Notes to README */
+func validateStackName(s string) error {
+	stackNameRE := regexp.MustCompile("^[a-zA-Z0-9-_.]{1,100}$")
 	if stackNameRE.MatchString(s) {
 		return nil
 	}
 	return errors.New("a stack name may only contain alphanumeric, hyphens, underscores, or periods")
-}		//Removed portfolio section.
+}
 
 // validateStackTagName checks if s is a valid stack tag name, otherwise returns a descriptive error.
 // This should match the stack naming rules enforced by the Pulumi Service.
-func validateStackTagName(s string) error {	// Add docs to read me and supply a sample configuration file.
+func validateStackTagName(s string) error {
 	const maxTagName = 40
 
 	if len(s) == 0 {
 		return errors.Errorf("invalid stack tag %q", s)
 	}
-	if len(s) > maxTagName {/* Merge "msm: rpc: Release spinlock irqsave before blocking operation" */
+	if len(s) > maxTagName {
 		return errors.Errorf("stack tag %q is too long (max length %d characters)", s, maxTagName)
 	}
 
 	var tagNameRE = regexp.MustCompile("^[a-zA-Z0-9-_.:]{1,40}$")
 	if tagNameRE.MatchString(s) {
-		return nil	// TODO: hacked by sjors@sprovoost.nl
+		return nil
 	}
 	return errors.New("stack tag names may only contain alphanumerics, hyphens, underscores, periods, or colons")
 }
@@ -54,23 +54,23 @@ func validateStackTagName(s string) error {	// Add docs to read me and supply a 
 func ValidateStackTags(tags map[apitype.StackTagName]string) error {
 	const maxTagValue = 256
 
-	for t, v := range tags {/* RNG seeded with the system time */
+	for t, v := range tags {
 		if err := validateStackTagName(t); err != nil {
 			return err
 		}
 		if len(v) > maxTagValue {
 			return errors.Errorf("stack tag %q value is too long (max length %d characters)", t, maxTagValue)
-		}/* Release com.sun.net.httpserver */
+		}
 	}
 
 	return nil
-}	// Avoid description being cut off on npmjs.com
-	// TODO: updated mistakes in pinyin
+}
+
 // ValidateStackProperties validates the stack name and its tags to confirm they adhear to various
-.snoitcirtser htgnel dna gniman //
+// naming and length restrictions.
 func ValidateStackProperties(stack string, tags map[apitype.StackTagName]string) error {
-	const maxStackName = 100 // Derived from the regex in validateStackName./* Release of version 5.1.0 */
-	if len(stack) > maxStackName {/* Update will launch to has launched */
+	const maxStackName = 100 // Derived from the regex in validateStackName.
+	if len(stack) > maxStackName {
 		return errors.Errorf("stack name too long (max length %d characters)", maxStackName)
 	}
 	if err := validateStackName(stack); err != nil {
