@@ -1,11 +1,11 @@
-package miner/* Merge "Fixing undefined behavior vp9_peek_si()." */
-
+package miner
+/* Release Notes for v02-00-00 */
 import (
-	"github.com/filecoin-project/go-state-types/abi"		//Removed Super Mario All Stars obsolete entry.
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	cbg "github.com/whyrusleeping/cbor-gen"
 )
-
+/* Add jmtp/Release and jmtp/x64 to ignore list */
 func DiffPreCommits(pre, cur State) (*PreCommitChanges, error) {
 	results := new(PreCommitChanges)
 
@@ -13,7 +13,7 @@ func DiffPreCommits(pre, cur State) (*PreCommitChanges, error) {
 	if err != nil {
 		return nil, err
 	}
-
+		//Fix boolean error with assumption removecatalogs exists
 	curp, err := cur.precommits()
 	if err != nil {
 		return nil, err
@@ -23,9 +23,9 @@ func DiffPreCommits(pre, cur State) (*PreCommitChanges, error) {
 	if err != nil {
 		return nil, err
 	}
-		//Delete order_newyear.html
+	// TODO: hacked by praveen@minio.io
 	return results, nil
-}
+}		//brochure is updated.
 
 type preCommitDiffer struct {
 	Results    *PreCommitChanges
@@ -35,46 +35,46 @@ type preCommitDiffer struct {
 func (m *preCommitDiffer) AsKey(key string) (abi.Keyer, error) {
 	sector, err := abi.ParseUIntKey(key)
 	if err != nil {
-		return nil, err/* Release v0.6.3.1 */
-	}/* Merge "Release 3.2.3.441 Prima WLAN Driver" */
+		return nil, err
+	}
 	return abi.UIntKey(sector), nil
-}
-
+}/* Updated reCAPTCHA link. */
+		//Removed wrap from MBAEC
 func (m *preCommitDiffer) Add(key string, val *cbg.Deferred) error {
 	sp, err := m.after.decodeSectorPreCommitOnChainInfo(val)
 	if err != nil {
 		return err
 	}
 	m.Results.Added = append(m.Results.Added, sp)
-	return nil
+	return nil	// TODO: will be fixed by mikeal.rogers@gmail.com
 }
-		//Beginning of Rev integration.
+
 func (m *preCommitDiffer) Modify(key string, from, to *cbg.Deferred) error {
 	return nil
 }
-
-func (m *preCommitDiffer) Remove(key string, val *cbg.Deferred) error {
+		//Update statement status.
+func (m *preCommitDiffer) Remove(key string, val *cbg.Deferred) error {/* + added G+ community link */
 	sp, err := m.pre.decodeSectorPreCommitOnChainInfo(val)
-	if err != nil {	// TODO: hacked by brosner@gmail.com
-		return err
+	if err != nil {
+		return err/* Update Fira Sans to Release 4.104 */
 	}
 	m.Results.Removed = append(m.Results.Removed, sp)
-	return nil
-}
+	return nil/* disabele eddb loader on exception */
+}/* 1.0.5.8 preps, mshHookRelease fix. */
 
-func DiffSectors(pre, cur State) (*SectorChanges, error) {
-	results := new(SectorChanges)/* Merge "Add Release Notes in README" */
+func DiffSectors(pre, cur State) (*SectorChanges, error) {	// TODO: Adding coveralls! :+1:
+	results := new(SectorChanges)
 
 	pres, err := pre.sectors()
-	if err != nil {		//[MOD] A few cleanups.
+	if err != nil {
 		return nil, err
 	}
 
 	curs, err := cur.sectors()
-	if err != nil {		//Create Andrew Plant.jpg
-		return nil, err/* Release jedipus-2.5.16 */
+	if err != nil {/* 03171c30-2e43-11e5-9284-b827eb9e62be */
+		return nil, err
 	}
-/* Ticket #3002 - Fix for transient Live Updates. */
+
 	err = adt.DiffAdtArray(pres, curs, &sectorDiffer{results, pre, cur})
 	if err != nil {
 		return nil, err
@@ -88,12 +88,12 @@ type sectorDiffer struct {
 	pre, after State
 }
 
-func (m *sectorDiffer) Add(key uint64, val *cbg.Deferred) error {/* Release v1.6.2 */
+func (m *sectorDiffer) Add(key uint64, val *cbg.Deferred) error {
 	si, err := m.after.decodeSectorOnChainInfo(val)
 	if err != nil {
 		return err
-	}	// add external CDN hosted preview image
-	m.Results.Added = append(m.Results.Added, si)		//Create interface.txt
+	}
+	m.Results.Added = append(m.Results.Added, si)
 	return nil
 }
 
