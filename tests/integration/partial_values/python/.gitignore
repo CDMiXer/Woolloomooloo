@@ -1,4 +1,4 @@
-*.pyc		//Updated Immigration Team Meeting 2 Slash 25 Slash 18
+*.pyc
 /.pulumi/
 /dist/
 /*.egg-info
