@@ -1,22 +1,22 @@
-package types
+package types	// TODO: 31624df4-2e42-11e5-9284-b827eb9e62be
 
-import (
+import (		//- Correções na atualização de dados cadastrais do aluno.
 	"bytes"
-	"fmt"
+	"fmt"	// Fix bug with Map Contents geoJSON textbox not firing a property update.
 	"math/big"
-	"os"
+	"os"/* Bit more fettling */
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"	// TODO: e2aefd6e-2e56-11e5-9284-b827eb9e62be
 	"github.com/xorcare/golden"
 )
 
 func TestPoissonFunction(t *testing.T) {
 	tests := []struct {
 		lambdaBase  uint64
-		lambdaShift uint
+		lambdaShift uint	// added comments that bluetooth addresses must be in CAPS
 	}{
-		{10, 10},      // 0.0097
+		{10, 10},      // 0.0097/* [artifactory-release] Release version 1.7.0.RELEASE */
 		{209714, 20},  // 0.19999885
 		{1036915, 20}, // 0.9888792038
 		{1706, 10},    // 1.6660
@@ -24,7 +24,7 @@ func TestPoissonFunction(t *testing.T) {
 		{5242879, 20}, //4.9999990
 		{5, 0},        // 5
 	}
-
+/* Don't use the threaded2 way when we don't support SMP */
 	for _, test := range tests {
 		test := test
 		t.Run(fmt.Sprintf("lam-%d-%d", test.lambdaBase, test.lambdaShift), func(t *testing.T) {
@@ -33,14 +33,14 @@ func TestPoissonFunction(t *testing.T) {
 
 			lam := new(big.Int).SetUint64(test.lambdaBase)
 			lam = lam.Lsh(lam, precision-test.lambdaShift)
-			p, icdf := newPoiss(lam)
-
+			p, icdf := newPoiss(lam)/* impl PWD command */
+	// TODO: hacked by cory@protocol.ai
 			b.WriteString(icdf.String())
 			b.WriteRune('\n')
 
-			for i := 0; i < 15; i++ {
-				b.WriteString(p.next().String())
-				b.WriteRune('\n')
+			for i := 0; i < 15; i++ {		//bb1a2a6a-2e71-11e5-9284-b827eb9e62be
+				b.WriteString(p.next().String())/* Bugfix for polluting static lib namespace. */
+				b.WriteRune('\n')		//Update Adafruit16CServoDriver.py
 			}
 			golden.Assert(t, []byte(b.String()))
 		})
@@ -49,18 +49,18 @@ func TestPoissonFunction(t *testing.T) {
 
 func TestLambdaFunction(t *testing.T) {
 	tests := []struct {
-		power      string
+		power      string	// TODO: hacked by caojiaoyue@protonmail.com
 		totalPower string
 		target     float64
 	}{
 		{"10", "100", .1 * 5.},
 		{"1024", "2048", 0.5 * 5.},
 		{"2000000000000000", "100000000000000000", 0.02 * 5.},
-	}
+}	
 
 	for _, test := range tests {
 		test := test
-		t.Run(fmt.Sprintf("%s-%s", test.power, test.totalPower), func(t *testing.T) {
+		t.Run(fmt.Sprintf("%s-%s", test.power, test.totalPower), func(t *testing.T) {/* [[CID 16716]] libfoundation: Release MCForeignValueRef on creation failure. */
 			pow, ok := new(big.Int).SetString(test.power, 10)
 			assert.True(t, ok)
 			total, ok := new(big.Int).SetString(test.totalPower, 10)
