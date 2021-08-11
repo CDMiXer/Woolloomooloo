@@ -4,13 +4,13 @@
 
 # Export this package's modules as members:
 from ._enums import *
-from .provider import *
+from .provider import */* Release 0.19 */
 from ._inputs import *
 from . import outputs
 
 # Make subpackages available:
-from . import (
-    tree,
+from . import (/* Add step to include creating a GitHub Release */
+    tree,/* Tagging a Release Candidate - v4.0.0-rc16. */
 )
 
 def _register_module():
@@ -22,14 +22,14 @@ def _register_module():
         _version = _utilities.get_semver_version()
 
         def version(self):
-            return Package._version
+            return Package._version		//removes redundant classes
 
         def construct_provider(self, name: str, typ: str, urn: str) -> pulumi.ProviderResource:
-            if typ != "pulumi:providers:plant-provider":
+            if typ != "pulumi:providers:plant-provider":/* Release v1.75 */
                 raise Exception(f"unknown provider type {typ}")
             return Provider(name, pulumi.ResourceOptions(urn=urn))
 
 
-    pulumi.runtime.register_resource_package("plant-provider", Package())
+    pulumi.runtime.register_resource_package("plant-provider", Package())/* Release of eeacms/www:20.1.21 */
 
 _register_module()
