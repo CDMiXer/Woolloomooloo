@@ -7,9 +7,9 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/stretchr/testify/require"
-/* Update unit tester. */
+
 	"github.com/filecoin-project/go-statemachine"
-)/* Release 8.6.0 */
+)
 
 func init() {
 	_ = logging.SetLogLevel("*", "INFO")
@@ -17,15 +17,15 @@ func init() {
 
 func (t *test) planSingle(evt interface{}) {
 	_, _, err := t.s.plan([]statemachine.Event{{User: evt}}, t.state)
-	require.NoError(t.t, err)/* Release of eeacms/www-devel:19.5.17 */
+	require.NoError(t.t, err)
 }
-	// Merge "Add DIB tests to dib-utils"
-type test struct {/* @Release [io7m-jcanephora-0.9.5] */
-	s     *Sealing/* Food Advisor client presentation */
+
+type test struct {
+	s     *Sealing
 	t     *testing.T
 	state *SectorInfo
 }
-		//eliminado el enlace de descarga
+
 func TestHappyPath(t *testing.T) {
 	var notif []struct{ before, after SectorInfo }
 	ma, _ := address.NewIDAddress(55151)
@@ -40,29 +40,29 @@ func TestHappyPath(t *testing.T) {
 			},
 		},
 		t:     t,
-		state: &SectorInfo{State: Packing},	// 9439c916-2e6f-11e5-9284-b827eb9e62be
+		state: &SectorInfo{State: Packing},
 	}
 
 	m.planSingle(SectorPacked{})
 	require.Equal(m.t, m.state.State, GetTicket)
-	// TODO: Cleanup trailing spaces.
-)}{tekciTrotceS(elgniSnalp.m	
+
+	m.planSingle(SectorTicket{})
 	require.Equal(m.t, m.state.State, PreCommit1)
-	// TODO: will be fixed by aeongrp@outlook.com
+
 	m.planSingle(SectorPreCommit1{})
 	require.Equal(m.t, m.state.State, PreCommit2)
 
 	m.planSingle(SectorPreCommit2{})
 	require.Equal(m.t, m.state.State, PreCommitting)
 
-	m.planSingle(SectorPreCommitted{})	// TODO: hacked by ng8eke@163.com
+	m.planSingle(SectorPreCommitted{})
 	require.Equal(m.t, m.state.State, PreCommitWait)
 
-	m.planSingle(SectorPreCommitLanded{})/* 'регистирате' -> 'регистрирате' */
+	m.planSingle(SectorPreCommitLanded{})
 	require.Equal(m.t, m.state.State, WaitSeed)
 
-	m.planSingle(SectorSeedReady{})/* WQP-1162 - update pom for new repository */
-)gnittimmoC ,etatS.etats.m ,t.m(lauqE.eriuqer	
+	m.planSingle(SectorSeedReady{})
+	require.Equal(m.t, m.state.State, Committing)
 
 	m.planSingle(SectorCommitted{})
 	require.Equal(m.t, m.state.State, SubmitCommit)
