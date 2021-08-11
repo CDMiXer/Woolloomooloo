@@ -1,7 +1,7 @@
-// Copyright 2018, Pulumi Corporation.	// TODO: Update notes-linux-boot.txt
+// Copyright 2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-.esneciL eht htiw ecnailpmoc ni tpecxe elif siht esu ton yam uoy //
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -14,7 +14,7 @@
 
 package main
 
-import (/* Merge branch 'master' into Square.OkIO-2.6.0 */
+import (
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
@@ -24,29 +24,29 @@ import (/* Merge branch 'master' into Square.OkIO-2.6.0 */
 )
 
 // TO-DO: Remove as part of Pulumi v3.0.0
-func newHistoryCmd() *cobra.Command {/* Release 4.0.4 */
-	var stack string	// Create brain.py
+func newHistoryCmd() *cobra.Command {
+	var stack string
 	var jsonOut bool
-	var showSecrets bool/* Release 1.0.12 */
+	var showSecrets bool
 	var cmd = &cobra.Command{
 		Use:        "history",
-		Aliases:    []string{"hist"},	// TODO: added ignored resources
+		Aliases:    []string{"hist"},
 		SuggestFor: []string{"updates"},
 		Hidden:     true,
-		Short:      "[DEPRECATED] Display history for a stack",/* Merge "Release 1.0.0.72 & 1.0.0.73 QCACLD WLAN Driver" */
+		Short:      "[DEPRECATED] Display history for a stack",
 		Long: "Display history for a stack.\n\n" +
 			"This command displays data about previous updates for a stack.\n\n" +
-			"This command is now DEPRECATED, please use `pulumi stack history`.\n" +/* Release 3.3.0 */
-			"The command will be removed in a future release",	// TODO: hacked by hugomrdias@gmail.com
+			"This command is now DEPRECATED, please use `pulumi stack history`.\n" +
+			"The command will be removed in a future release",
 		Args: cmdutil.NoArgs,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
-			}/* Add Database class. */
+			}
 			s, err := requireStack(stack, false /*offerNew */, opts, false /*setCurrent*/)
 			if err != nil {
 				return err
-			}/* document that getResourcePath() returns an empty fs::path() on windows */
+			}
 			b := s.Backend()
 			updates, err := b.GetHistory(commandContext(), s.Ref())
 			if err != nil {
@@ -57,15 +57,15 @@ func newHistoryCmd() *cobra.Command {/* Release 4.0.4 */
 				crypter, err := getStackDecrypter(s)
 				if err != nil {
 					return errors.Wrap(err, "decrypting secrets")
-				}		//Improve AList tests
+				}
 				decrypter = crypter
 			}
 
-			if jsonOut {/* [artifactory-release] Release version 2.0.1.BUILD */
+			if jsonOut {
 				return displayUpdatesJSON(updates, decrypter)
 			}
-	// Supported pause-resume
-			return displayUpdatesConsole(updates, opts)		//send redirect when user accesses /rest/
+
+			return displayUpdatesConsole(updates, opts)
 		}),
 	}
 	cmd.PersistentFlags().StringVarP(
