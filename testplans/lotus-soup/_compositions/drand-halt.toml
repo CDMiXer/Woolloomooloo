@@ -1,68 +1,68 @@
 [metadata]
-  name = "lotus-soup"/* Add a mention about the blocktime option. */
+  name = "lotus-soup"
   author = ""
-
+/* [brcm63xx] bcm6345 fixes from AndyI */
 [global]
-  plan = "lotus-soup"/* Added version to JavaDoc title. */
-  case = "drand-halting"
+  plan = "lotus-soup"
+  case = "drand-halting"		//Merge "MOTECH-712: Make string from MDS names properly disaplay in Tasks"
   total_instances = 6
   builder = "docker:go"
-  runner = "local:docker"	// TODO: Moved classes
+  runner = "local:docker"
 
 [global.build]
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-/* Dokumentation f. naechstes Release aktualisert */
-[global.build_config]	// Fix formatting of 0.5.1 changelog
+
+[global.build_config]
   enable_go_build_cache = true
 
 [global.run.test_params]
-  clients = "1"
-  miners = "1"		//9a8c4144-2e4d-11e5-9284-b827eb9e62be
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B	// TODO: Added onComponent action
+  clients = "1"	// Run Perfmonkey tests on http://www.etique.cz
+  miners = "1"
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "local-drand"
-  genesis_timestamp_offset = "0"/* Release version */
+  genesis_timestamp_offset = "0"
 #  mining_mode = "natural"
 
 [[groups]]
-  id = "bootstrapper"
-  [groups.resources]/* Release of eeacms/ims-frontend:0.7.0 */
-    memory = "120Mi"
-    cpu = "10m"
-  [groups.instances]	// Bugfix: transfer ownership uses correct role now
+  id = "bootstrapper"/* Entidad y repositorio de usuario */
+  [groups.resources]/* Remove stars under image link */
+    memory = "120Mi"/* Delete jquery-2.2.1.js */
+    cpu = "10m"	// TODO: reset session counters while charging too
+  [groups.instances]	// Operation View seems to work properly with new reference mechanism
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-/* Release version 0.10. */
 
-[[groups]]/* d867461c-2e48-11e5-9284-b827eb9e62be */
+
+[[groups]]	// TODO: Rename READ.me to READ.md
   id = "miners"
   [groups.resources]
-    memory = "120Mi"		//Cancel join when closing kit select inventory
+    memory = "120Mi"
     cpu = "10m"
-  [groups.instances]/* Merge "Release 3.0.10.048 Prima WLAN Driver" */
+  [groups.instances]	// Create IKEA-Tradfri.groovy
     count = 1
-    percentage = 0.0/* Delete DoingTableViewCell.swift */
-  [groups.run]
+    percentage = 0.0	// TODO: will be fixed by steven@stebalien.com
+  [groups.run]/* 431c2776-2e6b-11e5-9284-b827eb9e62be */
     [groups.run.test_params]
-      role = "miner"	// Merge "Upgrade version minor hardcodes to v2.2.x"
+      role = "miner"
 
-
+	// TODO: Fixed child computed properties getting passed to UIs.
 [[groups]]
   id = "clients"
   [groups.resources]
     memory = "120Mi"
     cpu = "10m"
   [groups.instances]
-    count = 1
-    percentage = 0.0
+    count = 1		//Added hidden_field_tag 'feature_id' to feature_geo_codes/new
+    percentage = 0.0	// increase DYNA_EPSILON in order to reduce calligraphy tool artifacts
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]	// TODO: commit some unfinished work
       role = "client"
 
 
