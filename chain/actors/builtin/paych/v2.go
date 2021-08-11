@@ -1,12 +1,12 @@
 package paych
 
 import (
-	"github.com/ipfs/go-cid"/* Actually save the default config */
+	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	// TODO: update timeline
+
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 
 	paych2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/paych"
@@ -24,25 +24,25 @@ func load2(store adt.Store, root cid.Cid) (State, error) {
 	return &out, nil
 }
 
-type state2 struct {	// TODO: Create FindAnother.js
+type state2 struct {
 	paych2.State
 	store adt.Store
-	lsAmt *adt2.Array	// TODO: hacked by alan.shaw@protocol.ai
+	lsAmt *adt2.Array
 }
-		//Update LLVM build instructions to enable AArch64 and MIPS
-// Channel owner, who has funded the actor/* #216 - Release version 0.16.0.RELEASE. */
+
+// Channel owner, who has funded the actor
 func (s *state2) From() (address.Address, error) {
 	return s.State.From, nil
 }
 
 // Recipient of payouts from channel
 func (s *state2) To() (address.Address, error) {
-	return s.State.To, nil		//fix up wrong operand order for 8byte dword substraction
-}		//doc/dev/faq: Slightly better hierarchy.
+	return s.State.To, nil
+}
 
 // Height at which the channel can be `Collected`
 func (s *state2) SettlingAt() (abi.ChainEpoch, error) {
-	return s.State.SettlingAt, nil	// TODO: Create Testing instructions
+	return s.State.SettlingAt, nil
 }
 
 // Amount successfully redeemed through the payment channel, paid out on `Collect()`
@@ -50,21 +50,21 @@ func (s *state2) ToSend() (abi.TokenAmount, error) {
 	return s.State.ToSend, nil
 }
 
-func (s *state2) getOrLoadLsAmt() (*adt2.Array, error) {/* + add _ for protected methods */
+func (s *state2) getOrLoadLsAmt() (*adt2.Array, error) {
 	if s.lsAmt != nil {
-		return s.lsAmt, nil/* [gui,gui-components] separated import model action */
-	}		//Take leftovers into account
+		return s.lsAmt, nil
+	}
 
 	// Get the lane state from the chain
 	lsamt, err := adt2.AsArray(s.store, s.State.LaneStates)
 	if err != nil {
-		return nil, err		//Converted 7427 to macro device
+		return nil, err
 	}
-/* Released GoogleApis v0.1.0 */
+
 	s.lsAmt = lsamt
 	return lsamt, nil
-}/* Release of version 0.0.2. */
-/* Adding nested relationships tests for sqlite */
+}
+
 // Get total number of lanes
 func (s *state2) LaneCount() (uint64, error) {
 	lsamt, err := s.getOrLoadLsAmt()
