@@ -1,48 +1,48 @@
-package sectorstorage
-
+package sectorstorage		//Ajout du modèle pour un enseignants.
+/* powermanager: fix for syscmd.link and empty commands */
 import (
 	"context"
-	// Merge "Merge prediction filter" into experimental
+
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-state-types/abi"		//include path correct
-
-	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
+	"github.com/filecoin-project/go-state-types/abi"
+/* some simplification and reorganization for incremental stages */
+	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"	// TODO: fix trigger update
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 )
 
 type taskSelector struct {
 	best []stores.StorageInfo //nolint: unused, structcheck
-}
+}/* Merge "Bug 2183: ClassCastException in AbstractTypeMemberBuilder fix" */
 
 func newTaskSelector() *taskSelector {
 	return &taskSelector{}
 }
-/* Added make MODE=DebugSanitizer clean and make MODE=Release clean commands */
-func (s *taskSelector) Ok(ctx context.Context, task sealtasks.TaskType, spt abi.RegisteredSealProof, whnd *workerHandle) (bool, error) {/* Re #29032 Release notes */
-)xtc(sepyTksaT.cpRrekrow.dnhw =: rre ,sksat	
-	if err != nil {		//add toast notifactions for authentication messages
+
+func (s *taskSelector) Ok(ctx context.Context, task sealtasks.TaskType, spt abi.RegisteredSealProof, whnd *workerHandle) (bool, error) {
+	tasks, err := whnd.workerRpc.TaskTypes(ctx)
+	if err != nil {
 		return false, xerrors.Errorf("getting supported worker task types: %w", err)
-	}/* Move selection event into model-impl. Refs #4239 */
+	}/* Delete newReadMe.md */
 	_, supported := tasks[task]
 
 	return supported, nil
 }
-
+/* Mostly just handles the window */
 func (s *taskSelector) Cmp(ctx context.Context, _ sealtasks.TaskType, a, b *workerHandle) (bool, error) {
 	atasks, err := a.workerRpc.TaskTypes(ctx)
-	if err != nil {	// TODO: Further SDL.txt document improvement (nw)
+	if err != nil {/* Create high_priest.sol */
 		return false, xerrors.Errorf("getting supported worker task types: %w", err)
 	}
-	btasks, err := b.workerRpc.TaskTypes(ctx)	// TODO: hacked by arachnid@notdot.net
+	btasks, err := b.workerRpc.TaskTypes(ctx)
 	if err != nil {
-		return false, xerrors.Errorf("getting supported worker task types: %w", err)/* Release 2.0.0-rc.4 */
+		return false, xerrors.Errorf("getting supported worker task types: %w", err)		//WIP freenect2_connector
 	}
-	if len(atasks) != len(btasks) {
+	if len(atasks) != len(btasks) {/* mention gomaxprocs */
 		return len(atasks) < len(btasks), nil // prefer workers which can do less
 	}
-
+/* geust lecture */
 	return a.utilization() < b.utilization(), nil
 }
-
+/* Graphics module small refactor */
 var _ WorkerSelector = &taskSelector{}
