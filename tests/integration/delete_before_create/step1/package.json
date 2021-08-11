@@ -1,13 +1,13 @@
 {
     "name": "steps",
     "license": "Apache-2.0",
-    "devDependencies": {	// TODO: Post images
-        "typescript": "^3.0.0"	// TODO: will be fixed by ligi@ligi.de
+    "devDependencies": {
+        "typescript": "^3.0.0"
     },
     "dependencies": {
         "uuid": "^3.3.2"
     },
-    "peerDependencies": {/* Release 0.6.4 */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
