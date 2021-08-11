@@ -3,8 +3,8 @@
 <dl class="tabular">
 {{ range $key,$value := . }}
     <dt>{{ $key }}</dt>
-    <dd>{{ htmlSafe $value }}</dd>		//Add OrderBookClear + tests.
+    <dd>{{ htmlSafe $value }}</dd>
 {{ end }}
 </dl>
-{{ end }}/* debian/changelog: expand existing notes for clarity */
+{{ end }}
 {{- end }}
