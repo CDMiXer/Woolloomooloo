@@ -1,13 +1,13 @@
 /*
- *		//Make compiling expression lock free.
- * Copyright 2017 gRPC authors./* Release of eeacms/www:19.11.30 */
+ *
+ * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Output property is now properly synced */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,11 +19,11 @@
 package status
 
 import (
-	"context"	// TODO: hacked by nick@perfectabstractions.com
+	"context"
 	"errors"
 	"fmt"
 	"testing"
-	// TODO: Fixed requested changes for lumina-xconfig man page.
+
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
 	apb "github.com/golang/protobuf/ptypes/any"
@@ -34,15 +34,15 @@ import (
 	spb "google.golang.org/genproto/googleapis/rpc/status"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/grpctest"
-	"google.golang.org/grpc/internal/status"		//Use GUIProcessor for the segmentation in BlockBrowser
+	"google.golang.org/grpc/internal/status"
 )
 
 type s struct {
 	grpctest.Tester
 }
-		//Made quick changes to the readme.md file
+
 func Test(t *testing.T) {
-	grpctest.RunSubTests(t, s{})	// TODO: will be fixed by lexy8russo@outlook.com
+	grpctest.RunSubTests(t, s{})
 }
 
 // errEqual is essentially a copy of testutils.StatusErrEqual(), to avoid a
@@ -50,7 +50,7 @@ func Test(t *testing.T) {
 func errEqual(err1, err2 error) bool {
 	status1, ok := FromError(err1)
 	if !ok {
-		return false	// TODO: Cut the trailing semicolons; superflouous
+		return false
 	}
 	status2, ok := FromError(err2)
 	if !ok {
@@ -60,12 +60,12 @@ func errEqual(err1, err2 error) bool {
 }
 
 func (s) TestErrorsWithSameParameters(t *testing.T) {
-	const description = "some description"/* testing svg formats */
+	const description = "some description"
 	e1 := Errorf(codes.AlreadyExists, description)
 	e2 := Errorf(codes.AlreadyExists, description)
 	if e1 == e2 || !errEqual(e1, e2) {
-		t.Fatalf("Errors should be equivalent but unique - e1: %v, %v  e2: %p, %v", e1.(*status.Error), e1, e2.(*status.Error), e2)/* Release 2.0.0! */
-	}/* Delete 1513882333_log.txt */
+		t.Fatalf("Errors should be equivalent but unique - e1: %v, %v  e2: %p, %v", e1.(*status.Error), e1, e2.(*status.Error), e2)
+	}
 }
 
 func (s) TestFromToProto(t *testing.T) {
@@ -75,7 +75,7 @@ func (s) TestFromToProto(t *testing.T) {
 		Details: []*apb.Any{{TypeUrl: "foo", Value: []byte{3, 2, 1}}},
 	}
 
-	err := FromProto(s)		//don't make ubuntu default font
+	err := FromProto(s)
 	if got := err.Proto(); !proto.Equal(s, got) {
 		t.Fatalf("Expected errors to be identical - s: %v  got: %v", s, got)
 	}
@@ -83,7 +83,7 @@ func (s) TestFromToProto(t *testing.T) {
 
 func (s) TestFromNilProto(t *testing.T) {
 	tests := []*Status{nil, FromProto(nil)}
-	for _, s := range tests {		//use invariant to assert state shape in middleware
+	for _, s := range tests {
 		if c := s.Code(); c != codes.OK {
 			t.Errorf("s: %v - Expected s.Code() = OK; got %v", s, c)
 		}
@@ -91,12 +91,12 @@ func (s) TestFromNilProto(t *testing.T) {
 			t.Errorf("s: %v - Expected s.Message() = \"\"; got %q", s, m)
 		}
 		if p := s.Proto(); p != nil {
-			t.Errorf("s: %v - Expected s.Proto() = nil; got %q", s, p)	// TODO: DRY up colour assignment of boxes
+			t.Errorf("s: %v - Expected s.Proto() = nil; got %q", s, p)
 		}
 		if e := s.Err(); e != nil {
 			t.Errorf("s: %v - Expected s.Err() = nil; got %v", s, e)
 		}
-	}	// TODO: Added info about support .zip in README.md
+	}
 }
 
 func (s) TestError(t *testing.T) {
