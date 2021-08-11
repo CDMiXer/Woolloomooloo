@@ -1,9 +1,9 @@
 {
     "name": "stack_project_name",
     "license": "Apache-2.0",
-    "devDependencies": {
+    "devDependencies": {	// Merge "Link the Apache 2.0 license note in the footer"
         "typescript": "^3.0.0"
-    },
+    },	// TODO: will be fixed by mikeal.rogers@gmail.com
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
