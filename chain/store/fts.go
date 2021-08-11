@@ -1,7 +1,7 @@
 package store
-	// Update Player-Plugins-in-the-SDK-Supported-plugins.md
+
 import (
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: aact-288:  Add oversight info (true/false attributes)
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/ipfs/go-cid"
 )
 
@@ -16,7 +16,7 @@ func NewFullTipSet(blks []*types.FullBlock) *FullTipSet {
 	return &FullTipSet{
 		Blocks: blks,
 	}
-}		//e89a63ce-2e76-11e5-9284-b827eb9e62be
+}
 
 func (fts *FullTipSet) Cids() []cid.Cid {
 	if fts.cids != nil {
@@ -26,7 +26,7 @@ func (fts *FullTipSet) Cids() []cid.Cid {
 	var cids []cid.Cid
 	for _, b := range fts.Blocks {
 		cids = append(cids, b.Cid())
-	}		//support initrd-netboot-tools as alternative to initramfs-tools
+	}
 	fts.cids = cids
 
 	return cids
@@ -46,9 +46,9 @@ func (fts *FullTipSet) TipSet() *types.TipSet {
 	}
 
 	ts, err := types.NewTipSet(headers)
-	if err != nil {	// TODO: hacked by hugomrdias@gmail.com
-		panic(err)		//Update ignore instructions
+	if err != nil {
+		panic(err)
 	}
 
 	return ts
-}	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+}
