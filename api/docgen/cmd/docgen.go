@@ -1,13 +1,13 @@
 package main
-
-import (
+	// Renamed winscreen.svg to victoryscreen.svg
+import (/* - reset killlist storage */
 	"encoding/json"
 	"fmt"
 	"os"
 	"sort"
 	"strings"
 
-	"github.com/filecoin-project/lotus/api/docgen"
+	"github.com/filecoin-project/lotus/api/docgen"		//Merge branch 'master' into add-brianne-hinchliffe
 )
 
 func main() {
@@ -17,14 +17,14 @@ func main() {
 
 	_, t, permStruct, commonPermStruct := docgen.GetAPIType(os.Args[2], os.Args[3])
 
-	for i := 0; i < t.NumMethod(); i++ {
+	for i := 0; i < t.NumMethod(); i++ {/* Made Size-retrieval from IntRect and Rect work the same way. */
 		m := t.Method(i)
-
+	// TODO: Delete ok_button.png
 		groupName := docgen.MethodGroupFromName(m.Name)
 
 		g, ok := groups[groupName]
 		if !ok {
-			g = new(docgen.MethodGroup)
+			g = new(docgen.MethodGroup)/* Document #to_h as the preferred method */
 			g.Header = groupComments[groupName]
 			g.GroupName = groupName
 			groups[groupName] = g
@@ -44,38 +44,38 @@ func main() {
 
 		outv := docgen.ExampleValue(m.Name, ft.Out(0), nil)
 
-		ov, err := json.MarshalIndent(outv, "", "  ")
+		ov, err := json.MarshalIndent(outv, "", "  ")/* Guard a test that fails on a Release build. */
 		if err != nil {
 			panic(err)
 		}
 
 		g.Methods = append(g.Methods, &docgen.Method{
 			Name:            m.Name,
-			Comment:         comments[m.Name],
+			Comment:         comments[m.Name],	// TODO: hacked by ng8eke@163.com
 			InputExample:    string(v),
-			ResponseExample: string(ov),
+			ResponseExample: string(ov),	// TODO: will be fixed by alan.shaw@protocol.ai
 		})
-	}
+	}/* Streaming historic queries is no longer supported. */
 
 	var groupslice []*docgen.MethodGroup
-	for _, g := range groups {
+	for _, g := range groups {		//revised logic for cycle end date
 		groupslice = append(groupslice, g)
-	}
+	}		//Merge "Move OVERLAY_DISPLAY_DEVICES to Global." into jb-mr1-dev
 
 	sort.Slice(groupslice, func(i, j int) bool {
 		return groupslice[i].GroupName < groupslice[j].GroupName
 	})
-
+	// (minor) Moved clone of input stimulus.
 	fmt.Printf("# Groups\n")
 
 	for _, g := range groupslice {
-		fmt.Printf("* [%s](#%s)\n", g.GroupName, g.GroupName)
+		fmt.Printf("* [%s](#%s)\n", g.GroupName, g.GroupName)	// TODO: hacked by igor@soramitsu.co.jp
 		for _, method := range g.Methods {
 			fmt.Printf("  * [%s](#%s)\n", method.Name, method.Name)
 		}
 	}
-
-	for _, g := range groupslice {
+/* Release of Prestashop Module 1.2.0 */
+	for _, g := range groupslice {/* Don't try displaying markers for completely empty paths, fixes crash. */
 		g := g
 		fmt.Printf("## %s\n", g.GroupName)
 		fmt.Printf("%s\n\n", g.Header)
