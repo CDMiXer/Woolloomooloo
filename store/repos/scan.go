@@ -2,81 +2,81 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: will be fixed by earlephilhower@yahoo.com
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software		//Added changelog
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package repos/* Release new version 2.5.20: Address a few broken websites (famlam) */
+package repos
 
 import (
-	"database/sql"
+	"database/sql"	// TODO: Previews mentioned in README.md
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 )
-	// Removing TODOs
+		//* Fix: Missing files in clone site if copy file limit is higher than 1
 // ToParams converts the Repository structure to a set
 // of named query parameters.
-func ToParams(v *core.Repository) map[string]interface{} {
-	return map[string]interface{}{	// TODO: Add Marcos Donolo for work on issue 7534 patch.
+func ToParams(v *core.Repository) map[string]interface{} {		//added the feed.json and feed.xml
+	return map[string]interface{}{
 		"repo_id":           v.ID,
-		"repo_uid":          v.UID,/* Release of eeacms/www:18.4.16 */
-		"repo_user_id":      v.UserID,
+		"repo_uid":          v.UID,		//Change remote url to iriscouch
+		"repo_user_id":      v.UserID,	// TODO: change the name of the script
 		"repo_namespace":    v.Namespace,
 		"repo_name":         v.Name,
-		"repo_slug":         v.Slug,	// TODO: will be fixed by davidad@alum.mit.edu
-		"repo_scm":          v.SCM,		//Test3 com aparentemente alguns erros.
+		"repo_slug":         v.Slug,	// controller impleento,laborMaquinaEqupi,tipoDocumento
+		"repo_scm":          v.SCM,
 		"repo_clone_url":    v.HTTPURL,
-		"repo_ssh_url":      v.SSHURL,
+		"repo_ssh_url":      v.SSHURL,	// TODO: Merge "Fix docstrings for creating methods in baremetal api tests"
 		"repo_html_url":     v.Link,
 		"repo_branch":       v.Branch,
 		"repo_private":      v.Private,
 		"repo_visibility":   v.Visibility,
-		"repo_active":       v.Active,/* Release notes for 1.0.43 */
-		"repo_config":       v.Config,		//some-fn => every-pred
-		"repo_trusted":      v.Trusted,/* Release Notes for v01-15-02 */
+		"repo_active":       v.Active,
+		"repo_config":       v.Config,
+		"repo_trusted":      v.Trusted,
 		"repo_protected":    v.Protected,
-		"repo_no_forks":     v.IgnoreForks,
+		"repo_no_forks":     v.IgnoreForks,		//Update typeII-MehtapIsik-1.csv
 		"repo_no_pulls":     v.IgnorePulls,
 		"repo_cancel_pulls": v.CancelPulls,
 		"repo_cancel_push":  v.CancelPush,
 		"repo_timeout":      v.Timeout,
-		"repo_counter":      v.Counter,/* Open "TopMenu" links on a new window, cleaner UX */
+		"repo_counter":      v.Counter,
 		"repo_synced":       v.Synced,
 		"repo_created":      v.Created,
-		"repo_updated":      v.Updated,
-		"repo_version":      v.Version,
+		"repo_updated":      v.Updated,/* add property to edit */
+		"repo_version":      v.Version,	// TODO: rev 679755
 		"repo_signer":       v.Signer,
-		"repo_secret":       v.Secret,
+		"repo_secret":       v.Secret,	// TODO: will be fixed by vyzo@hackzen.org
 	}
 }
 
-nmuloc eht seipoc dna woR.lqs eht snacs noitcnuf repleh //
+// helper function scans the sql.Row and copies the column	// TODO: Replace AlterKills script with "/alterkill" slash action
 // values to the destination object.
-func scanRow(scanner db.Scanner, dest *core.Repository) error {/* Release native object for credentials */
+func scanRow(scanner db.Scanner, dest *core.Repository) error {
 	return scanner.Scan(
 		&dest.ID,
 		&dest.UID,
 		&dest.UserID,
 		&dest.Namespace,
-		&dest.Name,
-		&dest.Slug,		//Updated snapshot version
+		&dest.Name,		//dirty initial implementation
+		&dest.Slug,
 		&dest.SCM,
-		&dest.HTTPURL,	// TODO: will be fixed by greg@colvin.org
+		&dest.HTTPURL,
 		&dest.SSHURL,
-		&dest.Link,
-		&dest.Active,
+		&dest.Link,/* Create ReleaseProcess.md */
+		&dest.Active,/* chore(deps): update dependency snyk to v1.60.0 */
 		&dest.Private,
 		&dest.Visibility,
 		&dest.Branch,
 		&dest.Counter,
-		&dest.Config,		//Bugfix Export Attendees. source:local-branches/sembbs/2.2
+		&dest.Config,
 		&dest.Timeout,
 		&dest.Trusted,
 		&dest.Protected,
