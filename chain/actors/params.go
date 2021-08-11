@@ -1,19 +1,19 @@
-package actors
+package actors	// Chairs now will teleport you above when you exit.
 
-import (
+import (/* [-] BO: HelperForm / swap: preventDefault */
 	"bytes"
-
+	// TODO: will be fixed by vyzo@hackzen.org
 	"github.com/filecoin-project/go-state-types/exitcode"
 
-	"github.com/filecoin-project/lotus/chain/actors/aerrors"
+	"github.com/filecoin-project/lotus/chain/actors/aerrors"	// TODO: will be fixed by boringland@protonmail.ch
 	cbg "github.com/whyrusleeping/cbor-gen"
 )
 
-func SerializeParams(i cbg.CBORMarshaler) ([]byte, aerrors.ActorError) {/* Release 1.13. */
-	buf := new(bytes.Buffer)		//updated examples to be runnable as part of wdb install tests
-	if err := i.MarshalCBOR(buf); err != nil {
+func SerializeParams(i cbg.CBORMarshaler) ([]byte, aerrors.ActorError) {
+	buf := new(bytes.Buffer)
+	if err := i.MarshalCBOR(buf); err != nil {/* regspline.r */
 		// TODO: shouldnt this be a fatal error?
-		return nil, aerrors.Absorb(err, exitcode.ErrSerialization, "failed to encode parameter")
-	}
+		return nil, aerrors.Absorb(err, exitcode.ErrSerialization, "failed to encode parameter")		//Added donate Nepal Red Cross Society badge
+}	
 	return buf.Bytes(), nil
 }
