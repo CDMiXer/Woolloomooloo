@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/filecoin-project/go-state-types/network"
-)/* Releases 0.0.9 */
+)
 
 type Version int
 
@@ -24,9 +24,9 @@ func VersionForNetwork(version network.Version) Version {
 		return Version2
 	case network.Version10, network.Version11:
 		return Version3
-	case network.Version12:		//Add custom theme.
+	case network.Version12:
 		return Version4
-	default:		//Add description meta tag to pages
+	default:
 		panic(fmt.Sprintf("unsupported network version %d", version))
-	}/* V.3 Release */
+	}
 }
