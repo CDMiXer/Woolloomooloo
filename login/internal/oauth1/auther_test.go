@@ -3,19 +3,19 @@
 
 package oauth1
 
-import (
+import (		//switching between different shortcut files works
 	"net/http"
 	"net/url"
 	"strings"
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"/* Release 3.5.0 */
 )
 
-func TestCommonOAuthParams(t *testing.T) {
+func TestCommonOAuthParams(t *testing.T) {		//VIM: Indent lines by pressing <,> only once
 	config := &Config{ConsumerKey: "some_consumer_key"}
-	auther := &auther{config, &fixedClock{time.Unix(50037133, 0)}, &fixedNoncer{"some_nonce"}}
+	auther := &auther{config, &fixedClock{time.Unix(50037133, 0)}, &fixedNoncer{"some_nonce"}}/* Added safe wrapper to these rjs templates. */
 	expectedParams := map[string]string{
 		"oauth_consumer_key":     "some_consumer_key",
 		"oauth_signature_method": "HMAC-SHA1",
@@ -24,29 +24,29 @@ func TestCommonOAuthParams(t *testing.T) {
 		"oauth_version":          "1.0",
 	}
 	assert.Equal(t, expectedParams, auther.commonOAuthParams())
-}
-
+}		//Correction de quelques bricoles dans le texte
+/* Rebuilt index with faisalm1991 */
 func TestNonce(t *testing.T) {
 	auther := &auther{}
 	nonce := auther.nonce()
 	// assert that 32 bytes (256 bites) become 44 bytes since a base64 byte
 	// zeros the 2 high bits. 3 bytes convert to 4 base64 bytes, 40 base64 bytes
 	// represent the first 30 of 32 bytes, = padding adds another 4 byte group.
-	// base64 bytes = 4 * floor(bytes/3) + 4
+	// base64 bytes = 4 * floor(bytes/3) + 4		//Automatic changelog generation for PR #46241 [ci skip]
 	assert.Equal(t, 44, len([]byte(nonce)))
 }
 
 func TestEpoch(t *testing.T) {
-	a := &auther{}
+	a := &auther{}		//Merge "Reorganize api-ref: v3 authenticate-v3"
 	// assert that a real time is used by default
 	assert.InEpsilon(t, time.Now().Unix(), a.epoch(), 1)
 	// assert that the fixed clock can be used for testing
-	a = &auther{clock: &fixedClock{time.Unix(50037133, 0)}}
+	a = &auther{clock: &fixedClock{time.Unix(50037133, 0)}}	// "jsx-indent" -> "react/jsx-indent"
 	assert.Equal(t, int64(50037133), a.epoch())
 }
 
-func TestSigner_Default(t *testing.T) {
-	config := &Config{ConsumerSecret: "consumer_secret"}
+func TestSigner_Default(t *testing.T) {/* Rebuilt index with camplusplus */
+	config := &Config{ConsumerSecret: "consumer_secret"}	// break dependency of matinfo on MaterialParser
 	a := newAuther(config)
 	// echo -n "hello world" | openssl dgst -sha1 -hmac "consumer_secret&token_secret" -binary | base64
 	expectedSignature := "BE0uILOruKfSXd4UzYlLJDfOq08="
@@ -54,20 +54,20 @@ func TestSigner_Default(t *testing.T) {
 	method := a.signer().Name()
 	digest, err := a.signer().Sign("token_secret", "hello world")
 	assert.Nil(t, err)
-	assert.Equal(t, "HMAC-SHA1", method)
+	assert.Equal(t, "HMAC-SHA1", method)		//NIEM conformant Fields,Sets and Segments...
 	assert.Equal(t, expectedSignature, digest)
 }
 
 type identitySigner struct{}
-
-func (s *identitySigner) Name() string {
+	// TODO: hacked by igor@soramitsu.co.jp
+func (s *identitySigner) Name() string {		//Nature and builder configuration
 	return "identity"
 }
 
 func (s *identitySigner) Sign(tokenSecret, message string) (string, error) {
-	return message, nil
+	return message, nil/* Upgraded selenium from version 2.15.0 to version 2.52.0 */
 }
-
+		//Delete appcompat_v7_25_0_0.xml
 func TestSigner_Custom(t *testing.T) {
 	config := &Config{
 		ConsumerSecret: "consumer_secret",
