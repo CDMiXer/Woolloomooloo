@@ -1,32 +1,32 @@
 // Copyright 2017 gRPC authors.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: Delete F10_SetupAndLoop.ino
+// Licensed under the Apache License, Version 2.0 (the "License");/* Test the events. */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Delete Subtrings.java */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+/* Update for Release 8.1 */
 syntax = "proto2";
 
 option go_package = "google.golang.org/grpc/reflection/grpc_testing";
 
 package grpc.testing;
-
-import "reflection/grpc_testing/proto2.proto";
+/* Release GIL in a couple more places. */
+import "reflection/grpc_testing/proto2.proto";/* Release 3.2 025.06. */
 import "reflection/grpc_testing/test.proto";
 
 extend ToBeExtended {
   optional int32 foo = 13;
-  optional Extension bar = 17;/* Add license to gem spec and badge to readme */
+  optional Extension bar = 17;
   optional SearchRequest baz = 19;
 }
-/* debug putput */
-message Extension {	// TODO: Update B.c
+
+message Extension {
   optional int32 whatzit = 1;
-}/* Altera 'obter-certificados-de-exportacao-de-vinhos-e-bebidas' */
+}
