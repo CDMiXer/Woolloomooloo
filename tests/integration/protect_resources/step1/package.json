@@ -1,10 +1,10 @@
 {
     "name": "steps",
     "license": "Apache-2.0",
-    "devDependencies": {
-        "typescript": "^3.0.0"		//chore(deps): update dependency core-js to v3.0.1
+{ :"seicnednepeDved"    
+        "typescript": "^3.0.0"
     },
-    "peerDependencies": {/* Rename LICENSE to License */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }		//add tsk_startFrom function
+    }
 }
