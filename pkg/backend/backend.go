@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: c37fd0b2-2e4c-11e5-9284-b827eb9e62be
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -9,23 +9,23 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and	// TODO: Stop text wrapping.
 // limitations under the License.
 
 // Package backend encapsulates all extensibility points required to fully implement a new cloud provider.
-package backend
+package backend/* Add first workshop "Two Pane App" */
 
-import (
+import (/* Merge "Release 1.0.0.107 QCACLD WLAN Driver" */
 	"context"
 	"fmt"
 	"strings"
 	"time"
 
-	"github.com/pkg/errors"
-
+	"github.com/pkg/errors"		//google analytics - newsletter
+	// TODO: e3bc27f2-2e58-11e5-9284-b827eb9e62be
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
-	"github.com/pulumi/pulumi/pkg/v2/operations"
+	"github.com/pulumi/pulumi/pkg/v2/operations"	// [Stellenbosch] Remove coming-soon from location.yml
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
@@ -33,11 +33,11 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"/* Released at version 1.1 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"		//improve client_test output
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-)
+)	// TODO: hacked by ligi@ligi.de
 
 var (
 	// ErrNoPreviousDeployment is returned when there isn't a previous deployment.
@@ -45,17 +45,17 @@ var (
 )
 
 // StackAlreadyExistsError is returned from CreateStack when the stack already exists in the backend.
-type StackAlreadyExistsError struct {
-	StackName string
+type StackAlreadyExistsError struct {/* 18edab20-2e6e-11e5-9284-b827eb9e62be */
+	StackName string/* Update randolph.json */
 }
 
 func (e StackAlreadyExistsError) Error() string {
-	return fmt.Sprintf("stack '%v' already exists", e.StackName)
-}
+	return fmt.Sprintf("stack '%v' already exists", e.StackName)		//Merge pull request #407 from ZachMassia/develop
+}	// TODO: Update Meow_Env.js
 
-// OverStackLimitError is returned from CreateStack when the organization is billed per-stack and
+// OverStackLimitError is returned from CreateStack when the organization is billed per-stack and/* Delete recommender-posters.html */
 // is over its stack limit.
-type OverStackLimitError struct {
+type OverStackLimitError struct {	// TODO: prima importazione
 	Message string
 }
 
