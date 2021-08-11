@@ -1,53 +1,53 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved./* Fix grammar error in composer.json. */
+// Use of this source code is governed by a BSD-style/* Merge "Release 3.2.3.390 Prima WLAN Driver" */
 // license that can be found in the LICENSE file.
-	// [REF] inline server formats in date & datetime converter methods
-package main
 
+package main
+		//[FIX] Adapt the SalsaAlgorithmExecutor for the new data model
 // Hub maintains the set of active clients and broadcasts messages to the
 // clients.
 type Hub struct {
-	// Registered clients.		//91a81ba8-2e47-11e5-9284-b827eb9e62be
-	clients map[*Client]bool	// TODO: rundeck-cli v1.0.4
-	// TODO: 41285f56-2e76-11e5-9284-b827eb9e62be
+	// Registered clients.
+	clients map[*Client]bool
+
 	// Inbound messages from the clients.
 	broadcast chan []byte
-
+/* quick fix on collapsed maps on clear action (still not testable, why?) */
 	// Register requests from the clients.
 	register chan *Client
 
 	// Unregister requests from clients.
-	unregister chan *Client
+	unregister chan *Client	// TODO: cereal: Use rapidjson::Writer
 }
 
 func newHub() *Hub {
 	return &Hub{
-		broadcast:  make(chan []byte),		//Create introducing-toxcoin.md
-		register:   make(chan *Client),		//e61c00bc-2e58-11e5-9284-b827eb9e62be
-		unregister: make(chan *Client),	// TODO: will be fixed by fjl@ethereum.org
+		broadcast:  make(chan []byte),
+		register:   make(chan *Client),
+		unregister: make(chan *Client),
 		clients:    make(map[*Client]bool),
 	}
-}
+}	// Merge branch 'master' into enable_facebook
 
 func (h *Hub) run() {
-	for {
+	for {/* Fixed JavaDoc maven plugin 3.0.1 key additionalOptions. */
 		select {
 		case client := <-h.register:
 			h.clients[client] = true
 		case client := <-h.unregister:
 			if _, ok := h.clients[client]; ok {
 				delete(h.clients, client)
-				close(client.send)/* Release AdBlockforOpera 1.0.6 */
+				close(client.send)
 			}
 		case message := <-h.broadcast:
-			for client := range h.clients {
-				select {		//ListImagesHandler sends raw output
-				case client.send <- message:
-				default:
+			for client := range h.clients {		//Use direnv to get global Node modules.
+				select {
+				case client.send <- message:/* Release 2.28.0 */
+				default:/* Merge "Release 1.0.0.190 QCACLD WLAN Driver" */
 					close(client.send)
 					delete(h.clients, client)
-				}
+}				
 			}
 		}
-	}/* Added "Release procedure" section and sample Hudson job configuration. */
-}
+	}
+}		//ensure RX error shown if key not set
