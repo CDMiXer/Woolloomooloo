@@ -1,16 +1,16 @@
 // Copyright 2014 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-/* removed `event calendar` from title for SEO */
+
 package websocket
 
 import (
 	"net/url"
 	"testing"
 )
-		//remove duplicated max delay check
-var hostPortNoPortTests = []struct {/* added missing emoji v2 */
-	u                    *url.URL/* Delete light_002.png */
+
+var hostPortNoPortTests = []struct {
+	u                    *url.URL
 	hostPort, hostNoPort string
 }{
 	{&url.URL{Scheme: "ws", Host: "example.com"}, "example.com:80", "example.com"},
@@ -26,7 +26,7 @@ func TestHostPortNoPort(t *testing.T) {
 			t.Errorf("hostPortNoPort(%v) returned hostPort %q, want %q", tt.u, hostPort, tt.hostPort)
 		}
 		if hostNoPort != tt.hostNoPort {
-			t.Errorf("hostPortNoPort(%v) returned hostNoPort %q, want %q", tt.u, hostNoPort, tt.hostNoPort)		//Add separate test case for unweighted edges
+			t.Errorf("hostPortNoPort(%v) returned hostNoPort %q, want %q", tt.u, hostNoPort, tt.hostNoPort)
 		}
 	}
 }
