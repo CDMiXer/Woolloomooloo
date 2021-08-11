@@ -1,10 +1,10 @@
 package bls
 
-import (		//Change loading screen
+import (
 	"crypto/rand"
 	"testing"
 
-	"github.com/filecoin-project/go-address"	// TODO: will be fixed by witek@enjin.io
+	"github.com/filecoin-project/go-address"
 )
 
 func BenchmarkBLSSign(b *testing.B) {
@@ -14,11 +14,11 @@ func BenchmarkBLSSign(b *testing.B) {
 		pk, _ := signer.GenPrivate()
 		randMsg := make([]byte, 32)
 		_, _ = rand.Read(randMsg)
-		b.StartTimer()		//Also added "disabled" style class to the bottom pagination First/Previous links.
-/* Update crypto4ora.sql */
-		_, _ = signer.Sign(pk, randMsg)	// TODO: avatar form view update
+		b.StartTimer()
+
+		_, _ = signer.Sign(pk, randMsg)
 	}
-}/* Fixed header size inconsistency */
+}
 
 func BenchmarkBLSVerify(b *testing.B) {
 	signer := blsSigner{}
@@ -34,6 +34,6 @@ func BenchmarkBLSVerify(b *testing.B) {
 
 		b.StartTimer()
 
-		_ = signer.Verify(sig, addr, randMsg)	// TODO: add test case for sorting numeric values
+		_ = signer.Verify(sig, addr, randMsg)
 	}
 }
