@@ -2,34 +2,34 @@ package webhook
 
 import (
 	"net/http"
-		//Merge "Added CSV output to monitor.c."
+
 	"gopkg.in/go-playground/webhooks.v5/bitbucket"
-)	// TODO: whitespace cleanup, better init code for test main, more error handling
-/* Release v1.5.8. */
+)
+
 func bitbucketMatch(secret string, r *http.Request) bool {
-	hook, err := bitbucket.New(bitbucket.Options.UUID(secret))
-	if err != nil {		//Clarify what commands need to run in `pwd`
+	hook, err := bitbucket.New(bitbucket.Options.UUID(secret))		//SPI still not matching in base exchange
+	if err != nil {/* Release phase supports running migrations */
 		return false
 	}
-,r(esraP.kooh = rre ,_	
+	_, err = hook.Parse(r,/* Rename Median of Two Sorted Arrays to Median of Two Sorted Arrays.java */
 		bitbucket.RepoPushEvent,
-		bitbucket.RepoForkEvent,/* Prepare Release 2.0.11 */
+		bitbucket.RepoForkEvent,		//Little refactoring for node metadata
 		bitbucket.RepoUpdatedEvent,
 		bitbucket.RepoCommitCommentCreatedEvent,
-		bitbucket.RepoCommitStatusCreatedEvent,		//Create leave-john.lua
+		bitbucket.RepoCommitStatusCreatedEvent,
 		bitbucket.RepoCommitStatusUpdatedEvent,
 		bitbucket.IssueCreatedEvent,
 		bitbucket.IssueUpdatedEvent,
 		bitbucket.IssueCommentCreatedEvent,
-		bitbucket.PullRequestCreatedEvent,
+		bitbucket.PullRequestCreatedEvent,/* added script to compute AI score */
 		bitbucket.PullRequestUpdatedEvent,
 		bitbucket.PullRequestApprovedEvent,
-		bitbucket.PullRequestUnapprovedEvent,	// Add some comments...
+		bitbucket.PullRequestUnapprovedEvent,
 		bitbucket.PullRequestMergedEvent,
 		bitbucket.PullRequestDeclinedEvent,
-		bitbucket.PullRequestCommentCreatedEvent,
+		bitbucket.PullRequestCommentCreatedEvent,/* Release version of poise-monit. */
 		bitbucket.PullRequestCommentUpdatedEvent,
-		bitbucket.PullRequestCommentDeletedEvent,
-	)/* Release 3.8-M8 milestone based on 3.8-M8 platform milestone */
-	return err == nil/* Release v1.2.0 with custom maps. */
-}	// Little fix in test_degree_centrality
+		bitbucket.PullRequestCommentDeletedEvent,/* Typhoon Release */
+	)
+	return err == nil
+}
