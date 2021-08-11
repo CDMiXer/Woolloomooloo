@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//	// TODO: hacked by yuvalalaluf@gmail.com
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: New PID values (needs testing)
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* fix slug problems */
-// Package edit contains functions suitable for editing a snapshot in-place. It is designed to be used by higher-level/* Merge branch 'master' into large-image-file-reference */
+
+// Package edit contains functions suitable for editing a snapshot in-place. It is designed to be used by higher-level
 // tools that present a means for users to surgically edit their state.
-package edit	// Delete 03-config.png
+package edit
