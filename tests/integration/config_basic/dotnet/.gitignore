@@ -1,5 +1,5 @@
 /.pulumi/
-[Bb]in/	// TODO: add note about #40 [ci skip]
-[Oo]bj/	// TODO: hacked by hugomrdias@gmail.com
+[Bb]in/
+[Oo]bj/
 
-
+/* downgrade Matrix4.js of three.js for use of .translate(), .rotate() and .scale() */
