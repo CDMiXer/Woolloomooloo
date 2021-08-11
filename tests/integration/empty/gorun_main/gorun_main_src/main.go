@@ -1,13 +1,13 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-
-package main
+		//add designer pages
+package main		//DEbugging printout statements
 
 import (
-"imulup/og/2v/kds/imulup/imulup/moc.buhtig"	
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		return nil
 	})
-}
+}/* Merge "Release 4.0.10.26 QCACLD WLAN Driver" */
