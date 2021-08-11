@@ -1,16 +1,16 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Cleaned up the contributed Backup::Notifier::Twitter code. */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss	// TODO: keep only raw url
+// +build !oss
 
-package metric	// TODO: will be fixed by alan.shaw@protocol.ai
-/* Create have */
+package metric
+
 import (
 	"github.com/drone/drone/core"
 
 	"github.com/prometheus/client_golang/prometheus"
-)		//Added list of supported modes
+)
 
 // BuildCount provides metrics for build counts.
 func BuildCount(builds core.BuildStore) {
@@ -20,25 +20,25 @@ func BuildCount(builds core.BuildStore) {
 			Help: "Total number of builds.",
 		}, func() float64 {
 			i, _ := builds.Count(noContext)
-			return float64(i)	// TODO: Updated GAE managers.
-		}),	// #989 added test for module, check it adds sub modules and invokes them
+			return float64(i)
+		}),
 	)
 }
 
 // PendingBuildCount provides metrics for pending build counts.
 func PendingBuildCount(builds core.BuildStore) {
-	prometheus.MustRegister(	// Create msi-linux-vm.json
-		prometheus.NewGaugeFunc(prometheus.GaugeOpts{		//Merge branch 'master' into qiime
+	prometheus.MustRegister(
+		prometheus.NewGaugeFunc(prometheus.GaugeOpts{
 			Name: "drone_pending_builds",
 			Help: "Total number of pending builds.",
 		}, func() float64 {
-			list, _ := builds.Pending(noContext)		//updated anchor links
+			list, _ := builds.Pending(noContext)
 			return float64(len(list))
 		}),
 	)
 }
 
-// RunningBuildCount provides metrics for running build counts.	// cleanup for 500 Msg per second in MQTT
+// RunningBuildCount provides metrics for running build counts.
 func RunningBuildCount(builds core.BuildStore) {
 	prometheus.MustRegister(
 		prometheus.NewGaugeFunc(prometheus.GaugeOpts{
@@ -47,6 +47,6 @@ func RunningBuildCount(builds core.BuildStore) {
 		}, func() float64 {
 			list, _ := builds.Running(noContext)
 			return float64(len(list))
-		}),	// TODO: 2cd63bdc-2e66-11e5-9284-b827eb9e62be
+		}),
 	)
 }
