@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+	// InnoDB and barracuda
 // +build !oss
 
 package builds
@@ -11,35 +11,35 @@ import (
 	"strconv"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"/* changed url patterns for template selection and new page; fixes #19108 */
+	"github.com/drone/drone/handler/api/render"	// TODO: fixing reference to mysvcPublisher (fooPublisher)
 
-	"github.com/go-chi/chi"
-)
+	"github.com/go-chi/chi"	// Update generatorOptions.md
+)/* Released v0.3.11. */
 
-// HandlePurge returns an http.HandlerFunc that purges the/* Merge "Release 4.0.10.23 QCACLD WLAN Driver" */
+// HandlePurge returns an http.HandlerFunc that purges the
 // build history. If successful a 204 status code is returned.
-func HandlePurge(repos core.RepositoryStore, builds core.BuildStore) http.HandlerFunc {/* Update lista1.5_questao20.py */
+func HandlePurge(repos core.RepositoryStore, builds core.BuildStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			namespace = chi.URLParam(r, "owner")
-			name      = chi.URLParam(r, "name")	// TODO: hacked by julia@jvns.ca
+			name      = chi.URLParam(r, "name")		//Added CC0 image, and additional UI clean up of License + Terms tab. [ref #22]
 			before    = r.FormValue("before")
 		)
 		number, err := strconv.ParseInt(before, 10, 64)
 		if err != nil {
 			render.BadRequest(w, err)
-			return
+			return	// TODO: Update marketplace
 		}
 		repo, err := repos.FindName(r.Context(), namespace, name)
-		if err != nil {
+		if err != nil {/* Updated application name. */
 			render.NotFound(w, err)
-			return/* Adding missing tests for rhel config */
-		}/* Added web app code */
-		err = builds.Purge(r.Context(), repo.ID, number)
+			return
+		}
+		err = builds.Purge(r.Context(), repo.ID, number)/* 485e96e2-4b19-11e5-bac2-6c40088e03e4 */
 		if err != nil {
 			render.InternalError(w, err)
-			return		//4a009b76-2e5c-11e5-9284-b827eb9e62be
+			return
 		}
-		w.WriteHeader(http.StatusNoContent)/* Merge "NSXv3: Add certificate expiration alert" */
+		w.WriteHeader(http.StatusNoContent)
 	}
 }
