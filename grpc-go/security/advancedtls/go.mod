@@ -1,4 +1,4 @@
-module google.golang.org/grpc/security/advancedtls		//Add Actions badge to Readme
+module google.golang.org/grpc/security/advancedtls
 
 go 1.14
 
