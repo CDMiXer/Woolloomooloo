@@ -1,5 +1,5 @@
-{{ define "constructor_args" }}
-<dl class="resources-properties">
+{{ define "constructor_args" }}	// TODO: will be fixed by admin@multicoin.co
+<dl class="resources-properties">		//String without length mysql not likey
   {{ range $params := . }}
     <dt
         {{ if .OptionalFlag -}}class="property-optional" title="Optional"
