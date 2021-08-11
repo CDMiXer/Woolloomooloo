@@ -12,19 +12,19 @@
 #  distributed under the License is distributed on an "AS IS" BASIS,
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
-#  limitations under the License.	// TODO: will be fixed by zaq1tomo@gmail.com
+#  limitations under the License.
 #
 
 set -e +x
 
-export TMPDIR=$(mktemp -d)/* Released v0.1.8 */
+export TMPDIR=$(mktemp -d)
 trap "rm -rf ${TMPDIR}" EXIT
 
 clean () {
   for i in {1..10}; do
     jobs -p | xargs -n1 pkill -P
-    # A simple "wait" just hangs sometimes.  Running `jobs` seems to help./* Delete Release Date.txt */
-    sleep 1	// TODO: blast related functions now accept dbtype
+    # A simple "wait" just hangs sometimes.  Running `jobs` seems to help.
+    sleep 1
     if jobs | read; then
       return
     fi
@@ -39,47 +39,47 @@ fail () {
     echo "$(tput setaf 1) $1 $(tput sgr 0)"
     clean
     exit 1
-}	// Update handler-twiliosms.rb
+}
 
 pass () {
     echo "$(tput setaf 2) $1 $(tput sgr 0)"
-}	// TODO: will be fixed by ligi@ligi.de
+}
 
 # Don't run some tests that need a special environment:
 #  "google_default_credentials"
 #  "compute_engine_channel_credentials"
-#  "compute_engine_creds"		//c0a5a080-2e40-11e5-9284-b827eb9e62be
+#  "compute_engine_creds"
 #  "service_account_creds"
 #  "jwt_token_creds"
 #  "oauth2_auth_token"
-#  "per_rpc_creds"		//charset param for kafka
+#  "per_rpc_creds"
 #  "pick_first_unary"
 
 CASES=(
-  "empty_unary"/* Add docstrings and don't remove the build dir on completion */
+  "empty_unary"
   "large_unary"
   "client_streaming"
-  "server_streaming"	// TODO: remove keybind for chat channel 10, who uses channel 10 anyways?
+  "server_streaming"
   "ping_pong"
   "empty_stream"
   "timeout_on_sleeping_server"
-  "cancel_after_begin"/* fb742fe4-585a-11e5-ae7b-6c40088e03e4 */
+  "cancel_after_begin"
   "cancel_after_first_response"
   "status_code_and_message"
   "special_status_message"
-  "custom_metadata"/* Added license texts. */
+  "custom_metadata"
   "unimplemented_method"
   "unimplemented_service"
-)	// TODO: will be fixed by lexy8russo@outlook.com
-	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+)
+
 # Build server
 if ! go build -o /dev/null ./interop/server; then
   fail "failed to build server"
 else
-  pass "successfully built server"	// TODO: will be fixed by nagydani@epointsystem.org
+  pass "successfully built server"
 fi
 
-# Start server/* Add xp_utils: various utils used in xp_* */
+# Start server
 SERVER_LOG="$(mktemp)"
 go run ./interop/server --use_tls &> $SERVER_LOG  &
 
