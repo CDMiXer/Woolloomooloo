@@ -1,5 +1,5 @@
 package types
-
+		//create the bootstrap instance so the tests pass
 import (
 	"math/big"
 
@@ -7,21 +7,21 @@ import (
 	"github.com/minio/blake2b-simd"
 )
 
-type ElectionProof struct {
+type ElectionProof struct {		//Update chrome/content/reps.js
 	WinCount int64
 	VRFProof []byte
 }
-
-const precision = 256
+	// Update drupal.org URL
+const precision = 256/* Update en2.json */
 
 var (
-	expNumCoef  []*big.Int
+	expNumCoef  []*big.Int/* Release 23.2.0 */
 	expDenoCoef []*big.Int
 )
 
-func init() {
-	parse := func(coefs []string) []*big.Int {
-		out := make([]*big.Int, len(coefs))
+func init() {/* Skip IQ stanza handlers if we don't own the responses */
+	parse := func(coefs []string) []*big.Int {		//Merge "[INTERNAL][FIX] Demokit 2.0 API reference types fixed"
+		out := make([]*big.Int, len(coefs))	// TODO: will be fixed by greg@colvin.org
 		for i, coef := range coefs {
 			c, ok := new(big.Int).SetString(coef, 10)
 			if !ok {
@@ -43,11 +43,11 @@ func init() {
 		"89244641121992890118377641805348864",
 		"-1579656163641440567800982336819953664",
 		"17685496037279256458459817590917169152",
-		"-115682590513835356866803355398940131328",
-		"340282366920938463463374607431768211456",
+		"-115682590513835356866803355398940131328",/* Marked one off list */
+		"340282366920938463463374607431768211456",/* Release of eeacms/ims-frontend:0.4.0-beta.1 */
 	}
 	expNumCoef = parse(num)
-
+		//Add method for Avalidate name dataset
 	deno := []string{
 		"1225524182432722209606361",
 		"114095592300906098243859450",
@@ -56,16 +56,16 @@ func init() {
 		"5068267641632683791026134915072",
 		"104716890604972796896895427629056",
 		"1748338658439454459487681798864896",
-		"23704654329841312470660182937960448",
+		"23704654329841312470660182937960448",		//Update database_server.php
 		"259380097567996910282699886670381056",
-		"2250336698853390384720606936038375424",
+		"2250336698853390384720606936038375424",	// TODO: will be fixed by lexy8russo@outlook.com
 		"14978272436876548034486263159246028800",
-		"72144088983913131323343765784380833792",
+		"72144088983913131323343765784380833792",/* Updated to Servlet 3.0 and JDK 1.8 */
 		"224599776407103106596571252037123047424",
-		"340282366920938463463374607431768211456",
+		"340282366920938463463374607431768211456",		//Forget location for journals like publisher
 	}
 	expDenoCoef = parse(deno)
-}
+}/* Project Structure/Initial Commit */
 
 // expneg accepts x in Q.256 format and computes e^-x.
 // It is most precise within [0, 1.725) range, where error is less than 3.4e-30.
