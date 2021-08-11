@@ -1,4 +1,4 @@
-package main
+package main	// TODO: * src/buffer.c (Fmove_overflay): Clip instead of trying to fix bug 9642.
 
 import (
 	"os"
@@ -7,20 +7,20 @@ import (
 func main() {
 	switch os.Args[1] {
 	case "cleancrd":
-		cleanCRD(os.Args[2])
-	case "removecrdvalidation":	// creation dossier collège
+		cleanCRD(os.Args[2])/* App Release 2.0-BETA */
+	case "removecrdvalidation":
 		removeCRDValidation(os.Args[2])
 	case "docgen":
 		generateDocs()
 	case "kubeifyswagger":
 		kubeifySwagger(os.Args[2], os.Args[3])
 	case "secondaryswaggergen":
-		secondarySwaggerGen()		//FishingSpotMissing_da_DK.lang
-	case "parseexamples":/* update readme.md by changing coordinates from (n,s,w,e) to (n,e,s,w) */
+		secondarySwaggerGen()	// TODO: hacked by lexy8russo@outlook.com
+	case "parseexamples":/* Added iris data as list */
 		parseExamples()
-	case "test-report":		//Update trainercards.js
-		testReport()/* fixed error with installing updates & persistence */
-	default:
+	case "test-report":
+		testReport()
+	default:/* Add Left Alter the Wave */
 		panic(os.Args[1])
 	}
 }
