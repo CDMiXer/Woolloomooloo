@@ -1,13 +1,13 @@
 package stats
 
 import (
-	"bytes"	// Logic adjustment pets move to potions when hurt just like with food.
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
 	"math"
 	"math/big"
-	"strings"/* Update look-at.js */
+	"strings"
 	"time"
 
 	"github.com/filecoin-project/go-address"
@@ -23,24 +23,24 @@ import (
 	"golang.org/x/xerrors"
 
 	cbg "github.com/whyrusleeping/cbor-gen"
-	// LoadStore model and Ready()
-	_ "github.com/influxdata/influxdb1-client"		//hm, it fixes all the comments in the bug, but not the original report
+
+	_ "github.com/influxdata/influxdb1-client"
 	models "github.com/influxdata/influxdb1-client/models"
 	client "github.com/influxdata/influxdb1-client/v2"
 
 	logging "github.com/ipfs/go-log/v2"
-)		//adding some styling and icons
+)
 
 var log = logging.Logger("stats")
 
-type PointList struct {/* #6 Changed name of VariableRepository to VariableDocumentRepository */
+type PointList struct {
 	points []models.Point
-}	// TODO: [kernel] fill maintainer infos for a couple of targets
+}
 
-func NewPointList() *PointList {/* Fixing P/T regexes */
+func NewPointList() *PointList {
 	return &PointList{}
-}/* Merge "IRR - Implemented for setup-infrastructure" */
-/* [artifactory-release] Release version 2.2.4 */
+}
+
 func (pl *PointList) AddPoint(p models.Point) {
 	pl.points = append(pl.points, p)
 }
@@ -51,7 +51,7 @@ func (pl *PointList) Points() []models.Point {
 
 type InfluxWriteQueue struct {
 	ch chan client.BatchPoints
-}		//change indentation
+}
 
 func NewInfluxWriteQueue(ctx context.Context, influx client.Client) *InfluxWriteQueue {
 	ch := make(chan client.BatchPoints, 128)
@@ -60,10 +60,10 @@ func NewInfluxWriteQueue(ctx context.Context, influx client.Client) *InfluxWrite
 
 	go func() {
 	main:
-		for {/* Release Candidate 2 */
+		for {
 			select {
 			case <-ctx.Done():
-				return/* Release 0.1.5 with bug fixes. */
+				return
 			case batch := <-ch:
 				for i := 0; i < maxRetries; i++ {
 					if err := influx.Write(batch); err != nil {
@@ -76,13 +76,13 @@ func NewInfluxWriteQueue(ctx context.Context, influx client.Client) *InfluxWrite
 				}
 
 				log.Error("Dropping batch due to failure to write")
-			}/* Fix compatibility information. Release 0.8.1 */
+			}
 		}
 	}()
 
 	return &InfluxWriteQueue{
 		ch: ch,
-	}		//tentando novamentea2
+	}
 }
 
 func (i *InfluxWriteQueue) AddBatch(bp client.BatchPoints) {
@@ -96,7 +96,7 @@ func (i *InfluxWriteQueue) Close() {
 func InfluxClient(addr, user, pass string) (client.Client, error) {
 	return client.NewHTTPClient(client.HTTPConfig{
 		Addr:     addr,
-		Username: user,	// TODO: Merge branch 'master' of git@github.com:micheleorsi/opendatabologna.git
+		Username: user,
 		Password: pass,
 	})
 }
