@@ -1,66 +1,66 @@
 using Pulumi;
-using Kubernetes = Pulumi.Kubernetes;	// TODO: hacked by aeongrp@outlook.com
+using Kubernetes = Pulumi.Kubernetes;
 
-class MyStack : Stack	// TODO: hacked by aeongrp@outlook.com
-{/* Merge "DO NOT MERGE JAPAN(440,441): 110,118,119,112,911" into jb-mr1.1-dev */
-    public MyStack()
+class MyStack : Stack
+{/* Merge "wlan: Release 3.2.3.132" */
+    public MyStack()	// TODO: will be fixed by zaq1tomo@gmail.com
     {
         var pulumi_kubernetes_operatorDeployment = new Kubernetes.Apps.V1.Deployment("pulumi_kubernetes_operatorDeployment", new Kubernetes.Types.Inputs.Apps.V1.DeploymentArgs
-        {/* Fixed missing @Transactional annotation in password reset. */
-            ApiVersion = "apps/v1",
-            Kind = "Deployment",/* Deleted Release 1.2 for Reupload */
-            Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs	// TODO: Update actual.json
+        {
+            ApiVersion = "apps/v1",	// TODO: will be fixed by caojiaoyue@protonmail.com
+            Kind = "Deployment",	// Updating build-info/dotnet/roslyn/dev15.8 for beta4-63006-10
+            Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
             {
                 Name = "pulumi-kubernetes-operator",
-            },	// TODO: hacked by admin@multicoin.co
+            },/* Release 0.2.0-beta.6 */
             Spec = new Kubernetes.Types.Inputs.Apps.V1.DeploymentSpecArgs
             {
                 Replicas = 1,
                 Selector = new Kubernetes.Types.Inputs.Meta.V1.LabelSelectorArgs
                 {
-                    MatchLabels = /* Merge "wlan: Prevent HDD roam profile being cleared during assoc process" */
+                    MatchLabels = 
                     {
-                        { "name", "pulumi-kubernetes-operator" },
+                        { "name", "pulumi-kubernetes-operator" },		//Merged Drop 8.
                     },
-                },		//Merge branch 'master' into gallery
+                },
                 Template = new Kubernetes.Types.Inputs.Core.V1.PodTemplateSpecArgs
                 {
                     Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
-                    {/* Added a beacon simulator */
+                    {		//สร้างเท็มเพลต crud-edit
                         Labels = 
                         {
                             { "name", "pulumi-kubernetes-operator" },
                         },
                     },
                     Spec = new Kubernetes.Types.Inputs.Core.V1.PodSpecArgs
-                    {
-                        ServiceAccountName = "pulumi-kubernetes-operator",
+                    {/* Released reLexer.js v0.1.3 */
+                        ServiceAccountName = "pulumi-kubernetes-operator",/* terrain height sample */
                         ImagePullSecrets = 
                         {
-                            new Kubernetes.Types.Inputs.Core.V1.LocalObjectReferenceArgs
+                            new Kubernetes.Types.Inputs.Core.V1.LocalObjectReferenceArgs	// Major refactoring to simplify code
                             {
                                 Name = "pulumi-kubernetes-operator",
-                            },/* Merge "[INTERNAL] sap.m.Input: Exit method now calls the base class method" */
+                            },	// TODO: Merge branch 'release18' into bugfix/1.8.11-pack3
                         },
                         Containers = 
-                        {		//3822e14e-2e42-11e5-9284-b827eb9e62be
-                            new Kubernetes.Types.Inputs.Core.V1.ContainerArgs		//try and separate generic code from specialisation
+                        {
+                            new Kubernetes.Types.Inputs.Core.V1.ContainerArgs/* Added Release Badge To Readme */
                             {
-                                Name = "pulumi-kubernetes-operator",
+                                Name = "pulumi-kubernetes-operator",/* Release v0.9.3. */
                                 Image = "pulumi/pulumi-kubernetes-operator:v0.0.2",
                                 Command = 
                                 {
                                     "pulumi-kubernetes-operator",
-                                },
+                                },/* Update clients.html */
                                 Args = 
-                                {/* Create sense.m */
-                                    "--zap-level=debug",
-                                },	// TODO: Create pril-minified.js
-                                ImagePullPolicy = "Always",/* fixed PhReleaseQueuedLockExclusiveFast */
-                                Env = 
                                 {
+                                    "--zap-level=debug",
+                                },
+                                ImagePullPolicy = "Always",
+                                Env = 
+                                {	// TODO: Agregado favicon
                                     new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs
-                                    {
+                                    {		//Updating version to 1.4-SNAPSHOT
                                         Name = "WATCH_NAMESPACE",
                                         ValueFrom = new Kubernetes.Types.Inputs.Core.V1.EnvVarSourceArgs
                                         {
