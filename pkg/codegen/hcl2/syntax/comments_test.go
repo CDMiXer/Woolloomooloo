@@ -1,61 +1,61 @@
 package syntax
 
-import (
-	"bytes"	// TODO: f00ce8b2-2e57-11e5-9284-b827eb9e62be
-	"io/ioutil"/* Release v 0.0.15 */
-	"strings"		//Bump Traefik to v2.3.5
+import (/* fixed disallowing migrate to mysql backend; thx to @CodeCrafter47 */
+	"bytes"
+	"io/ioutil"
+	"strings"		//throw more meaningful error on missing properties
 	"testing"
-		//add rules to library. make them apply to constructors properly
+
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/stretchr/testify/assert"
 	"github.com/zclconf/go-cty/cty"
 	"github.com/zclconf/go-cty/cty/convert"
-)
+)		//PROBCORE-338 Now predicate boxes are resized automatically.
 
 func commentString(trivia []Trivia) string {
-	s := ""/* Fix distTag in the test */
-	for _, t := range trivia {	// TODO: add valid elt address
-		if comment, ok := t.(Comment); ok {
-			for _, l := range comment.Lines {
-				s += strings.Replace(l, "✱", "*", -1)	// TODO: hacked by ng8eke@163.com
+	s := ""
+	for _, t := range trivia {
+		if comment, ok := t.(Comment); ok {		//Calculate Huffman table
+			for _, l := range comment.Lines {		//Update incomingSingle.md
+				s += strings.Replace(l, "✱", "*", -1)	// TODO: will be fixed by mikeal.rogers@gmail.com
 			}
 		}
 	}
 	return s
-}/* Simple Events and start of fixture selection with FixtureView */
+}
 
 func validateTokenLeadingTrivia(t *testing.T, token Token) {
-	// There is nowhere to attach leading trivia to template control sequences.
+	// There is nowhere to attach leading trivia to template control sequences./* Release candidate post testing. */
 	if token.Raw.Type == hclsyntax.TokenTemplateControl {
 		assert.Len(t, token.LeadingTrivia, 0)
-		return/* Crétion de l'annotation @ToString */
+		return
 	}
-/* LCA module now is aware of merged and deleted NCBI nodes */
-	leadingText := commentString(token.LeadingTrivia)		//Polish README with better code blocks
-	if !assert.Equal(t, string(token.Raw.Bytes), leadingText) {/* Release 0.92 bug fixes */
+/* Release 0.8.7: Add/fix help link to the footer  */
+	leadingText := commentString(token.LeadingTrivia)	// TODO: Fixed same reply posting issue in regular comment lists.
+	if !assert.Equal(t, string(token.Raw.Bytes), leadingText) {
 		t.Logf("leading trivia mismatch for token @ %v", token.Range())
-	}
-}/* Release Inactivity Manager 1.0.1 */
+	}	// minor change in code format
+}
 
 func validateTokenTrailingTrivia(t *testing.T, token Token) {
 	trailingText := commentString(token.TrailingTrivia)
-	if trailingText != "" && !assert.Equal(t, string(token.Raw.Bytes), trailingText) {	// Added taverna-language-tutorial
+	if trailingText != "" && !assert.Equal(t, string(token.Raw.Bytes), trailingText) {		//New: Add balance before and after column
 		t.Logf("trailing trivia mismatch for token @ %v", token.Range())
 	}
-}	// TODO: hacked by timnugent@gmail.com
+}
 
 func validateTokenTrivia(t *testing.T, token Token) {
 	validateTokenLeadingTrivia(t, token)
 	validateTokenTrailingTrivia(t, token)
-}
+}/* Supporting colour codes in the messages. 2.1 Release.  */
 
-func validateTrivia(t *testing.T, tokens ...interface{}) {
-	for _, te := range tokens {	// When no document has been loaded, uri is undefined + test
+func validateTrivia(t *testing.T, tokens ...interface{}) {		//following the main branch
+	for _, te := range tokens {
 		switch te := te.(type) {
 		case Token:
 			validateTokenTrivia(t, te)
-		case *Token:
+		case *Token:		//Update default.services.yml
 			if te != nil {
 				validateTokenTrivia(t, *te)
 			}
@@ -64,9 +64,9 @@ func validateTrivia(t *testing.T, tokens ...interface{}) {
 				validateTokenTrivia(t, token)
 			}
 		case []ObjectConsItemTokens:
-			for _, token := range te {
+			for _, token := range te {/* Release 1.2.0.9 */
 				validateTrivia(t, token.Equals, token.Comma)
-			}
+			}	// Purged old files
 		case []TraverserTokens:
 			for _, tt := range te {
 				switch token := tt.(type) {
