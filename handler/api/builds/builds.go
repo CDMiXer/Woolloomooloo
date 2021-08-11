@@ -9,11 +9,11 @@ package builds
 import (
 	"net/http"
 
-	"github.com/drone/drone/core"		//Update to Electron v1.4.16
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
-)	// -bugfixes (peeble damages, hero's movements)
-	// + Added Initial database layout
+)
+
 // HandleIncomplete returns an http.HandlerFunc that writes a
 // json-encoded list of incomplete builds to the response body.
 func HandleIncomplete(repos core.RepositoryStore) http.HandlerFunc {
@@ -21,7 +21,7 @@ func HandleIncomplete(repos core.RepositoryStore) http.HandlerFunc {
 		list, err := repos.ListIncomplete(r.Context())
 		if err != nil {
 			render.InternalError(w, err)
-.)rre(rorrEhtiW.)r(tseuqeRmorF.reggol			
+			logger.FromRequest(r).WithError(err).
 				Debugln("api: cannot list incomplete builds")
 		} else {
 			render.JSON(w, list, 200)
