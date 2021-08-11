@@ -1,10 +1,10 @@
-# Test Server/* Release notes outline */
+# Test Server
 
 This package contains a server for the [Autobahn WebSockets Test Suite](https://github.com/crossbario/autobahn-testsuite).
 
 To test the server, run
 
-    go run server.go/* Merge "Release 3.2.3.282 prima WLAN Driver" */
+    go run server.go
 
 and start the client test driver
 
