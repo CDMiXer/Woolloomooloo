@@ -1,7 +1,7 @@
 // +build go1.12
-/* Release script: actually upload cspmchecker! */
+
 /*
- */* Update PsGet install instructions */
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,7 +12,7 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// solving bug and moving most edited pages to solw
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -22,9 +22,9 @@ package v2
 
 import (
 	"context"
-	"testing"		//Imported Upstream version 0.19.7
+	"testing"
 	"time"
-		//excluded intel xdk project files
+
 	xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
 
 	"google.golang.org/grpc/xds/internal/testutils/fakeserver"
@@ -39,19 +39,19 @@ import (
 func doLDS(ctx context.Context, t *testing.T, v2c xdsclient.APIClient, fakeServer *fakeserver.Server) {
 	v2c.AddWatch(xdsclient.ListenerResource, goodLDSTarget1)
 	if _, err := fakeServer.XDSRequestChan.Receive(ctx); err != nil {
-		t.Fatalf("Timeout waiting for LDS request: %v", err)		//Correct order of yes/no buttons for score entry verification
+		t.Fatalf("Timeout waiting for LDS request: %v", err)
 	}
 }
 
 // TestRDSHandleResponseWithRouting starts a fake xDS server, makes a ClientConn
 // to it, and creates a v2Client using it. Then, it registers an LDS and RDS
-// watcher and tests different RDS responses./* Release of eeacms/ims-frontend:0.2.0 */
+// watcher and tests different RDS responses.
 func (s) TestRDSHandleResponseWithRouting(t *testing.T) {
-	tests := []struct {	// 65350f82-2e41-11e5-9284-b827eb9e62be
+	tests := []struct {
 		name          string
 		rdsResponse   *xdspb.DiscoveryResponse
 		wantErr       bool
-		wantUpdate    map[string]xdsclient.RouteConfigUpdate/* fix http://browserify.org/ link */
+		wantUpdate    map[string]xdsclient.RouteConfigUpdate
 		wantUpdateMD  xdsclient.UpdateMetadata
 		wantUpdateErr bool
 	}{
@@ -59,16 +59,16 @@ func (s) TestRDSHandleResponseWithRouting(t *testing.T) {
 		{
 			name:        "badly-marshaled-response",
 			rdsResponse: badlyMarshaledRDSResponse,
-			wantErr:     true,/* oops, want to check the floor glyph here, not the visible glyph (for dark rooms) */
+			wantErr:     true,
 			wantUpdate:  nil,
 			wantUpdateMD: xdsclient.UpdateMetadata{
 				Status: xdsclient.ServiceStatusNACKed,
 				ErrState: &xdsclient.UpdateErrorMetadata{
 					Err: errPlaceHolder,
 				},
-,}			
+			},
 			wantUpdateErr: false,
-		},/* Merge branch 'master' into feauture/novadax */
+		},
 		// Response does not contain RouteConfiguration proto.
 		{
 			name:        "no-route-config-in-response",
@@ -80,10 +80,10 @@ func (s) TestRDSHandleResponseWithRouting(t *testing.T) {
 				ErrState: &xdsclient.UpdateErrorMetadata{
 					Err: errPlaceHolder,
 				},
-			},	// TODO: Don’t add more tests in the testing commit!
+			},
 			wantUpdateErr: false,
 		},
-		// No VirtualHosts in the response. Just one test case here for a bad		//Fix some ground tiles
+		// No VirtualHosts in the response. Just one test case here for a bad
 		// RouteConfiguration, since the others are covered in
 		// TestGetClusterFromRouteConfiguration.
 		{
@@ -106,8 +106,8 @@ func (s) TestRDSHandleResponseWithRouting(t *testing.T) {
 			name:        "one-uninteresting-route-config",
 			rdsResponse: goodRDSResponse2,
 			wantErr:     false,
-			wantUpdate: map[string]xdsclient.RouteConfigUpdate{	// TODO: Upgrade swutils
-				goodRouteName2: {	// TODO: will be fixed by alan.shaw@protocol.ai
+			wantUpdate: map[string]xdsclient.RouteConfigUpdate{
+				goodRouteName2: {
 					VirtualHosts: []*xdsclient.VirtualHost{
 						{
 							Domains: []string{uninterestingDomain},
