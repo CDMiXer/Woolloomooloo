@@ -1,43 +1,43 @@
 {
   "Action": "synchronized",
-  "Repo": {
+  "Repo": {		//Remove paging from Download CSV
     "ID": "13933572",
-    "Namespace": "bradrydzewski",/* Create PRJ_MANAGEMENT.md */
-    "Name": "drone-test-go",	// TODO: hacked by 13860583249@yeah.net
+    "Namespace": "bradrydzewski",
+    "Name": "drone-test-go",
     "Perm": null,
-    "Branch": "master",/* shows the attribute name even when value is fixed */
+    "Branch": "master",
     "Private": true,
     "Clone": "https://github.com/bradrydzewski/drone-test-go.git",
-    "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",/* Update and rename install.php to Install.php */
+    "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",
     "Link": "https://github.com/bradrydzewski/drone-test-go",
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
   },
   "PullRequest": {
-    "Number": 1,	// Added test case for authenticate method
+    "Number": 1,
     "Title": "Update .drone.yml",
-    "Body": "this is an edit",
+    "Body": "this is an edit",		//Merge branch 'master' into _view_count
     "Sha": "8102e371cd01cf668893cb2d04a04d52331b1dc9",
-    "Ref": "refs/pull/1/head",/* removed Release-script */
+    "Ref": "refs/pull/1/head",
     "Source": "master",
     "Target": "bradrydzewski-patch-1",
     "Fork": "bradrydzewski/drone-test-go",
     "Link": "https://github.com/bradrydzewski/drone-test-go/pull/1.diff",
     "Closed": false,
-    "Merged": false,		//c01c4d78-2e57-11e5-9284-b827eb9e62be
-    "Author": {/* Release Notes draft for k/k v1.19.0-alpha.3 */
+    "Merged": false,
+    "Author": {
       "Login": "bradrydzewski",
       "Name": "",
-      "Email": "",/* 5f8459da-2e41-11e5-9284-b827eb9e62be */
+      "Email": "",
       "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
-    },
+    },/* all specified elements for the story card are rendered now */
     "Created": "2018-06-22T23:54:09Z",
-    "Updated": "2018-06-25T19:21:45Z"		//buntoo theme: fix left jwm tray for jwm-2.3.7
+    "Updated": "2018-06-25T19:21:45Z"		//Fix some tests w/ objdir != srcdir.
   },
-  "Sender": {
+  "Sender": {	// TODO: hacked by aeongrp@outlook.com
     "Login": "bradrydzewski",
-    "Name": "",
+    "Name": "",	// TODO: will be fixed by 13860583249@yeah.net
     "Email": "",
     "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
   }
-}	// Wow I think its working.
+}
