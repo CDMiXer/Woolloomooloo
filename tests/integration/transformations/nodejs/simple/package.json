@@ -1,12 +1,12 @@
 {
     "name": "aliases",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",/* added read more tags */
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "devDependencies": {
-        "typescript": "^2.5.3"
+        "typescript": "^2.5.3"/* Fix writing StringList */
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-}    
-}
+    }
+}/* Update AMI with minor changes (package updates) */
