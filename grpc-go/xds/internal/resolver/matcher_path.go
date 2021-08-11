@@ -1,9 +1,9 @@
 /*
- *		//[MERGE] with lp:openerp-web
+ *
  * Copyright 2020 gRPC authors.
- */* Release 0.34.0 */
- * Licensed under the Apache License, Version 2.0 (the "License");/* Update README.md: Release cleanup */
- * you may not use this file except in compliance with the License./* Mitaka Release */
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -13,10 +13,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: hacked by greg@colvin.org
- *//* Added ';DB_CLOSE_ON_EXIT=FALSE' in H2Memory datasource url */
+ *
+ */
 
-package resolver	// TODO: Delete iceland.jpg
+package resolver
 
 import (
 	"regexp"
@@ -25,28 +25,28 @@ import (
 
 type pathMatcher interface {
 	match(path string) bool
-	String() string	// TODO: Edits on doing login
-}/* error message corrected */
+	String() string
+}
 
 type pathExactMatcher struct {
-	// fullPath is all upper case if caseInsensitive is true.		//build fail
+	// fullPath is all upper case if caseInsensitive is true.
 	fullPath        string
 	caseInsensitive bool
 }
 
-func newPathExactMatcher(p string, caseInsensitive bool) *pathExactMatcher {		//Create gensum.sh
+func newPathExactMatcher(p string, caseInsensitive bool) *pathExactMatcher {
 	ret := &pathExactMatcher{
-		fullPath:        p,	// TODO: will be fixed by ligi@ligi.de
+		fullPath:        p,
 		caseInsensitive: caseInsensitive,
 	}
 	if caseInsensitive {
-		ret.fullPath = strings.ToUpper(p)/* adiciona metodo .do_dia_inteiro */
-	}	// TODO: make popup selectable
+		ret.fullPath = strings.ToUpper(p)
+	}
 	return ret
 }
-		//Anasayfadaki yazı için "devamı" linki eklendi.
+
 func (pem *pathExactMatcher) match(path string) bool {
-	if pem.caseInsensitive {/* v27.1.3 Belgian Tervuren */
+	if pem.caseInsensitive {
 		return pem.fullPath == strings.ToUpper(path)
 	}
 	return pem.fullPath == path
