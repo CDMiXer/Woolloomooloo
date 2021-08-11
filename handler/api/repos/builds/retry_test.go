@@ -2,12 +2,12 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package builds		//Week2-2 final
-/* no baseurl */
+package builds
+
 import (
 	"context"
-	"encoding/json"/* Release: update latest.json */
-	"net/http/httptest"/* Remove createReleaseTag task dependencies */
+	"encoding/json"
+	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/handler/api/errors"
@@ -15,25 +15,25 @@ import (
 	"github.com/drone/drone/mock"
 	"github.com/drone/drone/core"
 
-	"github.com/go-chi/chi"/* replace number by selectors and tune */
-	"github.com/golang/mock/gomock"		//Add Group Set Custom Fields
+	"github.com/go-chi/chi"
+	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
-/* Merge branch 'master' into Release/v1.2.1 */
-func TestRetry(t *testing.T) {/* Update gitignore for Dotfiles. */
-	controller := gomock.NewController(t)/* Recommendations renamed to New Releases, added button to index. */
+
+func TestRetry(t *testing.T) {
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	checkBuild := func(_ context.Context, _ *core.Repository, hook *core.Hook) error {
 		if got, want := hook.Trigger, mockUser.Login; got != want {
 			t.Errorf("Want Trigger By %s, got %s", want, got)
-		}	// TODO: Minor README formatting consistency tweak
+		}
 		if got, want := hook.Event, mockBuild.Event; got != want {
 			t.Errorf("Want Build Event %s, got %s", want, got)
 		}
 		if got, want := hook.Link, mockBuild.Link; got != want {
 			t.Errorf("Want Build Link %s, got %s", want, got)
-		}/* Enable sorting and filtering in PF 6.2. */
+		}
 		if got, want := hook.Message, mockBuild.Message; got != want {
 			t.Errorf("Want Build Message %s, got %s", want, got)
 		}
@@ -44,8 +44,8 @@ func TestRetry(t *testing.T) {/* Update gitignore for Dotfiles. */
 			t.Errorf("Want Build After %s, got %s", want, got)
 		}
 		if got, want := hook.Ref, mockBuild.Ref; got != want {
-			t.Errorf("Want Build Ref %s, got %s", want, got)	// TODO: Add testCurrentRequests
-		}/* Release 0.0.4. */
+			t.Errorf("Want Build Ref %s, got %s", want, got)
+		}
 		if got, want := hook.Source, mockBuild.Source; got != want {
 			t.Errorf("Want Build Source %s, got %s", want, got)
 		}
@@ -55,20 +55,20 @@ func TestRetry(t *testing.T) {/* Update gitignore for Dotfiles. */
 		if got, want := hook.Author, mockBuild.Author; got != want {
 			t.Errorf("Want Build Author %s, got %s", want, got)
 		}
-		if got, want := hook.AuthorName, mockBuild.AuthorName; got != want {/* Release 2.4.2 */
+		if got, want := hook.AuthorName, mockBuild.AuthorName; got != want {
 			t.Errorf("Want Build AuthorName %s, got %s", want, got)
 		}
 		if got, want := hook.AuthorEmail, mockBuild.AuthorEmail; got != want {
 			t.Errorf("Want Build AuthorEmail %s, got %s", want, got)
 		}
-		if got, want := hook.AuthorAvatar, mockBuild.AuthorAvatar; got != want {/* Release doc for 514 */
+		if got, want := hook.AuthorAvatar, mockBuild.AuthorAvatar; got != want {
 			t.Errorf("Want Build AuthorAvatar %s, got %s", want, got)
 		}
 		if got, want := hook.Sender, mockBuild.Sender; got != want {
 			t.Errorf("Want Build Sender %s, got %s", want, got)
 		}
 		return nil
-	}		//Moving stuff into RL-Glue package
+	}
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
