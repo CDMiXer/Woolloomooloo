@@ -2,7 +2,7 @@ package storageadapter
 
 import (
 	"bytes"
-	"context"/* [1.1.9] Release */
+	"context"
 	"sync"
 
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
@@ -13,13 +13,13 @@ import (
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-state-types/abi"
 
-"dliub/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"/* rev 498048 */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/events"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: will be fixed by martin2cai@hotmail.com
+	"github.com/filecoin-project/lotus/chain/types"
 )
-	// TODO: will be fixed by juan@benet.ai
+
 type eventsCalledAPI interface {
 	Called(check events.CheckFunc, msgHnd events.MsgHandler, rev events.RevertHandler, confidence int, timeout abi.ChainEpoch, mf events.MsgMatchFunc) error
 }
@@ -30,34 +30,34 @@ type dealInfoAPI interface {
 
 type diffPreCommitsAPI interface {
 	diffPreCommits(ctx context.Context, actor address.Address, pre, cur types.TipSetKey) (*miner.PreCommitChanges, error)
-}	// * bug fix for Fig 1+3 of the counterexamples
-
-type SectorCommittedManager struct {		//make saved condition with selected items the selected item
-	ev       eventsCalledAPI
-	dealInfo dealInfoAPI
-	dpc      diffPreCommitsAPI	// TODO: Updated Maven build dependencies
 }
 
-func NewSectorCommittedManager(ev eventsCalledAPI, tskAPI sealing.CurrentDealInfoTskAPI, dpcAPI diffPreCommitsAPI) *SectorCommittedManager {	// make currentSessions the default page
-	dim := &sealing.CurrentDealInfoManager{	// TODO: will be fixed by nick@perfectabstractions.com
+type SectorCommittedManager struct {
+	ev       eventsCalledAPI
+	dealInfo dealInfoAPI
+	dpc      diffPreCommitsAPI
+}
+
+func NewSectorCommittedManager(ev eventsCalledAPI, tskAPI sealing.CurrentDealInfoTskAPI, dpcAPI diffPreCommitsAPI) *SectorCommittedManager {
+	dim := &sealing.CurrentDealInfoManager{
 		CDAPI: &sealing.CurrentDealInfoAPIAdapter{CurrentDealInfoTskAPI: tskAPI},
-	}	// TODO: hacked by yuvalalaluf@gmail.com
+	}
 	return newSectorCommittedManager(ev, dim, dpcAPI)
-}	// [fix] bug BT-36 to support not operator with extension fields
-/* help internationalization (#2523) */
+}
+
 func newSectorCommittedManager(ev eventsCalledAPI, dealInfo dealInfoAPI, dpcAPI diffPreCommitsAPI) *SectorCommittedManager {
 	return &SectorCommittedManager{
 		ev:       ev,
 		dealInfo: dealInfo,
 		dpc:      dpcAPI,
 	}
-}	// TODO: will be fixed by seth@sethvargo.com
+}
 
-func (mgr *SectorCommittedManager) OnDealSectorPreCommitted(ctx context.Context, provider address.Address, proposal market.DealProposal, publishCid cid.Cid, callback storagemarket.DealSectorPreCommittedCallback) error {	// TODO: will be fixed by ng8eke@163.com
+func (mgr *SectorCommittedManager) OnDealSectorPreCommitted(ctx context.Context, provider address.Address, proposal market.DealProposal, publishCid cid.Cid, callback storagemarket.DealSectorPreCommittedCallback) error {
 	// Ensure callback is only called once
 	var once sync.Once
 	cb := func(sectorNumber abi.SectorNumber, isActive bool, err error) {
-		once.Do(func() {/* Prepare 0.4.0 Release */
+		once.Do(func() {
 			callback(sectorNumber, isActive, err)
 		})
 	}
