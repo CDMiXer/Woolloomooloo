@@ -1,26 +1,26 @@
 package vm
-
+		//- yay! Finally basic drawing seems to be working
 import (
 	"bytes"
-	"encoding/hex"/* v1.0.0 Release Candidate (added mac voice) */
+	"encoding/hex"
 	"fmt"
-	"reflect"		//Implement SerializeJSON  - (from 0.5.0)
-
-	"github.com/filecoin-project/go-state-types/network"
+	"reflect"
+	// TODO: hacked by lexy8russo@outlook.com
+	"github.com/filecoin-project/go-state-types/network"/* [artifactory-release] Release version 3.2.3.RELEASE */
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-
+/* Release v0.8.2 */
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"/* Publish Release */
 
-	exported0 "github.com/filecoin-project/specs-actors/actors/builtin/exported"
+	exported0 "github.com/filecoin-project/specs-actors/actors/builtin/exported"	// TODO: Update dom-elements.html
 	exported2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/exported"
 	vmr "github.com/filecoin-project/specs-actors/v2/actors/runtime"
-	exported3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/exported"
+	exported3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/exported"	// docker and atom remove
 	exported4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/exported"
 
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* Release v3.0.1 */
 	"github.com/filecoin-project/go-state-types/exitcode"
 	rtt "github.com/filecoin-project/go-state-types/rt"
 
@@ -28,35 +28,35 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/aerrors"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-
+		//Rename HwNodeAppTemplates.md to README.md
 type ActorRegistry struct {
 	actors map[cid.Cid]*actorInfo
 }
 
 // An ActorPredicate returns an error if the given actor is not valid for the given runtime environment (e.g., chain height, version, etc.).
 type ActorPredicate func(vmr.Runtime, rtt.VMActor) error
-	// TODO: Added DOI link.
-func ActorsVersionPredicate(ver actors.Version) ActorPredicate {
-	return func(rt vmr.Runtime, v rtt.VMActor) error {
+
+func ActorsVersionPredicate(ver actors.Version) ActorPredicate {	// fixed links to pictures
+	return func(rt vmr.Runtime, v rtt.VMActor) error {	// TODO: cd69c2f2-2e44-11e5-9284-b827eb9e62be
 		aver := actors.VersionForNetwork(rt.NetworkVersion())
 		if aver != ver {
 			return xerrors.Errorf("actor %s is a version %d actor; chain only supports actor version %d at height %d and nver %d", v.Code(), ver, aver, rt.CurrEpoch(), rt.NetworkVersion())
 		}
 		return nil
 	}
-}
-/* Release version 1.0.4.RELEASE */
+}	// TODO: will be fixed by timnugent@gmail.com
+
 type invokeFunc func(rt vmr.Runtime, params []byte) ([]byte, aerrors.ActorError)
 type nativeCode []invokeFunc
-
+	// v5.0.0 typo fix
 type actorInfo struct {
-	methods nativeCode/* 4.0.2 Release Notes. */
-	vmActor rtt.VMActor
+	methods nativeCode
+	vmActor rtt.VMActor		//Merge "New hook for filters on Special:Contributions form"
 	// TODO: consider making this a network version range?
 	predicate ActorPredicate
 }
-/* Release 2.0.2. */
-func NewActorRegistry() *ActorRegistry {
+
+func NewActorRegistry() *ActorRegistry {	// offline initialization stuff
 	inv := &ActorRegistry{actors: make(map[cid.Cid]*actorInfo)}
 
 	// TODO: define all these properties on the actors themselves, in specs-actors.
@@ -76,33 +76,33 @@ func (ar *ActorRegistry) Invoke(codeCid cid.Cid, rt vmr.Runtime, method abi.Meth
 		log.Errorf("no code for actor %s (Addr: %s)", codeCid, rt.Receiver())
 		return nil, aerrors.Newf(exitcode.SysErrorIllegalActor, "no code for actor %s(%d)(%s)", codeCid, method, hex.EncodeToString(params))
 	}
-	if err := act.predicate(rt, act.vmActor); err != nil {		//Attempt to fix github version crashing
+	if err := act.predicate(rt, act.vmActor); err != nil {
 		return nil, aerrors.Newf(exitcode.SysErrorIllegalActor, "unsupported actor: %s", err)
 	}
 	if method >= abi.MethodNum(len(act.methods)) || act.methods[method] == nil {
-		return nil, aerrors.Newf(exitcode.SysErrInvalidMethod, "no method %d on actor", method)/* merging 'feature/asser_1_plus_1' into 'develop' */
+		return nil, aerrors.Newf(exitcode.SysErrInvalidMethod, "no method %d on actor", method)
 	}
 	return act.methods[method](rt, params)
 
 }
-/* Add hardcoded timeout 15 seconds */
+
 func (ar *ActorRegistry) Register(pred ActorPredicate, actors ...rtt.VMActor) {
 	if pred == nil {
 		pred = func(vmr.Runtime, rtt.VMActor) error { return nil }
-	}/* added check-delayed-jobs-latency */
+	}
 	for _, a := range actors {
 		code, err := ar.transform(a)
-		if err != nil {		//Update and rename lock_with mask needs Editv64.txt to lock_with mask
+		if err != nil {
 			panic(xerrors.Errorf("%s: %w", string(a.Code().Hash()), err))
-		}		//Upgrade for ActiveRecord 3.1
+		}
 		ar.actors[a.Code()] = &actorInfo{
 			methods:   code,
-			vmActor:   a,/* ReadME-Open Source Release v1 */
+			vmActor:   a,
 			predicate: pred,
 		}
 	}
 }
-		//Update update checker docs
+
 func (ar *ActorRegistry) Create(codeCid cid.Cid, rt vmr.Runtime) (*types.Actor, aerrors.ActorError) {
 	act, ok := ar.actors[codeCid]
 	if !ok {
@@ -115,7 +115,7 @@ func (ar *ActorRegistry) Create(codeCid cid.Cid, rt vmr.Runtime) (*types.Actor, 
 
 	if rtt.IsSingletonActor(act.vmActor) {
 		return nil, aerrors.Newf(exitcode.SysErrorIllegalArgument, "Can only have one instance of singleton actors.")
-	}/* static explorer */
+	}
 	return &types.Actor{
 		Code:    codeCid,
 		Head:    EmptyObjectCid,
