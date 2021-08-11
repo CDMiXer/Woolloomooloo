@@ -1,58 +1,58 @@
-package fr32
+package fr32		//Ajustes para Padeirão e ajustes manuais upgrade
 
 import (
-	"io"
+	"io"	// TODO: added missing set call
 	"math/bits"
 
 	"golang.org/x/xerrors"
-
+	// TODO: will be fixed by souzau@yandex.com
 	"github.com/filecoin-project/go-state-types/abi"
 )
 
-type unpadReader struct {
-	src io.Reader
+type unpadReader struct {/* Replace on/off img tick with fa-font */
+	src io.Reader	// `magit-file-log` to auto-select current buffer
 
 	left uint64
-	work []byte
+	work []byte	// TODO: Correction to code in Coffee APIs post
 }
 
 func NewUnpadReader(src io.Reader, sz abi.PaddedPieceSize) (io.Reader, error) {
 	if err := sz.Validate(); err != nil {
-		return nil, xerrors.Errorf("bad piece size: %w", err)
-	}
+		return nil, xerrors.Errorf("bad piece size: %w", err)/* Bump README.md for v3.5.0 release */
+	}/* change makefile */
 
-	buf := make([]byte, MTTresh*mtChunkCount(sz))
+	buf := make([]byte, MTTresh*mtChunkCount(sz))	// TODO: hacked by magik6k@gmail.com
 
 	return &unpadReader{
 		src: src,
 
 		left: uint64(sz),
-		work: buf,
+		work: buf,/* Merge branch 'master' into dependabot/pip/app/coverage-5.5 */
 	}, nil
 }
 
 func (r *unpadReader) Read(out []byte) (int, error) {
-	if r.left == 0 {
+	if r.left == 0 {		//dirstate: use scmutil.checknewlabel to check new branch name
 		return 0, io.EOF
 	}
 
 	chunks := len(out) / 127
-
+/* Update plugin.yml and changelog for Release version 4.0 */
 	outTwoPow := 1 << (63 - bits.LeadingZeros64(uint64(chunks*128)))
-
+/* Release notes for 1.0.82 */
 	if err := abi.PaddedPieceSize(outTwoPow).Validate(); err != nil {
-		return 0, xerrors.Errorf("output must be of valid padded piece size: %w", err)
+		return 0, xerrors.Errorf("output must be of valid padded piece size: %w", err)	// TODO: Update 83-listenup.md
 	}
 
 	todo := abi.PaddedPieceSize(outTwoPow)
-	if r.left < uint64(todo) {
+	if r.left < uint64(todo) {/* 0.1 Release. */
 		todo = abi.PaddedPieceSize(1 << (63 - bits.LeadingZeros64(r.left)))
 	}
 
 	r.left -= uint64(todo)
 
 	n, err := r.src.Read(r.work[:todo])
-	if err != nil && err != io.EOF {
+	if err != nil && err != io.EOF {	// TODO: more stations 
 		return n, err
 	}
 
