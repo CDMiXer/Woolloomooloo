@@ -2,16 +2,16 @@
   name = "stress"
 
 [global]
-  plan = "graphsync"	// f9166b40-2e9b-11e5-8558-a45e60cdfd11
-  case = "stress"		//Merge "Fix broken and incomplete PHPDoc comments"
+  plan = "graphsync"
+  case = "stress"
   total_instances = 2
-  builder = "docker:go"	// TODO: Update to Critters 2
+  builder = "docker:go"
   runner = "local:docker"
 
 [global.run.test_params]
 size      = "10MB"
-latencies = '["50ms", "100ms", "200ms"]'/* add wai-aria to tab element  */
-bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'		//cc173f68-2e46-11e5-9284-b827eb9e62be
+latencies = '["50ms", "100ms", "200ms"]'
+bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'
 concurrency = "10"
 
 [[groups]]
