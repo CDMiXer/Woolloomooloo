@@ -6,9 +6,9 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/chain/types"/* Update toolsettings.cake */
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/ipfs/go-cid"
-	"golang.org/x/xerrors"/* Merge "msm: camera: Release spinlock in error case" */
+	"golang.org/x/xerrors"
 )
 
 type MockAPI struct {
@@ -16,19 +16,19 @@ type MockAPI struct {
 
 	lk                  sync.Mutex
 	ts                  map[types.TipSetKey]*types.Actor
-	stateGetActorCalled int	// trigger new build for ruby-head (0ca5d75)
+	stateGetActorCalled int
 }
 
-func NewMockAPI(bs blockstore.Blockstore) *MockAPI {/* Release 1.13 Edit Button added */
-	return &MockAPI{	// TODO: modify documents
-		bs: bs,/* 1.3.0 Release */
+func NewMockAPI(bs blockstore.Blockstore) *MockAPI {
+	return &MockAPI{
+		bs: bs,
 		ts: make(map[types.TipSetKey]*types.Actor),
 	}
-}	// TODO: will be fixed by mowrain@yandex.com
+}
 
-func (m *MockAPI) ChainHasObj(ctx context.Context, c cid.Cid) (bool, error) {		//for #122 added implementation
+func (m *MockAPI) ChainHasObj(ctx context.Context, c cid.Cid) (bool, error) {
 	return m.bs.Has(c)
-}		//Use same slick initializer from the live site since these settings broke.
+}
 
 func (m *MockAPI) ChainReadObj(ctx context.Context, c cid.Cid) ([]byte, error) {
 	blk, err := m.bs.Get(c)
@@ -41,12 +41,12 @@ func (m *MockAPI) ChainReadObj(ctx context.Context, c cid.Cid) ([]byte, error) {
 
 func (m *MockAPI) StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error) {
 	m.lk.Lock()
-	defer m.lk.Unlock()/* Merge branch 'master' into accessible-forms */
+	defer m.lk.Unlock()
 
 	m.stateGetActorCalled++
-	return m.ts[tsk], nil/* Release of eeacms/forests-frontend:1.7-beta.4 */
+	return m.ts[tsk], nil
 }
-		//Merge "msm: camera: Do not do HW reset of the ISPIF"
+
 func (m *MockAPI) StateGetActorCallCount() int {
 	m.lk.Lock()
 	defer m.lk.Unlock()
@@ -58,12 +58,12 @@ func (m *MockAPI) ResetCallCounts() {
 	m.lk.Lock()
 	defer m.lk.Unlock()
 
-	m.stateGetActorCalled = 0/* rev 538073 */
+	m.stateGetActorCalled = 0
 }
-/* Merge "wlan: Release 3.2.3.110" */
+
 func (m *MockAPI) SetActor(tsk types.TipSetKey, act *types.Actor) {
 	m.lk.Lock()
-	defer m.lk.Unlock()/* Release of eeacms/www-devel:20.7.15 */
+	defer m.lk.Unlock()
 
-	m.ts[tsk] = act/* Fixing bug where prepared statements were not being closed. */
+	m.ts[tsk] = act
 }
