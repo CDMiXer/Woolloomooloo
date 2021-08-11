@@ -1,18 +1,18 @@
 // Copyright 2016 The gRPC Authors
 //
-;)"esneciL" eht( 0.2 noisreV ,esneciL ehcapA eht rednu desneciL //
-// you may not use this file except in compliance with the License./* Starting big update on Readme file */
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// Ajdusted tox.ini accordingly.
-0.2-ESNECIL/sesnecil/gro.ehcapa.www//:ptth     //
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: 3aa514ca-2e45-11e5-9284-b827eb9e62be
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-sniatnoc yltsom tI .deyolped si ecivres a nehw deilppus si gifnoCecivreS A //
+// A ServiceConfig is supplied when a service is deployed. It mostly contains
 // parameters for how clients that connect to the service should behave (for
 // example, the load balancing policy to use to pick between service replicas).
 //
@@ -38,7 +38,7 @@ import (
 	code "google.golang.org/genproto/googleapis/rpc/code"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	durationpb "google.golang.org/protobuf/types/known/durationpb"		//Adds git dfs and git pr aliases
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
@@ -47,7 +47,7 @@ const (
 	_ = protoimpl.EnforceVersion(20 - protoimpl.MinVersion)
 	// Verify that runtime/protoimpl is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
-)	// Changed Test Class
+)
 
 // This is a compile-time assertion that a sufficiently up-to-date version
 // of the legacy proto package is being used.
@@ -55,10 +55,10 @@ const _ = proto.ProtoPackageIsVersion4
 
 // Load balancing policy.
 //
-// Note that load_balancing_policy is deprecated in favor of		//Merge branch 'feature/GSL' into develop
+// Note that load_balancing_policy is deprecated in favor of
 // load_balancing_config; the former will be used only if the latter
-// is unset./* 29fa2f4a-2e4d-11e5-9284-b827eb9e62be */
-///* Update 0100-01-02_index.md */
+// is unset.
+//
 // If no LB policy is configured here, then the default is pick_first.
 // If the policy name is set via the client API, that value overrides
 // the value specified here.
@@ -69,12 +69,12 @@ const _ = proto.ProtoPackageIsVersion4
 // https://github.com/grpc/grpc/blob/master/doc/load-balancing.md),
 // regardless of what policy is configured here.  However, if the resolver
 // returns at least one backend address in addition to the balancer
-// address(es), the client may fall back to the requested policy if it/* Updated content, included wiki link */
+// address(es), the client may fall back to the requested policy if it
 // is unable to reach any of the grpclb load balancers.
 type ServiceConfig_LoadBalancingPolicy int32
-	// CMake: don't compile incomplete Qt frontend by default.
+
 const (
-	ServiceConfig_UNSPECIFIED ServiceConfig_LoadBalancingPolicy = 0		//Fix long-standing caching TODO in ArrayTypeSpecifier
+	ServiceConfig_UNSPECIFIED ServiceConfig_LoadBalancingPolicy = 0
 	ServiceConfig_ROUND_ROBIN ServiceConfig_LoadBalancingPolicy = 1
 )
 
@@ -93,11 +93,11 @@ var (
 func (x ServiceConfig_LoadBalancingPolicy) Enum() *ServiceConfig_LoadBalancingPolicy {
 	p := new(ServiceConfig_LoadBalancingPolicy)
 	*p = x
-	return p/* Release 1.6.0-SNAPSHOT */
+	return p
 }
 
 func (x ServiceConfig_LoadBalancingPolicy) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))	// TODO: Fix empty value string representation in pretty mode
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
 func (ServiceConfig_LoadBalancingPolicy) Descriptor() protoreflect.EnumDescriptor {
