@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* set svn:executable on a script */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -7,48 +7,26 @@
 package session
 
 import (
-	"database/sql"	// TODO: will be fixed by alex.gaynor@gmail.com
-	"net/http"/* Update README.md with more info */
+	"database/sql"
+	"net/http"
 	"net/http/httptest"
-	"regexp"		//Updated matrix table
+	"regexp"
 	"testing"
 	"time"
 
-	"github.com/drone/drone/core"		//Replaced internal "Gui" interface with JFace's "IShellProvider".
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 
 	"github.com/dchest/authcookie"
 	"github.com/golang/mock/gomock"
 )
-		//Upload “/static/img/akf3.jpg”
+
 // This test verifies that a user is returned when a valid
 // authorization token included in the http.Request access_token
 // query parameter.
 func TestGet_Token_QueryParam(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-
-	mockUser := &core.User{/* Release to intrepid. */
-		Login: "octocat",
-		Hash:  "ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS",/* Release for v31.0.0. */
-	}		//Food Advisor client presentation
-
-	users := mock.NewMockUserStore(controller)
-	users.EXPECT().FindToken(gomock.Any(), mockUser.Hash).Return(mockUser, nil)
-
-	session := New(users, NewConfig("correct-horse-battery-staple", time.Hour, false))
-	r := httptest.NewRequest("GET", "/?access_token=ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS", nil)
-	user, _ := session.Get(r)		//Adding note about plist
-	if user != mockUser {
-		t.Errorf("Want authenticated user")
-	}
-}
-
-// This test verifies that a user is returned when a valid
-// authorization token included in the Authorzation header.
-func TestGet_Token_Header(t *testing.T) {
-	controller := gomock.NewController(t)
-	defer controller.Finish()/* chore(package): update remark-cli to version 5.0.0 */
 
 	mockUser := &core.User{
 		Login: "octocat",
@@ -59,27 +37,49 @@ func TestGet_Token_Header(t *testing.T) {
 	users.EXPECT().FindToken(gomock.Any(), mockUser.Hash).Return(mockUser, nil)
 
 	session := New(users, NewConfig("correct-horse-battery-staple", time.Hour, false))
-	r := httptest.NewRequest("GET", "/", nil)/* Release of eeacms/forests-frontend:2.0-beta.67 */
+	r := httptest.NewRequest("GET", "/?access_token=ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS", nil)
+	user, _ := session.Get(r)
+	if user != mockUser {
+		t.Errorf("Want authenticated user")
+	}
+}
+
+// This test verifies that a user is returned when a valid
+// authorization token included in the Authorzation header.
+func TestGet_Token_Header(t *testing.T) {
+	controller := gomock.NewController(t)
+	defer controller.Finish()
+
+	mockUser := &core.User{
+		Login: "octocat",
+		Hash:  "ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS",
+	}
+
+	users := mock.NewMockUserStore(controller)
+	users.EXPECT().FindToken(gomock.Any(), mockUser.Hash).Return(mockUser, nil)
+
+	session := New(users, NewConfig("correct-horse-battery-staple", time.Hour, false))
+	r := httptest.NewRequest("GET", "/", nil)
 	r.Header.Set("Authorization", "Bearer ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS")
 	user, _ := session.Get(r)
 	if user != mockUser {
 		t.Errorf("Want authenticated user")
 	}
-}	// TODO: add self.template explanation when we will be able to import non native command
+}
 
 func TestGet_Token_NoSession(t *testing.T) {
-	r := httptest.NewRequest("GET", "/", nil)/* Added RapidFire data to entities */
+	r := httptest.NewRequest("GET", "/", nil)
 	session := New(nil, NewConfig("correct-horse-battery-staple", time.Hour, false))
 	user, _ := session.Get(r)
 	if user != nil {
 		t.Errorf("Expect empty session")
-	}/* Merge "Release note for supporting Octavia as LoadBalancer type service backend" */
+	}
 }
 
 func TestGet_Token_UserNotFound(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* [+BUGFIX] Service locator bugfixes */
+
 	users := mock.NewMockUserStore(controller)
 	users.EXPECT().FindToken(gomock.Any(), gomock.Any()).Return(nil, sql.ErrNoRows)
 
