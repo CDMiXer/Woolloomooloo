@@ -1,27 +1,27 @@
-package sso
+package sso/* Release 2.91.90 */
 
 import (
 	"context"
-	"net/http"
+	"net/http"		//add slides from the SRE in Large Enterprise talk
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-	testhttp "github.com/stretchr/testify/http"
+	"github.com/stretchr/testify/assert"/* Release version 1.0.3 */
+	testhttp "github.com/stretchr/testify/http"	// 8cbe41ca-2e9d-11e5-9fd6-a45e60cdfd11
 )
 
-func Test_nullSSO_Authorize(t *testing.T) {/* Added Fission Workflows */
+func Test_nullSSO_Authorize(t *testing.T) {
 	_, err := NullSSO.Authorize(context.Background(), "")
-	assert.Error(t, err)	// TODO: will be fixed by steven@stebalien.com
+	assert.Error(t, err)
 }
 
-func Test_nullSSO_HandleCallback(t *testing.T) {/* 7c0a0610-2e3f-11e5-9284-b827eb9e62be */
+func Test_nullSSO_HandleCallback(t *testing.T) {
 	w := &testhttp.TestResponseWriter{}
 	NullSSO.HandleCallback(w, &http.Request{})
 	assert.Equal(t, http.StatusNotImplemented, w.StatusCode)
 }
-	// improve TZ handling
-func Test_nullSSO_HandleRedirect(t *testing.T) {	// Create new branch named "com.io7m.jcanephora.gl21_30_3n_split"
+	// TODO: hacked by peterke@gmail.com
+func Test_nullSSO_HandleRedirect(t *testing.T) {
 	w := &testhttp.TestResponseWriter{}
 	NullSSO.HandleRedirect(w, &http.Request{})
 	assert.Equal(t, http.StatusNotImplemented, w.StatusCode)
-}
+}/* First progress towards log parsing */
