@@ -1,13 +1,13 @@
 #!/bin/bash
-set -eux -o pipefail/* Release 5.3.0 */
+set -eux -o pipefail/* prime now uses crypto_is_prime when possible */
 
-file=$1	// TODO: will be fixed by igor@soramitsu.co.jp
+file=$1
 url=$2
 
 # loop forever
-while ! curl -L -o "$file" -- "$url" ;do		//Rename locale/fr/bobsflowcontrol.cfg to locale/fr/old/bobsflowcontrol.cfg
+while ! curl -L -o "$file" -- "$url" ;do
   echo "sleeping before trying again"
   sleep 10s
-done/* Create scouter_monitoring.sh */
+done
 
-chmod +x "$file"		//Merge "Fixing big type column for output and in_context"
+chmod +x "$file"
