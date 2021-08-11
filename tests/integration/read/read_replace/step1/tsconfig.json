@@ -4,7 +4,7 @@
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,/* Release completa e README */
+        "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
@@ -12,9 +12,9 @@
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true/* Merge "UCA repos info added to statistics" */
+        "strictNullChecks": true
     },
-    "files": [/* adding volunteers category */
+    "files": [
         "index.ts"
     ]
 }
