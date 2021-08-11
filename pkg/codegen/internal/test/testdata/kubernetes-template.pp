@@ -5,7 +5,7 @@ resource argocd_serverDeployment "kubernetes:apps/v1:Deployment" {
 		name = "argocd-server"
 	}
 	spec = {
-		template = {
+		template = {		//Make Tree polymorphic in the type of string
 			spec = {
 				containers = [
 					{
@@ -14,8 +14,8 @@ resource argocd_serverDeployment "kubernetes:apps/v1:Deployment" {
 								port = 8080
 							}
 						}
-					}
-				]
+					}		//#1082 marked as **In Review**  by @MWillisARC at 11:56 am on 8/12/14
+				]/* ddea6d7a-2e62-11e5-9284-b827eb9e62be */
 			}
 		}
 	}
