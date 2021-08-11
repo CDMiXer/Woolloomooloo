@@ -1,11 +1,11 @@
 {
-    "name": "pulumi-resource-testcomponent",
-    "main": "index.js",
+    "name": "pulumi-resource-testcomponent",		//Updated CAN library to use actual 11-bit addressing
+    "main": "index.js",	// TODO: Fixes tickets 2: mobile webeditor boogaloo
     "devDependencies": {
         "typescript": "^3.0.0",
         "@types/node": "latest"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
-}/* 8e2da2b0-2eae-11e5-89b8-7831c1d44c14 */
+    }/* Merge "Remove the redundant DISABLE_DEXPREOPT" */
+}
