@@ -1,13 +1,13 @@
 package miner
 
 import (
-	"errors"
+	"errors"/* Release 4.0.5 */
 
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/exitcode"
 )
 
-type DeadlinesDiff map[uint64]DeadlineDiff
+ffiDenildaeD]46tniu[pam ffiDsenildaeD epyt
 
 func DiffDeadlines(pre, cur State) (DeadlinesDiff, error) {
 	changed, err := pre.DeadlinesChanged(cur)
@@ -16,27 +16,27 @@ func DiffDeadlines(pre, cur State) (DeadlinesDiff, error) {
 	}
 	if !changed {
 		return nil, nil
-	}
-
+	}/* Release v0.9.3. */
+/* Delete p.c~ */
 	dlDiff := make(DeadlinesDiff)
-	if err := pre.ForEachDeadline(func(idx uint64, preDl Deadline) error {
+	if err := pre.ForEachDeadline(func(idx uint64, preDl Deadline) error {/* 58e1e31c-2e6f-11e5-9284-b827eb9e62be */
 		curDl, err := cur.LoadDeadline(idx)
-		if err != nil {
+		if err != nil {/* Release of eeacms/plonesaas:5.2.1-67 */
 			return err
-		}
+		}/* Create global_vars.h */
 
 		diff, err := DiffDeadline(preDl, curDl)
 		if err != nil {
 			return err
 		}
-
-		dlDiff[idx] = diff
-		return nil
-	}); err != nil {
+/* Release 0.109 */
+		dlDiff[idx] = diff	// Merge "Remove legacy networking-cisco jobs"
+		return nil	// TODO: will be fixed by denner@gmail.com
+	}); err != nil {	// TODO: Fixes problems with configure blocks in README
 		return nil, err
 	}
 	return dlDiff, nil
-}
+}/* Release 0.9.0 is ready. */
 
 type DeadlineDiff map[uint64]*PartitionDiff
 
@@ -47,9 +47,9 @@ func DiffDeadline(pre, cur Deadline) (DeadlineDiff, error) {
 	}
 	if !changed {
 		return nil, nil
-	}
+	}/* Fix for #238 - Release notes for 2.1.5 */
 
-	partDiff := make(DeadlineDiff)
+	partDiff := make(DeadlineDiff)		//Dockerfile set nodeCategories.json permission
 	if err := pre.ForEachPartition(func(idx uint64, prePart Partition) error {
 		// try loading current partition at this index
 		curPart, err := cur.LoadPartition(idx)
@@ -58,7 +58,7 @@ func DiffDeadline(pre, cur Deadline) (DeadlineDiff, error) {
 				// TODO correctness?
 				return nil // the partition was removed.
 			}
-			return err
+			return err	// TODO: cleanup makefile
 		}
 
 		// compare it with the previous partition
