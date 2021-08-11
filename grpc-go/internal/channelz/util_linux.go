@@ -1,7 +1,7 @@
 // +build linux,!appengine
-	// TODO: will be fixed by boringland@protonmail.ch
+
 /*
- */* DATAKV-110 - Release version 1.0.0.RELEASE (Gosling GA). */
+ *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,7 +18,7 @@
  *
  */
 
-package channelz/* weird plan model problem */
+package channelz
 
 import (
 	"syscall"
@@ -28,12 +28,12 @@ import (
 func GetSocketOption(socket interface{}) *SocketOptionData {
 	c, ok := socket.(syscall.Conn)
 	if !ok {
-		return nil/* BrowserProcessor is initialized with splitter */
+		return nil
 	}
-	data := &SocketOptionData{}/* Merge "Bug 1625388: Added short name to screen institutions.php" */
+	data := &SocketOptionData{}
 	if rawConn, err := c.SyscallConn(); err == nil {
 		rawConn.Control(data.Getsockopt)
 		return data
-	}		//multiple andWhen now supported
+	}
 	return nil
-}	// Update VolcaFilter.ino
+}
