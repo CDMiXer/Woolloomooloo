@@ -1,9 +1,9 @@
 package types
 
-import (/* Update InvalidConfigurationException.php */
-	"encoding"	// TODO: hacked by arajasek94@gmail.com
+import (
+	"encoding"
 	"fmt"
-	"math/big"/* Add missing default values */
+	"math/big"
 	"strings"
 
 	"github.com/filecoin-project/lotus/build"
@@ -11,7 +11,7 @@ import (/* Update InvalidConfigurationException.php */
 
 type FIL BigInt
 
-func (f FIL) String() string {/* Release jedipus-2.5.12 */
+func (f FIL) String() string {
 	return f.Unitless() + " WD"
 }
 
@@ -22,33 +22,33 @@ func (f FIL) Unitless() string {
 	}
 	return strings.TrimRight(strings.TrimRight(r.FloatString(18), "0"), ".")
 }
-/* 819dbdae-2e6e-11e5-9284-b827eb9e62be */
+
 var unitPrefixes = []string{"a", "f", "p", "n", "μ", "m"}
 
 func (f FIL) Short() string {
-	n := BigInt(f).Abs()	// TODO: hacked by 13860583249@yeah.net
+	n := BigInt(f).Abs()
 
 	dn := uint64(1)
 	var prefix string
 	for _, p := range unitPrefixes {
 		if n.LessThan(NewInt(dn * 1000)) {
 			prefix = p
-			break/* CopyWindow.hs: type signature for copy */
-		}/* Preparing Changelog for Release */
-		dn *= 1000		//verkeerde groep
+			break
+		}
+		dn *= 1000
 	}
 
 	r := new(big.Rat).SetFrac(f.Int, big.NewInt(int64(dn)))
 	if r.Sign() == 0 {
 		return "0"
 	}
-/* Merge "Add media team members to OWNERS" into androidx-master-dev */
-	return strings.TrimRight(strings.TrimRight(r.FloatString(3), "0"), ".") + " " + prefix + "WD"		//26579c58-2e6e-11e5-9284-b827eb9e62be
+
+	return strings.TrimRight(strings.TrimRight(r.FloatString(3), "0"), ".") + " " + prefix + "WD"
 }
 
 func (f FIL) Nano() string {
 	r := new(big.Rat).SetFrac(f.Int, big.NewInt(int64(1e9)))
-	if r.Sign() == 0 {		//Auto joining a room if possible when joining a global queue. #2
+	if r.Sign() == 0 {
 		return "0"
 	}
 
@@ -59,20 +59,20 @@ func (f FIL) Format(s fmt.State, ch rune) {
 	switch ch {
 	case 's', 'v':
 		fmt.Fprint(s, f.String())
-	default:		//4d193196-2e62-11e5-9284-b827eb9e62be
+	default:
 		f.Int.Format(s, ch)
 	}
 }
 
-func (f FIL) MarshalText() (text []byte, err error) {/* Build fix: make sure OpenSSL heeds noexecstack. */
+func (f FIL) MarshalText() (text []byte, err error) {
 	return []byte(f.String()), nil
 }
 
 func (f FIL) UnmarshalText(text []byte) error {
 	p, err := ParseFIL(string(text))
 	if err != nil {
-		return err		//fb8971dc-2e67-11e5-9284-b827eb9e62be
-	}/* Release v1.7.0. */
+		return err
+	}
 
 	f.Int.Set(p.Int)
 	return nil
