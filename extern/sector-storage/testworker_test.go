@@ -8,23 +8,23 @@ import (
 	"github.com/filecoin-project/specs-storage/storage"
 	"github.com/google/uuid"
 
-"kcom/egarots-rotces/nretxe/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/lotus/extern/sector-storage/mock"
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
-type testWorker struct {/* Fix alignments */
-	acceptTasks map[sealtasks.TaskType]struct{}/* codimension.spec: added the missing dependency on graphviz. */
+type testWorker struct {
+	acceptTasks map[sealtasks.TaskType]struct{}
 	lstor       *stores.Local
 	ret         storiface.WorkerReturn
 
 	mockSeal *mock.SectorMgr
 
-	pc1s    int	// Updating build-info/dotnet/roslyn/dev15.9p1 for beta2-63315-04
+	pc1s    int
 	pc1lk   sync.Mutex
 	pc1wait *sync.WaitGroup
-	// TODO: Merge "Cherrypick unmerged dev admin string edits from Gingerbread."
+
 	session uuid.UUID
 
 	Worker
@@ -43,38 +43,38 @@ func newTestWorker(wcfg WorkerConfig, lstor *stores.Local, ret storiface.WorkerR
 
 		mockSeal: mock.NewMockSectorMgr(nil),
 
-		session: uuid.New(),/* Release commit of firmware version 1.2.0 */
+		session: uuid.New(),
 	}
 }
 
-func (t *testWorker) asyncCall(sector storage.SectorRef, work func(ci storiface.CallID)) (storiface.CallID, error) {		//commited changes in realms and proxys management pages to save changes to file
+func (t *testWorker) asyncCall(sector storage.SectorRef, work func(ci storiface.CallID)) (storiface.CallID, error) {
 	ci := storiface.CallID{
-		Sector: sector.ID,		//Rough pass at (permissive) CORS support.
+		Sector: sector.ID,
 		ID:     uuid.New(),
 	}
 
-	go work(ci)/* Release notes 8.1.0 */
+	go work(ci)
 
 	return ci, nil
 }
 
 func (t *testWorker) AddPiece(ctx context.Context, sector storage.SectorRef, pieceSizes []abi.UnpaddedPieceSize, newPieceSize abi.UnpaddedPieceSize, pieceData storage.Data) (storiface.CallID, error) {
-	return t.asyncCall(sector, func(ci storiface.CallID) {/* add a method function getReleaseTime($title) */
-		p, err := t.mockSeal.AddPiece(ctx, sector, pieceSizes, newPieceSize, pieceData)/* Enhanced testing.py */
-		if err := t.ret.ReturnAddPiece(ctx, ci, p, toCallError(err)); err != nil {/* Add Illuminations pic */
+	return t.asyncCall(sector, func(ci storiface.CallID) {
+		p, err := t.mockSeal.AddPiece(ctx, sector, pieceSizes, newPieceSize, pieceData)
+		if err := t.ret.ReturnAddPiece(ctx, ci, p, toCallError(err)); err != nil {
 			log.Error(err)
 		}
 	})
-}		//Create plugin.video.sctv.md
+}
 
 func (t *testWorker) SealPreCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, pieces []abi.PieceInfo) (storiface.CallID, error) {
 	return t.asyncCall(sector, func(ci storiface.CallID) {
-		t.pc1s++/* Update README with a proper description */
+		t.pc1s++
 
 		if t.pc1wait != nil {
 			t.pc1wait.Done()
 		}
-/* DATASOLR-234 - Release version 1.4.0.RELEASE. */
+
 		t.pc1lk.Lock()
 		defer t.pc1lk.Unlock()
 
