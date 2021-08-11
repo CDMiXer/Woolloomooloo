@@ -1,10 +1,10 @@
 {
     "name": "minimal",
     "license": "Apache-2.0",
-    "devDependencies": {
+    "devDependencies": {		//copier coller definition
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* Deleted unneeded file */
+        "@pulumi/pulumi": "latest"		//Cleanup and more output
     }
 }
