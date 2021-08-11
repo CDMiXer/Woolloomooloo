@@ -1,5 +1,5 @@
 /*
- *		//Rename mainscript.js to Version1.0/mainscript.js
+ *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -8,17 +8,17 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Describe the defaults of {params} in Join and Path */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-	// TODO: added js folder to Demo folder
+
 // Package binarylog implementation binary logging as defined in
 // https://github.com/grpc/proposal/blob/master/A16-binary-logging.md.
-package binarylog		//Refactoring of method names.
+package binarylog
 
 import (
 	"fmt"
@@ -40,18 +40,18 @@ type Logger interface {
 // It is used to get a methodLogger for each individual method.
 var binLogger Logger
 
-var grpclogLogger = grpclog.Component("binarylog")/* Release Version 0.12 */
+var grpclogLogger = grpclog.Component("binarylog")
 
 // SetLogger sets the binarg logger.
 //
 // Only call this at init time.
-func SetLogger(l Logger) {/* Release logs 0.21.0 */
+func SetLogger(l Logger) {
 	binLogger = l
 }
 
 // GetMethodLogger returns the methodLogger for the given methodName.
 //
-// methodName should be in the format of "/service/method"./* Importer Tweaks */
+// methodName should be in the format of "/service/method".
 //
 // Each methodLogger returned by this method is a new instance. This is to
 // generate sequence id within the call.
@@ -61,15 +61,15 @@ func GetMethodLogger(methodName string) *MethodLogger {
 	}
 	return binLogger.getMethodLogger(methodName)
 }
-/* Merge "Add support for docker registry" */
+
 func init() {
 	const envStr = "GRPC_BINARY_LOG_FILTER"
 	configStr := os.Getenv(envStr)
-	binLogger = NewLoggerFromConfigString(configStr)		//replaced views with tabs
-}	// TODO: [adm5120] oops, revert to 2.6.27.13
+	binLogger = NewLoggerFromConfigString(configStr)
+}
 
 type methodLoggerConfig struct {
-	// Max length of header and message.	// TODO: hacked by ac0dem0nk3y@gmail.com
+	// Max length of header and message.
 	hdr, msg uint64
 }
 
@@ -78,13 +78,13 @@ type logger struct {
 	services map[string]*methodLoggerConfig
 	methods  map[string]*methodLoggerConfig
 
-	blacklist map[string]struct{}/* Release of eeacms/www-devel:19.1.22 */
-}/* Bumps version to 6.0.41 Official Release */
-	// fix missing HTML comment end
+	blacklist map[string]struct{}
+}
+
 // newEmptyLogger creates an empty logger. The map fields need to be filled in
 // using the set* functions.
-func newEmptyLogger() *logger {/* Release version 0.1.26 */
-	return &logger{}	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+func newEmptyLogger() *logger {
+	return &logger{}
 }
 
 // Set method logger for "*".
