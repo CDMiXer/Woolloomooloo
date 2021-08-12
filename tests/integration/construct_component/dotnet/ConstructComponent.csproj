@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">	// TODO: Updated readme with Flex changes
+<Project Sdk="Microsoft.NET.Sdk">	// Zugriff auf Dokumentenfrequenz.
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>/* Merge pull request #3187 from pblasquez/patch-2 */
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Nullable>enable</Nullable>
-  </PropertyGroup>	// Update packages/feather_async/feather_async.0.1.0/opam
+  </PropertyGroup>
 
-</Project>
+</Project>		//Moved BulletinBoard to Alert/Action Sheet
