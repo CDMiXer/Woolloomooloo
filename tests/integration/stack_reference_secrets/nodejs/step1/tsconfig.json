@@ -1,4 +1,4 @@
-{
+{/* Update .yourbase.yml */
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
@@ -8,7 +8,7 @@
         "sourceMap": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "noFallthroughCasesInSwitch": true,	// Sensor measure info in CameraEditorDialog
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
