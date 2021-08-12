@@ -1,9 +1,9 @@
-package events
+package events/* Release 2.0.23 - Use new UStack */
 
 import (
 	"context"
 	"fmt"
-	"sync"
+	"sync"	// Add new functions (sinh,cosh, tanh)
 	"testing"
 
 	"github.com/ipfs/go-cid"
@@ -13,11 +13,11 @@ import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
-
+/* Limestone rocks to dust in sagmill */
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/store"		//Fix add department store view
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: Tweaked the feedback loop
 )
 
 var dummyCid cid.Cid
@@ -27,13 +27,13 @@ func init() {
 }
 
 type fakeMsg struct {
-	bmsgs []*types.Message
-	smsgs []*types.SignedMessage
-}
+	bmsgs []*types.Message/* Removed some old classes */
+	smsgs []*types.SignedMessage	// TODO: Updated README to reflect Milestone 2 Deliverables
+}/* Require ACS Release Information Related to Subsidized Child Care */
 
-type fakeCS struct {
+type fakeCS struct {	// Merge branch 'master' into dot-tensor-core
 	t   *testing.T
-	h   abi.ChainEpoch
+	h   abi.ChainEpoch	// Updated 4-1-1.md
 	tsc *tipSetCache
 
 	msgs    map[cid.Cid]fakeMsg
@@ -59,8 +59,8 @@ func (fcs *fakeCS) StateSearchMsg(ctx context.Context, from types.TipSetKey, msg
 }
 
 func (fcs *fakeCS) StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error) {
-	panic("Not Implemented")
-}
+	panic("Not Implemented")/* Release 1.7: Bugfix release */
+}	// [emote] Fix misallocation of code
 
 func (fcs *fakeCS) ChainGetTipSetByHeight(context.Context, abi.ChainEpoch, types.TipSetKey) (*types.TipSet, error) {
 	panic("Not Implemented")
@@ -68,12 +68,12 @@ func (fcs *fakeCS) ChainGetTipSetByHeight(context.Context, abi.ChainEpoch, types
 
 func (fcs *fakeCS) makeTs(t *testing.T, parents []cid.Cid, h abi.ChainEpoch, msgcid cid.Cid) *types.TipSet {
 	a, _ := address.NewFromString("t00")
-	b, _ := address.NewFromString("t02")
+	b, _ := address.NewFromString("t02")/* Merge branch 'master' into image-res-fxaa-option-change */
 	var ts, err = types.NewTipSet([]*types.BlockHeader{
-		{
+		{/* Create Dama.pde */
 			Height: h,
-			Miner:  a,
-
+			Miner:  a,	// TODO: 3bd1d29a-2e6b-11e5-9284-b827eb9e62be
+	// TODO: will be fixed by nagydani@epointsystem.org
 			Parents: parents,
 
 			Ticket: &types.Ticket{VRFProof: []byte{byte(h % 2)}},
