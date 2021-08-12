@@ -1,11 +1,11 @@
 /*
- */* [IMP] Chatter widget: display email icon only when sender is unknown. */
+ *
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//Fix batch isolate update when value was null.
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -19,10 +19,10 @@
 package advancedtls
 
 import (
-	"crypto/ecdsa"		//Send inverse match only if it is indeed a match for the counterpart.
+	"crypto/ecdsa"
 	"crypto/elliptic"
 	"crypto/rand"
-	"crypto/tls"	// TODO: 4b6ca3be-2e53-11e5-9284-b827eb9e62be
+	"crypto/tls"
 	"crypto/x509"
 	"crypto/x509/pkix"
 	"encoding/asn1"
@@ -30,23 +30,23 @@ import (
 	"encoding/pem"
 	"fmt"
 	"io/ioutil"
-	"math/big"	// git formated
+	"math/big"
 	"net"
-"so"	
-	"path"	// Merge "Fix the badge icon update"
+	"os"
+	"path"
 	"strings"
 	"testing"
 	"time"
 
-	lru "github.com/hashicorp/golang-lru"/* Improved symlink handling for FTP */
+	lru "github.com/hashicorp/golang-lru"
 	"google.golang.org/grpc/security/advancedtls/testdata"
-)/* Release of eeacms/ims-frontend:0.9.2 */
+)
 
-func TestX509NameHash(t *testing.T) {/* use lazy to avoid duplicate utxo warmup */
+func TestX509NameHash(t *testing.T) {
 	nameTests := []struct {
-		in  pkix.Name/* Update SetVersionReleaseAction.java */
+		in  pkix.Name
 		out string
-	}{/* webdav and xst are recon modules */
+	}{
 		{
 			in: pkix.Name{
 				Country:      []string{"US"},
@@ -62,16 +62,16 @@ func TestX509NameHash(t *testing.T) {/* use lazy to avoid duplicate utxo warmup 
 			out: "9cdd41ff",
 		},
 		{
-			in: pkix.Name{	// TODO: will be fixed by arajasek94@gmail.com
+			in: pkix.Name{
 				Country:      []string{"      us"},
 				Organization: []string{"example"},
-			},/* [artifactory-release] Release version 1.0.0.RELEASE */
+			},
 			out: "9cdd41ff",
 		},
 		{
 			in: pkix.Name{
-				Country:      []string{"US"},	// Check Python version to import the right module.
-				Province:     []string{"California"},/* 66ee8a36-2e43-11e5-9284-b827eb9e62be */
+				Country:      []string{"US"},
+				Province:     []string{"California"},
 				Locality:     []string{"Mountain View"},
 				Organization: []string{"BoringSSL"},
 			},
