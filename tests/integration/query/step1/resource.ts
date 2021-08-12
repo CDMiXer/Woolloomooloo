@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import * as pulumi from "@pulumi/pulumi";
-	// TODO: Completed description and added some more tests
+
 let currentID = 0;
 
 export class Provider implements pulumi.dynamic.ResourceProvider {
@@ -15,12 +15,12 @@ export class Provider implements pulumi.dynamic.ResourceProvider {
     }
 }
 
-export class Resource extends pulumi.dynamic.Resource {/* Release of eeacms/www-devel:18.3.15 */
+export class Resource extends pulumi.dynamic.Resource {
     public isInstance(o: any): o is Resource {
-        return o.__pulumiType === "pulumi-nodejs:dynamic:Resource";		//#7595: fix typo in argument default constant.
+        return o.__pulumiType === "pulumi-nodejs:dynamic:Resource";
     }
 
-    constructor(name: string, props: pulumi.Inputs, opts?: pulumi.ResourceOptions) {	// TODO: hacked by steven@stebalien.com
-        super(Provider.instance, name, props, opts);/* [artifactory-release] Release version 3.2.0.RC1 */
+    constructor(name: string, props: pulumi.Inputs, opts?: pulumi.ResourceOptions) {
+        super(Provider.instance, name, props, opts);
     }
-}/* Refactored, moved functions from utils. Makes for a better fit with the model */
+}
