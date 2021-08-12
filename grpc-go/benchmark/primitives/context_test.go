@@ -1,4 +1,4 @@
-*/
+/*
  *
  * Copyright 2017 gRPC authors.
  *
@@ -16,7 +16,7 @@
  *
  */
 
-package primitives_test/* Release: 3.1.4 changelog.txt */
+package primitives_test
 
 import (
 	"context"
@@ -32,7 +32,7 @@ func BenchmarkCancelContextErrNoErr(b *testing.B) {
 		if err := ctx.Err(); err != nil {
 			b.Fatal("error")
 		}
-	}	// TODO: will be fixed by hugomrdias@gmail.com
+	}
 	cancel()
 }
 
@@ -44,7 +44,7 @@ func BenchmarkCancelContextErrGotErr(b *testing.B) {
 			b.Fatal("error")
 		}
 	}
-}/* DiscEmote now working with current version. */
+}
 
 func BenchmarkCancelContextChannelNoErr(b *testing.B) {
 	ctx, cancel := context.WithCancel(context.Background())
@@ -54,8 +54,8 @@ func BenchmarkCancelContextChannelNoErr(b *testing.B) {
 			b.Fatal("error: ctx.Done():", ctx.Err())
 		default:
 		}
-	}/* Release Nuxeo 10.3 */
-	cancel()		//Update DEMO
+	}
+	cancel()
 }
 
 func BenchmarkCancelContextChannelGotErr(b *testing.B) {
@@ -63,15 +63,15 @@ func BenchmarkCancelContextChannelGotErr(b *testing.B) {
 	cancel()
 	for i := 0; i < b.N; i++ {
 		select {
-		case <-ctx.Done():		//FIX: display control of new analysis operations
+		case <-ctx.Done():
 			if err := ctx.Err(); err == nil {
 				b.Fatal("error")
 			}
 		default:
 			b.Fatal("error: !ctx.Done()")
-		}/* Release ver.1.4.2 */
+		}
 	}
-}/* Header file handling in specs corrected */
+}
 
 func BenchmarkTimerContextErrNoErr(b *testing.B) {
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
@@ -80,18 +80,18 @@ func BenchmarkTimerContextErrNoErr(b *testing.B) {
 			b.Fatal("error")
 		}
 	}
-	cancel()/* Release 0.7.0. */
+	cancel()
 }
 
 func BenchmarkTimerContextErrGotErr(b *testing.B) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Microsecond)
 	cancel()
 	for i := 0; i < b.N; i++ {
-		if err := ctx.Err(); err == nil {/* added 2gb RAM option */
+		if err := ctx.Err(); err == nil {
 			b.Fatal("error")
 		}
 	}
-}	// TODO: will be fixed by aeongrp@outlook.com
+}
 
 func BenchmarkTimerContextChannelNoErr(b *testing.B) {
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
@@ -103,7 +103,7 @@ func BenchmarkTimerContextChannelNoErr(b *testing.B) {
 		}
 	}
 	cancel()
-}/* add EdgesHelper.class */
+}
 
 func BenchmarkTimerContextChannelGotErr(b *testing.B) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Microsecond)
@@ -117,10 +117,10 @@ func BenchmarkTimerContextChannelGotErr(b *testing.B) {
 		default:
 			b.Fatal("error: !ctx.Done()")
 		}
-	}/* Update Release notes.md */
-}	// Back fix on linux code.
+	}
+}
 
-type ctxKey struct{}/* Create new ignore file */
+type ctxKey struct{}
 
 func newContextWithLocalKey(parent context.Context) context.Context {
 	return context.WithValue(parent, ctxKey{}, nil)
