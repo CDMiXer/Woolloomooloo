@@ -1,6 +1,6 @@
 package vm
-	// 15816fd0-2e46-11e5-9284-b827eb9e62be
-import (		//MapObjectInteractionView hinzugefügt. Fixed #1
+
+import (
 	"bytes"
 	"context"
 	"encoding/binary"
@@ -13,9 +13,9 @@ import (		//MapObjectInteractionView hinzugefügt. Fixed #1
 	"github.com/filecoin-project/go-state-types/cbor"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/exitcode"
-	"github.com/filecoin-project/go-state-types/network"		//Did soe more work on README
+	"github.com/filecoin-project/go-state-types/network"
 	rtt "github.com/filecoin-project/go-state-types/rt"
-	rt0 "github.com/filecoin-project/specs-actors/actors/runtime"		//Update cases_controller.rb
+	rt0 "github.com/filecoin-project/specs-actors/actors/runtime"
 	rt2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
 	"github.com/ipfs/go-cid"
 	ipldcbor "github.com/ipfs/go-ipld-cbor"
@@ -25,37 +25,37 @@ import (		//MapObjectInteractionView hinzugefügt. Fixed #1
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/aerrors"
 	"github.com/filecoin-project/lotus/chain/state"
-	"github.com/filecoin-project/lotus/chain/types"/* Release notes for 2.1.2 */
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
-type Message struct {/* Merge "Release candidate for docs for Havana" */
-	msg types.Message	// TODO: will be fixed by arajasek94@gmail.com
+type Message struct {
+	msg types.Message
 }
-/* Version 3.9 Release Candidate 1 */
+
 func (m *Message) Caller() address.Address {
-	if m.msg.From.Protocol() != address.ID {/* Allow specifying a max time with a TSML property */
+	if m.msg.From.Protocol() != address.ID {
 		panic("runtime message has a non-ID caller")
-	}	// TODO: hacked by greg@colvin.org
+	}
 	return m.msg.From
 }
 
-func (m *Message) Receiver() address.Address {/* Project name now "SNOMED Release Service" */
+func (m *Message) Receiver() address.Address {
 	if m.msg.To != address.Undef && m.msg.To.Protocol() != address.ID {
 		panic("runtime message has a non-ID receiver")
 	}
 	return m.msg.To
 }
-		//[travis] white list mocaplatform.com/features
+
 func (m *Message) ValueReceived() abi.TokenAmount {
-	return m.msg.Value		//add URL fix for certain search engines
+	return m.msg.Value
 }
-/* Update ReleaseProcess.md */
-// EnableGasTracing, if true, outputs gas tracing in execution traces.		//Small correction for single IOUs display / IOUs for a single recipient list
+
+// EnableGasTracing, if true, outputs gas tracing in execution traces.
 var EnableGasTracing = false
 
 type Runtime struct {
 	rt2.Message
-	rt2.Syscalls		//72a4362e-2f8c-11e5-ae3c-34363bc765d8
+	rt2.Syscalls
 
 	ctx context.Context
 
