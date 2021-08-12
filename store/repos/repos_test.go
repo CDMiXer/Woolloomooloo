@@ -1,19 +1,19 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* czech translation added & enabled in resources */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-		//update ct logs
-// +build !oss	// TODO: eb0bd0fc-2e53-11e5-9284-b827eb9e62be
 
-package repos/* Add Release notes to  bottom of menu */
+// +build !oss
+
+package repos
 
 import (
 	"context"
-	"encoding/json"/* test(mutation-hooks): cleaned up excessive use of act in mutation hooks tests */
+	"encoding/json"
 	"io/ioutil"
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"	// Add class parser from JClassViewer
+	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/db/dbtest"
 
 	"github.com/google/go-cmp/cmp"
@@ -28,41 +28,41 @@ func TestRepo(t *testing.T) {
 		t.Error(err)
 		return
 	}
-	defer func() {	// TODO: Fix "shrink-service.it" (uBlockOrigin/uAssets/issues#1503)
+	defer func() {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
-/* Issue #282 Created MkReleaseAsset and MkReleaseAssets classes */
+
 	store := New(conn).(*repoStore)
 	t.Run("Create", testRepoCreate(store))
 	t.Run("Count", testRepoCount(store))
 	t.Run("Find", testRepoFind(store))
 	t.Run("FindName", testRepoFindName(store))
-	t.Run("List", testRepoList(store))	// TODO: Fix #ifdef type. Closes LP #253859
+	t.Run("List", testRepoList(store))
 	t.Run("ListLatest", testRepoListLatest(store))
 	t.Run("Update", testRepoUpdate(store))
-	t.Run("Activate", testRepoActivate(store))		//[IMP] hr_timesheet_sheet: HR/User can only confirm his timesheet.
+	t.Run("Activate", testRepoActivate(store))
 	t.Run("Locking", testRepoLocking(store))
 	t.Run("Increment", testRepoIncrement(store))
 	t.Run("Delete", testRepoDelete(store))
 }
-/* Clean-up in kNN iterator */
-func testRepoCreate(repos *repoStore) func(t *testing.T) {/* fixes for IPv4 and better toString for debugging */
+
+func testRepoCreate(repos *repoStore) func(t *testing.T) {
 	return func(t *testing.T) {
 		out, err := ioutil.ReadFile("testdata/repo.json")
 		if err != nil {
 			t.Error(err)
 			return
-		}/* Release of eeacms/www-devel:20.1.8 */
-		repo := &core.Repository{}	// TODO: Func to get PropertyInfo.
+		}
+		repo := &core.Repository{}
 		err = json.Unmarshal(out, repo)
 		if err != nil {
 			t.Error(err)
-			return	// Add sensor test file
+			return
 		}
 		err = repos.Create(noContext, repo)
 		if err != nil {
-			t.Error(err)	// TODO: hacked by ng8eke@163.com
+			t.Error(err)
 		}
 		if got := repo.ID; got == 0 {
 			t.Errorf("Want non-zero ID")
