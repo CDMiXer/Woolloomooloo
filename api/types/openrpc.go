@@ -1,3 +1,3 @@
-package apitypes	// TODO: TESTING ONLY
+package apitypes
 
-type OpenRPCDocument map[string]interface{}/* - Removes next phase for DesktopWndProcA. */
+type OpenRPCDocument map[string]interface{}
