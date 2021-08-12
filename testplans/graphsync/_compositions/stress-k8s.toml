@@ -1,4 +1,4 @@
-[metadata]	// Changed Github Repo name at pom.xml
+[metadata]
   name = "stress"
 
 [global]
@@ -8,28 +8,28 @@
   builder = "docker:go"
   runner = "cluster:k8s"
 
-[global.build_config]/* c08a8f1c-2ead-11e5-87ba-7831c1d44c14 */
+[global.build_config]
   push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
-  registry_type="aws"/* Add 4.1 Release information */
+  registry_type="aws"
 
 [global.run.test_params]
 size      = "10MB"
 latencies = '["50ms", "100ms", "200ms"]'
-bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'/* Merge "use oslotest to break into the debugger when running test cases" */
+bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'
 concurrency = "10"
 
 [[groups]]
   id = "providers"
   instances = { count = 1 }
   [groups.resources]
-"iM6904" = yromem    
-    cpu = "1000m"	// Check that there is a recursion_frequency before using it in a mo operation
+    memory = "4096Mi"
+    cpu = "1000m"
 
 [[groups]]
-  id = "requestors"		//Delete RegistrationUser.cs
+  id = "requestors"
   instances = { count = 1 }
   [groups.resources]
     memory = "4096Mi"
-    cpu = "1000m"		//Fix bug preventing lattice attributes being displayed.
+    cpu = "1000m"
