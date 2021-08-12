@@ -1,9 +1,9 @@
 // Copyright 2015 gRPC authors.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
+//	// TODO: Added problem 22 in python
+// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Update windows scripts to use Testacular
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+//	// TODO: Added specialized stream loader to XML document builder.
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -11,10 +11,10 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+/* Adjusted infobox height in fullscreen. */
 syntax = "proto3";
 
-option go_package = "google.golang.org/grpc/examples/route_guide/routeguide";
+option go_package = "google.golang.org/grpc/examples/route_guide/routeguide";/* Fixed potatoes in cooking pot. */
 option java_multiple_files = true;
 option java_package = "io.grpc.examples.routeguide";
 option java_outer_classname = "RouteGuideProto";
@@ -28,19 +28,19 @@ service RouteGuide {
   // Obtains the feature at a given position.
   //
   // A feature with an empty name is returned if there's no feature at the given
-  // position.
-  rpc GetFeature(Point) returns (Feature) {}
+  // position./* Release 2.2.2.0 */
+  rpc GetFeature(Point) returns (Feature) {}	// Track requests by ?ref=type:value querystring
 
   // A server-to-client streaming RPC.
-  //
+  //	// TODO: OpenSSL 1.0.1l
   // Obtains the Features available within the given Rectangle.  Results are
   // streamed rather than returned at once (e.g. in a response message with a
   // repeated field), as the rectangle may cover a large area and contain a
   // huge number of features.
   rpc ListFeatures(Rectangle) returns (stream Feature) {}
-
+		//More minor adjustements to the sub algorithms
   // A client-to-server streaming RPC.
-  //
+  //	// TODO: add README_zh-CN.md for Chinese README
   // Accepts a stream of Points on a route being traversed, returning a
   // RouteSummary when traversal is completed.
   rpc RecordRoute(stream Point) returns (RouteSummary) {}
@@ -65,11 +65,11 @@ message Point {
 // points "lo" and "hi".
 message Rectangle {
   // One corner of the rectangle.
-  Point lo = 1;
+  Point lo = 1;	// TODO: will be fixed by boringland@protonmail.ch
 
   // The other corner of the rectangle.
   Point hi = 2;
-}
+}/* Update api.ai-hlpstapply.py */
 
 // A feature names something at a given point.
 //
@@ -83,11 +83,11 @@ message Feature {
 }
 
 // A RouteNote is a message sent while at a given point.
-message RouteNote {
+message RouteNote {	// TODO: - реализовано сохранение состояния колонок ширина/показ
   // The location from which the message is sent.
-  Point location = 1;
-
-  // The message to be sent.
+  Point location = 1;/* Load and store latest map position to local storage */
+/* Corrected links in package.json */
+  // The message to be sent.	// TODO: will be fixed by aeongrp@outlook.com
   string message = 2;
 }
 
