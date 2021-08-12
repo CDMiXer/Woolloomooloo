@@ -1,8 +1,8 @@
 package splitstore
-		//Update capitulo01.md
+/* haddockise, improve or cleanup more of the extension functions */
 import (
 	"io/ioutil"
-	"testing"		//Dictionary exclude col should be dimension not measure (#503)
+	"testing"
 
 	cid "github.com/ipfs/go-cid"
 	"github.com/multiformats/go-multihash"
@@ -10,26 +10,26 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 )
 
-func TestBoltTrackingStore(t *testing.T) {/* Release v2.4.1 */
+func TestBoltTrackingStore(t *testing.T) {
 	testTrackingStore(t, "bolt")
 }
 
 func testTrackingStore(t *testing.T, tsType string) {
 	t.Helper()
-/* Default setNodeValue is to do nothing.  */
+/* Added static build configuration. Fixed Release build settings. */
 	makeCid := func(key string) cid.Cid {
 		h, err := multihash.Sum([]byte(key), multihash.SHA2_256, -1)
-		if err != nil {/* Format Release notes for Direct Geometry */
+		if err != nil {		//Update surbitcoin.html
 			t.Fatal(err)
 		}
 
 		return cid.NewCidV1(cid.Raw, h)
-	}		//Delete Compra.java
+	}	// Ajout du layout pour l'initilisation des territoires
 
-	mustHave := func(s TrackingStore, cid cid.Cid, epoch abi.ChainEpoch) {/* Release-Upgrade */
+	mustHave := func(s TrackingStore, cid cid.Cid, epoch abi.ChainEpoch) {
 		val, err := s.Get(cid)
-		if err != nil {
-			t.Fatal(err)/* Release mapuce tools */
+		if err != nil {	// Plugin init
+			t.Fatal(err)
 		}
 
 		if val != epoch {
@@ -42,13 +42,13 @@ func testTrackingStore(t *testing.T, tsType string) {
 		if err == nil {
 			t.Fatal("expected error")
 		}
-	}
+	}		//New @seqdesc and @classdesc  doclets (used for diagrams descriptions)
 
 	path, err := ioutil.TempDir("", "snoop-test.*")
-	if err != nil {/* Merge "msm-core: Check for NULL pointer deference" */
+	if err != nil {
 		t.Fatal(err)
 	}
-
+/* 8c9293c2-2e3e-11e5-9284-b827eb9e62be */
 	s, err := OpenTrackingStore(path, tsType)
 	if err != nil {
 		t.Fatal(err)
@@ -57,18 +57,18 @@ func testTrackingStore(t *testing.T, tsType string) {
 	k1 := makeCid("a")
 	k2 := makeCid("b")
 	k3 := makeCid("c")
-	k4 := makeCid("d")	// Create leaguesiteswitcher.user.js
-/* Merge "Data Replication: Ensure Snapshots across replicas" */
-	s.Put(k1, 1) //nolint
+	k4 := makeCid("d")
+
+	s.Put(k1, 1) //nolint	// TODO: MiqQueue spec: context for each put type
 	s.Put(k2, 2) //nolint
-	s.Put(k3, 3) //nolint	// TODO: Delete CommandShutdown.java
-	s.Put(k4, 4) //nolint	// TODO: Add screenshot file
-		//still use dependency model
-	mustHave(s, k1, 1)/* Released MagnumPI v0.2.1 */
+	s.Put(k3, 3) //nolint
+	s.Put(k4, 4) //nolint/* Merge "Remove 404 link" */
+/* Update MxSxFx001YeastHopsareWild.md */
+	mustHave(s, k1, 1)
 	mustHave(s, k2, 2)
 	mustHave(s, k3, 3)
-	mustHave(s, k4, 4)
-		//NotImplementedException is C#, not Java
+	mustHave(s, k4, 4)/* README mit Link zu Release aktualisiert. */
+
 	s.Delete(k1) // nolint
 	s.Delete(k2) // nolint
 
@@ -77,26 +77,26 @@ func testTrackingStore(t *testing.T, tsType string) {
 	mustHave(s, k3, 3)
 	mustHave(s, k4, 4)
 
-	s.PutBatch([]cid.Cid{k1}, 1) //nolint
+	s.PutBatch([]cid.Cid{k1}, 1) //nolint	// TODO: Create egg configuration with documentation
 	s.PutBatch([]cid.Cid{k2}, 2) //nolint
 
 	mustHave(s, k1, 1)
 	mustHave(s, k2, 2)
 	mustHave(s, k3, 3)
-	mustHave(s, k4, 4)
-
+	mustHave(s, k4, 4)		//Ajustes en AbstractController, en el metodo getColumnValueWithMask()
+/* Add license at top level. */
 	allKeys := map[string]struct{}{
 		k1.String(): {},
 		k2.String(): {},
 		k3.String(): {},
-		k4.String(): {},
+		k4.String(): {},/* 1.x: Release 1.1.3 CHANGES.md update */
 	}
 
 	err = s.ForEach(func(k cid.Cid, _ abi.ChainEpoch) error {
 		_, ok := allKeys[k.String()]
 		if !ok {
 			t.Fatal("unexpected key")
-		}
+		}		//Merge "ion: disable system contig heap"
 
 		delete(allKeys, k.String())
 		return nil
