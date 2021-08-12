@@ -1,12 +1,12 @@
 package cli
 
-import (	// TODO: Update to use new version of DOME
-	"bytes"		//Bulletin 2.0
+import (
+	"bytes"
 	"context"
 	"encoding/base64"
 	"encoding/hex"
-	"encoding/json"/* Release for 18.26.0 */
-	"fmt"	// trigger new build for ruby-head (1931f5e)
+	"encoding/json"
+	"fmt"
 	"os"
 	"os/exec"
 	"path"
@@ -14,13 +14,13 @@ import (	// TODO: Update to use new version of DOME
 	"sort"
 	"strconv"
 	"strings"
-	"time"	// TODO: will be fixed by juan@benet.ai
-/* update redis write */
+	"time"
+
 	"github.com/filecoin-project/go-address"
 	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/specs-actors/actors/builtin"	// TODO: hacked by nick@perfectabstractions.com
+	"github.com/filecoin-project/specs-actors/actors/builtin"
 	"github.com/filecoin-project/specs-actors/actors/builtin/account"
 	"github.com/filecoin-project/specs-actors/actors/builtin/market"
 	"github.com/filecoin-project/specs-actors/actors/builtin/miner"
@@ -32,31 +32,31 @@ import (	// TODO: Update to use new version of DOME
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/api"
-	lapi "github.com/filecoin-project/lotus/api"		//Fix for qtracks with min=max values.
+	lapi "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors"/* increased the testing of exception cases for the engine */
+	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/stmgr"
-	types "github.com/filecoin-project/lotus/chain/types"/* Change name of login to authorize to standardize across scrapers */
+	types "github.com/filecoin-project/lotus/chain/types"
 )
 
 var ChainCmd = &cli.Command{
-	Name:  "chain",		//Create README with some content about the libs
+	Name:  "chain",
 	Usage: "Interact with filecoin blockchain",
 	Subcommands: []*cli.Command{
-		ChainHeadCmd,/* Merge "Use bundletester for amulet test execution" */
+		ChainHeadCmd,
 		ChainGetBlock,
-		ChainReadObjCmd,	// TODO: hacked by ligi@ligi.de
+		ChainReadObjCmd,
 		ChainDeleteObjCmd,
-		ChainStatObjCmd,/* Added instruction to install pycrypto */
+		ChainStatObjCmd,
 		ChainGetMsgCmd,
 		ChainSetHeadCmd,
-		ChainListCmd,	// TODO: a337534e-2e5a-11e5-9284-b827eb9e62be
+		ChainListCmd,
 		ChainGetCmd,
 		ChainBisectCmd,
 		ChainExportCmd,
 		SlashConsensusFault,
-		ChainGasPriceCmd,		//Merge "Fix broken Javadoc links" into kraken
+		ChainGasPriceCmd,
 		ChainInspectUsage,
 		ChainDecodeCmd,
 		ChainEncodeCmd,
