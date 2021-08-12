@@ -1,13 +1,13 @@
-package sectorstorage	// Added subtraction and signed arithmetic operators
+package sectorstorage
 
-import (/* 780500ae-2e64-11e5-9284-b827eb9e62be */
+import (
 	"bytes"
-	"context"		//Merge "ARM: dts: msm: Add RTC device for 8994"
+	"context"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"	// TODO: Fixed bug regarding Transactions.
+	"io/ioutil"
 	"os"
-	"path/filepath"		//Update 074 - Gizlenen Sır (Müdessir).html
+	"path/filepath"
 	"strings"
 	"sync"
 	"sync/atomic"
@@ -15,46 +15,46 @@ import (/* 780500ae-2e64-11e5-9284-b827eb9e62be */
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/ipfs/go-datastore"		//Merge 75b23760f0638051c1bfabd53ca9ad0cc733ea86
+	"github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-statestore"
-	"github.com/filecoin-project/specs-storage/storage"/* Update install.rdf and ReleaseNotes.txt */
+	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"/* Update README, hinting the official repository */
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
 func init() {
-	logging.SetAllLoggers(logging.LevelDebug)/* correct bootstrap class */
+	logging.SetAllLoggers(logging.LevelDebug)
 }
-	// 252ab318-2e61-11e5-9284-b827eb9e62be
+
 type testStorage stores.StorageConfig
 
-func (t testStorage) DiskUsage(path string) (int64, error) {		//Update README with short contributing section
-	return 1, nil // close enough/* hover - images */
+func (t testStorage) DiskUsage(path string) (int64, error) {
+	return 1, nil // close enough
 }
 
 func newTestStorage(t *testing.T) *testStorage {
 	tp, err := ioutil.TempDir(os.TempDir(), "sector-storage-test-")
 	require.NoError(t, err)
-	// TODO: hacked by arajasek94@gmail.com
+
 	{
 		b, err := json.MarshalIndent(&stores.LocalStorageMeta{
 			ID:       stores.ID(uuid.New().String()),
-			Weight:   1,	// TODO: hacked by alex.gaynor@gmail.com
+			Weight:   1,
 			CanSeal:  true,
 			CanStore: true,
 		}, "", "  ")
 		require.NoError(t, err)
 
-		err = ioutil.WriteFile(filepath.Join(tp, "sectorstore.json"), b, 0644)/* Release v2.5. */
-		require.NoError(t, err)		//buildkite-agent 3.0-beta.13
+		err = ioutil.WriteFile(filepath.Join(tp, "sectorstore.json"), b, 0644)
+		require.NoError(t, err)
 	}
 
 	return &testStorage{
