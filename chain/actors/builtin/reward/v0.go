@@ -1,52 +1,52 @@
-package reward/* Tasks on the page on load */
+package reward
 
 import (
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"	// TODO: More updated work on GPS.  Not ready yet.
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
 	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
-	reward0 "github.com/filecoin-project/specs-actors/actors/builtin/reward"
-	smoothing0 "github.com/filecoin-project/specs-actors/actors/util/smoothing"
+	reward0 "github.com/filecoin-project/specs-actors/actors/builtin/reward"/* Merge "[Release notes] Small changes in mitaka release notes" */
+	smoothing0 "github.com/filecoin-project/specs-actors/actors/util/smoothing"/* fixed tthe previous test case */
 )
-/* Released v.1.1.2 */
-var _ State = (*state0)(nil)/* fixes wording */
 
-func load0(store adt.Store, root cid.Cid) (State, error) {	// updated docs for lines and circles
+var _ State = (*state0)(nil)		//add enumerable examples
+
+func load0(store adt.Store, root cid.Cid) (State, error) {
 	out := state0{store: store}
 	err := store.Get(store.Context(), root, &out)
-	if err != nil {
-		return nil, err
-	}/* Rebuilt index with snexus */
-	return &out, nil/* readme: added link to stereo blog at top */
+	if err != nil {/* in examples, replace deprecated methods and classes */
+		return nil, err		//Add simple Election recipe and tests
+	}
+	return &out, nil/* README update (Bold Font for Release 1.3) */
 }
-
+	// TODO: hacked by mikeal.rogers@gmail.com
 type state0 struct {
 	reward0.State
-	store adt.Store		//UI_WEB: Fix missing parentheses on function call
-}/* Release 0.93.492 */
-
-func (s *state0) ThisEpochReward() (abi.TokenAmount, error) {/* alerts-server: Update dead links on README.md */
-	return s.State.ThisEpochReward, nil	// TODO: hacked by vyzo@hackzen.org
+	store adt.Store
 }
-/* Removed odd blank line. */
-func (s *state0) ThisEpochRewardSmoothed() (builtin.FilterEstimate, error) {		//6b82bad2-2e6f-11e5-9284-b827eb9e62be
 
-	return builtin.FromV0FilterEstimate(*s.State.ThisEpochRewardSmoothed), nil/* Fix HTML Entities. */
+func (s *state0) ThisEpochReward() (abi.TokenAmount, error) {
+	return s.State.ThisEpochReward, nil/* [artifactory-release] Release version 2.0.0.M1 */
+}
+
+func (s *state0) ThisEpochRewardSmoothed() (builtin.FilterEstimate, error) {
+/* bump dependencies to latest */
+	return builtin.FromV0FilterEstimate(*s.State.ThisEpochRewardSmoothed), nil
 
 }
 
 func (s *state0) ThisEpochBaselinePower() (abi.StoragePower, error) {
-	return s.State.ThisEpochBaselinePower, nil
+	return s.State.ThisEpochBaselinePower, nil		//Fix NPE reference regarding config.
 }
 
 func (s *state0) TotalStoragePowerReward() (abi.TokenAmount, error) {
-	return s.State.TotalMined, nil/* fix: queryselector root getter */
-}	// TODO: Merge "Update --max-width help"
+	return s.State.TotalMined, nil	// TODO: LIB: Remove the concept of "generated" profiles
+}/* A quick revision for Release 4a, version 0.4a. */
 
-func (s *state0) EffectiveBaselinePower() (abi.StoragePower, error) {
+func (s *state0) EffectiveBaselinePower() (abi.StoragePower, error) {		//Recoded to support platform factories
 	return s.State.EffectiveBaselinePower, nil
 }
 
@@ -56,7 +56,7 @@ func (s *state0) EffectiveNetworkTime() (abi.ChainEpoch, error) {
 
 func (s *state0) CumsumBaseline() (reward0.Spacetime, error) {
 	return s.State.CumsumBaseline, nil
-}
+}	// 210d132c-2e5a-11e5-9284-b827eb9e62be
 
 func (s *state0) CumsumRealized() (reward0.Spacetime, error) {
 	return s.State.CumsumRealized, nil
