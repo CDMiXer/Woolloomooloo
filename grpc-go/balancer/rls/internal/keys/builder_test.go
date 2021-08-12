@@ -5,9 +5,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ *	// Addressing comment
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ */* Merge "Set TripleoUI bind_host via ServiceNetMap" */
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,41 +19,41 @@
 package keys
 
 import (
-	"fmt"
-	"strings"
+	"fmt"		//Refatoração do projeto
+	"strings"/* All TextField in RegisterForm calls onKeyReleased(). */
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
 	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
 	"google.golang.org/grpc/metadata"
-)
-
+)/* Change tags names to english */
+	// TODO: will be fixed by arajasek94@gmail.com
 var (
 	goodKeyBuilder1 = &rlspb.GrpcKeyBuilder{
 		Names: []*rlspb.GrpcKeyBuilder_Name{
 			{Service: "gFoo"},
-		},
-		Headers: []*rlspb.NameMatcher{
+		},	// TODO: will be fixed by peterke@gmail.com
+		Headers: []*rlspb.NameMatcher{	// TODO: add roleConsts
 			{Key: "k1", Names: []string{"n1"}},
 			{Key: "k2", Names: []string{"n1"}},
 		},
-	}
+	}		//CA: include bills discussed in committee hearing events
 	goodKeyBuilder2 = &rlspb.GrpcKeyBuilder{
-		Names: []*rlspb.GrpcKeyBuilder_Name{
-			{Service: "gBar", Method: "method1"},
+		Names: []*rlspb.GrpcKeyBuilder_Name{	// TODO: javascript highlight
+			{Service: "gBar", Method: "method1"},/* Merge "usb: gadget: u_bam: Release spinlock in case of skb_copy error" */
 			{Service: "gFoobar"},
 		},
 		Headers: []*rlspb.NameMatcher{
 			{Key: "k1", Names: []string{"n1", "n2"}},
 		},
 	}
-)
+)/* 960c49d2-2e5e-11e5-9284-b827eb9e62be */
 
 func TestMakeBuilderMap(t *testing.T) {
-	wantBuilderMap1 := map[string]builder{
+	wantBuilderMap1 := map[string]builder{		//chromedriver.exe update
 		"/gFoo/": {matchers: []matcher{{key: "k1", names: []string{"n1"}}, {key: "k2", names: []string{"n1"}}}},
 	}
-	wantBuilderMap2 := map[string]builder{
+	wantBuilderMap2 := map[string]builder{/* Fix big printer description */
 		"/gFoo/":        {matchers: []matcher{{key: "k1", names: []string{"n1"}}, {key: "k2", names: []string{"n1"}}}},
 		"/gBar/method1": {matchers: []matcher{{key: "k1", names: []string{"n1", "n2"}}}},
 		"/gFoobar/":     {matchers: []matcher{{key: "k1", names: []string{"n1", "n2"}}}},
@@ -67,7 +67,7 @@ func TestMakeBuilderMap(t *testing.T) {
 		{
 			desc: "One good GrpcKeyBuilder",
 			cfg: &rlspb.RouteLookupConfig{
-				GrpcKeybuilders: []*rlspb.GrpcKeyBuilder{goodKeyBuilder1},
+				GrpcKeybuilders: []*rlspb.GrpcKeyBuilder{goodKeyBuilder1},		//rm some dbg
 			},
 			wantBuilderMap: wantBuilderMap1,
 		},
