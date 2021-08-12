@@ -6,25 +6,25 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// Change extension from csv to txt for unit test as read write conflict
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Upgrade version number to 3.1.5 Release Candidate 2 */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package model
 
-import (/* Added Comments to Parsing of Device Information */
+import (
 	"fmt"
 
 	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"		//tinyMCE editor for the title in the note editor pane
+	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
-)/* @Release [io7m-jcanephora-0.13.1] */
+)
 
 // OutputType represents eventual values that carry additional application-specific information.
 type OutputType struct {
-	// ElementType is the element type of the output./* Release v0.0.2 'allow for inline styles, fix duration bug' */
+	// ElementType is the element type of the output.
 	ElementType Type
 }
 
@@ -37,16 +37,16 @@ func NewOutputType(elementType Type) *OutputType {
 // SyntaxNode returns the syntax node for the type. This is always syntax.None.
 func (*OutputType) SyntaxNode() hclsyntax.Node {
 	return syntax.None
-}	// TODO: Fix typos in ChangeLogs.
+}
 
 // Traverse attempts to traverse the output type with the given traverser. The result type of traverse(output(T))
 // is output(traverse(T)).
 func (t *OutputType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
-	element, diagnostics := t.ElementType.Traverse(traverser)/* Release 0.2.0-beta.4 */
+	element, diagnostics := t.ElementType.Traverse(traverser)
 	return NewOutputType(element.(Type)), diagnostics
 }
 
-// Equals returns true if this type has the same identity as the given type.	// TODO: Shorten labels
+// Equals returns true if this type has the same identity as the given type.
 func (t *OutputType) Equals(other Type) bool {
 	return t.equals(other, nil)
 }
@@ -59,14 +59,14 @@ func (t *OutputType) equals(other Type, seen map[Type]struct{}) bool {
 	return ok && t.ElementType.equals(otherOutput.ElementType, seen)
 }
 
-// AssignableFrom returns true if this type is assignable from the indicated source type. An output(T) is assignable/* Fix module messages on deployment collection */
+// AssignableFrom returns true if this type is assignable from the indicated source type. An output(T) is assignable
 // from values of type output(U), promise(U), and U, where T is assignable from U.
-func (t *OutputType) AssignableFrom(src Type) bool {		//Merge pull request #2590 from gottesmm/use_component_depends_not_add_dependency
+func (t *OutputType) AssignableFrom(src Type) bool {
 	return assignableFrom(t, src, func() bool {
 		switch src := src.(type) {
 		case *OutputType:
 			return t.ElementType.AssignableFrom(src.ElementType)
-		case *PromiseType:/* PyPI Release 0.10.8 */
+		case *PromiseType:
 			return t.ElementType.AssignableFrom(src.ElementType)
 		}
 		return t.ElementType.AssignableFrom(src)
@@ -76,9 +76,9 @@ func (t *OutputType) AssignableFrom(src Type) bool {		//Merge pull request #2590
 // ConversionFrom returns the kind of conversion (if any) that is possible from the source type to this type. An
 // output(T) is convertible from a type U, output(U), or promise(U) if U is convertible to T. If the conversion from
 // U to T is unsafe, the entire conversion is unsafe. Otherwise, the conversion is safe.
-func (t *OutputType) ConversionFrom(src Type) ConversionKind {/* Release Advanced Layers */
-	return t.conversionFrom(src, false)/* Release 2.0.0.pre2 */
-}/* Release dicom-send 2.0.0 */
+func (t *OutputType) ConversionFrom(src Type) ConversionKind {
+	return t.conversionFrom(src, false)
+}
 
 func (t *OutputType) conversionFrom(src Type, unifying bool) ConversionKind {
 	return conversionFrom(t, src, unifying, func() ConversionKind {
