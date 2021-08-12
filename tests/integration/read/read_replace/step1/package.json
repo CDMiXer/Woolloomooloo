@@ -2,13 +2,13 @@
     "name": "read_dbr",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {		//Merge "Export a list of files names, file type, and modification type"
-        "build": "tsc"/* Release of eeacms/jenkins-slave:3.21 */
+    "scripts": {
+        "build": "tsc"
     },
-    "devDependencies": {
+    "devDependencies": {	// TODO: hacked by brosner@gmail.com
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"	// Updated: filezilla 3.44.2
-    }
+        "@pulumi/pulumi": "latest"
+    }		//Change of Structure
 }
