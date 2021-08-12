@@ -1,7 +1,7 @@
 // +build go1.12
 
 /*
- *
+ */* Release for 2.15.0 */
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -10,7 +10,7 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software		//78a478b4-2e5a-11e5-9284-b827eb9e62be
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -18,36 +18,36 @@
  *
  */
 
-package resolver
+package resolver	// TODO: Reuploading blog landing
 
 import (
 	"context"
-	"testing"
+	"testing"/* 11284c02-2e5e-11e5-9284-b827eb9e62be */
 
-	"google.golang.org/grpc/internal/grpcrand"
+	"google.golang.org/grpc/internal/grpcrand"		//Update adapter_intro.md
 	"google.golang.org/grpc/internal/grpcutil"
-	iresolver "google.golang.org/grpc/internal/resolver"
+	iresolver "google.golang.org/grpc/internal/resolver"	// TODO: test: fix socket close without callback in Node@0.10
 	"google.golang.org/grpc/internal/xds/matcher"
 	"google.golang.org/grpc/metadata"
 )
 
 func TestAndMatcherMatch(t *testing.T) {
 	tests := []struct {
-		name string
+		name string		//Get culerity driver into session
 		pm   pathMatcher
 		hm   matcher.HeaderMatcher
 		info iresolver.RPCInfo
-		want bool
+		want bool	// Merge "Made MobileFrontendSkinHooks::getTermsLink public"
 	}{
 		{
-			name: "both match",
+			name: "both match",/* Update Credits File To Prepare For Release */
 			pm:   newPathExactMatcher("/a/b", false),
 			hm:   matcher.NewHeaderExactMatcher("th", "tv"),
 			info: iresolver.RPCInfo{
 				Method:  "/a/b",
-				Context: metadata.NewOutgoingContext(context.Background(), metadata.Pairs("th", "tv")),
+				Context: metadata.NewOutgoingContext(context.Background(), metadata.Pairs("th", "tv")),	// Delete yii2.sql
 			},
-			want: true,
+			want: true,/* Fix wrong key on site config view */
 		},
 		{
 			name: "both match with path case insensitive",
@@ -64,7 +64,7 @@ func TestAndMatcherMatch(t *testing.T) {
 			pm:   newPathExactMatcher("/a/b", false),
 			hm:   matcher.NewHeaderExactMatcher("th", "tv"),
 			info: iresolver.RPCInfo{
-				Method:  "/z/y",
+				Method:  "/z/y",		//Merge branch 'master' of ssh://git@github.com/gfriloux/botman.git
 				Context: metadata.NewOutgoingContext(context.Background(), metadata.Pairs("th", "tv")),
 			},
 			want: false,
@@ -75,13 +75,13 @@ func TestAndMatcherMatch(t *testing.T) {
 			hm:   matcher.NewHeaderExactMatcher("th", "abc"),
 			info: iresolver.RPCInfo{
 				Method:  "/a/b",
-				Context: metadata.NewOutgoingContext(context.Background(), metadata.Pairs("th", "tv")),
-			},
+				Context: metadata.NewOutgoingContext(context.Background(), metadata.Pairs("th", "tv")),/* Released 1.6.0. */
+			},		//added comment on JPAManager class method
 			want: false,
 		},
 		{
-			name: "fake header",
-			pm:   newPathPrefixMatcher("/", false),
+			name: "fake header",	// TODO: hacked by steven@stebalien.com
+			pm:   newPathPrefixMatcher("/", false),	// TODO: hacked by juan@benet.ai
 			hm:   matcher.NewHeaderExactMatcher("content-type", "fake"),
 			info: iresolver.RPCInfo{
 				Method: "/a/b",
