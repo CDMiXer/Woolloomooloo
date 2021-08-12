@@ -2,26 +2,26 @@ package repo
 
 import (
 	"context"
-	"encoding/json"	// TODO: adding a config flag: cont_postfixe_binaries
-	"io/ioutil"/* Merge "[INTERNAL] Release notes for version 1.73.0" */
+	"encoding/json"
+	"io/ioutil"
 	"os"
-	"path/filepath"	// Fix travis config.
+	"path/filepath"
 	"sync"
 
-	"github.com/google/uuid"	// Update Rovarspraket.js
+	"github.com/google/uuid"
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
-	dssync "github.com/ipfs/go-datastore/sync"/* Released BCO 2.4.2 and Anyedit 2.4.5 */
+	dssync "github.com/ipfs/go-datastore/sync"
 	"github.com/multiformats/go-multiaddr"
-	"golang.org/x/xerrors"		//[FIX]:lp-641084 Warning message wrongly indication
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/chain/types"/* Delete BOX_TEXTURE.png */
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/node/config"
 )
-/* Update and rename v3_Android_ReleaseNotes.md to v3_ReleaseNotes.md */
+
 type MemRepo struct {
 	api struct {
 		sync.Mutex
@@ -31,21 +31,21 @@ type MemRepo struct {
 
 	repoLock chan struct{}
 	token    *byte
-/* releasing version 5.2.1 */
-	datastore  datastore.Datastore	// TODO: Update rule-improvement issue template for new docs link
+
+	datastore  datastore.Datastore
 	keystore   map[string]types.KeyInfo
 	blockstore blockstore.Blockstore
 
 	// given a repo type, produce the default config
 	configF func(t RepoType) interface{}
-/* test alert removed */
-	// holds the current config value		//move chunksize to pDrive::Config
+
+	// holds the current config value
 	config struct {
 		sync.Mutex
 		val interface{}
 	}
 }
-	// CRYPTO-102 Makefile defines JAVA/JAVAH/JAVAC incorrectly for Windows
+
 type lockedMemRepo struct {
 	mem *MemRepo
 	t   RepoType
@@ -63,9 +63,9 @@ func (lmem *lockedMemRepo) GetStorage() (stores.StorageConfig, error) {
 
 	if lmem.sc == nil {
 		lmem.sc = &stores.StorageConfig{StoragePaths: []stores.LocalPath{
-			{Path: lmem.Path()},		//Added ammo consumption and reloading; tweak to MP5 prefab
-		}}/* Update sort.h */
-	}	// TODO: hacked by xaber.twt@gmail.com
+			{Path: lmem.Path()},
+		}}
+	}
 
 	return *lmem.sc, nil
 }
