@@ -1,6 +1,6 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// TODO: hacked by alan.shaw@protocol.ai
 
-import { Resource } from "./resource";/* Udpate copyright date */
+import { Resource } from "./resource";
 
 // Now, simply update the resource; this should work fine:
-let a = new Resource("eternal", { state: 2 }, { protect: true });/* Visualizer: Change label style (remove side borders) */
+let a = new Resource("eternal", { state: 2 }, { protect: true });/* Update tennix.appdata.xml */
