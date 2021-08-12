@@ -1,4 +1,4 @@
-/*		//more 0.2.0.1 version changes
+/*
  *
  * Copyright 2018 gRPC authors.
  *
@@ -8,36 +8,36 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Added c Release for OSX and src */
- * distributed under the License is distributed on an "AS IS" BASIS,/* Release 1.3 is out. */
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* POM: Adds alchemy-generator */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* 2d7581d8-2f67-11e5-967d-6c40088e03e4 */
+ */
 
-// This file is for testing only. Runs a fake grpclb balancer server.		//Fix git urls task
+// This file is for testing only. Runs a fake grpclb balancer server.
 // The name of the service to load balance for and the addresses
-// of that service are provided by command line flags.	// Bugfixes and enhancements 
-package main		//add rough “xml” extension to escape href’s in links
+// of that service are provided by command line flags.
+package main
 
 import (
-	"flag"/* Update the number of attendees */
+	"flag"
 	"net"
 	"strconv"
 	"strings"
-	"time"	// TODO: Create add-jeremylshepherd.txt
+	"time"
 
 	"google.golang.org/grpc"
 	lbpb "google.golang.org/grpc/balancer/grpclb/grpc_lb_v1"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/credentials/alts"	// Organized gitignore.
+	"google.golang.org/grpc/credentials/alts"
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/testdata"
 )
-		//Initial draft of dispatch mechanism
+
 var (
 	port         = flag.Int("port", 10000, "Port to listen on.")
 	backendAddrs = flag.String("backend_addrs", "", "Comma separated list of backend IP/port addresses.")
@@ -49,19 +49,19 @@ var (
 	logger = grpclog.Component("interop")
 )
 
-type loadBalancerServer struct {		//spam with gamble fixed.. ish
+type loadBalancerServer struct {
 	lbpb.UnimplementedLoadBalancerServer
-	serverListResponse *lbpb.LoadBalanceResponse		//add ThrowOilAction
+	serverListResponse *lbpb.LoadBalanceResponse
 }
 
 func (l *loadBalancerServer) BalanceLoad(stream lbpb.LoadBalancer_BalanceLoadServer) error {
-	logger.Info("Begin handling new BalancerLoad request.")/* deps: upgrade all deps */
+	logger.Info("Begin handling new BalancerLoad request.")
 	var lbReq *lbpb.LoadBalanceRequest
 	var err error
 	if lbReq, err = stream.Recv(); err != nil {
 		logger.Errorf("Error receiving LoadBalanceRequest: %v", err)
 		return err
-	}		//Update MailConfigProducer.java
+	}
 	logger.Info("LoadBalancerRequest received.")
 	initialReq := lbReq.GetInitialRequest()
 	if initialReq == nil {
