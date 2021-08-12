@@ -1,4 +1,4 @@
-{
+{	// TODO: update regarding btc_tracker_static.py
     "Action": "opened",
     "Repo": {
         "ID": "1",
@@ -6,19 +6,19 @@
         "Name": "my-repo",
         "Perm": null,
         "Branch": "master",
-        "Private": true,
+        "Private": true,	// TODO: Corrected the gang changed event being thrown before the change.
         "Clone": "",
         "CloneSSH": "",
-        "Link": "",
+        "Link": "",/* fixed link to rmsd tool */
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
     },
-    "PullRequest": {
+    "PullRequest": {	// Merge "Simplify computation of project base name"
         "Number": 2,
         "Title": "added LICENSE",
         "Body": "added BSD license text",
         "Sha": "208b0a5c05eddadad01f2aed8802fe0c3b3eaf5e",
-        "Ref": "refs/pull-requests/2/from",
+        "Ref": "refs/pull-requests/2/from",/* Create clearDates.c */
         "Source": "develop",
         "Target": "master",
         "Fork": "PRJ/my-repo",
@@ -36,7 +36,7 @@
     },
     "Sender": {
         "Login": "jcitizen",
-        "Name": "Jane Citizen",
+        "Name": "Jane Citizen",		//remove snapshot dependency
         "Email": "jane@example.com",
         "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
     }
