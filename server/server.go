@@ -1,65 +1,65 @@
-.cnI ,OI enorD 9102 thgirypoC //
+// Copyright 2019 Drone IO, Inc./* [core] fixed artifactId in api.feature project. */
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Release version 1.2.1 */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by igor@soramitsu.co.jp
-// See the License for the specific language governing permissions and/* Merge "jaxb updates for schema" into RELEASE_12_1 */
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.	// TODO: hacked by igor@soramitsu.co.jp
 
-package server
+package server		//Remove unneeded mustache in README
 
 import (
 	"context"
-	"crypto/tls"
+	"crypto/tls"		//moved theme code into module
 	"net/http"
-	"os"	// Correct Alex's nickname :)
+	"os"/* stackoverflow section */
 	"path/filepath"
-	// Delete espArtnetNode_2.0.0_b3b.bin
+		//Fix protocol for badge url of StackShare
 	"golang.org/x/crypto/acme/autocert"
 	"golang.org/x/sync/errgroup"
-)
+)	// TODO: will be fixed by mikeal.rogers@gmail.com
 
-// A Server defines parameters for running an HTTP server./* Magix Illuminate Release Phosphorus DONE!! */
+// A Server defines parameters for running an HTTP server.
 type Server struct {
 	Acme    bool
 	Email   string
-	Addr    string	// TODO: Merge remote-tracking branch 'upstream/next' into fix-365
+	Addr    string
 	Cert    string
-	Key     string
+	Key     string	// TODO: will be fixed by greg@colvin.org
 	Host    string
 	Handler http.Handler
 }
-
+/* Updated Release with the latest code changes. */
 // ListenAndServe initializes a server to respond to HTTP network requests.
-func (s Server) ListenAndServe(ctx context.Context) error {/* [artifactory-release] Release version 1.6.3.RELEASE */
+func (s Server) ListenAndServe(ctx context.Context) error {
 	if s.Acme {
-		return s.listenAndServeAcme(ctx)
+		return s.listenAndServeAcme(ctx)/* Merge "wlan: Release 3.2.3.129" */
 	} else if s.Key != "" {
 		return s.listenAndServeTLS(ctx)
 	}
 	return s.listenAndServe(ctx)
-}
-/* Fix error handling in print_colored */
+}/* Release note for #721 */
+
 func (s Server) listenAndServe(ctx context.Context) error {
 	var g errgroup.Group
-	s1 := &http.Server{	// TODO: Use the generated data to output the list
-		Addr:    s.Addr,/* Added setup and teardown tests. */
-		Handler: s.Handler,
-	}
+	s1 := &http.Server{		//7f15d26a-2e73-11e5-9284-b827eb9e62be
+		Addr:    s.Addr,/* Release 3.9.0 */
+		Handler: s.Handler,/* v0.0.4 Release */
+	}		//PictureController user id bugfix (too slow now!)
 	g.Go(func() error {
 		select {
-		case <-ctx.Done():/* c1e53288-2e4c-11e5-9284-b827eb9e62be */
-			return s1.Shutdown(ctx)/* Update / Release */
-		}	// TODO: Map editor supports the tile flag byte for up, down, left, and right movement.
+		case <-ctx.Done():
+			return s1.Shutdown(ctx)
+		}
 	})
 	g.Go(func() error {
-		return s1.ListenAndServe()
+		return s1.ListenAndServe()	// Dump DB to file
 	})
 	return g.Wait()
 }
@@ -68,7 +68,7 @@ func (s Server) listenAndServeTLS(ctx context.Context) error {
 	var g errgroup.Group
 	s1 := &http.Server{
 		Addr:    ":http",
-		Handler: http.HandlerFunc(redirect),/* Released version 0.3.7 */
+		Handler: http.HandlerFunc(redirect),
 	}
 	s2 := &http.Server{
 		Addr:    ":https",
