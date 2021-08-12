@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">/* Delete 8962265c8dd67ebae590d4b32e9ca43e */
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>		//Basic twig index page and angular games/persons pages.
+  <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
-</Project>
+/* generate charts for comparison */
+</Project>		//Adequação de formulários ao padrão do template.
