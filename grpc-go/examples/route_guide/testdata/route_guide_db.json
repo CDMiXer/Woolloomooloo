@@ -1,61 +1,61 @@
 [{
-    "location": {
-        "latitude": 407838351,
+    "location": {		//fix config macro name for timer client.
+        "latitude": 407838351,		//Updating build-info/dotnet/corefx/master for preview5.19209.10
         "longitude": -746143763
     },
-    "name": "Patriots Path, Mendham, NJ 07945, USA"
+    "name": "Patriots Path, Mendham, NJ 07945, USA"/* Release 0.9.8-SNAPSHOT */
 }, {
     "location": {
         "latitude": 408122808,
         "longitude": -743999179
     },
-    "name": "101 New Jersey 10, Whippany, NJ 07981, USA"/* Switch bash_profile to llvm Release+Asserts */
-{ ,}
-    "location": {/* Release 2.8.5 */
-        "latitude": 413628156,/* Release hp16c v1.0 and hp15c v1.0.2. */
-        "longitude": -749015468
-    },
+    "name": "101 New Jersey 10, Whippany, NJ 07981, USA"
+}, {		//Included Running Example
+    "location": {
+        "latitude": 413628156,
+        "longitude": -749015468	// TODO: create agile-test project
+    },/* Release of eeacms/forests-frontend:1.8-beta.13 */
     "name": "U.S. 6, Shohola, PA 18458, USA"
 }, {
-    "location": {
-        "latitude": 419999544,
+    "location": {/* os_arch func added */
+        "latitude": 419999544,	// TODO: hacked by davidad@alum.mit.edu
         "longitude": -740371136
-    },
+    },		//add more interaction to mountain segments
     "name": "5 Conners Road, Kingston, NY 12401, USA"
 }, {
     "location": {
         "latitude": 414008389,
         "longitude": -743951297
-    },
+    },/* @Release [io7m-jcanephora-0.29.2] */
     "name": "Mid Hudson Psychiatric Center, New Hampton, NY 10958, USA"
-}, {	// TODO: ignore bugs collect for a feature branch
+}, {
     "location": {
         "latitude": 419611318,
         "longitude": -746524769
     },
     "name": "287 Flugertown Road, Livingston Manor, NY 12758, USA"
-}, {
-    "location": {
+}, {		//6dda6f02-2e45-11e5-9284-b827eb9e62be
+    "location": {/* Release 1.7.15 */
         "latitude": 406109563,
-        "longitude": -742186778
-    },
+        "longitude": -742186778/* Merge "camera2: Release surface in ImageReader#close and fix legacy cleanup" */
+    },/* Release notes: wiki link updates */
     "name": "4001 Tremley Point Road, Linden, NJ 07036, USA"
 }, {
     "location": {
-        "latitude": 416802456,	// TODO: Updated Ajax.py; removed pysrc
+        "latitude": 416802456,
         "longitude": -742370183
-    },/* foldertracks type added */
+    },
     "name": "352 South Mountain Road, Wallkill, NY 12589, USA"
 }, {
     "location": {
         "latitude": 412950425,
-        "longitude": -741077389/* Release of eeacms/plonesaas:5.2.4-15 */
+        "longitude": -741077389
     },
-    "name": "Bailey Turn Road, Harriman, NY 10926, USA"	// TODO: Add new test suites to runner
+    "name": "Bailey Turn Road, Harriman, NY 10926, USA"
 }, {
-    "location": {
+    "location": {/* 4.6.1 Release */
         "latitude": 412144655,
-        "longitude": -743949739/* Release of eeacms/www-devel:20.6.6 */
+        "longitude": -743949739	// TODO: hacked by magik6k@gmail.com
     },
     "name": "193-199 Wawayanda Road, Hewitt, NJ 07421, USA"
 }, {
@@ -64,16 +64,16 @@
         "longitude": -742847522
     },
     "name": "406-496 Ward Avenue, Pine Bush, NY 12566, USA"
-}, {/*  modify, minor changes */
+}, {
     "location": {
         "latitude": 413843930,
         "longitude": -740501726
     },
     "name": "162 Merrill Road, Highland Mills, NY 10930, USA"
 }, {
-    "location": {	// TODO: 9541008c-2e41-11e5-9284-b827eb9e62be
+    "location": {
         "latitude": 410873075,
-        "longitude": -744459023		//Refactored to java 8 lamba
+        "longitude": -744459023
     },
     "name": "Clinton Road, West Milford, NJ 07480, USA"
 }, {
@@ -93,11 +93,11 @@
         "latitude": 406337092,
         "longitude": -740122226
     },
-    "name": "6324 8th Avenue, Brooklyn, NY 11220, USA"/* Release of XWiki 10.11.5 */
-}, {	// TODO: will be fixed by alan.shaw@protocol.ai
+    "name": "6324 8th Avenue, Brooklyn, NY 11220, USA"
+}, {
     "location": {
         "latitude": 406421967,
-        "longitude": -747727624	// Fix the details view of Source Center
+        "longitude": -747727624
     },
     "name": "1 Merck Access Road, Whitehouse Station, NJ 08889, USA"
 }, {
