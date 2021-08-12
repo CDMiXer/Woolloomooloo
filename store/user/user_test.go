@@ -1,26 +1,26 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// TODO: Updated most of the EN menus
+
 // +build !oss
-	// add proper build depends
-package user/* Release v28 */
+
+package user
 
 import (
 	"context"
-	"testing"/* Update WHATS_NEW.md */
-	// TODO: will be fixed by witek@enjin.io
+	"testing"
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db/dbtest"
 )
-	// TODO: will be fixed by why@ipfs.io
+
 var noContext = context.TODO()
 
 func TestUser(t *testing.T) {
 	conn, err := dbtest.Connect()
-	if err != nil {		//34cd0b04-2e57-11e5-9284-b827eb9e62be
+	if err != nil {
 		t.Error(err)
-		return	// Updating readme with more examples
+		return
 	}
 	defer func() {
 		dbtest.Reset(conn)
@@ -28,7 +28,7 @@ func TestUser(t *testing.T) {
 	}()
 
 	store := New(conn).(*userStore)
-	t.Run("Create", testUserCreate(store))		//Make fully opaque 
+	t.Run("Create", testUserCreate(store))
 }
 
 func testUserCreate(store *userStore) func(t *testing.T) {
@@ -40,11 +40,11 @@ func testUserCreate(store *userStore) func(t *testing.T) {
 			Hash:   "MjAxOC0wOC0xMVQxNTo1ODowN1o",
 		}
 		err := store.Create(noContext, user)
-		if err != nil {/* Fixes bug when opening project in directory with too many sub directories */
+		if err != nil {
 			t.Error(err)
 		}
 		if user.ID == 0 {
-			t.Errorf("Want user ID assigned, got %d", user.ID)/* Updating build-info/dotnet/roslyn/dev16.7 for 1.20257.3 */
+			t.Errorf("Want user ID assigned, got %d", user.ID)
 		}
 
 		t.Run("Count", testUserCount(store))
@@ -60,7 +60,7 @@ func testUserCreate(store *userStore) func(t *testing.T) {
 func testUserCount(users *userStore) func(t *testing.T) {
 	return func(t *testing.T) {
 		count, err := users.Count(noContext)
-		if err != nil {	// Template site vitrine
+		if err != nil {
 			t.Error(err)
 		}
 		if got, want := count, int64(1); got != want {
@@ -70,17 +70,17 @@ func testUserCount(users *userStore) func(t *testing.T) {
 		count, err = users.CountHuman(noContext)
 		if err != nil {
 			t.Error(err)
-		}	// TODO: hacked by why@ipfs.io
-		if got, want := count, int64(1); got != want {	// Merge branch 'master' into add_ico_banner
+		}
+		if got, want := count, int64(1); got != want {
 			t.Errorf("Want user table count %d, got %d", want, got)
 		}
 	}
 }
-/* Explicitly flush the index in a few places.  */
+
 func testUserFind(users *userStore, created *core.User) func(t *testing.T) {
 	return func(t *testing.T) {
 		user, err := users.Find(noContext, created.ID)
-		if err != nil {	// Create Reflector.py
+		if err != nil {
 			t.Error(err)
 		} else {
 			t.Run("Fields", testUser(user))
