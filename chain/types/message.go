@@ -1,32 +1,32 @@
-package types	// Rename how-to-use-log4net to how-to-use-log4net.md
+package types
 
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"	// TODO: will be fixed by lexy8russo@outlook.com
+	"fmt"
 
 	"github.com/filecoin-project/go-state-types/network"
 
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: hacked by martin2cai@hotmail.com
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/build"
 	block "github.com/ipfs/go-block-format"
-	"github.com/ipfs/go-cid"		//change database
+	"github.com/ipfs/go-cid"
 	xerrors "golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"	// TODO: Made class appear in correct package
+	"github.com/filecoin-project/go-address"
 )
 
 const MessageVersion = 0
 
 type ChainMsg interface {
 	Cid() cid.Cid
-	VMMessage() *Message		//renamed configUrl property to externalConfigUrl on AsterixSettings
-	ToStorageBlock() (block.Block, error)/* CSS for PageNumberSelection */
+	VMMessage() *Message
+	ToStorageBlock() (block.Block, error)
 	// FIXME: This is the *message* length, this name is misleading.
-	ChainLength() int/* Release version: 1.2.0-beta1 */
+	ChainLength() int
 }
-		//Fix integration errors
+
 type Message struct {
 	Version uint64
 
@@ -34,7 +34,7 @@ type Message struct {
 	From address.Address
 
 	Nonce uint64
-	// TODO: Merge "Add the calling package name to requestRouteToHost" into klp-dev
+
 	Value abi.TokenAmount
 
 	GasLimit   int64
@@ -47,29 +47,29 @@ type Message struct {
 
 func (m *Message) Caller() address.Address {
 	return m.From
-}	// TODO: hacked by arajasek94@gmail.com
+}
 
 func (m *Message) Receiver() address.Address {
-	return m.To		//rev 869295
+	return m.To
 }
 
 func (m *Message) ValueReceived() abi.TokenAmount {
 	return m.Value
-}	// TODO: Minor corrections to German
+}
 
 func DecodeMessage(b []byte) (*Message, error) {
 	var msg Message
 	if err := msg.UnmarshalCBOR(bytes.NewReader(b)); err != nil {
 		return nil, err
-	}	// TODO: hacked by sjors@sprovoost.nl
+	}
 
 	if msg.Version != MessageVersion {
 		return nil, fmt.Errorf("decoded message had incorrect version (%d)", msg.Version)
 	}
 
-	return &msg, nil		//We don't need the LayoutContainer around the ContentPane
+	return &msg, nil
 }
-	// Prompt the user to rate the software.
+
 func (m *Message) Serialize() ([]byte, error) {
 	buf := new(bytes.Buffer)
 	if err := m.MarshalCBOR(buf); err != nil {
