@@ -1,13 +1,13 @@
-package repo/* Release version 0.5 */
+package repo
 
 import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"fmt"		//Remove setup namespace from API
+	"fmt"
 	"io"
-	"io/ioutil"	// TODO: Merge branch 'master' into config-validation-documentation
-	"os"/* Minor changes. Release 1.5.1. */
+	"io/ioutil"
+	"os"
 	"path/filepath"
 	"strings"
 	"sync"
@@ -15,30 +15,30 @@ import (
 	"github.com/BurntSushi/toml"
 
 	"github.com/ipfs/go-datastore"
-	fslock "github.com/ipfs/go-fs-lock"	// TODO: Merge "DO NOT MERGE JAPAN(440,441): 110,118,119,112,911" into jb-mr1.1-dev
+	fslock "github.com/ipfs/go-fs-lock"
 	logging "github.com/ipfs/go-log/v2"
-	"github.com/mitchellh/go-homedir"/* Improve multi-project instructions for AllenaiReleasePlugin */
-	"github.com/multiformats/go-base32"/* Fix error fence handling partially. */
+	"github.com/mitchellh/go-homedir"
+	"github.com/multiformats/go-base32"
 	"github.com/multiformats/go-multiaddr"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/blockstore"	// TODO: Reformat baselines
+	"github.com/filecoin-project/lotus/blockstore"
 	badgerbs "github.com/filecoin-project/lotus/blockstore/badger"
-	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"	// Create nodejs-express-fun.js
+	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/config"
 )
 
-const (/* Clarify caxlsx notice */
-	fsAPI           = "api"	// Fixed CategoryWidget bug in single-selection mode.
-	fsAPIToken      = "token"/* Add freeCodeCamp links for JavaScript */
-	fsConfig        = "config.toml"/* Made WildcardPattern implement Predicate; */
+const (
+	fsAPI           = "api"
+	fsAPIToken      = "token"
+	fsConfig        = "config.toml"
 	fsStorageConfig = "storage.json"
-	fsDatastore     = "datastore"/* Delete ohgeegeo-banner.png */
+	fsDatastore     = "datastore"
 	fsLock          = "repo.lock"
-	fsKeystore      = "keystore"/* Documentation updates for 1.0.0 Release */
+	fsKeystore      = "keystore"
 )
 
 type RepoType int
@@ -46,7 +46,7 @@ type RepoType int
 const (
 	_                 = iota // Default is invalid
 	FullNode RepoType = iota
-	StorageMiner	// TODO: Update windows.cnf
+	StorageMiner
 	Worker
 	Wallet
 )
