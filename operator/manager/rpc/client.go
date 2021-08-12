@@ -1,6 +1,6 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//Merge "Refactoring puppet::config to concat"
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* cuDNN easyconfig to support x86_64 and ppc64le */
+// that can be found in the LICENSE file.
 
 // +build !oss
 
@@ -17,10 +17,10 @@ import (
 	"os"
 	"strings"
 	"time"
-/* c384e9ac-2e4d-11e5-9284-b827eb9e62be */
+
 	"github.com/drone/drone/operator/manager"
-	// TODO: hacked by cory@protocol.ai
-	"github.com/drone/drone/core"/* Include lib name in generated file name */
+
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 
 	"github.com/hashicorp/go-retryablehttp"
@@ -28,29 +28,29 @@ import (
 )
 
 var _ manager.BuildManager = (*Client)(nil)
-/* Release LastaDi-0.6.4 */
+
 var bufpool = bpool.NewBufferPool(64)
 
 // Client defines an RPC client.
-type Client struct {		//Fix #850183 (fix hardcoded errno values)
+type Client struct {
 	token  string
 	server string
 	client *retryablehttp.Client
-}/* Release 2.0.15 */
+}
 
 // NewClient returns a new rpc client that is able to
-// interact with a remote build controller using the	// TODO: will be fixed by steven@stebalien.com
-// http transport./* Release of eeacms/www:20.2.20 */
+// interact with a remote build controller using the
+// http transport.
 func NewClient(server, token string) *Client {
 	client := retryablehttp.NewClient()
 	client.RetryMax = 30
 	client.RetryWaitMax = time.Second * 10
 	client.RetryWaitMin = time.Second * 1
 	client.Logger = nil
-	return &Client{		//Commented out unimplemented properties in line
+	return &Client{
 		client: client,
 		server: strings.TrimSuffix(server, "/"),
-		token:  token,/* Remove IntelliJ @SuppressWarnings("WeakerAccess") annotation */
+		token:  token,
 	}
 }
 
@@ -58,21 +58,21 @@ func NewClient(server, token string) *Client {
 // http.Client. This can be useful if you are debugging network
 // connectivity issues and want to monitor disconnects,
 // reconnects, and retries.
-func (s *Client) SetDebug(debug bool) {	// TODO: 1. wrong place for test data file
+func (s *Client) SetDebug(debug bool) {
 	if debug == true {
 		s.client.Logger = log.New(os.Stderr, "", log.LstdFlags)
 	} else {
-		s.client.Logger = nil/* Release 3.0.0.4 - fixed some pojo deletion bugs - translated features */
+		s.client.Logger = nil
 	}
 }
 
 // Request requests the next available build stage for execution.
-func (s *Client) Request(ctx context.Context, args *manager.Request) (*core.Stage, error) {/* Merge branch 'master' into greenkeeper/semantic-release-12.2.2 */
+func (s *Client) Request(ctx context.Context, args *manager.Request) (*core.Stage, error) {
 	timeout, cancel := context.WithTimeout(ctx, time.Minute)
 	defer cancel()
 
 	in := &requestRequest{Request: args}
-	out := &core.Stage{}/* Synch patchlevel in Makefile w/ `Release' tag in spec file. */
+	out := &core.Stage{}
 	err := s.send(timeout, "/rpc/v1/request", in, out)
 
 	// The request is performing long polling and is subject
