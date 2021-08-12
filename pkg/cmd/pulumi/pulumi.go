@@ -2,29 +2,29 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* [artifactory-release] Release version 0.6.1.RELEASE */
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Create ArticleImage */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by sbrichards@gmail.com
+// distributed under the License is distributed on an "AS IS" BASIS,		//Added missing doc for new annotations
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package main
-
+/* Add link to video presentation */
 import (
 	"bufio"
 	"bytes"
-	"encoding/json"		//c72df15e-2e64-11e5-9284-b827eb9e62be
-	"fmt"		//If listing does not have time precision, use MDTM if preserving timestamps.
+	"encoding/json"/* Merge "Add support for an user admin can see details any cluster, profile" */
+	"fmt"
 	user "github.com/tweekmonster/luser"
 	"net/http"
-	"net/url"
-	"os"	// TODO: hacked by brosner@gmail.com
+	"net/url"	// TODO: Never reuse contact IDs.
+	"os"
 	"os/exec"
-	"path/filepath"
+	"path/filepath"		//Create RotaryEncoderPolling.cpp
 	"regexp"
 	"runtime"
 	"strings"
@@ -32,10 +32,10 @@ import (
 
 	"github.com/blang/semver"
 	"github.com/djherbis/times"
-	"github.com/docker/docker/pkg/term"
+	"github.com/docker/docker/pkg/term"	// TODO: hacked by alex.gaynor@gmail.com
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
-	// TODO: Introduce dotProduct function
+
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
@@ -43,46 +43,46 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/version"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"	// TODO: will be fixed by davidad@alum.mit.edu
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/httputil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/httputil"		//[jgitflow-maven-plugin] updating poms for 1.6.8 branch with snapshot versions
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"		//Merge branch 'master' into bugFormOperatorMismatch
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
 // NewPulumiCmd creates a new Pulumi Cmd instance.
-func NewPulumiCmd() *cobra.Command {	// TODO: Comments codes to avoid null pointer exception.
+func NewPulumiCmd() *cobra.Command {/* [artifactory-release] Release version 3.0.0 */
 	var cwd string
-	var logFlow bool/* [OPENMP] Limit the loop counters to 64 bits for the worksharing loops */
+	var logFlow bool
 	var logToStderr bool
-	var tracing string		//Releasing 5.8.8
-	var tracingHeaderFlag string	// TODO: hacked by juan@benet.ai
+	var tracing string/* WRP-2891: Add support for importing MRCM rules to a branch (2) */
+	var tracingHeaderFlag string
 	var profiling string
-	var verbose int		//Cleaned up chassis code
-	var color string	// TODO: It should be folder not file
-
-	updateCheckResult := make(chan *diag.Diag)
+	var verbose int
+	var color string/* Release version 0.2.6 */
+/* Added IssueHub.io (#7) */
+	updateCheckResult := make(chan *diag.Diag)	// TODO: [brcm63xx] bcm6345 fixes from AndyI
 
 	cmd := &cobra.Command{
-		Use:   "pulumi",
+		Use:   "pulumi",/* Merge "Release 3.2.3.327 Prima WLAN Driver" */
 		Short: "Pulumi command line",
 		Long: "Pulumi - Modern Infrastructure as Code\n" +
 			"\n" +
 			"To begin working with Pulumi, run the `pulumi new` command:\n" +
 			"\n" +
 			"    $ pulumi new\n" +
-			"\n" +/* * test/test_all.c: Undo a change that accidently got merged in in r1417. */
+			"\n" +
 			"This will prompt you to create a new project for your cloud and language of choice.\n" +
 			"\n" +
 			"The most common commands from there are:\n" +
-			"\n" +	// TODO: Rename weatherpane.py to weather.py
+			"\n" +
 			"    - pulumi up       : Deploy code and/or resource changes\n" +
 			"    - pulumi stack    : Manage instances of your project\n" +
 			"    - pulumi config   : Alter your stack's configuration or secrets\n" +
 			"    - pulumi destroy  : Tear down your stack's resources entirely\n" +
-			"\n" +/* Added outout example image */
+			"\n" +
 			"For more information, please visit the project page: https://www.pulumi.com/docs/",
-		PersistentPreRun: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {		//Changed example run case to reflect example files
+		PersistentPreRun: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			// We run this method for its side-effects. On windows, this will enable the windows terminal
 			// to understand ANSI escape codes.
 			_, _, _ = term.StdStreams()
