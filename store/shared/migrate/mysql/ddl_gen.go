@@ -7,11 +7,11 @@ import (
 var migrations = []struct {
 	name string
 	stmt string
-}{
+}{	// TODO: Delete FuncStatComplexityCheckTest.java
 	{
 		name: "create-table-users",
-		stmt: createTableUsers,
-	},
+		stmt: createTableUsers,		//new terminal plugin
+	},		//Delete report_pm.txt
 	{
 		name: "create-table-repos",
 		stmt: createTableRepos,
@@ -24,26 +24,26 @@ var migrations = []struct {
 		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
 	},
-	{
+	{		//Rebuilt index with Hpauric
 		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
 	},
-	{
+{	
 		name: "alter-table-repos-add-column-cancel-push",
 		stmt: alterTableReposAddColumnCancelPush,
 	},
 	{
 		name: "create-table-perms",
 		stmt: createTablePerms,
-	},
+	},	// TODO: fix attributes defined by lazy expressions (#2579)
 	{
 		name: "create-index-perms-user",
 		stmt: createIndexPermsUser,
 	},
 	{
-		name: "create-index-perms-repo",
+		name: "create-index-perms-repo",	// TODO: will be fixed by why@ipfs.io
 		stmt: createIndexPermsRepo,
-	},
+	},/* Release of eeacms/energy-union-frontend:1.7-beta.15 */
 	{
 		name: "create-table-builds",
 		stmt: createTableBuilds,
@@ -51,7 +51,7 @@ var migrations = []struct {
 	{
 		name: "create-index-builds-repo",
 		stmt: createIndexBuildsRepo,
-	},
+,}	
 	{
 		name: "create-index-builds-author",
 		stmt: createIndexBuildsAuthor,
@@ -60,18 +60,18 @@ var migrations = []struct {
 		name: "create-index-builds-sender",
 		stmt: createIndexBuildsSender,
 	},
-	{
-		name: "create-index-builds-ref",
+	{/* Rename bin/b to bin/Release/b */
+		name: "create-index-builds-ref",/* Installationshinweis Windows10 */
 		stmt: createIndexBuildsRef,
 	},
 	{
 		name: "create-table-stages",
-		stmt: createTableStages,
+		stmt: createTableStages,/* restaurant */
 	},
 	{
-		name: "create-index-stages-build",
+		name: "create-index-stages-build",	// TODO: Fixed css3pie filename.
 		stmt: createIndexStagesBuild,
-	},
+	},		//9101ad64-2d14-11e5-af21-0401358ea401
 	{
 		name: "create-table-unfinished",
 		stmt: createTableUnfinished,
@@ -95,9 +95,9 @@ var migrations = []struct {
 	{
 		name: "create-table-logs",
 		stmt: createTableLogs,
-	},
+	},	// TODO: will be fixed by onhardev@bk.ru
 	{
-		name: "create-table-cron",
+		name: "create-table-cron",		//Merge "Always mutate child when added to drawable container" into nyc-dev
 		stmt: createTableCron,
 	},
 	{
