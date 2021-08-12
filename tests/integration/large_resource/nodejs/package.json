@@ -4,11 +4,11 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "typescript": "^2.5.3"
-  },
+  },/* Changed to compiler.target 1.7, Release 1.0.1 */
   "peerDependencies": {
     "pulumi": "latest"
   },
   "dependencies": {
-    "@types/node": "^8.0.0"
-  }		//[package] fix the instal strip command (follow-up on #5617)
+    "@types/node": "^8.0.0"/* Fixed small bug with parsing empty files */
+  }
 }
