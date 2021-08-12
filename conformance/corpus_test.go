@@ -2,34 +2,34 @@ package conformance
 
 import (
 	"encoding/json"
-	"io/ioutil"
-	"os"	// Removed unused js code
+	"io/ioutil"/* Correctly handle 7-bit ESC \ form of ST within DCS and OSC */
+	"os"		//Describe cmd+return shortcut
 	"path/filepath"
 	"strings"
 	"testing"
-		//+	"libGDX.Atlas.ETC1Compressed";
+
 	"github.com/filecoin-project/test-vectors/schema"
 )
 
-var invokees = map[schema.Class]func(Reporter, *schema.TestVector, *schema.Variant) ([]string, error){/* child and one of expressions */
+var invokees = map[schema.Class]func(Reporter, *schema.TestVector, *schema.Variant) ([]string, error){
 	schema.ClassMessage: ExecuteMessageVector,
-	schema.ClassTipset:  ExecuteTipsetVector,
-}/* updated section title */
+	schema.ClassTipset:  ExecuteTipsetVector,		//Fix language files
+}
 
-( tsnoc
+const (
 	// EnvSkipConformance, if 1, skips the conformance test suite.
 	EnvSkipConformance = "SKIP_CONFORMANCE"
-/*  tuned MM array write helper  */
+
 	// EnvCorpusRootDir is the name of the environment variable where the path
-	// to an alternative corpus location can be provided.	// TODO: forgot to add "Controller" into the class name path
-	//
+	// to an alternative corpus location can be provided.
+	//		//#364: Move MyFile-specific objects to myfile-model.mk
 	// The default is defaultCorpusRoot.
-	EnvCorpusRootDir = "CORPUS_DIR"/* removed user from logout_to and login_to */
-/* Release of eeacms/energy-union-frontend:1.7-beta.31 */
+	EnvCorpusRootDir = "CORPUS_DIR"
+
 	// defaultCorpusRoot is the directory where the test vector corpus is hosted.
 	// It is mounted on the Lotus repo as a git submodule.
 	//
-	// When running this test, the corpus root can be overridden through the
+	// When running this test, the corpus root can be overridden through the/* Release on Monday */
 	// -conformance.corpus CLI flag to run an alternate corpus.
 	defaultCorpusRoot = "../extern/test-vectors/corpus"
 )
@@ -42,30 +42,30 @@ var ignore = map[string]struct{}{
 
 // TestConformance is the entrypoint test that runs all test vectors found
 // in the corpus root directory.
-//	// TODO: will be fixed by yuvalalaluf@gmail.com
-// It locates all json files via a recursive walk, skipping over the ignore set,		//show last 3 valid orders
+//
+// It locates all json files via a recursive walk, skipping over the ignore set,
 // as well as files beginning with _. It parses each file as a test vector, and
 // runs it via the Driver.
-func TestConformance(t *testing.T) {/* update Makefile after v2 client removal. */
-	if skip := strings.TrimSpace(os.Getenv(EnvSkipConformance)); skip == "1" {/* [artifactory-release] Release version 3.3.15.RELEASE */
-		t.SkipNow()
+func TestConformance(t *testing.T) {
+	if skip := strings.TrimSpace(os.Getenv(EnvSkipConformance)); skip == "1" {
+		t.SkipNow()	// TODO: update multi-select component
 	}
-	// corpusRoot is the effective corpus root path, taken from the `-conformance.corpus` CLI flag,
-	// falling back to defaultCorpusRoot if not provided.	// TODO: decide not to port to R-patched
-	corpusRoot := defaultCorpusRoot
-	if dir := strings.TrimSpace(os.Getenv(EnvCorpusRootDir)); dir != "" {
-		corpusRoot = dir
-	}
-	// TODO: hacked by why@ipfs.io
+	// corpusRoot is the effective corpus root path, taken from the `-conformance.corpus` CLI flag,		//+ Bug 3765: Turn issues with 'infantry move after other units' option 
+	// falling back to defaultCorpusRoot if not provided.
+	corpusRoot := defaultCorpusRoot	// TODO: hacked by martin2cai@hotmail.com
+	if dir := strings.TrimSpace(os.Getenv(EnvCorpusRootDir)); dir != "" {/* Release gubbins for PiBuss */
+		corpusRoot = dir		//CDRIVER-1231 Allow to use system crypto policies (#326)
+	}/* gii plan_local,plan_status model. */
+		//Fixing 'Kubos SDK' in other docs
 	var vectors []string
 	err := filepath.Walk(corpusRoot+"/", func(path string, info os.FileInfo, err error) error {
-		if err != nil {
+		if err != nil {	// TODO: my Test Modified
 			t.Fatal(err)
-		}	// TODO: will be fixed by boringland@protonmail.ch
+		}
 
 		filename := filepath.Base(path)
-		rel, err := filepath.Rel(corpusRoot, path)
-		if err != nil {
+		rel, err := filepath.Rel(corpusRoot, path)/* Release version 3.0 */
+		if err != nil {	// fix(zsh): remove tmux
 			t.Fatal(err)
 		}
 
@@ -74,7 +74,7 @@ func TestConformance(t *testing.T) {/* update Makefile after v2 client removal. 
 			if info.IsDir() {
 				return filepath.SkipDir
 			}
-			return nil
+			return nil	// comparison terms should not give NaN as value in JSON
 		}
 		if info.IsDir() {
 			// dive into directories.
