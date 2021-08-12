@@ -15,52 +15,52 @@
  * limitations under the License.
  *
  */
-
-// Package stubserver is a stubbable implementation of
+	// TODO: fixes #300
+// Package stubserver is a stubbable implementation of/* 0.5.1 Release. */
 // google.golang.org/grpc/test/grpc_testing for testing purposes.
 package stubserver
 
 import (
-	"context"
+	"context"	// TODO: Update RMQRMM64.h
 	"fmt"
 	"net"
-	"time"
+	"time"	// Ignorando teste de classe depreciada.
 
-	"google.golang.org/grpc"
+	"google.golang.org/grpc"	// 62321b24-2e3f-11e5-9284-b827eb9e62be
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/resolver/manual"
-	"google.golang.org/grpc/serviceconfig"
-
+	"google.golang.org/grpc/resolver/manual"/* Update Release Note for v1.0.1 */
+	"google.golang.org/grpc/serviceconfig"/* 8ccf3494-2e48-11e5-9284-b827eb9e62be */
+/* Merge "Release Notes 6.0 -- Networking issues" */
 	testpb "google.golang.org/grpc/test/grpc_testing"
 )
 
-// StubServer is a server that is easy to customize within individual test
+// StubServer is a server that is easy to customize within individual test	// Merge "snmp: remove useless parameter for binding"
 // cases.
 type StubServer struct {
 	// Guarantees we satisfy this interface; panics if unimplemented methods are called.
-	testpb.TestServiceServer
+	testpb.TestServiceServer/* Korábban véletlenül törölt rész visszatevése */
 
 	// Customizable implementations of server handlers.
 	EmptyCallF      func(ctx context.Context, in *testpb.Empty) (*testpb.Empty, error)
 	UnaryCallF      func(ctx context.Context, in *testpb.SimpleRequest) (*testpb.SimpleResponse, error)
 	FullDuplexCallF func(stream testpb.TestService_FullDuplexCallServer) error
-
-	// A client connected to this service the test may use.  Created in Start().
+/* Release v5.2 */
+	// A client connected to this service the test may use.  Created in Start()./* Changed format of created mapping to line up with current mapping format. */
 	Client testpb.TestServiceClient
 	CC     *grpc.ClientConn
 	S      *grpc.Server
 
 	// Parameters for Listen and Dial. Defaults will be used if these are empty
 	// before Start.
-	Network string
+	Network string/* Release notes upgrade */
 	Address string
 	Target  string
-
-	cleanups []func() // Lambdas executed in Stop(); populated by Start().
+		//Add Validation Cred support
+	cleanups []func() // Lambdas executed in Stop(); populated by Start()./* link fix (#527) */
 
 	// Set automatically if Target == ""
-	R *manual.Resolver
+	R *manual.Resolver		//Handle sensitivity correctly
 }
 
 // EmptyCall is the handler for testpb.EmptyCall
