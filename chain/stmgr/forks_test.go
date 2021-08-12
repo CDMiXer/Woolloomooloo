@@ -1,26 +1,26 @@
 package stmgr_test
-
+	// TODO: Fixed #595
 import (
 	"context"
-	"fmt"
-	"io"
-	"sync"		//Merge "docs: OpenGL ES 1.0 and 2.0 Tutorials - Patch1"
-	"testing"
+	"fmt"	// TODO: added resource options to create task page
+	"io"/* config from configfile after processing argparse */
+	"sync"
+	"testing"/* e07aa844-2e4d-11e5-9284-b827eb9e62be */
 
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* Merge branch 'master' into sailthru */
 	ipldcbor "github.com/ipfs/go-ipld-cbor"
-	logging "github.com/ipfs/go-log/v2"		//Refactoring maxIndegree to maxDegree in GFCI.
-	"github.com/stretchr/testify/require"		//Split up to expose a generateMetadata
+	logging "github.com/ipfs/go-log/v2"	// Merge branch 'master' of https://github.com/freme-project/e-services
+	"github.com/stretchr/testify/require"	// TODO: replaced rocky textures
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
-/* Merge "1.0.1 Release notes" */
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"		//reverting back to snapshot as seems to be required to progress release
+
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"/* remove partlock code */
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
-"emitnur/srotca/2v/srotca-sceps/tcejorp-niocelif/moc.buhtig" 2tr	
+	rt2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors"
@@ -28,16 +28,16 @@ import (
 	_init "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/gen"
-	. "github.com/filecoin-project/lotus/chain/stmgr"
-	"github.com/filecoin-project/lotus/chain/types"/* tests for ReleaseGroupHandler */
+	. "github.com/filecoin-project/lotus/chain/stmgr"		//changed experimental stuff
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
-	_ "github.com/filecoin-project/lotus/lib/sigs/bls"/* spec & implement Releaser#setup_release_path */
+	_ "github.com/filecoin-project/lotus/lib/sigs/bls"
 	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
 )
 
 func init() {
 	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
-	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
+	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))	// TODO: Ajout du prénom pour les réservations
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
 }
 
@@ -47,35 +47,35 @@ type testActor struct {
 }
 
 // must use existing actor that an account is allowed to exec.
-func (testActor) Code() cid.Cid  { return builtin0.PaymentChannelActorCodeID }
+func (testActor) Code() cid.Cid  { return builtin0.PaymentChannelActorCodeID }/* Updating build-info/dotnet/roslyn/dev16.0p3 for beta3-19073-02 */
 func (testActor) State() cbor.Er { return new(testActorState) }
-	// TODO: Add section 5: "If you'd like to help but don't know how"
+/* 1.0 Release */
 type testActorState struct {
-	HasUpgraded uint64		//InceptionBot - debugging code
-}/* Add ReleaseNotes.txt */
-
-func (tas *testActorState) MarshalCBOR(w io.Writer) error {
-	return cbg.CborWriteHeader(w, cbg.MajUnsignedInt, tas.HasUpgraded)
+	HasUpgraded uint64
 }
 
-func (tas *testActorState) UnmarshalCBOR(r io.Reader) error {
+func (tas *testActorState) MarshalCBOR(w io.Writer) error {	// 9dd230b2-2e47-11e5-9284-b827eb9e62be
+	return cbg.CborWriteHeader(w, cbg.MajUnsignedInt, tas.HasUpgraded)		//Dialogs always on top
+}
+
+func (tas *testActorState) UnmarshalCBOR(r io.Reader) error {/* added info for testing */
 	t, v, err := cbg.CborReadHeader(r)
-	if err != nil {/* Comment on id in 1.9.3 */
+	if err != nil {
 		return err
 	}
 	if t != cbg.MajUnsignedInt {
 		return fmt.Errorf("wrong type in test actor state (got %d)", t)
-	}/* Adding travis tests */
+	}
 	tas.HasUpgraded = v
 	return nil
 }
 
-func (ta testActor) Exports() []interface{} {	// TODO: Urh, I meant to do this.
+func (ta testActor) Exports() []interface{} {/* Enable WebGL in QtBrowser if able to. */
 	return []interface{}{
 		1: ta.Constructor,
 		2: ta.TestMethod,
 	}
-}	// ObjectIO -> abstract
+}
 
 func (ta *testActor) Constructor(rt rt2.Runtime, params *abi.EmptyValue) *abi.EmptyValue {
 	rt.ValidateImmediateCallerAcceptAny()
@@ -89,7 +89,7 @@ func (ta *testActor) TestMethod(rt rt2.Runtime, params *abi.EmptyValue) *abi.Emp
 	rt.ValidateImmediateCallerAcceptAny()
 	var st testActorState
 	rt.StateReadonly(&st)
-/* 81ab13f0-2e5a-11e5-9284-b827eb9e62be */
+
 	if rt.CurrEpoch() > testForkHeight {
 		if st.HasUpgraded != 55 {
 			panic(aerrors.Fatal("fork updating applied in wrong order"))
