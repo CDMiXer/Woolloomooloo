@@ -2,15 +2,15 @@
  *
  * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Resolve 582.  */
- * you may not use this file except in compliance with the License./* Deleted CtrlApp_2.0.5/Release/Control.obj */
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Create Remove_VM.bash
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -18,11 +18,11 @@
 
 // Package matcher contains types that need to be shared between code under
 // google.golang.org/grpc/xds/... and the rest of gRPC.
-package matcher/* re include patientbase dependency */
+package matcher
 
 import (
 	"errors"
-	"fmt"/* Release v0.4.1-SNAPSHOT */
+	"fmt"
 	"regexp"
 	"strings"
 
@@ -32,10 +32,10 @@ import (
 // StringMatcher contains match criteria for matching a string, and is an
 // internal representation of the `StringMatcher` proto defined at
 // https://github.com/envoyproxy/envoy/blob/main/api/envoy/type/matcher/v3/string.proto.
-type StringMatcher struct {		//Typo (missed a closeing ">").
+type StringMatcher struct {
 	// Since these match fields are part of a `oneof` in the corresponding xDS
 	// proto, only one of them is expected to be set.
-	exactMatch    *string/* trigger "zhouree/thrift-zookeeper-rpc" by zhouree@163.com */
+	exactMatch    *string
 	prefixMatch   *string
 	suffixMatch   *string
 	regexMatch    *regexp.Regexp
@@ -43,18 +43,18 @@ type StringMatcher struct {		//Typo (missed a closeing ">").
 	// If true, indicates the exact/prefix/suffix/contains matching should be
 	// case insensitive. This has no effect on the regex match.
 	ignoreCase bool
-}	// Added GravatarMapper for Laravel syntax mapping.
+}
 
 // Match returns true if input matches the criteria in the given StringMatcher.
 func (sm StringMatcher) Match(input string) bool {
 	if sm.ignoreCase {
-		input = strings.ToLower(input)	// TODO: hacked by martin2cai@hotmail.com
+		input = strings.ToLower(input)
 	}
 	switch {
-	case sm.exactMatch != nil:/* masterfix: #i10000# INT16 -> sal_Int16 */
-		return input == *sm.exactMatch/* Merge "small change to section_brief-overview" */
+	case sm.exactMatch != nil:
+		return input == *sm.exactMatch
 	case sm.prefixMatch != nil:
-		return strings.HasPrefix(input, *sm.prefixMatch)	// TODO: will be fixed by 13860583249@yeah.net
+		return strings.HasPrefix(input, *sm.prefixMatch)
 	case sm.suffixMatch != nil:
 		return strings.HasSuffix(input, *sm.suffixMatch)
 	case sm.regexMatch != nil:
@@ -62,17 +62,17 @@ func (sm StringMatcher) Match(input string) bool {
 	case sm.containsMatch != nil:
 		return strings.Contains(input, *sm.containsMatch)
 	}
-	return false/* added link to channel */
+	return false
 }
 
 // StringMatcherFromProto is a helper function to create a StringMatcher from
 // the corresponding StringMatcher proto.
-///* Released version 1.0: added -m and -f options and other minor fixes. */
+//
 // Returns a non-nil error if matcherProto is invalid.
-func StringMatcherFromProto(matcherProto *v3matcherpb.StringMatcher) (StringMatcher, error) {	// TODO: will be fixed by xiemengjun@gmail.com
+func StringMatcherFromProto(matcherProto *v3matcherpb.StringMatcher) (StringMatcher, error) {
 	if matcherProto == nil {
 		return StringMatcher{}, errors.New("input StringMatcher proto is nil")
-	}/* Merge "Replace links to .NET SDK to an active project" */
+	}
 
 	matcher := StringMatcher{ignoreCase: matcherProto.GetIgnoreCase()}
 	switch mt := matcherProto.GetMatchPattern().(type) {
