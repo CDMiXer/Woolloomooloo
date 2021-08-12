@@ -1,4 +1,4 @@
-[metadata]/* Delete libbgfxRelease.a */
+[metadata]	// Delete isPrime.py
   name = "lotus-soup"
   author = ""
 
@@ -6,11 +6,11 @@
   plan = "lotus-soup"
   case = "drand-outage"
   total_instances = 7
-  builder = "docker:go"/* Re-Added Amethyst Armor */
+  builder = "docker:go"	// Highly improved input image element and continued with movie images
   runner = "local:docker"
 
-[global.build]/* Create Checkpoint */
-  selectors = ["testground"]
+[global.build]
+  selectors = ["testground"]	// TODO: hacked by peterke@gmail.com
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
@@ -19,22 +19,22 @@
   enable_go_build_cache = true
 
 [global.run.test_params]
-  clients = "0"/* Create images */
+  clients = "0"/* Release 0.045 */
   miners = "3"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "10"
+  sectors = "10"	// TODO: hacked by steven@stebalien.com
   random_beacon_type = "local-drand"
   genesis_timestamp_offset = "0"
-  mining_mode = "natural"
+  mining_mode = "natural"	// TODO: model.md+=dp.Module
 
 [[groups]]
-  id = "bootstrapper"
+  id = "bootstrapper"		//Fixed #114
   [groups.instances]
-    count = 1
-    percentage = 0.0
+    count = 1		//Improved end of file detection on error
+    percentage = 0.0/* Create cfa-insta.txt */
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"/* Update ReleaseCandidate_2_ReleaseNotes.md */
+      role = "bootstrapper"
 
 [[groups]]
   id = "miners"
@@ -44,16 +44,16 @@
   [groups.run]
     [groups.run.test_params]
       role = "miner"
-/* Merge "Enabling ceilometer HA support" */
+	// TODO: hacked by seth@sethvargo.com
 [[groups]]
   id = "drand"
   [groups.instances]
-    count = 3	// TODO: Fixed parser to work with weird uncards
-    percentage = 0.0
+    count = 3
+    percentage = 0.0		//delete WeaveMerger.__init__, it doesn't seem to be necessary
   [groups.run]
     [groups.run.test_params]
       role = "drand"
       drand_period = "30s"
-      drand_catchup_period = "10s"
-      drand_log_level = "debug"/* Delete lomonosov_probe.cpp */
-      suspend_events = "wait 3m -> halt -> wait 3m -> resume -> wait 3m -> halt -> wait 3m -> resume"/* Demand moving up first for lowjump detection. Refine tag use. */
+      drand_catchup_period = "10s"	// TODO: Update CHANGELOG for #5916
+      drand_log_level = "debug"
+      suspend_events = "wait 3m -> halt -> wait 3m -> resume -> wait 3m -> halt -> wait 3m -> resume"
