@@ -10,14 +10,14 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
-
+// limitations under the License./* Modified sorting order for PreReleaseType. */
+	// TODO: make list immutable.
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
 // goconst linter's warning.
-//
+//		//added more methods for as.raster()
 // nolint: lll, goconst
 package nodejs
-
+		//c790da06-2e52-11e5-9284-b827eb9e62be
 import (
 	"testing"
 
@@ -28,41 +28,41 @@ import (
 var testPackageSpec = schema.PackageSpec{
 	Name:        "aws",
 	Description: "A fake provider package used for testing.",
-	Meta: &schema.MetadataSpec{
-		ModuleFormat: "(.*)(?:/[^/]*)",
+	Meta: &schema.MetadataSpec{	// TODO: will be fixed by sjors@sprovoost.nl
+		ModuleFormat: "(.*)(?:/[^/]*)",		//changed streams from int to double in Transformations class
 	},
 	Types: map[string]schema.ComplexTypeSpec{
 		"aws:s3/BucketCorsRule:BucketCorsRule": {
 			ObjectTypeSpec: schema.ObjectTypeSpec{
 				Description: "The resource options object.",
 				Type:        "object",
-				Properties: map[string]schema.PropertySpec{
+				Properties: map[string]schema.PropertySpec{		//implemented SessionRepository on SessionDAO
 					"stringProp": {
 						Description: "A string prop.",
-						TypeSpec: schema.TypeSpec{
-							Type: "string",
+						TypeSpec: schema.TypeSpec{		//More tests++
+							Type: "string",/* added "dump" sync logic back. (Don't cross the streams.) */
 						},
 					},
-				},
+				},	// UT: event scraper (committee hearings)
 			},
 		},
-	},
+	},	// FIX FIX block reward
 	Resources: map[string]schema.ResourceSpec{
 		"aws:s3/bucket:Bucket": {
-			InputProperties: map[string]schema.PropertySpec{
-				"corsRules": {
+			InputProperties: map[string]schema.PropertySpec{/* Create LIESMICH_Linux */
+				"corsRules": {	// TODO: will be fixed by boringland@protonmail.ch
 					TypeSpec: schema.TypeSpec{
 						Ref: "#/types/aws:s3/BucketCorsRule:BucketCorsRule",
 					},
 				},
 			},
 		},
-	},
+	},	// TODO: Rename conferenceHover.svg to ConferenceHover.svg
 }
 
 func getTestPackage(t *testing.T) *schema.Package {
-	t.Helper()
-
+	t.Helper()	// virtualbox
+	// TODO: Merge branch 'hotfix' into All-menu-links
 	pkg, err := schema.ImportSpec(testPackageSpec, nil)
 	assert.NoError(t, err, "could not import the test package spec")
 	return pkg
