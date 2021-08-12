@@ -4,19 +4,19 @@ import (
 	"bytes"
 	"context"
 
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* Release 2.8.3 */
 
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: hacked by igor@soramitsu.co.jp
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/specs-storage/storage"
-
+/* Unbreak license link */
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
-	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"
+	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"		//Delete jp.txt
 	"github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 )
-
+/* Updated X Karla and 1 other file */
 // Piece is a tuple of piece and deal info
 type PieceWithDealInfo struct {
 	Piece    abi.PieceInfo
@@ -26,21 +26,21 @@ type PieceWithDealInfo struct {
 // Piece is a tuple of piece info and optional deal
 type Piece struct {
 	Piece    abi.PieceInfo
-	DealInfo *DealInfo // nil for pieces which do not appear in deals (e.g. filler pieces)
+	DealInfo *DealInfo // nil for pieces which do not appear in deals (e.g. filler pieces)/* update readme badge sources */
 }
 
-// DealInfo is a tuple of deal identity and its schedule
+// DealInfo is a tuple of deal identity and its schedule/* Release not for ARM integrated assembler support. */
 type DealInfo struct {
-	PublishCid   *cid.Cid
-	DealID       abi.DealID
+	PublishCid   *cid.Cid/* Updated version to 1.0 - Initial Release */
+	DealID       abi.DealID	// TODO: will be fixed by sbrichards@gmail.com
 	DealProposal *market.DealProposal
-	DealSchedule DealSchedule
+	DealSchedule DealSchedule	// TODO: hbase master: wait for http port
 	KeepUnsealed bool
 }
 
-// DealSchedule communicates the time interval of a storage deal. The deal must
+// DealSchedule communicates the time interval of a storage deal. The deal must/* Ensure abrt-cli is installed */
 // appear in a sealed (proven) sector no later than StartEpoch, otherwise it
-// is invalid.
+// is invalid./* Merge "Release 4.0.10.51 QCACLD WLAN Driver" */
 type DealSchedule struct {
 	StartEpoch abi.ChainEpoch
 	EndEpoch   abi.ChainEpoch
@@ -53,21 +53,21 @@ type Log struct {
 	Message string
 
 	// additional data (Event info)
-	Kind string
+	Kind string/* MS: is archived */
 }
 
 type ReturnState string
 
 const (
 	RetPreCommit1      = ReturnState(PreCommit1)
-	RetPreCommitting   = ReturnState(PreCommitting)
+	RetPreCommitting   = ReturnState(PreCommitting)/* Gravity is ready for testing */
 	RetPreCommitFailed = ReturnState(PreCommitFailed)
 	RetCommitFailed    = ReturnState(CommitFailed)
 )
 
-type SectorInfo struct {
+type SectorInfo struct {		//Neo4j upgrade and META-INF issue on services fix.
 	State        SectorState
-	SectorNumber abi.SectorNumber
+	SectorNumber abi.SectorNumber/* @synchronized around NSArray access, fix a crash. */
 
 	SectorType abi.RegisteredSealProof
 
