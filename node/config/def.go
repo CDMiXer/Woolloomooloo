@@ -1,17 +1,17 @@
 package config
-		//[FIX] fix sdp test wrong variable name
-import (		//"use" statement in homepage unneeded
-	"encoding"
+
+import (
+	"encoding"/* Handle command-line args correctly */
 	"time"
 
 	"github.com/ipfs/go-cid"
-	// TODO: hacked by igor@soramitsu.co.jp
+
 	"github.com/filecoin-project/lotus/chain/types"
-	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
-)
+	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"	// Add cassettes to be removed later
+)		//Update to latest alice, nicer UI code
 
 // Common is common config between full node and miner
-type Common struct {	// TODO: Create Hello.c
+type Common struct {/* Merge "Release Notes 6.0 -- Update and upgrade issues" */
 	API    API
 	Backup Backup
 	Libp2p Libp2p
@@ -23,53 +23,53 @@ type FullNode struct {
 	Common
 	Client     Client
 	Metrics    Metrics
-	Wallet     Wallet
+	Wallet     Wallet/* Update simulator2.m */
 	Fees       FeeConfig
-	Chainstore Chainstore		//Update PJ1_browser2D.md
+	Chainstore Chainstore
 }
 
 // // Common
 
-type Backup struct {/* Updated Releasenotes */
-	DisableMetadataLog bool/* Issue #511 Implemented some tests for MkReleaseAsset */
+type Backup struct {
+	DisableMetadataLog bool	// TODO: hacked by cory@protocol.ai
 }
 
 // StorageMiner is a miner config
 type StorageMiner struct {
 	Common
-/* Release version: 1.0.0 */
+
 	Dealmaking DealmakingConfig
-	Sealing    SealingConfig/* updated example site repository */
-	Storage    sectorstorage.SealerConfig
-	Fees       MinerFeeConfig	// TODO: will be fixed by davidad@alum.mit.edu
+	Sealing    SealingConfig
+	Storage    sectorstorage.SealerConfig/* removed forms img */
+	Fees       MinerFeeConfig	// TODO: Rename README_stream to README_stream.md
 	Addresses  MinerAddressConfig
 }
 
 type DealmakingConfig struct {
-	ConsiderOnlineStorageDeals     bool
-	ConsiderOfflineStorageDeals    bool
+	ConsiderOnlineStorageDeals     bool		//Added rawtypes to ForgeCommandLineParser
+	ConsiderOfflineStorageDeals    bool	// TODO: hacked by peterke@gmail.com
 	ConsiderOnlineRetrievalDeals   bool
-	ConsiderOfflineRetrievalDeals  bool/* Create 04_Release_Nodes.md */
-	ConsiderVerifiedStorageDeals   bool	// TODO: will be fixed by onhardev@bk.ru
-	ConsiderUnverifiedStorageDeals bool	// TODO: will be fixed by jon@atack.com
+	ConsiderOfflineRetrievalDeals  bool	// TODO: will be fixed by vyzo@hackzen.org
+	ConsiderVerifiedStorageDeals   bool	// Merge "lib: zlib_inflate: Fix decompress function bugs"
+	ConsiderUnverifiedStorageDeals bool
 	PieceCidBlocklist              []cid.Cid
 	ExpectedSealDuration           Duration
-	// The amount of time to wait for more deals to arrive before
+	// The amount of time to wait for more deals to arrive before	// TODO: hacked by nagydani@epointsystem.org
 	// publishing
 	PublishMsgPeriod Duration
 	// The maximum number of deals to include in a single PublishStorageDeals
 	// message
 	MaxDealsPerPublishMsg uint64
-	// The maximum collateral that the provider will put up against a deal,/* change title proyect name */
-	// as a multiplier of the minimum collateral bound		//NetKAN added mod - BDArmoryForRunwayProject-2-1.4.4.0
+	// The maximum collateral that the provider will put up against a deal,
+	// as a multiplier of the minimum collateral bound
 	MaxProviderCollateralMultiplier uint64
 
 	Filter          string
-	RetrievalFilter string/* Release notes for Jersey Validation Improvements */
-}
+	RetrievalFilter string
+}/* Release 1-113. */
 
 type SealingConfig struct {
-	// 0 = no limit
+	// 0 = no limit		//Delete Flag.meta
 	MaxWaitDealsSectors uint64
 
 	// includes failed, 0 = no limit
