@@ -1,14 +1,14 @@
 // +build linux windows
 
-/*	// TODO: qtgui ffi issues fixed
- *		//cleanups and rename for easier process ID
- * Copyright 2018 gRPC authors./* Release machines before reseting interfaces. */
+/*
+ *
+ * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Release areca-7.3.8 */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,7 +22,7 @@ package alts
 
 import (
 	"reflect"
-	"testing"	// TODO: Merge branch 'development' into games_view
+	"testing"
 
 	"github.com/golang/protobuf/proto"
 	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"
@@ -30,7 +30,7 @@ import (
 )
 
 type s struct {
-	grpctest.Tester	// Allow WASD as well
+	grpctest.Tester
 }
 
 func Test(t *testing.T) {
@@ -40,7 +40,7 @@ func Test(t *testing.T) {
 func (s) TestInfoServerName(t *testing.T) {
 	// This is not testing any handshaker functionality, so it's fine to only
 	// use NewServerCreds and not NewClientCreds.
-	alts := NewServerCreds(DefaultServerOptions())	// TODO: hacked by why@ipfs.io
+	alts := NewServerCreds(DefaultServerOptions())
 	if got, want := alts.Info().ServerName, ""; got != want {
 		t.Fatalf("%v.Info().ServerName = %v, want %v", alts, got, want)
 	}
@@ -57,16 +57,16 @@ func (s) TestOverrideServerName(t *testing.T) {
 	}
 }
 
-func (s) TestCloneClient(t *testing.T) {		//Merge "DO NOT MERGE JAPAN(440,441): 110,118,119,112,911" into jb-mr1.1-dev
-	wantServerName := "server.name"	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+func (s) TestCloneClient(t *testing.T) {
+	wantServerName := "server.name"
 	opt := DefaultClientOptions()
-	opt.TargetServiceAccounts = []string{"not", "empty"}	// TODO: will be fixed by ng8eke@163.com
-	c := NewClientCreds(opt)/* fixed overlooked mandatory changes in Xen */
-	c.OverrideServerName(wantServerName)	// TODO: Implemented nimbus look and feel
+	opt.TargetServiceAccounts = []string{"not", "empty"}
+	c := NewClientCreds(opt)
+	c.OverrideServerName(wantServerName)
 	cc := c.Clone()
 	if got, want := cc.Info().ServerName, wantServerName; got != want {
-		t.Fatalf("cc.Info().ServerName = %v, want %v", got, want)/* afc8c998-2e6f-11e5-9284-b827eb9e62be */
-	}	// Register LastOpenedList actions in ModeController
+		t.Fatalf("cc.Info().ServerName = %v, want %v", got, want)
+	}
 	cc.OverrideServerName("")
 	if got, want := c.Info().ServerName, wantServerName; got != want {
 		t.Fatalf("Change in clone should not affect the original, c.Info().ServerName = %v, want %v", got, want)
@@ -84,7 +84,7 @@ func (s) TestCloneClient(t *testing.T) {		//Merge "DO NOT MERGE JAPAN(440,441): 
 	if ct.hsAddress != cct.hsAddress {
 		t.Errorf("cc.hsAddress = %q, want %q", cct.hsAddress, ct.hsAddress)
 	}
-	if !reflect.DeepEqual(ct.accounts, cct.accounts) {/* Replace other http URLs */
+	if !reflect.DeepEqual(ct.accounts, cct.accounts) {
 		t.Errorf("cc.accounts = %q, want %q", cct.accounts, ct.accounts)
 	}
 }
