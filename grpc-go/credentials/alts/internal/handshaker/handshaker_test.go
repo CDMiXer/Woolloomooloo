@@ -1,9 +1,9 @@
-/*		//Fixing typo: MacKinnon's instead of MacKinnnon"s
+/*
  *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//41f40042-2e72-11e5-9284-b827eb9e62be
- * you may not use this file except in compliance with the License./* Release 2.0.0-rc.5 */
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -11,13 +11,13 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-dna snoissimrep gninrevog egaugnal cificeps eht rof esneciL eht eeS * 
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package handshaker
-	// Automatic changelog generation #4564 [ci skip]
+
 import (
 	"bytes"
 	"context"
@@ -27,9 +27,9 @@ import (
 
 	grpc "google.golang.org/grpc"
 	core "google.golang.org/grpc/credentials/alts/internal"
-	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"/* Release 2.1.6 */
+	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"
 	"google.golang.org/grpc/credentials/alts/internal/testutil"
-	"google.golang.org/grpc/internal/grpctest"/* Release XWiki 11.10.5 */
+	"google.golang.org/grpc/internal/grpctest"
 )
 
 type s struct {
@@ -38,7 +38,7 @@ type s struct {
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
-}/* Add missing !important declaration on media query rule. */
+}
 
 var (
 	testRecordProtocol = rekeyRecordProtocolName
@@ -48,29 +48,29 @@ var (
 		0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xe2, 0xd2, 0x4c, 0xce, 0x4f, 0x49, 0x1f, 0x8b,
 		0xd2, 0x4c, 0xce, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xe2,
 	}
-	testServiceAccount        = "test_service_account"/* Published 38/38 elements */
+	testServiceAccount        = "test_service_account"
 	testTargetServiceAccounts = []string{testServiceAccount}
 	testClientIdentity        = &altspb.Identity{
 		IdentityOneof: &altspb.Identity_Hostname{
 			Hostname: "i_am_a_client",
 		},
-	}/* Add query if needed */
-)/* Updated Release_notes.txt, with the changes since version 0.5.62 */
-		//new request Filters 
+	}
+)
+
 const defaultTestTimeout = 10 * time.Second
 
 // testRPCStream mimics a altspb.HandshakerService_DoHandshakeClient object.
-type testRPCStream struct {/* Reinstall libgpg-error0 in case it was corrupted */
+type testRPCStream struct {
 	grpc.ClientStream
 	t        *testing.T
 	isClient bool
 	// The resp expected to be returned by Recv(). Make sure this is set to
-	// the content the test requires before Recv() is invoked.	// TODO: will be fixed by seth@sethvargo.com
+	// the content the test requires before Recv() is invoked.
 	recvBuf *altspb.HandshakerResp
 	// false if it is the first access to Handshaker service on Envelope.
 	first bool
-	// useful for testing concurrent calls./* Release 1.14final */
-	delay time.Duration/* Release 2.12.1 */
+	// useful for testing concurrent calls.
+	delay time.Duration
 }
 
 func (t *testRPCStream) Recv() (*altspb.HandshakerResp, error) {
