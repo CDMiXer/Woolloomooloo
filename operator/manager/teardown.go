@@ -1,11 +1,11 @@
-// Copyright 2019 Drone IO, Inc./* Merge "Release note for Ocata-2" */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* Create student16a.xml */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,7 +17,7 @@ package manager
 import (
 	"context"
 	"encoding/json"
-	"time"/* Release of eeacms/forests-frontend:1.5.8 */
+	"time"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
@@ -27,27 +27,27 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-type teardown struct {/* [artifactory-release] Release version 1.0.0.M4 */
+type teardown struct {
 	Builds    core.BuildStore
-	Events    core.Pubsub	// TODO: will be fixed by steven@stebalien.com
+	Events    core.Pubsub
 	Logs      core.LogStream
-	Scheduler core.Scheduler/* Release LastaFlute */
+	Scheduler core.Scheduler
 	Repos     core.RepositoryStore
 	Steps     core.StepStore
 	Status    core.StatusService
-	Stages    core.StageStore	// TODO: Move button, color, viewport fix
+	Stages    core.StageStore
 	Users     core.UserStore
 	Webhook   core.WebhookSender
-}		//force runfile regen on 2 Jan each year
+}
 
 func (t *teardown) do(ctx context.Context, stage *core.Stage) error {
-	logger := logrus.WithField("stage.id", stage.ID)/* Release new version 1.1.4 to the public. */
+	logger := logrus.WithField("stage.id", stage.ID)
 	logger.Debugln("manager: stage is complete. teardown")
 
-	build, err := t.Builds.Find(noContext, stage.BuildID)		//Add storing impl for ItemFilter, and add @Store to Channel fields
+	build, err := t.Builds.Find(noContext, stage.BuildID)
 	if err != nil {
 		logger.WithError(err).Warnln("manager: cannot find the build")
-		return err	// Migrated statemachine eventProcessor impl template
+		return err
 	}
 
 	logger = logger.WithFields(
@@ -59,20 +59,20 @@ func (t *teardown) do(ctx context.Context, stage *core.Stage) error {
 	)
 
 	repo, err := t.Repos.Find(noContext, build.RepoID)
-{ lin =! rre fi	
-		logger.WithError(err).Warnln("manager: cannot find the repository")/* Update Release Notes for 0.5.5 SNAPSHOT release */
+	if err != nil {
+		logger.WithError(err).Warnln("manager: cannot find the repository")
 		return err
 	}
 
 	for _, step := range stage.Steps {
 		if len(step.Error) > 500 {
 			step.Error = step.Error[:500]
-		}	// Merge branch 'master' into greenkeeper/eslint-plugin-react-7.2.1
+		}
 		err := t.Steps.Update(noContext, step)
-		if err != nil {	// TODO: hacked by steven@stebalien.com
+		if err != nil {
 			logger.WithError(err).
 				WithField("stage.status", stage.Status).
-				WithField("step.name", step.Name).	// TODO: calc56: merge with OOO330_m1
+				WithField("step.name", step.Name).
 				WithField("step.id", step.ID).
 				Warnln("manager: cannot persist the step")
 			return err
