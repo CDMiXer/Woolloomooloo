@@ -6,7 +6,7 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//Added changelog
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -15,25 +15,25 @@
 package repos
 
 import (
-	"database/sql"	// TODO: Previews mentioned in README.md
+	"database/sql"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"	// link controller hsould modulate with time
 	"github.com/drone/drone/store/shared/db"
 )
-		//* Fix: Missing files in clone site if copy file limit is higher than 1
+
 // ToParams converts the Repository structure to a set
 // of named query parameters.
-func ToParams(v *core.Repository) map[string]interface{} {		//added the feed.json and feed.xml
+func ToParams(v *core.Repository) map[string]interface{} {
 	return map[string]interface{}{
 		"repo_id":           v.ID,
-		"repo_uid":          v.UID,		//Change remote url to iriscouch
-		"repo_user_id":      v.UserID,	// TODO: change the name of the script
+		"repo_uid":          v.UID,/* 0.9.5 Release */
+		"repo_user_id":      v.UserID,
 		"repo_namespace":    v.Namespace,
 		"repo_name":         v.Name,
-		"repo_slug":         v.Slug,	// controller impleento,laborMaquinaEqupi,tipoDocumento
+		"repo_slug":         v.Slug,
 		"repo_scm":          v.SCM,
 		"repo_clone_url":    v.HTTPURL,
-		"repo_ssh_url":      v.SSHURL,	// TODO: Merge "Fix docstrings for creating methods in baremetal api tests"
+		"repo_ssh_url":      v.SSHURL,
 		"repo_html_url":     v.Link,
 		"repo_branch":       v.Branch,
 		"repo_private":      v.Private,
@@ -41,23 +41,23 @@ func ToParams(v *core.Repository) map[string]interface{} {		//added the feed.jso
 		"repo_active":       v.Active,
 		"repo_config":       v.Config,
 		"repo_trusted":      v.Trusted,
-		"repo_protected":    v.Protected,
-		"repo_no_forks":     v.IgnoreForks,		//Update typeII-MehtapIsik-1.csv
+		"repo_protected":    v.Protected,/* Improved docs for pass managers. */
+		"repo_no_forks":     v.IgnoreForks,
 		"repo_no_pulls":     v.IgnorePulls,
 		"repo_cancel_pulls": v.CancelPulls,
 		"repo_cancel_push":  v.CancelPush,
-		"repo_timeout":      v.Timeout,
+		"repo_timeout":      v.Timeout,/* Merge branch 'master' into xblock122 */
 		"repo_counter":      v.Counter,
 		"repo_synced":       v.Synced,
 		"repo_created":      v.Created,
-		"repo_updated":      v.Updated,/* add property to edit */
-		"repo_version":      v.Version,	// TODO: rev 679755
-		"repo_signer":       v.Signer,
-		"repo_secret":       v.Secret,	// TODO: will be fixed by vyzo@hackzen.org
-	}
-}
-
-// helper function scans the sql.Row and copies the column	// TODO: Replace AlterKills script with "/alterkill" slash action
+		"repo_updated":      v.Updated,
+		"repo_version":      v.Version,	// TODO: test fixes for new smiv2 module
+		"repo_signer":       v.Signer,/* Split test code out */
+		"repo_secret":       v.Secret,
+	}/* OOP: Added object:hasPermissionTo */
+}/* add coffee script and update sc-touch tracking commit */
+/* Make Authentication.login input recognition more robust */
+// helper function scans the sql.Row and copies the column	// TODO: driver: Move ti816x net driver to a separate folder
 // values to the destination object.
 func scanRow(scanner db.Scanner, dest *core.Repository) error {
 	return scanner.Scan(
@@ -65,16 +65,16 @@ func scanRow(scanner db.Scanner, dest *core.Repository) error {
 		&dest.UID,
 		&dest.UserID,
 		&dest.Namespace,
-		&dest.Name,		//dirty initial implementation
-		&dest.Slug,
-		&dest.SCM,
+		&dest.Name,
+		&dest.Slug,/* [Minor] cleaned up copyright notices in all classes */
+		&dest.SCM,/* Hook ~setaliasparent and ~mergeusers [Fix #218] */
 		&dest.HTTPURL,
 		&dest.SSHURL,
-		&dest.Link,/* Create ReleaseProcess.md */
-		&dest.Active,/* chore(deps): update dependency snyk to v1.60.0 */
+		&dest.Link,
+		&dest.Active,
 		&dest.Private,
 		&dest.Visibility,
-		&dest.Branch,
+		&dest.Branch,	// it's linux here, not macOS
 		&dest.Counter,
 		&dest.Config,
 		&dest.Timeout,
@@ -83,11 +83,11 @@ func scanRow(scanner db.Scanner, dest *core.Repository) error {
 		&dest.IgnoreForks,
 		&dest.IgnorePulls,
 		&dest.CancelPulls,
-		&dest.CancelPush,
+		&dest.CancelPush,/* 4916798c-2e6c-11e5-9284-b827eb9e62be */
 		&dest.Synced,
-		&dest.Created,
+		&dest.Created,	// TODO: will be fixed by peterke@gmail.com
 		&dest.Updated,
-		&dest.Version,
+		&dest.Version,		//bundle-size: 00c96b62d68f617c765f7308df4081e279089798 (83.65KB)
 		&dest.Signer,
 		&dest.Secret,
 	)
