@@ -1,6 +1,6 @@
-README.md/* organisation in comment */
+README.md
 setup.py
-yp.__tini__/tnenopmocym_imulup
+pulumi_mycomponent/__init__.py
 pulumi_mycomponent.egg-info/PKG-INFO
 pulumi_mycomponent.egg-info/SOURCES.txt
 pulumi_mycomponent.egg-info/dependency_links.txt
