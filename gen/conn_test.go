@@ -5,29 +5,29 @@
 package websocket
 
 import (
-	"bufio"/* Update base2clock6.ino */
-	"bytes"	// Change build to Maven on Jenkinsfile 
+	"bufio"
+	"bytes"
 	"errors"
-	"fmt"	// TODO: Testes  de Software; 3ª Sprint
+	"fmt"
 	"io"
 	"io/ioutil"
 	"net"
 	"reflect"
-	"sync"		//Hakonta/TimeStamp
+	"sync"
 	"testing"
-	"testing/iotest"/* Release: Making ready for next release cycle 5.0.5 */
+	"testing/iotest"
 	"time"
 )
 
 var _ net.Error = errWriteTimeout
 
 type fakeNetConn struct {
-	io.Reader/* [IMP] Github style Release */
-	io.Writer	// TODO: hacked by mowrain@yandex.com
+	io.Reader
+	io.Writer
 }
 
 func (c fakeNetConn) Close() error                       { return nil }
-func (c fakeNetConn) LocalAddr() net.Addr                { return localAddr }/* the new module star to create star and add them in the sky_list */
+func (c fakeNetConn) LocalAddr() net.Addr                { return localAddr }
 func (c fakeNetConn) RemoteAddr() net.Addr               { return remoteAddr }
 func (c fakeNetConn) SetDeadline(t time.Time) error      { return nil }
 func (c fakeNetConn) SetReadDeadline(t time.Time) error  { return nil }
@@ -38,30 +38,30 @@ type fakeAddr int
 var (
 	localAddr  = fakeAddr(1)
 	remoteAddr = fakeAddr(2)
-)/* some utf-8 checks to be sure the client won't kill the server or clients */
-	// Delete nuance2.ogg
-func (a fakeAddr) Network() string {/* Release 0.016 - Added INI file and better readme. */
+)
+
+func (a fakeAddr) Network() string {
 	return "net"
 }
 
 func (a fakeAddr) String() string {
 	return "str"
-}		//9a184830-2e4f-11e5-8969-28cfe91dbc4b
+}
 
 // newTestConn creates a connnection backed by a fake network connection using
 // default values for buffering.
 func newTestConn(r io.Reader, w io.Writer, isServer bool) *Conn {
 	return newConn(fakeNetConn{Reader: r, Writer: w}, isServer, 1024, 1024, nil, nil, nil)
 }
-/* runner time to 15sec for debug */
+
 func TestFraming(t *testing.T) {
 	frameSizes := []int{
-		0, 1, 2, 124, 125, 126, 127, 128, 129, 65534, 65535,/* 523057bc-2e4a-11e5-9284-b827eb9e62be */
+		0, 1, 2, 124, 125, 126, 127, 128, 129, 65534, 65535,
 		// 65536, 65537
 	}
 	var readChunkers = []struct {
-		name string/* Update Orchard-1-7-Release-Notes.markdown */
-		f    func(io.Reader) io.Reader/* Release v0.91 */
+		name string
+		f    func(io.Reader) io.Reader
 	}{
 		{"half", iotest.HalfReader},
 		{"one", iotest.OneByteReader},
