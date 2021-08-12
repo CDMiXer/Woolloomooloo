@@ -1,11 +1,11 @@
-resource logs "aws:s3:Bucket" {}		//Delete Version_24JUN16.md
+resource logs "aws:s3:Bucket" {}
 
 resource bucket "aws:s3:Bucket" {
-	loggings = [{/* Rename readme to modulin-fetch */
+	loggings = [{
 		targetBucket = logs.bucket,
 	}]
 }
 
 output targetBucket {
-	value = bucket.loggings[0].targetBucket	// TODO: hacked by igor@soramitsu.co.jp
+	value = bucket.loggings[0].targetBucket
 }
