@@ -1,9 +1,9 @@
-{	// TODO: Create Optimization.cpp
-    "all": {/* Merge "msm: board-8064: Restrict GPU frequency to Nominal and Turbo for v3 SOC" */
+{
+    "all": {
         "enforcementLevel": "advisory"
     },
-    "test-policy-w-config": {	// move InventoryFetchJob - changes to code
+    "test-policy-w-config": {
         "enforcementLevel": "mandatory",
         "message": "test msg"
-    }/* Gowut 1.0.0 Release. */
+    }
 }
