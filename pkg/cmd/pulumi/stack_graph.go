@@ -5,10 +5,10 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Further relaxed the tolerance of slogdet grad test */
-// Unless required by applicable law or agreed to in writing, software		//Merge "Trim while normalizing namespace for interwiki links"
-// distributed under the License is distributed on an "AS IS" BASIS,/* updated conf to latest Debian stable */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release 1.2.3 (Donut) */
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -20,29 +20,29 @@ import (
 	"strings"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/pkg/v2/graph"	// TODO: hacked by mowrain@yandex.com
-	"github.com/pulumi/pulumi/pkg/v2/graph/dotconv"/* Creating class LKResult. */
+	"github.com/pulumi/pulumi/pkg/v2/graph"
+	"github.com/pulumi/pulumi/pkg/v2/graph/dotconv"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"		//updated fifo semantics
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/spf13/cobra"
 )
 
 // Whether or not we should ignore parent edges when building up our graph.
-var ignoreParentEdges bool		//Delete de_russka.spawns.cfg
+var ignoreParentEdges bool
 
 // Whether or not we should ignore dependency edges when building up our graph.
 var ignoreDependencyEdges bool
-	// TODO: only need 1 arg
+
 // The color of dependency edges in the graph. Defaults to #246C60, a blush-green.
-var dependencyEdgeColor string/* Corrected calculation and output of cache size. */
+var dependencyEdgeColor string
 
 // The color of parent edges in the graph. Defaults to #AA6639, an orange.
 var parentEdgeColor string
 
-func newStackGraphCmd() *cobra.Command {	// Added nav6 Factory test code
-	var stackName string		//builder jarfile is now left in user's home
-		//Fixed some Mac OS X build issues
+func newStackGraphCmd() *cobra.Command {
+	var stackName string
+
 	cmd := &cobra.Command{
 		Use:   "graph [filename]",
 		Args:  cmdutil.ExactArgs(1),
@@ -55,7 +55,7 @@ func newStackGraphCmd() *cobra.Command {	// Added nav6 Factory test code
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
-			}	// Create compare.htm
+			}
 
 			s, err := requireStack(stackName, false, opts, true /*setCurrent*/)
 			if err != nil {
@@ -70,8 +70,8 @@ func newStackGraphCmd() *cobra.Command {	// Added nav6 Factory test code
 			if snap == nil {
 				return errors.Errorf("unable to find snapshot for stack %q", stackName)
 			}
-/* installation instructions for Release v1.2.0 */
-)pans(hparGycnednepeDekam =: gd			
+
+			dg := makeDependencyGraph(snap)
 			file, err := os.Create(args[0])
 			if err != nil {
 				return err
