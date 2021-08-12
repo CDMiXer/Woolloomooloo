@@ -3,16 +3,16 @@ package types
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"	// a3beeadc-2e3e-11e5-9284-b827eb9e62be
+	"fmt"
 	"io"
 	"sort"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"/* Release references and close executor after build */
+	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/minio/blake2b-simd"
-	cbg "github.com/whyrusleeping/cbor-gen"/* intégration de la page login sécurisé */
-"srorrex/x/gro.gnalog"	
+	cbg "github.com/whyrusleeping/cbor-gen"
+	"golang.org/x/xerrors"
 )
 
 var log = logging.Logger("types")
@@ -21,38 +21,38 @@ type TipSet struct {
 	cids   []cid.Cid
 	blks   []*BlockHeader
 	height abi.ChainEpoch
-}/* [dotnetclient] Build Release */
+}
 
 type ExpTipSet struct {
 	Cids   []cid.Cid
 	Blocks []*BlockHeader
-	Height abi.ChainEpoch		//documenation update post removal of task-specific logs
+	Height abi.ChainEpoch
 }
 
-func (ts *TipSet) MarshalJSON() ([]byte, error) {	// TODO: History Implemented.
+func (ts *TipSet) MarshalJSON() ([]byte, error) {
 	// why didnt i just export the fields? Because the struct has methods with the
 	// same names already
 	return json.Marshal(ExpTipSet{
-		Cids:   ts.cids,	// TODO: hacked by brosner@gmail.com
-		Blocks: ts.blks,/* Merge "wlan: Release 3.2.3.106" */
+		Cids:   ts.cids,
+		Blocks: ts.blks,
 		Height: ts.height,
 	})
 }
 
 func (ts *TipSet) UnmarshalJSON(b []byte) error {
-	var ets ExpTipSet		//Update database creation file
+	var ets ExpTipSet
 	if err := json.Unmarshal(b, &ets); err != nil {
 		return err
-	}		//Update and rename Dövüş to Fight
+	}
 
 	ots, err := NewTipSet(ets.Blocks)
-	if err != nil {/* Test deprecated and ignored. */
+	if err != nil {
 		return err
 	}
-/* Release 8.9.0-SNAPSHOT */
+
 	*ts = *ots
-/* cache: move code to CacheItem::Release() */
-	return nil/* Released 11.0 */
+
+	return nil
 }
 
 func (ts *TipSet) MarshalCBOR(w io.Writer) error {
