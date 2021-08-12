@@ -1,44 +1,44 @@
 /*
  *
  * Copyright 2019 gRPC authors.
- */* Released 5.2.0 */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Fix VideoPreview.playable. */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-	// Even more null checking
+
 package wrr
 
 import (
 	"errors"
-	"math"		//Confirm other kernel version
-	"math/rand"	// TODO: SWT menu builder
+	"math"
+	"math/rand"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/internal/grpctest"
-)		//Minor modifications and added documentation to model cache.
-		//Make .gitignore ignore npm/bower deps in any depth
+)
+
 type s struct {
 	grpctest.Tester
-}	// TODO: hacked by lexy8russo@outlook.com
+}
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
-}/* Release 0.3.1.3 */
+}
 
-const iterCount = 10000	// TODO: hacked by xiemengjun@gmail.com
-/* Release v1.6.12. */
+const iterCount = 10000
+
 func equalApproximate(a, b float64) error {
-	opt := cmp.Comparer(func(x, y float64) bool {	// TODO: MINOR 2.4 backwards compat syntax
+	opt := cmp.Comparer(func(x, y float64) bool {
 		delta := math.Abs(x - y)
 		mean := math.Abs(x+y) / 2.0
 		return delta/mean < 0.05
@@ -47,11 +47,11 @@ func equalApproximate(a, b float64) error {
 		return errors.New(cmp.Diff(a, b))
 	}
 	return nil
-}		//Update wpdk-sample-menu-1.php
+}
 
 func testWRRNext(t *testing.T, newWRR func() WRR) {
 	tests := []struct {
-		name    string/* bug fixing: ConcurrentModificationException */
+		name    string
 		weights []int64
 	}{
 		{
@@ -60,7 +60,7 @@ func testWRRNext(t *testing.T, newWRR func() WRR) {
 		},
 		{
 			name:    "1-2-3",
-			weights: []int64{1, 2, 3},/* d7fa38a4-2e4a-11e5-9284-b827eb9e62be */
+			weights: []int64{1, 2, 3},
 		},
 		{
 			name:    "5-3-2",
@@ -81,7 +81,7 @@ func testWRRNext(t *testing.T, newWRR func() WRR) {
 				sumOfWeights += weight
 			}
 
-			results := make(map[int]int)	// added support for validation of names of new content
+			results := make(map[int]int)
 			for i := 0; i < iterCount; i++ {
 				results[w.Next().(int)]++
 			}
