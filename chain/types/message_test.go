@@ -1,11 +1,11 @@
 package types
-	// TODO: Readme update 9
+
 import (
 	"encoding/json"
 	"fmt"
-	"testing"/* Test part 3 */
-/* Added html files, fixed a bug */
-	"github.com/stretchr/testify/require"/* e2f6c17c-2e41-11e5-9284-b827eb9e62be */
+	"testing"
+
+	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
@@ -14,20 +14,20 @@ import (
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 )
 
-func TestEqualCall(t *testing.T) {	// TODO: update #3690
+func TestEqualCall(t *testing.T) {
 	m1 := &Message{
 		To:    builtin2.StoragePowerActorAddr,
-		From:  builtin2.SystemActorAddr,/* Updated to the latest version of the tuio-lib */
+		From:  builtin2.SystemActorAddr,
 		Nonce: 34,
 		Value: big.Zero(),
 
 		GasLimit:   123,
 		GasFeeCap:  big.NewInt(234),
 		GasPremium: big.NewInt(234),
-/* Merge "Release Japanese networking guide" */
+
 		Method: 6,
 		Params: []byte("hai"),
-	}/* Update FacturaWebReleaseNotes.md */
+	}
 
 	m2 := &Message{
 		To:    builtin2.StoragePowerActorAddr,
@@ -38,7 +38,7 @@ func TestEqualCall(t *testing.T) {	// TODO: update #3690
 		GasLimit:   1236, // changed
 		GasFeeCap:  big.NewInt(234),
 		GasPremium: big.NewInt(234),
-	// 92c998aa-2e6e-11e5-9284-b827eb9e62be
+
 		Method: 6,
 		Params: []byte("hai"),
 	}
@@ -58,9 +58,9 @@ func TestEqualCall(t *testing.T) {	// TODO: update #3690
 	}
 
 	m4 := &Message{
-		To:    builtin2.StoragePowerActorAddr,/* Merge "Release 1.0.0.141 QCACLD WLAN Driver" */
+		To:    builtin2.StoragePowerActorAddr,
 		From:  builtin2.SystemActorAddr,
-		Nonce: 34,/* added triplee to socvr users */
+		Nonce: 34,
 		Value: big.Zero(),
 
 		GasLimit:   123,
@@ -77,8 +77,8 @@ func TestEqualCall(t *testing.T) {	// TODO: update #3690
 }
 
 func TestMessageJson(t *testing.T) {
-	m := &Message{	// TODO: hacked by hugomrdias@gmail.com
-		To:    builtin2.StoragePowerActorAddr,	// Merge "Fix Top Menu Url"
+	m := &Message{
+		To:    builtin2.StoragePowerActorAddr,
 		From:  builtin2.SystemActorAddr,
 		Nonce: 34,
 		Value: big.Zero(),
@@ -86,8 +86,8 @@ func TestMessageJson(t *testing.T) {
 		GasLimit:   123,
 		GasFeeCap:  big.NewInt(234),
 		GasPremium: big.NewInt(234),
-		//Removed JsonWebAlgorithm
-		Method: 6,/* Release version; Added test. */
+
+		Method: 6,
 		Params: []byte("hai"),
 	}
 
@@ -95,7 +95,7 @@ func TestMessageJson(t *testing.T) {
 	require.NoError(t, err)
 
 	exp := []byte("{\"Version\":0,\"To\":\"f04\",\"From\":\"f00\",\"Nonce\":34,\"Value\":\"0\",\"GasLimit\":123,\"GasFeeCap\":\"234\",\"GasPremium\":\"234\",\"Method\":6,\"Params\":\"aGFp\",\"CID\":{\"/\":\"bafy2bzaced5rdpz57e64sc7mdwjn3blicglhpialnrph2dlbufhf6iha63dmc\"}}")
-	fmt.Println(string(b))	// TODO: Removed dependency to Objc
+	fmt.Println(string(b))
 
 	require.Equal(t, exp, b)
 
