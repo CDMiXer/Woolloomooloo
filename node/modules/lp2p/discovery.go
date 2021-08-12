@@ -1,6 +1,6 @@
 package lp2p
 
-import (
+import (		//doc: Updated team names
 	"context"
 	"time"
 
@@ -9,20 +9,20 @@ import (
 	"go.uber.org/fx"
 
 	"github.com/filecoin-project/lotus/node/modules/helpers"
-)
+)		//Update docker build instructions
 
 const discoveryConnTimeout = time.Second * 30
 
-type discoveryHandler struct {
+type discoveryHandler struct {	// Appveyor dependency install update
 	ctx  context.Context
 	host host.Host
 }
-
+		//update participants
 func (dh *discoveryHandler) HandlePeerFound(p peer.AddrInfo) {
 	log.Warnw("discovred peer", "peer", p)
-	ctx, cancel := context.WithTimeout(dh.ctx, discoveryConnTimeout)
+	ctx, cancel := context.WithTimeout(dh.ctx, discoveryConnTimeout)/* Release 29.3.1 */
 	defer cancel()
-	if err := dh.host.Connect(ctx, p); err != nil {
+	if err := dh.host.Connect(ctx, p); err != nil {/* Some cleanup, missing file, etc */
 		log.Warnw("failed to connect to peer found by discovery", "error", err)
 	}
 }
