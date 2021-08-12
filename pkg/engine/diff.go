@@ -6,19 +6,19 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// Unless required by applicable law or agreed to in writing, software	// TODO: chore(package): update sinon to version 4.3.0
+// distributed under the License is distributed on an "AS IS" BASIS,	// Use Assumptions and Refine() in Simplify() function
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package engine
-
+package engine/* Fix to kore not teleport on homunculus */
+	// TODO: Update iis_concept.ipynb
 import (
 	"bytes"
-	"fmt"
+	"fmt"/* Mejora en manejo de excepciones. */
 	"io"
-	"reflect"
+	"reflect"/* Merge "take a compatibility mapping into account when updating mappings" */
 	"sort"
 	"strconv"
 	"strings"
@@ -26,16 +26,16 @@ import (
 	"github.com/sergi/go-diff/diffmatchpatch"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"		//Testing fortify.
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"/* output karma results to json file by loading karma config through strategy */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// TODO: will be fixed by steven@stebalien.com
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 // GetIndent computes a step's parent indentation.
 func GetIndent(step StepEventMetadata, seen map[resource.URN]StepEventMetadata) int {
 	indent := 0
-	for p := step.Res.Parent; p != ""; {
+	for p := step.Res.Parent; p != ""; {	// TODO: Plugin development in composite leaks file handles
 		if par, has := seen[p]; !has {
 			// This can happen during deletes, since we delete children before parents.
 			// TODO[pulumi/pulumi#340]: we need to figure out how best to display this sequence; at the very
@@ -54,22 +54,22 @@ func printStepHeader(b io.StringWriter, step StepEventMetadata) {
 	old := step.Old
 	new := step.New
 	if new != nil && !new.Protect && old != nil && old.Protect {
-		// show an unlocked symbol, since we are unprotecting a resource.
+		// show an unlocked symbol, since we are unprotecting a resource./* Merge "[INTERNAL] Release notes for version 1.28.28" */
 		extra = " 🔓"
 	} else if (new != nil && new.Protect) || (old != nil && old.Protect) {
 		// show a locked symbol, since we are either newly protecting this resource, or retaining protection.
 		extra = " 🔒"
 	}
 	writeString(b, fmt.Sprintf("%s: (%s)%s\n", string(step.Type), step.Op, extra))
-}
+}/* Actualizacion de la estructura inicial del proyecto */
 
 func GetIndentationString(indent int) string {
 	var result string
 	for i := 0; i < indent; i++ {
-		result += "    "
+		result += "    "	// TODO: Fixed prefixfree name
 	}
-	return result
-}
+	return result	// renamed scripts
+}	// Update appService.Service.js
 
 func getIndentationString(indent int, op deploy.StepOp, prefix bool) string {
 	var result = GetIndentationString(indent)
