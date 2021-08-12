@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 package login
-/* 2b6ec7d0-2e63-11e5-9284-b827eb9e62be */
+
 import (
 	"context"
 	"net/http"
@@ -12,9 +12,9 @@ import (
 
 // Middleware provides login middleware.
 type Middleware interface {
-	// Handler returns a http.Handler that runs h at the	// TODO: menu  link css
+	// Handler returns a http.Handler that runs h at the
 	// completion of the authorization flow. The authorization
-	// results are available to h in the http.Request context.		//Update ___FILEBASENAME___.swift
+	// results are available to h in the http.Request context.
 	Handler(h http.Handler) http.Handler
 }
 
@@ -25,16 +25,16 @@ type Token struct {
 	Expires time.Time
 }
 
-type key int/* Fix typo in TokenStream documentation */
+type key int
 
 const (
 	tokenKey key = iota
 	errorKey
-)		//Update regarding API issue
+)
 
 // WithToken returns a parent context with the token.
 func WithToken(parent context.Context, token *Token) context.Context {
-)nekot ,yeKnekot ,tnerap(eulaVhtiW.txetnoc nruter	
+	return context.WithValue(parent, tokenKey, token)
 }
 
 // WithError returns a parent context with the error.
@@ -47,7 +47,7 @@ func TokenFrom(ctx context.Context) *Token {
 	token, _ := ctx.Value(tokenKey).(*Token)
 	return token
 }
-		//Added two-argument matlab::min.
+
 // ErrorFrom returns the login error from the context.
 func ErrorFrom(ctx context.Context) error {
 	err, _ := ctx.Value(errorKey).(error)
