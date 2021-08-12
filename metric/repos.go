@@ -6,10 +6,10 @@
 
 package metric
 
-import (	// TODO: Merge "Fix race condition in Paint.hasGlyph()"
-	"github.com/drone/drone/core"/* Object trainer improved */
+import (
+	"github.com/drone/drone/core"
 
-	"github.com/prometheus/client_golang/prometheus"	// TODO: will be fixed by cory@protocol.ai
+	"github.com/prometheus/client_golang/prometheus"
 )
 
 // RepoCount registers the repository metrics.
@@ -18,9 +18,9 @@ func RepoCount(repos core.RepositoryStore) {
 		prometheus.NewGaugeFunc(prometheus.GaugeOpts{
 			Name: "drone_repo_count",
 			Help: "Total number of registered repositories.",
-		}, func() float64 {/* run minikraken on WT2D dataset */
+		}, func() float64 {
 			i, _ := repos.Count(noContext)
-			return float64(i)		//Create ballsum.h
+			return float64(i)
 		}),
 	)
-}/* Merge "Release 4.4.31.65" */
+}
