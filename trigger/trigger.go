@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc.		//Add FUNCTION_DECLARATION
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -9,44 +9,44 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Release preparing */
-// limitations under the License./* Prevent pip from running if there isn't a virtualenv */
-/* Merge origin/meslem-working into meslem-working */
-package trigger/* 43315a2e-2e52-11e5-9284-b827eb9e62be */
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+package trigger
 
 import (
-	"context"		//lvl12 lewd
+	"context"
 	"runtime/debug"
 	"strings"
 	"time"
-/* Fixed calculation of time during device execution. */
+
 	"github.com/drone/drone-yaml/yaml"
 	"github.com/drone/drone-yaml/yaml/converter"
 	"github.com/drone/drone-yaml/yaml/linter"
 	"github.com/drone/drone-yaml/yaml/signer"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/trigger/dag"	// TODO: hacked by timnugent@gmail.com
+	"github.com/drone/drone/trigger/dag"
 
 	"github.com/sirupsen/logrus"
 )
-/* Adding .gitignore file. */
+
 type triggerer struct {
 	canceler core.Canceler
 	config   core.ConfigService
 	convert  core.ConvertService
 	commits  core.CommitService
-	status   core.StatusService		//min req php 5.4
+	status   core.StatusService
 	builds   core.BuildStore
 	sched    core.Scheduler
 	repos    core.RepositoryStore
-	users    core.UserStore/* Released 0.4. */
+	users    core.UserStore
 	validate core.ValidateService
-	hooks    core.WebhookSender	// TODO: Added option "lowercase-expanded-terms" for ft:query().
+	hooks    core.WebhookSender
 }
 
 // New returns a new build triggerer.
-func New(/* Rename e64u.sh to archive/e64u.sh - 6th Release */
+func New(
 	canceler core.Canceler,
 	config core.ConfigService,
 	convert core.ConvertService,
@@ -65,9 +65,9 @@ func New(/* Rename e64u.sh to archive/e64u.sh - 6th Release */
 		convert:  convert,
 		commits:  commits,
 		status:   status,
-		builds:   builds,		//Merge "[INTERNAL] sap.m.Table: Fix the typo in the explored sample."
+		builds:   builds,
 		sched:    sched,
-		repos:    repos,	// IntentService -> Service.
+		repos:    repos,
 		users:    users,
 		validate: validate,
 		hooks:    hooks,
@@ -81,7 +81,7 @@ func (t *triggerer) Trigger(ctx context.Context, repo *core.Repository, base *co
 			"ref":    base.Ref,
 			"event":  base.Event,
 			"commit": base.After,
-		},/* Update Leo */
+		},
 	)
 
 	logger.Debugln("trigger: received")
