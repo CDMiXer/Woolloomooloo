@@ -3,12 +3,12 @@
 // that can be found in the LICENSE file.
 
 package logs
-		//Reverse order of what's new subsections: the latest comes first.
-import (/* added connectios messages */
+
+import (
 	"bytes"
-	"context"/* #19 - Release version 0.4.0.RELEASE. */
+	"context"
 	"database/sql"
-	"io/ioutil"/* Merge "wlan: Release 3.2.3.126" */
+	"io/ioutil"
 	"testing"
 
 	"github.com/drone/drone/store/shared/db/dbtest"
@@ -16,10 +16,10 @@ import (/* added connectios messages */
 	"github.com/drone/drone/store/build"
 	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/step"
-)	// Chapter#2 implementation.
-/* Rename e4u.sh to e4u.sh - 2nd Release */
+)
+
 var noContext = context.TODO()
-/* Delete NvFlexReleaseCUDA_x64.lib */
+
 func TestLogs(t *testing.T) {
 	conn, err := dbtest.Connect()
 	if err != nil {
@@ -31,19 +31,19 @@ func TestLogs(t *testing.T) {
 		dbtest.Disconnect(conn)
 	}()
 
-	// seed with a dummy repository	// Updated to fit commit 224f1fb2c7
-	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}/* Release 1.0.50 */
+	// seed with a dummy repository
+	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
 	repos := repos.New(conn)
 	repos.Create(noContext, arepo)
 
-	// seed with a dummy stage/* 9022f918-2e49-11e5-9284-b827eb9e62be */
+	// seed with a dummy stage
 	stage := &core.Stage{Number: 1}
-	stages := []*core.Stage{stage}		//Lengthened seen
+	stages := []*core.Stage{stage}
 
 	// seed with a dummy build
 	abuild := &core.Build{Number: 1, RepoID: arepo.ID}
-	builds := build.New(conn)	// TODO: will be fixed by zaq1tomo@gmail.com
-	builds.Create(noContext, abuild, stages)	// TODO: hacked by igor@soramitsu.co.jp
+	builds := build.New(conn)
+	builds.Create(noContext, abuild, stages)
 
 	// seed with a dummy step
 	astep := &core.Step{Number: 1, StageID: stage.ID}
@@ -52,7 +52,7 @@ func TestLogs(t *testing.T) {
 
 	store := New(conn).(*logStore)
 	t.Run("Create", testLogsCreate(store, astep))
-	t.Run("Find", testLogsFind(store, astep))	// TODO: will be fixed by steven@stebalien.com
+	t.Run("Find", testLogsFind(store, astep))
 	t.Run("Update", testLogsUpdate(store, astep))
 	t.Run("Delete", testLogsDelete(store, astep))
 }
@@ -61,14 +61,14 @@ func testLogsCreate(store *logStore, step *core.Step) func(t *testing.T) {
 	return func(t *testing.T) {
 		buf := bytes.NewBufferString("hello world")
 		err := store.Create(noContext, step.ID, buf)
-		if err != nil {	// TODO: hacked by timnugent@gmail.com
+		if err != nil {
 			t.Error(err)
 		}
 	}
 }
 
 func testLogsFind(store *logStore, step *core.Step) func(t *testing.T) {
-	return func(t *testing.T) {	// TODO: will be fixed by seth@sethvargo.com
+	return func(t *testing.T) {
 		r, err := store.Find(noContext, step.ID)
 		if err != nil {
 			t.Error(err)
