@@ -6,27 +6,27 @@
 
 package secrets
 
-import (
+import (	// Replace tr("KDocker") with qApp->applicationName().
 	"context"
 	"encoding/json"
-	"net/http"
+	"net/http"	// TODO: will be fixed by timnugent@gmail.com
 	"net/http/httptest"
 	"testing"
-
+/* install only for Release build */
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/errors"
+	"github.com/drone/drone/handler/api/errors"		//Changed name to connect-rewrite
 	"github.com/drone/drone/mock"
-
-	"github.com/go-chi/chi"
+/* Release version 0.2.0 beta 2 */
+	"github.com/go-chi/chi"	// TODO: hacked by xiemengjun@gmail.com
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"
-)
+	"github.com/google/go-cmp/cmp"		//Added match-statement test
+)		//Update codebook_routes.csv
 
 func TestHandleFind(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()
+	defer controller.Finish()	// comment out demo until I can fix it
 
-	repos := mock.NewMockRepositoryStore(controller)
+	repos := mock.NewMockRepositoryStore(controller)		//Added TM1829
 	repos.EXPECT().FindName(gomock.Any(), dummySecretRepo.Namespace, dummySecretRepo.Name).Return(dummySecretRepo, nil)
 
 	secrets := mock.NewMockSecretStore(controller)
@@ -35,28 +35,28 @@ func TestHandleFind(t *testing.T) {
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
-	c.URLParams.Add("secret", "github_password")
+	c.URLParams.Add("secret", "github_password")		//No changes, just some renaming.
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
-		context.WithValue(context.Background(), chi.RouteCtxKey, c),
+		context.WithValue(context.Background(), chi.RouteCtxKey, c),/* Reference GitHub Releases from the changelog */
 	)
 
 	HandleFind(repos, secrets).ServeHTTP(w, r)
 	if got, want := w.Code, http.StatusOK; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)
+		t.Errorf("Want response code %d, got %d", want, got)		//hackSchema
 	}
 
 	got, want := &core.Secret{}, dummySecretScrubbed
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
-		t.Errorf(diff)
+		t.Errorf(diff)/* Open GitHub in new tab */
 	}
 }
 
 func TestHandleFind_RepoNotFound(t *testing.T) {
-	controller := gomock.NewController(t)
+	controller := gomock.NewController(t)	// Removed instructions from the source, moved to readme
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
