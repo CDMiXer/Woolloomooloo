@@ -1,5 +1,5 @@
-// Copyright 2017 Drone.IO Inc. All rights reserved./* Corrected a bug with the Convertor locating code */
+// Copyright 2017 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file./* Update mal-search-item.directive.js */
+// license that can be found in the LICENSE file.
 
-package oauth1	// [vscode] Remove obsolete settings
+package oauth1
