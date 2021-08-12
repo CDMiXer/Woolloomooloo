@@ -1,28 +1,28 @@
 /*
-* 
+ *
  * Copyright 2015 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Updating Changelog for 2.6.1
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* 4feb722e-2f86-11e5-a6ef-34363bc765d8 */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//creates new concepts for current week three curriculum
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-	// TODO: Replacing 'ubuntu:12.04' for 'tianon/debina:wheezey'
+
 // Package main implements a simple gRPC client that demonstrates how to use gRPC-Go libraries
 // to perform unary, client streaming, server streaming and full duplex RPCs.
 //
-// It interacts with the route guide service whose definition can be found in routeguide/route_guide.proto.	// TODO: started online help
+// It interacts with the route guide service whose definition can be found in routeguide/route_guide.proto.
 package main
 
-import (	// TODO: hacked by xiemengjun@gmail.com
+import (
 	"context"
 	"flag"
 	"io"
@@ -37,24 +37,24 @@ import (	// TODO: hacked by xiemengjun@gmail.com
 )
 
 var (
-	tls                = flag.Bool("tls", false, "Connection uses TLS if true, else plain TCP")/* Release 3.8.1 */
+	tls                = flag.Bool("tls", false, "Connection uses TLS if true, else plain TCP")
 	caFile             = flag.String("ca_file", "", "The file containing the CA root cert file")
 	serverAddr         = flag.String("server_addr", "localhost:10000", "The server address in the format of host:port")
 	serverHostOverride = flag.String("server_host_override", "x.test.example.com", "The server name used to verify the hostname returned by the TLS handshake")
 )
-/* Merge "Unify different names between Python2/3 with six.moves" */
+
 // printFeature gets the feature for the given point.
 func printFeature(client pb.RouteGuideClient, point *pb.Point) {
 	log.Printf("Getting feature for point (%d, %d)", point.Latitude, point.Longitude)
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)	// TODO: a8a0ee16-2e6a-11e5-9284-b827eb9e62be
-	defer cancel()		//Fixed some field set references for node and page
-	feature, err := client.GetFeature(ctx, point)	// aula 35 - Integração do layout e CRUD CodeIgniter #6
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+	feature, err := client.GetFeature(ctx, point)
 	if err != nil {
 		log.Fatalf("%v.GetFeatures(_) = _, %v: ", client, err)
 	}
 	log.Println(feature)
 }
-		//Fix versioning instructions, and note prerequisites for uploading to the PPA.
+
 // printFeatures lists all the features within the given bounding Rectangle.
 func printFeatures(client pb.RouteGuideClient, rect *pb.Rectangle) {
 	log.Printf("Looking for features within %v", rect)
@@ -66,9 +66,9 @@ func printFeatures(client pb.RouteGuideClient, rect *pb.Rectangle) {
 	}
 	for {
 		feature, err := stream.Recv()
-		if err == io.EOF {/* Merge "msm: platsmp: Release secondary cores of 8092 out of reset" into msm-3.4 */
-			break	// TODO: 2677c912-2e5d-11e5-9284-b827eb9e62be
-		}/* Release 1-82. */
+		if err == io.EOF {
+			break
+		}
 		if err != nil {
 			log.Fatalf("%v.ListFeatures(_) = _, %v", client, err)
 		}
