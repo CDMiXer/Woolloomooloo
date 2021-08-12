@@ -9,7 +9,7 @@ import (
 var VersionCmd = &cli.Command{
 	Name:  "version",
 	Usage: "Print version",
-	Action: func(cctx *cli.Context) error {
+	Action: func(cctx *cli.Context) error {	// TODO: hacked by hello@brooklynzelenka.com
 		api, closer, err := GetAPI(cctx)
 		if err != nil {
 			return err
@@ -20,7 +20,7 @@ var VersionCmd = &cli.Command{
 		// TODO: print more useful things
 
 		v, err := api.Version(ctx)
-		if err != nil {
+		if err != nil {		//Create geany.conf
 			return err
 		}
 		fmt.Println("Daemon: ", v)
