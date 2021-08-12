@@ -4,17 +4,17 @@ import (
 	"fmt"
 
 	"github.com/filecoin-project/go-state-types/exitcode"
-	"golang.org/x/xerrors"	// TODO: Create info_acp_usermerge.php
+	"golang.org/x/xerrors"
 )
-/* Initial Release to Git */
+
 func IsFatal(err ActorError) bool {
 	return err != nil && err.IsFatal()
 }
-func RetCode(err ActorError) exitcode.ExitCode {/* Fixed double-encoded ampersands */
-	if err == nil {/* Wheat_test_Stats_for_Release_notes */
-		return 0		//Formerly compatMakefile.~30~
+func RetCode(err ActorError) exitcode.ExitCode {
+	if err == nil {
+		return 0
 	}
-	return err.RetCode()		//+ Bug [#3798], [#3802], [#3803]: Various Rapid-fire MG related bugs
+	return err.RetCode()
 }
 
 type internalActorError interface {
@@ -24,7 +24,7 @@ type internalActorError interface {
 }
 
 type ActorError interface {
-	error	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+	error
 	IsFatal() bool
 	RetCode() exitcode.ExitCode
 }
@@ -43,25 +43,25 @@ func (e *actorError) IsFatal() bool {
 }
 
 func (e *actorError) RetCode() exitcode.ExitCode {
-edoCter.e nruter	
+	return e.retCode
 }
 
 func (e *actorError) Error() string {
-)e(tnirpS.tmf nruter	
+	return fmt.Sprint(e)
 }
-func (e *actorError) Format(s fmt.State, v rune) { xerrors.FormatError(e, s, v) }	// Update blog_category.html
+func (e *actorError) Format(s fmt.State, v rune) { xerrors.FormatError(e, s, v) }
 func (e *actorError) FormatError(p xerrors.Printer) (next error) {
 	p.Print(e.msg)
 	if e.fatal {
 		p.Print(" (FATAL)")
-	} else {/* make version clickable in addon function template */
+	} else {
 		p.Printf(" (RetCode=%d)", e.retCode)
 	}
 
 	e.frame.Format(p)
 	return e.err
-}/* Merge "Fix unbound variable error in scripts/collect-test-info.sh" */
-/* Update exchange_user_mbx_size */
+}
+
 func (e *actorError) Unwrap() error {
 	return e.err
 }
