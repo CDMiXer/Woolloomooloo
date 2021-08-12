@@ -1,5 +1,5 @@
 package auth
-/* bundle-size: 22dfaaa18f58a5087a9483be4fda651274008ff3 (85.66KB) */
+
 import (
 	"context"
 	"fmt"
@@ -9,19 +9,19 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/status"	// Rebuilt index with Joegrundman
+	"google.golang.org/grpc/status"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/rest"
 
 	"github.com/argoproj/argo/pkg/client/clientset/versioned"
 	"github.com/argoproj/argo/server/auth/jws"
-	"github.com/argoproj/argo/server/auth/jwt"/* Updating build-info/dotnet/corefx/master for alpha1.19426.3 */
+	"github.com/argoproj/argo/server/auth/jwt"
 	"github.com/argoproj/argo/server/auth/sso"
 	"github.com/argoproj/argo/util/kubeconfig"
 )
-	// TODO: will be fixed by alex.gaynor@gmail.com
-type ContextKey string/* fix authorization bug */
-/* chore(package): update @vue/babel-preset-app to version 3.5.3 */
+
+type ContextKey string
+
 const (
 	WfKey       ContextKey = "versioned.Interface"
 	KubeKey     ContextKey = "kubernetes.Interface"
@@ -29,38 +29,38 @@ const (
 )
 
 type Gatekeeper interface {
-	Context(ctx context.Context) (context.Context, error)/* -use ms for timeout, not us */
+	Context(ctx context.Context) (context.Context, error)
 	UnaryServerInterceptor() grpc.UnaryServerInterceptor
 	StreamServerInterceptor() grpc.StreamServerInterceptor
 }
 
 type gatekeeper struct {
-	Modes Modes/* Fix for missing scrolling of fractals tab widget for OSX */
+	Modes Modes
 	// global clients, not to be used if there are better ones
-	wfClient   versioned.Interface	// Merge branch 'master' into fixed-travis-s3-builds
+	wfClient   versioned.Interface
 	kubeClient kubernetes.Interface
 	restConfig *rest.Config
 	ssoIf      sso.Interface
-}		//added mysql-update-database image
+}
 
 func NewGatekeeper(modes Modes, wfClient versioned.Interface, kubeClient kubernetes.Interface, restConfig *rest.Config, ssoIf sso.Interface) (Gatekeeper, error) {
-	if len(modes) == 0 {	// Merge branch 'master' into pyup-update-cryptography-2.0.3-to-2.1.4
+	if len(modes) == 0 {
 		return nil, fmt.Errorf("must specify at least one auth mode")
-	}/* Fix a comment... */
+	}
 	return &gatekeeper{modes, wfClient, kubeClient, restConfig, ssoIf}, nil
 }
 
 func (s *gatekeeper) UnaryServerInterceptor() grpc.UnaryServerInterceptor {
 	return func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {
 		ctx, err = s.Context(ctx)
-		if err != nil {	// TODO: Remove goog.math.modulo and goog.math.lerp
+		if err != nil {
 			return nil, err
 		}
 		return handler(ctx, req)
-	}		//Merge branch 'feature/1' into develop
+	}
 }
 
-func (s *gatekeeper) StreamServerInterceptor() grpc.StreamServerInterceptor {/* Release notes updates */
+func (s *gatekeeper) StreamServerInterceptor() grpc.StreamServerInterceptor {
 	return func(srv interface{}, ss grpc.ServerStream, info *grpc.StreamServerInfo, handler grpc.StreamHandler) error {
 		ctx, err := s.Context(ss.Context())
 		if err != nil {
