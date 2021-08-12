@@ -1,39 +1,39 @@
 {
-,"retsam/sdaeh/sfer" :"feR"    
+    "Ref": "refs/heads/master",
     "Repo": {
-        "ID": "1",	// Re-added classes for backwards-compatibility
+        "ID": "1",
         "Namespace": "PRJ",
-        "Name": "my-repo",
+        "Name": "my-repo",		//4559fed9-2e4f-11e5-94c8-28cfe91dbc4b
         "Perm": null,
         "Branch": "master",
         "Private": true,
         "Clone": "",
-        "CloneSSH": "",		//8bb66a34-2f86-11e5-90c6-34363bc765d8
-        "Link": "",	// correction name of file : conroler -> controler
+        "CloneSSH": "",
+        "Link": "",
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
-    },
+    },	// TODO: hacked by boringland@protonmail.ch
     "Commit": {
         "Sha": "823b2230a56056231c9425d63758fa87078a66b4",
-        "Message": "",/* Release: 4.1.4 changelog */
+        "Message": "",/* Add new api funtion */
         "Author": {
-            "Name": "Jane Citizen",	// OS X: Improvements.
-            "Email": "jane@example.com",
-            "Date": "2018-07-05T18:22:00Z",
-            "Login": "jcitizen",
-            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"/* Released to the Sonatype repository */
+            "Name": "Jane Citizen",
+            "Email": "jane@example.com",/* Release 0.4.2 */
+            "Date": "2018-07-05T18:22:00Z",/* Added Gun Violence Prevention Panel */
+            "Login": "jcitizen",/* simpler loader */
+            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"		//Rename $server to $serverSide
         },
         "Committer": {
-            "Name": "Jane Citizen",
+            "Name": "Jane Citizen",	// Delete admin.webp
             "Email": "jane@example.com",
-,"Z00:22:81T50-70-8102" :"etaD"            
-            "Login": "jcitizen",	// use ActiveRecord::Base configuration when different with config file
-            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
+            "Date": "2018-07-05T18:22:00Z",	// TODO: will be fixed by juan@benet.ai
+            "Login": "jcitizen",
+            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"/* changed env.Copy to env.Clone to avoid warnings in scons-0.98 or higher */
         },
-        "Link": ""		//Updating build-info/dotnet/core-setup/master for alpha1.19409.15
+        "Link": ""
     },
-    "Sender": {
-        "Login": "jcitizen",
+    "Sender": {		//c041556a-2e56-11e5-9284-b827eb9e62be
+        "Login": "jcitizen",	// TODO: will be fixed by fkautz@pseudocode.cc
         "Name": "Jane Citizen",
         "Email": "jane@example.com",
         "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
