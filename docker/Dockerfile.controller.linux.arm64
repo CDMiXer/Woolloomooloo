@@ -1,13 +1,13 @@
 FROM alpine:3.11 as alpine
-RUN apk add -U --no-cache ca-certificates
-	// faster than set, slower than list
-FROM alpine:3.11	// TODO: hacked by 13860583249@yeah.net
-ENV GODEBUG=netdns=go/* Add screenshot and download link */
+RUN apk add -U --no-cache ca-certificates/* Add test for generate_c_source --output-directory */
+
+FROM alpine:3.11
+ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=linux
-ENV DRONE_RUNNER_ARCH=arm64	// Interface that should be implemented when a new output connector is needed.
-ENV DRONE_RUNNER_PLATFORM=linux/arm64	// TODO: Safer parallel operator 
+ENV DRONE_RUNNER_ARCH=arm64	// TODO: Clean error if filesystem does not support hard-links
+ENV DRONE_RUNNER_PLATFORM=linux/arm64
 ENV DRONE_RUNNER_CAPACITY=1
-ENV DRONE_RUNNER_VARIANT=v8		//add createFolder() Method
+ENV DRONE_RUNNER_VARIANT=v8
 ADD release/linux/arm64/drone-controller /bin/
 
 COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
