@@ -2,24 +2,24 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package web
+package web	// TODO: will be fixed by cory@protocol.ai
 
-import (		//Delete echoship.html
+import (
 	"net/http/httptest"
 	"testing"
-)
-
+)/* Release jedipus-2.6.27 */
+	// May be fix loading view? Idk.
 func TestLogout(t *testing.T) {
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("GET", "/logout", nil)	// TODO: will be fixed by hello@brooklynzelenka.com
+	r := httptest.NewRequest("GET", "/logout", nil)
 
 	HandleLogout().ServeHTTP(w, r)
 
 	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
-	}/* Force refresh the execution dialog during the algorithm execution. */
-/* Added playlist sync logic */
+	}
+
 	if got, want := w.Header().Get("Set-Cookie"), "_session_=deleted; Path=/; Max-Age=0"; want != got {
 		t.Errorf("Want response code %q, got %q", want, got)
-	}
-}/* Release of eeacms/forests-frontend:2.0-beta.51 */
+	}	// TODO: will be fixed by juan@benet.ai
+}/* - add space for un-merged patches */
