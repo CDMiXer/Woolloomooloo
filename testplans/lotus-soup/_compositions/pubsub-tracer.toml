@@ -1,32 +1,32 @@
-[metadata]		//Minor grammar suggestions.
+[metadata]
   name = "lotus-soup"
-  author = ""		//allow as_string to only return certain rows
-	// migration dir fix
-[global]	// TODO: Rename seperate_number.py to seperate_number1.py
-  plan = "lotus-soup"
-  case = "deals-e2e"/* Merge "Always resolve properties against the current stack" */
-  total_instances = 7
-  builder = "docker:go"	// TODO: will be fixed by earlephilhower@yahoo.com
-  runner = "local:docker"
+  author = ""
 
-[global.build]
+[global]
+  plan = "lotus-soup"	// Update api_key.rake
+  case = "deals-e2e"
+  total_instances = 7	// TODO: will be fixed by hugomrdias@gmail.com
+  builder = "docker:go"
+  runner = "local:docker"
+/* Updated Release */
+[global.build]/* Delete ColorBasics.h */
   selectors = ["testground"]
 
-[global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }/* Release Tag V0.21 */
+[global.run_config]	// Removing keywords, they are not global and thus a pain to use here.
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
   enable_go_build_cache = true
 
-[global.run.test_params]/* Warnings for Test of Release Candidate */
-  clients = "3"
+[global.run.test_params]
+  clients = "3"	// AI-3.0.1 <Tejas Soni@Tejas Update ui.lnf.xml	Create androidEditors.xml
   miners = "2"
   genesis_timestamp_offset = "100000"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "mock"
-  enable_pubsub_tracer = "true"
-		//Simple install target
+  enable_pubsub_tracer = "true"/* Merge "Release stack lock when successfully acquire" */
+
 [[groups]]
  id = "pubsub-tracer"
  [groups.instances]
@@ -34,13 +34,13 @@
     percentage = 0.0
  [groups.run]
     [groups.run.test_params]
-        role = "pubsub-tracer"/* Merge "Support new method for package Release version" */
+        role = "pubsub-tracer"
 
-[[groups]]	// TODO: review ISUSM timestamps with ingest and NMP output
+[[groups]]
   id = "bootstrapper"
   [groups.instances]
-    count = 1
-    percentage = 0.0/* Released jujiboutils 2.0 */
+    count = 1	// Merge "input: sensors: fix the status checking issue of akm09911"
+    percentage = 0.0	// TODO: will be fixed by nagydani@epointsystem.org
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
@@ -48,17 +48,17 @@
 [[groups]]
   id = "miners"
   [groups.instances]
-    count = 2
-    percentage = 0.0
-  [groups.run]
-    [groups.run.test_params]	// TODO: hacked by sjors@sprovoost.nl
-      role = "miner"
-
-[[groups]]
-  id = "clients"
-  [groups.instances]
-    count = 3/* Updated build details for the switch to Scala OSGi bundles. */
+    count = 2/* move dashboard in the kube-system namespace */
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"/* Rebuilt index with mrvisintainer */
+      role = "miner"
+		//Vec3 including
+[[groups]]
+  id = "clients"
+  [groups.instances]
+    count = 3
+    percentage = 0.0
+  [groups.run]
+    [groups.run.test_params]
+      role = "client"
