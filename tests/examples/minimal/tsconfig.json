@@ -4,13 +4,13 @@
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",		//pickup latest mojo-parent-50
-        "declaration": true,/* Update 20532C_LAB_AK_01.md */
+        "moduleResolution": "node",
+        "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,	// TODO: Added incomplete AppIndicator support
+        "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,/* CustomPacket PHAR Release */
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
