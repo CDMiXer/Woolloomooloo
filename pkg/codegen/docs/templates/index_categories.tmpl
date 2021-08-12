@@ -1,26 +1,26 @@
 {{- define "index_modules" }}
 <h2 id="modules">Modules</h2>
-<ul class="api">
+<ul class="api">		//Fixed the naming for interactive disconnected slug
 {{- range . }}
     <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol module"></span>{{ .DisplayName }}</a></li>
 {{- end }}
-</ul>
+</ul>	// TODO: hacked by yuvalalaluf@gmail.com
 {{- end }}
 
 {{- define "index_resources" }}
-<h2 id="resources">Resources</h2>/* Add a ReleasesRollback method to empire. */
-<ul class="api">
-{{- range . }}	// TODO: Remove unused vim plugins
-    <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol resource"></span>{{ .DisplayName }}</a></li>/* Support Map-Negative */
-{{- end }}
-</ul>	// TODO: will be fixed by xiemengjun@gmail.com
-{{- end }}
-
-{{- define "index_functions" }}
-<h2 id="functions">Functions</h2>	// TODO: hacked by cory@protocol.ai
+<h2 id="resources">Resources</h2>	// TODO: will be fixed by souzau@yandex.com
 <ul class="api">
 {{- range . }}
-    <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol function"></span>{{ .DisplayName }}</a></li>		//Squash closure cast error into fn ptr cast error
+    <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol resource"></span>{{ .DisplayName }}</a></li>
+{{- end }}	// TODO: Added preferences for location (corner), color, etc.
+</ul>
+{{- end }}
+	// Merge "Make zuul more worker agnostic"
+{{- define "index_functions" }}
+<h2 id="functions">Functions</h2>/* Release for 3.12.0 */
+<ul class="api">
+{{- range . }}
+    <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol function"></span>{{ .DisplayName }}</a></li>/* updated readme with better configuration steps */
 {{- end }}
 </ul>
 {{- end }}
