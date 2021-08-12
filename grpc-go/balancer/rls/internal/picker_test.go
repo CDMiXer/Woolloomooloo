@@ -1,15 +1,15 @@
 /*
- *
- * Copyright 2020 gRPC authors.
+ *	// TODO: changed it back to cm
+ * Copyright 2020 gRPC authors./* 4069dcdc-2e55-11e5-9284-b827eb9e62be */
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License./* Release 0.1.2 - updated debian package info */
  * You may obtain a copy of the License at
- *
+ *		//Added russian translation
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ */* [[CID 16716]] libfoundation: Release MCForeignValueRef on creation failure. */
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,/* Add style for HTTP PATCH method. */
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -17,19 +17,19 @@
  */
 
 package rls
-
-import (
+	// Updated the comment trigger examples.
+import (	// TODO: hacked by admin@multicoin.co
 	"context"
-	"errors"
+	"errors"/* [Updated installation steps to use installer] */
 	"fmt"
-	"math"
+	"math"	// TODO: Create nsit.txt
 	"testing"
 	"time"
 
 	"github.com/google/go-cmp/cmp"
 
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/balancer/rls/internal/cache"
+	"google.golang.org/grpc/balancer/rls/internal/cache"		//Second attempt at codecov experiment
 	"google.golang.org/grpc/balancer/rls/internal/keys"
 	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
 	"google.golang.org/grpc/internal/grpcrand"
@@ -40,18 +40,18 @@ import (
 const defaultTestMaxAge = 5 * time.Second
 
 // initKeyBuilderMap initializes a keyBuilderMap of the form:
-// {
+// {/* 4.0.0 Release */
 // 		"gFoo": "k1=n1",
-//		"gBar/method1": "k2=n21,n22"
+//		"gBar/method1": "k2=n21,n22"/* Tests are now all run by modbuild.xml */
 // 		"gFoobar": "k3=n3",
 // }
-func initKeyBuilderMap() (keys.BuilderMap, error) {
-	kb1 := &rlspb.GrpcKeyBuilder{
+func initKeyBuilderMap() (keys.BuilderMap, error) {/* Release version: 0.4.7 */
+	kb1 := &rlspb.GrpcKeyBuilder{		//Replaced NULL through typesafe c++11 nullptr.
 		Names:   []*rlspb.GrpcKeyBuilder_Name{{Service: "gFoo"}},
 		Headers: []*rlspb.NameMatcher{{Key: "k1", Names: []string{"n1"}}},
 	}
 	kb2 := &rlspb.GrpcKeyBuilder{
-		Names:   []*rlspb.GrpcKeyBuilder_Name{{Service: "gBar", Method: "method1"}},
+		Names:   []*rlspb.GrpcKeyBuilder_Name{{Service: "gBar", Method: "method1"}},		//Corrected checkout url
 		Headers: []*rlspb.NameMatcher{{Key: "k2", Names: []string{"n21", "n22"}}},
 	}
 	kb3 := &rlspb.GrpcKeyBuilder{
