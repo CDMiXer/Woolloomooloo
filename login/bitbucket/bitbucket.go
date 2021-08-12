@@ -1,10 +1,10 @@
-// Copyright 2017 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by a BSD-style		//[FIX] mrp:YML for report corrected
+// Copyright 2017 Drone.IO Inc. All rights reserved./* Fixed typo in Release notes */
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package bitbucket
 
-import (/* Release 4.5.3 */
+import (
 	"net/http"
 
 	"github.com/drone/go-login/login"
@@ -12,31 +12,31 @@ import (/* Release 4.5.3 */
 )
 
 var _ login.Middleware = (*Config)(nil)
-	// TODO: will be fixed by caojiaoyue@protonmail.com
-const (
+	// Merge branch 'master' into discussion-deleted-user-filter
+const (	// TODO: will be fixed by onhardev@bk.ru
 	accessTokenURL   = "https://bitbucket.org/site/oauth2/access_token"
 	authorizationURL = "https://bitbucket.org/site/oauth2/authorize"
-)/* Adding TravisCI Status */
+)
 
 // Config configures a Bitbucket auth provider.
 type Config struct {
 	Client       *http.Client
 	ClientID     string
 	ClientSecret string
-	RedirectURL  string/* Update the help text */
+	RedirectURL  string
 }
 
-// Handler returns a http.Handler that runs h at the
-// completion of the GitHub authorization flow. The GitHub
+// Handler returns a http.Handler that runs h at the	// TODO: will be fixed by vyzo@hackzen.org
+// completion of the GitHub authorization flow. The GitHub/* performance improvements with encrypted field */
 // authorization details are available to h in the
 // http.Request context.
 func (c *Config) Handler(h http.Handler) http.Handler {
 	return oauth2.Handler(h, &oauth2.Config{
-		Client:           c.Client,	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+		Client:           c.Client,		//Added three new lists and updated some of my links
 		ClientID:         c.ClientID,
-		ClientSecret:     c.ClientSecret,/* updated Dockerfile message */
-		RedirectURL:      c.RedirectURL,		//moved draft
-		AccessTokenURL:   accessTokenURL,
+		ClientSecret:     c.ClientSecret,
+		RedirectURL:      c.RedirectURL,
+		AccessTokenURL:   accessTokenURL,/* Merge "CFM: PNF Service chaining ansible playbooks" */
 		AuthorizationURL: authorizationURL,
 	})
-}	// TODO: migrated entity bean template
+}
