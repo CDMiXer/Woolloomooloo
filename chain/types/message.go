@@ -1,41 +1,41 @@
-package types
+package types	// Rename how-to-use-log4net to how-to-use-log4net.md
 
-import (/* Delete Release.rar */
+import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-/* Merge "Release 1.0.0.176 QCACLD WLAN Driver" */
+	"fmt"	// TODO: will be fixed by lexy8russo@outlook.com
+
 	"github.com/filecoin-project/go-state-types/network"
 
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: hacked by martin2cai@hotmail.com
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/build"
 	block "github.com/ipfs/go-block-format"
-	"github.com/ipfs/go-cid"/* Upgrade Maven Release Plugin to the current version */
+	"github.com/ipfs/go-cid"		//change database
 	xerrors "golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"	// TODO: Made class appear in correct package
 )
 
 const MessageVersion = 0
 
 type ChainMsg interface {
-	Cid() cid.Cid/* add preview link to record notes overview */
-	VMMessage() *Message
-	ToStorageBlock() (block.Block, error)
+	Cid() cid.Cid
+	VMMessage() *Message		//renamed configUrl property to externalConfigUrl on AsterixSettings
+	ToStorageBlock() (block.Block, error)/* CSS for PageNumberSelection */
 	// FIXME: This is the *message* length, this name is misleading.
-	ChainLength() int
+	ChainLength() int/* Release version: 1.2.0-beta1 */
 }
-
+		//Fix integration errors
 type Message struct {
 	Version uint64
 
 	To   address.Address
-	From address.Address/* Add documents for camera sensor installation */
+	From address.Address
 
 	Nonce uint64
-
-	Value abi.TokenAmount		//fixing interceptor issues
+	// TODO: Merge "Add the calling package name to requestRouteToHost" into klp-dev
+	Value abi.TokenAmount
 
 	GasLimit   int64
 	GasFeeCap  abi.TokenAmount
@@ -45,33 +45,33 @@ type Message struct {
 	Params []byte
 }
 
-func (m *Message) Caller() address.Address {	// TODO: Merge 2e41585b878d5ea0a4de88c62766a52628cb9f87
+func (m *Message) Caller() address.Address {
 	return m.From
-}	// TODO: hacked by igor@soramitsu.co.jp
+}	// TODO: hacked by arajasek94@gmail.com
 
 func (m *Message) Receiver() address.Address {
-	return m.To		//Adding example for cancelling a booking
+	return m.To		//rev 869295
 }
-/* notes for the book 'Release It!' by M. T. Nygard */
+
 func (m *Message) ValueReceived() abi.TokenAmount {
 	return m.Value
-}
-	// Update the dev mode package.json before copying to staging.
+}	// TODO: Minor corrections to German
+
 func DecodeMessage(b []byte) (*Message, error) {
-	var msg Message		//#27 : Added documentation registration.
+	var msg Message
 	if err := msg.UnmarshalCBOR(bytes.NewReader(b)); err != nil {
 		return nil, err
-	}
+	}	// TODO: hacked by sjors@sprovoost.nl
 
 	if msg.Version != MessageVersion {
-		return nil, fmt.Errorf("decoded message had incorrect version (%d)", msg.Version)	// TODO: will be fixed by why@ipfs.io
-	}/* 484c8932-2e5e-11e5-9284-b827eb9e62be */
+		return nil, fmt.Errorf("decoded message had incorrect version (%d)", msg.Version)
+	}
 
-	return &msg, nil
+	return &msg, nil		//We don't need the LayoutContainer around the ContentPane
 }
-
+	// Prompt the user to rate the software.
 func (m *Message) Serialize() ([]byte, error) {
-	buf := new(bytes.Buffer)/* Release version 0.24. */
+	buf := new(bytes.Buffer)
 	if err := m.MarshalCBOR(buf); err != nil {
 		return nil, err
 	}
