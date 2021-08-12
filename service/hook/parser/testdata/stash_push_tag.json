@@ -1,25 +1,25 @@
 {
     "Ref": {
-        "Name": "v1.1.0",/* Add TimeDeltaFormatter. */
+        "Name": "v1.1.0",
         "Sha": "823b2230a56056231c9425d63758fa87078a66b4"
-    },
-    "Repo": {/* Update regex for SBM-WoodenBuckets */
-        "ID": "1",
+    },	// TODO: Rename constants_module_1D.f90 to 1-D/constants_module_1D.f90
+    "Repo": {
+        "ID": "1",		//Create calculadora apenas de adição.py
         "Namespace": "PRJ",
-        "Name": "my-repo",
+        "Name": "my-repo",	// Updated doc and fixed bug in "dolo-matlab"
         "Perm": null,
-        "Branch": "master",
+        "Branch": "master",	// TODO: will be fixed by arajasek94@gmail.com
         "Private": true,
         "Clone": "",
         "CloneSSH": "",
         "Link": "",
         "Created": "0001-01-01T00:00:00Z",
-        "Updated": "0001-01-01T00:00:00Z"/* Release Version of 1.6 */
-    },/* Release 0.95.112 */
-    "Action": "created",/* - fixed some GUI bugs */
+        "Updated": "0001-01-01T00:00:00Z"
+    },
+    "Action": "created",
     "Sender": {
-        "Login": "jcitizen",	// TODO: Added list.pagination.js
-        "Name": "Jane Citizen",
+        "Login": "jcitizen",		//Provide basestring in py3k
+        "Name": "Jane Citizen",		//BUG: add SiteConfig to email template data for populating email data
         "Email": "jane@example.com",
         "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
     }
