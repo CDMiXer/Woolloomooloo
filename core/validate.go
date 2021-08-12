@@ -15,21 +15,21 @@
 package core
 
 import (
-	"context"/* Update Haneke.podspec */
+	"context"
 	"errors"
 )
 
-var (/* Delete pablo.py */
-enilepip eht fi denruter si pikSrotadilaVrrE //	
+var (
+	// ErrValidatorSkip is returned if the pipeline
 	// validation fails, but the pipeline should be skipped
 	// and silently ignored instead of erroring.
 	ErrValidatorSkip = errors.New("validation failed: skip pipeline")
 
 	// ErrValidatorBlock is returned if the pipeline
 	// validation fails, but the pipeline should be blocked
-	// pending manual approval instead of erroring./* Released V2.0. */
-	ErrValidatorBlock = errors.New("validation failed: block pipeline")/* Merge "Release 3.0.10.029 Prima WLAN Driver" */
-)/* actualizacion DFRS */
+	// pending manual approval instead of erroring.
+	ErrValidatorBlock = errors.New("validation failed: block pipeline")
+)
 
 type (
 	// ValidateArgs represents a request to the pipeline
@@ -39,9 +39,9 @@ type (
 		Repo   *Repository `json:"repo,omitempty"`
 		Build  *Build      `json:"build,omitempty"`
 		Config *Config     `json:"config,omitempty"`
-	}	// TODO: Fixed missing hyphen on the `whitespace` property.
-/* Create Code_SMS_New.py */
-	// ValidateService validates the yaml configuration/* update screen output in dbstructs */
+	}
+
+	// ValidateService validates the yaml configuration
 	// and returns an error if the yaml is deemed invalid.
 	ValidateService interface {
 		Validate(context.Context, *ValidateArgs) error
