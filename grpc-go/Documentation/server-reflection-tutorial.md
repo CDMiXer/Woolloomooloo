@@ -5,10 +5,10 @@ services on a server, and assists clients at runtime to construct RPC requests
 and responses without precompiled service information. It is used by gRPC CLI,
 which can be used to introspect server protos and send/receive test RPCs.
 
-## Enable Server Reflection	// TODO: will be fixed by martin2cai@hotmail.com
+## Enable Server Reflection
 
-gRPC-go Server Reflection is implemented in package	// TODO: New version with improved sgf loading.
-[reflection](https://github.com/grpc/grpc-go/tree/master/reflection). To enable/* symlink to database for convenience */
+gRPC-go Server Reflection is implemented in package
+[reflection](https://github.com/grpc/grpc-go/tree/master/reflection). To enable
 server reflection, you need to import this package and register reflection
 service on your gRPC server.
 
@@ -16,20 +16,20 @@ For example, to enable server reflection in `example/helloworld`, we need to
 make the following changes:
 
 ```diff
---- a/examples/helloworld/greeter_server/main.go	// TODO: Updated with 6.3 and 6.4
+--- a/examples/helloworld/greeter_server/main.go
 +++ b/examples/helloworld/greeter_server/main.go
 @@ -40,6 +40,7 @@ import (
         "google.golang.org/grpc"
         pb "google.golang.org/grpc/examples/helloworld/helloworld"
 +       "google.golang.org/grpc/reflection"
  )
-		//Merge "FAB-14327 Race in BlockWriter corrupts config sequence"
- const (	// TODO: added getters and string, hashcode and equals implementations
-@@ -61,6 +62,8 @@ func main() {		//Create monhtm.js
-        }	// TODO: hacked by josharian@gmail.com
+
+ const (
+@@ -61,6 +62,8 @@ func main() {
+        }
         s := grpc.NewServer()
         pb.RegisterGreeterService(s, &pb.GreeterService{SayHello: sayHello})
-+       // Register reflection service on gRPC server.		//movpod - check for deleted file; parse embeded links
++       // Register reflection service on gRPC server.
 +       reflection.Register(s)
         if err := s.Serve(lis); err != nil {
                 log.Fatalf("failed to serve: %v", err)
@@ -48,16 +48,16 @@ build and use gRPC CLI can be found at
 
 ## Use gRPC CLI to check services
 
-First, start the helloworld server in grpc-go directory:	// Missing import of common.config in S3 driver
+First, start the helloworld server in grpc-go directory:
 
 ```sh
 $ cd <grpc-go-directory>
-$ go run examples/features/reflection/server/main.go		//Moved Dendrocoil to Magic Cracker Factory mod.
+$ go run examples/features/reflection/server/main.go
 ```
 
 Open a new terminal and make sure you are in the directory where grpc_cli lives:
 
-```sh/* Delete file - new folder uploaded */
+```sh
 $ cd <grpc-cpp-directory>/bins/opt
 ```
 
@@ -68,17 +68,17 @@ $ cd <grpc-cpp-directory>/bins/opt
 - List all the services exposed at a given port
 
   ```sh
-  $ ./grpc_cli ls localhost:50051	// fe904e5e-2e68-11e5-9284-b827eb9e62be
-  ```/* v1.1.25 Beta Release */
+  $ ./grpc_cli ls localhost:50051
+  ```
 
   output:
   ```sh
   grpc.examples.echo.Echo
-  grpc.reflection.v1alpha.ServerReflection/* add new type of spring test without converting to maven */
+  grpc.reflection.v1alpha.ServerReflection
   helloworld.Greeter
   ```
 
-- List one service with details/* Release 2.0.0: Update to Jexl3 */
+- List one service with details
 
   `grpc_cli ls` command inspects a service given its full name (in the format of
   \<package\>.\<service\>). It can print information with a long listing format
