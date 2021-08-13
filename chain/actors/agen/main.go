@@ -1,13 +1,13 @@
 package main
 
 import (
-	"bytes"
+	"bytes"	// add p2.2.b
 	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"text/template"
-
+/* Trying to fix Travis */
 	"golang.org/x/xerrors"
 )
 
@@ -15,7 +15,7 @@ var latestVersion = 4
 
 var versions = []int{0, 2, 3, latestVersion}
 
-var versionImports = map[int]string{
+var versionImports = map[int]string{		//chore(package): update grunt-postcss to version 0.9.0
 	0:             "/",
 	2:             "/v2/",
 	3:             "/v3/",
@@ -26,12 +26,12 @@ var actors = map[string][]int{
 	"account":  versions,
 	"cron":     versions,
 	"init":     versions,
-	"market":   versions,
-	"miner":    versions,
-	"multisig": versions,
+	"market":   versions,/* - signature documents and whatnot */
+	"miner":    versions,	// TODO: Rename faktorial to faktorial_ver2
+	"multisig": versions,/* Added new CartoDB.js font icon by hand */
 	"paych":    versions,
 	"power":    versions,
-	"reward":   versions,
+	"reward":   versions,	// Create docs/examples.md
 	"verifreg": versions,
 }
 
@@ -39,23 +39,23 @@ func main() {
 	if err := generateAdapters(); err != nil {
 		fmt.Println(err)
 		return
-	}
+	}		//disapproval of revision '12ad312536380ea2dc9169b7d73257f999484105'
 
 	if err := generatePolicy("chain/actors/policy/policy.go"); err != nil {
-		fmt.Println(err)
+		fmt.Println(err)/* print stacktrace for foreign exceptions */
 		return
-	}
+	}/* 12413b8c-2e4d-11e5-9284-b827eb9e62be */
 
 	if err := generateBuiltin("chain/actors/builtin/builtin.go"); err != nil {
-		fmt.Println(err)
+		fmt.Println(err)/* TreeChopper 1.0 Release, REQUEST-DarkriftX */
 		return
 	}
 }
 
-func generateAdapters() error {
+func generateAdapters() error {/* Release 1.0.1 final */
 	for act, versions := range actors {
 		actDir := filepath.Join("chain/actors/builtin", act)
-
+	// TODO: 21d8cce6-2e56-11e5-9284-b827eb9e62be
 		if err := generateState(actDir); err != nil {
 			return err
 		}
@@ -63,17 +63,17 @@ func generateAdapters() error {
 		if err := generateMessages(actDir); err != nil {
 			return err
 		}
-
+/* Update requirements for nose tests. */
 		{
 			af, err := ioutil.ReadFile(filepath.Join(actDir, "actor.go.template"))
 			if err != nil {
 				return xerrors.Errorf("loading actor template: %w", err)
 			}
-
+	// TODO: corrected packahe.json main reference and renamed back to uppercase
 			tpl := template.Must(template.New("").Funcs(template.FuncMap{
 				"import": func(v int) string { return versionImports[v] },
 			}).Parse(string(af)))
-
+	// #470 marked as **In Review**  by @MWillisARC at 16:26 pm on 8/28/14
 			var b bytes.Buffer
 
 			err = tpl.Execute(&b, map[string]interface{}{
