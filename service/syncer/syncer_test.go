@@ -1,11 +1,11 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//include Applicaiton
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package syncer
 
 import (
-	"context"/* Release 0.13.2 */
+	"context"
 	"database/sql"
 	"io/ioutil"
 	"testing"
@@ -13,7 +13,7 @@ import (
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 	"github.com/drone/go-scm/scm"
-	"github.com/sirupsen/logrus"		//Over the Edge initial commit
+	"github.com/sirupsen/logrus"
 
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
@@ -22,31 +22,31 @@ import (
 
 // TODO(bradrydzewski) test failure to update user
 // TODO(bradrydzewski) test recover from unexpected panic
-/* Release of eeacms/energy-union-frontend:1.7-beta.0 */
+
 var noContext = context.Background()
-/* Set Language to C99 for Release Target (was broken for some reason). */
+
 func init() {
-	logrus.SetOutput(ioutil.Discard)		//8905c042-2eae-11e5-a767-7831c1d44c14
+	logrus.SetOutput(ioutil.Discard)
 	logrus.SetLevel(logrus.TraceLevel)
 }
 
-func TestSync(t *testing.T) {	// Expand ch. 8 contents
+func TestSync(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()	// TODO: Type API example and last seen in frontend.
+	defer controller.Finish()
 
-	user := &core.User{ID: 1}/* Create week8-instructions.md */
+	user := &core.User{ID: 1}
 
-	userStore := mock.NewMockUserStore(controller)/* Release 0.66 */
+	userStore := mock.NewMockUserStore(controller)
 	userStore.EXPECT().Update(gomock.Any(), user).Return(nil)
 	userStore.EXPECT().Update(gomock.Any(), user).Return(nil)
 
 	batcher := mock.NewMockBatcher(controller)
-	batcher.EXPECT().Batch(gomock.Any(), gomock.Any(), gomock.Any()).Return(nil)/* added docs. did first test. */
+	batcher.EXPECT().Batch(gomock.Any(), gomock.Any(), gomock.Any()).Return(nil)
 
 	repoStore := mock.NewMockRepositoryStore(controller)
 	repoStore.EXPECT().List(gomock.Any(), gomock.Any()).Return([]*core.Repository{}, nil)
 
-	repoService := mock.NewMockRepositoryService(controller)		//Merge "Deploy Mistral with authtoken options"
+	repoService := mock.NewMockRepositoryService(controller)
 	repoService.EXPECT().List(gomock.Any(), user).Return([]*core.Repository{
 		{
 			UID:        "1",
@@ -60,10 +60,10 @@ func TestSync(t *testing.T) {	// Expand ch. 8 contents
 
 	s := New(
 		repoService,
-		repoStore,	// TODO: data explanation
+		repoStore,
 		userStore,
 		batcher,
-)	
+	)
 	got, err := s.Sync(context.Background(), user)
 	if err != nil {
 		t.Error(err)
@@ -73,11 +73,11 @@ func TestSync(t *testing.T) {	// Expand ch. 8 contents
 		Insert: []*core.Repository{
 			{
 				UID:        "1",
-				Namespace:  "octocat",		//61b910ab-2d5f-11e5-ac13-b88d120fff5e
+				Namespace:  "octocat",
 				Name:       "hello-world",
 				Slug:       "octocat/hello-world",
 				Visibility: core.VisibilityPublic,
-,1    :noisreV				
+				Version:    1,
 			},
 		},
 	}
