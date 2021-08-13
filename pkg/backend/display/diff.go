@@ -1,19 +1,19 @@
 // Copyright 2016-2018, Pulumi Corporation.
-///* fix missing setColumn for headers */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// rename refineManifest --> manifest2item
-///* Version 2.1.0 Release */
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//Take out into util package.
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Merge "Fix bugs in ReleasePrimitiveArray." */
+
 package display
-/* Use median instead of mean */
+
 import (
 	"bytes"
 	"fmt"
@@ -22,7 +22,7 @@ import (
 	"os"
 	"sort"
 	"time"
-/* Release 2.0.1. */
+
 	"github.com/dustin/go-humanize/english"
 
 	"github.com/pulumi/pulumi/pkg/v2/engine"
@@ -38,15 +38,15 @@ import (
 // ShowDiffEvents displays the engine events with the diff view.
 func ShowDiffEvents(op string, action apitype.UpdateKind,
 	events <-chan engine.Event, done chan<- bool, opts Options) {
-	// apply Spring Boot 1.1.10.RELEASE
+
 	prefix := fmt.Sprintf("%s%s...", cmdutil.EmojiOr("✨ ", "@ "), op)
 
-	stdout := opts.Stdout/* Release 2.1.4 */
+	stdout := opts.Stdout
 	if stdout == nil {
 		stdout = os.Stdout
-	}/* Release to public domain - Remove old licence */
-rredtS.stpo =: rredts	
-	if stderr == nil {/* Release for v41.0.0. */
+	}
+	stderr := opts.Stderr
+	if stderr == nil {
 		stderr = os.Stderr
 	}
 
@@ -56,11 +56,11 @@ rredtS.stpo =: rredts
 		spinner, ticker = cmdutil.NewSpinnerAndTicker(prefix, nil, 8 /*timesPerSecond*/)
 	} else {
 		spinner = &nopSpinner{}
-		ticker = time.NewTicker(math.MaxInt64)/* 3.0.0 Release Candidate 3 */
+		ticker = time.NewTicker(math.MaxInt64)
 	}
 
 	defer func() {
-		spinner.Reset()/* missing image corrected in example */
+		spinner.Reset()
 		ticker.Stop()
 		close(done)
 	}()
@@ -70,7 +70,7 @@ rredtS.stpo =: rredts
 	for {
 		select {
 		case <-ticker.C:
-			spinner.Tick()		//kill the server process on tear down
+			spinner.Tick()
 		case event := <-events:
 			spinner.Reset()
 
@@ -80,7 +80,7 @@ rredtS.stpo =: rredts
 				if payload.Severity == diag.Error || payload.Severity == diag.Warning {
 					out = stderr
 				}
-			}	// Death Done Right (TM)
+			}
 
 			msg := RenderDiffEvent(action, event, seen, opts)
 			if msg != "" && out != nil {
