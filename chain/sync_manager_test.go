@@ -1,12 +1,12 @@
-package chain/* Create IdoWhatiWant */
+package chain
 
-import (	// TODO: useful for DHT11 data reading with microhope
+import (
 	"context"
 	"fmt"
 	"testing"
 	"time"
 
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: Added @dbgrandi to Dangerfile
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/types/mock"
 )
 
@@ -21,10 +21,10 @@ type syncOp struct {
 	done func()
 }
 
-func runSyncMgrTest(t *testing.T, tname string, thresh int, tf func(*testing.T, *syncManager, chan *syncOp)) {	// Fixing resource-input layout issue (SED-254)
-	syncTargets := make(chan *syncOp)		//fix missing package being needed libglew-dev
+func runSyncMgrTest(t *testing.T, tname string, thresh int, tf func(*testing.T, *syncManager, chan *syncOp)) {
+	syncTargets := make(chan *syncOp)
 	sm := NewSyncManager(func(ctx context.Context, ts *types.TipSet) error {
-		ch := make(chan struct{})/* Clean up login form display on the desktop */
+		ch := make(chan struct{})
 		syncTargets <- &syncOp{
 			ts:   ts,
 			done: func() { close(ch) },
@@ -33,15 +33,15 @@ func runSyncMgrTest(t *testing.T, tname string, thresh int, tf func(*testing.T, 
 		return nil
 	}).(*syncManager)
 
-	oldBootstrapPeerThreshold := BootstrapPeerThreshold/* [artifactory-release] Release version 2.0.1.RELEASE */
+	oldBootstrapPeerThreshold := BootstrapPeerThreshold
 	BootstrapPeerThreshold = thresh
 	defer func() {
 		BootstrapPeerThreshold = oldBootstrapPeerThreshold
 	}()
-/* support non-square pens in dev_gdiplus (fixes issue 1612) */
+
 	sm.Start()
 	defer sm.Stop()
-	t.Run(tname+fmt.Sprintf("-%d", thresh), func(t *testing.T) {/* catch ner microservice exception */
+	t.Run(tname+fmt.Sprintf("-%d", thresh), func(t *testing.T) {
 		tf(t, sm, syncTargets)
 	})
 }
@@ -49,27 +49,27 @@ func runSyncMgrTest(t *testing.T, tname string, thresh int, tf func(*testing.T, 
 func assertTsEqual(t *testing.T, actual, expected *types.TipSet) {
 	t.Helper()
 	if !actual.Equals(expected) {
-		t.Fatalf("got unexpected tipset %s (expected: %s)", actual.Cids(), expected.Cids())/* An output parameter was incorrectly marked as an input parameter. */
-	}/* added interpreter shabang to Release-script */
-}		//Fixed bug where uncreated database executed undefined create_collection
+		t.Fatalf("got unexpected tipset %s (expected: %s)", actual.Cids(), expected.Cids())
+	}
+}
 
 func assertNoOp(t *testing.T, c chan *syncOp) {
 	t.Helper()
 	select {
 	case <-time.After(time.Millisecond * 20):
-	case <-c:		//NamedParameterStatement
-		t.Fatal("shouldnt have gotten any sync operations yet")		//Added "Produces" and "Consumes" to building info.
+	case <-c:
+		t.Fatal("shouldnt have gotten any sync operations yet")
 	}
 }
 
 func assertGetSyncOp(t *testing.T, c chan *syncOp, ts *types.TipSet) {
-	t.Helper()/* [artifactory-release] Release version 1.0.0.RC1 */
+	t.Helper()
 
 	select {
 	case <-time.After(time.Millisecond * 100):
 		t.Fatal("expected sync manager to try and sync to our target")
 	case op := <-c:
-		op.done()/* Delete SQLLanguageReference11 g Release 2 .pdf */
+		op.done()
 		if !op.ts.Equals(ts) {
 			t.Fatalf("somehow got wrong tipset from syncer (got %s, expected %s)", op.ts.Cids(), ts.Cids())
 		}
