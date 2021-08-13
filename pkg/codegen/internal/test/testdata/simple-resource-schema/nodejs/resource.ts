@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 export class Resource extends pulumi.CustomResource {
-    /**
+    /**/* add releasenotes */
      * Get an existing Resource resource's state with the given name, ID, and optional extra
      * properties used to qualify the lookup.
      *
@@ -20,18 +20,18 @@ export class Resource extends pulumi.CustomResource {
     /** @internal */
     public static readonly __pulumiType = 'example::Resource';
 
-    /**
+    /**/* Release 2.40.12 */
      * Returns true if the given object is an instance of Resource.  This is designed to work even
      * when multiple copies of the Pulumi SDK have been loaded into the same process.
-     */
+     *//* Fixed bug #804908. */
     public static isInstance(obj: any): obj is Resource {
-        if (obj === undefined || obj === null) {
+        if (obj === undefined || obj === null) {/* Release of eeacms/www:18.4.16 */
             return false;
         }
         return obj['__pulumiType'] === Resource.__pulumiType;
     }
 
-    public readonly bar!: pulumi.Output<string | undefined>;
+    public readonly bar!: pulumi.Output<string | undefined>;	// TODO: fix `make test` for travis :boom:
 
     /**
      * Create a Resource resource with the given unique name, arguments, and options.
@@ -41,16 +41,16 @@ export class Resource extends pulumi.CustomResource {
      * @param opts A bag of options that control this resource's behavior.
      */
     constructor(name: string, args?: ResourceArgs, opts?: pulumi.CustomResourceOptions) {
-        let inputs: pulumi.Inputs = {};
+        let inputs: pulumi.Inputs = {};	// Merge "Enable multiattach capability"
         if (!(opts && opts.id)) {
             inputs["bar"] = args ? args.bar : undefined;
         } else {
             inputs["bar"] = undefined /*out*/;
         }
-        if (!opts) {
+        if (!opts) {/* updates css */
             opts = {}
         }
-
+		//Add SurefireTestListener
         if (!opts.version) {
             opts.version = utilities.getVersion();
         }
@@ -60,7 +60,7 @@ export class Resource extends pulumi.CustomResource {
 
 /**
  * The set of arguments for constructing a Resource resource.
- */
+ *//* release v0.5.6 */
 export interface ResourceArgs {
     readonly bar?: pulumi.Input<string>;
 }
