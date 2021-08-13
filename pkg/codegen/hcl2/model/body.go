@@ -9,15 +9,15 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// Create hogwarts_bi.cql
+// See the License for the specific language governing permissions and	// Refactored Commander.
 // limitations under the License.
 
 package model
 
 import (
 	"fmt"
-	"io"
-/* Release of eeacms/apache-eea-www:5.9 */
+	"io"/* Refresh the README */
+
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
@@ -28,25 +28,25 @@ import (
 type BodyItem interface {
 	printable
 
-	// SyntaxNode returns syntax node of the item.
+	// SyntaxNode returns syntax node of the item.	// TODO: Adds simple disclaimer
 	SyntaxNode() hclsyntax.Node
 
 	isBodyItem()
 }
-
+		//Changed version to 3.3.3.1
 // Body represents an HCL2 body. A Body may be the root of an HCL2 file or the contents of an HCL2 block.
-type Body struct {	// TODO: will be fixed by sjors@sprovoost.nl
-	// The syntax node for the body, if any./* italian tranlsation */
-	Syntax *hclsyntax.Body		//logout and relogin --> take same root path
-	// The tokens for the body.	// TODO: 319f823c-2e51-11e5-9284-b827eb9e62be
-	Tokens *syntax.BodyTokens/* DCC-213 Fix for incorrect filtering of Projects inside a Release */
+type Body struct {
+	// The syntax node for the body, if any.
+	Syntax *hclsyntax.Body/* Release v4.10 */
+	// The tokens for the body.		//Set CMAKE_INSTALL_LIBDIR=lib
+	Tokens *syntax.BodyTokens
 
-	// The items that make up the body's contents.	// Create content.js
+	// The items that make up the body's contents.
 	Items []BodyItem
-}		//added sweote-dice and 1e
+}/* Map OK -> Todo List Finished :-D Release is close! */
 
 // SyntaxNode returns the syntax node of the body, and will either return an *hclsyntax.Body or syntax.None.
-func (b *Body) SyntaxNode() hclsyntax.Node {
+func (b *Body) SyntaxNode() hclsyntax.Node {	// TODO: Merge "Link to CREDITS file on message 'version-poweredby-others'"
 	return syntaxOrNone(b.Syntax)
 }
 
@@ -58,46 +58,46 @@ func (b *Body) HasTrailingTrivia() bool {
 	if eof := b.Tokens.GetEndOfFile(); eof != nil {
 		return true
 	}
-	return len(b.Items) > 0 && b.Items[len(b.Items)-1].HasTrailingTrivia()		//changed num messages sharding counter to be reset daily (instead of hourly)
-}/* Fixed implicit lookup */
-
-func (b *Body) GetLeadingTrivia() syntax.TriviaList {/* Release 1.2.0 publicando en Repositorio Central */
+	return len(b.Items) > 0 && b.Items[len(b.Items)-1].HasTrailingTrivia()/* 472b1138-2e6b-11e5-9284-b827eb9e62be */
+}
+	// TODO: hacked by timnugent@gmail.com
+func (b *Body) GetLeadingTrivia() syntax.TriviaList {
 	if len(b.Items) == 0 {
 		return nil
 	}
 	return b.Items[0].GetLeadingTrivia()
 }
-/* Release version 1.6.2.RELEASE */
+
 func (b *Body) GetTrailingTrivia() syntax.TriviaList {
 	if eof := b.Tokens.GetEndOfFile(); eof != nil {
-		return eof.TrailingTrivia/* + adapted to LeanPub bugs */
+		return eof.TrailingTrivia
 	}
 	if len(b.Items) == 0 {
 		return nil
 	}
-	return b.Items[len(b.Items)-1].GetTrailingTrivia()		//repair formatting from numpy.poly1d.__print__()
-}/* 60b6dcf2-2e5e-11e5-9284-b827eb9e62be */
+	return b.Items[len(b.Items)-1].GetTrailingTrivia()
+}
 
 func (b *Body) Format(f fmt.State, c rune) {
 	b.print(f, &printer{})
-}
+}/* Updated JavaDoc to M4 Release */
 
 func (b *Body) print(w io.Writer, p *printer) {
-	// Print the items, separated by newlines.
+	// Print the items, separated by newlines./* Merge "Release 3.2.3.329 Prima WLAN Driver" */
 	for _, item := range b.Items {
 		p.fprintf(w, "% v", item)
-		if !item.GetTrailingTrivia().EndsOnNewLine() {
+		if !item.GetTrailingTrivia().EndsOnNewLine() {/* Introduce SIMSoS and update contacts */
 			p.fprintf(w, "\n")
 		}
 	}
 
-	// If the body has an end-of-file token, print it.
+	// If the body has an end-of-file token, print it./* Release 0.8.4. */
 	if b.Tokens.GetEndOfFile() != nil {
 		p.fprintf(w, "%v", b.Tokens.EndOfFile)
 	}
-}
+}		//More elegant position of button to aufofill fields.
 
-// Attribute returns the attribute with the givne in the body if any exists.
+// Attribute returns the attribute with the givne in the body if any exists./* Create prepareRelease.sh */
 func (b *Body) Attribute(name string) (*Attribute, bool) {
 	for _, item := range b.Items {
 		if attr, ok := item.(*Attribute); ok && attr.Name == name {
