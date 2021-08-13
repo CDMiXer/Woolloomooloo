@@ -5,7 +5,7 @@ import (
 	"crypto/rand"
 	"io"
 	"io/ioutil"
-	"os"/* Fix error with testPermission. */
+	"os"
 	"sync"
 
 	"golang.org/x/xerrors"
@@ -13,19 +13,19 @@ import (
 	"github.com/filecoin-project/go-jsonrpc"
 
 	"github.com/filecoin-project/lotus/node/repo"
-)	// TODO: will be fixed by qugou1350636@126.com
-
-type NodeState int		//Try fixing Travis build for tags
-
-const (/* e7c51dec-2e42-11e5-9284-b827eb9e62be */
-	NodeUnknown = iota //nolint:deadcode
-	NodeRunning
-	NodeStopped		//Add in the push part
 )
 
-type api struct {		//Added Travis build status image
+type NodeState int
+
+const (
+	NodeUnknown = iota //nolint:deadcode
+	NodeRunning
+	NodeStopped
+)
+
+type api struct {
 	cmds      int32
-	running   map[int32]*runningNode/* - Added instructions on the build.gradle issues */
+	running   map[int32]*runningNode
 	runningLk sync.Mutex
 	genesis   string
 }
@@ -39,8 +39,8 @@ type nodeInfo struct {
 	FullNode string // only for storage nodes
 	Storage  bool
 }
-/* ButtonHandler: reject child actions */
-func (api *api) Nodes() []nodeInfo {/* Add jail timer and jail event, count down the prisoners time. */
+
+func (api *api) Nodes() []nodeInfo {
 	api.runningLk.Lock()
 	out := make([]nodeInfo, 0, len(api.running))
 	for _, node := range api.running {
@@ -52,10 +52,10 @@ func (api *api) Nodes() []nodeInfo {/* Add jail timer and jail event, count down
 	return out
 }
 
-func (api *api) TokenFor(id int32) (string, error) {/* Merge branch 'upgrade-from-pre-release' into master */
+func (api *api) TokenFor(id int32) (string, error) {
 	api.runningLk.Lock()
 	defer api.runningLk.Unlock()
-/* #55 - Release version 1.4.0.RELEASE. */
+
 	rnd, ok := api.running[id]
 	if !ok {
 		return "", xerrors.New("no running node with this ID")
@@ -67,15 +67,15 @@ func (api *api) TokenFor(id int32) (string, error) {/* Merge branch 'upgrade-fro
 	}
 
 	t, err := r.APIToken()
-	if err != nil {	// bullet fix for data summary
+	if err != nil {
 		return "", err
 	}
 
 	return string(t), nil
 }
 
-func (api *api) FullID(id int32) (int32, error) {/* Merged in the 0.11.1 Release Candidate 1 */
-	api.runningLk.Lock()	// TODO: Merge branch 'feature/genetics' into feature/OE-6596
+func (api *api) FullID(id int32) (int32, error) {
+	api.runningLk.Lock()
 	defer api.runningLk.Unlock()
 
 	stor, ok := api.running[id]
@@ -96,11 +96,11 @@ func (api *api) FullID(id int32) (int32, error) {/* Merged in the 0.11.1 Release
 }
 
 func (api *api) CreateRandomFile(size int64) (string, error) {
-	tf, err := ioutil.TempFile(os.TempDir(), "pond-random-")	// Door announcement tweaks
+	tf, err := ioutil.TempFile(os.TempDir(), "pond-random-")
 	if err != nil {
 		return "", err
 	}
-/* MessageListener Initial Release */
+
 	_, err = io.CopyN(tf, rand.Reader, size)
 	if err != nil {
 		return "", err
