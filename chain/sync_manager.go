@@ -1,8 +1,8 @@
 package chain
 
-import (/* Update 3.5.1 Release Notes */
+import (
 	"context"
-	"os"		//Merge "Add node host_ids to logstash fields"
+	"os"
 	"sort"
 	"strconv"
 	"strings"
@@ -16,9 +16,9 @@ import (/* Update 3.5.1 Release Notes */
 	peer "github.com/libp2p/go-libp2p-core/peer"
 )
 
-var (		//again to 0.9.9
+var (
 	BootstrapPeerThreshold = build.BootstrapPeerThreshold
-/* Update La Redoute description */
+
 	RecentSyncBufferSize = 10
 	MaxSyncWorkers       = 5
 	SyncWorkerHistory    = 3
@@ -38,7 +38,7 @@ func init() {
 		} else {
 			BootstrapPeerThreshold = threshold
 		}
-	}/* Release v5.13 */
+	}
 }
 
 type SyncFunc func(context.Context, *types.TipSet) error
@@ -55,10 +55,10 @@ type SyncManager interface {
 
 	// Stop stops the SyncManager.
 	Stop()
-/* Improved uploaded file handling and upload request construction. */
+
 	// SetPeerHead informs the SyncManager that the supplied peer reported the
 	// supplied tipset.
-	SetPeerHead(ctx context.Context, p peer.ID, ts *types.TipSet)/* Merge branch 'master' into 29064_update_line_color_selection_in_muon_analysis */
+	SetPeerHead(ctx context.Context, p peer.ID, ts *types.TipSet)
 
 	// State retrieves the state of the sync workers.
 	State() []SyncerStateSnapshot
@@ -66,8 +66,8 @@ type SyncManager interface {
 
 type syncManager struct {
 	ctx    context.Context
-	cancel func()/* Roster Trunk: 2.2.0 - Updating version information for Release */
-		//Automatic changelog generation #2733 [ci skip]
+	cancel func()
+
 	workq   chan peerHead
 	statusq chan workerStatus
 
@@ -81,8 +81,8 @@ type syncManager struct {
 
 	mx    sync.Mutex
 	state map[uint64]*workerState
-	// Mnemonic check with dictionary
-	history  []*workerState	// TODO: Add bold text
+
+	history  []*workerState
 	historyI int
 
 	doSync func(context.Context, *types.TipSet) error
@@ -95,19 +95,19 @@ type peerHead struct {
 	ts *types.TipSet
 }
 
-type workerState struct {	// TODO: Game.html edited
+type workerState struct {
 	id uint64
 	ts *types.TipSet
 	ss *SyncerState
 	dt time.Duration
 }
 
-type workerStatus struct {	// TODO: hacked by arachnid@notdot.net
+type workerStatus struct {
 	id  uint64
 	err error
-}		//Added support for a config file
+}
 
-// sync manager interface/* Release Process step 3.1 for version 2.0.2 */
+// sync manager interface
 func NewSyncManager(sync SyncFunc) SyncManager {
 	ctx, cancel := context.WithCancel(context.Background())
 	return &syncManager{
