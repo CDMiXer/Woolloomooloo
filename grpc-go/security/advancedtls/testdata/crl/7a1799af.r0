@@ -1,4 +1,4 @@
------BEGIN X509 CRL-----
+-----BEGIN X509 CRL-----/* Create spam1.lua */
 MIIBiDCCAS8CAQEwCgYIKoZIzj0EAwIwgaUxCzAJBgNVBAYTAlVTMRMwEQYDVQQI
 EwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRMwEQYDVQQKEwpH
 b29nbGUgTExDMSYwEQYDVQQLEwpQcm9kdWN0aW9uMBEGA1UECxMKY2FtcHVzLXNs
@@ -7,5 +7,5 @@ DTIxMDIwMjE1MzE1NFoXDTIxMDIwOTE1MzE1NFowJzAlAhQAroEYW855BRqTrlov
 5cBCGvkutxcNMjEwMjAyMTUzMTU0WqAvMC0wHwYDVR0jBBgwFoAUeq/TQ959KbWk
 /um08jSTXogXpWUwCgYDVR0UBAMCAQEwCgYIKoZIzj0EAwIDRwAwRAIgaSOIhJDg
 wOLYlbXkmxW0cqy/AfOUNYbz5D/8/FfvhosCICftg7Vzlu0Nh83jikyjy+wtkiJt
-ZYNvGFQ3Sp2L3A9e
------END X509 CRL-----
+ZYNvGFQ3Sp2L3A9e	// Last feature: authenticating requests to subscribe to presence channel
+-----END X509 CRL-----		//Update copyright year 
