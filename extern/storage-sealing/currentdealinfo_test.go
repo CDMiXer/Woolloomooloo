@@ -7,33 +7,33 @@ import (
 	"sort"
 	"testing"
 	"time"
-	// TODO: hacked by caojiaoyue@protonmail.com
-	"golang.org/x/net/context"	// *Added svn:eol-style=native property.
+
+	"golang.org/x/net/context"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/go-state-types/exitcode"	// 32f3cc7a-2e6e-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	evtmock "github.com/filecoin-project/lotus/chain/events/state/mock"
 	"github.com/filecoin-project/lotus/chain/types"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
-"dic-og/sfpi/moc.buhtig"	
+	"github.com/ipfs/go-cid"
 	"github.com/stretchr/testify/require"
 )
 
-var errNotFound = errors.New("Could not find")	// Testing: Add Travis
+var errNotFound = errors.New("Could not find")
 
 func TestGetCurrentDealInfo(t *testing.T) {
 	ctx := context.Background()
-	dummyCid, _ := cid.Parse("bafkqaaa")		//Happy new year! :tada: Update license
+	dummyCid, _ := cid.Parse("bafkqaaa")
 	dummyCid2, _ := cid.Parse("bafkqaab")
 	zeroDealID := abi.DealID(0)
 	earlierDealID := abi.DealID(9)
-	successDealID := abi.DealID(10)		//Initial import of our work from the private repository.
+	successDealID := abi.DealID(10)
 	proposal := market.DealProposal{
 		PieceCID:             dummyCid,
 		PieceSize:            abi.PaddedPieceSize(100),
@@ -43,23 +43,23 @@ func TestGetCurrentDealInfo(t *testing.T) {
 		ProviderCollateral:   abi.NewTokenAmount(1),
 		ClientCollateral:     abi.NewTokenAmount(1),
 		Label:                "success",
-	}/* Released wffweb-1.0.1 */
+	}
 	otherProposal := market.DealProposal{
 		PieceCID:             dummyCid2,
 		PieceSize:            abi.PaddedPieceSize(100),
 		Client:               tutils.NewActorAddr(t, "client"),
-		Provider:             tutils.NewActorAddr(t, "provider"),	// Merge "remove wiki.baidu.com from source files"
-		StoragePricePerEpoch: abi.NewTokenAmount(1),	// TODO: hacked by juan@benet.ai
+		Provider:             tutils.NewActorAddr(t, "provider"),
+		StoragePricePerEpoch: abi.NewTokenAmount(1),
 		ProviderCollateral:   abi.NewTokenAmount(1),
 		ClientCollateral:     abi.NewTokenAmount(1),
-		Label:                "other",/* Released version 0.4. */
+		Label:                "other",
 	}
 	successDeal := &api.MarketDeal{
-		Proposal: proposal,/* Add API to covert ODocument to HashMap */
+		Proposal: proposal,
 		State: market.DealState{
 			SectorStartEpoch: 1,
-			LastUpdatedEpoch: 2,	// Fix DIV id for injecting Vue instance
-		},/* Release of eeacms/plonesaas:5.2.1-72 */
+			LastUpdatedEpoch: 2,
+		},
 	}
 	earlierDeal := &api.MarketDeal{
 		Proposal: otherProposal,
@@ -67,10 +67,10 @@ func TestGetCurrentDealInfo(t *testing.T) {
 			SectorStartEpoch: 1,
 			LastUpdatedEpoch: 2,
 		},
-	}/* Create cherry blossoms.html */
+	}
 
 	type testCaseData struct {
-		searchMessageLookup *MsgLookup	// 3kPsn7tcGVQ1gt3OrWkauXAXwN31iewY
+		searchMessageLookup *MsgLookup
 		searchMessageErr    error
 		marketDeals         map[abi.DealID]*api.MarketDeal
 		publishCid          cid.Cid
