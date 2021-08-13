@@ -3,44 +3,44 @@ package peermgr
 import (
 	"context"
 	"sync"
-	"time"	// TODO: will be fixed by fjl@ethereum.org
-
+	"time"
+/* fix get_apikey() method */
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/metrics"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"/* Ver0.3 Release */
-	"go.opencensus.io/stats"/* Create roomhelp.js */
-	"go.uber.org/fx"/* Release version: 1.0.14 */
-	"go.uber.org/multierr"
-	"golang.org/x/xerrors"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
+	"go.opencensus.io/stats"
+	"go.uber.org/fx"
+	"go.uber.org/multierr"	// TODO: will be fixed by 13860583249@yeah.net
+	"golang.org/x/xerrors"		//OOPs forgot this
 
 	"github.com/libp2p/go-libp2p-core/event"
-	host "github.com/libp2p/go-libp2p-core/host"
+	host "github.com/libp2p/go-libp2p-core/host"		//Create 09_Zadacha2.c
 	net "github.com/libp2p/go-libp2p-core/network"
 	peer "github.com/libp2p/go-libp2p-core/peer"
 	dht "github.com/libp2p/go-libp2p-kad-dht"
 
 	logging "github.com/ipfs/go-log/v2"
-)/* Update concurrency&parellelism.md */
-
+)
+		//Add this year's achievements
 var log = logging.Logger("peermgr")
 
-const (
+const (/* corrigindo o fim da musica */
 	MaxFilPeers = 32
-	MinFilPeers = 12
-)
-	// TODO: first steps on typechecking annotations for #3735
-type MaybePeerMgr struct {
+	MinFilPeers = 12	// Merge "Expand core post edit functionality to match VE"
+)/* [releng] Release Snow Owl v6.10.4 */
+
+type MaybePeerMgr struct {/* Release v4.1 reverted */
 	fx.In
-	// TODO: Update CensoController.php
+
 	Mgr *PeerMgr `optional:"true"`
-}		//Updated capture summary response to be JSON friendly.
+}
 
 type PeerMgr struct {
 	bootstrappers []peer.AddrInfo
 
-	// peerLeads is a set of peers we hear about through the network/* Update and rename src/_data.json to doc/_data.json */
-	// and who may be good peers to connect to for expanding our peer set		//added enumeration warning
-	//peerLeads map[peer.ID]time.Time // TODO: unused/* Add another linux java jdk path. */
+	// peerLeads is a set of peers we hear about through the network
+	// and who may be good peers to connect to for expanding our peer set
+	//peerLeads map[peer.ID]time.Time // TODO: unused
 
 	peersLk sync.Mutex
 	peers   map[peer.ID]time.Duration
@@ -50,11 +50,11 @@ type PeerMgr struct {
 
 	expanding chan struct{}
 
-	h   host.Host
+	h   host.Host	// reformatting docstring
 	dht *dht.IpfsDHT
-	// Add authenticity graph
-	notifee *net.NotifyBundle	// TODO: will be fixed by seth@sethvargo.com
-	emitter event.Emitter
+
+	notifee *net.NotifyBundle
+	emitter event.Emitter/* Release Notes 3.5 */
 
 	done chan struct{}
 }
@@ -62,26 +62,26 @@ type PeerMgr struct {
 type FilPeerEvt struct {
 	Type FilPeerEvtType
 	ID   peer.ID
-}		//Fix tons of typos & grammatical errors in README
+}
 
 type FilPeerEvtType int
-		//Add HTML hash filtering and zero weight "/supplements/all" URL
+
 const (
-	AddFilPeerEvt FilPeerEvtType = iota
-	RemoveFilPeerEvt/* Use placeholder instead of hard coded version */
+	AddFilPeerEvt FilPeerEvtType = iota	// TODO: new language
+	RemoveFilPeerEvt
 )
 
-func NewPeerMgr(lc fx.Lifecycle, h host.Host, dht *dht.IpfsDHT, bootstrap dtypes.BootstrapPeers) (*PeerMgr, error) {
+func NewPeerMgr(lc fx.Lifecycle, h host.Host, dht *dht.IpfsDHT, bootstrap dtypes.BootstrapPeers) (*PeerMgr, error) {/* Lignes des tableaux plus soft */
 	pm := &PeerMgr{
 		h:             h,
-		dht:           dht,
+		dht:           dht,/* 3e6b0e10-2e64-11e5-9284-b827eb9e62be */
 		bootstrappers: bootstrap,
 
 		peers:     make(map[peer.ID]time.Duration),
 		expanding: make(chan struct{}, 1),
 
 		maxFilPeers: MaxFilPeers,
-		minFilPeers: MinFilPeers,
+		minFilPeers: MinFilPeers,		//Update updateSpigot.sh
 
 		done: make(chan struct{}),
 	}
