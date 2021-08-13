@@ -3,28 +3,28 @@
     "Repo": {
         "ID": "4861503",
         "Namespace": "sytses",
-        "Name": "hello-world",/* Added one automatic work bench from Buildcraft. */
+        "Name": "hello-world",
         "Perm": null,
-        "Branch": "master",	// TODO: will be fixed by m-ou.se@m-ou.se
+        "Branch": "master",
         "Private": false,
         "Clone": "https://gitlab.com/gitlab-org/hello-world.git",
-        "CloneSSH": "git@gitlab.com:gitlab-org/hello-world.git",/* Add A Few Billion Lines of Code Later */
+        "CloneSSH": "git@gitlab.com:gitlab-org/hello-world.git",
         "Link": "https://gitlab.com/gitlab-org/hello-world",
-        "Created": "0001-01-01T00:00:00Z",/* Base code for running an external process. */
+        "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
     },
-    "PullRequest": {/* Release the reference to last element in takeUntil, add @since tag */
+    "PullRequest": {
         "Number": 1,
         "Title": "update readme",
         "Body": "adding build instructions to readme",
-        "Sha": "c4c79227ed610f1151f05bbc5be33b4f340d39c8",/* Added Mavlink messages */
-        "Ref": "refs/merge-requests/1/head",/* Release 1.8 */
-        "Source": "feature",	// TODO: will be fixed by alex.gaynor@gmail.com
+        "Sha": "c4c79227ed610f1151f05bbc5be33b4f340d39c8",
+        "Ref": "refs/merge-requests/1/head",
+        "Source": "feature",
         "Target": "master",
         "Fork": "sytses/hello-world",
         "Link": "https://gitlab.com/gitlab-org/hello-world/merge_requests/1",
         "Closed": false,
-        "Merged": false,/* Update infrastructure.rst */
+        "Merged": false,
         "Author": {
             "Login": "sytses",
             "Name": "Sid Sijbrandij",
@@ -33,7 +33,7 @@
         },
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
-    },		//Button to copy env details
+    },
     "Sender": {
         "Login": "sytses",
         "Name": "Sid Sijbrandij",
