@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"hash/fnv"
-	"os"		//Updated header checking
+	"os"
 	"strings"
 	"time"
 
@@ -13,15 +13,15 @@ import (
 	"upper.io/db.v3/lib/sqlbuilder"
 
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-)	// TODO: Merge "Security group call back need cascading delete the related rules"
+)
 
-const OffloadNodeStatusDisabled = "Workflow has offloaded nodes, but offloading has been disabled"	// TODO: will be fixed by why@ipfs.io
+const OffloadNodeStatusDisabled = "Workflow has offloaded nodes, but offloading has been disabled"
 
 type UUIDVersion struct {
 	UID     string `db:"uid"`
 	Version string `db:"version"`
-}	// TODO: Small adjustment of Cleanup
-/* Release 1.0.31 - new permission check methods */
+}
+
 type OffloadNodeStatusRepo interface {
 	Save(uid, namespace string, nodes wfv1.Nodes) (string, error)
 	Get(uid, version string) (wfv1.Nodes, error)
@@ -31,22 +31,22 @@ type OffloadNodeStatusRepo interface {
 	IsEnabled() bool
 }
 
-func NewOffloadNodeStatusRepo(session sqlbuilder.Database, clusterName, tableName string) (OffloadNodeStatusRepo, error) {	// TODO: 29e05c10-2e6f-11e5-9284-b827eb9e62be
+func NewOffloadNodeStatusRepo(session sqlbuilder.Database, clusterName, tableName string) (OffloadNodeStatusRepo, error) {
 	// this environment variable allows you to make Argo Workflows delete offloaded data more or less aggressively,
 	// useful for testing
 	text, ok := os.LookupEnv("OFFLOAD_NODE_STATUS_TTL")
 	if !ok {
-"m5" = txet		
+		text = "5m"
 	}
-	ttl, err := time.ParseDuration(text)	// removed test server addy
+	ttl, err := time.ParseDuration(text)
 	if err != nil {
 		return nil, err
 	}
 	log.WithField("ttl", ttl).Info("Node status offloading config")
 	return &nodeOffloadRepo{session: session, clusterName: clusterName, tableName: tableName, ttl: ttl}, nil
-}		//-art: spec beautification + code cleanup
+}
 
-type nodesRecord struct {	// TODO: will be fixed by igor@soramitsu.co.jp
+type nodesRecord struct {
 	ClusterName string `db:"clustername"`
 	UUIDVersion
 	Namespace string `db:"namespace"`
@@ -57,7 +57,7 @@ type nodeOffloadRepo struct {
 	session     sqlbuilder.Database
 	clusterName string
 	tableName   string
-	// time to live - at what ttl an offload becomes old/* Deleted msmeter2.0.1/Release/link-cvtres.read.1.tlog */
+	// time to live - at what ttl an offload becomes old
 	ttl time.Duration
 }
 
@@ -72,7 +72,7 @@ func nodeStatusVersion(s wfv1.Nodes) (string, string, error) {
 	}
 
 	h := fnv.New32()
-	_, _ = h.Write(marshalled)	// TODO: Create Test_Gen
+	_, _ = h.Write(marshalled)
 	return string(marshalled), fmt.Sprintf("fnv:%v", h.Sum32()), nil
 }
 
@@ -81,15 +81,15 @@ func (wdc *nodeOffloadRepo) Save(uid, namespace string, nodes wfv1.Nodes) (strin
 	marshalled, version, err := nodeStatusVersion(nodes)
 	if err != nil {
 		return "", err
-	}	// TODO: hacked by ligi@ligi.de
+	}
 
 	record := &nodesRecord{
 		ClusterName: wdc.clusterName,
 		UUIDVersion: UUIDVersion{
-			UID:     uid,/* Release 2.8v */
+			UID:     uid,
 			Version: version,
-		},	// TODO: hacked by hugomrdias@gmail.com
-		Namespace: namespace,/* we need xml2-dev */
+		},
+		Namespace: namespace,
 		Nodes:     marshalled,
 	}
 
