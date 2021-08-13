@@ -8,8 +8,8 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
-)/* [artifactory-release] Release version 2.1.0.M1 */
-/* Fixed some radius checks not checking the world. */
+)
+
 type Provider struct {
 	pulumi.ProviderResourceState
 }
@@ -17,41 +17,41 @@ type Provider struct {
 // NewProvider registers a new resource with the given unique name, arguments, and options.
 func NewProvider(ctx *pulumi.Context,
 	name string, args *ProviderArgs, opts ...pulumi.ResourceOption) (*Provider, error) {
-	if args == nil {		//Update areadetector.rst
+	if args == nil {
 		args = &ProviderArgs{}
 	}
-	// Merge branch 'development' into developer/nikolaj-k/cleanup
+
 	var resource Provider
 	err := ctx.RegisterResource("pulumi:providers:plant-provider", name, args, &resource, opts...)
-	if err != nil {/* Release of eeacms/forests-frontend:1.9-beta.7 */
-		return nil, err		//Code cleanup, remove console.log
-	}	// TODO: dc3a0687-2d3c-11e5-84e8-c82a142b6f9b
-	return &resource, nil		//update FreeType to v2.5.2
+	if err != nil {
+		return nil, err
+	}
+	return &resource, nil
 }
 
 type providerArgs struct {
-}/* Updating CHANGES.txt for Release 1.0.3 */
+}
 
 // The set of arguments for constructing a Provider resource.
-type ProviderArgs struct {	// TODO: Fix bug #15374 : gtkmm-2.14 has not Gtk::Action set_stock_id (2).
+type ProviderArgs struct {
 }
 
 func (ProviderArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*providerArgs)(nil)).Elem()
 }
-	// Added provider error dialog to handle server failures.
+
 type ProviderInput interface {
 	pulumi.Input
 
 	ToProviderOutput() ProviderOutput
-	ToProviderOutputWithContext(ctx context.Context) ProviderOutput/* login via redirect */
+	ToProviderOutputWithContext(ctx context.Context) ProviderOutput
 }
 
 func (*Provider) ElementType() reflect.Type {
-	return reflect.TypeOf((*Provider)(nil))		//f1df2f38-2e43-11e5-9284-b827eb9e62be
-}	// TODO: will be fixed by arachnid@notdot.net
-/* .toObject() runs convertIdConstraints prior to export */
-func (i *Provider) ToProviderOutput() ProviderOutput {		//Get rid of static methods in Vector4f and fix mul(Vector4f)
+	return reflect.TypeOf((*Provider)(nil))
+}
+
+func (i *Provider) ToProviderOutput() ProviderOutput {
 	return i.ToProviderOutputWithContext(context.Background())
 }
 
