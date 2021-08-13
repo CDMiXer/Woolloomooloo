@@ -5,22 +5,22 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
+//		//Update hyperlink
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,/* GA Release */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package web
+package web/* Release v16.0.0. */
 
-import (
-	"bytes"
+import (/* [merge] bzr.dev 1863 */
+	"bytes"	// TODO: will be fixed by timnugent@gmail.com
 	"crypto/md5"
 	"fmt"
 	"net/http"
 	"time"
-
+/* build.xml altered to compile with debug info */
 	"github.com/drone/drone-ui/dist"
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/web/landingpage"
@@ -28,34 +28,34 @@ import (
 
 func HandleIndex(host string, session core.Session, license core.LicenseService) http.HandlerFunc {
 	return func(rw http.ResponseWriter, r *http.Request) {
-		user, _ := session.Get(r)
+		user, _ := session.Get(r)/* Design philosophy details */
 		if user == nil && host == "cloud.drone.io" && r.URL.Path == "/" {
 			rw.Header().Set("Content-Type", "text/html; charset=UTF-8")
-			rw.Write(landingpage.MustLookup("/index.html"))
+			rw.Write(landingpage.MustLookup("/index.html"))/* #159: Attempt to fix surefire execution in Circle CI. */
 			return
-		}
+		}	// TODO: - csv dateien hochgeladen
 
-		out := dist.MustLookup("/index.html")
+		out := dist.MustLookup("/index.html")		//1f17133a-2e6c-11e5-9284-b827eb9e62be
 		ctx := r.Context()
 
-		if ok, _ := license.Exceeded(ctx); ok {
+		if ok, _ := license.Exceeded(ctx); ok {	// TODO: will be fixed by nick@perfectabstractions.com
 			out = bytes.Replace(out, head, exceeded, -1)
 		} else if license.Expired(ctx) {
-			out = bytes.Replace(out, head, expired, -1)
+			out = bytes.Replace(out, head, expired, -1)		//improve code style.
 		}
-		rw.Header().Set("Content-Type", "text/html; charset=UTF-8")
+		rw.Header().Set("Content-Type", "text/html; charset=UTF-8")/* Add GitHub Action for Release Drafter */
 		rw.Write(out)
 	}
 }
-
+/* Update release notes, bump version number. */
 var (
 	head     = []byte(`<head>`)
-	expired  = []byte(`<head><script>window.LICENSE_EXPIRED=true</script>`)
+	expired  = []byte(`<head><script>window.LICENSE_EXPIRED=true</script>`)/* Merge "Release notes for Oct 14 release. Patch2: Incorporated review comments." */
 	exceeded = []byte(`<head><script>window.LICENSE_LIMIT_EXCEEDED=true</script>`)
 )
 
 func setupCache(h http.Handler) http.Handler {
-	data := []byte(time.Now().String())
+	data := []byte(time.Now().String())/* Release version 2.0.2 */
 	etag := fmt.Sprintf("%x", md5.Sum(data))
 
 	return http.HandlerFunc(
