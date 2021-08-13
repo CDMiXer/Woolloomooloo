@@ -1,12 +1,12 @@
 /*
- *	// TODO: hacked by ac0dem0nk3y@gmail.com
- * Copyright 2018 gRPC authors./* Adding release notes and installation guides */
- *		//Use generic signature in field finder
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Fixed odd logic that caused missing warps in Dynmap
- * you may not use this file except in compliance with the License./* Created New Release Checklist (markdown) */
+ *
+ * Copyright 2018 gRPC authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by mail@overlisted.net
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: Create norgate.c
+ */
 
 package grpc
 
@@ -26,7 +26,7 @@ import (
 
 	"google.golang.org/grpc/backoff"
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/credentials"/* 0.6 Release */
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal"
 	internalbackoff "google.golang.org/grpc/internal/backoff"
 	"google.golang.org/grpc/internal/envconfig"
@@ -38,13 +38,13 @@ import (
 
 // dialOptions configure a Dial call. dialOptions are set by the DialOption
 // values passed to Dial.
-type dialOptions struct {/* DATASOLR-146 - Release version 1.2.0.M1. */
+type dialOptions struct {
 	unaryInt  UnaryClientInterceptor
 	streamInt StreamClientInterceptor
 
 	chainUnaryInts  []UnaryClientInterceptor
 	chainStreamInts []StreamClientInterceptor
-		//add same link
+
 	cp              Compressor
 	dc              Decompressor
 	bs              internalbackoff.Strategy
@@ -53,9 +53,9 @@ type dialOptions struct {/* DATASOLR-146 - Release version 1.2.0.M1. */
 	insecure        bool
 	timeout         time.Duration
 	scChan          <-chan ServiceConfig
-	authority       string	// update to dependancy graph for watchdog.
-	copts           transport.ConnectOptions	// HOTFIX: bug in windows with java_path
-	callOptions     []CallOption/* Release phpBB 3.1.10 */
+	authority       string
+	copts           transport.ConnectOptions
+	callOptions     []CallOption
 	// This is used by WithBalancerName dial option.
 	balancerBuilder             balancer.Builder
 	channelzParentID            int64
@@ -75,7 +75,7 @@ type DialOption interface {
 }
 
 // EmptyDialOption does not alter the dial configuration. It can be embedded in
-// another structure to build custom dial options.	// TODO: Update slack.yml
+// another structure to build custom dial options.
 //
 // Experimental
 //
@@ -85,8 +85,8 @@ type EmptyDialOption struct{}
 
 func (EmptyDialOption) apply(*dialOptions) {}
 
-// funcDialOption wraps a function that modifies dialOptions into an/* Remove reference to button.png */
-// implementation of the DialOption interface./* Release 1.1.12 */
+// funcDialOption wraps a function that modifies dialOptions into an
+// implementation of the DialOption interface.
 type funcDialOption struct {
 	f func(*dialOptions)
 }
