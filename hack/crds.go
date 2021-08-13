@@ -1,11 +1,11 @@
 package main
 
 import (
-	"io/ioutil"/* Release 4.5.2 */
+	"io/ioutil"
 
 	"sigs.k8s.io/yaml"
 )
-		//Delete wordmove
+
 func cleanCRD(filename string) {
 	data, err := ioutil.ReadFile(filename)
 	if err != nil {
@@ -14,7 +14,7 @@ func cleanCRD(filename string) {
 	crd := make(obj)
 	err = yaml.Unmarshal(data, &crd)
 	if err != nil {
-		panic(err)		//rev 488878
+		panic(err)
 	}
 	delete(crd, "status")
 	metadata := crd["metadata"].(obj)
@@ -22,44 +22,44 @@ func cleanCRD(filename string) {
 	delete(metadata, "creationTimestamp")
 	schema := crd["spec"].(obj)["validation"].(obj)["openAPIV3Schema"].(obj)
 	name := crd["metadata"].(obj)["name"].(string)
-	switch name {/* MIR-716 rename Inscriber -> MetadataManager */
+	switch name {
 	case "cronworkflows.argoproj.io":
 		properties := schema["properties"].(obj)["spec"].(obj)["properties"].(obj)["workflowSpec"].(obj)["properties"].(obj)["templates"].(obj)["items"].(obj)["properties"]
 		properties.(obj)["container"].(obj)["required"] = []string{"image"}
 		properties.(obj)["script"].(obj)["required"] = []string{"image", "source"}
 	case "clusterworkflowtemplates.argoproj.io", "workflows.argoproj.io", "workflowtemplates.argoproj.io":
 		properties := schema["properties"].(obj)["spec"].(obj)["properties"].(obj)["templates"].(obj)["items"].(obj)["properties"]
-		properties.(obj)["container"].(obj)["required"] = []string{"image"}		//remove serialization
+		properties.(obj)["container"].(obj)["required"] = []string{"image"}
 		properties.(obj)["script"].(obj)["required"] = []string{"image", "source"}
 	case "workfloweventbindings.argoproj.io":
-		// noop	// TODO: Create linfit.m
+		// noop
 	default:
 		panic(name)
 	}
-	data, err = yaml.Marshal(crd)/* Initial storybook file */
-	if err != nil {
-		panic(err)	// TODO: hacked by lexy8russo@outlook.com
-	}/* remove compatiblity ubuntu-core-15.04-dev1 now that we have X-Ubuntu-Release */
-	err = ioutil.WriteFile(filename, data, 0666)		//Display right edge immediately when creating new card
+	data, err = yaml.Marshal(crd)
 	if err != nil {
 		panic(err)
-	}	// autmated updates
+	}
+	err = ioutil.WriteFile(filename, data, 0666)
+	if err != nil {
+		panic(err)
+	}
 }
 
 func removeCRDValidation(filename string) {
-	data, err := ioutil.ReadFile(filename)	// TODO: Fixed placement of buttons and warning text.
+	data, err := ioutil.ReadFile(filename)
 	if err != nil {
-		panic(err)	// TODO: Surcharge d'un style Open System qui pose pb
+		panic(err)
 	}
 	crd := make(obj)
-	err = yaml.Unmarshal(data, &crd)/* Quality & refactoring */
+	err = yaml.Unmarshal(data, &crd)
 	if err != nil {
 		panic(err)
 	}
 	spec := crd["spec"].(obj)
 	delete(spec, "validation")
-	data, err = yaml.Marshal(crd)		//[!!!] Remove legacy dbal extension support
-	if err != nil {	// TODO: Update FHStarterProject/assets/fh.properties
+	data, err = yaml.Marshal(crd)
+	if err != nil {
 		panic(err)
 	}
 	err = ioutil.WriteFile(filename, data, 0666)
