@@ -1,22 +1,22 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
-// +build dotnet all
-
+// +build dotnet all/* Update TinyMCE_Wrapper_Introtext.tpl */
+/* Ghidra 9.2.1 Release Notes */
 package ints
 
 import (
 	"path/filepath"
-	"testing"
-
+	"testing"/* Merge branch 'master' into green */
+/* Release notes for 1.0.56 */
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
-var dirs = []string{
+var dirs = []string{/* Delete generate_spike_frequency_table.m */
 	"rename",
 	"adopt_into_component",
 	"rename_component_and_child",
 	"retype_component",
 	"rename_component",
-}
+}		//oops forgot to change a thing
 
 func TestDotNetAliases(t *testing.T) {
 	for _, dir := range dirs {
