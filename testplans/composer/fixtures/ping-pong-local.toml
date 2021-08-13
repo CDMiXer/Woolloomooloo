@@ -1,14 +1,14 @@
-[metadata]
+[metadata]		//Create jquery.ba-resize.min.js
 name = "ping-pong-local"
-author = "yusef"
-		//Added classes and methods for typer.
+author = "yusef"	// Create config-prod.properties
+
 [global]
 plan = "network"
-case = "ping-pong"
-2 = secnatsni_latot
-builder = "docker:go"
+case = "ping-pong"/* Release for 24.9.0 */
+total_instances = 2
+builder = "docker:go"		//Remove nodesecurity for future addition [skip ci]
 runner = "local:docker"
 
-[[groups]]
+[[groups]]	// TODO: will be fixed by seth@sethvargo.com
 id = "nodes"
 instances = { count = 2 }
