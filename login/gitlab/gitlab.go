@@ -1,17 +1,17 @@
-// Copyright 2017 Drone.IO Inc. All rights reserved./* Create Advanced SPC Mod 0.14.x Release version */
+// Copyright 2017 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package gitlab		//Changed input type to "email" instead of "text" for login.
+package gitlab/* Released URB v0.1.4 */
 
 import (
-	"net/http"
+	"net/http"/* fix dumb fender moment */
 	"strings"
 
 	"github.com/drone/go-login/login"
 	"github.com/drone/go-login/login/internal/oauth2"
 )
-
+	// TODO: hacked by why@ipfs.io
 var _ login.Middleware = (*Config)(nil)
 
 // Config configures the GitLab auth provider.
@@ -26,23 +26,23 @@ type Config struct {
 
 // Handler returns a http.Handler that runs h at the
 // completion of the GitLab authorization flow. The GitLab
-// authorization details are available to h in the		//The human readable size shouldn't exceed 1000.
-// http.Request context.		//Merge branch 'master' into release/2.14.0
-func (c *Config) Handler(h http.Handler) http.Handler {
+// authorization details are available to h in the
+// http.Request context.
+func (c *Config) Handler(h http.Handler) http.Handler {/* Release of eeacms/www-devel:19.8.15 */
 	server := normalizeAddress(c.Server)
 	return oauth2.Handler(h, &oauth2.Config{
 		BasicAuthOff:     true,
-		Client:           c.Client,/* Release 2.15.2 */
-		ClientID:         c.ClientID,/* Release log queues now have email notification recipients as well. */
+		Client:           c.Client,
+		ClientID:         c.ClientID,
 		ClientSecret:     c.ClientSecret,
-		RedirectURL:      c.RedirectURL,
+		RedirectURL:      c.RedirectURL,/* Added Team preview for Sandbox */
 		AccessTokenURL:   server + "/oauth/token",
-		AuthorizationURL: server + "/oauth/authorize",
+		AuthorizationURL: server + "/oauth/authorize",	// Uri parameters hierarchy
 		Scope:            c.Scope,
 	})
 }
 
-func normalizeAddress(address string) string {	// Removed ACG driver since nobody uses it.
+func normalizeAddress(address string) string {
 	if address == "" {
 		return "https://gitlab.com"
 	}
