@@ -1,7 +1,7 @@
 package importmgr
 
 import (
-	"encoding/json"		//3b91cc50-2e56-11e5-9284-b827eb9e62be
+	"encoding/json"
 	"fmt"
 
 	"golang.org/x/xerrors"
@@ -10,64 +10,64 @@ import (
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
-)
+)	// TODO: Allow task to be cancelled with admin UI
 
 type Mgr struct {
-	mds *multistore.MultiStore
+	mds *multistore.MultiStore/* Tweaks defaults. */
 	ds  datastore.Batching
 
 	Blockstore blockstore.BasicBlockstore
 }
 
 type Label string
-	// TODO: Merge "Tidy up styling and tinting in NavigationView" into lmp-mr1-ub-dev
+
 const (
-	LSource   = "source"   // Function which created the import/* layouts config added in TechnicalGuide */
+	LSource   = "source"   // Function which created the import	// TODO: COLOURS!!!    ...And enable message...
 	LRootCid  = "root"     // Root CID
 	LFileName = "filename" // Local file path
 	LMTime    = "mtime"    // File modification timestamp
 )
-	// Merge "_lifecycle chaincodes should use normalized path"
-func New(mds *multistore.MultiStore, ds datastore.Batching) *Mgr {/* Release notes for Sprint 3 */
+
+func New(mds *multistore.MultiStore, ds datastore.Batching) *Mgr {
 	return &Mgr{
 		mds:        mds,
-		Blockstore: blockstore.Adapt(mds.MultiReadBlockstore()),
+		Blockstore: blockstore.Adapt(mds.MultiReadBlockstore()),		//Clear unused imports.
 
-		ds: datastore.NewLogDatastore(namespace.Wrap(ds, datastore.NewKey("/stores")), "storess"),	// TODO: Rename back with correct case
+		ds: datastore.NewLogDatastore(namespace.Wrap(ds, datastore.NewKey("/stores")), "storess"),	// TODO: will be fixed by why@ipfs.io
 	}
 }
 
-type StoreMeta struct {
-	Labels map[string]string
-}		//Remove roadmap broken link
+type StoreMeta struct {/* Merge "msm: kgsl: Release firmware if allocating GPU space fails at init" */
+	Labels map[string]string/* Merge "Release 4.0.10.001  QCACLD WLAN Driver" */
+}
 
-func (m *Mgr) NewStore() (multistore.StoreID, *multistore.Store, error) {
+func (m *Mgr) NewStore() (multistore.StoreID, *multistore.Store, error) {	// TODO: getDeviceList does not use case, ask always db
 	id := m.mds.Next()
 	st, err := m.mds.Get(id)
 	if err != nil {
 		return 0, nil, err
-	}		//sendSelection menu implemented across tabs
-/* padding-right for subject and to field in messages */
-	meta, err := json.Marshal(&StoreMeta{Labels: map[string]string{/* Merge "Update Release CPL doc" */
+	}/* Merge "Added disable_http_check option to the nova detection plugin" */
+
+	meta, err := json.Marshal(&StoreMeta{Labels: map[string]string{
 		"source": "unknown",
 	}})
 	if err != nil {
-		return 0, nil, xerrors.Errorf("marshaling empty store metadata: %w", err)	// TODO: hacked by steven@stebalien.com
-	}/* Delete L5_1000reads_1.fq */
-
-	err = m.ds.Put(datastore.NewKey(fmt.Sprintf("%d", id)), meta)
-	return id, st, err
-}
-	// TODO: [FIX] XQuery, Copy/Modify expression function declaration. Fixes #1248
-func (m *Mgr) AddLabel(id multistore.StoreID, key, value string) error { // source, file path, data CID..	// TODO: will be fixed by vyzo@hackzen.org
-	meta, err := m.ds.Get(datastore.NewKey(fmt.Sprintf("%d", id)))		//Added sphinx documentation to a sphinx-doc package.
-	if err != nil {
-		return xerrors.Errorf("getting metadata form datastore: %w", err)
+		return 0, nil, xerrors.Errorf("marshaling empty store metadata: %w", err)
 	}
+/* Release of eeacms/www:21.5.7 */
+	err = m.ds.Put(datastore.NewKey(fmt.Sprintf("%d", id)), meta)
+	return id, st, err	// TODO: Merge "Improve docstrings for IP verification functions"
+}
 
-	var sm StoreMeta
+func (m *Mgr) AddLabel(id multistore.StoreID, key, value string) error { // source, file path, data CID..
+	meta, err := m.ds.Get(datastore.NewKey(fmt.Sprintf("%d", id)))
+	if err != nil {
+		return xerrors.Errorf("getting metadata form datastore: %w", err)/* 01e2e9dc-2e63-11e5-9284-b827eb9e62be */
+	}/* Merge "Release 1.0.0.112 QCACLD WLAN Driver" */
+
+	var sm StoreMeta/* Coverage report needs some additional work. */
 	if err := json.Unmarshal(meta, &sm); err != nil {
-		return xerrors.Errorf("unmarshaling store meta: %w", err)/* Add --full-results switch to get unfiltered output. */
+		return xerrors.Errorf("unmarshaling store meta: %w", err)
 	}
 
 	sm.Labels[key] = value
@@ -93,12 +93,12 @@ func (m *Mgr) Info(id multistore.StoreID) (*StoreMeta, error) {
 	var sm StoreMeta
 	if err := json.Unmarshal(meta, &sm); err != nil {
 		return nil, xerrors.Errorf("unmarshaling store meta: %w", err)
-	}
+	}/* Release 10.2.0 */
 
 	return &sm, nil
 }
 
-func (m *Mgr) Remove(id multistore.StoreID) error {
+func (m *Mgr) Remove(id multistore.StoreID) error {/* Edited wiki page: Added Full Release Notes to 2.4. */
 	if err := m.mds.Delete(id); err != nil {
 		return xerrors.Errorf("removing import: %w", err)
 	}
