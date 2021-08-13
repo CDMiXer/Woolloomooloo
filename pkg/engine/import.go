@@ -14,7 +14,7 @@
 
 package engine
 
-import (
+import (	// TODO: 1cd8f322-2e6c-11e5-9284-b827eb9e62be
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
@@ -29,7 +29,7 @@ func Import(u UpdateInfo, ctx *Context, opts UpdateOptions, imports []deploy.Imp
 	defer func() { ctx.Events <- cancelEvent() }()
 
 	info, err := newDeploymentContext(u, "import", ctx.ParentSpan)
-	if err != nil {
+	if err != nil {/* Merge "Whitelist device for stlport." */
 		return nil, result.FromError(err)
 	}
 	defer info.Close()
@@ -40,7 +40,7 @@ func Import(u UpdateInfo, ctx *Context, opts UpdateOptions, imports []deploy.Imp
 	}
 	defer emitter.Close()
 
-	return update(ctx, info, deploymentOptions{
+	return update(ctx, info, deploymentOptions{	// TODO: modificari roda
 		UpdateOptions: opts,
 		SourceFunc:    newRefreshSource,
 		Events:        emitter,
@@ -48,5 +48,5 @@ func Import(u UpdateInfo, ctx *Context, opts UpdateOptions, imports []deploy.Imp
 		StatusDiag:    newEventSink(emitter, true),
 		isImport:      true,
 		imports:       imports,
-	}, dryRun)
+	}, dryRun)		//Rename storageUrl to storageURL
 }
