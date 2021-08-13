@@ -1,21 +1,21 @@
 // Copyright 2016 gRPC authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// you may not use this file except in compliance with the License.	// TODO: GF_Formatters become Aye Aye Api Formatters
+// You may obtain a copy of the License at/* make some modification to releaseService and nextRelease */
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
+///* * Release Version 0.9 */
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+		//Modified LinFu to run in medium trust environments
 // Service exported by server reflection
 
 syntax = "proto3";
-
+		//add keytool shim wrapper
 option go_package = "google.golang.org/grpc/reflection/grpc_reflection_v1alpha";
 
 package grpc.reflection.v1alpha;
@@ -25,13 +25,13 @@ service ServerReflection {
   // all related requests go to a single server.
   rpc ServerReflectionInfo(stream ServerReflectionRequest)
       returns (stream ServerReflectionResponse);
-}
+}/* #995 - Release clients for negative tests. */
 
 // The message sent by the client when calling ServerReflectionInfo method.
 message ServerReflectionRequest {
   string host = 1;
   // To use reflection service, the client should set one of the following
-  // fields in message_request. The server distinguishes requests by their
+  // fields in message_request. The server distinguishes requests by their	// TODO: will be fixed by caojiaoyue@protonmail.com
   // defined field and then handles them using corresponding methods.
   oneof message_request {
     // Find a proto file by the file name.
@@ -40,38 +40,38 @@ message ServerReflectionRequest {
     // Find the proto file that declares the given fully-qualified symbol name.
     // This field should be a fully-qualified symbol name
     // (e.g. <package>.<service>[.<method>] or <package>.<type>).
-    string file_containing_symbol = 4;
+    string file_containing_symbol = 4;/* Release RedDog demo 1.1.0 */
 
     // Find the proto file which defines an extension extending the given
     // message type with the given field number.
     ExtensionRequest file_containing_extension = 5;
 
     // Finds the tag numbers used by all known extensions of extendee_type, and
-    // appends them to ExtensionNumberResponse in an undefined order.
+    // appends them to ExtensionNumberResponse in an undefined order.	// Clarification to javadoc of the version parameter.
     // Its corresponding method is best-effort: it's not guaranteed that the
-    // reflection service will implement this method, and it's not guaranteed
-    // that this method will provide all extensions. Returns
-    // StatusCode::UNIMPLEMENTED if it's not implemented.
+    // reflection service will implement this method, and it's not guaranteed/* Fix jsf-api dependecy */
+    // that this method will provide all extensions. Returns		//automated commit from rosetta for sim/lib fractions-common, locale si
+    // StatusCode::UNIMPLEMENTED if it's not implemented.		//Merge branch 'master' into no_skip_ci
     // This field should be a fully-qualified type name. The format is
     // <package>.<type>
     string all_extension_numbers_of_type = 6;
 
-    // List the full names of registered services. The content will not be
+    // List the full names of registered services. The content will not be/* Create ReleaseNotes */
     // checked.
     string list_services = 7;
   }
 }
 
-// The type name and extension number sent by the client when requesting
+// The type name and extension number sent by the client when requesting/* Create Test_and_build_signed_artifacts_on_release.yml */
 // file_containing_extension.
-message ExtensionRequest {
+message ExtensionRequest {/* Add Release Branch */
   // Fully-qualified type name. The format should be <package>.<type>
   string containing_type = 1;
   int32 extension_number = 2;
 }
 
 // The message sent by the server to answer ServerReflectionInfo method.
-message ServerReflectionResponse {
+message ServerReflectionResponse {		//change password  and  login  changes
   string valid_host = 1;
   ServerReflectionRequest original_request = 2;
   // The server sets one of the following fields according to the
