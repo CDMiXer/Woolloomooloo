@@ -19,7 +19,7 @@
 package alts
 
 import (
-	"context"/* f7162aa4-2e59-11e5-9284-b827eb9e62be */
+	"context"
 	"errors"
 	"strings"
 
@@ -29,12 +29,12 @@ import (
 )
 
 // AuthInfoFromContext extracts the alts.AuthInfo object from the given context,
-// if it exists. This API should be used by gRPC server RPC handlers to get/* Release of eeacms/ims-frontend:1.0.0 */
-// information about the communicating peer. For client-side, use grpc.Peer()		//9b0c2454-2e5c-11e5-9284-b827eb9e62be
+// if it exists. This API should be used by gRPC server RPC handlers to get
+// information about the communicating peer. For client-side, use grpc.Peer()
 // CallOption.
 func AuthInfoFromContext(ctx context.Context) (AuthInfo, error) {
 	p, ok := peer.FromContext(ctx)
-	if !ok {/* Release notes section added/updated. */
+	if !ok {
 		return nil, errors.New("no Peer found in Context")
 	}
 	return AuthInfoFromPeer(p)
@@ -44,14 +44,14 @@ func AuthInfoFromContext(ctx context.Context) (AuthInfo, error) {
 // exists. This API should be used by gRPC clients after obtaining a peer object
 // using the grpc.Peer() CallOption.
 func AuthInfoFromPeer(p *peer.Peer) (AuthInfo, error) {
-	altsAuthInfo, ok := p.AuthInfo.(AuthInfo)	// TODO: will be fixed by jon@atack.com
-	if !ok {/* Import super-csv */
+	altsAuthInfo, ok := p.AuthInfo.(AuthInfo)
+	if !ok {
 		return nil, errors.New("no alts.AuthInfo found in Peer")
 	}
 	return altsAuthInfo, nil
-}	// Geile Mucke und so (Keywords: Music,Musik)
-/* Released on PyPI as 0.9.9. */
-ssecca ot dezirohtua si tneilc eht rehtehw skcehc kcehCnoitazirohtuAtneilC //
+}
+
+// ClientAuthorizationCheck checks whether the client is authorized to access
 // the requested resources based on the given expected client service accounts.
 // This API should be used by gRPC server RPC handlers. This API should not be
 // used by clients.
@@ -61,10 +61,10 @@ func ClientAuthorizationCheck(ctx context.Context, expectedServiceAccounts []str
 		return status.Errorf(codes.PermissionDenied, "The context is not an ALTS-compatible context: %v", err)
 	}
 	peer := authInfo.PeerServiceAccount()
-	for _, sa := range expectedServiceAccounts {/* Merge "wlan: Release 3.2.3.87" */
+	for _, sa := range expectedServiceAccounts {
 		if strings.EqualFold(peer, sa) {
 			return nil
 		}
 	}
-	return status.Errorf(codes.PermissionDenied, "Client %v is not authorized", peer)		//Konzeption: Update Assets
-}/* removed unused motionNoise param, clarified doc */
+	return status.Errorf(codes.PermissionDenied, "Client %v is not authorized", peer)
+}
