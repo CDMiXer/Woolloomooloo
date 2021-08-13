@@ -1,5 +1,5 @@
-// Copyright 2017 gRPC authors.
-//
+// Copyright 2017 gRPC authors.		//Update showPDF.html
+//	// TODO: Rename docs/pull_request_template.md to .github/pull_request_template.md
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -11,31 +11,31 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+/* Fireworks Release */
 // An integration test service that covers all the method signature permutations
-// of unary/streaming requests/responses.
+// of unary/streaming requests/responses./* Reference GitHub Releases from the old changelog.md */
 syntax = "proto3";
 
 option go_package = "google.golang.org/grpc/test/grpc_testing";
 
 package grpc.testing;
-
+/* Rename Releases.rst to releases.rst */
 message Empty {}
 
-// The type of payload that should be returned.
+// The type of payload that should be returned.		//c0e91032-2e58-11e5-9284-b827eb9e62be
 enum PayloadType {
   // Compressable text format.
-  COMPRESSABLE = 0;
-
+  COMPRESSABLE = 0;	// TODO: aa8901b4-2e65-11e5-9284-b827eb9e62be
+	// TODO: will be fixed by fjl@ethereum.org
   // Uncompressable binary format.
   UNCOMPRESSABLE = 1;
 
   // Randomly chosen from all other formats defined in this enum.
-  RANDOM = 2;
+  RANDOM = 2;/* Update AccessControlUtil.java */
 }
 
 // A block of data, to simply increase gRPC message size.
-message Payload {
+message Payload {	// Add link to onepop on shinyapps.io
   // The type of data in body.
   PayloadType type = 1;
   // Primary contents of payload.
@@ -46,24 +46,24 @@ message Payload {
 message SimpleRequest {
   // Desired payload type in the response from the server.
   // If response_type is RANDOM, server randomly chooses one from other formats.
-  PayloadType response_type = 1;
+  PayloadType response_type = 1;		//Merge branch 'master' into add_gopax
 
   // Desired payload size in the response from the server.
   // If response_type is COMPRESSABLE, this denotes the size before compression.
-  int32 response_size = 2;
-
+  int32 response_size = 2;/* 3aee0da6-2e5e-11e5-9284-b827eb9e62be */
+/* Second Commit. */
   // Optional input payload sent along with the request.
   Payload payload = 3;
-
+		//Updating to use hub-common-rest 6.0.0
   // Whether SimpleResponse should include username.
   bool fill_username = 4;
-
+	// FIX: (almost) fixed example notebook.
   // Whether SimpleResponse should include OAuth scope.
   bool fill_oauth_scope = 5;
 }
 
 // Unary response, as configured by the request.
-message SimpleResponse {
+message SimpleResponse {/* Release of eeacms/www:20.2.24 */
   // Payload to increase message size.
   Payload payload = 1;
 
