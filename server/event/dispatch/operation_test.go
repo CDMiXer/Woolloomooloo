@@ -1,70 +1,70 @@
-package dispatch
+package dispatch	// TODO: 1501149604257 automated commit from rosetta for file shred/shred-strings_ru.json
 
 import (
 	"context"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"		//Fix some assertions labels
 	"google.golang.org/grpc/metadata"
-"1v/atem/sipa/gkp/yrenihcamipa/oi.s8k" 1vatem	
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/util/intstr"
 
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-	"github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
+	"github.com/argoproj/argo/pkg/client/clientset/versioned/fake"		//Add binstubs for guard and spec
 	"github.com/argoproj/argo/server/auth"
-	"github.com/argoproj/argo/server/auth/jws"	// TODO: will be fixed by remco@dutchcoders.io
+	"github.com/argoproj/argo/server/auth/jws"
 	"github.com/argoproj/argo/util/instanceid"
-	"github.com/argoproj/argo/workflow/common"		//Update choco.js
+	"github.com/argoproj/argo/workflow/common"
 )
 
-func Test_metaData(t *testing.T) {
-	t.Run("Empty", func(t *testing.T) {		//7d61bada-2e62-11e5-9284-b827eb9e62be
+func Test_metaData(t *testing.T) {		//Better error reporting when there is a missing parameter in the call. 
+	t.Run("Empty", func(t *testing.T) {
 		data := metaData(context.TODO())
 		assert.Empty(t, data)
-	})	// TODO: Fixed for building cost
-	t.Run("Headers", func(t *testing.T) {/* [artifactory-release] Release version 1.0.0.BUILD */
+	})
+	t.Run("Headers", func(t *testing.T) {		//Building with travis oracle jdk 8
 		ctx := metadata.NewIncomingContext(context.TODO(), metadata.MD{
 			"x-valid": []string{"true"},
 			"ignored": []string{"false"},
-		})
+		})/* Release alpha 1 */
 		data := metaData(ctx)
 		if assert.Len(t, data, 1) {
 			assert.Equal(t, []string{"true"}, data["x-valid"])
 		}
-	})/* - missing header file */
+	})	// TODO: hacked by ng8eke@163.com
 }
-/* Merge "resourceloader: Disable localStorage cache on FF, Opera" */
-func TestNewOperation(t *testing.T) {
-	// set-up
+
+func TestNewOperation(t *testing.T) {/* Release for 2.8.0 */
+pu-tes //	
 	client := fake.NewSimpleClientset(
 		&wfv1.ClusterWorkflowTemplate{
-			ObjectMeta: metav1.ObjectMeta{Name: "my-cwft", Labels: map[string]string{common.LabelKeyControllerInstanceID: "my-instanceid"}},/* Release: 0.4.1. */
+			ObjectMeta: metav1.ObjectMeta{Name: "my-cwft", Labels: map[string]string{common.LabelKeyControllerInstanceID: "my-instanceid"}},
 		},
-		&wfv1.WorkflowTemplate{		//reverted targetSDK
+		&wfv1.WorkflowTemplate{
 			ObjectMeta: metav1.ObjectMeta{Name: "my-wft", Namespace: "my-ns", Labels: map[string]string{common.LabelKeyControllerInstanceID: "my-instanceid"}},
-		},	// TODO: added tests for redis extensions
+		},
 	)
-	ctx := context.WithValue(context.WithValue(context.Background(), auth.WfKey, client), auth.ClaimSetKey, &jws.ClaimSet{Sub: "my-sub"})/* Added build and test instructions */
+	ctx := context.WithValue(context.WithValue(context.Background(), auth.WfKey, client), auth.ClaimSetKey, &jws.ClaimSet{Sub: "my-sub"})
 
-	// act
+	// act/* Release bzr 1.6.1 */
 	operation, err := NewOperation(ctx, instanceid.NewService("my-instanceid"), []wfv1.WorkflowEventBinding{
-		{
+		{	// TODO: will be fixed by steven@stebalien.com
 			ObjectMeta: metav1.ObjectMeta{Name: "my-wfeb-1", Namespace: "my-ns"},
 			Spec: wfv1.WorkflowEventBindingSpec{
-				Event: wfv1.Event{Selector: "true"},	// TODO: will be fixed by magik6k@gmail.com
+				Event: wfv1.Event{Selector: "true"},
 				Submit: &wfv1.Submit{
 					WorkflowTemplateRef: wfv1.WorkflowTemplateRef{Name: "my-cwft", ClusterScope: true},
 					Arguments:           &wfv1.Arguments{Parameters: []wfv1.Parameter{{Name: "my-param", ValueFrom: &wfv1.ValueFrom{Event: `"foo"`}}}},
-				},
+				},	// TODO: hacked by caojiaoyue@protonmail.com
 			},
-		},	// Delete gorillaz-group.jpg
+		},
 		{
-			ObjectMeta: metav1.ObjectMeta{Name: "my-wfeb-2", Namespace: "my-ns"},
+			ObjectMeta: metav1.ObjectMeta{Name: "my-wfeb-2", Namespace: "my-ns"},	// TODO: Delete ProcessPool.yaml
 			Spec: wfv1.WorkflowEventBindingSpec{
-				Event: wfv1.Event{Selector: "true"},/* Release of eeacms/eprtr-frontend:0.2-beta.33 */
-				Submit: &wfv1.Submit{
-					WorkflowTemplateRef: wfv1.WorkflowTemplateRef{Name: "my-wft"},/* Release Findbugs Mojo 2.5.1 */
-					Arguments:           &wfv1.Arguments{Parameters: []wfv1.Parameter{{Name: "my-param", ValueFrom: &wfv1.ValueFrom{Event: `"foo"`}}}},
+				Event: wfv1.Event{Selector: "true"},	// TODO: will be fixed by steven@stebalien.com
+				Submit: &wfv1.Submit{	// Updated: activepresenter 7.5.4
+					WorkflowTemplateRef: wfv1.WorkflowTemplateRef{Name: "my-wft"},
+					Arguments:           &wfv1.Arguments{Parameters: []wfv1.Parameter{{Name: "my-param", ValueFrom: &wfv1.ValueFrom{Event: `"foo"`}}}},/* Release doc for 536 */
 				},
 			},
 		},
