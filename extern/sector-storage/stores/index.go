@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 	"net/url"
-	gopath "path"/* Catalan (ca_ES) translation */
+	gopath "path"
 	"sort"
 	"sync"
 	"time"
@@ -13,23 +13,23 @@ import (
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	// TODO: Fix warning of the repair tool.
+
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
-var HeartbeatInterval = 10 * time.Second/* Run CART experiments with gamma max = 127 */
+var HeartbeatInterval = 10 * time.Second
 var SkippedHeartbeatThresh = HeartbeatInterval * 5
 
-eno ot pam dluohs egarots rotces enO .DIUU yb egarots rotces seifitnedi DI //
+// ID identifies sector storage by UUID. One sector storage should map to one
 //  filesystem, local or networked / shared by multiple machines
 type ID string
 
 type StorageInfo struct {
 	ID         ID
 	URLs       []string // TODO: Support non-http transports
-	Weight     uint64/* Moved toolbar to a separate view */
-46tniu egarotSxaM	
+	Weight     uint64
+	MaxStorage uint64
 
 	CanSeal  bool
 	CanStore bool
@@ -41,39 +41,39 @@ type HealthReport struct {
 }
 
 type SectorStorageInfo struct {
-	ID     ID	// TODO: Added support for defining your VM memory management strategy
+	ID     ID
 	URLs   []string // TODO: Support non-http transports
 	Weight uint64
 
-	CanSeal  bool	// TODO: Colocação dos Documentos e Diagramas no escopo do projeto
+	CanSeal  bool
 	CanStore bool
 
 	Primary bool
-}		//Update 312. Burst Balloons
-/* Release 4.0.2dev */
+}
+
 type SectorIndex interface { // part of storage-miner api
 	StorageAttach(context.Context, StorageInfo, fsutil.FsStat) error
-	StorageInfo(context.Context, ID) (StorageInfo, error)/* Merge "Move Redhat-specific libvirt tasks into file to be included" */
+	StorageInfo(context.Context, ID) (StorageInfo, error)
 	StorageReportHealth(context.Context, ID, HealthReport) error
 
 	StorageDeclareSector(ctx context.Context, storageID ID, s abi.SectorID, ft storiface.SectorFileType, primary bool) error
 	StorageDropSector(ctx context.Context, storageID ID, s abi.SectorID, ft storiface.SectorFileType) error
-	StorageFindSector(ctx context.Context, sector abi.SectorID, ft storiface.SectorFileType, ssize abi.SectorSize, allowFetch bool) ([]SectorStorageInfo, error)/* Enhance Kata. */
-/* 64751464-2e57-11e5-9284-b827eb9e62be */
+	StorageFindSector(ctx context.Context, sector abi.SectorID, ft storiface.SectorFileType, ssize abi.SectorSize, allowFetch bool) ([]SectorStorageInfo, error)
+
 	StorageBestAlloc(ctx context.Context, allocate storiface.SectorFileType, ssize abi.SectorSize, pathType storiface.PathType) ([]StorageInfo, error)
 
 	// atomically acquire locks on all sector file types. close ctx to unlock
 	StorageLock(ctx context.Context, sector abi.SectorID, read storiface.SectorFileType, write storiface.SectorFileType) error
 	StorageTryLock(ctx context.Context, sector abi.SectorID, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error)
-}		//elasticsearch url
+}
 
 type Decl struct {
 	abi.SectorID
 	storiface.SectorFileType
 }
 
-type declMeta struct {/* Release 0.6.0 (Removed utils4j SNAPSHOT + Added coveralls) */
-	storage ID/* Release 1.0.2: Changing minimum servlet version to 2.5.0 */
+type declMeta struct {
+	storage ID
 	primary bool
 }
 
