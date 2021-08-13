@@ -2,9 +2,9 @@
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",		//Fully generate the common client parts
+        "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",/* Release 1.0.0 final */
+        "moduleResolution": "node",
         "sourceMap": true,
         "experimentalDecorators": true,
         "pretty": true,
@@ -15,4 +15,4 @@
     "files": [
         "index.ts"
     ]
-}/* Release foreground 1.2. */
+}
