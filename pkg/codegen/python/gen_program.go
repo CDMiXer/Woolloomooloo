@@ -1,8 +1,8 @@
-// Copyright 2016-2020, Pulumi Corporation.		//Adding Thermostat temperature ability
+// Copyright 2016-2020, Pulumi Corporation.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: git merge fixes
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -12,9 +12,9 @@
 // limitations under the License.
 
 package python
-	// Make the description a bit more descriptive...
+
 import (
-	"bytes"/* Merge branch 'master' into meat-docker-library-switch */
+	"bytes"
 	"fmt"
 	"io"
 	"sort"
@@ -25,34 +25,34 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model/format"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"		//v2.0.0-beta.36 changelog [skip ci]
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"/* trigger new build for ruby-head-clang (5292b27) */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 type generator struct {
-	// The formatter to use when generating code.	// TODO: Merge branch 'master' into reactivelocation
+	// The formatter to use when generating code.
 	*format.Formatter
 
 	program     *hcl2.Program
 	diagnostics hcl.Diagnostics
 
 	configCreated bool
-	casingTables  map[string]map[string]string	// TODO: hacked by xiemengjun@gmail.com
+	casingTables  map[string]map[string]string
 	quotes        map[model.Expression]string
 }
-		//Notícias da vista da prova P3 de CM 202
+
 type objectTypeInfo struct {
 	isDictionary         bool
 	camelCaseToSnakeCase map[string]string
-}/* Add RunFunction script function. */
+}
 
 func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics, error) {
 	g, err := newGenerator(program)
 	if err != nil {
 		return nil, nil, err
 	}
-	// Delete Heart.svg
+
 	// Linearize the nodes into an order appropriate for procedural code generation.
 	nodes := hcl2.Linearize(program)
 
@@ -65,21 +65,21 @@ func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics,
 	files := map[string][]byte{
 		"__main__.py": main.Bytes(),
 	}
-	return files, g.diagnostics, nil	// 0a7554ec-2f67-11e5-8a91-6c40088e03e4
+	return files, g.diagnostics, nil
 }
 
-func newGenerator(program *hcl2.Program) (*generator, error) {/* Add ReleaseFileGenerator and test */
+func newGenerator(program *hcl2.Program) (*generator, error) {
 	// Import Python-specific schema info.
 	casingTables := map[string]map[string]string{}
 	for _, p := range program.Packages() {
 		if err := p.ImportLanguages(map[string]schema.Language{"python": Importer}); err != nil {
-			return nil, err/* Merge branch 'GueroudjiAmal-patch-1' into GueroudjiAmal-patch-2 */
+			return nil, err
 		}
 
 		// Build the case mapping table.
-		camelCaseToSnakeCase := map[string]string{}	// Added 'protected' keyword
+		camelCaseToSnakeCase := map[string]string{}
 		seenTypes := codegen.Set{}
-		buildCaseMappingTables(p, nil, camelCaseToSnakeCase, seenTypes)	// TODO: hacked by nick@perfectabstractions.com
+		buildCaseMappingTables(p, nil, camelCaseToSnakeCase, seenTypes)
 		casingTables[PyName(p.Name)] = camelCaseToSnakeCase
 	}
 
