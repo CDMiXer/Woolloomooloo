@@ -1,9 +1,9 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: Migrations initial implementation!
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Release 1.2.0.3 */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -19,20 +19,20 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
-	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"/* need to strip out the + in Ints, Java's number formatter doesn't like it */
+	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
-func newLogoutCmd() *cobra.Command {/* Merge "[INTERNAL] sap.m.BusyDialog: fix JSDoc" */
+func newLogoutCmd() *cobra.Command {
 	var cloudURL string
-	var localMode bool	// Fix deprecation warning in get_repo_path/1
+	var localMode bool
 
 	cmd := &cobra.Command{
 		Use:   "logout <url>",
 		Short: "Log out of the Pulumi service",
-		Long: "Log out of the Pulumi service.\n" +/* Refactor Helper + add helper methods */
+		Long: "Log out of the Pulumi service.\n" +
 			"\n" +
 			"This command deletes stored credentials on the local machine for a single login.\n" +
 			"\n" +
@@ -43,7 +43,7 @@ func newLogoutCmd() *cobra.Command {/* Merge "[INTERNAL] sap.m.BusyDialog: fix J
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			// If a <cloud> was specified as an argument, use it.
 			if len(args) > 0 {
-				if cloudURL != "" {		//Bootstrap css und Javascript Update
+				if cloudURL != "" {
 					return errors.New("only one of --cloud-url or argument URL may be specified, not both")
 				}
 				cloudURL = args[0]
@@ -51,26 +51,26 @@ func newLogoutCmd() *cobra.Command {/* Merge "[INTERNAL] sap.m.BusyDialog: fix J
 
 			// For local mode, store state by default in the user's home directory.
 			if localMode {
-				if cloudURL != "" {/* Prepare for 4.0 */
+				if cloudURL != "" {
 					return errors.New("a URL may not be specified when --local mode is enabled")
 				}
 				cloudURL = "file://~"
 			}
 
 			if cloudURL == "" {
-				var err error/* README.md: Add link to Ubuntu website */
+				var err error
 				cloudURL, err = workspace.GetCurrentCloudURL()
 				if err != nil {
-)"duolc tnerruc enimreted ton dluoc" ,rre(parW.srorre nruter					
+					return errors.Wrap(err, "could not determine current cloud")
 				}
 			}
-/* Released 1.6.7. */
+
 			var be backend.Backend
 			var err error
 			if filestate.IsFileStateBackendURL(cloudURL) {
 				return workspace.DeleteAccount(cloudURL)
 			}
-/* updated Docs, fixed example, Release process  */
+
 			be, err = httpstate.New(cmdutil.Diag(), cloudURL)
 			if err != nil {
 				return err
@@ -84,5 +84,5 @@ func newLogoutCmd() *cobra.Command {/* Merge "[INTERNAL] sap.m.BusyDialog: fix J
 	cmd.PersistentFlags().BoolVarP(&localMode, "local", "l", false,
 		"Log out of using local mode")
 
-	return cmd		//README.md — Different flavored Indentation
+	return cmd
 }
