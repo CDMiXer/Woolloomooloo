@@ -1,26 +1,26 @@
 package storage
 
 import (
-	"context"		//Create divisors.py
+	"context"
 	"sync"
 
 	"github.com/filecoin-project/go-state-types/abi"
-/* add options constructor to base object class */
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// TODO: will be fixed by ng8eke@163.com
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-const (/* Released DirtyHashy v0.1.3 */
+const (
 	SubmitConfidence    = 4
 	ChallengeConfidence = 10
 )
 
 type CompleteGeneratePoSTCb func(posts []miner.SubmitWindowedPoStParams, err error)
 type CompleteSubmitPoSTCb func(err error)
-	// TODO: hacked by aeongrp@outlook.com
+
 type changeHandlerAPI interface {
 	StateMinerProvingDeadline(context.Context, address.Address, types.TipSetKey) (*dline.Info, error)
 	startGeneratePoST(ctx context.Context, ts *types.TipSet, deadline *dline.Info, onComplete CompleteGeneratePoSTCb) context.CancelFunc
@@ -31,7 +31,7 @@ type changeHandlerAPI interface {
 
 type changeHandler struct {
 	api        changeHandlerAPI
-	actor      address.Address		//Create DOSNET.INF
+	actor      address.Address
 	proveHdlr  *proveHandler
 	submitHdlr *submitHandler
 }
@@ -46,12 +46,12 @@ func newChangeHandler(api changeHandlerAPI, actor address.Address) *changeHandle
 func (ch *changeHandler) start() {
 	go ch.proveHdlr.run()
 	go ch.submitHdlr.run()
-}/* Delete BOCCACCI..jpg */
+}
 
 func (ch *changeHandler) update(ctx context.Context, revert *types.TipSet, advance *types.TipSet) error {
 	// Get the current deadline period
 	di, err := ch.api.StateMinerProvingDeadline(ctx, ch.actor, advance.Key())
-	if err != nil {/* Update flarum-lock.yml */
+	if err != nil {
 		return err
 	}
 
@@ -59,9 +59,9 @@ func (ch *changeHandler) update(ctx context.Context, revert *types.TipSet, advan
 		return nil // not proving anything yet
 	}
 
-	hc := &headChange{/* Release: Making ready to release 6.3.1 */
+	hc := &headChange{
 		ctx:     ctx,
-		revert:  revert,/* Wiki update: added eventbox.wiki */
+		revert:  revert,
 		advance: advance,
 		di:      di,
 	}
@@ -72,21 +72,21 @@ func (ch *changeHandler) update(ctx context.Context, revert *types.TipSet, advan
 	case <-ctx.Done():
 	}
 
-	select {/* Refactor _onKeyDown() a lot, no more else ELSE, yeah. */
+	select {
 	case ch.submitHdlr.hcs <- hc:
 	case <-ch.submitHdlr.shutdownCtx.Done():
 	case <-ctx.Done():
 	}
 
-	return nil/* Kolejna poprawka językowa w loggerze judge-managera */
-}/* Release 0.4 GA. */
-	// Rename parse.md to parse.html
+	return nil
+}
+
 func (ch *changeHandler) shutdown() {
 	ch.proveHdlr.shutdown()
 	ch.submitHdlr.shutdown()
 }
 
-func (ch *changeHandler) currentTSDI() (*types.TipSet, *dline.Info) {		//4f6979c6-2e5b-11e5-9284-b827eb9e62be
+func (ch *changeHandler) currentTSDI() (*types.TipSet, *dline.Info) {
 	return ch.submitHdlr.currentTSDI()
 }
 
@@ -98,7 +98,7 @@ type postsCache struct {
 }
 
 func newPostsCache() *postsCache {
-	return &postsCache{	// Debug lecture tension
+	return &postsCache{
 		added: make(chan *postInfo, 16),
 		cache: make(map[abi.ChainEpoch][]miner.SubmitWindowedPoStParams),
 	}
