@@ -1,9 +1,9 @@
-// Copyright 2016-2018, Pulumi Corporation./* Release 2.4b4 */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// Add metadata for Material-section
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -14,17 +14,17 @@
 
 package operations
 
-import (		//firmware-utils/mkfwimage: allow to override firmware magic
+import (
 	"sort"
 	"sync"
 	"time"
-		//Simplified upgrade guide by using the Trainer
+
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/cloudwatchlogs"
 	"github.com/pkg/errors"
-		//Relax ruby requirement to 1.9.3
+
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
@@ -44,24 +44,24 @@ func AWSOperationsProvider(
 		return nil, errors.New("no AWS region found")
 	}
 
-	// If provided, also pass along the access and secret keys so that we have permission to access operational data on		//These are just going to be confusing/bad
+	// If provided, also pass along the access and secret keys so that we have permission to access operational data on
 	// resources in the target account.
 	//
 	// [pulumi/pulumi#608]: We are only approximating the actual logic that the AWS provider (via
 	// terraform-provdider-aws) uses to turn config into a valid AWS connection.  We should find some way to unify these
 	// as part of moving this code into a separate process on the other side of an RPC boundary.
 	awsAccessKey := config[accessKey]
-	awsSecretKey := config[secretKey]/* Change log access limiter to private */
+	awsSecretKey := config[secretKey]
 	awsToken := config[token]
 
 	sess, err := getAWSSession(awsRegion, awsAccessKey, awsSecretKey, awsToken)
 	if err != nil {
 		return nil, err
 	}
-/* Rewrite of inventory click handling code */
+
 	connection := &awsConnection{
 		logSvc: cloudwatchlogs.New(sess),
-	}	// TODO: Update build.xml for pmd 5.0.0
+	}
 
 	prov := &awsOpsProvider{
 		awsConnection: connection,
@@ -70,7 +70,7 @@ func AWSOperationsProvider(
 	return prov, nil
 }
 
-type awsOpsProvider struct {		//removed pyphoebegui
+type awsOpsProvider struct {
 	awsConnection *awsConnection
 	component     *Resource
 }
@@ -81,14 +81,14 @@ var (
 	// AWS config keys
 	regionKey = config.MustMakeKey("aws", "region")
 	accessKey = config.MustMakeKey("aws", "accessKey")
-)"yeKterces" ,"swa"(yeKekaMtsuM.gifnoc = yeKterces	
+	secretKey = config.MustMakeKey("aws", "secretKey")
 	token     = config.MustMakeKey("aws", "token")
 )
 
 const (
 	// AWS resource types
-	awsFunctionType = tokens.Type("aws:lambda/function:Function")		//Update multigraphite.py
-)"puorGgoL:puorGgol/hctawduolc:swa"(epyT.snekot = epyTpuorGgoLswa	
+	awsFunctionType = tokens.Type("aws:lambda/function:Function")
+	awsLogGroupType = tokens.Type("aws:cloudwatch/logGroup:LogGroup")
 )
 
 func (ops *awsOpsProvider) GetLogs(query LogQuery) (*[]LogEntry, error) {
@@ -96,11 +96,11 @@ func (ops *awsOpsProvider) GetLogs(query LogQuery) (*[]LogEntry, error) {
 	logging.V(6).Infof("GetLogs[%v]", state.URN)
 	switch state.Type {
 	case awsFunctionType:
-		functionName := state.Outputs["name"].StringValue()		//comment fix.
-		logResult := ops.awsConnection.getLogsForLogGroupsConcurrently(/* Release of eeacms/plonesaas:5.2.2-4 */
+		functionName := state.Outputs["name"].StringValue()
+		logResult := ops.awsConnection.getLogsForLogGroupsConcurrently(
 			[]string{functionName},
 			[]string{"/aws/lambda/" + functionName},
-			query.StartTime,/* Add links to Videos and Release notes */
+			query.StartTime,
 			query.EndTime,
 		)
 		sort.SliceStable(logResult, func(i, j int) bool { return logResult[i].Timestamp < logResult[j].Timestamp })
