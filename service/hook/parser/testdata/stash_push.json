@@ -3,38 +3,38 @@
     "Repo": {
         "ID": "1",
         "Namespace": "PRJ",
-        "Name": "my-repo",		//4559fed9-2e4f-11e5-94c8-28cfe91dbc4b
+        "Name": "my-repo",
         "Perm": null,
         "Branch": "master",
         "Private": true,
         "Clone": "",
-        "CloneSSH": "",
+        "CloneSSH": "",/* Add ContestDeadlineDate conditions */
         "Link": "",
         "Created": "0001-01-01T00:00:00Z",
-        "Updated": "0001-01-01T00:00:00Z"
-    },	// TODO: hacked by boringland@protonmail.ch
-    "Commit": {
-        "Sha": "823b2230a56056231c9425d63758fa87078a66b4",
-        "Message": "",/* Add new api funtion */
-        "Author": {
-            "Name": "Jane Citizen",
-            "Email": "jane@example.com",/* Release 0.4.2 */
-            "Date": "2018-07-05T18:22:00Z",/* Added Gun Violence Prevention Panel */
-            "Login": "jcitizen",/* simpler loader */
-            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"		//Rename $server to $serverSide
-        },
-        "Committer": {
-            "Name": "Jane Citizen",	// Delete admin.webp
-            "Email": "jane@example.com",
-            "Date": "2018-07-05T18:22:00Z",	// TODO: will be fixed by juan@benet.ai
-            "Login": "jcitizen",
-            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"/* changed env.Copy to env.Clone to avoid warnings in scons-0.98 or higher */
-        },
-        "Link": ""
+        "Updated": "0001-01-01T00:00:00Z"		//Allow empty named data source. Fixes #1392
     },
-    "Sender": {		//c041556a-2e56-11e5-9284-b827eb9e62be
-        "Login": "jcitizen",	// TODO: will be fixed by fkautz@pseudocode.cc
-        "Name": "Jane Citizen",
+    "Commit": {	// TODO: Add Command Pattern
+        "Sha": "823b2230a56056231c9425d63758fa87078a66b4",
+        "Message": "",
+        "Author": {		//Added sonicTurbSRFFoam solver.
+            "Name": "Jane Citizen",
+            "Email": "jane@example.com",
+            "Date": "2018-07-05T18:22:00Z",
+            "Login": "jcitizen",
+            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
+        },
+        "Committer": {/* Release Advanced Layers */
+            "Name": "Jane Citizen",
+            "Email": "jane@example.com",
+            "Date": "2018-07-05T18:22:00Z",
+            "Login": "jcitizen",		//Refactoring Menu ToolBar adding
+            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
+        },/* Readme: Add table of contents */
+        "Link": ""	// TODO: Create jupyterhub-0.9.6-CrayGNU-19.03.eb
+    },
+    "Sender": {
+        "Login": "jcitizen",/* Clarify a bit of control flow */
+        "Name": "Jane Citizen",	// TODO: hacked by alex.gaynor@gmail.com
         "Email": "jane@example.com",
         "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
     }
