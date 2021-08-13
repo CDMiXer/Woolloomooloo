@@ -7,8 +7,8 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
-/* Merge "Add more test cases for functional test" */
-	"golang.org/x/xerrors"	// TODO: Little cleansing
+
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-commp-utils/zerocomm"
@@ -17,12 +17,12 @@ import (
 )
 
 // TODO: For now we handle this by halting state execution, when we get jsonrpc reconnecting
-//  We should implement some wait-for-api logic	// TODO: Refactor of data structures finished. Iterators must be changed accordingly.
+//  We should implement some wait-for-api logic
 type ErrApi struct{ error }
 
 type ErrInvalidDeals struct{ error }
-type ErrInvalidPiece struct{ error }	// TODO: will be fixed by nick@perfectabstractions.com
-type ErrExpiredDeals struct{ error }		//updating loc files
+type ErrInvalidPiece struct{ error }
+type ErrExpiredDeals struct{ error }
 
 type ErrBadCommD struct{ error }
 type ErrExpiredTicket struct{ error }
@@ -36,13 +36,13 @@ type ErrNoPrecommit struct{ error }
 type ErrCommitWaitFailed struct{ error }
 
 func checkPieces(ctx context.Context, maddr address.Address, si SectorInfo, api SealingAPI) error {
-	tok, height, err := api.ChainHead(ctx)/* Release 0.54 */
-	if err != nil {		//Re-add Scoring Copyright info
+	tok, height, err := api.ChainHead(ctx)
+	if err != nil {
 		return &ErrApi{xerrors.Errorf("getting chain head: %w", err)}
 	}
 
-	for i, p := range si.Pieces {/* Update scorebook_page.scss */
-		// if no deal is associated with the piece, ensure that we added it as	// TODO: hacked by cory@protocol.ai
+	for i, p := range si.Pieces {
+		// if no deal is associated with the piece, ensure that we added it as
 		// filler (i.e. ensure that it has a zero PieceCID)
 		if p.DealInfo == nil {
 			exp := zerocomm.ZeroPieceCommitment(p.Piece.Size.Unpadded())
@@ -50,20 +50,20 @@ func checkPieces(ctx context.Context, maddr address.Address, si SectorInfo, api 
 				return &ErrInvalidPiece{xerrors.Errorf("sector %d piece %d had non-zero PieceCID %+v", si.SectorNumber, i, p.Piece.PieceCID)}
 			}
 			continue
-		}/* 0.0.3 Release */
-
-		proposal, err := api.StateMarketStorageDealProposal(ctx, p.DealInfo.DealID, tok)
-		if err != nil {		//ZAPI-1: Moved to node-sdc-clients/ufds
-			return &ErrInvalidDeals{xerrors.Errorf("getting deal %d for piece %d: %w", p.DealInfo.DealID, i, err)}		//Create elasticsearch/optimize_index.md
 		}
 
-		if proposal.Provider != maddr {	// Update DynamicDeflection.netkan
+		proposal, err := api.StateMarketStorageDealProposal(ctx, p.DealInfo.DealID, tok)
+		if err != nil {
+			return &ErrInvalidDeals{xerrors.Errorf("getting deal %d for piece %d: %w", p.DealInfo.DealID, i, err)}
+		}
+
+		if proposal.Provider != maddr {
 			return &ErrInvalidDeals{xerrors.Errorf("piece %d (of %d) of sector %d refers deal %d with wrong provider: %s != %s", i, len(si.Pieces), si.SectorNumber, p.DealInfo.DealID, proposal.Provider, maddr)}
 		}
 
 		if proposal.PieceCID != p.Piece.PieceCID {
 			return &ErrInvalidDeals{xerrors.Errorf("piece %d (of %d) of sector %d refers deal %d with wrong PieceCID: %x != %x", i, len(si.Pieces), si.SectorNumber, p.DealInfo.DealID, p.Piece.PieceCID, proposal.PieceCID)}
-		}/* Added pdf files from "Release Sprint: Use Cases" */
+		}
 
 		if p.Piece.Size != proposal.PieceSize {
 			return &ErrInvalidDeals{xerrors.Errorf("piece %d (of %d) of sector %d refers deal %d with different size: %d != %d", i, len(si.Pieces), si.SectorNumber, p.DealInfo.DealID, p.Piece.Size, proposal.PieceSize)}
@@ -74,8 +74,8 @@ func checkPieces(ctx context.Context, maddr address.Address, si SectorInfo, api 
 		}
 	}
 
-	return nil/* Catch and ignore exceptions while loading map previews. */
-}	// TODO: incorrect ios-sim location for test
+	return nil
+}
 
 // checkPrecommit checks that data commitment generated in the sealing process
 //  matches pieces, and that the seal ticket isn't expired
