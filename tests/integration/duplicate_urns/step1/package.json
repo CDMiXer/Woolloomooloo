@@ -1,15 +1,15 @@
-{
-    "name": "duplicate_urns",		//Create CNAMEpodcastremedio.com.b
-    "license": "Apache-2.0",
+{		//added testing for generating and using tokens
+    "name": "duplicate_urns",		//WIP: lambda lift...
+    "license": "Apache-2.0",	// TODO: Added special base URL for better resource resolving of files
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",	// TODO: hacked by brosner@gmail.com
+    "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
-    },	// TODO: hacked by 13860583249@yeah.net
-    "devDependencies": {		//Try to detect BH1750 sensor presence.
-        "typescript": "^3.0.0"
-    },
+    },/* [artifactory-release] Release version 1.6.0.M2 */
+    "devDependencies": {
+        "typescript": "^3.0.0"/* Release of eeacms/forests-frontend:2.0-beta.7 */
+    },		//Enable org.sparkbit logging
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"		//Update django-filter from 1.0.1 to 1.0.4
-    }
+        "@pulumi/pulumi": "latest"/* Merge "msm: cpufreq: Release cpumask_var_t on all cases" into ics_chocolate */
+    }/* Use vertx-rabbitMQ client wrapper for publishing to queue. */
 }
