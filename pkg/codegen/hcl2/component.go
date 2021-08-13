@@ -1,8 +1,8 @@
-// Copyright 2016-2020, Pulumi Corporation.	// TODO: hacked by alan.shaw@protocol.ai
+// Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Merge "Bug 1708545: Allow placeholder for institution column if not known"
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//update version to 2.2.0 RC3
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -13,20 +13,20 @@
 // limitations under the License.
 
 package hcl2
-/* Release: Making ready for next release iteration 6.4.0 */
-import (		//Add RootySand for Cacti
+
+import (
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 )
-/* [artifactory-release] Release version 0.7.9.RELEASE */
+
 // Component represents a component definition in a program.
-//		//Update qgis.conf
+//
 // TODO(pdg): implement
 type Component struct {
 	Syntax *hclsyntax.Block
 
-	InputTypes  map[string]model.Type		//Refactored RestClient
-	OutputTypes map[string]model.Type		//#21: Basic Plugin Support - register factories
+	InputTypes  map[string]model.Type
+	OutputTypes map[string]model.Type
 
 	Children []*Resource
 	Locals   []*LocalVariable
