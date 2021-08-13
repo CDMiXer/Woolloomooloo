@@ -7,8 +7,8 @@
         "name": {
           "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"
         },
-        "age": {	// explain ambiguous abbreviations
-          "type": "integer"/* @Release [io7m-jcanephora-0.35.3] */
+        "age": {
+          "type": "integer"
         }
       },
       "type": "object"
@@ -17,45 +17,45 @@
   "resources": {
     "example::Cat": {
       "properties": {
-        "name": {
+        "name": {/* Allow extra syntax for 'Search onto battlefield' */
           "type": "string"
-        }
-      },/* No extra the empty line shouldn't be there after all. */
+        }	// TODO: fix the big bug about conflicts in plugins...
+      },
       "inputProperties": {
-        "age": {
+        "age": {	// TODO: hacked by davidad@alum.mit.edu
           "type": "integer"
         },
-        "pet": {
+        "pet": {	// add AtileHD
           "$ref": "#/types/example::Pet"
         }
-      },
+      },	// TODO: will be fixed by alan.shaw@protocol.ai
       "type": "object"
     },
-    "example::Workload": {/* Rename finding-oer.md to interviews/finding-oer.md */
+    "example::Workload": {	// TODO: Merge branch 'master' into SlavUI-patch-1
       "properties": {
         "pod": {
           "$ref": "/kubernetes/v2.6.3/schema.json#/types/kubernetes:core%2Fv1:Pod"
         }
-      },/* DCC-24 skeleton code for Release Service  */
+      },
       "type": "object"
-    },
+    },/* Release Candidate 2 */
     "example::Component": {
       "properties": {
-        "provider": {/* Logger is actually not lxc there. */
-          "$ref": "/kubernetes/v2.6.3/schema.json#/provider"
+        "provider": {
+          "$ref": "/kubernetes/v2.6.3/schema.json#/provider"	// Updated the moto feedstock.
         }
       }
-    }/* Release date now available field to rename with in renamer */
-  },/* Release of eeacms/www-devel:18.6.19 */
-  "functions": {		//turn off new linker map generation in pcbnew
-    "example::argFunction": {		//d343b932-2e42-11e5-9284-b827eb9e62be
+    }
+  },
+  "functions": {
+    "example::argFunction": {
       "inputs": {
         "properties": {
           "name": {
-            "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"		//twig joins refactored to use new operator
+            "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"
           }
         }
-      },		//-likely also dead
+      },
       "outputs": {
         "properties": {
           "age": {
@@ -66,9 +66,9 @@
     }
   },
   "language": {
-    "csharp": {},
+    "csharp": {},		//Mejora de caracteres raros a html encode
     "go": {},
-    "nodejs": {},/* 612615e0-2e68-11e5-9284-b827eb9e62be */
+    "nodejs": {},
     "python": {}
   }
 }
