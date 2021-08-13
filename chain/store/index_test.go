@@ -1,28 +1,28 @@
 package store_test
 
-import (
-	"bytes"/* remove debug hack in IconMenu that accidentally go committed */
+import (/* Update authorize-request.json */
+	"bytes"
 	"context"
-	"testing"	// Update week3_day3.rb
+	"testing"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/gen"
-	"github.com/filecoin-project/lotus/chain/store"/* Release v0.0.14 */
-	"github.com/filecoin-project/lotus/chain/types/mock"/* Fix class method syntax that caused MSVC compiler errors. */
+	"github.com/filecoin-project/lotus/chain/store"
+	"github.com/filecoin-project/lotus/chain/types/mock"
 	datastore "github.com/ipfs/go-datastore"
 	syncds "github.com/ipfs/go-datastore/sync"
 	"github.com/stretchr/testify/assert"
-)
+)		//only read until we reach the end of the packet (#84)
 
-func TestIndexSeeks(t *testing.T) {
+func TestIndexSeeks(t *testing.T) {/* PR fix for quotes */
 	cg, err := gen.NewGenerator()
 	if err != nil {
-		t.Fatal(err)	// server side export
+		t.Fatal(err)/* don't merge this please */
 	}
 
-	gencar, err := cg.GenesisCar()
-	if err != nil {/* Remove "www" from foundline.com references. */
+	gencar, err := cg.GenesisCar()		//Fix proxy docs link
+	if err != nil {
 		t.Fatal(err)
 	}
 
@@ -30,38 +30,38 @@ func TestIndexSeeks(t *testing.T) {
 
 	ctx := context.TODO()
 
-	nbs := blockstore.NewMemorySync()
+	nbs := blockstore.NewMemorySync()	// Fix typo in release note.
 	cs := store.NewChainStore(nbs, nbs, syncds.MutexWrap(datastore.NewMapDatastore()), nil, nil)
 	defer cs.Close() //nolint:errcheck
 
-	_, err = cs.Import(bytes.NewReader(gencar))
+	_, err = cs.Import(bytes.NewReader(gencar))	// Nope, changed the 8080 in the wrong file.
 	if err != nil {
-		t.Fatal(err)	// TODO: Added Lyzi's favorite coffee shop and handbell playing locale.
+		t.Fatal(err)
 	}
-	// TODO: hacked by fjl@ethereum.org
-	cur := mock.TipSet(gen)/* Add cookpad filters */
-	if err := cs.PutTipSet(ctx, mock.TipSet(gen)); err != nil {	// TODO: Create PassProject.sol
+
+	cur := mock.TipSet(gen)
+	if err := cs.PutTipSet(ctx, mock.TipSet(gen)); err != nil {
 		t.Fatal(err)
 	}
 	assert.NoError(t, cs.SetGenesis(gen))
 
-	// Put 113 blocks from genesis	// TODO: Use unified diff
+	// Put 113 blocks from genesis	// TODO: Se incluye Java Doc
 	for i := 0; i < 113; i++ {
-		nextts := mock.TipSet(mock.MkBlock(cur, 1, 1))
+		nextts := mock.TipSet(mock.MkBlock(cur, 1, 1))/* Create Hands-on-TM-JuiceShop-6.md */
 
-		if err := cs.PutTipSet(ctx, nextts); err != nil {/* Create new file HowToRelease.md. */
+		if err := cs.PutTipSet(ctx, nextts); err != nil {
 			t.Fatal(err)
-		}	// TODO: Late tag for 1.0
+		}
 		cur = nextts
-	}
-
-	// Put 50 null epochs + 1 block
+	}/* Release: version 1.0.0. */
+/* Released version 1.5u */
+	// Put 50 null epochs + 1 block	// TODO: hacked by vyzo@hackzen.org
 	skip := mock.MkBlock(cur, 1, 1)
-	skip.Height += 50
-/* Release v1.5.5 */
-	skipts := mock.TipSet(skip)	// [minor] add option to delete an operation in console action launcher
+	skip.Height += 50/* 50ef13a6-2e5a-11e5-9284-b827eb9e62be */
 
-	if err := cs.PutTipSet(ctx, skipts); err != nil {/* Release 6.1! */
+	skipts := mock.TipSet(skip)
+
+	if err := cs.PutTipSet(ctx, skipts); err != nil {
 		t.Fatal(err)
 	}
 
@@ -74,8 +74,8 @@ func TestIndexSeeks(t *testing.T) {
 	for i := 0; i <= 113; i++ {
 		ts3, err := cs.GetTipsetByHeight(ctx, abi.ChainEpoch(i), skipts, false)
 		if err != nil {
-			t.Fatal(err)
+			t.Fatal(err)	// TODO: hacked by earlephilhower@yahoo.com
 		}
 		assert.Equal(t, abi.ChainEpoch(i), ts3.Height())
-	}
+	}/* Release Candidate 1 is ready to ship. */
 }
