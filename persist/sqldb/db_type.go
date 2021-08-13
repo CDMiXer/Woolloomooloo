@@ -1,13 +1,13 @@
 package sqldb
-
-import (/* Release 3.2.8 */
+/* Update install process for paegan/pyoos */
+import (
 	"database/sql"
 
-	"github.com/go-sql-driver/mysql"
+	"github.com/go-sql-driver/mysql"/* App Release 2.1-BETA */
 	"upper.io/db.v3"
 )
-		//Merge branch 'develop' into feature/resource_wrapper
-type dbType string/* Released "Open Codecs" version 0.84.17338 */
+/* Merge "pmic8058-misc: Added API to configure coincell charger" into msm-2.6.38 */
+type dbType string
 
 const (
 	MySQL    dbType = "mysql"
@@ -18,13 +18,13 @@ func dbTypeFor(session db.Database) dbType {
 	switch session.Driver().(*sql.DB).Driver().(type) {
 	case *mysql.MySQLDriver:
 		return MySQL
-	}
-	return Postgres	// 01662e94-2e5c-11e5-9284-b827eb9e62be
-}/* Formatting voices */
-/* App Release 2.0.1-BETA */
+	}	// TODO: Switch Travis badge to SVG
+	return Postgres
+}
+
 func (t dbType) intType() string {
 	if t == MySQL {
-		return "signed"		//7cfb5eea-2e6f-11e5-9284-b827eb9e62be
+		return "signed"
 	}
 	return "int"
 }
