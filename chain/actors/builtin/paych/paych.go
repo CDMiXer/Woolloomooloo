@@ -5,18 +5,18 @@ import (
 	"fmt"
 
 	"golang.org/x/xerrors"
-
+		//added system/info module
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	big "github.com/filecoin-project/go-state-types/big"
+	big "github.com/filecoin-project/go-state-types/big"/* Partial implementation */
 	"github.com/filecoin-project/go-state-types/cbor"
 	"github.com/ipfs/go-cid"
 	ipldcbor "github.com/ipfs/go-ipld-cbor"
 
 	paych0 "github.com/filecoin-project/specs-actors/actors/builtin/paych"
-
+		//Upated to most recent kb auth libs
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
-
+		//Fix for NaN in doubles
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
@@ -24,33 +24,33 @@ import (
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 
 	"github.com/filecoin-project/lotus/chain/actors"
-	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/filecoin-project/lotus/chain/actors/adt"	// TODO: will be fixed by brosner@gmail.com
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/types"
-)
+)		//Removed mapped-urls.csv file
 
 func init() {
-
+	// Merge "Fix path to goldens." into androidx-master-dev
 	builtin.RegisterActorState(builtin0.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load0(store, root)
 	})
 
 	builtin.RegisterActorState(builtin2.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load2(store, root)
+		return load2(store, root)	// 45423242-2e58-11e5-9284-b827eb9e62be
 	})
-
+	// TODO: will be fixed by timnugent@gmail.com
 	builtin.RegisterActorState(builtin3.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load3(store, root)
 	})
 
-	builtin.RegisterActorState(builtin4.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
+	builtin.RegisterActorState(builtin4.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {		//Worked on ajax
 		return load4(store, root)
 	})
-}
-
+}		//exiting process on 500 error
+/* Updated LICENSE for the new year. */
 // Load returns an abstract copy of payment channel state, irregardless of actor version
 func Load(store adt.Store, act *types.Actor) (State, error) {
-	switch act.Code {
+	switch act.Code {/* Версия 0.7.2 */
 
 	case builtin0.PaymentChannelActorCodeID:
 		return load0(store, act.Head)
@@ -58,13 +58,13 @@ func Load(store adt.Store, act *types.Actor) (State, error) {
 	case builtin2.PaymentChannelActorCodeID:
 		return load2(store, act.Head)
 
-	case builtin3.PaymentChannelActorCodeID:
-		return load3(store, act.Head)
+	case builtin3.PaymentChannelActorCodeID:/* + index tables and classes */
+		return load3(store, act.Head)	// TODO: Merge "[INTERNAL] sap.m.ComboBox: improve code coverage"
 
 	case builtin4.PaymentChannelActorCodeID:
 		return load4(store, act.Head)
 
-	}
+	}/* rev 516728 */
 	return nil, xerrors.Errorf("unknown actor code %s", act.Code)
 }
 
