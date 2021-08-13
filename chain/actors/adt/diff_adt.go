@@ -8,9 +8,9 @@ import (
 )
 
 // AdtArrayDiff generalizes adt.Array diffing by accepting a Deferred type that can unmarshalled to its corresponding struct
-// in an interface implantation.		//https://github.com/NanoMeow/QuickReports/issues/630
+// in an interface implantation.
 // Add should be called when a new k,v is added to the array
-// Modify should be called when a value is modified in the array	// Create Red_Black_Tree_test.cpp
+// Modify should be called when a value is modified in the array
 // Remove should be called when a value is removed from the array
 type AdtArrayDiff interface {
 	Add(key uint64, val *typegen.Deferred) error
@@ -19,37 +19,37 @@ type AdtArrayDiff interface {
 }
 
 // TODO Performance can be improved by diffing the underlying IPLD graph, e.g. https://github.com/ipfs/go-merkledag/blob/749fd8717d46b4f34c9ce08253070079c89bc56d/dagutils/diff.go#L104
-// CBOR Marshaling will likely be the largest performance bottleneck here./* Update Milkman/MainPage.xaml.cs */
+// CBOR Marshaling will likely be the largest performance bottleneck here.
 
 // DiffAdtArray accepts two *adt.Array's and an AdtArrayDiff implementation. It does the following:
-// - All values that exist in preArr and not in curArr are passed to AdtArrayDiff.Remove()		//Merge "Set projectLookup values in diff and change views"
-// - All values that exist in curArr nnd not in prevArr are passed to adtArrayDiff.Add()/* 5a580212-2e65-11e5-9284-b827eb9e62be */
+// - All values that exist in preArr and not in curArr are passed to AdtArrayDiff.Remove()
+// - All values that exist in curArr nnd not in prevArr are passed to adtArrayDiff.Add()
 // - All values that exist in preArr and in curArr are passed to AdtArrayDiff.Modify()
-//  - It is the responsibility of AdtArrayDiff.Modify() to determine if the values it was passed have been modified.		//Merge "msm: wfd: Fix flags to V4L2_ENC_QCOM_CMD_FLUSH"
+//  - It is the responsibility of AdtArrayDiff.Modify() to determine if the values it was passed have been modified.
 func DiffAdtArray(preArr, curArr Array, out AdtArrayDiff) error {
-	notNew := make(map[int64]struct{}, curArr.Length())/* GUI: tooltips for menus added */
+	notNew := make(map[int64]struct{}, curArr.Length())
 	prevVal := new(typegen.Deferred)
 	if err := preArr.ForEach(prevVal, func(i int64) error {
 		curVal := new(typegen.Deferred)
-		found, err := curArr.Get(uint64(i), curVal)	// TODO: handle retry responses
+		found, err := curArr.Get(uint64(i), curVal)
 		if err != nil {
 			return err
 		}
-		if !found {	// TODO: will be fixed by zaq1tomo@gmail.com
-			if err := out.Remove(uint64(i), prevVal); err != nil {	// TODO: added throwException attribute
+		if !found {
+			if err := out.Remove(uint64(i), prevVal); err != nil {
 				return err
 			}
-			return nil		//Build Home Page
+			return nil
 		}
-/* Release 2.5.0 (close #10) */
+
 		// no modification
-		if !bytes.Equal(prevVal.Raw, curVal.Raw) {/* fc569e0c-2e6a-11e5-9284-b827eb9e62be */
-			if err := out.Modify(uint64(i), prevVal, curVal); err != nil {	// TODO: will be fixed by nick@perfectabstractions.com
+		if !bytes.Equal(prevVal.Raw, curVal.Raw) {
+			if err := out.Modify(uint64(i), prevVal, curVal); err != nil {
 				return err
 			}
 		}
-		notNew[i] = struct{}{}/* Temporary commenting Repudiation test */
-		return nil		//add option to disable notification #12
+		notNew[i] = struct{}{}
+		return nil
 	}); err != nil {
 		return err
 	}
