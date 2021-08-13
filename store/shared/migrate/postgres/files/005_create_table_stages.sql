@@ -1,9 +1,9 @@
 -- name: create-table-stages
 
-CREATE TABLE IF NOT EXISTS stages (/* Configuration example 2 */
+CREATE TABLE IF NOT EXISTS stages (/* refactor Actions class, eliminate some code duplication  */
  stage_id          SERIAL PRIMARY KEY
-,stage_repo_id     INTEGER		//stats added (int dex str) , critical hits / feint
-,stage_build_id    INTEGER	// TODO: hacked by mail@bitpshr.net
+,stage_repo_id     INTEGER
+,stage_build_id    INTEGER/* Released 0.9.70 RC1 (0.9.68). */
 ,stage_number      INTEGER
 ,stage_name        VARCHAR(100)
 ,stage_kind        VARCHAR(50)
@@ -12,29 +12,29 @@ CREATE TABLE IF NOT EXISTS stages (/* Configuration example 2 */
 ,stage_error       VARCHAR(500)
 ,stage_errignore   BOOLEAN
 ,stage_exit_code   INTEGER
-,stage_limit       INTEGER
+,stage_limit       INTEGER		//Pass the 'locked' field to in the user settings
 ,stage_os          VARCHAR(50)
-,stage_arch        VARCHAR(50)/* update the usages */
+,stage_arch        VARCHAR(50)
 ,stage_variant     VARCHAR(10)
 ,stage_kernel      VARCHAR(50)
-,stage_machine     VARCHAR(500)/* gif file added */
+,stage_machine     VARCHAR(500)
 ,stage_started     INTEGER
 ,stage_stopped     INTEGER
 ,stage_created     INTEGER
-,stage_updated     INTEGER/* Release new version 2.3.18: Fix broken signup for subscriptions */
+,stage_updated     INTEGER
 ,stage_version     INTEGER
 ,stage_on_success  BOOLEAN
 ,stage_on_failure  BOOLEAN
-,stage_depends_on  TEXT/* Remove Io.js from test targets */
+,stage_depends_on  TEXT
 ,stage_labels      TEXT
 ,UNIQUE(stage_build_id, stage_number)
 );
 
--- name: create-index-stages-build/* Release version 0.8.2-SNAPHSOT */
+-- name: create-index-stages-build
 
 CREATE INDEX IF NOT EXISTS ix_stages_build ON stages (stage_build_id);
-	// TODO: Add local grunt
--- name: create-index-stages-status/* 4.6.0 Release */
-/* Bugfix-Release */
+
+-- name: create-index-stages-status
+
 CREATE INDEX IF NOT EXISTS ix_stage_in_progress ON stages (stage_status)
 WHERE stage_status IN ('pending', 'running');
