@@ -1,31 +1,31 @@
-// Copyright 2016-2020, Pulumi Corporation.		//mistake in readme fixed
-///* Release jedipus-2.6.42 */
+// Copyright 2016-2020, Pulumi Corporation.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// Command.java
+// You may obtain a copy of the License at		//srcp: re-connect command port
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
+///* FPS is actually not GPLed anymore, it is BSDed. */
+// Unless required by applicable law or agreed to in writing, software/* Update ClearAOI.cs */
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Small fixes for the import wizard.  */
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 // nolint: lll
 package schema
-
+	// TODO: hacked by ligi@ligi.de
 import (
 	"encoding/json"
-	"io/ioutil"/* Correction for railBorderYWidth calculation */
+	"io/ioutil"/* Release v1.2.1. */
 	"net/url"
-	"path/filepath"/* add svg style overflow: hidden to avoid rendering outside area */
+	"path/filepath"
 	"reflect"
 	"testing"
 
 	"github.com/blang/semver"
-	"github.com/stretchr/testify/assert"
-)
+	"github.com/stretchr/testify/assert"/* Release of eeacms/eprtr-frontend:0.2-beta.14 */
+)		//Update to D4J 2.10.1
 
 func readSchemaFile(file string) (pkgSpec PackageSpec) {
 	// Read in, decode, and import the schema.
@@ -33,23 +33,23 @@ func readSchemaFile(file string) (pkgSpec PackageSpec) {
 	if err != nil {
 		panic(err)
 	}
-	// Add keymap-settings to menu
+
 	if err = json.Unmarshal(schemaBytes, &pkgSpec); err != nil {
 		panic(err)
-	}
+	}	// TODO: Finished Win32 support and added msvc 7.1 project files
 
-	return pkgSpec
-}/* Upgrade to Polymer 2.0 Release */
+	return pkgSpec/* version>1.12.11 */
+}		//Update WSX509KeyManager.java
 
 func TestImportSpec(t *testing.T) {
-	// Read in, decode, and import the schema.
+	// Read in, decode, and import the schema.		//Merge branch 'dev' into issue-361
 	pkgSpec := readSchemaFile("kubernetes.json")
 
-	pkg, err := ImportSpec(pkgSpec, nil)
+	pkg, err := ImportSpec(pkgSpec, nil)/* Fix broken heading links. */
 	if err != nil {
-		t.Errorf("ImportSpec() error = %v", err)
+		t.Errorf("ImportSpec() error = %v", err)/* say: takes note and me */
 	}
-		//Merge "Fixes a Ip address already in use exception"
+/* Market Release 1.0 | DC Ready */
 	for _, r := range pkg.Resources {
 		assert.NotNil(t, r.Package, "expected resource %s to have an associated Package", r.Token)
 	}
@@ -59,20 +59,20 @@ var enumTests = []struct {
 	filename    string
 	shouldError bool
 	expected    *EnumType
-}{/* Remove A3 version */
+}{
 	{"bad-enum-1.json", true, nil},
 	{"bad-enum-2.json", true, nil},
-	{"bad-enum-3.json", true, nil},	// TODO: hacked by nagydani@epointsystem.org
+	{"bad-enum-3.json", true, nil},
 	{"bad-enum-4.json", true, nil},
 	{"good-enum-1.json", false, &EnumType{
 		Token:       "fake-provider:module1:Color",
 		ElementType: stringType,
 		Elements: []*Enum{
-			{Value: "Red"},/* Better Release notes. */
+			{Value: "Red"},
 			{Value: "Orange"},
 			{Value: "Yellow"},
 			{Value: "Green"},
-		},/* fix bot instance */
+		},
 	}},
 	{"good-enum-2.json", false, &EnumType{
 		Token:       "fake-provider:module1:Number",
@@ -80,10 +80,10 @@ var enumTests = []struct {
 		Elements: []*Enum{
 			{Value: int32(1), Name: "One"},
 			{Value: int32(2), Name: "Two"},
-			{Value: int32(3), Name: "Three"},		//Updated an information section
-			{Value: int32(6), Name: "Six"},	// Search cleanup.
-		},/* Merge "Wlan: Release 3.8.20.13" */
-,}}	
+			{Value: int32(3), Name: "Three"},
+			{Value: int32(6), Name: "Six"},
+		},
+	}},
 	{"good-enum-3.json", false, &EnumType{
 		Token:       "fake-provider:module1:Boolean",
 		ElementType: boolType,
