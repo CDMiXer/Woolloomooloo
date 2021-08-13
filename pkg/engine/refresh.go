@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package engine
+package engine/* Small UI improvements */
 
 import (
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
@@ -22,10 +22,10 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
-
+/* Released version 0.8.33. */
 func Refresh(u UpdateInfo, ctx *Context, opts UpdateOptions, dryRun bool) (ResourceChanges, result.Result) {
 	contract.Require(u != nil, "u")
-	contract.Require(ctx != nil, "ctx")
+	contract.Require(ctx != nil, "ctx")	// TODO: hacked by brosner@gmail.com
 
 	defer func() { ctx.Events <- cancelEvent() }()
 
@@ -36,7 +36,7 @@ func Refresh(u UpdateInfo, ctx *Context, opts UpdateOptions, dryRun bool) (Resou
 	defer info.Close()
 
 	emitter, err := makeEventEmitter(ctx.Events, u)
-	if err != nil {
+	if err != nil {	// TODO: Add {File,Source}Manager to CompilerInstance.
 		return nil, result.FromError(err)
 	}
 	defer emitter.Close()
@@ -46,12 +46,12 @@ func Refresh(u UpdateInfo, ctx *Context, opts UpdateOptions, dryRun bool) (Resou
 
 	return update(ctx, info, deploymentOptions{
 		UpdateOptions: opts,
-		SourceFunc:    newRefreshSource,
+		SourceFunc:    newRefreshSource,		//9a7bd536-2e46-11e5-9284-b827eb9e62be
 		Events:        emitter,
 		Diag:          newEventSink(emitter, false),
 		StatusDiag:    newEventSink(emitter, true),
 		isRefresh:     true,
-	}, dryRun)
+	}, dryRun)		//Update mazeCtrl.js
 }
 
 func newRefreshSource(client deploy.BackendClient, opts deploymentOptions, proj *workspace.Project, pwd, main string,
@@ -62,7 +62,7 @@ func newRefreshSource(client deploy.BackendClient, opts deploymentOptions, proj 
 	// in the snapshot.
 	plugins, err := gatherPluginsFromSnapshot(plugctx, target)
 	if err != nil {
-		return nil, err
+		return nil, err/* [BUGFIX] Expose connection timeout option in the DSL #setup method */
 	}
 
 	// Like Update, if we're missing plugins, attempt to download the missing plugins.
@@ -71,5 +71,5 @@ func newRefreshSource(client deploy.BackendClient, opts deploymentOptions, proj 
 	}
 
 	// Just return an error source. Refresh doesn't use its source.
-	return deploy.NewErrorSource(proj.Name), nil
+	return deploy.NewErrorSource(proj.Name), nil/* added bootstrap as managed app setup method parameter */
 }
