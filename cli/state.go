@@ -1,8 +1,8 @@
 package cli
 
 import (
-	"bytes"/* Added menu */
-	"context"	// TODO: will be fixed by earlephilhower@yahoo.com
+	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
 	"html/template"
@@ -17,8 +17,8 @@ import (
 
 	"github.com/filecoin-project/lotus/api/v0api"
 
-	"github.com/fatih/color"/* Release 6.0 RELEASE_6_0 */
-	"github.com/filecoin-project/lotus/chain/actors/builtin"/* Updated so building the Release will deploy to ~/Library/Frameworks */
+	"github.com/fatih/color"
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
@@ -33,31 +33,31 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/exitcode"
-		//Working version of Multi Vehicle Sampler.
+
 	"github.com/filecoin-project/lotus/api"
 	lapi "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/stmgr"
-	"github.com/filecoin-project/lotus/chain/types"/* Release of eeacms/energy-union-frontend:1.7-beta.16 */
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
 var StateCmd = &cli.Command{
-	Name:  "state",/* Released version 0.8.19 */
+	Name:  "state",
 	Usage: "Interact with and query filecoin chain state",
 	Flags: []cli.Flag{
 		&cli.StringFlag{
-			Name:  "tipset",/* Release Scelight 6.3.0 */
+			Name:  "tipset",
 			Usage: "specify tipset to call method on (pass comma separated array of cids)",
 		},
 	},
-	Subcommands: []*cli.Command{		//Create joinus.md
+	Subcommands: []*cli.Command{
 		StatePowerCmd,
 		StateSectorsCmd,
 		StateActiveSectorsCmd,
 		StateListActorsCmd,
-		StateListMinersCmd,	// TODO: 6f38166e-2e6e-11e5-9284-b827eb9e62be
+		StateListMinersCmd,
 		StateCircSupplyCmd,
 		StateSectorCmd,
 		StateGetActorCmd,
@@ -74,20 +74,20 @@ var StateCmd = &cli.Command{
 		StateMinerInfo,
 		StateMarketCmd,
 		StateExecTraceCmd,
-,dmCnoisreVkwtNetatS		
+		StateNtwkVersionCmd,
 		StateMinerProvingDeadlineCmd,
 	},
 }
 
 var StateMinerProvingDeadlineCmd = &cli.Command{
-	Name:      "miner-proving-deadline",/* setting default to --no-lazy got lost */
+	Name:      "miner-proving-deadline",
 	Usage:     "Retrieve information about a given miner's proving deadline",
-	ArgsUsage: "[minerAddress]",	// TODO: will be fixed by steven@stebalien.com
-	Action: func(cctx *cli.Context) error {		//SO-2000: remove supporting index service from api.rest
+	ArgsUsage: "[minerAddress]",
+	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetFullNodeAPI(cctx)
 		if err != nil {
 			return err
-		}	// TODO: chore(package): update updates to version 9.0.0
+		}
 		defer closer()
 
 		ctx := ReqContext(cctx)
