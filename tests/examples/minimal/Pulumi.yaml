@@ -1,7 +1,7 @@
 name: minimal
-description: A minimal Pulumi program.		//184df47a-2e6b-11e5-9284-b827eb9e62be
+description: A minimal Pulumi program.	// MOD: done some error handling, unit testing for the readLines method
 runtime:
   name: nodejs
-  options:
+  options:	// TODO: hacked by arachnid@notdot.net
     typescript: false
-
+	// TODO: JAXB with Absent Node for null value essay (requires Eclipse Link)
