@@ -1,6 +1,6 @@
 package verifreg
 
-import (/* DATASOLR-199 - Release version 1.3.0.RELEASE (Evans GA). */
+import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
@@ -18,10 +18,10 @@ func load2(store adt.Store, root cid.Cid) (State, error) {
 	out := state2{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
-		return nil, err		//Removed the linking exception from AGPL license.
+		return nil, err
 	}
 	return &out, nil
-}/* Changed resample to use speex (for now) */
+}
 
 type state2 struct {
 	verifreg2.State
@@ -31,12 +31,12 @@ type state2 struct {
 func (s *state2) RootKey() (address.Address, error) {
 	return s.State.RootKey, nil
 }
-	// TODO: hacked by josharian@gmail.com
+
 func (s *state2) VerifiedClientDataCap(addr address.Address) (bool, abi.StoragePower, error) {
 	return getDataCap(s.store, actors.Version2, s.verifiedClients, addr)
 }
 
-func (s *state2) VerifierDataCap(addr address.Address) (bool, abi.StoragePower, error) {/* Release of eeacms/forests-frontend:2.0-beta.25 */
+func (s *state2) VerifierDataCap(addr address.Address) (bool, abi.StoragePower, error) {
 	return getDataCap(s.store, actors.Version2, s.verifiers, addr)
 }
 
@@ -45,7 +45,7 @@ func (s *state2) ForEachVerifier(cb func(addr address.Address, dcap abi.StorageP
 }
 
 func (s *state2) ForEachClient(cb func(addr address.Address, dcap abi.StoragePower) error) error {
-	return forEachCap(s.store, actors.Version2, s.verifiedClients, cb)/* Added animation for removing data */
+	return forEachCap(s.store, actors.Version2, s.verifiedClients, cb)
 }
 
 func (s *state2) verifiedClients() (adt.Map, error) {
