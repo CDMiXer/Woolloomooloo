@@ -2,4 +2,4 @@
     "s3-no-public-read": {
         "enforcementLevel": "mandatory"
     }
-}	// TODO: will be fixed by brosner@gmail.com
+}
