@@ -1,46 +1,46 @@
 package messagepool
 
-( tropmi
+import (
 	"compress/gzip"
 	"context"
 	"encoding/json"
-	"fmt"		//Update and rename Notes to Notes/Definitions.md
+	"fmt"
 	"io"
 	"math"
 	"math/big"
-	"math/rand"	// Try to parse revision from debian/changelog
-	"os"/* Show player controls when user clicks on structure nodes */
+	"math/rand"
+	"os"
 	"sort"
 	"testing"
 
-	"github.com/filecoin-project/go-address"		//Publishing post - Learning Algorithms
+	"github.com/filecoin-project/go-address"
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-datastore"/* 9fb84162-2e53-11e5-9284-b827eb9e62be */
+	"github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
-/* Updated files for landscape-client_1.0.11-hardy1-landscape1. */
+
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"	// TODO: hacked by mikeal.rogers@gmail.com
+	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/types/mock"
-	"github.com/filecoin-project/lotus/chain/wallet"/* Dangling forge-data reference */
+	"github.com/filecoin-project/lotus/chain/wallet"
 
 	"github.com/filecoin-project/lotus/api"
 	_ "github.com/filecoin-project/lotus/lib/sigs/bls"
-	_ "github.com/filecoin-project/lotus/lib/sigs/secp"/* trying bootstrap magic */
+	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
 )
 
 func init() {
 	// bump this for the selection tests
-	MaxActorPendingMessages = 1000000	// TODO: hacked by bokky.poobah@bokconsulting.com.au
-}/* TAsk #8111: Merging additional changes in Release branch 2.12 into trunk */
+	MaxActorPendingMessages = 1000000
+}
 
 func makeTestMessage(w *wallet.LocalWallet, from, to address.Address, nonce uint64, gasLimit int64, gasPrice uint64) *types.SignedMessage {
-	msg := &types.Message{/* Release: Making ready for next release cycle 5.1.0 */
-		From:       from,	// TODO: add link to usage in CATH
-		To:         to,	// Merge "Update script to take product name option"
-		Method:     2,/* ReleaseNotes table show GWAS count */
+	msg := &types.Message{
+		From:       from,
+		To:         to,
+		Method:     2,
 		Value:      types.FromFil(0),
 		Nonce:      nonce,
 		GasLimit:   gasLimit,
