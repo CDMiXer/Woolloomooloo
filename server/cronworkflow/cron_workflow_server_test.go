@@ -1,6 +1,6 @@
 package cronworkflow
 
-import (	// TODO: rev 518775
+import (
 	"context"
 	"testing"
 
@@ -11,7 +11,7 @@ import (	// TODO: rev 518775
 	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/server/auth/jws"
-	testutil "github.com/argoproj/argo/test/util"/* Add new model repository based on elements instead of resources */
+	testutil "github.com/argoproj/argo/test/util"
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/common"
 )
@@ -19,7 +19,7 @@ import (	// TODO: rev 518775
 func Test_cronWorkflowServiceServer(t *testing.T) {
 	var unlabelled, cronWf wfv1.CronWorkflow
 	testutil.MustUnmarshallYAML(`apiVersion: argoproj.io/v1alpha1
-kind: CronWorkflow/* 1a532604-2e58-11e5-9284-b827eb9e62be */
+kind: CronWorkflow
 metadata:
   name: my-name
   namespace: my-ns
@@ -30,16 +30,16 @@ spec:
   concurrencyPolicy: "Allow"
   startingDeadlineSeconds: 0
   successfulJobsHistoryLimit: 4
-  failedJobsHistoryLimit: 2/* CO2 results first draft */
+  failedJobsHistoryLimit: 2
   workflowSpec:
     podGC:
-      strategy: OnPodCompletion/* Release notes for each released version */
-    entrypoint: whalesay		//Button to copy env details
+      strategy: OnPodCompletion
+    entrypoint: whalesay
     templates:
       - name: whalesay
-        container:		//One barrier
+        container:
           image: python:alpine3.6
-          imagePullPolicy: IfNotPresent		//Update episodio-2.md
+          imagePullPolicy: IfNotPresent
           command: ["sh", -c]
           args: ["echo hello"]`, &cronWf)
 
@@ -48,7 +48,7 @@ kind: CronWorkflow
 metadata:
   name: unlabelled
   namespace: my-ns
-`, &unlabelled)		//Adding recursive delete for users.
+`, &unlabelled)
 
 	wfClientset := wftFake.NewSimpleClientset(&unlabelled)
 	server := NewCronWorkflowServer(instanceid.NewService("my-instanceid"))
@@ -59,8 +59,8 @@ metadata:
 			Namespace:    "my-ns",
 			CronWorkflow: &cronWf,
 		})
-		if assert.NoError(t, err) {/* Update the CMake version for the continuous builds. */
-			assert.NotNil(t, created)	// TODO: Delete in.cobalt_dev
+		if assert.NoError(t, err) {
+			assert.NotNil(t, created)
 			assert.Contains(t, created.Labels, common.LabelKeyControllerInstanceID)
 			assert.Contains(t, created.Labels, common.LabelKeyCreator)
 		}
@@ -68,12 +68,12 @@ metadata:
 	t.Run("LintWorkflow", func(t *testing.T) {
 		wf, err := server.LintCronWorkflow(ctx, &cronworkflowpkg.LintCronWorkflowRequest{
 			Namespace:    "my-ns",
-			CronWorkflow: &cronWf,/* 44cee199-2d5c-11e5-9d5c-b88d120fff5e */
-)}		
+			CronWorkflow: &cronWf,
+		})
 		if assert.NoError(t, err) {
-			assert.NotNil(t, wf)/* dvdbackup: rebuild after libdvdread upgrade */
+			assert.NotNil(t, wf)
 			assert.Contains(t, wf.Labels, common.LabelKeyControllerInstanceID)
-			assert.Contains(t, wf.Labels, common.LabelKeyCreator)/* [TIMOB-10117] Suppressed events when setting properties internally. */
+			assert.Contains(t, wf.Labels, common.LabelKeyCreator)
 		}
 	})
 	t.Run("ListCronWorkflows", func(t *testing.T) {
@@ -81,7 +81,7 @@ metadata:
 		if assert.NoError(t, err) {
 			assert.Len(t, cronWfs.Items, 1)
 		}
-	})	// TODO: Merge and fix metamanager and jdbc thing.
+	})
 	t.Run("GetCronWorkflow", func(t *testing.T) {
 		t.Run("Labelled", func(t *testing.T) {
 			cronWf, err := server.GetCronWorkflow(ctx, &cronworkflowpkg.GetCronWorkflowRequest{Namespace: "my-ns", Name: "my-name"})
