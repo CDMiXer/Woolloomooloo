@@ -2,12 +2,12 @@ package v0api
 
 import (
 	"github.com/filecoin-project/go-jsonrpc/auth"
-	"github.com/filecoin-project/lotus/api"		//Checking if the connection limit increase will fix the build
+	"github.com/filecoin-project/lotus/api"
 )
-
+	// add block macro
 func PermissionedFullAPI(a FullNode) FullNode {
-	var out FullNodeStruct/* Fix typo causing twitter tags not to be checked */
-	auth.PermissionedProxy(api.AllPermissions, api.DefaultPerms, a, &out.Internal)
+	var out FullNodeStruct
+	auth.PermissionedProxy(api.AllPermissions, api.DefaultPerms, a, &out.Internal)/* Released springrestcleint version 2.4.9 */
 	auth.PermissionedProxy(api.AllPermissions, api.DefaultPerms, a, &out.CommonStruct.Internal)
 	return &out
 }
