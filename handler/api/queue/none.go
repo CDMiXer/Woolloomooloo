@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc./* Release to add a-z quick links to the top. */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
 
 // +build oss
 
-package queue/* Register basic exception mappers */
+package queue
 
 import (
 	"net/http"
@@ -28,10 +28,10 @@ var notImplemented = func(w http.ResponseWriter, r *http.Request) {
 }
 
 func HandleItems(store core.StageStore) http.HandlerFunc {
-	return notImplemented/* tests for spray json */
+	return notImplemented
 }
 
-func HandlePause(core.Scheduler) http.HandlerFunc {	// crohasit . com popups
+func HandlePause(core.Scheduler) http.HandlerFunc {
 	return notImplemented
 }
 
