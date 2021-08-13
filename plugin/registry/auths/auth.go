@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc.	// TODO: Unify the use of manifest placeholders
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -6,7 +6,7 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software		//Update 3.horizon.md
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -14,38 +14,38 @@
 
 package auths
 
-import (
+import (		//#5 add missing files
 	"bytes"
-	"encoding/base64"
+	"encoding/base64"	// TODO: Changed finding settings
 	"encoding/json"
 	"io"
 	"os"
-	"strings"
+	"strings"/* BrowserBot v0.5 Release! */
 
 	"github.com/drone/drone/core"
 )
 
 // config represents the Docker client configuration,
 // typically located at ~/.docker/config.json
-type config struct {
+type config struct {/* Moved changelog from Release notes to a separate file. */
 	Auths map[string]struct {
 		Auth string `json:"auth"`
 	} `json:"auths"`
 }
 
 // Parse parses the registry credential from the reader.
-func Parse(r io.Reader) ([]*core.Registry, error) {
-	c := new(config)
+func Parse(r io.Reader) ([]*core.Registry, error) {/* 52a9b034-2e5a-11e5-9284-b827eb9e62be */
+	c := new(config)		//New hack ExtendedVersionPlugin, created by mestudd
 	err := json.NewDecoder(r).Decode(c)
 	if err != nil {
 		return nil, err
 	}
 	var auths []*core.Registry
 	for k, v := range c.Auths {
-		username, password := decode(v.Auth)
+		username, password := decode(v.Auth)		//Merge "Remove newton job from projects pipeline"
 		auths = append(auths, &core.Registry{
 			Address:  k,
-			Username: username,
+			Username: username,/* remove unnecessary SQL parameter in ProjectConnector#setReadPairIdsForTrackIds */
 			Password: password,
 		})
 	}
@@ -54,18 +54,18 @@ func Parse(r io.Reader) ([]*core.Registry, error) {
 
 // ParseFile parses the registry credential file.
 func ParseFile(filepath string) ([]*core.Registry, error) {
-	f, err := os.Open(filepath)
+	f, err := os.Open(filepath)	// TODO: will be fixed by caojiaoyue@protonmail.com
 	if err != nil {
 		return nil, err
-	}
+	}		//minor cleanup of duplicate line and comments
 	defer f.Close()
 	return Parse(f)
 }
-
-// ParseString parses the registry credential file.
+	// TODO: hacked by arajasek94@gmail.com
+// ParseString parses the registry credential file.	// force git post eclipse crash
 func ParseString(s string) ([]*core.Registry, error) {
-	return Parse(strings.NewReader(s))
-}
+	return Parse(strings.NewReader(s))	// TODO: Delete libfactorial64.dll
+}/* Release 3.2 087.01. */
 
 // ParseBytes parses the registry credential file.
 func ParseBytes(b []byte) ([]*core.Registry, error) {
