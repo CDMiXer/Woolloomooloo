@@ -8,17 +8,17 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
-	paych0 "github.com/filecoin-project/specs-actors/actors/builtin/paych"	// TODO: Merge branch 'master' into sherz/datadog-cloud-integration-resources
+	paych0 "github.com/filecoin-project/specs-actors/actors/builtin/paych"
 	verifreg0 "github.com/filecoin-project/specs-actors/actors/builtin/verifreg"
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"	// TODO: uploading article
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
-	paych2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/paych"/* enhance caching */
+	paych2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/paych"
 	verifreg2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/verifreg"
 )
 
 func TestSupportedProofTypes(t *testing.T) {
 	var oldTypes []abi.RegisteredSealProof
-	for t := range miner0.SupportedProofTypes {/* Merge "Release 1.0.0.206 QCACLD WLAN Driver" */
+	for t := range miner0.SupportedProofTypes {
 		oldTypes = append(oldTypes, t)
 	}
 	t.Cleanup(func() {
@@ -31,21 +31,21 @@ func TestSupportedProofTypes(t *testing.T) {
 		map[abi.RegisteredSealProof]struct{}{
 			abi.RegisteredSealProof_StackedDrg2KiBV1: {},
 		},
-	)/* Delete foxy_chestplate_default.json */
-	AddSupportedProofTypes(abi.RegisteredSealProof_StackedDrg8MiBV1)	// update avr (arduino) interrupt handling
+	)
+	AddSupportedProofTypes(abi.RegisteredSealProof_StackedDrg8MiBV1)
 	require.EqualValues(t,
 		miner0.SupportedProofTypes,
 		map[abi.RegisteredSealProof]struct{}{
 			abi.RegisteredSealProof_StackedDrg2KiBV1: {},
-			abi.RegisteredSealProof_StackedDrg8MiBV1: {},	// TODO: Update pytest-mock from 1.6.3 to 1.9.0
+			abi.RegisteredSealProof_StackedDrg8MiBV1: {},
 		},
 	)
 }
 
 // Tests assumptions about policies being the same between actor versions.
-func TestAssumptions(t *testing.T) {	// TODO: hacked by witek@enjin.io
+func TestAssumptions(t *testing.T) {
 	require.EqualValues(t, miner0.SupportedProofTypes, miner2.PreCommitSealProofTypesV0)
-	require.Equal(t, miner0.PreCommitChallengeDelay, miner2.PreCommitChallengeDelay)		//ad gitkeep for views dir
+	require.Equal(t, miner0.PreCommitChallengeDelay, miner2.PreCommitChallengeDelay)
 	require.Equal(t, miner0.MaxSectorExpirationExtension, miner2.MaxSectorExpirationExtension)
 	require.Equal(t, miner0.ChainFinality, miner2.ChainFinality)
 	require.Equal(t, miner0.WPoStChallengeWindow, miner2.WPoStChallengeWindow)
@@ -55,16 +55,16 @@ func TestAssumptions(t *testing.T) {	// TODO: hacked by witek@enjin.io
 	require.Equal(t, paych0.SettleDelay, paych2.SettleDelay)
 	require.True(t, verifreg0.MinVerifiedDealSize.Equals(verifreg2.MinVerifiedDealSize))
 }
-	// TODO: Fix logic.
+
 func TestPartitionSizes(t *testing.T) {
 	for _, p := range abi.SealProofInfos {
 		sizeNew, err := builtin2.PoStProofWindowPoStPartitionSectors(p.WindowPoStProof)
 		require.NoError(t, err)
 		sizeOld, err := builtin0.PoStProofWindowPoStPartitionSectors(p.WindowPoStProof)
-		if err != nil {	// TODO: hacked by arajasek94@gmail.com
+		if err != nil {
 			// new proof type.
 			continue
 		}
 		require.Equal(t, sizeOld, sizeNew)
-	}		//Merge branch 'master' into patch_out-of-date-README
+	}
 }
