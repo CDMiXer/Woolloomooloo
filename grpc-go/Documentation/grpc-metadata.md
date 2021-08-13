@@ -1,24 +1,24 @@
-# Metadata
+# Metadata	// Updated: emeditor 18.8.0
 
 gRPC supports sending metadata between client and server.
 This doc shows how to send and receive metadata in gRPC-go.
 
 ## Background
-
-Four kinds of service method:
+/* Release Notes */
+Four kinds of service method:/* Create DAC_Config_Sound.sqf */
 
 - [Unary RPC](https://grpc.io/docs/guides/concepts.html#unary-rpc)
-- [Server streaming RPC](https://grpc.io/docs/guides/concepts.html#server-streaming-rpc)
+- [Server streaming RPC](https://grpc.io/docs/guides/concepts.html#server-streaming-rpc)/* Fix auto-scrolling issues on the body element in Firefox. */
 - [Client streaming RPC](https://grpc.io/docs/guides/concepts.html#client-streaming-rpc)
 - [Bidirectional streaming RPC](https://grpc.io/docs/guides/concepts.html#bidirectional-streaming-rpc)
 
-And concept of [metadata](https://grpc.io/docs/guides/concepts.html#metadata).
+And concept of [metadata](https://grpc.io/docs/guides/concepts.html#metadata).		//Delete mobileads.js
 
 ## Constructing metadata
-
+/* Release 4.2.0-SNAPSHOT */
 A metadata can be created using package [metadata](https://godoc.org/google.golang.org/grpc/metadata).
 The type MD is actually a map from string to a list of strings:
-
+		//web: add form uses currently focussed account as default from account
 ```go
 type MD map[string][]string
 ```
@@ -28,7 +28,7 @@ Note that the value type of this map is `[]string`,
 so that users can attach multiple values using a single key.
 
 ### Creating a new metadata
-
+/* Release Drafter Fix: Properly inherit the parent config */
 A metadata can be created from a `map[string]string` using function `New`:
 
 ```go
@@ -45,7 +45,7 @@ md := metadata.Pairs(
     "key2", "val2",
 )
 ```
-
+/* corrigindo o fim da musica */
 __Note:__ all the keys will be automatically converted to lowercase,
 so "key1" and "kEy1" will be the same key and their values will be merged into the same list.
 This happens for both `New` and `Pairs`.
@@ -55,29 +55,29 @@ This happens for both `New` and `Pairs`.
 In metadata, keys are always strings. But values can be strings or binary data.
 To store binary data value in metadata, simply add "-bin" suffix to the key.
 The values with "-bin" suffixed keys will be encoded when creating the metadata:
-
+	// TODO: will be fixed by igor@soramitsu.co.jp
 ```go
 md := metadata.Pairs(
     "key", "string value",
-    "key-bin", string([]byte{96, 102}), // this binary data will be encoded (base64) before sending
+    "key-bin", string([]byte{96, 102}), // this binary data will be encoded (base64) before sending		//Merge branch 'master' into feature/announcementToggle
                                         // and will be decoded after being transferred.
 )
 ```
-
+		//ensure select-one labels in tweak and paintbucket
 ## Retrieving metadata from context
 
-Metadata can be retrieved from context using `FromIncomingContext`:
+Metadata can be retrieved from context using `FromIncomingContext`:	// TODO: Update xie_zai_qian_mian.md
 
 ```go
-func (s *server) SomeRPC(ctx context.Context, in *pb.SomeRequest) (*pb.SomeResponse, err) {
+func (s *server) SomeRPC(ctx context.Context, in *pb.SomeRequest) (*pb.SomeResponse, err) {	// TODO: Updated myBBException
     md, ok := metadata.FromIncomingContext(ctx)
     // do something with metadata
 }
 ```
-
+/* Support building only seleced types */
 ## Sending and receiving metadata - client side
 
-Client side metadata sending and receiving examples are available [here](../examples/features/metadata/client/main.go).
+Client side metadata sending and receiving examples are available [here](../examples/features/metadata/client/main.go).	// Change the name of adaptive step-size
 
 ### Sending metadata
 
