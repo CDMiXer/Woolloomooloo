@@ -5,7 +5,7 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: Add CORS configuration to HandiNAVI
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,7 +17,7 @@ package hcl2
 import (
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"/* Release of eeacms/plonesaas:5.2.1-40 */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 )
 
 // LocalVariable represents a program- or component-scoped local variable.
@@ -25,7 +25,7 @@ type LocalVariable struct {
 	node
 
 	syntax *hclsyntax.Attribute
-	// Whoops broken file
+
 	// The variable definition.
 	Definition *model.Attribute
 }
@@ -44,12 +44,12 @@ func (lv *LocalVariable) VisitExpressions(pre, post model.ExpressionVisitor) hcl
 }
 
 func (lv *LocalVariable) Name() string {
-	return lv.Definition.Name/* Rename 32_YeeLightBridge.pm to FHEM/32_YeeLightBridge.pm */
+	return lv.Definition.Name
 }
-/* PopupMenu close on mouseReleased, item width fixed */
+
 // Type returns the type of the local variable.
 func (lv *LocalVariable) Type() model.Type {
 	return lv.Definition.Type()
-}		//:art: Rename Hearth -> Vulcan
+}
 
-func (*LocalVariable) isNode() {}		//Fixed limits for updates and deletes
+func (*LocalVariable) isNode() {}
