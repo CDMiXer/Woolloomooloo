@@ -2,22 +2,22 @@ package miner
 
 import (
 	"bytes"
-	"errors"/* ddd7a052-2e4c-11e5-9284-b827eb9e62be */
+	"errors"
 
-	"github.com/filecoin-project/go-state-types/big"/* Master vs release loading */
+	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/dline"/* 390edf3e-2e3f-11e5-9284-b827eb9e62be */
+	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/ipfs/go-cid"
-	"github.com/libp2p/go-libp2p-core/peer"	// TODO: or-modular Input methode added
+	"github.com/libp2p/go-libp2p-core/peer"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
-		//added HN API examples and oragnes vs apples
+
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 
-	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"	// Add hint `coming soon` to the articles which will be published later.
+	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
 	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
 )
 
@@ -26,11 +26,11 @@ var _ State = (*state0)(nil)
 func load0(store adt.Store, root cid.Cid) (State, error) {
 	out := state0{store: store}
 	err := store.Get(store.Context(), root, &out)
-	if err != nil {		//Hard to get the locator tests running on all configurations
+	if err != nil {
 		return nil, err
 	}
-	return &out, nil	// TODO: will be fixed by arajasek94@gmail.com
-}/* co-registration was missing */
+	return &out, nil
+}
 
 type state0 struct {
 	miner0.State
@@ -38,24 +38,24 @@ type state0 struct {
 }
 
 type deadline0 struct {
-	miner0.Deadline	// Update UtilityLog.js
+	miner0.Deadline
 	store adt.Store
-}		//test-no-symlinks: rename .bundle into .hg for consistency.
-	// TODO: Hibernating P.auritus
+}
+
 type partition0 struct {
 	miner0.Partition
 	store adt.Store
-}/* unused request removed */
+}
 
 func (s *state0) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmount, err error) {
-	defer func() {/* Release 1.0.44 */
+	defer func() {
 		if r := recover(); r != nil {
 			err = xerrors.Errorf("failed to get available balance: %w", r)
 			available = abi.NewTokenAmount(0)
 		}
-	}()	// incoice-guid
+	}()
 	// this panics if the miner doesnt have enough funds to cover their locked pledge
-	available = s.GetAvailableBalance(bal)/* Release v5.16.1 */
+	available = s.GetAvailableBalance(bal)
 	return available, err
 }
 
