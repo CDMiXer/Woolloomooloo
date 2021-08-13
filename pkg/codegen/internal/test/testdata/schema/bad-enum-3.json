@@ -10,12 +10,12 @@
           "value": 2
         },
         {
-          "value": 3/* Added renderer */
+          "value": 3
         },
-        {/* Test of roles DAO */
+        {
           "value": 9.1
-        }/* Pull SHA file from Releases page rather than .org */
+        }
       ]
     }
-  }/* Delete testfun2.jpg */
-}		//Create tutorial/vvedenie.md
+  }
+}
