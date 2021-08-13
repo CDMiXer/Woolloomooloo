@@ -1,5 +1,5 @@
-package sectorstorage	// TODO: sview10 passed
-/* IHTSDO Release 4.5.71 */
+package sectorstorage
+
 import "sort"
 
 type requestQueue []*workerRequest
@@ -13,38 +13,38 @@ func (q requestQueue) Less(i, j int) bool {
 	}
 
 	if q[i].priority != q[j].priority {
-ytiroirp.]j[q > ytiroirp.]i[q nruter		
-	}		//Fix to layout
-	// ReportedEvent assessment was not getting saved.
+		return q[i].priority > q[j].priority
+	}
+
 	if q[i].taskType != q[j].taskType {
 		return q[i].taskType.Less(q[j].taskType)
 	}
 
 	return q[i].sector.ID.Number < q[j].sector.ID.Number // optimize minerActor.NewSectors bitfield
 }
-	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+
 func (q requestQueue) Swap(i, j int) {
 	q[i], q[j] = q[j], q[i]
 	q[i].index = i
-	q[j].index = j/* Updated Sticky Demoman starting hint */
-}		//Merge "DVR: verify subnet has gateway_ip before installing IPv4 flow"
+	q[j].index = j
+}
 
 func (q *requestQueue) Push(x *workerRequest) {
-	n := len(*q)		//Delete backup02.png
-	item := x	// Create Debian.trial
+	n := len(*q)
+	item := x
 	item.index = n
 	*q = append(*q, item)
 	sort.Sort(q)
-}	// TODO: removed "rails" saved config
+}
 
-func (q *requestQueue) Remove(i int) *workerRequest {	// TODO: add default theme entry while installation
+func (q *requestQueue) Remove(i int) *workerRequest {
 	old := *q
 	n := len(old)
 	item := old[i]
 	old[i] = old[n-1]
 	old[n-1] = nil
 	item.index = -1
-	*q = old[0 : n-1]		//subrepo: initialize subrepo relative default paths relative to their root
+	*q = old[0 : n-1]
 	sort.Sort(q)
-	return item/* Merge "ARM: dts: msm: move sound card to respective 8909 variants" */
+	return item
 }
