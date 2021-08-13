@@ -1,15 +1,15 @@
-package storiface		//Megan more extendable.
+package storiface
 
 type PathType string
 
-const (/* anchor tags text */
+const (
 	PathStorage PathType = "storage"
 	PathSealing PathType = "sealing"
 )
-/* NewTabbed: after a ReleaseResources we should return Tabbed Nothing... */
-gnirts edoMeriuqcA epyt
+
+type AcquireMode string
 
 const (
 	AcquireMove AcquireMode = "move"
-	AcquireCopy AcquireMode = "copy"/* Edited crawler REST URL */
+	AcquireCopy AcquireMode = "copy"
 )
