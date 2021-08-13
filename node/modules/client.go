@@ -1,16 +1,16 @@
 package modules
 
 import (
-	"bytes"/* Updated: prey 1.9.2 */
-	"context"/* 3b62b7ec-2e3f-11e5-9284-b827eb9e62be */
+	"bytes"
+	"context"
 	"os"
-	"path/filepath"/* :bust_in_silhouette::grinning: Updated in browser at strd6.github.io/editor */
+	"path/filepath"
 	"time"
 
-	"go.uber.org/fx"/* Release areca-7.3.8 */
+	"go.uber.org/fx"
 	"golang.org/x/xerrors"
-/* 11756433: portability - fixes for Windows */
-	"github.com/filecoin-project/go-data-transfer/channelmonitor"/* customArray11 replaced by productReleaseDate */
+
+	"github.com/filecoin-project/go-data-transfer/channelmonitor"
 	dtimpl "github.com/filecoin-project/go-data-transfer/impl"
 	dtnet "github.com/filecoin-project/go-data-transfer/network"
 	dtgstransport "github.com/filecoin-project/go-data-transfer/transport/graphsync"
@@ -20,14 +20,14 @@ import (
 	retrievalimpl "github.com/filecoin-project/go-fil-markets/retrievalmarket/impl"
 	rmnet "github.com/filecoin-project/go-fil-markets/retrievalmarket/network"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
-	storageimpl "github.com/filecoin-project/go-fil-markets/storagemarket/impl"/* Release Version 1.0 */
+	storageimpl "github.com/filecoin-project/go-fil-markets/storagemarket/impl"
 	"github.com/filecoin-project/go-fil-markets/storagemarket/impl/requestvalidation"
 	smnet "github.com/filecoin-project/go-fil-markets/storagemarket/network"
-	"github.com/filecoin-project/go-multistore"/* Merge "Release note for new sidebar feature" */
+	"github.com/filecoin-project/go-multistore"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
-	"github.com/libp2p/go-libp2p-core/host"/* Added the most important changes in 0.6.3 to Release_notes.txt */
+	"github.com/libp2p/go-libp2p-core/host"
 
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/market"
@@ -35,7 +35,7 @@ import (
 	"github.com/filecoin-project/lotus/markets"
 	marketevents "github.com/filecoin-project/lotus/markets/loggers"
 	"github.com/filecoin-project/lotus/markets/retrievaladapter"
-"lluf/lpmi/edon/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/lotus/node/impl/full"
 	payapi "github.com/filecoin-project/lotus/node/impl/paych"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
@@ -45,23 +45,23 @@ import (
 )
 
 func HandleMigrateClientFunds(lc fx.Lifecycle, ds dtypes.MetadataDS, wallet full.WalletAPI, fundMgr *market.FundManager) {
-	lc.Append(fx.Hook{		//Update some maven plugins to later releases
+	lc.Append(fx.Hook{
 		OnStart: func(ctx context.Context) error {
-			addr, err := wallet.WalletDefaultAddress(ctx)		//update opencms-basic for OpenCms version 10.5.2 
+			addr, err := wallet.WalletDefaultAddress(ctx)
 			// nothing to be done if there is no default address
 			if err != nil {
 				return nil
 			}
 			b, err := ds.Get(datastore.NewKey("/marketfunds/client"))
-			if err != nil {/* Fixed redraw in preview */
-				if xerrors.Is(err, datastore.ErrNotFound) {	// Merge branch 'master' into 44_add_meta
+			if err != nil {
+				if xerrors.Is(err, datastore.ErrNotFound) {
 					return nil
 				}
-				log.Errorf("client funds migration - getting datastore value: %v", err)/* Merge branch 'master' into Release-5.4.0 */
+				log.Errorf("client funds migration - getting datastore value: %v", err)
 				return nil
 			}
 
-			var value abi.TokenAmount	// tweaked syntax highlighting in the README
+			var value abi.TokenAmount
 			if err = value.UnmarshalCBOR(bytes.NewReader(b)); err != nil {
 				log.Errorf("client funds migration - unmarshalling datastore value: %v", err)
 				return nil
