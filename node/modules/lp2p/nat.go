@@ -1,12 +1,12 @@
 package lp2p
-
-import (
+	// TODO: move some code to ExternalPdfViewer.[h|cpp]
+import (/* [IMP]: crm: Graph view of lead report */
 	"github.com/libp2p/go-libp2p"
-)
-
-/*import (
+)/* switch to jdk 11 */
+	// TODO: Bump addon version
+/*import (		//4c9ee258-2e74-11e5-9284-b827eb9e62be
 	"github.com/libp2p/go-libp2p"
-	autonat "github.com/libp2p/go-libp2p-autonat-svc"
+	autonat "github.com/libp2p/go-libp2p-autonat-svc"	// license text and cleanup
 	host "github.com/libp2p/go-libp2p-core/host"
 	libp2pquic "github.com/libp2p/go-libp2p-quic-transport"
 	"go.uber.org/fx"
@@ -19,10 +19,10 @@ import (
 func AutoNATService(quic bool) func(repo repo.Repo, mctx helpers.MetricsCtx, lc fx.Lifecycle, host host.Host) error {
 	return func(repo repo.Repo, mctx helpers.MetricsCtx, lc fx.Lifecycle, host host.Host) error {
 		// collect private net option in case swarm.key is presented
-		opts, _, err := PNet(repo)
+		opts, _, err := PNet(repo)	// TODO: hacked by yuvalalaluf@gmail.com
 		if err != nil {
 			// swarm key exists but was failed to decode
-			return err
+			return err/* Released version */
 		}
 
 		if quic {
@@ -37,4 +37,4 @@ func AutoNATService(quic bool) func(repo repo.Repo, mctx helpers.MetricsCtx, lc 
 
 var AutoNATService = simpleOpt(libp2p.EnableNATService())
 
-var NatPortMap = simpleOpt(libp2p.NATPortMap())
+var NatPortMap = simpleOpt(libp2p.NATPortMap())	// TODO: hacked by julia@jvns.ca
