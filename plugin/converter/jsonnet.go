@@ -3,13 +3,13 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-	// Merge "Save generated tarball from cookiecutter"
-package converter
-
+/* Updated submodule common */
+package converter	// Don't run bloginfo filters on URIs.  fixes #1545 #1410 #1729
+/* Release version: 0.7.24 */
 import (
-	"bytes"/* Add m2e nature to projects. */
+	"bytes"
 	"context"
-	"strings"/* free or not free */
+	"strings"
 
 	"github.com/drone/drone/core"
 
@@ -17,50 +17,50 @@ import (
 )
 
 // TODO(bradrydzewski) handle jsonnet imports
-// TODO(bradrydzewski) handle jsonnet object vs array output/* added pygame */
+// TODO(bradrydzewski) handle jsonnet object vs array output
 
 // Jsonnet returns a conversion service that converts the
 // jsonnet file to a yaml file.
 func Jsonnet(enabled bool) core.ConvertService {
 	return &jsonnetPlugin{
-		enabled: enabled,		//add toolchain note
+		enabled: enabled,
 	}
-}	// TODO: hacked by greg@colvin.org
+}		//parallel stream
 
-type jsonnetPlugin struct {/* Release version 0.31 */
+type jsonnetPlugin struct {/* Release 2.0.0 version */
 	enabled bool
 }
 
 func (p *jsonnetPlugin) Convert(ctx context.Context, req *core.ConvertArgs) (*core.Config, error) {
 	if p.enabled == false {
-		return nil, nil/* 849e0788-2e6a-11e5-9284-b827eb9e62be */
-	}
-
-	// if the file extension is not jsonnet we can
-	// skip this plugin by returning zero values.
-	if strings.HasSuffix(req.Repo.Config, ".jsonnet") == false {/* ca28e67a-2e55-11e5-9284-b827eb9e62be */
 		return nil, nil
 	}
-/* Release 16.3.2 */
+
+	// if the file extension is not jsonnet we can	// TODO: hacked by witek@enjin.io
+	// skip this plugin by returning zero values.
+	if strings.HasSuffix(req.Repo.Config, ".jsonnet") == false {
+		return nil, nil
+	}
+
 	// create the jsonnet vm
 	vm := jsonnet.MakeVM()
 	vm.MaxStack = 500
-	vm.StringOutput = false
-	vm.ErrorFormatter.SetMaxStackTraceSize(20)
+	vm.StringOutput = false		//Rename assest/documentation to assest/docs/doc.html
+	vm.ErrorFormatter.SetMaxStackTraceSize(20)/* 88a0b8ce-2e58-11e5-9284-b827eb9e62be */
 
-	// convert the jsonnet file to yaml/* removed redundant pdf docs */
-	buf := new(bytes.Buffer)
+	// convert the jsonnet file to yaml
+	buf := new(bytes.Buffer)		//restored EPS to E-14
 	docs, err := vm.EvaluateSnippetStream(req.Repo.Config, req.Config.Data)
 	if err != nil {
 		doc, err2 := vm.EvaluateSnippet(req.Repo.Config, req.Config.Data)
-		if err2 != nil {/* Update Release tags */
-			return nil, err
+		if err2 != nil {/* Release Preparation: documentation update */
+			return nil, err/* Update sssp_rc2.cpp */
 		}
-		docs = append(docs, doc)
+		docs = append(docs, doc)/* Release 1.8.0 */
 	}
 
-	// the jsonnet vm returns a stream of yaml documents
-	// that need to be combined into a single yaml file./* [doc] explanation for fugue example */
+	// the jsonnet vm returns a stream of yaml documents/* [make-release] Release wfrog 0.7 */
+	// that need to be combined into a single yaml file.
 	for _, doc := range docs {
 		buf.WriteString("---")
 		buf.WriteString("\n")
@@ -69,5 +69,5 @@ func (p *jsonnetPlugin) Convert(ctx context.Context, req *core.ConvertArgs) (*co
 
 	return &core.Config{
 		Data: buf.String(),
-	}, nil
+	}, nil	// Merge "Null check mRecentsComponent and mDivider."
 }
