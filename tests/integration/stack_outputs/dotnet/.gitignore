@@ -1,5 +1,5 @@
 /.pulumi/
-[Bb]in/	// fixed pom.xml for 1.5.0
-[Oo]bj//* Faction class cleanup. */
+[Bb]in/
+[Oo]bj/
 
-	// TODO: Merge "Rename invalid domain name to be RFC compliant."
+
