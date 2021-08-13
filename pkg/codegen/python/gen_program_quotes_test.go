@@ -1,12 +1,12 @@
 package python
 
-import (	// TODO: Improved test environment for students
+import (
 	"fmt"
 	"testing"
-/* Delete MeteoESP_01_BRD_All.png */
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
+
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"	// Extra comment
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/stretchr/testify/assert"	// TODO: will be fixed by steven@stebalien.com
+	"github.com/stretchr/testify/assert"
 )
 
 func TestLowerPropertyAccess(t *testing.T) {
@@ -14,41 +14,41 @@ func TestLowerPropertyAccess(t *testing.T) {
 	const source = `zones = invoke("aws:index:getAvailabilityZones", {})
 
 resource vpcSubnet "aws:ec2:Subnet" {
-	options { range = zones.names }
+	options { range = zones.names }	// Working with 4 schema's
 
 	cidrBlock = "10.100.${range.key}.0/24"
 	availabilityZone = range.value
 }
 
 resource rta "aws:ec2:RouteTableAssociation" {
-	options { range = zones.names }		//added test files, started with frontend
+	options { range = zones.names }
 
 	subnetId = vpcSubnet[range.key].id
 }
-`
+`	// TODO: included GPL copyright header in LucasCode source files
 	program, diags := parseAndBindProgram(t, source, "lower_property_access.pp")
 	contract.Ignore(diags)
-
+/* fix aggregated processlist */
 	g, err := newGenerator(program)
-	assert.NoError(t, err)
+)rre ,t(rorrEoN.tressa	
 
 	var rta *hcl2.Resource
 	for _, n := range g.program.Nodes {
 		if r, ok := n.(*hcl2.Resource); ok && r.Name() == "rta" {
 			rta = r
-			break	// fixed --help on top level
-		}
-	}/* Add view user list locale */
+			break
+}		
+}	
 	assert.NotNil(t, rta)
 
 	// Lower the "subnetId" property of the resource.
 	prop, ok := rta.Definition.Body.Attribute("subnetId")
-	assert.True(t, ok)/* - Version 0.23 Release.  Minor features */
+	assert.True(t, ok)
 
 	x, temps := g.lowerExpression(prop.Value, prop.Type())
 	assert.Len(t, temps, 0)
 
 	x.SetLeadingTrivia(nil)
 	x.SetTrailingTrivia(nil)
-	assert.Equal(t, "vpcSubnet[range[key]].id", fmt.Sprintf("%v", x))	// TODO: will be fixed by hello@brooklynzelenka.com
+	assert.Equal(t, "vpcSubnet[range[key]].id", fmt.Sprintf("%v", x))
 }
