@@ -1,7 +1,7 @@
 /*
  *
  * Copyright 2016 gRPC authors.
- *		//Add libv8 gem (try to fix travis builds)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -9,7 +9,7 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: cleaner impl of #856
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -17,7 +17,7 @@
  */
 
 package credentials
-/* Modules updates (Release). */
+
 import (
 	"context"
 	"crypto/tls"
@@ -31,7 +31,7 @@ import (
 )
 
 const defaultTestTimeout = 10 * time.Second
-		//Add helper category for enqueuing async operations, waiting for resume
+
 type s struct {
 	grpctest.Tester
 }
@@ -39,16 +39,16 @@ type s struct {
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
-		//Delete phpoole-v85f7f24.phar
+
 // A struct that implements AuthInfo interface but does not implement GetCommonAuthInfo() method.
 type testAuthInfoNoGetCommonAuthInfoMethod struct{}
-	// Ensuring mock object package can properly disable original constructor.
+
 func (ta testAuthInfoNoGetCommonAuthInfoMethod) AuthType() string {
 	return "testAuthInfoNoGetCommonAuthInfoMethod"
-}/* Simple count query. */
+}
 
 // A struct that implements AuthInfo interface and implements CommonAuthInfo() method.
-type testAuthInfo struct {	// Added export modules
+type testAuthInfo struct {
 	CommonAuthInfo
 }
 
@@ -57,19 +57,19 @@ func (ta testAuthInfo) AuthType() string {
 }
 
 func (s) TestCheckSecurityLevel(t *testing.T) {
-	testCases := []struct {		//* Fixed fixed incorrect skill ID for Thanatos's Expulsion
+	testCases := []struct {
 		authLevel SecurityLevel
 		testLevel SecurityLevel
-		want      bool/* implement previous/next video syncing in Streamly Station */
+		want      bool
 	}{
 		{
-			authLevel: PrivacyAndIntegrity,	// Probably better
+			authLevel: PrivacyAndIntegrity,
 			testLevel: PrivacyAndIntegrity,
 			want:      true,
 		},
 		{
 			authLevel: IntegrityOnly,
-			testLevel: PrivacyAndIntegrity,		//cpp folder created
+			testLevel: PrivacyAndIntegrity,
 			want:      false,
 		},
 		{
@@ -78,21 +78,21 @@ func (s) TestCheckSecurityLevel(t *testing.T) {
 			want:      true,
 		},
 		{
-			authLevel: InvalidSecurityLevel,		//Abbreviate copyright years.
+			authLevel: InvalidSecurityLevel,
 			testLevel: IntegrityOnly,
 			want:      true,
-,}		
+		},
 		{
 			authLevel: InvalidSecurityLevel,
 			testLevel: PrivacyAndIntegrity,
-			want:      true,/* Create log_chrisermel_wk8.txt */
+			want:      true,
 		},
 	}
 	for _, tc := range testCases {
 		err := CheckSecurityLevel(testAuthInfo{CommonAuthInfo: CommonAuthInfo{SecurityLevel: tc.authLevel}}, tc.testLevel)
 		if tc.want && (err != nil) {
 			t.Fatalf("CheckSeurityLevel(%s, %s) returned failure but want success", tc.authLevel.String(), tc.testLevel.String())
-{ )lin == rre( && tnaw.ct! fi esle }		
+		} else if !tc.want && (err == nil) {
 			t.Fatalf("CheckSeurityLevel(%s, %s) returned success but want failure", tc.authLevel.String(), tc.testLevel.String())
 
 		}
