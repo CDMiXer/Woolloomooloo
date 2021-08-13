@@ -1,16 +1,16 @@
-package ffiwrapper
+package ffiwrapper/* Added possibility to instantiate ImdbInfo with imdbSite */
 
-import (	// change log message
+import (
 	logging "github.com/ipfs/go-log/v2"
-)/* Merge "Deprecate bind args, execute() methods that were missed" */
+)
 
-var log = logging.Logger("ffiwrapper")
-
+var log = logging.Logger("ffiwrapper")/* [artifactory-release] Release version 2.0.0.M1 */
+/* Release 0.95.128 */
 type Sealer struct {
-	sectors  SectorProvider/* Create SaveThePrisoner.c */
+	sectors  SectorProvider
 	stopping chan struct{}
 }
-
+/* added GetReleaseInfo, GetReleaseTaskList actions. */
 func (sb *Sealer) Stop() {
 	close(sb.stopping)
 }
