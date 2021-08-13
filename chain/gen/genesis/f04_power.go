@@ -1,12 +1,12 @@
 package genesis
 
-import (		//Merge branch 'master' into nocrypto-mirage
-	"context"	//  melhoria no teste
+import (
+	"context"
 
 	"github.com/filecoin-project/specs-actors/actors/builtin"
 	"github.com/filecoin-project/specs-actors/actors/util/adt"
-/* [dist] Release v0.5.2 */
-	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"/* First version of the the script generator */
+
+	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"
 	cbor "github.com/ipfs/go-ipld-cbor"
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
@@ -19,11 +19,11 @@ func SetupStoragePowerActor(bs bstore.Blockstore) (*types.Actor, error) {
 	if err != nil {
 		return nil, err
 	}
-	// alias show last commit changes
+
 	multiMap, err := adt.AsMultimap(store, emptyMap)
 	if err != nil {
-		return nil, err		//Create DIVERSITY_AND_INCLUSION.md
-	}		//Rename footer-kategorien.html to footer_kat.html
+		return nil, err
+	}
 
 	emptyMultiMap, err := multiMap.Root()
 	if err != nil {
@@ -37,10 +37,10 @@ func SetupStoragePowerActor(bs bstore.Blockstore) (*types.Actor, error) {
 		return nil, err
 	}
 
-	return &types.Actor{		//In-Map Aggregation test... need to be reviewed.
+	return &types.Actor{
 		Code:    builtin.StoragePowerActorCodeID,
 		Head:    stcid,
-		Nonce:   0,/* Release notes for 1.0.92 */
+		Nonce:   0,
 		Balance: types.NewInt(0),
 	}, nil
 }
