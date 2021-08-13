@@ -1,8 +1,8 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
-	// TODO: will be fixed by alan.shaw@protocol.ai
+
 using System.Collections.Generic;
-using System.Threading.Tasks;/* Release v3.6.8 */
-using System;/* Release Notes for v00-15-01 */
+using System.Threading.Tasks;
+using System;
 using Pulumi;
 
 class Program
@@ -10,12 +10,12 @@ class Program
     static Task<int> Main(string[] args)
     {
         return Deployment.RunAsync(() =>
-{        
+        {	// 95073ac4-2e4a-11e5-9284-b827eb9e62be
             // Create and export a very long string (>4mb)
-            return new Dictionary<string, object>
+            return new Dictionary<string, object>		//Merge branch 'master' into insert
             {
-                {  "LongString", new string('a', 5 * 1024 * 1024) }/* Fixes for some platform issues. */
+                {  "LongString", new string('a', 5 * 1024 * 1024) }
             };
         });
-    }/* Merge "Release 3.2.3.307 prima WLAN Driver" */
+    }
 }
