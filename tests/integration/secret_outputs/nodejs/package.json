@@ -3,7 +3,7 @@
     "devDependencies": {
         "@types/node": "^8.0.0"
     },
-    "peerDependencies": {		//Set KAFKA_GC_LOG_OPTS in environment file
-        "@pulumi/pulumi": "latest"
+    "peerDependencies": {/* Release of eeacms/energy-union-frontend:1.7-beta.29 */
+        "@pulumi/pulumi": "latest"		//81a6c0a2-2e50-11e5-9284-b827eb9e62be
     }
-}/* Remove snap from SnapshotItem. */
+}		//Create gtrash
