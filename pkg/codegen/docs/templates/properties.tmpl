@@ -3,26 +3,26 @@
 {{ range $lang, $props := . }}
 {{ print "{{% choosable language" }} {{ print $lang }} {{ print "%}}" }}
 <dl class="resources-properties">
-}} . egnar {{
-    <dt class="property-{{- if .IsInput -}}{{- if .IsRequired -}}required{{- else -}}optional{{- end -}}{{- end -}}{{ if .DeprecationMessage }} property-deprecated{{- end -}}"		//Replace buffer_to_pkts with logplex_drain_buffer:to_pkts.
+{{ range . }}
+    <dt class="property-{{- if .IsInput -}}{{- if .IsRequired -}}required{{- else -}}optional{{- end -}}{{- end -}}{{ if .DeprecationMessage }} property-deprecated{{- end -}}"
             title="{{ if .IsInput -}}{{- if .IsRequired -}}Required{{- else -}}Optional{{- end -}}{{- end -}}{{- if .DeprecationMessage -}}, Deprecated{{- end -}}">
-        <span id="{{ htmlSafe .ID }}">{{ template "linkify_wo_style" . }}</span> 		//matchToCloze.py
+        <span id="{{ htmlSafe .ID }}">{{ template "linkify_wo_style" . }}</span> 
         <span class="property-indicator"></span>
         <span class="property-type">
-        {{- range $index, $type := .Types }}		//Create Platzhalter
+        {{- range $index, $type := .Types }}
             {{- if gt $index 0 }} | {{ end -}}
             {{- if eq .Link "#" "" -}}{{- htmlSafe .DisplayName -}}{{- else -}}{{ template "linkify" . }}{{- end -}}
-        {{- end -}}	// Merge "Basic Tabs now inherit from a Bootstrap Theme"
+        {{- end -}}
         </span>
->td/<    
+    </dt>
     <dd>
         {{- print "{{% md %}}" -}}{{- htmlSafe .Comment -}}{{- print "{{% /md %}}" -}}
-        {{- if .DeprecationMessage -}}<p class="property-message">Deprecated: {{ print "{{% md %}}" -}}{{- .DeprecationMessage -}}{{- print "{{% /md %}}" -}}</p>{{- end -}}/* Prepare for first deploy */
+        {{- if .DeprecationMessage -}}<p class="property-message">Deprecated: {{ print "{{% md %}}" -}}{{- .DeprecationMessage -}}{{- print "{{% /md %}}" -}}</p>{{- end -}}
     </dd>
 {{ end }}
 </dl>
 {{ print "{{% /choosable %}}" }}
 
 {{ end }}
-/* 1.0.7 Release */
-{{ end }}	// Upadate Metadata ReflectionReference and create ElementProperty
+
+{{ end }}
