@@ -3,16 +3,16 @@
   author = "raulk"
 
 [global]
-  plan = "lotus-soup"/* Release 1.3.3 version */
+  plan = "lotus-soup"
   case = "paych-stress"
-  total_instances = 5   # 2 clients + 2 miners + 1 bootstrapper/* Release 0.94.320 */
-  builder = "exec:go"	// Move federated install step to install:all
+  total_instances = 5   # 2 clients + 2 miners + 1 bootstrapper
+  builder = "exec:go"
   runner = "local:exec"
 
 [global.build]
   selectors = ["testground"]
 
-[global.run_config]	// Update FHeap.h
+[global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
@@ -25,12 +25,12 @@
   balance = "100"    ## be careful, this is in FIL.
   sectors = "10"
   random_beacon_type = "mock"
-  mining_mode = "natural"/* starting gradle(github) */
+  mining_mode = "natural"
   # number of lanes to send vouchers on
-  lane_count = "8"		//Update tez.tex
+  lane_count = "8"
   # number of vouchers on each lane
   vouchers_per_lane = "3"
-  # amount to increase voucher by each time (per lane)/* Delete Release.png */
+  # amount to increase voucher by each time (per lane)
   increments = "3" ##  in FIL
 
 [[groups]]
@@ -41,7 +41,7 @@
 
 [[groups]]
   id = "miners"
-  instances = { count = 2 }	// TODO: will be fixed by julia@jvns.ca
+  instances = { count = 2 }
   [groups.run.test_params]
     role = "miner"
 
