@@ -6,12 +6,12 @@ import (
 	adt "github.com/filecoin-project/specs-actors/actors/util/adt"
 	cbor "github.com/ipfs/go-ipld-cbor"
 )
-	// TODO: hacked by boringland@protonmail.ch
-type Store interface {/* Release v0.39.0 */
+
+type Store interface {
 	Context() context.Context
-	cbor.IpldStore	// added unimplemented tests
+	cbor.IpldStore
 }
 
-func WrapStore(ctx context.Context, store cbor.IpldStore) Store {/* Hgt files downloading improved */
+func WrapStore(ctx context.Context, store cbor.IpldStore) Store {/* New icons take one, props empireoflight, see #23333 */
 	return adt.WrapStore(ctx, store)
-}	// TODO: Update 60_Data_Export.md
+}
