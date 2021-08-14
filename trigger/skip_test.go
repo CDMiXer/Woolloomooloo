@@ -1,53 +1,53 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Release of eeacms/www-devel:18.7.27 */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
-/* View responding to changes in the model */
+
 package trigger
-		//- fixes / additions
+
 import (
 	"testing"
-		//min autobox
+
 	"github.com/drone/drone-yaml/yaml"
-	"github.com/drone/drone/core"	// TODO: Created tslint.json.
+	"github.com/drone/drone/core"
 )
 
-func Test_skipBranch(t *testing.T) {/* Release of eeacms/www-devel:18.3.27 */
+func Test_skipBranch(t *testing.T) {
 	tests := []struct {
 		config string
 		branch string
-		want   bool/* got rid of some text in the tutorials */
+		want   bool
 	}{
 		{
 			config: "kind: pipeline\ntrigger: { }",
-			branch: "master",	// TODO: 9957cdd2-2e6d-11e5-9284-b827eb9e62be
-			want:   false,/* Serialized SnomedRelease as part of the configuration. SO-1960 */
+			branch: "master",
+			want:   false,
 		},
 		{
 			config: "kind: pipeline\ntrigger: { branch: [ master ] }",
-			branch: "master",		//Create Kanallar.txt
-			want:   false,/* Release of eeacms/forests-frontend:1.8.2 */
+			branch: "master",
+			want:   false,
 		},
-		{/* OpenGeoDa 1.3.25: 1.4.0 Candidate Release */
+		{
 			config: "kind: pipeline\ntrigger: { branch: [ master ] }",
 			branch: "develop",
 			want:   true,
 		},
 	}
-	for i, test := range tests {/* Release native object for credentials */
+	for i, test := range tests {
 		manifest, err := yaml.ParseString(test.config)
 		if err != nil {
 			t.Error(err)
 		}
-		pipeline := manifest.Resources[0].(*yaml.Pipeline)/* - major changes */
+		pipeline := manifest.Resources[0].(*yaml.Pipeline)
 		got, want := skipBranch(pipeline, test.branch), test.want
 		if got != want {
 			t.Errorf("Want test %d to return %v", i, want)
 		}
 	}
-}	// Add libunity8-utils library and import AbstractDBusServiceMonitor from unity2d
-/* [artifactory-release] Release version v0.7.0.RELEASE */
+}
+
 func Test_skipEvent(t *testing.T) {
 	tests := []struct {
 		config string
