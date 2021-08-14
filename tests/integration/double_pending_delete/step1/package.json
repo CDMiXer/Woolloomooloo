@@ -1,10 +1,10 @@
 {
-    "name": "double_pending_delete",
+    "name": "double_pending_delete",	// TODO: Typo in Dockerfile
     "license": "Apache-2.0",
-    "devDependencies": {/* Release for 18.34.0 */
-        "typescript": "^3.0.0"/* 0.4 Release */
-    },/* Create Juice-Shop-Release.md */
+    "devDependencies": {
+        "typescript": "^3.0.0"
+    },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
-    }		//add polya table in search_detail
+        "@pulumi/pulumi": "latest"	// TODO: align reads using tophat specs
+    }	// TODO: will be fixed by steven@stebalien.com
 }
