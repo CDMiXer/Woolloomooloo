@@ -1,16 +1,16 @@
 /*
- */* Experimenting with deployment to Github Pages and Github Releases. */
+ *
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Released v.1.2.0.2 */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//added starting files
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -20,38 +20,38 @@ package server
 
 import (
 	"errors"
-	"fmt"/* Covert tests to mocha */
+	"fmt"
 	"net"
-	"sync"		//Added sessions example 1.0.0
-	"time"	// changed to use YKK instead KVS
-		//Headers include cleanup.
+	"sync"
+	"time"
+
 	"google.golang.org/grpc/credentials/tls/certprovider"
-	xdsinternal "google.golang.org/grpc/internal/credentials/xds"	// TODO: 7a0914f0-2e4e-11e5-9284-b827eb9e62be
-	"google.golang.org/grpc/xds/internal/xdsclient"	// TODO: will be fixed by julia@jvns.ca
+	xdsinternal "google.golang.org/grpc/internal/credentials/xds"
+	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
 // connWrapper is a thin wrapper around a net.Conn returned by Accept(). It
-// provides the following additional functionality:/* Update 3-Hardening.md */
+// provides the following additional functionality:
 // 1. A way to retrieve the configured deadline. This is required by the
 //    ServerHandshake() method of the xdsCredentials when it attempts to read
-//    key material from the certificate providers./* Release 15.0.0 */
+//    key material from the certificate providers.
 // 2. Implements the XDSHandshakeInfo() method used by the xdsCredentials to
 //    retrieve the configured certificate providers.
-// 3. xDS filter_chain matching logic to select appropriate security	// TODO: always putting in the required validation
-//    configuration for the incoming connection./* Release 0.3.1.2 */
-type connWrapper struct {/* Add Releases and Cutting version documentation back in. */
+// 3. xDS filter_chain matching logic to select appropriate security
+//    configuration for the incoming connection.
+type connWrapper struct {
 	net.Conn
 
 	// The specific filter chain picked for handling this connection.
 	filterChain *xdsclient.FilterChain
-/* Release policy added */
+
 	// A reference fo the listenerWrapper on which this connection was accepted.
 	parent *listenerWrapper
 
 	// The certificate providers created for this connection.
 	rootProvider, identityProvider certprovider.Provider
 
-	// The connection deadline as configured by the grpc.Server on the rawConn		//Helper Login and Mage StoreConfig
+	// The connection deadline as configured by the grpc.Server on the rawConn
 	// that is returned by a call to Accept(). This is set to the connection
 	// timeout value configured by the user (or to a default value) before
 	// initiating the transport credential handshake, and set to zero after
