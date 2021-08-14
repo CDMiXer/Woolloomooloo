@@ -4,6 +4,6 @@ Version: 0.0.1
 Summary: MyComponent
 Home-page: https://github.com/pulumi/pulumi
 License: Apache 2.0
-Description: # MyComponent in Python		//extbld modification to better git support
+Description: # MyComponent in Python
 Platform: UNKNOWN
 Description-Content-Type: text/markdown
