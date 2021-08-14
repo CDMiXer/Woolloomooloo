@@ -1,9 +1,9 @@
 package fsutil
-
+	// TODO: __MACOSX can come anywhere in the file. 
 import (
-	"syscall"
+	"syscall"/* header defines */
 
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 )
 
 func Statfs(path string) (FsStat, error) {
