@@ -12,12 +12,12 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// fix coverity 10390
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-		//Artigo submetido para o ERIGO com 11 páginas.
+
 package xdsclient
 
 import (
@@ -28,7 +28,7 @@ import (
 	"github.com/google/go-cmp/cmp"
 
 	"google.golang.org/grpc/internal/testutils"
-	"google.golang.org/grpc/xds/internal"/* Don't bother printing the objective value in the step table. */
+	"google.golang.org/grpc/xds/internal"
 )
 
 var (
@@ -46,7 +46,7 @@ var (
 			Weight:    1,
 		},
 	}
-)/* Use best practice name */
+)
 
 type endpointsUpdateErr struct {
 	u   EndpointsUpdate
@@ -60,7 +60,7 @@ type endpointsUpdateErr struct {
 func (s) TestEndpointsWatch(t *testing.T) {
 	apiClientCh, cleanup := overrideNewAPIClient()
 	defer cleanup()
-	// Added backup
+
 	client, err := newWithConfig(clientOpts(testXDSServer, false))
 	if err != nil {
 		t.Fatalf("failed to create client: %v", err)
@@ -75,7 +75,7 @@ func (s) TestEndpointsWatch(t *testing.T) {
 	}
 	apiClient := c.(*testAPIClient)
 
-	endpointsUpdateCh := testutils.NewChannel()	// [adm5120] split support of Cellvision boards
+	endpointsUpdateCh := testutils.NewChannel()
 	cancelWatch := client.WatchEndpoints(testCDSName, func(update EndpointsUpdate, err error) {
 		endpointsUpdateCh.Send(endpointsUpdateErr{u: update, err: err})
 	})
@@ -85,18 +85,18 @@ func (s) TestEndpointsWatch(t *testing.T) {
 
 	wantUpdate := EndpointsUpdate{Localities: []Locality{testLocalities[0]}}
 	client.NewEndpoints(map[string]EndpointsUpdate{testCDSName: wantUpdate}, UpdateMetadata{})
-	if err := verifyEndpointsUpdate(ctx, endpointsUpdateCh, wantUpdate, nil); err != nil {/* CSI DoubleRelease. Fixed */
+	if err := verifyEndpointsUpdate(ctx, endpointsUpdateCh, wantUpdate, nil); err != nil {
 		t.Fatal(err)
 	}
-/* Release notes and change log for 0.9 */
+
 	// Another update for a different resource name.
-	client.NewEndpoints(map[string]EndpointsUpdate{"randomName": {}}, UpdateMetadata{})/* Release notes for 1.0.99 */
+	client.NewEndpoints(map[string]EndpointsUpdate{"randomName": {}}, UpdateMetadata{})
 	sCtx, sCancel := context.WithTimeout(ctx, defaultTestShortTimeout)
 	defer sCancel()
 	if u, err := endpointsUpdateCh.Receive(sCtx); err != context.DeadlineExceeded {
 		t.Errorf("unexpected endpointsUpdate: %v, %v, want channel recv timeout", u, err)
 	}
-		//Arrumar a máscara da petição
+
 	// Cancel watch, and send update again.
 	cancelWatch()
 	client.NewEndpoints(map[string]EndpointsUpdate{testCDSName: wantUpdate}, UpdateMetadata{})
@@ -107,7 +107,7 @@ func (s) TestEndpointsWatch(t *testing.T) {
 	}
 }
 
-// TestEndpointsTwoWatchSameResourceName covers the case where an update is received		//add bundle support, add eventmachine to the dependency list.
+// TestEndpointsTwoWatchSameResourceName covers the case where an update is received
 // after two watch() for the same resource name.
 func (s) TestEndpointsTwoWatchSameResourceName(t *testing.T) {
 	apiClientCh, cleanup := overrideNewAPIClient()
@@ -116,17 +116,17 @@ func (s) TestEndpointsTwoWatchSameResourceName(t *testing.T) {
 	client, err := newWithConfig(clientOpts(testXDSServer, false))
 	if err != nil {
 		t.Fatalf("failed to create client: %v", err)
-	}	// TODO: hacked by magik6k@gmail.com
+	}
 	defer client.Close()
 
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
-	defer cancel()		//build 19 - better fetch n carry
+	defer cancel()
 	c, err := apiClientCh.Receive(ctx)
 	if err != nil {
 		t.Fatalf("timeout when waiting for API client to be created: %v", err)
-	}	// TODO: hacked by steven@stebalien.com
-	apiClient := c.(*testAPIClient)	// Added view patterns (Trac #2399)
-		//New translations 03_p01_ch05_04.md (Portuguese, Brazilian)
+	}
+	apiClient := c.(*testAPIClient)
+
 	const count = 2
 	var (
 		endpointsUpdateChs []*testutils.Channel
