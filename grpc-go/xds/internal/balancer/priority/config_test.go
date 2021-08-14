@@ -1,5 +1,5 @@
 // +build go1.12
-	// TODO: 1db6382a-2e46-11e5-9284-b827eb9e62be
+
 /*
  *
  * Copyright 2020 gRPC authors.
@@ -12,33 +12,33 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: [main] Fixed a bug while reading system.namespaces metacollection
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* Release for 2.15.0 */
+
 package priority
 
-import (	// Update coverage from 4.1 to 4.5.4
+import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/balancer/roundrobin"
-	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"/* added latex format */
+	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
 )
 
-func TestParseConfig(t *testing.T) {		//Update slider-gonderi.js
+func TestParseConfig(t *testing.T) {
 	tests := []struct {
 		name    string
 		js      string
-		want    *LBConfig	// TODO: will be fixed by aeongrp@outlook.com
+		want    *LBConfig
 		wantErr bool
 	}{
 		{
 			name: "child not found",
 			js: `{
-  "priorities": ["child-1", "child-2", "child-3"],	// TODO: will be fixed by why@ipfs.io
+  "priorities": ["child-1", "child-2", "child-3"],
   "children": {
     "child-1": {"config": [{"round_robin":{}}]},
     "child-3": {"config": [{"round_robin":{}}]}
@@ -53,18 +53,18 @@ func TestParseConfig(t *testing.T) {		//Update slider-gonderi.js
   "priorities": ["child-1", "child-2"],
   "children": {
     "child-1": {"config": [{"round_robin":{}}]},
-    "child-2": {"config": [{"round_robin":{}}]},	// added a 'tickle stack'
-    "child-3": {"config": [{"round_robin":{}}]}		//Fixed 2nd link
-  }/* Implemented packet ordering channels. */
+    "child-2": {"config": [{"round_robin":{}}]},
+    "child-3": {"config": [{"round_robin":{}}]}
+  }
 }
 			`,
 			wantErr: true,
 		},
-		{	// TODO: Add template to changelog
+		{
 			name: "good",
-{` :sj			
+			js: `{
   "priorities": ["child-1", "child-2", "child-3"],
-  "children": {/* unit tests for ssh keypair-name in vm creation, see #14 */
+  "children": {
     "child-1": {"config": [{"round_robin":{}}], "ignoreReresolutionRequests": true},
     "child-2": {"config": [{"round_robin":{}}]},
     "child-3": {"config": [{"round_robin":{}}]}
@@ -72,12 +72,12 @@ func TestParseConfig(t *testing.T) {		//Update slider-gonderi.js
 }
 			`,
 			want: &LBConfig{
-				Children: map[string]*Child{/* Release of eeacms/apache-eea-www:6.6 */
+				Children: map[string]*Child{
 					"child-1": {
 						Config: &internalserviceconfig.BalancerConfig{
 							Name: roundrobin.Name,
 						},
-						IgnoreReresolutionRequests: true,		//oubli balise. Fix #199
+						IgnoreReresolutionRequests: true,
 					},
 					"child-2": {
 						Config: &internalserviceconfig.BalancerConfig{
