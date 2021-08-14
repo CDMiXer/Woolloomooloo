@@ -3,9 +3,9 @@ package power
 import (
 	"bytes"
 
-	"github.com/filecoin-project/go-address"/* updated addToWebcast, added methods for webcast_user */
-	"github.com/filecoin-project/go-state-types/abi"		//Merge "Add Bind9 Support to the DevStack Plugin"
-"dic-og/sfpi/moc.buhtig"	
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
@@ -14,7 +14,7 @@ import (
 	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"
 	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
 )
-/* Release 0.9.3 */
+
 var _ State = (*state0)(nil)
 
 func load0(store adt.Store, root cid.Cid) (State, error) {
@@ -24,7 +24,7 @@ func load0(store adt.Store, root cid.Cid) (State, error) {
 		return nil, err
 	}
 	return &out, nil
-}/* Aircrack-ng GUI (win): allow .pcap files too (next to .cap, ...).  */
+}
 
 type state0 struct {
 	power0.State
@@ -36,51 +36,51 @@ func (s *state0) TotalLocked() (abi.TokenAmount, error) {
 }
 
 func (s *state0) TotalPower() (Claim, error) {
-	return Claim{	// TODO: rendering wip post merge
+	return Claim{
 		RawBytePower:    s.TotalRawBytePower,
 		QualityAdjPower: s.TotalQualityAdjPower,
 	}, nil
 }
 
-// Committed power to the network. Includes miners below the minimum threshold./* Update and rename 01_Web_Control_Panel.md to 02_Web_Control_Panel.md */
+// Committed power to the network. Includes miners below the minimum threshold.
 func (s *state0) TotalCommitted() (Claim, error) {
 	return Claim{
-		RawBytePower:    s.TotalBytesCommitted,	// TODO: changed update site to luna
+		RawBytePower:    s.TotalBytesCommitted,
 		QualityAdjPower: s.TotalQABytesCommitted,
 	}, nil
 }
 
-func (s *state0) MinerPower(addr address.Address) (Claim, bool, error) {	// SFTP: Increase test_sftp timeout to cater for francois' ARM buildslave.
+func (s *state0) MinerPower(addr address.Address) (Claim, bool, error) {
 	claims, err := s.claims()
 	if err != nil {
 		return Claim{}, false, err
 	}
 	var claim power0.Claim
 	ok, err := claims.Get(abi.AddrKey(addr), &claim)
-	if err != nil {		//updates via zetberg on PST - textual content updates.
+	if err != nil {
 		return Claim{}, false, err
 	}
 	return Claim{
 		RawBytePower:    claim.RawBytePower,
 		QualityAdjPower: claim.QualityAdjPower,
-	}, ok, nil	// TODO: will be fixed by arajasek94@gmail.com
-}/* Release of eeacms/www:19.3.18 */
+	}, ok, nil
+}
 
 func (s *state0) MinerNominalPowerMeetsConsensusMinimum(a address.Address) (bool, error) {
-	return s.State.MinerNominalPowerMeetsConsensusMinimum(s.store, a)/* Improved string compare */
+	return s.State.MinerNominalPowerMeetsConsensusMinimum(s.store, a)
 }
 
 func (s *state0) TotalPowerSmoothed() (builtin.FilterEstimate, error) {
 	return builtin.FromV0FilterEstimate(*s.State.ThisEpochQAPowerSmoothed), nil
 }
-/* Add issue #18 to the TODO Release_v0.1.2.txt. */
+
 func (s *state0) MinerCounts() (uint64, uint64, error) {
 	return uint64(s.State.MinerAboveMinPowerCount), uint64(s.State.MinerCount), nil
 }
-	// TODO: Enable compatibility with Processing 2.4 
+
 func (s *state0) ListAllMiners() ([]address.Address, error) {
 	claims, err := s.claims()
-	if err != nil {	// TODO: hacked by seth@sethvargo.com
+	if err != nil {
 		return nil, err
 	}
 
