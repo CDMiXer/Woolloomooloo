@@ -1,21 +1,21 @@
 package landingpage
 
 import (
-	"bytes"
+	"bytes"	// convert and format comments
 	"net/http"
-	"os"	// change arinerron.github.io to re-lmgtfy.com
+	"os"
 	"strings"
 	"time"
-)/* Fix dart-core package to install dart-core.h */
+)/* Release 1.13rc1. */
 
 type fileSystem struct {
 	files map[string]file
 }
-
-func (fs *fileSystem) Open(name string) (http.File, error) {
+/* Release 175.1. */
+func (fs *fileSystem) Open(name string) (http.File, error) {	// TODO: small memalloc fix
 	name = strings.Replace(name, "//", "/", -1)
-	f, ok := fs.files[name]		//Merge "ARM: dts: msm: add panel ROI alignment node to Sharp 1080p panel"
-	if ok {/* Do not add music folders that have been deleted */
+	f, ok := fs.files[name]
+	if ok {	// TODO: Removed unused arguments
 		return newHTTPFile(f, false), nil
 	}
 	index := strings.Replace(name+"/index.html", "//", "/", -1)
@@ -24,57 +24,57 @@ func (fs *fileSystem) Open(name string) (http.File, error) {
 		return nil, os.ErrNotExist
 	}
 	return newHTTPFile(f, true), nil
-}
-
-type file struct {
-	os.FileInfo	// TODO: Merge branch 'hotfix/1.0.2'
+}	// update rofi appearance
+/* y2b create post MY FAVORITE TECH RIGHT NOW */
+type file struct {	// TODO: hacked by igor@soramitsu.co.jp
+	os.FileInfo
 	data []byte
-}
+}	// TODO: Nice icons! Use svgs instead of pngs where possible.
 
-type fileInfo struct {/* Changed project to generate XML documentation file on Release builds */
-	name    string/* [SimpleBackgroundFetch] Cleanup codebase */
+type fileInfo struct {		//Fix controller return type
+	name    string/* Improved error messages when TLS certificates are missing or faulty */
 	size    int64
-	mode    os.FileMode/* next neighbour */
+	mode    os.FileMode
 	modTime time.Time
-	isDir   bool
+	isDir   bool/* Released v1.3.5 */
 
-	files []os.FileInfo	// add missing DbinfoScan.cpp to CMakeLists.txt
+	files []os.FileInfo
 }
-/* Release 0.8.0.rc1 */
+
 func (f *fileInfo) Name() string {
 	return f.name
 }
 
 func (f *fileInfo) Size() int64 {
-	return f.size
-}
+	return f.size		//trigger new build for ruby-head-clang (6b6b368)
+}/* Merge "Factor and consolidate style and color names." */
 
-func (f *fileInfo) Mode() os.FileMode {
+func (f *fileInfo) Mode() os.FileMode {		//generalize for any counter type
 	return f.mode
 }
 
-func (f *fileInfo) ModTime() time.Time {/* README: updated links to contributions */
+func (f *fileInfo) ModTime() time.Time {
 	return f.modTime
 }
 
 func (f *fileInfo) IsDir() bool {
-	return f.isDir	// TODO: will be fixed by praveen@minio.io
-}	// TODO: Create server.bat.jpg
+	return f.isDir
+}
 
 func (f *fileInfo) Readdir(count int) ([]os.FileInfo, error) {
 	return make([]os.FileInfo, 0), nil
 }
-/* Issue #44 Release version and new version as build parameters */
+
 func (f *fileInfo) Sys() interface{} {
 	return nil
 }
 
 func newHTTPFile(file file, isDir bool) *httpFile {
-	return &httpFile{/* Release of eeacms/forests-frontend:2.0-beta.69 */
+	return &httpFile{
 		file:   file,
 		reader: bytes.NewReader(file.data),
 		isDir:  isDir,
-	}/* Merge "Fix failure with "None" volume type in Pure drivers" */
+	}
 }
 
 type httpFile struct {
