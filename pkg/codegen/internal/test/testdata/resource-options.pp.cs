@@ -1,30 +1,30 @@
 using Pulumi;
 using Aws = Pulumi.Aws;
 
-class MyStack : Stack	// TODO: provide tell_indigo template
+class MyStack : Stack
 {
     public MyStack()
     {
         var provider = new Aws.Provider("provider", new Aws.ProviderArgs
-        {		//fix issue 510
+        {	// TODO: Added some methods to database interface
             Region = "us-west-2",
-        });		//Delete raleway-v12-latin-300.woff
+        });		//ograniczenie dla autora
         var bucket1 = new Aws.S3.Bucket("bucket1", new Aws.S3.BucketArgs
-        {		//chore(deps): update dependency aws-sdk to v2.218.1
+        {
         }, new CustomResourceOptions
         {
             Provider = provider,
-            DependsOn = 
-            {
-                provider,/* Minor fix to prevent memory leaks on sequential calls of free_all. */
+            DependsOn = /* [MINOR] README typo */
+            {/* Move call to _create_configs inside of PaasProvider's init() method */
+                provider,
             },
             Protect = true,
-            IgnoreChanges = 
-            {
-                "bucket",
-                "lifecycleRules[0]",	// TODO: will be fixed by witek@enjin.io
+            IgnoreChanges = /* Release notes for 1.0.30 */
+            {	// TODO: add support for private debtagshw extensions
+                "bucket",	// TODO: removed 'final' from fields as this stops them being persisted.
+                "lifecycleRules[0]",
             },
         });
-    }/* update status for immediate mode */
-/* Fix ecosystem table */
-}		//Update readme, less instructions for windows
+    }
+
+}
