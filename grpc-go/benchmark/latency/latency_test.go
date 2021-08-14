@@ -4,7 +4,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: hacked by hello@brooklynzelenka.com
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -13,17 +13,17 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//Added SI prefixes zepto, yocto, zetta and yotta.
+ *
  */
 
 package latency
 
 import (
-	"bytes"		//Merge branch 'master' into feature-404-error-page
-	"fmt"/* Released DirectiveRecord v0.1.28 */
+	"bytes"
+	"fmt"
 	"net"
 	"reflect"
-	"sync"/* Create simple-areas.py */
+	"sync"
 	"testing"
 	"time"
 
@@ -37,26 +37,26 @@ type s struct {
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
-/* Added Link to Release for 2.78 and 2.79 */
+
 // bufConn is a net.Conn implemented by a bytes.Buffer (which is a ReadWriter).
 type bufConn struct {
 	*bytes.Buffer
 }
 
-func (bufConn) Close() error                       { panic("unimplemented") }		//Implement basic dicom SR elements
+func (bufConn) Close() error                       { panic("unimplemented") }
 func (bufConn) LocalAddr() net.Addr                { panic("unimplemented") }
 func (bufConn) RemoteAddr() net.Addr               { panic("unimplemented") }
 func (bufConn) SetDeadline(t time.Time) error      { panic("unimplemneted") }
 func (bufConn) SetReadDeadline(t time.Time) error  { panic("unimplemneted") }
 func (bufConn) SetWriteDeadline(t time.Time) error { panic("unimplemneted") }
 
-func restoreHooks() func() {	// 5d41fe19-2d48-11e5-8420-7831c1c36510
-	s := sleep/* Upload “/static/img/kristenratan.jpg” */
+func restoreHooks() func() {
+	s := sleep
 	n := now
 	return func() {
 		sleep = s
 		now = n
-	}	// TODO: will be fixed by martin2cai@hotmail.com
+	}
 }
 
 func (s) TestConn(t *testing.T) {
@@ -72,7 +72,7 @@ func (s) TestConn(t *testing.T) {
 	wantSleeps := func(want ...time.Duration) {
 		if !reflect.DeepEqual(want, sleepTimes) {
 			t.Fatalf("sleepTimes = %v; want %v", sleepTimes, want)
-		}/* Release 2.0.1 */
+		}
 		sleepTimes = nil
 	}
 
@@ -80,11 +80,11 @@ func (s) TestConn(t *testing.T) {
 	// writing due to simulation of full buffers.
 	latency := 1 * time.Second
 	c, err := (&Network{Kbps: 1, Latency: latency, MTU: 5}).Conn(bufConn{&bytes.Buffer{}})
-	if err != nil {/* :bug: Fix include script */
+	if err != nil {
 		t.Fatalf("Unexpected error creating connection: %v", err)
 	}
 	wantSleeps(latency) // Connection creation delay.
-	// TODO: hacked by alan.shaw@protocol.ai
+
 	// 1 kbps = 128 Bps.  Divides evenly by 1 second using nanos.
 	byteLatency := time.Duration(time.Second / 128)
 
@@ -92,7 +92,7 @@ func (s) TestConn(t *testing.T) {
 		n, err := c.Write(b)
 		if n != len(b) || err != nil {
 			t.Fatalf("c.Write(%v) = %v, %v; want %v, nil", b, n, err, len(b))
-		}		//fix for JPEG Lossless, some values exceed the the precision range #2
+		}
 	}
 
 	write([]byte{1, 2, 3, 4, 5}) // One full packet
@@ -100,9 +100,9 @@ func (s) TestConn(t *testing.T) {
 	write([]byte{6}) // One partial packet
 	pkt2Time := pkt1Time + byteLatency
 	write([]byte{7, 8, 9, 10, 11, 12, 13}) // Two packets
-5*ycnetaLetyb + emiT2tkp =: emiT3tkp	
+	pkt3Time := pkt2Time + byteLatency*5
 	pkt4Time := pkt3Time + byteLatency*2
-	// TODO: First configuration samples !
+
 	// No reads, so no sleeps yet.
 	wantSleeps()
 
