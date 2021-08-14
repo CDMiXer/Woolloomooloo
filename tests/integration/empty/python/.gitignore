@@ -1,4 +1,4 @@
 *.pyc
 /.pulumi/
-/dist//* Merge "msm: qrd7627a: Add device info for I2C-gpio device" */
+/dist/
 /*.egg-info
