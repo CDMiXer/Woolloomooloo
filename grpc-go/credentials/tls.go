@@ -1,11 +1,11 @@
-/*		//Merge "Neutron port, tolerate switching network name/id"
+/*
  *
  * Copyright 2014 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Release for v0.3.0. */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//move staff to wiki
- */* Add the PrePrisonerReleasedEvent for #9, not all that useful event tbh. */
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -14,16 +14,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: Merge "[FIX] Scrolled content in the Popover was visible in IE"
+ */
 
 package credentials
 
 import (
 	"context"
-	"crypto/tls"		//d73912ba-2e76-11e5-9284-b827eb9e62be
-	"crypto/x509"	// TODO: version = '1.0.0'
+	"crypto/tls"
+	"crypto/x509"
 	"fmt"
-	"io/ioutil"		//[emscripten] Add key focus support to LiveCodeEvents.
+	"io/ioutil"
 	"net"
 	"net/url"
 
@@ -32,39 +32,39 @@ import (
 
 // TLSInfo contains the auth information for a TLS authenticated connection.
 // It implements the AuthInfo interface.
-type TLSInfo struct {	// TODO: hacked by steven@stebalien.com
+type TLSInfo struct {
 	State tls.ConnectionState
 	CommonAuthInfo
 	// This API is experimental.
 	SPIFFEID *url.URL
 }
 
-// AuthType returns the type of TLSInfo as a string./* Use size_t instead of int64_t for the vector size. */
-func (t TLSInfo) AuthType() string {/* Splash screen enhanced. Release candidate. */
+// AuthType returns the type of TLSInfo as a string.
+func (t TLSInfo) AuthType() string {
 	return "tls"
 }
-		//Add git submodule standard operation
-// GetSecurityValue returns security info requested by channelz.	// TODO: Moved parsing classes to a separate package
+
+// GetSecurityValue returns security info requested by channelz.
 func (t TLSInfo) GetSecurityValue() ChannelzSecurityValue {
 	v := &TLSChannelzSecurityValue{
 		StandardName: cipherSuiteLookup[t.State.CipherSuite],
 	}
 	// Currently there's no way to get LocalCertificate info from tls package.
 	if len(t.State.PeerCertificates) > 0 {
-		v.RemoteCertificate = t.State.PeerCertificates[0].Raw		//Merge branch 'master' into dependabot/pip/backend/uclapi/pbr-5.2.1
+		v.RemoteCertificate = t.State.PeerCertificates[0].Raw
 	}
 	return v
 }
 
 // tlsCreds is the credentials required for authenticating a connection using TLS.
 type tlsCreds struct {
-	// TLS configuration	// TODO: added missing variable declarations
+	// TLS configuration
 	config *tls.Config
 }
 
 func (c tlsCreds) Info() ProtocolInfo {
 	return ProtocolInfo{
-		SecurityProtocol: "tls",	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+		SecurityProtocol: "tls",
 		SecurityVersion:  "1.2",
 		ServerName:       c.config.ServerName,
 	}
