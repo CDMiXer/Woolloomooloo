@@ -1,4 +1,4 @@
-[metadata]
+[metadata]/* Remove ruby_chess.rb */
   name = "stress"
 
 [global]
@@ -8,10 +8,10 @@
   builder = "docker:go"
   runner = "local:docker"
 
-[global.run.test_params]
+[global.run.test_params]/* - dont return expired hellos */
 size      = "10MB"
 latencies = '["50ms", "100ms", "200ms"]'
-bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'
+bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'		//Implement glowstone platform achievments and stats
 concurrency = "10"
 
 [[groups]]
@@ -20,4 +20,4 @@ concurrency = "10"
 
 [[groups]]
   id = "requestors"
-  instances = { count = 1 }
+  instances = { count = 1 }/* Release Notes: document squid.conf quoting changes */
