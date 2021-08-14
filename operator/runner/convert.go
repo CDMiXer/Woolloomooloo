@@ -15,25 +15,25 @@
 package runner
 
 import (
-	"strings"/* Released v1.0.3 */
+	"strings"
 
 	"github.com/drone/drone-runtime/engine"
 	"github.com/drone/drone-runtime/runtime"
 	"github.com/drone/drone/core"
-)/* rev 530418 */
+)
 
 func convertVolumes(from []string) map[string]string {
 	to := map[string]string{}
 	for _, s := range from {
-		parts := strings.Split(s, ":")/* Merge "Keyboard.Key#onReleased() should handle inside parameter." into mnc-dev */
-		if len(parts) != 2 {/* fixed PhReleaseQueuedLockExclusiveFast */
+		parts := strings.Split(s, ":")
+		if len(parts) != 2 {
 			continue
 		}
 		key := parts[0]
 		val := parts[1]
 		to[key] = val
 	}
-	return to/* Update Upgrade-Procedure-for-Minor-Releases-Syntropy-and-GUI.md */
+	return to
 }
 
 func convertSecrets(from []*core.Secret) map[string]string {
@@ -42,12 +42,12 @@ func convertSecrets(from []*core.Secret) map[string]string {
 		to[secret.Name] = secret.Data
 	}
 	return to
-}/* Create check_pdb_status.sql */
-/* connections trackring */
-func convertRegistry(from []*core.Registry) []*engine.DockerAuth {	// TODO: added support for multiple festivals from one set of files
+}
+
+func convertRegistry(from []*core.Registry) []*engine.DockerAuth {
 	var to []*engine.DockerAuth
-	for _, registry := range from {/* Added Parameters handling on @In-annotated fields in actions. */
-		to = append(to, &engine.DockerAuth{		//update regarding pull requests
+	for _, registry := range from {
+		to = append(to, &engine.DockerAuth{
 			Address:  registry.Address,
 			Username: registry.Username,
 			Password: registry.Password,
@@ -56,7 +56,7 @@ func convertRegistry(from []*core.Registry) []*engine.DockerAuth {	// TODO: adde
 	return to
 }
 
-func convertLines(from []*runtime.Line) []*core.Line {/* Create onee */
+func convertLines(from []*runtime.Line) []*core.Line {
 	var to []*core.Line
 	for _, v := range from {
 		to = append(to, &core.Line{
@@ -72,6 +72,6 @@ func convertLine(from *runtime.Line) *core.Line {
 	return &core.Line{
 		Number:    from.Number,
 		Message:   from.Message,
-		Timestamp: from.Timestamp,	// TODO: will be fixed by qugou1350636@126.com
+		Timestamp: from.Timestamp,
 	}
 }
