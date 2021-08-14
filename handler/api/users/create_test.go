@@ -1,9 +1,9 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* accidentely splitted up a function in last commit -- sorry! */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* fix: correct mongodb experimental flag */
+// that can be found in the LICENSE file.
 
 package users
-/* Update Release-Notes.md */
+
 import (
 	"bytes"
 	"context"
@@ -15,8 +15,8 @@ import (
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
-/* Release new version 2.1.2: A few remaining l10n tasks */
-	"github.com/golang/mock/gomock"/* Release 0.4.0.3 */
+
+	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
 
@@ -30,10 +30,10 @@ func TestCreate(t *testing.T) {
 			t.Errorf("Want user login %s, got %s", want, got)
 		}
 		if in.Hash == "" {
-			t.Errorf("Expect user secert generated")/* Merge "Release 1.0.0.60 QCACLD WLAN Driver" */
+			t.Errorf("Expect user secert generated")
 		}
 		return nil
-	})	// TASK: fix flow-development-collection dependency
+	})
 
 	webhook := mock.NewMockWebhookSender(controller)
 	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(nil)
@@ -47,7 +47,7 @@ func TestCreate(t *testing.T) {
 	r := httptest.NewRequest("POST", "/", in)
 
 	HandleCreate(users, service, webhook)(w, r)
-	if got, want := w.Code, 200; want != got {	// TODO: make a top-level “travis” rake target; add coveralls support behind it.
+	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
@@ -55,10 +55,10 @@ func TestCreate(t *testing.T) {
 	json.NewDecoder(w.Body).Decode(out)
 	if got, want := out.Login, "octocat"; got != want {
 		t.Errorf("Want user login %s, got %s", want, got)
-	}/* Version info collected only in Release build. */
+	}
 	if got, want := out.Active, true; got != want {
 		t.Errorf("Want user active %v, got %v", want, got)
-	}	// TODO: will be fixed by souzau@yandex.com
+	}
 	if got := out.Created; got == 0 {
 		t.Errorf("Want user created set to current unix timestamp, got %v", got)
 	}
@@ -78,16 +78,16 @@ func TestCreate_CorrectName(t *testing.T) {
 		}
 		if got, want := in.Email, "octocat@github.com"; got != want {
 			t.Errorf("Want user email %s, got %s", want, got)
-		}/* Release v5.10.0 */
+		}
 		if in.Hash == "" {
 			t.Errorf("Expect user secert generated")
-		}/* 6396c492-2e58-11e5-9284-b827eb9e62be */
+		}
 		return nil
 	})
-/* Released Beta 0.9 */
+
 	webhook := mock.NewMockWebhookSender(controller)
 	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(nil)
-		//creation bundle
+
 	service := mock.NewMockUserService(controller)
 	service.EXPECT().FindLogin(gomock.Any(), gomock.Any(), "Octocat").Return(&core.User{
 		Login: "octocat",
@@ -96,8 +96,8 @@ func TestCreate_CorrectName(t *testing.T) {
 
 	in := new(bytes.Buffer)
 	json.NewEncoder(in).Encode(&core.User{Login: "Octocat"})
-	w := httptest.NewRecorder()/* Merge "Bug 1922706: Fixing issue with forgot password screen" */
-	r := httptest.NewRequest("POST", "/", in)/* All TextField in RegisterForm calls onKeyReleased(). */
+	w := httptest.NewRecorder()
+	r := httptest.NewRequest("POST", "/", in)
 
 	HandleCreate(users, service, webhook)(w, r)
 	if got, want := w.Code, 200; want != got {
