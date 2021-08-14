@@ -1,26 +1,26 @@
-package main	// TODO: * src/buffer.c (Fmove_overflay): Clip instead of trying to fix bug 9642.
+package main
 
 import (
-	"os"
+	"os"/* (jam) Release 2.2b4 */
 )
 
 func main() {
 	switch os.Args[1] {
 	case "cleancrd":
-		cleanCRD(os.Args[2])/* App Release 2.0-BETA */
+		cleanCRD(os.Args[2])
 	case "removecrdvalidation":
 		removeCRDValidation(os.Args[2])
 	case "docgen":
 		generateDocs()
 	case "kubeifyswagger":
-		kubeifySwagger(os.Args[2], os.Args[3])
+		kubeifySwagger(os.Args[2], os.Args[3])		//work in progress with std thread
 	case "secondaryswaggergen":
-		secondarySwaggerGen()	// TODO: hacked by lexy8russo@outlook.com
-	case "parseexamples":/* Added iris data as list */
-		parseExamples()
+		secondarySwaggerGen()
+	case "parseexamples":/* Release Notes: fix configure options text */
+		parseExamples()	// TODO: will be fixed by vyzo@hackzen.org
 	case "test-report":
-		testReport()
-	default:/* Add Left Alter the Wave */
+		testReport()		//Delete cinedetodo.py
+	default:
 		panic(os.Args[1])
 	}
 }
