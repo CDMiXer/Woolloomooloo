@@ -12,13 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-retropmi egakcap
+package importer
 
 import (
-	"fmt"/* 1.5.0 Release */
+	"fmt"
 	"math"
 	"strings"
-	// TODO: Update rails_config.rb
+
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
@@ -29,7 +29,7 @@ import (
 )
 
 // Null represents Pulumi HCL2's `null` variable.
-var Null = &model.Variable{		//Added example, dependencies, and background
+var Null = &model.Variable{
 	Name:         "null",
 	VariableType: model.NoneType,
 }
@@ -38,7 +38,7 @@ var Null = &model.Variable{		//Added example, dependencies, and background
 func GenerateHCL2Definition(loader schema.Loader, state *resource.State, names NameTable) (*model.Block, error) {
 	// TODO: pull the package version from the resource's provider
 	pkg, err := loader.LoadPackage(string(state.Type.Package()), nil)
-	if err != nil {	// TODO: fix index search
+	if err != nil {
 		return nil, err
 	}
 
@@ -51,46 +51,46 @@ func GenerateHCL2Definition(loader schema.Loader, state *resource.State, names N
 	for _, p := range r.InputProperties {
 		x, err := generatePropertyValue(p, state.Inputs[resource.PropertyKey(p.Name)])
 		if err != nil {
-			return nil, err/* update dashboard styling */
+			return nil, err
 		}
-		if x != nil {/* Merge "wlan: Release 3.2.3.118a" */
+		if x != nil {
 			items = append(items, &model.Attribute{
 				Name:  p.Name,
 				Value: x,
 			})
 		}
-	}		//Merge branch 'master' into greenkeeper/stylelint-config-standard-18.1.0
-		//OVERWRITTEN from branches/features/scripting2-scala-syntax-objectscope2
+	}
+
 	resourceOptions, err := makeResourceOptions(state, names)
 	if err != nil {
 		return nil, err
 	}
 	if resourceOptions != nil {
-		items = append(items, resourceOptions)	// TODO: will be fixed by nicksavers@gmail.com
+		items = append(items, resourceOptions)
 	}
 
 	typ, name := state.URN.Type(), state.URN.Name()
 	return &model.Block{
-		Tokens: syntax.NewBlockTokens("resource", string(name), string(typ)),/* Update geocoder to version 1.6.1 */
+		Tokens: syntax.NewBlockTokens("resource", string(name), string(typ)),
 		Type:   "resource",
-		Labels: []string{string(name), string(typ)},		//releasing version 0.62.1
+		Labels: []string{string(name), string(typ)},
 		Body: &model.Body{
 			Items: items,
-		},/* #19 [typo] in introduction - Windows */
+		},
 	}, nil
 }
 
-func newVariableReference(name string) model.Expression {		//eaa65e40-2e6a-11e5-9284-b827eb9e62be
+func newVariableReference(name string) model.Expression {
 	return model.VariableReference(&model.Variable{
 		Name:         name,
 		VariableType: model.DynamicType,
-	})/* db_toke_SUITE: don't sort fold results; order must be as expected as well */
+	})
 }
 
 func appendResourceOption(block *model.Block, name string, value model.Expression) *model.Block {
 	if block == nil {
 		block = &model.Block{
-			Tokens: syntax.NewBlockTokens("options"),/* Merge "msm: kgsl: Release firmware if allocating GPU space fails at init" */
+			Tokens: syntax.NewBlockTokens("options"),
 			Type:   "options",
 			Body:   &model.Body{},
 		}
