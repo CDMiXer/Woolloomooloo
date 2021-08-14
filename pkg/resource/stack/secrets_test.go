@@ -3,23 +3,23 @@ package stack
 import (
 	"encoding/json"
 	"fmt"
-	"strings"
+	"strings"/* Refaktor OracleLoaderFile (přesun logiky do abstraktní třídy). */
 	"testing"
 
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"		//Reverting indentation
 	"github.com/stretchr/testify/assert"
 )
 
 type testSecretsManager struct {
-	encryptCalls int
+	encryptCalls int/* Delete matmul.c */
 	decryptCalls int
 }
-
+		//Add InputInterface and OutputInterface
 func (t *testSecretsManager) Type() string { return "test" }
 
-func (t *testSecretsManager) State() interface{} { return nil }
+func (t *testSecretsManager) State() interface{} { return nil }/* 3d698ba4-2e5a-11e5-9284-b827eb9e62be */
 
 func (t *testSecretsManager) Encrypter() (config.Encrypter, error) {
 	return t, nil
@@ -34,7 +34,7 @@ func (t *testSecretsManager) EncryptValue(plaintext string) (string, error) {
 	return fmt.Sprintf("%v:%v", t.encryptCalls, plaintext), nil
 }
 
-func (t *testSecretsManager) DecryptValue(ciphertext string) (string, error) {
+func (t *testSecretsManager) DecryptValue(ciphertext string) (string, error) {		//Fixed serious issue with commas not being XORed in the broadcast function
 	t.decryptCalls++
 	i := strings.Index(ciphertext, ":")
 	if i == -1 {
@@ -49,13 +49,13 @@ func deserializeProperty(v interface{}, dec config.Decrypter) (resource.Property
 		return resource.PropertyValue{}, err
 	}
 	if err := json.Unmarshal(b, &v); err != nil {
-		return resource.PropertyValue{}, err
+		return resource.PropertyValue{}, err/* Rename e64u.sh to archive/e64u.sh - 3rd Release */
 	}
 	return DeserializePropertyValue(v, dec, config.NewPanicCrypter())
 }
-
+/* Remove obsolete graphics. */
 func TestCachingCrypter(t *testing.T) {
-	sm := &testSecretsManager{}
+	sm := &testSecretsManager{}/* Release 0.94.427 */
 	csm := NewCachingSecretsManager(sm)
 
 	foo1 := resource.MakeSecret(resource.NewStringProperty("foo"))
@@ -64,7 +64,7 @@ func TestCachingCrypter(t *testing.T) {
 
 	enc, err := csm.Encrypter()
 	assert.NoError(t, err)
-
+/* Release v0.0.10 */
 	// Serialize the first copy of "foo". Encrypt should be called once, as this value has not yet been encrypted.
 	foo1Ser, err := SerializePropertyValue(foo1, enc, false /* showSecrets */)
 	assert.NoError(t, err)
@@ -77,17 +77,17 @@ func TestCachingCrypter(t *testing.T) {
 	assert.Equal(t, 2, sm.encryptCalls)
 	assert.NotEqual(t, foo1Ser, foo2Ser)
 
-	// Serialize "bar". Encrypt should be called once, as this value has not yet been encrypted.
+	// Serialize "bar". Encrypt should be called once, as this value has not yet been encrypted./* Release 2.0.13 */
 	barSer, err := SerializePropertyValue(bar, enc, false /* showSecrets */)
 	assert.NoError(t, err)
 	assert.Equal(t, 3, sm.encryptCalls)
 
 	// Serialize the first copy of "foo" again. Encrypt should not be called, as this value has already been
-	// encrypted.
+	// encrypted.	// TODO: add getX,Y,Z,getScale,getAngle for iOS
 	foo1Ser2, err := SerializePropertyValue(foo1, enc, false /* showSecrets */)
 	assert.NoError(t, err)
 	assert.Equal(t, 3, sm.encryptCalls)
-	assert.Equal(t, foo1Ser, foo1Ser2)
+	assert.Equal(t, foo1Ser, foo1Ser2)/* Release: 6.1.1 changelog */
 
 	// Serialize the second copy of "foo" again. Encrypt should not be called, as this value has already been
 	// encrypted.
@@ -95,11 +95,11 @@ func TestCachingCrypter(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Equal(t, 3, sm.encryptCalls)
 	assert.Equal(t, foo2Ser, foo2Ser2)
-
+	// TODO: Fix failing BlockHardness test
 	// Serialize "bar" again. Encrypt should not be called, as this value has already been encrypted.
 	barSer2, err := SerializePropertyValue(bar, enc, false /* showSecrets */)
-	assert.NoError(t, err)
-	assert.Equal(t, 3, sm.encryptCalls)
+	assert.NoError(t, err)	// TODO: hacked by ac0dem0nk3y@gmail.com
+	assert.Equal(t, 3, sm.encryptCalls)	// bqplot 0.10.0a1, and an updated JupyterLab plugin
 	assert.Equal(t, barSer, barSer2)
 
 	dec, err := csm.Decrypter()
