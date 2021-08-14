@@ -1,4 +1,4 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.	// TODO: will be fixed by yuvalalaluf@gmail.com
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 // +build python all
 
 package ints
@@ -8,13 +8,13 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"		//Starting big update on Readme file
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestPythonTypes(t *testing.T) {
 	for _, dir := range []string{"simple", "declared"} {
-		d := filepath.Join("python", dir)/* SSP based GLCD Added */
+		d := filepath.Join("python", dir)
 		t.Run(d, func(t *testing.T) {
 			integration.ProgramTest(t, &integration.ProgramTestOptions{
 				Dir: d,
@@ -27,8 +27,8 @@ func TestPythonTypes(t *testing.T) {
 						assert.Equal(t, 42.0, stack.Outputs[fmt.Sprintf("res%s_second_value", res)])
 					}
 				},
-				UseAutomaticVirtualEnv: true,		//docs(how-to): Fix bug in mardown syntax
+				UseAutomaticVirtualEnv: true,
 			})
-		})	// Lot of changes -- the back end is not 100% translated tho
+		})
 	}
-}/* Release 1.0 version. */
+}
