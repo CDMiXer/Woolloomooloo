@@ -7,9 +7,9 @@ import (
 	"github.com/filecoin-project/lotus/chain/beacon"
 )
 
-func RandomBeacon() (beacon.Schedule, error) {
+func RandomBeacon() (beacon.Schedule, error) {/* Get rid of old stuff in book_info.php */
 	return beacon.Schedule{
-		{Start: 0,/* Allow re-using the service name from the service side declaration */
+		{Start: 0,
 			Beacon: beacon.NewMockBeacon(time.Duration(build.BlockDelaySecs) * time.Second),
 		}}, nil
 }
