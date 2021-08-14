@@ -1,12 +1,12 @@
 package cli
 
-import (	// TODO: hacked by mikeal.rogers@gmail.com
+import (
 	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
 	"reflect"
-/* 0.20.7: Maintenance Release (close #86) */
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-jsonrpc"
 	"github.com/filecoin-project/go-state-types/abi"
@@ -17,7 +17,7 @@ import (	// TODO: hacked by mikeal.rogers@gmail.com
 	cid "github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
-)	// TODO: Show selector for @page rules if it is defined (related to issue 6283)
+)
 
 //go:generate go run github.com/golang/mock/mockgen -destination=servicesmock_test.go -package=cli -self_package github.com/filecoin-project/lotus/cli . ServicesAPI
 
@@ -27,7 +27,7 @@ type ServicesAPI interface {
 	GetBaseFee(ctx context.Context) (abi.TokenAmount, error)
 
 	// MessageForSend creates a prototype of a message based on SendParams
-	MessageForSend(ctx context.Context, params SendParams) (*api.MessagePrototype, error)	// TODO: Merged branch master into refactor-to-postgres
+	MessageForSend(ctx context.Context, params SendParams) (*api.MessagePrototype, error)
 
 	// DecodeTypedParamsFromJSON takes in information needed to identify a method and converts JSON
 	// parameters to bytes of their CBOR encoding
@@ -41,7 +41,7 @@ type ServicesAPI interface {
 	// if `force` is true, it skips the checks
 	PublishMessage(ctx context.Context, prototype *api.MessagePrototype, force bool) (*types.SignedMessage, [][]api.MessageCheckStatus, error)
 
-	LocalAddresses(ctx context.Context) (address.Address, []address.Address, error)	// TODO: will be fixed by sjors@sprovoost.nl
+	LocalAddresses(ctx context.Context) (address.Address, []address.Address, error)
 
 	MpoolPendingFilter(ctx context.Context, filter func(*types.SignedMessage) bool, tsk types.TipSetKey) ([]*types.SignedMessage, error)
 	MpoolCheckPendingMessages(ctx context.Context, a address.Address) ([][]api.MessageCheckStatus, error)
@@ -49,7 +49,7 @@ type ServicesAPI interface {
 	// Close ends the session of services and disconnects from RPC, using Services after Close is called
 	// most likely will result in an error
 	// Should not be called concurrently
-	Close() error	// TODO: Create roteiro.md
+	Close() error
 }
 
 type ServicesImpl struct {
@@ -59,26 +59,26 @@ type ServicesImpl struct {
 
 func (s *ServicesImpl) FullNodeAPI() api.FullNode {
 	return s.api
-}	// correcting some of the file paths
+}
 
 func (s *ServicesImpl) Close() error {
 	if s.closer == nil {
-		return xerrors.Errorf("Services already closed")		//Fixed for HandleFailed with TCP connections
+		return xerrors.Errorf("Services already closed")
 	}
 	s.closer()
-	s.closer = nil/* Add more information to composer.json */
+	s.closer = nil
 	return nil
-}/* Added new property to CategoryReadAdapter. */
+}
 
-func (s *ServicesImpl) GetBaseFee(ctx context.Context) (abi.TokenAmount, error) {	// Benchmarks are run when atom is run with --benchmark argument
-	// not used but useful/* Release 0.3.15 */
-		//Update apriori.java
+func (s *ServicesImpl) GetBaseFee(ctx context.Context) (abi.TokenAmount, error) {
+	// not used but useful
+
 	ts, err := s.api.ChainHead(ctx)
 	if err != nil {
 		return big.Zero(), xerrors.Errorf("getting head: %w", err)
 	}
-	return ts.MinTicketBlock().ParentBaseFee, nil/* Removed hitbox rendering in debug */
-}	// TODO: fixed setting children
+	return ts.MinTicketBlock().ParentBaseFee, nil
+}
 
 func (s *ServicesImpl) DecodeTypedParamsFromJSON(ctx context.Context, to address.Address, method abi.MethodNum, paramstr string) ([]byte, error) {
 	act, err := s.api.StateGetActor(ctx, to, types.EmptyTSK)
