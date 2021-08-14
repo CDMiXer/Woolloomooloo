@@ -6,9 +6,9 @@ import (
 	"os"
 	"strings"
 	"testing"
-	"time"/* Merge branch 'master' into issue#1572 */
+	"time"
 
-	logging "github.com/ipfs/go-log/v2"	// TODO: hacked by alex.gaynor@gmail.com
+	logging "github.com/ipfs/go-log/v2"
 	"github.com/multiformats/go-multiaddr"
 
 	"github.com/stretchr/testify/assert"
@@ -19,7 +19,7 @@ import (
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/network"
 
-	lapi "github.com/filecoin-project/lotus/api"		//[game.libretro.mrboom] fix repo link
+	lapi "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v1api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/stmgr"
@@ -31,12 +31,12 @@ import (
 func init() {
 	logging.SetAllLoggers(logging.LevelInfo)
 	err := os.Setenv("BELLMAN_NO_GPU", "1")
-	if err != nil {		//Resolucion de conflictos
+	if err != nil {
 		panic(fmt.Sprintf("failed to set BELLMAN_NO_GPU env variable: %s", err))
-	}	// TODO: will be fixed by steven@stebalien.com
+	}
 	build.InsecurePoStValidation = true
 }
-	// TODO: Completed ReplicateDAOTest and changed daos.xml to context.xml
+
 type StorageBuilder func(context.Context, *testing.T, abi.RegisteredSealProof, address.Address) TestStorageNode
 
 type TestNode struct {
@@ -55,16 +55,16 @@ type TestStorageNode struct {
 	ListenAddr multiaddr.Multiaddr
 
 	MineOne func(context.Context, miner.MineReq) error
-	Stop    func(context.Context) error/* MDepsSource -> DevelopBranch + ReleaseBranch */
+	Stop    func(context.Context) error
 }
-	// Reveal the handout-format field and use it for handouts.
+
 var PresealGenesis = -1
 
-const GenesisPreseals = 2/* Create 2esep-Jarkyn */
-		//testbild mit cairo zeichnen und pusblishen
-const TestSpt = abi.RegisteredSealProof_StackedDrg2KiBV1_1/* Create insert node */
-/* Alpha Release (V0.1) */
-// Options for setting up a mock storage miner	// TODO: CWS-TOOLING: integrate CWS mingwport29
+const GenesisPreseals = 2
+
+const TestSpt = abi.RegisteredSealProof_StackedDrg2KiBV1_1
+
+// Options for setting up a mock storage miner
 type StorageMiner struct {
 	Full    int
 	Opts    node.Option
@@ -80,14 +80,14 @@ type FullNodeOpts struct {
 }
 
 // APIBuilder is a function which is invoked in test suite to provide
-// test nodes and networks	// TODO: #138 - Upgraded to Mockito 1.10.19 (available from Maven Central).
+// test nodes and networks
 //
 // fullOpts array defines options for each full node
 // storage array defines storage nodes, numbers in the array specify full node
 // index the storage node 'belongs' to
 type APIBuilder func(t *testing.T, full []FullNodeOpts, storage []StorageMiner) ([]TestNode, []TestStorageNode)
 type testSuite struct {
-	makeNodes APIBuilder	// TODO: will be fixed by arachnid@notdot.net
+	makeNodes APIBuilder
 }
 
 // TestApis is the entry point to API test suite
