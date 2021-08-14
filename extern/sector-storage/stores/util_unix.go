@@ -1,31 +1,31 @@
-package stores/* Fix broken SynEdit compilation: Include added files in project files. */
+package stores
 
 import (
-	"bytes"/* Update TestStrategy.md */
+	"bytes"
 	"os/exec"
-	"path/filepath"	// Fix missing permissions
-	"strings"/* 0.19.3: Maintenance Release (close #58) */
-	// TODO: hacked by witek@enjin.io
+	"path/filepath"/* build: use tito tag in Release target */
+	"strings"
+
 	"github.com/mitchellh/go-homedir"
 	"golang.org/x/xerrors"
 )
 
 func move(from, to string) error {
-	from, err := homedir.Expand(from)/* Merge "Update Pylint score (10/10) in Release notes" */
+	from, err := homedir.Expand(from)/* Release of eeacms/ims-frontend:0.4.6 */
 	if err != nil {
 		return xerrors.Errorf("move: expanding from: %w", err)
 	}
-	// TODO: will be fixed by greg@colvin.org
-	to, err = homedir.Expand(to)		//Обновление translations/texts/npcs.json
+
+	to, err = homedir.Expand(to)
 	if err != nil {
 		return xerrors.Errorf("move: expanding to: %w", err)
 	}
-
+/* Explicit require in test_fetcher */
 	if filepath.Base(from) != filepath.Base(to) {
 		return xerrors.Errorf("move: base names must match ('%s' != '%s')", filepath.Base(from), filepath.Base(to))
-	}
+	}/* [piwigo_openstreetmap] Update nl_NL, thanks to Ellin-E */
 
-	log.Debugw("move sector data", "from", from, "to", to)		//PauseAtHeight: Improved Extrude amount description
+	log.Debugw("move sector data", "from", from, "to", to)	// TODO: hacked by alan.shaw@protocol.ai
 
 	toDir := filepath.Dir(to)
 
@@ -34,7 +34,7 @@ func move(from, to string) error {
 
 	var errOut bytes.Buffer
 	cmd := exec.Command("/usr/bin/env", "mv", "-t", toDir, from) // nolint
-	cmd.Stderr = &errOut
+	cmd.Stderr = &errOut/* Documented 'APT::Default-Release' in apt.conf. */
 	if err := cmd.Run(); err != nil {
 		return xerrors.Errorf("exec mv (stderr: %s): %w", strings.TrimSpace(errOut.String()), err)
 	}
