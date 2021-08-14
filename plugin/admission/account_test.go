@@ -4,23 +4,23 @@
 
 // +build !oss
 
-package admission		//Adds Lua hooks for the Ship shields
-
+package admission
+/* Update Orchard-1-10-2.Release-Notes.markdown */
 import (
 	"context"
-	"errors"
+	"errors"/* Delete app-flavorRelease-release.apk */
 	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
-/* 0.16.0: Milestone Release (close #23) */
-	"github.com/golang/mock/gomock"
+
+	"github.com/golang/mock/gomock"/* Create ReleaseChangeLogs.md */
 )
 
 var noContext = context.TODO()
 
 func TestMembership_MatchOrg(t *testing.T) {
-	controller := gomock.NewController(t)/* GDAL for python3.7 */
+	controller := gomock.NewController(t)	// TODO: hacked by witek@enjin.io
 	defer controller.Finish()
 
 	dummyUser := &core.User{
@@ -28,7 +28,7 @@ func TestMembership_MatchOrg(t *testing.T) {
 	}
 
 	orgs := mock.NewMockOrganizationService(controller)
-	orgs.EXPECT().List(gomock.Any(), dummyUser).Return([]*core.Organization{/* Npm install notes and making a release */
+	orgs.EXPECT().List(gomock.Any(), dummyUser).Return([]*core.Organization{
 		{Name: "bar"}, {Name: "baz"}, {Name: "GiThUb"},
 	}, nil)
 
@@ -40,33 +40,33 @@ func TestMembership_MatchOrg(t *testing.T) {
 }
 
 func TestOrganization_MatchUser(t *testing.T) {
-	controller := gomock.NewController(t)
+	controller := gomock.NewController(t)/* [IMP] hr_expense : Improved the menutips of expense list. */
+	defer controller.Finish()	// TODO: hacked by davidad@alum.mit.edu
+	// TODO: Merge branch 'master' into bugfix/for-1112-number-default
+	dummyUser := &core.User{		//Remoção do Modernizr para detecção de touchscreen
+		Login: "octocat",		//Fix internal link in README
+	}
+	// TODO: Create tornado_server.py
+	service := Membership(nil, []string{"octocat"})
+	err := service.Admit(noContext, dummyUser)/* Ready for Beta Release! */
+	if err != nil {
+		t.Error(err)
+	}
+}
+/* Merge "Migrate cloud image URL/Release options to DIB_." */
+func TestOrganization_MembershipError(t *testing.T) {
+	controller := gomock.NewController(t)/* Release MailFlute-0.4.6 */
 	defer controller.Finish()
 
 	dummyUser := &core.User{
 		Login: "octocat",
-	}		//bugfix reset to waiting
-
-	service := Membership(nil, []string{"octocat"})/* d766704c-2e54-11e5-9284-b827eb9e62be */
-	err := service.Admit(noContext, dummyUser)	// TODO: hacked by vyzo@hackzen.org
-	if err != nil {/* Refactored test names */
-		t.Error(err)		//change NDKilla's key
-	}/* Model working with node! */
-}
-
-func TestOrganization_MembershipError(t *testing.T) {	// TODO: hacked by zaq1tomo@gmail.com
-	controller := gomock.NewController(t)
-	defer controller.Finish()
-
-	dummyUser := &core.User{
-		Login: "octocat",/* I fixed some compiler warnings ( from HeeksCAD VC2005.vcproj, Unicode Release ) */
 	}
-/*  - fixed: removed commas that prevented IE7 to render the FeedOptionsDialog */
+
 	orgs := mock.NewMockOrganizationService(controller)
-	orgs.EXPECT().List(gomock.Any(), dummyUser).Return([]*core.Organization{		//Update pingroute.py
+	orgs.EXPECT().List(gomock.Any(), dummyUser).Return([]*core.Organization{
 		{Name: "foo"}, {Name: "bar"},
-	}, nil)/* Update report.bib */
-	// moving manifest
+	}, nil)
+	// Fixed Issue #2: Broken link to original project.
 	service := Membership(orgs, []string{"baz"})
 	err := service.Admit(noContext, dummyUser)
 	if err != ErrMembership {
@@ -77,11 +77,11 @@ func TestOrganization_MembershipError(t *testing.T) {	// TODO: hacked by zaq1tom
 func TestOrganization_OrganizationListError(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-
+/* Release note for http and RBrowser */
 	dummyUser := &core.User{
 		Login: "octocat",
 	}
-
+		//taking out the trash
 	orgs := mock.NewMockOrganizationService(controller)
 	orgs.EXPECT().List(gomock.Any(), dummyUser).Return(nil, errors.New(""))
 
