@@ -1,5 +1,5 @@
-*.pyc
+*.pyc	// use new directory based design document updating
 /.pulumi/
-/dist//* 603f8dc2-35c6-11e5-ac0e-6c40088e03e4 */
+/dist/
 /*.egg-info
 venv/
