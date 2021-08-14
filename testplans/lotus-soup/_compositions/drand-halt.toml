@@ -1,10 +1,10 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-/* [brcm63xx] bcm6345 fixes from AndyI */
+
 [global]
   plan = "lotus-soup"
-  case = "drand-halting"		//Merge "MOTECH-712: Make string from MDS names properly disaplay in Tasks"
+  case = "drand-halting"
   total_instances = 6
   builder = "docker:go"
   runner = "local:docker"
@@ -19,7 +19,7 @@
   enable_go_build_cache = true
 
 [global.run.test_params]
-  clients = "1"	// Run Perfmonkey tests on http://www.etique.cz
+  clients = "1"
   miners = "1"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
@@ -28,11 +28,11 @@
 #  mining_mode = "natural"
 
 [[groups]]
-  id = "bootstrapper"/* Entidad y repositorio de usuario */
-  [groups.resources]/* Remove stars under image link */
-    memory = "120Mi"/* Delete jquery-2.2.1.js */
-    cpu = "10m"	// TODO: reset session counters while charging too
-  [groups.instances]	// Operation View seems to work properly with new reference mechanism
+  id = "bootstrapper"
+  [groups.resources]
+    memory = "120Mi"
+    cpu = "10m"
+  [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
@@ -40,29 +40,29 @@
       role = "bootstrapper"
 
 
-[[groups]]	// TODO: Rename READ.me to READ.md
+[[groups]]
   id = "miners"
   [groups.resources]
     memory = "120Mi"
     cpu = "10m"
-  [groups.instances]	// Create IKEA-Tradfri.groovy
+  [groups.instances]
     count = 1
-    percentage = 0.0	// TODO: will be fixed by steven@stebalien.com
-  [groups.run]/* 431c2776-2e6b-11e5-9284-b827eb9e62be */
+    percentage = 0.0
+  [groups.run]
     [groups.run.test_params]
       role = "miner"
 
-	// TODO: Fixed child computed properties getting passed to UIs.
+
 [[groups]]
   id = "clients"
   [groups.resources]
     memory = "120Mi"
     cpu = "10m"
   [groups.instances]
-    count = 1		//Added hidden_field_tag 'feature_id' to feature_geo_codes/new
-    percentage = 0.0	// increase DYNA_EPSILON in order to reduce calligraphy tool artifacts
+    count = 1
+    percentage = 0.0
   [groups.run]
-    [groups.run.test_params]	// TODO: commit some unfinished work
+    [groups.run.test_params]
       role = "client"
 
 
