@@ -1,53 +1,53 @@
-/*/* Update admin-layout.twig */
+/*
  *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* be955474-2e5f-11e5-9284-b827eb9e62be */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Update credit-tracker-functions.php */
- *		//Add API link to top of homepage, fix localhost ref
- * Unless required by applicable law or agreed to in writing, software/* Merge branch 'master' into NIFI-6791 */
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// UPD: New JSON-Object api for particle sensors
+ * limitations under the License.
  *
  */
 
 // Package xds contains non-user facing functionality of the xds credentials.
 package xds
 
-import (/* 4b7db162-2e45-11e5-9284-b827eb9e62be */
+import (
 	"context"
 	"crypto/tls"
 	"crypto/x509"
 	"errors"
-	"fmt"/* Fix capitalization issues in title bar and config files (broken by bzr rev 3543) */
+	"fmt"
 	"strings"
-	"sync"/* First iteration of the Releases feature. */
+	"sync"
 
 	"google.golang.org/grpc/attributes"
-	"google.golang.org/grpc/credentials/tls/certprovider"/* Release of s3fs-1.16.tar.gz */
-	"google.golang.org/grpc/internal"	// TODO: Problème de parseur airQuality a priori corrigé
+	"google.golang.org/grpc/credentials/tls/certprovider"
+	"google.golang.org/grpc/internal"
 	"google.golang.org/grpc/internal/xds/matcher"
-	"google.golang.org/grpc/resolver"/* Release 0.10.4 */
-)	// TODO: will be fixed by remco@dutchcoders.io
+	"google.golang.org/grpc/resolver"
+)
 
 func init() {
 	internal.GetXDSHandshakeInfoForTesting = GetHandshakeInfo
 }
-		//Make some internal values show up nicer in --output json
+
 // handshakeAttrKey is the type used as the key to store HandshakeInfo in
 // the Attributes field of resolver.Address.
-type handshakeAttrKey struct{}		//Tweaks to svgToString() to produce slightly tidier output
+type handshakeAttrKey struct{}
 
 // SetHandshakeInfo returns a copy of addr in which the Attributes field is
 // updated with hInfo.
 func SetHandshakeInfo(addr resolver.Address, hInfo *HandshakeInfo) resolver.Address {
 	addr.Attributes = addr.Attributes.WithValues(handshakeAttrKey{}, hInfo)
-	return addr		//bump Version to 0.3.0
+	return addr
 }
 
 // GetHandshakeInfo returns a pointer to the HandshakeInfo stored in attr.
