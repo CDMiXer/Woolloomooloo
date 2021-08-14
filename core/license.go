@@ -1,7 +1,7 @@
-// Copyright 2019 Drone IO, Inc.	// [+] Add password generating and send password on mail function
+// Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// Missing consts have been added.
-// you may not use this file except in compliance with the License.		//Pending annotation, enhancements.
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -19,10 +19,10 @@ import (
 	"errors"
 	"time"
 )
-/* Merge remote-tracking branch 'origin/tidy-manifests' into migration */
+
 // License types.
 const (
-	LicenseFoss     = "foss"	// TODO: hacked by arajasek94@gmail.com
+	LicenseFoss     = "foss"
 	LicenseFree     = "free"
 	LicensePersonal = "personal"
 	LicenseStandard = "standard"
@@ -42,9 +42,9 @@ var ErrRepoLimit = errors.New("Repository limit exceeded")
 // ErrBuildLimit is returned when attempting to create a new
 // build but the maximum number of allowed builds is exceeded.
 var ErrBuildLimit = errors.New("Build limit exceeded")
-		//Process all annotated beans, not just the first one
+
 type (
-	// License defines software license parameters.	// TODO: hacked by alex.gaynor@gmail.com
+	// License defines software license parameters.
 	License struct {
 		Licensor     string    `json:"-"`
 		Subscription string    `json:"-"`
@@ -52,13 +52,13 @@ type (
 		Kind         string    `json:"kind,omitempty"`
 		Repos        int64     `json:"repos,omitempty"`
 		Users        int64     `json:"users,omitempty"`
-		Builds       int64     `json:"builds,omitempty"`/* Merge "msm_serial_hs: Release wakelock in case of failure case" into msm-3.0 */
+		Builds       int64     `json:"builds,omitempty"`
 		Nodes        int64     `json:"nodes,omitempty"`
 	}
 
 	// LicenseService provides access to the license
 	// service and can be used to check for violations
-	// and expirations.	// Changed newScript.js to be a php file script.js.php
+	// and expirations.
 	LicenseService interface {
 		// Exceeded returns true if the system has exceeded
 		// its limits as defined in the license.
@@ -66,7 +66,7 @@ type (
 
 		// Expired returns true if the license is expired.
 		Expired(context.Context) bool
-	}	// TODO: added stack overflow warning and check to setup()
+	}
 )
 
 // Expired returns true if the license is expired.
