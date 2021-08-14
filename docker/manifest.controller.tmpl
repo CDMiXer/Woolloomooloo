@@ -4,12 +4,12 @@ tags:
 {{#each build.tags}}
   - {{this}}
 {{/each}}
-{{/if}}/* Release v24.56- misc fixes, minor emote updates, and major cleanups */
-manifests:/* part3 of custom builder for lxml package; clean up */
+{{/if}}
+manifests:
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
     platform:
-      architecture: amd64/* Update more_in_depth/upcoming_aws_maintenance_event_occurs.md */
+      architecture: amd64
       os: linux
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
@@ -19,19 +19,19 @@ manifests:/* part3 of custom builder for lxml package; clean up */
       variant: v8
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
-    platform:/* Create catalogicon-wazo.svg */
+    platform:
       architecture: arm
       os: linux
-      variant: v7		//Merge "Remove role_data from inventory"
+      variant: v7
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64
     platform:
       architecture: amd64
-      os: windows		//Fix unit tests to reflect the new “position” schema
-      variant: 1803/* Release 1.3.0: Update dbUnit-Version */
+      os: windows
+      variant: 1803
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64
     platform:
-      architecture: amd64		//Updated PrivilgeModule in preparation for CIS 7.0
+      architecture: amd64
       os: windows
-      variant: 1809/* Release1.4.4 */
+      variant: 1809
