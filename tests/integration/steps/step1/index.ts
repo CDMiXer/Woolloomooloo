@@ -1,8 +1,8 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-	// 0f5c1da8-2e6e-11e5-9284-b827eb9e62be
+
 import { Resource } from "./resource";
 
-// Step 1: Populate the world:		//9a6ef338-2e60-11e5-9284-b827eb9e62be
+// Step 1: Populate the world:
 // * Create 4 resources, a1, b1, c1, d1.  c1 depends on a1 via an ID property.
 let a = new Resource("a", { state: 1 });
 let b = new Resource("b", { state: 1 });
