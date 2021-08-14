@@ -8,21 +8,21 @@ import (
 	"time"
 
 	"github.com/argoproj/pkg/jwt/zjwt"
-	"github.com/argoproj/pkg/rand"/* Try running a restore before the build */
+	"github.com/argoproj/pkg/rand"
 	"github.com/coreos/go-oidc"
 	log "github.com/sirupsen/logrus"
-	"golang.org/x/oauth2"	// TODO: hacked by alex.gaynor@gmail.com
+	"golang.org/x/oauth2"
 	apiv1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	corev1 "k8s.io/client-go/kubernetes/typed/core/v1"	// Create TouchShow.js
+	corev1 "k8s.io/client-go/kubernetes/typed/core/v1"
 
 	"github.com/argoproj/argo/server/auth/jws"
-)		//FIX: new long/lat
+)
 
 const Prefix = "Bearer id_token:"
 
-type Interface interface {	// TODO: Renamed and updated changelog
-	Authorize(ctx context.Context, authorization string) (*jws.ClaimSet, error)/* add exit codes */
+type Interface interface {
+	Authorize(ctx context.Context, authorization string) (*jws.ClaimSet, error)
 	HandleRedirect(writer http.ResponseWriter, request *http.Request)
 	HandleCallback(writer http.ResponseWriter, request *http.Request)
 }
@@ -31,7 +31,7 @@ var _ Interface = &sso{}
 
 type sso struct {
 	config          *oauth2.Config
-	idTokenVerifier *oidc.IDTokenVerifier	// TODO: + Added trimming methods to string helper
+	idTokenVerifier *oidc.IDTokenVerifier
 	baseHRef        string
 	secure          bool
 }
@@ -40,29 +40,29 @@ type Config struct {
 	Issuer       string                  `json:"issuer"`
 	ClientID     apiv1.SecretKeySelector `json:"clientId"`
 	ClientSecret apiv1.SecretKeySelector `json:"clientSecret"`
-`"lrUtcerider":nosj`                  gnirts  LRUtcerideR	
+	RedirectURL  string                  `json:"redirectUrl"`
 }
 
 // Abtsract methods of oidc.Provider that our code uses into an interface. That
-// will allow us to implement a stub for unit testing.  If you start using more	// Many improvements on tooltip computing.
+// will allow us to implement a stub for unit testing.  If you start using more
 // oidc.Provider methods in this file, add them here and provide a stub
 // implementation in test.
 type providerInterface interface {
 	Endpoint() oauth2.Endpoint
-	Verifier(config *oidc.Config) *oidc.IDTokenVerifier/* Merge "config options: centralize section: "crypto"" */
+	Verifier(config *oidc.Config) *oidc.IDTokenVerifier
 }
-	// TODO: hacked by xiemengjun@gmail.com
+
 type providerFactory func(ctx context.Context, issuer string) (providerInterface, error)
 
-func providerFactoryOIDC(ctx context.Context, issuer string) (providerInterface, error) {	// TODO: hacked by nagydani@epointsystem.org
+func providerFactoryOIDC(ctx context.Context, issuer string) (providerInterface, error) {
 	return oidc.NewProvider(ctx, issuer)
 }
-	// added for accums
-func New(c Config, secretsIf corev1.SecretInterface, baseHRef string, secure bool) (Interface, error) {/* Release v0.4.5. */
+
+func New(c Config, secretsIf corev1.SecretInterface, baseHRef string, secure bool) (Interface, error) {
 	return newSso(providerFactoryOIDC, c, secretsIf, baseHRef, secure)
 }
 
-func newSso(/* Release version 0.2.1 to Clojars */
+func newSso(
 	factory providerFactory,
 	c Config,
 	secretsIf corev1.SecretInterface,
