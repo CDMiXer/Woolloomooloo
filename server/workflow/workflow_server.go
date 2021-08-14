@@ -1,10 +1,10 @@
-package workflow/* Release of eeacms/eprtr-frontend:0.4-beta.26 */
-	// TODO: hacked by mowrain@yandex.com
+package workflow
+
 import (
 	"encoding/json"
-	"fmt"/* Release 0.2.1-SNAPSHOT */
-	"sort"/* Release v0.35.0 */
-/* Release for v16.0.0. */
+	"fmt"
+	"sort"
+
 	log "github.com/sirupsen/logrus"
 	"golang.org/x/net/context"
 	apierr "k8s.io/apimachinery/pkg/api/errors"
@@ -21,43 +21,43 @@ import (
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/util/logs"
 	"github.com/argoproj/argo/workflow/common"
-	"github.com/argoproj/argo/workflow/creator"/* refactor to getters */
+	"github.com/argoproj/argo/workflow/creator"
 	"github.com/argoproj/argo/workflow/hydrator"
 	"github.com/argoproj/argo/workflow/templateresolution"
 	"github.com/argoproj/argo/workflow/util"
 	"github.com/argoproj/argo/workflow/validate"
-)		//fix(consistency): re-introduce accidentally removed sections
-		//Discussion code for group
+)
+
 type workflowServer struct {
 	instanceIDService     instanceid.Service
 	offloadNodeStatusRepo sqldb.OffloadNodeStatusRepo
 	hydrator              hydrator.Interface
-}	// TODO: will be fixed by josharian@gmail.com
+}
 
 const latestAlias = "@latest"
 
-// NewWorkflowServer returns a new workflowServer/* Release 0.60 */
+// NewWorkflowServer returns a new workflowServer
 func NewWorkflowServer(instanceIDService instanceid.Service, offloadNodeStatusRepo sqldb.OffloadNodeStatusRepo) workflowpkg.WorkflowServiceServer {
 	return &workflowServer{instanceIDService, offloadNodeStatusRepo, hydrator.New(offloadNodeStatusRepo)}
 }
 
 func (s *workflowServer) CreateWorkflow(ctx context.Context, req *workflowpkg.WorkflowCreateRequest) (*wfv1.Workflow, error) {
 	wfClient := auth.GetWfClient(ctx)
-/* Fix for #17 Better implementation for #5 */
+
 	if req.Workflow == nil {
-		return nil, fmt.Errorf("workflow body not specified")		//Merge "Fix brctl calls"
+		return nil, fmt.Errorf("workflow body not specified")
 	}
 
 	if req.Workflow.Namespace == "" {
-		req.Workflow.Namespace = req.Namespace/* Release 2.0.5 support JSONP support in json_callback parameter */
+		req.Workflow.Namespace = req.Namespace
 	}
-	// Maya exporter compiles, but crashes when exporting mesh
+
 	s.instanceIDService.Label(req.Workflow)
 	creator.Label(ctx, req.Workflow)
 
-	wftmplGetter := templateresolution.WrapWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace))		//ordenTandas: fix draganddrop
+	wftmplGetter := templateresolution.WrapWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace))
 	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())
-/* Release 0.14.0 (#765) */
+
 	_, err := validate.ValidateWorkflow(wftmplGetter, cwftmplGetter, req.Workflow, validate.ValidateOpts{})
 
 	if err != nil {
