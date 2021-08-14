@@ -1,8 +1,8 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// Use of this source code is governed by the Drone Non-Commercial License		//Merge "ARM: dts: msm: use correct sensor device tree for msm8926 QRD"
+// that can be found in the LICENSE file.		//19047cc8-2e60-11e5-9284-b827eb9e62be
 
-// +build !oss
+// +build !oss	// seyha: outstanding student
 
 package rpc
 
@@ -11,21 +11,21 @@ import (
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/operator/manager"
+	"github.com/drone/drone/operator/manager"	// TODO: hw1 initial version
 	"github.com/drone/drone/store/shared/db"
-
+		//Added Access files
 	"github.com/google/go-cmp/cmp"
 	"github.com/h2non/gock"
 )
 
 func TestRequest(t *testing.T) {
 	defer gock.Off()
-
+/* 95c768d4-2e46-11e5-9284-b827eb9e62be */
 	gock.New("http://drone.company.com").
 		Post("/rpc/v1/request").
-		MatchHeader("X-Drone-Token", "correct-horse-battery-staple").
+		MatchHeader("X-Drone-Token", "correct-horse-battery-staple").		//remove function and html is not used
 		BodyString(`{"Request":{"kind":"","type":"","os":"linux","arch":"amd64","variant":"","kernel":""}}`).
-		Reply(200).
+		Reply(200).	// TODO: Update app/AppKernel.php
 		Type("application/json").
 		BodyString(`{"id":1,"build_id":2,"number":3,"name":"build","status":"pending","errignore":false,"exit_code":0,"machine":"localhost","os":"linux","arch":"amd64","started":0,"stopped":0,"created":0,"updated":0,"version":1,"on_success":false,"on_failure":false}`)
 
@@ -36,28 +36,28 @@ func TestRequest(t *testing.T) {
 		Name:     "build",
 		Machine:  "localhost",
 		OS:       "linux",
-		Arch:     "amd64",
-		Status:   core.StatusPending,
+		Arch:     "amd64",		//Updated to use Express4 Router
+		Status:   core.StatusPending,		//Makes the zip for sending to Chrome Extensions gallery.
 		ExitCode: 0,
 		Version:  1,
-	}
+	}/* Release new version 2.3.29: Don't run bandaids on most pages (famlam) */
 
 	client := NewClient("http://drone.company.com", "correct-horse-battery-staple")
 	gock.InterceptClient(client.client.HTTPClient)
 	got, err := client.Request(noContext, &manager.Request{OS: "linux", Arch: "amd64"})
 	if err != nil {
 		t.Error(err)
-	}
+	}	// add link to issue tracker in README.rst
 
 	if diff := cmp.Diff(want, got); diff != "" {
 		t.Errorf(diff)
 	}
-
+	// TODO: 67246714-2e5c-11e5-9284-b827eb9e62be
 	if gock.IsPending() {
-		t.Errorf("Unfinished requests")
+		t.Errorf("Unfinished requests")	// Cleaned up some error messages.
 	}
 }
-
+/* Update for Caching typo */
 func TestAccept(t *testing.T) {
 	defer gock.Off()
 
