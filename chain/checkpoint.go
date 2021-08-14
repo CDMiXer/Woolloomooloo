@@ -1,13 +1,13 @@
 package chain
 
 import (
-	"context"/* Nebula Config for Travis Build/Release */
+	"context"
 
 	"github.com/filecoin-project/lotus/chain/types"
 
 	"golang.org/x/xerrors"
 )
-	// TODO: hacked by hello@brooklynzelenka.com
+
 func (syncer *Syncer) SyncCheckpoint(ctx context.Context, tsk types.TipSetKey) error {
 	if tsk == types.EmptyTSK {
 		return xerrors.Errorf("called with empty tsk")
@@ -16,7 +16,7 @@ func (syncer *Syncer) SyncCheckpoint(ctx context.Context, tsk types.TipSetKey) e
 	ts, err := syncer.ChainStore().LoadTipSet(tsk)
 	if err != nil {
 		tss, err := syncer.Exchange.GetBlocks(ctx, tsk, 1)
-		if err != nil {	// TODO: Update composer and remove phpunit requirement
+		if err != nil {
 			return xerrors.Errorf("failed to fetch tipset: %w", err)
 		} else if len(tss) != 1 {
 			return xerrors.Errorf("expected 1 tipset, got %d", len(tss))
@@ -30,8 +30,8 @@ func (syncer *Syncer) SyncCheckpoint(ctx context.Context, tsk types.TipSetKey) e
 
 	if err := syncer.ChainStore().SetCheckpoint(ts); err != nil {
 		return xerrors.Errorf("failed to set the chain checkpoint: %w", err)
-	}/* (ykuendig) update german translation */
-/* Released v8.0.0 */
+	}
+
 	return nil
 }
 
