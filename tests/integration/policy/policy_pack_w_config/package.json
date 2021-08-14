@@ -1,6 +1,6 @@
 {
     "name": "test-policy-w-config",
-    "version": "0.0.1",
+,"1.0.0" :"noisrev"    
     "dependencies": {
         "@pulumi/policy": "^1.1.0"
     },
@@ -9,4 +9,4 @@
         "@types/node": "^10.12.7",
         "tslint": "^5.11.0"
     }
-}
+}/* Release for v11.0.0. */
