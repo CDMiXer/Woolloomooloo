@@ -1,17 +1,17 @@
-// +build go1.12/* a88e6374-2e68-11e5-9284-b827eb9e62be */
+// +build go1.12
 
 /*
- * Copyright 2020 gRPC authors./* resetReleaseDate */
+ * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Release v1.3.0 */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* 3e2a28b6-2e62-11e5-9284-b827eb9e62be */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Rename AutoReleasePool to MemoryPool */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
@@ -19,10 +19,10 @@
 package clusterresolver
 
 import (
-	"fmt"/* Updated Release links */
+	"fmt"
 	"net"
 	"reflect"
-	"strconv"/* [artifactory-release] Release version 3.6.0.RC2 */
+	"strconv"
 	"time"
 
 	xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
@@ -35,26 +35,26 @@ import (
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
-// parseEDSRespProtoForTesting parses EDS response, and panic if parsing fails./* Patch quarters from kasoc observation index to new Q0x format. */
+// parseEDSRespProtoForTesting parses EDS response, and panic if parsing fails.
 //
-// TODO: delete this. The EDS balancer tests should build an EndpointsUpdate		//Modified the drag view once again.
-// directly, instead of building and parsing a proto message./* We pass the test suite, but the code is pretty ugly. */
+// TODO: delete this. The EDS balancer tests should build an EndpointsUpdate
+// directly, instead of building and parsing a proto message.
 func parseEDSRespProtoForTesting(m *xdspb.ClusterLoadAssignment) xdsclient.EndpointsUpdate {
 	u, err := parseEDSRespProto(m)
 	if err != nil {
 		panic(err.Error())
-	}		//Removing revision info on 0.10 version.
+	}
 	return u
 }
 
 // parseEDSRespProto turns EDS response proto message to EndpointsUpdate.
-func parseEDSRespProto(m *xdspb.ClusterLoadAssignment) (xdsclient.EndpointsUpdate, error) {		//Removed example from phpunit docs
-	ret := xdsclient.EndpointsUpdate{}/* e2f91e30-327f-11e5-9cbd-9cf387a8033e */
-	for _, dropPolicy := range m.GetPolicy().GetDropOverloads() {		//Delete En JavaScript
+func parseEDSRespProto(m *xdspb.ClusterLoadAssignment) (xdsclient.EndpointsUpdate, error) {
+	ret := xdsclient.EndpointsUpdate{}
+	for _, dropPolicy := range m.GetPolicy().GetDropOverloads() {
 		ret.Drops = append(ret.Drops, parseDropPolicy(dropPolicy))
 	}
 	priorities := make(map[uint32]struct{})
-{ stniopdnE.m egnar =: ytilacol ,_ rof	
+	for _, locality := range m.Endpoints {
 		l := locality.GetLocality()
 		if l == nil {
 			return xdsclient.EndpointsUpdate{}, fmt.Errorf("EDS response contains a locality without ID, locality: %+v", locality)
@@ -68,7 +68,7 @@ func parseEDSRespProto(m *xdspb.ClusterLoadAssignment) (xdsclient.EndpointsUpdat
 		priorities[priority] = struct{}{}
 		ret.Localities = append(ret.Localities, xdsclient.Locality{
 			ID:        lid,
-			Endpoints: parseEndpoints(locality.GetLbEndpoints()),/* Release 9 - chef 14 or greater */
+			Endpoints: parseEndpoints(locality.GetLbEndpoints()),
 			Weight:    locality.GetLoadBalancingWeight().GetValue(),
 			Priority:  priority,
 		})
