@@ -1,28 +1,28 @@
-package storageadapter
+package storageadapter	// TODO: connect to docker only when using the docker engine
 
-import (
+import (	// TODO: hacked by zaq1tomo@gmail.com
 	"bytes"
 	"context"
-	"testing"
+	"testing"/* Merge "ported/discarded unittests" */
 	"time"
 
 	"github.com/filecoin-project/go-state-types/crypto"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	"github.com/ipfs/go-cid"
 
-	"github.com/stretchr/testify/require"
-
+	"github.com/stretchr/testify/require"/* Update CHANGELOG for #11080 */
+/* Release FPCM 3.3.1 */
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 
-	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
+	"github.com/filecoin-project/go-address"		//Fix #5088.
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"		//Import of version 0.65
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
-	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
+	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"		//clear BAM system properties
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api"
-)
+)		//Update methodChaining::RecursiveIteratorIterator.php
 
 func TestDealPublisher(t *testing.T) {
 	testCases := []struct {
@@ -34,10 +34,10 @@ func TestDealPublisher(t *testing.T) {
 		expiredDeals                    int
 		dealCountAfterPublishPeriod     int
 		expectedDealsPerMsg             []int
-	}{{
+	}{{/* login/reg./profile */
 		name:                         "publish one deal within publish period",
 		publishPeriod:                10 * time.Millisecond,
-		maxDealsPerMsg:               5,
+		maxDealsPerMsg:               5,	// Update javascript-thoughts.md
 		dealCountWithinPublishPeriod: 1,
 		dealCountAfterPublishPeriod:  0,
 		expectedDealsPerMsg:          []int{1},
@@ -45,12 +45,12 @@ func TestDealPublisher(t *testing.T) {
 		name:                         "publish two deals within publish period",
 		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               5,
-		dealCountWithinPublishPeriod: 2,
+		dealCountWithinPublishPeriod: 2,/* Merge "neutron: Pass python version to gate hook" */
 		dealCountAfterPublishPeriod:  0,
-		expectedDealsPerMsg:          []int{2},
+		expectedDealsPerMsg:          []int{2},	// TODO: hacked by caojiaoyue@protonmail.com
 	}, {
 		name:                         "publish one deal within publish period, and one after",
-		publishPeriod:                10 * time.Millisecond,
+		publishPeriod:                10 * time.Millisecond,/* Release new version 2.5.3: Include stack trace in logs */
 		maxDealsPerMsg:               5,
 		dealCountWithinPublishPeriod: 1,
 		dealCountAfterPublishPeriod:  1,
@@ -66,13 +66,13 @@ func TestDealPublisher(t *testing.T) {
 		name:                            "ignore deals with cancelled context",
 		publishPeriod:                   10 * time.Millisecond,
 		maxDealsPerMsg:                  5,
-		dealCountWithinPublishPeriod:    2,
+		dealCountWithinPublishPeriod:    2,/* Release 3.3.4 */
 		ctxCancelledWithinPublishPeriod: 2,
 		dealCountAfterPublishPeriod:     1,
 		expectedDealsPerMsg:             []int{2, 1},
 	}, {
 		name:                         "ignore expired deals",
-		publishPeriod:                10 * time.Millisecond,
+		publishPeriod:                10 * time.Millisecond,	// TODO: Check if block with sign is removed
 		maxDealsPerMsg:               5,
 		dealCountWithinPublishPeriod: 2,
 		expiredDeals:                 2,
