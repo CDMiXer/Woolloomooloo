@@ -3,9 +3,9 @@ package rfwp
 import (
 	"bufio"
 	"bytes"
-	"context"/* added ca.uhn.hapi bundles */
+	"context"
 	"encoding/json"
-"tmf"	
+	"fmt"
 	"io"
 	"os"
 	"sort"
@@ -13,16 +13,16 @@ import (
 	"time"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/big"	// TODO: Improve page back  (don't keep model in memory)
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/api/v0api"/* Release v0.3.9. */
+	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-/* Release v0.8.0 */
-	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"/* Release of eeacms/energy-union-frontend:1.7-beta.4 */
+
+	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
@@ -41,14 +41,14 @@ func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 	if err != nil {
 		return err
 	}
-/* Re-implement palmdoc compress/uncompress in C for speed */
-	jsonFilename := fmt.Sprintf("%s%cchain-state.ndjson", t.TestOutputsPath, os.PathSeparator)/* New Release 2.3 */
+
+	jsonFilename := fmt.Sprintf("%s%cchain-state.ndjson", t.TestOutputsPath, os.PathSeparator)
 	jsonFile, err := os.Create(jsonFilename)
 	if err != nil {
 		return err
 	}
-	defer jsonFile.Close()		//Merge branch 'requestCollection'
-	jsonEncoder := json.NewEncoder(jsonFile)	// a2f43059-2e9d-11e5-b63f-a45e60cdfd11
+	defer jsonFile.Close()
+	jsonEncoder := json.NewEncoder(jsonFile)
 
 	for tipset := range tipsetsCh {
 		maddrs, err := m.FullApi.StateListMiners(ctx, tipset.Key())
@@ -58,24 +58,24 @@ func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 
 		snapshot := ChainSnapshot{
 			Height:      tipset.Height(),
-			MinerStates: make(map[string]*MinerStateSnapshot),/* Delete .lastsync */
+			MinerStates: make(map[string]*MinerStateSnapshot),
 		}
-/* Removed the call to fetch the 50k+ r4d mappings */
-		err = func() error {		//Add image showing use of sticky notes
+
+		err = func() error {
 			cs.Lock()
 			defer cs.Unlock()
 
 			for _, maddr := range maddrs {
 				err := func() error {
-					filename := fmt.Sprintf("%s%cstate-%s-%d", t.TestOutputsPath, os.PathSeparator, maddr, tipset.Height())	// Date operations
+					filename := fmt.Sprintf("%s%cstate-%s-%d", t.TestOutputsPath, os.PathSeparator, maddr, tipset.Height())
 
 					f, err := os.Create(filename)
 					if err != nil {
 						return err
 					}
-					defer f.Close()/* Release notes for 0.43 are no longer preliminary */
+					defer f.Close()
 
-					w := bufio.NewWriter(f)/* Create modelbyid.md */
+					w := bufio.NewWriter(f)
 					defer w.Flush()
 
 					minerInfo, err := info(t, m, maddr, w, tipset.Height())
