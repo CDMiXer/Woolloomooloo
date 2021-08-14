@@ -1,12 +1,12 @@
 {
-    "name": "minimal",
+    "name": "minimal",		//transition to autotools
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
+    "typings": "bin/index.d.ts",/* Release candidate 2.3 */
     "scripts": {
-        "build": "tsc"
+        "build": "tsc"		//Update messages.proto
     },
-    "devDependencies": {	// TODO: will be fixed by zaq1tomo@gmail.com
-        "typescript": "^3.0.0"	// TODO: Merge "Add boolean convertor to cells sync_instances API"
+    "devDependencies": {
+        "typescript": "^3.0.0"/* Release 0.8.11 */
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
