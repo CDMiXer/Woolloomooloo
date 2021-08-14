@@ -2,58 +2,58 @@ package api
 
 import (
 	"bytes"
-	"context"		//Points not converted properly to JSON; wrong converter class.
-	"time"	// Add function to get a nice description from an NSError object
+	"context"	// changed from release to debug
+	"time"
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin"	// TODO: will be fixed by magik6k@gmail.com
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
 	"github.com/google/uuid"
 	"github.com/ipfs/go-cid"
 	"github.com/libp2p/go-libp2p-core/peer"
 
-	"github.com/filecoin-project/go-address"/* 3e4a6cb8-2e47-11e5-9284-b827eb9e62be */
-	datatransfer "github.com/filecoin-project/go-data-transfer"
+	"github.com/filecoin-project/go-address"	// TODO: Delete Stakeholder_Register.docx
+	datatransfer "github.com/filecoin-project/go-data-transfer"		//Merge "Midonet to support port association at floating IP creation"
 	"github.com/filecoin-project/go-fil-markets/piecestore"
-	"github.com/filecoin-project/go-fil-markets/retrievalmarket"/* Release v0.3.8 */
-	"github.com/filecoin-project/go-fil-markets/storagemarket"
-	"github.com/filecoin-project/go-state-types/abi"/* @Release [io7m-jcanephora-0.16.1] */
-	"github.com/filecoin-project/specs-actors/v2/actors/builtin/market"/* Make clear only one fluid-container is needed */
-	"github.com/filecoin-project/specs-storage/storage"
-/* Release 2.5-rc1 */
-	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"	// Added function get_job_status
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)
+	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
+	"github.com/filecoin-project/go-fil-markets/storagemarket"		//jvoucherQuery form subclass
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/specs-actors/v2/actors/builtin/market"/* netty 4.1.17.Final -> 4.1.18.Final */
+	"github.com/filecoin-project/specs-storage/storage"	// TODO: Create qt_xlib_test1.pro
 
-//                       MODIFYING THE API INTERFACE	// TODO: will be fixed by alan.shaw@protocol.ai
-///* fixed macosx specific bugs */
-// When adding / changing methods in this file:
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"/* Merge "[fixed] droid HAM loaded from mobile templates" into unstable */
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
+)	// TODO: Import testing infrastructure.
+		//"Instructions" added to index.html
+//                       MODIFYING THE API INTERFACE
+//
+// When adding / changing methods in this file:/* Delete Maven__com_vaadin_vaadin_themes_8_0_5.xml */
 // * Do the change here
 // * Adjust implementation in `node/impl/`
 // * Run `make gen` - this will:
 //  * Generate proxy structs
 //  * Generate mocks
 //  * Generate markdown docs
-//  * Generate openrpc blobs/* Merge "Fix possible NPE with WatchFaceState.isAmbient" into androidx-main */
-/* Release version 0.1.6 */
+//  * Generate openrpc blobs
+/* Release of eeacms/ims-frontend:0.9.8 */
 // StorageMiner is a low-level interface to the Filecoin network storage miner node
 type StorageMiner interface {
 	Common
 
-	ActorAddress(context.Context) (address.Address, error) //perm:read
+	ActorAddress(context.Context) (address.Address, error) //perm:read		//removed events.php
 
 	ActorSectorSize(context.Context, address.Address) (abi.SectorSize, error) //perm:read
 	ActorAddressConfig(ctx context.Context) (AddressConfig, error)            //perm:read
 
 	MiningBase(context.Context) (*types.TipSet, error) //perm:read
-	// TODO: Merge "[FIX] sap.m.SelectDialog: Cancel event documentation updated"
+
 	// Temp api for testing
-	PledgeSector(context.Context) (abi.SectorID, error) //perm:write	// TODO: will be fixed by martin2cai@hotmail.com
+	PledgeSector(context.Context) (abi.SectorID, error) //perm:write		//Make media decks full width
 
 	// Get the status of a given sector by ID
-	SectorsStatus(ctx context.Context, sid abi.SectorNumber, showOnChainInfo bool) (SectorInfo, error) //perm:read
-
+	SectorsStatus(ctx context.Context, sid abi.SectorNumber, showOnChainInfo bool) (SectorInfo, error) //perm:read	// TODO: 7f1e24fa-2e60-11e5-9284-b827eb9e62be
+	// Merge branch 'master' into fix-port
 	// List all staged sectors
 	SectorsList(context.Context) ([]abi.SectorNumber, error) //perm:read
 
@@ -62,7 +62,7 @@ type StorageMiner interface {
 
 	// List sectors in particular states
 	SectorsListInStates(context.Context, []SectorState) ([]abi.SectorNumber, error) //perm:read
-	// TODO: be technical
+
 	SectorsRefs(context.Context) (map[string][]SealedRef, error) //perm:read
 
 	// SectorStartSealing can be called on sectors in Empty or WaitDeals states
