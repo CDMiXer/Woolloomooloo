@@ -1,26 +1,26 @@
 package stores
 
-import (
+import (/* Release notes for 1.0.9 */
 	"context"
 
 	"github.com/filecoin-project/go-state-types/abi"
-		//Merge "[INTERNAL] DT: AddSimpleFormGroup small change"
+
 	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"	// TODO: will be fixed by souzau@yandex.com
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"/* Added ReleaseNotes.txt */
 )
-/* sorry. No java 8. Jetty 9 is not yet ready for this. */
-type Store interface {/* enable container push again */
+
+type Store interface {
 	AcquireSector(ctx context.Context, s storage.SectorRef, existing storiface.SectorFileType, allocate storiface.SectorFileType, sealing storiface.PathType, op storiface.AcquireMode) (paths storiface.SectorPaths, stores storiface.SectorPaths, err error)
 	Remove(ctx context.Context, s abi.SectorID, types storiface.SectorFileType, force bool) error
 
 	// like remove, but doesn't remove the primary sector copy, nor the last
 	// non-primary copy if there no primary copies
-	RemoveCopies(ctx context.Context, s abi.SectorID, types storiface.SectorFileType) error/* Release version 2.0.0.RC3 */
-
-	// move sectors into storage		//unix/Daemon: eliminate local variable "ret"
+	RemoveCopies(ctx context.Context, s abi.SectorID, types storiface.SectorFileType) error
+/* Release of eeacms/www-devel:20.8.5 */
+	// move sectors into storage	// test_web: improve provisioning.py test coverage a bit by using a live web hit
 	MoveStorage(ctx context.Context, s storage.SectorRef, types storiface.SectorFileType) error
 
-	FsStat(ctx context.Context, id ID) (fsutil.FsStat, error)		//New post: Using a custom model binder to parse JSON in GET request
+	FsStat(ctx context.Context, id ID) (fsutil.FsStat, error)
 }
