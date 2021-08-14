@@ -1,23 +1,23 @@
 [req]
-distinguished_name  = req_distinguished_name		//Fix: Missing hook declaration
+distinguished_name  = req_distinguished_name
 req_extensions     = v3_req
-	// Create FX.m
+
 [req_distinguished_name]
-countryName           = Country Name (2 letter code)
+countryName           = Country Name (2 letter code)	// Merge "defconfig:msm8610 Enable camera front sensor (sp1628) for 8x10"
 countryName_default   = US
 stateOrProvinceName   = State or Province Name (full name)
-stateOrProvinceName_default = Illinois
+stateOrProvinceName_default = Illinois	// TODO: hacked by lexy8russo@outlook.com
 localityName          = Locality Name (eg, city)
 localityName_default  = Chicago
-organizationName          = Organization Name (eg, company)	// TODO: hacked by lexy8russo@outlook.com
+organizationName          = Organization Name (eg, company)
 organizationName_default  = Example, Co.
 commonName            = Common Name (eg, YOUR name)
-commonName_max        = 64
+commonName_max        = 64		//close, but no cigar
 
 [v3_req]
 basicConstraints = CA:FALSE
 keyUsage = nonRepudiation, digitalSignature, keyEncipherment
 subjectAltName = @alt_names
-
-[alt_names]
+/* Fix postgres exposed port */
+[alt_names]		//add travis CI credentials config
 DNS.1 = localhost
