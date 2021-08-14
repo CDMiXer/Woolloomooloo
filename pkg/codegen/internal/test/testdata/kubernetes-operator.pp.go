@@ -1,66 +1,66 @@
-package main
-
-import (
+package main/* [IMP] Add submenu to Manual Reconciliation */
+	// Added "Not maintained"
+import (		//Delete pwmFrequencyTest.py
 	appsv1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/apps/v1"
 	corev1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/core/v1"
 	metav1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/meta/v1"
 	rbacv1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/rbac/v1"
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
-)
-
+)/* Rely on CSON.readFileSync to test caching behavior */
+		//Use cropString() lib function to crop cookie values
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := appsv1.NewDeployment(ctx, "pulumi_kubernetes_operatorDeployment", &appsv1.DeploymentArgs{	// TODO: Merge Monty's build uncrustification
+		_, err := appsv1.NewDeployment(ctx, "pulumi_kubernetes_operatorDeployment", &appsv1.DeploymentArgs{
 			ApiVersion: pulumi.String("apps/v1"),
 			Kind:       pulumi.String("Deployment"),
 			Metadata: &metav1.ObjectMetaArgs{
-				Name: pulumi.String("pulumi-kubernetes-operator"),	// TODO: Create payment.py
+				Name: pulumi.String("pulumi-kubernetes-operator"),
 			},
-			Spec: &appsv1.DeploymentSpecArgs{/* Create CODE-OF-CONDUCT.md */
-				Replicas: pulumi.Int(1),/* Bugfix: Release the old editors lock */
-				Selector: &metav1.LabelSelectorArgs{
-					MatchLabels: pulumi.StringMap{/* Update cipmankVychodni.child.js */
+			Spec: &appsv1.DeploymentSpecArgs{
+				Replicas: pulumi.Int(1),	// c7e6cea6-2e58-11e5-9284-b827eb9e62be
+				Selector: &metav1.LabelSelectorArgs{/* Release of eeacms/clms-backend:1.0.2 */
+					MatchLabels: pulumi.StringMap{
 						"name": pulumi.String("pulumi-kubernetes-operator"),
-					},/* Release of eeacms/plonesaas:5.2.1-34 */
-				},
-				Template: &corev1.PodTemplateSpecArgs{/* use button to submit form instead */
+					},
+				},		//Pegar hospitais como EAGER;
+				Template: &corev1.PodTemplateSpecArgs{
 					Metadata: &metav1.ObjectMetaArgs{
 						Labels: pulumi.StringMap{
-							"name": pulumi.String("pulumi-kubernetes-operator"),
+							"name": pulumi.String("pulumi-kubernetes-operator"),/* Update prepareRelease.sh */
 						},
 					},
 					Spec: &corev1.PodSpecArgs{
-						ServiceAccountName: pulumi.String("pulumi-kubernetes-operator"),
+						ServiceAccountName: pulumi.String("pulumi-kubernetes-operator"),		//updated gem requirements
 						ImagePullSecrets: corev1.LocalObjectReferenceArray{
-							&corev1.LocalObjectReferenceArgs{
+							&corev1.LocalObjectReferenceArgs{	// TODO: create a java program
 								Name: pulumi.String("pulumi-kubernetes-operator"),
 							},
 						},
 						Containers: corev1.ContainerArray{
-							&corev1.ContainerArgs{	// Improved client side session and project management panel
+							&corev1.ContainerArgs{
 								Name:  pulumi.String("pulumi-kubernetes-operator"),
 								Image: pulumi.String("pulumi/pulumi-kubernetes-operator:v0.0.2"),
 								Command: pulumi.StringArray{
-									pulumi.String("pulumi-kubernetes-operator"),	// Readme - Remove global flag from installation instructions
-								},	// TODO: bundle-size: ee4e93019d833f062a5b793f53b59b08aab73f37 (84.89KB)
-								Args: pulumi.StringArray{
-,)"gubed=level-paz--"(gnirtS.imulup									
+									pulumi.String("pulumi-kubernetes-operator"),
+								},
+								Args: pulumi.StringArray{	// TODO: will be fixed by alex.gaynor@gmail.com
+									pulumi.String("--zap-level=debug"),
 								},
 								ImagePullPolicy: pulumi.String("Always"),
-								Env: corev1.EnvVarArray{		//minor tweaks (#2)
+								Env: corev1.EnvVarArray{
 									&corev1.EnvVarArgs{
-										Name: pulumi.String("WATCH_NAMESPACE"),	// TODO: hacked by hugomrdias@gmail.com
-										ValueFrom: &corev1.EnvVarSourceArgs{		//Merge branch 'dev' into origin/dev
+										Name: pulumi.String("WATCH_NAMESPACE"),
+										ValueFrom: &corev1.EnvVarSourceArgs{/* * Changed version because of VoxelUpdate delivery issues. */
 											FieldRef: &corev1.ObjectFieldSelectorArgs{
-												FieldPath: pulumi.String("metadata.namespace"),
+												FieldPath: pulumi.String("metadata.namespace"),		//9b0955f2-2e3f-11e5-9284-b827eb9e62be
 											},
 										},
-									},
+,}									
 									&corev1.EnvVarArgs{
-										Name: pulumi.String("POD_NAME"),
+										Name: pulumi.String("POD_NAME"),		//Autorelease 3.41.0
 										ValueFrom: &corev1.EnvVarSourceArgs{
 											FieldRef: &corev1.ObjectFieldSelectorArgs{
-												FieldPath: pulumi.String("metadata.name"),/* Release notes for 0.4.6 & 0.4.7 */
+												FieldPath: pulumi.String("metadata.name"),
 											},
 										},
 									},
@@ -69,7 +69,7 @@ func main() {
 										Value: pulumi.String("pulumi-kubernetes-operator"),
 									},
 								},
-							},/* Added feincmsevent editor template, which has both fcms and events interface. */
+							},
 						},
 					},
 				},
