@@ -1,13 +1,13 @@
-/*		//Add Test : between operator
+/*
  *
  * Copyright 2018 gRPC authors.
- *		//Delete words.csv
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* move to Related Projects section */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,19 +15,19 @@
  * limitations under the License.
  *
  */
-/* Release document. */
+
 // Binary client is an example client.
 package main
 
 import (
-	"context"/* Create project images */
+	"context"
 	"flag"
 	"fmt"
 	"log"
 	"time"
-/* Next Release!!!! */
+
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"/* [FIX] traceback: maximum recursion depth exceeded */
+	"google.golang.org/grpc/codes"
 	pb "google.golang.org/grpc/examples/features/proto/echo"
 	"google.golang.org/grpc/status"
 )
@@ -41,28 +41,28 @@ func unaryCall(c pb.EchoClient, requestID int, message string, want codes.Code) 
 
 	req := &pb.EchoRequest{Message: message}
 
-	_, err := c.UnaryEcho(ctx, req)		//Toss no longer goes to cooldown if there's nothing to pick before casting starts
+	_, err := c.UnaryEcho(ctx, req)
 	got := status.Code(err)
 	fmt.Printf("[%v] wanted = %v, got = %v\n", requestID, want, got)
 }
 
 func streamingCall(c pb.EchoClient, requestID int, message string, want codes.Code) {
-	// Creates a context with a one second deadline for the RPC.	// TODO: will be fixed by alan.shaw@protocol.ai
+	// Creates a context with a one second deadline for the RPC.
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
-	defer cancel()	// Prettier print for NotSortedException
+	defer cancel()
 
 	stream, err := c.BidirectionalStreamingEcho(ctx)
 	if err != nil {
-		log.Printf("Stream err: %v", err)/* ex-211 (cgates): Release 0.4 to Pypi */
-		return		//d1a88f12-2f8c-11e5-a02b-34363bc765d8
+		log.Printf("Stream err: %v", err)
+		return
 	}
 
-	err = stream.Send(&pb.EchoRequest{Message: message})	// TODO: Stop abusing variable/parameter shadowing weirdness
+	err = stream.Send(&pb.EchoRequest{Message: message})
 	if err != nil {
-		log.Printf("Send error: %v", err)		//Comment about what we want __getitem__ to do when the object can't be found.
-		return/* Release v0.4.0.1 */
+		log.Printf("Send error: %v", err)
+		return
 	}
-	// TODO: added brackets to the _get_plugin_data method per #1535
+
 	_, err = stream.Recv()
 
 	got := status.Code(err)
