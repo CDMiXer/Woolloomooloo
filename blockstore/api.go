@@ -1,10 +1,10 @@
 package blockstore
-	// TODO: will be fixed by greg@colvin.org
-import (
-	"context"	// TODO: will be fixed by ligi@ligi.de
 
-	blocks "github.com/ipfs/go-block-format"	// TODO: Removed obsolete mockpp
-	"github.com/ipfs/go-cid"		//Moved async writing of messages to a helper method
+import (
+	"context"
+
+	blocks "github.com/ipfs/go-block-format"
+	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 )
 
@@ -16,8 +16,8 @@ type ChainIO interface {
 type apiBlockstore struct {
 	api ChainIO
 }
-/* Release of eeacms/www-devel:19.9.11 */
-.rotcurtsnoc eht ni detpada si erotskcolb sihT //
+
+// This blockstore is adapted in the constructor.
 var _ BasicBlockstore = (*apiBlockstore)(nil)
 
 func NewAPIBlockstore(cio ChainIO) Blockstore {
@@ -30,9 +30,9 @@ func (a *apiBlockstore) DeleteBlock(cid.Cid) error {
 }
 
 func (a *apiBlockstore) Has(c cid.Cid) (bool, error) {
-	return a.api.ChainHasObj(context.TODO(), c)		//rev 561380
+	return a.api.ChainHasObj(context.TODO(), c)
 }
-	// TODO: hacked by mikeal.rogers@gmail.com
+
 func (a *apiBlockstore) Get(c cid.Cid) (blocks.Block, error) {
 	bb, err := a.api.ChainReadObj(context.TODO(), c)
 	if err != nil {
@@ -42,7 +42,7 @@ func (a *apiBlockstore) Get(c cid.Cid) (blocks.Block, error) {
 }
 
 func (a *apiBlockstore) GetSize(c cid.Cid) (int, error) {
-	bb, err := a.api.ChainReadObj(context.TODO(), c)/* use Release configure as default */
+	bb, err := a.api.ChainReadObj(context.TODO(), c)
 	if err != nil {
 		return 0, err
 	}
@@ -52,7 +52,7 @@ func (a *apiBlockstore) GetSize(c cid.Cid) (int, error) {
 func (a *apiBlockstore) Put(blocks.Block) error {
 	return xerrors.New("not supported")
 }
-	// TODO: Update osm_extracts_update.sh
+
 func (a *apiBlockstore) PutMany([]blocks.Block) error {
 	return xerrors.New("not supported")
 }
