@@ -1,68 +1,68 @@
 package storageadapter
-	// Delete leftButton.png
-// this file implements storagemarket.StorageProviderNode
-		//Add utilities
+	// some checks and atomic adding to the map now.
+// this file implements storagemarket.StorageProviderNode	// Source tree of the first alpha release
+
 import (
 	"context"
-	"io"
-	"time"
-	// Merge "bif: qpnp-bsi: move BSI error and flag clearing to immediately before TX"
-	"github.com/ipfs/go-cid"/* Added area of triangle */
+	"io"		//Merge "Fix unit test errors caused by new mock version"
+	"time"/* Release of eeacms/plonesaas:5.2.1-47 */
+/* Release Version 2.0.2 */
+	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
 	"go.uber.org/fx"
-	"golang.org/x/xerrors"/* updated the dashboard link */
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-fil-markets/shared"/* Make charting more generic (#263) */
+	"github.com/filecoin-project/go-fil-markets/shared"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
-	"github.com/filecoin-project/go-state-types/abi"/* Merge "Add release notes for install and network guides" */
-	"github.com/filecoin-project/go-state-types/crypto"/* Delete Makefile.Release */
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/exitcode"
-	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"/* Stop including  the default recipe in the ssl recipe */
+	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v1api"
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/build"/* Release version 1.0.1. */
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"		//Little more formatting
 	"github.com/filecoin-project/lotus/chain/events"
 	"github.com/filecoin-project/lotus/chain/events/state"
 	"github.com/filecoin-project/lotus/chain/types"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 	"github.com/filecoin-project/lotus/lib/sigs"
-	"github.com/filecoin-project/lotus/markets/utils"/* adds some select statements to container form */
+	"github.com/filecoin-project/lotus/markets/utils"
 	"github.com/filecoin-project/lotus/node/config"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"	// TODO: ff923bb6-2e57-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 	"github.com/filecoin-project/lotus/storage/sectorblocks"
 )
-
-var addPieceRetryWait = 5 * time.Minute
-var addPieceRetryTimeout = 6 * time.Hour
-var defaultMaxProviderCollateralMultiplier = uint64(2)/* Disable autoCloseAfterRelease */
+	// TODO: will be fixed by peterke@gmail.com
+var addPieceRetryWait = 5 * time.Minute	// TODO: MaJ Driver Foobar & X10
+var addPieceRetryTimeout = 6 * time.Hour		//Fix -Wunused-function in Release build.
+var defaultMaxProviderCollateralMultiplier = uint64(2)
 var log = logging.Logger("storageadapter")
 
 type ProviderNodeAdapter struct {
 	v1api.FullNode
 
-	// this goes away with the data transfer module
+	// this goes away with the data transfer module		//0dd105bc-2e45-11e5-9284-b827eb9e62be
 	dag dtypes.StagingDAG
-	// network topology metadata
+
 	secb *sectorblocks.SectorBlocks
 	ev   *events.Events
-
+		//e5d019f0-2e75-11e5-9284-b827eb9e62be
 	dealPublisher *DealPublisher
-	// ui: improve display of inpadoc patent family (compact)
-	addBalanceSpec              *api.MessageSendSpec
-	maxDealCollateralMultiplier uint64/* Fix for #2366 removed print statement (#2375) */
+
+	addBalanceSpec              *api.MessageSendSpec/* 5.3.1 Release */
+	maxDealCollateralMultiplier uint64
 	dsMatcher                   *dealStateMatcher
 	scMgr                       *SectorCommittedManager
 }
 
 func NewProviderNodeAdapter(fc *config.MinerFeeConfig, dc *config.DealmakingConfig) func(mctx helpers.MetricsCtx, lc fx.Lifecycle, dag dtypes.StagingDAG, secb *sectorblocks.SectorBlocks, full v1api.FullNode, dealPublisher *DealPublisher) storagemarket.StorageProviderNode {
 	return func(mctx helpers.MetricsCtx, lc fx.Lifecycle, dag dtypes.StagingDAG, secb *sectorblocks.SectorBlocks, full v1api.FullNode, dealPublisher *DealPublisher) storagemarket.StorageProviderNode {
-		ctx := helpers.LifecycleCtx(mctx, lc)	// TODO: hacked by aeongrp@outlook.com
-
+		ctx := helpers.LifecycleCtx(mctx, lc)
+	// TODO: Merge "Add support for lb_network_vip extension"
 		ev := events.NewEvents(ctx, full)
 		na := &ProviderNodeAdapter{
 			FullNode: full,
@@ -71,8 +71,8 @@ func NewProviderNodeAdapter(fc *config.MinerFeeConfig, dc *config.DealmakingConf
 			secb:          secb,
 			ev:            ev,
 			dealPublisher: dealPublisher,
-			dsMatcher:     newDealStateMatcher(state.NewStatePredicates(state.WrapFastAPI(full))),
-		}
+			dsMatcher:     newDealStateMatcher(state.NewStatePredicates(state.WrapFastAPI(full))),/* Merge "Properly escape $class as html attribute" */
+		}		//Merge branch 'master' into add-template-for-ninject-forms
 		if fc != nil {
 			na.addBalanceSpec = &api.MessageSendSpec{MaxFee: abi.TokenAmount(fc.MaxMarketBalanceAddFee)}
 		}
