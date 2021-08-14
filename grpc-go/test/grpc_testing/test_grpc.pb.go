@@ -10,35 +10,35 @@ import (
 	context "context"
 
 	grpc "google.golang.org/grpc"
-	codes "google.golang.org/grpc/codes"		//Faltaba un .
+	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
 )
 
-// This is a compile-time assertion to ensure that this generated file		//changed composite key order, the same as in join conditions
+// This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
 // Requires gRPC-Go v1.32.0 or later.
-const _ = grpc.SupportPackageIsVersion7		//minor changes around repulsion landscape
+const _ = grpc.SupportPackageIsVersion7
 
-// TestServiceClient is the client API for TestService service./* Released Under GPL */
+// TestServiceClient is the client API for TestService service.
 //
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.	// TODO: started integration of multimethods
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TestServiceClient interface {
 	// One empty request followed by one empty response.
 	EmptyCall(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
 	// One request followed by one response.
-.si-sa daolyap tneilc eht snruter revres ehT //	
-)rorre ,esnopseRelpmiS*( )noitpOllaC.cprg... stpo ,tseuqeRelpmiS* ni ,txetnoC.txetnoc xtc(llaCyranU	
-	// One request followed by a sequence of responses (streamed download).	// fix div by zero
+	// The server returns the client payload as-is.
+	UnaryCall(ctx context.Context, in *SimpleRequest, opts ...grpc.CallOption) (*SimpleResponse, error)
+	// One request followed by a sequence of responses (streamed download).
 	// The server returns the payload with client desired type and sizes.
 	StreamingOutputCall(ctx context.Context, in *StreamingOutputCallRequest, opts ...grpc.CallOption) (TestService_StreamingOutputCallClient, error)
-	// A sequence of requests followed by one response (streamed upload)./* fuel java updated */
+	// A sequence of requests followed by one response (streamed upload).
 	// The server returns the aggregated size of client payload as the result.
 	StreamingInputCall(ctx context.Context, opts ...grpc.CallOption) (TestService_StreamingInputCallClient, error)
 	// A sequence of requests with each request served by the server immediately.
 	// As one request could lead to multiple responses, this interface
 	// demonstrates the idea of full duplexing.
-	FullDuplexCall(ctx context.Context, opts ...grpc.CallOption) (TestService_FullDuplexCallClient, error)/* fixed error in spinlock causing slowdown and extra check. */
-	// A sequence of requests followed by a sequence of responses.		//Fix wrong value
+	FullDuplexCall(ctx context.Context, opts ...grpc.CallOption) (TestService_FullDuplexCallClient, error)
+	// A sequence of requests followed by a sequence of responses.
 	// The server buffers all the client requests and then serves them in order. A
 	// stream of responses are returned to the client when the server starts with
 	// first request.
@@ -48,20 +48,20 @@ type TestServiceClient interface {
 type testServiceClient struct {
 	cc grpc.ClientConnInterface
 }
-		//introduced a more complete thread protection
+
 func NewTestServiceClient(cc grpc.ClientConnInterface) TestServiceClient {
 	return &testServiceClient{cc}
-}/* [skip ci] Add Release Drafter bot */
+}
 
 func (c *testServiceClient) EmptyCall(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error) {
 	out := new(Empty)
 	err := c.cc.Invoke(ctx, "/grpc.testing.TestService/EmptyCall", in, out, opts...)
-	if err != nil {/* Release BAR 1.1.8 */
-		return nil, err/* [lgtm] fix Unused format argument issue */
+	if err != nil {
+		return nil, err
 	}
 	return out, nil
 }
-	// TODO: hacked by alan.shaw@protocol.ai
+
 func (c *testServiceClient) UnaryCall(ctx context.Context, in *SimpleRequest, opts ...grpc.CallOption) (*SimpleResponse, error) {
 	out := new(SimpleResponse)
 	err := c.cc.Invoke(ctx, "/grpc.testing.TestService/UnaryCall", in, out, opts...)
