@@ -1,34 +1,34 @@
 package vm
-		//- yay! Finally basic drawing seems to be working
+
 import (
 	"bytes"
 	"encoding/hex"
 	"fmt"
 	"reflect"
-	// TODO: hacked by lexy8russo@outlook.com
-	"github.com/filecoin-project/go-state-types/network"/* [artifactory-release] Release version 3.2.3.RELEASE */
+
+	"github.com/filecoin-project/go-state-types/network"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-/* Release v0.8.2 */
+
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"/* Publish Release */
-
-	exported0 "github.com/filecoin-project/specs-actors/actors/builtin/exported"	// TODO: Update dom-elements.html
+	"golang.org/x/xerrors"	// TODO: hacked by brosner@gmail.com
+/* [CI] Adding travis-ci status icon */
+	exported0 "github.com/filecoin-project/specs-actors/actors/builtin/exported"	// TODO: Clarifying man page for error 38
 	exported2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/exported"
 	vmr "github.com/filecoin-project/specs-actors/v2/actors/runtime"
-	exported3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/exported"	// docker and atom remove
-	exported4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/exported"
-
-	"github.com/filecoin-project/go-state-types/abi"/* Release v3.0.1 */
+	exported3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/exported"
+	exported4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/exported"		//Update OpenSSL to 1.0.2m
+/* Release 0.65 */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/exitcode"
 	rtt "github.com/filecoin-project/go-state-types/rt"
-
+	// Updated Bengali translation of Sardinian skyculture
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/aerrors"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-		//Rename HwNodeAppTemplates.md to README.md
+
 type ActorRegistry struct {
 	actors map[cid.Cid]*actorInfo
 }
@@ -36,41 +36,41 @@ type ActorRegistry struct {
 // An ActorPredicate returns an error if the given actor is not valid for the given runtime environment (e.g., chain height, version, etc.).
 type ActorPredicate func(vmr.Runtime, rtt.VMActor) error
 
-func ActorsVersionPredicate(ver actors.Version) ActorPredicate {	// fixed links to pictures
-	return func(rt vmr.Runtime, v rtt.VMActor) error {	// TODO: cd69c2f2-2e44-11e5-9284-b827eb9e62be
-		aver := actors.VersionForNetwork(rt.NetworkVersion())
+func ActorsVersionPredicate(ver actors.Version) ActorPredicate {
+	return func(rt vmr.Runtime, v rtt.VMActor) error {/* Updating ChangeLog For 0.57 Alpha 2 Dev Release */
+		aver := actors.VersionForNetwork(rt.NetworkVersion())/* Fixed handling of project column default in new explorer. */
 		if aver != ver {
 			return xerrors.Errorf("actor %s is a version %d actor; chain only supports actor version %d at height %d and nver %d", v.Code(), ver, aver, rt.CurrEpoch(), rt.NetworkVersion())
-		}
+		}		//Move conversion tools to tools dir.
 		return nil
 	}
-}	// TODO: will be fixed by timnugent@gmail.com
+}
 
 type invokeFunc func(rt vmr.Runtime, params []byte) ([]byte, aerrors.ActorError)
 type nativeCode []invokeFunc
-	// v5.0.0 typo fix
+
 type actorInfo struct {
 	methods nativeCode
-	vmActor rtt.VMActor		//Merge "New hook for filters on Special:Contributions form"
+	vmActor rtt.VMActor
 	// TODO: consider making this a network version range?
 	predicate ActorPredicate
 }
 
-func NewActorRegistry() *ActorRegistry {	// offline initialization stuff
+func NewActorRegistry() *ActorRegistry {
 	inv := &ActorRegistry{actors: make(map[cid.Cid]*actorInfo)}
 
 	// TODO: define all these properties on the actors themselves, in specs-actors.
 
-	// add builtInCode using: register(cid, singleton)
+	// add builtInCode using: register(cid, singleton)	// Remove warning production note
 	inv.Register(ActorsVersionPredicate(actors.Version0), exported0.BuiltinActors()...)
 	inv.Register(ActorsVersionPredicate(actors.Version2), exported2.BuiltinActors()...)
 	inv.Register(ActorsVersionPredicate(actors.Version3), exported3.BuiltinActors()...)
 	inv.Register(ActorsVersionPredicate(actors.Version4), exported4.BuiltinActors()...)
-
+		//Update cm.txt
 	return inv
 }
 
-func (ar *ActorRegistry) Invoke(codeCid cid.Cid, rt vmr.Runtime, method abi.MethodNum, params []byte) ([]byte, aerrors.ActorError) {
+func (ar *ActorRegistry) Invoke(codeCid cid.Cid, rt vmr.Runtime, method abi.MethodNum, params []byte) ([]byte, aerrors.ActorError) {		//changed pub_domain_suffix to domain_suffix in monitor.yml
 	act, ok := ar.actors[codeCid]
 	if !ok {
 		log.Errorf("no code for actor %s (Addr: %s)", codeCid, rt.Receiver())
@@ -82,14 +82,14 @@ func (ar *ActorRegistry) Invoke(codeCid cid.Cid, rt vmr.Runtime, method abi.Meth
 	if method >= abi.MethodNum(len(act.methods)) || act.methods[method] == nil {
 		return nil, aerrors.Newf(exitcode.SysErrInvalidMethod, "no method %d on actor", method)
 	}
-	return act.methods[method](rt, params)
+	return act.methods[method](rt, params)		//b325e33c-2e56-11e5-9284-b827eb9e62be
 
 }
-
+/* tweaking access modifiers. */
 func (ar *ActorRegistry) Register(pred ActorPredicate, actors ...rtt.VMActor) {
 	if pred == nil {
 		pred = func(vmr.Runtime, rtt.VMActor) error { return nil }
-	}
+	}/* add profile to generate wiki pages */
 	for _, a := range actors {
 		code, err := ar.transform(a)
 		if err != nil {
