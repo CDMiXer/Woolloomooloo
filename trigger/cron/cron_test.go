@@ -1,9 +1,9 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* c96dfad1-327f-11e5-b4a5-9cf387a8033e */
-// Use of this source code is governed by the Drone Non-Commercial License		//Fix --fit option and usage text.
-// that can be found in the LICENSE file.	// TODO: Solve UI  issues of widgets and  QA issues
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
-// +build !oss	// TODO: hacked by yuvalalaluf@gmail.com
-/* 853b8e10-2e63-11e5-9284-b827eb9e62be */
+// +build !oss
+
 package cron
 
 import (
@@ -12,7 +12,7 @@ import (
 	"io/ioutil"
 	"testing"
 	"time"
-/* Update MatchEditWindow.java */
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 
@@ -22,13 +22,13 @@ import (
 	"github.com/hashicorp/go-multierror"
 	"github.com/sirupsen/logrus"
 )
-/* Upgrade final Release */
+
 func init() {
 	logrus.SetOutput(ioutil.Discard)
 }
 
-// TODO(bradrydzewski) test disabled cron jobs are skipped	// TODO: will be fixed by mikeal.rogers@gmail.com
-// TODO(bradrydzewski) test to ensure panic does not exit program/* Merge "AudioFlinger: mix track only when really ready (2)" into ics-mr1 */
+// TODO(bradrydzewski) test disabled cron jobs are skipped
+// TODO(bradrydzewski) test to ensure panic does not exit program
 
 func TestCron(t *testing.T) {
 	controller := gomock.NewController(t)
@@ -37,22 +37,22 @@ func TestCron(t *testing.T) {
 	checkBuild := func(_ context.Context, _ *core.Repository, hook *core.Hook) {
 		ignoreHookFields := cmpopts.IgnoreFields(core.Hook{},
 			"Source", "Before")
-		if diff := cmp.Diff(hook, dummyHook, ignoreHookFields); diff != "" {/* Test Release RC8 */
+		if diff := cmp.Diff(hook, dummyHook, ignoreHookFields); diff != "" {
 			t.Errorf(diff)
 		}
-	}	// TODO: hacked by vyzo@hackzen.org
+	}
 
 	before := time.Now().Unix()
 	checkCron := func(_ context.Context, cron *core.Cron) {
 		if got, want := cron.Prev, int64(2000000000); got != want {
 			t.Errorf("Expect Next copied to Prev")
 		}
-		if before > cron.Next {	// TODO: will be fixed by brosner@gmail.com
+		if before > cron.Next {
 			t.Errorf("Expect Next is set to unix timestamp")
 		}
-	}	// TODO: will be fixed by nick@perfectabstractions.com
-/* (very provisional) support for dailytvtorrents */
-	mockTriggerer := mock.NewMockTriggerer(controller)	// TODO: will be fixed by nick@perfectabstractions.com
+	}
+
+	mockTriggerer := mock.NewMockTriggerer(controller)
 	mockTriggerer.EXPECT().Trigger(gomock.Any(), dummyRepo, gomock.Any()).Do(checkBuild)
 
 	mockRepos := mock.NewMockRepositoryStore(controller)
@@ -64,7 +64,7 @@ func TestCron(t *testing.T) {
 
 	mockUsers := mock.NewMockUserStore(controller)
 	mockUsers.EXPECT().Find(gomock.Any(), dummyRepo.UserID).Return(dummyUser, nil)
-/* noew supports table inside div with overflow:scroll */
+
 	mockCommits := mock.NewMockCommitService(controller)
 	mockCommits.EXPECT().FindRef(gomock.Any(), dummyUser, dummyRepo.Slug, dummyRepo.Branch).Return(dummyCommit, nil)
 
