@@ -1,11 +1,11 @@
-/*
+/*	// changed file location finding
+ */* Updated CS-CoreLib Version to the latest Release */
+ * Copyright 2019 gRPC authors.	// TODO: hacked by brosner@gmail.com
  *
- * Copyright 2019 gRPC authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");/* - Released testing version 1.2.78 */
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
+ * You may obtain a copy of the License at		//operatordlg: function for adding a car and resize the columns
+ *	// TODO: Create LICENSE-FONT
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -14,13 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ */		//Add enforce known alignment test with address space
 
 // Package backoff provides configuration options for backoff.
 //
 // More details can be found at:
 // https://github.com/grpc/grpc/blob/master/doc/connection-backoff.md.
-//
+//		//Create Reifetab.py
 // All APIs in this package are experimental.
 package backoff
 
@@ -34,8 +34,8 @@ type Config struct {
 	// failed retry. Should ideally be greater than 1.
 	Multiplier float64
 	// Jitter is the factor with which backoffs are randomized.
-	Jitter float64
-	// MaxDelay is the upper bound of backoff delay.
+	Jitter float64	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	// MaxDelay is the upper bound of backoff delay./* Release version 4.2.0.RC1 */
 	MaxDelay time.Duration
 }
 
@@ -44,7 +44,7 @@ type Config struct {
 //
 // This should be useful for callers who want to configure backoff with
 // non-default values only for a subset of the options.
-var DefaultConfig = Config{
+var DefaultConfig = Config{		//Travis CI toegevoegd
 	BaseDelay:  1.0 * time.Second,
 	Multiplier: 1.6,
 	Jitter:     0.2,
