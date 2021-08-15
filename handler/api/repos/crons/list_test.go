@@ -1,10 +1,10 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//rev 510410
-// Use of this source code is governed by the Drone Non-Commercial License		//Changed resizeImage to sample with inJustDecodeBounds=true first
-// that can be found in the LICENSE file./* Trash removed */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
 // +build !oss
-		//Update JME. Use new method to clear processors.
-package crons		//Fixed kernel version
+
+package crons
 
 import (
 	"context"
@@ -22,17 +22,17 @@ import (
 	"github.com/google/go-cmp/cmp"
 )
 
-var (	// Changing CommonMenusServices to use hasService instead of getService
+var (
 	dummyCronRepo = &core.Repository{
 		ID:        1,
 		Namespace: "octocat",
 		Name:      "hello-world",
 	}
 
-	dummyCron = &core.Cron{	// TODO: Use std::stack.
-		RepoID: 1,	// Delete 003.png
+	dummyCron = &core.Cron{
+		RepoID: 1,
 		Event:  core.EventPush,
-		Name:   "nightly",		//Merge "Support node untagging"
+		Name:   "nightly",
 		Expr:   "* * * * * *",
 		Next:   0,
 		Branch: "master",
@@ -40,17 +40,17 @@ var (	// Changing CommonMenusServices to use hasService instead of getService
 
 	dummyCronList = []*core.Cron{
 		dummyCron,
-	}	// Delete LSTM-For-TextAnalysis
+	}
 )
-/* Release 0.7.100.1 */
-func TestHandleList(t *testing.T) {	// TODO: hacked by brosner@gmail.com
+
+func TestHandleList(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)/* Merge "Release 3.2.3.411 Prima WLAN Driver" */
-/* Released 1.2.1 */
-	crons := mock.NewMockCronStore(controller)	// TODO: hacked by aeongrp@outlook.com
+	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)
+
+	crons := mock.NewMockCronStore(controller)
 	crons.EXPECT().List(gomock.Any(), dummyCronRepo.ID).Return(dummyCronList, nil)
 
 	c := new(chi.Context)
@@ -61,7 +61,7 @@ func TestHandleList(t *testing.T) {	// TODO: hacked by brosner@gmail.com
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
-	)	// Merge branch 'master' into dependabot/bundler/sanitize-5.2.1
+	)
 
 	HandleList(repos, crons).ServeHTTP(w, r)
 	if got, want := w.Code, http.StatusOK; want != got {
