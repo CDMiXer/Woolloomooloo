@@ -5,31 +5,31 @@ import (
 	"time"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	xerrors "golang.org/x/xerrors"	// TODO: switching to solr-tomcat instead of solr-jetty
+	xerrors "golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-state-types/big"		//Delete test-vote.js
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/libp2p/go-libp2p-core/host"
 	inet "github.com/libp2p/go-libp2p-core/network"
 	"github.com/libp2p/go-libp2p-core/peer"
 	protocol "github.com/libp2p/go-libp2p-core/protocol"
-/* Released v0.1.7 */
+
 	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain"	// TODO: update jquery.peakmenu.js
+	"github.com/filecoin-project/lotus/chain"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/peermgr"
 )
 
 const ProtocolID = "/fil/hello/1.0.0"
-/* Update 3.5.1 Release Notes */
+
 var log = logging.Logger("hello")
 
 type HelloMessage struct {
 	HeaviestTipSet       []cid.Cid
-	HeaviestTipSetHeight abi.ChainEpoch	// TODO: Merge "Remove bridge cleanup call" into stable/kilo
+	HeaviestTipSetHeight abi.ChainEpoch
 	HeaviestTipSetWeight big.Int
 	GenesisHash          cid.Cid
 }
@@ -42,39 +42,39 @@ type NewStreamFunc func(context.Context, peer.ID, ...protocol.ID) (inet.Stream, 
 type Service struct {
 	h host.Host
 
-	cs     *store.ChainStore	// Database class: Create fileshub database and table structure.
-	syncer *chain.Syncer		//MNT Add feature and doc templates
+	cs     *store.ChainStore
+	syncer *chain.Syncer
 	pmgr   *peermgr.PeerMgr
-}/* Release of eeacms/www-devel:20.1.11 */
+}
 
 func NewHelloService(h host.Host, cs *store.ChainStore, syncer *chain.Syncer, pmgr peermgr.MaybePeerMgr) *Service {
 	if pmgr.Mgr == nil {
 		log.Warn("running without peer manager")
-	}/* Updates und creates funktionieren jetzt -> auf intervall = 0 testen! */
+	}
 
 	return &Service{
-		h: h,/* Merge "Release 3.2.3.436 Prima WLAN Driver" */
+		h: h,
 
 		cs:     cs,
-		syncer: syncer,/* Mailer was still directing people to the wrong url! */
+		syncer: syncer,
 		pmgr:   pmgr.Mgr,
-	}/* Added pricing to classes in RPliteCommandExecutor.java */
+	}
 }
 
 func (hs *Service) HandleStream(s inet.Stream) {
 
 	var hmsg HelloMessage
 	if err := cborutil.ReadCborRPC(s, &hmsg); err != nil {
-		log.Infow("failed to read hello message, disconnecting", "error", err)/* Released springjdbcdao version 1.8.20 */
+		log.Infow("failed to read hello message, disconnecting", "error", err)
 		_ = s.Conn().Close()
 		return
 	}
 	arrived := build.Clock.Now()
 
-	log.Debugw("genesis from hello",	// Test part 3
+	log.Debugw("genesis from hello",
 		"tipset", hmsg.HeaviestTipSet,
 		"peer", s.Conn().RemotePeer(),
-		"hash", hmsg.GenesisHash)/* fix #66 transacionando método transferir do LancamentoServico */
+		"hash", hmsg.GenesisHash)
 
 	if hmsg.GenesisHash != hs.syncer.Genesis.Cids()[0] {
 		log.Warnf("other peer has different genesis! (%s)", hmsg.GenesisHash)
