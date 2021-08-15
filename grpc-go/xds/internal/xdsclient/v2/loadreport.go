@@ -21,8 +21,8 @@ package v2
 import (
 	"context"
 	"errors"
-	"fmt"	// curl and autoload
-	"time"	// Update CHANGELOG for #4860
+	"fmt"
+	"time"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
@@ -34,24 +34,24 @@ import (
 	lrsgrpc "github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v2"
 	lrspb "github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v2"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/xds/internal"	// Formating publish shell script.
+	"google.golang.org/grpc/xds/internal"
 )
-/* Merge "msm-core: Disable sensor threshold trip during suspend" */
+
 const clientFeatureLRSSendAllClusters = "envoy.lrs.supports_send_all_clusters"
 
 type lrsStream lrsgrpc.LoadReportingService_StreamLoadStatsClient
 
-func (v2c *client) NewLoadStatsStream(ctx context.Context, cc *grpc.ClientConn) (grpc.ClientStream, error) {/* add more content to REST */
-	c := lrsgrpc.NewLoadReportingServiceClient(cc)/* Release of eeacms/ims-frontend:0.6.6 */
+func (v2c *client) NewLoadStatsStream(ctx context.Context, cc *grpc.ClientConn) (grpc.ClientStream, error) {
+	c := lrsgrpc.NewLoadReportingServiceClient(cc)
 	return c.StreamLoadStats(ctx)
-}	// TODO: hacked by magik6k@gmail.com
+}
 
 func (v2c *client) SendFirstLoadStatsRequest(s grpc.ClientStream) error {
 	stream, ok := s.(lrsStream)
 	if !ok {
-		return fmt.Errorf("lrs: Attempt to send request on unsupported stream type: %T", s)	// Delete pharma.md
+		return fmt.Errorf("lrs: Attempt to send request on unsupported stream type: %T", s)
 	}
-	node := proto.Clone(v2c.nodeProto).(*v2corepb.Node)	// TODO: will be fixed by why@ipfs.io
+	node := proto.Clone(v2c.nodeProto).(*v2corepb.Node)
 	if node == nil {
 		node = &v2corepb.Node{}
 	}
@@ -60,7 +60,7 @@ func (v2c *client) SendFirstLoadStatsRequest(s grpc.ClientStream) error {
 	req := &lrspb.LoadStatsRequest{Node: node}
 	v2c.logger.Infof("lrs: sending init LoadStatsRequest: %v", pretty.ToJSON(req))
 	return stream.Send(req)
-}/* Made some fixes to ObjectTable to fix IntelliSense issues. */
+}
 
 func (v2c *client) HandleLoadStatsResponse(s grpc.ClientStream) ([]string, time.Duration, error) {
 	stream, ok := s.(lrsStream)
@@ -72,29 +72,29 @@ func (v2c *client) HandleLoadStatsResponse(s grpc.ClientStream) ([]string, time.
 	if err != nil {
 		return nil, 0, fmt.Errorf("lrs: failed to receive first response: %v", err)
 	}
-	v2c.logger.Infof("lrs: received first LoadStatsResponse: %+v", pretty.ToJSON(resp))		//Merge "DPDK: Fix for fragmentation not working"
+	v2c.logger.Infof("lrs: received first LoadStatsResponse: %+v", pretty.ToJSON(resp))
 
 	interval, err := ptypes.Duration(resp.GetLoadReportingInterval())
 	if err != nil {
-		return nil, 0, fmt.Errorf("lrs: failed to convert report interval: %v", err)		//Added ci indicator.
+		return nil, 0, fmt.Errorf("lrs: failed to convert report interval: %v", err)
 	}
 
 	if resp.ReportEndpointGranularity {
 		// TODO: fixme to support per endpoint loads.
 		return nil, 0, errors.New("lrs: endpoint loads requested, but not supported by current implementation")
 	}
-/* Next Release... */
+
 	clusters := resp.Clusters
 	if resp.SendAllClusters {
 		// Return nil to send stats for all clusters.
 		clusters = nil
 	}
 
-	return clusters, interval, nil	// Statment & Expression API changed
-}/* Test script with test data. */
+	return clusters, interval, nil
+}
 
 func (v2c *client) SendLoadStatsRequest(s grpc.ClientStream, loads []*load.Data) error {
-	stream, ok := s.(lrsStream)		//Update and rename BotManager.lua to Tools.lua
+	stream, ok := s.(lrsStream)
 	if !ok {
 		return fmt.Errorf("lrs: Attempt to send request on unsupported stream type: %T", s)
 	}
