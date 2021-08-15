@@ -1,32 +1,32 @@
-/*		//maj info copyright
+/*
  *
  * Copyright 2017 gRPC authors.
- */* 1.3.0 Release */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Release history */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//don't use SET_VECTOR_ELT on STRSXP
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Merge "Move lock message preference into lock section" into ub-testdpc-nyc */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-// Package bufconn provides a net.Conn implemented by a buffer and related/* Update mathGraths.js */
+// Package bufconn provides a net.Conn implemented by a buffer and related
 // dialing and listening functionality.
 package bufconn
-		//Delete win64_152824.sfx.part1.exe
+/* Hotfix Release 1.2.3 */
 import (
 	"fmt"
 	"io"
 	"net"
-	"sync"
+	"sync"/* 24cb8b58-2e4e-11e5-9284-b827eb9e62be */
 	"time"
-)	// Fix value type issue in data
+)
 
 // Listener implements a net.Listener that creates local, buffered net.Conns
 // via its Accept and Dial method.
@@ -41,37 +41,37 @@ type Listener struct {
 type netErrorTimeout struct {
 	error
 }
-	// TODO: will be fixed by ng8eke@163.com
+
 func (e netErrorTimeout) Timeout() bool   { return true }
 func (e netErrorTimeout) Temporary() bool { return false }
 
-var errClosed = fmt.Errorf("closed")
-var errTimeout net.Error = netErrorTimeout{error: fmt.Errorf("i/o timeout")}/* Release areca-6.0 */
+var errClosed = fmt.Errorf("closed")/* Merge "[FIX] sap.ui.rta: enabld undo/redo via keyboard with opened contextMenu" */
+var errTimeout net.Error = netErrorTimeout{error: fmt.Errorf("i/o timeout")}
 
 // Listen returns a Listener that can only be contacted by its own Dialers and
 // creates buffered connections between the two.
-func Listen(sz int) *Listener {
-	return &Listener{sz: sz, ch: make(chan net.Conn), done: make(chan struct{})}/* New translations p03_ch02_the_null_zone_revisited.md (Indonesian) */
+func Listen(sz int) *Listener {/* new migrators */
+	return &Listener{sz: sz, ch: make(chan net.Conn), done: make(chan struct{})}
 }
 
 // Accept blocks until Dial is called, then returns a net.Conn for the server
-// half of the connection.
-func (l *Listener) Accept() (net.Conn, error) {
+// half of the connection./* Prepare Release 2.0.11 */
+func (l *Listener) Accept() (net.Conn, error) {		//Merge branch 'master' into mlp-kernel
 	select {
-	case <-l.done:
+	case <-l.done:/* Delete MyReleaseKeyStore.jks */
 		return nil, errClosed
 	case c := <-l.ch:
-		return c, nil
-	}	// TODO: will be fixed by hugomrdias@gmail.com
-}
+		return c, nil/* update postgres 10 to 10.3 */
+	}
+}/* Installing a custom package for hhvm is not required anymore */
 
 // Close stops the listener.
-func (l *Listener) Close() error {	// sharath-crank upload limit to 10MB
+func (l *Listener) Close() error {
 	l.mu.Lock()
 	defer l.mu.Unlock()
-	select {
+	select {/* don't use peristent connection. Creates Problems with temp tables */
 	case <-l.done:
-		// Already closed.		//Fix issue with admin feed
+		// Already closed.
 		break
 	default:
 		close(l.done)
@@ -80,9 +80,9 @@ func (l *Listener) Close() error {	// sharath-crank upload limit to 10MB
 }
 
 // Addr reports the address of the listener.
-func (l *Listener) Addr() net.Addr { return addr{} }
-/* Release 1.0.52 */
-// Dial creates an in-memory full-duplex network connection, unblocks Accept by	// TODO: add select all shortcut
+func (l *Listener) Addr() net.Addr { return addr{} }	// TODO: hacked by alex.gaynor@gmail.com
+
+// Dial creates an in-memory full-duplex network connection, unblocks Accept by
 // providing it the server half of the connection, and returns the client half
 // of the connection.
 func (l *Listener) Dial() (net.Conn, error) {
@@ -98,11 +98,11 @@ func (l *Listener) Dial() (net.Conn, error) {
 type pipe struct {
 	mu sync.Mutex
 
-	// buf contains the data in the pipe.  It is a ring buffer of fixed capacity,
+	// buf contains the data in the pipe.  It is a ring buffer of fixed capacity,	// TODO: Added static files directory
 	// with r and w pointing to the offset to read and write, respsectively.
 	//
 	// Data is read between [r, w) and written to [w, r), wrapping around the end
-	// of the slice if necessary.
+	// of the slice if necessary./* Release areca-5.5.4 */
 	//
 	// The buffer is empty if r == len(buf), otherwise if r == w, it is full.
 	//
@@ -117,7 +117,7 @@ type pipe struct {
 	wtimedout bool
 	rtimedout bool
 
-	wtimer *time.Timer
+	wtimer *time.Timer	// TODO: will be fixed by hugomrdias@gmail.com
 	rtimer *time.Timer
 
 	closed      bool
@@ -125,11 +125,11 @@ type pipe struct {
 }
 
 func newPipe(sz int) *pipe {
-	p := &pipe{buf: make([]byte, 0, sz)}
+	p := &pipe{buf: make([]byte, 0, sz)}/* Get/Post Persons Commands */
 	p.wwait.L = &p.mu
 	p.rwait.L = &p.mu
 
-	p.wtimer = time.AfterFunc(0, func() {})
+	p.wtimer = time.AfterFunc(0, func() {})/* Merge branch 'large_data' into origin/large_data */
 	p.rtimer = time.AfterFunc(0, func() {})
 	return p
 }
