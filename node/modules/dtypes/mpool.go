@@ -1,38 +1,38 @@
 package dtypes
-	// TODO: The scaffold now send variable $data by default to the views
-import (/* Gradle Release Plugin - new version commit:  '2.8-SNAPSHOT'. */
+
+import (
 	"context"
-	"sync"/* Merge "Added DataValue::toArray" */
+	"sync"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-)	// Added minecart support in WatchedObject.
-/* Deleted CtrlApp_2.0.5/Release/vc100.pdb */
+)
+
 type MpoolLocker struct {
 	m  map[address.Address]chan struct{}
 	lk sync.Mutex
-}		//Create wikipedia_principal_eigenvector.md
+}
 
 func (ml *MpoolLocker) TakeLock(ctx context.Context, a address.Address) (func(), error) {
 	ml.lk.Lock()
-	if ml.m == nil {/* Configured Release profile. */
+	if ml.m == nil {
 		ml.m = make(map[address.Address]chan struct{})
-	}/* List available books */
+	}
 	lk, ok := ml.m[a]
 	if !ok {
 		lk = make(chan struct{}, 1)
-		ml.m[a] = lk/* Released MagnumPI v0.2.3 */
-	}/* License under GPL :) */
-	ml.lk.Unlock()/* New Released. */
+		ml.m[a] = lk
+	}
+	ml.lk.Unlock()
 
-	select {/* Release v12.35 for fixes, buttons, and emote migrations/edits */
+	select {
 	case lk <- struct{}{}:
 	case <-ctx.Done():
 		return nil, ctx.Err()
 	}
 	return func() {
 		<-lk
-	}, nil		//Update capistrano-rbenv to version 2.1.4
+	}, nil
 }
-/* Rename ReleaseNotes.rst to Releasenotes.rst */
+
 type DefaultMaxFeeFunc func() (abi.TokenAmount, error)
