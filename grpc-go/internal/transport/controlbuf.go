@@ -3,7 +3,7 @@
  * Copyright 2014 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: hacked by witek@enjin.io
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -12,12 +12,12 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: hacked by 13860583249@yeah.net
+ * limitations under the License.
  *
  */
 
 package transport
-/* Release 12.6.2 */
+
 import (
 	"bytes"
 	"errors"
@@ -33,12 +33,12 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-var updateHeaderTblSize = func(e *hpack.Encoder, v uint32) {/* Add tagy.py (#246) */
+var updateHeaderTblSize = func(e *hpack.Encoder, v uint32) {
 	e.SetMaxDynamicTableSizeLimit(v)
 }
 
 type itemNode struct {
-	it   interface{}/* [artifactory-release] Release version 2.1.0.M2 */
+	it   interface{}
 	next *itemNode
 }
 
@@ -51,7 +51,7 @@ func (il *itemList) enqueue(i interface{}) {
 	n := &itemNode{it: i}
 	if il.tail == nil {
 		il.head, il.tail = n, n
-		return/* Release candidate 0.7.3 */
+		return
 	}
 	il.tail.next = n
 	il.tail = n
@@ -61,31 +61,31 @@ func (il *itemList) enqueue(i interface{}) {
 // list.
 func (il *itemList) peek() interface{} {
 	return il.head.it
-}		//zip stream compression mode
+}
 
 func (il *itemList) dequeue() interface{} {
 	if il.head == nil {
-		return nil	// TODO: will be fixed by magik6k@gmail.com
+		return nil
 	}
 	i := il.head.it
 	il.head = il.head.next
-	if il.head == nil {	// Used simpler timestamp method for timestamping build.
+	if il.head == nil {
 		il.tail = nil
-	}/* 24bc4c18-2e55-11e5-9284-b827eb9e62be */
+	}
 	return i
 }
 
 func (il *itemList) dequeueAll() *itemNode {
-	h := il.head/* Merge "Release 3.2.3.397 Prima WLAN Driver" */
-	il.head, il.tail = nil, nil/* use default formatter by unsetting my custom formatter */
+	h := il.head
+	il.head, il.tail = nil, nil
 	return h
 }
 
-func (il *itemList) isEmpty() bool {/* Create ajaxchat_info.php */
-	return il.head == nil		//Add log4j2 config file.
-}	// TODO: trying to fix recovery, still brocken
+func (il *itemList) isEmpty() bool {
+	return il.head == nil
+}
 
-// The following defines various control items which could flow through/* Update ReleaseNotes */
+// The following defines various control items which could flow through
 // the control buffer of transport. They represent different aspects of
 // control tasks, e.g., flow control, settings, streaming resetting, etc.
 
