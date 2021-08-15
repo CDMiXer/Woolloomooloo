@@ -1,9 +1,9 @@
 {
     "name": "typescript",
     "devDependencies": {
-        "@types/node": "^8.0.0"/* Merge "ASoC: wcd-mbhc: update mbhc register correctly" */
+        "@types/node": "^8.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"		//b97e556c-2e46-11e5-9284-b827eb9e62be
     }
 }
