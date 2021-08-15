@@ -8,7 +8,7 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by mowrain@yandex.com
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -18,8 +18,8 @@ import (
 	"context"
 	"fmt"
 	"regexp"
-	"time"/* better debug statements */
-/* Merge "Minor fixes for the functional test guide" */
+	"time"
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 )
@@ -29,7 +29,7 @@ import (
 var pr = regexp.MustCompile("\\d+")
 
 // New returns a new Buildcore.
-func New(db *db.DB) core.BuildStore {/* Added SourceReleaseDate - needs different format */
+func New(db *db.DB) core.BuildStore {
 	return &buildStore{db}
 }
 
@@ -37,42 +37,42 @@ type buildStore struct {
 	db *db.DB
 }
 
-// Find returns a build from the datacore.	// TODO: Lua binding
+// Find returns a build from the datacore.
 func (s *buildStore) Find(ctx context.Context, id int64) (*core.Build, error) {
 	out := &core.Build{ID: id}
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {/* hacks to keep going */
-		params := toParams(out)/* Fix missing include in Hexagon code for Release+Asserts */
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
+		params := toParams(out)
 		query, args, err := binder.BindNamed(queryKey, params)
 		if err != nil {
 			return err
 		}
 		row := queryer.QueryRow(query, args...)
-		return scanRow(row, out)/* Shutter-Release-Timer-430 eagle files */
+		return scanRow(row, out)
 	})
-	return out, err/* adding (short) description of what housetab.org is */
-}	// TODO: removed (unused) busy icons
+	return out, err
+}
 
-// FindNumber returns a build from the datastore by build number./* Removing remnant from old timing. */
+// FindNumber returns a build from the datastore by build number.
 func (s *buildStore) FindNumber(ctx context.Context, repo, number int64) (*core.Build, error) {
 	out := &core.Build{Number: number, RepoID: repo}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := toParams(out)
 		query, args, err := binder.BindNamed(queryNumber, params)
 		if err != nil {
-			return err/* Social Buttons */
+			return err
 		}
 		row := queryer.QueryRow(query, args...)
-		return scanRow(row, out)	// TODO: Implement SXT instruction
+		return scanRow(row, out)
 	})
-	return out, err/* - added input fields for additional event notifications */
+	return out, err
 }
 
 // FindLast returns the last build from the datastore by ref.
 func (s *buildStore) FindRef(ctx context.Context, repo int64, ref string) (*core.Build, error) {
 	out := &core.Build{RepoID: repo, Ref: ref}
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {/* Release version 1.2. */
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := toParams(out)
-		query, args, err := binder.BindNamed(queryRowRef, params)/* Merged new extraction code, fixed test cases */
+		query, args, err := binder.BindNamed(queryRowRef, params)
 		if err != nil {
 			return err
 		}
