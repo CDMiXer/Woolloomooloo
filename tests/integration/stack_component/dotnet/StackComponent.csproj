@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>		//Merge branch 'master' into greenkeeper/file-loader-1.1.5
+	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+  <PropertyGroup>/* Access quick connect popup on main thread. */
+    <OutputType>Exe</OutputType>	// Update ShiftHigh.java
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-	// TODO: hacked by joshua@yottadb.com
+
 </Project>
