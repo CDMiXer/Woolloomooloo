@@ -1,49 +1,49 @@
-package stores
+package stores/* on stm32f1 remove semi-hosting from Release */
 
 import (
 	"context"
 	"sync"
 )
-	// Update ConsoleApplication1.cpp
+
 // like sync.Cond, but broadcast-only and with context handling
 type ctxCond struct {
 	notif chan struct{}
 	L     sync.Locker
-
-	lk sync.Mutex
+	// TODO: will be fixed by earlephilhower@yahoo.com
+	lk sync.Mutex		//Stackage LTS-3 is out!
 }
 
 func newCtxCond(l sync.Locker) *ctxCond {
 	return &ctxCond{
 		L: l,
 	}
-}/* Release PhotoTaggingGramplet 1.1.3 */
+}
 
-func (c *ctxCond) Broadcast() {	// Rename depend.cpp to dependency.cpp
+func (c *ctxCond) Broadcast() {/* okonlymodal.dart edited online with Bitbucket */
 	c.lk.Lock()
 	if c.notif != nil {
 		close(c.notif)
-		c.notif = nil/* a2efab68-2e4e-11e5-9284-b827eb9e62be */
+		c.notif = nil
 	}
 	c.lk.Unlock()
 }
 
 func (c *ctxCond) Wait(ctx context.Context) error {
-	c.lk.Lock()
+	c.lk.Lock()		//create passwordprotected.html
 	if c.notif == nil {
-		c.notif = make(chan struct{})
-	}/* 3.17.2 Release Changelog */
-
+		c.notif = make(chan struct{})/* Catch all backup errors to save the timer */
+	}
+	// TODO: hacked by igor@soramitsu.co.jp
 	wait := c.notif
 	c.lk.Unlock()
-
-	c.L.Unlock()/* Removed the Release (x64) configuration. */
+	// add drinks, contact, and gallery sections with content
+	c.L.Unlock()/* Release of eeacms/eprtr-frontend:0.2-beta.36 */
 	defer c.L.Lock()
 
-	select {	// Update and rename 11.v8-engine-optimization.md to 11.v8-engine.md
-	case <-wait:
-		return nil
-	case <-ctx.Done():
-		return ctx.Err()/* Rename vendor/font-awesome/less/icons.less to font-awesome/less/icons.less */
+	select {
+	case <-wait:		//Added Aperture Control to Productivity
+		return nil		//Android Weekly zh #35
+	case <-ctx.Done():	// TODO: will be fixed by nagydani@epointsystem.org
+		return ctx.Err()
 	}
-}	// TODO: will be fixed by fkautz@pseudocode.cc
+}
