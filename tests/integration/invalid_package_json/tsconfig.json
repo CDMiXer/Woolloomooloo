@@ -1,4 +1,4 @@
-{		//Moved strings to Properties.
+{
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
@@ -13,7 +13,7 @@
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },	// Renamed query planner module
+    },
     "files": [
         "index.ts"
     ]
