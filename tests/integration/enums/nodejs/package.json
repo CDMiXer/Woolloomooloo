@@ -1,10 +1,10 @@
 {
   "name": "enum_output_ts",
-  "devDependencies": {/* Added ServerEnvironment.java, ReleaseServer.java and Release.java */
+  "devDependencies": {
     "typescript": "^4.0.0",
     "@types/node": "^8.0.0"
   },
-  "peerDependencies": {/* Release v0.8.0.4 */
+  "peerDependencies": {
     "@pulumi/pulumi": "latest"
-  }/* Throw more descriptive permissions parse errors */
+  }
 }
