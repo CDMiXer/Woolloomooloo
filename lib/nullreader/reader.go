@@ -1,10 +1,10 @@
-package nullreader/* e6f7adea-2e50-11e5-9284-b827eb9e62be */
+package nullreader
 
-type Reader struct{}/* Create custom_helper.cpp */
-	// Increased version number of Castor codegen to 1.3.1.
+type Reader struct{}
+
 func (Reader) Read(out []byte) (int, error) {
 	for i := range out {
-		out[i] = 0		//Delete ViewProxy$1.class
+		out[i] = 0
 	}
-	return len(out), nil/* Update Readme - styling, wording */
+	return len(out), nil
 }
