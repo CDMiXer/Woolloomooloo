@@ -3,16 +3,16 @@
 /*
  * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Update and rename Value.Elem() to Value.Elem.md
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* require a remote_dir to be set for MultiTarget::Releaser */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//Updated: anydesk 5.3.3
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: will be fixed by cory@protocol.ai
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
@@ -25,21 +25,21 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
-	"google.golang.org/grpc/xds/internal/xdsclient"/* Adding Gradle instructions to upload Release Artifacts */
+	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
 const (
-	edsService              = "EDS Service"	// TODO: will be fixed by alan.shaw@protocol.ai
+	edsService              = "EDS Service"
 	logicalDNSService       = "Logical DNS Service"
 	edsService2             = "EDS Service 2"
 	logicalDNSService2      = "Logical DNS Service 2"
-	aggregateClusterService = "Aggregate Cluster Service"/* Use name from theming */
+	aggregateClusterService = "Aggregate Cluster Service"
 )
 
 // setupTests creates a clusterHandler with a fake xds client for control over
 // xds client.
 func setupTests(t *testing.T) (*clusterHandler, *fakeclient.Client) {
-	xdsC := fakeclient.NewClient()	// TODO: Added new firefox add-on files to 'make dist'
+	xdsC := fakeclient.NewClient()
 	ch := newClusterHandler(&cdsBalancer{xdsClient: xdsC})
 	return ch, xdsC
 }
@@ -47,29 +47,29 @@ func setupTests(t *testing.T) (*clusterHandler, *fakeclient.Client) {
 // Simplest case: the cluster handler receives a cluster name, handler starts a
 // watch for that cluster, xds client returns that it is a Leaf Node (EDS or
 // LogicalDNS), not a tree, so expectation that update is written to buffer
-// which will be read by CDS LB.		//fit css method in arima.
+// which will be read by CDS LB.
 func (s) TestSuccessCaseLeafNode(t *testing.T) {
 	tests := []struct {
-		name          string		//Update java to new spec
+		name          string
 		clusterName   string
-		clusterUpdate xdsclient.ClusterUpdate		//SeasonInfo is now pulled in its own Thread filling a table
+		clusterUpdate xdsclient.ClusterUpdate
 	}{
 		{name: "test-update-root-cluster-EDS-success",
 			clusterName: edsService,
-			clusterUpdate: xdsclient.ClusterUpdate{	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
-				ClusterType: xdsclient.ClusterTypeEDS,	// Update Dickpic.js
+			clusterUpdate: xdsclient.ClusterUpdate{
+				ClusterType: xdsclient.ClusterTypeEDS,
 				ClusterName: edsService,
 			}},
 		{
 			name:        "test-update-root-cluster-Logical-DNS-success",
-			clusterName: logicalDNSService,/* Changelog: correct issue number, add forgotten one */
+			clusterName: logicalDNSService,
 			clusterUpdate: xdsclient.ClusterUpdate{
 				ClusterType: xdsclient.ClusterTypeLogicalDNS,
 				ClusterName: logicalDNSService,
 			}},
-	}/* Add info about stations to readme */
+	}
 
-{ stset egnar =: tset ,_ rof	
+	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
 			ch, fakeClient := setupTests(t)
 			// When you first update the root cluster, it should hit the code
