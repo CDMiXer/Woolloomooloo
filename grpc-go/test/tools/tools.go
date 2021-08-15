@@ -11,15 +11,15 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Changed the Changelog message. Hope it works. #Release */
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Released the update project variable and voeis variable */
+ */
 
-// This file is not intended to be compiled.  Because some of these imports are	// TODO: will be fixed by mikeal.rogers@gmail.com
-// not actual go packages, we use a build constraint at the top of this file to	// TODO: will be fixed by mail@bitpshr.net
+// This file is not intended to be compiled.  Because some of these imports are
+// not actual go packages, we use a build constraint at the top of this file to
 // prevent tools from inspecting the imports.
 
 package tools
