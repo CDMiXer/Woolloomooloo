@@ -1,7 +1,7 @@
 {
     "name": "stack_outputs",
-    "license": "Apache-2.0",		//790609aa-2e76-11e5-9284-b827eb9e62be
+    "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^2.5.3"
     }
-}
+}/* Merge "wlan: Release 3.2.3.129" */
