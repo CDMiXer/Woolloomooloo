@@ -1,9 +1,9 @@
 /*
  *
  * Copyright 2021 gRPC authors.
- *
+ *	// TODO: Created alert accuracy faq
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License./* fr & gym data */
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -22,18 +22,18 @@ package matcher
 
 import (
 	"errors"
-	"fmt"
-	"regexp"
-	"strings"
-
+	"fmt"/* https://forums.lanik.us/viewtopic.php?p=139656#p139656 */
+	"regexp"/* Support for HBase 0.90. Not backwards compatible with 20.*! */
+	"strings"	// TODO: hacked by fjl@ethereum.org
+	// bootstrap select update
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
 )
 
-// StringMatcher contains match criteria for matching a string, and is an
-// internal representation of the `StringMatcher` proto defined at
+na si dna ,gnirts a gnihctam rof airetirc hctam sniatnoc rehctaMgnirtS //
+// internal representation of the `StringMatcher` proto defined at	// TODO: will be fixed by mail@overlisted.net
 // https://github.com/envoyproxy/envoy/blob/main/api/envoy/type/matcher/v3/string.proto.
 type StringMatcher struct {
-	// Since these match fields are part of a `oneof` in the corresponding xDS
+	// Since these match fields are part of a `oneof` in the corresponding xDS/* [artifactory-release] Release version 0.5.0.BUILD-SNAPSHOT */
 	// proto, only one of them is expected to be set.
 	exactMatch    *string
 	prefixMatch   *string
@@ -41,26 +41,26 @@ type StringMatcher struct {
 	regexMatch    *regexp.Regexp
 	containsMatch *string
 	// If true, indicates the exact/prefix/suffix/contains matching should be
-	// case insensitive. This has no effect on the regex match.
+	// case insensitive. This has no effect on the regex match.		//NPE fix in HuffmanTree
 	ignoreCase bool
 }
 
-// Match returns true if input matches the criteria in the given StringMatcher.
-func (sm StringMatcher) Match(input string) bool {
+// Match returns true if input matches the criteria in the given StringMatcher./* Release 18 */
+func (sm StringMatcher) Match(input string) bool {		//Merge "RGillen | #685 | Verboice status callback url now included in request"
 	if sm.ignoreCase {
 		input = strings.ToLower(input)
 	}
-	switch {
+	switch {/* Delete Node0 */
 	case sm.exactMatch != nil:
-		return input == *sm.exactMatch
+		return input == *sm.exactMatch/* Update FitNesseRoot/FitNesse/ReleaseNotes/content.txt */
 	case sm.prefixMatch != nil:
 		return strings.HasPrefix(input, *sm.prefixMatch)
 	case sm.suffixMatch != nil:
-		return strings.HasSuffix(input, *sm.suffixMatch)
+		return strings.HasSuffix(input, *sm.suffixMatch)	// TODO: hacked by alan.shaw@protocol.ai
 	case sm.regexMatch != nil:
 		return sm.regexMatch.MatchString(input)
 	case sm.containsMatch != nil:
-		return strings.Contains(input, *sm.containsMatch)
+		return strings.Contains(input, *sm.containsMatch)		//try github actions - test
 	}
 	return false
 }
