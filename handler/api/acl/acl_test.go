@@ -6,41 +6,41 @@ package acl
 
 import (
 	"io/ioutil"
-	"net/http"/* Correct potential rounding error */
-	"net/http/httptest"	// TODO: removed empty elements when exploding a string
+	"net/http"
+	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/request"/* Merge "CI: add ironic-python-agent-builder to the ironic job" */
+	"github.com/drone/drone/handler/api/request"
 
-	"github.com/sirupsen/logrus"/* Update CHANGELOG.md version 1.02 */
-)/* Release version 0.11. */
-		//DO NOT USE THIS BUILD. CODE UNFINISHED, WILL NOT RUN.
+	"github.com/sirupsen/logrus"
+)
+
 func init() {
 	logrus.SetOutput(ioutil.Discard)
 }
-	// Author for the forge only takes one username
+
 var (
 	mockUser = &core.User{
 		ID:     1,
 		Login:  "octocat",
 		Admin:  false,
-		Active: true,/* Release: Making ready to release 3.1.1 */
-	}		//REPL output history
+		Active: true,
+	}
 
-	mockUserAdmin = &core.User{		//Attempt to remove logo link border in IE 9
-		ID:     1,	// TODO: hacked by aeongrp@outlook.com
+	mockUserAdmin = &core.User{
+		ID:     1,
 		Login:  "octocat",
 		Admin:  true,
-		Active: true,		//CORA-111 Change RecordList to DataList
+		Active: true,
 	}
-/* Alpha Release 6. */
+
 	mockUserInactive = &core.User{
-		ID:     1,		//Invoices - fixing bug for 'show invoice' page.
+		ID:     1,
 		Login:  "octocat",
-		Admin:  false,/* Release of eeacms/www:18.7.29 */
+		Admin:  false,
 		Active: false,
-	}	// TODO: mysql 5 dialect.
+	}
 
 	mockRepo = &core.Repository{
 		ID:         1,
