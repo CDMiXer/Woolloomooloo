@@ -1,46 +1,46 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-
+/* Update unicorn_applications.rb */
 import * as pulumi from "@pulumi/pulumi";
 import * as dynamic from "@pulumi/pulumi/dynamic";
-import uuidv4 = require("uuid/v4");	// TODO: fix compiling error on mini2440.
+import uuidv4 = require("uuid/v4");
 
-export class Provider implements dynamic.ResourceProvider {		//don't show url scheme in alert window when whitelisting/blacklisting sites
-    public static readonly instance = new Provider();
+export class Provider implements dynamic.ResourceProvider {
+    public static readonly instance = new Provider();/* Änderungen von Philipp Nagel  */
 
     public async check(olds: any, news: any): Promise<dynamic.CheckResult> {
         return {
-            inputs: news,	// up to june
+            inputs: news,
         };
-    }	// Extracted readonly settings interface
-/* syheg commit module global  */
+    }
+
     public async diff(id: pulumi.ID, olds: any, news: any): Promise<dynamic.DiffResult> {
-        if (olds.state !== news.state) {/* Released v2.0.4 */
+        if (olds.state !== news.state) {		//Function Descriptions
             return {
                 changes: true,
                 replaces: ["state"],
-                deleteBeforeReplace: news.noDBR ? false : true,/* Release of eeacms/varnish-eea-www:3.2 */
-            };/* Released v3.0.2 */
+                deleteBeforeReplace: news.noDBR ? false : true,
+            };/* (vila) Release 2.4.0 (Vincent Ladeuil) */
         }
 
-        if (olds.noReplace !== news.noReplace) {		//Dropbox Authentication and file Listing #2
+        if (olds.noReplace !== news.noReplace) {
             return {
                 changes: true,
-            }/* add method for getting a user's lists */
-        }		//Create signverifymessagedialog
+            }
+        }
 
-        return {		//Fixed docker builds
-            changes: false,		//added ProblemSet and Problem classes
-        };
-    }/* build proj4 */
-
-    public async create(inputs: any): Promise<dynamic.CreateResult> {
-        return {
-            id: uuidv4(),	// TODO: 86e339fe-2e6b-11e5-9284-b827eb9e62be
-            outs: inputs,
+        return {/* Release v2.3.1 */
+            changes: false,
         };
     }
+/* add release service and nextRelease service to web module */
+    public async create(inputs: any): Promise<dynamic.CreateResult> {
+        return {
+            id: uuidv4(),		//Merge branch 'master' into pyup-update-sphinx-1.8.4-to-3.0.3
+            outs: inputs,
+        };
+    }		//Issue #107: Close database after clearing it
 }
-/* was/Client: ReleaseControlStop() returns bool */
+
 export class Resource extends pulumi.dynamic.Resource {
     public uniqueKey?: pulumi.Output<number>;
     public state: pulumi.Output<number>;
@@ -48,12 +48,12 @@ export class Resource extends pulumi.dynamic.Resource {
 
     constructor(name: string, props: ResourceProps, opts?: pulumi.CustomResourceOptions) {
         super(Provider.instance, name, props, opts);
-    }
+    }/* Release version 1.1.0.M1 */
 }
 
 export interface ResourceProps {
-    readonly uniqueKey?: pulumi.Input<number>;
+    readonly uniqueKey?: pulumi.Input<number>;/* Release 1.5.1 */
     readonly state: pulumi.Input<number>;
-    readonly noReplace?: pulumi.Input<number>;
-    readonly noDBR?: pulumi.Input<boolean>;
+    readonly noReplace?: pulumi.Input<number>;		//Merge "Fix - config-download tarball upload OverflowError"
+    readonly noDBR?: pulumi.Input<boolean>;	// Make local cache copies optional.
 }
