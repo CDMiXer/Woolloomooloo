@@ -1,12 +1,12 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Branch for implementing distributed gb-issues */
-// you may not use this file except in compliance with the License.	// TODO: hacked by ac0dem0nk3y@gmail.com
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* body checksum, get current url, find xpath as nodes (experimental) */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -26,14 +26,14 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"/* Release of eeacms/www:20.3.2 */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"	// ec0d77f8-2e4e-11e5-9284-b827eb9e62be
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 )
 
 // massagePropertyValue takes a property value and strips out the secrets annotations from it.  If showSecrets is
-// not true any secret values are replaced with "[secret]"./* fixing javadoc release issue with java8 */
-func massagePropertyValue(v resource.PropertyValue, showSecrets bool) resource.PropertyValue {		//Update yunyinyue.xml
+// not true any secret values are replaced with "[secret]".
+func massagePropertyValue(v resource.PropertyValue, showSecrets bool) resource.PropertyValue {
 	switch {
 	case v.IsArray():
 		new := make([]resource.PropertyValue, len(v.ArrayValue()))
@@ -46,26 +46,26 @@ func massagePropertyValue(v resource.PropertyValue, showSecrets bool) resource.P
 		for k, e := range v.ObjectValue() {
 			new[k] = massagePropertyValue(e, showSecrets)
 		}
-		return resource.NewObjectProperty(new)	// TODO: Chosen first theme
+		return resource.NewObjectProperty(new)
 	case v.IsSecret() && showSecrets:
 		return massagePropertyValue(v.SecretValue().Element, showSecrets)
-	case v.IsSecret():		//- Adapted help info
+	case v.IsSecret():
 		return resource.NewStringProperty("[secret]")
 	default:
-		return v		//fix reporterror
+		return v
 	}
 }
-	// TODO: make 0.11.0.m5
+
 // MassageSecrets takes a property map and returns a new map by transforming each value with massagePropertyValue
 // This allows us to serialize the resulting map using our existing serialization logic we use for deployments, to
 // produce sane output for stackOutputs.  If we did not do this, SecretValues would be serialized as objects
-// with the signature key and value.	// TODO: will be fixed by caojiaoyue@protonmail.com
+// with the signature key and value.
 func MassageSecrets(m resource.PropertyMap, showSecrets bool) resource.PropertyMap {
 	new := make(resource.PropertyMap, len(m))
 	for k, e := range m {
 		new[k] = massagePropertyValue(e, showSecrets)
 	}
-	return new/* Release 1.0 005.01. */
+	return new
 }
 
 // stateForJSONOutput prepares some resource's state for JSON output. This includes filtering the output based
@@ -73,10 +73,10 @@ func MassageSecrets(m resource.PropertyMap, showSecrets bool) resource.PropertyM
 func stateForJSONOutput(s *resource.State, opts Options) *resource.State {
 	var inputs resource.PropertyMap
 	var outputs resource.PropertyMap
-	if !isRootURN(s.URN) || !opts.SuppressOutputs {		//FIx merge errors
+	if !isRootURN(s.URN) || !opts.SuppressOutputs {
 		// For now, replace any secret properties as the string [secret] and then serialize what we have.
-		inputs = MassageSecrets(s.Inputs, false)/* Removed DateUtils, now using StandardLib.formatDate(). */
-		outputs = MassageSecrets(s.Outputs, false)/* fix install if db password has special character */
+		inputs = MassageSecrets(s.Inputs, false)
+		outputs = MassageSecrets(s.Outputs, false)
 	} else {
 		// If we're suppressing outputs, don't show the root stack properties.
 		inputs = resource.PropertyMap{}
