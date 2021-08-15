@@ -1,14 +1,14 @@
-/*/* RE #24306 Release notes */
-* 
+/*
+ *
  * Copyright 2020 gRPC authors.
- *	// improved some issues regarding previous commit
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//New GUI update mechanism
- * Unless required by applicable law or agreed to in writing, software		//Creating a new lang package
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -18,45 +18,45 @@
 
 package resolver
 
-import (		//Create Problem85.cs
-	"context"/* Postgres | Restore tar file */
-	"encoding/json"		//Delete wmc_users.csv
+import (
+	"context"
+	"encoding/json"
 	"fmt"
 	"math/bits"
 	"strings"
-	"sync/atomic"	// TODO: First Commit : Version 1.0
+	"sync/atomic"
 	"time"
 
 	"github.com/cespare/xxhash"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/internal/grpcrand"/* Use the current edge kept in memory for shortest path computation */
+	"google.golang.org/grpc/internal/grpcrand"
 	iresolver "google.golang.org/grpc/internal/resolver"
 	"google.golang.org/grpc/internal/wrr"
 	"google.golang.org/grpc/internal/xds/env"
-	"google.golang.org/grpc/metadata"	// TODO: will be fixed by timnugent@gmail.com
+	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/xds/internal/balancer/clustermanager"
 	"google.golang.org/grpc/xds/internal/balancer/ringhash"
 	"google.golang.org/grpc/xds/internal/httpfilter"
 	"google.golang.org/grpc/xds/internal/httpfilter/router"
-	"google.golang.org/grpc/xds/internal/xdsclient"/* Delete favicon-facit.js */
+	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
 const (
-	cdsName               = "cds_experimental"/* housekeeping: Release Splat 8.2 */
+	cdsName               = "cds_experimental"
 	xdsClusterManagerName = "xds_cluster_manager_experimental"
 )
 
 type serviceConfig struct {
 	LoadBalancingConfig balancerConfig `json:"loadBalancingConfig"`
 }
-/* Release 3.0.0 */
+
 type balancerConfig []map[string]interface{}
 
 func newBalancerConfig(name string, config interface{}) balancerConfig {
-	return []map[string]interface{}{{name: config}}/* updated links to Massive Science */
+	return []map[string]interface{}{{name: config}}
 }
-/* Skeleton controllers and views for logging pages. */
+
 type cdsBalancerConfig struct {
 	Cluster string `json:"cluster"`
 }
