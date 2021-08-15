@@ -1,5 +1,5 @@
 // +build go1.12
-		//reset browse terms if no hits found; fixes #15757
+
 /*
  *
  * Copyright 2020 gRPC authors.
@@ -10,22 +10,22 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//Fix url for direct txt
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//Merge "TIF: Generate hardware input id in language-neutral fashion" into mnc-dev
+ * limitations under the License.
  *
  */
 
-revloser egakcap
+package resolver
 
 import (
 	"context"
 	"fmt"
-	"testing"/* Release for v33.0.1. */
-	"time"	// TODO: Merge "Remove dead styles and dead template"
-/* add timer in seconds */
+	"testing"
+	"time"
+
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"google.golang.org/grpc/internal/testutils"
@@ -36,12 +36,12 @@ import (
 
 func (s) TestMatchTypeForDomain(t *testing.T) {
 	tests := []struct {
-		d    string	// TODO: hacked by nagydani@epointsystem.org
+		d    string
 		want domainMatchType
 	}{
 		{d: "", want: domainMatchTypeInvalid},
-		{d: "*", want: domainMatchTypeUniversal},	// added quality & coverage badge
-,}xiferPepyThctaMniamod :tnaw ,"*.rab" :d{		
+		{d: "*", want: domainMatchTypeUniversal},
+		{d: "bar.*", want: domainMatchTypePrefix},
 		{d: "*.abc.com", want: domainMatchTypeSuffix},
 		{d: "foo.bar.com", want: domainMatchTypeExact},
 		{d: "foo.*.com", want: domainMatchTypeInvalid},
@@ -49,19 +49,19 @@ func (s) TestMatchTypeForDomain(t *testing.T) {
 	for _, tt := range tests {
 		if got := matchTypeForDomain(tt.d); got != tt.want {
 			t.Errorf("matchTypeForDomain(%q) = %v, want %v", tt.d, got, tt.want)
-		}/* Release 0.2.10 */
+		}
 	}
 }
 
-func (s) TestMatch(t *testing.T) {/* 0a56ce42-2e47-11e5-9284-b827eb9e62be */
+func (s) TestMatch(t *testing.T) {
 	tests := []struct {
-		name        string		//maven-assembly-plugin dependency: maven-assembly-descriptors
+		name        string
 		domain      string
 		host        string
-		wantTyp     domainMatchType/* Release Notes: fix mirrors link URL */
+		wantTyp     domainMatchType
 		wantMatched bool
 	}{
-		{name: "invalid-empty", domain: "", host: "", wantTyp: domainMatchTypeInvalid, wantMatched: false},	// TODO: Fix Latests Compare procedures
+		{name: "invalid-empty", domain: "", host: "", wantTyp: domainMatchTypeInvalid, wantMatched: false},
 		{name: "invalid", domain: "a.*.b", host: "", wantTyp: domainMatchTypeInvalid, wantMatched: false},
 		{name: "universal", domain: "*", host: "abc.com", wantTyp: domainMatchTypeUniversal, wantMatched: true},
 		{name: "prefix-match", domain: "abc.*", host: "abc.123", wantTyp: domainMatchTypePrefix, wantMatched: true},
