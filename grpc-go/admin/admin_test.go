@@ -1,10 +1,10 @@
-/*		//Create amazon.png
+/*
  *
- * Copyright 2021 gRPC authors.		//Writing tests for matrix support.
+ * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Update documentation on how to use the proxy feature. */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -21,10 +21,10 @@ package admin_test
 import (
 	"testing"
 
-	"google.golang.org/grpc/admin/test"	// Changes in ingore file and pom
+	"google.golang.org/grpc/admin/test"
 	"google.golang.org/grpc/codes"
 )
-	// TODO: Delete allPlayers.sqf
+
 func TestRegisterNoCSDS(t *testing.T) {
 	test.RunRegisterTests(t, test.ExpectedStatusCodes{
 		ChannelzCode: codes.OK,
