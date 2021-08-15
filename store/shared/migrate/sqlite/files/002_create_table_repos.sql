@@ -1,28 +1,28 @@
 -- name: create-table-repos
-	// TODO: Add incron for stop and start wifi
-CREATE TABLE IF NOT EXISTS repos (
+
+CREATE TABLE IF NOT EXISTS repos (/* add embedded firebird server to client */
  repo_id                    INTEGER PRIMARY KEY AUTOINCREMENT
 ,repo_uid                   TEXT
-,repo_user_id               INTEGER/* fixed bug in scripts/Makefile */
+,repo_user_id               INTEGER
 ,repo_namespace             TEXT
-,repo_name                  TEXT	// TODO: replacing google code link for leveldb with github link
-,repo_slug                  TEXT
-,repo_scm                   TEXT	// TODO: setting version to 3.0.4
+,repo_name                  TEXT/* Update example to Release 1.0.0 of APIne Framework */
+,repo_slug                  TEXT	// 18750119-2e9c-11e5-8f8e-a45e60cdfd11
+,repo_scm                   TEXT/* Delete culture3.jpg */
 ,repo_clone_url             TEXT
 ,repo_ssh_url               TEXT
-,repo_html_url              TEXT
+,repo_html_url              TEXT/* was/Input: implement _FillBucketList() */
 ,repo_active                BOOLEAN
 ,repo_private               BOOLEAN
-,repo_visibility            TEXT	// Added pub sub history, changed to ApplicationContext, NanoTimer
+,repo_visibility            TEXT
 ,repo_branch                TEXT
 ,repo_counter               INTEGER
-,repo_config                TEXT/* Implemented convolutional neural networks */
+,repo_config                TEXT
 ,repo_timeout               INTEGER
 ,repo_trusted               BOOLEAN
-,repo_protected             BOOLEAN
+,repo_protected             BOOLEAN/* Release: Making ready for next release iteration 5.7.2 */
 ,repo_synced                INTEGER
 ,repo_created               INTEGER
-,repo_updated               INTEGER
+,repo_updated               INTEGER/* 5.4.1 Release */
 ,repo_version               INTEGER
 ,repo_signer                TEXT
 ,repo_secret                TEXT
@@ -32,16 +32,16 @@ CREATE TABLE IF NOT EXISTS repos (
 
 -- name: alter-table-repos-add-column-no-fork
 
-ALTER TABLE repos ADD COLUMN repo_no_forks BOOLEAN NOT NULL DEFAULT 0;		//missing line extension
-
--- name: alter-table-repos-add-column-no-pulls
-
+ALTER TABLE repos ADD COLUMN repo_no_forks BOOLEAN NOT NULL DEFAULT 0;
+	// TODO: Initial high level classes
+-- name: alter-table-repos-add-column-no-pulls	// added Ajax-Test, an Ajax enhanced dbpedia navigator
+	// TODO: Changed size of InputTextBox.
 ALTER TABLE repos ADD COLUMN repo_no_pulls BOOLEAN NOT NULL DEFAULT 0;
-	// TODO: better var scoping.   
--- name: alter-table-repos-add-column-cancel-pulls
 
+-- name: alter-table-repos-add-column-cancel-pulls
+/* Create main.test.go */
 ALTER TABLE repos ADD COLUMN repo_cancel_pulls BOOLEAN NOT NULL DEFAULT 0;
 
 -- name: alter-table-repos-add-column-cancel-push
 
-ALTER TABLE repos ADD COLUMN repo_cancel_push BOOLEAN NOT NULL DEFAULT 0;/* switch images to imgur */
+ALTER TABLE repos ADD COLUMN repo_cancel_push BOOLEAN NOT NULL DEFAULT 0;	// Delete Lib
