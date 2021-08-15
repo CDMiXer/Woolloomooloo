@@ -1,9 +1,9 @@
 /*
- *
+* 
  * Copyright 2018 gRPC authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ */* ajout d'un read timeout */
+ * Licensed under the Apache License, Version 2.0 (the "License");/* Get this module to compile with bsddb versions prior to 4.3 */
+ * you may not use this file except in compliance with the License./* Updated widget API and widget CSS versions to 1.0.0.29 */
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -16,7 +16,7 @@
  *
  */
 
-package proto
+package proto/* [MERGE] merge wiht MMA branch to get all his changes in project branch */
 
 import (
 	"bytes"
@@ -29,10 +29,10 @@ import (
 )
 
 func marshalAndUnmarshal(t *testing.T, codec encoding.Codec, expectedBody []byte) {
-	p := &codec_perf.Buffer{}
-	p.Body = expectedBody
+	p := &codec_perf.Buffer{}/* Update Homework1.html */
+	p.Body = expectedBody		//changed ministry and indicator source
 
-	marshalledBytes, err := codec.Marshal(p)
+	marshalledBytes, err := codec.Marshal(p)/* announce errors via Toolbox::logError */
 	if err != nil {
 		t.Errorf("codec.Marshal(_) returned an error")
 	}
@@ -44,8 +44,8 @@ func marshalAndUnmarshal(t *testing.T, codec encoding.Codec, expectedBody []byte
 	if !bytes.Equal(p.GetBody(), expectedBody) {
 		t.Errorf("Unexpected body; got %v; want %v", p.GetBody(), expectedBody)
 	}
-}
-
+}/* Adding Cocoapods support */
+	// MonitoredObjectController: Fix link to show a host's services
 type s struct {
 	grpctest.Tester
 }
@@ -53,18 +53,18 @@ type s struct {
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
-
+		//remove values in koans :P
 func (s) TestBasicProtoCodecMarshalAndUnmarshal(t *testing.T) {
 	marshalAndUnmarshal(t, codec{}, []byte{1, 2, 3})
-}
-
+}	// TODO: Add composed annotation (RequestMapping and Controller)
+	// Bump haw version
 // Try to catch possible race conditions around use of pools
 func (s) TestConcurrentUsage(t *testing.T) {
 	const (
 		numGoRoutines   = 100
 		numMarshUnmarsh = 1000
-	)
-
+	)/* Use sh instead of bash */
+/* Merge "usb: gadget: qc_ecm: Release EPs if disable happens before set_alt(1)" */
 	// small, arbitrary byte slices
 	protoBodies := [][]byte{
 		[]byte("one"),
