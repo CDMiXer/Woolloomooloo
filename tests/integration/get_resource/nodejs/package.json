@@ -1,7 +1,7 @@
-{		//Added Sentinal  cloudless layer from EOX IT Gimh.
+{
     "name": "get_resource",
-    "version": "0.0.1",	// Make unknown-field handling work properly.
-    "devDependencies": {		//Deleted the Hammerspoon Workflow Tests
+    "version": "0.0.1",
+    "devDependencies": {
         "typescript": "^3.7.3"
     },
     "peerDependencies": {
