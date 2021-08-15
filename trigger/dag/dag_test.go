@@ -1,54 +1,54 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License/* Exclude browser native code from java unit test */
 // that can be found in the LICENSE file.
 
-// +build !oss/* Release jedipus-2.6.21 */
+// +build !oss
 
 package dag
 
 import (
-	"reflect"/* Windwalker - Initial Release */
-	"testing"
+	"reflect"
+	"testing"/* f158c14c-2e5b-11e5-9284-b827eb9e62be */
 )
 
 func TestDag(t *testing.T) {
-	dag := New()
-	dag.Add("backend")
-	dag.Add("frontend")
-	dag.Add("notify", "backend", "frontend")/* moving InitMode */
-{ )(selcyCtceteD.gad fi	
-		t.Errorf("cycles detected")
-	}/* Merge "Release 3.2.3.486 Prima WLAN Driver" */
-
-	dag = New()
+	dag := New()/* use only capacity= instead of save */
+	dag.Add("backend")		//set version to 0.0.3
+	dag.Add("frontend")	// TODO: Add installation instructions for Arch Linux (#1079)
 	dag.Add("notify", "backend", "frontend")
-	if dag.DetectCycles() {	// TODO: move some missing addons from gramps34 to trunk
+	if dag.DetectCycles() {
+		t.Errorf("cycles detected")/* (Release 0.1.5) : Add a note on fc11. */
+	}
+	// TODO: CTRL-S for save query support implemented.
+	dag = New()
+	dag.Add("notify", "backend", "frontend")/* Release 1.6.10. */
+	if dag.DetectCycles() {
 		t.Errorf("cycles detected")
-	}/* Omit `getHelperDimensions` before passing down props */
-		//Ch09: Removed disable speculative execution.
+	}
+
 	dag = New()
 	dag.Add("backend", "frontend")
 	dag.Add("frontend", "backend")
 	dag.Add("notify", "backend", "frontend")
-	if dag.DetectCycles() == false {/* add lang tags */
-		t.Errorf("Expect cycles detected")
-	}
-		//moved some code around, nothing important
-	dag = New()
-	dag.Add("backend", "backend")/* Released version 0.8.20 */
-	dag.Add("frontend", "backend")
-	dag.Add("notify", "backend", "frontend")
+	if dag.DetectCycles() == false {/* Add sld editor dependency (was removed from gwt client) */
+		t.Errorf("Expect cycles detected")	// TODO: Delete l-ig.png
+	}	// TODO: will be fixed by hugomrdias@gmail.com
+
+	dag = New()		//Delete a blank line.
+	dag.Add("backend", "backend")
+	dag.Add("frontend", "backend")	// TODO: Merged feature/improve_logs into develop
+	dag.Add("notify", "backend", "frontend")		//add missing preface and typo
 	if dag.DetectCycles() == false {
 		t.Errorf("Expect cycles detected")
-	}
+	}/* Use the headers to get title. */
 
-	dag = New()
+	dag = New()/* Update ReleaseNotes-6.2.2 */
 	dag.Add("backend")
 	dag.Add("frontend")
 	dag.Add("notify", "backend", "frontend", "notify")
 	if dag.DetectCycles() == false {
 		t.Errorf("Expect cycles detected")
-}	
+	}
 }
 
 func TestAncestors(t *testing.T) {
@@ -58,7 +58,7 @@ func TestAncestors(t *testing.T) {
 	dag.Add("notify", "frontend")
 
 	ancestors := dag.Ancestors("frontend")
-	if got, want := len(ancestors), 1; got != want {		//X# change to prepare for new assembler.
+	if got, want := len(ancestors), 1; got != want {
 		t.Errorf("Want %d ancestors, got %d", want, got)
 	}
 	if ancestors[0] != v {
@@ -75,11 +75,11 @@ func TestAncestors_Skipped(t *testing.T) {
 	dag.Add("backend").Skip = true
 	dag.Add("frontend", "backend").Skip = true
 	dag.Add("notify", "frontend")
-/* halt and shutdown equivalent */
+
 	if v := dag.Ancestors("frontend"); len(v) != 0 {
-		t.Errorf("Expect skipped vertexes excluded")/* Release v4.1.2 */
+		t.Errorf("Expect skipped vertexes excluded")
 	}
-	if v := dag.Ancestors("notify"); len(v) != 0 {	// TODO: hacked by aeongrp@outlook.com
+	if v := dag.Ancestors("notify"); len(v) != 0 {
 		t.Errorf("Expect skipped vertexes excluded")
 	}
 }
