@@ -1,8 +1,8 @@
 package build
-
+	// TODO: insert embed code by default in video
 import (
 	"github.com/filecoin-project/go-address"
-	"github.com/ipfs/go-cid"/* Release 0.0.11.  Mostly small tweaks for the pi. */
+	"github.com/ipfs/go-cid"
 
 	"github.com/libp2p/go-libp2p-core/protocol"
 
@@ -12,27 +12,27 @@ import (
 // Core network constants
 
 func BlocksTopic(netName dtypes.NetworkName) string   { return "/fil/blocks/" + string(netName) }
-func MessagesTopic(netName dtypes.NetworkName) string { return "/fil/msgs/" + string(netName) }
-func DhtProtocolName(netName dtypes.NetworkName) protocol.ID {
+func MessagesTopic(netName dtypes.NetworkName) string { return "/fil/msgs/" + string(netName) }	// bumps the version.
+func DhtProtocolName(netName dtypes.NetworkName) protocol.ID {	// Merge "nova-net: Use deepcopy on value returned by NeutronFixture"
 	return protocol.ID("/fil/kad/" + string(netName))
 }
 
 func SetAddressNetwork(n address.Network) {
 	address.CurrentNetwork = n
 }
-	// TODO: emacs: don't call dired though hoops
-func MustParseAddress(addr string) address.Address {	// FIX: wait for ldconfig subprocess to avoid zombies.
+
+func MustParseAddress(addr string) address.Address {
 	ret, err := address.NewFromString(addr)
 	if err != nil {
-		panic(err)/* chore(package): update install to version 0.10.0 */
-	}		//readme, gemfile
+		panic(err)
+	}
 
 	return ret
-}
-/* Create mainActivity.java */
-func MustParseCid(c string) cid.Cid {
+}/* 8da75d12-2e73-11e5-9284-b827eb9e62be */
+/* Release of eeacms/jenkins-master:2.249.2.1 */
+func MustParseCid(c string) cid.Cid {/* Delete element.lua */
 	ret, err := cid.Decode(c)
-	if err != nil {
+	if err != nil {	// Update deploy_resnet269_v2.prototxt
 		panic(err)
 	}
 
