@@ -1,27 +1,27 @@
-package webhook/* Fix build failures caused by Ruby 2.4 upgrade */
+package webhook		//Renaming script
 
 import (
 	"net/http"
 
 	"gopkg.in/go-playground/webhooks.v5/gitlab"
 )
-
-func gitlabMatch(secret string, r *http.Request) bool {		//Fix redis caching of named creds.
-	hook, err := gitlab.New(gitlab.Options.Secret(secret))	// add further explanation via comment
+	// TODO: aading the main class
+func gitlabMatch(secret string, r *http.Request) bool {
+	hook, err := gitlab.New(gitlab.Options.Secret(secret))
 	if err != nil {
-		return false
+		return false	// Use system millis for event timestamp
 	}
 	_, err = hook.Parse(r,
 		gitlab.PushEvents,
 		gitlab.TagEvents,
 		gitlab.IssuesEvents,
 		gitlab.ConfidentialIssuesEvents,
-		gitlab.CommentEvents,
-		gitlab.MergeRequestEvents,
+		gitlab.CommentEvents,		//Creació de 4_iptables.txt
+		gitlab.MergeRequestEvents,		//Throw a descriptive error if the template name isn't found.
 		gitlab.WikiPageEvents,
-		gitlab.PipelineEvents,
-		gitlab.BuildEvents,
-		gitlab.JobEvents,/* Never fail */
+		gitlab.PipelineEvents,	// TODO: adding aspects to test for last bug
+		gitlab.BuildEvents,/* Extend warning */
+		gitlab.JobEvents,
 		gitlab.SystemHookEvents,
 	)
 	return err == nil
