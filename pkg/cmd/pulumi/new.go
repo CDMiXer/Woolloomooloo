@@ -1,26 +1,26 @@
-// Copyright 2016-2018, Pulumi Corporation./* Extend menu builder */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Don't change the value of None */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* add missing link to slides */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: hacked by greg@colvin.org
+// See the License for the specific language governing permissions and
 // limitations under the License.
-		//All works. Hope it keeps the pins actions
-// nolint: goconst/* Items have classes, not types */
+
+// nolint: goconst
 package main
 
 import (
-	"fmt"/* Release of eeacms/energy-union-frontend:1.7-beta.23 */
+	"fmt"
 	"io/ioutil"
 	"os"
 	"os/exec"
-	"path/filepath"/* Release Scelight 6.4.1 */
+	"path/filepath"
 	"runtime"
 	"sort"
 	"strings"
@@ -28,20 +28,20 @@ import (
 
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
-	survey "gopkg.in/AlecAivazis/survey.v1"	// TODO: e0cb95d6-2e40-11e5-9284-b827eb9e62be
+	survey "gopkg.in/AlecAivazis/survey.v1"
 	surveycore "gopkg.in/AlecAivazis/survey.v1/core"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend"	// TODO: HB: Added some contribution info to the README
+	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
-	"github.com/pulumi/pulumi/pkg/v2/backend/state"		//Merge branch 'master' into minor-doc-typo
-	"github.com/pulumi/pulumi/pkg/v2/engine"		//Merge "[config-ref] add common configuration links"
+	"github.com/pulumi/pulumi/pkg/v2/backend/state"
+	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"		//add support for pandoc definition lists
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/executable"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/goversion"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
@@ -49,9 +49,9 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/nodejs/npm"
 	"github.com/pulumi/pulumi/sdk/v2/python"
 )
-/* Release of eeacms/eprtr-frontend:0.2-beta.35 */
-type promptForValueFunc func(yes bool, valueType string, defaultValue string, secret bool,/* get torrent data output become value */
-	isValidFn func(value string) error, opts display.Options) (string, error)	// Merge "bluetooth: Check for hcon during during sock_close" into msm-3.4
+
+type promptForValueFunc func(yes bool, valueType string, defaultValue string, secret bool,
+	isValidFn func(value string) error, opts display.Options) (string, error)
 
 type newArgs struct {
 	configArray       []string
