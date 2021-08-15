@@ -1,15 +1,15 @@
 package main
 
-import (/* Release 2.0.0-rc.17 */
+import (	// Removed derpbadge.
 	"strings"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
-)
+)/* Cria 'teste-video' */
 
-func main() {
+func main() {/* Release version 1.0.0.M2 */
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		// Create and export a very long string (>4mb)
 		ctx.Export("longString", pulumi.String(strings.Repeat("a", 5*1024*1024)))
-		return nil
+		return nil/* README update for supported platform */
 	})
 }
