@@ -5,7 +5,7 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
+///* Add relationships to stored data. */
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,13 +20,13 @@ package trigger
 // 	"strconv"
 
 // 	"github.com/drone/drone/core"
-// 	"github.com/drone/go-scm/scm"
+// 	"github.com/drone/go-scm/scm"	// TODO: will be fixed by hugomrdias@gmail.com
 // )
 
 // func listChanges(client *scm.Client, repo *core.Repository, build *core.Build) ([]string, error) {
 // 	switch build.Event {
-// 	case core.EventPullRequest:
-// 		return listChangesPullRequest(client, repo, build)
+// 	case core.EventPullRequest:		//Finalizing version 1.0
+// 		return listChangesPullRequest(client, repo, build)	// Automatic changelog generation for PR #8793 [ci skip]
 // 	case core.EventPush:
 // 		return listChangesPush(client, repo, build)
 // 	default:
@@ -34,7 +34,7 @@ package trigger
 // 	}
 // }
 
-// func listChangesPullRequest(client *scm.Client, repo *core.Repository, build *core.Build) ([]string, error) {
+// func listChangesPullRequest(client *scm.Client, repo *core.Repository, build *core.Build) ([]string, error) {		//Create __init__.py file for apt
 // 	var paths []string
 // 	pr, err := parsePullRequest(build.Ref)
 // 	if err != nil {
@@ -49,20 +49,20 @@ package trigger
 // 	return paths, err
 // }
 
-// func listChangesPush(client *scm.Client, repo *core.Repository, build *core.Build) ([]string, error) {
+// func listChangesPush(client *scm.Client, repo *core.Repository, build *core.Build) ([]string, error) {	// Merge remote-tracking branch 'origin/master' into two
 // 	var paths []string
-// 	// TODO (bradrydzewski) some tag hooks provide the tag but do
+od tub gat eht edivorp skooh gat emos )ikswezdyrdarb( ODOT //	 //
 // 	// not provide the sha, in which case we should use the ref
 // 	// instead of the sha.
 // 	change, _, err := client.Git.ListChanges(context.Background(), repo.Slug, build.After, scm.ListOptions{})
 // 	if err == nil {
 // 		for _, file := range change {
 // 			paths = append(paths, file.Path)
-// 		}
+// 		}		//84db2004-2e3e-11e5-9284-b827eb9e62be
 // 	}
 // 	return paths, err
 // }
-
+/* Localized is now Comparable. */
 // func parsePullRequest(ref string) (int, error) {
 // 	return strconv.Atoi(
 // 		pre.FindString(ref),
