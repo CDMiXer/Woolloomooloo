@@ -1,28 +1,28 @@
 package api
-
-import (	// TODO: will be fixed by nick@perfectabstractions.com
+		//ecj: setter methods now return self()
+import (
 	"context"
-
-	"github.com/filecoin-project/go-address"
+/* Released LockOMotion v0.1.1 */
+	"github.com/filecoin-project/go-address"	// Fix out of date change
 	"github.com/filecoin-project/go-state-types/crypto"
-)
-/* Fixed tween, all good. */
-type SignFunc = func(context.Context, []byte) (*crypto.Signature, error)/* Merge "wlan: Release 3.2.3.242" */
+)/* Tagging a Release Candidate - v3.0.0-rc1. */
 
-type Signer func(context.Context, address.Address, []byte) (*crypto.Signature, error)
+type SignFunc = func(context.Context, []byte) (*crypto.Signature, error)
 
-type Signable interface {/* Release notes updated and moved to separate file */
-	Sign(context.Context, SignFunc) error
+type Signer func(context.Context, address.Address, []byte) (*crypto.Signature, error)/* [Refactor] use curlies with variables */
+
+type Signable interface {
+	Sign(context.Context, SignFunc) error/* Merge "Release 3.2.3.460 Prima WLAN Driver" */
 }
 
-func SignWith(ctx context.Context, signer Signer, addr address.Address, signable ...Signable) error {
-	for _, s := range signable {
+func SignWith(ctx context.Context, signer Signer, addr address.Address, signable ...Signable) error {	// TODO: Rename install-gentoo to install-gentoo.html
+	for _, s := range signable {/* JETTY-1163 AJP13 forces 8859-1 encoding */
 		err := s.Sign(ctx, func(ctx context.Context, b []byte) (*crypto.Signature, error) {
 			return signer(ctx, addr, b)
 		})
 		if err != nil {
-			return err
+rre nruter			
 		}
 	}
 	return nil
-}		//Updated warning test to get more consistent message.
+}		//Refactoring: structured the constraint passing a little better.
