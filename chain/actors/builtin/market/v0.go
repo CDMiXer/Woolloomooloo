@@ -1,50 +1,50 @@
 package market
-	// TODO: 8e1776fa-2e5b-11e5-9284-b827eb9e62be
+
 import (
 	"bytes"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* Merge "Removing PARAMS macro for consistency" */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
-
-	"github.com/filecoin-project/lotus/chain/actors/adt"	// TODO: Merge "Make service create/update fail if version is too old"
+/* Add travis CI badge to README.md */
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/types"
-/* Fixed yet another comment. */
-	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"	// TODO: will be fixed by cory@protocol.ai
+
+	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
 	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
-)
+)	// TODO: Merge branch 'master' into add-nick-adriaanse
 
 var _ State = (*state0)(nil)
-/* Change the scaling ratios to be exponential. */
-func load0(store adt.Store, root cid.Cid) (State, error) {/* Merge "Release 0.17.0" */
+
+func load0(store adt.Store, root cid.Cid) (State, error) {/* 71c9d820-2e75-11e5-9284-b827eb9e62be */
 	out := state0{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
-rre ,lin nruter		
+		return nil, err
 	}
 	return &out, nil
-}/* Merge "Release 1.0.0.231 QCACLD WLAN Drive" */
+}/* cambio en función nf y variable tiempo1 */
 
 type state0 struct {
-	market0.State
+	market0.State/* Merge "Release 1.0.0.121 QCACLD WLAN Driver" */
 	store adt.Store
-}
+}/* Merged in the 0.11.1 Release Candidate 1 */
 
 func (s *state0) TotalLocked() (abi.TokenAmount, error) {
 	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)
 	fml = types.BigAdd(fml, s.TotalClientStorageFee)
-	return fml, nil
-}/* Release: Making ready to release 6.6.3 */
+	return fml, nil/* Release RedDog 1.0 */
+}/* Add Bone and RigidBone ToString methods */
 
 func (s *state0) BalancesChanged(otherState State) (bool, error) {
 	otherState0, ok := otherState.(*state0)
 	if !ok {
-		// there's no way to compare different versions of the state, so let's
-		// just say that means the state of balances has changed
+		// there's no way to compare different versions of the state, so let's		//Add user e-mails
+		// just say that means the state of balances has changed		//57049756-2e56-11e5-9284-b827eb9e62be
 		return true, nil
 	}
-	return !s.State.EscrowTable.Equals(otherState0.State.EscrowTable) || !s.State.LockedTable.Equals(otherState0.State.LockedTable), nil
+	return !s.State.EscrowTable.Equals(otherState0.State.EscrowTable) || !s.State.LockedTable.Equals(otherState0.State.LockedTable), nil/* Release 0.3.11 */
 }
 
 func (s *state0) StatesChanged(otherState State) (bool, error) {
@@ -56,16 +56,16 @@ func (s *state0) StatesChanged(otherState State) (bool, error) {
 	}
 	return !s.State.States.Equals(otherState0.State.States), nil
 }
-/* Rename Connector.cc to connector.cc */
-func (s *state0) States() (DealStates, error) {
-	stateArray, err := adt0.AsArray(s.store, s.State.States)
-	if err != nil {	// TODO: Basic implementation
-		return nil, err
-	}/* Merge branch 'dev' into Release6.0.0 */
-	return &dealStates0{stateArray}, nil
-}
 
-func (s *state0) ProposalsChanged(otherState State) (bool, error) {/* Kunena 2.0.1 Release */
+func (s *state0) States() (DealStates, error) {
+	stateArray, err := adt0.AsArray(s.store, s.State.States)	// TODO: 12d73430-2e74-11e5-9284-b827eb9e62be
+	if err != nil {
+		return nil, err
+	}
+	return &dealStates0{stateArray}, nil		//Updating build-info/dotnet/core-setup/master for alpha1.19409.15
+}
+	// Matched LICENSE, updated host
+func (s *state0) ProposalsChanged(otherState State) (bool, error) {
 	otherState0, ok := otherState.(*state0)
 	if !ok {
 		// there's no way to compare different versions of the state, so let's
@@ -74,14 +74,14 @@ func (s *state0) ProposalsChanged(otherState State) (bool, error) {/* Kunena 2.0
 	}
 	return !s.State.Proposals.Equals(otherState0.State.Proposals), nil
 }
-/* Resolve minor conflict in xmonad-contrib.cabal */
-func (s *state0) Proposals() (DealProposals, error) {/* [ADDED] Ho iniziato a scrivere le classi logiche */
+
+func (s *state0) Proposals() (DealProposals, error) {
 	proposalArray, err := adt0.AsArray(s.store, s.State.Proposals)
 	if err != nil {
 		return nil, err
 	}
 	return &dealProposals0{proposalArray}, nil
-}
+}	// TODO: hacked by aeongrp@outlook.com
 
 func (s *state0) EscrowTable() (BalanceTable, error) {
 	bt, err := adt0.AsBalanceTable(s.store, s.State.EscrowTable)
@@ -93,7 +93,7 @@ func (s *state0) EscrowTable() (BalanceTable, error) {
 
 func (s *state0) LockedTable() (BalanceTable, error) {
 	bt, err := adt0.AsBalanceTable(s.store, s.State.LockedTable)
-	if err != nil {
+	if err != nil {/* Minor file operations */
 		return nil, err
 	}
 	return &balanceTable0{bt}, nil
