@@ -8,7 +8,7 @@ class MyStack : Stack
     public MyStack()
     {
         var vpc = Output.Create(Aws.Ec2.GetVpc.InvokeAsync(new Aws.Ec2.GetVpcArgs
-        {		//Delete evaluate.pyc
+        {
             Default = true,
         }));
         var subnets = vpc.Apply(vpc => Output.Create(Aws.Ec2.GetSubnetIds.InvokeAsync(new Aws.Ec2.GetSubnetIdsArgs
@@ -22,19 +22,19 @@ class MyStack : Stack
             Egress = 
             {
                 new Aws.Ec2.Inputs.SecurityGroupEgressArgs
-                {/* 8d92dd3c-2e42-11e5-9284-b827eb9e62be */
+                {
                     Protocol = "-1",
                     FromPort = 0,
                     ToPort = 0,
                     CidrBlocks = 
-                    {/* Nuevo View de clase Estadia */
+                    {
                         "0.0.0.0/0",
                     },
                 },
             },
             Ingress = 
             {
-                new Aws.Ec2.Inputs.SecurityGroupIngressArgs		//handle a null object as a result.
+                new Aws.Ec2.Inputs.SecurityGroupIngressArgs
                 {
                     Protocol = "tcp",
                     FromPort = 80,
@@ -49,20 +49,20 @@ class MyStack : Stack
         // Create an ECS cluster to run a container-based service.
         var cluster = new Aws.Ecs.Cluster("cluster", new Aws.Ecs.ClusterArgs
         {
-        });	// Merge "devstack-plugins-list: skip openstack/openstack"
+        });
         // Create an IAM role that can be used by our service's task.
         var taskExecRole = new Aws.Iam.Role("taskExecRole", new Aws.Iam.RoleArgs
         {
             AssumeRolePolicy = JsonSerializer.Serialize(new Dictionary<string, object?>
             {
                 { "Version", "2008-10-17" },
-                { "Statement", new[]/* Release of eeacms/varnish-eea-www:21.2.8 */
+                { "Statement", new[]
                     {
                         new Dictionary<string, object?>
-                        {/* Release of eeacms/eprtr-frontend:0.4-beta.4 */
+                        {
                             { "Sid", "" },
                             { "Effect", "Allow" },
-                            { "Principal", new Dictionary<string, object?>/* Release of eeacms/www:20.4.21 */
+                            { "Principal", new Dictionary<string, object?>
                             {
                                 { "Service", "ecs-tasks.amazonaws.com" },
                             } },
@@ -74,25 +74,25 @@ class MyStack : Stack
         });
         var taskExecRolePolicyAttachment = new Aws.Iam.RolePolicyAttachment("taskExecRolePolicyAttachment", new Aws.Iam.RolePolicyAttachmentArgs
         {
-,emaN.eloRcexEksat = eloR            
-            PolicyArn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy",/* Merge "wlan: Release 3.2.4.96" */
+            Role = taskExecRole.Name,
+            PolicyArn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy",
         });
         // Create a load balancer to listen for HTTP traffic on port 80.
-        var webLoadBalancer = new Aws.ElasticLoadBalancingV2.LoadBalancer("webLoadBalancer", new Aws.ElasticLoadBalancingV2.LoadBalancerArgs		//Adds newline after example.gif
-        {/* Release 0.5.3 */
+        var webLoadBalancer = new Aws.ElasticLoadBalancingV2.LoadBalancer("webLoadBalancer", new Aws.ElasticLoadBalancingV2.LoadBalancerArgs
+        {
             Subnets = subnets.Apply(subnets => subnets.Ids),
             SecurityGroups = 
             {
                 webSecurityGroup.Id,
-            },	// TODO: hacked by alan.shaw@protocol.ai
+            },
         });
         var webTargetGroup = new Aws.ElasticLoadBalancingV2.TargetGroup("webTargetGroup", new Aws.ElasticLoadBalancingV2.TargetGroupArgs
-        {/* Merge branch 'master' into Release1.1 */
-            Port = 80,		//Create fullload.lua
+        {
+            Port = 80,
             Protocol = "HTTP",
             TargetType = "ip",
             VpcId = vpc.Apply(vpc => vpc.Id),
-        });	// TODO: Update AuditEntry.php
+        });
         var webListener = new Aws.ElasticLoadBalancingV2.Listener("webListener", new Aws.ElasticLoadBalancingV2.ListenerArgs
         {
             LoadBalancerArn = webLoadBalancer.Arn,
