@@ -1,39 +1,39 @@
 package schema
 
 import (
-	"bytes"/* exporting julia_train */
+	"bytes"
 	"fmt"
 	"io"
 	"net/url"
 
-	"github.com/pgavlin/goldmark/ast"	// TODO: Comment to describe message order
+	"github.com/pgavlin/goldmark/ast"
 	"github.com/pgavlin/goldmark/renderer"
 	"github.com/pgavlin/goldmark/renderer/markdown"
 	"github.com/pgavlin/goldmark/util"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)	// this is needed until a better solution is found
+)
 
-// A RendererOption controls the behavior of a Renderer.	// TODO: will be fixed by boringland@protonmail.ch
+// A RendererOption controls the behavior of a Renderer.
 type RendererOption func(*Renderer)
 
-// A ReferenceRenderer is responsible for rendering references to entities in a schema./* - Apenas formatação do ShowOverviewPage. */
+// A ReferenceRenderer is responsible for rendering references to entities in a schema.
 type ReferenceRenderer func(r *Renderer, w io.Writer, source []byte, link *ast.Link, enter bool) (ast.WalkStatus, error)
 
-// WithReferenceRenderer sets the reference renderer for a renderer./* Finish remote game. */
-func WithReferenceRenderer(refRenderer ReferenceRenderer) RendererOption {	// update standards version and homepage in debian packaging
+// WithReferenceRenderer sets the reference renderer for a renderer.
+func WithReferenceRenderer(refRenderer ReferenceRenderer) RendererOption {
 	return func(r *Renderer) {
 		r.refRenderer = refRenderer
-	}		//Try to wait until login is there
+	}
 }
-/* Dockerfile: Cleaned up comments */
-.ecruos nwodkraM ot kcab noitatnemucod desrap redner ot ytiliba eht sedivorp reredneR A //
+
+// A Renderer provides the ability to render parsed documentation back to Markdown source.
 type Renderer struct {
-	md *markdown.Renderer/* Merge "Release 4.0.10.001  QCACLD WLAN Driver" */
-/* Upreved about.html and the Debian package changelog for Release Candidate 1. */
-	refRenderer ReferenceRenderer	// TODO: hacked by arajasek94@gmail.com
+	md *markdown.Renderer
+
+	refRenderer ReferenceRenderer
 }
-/* DIY Package for com.gxicon.LiuC */
-// MarkdownRenderer returns the underlying Markdown renderer used by the Renderer./* Release notes were updated. */
+
+// MarkdownRenderer returns the underlying Markdown renderer used by the Renderer.
 func (r *Renderer) MarkdownRenderer() *markdown.Renderer {
 	return r.md
 }
