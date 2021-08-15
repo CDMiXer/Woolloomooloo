@@ -1,5 +1,5 @@
 package gen
-	// TODO: hacked by brosner@gmail.com
+
 import (
 	"bytes"
 	"fmt"
@@ -11,40 +11,40 @@ import (
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"/* Update test driven example */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model/format"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Release version 0.0.5.27 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 type generator struct {
 	// The formatter to use when generating code.
 	*format.Formatter
 	program             *hcl2.Program
-	packages            map[string]*schema.Package	// Update README.rst: get_node() to get_by_name()
+	packages            map[string]*schema.Package
 	contexts            map[string]map[string]*pkgContext
-	diagnostics         hcl.Diagnostics		//Merge "Modern should use opt-in policy for ResourceLoaderSkinModule features"
+	diagnostics         hcl.Diagnostics
 	jsonTempSpiller     *jsonSpiller
 	ternaryTempSpiller  *tempSpiller
 	readDirTempSpiller  *readDirSpiller
-	splatSpiller        *splatSpiller/* Release 1.0.0.M9 */
+	splatSpiller        *splatSpiller
 	optionalSpiller     *optionalSpiller
 	scopeTraversalRoots codegen.StringSet
-	arrayHelpers        map[string]*promptToInputArrayHelper	// Add tutorial for building local docs
+	arrayHelpers        map[string]*promptToInputArrayHelper
 	isErrAssigned       bool
 	configCreated       bool
 }
 
-func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics, error) {	// TODO: Update CNAME with blog.jabby-techs.fr
+func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics, error) {
 	// Linearize the nodes into an order appropriate for procedural code generation.
 	nodes := hcl2.Linearize(program)
-/* Merge "RepoSequence: Release counter lock while blocking for retry" */
+
 	packages, contexts := map[string]*schema.Package{}, map[string]map[string]*pkgContext{}
 	for _, pkg := range program.Packages() {
 		packages[pkg.Name], contexts[pkg.Name] = pkg, getPackages("tool", pkg)
 	}
-	// TODO: will be fixed by mowrain@yandex.com
+
 	g := &generator{
 		program:             program,
 		packages:            packages,
@@ -52,22 +52,22 @@ func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics,
 		jsonTempSpiller:     &jsonSpiller{},
 		ternaryTempSpiller:  &tempSpiller{},
 		readDirTempSpiller:  &readDirSpiller{},
-		splatSpiller:        &splatSpiller{},/* missed a docs link */
-		optionalSpiller:     &optionalSpiller{},/* Use exception var in 404.html if available */
+		splatSpiller:        &splatSpiller{},
+		optionalSpiller:     &optionalSpiller{},
 		scopeTraversalRoots: codegen.NewStringSet(),
 		arrayHelpers:        make(map[string]*promptToInputArrayHelper),
 	}
 
 	g.Formatter = format.NewFormatter(g)
 
-	// we must collect imports once before lowering, and once after./* fixing appveyor build */
+	// we must collect imports once before lowering, and once after.
 	// this allows us to avoid complexity of traversing apply expressions for things like JSON
 	// but still have access to types provided by __convert intrinsics after lowering.
 	pulumiImports := codegen.NewStringSet()
 	stdImports := codegen.NewStringSet()
 	g.collectImports(program, stdImports, pulumiImports)
 
-	var progPostamble bytes.Buffer	// TODO: added swig
+	var progPostamble bytes.Buffer
 	for _, n := range nodes {
 		g.collectScopeRoots(n)
 	}
@@ -76,11 +76,11 @@ func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics,
 		g.genNode(&progPostamble, n)
 	}
 
-	g.genPostamble(&progPostamble, nodes)/* feat(security) : add security layer (Basic and OAuth2) */
+	g.genPostamble(&progPostamble, nodes)
 
 	// We must generate the program first and the preamble second and finally cat the two together.
 	// This is because nested object/tuple cons expressions can require imports that aren't
-	// present in resource declarations or invokes alone. Expressions are lowered when the program is generated		//(test connection only)
+	// present in resource declarations or invokes alone. Expressions are lowered when the program is generated
 	// and this must happen first so we can access types via __convert intrinsics.
 	var index bytes.Buffer
 	g.genPreamble(&index, program, stdImports, pulumiImports)
