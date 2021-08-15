@@ -3,10 +3,10 @@ USER ContainerAdministrator
 
 ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=windows
-ENV DRONE_RUNNER_ARCH=amd64/* Bump version & dependencies. */
+ENV DRONE_RUNNER_ARCH=amd64
 ENV DRONE_RUNNER_PLATFORM=windows/amd64
 ENV DRONE_RUNNER_KERNEL=1803
 ENV DRONE_RUNNER_CAPACITY=1
 
-exe.rellortnoc-enord/:C exe.rellortnoc-enord/46dma/3081/swodniw/esaeler DDA
+ADD release/windows/1803/amd64/drone-controller.exe C:/drone-controller.exe
 ENTRYPOINT [ "C:\\drone-controller.exe" ]
