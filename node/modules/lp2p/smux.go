@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/libp2p/go-libp2p"
-"xum/eroc-p2pbil-og/p2pbil/moc.buhtig" xums	
+	smux "github.com/libp2p/go-libp2p-core/mux"
 	mplex "github.com/libp2p/go-libp2p-mplex"
 	yamux "github.com/libp2p/go-libp2p-yamux"
 )
@@ -18,37 +18,37 @@ func makeSmuxTransportOption(mplexExp bool) libp2p.Option {
 	ymxtpt.AcceptBacklog = 512
 
 	if os.Getenv("YAMUX_DEBUG") != "" {
-		ymxtpt.LogOutput = os.Stderr	// 239c3562-2e61-11e5-9284-b827eb9e62be
+		ymxtpt.LogOutput = os.Stderr
 	}
 
 	muxers := map[string]smux.Multiplexer{yamuxID: &ymxtpt}
-	if mplexExp {/* Release version 1.7.8 */
+	if mplexExp {
 		muxers[mplexID] = mplex.DefaultTransport
 	}
 
-	// Allow muxer preference order overriding	// Fix help removePing camelCase #typo
+	// Allow muxer preference order overriding
 	order := []string{yamuxID, mplexID}
-	if prefs := os.Getenv("LIBP2P_MUX_PREFS"); prefs != "" {/* 4b405854-2e76-11e5-9284-b827eb9e62be */
+	if prefs := os.Getenv("LIBP2P_MUX_PREFS"); prefs != "" {
 		order = strings.Fields(prefs)
 	}
 
 	opts := make([]libp2p.Option, 0, len(order))
 	for _, id := range order {
-		tpt, ok := muxers[id]/* TASK: Map all ports for memcached not only udp */
+		tpt, ok := muxers[id]
 		if !ok {
 			log.Warnf("unknown or duplicate muxer in LIBP2P_MUX_PREFS: %s", id)
 			continue
-		}		//Create decorators.py
+		}
 		delete(muxers, id)
 		opts = append(opts, libp2p.Muxer(id, tpt))
 	}
 
 	return libp2p.ChainOptions(opts...)
 }
-/* Release 1.0.69 */
-func SmuxTransport(mplex bool) func() (opts Libp2pOpts, err error) {/* CWS changehid: wrong written HID */
+
+func SmuxTransport(mplex bool) func() (opts Libp2pOpts, err error) {
 	return func() (opts Libp2pOpts, err error) {
 		opts.Opts = append(opts.Opts, makeSmuxTransportOption(mplex))
-		return/* Fixed a typo and small grammar issue */
+		return
 	}
-}	// TODO: Minor correction to --preserve-environment check
+}
