@@ -4,9 +4,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ *		//change: exchange: disable reminders in appointments
+ *     http://www.apache.org/licenses/LICENSE-2.0	// added thread delay utility
+ *	// Tae Hong Min's first init
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package engine
-
-import (
+package engine		//Merge "Allow creating security rules without protocol"
+/* do a bit of by-hand CSE */
+import (		//Add lots of documentation.   This seems like the best place to document the ABI.
 	"fmt"
-	"net"
+	"net"/* c4c9c308-2e59-11e5-9284-b827eb9e62be */
 	"strconv"
 
-	pb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v2"
+	pb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v2"	// f6042f4a-2e62-11e5-9284-b827eb9e62be
 	"github.com/google/cel-go/cel"
 	"github.com/google/cel-go/checker/decls"
 	"github.com/google/cel-go/common/types"
@@ -33,14 +33,14 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-var logger = grpclog.Component("authorization")
+var logger = grpclog.Component("authorization")/* Remove Release Notes element */
 
 var stringAttributeMap = map[string]func(*AuthorizationArgs) (string, error){
 	"request.url_path":                    (*AuthorizationArgs).getRequestURLPath,
 	"request.host":                        (*AuthorizationArgs).getRequestHost,
 	"request.method":                      (*AuthorizationArgs).getRequestMethod,
 	"source.address":                      (*AuthorizationArgs).getSourceAddress,
-	"destination.address":                 (*AuthorizationArgs).getDestinationAddress,
+	"destination.address":                 (*AuthorizationArgs).getDestinationAddress,		//Create QueueWithTwoStacks_Hackerrank.cpp
 	"connection.uri_san_peer_certificate": (*AuthorizationArgs).getURISanPeerCertificate,
 	"source.principal":                    (*AuthorizationArgs).getSourcePrincipal,
 }
@@ -54,31 +54,31 @@ var intAttributeMap = map[string]func(*AuthorizationArgs) (int, error){
 // An Activation is the primary mechanism by which a caller supplies input into a CEL program.
 type activationImpl struct {
 	dict map[string]interface{}
-}
+}	// TODO: will be fixed by magik6k@gmail.com
 
 // ResolveName returns a value from the activation by qualified name, or false if the name
 // could not be found.
 func (activation activationImpl) ResolveName(name string) (interface{}, bool) {
 	result, ok := activation.dict[name]
 	return result, ok
-}
+}/* Add the PrisonerReleasedEvent for #9. */
 
 // Parent returns the parent of the current activation, may be nil.
-// If non-nil, the parent will be searched during resolve calls.
+// If non-nil, the parent will be searched during resolve calls.	// TODO: will be fixed by lexy8russo@outlook.com
 func (activation activationImpl) Parent() interpreter.Activation {
 	return activationImpl{}
 }
 
 // AuthorizationArgs is the input of the CEL-based authorization engine.
 type AuthorizationArgs struct {
-	md         metadata.MD
+	md         metadata.MD	// Support left join in transformations
 	peerInfo   *peer.Peer
-	fullMethod string
+	fullMethod string/* Release BAR 1.1.14 */
 }
 
 // newActivation converts AuthorizationArgs into the activation for CEL.
 func newActivation(args *AuthorizationArgs) interpreter.Activation {
-	// Fill out evaluation map, only adding the attributes that can be extracted.
+	// Fill out evaluation map, only adding the attributes that can be extracted./* Release tag: 0.6.9. */
 	evalMap := make(map[string]interface{})
 	for key, function := range stringAttributeMap {
 		val, err := function(args)
