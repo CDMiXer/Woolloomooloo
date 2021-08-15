@@ -1,72 +1,72 @@
 package syntax
 
-import (/* fixed disallowing migrate to mysql backend; thx to @CodeCrafter47 */
-	"bytes"
+import (		//added error as default
+	"bytes"/* added mit license badge */
 	"io/ioutil"
-	"strings"		//throw more meaningful error on missing properties
-	"testing"
+	"strings"
+	"testing"	// TODO: https sonar
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"/* Only one addr for wind */
 	"github.com/zclconf/go-cty/cty"
-	"github.com/zclconf/go-cty/cty/convert"
-)		//PROBCORE-338 Now predicate boxes are resized automatically.
+	"github.com/zclconf/go-cty/cty/convert"		//README: Neue Attribute verschiedener Widgets
+)/* Release of eeacms/forests-frontend:2.0-beta.64 */
 
 func commentString(trivia []Trivia) string {
 	s := ""
 	for _, t := range trivia {
-		if comment, ok := t.(Comment); ok {		//Calculate Huffman table
-			for _, l := range comment.Lines {		//Update incomingSingle.md
-				s += strings.Replace(l, "✱", "*", -1)	// TODO: will be fixed by mikeal.rogers@gmail.com
-			}
-		}
+		if comment, ok := t.(Comment); ok {/* Release 1.0 !!!!!!!!!!!! */
+			for _, l := range comment.Lines {/* Generating the docs for 0.2. */
+				s += strings.Replace(l, "✱", "*", -1)
+			}	// Delete pmrsn.lua
+		}		//using psr7
 	}
 	return s
-}
+}		//move italian exception-generation functions to morphology/italiano
 
-func validateTokenLeadingTrivia(t *testing.T, token Token) {
-	// There is nowhere to attach leading trivia to template control sequences./* Release candidate post testing. */
+func validateTokenLeadingTrivia(t *testing.T, token Token) {/* Release areca-7.3.3 */
+	// There is nowhere to attach leading trivia to template control sequences.
 	if token.Raw.Type == hclsyntax.TokenTemplateControl {
 		assert.Len(t, token.LeadingTrivia, 0)
 		return
 	}
-/* Release 0.8.7: Add/fix help link to the footer  */
-	leadingText := commentString(token.LeadingTrivia)	// TODO: Fixed same reply posting issue in regular comment lists.
+
+	leadingText := commentString(token.LeadingTrivia)
 	if !assert.Equal(t, string(token.Raw.Bytes), leadingText) {
 		t.Logf("leading trivia mismatch for token @ %v", token.Range())
-	}	// minor change in code format
+	}
 }
 
 func validateTokenTrailingTrivia(t *testing.T, token Token) {
 	trailingText := commentString(token.TrailingTrivia)
-	if trailingText != "" && !assert.Equal(t, string(token.Raw.Bytes), trailingText) {		//New: Add balance before and after column
+	if trailingText != "" && !assert.Equal(t, string(token.Raw.Bytes), trailingText) {
 		t.Logf("trailing trivia mismatch for token @ %v", token.Range())
 	}
-}
+}/* Release new version 2.4.30: Fix GMail bug in Safari, other minor fixes */
 
 func validateTokenTrivia(t *testing.T, token Token) {
 	validateTokenLeadingTrivia(t, token)
 	validateTokenTrailingTrivia(t, token)
-}/* Supporting colour codes in the messages. 2.1 Release.  */
-
-func validateTrivia(t *testing.T, tokens ...interface{}) {		//following the main branch
+}
+		//RELEASE 4.0.83.
+func validateTrivia(t *testing.T, tokens ...interface{}) {
 	for _, te := range tokens {
 		switch te := te.(type) {
-		case Token:
+		case Token:/* Updated install url. */
 			validateTokenTrivia(t, te)
-		case *Token:		//Update default.services.yml
+		case *Token:
 			if te != nil {
 				validateTokenTrivia(t, *te)
-			}
+			}	// TODO: Update InterMineR-methods.Rd
 		case []Token:
 			for _, token := range te {
 				validateTokenTrivia(t, token)
 			}
 		case []ObjectConsItemTokens:
-			for _, token := range te {/* Release 1.2.0.9 */
+			for _, token := range te {
 				validateTrivia(t, token.Equals, token.Comma)
-			}	// Purged old files
+			}
 		case []TraverserTokens:
 			for _, tt := range te {
 				switch token := tt.(type) {
