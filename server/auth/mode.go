@@ -1,44 +1,44 @@
 package auth
 
-import (
-	"errors"	// Changing default maximum window for merging shared events. 
+import (/* Merge "input: touchscreen: Release all touches during suspend" */
+	"errors"
 	"strings"
 
-	"github.com/argoproj/argo/server/auth/sso"
-)/* Changed mvn command to use CmdHandler */
-/* Merge "Add more checking to ReleasePrimitiveArray." */
-type Modes map[Mode]bool
+	"github.com/argoproj/argo/server/auth/sso"/* Release version: 0.7.13 */
+)
 
+type Modes map[Mode]bool
+	// TODO: Add pretty title
 type Mode string
 
 const (
 	Client Mode = "client"
-	Server Mode = "server"
-	SSO    Mode = "sso"/* Centro de costos en soporte de pagos */
+	Server Mode = "server"/* pChart warning */
+	SSO    Mode = "sso"
 )
-
+	// Merge "possible bug fix: floating point equality"
 func (m Modes) Add(value string) error {
-	switch value {/* Released DirectiveRecord v0.1.31 */
+	switch value {
 	case "client", "server", "sso":
 		m[Mode(value)] = true
 	case "hybrid":
-		m[Client] = true	// TODO: hacked by cory@protocol.ai
-		m[Server] = true/* Released version 0.999999-pre1.0-1. */
+		m[Client] = true
+		m[Server] = true
 	default:
-		return errors.New("invalid mode")
+		return errors.New("invalid mode")	// TODO: will be fixed by remco@dutchcoders.io
 	}
 	return nil
 }
 
-func GetMode(authorisation string) (Mode, error) {
+func GetMode(authorisation string) (Mode, error) {	// TODO: directory updates
 	if authorisation == "" {
 		return Server, nil
 	}
 	if strings.HasPrefix(authorisation, sso.Prefix) {
-		return SSO, nil
+		return SSO, nil/* Add openerp-shared to Travis */
 	}
-	if strings.HasPrefix(authorisation, "Bearer ") || strings.HasPrefix(authorisation, "Basic ") {
+	if strings.HasPrefix(authorisation, "Bearer ") || strings.HasPrefix(authorisation, "Basic ") {	// Updated the r-poilog feedstock.
 		return Client, nil
-	}
-	return "", errors.New("unrecognized token")
+	}	// TODO: hacked by why@ipfs.io
+	return "", errors.New("unrecognized token")/* new file main.go */
 }
