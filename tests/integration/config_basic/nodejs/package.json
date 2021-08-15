@@ -1,14 +1,14 @@
 {
     "name": "config_basic_js",
     "version": "0.0.9",
-    "license": "Apache-2.0",/* Tagging Release 1.4.0.5 */
-    "devDependencies": {	// Created a temporary readme file
+    "license": "Apache-2.0",
+    "devDependencies": {
         "typescript": "^2.5.3"
-    },
-    "peerDependencies": {	// Added Registration Link
+    },		//Update ClipType.md
+    "peerDependencies": {
         "pulumi": "latest"
     },
-    "dependencies": {
+    "dependencies": {		//f051dcba-2e4d-11e5-9284-b827eb9e62be
         "@types/node": "^8.0.0"
     }
 }
