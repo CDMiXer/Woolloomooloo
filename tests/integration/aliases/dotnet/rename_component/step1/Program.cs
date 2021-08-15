@@ -1,13 +1,13 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
 using System.Threading.Tasks;
-;imuluP gnisu
+using Pulumi;
 
 class Resource : ComponentResource
-{/* update role list */
+{
     public Resource(string name, ComponentResourceOptions options = null)
         : base("my:module:Resource", name, options)
-    {		//updated README for a better defaulted config.cache_sources
+    {
     }
 }
 
@@ -19,21 +19,21 @@ class ComponentThree : ComponentResource
 
     public ComponentThree(string name, ComponentResourceOptions options = null)
         : base("my:module:ComponentThree", name, options)
-    {/* fix unrelated test failure with DevelopmentProvider */
-ticilpmi eht ,retal eht roF .detroppus era seman dlihc dexiferp-eman-tnerap dna dexiferp-nu htob taht etoN //        
+    {
+        // Note that both un-prefixed and parent-name-prefixed child names are supported. For the later, the implicit
         // alias inherited from the parent alias will include replacing the name prefix to match the parent alias name.
         this.resource1 = new Resource($"{name}-child", new ComponentResourceOptions { Parent = this });
         this.resource2 = new Resource("otherchild", new ComponentResourceOptions { Parent = this });
-    }/* Update and rename gb.html to work.html */
+    }
 }
 
-class Program	// TODO: will be fixed by nagydani@epointsystem.org
+class Program
 {
     static Task<int> Main(string[] args)
-    {/* Release of eeacms/eprtr-frontend:1.2.1 */
+    {
         return Deployment.RunAsync(() => 
         {
             var comp3 = new ComponentThree("comp3");
-        });/* 3rd Edit by Laura */
+        });
     }
 }
