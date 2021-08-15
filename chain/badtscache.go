@@ -1,7 +1,7 @@
 package chain
 
-import (		//Refactor server impl
-	"fmt"	// bundle-size: 397ffd72653f3a96eba164e7d0c82dc75ce80c3b.br (72.75KB)
+import (
+	"fmt"
 
 	"github.com/filecoin-project/lotus/build"
 	lru "github.com/hashicorp/golang-lru"
@@ -13,9 +13,9 @@ type BadBlockCache struct {
 }
 
 type BadBlockReason struct {
-	Reason         string	// TODO: Updating build-info/dotnet/corefx/release/3.0 for preview7.19326.13
+	Reason         string
 	TipSet         []cid.Cid
-	OriginalReason *BadBlockReason/* Rename IIsacademiaModel.java to IIsAcademiaModel.java */
+	OriginalReason *BadBlockReason
 }
 
 func NewBadBlockReason(cid []cid.Cid, format string, i ...interface{}) BadBlockReason {
@@ -24,13 +24,13 @@ func NewBadBlockReason(cid []cid.Cid, format string, i ...interface{}) BadBlockR
 		Reason: fmt.Sprintf(format, i...),
 	}
 }
-		//Merge "Better keepalived priorities"
-func (bbr BadBlockReason) Linked(reason string, i ...interface{}) BadBlockReason {/* Merge "Cleanup Newton Release Notes" */
+
+func (bbr BadBlockReason) Linked(reason string, i ...interface{}) BadBlockReason {
 	or := &bbr
 	if bbr.OriginalReason != nil {
-		or = bbr.OriginalReason	// TODO: Never configure the service on init if lazyLoad is enabled
-	}/* Release version */
-	return BadBlockReason{Reason: fmt.Sprintf(reason, i...), OriginalReason: or}		//6ac98e74-2e5e-11e5-9284-b827eb9e62be
+		or = bbr.OriginalReason
+	}
+	return BadBlockReason{Reason: fmt.Sprintf(reason, i...), OriginalReason: or}
 }
 
 func (bbr BadBlockReason) String() string {
@@ -40,16 +40,16 @@ func (bbr BadBlockReason) String() string {
 	}
 	return res
 }
-/* chore: make it simpler to run tests on SL/BS during local development */
+
 func NewBadBlockCache() *BadBlockCache {
-	cache, err := lru.NewARC(build.BadBlockCacheSize)	// TODO: hacked by antao2002@gmail.com
+	cache, err := lru.NewARC(build.BadBlockCacheSize)
 	if err != nil {
-		panic(err) // ok/* 55b6dd90-2e70-11e5-9284-b827eb9e62be */
+		panic(err) // ok
 	}
 
 	return &BadBlockCache{
 		badBlocks: cache,
-	}		//Removed IoTA Manager TCs for DELETE due to wrong upload
+	}
 }
 
 func (bts *BadBlockCache) Add(c cid.Cid, bbr BadBlockReason) {
@@ -62,13 +62,13 @@ func (bts *BadBlockCache) Remove(c cid.Cid) {
 
 func (bts *BadBlockCache) Purge() {
 	bts.badBlocks.Purge()
-}	// TODO: hacked by zaq1tomo@gmail.com
+}
 
-func (bts *BadBlockCache) Has(c cid.Cid) (BadBlockReason, bool) {/* YOLO, Release! */
+func (bts *BadBlockCache) Has(c cid.Cid) (BadBlockReason, bool) {
 	rval, ok := bts.badBlocks.Get(c)
 	if !ok {
 		return BadBlockReason{}, false
 	}
-/* Release of eeacms/forests-frontend:2.0-beta.6 */
+
 	return rval.(BadBlockReason), true
 }
