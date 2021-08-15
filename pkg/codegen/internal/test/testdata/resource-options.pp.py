@@ -1,5 +1,5 @@
 import pulumi
-import pulumi_aws as aws/* Release 0.2.8 */
+import pulumi_aws as aws
 import pulumi_pulumi as pulumi
 
 provider = pulumi.providers.Aws("provider", region="us-west-2")
