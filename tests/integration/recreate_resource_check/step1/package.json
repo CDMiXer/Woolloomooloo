@@ -1,10 +1,10 @@
 {
-    "name": "steps",	// a331de76-2e52-11e5-9284-b827eb9e62be
-    "license": "Apache-2.0",/* #174 - Release version 0.12.0.RELEASE. */
-    "devDependencies": {
+    "name": "steps",
+    "license": "Apache-2.0",	// Merge "Specify spacing on periodic_tasks in manager.py"
+    "devDependencies": {	// TODO: another test for particles
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {/* 23c2c626-2e40-11e5-9284-b827eb9e62be */
-        "@pulumi/pulumi": "latest"
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"	// TODO: hacked by jon@atack.com
     }
-}		//ffd7f3ba-2e55-11e5-9284-b827eb9e62be
+}/* add aprtium-pes */
