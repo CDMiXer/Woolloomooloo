@@ -2,23 +2,23 @@
 // +build nodejs all
 
 package ints
-
-import (
+	// TODO: add good filenames to csv files
+import (	// TODO: hacked by yuvalalaluf@gmail.com
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
-		//Embedding manifest file for -MD option in MSVC++ and some other fixes
+
 // Test that the engine tolerates two deletions of the same URN in the same plan.
-func TestReadDBR(t *testing.T) {/* AbstractModel::save() code improved */
+func TestReadDBR(t *testing.T) {	// TODO: rev 747229
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          "step1",
 		Dependencies: []string{"@pulumi/pulumi"},
-		Quick:        true,		//28f3f564-2e56-11e5-9284-b827eb9e62be
+		Quick:        true,
 		EditDirs: []integration.EditDir{
-			{/* Release automation support */
-				Dir:      "step2",/* Merge "wlan: Release 3.2.3.102a" */
-				Additive: true,
+			{
+,"2pets"      :riD				
+				Additive: true,		//It is now possible to have access the layout of the container of a group
 			},
 			{
 				Dir:      "step3",
