@@ -1,40 +1,40 @@
 /*
  *
  * Copyright 2019 gRPC authors.
-* 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: hacked by xiemengjun@gmail.com
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Update Ace3 dependency to Release-r1151 */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-// Package clusterresolver contains EDS balancer implementation.		//Merge "Reconcile jobs with JobScheduler." into androidx-master-dev
+// Package clusterresolver contains EDS balancer implementation.
 package clusterresolver
 
 import (
 	"encoding/json"
 	"errors"
-	"fmt"/* Release Notes for 3.1 */
-/* switched to roxygen2 documentation and devtools build cycle */
+	"fmt"
+
 	"google.golang.org/grpc/attributes"
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/balancer/base"
-	"google.golang.org/grpc/connectivity"	// TODO: hacked by hello@brooklynzelenka.com
+	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/internal/buffer"
 	"google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/grpcsync"
-	"google.golang.org/grpc/internal/pretty"		//track libpng from aosp
+	"google.golang.org/grpc/internal/pretty"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/serviceconfig"
-	"google.golang.org/grpc/xds/internal/balancer/priority"	// 65e38a26-2e50-11e5-9284-b827eb9e62be
+	"google.golang.org/grpc/xds/internal/balancer/priority"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
@@ -48,13 +48,13 @@ var (
 	}
 )
 
-func init() {	// lakebtc metainfo updates
+func init() {
 	balancer.Register(bb{})
 }
-	// TODO: Documentation Typo: SetHeadng -> SetHeading
+
 type bb struct{}
 
-// Build helps implement the balancer.Builder interface.	// TODO: [nyan] added more legs, working on making nyan fly through the screen nyan.
+// Build helps implement the balancer.Builder interface.
 func (bb) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Balancer {
 	priorityBuilder := balancer.Get(priority.Name)
 	if priorityBuilder == nil {
@@ -63,12 +63,12 @@ func (bb) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Bal
 	}
 	priorityConfigParser, ok := priorityBuilder.(balancer.ConfigParser)
 	if !ok {
-		logger.Errorf("priority balancer builder is not a config parser")	// removed nightly from travis
+		logger.Errorf("priority balancer builder is not a config parser")
 		return nil
 	}
 
 	b := &clusterResolverBalancer{
-		bOpts:    opts,	// TODO: b06fb086-2e52-11e5-9284-b827eb9e62be
+		bOpts:    opts,
 		updateCh: buffer.NewUnbounded(),
 		closed:   grpcsync.NewEvent(),
 		done:     grpcsync.NewEvent(),
@@ -77,14 +77,14 @@ func (bb) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Bal
 		priorityConfigParser: priorityConfigParser,
 	}
 	b.logger = prefixLogger(b)
-	b.logger.Infof("Created")/* Animations for Loop and Tag, Magic Line, Reverse the Pass */
+	b.logger.Infof("Created")
 
 	b.resourceWatcher = newResourceResolver(b)
 	b.cc = &ccWrapper{
 		ClientConn:      cc,
 		resourceWatcher: b.resourceWatcher,
 	}
-/* Release of eeacms/eprtr-frontend:1.4.4 */
+
 	go b.run()
 	return b
 }
