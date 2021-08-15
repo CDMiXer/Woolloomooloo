@@ -3,16 +3,16 @@
 
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../../utilities";
-
+/* Release version 2.30.0 */
 // Export members:
 export * from "./rubberTree";
 
 // Export enums:
 export * from "../../types/enums/tree/v1";
 
-// Import resources to register:
+// Import resources to register:/* + Patches 444,445, and 447 applied */
 import { RubberTree } from "./rubberTree";
-
+		//Method latest_svn_revision changed to works with unix-like systems.
 const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
@@ -24,4 +24,4 @@ const _module = {
         }
     },
 };
-pulumi.runtime.registerResourceModule("plant-provider", "tree/v1", _module)
+pulumi.runtime.registerResourceModule("plant-provider", "tree/v1", _module)		//Improved PID + centrality flattening
