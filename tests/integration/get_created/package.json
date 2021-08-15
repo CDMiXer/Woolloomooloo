@@ -1,15 +1,15 @@
-{	// TODO: Delete 914659.pdf
+{
     "name": "stack_project_name",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",/* Split MAST/DATA field collection from main table. */
-    "scripts": {/* fixed restoring of fits from file */
+    "typings": "bin/index.d.ts",
+    "scripts": {
         "build": "tsc"
     },
-    "devDependencies": {	// updated mmu main
+    "devDependencies": {
         "typescript": "^3.0.0"
-    },		//Update doc/CONFIGURATION
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}	// TODO: hacked by fjl@ethereum.org
+}
