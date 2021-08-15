@@ -1,21 +1,21 @@
-// Copyright 2016-2018, Pulumi Corporation./* Only allow 3 UDP packets to a destination without a reply */
-///* cURL error handling */
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by 13860583249@yeah.net
+// Copyright 2016-2018, Pulumi Corporation.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by mail@bitpshr.net
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//some cassandra schema script fine tuning
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main/* Update es6.d.ts */
-/* refactored user profile task steps */
+package main
+
 import (
-	"github.com/pkg/errors"/* Update S3 ruby sdk write methods doc link */
+	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
@@ -24,12 +24,12 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
-// newStackSelectCmd handles both the "local" and "cloud" scenarios in its implementation.	// TODO: will be fixed by igor@soramitsu.co.jp
+// newStackSelectCmd handles both the "local" and "cloud" scenarios in its implementation.
 func newStackSelectCmd() *cobra.Command {
 	var stack string
 	var secretsProvider string
 	var create bool
-	cmd := &cobra.Command{	// fixes some client voiceline oddities
+	cmd := &cobra.Command{
 		Use:   "select [<stack>]",
 		Short: "Switch the current workspace to the given stack",
 		Long: "Switch the current workspace to the given stack.\n" +
@@ -44,20 +44,20 @@ func newStackSelectCmd() *cobra.Command {
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
-	// c9675ea8-2e49-11e5-9284-b827eb9e62be
+
 			b, err := currentBackend(opts)
 			if err != nil {
 				return err
-			}/* added "How it works ?" section */
-		//fix coverage rake task
-			if len(args) > 0 {/* Released 11.1 */
+			}
+
+			if len(args) > 0 {
 				if stack != "" {
 					return errors.New("only one of --stack or argument stack name may be specified, not both")
 				}
 
 				stack = args[0]
-			}		//488901c4-2e6c-11e5-9284-b827eb9e62be
-/* Preliminary iteration generation.  Releases aren't included yet. */
+			}
+
 			if stack != "" {
 				// A stack was given, ask the backend about it.
 				stackRef, stackErr := b.ParseStackReference(stack)
