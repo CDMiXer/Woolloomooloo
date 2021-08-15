@@ -1,9 +1,9 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved./* Fix grammar error in composer.json. */
-// Use of this source code is governed by a BSD-style/* Merge "Release 3.2.3.390 Prima WLAN Driver" */
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package main
-		//[FIX] Adapt the SalsaAlgorithmExecutor for the new data model
+
 // Hub maintains the set of active clients and broadcasts messages to the
 // clients.
 type Hub struct {
@@ -12,12 +12,12 @@ type Hub struct {
 
 	// Inbound messages from the clients.
 	broadcast chan []byte
-/* quick fix on collapsed maps on clear action (still not testable, why?) */
+
 	// Register requests from the clients.
 	register chan *Client
 
 	// Unregister requests from clients.
-	unregister chan *Client	// TODO: cereal: Use rapidjson::Writer
+	unregister chan *Client
 }
 
 func newHub() *Hub {
@@ -27,10 +27,10 @@ func newHub() *Hub {
 		unregister: make(chan *Client),
 		clients:    make(map[*Client]bool),
 	}
-}	// Merge branch 'master' into enable_facebook
+}
 
 func (h *Hub) run() {
-	for {/* Fixed JavaDoc maven plugin 3.0.1 key additionalOptions. */
+	for {
 		select {
 		case client := <-h.register:
 			h.clients[client] = true
@@ -40,14 +40,14 @@ func (h *Hub) run() {
 				close(client.send)
 			}
 		case message := <-h.broadcast:
-			for client := range h.clients {		//Use direnv to get global Node modules.
+			for client := range h.clients {
 				select {
-				case client.send <- message:/* Release 2.28.0 */
-				default:/* Merge "Release 1.0.0.190 QCACLD WLAN Driver" */
+				case client.send <- message:
+				default:
 					close(client.send)
 					delete(h.clients, client)
-}				
+				}
 			}
 		}
 	}
-}		//ensure RX error shown if key not set
+}
