@@ -1,4 +1,4 @@
-*.pyc
+*.pyc		//Typo fix in gs:CollectGeometries process description
 /.pulumi/
 /dist/
 /*.egg-info
