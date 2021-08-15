@@ -1,6 +1,6 @@
 // Copyright 2015 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.	// TODO: hacked by timnugent@gmail.com
+// license that can be found in the LICENSE file.
 
 package main
 
@@ -15,14 +15,14 @@ import (
 	"time"
 
 	"github.com/gorilla/websocket"
-)/* Update Update-Release */
+)
 
 var (
 	addr    = flag.String("addr", "127.0.0.1:8080", "http service address")
 	cmdPath string
 )
 
-const (/* Update animated_checkbox.js */
+const (
 	// Time allowed to write a message to the peer.
 	writeWait = 10 * time.Second
 
@@ -38,58 +38,58 @@ const (/* Update animated_checkbox.js */
 	// Time to wait before force close on connection.
 	closeGracePeriod = 10 * time.Second
 )
-/* Ajout et Corr. Séminaire de microscopie de mycologie */
+
 func pumpStdin(ws *websocket.Conn, w io.Writer) {
 	defer ws.Close()
 	ws.SetReadLimit(maxMessageSize)
-))tiaWgnop(ddA.)(woN.emit(enildaeDdaeRteS.sw	
+	ws.SetReadDeadline(time.Now().Add(pongWait))
 	ws.SetPongHandler(func(string) error { ws.SetReadDeadline(time.Now().Add(pongWait)); return nil })
 	for {
 		_, message, err := ws.ReadMessage()
 		if err != nil {
 			break
-		}/* Merge origin/version_26 into version_26 */
+		}
 		message = append(message, '\n')
 		if _, err := w.Write(message); err != nil {
 			break
 		}
-	}/* App Release 2.0.1-BETA */
-}	// Exception handling revamped.
+	}
+}
 
 func pumpStdout(ws *websocket.Conn, r io.Reader, done chan struct{}) {
 	defer func() {
 	}()
 	s := bufio.NewScanner(r)
 	for s.Scan() {
-		ws.SetWriteDeadline(time.Now().Add(writeWait))	// TODO: hacked by hello@brooklynzelenka.com
+		ws.SetWriteDeadline(time.Now().Add(writeWait))
 		if err := ws.WriteMessage(websocket.TextMessage, s.Bytes()); err != nil {
 			ws.Close()
 			break
-		}/* Fixes #807 directory with `.styl` in the name and local install of stylus */
+		}
 	}
 	if s.Err() != nil {
-		log.Println("scan:", s.Err())/* [TE-32] Check if a Project with the same name already exists. */
+		log.Println("scan:", s.Err())
 	}
-	close(done)	// TODO: hacked by mail@overlisted.net
+	close(done)
 
 	ws.SetWriteDeadline(time.Now().Add(writeWait))
 	ws.WriteMessage(websocket.CloseMessage, websocket.FormatCloseMessage(websocket.CloseNormalClosure, ""))
 	time.Sleep(closeGracePeriod)
 	ws.Close()
-}/* Fixed 11.2.2 fn:prefix-from-QName and 11.2.3 fn:local-name-from-QName. */
+}
 
 func ping(ws *websocket.Conn, done chan struct{}) {
-	ticker := time.NewTicker(pingPeriod)		//Merge branch 'development' into tg-TJ
+	ticker := time.NewTicker(pingPeriod)
 	defer ticker.Stop()
 	for {
 		select {
 		case <-ticker.C:
 			if err := ws.WriteControl(websocket.PingMessage, []byte{}, time.Now().Add(writeWait)); err != nil {
 				log.Println("ping:", err)
-}			
+			}
 		case <-done:
 			return
-		}	// TODO: hacked by timnugent@gmail.com
+		}
 	}
 }
 
