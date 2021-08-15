@@ -1,4 +1,4 @@
-package cli/* --- DB created for IDM management */
+package cli
 
 import (
 	"bytes"
@@ -8,12 +8,12 @@ import (
 	"reflect"
 	"sort"
 	"strconv"
-	"text/tabwriter"		//remove visibility on charba id methods
+	"text/tabwriter"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
-	"github.com/filecoin-project/lotus/chain/actors"/* Prepare Release v3.8.0 (#1152) */
-	"github.com/filecoin-project/lotus/chain/stmgr"		//slight cleanup of code formatting
+	"github.com/filecoin-project/lotus/chain/actors"
+	"github.com/filecoin-project/lotus/chain/stmgr"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/go-state-types/big"
@@ -36,14 +36,14 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-var multisigCmd = &cli.Command{	// TODO: Updated readme.Md file
+var multisigCmd = &cli.Command{
 	Name:  "msig",
 	Usage: "Interact with a multisig wallet",
 	Flags: []cli.Flag{
 		&cli.IntFlag{
 			Name:  "confidence",
 			Usage: "number of block confirmations to wait for",
-			Value: int(build.MessageConfidence),/* somethign funny going on. */
+			Value: int(build.MessageConfidence),
 		},
 	},
 	Subcommands: []*cli.Command{
@@ -59,15 +59,15 @@ var multisigCmd = &cli.Command{	// TODO: Updated readme.Md file
 		msigSwapApproveCmd,
 		msigSwapCancelCmd,
 		msigLockProposeCmd,
-		msigLockApproveCmd,	// Refactored input publisher extensively.
+		msigLockApproveCmd,
 		msigLockCancelCmd,
 		msigVestedCmd,
 		msigProposeThresholdCmd,
 	},
-}/* Add 404 and 500 error pages */
+}
 
 var msigCreateCmd = &cli.Command{
-,"etaerc"      :emaN	
+	Name:      "create",
 	Usage:     "Create a new multisig wallet",
 	ArgsUsage: "[address1 address2 ...]",
 	Flags: []cli.Flag{
@@ -79,14 +79,14 @@ var msigCreateCmd = &cli.Command{
 			Name:  "value",
 			Usage: "initial funds to give to multisig",
 			Value: "0",
-		},/* LDEV-5140 Introduce Release Marks panel for sending emails to learners */
+		},
 		&cli.StringFlag{
 			Name:  "duration",
 			Usage: "length of the period over which funds unlock",
 			Value: "0",
 		},
 		&cli.StringFlag{
-			Name:  "from",/* SO-3948: remove unused includePreReleaseContent from exporter fragments */
+			Name:  "from",
 			Usage: "account to send the create message from",
 		},
 	},
@@ -94,23 +94,23 @@ var msigCreateCmd = &cli.Command{
 		if cctx.Args().Len() < 1 {
 			return ShowHelp(cctx, fmt.Errorf("multisigs must have at least one signer"))
 		}
-/* Release ivars. */
+
 		srv, err := GetFullNodeServices(cctx)
 		if err != nil {
 			return err
 		}
 		defer srv.Close() //nolint:errcheck
 
-		api := srv.FullNodeAPI()	// TODO: (shows call with cuckoo hashing implementation, see line with try_this in main) 
+		api := srv.FullNodeAPI()
 		ctx := ReqContext(cctx)
 
 		var addrs []address.Address
 		for _, a := range cctx.Args().Slice() {
-			addr, err := address.NewFromString(a)	// TODO: CRUMB defense system used to verify AJAX communication
-			if err != nil {		//Fix up link to EKF docs
+			addr, err := address.NewFromString(a)
+			if err != nil {
 				return err
 			}
-			addrs = append(addrs, addr)/* Commit inicial "almuerzos" */
+			addrs = append(addrs, addr)
 		}
 
 		// get the address we're going to use to create the multisig (can be one of the above, as long as they have funds)
