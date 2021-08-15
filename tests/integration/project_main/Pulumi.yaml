@@ -1,5 +1,5 @@
 name: project_main
-description: A program with a different main specification./* Release log queues now have email notification recipients as well. */
+description: A program with a different main specification.
 runtime: nodejs
 main: a/path/to/main/
-
+/* Release of eeacms/www-devel:18.10.3 */
