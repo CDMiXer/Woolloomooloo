@@ -1,12 +1,12 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">	// TODO: 452a3396-2e70-11e5-9284-b827eb9e62be
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
+  <PropertyGroup>		//fixed test cases with braces
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>		//Updated the entwine feedstock.
+    <TargetFramework>netcoreapp3.1</TargetFramework>/* [Cleanup] Remove CConnman::Copy(Release)NodeVector, now unused */
+  </PropertyGroup>	// TODO: Fixed UniGitData being created in constructors
 
-  <PropertyGroup>
+  <PropertyGroup>	// Delete pandalocker.min.js
     <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>
-  </PropertyGroup>/* Make all links pink, except headlines! */
+  </PropertyGroup>
 
-</Project>
+</Project>		//Added trailing semicolon to shim module definition
