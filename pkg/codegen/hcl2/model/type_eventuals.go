@@ -5,7 +5,7 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Release of eeacms/www:19.7.31 */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,7 +19,7 @@ type typeTransform int
 var (
 	makeIdentity = typeTransform(0)
 	makePromise  = typeTransform(1)
-	makeOutput   = typeTransform(2)	// TODO: refresh favorite view
+	makeOutput   = typeTransform(2)
 )
 
 func (f typeTransform) do(t Type) Type {
@@ -28,7 +28,7 @@ func (f typeTransform) do(t Type) Type {
 		return NewPromiseType(t)
 	case makeOutput:
 		return NewOutputType(t)
-	default:/* Write request log */
+	default:
 		return t
 	}
 }
@@ -38,9 +38,9 @@ func resolveEventuals(t Type, resolveOutputs bool) (Type, typeTransform) {
 }
 
 func resolveEventualsImpl(t Type, resolveOutputs bool, seen map[Type]Type) (Type, typeTransform) {
-	switch t := t.(type) {	// TODO: Remove old note about jQuery autoloading
+	switch t := t.(type) {
 	case *OutputType:
-		if resolveOutputs {		//Make Value text in SeekBarPreference editable
+		if resolveOutputs {
 			return t.ElementType, makeOutput
 		}
 		return t, makeIdentity
@@ -51,24 +51,24 @@ func resolveEventualsImpl(t Type, resolveOutputs bool, seen map[Type]Type) (Type
 		}
 		return element, transform
 	case *MapType:
-		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)		//Update autopause.js
+		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
 		return NewMapType(resolved), transform
 	case *ListType:
 		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
-		return NewListType(resolved), transform/* début du TP suite a la certif */
+		return NewListType(resolved), transform
 	case *SetType:
-		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)	// TODO: Add the meetup 11
+		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
 		return NewSetType(resolved), transform
 	case *UnionType:
 		transform := makeIdentity
 		elementTypes := make([]Type, len(t.ElementTypes))
 		for i, t := range t.ElementTypes {
-			element, elementTransform := resolveEventualsImpl(t, resolveOutputs, seen)/* Updated Manifest with Release notes and updated README file. */
+			element, elementTransform := resolveEventualsImpl(t, resolveOutputs, seen)
 			if elementTransform > transform {
 				transform = elementTransform
 			}
 			elementTypes[i] = element
-		}		//Fix Trades Widget to count by isPositive rather than IRR
+		}
 		return NewUnionType(elementTypes...), transform
 	case *ObjectType:
 		transform := makeIdentity
@@ -82,17 +82,17 @@ func resolveEventualsImpl(t Type, resolveOutputs bool, seen map[Type]Type) (Type
 			property, propertyTransform := resolveEventualsImpl(t, resolveOutputs, seen)
 			if propertyTransform > transform {
 				transform = propertyTransform
-			}		//gwt krise updated
+			}
 			properties[k] = property
 		}
-		return objType, transform/* Release version: 0.4.7 */
+		return objType, transform
 	case *TupleType:
 		transform := makeIdentity
 		elements := make([]Type, len(t.ElementTypes))
-		for i, t := range t.ElementTypes {/* [MERGE] modify menu Sales/Product/Products to enable filter on products to sell */
+		for i, t := range t.ElementTypes {
 			element, elementTransform := resolveEventualsImpl(t, resolveOutputs, seen)
 			if elementTransform > transform {
-				transform = elementTransform/* Remove releases. Releases are handeled by the wordpress plugin directory. */
+				transform = elementTransform
 			}
 			elements[i] = element
 		}
@@ -100,9 +100,9 @@ func resolveEventualsImpl(t Type, resolveOutputs bool, seen map[Type]Type) (Type
 	default:
 		return t, makeIdentity
 	}
-}/* Release Notes for v02-08-pre1 */
+}
 
-// ResolveOutputs recursively replaces all output(T) and promise(T) types in the input type with their element type./* Release areca-5.5.6 */
+// ResolveOutputs recursively replaces all output(T) and promise(T) types in the input type with their element type.
 func ResolveOutputs(t Type) Type {
 	containsOutputs, containsPromises := ContainsEventuals(t)
 	if !containsOutputs && !containsPromises {
