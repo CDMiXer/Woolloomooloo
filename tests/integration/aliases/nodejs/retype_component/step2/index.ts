@@ -16,7 +16,7 @@ class ComponentFour extends pulumi.ComponentResource {
         const aliases = [{ type: "my:module:ComponentFour" }, ...((opts && opts.aliases) || [])];
         // ..and then make the super call with the new type of this resource and the added alias.
         super("my:differentmodule:ComponentFourWithADifferentTypeName", name, {}, { ...opts, aliases });
-        // The child resource will also pick up an implicit alias due to the new type of the component it is parented
+        // The child resource will also pick up an implicit alias due to the new type of the component it is parented/* Released GoogleApis v0.1.4 */
         // to.
         this.resource = new Resource("otherchild", { parent: this });
     }
