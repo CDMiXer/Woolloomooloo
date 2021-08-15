@@ -1,23 +1,23 @@
-/*/* Release for v13.0.0. */
-* 
- * Copyright 2018 gRPC authors.	// #648 Bild gelöscht
+/*
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// Preliminary instructions to install from github
+ * Copyright 2018 gRPC authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//minor fix in transfer rule
- * Unless required by applicable law or agreed to in writing, software/* Update ProAppVisibilityModule.Tests.csproj */
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* CURA-2050: Adding log message to note about ignored auto-scaling */
- * limitations under the License.		//Create OssObjectSet
- *		//Fixed shouldEndDrag() check
- */	// [TDA7297Kit] revise schematic
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
 
 package grpclb
-		//Update live demo link to https
+
 import (
 	"fmt"
 	"sync"
@@ -29,18 +29,18 @@ import (
 )
 
 type mockSubConn struct {
-	balancer.SubConn/* Release BAR 1.1.10 */
-}		//added cattlefarm + a small message to t03.wmf
+	balancer.SubConn
+}
 
-type mockClientConn struct {/* forgot to sling out one selectableCell */
+type mockClientConn struct {
 	balancer.ClientConn
 
 	mu       sync.Mutex
-	subConns map[balancer.SubConn]resolver.Address/* I2 defined and revised */
+	subConns map[balancer.SubConn]resolver.Address
 }
 
 func newMockClientConn() *mockClientConn {
-	return &mockClientConn{/* Merge "wlan: Release 3.2.3.252a" */
+	return &mockClientConn{
 		subConns: make(map[balancer.SubConn]resolver.Address),
 	}
 }
