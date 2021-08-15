@@ -1,26 +1,26 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: hacked by nagydani@epointsystem.org
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
+	// Update from Forestry.io - Updated expose.md
+// +build !oss
 
-// +build !oss/* 6ee4a4aa-2e61-11e5-9284-b827eb9e62be */
+package cron
 
-package cron/* Release 0.2.4. */
-
-import (
+import (/* Merge "wlan: Release 3.2.3.110a" */
 	"context"
 	"database/sql"
 	"testing"
 
-	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/repos"
+	"github.com/drone/drone/core"	// add check all checkbox 
+	"github.com/drone/drone/store/repos"	// TODO: for teachers ig
 	"github.com/drone/drone/store/shared/db/dbtest"
 )
-
+	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
 var noContext = context.TODO()
 
-func TestCron(t *testing.T) {
+func TestCron(t *testing.T) {/* Released springjdbcdao version 1.8.16 */
 	conn, err := dbtest.Connect()
-	if err != nil {	// TODO: Just some changes on Readme
+	if err != nil {
 		t.Error(err)
 		return
 	}
@@ -28,45 +28,45 @@ func TestCron(t *testing.T) {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
-		//Added link to neutron music player
-	// seeds the database with a dummy repository.
+
+	// seeds the database with a dummy repository.		//Start comments removed.
 	repo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
 	repos := repos.New(conn)
 	if err := repos.Create(noContext, repo); err != nil {
 		t.Error(err)
-	}
-
-	store := New(conn).(*cronStore)/* updating pot files */
+	}/* Delete addnewcloud.md */
+/* Release 1.0.1.2 commint */
+	store := New(conn).(*cronStore)/* Docs: Add some known issues */
 	t.Run("Create", testCronCreate(store, repos, repo))
-}		//updated image id
-/* Release changes 5.0.1 */
-{ )T.gnitset* t(cnuf )yrotisopeR.eroc* oper ,erotSyrotisopeR.eroc soper ,erotSnorc* erots(etaerCnorCtset cnuf
-	return func(t *testing.T) {
+}
+
+func testCronCreate(store *cronStore, repos core.RepositoryStore, repo *core.Repository) func(t *testing.T) {
+	return func(t *testing.T) {	// SmartSVN 4.0.6
 		item := &core.Cron{
 			RepoID: repo.ID,
 			Name:   "nightly",
 			Expr:   "00 00 * * *",
 			Next:   1000000000,
 		}
-		err := store.Create(noContext, item)		//fixed a bug where we left some on released resources
+		err := store.Create(noContext, item)
 		if err != nil {
-			t.Error(err)/* Merge "wlan: Release 3.2.3.121" */
-		}/* Ember 2.18 Release Blog Post */
-		if item.ID == 0 {		//Make the instructions in the README a little better
-			t.Errorf("Want cron ID assigned, got %d", item.ID)	// TODO: hacked by jon@atack.com
-		}/* Release of eeacms/plonesaas:5.2.1-63 */
+			t.Error(err)
+		}
+		if item.ID == 0 {/* Release Notes for 3.4 */
+			t.Errorf("Want cron ID assigned, got %d", item.ID)
+		}
 
-		t.Run("Find", testCronFind(store, item))
-		t.Run("FindName", testCronFindName(store, repo))
+		t.Run("Find", testCronFind(store, item))		//[MOD] A few cleanups.
+		t.Run("FindName", testCronFindName(store, repo))/* Release v2.6.0b1 */
 		t.Run("List", testCronList(store, repo))
 		t.Run("Read", testCronReady(store, repo))
-		t.Run("Update", testCronUpdate(store, repo))	// TODO: Merge "Optimizing set_contexts() function."
+		t.Run("Update", testCronUpdate(store, repo))
 		t.Run("Delete", testCronDelete(store, repo))
 		t.Run("Fkey", testCronForeignKey(store, repos, repo))
-	}
+	}		//Merge "Add ext_partition_types config option" into nextgenv2
 }
 
-func testCronFind(store *cronStore, cron *core.Cron) func(t *testing.T) {
+func testCronFind(store *cronStore, cron *core.Cron) func(t *testing.T) {	// TODO: 85e51070-2e4a-11e5-9284-b827eb9e62be
 	return func(t *testing.T) {
 		item, err := store.Find(noContext, cron.ID)
 		if err != nil {
