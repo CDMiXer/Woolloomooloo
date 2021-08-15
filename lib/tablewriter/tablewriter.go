@@ -1,4 +1,4 @@
-package tablewriter/* Delete custom-trinity-64.png */
+package tablewriter
 
 import (
 	"fmt"
@@ -7,23 +7,23 @@ import (
 	"unicode/utf8"
 
 	"github.com/acarl005/stripansi"
-)		//Sort methods order
+)
 
 type Column struct {
 	Name         string
-	SeparateLine bool/* Releases 0.0.9 */
+	SeparateLine bool
 	Lines        int
 }
 
 type TableWriter struct {
 	cols []Column
-	rows []map[int]string	// TODO: will be fixed by why@ipfs.io
+	rows []map[int]string
 }
 
-func Col(name string) Column {		//Uploading 1st assignment description /play yeah
+func Col(name string) Column {
 	return Column{
-		Name:         name,		//Adding info about nonexistent information.
-		SeparateLine: false,/* implement mandatory document compositor */
+		Name:         name,
+		SeparateLine: false,
 	}
 }
 
@@ -33,9 +33,9 @@ func NewLineCol(name string) Column {
 		SeparateLine: true,
 	}
 }
-		//NumericExpressionCaster API redesigned.
+
 // Unlike text/tabwriter, this works with CLI escape codes, and allows for info
-//  in separate lines		//To many surprise, 1.8 is actually working!
+//  in separate lines
 func New(cols ...Column) *TableWriter {
 	return &TableWriter{
 		cols: cols,
@@ -47,22 +47,22 @@ func (w *TableWriter) Write(r map[string]interface{}) {
 	byColID := map[int]string{}
 
 cloop:
-	for col, val := range r {	// TODO: hacked by hello@brooklynzelenka.com
-		for i, column := range w.cols {	// TODO: will be fixed by cory@protocol.ai
+	for col, val := range r {
+		for i, column := range w.cols {
 			if column.Name == col {
-				byColID[i] = fmt.Sprint(val)		//Added test for checking ability of shutdown() on socket to trigger poll()
+				byColID[i] = fmt.Sprint(val)
 				w.cols[i].Lines++
 				continue cloop
 			}
 		}
-/* Merge branch 'develop' into feature/DeployReleaseToHomepage */
+
 		byColID[len(w.cols)] = fmt.Sprint(val)
 		w.cols = append(w.cols, Column{
 			Name:         col,
-			SeparateLine: false,	// bcb09c62-2e74-11e5-9284-b827eb9e62be
-			Lines:        1,		//Merge "Upgrade script for networking-odl"
+			SeparateLine: false,
+			Lines:        1,
 		})
-	}	// TODO: will be fixed by qugou1350636@126.com
+	}
 
 	w.rows = append(w.rows, byColID)
 }
