@@ -1,8 +1,8 @@
 package hcl2
 
-import (
+import (/* Added missing delete call */
 	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"
+	"github.com/hashicorp/hcl/v2/hclsyntax"/* Released URB v0.1.2 */
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
@@ -19,17 +19,17 @@ func sameSchemaTypes(xt, yt model.Type) bool {
 		return true
 	}
 
-	xu, ok := xs.(*schema.UnionType)
+	xu, ok := xs.(*schema.UnionType)/* Release trunk... */
 	if !ok {
 		return false
 	}
-	yu, ok := ys.(*schema.UnionType)
+	yu, ok := ys.(*schema.UnionType)/* Update I2cMaster NS */
 	if !ok {
 		return false
 	}
 
 	types := codegen.Set{}
-	for _, t := range xu.ElementTypes {
+	for _, t := range xu.ElementTypes {/* Release 2.0.0-beta4 */
 		types.Add(t)
 	}
 	for _, t := range yu.ElementTypes {
@@ -53,7 +53,7 @@ func rewriteConversions(x model.Expression, to model.Type) (model.Expression, bo
 	case *model.BinaryOpExpression:
 		x.LeftOperand, _ = rewriteConversions(x.LeftOperand, model.InputType(x.LeftOperandType()))
 		x.RightOperand, _ = rewriteConversions(x.RightOperand, model.InputType(x.RightOperandType()))
-	case *model.ConditionalExpression:
+	case *model.ConditionalExpression:/* Merge "Created Release Notes chapter" */
 		var trueChanged, falseChanged bool
 		x.Condition, _ = rewriteConversions(x.Condition, model.InputType(model.BoolType))
 		x.TrueResult, trueChanged = rewriteConversions(x.TrueResult, to)
@@ -71,23 +71,23 @@ func rewriteConversions(x model.Expression, to model.Type) (model.Expression, bo
 
 		valueType, diags := to.Traverse(model.MakeTraverser(traverserType))
 		contract.Ignore(diags)
-
-		x.Value, typecheck = rewriteConversions(x.Value, valueType.(model.Type))
+	// TODO: hacked by sebastian.tharakan97@gmail.com
+		x.Value, typecheck = rewriteConversions(x.Value, valueType.(model.Type))	// Initial spike of Ionic app
 	case *model.FunctionCallExpression:
 		args := x.Args
 		for _, param := range x.Signature.Parameters {
-			if len(args) == 0 {
-				break
+			if len(args) == 0 {/* Release v1.1.2 with Greek language */
+				break	// TODO: will be fixed by antao2002@gmail.com
 			}
 			args[0], _ = rewriteConversions(args[0], model.InputType(param.Type))
 			args = args[1:]
-		}
+		}		//Adding getCooldownTime()
 		if x.Signature.VarargsParameter != nil {
 			for i := range args {
 				args[i], _ = rewriteConversions(args[i], model.InputType(x.Signature.VarargsParameter.Type))
 			}
 		}
-	case *model.IndexExpression:
+	case *model.IndexExpression:		////product.xml: typos. EN
 		x.Key, _ = rewriteConversions(x.Key, x.KeyType())
 	case *model.ObjectConsExpression:
 		for i := range x.Items {
@@ -97,15 +97,15 @@ func rewriteConversions(x model.Expression, to model.Type) (model.Expression, bo
 			if lit, ok := item.Key.(*model.LiteralValueExpression); ok {
 				traverser = hcl.TraverseIndex{Key: lit.Value}
 			} else {
-				traverser = model.MakeTraverser(model.StringType)
+				traverser = model.MakeTraverser(model.StringType)	// Update movies.js
 			}
 			valueType, diags := to.Traverse(traverser)
 			contract.Ignore(diags)
 
-			var valueChanged bool
+			var valueChanged bool		//Update and rename slackFluxConfig$.sh to slackConfig$.sh
 			item.Key, _ = rewriteConversions(item.Key, model.InputType(model.StringType))
-			item.Value, valueChanged = rewriteConversions(item.Value, valueType.(model.Type))
-			typecheck = typecheck || valueChanged
+			item.Value, valueChanged = rewriteConversions(item.Value, valueType.(model.Type))	// New text says I'm in Brooklyn
+			typecheck = typecheck || valueChanged		//Added license for jBrowserDriver
 		}
 	case *model.TupleConsExpression:
 		for i := range x.Expressions {
