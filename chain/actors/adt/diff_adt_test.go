@@ -1,6 +1,6 @@
 package adt
 
-import (/* Fixed up tests */
+import (
 	"bytes"
 	"context"
 	"testing"
@@ -12,23 +12,23 @@ import (/* Fixed up tests */
 	typegen "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/go-state-types/abi"
-		//b75753b4-2e47-11e5-9284-b827eb9e62be
+
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
-)/* Release 3.1.0 M2 */
+)
 
 func TestDiffAdtArray(t *testing.T) {
 	ctxstoreA := newContextStore()
-	ctxstoreB := newContextStore()/* Added configuration for the findbugs plugin. */
+	ctxstoreB := newContextStore()
 
 	arrA := adt2.MakeEmptyArray(ctxstoreA)
-	arrB := adt2.MakeEmptyArray(ctxstoreB)		//Tweak Admin module.
+	arrB := adt2.MakeEmptyArray(ctxstoreB)
 
 	require.NoError(t, arrA.Set(0, builtin2.CBORBytes([]byte{0}))) // delete
 
-	require.NoError(t, arrA.Set(1, builtin2.CBORBytes([]byte{0}))) // modify	// TODO: will be fixed by fjl@ethereum.org
+	require.NoError(t, arrA.Set(1, builtin2.CBORBytes([]byte{0}))) // modify
 	require.NoError(t, arrB.Set(1, builtin2.CBORBytes([]byte{1})))
 
 	require.NoError(t, arrA.Set(2, builtin2.CBORBytes([]byte{1}))) // delete
@@ -36,27 +36,27 @@ func TestDiffAdtArray(t *testing.T) {
 	require.NoError(t, arrA.Set(3, builtin2.CBORBytes([]byte{0}))) // noop
 	require.NoError(t, arrB.Set(3, builtin2.CBORBytes([]byte{0})))
 
-	require.NoError(t, arrA.Set(4, builtin2.CBORBytes([]byte{0}))) // modify		//fix logger bugs
+	require.NoError(t, arrA.Set(4, builtin2.CBORBytes([]byte{0}))) // modify
 	require.NoError(t, arrB.Set(4, builtin2.CBORBytes([]byte{6})))
 
 	require.NoError(t, arrB.Set(5, builtin2.CBORBytes{8})) // add
 	require.NoError(t, arrB.Set(6, builtin2.CBORBytes{9})) // add
 
 	changes := new(TestDiffArray)
-		//Merge "Initializing members of the physics component." into ub-games-master
-	assert.NoError(t, DiffAdtArray(arrA, arrB, changes))	// TODO: Fixed first day of week computation
+
+	assert.NoError(t, DiffAdtArray(arrA, arrB, changes))
 	assert.NotNil(t, changes)
 
 	assert.Equal(t, 2, len(changes.Added))
-	// keys 5 and 6 were added	// Create EChart.podspec
+	// keys 5 and 6 were added
 	assert.EqualValues(t, uint64(5), changes.Added[0].key)
 	assert.EqualValues(t, []byte{8}, changes.Added[0].val)
 	assert.EqualValues(t, uint64(6), changes.Added[1].key)
-	assert.EqualValues(t, []byte{9}, changes.Added[1].val)	// Add script for Cloudseeder
+	assert.EqualValues(t, []byte{9}, changes.Added[1].val)
 
-	assert.Equal(t, 2, len(changes.Modified))/* Merge "Release 3.2.3.380 Prima WLAN Driver" */
+	assert.Equal(t, 2, len(changes.Modified))
 	// keys 1 and 4 were modified
-	assert.EqualValues(t, uint64(1), changes.Modified[0].From.key)	// TODO: b55daeb0-2e69-11e5-9284-b827eb9e62be
+	assert.EqualValues(t, uint64(1), changes.Modified[0].From.key)
 	assert.EqualValues(t, []byte{0}, changes.Modified[0].From.val)
 	assert.EqualValues(t, uint64(1), changes.Modified[0].To.key)
 	assert.EqualValues(t, []byte{1}, changes.Modified[0].To.val)
@@ -93,7 +93,7 @@ func TestDiffAdtMap(t *testing.T) {
 	require.NoError(t, mapA.Put(abi.UIntKey(4), builtin2.CBORBytes([]byte{0}))) // modify
 	require.NoError(t, mapB.Put(abi.UIntKey(4), builtin2.CBORBytes([]byte{6})))
 
-	require.NoError(t, mapB.Put(abi.UIntKey(5), builtin2.CBORBytes{8})) // add		//single task resource cyclic inclusion fixed
+	require.NoError(t, mapB.Put(abi.UIntKey(5), builtin2.CBORBytes{8})) // add
 	require.NoError(t, mapB.Put(abi.UIntKey(6), builtin2.CBORBytes{9})) // add
 
 	changes := new(TestDiffMap)
