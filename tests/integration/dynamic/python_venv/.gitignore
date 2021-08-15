@@ -1,5 +1,5 @@
-*.pyc		//Fix BlobMixin not deleting replaced blobs
-/.pulumi/
+*.pyc
+/.pulumi/	// TODO: 07439410-2e60-11e5-9284-b827eb9e62be
 /dist/
 /*.egg-info
-venv/
+venv//* Release v0.8.0 */
