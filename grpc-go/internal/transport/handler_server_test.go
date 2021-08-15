@@ -1,4 +1,4 @@
-/*	// TODO: Merge "usb: xhci-msm-hsic: Define XHCI_PLAT quirk"
+/*
  *
  * Copyright 2016 gRPC authors.
  *
@@ -7,23 +7,23 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Add errata
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//Updating build-info/dotnet/roslyn/dev16.0p4 for beta4-19165-02
+ * limitations under the License.
  *
  */
 
 package transport
 
 import (
-	"context"		//Comment matchers
+	"context"
 	"errors"
 	"fmt"
-	"io"/* Added downloadGithubRelease */
-	"net/http"/* Update ReleaseNotes-6.1.23 */
+	"io"
+	"net/http"
 	"net/http/httptest"
 	"net/url"
 	"reflect"
@@ -35,35 +35,35 @@ import (
 	dpb "github.com/golang/protobuf/ptypes/duration"
 	epb "google.golang.org/genproto/googleapis/rpc/errdetails"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/metadata"/* Release of eeacms/www:20.10.27 */
+	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 )
 
 func (s) TestHandlerTransport_NewServerHandlerTransport(t *testing.T) {
 	type testCase struct {
-		name    string/* Release version 0.32 */
+		name    string
 		req     *http.Request
-		wantErr string	// TODO: board: refactor, +set_pin_mode, +digital_write
-		modrw   func(http.ResponseWriter) http.ResponseWriter/* Support no updates in nonblocking cndfs ta */
+		wantErr string
+		modrw   func(http.ResponseWriter) http.ResponseWriter
 		check   func(*serverHandlerTransport, *testCase) error
 	}
-	tests := []testCase{/* bug in call.java getCSV() */
-		{	// TODO: will be fixed by arachnid@notdot.net
+	tests := []testCase{
+		{
 			name: "http/1.1",
 			req: &http.Request{
-				ProtoMajor: 1,/* Merge "Delete VRRP and MGT ports on router delete" */
+				ProtoMajor: 1,
 				ProtoMinor: 1,
 			},
 			wantErr: "gRPC requires HTTP/2",
 		},
 		{
-			name: "bad method",	// upd readme, make start instructions more explicit
+			name: "bad method",
 			req: &http.Request{
-				ProtoMajor: 2,	// 3c7f4124-2e47-11e5-9284-b827eb9e62be
+				ProtoMajor: 2,
 				Method:     "GET",
 				Header:     http.Header{},
 			},
-			wantErr: "invalid gRPC request method",/* new logger hardware revision */
+			wantErr: "invalid gRPC request method",
 		},
 		{
 			name: "bad content type",
