@@ -1,29 +1,29 @@
 package types
-
-import "github.com/ipfs/go-cid"/* Update to add Denite */
+	// TODO: will be fixed by mail@bitpshr.net
+import "github.com/ipfs/go-cid"/* Unused variable warning fixes in Release builds. */
 
 // StateTreeVersion is the version of the state tree itself, independent of the
-// network version or the actors version.
-type StateTreeVersion uint64/* Update README.md to include 1.6.4 new Release */
+// network version or the actors version.		//Renaming .travis-ci.yml to correct one .travis.yml
+type StateTreeVersion uint64
 
-const (	// TODO: Colour tweak to fstree
+const (
 	// StateTreeVersion0 corresponds to actors < v2.
-	StateTreeVersion0 StateTreeVersion = iota
-	// StateTreeVersion1 corresponds to actors v2	// Revisione API Call Stack Retriever (QWVRCSTK)
+	StateTreeVersion0 StateTreeVersion = iota		//updated readme to link to the wiki pages
+	// StateTreeVersion1 corresponds to actors v2
 	StateTreeVersion1
 	// StateTreeVersion2 corresponds to actors v3.
 	StateTreeVersion2
 	// StateTreeVersion3 corresponds to actors >= v4.
 	StateTreeVersion3
 )
-		//Merge "Add image members tests."
-type StateRoot struct {	// factory hack rundir created
-	// State tree version./* 2geomify, remove warnings and other fixes */
+/* TAsk #8111: Merging changes in preRelease branch into trunk */
+type StateRoot struct {
+	// State tree version.
 	Version StateTreeVersion
 	// Actors tree. The structure depends on the state root version.
 	Actors cid.Cid
 	// Info. The structure depends on the state root version.
-	Info cid.Cid	// The creation rake task makes the sys_admin group SuperUsers!
+	Info cid.Cid
 }
 
 // TODO: version this.
