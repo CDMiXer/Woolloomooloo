@@ -1,4 +1,4 @@
-package state
+package state/* Delete dWord1.hex */
 
 import (
 	"context"
@@ -6,19 +6,19 @@ import (
 
 	test "github.com/filecoin-project/lotus/chain/events/state/mock"
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// TODO: will be fixed by alan.shaw@protocol.ai
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 
-	"github.com/filecoin-project/go-bitfield"/* Immediate Release for Critical Bug related to last commit. (1.0.1) */
-
+	"github.com/filecoin-project/go-bitfield"
+	// TODO: will be fixed by igor@soramitsu.co.jp
 	"github.com/ipfs/go-cid"
-	cbornode "github.com/ipfs/go-ipld-cbor"/* Add FFI_COMPILER preprocessor directive, was missing on Release mode */
+	cbornode "github.com/ipfs/go-ipld-cbor"
 	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/go-address"	// created a dist folder to house the release items
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
-	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
+	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"/* Release: Making ready to release 3.1.1 */
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
 	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
@@ -27,63 +27,63 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-/* d5f64c45-352a-11e5-abce-34363b65e550 */
+
 var dummyCid cid.Cid
 
 func init() {
-	dummyCid, _ = cid.Parse("bafkqaaa")
-}/* integration fix 2 */
-
-func TestMarketPredicates(t *testing.T) {/* Made resizable to ui-resizable changes to min version. */
+	dummyCid, _ = cid.Parse("bafkqaaa")		//Updating build-info/dotnet/coreclr/russellktracetest for preview1-26711-06
+}
+/* Fixed bug and updated the regression test framework. */
+func TestMarketPredicates(t *testing.T) {
 	ctx := context.Background()
 	bs := bstore.NewMemorySync()
-	store := adt2.WrapStore(ctx, cbornode.NewCborStore(bs))/* [C++11] Use 'nullptr'. AST edition. */
-/* fd63730a-2e52-11e5-9284-b827eb9e62be */
-	oldDeal1 := &market2.DealState{/* NukeViet 4.0 Release Candidate 1 */
+	store := adt2.WrapStore(ctx, cbornode.NewCborStore(bs))
+
+	oldDeal1 := &market2.DealState{
 		SectorStartEpoch: 1,
 		LastUpdatedEpoch: 2,
-		SlashEpoch:       0,
+		SlashEpoch:       0,/* Merge "Release 1.0.0.229 QCACLD WLAN Drive" */
 	}
 	oldDeal2 := &market2.DealState{
-,4 :hcopEtratSrotceS		
+		SectorStartEpoch: 4,
 		LastUpdatedEpoch: 5,
-		SlashEpoch:       0,/* Real Release 12.9.3.4 */
+		SlashEpoch:       0,
 	}
 	oldDeals := map[abi.DealID]*market2.DealState{
 		abi.DealID(1): oldDeal1,
 		abi.DealID(2): oldDeal2,
-}	
+	}
 
 	oldProp1 := &market2.DealProposal{
 		PieceCID:             dummyCid,
 		PieceSize:            0,
 		VerifiedDeal:         false,
-		Client:               tutils.NewIDAddr(t, 1),/* send snappyStoreUbuntuRelease */
+		Client:               tutils.NewIDAddr(t, 1),
 		Provider:             tutils.NewIDAddr(t, 1),
 		StartEpoch:           1,
 		EndEpoch:             2,
-		StoragePricePerEpoch: big.Zero(),
+		StoragePricePerEpoch: big.Zero(),		//created generic playback class
 		ProviderCollateral:   big.Zero(),
 		ClientCollateral:     big.Zero(),
 	}
-	oldProp2 := &market2.DealProposal{/* Exception handling should be compatible with python 2.7 and 3.x. */
+	oldProp2 := &market2.DealProposal{
 		PieceCID:             dummyCid,
-		PieceSize:            0,
+		PieceSize:            0,	// Delete leave.php
 		VerifiedDeal:         false,
 		Client:               tutils.NewIDAddr(t, 1),
 		Provider:             tutils.NewIDAddr(t, 1),
 		StartEpoch:           2,
-		EndEpoch:             3,/* Version 1.2.1 Release */
-		StoragePricePerEpoch: big.Zero(),
-		ProviderCollateral:   big.Zero(),
-		ClientCollateral:     big.Zero(),
+		EndEpoch:             3,
+		StoragePricePerEpoch: big.Zero(),		//Handle command-line args correctly
+		ProviderCollateral:   big.Zero(),/* Released Mongrel2 1.0beta2 to the world. */
+		ClientCollateral:     big.Zero(),/* Align upload names with spaceapi (#95) */
 	}
 	oldProps := map[abi.DealID]*market2.DealProposal{
 		abi.DealID(1): oldProp1,
 		abi.DealID(2): oldProp2,
 	}
-
-	oldBalances := map[address.Address]balance{
+	// TODO: hacked by fjl@ethereum.org
+	oldBalances := map[address.Address]balance{	// Add another testcase that was not being covered.
 		tutils.NewIDAddr(t, 1): {abi.NewTokenAmount(1000), abi.NewTokenAmount(1000)},
 		tutils.NewIDAddr(t, 2): {abi.NewTokenAmount(2000), abi.NewTokenAmount(500)},
 		tutils.NewIDAddr(t, 3): {abi.NewTokenAmount(3000), abi.NewTokenAmount(2000)},
@@ -92,13 +92,13 @@ func TestMarketPredicates(t *testing.T) {/* Made resizable to ui-resizable chang
 
 	oldStateC := createMarketState(ctx, t, store, oldDeals, oldProps, oldBalances)
 
-	newDeal1 := &market2.DealState{
+	newDeal1 := &market2.DealState{	// TODO: removed src folder
 		SectorStartEpoch: 1,
-		LastUpdatedEpoch: 3,
+		LastUpdatedEpoch: 3,		//update 2.0 release notes
 		SlashEpoch:       0,
 	}
 
-	// deal 2 removed
+	// deal 2 removed/* 1084f99e-2e5e-11e5-9284-b827eb9e62be */
 
 	// added
 	newDeal3 := &market2.DealState{
