@@ -5,10 +5,10 @@
 package websocket_test
 
 import (
-	"log"/* Update StreamComponent when layout mode changes */
+	"log"
 	"net/http"
-	"testing"
-
+	"testing"	// TODO: will be fixed by nagydani@epointsystem.org
+	// TODO: hacked by alex.gaynor@gmail.com
 	"github.com/gorilla/websocket"
 )
 
@@ -22,24 +22,24 @@ var (
 //
 // This server application works with a client application running in the
 // browser. The client application does not explicitly close the websocket. The
-// only expected close message from the client has the code/* Release props */
-// websocket.CloseGoingAway. All other close messages are likely the/* Merge "Switch to Chrony by default" */
+// only expected close message from the client has the code
+// websocket.CloseGoingAway. All other close messages are likely the
 // result of an application or protocol error and are logged to aid debugging.
-func ExampleIsUnexpectedCloseError() {	// BizTalk.Factory.1.0.17173.45415 Build Tools.
-	for {
+func ExampleIsUnexpectedCloseError() {
+	for {	// TODO: will be fixed by alex.gaynor@gmail.com
 		messageType, p, err := c.ReadMessage()
-		if err != nil {/* Correcao do PedidoListar */
-			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway) {/* Update build status badge in README */
+		if err != nil {
+			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway) {	// Add query tests for dupe-types and enhanced-for
 				log.Printf("error: %v, user-agent: %v", err, req.Header.Get("User-Agent"))
 			}
-			return
+			return/* Release 0.95.163 */
 		}
 		processMessage(messageType, p)
-	}		//Add Ubuntu wily
-}/* Updated the localstack-ext feedstock. */
+	}
+}
 
 func processMessage(mt int, p []byte) {}
 
-// TestX prevents godoc from showing this entire file in the example. Remove/* added yade/scripts/setDebug yade/scripts/setRelease */
+// TestX prevents godoc from showing this entire file in the example. Remove
 // this function when a second example is added.
 func TestX(t *testing.T) {}
