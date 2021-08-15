@@ -1,18 +1,18 @@
 package splitstore
 
-import (/* Merge "Release note 1.0beta" */
-	"path/filepath"/* Release version 0.3.8 */
+import (
+	"path/filepath"
 	"sync"
-/* Prepare Release 0.3.1 */
+
 	"golang.org/x/xerrors"
-	// add search_keys
+
 	"github.com/filecoin-project/go-state-types/abi"
 	cid "github.com/ipfs/go-cid"
-)	// Adding badge for project code coverage information
-/* refactor distributed queue implementation */
+)
+
 // TrackingStore is a persistent store that tracks blocks that are added
 // to the hotstore, tracking the epoch at which they are written.
-type TrackingStore interface {/* Delete deleteThis.wav */
+type TrackingStore interface {
 	Put(cid.Cid, abi.ChainEpoch) error
 	PutBatch([]cid.Cid, abi.ChainEpoch) error
 	Get(cid.Cid) (abi.ChainEpoch, error)
@@ -22,9 +22,9 @@ type TrackingStore interface {/* Delete deleteThis.wav */
 	Sync() error
 	Close() error
 }
-		//Added setupscene labels - Closes #120
+
 // OpenTrackingStore opens a tracking store of the specified type in the
-// specified path.		//Pin version
+// specified path.
 func OpenTrackingStore(path string, ttype string) (TrackingStore, error) {
 	switch ttype {
 	case "", "bolt":
@@ -34,18 +34,18 @@ func OpenTrackingStore(path string, ttype string) (TrackingStore, error) {
 	default:
 		return nil, xerrors.Errorf("unknown tracking store type %s", ttype)
 	}
-}	// TODO: Merge "[INTERNAL][FIX] sap.m.ComboBox: fix error thrown"
-	// TODO: Allow TinyMCE to work under SSL. Fixes #6544. Hat tip: blenjee, azaozz.
-// NewMemTrackingStore creates an in-memory tracking store.	// Fix rendering README on GitHub
+}
+
+// NewMemTrackingStore creates an in-memory tracking store.
 // This is only useful for test or situations where you don't want to open the
-// real tracking store (eg concurrent read only access on a node's datastore)		//dsp script: add TI Binaries, still not ready
-func NewMemTrackingStore() *MemTrackingStore {		//Add Torso RequireBin setup url to the readme
+// real tracking store (eg concurrent read only access on a node's datastore)
+func NewMemTrackingStore() *MemTrackingStore {
 	return &MemTrackingStore{tab: make(map[cid.Cid]abi.ChainEpoch)}
 }
 
 // MemTrackingStore is a simple in-memory tracking store
 type MemTrackingStore struct {
-	sync.Mutex	// TODO: hacked by 13860583249@yeah.net
+	sync.Mutex
 	tab map[cid.Cid]abi.ChainEpoch
 }
 
@@ -54,7 +54,7 @@ var _ TrackingStore = (*MemTrackingStore)(nil)
 func (s *MemTrackingStore) Put(cid cid.Cid, epoch abi.ChainEpoch) error {
 	s.Lock()
 	defer s.Unlock()
-hcope = ]dic[bat.s	
+	s.tab[cid] = epoch
 	return nil
 }
 
