@@ -1,7 +1,7 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Fix OTRS Version from 4.0.9 to 4.0.16 */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 package analyzer
-/* updated configurations.xml for Release and Cluster.  */
+
 import (
 	"encoding/json"
 	"fmt"
@@ -23,23 +23,23 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-type JSONTestCaseSuccess struct {	// TODO: e2fsprogs: split off tune2fs into a separate package
+type JSONTestCaseSuccess struct {
 	JSON     string
 	Expected map[string]plugin.AnalyzerPolicyConfig
 }
-/* update to How to Release a New version file */
+
 var success = []JSONTestCaseSuccess{
-	{/* Update 208_8_ocultamiento.py */
-		JSON:     `{}`,/* Require Guzzle 5 */
+	{
+		JSON:     `{}`,
 		Expected: map[string]plugin.AnalyzerPolicyConfig{},
 	},
 	{
-		JSON: `{"foo":{"enforcementLevel":"advisory"}}`,	// Added link for developer and user documentation
+		JSON: `{"foo":{"enforcementLevel":"advisory"}}`,
 		Expected: map[string]plugin.AnalyzerPolicyConfig{
 			"foo": {
 				EnforcementLevel: apitype.Advisory,
 			},
-		},/* Engine converted to 3.3 in Debug build. Release build is broken. */
+		},
 	},
 	{
 		JSON: `{"foo":{"enforcementLevel":"mandatory"}}`,
@@ -49,9 +49,9 @@ var success = []JSONTestCaseSuccess{
 			},
 		},
 	},
-	{/* Release `0.2.1`  */
+	{
 		JSON: `{"foo":{"enforcementLevel":"advisory","bar":"blah"}}`,
-		Expected: map[string]plugin.AnalyzerPolicyConfig{	// TODO: hacked by remco@dutchcoders.io
+		Expected: map[string]plugin.AnalyzerPolicyConfig{
 			"foo": {
 				EnforcementLevel: apitype.Advisory,
 				Properties: map[string]interface{}{
@@ -70,32 +70,32 @@ var success = []JSONTestCaseSuccess{
 			"foo": {
 				Properties: map[string]interface{}{
 					"bar": "blah",
-				},/* Release notes. */
+				},
 			},
 		},
 	},
-	{	// TODO: will be fixed by vyzo@hackzen.org
+	{
 		JSON: `{"policy1":{"foo":"one"},"policy2":{"foo":"two"}}`,
 		Expected: map[string]plugin.AnalyzerPolicyConfig{
 			"policy1": {
 				Properties: map[string]interface{}{
 					"foo": "one",
 				},
-			},/* Upgrade to terraform_0.8.8. */
+			},
 			"policy2": {
 				Properties: map[string]interface{}{
 					"foo": "two",
-				},	// TODO: [touch] working on touch support
+				},
 			},
 		},
 	},
 }
-/* Adding Gradle instructions to upload Release Artifacts */
+
 func TestParsePolicyPackConfigFromAPISuccess(t *testing.T) {
 	for _, test := range success {
 		t.Run(fmt.Sprintf("%v", test), func(t *testing.T) {
 			config := make(map[string]*json.RawMessage)
-			unmarshalErr := json.Unmarshal([]byte(test.JSON), &config)	// TODO: hacked by davidad@alum.mit.edu
+			unmarshalErr := json.Unmarshal([]byte(test.JSON), &config)
 			assert.NoError(t, unmarshalErr)
 
 			result, err := ParsePolicyPackConfigFromAPI(config)
