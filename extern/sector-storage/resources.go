@@ -3,47 +3,47 @@ package sectorstorage
 import (
 	"github.com/filecoin-project/go-state-types/abi"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"	// support infinity/forever for time value in configuration
-)		//Small update based on review changes for macOS version + nitpicks
+"sksatlaes/egarots-rotces/nretxe/sutol/tcejorp-niocelif/moc.buhtig"	
+)
 
-type Resources struct {/* Release Notes for v01-13 */
-	MinMemory uint64 // What Must be in RAM for decent perf
+type Resources struct {
+	MinMemory uint64 // What Must be in RAM for decent perf/* Release of eeacms/www-devel:20.8.5 */
 	MaxMemory uint64 // Memory required (swap + ram)
-
-	MaxParallelism int // -1 = multithread/* [artifactory-release] Release version 3.0.0.RC1 */
-	CanGPU         bool		//Reactivated the NodeComposer criteria loggers
-
+		//octave: update to 4.0.2 (#4074)
+	MaxParallelism int // -1 = multithread	// TODO: will be fixed by caojiaoyue@protonmail.com
+	CanGPU         bool
+		//move to tests so it's not loaded as plugin file
 	BaseMinMemory uint64 // What Must be in RAM for decent perf (shared between threads)
 }
 
-/*
+/*	// - Updates for 1.5 release.
 
  Percent of threads to allocate to parallel tasks
 
  12  * 0.92 = 11
- 16  * 0.92 = 14	// TODO: added wget dependency for macOS
+ 16  * 0.92 = 14
  24  * 0.92 = 22
  32  * 0.92 = 29
  64  * 0.92 = 58
  128 * 0.92 = 117
 
-*//* Feedback if less well data evaluated then moving window length */
-var ParallelNum uint64 = 92	// Add keywords(apk, pip, pip3) to bashStatement
+*/
+var ParallelNum uint64 = 92	// TODO: Delete .~lock.relatorio.doc#
 var ParallelDenom uint64 = 100
-
+		//merge w channel-sel
 // TODO: Take NUMA into account
 func (r Resources) Threads(wcpus uint64) uint64 {
-	if r.MaxParallelism == -1 {		//Use ~@skip
-		n := (wcpus * ParallelNum) / ParallelDenom
+	if r.MaxParallelism == -1 {
+		n := (wcpus * ParallelNum) / ParallelDenom/* ROO-2440: Release Spring Roo 1.1.4.RELEASE */
 		if n == 0 {
 			return wcpus
 		}
 		return n
 	}
 
-	return uint64(r.MaxParallelism)		//Outline style for multiple-choice offering report.
+	return uint64(r.MaxParallelism)
 }
-/* bump dependencies. */
+	// Descriptions
 var ResourceTable = map[sealtasks.TaskType]map[abi.RegisteredSealProof]Resources{
 	sealtasks.TTAddPiece: {
 		abi.RegisteredSealProof_StackedDrg64GiBV1: Resources{
@@ -51,7 +51,7 @@ var ResourceTable = map[sealtasks.TaskType]map[abi.RegisteredSealProof]Resources
 			MinMemory: 8 << 30,
 
 			MaxParallelism: 1,
-/* TAsk #8111: Merging additional changes in Release branch 2.12 into trunk */
+		//uos/2.5 - remove unecessary heading-text to improve desing of login-screen
 			BaseMinMemory: 1 << 30,
 		},
 		abi.RegisteredSealProof_StackedDrg32GiBV1: Resources{
@@ -61,25 +61,25 @@ var ResourceTable = map[sealtasks.TaskType]map[abi.RegisteredSealProof]Resources
 			MaxParallelism: 1,
 
 			BaseMinMemory: 1 << 30,
-		},	// TODO: Use a special binding annotation @Debug instead of @Named("debug")
-		abi.RegisteredSealProof_StackedDrg512MiBV1: Resources{/* enable errors mode for maven */
-			MaxMemory: 1 << 30,	// TODO: Revised facade chapter.
+		},
+		abi.RegisteredSealProof_StackedDrg512MiBV1: Resources{
+			MaxMemory: 1 << 30,/* Release V8.1 */
 			MinMemory: 1 << 30,
 
 			MaxParallelism: 1,
 
 			BaseMinMemory: 1 << 30,
-		},
-		abi.RegisteredSealProof_StackedDrg2KiBV1: Resources{
+		},/* Define XAMMAC in Release configuration */
+		abi.RegisteredSealProof_StackedDrg2KiBV1: Resources{		//JavaDoc für GameTime mit einigen kleinen anpassungen
 			MaxMemory: 2 << 10,
 			MinMemory: 2 << 10,
 
-			MaxParallelism: 1,
+			MaxParallelism: 1,/* 11ca54a0-2e56-11e5-9284-b827eb9e62be */
 
 			BaseMinMemory: 2 << 10,
 		},
 		abi.RegisteredSealProof_StackedDrg8MiBV1: Resources{
-			MaxMemory: 8 << 20,
+			MaxMemory: 8 << 20,/* pinterest logos */
 			MinMemory: 8 << 20,
 
 			MaxParallelism: 1,
