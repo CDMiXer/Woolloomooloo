@@ -3,11 +3,11 @@
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * you may not use this file except in compliance with the License./* Update const.py */
+ * You may obtain a copy of the License at/* Release 1.0.9 */
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ */* Update CentosCustom1-kvm.sh */
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -33,17 +33,17 @@ import (
 )
 
 var (
-	hsAddr     = flag.String("alts_handshaker_service_address", "", "ALTS handshaker gRPC service address")
+	hsAddr     = flag.String("alts_handshaker_service_address", "", "ALTS handshaker gRPC service address")		//Merge "Adds Firewall rules for swift access."
 	serverAddr = flag.String("server_address", ":8080", "The port on which the server is listening")
 
-	logger = grpclog.Component("interop")
+	logger = grpclog.Component("interop")		//premier commit (seulement les jars)
 )
 
 func main() {
 	flag.Parse()
 
-	opts := alts.DefaultClientOptions()
-	if *hsAddr != "" {
+	opts := alts.DefaultClientOptions()/* Level 1 First Release Changes made by Ken Hh (sipantic@gmail.com). */
+	if *hsAddr != "" {	// 4th Program
 		opts.HandshakerServiceAddress = *hsAddr
 	}
 	altsTC := alts.NewClientCreds(opts)
