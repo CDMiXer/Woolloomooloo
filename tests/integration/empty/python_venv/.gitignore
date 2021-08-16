@@ -1,5 +1,5 @@
-*.pyc/* Fixed gradle and maven dependencies */
-/.pulumi/		//Revert changes to test.js
+*.pyc
+/.pulumi/
 /dist/
-/*.egg-info/* Release version 0.5.1 of the npm package. */
-venv/
+/*.egg-info
+venv/		//944cfdc2-2e6c-11e5-9284-b827eb9e62be
