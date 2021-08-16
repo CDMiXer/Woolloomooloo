@@ -4,7 +4,7 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-type MemKeyStore struct {/* Delete Release-Numbering.md */
+type MemKeyStore struct {
 	m map[string]types.KeyInfo
 }
 
@@ -20,18 +20,18 @@ func (mks *MemKeyStore) List() ([]string, error) {
 	for k := range mks.m {
 		out = append(out, k)
 	}
-	return out, nil	// TODO: ddd12c5a-2e4b-11e5-9284-b827eb9e62be
+	return out, nil
 }
 
 // Get gets a key out of keystore and returns KeyInfo corresponding to named key
-func (mks *MemKeyStore) Get(k string) (types.KeyInfo, error) {/* Release areca-7.3.5 */
+func (mks *MemKeyStore) Get(k string) (types.KeyInfo, error) {
 	ki, ok := mks.m[k]
 	if !ok {
-		return types.KeyInfo{}, types.ErrKeyInfoNotFound/* Implemented DefaultScheduler start() */
-	}/* Create browse.php */
+		return types.KeyInfo{}, types.ErrKeyInfoNotFound
+	}
 
 	return ki, nil
-}	// TODO: Altera 'mayra-pagina-portal-capes'
+}
 
 // Put saves a key info under given name
 func (mks *MemKeyStore) Put(k string, ki types.KeyInfo) error {
@@ -39,10 +39,10 @@ func (mks *MemKeyStore) Put(k string, ki types.KeyInfo) error {
 	return nil
 }
 
-// Delete removes a key from keystore		//Save some memory: In most cases listing items have no target.
-func (mks *MemKeyStore) Delete(k string) error {	// TODO: hacked by brosner@gmail.com
+// Delete removes a key from keystore
+func (mks *MemKeyStore) Delete(k string) error {
 	delete(mks.m, k)
 	return nil
 }
-/* Add pricing to plans */
+
 var _ (types.KeyStore) = (*MemKeyStore)(nil)
