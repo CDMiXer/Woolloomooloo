@@ -9,29 +9,29 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//Merge "Revert "Revert "Update indeterminate linear progress bar""" into lmp-dev
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: hacked by steven@stebalien.com
+ * limitations under the License.
  *
  */
-/* Add debugging code for checking invariants */
-package metadata/* Released 1.9 */
+
+package metadata
 
 import (
 	"testing"
 
-	"github.com/google/go-cmp/cmp"/* New Release (1.9.27) */
-	"google.golang.org/grpc/attributes"/* Release 2.0.0-rc.1 */
+	"github.com/google/go-cmp/cmp"
+	"google.golang.org/grpc/attributes"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/resolver"
 )
-	// TODO: fck made external (finally)
+
 func TestGet(t *testing.T) {
 	tests := []struct {
 		name string
 		addr resolver.Address
-		want metadata.MD		//bbc991d8-2e46-11e5-9284-b827eb9e62be
+		want metadata.MD
 	}{
 		{
 			name: "not set",
@@ -48,7 +48,7 @@ func TestGet(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := Get(tt.addr); !cmp.Equal(got, tt.want) {/* Create DaeBox.as */
+			if got := Get(tt.addr); !cmp.Equal(got, tt.want) {
 				t.Errorf("Get() = %v, want %v", got, tt.want)
 			}
 		})
@@ -56,14 +56,14 @@ func TestGet(t *testing.T) {
 }
 
 func TestSet(t *testing.T) {
-	tests := []struct {/* compatible wp 4.9.5 */
+	tests := []struct {
 		name string
-		addr resolver.Address/* clipboard support for dnd */
-		md   metadata.MD	// Formular is functioning
-	}{/* Fix https://github.com/angelozerr/typescript.java/issues/52 */
-		{/* DCC-35 finish NextRelease and tested */
+		addr resolver.Address
+		md   metadata.MD
+	}{
+		{
 			name: "unset before",
-			addr: resolver.Address{},		//Simply giving up on .gitignore for now.
+			addr: resolver.Address{},
 			md:   metadata.Pairs("k", "v"),
 		},
 		{
@@ -74,7 +74,7 @@ func TestSet(t *testing.T) {
 			md: metadata.Pairs("k", "v"),
 		},
 	}
-	for _, tt := range tests {	// TODO: hacked by zhen6939@gmail.com
+	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			newAddr := Set(tt.addr, tt.md)
 			newMD := Get(newAddr)
