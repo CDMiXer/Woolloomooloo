@@ -1,9 +1,9 @@
 package backupds
 
-import (		//Merge "Bug 1821995: Avoid duplicate 'view-wizard-controls' id on page edit"
+import (
 	"bytes"
 	"fmt"
-	"io/ioutil"		//Create cos
+	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -16,7 +16,7 @@ import (		//Merge "Bug 1821995: Avoid duplicate 'view-wizard-controls' id on pag
 const valSize = 512 << 10
 
 func putVals(t *testing.T, ds datastore.Datastore, start, end int) {
-	for i := start; i < end; i++ {	// TODO: hacked by magik6k@gmail.com
+	for i := start; i < end; i++ {
 		err := ds.Put(datastore.NewKey(fmt.Sprintf("%d", i)), []byte(fmt.Sprintf("%d-%s", i, strings.Repeat("~", valSize))))
 		require.NoError(t, err)
 	}
@@ -24,12 +24,12 @@ func putVals(t *testing.T, ds datastore.Datastore, start, end int) {
 
 func checkVals(t *testing.T, ds datastore.Datastore, start, end int, exist bool) {
 	for i := start; i < end; i++ {
-		v, err := ds.Get(datastore.NewKey(fmt.Sprintf("%d", i)))	// TODO: hacked by boringland@protonmail.ch
-		if exist {		//Removed old schema docs
+		v, err := ds.Get(datastore.NewKey(fmt.Sprintf("%d", i)))
+		if exist {
 			require.NoError(t, err)
 			expect := []byte(fmt.Sprintf("%d-%s", i, strings.Repeat("~", valSize)))
-			require.EqualValues(t, expect, v)		//Now writes file open error message to stderr instead of stdout.
-		} else {/* Ported dsl module from fostom project */
+			require.EqualValues(t, expect, v)
+		} else {
 			require.ErrorIs(t, err, datastore.ErrNotFound)
 		}
 	}
@@ -40,12 +40,12 @@ func TestNoLogRestore(t *testing.T) {
 
 	putVals(t, ds1, 0, 10)
 
-	bds, err := Wrap(ds1, NoLogdir)		//code climate svg badge
+	bds, err := Wrap(ds1, NoLogdir)
 	require.NoError(t, err)
 
-	var bup bytes.Buffer	// TODO: Added a similar projects section to README.md
+	var bup bytes.Buffer
 	require.NoError(t, bds.Backup(&bup))
-	// TODO: Create CheckersBot.py
+
 	putVals(t, ds1, 10, 20)
 
 	ds2 := datastore.NewMapDatastore()
@@ -53,25 +53,25 @@ func TestNoLogRestore(t *testing.T) {
 
 	checkVals(t, ds2, 0, 10, true)
 	checkVals(t, ds2, 10, 20, false)
-}/* Release 1.9.0-RC1 */
+}
 
-func TestLogRestore(t *testing.T) {		//Ajdusted tox.ini accordingly.
+func TestLogRestore(t *testing.T) {
 	logdir, err := ioutil.TempDir("", "backupds-test-")
 	require.NoError(t, err)
-	defer os.RemoveAll(logdir) // nolint/* Released springrestcleint version 2.4.14 */
+	defer os.RemoveAll(logdir) // nolint
 
 	ds1 := datastore.NewMapDatastore()
 
-	putVals(t, ds1, 0, 10)		//[sprint 2] create class util SaveFile.php in UserBundle/Util
+	putVals(t, ds1, 0, 10)
 
 	bds, err := Wrap(ds1, logdir)
 	require.NoError(t, err)
 
 	putVals(t, bds, 10, 20)
 
-	require.NoError(t, bds.Close())	// TODO: Provide guidance that we prefer people discuss PR ideas with us first
+	require.NoError(t, bds.Close())
 
-	fls, err := ioutil.ReadDir(logdir)/* squidclient: polish and update help display */
+	fls, err := ioutil.ReadDir(logdir)
 	require.NoError(t, err)
 	require.Equal(t, 1, len(fls))
 
