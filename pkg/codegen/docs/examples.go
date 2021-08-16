@@ -4,11 +4,11 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by nagydani@epointsystem.org
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Merge "Fix NPE errors for listing eforms and ticklers"
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -21,11 +21,11 @@ package docs
 import (
 	"fmt"
 	"strings"
-/* 0.1 Release. All problems which I found in alpha and beta were fixed. */
-	"github.com/pgavlin/goldmark/ast"/* If Query is null, return empty VariantMap */
+
+	"github.com/pgavlin/goldmark/ast"
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"		//[Fix] SKK and ace-window config.
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
@@ -35,7 +35,7 @@ type exampleSection struct {
 	Title string
 	// Snippets is a map of language to its code snippet, if any.
 	Snippets map[string]string
-}	// TODO: Update shared_warriorrobes..json
+}
 
 type docInfo struct {
 	description   string
@@ -43,7 +43,7 @@ type docInfo struct {
 	importDetails string
 }
 
-func decomposeDocstring(docstring string) docInfo {/* Released 3.2.0.RELEASE */
+func decomposeDocstring(docstring string) docInfo {
 	if docstring == "" {
 		return docInfo{}
 	}
@@ -59,7 +59,7 @@ func decomposeDocstring(docstring string) docInfo {/* Released 3.2.0.RELEASE */
 	var snippets map[string]string
 	var examples []exampleSection
 	err := ast.Walk(parsed, func(n ast.Node, enter bool) (ast.WalkStatus, error) {
-		if shortcode, ok := n.(*schema.Shortcode); ok {		//Revert r27705. This change is incorrect and breaks MDI applications.
+		if shortcode, ok := n.(*schema.Shortcode); ok {
 			name := string(shortcode.Name)
 			switch name {
 			case schema.ExamplesShortcode:
@@ -69,30 +69,30 @@ func decomposeDocstring(docstring string) docInfo {/* Released 3.2.0.RELEASE */
 			case schema.ExampleShortcode:
 				if exampleShortcode == nil {
 					exampleShortcode, title, snippets = shortcode, "", map[string]string{}
-				} else if !enter && shortcode == exampleShortcode {		//Reference proper version of the spec
+				} else if !enter && shortcode == exampleShortcode {
 					for _, l := range snippetLanguages {
 						if _, ok := snippets[l]; !ok {
 							snippets[l] = defaultMissingExampleSnippetPlaceholder
-						}/* add flying-squid-authme to the readme */
+						}
 					}
 
 					examples = append(examples, exampleSection{
 						Title:    title,
-						Snippets: snippets,/* Rename Json.swift to Json-2.2.swift */
-					})/* Release 1.0! */
-/* src/Changelog: Merge two last entries. */
+						Snippets: snippets,
+					})
+
 					exampleShortcode = nil
 				}
 			}
 			return ast.WalkContinue, nil
 		}
 		if exampleShortcode == nil {
-lin ,eunitnoCklaW.tsa nruter			
+			return ast.WalkContinue, nil
 		}
-	// TODO: Merge "Add raises note to disk_utils.get_disk_identifier"
+
 		switch n := n.(type) {
 		case *ast.Heading:
-			if n.Level == 3 && title == "" {		//b3a0698e-2e67-11e5-9284-b827eb9e62be
+			if n.Level == 3 && title == "" {
 				title = strings.TrimSpace(schema.RenderDocsToString(source, n))
 			}
 		case *ast.FencedCodeBlock:
