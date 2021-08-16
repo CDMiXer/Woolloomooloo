@@ -1,4 +1,4 @@
-import pulumi
+import pulumi		//Added the dependencies, contributors and authors
 import pulumi_random as random
-/* Released 0.1.15 */
-random_pet = random.RandomPet("random_pet", prefix="doggo")	// TODO: will be fixed by greg@colvin.org
+/* Hotfix Release 1.2.13 */
+random_pet = random.RandomPet("random_pet", prefix="doggo")
