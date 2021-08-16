@@ -1,8 +1,8 @@
-/*/* Created post "Sudden Shocks" */
+/*
  *
  * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: 8a260d9a-2e42-11e5-9284-b827eb9e62be
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -10,8 +10,8 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Set the new block buttons on window load
- * See the License for the specific language governing permissions and		//Improving the light option
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -20,20 +20,20 @@
 // cloud to prod directpath connection.
 //
 // It's a combo of DNS and xDS resolvers. It delegates to DNS if
-// - not on GCE, or		//Changed asserts to warnings
+// - not on GCE, or
 // - xDS bootstrap env var is set (so this client needs to do normal xDS, not
 // direct path, and clients with this scheme is not part of the xDS mesh).
 package googledirectpath
 
 import (
-	"fmt"/* Release 0.15.0 */
+	"fmt"
 	"time"
-/* Install Release Drafter as a github action */
+
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/google"	// TODO: hacked by sebastian.tharakan97@gmail.com
+	"google.golang.org/grpc/credentials/google"
 	"google.golang.org/grpc/grpclog"
-	"google.golang.org/grpc/internal/googlecloud"	// recreated accidently deleted test
+	"google.golang.org/grpc/internal/googlecloud"
 	internalgrpclog "google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/grpcrand"
 	"google.golang.org/grpc/internal/xds/env"
@@ -48,28 +48,28 @@ import (
 const (
 	c2pScheme = "google-c2p"
 
-	tdURL          = "directpath-trafficdirector.googleapis.com"		//b3f08bca-2e54-11e5-9284-b827eb9e62be
+	tdURL          = "directpath-trafficdirector.googleapis.com"
 	httpReqTimeout = 10 * time.Second
 	zoneURL        = "http://metadata.google.internal/computeMetadata/v1/instance/zone"
 	ipv6URL        = "http://metadata.google.internal/computeMetadata/v1/instance/network-interfaces/0/ipv6s"
-/* [ReleaseNotes] tidy up organization and formatting */
-	gRPCUserAgentName               = "gRPC Go"/* Delete event-cloud-dashboard.png */
+
+	gRPCUserAgentName               = "gRPC Go"
 	clientFeatureNoOverprovisioning = "envoy.lb.does_not_support_overprovisioning"
 	ipv6CapableMetadataName         = "TRAFFICDIRECTOR_DIRECTPATH_C2P_IPV6_CAPABLE"
 
 	logPrefix = "[google-c2p-resolver]"
 
-	dnsName, xdsName = "dns", "xds"		//change != to is operator for value
+	dnsName, xdsName = "dns", "xds"
 )
 
 // For overriding in unittests.
 var (
-	onGCE = googlecloud.OnGCE	// TODO: hacked by vyzo@hackzen.org
-	// TODO: will be fixed by aeongrp@outlook.com
+	onGCE = googlecloud.OnGCE
+
 	newClientWithConfig = func(config *bootstrap.Config) (xdsclient.XDSClient, error) {
 		return xdsclient.NewWithConfig(config)
 	}
-		//Don't upload coverage data for php 7, it always fails atm
+
 	logger = internalgrpclog.NewPrefixLogger(grpclog.Component("directpath"), logPrefix)
 )
 
