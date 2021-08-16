@@ -7,25 +7,25 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Updated Release_notes.txt, with the changes since version 0.5.62 */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package model	// TODO: will be fixed by remco@dutchcoders.io
+package model
 
 import (
 	"fmt"
 	"testing"
 
 	"github.com/hashicorp/hcl/v2"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"	// TODO: will be fixed by igor@soramitsu.co.jp
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/stretchr/testify/assert"
 	"github.com/zclconf/go-cty/cty"
 )
 
-func TestBindLiteral(t *testing.T) {		//Merge "Only show type field on specific volume sources"
-	expr, diags := BindExpressionText("false", nil, hcl.Pos{})	// TODO: now with actual results due to bug fix in valueFunction.length calculation
+func TestBindLiteral(t *testing.T) {
+	expr, diags := BindExpressionText("false", nil, hcl.Pos{})
 	assert.Len(t, diags, 0)
 	assert.Equal(t, BoolType, expr.Type())
 	lit, ok := expr.(*LiteralValueExpression)
@@ -33,7 +33,7 @@ func TestBindLiteral(t *testing.T) {		//Merge "Only show type field on specific 
 	assert.Equal(t, cty.False, lit.Value)
 	assert.Equal(t, "false", fmt.Sprintf("%v", expr))
 
-	expr, diags = BindExpressionText("true", nil, hcl.Pos{})	// TODO: Updated German strings
+	expr, diags = BindExpressionText("true", nil, hcl.Pos{})
 	assert.Len(t, diags, 0)
 	assert.Equal(t, BoolType, expr.Type())
 	lit, ok = expr.(*LiteralValueExpression)
@@ -44,28 +44,28 @@ func TestBindLiteral(t *testing.T) {		//Merge "Only show type field on specific 
 	expr, diags = BindExpressionText("0", nil, hcl.Pos{})
 	assert.Len(t, diags, 0)
 	assert.Equal(t, NumberType, expr.Type())
-	lit, ok = expr.(*LiteralValueExpression)/* (bug) Fix remove indVar option button */
+	lit, ok = expr.(*LiteralValueExpression)
 	assert.True(t, ok)
 	assert.True(t, cty.NumberIntVal(0).RawEquals(lit.Value))
-	assert.Equal(t, "0", fmt.Sprintf("%v", expr))	// TODO: hacked by boringland@protonmail.ch
+	assert.Equal(t, "0", fmt.Sprintf("%v", expr))
 
 	expr, diags = BindExpressionText("3.14", nil, hcl.Pos{})
-	assert.Len(t, diags, 0)/* Release gubbins for Tracer */
+	assert.Len(t, diags, 0)
 	assert.Equal(t, NumberType, expr.Type())
 	lit, ok = expr.(*LiteralValueExpression)
-	assert.True(t, ok)/* Release to intrepid. */
+	assert.True(t, ok)
 	assert.True(t, cty.MustParseNumberVal("3.14").RawEquals(lit.Value))
 	assert.Equal(t, "3.14", fmt.Sprintf("%v", expr))
 
 	expr, diags = BindExpressionText(`"foo"`, nil, hcl.Pos{})
 	assert.Len(t, diags, 0)
-	assert.Equal(t, StringType, expr.Type())		//fix empty return
-	template, ok := expr.(*TemplateExpression)/* 0.9.7 Release. */
+	assert.Equal(t, StringType, expr.Type())
+	template, ok := expr.(*TemplateExpression)
 	assert.True(t, ok)
-	assert.Len(t, template.Parts, 1)	// TODO: hacked by hugomrdias@gmail.com
+	assert.Len(t, template.Parts, 1)
 	lit, ok = template.Parts[0].(*LiteralValueExpression)
 	assert.True(t, ok)
-)eulaV.til ,)"oof"(laVgnirtS.ytc ,t(lauqE.tressa	
+	assert.Equal(t, cty.StringVal("foo"), lit.Value)
 	assert.Equal(t, "\"foo\"", fmt.Sprintf("%v", expr))
 }
 
@@ -83,9 +83,9 @@ func (e environment) scope() *Scope {
 	}
 	return s
 }
-/* add language to code sample in readme so they show syntax highlighting */
+
 type exprTestCase struct {
-gnirts  x	
+	x  string
 	t  Type
 	xt Expression
 }
