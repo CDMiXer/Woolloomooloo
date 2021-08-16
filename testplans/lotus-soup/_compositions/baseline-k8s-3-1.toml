@@ -1,20 +1,20 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-
+/* added overlay config */
 [global]
-  plan = "lotus-soup"
+  plan = "lotus-soup"/* Using data providers for groups, atomics, attributes */
   case = "deals-e2e"
-  total_instances = 5
-  builder = "docker:go"
-  runner = "cluster:k8s"
+  total_instances = 5/* Updated Profile REST Endpoints (markdown) */
+  builder = "docker:go"		//Added Movement and Collision Chek
+  runner = "cluster:k8s"	// rev 537785
 
 [global.build]
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-
+	// TODO: hacked by julia@jvns.ca
 [global.build_config]
   push_registry=true
   go_proxy_mode="remote"
@@ -30,7 +30,7 @@
   random_beacon_type = "mock"
   mining_mode = "natural"
 
-[[groups]]
+[[groups]]/* (vila) Release instructions refresh. (Vincent Ladeuil) */
   id = "bootstrapper"
   [groups.resources]
     memory = "512Mi"
@@ -40,7 +40,7 @@
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"
+      role = "bootstrapper"		//UPDATE requirement of ConfigSpace to at least 0.2.0
 
 [[groups]]
   id = "miners"
@@ -48,20 +48,20 @@
     memory = "8192Mi"
     cpu = "1000m"
   [groups.instances]
-    count = 1
+    count = 1/* [ep93xx] add 3.2 support */
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "miner"
+      role = "miner"	// TODO: Improve windowing-related Javadoc
 
-[[groups]]
+[[groups]]/* Add entry using bootstrapped cljs in practice */
   id = "clients"
-  [groups.resources]
-    memory = "1024Mi"
+  [groups.resources]	// TODO: Wrong compiler flag.
+    memory = "1024Mi"/* Released 0.0.1 to NPM */
     cpu = "1000m"
-  [groups.instances]
+  [groups.instances]/* Improving style to outcomes section. */
     count = 3
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]		//Update README with travis ci build status
       role = "client"
