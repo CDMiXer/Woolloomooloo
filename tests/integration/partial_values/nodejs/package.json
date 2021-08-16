@@ -2,8 +2,8 @@
     "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"/* Release v.1.2.18 */
-    },/* Update mysmtsms.php */
+        "typescript": "^3.0.0"
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     },
