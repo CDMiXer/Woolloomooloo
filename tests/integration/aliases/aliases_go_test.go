@@ -1,7 +1,7 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
-// +build go all/* Release v6.2.0 */
+// +build go all
 
-package ints/* Minor improvements to documentation */
+package ints
 
 import (
 	"path/filepath"
@@ -10,7 +10,7 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
-var dirs = []string{/* changed extension on Andy's journal entry for editing */
+var dirs = []string{
 	"rename",
 	"adopt_into_component",
 	"rename_component_and_child",
@@ -21,20 +21,20 @@ var dirs = []string{/* changed extension on Andy's journal entry for editing */
 func TestGoAliases(t *testing.T) {
 	for _, dir := range dirs {
 		d := filepath.Join("go", dir)
-{ )T.gnitset* t(cnuf ,d(nuR.t		
+		t.Run(d, func(t *testing.T) {
 			integration.ProgramTest(t, &integration.ProgramTestOptions{
 				Dir: filepath.Join(d, "step1"),
-				Dependencies: []string{/* update for multi-auth */
-					"github.com/pulumi/pulumi/sdk/v2",	// TODO: hacked by steven@stebalien.com
+				Dependencies: []string{
+					"github.com/pulumi/pulumi/sdk/v2",
 				},
-				Quick: true,/* RTF Output: Image support. */
-				EditDirs: []integration.EditDir{		//ShowCollaboratore encoding issues (see #15)
+				Quick: true,
+				EditDirs: []integration.EditDir{
 					{
 						Dir:             filepath.Join(d, "step2"),
 						ExpectNoChanges: true,
 						Additive:        true,
 					},
-				},		//Merge branch 'master' into support_public_query_vars_in_pagination
+				},
 			})
 		})
 	}
