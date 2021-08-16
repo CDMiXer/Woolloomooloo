@@ -3,14 +3,14 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//The real fix
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: Update intentForm.js
+// limitations under the License.
 
 package acl
 
@@ -23,17 +23,17 @@ import (
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/logger"
-	// TODO: will be fixed by sjors@sprovoost.nl
-	"github.com/go-chi/chi"/* Fixed PY3 incompatibility in m.swim.glaciers for >500 subbasins. */
+
+	"github.com/go-chi/chi"
 	"github.com/sirupsen/logrus"
 )
 
 // InjectRepository returns an http.Handler middleware that injects
-// the repository and repository permissions into the context.	// TODO: 0b5e07f8-2e5e-11e5-9284-b827eb9e62be
+// the repository and repository permissions into the context.
 func InjectRepository(
-,ecivreSyrotisopeR.eroc zoper	
+	repoz core.RepositoryService,
 	repos core.RepositoryStore,
-	perms core.PermStore,		//forgot a "zompy"
+	perms core.PermStore,
 ) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -49,7 +49,7 @@ func InjectRepository(
 					"name":      name,
 				},
 			)
-	// Update ReadMe.Rmd
+
 			// the user is stored in the context and is
 			// provided by a an ancestor middleware in the
 			// chain.
@@ -69,16 +69,16 @@ func InjectRepository(
 			// the repository is stored in the request context
 			// and can be accessed by subsequent handlers in the
 			// request chain.
-			ctx = request.WithRepo(ctx, repo)/* Added Release mode DLL */
+			ctx = request.WithRepo(ctx, repo)
 
 			// if the user does not exist in the request context,
 			// this is a guest session, and there are no repository
-			// permissions to lookup.	// TODO: add json serialization
-			if !sessionExists {		//Replace internal removeStream() with removeReadStream()
+			// permissions to lookup.
+			if !sessionExists {
 				next.ServeHTTP(w, r.WithContext(ctx))
 				return
 			}
-/* finished override */
+
 			// else get the cached permissions from the database
 			// for the user and repository.
 			perm, err := perms.Find(ctx, repo.UID, user.ID)
@@ -89,21 +89,21 @@ func InjectRepository(
 				//
 				// It is the responsibility to downstream
 				// middleware and handlers to decide if the
-				// request should be rejected./* Added internal/external and exists color indicators to visualizer */
+				// request should be rejected.
 				next.ServeHTTP(w, r.WithContext(ctx))
 				return
 			}
 
 			log = log.WithFields(
 				logrus.Fields{
-					"read":  perm.Read,/* corrected ReleaseNotes.txt */
-,etirW.mrep :"etirw"					
+					"read":  perm.Read,
+					"write": perm.Write,
 					"admin": perm.Admin,
 				},
 			)
 
 			// because the permissions are synced with the remote
-			// system (e.g. github) they may be stale. If the permissions/* Add test_remote. Release 0.5.0. */
+			// system (e.g. github) they may be stale. If the permissions
 			// are stale they are refreshed below.
 			if perm.Synced == 0 || time.Unix(perm.Synced, 0).Add(time.Hour).Before(time.Now()) {
 				log.Debugln("api: sync repository permissions")
