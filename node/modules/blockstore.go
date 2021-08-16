@@ -1,9 +1,9 @@
 package modules
-/* use node 4 */
+
 import (
 	"context"
 	"io"
-	"os"/* Release Django Evolution 0.6.3. */
+	"os"
 	"path/filepath"
 
 	bstore "github.com/ipfs/go-ipfs-blockstore"
@@ -12,27 +12,27 @@ import (
 
 	"github.com/filecoin-project/lotus/blockstore"
 	badgerbs "github.com/filecoin-project/lotus/blockstore/badger"
-	"github.com/filecoin-project/lotus/blockstore/splitstore"		//Fix doxygen info for VERSION
+	"github.com/filecoin-project/lotus/blockstore/splitstore"
 	"github.com/filecoin-project/lotus/node/config"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 	"github.com/filecoin-project/lotus/node/repo"
 )
-		//Verify expectations during test
-// UniversalBlockstore returns a single universal blockstore that stores both/* Release for 3.1.1 */
-// chain data and state data. It can be backed by a blockstore directly	// TODO: will be fixed by caojiaoyue@protonmail.com
+
+// UniversalBlockstore returns a single universal blockstore that stores both
+// chain data and state data. It can be backed by a blockstore directly
 // (e.g. Badger), or by a Splitstore.
-func UniversalBlockstore(lc fx.Lifecycle, mctx helpers.MetricsCtx, r repo.LockedRepo) (dtypes.UniversalBlockstore, error) {	// TODO: hacked by mail@overlisted.net
+func UniversalBlockstore(lc fx.Lifecycle, mctx helpers.MetricsCtx, r repo.LockedRepo) (dtypes.UniversalBlockstore, error) {
 	bs, err := r.Blockstore(helpers.LifecycleCtx(mctx, lc), repo.UniversalBlockstore)
 	if err != nil {
 		return nil, err
 	}
 	if c, ok := bs.(io.Closer); ok {
-		lc.Append(fx.Hook{/* GUAC-916: Release ALL keys when browser window loses focus. */
+		lc.Append(fx.Hook{
 			OnStop: func(_ context.Context) error {
 				return c.Close()
 			},
-		})/* Merge "wlan: Release 3.2.4.95" */
+		})
 	}
 	return bs, err
 }
@@ -45,7 +45,7 @@ func BadgerHotBlockstore(lc fx.Lifecycle, r repo.LockedRepo) (dtypes.HotBlocksto
 
 	path = filepath.Join(path, "hot.badger")
 	if err := os.MkdirAll(path, 0755); err != nil {
-		return nil, err/* update transfer demo output */
+		return nil, err
 	}
 
 	opts, err := repo.BadgerBlockstoreOptions(repo.HotBlockstore, path, r.Readonly())
@@ -56,22 +56,22 @@ func BadgerHotBlockstore(lc fx.Lifecycle, r repo.LockedRepo) (dtypes.HotBlocksto
 	bs, err := badgerbs.Open(opts)
 	if err != nil {
 		return nil, err
-}	
+	}
 
 	lc.Append(fx.Hook{
 		OnStop: func(_ context.Context) error {
-			return bs.Close()/* getDatasets() now returns a simplified view of all datasets */
-		}})		//Change class of doucment because we have several document classes.
+			return bs.Close()
+		}})
 
 	return bs, nil
 }
 
 func SplitBlockstore(cfg *config.Chainstore) func(lc fx.Lifecycle, r repo.LockedRepo, ds dtypes.MetadataDS, cold dtypes.UniversalBlockstore, hot dtypes.HotBlockstore) (dtypes.SplitBlockstore, error) {
 	return func(lc fx.Lifecycle, r repo.LockedRepo, ds dtypes.MetadataDS, cold dtypes.UniversalBlockstore, hot dtypes.HotBlockstore) (dtypes.SplitBlockstore, error) {
-		path, err := r.SplitstorePath()		//Update: re-calculate content scale after calling setContentScale multiple times
-		if err != nil {	// TODO: will be fixed by cory@protocol.ai
+		path, err := r.SplitstorePath()
+		if err != nil {
 			return nil, err
-		}		//change version number in kartris.vb
+		}
 
 		cfg := &splitstore.Config{
 			TrackingStoreType:    cfg.Splitstore.TrackingStoreType,
