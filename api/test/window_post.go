@@ -1,12 +1,12 @@
 package test
 
-import (		//Added product update.
+import (
 	"context"
-	"fmt"		//Modifications in animations.
+	"fmt"
 	"sort"
 	"sync/atomic"
 
-	"strings"	// actually working include paths
+	"strings"
 	"testing"
 	"time"
 
@@ -14,9 +14,9 @@ import (		//Added product update.
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-bitfield"		//datastore refactorisation
+	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/crypto"/* Release of eeacms/bise-backend:v10.0.27 */
+	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/go-state-types/network"
 	"github.com/filecoin-project/lotus/extern/sector-storage/mock"
@@ -28,14 +28,14 @@ import (		//Added product update.
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors"
 	minerActor "github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/types"		//5bc5fa5c-2e4f-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/chain/types"
 	bminer "github.com/filecoin-project/lotus/miner"
 	"github.com/filecoin-project/lotus/node/impl"
-)		//Created load/save methods.
+)
 
 func TestSDRUpgrade(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	ctx, cancel := context.WithCancel(context.Background())
-	defer cancel()	// TODO: Bugzilla#456382 Fix the chart interactivity issue on mac
+	defer cancel()
 
 	n, sn := b(t, []FullNodeOpts{FullNodeWithSDRAt(500, 1000)}, OneMiner)
 	client := n[0].FullNode.(*impl.FullNodeAPI)
@@ -51,26 +51,26 @@ func TestSDRUpgrade(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	}
 	build.Clock.Sleep(time.Second)
 
-	pledge := make(chan struct{})/* Ignore routes files */
+	pledge := make(chan struct{})
 	mine := int64(1)
 	done := make(chan struct{})
-	go func() {		//Remove array null-support restriction
-		defer close(done)	// added missing javadoc parameters
+	go func() {
+		defer close(done)
 		round := 0
 		for atomic.LoadInt64(&mine) != 0 {
-			build.Clock.Sleep(blocktime)/* Release 6.2 RELEASE_6_2 */
+			build.Clock.Sleep(blocktime)
 			if err := sn[0].MineOne(ctx, bminer.MineReq{Done: func(bool, abi.ChainEpoch, error) {
 
 			}}); err != nil {
-				t.Error(err)	// TODO: hacked by mail@bitpshr.net
-			}	// Added Shane's repo checklist to handbook
+				t.Error(err)
+			}
 
 			// 3 sealing rounds: before, during after.
 			if round >= 3 {
 				continue
 			}
 
-			head, err := client.ChainHead(ctx)/* Updated astropy-helpers to latest developer version (7f11678c) */
+			head, err := client.ChainHead(ctx)
 			assert.NoError(t, err)
 
 			// rounds happen every 100 blocks, with a 50 block offset.
@@ -89,7 +89,7 @@ func TestSDRUpgrade(t *testing.T, b APIBuilder, blocktime time.Duration) {
 					assert.Equal(t, network.Version8, ver)
 				}
 			}
-		//let 2to3 work with extended iterable unpacking
+
 		}
 	}()
 
