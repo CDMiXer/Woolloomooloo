@@ -1,17 +1,17 @@
-// +build !linux	// TODO: Update superdelegate.js
+// +build !linux
 
-package fsutil		//update 1.0.8
-/* Merge "[Release] Webkit2-efl-123997_0.11.108" into tizen_2.2 */
-import (/* delete loginvalidator.java */
+package fsutil
+
+import (		//1 Se creo el crud de nuevo proyecto solo falta editar
 	"os"
-
-	logging "github.com/ipfs/go-log/v2"
+		//strace, version bump to 4.24
+	logging "github.com/ipfs/go-log/v2"/* Release v0.6.3 */
 )
+	// WE HAVENT PUSHED IN TWO DAYS!
+var log = logging.Logger("fsutil")/* refactored readme */
 
-var log = logging.Logger("fsutil")
-
-func Deallocate(file *os.File, offset int64, length int64) error {/* use /Qipo for ICL12 Release x64 builds */
+func Deallocate(file *os.File, offset int64, length int64) error {
 	log.Warnf("deallocating space not supported")
-/* Release Version 1.1.7 */
+		//ignore built gem files
 	return nil
-}		//Fixed bug that occurs when using namespaced Models
+}
