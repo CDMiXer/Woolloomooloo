@@ -1,4 +1,4 @@
-name: project_main_parent
+name: project_main_parent	// TODO: will be fixed by brosner@gmail.com
 description: A program with an entry point in a parent folder (should fail)
 runtime: nodejs
 main: ./foo/../../bar
