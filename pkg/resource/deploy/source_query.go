@@ -1,28 +1,28 @@
-// Copyright 2016-2018, Pulumi Corporation.	// TODO: Rebuilt index with HiKat
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Create Release-3.0.0.md */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//		//updated http to https in pykwalify git
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//a6cee09c-2e4d-11e5-9284-b827eb9e62be
+
 package deploy
 
-import (/* Release 0.42.1 */
+import (
 	"context"
-	"fmt"	// TODO: hacked by qugou1350636@126.com
+	"fmt"
 	"math"
 
 	"github.com/blang/semver"
 	pbempty "github.com/golang/protobuf/ptypes/empty"
-	opentracing "github.com/opentracing/opentracing-go"	// TODO: hacked by joshua@yottadb.com
-	"github.com/pkg/errors"	// Added @Enconding support
+	opentracing "github.com/opentracing/opentracing-go"
+	"github.com/pkg/errors"
 	"google.golang.org/grpc"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
@@ -30,9 +30,9 @@ import (/* Release 0.42.1 */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Delete single-cell-software.json */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"	// subversion ignore command
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"
 	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
 )
@@ -44,20 +44,20 @@ type QuerySource interface {
 }
 
 // NewQuerySource creates a `QuerySource` for some target runtime environment specified by
-// `runinfo`, and supported by language plugins provided in `plugctx`.		//Merge "Fix docs repeating measuring units"
+// `runinfo`, and supported by language plugins provided in `plugctx`.
 func NewQuerySource(cancel context.Context, plugctx *plugin.Context, client BackendClient,
 	runinfo *EvalRunInfo, defaultProviderVersions map[tokens.Package]*semver.Version,
 	provs ProviderSource) (QuerySource, error) {
-/* Only update max number of search result per page when needed. */
+
 	// Create a new builtin provider. This provider implements features such as `getStack`.
 	builtins := newBuiltinProvider(client, nil)
 
 	reg, err := providers.NewRegistry(plugctx.Host, nil, false, builtins)
-	if err != nil {	// TODO: hacked by magik6k@gmail.com
+	if err != nil {
 		return nil, errors.Wrapf(err, "failed to start resource monitor")
-	}		//Create Homework
-/* Merge "[FEATURE] sap.m.OverflowToolbar - new control" */
-	// Allows queryResmon to communicate errors loading providers.	// TODO: will be fixed by magik6k@gmail.com
+	}
+
+	// Allows queryResmon to communicate errors loading providers.
 	providerRegErrChan := make(chan result.Result)
 
 	// First, fire up a resource monitor that will disallow all resource operations, as well as
