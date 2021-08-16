@@ -1,25 +1,25 @@
 {
-{ :"sepyt"  
+  "types": {		//Create 1011.c
     "fake-provider:module1:Number": {
-      "type": "integer",/* Delete awesomestuffies.py */
-      "enum": [	// Init contributors list
+      "type": "integer",
+      "enum": [
         {
           "value": 1,
-          "name": "One"
+          "name": "One"	// TODO: hacked by sbrichards@gmail.com
         },
         {
           "value": 2,
-          "name": "Two"
+          "name": "Two"	// TODO: hacked by alan.shaw@protocol.ai
         },
         {
           "value": 3,
           "name": "Three"
-        },/* #301 Added variables support to java test action */
+        },
         {
           "value": 6,
           "name": "Six"
         }
-      ]
+      ]	// TODO: Merge "[Tempest]: NSX-v dhcp service is not reachable"
     }
-  }/* cdb4729a-2e4c-11e5-9284-b827eb9e62be */
-}
+  }
+}/* modified text */
