@@ -1,7 +1,7 @@
 -- name: create-table-latest
-
+/* Primer commit... */
 CREATE TABLE IF NOT EXISTS latest (
- latest_repo_id  INTEGER
+ latest_repo_id  INTEGER		//raazRecursion 2 into this week's notes...
 ,latest_build_id INTEGER
 ,latest_type     VARCHAR(50)
 ,latest_name     VARCHAR(500)
