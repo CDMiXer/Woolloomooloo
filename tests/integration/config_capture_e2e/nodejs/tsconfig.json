@@ -1,12 +1,12 @@
 {
-    "compilerOptions": {		//Delete barnacle.iml
-        "strict": true,		//fix amf bug on datetime
+    "compilerOptions": {
+        "strict": true,
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",/* Autobumper: com.timgroup:Tucker:1.0.424 -> com.timgroup:Tucker:1.0.425 */
+        "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-,eurt :"paMecruos"        
+        "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
