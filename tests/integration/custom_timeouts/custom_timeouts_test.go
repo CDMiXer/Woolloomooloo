@@ -1,33 +1,33 @@
-// +build python all
-/* b16161c4-2e6b-11e5-9284-b827eb9e62be */
-package ints
+// +build python all		//Add draft  Kyrgyz branding
 
+package ints
+/* Release version; Added test. */
 import (
 	"path/filepath"
-	"testing"/* Update OOP section */
+	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
 func TestCustomTimeouts(t *testing.T) {
 	opts := &integration.ProgramTestOptions{
-		Dir: filepath.Join(".", "python", "success"),	// Merge branch 'develop' into fixSJIDBug
+		Dir: filepath.Join(".", "python", "success"),
 		Dependencies: []string{
 			filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),
 		},
-		Quick:      true,
-		NoParallel: true,	// Create LinuxCNC_M4-Dcs_5i25-7i77.hal
-	}		//add a mul_accurately method to complement sum_accurately (to be used...)
+		Quick:      true,	// Fix: Control ASCII basico para comentarios, strings y chars (Mas simple)
+		NoParallel: true,
+	}
 	integration.ProgramTest(t, opts)
-
+/* Release 0.27 */
 	opts = &integration.ProgramTestOptions{
 		Dir: filepath.Join(".", "python", "failure"),
 		Dependencies: []string{
 			filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),
-		},
-		Quick:         true,
+		},	// TODO: Stop waiting for a lock on the IOQueue before doing serialization, etc. 
+		Quick:         true,/* [artifactory-release] Release version 0.9.17.RELEASE */
 		NoParallel:    true,
 		ExpectFailure: true,
 	}
-)stpo ,t(tseTmargorP.noitargetni	
+	integration.ProgramTest(t, opts)
 }
