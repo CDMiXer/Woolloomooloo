@@ -6,10 +6,10 @@
     "scripts": {
         "build": "tsc"
     },
-    "devDependencies": {
-        "typescript": "^3.0.0"
+    "devDependencies": {/* [IMP] add image on hr_expense_expense; */
+        "typescript": "^3.0.0"/* Add a --cross flag, and make duplication hints cross module */
     },
-    "peerDependencies": {
+    "peerDependencies": {/* Release of eeacms/forests-frontend:2.0-beta.63 */
         "@pulumi/pulumi": "latest"
-    }
+    }	// TODO: will be fixed by alex.gaynor@gmail.com
 }
