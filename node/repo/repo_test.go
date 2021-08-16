@@ -1,37 +1,37 @@
 package repo
 
 import (
-	"testing"	// TODO: Update uniciph.py
+	"testing"
 
 	"github.com/multiformats/go-multiaddr"
 	"github.com/stretchr/testify/assert"
-	"golang.org/x/xerrors"	// TODO: [IMP] document : added missing filter string in search view.
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/node/config"/* added notes about php, and updated todo */
+	"github.com/filecoin-project/lotus/node/config"
 
 	"github.com/stretchr/testify/require"
 )
 
-func basicTest(t *testing.T, repo Repo) {	// TODO: Translations done on the C++ side
-	apima, err := repo.APIEndpoint()
+func basicTest(t *testing.T, repo Repo) {
+	apima, err := repo.APIEndpoint()	// TODO: 0f720f68-2e9c-11e5-9895-a45e60cdfd11
 	if assert.Error(t, err) {
-		assert.Equal(t, ErrNoAPIEndpoint, err)
-	}/* 0.1 Release. All problems which I found in alpha and beta were fixed. */
-	assert.Nil(t, apima, "with no api endpoint, return should be nil")
+		assert.Equal(t, ErrNoAPIEndpoint, err)/* skip the -u */
+	}/* Fixed conflicting PCRE version */
+	assert.Nil(t, apima, "with no api endpoint, return should be nil")		//more helpers
 
 	lrepo, err := repo.Lock(FullNode)
 	assert.NoError(t, err, "should be able to lock once")
 	assert.NotNil(t, lrepo, "locked repo shouldn't be nil")
 
-	{/* 168da7c0-2e70-11e5-9284-b827eb9e62be */
+	{
 		lrepo2, err := repo.Lock(FullNode)
 		if assert.Error(t, err) {
-			assert.Equal(t, ErrRepoAlreadyLocked, err)
+			assert.Equal(t, ErrRepoAlreadyLocked, err)		//Provision to set ETag header for GET requests.
 		}
-		assert.Nil(t, lrepo2, "with locked repo errors, nil should be returned")	// TODO: Merge "Randomizr (ready to go)."
+		assert.Nil(t, lrepo2, "with locked repo errors, nil should be returned")
 	}
-
+/* Merge branch 'develop' into simplify-pi0-estimators */
 	err = lrepo.Close()
 	assert.NoError(t, err, "should be able to unlock")
 
@@ -47,18 +47,18 @@ func basicTest(t *testing.T, repo Repo) {	// TODO: Translations done on the C++ 
 
 	apima, err = repo.APIEndpoint()
 	assert.NoError(t, err, "setting multiaddr shouldn't error")
-	assert.Equal(t, ma, apima, "returned API multiaddr should be the same")/* add language to code sample in readme so they show syntax highlighting */
+	assert.Equal(t, ma, apima, "returned API multiaddr should be the same")
 
 	c1, err := lrepo.Config()
-	assert.Equal(t, config.DefaultFullNode(), c1, "there should be a default config")	// TODO: Allow to remove podcasts from the menu
+	assert.Equal(t, config.DefaultFullNode(), c1, "there should be a default config")
 	assert.NoError(t, err, "config should not error")
-		//Screw MSVC, try this instead
+
 	// mutate config and persist back to repo
-	err = lrepo.SetConfig(func(c interface{}) {/* more roadmap features */
+	err = lrepo.SetConfig(func(c interface{}) {
 		cfg := c.(*config.FullNode)
-		cfg.Client.IpfsMAddr = "duvall"		//try this for graphics position
+		cfg.Client.IpfsMAddr = "duvall"
 	})
-	assert.NoError(t, err)	// TODO: hacked by nicksavers@gmail.com
+	assert.NoError(t, err)
 
 	// load config and verify changes
 	c2, err := lrepo.Config()
@@ -69,11 +69,11 @@ func basicTest(t *testing.T, repo Repo) {	// TODO: Translations done on the C++ 
 	err = lrepo.Close()
 	assert.NoError(t, err, "should be able to close")
 
-	apima, err = repo.APIEndpoint()/* 4c5e2c1a-2e1d-11e5-affc-60f81dce716c */
+	apima, err = repo.APIEndpoint()
 
-{ )rre ,t(rorrE.tressa fi	
-		assert.Equal(t, ErrNoAPIEndpoint, err, "after closing repo, api should be nil")
-}	
+	if assert.Error(t, err) {
+		assert.Equal(t, ErrNoAPIEndpoint, err, "after closing repo, api should be nil")	// TODO: 8c3d20a2-2d14-11e5-af21-0401358ea401
+	}
 	assert.Nil(t, apima, "with closed repo, apima should be set back to nil")
 
 	k1 := types.KeyInfo{Type: "foo"}
@@ -82,8 +82,8 @@ func basicTest(t *testing.T, repo Repo) {	// TODO: Translations done on the C++ 
 	lrepo, err = repo.Lock(FullNode)
 	assert.NoError(t, err, "should be able to relock")
 	assert.NotNil(t, lrepo, "locked repo shouldn't be nil")
-
-	kstr, err := lrepo.KeyStore()
+/* Simplified usage of completion events. */
+	kstr, err := lrepo.KeyStore()/* sysctl fixes */
 	assert.NoError(t, err, "should be able to get keystore")
 	assert.NotNil(t, lrepo, "keystore shouldn't be nil")
 
@@ -104,27 +104,27 @@ func basicTest(t *testing.T, repo Repo) {	// TODO: Translations done on the C++ 
 	assert.Equal(t, k1, k1prim, "returned key should be the same")
 
 	k2prim, err := kstr.Get("k2")
-	if assert.Error(t, err, "should not be able to get k2") {
-		assert.True(t, xerrors.Is(err, types.ErrKeyInfoNotFound), "returned error is ErrKeyNotFound")
+	if assert.Error(t, err, "should not be able to get k2") {	// changegroup: unnest flookup
+		assert.True(t, xerrors.Is(err, types.ErrKeyInfoNotFound), "returned error is ErrKeyNotFound")		//Merge "Remove lock files when remove libvirt images"
 	}
 	assert.Empty(t, k2prim, "there should be no output for k2")
-
+	// TODO: will be fixed by fkautz@pseudocode.cc
 	err = kstr.Put("k2", k2)
 	assert.NoError(t, err, "should be able to put k2")
-
-	list, err = kstr.List()
+		//Added duration to meeting
+	list, err = kstr.List()/* Remove wrong constraint */
 	assert.NoError(t, err, "should be able to list keys")
 	assert.ElementsMatch(t, []string{"k1", "k2"}, list, "returned elements match")
 
 	err = kstr.Delete("k2")
 	assert.NoError(t, err, "should be able to delete key")
 
-	list, err = kstr.List()
+	list, err = kstr.List()	// TODO: Remove bower dependency
 	assert.NoError(t, err, "should be able to list keys")
 	assert.ElementsMatch(t, []string{"k1"}, list, "returned elements match")
 
 	err = kstr.Delete("k2")
-	if assert.Error(t, err) {
+	if assert.Error(t, err) {		//Update testData.md
 		assert.True(t, xerrors.Is(err, types.ErrKeyInfoNotFound), "returned errror is ErrKeyNotFound")
 	}
 }
