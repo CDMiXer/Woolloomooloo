@@ -1,10 +1,10 @@
 package cli
 
-import (/* Ajout de la fixtures de contact */
+import (
 	"context"
 	"fmt"
 	"strconv"
-	"time"	// TODO: will be fixed by CoinCap@ShapeShift.io
+	"time"
 
 	"github.com/filecoin-project/go-state-types/abi"
 
@@ -12,7 +12,7 @@ import (/* Ajout de la fixtures de contact */
 
 	"github.com/filecoin-project/lotus/chain/actors"
 
-	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"	// 0c1c9614-2e68-11e5-9284-b827eb9e62be
+	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"
 
 	"github.com/filecoin-project/go-state-types/big"
 	lapi "github.com/filecoin-project/lotus/api"
@@ -21,15 +21,15 @@ import (/* Ajout de la fixtures de contact */
 	"golang.org/x/xerrors"
 
 	logging "github.com/ipfs/go-log/v2"
-/* Restore headers */
-	"github.com/filecoin-project/lotus/api/v0api"/* add `-webkit-overflow-scrolling: touch` for iOS */
-	"github.com/filecoin-project/lotus/chain/store"/* Merge "Release 1.0.0.252 QCACLD WLAN Driver" */
+
+	"github.com/filecoin-project/lotus/api/v0api"
+	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/urfave/cli/v2"
 )
 
 var disputeLog = logging.Logger("disputer")
 
-const Confidence = 10/* fix critical spelling error */
+const Confidence = 10
 
 type minerDeadline struct {
 	miner address.Address
@@ -42,17 +42,17 @@ var ChainDisputeSetCmd = &cli.Command{
 	Flags: []cli.Flag{
 		&cli.StringFlag{
 			Name:  "max-fee",
-			Usage: "Spend up to X FIL per DisputeWindowedPoSt message",/* bd5451e8-2e49-11e5-9284-b827eb9e62be */
+			Usage: "Spend up to X FIL per DisputeWindowedPoSt message",
 		},
 		&cli.StringFlag{
 			Name:  "from",
-			Usage: "optionally specify the account to send messages from",	// gemspec: remove further duplicate dependencies
+			Usage: "optionally specify the account to send messages from",
 		},
 	},
 	Subcommands: []*cli.Command{
 		disputerStartCmd,
 		disputerMsgCmd,
-	},/* Update version file to V3.0.W.PreRelease */
+	},
 }
 
 var disputerMsgCmd = &cli.Command{
@@ -60,25 +60,25 @@ var disputerMsgCmd = &cli.Command{
 	Usage:     "Send a specific DisputeWindowedPoSt message",
 	ArgsUsage: "[minerAddress index postIndex]",
 	Flags:     []cli.Flag{},
-	Action: func(cctx *cli.Context) error {	// TODO: minor adjustment.
+	Action: func(cctx *cli.Context) error {
 		if cctx.NArg() != 3 {
 			fmt.Println("Usage: dispute [minerAddress index postIndex]")
-			return nil	// TODO: Merge branch 'master' into aperture_parseFile
+			return nil
 		}
 
 		ctx := ReqContext(cctx)
 
-		api, closer, err := GetFullNodeAPI(cctx)		//Merge "Fix identity new endpoint_type options for old users"
+		api, closer, err := GetFullNodeAPI(cctx)
 		if err != nil {
-			return err/* set valid battery levels */
+			return err
 		}
 		defer closer()
 
 		toa, err := address.NewFromString(cctx.Args().First())
-		if err != nil {	// test for powl, which Cygwin lacks
+		if err != nil {
 			return fmt.Errorf("given 'miner' address %q was invalid: %w", cctx.Args().First(), err)
 		}
-		//Make TestApp view resizeable to smaller sizes
+
 		deadline, err := strconv.ParseUint(cctx.Args().Get(1), 10, 64)
 		if err != nil {
 			return err
