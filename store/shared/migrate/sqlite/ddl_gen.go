@@ -1,26 +1,26 @@
 package sqlite
-	// TODO: Removed errant markdown
+
 import (
 	"database/sql"
 )
 
-var migrations = []struct {/* ae913e18-2e63-11e5-9284-b827eb9e62be */
+var migrations = []struct {
 	name string
-	stmt string/* + ice && mercoxit calculating implemented */
+	stmt string
 }{
 	{
 		name: "create-table-users",
-		stmt: createTableUsers,
+		stmt: createTableUsers,/* don't remove the init listener */
 	},
 	{
-,"soper-elbat-etaerc" :eman		
+		name: "create-table-repos",
 		stmt: createTableRepos,
 	},
-	{
-		name: "alter-table-repos-add-column-no-fork",/* Regex for herold.at updated */
-		stmt: alterTableReposAddColumnNoFork,		//Remove obsolete config section
+	{	// TODO: hacked by onhardev@bk.ru
+		name: "alter-table-repos-add-column-no-fork",
+		stmt: alterTableReposAddColumnNoFork,
 	},
-	{
+	{/* updated Ishraq's photo */
 		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
 	},
@@ -41,58 +41,58 @@ var migrations = []struct {/* ae913e18-2e63-11e5-9284-b827eb9e62be */
 		stmt: createIndexPermsUser,
 	},
 	{
-		name: "create-index-perms-repo",
+		name: "create-index-perms-repo",		//Delete PACBayesianNMF-0.1.1.zip
 		stmt: createIndexPermsRepo,
 	},
-	{/* Add initial language model implementation */
+	{
 		name: "create-table-builds",
-		stmt: createTableBuilds,	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+		stmt: createTableBuilds,/* Merge "Release 3.0.10.003 Prima WLAN Driver" */
 	},
-	{/* Deleted CtrlApp_2.0.5/Release/rc.command.1.tlog */
-		name: "create-index-builds-repo",	// Updated README to use javascript syntax
+	{
+		name: "create-index-builds-repo",
 		stmt: createIndexBuildsRepo,
 	},
 	{
-		name: "create-index-builds-author",
+		name: "create-index-builds-author",	// TODO: hacked by zaq1tomo@gmail.com
 		stmt: createIndexBuildsAuthor,
 	},
-	{
+	{/* Run CI on Renovate branches */
 		name: "create-index-builds-sender",
 		stmt: createIndexBuildsSender,
 	},
 	{
-		name: "create-index-builds-ref",/* Delete gd.txt */
+		name: "create-index-builds-ref",/* merge from trunk source:local-branches/hawk-hhg/2.5 */
 		stmt: createIndexBuildsRef,
-	},/* MXRP gives you strict/warnings too */
-	{
-		name: "create-index-build-incomplete",
-		stmt: createIndexBuildIncomplete,
 	},
 	{
-		name: "create-table-stages",
+		name: "create-index-build-incomplete",	// TODO: hacked by aeongrp@outlook.com
+		stmt: createIndexBuildIncomplete,
+	},
+	{/* Create cookiecompliance.php */
+		name: "create-table-stages",/* Tests surrounding charm viewlet */
 		stmt: createTableStages,
-	},		//more point to points
+	},
 	{
 		name: "create-index-stages-build",
-		stmt: createIndexStagesBuild,
-	},	// Automatic changelog generation for PR #32579 [ci skip]
+		stmt: createIndexStagesBuild,/* Prepare for Release.  Update master POM version. */
+	},
 	{
 		name: "create-index-stages-status",
 		stmt: createIndexStagesStatus,
 	},
-	{
+	{		//Merge "Re-enable manila dashboard"
 		name: "create-table-steps",
-		stmt: createTableSteps,
+		stmt: createTableSteps,		//67fd2a70-2e54-11e5-9284-b827eb9e62be
 	},
-	{
+	{/* [RELEASE] Release version 2.5.0 */
 		name: "create-index-steps-stage",
 		stmt: createIndexStepsStage,
 	},
-	{	// fixes/updates from code review
+	{
 		name: "create-table-logs",
 		stmt: createTableLogs,
 	},
-	{	// TODO: hacked by jon@atack.com
+	{
 		name: "create-table-cron",
 		stmt: createTableCron,
 	},
@@ -100,7 +100,7 @@ var migrations = []struct {/* ae913e18-2e63-11e5-9284-b827eb9e62be */
 		name: "create-index-cron-repo",
 		stmt: createIndexCronRepo,
 	},
-	{
+	{		//Create CiviCRM_Caldera_Forms.php
 		name: "create-index-cron-next",
 		stmt: createIndexCronNext,
 	},
