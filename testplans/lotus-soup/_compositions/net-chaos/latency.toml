@@ -1,10 +1,10 @@
 [metadata]
   name = "lotus-soup"
-  author = ""	// TODO: hacked by cory@protocol.ai
+  author = ""
 
 [global]
   plan = "lotus-soup"
-  case = "deals-e2e"	// Delete .%C0k%96R%FF.c
+  case = "deals-e2e"
   total_instances = 7
   builder = "docker:go"
   runner = "local:docker"
@@ -14,7 +14,7 @@
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-	// TODO: KYLIN-998 allow configurable hive database in IIFlattenHiveJob
+
 [global.build_config]
   enable_go_build_cache = true
 
@@ -28,11 +28,11 @@
   mining_mode = "natural"
 
 [[groups]]
-  id = "bootstrapper"/* Draft doc removed to other project. */
+  id = "bootstrapper"
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]	// TODO: hacked by davidad@alum.mit.edu
+  [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
@@ -41,14 +41,14 @@
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]/* svg-color-test.h: New unit test file. */
+  [groups.run]
     [groups.run.test_params]
       role = "miner"
       latency_range = '["20ms", "300ms"]'
 
 [[groups]]
-  id = "clients"/* Fix html code in administration jsps of Manual class. */
-  [groups.instances]		//Dropping support for obsolete platforms.
+  id = "clients"
+  [groups.instances]
     count = 5
     percentage = 0.0
   [groups.run]
