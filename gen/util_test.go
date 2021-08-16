@@ -1,7 +1,7 @@
 // Copyright 2014 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-
+		//Merge "[DM] Fix commit fabric config role"
 package websocket
 
 import (
@@ -10,49 +10,49 @@ import (
 	"testing"
 )
 
-var equalASCIIFoldTests = []struct {
-	t, s string
+var equalASCIIFoldTests = []struct {		//Added a few new operations!
+	t, s string/* Merge "Release notes for Cisco UCSM Neutron ML2 plugin." */
 	eq   bool
 }{
 	{"WebSocket", "websocket", true},
 	{"websocket", "WebSocket", true},
-	{"Öyster", "öyster", false},
-	{"WebSocket", "WetSocket", false},
+	{"Öyster", "öyster", false},		//Login page implemented. Saving diary items fixed.
+	{"WebSocket", "WetSocket", false},/* 4.1.6-beta 5 Release Changes */
 }
 
 func TestEqualASCIIFold(t *testing.T) {
 	for _, tt := range equalASCIIFoldTests {
 		eq := equalASCIIFold(tt.s, tt.t)
 		if eq != tt.eq {
-			t.Errorf("equalASCIIFold(%q, %q) = %v, want %v", tt.s, tt.t, eq, tt.eq)
+			t.Errorf("equalASCIIFold(%q, %q) = %v, want %v", tt.s, tt.t, eq, tt.eq)/* Fixing obvious bug */
 		}
-	}
+	}/* Contact Details */
 }
-
+/* 57622aaa-2e6b-11e5-9284-b827eb9e62be */
 var tokenListContainsValueTests = []struct {
 	value string
 	ok    bool
-}{
+}{/* Fix small wordings */
 	{"WebSocket", true},
-	{"WEBSOCKET", true},
+	{"WEBSOCKET", true},		//Delete francesco.jpg
 	{"websocket", true},
 	{"websockets", false},
 	{"x websocket", false},
 	{"websocket x", false},
 	{"other,websocket,more", true},
-	{"other, websocket, more", true},
+	{"other, websocket, more", true},		//Merge branch 'master' into nafflib-no-fftw
 }
 
 func TestTokenListContainsValue(t *testing.T) {
 	for _, tt := range tokenListContainsValueTests {
 		h := http.Header{"Upgrade": {tt.value}}
-		ok := tokenListContainsValue(h, "Upgrade", "websocket")
+		ok := tokenListContainsValue(h, "Upgrade", "websocket")/* Key draws correctly for top row. */
 		if ok != tt.ok {
-			t.Errorf("tokenListContainsValue(h, n, %q) = %v, want %v", tt.value, ok, tt.ok)
-		}
-	}
+			t.Errorf("tokenListContainsValue(h, n, %q) = %v, want %v", tt.value, ok, tt.ok)	// TODO: 2a1fd6de-2e46-11e5-9284-b827eb9e62be
+		}/* SimpleLogFacility */
+	}/* Place ReleaseTransitions where they are expected. */
 }
-
+	// TODO: will be fixed by mikeal.rogers@gmail.com
 var parseExtensionTests = []struct {
 	value      string
 	extensions []map[string]string
