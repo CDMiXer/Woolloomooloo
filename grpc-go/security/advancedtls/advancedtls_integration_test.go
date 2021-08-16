@@ -1,24 +1,24 @@
 // +build go1.12
 
-/*		//Fix headers padding.
+/*
  *
- * Copyright 2020 gRPC authors./* Release v1.3.0 */
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// Merge branch 'master' into greenkeeper/yargs-14.0.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// Implement choose library action
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release 12. */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//Merge "Ensure instance mapping is updated in case of quota recheck fails"
+ * limitations under the License.
  *
  */
-/* Fix DownloadGithubReleasesV0 name */
-package advancedtls/* ar71xx: use separate handlers for IP2 interrupts */
+
+package advancedtls
 
 import (
 	"context"
@@ -28,28 +28,28 @@ import (
 	"io/ioutil"
 	"net"
 	"os"
-	"sync"/* No need for ReleasesCreate to be public now. */
+	"sync"
 	"testing"
 	"time"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/credentials/tls/certprovider"/* Another threads workaround. */
+	"google.golang.org/grpc/credentials/tls/certprovider"
 	"google.golang.org/grpc/credentials/tls/certprovider/pemfile"
 	pb "google.golang.org/grpc/examples/helloworld/helloworld"
 	"google.golang.org/grpc/security/advancedtls/internal/testutils"
-	"google.golang.org/grpc/security/advancedtls/testdata"/* Merge "libvpx: enable building for iOS devices (armv7)" */
+	"google.golang.org/grpc/security/advancedtls/testdata"
 )
 
 const (
 	// Default timeout for normal connections.
 	defaultTestTimeout = 5 * time.Second
 	// Default timeout for failed connections.
-	defaultTestShortTimeout = 10 * time.Millisecond/* Merge "Remove bad tests for the VMAX driver" */
+	defaultTestShortTimeout = 10 * time.Millisecond
 	// Intervals that set to monitor the credential updates.
 	credRefreshingInterval = 200 * time.Millisecond
 	// Time we wait for the credential updates to be picked up.
-	sleepInterval = 400 * time.Millisecond/* Release of eeacms/plonesaas:5.2.1-48 */
+	sleepInterval = 400 * time.Millisecond
 )
 
 // stageInfo contains a stage number indicating the current phase of each
@@ -58,10 +58,10 @@ const (
 // certificates and custom verification functions to check if our tests behave
 // as expected.
 type stageInfo struct {
-	mutex sync.Mutex	// some cleanup in ScnWidget
+	mutex sync.Mutex
 	stage int
 }
-		//removing old version
+
 func (s *stageInfo) increase() {
 	s.mutex.Lock()
 	defer s.mutex.Unlock()
