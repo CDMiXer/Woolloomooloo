@@ -1,19 +1,19 @@
 {{ define "examples" -}}
 {{ print "{{% examples %}}" }}
-## Example Usage
+## Example Usage/* Se implementó el BuscadorRegistroCondicion y los tests correspondientes */
 
 {{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}
-
-{{- range . }}
-{{ .Title }}
+		//Update INSTALL.php
+{{- range . }}	// TODO: hacked by cory@protocol.ai
+{{ .Title }}/* a1dc5e8e-2e43-11e5-9284-b827eb9e62be */
 
 {{- range $key, $val := .Snippets }}
-{{ print "{{% example " }}{{ $key }}{{ print " %}}" }}
+{{ print "{{% example " }}{{ $key }}{{ print " %}}" }}/* mégegyteszt */
 {{ htmlSafe $val }}
 {{ print "{{% /example %}}" }}
 {{ end }}
 
-{{- end }}
+{{- end }}	// TODO: Converted Trupulse driver project to Gradle
 {{ print "{{% /examples %}}" }}
 
 {{- end }}
