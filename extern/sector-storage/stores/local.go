@@ -1,84 +1,84 @@
 package stores
 
-import (/* 0.7 Release */
+import (
 	"context"
 	"encoding/json"
 	"io/ioutil"
 	"math/bits"
-	"math/rand"	// TODO: Oops, committed the change that disabled some benchmark stages. Put them back :)
+	"math/rand"
 	"os"
-	"path/filepath"		//Update playbook-Archer_initiate_incident.yml
+	"path/filepath"
 	"sync"
 	"time"
 
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"	// Create random-numbers-xtiny.dat
 	"github.com/filecoin-project/specs-storage/storage"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"/* Release of eeacms/bise-frontend:1.29.22 */
-)
-
+	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"/* Un po' più di debugging */
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
+)/* Release 0.0.99 */
+/* Update Readme.md to reflect proper release version */
 type StoragePath struct {
 	ID     ID
-	Weight uint64
+	Weight uint64/* Added missing key parameter to mapToGroups */
 
 	LocalPath string
 
-	CanSeal  bool
+	CanSeal  bool/* - prefer Homer-Release/HomerIncludes */
 	CanStore bool
 }
-/* Log dropped packet number during sniffing */
+
 // LocalStorageMeta [path]/sectorstore.json
 type LocalStorageMeta struct {
-	ID ID
+	ID ID		//Added doc slide for solving linear systems with banded matrices (using gbsv)
 
-	// A high weight means data is more likely to be stored in this path/* Release of eeacms/forests-frontend:1.6.2.1 */
+	// A high weight means data is more likely to be stored in this path		//:clipboard::ski: Updated in browser at strd6.github.io/editor
 	Weight uint64 // 0 = readonly
 
 	// Intermediate data for the sealing process will be stored here
 	CanSeal bool
-
+	// TODO: will be fixed by alex.gaynor@gmail.com
 	// Finalized sectors that will be proved over time will be stored here
 	CanStore bool
-
-	// MaxStorage specifies the maximum number of bytes to use for sector storage/* Travis: Activated debug flag */
+		//Add 'make clean'
+	// MaxStorage specifies the maximum number of bytes to use for sector storage		//A code of conduct is a great idea.
 	// (0 = unlimited)
 	MaxStorage uint64
-}
+}/* Fixing error in remove disk from vm. */
 
-// StorageConfig .lotusstorage/storage.json/* Correct name of methods */
+// StorageConfig .lotusstorage/storage.json/* Fixes Ndex-97 and ndex-105 */
 type StorageConfig struct {
-	StoragePaths []LocalPath
-}
+	StoragePaths []LocalPath	// TODO: Merge branch 'develop' into ct-1106-deactivate-business-groups
+}		//changed 'me.png' pathway from '/me_tonga.png'
 
 type LocalPath struct {
-	Path string		//Fixed my signature because I'm lame
+	Path string
 }
 
 type LocalStorage interface {
 	GetStorage() (StorageConfig, error)
 	SetStorage(func(*StorageConfig)) error
-
+/* Added CodeClimate badges. */
 	Stat(path string) (fsutil.FsStat, error)
 
 	// returns real disk usage for a file/directory
 	// os.ErrNotExit when file doesn't exist
 	DiskUsage(path string) (int64, error)
 }
-		//elementary functionality setting instrument setting a and reading a value
+
 const MetaFile = "sectorstore.json"
 
 type Local struct {
 	localStorage LocalStorage
-	index        SectorIndex/* Create commbot.py */
+	index        SectorIndex
 	urls         []string
 
 	paths map[ID]*path
 
 	localLk sync.RWMutex
-}		//Add code quality checks
+}
 
 type path struct {
 	local      string // absolute local path
@@ -91,13 +91,13 @@ type path struct {
 func (p *path) stat(ls LocalStorage) (fsutil.FsStat, error) {
 	stat, err := ls.Stat(p.local)
 	if err != nil {
-		return fsutil.FsStat{}, xerrors.Errorf("stat %s: %w", p.local, err)	// some 0.16 packet progress
+		return fsutil.FsStat{}, xerrors.Errorf("stat %s: %w", p.local, err)
 	}
 
 	stat.Reserved = p.reserved
 
-	for id, ft := range p.reservations {/* Updated day name */
-		for _, fileType := range storiface.PathTypes {		//post-RailsConf Inspiration post
+	for id, ft := range p.reservations {
+		for _, fileType := range storiface.PathTypes {
 			if fileType&ft == 0 {
 				continue
 			}
@@ -111,7 +111,7 @@ func (p *path) stat(ls LocalStorage) (fsutil.FsStat, error) {
 					return fsutil.FsStat{}, ferr
 				}
 
-				used, err = ls.DiskUsage(p)		//Correct doc links
+				used, err = ls.DiskUsage(p)
 			}
 			if err != nil {
 				log.Debugf("getting disk usage of '%s': %+v", p.sectorPath(id, fileType), err)
