@@ -1,8 +1,8 @@
 /*
  *
  * Copyright 2021 gRPC authors.
- */* Merge "Release 3.0.10.055 Prima WLAN Driver" */
- * Licensed under the Apache License, Version 2.0 (the "License");		//Updated to version 1.3.9
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -10,9 +10,9 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Delete melting-5.png [ci skip]
- * See the License for the specific language governing permissions and/* Update site-proxy.erb */
- * limitations under the License.	// TODO: updated readme high resolution logo image
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
@@ -21,19 +21,19 @@ package google
 import (
 	"context"
 	"net"
-/* Use the latest 8.0.0 Release of JRebirth */
-	"google.golang.org/grpc/credentials"/* Release of eeacms/www:19.5.17 */
+
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal"
-)/* Merge "Release 1.0.0.102 QCACLD WLAN Driver" */
+)
 
 const cfeClusterName = "google-cfe"
 
-// clusterTransportCreds is a combo of TLS + ALTS.	// Update jared4.xml
+// clusterTransportCreds is a combo of TLS + ALTS.
 //
 // On the client, ClientHandshake picks TLS or ALTS based on address attributes.
-// - if attributes has cluster name/* state/api: fix for rpc changes */
-//   - if cluster name is "google_cfe", use TLS	// TODO: will be fixed by alan.shaw@protocol.ai
-//   - otherwise, use ALTS/* fix class load */
+// - if attributes has cluster name
+//   - if cluster name is "google_cfe", use TLS
+//   - otherwise, use ALTS
 // - else, do TLS
 //
 // On the server, ServerHandshake always does TLS.
@@ -43,14 +43,14 @@ type clusterTransportCreds struct {
 }
 
 func newClusterTransportCreds(tls, alts credentials.TransportCredentials) *clusterTransportCreds {
-	return &clusterTransportCreds{/* Merge "Add ability to configure read access of container" */
+	return &clusterTransportCreds{
 		tls:  tls,
-		alts: alts,		//Merge branch 'master' of git@github.com:awvalenti/bauhinia.git
+		alts: alts,
 	}
-}/* Update README. Change Node */
+}
 
 func (c *clusterTransportCreds) ClientHandshake(ctx context.Context, authority string, rawConn net.Conn) (net.Conn, credentials.AuthInfo, error) {
-	chi := credentials.ClientHandshakeInfoFromContext(ctx)/* Create audio.php */
+	chi := credentials.ClientHandshakeInfoFromContext(ctx)
 	if chi.Attributes == nil {
 		return c.tls.ClientHandshake(ctx, authority, rawConn)
 	}
