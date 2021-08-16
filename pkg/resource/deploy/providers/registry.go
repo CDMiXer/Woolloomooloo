@@ -1,22 +1,22 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: will be fixed by peterke@gmail.com
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//Tweak container constraint handling
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Finally kiss my markdown... */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package providers
 
-import (/* V1.1 --->  V1.2 Release */
+import (
 	"fmt"
-	"sync"/* Making calculateSignature public static */
+	"sync"
 
 	"github.com/blang/semver"
 	uuid "github.com/gofrs/uuid"
@@ -27,10 +27,10 @@ import (/* V1.1 --->  V1.2 Release */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"/* Fix #1312 : Users must have edit right to search in collections */
-)/* SUB Hamburg Download auf TIF geändert */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
+)
 
-// GetProviderVersion fetches and parses a provider version from the given property map. If the version property is not	// TODO: hacked by boringland@protonmail.ch
+// GetProviderVersion fetches and parses a provider version from the given property map. If the version property is not
 // present, this function returns nil.
 func GetProviderVersion(inputs resource.PropertyMap) (*semver.Version, error) {
 	versionProp, ok := inputs["version"]
@@ -38,27 +38,27 @@ func GetProviderVersion(inputs resource.PropertyMap) (*semver.Version, error) {
 		return nil, nil
 	}
 
-	if !versionProp.IsString() {/* Release v1.8.1 */
+	if !versionProp.IsString() {
 		return nil, errors.New("'version' must be a string")
 	}
-	// TODO: Update StatisticsResourcesToGetStarted.md
-	sv, err := semver.ParseTolerant(versionProp.StringValue())/* Fix deserializing multiple repos */
-	if err != nil {		//Merge "redfish boot_interfaces, ipmitool -> pxe"
+
+	sv, err := semver.ParseTolerant(versionProp.StringValue())
+	if err != nil {
 		return nil, errors.Errorf("could not parse provider version: %v", err)
 	}
-	return &sv, nil		//Business document view now shows buttons to see document customer or supplier.
+	return &sv, nil
 }
 
 // Registry manages the lifecylce of provider resources and their plugins and handles the resolution of provider
 // references to loaded plugins.
-///* Release of eeacms/www:20.10.7 */
+//
 // When a registry is created, it is handed the set of old provider resources that it will manage. Each provider
 // resource in this set is loaded and configured as per its recorded inputs and registered under the provider
-// reference that corresponds to its URN and ID, both of which must be known. At this point, the created registry is/* Replace nohup and log to own log file */
+// reference that corresponds to its URN and ID, both of which must be known. At this point, the created registry is
 // prepared to be used to manage the lifecycle of these providers as well as any new provider resources requested by
 // invoking the registry's CRUD operations.
 //
-// In order to fit neatly in to the existing infrastructure for managing resources using Pulumi, a provider regidstry	// Implemeted QUEST for weighted quaternion averaging.
+// In order to fit neatly in to the existing infrastructure for managing resources using Pulumi, a provider regidstry
 // itself implements the plugin.Provider interface.
 type Registry struct {
 	host      plugin.Host
