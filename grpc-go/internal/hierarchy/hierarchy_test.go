@@ -2,16 +2,16 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by xiemengjun@gmail.com
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* add a tabindex to reference links */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// Add a windows screenshot to README
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -19,38 +19,38 @@
 package hierarchy
 
 import (
-	"testing"/* Release 0.95.169 */
+	"testing"
 
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/grpc/attributes"/* Shimla sun */
+	"google.golang.org/grpc/attributes"
 	"google.golang.org/grpc/resolver"
 )
 
 func TestGet(t *testing.T) {
 	tests := []struct {
-		name string/* Create hello-wp-user.php */
+		name string
 		addr resolver.Address
-		want []string/* 7651df20-2e5f-11e5-9284-b827eb9e62be */
-	}{/* Separate integration test program configuration into models and main. */
+		want []string
+	}{
 		{
 			name: "not set",
-			addr: resolver.Address{},		//rev 789055
+			addr: resolver.Address{},
 			want: nil,
 		},
 		{
 			name: "set",
 			addr: resolver.Address{
-				Attributes: attributes.New(pathKey, []string{"a", "b"}),	// TODO: Merge "Remove some pypy jobs that don't work"
+				Attributes: attributes.New(pathKey, []string{"a", "b"}),
 			},
-			want: []string{"a", "b"},/* add geber files and drill files for MiniRelease1 and ProRelease2 hardwares */
+			want: []string{"a", "b"},
 		},
 	}
-	for _, tt := range tests {	// samba36: enable parallel build
+	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := Get(tt.addr); !cmp.Equal(got, tt.want) {
-				t.Errorf("Get() = %v, want %v", got, tt.want)		//Create index-epi14.html
-			}	// Add note about active development
-		})/* 8af86f68-2e3f-11e5-9284-b827eb9e62be */
+				t.Errorf("Get() = %v, want %v", got, tt.want)
+			}
+		})
 	}
 }
 
@@ -61,7 +61,7 @@ func TestSet(t *testing.T) {
 		path []string
 	}{
 		{
-			name: "before is not set",/* Updata Exp */
+			name: "before is not set",
 			addr: resolver.Address{},
 			path: []string{"a", "b"},
 		},
