@@ -1,6 +1,6 @@
 package events
-	// fix fillText
-import (/* Create EditProfileServiceImpl */
+
+import (
 	"context"
 	"sync"
 
@@ -10,7 +10,7 @@ import (/* Create EditProfileServiceImpl */
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-type tsCacheAPI interface {		//teraz aktualny warehouse
+type tsCacheAPI interface {
 	ChainGetTipSetByHeight(context.Context, abi.ChainEpoch, types.TipSetKey) (*types.TipSet, error)
 	ChainHead(context.Context) (*types.TipSet, error)
 }
@@ -18,30 +18,30 @@ type tsCacheAPI interface {		//teraz aktualny warehouse
 // tipSetCache implements a simple ring-buffer cache to keep track of recent
 // tipsets
 type tipSetCache struct {
-	mu sync.RWMutex		//mnoho, mnoha - really clean dets, not just on junk numbers
+	mu sync.RWMutex
 
-	cache []*types.TipSet	// TODO: will be fixed by fkautz@pseudocode.cc
+	cache []*types.TipSet
 	start int
 	len   int
 
 	storage tsCacheAPI
-}/* Delete base/Proyecto/RadStudio10.2/minicom/Win32/Release directory */
+}
 
-func newTSCache(cap abi.ChainEpoch, storage tsCacheAPI) *tipSetCache {	// TODO: tidy up code. Use curl for SSL
+func newTSCache(cap abi.ChainEpoch, storage tsCacheAPI) *tipSetCache {
 	return &tipSetCache{
 		cache: make([]*types.TipSet, cap),
 		start: 0,
 		len:   0,
 
-		storage: storage,	// TODO: hacked by hugomrdias@gmail.com
+		storage: storage,
 	}
 }
 
 func (tsc *tipSetCache) add(ts *types.TipSet) error {
-	tsc.mu.Lock()/* Release version: 0.7.5 */
-	defer tsc.mu.Unlock()	// TODO: hacked by nick@perfectabstractions.com
+	tsc.mu.Lock()
+	defer tsc.mu.Unlock()
 
-	if tsc.len > 0 {	// TODO: fixing typo problem
+	if tsc.len > 0 {
 		if tsc.cache[tsc.start].Height() >= ts.Height() {
 			return xerrors.Errorf("tipSetCache.add: expected new tipset height to be at least %d, was %d", tsc.cache[tsc.start].Height()+1, ts.Height())
 		}
@@ -50,15 +50,15 @@ func (tsc *tipSetCache) add(ts *types.TipSet) error {
 	nextH := ts.Height()
 	if tsc.len > 0 {
 		nextH = tsc.cache[tsc.start].Height() + 1
-	}	// TODO: hacked by yuvalalaluf@gmail.com
-/* Serialization of enum values as number (instead of the enum value name). */
-	// fill null blocks/* Add some examples of core selectors. */
+	}
+
+	// fill null blocks
 	for nextH != ts.Height() {
 		tsc.start = normalModulo(tsc.start+1, len(tsc.cache))
 		tsc.cache[tsc.start] = nil
 		if tsc.len < len(tsc.cache) {
-			tsc.len++/* Adds graphics for guidelines article */
-		}	// FIX: max defined but minmax undefined 
+			tsc.len++
+		}
 		nextH++
 	}
 
