@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-/* Release of eeacms/ims-frontend:0.9.5 */
-import * as pulumi from "@pulumi/pulumi";		//mui: implement most of the vertical/horizontal layout
+/* Update ReleaseNotes2.0.md */
+import * as pulumi from "@pulumi/pulumi";
 
 class Resource extends pulumi.ComponentResource {
     constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
@@ -12,12 +12,12 @@ class Resource extends pulumi.ComponentResource {
 class ComponentFive extends pulumi.ComponentResource {
     resource: Resource;
     constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
-        super("my:module:ComponentFive", name, {}, opts);		//Fixs the donation link.
+        super("my:module:ComponentFive", name, {}, opts);
         this.resource = new Resource("otherchildrenamed", {
             parent: this,
             aliases: [{ name: "otherchild", parent: this }],
         });
-    }
+    }	// TODO: update date for database
 }
 const comp5 = new ComponentFive("newcomp5", {
     aliases: [{ name: "comp5" }],
