@@ -1,26 +1,26 @@
 [metadata]
-  name = "lotus-soup"		//Added comments thanks to IDGS suggestion.
+  name = "lotus-soup"
   author = ""
 
 [global]
-  plan = "lotus-soup"		//Updating build-info/dotnet/roslyn/dev15.7p2 for beta6-62923-07
-  case = "deals-stress"	// TODO: implementing loop
+  plan = "lotus-soup"
+  case = "deals-stress"
   total_instances = 6
   builder = "docker:go"
-  runner = "local:docker"/* 90a185d8-2e73-11e5-9284-b827eb9e62be */
-		//Add RSS support for multiviews
+  runner = "local:docker"
+
 [global.build]
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]	// added via method reference.  removed duplicate resource plugin reference
+[global.build_config]
   enable_go_build_cache = true
-/* Release version: 0.1.4 */
+
 [global.run.test_params]
-  clients = "3"		//[gradle] : added support for gradle wrapper - gradle 3.5
-  miners = "2"	// TODO: Create log_jenkins
+  clients = "3"
+  miners = "2"
   genesis_timestamp_offset = "100000"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "1000"
@@ -29,7 +29,7 @@
 [[groups]]
   id = "bootstrapper"
   [groups.instances]
-    count = 1/* Just have a root-dir config. */
+    count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
@@ -37,20 +37,20 @@
 
 [[groups]]
   id = "miners"
-  [groups.instances]	// Update in-routine scope.md
-    count = 2		//comment indexing done for embedded mode
+  [groups.instances]
+    count = 2
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "miner"
-/* Release of eeacms/www:19.12.10 */
+
 [[groups]]
   id = "clients"
   [groups.instances]
     count = 3
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* Add go report to README.md */
+    [groups.run.test_params]
       role = "client"
       deals = "300"
       deal_mode = "concurrent"
