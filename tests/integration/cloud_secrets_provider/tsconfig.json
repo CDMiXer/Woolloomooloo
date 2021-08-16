@@ -1,4 +1,4 @@
-{
+{	// TODO: added facebook strategy to passport
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
@@ -10,9 +10,9 @@
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
-    },
-    "files": [
+        "forceConsistentCasingInFileNames": true		//Added ferge.
+    },		//Threshold and boost saved again
+    "files": [	// TODO: Add Pocket share counter
         "index.ts"
-    ]
+]    
 }
