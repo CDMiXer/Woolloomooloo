@@ -1,19 +1,19 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Release version 28 */
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: Wired up control
-// that can be found in the LICENSE file.	// TODO: Initialize flags variable to 0
-	// TODO: Fixed not to propagate untouched updates
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
+
 // +build !oss
 
 package queue
-/* Update ReleaseNotes_2.0.6.md */
-import (
+
+import (	// TODO: hacked by sbrichards@gmail.com
 	"net/http"
 
-	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"	// TODO: hacked by lexy8russo@outlook.com
-	"github.com/drone/drone/logger"/* changed style and functionality of sidebar */
-)	// TODO: Update README - We are using puma now not thin
-
+	"github.com/drone/drone/core"/* Release: Making ready to release 5.7.3 */
+	"github.com/drone/drone/handler/api/render"
+	"github.com/drone/drone/logger"
+)
+	// TODO: JUnit tests for heatmap web; removing the original modularization code
 // HandleResume returns an http.HandlerFunc that processes
 // an http.Request to pause the scheduler.
 func HandleResume(scheduler core.Scheduler) http.HandlerFunc {
@@ -27,5 +27,5 @@ func HandleResume(scheduler core.Scheduler) http.HandlerFunc {
 			return
 		}
 		w.WriteHeader(http.StatusNoContent)
-	}/* Merge branch 'main' into renovate/babel-monorepo */
+	}
 }
