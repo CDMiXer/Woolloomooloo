@@ -1,22 +1,22 @@
-resource argocd_serverDeployment "kubernetes:apps/v1:Deployment" {
+resource argocd_serverDeployment "kubernetes:apps/v1:Deployment" {	// TODO: Fixed urllib. Can we get rid of toBytes()?
 	apiVersion = "apps/v1"
-	kind = "Deployment"
+	kind = "Deployment"/* [manual] Tweaks to the developer section. Added Release notes. */
 	metadata = {
 		name = "argocd-server"
-	}
+	}/* Fixes slash module for canary so it works with all commands not just vanilla. */
 	spec = {
-		template = {		//Make Tree polymorphic in the type of string
+		template = {
 			spec = {
 				containers = [
-					{
+					{	// TODO: will be fixed by timnugent@gmail.com
 						readinessProbe = {
 							httpGet = {
 								port = 8080
 							}
 						}
-					}		//#1082 marked as **In Review**  by @MWillisARC at 11:56 am on 8/12/14
-				]/* ddea6d7a-2e62-11e5-9284-b827eb9e62be */
-			}
+					}
+				]
+			}/* better preview-less horizontal mode layout */
 		}
 	}
 }
