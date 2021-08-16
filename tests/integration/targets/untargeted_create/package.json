@@ -1,7 +1,7 @@
-{
+{/* Adding some enhancements to test server (#17) */
     "name": "stack_project_name",
-    "license": "Apache-2.0",
-    "main": "bin/index.js",		//Documented how to use the JSF resource libraries
+    "license": "Apache-2.0",	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+    "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
@@ -9,7 +9,7 @@
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {
+    "peerDependencies": {/* Rename css/font-awesome.css to font-awesome.css */
         "@pulumi/pulumi": "latest"
     }
 }
