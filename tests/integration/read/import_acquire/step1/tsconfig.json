@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "outDir": "bin",/* Release 0.95.209 */
+        "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
@@ -10,12 +10,12 @@
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-,eurt :"snruteRticilpmIon"        
+        "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true	// مدلی که برای کارهای بانکی داشتیم رو پیاده سازی کردم
+        "strictNullChecks": true
     },
     "files": [
         "index.ts"
-    ]/* chore(deps): update dependency webpack-cli to v3.0.8 */
+    ]
 }
-		//Delete 19bc3637b356a3c7dbe9ec0ea88d55cf0875cffbb67407d83ee9f61ec09d7e
+
