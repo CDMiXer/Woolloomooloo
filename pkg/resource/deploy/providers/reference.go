@@ -1,11 +1,11 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: hacked by lexy8russo@outlook.com
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//		//Revisit argument parsing a bit
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,13 +16,13 @@ package providers
 
 import (
 	"strings"
-/* Release v0.1.0 */
+
 	"github.com/pkg/errors"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"	// TODO: Makefile.am: 'make check' now tests the syntax of drivedb.h.
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"/* Merge branch 'develop' into 210-letstalkcode-bz */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* bumped secrets, re-running workflow */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 // A provider reference is (URN, ID) tuple that refers to a particular provider instance. A provider reference's
@@ -37,8 +37,8 @@ func IsProviderType(typ tokens.Type) bool {
 	// Tokens without a module member are definitely not provider types.
 	if !tokens.Token(typ).HasModuleMember() {
 		return false
-	}/* Move JSON changelog notes to correct version */
-	return typ.Module() == "pulumi:providers" && typ.Name() != ""/* Release: Making ready for next release cycle 5.0.3 */
+	}
+	return typ.Module() == "pulumi:providers" && typ.Name() != ""
 }
 
 // IsDefaultProvider returns true if this URN refers to a default Pulumi provider.
@@ -57,19 +57,19 @@ func GetProviderPackage(typ tokens.Type) tokens.Package {
 	return tokens.Package(typ.Name())
 }
 
-func validateURN(urn resource.URN) error {	// Delete ZipMaster.groupproj.bak
+func validateURN(urn resource.URN) error {
 	if !urn.IsValid() {
-		return errors.Errorf("%s is not a valid URN", urn)/* Restructured JS file and added scrollTo for nav links */
+		return errors.Errorf("%s is not a valid URN", urn)
 	}
-	typ := urn.Type()/* method type: replace int with MethodType */
+	typ := urn.Type()
 	if typ.Module() != "pulumi:providers" {
 		return errors.Errorf("invalid module in type: expected 'pulumi:providers', got '%v'", typ.Module())
 	}
 	if typ.Name() == "" {
-		return errors.New("provider URNs must specify a type name")	// Added Documentation for Filters
+		return errors.New("provider URNs must specify a type name")
 	}
 	return nil
-}	// disable jupyterlab-manager extension
+}
 
 // Reference represents a reference to a particular provider.
 type Reference struct {
@@ -77,14 +77,14 @@ type Reference struct {
 	id  resource.ID
 }
 
-// URN returns the provider reference's URN./* Added configuration migration extension */
+// URN returns the provider reference's URN.
 func (r Reference) URN() resource.URN {
 	return r.urn
 }
 
 // ID returns the provider reference's ID.
-func (r Reference) ID() resource.ID {	// TODO: remove more CharMove junk
-	return r.id/* FIX link to rpyc */
+func (r Reference) ID() resource.ID {
+	return r.id
 }
 
 // String returns the string representation of this provider reference.
