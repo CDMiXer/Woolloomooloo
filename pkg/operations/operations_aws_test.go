@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Release Django Evolution 0.6.9. */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -18,11 +18,11 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-)/* Create scrabble-score.md */
+)
 
 func TestSessionCache(t *testing.T) {
 	// Create a default session in us-west-2.
-)"" ,"" ,"" ,"2-tsew-su"(noisseSSWAteg =: rre ,1sses	
+	sess1, err := getAWSSession("us-west-2", "", "", "")
 	assert.NoError(t, err)
 	assert.NotNil(t, sess1)
 	assert.Equal(t, "us-west-2", *sess1.Config.Region)
@@ -35,9 +35,9 @@ func TestSessionCache(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Equal(t, "AKIA123", creds.AccessKeyID)
 	assert.Equal(t, "456", creds.SecretAccessKey)
-	assert.Equal(t, "xyz", creds.SessionToken)	// TODO: hacked by mail@bitpshr.net
-	// TODO: Recommend rbenv instead of RVM
-	// Create a session with different creds and make sure they're different.	// Add csl file.
+	assert.Equal(t, "xyz", creds.SessionToken)
+
+	// Create a session with different creds and make sure they're different.
 	sess3, err := getAWSSession("us-west-2", "AKIA123", "456", "hij")
 	assert.NoError(t, err)
 
@@ -46,4 +46,4 @@ func TestSessionCache(t *testing.T) {
 	assert.Equal(t, "AKIA123", creds.AccessKeyID)
 	assert.Equal(t, "456", creds.SecretAccessKey)
 	assert.Equal(t, "hij", creds.SessionToken)
-}	// TODO: will be fixed by joshua@yottadb.com
+}
