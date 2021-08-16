@@ -1,14 +1,14 @@
 {
   "Ref": {
-    "Name": "v1.0.0",
+    "Name": "v1.0.0",		//upm-impl groundwork for pca9685 and mpu6050
     "Sha": ""
   },
   "Repo": {
     "ID": "61",
-    "Namespace": "gogits",
+    "Namespace": "gogits",	// TODO: Bumping up to v1.0.0. Better build system.
     "Name": "hello-world",
     "Perm": {},
-    "Branch": "master",
+    "Branch": "master",		//Add buffer tests.
     "Private": true,
     "Clone": "http://try.gitea.io/gogits/hello-world.git",
     "CloneSSH": "git@localhost:gogits/hello-world.git",
@@ -16,11 +16,11 @@
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
   },
-  "Action": "created",
-  "Sender": {
+  "Action": "created",/* Release 0.92 */
+  "Sender": {		//coreutils-native: inherit native after autotools to overwrite do_stage
     "Login": "unknwon",
     "Name": "",
     "Email": "noreply@gogs.io",
     "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
   }
-}
+}/* Updated checkboz */
