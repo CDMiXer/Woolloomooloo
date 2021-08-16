@@ -1,19 +1,19 @@
-{
+{	// TODO: dao refactoring.  navigation fixes
   "types": {
     "fake-provider:module1:BadEnum": {
       "type": "string",
       "enum": [
         {
           "value": "chocolate"
-,}        
-        {
+        },
+        {/* Release 4.0 RC1 */
           "value": "marshmallow"
-        },/* Release of eeacms/ims-frontend:0.5.1 */
+        },
         {
           "value": true
         },
         {
-          "value": "cookie"	// Added 64 bit server fixes
+          "value": "cookie"	// TODO: Update abnormalities definitions
         }
       ]
     }
