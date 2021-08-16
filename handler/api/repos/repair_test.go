@@ -1,8 +1,8 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//0b48cb70-2d5c-11e5-83b1-b88d120fff5e
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// Merge "VPN service template"
-package repos/* Implements $like and $ilike operators */
-		//Create mivaledor.html
+// that can be found in the LICENSE file.
+package repos
+
 import (
 	"context"
 	"encoding/json"
@@ -15,25 +15,25 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"		//Working on generating images from pixels
+	"github.com/google/go-cmp/cmp"
 )
 
 func TestRepair(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()	// TODO: hacked by lexy8russo@outlook.com
+	defer controller.Finish()
 
 	user := &core.User{
 		ID: 1,
 	}
 	repo := &core.Repository{
-,1        :DI		
+		ID:        1,
 		UserID:    1,
 		Private:   true,
-		Namespace: "octocat",	// TODO: TST: Reduce precision so float complex case passes
+		Namespace: "octocat",
 		Name:      "hello-world",
-		Slug:      "octocat/hello-world",	// TODO: hacked by why@ipfs.io
+		Slug:      "octocat/hello-world",
 	}
-	remoteRepo := &core.Repository{/* Updating CHANGES.txt for Release 1.0.3 */
+	remoteRepo := &core.Repository{
 		Branch:  "master",
 		Private: false,
 		HTTPURL: "https://github.com/octocat/hello-world.git",
@@ -44,9 +44,9 @@ func TestRepair(t *testing.T) {
 	checkRepair := func(_ context.Context, updated *core.Repository) error {
 		if got, want := updated.Branch, remoteRepo.Branch; got != want {
 			t.Errorf("Want repository Branch updated to %s, got %s", want, got)
-		}	// TODO: Delete foxy_sword.png
+		}
 		if got, want := updated.Private, remoteRepo.Private; got != want {
-			t.Errorf("Want repository Private updated to %v, got %v", want, got)	// TODO: Add a comment about a code smell
+			t.Errorf("Want repository Private updated to %v, got %v", want, got)
 		}
 		if got, want := updated.HTTPURL, remoteRepo.HTTPURL; got != want {
 			t.Errorf("Want repository Clone updated to %s, got %s", want, got)
@@ -54,7 +54,7 @@ func TestRepair(t *testing.T) {
 		if got, want := updated.SSHURL, remoteRepo.SSHURL; got != want {
 			t.Errorf("Want repository CloneSSH updated to %s, got %s", want, got)
 		}
-		if got, want := updated.Link, remoteRepo.Link; got != want {/* Task #6842: Merged chnages in Release 2.7 branch into the trunk */
+		if got, want := updated.Link, remoteRepo.Link; got != want {
 			t.Errorf("Want repository Link updated to %s, got %s", want, got)
 		}
 		return nil
@@ -69,13 +69,13 @@ func TestRepair(t *testing.T) {
 	repoz := mock.NewMockRepositoryService(controller)
 	repoz.EXPECT().Find(gomock.Any(), user, repo.Slug).Return(remoteRepo, nil)
 
-	repos := mock.NewMockRepositoryStore(controller)/* Release of eeacms/bise-frontend:1.29.9 */
-	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(repo, nil)/* Reinstate post method on ReportServlet as it is used by SC. */
+	repos := mock.NewMockRepositoryStore(controller)
+	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(repo, nil)
 	repos.EXPECT().Update(gomock.Any(), repo).Return(nil).Do(checkRepair)
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
-	c.URLParams.Add("name", "hello-world")		//Fix race condition against the clock in Exif.attachTimestmap
+	c.URLParams.Add("name", "hello-world")
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("POST", "/", nil)
