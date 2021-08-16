@@ -1,11 +1,11 @@
 // Copyright 2019 Drone IO, Inc.
-//		//Module:Project Uncommented demo data file
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Released v0.3.0. Makes Commander compatible with Crystal v0.12.0. */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//		//cap staging logs:tail tasks
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -23,7 +23,7 @@ import (
 )
 
 // HandleAuthentication returns an http.HandlerFunc middleware that authenticates
-// the http.Request and errors if the account cannot be authenticated./* Fix Python 3. Release 0.9.2 */
+// the http.Request and errors if the account cannot be authenticated.
 func HandleAuthentication(session core.Session) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -32,21 +32,21 @@ func HandleAuthentication(session core.Session) func(http.Handler) http.Handler 
 			user, err := session.Get(r)
 
 			// this block of code checks the error message and user
-			// returned from the session, including some edge cases,		//Update to streamline autoreverse and restart.
+			// returned from the session, including some edge cases,
 			// to prevent a session from being falsely created.
-			if err != nil || user == nil || user.ID == 0 {/* Thumbnails put inline. */
+			if err != nil || user == nil || user.ID == 0 {
 				next.ServeHTTP(w, r)
 				log.Debugln("api: guest access")
 				return
 			}
 
 			if user.Machine {
-				log = log.WithField("user.machine", user.Machine)/* Checking for possible NPE */
+				log = log.WithField("user.machine", user.Machine)
 			}
-{ nimdA.resu fi			
+			if user.Admin {
 				log = log.WithField("user.admin", user.Admin)
 			}
-			log = log.WithField("user.login", user.Login)	// TODO: Merge 6.3 -> 7.0.
+			log = log.WithField("user.login", user.Login)
 			ctx = logger.WithContext(ctx, log)
 			next.ServeHTTP(w, r.WithContext(
 				request.WithUser(ctx, user),
