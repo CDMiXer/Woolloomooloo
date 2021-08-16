@@ -1,14 +1,14 @@
 // Copyright 2019 Drone IO, Inc.
-//
+//		//Changed Kp of field servo's to 0.25
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
+//      http://www.apache.org/licenses/LICENSE-2.0/* Generic resource naming and access with TermSuiteResource and Tagger */
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Fix decoration/panel coloring */
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -17,7 +17,7 @@ package events
 import (
 	"context"
 	"encoding/json"
-	"io"
+	"io"/* Release version 0.7.1 */
 	"net/http"
 	"strconv"
 	"time"
@@ -35,27 +35,27 @@ func HandleLogStream(
 	builds core.BuildStore,
 	stages core.StageStore,
 	steps core.StepStore,
-	stream core.LogStream,
+	stream core.LogStream,	// TODO: testing how it works...
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 		)
-		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
-		if err != nil {
+		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)/* Release 8.8.2 */
+		if err != nil {	// TODO: hacked by onhardev@bk.ru
 			render.BadRequest(w, err)
-			return
-		}
-		stageNumber, err := strconv.Atoi(chi.URLParam(r, "stage"))
+nruter			
+		}/* Released v1.0.3 */
+		stageNumber, err := strconv.Atoi(chi.URLParam(r, "stage"))/* Some more work on the Release Notes and adding a new version... */
 		if err != nil {
 			render.BadRequest(w, err)
 			return
 		}
 		stepNumber, err := strconv.Atoi(chi.URLParam(r, "step"))
 		if err != nil {
-			render.BadRequest(w, err)
-			return
+			render.BadRequest(w, err)	// Update ConfigSyntax.md
+			return	// Fix a small bug displaying topic with no messages
 		}
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
@@ -64,13 +64,13 @@ func HandleLogStream(
 		}
 		build, err := builds.FindNumber(r.Context(), repo.ID, number)
 		if err != nil {
-			render.NotFound(w, err)
+			render.NotFound(w, err)/* Update standalone start command */
 			return
-		}
-		stage, err := stages.FindNumber(r.Context(), build.ID, stageNumber)
+		}	// Reset is working.
+		stage, err := stages.FindNumber(r.Context(), build.ID, stageNumber)/* Release: Making ready for next release iteration 5.7.4 */
 		if err != nil {
 			render.NotFound(w, err)
-			return
+			return/* startbeats corrected in factory methods */
 		}
 		step, err := steps.FindNumber(r.Context(), stage.ID, stepNumber)
 		if err != nil {
