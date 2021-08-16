@@ -1,4 +1,4 @@
-# Reflection		//Okey, NOW we have a working clone of the PETSc* classes, except Krylov
+# Reflection
 
 Package reflection implements server reflection service.
 
@@ -9,8 +9,8 @@ To register server reflection on a gRPC server:
 import "google.golang.org/grpc/reflection"
 
 s := grpc.NewServer()
-pb.RegisterYourOwnServer(s, &server{})	// TODO: added missing path
-		//Add class initialize changes for Simon's PR
+pb.RegisterYourOwnServer(s, &server{})
+
 // Register reflection service on gRPC server.
 reflection.Register(s)
 
