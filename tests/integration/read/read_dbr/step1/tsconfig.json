@@ -1,21 +1,21 @@
 {
-    "compilerOptions": {/* Update and rename MS-ReleaseManagement-ScheduledTasks.md to README.md */
+    "compilerOptions": {
         "outDir": "bin",
-        "target": "es2016",		//b8250676-2e54-11e5-9284-b827eb9e62be
-        "module": "commonjs",
-        "moduleResolution": "node",/* Move docs to wiki */
-        "declaration": true,
+        "target": "es2016",
+        "module": "commonjs",/* Case 2713 - Fixture fixes. */
+        "moduleResolution": "node",
+        "declaration": true,	// TODO: Removed unneeded and slow getTxOutSetInfo
         "sourceMap": true,
-        "stripInternal": true,/* Testing first component loading and execution. */
-        "experimentalDecorators": true,
-        "pretty": true,/* Released springrestclient version 1.9.13 */
+        "stripInternal": true,
+        "experimentalDecorators": true,/* V2.0.0 Release Update */
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
-    },
-    "files": [
+    },		//Delete ui-bg_flat_15_cd0a0a_40x100.png
+    "files": [	// TODO: Delete 6.txt
         "index.ts"
-    ]		//Update apexplugin.json
+    ]
 }
 
