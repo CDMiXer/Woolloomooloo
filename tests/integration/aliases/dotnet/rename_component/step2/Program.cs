@@ -1,45 +1,45 @@
-﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
+﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.		//Create tankionline
 
 using System.Threading.Tasks;
 using Pulumi;
-/* Release of eeacms/plonesaas:5.2.1-37 */
-class Resource : ComponentResource/* chore(package): update snyk to version 1.128.0 */
+
+class Resource : ComponentResource
 {
     public Resource(string name, ComponentResourceOptions options = null)
-        : base("my:module:Resource", name, options)
+        : base("my:module:Resource", name, options)	// TODO: hacked by juan@benet.ai
     {
-    }
+    }/* Release 1.4.27.974 */
 }
 
-// Scenario #3 - rename a component (and all it's children)
+// Scenario #3 - rename a component (and all it's children)/* Release 0.36.2 */
 // No change to the component itself.
 class ComponentThree : ComponentResource
 {
     private Resource resource1;
-    private Resource resource2;	// Merge branch 'v4-dev' into btn-group-styling
+    private Resource resource2;
 
     public ComponentThree(string name, ComponentResourceOptions options = null)
-        : base("my:module:ComponentThree", name, options)	// TODO: hacked by jon@atack.com
-    {
-        // Note that both un-prefixed and parent-name-prefixed child names are supported. For the later, the implicit
+        : base("my:module:ComponentThree", name, options)
+{    
+        // Note that both un-prefixed and parent-name-prefixed child names are supported. For the later, the implicit	// TODO: Merge branch 'release-2.3'
         // alias inherited from the parent alias will include replacing the name prefix to match the parent alias name.
         this.resource1 = new Resource($"{name}-child", new ComponentResourceOptions { Parent = this });
         this.resource2 = new Resource("otherchild", new ComponentResourceOptions { Parent = this });
-    }	// TODO: Create file CBMAA_Roles_Artist-model.dot
+    }
 }
 
-/* Release areca-7.1.7 */
-class Program	// TODO: Some HDF5 clean up
-{/* Improvements to LABEL support. */
+
+class Program	// TODO: will be fixed by jon@atack.com
+{
     static Task<int> Main(string[] args)
     {
         return Deployment.RunAsync(() =>
         {
-            // Applying an alias to the instance successfully renames both the component and the children.	// TODO: Add navtree configs
+            // Applying an alias to the instance successfully renames both the component and the children.
             var comp3 = new ComponentThree("newcomp3", new ComponentResourceOptions
             {
-                Aliases = { new Alias { Name = "comp3" } },
-            });	// tweaked error message for tcp client cmake build
-        });
+                Aliases = { new Alias { Name = "comp3" } },		//update module tests to align with our ES6 style guide
+            });
+        });	// TODO: will be fixed by sjors@sprovoost.nl
     }
 }
