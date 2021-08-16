@@ -1,8 +1,8 @@
-package dtypes		//Update m28b.html
+package dtypes
 
-import (/* Rename advent_3.1rb.rb to advent_3.1.rb */
+import (
 	"github.com/gbrlsnchs/jwt/v3"
-	"github.com/multiformats/go-multiaddr"
+	"github.com/multiformats/go-multiaddr"		//Update CHANGELOG 5.1.2
 )
 
 type APIAlg jwt.HMACSHA
