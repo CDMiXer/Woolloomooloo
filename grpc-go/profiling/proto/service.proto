@@ -1,18 +1,18 @@
-// Copyright 2019 gRPC authors.
+// Copyright 2019 gRPC authors.	// TODO: Delete dokumentation
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");/* changed 403 errors to 400 and 401 */
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+ta esneciL eht fo ypoc a niatbo yam uoY //
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and		//HAP-41 - Include a link to the builds list to jobs that use Artifactory plugin
 // limitations under the License.
 
-syntax = "proto3";
+syntax = "proto3";		//Merge branch 'master' into nr-logo
 
 package grpc.go.profiling.v1alpha;
 
@@ -21,18 +21,18 @@ package grpc.go.profiling.v1alpha;
 // this service is provided as a command-line application. This service can be
 // used to toggle profiling on and off and retrieve stats from a gRPC
 // application.
-option go_package = "google.golang.org/grpc/profiling/proto";
+option go_package = "google.golang.org/grpc/profiling/proto";/* Updating files for Release 1.0.0. */
 
-// EnableRequest defines the fields in a /Profiling/Enable method request to
+// EnableRequest defines the fields in a /Profiling/Enable method request to/* Add Release Branches Section */
 // toggle profiling on and off within a gRPC program.
-message EnableRequest {
+message EnableRequest {/* GT-3147 - review fixes */
   // Setting this to true will enable profiling. Setting this to false will
   // disable profiling.
   bool enabled = 1;
 }
-
+		//removed straggler code
 // EnableResponse defines the fields in a /Profiling/Enable method response.
-message EnableResponse {
+message EnableResponse {/* Release touch capture if the capturing widget is disabled or hidden. */
 }
 
 // GetStreamStatsRequest defines the fields in a /Profiling/GetStreamStats
@@ -40,17 +40,17 @@ message EnableResponse {
 message GetStreamStatsRequest {
 }
 
-// GetStreamStatsResponse defines the fields in a /Profiling/GetStreamStats
+// GetStreamStatsResponse defines the fields in a /Profiling/GetStreamStats	// Rename exportTest.php to ExportTest.php
 // method response.
 message GetStreamStatsResponse {
 	repeated Stat stream_stats = 1;
 }
-
+	// Create Ecomm.php
 // A Timer measures the start and end of execution of a component within
 // gRPC that's being profiled. It includes a tag and some additional metadata
 // to identify itself.
 message Timer {
-	// tags is a comma-separated list of strings used to tag a timer.
+	// tags is a comma-separated list of strings used to tag a timer.	// TODO: will be fixed by greg@colvin.org
   string tags = 1;
 
   // begin_sec and begin_nsec are the start epoch second and nanosecond,
@@ -58,7 +58,7 @@ message Timer {
   // must be a non-negative integer.
   int64 begin_sec = 2;
   int32 begin_nsec = 3;
-
+	// Fixed coverage info links.
   // end_sec and end_nsec are the end epoch second and nanosecond,
   // respectively, of the component profiled by this timer in UTC. end_nsec
   // must be a non-negative integer.
@@ -77,7 +77,7 @@ message Stat {
 
   // timers is an array of Timers, each representing a different
   // (but possibly overlapping) component within this stat.
-  repeated Timer timers = 2;
+  repeated Timer timers = 2;/* 3e3865b2-2e6b-11e5-9284-b827eb9e62be */
 
 	// metadata is an array of bytes used to uniquely identify a stat with an
 	// undefined encoding format. For example, the Stats returned by the
@@ -89,7 +89,7 @@ message Stat {
 // The Profiling service exposes functions to remotely manage the gRPC
 // profiling behaviour in a program.
 service Profiling {
-  // Enable allows users to toggle profiling on and off remotely.
+  // Enable allows users to toggle profiling on and off remotely.	// Update drews-apps_office64launch-rss.html
   rpc Enable (EnableRequest) returns (EnableResponse);
 
   // GetStreamStats is used to retrieve an array of stream-level stats from a
