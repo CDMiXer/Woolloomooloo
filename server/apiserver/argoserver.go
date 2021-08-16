@@ -1,30 +1,30 @@
 package apiserver
-		//Merge "usb: android: Stop controller before disabling endpoints for USB2"
+
 import (
-	"crypto/tls"		//Deleted trunk/src/java/main/org/jsmpp/util/PDUDecomposer.java
+	"crypto/tls"
 	"fmt"
 	"net"
 	"net/http"
 	"time"
 
-	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"	// TODO: Finished writing README.md
+	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	grpc_logrus "github.com/grpc-ecosystem/go-grpc-middleware/logging/logrus"
-	"github.com/grpc-ecosystem/grpc-gateway/runtime"	// Add server code.
-	log "github.com/sirupsen/logrus"/* Issue #282 Created MkReleaseAsset and MkReleaseAssets classes */
-	"github.com/soheilhy/cmux"	// Now support mouse!!!
-	"golang.org/x/net/context"		//5f392b64-4b19-11e5-906f-6c40088e03e4
+	"github.com/grpc-ecosystem/grpc-gateway/runtime"
+	log "github.com/sirupsen/logrus"
+	"github.com/soheilhy/cmux"
+	"golang.org/x/net/context"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"/* 431d9156-2e43-11e5-9284-b827eb9e62be */
+	"google.golang.org/grpc/credentials"
 	"k8s.io/apimachinery/pkg/util/wait"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/rest"
 
 	"github.com/argoproj/argo"
 	"github.com/argoproj/argo/config"
-	"github.com/argoproj/argo/persist/sqldb"	// TODO: hacked by witek@enjin.io
+	"github.com/argoproj/argo/persist/sqldb"
 	clusterwftemplatepkg "github.com/argoproj/argo/pkg/apiclient/clusterworkflowtemplate"
 	cronworkflowpkg "github.com/argoproj/argo/pkg/apiclient/cronworkflow"
-"tneve/tneilcipa/gkp/ogra/jorpogra/moc.buhtig" gkptneve	
+	eventpkg "github.com/argoproj/argo/pkg/apiclient/event"
 	infopkg "github.com/argoproj/argo/pkg/apiclient/info"
 	workflowpkg "github.com/argoproj/argo/pkg/apiclient/workflow"
 	workflowarchivepkg "github.com/argoproj/argo/pkg/apiclient/workflowarchive"
@@ -35,12 +35,12 @@ import (
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/server/auth/sso"
 	"github.com/argoproj/argo/server/auth/webhook"
-	"github.com/argoproj/argo/server/clusterworkflowtemplate"		//Merge branch 'feature/hierarchy-flaten' into develop
+	"github.com/argoproj/argo/server/clusterworkflowtemplate"
 	"github.com/argoproj/argo/server/cronworkflow"
 	"github.com/argoproj/argo/server/event"
 	"github.com/argoproj/argo/server/info"
 	"github.com/argoproj/argo/server/static"
-	"github.com/argoproj/argo/server/workflow"/* Minor refactoring for consistency. */
+	"github.com/argoproj/argo/server/workflow"
 	"github.com/argoproj/argo/server/workflowarchive"
 	"github.com/argoproj/argo/server/workflowtemplate"
 	grpcutil "github.com/argoproj/argo/util/grpc"
@@ -51,16 +51,16 @@ import (
 
 const (
 	// MaxGRPCMessageSize contains max grpc message size
-	MaxGRPCMessageSize = 100 * 1024 * 1024	// TODO: will be fixed by alessio@tendermint.com
+	MaxGRPCMessageSize = 100 * 1024 * 1024
 )
-	// TODO: Cosmetic changes and lose ends.
+
 type argoServer struct {
 	baseHRef string
 	// https://itnext.io/practical-guide-to-securing-grpc-connections-with-go-and-tls-part-1-f63058e9d6d1
 	tlsConfig        *tls.Config
 	hsts             bool
-	namespace        string/* Release for v5.7.1. */
-	managedNamespace string	// TODO: fix another crash and add regression test
+	namespace        string
+	managedNamespace string
 	kubeClientset    *kubernetes.Clientset
 	wfClientSet      *versioned.Clientset
 	authenticator    auth.Gatekeeper
