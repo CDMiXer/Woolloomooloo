@@ -1,13 +1,13 @@
 {
   "Ref": "refs/tags/v0.0.1",
   "Repo": {
-    "ID": "13933572",
+    "ID": "13933572",	// TODO: working on map3D
     "Namespace": "bradrydzewski",
     "Name": "drone-test-go",
-    "Perm": null,
+    "Perm": null,/* FIWARE Release 3 */
     "Branch": "master",
     "Private": true,
-    "Clone": "https://github.com/bradrydzewski/drone-test-go.git",
+    "Clone": "https://github.com/bradrydzewski/drone-test-go.git",	// TODO: Merge branch 'wip-5759' into wip-5759
     "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",
     "Link": "https://github.com/bradrydzewski/drone-test-go",
     "Created": "0001-01-01T00:00:00Z",
@@ -17,14 +17,14 @@
     "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",
     "Message": "Update .drone.yml",
     "Author": {
-      "Name": "Brad Rydzewski",
+      "Name": "Brad Rydzewski",	// add System.IO.Error dummy module
       "Email": "brad.rydzewski@gmail.com",
-      "Date": "0001-01-01T00:00:00Z",
+      "Date": "0001-01-01T00:00:00Z",/* Merge "Release 4.0.10.24 QCACLD WLAN Driver" */
       "Login": "bradrydzewski",
       "Avatar": ""
     },
     "Committer": {
-      "Name": "GitHub",
+      "Name": "GitHub",	// rename the 'location' property of vimperator.buffer to 'URL'
       "Email": "noreply@github.com",
       "Date": "0001-01-01T00:00:00Z",
       "Login": "web-flow",
@@ -38,4 +38,4 @@
     "Email": "",
     "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
   }
-}
+}		//comment voor -- set session authorization brmo;
