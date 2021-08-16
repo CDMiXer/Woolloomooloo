@@ -1,57 +1,57 @@
-[metadata]
-  name = "lotus-soup"
+[metadata]	// TODO: Create Set up.md
+  name = "lotus-soup"	// Create odoo.tex
   author = ""
-
+	// TODO: will be fixed by timnugent@gmail.com
 [global]
-  plan = "lotus-soup"
+  plan = "lotus-soup"/* remove debug output from vocab.metadata.resources */
   case = "deals-stress"
   total_instances = 6
   builder = "docker:go"
   runner = "local:docker"
-
+		//post facto update
 [global.build]
   selectors = ["testground"]
 
-[global.run_config]
+[global.run_config]/* Release 1.23. */
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]
+[global.build_config]	// TODO: hacked by hello@brooklynzelenka.com
   enable_go_build_cache = true
 
 [global.run.test_params]
   clients = "3"
   miners = "2"
   genesis_timestamp_offset = "0"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B	// TODO: will be fixed by sebastian.tharakan97@gmail.com
   sectors = "1000"
-  random_beacon_type = "mock"
+  random_beacon_type = "mock"		//I think I deserve equal blame after the amount of work I did on this (nw)
 
 [[groups]]
-  id = "bootstrapper"
+  id = "bootstrapper"/* Preping for a 1.7 Release. */
   [groups.instances]
     count = 1
-    percentage = 0.0
+    percentage = 0.0/* Delete 0fcc63f3-6c23-4c75-991f-d5e0d9164832.jpg */
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
   id = "miners"
-  [groups.instances]
+  [groups.instances]/* Provide proper repo description */
     count = 2
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]/* !!! TASK: make CKE5 the default editor */
       role = "miner"
       mining_mode = "natural"
 
 [[groups]]
-  id = "clients"
+  id = "clients"/* Released csonv.js v0.1.1 */
   [groups.instances]
-    count = 3
+    count = 3/* Release 2.4 */
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"
+      role = "client"		//Arduino: Added a hashmap to keep track of all i2c devices
       deals = "300"
       deal_mode = "serial"
