@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -eu -o pipefail	// TODO: hacked by cory@protocol.ai
-	// TODO: f55ba14e-2e45-11e5-9284-b827eb9e62be
-echo "# This is an auto-generated file. DO NOT EDIT"	// add bootstrap js lib
-cat
+set -eu -o pipefail
+
+echo "# This is an auto-generated file. DO NOT EDIT"
+cat/* adding easyconfigs: GitPython-3.1.0-GCCcore-8.3.0-Python-3.7.4.eb */
