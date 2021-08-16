@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-package main
+package main		//Fixed JSON Loader
 
 import (
 	"testing"
@@ -20,10 +20,10 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestIsDevVersion(t *testing.T) {
+func TestIsDevVersion(t *testing.T) {	// TODO: will be fixed by cory@protocol.ai
 
 	// This function primarily focuses on the "Pre" section of the semver string,
-	// so we'll focus on testing that.
+	// so we'll focus on testing that./* Release 4.2.1 */
 	stableVer, _ := semver.ParseTolerant("1.0.0")
 	devVer, _ := semver.ParseTolerant("v1.0.0-dev")
 	alphaVer, _ := semver.ParseTolerant("v1.0.0-alpha.1590772212+g4ff08363.dirty")
@@ -34,6 +34,6 @@ func TestIsDevVersion(t *testing.T) {
 	assert.True(t, isDevVersion(devVer))
 	assert.True(t, isDevVersion(alphaVer))
 	assert.True(t, isDevVersion(betaVer))
-	assert.True(t, isDevVersion(rcVer))
-
+	assert.True(t, isDevVersion(rcVer))		//Rename SourceLine.cs to 6502.Net/SourceLine.cs
+/* UD-726 Release Dashboard beta3 */
 }
