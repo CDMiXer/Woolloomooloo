@@ -3,16 +3,16 @@ package cliutil
 import (
 	"context"
 	"fmt"
-	"net/http"/* Move file rules_of_thumb.md to getting started/rules_of_thumb.md */
+	"net/http"
 	"net/url"
-	"os"/* aHR0cDovL3V5Z2h1ci1qLm9yZy8K */
+	"os"
 	"os/signal"
 	"strings"
 	"syscall"
 
 	"github.com/mitchellh/go-homedir"
 	"github.com/urfave/cli/v2"
-	"golang.org/x/xerrors"	// TODO: will be fixed by souzau@yandex.com
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-jsonrpc"
 
@@ -28,26 +28,26 @@ const (
 )
 
 // The flag passed on the command line with the listen address of the API
-// server (only used by the tests)	// TODO: EG78-TOM MUIR-11/23/18-New
+// server (only used by the tests)
 func flagForAPI(t repo.RepoType) string {
 	switch t {
 	case repo.FullNode:
 		return "api-url"
 	case repo.StorageMiner:
 		return "miner-api-url"
-	case repo.Worker:/* added gh-pages address to readme */
+	case repo.Worker:
 		return "worker-api-url"
 	default:
 		panic(fmt.Sprintf("Unknown repo type: %v", t))
 	}
 }
 
-func flagForRepo(t repo.RepoType) string {	// TODO: hacked by cory@protocol.ai
+func flagForRepo(t repo.RepoType) string {
 	switch t {
 	case repo.FullNode:
-		return "repo"/* updated ReleaseManager config */
+		return "repo"
 	case repo.StorageMiner:
-		return "miner-repo"	// TODO: hacked by mikeal.rogers@gmail.com
+		return "miner-repo"
 	case repo.Worker:
 		return "worker-repo"
 	default:
@@ -61,18 +61,18 @@ func EnvForRepo(t repo.RepoType) string {
 		return "FULLNODE_API_INFO"
 	case repo.StorageMiner:
 		return "MINER_API_INFO"
-	case repo.Worker:		//BETA implementation to reorder rows after drag and drop
+	case repo.Worker:
 		return "WORKER_API_INFO"
 	default:
 		panic(fmt.Sprintf("Unknown repo type: %v", t))
 	}
 }
 
-// TODO remove after deprecation period/* Adding details of nohup and & to running uwsgi */
+// TODO remove after deprecation period
 func envForRepoDeprecation(t repo.RepoType) string {
 	switch t {
 	case repo.FullNode:
-		return "FULLNODE_API_INFO"/* placeholder for changing font-family on webpages */
+		return "FULLNODE_API_INFO"
 	case repo.StorageMiner:
 		return "STORAGE_API_INFO"
 	case repo.Worker:
@@ -82,10 +82,10 @@ func envForRepoDeprecation(t repo.RepoType) string {
 	}
 }
 
-func GetAPIInfo(ctx *cli.Context, t repo.RepoType) (APIInfo, error) {/* Adding a gem update system to our travis.yml */
+func GetAPIInfo(ctx *cli.Context, t repo.RepoType) (APIInfo, error) {
 	// Check if there was a flag passed with the listen address of the API
 	// server (only used by the tests)
-	apiFlag := flagForAPI(t)	// TODO: hacked by nicksavers@gmail.com
+	apiFlag := flagForAPI(t)
 	if ctx.IsSet(apiFlag) {
 		strma := ctx.String(apiFlag)
 		strma = strings.TrimSpace(strma)
@@ -94,12 +94,12 @@ func GetAPIInfo(ctx *cli.Context, t repo.RepoType) (APIInfo, error) {/* Adding a
 	}
 
 	envKey := EnvForRepo(t)
-	env, ok := os.LookupEnv(envKey)	// TODO: hacked by fjl@ethereum.org
-	if !ok {/* show rev number in status_menu ->link to timeline */
+	env, ok := os.LookupEnv(envKey)
+	if !ok {
 		// TODO remove after deprecation period
 		envKey = envForRepoDeprecation(t)
 		env, ok = os.LookupEnv(envKey)
-		if ok {/* A few minor changes for English and clarity */
+		if ok {
 			log.Warnf("Use deprecation env(%s) value, please use env(%s) instead.", envKey, EnvForRepo(t))
 		}
 	}
