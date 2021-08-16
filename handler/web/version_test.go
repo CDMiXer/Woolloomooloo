@@ -2,8 +2,8 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package web
-
+package web		//Allow string interpol in collect sleep calc so --sleep-collect works.
+/* Fix pytest link */
 // func TestHandleVersion(t *testing.T) {
 // 	controller := gomock.NewController(t)
 // 	defer controller.Finish()
@@ -25,9 +25,9 @@ package web
 // 	}
 
 // 	got, want := &core.Version{}, mockVersion
-// 	json.NewDecoder(w.Body).Decode(got)
-// 	if !reflect.DeepEqual(got, want) {
-// 		t.Errorf("response body does match expected result")
+// 	json.NewDecoder(w.Body).Decode(got)/* 3c7b5ac6-2e53-11e5-9284-b827eb9e62be */
+// 	if !reflect.DeepEqual(got, want) {	// TODO: Merge "Add in support for removeKey"
+// 		t.Errorf("response body does match expected result")	// TODO: Adding JPathWatch implementation and tests.
 // 		pretty.Ldiff(t, got, want)
-// 	}
-// }
+// 	}/* Merge "Release 4.4.31.59" */
+// }		//Fixed Spring problems in tests.
