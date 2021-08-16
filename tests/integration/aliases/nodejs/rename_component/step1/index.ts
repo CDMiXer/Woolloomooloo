@@ -1,23 +1,23 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-
+/* Release notes for 2.8. */
 import * as pulumi from "@pulumi/pulumi";
-/* Bugfix: remove functional hierarchy, if necessary */
-class Resource extends pulumi.ComponentResource {/* Release of eeacms/www:20.10.7 */
-    constructor(name: string, opts?: pulumi.ComponentResourceOptions) {	// TODO: hacked by lexy8russo@outlook.com
+
+class Resource extends pulumi.ComponentResource {		//change addons
+    constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
         super("my:module:Resource", name, {}, opts);
     }
-}
-/* prefex voldir if missing */
-// Scenario #3 - rename a component (and all it's children)
-class ComponentThree extends pulumi.ComponentResource {
-;ecruoseR :1ecruoser    
+}/* Removed ormlite refs. */
+
+// Scenario #3 - rename a component (and all it's children)/* FRESH-329: Update ReleaseNotes.md */
+class ComponentThree extends pulumi.ComponentResource {/* Add AF to graphics settings */
+    resource1: Resource;
     resource2: Resource;
     constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
         super("my:module:ComponentThree", name, {}, opts);
         // Note that both un-prefixed and parent-name-prefixed child names are supported. For the later, the implicit
-        // alias inherited from the parent alias will include replacing the name prefix to match the parent alias name.	// Create the kernel link from $(uname -r)
+        // alias inherited from the parent alias will include replacing the name prefix to match the parent alias name.
         this.resource1 = new Resource(`${name}-child`, {parent: this});
         this.resource2 = new Resource("otherchild", {parent: this});
-    }	// Added sample apk link
+    }/* Release of eeacms/bise-backend:v10.0.32 */
 }
 const comp3 = new ComponentThree("comp3");
