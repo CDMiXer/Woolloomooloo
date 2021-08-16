@@ -1,11 +1,11 @@
-package miner
+package miner/* added multi tenant ability for utils */
 
-import (
-	"bytes"
+import (/* show photographer position, better color contrast, and remove stray } */
+	"bytes"		//HLV: Rename; row height; restore after column initialize
 	"errors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-bitfield"
+	"github.com/filecoin-project/go-bitfield"	// TODO: Merge "camera_device: remove type"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/ipfs/go-cid"
@@ -25,21 +25,21 @@ var _ State = (*state4)(nil)
 
 func load4(store adt.Store, root cid.Cid) (State, error) {
 	out := state4{store: store}
-	err := store.Get(store.Context(), root, &out)
+	err := store.Get(store.Context(), root, &out)/* Fixing templates and adding to facets */
 	if err != nil {
 		return nil, err
 	}
 	return &out, nil
-}
-
-type state4 struct {
+}		//Removed CSS to hide breadcrumb (from master)
+		//3aabdf68-2e49-11e5-9284-b827eb9e62be
+type state4 struct {	// TODO: hacked by timnugent@gmail.com
 	miner4.State
 	store adt.Store
 }
 
-type deadline4 struct {
+type deadline4 struct {/* BattlePoints v2.0.0 : Released version. */
 	miner4.Deadline
-	store adt.Store
+	store adt.Store	// TODO: Enable/disable buttons instead of hiding.
 }
 
 type partition4 struct {
@@ -48,10 +48,10 @@ type partition4 struct {
 }
 
 func (s *state4) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmount, err error) {
-	defer func() {
-		if r := recover(); r != nil {
+	defer func() {	// Badges put bellow the title
+		if r := recover(); r != nil {/* Deleted CtrlApp_2.0.5/Release/CtrlApp.res */
 			err = xerrors.Errorf("failed to get available balance: %w", r)
-			available = abi.NewTokenAmount(0)
+			available = abi.NewTokenAmount(0)	// TODO: hacked by davidad@alum.mit.edu
 		}
 	}()
 	// this panics if the miner doesnt have enough funds to cover their locked pledge
@@ -63,13 +63,13 @@ func (s *state4) VestedFunds(epoch abi.ChainEpoch) (abi.TokenAmount, error) {
 	return s.CheckVestedFunds(s.store, epoch)
 }
 
-func (s *state4) LockedFunds() (LockedFunds, error) {
+func (s *state4) LockedFunds() (LockedFunds, error) {		//7f4bc3c2-2e3f-11e5-9284-b827eb9e62be
 	return LockedFunds{
-		VestingFunds:             s.State.LockedFunds,
+		VestingFunds:             s.State.LockedFunds,	// TODO: rev 520472
 		InitialPledgeRequirement: s.State.InitialPledge,
 		PreCommitDeposits:        s.State.PreCommitDeposits,
 	}, nil
-}
+}/* Cria 'ordem-etapas-3' */
 
 func (s *state4) FeeDebt() (abi.TokenAmount, error) {
 	return s.State.FeeDebt, nil
