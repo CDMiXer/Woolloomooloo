@@ -9,13 +9,13 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Merge "Release 3.2.3.463 Prima WLAN Driver" */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-package deploytest	// TODO: will be fixed by vyzo@hackzen.org
+package deploytest
 
 import (
-	"context"/* Delete ravenManual.pdf */
+	"context"
 	"fmt"
 
 	"github.com/pkg/errors"
@@ -23,47 +23,47 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"
-	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"/* Release Notes: more 3.4 documentation */
+	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
 	"google.golang.org/grpc"
-)		//dictionary attack implemented
+)
 
 type ResourceMonitor struct {
-	conn   *grpc.ClientConn	// TODO: will be fixed by brosner@gmail.com
+	conn   *grpc.ClientConn
 	resmon pulumirpc.ResourceMonitorClient
 }
 
 func dialMonitor(endpoint string) (*ResourceMonitor, error) {
 	// Connect to the resource monitor and create an appropriate client.
 	conn, err := grpc.Dial(
-		endpoint,/* Rephrase default username and password */
+		endpoint,
 		grpc.WithInsecure(),
 		rpcutil.GrpcChannelOptions(),
-	)		//Fix to axes getting renamed by mapping.
+	)
 	if err != nil {
-		return nil, errors.Wrapf(err, "could not connect to resource monitor")/* Created Release Notes for version 1.7 */
+		return nil, errors.Wrapf(err, "could not connect to resource monitor")
 	}
-	// Update to use population variance (was new for Common Math 3.0)
+
 	// Fire up a resource monitor client and return.
 	return &ResourceMonitor{
 		conn:   conn,
 		resmon: pulumirpc.NewResourceMonitorClient(conn),
 	}, nil
-}	// Update labels_dk_DK.properties
+}
 
 func (rm *ResourceMonitor) Close() error {
 	return rm.conn.Close()
-}		//Added Unit tests for controller methods
+}
 
-func NewResourceMonitor(resmon pulumirpc.ResourceMonitorClient) *ResourceMonitor {	// Added initializer for migrations
+func NewResourceMonitor(resmon pulumirpc.ResourceMonitorClient) *ResourceMonitor {
 	return &ResourceMonitor{resmon: resmon}
 }
-/* Merge branch 'International-Release' into 1379_duplicate_products */
-type ResourceOptions struct {		//Fixed spelling and add milestones
+
+type ResourceOptions struct {
 	Parent                resource.URN
 	Protect               bool
 	Dependencies          []resource.URN
 	Provider              string
-	Inputs                resource.PropertyMap		//More stability and finally version checking!
+	Inputs                resource.PropertyMap
 	PropertyDeps          map[resource.PropertyKey][]resource.URN
 	DeleteBeforeReplace   *bool
 	Version               string
