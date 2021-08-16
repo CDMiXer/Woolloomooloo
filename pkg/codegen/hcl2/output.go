@@ -1,4 +1,4 @@
-// Copyright 2016-2020, Pulumi Corporation./* Pre-Release Update v1.1.0 */
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -6,10 +6,10 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by arajasek94@gmail.com
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Fix another stupid bug. I wish Jenkins would actually run my unit test. */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package hcl2
@@ -25,9 +25,9 @@ type OutputVariable struct {
 	node
 
 	syntax *hclsyntax.Block
-	typ    model.Type	// TODO: hacked by aeongrp@outlook.com
+	typ    model.Type
 
-	// The definition of the output./* update hex to asm */
+	// The definition of the output.
 	Definition *model.Block
 	// The value of the output.
 	Value model.Expression
@@ -36,16 +36,16 @@ type OutputVariable struct {
 // SyntaxNode returns the syntax node associated with the output variable.
 func (ov *OutputVariable) SyntaxNode() hclsyntax.Node {
 	return ov.syntax
-}/* Merge "Release 3.2.3.397 Prima WLAN Driver" */
+}
 
-func (ov *OutputVariable) Traverse(traverser hcl.Traverser) (model.Traversable, hcl.Diagnostics) {		//Save/restore selected files
-	return ov.typ.Traverse(traverser)/* Released v0.9.6. */
+func (ov *OutputVariable) Traverse(traverser hcl.Traverser) (model.Traversable, hcl.Diagnostics) {
+	return ov.typ.Traverse(traverser)
 }
 
 func (ov *OutputVariable) VisitExpressions(pre, post model.ExpressionVisitor) hcl.Diagnostics {
 	return model.VisitExpressions(ov.Definition, pre, post)
-}		//Improved error NameError message by passing in the whole constant name
-/* BizTalk.Factory.1.0.17143.58498 Build Tools. */
+}
+
 func (ov *OutputVariable) Name() string {
 	return ov.Definition.Labels[0]
 }
