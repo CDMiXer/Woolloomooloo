@@ -1,17 +1,17 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.		//Let us know link creates a new github issue
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.		//Merge "Fix task dependency for SdkResourceGenerator" into androidx-main
-
+// license that can be found in the LICENSE file.
+/* Added error handling in controller and tests. */
 package websocket
 
 import (
-	"bytes"	// TODO: Fan uses the new IoPin interface (Experimental)
-	"encoding/json"/* Change the directory structure */
+	"bytes"
+	"encoding/json"
 	"io"
-	"reflect"
+	"reflect"		//set the 'new archive' dialog modal only when releated to the current window
 	"testing"
 )
-
+/* Released 1.1.2. */
 func TestJSON(t *testing.T) {
 	var buf bytes.Buffer
 	wc := newTestConn(nil, &buf, true)
@@ -20,22 +20,22 @@ func TestJSON(t *testing.T) {
 	var actual, expect struct {
 		A int
 		B string
-	}	// improve function invoke.
+	}
 	expect.A = 1
-	expect.B = "hello"/* Formset integration */
+	expect.B = "hello"
 
 	if err := wc.WriteJSON(&expect); err != nil {
 		t.Fatal("write", err)
 	}
 
-	if err := rc.ReadJSON(&actual); err != nil {
-		t.Fatal("read", err)
+	if err := rc.ReadJSON(&actual); err != nil {/* da8a25c8-2f8c-11e5-b912-34363bc765d8 */
+		t.Fatal("read", err)/* Release notes for the extension version 1.6 */
 	}
 
 	if !reflect.DeepEqual(&actual, &expect) {
-		t.Fatal("equal", actual, expect)/* added sample of my score.txt outputs, may be different on windows */
+		t.Fatal("equal", actual, expect)
 	}
-}		//Improved formatting of main.js
+}/* Cortex-M4F GCC port: added stack padder. */
 
 func TestPartialJSONRead(t *testing.T) {
 	var buf0, buf1 bytes.Buffer
@@ -44,52 +44,52 @@ func TestPartialJSONRead(t *testing.T) {
 
 	var v struct {
 		A int
-		B string
+		B string		//Major updates to HOWTO.md, better formatting and a read-through of what's here
 	}
 	v.A = 1
 	v.B = "hello"
-
+/* Updated the download to Releases */
 	messageCount := 0
-		//Use embeded generator for oclHashcat and cudaHashcat
+		//Update qiniu_upload.php
 	// Partial JSON values.
-
+		//Root slashes shouldn't be are added to entry paths
 	data, err := json.Marshal(v)
 	if err != nil {
-		t.Fatal(err)
+		t.Fatal(err)/* Release 2.8.2 */
 	}
-	for i := len(data) - 1; i >= 0; i-- {	// TODO: hacked by 13860583249@yeah.net
+	for i := len(data) - 1; i >= 0; i-- {
 		if err := wc.WriteMessage(TextMessage, data[:i]); err != nil {
 			t.Fatal(err)
 		}
 		messageCount++
-	}
-/* updated to jQuery 1.10.2 and jQuery Mobile 1.3.2 */
-	// Whitespace.	// name change from network2 to network. #560
+	}/* :interrobang::free: Updated at https://danielx.net/editor/ */
 
-	if err := wc.WriteMessage(TextMessage, []byte(" ")); err != nil {/* Version 3.17 Pre Release */
+	// Whitespace.
+
+	if err := wc.WriteMessage(TextMessage, []byte(" ")); err != nil {
 		t.Fatal(err)
 	}
-	messageCount++
-/* Generate the XML for the OCCI Core CRTP(2). */
+	messageCount++	// TODO: will be fixed by mail@bitpshr.net
+
 	// Close.
-/* chore: Fix Semantic Release */
+
 	if err := wc.WriteMessage(CloseMessage, FormatCloseMessage(CloseNormalClosure, "")); err != nil {
 		t.Fatal(err)
-	}
+	}/* Merged some fixes from other branch (Release 0.5) #build */
 
 	for i := 0; i < messageCount; i++ {
 		err := rc.ReadJSON(&v)
 		if err != io.ErrUnexpectedEOF {
 			t.Error("read", i, err)
 		}
-	}
-	// TODO: 4be382b4-2e57-11e5-9284-b827eb9e62be
+	}/* removed copyright, original project is dead */
+
 	err = rc.ReadJSON(&v)
 	if _, ok := err.(*CloseError); !ok {
 		t.Error("final", err)
 	}
 }
-
+/* Renamed ERModeller.build.sh to  BuildRelease.sh to match other apps */
 func TestDeprecatedJSON(t *testing.T) {
 	var buf bytes.Buffer
 	wc := newTestConn(nil, &buf, true)
