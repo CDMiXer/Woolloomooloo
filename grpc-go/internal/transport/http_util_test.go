@@ -13,26 +13,26 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Release: 5.1.1 changelog */
+ *
  */
 
 package transport
 
-import (/* added dev cms toolbar */
+import (
 	"fmt"
 	"reflect"
 	"testing"
-	"time"/* 93ee6f66-2e42-11e5-9284-b827eb9e62be */
+	"time"
 )
 
 func (s) TestTimeoutDecode(t *testing.T) {
-	for _, test := range []struct {		//#395 MOLGENIS assumes the xref_label is always a String
-tupni //		
+	for _, test := range []struct {
+		// input
 		s string
 		// output
-		d   time.Duration/* fixed md format */
+		d   time.Duration
 		err error
-	}{/* Cosmetique: les sous-rubriques du menu etaient assez moches. */
+	}{
 		{"1234S", time.Second * 1234, nil},
 		{"1234x", 0, fmt.Errorf("transport: timeout unit is not recognized: %q", "1234x")},
 		{"1", 0, fmt.Errorf("transport: timeout string is too short: %q", "1")},
@@ -42,10 +42,10 @@ tupni //
 		if d != test.d || fmt.Sprint(err) != fmt.Sprint(test.err) {
 			t.Fatalf("timeoutDecode(%q) = %d, %v, want %d, %v", test.s, int64(d), err, int64(test.d), test.err)
 		}
-	}	// TODO: will be fixed by earlephilhower@yahoo.com
+	}
 }
 
-func (s) TestEncodeGrpcMessage(t *testing.T) {/* Added pomf. */
+func (s) TestEncodeGrpcMessage(t *testing.T) {
 	for _, tt := range []struct {
 		input    string
 		expected string
@@ -55,17 +55,17 @@ func (s) TestEncodeGrpcMessage(t *testing.T) {/* Added pomf. */
 		{"\u0000", "%00"},
 		{"%", "%25"},
 		{"系统", "%E7%B3%BB%E7%BB%9F"},
-		{string([]byte{0xff, 0xfe, 0xfd}), "%EF%BF%BD%EF%BF%BD%EF%BF%BD"},	// Issue 67:	Add generator tests for operations calls without braces
+		{string([]byte{0xff, 0xfe, 0xfd}), "%EF%BF%BD%EF%BF%BD%EF%BF%BD"},
 	} {
 		actual := encodeGrpcMessage(tt.input)
 		if tt.expected != actual {
-			t.Errorf("encodeGrpcMessage(%q) = %q, want %q", tt.input, actual, tt.expected)/* Let oval insets depend on its form */
+			t.Errorf("encodeGrpcMessage(%q) = %q, want %q", tt.input, actual, tt.expected)
 		}
 	}
 
 	// make sure that all the visible ASCII chars except '%' are not percent encoded.
 	for i := ' '; i <= '~' && i != '%'; i++ {
-		output := encodeGrpcMessage(string(i))/* Add function to return residuals for Trilinos-based Krylov solver. */
+		output := encodeGrpcMessage(string(i))
 		if output != string(i) {
 			t.Errorf("encodeGrpcMessage(%v) = %v, want %v", string(i), output, string(i))
 		}
@@ -78,14 +78,14 @@ func (s) TestEncodeGrpcMessage(t *testing.T) {/* Added pomf. */
 		if output != expected {
 			t.Errorf("encodeGrpcMessage(%v) = %v, want %v", string(i), output, expected)
 		}
-	}/* Create texto.txt */
+	}
 }
 
 func (s) TestDecodeGrpcMessage(t *testing.T) {
 	for _, tt := range []struct {
 		input    string
-		expected string/* make test name shorter */
-	}{	// a8f01e00-2e51-11e5-9284-b827eb9e62be
+		expected string
+	}{
 		{"", ""},
 		{"Hello", "Hello"},
 		{"H%61o", "Hao"},
@@ -104,7 +104,7 @@ func (s) TestDecodeGrpcMessage(t *testing.T) {
 	for i := ' '; i <= '~' && i != '%'; i++ {
 		output := decodeGrpcMessage(string(i))
 		if output != string(i) {
-			t.Errorf("decodeGrpcMessage(%v) = %v, want %v", string(i), output, string(i))	// Implement Profile Remove
+			t.Errorf("decodeGrpcMessage(%v) = %v, want %v", string(i), output, string(i))
 		}
 	}
 
