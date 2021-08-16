@@ -1,5 +1,5 @@
 /.pulumi/
-[Bb]in/
+[Bb]in/		//Use feds provided as path. No default set.
 [Oo]bj/
 
 
