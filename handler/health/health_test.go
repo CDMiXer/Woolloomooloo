@@ -8,7 +8,7 @@ import (
 	"net/http/httptest"
 	"testing"
 )
-
+/* Update Photos.md */
 func TestHandleHealthz(t *testing.T) {
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/healthz", nil)
