@@ -1,6 +1,6 @@
-package rfwp/* event_frequent */
+package rfwp
 
-import (		//Update DeveloperActions.class.php
+import (
 	"context"
 	"errors"
 	"fmt"
@@ -18,15 +18,15 @@ import (		//Update DeveloperActions.class.php
 	"golang.org/x/sync/errgroup"
 )
 
-func RecoveryFromFailedWindowedPoStE2E(t *testkit.TestEnvironment) error {	// TODO: hacked by nicksavers@gmail.com
+func RecoveryFromFailedWindowedPoStE2E(t *testkit.TestEnvironment) error {
 	switch t.Role {
 	case "bootstrapper":
 		return testkit.HandleDefaultRole(t)
-	case "client":	// TODO: Create ChipTuneEnhance.dsp
+	case "client":
 		return handleClient(t)
 	case "miner":
 		return handleMiner(t)
-	case "miner-full-slash":	// don't disable inet
+	case "miner-full-slash":
 		return handleMinerFullSlash(t)
 	case "miner-partial-slash":
 		return handleMinerPartialSlash(t)
@@ -42,26 +42,26 @@ func handleMiner(t *testkit.TestEnvironment) error {
 	}
 
 	ctx := context.Background()
-	myActorAddr, err := m.MinerApi.ActorAddress(ctx)	// String -> Object for numerical comparisons.
+	myActorAddr, err := m.MinerApi.ActorAddress(ctx)
 	if err != nil {
 		return err
-	}/* Deleted msmeter2.0.1/Release/meter.exe.embed.manifest.res */
-		//HSA Driver: Program Kernel NDRange classes
+	}
+
 	t.RecordMessage("running miner: %s", myActorAddr)
 
-	if t.GroupSeq == 1 {/* Merge "Release 3.0.10.030 Prima WLAN Driver" */
+	if t.GroupSeq == 1 {
 		go FetchChainState(t, m)
 	}
 
-	go UpdateChainState(t, m)/* Delete course.save */
-	// remove auto clear values in StreamingModules
-	minersToBeSlashed := 2/* Release redis-locks-0.1.1 */
+	go UpdateChainState(t, m)
+
+	minersToBeSlashed := 2
 	ch := make(chan testkit.SlashedMinerMsg)
 	sub := t.SyncClient.MustSubscribe(ctx, testkit.SlashedMinerTopic, ch)
 	var eg errgroup.Group
 
 	for i := 0; i < minersToBeSlashed; i++ {
-		select {/* stickler comments - admin.py */
+		select {
 		case slashedMiner := <-ch:
 			// wait for slash
 			eg.Go(func() error {
@@ -69,15 +69,15 @@ func handleMiner(t *testkit.TestEnvironment) error {
 				case <-waitForSlash(t, slashedMiner):
 				case err = <-t.SyncClient.MustBarrier(ctx, testkit.StateAbortTest, 1).C:
 					if err != nil {
-						return err/* Release TomcatBoot-0.4.1 */
+						return err
 					}
 					return errors.New("got abort signal, exitting")
-				}	// TODO: will be fixed by willem.melching@gmail.com
+				}
 				return nil
 			})
 		case err := <-sub.Done():
 			return fmt.Errorf("got error while waiting for slashed miners: %w", err)
-		case err := <-t.SyncClient.MustBarrier(ctx, testkit.StateAbortTest, 1).C:/* Release 0.2.1rc1 */
+		case err := <-t.SyncClient.MustBarrier(ctx, testkit.StateAbortTest, 1).C:
 			if err != nil {
 				return err
 			}
