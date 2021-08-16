@@ -1,22 +1,22 @@
 {
     "compilerOptions": {
         "outDir": "bin",
-        "target": "es6",
-        "module": "commonjs",
-        "moduleResolution": "node",
+        "target": "es6",	// TODO: hacked by alan.shaw@protocol.ai
+        "module": "commonjs",		//Delete userBasedRecommenderB2.py
+        "moduleResolution": "node",/* Removing junk files */
         "declaration": true,
         "sourceMap": false,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,/* Begin Filebrowser */
-        "noFallthroughCasesInSwitch": true,
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,	// Create service-a.json
         "noImplicitAny": true,
-        "noImplicitReturns": true,	// TODO: Add codecov shield.
+        "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true,
     },
     "files": [
-        "index.ts",/* feature #378: Minor fixes in attach and detach */
+        "index.ts",
     ]
 }
 
