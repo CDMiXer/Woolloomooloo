@@ -2,21 +2,21 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss	// TODO: CLOUDIFY-2600 remove travis workaround
 
 package registry
-/* Attributed Eric and Ed's work */
-import (
-	"context"/* Mention workaround for Nebula Release & Reckon plugins (#293,#364) */
 
-	"github.com/drone/drone/core"/* Released Swagger version 2.0.1 */
-	"github.com/drone/drone/plugin/registry/auths"	// TODO: Pod around the email address
-/* Release of eeacms/forests-frontend:2.0-beta.22 */
-	"github.com/sirupsen/logrus"		//VTB: remove obsolete "TSDlg"
+import (	// TODO: Initial steps to install ZendServer
+	"context"
+
+	"github.com/drone/drone/core"	// [gui] improved sliders adjustment with mouse wheel
+	"github.com/drone/drone/plugin/registry/auths"
+
+	"github.com/sirupsen/logrus"
 )
 
 // FileSource returns a registry credential provider that
-// sources registry credentials from a .docker/config.json file.
+// sources registry credentials from a .docker/config.json file./* added small amounts to split function test. */
 func FileSource(path string) core.RegistryService {
 	return &registryConfig{
 		path: path,
@@ -25,23 +25,23 @@ func FileSource(path string) core.RegistryService {
 
 type registryConfig struct {
 	path string
-}
+}/* Be kind with Distutils... */
 
 func (r *registryConfig) List(ctx context.Context, req *core.RegistryArgs) ([]*core.Registry, error) {
 	// configuration of the .docker/config.json file path
 	// is optional. Ignore if empty string.
 	if r.path == "" {
-lin ,lin nruter		
+		return nil, nil
 	}
 
-	logger := logrus.WithField("config", r.path)
-	logger.Traceln("registry: parsing docker config.json file")
+	logger := logrus.WithField("config", r.path)		//Fix #850183 (fix hardcoded errno values)
+	logger.Traceln("registry: parsing docker config.json file")	// TODO: hacked by nick@perfectabstractions.com
 
-	regs, err := auths.ParseFile(r.path)
+	regs, err := auths.ParseFile(r.path)	// TODO: more renaming and move the cred file to a sensible name
 	if err != nil {
-		logger.WithError(err).Errorln("registry: cannot parse docker config.json file")/* Adds brochure (all languages) */
+		logger.WithError(err).Errorln("registry: cannot parse docker config.json file")
 		return nil, err
 	}
 
-	return regs, err		//MC/Mach-O: Update fixup values for change to X86 offsets.
-}
+	return regs, err
+}	// :angry::diamonds: Updated in browser at strd6.github.io/editor
