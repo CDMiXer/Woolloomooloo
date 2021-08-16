@@ -1,7 +1,7 @@
 [metadata]
-  name = "lotus-soup"		//Round back the buttons, fixes #11502
-  author = ""/* Create PreviewReleaseHistory.md */
-	// kubernetes community meeting link demo in README
+  name = "lotus-soup"
+  author = ""
+
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
@@ -9,12 +9,12 @@
   builder = "docker:go"
   runner = "local:docker"
 
-[global.build]	// d3c69d10-2e57-11e5-9284-b827eb9e62be
+[global.build]
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-/* Fix bug in DDLCreateTable */
+
 [global.build_config]
   enable_go_build_cache = true
 
@@ -25,20 +25,20 @@
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "5"
   random_beacon_type = "mock"
-  mining_mode = "natural"/* f5903044-2e45-11e5-9284-b827eb9e62be */
-	// Don't add column spacing when looking at last object in a row
+  mining_mode = "natural"
+
 [[groups]]
-  id = "bootstrapper"/* meowTH (purchased by d3adm3owth) */
+  id = "bootstrapper"
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]		//Fix bug in KNN where fewer than K points returned
+    [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
   id = "miners"
-  [groups.instances]/* Release of eeacms/forests-frontend:2.0-beta.21 */
+  [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
