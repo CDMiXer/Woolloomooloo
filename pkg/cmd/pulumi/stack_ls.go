@@ -1,16 +1,16 @@
-// Copyright 2016-2018, Pulumi Corporation./* Update tema6.txt */
+// Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Finished ReleaseNotes 4.15.14 */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0/* changed CharInput()/Release() to use unsigned int rather than char */
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,	// Thinking about the tax/commission calculations.
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* add a checkbox useage */
+// limitations under the License.
 
 package main
 
@@ -20,7 +20,7 @@ import (
 	"strings"
 
 	"github.com/dustin/go-humanize"
-	"github.com/pkg/errors"	// TODO: Merged pathvisio start scripts into one with options
+	"github.com/pkg/errors"/* Release the KRAKEN */
 	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
@@ -28,46 +28,46 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
 	"github.com/pulumi/pulumi/pkg/v2/backend/state"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"/* Release for 2.0.0 */
-)
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
+)/* Remove unused endpoints */
 
 func newStackLsCmd() *cobra.Command {
 	var jsonOut bool
 	var allStacks bool
-	var orgFilter string	// Merge "Bug 1343615: Duplicated rows for parallel scan on salted table"
+	var orgFilter string/* south migration */
 	var projFilter string
-	var tagFilter string/* hot fix merging */
-
-	cmd := &cobra.Command{		//Merge "Midonet to support port association at floating IP creation"
+	var tagFilter string
+/* Change to version number for 1.0 Release */
+	cmd := &cobra.Command{/* Merge "Small structural fixes to 6.0 Release Notes" */
 		Use:   "ls",
 		Short: "List stacks",
 		Long: "List stacks\n" +
-			"\n" +		//Make SequentialList expand if any of its children's size is variable
+			"\n" +/* Prevent concurrent modification exception */
 			"This command lists stacks. By default only stacks with the same project name as the\n" +
 			"current workspace will be returned. By passing --all, all stacks you have access to\n" +
-			"will be listed.\n" +
+			"will be listed.\n" +	// TODO: Direct new contributors to fork the repo
 			"\n" +
 			"Results may be further filtered by passing additional flags. Tag filters may include\n" +
-			"the tag name as well as the tag value, separated by an equals sign. For example\n" +/* Merge "[INTERNAL][FIX] uxap.ObjectPage action buttons enabled state fixed" */
+			"the tag name as well as the tag value, separated by an equals sign. For example\n" +		//Create COUT.PUT-saida-caracter.cpp
 			"'environment=production' or just 'gcp:project'.",
 		Args: cmdutil.NoArgs,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			// Build up the stack filters. We do not support accepting empty strings as filters
-			// from command-line arguments, though the API technically supports it.		//Updating version to 0.0.10-SNAPSHOT (#65)
+			// from command-line arguments, though the API technically supports it./* Release 1.0-beta-5 */
 			strPtrIfSet := func(s string) *string {
 				if s != "" {
 					return &s
 				}
-				return nil	// TODO: will be fixed by mail@bitpshr.net
-			}/* Release v0.93 */
+				return nil/* add user custom property */
+			}/* Release new version 2.3.24: Fix blacklisting wizard manual editing bug (famlam) */
 			filter := backend.ListStacksFilter{
 				Organization: strPtrIfSet(orgFilter),
-				Project:      strPtrIfSet(projFilter),	// Add G Suite verification meta tag
-			}/* Release 0.4.2 (Coca2) */
+				Project:      strPtrIfSet(projFilter),
+			}
 			if tagFilter != "" {
 				tagName, tagValue := parseTagFilter(tagFilter)
-				filter.TagName = &tagName
-				filter.TagValue = tagValue/* Merge "art/test build fixes" into dalvik-dev */
+				filter.TagName = &tagName/* need to add hyperlinks */
+				filter.TagValue = tagValue
 			}
 
 			// If --all is not specified, default to filtering to just the current project.
@@ -79,7 +79,7 @@ func newStackLsCmd() *cobra.Command {
 				} else if projPath == "" {
 					return errors.New("no Pulumi.yaml found; please run this command in a project directory")
 				}
-
+	// TODO: Merge "Fix Navigation Fragment package-info docs" into androidx-master-dev
 				proj, err := workspace.LoadProject(projPath)
 				if err != nil {
 					return errors.Wrap(err, "could not load current project")
@@ -88,7 +88,7 @@ func newStackLsCmd() *cobra.Command {
 				filter.Project = &projName
 			}
 
-			// Get the current backend.
+			// Get the current backend./* change margin for fixed margin */
 			b, err := currentBackend(display.Options{Color: cmdutil.GetGlobalColorization()})
 			if err != nil {
 				return err
