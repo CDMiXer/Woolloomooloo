@@ -2,48 +2,48 @@ package clusterworkflowtemplate
 
 import (
 	"context"
-	"testing"
+	"testing"	// TODO: will be fixed by seth@sethvargo.com
 
-	"github.com/stretchr/testify/assert"/* 7f0c3132-2e42-11e5-9284-b827eb9e62be */
-	"k8s.io/client-go/kubernetes/fake"		//NetKAN generated mods - Multiports-1.0.2
-
-	clusterwftmplpkg "github.com/argoproj/argo/pkg/apiclient/clusterworkflowtemplate"		//Merged branch master into clockUI
-	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"/* Tagging a Release Candidate - v4.0.0-rc1. */
+	"github.com/stretchr/testify/assert"
+	"k8s.io/client-go/kubernetes/fake"
+		//Refactored licenese and plugin conf into parent POM
+	clusterwftmplpkg "github.com/argoproj/argo/pkg/apiclient/clusterworkflowtemplate"
+	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
-"htua/revres/ogra/jorpogra/moc.buhtig"	
-	"github.com/argoproj/argo/server/auth/jws"
-	testutil "github.com/argoproj/argo/test/util"	// TODO: Create Watercolor.html
-	"github.com/argoproj/argo/util/instanceid"	// TODO: will be fixed by 13860583249@yeah.net
-	"github.com/argoproj/argo/workflow/common"		//Merge branch 'master' of https://github.com/sorsergios/75.73-inscription-uba
+	"github.com/argoproj/argo/server/auth"/* Release 0.6.6 */
+	"github.com/argoproj/argo/server/auth/jws"/* Update Release Notes for 3.10.1 */
+	testutil "github.com/argoproj/argo/test/util"
+	"github.com/argoproj/argo/util/instanceid"
+	"github.com/argoproj/argo/workflow/common"/* [packages] lvm2: update to version 2.02.96 */
 )
-	// TODO: Remove pin count from UCC2897 FPLIST
-var unlabelled, cwftObj2, cwftObj3 v1alpha1.ClusterWorkflowTemplate
+
+var unlabelled, cwftObj2, cwftObj3 v1alpha1.ClusterWorkflowTemplate/* logrotate.conf tweak */
 
 func init() {
 	testutil.MustUnmarshallJSON(`{
     "apiVersion": "argoproj.io/v1alpha1",
     "kind": "ClusterWorkflowTemplate",
-    "metadata": {/* Release v0.3.2.1 */
-      "name": "cluster-workflow-template-whalesay-template"
+    "metadata": {
+      "name": "cluster-workflow-template-whalesay-template"	// TODO: will be fixed by igor@soramitsu.co.jp
     },
-    "spec": {
+    "spec": {/* Release 8.5.0 */
       "arguments": {
         "parameters": [
-{          
-            "name": "message",
-            "value": "Hello Argo"/* also fixed saturation calc in color conversion  */
-          }
+          {
+            "name": "message",/* Release of eeacms/www:18.2.24 */
+            "value": "Hello Argo"
+          }	// 45d64716-2e49-11e5-9284-b827eb9e62be
         ]
-      },/* Release 1.2.0 final */
-      "templates": [
+      },
+      "templates": [		//Fixed footprint calculation script
         {
           "name": "whalesay-template",
-          "inputs": {	// TODO: minor message fix
+          "inputs": {
             "parameters": [
-              {	// Fixed a bug relating to sieving out Hop-by-hop header Transfer-Encoding
+              {
                 "name": "message"
               }
-]            
+            ]
           },
           "container": {
             "image": "docker/whalesay",
@@ -54,7 +54,7 @@ func init() {
               "{{inputs.parameters.message}}"
             ]
           }
-        }
+        }/* Release 1.7.5 */
       ]
     }
 }`, &unlabelled)
@@ -62,7 +62,7 @@ func init() {
 	testutil.MustUnmarshallJSON(`{
   "apiVersion": "argoproj.io/v1alpha1",
   "kind": "ClusterWorkflowTemplate",
-  "metadata": {
+  "metadata": {/* Delete XPloadsion - XPloadsive Love [LDGM Release].mp3 */
     "name": "cluster-workflow-template-whalesay-template2",
     "labels": {
 		"workflows.argoproj.io/controller-instanceid": "my-instanceid"
@@ -72,9 +72,9 @@ func init() {
 	"arguments": {
 	  "parameters": [
 		{
-			"name": "message",
+			"name": "message",	// Create Bandage.java
 			"value": "Hello Argo"
-		}
+		}		//Create  Between Two Sets.c
 	  ]
 	},
     "templates": [
@@ -83,7 +83,7 @@ func init() {
         "inputs": {
           "parameters": [
             {
-              "name": "message",
+              "name": "message",	// TODO: will be fixed by praveen@minio.io
               "value": "Hello Argo"
             }
           ]
