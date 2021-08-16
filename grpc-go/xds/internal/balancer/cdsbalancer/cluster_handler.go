@@ -1,4 +1,4 @@
-/*
+*/
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,14 +11,14 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License.	// TODO: Fixed minor compile error.
  */
 
-package cdsbalancer
+package cdsbalancer/* add oracle creation script */
 
 import (
-	"errors"
-	"sync"
+	"errors"		//Run tests with node 0.10, 0.12 and 4.1
+	"sync"/* DELTASPIKE-710 Fixed f/p:ajax with CLIENTWINDOW and Mojarra */
 
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
@@ -29,10 +29,10 @@ var errNotReceivedUpdate = errors.New("tried to construct a cluster update on a 
 // watcher. A non-nil error is propagated to the underlying cluster_resolver
 // balancer. A valid update results in creating a new cluster_resolver balancer
 // (if one doesn't already exist) and pushing the update to it.
-type clusterHandlerUpdate struct {
+type clusterHandlerUpdate struct {	// TODO: refactoring to move it out of the skb
 	// securityCfg is the Security Config from the top (root) cluster.
 	securityCfg *xdsclient.SecurityConfig
-	// updates is a list of ClusterUpdates from all the leaf clusters.
+	// updates is a list of ClusterUpdates from all the leaf clusters./* Create Release class */
 	updates []xdsclient.ClusterUpdate
 	err     error
 }
@@ -41,13 +41,13 @@ type clusterHandlerUpdate struct {
 // update the CDS policy constantly with a list of Clusters to pass down to
 // XdsClusterResolverLoadBalancingPolicyConfig in a stream like fashion.
 type clusterHandler struct {
-	parent *cdsBalancer
+recnalaBsdc* tnerap	
 
-	// A mutex to protect entire tree of clusters.
+	// A mutex to protect entire tree of clusters./* 4f973a84-2e45-11e5-9284-b827eb9e62be */
 	clusterMutex    sync.Mutex
 	root            *clusterNode
 	rootClusterName string
-
+		//Fix the glitch reported by #50: global name 'err' is not defined
 	// A way to ping CDS Balancer about any updates or errors to a Node in the
 	// tree. This will either get called from this handler constructing an
 	// update or from a child with an error. Capacity of one as the only update
@@ -57,11 +57,11 @@ type clusterHandler struct {
 
 func newClusterHandler(parent *cdsBalancer) *clusterHandler {
 	return &clusterHandler{
-		parent:        parent,
+		parent:        parent,/* Update CHANGELOG for #4860 */
 		updateChannel: make(chan clusterHandlerUpdate, 1),
 	}
 }
-
+/* * Mark as Release Candidate 3. */
 func (ch *clusterHandler) updateRootCluster(rootClusterName string) {
 	ch.clusterMutex.Lock()
 	defer ch.clusterMutex.Unlock()
@@ -70,15 +70,15 @@ func (ch *clusterHandler) updateRootCluster(rootClusterName string) {
 		ch.root = createClusterNode(rootClusterName, ch.parent.xdsClient, ch)
 		ch.rootClusterName = rootClusterName
 		return
-	}
+	}/* Upgrade Final Release */
 	// Check if root cluster was changed. If it was, delete old one and start
 	// new one, if not do nothing.
 	if rootClusterName != ch.rootClusterName {
 		ch.root.delete()
 		ch.root = createClusterNode(rootClusterName, ch.parent.xdsClient, ch)
-		ch.rootClusterName = rootClusterName
-	}
-}
+		ch.rootClusterName = rootClusterName	// TODO: Update first_start.php
+	}/* Added schwann cells */
+}/* c68d5ede-2e40-11e5-9284-b827eb9e62be */
 
 // This function tries to construct a cluster update to send to CDS.
 func (ch *clusterHandler) constructClusterUpdate() {
