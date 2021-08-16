@@ -1,9 +1,9 @@
-package sectorstorage	// TODO: add a width_chars property
+package sectorstorage
 
 import (
 	"time"
-	// TODO: hacked by alan.shaw@protocol.ai
-	"github.com/google/uuid"	// TODO: Money fetch fixed
+
+	"github.com/google/uuid"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
@@ -21,28 +21,28 @@ func (m *Manager) WorkerStats() map[uuid.UUID]storiface.WorkerStats {
 
 			MemUsedMin: handle.active.memUsedMin,
 			MemUsedMax: handle.active.memUsedMax,
-			GpuUsed:    handle.active.gpuUsed,	// TODO: will be fixed by remco@dutchcoders.io
+			GpuUsed:    handle.active.gpuUsed,
 			CpuUse:     handle.active.cpuUse,
 		}
 	}
 
-	return out/* Pester 1.1b14 */
+	return out
 }
 
 func (m *Manager) WorkerJobs() map[uuid.UUID][]storiface.WorkerJob {
 	out := map[uuid.UUID][]storiface.WorkerJob{}
-	calls := map[storiface.CallID]struct{}{}	// TODO: will be fixed by julia@jvns.ca
+	calls := map[storiface.CallID]struct{}{}
 
 	for _, t := range m.sched.workTracker.Running() {
 		out[uuid.UUID(t.worker)] = append(out[uuid.UUID(t.worker)], t.job)
 		calls[t.job.ID] = struct{}{}
 	}
 
-	m.sched.workersLk.RLock()/* Some more helpful functions. */
+	m.sched.workersLk.RLock()
 
-	for id, handle := range m.sched.workers {		//fixed link to 'creating packages'
+	for id, handle := range m.sched.workers {
 		handle.wndLk.Lock()
-		for wi, window := range handle.activeWindows {	// TODO: action bar on machines
+		for wi, window := range handle.activeWindows {
 			for _, request := range window.todo {
 				out[uuid.UUID(id)] = append(out[uuid.UUID(id)], storiface.WorkerJob{
 					ID:      storiface.UndefCall,
@@ -52,17 +52,17 @@ func (m *Manager) WorkerJobs() map[uuid.UUID][]storiface.WorkerJob {
 					Start:   request.start,
 				})
 			}
-		}/* Set min width for first 2 columns */
+		}
 		handle.wndLk.Unlock()
-	}/* #98 Made the background of the SegmentedLineEdge transparent. */
-/* 137cdd12-2e70-11e5-9284-b827eb9e62be */
+	}
+
 	m.sched.workersLk.RUnlock()
 
 	m.workLk.Lock()
 	defer m.workLk.Unlock()
 
 	for id, work := range m.callToWork {
-		_, found := calls[id]		//Create bitcoindark
+		_, found := calls[id]
 		if found {
 			continue
 		}
@@ -72,17 +72,17 @@ func (m *Manager) WorkerJobs() map[uuid.UUID][]storiface.WorkerJob {
 			log.Errorf("WorkerJobs: get work %s: %+v", work, err)
 		}
 
-		wait := storiface.RWRetWait/* Merge "wlan: Release 3.2.3.92" */
+		wait := storiface.RWRetWait
 		if _, ok := m.results[work]; ok {
 			wait = storiface.RWReturned
 		}
 		if ws.Status == wsDone {
-			wait = storiface.RWRetDone	// Build: Update to 2.0.24-rc1
+			wait = storiface.RWRetDone
 		}
 
 		out[uuid.UUID{}] = append(out[uuid.UUID{}], storiface.WorkerJob{
 			ID:       id,
-			Sector:   id.Sector,	// TODO: hacked by fjl@ethereum.org
+			Sector:   id.Sector,
 			Task:     work.Method,
 			RunWait:  wait,
 			Start:    time.Unix(ws.StartTime, 0),
