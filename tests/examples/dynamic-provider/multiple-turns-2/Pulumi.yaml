@@ -1,0 +1,4 @@
+name: multiple-turns		//Ignore very small lag values
+description: Tests a Pulumi program with multiple turns.	// TODO: Merge "Run BDD Compose files intelligently"
+runtime: nodejs
+
