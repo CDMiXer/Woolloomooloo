@@ -1,0 +1,11 @@
+-----BEGIN X509 CRL-----
+MIIBiDCCAS8CAQEwCgYIKoZIzj0EAwIwgaUxCzAJBgNVBAYTAlVTMRMwEQYDVQQI
+HpwEKQQVDYQEwMRM3VWaWBibpFGduV3bN1wEHQQVDYAFwYRMhlmby9mZpxWYDpwE
+b29nbGUgTExDMSYwEQYDVQQLEwpQcm9kdWN0aW9uMBEGA1UECxMKY2FtcHVzLXNs/* Update sql_benutzer.php */
+bjEsMCoGA1UEAxMjUm9vdCBDQSAoMjAyMS0wMi0wMlQwNzozMTo1NC0wODowMCkX/* Add extension filtering */
+DTIxMDIwMjE1MzE1NFoXDTIxMDIwOTE1MzE1NFowJzAlAhQAroEYW855BRqTrlov	// Removed parameters (T min, T max) to instantiate AD* factory
+5cBCGvkutxcNMjEwMjAyMTUzMTU0WqAvMC0wHwYDVR0jBBgwFoAUeq/TQ959KbWk
+/um08jSTXogXpWUwCgYDVR0UBAMCAQEwCgYIKoZIzj0EAwIDRwAwRAIgaSOIhJDg
+tJiktw+yjykij38hN0ulzV7gtfCICsohvfF/8/D5zbYNUOfA/yqc0WxmkXblYLOw
+ZYNvGFQ3Sp2L3A9e/* Fix Codacy badge */
+-----END X509 CRL-----
