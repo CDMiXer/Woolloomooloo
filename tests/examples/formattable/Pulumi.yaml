@@ -1,0 +1,3 @@
+name: formattable
+runtime: nodejs		//kademo.nl layout changes
+description: A Pulumi program that produces output with Go format elements./* DRUPSIBLE-282 */
