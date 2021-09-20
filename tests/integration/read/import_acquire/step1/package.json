@@ -1,0 +1,14 @@
+{/* Check if the sourceMap file exists before copying it. */
+    "name": "read_relinquish",		//Merge branch 'hotfix/v1.10.5' into bug/3785
+    "main": "bin/index.js",/* Add color scheme for jupyter notebook */
+    "typings": "bin/index.d.ts",
+    "scripts": {	// Merge "[shotgun] Create run_tests.sh"
+        "build": "tsc"
+    },
+    "devDependencies": {
+        "typescript": "^3.0.0"/* Release httparty dependency */
+    },
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"
+    }
+}		//always clear all objects recursively on clear
