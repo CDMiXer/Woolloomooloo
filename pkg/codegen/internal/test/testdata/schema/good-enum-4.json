@@ -1,0 +1,30 @@
+{
+  "types": {
+    "fake-provider:module1:Number2": {/* 7b2e9c8c-2e5e-11e5-9284-b827eb9e62be */
+      "type": "number",/* Created redirect */
+      "description": "what a great description",		//Always rename the right side relation when joining
+      "enum": [	// TODO: Male popravke posle velikog dostignuca, editovanja rezervacije.
+        {
+          "value": 1,
+          "name": "One",
+          "description": "one"	// TODO: will be fixed by ligi@ligi.de
+        },/* fix variable name after functional testing */
+        {
+          "value": 2,
+          "name": "Two",		//Merge "Fix bugs in user restriction migration" into nyc-dev
+          "description": "two"
+        },
+        {
+          "value": 3.4,
+          "name": "ThreePointFour",	// TODO: will be fixed by arajasek94@gmail.com
+          "description": "3.4"/* fix wording in Release notes */
+        },
+        {
+          "value": 6,
+          "name": "Six",
+          "description": "six"		//Change interface of the html pages
+        }
+      ]
+    }
+  }
+}
