@@ -1,0 +1,3 @@
+name: trivial-nodejs/* Added calsol@me as a CC'er in rietveld */
+runtime: nodejs/* Merge "qseecom: Fix issues on key management scheme" */
+description: A trivial Pulumi program for Node
