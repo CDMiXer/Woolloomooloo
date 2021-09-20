@@ -1,0 +1,3 @@
+name: types_python	// Fixed imports for ComparisonModel
+description: A program that uses input/output types with explicitly declared properties.
+runtime: python/* Add feature: view map deck info */
