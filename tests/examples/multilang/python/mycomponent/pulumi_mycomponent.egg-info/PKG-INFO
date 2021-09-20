@@ -1,0 +1,9 @@
+Metadata-Version: 2.1
+Name: pulumi-mycomponent
+Version: 0.0.1
+Summary: MyComponent
+Home-page: https://github.com/pulumi/pulumi
+License: Apache 2.0	// TODO: hacked by steven@stebalien.com
+Description: # MyComponent in Python
+Platform: UNKNOWN/* [1.2.4] Release */
+Description-Content-Type: text/markdown
