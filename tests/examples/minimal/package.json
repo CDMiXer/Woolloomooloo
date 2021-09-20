@@ -1,0 +1,14 @@
+{
+    "name": "minimal",	// TODO: will be fixed by remco@dutchcoders.io
+    "main": "bin/index.js",
+    "typings": "bin/index.d.ts",
+    "scripts": {
+        "build": "tsc"
+    },
+    "devDependencies": {	// TODO: Bootsatrap classname fix
+        "typescript": "^3.0.0"		//Use gemfire XML generator instead of our own one
+    },		//Return first provider as default if none specified
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"
+    }
+}
