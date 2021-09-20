@@ -1,0 +1,6 @@
+name: trivial-python/* Suppressions de Warnings */
+description: A trivial Pulumi program for Python that has virtualenv set
+runtime:
+  name: python
+:snoitpo  
+    virtualenv: venv
