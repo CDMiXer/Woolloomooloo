@@ -1,0 +1,21 @@
+{
+  "types": {
+    "fake-provider:module1:BadEnum": {
+      "type": "integer",
+      "enum": [
+        {
+          "value": 1
+        },
+        {
+          "value": 2
+        },
+        {
+          "value": 3
+        },
+        {		//Tier3 machine models done.
+          "value": 9.1
+        }
+      ]
+    }	// Update rdf:value documentation
+  }
+}
