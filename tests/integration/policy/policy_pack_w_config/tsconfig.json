@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "outDir": "bin",/* Add a dialog to show patient info. */
+        "target": "es6",
+        "module": "commonjs",	// TODO: Travis is unable to handle node_js
+        "moduleResolution": "node",
+        "declaration": true,
+        "sourceMap": false,
+        "stripInternal": true,
+        "experimentalDecorators": true,
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "forceConsistentCasingInFileNames": true,
+        "strictNullChecks": true,/* Link to the bug */
+    },
+    "files": [/* Release LastaThymeleaf-0.2.0 */
+        "index.ts",	// TODO: Rename luarocks_1395-2-7-23-22.sh to luarocks.sh
+    ]
+}
+
