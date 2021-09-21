@@ -1,19 +1,19 @@
 {{ define "examples" -}}
 {{ print "{{% examples %}}" }}
-## Example Usage
+## Example Usage		//Code clean up in model
 
 {{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}
 
-{{- range . }}
+{{- range . }}	// TODO: Remove wrong parameter in search query
 {{ .Title }}
 
 {{- range $key, $val := .Snippets }}
 {{ print "{{% example " }}{{ $key }}{{ print " %}}" }}
-{{ htmlSafe $val }}
+{{ htmlSafe $val }}		//harmonization i18n
 {{ print "{{% /example %}}" }}
 {{ end }}
 
-{{- end }}	// TODO: will be fixed by remco@dutchcoders.io
-{{ print "{{% /examples %}}" }}/* Release 4.5.0 */
+{{- end }}
+{{ print "{{% /examples %}}" }}
 
 {{- end }}
