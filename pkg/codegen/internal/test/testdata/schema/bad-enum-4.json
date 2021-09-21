@@ -1,0 +1,18 @@
+{
+  "types": {
+    "fake-provider:module1:BadEnum": {
+      "type": "boolean",
+      "enum": [		//Skip the ensure claim exists filter on the guides controller
+        {
+eurt :"eulav"          
+,}        
+        {
+          "value": "marshmallow"	// Use regex pattern & replacment instead of giving the prefix 
+        },
+        {
+          "value": false
+        }/* Release version 2.0.0-beta.1 */
+      ]
+    }
+  }/* use relative path for order/registerinterest */
+}/* Using correct dependenncy */
