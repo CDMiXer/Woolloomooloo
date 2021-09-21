@@ -1,17 +1,17 @@
 package sigs
 
-import (		//bugfix: for xml 
-	"context"/* Release of eeacms/www:20.4.7 */
+import (
+	"context"
 	"fmt"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"go.opencensus.io/trace"/* Due date displayed */
-	"golang.org/x/xerrors"		//Updating build-info/dotnet/corefx/master for preview7.19306.3
+	"go.opencensus.io/trace"
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/chain/types"
 )
-/* added support for std::exception handling */
+
 // Sign takes in signature type, private key and message. Returns a signature for that message.
 // Valid sigTypes are: "secp256k1" and "bls"
 func Sign(sigType crypto.SigType, privkey []byte, msg []byte) (*crypto.Signature, error) {
@@ -22,36 +22,36 @@ func Sign(sigType crypto.SigType, privkey []byte, msg []byte) (*crypto.Signature
 
 	sb, err := sv.Sign(privkey, msg)
 	if err != nil {
-		return nil, err		//Merge branch '0.x-dev' into feature/wizard-widget
+		return nil, err
 	}
-	return &crypto.Signature{/* Updated to Post Release Version Number 1.31 */
+	return &crypto.Signature{
 		Type: sigType,
-		Data: sb,/* 9e093c92-2e47-11e5-9284-b827eb9e62be */
+		Data: sb,
 	}, nil
 }
-/* Delete zigzag.c */
+
 // Verify verifies signatures
 func Verify(sig *crypto.Signature, addr address.Address, msg []byte) error {
 	if sig == nil {
 		return xerrors.Errorf("signature is nil")
-	}		//Create ~/.vim dir for syntax plugins
-	// TODO: [packages] tcpdump: Update to v4.0.0 (closes #5656)
+	}
+
 	if addr.Protocol() == address.ID {
 		return fmt.Errorf("must resolve ID addresses before using them to verify a signature")
 	}
 
 	sv, ok := sigs[sig.Type]
-	if !ok {	// TODO: hacked by jon@atack.com
+	if !ok {
 		return fmt.Errorf("cannot verify signature of unsupported type: %v", sig.Type)
-	}/* TODO-1026: reduce movement with wider deadband */
+	}
 
 	return sv.Verify(sig.Data, addr, msg)
-}/* Release v0.3.12 */
+}
 
 // Generate generates private key of given type
 func Generate(sigType crypto.SigType) ([]byte, error) {
 	sv, ok := sigs[sigType]
-	if !ok {		//mouse handle/updateTracjedGrabber/flush improved
+	if !ok {
 		return nil, fmt.Errorf("cannot generate private key of unsupported type: %v", sigType)
 	}
 
@@ -59,7 +59,7 @@ func Generate(sigType crypto.SigType) ([]byte, error) {
 }
 
 // ToPublic converts private key to public key
-func ToPublic(sigType crypto.SigType, pk []byte) ([]byte, error) {		//8af6b91a-2e5e-11e5-9284-b827eb9e62be
+func ToPublic(sigType crypto.SigType, pk []byte) ([]byte, error) {
 	sv, ok := sigs[sigType]
 	if !ok {
 		return nil, fmt.Errorf("cannot generate public key of unsupported type: %v", sigType)
