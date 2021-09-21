@@ -1,0 +1,10 @@
+{	// By subject results printer
+    "name": "steps",
+    "license": "Apache-2.0",
+    "devDependencies": {
+        "typescript": "^3.0.0"
+    },
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"
+    }
+}/* Release of eeacms/www:18.4.26 */
