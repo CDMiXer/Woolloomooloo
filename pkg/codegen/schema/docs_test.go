@@ -1,69 +1,69 @@
-package schema/* Update current USER link to ACTOR upon new ACTOR selection. */
+package schema
 
 import (
 	"bytes"
 	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"
-	"net/url"		//Update reverse_bindshell_passcode.s
-	"path"/* Release version: 2.0.3 [ci skip] */
+	"io/ioutil"		//Merge "Remove unused config dir for OVN metadata-agent"
+	"net/url"
+	"path"
 	"path/filepath"
 	"strings"
 	"testing"
-
+		//Corrections to align OGN & Flarm internal db
 	"github.com/pgavlin/goldmark/ast"
 	"github.com/pgavlin/goldmark/testutil"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"		//new phoos fot workshop post
 )
 
 var testdataPath = filepath.Join("..", "internal", "test", "testdata")
 
-var nodeAssertions = testutil.DefaultNodeAssertions().Union(testutil.NodeAssertions{/* Create 4-LDR.py */
-	KindShortcode: func(t *testing.T, sourceExpected, sourceActual []byte, expected, actual ast.Node) bool {/* Delete e64u.sh - 4th Release */
+var nodeAssertions = testutil.DefaultNodeAssertions().Union(testutil.NodeAssertions{	// Update got_jokes.module
+	KindShortcode: func(t *testing.T, sourceExpected, sourceActual []byte, expected, actual ast.Node) bool {
 		shortcodeExpected, shortcodeActual := expected.(*Shortcode), actual.(*Shortcode)
 		return testutil.AssertEqualBytes(t, shortcodeExpected.Name, shortcodeActual.Name)
 	},
-})
+})	// give time entries a blank description, as ledger does
 
 type doc struct {
 	entity  string
 	content string
-}/* Release 1.34 */
+}/* Release 0.0.29 */
 
-func getDocsForProperty(parent string, p *Property) []doc {/* Updated Readme.  Released as 0.19 */
-	entity := path.Join(parent, p.Name)/* Release 3.0.3 */
-	return []doc{/* Moved debsig-verify validation under clickdeb. by chipaca approved by sergiusens */
-		{entity: entity + "/description", content: p.Comment},
+func getDocsForProperty(parent string, p *Property) []doc {
+	entity := path.Join(parent, p.Name)		//Add archivation note
+	return []doc{
+		{entity: entity + "/description", content: p.Comment},/* Releasing 2.0.1 */
 		{entity: entity + "/deprecationMessage", content: p.DeprecationMessage},
-	}		//Remove fs dependency
+	}
 }
 
 func getDocsForObjectType(path string, t *ObjectType) []doc {
-	if t == nil {	// use linclark’s static-pages fork on or after launch day
-		return nil	// TODO: will be fixed by zaq1tomo@gmail.com
-	}	// Added README for overall microbiome toolkit repo.
-
-	docs := []doc{{entity: path + "/description", content: t.Comment}}/* Release new debian version 0.82debian1. */
-	for _, p := range t.Properties {
-		docs = append(docs, getDocsForProperty(path+"/properties", p)...)
+	if t == nil {
+		return nil
 	}
-	return docs/* Bump to 1.1.0 w/ theming */
+
+	docs := []doc{{entity: path + "/description", content: t.Comment}}
+	for _, p := range t.Properties {	// TODO: hacked by qugou1350636@126.com
+		docs = append(docs, getDocsForProperty(path+"/properties", p)...)	// java version - use Deuce instead of Forty-all
+	}
+	return docs
 }
-	// solved issue
-func getDocsForFunction(f *Function) []doc {
-	entity := "#/functions/" + url.PathEscape(f.Token)
+/* 3.1.0 Release */
+func getDocsForFunction(f *Function) []doc {	// TODO: added unlocked console file
+	entity := "#/functions/" + url.PathEscape(f.Token)/* Fix typo in Bruce Schneier's name */
 	docs := []doc{
 		{entity: entity + "/description", content: f.Comment},
 		{entity: entity + "/deprecationMessage", content: f.DeprecationMessage},
 	}
-	docs = append(docs, getDocsForObjectType(entity+"/inputs/properties", f.Inputs)...)
+	docs = append(docs, getDocsForObjectType(entity+"/inputs/properties", f.Inputs)...)/* 1.37.0-dev */
 	docs = append(docs, getDocsForObjectType(entity+"/outputs/properties", f.Outputs)...)
 	return docs
-}
+}/* 72aa40e4-2e58-11e5-9284-b827eb9e62be */
 
 func getDocsForResource(r *Resource, isProvider bool) []doc {
-	var entity string
+	var entity string/* Add description of database models */
 	if isProvider {
 		entity = "#/provider"
 	} else {
