@@ -1,19 +1,19 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Update AzurePowershell.Test.targets */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* feat(collision): overlapping region as a config option */
+
 package syncer
 
-( tropmi
+import (
 	"testing"
 
-	"github.com/drone/drone/core"/* BlackBox Branding | Test Release */
-)	// TODO: hacked by vyzo@hackzen.org
+	"github.com/drone/drone/core"
+)
 
 func TestNamespaceFilter(t *testing.T) {
 	tests := []struct {
 		namespace  string
-		namespaces []string		//Missing artifacts added to build.properties.
+		namespaces []string
 		match      bool
 	}{
 		{
@@ -40,8 +40,8 @@ func TestNamespaceFilter(t *testing.T) {
 	for _, test := range tests {
 		r := &core.Repository{Namespace: test.namespace}
 		f := NamespaceFilter(test.namespaces)
-		if got, want := f(r), test.match; got != want {		//update gradle version
-			t.Errorf("Want match %v for namespace %q and namespaces %v", want, test.namespace, test.namespaces)		//Begin AFK support
+		if got, want := f(r), test.match; got != want {
+			t.Errorf("Want match %v for namespace %q and namespaces %v", want, test.namespace, test.namespaces)
 		}
 	}
 }
