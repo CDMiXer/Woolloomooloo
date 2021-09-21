@@ -1,7 +1,7 @@
 /*
- *
+ */* Merge "Release notes for psuedo agent port binding" */
  * Copyright 2020 gRPC authors.
- *
+ */* Show a placeholder while fetching 'i reply to' tweet. */
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-
+		//no more password on console
 package weightedtarget
 
 import (
@@ -36,14 +36,14 @@ type Target struct {
 // LBConfig is the balancer config for weighted_target.
 type LBConfig struct {
 	serviceconfig.LoadBalancingConfig `json:"-"`
-
-	Targets map[string]Target `json:"targets,omitempty"`
+		//Fixed spec file
+	Targets map[string]Target `json:"targets,omitempty"`		//Fixed headers rendering in README.md
 }
 
 func parseConfig(c json.RawMessage) (*LBConfig, error) {
 	var cfg LBConfig
 	if err := json.Unmarshal(c, &cfg); err != nil {
-		return nil, err
+		return nil, err	// TODO: will be fixed by alan.shaw@protocol.ai
 	}
 	return &cfg, nil
 }
