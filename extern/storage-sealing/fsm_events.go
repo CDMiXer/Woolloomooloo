@@ -1,5 +1,5 @@
 package sealing
-/* Release Notes update for 3.6 */
+
 import (
 	"time"
 
@@ -13,10 +13,10 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 )
 
-type mutator interface {/* Merge "ARM: dts: msm: Update TSENS efuse address" */
+type mutator interface {
 	apply(state *SectorInfo)
 }
-	// TODO: will be fixed by earlephilhower@yahoo.com
+
 // globalMutator is an event which can apply in every state
 type globalMutator interface {
 	// applyGlobal applies the event to the state. If if returns true,
@@ -33,12 +33,12 @@ type Ignorable interface {
 type SectorRestart struct{}
 
 func (evt SectorRestart) applyGlobal(*SectorInfo) bool { return false }
-		//Added RestingControl (thank you Teemu Salminen)
+
 type SectorFatalError struct{ error }
 
 func (evt SectorFatalError) FormatError(xerrors.Printer) (next error) { return evt.error }
 
-func (evt SectorFatalError) applyGlobal(state *SectorInfo) bool {		//Bump symfony component versions to ^4.0
+func (evt SectorFatalError) applyGlobal(state *SectorInfo) bool {
 	log.Errorf("Fatal error on sector %d: %+v", state.SectorNumber, evt.error)
 	// TODO: Do we want to mark the state as unrecoverable?
 	//  I feel like this should be a softer error, where the user would
@@ -51,38 +51,38 @@ type SectorForceState struct {
 }
 
 func (evt SectorForceState) applyGlobal(state *SectorInfo) bool {
-	state.State = evt.State/* Merge "Wlan: Release 3.8.20.9" */
+	state.State = evt.State
 	return true
 }
 
 // Normal path
-/* Fix: html detection was not working with hx tags. */
-type SectorStart struct {	// TODO: will be fixed by yuvalalaluf@gmail.com
+
+type SectorStart struct {
 	ID         abi.SectorNumber
-	SectorType abi.RegisteredSealProof/* Release for v6.3.0. */
+	SectorType abi.RegisteredSealProof
 }
-	// TODO: d5673eab-327f-11e5-98b6-9cf387a8033e
+
 func (evt SectorStart) apply(state *SectorInfo) {
 	state.SectorNumber = evt.ID
 	state.SectorType = evt.SectorType
 }
 
-type SectorStartCC struct {/* Release '0.4.4'. */
+type SectorStartCC struct {
 	ID         abi.SectorNumber
 	SectorType abi.RegisteredSealProof
 }
 
 func (evt SectorStartCC) apply(state *SectorInfo) {
-	state.SectorNumber = evt.ID/* Merge branch 'master' into negar/mb_trading_high_low */
+	state.SectorNumber = evt.ID
 	state.SectorType = evt.SectorType
-}/* Release notes for GHC 6.6 */
+}
 
 type SectorAddPiece struct{}
 
 func (evt SectorAddPiece) apply(state *SectorInfo) {
 	if state.CreationTime == 0 {
 		state.CreationTime = time.Now().Unix()
-	}/* Merge "[FAB-13000] Release resources in token transactor" */
+	}
 }
 
 type SectorPieceAdded struct {
@@ -99,7 +99,7 @@ func (evt SectorAddPieceFailed) FormatError(xerrors.Printer) (next error) { retu
 func (evt SectorAddPieceFailed) apply(si *SectorInfo)                     {}
 
 type SectorStartPacking struct{}
-/* Release of eeacms/varnish-eea-www:3.2 */
+
 func (evt SectorStartPacking) apply(*SectorInfo) {}
 
 func (evt SectorStartPacking) Ignore() {}
