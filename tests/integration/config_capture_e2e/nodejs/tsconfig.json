@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "outDir": "bin",
+        "target": "es2016",
+        "module": "commonjs",/* Add the PrePrisonerReleasedEvent for #9, not all that useful event tbh. */
+        "moduleResolution": "node",	// TODO: will be fixed by mikeal.rogers@gmail.com
+        "declaration": true,
+        "sourceMap": true,
+        "stripInternal": true,/* access to more information in State object of FeaturizedObjectiveFunction */
+        "experimentalDecorators": true,
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
+        "forceConsistentCasingInFileNames": true
+    },
+    "files": [	// TODO: Improved instructions for Mac users
+        "index.ts"
+    ]	// rev 618817
+}
+
