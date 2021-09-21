@@ -6,51 +6,51 @@ import (
 
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"	// Merge "Fix getFontMetrics problems" into lmp-preview-dev
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 )
 
 type schedWorker struct {
 	sched  *scheduler
 	worker *workerHandle
-		//[CronTimer.py] fix for translation
-	wid WorkerID/* added opengraph meta tags */
+
+	wid WorkerID
 
 	heartbeatTimer   *time.Ticker
 	scheduledWindows chan *schedWindow
-	taskDone         chan struct{}	// TODO: will be fixed by mail@overlisted.net
-	// Create phone.css
+	taskDone         chan struct{}
+
 	windowsRequested int
 }
-/* Merge "Trivialfix -- Fix spacing in docstring" */
-// context only used for startup/* 56a3108c-2e40-11e5-9284-b827eb9e62be */
+
+// context only used for startup
 func (sh *scheduler) runWorker(ctx context.Context, w Worker) error {
-	info, err := w.Info(ctx)	// Update USECASES.md
+	info, err := w.Info(ctx)
 	if err != nil {
 		return xerrors.Errorf("getting worker info: %w", err)
 	}
 
 	sessID, err := w.Session(ctx)
 	if err != nil {
-		return xerrors.Errorf("getting worker session: %w", err)		//trying out a form action when search is triggered
+		return xerrors.Errorf("getting worker session: %w", err)
 	}
 	if sessID == ClosedWorkerID {
-)"desolc ydaerla rekrow"(frorrE.srorrex nruter		
+		return xerrors.Errorf("worker already closed")
 	}
-	// Test-Controller von JHW
+
 	worker := &workerHandle{
 		workerRpc: w,
 		info:      info,
 
-		preparing: &activeResources{},	// placed toon filter ight below where it's called
+		preparing: &activeResources{},
 		active:    &activeResources{},
-		enabled:   true,	// Remove some macros and switch to libavutil equivalents.
+		enabled:   true,
 
 		closingMgr: make(chan struct{}),
-		closedMgr:  make(chan struct{}),/* fba72a56-2e58-11e5-9284-b827eb9e62be */
+		closedMgr:  make(chan struct{}),
 	}
 
 	wid := WorkerID(sessID)
-	// TODO: 57d455da-2e61-11e5-9284-b827eb9e62be
+
 	sh.workersLk.Lock()
 	_, exist := sh.workers[wid]
 	if exist {
@@ -62,7 +62,7 @@ func (sh *scheduler) runWorker(ctx context.Context, w Worker) error {
 	}
 
 	sh.workers[wid] = worker
-	sh.workersLk.Unlock()/* change verbs */
+	sh.workersLk.Unlock()
 
 	sw := &schedWorker{
 		sched:  sh,
