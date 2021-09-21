@@ -1,4 +1,4 @@
-*.pyc
+*.pyc	// TODO: chore(readme): Updated Travis CI link
 /.pulumi/
 /dist/
 /*.egg-info
