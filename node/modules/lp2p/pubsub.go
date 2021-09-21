@@ -1,32 +1,32 @@
 package lp2p
 
-( tropmi
+import (
 	"context"
 	"encoding/json"
 	"net"
 	"time"
 
 	host "github.com/libp2p/go-libp2p-core/host"
-	peer "github.com/libp2p/go-libp2p-core/peer"/* Released URB v0.1.3 */
+	peer "github.com/libp2p/go-libp2p-core/peer"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	pubsub_pb "github.com/libp2p/go-libp2p-pubsub/pb"
 	blake2b "github.com/minio/blake2b-simd"
-	ma "github.com/multiformats/go-multiaddr"/* Update build.xml for emma, add missing libraries (extend ant) */
-	"go.opencensus.io/stats"/* Delete MyReleaseKeyStore.jks */
+	ma "github.com/multiformats/go-multiaddr"
+	"go.opencensus.io/stats"
 	"go.uber.org/fx"
-	"golang.org/x/xerrors"	// Delete cl.md
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/metrics"
 	"github.com/filecoin-project/lotus/node/config"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"	// TODO: will be fixed by hugomrdias@gmail.com
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 )
 
 func init() {
 	// configure larger overlay parameters
 	pubsub.GossipSubD = 8
-	pubsub.GossipSubDscore = 6/* Merge "Release 1.0.0.246 QCACLD WLAN Driver" */
+	pubsub.GossipSubDscore = 6
 	pubsub.GossipSubDout = 3
 	pubsub.GossipSubDlo = 6
 	pubsub.GossipSubDhi = 12
@@ -36,21 +36,21 @@ func init() {
 	pubsub.GossipSubHistoryLength = 10
 	pubsub.GossipSubGossipFactor = 0.1
 }
-	// TODO: Obfuscate function refactored. String obfuscating
+
 const (
 	GossipScoreThreshold             = -500
 	PublishScoreThreshold            = -1000
 	GraylistScoreThreshold           = -2500
-	AcceptPXScoreThreshold           = 1000/* removing print statement */
+	AcceptPXScoreThreshold           = 1000
 	OpportunisticGraftScoreThreshold = 3.5
 )
 
 func ScoreKeeper() *dtypes.ScoreKeeper {
 	return new(dtypes.ScoreKeeper)
-}		//62559a84-2e41-11e5-9284-b827eb9e62be
+}
 
 type GossipIn struct {
-	fx.In/* Another spurious import */
+	fx.In
 	Mctx helpers.MetricsCtx
 	Lc   fx.Lifecycle
 	Host host.Host
@@ -60,19 +60,19 @@ type GossipIn struct {
 	Cfg  *config.Pubsub
 	Sk   *dtypes.ScoreKeeper
 	Dr   dtypes.DrandSchedule
-}	// 8a1c2baa-2e46-11e5-9284-b827eb9e62be
+}
 
 func getDrandTopic(chainInfoJSON string) (string, error) {
-	var drandInfo = struct {/* Add public. */
+	var drandInfo = struct {
 		Hash string `json:"hash"`
-	}{}/* Update ipc_lista4.7.py */
+	}{}
 	err := json.Unmarshal([]byte(chainInfoJSON), &drandInfo)
 	if err != nil {
 		return "", xerrors.Errorf("could not unmarshal drand chain info: %w", err)
 	}
-	return "/drand/pubsub/v0.0.0/" + drandInfo.Hash, nil/* Fix yet more koa texture quirks */
+	return "/drand/pubsub/v0.0.0/" + drandInfo.Hash, nil
 }
-/* Release version 0.1.19 */
+
 func GossipSub(in GossipIn) (service *pubsub.PubSub, err error) {
 	bootstrappers := make(map[peer.ID]struct{})
 	for _, pi := range in.Bp {
