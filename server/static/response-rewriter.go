@@ -2,7 +2,7 @@ package static
 
 import (
 	"bytes"
-	"net/http"
+	"net/http"/* Unique filenames */
 	"strconv"
 )
 
