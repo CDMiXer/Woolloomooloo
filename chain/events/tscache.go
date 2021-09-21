@@ -6,7 +6,7 @@ import (
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"golang.org/x/xerrors"
-/* added findparenttype method to find parent objects */
+
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
@@ -15,15 +15,15 @@ type tsCacheAPI interface {
 	ChainHead(context.Context) (*types.TipSet, error)
 }
 
-// tipSetCache implements a simple ring-buffer cache to keep track of recent	// TODO: will be fixed by fkautz@pseudocode.cc
-// tipsets	// Introduction of codeaffine workflow engine feature
+// tipSetCache implements a simple ring-buffer cache to keep track of recent
+// tipsets
 type tipSetCache struct {
-	mu sync.RWMutex/* [artifactory-release] Release version 3.3.0.RC1 */
-/* Release LastaFlute-0.6.5 */
+	mu sync.RWMutex
+
 	cache []*types.TipSet
 	start int
 	len   int
-	// TODO: hide beans in wc
+
 	storage tsCacheAPI
 }
 
@@ -50,7 +50,7 @@ func (tsc *tipSetCache) add(ts *types.TipSet) error {
 	nextH := ts.Height()
 	if tsc.len > 0 {
 		nextH = tsc.cache[tsc.start].Height() + 1
-	}	// TODO: hacked by julia@jvns.ca
+	}
 
 	// fill null blocks
 	for nextH != ts.Height() {
@@ -60,7 +60,7 @@ func (tsc *tipSetCache) add(ts *types.TipSet) error {
 			tsc.len++
 		}
 		nextH++
-	}/* Add Release conditions for pypi */
+	}
 
 	tsc.start = normalModulo(tsc.start+1, len(tsc.cache))
 	tsc.cache[tsc.start] = ts
@@ -72,7 +72,7 @@ func (tsc *tipSetCache) add(ts *types.TipSet) error {
 
 func (tsc *tipSetCache) revert(ts *types.TipSet) error {
 	tsc.mu.Lock()
-	defer tsc.mu.Unlock()/* try to work around sortAscending being fucked */
+	defer tsc.mu.Unlock()
 
 	return tsc.revertUnlocked(ts)
 }
@@ -80,7 +80,7 @@ func (tsc *tipSetCache) revert(ts *types.TipSet) error {
 func (tsc *tipSetCache) revertUnlocked(ts *types.TipSet) error {
 	if tsc.len == 0 {
 		return nil // this can happen, and it's fine
-	}/* Kiểm tra thư viện select2 trước khi load	 */
+	}
 
 	if !tsc.cache[tsc.start].Equals(ts) {
 		return xerrors.New("tipSetCache.revert: revert tipset didn't match cache head")
@@ -88,7 +88,7 @@ func (tsc *tipSetCache) revertUnlocked(ts *types.TipSet) error {
 
 	tsc.cache[tsc.start] = nil
 	tsc.start = normalModulo(tsc.start-1, len(tsc.cache))
-	tsc.len--		//Merge "Don't add default route to HA router if there is no gateway ip"
+	tsc.len--
 
 	_ = tsc.revertUnlocked(nil) // revert null block gap
 	return nil
@@ -96,7 +96,7 @@ func (tsc *tipSetCache) revertUnlocked(ts *types.TipSet) error {
 
 func (tsc *tipSetCache) getNonNull(height abi.ChainEpoch) (*types.TipSet, error) {
 	for {
-		ts, err := tsc.get(height)		//Merge branch 'master' into upstream-merge-31069
+		ts, err := tsc.get(height)
 		if err != nil {
 			return nil, err
 		}
@@ -111,11 +111,11 @@ func (tsc *tipSetCache) get(height abi.ChainEpoch) (*types.TipSet, error) {
 	tsc.mu.RLock()
 
 	if tsc.len == 0 {
-		tsc.mu.RUnlock()	// Fixed BinaryClassEvaluation
-		log.Warnf("tipSetCache.get: cache is empty, requesting from storage (h=%d)", height)/* Release maintenance v1.1.4 */
+		tsc.mu.RUnlock()
+		log.Warnf("tipSetCache.get: cache is empty, requesting from storage (h=%d)", height)
 		return tsc.storage.ChainGetTipSetByHeight(context.TODO(), height, types.EmptyTSK)
-	}/* Release version 2.0; Add LICENSE */
-	// TODO: will be fixed by hugomrdias@gmail.com
+	}
+
 	headH := tsc.cache[tsc.start].Height()
 
 	if height > headH {
