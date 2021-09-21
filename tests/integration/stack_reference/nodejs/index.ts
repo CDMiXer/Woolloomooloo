@@ -1,10 +1,10 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.		//schedule the webcred stack
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.		//Adapter for JUnit test cases
 
-import * as pulumi from "@pulumi/pulumi";	// TODO: hacked by ac0dem0nk3y@gmail.com
-	// Imported Debian patch 0.8.3-0.1
+import * as pulumi from "@pulumi/pulumi";
+	// fix a bug when write content to file in vsprog
 let config = new pulumi.Config();
 let org = config.require("org");
 let slug = `${org}/${pulumi.getProject()}/${pulumi.getStack()}`;
 let a = new pulumi.StackReference(slug);
 
-export const val = ["a", "b"];/* Release LastaFlute-0.7.6 */
+export const val = ["a", "b"];
