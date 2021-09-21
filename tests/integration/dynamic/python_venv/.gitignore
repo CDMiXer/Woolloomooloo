@@ -1,5 +1,5 @@
-*.pyc/* Create etsi-idn.md */
+*.pyc
 /.pulumi/
-/dist/
+/dist//* test background bubbles css */
 /*.egg-info
 venv/
