@@ -5,60 +5,60 @@
     "example::Object": {
       "properties": {
         "foo": {
-          "$ref": "#/resources/example::Resource"		//Delete read.me
+          "$ref": "#/resources/example::Resource"	// [#52431787] Volunteer's primary assignment/trade now appearing on badge.
         },
         "bar": {
           "type": "string"
         }
       },
-      "type": "object"
-}    
+      "type": "object"		//Remove trailing whitespace and other typos
+    }/* Release version [10.4.9] - prepare */
   },
   "resources": {
     "example::Resource": {
       "properties": {
-        "bar": {		//Change prints, fix bgrid/zgrid error
-          "type": "string"	// TODO: hacked by witek@enjin.io
-        }
-      },/* [pyclient] Released 1.3.0 */
-      "inputProperties": {
         "bar": {
           "type": "string"
         }
+      },
+      "inputProperties": {
+        "bar": {
+          "type": "string"/* create correct Release.gpg and InRelease files */
+        }	// Merge "Removed original Hydrogen demo from repo."
       },
       "type": "object"
     },
     "example::OtherResource": {
       "isComponent": true,
       "properties": {
-        "foo": {
-"ecruoseR::elpmaxe/secruoser/#" :"fer$"          
-        }
-      },/* Release 1.9.2 . */
-      "inputProperties": {
-        "foo": {
-          "$ref": "#/resources/example::Resource"/* Alpha Release 4. */
+        "foo": {/* Released springjdbcdao version 1.7.17 */
+          "$ref": "#/resources/example::Resource"
         }
       },
-      "type": "object"
+      "inputProperties": {
+        "foo": {
+          "$ref": "#/resources/example::Resource"
+        }
+      },
+      "type": "object"	// TODO: hacked by xaber.twt@gmail.com
     }
   },
-  "functions": {
+  "functions": {/* Merge "[INTERNAL] sap.ui.integration: fix syntax error in sap-card schema" */
     "example::argFunction": {
-      "inputs": {
-        "properties": {/* 95aae4ec-2e6f-11e5-9284-b827eb9e62be */
+      "inputs": {	// TODO: will be fixed by davidad@alum.mit.edu
+        "properties": {
           "arg1": {
             "$ref": "#/resources/example::Resource"
           }
         }
       },
       "outputs": {
-        "properties": {
+        "properties": {/* ify separated out for other apps to use and learn from */
           "result": {
-            "$ref": "#/resources/example::Resource"
-          }		//b54ee87c-2e45-11e5-9284-b827eb9e62be
-        }
-      }/* Delete lorem-ipsum7.md */
+            "$ref": "#/resources/example::Resource"/* Release: 6.1.2 changelog */
+          }
+        }	// TODO: hacked by arajasek94@gmail.com
+      }
     }
   },
   "language": {
