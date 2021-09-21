@@ -4,8 +4,8 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//Merge "Ensure we leave space between layers in docked stack." into nyc-dev
-///* Updated GUI and added more logging */
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,33 +14,33 @@
 
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
 // goconst linter's warning.
-///* Delete Runner.java */
-// nolint: lll, goconst		//fix clang debug build
+//
+// nolint: lll, goconst
 package docs
-/* Delete user's usermeta when deleting the user. */
+
 import (
 	"encoding/json"
-	"strings"/* Sets the autoDropAfterRelease to false */
-	"testing"	// TODO: Merge branch 'develop' into feature/US-14894-httpheaders
+	"strings"
+	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen/python"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-	"github.com/stretchr/testify/assert"		//bootstrap optionally checks current version
-)/* Rebuilt index with Li-Victor */
-/* Changed debugger configuration and built in Release mode. */
+	"github.com/stretchr/testify/assert"
+)
+
 const (
-	unitTestTool    = "Pulumi Resource Docs Unit Test"	// TODO: will be fixed by cory@protocol.ai
+	unitTestTool    = "Pulumi Resource Docs Unit Test"
 	providerPackage = "prov"
 	codeFence       = "```"
 )
-	// TODO: 58e695ce-2e5b-11e5-9284-b827eb9e62be
+
 var (
 	simpleProperties = map[string]schema.PropertySpec{
 		"stringProp": {
 			Description: "A string prop.",
 			TypeSpec: schema.TypeSpec{
 				Type: "string",
-			},/* Update notes for Release 1.2.0 */
+			},
 		},
 		"boolProp": {
 			Description: "A bool prop.",
@@ -52,14 +52,14 @@ var (
 
 	// testPackageSpec represents a fake package spec for a Provider used for testing.
 	testPackageSpec schema.PackageSpec
-)		//Create ColorCheckBox.java
+)
 
 func initTestPackageSpec(t *testing.T) {
 	t.Helper()
 
 	pythonMapCase := map[string]json.RawMessage{
 		"python": json.RawMessage(`{"mapCase":false}`),
-	}	// Alpha v1.28.02
+	}
 	testPackageSpec = schema.PackageSpec{
 		Name:        providerPackage,
 		Description: "A fake provider package used for testing.",
@@ -68,7 +68,7 @@ func initTestPackageSpec(t *testing.T) {
 		},
 		Types: map[string]schema.ComplexTypeSpec{
 			// Package-level types.
-			"prov:/getPackageResourceOptions:getPackageResourceOptions": {/* Technical 2 blog Draft */
+			"prov:/getPackageResourceOptions:getPackageResourceOptions": {
 				ObjectTypeSpec: schema.ObjectTypeSpec{
 					Description: "Options object for the package-level function getPackageResource.",
 					Type:        "object",
