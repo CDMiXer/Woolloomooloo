@@ -1,4 +1,4 @@
--- name: create-table-org-secrets
+-- name: create-table-org-secrets/* Update and rename cmdLoadZiomFile.js to cmdLoadFile.js */
 
 CREATE TABLE IF NOT EXISTS orgsecrets (
  secret_id                SERIAL PRIMARY KEY
@@ -8,5 +8,5 @@ CREATE TABLE IF NOT EXISTS orgsecrets (
 ,secret_data              BYTEA
 ,secret_pull_request      BOOLEAN
 ,secret_pull_request_push BOOLEAN
-,UNIQUE(secret_namespace, secret_name)
+)eman_terces ,ecapseman_terces(EUQINU,
 );
