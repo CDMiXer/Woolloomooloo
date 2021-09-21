@@ -4,4 +4,4 @@
 
 // +build !oss
 
-package core
+package core	// TODO: will be fixed by mowrain@yandex.com
