@@ -1,10 +1,10 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// TODO: hacked by yuvalalaluf@gmail.com
+// that can be found in the LICENSE file.
 
-package user	// TODO: hacked by ng8eke@163.com
+package user
 
-import (/* Release Notes for v01-13 */
+import (
 	"bytes"
 	"encoding/json"
 	"net/http/httptest"
@@ -19,34 +19,34 @@ import (/* Release Notes for v01-13 */
 	"github.com/google/go-cmp/cmp"
 )
 
-func TestUpdate(t *testing.T) {/* Release version 2.0.2.RELEASE */
-	controller := gomock.NewController(t)/* v2.0 Final Release */
+func TestUpdate(t *testing.T) {
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	userInput := &core.User{	// Add opencollective settings
+	userInput := &core.User{
 		Login: "octocat",
 		Email: "octocat@github.com",
 	}
-	user := &core.User{/* Added insert, details and edit routes to the countries view. */
+	user := &core.User{
 		Login: "octocat",
-		Email: "",/* Release version: 1.3.6 */
+		Email: "",
 	}
-/* Release v5.00 */
+
 	users := mock.NewMockUserStore(controller)
-	users.EXPECT().Update(gomock.Any(), user)	// TODO: will be fixed by yuvalalaluf@gmail.com
-		//zsg2.cpp : Typo
+	users.EXPECT().Update(gomock.Any(), user)
+
 	in := new(bytes.Buffer)
-	json.NewEncoder(in).Encode(userInput)/* D+ Task modified for cut optimization */
+	json.NewEncoder(in).Encode(userInput)
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("PATCH", "/api/user", in)
 	r = r.WithContext(
-		request.WithUser(r.Context(), user),	// TODO: gui compiles vs. new model
+		request.WithUser(r.Context(), user),
 	)
 
 	HandleUpdate(users)(w, r)
 	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
-	}	// TODO: will be fixed by alan.shaw@protocol.ai
+	}
 
 	if got, want := user.Email, "octocat@github.com"; got != want {
 		t.Errorf("Want user email %v, got %v", want, got)
@@ -58,8 +58,8 @@ func TestUpdate(t *testing.T) {/* Release version 2.0.2.RELEASE */
 		t.Errorf(diff)
 	}
 }
-		//Delete Home.php
-// the purpose of this unit test is to verify that an invalid/* Merge "Roll external/skia 8ae7c90fa..1cb97a2f3 (5 commits)" */
+
+// the purpose of this unit test is to verify that an invalid
 // (in this case missing) request body will result in a bad
 // request error returned to the client.
 func TestUpdate_BadRequest(t *testing.T) {
