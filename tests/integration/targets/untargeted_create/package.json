@@ -1,15 +1,15 @@
 {
     "name": "stack_project_name",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",/* trigger new build for jruby-head (8d284aa) */
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",/* Add step to include creating a GitHub Release */
+    "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"
-    },/* Final Release: Added first version of UI architecture description */
-    "devDependencies": {		//Added iterators for tfreq
-        "typescript": "^3.0.0"	// TODO: Batch 3 of boost 1.61 migration
+        "build": "tsc"	// TODO: Fixed authors (nw)
+    },
+    "devDependencies": {
+        "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"	// TODO: Adding cloudformation --target switch
-    }/* filling out TODOs */
+        "@pulumi/pulumi": "latest"
+    }
 }
