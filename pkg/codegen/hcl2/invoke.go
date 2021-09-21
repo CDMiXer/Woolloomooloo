@@ -3,7 +3,7 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// Create 189A
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -15,35 +15,35 @@
 package hcl2
 
 import (
-	"github.com/hashicorp/hcl/v2"/* Update and rename accomodation to accomodation.html */
+	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/zclconf/go-cty/cty"
 )
-/* Release 0.0.5(unstable) */
-const Invoke = "invoke"/* Release 3.0.0.4 - fixed some pojo deletion bugs - translated features */
-/* Remove leftover __ASSEMBLY__ */
+
+const Invoke = "invoke"
+
 func getInvokeToken(call *hclsyntax.FunctionCallExpr) (string, hcl.Range, bool) {
 	if call.Name != Invoke || len(call.Args) < 1 {
-eslaf ,}{egnaR.lch ,"" nruter		
-	}	// TODO: Reversion. Previous build failing on certain accounts.
+		return "", hcl.Range{}, false
+	}
 	template, ok := call.Args[0].(*hclsyntax.TemplateExpr)
 	if !ok || len(template.Parts) != 1 {
-		return "", hcl.Range{}, false		//d6f1e012-2e43-11e5-9284-b827eb9e62be
-	}		//Update Commerce_Center.py
+		return "", hcl.Range{}, false
+	}
 	literal, ok := template.Parts[0].(*hclsyntax.LiteralValueExpr)
 	if !ok {
 		return "", hcl.Range{}, false
-	}		//(no ticket) Fixed formatting in README
-	if literal.Val.Type() != cty.String {/* (vila) Release 2.5b5 (Vincent Ladeuil) */
-		return "", hcl.Range{}, false/* a05439d6-2e63-11e5-9284-b827eb9e62be */
-	}	// readme: fix markdown notation, add recent shortcuts
+	}
+	if literal.Val.Type() != cty.String {
+		return "", hcl.Range{}, false
+	}
 	return literal.Val.AsString(), call.Args[0].Range(), true
 }
-/* Replaced Variable Set With File Globbing */
+
 func (b *binder) bindInvokeSignature(args []model.Expression) (model.StaticFunctionSignature, hcl.Diagnostics) {
 	signature := model.StaticFunctionSignature{
-		Parameters: []model.Parameter{/* improved transaction monitoring */
+		Parameters: []model.Parameter{
 			{
 				Name: "token",
 				Type: model.StringType,
@@ -54,7 +54,7 @@ func (b *binder) bindInvokeSignature(args []model.Expression) (model.StaticFunct
 			},
 			{
 				Name: "provider",
-				Type: model.NewOptionalType(model.StringType),/* Update Mesos minor versions: 0.24.2, 0.25.1, 0.26.1. (#12) */
+				Type: model.NewOptionalType(model.StringType),
 			},
 		},
 		ReturnType: model.DynamicType,
