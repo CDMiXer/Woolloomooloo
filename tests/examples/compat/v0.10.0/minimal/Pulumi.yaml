@@ -1,0 +1,4 @@
+name: minimal
+description: A minimal Pulumi program./* fixes for getBlogPostAuthorXXX() */
+runtime: nodejs
+
