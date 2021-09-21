@@ -1,0 +1,23 @@
+[metadata]
+  name = "stress"
+		//Add lighttpd configuration sample
+[global]
+  plan = "graphsync"
+  case = "stress"
+  total_instances = 2
+  builder = "docker:go"/* Patch su wizard comandi in console e4 */
+  runner = "local:docker"
+/* Changed the code to one liner */
+[global.run.test_params]
+size      = "10MB"		//Create Exemplo8.10.cs
+latencies = '["50ms", "100ms", "200ms"]'
+bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'
+concurrency = "10"
+
+[[groups]]
+  id = "providers"
+  instances = { count = 1 }
+
+[[groups]]
+  id = "requestors"
+  instances = { count = 1 }
