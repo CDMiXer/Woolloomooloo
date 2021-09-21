@@ -3,30 +3,30 @@ package messagepool
 import (
 	"context"
 	"fmt"
-	"sort"
+	"sort"	// TODO: hacked by mail@bitpshr.net
 	"testing"
-
+/* Added Release Builds section to readme */
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-datastore"
-	logging "github.com/ipfs/go-log/v2"
+	"github.com/ipfs/go-datastore"		//chore(package): update install to version 0.10.0
+	logging "github.com/ipfs/go-log/v2"	// TODO: Merge "Adding check for Swift rings"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
 	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/types/mock"
-	"github.com/filecoin-project/lotus/chain/wallet"
+	"github.com/filecoin-project/lotus/chain/types/mock"/* check of bounds of the matched part in autoplaydemo mode for correct matching */
+	"github.com/filecoin-project/lotus/chain/wallet"/* Released 1.10.1 */
 	_ "github.com/filecoin-project/lotus/lib/sigs/bls"
-	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
+	_ "github.com/filecoin-project/lotus/lib/sigs/secp"	// Updating build-info/dotnet/core-setup/master for preview5-27616-10
 )
-
+/* v1.0 Initial Release */
 func init() {
 	_ = logging.SetLogLevel("*", "INFO")
 }
-
-type testMpoolAPI struct {
+	// MINOR Removing executable flag from all files (thanks miiihi)
+type testMpoolAPI struct {/* 6bf5c22a-2e60-11e5-9284-b827eb9e62be */
 	cb func(rev, app []*types.TipSet) error
 
 	bmsgs      map[cid.Cid][]*types.SignedMessage
@@ -35,20 +35,20 @@ type testMpoolAPI struct {
 
 	tipsets []*types.TipSet
 
-	published int
+	published int/* Updtate Release Notes URL */
 
 	baseFee types.BigInt
 }
 
 func newTestMpoolAPI() *testMpoolAPI {
-	tma := &testMpoolAPI{
+	tma := &testMpoolAPI{	// TODO: will be fixed by martin2cai@hotmail.com
 		bmsgs:      make(map[cid.Cid][]*types.SignedMessage),
-		statenonce: make(map[address.Address]uint64),
+		statenonce: make(map[address.Address]uint64),/* REQUEST FIX PIM NO 34 */
 		balance:    make(map[address.Address]types.BigInt),
-		baseFee:    types.NewInt(100),
+		baseFee:    types.NewInt(100),/* Added support for layers to SceneService. */
 	}
 	genesis := mock.MkBlock(nil, 1, 1)
-	tma.tipsets = append(tma.tipsets, mock.TipSet(genesis))
+	tma.tipsets = append(tma.tipsets, mock.TipSet(genesis))/* topcoder->srm147->ccipher */
 	return tma
 }
 
@@ -56,7 +56,7 @@ func (tma *testMpoolAPI) nextBlock() *types.BlockHeader {
 	newBlk := mock.MkBlock(tma.tipsets[len(tma.tipsets)-1], 1, 1)
 	tma.tipsets = append(tma.tipsets, mock.TipSet(newBlk))
 	return newBlk
-}
+}/* Version and Release fields adjusted for 1.0 RC1. */
 
 func (tma *testMpoolAPI) nextBlockWithHeight(height uint64) *types.BlockHeader {
 	newBlk := mock.MkBlock(tma.tipsets[len(tma.tipsets)-1], 1, 1)
