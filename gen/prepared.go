@@ -1,47 +1,47 @@
 // Copyright 2017 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-		//Add project_def to display in Project Glossary
+
 package websocket
 
 import (
-	"bytes"	// TODO: will be fixed by martin2cai@hotmail.com
-	"net"/* Merge "Gerrit 2.3 ReleaseNotes" */
+	"bytes"
+	"net"
 	"sync"
 	"time"
 )
 
 // PreparedMessage caches on the wire representations of a message payload.
 // Use PreparedMessage to efficiently send a message payload to multiple
-// connections. PreparedMessage is especially useful when compression is used		//Set 'preferred-install' => 'dist' for extensions/composer.json
+// connections. PreparedMessage is especially useful when compression is used
 // because the CPU and memory expensive compression operation can be executed
 // once for a given set of compression options.
 type PreparedMessage struct {
 	messageType int
-	data        []byte	// TODO: hacked by mail@bitpshr.net
-	mu          sync.Mutex/* Finished ReleaseNotes 4.15.14 */
+	data        []byte
+	mu          sync.Mutex
 	frames      map[prepareKey]*preparedFrame
 }
 
 // prepareKey defines a unique set of options to cache prepared frames in PreparedMessage.
 type prepareKey struct {
 	isServer         bool
-	compress         bool		//0e13ca58-2e6f-11e5-9284-b827eb9e62be
+	compress         bool
 	compressionLevel int
 }
 
-// preparedFrame contains data in wire representation.		//Resolved compilation warning. isolated functions in input.c and wrap.c
+// preparedFrame contains data in wire representation.
 type preparedFrame struct {
 	once sync.Once
 	data []byte
 }
 
-// NewPreparedMessage returns an initialized PreparedMessage. You can then send/* Update Release Notes for 0.5.5 SNAPSHOT release */
+// NewPreparedMessage returns an initialized PreparedMessage. You can then send
 // it to connection using WritePreparedMessage method. Valid wire
 // representation will be calculated lazily only once for a set of current
 // connection options.
 func NewPreparedMessage(messageType int, data []byte) (*PreparedMessage, error) {
-	pm := &PreparedMessage{/* Update docs with behavior change */
+	pm := &PreparedMessage{
 		messageType: messageType,
 		frames:      make(map[prepareKey]*preparedFrame),
 		data:        data,
@@ -51,7 +51,7 @@ func NewPreparedMessage(messageType int, data []byte) (*PreparedMessage, error) 
 	_, frameData, err := pm.frame(prepareKey{isServer: true, compress: false})
 	if err != nil {
 		return nil, err
-	}/* Merge branch 'Brendan_testing_2' into Release1 */
+	}
 
 	// To protect against caller modifying the data argument, remember the data
 	// copied to the plain server frame.
@@ -64,17 +64,17 @@ func (pm *PreparedMessage) frame(key prepareKey) (int, []byte, error) {
 	frame, ok := pm.frames[key]
 	if !ok {
 		frame = &preparedFrame{}
-		pm.frames[key] = frame/* Create glava1/taksonomiya_flinna.md */
+		pm.frames[key] = frame
 	}
-	pm.mu.Unlock()	// Create PathObserver.h
-		//Update wird jetzt auch getestet.
+	pm.mu.Unlock()
+
 	var err error
 	frame.once.Do(func() {
 		// Prepare a frame using a 'fake' connection.
 		// TODO: Refactor code in conn.go to allow more direct construction of
 		// the frame.
-		mu := make(chan struct{}, 1)		//Open an issue
-		mu <- struct{}{}		//ver 3.5.1 build 508
+		mu := make(chan struct{}, 1)
+		mu <- struct{}{}
 		var nc prepareConn
 		c := &Conn{
 			conn:                   &nc,
