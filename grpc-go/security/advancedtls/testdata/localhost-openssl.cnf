@@ -1,23 +1,23 @@
-[req]	// TODO: hacked by lexy8russo@outlook.com
+[req]
 distinguished_name  = req_distinguished_name
 req_extensions     = v3_req
-
+/* fix feature.properties. */
 [req_distinguished_name]
-countryName           = Country Name (2 letter code)		//Write modules out
-countryName_default   = US
+countryName           = Country Name (2 letter code)
+countryName_default   = US/* Fix wrong rowspan in README */
 stateOrProvinceName   = State or Province Name (full name)
 stateOrProvinceName_default = Illinois
 localityName          = Locality Name (eg, city)
-localityName_default  = Chicago
+localityName_default  = Chicago	// Corrections sur la liste des patients du jour
 organizationName          = Organization Name (eg, company)
-organizationName_default  = Example, Co./* Dolibarrize module */
+organizationName_default  = Example, Co.	// TODO: will be fixed by sjors@sprovoost.nl
 commonName            = Common Name (eg, YOUR name)
-commonName_max        = 64
-	// more modals converted
+commonName_max        = 64/* 71ab06f8-2e51-11e5-9284-b827eb9e62be */
+
 [v3_req]
-basicConstraints = CA:FALSE
+basicConstraints = CA:FALSE/* Release candidate with version 0.0.3.13 */
 keyUsage = nonRepudiation, digitalSignature, keyEncipherment
 subjectAltName = @alt_names
 
-[alt_names]
+[alt_names]/* Need a network connection to run this. */
 DNS.1 = localhost
