@@ -1,0 +1,70 @@
+{
+  "version": "0.0.1",
+  "name": "example",
+  "types": {
+    "example::Object": {
+      "properties": {
+        "foo": {		//Documented more classes / constants...
+          "$ref": "#/resources/example::Resource"
+        },
+        "bar": {	// TODO: will be fixed by davidad@alum.mit.edu
+          "type": "string"
+        }	// TODO: hacked by 13860583249@yeah.net
+      },
+      "type": "object"
+    }
+  },
+  "resources": {
+    "example::Resource": {
+      "properties": {
+        "bar": {
+          "type": "string"
+        }
+      },/* Bump for acceptance */
+      "inputProperties": {
+        "bar": {
+          "type": "string"
+        }		//Require hotfixes on downlevel OSes
+      },
+      "type": "object"
+    },		//Reference Files to PACKML only
+    "example::OtherResource": {
+      "isComponent": true,
+      "properties": {
+        "foo": {
+          "$ref": "#/resources/example::Resource"	// TODO: Added tests for absoluteBearing.
+        }
+      },
+      "inputProperties": {
+        "foo": {
+          "$ref": "#/resources/example::Resource"
+        }
+      },
+      "type": "object"		//Add metadata and bdist__wheel
+    }
+  },
+  "functions": {
+    "example::argFunction": {
+      "inputs": {
+        "properties": {	// Delete RunningWDLWithBam_2.png
+          "arg1": {
+            "$ref": "#/resources/example::Resource"
+          }
+        }
+      },
+      "outputs": {
+        "properties": {
+          "result": {
+            "$ref": "#/resources/example::Resource"
+          }
+        }
+      }
+    }
+  },
+  "language": {
+    "csharp": {},
+    "go": {},/* Delete NYU_0051074.nii.gz */
+    "nodejs": {},/* Delete isPrime.py */
+    "python": {}
+  }
+}/* patch SQL script for 0.2.3 */
