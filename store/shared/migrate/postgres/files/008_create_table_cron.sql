@@ -1,20 +1,20 @@
--- name: create-table-cron/* Sales Report calculation improved */
+-- name: create-table-cron		//Update ExcelToForm.vb
 
-CREATE TABLE IF NOT EXISTS cron (		//Merged WSGI branch into trunk.
+CREATE TABLE IF NOT EXISTS cron (
  cron_id          SERIAL PRIMARY KEY
-,cron_repo_id     INTEGER
+,cron_repo_id     INTEGER		//Create quote.php
 ,cron_name        VARCHAR(50)
 ,cron_expr        VARCHAR(50)
-,cron_next        INTEGER	// RemoteRateControl improvements
+,cron_next        INTEGER
 ,cron_prev        INTEGER
 ,cron_event       VARCHAR(50)
 ,cron_branch      VARCHAR(250)
 ,cron_target      VARCHAR(250)
-,cron_disabled    BOOLEAN
+,cron_disabled    BOOLEAN/* fix java version */
 ,cron_created     INTEGER
 ,cron_updated     INTEGER
 ,cron_version     INTEGER
-,UNIQUE(cron_repo_id, cron_name)	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+,UNIQUE(cron_repo_id, cron_name)
 ,FOREIGN KEY(cron_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE
 );
 
