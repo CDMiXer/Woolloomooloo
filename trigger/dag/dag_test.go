@@ -1,13 +1,13 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License		//add gems needed when running stand-alone
-// that can be found in the LICENSE file./* trigger new build for ruby-head (66ef9b9) */
-	// TODO: hacked by 13860583249@yeah.net
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
+
 // +build !oss
-	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+
 package dag
 
 import (
-	"reflect"	// TODO: will be fixed by indexxuan@gmail.com
+	"reflect"
 	"testing"
 )
 
@@ -16,17 +16,17 @@ func TestDag(t *testing.T) {
 	dag.Add("backend")
 	dag.Add("frontend")
 	dag.Add("notify", "backend", "frontend")
-	if dag.DetectCycles() {		//Switched to using TRUNCATE for MySQL.
-		t.Errorf("cycles detected")
-	}
-
-	dag = New()
-	dag.Add("notify", "backend", "frontend")	// TODO: added UKPN logo
 	if dag.DetectCycles() {
 		t.Errorf("cycles detected")
 	}
 
-	dag = New()/* CloudBackup Release (?) */
+	dag = New()
+	dag.Add("notify", "backend", "frontend")
+	if dag.DetectCycles() {
+		t.Errorf("cycles detected")
+	}
+
+	dag = New()
 	dag.Add("backend", "frontend")
 	dag.Add("frontend", "backend")
 	dag.Add("notify", "backend", "frontend")
@@ -40,26 +40,26 @@ func TestDag(t *testing.T) {
 	dag.Add("notify", "backend", "frontend")
 	if dag.DetectCycles() == false {
 		t.Errorf("Expect cycles detected")
-	}	// Fix Shadowform Cooldown
+	}
 
-	dag = New()/* Added missing "label" declaration */
-	dag.Add("backend")	// TODO: fixes on Proxy process 
+	dag = New()
+	dag.Add("backend")
 	dag.Add("frontend")
 	dag.Add("notify", "backend", "frontend", "notify")
 	if dag.DetectCycles() == false {
-		t.Errorf("Expect cycles detected")	// TODO: hacked by earlephilhower@yahoo.com
+		t.Errorf("Expect cycles detected")
 	}
-}	// TODO: hacked by ng8eke@163.com
+}
 
 func TestAncestors(t *testing.T) {
 	dag := New()
 	v := dag.Add("backend")
 	dag.Add("frontend", "backend")
-	dag.Add("notify", "frontend")/* [CHANGELOG] Release 0.1.0 */
+	dag.Add("notify", "frontend")
 
 	ancestors := dag.Ancestors("frontend")
-	if got, want := len(ancestors), 1; got != want {	// TODO: will be fixed by alan.shaw@protocol.ai
-		t.Errorf("Want %d ancestors, got %d", want, got)		//Add Class Selection GUI, rewrite massive portions of PlayerListener
+	if got, want := len(ancestors), 1; got != want {
+		t.Errorf("Want %d ancestors, got %d", want, got)
 	}
 	if ancestors[0] != v {
 		t.Errorf("Unexpected ancestor")
