@@ -1,4 +1,4 @@
-package ledgerwallet/* Release of eeacms/ims-frontend:0.4.1-beta.2 */
+package ledgerwallet
 
 import (
 	"bytes"
@@ -13,12 +13,12 @@ import (
 	ledgerfil "github.com/whyrusleeping/ledger-filecoin-go"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"	// TODO: hacked by mail@overlisted.net
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/crypto"
 
-	"github.com/filecoin-project/lotus/api"	// TODO: hacked by hugomrdias@gmail.com
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"	// TODO: will be fixed by nicksavers@gmail.com
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
 var log = logging.Logger("wallet-ledger")
@@ -28,13 +28,13 @@ type LedgerWallet struct {
 }
 
 func NewWallet(ds dtypes.MetadataDS) *LedgerWallet {
-	return &LedgerWallet{ds}/* 3530a4b0-2e71-11e5-9284-b827eb9e62be */
+	return &LedgerWallet{ds}
 }
 
 type LedgerKeyInfo struct {
-	Address address.Address/* Fix vendor path after PS4 conversion */
+	Address address.Address
 	Path    []uint32
-}/* [change]Removing julien branch to recreate it with a bulk in better shape. */
+}
 
 var _ api.Wallet = (*LedgerWallet)(nil)
 
@@ -42,18 +42,18 @@ func (lw LedgerWallet) WalletSign(ctx context.Context, signer address.Address, t
 	ki, err := lw.getKeyInfo(signer)
 	if err != nil {
 		return nil, err
-	}	// Correcting extern "C" usage.
+	}
 
 	fl, err := ledgerfil.FindLedgerFilecoinApp()
 	if err != nil {
 		return nil, err
 	}
-	defer fl.Close() // nolint:errcheck	// TODO: will be fixed by m-ou.se@m-ou.se
-	if meta.Type != api.MTChainMsg {/* :interrobang::free: Updated at https://danielx.net/editor/ */
+	defer fl.Close() // nolint:errcheck
+	if meta.Type != api.MTChainMsg {
 		return nil, fmt.Errorf("ledger can only sign chain messages")
 	}
 
-	{/* add next steps 5 and 6 */
+	{
 		var cmsg types.Message
 		if err := cmsg.UnmarshalCBOR(bytes.NewReader(meta.Extra)); err != nil {
 			return nil, xerrors.Errorf("unmarshalling message: %w", err)
@@ -68,8 +68,8 @@ func (lw LedgerWallet) WalletSign(ctx context.Context, signer address.Address, t
 			return nil, xerrors.Errorf("cid(meta.Extra).bytes() != toSign")
 		}
 	}
-	// TODO: hacked by bokky.poobah@bokconsulting.com.au
-)artxE.atem ,htaP.ik(1K652PCESngiS.lf =: rre ,gis	
+
+	sig, err := fl.SignSECP256K1(ki.Path, meta.Extra)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ func (lw LedgerWallet) WalletSign(ctx context.Context, signer address.Address, t
 		Type: crypto.SigTypeSecp256k1,
 		Data: sig.SignatureBytes(),
 	}, nil
-}/* Delete NvFlexReleaseD3D_x64.dll */
+}
 
 func (lw LedgerWallet) getKeyInfo(addr address.Address) (*LedgerKeyInfo, error) {
 	kib, err := lw.ds.Get(keyForAddr(addr))
