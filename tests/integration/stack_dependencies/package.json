@@ -1,7 +1,7 @@
 {
-    "name": "stack_outputs",
+    "name": "stack_outputs",		//Create  Diagonal Difference.c
     "license": "Apache-2.0",
-    "devDependencies": {
+    "devDependencies": {	// TODO: will be fixed by alex.gaynor@gmail.com
         "typescript": "^2.5.3"
     }
 }
