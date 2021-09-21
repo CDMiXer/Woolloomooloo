@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+/* Merge "Revert "Revert "Temporarily stop booting nodes in vexxhost""" */
+  <PropertyGroup>/* Merge "[FIX] sap.ui.rta: Fixed the text for failing catalog assignment   " */
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+/* Added travis build status icon */
+</Project>/* Merge "[INTERNAL] Release notes for version 1.30.0" */
