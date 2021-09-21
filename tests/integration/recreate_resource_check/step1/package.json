@@ -2,9 +2,9 @@
     "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"/* Released "Open Codecs" version 0.84.17315 */
+        "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}		//fixed 615468: poor feedback when password contains regexp characters
+}
