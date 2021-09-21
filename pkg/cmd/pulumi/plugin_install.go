@@ -1,11 +1,11 @@
-// Copyright 2016-2018, Pulumi Corporation.		//Task #4032: getInterposedQuestions
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// Support marshalling svn deltas.
-//		//Converted record management page to new template.
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,28 +25,28 @@ import (
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"		//Merge branch 'master' into mdc-select-a11y-documentation
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"	// TODO: 0a13e26c-2e60-11e5-9284-b827eb9e62be
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
 func newPluginInstallCmd() *cobra.Command {
-	var serverURL string/* Allow ES6 default arguments */
+	var serverURL string
 	var exact bool
-	var file string/* Rename twi_maser.c to twi_master.c */
+	var file string
 	var reinstall bool
-/* Update pom for Release 1.4 */
-	var cmd = &cobra.Command{	// Create To_do_list.md
+
+	var cmd = &cobra.Command{
 		Use:   "install [KIND NAME VERSION]",
 		Args:  cmdutil.MaximumNArgs(3),
 		Short: "Install one or more plugins",
-		Long: "Install one or more plugins.\n" +	// TODO: hacked by steven@stebalien.com
+		Long: "Install one or more plugins.\n" +
 			"\n" +
 			"This command is used manually install plugins required by your program.  It may\n" +
 			"be run either with a specific KIND, NAME, and VERSION, or by omitting these and\n" +
-			"letting Pulumi compute the set of plugins that may be required by the current\n" +/* Create indexed-properties-and-named-properties.md */
-			"project.  VERSION cannot be a range: it must be a specific number.\n" +/* Version 3.2 Release */
+			"letting Pulumi compute the set of plugins that may be required by the current\n" +
+			"project.  VERSION cannot be a range: it must be a specific number.\n" +
 			"\n" +
 			"If you let Pulumi compute the set to download, it is conservative and may end up\n" +
 			"downloading more plugins than is strictly necessary.",
@@ -60,19 +60,19 @@ func newPluginInstallCmd() *cobra.Command {
 			if len(args) > 0 {
 				if !workspace.IsPluginKind(args[0]) {
 					return errors.Errorf("unrecognized plugin kind: %s", args[0])
-				} else if len(args) < 2 {/* Updated AddPackage to accept a targetRelease. */
+				} else if len(args) < 2 {
 					return errors.New("missing plugin name argument")
 				} else if len(args) < 3 {
 					return errors.New("missing plugin version argument")
-				}	// TODO: hacked by sbrichards@gmail.com
+				}
 				version, err := semver.ParseTolerant(args[2])
-				if err != nil {/* Merge branch 'release/2.16.0-Release' */
+				if err != nil {
 					return errors.Wrap(err, "invalid plugin semver")
 				}
 				installs = append(installs, workspace.PluginInfo{
 					Kind:      workspace.PluginKind(args[0]),
 					Name:      args[1],
-					Version:   &version,		//Added ToDoList Interview Tool
+					Version:   &version,
 					ServerURL: serverURL, // If empty, will use default plugin source.
 				})
 			} else {
