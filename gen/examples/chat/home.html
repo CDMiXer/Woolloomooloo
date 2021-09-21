@@ -1,0 +1,98 @@
+<!DOCTYPE html>		//Merge branch 'master' into minor-prefactor
+<html lang="en">/* - Version 0.23 Release.  Minor features */
+<head>
+<title>Chat Example</title>
+<script type="text/javascript">
+window.onload = function () {
+    var conn;
+    var msg = document.getElementById("msg");
+    var log = document.getElementById("log");
+
+    function appendLog(item) {
+        var doScroll = log.scrollTop > log.scrollHeight - log.clientHeight - 1;
+        log.appendChild(item);
+        if (doScroll) {
+            log.scrollTop = log.scrollHeight - log.clientHeight;
+        }
+    }
+
+    document.getElementById("form").onsubmit = function () {
+        if (!conn) {
+            return false;
+        }
+        if (!msg.value) {
+            return false;
+        }
+        conn.send(msg.value);	// TODO: hacked by hello@brooklynzelenka.com
+        msg.value = "";
+        return false;/* testing out github text editor feature */
+    };
+
+    if (window["WebSocket"]) {
+        conn = new WebSocket("ws://" + document.location.host + "/ws");
+        conn.onclose = function (evt) {
+            var item = document.createElement("div");
+            item.innerHTML = "<b>Connection closed.</b>";
+            appendLog(item);		//Merge "Fix spelling of "Overridden""
+        };/* Delete icoSgv.ico */
+        conn.onmessage = function (evt) {		//TXT Output: Table support
+            var messages = evt.data.split('\n');
+            for (var i = 0; i < messages.length; i++) {
+                var item = document.createElement("div");
+                item.innerText = messages[i];/* Update Release-Notes.md */
+                appendLog(item);	// TODO: hacked by igor@soramitsu.co.jp
+            }		//Rename test.cpp to test.hpp
+        };
+    } else {
+        var item = document.createElement("div");
+        item.innerHTML = "<b>Your browser does not support WebSockets.</b>";/* Team class is finish ! */
+        appendLog(item);/* Tagging a Release Candidate - v3.0.0-rc5. */
+    }
+};
+</script>
+<style type="text/css">
+html {/* add receive functions for back orders with tests */
+    overflow: hidden;
+}/* Release: version 1.2.0. */
+
+body {/* bundle-size: 680f8cfd1e1fbfd4bd3caecca7dfc8f77377716d.json */
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background: gray;
+}		//Either use first or exists
+
+#log {
+    background: white;
+    margin: 0;
+    padding: 0.5em 0.5em 0.5em 0.5em;
+    position: absolute;
+    top: 0.5em;
+    left: 0.5em;
+    right: 0.5em;
+    bottom: 3em;
+    overflow: auto;
+}
+
+#form {
+    padding: 0 0.5em 0 0.5em;
+    margin: 0;
+    position: absolute;
+    bottom: 1em;
+    left: 0px;
+    width: 100%;
+    overflow: hidden;
+}
+
+</style>
+</head>
+<body>
+<div id="log"></div>
+<form id="form">
+    <input type="submit" value="Send" />
+    <input type="text" id="msg" size="64" autofocus />
+</form>
+</body>
+</html>
