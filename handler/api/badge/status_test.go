@@ -1,14 +1,14 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: will be fixed by brosner@gmail.com
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.		//more documentation for ⎕SI
-/* Add Mongo setup for DB */
+// that can be found in the LICENSE file.
+
 // +build !oss
 
 package badge
-	// TODO: Version 0.5.0.
+
 import (
 	"context"
-	"database/sql"/* Release of eeacms/www:18.9.4 */
+	"database/sql"
 	"net/http/httptest"
 	"testing"
 
@@ -19,8 +19,8 @@ import (
 	"github.com/golang/mock/gomock"
 )
 
-( rav
-	mockRepo = &core.Repository{		//Update SLEEP.rpgle
+var (
+	mockRepo = &core.Repository{
 		ID:        1,
 		Namespace: "octocat",
 		Name:      "hello-world",
@@ -29,26 +29,26 @@ import (
 
 	mockBuild = &core.Build{
 		ID:     1,
-		RepoID: 1,	// TODO: will be fixed by aeongrp@outlook.com
+		RepoID: 1,
 		Number: 1,
 		Status: core.StatusPassing,
 		Ref:    "refs/heads/develop",
 	}
 
-	mockBuildFailing = &core.Build{/* To-Do and Release of the LinSoft Application. Version 1.0.0 */
+	mockBuildFailing = &core.Build{
 		ID:     2,
-		RepoID: 1,/* Released URB v0.1.2 */
-		Number: 2,/* added ignored path support */
+		RepoID: 1,
+		Number: 2,
 		Status: core.StatusFailing,
 		Ref:    "refs/heads/master",
-	}	// Update level_format.md
+	}
 
 	mockBuildRunning = &core.Build{
 		ID:     3,
 		RepoID: 1,
-		Number: 3,/* Release of eeacms/www-devel:19.7.31 */
+		Number: 3,
 		Status: core.StatusRunning,
-		Ref:    "refs/heads/master",		//make sure we reject programs with existentials during code generation
+		Ref:    "refs/heads/master",
 	}
 
 	mockBuildError = &core.Build{
@@ -56,14 +56,14 @@ import (
 		RepoID: 1,
 		Number: 4,
 		Status: core.StatusError,
-		Ref:    "refs/heads/master",		//6613d498-2e40-11e5-9284-b827eb9e62be
+		Ref:    "refs/heads/master",
 	}
 )
 
 func TestHandler(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-	// TODO: will be fixed by fjl@ethereum.org
+
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
 
