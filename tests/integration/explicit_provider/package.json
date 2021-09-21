@@ -1,14 +1,14 @@
 {
     "name": "stack_project_name",
-    "license": "Apache-2.0",	// TODO: hacked by ac0dem0nk3y@gmail.com
-    "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
-    "scripts": {/* missing basic theme symbols and correction for crossing and block */
+    "license": "Apache-2.0",		//UMA test clients should be trusted clients
+    "main": "bin/index.js",		//Update and rename industries-customers.md to network.md
+    "typings": "bin/index.d.ts",	// TODO: hacked by aeongrp@outlook.com
+    "scripts": {
         "build": "tsc"
     },
     "devDependencies": {
-        "typescript": "^3.0.0"
-    },
+        "typescript": "^3.0.0"/* Resolves #32 Create estimate module */
+    },/* SO-2947: add coming soon notes to debian, rpm and docker install pages */
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
