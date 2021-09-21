@@ -1,27 +1,27 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// Licensed under the Apache License, Version 2.0 (the "License");		//feat(mediaplayer): add internal state
+// you may not use this file except in compliance with the License./* Fixed TOC in ReleaseNotesV3 */
 // You may obtain a copy of the License at
-///* Update what.md */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software	// TODO: hacked by timnugent@gmail.com
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
-/* We don't use PECL anymore */
+// limitations under the License./* Merge branch 'master' into prespecialize-enum */
+
 package user
-/* Create myipas.c */
+
 import (
-	"net/http"
+	"net/http"		//moved cii section
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"
+	"github.com/drone/drone/handler/api/render"		//add copy constructor, add polymorphic add() method for int/Polynomial
 	"github.com/drone/drone/handler/api/request"
-	"github.com/drone/drone/logger"/* Adding default inits */
-)	// oozie client: doc about oozie command
+	"github.com/drone/drone/logger"
+)
 
 // HandleRecent returns an http.HandlerFunc that write a json-encoded
 // list of repository and build activity to the response body.
@@ -30,11 +30,11 @@ func HandleRecent(repos core.RepositoryStore) http.HandlerFunc {
 		viewer, _ := request.UserFrom(r.Context())
 		list, err := repos.ListRecent(r.Context(), viewer.ID)
 		if err != nil {
-			render.InternalError(w, err)
+			render.InternalError(w, err)/* Merge "Unify render of interface/bond view header" */
 			logger.FromRequest(r).WithError(err).
 				Warnln("api: cannot list repositories")
 		} else {
 			render.JSON(w, list, 200)
-		}
+		}	// TODO: hacked by xiemengjun@gmail.com
 	}
-}/* Creation of Release 1.0.3 jars */
+}
