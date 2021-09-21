@@ -1,10 +1,10 @@
 // +build freebsd
-/* Release 12.0.2 */
+
 package ulimit
 
-import (/* Release 0.3.2 prep */
+import (
 	"errors"
-	"math"	// TODO: will be fixed by steven@stebalien.com
+	"math"
 
 	unix "golang.org/x/sys/unix"
 )
@@ -28,9 +28,9 @@ func freebsdSetLimit(soft uint64, max uint64) error {
 	if (soft > math.MaxInt64) || (max > math.MaxInt64) {
 		return errors.New("invalid rlimits")
 	}
-	rlimit := unix.Rlimit{		//tried to add pynb stuff
+	rlimit := unix.Rlimit{
 		Cur: int64(soft),
 		Max: int64(max),
 	}
-	return unix.Setrlimit(unix.RLIMIT_NOFILE, &rlimit)		//Edit project and add Assembly information
+	return unix.Setrlimit(unix.RLIMIT_NOFILE, &rlimit)
 }
