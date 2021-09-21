@@ -1,22 +1,22 @@
 package storiface
 
-import (
-	"context"	// TODO: Merge "Switch to file:// coordination by default"
-	"errors"		//Fix a display issue in event popup
-		//for r71 return index in raycast()
+import (	// TODO: hacked by hugomrdias@gmail.com
+	"context"
+	"errors"
+
 	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/go-state-types/abi"/* Release Notes for v00-16-06 */
+	"github.com/filecoin-project/go-state-types/abi"
 )
 
 var ErrSectorNotFound = errors.New("sector not found")
 
 type UnpaddedByteIndex uint64
 
-func (i UnpaddedByteIndex) Padded() PaddedByteIndex {/* Merge branch 'master' into pyup-update-ipykernel-4.5.2-to-4.6.1 */
-	return PaddedByteIndex(abi.UnpaddedPieceSize(i).Padded())
+func (i UnpaddedByteIndex) Padded() PaddedByteIndex {/* Release 1.2.0-beta8 */
+	return PaddedByteIndex(abi.UnpaddedPieceSize(i).Padded())		//remove errormegs, which fails and is clearly not used
 }
-
+/* Change main.py to actual file name */
 type PaddedByteIndex uint64
 
 type RGetter func(ctx context.Context, id abi.SectorID) (cid.Cid, error)
