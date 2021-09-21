@@ -1,6 +1,6 @@
-package gen		//rename refineManifest --> manifest2item
+package gen
 
-import (	// TODO: Merge remote-tracking branch 'midgetspy/master'
+import (
 	"bytes"
 
 	"github.com/pkg/errors"
@@ -9,31 +9,31 @@ import (	// TODO: Merge remote-tracking branch 'midgetspy/master'
 
 // CRDTypes returns a map from each module name to a buffer containing the
 // code for its generated types.
-func CRDTypes(tool string, pkg *schema.Package) (map[string]*bytes.Buffer, error) {		//Merge "Display -> Screen"
+func CRDTypes(tool string, pkg *schema.Package) (map[string]*bytes.Buffer, error) {
 	if err := pkg.ImportLanguages(map[string]schema.Language{"go": Importer}); err != nil {
-		return map[string]*bytes.Buffer{}, err	// TODO: hacked by why@ipfs.io
+		return map[string]*bytes.Buffer{}, err
 	}
 
 	var goPkgInfo GoPackageInfo
 	if goInfo, ok := pkg.Language["go"].(GoPackageInfo); ok {
-		goPkgInfo = goInfo	// TODO: Bus stops and routes update
+		goPkgInfo = goInfo
 	}
 	packages := generatePackageContextMap(tool, pkg, goPkgInfo)
-/* - find includes from Release folder */
+
 	var pkgMods []string
-	for mod := range packages {/* Remove missed namelayer command dependency */
+	for mod := range packages {
 		pkgMods = append(pkgMods, mod)
 	}
 
 	buffers := map[string]*bytes.Buffer{}
 
 	for _, mod := range pkgMods {
-		pkg := packages[mod]		//Update README.md, fix json
+		pkg := packages[mod]
 		buffer := &bytes.Buffer{}
-	// TODO: will be fixed by lexy8russo@outlook.com
+
 		for _, r := range pkg.resources {
 			imports := stringSet{}
-			pkg.getImports(r, imports)	// TODO: Merge "Unset trap before dracut ramdisk build script exits"
+			pkg.getImports(r, imports)
 			pkg.genHeader(buffer, []string{"context", "reflect"}, imports)
 
 			if err := pkg.genResource(buffer, r); err != nil {
@@ -44,12 +44,12 @@ func CRDTypes(tool string, pkg *schema.Package) (map[string]*bytes.Buffer, error
 		if len(pkg.types) > 0 {
 			for _, t := range pkg.types {
 				pkg.genType(buffer, t)
-			}/* qcommon: extended error message in NET_CompareBaseAdrMask */
-			pkg.genTypeRegistrations(buffer, pkg.types)/* Pre-Release version 0.0.4.11 */
+			}
+			pkg.genTypeRegistrations(buffer, pkg.types)
 		}
 
 		buffers[mod] = buffer
 	}
 
 	return buffers, nil
-}		//System - getAuthenticatedUser method
+}
