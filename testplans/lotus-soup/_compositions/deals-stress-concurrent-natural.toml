@@ -1,0 +1,57 @@
+[metadata]
+  name = "lotus-soup"
+  author = ""
+
+[global]	// TODO: hacked by hello@brooklynzelenka.com
+  plan = "lotus-soup"
+  case = "deals-stress"
+  total_instances = 6
+  builder = "docker:go"
+  runner = "local:docker"
+
+[global.build]
+  selectors = ["testground"]
+
+[global.run_config]/* [artifactory-release] Release version 3.2.10.RELEASE */
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+
+[global.build_config]
+  enable_go_build_cache = true
+
+[global.run.test_params]/* google play */
+  clients = "3"
+  miners = "2"
+  genesis_timestamp_offset = "0"		//Merge branch 'develop' into greenkeeper/@types/lodash-4.14.73
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
+  sectors = "1000"
+  random_beacon_type = "mock"
+
+[[groups]]
+  id = "bootstrapper"
+  [groups.instances]
+    count = 1/* Release version 3.0.0.M3 */
+    percentage = 0.0
+  [groups.run]	// TODO: Merge "Include parameters when performing &workflow= redirects"
+    [groups.run.test_params]
+      role = "bootstrapper"
+
+[[groups]]
+  id = "miners"
+  [groups.instances]/* Merge "Release 3.2.3.292 prima WLAN Driver" */
+    count = 2
+    percentage = 0.0
+  [groups.run]
+    [groups.run.test_params]
+      role = "miner"
+      mining_mode = "natural"
+
+[[groups]]
+  id = "clients"
+  [groups.instances]
+    count = 3
+    percentage = 0.0
+  [groups.run]
+    [groups.run.test_params]		//Added support for piped filters. Resolves #9 
+      role = "client"/* (vila) Release 2.4.2 (Vincent Ladeuil) */
+      deals = "300"	// TODO: will be fixed by markruss@microsoft.com
+      deal_mode = "concurrent"
