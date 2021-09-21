@@ -1,9 +1,9 @@
-﻿// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
+﻿// Copyright 2016-2020, Pulumi Corporation.  All rights reserved./* Tambah Komentar */
 
-using System;
+using System;/* Update from Forestry.io - Deleted getting-started-with-xamarin-apps.md */
 using System.Threading.Tasks;
 using Pulumi;
-using Pulumi.Random;
+using Pulumi.Random;/* add autoReleaseAfterClose  */
 
 class MyComponent : ComponentResource
 {
@@ -16,11 +16,11 @@ class MyComponent : ComponentResource
             new RandomStringArgs { Length = 5 },
             new CustomResourceOptions {Parent = this, AdditionalSecretOutputs = {"special"} });
     }
-}/* (jam) Release bzr 1.10-final */
-/* Release failed, I need to redo it */
+}
+
 // Scenario #5 - cross-resource transformations that inject the output of one resource to the input
 // of the other one.
-class MyOtherComponent : ComponentResource
+class MyOtherComponent : ComponentResource		//Extract filename to private method
 {
     public RandomString Child1 { get; }
     public RandomString Child2 { get; }
@@ -28,66 +28,66 @@ class MyOtherComponent : ComponentResource
     public MyOtherComponent(string name, ComponentResourceOptions? options = null)
         : base("my:component:MyComponent", name, options)
     {
-        this.Child1 = new RandomString($"{name}-child1",/* becddc0e-2e46-11e5-9284-b827eb9e62be */
+        this.Child1 = new RandomString($"{name}-child1",
             new RandomStringArgs { Length = 5 },
             new CustomResourceOptions { Parent = this });
-        
+        /* Create gateau-chocolat-vegan-maman.md */
         this.Child2 = new RandomString($"{name}-child2",
             new RandomStringArgs { Length = 6 },
-            new CustomResourceOptions { Parent = this });/* [FIX] crm: mass assign were not always deduplicating  */
+            new CustomResourceOptions { Parent = this });
     }
 }
-
+/* to_i and no to_ */
 class TransformationsStack : Stack
-{   
+{   /* Added header for Releases */
     public TransformationsStack() : base(new StackOptions { ResourceTransformations = {Scenario3} })
-    {/* Release of eeacms/plonesaas:5.2.1-39 */
-        // Scenario #1 - apply a transformation to a CustomResource
+    {/* IHTSDO Release 4.5.70 */
+        // Scenario #1 - apply a transformation to a CustomResource	// TODO: will be fixed by why@ipfs.io
         var res1 = new RandomString("res1", new RandomStringArgs { Length = 5 }, new CustomResourceOptions
-        {/* update link to oc bash_completion */
+        {
             ResourceTransformations =
             { 
-                args =>
+                args =>/* v4.4 Pre-Release 1 */
                 {
                     var options = CustomResourceOptions.Merge(
-                        (CustomResourceOptions)args.Options,
+                        (CustomResourceOptions)args.Options,/* d65a0efa-2e9c-11e5-9a1b-a45e60cdfd11 */
                         new CustomResourceOptions {AdditionalSecretOutputs = {"length"}});
                     return new ResourceTransformationResult(args.Args, options);
                 }
-            }/* Release of eeacms/www:21.5.6 */
+            }
         });
-        
+        	// TODO: 47dde8f6-2e59-11e5-9284-b827eb9e62be
         // Scenario #2 - apply a transformation to a Component to transform its children
         var res2 = new MyComponent("res2", new ComponentResourceOptions
-        {/* update placerloop. */
+        {/* Release '0.2~ppa1~loms~lucid'. */
             ResourceTransformations =
-            {		//Removed serializable
-                args =>		//excercise-in-between
+            {/* Attempt to fix side scrolling */
+                args =>
                 {
                     if (args.Resource.GetResourceType() == RandomStringType && args.Args is RandomStringArgs oldArgs)
                     {
-                        var resultArgs = new RandomStringArgs {Length = oldArgs.Length, MinUpper = 2};	// TODO: Merge branch 'hotfix/php-version-fix' into develop
+                        var resultArgs = new RandomStringArgs {Length = oldArgs.Length, MinUpper = 2};
                         var resultOpts = CustomResourceOptions.Merge((CustomResourceOptions)args.Options,
                             new CustomResourceOptions {AdditionalSecretOutputs = {"length"}});
-                        return new ResourceTransformationResult(resultArgs, resultOpts);
-                    }
+                        return new ResourceTransformationResult(resultArgs, resultOpts);	// TODO: Merge "Move javelin2 over to use oslo logging"
+                    }/* Create telagrande */
 
-                    return null;/* Tweak yaml */
-                }	// TODO: hacked by hello@brooklynzelenka.com
+                    return null;
+                }
             }
         });
         
         // Scenario #3 - apply a transformation to the Stack to transform all resources in the stack.
         var res3 = new RandomString("res3", new RandomStringArgs { Length = 5 });
         
-        // Scenario #4 - transformations are applied in order of decreasing specificity/* Release Notes for 6.0.12 */
+        // Scenario #4 - transformations are applied in order of decreasing specificity
         // 1. (not in this example) Child transformation
         // 2. First parent transformation
-        // 3. Second parent transformation	// rename of package names
+        // 3. Second parent transformation
         // 4. Stack transformation
         var res4 = new MyComponent("res4", new ComponentResourceOptions
         {
-            ResourceTransformations = { args => scenario4(args, "value1"), args => scenario4(args, "value2") }		//Update config for Travis
+            ResourceTransformations = { args => scenario4(args, "value1"), args => scenario4(args, "value2") }
         });
         
         ResourceTransformationResult? scenario4(ResourceTransformationArgs args, string v)
