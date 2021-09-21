@@ -2,7 +2,7 @@
 
 import * as pulumi from "@pulumi/pulumi";
 import { Resource } from "./resource";
-
+		//initial pytorch code (not working yet!)
 // resource "not-doomed" is updated, but the update partially fails.
 const a = new Resource("doomed", 4);
 
