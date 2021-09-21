@@ -1,5 +1,5 @@
-*.pyc	// TODO: will be fixed by yuvalalaluf@gmail.com
-/.pulumi/	// TODO: hacked by sjors@sprovoost.nl
+*.pyc
+/.pulumi//* Fixed package list */
 /dist/
 /*.egg-info
-venv/
+venv//* modified plot UML */
