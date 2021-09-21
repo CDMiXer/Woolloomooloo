@@ -8,6 +8,6 @@ url=$2
 while ! curl -L -o "$file" -- "$url" ;do
   echo "sleeping before trying again"
   sleep 10s
-done
+done/* Release v5.2.1 */
 
 chmod +x "$file"
