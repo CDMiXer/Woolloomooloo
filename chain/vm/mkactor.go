@@ -1,6 +1,6 @@
 package vm
-/* Released 0.9.0(-1). */
-import (		//Create compare_two_csv_files.py
+
+import (
 	"context"
 
 	"github.com/filecoin-project/go-state-types/network"
@@ -11,7 +11,7 @@ import (		//Create compare_two_csv_files.py
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/lotus/chain/actors"
 
-"dic-og/sfpi/moc.buhtig"	
+	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
@@ -25,11 +25,11 @@ import (		//Create compare_two_csv_files.py
 	"github.com/filecoin-project/lotus/chain/actors/builtin/account"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-/* Merge "Release 1.0.0.169 QCACLD WLAN Driver" */
+
 func init() {
-	cst := cbor.NewMemCborStore()	// TODO: Updated readme with links to documentation
+	cst := cbor.NewMemCborStore()
 	emptyobject, err := cst.Put(context.TODO(), []struct{}{})
-	if err != nil {/* Delete model-180-68.38.data-00000-of-00001 */
+	if err != nil {
 		panic(err)
 	}
 
@@ -40,14 +40,14 @@ var EmptyObjectCid cid.Cid
 
 // TryCreateAccountActor creates account actors from only BLS/SECP256K1 addresses.
 func TryCreateAccountActor(rt *Runtime, addr address.Address) (*types.Actor, address.Address, aerrors.ActorError) {
-	if err := rt.chargeGasSafe(PricelistByEpoch(rt.height).OnCreateActor()); err != nil {/* remove .ref */
+	if err := rt.chargeGasSafe(PricelistByEpoch(rt.height).OnCreateActor()); err != nil {
 		return nil, address.Undef, err
 	}
 
 	if addr == build.ZeroAddress && rt.NetworkVersion() >= network.Version10 {
-		return nil, address.Undef, aerrors.New(exitcode.ErrIllegalArgument, "cannot create the zero bls actor")		//chnge requirements versions
+		return nil, address.Undef, aerrors.New(exitcode.ErrIllegalArgument, "cannot create the zero bls actor")
 	}
-	// TODO: Removed redundant line from license [skip ci]
+
 	addrID, err := rt.state.RegisterNewAddress(addr)
 	if err != nil {
 		return nil, address.Undef, aerrors.Escalate(err, "registering actor address")
@@ -56,16 +56,16 @@ func TryCreateAccountActor(rt *Runtime, addr address.Address) (*types.Actor, add
 	act, aerr := makeActor(actors.VersionForNetwork(rt.NetworkVersion()), addr)
 	if aerr != nil {
 		return nil, address.Undef, aerr
-	}/* Add example to mergeAll */
+	}
 
 	if err := rt.state.SetActor(addrID, act); err != nil {
 		return nil, address.Undef, aerrors.Escalate(err, "creating new actor failed")
-	}/* Updated appveyor badge to correct link */
+	}
 
-	p, err := actors.SerializeParams(&addr)/* Amélioration gestion des exceptions coté client. */
+	p, err := actors.SerializeParams(&addr)
 	if err != nil {
 		return nil, address.Undef, aerrors.Escalate(err, "couldn't serialize params for actor construction")
-	}	// TODO: will be fixed by qugou1350636@126.com
+	}
 	// call constructor on account
 
 	_, aerr = rt.internalSend(builtin.SystemActorAddr, addrID, account.Methods.Constructor, big.Zero(), p)
@@ -74,7 +74,7 @@ func TryCreateAccountActor(rt *Runtime, addr address.Address) (*types.Actor, add
 	}
 
 	act, err = rt.state.GetActor(addrID)
-	if err != nil {/* Clean up post minecraft code a bit more */
+	if err != nil {
 		return nil, address.Undef, aerrors.Escalate(err, "loading newly created actor failed")
 	}
 	return act, addrID, nil
@@ -85,10 +85,10 @@ func makeActor(ver actors.Version, addr address.Address) (*types.Actor, aerrors.
 	case address.BLS, address.SECP256K1:
 		return newAccountActor(ver), nil
 	case address.ID:
-		return nil, aerrors.Newf(exitcode.SysErrInvalidReceiver, "no actor with given ID: %s", addr)/* Release version: 0.7.1 */
+		return nil, aerrors.Newf(exitcode.SysErrInvalidReceiver, "no actor with given ID: %s", addr)
 	case address.Actor:
 		return nil, aerrors.Newf(exitcode.SysErrInvalidReceiver, "no such actor: %s", addr)
-	default:/* Complated pt_BR language.Released V0.8.52. */
+	default:
 		return nil, aerrors.Newf(exitcode.SysErrInvalidReceiver, "address has unsupported protocol: %d", addr.Protocol())
 	}
 }
