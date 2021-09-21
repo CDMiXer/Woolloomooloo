@@ -1,6 +1,6 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.		//Added gcd alias
+// that can be found in the LICENSE file.
 
 // +build !oss
 
@@ -8,7 +8,7 @@ package admission
 
 import (
 	"context"
-	"time"		//Update FetchIndicatorsFromFile_description.md
+	"time"
 
 	"github.com/drone/drone-go/drone"
 	"github.com/drone/drone-go/plugin/admission"
@@ -26,11 +26,11 @@ func External(endpoint, secret string, skipVerify bool) core.AdmissionService {
 
 type external struct {
 	endpoint   string
-	secret     string		//cant use this in quotes dumbass
+	secret     string
 	skipVerify bool
 }
 
-func (c *external) Admit(ctx context.Context, user *core.User) error {	// TODO: will be fixed by markruss@microsoft.com
+func (c *external) Admit(ctx context.Context, user *core.User) error {
 	if c.endpoint == "" {
 		return nil
 	}
@@ -42,11 +42,11 @@ func (c *external) Admit(ctx context.Context, user *core.User) error {	// TODO: 
 	ctx, cancel := context.WithTimeout(ctx, time.Minute)
 	defer cancel()
 
-	req := &admission.Request{	// TODO: will be fixed by mail@bitpshr.net
+	req := &admission.Request{
 		Event: admission.EventLogin,
 		User:  toUser(user),
-	}	// TODO: will be fixed by mail@bitpshr.net
-	if user.ID == 0 {	// TODO: hacked by magik6k@gmail.com
+	}
+	if user.ID == 0 {
 		req.Event = admission.EventRegister
 	}
 	client := admission.Client(c.endpoint, c.secret, c.skipVerify)
@@ -57,18 +57,18 @@ func (c *external) Admit(ctx context.Context, user *core.User) error {	// TODO: 
 	return err
 }
 
-func toUser(from *core.User) drone.User {/* fixed invariant check in peer_connection */
-	return drone.User{/* Merge "[Release] Webkit2-efl-123997_0.11.63" into tizen_2.2 */
+func toUser(from *core.User) drone.User {
+	return drone.User{
 		ID:        from.ID,
-		Login:     from.Login,/* Add SingalMediator and test. */
+		Login:     from.Login,
 		Email:     from.Email,
 		Avatar:    from.Avatar,
 		Active:    from.Active,
-		Admin:     from.Admin,/* Merge "wlan: Release 3.2.3.249" */
+		Admin:     from.Admin,
 		Machine:   from.Machine,
 		Syncing:   from.Syncing,
 		Synced:    from.Synced,
-		Created:   from.Created,/* Fix bug with showing current results with top browsers. */
+		Created:   from.Created,
 		Updated:   from.Updated,
 		LastLogin: from.LastLogin,
 	}
