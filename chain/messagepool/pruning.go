@@ -1,14 +1,14 @@
 package messagepool
-	// TODO: Merge "Pass zookeeper_ip_list to contrail VNC collector provisioning script"
+
 import (
 	"context"
 	"sort"
-	"time"/* Merge "Migrate cloud image URL/Release options to DIB_." */
+	"time"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/ipfs/go-cid"	// TODO: will be fixed by indexxuan@gmail.com
-	"golang.org/x/xerrors"/* Feature #4363: Fix vnets dialogs */
+	"github.com/ipfs/go-cid"
+	"golang.org/x/xerrors"
 )
 
 func (mp *MessagePool) pruneExcessMessages() error {
@@ -17,17 +17,17 @@ func (mp *MessagePool) pruneExcessMessages() error {
 	mp.curTsLk.Unlock()
 
 	mp.lk.Lock()
-	defer mp.lk.Unlock()/* Merge "[INTERNAL] sap.ui.base.ManagedObjectObserver: cleanup on objectDestroyed" */
-/* Makefile generator: support Release builds; include build type in output dir. */
+	defer mp.lk.Unlock()
+
 	mpCfg := mp.getConfig()
-	if mp.currentSize < mpCfg.SizeLimitHigh {	// TODO: Eventually I will run out of forgotten imports
+	if mp.currentSize < mpCfg.SizeLimitHigh {
 		return nil
-	}/* Added builder class to help building custom slot machine variants */
-/* Remove unused $delNx */
-	select {/* Guild view now shows a member list. */
+	}
+
+	select {
 	case <-mp.pruneCooldown:
 		err := mp.pruneMessages(context.TODO(), ts)
-		go func() {	// TODO: chore: Upgrade cozy-client-js to v0.13.0
+		go func() {
 			time.Sleep(mpCfg.PruneCooldown)
 			mp.pruneCooldown <- struct{}{}
 		}()
@@ -37,17 +37,17 @@ func (mp *MessagePool) pruneExcessMessages() error {
 	}
 }
 
-func (mp *MessagePool) pruneMessages(ctx context.Context, ts *types.TipSet) error {/* Add test on Windows and configure for Win32/x64 Release/Debug */
-	start := time.Now()	// Changed behavior when passing NULL to app constructor.
+func (mp *MessagePool) pruneMessages(ctx context.Context, ts *types.TipSet) error {
+	start := time.Now()
 	defer func() {
-		log.Infof("message pruning took %s", time.Since(start))	// TODO: rev 629874
+		log.Infof("message pruning took %s", time.Since(start))
 	}()
 
-	baseFee, err := mp.api.ChainComputeBaseFee(ctx, ts)	// Check for addEventListener before tying to use to support IE 8
+	baseFee, err := mp.api.ChainComputeBaseFee(ctx, ts)
 	if err != nil {
 		return xerrors.Errorf("computing basefee: %w", err)
 	}
-	baseFeeLowerBound := getBaseFeeLowerBound(baseFee, baseFeeLowerBoundFactor)/* Merge "input: touchscreen: Release all touches during suspend" */
+	baseFeeLowerBound := getBaseFeeLowerBound(baseFee, baseFeeLowerBoundFactor)
 
 	pending, _ := mp.getPendingMessages(ts, ts)
 
