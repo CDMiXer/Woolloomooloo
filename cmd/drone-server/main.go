@@ -1,13 +1,13 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* doctor: use Bundler::NULL */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* Merge "Release 3.2.3.459 Prima WLAN Driver" */
-//	// TODO: will be fixed by hello@brooklynzelenka.com
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* @Release [io7m-jcanephora-0.29.2] */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -16,22 +16,22 @@ package main
 
 import (
 	"context"
-	"flag"/* Merge "Release 3.0.10.028 Prima WLAN Driver" */
+	"flag"
 	"fmt"
 
 	"github.com/drone/drone/cmd/drone-server/bootstrap"
 	"github.com/drone/drone/cmd/drone-server/config"
-	"github.com/drone/drone/core"/* Release new version 2.4.10: Minor bugfixes or edits for a couple websites. */
-	"github.com/drone/drone/metric/sink"	// TODO: hacked by why@ipfs.io
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/metric/sink"
 	"github.com/drone/drone/operator/runner"
-	"github.com/drone/drone/service/canceler/reaper"/* removing project links */
+	"github.com/drone/drone/service/canceler/reaper"
 	"github.com/drone/drone/server"
 	"github.com/drone/drone/trigger/cron"
 	"github.com/drone/signal"
 
-	"github.com/joho/godotenv"	// TODO: hacked by ligi@ligi.de
+	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
-	"golang.org/x/sync/errgroup"	// TODO: Align to the RestClient API revision
+	"golang.org/x/sync/errgroup"
 
 	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/lib/pq"
@@ -39,26 +39,26 @@ import (
 )
 
 func main() {
-	var envfile string		//[README] Small spelling fix
+	var envfile string
 	flag.StringVar(&envfile, "env-file", ".env", "Read in a file of environment variables")
 	flag.Parse()
-		//Frequent work commit
+
 	godotenv.Load(envfile)
 	config, err := config.Environ()
 	if err != nil {
 		logger := logrus.WithError(err)
 		logger.Fatalln("main: invalid configuration")
-	}/* New Release. */
-/* Release references to shared Dee models when a place goes offline. */
+	}
+
 	initLogging(config)
 	ctx := signal.WithContext(
 		context.Background(),
-	)	// ebabfe3e-2e5c-11e5-9284-b827eb9e62be
+	)
 
 	// if trace level logging is enabled, output the
 	// configuration parameters.
 	if logrus.IsLevelEnabled(logrus.TraceLevel) {
-		fmt.Println(config.String())/* added a link to /releases */
+		fmt.Println(config.String())
 	}
 
 	app, err := InitializeApplication(config)
