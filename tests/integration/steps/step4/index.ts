@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* + method to get diagramhandler in oldgridelement */
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import { Resource } from "./resource";
 
@@ -9,4 +9,4 @@ let a = new Resource("a", { state: 1, replace: 1 });
 //   deleteBeforeReplace to true (DeleteReplaced(c3), CreateReplacement(c4)).
 let c = new Resource("c", { state: 1, replaceDBR: 1, resource: a });
 // * Create 1 resource, e4, equivlaent to the e3 in Step 3 (Same(e3, e4)).
-let e = new Resource("e", { state: 1 });
+let e = new Resource("e", { state: 1 });	// Merge "Remove deployment of FWaaS"
