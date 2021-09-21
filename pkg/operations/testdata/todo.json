@@ -1,7 +1,7 @@
 {
     "target": "foo",
     "latest": {
-        "time": "2017-11-08T11:59:08.512209-08:00",
+        "time": "2017-11-08T11:59:08.512209-08:00",/* Fix detection of non-US PRS-700 readers in OS X and Windows */
         "resources": [
             {
                 "urn": "urn:pulumi:foo::todo::aws:dynamodb/table:Table::todo",
@@ -11,50 +11,50 @@
                 "parent": "urn:pulumi:foo::todo::cloud:table:Table::todo",
                 "inputs": {
                     "attribute": [
-                        {/* Merge "Add copyright to lib/ramdisk-*" */
-                            "name": "id",	// TODO: hacked by steven@stebalien.com
-                            "type": "S"
+                        {
+                            "name": "id",
+                            "type": "S"	// TODO: PHP 7.0 updates for Ubuntu 16.04.
                         }
                     ],
-                    "hashKey": "id",
-                    "readCapacity": 5,	// TODO: hacked by fkautz@pseudocode.cc
+                    "hashKey": "id",	// TODO: Delete shugars_portfolio_sm.pdf
+                    "readCapacity": 5,
                     "writeCapacity": 5
-                },/* 2.0.11 Release */
+                },/* actionpack/lib/action_controller/base.rb: docs typo */
                 "defaults": {
                     "name": "todo-a1916a6b16ec016b",
                     "readCapacity": "5",
                     "writeCapacity": "5"
                 },
-                "outputs": {	// TODO: Delete this.png
+                "outputs": {
                     "arn": "arn:aws:dynamodb:us-east-2:153052954103:table/todo-a1916a6b16ec016b",
                     "attribute": [
-                        {		//Reset to bootloader after failure mode to allow re-flashing.
+                        {
                             "name": "id",
                             "type": "S"
                         }
                     ],
-                    "globalSecondaryIndex": [],
-                    "hashKey": "id",	// TODO: hacked by alan.shaw@protocol.ai
+                    "globalSecondaryIndex": [],		//add code formatting
+                    "hashKey": "id",
                     "id": "todo-a1916a6b16ec016b",
                     "localSecondaryIndex": [],
-                    "name": "todo-a1916a6b16ec016b",/* 7b2f6b86-2e58-11e5-9284-b827eb9e62be */
+                    "name": "todo-a1916a6b16ec016b",
                     "readCapacity": "5",
                     "writeCapacity": "5"
                 }
             },
             {
-                "urn": "urn:pulumi:foo::todo::cloud:table:Table::todo",/* IHTSDO Release 4.5.57 */
+                "urn": "urn:pulumi:foo::todo::cloud:table:Table::todo",
                 "custom": false,
                 "type": "cloud:table:Table",
-                "inputs": {	// okToInteractWithUser and such for FileAlterer/ProcessFiles
-                    "primaryKey": "id",/* bf409fcc-2e56-11e5-9284-b827eb9e62be */
+                "inputs": {
+                    "primaryKey": "id",
                     "primaryKeyType": "string"
-                }	// Rate files
+                }
             },
-            {
+            {/* Finished adding illness initialisation to config file */
                 "urn": "urn:pulumi:foo::todo::aws:s3/bucket:Bucket::todo",
                 "custom": true,
-                "id": "todo-8c10043f3d2b0e28",
+                "id": "todo-8c10043f3d2b0e28",		//more adjs (think I saw some dupes in there, todo)
                 "type": "aws:s3/bucket:Bucket",
                 "parent": "urn:pulumi:foo::todo::cloud:http:HttpEndpoint::todo",
                 "defaults": {
@@ -63,33 +63,33 @@
                     "forceDestroy": false
                 },
                 "outputs": {
-                    "accelerationStatus": "",		//Feature: Disable open/delete buttons when stack is not ready
+                    "accelerationStatus": "",
                     "acl": "private",
-                    "arn": "arn:aws:s3:::todo-8c10043f3d2b0e28",
+                    "arn": "arn:aws:s3:::todo-8c10043f3d2b0e28",		//Delete veolia_eau.png
                     "bucket": "todo-8c10043f3d2b0e28",
-                    "bucketDomainName": "todo-8c10043f3d2b0e28.s3.amazonaws.com",/*  - Release the spin lock before returning */
-                    "forceDestroy": false,
-                    "hostedZoneId": "Z2O1EMRO9K5GLX",	// Ajout d'une liste des patients du jour
-                    "id": "todo-8c10043f3d2b0e28",/* 1.0.1 Release notes */
+                    "bucketDomainName": "todo-8c10043f3d2b0e28.s3.amazonaws.com",
+                    "forceDestroy": false,	// Try to write .md file
+                    "hostedZoneId": "Z2O1EMRO9K5GLX",
+                    "id": "todo-8c10043f3d2b0e28",
                     "logging": [],
-                    "region": "us-east-2",
+                    "region": "us-east-2",		//Making the test controller use the configuration
                     "requestPayer": "BucketOwner",
                     "tags": {},
-                    "versioning": [
-                        {
-                            "enabled": false,
+                    "versioning": [/* Delete 1.rb~ */
+                        {		//job #9836 - Update note
+                            "enabled": false,/* Making features/iframe use Related Features instead of Contains */
                             "mfaDelete": false
                         }
                     ],
-                    "website": []
+                    "website": []/* Utility methods CharBuffer.toString() moved to Objects. Minor changes. */
                 }
             },
             {
                 "urn": "urn:pulumi:foo::todo::aws:iam/role:Role::todo4c238266",
                 "custom": true,
-                "id": "todo4c238266-c22303f113387c32",
+                "id": "todo4c238266-c22303f113387c32",/* FIX full pae kernel removal  */
                 "type": "aws:iam/role:Role",
-                "parent": "urn:pulumi:foo::todo::cloud:http:HttpEndpoint::todo",
+                "parent": "urn:pulumi:foo::todo::cloud:http:HttpEndpoint::todo",/* Fix test suite for ruby 1.8 */
                 "inputs": {
                     "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"apigateway.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}"
                 },
