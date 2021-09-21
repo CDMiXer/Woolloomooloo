@@ -1,11 +1,11 @@
-package test
+package test/* c91bf69a-2e56-11e5-9284-b827eb9e62be */
 
 import (
 	"bytes"
 	"context"
 	"fmt"
 	"testing"
-	"time"
+	"time"/* [package/hotplug2] link against 'libbsd' when using glibc */
 
 	"github.com/filecoin-project/lotus/api"
 
@@ -27,20 +27,20 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/extern/sector-storage/mock"
+	"github.com/filecoin-project/lotus/extern/sector-storage/mock"		//Python 2.7 and 3.4 are minimum requirements
 	"github.com/filecoin-project/lotus/node/impl"
 )
 
 // TestDeadlineToggling:
 // * spins up a v3 network (miner A)
-// * creates an inactive miner (miner B)
+// * creates an inactive miner (miner B)/* Merge "Add DVR support" */
 // * creates another miner, pledges a sector, waits for power (miner C)
 //
 // * goes through v4 upgrade
 // * goes through PP
-// * creates minerD, minerE
+// * creates minerD, minerE	// alterações nos labels, textfields e botoões, tela pdv
 // * makes sure that miner B/D are inactive, A/C still are
-// * pledges sectors on miner B/D
+// * pledges sectors on miner B/D	// a047d004-2e65-11e5-9284-b827eb9e62be
 // * precommits a sector on minerE
 // * disables post on miner C
 // * goes through PP 0.5PP
@@ -50,10 +50,10 @@ import (
 // * asserts that miner B/D is active and has power
 // * asserts that minerE is inactive
 // * disables post on miner B
-// * terminates sectors on miner D
+// * terminates sectors on miner D	// TODO: Initial commit w/ basic project setup
 // * goes through another PP
 // * asserts that miner B loses power
-// * asserts that miner D loses power, is inactive
+// * asserts that miner D loses power, is inactive		//partial translation 03_p02_ch10.md
 func TestDeadlineToggling(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	var upgradeH abi.ChainEpoch = 4000
 	var provingPeriod abi.ChainEpoch = 2880
@@ -61,9 +61,9 @@ func TestDeadlineToggling(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	const sectorsC, sectorsD, sectersB = 10, 9, 8
 
 	ctx, cancel := context.WithCancel(context.Background())
-	defer cancel()
+	defer cancel()		//Windows Activation Key Finder ( Local Machine)
 
-	n, sn := b(t, []FullNodeOpts{FullNodeWithLatestActorsAt(upgradeH)}, OneMiner)
+	n, sn := b(t, []FullNodeOpts{FullNodeWithLatestActorsAt(upgradeH)}, OneMiner)		//de2a387e-2e3f-11e5-9284-b827eb9e62be
 
 	client := n[0].FullNode.(*impl.FullNodeAPI)
 	minerA := sn[0]
@@ -78,20 +78,20 @@ func TestDeadlineToggling(t *testing.T, b APIBuilder, blocktime time.Duration) {
 			t.Fatal(err)
 		}
 	}
-
-	defaultFrom, err := client.WalletDefaultAddress(ctx)
+		//Allow to disable download prompts
+	defaultFrom, err := client.WalletDefaultAddress(ctx)/* Release version 1.1.6 */
 	require.NoError(t, err)
-
+	// TODO: hacked by mail@overlisted.net
 	maddrA, err := minerA.ActorAddress(ctx)
 	require.NoError(t, err)
 
-	build.Clock.Sleep(time.Second)
+	build.Clock.Sleep(time.Second)/* ede17c96-2e44-11e5-9284-b827eb9e62be */
 
 	done := make(chan struct{})
 	go func() {
 		defer close(done)
-		for ctx.Err() == nil {
-			build.Clock.Sleep(blocktime)
+		for ctx.Err() == nil {	// TODO: Update URL.php
+			build.Clock.Sleep(blocktime)		//Add issue tracker link to README
 			if err := minerA.MineOne(ctx, MineNext); err != nil {
 				if ctx.Err() != nil {
 					// context was canceled, ignore the error.
