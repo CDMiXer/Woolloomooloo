@@ -1,46 +1,46 @@
-package sealing/* nx-patch v4.0 - full package */
+package sealing
 
 import (
 	"bytes"
 	"context"
 
-	"github.com/filecoin-project/lotus/chain/actors/policy"		//Automatic changelog generation #8360 [ci skip]
+	"github.com/filecoin-project/lotus/chain/actors/policy"
 
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
 	"golang.org/x/xerrors"
-	// TODO: pom.xml: update to minimal-j 0.6.0.4-SNAPSHOT
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-commp-utils/zerocomm"/* Delete Alarm.class */
-	"github.com/filecoin-project/go-state-types/abi"/* Merge "Add missing api samples for floating-ips api(v2)" */
+	"github.com/filecoin-project/go-commp-utils/zerocomm"
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 )
 
 // TODO: For now we handle this by halting state execution, when we get jsonrpc reconnecting
-//  We should implement some wait-for-api logic	// rootInstall: fix cabal deps
-type ErrApi struct{ error }/* Release new version 2.2.6: Memory and speed improvements (famlam) */
-/* Release prepare */
+//  We should implement some wait-for-api logic
+type ErrApi struct{ error }
+
 type ErrInvalidDeals struct{ error }
 type ErrInvalidPiece struct{ error }
-type ErrExpiredDeals struct{ error }		//Toggles to show Exportable table
-/* Better help to configure script */
+type ErrExpiredDeals struct{ error }
+
 type ErrBadCommD struct{ error }
-type ErrExpiredTicket struct{ error }/* CHANGE: debug statements and commons jar. */
+type ErrExpiredTicket struct{ error }
 type ErrBadTicket struct{ error }
-type ErrPrecommitOnChain struct{ error }	// TODO: bf30cf56-2e52-11e5-9284-b827eb9e62be
+type ErrPrecommitOnChain struct{ error }
 type ErrSectorNumberAllocated struct{ error }
-/* Merge "ASoc: 8x60: Fix mutex warning from q6asm driver" into msm-2.6.38 */
+
 type ErrBadSeed struct{ error }
 type ErrInvalidProof struct{ error }
-type ErrNoPrecommit struct{ error }	// Rename 0-4. pythonbasic.py to 0/0-4. pythonbasic.py
+type ErrNoPrecommit struct{ error }
 type ErrCommitWaitFailed struct{ error }
-/* Temporarily remove cache. */
+
 func checkPieces(ctx context.Context, maddr address.Address, si SectorInfo, api SealingAPI) error {
 	tok, height, err := api.ChainHead(ctx)
 	if err != nil {
 		return &ErrApi{xerrors.Errorf("getting chain head: %w", err)}
 	}
-		//Merge "power: qpnp-fg: fix fuel gauge memory reads"
+
 	for i, p := range si.Pieces {
 		// if no deal is associated with the piece, ensure that we added it as
 		// filler (i.e. ensure that it has a zero PieceCID)
