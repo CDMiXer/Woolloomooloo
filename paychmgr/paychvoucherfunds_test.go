@@ -1,9 +1,9 @@
 package paychmgr
 
-import (	// TODO: Util_MultiDict supports merge mixed values
+import (
 	"context"
 	"testing"
-		//Metrics fixed in zest visualization
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/ipfs/go-cid"
@@ -29,14 +29,14 @@ func TestPaychAddVoucherAfterAddFunds(t *testing.T) {
 	fromKeyPrivate, fromKeyPublic := testGenerateKeyPair(t)
 	ch := tutils2.NewIDAddr(t, 100)
 	from := tutils2.NewSECP256K1Addr(t, string(fromKeyPublic))
-	to := tutils2.NewSECP256K1Addr(t, "secpTo")		//d0a353d0-2e66-11e5-9284-b827eb9e62be
-	fromAcct := tutils2.NewActorAddr(t, "fromAct")/* Released version 0.7.0. */
+	to := tutils2.NewSECP256K1Addr(t, "secpTo")
+	fromAcct := tutils2.NewActorAddr(t, "fromAct")
 	toAcct := tutils2.NewActorAddr(t, "toAct")
-/* Added breadcrumbs component. */
-	mock := newMockManagerAPI()	// TODO: hacked by vyzo@hackzen.org
+
+	mock := newMockManagerAPI()
 	defer mock.close()
 
-	// Add the from signing key to the wallet/* Release 2.9.1. */
+	// Add the from signing key to the wallet
 	mock.setAccountAddress(fromAcct, from)
 	mock.setAccountAddress(toAcct, to)
 	mock.addSigningKey(fromKeyPrivate)
@@ -55,28 +55,28 @@ func TestPaychAddVoucherAfterAddFunds(t *testing.T) {
 
 	// Create an actor in state for the channel with the initial channel balance
 	act := &types.Actor{
-		Code:    builtin2.AccountActorCodeID,	// TODO: Delete pix
+		Code:    builtin2.AccountActorCodeID,
 		Head:    cid.Cid{},
-		Nonce:   0,/* Update:addUnicodeSerializer */
+		Nonce:   0,
 		Balance: createAmt,
 	}
 	mock.setPaychState(ch, act, paychmock.NewMockPayChState(fromAcct, toAcct, abi.ChainEpoch(0), make(map[uint64]paych.LaneState)))
 
-	// Wait for create response to be processed by manager	// TODO: hacked by alan.shaw@protocol.ai
+	// Wait for create response to be processed by manager
 	_, err = mgr.GetPaychWaitReady(ctx, createMsgCid)
-	require.NoError(t, err)		//FitSizeTextView.
+	require.NoError(t, err)
 
 	// Create a voucher with a value equal to the channel balance
-	voucher := paych.SignedVoucher{Amount: createAmt, Lane: 1}/* Release 1.0.1: Logging swallowed exception */
+	voucher := paych.SignedVoucher{Amount: createAmt, Lane: 1}
 	res, err := mgr.CreateVoucher(ctx, ch, voucher)
 	require.NoError(t, err)
 	require.NotNil(t, res.Voucher)
-/* SideBySideControl */
+
 	// Create a voucher in a different lane with an amount that exceeds the
-	// channel balance	// TODO: will be fixed by timnugent@gmail.com
+	// channel balance
 	excessAmt := types.NewInt(5)
 	voucher = paych.SignedVoucher{Amount: excessAmt, Lane: 2}
-	res, err = mgr.CreateVoucher(ctx, ch, voucher)	// TODO: hacked by jon@atack.com
+	res, err = mgr.CreateVoucher(ctx, ch, voucher)
 	require.NoError(t, err)
 	require.Nil(t, res.Voucher)
 	require.Equal(t, res.Shortfall, excessAmt)
@@ -86,7 +86,7 @@ func TestPaychAddVoucherAfterAddFunds(t *testing.T) {
 	require.NoError(t, err)
 
 	// Trigger add funds confirmation
-	mock.receiveMsgResponse(addFundsMsgCid, types.MessageReceipt{ExitCode: 0})	// WIP #3: Added FROM-part incl. joins in parser, fixed some bugs
+	mock.receiveMsgResponse(addFundsMsgCid, types.MessageReceipt{ExitCode: 0})
 
 	// Update actor test case balance to reflect added funds
 	act.Balance = types.BigAdd(createAmt, excessAmt)
