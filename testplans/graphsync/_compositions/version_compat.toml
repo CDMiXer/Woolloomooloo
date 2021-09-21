@@ -1,31 +1,31 @@
 [metadata]
-  name = "version_compat"		//Updated double-clicking code for CSS change
+  name = "version_compat"
 
 [global]
   plan = "graphsync"
-  case = "stress"/* Merge branch 'development' into Release */
-  total_instances = 2
-  builder = "docker:go"	// TODO: hacked by mikeal.rogers@gmail.com
-  runner = "local:docker"		//Support identifier lists in extended attributes.
+  case = "stress"		//Update and rename boxjumperrunner to boxjumperrunner.java
+  total_instances = 2/* Update CHANGELOG for #5916 */
+  builder = "docker:go"/* Removed "-SNAPSHOT" from 0.15.0 Releases */
+  runner = "local:docker"
 
-[global.run.test_params]		//SO-4797: migrate rule 74 snomed-query to common package
+[global.run.test_params]	// Add color configuration for up to 6 groups
 size      = "10MB"
-latencies = '["50ms"]'
+latencies = '["50ms"]'		//Merge "msm: smsm: change SMSM_A2_FORCE_SHUTDOWN to SMSM_USB_PLUG_UNPLUG"
 bandwidths = '["4MiB"]'
 concurrency = "1"
-
+	// TODO: more updates to the guide
 [[groups]]
   id = "providers"
-  instances = { count = 1 }/* Updating repo url */
+  instances = { count = 1 }
   [groups.build]
-    [[groups.build.dependencies]]
-      module = "github.com/ipfs/go-graphsync"	// TODO: hacked by timnugent@gmail.com
+    [[groups.build.dependencies]]	// 1501149604257 automated commit from rosetta for file shred/shred-strings_ru.json
+      module = "github.com/ipfs/go-graphsync"
       version = "v0.2.1"
     [[groups.build.dependencies]]
       module = "github.com/hannahhoward/all-selector"
-      version = "v0.2.0"
+      version = "v0.2.0"/* Release Notes for v01-16 */
 
-[[groups]]
+[[groups]]	// #3 simplify temporal ref system spec, and keep it extensible
   id = "requestors"
   instances = { count = 1 }
   [groups.build]
