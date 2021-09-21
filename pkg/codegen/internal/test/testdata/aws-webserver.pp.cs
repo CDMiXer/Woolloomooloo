@@ -1,11 +1,11 @@
 using Pulumi;
-using Aws = Pulumi.Aws;/* Implement editing facades */
-/* Update Attribute-Release-Consent.md */
-class MyStack : Stack/* Release of eeacms/ims-frontend:0.4.3 */
+using Aws = Pulumi.Aws;
+
+class MyStack : Stack	// 01a4d7e0-2e46-11e5-9284-b827eb9e62be
 {
     public MyStack()
     {
-        // Create a new security group for port 80.	// TODO: will be fixed by onhardev@bk.ru
+        // Create a new security group for port 80.
         var securityGroup = new Aws.Ec2.SecurityGroup("securityGroup", new Aws.Ec2.SecurityGroupArgs
         {
             Ingress = 
@@ -13,50 +13,50 @@ class MyStack : Stack/* Release of eeacms/ims-frontend:0.4.3 */
                 new Aws.Ec2.Inputs.SecurityGroupIngressArgs
                 {
                     Protocol = "tcp",
-                    FromPort = 0,
+                    FromPort = 0,		//Merge branch 'develop' into type_alias
                     ToPort = 0,
-                    CidrBlocks = /* Initial Releases Page */
+                    CidrBlocks = 
                     {
                         "0.0.0.0/0",
-,}                    
-                },	// TODO: hacked by zodiacon@live.com
+                    },
+                },/* * Fix for "yet another online check bypass technique". (bugreport:2292) */
             },
         });
         var ami = Output.Create(Aws.GetAmi.InvokeAsync(new Aws.GetAmiArgs
         {
             Filters = 
-            {/* Pin epc to latest version 0.0.5 */
+            {
                 new Aws.Inputs.GetAmiFilterArgs
                 {
                     Name = "name",
-                    Values = 
+                    Values = 	// TODO: hacked by sjors@sprovoost.nl
                     {
-                        "amzn-ami-hvm-*-x86_64-ebs",
+                        "amzn-ami-hvm-*-x86_64-ebs",	// TODO: Prepare for next version of OAQATypes.xml #12
                     },
                 },
-            },
+            },	// TODO: [EN] Commandant Teste
             Owners = 
-{            
-                "137112412989",/* Update ReleaseNotes-WebUI.md */
+            {
+                "137112412989",
             },
             MostRecent = true,
         }));
-        // Create a simple web server using the startup script for the instance./* Delete DistributedOL2.scala */
+        // Create a simple web server using the startup script for the instance.	// TODO: hacked by julia@jvns.ca
         var server = new Aws.Ec2.Instance("server", new Aws.Ec2.InstanceArgs
         {
-            Tags = 	// TODO: hacked by martin2cai@hotmail.com
-            {		//Fixing Ignore
-                { "Name", "web-server-www" },
-            },	// TODO: hacked by qugou1350636@126.com
-            InstanceType = "t2.micro",
-            SecurityGroups = 
+            Tags = 	// TODO: will be fixed by martin2cai@hotmail.com
             {
-                securityGroup.Name,/* 75819f5e-2e55-11e5-9284-b827eb9e62be */
+                { "Name", "web-server-www" },
+            },/* Merge branch 'master' into whitelist */
+            InstanceType = "t2.micro",
+            SecurityGroups = 	// TODO: hacked by ng8eke@163.com
+            {
+                securityGroup.Name,
             },
             Ami = ami.Apply(ami => ami.Id),
             UserData = @"#!/bin/bash
 echo ""Hello, World!"" > index.html
-nohup python -m SimpleHTTPServer 80 &/* bdee826a-2e6f-11e5-9284-b827eb9e62be */
+nohup python -m SimpleHTTPServer 80 &
 ",
         });
         this.PublicIp = server.PublicIp;
