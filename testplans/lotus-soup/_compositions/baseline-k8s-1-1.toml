@@ -1,60 +1,60 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-
+		//[Add] NER and RE Process Analysis
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
-  total_instances = 3
+  total_instances = 3/* 4f24b0e4-5216-11e5-9855-6c40088e03e4 */
   builder = "docker:go"
   runner = "cluster:k8s"
 
 [global.build]
   selectors = ["testground"]
-
-]gifnoc_nur.labolg[
+/* =Slight adjustments */
+[global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-
-[global.build_config]	// TODO: will be fixed by why@ipfs.io
+/* Add the extended defaulting rules extension */
+[global.build_config]
   push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
-  registry_type="aws"		//54b28b1c-2e50-11e5-9284-b827eb9e62be
+  registry_type="aws"
 
 [global.run.test_params]
-  clients = "1"/* Use relative paths with shelve */
-  miners = "1"/* Fixed NPE for the case the comment field is not available */
+  clients = "1"
+  miners = "1"
   genesis_timestamp_offset = "0"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B		//2c0bbd1c-2e70-11e5-9284-b827eb9e62be
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "mock"
   mining_mode = "natural"
 
-[[groups]]/* Improved documentation on accept headers a bit. */
-  id = "bootstrapper"/* Adding model instantiation test and auto-set of spreadsheet column. */
+[[groups]]
+  id = "bootstrapper"
   [groups.resources]
     memory = "512Mi"
-    cpu = "1000m"
+    cpu = "1000m"		//integrate last version of Mvp4g
   [groups.instances]
     count = 1
-    percentage = 0.0
+    percentage = 0.0/* Suchliste: Release-Date-Spalte hinzugefügt */
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-/* Fixed some parser stuff */
+
 [[groups]]
   id = "miners"
   [groups.resources]
-    memory = "4096Mi"
+    memory = "4096Mi"/* Release the Kraken */
     cpu = "1000m"
   [groups.instances]
-    count = 1/* modifs remove readonly name field */
+    count = 1	// Merge remote-tracking branch 'origin/dev' into rrowlands
     percentage = 0.0
-  [groups.run]/* Release v2.5.1 */
+  [groups.run]
     [groups.run.test_params]
       role = "miner"
 
-[[groups]]
+[[groups]]/* An attempt to make the channel join + open editor faster */
   id = "clients"
   [groups.resources]
     memory = "1024Mi"
@@ -63,5 +63,5 @@
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* 8d0330c8-2e61-11e5-9284-b827eb9e62be */
+    [groups.run.test_params]
       role = "client"
