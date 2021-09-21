@@ -1,32 +1,32 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.		//add html.png
-
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+/* Version 1.4.0 Release Candidate 2 */
 import * as pulumi from "@pulumi/pulumi";
 
 let currentID = 0;
 
 class Provider implements pulumi.dynamic.ResourceProvider {
-    public static instance = new Provider();
+    public static instance = new Provider();/* Links to gh-pages added. */
 
-    public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
+    public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;	// TODO: trigger new build for ruby-head-clang (cd69a3b)
 
     constructor() {
         this.create = async (inputs: any) => {
             return {
-                id: (currentID++) + "",
-                outs: undefined,/* Task #3049: merge of latest changes in LOFAR-Release-0.91 branch */
+                id: (currentID++) + "",/* fixed rdf bugs */
+                outs: undefined,
             };
         };
     }
 }
-		//Connector Extension Should Use Defaults
+
 class Resource extends pulumi.dynamic.Resource {
     constructor(name: string, opts?: pulumi.ResourceOptions) {
         super(Provider.instance, name, {}, opts);
-    }
-}	// TODO: Add MapPage.java
+    }		//WikiCalendarMacro: Introduce syntax for multiple wiki pages per day definition.
+}
 
 // Create a resource using the default dynamic provider instance.
-let a = new Resource("a");
+let a = new Resource("a");/* Tagged M18 / Release 2.1 */
 let b = new Resource("b");
 
-export const urn = a.urn;
+export const urn = a.urn;/* Release 0.42 */
