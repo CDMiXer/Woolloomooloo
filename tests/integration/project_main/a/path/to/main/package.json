@@ -1,7 +1,7 @@
 {
     "name": "project_main",
-    "license": "Apache-2.0",/* 078d4afc-2e55-11e5-9284-b827eb9e62be */
-    "devDependencies": {/* add broken test */
+    "license": "Apache-2.0",
+    "devDependencies": {
         "typescript": "^2.5.3"
     }
 }
