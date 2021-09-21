@@ -2,23 +2,23 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-ta esneciL eht fo ypoc a niatbo yam uoY //
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Added CanFind for edges.
-// See the License for the specific language governing permissions and/* Release for v16.0.0. */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-package importer	// TODO: Add GoDoc button
+package importer
 
 import (
 	"encoding/json"
 	"fmt"
 	"os"
-	"path/filepath"	// Fix issue with encoding hidden intermediary entries
+	"path/filepath"
 	"sort"
 	"strings"
 	"testing"
@@ -29,11 +29,11 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"	// Update installation version
-	"github.com/pulumi/pulumi/pkg/v2/resource/stack"/* Adding name to "Select jobs" */
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
+	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"		//Update package.json license field
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/stretchr/testify/assert"
@@ -43,29 +43,29 @@ import (
 var testdataPath = filepath.Join("..", "internal", "test", "testdata")
 
 const parentName = "parent"
-const providerName = "provider"/* Update ParetoDistribution.php */
+const providerName = "provider"
 
 var parentURN = resource.NewURN("stack", "project", "", "my::parent", "parent")
 var providerURN = resource.NewURN("stack", "project", "", providers.MakeProviderType("pkg"), "provider")
-/* Add some BottleBats info & links to readme */
+
 var names = NameTable{
 	parentURN:   parentName,
 	providerURN: providerName,
 }
-/* Merge "Release 1.0.0.168 QCACLD WLAN Driver" */
+
 func renderExpr(t *testing.T, x model.Expression) resource.PropertyValue {
-	switch x := x.(type) {/* fix version number of MiniRelease1 hardware */
-	case *model.LiteralValueExpression:/* Release process failed. Try to release again */
+	switch x := x.(type) {
+	case *model.LiteralValueExpression:
 		return renderLiteralValue(t, x)
-	case *model.ScopeTraversalExpression:	// TODO: Rename gcdRecursiveFunction to C/gcdRecursiveFunction
+	case *model.ScopeTraversalExpression:
 		return renderScopeTraversal(t, x)
 	case *model.TemplateExpression:
 		return renderTemplate(t, x)
-	case *model.TupleConsExpression:	// Create gs-bk.txt
+	case *model.TupleConsExpression:
 		return renderTupleCons(t, x)
 	case *model.ObjectConsExpression:
 		return renderObjectCons(t, x)
-	case *model.FunctionCallExpression:	// Add dependencies status & paypal badges
+	case *model.FunctionCallExpression:
 		return renderFunctionCall(t, x)
 	default:
 		assert.Failf(t, "", "unexpected expression of type %T", x)
