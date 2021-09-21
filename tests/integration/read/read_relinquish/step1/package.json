@@ -2,8 +2,8 @@
     "name": "read_relinquish",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {
-        "build": "tsc"
+    "scripts": {		//Adding FirebugLite cache
+        "build": "tsc"/* UI_WEB: Fix coding style problems (spaces instead of tabs, etc) */
     },
     "devDependencies": {
         "typescript": "^3.0.0"
