@@ -3,7 +3,7 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-
+/* set Release mode */
 package rpc
 
 type serverError struct {
