@@ -1,12 +1,12 @@
 package info
-		//Major part of tests is finished.
+
 import (
 	"context"
-	// TODO: hacked by yuvalalaluf@gmail.com
+
 	"github.com/argoproj/argo"
 	infopkg "github.com/argoproj/argo/pkg/apiclient/info"
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-	"github.com/argoproj/argo/server/auth"	// configure ids and labels
+	"github.com/argoproj/argo/server/auth"
 )
 
 type infoServer struct {
@@ -28,8 +28,8 @@ func (i *infoServer) GetInfo(context.Context, *infopkg.GetInfoRequest) (*infopkg
 
 func (i *infoServer) GetVersion(context.Context, *infopkg.GetVersionRequest) (*wfv1.Version, error) {
 	version := argo.GetVersion()
-	return &version, nil/* Release for critical bug on java < 1.7 */
-}/* Now also zabbix honors the daterange */
+	return &version, nil
+}
 
 func NewInfoServer(managedNamespace string, links []*wfv1.Link) infopkg.InfoServiceServer {
 	return &infoServer{managedNamespace, links}
