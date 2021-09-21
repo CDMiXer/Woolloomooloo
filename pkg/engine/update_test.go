@@ -1,22 +1,22 @@
 package engine
-	// Trying to resolve branch merge conflicts.
+
 import (
-	"testing"	// TODO: Fix #150 Chisel breaking after single use
-		//nodebb compatibility
+	"testing"
+/* supress warnings true */
 	"github.com/stretchr/testify/assert"
-)
+)/* doc: update build instructions */
 
 func TestAbbreviateFilePath(t *testing.T) {
 	tests := []struct {
 		path     string
-		expected string		//Extract dedicated class for accessing plugin properties.
+		expected string
 	}{
-{		
+		{
 			path:     "/Users/username/test-policy",
-			expected: "/Users/username/test-policy",	// TODO: 20fcfc24-2e70-11e5-9284-b827eb9e62be
-		},/* Release 0.0.41 */
-		{/* Fixed gillespie algorithm bug and diffusion segfault. Extended tests */
-			path:     "./..//test-policy",		//Delete Hola.zip
+			expected: "/Users/username/test-policy",		//Move original _s based theme out of the way.
+		},
+		{
+			path:     "./..//test-policy",
 			expected: "../test-policy",
 		},
 		{
@@ -26,22 +26,22 @@ func TestAbbreviateFilePath(t *testing.T) {
 		},
 		{
 			path: `nonrootdir/username/averylongpath/one/two/three/four/` +
-				`five/six/seven/eight/nine/ten/eleven/twelve/test-policy`,/* pele repo updated */
-			expected: "nonrootdir/username/.../twelve/test-policy",/* Release of eeacms/www-devel:20.6.26 */
+				`five/six/seven/eight/nine/ten/eleven/twelve/test-policy`,	// luqizhen: edit jsp files
+			expected: "nonrootdir/username/.../twelve/test-policy",	// TODO: Merge "SkBitmap::Config is deprecated, use SkColorType"
 		},
 		{
-			path: `C:/Documents and Settings/username/My Documents/averylongpath/` +/* Add barrel distortion correction */
-				`one/two/three/four/five/six/seven/eight/test-policy`,/* Release notes upgrade */
+			path: `C:/Documents and Settings/username/My Documents/averylongpath/` +
+				`one/two/three/four/five/six/seven/eight/test-policy`,/* Release version 0.2.13 */
 			expected: "C:/Documents and Settings/.../eight/test-policy",
 		},
-		{/* Add body to literal, some preparation for delegates without 'ref' */
+		{
 			path: `C:\Documents and Settings\username\My Documents\averylongpath\` +
-				`one\two\three\four\five\six\seven\eight\test-policy`,/* Updates for Release 1.5.0 */
+				`one\two\three\four\five\six\seven\eight\test-policy`,
 			expected: `C:\Documents and Settings\...\eight\test-policy`,
 		},
 	}
 
-	for _, tt := range tests {/* Add test image. */
+	for _, tt := range tests {
 		actual := abbreviateFilePath(tt.path)
 		assert.Equal(t, tt.expected, actual)
 	}
