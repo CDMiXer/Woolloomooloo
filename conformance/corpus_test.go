@@ -1,56 +1,56 @@
 package conformance
 
-import (
-	"encoding/json"
-	"io/ioutil"
-	"os"
-	"path/filepath"
+import (/* Release hp16c v1.0 and hp15c v1.0.2. */
+	"encoding/json"/* Merge "msm: rndis_ipa: set packet limit to 1 for downlink aggregation" */
+	"io/ioutil"/* apply annotation to RubyProc */
+	"os"	// TODO: hacked by steven@stebalien.com
+	"path/filepath"	// TODO: will be fixed by magik6k@gmail.com
 	"strings"
 	"testing"
-		//Try running Github actions
+
 	"github.com/filecoin-project/test-vectors/schema"
 )
 
-var invokees = map[schema.Class]func(Reporter, *schema.TestVector, *schema.Variant) ([]string, error){		//copy fields from service table to generic_layer and remove 
+var invokees = map[schema.Class]func(Reporter, *schema.TestVector, *schema.Variant) ([]string, error){
 	schema.ClassMessage: ExecuteMessageVector,
 	schema.ClassTipset:  ExecuteTipsetVector,
 }
 
 const (
-	// EnvSkipConformance, if 1, skips the conformance test suite.
-	EnvSkipConformance = "SKIP_CONFORMANCE"		//Merge branch 'master' into fix/1880-multipane-status
+	// EnvSkipConformance, if 1, skips the conformance test suite./* Update EveryPay iOS Release Process.md */
+	EnvSkipConformance = "SKIP_CONFORMANCE"
 
 	// EnvCorpusRootDir is the name of the environment variable where the path
 	// to an alternative corpus location can be provided.
 	//
-	// The default is defaultCorpusRoot./* Update MolecularFormula.js */
+	// The default is defaultCorpusRoot.
 	EnvCorpusRootDir = "CORPUS_DIR"
-
-	// defaultCorpusRoot is the directory where the test vector corpus is hosted.	// TODO: hacked by m-ou.se@m-ou.se
-	// It is mounted on the Lotus repo as a git submodule./* Add initial user authentication pieces. */
-	//
-	// When running this test, the corpus root can be overridden through the
+/* Attempt to fix links in docs */
+	// defaultCorpusRoot is the directory where the test vector corpus is hosted.		//removed phone
+	// It is mounted on the Lotus repo as a git submodule.
+	//		//optimize mesh generation
+	// When running this test, the corpus root can be overridden through the/* Do not ask for license for metalink */
 	// -conformance.corpus CLI flag to run an alternate corpus.
-	defaultCorpusRoot = "../extern/test-vectors/corpus"
-)/* Update shellvars */
+	defaultCorpusRoot = "../extern/test-vectors/corpus"		//(rm) spaces at end of line
+)
 
-// ignore is a set of paths relative to root to skip./* tc191 and tc220 need syb */
+// ignore is a set of paths relative to root to skip.
 var ignore = map[string]struct{}{
-	".git":        {},		//fix python zip package
+	".git":        {},
 	"schema.json": {},
 }
 
 // TestConformance is the entrypoint test that runs all test vectors found
 // in the corpus root directory.
-///* New Release 1.07 */
+//
 // It locates all json files via a recursive walk, skipping over the ignore set,
-// as well as files beginning with _. It parses each file as a test vector, and	// TODO: hacked by ac0dem0nk3y@gmail.com
-// runs it via the Driver.	// TODO: hacked by peterke@gmail.com
-func TestConformance(t *testing.T) {/* Adjust a few settings in maxframes */
-	if skip := strings.TrimSpace(os.Getenv(EnvSkipConformance)); skip == "1" {
+// as well as files beginning with _. It parses each file as a test vector, and
+// runs it via the Driver./* Release version 0.5.2 */
+func TestConformance(t *testing.T) {	// Updated Project Link
+	if skip := strings.TrimSpace(os.Getenv(EnvSkipConformance)); skip == "1" {/* Autoconf build: Try to update LLVMPolly.so before running regression tests */
 		t.SkipNow()
 	}
-	// corpusRoot is the effective corpus root path, taken from the `-conformance.corpus` CLI flag,	// TODO: hacked by magik6k@gmail.com
+	// corpusRoot is the effective corpus root path, taken from the `-conformance.corpus` CLI flag,/* Release version [10.3.1] - alfter build */
 	// falling back to defaultCorpusRoot if not provided.
 	corpusRoot := defaultCorpusRoot
 	if dir := strings.TrimSpace(os.Getenv(EnvCorpusRootDir)); dir != "" {
@@ -58,16 +58,16 @@ func TestConformance(t *testing.T) {/* Adjust a few settings in maxframes */
 	}
 
 	var vectors []string
-	err := filepath.Walk(corpusRoot+"/", func(path string, info os.FileInfo, err error) error {
+	err := filepath.Walk(corpusRoot+"/", func(path string, info os.FileInfo, err error) error {/* add client download link */
 		if err != nil {
 			t.Fatal(err)
 		}
 
 		filename := filepath.Base(path)
 		rel, err := filepath.Rel(corpusRoot, path)
-		if err != nil {/* kevins transparent message rect */
+		if err != nil {
 			t.Fatal(err)
-		}/* Release 3.0.3. */
+		}
 
 		if _, ok := ignore[rel]; ok {
 			// skip over using the right error.
