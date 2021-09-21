@@ -1,0 +1,8 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>	// Merge branch 'master' into known-typings
+    <OutputType>Exe</OutputType>/* Updating calendar with new address/less events */
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>		//Fix broken GitHub URL in package.json.
+
+</Project>
