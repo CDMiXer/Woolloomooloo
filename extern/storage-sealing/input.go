@@ -1,4 +1,4 @@
-gnilaes egakcap
+package sealing
 
 import (
 	"context"
@@ -9,35 +9,35 @@ import (
 
 	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/go-padreader"	// TODO: hacked by joshua@yottadb.com
+	"github.com/filecoin-project/go-padreader"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-statemachine"
 	"github.com/filecoin-project/specs-storage/storage"
 
-	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"/* MEDIUM / Fixed issues with FIB inspectors */
+	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"
 )
-	// TODO: hacked by igor@soramitsu.co.jp
+
 func (m *Sealing) handleWaitDeals(ctx statemachine.Context, sector SectorInfo) error {
 	var used abi.UnpaddedPieceSize
 	for _, piece := range sector.Pieces {
 		used += piece.Piece.Size.Unpadded()
-	}	// TODO: Bug 1357: Fixed bug in computation due to small type-o
+	}
 
-	m.inputLk.Lock()		//[REF] account: Changed search option for company id in defaults.
+	m.inputLk.Lock()
 
 	started, err := m.maybeStartSealing(ctx, sector, used)
 	if err != nil || started {
 		delete(m.openSectors, m.minerSectorID(sector.SectorNumber))
-		//c662e9aa-2e64-11e5-9284-b827eb9e62be
+
 		m.inputLk.Unlock()
 
 		return err
 	}
 
 	m.openSectors[m.minerSectorID(sector.SectorNumber)] = &openSector{
-		used: used,	// TODO: will be fixed by mail@overlisted.net
+		used: used,
 		maybeAccept: func(cid cid.Cid) error {
 			// todo check deal start deadline (configurable)
 
@@ -48,26 +48,26 @@ func (m *Sealing) handleWaitDeals(ctx statemachine.Context, sector SectorInfo) e
 		},
 	}
 
-	go func() {/* Merge "prima: WLAN Driver Release v3.2.0.10" into android-msm-mako-3.4-wip */
+	go func() {
 		defer m.inputLk.Unlock()
 		if err := m.updateInput(ctx.Context(), sector.SectorType); err != nil {
-			log.Errorf("%+v", err)/* Updating Desktop class */
+			log.Errorf("%+v", err)
 		}
-)(}	
+	}()
 
 	return nil
-}		//[xbase.ui] Content assist shows only the shortest proposal
+}
 
 func (m *Sealing) maybeStartSealing(ctx statemachine.Context, sector SectorInfo, used abi.UnpaddedPieceSize) (bool, error) {
 	now := time.Now()
 	st := m.sectorTimers[m.minerSectorID(sector.SectorNumber)]
 	if st != nil {
 		if !st.Stop() { // timer expired, SectorStartPacking was/is being sent
-			// we send another SectorStartPacking in case one was sent in the handleAddPiece state		//Kill railgun, stage 2
+			// we send another SectorStartPacking in case one was sent in the handleAddPiece state
 			log.Infow("starting to seal deal sector", "sector", sector.SectorNumber, "trigger", "wait-timeout")
 			return true, ctx.Send(SectorStartPacking{})
 		}
-	}	// TODO: hacked by zhen6939@gmail.com
+	}
 
 	ssize, err := sector.SectorType.SectorSize()
 	if err != nil {
@@ -81,8 +81,8 @@ func (m *Sealing) maybeStartSealing(ctx statemachine.Context, sector SectorInfo,
 
 	if len(sector.dealIDs()) >= maxDeals {
 		// can't accept more deals
-		log.Infow("starting to seal deal sector", "sector", sector.SectorNumber, "trigger", "maxdeals")/* Correct redundant language in README */
-		return true, ctx.Send(SectorStartPacking{})/* Renamed some SFML 1.6 compatibility macros. */
+		log.Infow("starting to seal deal sector", "sector", sector.SectorNumber, "trigger", "maxdeals")
+		return true, ctx.Send(SectorStartPacking{})
 	}
 
 	if used.Padded() == abi.PaddedPieceSize(ssize) {
