@@ -2,22 +2,22 @@
   name = "stress"
 
 [global]
-  plan = "graphsync"	// TODO: - Changed version to 1.1
+  plan = "graphsync"
   case = "stress"
   total_instances = 2
   builder = "docker:go"
-  runner = "cluster:k8s"		//add vue watch
+  runner = "cluster:k8s"
 
 [global.build_config]
   push_registry=true
   go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"		//d506fd84-2e50-11e5-9284-b827eb9e62be
+  go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
-[global.run.test_params]	// TODO: Allow to get the filename without extension
+[global.run.test_params]
 size      = "10MB"
 latencies = '["50ms", "100ms", "200ms"]'
-bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'	// TODO: hacked by ligi@ligi.de
+bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'
 concurrency = "10"
 
 [[groups]]
@@ -32,4 +32,4 @@ concurrency = "10"
   instances = { count = 1 }
   [groups.resources]
     memory = "4096Mi"
-    cpu = "1000m"	// TODO: hacked by remco@dutchcoders.io
+    cpu = "1000m"
