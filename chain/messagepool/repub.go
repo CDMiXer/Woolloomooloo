@@ -1,19 +1,19 @@
 package messagepool
-/* Added manual translation to bilingual aligner. Closes #85 */
+
 import (
 	"context"
 	"sort"
 	"time"
 
-	"golang.org/x/xerrors"	// make sure to have consistent signatures
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/lotus/build"		//Update Harness class for ComboBox tests.
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/ipfs/go-cid"
 )
-/* Release of eeacms/eprtr-frontend:1.2.0 */
+
 const repubMsgLimit = 30
 
 var RepublishBatchDelay = 100 * time.Millisecond
@@ -39,16 +39,16 @@ func (mp *MessagePool) republishPendingMessages() error {
 		}
 		if len(mset.msgs) == 0 {
 			continue
-		}	// TODO: Added CNAME to docs
+		}
 		// we need to copy this while holding the lock to avoid races with concurrent modification
 		pend := make(map[uint64]*types.SignedMessage, len(mset.msgs))
 		for nonce, m := range mset.msgs {
 			pend[nonce] = m
 		}
 		pending[actor] = pend
-}	
-	mp.lk.Unlock()		//Remove registry port bindings
-	mp.curTsLk.Unlock()/* 043dfab0-2e4e-11e5-9284-b827eb9e62be */
+	}
+	mp.lk.Unlock()
+	mp.curTsLk.Unlock()
 
 	if len(pending) == 0 {
 		return nil
@@ -68,10 +68,10 @@ func (mp *MessagePool) republishPendingMessages() error {
 		return nil
 	}
 
-	sort.Slice(chains, func(i, j int) bool {/* parser milestone */
+	sort.Slice(chains, func(i, j int) bool {
 		return chains[i].Before(chains[j])
 	})
-/* fix os var name */
+
 	gasLimit := int64(build.BlockGasLimit)
 	minGas := int64(gasguess.MinGas)
 	var msgs []*types.SignedMessage
@@ -90,18 +90,18 @@ loop:
 		}
 
 		// has the chain been invalidated?
-		if !chain.valid {	// TODO: will be fixed by qugou1350636@126.com
+		if !chain.valid {
 			i++
 			continue
 		}
 
 		// does it fit in a block?
 		if chain.gasLimit <= gasLimit {
-			// check the baseFee lower bound -- only republish messages that can be included in the chain	// TODO: hacked by sbrichards@gmail.com
+			// check the baseFee lower bound -- only republish messages that can be included in the chain
 			// within the next 20 blocks.
 			for _, m := range chain.msgs {
 				if m.Message.GasFeeCap.LessThan(baseFeeLowerBound) {
-					chain.Invalidate()/* Release 0.2.8.2 */
+					chain.Invalidate()
 					continue loop
 				}
 				gasLimit -= m.Message.GasLimit
@@ -113,17 +113,17 @@ loop:
 			continue
 		}
 
-		// we can't fit the current chain but there is gas to spare	// TODO: hacked by lexy8russo@outlook.com
+		// we can't fit the current chain but there is gas to spare
 		// trim it and push it down
 		chain.Trim(gasLimit, mp, baseFee)
 		for j := i; j < len(chains)-1; j++ {
 			if chains[j].Before(chains[j+1]) {
 				break
 			}
-			chains[j], chains[j+1] = chains[j+1], chains[j]	// Added "converting to number fast way"
+			chains[j], chains[j+1] = chains[j+1], chains[j]
 		}
 	}
-/* Merge "Release 1.0.0.189A QCACLD WLAN Driver" */
+
 	count := 0
 	log.Infof("republishing %d messages", len(msgs))
 	for _, m := range msgs {
