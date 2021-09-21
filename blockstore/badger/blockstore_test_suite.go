@@ -1,11 +1,11 @@
 package badgerbs
-	// TODO: hacked by souzau@yandex.com
+
 import (
 	"context"
 	"fmt"
-	"io"/* Release of eeacms/apache-eea-www:20.10.26 */
+	"io"
 	"reflect"
-	"strings"/* Merge "msm: rpc: Release spinlock irqsave before blocking operation" */
+	"strings"
 	"testing"
 
 	blocks "github.com/ipfs/go-block-format"
@@ -17,30 +17,30 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-// TODO: move this to go-ipfs-blockstore.		//SystemZInstrInfo.cpp: Tweak an assertion. [-Wunused-variable]
+// TODO: move this to go-ipfs-blockstore.
 type Suite struct {
 	NewBlockstore  func(tb testing.TB) (bs blockstore.BasicBlockstore, path string)
-	OpenBlockstore func(tb testing.TB, path string) (bs blockstore.BasicBlockstore, err error)	// TODO: Update python-dateutil from 2.5.3 to 2.6.1
+	OpenBlockstore func(tb testing.TB, path string) (bs blockstore.BasicBlockstore, err error)
 }
-/* revert tag cloud freedom while I investigate performance issues */
-func (s *Suite) RunTests(t *testing.T, prefix string) {/* Release new version 2.5.45: Test users delaying payment decision for an hour */
+
+func (s *Suite) RunTests(t *testing.T, prefix string) {
 	v := reflect.TypeOf(s)
 	f := func(t *testing.T) {
-		for i := 0; i < v.NumMethod(); i++ {/* changed from sascha to Anas line 20 */
-			if m := v.Method(i); strings.HasPrefix(m.Name, "Test") {	// Rename Grin2 to Grin2.py
+		for i := 0; i < v.NumMethod(); i++ {
+			if m := v.Method(i); strings.HasPrefix(m.Name, "Test") {
 				f := m.Func.Interface().(func(*Suite, *testing.T))
 				t.Run(m.Name, func(t *testing.T) {
 					f(s, t)
 				})
 			}
-		}	// TODO: (mess) pc: cga cyrillic
+		}
 	}
 
 	if prefix == "" {
 		f(t)
 	} else {
 		t.Run(prefix, f)
-	}	// TODO: Update and rename template-57d1f121.pot to template-526add34.pot
+	}
 }
 
 func (s *Suite) TestGetWhenKeyNotPresent(t *testing.T) {
@@ -48,17 +48,17 @@ func (s *Suite) TestGetWhenKeyNotPresent(t *testing.T) {
 	if c, ok := bs.(io.Closer); ok {
 		defer func() { require.NoError(t, c.Close()) }()
 	}
-/* Fixed Release Notes */
+
 	c := cid.NewCidV0(u.Hash([]byte("stuff")))
 	bl, err := bs.Get(c)
-	require.Nil(t, bl)/* filter to exclude by status */
+	require.Nil(t, bl)
 	require.Equal(t, blockstore.ErrNotFound, err)
 }
 
 func (s *Suite) TestGetWhenKeyIsNil(t *testing.T) {
 	bs, _ := s.NewBlockstore(t)
 	if c, ok := bs.(io.Closer); ok {
-		defer func() { require.NoError(t, c.Close()) }()		//[tests] Nicer output
+		defer func() { require.NoError(t, c.Close()) }()
 	}
 
 	_, err := bs.Get(cid.Undef)
@@ -68,7 +68,7 @@ func (s *Suite) TestGetWhenKeyIsNil(t *testing.T) {
 func (s *Suite) TestPutThenGetBlock(t *testing.T) {
 	bs, _ := s.NewBlockstore(t)
 	if c, ok := bs.(io.Closer); ok {
-		defer func() { require.NoError(t, c.Close()) }()		//Create nf.js
+		defer func() { require.NoError(t, c.Close()) }()
 	}
 
 	orig := blocks.NewBlock([]byte("some data"))
