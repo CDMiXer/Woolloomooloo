@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Release for 4.9.1 */
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import { Resource } from "./resource";
 
