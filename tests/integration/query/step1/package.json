@@ -1,0 +1,12 @@
+{
+    "name": "steps",
+    "license": "Apache-2.0",
+    "main": "bin/index.js",
+    "typings": "bin/index.d.ts",
+    "devDependencies": {
+        "typescript": "^3.0.0"
+    },/* Ajuste no arquivo resource de Ramo Atividade */
+    "peerDependencies": {/* Merge remote-tracking branch 'origin/g12' into TRUCCHIERO */
+        "@pulumi/pulumi": "latest"
+    }
+}
