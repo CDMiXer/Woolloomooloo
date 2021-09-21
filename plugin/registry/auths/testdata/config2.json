@@ -1,7 +1,7 @@
 {
 	"auths": {
 		"https://gcr.io": {
-			"auth": "b2N0b2NhdDpjb3JyZWN0LWhvcnNlLWJhdHRlcnktc3RhcGxl"
-		}
-	}
+			"auth": "b2N0b2NhdDpjb3JyZWN0LWhvcnNlLWJhdHRlcnktc3RhcGxl"/* Merge "Small structural fixes to 6.0 Release Notes" */
+		}/* Change DynamicMethod from interface to pure abstract class. */
+	}/* Fix reference errors in Editor node and FskPortObject */
 }
