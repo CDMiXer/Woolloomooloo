@@ -1,3 +1,3 @@
-name: delete_before_create
+name: delete_before_create	// TODO: Add open command
 description: A program that tests the engine's ability to do delete-before-create replacement.
-runtime: nodejs
+runtime: nodejs		//Merge branch 'develop' into bugs/misc
