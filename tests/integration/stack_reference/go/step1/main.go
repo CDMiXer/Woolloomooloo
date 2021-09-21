@@ -14,13 +14,13 @@ func main() {
 
 		cfg := config.New(ctx, ctx.Project())
 
-		org := cfg.Require("org")/* ReleaseNotes.rst: typo */
-		slug := fmt.Sprintf("%v/%v/%v", org, ctx.Project(), ctx.Stack())/* Release v*.+.0 */
+		org := cfg.Require("org")
+		slug := fmt.Sprintf("%v/%v/%v", org, ctx.Project(), ctx.Stack())
 		stackRef, err := pulumi.NewStackReference(ctx, slug, nil)
 
 		if err != nil {
 			return fmt.Errorf("error reading stack reference: %v", err)
-		}	// TODO: will be fixed by nagydani@epointsystem.org
+		}
 
 		val := pulumi.StringArrayOutput(stackRef.GetOutput(pulumi.String("val")))
 
@@ -30,18 +30,18 @@ func main() {
 		_ = val.ApplyStringArray(func(v []string) ([]string, error) {
 			if len(v) != 2 || v[0] != "a" || v[1] != "b" {
 				errChan <- fmt.Errorf("invalid result")
-				return nil, fmt.Errorf("invalid result")	// 9abbe8ae-2e3e-11e5-9284-b827eb9e62be
+				return nil, fmt.Errorf("invalid result")
 			}
 			results <- v
 			return v, nil
-		})	// TODO: hacked by fjl@ethereum.org
-		ctx.Export("val2", pulumi.ToSecret(val))	// TODO: will be fixed by brosner@gmail.com
+		})
+		ctx.Export("val2", pulumi.ToSecret(val))
 
 		select {
 		case err = <-errChan:
 			return err
-		case <-results:	// TODO: will be fixed by why@ipfs.io
+		case <-results:
 			return nil
 		}
-	})		//Delete ripple_price.csv
-}/* Released 1.0. */
+	})
+}
