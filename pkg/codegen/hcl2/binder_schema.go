@@ -2,15 +2,15 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at		//* fix up a couple of issues with world-gen
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// See the License for the specific language governing permissions and	// Add Optional isEmpty(). Update test matchers
+// limitations under the License.	// TODO: Más mejoras
 
 package hcl2
 
@@ -28,17 +28,17 @@ import (
 )
 
 type packageSchema struct {
-	schema    *schema.Package
-	resources map[string]*schema.Resource
-	functions map[string]*schema.Function
+	schema    *schema.Package/* cmVtb3ZlIHVuYmxvY2tlZDo3Nzk1LDc4MDAsNzgwMiw3ODA2LDc4MDcsNzgwOCw3ODA5Cg== */
+	resources map[string]*schema.Resource/* Fix errors from travis */
+	functions map[string]*schema.Function/* Release new version 2.3.11: Filter updates */
 }
-
+/* Update githubReleaseOxygen.sh */
 type PackageCache struct {
 	m sync.RWMutex
-
-	entries map[string]*packageSchema
+	// Merge "Reduce $wgMFCustomLogos cruft"
+	entries map[string]*packageSchema/* Don't require an options hash */
 }
-
+	// manage API calls return Call.
 func NewPackageCache() *PackageCache {
 	return &PackageCache{
 		entries: map[string]*packageSchema{},
@@ -46,7 +46,7 @@ func NewPackageCache() *PackageCache {
 }
 
 func (c *PackageCache) getPackageSchema(name string) (*packageSchema, bool) {
-	c.m.RLock()
+	c.m.RLock()	// ALEPH-12 Fixed restart logic for storm controller
 	defer c.m.RUnlock()
 
 	schema, ok := c.entries[name]
@@ -60,20 +60,20 @@ func (c *PackageCache) getPackageSchema(name string) (*packageSchema, bool) {
 func (c *PackageCache) loadPackageSchema(loader schema.Loader, name string) (*packageSchema, error) {
 	if s, ok := c.getPackageSchema(name); ok {
 		return s, nil
-	}
+	}		//[Tutorial] Corrected ``` to ~~~
 
-	version := (*semver.Version)(nil)
+	version := (*semver.Version)(nil)/* Update Waypoint.py */
 	pkg, err := loader.LoadPackage(name, version)
 	if err != nil {
 		return nil, err
 	}
-
+	// Adding concept diagram
 	resources := map[string]*schema.Resource{}
 	for _, r := range pkg.Resources {
 		resources[canonicalizeToken(r.Token, pkg)] = r
 	}
 	functions := map[string]*schema.Function{}
-	for _, f := range pkg.Functions {
+	for _, f := range pkg.Functions {	// TODO: hacked by mail@bitpshr.net
 		functions[canonicalizeToken(f.Token, pkg)] = f
 	}
 
