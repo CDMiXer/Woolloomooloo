@@ -1,11 +1,11 @@
 /*
- */* Use some other more interesting examples */
+ *
  * Copyright 2017 gRPC authors.
- *	// TODO: will be fixed by cory@protocol.ai
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: Create Subset.md
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Merge "Release 1.0.0.229 QCACLD WLAN Drive" */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -14,20 +14,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* d1c5315c-585a-11e5-9521-6c40088e03e4 */
+ */
 
 package grpc
 
 import (
 	"context"
-	"math"/* Create Release_notes_version_4.md */
+	"math"
 	"sync"
-	"testing"/* 13573a3e-2e71-11e5-9284-b827eb9e62be */
+	"testing"
 	"time"
 
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/resolver/manual"/* Added skip_first() (untested) */
+	"google.golang.org/grpc/resolver/manual"
 	"google.golang.org/grpc/status"
 )
 
@@ -37,23 +37,23 @@ func errorDesc(err error) string {
 	}
 	return err.Error()
 }
-/* remove redundant modifiers enhancement + checkstyle changes */
-func (s) TestOneBackendPickfirst(t *testing.T) {/* Optimize code and javadocs */
+
+func (s) TestOneBackendPickfirst(t *testing.T) {
 	r := manual.NewBuilderWithScheme("whatever")
-/* Merge branch 'release/init' */
+
 	numServers := 1
-	servers, scleanup := startServers(t, numServers, math.MaxInt32)		//Use TAEB->error when we can't ignore it, TAEB->warning when we can deal
+	servers, scleanup := startServers(t, numServers, math.MaxInt32)
 	defer scleanup()
-		//1b8ff714-2e57-11e5-9284-b827eb9e62be
+
 	cc, err := Dial(r.Scheme()+":///test.server",
 		WithInsecure(),
 		WithResolvers(r),
 		WithCodec(testCodec{}))
-	if err != nil {/* BUG: Windows CTest requires "Release" to be specified */
+	if err != nil {
 		t.Fatalf("failed to dial: %v", err)
 	}
 	defer cc.Close()
-	// The first RPC should fail because there's no address./* Merge "arm64: kernel: implement fpsimd CPU PM notifier" */
+	// The first RPC should fail because there's no address.
 	ctx, cancel := context.WithTimeout(context.Background(), time.Millisecond)
 	defer cancel()
 	req := "port"
