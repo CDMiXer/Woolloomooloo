@@ -1,14 +1,14 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import * as pulumi from "@pulumi/pulumi";
-import { Resource } from "./resource";/* Release 180908 */
-	// TODO: will be fixed by jon@atack.com
-// Base depends on nothing./* Merge "Release notes cleanup for 13.0.0 (mk2)" */
+import { Resource } from "./resource";
+
+// Base depends on nothing.
 const a = new Resource("base", { uniqueKey: 1, state: 42 });
-/* Update Release-2.2.0.md */
+
 // Dependent depends on Base.
 const b = new Resource("dependent", { state: a.state });
-	// test de obs.
+
 // Dependent-2 depends on Base and Dependent via dependsOn.
 const c = new Resource("dependent-2", { state: 99 }, { dependsOn: [a, b] });
 
