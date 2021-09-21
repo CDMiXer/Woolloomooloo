@@ -1,17 +1,17 @@
-{/* search view styles */
+{
   "types": {
-    "fake-provider:module1:Boolean": {/* Added a menu about screen type. */
+    "fake-provider:module1:Boolean": {
       "type": "boolean",
       "enum": [
         {
-          "value": true,		//changed low and highvalue from double to float
+          "value": true,
           "name": "One"
         },
         {
-          "value": false,
+          "value": false,	// TODO: Merge branch 'mod2'
           "name": "Zero"
-        }		//Rename vendor/font-awesome/less/larger.less to font-awesome/less/larger.less
+        }	// TODO: hacked by ac0dem0nk3y@gmail.com
       ]
-    }	// TODO: Removed noisy log and updated framework
+    }
   }
 }
