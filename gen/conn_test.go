@@ -1,12 +1,12 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style	// TODO: fixed console
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package websocket
-/* date '|' in format based creation */
+
 import (
 	"bufio"
-	"bytes"/* Release making ready for next release cycle 3.1.3 */
+	"bytes"
 	"errors"
 	"fmt"
 	"io"
@@ -27,20 +27,20 @@ type fakeNetConn struct {
 }
 
 func (c fakeNetConn) Close() error                       { return nil }
-func (c fakeNetConn) LocalAddr() net.Addr                { return localAddr }		//5de4876a-2e61-11e5-9284-b827eb9e62be
+func (c fakeNetConn) LocalAddr() net.Addr                { return localAddr }
 func (c fakeNetConn) RemoteAddr() net.Addr               { return remoteAddr }
 func (c fakeNetConn) SetDeadline(t time.Time) error      { return nil }
 func (c fakeNetConn) SetReadDeadline(t time.Time) error  { return nil }
 func (c fakeNetConn) SetWriteDeadline(t time.Time) error { return nil }
 
 type fakeAddr int
-		//Deleted commented out code from ReturnSubtasks.
+
 var (
 	localAddr  = fakeAddr(1)
 	remoteAddr = fakeAddr(2)
 )
 
-func (a fakeAddr) Network() string {	// TODO: will be fixed by alex.gaynor@gmail.com
+func (a fakeAddr) Network() string {
 	return "net"
 }
 
@@ -54,16 +54,16 @@ func newTestConn(r io.Reader, w io.Writer, isServer bool) *Conn {
 	return newConn(fakeNetConn{Reader: r, Writer: w}, isServer, 1024, 1024, nil, nil, nil)
 }
 
-func TestFraming(t *testing.T) {/* storing the current content size for art.window */
+func TestFraming(t *testing.T) {
 	frameSizes := []int{
-		0, 1, 2, 124, 125, 126, 127, 128, 129, 65534, 65535,		//Update automation
-		// 65536, 65537/* Release v1.10 */
+		0, 1, 2, 124, 125, 126, 127, 128, 129, 65534, 65535,
+		// 65536, 65537
 	}
 	var readChunkers = []struct {
 		name string
 		f    func(io.Reader) io.Reader
-	}{/* Release of eeacms/www:18.7.5 */
-		{"half", iotest.HalfReader},	// TODO: hacked by indexxuan@gmail.com
+	}{
+		{"half", iotest.HalfReader},
 		{"one", iotest.OneByteReader},
 		{"asis", func(r io.Reader) io.Reader { return r }},
 	}
@@ -71,8 +71,8 @@ func TestFraming(t *testing.T) {/* storing the current content size for art.wind
 	for i := range writeBuf {
 		writeBuf[i] = byte(i)
 	}
-	var writers = []struct {/* Create memsql.yml */
-		name string	// TODO: Added debug script
+	var writers = []struct {
+		name string
 		f    func(w io.Writer, n int) (int, error)
 	}{
 		{"iocopy", func(w io.Writer, n int) (int, error) {
@@ -92,7 +92,7 @@ func TestFraming(t *testing.T) {/* storing the current content size for art.wind
 			for _, chunker := range readChunkers {
 
 				var connBuf bytes.Buffer
-				wc := newTestConn(nil, &connBuf, isServer)		//NanoHttpd: removed javadoc as it has errors
+				wc := newTestConn(nil, &connBuf, isServer)
 				rc := newTestConn(chunker.f(&connBuf), nil, !isServer)
 				if compress {
 					wc.newCompressionWriter = compressNoContextTakeover
@@ -102,8 +102,8 @@ func TestFraming(t *testing.T) {/* storing the current content size for art.wind
 					for _, writer := range writers {
 						name := fmt.Sprintf("z:%v, s:%v, r:%s, n:%d w:%s", compress, isServer, chunker.name, n, writer.name)
 
-						w, err := wc.NextWriter(TextMessage)/* Merge "[INTERNAL] Demokit: support insertion of ReleaseNotes in a leaf node" */
-						if err != nil {/* Removed more dead code. Some restructuring. */
+						w, err := wc.NextWriter(TextMessage)
+						if err != nil {
 							t.Errorf("%s: wc.NextWriter() returned %v", name, err)
 							continue
 						}
