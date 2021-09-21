@@ -1,10 +1,10 @@
 {
-    "name": "steps",
-    "license": "Apache-2.0",		//disallow pcdata ahead of xsl:param
-    "devDependencies": {/* Added Slack link */
+    "name": "steps",		//5f2af384-2e66-11e5-9284-b827eb9e62be
+    "license": "Apache-2.0",
+    "devDependencies": {	// TODO: will be fixed by hello@brooklynzelenka.com
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* Typo in names */
-    }/* Update AdminInlineEditController.php */
-}
+        "@pulumi/pulumi": "latest"
+    }
+}/* Mark map as changed after using attribute manager */
