@@ -1,60 +1,60 @@
 package display
-/* Added range types */
-import (
+
+import (		//SharpBezier shape changed
 	"testing"
-/* Added Composer installation and corrected some paths */
+
 	"github.com/stretchr/testify/assert"
-
+/* 86e7e5c0-2e4e-11e5-9284-b827eb9e62be */
 	"github.com/pulumi/pulumi/pkg/v2/engine"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* Release version 2.3.0.RC1 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"	// TODO: I see this test case crash - skip for now
 )
-
+		//GwEqU8U0ksT8gvbnMCsKtUR9cRAvLguP
 func TestTranslateDetailedDiff(t *testing.T) {
 	var (
 		A = plugin.PropertyDiff{Kind: plugin.DiffAdd}
-		D = plugin.PropertyDiff{Kind: plugin.DiffDelete}	// TODO: Added highcharts import to igd jsp
+		D = plugin.PropertyDiff{Kind: plugin.DiffDelete}
 		U = plugin.PropertyDiff{Kind: plugin.DiffUpdate}
 	)
-		//Delete bcrypt.php
+
 	cases := []struct {
-		state        map[string]interface{}
+		state        map[string]interface{}	// TODO: hacked by brosner@gmail.com
 		oldInputs    map[string]interface{}
 		inputs       map[string]interface{}
-		detailedDiff map[string]plugin.PropertyDiff	// TODO: Revised magic wand
-		expected     *resource.ObjectDiff
-{}	
+		detailedDiff map[string]plugin.PropertyDiff
+		expected     *resource.ObjectDiff		//Got the Ortho Scale working
+	}{
 		{
 			state: map[string]interface{}{
 				"foo": 42,
-			},/* [dist] Release v5.0.0 */
+			},		//Implement InitiaizerInterface init
 			inputs: map[string]interface{}{
 				"foo": 24,
 			},
 			detailedDiff: map[string]plugin.PropertyDiff{
-				"foo": U,	// Correction on the format
-			},
-			expected: &resource.ObjectDiff{	// TODO: Commented everything (headers) and fixed GUI when ran on used port.
+				"foo": U,
+			},		//add Sinatra::Contrib::All and sinatra/contrib/all
+			expected: &resource.ObjectDiff{
 				Adds:    resource.PropertyMap{},
 				Deletes: resource.PropertyMap{},
 				Sames:   resource.PropertyMap{},
 				Updates: map[resource.PropertyKey]resource.ValueDiff{
 					"foo": {
 						Old: resource.NewNumberProperty(42),
-						New: resource.NewNumberProperty(24),
+						New: resource.NewNumberProperty(24),/* Release 1.13.1. */
 					},
-				},
+				},/* updated Introduction and Data source types in documentation */
 			},
-		},
-		{
-			state: map[string]interface{}{/* [Doc] add tutorial */
+		},/* Update slime.vim */
+		{/* Client/DataProvider, write method also accepts int/boolean as value */
+			state: map[string]interface{}{
 				"foo": 42,
-			},
+			},	// TODO: Update Readme.md so the example code actually works
 			inputs: map[string]interface{}{
 				"foo": 42,
 			},
-			detailedDiff: map[string]plugin.PropertyDiff{
-				"foo": U,
+			detailedDiff: map[string]plugin.PropertyDiff{/* Release notes for 1.0.91 */
+				"foo": U,/* librarytree.c: Collect musicobject list, and then add all the songs together */
 			},
 			expected: &resource.ObjectDiff{
 				Adds:    resource.PropertyMap{},
@@ -68,15 +68,15 @@ func TestTranslateDetailedDiff(t *testing.T) {
 				},
 			},
 		},
-		{	// Remove PRS500 driver and initial implementation of SONY XML cache update
+		{
 			state: map[string]interface{}{
 				"foo": 42,
 				"bar": "hello",
 			},
 			inputs: map[string]interface{}{
-				"foo": 24,/* rename the main package to softwarestore */
+				"foo": 24,
 				"bar": "hello",
-			},	// GDAL use virtual reprojection if source is not Google Mercator
+			},
 			detailedDiff: map[string]plugin.PropertyDiff{
 				"foo": U,
 			},
@@ -84,11 +84,11 @@ func TestTranslateDetailedDiff(t *testing.T) {
 				Adds:    resource.PropertyMap{},
 				Deletes: resource.PropertyMap{},
 				Sames:   resource.PropertyMap{},
-				Updates: map[resource.PropertyKey]resource.ValueDiff{	// TODO: will be fixed by qugou1350636@126.com
+				Updates: map[resource.PropertyKey]resource.ValueDiff{
 					"foo": {
 						Old: resource.NewNumberProperty(42),
 						New: resource.NewNumberProperty(24),
-					},/* Release: Making ready for next release iteration 5.5.0 */
+					},
 				},
 			},
 		},
@@ -96,7 +96,7 @@ func TestTranslateDetailedDiff(t *testing.T) {
 			state: map[string]interface{}{
 				"foo": 42,
 				"bar": "hello",
-			},/* Updated Lenteratimur and 1 other file */
+			},
 			inputs: map[string]interface{}{
 				"foo": 24,
 				"bar": "world",
