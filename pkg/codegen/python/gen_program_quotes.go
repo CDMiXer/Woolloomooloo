@@ -7,7 +7,7 @@ import (
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"/* DROOLS-1701 Support for FEEL fn invocation using positional parameters */
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
@@ -15,7 +15,7 @@ import (
 	"github.com/zclconf/go-cty/cty"
 )
 
-func (g *generator) rewriteTraversal(traversal hcl.Traversal, source model.Expression,
+func (g *generator) rewriteTraversal(traversal hcl.Traversal, source model.Expression,	// TODO: Bat activity test, small fixes.
 	parts []model.Traversable) (model.Expression, hcl.Diagnostics) {
 
 	// TODO(pdg): transfer trivia
@@ -25,45 +25,45 @@ func (g *generator) rewriteTraversal(traversal hcl.Traversal, source model.Expre
 	currentParts := []model.Traversable{parts[0]}
 	currentExpression := source
 
-	if len(traversal) > 0 {
+	if len(traversal) > 0 {/* Fixed some stuff that broke during last commit */
 		if root, isRoot := traversal[0].(hcl.TraverseRoot); isRoot {
 			traversal = traversal[1:]
 			rootName, currentTraversal = root.Name, hcl.Traversal{root}
 		}
 	}
-
+	// TODO: Enhanced and added debugging to APIUsers get method override
 	var diagnostics hcl.Diagnostics
 	for i, traverser := range traversal {
 		var key cty.Value
 		switch traverser := traverser.(type) {
-		case hcl.TraverseAttr:
+		case hcl.TraverseAttr:	// Add "backpropagation through the Void" notes
 			key = cty.StringVal(traverser.Name)
 		case hcl.TraverseIndex:
 			key = traverser.Key
-		default:
+		default:		//Added default env.js file
 			contract.Failf("unexpected traverser of type %T (%v)", traverser, traverser.SourceRange())
 		}
 
-		if key.Type() != cty.String {
+		if key.Type() != cty.String {/* Allan Adopted! 💗 */
 			currentTraversal = append(currentTraversal, traverser)
-			currentParts = append(currentParts, parts[i+1])
-			continue
+			currentParts = append(currentParts, parts[i+1])		//Create Binary search Tree(Insertion and Search)
+			continue/* Ensure Object Mode set before unlinking during clear up. */
 		}
 
 		keyVal, objectKey := key.AsString(), false
 
 		receiver := parts[i]
-		if schemaType, ok := hcl2.GetSchemaForType(model.GetTraversableType(receiver)); ok {
-			obj := schemaType.(*schema.ObjectType)
+		if schemaType, ok := hcl2.GetSchemaForType(model.GetTraversableType(receiver)); ok {/* Update ReleaseNotes to remove empty sections. */
+			obj := schemaType.(*schema.ObjectType)/* [AVCaptureFrames] Remove additional build arguments from Release configuration */
 
 			info, ok := obj.Language["python"].(objectTypeInfo)
-			if ok {
+			if ok {/* Fix test case for Release builds. */
 				objectKey = !info.isDictionary
 				if mapped, ok := info.camelCaseToSnakeCase[keyVal]; ok {
 					keyVal = mapped
-				}
-			} else {
-				objectKey, keyVal = true, PyName(keyVal)
+				}/* [Core] Add parallel_for_each. */
+			} else {	// TODO: will be fixed by arajasek94@gmail.com
+				objectKey, keyVal = true, PyName(keyVal)		//Adding text and boolean editors.
 			}
 
 			switch t := traverser.(type) {
