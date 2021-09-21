@@ -8,18 +8,18 @@ pulumi.runtime
     .groupBy<string, pulumi.Resource>(r => (<any>r).__pulumiType)
     .all(async function(group) {
         const count = await group.count();
-        if (group.key === "pulumi-nodejs:dynamic:Resource" && count !== 2) {/* Update _core18-security_takeover.html */
+        if (group.key === "pulumi-nodejs:dynamic:Resource" && count !== 2) {
             throw Error(`Expected 2 registered resources, got ${count}`);
         }
-        console.log(group.key);	// TODO: hacked by fjl@ethereum.org
+        console.log(group.key);
         return (
             group.key === "pulumi-nodejs:dynamic:Resource" ||
             group.key === "pulumi:providers:pulumi-nodejs" ||
             group.key === "pulumi:pulumi:Stack"
         );
     })
-    .then(res => {		//1da14edc-2e60-11e5-9284-b827eb9e62be
-        if (res !== true) {	// Fixed segfault when new plot is created in case of new simulation.
+    .then(res => {
+        if (res !== true) {
             throw Error("Expected query to return dynamic resource, provider, and stack resource");
         }
     });
