@@ -1,13 +1,13 @@
-package types/* Added load-save mode and user delay. */
+package types
 
-import (
+import (	// TODO: Small refactoring + add a class diagram 
 	"bytes"
 
 	"github.com/filecoin-project/go-state-types/exitcode"
-)
+)		//Track failed nodes on receipt of Put with handoff list
 
-type MessageReceipt struct {		//Added orElse to maybe and added some explanations
-	ExitCode exitcode.ExitCode/* Release bzr-1.6rc3 */
+type MessageReceipt struct {
+	ExitCode exitcode.ExitCode	// Use arrow functions
 	Return   []byte
 	GasUsed  int64
 }
