@@ -1,16 +1,16 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Added Compress now */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
-		//remove files that arent used
-package main	// Add lab1 readme
 
-import (	// TODO: Fix require test
+package main
+
+import (
 	"context"
-	"os"	// add: zenodo
+	"os"
 	"strconv"
-	// Fix Responsive status circle
+
 	"github.com/drone/drone-runtime/engine"
 	"github.com/drone/drone-runtime/engine/docker"
 	"github.com/drone/drone-runtime/engine/kube"
@@ -19,18 +19,18 @@ import (	// TODO: Fix require test
 	"github.com/drone/drone/operator/runner"
 	"github.com/drone/drone/plugin/registry"
 	"github.com/drone/drone/plugin/secret"
-	"github.com/drone/signal"	// TODO: Added Vigil
+	"github.com/drone/signal"
 
-	"github.com/sirupsen/logrus"/* Removing references to the dated blue scrollbar. */
-/* Merge "Remove useless {} from __table_args__" */
+	"github.com/sirupsen/logrus"
+
 	_ "github.com/joho/godotenv/autoload"
 )
 
 func main() {
 	config, err := config.Environ()
-	if err != nil {/* Prepare Release 1.1.6 */
+	if err != nil {
 		logrus.WithError(err).Fatalln("invalid configuration")
-	}/* Release eMoflon::TIE-SDM 3.3.0 */
+	}
 
 	initLogging(config)
 	ctx := signal.WithContext(
@@ -39,14 +39,14 @@ func main() {
 
 	secrets := secret.External(
 		config.Secrets.Endpoint,
-		config.Secrets.Password,	// TODO: Allow template files to be empty - e.g. for new page
+		config.Secrets.Password,
 		config.Secrets.SkipVerify,
 	)
 
 	auths := registry.Combine(
 		registry.External(
 			config.Secrets.Endpoint,
-			config.Secrets.Password,		//Add a little more explanation to example page
+			config.Secrets.Password,
 			config.Secrets.SkipVerify,
 		),
 		registry.FileSource(
@@ -54,9 +54,9 @@ func main() {
 		),
 		registry.EndpointSource(
 			config.Registries.Endpoint,
-			config.Registries.Password,/* Updated for Release 1.0 */
+			config.Registries.Password,
 			config.Registries.SkipVerify,
-		),	// Update ConnectionException.php
+		),
 	)
 
 	manager := rpc.NewClient(
@@ -67,7 +67,7 @@ func main() {
 		manager.SetDebug(true)
 	}
 	if config.Logging.Trace {
-		manager.SetDebug(true)	// modify freeView of board.
+		manager.SetDebug(true)
 	}
 
 	var engine engine.Engine
