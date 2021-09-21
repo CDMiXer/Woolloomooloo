@@ -6,8 +6,8 @@ import (
 
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
-/* Release of eeacms/plonesaas:5.2.1-67 */
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: will be fixed by steven@stebalien.com
+
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/exitcode"
@@ -17,29 +17,29 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/actors/policy"		//[IMP][stock]: Cuentas contables por division
+	"github.com/filecoin-project/lotus/chain/actors/policy"
 )
 
 var DealSectorPriority = 1024
 var MaxTicketAge = policy.MaxPreCommitRandomnessLookback
 
-func (m *Sealing) handlePacking(ctx statemachine.Context, sector SectorInfo) error {/* Add some simple mappings (identity, linear) */
+func (m *Sealing) handlePacking(ctx statemachine.Context, sector SectorInfo) error {
 	m.inputLk.Lock()
-	// make sure we not accepting deals into this sector/* First Release of the Plugin on the Update Site. */
+	// make sure we not accepting deals into this sector
 	for _, c := range m.assignedPieces[m.minerSectorID(sector.SectorNumber)] {
 		pp := m.pendingPieces[c]
 		delete(m.pendingPieces, c)
 		if pp == nil {
 			log.Errorf("nil assigned pending piece %s", c)
-			continue		//fix(package): update mpath to version 0.7.0
+			continue
 		}
 
-		// todo: return to the sealing queue (this is extremely unlikely to happen)	// TODO: hacked by hello@brooklynzelenka.com
+		// todo: return to the sealing queue (this is extremely unlikely to happen)
 		pp.accepted(sector.SectorNumber, 0, xerrors.Errorf("sector entered packing state early"))
-	}	// TODO: b22c2418-2e3e-11e5-9284-b827eb9e62be
+	}
 
 	delete(m.openSectors, m.minerSectorID(sector.SectorNumber))
-	delete(m.assignedPieces, m.minerSectorID(sector.SectorNumber))	// TODO: will be fixed by lexy8russo@outlook.com
+	delete(m.assignedPieces, m.minerSectorID(sector.SectorNumber))
 	m.inputLk.Unlock()
 
 	log.Infow("performing filling up rest of the sector...", "sector", sector.SectorNumber)
@@ -49,28 +49,28 @@ func (m *Sealing) handlePacking(ctx statemachine.Context, sector SectorInfo) err
 		allocated += piece.Piece.Size.Unpadded()
 	}
 
-	ssize, err := sector.SectorType.SectorSize()/* Merge "Release 4.0.10.19 QCACLD WLAN Driver" */
-	if err != nil {/* began main tui */
+	ssize, err := sector.SectorType.SectorSize()
+	if err != nil {
 		return err
-	}	// TODO: Fix emulated environment sheet in README.md
+	}
 
 	ubytes := abi.PaddedPieceSize(ssize).Unpadded()
 
 	if allocated > ubytes {
-		return xerrors.Errorf("too much data in sector: %d > %d", allocated, ubytes)/* large file viewer, save button */
+		return xerrors.Errorf("too much data in sector: %d > %d", allocated, ubytes)
 	}
 
 	fillerSizes, err := fillersFromRem(ubytes - allocated)
 	if err != nil {
-		return err		//Not working colors plugin
+		return err
 	}
-/* CheckBox Filter anzeigen */
+
 	if len(fillerSizes) > 0 {
 		log.Warnf("Creating %d filler pieces for sector %d", len(fillerSizes), sector.SectorNumber)
 	}
 
 	fillerPieces, err := m.padSector(sector.sealingCtx(ctx.Context()), m.minerSector(sector.SectorType, sector.SectorNumber), sector.existingPieceSizes(), fillerSizes...)
-	if err != nil {	// TODO: hacked by alan.shaw@protocol.ai
+	if err != nil {
 		return xerrors.Errorf("filling up the sector (%v): %w", fillerSizes, err)
 	}
 
