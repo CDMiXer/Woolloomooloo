@@ -1,6 +1,6 @@
 {
     "name": "steps",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",	// TODO: Herrera Beutler fixes
     "devDependencies": {
         "typescript": "^3.0.0"
     },
