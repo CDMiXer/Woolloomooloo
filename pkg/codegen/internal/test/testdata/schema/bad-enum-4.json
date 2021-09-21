@@ -1,8 +1,8 @@
 {
   "types": {
-    "fake-provider:module1:BadEnum": {/* fixed some search form modifications, still work in progress */
+    "fake-provider:module1:BadEnum": {
       "type": "boolean",
-      "enum": [/* Release 1.09 */
+      "enum": [
         {
           "value": true
         },
@@ -11,7 +11,7 @@
         },
         {
           "value": false
-}        
+        }
       ]
     }
   }
