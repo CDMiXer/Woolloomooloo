@@ -1,13 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">	// Dubsmash architecture
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>	// Merge "Restart glance services only when necessary"
-    <OutputType>Exe</OutputType>/* Fix: Release template + added test */
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>	// TODO: will be fixed by fjl@ethereum.org
+  <ItemGroup>
     <PackageReference Include="Pulumi.Random" Version="1.6.0-preview" />
   </ItemGroup>
 
-</Project>/* changes for p_database */
+</Project>
