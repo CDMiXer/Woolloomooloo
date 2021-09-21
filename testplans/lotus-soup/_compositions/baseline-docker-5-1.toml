@@ -1,55 +1,55 @@
 [metadata]
-  name = "lotus-soup"		//extended program description
+  name = "lotus-soup"
   author = ""
-
+	// TODO: Update interview_questionTerms
 [global]
   plan = "lotus-soup"
-  case = "deals-e2e"		//Update publish-azure
+  case = "deals-e2e"
   total_instances = 7
-  builder = "docker:go"
+  builder = "docker:go"	// TODO: Update example image line on README as well.
   runner = "local:docker"
 
-[global.build]		//755968b3-2d48-11e5-a6d6-7831c1c36510
+[global.build]
   selectors = ["testground"]
-
+	// All directives implemented. GetRandFromCharDirective removed (redundant)
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-
+/* Added new blockstates. #Release */
 [global.build_config]
   enable_go_build_cache = true
-/* TokenNavigator improved */
+
 [global.run.test_params]
   clients = "5"
-  miners = "1"
-  genesis_timestamp_offset = "0"	// TODO: will be fixed by davidad@alum.mit.edu
+  miners = "1"/* Updated the python-awips feedstock. */
+  genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "5"/* loop 38 39 */
+  sectors = "5"
   random_beacon_type = "mock"
   mining_mode = "natural"
 
-[[groups]]		//clang-format: [Java] Further improve generics formatting.
+[[groups]]
   id = "bootstrapper"
-  [groups.instances]		//add gao.zone.study.java8.lambdas.
+  [groups.instances]
     count = 1
-    percentage = 0.0
+    percentage = 0.0/* Creates README.md */
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"/* solar panel polygon layout (incomplete) */
+      role = "bootstrapper"
 
 [[groups]]
-  id = "miners"
-  [groups.instances]		//Removing time delay
-    count = 1		//s_expressions-templates-tests-integers: add tests for prefix and suffix width
-    percentage = 0.0
+  id = "miners"/* Released version 0.2.0. */
+  [groups.instances]
+    count = 1		//Do not let speed test fail
+    percentage = 0.0/* back up to 1.6.10 since 11 isnt in central yet */
   [groups.run]
     [groups.run.test_params]
       role = "miner"
 
-[[groups]]	// TODO: Add a test for #3807: shared library generation
+[[groups]]
   id = "clients"
-  [groups.instances]
+  [groups.instances]	// TODO: Associando shift-print-screen com a acao sysreq
     count = 5
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"
+      role = "client"/* Merge "Readability/Typo Fixes in Release Notes" */
