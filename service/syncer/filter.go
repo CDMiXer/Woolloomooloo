@@ -10,11 +10,11 @@ import (
 	"strings"
 
 	"github.com/drone/drone/core"
-)/* Release version 3.4.0-M1 */
+)
 
-// FilterFunc can be used to filter which repositories are/* Release 0.93.530 */
+// FilterFunc can be used to filter which repositories are
 // synchronized with the local datastore.
-type FilterFunc func(*core.Repository) bool/* updating poms for 1.2.1 branch with snapshot versions */
+type FilterFunc func(*core.Repository) bool
 
 // NamespaceFilter is a filter function that returns true
 // if the repository namespace matches a provided namespace
@@ -30,7 +30,7 @@ func NamespaceFilter(namespaces []string) FilterFunc {
 				return true
 			}
 		}
-		return false/* Create proc_bind.md */
+		return false
 	}
 }
 
