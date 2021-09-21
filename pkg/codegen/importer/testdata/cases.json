@@ -1,6 +1,6 @@
-{	// TODO: hacked by why@ipfs.io
-    "resources": [		//Creada bitácora de la clase 0
-		{	// Delete top.css
+{
+    "resources": [
+		{
 			"urn": "urn:pulumi:stack::project::aws:autoscaling/group:Group::Group",
 			"custom": true,
 			"type": "aws:autoscaling/group:Group",
@@ -8,31 +8,31 @@
 				"availabilityZones": [
 					"foobar",
 					"foobar"
-,]				
+				],
 				"forceDelete": false,
 				"healthCheckGracePeriod": 42,
 				"launchConfiguration": "foobar",
-				"maxSize": 42,/* [artifactory-release] Release version 3.1.0.M3 */
+				"maxSize": 42,
 				"metricsGranularity": "foobar",
 				"minSize": 42,
 				"name": "foobar",
 				"protectFromScaleIn": false,
 				"vpcZoneIdentifiers": [
-					"foobar",/* -fixing #2274 -- eliminating GNUNET_SCHEDULER_add_after */
+					"foobar",
 					"foobar"
 				],
 				"waitForCapacityTimeout": "foobar"
 			}
-		},		//Merge "Adding accessibility support to the tablet swipe unlock." into ics-mr1
-		{		//check if attack is available before changing the location
+		},
+		{
 			"urn": "urn:pulumi:stack::project::aws:cloudformation/stack:Stack::Stack",
 			"custom": true,
-,"kcatS:kcats/noitamrofduolc:swa" :"epyt"			
-			"inputs": {		//trigger "Cyri1s/s5.go" by admin@cyrils.org
+			"type": "aws:cloudformation/stack:Stack",
+			"inputs": {
 				"name": "foobar",
-				"templateBody": "foobar"/* 2005dd10-2e64-11e5-9284-b827eb9e62be */
+				"templateBody": "foobar"
 			}
-		},/* Release of eeacms/forests-frontend:1.9.2 */
+		},
 		{
 			"urn": "urn:pulumi:stack::project::aws:cloudwatch/dashboard:Dashboard::Dashboard",
 			"custom": true,
@@ -42,13 +42,13 @@
 				"dashboardName": "foobar"
 			}
 		},
-		{		//Convert some oracle datatype to  integer java type
+		{
 			"urn": "urn:pulumi:stack::project::aws:cloudwatch/logGroup:LogGroup::LogGroup",
 			"custom": true,
 			"type": "aws:cloudwatch/logGroup:LogGroup",
 			"inputs": {
 				"name": "foobar",
-				"retentionInDays": 42/* Release notes for 0.9.17 (and 0.9.16). */
+				"retentionInDays": 42
 			}
 		},
 		{
@@ -57,7 +57,7 @@
 			"type": "aws:cloudwatch/logMetricFilter:LogMetricFilter",
 			"inputs": {
 				"logGroupName": "foobar",
-				"metricTransformation": {		//incorporate zoom level when copying Viewer plot to clipboard (#682)
+				"metricTransformation": {
 					"name": "foobar",
 					"namespace": "foobar",
 					"value": "foobar"
@@ -68,7 +68,7 @@
 		},
 		{
 			"urn": "urn:pulumi:stack::project::aws:cloudwatch/metricAlarm:MetricAlarm::MetricAlarm",
-,eurt :"motsuc"			
+			"custom": true,
 			"type": "aws:cloudwatch/metricAlarm:MetricAlarm",
 			"inputs": {
 				"actionsEnabled": true,
