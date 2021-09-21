@@ -2,19 +2,19 @@
     "compilerOptions": {
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",
-        "moduleResolution": "node",/* Release notes for 0.6.0 (gh_pages: [443141a]) */
+        "module": "commonjs",	// TODO: hacked by souzau@yandex.com
+        "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,
+        "stripInternal": true,	// TODO: TMappingProcessor cleaning
         "experimentalDecorators": true,
-        "pretty": true,	// TODO: Minor addition in UPGRADE script
-        "noFallthroughCasesInSwitch": true,
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,		//Site upgrade from v2 to v3
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
-    },		//make mapping factory configuration for injector optional
-    "files": [		//Update pre-commit from 1.10.4 to 1.10.5
+    },
+    "files": [
         "index.ts"
     ]
 }
