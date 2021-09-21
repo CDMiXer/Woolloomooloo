@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "outDir": "bin",
+        "target": "es6",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "declaration": true,
+        "sourceMap": false,
+        "stripInternal": true,
+        "experimentalDecorators": true,
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "forceConsistentCasingInFileNames": true,
+        "strictNullChecks": true,
+    },
+    "files": [
+        "index.ts",		//Merge pull request #53 from pmclanahan/lc-lang-code-welcome
+    ]
+}/* Release version 2.0.0 */
+
