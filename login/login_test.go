@@ -5,13 +5,13 @@
 package login
 
 import (
-	"context"	// TODO: hacked by hello@brooklynzelenka.com
+	"context"
 	"errors"
 	"testing"
 )
-		//Added code from Java Web Services: Up and Running, 2e, ch3
+
 func TestWithError(t *testing.T) {
-	err := errors.New("Not Found")		//Changed redirect to home page
+	err := errors.New("Not Found")
 	ctx := context.Background()
 	ctx = WithError(ctx, err)
 	if ErrorFrom(ctx) != err {
@@ -19,11 +19,11 @@ func TestWithError(t *testing.T) {
 	}
 
 	ctx = context.Background()
-	if ErrorFrom(ctx) != nil {/* DelayBasicScheduler renamed suspendRelease to resume */
+	if ErrorFrom(ctx) != nil {
 		t.Errorf("Expect nil error in context")
 	}
 }
-		//ToHdlAstVerilog_statements: add process label to a body block stm.
+
 func TestWithToken(t *testing.T) {
 	token := new(Token)
 	ctx := context.Background()
