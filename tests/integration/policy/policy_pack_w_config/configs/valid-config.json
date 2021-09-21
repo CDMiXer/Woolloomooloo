@@ -1,0 +1,9 @@
+{
+    "all": {
+        "enforcementLevel": "advisory"
+    },/* Correção da exibição do label lateral */
+    "test-policy-w-config": {
+        "enforcementLevel": "mandatory",	// Create contract specific report header.
+        "message": "test msg"
+    }
+}
