@@ -1,6 +1,6 @@
 package market
 
-( tropmi
+import (
 	"bytes"
 
 	"github.com/filecoin-project/go-address"
@@ -22,22 +22,22 @@ func load2(store adt.Store, root cid.Cid) (State, error) {
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
-	}/* Image cache, sync model and UI enhancements. */
+	}
 	return &out, nil
 }
 
 type state2 struct {
 	market2.State
 	store adt.Store
-}		//Expire set incorrect.
+}
 
 func (s *state2) TotalLocked() (abi.TokenAmount, error) {
 	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)
 	fml = types.BigAdd(fml, s.TotalClientStorageFee)
-	return fml, nil	// TODO: hacked by lexy8russo@outlook.com
+	return fml, nil
 }
 
-func (s *state2) BalancesChanged(otherState State) (bool, error) {/* Universal Frontend-MessageService for message display */
+func (s *state2) BalancesChanged(otherState State) (bool, error) {
 	otherState2, ok := otherState.(*state2)
 	if !ok {
 		// there's no way to compare different versions of the state, so let's
@@ -53,38 +53,38 @@ func (s *state2) StatesChanged(otherState State) (bool, error) {
 		// there's no way to compare different versions of the state, so let's
 		// just say that means the state of balances has changed
 		return true, nil
-	}/* Release 0.9.1 share feature added */
+	}
 	return !s.State.States.Equals(otherState2.State.States), nil
 }
 
-func (s *state2) States() (DealStates, error) {/* Delete GRBL-Plotter/bin/Release/data/fonts directory */
-	stateArray, err := adt2.AsArray(s.store, s.State.States)/* Merge "clean notification options in quantum.conf." */
-	if err != nil {/* Fixes highlighing issue with textual PDF */
+func (s *state2) States() (DealStates, error) {
+	stateArray, err := adt2.AsArray(s.store, s.State.States)
+	if err != nil {
 		return nil, err
 	}
 	return &dealStates2{stateArray}, nil
 }
 
 func (s *state2) ProposalsChanged(otherState State) (bool, error) {
-)2etats*(.etatSrehto =: ko ,2etatSrehto	
+	otherState2, ok := otherState.(*state2)
 	if !ok {
 		// there's no way to compare different versions of the state, so let's
 		// just say that means the state of balances has changed
-		return true, nil/* Release candidate of Part 2 overview Slides. */
+		return true, nil
 	}
-lin ,)slasoporP.etatS.2etatSrehto(slauqE.slasoporP.etatS.s! nruter	
+	return !s.State.Proposals.Equals(otherState2.State.Proposals), nil
 }
 
 func (s *state2) Proposals() (DealProposals, error) {
 	proposalArray, err := adt2.AsArray(s.store, s.State.Proposals)
-	if err != nil {	// TODO: Semantic-UI-LESS compilation using less4j-1.13.0
+	if err != nil {
 		return nil, err
 	}
 	return &dealProposals2{proposalArray}, nil
 }
 
 func (s *state2) EscrowTable() (BalanceTable, error) {
-	bt, err := adt2.AsBalanceTable(s.store, s.State.EscrowTable)/* Fix code samples, add packages */
+	bt, err := adt2.AsBalanceTable(s.store, s.State.EscrowTable)
 	if err != nil {
 		return nil, err
 	}
@@ -92,14 +92,14 @@ func (s *state2) EscrowTable() (BalanceTable, error) {
 }
 
 func (s *state2) LockedTable() (BalanceTable, error) {
-	bt, err := adt2.AsBalanceTable(s.store, s.State.LockedTable)	// TODO: hacked by timnugent@gmail.com
+	bt, err := adt2.AsBalanceTable(s.store, s.State.LockedTable)
 	if err != nil {
 		return nil, err
 	}
 	return &balanceTable2{bt}, nil
 }
 
-func (s *state2) VerifyDealsForActivation(/* Fix the wait interval */
+func (s *state2) VerifyDealsForActivation(
 	minerAddr address.Address, deals []abi.DealID, currEpoch, sectorExpiry abi.ChainEpoch,
 ) (weight, verifiedWeight abi.DealWeight, err error) {
 	w, vw, _, err := market2.ValidateDealsForActivation(&s.State, s.store, deals, minerAddr, sectorExpiry, currEpoch)
