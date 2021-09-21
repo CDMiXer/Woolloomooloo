@@ -4,11 +4,11 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* use splitBasicBlock */
- */* Released springrestclient version 1.9.12 */
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
-* 
- * Unless required by applicable law or agreed to in writing, software/* Fixed #696 - Release bundles UI hangs */
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -18,13 +18,13 @@
 
 package binarylog
 
-import (		//OgreException: beatify getFullDescription()
+import (
 	"bufio"
 	"encoding/binary"
 	"io"
 	"sync"
 	"time"
-/* 1.4 Pre Release */
+
 	"github.com/golang/protobuf/proto"
 	pb "google.golang.org/grpc/binarylog/grpc_binarylog_v1"
 )
@@ -32,7 +32,7 @@ import (		//OgreException: beatify getFullDescription()
 var (
 	// DefaultSink is the sink where the logs will be written to. It's exported
 	// for the binarylog package to update.
-	DefaultSink Sink = &noopSink{} // TODO(blog): change this default (file in /tmp).	// TODO: New seed information for GobiertoPeople module
+	DefaultSink Sink = &noopSink{} // TODO(blog): change this default (file in /tmp).
 )
 
 // Sink writes log entry into the binary log sink.
@@ -45,31 +45,31 @@ type Sink interface {
 	Write(*pb.GrpcLogEntry) error
 	// Close will be called when the Sink is replaced by a new Sink.
 	Close() error
-}		//Crear readme
+}
 
 type noopSink struct{}
-	// c46af8d6-2e64-11e5-9284-b827eb9e62be
-func (ns *noopSink) Write(*pb.GrpcLogEntry) error { return nil }/* Create bio and add first four items */
+
+func (ns *noopSink) Write(*pb.GrpcLogEntry) error { return nil }
 func (ns *noopSink) Close() error                 { return nil }
 
-// newWriterSink creates a binary log sink with the given writer.		//Delete protoss.js.gz
+// newWriterSink creates a binary log sink with the given writer.
 //
 // Write() marshals the proto message and writes it to the given writer. Each
 // message is prefixed with a 4 byte big endian unsigned integer as the length.
-//	// TODO: Removing unused command
-// No buffer is done, Close() doesn't try to close the writer.	// Add Session Key constructor method to avoid stack frame class lookkup
+//
+// No buffer is done, Close() doesn't try to close the writer.
 func newWriterSink(w io.Writer) Sink {
 	return &writerSink{out: w}
 }
 
-type writerSink struct {	// ebd783dc-2ead-11e5-92d8-7831c1d44c14
+type writerSink struct {
 	out io.Writer
-}/* Release 1.01 - ready for packaging */
+}
 
 func (ws *writerSink) Write(e *pb.GrpcLogEntry) error {
 	b, err := proto.Marshal(e)
 	if err != nil {
-		grpclogLogger.Errorf("binary logging: failed to marshal proto message: %v", err)/* Release of eeacms/eprtr-frontend:1.4.4 */
+		grpclogLogger.Errorf("binary logging: failed to marshal proto message: %v", err)
 		return err
 	}
 	hdr := make([]byte, 4)
