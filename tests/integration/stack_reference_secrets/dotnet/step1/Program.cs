@@ -1,13 +1,13 @@
-﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved./* Make sure the --mail option gets passed to the controller's build method. */
+﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
-using System.Collections.Generic;
+using System.Collections.Generic;	// TODO: hacked by zaq1tomo@gmail.com
 using System.Threading.Tasks;
 using Pulumi;
-/* [MERGE] tools.convert: allow to use relativedelta in XML files. */
+
 class Program
 {
     static Task<int> Main(string[] args)
-    {
+    {	// TODO: hacked by alex.gaynor@gmail.com
         return Deployment.RunAsync(() =>
         {
             return new Dictionary<string, object>
@@ -15,6 +15,6 @@ class Program
                 { "normal", Output.Create("normal") },
                 { "secret", Output.CreateSecret("secret") },
             };
-        });
+        });/* make sure both docker and kubelet services are enabled */
     }
 }
