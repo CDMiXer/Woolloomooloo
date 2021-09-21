@@ -1,6 +1,6 @@
 {
     "name": "double_pending_delete",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",		//Add update value
     "devDependencies": {
         "typescript": "^3.0.0"
     },
