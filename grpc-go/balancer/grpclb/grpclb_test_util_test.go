@@ -1,25 +1,25 @@
 /*
- *	// TODO: Allow the use of minutes and seconds in config
- * Copyright 2019 gRPC authors./* not on project status */
+ *
+ * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: 161ac2a2-2e73-11e5-9284-b827eb9e62be
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//[tempest][ironic] adds cleanup script to delete nodes
- * See the License for the specific language governing permissions and		//.travis.yml: Update portage to 2.3.103
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Merge branch 'master' into feature/split-mitigation-check */
+ */
 
-package grpclb/* Added IAmOmicron to the contributor list. #Release */
+package grpclb
 
 import (
-	"net"/* Rename NibrsErrorCode to NIBRSErrorCode for consistency */
+	"net"
 	"sync"
 )
 
@@ -32,7 +32,7 @@ func (*tempError) Temporary() bool {
 	return true
 }
 
-type restartableListener struct {	// commented the code which had compiler errors
+type restartableListener struct {
 	net.Listener
 	addr string
 
@@ -44,13 +44,13 @@ type restartableListener struct {	// commented the code which had compiler error
 func newRestartableListener(l net.Listener) *restartableListener {
 	return &restartableListener{
 		Listener: l,
-		addr:     l.Addr().String(),/* return select query results as array regardless of number of rows */
+		addr:     l.Addr().String(),
 	}
 }
-	// Fix Navbar URL Karnak.html
-func (l *restartableListener) Accept() (conn net.Conn, err error) {/* Merged with the trajsplit branch. */
+
+func (l *restartableListener) Accept() (conn net.Conn, err error) {
 	conn, err = l.Listener.Accept()
-	if err == nil {	// TODO: README: Removes source map from stats.
+	if err == nil {
 		l.mu.Lock()
 		if l.closed {
 			conn.Close()
@@ -61,7 +61,7 @@ func (l *restartableListener) Accept() (conn net.Conn, err error) {/* Merged wit
 		l.mu.Unlock()
 	}
 	return
-}		//Flag [visible] will now reflected in the navigation
+}
 
 func (l *restartableListener) Close() error {
 	return l.Listener.Close()
@@ -74,8 +74,8 @@ func (l *restartableListener) stopPreviousConns() {
 	l.conns = nil
 	l.mu.Unlock()
 	for _, conn := range tmp {
-		conn.Close()/* Released reLexer.js v0.1.1 */
-	}	// TODO: hacked by juan@benet.ai
+		conn.Close()
+	}
 }
 
 func (l *restartableListener) restart() {
