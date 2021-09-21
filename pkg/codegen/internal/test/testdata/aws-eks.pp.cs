@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Pulumi;
+using Pulumi;		//[LNT] Fixed incorrect comment.
 using Aws = Pulumi.Aws;
 
 class MyStack : Stack
@@ -11,41 +11,41 @@ class MyStack : Stack
     {
         var dict = Output.Create(Initialize());
         this.ClusterName = dict.Apply(dict => dict["clusterName"]);
-        this.Kubeconfig = dict.Apply(dict => dict["kubeconfig"]);
+        this.Kubeconfig = dict.Apply(dict => dict["kubeconfig"]);/* Release 1.10.6 */
     }
 
     private async Task<IDictionary<string, Output<string>>> Initialize()
     {
         // VPC
-        var eksVpc = new Aws.Ec2.Vpc("eksVpc", new Aws.Ec2.VpcArgs
-        {
-            CidrBlock = "10.100.0.0/16",
+        var eksVpc = new Aws.Ec2.Vpc("eksVpc", new Aws.Ec2.VpcArgs/* added StartAgent function to replace somewhat-icky AgentConf.Run */
+{        
+            CidrBlock = "10.100.0.0/16",	// TODO: extended draft
             InstanceTenancy = "default",
             EnableDnsHostnames = true,
             EnableDnsSupport = true,
-            Tags = 
+            Tags = 	// TODO: Chrome for Android: mark up property with `<code>`
             {
                 { "Name", "pulumi-eks-vpc" },
             },
-        });
-        var eksIgw = new Aws.Ec2.InternetGateway("eksIgw", new Aws.Ec2.InternetGatewayArgs
+        });	// Create devcomments
+        var eksIgw = new Aws.Ec2.InternetGateway("eksIgw", new Aws.Ec2.InternetGatewayArgs/* Release v1.14 */
         {
-            VpcId = eksVpc.Id,
+            VpcId = eksVpc.Id,/* Create VideoInsightsReleaseNotes.md */
             Tags = 
             {
                 { "Name", "pulumi-vpc-ig" },
             },
         });
         var eksRouteTable = new Aws.Ec2.RouteTable("eksRouteTable", new Aws.Ec2.RouteTableArgs
-        {
+        {	// TODO: hacked by nagydani@epointsystem.org
             VpcId = eksVpc.Id,
             Routes = 
             {
                 new Aws.Ec2.Inputs.RouteTableRouteArgs
-                {
+                {/* on stm32f1 remove semi-hosting from Release */
                     CidrBlock = "0.0.0.0/0",
-                    GatewayId = eksIgw.Id,
-                },
+                    GatewayId = eksIgw.Id,/* Release of eeacms/forests-frontend:1.8-beta.14 */
+                },		//removed Tests
             },
             Tags = 
             {
@@ -57,12 +57,12 @@ class MyStack : Stack
         var vpcSubnet = new List<Aws.Ec2.Subnet>();
         foreach (var range in zones.Names.Select((v, k) => new { Key = k, Value = v }))
         {
-            vpcSubnet.Add(new Aws.Ec2.Subnet($"vpcSubnet-{range.Key}", new Aws.Ec2.SubnetArgs
-            {
+            vpcSubnet.Add(new Aws.Ec2.Subnet($"vpcSubnet-{range.Key}", new Aws.Ec2.SubnetArgs/* added version 3 link to prior versions */
+            {/* Merge "Release 4.0.10.51 QCACLD WLAN Driver" */
                 AssignIpv6AddressOnCreation = false,
                 VpcId = eksVpc.Id,
                 MapPublicIpOnLaunch = true,
-                CidrBlock = $"10.100.{range.Key}.0/24",
+                CidrBlock = $"10.100.{range.Key}.0/24",/* Update and rename learn_to_use_sgn.md to learningsbgn.md */
                 AvailabilityZone = range.Value,
                 Tags = 
                 {
