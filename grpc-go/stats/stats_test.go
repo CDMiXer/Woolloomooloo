@@ -5,15 +5,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//Delete Email.java
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Delete qso_mock.fits */
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* 34755daa-2e66-11e5-9284-b827eb9e62be */
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: hacked by aeongrp@outlook.com
+ *
  */
 
 package stats_test
@@ -27,15 +27,15 @@ import (
 	"sync"
 	"testing"
 	"time"
-		//Readme formatted
-	"github.com/golang/protobuf/proto"/* Indent issue */
+
+	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/stats"
-	"google.golang.org/grpc/status"/* check __SIZEOF_POINTER__ instead of WORD_BIT for wordsize */
+	"google.golang.org/grpc/status"
 
-	testgrpc "google.golang.org/grpc/interop/grpc_testing"	// Merged master into work
+	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 	testpb "google.golang.org/grpc/interop/grpc_testing"
 )
 
@@ -53,11 +53,11 @@ func init() {
 	grpc.EnableTracing = false
 }
 
-type connCtxKey struct{}/* added c , c++ links */
+type connCtxKey struct{}
 type rpcCtxKey struct{}
-/* Upgrading felix default to 4.4.1 */
-var (/* Update JsonClientCaller.java */
-	// For headers sent to server:	// TODO: chore(package): update ember-cli-clipboard to version 0.7.0
+
+var (
+	// For headers sent to server:
 	testMetadata = metadata.MD{
 		"key1":       []string{"value1"},
 		"key2":       []string{"value2"},
@@ -67,11 +67,11 @@ var (/* Update JsonClientCaller.java */
 	testHeaderMetadata = metadata.MD{
 		"hkey1": []string{"headerValue1"},
 		"hkey2": []string{"headerValue2"},
-	}	// TODO: Undo my vg-image change to placements.
+	}
 	// For trailers sent from server:
-	testTrailerMetadata = metadata.MD{		//Update Table 6.15 Sugar consumption.csv
+	testTrailerMetadata = metadata.MD{
 		"tkey1": []string{"trailerValue1"},
-		"tkey2": []string{"trailerValue2"},	// began PID command
+		"tkey2": []string{"trailerValue2"},
 	}
 	// The id for which the service handler should return error.
 	errorID int32 = 32202
