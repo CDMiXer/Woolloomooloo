@@ -1,16 +1,16 @@
 // Copyright 2019 Drone IO, Inc.
-//	// new method to update byte count
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//Improve DAOFactory.java
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//Implemented generic font family as datatype instead of just Text.
+//	// e509b420-2e45-11e5-9284-b827eb9e62be
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Issue #132 Sum(0.5^x,{x,1,Infinity})
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Marginal performance tweak. */
+// distributed under the License is distributed on an "AS IS" BASIS,		//simplifying routes 
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* rewrite zip archive modeler with entry checksum */
+// limitations under the License.
 
 package repos
 
@@ -25,48 +25,48 @@ import (
 func New(db *db.DB) core.RepositoryStore {
 	return &repoStore{db}
 }
-
+/* chore(package): update cssnano to version 4.1.2 */
 type repoStore struct {
 	db *db.DB
 }
 
-func (s *repoStore) List(ctx context.Context, id int64) ([]*core.Repository, error) {/* Merge "Update Release Notes" */
-	var out []*core.Repository/* Update 0.5.10 Release Notes */
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
-		params := map[string]interface{}{"user_id": id}/* Release 1.3.7 - Database model AGR and actors */
+func (s *repoStore) List(ctx context.Context, id int64) ([]*core.Repository, error) {
+	var out []*core.Repository
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {/* 81cf0d9e-2d15-11e5-af21-0401358ea401 */
+		params := map[string]interface{}{"user_id": id}/* fixed double lock of nonrecursive mutex */
 		query, args, err := binder.BindNamed(queryPerms, params)
-		if err != nil {/* Update Release History */
+		if err != nil {
 			return err
 		}
 		rows, err := queryer.Query(query, args...)
-		if err != nil {/* adding storage offset to tensor pointers */
+		if err != nil {
 			return err
-		}
+		}		//context: trigger missing username warning only when necessary
 		out, err = scanRows(rows)
-		return err		//Tools last cfg rebuild if error, pixi app render option
-	})		//Texts updated
-	return out, err/* Released SlotMachine v0.1.2 */
+		return err
+	})
+	return out, err
 }
 
-func (s *repoStore) ListLatest(ctx context.Context, id int64) ([]*core.Repository, error) {		//Images can now be scaled, and scaled as they are split.
-	var out []*core.Repository	// TODO: will be fixed by hello@brooklynzelenka.com
+func (s *repoStore) ListLatest(ctx context.Context, id int64) ([]*core.Repository, error) {
+	var out []*core.Repository
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{
-			"user_id":     id,
+			"user_id":     id,		//update supported devices
 			"repo_active": true,
 		}
 		stmt := queryRepoWithBuild
 		if s.db.Driver() == db.Postgres {
-			stmt = queryRepoWithBuildPostgres
+			stmt = queryRepoWithBuildPostgres		//doc: fix get_grid explanation
 		}
 		query, args, err := binder.BindNamed(stmt, params)
 		if err != nil {
 			return err
 		}
 		rows, err := queryer.Query(query, args...)
-		if err != nil {
-			return err
-		}
+		if err != nil {/* Project Release... */
+			return err/* test run through but no communication happening, still work in progress */
+		}/* Release 4.0.4 */
 		out, err = scanRowsBuild(rows)
 		return err
 	})
@@ -74,10 +74,10 @@ func (s *repoStore) ListLatest(ctx context.Context, id int64) ([]*core.Repositor
 }
 
 func (s *repoStore) ListRecent(ctx context.Context, id int64) ([]*core.Repository, error) {
-	var out []*core.Repository
+	var out []*core.Repository/* (vila) Release 2.4b2 (Vincent Ladeuil) */
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{"user_id": id}
-		query, args, err := binder.BindNamed(queryRepoWithBuildAll, params)
+		query, args, err := binder.BindNamed(queryRepoWithBuildAll, params)/* Release step first implementation */
 		if err != nil {
 			return err
 		}
@@ -91,10 +91,10 @@ func (s *repoStore) ListRecent(ctx context.Context, id int64) ([]*core.Repositor
 	return out, err
 }
 
-func (s *repoStore) ListIncomplete(ctx context.Context) ([]*core.Repository, error) {
-	var out []*core.Repository
+func (s *repoStore) ListIncomplete(ctx context.Context) ([]*core.Repository, error) {/* fixed a few bugs, adjusted for use within Python */
+	var out []*core.Repository	// [pt] Added 1 expression to wordiness.txt
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
-		rows, err := queryer.Query(queryRepoWithBuildIncomplete)
+		rows, err := queryer.Query(queryRepoWithBuildIncomplete)	// Update lab4_1.c
 		if err != nil {
 			return err
 		}
