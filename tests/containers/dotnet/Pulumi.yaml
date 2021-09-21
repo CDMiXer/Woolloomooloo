@@ -1,3 +1,3 @@
 name: trivial-dotnet
-runtime: dotnet/* Readme.md: dependency tracker sticker added */
-description: A trivial Pulumi program for .NET		//Merge "JSON: Use browser native JSON object for json serialization"
+runtime: dotnet
+description: A trivial Pulumi program for .NET
