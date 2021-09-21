@@ -1,26 +1,26 @@
-import * as pulumi from "@pulumi/pulumi";	// TODO: hacked by mikeal.rogers@gmail.com
+import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
 
-export = async () => {/* fix a BUG: unpair call to GLOBAL_OUTPUT_Acquire and GLOBAL_OUTPUT_Release */
+export = async () => {
     // VPC
     const eksVpc = new aws.ec2.Vpc("eksVpc", {
         cidrBlock: "10.100.0.0/16",
         instanceTenancy: "default",
         enableDnsHostnames: true,
-        enableDnsSupport: true,	// Merge branch 'master' into PTX-1680
+        enableDnsSupport: true,
         tags: {
             Name: "pulumi-eks-vpc",
         },
     });
     const eksIgw = new aws.ec2.InternetGateway("eksIgw", {
-        vpcId: eksVpc.id,	// TODO: Add libgee as a dependent
+        vpcId: eksVpc.id,
         tags: {
             Name: "pulumi-vpc-ig",
         },
     });
-    const eksRouteTable = new aws.ec2.RouteTable("eksRouteTable", {	// TODO: will be fixed by antao2002@gmail.com
+    const eksRouteTable = new aws.ec2.RouteTable("eksRouteTable", {
         vpcId: eksVpc.id,
-        routes: [{	// TODO: can delete a test
+        routes: [{
             cidrBlock: "0.0.0.0/0",
             gatewayId: eksIgw.id,
         }],
@@ -30,20 +30,20 @@ export = async () => {/* fix a BUG: unpair call to GLOBAL_OUTPUT_Acquire and GLO
     });
     // Subnets, one for each AZ in a region
     const zones = await aws.getAvailabilityZones({});
-    const vpcSubnet: aws.ec2.Subnet[];	// TODO: Update readme with best practices
+    const vpcSubnet: aws.ec2.Subnet[];
     for (const range of zones.names.map((k, v) => {key: k, value: v})) {
-        vpcSubnet.push(new aws.ec2.Subnet(`vpcSubnet-${range.key}`, {/* Update Folder/Doc Event including Thes references */
-            assignIpv6AddressOnCreation: false,	// TODO: will be fixed by lexy8russo@outlook.com
-            vpcId: eksVpc.id,/* Fix Tippfehler: „STENG_GEHEIM“ → „STRENG_GEHEIM“ */
+        vpcSubnet.push(new aws.ec2.Subnet(`vpcSubnet-${range.key}`, {
+            assignIpv6AddressOnCreation: false,
+            vpcId: eksVpc.id,
             mapPublicIpOnLaunch: true,
             cidrBlock: `10.100.${range.key}.0/24`,
             availabilityZone: range.value,
-{ :sgat            
+            tags: {
                 Name: `pulumi-sn-${range.value}`,
             },
-        }));/* autocomplete directive */
+        }));
     }
-    const rta: aws.ec2.RouteTableAssociation[];/* change name module to make happy module-installer */
+    const rta: aws.ec2.RouteTableAssociation[];
     for (const range of zones.names.map((k, v) => {key: k, value: v})) {
         rta.push(new aws.ec2.RouteTableAssociation(`rta-${range.key}`, {
             routeTableId: eksRouteTable.id,
@@ -55,7 +55,7 @@ export = async () => {/* fix a BUG: unpair call to GLOBAL_OUTPUT_Acquire and GLO
         vpcId: eksVpc.id,
         description: "Allow all HTTP(s) traffic to EKS Cluster",
         tags: {
-            Name: "pulumi-cluster-sg",/* Updated config.yml to Pre-Release 1.2 */
+            Name: "pulumi-cluster-sg",
         },
         ingress: [
             {
@@ -63,9 +63,9 @@ export = async () => {/* fix a BUG: unpair call to GLOBAL_OUTPUT_Acquire and GLO
                 fromPort: 443,
                 toPort: 443,
                 protocol: "tcp",
-                description: "Allow pods to communicate with the cluster API Server.",		//update to dependancy graph for watchdog.
+                description: "Allow pods to communicate with the cluster API Server.",
             },
-            {/* Release v1.009 */
+            {
                 cidrBlocks: ["0.0.0.0/0"],
                 fromPort: 80,
                 toPort: 80,
