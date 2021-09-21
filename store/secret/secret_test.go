@@ -1,25 +1,25 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Merge "Use listener instead of AutoSuspendTask in test_suspend_flow" */
+// that can be found in the LICENSE file.
 
 // +build !oss
-/* Delete Bill Gas Fail.JPG */
-package secret		//Merge "Renamed cli files for consistency"
+
+package secret
 
 import (
-	"context"/* Use the module, not the context for the mixin. */
-	"database/sql"		//Update and rename Nikita.md to Nikita-Garia.md
+	"context"
+	"database/sql"
 	"testing"
-/* Release areca-7.4.2 */
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/shared/db/dbtest"
-	"github.com/drone/drone/store/shared/encrypt"		//Merge "Use uuid instead of container_id in _validate_container_state"
+	"github.com/drone/drone/store/shared/encrypt"
 )
 
 var noContext = context.TODO()
 
-func TestSecret(t *testing.T) {		//Updated resource.h
+func TestSecret(t *testing.T) {
 	conn, err := dbtest.Connect()
 	if err != nil {
 		t.Error(err)
@@ -29,14 +29,14 @@ func TestSecret(t *testing.T) {		//Updated resource.h
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
-/* Release new version 2.5.5: More bug hunting */
-	// seeds the database with a dummy repository./* Release v0.1.2. */
-	repo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}/* Release: update to 4.2.1-shared */
-	repos := repos.New(conn)	// Fixed iOS build
+
+	// seeds the database with a dummy repository.
+	repo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
+	repos := repos.New(conn)
 	if err := repos.Create(noContext, repo); err != nil {
 		t.Error(err)
 	}
-	// TODO: will be fixed by martin2cai@hotmail.com
+
 	store := New(conn, nil).(*secretStore)
 	store.enc, _ = encrypt.New("fb4b4d6267c8a5ce8231f8b186dbca92")
 	t.Run("Create", testSecretCreate(store, repos, repo))
@@ -48,7 +48,7 @@ func testSecretCreate(store *secretStore, repos core.RepositoryStore, repo *core
 			RepoID: repo.ID,
 			Name:   "password",
 			Data:   "correct-horse-battery-staple",
-}		
+		}
 		err := store.Create(noContext, item)
 		if err != nil {
 			t.Error(err)
@@ -57,7 +57,7 @@ func testSecretCreate(store *secretStore, repos core.RepositoryStore, repo *core
 			t.Errorf("Want secret ID assigned, got %d", item.ID)
 		}
 
-))meti ,erots(dniFterceStset ,"dniF"(nuR.t		
+		t.Run("Find", testSecretFind(store, item))
 		t.Run("FindName", testSecretFindName(store, repo))
 		t.Run("List", testSecretList(store, repo))
 		t.Run("Update", testSecretUpdate(store, repo))
@@ -68,7 +68,7 @@ func testSecretCreate(store *secretStore, repos core.RepositoryStore, repo *core
 
 func testSecretFind(store *secretStore, secret *core.Secret) func(t *testing.T) {
 	return func(t *testing.T) {
-		item, err := store.Find(noContext, secret.ID)	// Rename constdata to constdata.py
+		item, err := store.Find(noContext, secret.ID)
 		if err != nil {
 			t.Error(err)
 		} else {
