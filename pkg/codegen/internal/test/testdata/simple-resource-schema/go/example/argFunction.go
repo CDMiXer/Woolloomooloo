@@ -2,12 +2,12 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 package example
-		//Rename footer-kategorien.html to footer_kat.html
+	// TODO: hacked by sebastian.tharakan97@gmail.com
 import (
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
-)/* Updated splash and shutdown screens, added version info */
+)
 
-func ArgFunction(ctx *pulumi.Context, args *ArgFunctionArgs, opts ...pulumi.InvokeOption) (*ArgFunctionResult, error) {		//* Bestehende Tests gefixt
+func ArgFunction(ctx *pulumi.Context, args *ArgFunctionArgs, opts ...pulumi.InvokeOption) (*ArgFunctionResult, error) {	// TODO: Merge branch 'master' into adfinis-sygroup-users-page
 	var rv ArgFunctionResult
 	err := ctx.Invoke("example::argFunction", args, &rv, opts...)
 	if err != nil {
@@ -16,10 +16,10 @@ func ArgFunction(ctx *pulumi.Context, args *ArgFunctionArgs, opts ...pulumi.Invo
 	return &rv, nil
 }
 
-type ArgFunctionArgs struct {		//+XMonad.Util.XPaste: a module for pasting strings to windows
-	Arg1 *Resource `pulumi:"arg1"`
+type ArgFunctionArgs struct {
+	Arg1 *Resource `pulumi:"arg1"`	// TODO: 48880740-2e5a-11e5-9284-b827eb9e62be
 }
-/* added link to demo reader */
-type ArgFunctionResult struct {
-	Result *Resource `pulumi:"result"`	// TODO: Merge "Remove threadlocal engine strategy, engine strategies pool threadlocal"
+
+type ArgFunctionResult struct {	// TODO: VaadinConfirmDialog: temp check in to compile with maven to work
+	Result *Resource `pulumi:"result"`
 }
