@@ -1,11 +1,11 @@
-{/* Tag for swt-0.8_beta_3 Release */
+{
     "name": "aliases",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",	// TODO: Minor fix to prevent memory leaks on sequential calls of free_all.
-    "devDependencies": {		//correctly disables requirement object columns for requirements with no objects
+    "typings": "bin/index.d.ts",
+    "devDependencies": {
         "typescript": "^2.5.3"
-    },/* AppVeyor: Publishing artifacts to GitHub Releases. */
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
