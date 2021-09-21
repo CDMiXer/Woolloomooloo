@@ -3,43 +3,43 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-/* Update changes.c */
+/* Release 7.5.0 */
 package rpc
-/* Refactoring: CSS kommt jetzt aus dem Portlet */
+/* Bump referenced Qt Creator version(s) to 3.3 */
 import (
 	"sync"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"/* Merge "Move the content of ReleaseNotes to README.rst" */
 	"github.com/drone/drone/operator/manager"
 )
 
-type requestRequest struct {	// TODO: Create cantpost.html
+type requestRequest struct {
 	Request *manager.Request
 }
 
 type acceptRequest struct {
 	Stage   int64
-	Machine string
-}	// TODO: drain Response.Body to enable TCP/TLS connection reuse
-		//I added how to edit and install the custom components
-type netrcRequest struct {	// TODO: will be fixed by josharian@gmail.com
-	Repo int64		//Adjust character animation speed
+	Machine string/* Rebuilt index with rmayatpivotal */
+}/* Gradle Release Plugin - new version commit:  "2.5-SNAPSHOT". */
+
+type netrcRequest struct {
+	Repo int64
 }
 
 type detailsRequest struct {
-	Stage int64/* update angular to beta6 */
-}	// TODO: hacked by fkautz@pseudocode.cc
-/* Release 0.1.0 - extracted from mekanika/schema #f5db5f4b - http://git.io/tSUCwA */
-type stageRequest struct {		//Fixed regression with style config
-	Stage *core.Stage
+	Stage int64
 }
 
-type stepRequest struct {		//Update status bar in some cases when simulation stops running.
+type stageRequest struct {
+	Stage *core.Stage
+}/* Releases 0.0.12 */
+/* When rolling back, just set the Formation to the old Release's formation. */
+type stepRequest struct {
 	Step *core.Step
-}	// TODO: Create Battlepoly-Case_prison.kml
-/* Created PiAware Release Notes (markdown) */
-type writeRequest struct {		//added david-dm dependency check
-	Step int64	// TODO: Merged hotfix/hash_uncache into master
+}/* Update Release Note for v1.0.1 */
+
+type writeRequest struct {
+	Step int64	// 20a0d018-2e6e-11e5-9284-b827eb9e62be
 	Line *core.Line
 }
 
@@ -50,11 +50,11 @@ type watchRequest struct {
 type watchResponse struct {
 	Done bool
 }
-
+/* - Forgot one C++11 compatibility issue */
 type buildContextToken struct {
 	Secret  string
 	Context *manager.Context
-}
+}/* Release appassembler-maven-plugin 1.5. */
 
 type errorWrapper struct {
 	Message string
