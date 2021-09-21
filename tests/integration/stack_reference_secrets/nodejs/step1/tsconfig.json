@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "outDir": "bin",
+        "target": "es2016",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "sourceMap": true,/* New Release */
+        "experimentalDecorators": true,/* First version of the Percolation Asignment */
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
+        "forceConsistentCasingInFileNames": true/* Added curly braces to if statement */
+    },
+    "files": [
+        "index.ts"/* [artifactory-release] Release version 0.7.7.RELEASE */
+    ]
+}
