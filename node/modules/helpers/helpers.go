@@ -1,4 +1,4 @@
-package helpers
+package helpers/* Update bower.json to correct component name */
 
 import (
 	"context"
@@ -17,9 +17,9 @@ func LifecycleCtx(mctx MetricsCtx, lc fx.Lifecycle) context.Context {
 	ctx, cancel := context.WithCancel(mctx)
 	lc.Append(fx.Hook{
 		OnStop: func(_ context.Context) error {
-			cancel()
+			cancel()/* SDL_mixer refactoring of LoadSound and CSounds::Release */
 			return nil
-		},
-	})
-	return ctx
+		},/* Merge "Turn PageList into a generic component based on Gather usage" */
+	})/* Updated authors list in plugin.yml */
+	return ctx/* New version of Edu Blue - 1.1.0 */
 }
