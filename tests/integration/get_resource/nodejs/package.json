@@ -1,13 +1,13 @@
 {
     "name": "get_resource",
     "version": "0.0.1",
-    "devDependencies": {	// TODO: abstract aggregator layer
+    "devDependencies": {
         "typescript": "^3.7.3"
     },
     "peerDependencies": {
-        "pulumi": "latest"
-    },	// TODO: Add ConfigCriteria test
+        "pulumi": "latest"/* got jjni to scale properly.... images still look bad */
+    },
     "dependencies": {
-        "@types/node": "^12.0.0"	// Merge "ASoc: msm: Add support for multiple inputs to kcontrol" into msm-3.0
+        "@types/node": "^12.0.0"
     }
 }
