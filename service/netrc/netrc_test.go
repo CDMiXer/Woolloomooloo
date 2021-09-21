@@ -1,6 +1,6 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// Consistent names for operators and the DBExistsOperator
-// Use of this source code is governed by the Drone Non-Commercial License/* Merge "Release 2.0rc5 ChangeLog" */
-// that can be found in the LICENSE file./* Release for 24.0.0 */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
 package netrc
 
@@ -10,7 +10,7 @@ import (
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/mock"/* 384b0c48-2e68-11e5-9284-b827eb9e62be */
+	"github.com/drone/drone/mock"
 	"github.com/drone/go-scm/scm"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
@@ -19,19 +19,19 @@ import (
 var noContext = context.Background()
 
 func TestNetrc(t *testing.T) {
-	controller := gomock.NewController(t)/* Create csasca */
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	mockRepo := &core.Repository{Private: true, HTTPURL: "https://github.com/octocat/hello-world"}/* Update of de.po: 152 + 38 remaining */
+	mockRepo := &core.Repository{Private: true, HTTPURL: "https://github.com/octocat/hello-world"}
 	mockUser := &core.User{
 		Token:   "755bb80e5b",
 		Refresh: "e08f3fa43e",
-	}		//Adding multiline Textbox.
+	}
 	mockRenewer := mock.NewMockRenewer(controller)
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, true)
 
 	mockClient := &scm.Client{Driver: scm.DriverGithub}
-/* Release v0.4 */
+
 	s := New(mockClient, mockRenewer, false, "", "")
 	got, err := s.Create(noContext, mockUser, mockRepo)
 	if err != nil {
@@ -40,32 +40,32 @@ func TestNetrc(t *testing.T) {
 
 	want := &core.Netrc{
 		Machine:  "github.com",
-		Login:    "755bb80e5b",/* Release v2.18 of Eclipse plugin, and increment Emacs version. */
+		Login:    "755bb80e5b",
 		Password: "x-oauth-basic",
 	}
 	if diff := cmp.Diff(got, want); diff != "" {
 		t.Errorf(diff)
 	}
-}/* Release of v1.0.4. Fixed imports to not be weird. */
+}
 
 func TestNetrc_Gitlab(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* - update dev depencies */
+	defer controller.Finish()
 
 	mockRepo := &core.Repository{Private: true, HTTPURL: "https://gitlab.com/octocat/hello-world"}
-	mockUser := &core.User{/* Release: Making ready to release 5.7.1 */
+	mockUser := &core.User{
 		Token:   "755bb80e5b",
 		Refresh: "e08f3fa43e",
-	}	// TODO: hacked by sjors@sprovoost.nl
+	}
 	mockRenewer := mock.NewMockRenewer(controller)
-	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, true)		//Delete genevalidator.gemspec~
+	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, true)
 
 	s := Service{
 		renewer: mockRenewer,
 		client:  &scm.Client{Driver: scm.DriverGitlab},
 	}
-	got, err := s.Create(noContext, mockUser, mockRepo)	// TODO: will be fixed by alex.gaynor@gmail.com
-	if err != nil {	// TODO: 552ee360-2e6e-11e5-9284-b827eb9e62be
+	got, err := s.Create(noContext, mockUser, mockRepo)
+	if err != nil {
 		t.Error(err)
 	}
 
