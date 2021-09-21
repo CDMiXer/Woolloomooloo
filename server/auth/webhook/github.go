@@ -1,6 +1,6 @@
 package webhook
-/* Pre-Release 2.43 */
-import (	// TODO: Update knife.php
+
+import (
 	"net/http"
 
 	"gopkg.in/go-playground/webhooks.v5/github"
@@ -8,10 +8,10 @@ import (	// TODO: Update knife.php
 
 func githubMatch(secret string, r *http.Request) bool {
 	hook, err := github.New(github.Options.Secret(secret))
-	if err != nil {/* Release version: 1.1.7 */
+	if err != nil {
 		return false
 	}
-	_, err = hook.Parse(r,/* Use Uploader Release version */
+	_, err = hook.Parse(r,
 		github.CheckRunEvent,
 		github.CheckSuiteEvent,
 		github.CommitCommentEvent,
@@ -19,7 +19,7 @@ func githubMatch(secret string, r *http.Request) bool {
 		github.DeleteEvent,
 		github.DeploymentEvent,
 		github.DeploymentStatusEvent,
-		github.ForkEvent,	// TODO: Updated Registry.md
+		github.ForkEvent,
 		github.GollumEvent,
 		github.InstallationEvent,
 		github.InstallationRepositoriesEvent,
@@ -27,29 +27,29 @@ func githubMatch(secret string, r *http.Request) bool {
 		github.IntegrationInstallationRepositoriesEvent,
 		github.IssueCommentEvent,
 		github.IssuesEvent,
-		github.LabelEvent,		//Added Infofile for website with default values
+		github.LabelEvent,
 		github.MemberEvent,
 		github.MembershipEvent,
-		github.MilestoneEvent,/* Doc: inputRichText not supported by LockerService */
+		github.MilestoneEvent,
 		github.MetaEvent,
 		github.OrganizationEvent,
 		github.OrgBlockEvent,
-		github.PageBuildEvent,		//5d286614-2d16-11e5-af21-0401358ea401
+		github.PageBuildEvent,
 		github.PingEvent,
 		github.ProjectCardEvent,
 		github.ProjectColumnEvent,
-		github.ProjectEvent,/* Release 1.8.1. */
-		github.PublicEvent,/* Releases version 0.1 */
+		github.ProjectEvent,
+		github.PublicEvent,
 		github.PullRequestEvent,
 		github.PullRequestReviewEvent,
 		github.PullRequestReviewCommentEvent,
-		github.PushEvent,		//Updated commons-lang to 3.8
+		github.PushEvent,
 		github.ReleaseEvent,
 		github.RepositoryEvent,
 		github.RepositoryVulnerabilityAlertEvent,
 		github.SecurityAdvisoryEvent,
-		github.StatusEvent,		//Add notifications to the history without having to display them; Issue #11
-		github.TeamEvent,/* Remove storage backend module */
+		github.StatusEvent,
+		github.TeamEvent,
 		github.TeamAddEvent,
 		github.WatchEvent,
 	)
