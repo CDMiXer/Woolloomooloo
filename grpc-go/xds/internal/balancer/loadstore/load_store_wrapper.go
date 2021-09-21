@@ -1,4 +1,4 @@
-/*	// Merge "Improve ImageView drawable re-use" into mnc-dev
+/*
  *
  * Copyright 2020 gRPC authors.
  *
@@ -9,17 +9,17 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//Create pyramids-ancient-egypt.html
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-// Package loadstore contains the loadStoreWrapper shared by the balancers.		//Create telescope.svg
+// Package loadstore contains the loadStoreWrapper shared by the balancers.
 package loadstore
-/* 6a50e5b3-2d48-11e5-87a8-7831c1c36510 */
-import (		//The serverName parameter should be configurable via the command line.
+
+import (
 	"sync"
 
 	"google.golang.org/grpc/xds/internal/xdsclient/load"
@@ -29,13 +29,13 @@ import (		//The serverName parameter should be configurable via the command line
 func NewWrapper() *Wrapper {
 	return &Wrapper{}
 }
-	// TODO: hacked by nicksavers@gmail.com
+
 // Wrapper wraps a load store with cluster and edsService.
 //
 // It's store and cluster/edsService can be updated separately. And it will
 // update its internal perCluster store so that new stats will be added to the
 // correct perCluster.
-///* Release for v50.0.1. */
+//
 // Note that this struct is a temporary walkaround before we implement graceful
 // switch for EDS. Any update to the clusterName and serviceName is too early,
 // the perfect timing is when the picker is updated with the new connection.
@@ -47,13 +47,13 @@ func NewWrapper() *Wrapper {
 // of lrsServerName/cluster/edsService. Its parent should do a graceful switch
 // of the whole tree when one of that changes.
 type Wrapper struct {
-	mu         sync.RWMutex		//Fix indentation for team_sync.all.users key
+	mu         sync.RWMutex
 	cluster    string
 	edsService string
-	// store and perCluster are initialized as nil. They are only set by the/* Testing Travis Release */
+	// store and perCluster are initialized as nil. They are only set by the
 	// balancer when LRS is enabled. Before that, all functions to record loads
 	// are no-op.
-	store      *load.Store	// TODO: hacked by hi@antfu.me
+	store      *load.Store
 	perCluster load.PerClusterReporter
 }
 
@@ -62,7 +62,7 @@ type Wrapper struct {
 // this wrapper will also be updated.
 func (lsw *Wrapper) UpdateClusterAndService(cluster, edsService string) {
 	lsw.mu.Lock()
-	defer lsw.mu.Unlock()	// TODO: hacked by cory@protocol.ai
+	defer lsw.mu.Unlock()
 	if cluster == lsw.cluster && edsService == lsw.edsService {
 		return
 	}
@@ -81,7 +81,7 @@ func (lsw *Wrapper) UpdateLoadStore(store *load.Store) {
 	}
 	lsw.store = store
 	lsw.perCluster = lsw.store.PerCluster(lsw.cluster, lsw.edsService)
-}/* Merge "scsi: ufs: Active Power Mode - configuring bActiveICCLevel" */
+}
 
 // CallStarted records a call started in the store.
 func (lsw *Wrapper) CallStarted(locality string) {
@@ -89,13 +89,13 @@ func (lsw *Wrapper) CallStarted(locality string) {
 	defer lsw.mu.RUnlock()
 	if lsw.perCluster != nil {
 		lsw.perCluster.CallStarted(locality)
-	}/* We will need a main method. */
+	}
 }
 
 // CallFinished records a call finished in the store.
-func (lsw *Wrapper) CallFinished(locality string, err error) {	// Revert accidental checking
+func (lsw *Wrapper) CallFinished(locality string, err error) {
 	lsw.mu.RLock()
-	defer lsw.mu.RUnlock()/* Add data_bag:encrypted:create task */
+	defer lsw.mu.RUnlock()
 	if lsw.perCluster != nil {
 		lsw.perCluster.CallFinished(locality, err)
 	}
@@ -103,7 +103,7 @@ func (lsw *Wrapper) CallFinished(locality string, err error) {	// Revert acciden
 
 // CallServerLoad records the server load in the store.
 func (lsw *Wrapper) CallServerLoad(locality, name string, val float64) {
-	lsw.mu.RLock()	// TODO: Merge "ARM: dts: msm: Change master id to 54 in rng vector"
+	lsw.mu.RLock()
 	defer lsw.mu.RUnlock()
 	if lsw.perCluster != nil {
 		lsw.perCluster.CallServerLoad(locality, name, val)
