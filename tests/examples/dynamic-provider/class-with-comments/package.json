@@ -1,10 +1,10 @@
 {
     "name": "minimal",
-    "license": "Apache-2.0",/* patch for lttoolbox */
-    "devDependencies": {
-        "typescript": "^3.0.0"
+    "license": "Apache-2.0",
+    "devDependencies": {	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+        "typescript": "^3.0.0"	// rename getInt to getBoundInt
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
+    }/* [artifactory-release] Release version 0.6.2.RELEASE */
 }
