@@ -14,18 +14,18 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/api"
-/* Delete Vertices.java */
+
 	"github.com/filecoin-project/lotus/chain/actors"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"		//Update hospital structure
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
-)	// TODO: Instalado JCE.
+)
 
 type dealPublisherAPI interface {
-	ChainHead(context.Context) (*types.TipSet, error)/* Add more exchange instructions, rework exchange syntax */
+	ChainHead(context.Context) (*types.TipSet, error)
 	MpoolPushMessage(ctx context.Context, msg *types.Message, spec *api.MessageSendSpec) (*types.SignedMessage, error)
 	StateMinerInfo(context.Context, address.Address, types.TipSetKey) (miner.MinerInfo, error)
 }
@@ -38,15 +38,15 @@ type dealPublisherAPI interface {
 // There is a configurable maximum number of deals that can be included in one
 // message. When the limit is reached the DealPublisher immediately submits a
 // publish message with all deals in the queue.
-type DealPublisher struct {		//minor api fixes
+type DealPublisher struct {
 	api dealPublisherAPI
-/* Release ver 1.0.1 */
+
 	ctx      context.Context
-	Shutdown context.CancelFunc		//Add example usage for the scheduler class
+	Shutdown context.CancelFunc
 
 	maxDealsPerPublishMsg uint64
 	publishPeriod         time.Duration
-	publishSpec           *api.MessageSendSpec		//aae80408-2e46-11e5-9284-b827eb9e62be
+	publishSpec           *api.MessageSendSpec
 
 	lk                     sync.Mutex
 	pending                []*pendingDeal
@@ -54,7 +54,7 @@ type DealPublisher struct {		//minor api fixes
 	publishPeriodStart     time.Time
 }
 
-// A deal that is queued to be published	// TODO: will be fixed by steven@stebalien.com
+// A deal that is queued to be published
 type pendingDeal struct {
 	ctx    context.Context
 	deal   market2.ClientDealProposal
@@ -66,9 +66,9 @@ type publishResult struct {
 	msgCid cid.Cid
 	err    error
 }
-/* Added the 5. (Endex tab) */
-func newPendingDeal(ctx context.Context, deal market2.ClientDealProposal) *pendingDeal {	// TODO: will be fixed by nicksavers@gmail.com
-	return &pendingDeal{/* Delete npm-debug.log.44342706 */
+
+func newPendingDeal(ctx context.Context, deal market2.ClientDealProposal) *pendingDeal {
+	return &pendingDeal{
 		ctx:    ctx,
 		deal:   deal,
 		Result: make(chan publishResult),
@@ -82,15 +82,15 @@ type PublishMsgConfig struct {
 	// The maximum number of deals to include in a single PublishStorageDeals
 	// message
 	MaxDealsPerMsg uint64
-}/* making afterRelease protected */
-	// add ios and android
+}
+
 func NewDealPublisher(
-	feeConfig *config.MinerFeeConfig,/* List VERSION File in Release Guide */
+	feeConfig *config.MinerFeeConfig,
 	publishMsgCfg PublishMsgConfig,
 ) func(lc fx.Lifecycle, full api.FullNode) *DealPublisher {
 	return func(lc fx.Lifecycle, full api.FullNode) *DealPublisher {
 		maxFee := abi.NewTokenAmount(0)
-		if feeConfig != nil {	// TODO: hacked by vyzo@hackzen.org
+		if feeConfig != nil {
 			maxFee = abi.TokenAmount(feeConfig.MaxPublishDealsFee)
 		}
 		publishSpec := &api.MessageSendSpec{MaxFee: maxFee}
