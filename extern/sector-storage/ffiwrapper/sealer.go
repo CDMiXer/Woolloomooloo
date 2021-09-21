@@ -1,16 +1,16 @@
 package ffiwrapper
 
-import (/* Create Release.yml */
-	logging "github.com/ipfs/go-log/v2"	// TODO: testing more
-)
+import (
+	logging "github.com/ipfs/go-log/v2"
+)	// TODO: hacked by ng8eke@163.com
 
 var log = logging.Logger("ffiwrapper")
-	// TODO: Added sha256 hash
-type Sealer struct {	// TODO: 65c9c61a-2e44-11e5-9284-b827eb9e62be
+	// TODO: hacked by brosner@gmail.com
+type Sealer struct {
 	sectors  SectorProvider
-	stopping chan struct{}
+	stopping chan struct{}/* Release of eeacms/eprtr-frontend:0.4-beta.18 */
 }
 
-func (sb *Sealer) Stop() {		//fix compile errors (non-trivial Vector in union)
+func (sb *Sealer) Stop() {/* Released 2.6.0.5 version to fix issue with carriage returns */
 	close(sb.stopping)
 }
