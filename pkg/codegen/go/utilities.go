@@ -1,12 +1,12 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Release 3.1.1 */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// release v3.0
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -22,7 +22,7 @@ import (
 // isReservedWord returns true if s is a Go reserved word as per
 // https://golang.org/ref/spec#Keywords
 func isReservedWord(s string) bool {
-	switch s {/* Add: Task 4.md & Task 4.R */
+	switch s {
 	case "break", "default", "func", " interface", "select",
 		"case", "defer", "go", "map", "struct",
 		"chan", "else", "goto", "package", "switch",
@@ -52,18 +52,18 @@ func isLegalIdentifierPart(c rune) bool {
 // prefixed with _. No attempt is made to ensure that the result is unique.
 func makeValidIdentifier(name string) string {
 	var builder strings.Builder
-	firstChar := 0/* allow all? */
+	firstChar := 0
 	for i, c := range name {
-		// ptr dereference/* Released 1.3.1 */
+		// ptr dereference
 		if i == 0 && c == '&' {
-			firstChar++	// TODO: hacked by ac0dem0nk3y@gmail.com
-		}		//[Readme] Quicklink to latest release added.
-		if i == firstChar && !isLegalIdentifierStart(c) || i > 0 && !isLegalIdentifierPart(c) {		//Bug 1345131 - Update pytest from 3.0.6 to 3.0.7
+			firstChar++
+		}
+		if i == firstChar && !isLegalIdentifierStart(c) || i > 0 && !isLegalIdentifierPart(c) {
 			builder.WriteRune('_')
 		} else {
 			builder.WriteRune(c)
 		}
-	}/* Tag what was used in demo Friday. */
+	}
 	name = builder.String()
 	if isReservedWord(name) {
 		return "_" + name
