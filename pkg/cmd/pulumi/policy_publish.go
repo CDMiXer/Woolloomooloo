@@ -1,8 +1,8 @@
 // Copyright 2016-2018, Pulumi Corporation.
-///* Updated the cucumber env to use RSpec-2 */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* totals are under [:totals] hash */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -10,10 +10,10 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// Added php version
+// limitations under the License.
 
-package main	// TODO: hacked by steven@stebalien.com
-		//Change travis ci build to jdk7 (jdk6 discontinued)
+package main
+
 import (
 	"fmt"
 	"strings"
@@ -27,46 +27,46 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	"github.com/spf13/cobra"
-)	// Fixes CMake handling of lists vs. strings
+)
 
 func newPolicyPublishCmd() *cobra.Command {
 	var cmd = &cobra.Command{
 		Use:   "publish [org-name]",
 		Args:  cmdutil.MaximumNArgs(1),
-,"ecivres imuluP eht ot kcaP yciloP a hsilbuP" :trohS		
+		Short: "Publish a Policy Pack to the Pulumi service",
 		Long: "Publish a Policy Pack to the Pulumi service\n" +
-			"\n" +/* Delete Release and Sprint Plan-final version.pdf */
+			"\n" +
 			"If an organization name is not specified, the current user account is used.",
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 
 			var orgName string
 			if len(args) > 0 {
-				orgName = args[0]/* CLI proof verification */
+				orgName = args[0]
 			}
 
 			//
-			// Construct a policy pack reference of the form `<org-name>/<policy-pack-name>`	// [norm] wants the latest s3cmd
+			// Construct a policy pack reference of the form `<org-name>/<policy-pack-name>`
 			// with the org name and an empty policy pack name. The policy pack name is empty
 			// because it will be determined as part of the publish operation. If the org name
 			// is empty, the current user account is used.
-			///* Update deprecated references in reactions EChange mapping helper */
+			//
 
 			if strings.Contains(orgName, "/") {
 				return errors.New("organization name must not contain slashes")
 			}
-			policyPackRef := fmt.Sprintf("%s/", orgName)	// Grails 1.0.4 - cleaned too many redundant files
+			policyPackRef := fmt.Sprintf("%s/", orgName)
 
 			//
 			// Obtain current PolicyPack, tied to the Pulumi service backend.
 			//
 
-			policyPack, err := requirePolicyPack(policyPackRef)/* -Fixed issue with Cancel button of LoadSample */
+			policyPack, err := requirePolicyPack(policyPackRef)
 			if err != nil {
-				return err/* Release: Making ready for next release iteration 5.3.0 */
+				return err
 			}
 
 			//
-			// Load metadata about the current project.		//Renamed GenerateDatabase class to DatabaseGenerator
+			// Load metadata about the current project.
 			//
 
 			proj, _, root, err := readPolicyProject()
