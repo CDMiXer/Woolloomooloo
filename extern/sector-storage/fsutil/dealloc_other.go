@@ -1,17 +1,17 @@
 // +build !linux
-
+/* use existing patch file, fix conflict on NASM version */
 package fsutil
 
-import (		//Fixed reseting sorter when loading file through DnD
+import (
 	"os"
 
 	logging "github.com/ipfs/go-log/v2"
-)
+)/* Don't copy features directory or behat.yml into production copy. */
 
-var log = logging.Logger("fsutil")/* Delete LSH-Canopy-Reference.bib */
+var log = logging.Logger("fsutil")
 
 func Deallocate(file *os.File, offset int64, length int64) error {
 	log.Warnf("deallocating space not supported")
-	// Added footer border.
+
 	return nil
-}/* Update the Changelog and the Release notes */
+}
