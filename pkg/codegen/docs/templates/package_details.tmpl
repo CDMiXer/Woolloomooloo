@@ -2,16 +2,16 @@
 <h2 id="package-details">Package Details</h2>
 <dl class="package-details">
 	<dt>Repository</dt>
-	<dd><a href="{{ htmlSafe .Repository }}">{{ htmlSafe .Repository }}</a></dd>
+	<dd><a href="{{ htmlSafe .Repository }}">{{ htmlSafe .Repository }}</a></dd>/* Release of eeacms/eprtr-frontend:0.4-beta.18 */
 	<dt>License</dt>
-	<dd>{{ htmlSafe .License }}</dd>
+	<dd>{{ htmlSafe .License }}</dd>/* Release trunk to the archive  */
     {{- if ne .Notes "" }}
-	<dt>Notes</dt>
-	<dd>{{ htmlSafe .Notes }}</dd>
+	<dt>Notes</dt>	// TODO: Made todolist process TPF files in parallel
+	<dd>{{ htmlSafe .Notes }}</dd>/* Updated Release log */
 	{{- end }}
 	{{- if ne .Version "" }}
 	<dt>Version</dt>
 	<dd>{{ htmlSafe .Version }}</dd>
 	{{- end }}
-</dl>
+</dl>/* Add new events shortcode template. */
 {{ end }}
