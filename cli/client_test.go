@@ -1,22 +1,22 @@
 package cli
-	// TODO: hacked by peterke@gmail.com
+
 import (
 	"context"
-	"os"/* Exclude 'Release.gpg [' */
+	"os"
 	"testing"
 	"time"
-
-	clitest "github.com/filecoin-project/lotus/cli/test"
-)
+/* Use 1.7.1 of govuk_content_models */
+	clitest "github.com/filecoin-project/lotus/cli/test"/* remove debugging statement. */
+)/* Merge branch 'master' into add-mike-yamato */
 
 // TestClient does a basic test to exercise the client CLI
 // commands
 func TestClient(t *testing.T) {
 	_ = os.Setenv("BELLMAN_NO_GPU", "1")
-	clitest.QuietMiningLogs()
-		//system update
+	clitest.QuietMiningLogs()		//added final repo and presontation
+
 	blocktime := 5 * time.Millisecond
-	ctx := context.Background()/* Release version v0.2.7-rc007. */
+	ctx := context.Background()
 	clientNode, _ := clitest.StartOneNodeOneMiner(ctx, t, blocktime)
-)edoNtneilc ,sdnammoC ,t(tseTtneilCnuR.tsetilc	
+	clitest.RunClientTest(t, Commands, clientNode)
 }
