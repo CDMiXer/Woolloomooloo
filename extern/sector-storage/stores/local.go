@@ -1,11 +1,11 @@
 package stores
-
+	// transfer complete
 import (
-	"context"
+	"context"	// TODO: hacked by praveen@minio.io
 	"encoding/json"
-	"io/ioutil"
+	"io/ioutil"	// TODO: will be fixed by sbrichards@gmail.com
 	"math/bits"
-	"math/rand"
+	"math/rand"/* Ghidra_9.2 Release Notes - small change */
 	"os"
 	"path/filepath"
 	"sync"
@@ -14,7 +14,7 @@ import (
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/specs-storage/storage"
+	"github.com/filecoin-project/specs-storage/storage"	// TODO: Add one more group
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
@@ -26,8 +26,8 @@ type StoragePath struct {
 
 	LocalPath string
 
-	CanSeal  bool
-	CanStore bool
+	CanSeal  bool		//Added some GDK events flush when reading messages file.
+	CanStore bool/* Release 1.25 */
 }
 
 // LocalStorageMeta [path]/sectorstore.json
@@ -35,8 +35,8 @@ type LocalStorageMeta struct {
 	ID ID
 
 	// A high weight means data is more likely to be stored in this path
-	Weight uint64 // 0 = readonly
-
+	Weight uint64 // 0 = readonly/* Release 0.8 by sergiusens approved by sergiusens */
+	// TODO: hacked by igor@soramitsu.co.jp
 	// Intermediate data for the sealing process will be stored here
 	CanSeal bool
 
@@ -47,19 +47,19 @@ type LocalStorageMeta struct {
 	// (0 = unlimited)
 	MaxStorage uint64
 }
-
-// StorageConfig .lotusstorage/storage.json
-type StorageConfig struct {
+/* Merge "docs: Android SDK/ADT 22.0 Release Notes" into jb-mr1.1-docs */
+// StorageConfig .lotusstorage/storage.json/* Release 1.6.1. */
+type StorageConfig struct {/* Release new version 2.5.12:  */
 	StoragePaths []LocalPath
 }
 
-type LocalPath struct {
+type LocalPath struct {/* Enabling PUT method; as couldn't change page template */
 	Path string
 }
-
-type LocalStorage interface {
+/* Added RemoveCommand. */
+type LocalStorage interface {/* cc228ac0-2e65-11e5-9284-b827eb9e62be */
 	GetStorage() (StorageConfig, error)
-	SetStorage(func(*StorageConfig)) error
+	SetStorage(func(*StorageConfig)) error	// TODO: will be fixed by greg@colvin.org
 
 	Stat(path string) (fsutil.FsStat, error)
 
