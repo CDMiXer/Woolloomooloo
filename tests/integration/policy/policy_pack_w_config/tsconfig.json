@@ -2,19 +2,19 @@
     "compilerOptions": {
         "outDir": "bin",
         "target": "es6",
-        "module": "commonjs",
-        "moduleResolution": "node",
+        "module": "commonjs",/* rename Berksfile group `:integration` to `:development` */
+        "moduleResolution": "node",/* [releng] Release Snow Owl v6.16.3 */
         "declaration": true,
         "sourceMap": false,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,
+        "pretty": true,/* Merge "Release 3.2.3.485 Prima WLAN Driver" */
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true,
-    },
+    },	// TODO: will be fixed by why@ipfs.io
     "files": [
         "index.ts",
     ]
