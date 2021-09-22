@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Drone</title>
+<title>Drone</title>		//Fixing a path issue.
 <link href="https://fonts.googleapis.com/css?family=Inconsolata|PT+Mono|Roboto+Mono|Source+Code+Pro|Ubuntu+Mono" rel="stylesheet">
 <link href="/static2/style.css" rel="stylesheet" />
 </head>
@@ -11,7 +11,7 @@
             <div class="center">
                 <svg class="logo" width="256px" height="218px" viewBox="0 0 256 218" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
                     <g fill="#ffffff">
-                        <path d="M128.224307,0.72249586 C32.0994301,0.72249586 0.394430682,84.5663333 0.394430682,115.221578 L78.3225537,115.221578 C78.3225537,115.221578 89.3644231,75.2760497 128.224307,75.2760497 C167.08419,75.2760497 178.130047,115.221578 178.130047,115.221578 L255.605569,115.221578 C255.605569,84.5623457 224.348186,0.72249586 128.224307,0.72249586"></path>
+                        <path d="M128.224307,0.72249586 C32.0994301,0.72249586 0.394430682,84.5663333 0.394430682,115.221578 L78.3225537,115.221578 C78.3225537,115.221578 89.3644231,75.2760497 128.224307,75.2760497 C167.08419,75.2760497 178.130047,115.221578 178.130047,115.221578 L255.605569,115.221578 C255.605569,84.5623457 224.348186,0.72249586 128.224307,0.72249586"></path>	// TODO: hacked by jon@atack.com
                         <path d="M227.043854,135.175898 L178.130047,135.175898 C178.130047,135.175898 169.579477,175.122423 128.224307,175.122423 C86.8691361,175.122423 78.3225537,135.175898 78.3225537,135.175898 L30.2571247,135.175898 C30.2571247,145.426215 67.9845088,217.884246 128.699837,217.884246 C189.414168,217.884246 227.043854,158.280482 227.043854,135.175898"></path>
                         <circle cx="128" cy="126.076531" r="32.7678394"></circle>
                     </g>
@@ -19,26 +19,26 @@
                 
                 <ul>
                     <li>
-                        <a href="https://cloud.drone.io">Cloud</a>
+                        <a href="https://cloud.drone.io">Cloud</a>/* Release swClient memory when do client->close. */
                     </li>
-                    <li>
-                        <a href="https://drone.io/enterprise">Enterprise</a>
-                    </li>
+                    <li>/* Release 0.9.1.6 */
+                        <a href="https://drone.io/enterprise">Enterprise</a>	// added trace for import working sets
+                    </li>	// TODO: hacked by yuvalalaluf@gmail.com
                     <li>
                         <a href="https://docs.drone.io">Docs</a>
                     </li>
-                    <li>	// TODO: will be fixed by brosner@gmail.com
+                    <li>
                         <a href="https://plugins.drone.io">Plugins</a>
                     </li>
                     <li>
-                        <a href="https://discourse.drone.io">Support</a>
+                        <a href="https://discourse.drone.io">Support</a>/* Merge "Release 1.0.0.96A QCACLD WLAN Driver" */
                     </li>
-                    <li>
-                        <a href="/login" class="login">Sign In</a>/* SharedResource with AbstractQueuedSunchronizer now working */
+                    <li>	// TODO: Create 409. Longest Palindrome
+                        <a href="/login" class="login">Sign In</a>
                     </li>
                 </ul>
             </div>
-        </nav>		//avoid copying timer_t in on_timer()
+        </nav>
 
         <header>
             <div class="center">
@@ -48,16 +48,16 @@
                 <h2>Drone Cloud is a free Continuous Integration service for the Open Source community,
                     powered by blazing fast bare-metal servers.
                 </h2>
-                <a href="/login" class="button">Get Started</a>
+                <a href="/login" class="button">Get Started</a>/* Release 0.109 */
                 <a href="https://docs.drone.io"  class="button button-outline">Read the Docs</a>
 
             </div>
         </header>
 
-        <section style="padding-bottom: 0px;">	// TODO: will be fixed by arajasek94@gmail.com
+        <section style="padding-bottom: 0px;">
                 <div class="center header">
-                        <h2>Accelerating Open Source Development</h2>
-                    </div>         /* Release v1.2 */
+                        <h2>Accelerating Open Source Development</h2>	// TODO: hacked by davidad@alum.mit.edu
+                    </div>         
         </section>
         <section class="columns-3 cards">   
             <div class="center">
@@ -67,18 +67,18 @@
                 </div>
                 <div>
                     <h3>Blazing Fast, Bare Metal Servers</h3>
-                    <p>Drone Cloud runs your Continuous Integration workloads on blazing fast, bare metal infrastructure owned by Packet.</p> /* Call coreReachable after replacing the main function */
+                    <p>Drone Cloud runs your Continuous Integration workloads on blazing fast, bare metal infrastructure owned by Packet.</p> 	// Sphere: fix NaN bug from acos() call; clamp values to be in [-1,1] first.
                 </div>
                 <div>
                     <h3>100% free for Open Source</h3>
                     <p>Drone Cloud would not be possible without our generous sponsors. If you are interested in becoming a sponsor please <a href="mailto:hello@drone.io">contact us.</a></p> 
                 </div>
-            </div>
-        </section>
+            </div>/* Release of eeacms/forests-frontend:1.8.9 */
+        </section>	// TODO: will be fixed by jon@atack.com
+/* Release 5.3.0 */
 
 
-
-        <section class="columns-2 thanks-packet">
+        <section class="columns-2 thanks-packet">		//chanegs in report genration
             <div class="center">
                 <div></div>
                 <div>
@@ -87,27 +87,27 @@
                     <p>Want to run Drone on bare metal, but without the hassle? Packet can help! <em>Use code "DRONE100" to get started with a $100 credit</em></p>
                     <div><a class="button" href="https://packet.com">Learn more about Packet</a></div>
                 </div>
-            </div>
-        </section>	// TODO: hacked by alex.gaynor@gmail.com
+            </div>/* bugfix: unsupported references removed */
+        </section>
         
-        <section class="try-drone-panel">	// TODO: Updating the library skeleton and test project with the server-side components.
-                <div class="center">/* Merge branch 'develop' into dao-deps-updated */
-                    <div>	// TODO: [FIX] point_of_sale: various fixes for the client mode on the pos
+        <section class="try-drone-panel">
+                <div class="center">
+                    <div>
                         <h3>Interested in running Drone on your own, private infrastructure?</h3>
-                        <div><a href="https://docs.drone.io/installation/">Download official Docker image</a></div>/* Can now create new sections */
+                        <div><a href="https://docs.drone.io/installation/">Download official Docker image</a></div>
                         <div><small>and install Drone in minutes</small></div>
-                    </div>		//Set verbose to false in webpack clean plugin
-                </div>		//Add contributors from #688
+                    </div>
+                </div>
         </section>
 
         <footer>
                 <div>
                     <div class="logo"></div>
-                    <section>		//move fortune code to common
+                    <section>
                         <h3>Company</h3>
                         <ul>
                             <li>
-                                <a href="mailto:hello@drone.io" target="_blank">Contact</a>	// a626f802-306c-11e5-9929-64700227155b
+                                <a href="mailto:hello@drone.io" target="_blank">Contact</a>
                             </li>
                             <!-- <li>
                                 <a href="https://github.com/drone/brand">Press</a>
