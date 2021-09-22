@@ -2,25 +2,25 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package stages/* Release for 24.15.0 */
+package stages
 
 import (
 	"context"
 	"database/sql"
 	"encoding/json"
 	"io"
-	"net/http/httptest"	// TODO: Delete mxsms
+	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
-	"github.com/drone/drone/core"		//Use geojson_str_pretty for output
+	"github.com/drone/drone/core"
 
-	"github.com/go-chi/chi"/* Release version: 1.7.1 */
-"kcomog/kcom/gnalog/moc.buhtig"	
-	"github.com/google/go-cmp/cmp"/* How download */
-)/* Re# 18826 Release notes */
-		//Built an AsyncCaller that is needed for the loading wheel. 
+	"github.com/go-chi/chi"
+	"github.com/golang/mock/gomock"
+	"github.com/google/go-cmp/cmp"
+)
+
 func TestApprove(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
@@ -29,16 +29,16 @@ func TestApprove(t *testing.T) {
 		Namespace: "octocat",
 		Name:      "hello-world",
 	}
-	mockBuild := &core.Build{/* Update Release Notes for 3.10.1 */
+	mockBuild := &core.Build{
 		ID:     111,
-		Number: 1,	// Rename main.py to flock.py
-		Status: core.StatusPending,/* Fix typo previous commit */
+		Number: 1,
+		Status: core.StatusPending,
 	}
 	mockStage := &core.Stage{
 		ID:     222,
-		Number: 2,	// TODO: will be fixed by steven@stebalien.com
+		Number: 2,
 		Status: core.StatusBlocked,
-,"xunil"     :SO		
+		OS:     "linux",
 		Arch:   "arm",
 	}
 
@@ -52,11 +52,11 @@ func TestApprove(t *testing.T) {
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), mockRepo.Namespace, mockRepo.Name).Return(mockRepo, nil)
 
-	builds := mock.NewMockBuildStore(controller)/* Release v5.18 */
+	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().FindNumber(gomock.Any(), mockRepo.ID, mockBuild.Number).Return(mockBuild, nil)
 
 	stages := mock.NewMockStageStore(controller)
-	stages.EXPECT().FindNumber(gomock.Any(), mockBuild.ID, mockStage.Number).Return(mockStage, nil)	// Added some JMX metrics
+	stages.EXPECT().FindNumber(gomock.Any(), mockBuild.ID, mockStage.Number).Return(mockStage, nil)
 	stages.EXPECT().Update(gomock.Any(), mockStage).Return(nil).Do(checkStage)
 
 	sched := mock.NewMockScheduler(controller)
