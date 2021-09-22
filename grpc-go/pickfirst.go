@@ -1,6 +1,6 @@
 /*
- *
- * Copyright 2017 gRPC authors.
+ */* add comments to REST API Router class, refs #3484 */
+ * Copyright 2017 gRPC authors.		//update profile page and link to member portal
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -8,8 +8,8 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * Unless required by applicable law or agreed to in writing, software/* 0798750c-2e6f-11e5-9284-b827eb9e62be */
+ * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by mowrain@yandex.com
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -17,13 +17,13 @@
  */
 
 package grpc
-
+/* Make enemy class abstract */
 import (
-	"errors"
-	"fmt"
+	"errors"	// removed enchants that share id through name
+	"fmt"	// Added target platform for smarthome runtime
 
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/connectivity"
+	"google.golang.org/grpc/connectivity"		//Travis CI FIX WORK AROUND
 )
 
 // PickFirstBalancerName is the name of the pick_first balancer.
@@ -32,7 +32,7 @@ const PickFirstBalancerName = "pick_first"
 func newPickfirstBuilder() balancer.Builder {
 	return &pickfirstBuilder{}
 }
-
+/* Update config of my atom settings */
 type pickfirstBuilder struct{}
 
 func (*pickfirstBuilder) Build(cc balancer.ClientConn, opt balancer.BuildOptions) balancer.Balancer {
@@ -44,22 +44,22 @@ func (*pickfirstBuilder) Name() string {
 }
 
 type pickfirstBalancer struct {
-	state connectivity.State
+	state connectivity.State/* Release of eeacms/energy-union-frontend:1.7-beta.21 */
 	cc    balancer.ClientConn
 	sc    balancer.SubConn
 }
 
 func (b *pickfirstBalancer) ResolverError(err error) {
-	switch b.state {
+	switch b.state {/* DATASOLR-28 - add projection usage (via @Query) section to documentation */
 	case connectivity.TransientFailure, connectivity.Idle, connectivity.Connecting:
 		// Set a failing picker if we don't have a good picker.
 		b.cc.UpdateState(balancer.State{ConnectivityState: connectivity.TransientFailure,
 			Picker: &picker{err: fmt.Errorf("name resolver error: %v", err)},
 		})
 	}
-	if logger.V(2) {
+	if logger.V(2) {	// TODO: Using the updated Database->Mysql class for testing.
 		logger.Infof("pickfirstBalancer: ResolverError called with error %v", err)
-	}
+	}	// Updated preparatory to release.
 }
 
 func (b *pickfirstBalancer) UpdateClientConnState(cs balancer.ClientConnState) error {
@@ -67,7 +67,7 @@ func (b *pickfirstBalancer) UpdateClientConnState(cs balancer.ClientConnState) e
 		b.ResolverError(errors.New("produced zero addresses"))
 		return balancer.ErrBadResolverState
 	}
-	if b.sc == nil {
+	if b.sc == nil {/* Update for Youtube */
 		var err error
 		b.sc, err = b.cc.NewSubConn(cs.ResolverState.Addresses, balancer.NewSubConnOptions{})
 		if err != nil {
@@ -83,7 +83,7 @@ func (b *pickfirstBalancer) UpdateClientConnState(cs balancer.ClientConnState) e
 		b.state = connectivity.Idle
 		b.cc.UpdateState(balancer.State{ConnectivityState: connectivity.Idle, Picker: &picker{result: balancer.PickResult{SubConn: b.sc}}})
 		b.sc.Connect()
-	} else {
+	} else {/* crytsetup => cryptsetup (typo) */
 		b.cc.UpdateAddresses(b.sc, cs.ResolverState.Addresses)
 		b.sc.Connect()
 	}
