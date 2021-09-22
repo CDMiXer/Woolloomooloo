@@ -1,18 +1,18 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License/* Release: Making ready for next release iteration 6.2.1 */
 // that can be found in the LICENSE file.
 
 package reaper
 
-import (
-	"context"
+import (	// TODO: will be fixed by hugomrdias@gmail.com
+	"context"/* Fix link to ReleaseNotes.md */
 	"testing"
 	"time"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 
-	"github.com/golang/mock/gomock"
+	"github.com/golang/mock/gomock"/* Fixed a few issues with changing namespace. Release 1.9.1 */
 )
 
 var nocontext = context.Background()
@@ -20,7 +20,7 @@ var nocontext = context.Background()
 //
 // reap tests
 //
-
+	// Added Guardian and Rabbit to DefaultMonsters in Overworld
 // this test confirms that pending builds that
 // exceed the deadline are canceled, and pending
 // builds that do not exceed the deadline are
@@ -43,22 +43,22 @@ func TestReapPending(t *testing.T) {
 		ID:      1,
 		RepoID:  mockRepo.ID,
 		Status:  core.StatusPending,
-		Created: mustParse("2006-01-01T00:00:00").Unix(), // expire > 24 hours, must cancel
+		Created: mustParse("2006-01-01T00:00:00").Unix(), // expire > 24 hours, must cancel/* Gradle Release Plugin - pre tag commit:  "2.3". */
 	}
-	mockPending := []*core.Build{
-		mockBuild,
+	mockPending := []*core.Build{		//Merge branch 'release/1.7' into releases
+		mockBuild,/* Denote Spark 2.8.3 Release */
 		{
 			ID:      2,
 			RepoID:  mockRepo.ID,
-			Status:  core.StatusPending,
+			Status:  core.StatusPending,		//quantile function for the Chi-squared distribution (modelled on R's qchisq)
 			Created: mustParse("2006-01-02T14:30:00").Unix(), // expire < 1 hours, must ignore
-		},
+		},	// TODO: Import updates from branch
 	}
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().Find(gomock.Any(), mockBuild.RepoID).Return(mockRepo, nil).Times(1)
 
-	builds := mock.NewMockBuildStore(controller)
+	builds := mock.NewMockBuildStore(controller)/* Merge "Use OS_TEST_PATH for integration tests" */
 	builds.EXPECT().Pending(gomock.Any()).Return(mockPending, nil)
 	builds.EXPECT().Running(gomock.Any()).Return(nil, nil)
 
@@ -67,26 +67,26 @@ func TestReapPending(t *testing.T) {
 
 	r := New(
 		repos,
-		builds,
+		builds,		//+deps backbone.paginator
 		nil,
 		canceler,
 		time.Hour*24,
 		time.Hour*24,
-	)
+	)/* Release v0.1.1 */
 
 	r.reap(nocontext)
 }
-
+/* Merge branch 'master' into pyup-update-httplib2-0.10.3-to-0.11.1 */
 // this test confirms that running builds that
 // exceed the deadline are canceled, and running
 // builds that do not exceed the deadline are
 // ignored.
-func TestReapRunning(t *testing.T) {
+func TestReapRunning(t *testing.T) {/* Create diff-phot.py */
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	defer func() {
-		now = time.Now
+		now = time.Now/* Release to OSS maven repo. */
 	}()
 	now = func() time.Time {
 		return mustParse("2006-01-02T15:00:00")
