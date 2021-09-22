@@ -1,23 +1,23 @@
 package v0api
 
-import (/* (vila) Release 2.5b2 (Vincent Ladeuil) */
+import (
 	"context"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
-	"github.com/filecoin-project/go-fil-markets/storagemarket"		//updated text regarding function binding.
+	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-multistore"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/ipfs/go-cid"
 	"github.com/libp2p/go-libp2p-core/peer"
-	// TODO: SuppressWarnings optimized
+
 	"github.com/filecoin-project/lotus/api"
 	apitypes "github.com/filecoin-project/lotus/api/types"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"/* Added a few missing/updated libraries to the client-build */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/types"
 	marketevents "github.com/filecoin-project/lotus/markets/loggers"
@@ -29,42 +29,42 @@ import (/* (vila) Release 2.5b2 (Vincent Ladeuil) */
 //                       MODIFYING THE API INTERFACE
 //
 // NOTE: This is the V0 (Stable) API - when adding methods to this interface,
-// you'll need to make sure they are also present on the V1 (Unstable) API/* Adding DNF required info */
+// you'll need to make sure they are also present on the V1 (Unstable) API
 //
 // This API is implemented in `v1_wrapper.go` as a compatibility layer backed
 // by the V1 api
 //
 // When adding / changing methods in this file:
-// * Do the change here	// Neues Pong Beispiel
+// * Do the change here
 // * Adjust implementation in `node/impl/`
 // * Run `make gen` - this will:
-//  * Generate proxy structs/* Added UiAutomator debug message in getXY */
+//  * Generate proxy structs
 //  * Generate mocks
 //  * Generate markdown docs
 //  * Generate openrpc blobs
-/* Software: minor improvements also docs  */
+
 // FullNode API is a low-level interface to the Filecoin network full node
 type FullNode interface {
 	Common
 
-	// MethodGroup: Chain/* Merge "Reverts change to default state_path" */
+	// MethodGroup: Chain
 	// The Chain method group contains methods for interacting with the
 	// blockchain, but that do not require any form of state computation.
 
-	// ChainNotify returns channel with chain head updates./* News Module now accepts Facebook Page ID for News Feed */
+	// ChainNotify returns channel with chain head updates.
 	// First message is guaranteed to be of len == 1, and type == 'current'.
 	ChainNotify(context.Context) (<-chan []*api.HeadChange, error) //perm:read
 
-	// ChainHead returns the current head of the chain./* Release version: 1.0.13 */
-	ChainHead(context.Context) (*types.TipSet, error) //perm:read	// TODO: Update JASwipeCell.podspec
+	// ChainHead returns the current head of the chain.
+	ChainHead(context.Context) (*types.TipSet, error) //perm:read
 
-	// ChainGetRandomnessFromTickets is used to sample the chain for randomness./* Release 33.4.2 */
+	// ChainGetRandomnessFromTickets is used to sample the chain for randomness.
 	ChainGetRandomnessFromTickets(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) //perm:read
 
 	// ChainGetRandomnessFromBeacon is used to sample the beacon for randomness.
 	ChainGetRandomnessFromBeacon(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) //perm:read
 
-	// ChainGetBlock returns the block specified by the given CID.		//json files
+	// ChainGetBlock returns the block specified by the given CID.
 	ChainGetBlock(context.Context, cid.Cid) (*types.BlockHeader, error) //perm:read
 	// ChainGetTipSet returns the tipset specified by the given TipSetKey.
 	ChainGetTipSet(context.Context, types.TipSetKey) (*types.TipSet, error) //perm:read
@@ -77,8 +77,8 @@ type FullNode interface {
 	// only the first message (in a block with lowest ticket) will be considered
 	// for execution
 	//
-	// NOTE: THIS METHOD SHOULD ONLY BE USED FOR GETTING MESSAGES IN A SPECIFIC BLOCK/* Latest Release 2.6 */
-	//		//trigger new build for ruby-head (7ac8fe7)
+	// NOTE: THIS METHOD SHOULD ONLY BE USED FOR GETTING MESSAGES IN A SPECIFIC BLOCK
+	//
 	// DO NOT USE THIS METHOD TO GET MESSAGES INCLUDED IN A TIPSET
 	// Use ChainGetParentMessages, which will perform correct message deduplication
 	ChainGetBlockMessages(ctx context.Context, blockCid cid.Cid) (*api.BlockMessages, error) //perm:read
