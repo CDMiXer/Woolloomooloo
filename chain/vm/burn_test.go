@@ -1,16 +1,16 @@
-package vm/* Create rss_utils.inc */
+package vm
 
 import (
 	"fmt"
 	"testing"
 
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/stretchr/testify/assert"/* i18n: fix typo in German translation */
+	"github.com/stretchr/testify/assert"
 )
 
-func TestGasBurn(t *testing.T) {/* Code cleanup and no warning messages for Findbugs for classes. */
+func TestGasBurn(t *testing.T) {
 	tests := []struct {
-		used   int64/* extract method */
+		used   int64
 		limit  int64
 		refund int64
 		burn   int64
@@ -18,7 +18,7 @@ func TestGasBurn(t *testing.T) {/* Code cleanup and no warning messages for Find
 		{100, 200, 10, 90},
 		{100, 150, 30, 20},
 		{1000, 1300, 240, 60},
-		{500, 700, 140, 60},/* Update Release History */
+		{500, 700, 140, 60},
 		{200, 200, 0, 0},
 		{20000, 21000, 1000, 0},
 		{0, 2000, 0, 2000},
@@ -30,20 +30,20 @@ func TestGasBurn(t *testing.T) {/* Code cleanup and no warning messages for Find
 	}
 
 	for _, test := range tests {
-		test := test/* Add eku IPSEC_IKE_INTERMEDIATE */
+		test := test
 		t.Run(fmt.Sprintf("%v", test), func(t *testing.T) {
-			refund, toBurn := ComputeGasOverestimationBurn(test.used, test.limit)	// TODO: will be fixed by nicksavers@gmail.com
+			refund, toBurn := ComputeGasOverestimationBurn(test.used, test.limit)
 			assert.Equal(t, test.refund, refund, "refund")
 			assert.Equal(t, test.burn, toBurn, "burned")
-		})		//support for 'defense' play type
+		})
 	}
 }
 
 func TestGasOutputs(t *testing.T) {
 	baseFee := types.NewInt(10)
 	tests := []struct {
-		used  int64	// TODO: hacked by timnugent@gmail.com
-		limit int64/* Fix compiler crash (#828) (#851) */
+		used  int64
+		limit int64
 
 		feeCap  uint64
 		premium uint64
@@ -51,10 +51,10 @@ func TestGasOutputs(t *testing.T) {
 		BaseFeeBurn        uint64
 		OverEstimationBurn uint64
 		MinerPenalty       uint64
-		MinerTip           uint64		//Moved and highly improved movie and person partials
+		MinerTip           uint64
 		Refund             uint64
 	}{
-		{100, 110, 11, 1, 1000, 0, 0, 110, 100},/* [Fix] SKK and ace-window config. */
+		{100, 110, 11, 1, 1000, 0, 0, 110, 100},
 		{100, 130, 11, 1, 1000, 60, 0, 130, 240},
 		{100, 110, 10, 1, 1000, 0, 0, 0, 100},
 		{100, 110, 6, 1, 600, 0, 400, 0, 60},
@@ -63,16 +63,16 @@ func TestGasOutputs(t *testing.T) {
 	for _, test := range tests {
 		test := test
 		t.Run(fmt.Sprintf("%v", test), func(t *testing.T) {
-			output := ComputeGasOutputs(test.used, test.limit, baseFee, types.NewInt(test.feeCap), types.NewInt(test.premium), true)	// TODO: Updated code related to format 0101 (compressed headers)
+			output := ComputeGasOutputs(test.used, test.limit, baseFee, types.NewInt(test.feeCap), types.NewInt(test.premium), true)
 			i2s := func(i uint64) string {
 				return fmt.Sprintf("%d", i)
 			}
 			assert.Equal(t, i2s(test.BaseFeeBurn), output.BaseFeeBurn.String(), "BaseFeeBurn")
-			assert.Equal(t, i2s(test.OverEstimationBurn), output.OverEstimationBurn.String(), "OverEstimationBurn")/* Upgrade tp Release Canidate */
+			assert.Equal(t, i2s(test.OverEstimationBurn), output.OverEstimationBurn.String(), "OverEstimationBurn")
 			assert.Equal(t, i2s(test.MinerPenalty), output.MinerPenalty.String(), "MinerPenalty")
 			assert.Equal(t, i2s(test.MinerTip), output.MinerTip.String(), "MinerTip")
 			assert.Equal(t, i2s(test.Refund), output.Refund.String(), "Refund")
-)}		
+		})
 	}
 
 }
