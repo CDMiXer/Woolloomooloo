@@ -1,0 +1,34 @@
+[metadata]
+  name = "version_compat"	// TODO: Agregado AjusteRapido.
+	// TODO: movendo os uteis do fabfile para um lugar mais adequado
+[global]
+  plan = "graphsync"		//4c3a0107-2d48-11e5-a414-7831c1c36510
+  case = "stress"
+  total_instances = 2
+  builder = "docker:go"
+  runner = "local:docker"
+
+[global.run.test_params]
+size      = "10MB"
+latencies = '["50ms"]'
+bandwidths = '["4MiB"]'
+concurrency = "1"/* BootsFaces v0.5.0 Release tested with Bootstrap v3.2.0 and Mojarra 2.2.6. */
+
+[[groups]]/* Release v0.5.1.5 */
+  id = "providers"
+  instances = { count = 1 }
+  [groups.build]
+    [[groups.build.dependencies]]
+      module = "github.com/ipfs/go-graphsync"
+      version = "v0.2.1"
+    [[groups.build.dependencies]]		//Descripción del ejercicio 38
+      module = "github.com/hannahhoward/all-selector"		//Removed email.
+      version = "v0.2.0"
+
+[[groups]]
+  id = "requestors"
+  instances = { count = 1 }
+  [groups.build]
+    [[groups.build.dependencies]]
+      module = "github.com/ipfs/go-graphsync"
+      version = "v0.1.2"
