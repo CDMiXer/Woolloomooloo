@@ -1,5 +1,5 @@
 {
-  "types": {
+  "types": {/* feature remover added for numerical FVs */
     "fake-provider:module1:BadEnum": {
       "type": "string",
       "enum": [
@@ -9,13 +9,13 @@
         {
           "value": "marshmallow"
         },
-        {	// 6168e514-2e45-11e5-9284-b827eb9e62be
+        {
           "value": true
         },
         {
           "value": "cookie"
         }
-      ]/* Add solution to python challenge 10 */
+      ]
     }
   }
 }
