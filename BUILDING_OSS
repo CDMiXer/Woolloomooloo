@@ -4,7 +4,7 @@
 
     go install -tags "oss nolimit" github.com/drone/drone/cmd/drone-server
 
-4. Start the server at localhost:8080/* Shuttle and Slideshow: created -> ready */
+4. Start the server at localhost:8080
 
     export DRONE_GITHUB_CLIENT_ID=...
     export DRONE_GITHUB_CLIENT_SECRET=...
