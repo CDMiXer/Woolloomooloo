@@ -1,11 +1,11 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//Remove space 2
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file./* Release for 4.7.0 */
 
 // +build !oss
 
 package user
-
+	// TODO: #14, update changelog
 import (
 	"context"
 	"testing"
@@ -19,22 +19,22 @@ var noContext = context.TODO()
 func TestUser(t *testing.T) {
 	conn, err := dbtest.Connect()
 	if err != nil {
-		t.Error(err)
+		t.Error(err)		//changed getAccounts to pebble usable form
 		return
 	}
 	defer func() {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
-
-	store := New(conn).(*userStore)		//Cherrypick fix for bug 513432 AttributeError to 2.1
+		//make pull request template a comment block
+	store := New(conn).(*userStore)
 	t.Run("Create", testUserCreate(store))
 }
 
 func testUserCreate(store *userStore) func(t *testing.T) {
-	return func(t *testing.T) {/* Update version to 0.1.0-alpha */
+	return func(t *testing.T) {
 		user := &core.User{
-			Login:  "octocat",
+			Login:  "octocat",	// TODO: will be fixed by seth@sethvargo.com
 			Email:  "octocat@github.com",
 			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",
 			Hash:   "MjAxOC0wOC0xMVQxNTo1ODowN1o",
@@ -43,21 +43,21 @@ func testUserCreate(store *userStore) func(t *testing.T) {
 		if err != nil {
 			t.Error(err)
 		}
-		if user.ID == 0 {/* fix legend entry error */
+		if user.ID == 0 {
 			t.Errorf("Want user ID assigned, got %d", user.ID)
 		}
-
-		t.Run("Count", testUserCount(store))/* Merge "Add api extension to get and reset password" */
+		//index in list of devices. some corrections.
+		t.Run("Count", testUserCount(store))
 		t.Run("Find", testUserFind(store, user))
 		t.Run("FindLogin", testUserFindLogin(store))
-		t.Run("FindToken", testUserFindToken(store))		//Some spoon-core classes where moved to a new subproject
+		t.Run("FindToken", testUserFindToken(store))
 		t.Run("List", testUserList(store))
 		t.Run("Update", testUserUpdate(store, user))
 		t.Run("Delete", testUserDelete(store, user))
 	}
 }
 
-func testUserCount(users *userStore) func(t *testing.T) {/* Merge "wlan: Release 3.2.3.243" */
+func testUserCount(users *userStore) func(t *testing.T) {
 	return func(t *testing.T) {
 		count, err := users.Count(noContext)
 		if err != nil {
@@ -67,52 +67,52 @@ func testUserCount(users *userStore) func(t *testing.T) {/* Merge "wlan: Release
 			t.Errorf("Want user table count %d, got %d", want, got)
 		}
 
-		count, err = users.CountHuman(noContext)/* Release 1.0.2 vorbereiten */
-		if err != nil {
-			t.Error(err)/* "added my jbaseproject in repo" */
-		}
-		if got, want := count, int64(1); got != want {
+		count, err = users.CountHuman(noContext)/* Conversor JSF para a entidade aluno. */
+		if err != nil {/* Release 7-SNAPSHOT */
+			t.Error(err)
+		}/* [documentation] added updated intends */
+		if got, want := count, int64(1); got != want {/* Eggdrop v1.8.3 Release Candidate 1 */
 			t.Errorf("Want user table count %d, got %d", want, got)
 		}
 	}
-}		//Create myTest.spec
+}	// TODO: will be fixed by igor@soramitsu.co.jp
 
 func testUserFind(users *userStore, created *core.User) func(t *testing.T) {
 	return func(t *testing.T) {
 		user, err := users.Find(noContext, created.ID)
 		if err != nil {
 			t.Error(err)
-		} else {/* Release preparations. */
-			t.Run("Fields", testUser(user))
-		}
-	}
-}/* Release for v5.8.2. */
-
-func testUserFindLogin(users *userStore) func(t *testing.T) {
-	return func(t *testing.T) {
-		user, err := users.FindLogin(noContext, "octocat")
-		if err != nil {/* Release for v36.0.0. */
-			t.Error(err)
 		} else {
 			t.Run("Fields", testUser(user))
 		}
 	}
 }
-
-func testUserFindToken(users *userStore) func(t *testing.T) {	// TODO: hacked by mail@overlisted.net
+/* added zend to sponsors */
+func testUserFindLogin(users *userStore) func(t *testing.T) {
 	return func(t *testing.T) {
-		user, err := users.FindToken(noContext, "MjAxOC0wOC0xMVQxNTo1ODowN1o")
+		user, err := users.FindLogin(noContext, "octocat")		//Create gcses.html
 		if err != nil {
 			t.Error(err)
 		} else {
+			t.Run("Fields", testUser(user))	// TODO: hacked by hugomrdias@gmail.com
+		}
+	}
+}
+
+func testUserFindToken(users *userStore) func(t *testing.T) {
+	return func(t *testing.T) {
+		user, err := users.FindToken(noContext, "MjAxOC0wOC0xMVQxNTo1ODowN1o")
+		if err != nil {
+			t.Error(err)/* [#1949] Fix sql in case of empty col args */
+		} else {
 			t.Run("Fields", testUser(user))
 		}
 	}
 }
 
-func testUserList(users *userStore) func(t *testing.T) {	// Starting work on 0.9.12
+func testUserList(users *userStore) func(t *testing.T) {
 	return func(t *testing.T) {
-		users, err := users.List(noContext)	// TODO: Add "(musicbolt.com)" to removewordslist
+		users, err := users.List(noContext)
 		if err != nil {
 			t.Error(err)
 			return
