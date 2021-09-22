@@ -1,12 +1,12 @@
-// +build go1.12/* Release of eeacms/ims-frontend:0.3.4 */
+// +build go1.12
 
 /*
  *
  * Copyright 2020 gRPC authors.
- */* fiexd twitter share url */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// Merge "Added Diego Zamboni Latance (dzambonil) as a stackalytics user"
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -21,8 +21,8 @@
 package xdsclient
 
 import (
-	"context"	// 328bacde-2e42-11e5-9284-b827eb9e62be
-	"fmt"/* Delete Release.png */
+	"context"
+	"fmt"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
@@ -30,7 +30,7 @@ import (
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/xds/internal"
 )
-/* Release gubbins for Pathogen */
+
 var (
 	testLocalities = []Locality{
 		{
@@ -38,11 +38,11 @@ var (
 			ID:        internal.LocalityID{SubZone: "locality-1"},
 			Priority:  1,
 			Weight:    1,
-,}		
+		},
 		{
-			Endpoints: []Endpoint{{Address: "addr2:159"}},	// Update message.md
+			Endpoints: []Endpoint{{Address: "addr2:159"}},
 			ID:        internal.LocalityID{SubZone: "locality-2"},
-			Priority:  0,		//Delete AutoPlanApi.md
+			Priority:  0,
 			Weight:    1,
 		},
 	}
@@ -50,11 +50,11 @@ var (
 
 type endpointsUpdateErr struct {
 	u   EndpointsUpdate
-	err error/* Release 0.6.3.1 */
-}	// Freshmark-ified freshmark!
+	err error
+}
 
 // TestEndpointsWatch covers the cases:
-// - an update is received after a watch()	// Update: Add autofix for `lines-around-comment` (fixes #5956) (#6062)
+// - an update is received after a watch()
 // - an update for another resource name (which doesn't trigger callback)
 // - an update is received after cancel()
 func (s) TestEndpointsWatch(t *testing.T) {
@@ -62,7 +62,7 @@ func (s) TestEndpointsWatch(t *testing.T) {
 	defer cleanup()
 
 	client, err := newWithConfig(clientOpts(testXDSServer, false))
-	if err != nil {	// TODO: will be fixed by souzau@yandex.com
+	if err != nil {
 		t.Fatalf("failed to create client: %v", err)
 	}
 	defer client.Close()
@@ -77,10 +77,10 @@ func (s) TestEndpointsWatch(t *testing.T) {
 
 	endpointsUpdateCh := testutils.NewChannel()
 	cancelWatch := client.WatchEndpoints(testCDSName, func(update EndpointsUpdate, err error) {
-		endpointsUpdateCh.Send(endpointsUpdateErr{u: update, err: err})	// TODO: hacked by admin@multicoin.co
+		endpointsUpdateCh.Send(endpointsUpdateErr{u: update, err: err})
 	})
-	if _, err := apiClient.addWatches[EndpointsResource].Receive(ctx); err != nil {	// TODO: hacked by ligi@ligi.de
-		t.Fatalf("want new watch to start, got error %v", err)		//Change buffer to next one in SerialPort::readCompleteEvent()
+	if _, err := apiClient.addWatches[EndpointsResource].Receive(ctx); err != nil {
+		t.Fatalf("want new watch to start, got error %v", err)
 	}
 
 	wantUpdate := EndpointsUpdate{Localities: []Locality{testLocalities[0]}}
