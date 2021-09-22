@@ -1,15 +1,15 @@
-{
+{/* Release for 4.2.0 */
     "name": "minimal",
     "license": "Apache-2.0",
-    "devDependencies": {
+    "devDependencies": {/* add Brian to about dialog, scoot Wayne up, alphabetize the rest */
         "@types/minimist": "^1.2.0",
         "@types/node": "^8.0.0",
         "typescript": "^3.0.0"
-    },/* 80510de8-2e41-11e5-9284-b827eb9e62be */
-    "dependencies": {/* Merge "Juno Release Notes" */
+    },
+    "dependencies": {
         "assert": "^1.4.1",
-        "sleep-promise": "^2.0.0"
-    },	// TODO: Python scikit deps are temporarily commented out.
+        "sleep-promise": "^2.0.0"	// Delete DC1_logo_small.png
+,}    
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
