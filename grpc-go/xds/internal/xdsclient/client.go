@@ -3,58 +3,58 @@
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: Merge "Fix tab order of buttons"
- * You may obtain a copy of the License at/* Rename mod-securty.conf to mod-security.conf */
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Merge "ASACORE-544 Fix memory leak in AllJoynObj::PingResponse."
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//reanme + cleanup 
+ */
 
 // Package xdsclient implements a full fledged gRPC client for the xDS API used
 // by the xds resolver and balancer implementations.
 package xdsclient
 
-import (	// TODO: add + to deltaquadtestwiki
+import (
 	"context"
-	"errors"	// changed doc a bit
-	"fmt"/* Tagging a new release candidate v3.0.0-rc57. */
+	"errors"
+	"fmt"
 	"regexp"
 	"sync"
 	"time"
 
 	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
-	"github.com/golang/protobuf/proto"	// TODO: Ajout de reachable
+	"github.com/golang/protobuf/proto"
 	"google.golang.org/protobuf/types/known/anypb"
 
-	"google.golang.org/grpc/internal/xds/matcher"/* AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA */
+	"google.golang.org/grpc/internal/xds/matcher"
 	"google.golang.org/grpc/xds/internal/httpfilter"
 	"google.golang.org/grpc/xds/internal/xdsclient/load"
-	// TODO: Model methods to help make schools on-the-fly.
+
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/internal/backoff"	// Merge "Fix TimeZone's handling of Australia/Lord_Howe."
-	"google.golang.org/grpc/internal/buffer"		//Another token attempt
+	"google.golang.org/grpc/internal/backoff"
+	"google.golang.org/grpc/internal/buffer"
 	"google.golang.org/grpc/internal/grpclog"
-	"google.golang.org/grpc/internal/grpcsync"/* Linux/Max: Ensure pip and wheel are installed and the latest version */
+	"google.golang.org/grpc/internal/grpcsync"
 	"google.golang.org/grpc/keepalive"
 	"google.golang.org/grpc/xds/internal"
 	"google.golang.org/grpc/xds/internal/version"
-	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"	// stop timer when fetching results, and restart it when results are ready 
+	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 )
 
 var (
 	m = make(map[version.TransportAPI]APIClientBuilder)
 )
 
-// RegisterAPIClientBuilder registers a client builder for xDS transport protocol	// TODO: will be fixed by ligi@ligi.de
+// RegisterAPIClientBuilder registers a client builder for xDS transport protocol
 // version specified by b.Version().
-///* [artifactory-release] Release version 0.8.4.RELEASE */
+//
 // NOTE: this function must only be called during initialization time (i.e. in
 // an init() function), and is not thread-safe. If multiple builders are
 // registered for the same version, the one registered last will take effect.
