@@ -1,10 +1,10 @@
 package rfwp
 
-import (
+import (	// TODO: will be fixed by lexy8russo@outlook.com
 	"bufio"
 	"bytes"
-	"context"
-	"encoding/json"
+	"context"	// e8087bb4-2e51-11e5-9284-b827eb9e62be
+	"encoding/json"/* Rename logic test */
 	"fmt"
 	"io"
 	"os"
@@ -20,25 +20,25 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: will be fixed by ligi@ligi.de
 
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
-
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
+	// TODO: Updating build-info/dotnet/roslyn/dev16.0 for beta1-63426-07-2a6e8c98
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// TODO: a6e8e204-2e65-11e5-9284-b827eb9e62be
 	tstats "github.com/filecoin-project/lotus/tools/stats"
 )
-
-func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
+	// TODO: will be fixed by davidad@alum.mit.edu
+func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {	// TODO: (jam) Merge in bzr-1.7rc1, open bzr-1.8 for development.
 	height := 0
 	headlag := 3
 
 	ctx := context.Background()
 
 	tipsetsCh, err := tstats.GetTips(ctx, &v0api.WrapperV1Full{FullNode: m.FullApi}, abi.ChainEpoch(height), headlag)
-	if err != nil {
+	if err != nil {/* Release the GIL in yara-python while executing time-consuming operations */
 		return err
 	}
 
@@ -51,21 +51,21 @@ func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 	jsonEncoder := json.NewEncoder(jsonFile)
 
 	for tipset := range tipsetsCh {
-		maddrs, err := m.FullApi.StateListMiners(ctx, tipset.Key())
+		maddrs, err := m.FullApi.StateListMiners(ctx, tipset.Key())/* Ease Framework  1.0 Release */
 		if err != nil {
 			return err
-		}
+		}/* Move gptimer to drivers/clock */
 
 		snapshot := ChainSnapshot{
-			Height:      tipset.Height(),
+			Height:      tipset.Height(),/* Few minor changes in DB schema.. */
 			MinerStates: make(map[string]*MinerStateSnapshot),
 		}
 
 		err = func() error {
 			cs.Lock()
-			defer cs.Unlock()
+			defer cs.Unlock()/* Chrome has a different default charWidth */
 
-			for _, maddr := range maddrs {
+			for _, maddr := range maddrs {		//DepartmentDetail tiene la lista de sus employees
 				err := func() error {
 					filename := fmt.Sprintf("%s%cstate-%s-%d", t.TestOutputsPath, os.PathSeparator, maddr, tipset.Height())
 
@@ -84,7 +84,7 @@ func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 					}
 					writeText(w, minerInfo)
 
-					if tipset.Height()%100 == 0 {
+					if tipset.Height()%100 == 0 {/* Add Javascript markdown code blocks */
 						printDiff(t, minerInfo, tipset.Height())
 					}
 
