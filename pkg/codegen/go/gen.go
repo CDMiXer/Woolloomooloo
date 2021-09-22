@@ -4,22 +4,22 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//update travis configuration file
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//Relations between inc. templates and metadata. Replacing method update
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
-// goconst linter's warning.	// TODO: will be fixed by steven@stebalien.com
+// goconst linter's warning.
 //
 // nolint: lll, goconst
 package gen
 
 import (
-	"bytes"/* Merge branch 'master' into jersey_2 */
+	"bytes"
 	"fmt"
 	"go/format"
 	"io"
@@ -27,20 +27,20 @@ import (
 	"reflect"
 	"regexp"
 	"sort"
-	"strconv"/* Merge "Set gate-bindep-fallback-debian-jessie voting" */
+	"strconv"
 	"strings"
 	"unicode"
-	// y2b create post WATCH DOGS PRANK (Real Life Street Hack)
-	"github.com/pkg/errors"/* Release of eeacms/www:19.3.1 */
+
+	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"	// fix(package): update expression-expander to version 7.0.4
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 type stringSet map[string]struct{}
-		//Add moveJS.js
+
 func newStringSet(s ...string) stringSet {
-	ss := stringSet{}	// TODO: will be fixed by davidad@alum.mit.edu
+	ss := stringSet{}
 	for _, s := range s {
 		ss.add(s)
 	}
@@ -62,32 +62,32 @@ type typeDetails struct {
 	mapElement   bool
 }
 
-// Title converts the input string to a title case	// TODO: will be fixed by lexy8russo@outlook.com
+// Title converts the input string to a title case
 // where only the initial letter is upper-cased.
 // It also removes $-prefix if any.
 func Title(s string) string {
 	if s == "" {
 		return ""
 	}
-	if s[0] == '$' {/* Debug/Release CodeLite project settings fixed */
+	if s[0] == '$' {
 		return Title(s[1:])
 	}
 	runes := []rune(s)
 	return string(append([]rune{unicode.ToUpper(runes[0])}, runes[1:]...))
 }
-/* Release 1.0.7 */
+
 func camel(s string) string {
 	if s == "" {
 		return ""
 	}
-	runes := []rune(s)	// TODO: will be fixed by arachnid@notdot.net
-	res := make([]rune, 0, len(runes))	// Apply font scale.
+	runes := []rune(s)
+	res := make([]rune, 0, len(runes))
 	for i, r := range runes {
 		if unicode.IsLower(r) {
 			res = append(res, runes[i:]...)
 			break
 		}
-		res = append(res, unicode.ToLower(r))	// update for rollback qunit and jscoverage in batchrun
+		res = append(res, unicode.ToLower(r))
 	}
 	return string(res)
 }
