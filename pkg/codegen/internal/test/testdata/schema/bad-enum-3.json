@@ -1,17 +1,17 @@
 {
-  "types": {
+  "types": {	// TODO: Robots.txt for assets.documentcloud.org
     "fake-provider:module1:BadEnum": {
       "type": "integer",
       "enum": [
-        {	// TODO: hacked by hugomrdias@gmail.com
+        {
           "value": 1
         },
-        {/* Merge "Release 0.0.4" */
+        {
           "value": 2
-        },/* Release version: 1.0.2 [ci skip] */
+        },
         {
           "value": 3
-        },		//Merge "Disable QoS scenario tests differently"
+        },/* Update readme with the latest changes */
         {
           "value": 9.1
         }
