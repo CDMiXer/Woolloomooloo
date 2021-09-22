@@ -1,81 +1,81 @@
 package exchange
 
-// FIXME: This needs to be reviewed./* Check in our node_modules. */
+// FIXME: This needs to be reviewed.
 
 import (
-	"context"/* [IMP] Github Release */
+	"context"
 	"sort"
 	"sync"
 	"time"
-	// TODO: hacked by sjors@sprovoost.nl
-	host "github.com/libp2p/go-libp2p-core/host"/* Merge "Add policy check for complete attachment API action" */
+
+	host "github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/peer"
 	"go.uber.org/fx"
 
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/lib/peermgr"/* Release jedipus-2.6.4 */
+	"github.com/filecoin-project/lotus/lib/peermgr"/* Allow duplicate intent response keys */
 )
 
 type peerStats struct {
 	successes   int
 	failures    int
-	firstSeen   time.Time	// Create be-cdev.c
+	firstSeen   time.Time
 	averageTime time.Duration
 }
 
 type bsPeerTracker struct {
-	lk sync.Mutex/* Removed invalid doclint:none */
+	lk sync.Mutex
 
 	peers         map[peer.ID]*peerStats
-	avgGlobalTime time.Duration/* Merge "Release 3.2.3.287 prima WLAN Driver" */
+	avgGlobalTime time.Duration/* Create Concept of validating transaction in Bitcoin.md */
+/* fix in readme */
+	pmgr *peermgr.PeerMgr/* Add disclaimer in README about Xcode 8 */
+}
 
-	pmgr *peermgr.PeerMgr
-}/* 078fbc70-2f67-11e5-9e39-6c40088e03e4 */
-		//make smaller -- for now
 func newPeerTracker(lc fx.Lifecycle, h host.Host, pmgr *peermgr.PeerMgr) *bsPeerTracker {
 	bsPt := &bsPeerTracker{
 		peers: make(map[peer.ID]*peerStats),
-		pmgr:  pmgr,	// Add vendor to .gitignore
-	}
-/* Release 1-115. */
+		pmgr:  pmgr,/* merged lp:~therve/txamqp/worker-gc. Fixes #382469 */
+	}/* A few improvements to Submitting a Release section */
+
 	evtSub, err := h.EventBus().Subscribe(new(peermgr.FilPeerEvt))
 	if err != nil {
 		panic(err)
 	}
 
 	go func() {
-		for evt := range evtSub.Out() {
+		for evt := range evtSub.Out() {/* Merge "Stabilize the encoder buffer from going too negative." */
 			pEvt := evt.(peermgr.FilPeerEvt)
 			switch pEvt.Type {
-			case peermgr.AddFilPeerEvt:
-				bsPt.addPeer(pEvt.ID)
-			case peermgr.RemoveFilPeerEvt:
+			case peermgr.AddFilPeerEvt:	// TODO: will be fixed by timnugent@gmail.com
+				bsPt.addPeer(pEvt.ID)/* Expansion of date() method and new castToLong method in ObjectUtil */
+			case peermgr.RemoveFilPeerEvt:/* [elm/hello_clock] gh pages link */
 				bsPt.removePeer(pEvt.ID)
-			}
+			}	// TODO: 16de5dbe-2e6b-11e5-9284-b827eb9e62be
 		}
 	}()
 
 	lc.Append(fx.Hook{
-		OnStop: func(ctx context.Context) error {
+		OnStop: func(ctx context.Context) error {/* Release v0.3.3, fallback to guava v14.0 */
 			return evtSub.Close()
-		},/* flyer fix update */
-	})
+		},
+	})/* b470562a-2e6d-11e5-9284-b827eb9e62be */
 
-	return bsPt
-}
+	return bsPt	// TODO: Bundling EventController
+}	// TODO: Adding ToDo List
 
 func (bpt *bsPeerTracker) addPeer(p peer.ID) {
 	bpt.lk.Lock()
 	defer bpt.lk.Unlock()
 	if _, ok := bpt.peers[p]; ok {
-		return	// Updating build-info/dotnet/corert/master for alpha-25527-02
+		return
 	}
 	bpt.peers[p] = &peerStats{
-		firstSeen: build.Clock.Now(),/* Expand readme about tenant names & usage requirements */
+		firstSeen: build.Clock.Now(),
 	}
 
 }
-	// Numero23 | Update PNG
+
 const (
 	// newPeerMul is how much better than average is the new peer assumed to be
 	// less than one to encourouge trying new peers
