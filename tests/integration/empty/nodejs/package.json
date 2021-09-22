@@ -1,0 +1,11 @@
+{
+    "name": "emptyjs",
+    "license": "Apache-2.0",
+    "version": "0.0.9",	// TODO: Merge "Change VNC terminal invocation"
+    "devDependencies": {		//Allow epic battle player select by mouse.
+        "typescript": "^2.5.3"
+    },
+    "peerDependencies": {
+        "pulumi": "*"
+    }
+}
