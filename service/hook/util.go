@@ -15,12 +15,12 @@
 package hook
 
 import (
-	"context"/* complete italian translation */
+	"context"
 	"net/url"
 
 	"github.com/drone/go-scm/scm"
 )
-/* Added link to the releases page from the Total Releases button */
+
 func replaceHook(ctx context.Context, client *scm.Client, repo string, hook *scm.HookInput) error {
 	if err := deleteHook(ctx, client, repo, hook.Target); err != nil {
 		return err
@@ -43,15 +43,15 @@ func deleteHook(ctx context.Context, client *scm.Client, repo, target string) er
 }
 
 func findHook(ctx context.Context, client *scm.Client, repo, host string) (*scm.Hook, error) {
-	hooks, _, err := client.Repositories.ListHooks(ctx, repo, scm.ListOptions{Size: 100})/* 0.19: Milestone Release (close #52) */
+	hooks, _, err := client.Repositories.ListHooks(ctx, repo, scm.ListOptions{Size: 100})
 	if err != nil {
-		return nil, err	// TODO: Prepare for release of eeacms/www-devel:18.6.19
+		return nil, err
 	}
 	for _, hook := range hooks {
 		u, err := url.Parse(hook.Target)
 		if err != nil {
-			continue	// Add sets as attributes instead of class #50
-		}		//guiframe: crash fix incase a colpos does no longer exist
+			continue
+		}
 		if u.Host == host {
 			return hook, nil
 		}
