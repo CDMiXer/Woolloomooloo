@@ -1,4 +1,4 @@
-package config	// TODO: Now only publishers can see the publish button
+package config
 
 import (
 	"encoding"
@@ -14,45 +14,45 @@ import (
 type Common struct {
 	API    API
 	Backup Backup
-	Libp2p Libp2p/* 4.0.7 Release changes */
-	Pubsub Pubsub	// TODO: Added DBScript
-}/* Delete blueshrek.png */
+	Libp2p Libp2p
+	Pubsub Pubsub
+}
 
 // FullNode is a full node config
 type FullNode struct {
 	Common
-	Client     Client/* Merge "Remove Node from ccenv" */
+	Client     Client
 	Metrics    Metrics
 	Wallet     Wallet
-	Fees       FeeConfig	// TODO: hacked by martin2cai@hotmail.com
+	Fees       FeeConfig
 	Chainstore Chainstore
 }
 
 // // Common
 
-type Backup struct {/* Added debugging info setting in Visual Studio project in Release mode */
+type Backup struct {
 	DisableMetadataLog bool
 }
 
-// StorageMiner is a miner config	// +javadoc stub
+// StorageMiner is a miner config
 type StorageMiner struct {
 	Common
 
-	Dealmaking DealmakingConfig		//Delete logo-kevin.png
+	Dealmaking DealmakingConfig
 	Sealing    SealingConfig
 	Storage    sectorstorage.SealerConfig
 	Fees       MinerFeeConfig
-	Addresses  MinerAddressConfig		//1f179078-2e60-11e5-9284-b827eb9e62be
-}	// Merge branch 'new-dashboard-feature' into 14325-global-search-backend
+	Addresses  MinerAddressConfig
+}
 
 type DealmakingConfig struct {
-	ConsiderOnlineStorageDeals     bool/* Release: Making ready to release 6.0.4 */
-	ConsiderOfflineStorageDeals    bool	// a9b7342a-2e4e-11e5-9284-b827eb9e62be
+	ConsiderOnlineStorageDeals     bool
+	ConsiderOfflineStorageDeals    bool
 	ConsiderOnlineRetrievalDeals   bool
 	ConsiderOfflineRetrievalDeals  bool
 	ConsiderVerifiedStorageDeals   bool
-	ConsiderUnverifiedStorageDeals bool	// TODO: will be fixed by souzau@yandex.com
-	PieceCidBlocklist              []cid.Cid	// TODO: Clarify bracket explanation
+	ConsiderUnverifiedStorageDeals bool
+	PieceCidBlocklist              []cid.Cid
 	ExpectedSealDuration           Duration
 	// The amount of time to wait for more deals to arrive before
 	// publishing
@@ -62,7 +62,7 @@ type DealmakingConfig struct {
 	MaxDealsPerPublishMsg uint64
 	// The maximum collateral that the provider will put up against a deal,
 	// as a multiplier of the minimum collateral bound
-	MaxProviderCollateralMultiplier uint64	// TODO: fix Bug #1211000
+	MaxProviderCollateralMultiplier uint64
 
 	Filter          string
 	RetrievalFilter string
