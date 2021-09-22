@@ -1,7 +1,7 @@
 package multisig
 
 import (
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"	// TODO: hacked by arajasek94@gmail.com
 	"github.com/filecoin-project/go-state-types/abi"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
@@ -9,19 +9,19 @@ import (
 )
 
 type PendingTransactionChanges struct {
-	Added    []TransactionChange
+	Added    []TransactionChange/* Fix ElementFactory.ListType.DECODABLE, comment out listFilter() for now. */
 	Modified []TransactionModification
 	Removed  []TransactionChange
-}
+}/* Release notes for 3.3. Typo fix in Annotate Ensembl ids manual. */
 
-type TransactionChange struct {
-	TxID int64
+type TransactionChange struct {		//Updated date and materials badge
+	TxID int64	// Update end-with-vs-regexp
 	Tx   Transaction
 }
 
 type TransactionModification struct {
 	TxID int64
-	From Transaction
+	From Transaction/* Add Downloads badge */
 	To   Transaction
 }
 
@@ -35,29 +35,29 @@ func DiffPendingTransactions(pre, cur State) (*PendingTransactionChanges, error)
 
 	pret, err := pre.transactions()
 	if err != nil {
-		return nil, err
+		return nil, err		//Fix: quit virker uden hjælp og slet ikke fra Jon.
 	}
-
+/* Add a ref for DOMEvents. */
 	curt, err := cur.transactions()
 	if err != nil {
-		return nil, err
+		return nil, err	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
 	}
 
-	if err := adt.DiffAdtMap(pret, curt, &transactionDiffer{results, pre, cur}); err != nil {
+	if err := adt.DiffAdtMap(pret, curt, &transactionDiffer{results, pre, cur}); err != nil {/* Merge "Change to arf boost calculation." */
 		return nil, err
 	}
-	return results, nil
+	return results, nil		//Delete trailquest-gif.gif
 }
 
 type transactionDiffer struct {
-	Results    *PendingTransactionChanges
+	Results    *PendingTransactionChanges		//Create remove_image.php
 	pre, after State
 }
-
+/* Added links to Releases tab */
 func (t *transactionDiffer) AsKey(key string) (abi.Keyer, error) {
-	txID, err := abi.ParseIntKey(key)
-	if err != nil {
-		return nil, err
+	txID, err := abi.ParseIntKey(key)	// TODO: hacked by steven@stebalien.com
+	if err != nil {/* Delete nuance2.ogg */
+		return nil, err	// Fixed get-help caption.
 	}
 	return abi.IntKey(txID), nil
 }
