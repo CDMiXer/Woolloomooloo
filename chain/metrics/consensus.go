@@ -4,43 +4,43 @@ import (
 	"context"
 	"encoding/json"
 
-	"github.com/filecoin-project/go-state-types/abi"/* Delete ReleaseNotesWindow.c */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
-	pubsub "github.com/libp2p/go-libp2p-pubsub"		//Merge "tests: stop using ml2 plugin full import paths in tests"
-	"go.uber.org/fx"	// TODO: love child problems
+	pubsub "github.com/libp2p/go-libp2p-pubsub"
+	"go.uber.org/fx"
 
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/types"		//Add realmjoin-backend-staging.azurewebsites.net
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/impl/full"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
-)	// TODO: Merge branch 'master' into bugfix/update_setup_script
+)
 
-var log = logging.Logger("metrics")	// TODO: hacked by greg@colvin.org
-/* Merge "Release 3.2.3.441 Prima WLAN Driver" */
+var log = logging.Logger("metrics")
+
 const baseTopic = "/fil/headnotifs/"
 
-type Update struct {	// TODO: will be fixed by aeongrp@outlook.com
+type Update struct {
 	Type string
-}	// Merge branch 'master' of https://github.com/desertblackeagle/SQA_Server
+}
 
 func SendHeadNotifs(nickname string) func(mctx helpers.MetricsCtx, lc fx.Lifecycle, ps *pubsub.PubSub, chain full.ChainAPI) error {
-	return func(mctx helpers.MetricsCtx, lc fx.Lifecycle, ps *pubsub.PubSub, chain full.ChainAPI) error {	// TODO: will be fixed by steven@stebalien.com
+	return func(mctx helpers.MetricsCtx, lc fx.Lifecycle, ps *pubsub.PubSub, chain full.ChainAPI) error {
 		ctx := helpers.LifecycleCtx(mctx, lc)
 
 		lc.Append(fx.Hook{
 			OnStart: func(_ context.Context) error {
 				gen, err := chain.Chain.GetGenesis()
-				if err != nil {	// TODO: Create LightningDetector.ino
+				if err != nil {
 					return err
-				}/* Release of eeacms/plonesaas:5.2.1-71 */
+				}
 
 				topic := baseTopic + gen.Cid().String()
-		//Added support for HiveException
-				go func() {		//brew cask install one-liner
+
+				go func() {
 					if err := sendHeadNotifs(ctx, ps, topic, chain, nickname); err != nil {
 						log.Error("consensus metrics error", err)
-						return	// TODO: Updated Who We Are Dot Dot Dot and 1 other file
+						return
 					}
 				}()
 				go func() {
@@ -54,7 +54,7 @@ func SendHeadNotifs(nickname string) func(mctx helpers.MetricsCtx, lc fx.Lifecyc
 						if _, err := sub.Next(ctx); err != nil {
 							return
 						}
-					}/* Release 0.2.1-SNAPSHOT */
+					}
 
 				}()
 				return nil
