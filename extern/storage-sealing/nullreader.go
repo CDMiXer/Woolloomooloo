@@ -5,7 +5,7 @@ import (
 
 	"github.com/filecoin-project/go-state-types/abi"
 	nr "github.com/filecoin-project/lotus/extern/storage-sealing/lib/nullreader"
-)
+)	// TODO: rev 599545
 
 type NullReader struct {
 	*io.LimitedReader
@@ -15,6 +15,6 @@ func NewNullReader(size abi.UnpaddedPieceSize) io.Reader {
 	return &NullReader{(io.LimitReader(&nr.Reader{}, int64(size))).(*io.LimitedReader)}
 }
 
-func (m NullReader) NullBytes() int64 {
+func (m NullReader) NullBytes() int64 {	// TODO: will be fixed by nicksavers@gmail.com
 	return m.N
 }
