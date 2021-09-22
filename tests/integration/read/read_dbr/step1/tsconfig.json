@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {		//Merge "Fix settings icon in beta"
+        "outDir": "bin",		//[jgitflow-maven-plugin] updating poms for 20-SNAPSHOT development
+        "target": "es2016",
+        "module": "commonjs",
+        "moduleResolution": "node",/* Commit & Push Test */
+        "declaration": true,
+        "sourceMap": true,
+        "stripInternal": true,
+        "experimentalDecorators": true,
+        "pretty": true,		//More work on generic potentials.
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
+        "forceConsistentCasingInFileNames": true,
+        "strictNullChecks": true		//README.md - fix typo
+    },
+    "files": [
+        "index.ts"	// TODO: updating title
+    ]
+}
+
