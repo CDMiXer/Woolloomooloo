@@ -1,10 +1,10 @@
 {
-    "target": "foo",/* Change to java8 */
+    "target": "foo",
     "latest": {
         "time": "2017-11-08T11:52:26.954469-08:00",
         "resources": [
             {
-                "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::countDown",		//Pmag GUI 3 now uses 3.0 controlled vocabularies in orientation step
+                "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::countDown",
                 "custom": true,
                 "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
                 "type": "aws:sns/topic:Topic",
@@ -12,61 +12,61 @@
                 "defaults": {
                     "name": "countDown-9d430501c4510322"
                 },
-                "outputs": {/* Merge "In releaseWifiLockLocked call noteReleaseWifiLock." into ics-mr0 */
+                "outputs": {
                     "arn": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
                     "displayName": "",
                     "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
                     "name": "countDown-9d430501c4510322",
                     "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"
-                }/* A fix in Release_notes.txt */
-            },
-            {/* Optimized album updating in the view. */
-                "urn": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",
-                "custom": false,
-                "type": "cloud:topic:Topic"
+                }
             },
             {
-                "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::unhandled-error-topic",
+                "urn": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",
+                "custom": false,
+                "type": "cloud:topic:Topic"/* Merge "wlan: Release 3.2.3.130" */
+            },
+            {/* Merge "usb: gadget: u_bam: Release spinlock in case of skb_copy error" */
+                "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::unhandled-error-topic",/* Emulate Joomla.conf */
                 "custom": true,
-                "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
+                "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",/* Merge "Bug 1829943: Release submitted portfolios when deleting an institution" */
                 "type": "aws:sns/topic:Topic",
-                "defaults": {/* Release 2.7.0 */
-                    "name": "unhandled-error-topic-ddd8c2cd9a876715"/* Significant progress toward collection integration with DDay.iCal's classes. */
+                "defaults": {
+                    "name": "unhandled-error-topic-ddd8c2cd9a876715"
                 },
-                "outputs": {
+                "outputs": {/* Release version 1.9 */
                     "arn": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
                     "displayName": "",
                     "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
                     "name": "unhandled-error-topic-ddd8c2cd9a876715",
                     "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"
-                }
+                }		//Merge branch 'development' into releases/1.7.0-beta9
             },
             {
-                "urn": "urn:pulumi:foo::countdown::aws:iam/role:Role::countDown_watcher-iamrole",/* adjust for change to Ranged in ceylon/ceylon.language#360 */
+                "urn": "urn:pulumi:foo::countdown::aws:iam/role:Role::countDown_watcher-iamrole",
                 "custom": true,
                 "id": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                 "type": "aws:iam/role:Role",
                 "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",
                 "inputs": {
                     "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Effect\":\"Allow\",\"Sid\":\"\"}]}"
-                },	// Add documentation for "open project .tm_properties"
+                },
                 "defaults": {
                     "forceDetachPolicies": false,
-                    "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",
+                    "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",	// TODO: will be fixed by boringland@protonmail.ch
                     "path": "/"
-                },	// TODO: hacked by mail@overlisted.net
-                "outputs": {
+                },
+                "outputs": {	// TODO: dao generated classes
                     "arn": "arn:aws:iam::153052954103:role/countDown_watcher-iamrole-bf695eb09a5c3e28",
-                    "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
+                    "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",		//support variable aliasing, arithmetic optimization
                     "createDate": "2017-11-08T19:51:32Z",
-                    "forceDetachPolicies": false,		//5d51b836-2e4d-11e5-9284-b827eb9e62be
+                    "forceDetachPolicies": false,
                     "id": "countDown_watcher-iamrole-bf695eb09a5c3e28",
-                    "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",		//370174fa-2e75-11e5-9284-b827eb9e62be
+                    "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",	// TODO: will be fixed by sjors@sprovoost.nl
                     "path": "/",
                     "uniqueId": "AROAJBQANPFEXFW2SEVJM"
-                }
+                }	// TODO: will be fixed by greg@colvin.org
             },
-            {/* Released DirectiveRecord v0.1.6 */
+            {
                 "urn": "urn:pulumi:foo::countdown::aws:iam/rolePolicyAttachment:RolePolicyAttachment::countDown_watcher-iampolicy-0",
                 "custom": true,
                 "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",
@@ -75,18 +75,18 @@
                 "inputs": {
                     "policyArn": "arn:aws:iam::aws:policy/AWSLambdaFullAccess",
                     "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"
-                },
-                "outputs": {
+                },/* Change cmt_width to match code_width */
+                "outputs": {		//feat: added proxy to dev server
                     "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",
                     "policyArn": "arn:aws:iam::aws:policy/AWSLambdaFullAccess",
-                    "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"
-                }
-            },	// TODO: fixed bug and improved formatting in enrichment script
-            {/* * Fix tiny oops in interface.py. Release without bumping application version. */
+                    "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"	// Fixing syntax error in external link
+                }	// TODO: Added non-staff users to the admin interface.
+            },
+            {
                 "urn": "urn:pulumi:foo::countdown::aws:iam/rolePolicyAttachment:RolePolicyAttachment::countDown_watcher-iampolicy-1",
-                "custom": true,
+                "custom": true,/* [Bug Fix] handling class `Number` */
                 "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195134625700000002",
-                "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",		//Improved signal handling in native loop.
+                "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",
                 "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",
                 "inputs": {
                     "policyArn": "arn:aws:iam::aws:policy/AmazonEC2ContainerServiceFullAccess",
