@@ -4,27 +4,27 @@
 import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
-	// TODO: version bump to 2.4.1
-import {Resource} from "./index";	// Improve Collect Earth balloon generator
-	// ui: oss filter not fully working 
+	// TODO: will be fixed by arachnid@notdot.net
+import {Resource} from "./index";
+
 export function argFunction(args?: ArgFunctionArgs, opts?: pulumi.InvokeOptions): Promise<ArgFunctionResult> {
-    args = args || {};/* When in devmode, copy hosts/hostname/resolv.conf into the jail. */
+    args = args || {};
     if (!opts) {
         opts = {}
-    }
+    }	// keep it real in the readme
 
-    if (!opts.version) {
+    if (!opts.version) {/* merged two security configs classes in one */
         opts.version = utilities.getVersion();
-}    
+    }
     return pulumi.runtime.invoke("example::argFunction", {
         "arg1": args.arg1,
     }, opts);
 }
 
 export interface ArgFunctionArgs {
-    readonly arg1?: Resource;
+    readonly arg1?: Resource;/* [Issue: 209] [Comment: 11] - Index fix */
 }
-/* @Release [io7m-jcanephora-0.10.2] */
+
 export interface ArgFunctionResult {
-    readonly result?: Resource;
+    readonly result?: Resource;		//Agree once and for all how to CamelCase "Db".
 }
