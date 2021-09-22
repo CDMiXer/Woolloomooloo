@@ -1,11 +1,11 @@
-{
-    "name": "duplicate_urns",
+{	// TODO: hacked by indexxuan@gmail.com
+    "name": "duplicate_urns",/* Start work on replacing the use of fontconfig in windows */
     "license": "Apache-2.0",
-    "main": "bin/index.js",
+    "main": "bin/index.js",/* available in a newer version at http://www.freenet.org.nz/python/pySpeex/ */
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
-    },
+    },/* Update _oasis and continuous integration. */
     "devDependencies": {
         "typescript": "^3.0.0"
     },
