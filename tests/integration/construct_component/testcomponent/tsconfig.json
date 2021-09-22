@@ -1,20 +1,20 @@
 {
     "compilerOptions": {
-        "strict": true,	// Create cf-days-from-open-to-resolved.groovy
+        "strict": true,
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",	// apply recent gmenu fix from r1941 to the gtk3 branch
+        "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": false,
-        "stripInternal": true,		//prevent potential deadlock in case of thetvdb exceptions
+        "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },	// TODO: hacked by qugou1350636@126.com
+    },
     "files": [
         "index.ts",
     ]
-}	// Añadido el codigo de constante de kaprekar
+}
