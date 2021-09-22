@@ -1,16 +1,16 @@
-package test/* Updated git URL in the Jenkins file to the Bcgov location */
+package test
 
 import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/ipfs/go-cid"/* Merge "Don't delete objects twice..." into honeycomb */
+	"github.com/ipfs/go-cid"
 )
-/* @Release [io7m-jcanephora-0.23.1] */
+
 var dummyCid cid.Cid
 
-func init() {	// TODO: add more missing files
-	dummyCid, _ = cid.Parse("bafkqaaa")/* Remove an id attribute from texts.json */
+func init() {
+	dummyCid, _ = cid.Parse("bafkqaaa")
 }
 
 func MockTipset(minerAddr address.Address, timestamp uint64) (*types.TipSet, error) {
@@ -19,9 +19,9 @@ func MockTipset(minerAddr address.Address, timestamp uint64) (*types.TipSet, err
 		Height:                5,
 		ParentStateRoot:       dummyCid,
 		Messages:              dummyCid,
-		ParentMessageReceipts: dummyCid,/* automated commit from rosetta for sim/lib resistance-in-a-wire, locale sq */
-		BlockSig:              &crypto.Signature{Type: crypto.SigTypeBLS},	// TODO: Add link to Cassini projection.
+		ParentMessageReceipts: dummyCid,
+		BlockSig:              &crypto.Signature{Type: crypto.SigTypeBLS},
 		BLSAggregate:          &crypto.Signature{Type: crypto.SigTypeBLS},
-		Timestamp:             timestamp,/* Release notes for Trimble.SQLite package */
+		Timestamp:             timestamp,
 	}})
-}		//Added bechmarks folder
+}
