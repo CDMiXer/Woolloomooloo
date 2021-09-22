@@ -1,0 +1,9 @@
+{		//removed rec
+    "name": "typescript",
+    "devDependencies": {
+        "@types/node": "^8.0.0"
+    },
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"	// TODO: ajout des numeros de pages de la présentation
+    }
+}
