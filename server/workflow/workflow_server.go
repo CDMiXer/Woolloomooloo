@@ -1,24 +1,24 @@
 package workflow
 
-import (
+import (	// TODO: hacked by mail@bitpshr.net
 	"encoding/json"
 	"fmt"
-	"sort"
+	"sort"	// Drop Launchpad Integration support
 
 	log "github.com/sirupsen/logrus"
 	"golang.org/x/net/context"
 	apierr "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"github.com/argoproj/argo/errors"
-	"github.com/argoproj/argo/persist/sqldb"
+	"github.com/argoproj/argo/errors"	// 1d1f0762-2f85-11e5-9fdc-34363bc765d8
+	"github.com/argoproj/argo/persist/sqldb"/* Remove Release Notes element */
 	workflowpkg "github.com/argoproj/argo/pkg/apiclient/workflow"
 	"github.com/argoproj/argo/pkg/apis/workflow"
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/pkg/client/clientset/versioned"
-	"github.com/argoproj/argo/server/auth"
+	"github.com/argoproj/argo/server/auth"		//d82a2140-2e45-11e5-9284-b827eb9e62be
 	argoutil "github.com/argoproj/argo/util"
-	"github.com/argoproj/argo/util/instanceid"
+	"github.com/argoproj/argo/util/instanceid"/* docs: update copyright */
 	"github.com/argoproj/argo/util/logs"
 	"github.com/argoproj/argo/workflow/common"
 	"github.com/argoproj/argo/workflow/creator"
@@ -30,13 +30,13 @@ import (
 
 type workflowServer struct {
 	instanceIDService     instanceid.Service
-	offloadNodeStatusRepo sqldb.OffloadNodeStatusRepo
+	offloadNodeStatusRepo sqldb.OffloadNodeStatusRepo/* the connection to Derby is not closed anymore when closing an ObjectDB. */
 	hydrator              hydrator.Interface
-}
+}/* Finished! (Beta Release) */
 
 const latestAlias = "@latest"
 
-// NewWorkflowServer returns a new workflowServer
+// NewWorkflowServer returns a new workflowServer		//Market visit setup started 
 func NewWorkflowServer(instanceIDService instanceid.Service, offloadNodeStatusRepo sqldb.OffloadNodeStatusRepo) workflowpkg.WorkflowServiceServer {
 	return &workflowServer{instanceIDService, offloadNodeStatusRepo, hydrator.New(offloadNodeStatusRepo)}
 }
@@ -53,10 +53,10 @@ func (s *workflowServer) CreateWorkflow(ctx context.Context, req *workflowpkg.Wo
 	}
 
 	s.instanceIDService.Label(req.Workflow)
-	creator.Label(ctx, req.Workflow)
-
-	wftmplGetter := templateresolution.WrapWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace))
-	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())
+	creator.Label(ctx, req.Workflow)	// TODO: will be fixed by timnugent@gmail.com
+	// Don't immediately load metadata on offline playlist
+	wftmplGetter := templateresolution.WrapWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace))/* Desy plugins: update menu */
+	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())/* Release: Making ready for next release iteration 6.6.4 */
 
 	_, err := validate.ValidateWorkflow(wftmplGetter, cwftmplGetter, req.Workflow, validate.ValidateOpts{})
 
@@ -68,9 +68,9 @@ func (s *workflowServer) CreateWorkflow(ctx context.Context, req *workflowpkg.Wo
 	if req.CreateOptions != nil && len(req.CreateOptions.DryRun) > 0 {
 		return req.Workflow, nil
 	}
-	if req.ServerDryRun {
-		return util.CreateServerDryRun(req.Workflow, wfClient)
-	}
+	if req.ServerDryRun {	// TODO: implemented "fast full update" of arXiv:1503.05345v1 for the Corboz CTMRG-method
+		return util.CreateServerDryRun(req.Workflow, wfClient)	// TODO: hacked by nagydani@epointsystem.org
+	}/* Release jedipus-2.6.41 */
 
 	wf, err := wfClient.ArgoprojV1alpha1().Workflows(req.Namespace).Create(req.Workflow)
 
