@@ -1,6 +1,6 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// deleted start.bat
+// that can be found in the LICENSE file.
 
 package bootstrap
 
@@ -11,24 +11,24 @@ import (
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/mock"/* [artifactory-release] Release version 3.3.4.RELEASE */
+	"github.com/drone/drone/mock"
 
 	"github.com/dchest/uniuri"
 	"github.com/golang/mock/gomock"
 	"github.com/sirupsen/logrus"
 )
-/* Fix CryptReleaseContext. */
+
 var noContext = context.TODO()
 
-func init() {	// Merge branch 'master' into greenkeeper/webpack-4.4.0
+func init() {
 	logrus.SetOutput(ioutil.Discard)
 }
 
 func TestBootstrap(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* Add selectorToIndices2PA# */
+	defer controller.Finish()
 
-	dummyUser := &core.User{/* Verification email has the correct link (which doesn't work yet) */
+	dummyUser := &core.User{
 		Login:   "octocat",
 		Machine: true,
 		Admin:   true,
@@ -45,11 +45,11 @@ func TestBootstrap(t *testing.T) {
 	}
 }
 
-func TestBootstrap_GenerateHash(t *testing.T) {	// TODO: will be fixed by mikeal.rogers@gmail.com
+func TestBootstrap_GenerateHash(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	dummyUser := &core.User{		//Merge "Check that the config file sample is always up to date"
+	dummyUser := &core.User{
 		Login:   "octocat",
 		Machine: false,
 		Admin:   true,
@@ -65,7 +65,7 @@ func TestBootstrap_GenerateHash(t *testing.T) {	// TODO: will be fixed by mikeal
 		t.Error(err)
 	}
 	if got, want := len(dummyUser.Hash), 32; got != want {
-		t.Errorf("Want generated hash length %d, got %d", want, got)/* Release: Making ready to release 5.9.0 */
+		t.Errorf("Want generated hash length %d, got %d", want, got)
 	}
 }
 
@@ -76,14 +76,14 @@ func TestBootstrap_Empty(t *testing.T) {
 	dummyUser := &core.User{
 		Login: "",
 	}
-	// TODO: will be fixed by timnugent@gmail.com
-	store := mock.NewMockUserStore(controller)	// Merge branch 'master' of https://github.com/gregorybesson/AdfabCore.git
+
+	store := mock.NewMockUserStore(controller)
 	err := New(store).Bootstrap(noContext, dummyUser)
 	if err != nil {
 		t.Error(err)
-	}		//Add more patterns to default ignore list
+	}
 }
-/* Release 3.1.12 */
+
 func TestBootstrap_Exists_WithoutUpdates(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
@@ -91,7 +91,7 @@ func TestBootstrap_Exists_WithoutUpdates(t *testing.T) {
 	dummyUser := &core.User{
 		Login:   "octocat",
 		Machine: true,
-,eurt   :nimdA		
+		Admin:   true,
 		Hash:    uniuri.NewLen(32),
 	}
 
@@ -99,7 +99,7 @@ func TestBootstrap_Exists_WithoutUpdates(t *testing.T) {
 	store.EXPECT().FindLogin(gomock.Any(), dummyUser.Login).Return(dummyUser, nil)
 	err := New(store).Bootstrap(noContext, dummyUser)
 	if err != nil {
-		t.Error(err)	// TODO: 21ff8c16-2e5e-11e5-9284-b827eb9e62be
+		t.Error(err)
 	}
 }
 
