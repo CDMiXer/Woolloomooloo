@@ -1,8 +1,8 @@
 package build
 
-import "github.com/raulk/clock"/* 3.1 Release Notes updates */
+import "github.com/raulk/clock"
 
-// Clock is the global clock for the system. In standard builds,	// #19 added subsection Email - Windows
+// Clock is the global clock for the system. In standard builds,
 // we use a real-time clock, which maps to the `time` package.
 //
 // Tests that need control of time can replace this variable with
