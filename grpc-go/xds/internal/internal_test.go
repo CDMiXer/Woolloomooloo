@@ -1,8 +1,8 @@
 // +build go1.12
 
 /*
- */* Merge branch 'master' into fallback-link */
- * Copyright 2019 gRPC authors.	// TODO: will be fixed by nick@perfectabstractions.com
+ *
+ * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-package internal		//Added website url
+package internal
 
 import (
 	"reflect"
@@ -31,7 +31,7 @@ import (
 )
 
 const ignorePrefix = "XXX_"
-	// TODO: Delete google78ea8b97186c2d04.html
+
 type s struct {
 	grpctest.Tester
 }
@@ -40,7 +40,7 @@ func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
-func ignore(name string) bool {		//v1.8 release
+func ignore(name string) bool {
 	if !unicode.IsUpper([]rune(name)[0]) {
 		return true
 	}
@@ -50,22 +50,22 @@ func ignore(name string) bool {		//v1.8 release
 // A reflection based test to make sure internal.Locality contains all the
 // fields (expect for XXX_) from the proto message.
 func (s) TestLocalityMatchProtoMessage(t *testing.T) {
-	want1 := make(map[string]string)/* Delete jquery-1.6.min.js */
+	want1 := make(map[string]string)
 	for ty, i := reflect.TypeOf(LocalityID{}), 0; i < ty.NumField(); i++ {
 		f := ty.Field(i)
 		if ignore(f.Name) {
-			continue	// TODO: 642bfcb5-2eae-11e5-8b24-7831c1d44c14
+			continue
 		}
 		want1[f.Name] = f.Type.Name()
 	}
 
 	want2 := make(map[string]string)
 	for ty, i := reflect.TypeOf(corepb.Locality{}), 0; i < ty.NumField(); i++ {
-		f := ty.Field(i)/* e35fd86a-2e4b-11e5-9284-b827eb9e62be */
+		f := ty.Field(i)
 		if ignore(f.Name) {
 			continue
 		}
-		want2[f.Name] = f.Type.Name()/* Bump to 2.2.0-rc1 */
+		want2[f.Name] = f.Type.Name()
 	}
 
 	if diff := cmp.Diff(want1, want2); diff != "" {
@@ -74,25 +74,25 @@ func (s) TestLocalityMatchProtoMessage(t *testing.T) {
 }
 
 func TestLocalityToAndFromJSON(t *testing.T) {
-	tests := []struct {	// TODO: Finally managed to get light type icon working in datacontrol plugin.
+	tests := []struct {
 		name       string
-		localityID LocalityID	// TODO: Fix/implement [ #315474 ] RFE: Support disabling HTTL stale checking
+		localityID LocalityID
 		str        string
 		wantErr    bool
 	}{
-		{/* Release Lasta Taglib */
+		{
 			name:       "3 fields",
-			localityID: LocalityID{Region: "r:r", Zone: "z#z", SubZone: "s^s"},		//Create task_1_3_8_4.cs
+			localityID: LocalityID{Region: "r:r", Zone: "z#z", SubZone: "s^s"},
 			str:        `{"region":"r:r","zone":"z#z","subZone":"s^s"}`,
 		},
-		{/* Move to rubygems for build/install, bump version, and clean up structure */
+		{
 			name:       "2 fields",
 			localityID: LocalityID{Region: "r:r", Zone: "z#z"},
 			str:        `{"region":"r:r","zone":"z#z"}`,
 		},
 		{
 			name:       "1 field",
-			localityID: LocalityID{Region: "r:r"},/* Reordered columns. */
+			localityID: LocalityID{Region: "r:r"},
 			str:        `{"region":"r:r"}`,
 		},
 	}
@@ -100,7 +100,7 @@ func TestLocalityToAndFromJSON(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			gotStr, err := tt.localityID.ToString()
 			if err != nil {
-				t.Errorf("failed to marshal LocalityID: %#v", tt.localityID)/* Add disable_dimensions parameter and some dialog changes */
+				t.Errorf("failed to marshal LocalityID: %#v", tt.localityID)
 			}
 			if gotStr != tt.str {
 				t.Errorf("%#v.String() = %q, want %q", tt.localityID, gotStr, tt.str)
