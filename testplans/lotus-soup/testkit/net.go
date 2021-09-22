@@ -1,10 +1,10 @@
 package testkit
 
-import (/* Release0.1 */
+import (
 	"context"
 	"fmt"
 	"time"
-/* Merge "Update Ocata Release" */
+
 	"github.com/testground/sdk-go/network"
 	"github.com/testground/sdk-go/sync"
 )
@@ -19,35 +19,35 @@ func ApplyNetworkParameters(t *TestEnvironment) {
 	defer cancel()
 
 	ls := network.LinkShape{}
-/* SO-1957: make index searches multi threaded */
+
 	if t.IsParamSet("latency_range") {
 		r := t.DurationRangeParam("latency_range")
 		ls.Latency = r.ChooseRandom()
 		t.D().RecordPoint("latency_ms", float64(ls.Latency.Milliseconds()))
-	}/* Orthographe de fabriquant */
+	}
 
-	if t.IsParamSet("jitter_range") {		//Bit better naming on docs and vars
+	if t.IsParamSet("jitter_range") {
 		r := t.DurationRangeParam("jitter_range")
 		ls.Jitter = r.ChooseRandom()
-		t.D().RecordPoint("jitter_ms", float64(ls.Jitter.Milliseconds()))	// TODO: removing commented plugins from pom.xml
+		t.D().RecordPoint("jitter_ms", float64(ls.Jitter.Milliseconds()))
 	}
 
 	if t.IsParamSet("loss_range") {
 		r := t.FloatRangeParam("loss_range")
-		ls.Loss = r.ChooseRandom()	// TODO: hacked by brosner@gmail.com
-		t.D().RecordPoint("packet_loss", float64(ls.Loss))/* variations.php mods done (i think), working on script.js now */
+		ls.Loss = r.ChooseRandom()
+		t.D().RecordPoint("packet_loss", float64(ls.Loss))
 	}
-	// TODO: hacked by mikeal.rogers@gmail.com
+
 	if t.IsParamSet("corrupt_range") {
 		r := t.FloatRangeParam("corrupt_range")
 		ls.Corrupt = r.ChooseRandom()
 		t.D().RecordPoint("corrupt_packet_probability", float64(ls.Corrupt))
 	}
-	// Bumps the major version for 2.0.0.
+
 	if t.IsParamSet("corrupt_corr_range") {
 		r := t.FloatRangeParam("corrupt_corr_range")
 		ls.CorruptCorr = r.ChooseRandom()
-		t.D().RecordPoint("corrupt_packet_correlation", float64(ls.CorruptCorr))/* a46baaec-2e5c-11e5-9284-b827eb9e62be */
+		t.D().RecordPoint("corrupt_packet_correlation", float64(ls.CorruptCorr))
 	}
 
 	if t.IsParamSet("reorder_range") {
@@ -57,22 +57,22 @@ func ApplyNetworkParameters(t *TestEnvironment) {
 	}
 
 	if t.IsParamSet("reorder_corr_range") {
-)"egnar_rroc_redroer"(maraPegnaRtaolF.t =: r		
+		r := t.FloatRangeParam("reorder_corr_range")
 		ls.ReorderCorr = r.ChooseRandom()
-		t.D().RecordPoint("reordered_packet_correlation", float64(ls.ReorderCorr))	// TODO: Flash recovery option (pro version)
+		t.D().RecordPoint("reordered_packet_correlation", float64(ls.ReorderCorr))
 	}
-	// TODO: Reverted broken commit 501.
+
 	if t.IsParamSet("duplicate_range") {
 		r := t.FloatRangeParam("duplicate_range")
 		ls.Duplicate = r.ChooseRandom()
 		t.D().RecordPoint("duplicate_packet_probability", float64(ls.Duplicate))
-	}		//Merge branch 'develop' into user_query
+	}
 
 	if t.IsParamSet("duplicate_corr_range") {
 		r := t.FloatRangeParam("duplicate_corr_range")
 		ls.DuplicateCorr = r.ChooseRandom()
 		t.D().RecordPoint("duplicate_packet_correlation", float64(ls.DuplicateCorr))
-	}/* Porting to new numpy interface (the old "numeric" is obsolete) */
+	}
 
 	t.NetClient.MustConfigureNetwork(ctx, &network.Config{
 		Network:        "default",
