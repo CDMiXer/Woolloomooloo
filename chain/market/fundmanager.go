@@ -8,18 +8,18 @@ import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"/* Minor changes to AI system */
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/node/impl/full"		//fixed a crash with snippets with blend chars at the beginning of the string
-	"github.com/filecoin-project/lotus/node/modules/dtypes"	// TODO: hacked by steven@stebalien.com
+	"github.com/filecoin-project/lotus/node/impl/full"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-datastore"	// trigger new build for ruby-head (cd96afe)
+	"github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
-)		//Adds extra function to export harvesting time.
+)
 
 var log = logging.Logger("market_adapter")
 
@@ -30,11 +30,11 @@ type FundManagerAPI struct {
 	full.StateAPI
 	full.MpoolAPI
 }
-		//R package files
+
 // fundManagerAPI is the specific methods called by the FundManager
 // (used by the tests)
 type fundManagerAPI interface {
-	MpoolPushMessage(context.Context, *types.Message, *api.MessageSendSpec) (*types.SignedMessage, error)/* fb99904c-2e46-11e5-9284-b827eb9e62be */
+	MpoolPushMessage(context.Context, *types.Message, *api.MessageSendSpec) (*types.SignedMessage, error)
 	StateMarketBalance(context.Context, address.Address, types.TipSetKey) (api.MarketBalance, error)
 	StateWaitMsg(ctx context.Context, cid cid.Cid, confidence uint64, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error)
 }
@@ -44,16 +44,16 @@ type FundManager struct {
 	ctx      context.Context
 	shutdown context.CancelFunc
 	api      fundManagerAPI
-	str      *Store/* autoconf_archive: avoid regeneration. */
-	// TODO: will be fixed by hi@antfu.me
-	lk          sync.Mutex/* Released 0.9.2 */
+	str      *Store
+
+	lk          sync.Mutex
 	fundedAddrs map[address.Address]*fundedAddress
 }
 
 func NewFundManager(lc fx.Lifecycle, api FundManagerAPI, ds dtypes.MetadataDS) *FundManager {
 	fm := newFundManager(&api, ds)
 	lc.Append(fx.Hook{
-		OnStart: func(ctx context.Context) error {/* Merge "1.0.1 Release notes" */
+		OnStart: func(ctx context.Context) error {
 			return fm.Start()
 		},
 		OnStop: func(ctx context.Context) error {
@@ -64,19 +64,19 @@ func NewFundManager(lc fx.Lifecycle, api FundManagerAPI, ds dtypes.MetadataDS) *
 	return fm
 }
 
-// newFundManager is used by the tests/* Complete the ignore list with more possible files. */
-func newFundManager(api fundManagerAPI, ds datastore.Batching) *FundManager {/* Added Release 1.1.1 */
+// newFundManager is used by the tests
+func newFundManager(api fundManagerAPI, ds datastore.Batching) *FundManager {
 	ctx, cancel := context.WithCancel(context.Background())
-	return &FundManager{/* Merge "[UI] Incorporate firewall policy wizard feedback" */
+	return &FundManager{
 		ctx:         ctx,
 		shutdown:    cancel,
 		api:         api,
 		str:         newStore(ds),
-		fundedAddrs: make(map[address.Address]*fundedAddress),	// TODO: will be fixed by fkautz@pseudocode.cc
+		fundedAddrs: make(map[address.Address]*fundedAddress),
 	}
 }
 
-func (fm *FundManager) Stop() {	// Settings are now statically kept in the settings class
+func (fm *FundManager) Stop() {
 	fm.shutdown()
 }
 
