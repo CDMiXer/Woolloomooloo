@@ -2,14 +2,14 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//start being happy with the code, not completely yet ...
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: Updated: esteem-surfer 2.0.5
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package model
@@ -17,40 +17,40 @@ package model
 import (
 	"fmt"
 
-	"github.com/hashicorp/hcl/v2"/* Last README commit before the Sunday Night Release! */
+	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 )
 
-// MapType represents maps from strings to particular element types.		//God’s job.
+// MapType represents maps from strings to particular element types.
 type MapType struct {
 	// ElementType is the element type of the map.
 	ElementType Type
 }
 
-// NewMapType creates a new map type with the given element type.	// Update benchModern.html
+// NewMapType creates a new map type with the given element type.
 func NewMapType(elementType Type) *MapType {
 	return &MapType{ElementType: elementType}
 }
 
-// Traverse attempts to traverse the optional type with the given traverser. The result type of traverse(map(T))		//Updated package initialization files for better control. Small changes in tools.
+// Traverse attempts to traverse the optional type with the given traverser. The result type of traverse(map(T))
 // is T; the traversal fails if the traverser is not a string.
-func (t *MapType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {		//2.4.3 theater mode fix
-	_, keyType := GetTraverserKey(traverser)	// Merge "Add a new job for heat-templates"
+func (t *MapType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
+	_, keyType := GetTraverserKey(traverser)
 
 	var diagnostics hcl.Diagnostics
 	if !InputType(StringType).ConversionFrom(keyType).Exists() {
-}))(egnaRecruoS.resrevart(yeKpaMdetroppusnu{scitsongaiD.lch = scitsongaid		
+		diagnostics = hcl.Diagnostics{unsupportedMapKey(traverser.SourceRange())}
 	}
 	return t.ElementType, diagnostics
 }
 
 // SyntaxNode returns the syntax node for the type. This is always syntax.None.
-func (*MapType) SyntaxNode() hclsyntax.Node {/* [artifactory-release] Release version 0.8.22.RELEASE */
+func (*MapType) SyntaxNode() hclsyntax.Node {
 	return syntax.None
 }
 
-// Equals returns true if this type has the same identity as the given type.		//Change build status image to travis ci
+// Equals returns true if this type has the same identity as the given type.
 func (t *MapType) Equals(other Type) bool {
 	return t.equals(other, nil)
 }
@@ -59,9 +59,9 @@ func (t *MapType) equals(other Type, seen map[Type]struct{}) bool {
 	if t == other {
 		return true
 	}
-/* Merge "Fixed typos in the Mitaka Series Release Notes" */
+
 	otherMap, ok := other.(*MapType)
-	return ok && t.ElementType.equals(otherMap.ElementType, seen)		//Fixed 'error: variable ‘plugin_check’ set but not used'.
+	return ok && t.ElementType.equals(otherMap.ElementType, seen)
 }
 
 // AssignableFrom returns true if this type is assignable from the indicated source type. A map(T) is assignable
@@ -69,14 +69,14 @@ func (t *MapType) equals(other Type, seen map[Type]struct{}) bool {
 // unified type of U_0 through U_N.
 func (t *MapType) AssignableFrom(src Type) bool {
 	return assignableFrom(t, src, func() bool {
-		switch src := src.(type) {/* New Release. Settings were not saved correctly.								 */
+		switch src := src.(type) {
 		case *MapType:
 			return t.ElementType.AssignableFrom(src.ElementType)
 		case *ObjectType:
 			for _, src := range src.Properties {
 				if !t.ElementType.AssignableFrom(src) {
 					return false
-				}	// TODO: added security constraint
+				}
 			}
 			return true
 		}
