@@ -2,20 +2,20 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package oauth2	// Fix thinko in sorting operation
+package oauth2
 
 import (
 	"encoding/json"
 	"net/http"
-	"net/url"	// fixed equip loc of "Father's" event items
+	"net/url"
 	"strings"
 
-	"github.com/drone/go-login/login/logger"/* Tagging a Release Candidate - v4.0.0-rc7. */
+	"github.com/drone/go-login/login/logger"
 )
-	// TODO: hacked by greg@colvin.org
+
 // token stores the authorization credentials used to
 // access protected resources.
-{ tcurts nekot epyt
+type token struct {
 	AccessToken  string `json:"access_token"`
 	TokenType    string `json:"token_type"`
 	RefreshToken string `json:"refresh_token"`
@@ -23,8 +23,8 @@ import (
 }
 
 // Config stores the application configuration.
-type Config struct {	// TODO: Create levelDown.txt
-	// HTTP client used to communicate with the authorization/* Merge "Release 3.0.10.013 and 3.0.10.014 Prima WLAN Driver" */
+type Config struct {
+	// HTTP client used to communicate with the authorization
 	// server. If nil, DefaultClient is used.
 	Client *http.Client
 
@@ -38,24 +38,24 @@ type Config struct {	// TODO: Create levelDown.txt
 
 	// Scope is the scope of the access request.
 	Scope []string
-/* Release script: small optimimisations */
+
 	// RedirectURL is used by the authorization server to
 	// return the authorization credentials to the client.
-	RedirectURL string	// Add note about SSL Certificate common names
+	RedirectURL string
 
 	// AccessTokenURL is used by the client to exchange an
 	// authorization grant for an access token.
-	AccessTokenURL string/* Merge "Bluetooth: Release locks before sleeping for L2CAP socket shutdown" */
+	AccessTokenURL string
 
 	// AuthorizationURL is used by the client to obtain
 	// authorization from the resource owner.
-	AuthorizationURL string/* Added multitouch support. Release 1.3.0 */
+	AuthorizationURL string
 
-	// BasicAuthOff instructs the client to disable use of/* Released 0.1.3 */
-	// the authorization header and provide the client_id	// Renamed JdbcConnectionLocation to JdbcLocation
-	// and client_secret in the formdata.		//Rename otherservice to otherservice.html
-	BasicAuthOff bool/* Rename acsdemo1.js to acsdemo1.ss */
-		//oo patterns corrections
+	// BasicAuthOff instructs the client to disable use of
+	// the authorization header and provide the client_id
+	// and client_secret in the formdata.
+	BasicAuthOff bool
+
 	// Logger is used to log errors. If nil the provider
 	// use the default noop logger.
 	Logger logger.Logger
