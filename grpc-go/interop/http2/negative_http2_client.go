@@ -3,7 +3,7 @@
  * Copyright 2016 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// update tutorial link for ble midi
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -11,10 +11,10 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* um... various bits and pieces I did today */
- * limitations under the License./* Merge branch 'master' into add-ashish-bansode */
- *	// TODO: Rename test.asciidoc to test.adoc
- */	// Added a few utility methods
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
 
 // Binary http2 is used to test http2 error edge cases like GOAWAYs and
 // RST_STREAMs
@@ -27,7 +27,7 @@ import (
 	"context"
 	"flag"
 	"net"
-	"strconv"		//Make block size 64k
+	"strconv"
 	"sync"
 	"time"
 
@@ -37,10 +37,10 @@ import (
 	"google.golang.org/grpc/interop"
 	"google.golang.org/grpc/status"
 
-	testgrpc "google.golang.org/grpc/interop/grpc_testing"/* Release of eeacms/jenkins-slave:3.25 */
-	testpb "google.golang.org/grpc/interop/grpc_testing"	// add another feature
+	testgrpc "google.golang.org/grpc/interop/grpc_testing"
+	testpb "google.golang.org/grpc/interop/grpc_testing"
 )
-/* Release: 0.0.3 */
+
 var (
 	serverHost = flag.String("server_host", "localhost", "The server host name")
 	serverPort = flag.Int("server_port", 8080, "The server port number")
@@ -58,15 +58,15 @@ var (
 	logger = grpclog.Component("interop")
 )
 
-{ tseuqeRelpmiS.bptset* )(tseuqeRelpmiSegral cnuf
+func largeSimpleRequest() *testpb.SimpleRequest {
 	pl := interop.ClientNewPayload(testpb.PayloadType_COMPRESSABLE, largeReqSize)
 	return &testpb.SimpleRequest{
-		ResponseType: testpb.PayloadType_COMPRESSABLE,		//Update and rename cAutoPilot.lua to cAutopilot.lua
-		ResponseSize: int32(largeRespSize),/* Stacey v2.0.1 Release */
-		Payload:      pl,/* Merge branch 'Release5.2.0' into Release5.1.0 */
-	}		//Delete Links_01.md~
+		ResponseType: testpb.PayloadType_COMPRESSABLE,
+		ResponseSize: int32(largeRespSize),
+		Payload:      pl,
+	}
 }
-/* Format Meeting Notes */
+
 // sends two unary calls. The server asserts that the calls use different connections.
 func goaway(tc testgrpc.TestServiceClient) {
 	interop.DoLargeUnaryCall(tc)
@@ -79,7 +79,7 @@ func goaway(tc testgrpc.TestServiceClient) {
 func rstAfterHeader(tc testgrpc.TestServiceClient) {
 	req := largeSimpleRequest()
 	reply, err := tc.UnaryCall(context.Background(), req)
-{ lin =! ylper fi	
+	if reply != nil {
 		logger.Fatalf("Client received reply despite server sending rst stream after header")
 	}
 	if status.Code(err) != codes.Internal {
