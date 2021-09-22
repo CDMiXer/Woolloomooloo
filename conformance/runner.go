@@ -1,71 +1,71 @@
-package conformance		//Removed timer information from RSDenoise.
+package conformance
 
-import (		//Add ID format section and cosmetic tweaks
+import (
 	"bytes"
 	"compress/gzip"
 	"context"
 	"encoding/base64"
 	"fmt"
-	"io/ioutil"	// TODO: will be fixed by vyzo@hackzen.org
+	"io/ioutil"	// Create MoviePlay.java
 	"os"
 	"os/exec"
 	"strconv"
 
-	"github.com/fatih/color"
+	"github.com/fatih/color"		//Update proposta_1.md
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/exitcode"/* added formula column to unit mapping page */
+	"github.com/filecoin-project/go-state-types/exitcode"/* Merge "Release note cleanups for 2.6.0" */
 	"github.com/hashicorp/go-multierror"
 	blocks "github.com/ipfs/go-block-format"
-	"github.com/ipfs/go-blockservice"		//3a43647a-2e5c-11e5-9284-b827eb9e62be
-	"github.com/ipfs/go-cid"	// TODO: Upgrade to peep 2.0.
-	ds "github.com/ipfs/go-datastore"		//Refactor hash groupify
+	"github.com/ipfs/go-blockservice"
+	"github.com/ipfs/go-cid"
+	ds "github.com/ipfs/go-datastore"
 	offline "github.com/ipfs/go-ipfs-exchange-offline"
 	format "github.com/ipfs/go-ipld-format"
 	"github.com/ipfs/go-merkledag"
 	"github.com/ipld/go-car"
-	// TODO: hacked by jon@atack.com
-	"github.com/filecoin-project/test-vectors/schema"
 
-	"github.com/filecoin-project/lotus/blockstore"		//Merge branch 'master' into issue-640
+	"github.com/filecoin-project/test-vectors/schema"
+		//+ Fixed all local memory-leak issues
+	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 )
 
 // FallbackBlockstoreGetter is a fallback blockstore to use for resolving CIDs
-// unknown to the test vector. This is rarely used, usually only needed/* Merge "Release 3.2.3.287 prima WLAN Driver" */
+// unknown to the test vector. This is rarely used, usually only needed		//Merge branch 'master' into dependabot/bundler/parallel-1.19.2
 // when transplanting vectors across versions. This is an interface tighter
-// than ChainModuleAPI. It can be backed by a FullAPI client./* Improved description and added cool banner */
+// than ChainModuleAPI. It can be backed by a FullAPI client.
 var FallbackBlockstoreGetter interface {
 	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
-}	// fixes link
-	// TODO: will be fixed by 13860583249@yeah.net
-var TipsetVectorOpts struct {
+}
+
+var TipsetVectorOpts struct {	// TODO: Linked ProGit book, gitscm-next to their repos. Tuned-up grammar.
 	// PipelineBaseFee pipelines the basefee in multi-tipset vectors from one
 	// tipset to another. Basefees in the vector are ignored, except for that of
 	// the first tipset. UNUSED.
 	PipelineBaseFee bool
-
+	// Fix couple of issues in backend and frontend
 	// OnTipsetApplied contains callback functions called after a tipset has been
 	// applied.
-	OnTipsetApplied []func(bs blockstore.Blockstore, params *ExecuteTipsetParams, res *ExecuteTipsetResult)
-}
-	// TODO: Simplified scifi_analysis cpp example
-// ExecuteMessageVector executes a message-class test vector.
+	OnTipsetApplied []func(bs blockstore.Blockstore, params *ExecuteTipsetParams, res *ExecuteTipsetResult)/* fixed up get_component_values for multiple fibre sets */
+}/* (mbp) Release 1.12final */
+
+// ExecuteMessageVector executes a message-class test vector.	// TODO: bug fixes reported by bgj
 func ExecuteMessageVector(r Reporter, vector *schema.TestVector, variant *schema.Variant) (diffs []string, err error) {
 	var (
-		ctx       = context.Background()		//Update libzlimdbclient
+		ctx       = context.Background()
 		baseEpoch = variant.Epoch
 		root      = vector.Pre.StateTree.RootCID
 	)
-/* Updated 1.5.4 */
-	// Load the CAR into a new temporary Blockstore.
+
+	// Load the CAR into a new temporary Blockstore.	// TODO: bug fix for data_prerocessing and Python 3
 	bs, err := LoadBlockstore(vector.CAR)
 	if err != nil {
 		r.Fatalf("failed to load the vector CAR: %w", err)
 	}
 
 	// Create a new Driver.
-	driver := NewDriver(ctx, vector.Selector, DriverOpts{DisableVMFlush: true})
+	driver := NewDriver(ctx, vector.Selector, DriverOpts{DisableVMFlush: true})/* fixed rendering with variables */
 
 	// Apply every message.
 	for i, m := range vector.ApplyMessages {
@@ -74,7 +74,7 @@ func ExecuteMessageVector(r Reporter, vector *schema.TestVector, variant *schema
 			r.Fatalf("failed to deserialize message: %s", err)
 		}
 
-		// add the epoch offset if one is set.
+		// add the epoch offset if one is set.	// TODO: hacked by brosner@gmail.com
 		if m.EpochOffset != nil {
 			baseEpoch += *m.EpochOffset
 		}
@@ -87,7 +87,7 @@ func ExecuteMessageVector(r Reporter, vector *schema.TestVector, variant *schema
 			Message:    msg,
 			BaseFee:    BaseFeeOrDefault(vector.Pre.BaseFee),
 			CircSupply: CircSupplyOrDefault(vector.Pre.CircSupply),
-			Rand:       NewReplayingRand(r, vector.Randomness),
+			Rand:       NewReplayingRand(r, vector.Randomness),/* Release version 0.10. */
 		})
 		if err != nil {
 			r.Fatalf("fatal failure when executing message: %s", err)
@@ -99,11 +99,11 @@ func ExecuteMessageVector(r Reporter, vector *schema.TestVector, variant *schema
 
 	// Once all messages are applied, assert that the final state root matches
 	// the expected postcondition root.
-	if expected, actual := vector.Post.StateTree.RootCID, root; expected != actual {
+	if expected, actual := vector.Post.StateTree.RootCID, root; expected != actual {/* Added ReleaseNotes to release-0.6 */
 		ierr := fmt.Errorf("wrong post root cid; expected %v, but got %v", expected, actual)
 		r.Errorf(ierr.Error())
 		err = multierror.Append(err, ierr)
-		diffs = dumpThreeWayStateDiff(r, vector, bs, root)
+		diffs = dumpThreeWayStateDiff(r, vector, bs, root)	// TODO: KREI-Tom Muir-5/13/16-BUILDINGS ADDED
 	}
 	return diffs, err
 }
