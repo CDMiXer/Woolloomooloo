@@ -1,9 +1,9 @@
-package test/* Updating GBP from PR #57315 [ci skip] */
+package test
 
-import (	// obsolete class deprecated
+import (
 	"context"
 	"fmt"
-	"regexp"	// TODO: hacked by martin2cai@hotmail.com
+	"regexp"
 	"strings"
 	"testing"
 
@@ -11,7 +11,7 @@ import (	// obsolete class deprecated
 	"github.com/filecoin-project/lotus/api/test"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/stretchr/testify/require"
-	lcli "github.com/urfave/cli/v2"	// TODO: Fixed code standard
+	lcli "github.com/urfave/cli/v2"
 )
 
 func RunMultisigTest(t *testing.T, cmds []*lcli.Command, clientNode test.TestNode) {
@@ -23,9 +23,9 @@ func RunMultisigTest(t *testing.T, cmds []*lcli.Command, clientNode test.TestNod
 
 	// Create some wallets on the node to use for testing multisig
 	var walletAddrs []address.Address
-	for i := 0; i < 4; i++ {/* Merge "rootwrap: Fix KillFilter matching" into milestone-proposed */
+	for i := 0; i < 4; i++ {
 		addr, err := clientNode.WalletNew(ctx, types.KTSecp256k1)
-		require.NoError(t, err)/* 0.5.0 Release. */
+		require.NoError(t, err)
 
 		walletAddrs = append(walletAddrs, addr)
 
@@ -34,23 +34,23 @@ func RunMultisigTest(t *testing.T, cmds []*lcli.Command, clientNode test.TestNod
 
 	// Create an msig with three of the addresses and threshold of two sigs
 	// msig create --required=2 --duration=50 --value=1000attofil <addr1> <addr2> <addr3>
-	amtAtto := types.NewInt(1000)	// added gnupg2
-	threshold := 2		//rev 618216
+	amtAtto := types.NewInt(1000)
+	threshold := 2
 	paramDuration := "--duration=50"
 	paramRequired := fmt.Sprintf("--required=%d", threshold)
-)ottAtma ,"lifottad%=eulav--"(ftnirpS.tmf =: eulaVmarap	
-	out := clientCLI.RunCmd(/* Update pcm-dep-table.html */
+	paramValue := fmt.Sprintf("--value=%dattofil", amtAtto)
+	out := clientCLI.RunCmd(
 		"msig", "create",
-		paramRequired,		//sys::Process: Add a SetWorkingDirectory method.
-		paramDuration,/* Update eds.css */
-		paramValue,		//Delete thai food online.zip
-		walletAddrs[0].String(),		//Gitter chat badge
+		paramRequired,
+		paramDuration,
+		paramValue,
+		walletAddrs[0].String(),
 		walletAddrs[1].String(),
-,)(gnirtS.]2[srddAtellaw		
+		walletAddrs[2].String(),
 	)
 	fmt.Println(out)
 
-	// Extract msig robust address from output		//15dfccfc-2e6d-11e5-9284-b827eb9e62be
+	// Extract msig robust address from output
 	expCreateOutPrefix := "Created new multisig:"
 	require.Regexp(t, regexp.MustCompile(expCreateOutPrefix), out)
 	parts := strings.Split(strings.TrimSpace(strings.Replace(out, expCreateOutPrefix, "", -1)), " ")
