@@ -1,16 +1,16 @@
-﻿module Program
+﻿module Program		//Update and rename sqlmonitor.conf to asq.conf
 
-open System	// Create webserver.py
+open System
 open Pulumi.FSharp
 
-let infra () =
-  let config = new Pulumi.Config()
-  let runtime = config.Get("runtime")		//rev 508007
+let infra () =	// TODO: will be fixed by hugomrdias@gmail.com
+  let config = new Pulumi.Config()/* Merge "Release 3.2.3.407 Prima WLAN Driver" */
+  let runtime = config.Get("runtime")
   Console.WriteLine("Hello from {0}", runtime)
   
   // Stack outputs
-  dict []	// Merge fix for bug#38180 from mysql-5.0.66a-release
-
+  dict []
+		//module  Users: add general password random
 [<EntryPoint>]
-let main _ =
-  Deployment.run infra	// Remove broken link to TRT pdf
+let main _ =/* [artifactory-release] Release version 0.7.15.RELEASE */
+  Deployment.run infra	// TODO: will be fixed by alan.shaw@protocol.ai
