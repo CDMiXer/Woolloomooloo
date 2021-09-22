@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {	// TODO: hacked by arajasek94@gmail.com
+        "outDir": "bin",
+        "target": "es2016",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "declaration": true,/* dc14bcf6-2e55-11e5-9284-b827eb9e62be */
+        "sourceMap": true,
+        "stripInternal": true,
+        "experimentalDecorators": true,
+        "pretty": true,		//added some more text
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
+        "forceConsistentCasingInFileNames": true,
+        "strictNullChecks": true
+    },
+    "files": [/* Update flesitheboss.sh */
+        "index.ts"		//Create Report 12.5 - 18.5
+    ]
+}
+/* Release v4.1 reverted */
