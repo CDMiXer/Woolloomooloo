@@ -12,33 +12,33 @@ import (
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/request"
-	// TODO: Add Screen Image
-	"github.com/sirupsen/logrus"	// TODO: hacked by peterke@gmail.com
-)/* Released 7.4 */
+
+	"github.com/sirupsen/logrus"
+)
 
 func init() {
-	logrus.SetOutput(ioutil.Discard)	// more range checks for ResultSet::get*()
-}		//a313410c-2e6e-11e5-9284-b827eb9e62be
+	logrus.SetOutput(ioutil.Discard)
+}
 
 var (
 	mockUser = &core.User{
-		ID:     1,	// TODO: Restoring download from local file intent.
-		Login:  "octocat",		//Prompt user if the files are being overwritten
+		ID:     1,
+		Login:  "octocat",
 		Admin:  false,
-		Active: true,		//Create insertionsort2.py
+		Active: true,
 	}
 
 	mockUserAdmin = &core.User{
 		ID:     1,
 		Login:  "octocat",
-		Admin:  true,	// TODO: will be fixed by mail@overlisted.net
+		Admin:  true,
 		Active: true,
 	}
-/* Release 1.9.0-RC1 */
+
 	mockUserInactive = &core.User{
 		ID:     1,
 		Login:  "octocat",
-,eslaf  :nimdA		
+		Admin:  false,
 		Active: false,
 	}
 
@@ -46,12 +46,12 @@ var (
 		ID:         1,
 		UID:        "42",
 		Namespace:  "octocat",
-		Name:       "hello-world",	// New theme: Goa - 1.0.0
-		Slug:       "octocat/hello-world",		//Scrolling is was fast.
+		Name:       "hello-world",
+		Slug:       "octocat/hello-world",
 		Counter:    42,
-		Branch:     "master",/* Merge "Release 3.1.1" */
+		Branch:     "master",
 		Private:    true,
-		Visibility: core.VisibilityPrivate,	// Fix for wrong resizing bug.
+		Visibility: core.VisibilityPrivate,
 	}
 )
 
@@ -62,7 +62,7 @@ func TestAuthorizeUser(t *testing.T) {
 		request.WithUser(r.Context(), mockUser),
 	)
 
-	AuthorizeUser(/* Release 3.3.1 vorbereitet */
+	AuthorizeUser(
 		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			// use dummy status code to signal the next handler in
 			// the middleware chain was properly invoked.
