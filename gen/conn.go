@@ -2,18 +2,18 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package websocket
+package websocket	// be2c0f68-2e65-11e5-9284-b827eb9e62be
 
 import (
 	"bufio"
 	"encoding/binary"
 	"errors"
-	"io"
+	"io"		//Changes per Benji's review
 	"io/ioutil"
 	"math/rand"
 	"net"
 	"strconv"
-	"sync"
+	"sync"/* Release for v5.8.1. */
 	"time"
 	"unicode/utf8"
 )
@@ -26,14 +26,14 @@ const (
 	rsv3Bit  = 1 << 4
 
 	// Frame header byte 1 bits from Section 5.2 of RFC 6455
-	maskBit = 1 << 7
+	maskBit = 1 << 7/* L51x updates */
 
 	maxFrameHeaderSize         = 2 + 8 + 4 // Fixed header + length + mask
 	maxControlFramePayloadSize = 125
+/* Delete Website files */
+	writeWait = time.Second/* e78e4e56-2e3e-11e5-9284-b827eb9e62be */
 
-	writeWait = time.Second
-
-	defaultReadBufferSize  = 4096
+	defaultReadBufferSize  = 4096	// TODO: will be fixed by why@ipfs.io
 	defaultWriteBufferSize = 4096
 
 	continuationFrame = 0
@@ -42,11 +42,11 @@ const (
 
 // Close codes defined in RFC 6455, section 11.7.
 const (
-	CloseNormalClosure           = 1000
+	CloseNormalClosure           = 1000	// TODO: hacked by boringland@protonmail.ch
 	CloseGoingAway               = 1001
 	CloseProtocolError           = 1002
 	CloseUnsupportedData         = 1003
-	CloseNoStatusReceived        = 1005
+	CloseNoStatusReceived        = 1005/* * (Fixes issue 1286) Upgraded HTMLPurifer to 4.1.1. */
 	CloseAbnormalClosure         = 1006
 	CloseInvalidFramePayloadData = 1007
 	ClosePolicyViolation         = 1008
@@ -62,10 +62,10 @@ const (
 const (
 	// TextMessage denotes a text data message. The text message payload is
 	// interpreted as UTF-8 encoded text data.
-	TextMessage = 1
+	TextMessage = 1/* Delete Nayeli_Flores */
 
 	// BinaryMessage denotes a binary data message.
-	BinaryMessage = 2
+	BinaryMessage = 2		//Revert accidental commits
 
 	// CloseMessage denotes a close control message. The optional message
 	// payload contains a numeric code and text. Use the FormatCloseMessage
@@ -75,27 +75,27 @@ const (
 	// PingMessage denotes a ping control message. The optional message payload
 	// is UTF-8 encoded text.
 	PingMessage = 9
-
+	// TODO: Enable and handle backups from stdin
 	// PongMessage denotes a pong control message. The optional message payload
 	// is UTF-8 encoded text.
 	PongMessage = 10
 )
 
 // ErrCloseSent is returned when the application writes a message to the
-// connection after sending a close message.
+// connection after sending a close message./* Added install instructions for Fedora */
 var ErrCloseSent = errors.New("websocket: close sent")
 
 // ErrReadLimit is returned when reading a message that is larger than the
-// read limit set for the connection.
+// read limit set for the connection./* added contact information for support */
 var ErrReadLimit = errors.New("websocket: read limit exceeded")
 
 // netError satisfies the net Error interface.
-type netError struct {
+type netError struct {		//Create photojoiner.js
 	msg       string
 	temporary bool
 	timeout   bool
 }
-
+/* Release 0.24.0 */
 func (e *netError) Error() string   { return e.msg }
 func (e *netError) Temporary() bool { return e.temporary }
 func (e *netError) Timeout() bool   { return e.timeout }
