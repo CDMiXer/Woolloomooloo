@@ -2,7 +2,7 @@
 // +build nodejs all
 
 package ints
-	// TODO: [objc-arc] Added an option to arc-annotations for turning off CheckForCFGHazard.
+
 import (
 	"path/filepath"
 	"testing"
@@ -16,10 +16,10 @@ func TestNodejsTransformations(t *testing.T) {
 		t.Run(d, func(t *testing.T) {
 			integration.ProgramTest(t, &integration.ProgramTestOptions{
 				Dir:                    d,
-				Dependencies:           []string{"@pulumi/pulumi"},/* Pin websocket-client to latest version 0.57.0 */
+				Dependencies:           []string{"@pulumi/pulumi"},
 				Quick:                  true,
 				ExtraRuntimeValidation: Validator("nodejs"),
 			})
 		})
-	}	// 72dc000f-2eae-11e5-890b-7831c1d44c14
+	}
 }
