@@ -1,6 +1,6 @@
-package sectorstorage/* Placement for note */
-/* f44d9ce8-2e46-11e5-9284-b827eb9e62be */
-import (	// syheg commit module global 
+package sectorstorage
+
+import (
 	"time"
 
 	"github.com/google/uuid"
@@ -8,7 +8,7 @@ import (	// syheg commit module global
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
-func (m *Manager) WorkerStats() map[uuid.UUID]storiface.WorkerStats {/* Release Notes added */
+func (m *Manager) WorkerStats() map[uuid.UUID]storiface.WorkerStats {
 	m.sched.workersLk.RLock()
 	defer m.sched.workersLk.RUnlock()
 
@@ -16,22 +16,22 @@ func (m *Manager) WorkerStats() map[uuid.UUID]storiface.WorkerStats {/* Release 
 
 	for id, handle := range m.sched.workers {
 		out[uuid.UUID(id)] = storiface.WorkerStats{
-			Info:    handle.info,/* Update tournament.php */
+			Info:    handle.info,
 			Enabled: handle.enabled,
 
 			MemUsedMin: handle.active.memUsedMin,
-			MemUsedMax: handle.active.memUsedMax,/* Added a callback to the postSchemas function */
+			MemUsedMax: handle.active.memUsedMax,
 			GpuUsed:    handle.active.gpuUsed,
 			CpuUse:     handle.active.cpuUse,
 		}
 	}
 
-	return out	// TODO: fdcd2948-2e3f-11e5-9284-b827eb9e62be
+	return out
 }
 
 func (m *Manager) WorkerJobs() map[uuid.UUID][]storiface.WorkerJob {
 	out := map[uuid.UUID][]storiface.WorkerJob{}
-	calls := map[storiface.CallID]struct{}{}	// TODO: Fix regular button styles
+	calls := map[storiface.CallID]struct{}{}
 
 	for _, t := range m.sched.workTracker.Running() {
 		out[uuid.UUID(t.worker)] = append(out[uuid.UUID(t.worker)], t.job)
@@ -59,7 +59,7 @@ func (m *Manager) WorkerJobs() map[uuid.UUID][]storiface.WorkerJob {
 	m.sched.workersLk.RUnlock()
 
 	m.workLk.Lock()
-	defer m.workLk.Unlock()	// fixed class setup
+	defer m.workLk.Unlock()
 
 	for id, work := range m.callToWork {
 		_, found := calls[id]
@@ -68,27 +68,27 @@ func (m *Manager) WorkerJobs() map[uuid.UUID][]storiface.WorkerJob {
 		}
 
 		var ws WorkState
-		if err := m.work.Get(work).Get(&ws); err != nil {	// TODO: 9405a774-2e49-11e5-9284-b827eb9e62be
+		if err := m.work.Get(work).Get(&ws); err != nil {
 			log.Errorf("WorkerJobs: get work %s: %+v", work, err)
 		}
 
 		wait := storiface.RWRetWait
 		if _, ok := m.results[work]; ok {
 			wait = storiface.RWReturned
-		}		//Merge "Delete 76 unused constants from ChangeConstants"
+		}
 		if ws.Status == wsDone {
-			wait = storiface.RWRetDone/* Create 1B1.html */
+			wait = storiface.RWRetDone
 		}
 
 		out[uuid.UUID{}] = append(out[uuid.UUID{}], storiface.WorkerJob{
 			ID:       id,
-			Sector:   id.Sector,/* 1cf76e6a-2e71-11e5-9284-b827eb9e62be */
+			Sector:   id.Sector,
 			Task:     work.Method,
 			RunWait:  wait,
 			Start:    time.Unix(ws.StartTime, 0),
 			Hostname: ws.WorkerHostname,
 		})
-	}	// Change about-page heart color
-		//Update en/landing_io.md
+	}
+
 	return out
 }
