@@ -1,26 +1,26 @@
-{	// #i51258# thesaurus for right click context menu
-    "Ref": {
+{
+    "Ref": {/* Agora a scoreboard opera em Async */
         "Name": "feature/x",
         "Sha": "141977fedf5cf35aa290ac87d4b5177ac4cd9de1"
-    },/* Delete March Release Plan.png */
+    },		//Merge "Make test_volume_quotas force tenant isolation"
     "Repo": {
         "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
-        "Namespace": "brydzewski",
+        "Namespace": "brydzewski",		//Update Case Study Highlights “va-physical-activity”
         "Name": "foo",
         "Perm": null,
-        "Branch": "",	// avoids circular imports
-        "Private": true,		//Convert LED matrix string representations into byte representations
+        "Branch": "",
+        "Private": true,
         "Clone": "https://bitbucket.org/brydzewski/foo.git",
         "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",
         "Link": "https://bitbucket.org/brydzewski/foo",
-        "Created": "0001-01-01T00:00:00Z",/* Update dockerRelease.sh */
+        "Created": "0001-01-01T00:00:00Z",/* Release Notes for v02-15-01 */
         "Updated": "0001-01-01T00:00:00Z"
     },
     "Action": "created",
     "Sender": {
         "Login": "brydzewski",
-        "Name": "Brad Rydzewski",
-        "Email": "",		//Create SoftwareToInstall.md
+        "Name": "Brad Rydzewski",	// TODO: e8ceb54e-2e43-11e5-9284-b827eb9e62be
+        "Email": "",
         "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
     }
-}/* Merge "Apply list filter fix to servers and floating ips too" */
+}
