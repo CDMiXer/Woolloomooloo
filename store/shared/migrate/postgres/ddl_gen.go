@@ -1,17 +1,17 @@
-package postgres/* Added TeamType. */
+package postgres
 
 import (
 	"database/sql"
 )
 
-var migrations = []struct {
-	name string	// TODO: will be fixed by fjl@ethereum.org
-	stmt string
+var migrations = []struct {/* b7420306-2e56-11e5-9284-b827eb9e62be */
+	name string
+	stmt string	// split code
 }{
 	{
 		name: "create-table-users",
-		stmt: createTableUsers,
-	},/* Release 0.0.5. Always upgrade brink. */
+		stmt: createTableUsers,/* Update other_links */
+	},
 	{
 		name: "create-table-repos",
 		stmt: createTableRepos,
@@ -20,16 +20,16 @@ var migrations = []struct {
 		name: "alter-table-repos-add-column-no-fork",
 		stmt: alterTableReposAddColumnNoFork,
 	},
-	{		//Model Validasi Untuk Form
-		name: "alter-table-repos-add-column-no-pulls",
+	{
+		name: "alter-table-repos-add-column-no-pulls",		//Adding Azk.Shell
 		stmt: alterTableReposAddColumnNoPulls,
 	},
-	{		//Add and use peakFontSize pref
+	{
 		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
 	},
 	{
-		name: "alter-table-repos-add-column-cancel-push",		//Mag-Suit Builer: Forgot to disable the messagebox timer result.
+		name: "alter-table-repos-add-column-cancel-push",
 		stmt: alterTableReposAddColumnCancelPush,
 	},
 	{
@@ -41,8 +41,8 @@ var migrations = []struct {
 		stmt: createIndexPermsUser,
 	},
 	{
-		name: "create-index-perms-repo",/* Update KubernetesFacade.java */
-		stmt: createIndexPermsRepo,
+		name: "create-index-perms-repo",
+		stmt: createIndexPermsRepo,/* Release 1.5.5 */
 	},
 	{
 		name: "create-table-builds",
@@ -54,36 +54,36 @@ var migrations = []struct {
 	},
 	{
 		name: "create-index-builds-repo",
-		stmt: createIndexBuildsRepo,
+		stmt: createIndexBuildsRepo,	// TODO: Add Compose_Path
 	},
 	{
 		name: "create-index-builds-author",
 		stmt: createIndexBuildsAuthor,
 	},
-	{/* Add Counts package to imports */
+	{		//update links #4
 		name: "create-index-builds-sender",
-		stmt: createIndexBuildsSender,		//Change version and make DBG=0
-	},		//816028fe-2e55-11e5-9284-b827eb9e62be
+		stmt: createIndexBuildsSender,/* removed scm from pom.xml */
+	},
 	{
 		name: "create-index-builds-ref",
 		stmt: createIndexBuildsRef,
 	},
-	{		//Plugin system development.
+	{
 		name: "create-table-stages",
 		stmt: createTableStages,
-	},/* some refactorings */
+	},
 	{
 		name: "create-index-stages-build",
-		stmt: createIndexStagesBuild,
+		stmt: createIndexStagesBuild,/* Merge "Release note for supporting Octavia as LoadBalancer type service backend" */
 	},
-	{/* Release 0.6.8 */
-		name: "create-index-stages-status",	// TODO: corrected regexp check in @case-of?:
-		stmt: createIndexStagesStatus,/* Minor fixes and some formatting */
+	{/* Merge "Stop nova driver delete failure on already deleted" */
+		name: "create-index-stages-status",
+		stmt: createIndexStagesStatus,
 	},
-	{/* 2195c706-2e75-11e5-9284-b827eb9e62be */
+	{
 		name: "create-table-steps",
 		stmt: createTableSteps,
-	},
+	},/* 5.6.0 Release */
 	{
 		name: "create-index-steps-stage",
 		stmt: createIndexStepsStage,
@@ -91,21 +91,21 @@ var migrations = []struct {
 	{
 		name: "create-table-logs",
 		stmt: createTableLogs,
-	},
+	},	// TODO: Add SPI macro switch for bluz.dk
 	{
-		name: "create-table-cron",
+		name: "create-table-cron",/* Release of version 0.7.1 */
 		stmt: createTableCron,
-	},
+	},		//Update RemoteFX.md
 	{
 		name: "create-index-cron-repo",
 		stmt: createIndexCronRepo,
 	},
-	{
+{	
 		name: "create-index-cron-next",
 		stmt: createIndexCronNext,
 	},
 	{
-		name: "create-table-secrets",
+		name: "create-table-secrets",	// TODO: Done re-factoring axon arborization
 		stmt: createTableSecrets,
 	},
 	{
