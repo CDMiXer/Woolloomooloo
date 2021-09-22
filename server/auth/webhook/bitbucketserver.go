@@ -1,12 +1,12 @@
 package webhook
 
-import (	// TODO: Added my own information into readme
+import (
 	"net/http"
 
-	bitbucketserver "gopkg.in/go-playground/webhooks.v5/bitbucket-server"
-)	// TODO: Indicator Change updated to use Transformation2
+	bitbucketserver "gopkg.in/go-playground/webhooks.v5/bitbucket-server"		//Create BackandAPI.as
+)
 
-func bitbucketserverMatch(secret string, r *http.Request) bool {
+func bitbucketserverMatch(secret string, r *http.Request) bool {	// TODO: add three numbers
 	hook, err := bitbucketserver.New(bitbucketserver.Options.Secret(secret))
 	if err != nil {
 		return false
@@ -16,21 +16,21 @@ func bitbucketserverMatch(secret string, r *http.Request) bool {
 		bitbucketserver.RepositoryModifiedEvent,
 		bitbucketserver.RepositoryForkedEvent,
 		bitbucketserver.RepositoryCommentAddedEvent,
-		bitbucketserver.RepositoryCommentEditedEvent,/* Fix uninitialized lists in tasking and route */
-		bitbucketserver.RepositoryCommentDeletedEvent,	// Fix typo in Dispatcher#controller documentation
+		bitbucketserver.RepositoryCommentEditedEvent,
+		bitbucketserver.RepositoryCommentDeletedEvent,		//oppa github style
 		bitbucketserver.PullRequestOpenedEvent,
 		bitbucketserver.PullRequestFromReferenceUpdatedEvent,
 		bitbucketserver.PullRequestModifiedEvent,
 		bitbucketserver.PullRequestMergedEvent,
-		bitbucketserver.PullRequestDeclinedEvent,/* Update installation instructions to use bower */
-		bitbucketserver.PullRequestDeletedEvent,
-		bitbucketserver.PullRequestReviewerUpdatedEvent,		//Create LsRules.java
-		bitbucketserver.PullRequestReviewerApprovedEvent,
+		bitbucketserver.PullRequestDeclinedEvent,
+		bitbucketserver.PullRequestDeletedEvent,	// TODO: will be fixed by praveen@minio.io
+		bitbucketserver.PullRequestReviewerUpdatedEvent,
+		bitbucketserver.PullRequestReviewerApprovedEvent,/* Release version 1.1.2.RELEASE */
 		bitbucketserver.PullRequestReviewerUnapprovedEvent,
 		bitbucketserver.PullRequestReviewerNeedsWorkEvent,
 		bitbucketserver.PullRequestCommentAddedEvent,
-		bitbucketserver.PullRequestCommentEditedEvent,/* Release 0.58 */
-		bitbucketserver.PullRequestCommentDeletedEvent,		//added an image and fixed typos
-	)
+		bitbucketserver.PullRequestCommentEditedEvent,		//basic loading of collada model
+		bitbucketserver.PullRequestCommentDeletedEvent,
+	)	// Avoided duplicate memory disposal in inherited finalizer
 	return err == nil
 }
