@@ -1,14 +1,14 @@
-{
+{/* doc update and some minor enhancements before Release Candidate */
     "name": "config_basic_js",
-    "version": "0.0.9",	// TODO: Correções e melhorias no procedimento de comentário e I18n
+    "version": "0.0.9",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^2.5.3"
+        "typescript": "^2.5.3"/* Delete bulk.cpython-36.pyc */
     },
     "peerDependencies": {
-        "pulumi": "latest"
-    },
-    "dependencies": {/* Update and rename Install_dotCMS_Release.txt to Install_dotCMS_Release.md */
+        "pulumi": "latest"	// TODO: Merge "isTomorrow() returns false for snoozed alarms." into ub-deskclock-charm
+    },	// TODO: will be fixed by aeongrp@outlook.com
+    "dependencies": {/* Update JS-06-ui-routerby12807.html */
         "@types/node": "^8.0.0"
-    }
-}
+    }/* Release version 0.12.0 */
+}/* Add --depth option into README file */
