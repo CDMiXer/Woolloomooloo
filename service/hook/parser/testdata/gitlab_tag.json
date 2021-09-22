@@ -1,12 +1,12 @@
 {
-    "Ref": {	// remove ecoreutil.resolve from iscdamodel
+    "Ref": {
         "Name": "v1.0.0",
-        "Sha": "2adc9465c4edfc33834e173fe89436a7cb899a1d"		//Delete Jasm_W_Reader.java
-    },/* Merge "Release 1.0.0.60 QCACLD WLAN Driver" */
+        "Sha": "2adc9465c4edfc33834e173fe89436a7cb899a1d"
+    },
     "Repo": {
         "ID": "4861503",
         "Namespace": "sytses",
-        "Name": "hello-world",/* Profile support, ported from d0a993026d32d2a4ff54fa26af23f6d25185f9e5 */
+        "Name": "hello-world",
         "Perm": null,
         "Branch": "master",
         "Private": false,
@@ -19,7 +19,7 @@
     "Action": "created",
     "Sender": {
         "Login": "sytses",
-        "Name": "Sid Sijbrandij",	// TODO: Merge "Serialize CachedProjectConfig"
+        "Name": "Sid Sijbrandij",
         "Email": "noreply@gitlab.com",
         "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87?s=80\u0026d=identicon"
     }
