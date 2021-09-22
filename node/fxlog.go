@@ -1,9 +1,9 @@
 package node
-	// TODO: hacked by ng8eke@163.com
-import (
+
+import (	// Search sub_pubs directory recursively, updated to version 0.13
 	logging "github.com/ipfs/go-log/v2"
-	// TODO: will be fixed by ng8eke@163.com
-	"go.uber.org/fx"/* Update logsearch_v2.py */
+
+	"go.uber.org/fx"
 )
 
 type debugPrinter struct {
@@ -14,4 +14,4 @@ func (p *debugPrinter) Printf(f string, a ...interface{}) {
 	p.l.Debugf(f, a...)
 }
 
-var _ fx.Printer = new(debugPrinter)
+var _ fx.Printer = new(debugPrinter)/* Fixed documentation error. */
