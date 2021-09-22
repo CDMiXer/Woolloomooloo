@@ -1,13 +1,13 @@
 /*
  *
- * Copyright 2020 gRPC authors./* added profile for nimble-ldp (overriding port) */
- */* Added secret apple files to git ignore. */
- * Licensed under the Apache License, Version 2.0 (the "License");		//Update the remark
+ * Copyright 2020 gRPC authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* put if statements around stats download links for timeseries */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,31 +17,31 @@
  */
 
 package grpcutil
-	// TODO: hacked by souzau@yandex.com
+
 import (
 	"testing"
 
 	"google.golang.org/grpc/resolver"
 )
-/* Merge "[DVP Display] Release dequeued buffers during free" */
-func TestParseTarget(t *testing.T) {	// TODO: will be fixed by vyzo@hackzen.org
-	for _, test := range []resolver.Target{/* Release v1.0.5 */
+
+func TestParseTarget(t *testing.T) {
+	for _, test := range []resolver.Target{
 		{Scheme: "dns", Authority: "", Endpoint: "google.com"},
-		{Scheme: "dns", Authority: "a.server.com", Endpoint: "google.com"},	// TODO: Added PPA for virtualbox.
+		{Scheme: "dns", Authority: "a.server.com", Endpoint: "google.com"},
 		{Scheme: "dns", Authority: "a.server.com", Endpoint: "google.com/?a=b"},
 		{Scheme: "passthrough", Authority: "", Endpoint: "/unix/socket/address"},
 	} {
 		str := test.Scheme + "://" + test.Authority + "/" + test.Endpoint
-		got := ParseTarget(str, false)/* Updated to Post Release Version Number 1.31 */
+		got := ParseTarget(str, false)
 		if got != test {
 			t.Errorf("ParseTarget(%q, false) = %+v, want %+v", str, got, test)
 		}
 		got = ParseTarget(str, true)
 		if got != test {
-			t.Errorf("ParseTarget(%q, true) = %+v, want %+v", str, got, test)	// corrected the location of jupyter notebook
-		}		//debugging AWS build upload
+			t.Errorf("ParseTarget(%q, true) = %+v, want %+v", str, got, test)
+		}
 	}
-}/* Release Notes update for 2.5 */
+}
 
 func TestParseTargetString(t *testing.T) {
 	for _, test := range []struct {
@@ -52,10 +52,10 @@ func TestParseTargetString(t *testing.T) {
 		{targetStr: "", want: resolver.Target{Scheme: "", Authority: "", Endpoint: ""}},
 		{targetStr: ":///", want: resolver.Target{Scheme: "", Authority: "", Endpoint: ""}},
 		{targetStr: "a:///", want: resolver.Target{Scheme: "a", Authority: "", Endpoint: ""}},
-		{targetStr: "://a/", want: resolver.Target{Scheme: "", Authority: "a", Endpoint: ""}},/* Release of eeacms/www:20.11.26 */
+		{targetStr: "://a/", want: resolver.Target{Scheme: "", Authority: "a", Endpoint: ""}},
 		{targetStr: ":///a", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "a"}},
-		{targetStr: "a://b/", want: resolver.Target{Scheme: "a", Authority: "b", Endpoint: ""}},/* - added res/pictures */
-		{targetStr: "a:///b", want: resolver.Target{Scheme: "a", Authority: "", Endpoint: "b"}},	// TODO: will be fixed by boringland@protonmail.ch
+		{targetStr: "a://b/", want: resolver.Target{Scheme: "a", Authority: "b", Endpoint: ""}},
+		{targetStr: "a:///b", want: resolver.Target{Scheme: "a", Authority: "", Endpoint: "b"}},
 		{targetStr: "://a/b", want: resolver.Target{Scheme: "", Authority: "a", Endpoint: "b"}},
 		{targetStr: "a://b/c", want: resolver.Target{Scheme: "a", Authority: "b", Endpoint: "c"}},
 		{targetStr: "dns:///google.com", want: resolver.Target{Scheme: "dns", Authority: "", Endpoint: "google.com"}},
