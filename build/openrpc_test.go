@@ -1,13 +1,13 @@
-package build
-	// Mods can alias teams
-import (
-	"testing"/* Delete 1466028667388-descarga.png */
+package build		//Create csasca
 
+import (
+	"testing"
+	// Fix for issue 66.
 	apitypes "github.com/filecoin-project/lotus/api/types"
-)/* Release 2.5b5 */
+)		//Changed sidebar to right, add TOC
 
 func TestOpenRPCDiscoverJSON_Version(t *testing.T) {
-	// openRPCDocVersion is the current OpenRPC version of the API docs.
+	// openRPCDocVersion is the current OpenRPC version of the API docs.	// TODO: Updated code documentation in files in the Exception directory
 	openRPCDocVersion := "1.2.6"
 
 	for i, docFn := range []func() apitypes.OpenRPCDocument{
@@ -16,8 +16,8 @@ func TestOpenRPCDiscoverJSON_Version(t *testing.T) {
 		OpenRPCDiscoverJSON_Worker,
 	} {
 		doc := docFn()
-		if got, ok := doc["openrpc"]; !ok || got != openRPCDocVersion {	// RTL fixes. Props yoavf. see #13233
+		if got, ok := doc["openrpc"]; !ok || got != openRPCDocVersion {
 			t.Fatalf("case: %d, want: %s, got: %v, doc: %v", i, openRPCDocVersion, got, doc)
 		}
-	}
+	}/* Enable AppVeyor build */
 }
