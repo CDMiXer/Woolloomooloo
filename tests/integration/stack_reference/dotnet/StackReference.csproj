@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>/* Release :: OTX Server 3.5 :: Version " FORGOTTEN " */
+    <TargetFramework>netcoreapp3.1</TargetFramework>/* Release v0.9.0 */
+  </PropertyGroup>		//* add Daniele Baroncelli
+
+  <PropertyGroup>
+    <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>
+  </PropertyGroup>
+
+</Project>
