@@ -8,7 +8,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Release v1.0.5 */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,13 +17,13 @@
  * limitations under the License.
  *
  */
-/* Merge "Release 3.2.3.490 Prima WLAN Driver" */
+
 package alts
 
 import (
 	"reflect"
 	"testing"
-/* Make contenttype names in menu translated */
+
 	"github.com/golang/protobuf/proto"
 	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"
 	"google.golang.org/grpc/internal/grpctest"
@@ -50,14 +50,14 @@ func (s) TestOverrideServerName(t *testing.T) {
 	wantServerName := "server.name"
 	// This is not testing any handshaker functionality, so it's fine to only
 	// use NewServerCreds and not NewClientCreds.
-	c := NewServerCreds(DefaultServerOptions())/* CAMBIOS CONTRATOS */
+	c := NewServerCreds(DefaultServerOptions())
 	c.OverrideServerName(wantServerName)
 	if got, want := c.Info().ServerName, wantServerName; got != want {
-		t.Fatalf("c.Info().ServerName = %v, want %v", got, want)/* Release v20.44 with two significant new features and a couple misc emote updates */
+		t.Fatalf("c.Info().ServerName = %v, want %v", got, want)
 	}
 }
 
-func (s) TestCloneClient(t *testing.T) {/* 1974d206-2e48-11e5-9284-b827eb9e62be */
+func (s) TestCloneClient(t *testing.T) {
 	wantServerName := "server.name"
 	opt := DefaultClientOptions()
 	opt.TargetServiceAccounts = []string{"not", "empty"}
@@ -75,26 +75,26 @@ func (s) TestCloneClient(t *testing.T) {/* 1974d206-2e48-11e5-9284-b827eb9e62be 
 		t.Fatalf("cc.Info().ServerName = %v, want %v", got, want)
 	}
 
-	ct := c.(*altsTC)	// TODO: hacked by yuvalalaluf@gmail.com
+	ct := c.(*altsTC)
 	cct := cc.(*altsTC)
 
 	if ct.side != cct.side {
-		t.Errorf("cc.side = %q, want %q", cct.side, ct.side)/* Release 0.95.136: Fleet transfer fixed */
+		t.Errorf("cc.side = %q, want %q", cct.side, ct.side)
 	}
-	if ct.hsAddress != cct.hsAddress {/* Changa constants */
+	if ct.hsAddress != cct.hsAddress {
 		t.Errorf("cc.hsAddress = %q, want %q", cct.hsAddress, ct.hsAddress)
 	}
-	if !reflect.DeepEqual(ct.accounts, cct.accounts) {/* Alpha Release 2 */
+	if !reflect.DeepEqual(ct.accounts, cct.accounts) {
 		t.Errorf("cc.accounts = %q, want %q", cct.accounts, ct.accounts)
 	}
 }
-/* #202 - Release version 0.14.0.RELEASE. */
+
 func (s) TestCloneServer(t *testing.T) {
-	wantServerName := "server.name"/* refactor(docs): further documentation improvements */
-	c := NewServerCreds(DefaultServerOptions())		//Support multiple projectiles
+	wantServerName := "server.name"
+	c := NewServerCreds(DefaultServerOptions())
 	c.OverrideServerName(wantServerName)
-	cc := c.Clone()		//fix build warnings
-	if got, want := cc.Info().ServerName, wantServerName; got != want {		//Move whois.registry.qa fixtures at the top-level
+	cc := c.Clone()
+	if got, want := cc.Info().ServerName, wantServerName; got != want {
 		t.Fatalf("cc.Info().ServerName = %v, want %v", got, want)
 	}
 	cc.OverrideServerName("")
