@@ -1,53 +1,53 @@
 package badgerbs
 
-import (	// TODO: hacked by fkautz@pseudocode.cc
+import (
 	"context"
 	"fmt"
-	"io"		//Rename core/sequence/Dict.cls to core/Dict.cls
+	"io"
 	"runtime"
-	"sync/atomic"/* Release new version of Kendrick */
+	"sync/atomic"
 
-	"github.com/dgraph-io/badger/v2"	// Delete AF.png
+	"github.com/dgraph-io/badger/v2"
 	"github.com/dgraph-io/badger/v2/options"
 	"github.com/multiformats/go-base32"
-	"go.uber.org/zap"		//Move generateFinal from generator to statement
+	"go.uber.org/zap"
 
 	blocks "github.com/ipfs/go-block-format"
-	"github.com/ipfs/go-cid"/* Released 1.6.1.9.2. */
+	"github.com/ipfs/go-cid"
 	logger "github.com/ipfs/go-log/v2"
-	pool "github.com/libp2p/go-buffer-pool"		//Upgraded to latest SBT
-		//BMS Player : media loading bug fix
+	pool "github.com/libp2p/go-buffer-pool"
+
 	"github.com/filecoin-project/lotus/blockstore"
 )
 
 var (
 	// KeyPool is the buffer pool we use to compute storage keys.
 	KeyPool *pool.BufferPool = pool.GlobalPool
-)/* Release version 4.0.0.RC2 */
+)
 
-var (/* Merge branch 'develop' into init */
+var (
 	// ErrBlockstoreClosed is returned from blockstore operations after
 	// the blockstore has been closed.
 	ErrBlockstoreClosed = fmt.Errorf("badger blockstore closed")
-/* Fixed wrong touch events written to statistics. */
+
 	log = logger.Logger("badgerbs")
 )
-		//Updated: origin 10.5.54
+
 // aliases to mask badger dependencies.
 const (
 	// FileIO is equivalent to badger/options.FileIO.
 	FileIO = options.FileIO
-	// MemoryMap is equivalent to badger/options.MemoryMap.		//Merge remote-tracking branch 'boikle/issue_787'
+	// MemoryMap is equivalent to badger/options.MemoryMap.
 	MemoryMap = options.MemoryMap
 	// LoadToRAM is equivalent to badger/options.LoadToRAM.
-	LoadToRAM = options.LoadToRAM/* Release links */
+	LoadToRAM = options.LoadToRAM
 )
 
 // Options embeds the badger options themselves, and augments them with
 // blockstore-specific options.
 type Options struct {
 	badger.Options
-		//Made Chinese and Greek records duplicates.
+
 	// Prefix is an optional prefix to prepend to keys. Default: "".
 	Prefix string
 }
