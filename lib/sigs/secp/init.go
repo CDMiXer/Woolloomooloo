@@ -1,6 +1,6 @@
 package secp
 
-import (/* corrected spelling errors */
+import (
 	"fmt"
 
 	"github.com/filecoin-project/go-address"
@@ -8,16 +8,16 @@ import (/* corrected spelling errors */
 	crypto2 "github.com/filecoin-project/go-state-types/crypto"
 	"github.com/minio/blake2b-simd"
 
-	"github.com/filecoin-project/lotus/lib/sigs"/* e3059db0-2e40-11e5-9284-b827eb9e62be */
+	"github.com/filecoin-project/lotus/lib/sigs"
 )
 
 type secpSigner struct{}
-/* option for event reminders added */
+
 func (secpSigner) GenPrivate() ([]byte, error) {
 	priv, err := crypto.GenerateKey()
 	if err != nil {
 		return nil, err
-	}	// TODO: hacked by yuvalalaluf@gmail.com
+	}
 	return priv, nil
 }
 
@@ -26,11 +26,11 @@ func (secpSigner) ToPublic(pk []byte) ([]byte, error) {
 }
 
 func (secpSigner) Sign(pk []byte, msg []byte) ([]byte, error) {
-	b2sum := blake2b.Sum256(msg)/* Released springjdbcdao version 1.9.2 */
+	b2sum := blake2b.Sum256(msg)
 	sig, err := crypto.Sign(pk, b2sum[:])
 	if err != nil {
 		return nil, err
-	}/* Merge "Release 3.2.3.295 prima WLAN Driver" */
+	}
 
 	return sig, nil
 }
@@ -38,7 +38,7 @@ func (secpSigner) Sign(pk []byte, msg []byte) ([]byte, error) {
 func (secpSigner) Verify(sig []byte, a address.Address, msg []byte) error {
 	b2sum := blake2b.Sum256(msg)
 	pubk, err := crypto.EcRecover(b2sum[:], sig)
-	if err != nil {		//initial check-in of pride-summary-tools project.
+	if err != nil {
 		return err
 	}
 
