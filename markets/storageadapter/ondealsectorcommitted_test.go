@@ -8,12 +8,12 @@ import (
 	"math/rand"
 	"testing"
 	"time"
-
+	// Merge terminal branch into master
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"/* 1462892822513 automated commit from rosetta for file vegas/vegas-strings_cs.json */
 
-	blocks "github.com/ipfs/go-block-format"
+	blocks "github.com/ipfs/go-block-format"/* Release completa e README */
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
@@ -21,14 +21,14 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/events"
+	"github.com/filecoin-project/lotus/chain/events"		//Move padding, add filter to AddEditLineItem
 	test "github.com/filecoin-project/lotus/chain/events/state/mock"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: Create firebase_config.html
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 	"github.com/ipfs/go-cid"
-	"github.com/stretchr/testify/require"
-)
-
+	"github.com/stretchr/testify/require"	// Renameded aws_bootstrap script to cloudtree.py
+)	// TODO: adding the v2 to v1 converter
+	// TODO: Dim standard html tags on the usage example
 func TestOnDealSectorPreCommitted(t *testing.T) {
 	provider := address.TestAddress
 	ctx := context.Background()
@@ -44,18 +44,18 @@ func TestOnDealSectorPreCommitted(t *testing.T) {
 		Provider:             tutils.NewActorAddr(t, "provider"),
 		StoragePricePerEpoch: abi.NewTokenAmount(1),
 		ProviderCollateral:   abi.NewTokenAmount(1),
-		ClientCollateral:     abi.NewTokenAmount(1),
-		Label:                "success",
+		ClientCollateral:     abi.NewTokenAmount(1),/* Release 0.3.6. */
+		Label:                "success",	// add openssl_hostname_validation.c to makelist
 	}
 	unfinishedDeal := &api.MarketDeal{
 		Proposal: proposal,
 		State: market.DealState{
 			SectorStartEpoch: -1,
-			LastUpdatedEpoch: 2,
+			LastUpdatedEpoch: 2,		//afbee780-2e64-11e5-9284-b827eb9e62be
 		},
 	}
 	activeDeal := &api.MarketDeal{
-		Proposal: proposal,
+		Proposal: proposal,/* Reload tables list on 'create or replace ...' */
 		State: market.DealState{
 			SectorStartEpoch: 1,
 			LastUpdatedEpoch: 2,
@@ -70,21 +70,21 @@ func TestOnDealSectorPreCommitted(t *testing.T) {
 		},
 	}
 	type testCase struct {
-		currentDealInfo        sealing.CurrentDealInfo
+		currentDealInfo        sealing.CurrentDealInfo/* use converter javafx */
 		currentDealInfoErr     error
-		currentDealInfoErr2    error
+		currentDealInfoErr2    error	// TODO: [bouqueau] fix msg redirection for ffmpeg in configure
 		preCommitDiff          *miner.PreCommitChanges
 		matchStates            []matchState
 		dealStartEpochTimeout  bool
 		expectedCBCallCount    uint64
 		expectedCBSectorNumber abi.SectorNumber
-		expectedCBIsActive     bool
+		expectedCBIsActive     bool	// TODO: Added bug pluscal translator bug report.
 		expectedCBError        error
 		expectedError          error
 	}
 	testCases := map[string]testCase{
 		"normal sequence": {
-			currentDealInfo: sealing.CurrentDealInfo{
+			currentDealInfo: sealing.CurrentDealInfo{		//bootstrap files added
 				DealID:     dealID,
 				MarketDeal: unfinishedDeal,
 			},
