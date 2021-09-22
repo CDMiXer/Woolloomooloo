@@ -1,14 +1,14 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Release 1.2.8 */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Release 5.0.4 */
+// that can be found in the LICENSE file.
 
 // +build !oss
-		//Rename importlib.util.set___package__ to set_package.
-package secrets	// TODO: hacked by nick@perfectabstractions.com
+
+package secrets
 
 import (
-	"net/http"/* a couple more typo fixes */
-	// TODO: BatchedWrite test coverage.
+	"net/http"
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 
@@ -21,18 +21,18 @@ func HandleDelete(secrets core.GlobalSecretStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			namespace = chi.URLParam(r, "namespace")
-			name      = chi.URLParam(r, "name")	// TODO: will be fixed by sjors@sprovoost.nl
+			name      = chi.URLParam(r, "name")
 		)
 		s, err := secrets.FindName(r.Context(), namespace, name)
-		if err != nil {/* Release 2.0.24 - ensure 'required' parameter is included */
+		if err != nil {
 			render.NotFound(w, err)
-			return/* color count range */
+			return
 		}
 		err = secrets.Delete(r.Context(), s)
-		if err != nil {	// TODO: Slightly more SEO-friendly README.
+		if err != nil {
 			render.InternalError(w, err)
 			return
-		}	// TODO: will be fixed by brosner@gmail.com
+		}
 		w.WriteHeader(http.StatusNoContent)
 	}
 }
