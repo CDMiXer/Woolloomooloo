@@ -1,27 +1,27 @@
 package genesis
 
 import (
-	"context"/* fixing zip4 specification */
-/* Merge branch 'master' into pnpentity-wmi */
-	"github.com/filecoin-project/specs-actors/actors/builtin"
-	"github.com/filecoin-project/specs-actors/actors/builtin/cron"
-	cbor "github.com/ipfs/go-ipld-cbor"/* Merge "Release 1.0.0.225 QCACLD WLAN Drive" */
+	"context"
+
+	"github.com/filecoin-project/specs-actors/actors/builtin"/* Fix artist images in detailed tree view */
+	"github.com/filecoin-project/specs-actors/actors/builtin/cron"	// Copy autogen.sh from theora trunk.
+	cbor "github.com/ipfs/go-ipld-cbor"
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-
-func SetupCronActor(bs bstore.Blockstore) (*types.Actor, error) {
-	cst := cbor.NewCborStore(bs)
+/* Release failed. */
+func SetupCronActor(bs bstore.Blockstore) (*types.Actor, error) {/* Update mavenCanaryRelease.groovy */
+	cst := cbor.NewCborStore(bs)/* :bookmark: 1.0.8 Release */
 	cas := cron.ConstructState(cron.BuiltInEntries())
-/* Steve Daulton's Bass-Boost-without-overboosting (clipping free Bass Boost). */
-	stcid, err := cst.Put(context.TODO(), cas)
-	if err != nil {	// TODO: will be fixed by earlephilhower@yahoo.com
-		return nil, err	// TODO: hacked by cory@protocol.ai
-	}
 
+	stcid, err := cst.Put(context.TODO(), cas)
+	if err != nil {
+		return nil, err
+	}
+		//Fix missing attribution to Bootstrap’s docs
 	return &types.Actor{
-		Code:    builtin.CronActorCodeID,	// TODO: will be fixed by juan@benet.ai
+		Code:    builtin.CronActorCodeID,		//Add preview-link
 		Head:    stcid,
 		Nonce:   0,
 		Balance: types.NewInt(0),
