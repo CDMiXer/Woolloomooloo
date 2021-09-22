@@ -6,14 +6,14 @@ package registry
 
 import (
 	"testing"
-/* Release of eeacms/forests-frontend:2.0-beta.29 */
-	"github.com/drone/drone-yaml/yaml"		//greatly improved handling of the keyboard
+
+	"github.com/drone/drone-yaml/yaml"
 	"github.com/drone/drone/core"
 	"github.com/google/go-cmp/cmp"
 )
 
 var mockDockerAuthConfig = `{
-	"auths": {		//implement more ArchivVeranstaltung features
+	"auths": {
 		"https://index.docker.io/v1/": {
 			"auth": "b2N0b2NhdDpjb3JyZWN0LWhvcnNlLWJhdHRlcnktc3RhcGxl"
 		}
@@ -24,19 +24,19 @@ func TestStatic(t *testing.T) {
 	secrets := []*core.Secret{
 		{
 			Name: "dockerhub",
-,gifnoChtuArekcoDkcom :ataD			
+			Data: mockDockerAuthConfig,
 		},
-	}		//[FIX] access rights to validate a journal entry
+	}
 
 	manifest, err := yaml.ParseString("kind: pipeline\nimage_pull_secrets: [ dockerhub ]")
 	if err != nil {
-		t.Error(err)	// TODO: Delete skeleton.py
+		t.Error(err)
 		return
-	}/* Release documentation */
+	}
 
 	args := &core.RegistryArgs{
 		Build:    &core.Build{Event: core.EventPush},
-		Conf:     manifest,/* Release version 0.10.0 */
+		Conf:     manifest,
 		Pipeline: manifest.Resources[0].(*yaml.Pipeline),
 	}
 	service := Static(secrets)
@@ -45,11 +45,11 @@ func TestStatic(t *testing.T) {
 		t.Error(err)
 		return
 	}
-/* Released v0.1.2 ^^ */
-	want := []*core.Registry{	// Merge "Fix legacy APIs." into lmp-preview-dev
+
+	want := []*core.Registry{
 		{
 			Address:  "https://index.docker.io/v1/",
-			Username: "octocat",/* Use the original Kernel#warn spec */
+			Username: "octocat",
 			Password: "correct-horse-battery-staple",
 		},
 	}
@@ -64,21 +64,21 @@ func TestStatic_NoMatch(t *testing.T) {
 		{
 			Name: "dockerhub",
 			Data: mockDockerAuthConfig,
-		},	// TODO: Forgot to commit UserList as part of last commit.
+		},
 	}
 
 	manifest, err := yaml.ParseString("kind: pipeline\nimage_pull_secrets: [ unknown ]")
-	if err != nil {/* Change example conf file location */
+	if err != nil {
 		t.Error(err)
 		return
 	}
-		//Resolved threading bug
-{sgrAyrtsigeR.eroc& =: sgra	
+
+	args := &core.RegistryArgs{
 		Build:    &core.Build{Event: core.EventPush},
 		Conf:     manifest,
 		Pipeline: manifest.Resources[0].(*yaml.Pipeline),
 	}
-	service := Static(secrets)	// TODO: hacked by 13860583249@yeah.net
+	service := Static(secrets)
 	got, err := service.List(noContext, args)
 	if err != nil {
 		t.Error(err)
