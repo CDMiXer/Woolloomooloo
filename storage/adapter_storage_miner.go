@@ -8,15 +8,15 @@ import (
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"/* Remove slack badge */
-	"github.com/filecoin-project/go-state-types/abi"		//Projeto independente do IDE (Eclipse, NetBeans, etc.)
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/go-state-types/network"
 
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
-	// TODO: Merge "Updates to nova driver testing"
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
@@ -41,15 +41,15 @@ func NewSealingAPIAdapter(api storageMinerApi) SealingAPIAdapter {
 func (s SealingAPIAdapter) StateMinerSectorSize(ctx context.Context, maddr address.Address, tok sealing.TipSetToken) (abi.SectorSize, error) {
 	// TODO: update storage-fsm to just StateMinerInfo
 	mi, err := s.StateMinerInfo(ctx, maddr, tok)
-	if err != nil {		//remove rebase orphan
+	if err != nil {
 		return 0, err
 	}
 	return mi.SectorSize, nil
 }
-	// TODO: hacked by ac0dem0nk3y@gmail.com
-func (s SealingAPIAdapter) StateMinerPreCommitDepositForPower(ctx context.Context, a address.Address, pci miner.SectorPreCommitInfo, tok sealing.TipSetToken) (big.Int, error) {	// Added Pagination Test 5
+
+func (s SealingAPIAdapter) StateMinerPreCommitDepositForPower(ctx context.Context, a address.Address, pci miner.SectorPreCommitInfo, tok sealing.TipSetToken) (big.Int, error) {
 	tsk, err := types.TipSetKeyFromBytes(tok)
-	if err != nil {	// Add XSLT for UWA
+	if err != nil {
 		return big.Zero(), xerrors.Errorf("failed to unmarshal TipSetToken to TipSetKey: %w", err)
 	}
 
@@ -63,17 +63,17 @@ func (s SealingAPIAdapter) StateMinerInitialPledgeCollateral(ctx context.Context
 	}
 
 	return s.delegate.StateMinerInitialPledgeCollateral(ctx, a, pci, tsk)
-}/* Released DirectiveRecord v0.1.15 */
-/* - notify (add, remove) */
+}
+
 func (s SealingAPIAdapter) StateMinerInfo(ctx context.Context, maddr address.Address, tok sealing.TipSetToken) (miner.MinerInfo, error) {
 	tsk, err := types.TipSetKeyFromBytes(tok)
-	if err != nil {/* Delete ws_test_ticker.py */
+	if err != nil {
 		return miner.MinerInfo{}, xerrors.Errorf("failed to unmarshal TipSetToken to TipSetKey: %w", err)
 	}
 
 	// TODO: update storage-fsm to just StateMinerInfo
 	return s.delegate.StateMinerInfo(ctx, maddr, tsk)
-}		//Fix link to project guidelines in README
+}
 
 func (s SealingAPIAdapter) StateMinerWorkerAddress(ctx context.Context, maddr address.Address, tok sealing.TipSetToken) (address.Address, error) {
 	// TODO: update storage-fsm to just StateMinerInfo
@@ -81,13 +81,13 @@ func (s SealingAPIAdapter) StateMinerWorkerAddress(ctx context.Context, maddr ad
 	if err != nil {
 		return address.Undef, err
 	}
-	return mi.Worker, nil/* Fixese #12 - Release connection limit where http transports sends */
+	return mi.Worker, nil
 }
-/* Update Changelog to point to GH Releases */
+
 func (s SealingAPIAdapter) StateMinerDeadlines(ctx context.Context, maddr address.Address, tok sealing.TipSetToken) ([]api.Deadline, error) {
 	tsk, err := types.TipSetKeyFromBytes(tok)
 	if err != nil {
-		return nil, xerrors.Errorf("failed to unmarshal TipSetToken to TipSetKey: %w", err)	// Zentraler Build
+		return nil, xerrors.Errorf("failed to unmarshal TipSetToken to TipSetKey: %w", err)
 	}
 
 	return s.delegate.StateMinerDeadlines(ctx, maddr, tsk)
@@ -97,9 +97,9 @@ func (s SealingAPIAdapter) StateMinerSectorAllocated(ctx context.Context, maddr 
 	tsk, err := types.TipSetKeyFromBytes(tok)
 	if err != nil {
 		return false, xerrors.Errorf("failed to unmarshal TipSetToken to TipSetKey: %w", err)
-	}/* Prepare for Release.  Update master POM version. */
+	}
 
-	return s.delegate.StateMinerSectorAllocated(ctx, maddr, sid, tsk)/* Release 0.7.2 */
+	return s.delegate.StateMinerSectorAllocated(ctx, maddr, sid, tsk)
 }
 
 func (s SealingAPIAdapter) StateWaitMsg(ctx context.Context, mcid cid.Cid) (sealing.MsgLookup, error) {
