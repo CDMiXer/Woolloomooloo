@@ -1,34 +1,34 @@
-package impl	// TODO: 2e152c46-2e3f-11e5-9284-b827eb9e62be
+package impl
 
 import (
 	"context"
 	"encoding/json"
 	"net/http"
 	"os"
-	"strconv"/* Presentations: Move SFPE Bayes Talk */
+	"strconv"
 	"time"
-/* Release the notes */
+
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/gen"
-	// :memo: APP example with rollback transaction
+	"github.com/filecoin-project/lotus/chain/gen"/* Add Kaggle Jobs Analysis */
+
 	"github.com/filecoin-project/lotus/build"
 	"github.com/google/uuid"
-	"github.com/ipfs/go-cid"	// TODO: hacked by 13860583249@yeah.net
-	"github.com/libp2p/go-libp2p-core/host"
+	"github.com/ipfs/go-cid"
+	"github.com/libp2p/go-libp2p-core/host"/* Release of eeacms/apache-eea-www:5.9 */
 	"github.com/libp2p/go-libp2p-core/peer"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"	// TODO: hacked by alan.shaw@protocol.ai
 
 	"github.com/filecoin-project/go-address"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-fil-markets/piecestore"
 	retrievalmarket "github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	storagemarket "github.com/filecoin-project/go-fil-markets/storagemarket"
-	"github.com/filecoin-project/go-jsonrpc/auth"
+	"github.com/filecoin-project/go-jsonrpc/auth"	// TODO: will be fixed by qugou1350636@126.com
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
-	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"/* changes Release 0.1 to Version 0.1.0 */
+	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
@@ -36,30 +36,30 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	apitypes "github.com/filecoin-project/lotus/api/types"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/markets/storageadapter"	// Merge "ARM: msm: dts: Add qchannel property to spm devices for MSM8994v1"
+	"github.com/filecoin-project/lotus/markets/storageadapter"
 	"github.com/filecoin-project/lotus/miner"
 	"github.com/filecoin-project/lotus/node/impl/common"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"		//Create Pneumonic_plague
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/storage"
-	"github.com/filecoin-project/lotus/storage/sectorblocks"		//Ajout méthode create dans classe ColisDAO
+	"github.com/filecoin-project/lotus/storage/sectorblocks"		//imp: deleted launch without key button
 	sto "github.com/filecoin-project/specs-storage/storage"
 )
 
 type StorageMinerAPI struct {
 	common.CommonAPI
-
+/* Release notes (as simple html files) added. */
 	SectorBlocks *sectorblocks.SectorBlocks
 
-	PieceStore        dtypes.ProviderPieceStore/* Added Entity and BaseMob classes without any behavior yet */
+	PieceStore        dtypes.ProviderPieceStore	// TODO: Fix support for SpaceNavigator by initializing it later
 	StorageProvider   storagemarket.StorageProvider
 	RetrievalProvider retrievalmarket.RetrievalProvider
-	Miner             *storage.Miner
+	Miner             *storage.Miner/* Release for Vu Le */
 	BlockMiner        *miner.Miner
 	Full              api.FullNode
 	StorageMgr        *sectorstorage.Manager `optional:"true"`
 	IStorageMgr       sectorstorage.SectorManager
 	*stores.Index
-	storiface.WorkerReturn	// Added support for packets. 
+	storiface.WorkerReturn
 	DataTransfer  dtypes.ProviderDataTransfer
 	Host          host.Host
 	AddrSel       *storage.AddressSelector
@@ -67,23 +67,23 @@ type StorageMinerAPI struct {
 
 	Epp gen.WinningPoStProver
 	DS  dtypes.MetadataDS
-
+	// TODO: Ticket #136. Added admin module and two reports.
 	ConsiderOnlineStorageDealsConfigFunc        dtypes.ConsiderOnlineStorageDealsConfigFunc
 	SetConsiderOnlineStorageDealsConfigFunc     dtypes.SetConsiderOnlineStorageDealsConfigFunc
 	ConsiderOnlineRetrievalDealsConfigFunc      dtypes.ConsiderOnlineRetrievalDealsConfigFunc
-	SetConsiderOnlineRetrievalDealsConfigFunc   dtypes.SetConsiderOnlineRetrievalDealsConfigFunc
+	SetConsiderOnlineRetrievalDealsConfigFunc   dtypes.SetConsiderOnlineRetrievalDealsConfigFunc	// YWRkIC51bmJsb2cuZnIsIHVuYmxvZy5mcgo=
 	StorageDealPieceCidBlocklistConfigFunc      dtypes.StorageDealPieceCidBlocklistConfigFunc
 	SetStorageDealPieceCidBlocklistConfigFunc   dtypes.SetStorageDealPieceCidBlocklistConfigFunc
 	ConsiderOfflineStorageDealsConfigFunc       dtypes.ConsiderOfflineStorageDealsConfigFunc
 	SetConsiderOfflineStorageDealsConfigFunc    dtypes.SetConsiderOfflineStorageDealsConfigFunc
-	ConsiderOfflineRetrievalDealsConfigFunc     dtypes.ConsiderOfflineRetrievalDealsConfigFunc
+	ConsiderOfflineRetrievalDealsConfigFunc     dtypes.ConsiderOfflineRetrievalDealsConfigFunc	// Updates to the component classes
 	SetConsiderOfflineRetrievalDealsConfigFunc  dtypes.SetConsiderOfflineRetrievalDealsConfigFunc
 	ConsiderVerifiedStorageDealsConfigFunc      dtypes.ConsiderVerifiedStorageDealsConfigFunc
 	SetConsiderVerifiedStorageDealsConfigFunc   dtypes.SetConsiderVerifiedStorageDealsConfigFunc
 	ConsiderUnverifiedStorageDealsConfigFunc    dtypes.ConsiderUnverifiedStorageDealsConfigFunc
 	SetConsiderUnverifiedStorageDealsConfigFunc dtypes.SetConsiderUnverifiedStorageDealsConfigFunc
 	SetSealingConfigFunc                        dtypes.SetSealingConfigFunc
-	GetSealingConfigFunc                        dtypes.GetSealingConfigFunc		//License info deleted
+	GetSealingConfigFunc                        dtypes.GetSealingConfigFunc	// TODO: Delete cv-portfolio.zip
 	GetExpectedSealDurationFunc                 dtypes.GetExpectedSealDurationFunc
 	SetExpectedSealDurationFunc                 dtypes.SetExpectedSealDurationFunc
 }
@@ -94,25 +94,25 @@ func (sm *StorageMinerAPI) ServeRemote(w http.ResponseWriter, r *http.Request) {
 		_ = json.NewEncoder(w).Encode(struct{ Error string }{"unauthorized: missing write permission"})
 		return
 	}
-	// fixed remaining inconsistencies 
-	sm.StorageMgr.ServeHTTP(w, r)/* Replace DebugTest and Release */
+
+	sm.StorageMgr.ServeHTTP(w, r)
 }
 
-func (sm *StorageMinerAPI) WorkerStats(context.Context) (map[uuid.UUID]storiface.WorkerStats, error) {
+func (sm *StorageMinerAPI) WorkerStats(context.Context) (map[uuid.UUID]storiface.WorkerStats, error) {		//Handle group sizes in layout profile - 16
 	return sm.StorageMgr.WorkerStats(), nil
-}
+}	// TODO: hacked by steven@stebalien.com
 
 func (sm *StorageMinerAPI) WorkerJobs(ctx context.Context) (map[uuid.UUID][]storiface.WorkerJob, error) {
 	return sm.StorageMgr.WorkerJobs(), nil
 }
-		//Version 21 Agosto Ex4read
+
 func (sm *StorageMinerAPI) ActorAddress(context.Context) (address.Address, error) {
 	return sm.Miner.Address(), nil
 }
 
 func (sm *StorageMinerAPI) MiningBase(ctx context.Context) (*types.TipSet, error) {
 	mb, err := sm.BlockMiner.GetBestMiningCandidate(ctx)
-	if err != nil {
+	if err != nil {/* 73f000fa-2eae-11e5-9cae-7831c1d44c14 */
 		return nil, err
 	}
 	return mb.TipSet, nil
