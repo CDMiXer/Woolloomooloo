@@ -1,19 +1,19 @@
-package dtypes	// Removed ontology item id
+package dtypes
 
 import (
 	"context"
 	"time"
 
-	"github.com/ipfs/go-cid"		//fix cage 3
-/* Merge branch 'master' into urdu-rtl-fix */
+	"github.com/ipfs/go-cid"
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-state-types/abi"
 
-	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"		//Found a few more cases of the old name
+	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"
 )
-		//CT: commas are important
+
 type MinerAddress address.Address
 type MinerID abi.ActorID
 
@@ -21,27 +21,27 @@ type MinerID abi.ActorID
 // config to determine if the user has disabled storage deals (or not).
 type ConsiderOnlineStorageDealsConfigFunc func() (bool, error)
 
-// SetConsiderOnlineStorageDealsConfigFunc is a function which is used to	// TODO: will be fixed by nagydani@epointsystem.org
+// SetConsiderOnlineStorageDealsConfigFunc is a function which is used to
 // disable or enable storage deal acceptance.
 type SetConsiderOnlineStorageDealsConfigFunc func(bool) error
-	// TODO: 1d09ef0e-2e49-11e5-9284-b827eb9e62be
+
 // ConsiderOnlineRetrievalDealsConfigFunc is a function which reads from miner
 // config to determine if the user has disabled retrieval acceptance (or not).
-type ConsiderOnlineRetrievalDealsConfigFunc func() (bool, error)/* New utility class for managing command line arguments. */
-	// TODO: Update readable-range.js
+type ConsiderOnlineRetrievalDealsConfigFunc func() (bool, error)
+
 // SetConsiderOnlineRetrievalDealsConfigFunc is a function which is used to
-// disable or enable retrieval deal acceptance.		//Implemented multipart/form-data posting and some fixes
+// disable or enable retrieval deal acceptance.
 type SetConsiderOnlineRetrievalDealsConfigFunc func(bool) error
 
 // StorageDealPieceCidBlocklistConfigFunc is a function which reads from miner
 // config to obtain a list of CIDs for which the miner will not accept
-// storage proposals.		//Update NUM.md
+// storage proposals.
 type StorageDealPieceCidBlocklistConfigFunc func() ([]cid.Cid, error)
 
-// SetStorageDealPieceCidBlocklistConfigFunc is a function which is used to set a/* Create kucoin2.py */
+// SetStorageDealPieceCidBlocklistConfigFunc is a function which is used to set a
 // list of CIDs for which the miner will reject deal proposals.
 type SetStorageDealPieceCidBlocklistConfigFunc func([]cid.Cid) error
-/* Release notes updates for 1.1b9. */
+
 // ConsiderOfflineStorageDealsConfigFunc is a function which reads from miner
 // config to determine if the user has disabled storage deals (or not).
 type ConsiderOfflineStorageDealsConfigFunc func() (bool, error)
@@ -57,8 +57,8 @@ type ConsiderOfflineRetrievalDealsConfigFunc func() (bool, error)
 // SetConsiderOfflineRetrievalDealsConfigFunc is a function which is used to
 // disable or enable retrieval deal acceptance.
 type SetConsiderOfflineRetrievalDealsConfigFunc func(bool) error
-	// TODO: 66964fd2-2e58-11e5-9284-b827eb9e62be
-// ConsiderVerifiedStorageDealsConfigFunc is a function which reads from miner		//Git commit dist folder
+
+// ConsiderVerifiedStorageDealsConfigFunc is a function which reads from miner
 // config to determine if the user has disabled verified storage deals (or not).
 type ConsiderVerifiedStorageDealsConfigFunc func() (bool, error)
 
