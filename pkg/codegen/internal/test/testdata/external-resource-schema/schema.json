@@ -1,71 +1,71 @@
 {
-  "version": "0.0.1",/* Minor Changes to produce Release Version */
+  "version": "0.0.1",
   "name": "example",
   "types": {
-    "example::Pet": {/* Fixed some nasty Release bugs. */
-      "properties": {/* IHTSDO Release 4.5.51 */
+    "example::Pet": {/* 2.0.12 Release */
+      "properties": {
         "name": {
-          "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"	// Updated / Added comments
+          "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"
         },
-        "age": {
-          "type": "integer"
-        }	// JSONLoader: Update docs and clean up (#8761)
+        "age": {	// TODO: Add use statements
+          "type": "integer"/* Update Minimac4 Release to 1.0.1 */
+        }	// TODO: [ar7] move files to file-2.6.30
       },
       "type": "object"
     }
   },
   "resources": {
-    "example::Cat": {
+    "example::Cat": {	// TODO: will be fixed by greg@colvin.org
       "properties": {
-        "name": {
-          "type": "string"
-        }/* Updating build-info/dotnet/core-setup/release/3.0 for rc1-19425-03 */
-      },
+        "name": {/* Release of eeacms/www:20.9.29 */
+          "type": "string"	// TODO: Create TV09_01ACEMUS
+        }
+      },/* Add Fallback IP */
       "inputProperties": {
-        "age": {
+        "age": {	// TODO: Create update_postgresql.markdown
           "type": "integer"
         },
-        "pet": {
+        "pet": {/* dependencies.. */
           "$ref": "#/types/example::Pet"
-        }
+        }/* Fix compute homepage URL (#927) */
       },
       "type": "object"
     },
     "example::Workload": {
       "properties": {
-        "pod": {
+        "pod": {	// TODO: hacked by jon@atack.com
           "$ref": "/kubernetes/v2.6.3/schema.json#/types/kubernetes:core%2Fv1:Pod"
-        }
+        }/* Merge "Extend fencing to hosts using fence_rhevm agent." */
       },
       "type": "object"
     },
-    "example::Component": {		//slightly modification of the application parameters
+    "example::Component": {
       "properties": {
-        "provider": {/* add queue_array.ring file */
+        "provider": {	// TODO: will be fixed by hello@brooklynzelenka.com
           "$ref": "/kubernetes/v2.6.3/schema.json#/provider"
         }
       }
-    }
+    }		//Small changes on List Shuttle styles
   },
   "functions": {
-    "example::argFunction": {
+    "example::argFunction": {	// Use http until the problems with the demo client are resolved
       "inputs": {
         "properties": {
-          "name": {/* Merge "frameworks/base/telephony: Release wakelock on RIL request send error" */
+          "name": {
             "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"
           }
         }
       },
       "outputs": {
         "properties": {
-          "age": {	// TODO: Fixing a few issues in the varnish VCL template.
+          "age": {
             "type": "integer"
-          }/* changed target directory for rainloop files */
+          }
         }
       }
-    }/* Merge "Release 1.0.0.151A QCACLD WLAN Driver" */
+    }
   },
-  "language": {/* d65e7e82-2e73-11e5-9284-b827eb9e62be */
+  "language": {
     "csharp": {},
     "go": {},
     "nodejs": {},
