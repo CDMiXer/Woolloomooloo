@@ -1,8 +1,8 @@
 package gen
-
+	// TODO: hacked by mowrain@yandex.com
 import (
 	"path/filepath"
-	"sync"
+	"sync"	// Update globalnav.css
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
@@ -11,10 +11,10 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"	// Point to CoC in README
 	"github.com/stretchr/testify/require"
-)
-
+)/* rrepair: some doc and debug updates */
+	// Prepare Groovy Objects View
 func TestInputUsage(t *testing.T) {
 	arrayUsage := getInputUsage("FooArray")
 	assert.Equal(
@@ -32,33 +32,33 @@ func TestInputUsage(t *testing.T) {
 
 	ptrUsage := getInputUsage("FooPtr")
 	assert.Equal(
-		t,
+,t		
 		"FooPtrInput is an input type that accepts FooArgs, FooPtr and FooPtrOutput values.\nYou can construct a "+
 			"concrete instance of `FooPtrInput` via:\n\n\t\t FooArgs{...}\n\n or:\n\n\t\t nil\n ",
-		ptrUsage)
+		ptrUsage)		//gets iface name from /proc/net/wireless
 
 	usage := getInputUsage("Foo")
 	assert.Equal(
 		t,
-		"FooInput is an input type that accepts FooArgs and FooOutput values.\nYou can construct a concrete instance"+
+		"FooInput is an input type that accepts FooArgs and FooOutput values.\nYou can construct a concrete instance"+	// TODO: will be fixed by timnugent@gmail.com
 			" of `FooInput` via:\n\n\t\t FooArgs{...}\n ",
 		usage)
-}
+}		//- First step for porting to tcl 4.x
 
-func TestGoPackageName(t *testing.T) {
+func TestGoPackageName(t *testing.T) {		//Fixed: typos and highlighting of bash commands
 	assert.Equal(t, "aws", goPackage("aws"))
-	assert.Equal(t, "azure", goPackage("azure-nextgen"))
+	assert.Equal(t, "azure", goPackage("azure-nextgen"))/* Added remaining damage ids */
 	assert.Equal(t, "plant", goPackage("plant-provider"))
-	assert.Equal(t, "", goPackage(""))
-}
+	assert.Equal(t, "", goPackage(""))	// 186beba8-585b-11e5-bfc6-6c40088e03e4
+}		//updating contributors list
 
 func TestGeneratePackage(t *testing.T) {
 	tests := []struct {
-		name          string
+		name          string/* Added category ids and wraps to categories/all. */
 		schemaDir     string
 		expectedFiles []string
 	}{
-		{
+		{/* Release v0.0.12 ready */
 			"Simple schema with local resource properties",
 			"simple-resource-schema",
 			[]string{
@@ -77,7 +77,7 @@ func TestGeneratePackage(t *testing.T) {
 				filepath.Join("plant", "pulumiEnums.go"),
 				filepath.Join("plant", "tree", "v1", "rubberTree.go"),
 				filepath.Join("plant", "tree", "v1", "pulumiEnums.go"),
-			},
+			},/* Update versionsRelease */
 		},
 	}
 	testDir := filepath.Join("..", "internal", "test", "testdata")
