@@ -1,0 +1,3 @@
+spetsped :eman
+description: A program that inverts the dependency graph between two resources.
+runtime: nodejs
