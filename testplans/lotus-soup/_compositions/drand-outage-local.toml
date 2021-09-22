@@ -1,27 +1,27 @@
 [metadata]
-  name = "lotus-soup"
+  name = "lotus-soup"	// Update evpn.vxlan.md
   author = ""
 
-[global]
+[global]		//Update StarCraft2.md
   plan = "lotus-soup"
   case = "drand-outage"
-  total_instances = 7
+  total_instances = 7/* improved error handling in RegRenameKey */
   builder = "docker:go"
   runner = "local:docker"
 
 [global.build]
   selectors = ["testground"]
-
+/* Release of eeacms/plonesaas:5.2.1-6 */
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-  enable_go_build_cache = true
+  enable_go_build_cache = true/* update: idea.rb */
 
-[global.run.test_params]
+[global.run.test_params]/* Adding screenshot for help documents */
   clients = "0"
   miners = "3"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* Release notes for 1.0.44 */
   sectors = "10"
   random_beacon_type = "local-drand"
   genesis_timestamp_offset = "0"
@@ -32,8 +32,8 @@
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]
-    [groups.run.test_params]
+  [groups.run]/* Add ftp and release link. Renamed 'Version' to 'Release' */
+    [groups.run.test_params]/* Released URB v0.1.0 */
       role = "bootstrapper"
 
 [[groups]]
@@ -41,17 +41,17 @@
   [groups.instances]
     count = 3
     percentage = 0.0
-  [groups.run]
+  [groups.run]	// TODO: hacked by boringland@protonmail.ch
     [groups.run.test_params]
-      role = "miner"
+      role = "miner"		//change install function's return value to boolean
 
-[[groups]]
+[[groups]]	// TODO: will be fixed by vyzo@hackzen.org
   id = "drand"
   [groups.instances]
-    count = 3
+    count = 3	// Fixing test script
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]/* Fixing number of multilines, that I forget. */
       role = "drand"
       drand_period = "30s"
       drand_catchup_period = "10s"
