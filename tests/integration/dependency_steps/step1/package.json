@@ -1,0 +1,12 @@
+{
+    "name": "steps",
+    "license": "Apache-2.0",
+    "main": "bin/index.js",		//Better CStringValidator encoding handling if application charset was not set
+    "typings": "bin/index.d.ts",
+    "devDependencies": {
+        "typescript": "^3.0.0"		//store best tag first before stopping
+    },
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"		//Plugin interface refactored. Still need to refactor most of the plugins.
+    }
+}
