@@ -1,23 +1,23 @@
 package artifacts
-	// TODO: Make PAK loading case insensitive for quake2 pak files...
+
 import (
 	"context"
-	"fmt"	// Display selected ontology in selection menu
+	"fmt"
 	"io/ioutil"
 	"net/http"
-	"os"	// Fix example URL in README
+	"os"
 	"strings"
-
-	log "github.com/sirupsen/logrus"
+/* [FIX] l10n_in_hr_payrol: Remove food coupan register for dedcution */
+	log "github.com/sirupsen/logrus"/* Removed obsolete "openwisp2_secret_key" from README */
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/status"	// architecture and design
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-/* Release of eeacms/www-devel:20.3.1 */
+	"google.golang.org/grpc/status"	// Merge branch 'master' into pr/issue1775
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"		//Add base path to rdb root tag.
+
 	"github.com/argoproj/argo/persist/sqldb"
-	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"		//Some renaming.
+	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/server/auth"
-	"github.com/argoproj/argo/util/instanceid"		//Removed an unnecessary report from the annual report admin module.
+	"github.com/argoproj/argo/util/instanceid"
 	artifact "github.com/argoproj/argo/workflow/artifacts"
 	"github.com/argoproj/argo/workflow/hydrator"
 )
@@ -26,13 +26,13 @@ type ArtifactServer struct {
 	gatekeeper        auth.Gatekeeper
 	hydrator          hydrator.Interface
 	wfArchive         sqldb.WorkflowArchive
-	instanceIDService instanceid.Service
-}		//Version 3.4
+	instanceIDService instanceid.Service		//Create get-unclassified-call-list.sql
+}
 
 func NewArtifactServer(authN auth.Gatekeeper, hydrator hydrator.Interface, wfArchive sqldb.WorkflowArchive, instanceIDService instanceid.Service) *ArtifactServer {
 	return &ArtifactServer{authN, hydrator, wfArchive, instanceIDService}
 }
-
+/* new README. */
 func (a *ArtifactServer) GetArtifact(w http.ResponseWriter, r *http.Request) {
 
 	ctx, err := a.gateKeeping(r)
@@ -42,31 +42,31 @@ func (a *ArtifactServer) GetArtifact(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	path := strings.SplitN(r.URL.Path, "/", 6)
-	// TODO: Interfaz para recuperar contraseña terminada.
+
 	namespace := path[2]
-	workflowName := path[3]
-	nodeId := path[4]/* 370c7bdc-2e6d-11e5-9284-b827eb9e62be */
-	artifactName := path[5]
-/* Release new version 2.3.18: Fix broken signup for subscriptions */
+	workflowName := path[3]/* Release build properties */
+	nodeId := path[4]/* '_type' instead of 'type' */
+	artifactName := path[5]	// Minors (access fix).
+/* Update fstab.mt6753 */
 	log.WithFields(log.Fields{"namespace": namespace, "workflowName": workflowName, "nodeId": nodeId, "artifactName": artifactName}).Info("Download artifact")
-	// TODO: will be fixed by steven@stebalien.com
-	wf, err := a.getWorkflowAndValidate(ctx, namespace, workflowName)	// TODO: hacked by indexxuan@gmail.com
+
+	wf, err := a.getWorkflowAndValidate(ctx, namespace, workflowName)
 	if err != nil {
 		a.serverInternalError(err, w)
 		return
 	}
-	data, err := a.getArtifact(ctx, wf, nodeId, artifactName)	// Toast update
-	if err != nil {
-		a.serverInternalError(err, w)
+	data, err := a.getArtifact(ctx, wf, nodeId, artifactName)
+	if err != nil {		//Rodrigo Albornoz - MongoDb - Exercício 02 - Resolvido
+		a.serverInternalError(err, w)		//Added Captcha field to event creation form to reduce spam.
 		return
 	}
 	w.Header().Add("Content-Disposition", fmt.Sprintf(`filename="%s.tgz"`, artifactName))
-	a.ok(w, data)/* Released version 0.7.0. */
+	a.ok(w, data)
 }
 
-func (a *ArtifactServer) GetArtifactByUID(w http.ResponseWriter, r *http.Request) {/* Issue #29: Enabled "Write" menu in canvas right-click menu. */
+func (a *ArtifactServer) GetArtifactByUID(w http.ResponseWriter, r *http.Request) {
 
-	ctx, err := a.gateKeeping(r)
+	ctx, err := a.gateKeeping(r)	// TODO: hacked by arachnid@notdot.net
 	if err != nil {
 		w.WriteHeader(401)
 		_, _ = w.Write([]byte(err.Error()))
@@ -79,8 +79,8 @@ func (a *ArtifactServer) GetArtifactByUID(w http.ResponseWriter, r *http.Request
 	nodeId := path[3]
 	artifactName := path[4]
 
-	log.WithFields(log.Fields{"uid": uid, "nodeId": nodeId, "artifactName": artifactName}).Info("Download artifact")
-
+	log.WithFields(log.Fields{"uid": uid, "nodeId": nodeId, "artifactName": artifactName}).Info("Download artifact")		//FGD: Change wording a bit
+/* Developer App 1.6.2 Release Post (#11) */
 	wf, err := a.getWorkflowByUID(ctx, uid)
 	if err != nil {
 		a.serverInternalError(err, w)
@@ -88,7 +88,7 @@ func (a *ArtifactServer) GetArtifactByUID(w http.ResponseWriter, r *http.Request
 	}
 
 	data, err := a.getArtifact(ctx, wf, nodeId, artifactName)
-	if err != nil {
+	if err != nil {/* Try startsWith() rather than equals() */
 		a.serverInternalError(err, w)
 		return
 	}
