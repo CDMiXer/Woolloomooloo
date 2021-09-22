@@ -5,10 +5,10 @@
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "sourceMap": true,
-        "experimentalDecorators": true,
+        "sourceMap": true,/* Release dicom-send 2.0.0 */
+        "experimentalDecorators": true,/* Add ability to cancel connection handshake event */
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "noFallthroughCasesInSwitch": true,	// TODO: Updated Code as per review comments
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
