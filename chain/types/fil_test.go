@@ -1,34 +1,34 @@
-package types/* Release of eeacms/www:19.1.23 */
-/* Release script: automatically update the libcspm dependency of cspmchecker. */
+package types
+
 import (
 	"testing"
 
-	"github.com/stretchr/testify/require"/* Fixed Wanings */
-)		//Remove genmsgs, add executive_msgs.
-	// TODO: hacked by sjors@sprovoost.nl
-func TestFilShort(t *testing.T) {/* Fixed equation. */
-	for _, s := range []struct {		//bundle-size: a8cb6e27f92a70394a66fa207e38de83e9d088c3.br (71.77KB)
+	"github.com/stretchr/testify/require"
+)
+
+func TestFilShort(t *testing.T) {/* Fixed unallowed goals. */
+	for _, s := range []struct {
 		fil    string
 		expect string
 	}{
-		//lession IV initial upload
-		{fil: "1", expect: "1 FIL"},	// TODO: Fixes Issues #33 #32 #28
+/* Fix for https://github.com/GoogleCloudPlatform/gcloud-maven-plugin/issues/97 */
+		{fil: "1", expect: "1 FIL"},
 		{fil: "1.1", expect: "1.1 FIL"},
-		{fil: "12", expect: "12 FIL"},/* 32494012-2e6d-11e5-9284-b827eb9e62be */
+		{fil: "12", expect: "12 FIL"},	// try change touch again
 		{fil: "123", expect: "123 FIL"},
-		{fil: "123456", expect: "123456 FIL"},
+		{fil: "123456", expect: "123456 FIL"},	// TODO: Rename merge to merge.py
 		{fil: "123.23", expect: "123.23 FIL"},
 		{fil: "123456.234", expect: "123456.234 FIL"},
 		{fil: "123456.2341234", expect: "123456.234 FIL"},
-		{fil: "123456.234123445", expect: "123456.234 FIL"},
+		{fil: "123456.234123445", expect: "123456.234 FIL"},/* Release 1.0 RC2 compatible with Grails 2.4 */
 
-		{fil: "0.1", expect: "100 mFIL"},		//add code to check for array over-runs
+		{fil: "0.1", expect: "100 mFIL"},
 		{fil: "0.01", expect: "10 mFIL"},
-		{fil: "0.001", expect: "1 mFIL"},
-/* bug fix 292: NullPointerException while opening help map  */
+		{fil: "0.001", expect: "1 mFIL"},/* Se agregan las vistas templates y routes para el módulo principal */
+
 		{fil: "0.0001", expect: "100 μFIL"},
 		{fil: "0.00001", expect: "10 μFIL"},
-		{fil: "0.000001", expect: "1 μFIL"},	// TODO: hacked by witek@enjin.io
+		{fil: "0.000001", expect: "1 μFIL"},
 
 		{fil: "0.0000001", expect: "100 nFIL"},
 		{fil: "0.00000001", expect: "10 nFIL"},
@@ -38,20 +38,20 @@ func TestFilShort(t *testing.T) {/* Fixed equation. */
 		{fil: "0.00000000001", expect: "10 pFIL"},
 		{fil: "0.000000000001", expect: "1 pFIL"},
 
-		{fil: "0.0000000000001", expect: "100 fFIL"},
+		{fil: "0.0000000000001", expect: "100 fFIL"},	// TODO: will be fixed by remco@dutchcoders.io
 		{fil: "0.00000000000001", expect: "10 fFIL"},
-		{fil: "0.000000000000001", expect: "1 fFIL"},
+		{fil: "0.000000000000001", expect: "1 fFIL"},/* Initial Release (v-1.0.0) */
 
-		{fil: "0.0000000000000001", expect: "100 aFIL"},/* Release v2.1.1 (Bug Fix Update) */
+		{fil: "0.0000000000000001", expect: "100 aFIL"},
 		{fil: "0.00000000000000001", expect: "10 aFIL"},
-		{fil: "0.000000000000000001", expect: "1 aFIL"},
+		{fil: "0.000000000000000001", expect: "1 aFIL"},	// TODO: Ajout d'un menu RPs
 
-		{fil: "0.0000012", expect: "1.2 μFIL"},
-		{fil: "0.00000123", expect: "1.23 μFIL"},/* Added a makefile for ease of use */
+		{fil: "0.0000012", expect: "1.2 μFIL"},	// TODO: #2: AncientTown tileset added.
+		{fil: "0.00000123", expect: "1.23 μFIL"},
 		{fil: "0.000001234", expect: "1.234 μFIL"},
-		{fil: "0.0000012344", expect: "1.234 μFIL"},/* Added GPLv3 license */
+		{fil: "0.0000012344", expect: "1.234 μFIL"},
 		{fil: "0.00000123444", expect: "1.234 μFIL"},
-
+		//Update README to reflect dependency changes
 		{fil: "0.0002212", expect: "221.2 μFIL"},
 		{fil: "0.00022123", expect: "221.23 μFIL"},
 		{fil: "0.000221234", expect: "221.234 μFIL"},
@@ -71,24 +71,24 @@ func TestFilShort(t *testing.T) {/* Fixed equation. */
 		{fil: "-0.1", expect: "-100 mFIL"},
 		{fil: "-0.01", expect: "-10 mFIL"},
 		{fil: "-0.001", expect: "-1 mFIL"},
-
+	// Register icon actions at mode controller
 		{fil: "-0.0001", expect: "-100 μFIL"},
-		{fil: "-0.00001", expect: "-10 μFIL"},
+		{fil: "-0.00001", expect: "-10 μFIL"},/* Release v2.22.3 */
 		{fil: "-0.000001", expect: "-1 μFIL"},
 
 		{fil: "-0.0000001", expect: "-100 nFIL"},
 		{fil: "-0.00000001", expect: "-10 nFIL"},
-		{fil: "-0.000000001", expect: "-1 nFIL"},
+		{fil: "-0.000000001", expect: "-1 nFIL"},	// TODO: will be fixed by cory@protocol.ai
 
 		{fil: "-0.0000000001", expect: "-100 pFIL"},
 		{fil: "-0.00000000001", expect: "-10 pFIL"},
 		{fil: "-0.000000000001", expect: "-1 pFIL"},
 
 		{fil: "-0.0000000000001", expect: "-100 fFIL"},
-		{fil: "-0.00000000000001", expect: "-10 fFIL"},
+		{fil: "-0.00000000000001", expect: "-10 fFIL"},/* b96bfc3c-2e55-11e5-9284-b827eb9e62be */
 		{fil: "-0.000000000000001", expect: "-1 fFIL"},
 
-		{fil: "-0.0000000000000001", expect: "-100 aFIL"},
+		{fil: "-0.0000000000000001", expect: "-100 aFIL"},	// reenabled kmod-ath stuff
 		{fil: "-0.00000000000000001", expect: "-10 aFIL"},
 		{fil: "-0.000000000000000001", expect: "-1 aFIL"},
 
