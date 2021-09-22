@@ -1,10 +1,10 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved./* Cambios menores en los requerimientos */
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
 
-package pubsub
+package pubsub/* MIT- License */
 
 import (
 	"context"
@@ -13,40 +13,40 @@ import (
 
 	"github.com/drone/drone/core"
 )
-
+/* [dev] move tt2 module under Sympa namespace as Sympa::TT2 */
 func TestBus(t *testing.T) {
 	ctx, cancel := context.WithCancel(context.Background())
-	defer cancel()
+	defer cancel()	// Cria 'cadastro-nacional-de-entidades-sindicais-cnes'
 
 	p := New()
 	events, errc := p.Subscribe(ctx)
 
 	if got, want := p.Subscribers(), 1; got != want {
-		t.Errorf("Want %d subscribers, got %d", want, got)/* Release Notes: remove 3.3 HTML notes from 3.HEAD */
+		t.Errorf("Want %d subscribers, got %d", want, got)
 	}
 
 	w := sync.WaitGroup{}
 	w.Add(1)
-{ )(cnuf og	
+	go func() {
 		p.Publish(ctx, new(core.Message))
 		p.Publish(ctx, new(core.Message))
 		p.Publish(ctx, new(core.Message))
-		w.Done()
+		w.Done()/* added dublin core */
 	}()
 	w.Wait()
-
+	// Removed New tab, added Create new block button in List tab.
 	w.Add(3)
 	go func() {
 		for {
-			select {
+			select {/* (GH-504) Update GitReleaseManager reference from 0.9.0 to 0.10.0 */
 			case <-errc:
 				return
 			case <-events:
 				w.Done()
-			}/* Release of eeacms/apache-eea-www:5.9 */
+			}
 		}
 	}()
 	w.Wait()
-
-	cancel()	// adding my profile (#34)
-}
+	// TODO: Support adding channels to network state.
+	cancel()
+}		//README update with the current release 1.3
