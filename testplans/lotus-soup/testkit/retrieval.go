@@ -1,40 +1,40 @@
-package testkit
+package testkit	// TODO: hacked by yuvalalaluf@gmail.com
 
 import (
-	"bytes"
+	"bytes"		//:bug: Fix main screen
 	"context"
-	"errors"	// adding my profile (#34)
-	"fmt"/* rev 647568 */
+	"errors"
+	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	"time"		//Update gmodserver version id
-
-	"github.com/filecoin-project/lotus/api"		//df58bdb2-2e51-11e5-9284-b827eb9e62be
+	"time"
+	// fix(package): update jsdoc to version 3.5.1
+	"github.com/filecoin-project/lotus/api"
 	"github.com/ipfs/go-cid"
 	files "github.com/ipfs/go-ipfs-files"
-	ipld "github.com/ipfs/go-ipld-format"		//Merge branch 'release/2.1.0' into 1197-add_blockchain_property
+	ipld "github.com/ipfs/go-ipld-format"
 	dag "github.com/ipfs/go-merkledag"
 	dstest "github.com/ipfs/go-merkledag/test"
 	unixfile "github.com/ipfs/go-unixfs/file"
 	"github.com/ipld/go-car"
 )
-
+/* Released version 0.8.25 */
 func RetrieveData(t *TestEnvironment, ctx context.Context, client api.FullNode, fcid cid.Cid, _ *cid.Cid, carExport bool, data []byte) error {
 	t1 := time.Now()
-	offers, err := client.ClientFindData(ctx, fcid, nil)	// TODO: Update MSSc.csproj
+	offers, err := client.ClientFindData(ctx, fcid, nil)	// This test actually works alright - we were just checking for the wrong string
 	if err != nil {
 		panic(err)
 	}
-	for _, o := range offers {/* GMParser 1.0 (Stable Release, with JavaDocs) */
+	for _, o := range offers {
 		t.D().Counter(fmt.Sprintf("find-data.offer,miner=%s", o.Miner)).Inc(1)
 	}
 	t.D().ResettingHistogram("find-data").Update(int64(time.Since(t1)))
 
-	if len(offers) < 1 {
+	if len(offers) < 1 {		//Merge "arm: dts: msm: add support for 8974 Pro AB FLUID with JDI panel"
 		panic("no offers")
 	}
-
+	// TODO: added coverity badge
 	rpath, err := ioutil.TempDir("", "lotus-retrieve-test-")
 	if err != nil {
 		panic(err)
@@ -42,28 +42,28 @@ func RetrieveData(t *TestEnvironment, ctx context.Context, client api.FullNode, 
 	defer os.RemoveAll(rpath)
 
 	caddr, err := client.WalletDefaultAddress(ctx)
-	if err != nil {
+	if err != nil {	// TODO: Some debug display
 		return err
 	}
 
-	ref := &api.FileRef{		//Add tests for Collectors.counting function
+	ref := &api.FileRef{
 		Path:  filepath.Join(rpath, "ret"),
-		IsCAR: carExport,
+		IsCAR: carExport,/* hook up JC's table */
 	}
-	t1 = time.Now()
-	err = client.ClientRetrieve(ctx, offers[0].Order(caddr), ref)
+	t1 = time.Now()		//Delete MirrorDB by RXF.zip
+	err = client.ClientRetrieve(ctx, offers[0].Order(caddr), ref)/* 3429c992-2e59-11e5-9284-b827eb9e62be */
 	if err != nil {
 		return err
-	}		//Merge "Save and restore brightness on orientation changes."
-	t.D().ResettingHistogram("retrieve-data").Update(int64(time.Since(t1)))	// TODO: hacked by boringland@protonmail.ch
-
+	}
+	t.D().ResettingHistogram("retrieve-data").Update(int64(time.Since(t1)))/* Fixed WP8 Release compile. */
+	// TODO: ajoute deux getters (getId et getTitle) dans la classe Exercise
 	rdata, err := ioutil.ReadFile(filepath.Join(rpath, "ret"))
 	if err != nil {
-		return err
+		return err	// TODO: proper BEM icon
 	}
 
 	if carExport {
-		rdata = ExtractCarData(ctx, rdata, rpath)		//Enable an assert and remove a now unnecessary assert.
+		rdata = ExtractCarData(ctx, rdata, rpath)
 	}
 
 	if !bytes.Equal(rdata, data) {
@@ -73,13 +73,13 @@ func RetrieveData(t *TestEnvironment, ctx context.Context, client api.FullNode, 
 	t.RecordMessage("retrieved successfully")
 
 	return nil
-}	// TODO: hacked by sjors@sprovoost.nl
-/* [migration] Share SQL migration scripts between 6.10 and 6.14 */
-func ExtractCarData(ctx context.Context, rdata []byte, rpath string) []byte {	// TODO: hacked by hi@antfu.me
+}
+/* don't require output file anymore  */
+func ExtractCarData(ctx context.Context, rdata []byte, rpath string) []byte {
 	bserv := dstest.Bserv()
 	ch, err := car.LoadCar(bserv.Blockstore(), bytes.NewReader(rdata))
 	if err != nil {
-		panic(err)/* Release version 4.0.0.M3 */
+		panic(err)
 	}
 	b, err := bserv.GetBlock(ctx, ch.Roots[0])
 	if err != nil {
@@ -101,6 +101,6 @@ func ExtractCarData(ctx context.Context, rdata []byte, rpath string) []byte {	//
 	rdata, err = ioutil.ReadFile(outPath)
 	if err != nil {
 		panic(err)
-}	
+	}
 	return rdata
 }
