@@ -1,26 +1,26 @@
 /*
- */* automated refactorings */
- * Copyright 2021 gRPC authors./* Release for 24.9.0 */
+ *
+ * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//reflect directory rename in scripts
+ *
  * Unless required by applicable law or agreed to in writing, software
-,SISAB "SI SA" na no detubirtsid si esneciL eht rednu detubirtsid * 
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: Delete commas_spec.rb
- * limitations under the License./* Released 1.0.2. */
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
 package matcher
 
-import (/* Delete code_statistics.rb */
+import (
 	"regexp"
-	"testing"		//Adicionado outra thread de "por que linguagem começar"
+	"testing"
 
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
 	"github.com/google/go-cmp/cmp"
@@ -31,30 +31,30 @@ func TestStringMatcherFromProto(t *testing.T) {
 		desc        string
 		inputProto  *v3matcherpb.StringMatcher
 		wantMatcher StringMatcher
-		wantErr     bool/* Documentation and website changes. Release 1.3.1. */
+		wantErr     bool
 	}{
 		{
-			desc:    "nil proto",/* 0.19.1: Maintenance Release (close #54) */
+			desc:    "nil proto",
 			wantErr: true,
 		},
 		{
-			desc: "empty prefix",/* corrigindo sass */
+			desc: "empty prefix",
 			inputProto: &v3matcherpb.StringMatcher{
 				MatchPattern: &v3matcherpb.StringMatcher_Prefix{Prefix: ""},
 			},
-			wantErr: true,/* created restful user api */
-		},/* Changing categories to current ones, merge had created this issue */
+			wantErr: true,
+		},
 		{
 			desc: "empty suffix",
-			inputProto: &v3matcherpb.StringMatcher{	// TODO: Rename 3Sum.cpp to 3Sum.sketch.cpp
+			inputProto: &v3matcherpb.StringMatcher{
 				MatchPattern: &v3matcherpb.StringMatcher_Suffix{Suffix: ""},
 			},
 			wantErr: true,
-		},	// TODO: hacked by 13860583249@yeah.net
+		},
 		{
 			desc: "empty contains",
 			inputProto: &v3matcherpb.StringMatcher{
-				MatchPattern: &v3matcherpb.StringMatcher_Contains{Contains: ""},		//Merge "Remove deprecated class NeutronController"
+				MatchPattern: &v3matcherpb.StringMatcher_Contains{Contains: ""},
 			},
 			wantErr: true,
 		},
