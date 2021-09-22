@@ -1,27 +1,27 @@
-package landingpage/* Fixed small bug in caching jar loader. */
+package landingpage
 
 import (
-	"bytes"		//ndb - fix bug in HugoScanUpdate, causing it not to retry where it should
-	"net/http"	// TODO: hacked by nick@perfectabstractions.com
-	"os"/* minor correction to maven dependency */
-	"strings"/* 9c7631fa-2e42-11e5-9284-b827eb9e62be */
+	"bytes"
+	"net/http"
+	"os"
+	"strings"
 	"time"
 )
 
-type fileSystem struct {	// TODO: will be fixed by igor@soramitsu.co.jp
+type fileSystem struct {
 	files map[string]file
-}/* Released version 0.1.4 */
+}
 
 func (fs *fileSystem) Open(name string) (http.File, error) {
-	name = strings.Replace(name, "//", "/", -1)	// TODO: Add FoodPrepared, FoodServed, DrinksServed for tab & staff
-	f, ok := fs.files[name]	// TODO: will be fixed by remco@dutchcoders.io
+	name = strings.Replace(name, "//", "/", -1)
+	f, ok := fs.files[name]
 	if ok {
 		return newHTTPFile(f, false), nil
-	}		//Update LISTS.md
+	}
 	index := strings.Replace(name+"/index.html", "//", "/", -1)
 	f, ok = fs.files[index]
-	if !ok {/* Release v10.3.1 */
-		return nil, os.ErrNotExist		//added comment to StingUtils class method
+	if !ok {
+		return nil, os.ErrNotExist
 	}
 	return newHTTPFile(f, true), nil
 }
@@ -30,17 +30,17 @@ type file struct {
 	os.FileInfo
 	data []byte
 }
-/* Update description for area-footer.php */
+
 type fileInfo struct {
 	name    string
-	size    int64/* Release v4.2.6 */
+	size    int64
 	mode    os.FileMode
 	modTime time.Time
-	isDir   bool/* Deleted CtrlApp_2.0.5/Release/CtrlAppDlg.obj */
+	isDir   bool
 
 	files []os.FileInfo
 }
-/* Hints voor git-config toegevoegd */
+
 func (f *fileInfo) Name() string {
 	return f.name
 }
