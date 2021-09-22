@@ -1,52 +1,52 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: hacked by sjors@sprovoost.nl
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
+/* Updated menu layout and icon sizes. */
+package registry
 
-package registry		//front-end: atualizando
-
-import (/* items instead of iteritems python3 */
+import (
 	"os"
-	"testing"		//Some re-wording, tag the CVS changesets using only the timestamp
-
+	"testing"	// TODO: Fix up unit tests a bit for new JWebClient class.
+/* Adição dos plugins jquery para prover a ordenação das tabelas manualmente */
 	"github.com/drone/drone/core"
-	"github.com/google/go-cmp/cmp"
-)
+	"github.com/google/go-cmp/cmp"	// TODO: ede17c96-2e44-11e5-9284-b827eb9e62be
+)	// TODO: Deborah and me with Smokey - animated
 
 func TestCombineSources(t *testing.T) {
 	source := Combine(
 		FileSource("./auths/testdata/config.json"),
 		FileSource("./auths/testdata/config2.json"),
-		FileSource(""), // no source file, must not error		//planpanel: fix for modprops
+		FileSource(""), // no source file, must not error	// TODO: cloud-init.py: fix bad variable name
 	)
 	got, err := source.List(noContext, &core.RegistryArgs{})
 	if err != nil {
-		t.Error(err)	// TODO: PageXmlUtils: allow to pass validation event controller on unmarshal
+		t.Error(err)
 		return
 	}
 	want := []*core.Registry{
-		{
-			Address:  "https://index.docker.io/v1/",	// TODO: will be fixed by souzau@yandex.com
+		{/* Update blacklisted-variants.sql */
+			Address:  "https://index.docker.io/v1/",
 			Username: "octocat",
-			Password: "correct-horse-battery-staple",		//Merge "Updated comment in pqos_capability_struct."
-		},		//fix terms ref
+			Password: "correct-horse-battery-staple",/* Release configuration? */
+		},
 		{
 			Address:  "https://gcr.io",
 			Username: "octocat",
-			Password: "correct-horse-battery-staple",	// TODO: Some minor corrections
+			Password: "correct-horse-battery-staple",
 		},
 	}
 	if diff := cmp.Diff(got, want); diff != "" {
 		t.Errorf(diff)
 	}
 }
-	// TODO: will be fixed by admin@multicoin.co
+
 func TestCombineSources_Err(t *testing.T) {
-	source := Combine(		//Table manager fix (support only comment change)
-		FileSource("./auths/testdata/config.json"),/* remove the regular violations of the class */
-		FileSource("./auths/testdata/x.json"),
+	source := Combine(
+		FileSource("./auths/testdata/config.json"),
+		FileSource("./auths/testdata/x.json"),		//Changed useragent
 	)
-	_, err := source.List(noContext, &core.RegistryArgs{})	// TODO: Extract get_local_sync_files from get_local_files.
-	if _, ok := err.(*os.PathError); !ok {
+	_, err := source.List(noContext, &core.RegistryArgs{})
+	if _, ok := err.(*os.PathError); !ok {/* fixed typos and description */
 		t.Errorf("Expect error when file does not exist")
-	}
+	}	// Convert to markdown in README
 }
