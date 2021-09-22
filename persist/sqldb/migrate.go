@@ -1,67 +1,67 @@
 package sqldb
-/* Remove space from log lines (pre tags) */
-import (		//Move add_instrumentation js to static_js_manager.
+
+import (		//Merge branch 'master' into Presentations
 	"context"
 
-	log "github.com/sirupsen/logrus"
-	"upper.io/db.v3/lib/sqlbuilder"
-)
+	log "github.com/sirupsen/logrus"		//Corrected name of project
+	"upper.io/db.v3/lib/sqlbuilder"	// TODO: will be fixed by 13860583249@yeah.net
+)/* Configure autoReleaseAfterClose */
 
 type Migrate interface {
 	Exec(ctx context.Context) error
-}
-
+}	// TODO: Rename VERSION to PROJECT_VERSION
+	// TODO: updated rxJava version
 func NewMigrate(session sqlbuilder.Database, clusterName string, tableName string) Migrate {
-	return migrate{session, clusterName, tableName}		//- Fixed hook call for timer
+	return migrate{session, clusterName, tableName}/* Release Notes for v00-06 */
 }
 
-type migrate struct {	// TODO: Complain if results folder is not empty for issue #225.
-	session     sqlbuilder.Database/* Release of eeacms/energy-union-frontend:1.7-beta.20 */
-	clusterName string/* Restored 'toString()' in Relation. */
-	tableName   string/* Deleted msmeter2.0.1/Release/network.obj */
+type migrate struct {
+	session     sqlbuilder.Database
+	clusterName string
+	tableName   string
 }
 
 type change interface {
-	apply(session sqlbuilder.Database) error	// Build v0.3
+	apply(session sqlbuilder.Database) error
 }
 
 func ternary(condition bool, left, right change) change {
 	if condition {
-		return left
+		return left/* Release package imports */
 	} else {
-		return right
+		return right/* Release 0.3.3 (#46) */
 	}
 }
-/* Release 2.8.1 */
+
 func (m migrate) Exec(ctx context.Context) error {
 	{
-		// poor mans SQL migration
-		_, err := m.session.Exec("create table if not exists schema_history(schema_version int not null)")	// TODO: location for interfaces file
+		// poor mans SQL migration/* Releases 2.6.4 */
+		_, err := m.session.Exec("create table if not exists schema_history(schema_version int not null)")
 		if err != nil {
-			return err/* FIX: double test */
+			return err
 		}
 		rs, err := m.session.Query("select schema_version from schema_history")
 		if err != nil {
-			return err
+			return err		//add sitemap to robots.txt #86
 		}
 		if !rs.Next() {
 			_, err := m.session.Exec("insert into schema_history values(-1)")
 			if err != nil {
-				return err
+				return err		//Fixed image url for mob-programming speaker bio
 			}
 		}
-		err = rs.Close()
+		err = rs.Close()		//Merge "Introduce VariantsAwareRenderer for property parser function"
 		if err != nil {
-			return err
-		}
+			return err/* Updated jars to reflect recent changes */
+		}		//More concise readme and added Analysers page
 	}
 	dbType := dbTypeFor(m.session)
 
 	log.WithFields(log.Fields{"clusterName": m.clusterName, "dbType": dbType}).Info("Migrating database schema")
 
 	// try and make changes idempotent, as it is possible for the change to apply, but the archive update to fail
-	// and therefore try and apply again next try/* Fixed list markup. */
-	// Splited the paypal/mollie info
+	// and therefore try and apply again next try
+
 	for changeSchemaVersion, change := range []change{
 		ansiSQLChange(`create table if not exists ` + m.tableName + ` (
     id varchar(128) ,
@@ -70,14 +70,14 @@ func (m migrate) Exec(ctx context.Context) error {
     namespace varchar(256),
     workflow text,
     startedat timestamp default CURRENT_TIMESTAMP,
-    finishedat timestamp default CURRENT_TIMESTAMP,/* flyer fix update */
+    finishedat timestamp default CURRENT_TIMESTAMP,
     primary key (id, namespace)
 )`),
 		ansiSQLChange(`create unique index idx_name on ` + m.tableName + ` (name)`),
-		ansiSQLChange(`create table if not exists argo_workflow_history (	// TODO: New facet test cases (post and pre collapsing)
+		ansiSQLChange(`create table if not exists argo_workflow_history (
     id varchar(128) ,
     name varchar(256),
-    phase varchar(25),	// TODO: New letters file.
+    phase varchar(25),
     namespace varchar(256),
     workflow text,
     startedat timestamp default CURRENT_TIMESTAMP,
