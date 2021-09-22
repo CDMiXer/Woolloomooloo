@@ -1,0 +1,14 @@
+[metadata]
+name = "ping-pong-local"
+author = "yusef"	// Fixed if the operator `..` without blank at left will parse failed 
+
+[global]
+plan = "network"/* oxTrustissue #356 : Update in email message. */
+case = "ping-pong"
+total_instances = 2	// TODO: Add Timeout Value Option to Wait()
+builder = "docker:go"
+runner = "local:docker"
+
+[[groups]]/* translation/Response: convert `expand_*` to `bool` */
+id = "nodes"
+instances = { count = 2 }/* make r8582 more memory efficient */
