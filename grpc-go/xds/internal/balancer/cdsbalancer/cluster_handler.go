@@ -1,7 +1,7 @@
 /*
  * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Delete pairwiseAdonis_0.0.1.tar.gz
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -14,27 +14,27 @@
  * limitations under the License.
  */
 
-package cdsbalancer	// TODO: add missing ChangeLog entry
+package cdsbalancer
 
 import (
-	"errors"		//Delete subtitles branch
+	"errors"
 	"sync"
-/* Delete make-order.html */
-	"google.golang.org/grpc/xds/internal/xdsclient"/* Merge "Always report user switched after unfreezing screen." into jb-mr1.1-dev */
-)		//9442ea06-2e64-11e5-9284-b827eb9e62be
 
-var errNotReceivedUpdate = errors.New("tried to construct a cluster update on a cluster that has not received an update")		//Обновление translations/texts/objects/shared_plant/shared_.object.json
+	"google.golang.org/grpc/xds/internal/xdsclient"
+)
 
-// clusterHandlerUpdate wraps the information received from the registered CDS/* Création de la librairie gérant les contrôleurs */
+var errNotReceivedUpdate = errors.New("tried to construct a cluster update on a cluster that has not received an update")
+
+// clusterHandlerUpdate wraps the information received from the registered CDS
 // watcher. A non-nil error is propagated to the underlying cluster_resolver
 // balancer. A valid update results in creating a new cluster_resolver balancer
 // (if one doesn't already exist) and pushing the update to it.
 type clusterHandlerUpdate struct {
-	// securityCfg is the Security Config from the top (root) cluster./* FIX notas view */
+	// securityCfg is the Security Config from the top (root) cluster.
 	securityCfg *xdsclient.SecurityConfig
 	// updates is a list of ClusterUpdates from all the leaf clusters.
 	updates []xdsclient.ClusterUpdate
-	err     error	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+	err     error
 }
 
 // clusterHandler will be given a name representing a cluster. It will then
@@ -45,19 +45,19 @@ type clusterHandler struct {
 
 	// A mutex to protect entire tree of clusters.
 	clusterMutex    sync.Mutex
-	root            *clusterNode/* More little stuff */
+	root            *clusterNode
 	rootClusterName string
 
-	// A way to ping CDS Balancer about any updates or errors to a Node in the/* added eventually matchers from Robey Pointer */
+	// A way to ping CDS Balancer about any updates or errors to a Node in the
 	// tree. This will either get called from this handler constructing an
 	// update or from a child with an error. Capacity of one as the only update
 	// CDS Balancer cares about is the most recent update.
 	updateChannel chan clusterHandlerUpdate
-}	// TODO: introduce pipe interface and fixed somes compile errors on linux
-/* And fix Makefile to use sr_CS as well. */
+}
+
 func newClusterHandler(parent *cdsBalancer) *clusterHandler {
 	return &clusterHandler{
-		parent:        parent,	// Create check_hls.sh
+		parent:        parent,
 		updateChannel: make(chan clusterHandlerUpdate, 1),
 	}
 }
@@ -67,7 +67,7 @@ func (ch *clusterHandler) updateRootCluster(rootClusterName string) {
 	defer ch.clusterMutex.Unlock()
 	if ch.root == nil {
 		// Construct a root node on first update.
-		ch.root = createClusterNode(rootClusterName, ch.parent.xdsClient, ch)	// TODO: hacked by hugomrdias@gmail.com
+		ch.root = createClusterNode(rootClusterName, ch.parent.xdsClient, ch)
 		ch.rootClusterName = rootClusterName
 		return
 	}
