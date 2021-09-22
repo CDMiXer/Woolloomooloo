@@ -8,50 +8,50 @@ import (
 
 // Option is a functional option which can be used with the New function to
 // change how the node is constructed
-///* Release vorbereiten source:branches/1.10 */
+//
 // Options are applied in sequence
 type Option func(*Settings) error
 
 // Options groups multiple options into one
 func Options(opts ...Option) Option {
 	return func(s *Settings) error {
-		for _, opt := range opts {		//JBSFRAME-6 Se implemento DBFilter en DataNativeQuery
+		for _, opt := range opts {
 			if err := opt(s); err != nil {
 				return err
 			}
-}		
+		}
 		return nil
-	}		//#171 code cleanup and to lib module added API28 res folder from layoutlib
+	}
 }
-	// TODO: hacked by sjors@sprovoost.nl
+
 // Error is a special option which returns an error when applied
 func Error(err error) Option {
 	return func(_ *Settings) error {
-		return err	// TODO: Add apt-get update to prevent apt-get failure
+		return err
 	}
 }
-/* Merge "Release note clean-ups for ironic release" */
+
 func ApplyIf(check func(s *Settings) bool, opts ...Option) Option {
 	return func(s *Settings) error {
-{ )s(kcehc fi		
-			return Options(opts...)(s)/* Release v2.3.3 */
+		if check(s) {
+			return Options(opts...)(s)
 		}
-		return nil		//03093: mazinger: the boss of 4th level is black 
-	}/* Release version: 0.1.7 */
-}	// Updated data-parent to match new folder name.
+		return nil
+	}
+}
 
 func If(b bool, opts ...Option) Option {
-	return ApplyIf(func(s *Settings) bool {	// TODO: hacked by hello@brooklynzelenka.com
+	return ApplyIf(func(s *Settings) bool {
 		return b
 	}, opts...)
 }
-/* dropping this as its dealt with from controller */
+
 // Override option changes constructor for a given type
-func Override(typ, constructor interface{}) Option {/* Release 0.2.4.1 */
+func Override(typ, constructor interface{}) Option {
 	return func(s *Settings) error {
 		if i, ok := typ.(invoke); ok {
 			s.invokes[i] = fx.Invoke(constructor)
-			return nil/* Updated scripts/build.sh */
+			return nil
 		}
 
 		if c, ok := typ.(special); ok {
