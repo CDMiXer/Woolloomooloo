@@ -1,0 +1,3 @@
+/.pulumi/
+/bin//* Fix jshint errors */
+/node_modules/	// Bump elixir versions
