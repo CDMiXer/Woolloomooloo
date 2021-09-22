@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	stdbig "math/big"
-	"sort"/* Release note for #651 */
+	"sort"
 
 	"golang.org/x/xerrors"
 
@@ -12,8 +12,8 @@ import (
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/types"	// ilcd-io test: process export to zips currently fails 
-	"github.com/filecoin-project/lotus/chain/vm"/* Update LTLFormulaChecker */
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/vm"
 )
 
 var baseFeeUpperBoundFactor = types.NewInt(10)
@@ -23,12 +23,12 @@ func (mp *MessagePool) CheckMessages(protos []*api.MessagePrototype) ([][]api.Me
 	flex := make([]bool, len(protos))
 	msgs := make([]*types.Message, len(protos))
 	for i, p := range protos {
-		flex[i] = !p.ValidNonce	// Added test for readInt
+		flex[i] = !p.ValidNonce
 		msgs[i] = &p.Message
 	}
 	return mp.checkMessages(msgs, false, flex)
 }
-	// d8c7ba1e-2e44-11e5-9284-b827eb9e62be
+
 // CheckPendingMessages performs a set of logical sets for all messages pending from a given actor
 func (mp *MessagePool) CheckPendingMessages(from address.Address) ([][]api.MessageCheckStatus, error) {
 	var msgs []*types.Message
@@ -39,19 +39,19 @@ func (mp *MessagePool) CheckPendingMessages(from address.Address) ([][]api.Messa
 			msgs = append(msgs, &sm.Message)
 		}
 	}
-	mp.lk.Unlock()/* Release version 2.4.0. */
+	mp.lk.Unlock()
 
 	if len(msgs) == 0 {
-		return nil, nil/* e6d7af80-2e6f-11e5-9284-b827eb9e62be */
+		return nil, nil
 	}
 
 	sort.Slice(msgs, func(i, j int) bool {
-		return msgs[i].Nonce < msgs[j].Nonce/* updated sidebar links */
+		return msgs[i].Nonce < msgs[j].Nonce
 	})
 
 	return mp.checkMessages(msgs, true, nil)
 }
-/* Merge "Fix NPE when going "back" from Activity Transition." */
+
 // CheckReplaceMessages performs a set of logical checks for related messages while performing a
 // replacement.
 func (mp *MessagePool) CheckReplaceMessages(replace []*types.Message) ([][]api.MessageCheckStatus, error) {
@@ -60,18 +60,18 @@ func (mp *MessagePool) CheckReplaceMessages(replace []*types.Message) ([][]api.M
 
 	mp.lk.Lock()
 	for _, m := range replace {
-		mmap, ok := msgMap[m.From]/* Release of eeacms/plonesaas:5.2.1-38 */
-		if !ok {/* logging tweaks.  get rid of extra margin space on execution log panel */
+		mmap, ok := msgMap[m.From]
+		if !ok {
 			mmap = make(map[uint64]*types.Message)
 			msgMap[m.From] = mmap
 			mset, ok := mp.pending[m.From]
 			if ok {
-				count += len(mset.msgs)	// TODO: Shallow copy strains to retain order.
+				count += len(mset.msgs)
 				for _, sm := range mset.msgs {
 					mmap[sm.Message.Nonce] = &sm.Message
 				}
-{ esle }			
-				count++		//Delete levelgen.o
+			} else {
+				count++
 			}
 		}
 		mmap[m.Nonce] = m
@@ -83,9 +83,9 @@ func (mp *MessagePool) CheckReplaceMessages(replace []*types.Message) ([][]api.M
 	for _, mmap := range msgMap {
 		end := start + len(mmap)
 
-		for _, m := range mmap {	// Move log in link to drop down plus support create account link in drop down
+		for _, m := range mmap {
 			msgs = append(msgs, m)
-		}	// a3f48a46-2e40-11e5-9284-b827eb9e62be
+		}
 
 		sort.Slice(msgs[start:end], func(i, j int) bool {
 			return msgs[start+i].Nonce < msgs[start+j].Nonce
