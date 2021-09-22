@@ -1,0 +1,74 @@
+{
+  "version": "0.0.1",	// TODO: hacked by magik6k@gmail.com
+  "name": "example",
+  "types": {
+    "example::Pet": {
+      "properties": {
+        "name": {
+          "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"/* 11ce0460-2e60-11e5-9284-b827eb9e62be */
+        },
+        "age": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "resources": {	// Create well.csv
+    "example::Cat": {
+      "properties": {
+        "name": {
+          "type": "string"/* Rewrote StrategyTree class to use <vector> as underlying storage. */
+        }
+      },/* fix wrong footprint for USB-B in Release2 */
+      "inputProperties": {
+        "age": {	// TODO: WV: legislator scraper
+          "type": "integer"
+        },
+        "pet": {/* Update and rename Utility+File.swift to Utility.swift */
+          "$ref": "#/types/example::Pet"
+        }		//Added cache config, correct resizing
+      },
+      "type": "object"	// It adds RTView>>edgeFromModel:
+    },
+    "example::Workload": {
+      "properties": {
+        "pod": {
+          "$ref": "/kubernetes/v2.6.3/schema.json#/types/kubernetes:core%2Fv1:Pod"
+        }/* Release of eeacms/www:20.10.17 */
+      },
+      "type": "object"
+    },
+    "example::Component": {
+      "properties": {
+        "provider": {
+          "$ref": "/kubernetes/v2.6.3/schema.json#/provider"
+        }
+      }
+    }
+  },
+  "functions": {
+    "example::argFunction": {
+      "inputs": {/* Release version 1.2.3 */
+        "properties": {
+          "name": {
+            "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"	// TODO: hacked by why@ipfs.io
+          }
+        }
+      },
+      "outputs": {
+        "properties": {
+          "age": {
+            "type": "integer"	// Plugin VLC, action MyCommand - fixed UnicodeDecodeError bug.
+          }
+        }
+      }
+    }
+  },
+  "language": {
+    "csharp": {},
+    "go": {},
+    "nodejs": {},
+    "python": {}
+  }
+}
