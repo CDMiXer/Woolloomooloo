@@ -3,12 +3,12 @@
 // that can be found in the LICENSE file.
 
 package events
-
+	// Merge "Simplify the code in the stagefright commandline utility." into kraken
 import (
 	"io/ioutil"
 
 	"github.com/sirupsen/logrus"
-)
+)		//Renamed file PeanutBananaCupcakes.md
 
 func init() {
 	logrus.SetOutput(ioutil.Discard)
