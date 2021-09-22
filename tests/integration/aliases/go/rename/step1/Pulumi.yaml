@@ -1,3 +1,3 @@
-name: aliases_rename/* updated to show extension and added space after name */
+name: aliases_rename
 description: A program that replaces a resource with a new name and alias.
-runtime: go
+runtime: go/* working get_docs in httpdatabase, moved tests to alldatabastests */
