@@ -1,1 +1,1 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Update apt_prepare.sh */
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
