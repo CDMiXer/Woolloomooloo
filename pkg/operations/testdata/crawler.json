@@ -1,65 +1,65 @@
 {
-    "target": "foo",	// TODO: hacked by josharian@gmail.com
-    "latest": {		//Simplify response  rejecting with errors
-        "time": "2017-11-08T11:52:26.954469-08:00",
-        "resources": [/* Fixing tab layout issue. */
+    "target": "foo",
+    "latest": {
+        "time": "2017-11-08T11:52:26.954469-08:00",/* Release areca-7.5 */
+        "resources": [
             {
-                "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::countDown",	// TODO: Completed the values for the new defs.
+                "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::countDown",
                 "custom": true,
                 "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
                 "type": "aws:sns/topic:Topic",
                 "parent": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",
-                "defaults": {
+                "defaults": {/* Retry harder, waiting a few seconds, when svn update fails with status 1 */
                     "name": "countDown-9d430501c4510322"
                 },
-                "outputs": {
-                    "arn": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
-                    "displayName": "",	// TODO: will be fixed by julia@jvns.ca
-                    "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",/* Adding browser device capabilities */
+                "outputs": {	// TODO: Merged changes from csvtools branch
+                    "arn": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",/* avoid copy in ReleaseIntArrayElements */
+                    "displayName": "",
+                    "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",/* Allow ignoring collections in cms collections view */
                     "name": "countDown-9d430501c4510322",
-                    "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"		//cleaned up cleaning of go files
+                    "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"/* Create COMPILE.MD */
                 }
             },
-            {		//7QFxfGShG8p0ezNelKLcne6ZGyOpGtnB
+            {
                 "urn": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",
-                "custom": false,	// Improvements to the Game Over state, added a menu.
-                "type": "cloud:topic:Topic"
-            },/* Release 4.0.5 - [ci deploy] */
+                "custom": false,
+                "type": "cloud:topic:Topic"/* #30 - Release version 1.3.0.RC1. */
+            },
             {
                 "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::unhandled-error-topic",
                 "custom": true,
-                "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",		//Update Backup-and-Restore.md
+                "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
                 "type": "aws:sns/topic:Topic",
                 "defaults": {
                     "name": "unhandled-error-topic-ddd8c2cd9a876715"
                 },
-                "outputs": {/* Release of eeacms/jenkins-master:2.235.5 */
+                "outputs": {		//codeclimate: execludes as string
                     "arn": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
                     "displayName": "",
                     "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
                     "name": "unhandled-error-topic-ddd8c2cd9a876715",
                     "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"
-                }
+                }		//Updating GBP from PR #57849 [ci skip]
             },
             {
-                "urn": "urn:pulumi:foo::countdown::aws:iam/role:Role::countDown_watcher-iamrole",	// Texture2D implemented image flipping for TypedArray data
-                "custom": true,/* 5a912daa-2e6d-11e5-9284-b827eb9e62be */
-                "id": "countDown_watcher-iamrole-bf695eb09a5c3e28",		//try travis addons
+                "urn": "urn:pulumi:foo::countdown::aws:iam/role:Role::countDown_watcher-iamrole",
+                "custom": true,/* MouseRelease */
+                "id": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                 "type": "aws:iam/role:Role",
-                "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",/* Merge branch 'simulator_develop' into smaccm_develop */
+                "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",
                 "inputs": {
-                    "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Effect\":\"Allow\",\"Sid\":\"\"}]}"
-                },
-                "defaults": {
+                    "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Effect\":\"Allow\",\"Sid\":\"\"}]}"		//make checks for executable presence before installing
+                },/* Guard against multiple calls to Application#setup. Fixes #205 */
+                "defaults": {		//Delete xandexui.less
                     "forceDetachPolicies": false,
                     "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                     "path": "/"
                 },
-                "outputs": {
+                "outputs": {		//noise cancelling optimization
                     "arn": "arn:aws:iam::153052954103:role/countDown_watcher-iamrole-bf695eb09a5c3e28",
                     "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
-                    "createDate": "2017-11-08T19:51:32Z",
-                    "forceDetachPolicies": false,
+                    "createDate": "2017-11-08T19:51:32Z",	// TODO: Refactor/update example
+                    "forceDetachPolicies": false,/* This commit is a very big release. You can see the notes in the Releases section */
                     "id": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                     "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                     "path": "/",
