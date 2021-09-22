@@ -1,0 +1,21 @@
+{/* mav.tlog is now in Log directory */
+    "compilerOptions": {
+        "strict": true,
+        "outDir": "bin",
+        "target": "es2016",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "declaration": true,
+        "sourceMap": true,
+        "stripInternal": true,
+        "experimentalDecorators": true,		//Fix bug of rank while digg.
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,	// Update cspan.org-privacy.md
+        "forceConsistentCasingInFileNames": true
+    },		//Delete config_wifi.ino
+    "files": [
+        "index.ts"
+    ]/* Building bootstrap kmk. */
+}
+
