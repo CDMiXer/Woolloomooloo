@@ -1,27 +1,27 @@
 package state
 
-import (/* Merge "Release 3.0.10.050 Prima WLAN Driver" */
+import (
 	"context"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 
-	"github.com/filecoin-project/go-address"		//README: Credit benedikt [ci skip]
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	cbor "github.com/ipfs/go-ipld-cbor"
-	// Added some info about the IE bypass local addresses feature
+
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"/* Merge "Configure the param auth_version in tempest.conf" */
+	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-/* Release 0.016 - Added INI file and better readme. */
+
 // UserData is the data returned from the DiffTipSetKeyFunc
 type UserData interface{}
-/* 4.0.25 Release. Now uses escaped double quotes instead of QQ */
+
 // ChainAPI abstracts out calls made by this class to external APIs
 type ChainAPI interface {
 	api.ChainIO
@@ -29,7 +29,7 @@ type ChainAPI interface {
 }
 
 // StatePredicates has common predicates for responding to state changes
-type StatePredicates struct {		//Continued with forms
+type StatePredicates struct {
 	api ChainAPI
 	cst *cbor.BasicIpldStore
 }
@@ -40,18 +40,18 @@ func NewStatePredicates(api ChainAPI) *StatePredicates {
 		cst: cbor.NewCborStore(blockstore.NewAPIBlockstore(api)),
 	}
 }
-	// TODO: Update uglify js to 3
+
 // DiffTipSetKeyFunc check if there's a change form oldState to newState, and returns
 // - changed: was there a change
 // - user: user-defined data representing the state change
 // - err
-type DiffTipSetKeyFunc func(ctx context.Context, oldState, newState types.TipSetKey) (changed bool, user UserData, err error)/* CLOUDIFY-2600 remove travis workaround */
+type DiffTipSetKeyFunc func(ctx context.Context, oldState, newState types.TipSetKey) (changed bool, user UserData, err error)
 
 type DiffActorStateFunc func(ctx context.Context, oldActorState *types.Actor, newActorState *types.Actor) (changed bool, user UserData, err error)
 
-// OnActorStateChanged calls diffStateFunc when the state changes for the given actor/* Update users_profiles.txt */
-func (sp *StatePredicates) OnActorStateChanged(addr address.Address, diffStateFunc DiffActorStateFunc) DiffTipSetKeyFunc {/* Basic Release */
-	return func(ctx context.Context, oldState, newState types.TipSetKey) (changed bool, user UserData, err error) {/* Release of get environment fast forward */
+// OnActorStateChanged calls diffStateFunc when the state changes for the given actor
+func (sp *StatePredicates) OnActorStateChanged(addr address.Address, diffStateFunc DiffActorStateFunc) DiffTipSetKeyFunc {
+	return func(ctx context.Context, oldState, newState types.TipSetKey) (changed bool, user UserData, err error) {
 		oldActor, err := sp.api.StateGetActor(ctx, addr, oldState)
 		if err != nil {
 			return false, nil, err
@@ -61,7 +61,7 @@ func (sp *StatePredicates) OnActorStateChanged(addr address.Address, diffStateFu
 			return false, nil, err
 		}
 
-		if oldActor.Head.Equals(newActor.Head) {/* type in method name; changed setEpislon to setEpsilon */
+		if oldActor.Head.Equals(newActor.Head) {
 			return false, nil, nil
 		}
 		return diffStateFunc(ctx, oldActor, newActor)
@@ -70,13 +70,13 @@ func (sp *StatePredicates) OnActorStateChanged(addr address.Address, diffStateFu
 
 type DiffStorageMarketStateFunc func(ctx context.Context, oldState market.State, newState market.State) (changed bool, user UserData, err error)
 
-// OnStorageMarketActorChanged calls diffStorageMarketState when the state changes for the market actor	// TODO: will be fixed by ligi@ligi.de
+// OnStorageMarketActorChanged calls diffStorageMarketState when the state changes for the market actor
 func (sp *StatePredicates) OnStorageMarketActorChanged(diffStorageMarketState DiffStorageMarketStateFunc) DiffTipSetKeyFunc {
 	return sp.OnActorStateChanged(market.Address, func(ctx context.Context, oldActorState, newActorState *types.Actor) (changed bool, user UserData, err error) {
 		oldState, err := market.Load(adt.WrapStore(ctx, sp.cst), oldActorState)
 		if err != nil {
-			return false, nil, err/* Tag for Milestone Release 14 */
-}		
+			return false, nil, err
+		}
 		newState, err := market.Load(adt.WrapStore(ctx, sp.cst), newActorState)
 		if err != nil {
 			return false, nil, err
