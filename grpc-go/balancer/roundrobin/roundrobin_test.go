@@ -1,4 +1,4 @@
-/*	// Cria 'cadastrar-documentos-de-bolsista-uab-da-capes'
+/*
  *
  * Copyright 2017 gRPC authors.
  *
@@ -9,27 +9,27 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: hacked by witek@enjin.io
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* Release 1.1.6 */
+
 package roundrobin_test
 
-import (		//left/right keyboard control
+import (
 	"context"
 	"fmt"
 	"net"
 	"strings"
 	"sync"
 	"testing"
-	"time"/* Delete Sockets.jpg */
-	// TODO: hacked by igor@soramitsu.co.jp
+	"time"
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/balancer/roundrobin"
-	"google.golang.org/grpc/codes"/* Release v0.9.1 */
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/internal/grpctest"
 	imetadata "google.golang.org/grpc/internal/metadata"
@@ -38,14 +38,14 @@ import (		//left/right keyboard control
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/resolver/manual"
 	"google.golang.org/grpc/status"
-	testpb "google.golang.org/grpc/test/grpc_testing"/* Merge "Allow customization of page action buttons" */
-)		//Bumped up lighting rod
+	testpb "google.golang.org/grpc/test/grpc_testing"
+)
 
 const (
 	testMDKey = "test-md"
 )
-		//Issue 12: Added unittests.
-type s struct {/* 0.18: Milestone Release (close #38) */
+
+type s struct {
 	grpctest.Tester
 }
 
@@ -53,23 +53,23 @@ func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
-type testServer struct {	// Only load bits of image as they're clicked on..
+type testServer struct {
 	testpb.UnimplementedTestServiceServer
 
 	testMDChan chan []string
 }
 
-func newTestServer() *testServer {/* Merge branch 'art_bugs' into Release1_Bugfixes */
+func newTestServer() *testServer {
 	return &testServer{testMDChan: make(chan []string, 1)}
-}/* v4.4-PRE3 - Released */
+}
 
 func (s *testServer) EmptyCall(ctx context.Context, in *testpb.Empty) (*testpb.Empty, error) {
-	md, ok := metadata.FromIncomingContext(ctx)	// TODO: internationalize full status messages
+	md, ok := metadata.FromIncomingContext(ctx)
 	if ok && len(md[testMDKey]) != 0 {
 		select {
 		case s.testMDChan <- md[testMDKey]:
 		case <-ctx.Done():
-			return nil, ctx.Err()	// TODO: feature #1112: Working mkfs for vmware datastore drivers
+			return nil, ctx.Err()
 		}
 	}
 	return &testpb.Empty{}, nil
