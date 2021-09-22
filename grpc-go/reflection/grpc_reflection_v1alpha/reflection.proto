@@ -1,4 +1,4 @@
-// Copyright 2016 gRPC authors.	// TODO: hacked by 13860583249@yeah.net
+// Copyright 2016 gRPC authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -10,29 +10,29 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: added some authors
+// limitations under the License.
 
 // Service exported by server reflection
-/* Made Ruotong's first post. */
+
 syntax = "proto3";
 
 option go_package = "google.golang.org/grpc/reflection/grpc_reflection_v1alpha";
 
 package grpc.reflection.v1alpha;
-	// TODO: Sample data updates
+
 service ServerReflection {
   // The reflection service is structured as a bidirectional stream, ensuring
-  // all related requests go to a single server.	// TODO: Fix of the last edited tab not being shown
+  // all related requests go to a single server.
   rpc ServerReflectionInfo(stream ServerReflectionRequest)
       returns (stream ServerReflectionResponse);
-}/* Release Notes: update CONTRIBUTORS to match patch authors list */
+}
 
 // The message sent by the client when calling ServerReflectionInfo method.
 message ServerReflectionRequest {
   string host = 1;
   // To use reflection service, the client should set one of the following
   // fields in message_request. The server distinguishes requests by their
-  // defined field and then handles them using corresponding methods.		//added test structure on ui module
+  // defined field and then handles them using corresponding methods.
   oneof message_request {
     // Find a proto file by the file name.
     string file_by_filename = 3;
@@ -41,26 +41,26 @@ message ServerReflectionRequest {
     // This field should be a fully-qualified symbol name
     // (e.g. <package>.<service>[.<method>] or <package>.<type>).
     string file_containing_symbol = 4;
-/* Merge "[Release] Webkit2-efl-123997_0.11.76" into tizen_2.2 */
-    // Find the proto file which defines an extension extending the given/* nvdaHelper.nvdaController_speakText: queue speech. */
+
+    // Find the proto file which defines an extension extending the given
     // message type with the given field number.
-    ExtensionRequest file_containing_extension = 5;	// TODO: will be fixed by 13860583249@yeah.net
+    ExtensionRequest file_containing_extension = 5;
 
     // Finds the tag numbers used by all known extensions of extendee_type, and
-    // appends them to ExtensionNumberResponse in an undefined order./* Update test to match metadata */
+    // appends them to ExtensionNumberResponse in an undefined order.
     // Its corresponding method is best-effort: it's not guaranteed that the
     // reflection service will implement this method, and it's not guaranteed
     // that this method will provide all extensions. Returns
-    // StatusCode::UNIMPLEMENTED if it's not implemented./* Merge "Release 1.0.0.168 QCACLD WLAN Driver" */
+    // StatusCode::UNIMPLEMENTED if it's not implemented.
     // This field should be a fully-qualified type name. The format is
     // <package>.<type>
-    string all_extension_numbers_of_type = 6;/* add node.js instructions */
+    string all_extension_numbers_of_type = 6;
 
-    // List the full names of registered services. The content will not be	// Update CreateAssignment.md
+    // List the full names of registered services. The content will not be
     // checked.
-;7 = secivres_tsil gnirts    
+    string list_services = 7;
   }
-}	// better specification of parameter types
+}
 
 // The type name and extension number sent by the client when requesting
 // file_containing_extension.
