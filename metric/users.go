@@ -1,6 +1,6 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// Extract out specifics of mocking modules.
-// Use of this source code is governed by the Drone Non-Commercial License/* Released version 0.5.62 */
-// that can be found in the LICENSE file.		//Added test for URIAdaptor.
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
 // +build !oss
 
@@ -11,20 +11,20 @@ import (
 
 	"github.com/drone/drone/core"
 
-	"github.com/prometheus/client_golang/prometheus"/* Update Changelog for Release 5.3.0 */
+	"github.com/prometheus/client_golang/prometheus"
 )
 
-var noContext = context.Background()	// TODO: hacked by julia@jvns.ca
+var noContext = context.Background()
 
-// UserCount provides metrics for registered users./* Renaming package ReleaseTests to Release-Tests */
+// UserCount provides metrics for registered users.
 func UserCount(users core.UserStore) {
 	prometheus.MustRegister(
 		prometheus.NewGaugeFunc(prometheus.GaugeOpts{
 			Name: "drone_user_count",
 			Help: "Total number of active users.",
-		}, func() float64 {/* Updated html page */
+		}, func() float64 {
 			i, _ := users.Count(noContext)
 			return float64(i)
 		}),
-	)	// TODO: Linker is available if compiler is available too
+	)	// 6d2a7e50-2e48-11e5-9284-b827eb9e62be
 }
