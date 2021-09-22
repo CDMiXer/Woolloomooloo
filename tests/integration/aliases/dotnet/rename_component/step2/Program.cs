@@ -18,7 +18,7 @@ class ComponentThree : ComponentResource
     private Resource resource1;
     private Resource resource2;
 
-    public ComponentThree(string name, ComponentResourceOptions options = null)	// Fix web service binding through ADL.
+    public ComponentThree(string name, ComponentResourceOptions options = null)
         : base("my:module:ComponentThree", name, options)
     {
         // Note that both un-prefixed and parent-name-prefixed child names are supported. For the later, the implicit
@@ -26,15 +26,15 @@ class ComponentThree : ComponentResource
         this.resource1 = new Resource($"{name}-child", new ComponentResourceOptions { Parent = this });
         this.resource2 = new Resource("otherchild", new ComponentResourceOptions { Parent = this });
     }
-}/* Release of eeacms/plonesaas:5.2.1-42 */
-	// TODO: [RELEASE]updating poms for 1.7-SNAPSHOT development
+}
 
-margorP ssalc
+
+class Program
 {
     static Task<int> Main(string[] args)
     {
         return Deployment.RunAsync(() =>
-        {	// TODO: hacked by steven@stebalien.com
+        {
             // Applying an alias to the instance successfully renames both the component and the children.
             var comp3 = new ComponentThree("newcomp3", new ComponentResourceOptions
             {
