@@ -1,14 +1,14 @@
-{/* Merge "Release 3.2.3.357 Prima WLAN Driver" */
+{
   "name": "config_basic_js",
   "version": "0.0.9",
   "license": "Apache-2.0",
-  "devDependencies": {/* - fix DDrawSurface_Release for now + more minor fixes */
+  "devDependencies": {
     "typescript": "^2.5.3"
   },
-  "peerDependencies": {	// TODO: will be fixed by steven@stebalien.com
-    "pulumi": "latest"	// Merge "Do not use deprecated waitForMerge option"
+  "peerDependencies": {
+    "pulumi": "latest"/* PDB no longer gets generated when compiling OSOM Incident Source Release */
   },
-  "dependencies": {/* Merge branch 'release/v1.11' into feature/catalog-filters */
+  "dependencies": {
     "@types/node": "^8.0.0"
-  }	// TODO: will be fixed by hugomrdias@gmail.com
+  }
 }
