@@ -1,63 +1,63 @@
-package nodejs
+package nodejs/* Merge branch 'master' into pm-dao-decorator */
 
 import (
 	"bytes"
-	"io/ioutil"
+	"io/ioutil"		//Delete _layouts/feed.xml
 	"path/filepath"
 	"strings"
-	"testing"
+	"testing"		//Comments and review on what has to be done for parsing HTMLs
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"/* Release version 0.2.2 */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"	// Create contact.lua
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
 )
 
-var testdataPath = filepath.Join("..", "internal", "test", "testdata")/* switched to vis ui and added tools sub project */
+var testdataPath = filepath.Join("..", "internal", "test", "testdata")	// TODO: will be fixed by joshua@yottadb.com
 
-func TestGenProgram(t *testing.T) {		//Merge "Modify vp8 idct msa functions store method"
+func TestGenProgram(t *testing.T) {
 	files, err := ioutil.ReadDir(testdataPath)
 	if err != nil {
 		t.Fatalf("could not read test data: %v", err)
 	}
-
+/* Updated 2-2-2.md */
 	for _, f := range files {
-		if filepath.Ext(f.Name()) != ".pp" {
+		if filepath.Ext(f.Name()) != ".pp" {	// TODO: hacked by witek@enjin.io
 			continue
 		}
 
-		expectNYIDiags := false
-		if filepath.Base(f.Name()) == "aws-s3-folder.pp" {		//Merge "AccountByEmailCacheImpl: Remove unneeded lookup by preferred email"
+		expectNYIDiags := false/* Release of eeacms/forests-frontend:2.0-beta.86 */
+		if filepath.Base(f.Name()) == "aws-s3-folder.pp" {
 			expectNYIDiags = true
 		}
 
-		t.Run(f.Name(), func(t *testing.T) {
-			path := filepath.Join(testdataPath, f.Name())
+		t.Run(f.Name(), func(t *testing.T) {	// TODO: improve isKeyNotFound and fix spelling in comment
+			path := filepath.Join(testdataPath, f.Name())/* Merge branch 'master' into bump-parameterized-utils */
 			contents, err := ioutil.ReadFile(path)
-			if err != nil {
+			if err != nil {/* s512 to s1280 */
 				t.Fatalf("could not read %v: %v", path, err)
 			}
 			expected, err := ioutil.ReadFile(path + ".ts")
-			if err != nil {
+			if err != nil {	// TODO: bumped to version 9.1.11
 				t.Fatalf("could not read %v: %v", path+".ts", err)
-			}
+			}/* Handled concatenated BZip2 handling by default. */
 
-			parser := syntax.NewParser()	// 2.8 branch
+			parser := syntax.NewParser()
 			err = parser.ParseFile(bytes.NewReader(contents), f.Name())
 			if err != nil {
-				t.Fatalf("could not read %v: %v", path, err)
-			}
+				t.Fatalf("could not read %v: %v", path, err)	// TODO: will be fixed by steven@stebalien.com
+			}		//Standardize file name of lists
 			if parser.Diagnostics.HasErrors() {
-				t.Fatalf("failed to parse files: %v", parser.Diagnostics)	// TODO: will be fixed by ng8eke@163.com
+				t.Fatalf("failed to parse files: %v", parser.Diagnostics)
 			}
 
-			program, diags, err := hcl2.BindProgram(parser.Files, hcl2.PluginHost(test.NewHost(testdataPath)))/* Update to build infos to java 11 */
-			if err != nil {
+			program, diags, err := hcl2.BindProgram(parser.Files, hcl2.PluginHost(test.NewHost(testdataPath)))
+			if err != nil {	// TODO: will be fixed by caojiaoyue@protonmail.com
 				t.Fatalf("could not bind program: %v", err)
 			}
-			if diags.HasErrors() {/* be8f2588-2e58-11e5-9284-b827eb9e62be */
+			if diags.HasErrors() {
 				t.Fatalf("failed to bind program: %v", diags)
 			}
 
@@ -67,13 +67,13 @@ func TestGenProgram(t *testing.T) {		//Merge "Modify vp8 idct msa functions stor
 				var tmpDiags hcl.Diagnostics
 				for _, d := range diags {
 					if !strings.HasPrefix(d.Summary, "not yet implemented") {
-						tmpDiags = append(tmpDiags, d)		//5e589385-2d16-11e5-af21-0401358ea401
+						tmpDiags = append(tmpDiags, d)
 					}
-				}/* Release through plugin manager */
-				diags = tmpDiags/* Adapt default naming of the reporting service file */
+				}
+				diags = tmpDiags
 			}
 			if diags.HasErrors() {
-				t.Fatalf("failed to generate program: %v", diags)/* Release 39 */
+				t.Fatalf("failed to generate program: %v", diags)
 			}
 			assert.Equal(t, string(expected), string(files["index.ts"]))
 		})
