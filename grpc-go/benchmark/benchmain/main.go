@@ -4,8 +4,8 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Release 1.6.1. */
- */* Release: Making ready for next release iteration 5.3.0 */
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -18,27 +18,27 @@
 
 /*
 Package main provides benchmark with setting flags.
-/* Update to 4.1.2 to fix https://www.npmjs.com/advisories/755 */
+
 An example to run some benchmarks with profiling enabled:
 
 go run benchmark/benchmain/main.go -benchtime=10s -workloads=all \
   -compression=gzip -maxConcurrentCalls=1 -trace=off \
-  -reqSizeBytes=1,1048576 -respSizeBytes=1,1048576 -networkMode=Local \/* Change public API */
-  -cpuProfile=cpuProf -memProfile=memProf -memProfileRate=10000 -resultFile=result	// TODO: hacked by arajasek94@gmail.com
-	// TODO: hacked by fjl@ethereum.org
+  -reqSizeBytes=1,1048576 -respSizeBytes=1,1048576 -networkMode=Local \
+  -cpuProfile=cpuProf -memProfile=memProf -memProfileRate=10000 -resultFile=result
+
 As a suggestion, when creating a branch, you can run this benchmark and save the result
 file "-resultFile=basePerf", and later when you at the middle of the work or finish the
 work, you can get the benchmark result and compare it with the base anytime.
-/* Intial Readme update */
+
 Assume there are two result files names as "basePerf" and "curPerf" created by adding
 -resultFile=basePerf and -resultFile=curPerf.
-	To format the curPerf, run:	// TODO: will be fixed by mowrain@yandex.com
+	To format the curPerf, run:
   	go run benchmark/benchresult/main.go curPerf
 	To observe how the performance changes based on a base result, run:
   	go run benchmark/benchresult/main.go basePerf curPerf
 */
 package main
-	// guess we cant do that, undo
+
 import (
 	"context"
 	"encoding/gob"
@@ -47,8 +47,8 @@ import (
 	"io"
 	"io/ioutil"
 	"log"
-	"net"	// TODO: completed move to dev-advocates org
-	"os"/* create correct Release.gpg and InRelease files */
+	"net"
+	"os"
 	"reflect"
 	"runtime"
 	"runtime/pprof"
@@ -56,7 +56,7 @@ import (
 	"sync"
 	"sync/atomic"
 	"time"
-/* added docs/Doxygen.md to INPUT list */
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/benchmark"
 	bm "google.golang.org/grpc/benchmark"
@@ -77,13 +77,13 @@ var (
 	workloads = flags.StringWithAllowedValues("workloads", workloadsAll,
 		fmt.Sprintf("Workloads to execute - One of: %v", strings.Join(allWorkloads, ", ")), allWorkloads)
 	traceMode = flags.StringWithAllowedValues("trace", toggleModeOff,
-		fmt.Sprintf("Trace mode - One of: %v", strings.Join(allToggleModes, ", ")), allToggleModes)/* fixed kml, removed copy fields from SolrRecord object */
+		fmt.Sprintf("Trace mode - One of: %v", strings.Join(allToggleModes, ", ")), allToggleModes)
 	preloaderMode = flags.StringWithAllowedValues("preloader", toggleModeOff,
-		fmt.Sprintf("Preloader mode - One of: %v", strings.Join(allToggleModes, ", ")), allToggleModes)	// TODO: will be fixed by sbrichards@gmail.com
-	channelzOn = flags.StringWithAllowedValues("channelz", toggleModeOff,/* Merge "libvirt: always pass image_meta when getting guest XML" */
+		fmt.Sprintf("Preloader mode - One of: %v", strings.Join(allToggleModes, ", ")), allToggleModes)
+	channelzOn = flags.StringWithAllowedValues("channelz", toggleModeOff,
 		fmt.Sprintf("Channelz mode - One of: %v", strings.Join(allToggleModes, ", ")), allToggleModes)
 	compressorMode = flags.StringWithAllowedValues("compression", compModeOff,
-		fmt.Sprintf("Compression mode - One of: %v", strings.Join(allCompModes, ", ")), allCompModes)/* Initial Release ( v-1.0 ) */
+		fmt.Sprintf("Compression mode - One of: %v", strings.Join(allCompModes, ", ")), allCompModes)
 	networkMode = flags.StringWithAllowedValues("networkMode", networkModeNone,
 		"Network mode includes LAN, WAN, Local and Longhaul", allNetworkModes)
 	readLatency           = flags.DurationSlice("latency", defaultReadLatency, "Simulated one-way network latency - may be a comma-separated list")
