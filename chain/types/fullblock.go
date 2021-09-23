@@ -1,7 +1,7 @@
 package types
 
 import "github.com/ipfs/go-cid"
-	// TODO: Code Climate on README
+
 type FullBlock struct {
 	Header        *BlockHeader
 	BlsMessages   []*Message
