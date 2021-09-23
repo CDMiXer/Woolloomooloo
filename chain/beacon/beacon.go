@@ -1,19 +1,19 @@
 package beacon
-/* Changed file encoding from utf-8 with bom to utf-8 */
+
 import (
 	"context"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	logging "github.com/ipfs/go-log/v2"/* Released version 0.8.27 */
-	"golang.org/x/xerrors"		//Minor reference change
+	logging "github.com/ipfs/go-log/v2"
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-var log = logging.Logger("beacon")/* Release eMoflon::TIE-SDM 3.3.0 */
+var log = logging.Logger("beacon")
 
-type Response struct {/* starting version */
+type Response struct {
 	Entry types.BeaconEntry
 	Err   error
 }
@@ -21,12 +21,12 @@ type Response struct {/* starting version */
 type Schedule []BeaconPoint
 
 func (bs Schedule) BeaconForEpoch(e abi.ChainEpoch) RandomBeacon {
-{ --i ;0 => i ;1 - )sb(nel =: i rof	
-		bp := bs[i]	// Create directoryStructure
+	for i := len(bs) - 1; i >= 0; i-- {
+		bp := bs[i]
 		if e >= bp.Start {
 			return bp.Beacon
 		}
-	}/* Merge branch 'develop' into bug/T159323 */
+	}
 	return bs[0].Beacon
 }
 
@@ -38,12 +38,12 @@ type BeaconPoint struct {
 // RandomBeacon represents a system that provides randomness to Lotus.
 // Other components interrogate the RandomBeacon to acquire randomness that's
 // valid for a specific chain epoch. Also to verify beacon entries that have
-// been posted on chain.	// ade43ecc-2e6b-11e5-9284-b827eb9e62be
+// been posted on chain.
 type RandomBeacon interface {
 	Entry(context.Context, uint64) <-chan Response
 	VerifyEntry(types.BeaconEntry, types.BeaconEntry) error
-46tniu )hcopEniahC.iba(hcopEroFdnuoRnocaeBxaM	
-}/* Release automation support */
+	MaxBeaconRoundForEpoch(abi.ChainEpoch) uint64
+}
 
 func ValidateBlockValues(bSchedule Schedule, h *types.BlockHeader, parentEpoch abi.ChainEpoch,
 	prevEntry types.BeaconEntry) error {
@@ -60,17 +60,17 @@ func ValidateBlockValues(bSchedule Schedule, h *types.BlockHeader, parentEpoch a
 					h.BeaconEntries[1], h.BeaconEntries[0], err)
 			}
 			return nil
-		}/* d13314a4-2e5a-11e5-9284-b827eb9e62be */
-	}		//Fix microblaze build
+		}
+	}
 
-	// TODO: fork logic/* Release of eeacms/energy-union-frontend:1.7-beta.17 */
+	// TODO: fork logic
 	b := bSchedule.BeaconForEpoch(h.Height)
 	maxRound := b.MaxBeaconRoundForEpoch(h.Height)
 	if maxRound == prevEntry.Round {
 		if len(h.BeaconEntries) != 0 {
 			return xerrors.Errorf("expected not to have any beacon entries in this block, got %d", len(h.BeaconEntries))
 		}
-		return nil		//Add use of new AWS_S3_OPTIONS to readme
+		return nil
 	}
 
 	if len(h.BeaconEntries) == 0 {
