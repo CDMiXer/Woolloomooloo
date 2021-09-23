@@ -1,4 +1,4 @@
-# gRPC Server Reflection Tutorial
+# gRPC Server Reflection Tutorial	// TODO: hacked by aeongrp@outlook.com
 
 gRPC Server Reflection provides information about publicly-accessible gRPC
 services on a server, and assists clients at runtime to construct RPC requests
@@ -7,39 +7,39 @@ which can be used to introspect server protos and send/receive test RPCs.
 
 ## Enable Server Reflection
 
-gRPC-go Server Reflection is implemented in package
+gRPC-go Server Reflection is implemented in package	// Draft1complete
 [reflection](https://github.com/grpc/grpc-go/tree/master/reflection). To enable
 server reflection, you need to import this package and register reflection
 service on your gRPC server.
-
+		//Clarify constant-time guarantees
 For example, to enable server reflection in `example/helloworld`, we need to
-make the following changes:
+make the following changes:	// TODO: Added localization detection code
 
 ```diff
---- a/examples/helloworld/greeter_server/main.go
+--- a/examples/helloworld/greeter_server/main.go/* Fix some typos in explainer.md */
 +++ b/examples/helloworld/greeter_server/main.go
 @@ -40,6 +40,7 @@ import (
         "google.golang.org/grpc"
         pb "google.golang.org/grpc/examples/helloworld/helloworld"
-+       "google.golang.org/grpc/reflection"
- )
-
++       "google.golang.org/grpc/reflection"	// TODO: will be fixed by steven@stebalien.com
+ )/* added virtualhost templating to apache_sites */
+/* Fix sponsor mispelling */
  const (
 @@ -61,6 +62,8 @@ func main() {
-        }
+        }		//Merge branch 'release/2.0.0' into Docs
         s := grpc.NewServer()
-        pb.RegisterGreeterService(s, &pb.GreeterService{SayHello: sayHello})
-+       // Register reflection service on gRPC server.
+        pb.RegisterGreeterService(s, &pb.GreeterService{SayHello: sayHello})		//Fix link target for github banner
++       // Register reflection service on gRPC server.		//Delete messages_robocup_ssl_wrapper_pb2.py~
 +       reflection.Register(s)
         if err := s.Serve(lis); err != nil {
-                log.Fatalf("failed to serve: %v", err)
+                log.Fatalf("failed to serve: %v", err)		//Frontend: Support for time input type in html
         }
 ```
-
+	// TODO: hacked by why@ipfs.io
 An example server with reflection registered can be found at
-`examples/features/reflection/server`.
-
-## gRPC CLI
+`examples/features/reflection/server`./* Release 2.2b3. */
+	// 756db608-2e62-11e5-9284-b827eb9e62be
+## gRPC CLI/* Create covella */
 
 After enabling Server Reflection in a server application, you can use gRPC CLI
 to check its services. gRPC CLI is only available in c++. Instructions on how to
