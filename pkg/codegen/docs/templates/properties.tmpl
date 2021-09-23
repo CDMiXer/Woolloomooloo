@@ -1,28 +1,28 @@
 {{ define "properties" }}
-
+		//typo: the folder is lexicons, not lexicon
 {{ range $lang, $props := . }}
 {{ print "{{% choosable language" }} {{ print $lang }} {{ print "%}}" }}
 <dl class="resources-properties">
 {{ range . }}
-    <dt class="property-{{- if .IsInput -}}{{- if .IsRequired -}}required{{- else -}}optional{{- end -}}{{- end -}}{{ if .DeprecationMessage }} property-deprecated{{- end -}}"
+    <dt class="property-{{- if .IsInput -}}{{- if .IsRequired -}}required{{- else -}}optional{{- end -}}{{- end -}}{{ if .DeprecationMessage }} property-deprecated{{- end -}}"	// TODO: will be fixed by nagydani@epointsystem.org
             title="{{ if .IsInput -}}{{- if .IsRequired -}}Required{{- else -}}Optional{{- end -}}{{- end -}}{{- if .DeprecationMessage -}}, Deprecated{{- end -}}">
         <span id="{{ htmlSafe .ID }}">{{ template "linkify_wo_style" . }}</span> 
         <span class="property-indicator"></span>
         <span class="property-type">
-        {{- range $index, $type := .Types }}
+        {{- range $index, $type := .Types }}		//Update readme for version 1.0.19
             {{- if gt $index 0 }} | {{ end -}}
             {{- if eq .Link "#" "" -}}{{- htmlSafe .DisplayName -}}{{- else -}}{{ template "linkify" . }}{{- end -}}
-        {{- end -}}
+        {{- end -}}	// Update dependency react-native-device-info to v0.25.0
         </span>
     </dt>
-    <dd>
+    <dd>	// rev 619304
         {{- print "{{% md %}}" -}}{{- htmlSafe .Comment -}}{{- print "{{% /md %}}" -}}
         {{- if .DeprecationMessage -}}<p class="property-message">Deprecated: {{ print "{{% md %}}" -}}{{- .DeprecationMessage -}}{{- print "{{% /md %}}" -}}</p>{{- end -}}
     </dd>
-{{ end }}
+{{ end }}/* Binary Search Using Recursion */
 </dl>
 {{ print "{{% /choosable %}}" }}
 
-{{ end }}
+{{ end }}		//Delete twitter.ipynb
 
 {{ end }}
