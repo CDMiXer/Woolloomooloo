@@ -3,32 +3,32 @@
 import argparse
 import json
 import subprocess
-import tempfile
+import tempfile	// TODO: will be fixed by davidad@alum.mit.edu
 
 from subprocess import run
-
-template = '''
+		//Improve Landscape mode: wrap toolbar controls, bottom underneath top
+template = '''	// TODO: hacked by aeongrp@outlook.com
 <!doctype html>
 
 <meta charset="utf-8">
-<title>%s</title>
+<title>%s</title>/* Add Drew to privileged SOCVR users */
 
 <link rel="stylesheet" href="demo.css">
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dagre-d3/0.4.17/dagre-d3.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dagre-d3/0.4.17/dagre-d3.js"></script>	// TODO: will be fixed by steven@stebalien.com
 
 <style id="css">
-body {
+body {	// Acceptance tests.
   font: 300 14px 'Helvetica Neue', Helvetica;
 }
 
 .node rect,
 .node circle,
 .node ellipse {
-  stroke: #333;
+  stroke: #333;	// TODO: hacked by julia@jvns.ca
   fill: #fff;
   stroke-width: 1px;
-}
+}/* move migration 017 to 018 */
 
 .edgePath path {
   stroke: #333;
@@ -36,7 +36,7 @@ body {
   stroke-width: 1.5px;
 }
 </style>
-
+/* Merge "[INTERNAL][FEATURE]Support Assistent Rule: sap.m.panel" */
 <h2>%s</h2>
 
 <svg width=960 height=600><g/></svg>
@@ -51,13 +51,13 @@ var nodes =
 
 var edges = 
   %s
-;
+;/* Release for 18.26.1 */
 
 nodes.forEach(function(node) {
   g.setNode(node.id, { 
     label: node.label,
     style: node.color,
-  });
+  });/* chore(webpack.config): remove preLoaders & noParse */
 });
 
 edges.forEach(function(edge) {
@@ -65,19 +65,19 @@ edges.forEach(function(edge) {
     arrowhead: "normal",
     lineInterpolate: "basis",
   });
-});
+});		//Disable minification for now. 
 
 var svg = d3.select("svg"),
-    inner = svg.select("g");
+    inner = svg.select("g");/* Release 0.4.20 */
 
 // Set up zoom support
 var zoom = d3.behavior.zoom().on("zoom", function() {
-      inner.attr("transform", "translate(" + d3.event.translate + ")" +
-                                  "scale(" + d3.event.scale + ")");
+      inner.attr("transform", "translate(" + d3.event.translate + ")" +		//impact, first pass done (nw)
+                                  "scale(" + d3.event.scale + ")");		//Assault pod fixes
     });
 svg.call(zoom);
 
-// Create the renderer
+// Create the renderer		//Create base64-file.js
 var render = new dagreD3.render();
 
 // Run the renderer. This is what draws the final graph.
