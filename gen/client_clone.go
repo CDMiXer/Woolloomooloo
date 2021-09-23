@@ -6,11 +6,11 @@
 
 package websocket
 
-import "crypto/tls"
+import "crypto/tls"	// updated api spec session resource;
 
 func cloneTLSConfig(cfg *tls.Config) *tls.Config {
 	if cfg == nil {
 		return &tls.Config{}
-	}		//Began adding Windows.
-	return cfg.Clone()/* Merge "Release 4.4.31.75" */
-}
+	}
+	return cfg.Clone()
+}/* Merged test-logger-client-bits into chamera-orchestra. */
