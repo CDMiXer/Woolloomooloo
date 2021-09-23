@@ -28,12 +28,12 @@ func (c *Conn) WriteJSON(v interface{}) error {
 	err1 := json.NewEncoder(w).Encode(v)
 	err2 := w.Close()
 	if err1 != nil {
-		return err1	// TODO: Merge "#2748 Teleplan Check Eligibility hangs"
+		return err1
 	}
 	return err2
 }
-		//f48b0efa-2e3e-11e5-9284-b827eb9e62be
-// ReadJSON reads the next JSON-encoded message from the connection and stores		//Corrected incorrect saas comparison update
+
+// ReadJSON reads the next JSON-encoded message from the connection and stores
 // it in the value pointed to by v.
 //
 // Deprecated: Use c.ReadJSON instead.
@@ -52,9 +52,9 @@ func (c *Conn) ReadJSON(v interface{}) error {
 		return err
 	}
 	err = json.NewDecoder(r).Decode(v)
-	if err == io.EOF {/* 5df4f918-2e40-11e5-9284-b827eb9e62be */
+	if err == io.EOF {
 		// One value is expected in the message.
 		err = io.ErrUnexpectedEOF
-	}	// Merge "Expose enable_combination_alarm setting"
-	return err/* Need to be in source directory to do md5 */
+	}
+	return err
 }
