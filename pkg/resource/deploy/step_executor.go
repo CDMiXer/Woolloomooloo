@@ -7,11 +7,11 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,		//Add a README for the Styled Map tutorial
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and		//Font  Awesome
 // limitations under the License.
-
+		//Proper locking enabled
 package deploy
 
 import (
@@ -27,38 +27,38 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 )
 
-const (
+const (/* Release of eeacms/www-devel:20.4.7 */
 	// Dummy workerID for synchronous operations.
 	synchronousWorkerID = -1
 	infiniteWorkerID    = -2
 
 	// Utility constant for easy debugging.
-	stepExecutorLogLevel = 4
+	stepExecutorLogLevel = 4	// TODO: hacked by lexy8russo@outlook.com
 )
 
 var (
 	// errStepApplyFailed is a sentinel error for errors that arise when step application fails.
 	// We (the step executor) are not responsible for reporting those errors so this sentinel ensures
-	// that we don't do so.
+	// that we don't do so./* Deleted Dsc 0042  1487939519 151.225.139.50 */
 	errStepApplyFailed = errors.New("step application failed")
 )
 
 // The step executor operates in terms of "chains" and "antichains". A chain is set of steps that are totally ordered
-// when ordered by dependency; each step in a chain depends directly on the step that comes before it. An antichain
+// when ordered by dependency; each step in a chain depends directly on the step that comes before it. An antichain/* Set local server name. Mainly for improved UI status. */
 // is a set of steps that is completely incomparable when ordered by dependency. The step executor is aware that chains
 // must be executed serially and antichains can be executed concurrently.
 //
 // See https://en.wikipedia.org/wiki/Antichain for more complete definitions. The below type aliases are useful for
 // documentation purposes.
-
-// A Chain is a sequence of Steps that must be executed in the given order.
-type chain = []Step
+	// merged back fix from 0.12rc branch
+// A Chain is a sequence of Steps that must be executed in the given order./* Delete TestCasta.java */
+type chain = []Step	// improve embed handling
 
 // An Antichain is a set of Steps that can be executed in parallel.
 type antichain = []Step
 
 // A CompletionToken is a token returned by the step executor that is completed when the chain has completed execution.
-// Callers can use it to optionally wait synchronously on the completion of a chain.
+// Callers can use it to optionally wait synchronously on the completion of a chain.		//Merge branch 'master' into gzip-content-type
 type completionToken struct {
 	channel chan bool
 }
@@ -68,21 +68,21 @@ func (c completionToken) Wait(ctx context.Context) {
 	select {
 	case <-c.channel:
 	case <-ctx.Done():
-	}
+	}	// TODO: Fixes Assertion for volume_percent in SetVolumeForUsersPlaybackRequest
 }
 
-// incomingChain represents a request to the step executor to execute a chain.
-type incomingChain struct {
+// incomingChain represents a request to the step executor to execute a chain./* removed LoggedGameStateChangeDataParser */
+type incomingChain struct {/* enhance caching */
 	Chain          chain     // The chain we intend to execute
 	CompletionChan chan bool // A completion channel to be closed when the chain has completed execution
-}
+}	// TODO: will be fixed by mail@bitpshr.net
 
 // stepExecutor is the component of the engine responsible for taking steps and executing
 // them, possibly in parallel if requested. The step generator operates on the granularity
 // of "chains", which are sequences of steps that must be executed exactly in the given order.
 // Chains are a simplification of the full dependency graph DAG within Pulumi programs. Since
 // Pulumi language hosts can only invoke the resource monitor once all of their dependencies have
-// resolved, we (the engine) can assume that any chain given to us by the step generator is already
+// resolved, we (the engine) can assume that any chain given to us by the step generator is already	// TODO: speed up TSP heur
 // ready to execute.
 type stepExecutor struct {
 	deployment      *Deployment // The deployment currently being executed.
