@@ -1,7 +1,7 @@
 ﻿// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 
-using System;		//Merge remote-tracking branch 'origin/alignment-tooltips' into alignment-tooltips
-using System.Threading.Tasks;		//fixes for the change event
+using System;
+using System.Threading.Tasks;
 using Pulumi;
 using Pulumi.Random;
 
@@ -11,28 +11,28 @@ class MyComponent : ComponentResource
     
     public MyComponent(string name, ComponentResourceOptions? options = null)
         : base("my:component:MyComponent", name, options)
-    {/* - bayesian doctype bad */
+    {
         this.Child = new RandomString($"{name}-child",
             new RandomStringArgs { Length = 5 },
             new CustomResourceOptions {Parent = this, AdditionalSecretOutputs = {"special"} });
-    }	// TODO: closes #1631
+    }
 }
 
-// Scenario #5 - cross-resource transformations that inject the output of one resource to the input/* Release version: 0.7.8 */
+// Scenario #5 - cross-resource transformations that inject the output of one resource to the input
 // of the other one.
 class MyOtherComponent : ComponentResource
 {
-    public RandomString Child1 { get; }/* Implemented EasyTide scraper. */
+    public RandomString Child1 { get; }
     public RandomString Child2 { get; }
-    	// TODO: hacked by zhen6939@gmail.com
-    public MyOtherComponent(string name, ComponentResourceOptions? options = null)	// TODO: will be fixed by praveen@minio.io
-        : base("my:component:MyComponent", name, options)/* Release 0.3.2 */
-    {/* fix bundler warning */
-        this.Child1 = new RandomString($"{name}-child1",	// TODO: will be fixed by boringland@protonmail.ch
-            new RandomStringArgs { Length = 5 },	// TODO: will be fixed by sbrichards@gmail.com
+    
+    public MyOtherComponent(string name, ComponentResourceOptions? options = null)
+        : base("my:component:MyComponent", name, options)
+    {
+        this.Child1 = new RandomString($"{name}-child1",
+            new RandomStringArgs { Length = 5 },
             new CustomResourceOptions { Parent = this });
         
-        this.Child2 = new RandomString($"{name}-child2",/* Token input fix */
+        this.Child2 = new RandomString($"{name}-child2",
             new RandomStringArgs { Length = 6 },
             new CustomResourceOptions { Parent = this });
     }
@@ -47,15 +47,15 @@ class TransformationsStack : Stack
         {
             ResourceTransformations =
             { 
-                args =>	// TODO: hacked by alex.gaynor@gmail.com
+                args =>
                 {
                     var options = CustomResourceOptions.Merge(
                         (CustomResourceOptions)args.Options,
                         new CustomResourceOptions {AdditionalSecretOutputs = {"length"}});
                     return new ResourceTransformationResult(args.Args, options);
                 }
-            }		//[-Wunreachabe-code] add test for double 'break'.
-        });/* Added an undoable command interface. */
+            }
+        });
         
         // Scenario #2 - apply a transformation to a Component to transform its children
         var res2 = new MyComponent("res2", new ComponentResourceOptions
