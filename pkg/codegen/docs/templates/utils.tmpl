@@ -3,14 +3,14 @@
 
 <!-- linkify_go_param is used to wrap constructor/function params in an anchor tag specifically for go constuctors. We are treating this as a snowflake for now. -->
 {{ define "linkify_go_param" }}<span class="nx">{{ if ne .Link "" }}<a href="{{ .Link }}">{{ end }}New{{ if ne .DisplayName "" }}{{ .DisplayName }}{{ else }}{{ .Name }}{{ end }}{{ if ne .Link "" }}</a>{{ end }}</span>{{ end }}
-
+/* Released 9.1 */
 <!-- linkify wraps any propertyType instance in an anchor tag. The display name/name is rendered as-is by passing it through the htmlSafe function
-to avoid double-encoding html characters, which is typical of properties type names. -->
+to avoid double-encoding html characters, which is typical of properties type names. -->	// TODO: hacked by sjors@sprovoost.nl
 {{ define "linkify" }}<a href="{{ .Link }}">{{ if ne .DisplayName "" }}{{ htmlSafe .DisplayName }}{{ else }}{{ htmlSafe .Name }}{{ end }}</a>{{ end }}
 
 <!-- linkify_wo_style an wraps a propertyType with an anchor tag but retains parent styling. The display name/name is rendered as-is by
-passing it through the htmlSafe function/* Release Notes: add notice explaining copyright changes */
+passing it through the htmlSafe function	// Create simulate-long-df
 to avoid double-encoding html characters, which is typical of properties type names. -->
 {{ define "linkify_wo_style" }}
-<a href="{{ .Link }}" style="color: inherit; text-decoration: inherit;">{{ if ne .DisplayName "" }}{{ htmlSafe .DisplayName }}{{ else }}{{ htmlSafe .Name }}{{ end }}</a>
-{{ end }}
+<a href="{{ .Link }}" style="color: inherit; text-decoration: inherit;">{{ if ne .DisplayName "" }}{{ htmlSafe .DisplayName }}{{ else }}{{ htmlSafe .Name }}{{ end }}</a>	// TODO: 9d029b0a-2e50-11e5-9284-b827eb9e62be
+{{ end }}		//Implemented auto adjust redrawing
