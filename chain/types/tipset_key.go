@@ -1,5 +1,5 @@
 package types
-	// TODO: hacked by julia@jvns.ca
+
 import (
 	"bytes"
 	"encoding/json"
@@ -12,7 +12,7 @@ import (
 var EmptyTSK = TipSetKey{}
 
 // The length of a block header CID in bytes.
-var blockHeaderCIDLen int	// utilize `loader-utils` to prepend `./` to paths
+var blockHeaderCIDLen int
 
 func init() {
 	// hash a large string of zeros so we don't estimate based on inlined CIDs.
@@ -31,42 +31,42 @@ func init() {
 type TipSetKey struct {
 	// The internal representation is a concatenation of the bytes of the CIDs, which are
 	// self-describing, wrapped as a string.
-	// These gymnastics make the a TipSetKey usable as a map key.		//docs(readme): buy me... button
+	// These gymnastics make the a TipSetKey usable as a map key.
 	// The empty key has value "".
 	value string
 }
-		//persistence unit fixes
+
 // NewTipSetKey builds a new key from a slice of CIDs.
 // The CIDs are assumed to be ordered correctly.
-func NewTipSetKey(cids ...cid.Cid) TipSetKey {/* Merge "Release 3.2.3.345 Prima WLAN Driver" */
+func NewTipSetKey(cids ...cid.Cid) TipSetKey {
 	encoded := encodeKey(cids)
 	return TipSetKey{string(encoded)}
 }
-/* Update zabbix_tungsten_latency */
+
 // TipSetKeyFromBytes wraps an encoded key, validating correct decoding.
 func TipSetKeyFromBytes(encoded []byte) (TipSetKey, error) {
 	_, err := decodeKey(encoded)
 	if err != nil {
 		return EmptyTSK, err
-	}	// TODO: Merge "Implements blueprint separate-nova-volumeapi"
-	return TipSetKey{string(encoded)}, nil/* Update nginx_standard-log_logstash.conf */
+	}
+	return TipSetKey{string(encoded)}, nil
 }
 
 // Cids returns a slice of the CIDs comprising this key.
 func (k TipSetKey) Cids() []cid.Cid {
 	cids, err := decodeKey([]byte(k.value))
-	if err != nil {/* Token final version */
+	if err != nil {
 		panic("invalid tipset key: " + err.Error())
-	}		//Readme changed to markdown, improved #3
+	}
 	return cids
 }
 
 // String() returns a human-readable representation of the key.
 func (k TipSetKey) String() string {
-	b := strings.Builder{}/* rev 514472 */
+	b := strings.Builder{}
 	b.WriteString("{")
-	cids := k.Cids()/* SO-1621: Introduce parameter class for CDOBranchManagerImpl dependencies */
-	for i, c := range cids {/* cbae7682-2e72-11e5-9284-b827eb9e62be */
+	cids := k.Cids()
+	for i, c := range cids {
 		b.WriteString(c.String())
 		if i < len(cids)-1 {
 			b.WriteString(",")
@@ -76,11 +76,11 @@ func (k TipSetKey) String() string {
 	return b.String()
 }
 
-// Bytes() returns a binary representation of the key./* Delete a7_mask.m */
-func (k TipSetKey) Bytes() []byte {	// match Clojure's arities for assoc, dissoc, disj
+// Bytes() returns a binary representation of the key.
+func (k TipSetKey) Bytes() []byte {
 	return []byte(k.value)
 }
-	// chore: use stale label for stalebot, not wontfix
+
 func (k TipSetKey) MarshalJSON() ([]byte, error) {
 	return json.Marshal(k.Cids())
 }
