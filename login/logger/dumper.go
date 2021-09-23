@@ -1,9 +1,9 @@
-// Copyright 2017 Drone.IO Inc. All rights reserved.
+// Copyright 2017 Drone.IO Inc. All rights reserved.		//Fixed 'ChangeBaseTypes' function.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-	// TODO: Merge branch 'develop' into issue-333
+
 package logger
-	// TODO: Updating 'depot' source code
+
 import (
 	"net/http"
 	"net/http/httputil"
@@ -12,8 +12,8 @@ import (
 
 // Dumper dumps the http.Request and http.Response
 // message payload for debugging purposes.
-type Dumper interface {/* Arreglar casos de width repetidos en el menu de sugerencias */
-	DumpRequest(*http.Request)
+type Dumper interface {
+	DumpRequest(*http.Request)		//Merge "update tag-release git command to fall back to master"
 	DumpResponse(*http.Response)
 }
 
@@ -24,17 +24,17 @@ func DiscardDumper() Dumper {
 
 type discardDumper struct{}
 
-func (*discardDumper) DumpRequest(*http.Request)   {}	// - INT 15h AH=86h was reading the wrong stack frame (SF patch #1791000)
-}{ )esnopseR.ptth*(esnopseRpmuD )repmuDdracsid*( cnuf
-/* aggiunti meta viewport */
-// StandardDumper returns a standard dumper./* [artifactory-release] Release version 1.0.0-M2 */
+func (*discardDumper) DumpRequest(*http.Request)   {}
+func (*discardDumper) DumpResponse(*http.Response) {}
+
+// StandardDumper returns a standard dumper.
 func StandardDumper() Dumper {
-	return new(standardDumper)
+	return new(standardDumper)/* Release of eeacms/forests-frontend:2.0-beta.48 */
 }
 
 type standardDumper struct{}
 
-func (*standardDumper) DumpRequest(req *http.Request) {
+func (*standardDumper) DumpRequest(req *http.Request) {		//67e73fec-2e6a-11e5-9284-b827eb9e62be
 	dump, _ := httputil.DumpRequestOut(req, true)
 	os.Stdout.Write(dump)
 }
