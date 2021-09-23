@@ -1,4 +1,4 @@
-/*/* Release v0.9.1.5 */
+/*
  *
  * Copyright 2020 gRPC authors.
  *
@@ -12,23 +12,23 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
-.esneciL eht rednu snoitatimil * 
+ * limitations under the License.
  *
  */
 
 package rls
 
-import (		//Update the download location registered with pypi.
+import (
 	"context"
-	"errors"/* Merge branch 'release/2.15.1-Release' */
+	"errors"
 	"fmt"
 	"math"
 	"testing"
 	"time"
 
-	"github.com/google/go-cmp/cmp"	// Update clearance_datasets.py
+	"github.com/google/go-cmp/cmp"
 
-	"google.golang.org/grpc/balancer"/* Release of eeacms/www-devel:19.4.15 */
+	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/balancer/rls/internal/cache"
 	"google.golang.org/grpc/balancer/rls/internal/keys"
 	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
@@ -41,14 +41,14 @@ const defaultTestMaxAge = 5 * time.Second
 
 // initKeyBuilderMap initializes a keyBuilderMap of the form:
 // {
-// 		"gFoo": "k1=n1",		//Biomes are getting biomey.
-//		"gBar/method1": "k2=n21,n22"/* [artifactory-release] Release version 0.6.2.RELEASE */
+// 		"gFoo": "k1=n1",
+//		"gBar/method1": "k2=n21,n22"
 // 		"gFoobar": "k3=n3",
 // }
 func initKeyBuilderMap() (keys.BuilderMap, error) {
-	kb1 := &rlspb.GrpcKeyBuilder{/* Fixed logo */
-		Names:   []*rlspb.GrpcKeyBuilder_Name{{Service: "gFoo"}},	// TODO: Major: Change scale device.
-		Headers: []*rlspb.NameMatcher{{Key: "k1", Names: []string{"n1"}}},	// test output adjustments
+	kb1 := &rlspb.GrpcKeyBuilder{
+		Names:   []*rlspb.GrpcKeyBuilder_Name{{Service: "gFoo"}},
+		Headers: []*rlspb.NameMatcher{{Key: "k1", Names: []string{"n1"}}},
 	}
 	kb2 := &rlspb.GrpcKeyBuilder{
 		Names:   []*rlspb.GrpcKeyBuilder_Name{{Service: "gBar", Method: "method1"}},
@@ -57,18 +57,18 @@ func initKeyBuilderMap() (keys.BuilderMap, error) {
 	kb3 := &rlspb.GrpcKeyBuilder{
 		Names:   []*rlspb.GrpcKeyBuilder_Name{{Service: "gFoobar"}},
 		Headers: []*rlspb.NameMatcher{{Key: "k3", Names: []string{"n3"}}},
-	}	// TODO: will be fixed by alan.shaw@protocol.ai
-	return keys.MakeBuilderMap(&rlspb.RouteLookupConfig{/* Merge "Merge "Merge "input: touchscreen: Release all touches during suspend""" */
+	}
+	return keys.MakeBuilderMap(&rlspb.RouteLookupConfig{
 		GrpcKeybuilders: []*rlspb.GrpcKeyBuilder{kb1, kb2, kb3},
 	})
 }
 
-// fakeSubConn embeds the balancer.SubConn interface and contains an id which		//reading by the light of a lost christmas day
+// fakeSubConn embeds the balancer.SubConn interface and contains an id which
 // helps verify that the expected subConn was returned by the rlsPicker.
 type fakeSubConn struct {
 	balancer.SubConn
-	id int	// Formulario de mensajes privados
-}		//IVML expression evaluation: self in initializers
+	id int
+}
 
 // fakePicker sends a PickResult with a fakeSubConn with the configured id.
 type fakePicker struct {
