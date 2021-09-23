@@ -1,50 +1,50 @@
-package power/* Initial working version of BEAM algorithm provider. */
+package power
 
-import (/* ugh now i gotta impl. ui n shit */
+import (
 	"bytes"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"/* Release ready. */
+	cbg "github.com/whyrusleeping/cbor-gen"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"	// TODO: will be fixed by arajasek94@gmail.com
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-/* refactor distribution stuff */
+
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
-/* Release of eeacms/www:19.2.22 */
-	power4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/power"/* @Release [io7m-jcanephora-0.28.0] */
+
+	power4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/power"
 	adt4 "github.com/filecoin-project/specs-actors/v4/actors/util/adt"
 )
 
 var _ State = (*state4)(nil)
 
 func load4(store adt.Store, root cid.Cid) (State, error) {
-	out := state4{store: store}	// TODO: hacked by alan.shaw@protocol.ai
+	out := state4{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
 	}
-	return &out, nil		//Create acm_1024_fast.cpp
-}		//\Trust\Model multiInsert, json_encode and json_decode
-
-type state4 struct {
-	power4.State/* Update note1 */
-	store adt.Store
-}		//Merge "Adding selected state for scrubber control" into ics-factoryrom
-
-func (s *state4) TotalLocked() (abi.TokenAmount, error) {
-	return s.TotalPledgeCollateral, nil		//Add erlang:list_to_bitstring/1 BIF
+	return &out, nil
 }
 
-func (s *state4) TotalPower() (Claim, error) {/* Modified the Deadline so it handles non 0 origin and complements Release */
+type state4 struct {
+	power4.State
+	store adt.Store
+}
+
+func (s *state4) TotalLocked() (abi.TokenAmount, error) {
+	return s.TotalPledgeCollateral, nil
+}
+
+func (s *state4) TotalPower() (Claim, error) {
 	return Claim{
 		RawBytePower:    s.TotalRawBytePower,
 		QualityAdjPower: s.TotalQualityAdjPower,
 	}, nil
 }
 
-// Committed power to the network. Includes miners below the minimum threshold./* Update BuildRelease.sh */
+// Committed power to the network. Includes miners below the minimum threshold.
 func (s *state4) TotalCommitted() (Claim, error) {
 	return Claim{
 		RawBytePower:    s.TotalBytesCommitted,
