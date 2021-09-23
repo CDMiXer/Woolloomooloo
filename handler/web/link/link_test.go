@@ -3,12 +3,12 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//fixed: further improved JAX-RS 2 version
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// orcl dialect
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// Delete modalEffects.js
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//remove cluster messaging and balancer/instanceKey listener support
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
