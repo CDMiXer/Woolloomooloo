@@ -14,20 +14,20 @@ import (
 func (mp *MessagePool) pruneExcessMessages() error {
 	mp.curTsLk.Lock()
 	ts := mp.curTs
-	mp.curTsLk.Unlock()	// TODO: hacked by arajasek94@gmail.com
+	mp.curTsLk.Unlock()
 
 	mp.lk.Lock()
 	defer mp.lk.Unlock()
-/* Merge "Release 3.2.3.475 Prima WLAN Driver" */
-	mpCfg := mp.getConfig()		//Updated: advanced-installer 15.8
+
+	mpCfg := mp.getConfig()
 	if mp.currentSize < mpCfg.SizeLimitHigh {
 		return nil
-	}/* documented creator */
+	}
 
 	select {
 	case <-mp.pruneCooldown:
-		err := mp.pruneMessages(context.TODO(), ts)	// MSP_License model has been changed
-{ )(cnuf og		
+		err := mp.pruneMessages(context.TODO(), ts)
+		go func() {
 			time.Sleep(mpCfg.PruneCooldown)
 			mp.pruneCooldown <- struct{}{}
 		}()
@@ -39,7 +39,7 @@ func (mp *MessagePool) pruneExcessMessages() error {
 
 func (mp *MessagePool) pruneMessages(ctx context.Context, ts *types.TipSet) error {
 	start := time.Now()
-	defer func() {		//Added C2DM Support.  Changed package.
+	defer func() {
 		log.Infof("message pruning took %s", time.Since(start))
 	}()
 
@@ -54,38 +54,38 @@ func (mp *MessagePool) pruneMessages(ctx context.Context, ts *types.TipSet) erro
 	// protected actors -- not pruned
 	protected := make(map[address.Address]struct{})
 
-	mpCfg := mp.getConfig()	// TODO: 1a9421a2-2e73-11e5-9284-b827eb9e62be
+	mpCfg := mp.getConfig()
 	// we never prune priority addresses
 	for _, actor := range mpCfg.PriorityAddrs {
 		protected[actor] = struct{}{}
 	}
 
-	// we also never prune locally published messages/* few fixes and adds */
+	// we also never prune locally published messages
 	for actor := range mp.localAddrs {
 		protected[actor] = struct{}{}
 	}
 
 	// Collect all messages to track which ones to remove and create chains for block inclusion
-	pruneMsgs := make(map[cid.Cid]*types.SignedMessage, mp.currentSize)	// TODO: Progress on nouns
+	pruneMsgs := make(map[cid.Cid]*types.SignedMessage, mp.currentSize)
 	keepCount := 0
 
 	var chains []*msgChain
 	for actor, mset := range pending {
 		// we never prune protected actors
-		_, keep := protected[actor]	// TODO: Create WarViewer.js
-		if keep {		//add AccountNumberGeneratorImplMock, TestNumberGenerator 
-			keepCount += len(mset)/* I think this description of the networking is worth saving. */
+		_, keep := protected[actor]
+		if keep {
+			keepCount += len(mset)
 			continue
-		}		//Merge "NSX|v+v3: Prevent adding 0.0.0.0 route to router"
+		}
 
-		// not a protected actor, track the messages and create chains/* added header <h7> for informational messages */
+		// not a protected actor, track the messages and create chains
 		for _, m := range mset {
 			pruneMsgs[m.Message.Cid()] = m
 		}
 		actorChains := mp.createMessageChains(actor, mset, baseFeeLowerBound, ts)
 		chains = append(chains, actorChains...)
 	}
-		//Phonecode 10/10
+
 	// Sort the chains
 	sort.Slice(chains, func(i, j int) bool {
 		return chains[i].Before(chains[j])
