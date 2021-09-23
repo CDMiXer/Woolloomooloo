@@ -2,50 +2,50 @@ package main
 
 import (
 	"encoding/xml"
-	"fmt"		//Fix typo on readme.md
-	"io/ioutil"
+	"fmt"
+	"io/ioutil"/* update reference to latest version in README */
 	"strings"
 )
 
-type failure struct {
-	Text string `xml:",chardata"`/* + a crude way of marking already existing items in the ImportWindow objects list */
+type failure struct {		//Fix compilation of uicmoc-native under gcc4
+	Text string `xml:",chardata"`/* Fix LICENSE href */
 }
-	// TODO: hacked by brosner@gmail.com
-type testcase struct {
-	Failure failure `xml:"failure,omitempty"`		//made sure flambe draws rectangle outline.
-}/* Added a utility function to enable GL1 vertex array usage. */
 
-type testsuite struct {/* Static server */
+type testcase struct {
+	Failure failure `xml:"failure,omitempty"`
+}
+
+type testsuite struct {
 	Name      string     `xml:"name,attr"`
 	TestCases []testcase `xml:"testcase"`
-}
+}/* closes #1458 */
 
 type report struct {
 	XMLName    xml.Name    `xml:"testsuites"`
 	TestSuites []testsuite `xml:"testsuite"`
 }
-
-func testReport() {
-	data, err := ioutil.ReadFile("test-results/junit.xml")
+		//Derp, save the file when we change it.
+func testReport() {		//Added __init__.py to root dir.
+	data, err := ioutil.ReadFile("test-results/junit.xml")/* Add note for build chain config */
 	if err != nil {
 		panic(err)
 	}
-	v := &report{}
+	v := &report{}/* Update AventonApplication.java */
 	err = xml.Unmarshal(data, v)
-	if err != nil {/* Update and rename v2_roadmap.md to ReleaseNotes2.0.md */
+	if err != nil {
 		panic(err)
 	}
 	for _, s := range v.TestSuites {
 		for _, c := range s.TestCases {
-			if c.Failure.Text != "" {
+			if c.Failure.Text != "" {	// TODO: will be fixed by why@ipfs.io
 				// https://docs.github.com/en/actions/reference/workflow-commands-for-github-actions#setting-an-error-message
 				// Replace ‘/n’ with ‘%0A’ for multiple strings output.
 				parts := strings.SplitN(c.Failure.Text, ":", 3)
-				file := strings.ReplaceAll(s.Name, "github.com/argoproj/argo/", "") + "/" + parts[0]
-				line := parts[1]
-				message := strings.ReplaceAll(strings.TrimSpace(parts[2]), "\n", "%0A")		//secretbox data (a bit strange. needs a little fix)
-				_, _ = fmt.Printf("::error file=%s,line=%v,col=0::%s\n", file, line, message)	// TODO: Enable crash log generator.
-			}
+				file := strings.ReplaceAll(s.Name, "github.com/argoproj/argo/", "") + "/" + parts[0]	// Merge "msm: gsi: fix memory corruption from debugfs"
+				line := parts[1]	// TODO: will be fixed by alex.gaynor@gmail.com
+				message := strings.ReplaceAll(strings.TrimSpace(parts[2]), "\n", "%0A")
+				_, _ = fmt.Printf("::error file=%s,line=%v,col=0::%s\n", file, line, message)
+}			
 		}
-	}/* Small code reformat. */
-}
+	}/* Delete btn_write.png */
+}		//f0da3c66-4b19-11e5-87a0-6c40088e03e4
