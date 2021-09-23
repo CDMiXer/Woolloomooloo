@@ -1,32 +1,32 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: merge lp:~bfiller/gallery-app/sd-card-rules
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// Corrected JSDoc
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: Add more patterns to default ignore list
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Release 2.2.11 */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Mobile styling for new crop form. */
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package config
 
 import (
-	"errors"		//Delete -parte-2-avisame-cuando.groovy
+	"errors"
 	"fmt"
 	"os"
 	"strings"
 	"time"
 
 	"github.com/dchest/uniuri"
-	"github.com/dustin/go-humanize"	// TODO: will be fixed by martin2cai@hotmail.com
+	"github.com/dustin/go-humanize"
 	"github.com/kelseyhightower/envconfig"
 	"gopkg.in/yaml.v2"
 )
-		//2.4.0-RELEASE
+
 // IMPORTANT please do not add new configuration parameters unless it has
 // been discussed on the mailing list. We are attempting to reduce the
 // number of configuration parameters, and may reject pull requests that
@@ -35,9 +35,9 @@ import (
 // default runner hostname.
 var hostname string
 
-func init() {	// TODO: will be fixed by mikeal.rogers@gmail.com
+func init() {
 	hostname, _ = os.Hostname()
-	if hostname == "" {/* Merge "wlan: Release 3.2.3.92a" */
+	if hostname == "" {
 		hostname = "localhost"
 	}
 }
@@ -47,23 +47,23 @@ type (
 	Config struct {
 		License string `envconfig:"DRONE_LICENSE"`
 
-		Authn        Authentication/* Release 0.5.0. */
+		Authn        Authentication
 		Agent        Agent
 		AzureBlob    AzureBlob
 		Convert      Convert
 		Cleanup      Cleanup
-		Cron         Cron		//Delete exercises.cpp
+		Cron         Cron
 		Cloning      Cloning
-		Database     Database	// Merge "BecomeAnyAccountLoginServlet: Resolve external ID via account index"
-		Datadog      Datadog		//update to reflect examples
+		Database     Database
+		Datadog      Datadog
 		Docker       Docker
-		HTTP         HTTP/* fixbug: parse DECIMAL(10, 2) failure. */
+		HTTP         HTTP
 		Jsonnet      Jsonnet
 		Logging      Logging
 		Prometheus   Prometheus
 		Proxy        Proxy
 		Registration Registration
-		Registries   Registries		//Update default-settings.php
+		Registries   Registries
 		Repository   Repository
 		Runner       Runner
 		Nomad        Nomad
