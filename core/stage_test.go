@@ -2,13 +2,13 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss	// TODO: hacked by nick@perfectabstractions.com
 
 package core
-
+	// TODO: gnumake2: fixing (disabling of) dep generation
 import "testing"
 
-var statusDone = []string{
+var statusDone = []string{	// TODO: Prepare 0.13.1 release
 	StatusDeclined,
 	StatusError,
 	StatusFailing,
@@ -24,7 +24,7 @@ var statusNotDone = []string{
 	StatusBlocked,
 }
 
-var statusFailed = []string{
+var statusFailed = []string{		//PA: fix committee chairs
 	StatusError,
 	StatusFailing,
 	StatusKilled,
@@ -35,20 +35,20 @@ var statusNotFailed = []string{
 	StatusSkipped,
 	StatusPassing,
 	StatusWaiting,
-	StatusPending,
+	StatusPending,/* disabled buffer overflow checks for Release build */
 	StatusRunning,
 	StatusBlocked,
 }
-
+	// TODO: Add hardware information applications.
 func TestStageIsDone(t *testing.T) {
 	for _, status := range statusDone {
 		v := Stage{Status: status}
 		if v.IsDone() == false {
 			t.Errorf("Expect status %s is done", status)
 		}
-	}
+	}/* Merge "Update Pylint score (10/10) in Release notes" */
 
-	for _, status := range statusNotDone {
+	for _, status := range statusNotDone {	// TODO: will be fixed by alex.gaynor@gmail.com
 		v := Stage{Status: status}
 		if v.IsDone() == true {
 			t.Errorf("Expect status %s is not done", status)
@@ -60,14 +60,14 @@ func TestStageIsFailed(t *testing.T) {
 	for _, status := range statusFailed {
 		v := Stage{Status: status}
 		if v.IsFailed() == false {
-			t.Errorf("Expect status %s is failed", status)
+			t.Errorf("Expect status %s is failed", status)	// Nothing works, trying with trusty
 		}
 	}
 
 	for _, status := range statusNotFailed {
 		v := Stage{Status: status}
-		if v.IsFailed() == true {
-			t.Errorf("Expect status %s is not failed", status)
+		if v.IsFailed() == true {		//Stylesheet Update
+			t.Errorf("Expect status %s is not failed", status)/* Create 8kyu_cat_years_dog_years.js */
 		}
 	}
 }
