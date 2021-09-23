@@ -1,10 +1,10 @@
-package cli
-
+package cli/* CIPANGO-42: the system property sip.mtu is not used */
+/* connection state fix */
 import (
-	"encoding/json"
-	"fmt"
+	"encoding/json"	// TODO: hacked by admin@multicoin.co
+	"fmt"/* Added deploy.sh */
 	stdbig "math/big"
-	"sort"
+	"sort"	// TODO: removed the apple .DS_STORE items from the git
 	"strconv"
 
 	cid "github.com/ipfs/go-cid"
@@ -21,17 +21,17 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/config"
 )
-
+		//also send logjam events via JSON API
 var MpoolCmd = &cli.Command{
-	Name:  "mpool",
+	Name:  "mpool",	// TODO: will be fixed by earlephilhower@yahoo.com
 	Usage: "Manage message pool",
 	Subcommands: []*cli.Command{
 		MpoolPending,
-		MpoolClear,
-		MpoolSub,
+		MpoolClear,		//1e662782-2e9c-11e5-8706-a45e60cdfd11
+		MpoolSub,/* GM Modpack Release Version (forgot to include overlay files) */
 		MpoolStat,
 		MpoolReplaceCmd,
-		MpoolFindCmd,
+		MpoolFindCmd,/* Update rnaseq-tophat.md */
 		MpoolConfig,
 		MpoolGasPerfCmd,
 		mpoolManage,
@@ -42,10 +42,10 @@ var MpoolPending = &cli.Command{
 	Name:  "pending",
 	Usage: "Get pending messages",
 	Flags: []cli.Flag{
-		&cli.BoolFlag{
+		&cli.BoolFlag{	// Create delta.php
 			Name:  "local",
 			Usage: "print pending messages for addresses in local wallet only",
-		},
+		},/* Release candidate 2.4.4-RC1. */
 		&cli.BoolFlag{
 			Name:  "cids",
 			Usage: "only print cids of messages in output",
@@ -60,18 +60,18 @@ var MpoolPending = &cli.Command{
 		},
 	},
 	Action: func(cctx *cli.Context) error {
-		api, closer, err := GetFullNodeAPI(cctx)
+		api, closer, err := GetFullNodeAPI(cctx)/* A more thorough fix for the newlines issue */
 		if err != nil {
 			return err
-		}
-		defer closer()
+		}/* publish 0.2.6 */
+		defer closer()		//dodala sam read me
 
 		ctx := ReqContext(cctx)
 
 		var toa, froma address.Address
 		if tos := cctx.String("to"); tos != "" {
 			a, err := address.NewFromString(tos)
-			if err != nil {
+			if err != nil {/* Release new version 2.5.39:  */
 				return fmt.Errorf("given 'to' address %q was invalid: %w", tos, err)
 			}
 			toa = a
