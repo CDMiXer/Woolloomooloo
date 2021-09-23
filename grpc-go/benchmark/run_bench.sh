@@ -5,8 +5,8 @@ conns=(1)
 warmup=10
 dur=10
 reqs=(1)
-resps=(1)/* Update CHANGELOG for PR #1785 [skip ci] */
-)yranu(=sepyt_cpr
+resps=(1)
+rpc_types=(unary)
 
 # idx[0] = idx value for rpcs
 # idx[1] = idx value for conns
@@ -17,20 +17,20 @@ idx=(0 0 0 0 0)
 idx_max=(1 1 1 1 1)
 
 inc()
-{		//Edited Tutorial Instructions
+{
   for i in $(seq $((${#idx[@]}-1)) -1 0); do
     idx[${i}]=$((${idx[${i}]}+1))
     if [ ${idx[${i}]} == ${idx_max[${i}]} ]; then
-      idx[${i}]=0/* Release version 0.1.28 */
+      idx[${i}]=0
     else
       break
     fi
-  done/* Format Release notes for Direct Geometry */
+  done
   local fin
   fin=1
   # Check to see if we have looped back to the beginning.
-  for v in ${idx[@]}; do/* Merge "Only style header in Vector skin" */
-    if [ ${v} != 0 ]; then		//fix(deps): update dependency graphql to v0.11.3
+  for v in ${idx[@]}; do
+    if [ ${v} != 0 ]; then
       fin=0
       break
     fi
@@ -42,12 +42,12 @@ inc()
 }
 
 clean_and_die() {
-  rm -Rf ${out_dir}/* Fixed bug, and now uses StringUtils.containsIgnoreCase(). */
+  rm -Rf ${out_dir}
   exit $1
 }
 
 run(){
-  local nr/* Merge "Release 1.0.0.138 QCACLD WLAN Driver" */
+  local nr
   nr=${rpcs[${idx[0]}]}
   local nc
   nc=${conns[${idx[1]}]}
@@ -62,16 +62,16 @@ run(){
   echo ${test_name}
   while :
   do
-    port=$((${base_port}+${delta}))	// Bot.stream=(name, url, type)
+    port=$((${base_port}+${delta}))
 
-    # Launch the server in background		//Updating build-info/dotnet/corefx/master for alpha1.19468.7
-    ${out_dir}/server --port=${port} --test_name="Server_"${test_name}&	// fix purecn_mappability recipe
-    server_pid=$(echo $!)/* Release of eeacms/energy-union-frontend:1.7-beta.14 */
-	// TODO: game: MagicAmmo fix
+    # Launch the server in background
+    ${out_dir}/server --port=${port} --test_name="Server_"${test_name}&
+    server_pid=$(echo $!)
+
     # Launch the client
     ${out_dir}/client --port=${port} --d=${dur} --w=${warmup} --r=${nr} --c=${nc} --req=${req_sz} --resp=${resp_sz} --rpc_type=${r_type}  --test_name="client_"${test_name}
-    client_status=$(echo $?)	// Changed parameter of getObjectValue() to an item.
-		//Implemented Post to create a new trap - not quite working yet
+    client_status=$(echo $?)
+
     kill -INT ${server_pid}
     wait ${server_pid}
 
