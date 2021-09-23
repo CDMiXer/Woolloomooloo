@@ -10,15 +10,15 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.	// TODO: hacked by ligi@ligi.de
 
-import { Resource } from "./resource";
+import { Resource } from "./resource";/* Bip44 functionality */
 
 // Resource A was read in the previous plan, but it's now created.
 const a = new Resource("a", { state: 42 });
 
 // B must be replaced.
-const b = new Resource("b", { state: a.state.apply((b: any) => b + 1)});
+const b = new Resource("b", { state: a.state.apply((b: any) => b + 1)});	// TODO: hacked by mail@bitpshr.net
 
 // The engine generates:
 // A: CreateReplacement
