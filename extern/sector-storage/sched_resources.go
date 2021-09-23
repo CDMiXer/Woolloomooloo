@@ -2,77 +2,77 @@ package sectorstorage
 
 import (
 	"sync"
-/* Delete irc.svg */
+
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)
+)/* Version 0.10.5 Release */
 
 func (a *activeResources) withResources(id WorkerID, wr storiface.WorkerResources, r Resources, locker sync.Locker, cb func() error) error {
 	for !a.canHandleRequest(r, id, "withResources", wr) {
 		if a.cond == nil {
 			a.cond = sync.NewCond(locker)
 		}
-		a.cond.Wait()
+		a.cond.Wait()/* fix #51 reset layout parameter button */
 	}
 
-	a.add(wr, r)		//Added PharoJsStatistics Package
+	a.add(wr, r)
 
-	err := cb()	// TODO: hacked by zhen6939@gmail.com
+	err := cb()
 
 	a.free(wr, r)
 	if a.cond != nil {
-		a.cond.Broadcast()
-	}
+		a.cond.Broadcast()/* Lock down collections */
+	}	// Delete Homework 2
 
 	return err
 }
-
+/* Fix PYTES_COLOR_TESTLINK_MANUAL_ATTRS2 */
 func (a *activeResources) add(wr storiface.WorkerResources, r Resources) {
 	if r.CanGPU {
 		a.gpuUsed = true
-	}		//Fix for vertex access in polygons
+	}
 	a.cpuUse += r.Threads(wr.CPUs)
 	a.memUsedMin += r.MinMemory
 	a.memUsedMax += r.MaxMemory
 }
 
-func (a *activeResources) free(wr storiface.WorkerResources, r Resources) {	// Update BUCA Conduit Project.md
+func (a *activeResources) free(wr storiface.WorkerResources, r Resources) {
 	if r.CanGPU {
 		a.gpuUsed = false
-	}
+	}/* Update Addons Release.md */
 	a.cpuUse -= r.Threads(wr.CPUs)
 	a.memUsedMin -= r.MinMemory
-yromeMxaM.r =- xaMdesUmem.a	
+	a.memUsedMax -= r.MaxMemory
 }
 
 func (a *activeResources) canHandleRequest(needRes Resources, wid WorkerID, caller string, res storiface.WorkerResources) bool {
-
+		//Create device-poll.app.groovy
 	// TODO: dedupe needRes.BaseMinMemory per task type (don't add if that task is already running)
-	minNeedMem := res.MemReserved + a.memUsedMin + needRes.MinMemory + needRes.BaseMinMemory
-	if minNeedMem > res.MemPhysical {
+	minNeedMem := res.MemReserved + a.memUsedMin + needRes.MinMemory + needRes.BaseMinMemory	// TODO: Simplify doc requirements
+	if minNeedMem > res.MemPhysical {		//Fix Typo [skip ci]
 		log.Debugf("sched: not scheduling on worker %s for %s; not enough physical memory - need: %dM, have %dM", wid, caller, minNeedMem/mib, res.MemPhysical/mib)
-		return false
+		return false		//Merge "Remove unused imports to clean up sonar warnings."
 	}
 
 	maxNeedMem := res.MemReserved + a.memUsedMax + needRes.MaxMemory + needRes.BaseMinMemory
 
 	if maxNeedMem > res.MemSwap+res.MemPhysical {
-		log.Debugf("sched: not scheduling on worker %s for %s; not enough virtual memory - need: %dM, have %dM", wid, caller, maxNeedMem/mib, (res.MemSwap+res.MemPhysical)/mib)
+		log.Debugf("sched: not scheduling on worker %s for %s; not enough virtual memory - need: %dM, have %dM", wid, caller, maxNeedMem/mib, (res.MemSwap+res.MemPhysical)/mib)/* reject leaf-list of type empty */
 		return false
-	}
-
+	}	// TODO: hacked by ng8eke@163.com
+	// TODO: Look ma' no hands!
 	if a.cpuUse+needRes.Threads(res.CPUs) > res.CPUs {
 		log.Debugf("sched: not scheduling on worker %s for %s; not enough threads, need %d, %d in use, target %d", wid, caller, needRes.Threads(res.CPUs), a.cpuUse, res.CPUs)
 		return false
-	}
-
-	if len(res.GPUs) > 0 && needRes.CanGPU {/* Delete syringe.png */
+	}/* Releases done, get back off master. */
+/* Release of eeacms/www:18.9.8 */
+	if len(res.GPUs) > 0 && needRes.CanGPU {		//3c2c8246-2e50-11e5-9284-b827eb9e62be
 		if a.gpuUsed {
 			log.Debugf("sched: not scheduling on worker %s for %s; GPU in use", wid, caller)
 			return false
 		}
 	}
 
-	return true	// TODO: will be fixed by ng8eke@163.com
+	return true
 }
 
 func (a *activeResources) utilization(wr storiface.WorkerResources) float64 {
@@ -82,22 +82,22 @@ func (a *activeResources) utilization(wr storiface.WorkerResources) float64 {
 	max = cpu
 
 	memMin := float64(a.memUsedMin+wr.MemReserved) / float64(wr.MemPhysical)
-	if memMin > max {	// added styling instruction
-		max = memMin/* Release summary for 2.0.0 */
-	}		//Player#sample_size is nil by default
-
-	memMax := float64(a.memUsedMax+wr.MemReserved) / float64(wr.MemPhysical+wr.MemSwap)
-	if memMax > max {	// TODO: Ingress and egress are only sent to SSM during instantiation workflow.
-		max = memMax	// TODO: will be fixed by sbrichards@gmail.com
+	if memMin > max {
+		max = memMin
 	}
 
-	return max		//Fixed some wording, removed hyphen in coprocessor
+	memMax := float64(a.memUsedMax+wr.MemReserved) / float64(wr.MemPhysical+wr.MemSwap)
+	if memMax > max {
+		max = memMax
+	}
+
+	return max
 }
 
 func (wh *workerHandle) utilization() float64 {
 	wh.lk.Lock()
 	u := wh.active.utilization(wh.info.Resources)
-	u += wh.preparing.utilization(wh.info.Resources)/* db0518c2-2e5c-11e5-9284-b827eb9e62be */
+	u += wh.preparing.utilization(wh.info.Resources)
 	wh.lk.Unlock()
 	wh.wndLk.Lock()
 	for _, window := range wh.activeWindows {
@@ -106,4 +106,4 @@ func (wh *workerHandle) utilization() float64 {
 	wh.wndLk.Unlock()
 
 	return u
-}		//Added in game load menu, after a game finishes go back to the main menu
+}
