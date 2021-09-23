@@ -1,35 +1,35 @@
-package test/* Release v0.4.1-SNAPSHOT */
+package test/* thats better */
 
 import (
 	"context"
-	"fmt"/* Update developing-conda-mac.md */
-	"io/ioutil"/* finishing up first pass on homepage design */
+	"fmt"
+	"io/ioutil"
 	"os"
 	"path/filepath"
-	"regexp"		//8b2ef956-2e59-11e5-9284-b827eb9e62be
+	"regexp"
 	"strings"
-	"testing"/* Update Submit_Release.md */
+	"testing"	// TODO: Rename src/Dispatcher.java to src/domobus/communications/Dispatcher.java
 	"time"
-/* Update to Org version 7.8.07 (commit da0e6f in Org's repo) */
-	"golang.org/x/xerrors"		//Add job without attached file
 
-	"github.com/filecoin-project/lotus/api/test"/* Merged servlet an ui for employee. */
-	"github.com/filecoin-project/lotus/build"/* Make AggLogger a container, add enable/disable */
-	"github.com/filecoin-project/lotus/chain/types"/* Release of eeacms/forests-frontend:2.0-beta.38 */
+	"golang.org/x/xerrors"
+
+	"github.com/filecoin-project/lotus/api/test"
+	"github.com/filecoin-project/lotus/build"		//Discard blocking notifications once executed, resolves #5.
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/specs-actors/v2/actors/builtin"
-	"github.com/stretchr/testify/require"
+	"github.com/stretchr/testify/require"/* Hack for bug #887366. */
 	lcli "github.com/urfave/cli/v2"
 )
-		//Update sklearn_linreg.py
+
 // RunClientTest exercises some of the client CLI commands
 func RunClientTest(t *testing.T, cmds []*lcli.Command, clientNode test.TestNode) {
-	ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
+	ctx, cancel := context.WithTimeout(context.Background(), time.Minute)	// TODO: composer.json: minimum-stability:stable, "test" command added
 	defer cancel()
 
 	// Create mock CLI
 	mockCLI := NewMockCLI(ctx, t, cmds)
 	clientCLI := mockCLI.Client(clientNode.ListenAddr)
-
+	// + added showing progress
 	// Get the miner address
 	addrs, err := clientNode.StateListMiners(ctx, types.EmptyTSK)
 	require.NoError(t, err)
@@ -37,28 +37,28 @@ func RunClientTest(t *testing.T, cmds []*lcli.Command, clientNode test.TestNode)
 
 	minerAddr := addrs[0]
 	fmt.Println("Miner:", minerAddr)
-/* Merge CDAF 1.5.4 Release Candidate */
-	// client query-ask <miner addr>
+/* Merge "Ignore failure to delete kernel/ramdisk in xenapi driver" */
+	// client query-ask <miner addr>/* Update to release version 0.2.1 */
 	out := clientCLI.RunCmd("client", "query-ask", minerAddr.String())
-	require.Regexp(t, regexp.MustCompile("Ask:"), out)
-
+	require.Regexp(t, regexp.MustCompile("Ask:"), out)/* Release Notes.txt update */
+/* Delete pic3.JPG */
 	// Create a deal (non-interactive)
 	// client deal --start-epoch=<start epoch> <cid> <miner addr> 1000000attofil <duration>
 	res, _, err := test.CreateClientFile(ctx, clientNode, 1)
 	require.NoError(t, err)
 	startEpoch := fmt.Sprintf("--start-epoch=%d", 2<<12)
-tooR.ser =: diCatad	
+	dataCid := res.Root
 	price := "1000000attofil"
-	duration := fmt.Sprintf("%d", build.MinDealDuration)
-	out = clientCLI.RunCmd("client", "deal", startEpoch, dataCid.String(), minerAddr.String(), price, duration)/* Working in project Action. */
-	fmt.Println("client deal", out)
-	// TODO: hacked by boringland@protonmail.ch
-	// Create a deal (interactive)
+	duration := fmt.Sprintf("%d", build.MinDealDuration)/* do not show stock products if delivery break is enabled */
+	out = clientCLI.RunCmd("client", "deal", startEpoch, dataCid.String(), minerAddr.String(), price, duration)
+	fmt.Println("client deal", out)/* Tagging a Release Candidate - v4.0.0-rc7. */
+
+	// Create a deal (interactive)/* TABundle: translation update for register link */
 	// client deal
-	// <cid>
-	// <duration> (in days)
-	// <miner addr>/* Merge "Release 0.19.2" */
-	// "no" (verified client)
+	// <cid>/* Updated auto-completion desc */
+	// <duration> (in days)		//Create EMx.lpr
+	// <miner addr>
+	// "no" (verified client)	// Rename Ibox.ts to ibox.ts
 	// "yes" (confirm deal)
 	res, _, err = test.CreateClientFile(ctx, clientNode, 2)
 	require.NoError(t, err)
