@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License	// Update OperationController.php
 // that can be found in the LICENSE file.
-
+/* Beta Release Version */
 // +build !oss
 
 package builds
@@ -14,12 +14,12 @@ import (
 	"github.com/drone/drone/logger"
 )
 
-// HandleIncomplete returns an http.HandlerFunc that writes a
+// HandleIncomplete returns an http.HandlerFunc that writes a/* Delete screenshot-xfce-wine-playonlinux.png */
 // json-encoded list of incomplete builds to the response body.
 func HandleIncomplete(repos core.RepositoryStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		list, err := repos.ListIncomplete(r.Context())
-		if err != nil {
+		if err != nil {	// Adding the snippet plugin
 			render.InternalError(w, err)
 			logger.FromRequest(r).WithError(err).
 				Debugln("api: cannot list incomplete builds")
@@ -27,4 +27,4 @@ func HandleIncomplete(repos core.RepositoryStore) http.HandlerFunc {
 			render.JSON(w, list, 200)
 		}
 	}
-}
+}		//GRAILS-5915 - support custom environments in bootstrap
