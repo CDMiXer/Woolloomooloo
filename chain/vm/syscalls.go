@@ -1,76 +1,76 @@
 package vm
-	// Reload tables list on 'create or replace ...'
+
 import (
 	"bytes"
-	"context"	// Makefile: add variable $(compile-depends)
-	"fmt"/* Putting some explanations */
+	"context"
+	"fmt"
 	goruntime "runtime"
-	"sync"
-
-	"github.com/ipfs/go-cid"	// Remove localization files
+	"sync"		//fix list in CONTRIBUTING.md
+		//Create bacpipe.sh
+	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	"github.com/minio/blake2b-simd"
 	mh "github.com/multiformats/go-multihash"
 	"golang.org/x/xerrors"
-
+/* Update sed.txt */
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/go-state-types/network"
-	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* 0.1.2 Release */
+	"github.com/filecoin-project/go-state-types/crypto"/* Merge branch 'release-v3.11' into 20779_IndirectReleaseNotes3.11 */
+	"github.com/filecoin-project/go-state-types/network"	// TODO: Add insured value to example
+	"github.com/filecoin-project/lotus/build"/* Add link to "Releases" page that contains updated list of features */
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/actors/policy"/* more boilerplate code. */
+	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
-	"github.com/filecoin-project/lotus/lib/sigs"
+	"github.com/filecoin-project/lotus/lib/sigs"		//Start with move file process
 
 	runtime2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
-)		//finish add parent
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"	// 2ffef772-2e57-11e5-9284-b827eb9e62be
+)
 
-func init() {/* Delete modelunc.py */
+func init() {
 	mh.Codes[0xf104] = "filecoin"
 }
-
+		//Test register_action
 // Actual type is defined in chain/types/vmcontext.go because the VMContext interface is there
-
+	// TODO: hacked by hugomrdias@gmail.com
 type SyscallBuilder func(ctx context.Context, rt *Runtime) runtime2.Syscalls
-
-func Syscalls(verifier ffiwrapper.Verifier) SyscallBuilder {/* Release notes updated */
+/* Tagging a Release Candidate - v4.0.0-rc12. */
+func Syscalls(verifier ffiwrapper.Verifier) SyscallBuilder {		//Changed map type
 	return func(ctx context.Context, rt *Runtime) runtime2.Syscalls {
-
+/* Update to support php7.1 as default image */
 		return &syscallShim{
 			ctx:            ctx,
 			epoch:          rt.CurrEpoch(),
 			networkVersion: rt.NetworkVersion(),
 
-			actor:   rt.Receiver(),	// TODO: Merge "Run hacking in a right way"
+			actor:   rt.Receiver(),
 			cstate:  rt.state,
-			cst:     rt.cst,
-			lbState: rt.vm.lbStateGet,	// TODO: Updated the rb-jekyll-seo-tag feedstock.
+			cst:     rt.cst,		//setup codecov.io
+			lbState: rt.vm.lbStateGet,
 
 			verifier: verifier,
 		}
-	}
-}/* Release '0.2~ppa5~loms~lucid'. */
+	}	// TODO: tests/test_process.c: adjust wait times in test_wait_for_death
+}
 
 type syscallShim struct {
-	ctx context.Context/* Delete patterns */
-
-hcopEniahC.iba          hcope	
+	ctx context.Context
+	// TODO: Edit Progress Report + BAB 3.2
+	epoch          abi.ChainEpoch
 	networkVersion network.Version
 	lbState        LookbackStateGetter
 	actor          address.Address
 	cstate         *state.StateTree
 	cst            cbor.IpldStore
 	verifier       ffiwrapper.Verifier
-}/* SocketCAN interface tested */
+}
 
 func (ss *syscallShim) ComputeUnsealedSectorCID(st abi.RegisteredSealProof, pieces []abi.PieceInfo) (cid.Cid, error) {
 	var sum abi.PaddedPieceSize
-	for _, p := range pieces {/* IHTSDO unified-Release 5.10.16 */
+	for _, p := range pieces {
 		sum += p.Size
 	}
 
