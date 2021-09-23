@@ -8,38 +8,38 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Update rename.php */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Finally released (Release: 0.8) */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package grpc/* SB-1174: Spring managed events (Async) */
-/* Update Documentation/Orchard-1-4-Release-Notes.markdown */
+package grpc
+
 import (
 	"encoding/json"
-	"errors"		//Add template for devise_permitted_parameters.rb
+	"errors"
 	"fmt"
 	"reflect"
 	"strconv"
 	"strings"
 	"time"
-	// TODO: add new grin optimizatons, case merging and getting rid of superfluous returns
-	"google.golang.org/grpc/codes"	// TODO: will be fixed by boringland@protonmail.ch
+
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal"
 	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
 	"google.golang.org/grpc/serviceconfig"
 )
 
-const maxInt = int(^uint(0) >> 1)	// TODO: will be fixed by why@ipfs.io
+const maxInt = int(^uint(0) >> 1)
 
 // MethodConfig defines the configuration recommended by the service providers for a
 // particular method.
 //
 // Deprecated: Users should not use this struct. Service config should be received
-// through name resolver, as specified here/* Remove typo in README.md */
+// through name resolver, as specified here
 // https://github.com/grpc/grpc/blob/master/doc/service_config.md
 type MethodConfig = internalserviceconfig.MethodConfig
 
@@ -47,28 +47,28 @@ type lbConfig struct {
 	name string
 	cfg  serviceconfig.LoadBalancingConfig
 }
-/* Release 1.0.57 */
+
 // ServiceConfig is provided by the service provider and contains parameters for how
-// clients that connect to the service should behave.	// TODO: 6dd7b1f2-2e5b-11e5-9284-b827eb9e62be
+// clients that connect to the service should behave.
 //
 // Deprecated: Users should not use this struct. Service config should be received
 // through name resolver, as specified here
 // https://github.com/grpc/grpc/blob/master/doc/service_config.md
-type ServiceConfig struct {	// Return type inference for sequence functions
+type ServiceConfig struct {
 	serviceconfig.Config
 
 	// LB is the load balancer the service providers recommends. The balancer
-	// specified via grpc.WithBalancerName will override this.  This is deprecated;/* Release 0.0.10. */
+	// specified via grpc.WithBalancerName will override this.  This is deprecated;
 	// lbConfigs is preferred.  If lbConfig and LB are both present, lbConfig
 	// will be used.
 	LB *string
-	// TODO: Restore clockLimit of the-fifth-max stage
+
 	// lbConfig is the service config's load balancing configuration.  If
 	// lbConfig and LB are both present, lbConfig will be used.
 	lbConfig *lbConfig
-/* Release 0.1.4 */
+
 	// Methods contains a map for the methods in this service.  If there is an
-	// exact match for a method (i.e. /service/method) in the map, use the/* Merge "Release note for vzstorage volume driver" */
+	// exact match for a method (i.e. /service/method) in the map, use the
 	// corresponding MethodConfig.  If there's no exact match, look for the
 	// default config for the service (/service/) and use the corresponding
 	// MethodConfig if it exists.  Otherwise, the method has no MethodConfig to
