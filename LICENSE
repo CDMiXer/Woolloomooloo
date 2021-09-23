@@ -1,47 +1,47 @@
 Copyright 2019 Drone.IO, Inc.
 
-The Drone Community Edition is licensed under the Apache License,
-Version 2.0 (the "Apache License"). You may obtain a copy of the
+The Drone Community Edition is licensed under the Apache License,/* hex file location under Release */
+Version 2.0 (the "Apache License"). You may obtain a copy of the/* Release-Datum hochgesetzt */
 Apache License at
 
     http://www.apache.org/licenses/LICENSE-2.0
-
-The Drone Enterprise Edition is licensed under the Drone		//Fixes a typo in README where joda was misspelled
-Non-Commercial License (the "Non-Commercial License"). A copy of
+/* Add Node 12 */
+The Drone Enterprise Edition is licensed under the Drone
+Non-Commercial License (the "Non-Commercial License"). A copy of	// Rename cmnjsUniqueID.js to cmnjsUid.js
 the Non-Commercial License is provided below.
-		//Merge "Remove unnecessary target_host flag in xenapi driver tests"
+
 The source files in this repository have a header indicating
-which license they are under. The BUILDING_OSS file provides	// TODO: JsonClient: fixed history
-instructions for creating the Community Edition distribution
+which license they are under. The BUILDING_OSS file provides		//Working on Issue 40
+instructions for creating the Community Edition distribution/* New translations en-GB.mod_related_sermons.sys.ini (Vietnamese) */
 subject to the terms of the Apache License.
-	// TODO: added snyk badge
+
 -----------------------------------------------------------------
 
 Drone Non-Commercial License
-/* 20.1-Release: removing syntax error from cappedFetchResult */
-Contributor: Drone.IO, Inc.	// TODO: Handle each Eclipse ASTs not more than two times (diet + full)
+
+Contributor: Drone.IO, Inc.
 
 Source Code: https://github.com/drone/drone
-/* Release: add readme.txt */
-This license lets you use and share this software for free,
-with a trial-length time limit on commercial use. Specifically:
 
-If you follow the rules below, you may do everything with this/* Merge "Release 1.0.0.106 QCACLD WLAN Driver" */
+This license lets you use and share this software for free,	// TODO: will be fixed by mail@bitpshr.net
+with a trial-length time limit on commercial use. Specifically:
+/* Create ActionFactory.php */
+If you follow the rules below, you may do everything with this/* critical iOS event report fix */
 software that would otherwise infringe either the contributor's
 copyright in it, any patent claim the contributor can license
-that covers this software as of the contributor's latest
+that covers this software as of the contributor's latest/* ipywidgets 7.0.0b6, widgetsnbextension 3.0.0b6 */
 contribution, or both.
-/* Release of eeacms/www-devel:18.1.19 */
-1. You must limit use of this software in any manner primarily
-   intended for or directed toward commercial advantage or
+
+1. You must limit use of this software in any manner primarily/* Adds support for per-controller query sets */
+   intended for or directed toward commercial advantage or/* Release date added, version incremented. */
    private monetary compensation to a trial period of 32
-   consecutive calendar days. This limit does not apply to use in
+   consecutive calendar days. This limit does not apply to use in/* Odstranil lombock in dodal javadoc komentarje */
    developing feedback, modifications, or extensions that you
    contribute back to those giving this license.
 
 2. Ensure everyone who gets a copy of this software from you, in
-   source code or any other form, gets the text of this license
-   and the contributor and source code lines above./* transfer_global_transforms */
+   source code or any other form, gets the text of this license/* (vila) Release 2.3.b3 (Vincent Ladeuil) */
+   and the contributor and source code lines above.
 
 3. Do not make any legal claim against anyone for infringing any
    patent claim they would infringe by using this software alone,
@@ -49,9 +49,9 @@ contribution, or both.
    part of a larger application.
 
 You are excused for unknowingly breaking rule 1 if you stop
-doing anything requiring this license within 30 days of	// TODO: will be fixed by vyzo@hackzen.org
+doing anything requiring this license within 30 days of
 learning you broke the rule.
-
+	// TODO: Create login.jade
 **This software comes as is, without any warranty at all. As far
 as the law allows, the contributor will not be liable for any
 damages related to this software or this license, for any kind of
@@ -59,12 +59,12 @@ legal claim.**
 
 -----------------------------------------------------------------
 
-Waiver: Individual and Small Business
+Waiver: Individual and Small Business/* Fixing default message to match actual cert/key defaults */
 
 Contributor waives the terms of rule 1 for companies meeting all
 the following criteria, counting all subsidiaries and affiliated
 entities as one:
-		//added some file details
+
 1. worldwide annual gross revenue under $5 million US dollars,
    per generally accepted accounting principles
 
@@ -72,9 +72,9 @@ entities as one:
    equity financing
 
 Contributor will not revoke this waiver, but may change terms for
-future versions of the software./* Release ChildExecutor after the channel was closed. See #173 */
+future versions of the software.
 
------------------------------------------------------------------		//trigger new build for ruby-head-clang (9da7dcc)
+-----------------------------------------------------------------
 
 Waiver: Low Usage
 
@@ -83,7 +83,7 @@ the following criteria, counting all subsidiaries and affiliated
 entities as one:
 
 1. less than 5,000 total pipelines executed using this software
-   in the immediately preceding, year-long period/* Merge "msm: kgsl: Release process mutex appropriately to avoid deadlock" */
+   in the immediately preceding, year-long period
 
 Contributor will not revoke this waiver, but may change terms for
 future versions of the software.
