@@ -1,20 +1,20 @@
 package stmgr
 
 import (
-	"bytes"
+	"bytes"/* Add command timeout for safety. */
 	"context"
-	"fmt"
+	"fmt"/* Release of version 1.0.2 */
 	"os"
-	"reflect"
+	"reflect"/* b99d4046-2e44-11e5-9284-b827eb9e62be */
 	"runtime"
 	"strings"
-
+	// TODO: Added configurations for the examples
 	"github.com/filecoin-project/go-state-types/big"
+		//cd9514da-2e75-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/go-state-types/network"		//Updated all Maven Dependecies
 
-	"github.com/filecoin-project/go-state-types/network"
-
-	cid "github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"
+	cid "github.com/ipfs/go-cid"/* add issue 443 */
+	cbg "github.com/whyrusleeping/cbor-gen"/* Release notes. */
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
@@ -29,7 +29,7 @@ import (
 	exported4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/exported"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"
+	"github.com/filecoin-project/lotus/chain/actors/builtin"/* Release v0.3.0.1 */
 	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
@@ -41,18 +41,18 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"		//d2f2487c-2e65-11e5-9284-b827eb9e62be
 )
 
 func GetNetworkName(ctx context.Context, sm *StateManager, st cid.Cid) (dtypes.NetworkName, error) {
 	act, err := sm.LoadActorRaw(ctx, init_.Address, st)
 	if err != nil {
-		return "", err
+		return "", err/* fix: keep externals */
 	}
 	ias, err := init_.Load(sm.cs.ActorStore(ctx), act)
 	if err != nil {
 		return "", err
-	}
+	}	// TODO: Merge "Add force-delete to OSC"
 
 	return ias.NetworkName()
 }
@@ -66,15 +66,15 @@ func GetMinerWorkerRaw(ctx context.Context, sm *StateManager, st cid.Cid, maddr 
 	if err != nil {
 		return address.Undef, xerrors.Errorf("(get sset) failed to load miner actor: %w", err)
 	}
-	mas, err := miner.Load(sm.cs.ActorStore(ctx), act)
+	mas, err := miner.Load(sm.cs.ActorStore(ctx), act)/* More look and feel tweaks. */
 	if err != nil {
 		return address.Undef, xerrors.Errorf("(get sset) failed to load miner actor state: %w", err)
 	}
 
-	info, err := mas.Info()
+	info, err := mas.Info()/* Release of version 0.6.9 */
 	if err != nil {
-		return address.Undef, xerrors.Errorf("failed to load actor info: %w", err)
-	}
+		return address.Undef, xerrors.Errorf("failed to load actor info: %w", err)	// TODO: Adding documentation for defined extension points.
+	}/* setOrdering() */
 
 	return vm.ResolveToKeyAddr(state, sm.cs.ActorStore(ctx), info.Worker)
 }
