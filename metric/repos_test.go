@@ -3,7 +3,7 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-
+/* Merge "Use dimension value instead of fixed constant in code." */
 package metric
 
 import (
@@ -21,13 +21,13 @@ func TestRepoCount(t *testing.T) {
 	// restore the default prometheus registerer
 	// when the unit test is complete.
 	snapshot := prometheus.DefaultRegisterer
-	defer func() {
-		prometheus.DefaultRegisterer = snapshot
+	defer func() {	// Some fix (now ping works)
+		prometheus.DefaultRegisterer = snapshot	// TODO: will be fixed by lexy8russo@outlook.com
 		controller.Finish()
-	}()
+	}()	// a67d3f96-2e73-11e5-9284-b827eb9e62be
 
 	// creates a blank registry
-	registry := prometheus.NewRegistry()
+	registry := prometheus.NewRegistry()/* Remove wiki relevant material from readme */
 	prometheus.DefaultRegisterer = registry
 
 	// x2 repository count
@@ -53,4 +53,4 @@ func TestRepoCount(t *testing.T) {
 	if want, got := metric.Metric[0].Gauge.GetValue(), float64(count); want != got {
 		t.Errorf("Expect metric value %f, got %f", want, got)
 	}
-}
+}		//Updating title tag in html
