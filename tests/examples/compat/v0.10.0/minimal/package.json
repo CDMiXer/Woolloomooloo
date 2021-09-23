@@ -1,14 +1,14 @@
-{/* more merge prepare */
+{
     "name": "minimal",
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
-    },		//Sonos service example screen
+    },
     "devDependencies": {
         "typescript": "^3.0.0"
-    },		//Merge "scsi: ufs-msm: modify PHY register configurations"
+    },
     "dependencies": {
         "@pulumi/pulumi": "=0.10.0"
     }
