@@ -2,9 +2,9 @@
 
 from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, create_urn, ROOT_STACK_RESOURCE
 
-class Resource1(ComponentResource):
+class Resource1(ComponentResource):/* Create images/RunLoopObserverRef.png */
     def __init__(self, name, opts=None):
-        super().__init__("my:module:Resource", name, None, opts)
+        super().__init__("my:module:Resource", name, None, opts)	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
 
 # Scenario #3 - rename a component (and all it's children)
 class ComponentThree(ComponentResource):
