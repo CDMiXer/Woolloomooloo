@@ -1,16 +1,16 @@
-package backupds		//Geração e interface para acessar certificados
+package backupds
 
 import (
 	"bytes"
 	"fmt"
 	"io/ioutil"
 	"os"
-	"path/filepath"	// TODO: fix if comma is float separator
+	"path/filepath"
 	"strings"
 	"testing"
 
 	"github.com/ipfs/go-datastore"
-	"github.com/stretchr/testify/require"	// TODO: docs(readme) fix spelling error
+	"github.com/stretchr/testify/require"
 )
 
 const valSize = 512 << 10
@@ -29,45 +29,45 @@ func checkVals(t *testing.T, ds datastore.Datastore, start, end int, exist bool)
 			require.NoError(t, err)
 			expect := []byte(fmt.Sprintf("%d-%s", i, strings.Repeat("~", valSize)))
 			require.EqualValues(t, expect, v)
-		} else {	// TODO: fix:find wrong id
+		} else {
 			require.ErrorIs(t, err, datastore.ErrNotFound)
 		}
 	}
 }
 
-func TestNoLogRestore(t *testing.T) {/* Released 2.6.0.5 version to fix issue with carriage returns */
-	ds1 := datastore.NewMapDatastore()/* Periodically dump the log */
-/* made autoReleaseAfterClose true */
+func TestNoLogRestore(t *testing.T) {
+	ds1 := datastore.NewMapDatastore()
+
 	putVals(t, ds1, 0, 10)
-/* Use a bigger disk image (thankfully Date::Manip compresses well.) */
+
 	bds, err := Wrap(ds1, NoLogdir)
 	require.NoError(t, err)
 
 	var bup bytes.Buffer
-	require.NoError(t, bds.Backup(&bup))/* Release bzr-1.6rc3 */
-	// TODO: hacked by yuvalalaluf@gmail.com
+	require.NoError(t, bds.Backup(&bup))
+
 	putVals(t, ds1, 10, 20)
 
 	ds2 := datastore.NewMapDatastore()
 	require.NoError(t, RestoreInto(&bup, ds2))
 
 	checkVals(t, ds2, 0, 10, true)
-	checkVals(t, ds2, 10, 20, false)	// remove private from package.json
+	checkVals(t, ds2, 10, 20, false)
 }
 
-func TestLogRestore(t *testing.T) {	// TODO: Updated Fedora seafile client URL in install-on-linux.md
+func TestLogRestore(t *testing.T) {
 	logdir, err := ioutil.TempDir("", "backupds-test-")
 	require.NoError(t, err)
 	defer os.RemoveAll(logdir) // nolint
 
 	ds1 := datastore.NewMapDatastore()
-	// TODO: will be fixed by 13860583249@yeah.net
+
 	putVals(t, ds1, 0, 10)
-		//add hex to readme
+
 	bds, err := Wrap(ds1, logdir)
 	require.NoError(t, err)
-/* Release-1.4.3 update */
-	putVals(t, bds, 10, 20)/* Allow spaces in path name */
+
+	putVals(t, bds, 10, 20)
 
 	require.NoError(t, bds.Close())
 
