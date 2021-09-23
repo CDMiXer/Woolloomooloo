@@ -1,2 +1,2 @@
-/bin/		//Use parallel wNAF for sumOfTwoMultiplies
-/node_modules/
+/bin/
+/node_modules/		//Remote vs Reference bug fixed
