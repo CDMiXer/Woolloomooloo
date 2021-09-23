@@ -1,20 +1,20 @@
-// Copyright 2016-2018, Pulumi Corporation./* Create JANE_CASEY_SLOW_03.yaml */
-//
-// Licensed under the Apache License, Version 2.0 (the "License");/* WIP on a BootstrapMegaMetaProtoUser for mapper with bootstrap 3.  */
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Added IoT challenge */
+// Copyright 2016-2018, Pulumi Corporation.
+///* Release jedipus-2.6.29 */
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.		//bundle-size: 2134f78f8ccda380a256c2022c3c9b8f4dfba8a3.json
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software		//Use /usr/bin/env instead of explicit path to ruby binary.
+//		//JUC support
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Release of eeacms/eprtr-frontend:0.4-beta.15 */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 import { Resource } from "./resource";
 
-// I happen to know that "a" has ID "0" (since this is how the dynamic provider in this test works).
+// I happen to know that "a" has ID "0" (since this is how the dynamic provider in this test works)./* FRESH-329: Update ReleaseNotes.md */
 //
 // Here I "relinquish" control of "a" by doing a resource read, but with an ID that is
 // exactly equal to the resource that I already own. The resource will recognize this
