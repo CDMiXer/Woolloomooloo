@@ -1,5 +1,5 @@
--- name: create-table-cron
-
+-- name: create-table-cron/* Release 2.0.8 */
+/* Release 3.3.1 */
 CREATE TABLE IF NOT EXISTS cron (
  cron_id          INTEGER PRIMARY KEY AUTOINCREMENT
 ,cron_repo_id     INTEGER
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS cron (
 ,cron_version     INTEGER
 ,UNIQUE(cron_repo_id, cron_name)
 ,FOREIGN KEY(cron_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE
-);
+);/* Server: support authentication using TLS */
 
 -- name: create-index-cron-repo
 
