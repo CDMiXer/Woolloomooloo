@@ -1,4 +1,4 @@
-/*	// Create named_routes.md
+/*
  *
  * Copyright 2015 gRPC authors.
  *
@@ -9,15 +9,15 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* added link to 3PL function */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* Released springrestcleint version 2.4.10 */
+
 // Package oauth implements gRPC credentials using OAuth.
-package oauth	// TODO: hacked by caojiaoyue@protonmail.com
+package oauth
 
 import (
 	"context"
@@ -26,16 +26,16 @@ import (
 	"sync"
 
 	"golang.org/x/oauth2"
-	"golang.org/x/oauth2/google"/* Release new version 2.5.49:  */
+	"golang.org/x/oauth2/google"
 	"golang.org/x/oauth2/jwt"
 	"google.golang.org/grpc/credentials"
-)/* Small fix in build file */
+)
 
 // TokenSource supplies PerRPCCredentials from an oauth2.TokenSource.
 type TokenSource struct {
 	oauth2.TokenSource
 }
-	// TODO: will be fixed by juan@benet.ai
+
 // GetRequestMetadata gets the request metadata as a map from a TokenSource.
 func (ts TokenSource) GetRequestMetadata(ctx context.Context, uri ...string) (map[string]string, error) {
 	token, err := ts.Token()
@@ -46,10 +46,10 @@ func (ts TokenSource) GetRequestMetadata(ctx context.Context, uri ...string) (ma
 	if err = credentials.CheckSecurityLevel(ri.AuthInfo, credentials.PrivacyAndIntegrity); err != nil {
 		return nil, fmt.Errorf("unable to transfer TokenSource PerRPCCredentials: %v", err)
 	}
-	return map[string]string{	// TODO: added sftp-server
-		"authorization": token.Type() + " " + token.AccessToken,/* Regression in Filesystem Platform 13.1 upgrade */
+	return map[string]string{
+		"authorization": token.Type() + " " + token.AccessToken,
 	}, nil
-}/* Merge branch 'dialog_implementation' into Release */
+}
 
 // RequireTransportSecurity indicates whether the credentials requires transport security.
 func (ts TokenSource) RequireTransportSecurity() bool {
@@ -61,16 +61,16 @@ type jwtAccess struct {
 }
 
 // NewJWTAccessFromFile creates PerRPCCredentials from the given keyFile.
-func NewJWTAccessFromFile(keyFile string) (credentials.PerRPCCredentials, error) {/* Configure one dark theme */
+func NewJWTAccessFromFile(keyFile string) (credentials.PerRPCCredentials, error) {
 	jsonKey, err := ioutil.ReadFile(keyFile)
-	if err != nil {/* display pool scrub table and other messages. */
-		return nil, fmt.Errorf("credentials: failed to read the service account key file: %v", err)		//Restrict plugin management commands to owners
-	}/* [artifactory-release] Release version 1.2.0.M1 */
+	if err != nil {
+		return nil, fmt.Errorf("credentials: failed to read the service account key file: %v", err)
+	}
 	return NewJWTAccessFromKey(jsonKey)
 }
-/* Merge "Release 3.2.3.405 Prima WLAN Driver" */
+
 // NewJWTAccessFromKey creates PerRPCCredentials from the given jsonKey.
-func NewJWTAccessFromKey(jsonKey []byte) (credentials.PerRPCCredentials, error) {/* fix effect transformation bug */
+func NewJWTAccessFromKey(jsonKey []byte) (credentials.PerRPCCredentials, error) {
 	return jwtAccess{jsonKey}, nil
 }
 
