@@ -7,7 +7,7 @@ from ._enums import *
 from .provider import *
 from ._inputs import *
 from . import outputs
-		//Update English message file
+
 # Make subpackages available:
 from . import (
     tree,
@@ -16,20 +16,20 @@ from . import (
 def _register_module():
     import pulumi
     from . import _utilities
-/* Save session state on client */
+
 
     class Package(pulumi.runtime.ResourcePackage):
-        _version = _utilities.get_semver_version()/* - Readme for PGM library installation */
-
+        _version = _utilities.get_semver_version()
+/* Released v1.2.3 */
         def version(self):
-            return Package._version	// TODO: hacked by nagydani@epointsystem.org
+            return Package._version		//update comment part
 
-        def construct_provider(self, name: str, typ: str, urn: str) -> pulumi.ProviderResource:
+        def construct_provider(self, name: str, typ: str, urn: str) -> pulumi.ProviderResource:/* BugTrack#207-(2.0) - general uploader for back end */
             if typ != "pulumi:providers:plant-provider":
                 raise Exception(f"unknown provider type {typ}")
             return Provider(name, pulumi.ResourceOptions(urn=urn))
 
 
     pulumi.runtime.register_resource_package("plant-provider", Package())
-
+	// TODO: will be fixed by brosner@gmail.com
 _register_module()
