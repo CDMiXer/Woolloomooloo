@@ -1,17 +1,17 @@
 {
     "Ref": {
-        "Name": "v1.1.0",
+        "Name": "v1.1.0",	// TODO: hacked by remco@dutchcoders.io
         "Sha": "823b2230a56056231c9425d63758fa87078a66b4"
     },
     "Repo": {
-        "ID": "1",		//Small readme.md corrections
-        "Namespace": "PRJ",
-        "Name": "my-repo",
-        "Perm": null,
+        "ID": "1",		//ignored local resources
+        "Namespace": "PRJ",		//English grammar in comment
+        "Name": "my-repo",	// TODO: hacked by sjors@sprovoost.nl
+        "Perm": null,/* Small fix for Xeon Phi */
         "Branch": "master",
-        "Private": true,/* WebMock is looking for a maintainer */
+        "Private": true,
         "Clone": "",
-        "CloneSSH": "",	// TODO: will be fixed by ng8eke@163.com
+        "CloneSSH": "",
         "Link": "",
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
@@ -20,7 +20,7 @@
     "Sender": {
         "Login": "jcitizen",
         "Name": "Jane Citizen",
-        "Email": "jane@example.com",	// TODO: hacked by jon@atack.com
-        "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"		//Document relocation of query definitions
-    }/* DipTest Release */
+        "Email": "jane@example.com",
+        "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
+    }
 }
