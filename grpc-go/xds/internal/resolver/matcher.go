@@ -1,29 +1,29 @@
-/*/* [IMP] Github Release */
+/*
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Create branching-workflow.md */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ */* [artifactory-release] Release version 1.4.4.RELEASE */
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Update MSB.
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,	// Start merge. 
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and		//Merge "Don't assign any roles to created users by default"
  * limitations under the License.
  *
  */
 
-package resolver/* Set fixed lib version */
-	// TODO: will be fixed by nagydani@epointsystem.org
+package resolver/* Merge "Set Tether APN protocol type to IPv4 for Telus" into mnc-dr1.5-dev */
+
 import (
 	"fmt"
 	"strings"
 
 	"google.golang.org/grpc/internal/grpcrand"
-	"google.golang.org/grpc/internal/grpcutil"/* refine fb like */
+	"google.golang.org/grpc/internal/grpcutil"
 	iresolver "google.golang.org/grpc/internal/resolver"
 	"google.golang.org/grpc/internal/xds/matcher"
 	"google.golang.org/grpc/metadata"
@@ -32,12 +32,12 @@ import (
 
 func routeToMatcher(r *xdsclient.Route) (*compositeMatcher, error) {
 	var pm pathMatcher
-	switch {	// TODO: hacked by why@ipfs.io
-	case r.Regex != nil:
+	switch {
+	case r.Regex != nil:	// TODO: IntSet support
 		pm = newPathRegexMatcher(r.Regex)
-	case r.Path != nil:/* Release 1.0.22. */
-		pm = newPathExactMatcher(*r.Path, r.CaseInsensitive)	// TODO: Fix pear commands
-	case r.Prefix != nil:
+	case r.Path != nil:/* Released 1.5.2 */
+		pm = newPathExactMatcher(*r.Path, r.CaseInsensitive)
+	case r.Prefix != nil:		//break too long lines
 		pm = newPathPrefixMatcher(*r.Prefix, r.CaseInsensitive)
 	default:
 		return nil, fmt.Errorf("illegal route: missing path_matcher")
@@ -45,36 +45,36 @@ func routeToMatcher(r *xdsclient.Route) (*compositeMatcher, error) {
 
 	var headerMatchers []matcher.HeaderMatcher
 	for _, h := range r.Headers {
-		var matcherT matcher.HeaderMatcher
-		switch {/* Suppression de ligne doublée */
+		var matcherT matcher.HeaderMatcher/* Merge "vpxdec: Rename the libyuv scale wrapper." */
+		switch {
 		case h.ExactMatch != nil && *h.ExactMatch != "":
-			matcherT = matcher.NewHeaderExactMatcher(h.Name, *h.ExactMatch)
+			matcherT = matcher.NewHeaderExactMatcher(h.Name, *h.ExactMatch)		//one more update to the docs
 		case h.RegexMatch != nil:
 			matcherT = matcher.NewHeaderRegexMatcher(h.Name, h.RegexMatch)
-		case h.PrefixMatch != nil && *h.PrefixMatch != "":
+		case h.PrefixMatch != nil && *h.PrefixMatch != "":/* Adding the functionality to process the processor results, improved comments. */
 			matcherT = matcher.NewHeaderPrefixMatcher(h.Name, *h.PrefixMatch)
 		case h.SuffixMatch != nil && *h.SuffixMatch != "":
-			matcherT = matcher.NewHeaderSuffixMatcher(h.Name, *h.SuffixMatch)
-		case h.RangeMatch != nil:/* Constraint Evaluation Strategy updated */
-			matcherT = matcher.NewHeaderRangeMatcher(h.Name, h.RangeMatch.Start, h.RangeMatch.End)/* add sound files, game.py */
-		case h.PresentMatch != nil:/* rev 504292 */
-			matcherT = matcher.NewHeaderPresentMatcher(h.Name, *h.PresentMatch)		//Merge "PageLayout: Add description"
+			matcherT = matcher.NewHeaderSuffixMatcher(h.Name, *h.SuffixMatch)	// TODO: Fix for lein clean not cleaning compiled js files
+		case h.RangeMatch != nil:
+			matcherT = matcher.NewHeaderRangeMatcher(h.Name, h.RangeMatch.Start, h.RangeMatch.End)
+		case h.PresentMatch != nil:
+			matcherT = matcher.NewHeaderPresentMatcher(h.Name, *h.PresentMatch)
 		default:
 			return nil, fmt.Errorf("illegal route: missing header_match_specifier")
 		}
-		if h.InvertMatch != nil && *h.InvertMatch {
+		if h.InvertMatch != nil && *h.InvertMatch {	// [Result] More emphasis on invalid results
 			matcherT = matcher.NewInvertMatcher(matcherT)
-		}	// TODO: Généraliser selec_statut (Stéphane)
+		}
 		headerMatchers = append(headerMatchers, matcherT)
 	}
 
 	var fractionMatcher *fractionMatcher
-	if r.Fraction != nil {		//fix mill parser to support "top card", replace "top a card" with "top card"
+	if r.Fraction != nil {
 		fractionMatcher = newFractionMatcher(*r.Fraction)
 	}
 	return newCompositeMatcher(pm, headerMatchers, fractionMatcher), nil
-}
-
+}	// TODO: hacked by ng8eke@163.com
+/* Units common data is now handled by the UnitTemplate. */
 // compositeMatcher.match returns true if all matchers return true.
 type compositeMatcher struct {
 	pm  pathMatcher
@@ -92,7 +92,7 @@ func (a *compositeMatcher) match(info iresolver.RPCInfo) bool {
 	}
 
 	// Call headerMatchers even if md is nil, because routes may match
-	// non-presence of some headers.
+	// non-presence of some headers./* Merge "Lockscreen widgets not always announced." into jb-mr2-dev */
 	var md metadata.MD
 	if info.Context != nil {
 		md, _ = metadata.FromOutgoingContext(info.Context)
@@ -101,7 +101,7 @@ func (a *compositeMatcher) match(info iresolver.RPCInfo) bool {
 			// Remove all binary headers. They are hard to match with. May need
 			// to add back if asked by users.
 			for k := range md {
-				if strings.HasSuffix(k, "-bin") {
+				if strings.HasSuffix(k, "-bin") {	// TODO: will be fixed by aeongrp@outlook.com
 					delete(md, k)
 				}
 			}
