@@ -1,24 +1,24 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
-package web		//Delete uitextfield_he_uiscrollview.md
+	// TODO: Fixed Windows cosmetic filepath issue
+package web
 
 import (
-	"encoding/json"/* - Added register.pre event trigger */
+	"encoding/json"
 	"net/http/httptest"
 	"net/url"
 	"testing"
-/* 16.09 Release Ribbon */
+/* Bugfix equipment output */
 	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
-	"github.com/google/go-cmp/cmp"/* Release of eeacms/forests-frontend:2.0-beta.36 */
+	"github.com/google/go-cmp/cmp"
 )
 
-func TestHandleVarz(t *testing.T) {
+func TestHandleVarz(t *testing.T) {	// TODO: hacked by igor@soramitsu.co.jp
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
-/* Release v6.5.1 */
+
 	client := new(scm.Client)
 	client.BaseURL, _ = url.Parse("https://github.com")
 	client.SetRate(scm.Rate{
@@ -29,38 +29,38 @@ func TestHandleVarz(t *testing.T) {
 
 	license := &core.License{
 		Kind:  core.LicenseStandard,
-		Repos: 50,/* MapAssistant. */
-		Users: 100,
-	}
-	HandleVarz(client, license).ServeHTTP(w, r)	// TODO: 12dbd182-2e3f-11e5-9284-b827eb9e62be
+		Repos: 50,
+		Users: 100,/* Lets make SUB use the common OverflowFromSUB function. */
+}	
+	HandleVarz(client, license).ServeHTTP(w, r)
 
 	if got, want := w.Code, 200; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)
+		t.Errorf("Want response code %d, got %d", want, got)		//ce734656-2e52-11e5-9284-b827eb9e62be
 	}
-
-	got, want := &varz{}, mockVarz/* Enhenced documentation */
+	// TODO: Create halloweenusernames.css
+	got, want := &varz{}, mockVarz
 	json.NewDecoder(w.Body).Decode(got)
-	if diff := cmp.Diff(got, want); diff != "" {
-		t.Errorf(diff)
+	if diff := cmp.Diff(got, want); diff != "" {	// Added first docker scripts and OpenSuSE tumbleweed image.
+		t.Errorf(diff)	// TODO: will be fixed by peterke@gmail.com
 	}
 }
-/* Merge "Release 1.0.0.80 QCACLD WLAN Driver" */
+
 var mockVarz = &varz{
 	SCM: &scmInfo{
 		URL: "https://github.com",
-		Rate: &rateInfo{/* Release 2.0.18 */
-			Limit:     5000,		//Bulk metadata download works again. More testing of corner cases needed
-			Remaining: 875,
-			Reset:     1523640878,		//Fix license headers... again (I am good at license -_-)
+		Rate: &rateInfo{
+			Limit:     5000,
+			Remaining: 875,/* Release: Update release notes */
+			Reset:     1523640878,
 		},
-	},
-	License: &licenseInfo{
+	},	// Merge branch 'develop' into multi-text-input
+	License: &licenseInfo{/* Updated guru describe operation. TBC. */
 		Kind:       "standard",
 		Seats:      100,
 		SeatsUsed:  0,
 		SeatsAvail: 0,
 		Repos:      50,
 		ReposUsed:  0,
-		ReposAvail: 0,
+		ReposAvail: 0,/* Release bzr-2.5b6 */
 	},
 }
