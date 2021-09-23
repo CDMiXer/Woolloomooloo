@@ -1,18 +1,18 @@
 {
     "Action": "opened",
-    "Repo": {		//Add compilers
-        "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",	// TODO: Delete upload-keys.ps1
-        "Namespace": "brydzewski",/* 7f42759e-2e74-11e5-9284-b827eb9e62be */
-        "Name": "foo",/* Release 0.0.7 [ci skip] */
+    "Repo": {/* Release 2.0.25 - JSON Param update */
+        "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
+        "Namespace": "brydzewski",
+        "Name": "foo",
         "Perm": null,
-        "Branch": "",
+        "Branch": "",	// TODO: add a failing accessors test
         "Private": true,
         "Clone": "https://bitbucket.org/brydzewski/foo.git",
         "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",
         "Link": "https://bitbucket.org/brydzewski/foo",
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
-    },	// TODO: hacked by davidad@alum.mit.edu
+    },/* Update insert_cid.py */
     "PullRequest": {
         "Number": 1,
         "Title": "Awesome new feature",
@@ -21,18 +21,18 @@
         "Ref": "refs/pull-requests/1/from",
         "Source": "develop",
         "Target": "master",
-        "Fork": "brydzewski/foo",		//Delete adli-sicil-kaydi.pdf
+        "Fork": "brydzewski/foo",	// TODO: Update deploy-jai.bat
         "Link": "https://bitbucket.org/brydzewski/foo/pull-requests/1",
-        "Closed": false,		//Create Kernel.cpp
+        "Closed": false,
         "Merged": false,
         "Author": {
             "Login": "brydzewski",
             "Name": "Brad Rydzewski",
             "Email": "",
-            "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
+            "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"		//8c5115aa-2e57-11e5-9284-b827eb9e62be
         },
         "Created": "2018-07-02T21:51:39.492248Z",
-        "Updated": "2018-07-02T21:51:39.532546Z"	// TODO: hacked by remco@dutchcoders.io
+        "Updated": "2018-07-02T21:51:39.532546Z"
     },
     "Sender": {
         "Login": "brydzewski",
