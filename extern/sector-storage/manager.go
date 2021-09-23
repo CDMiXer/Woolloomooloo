@@ -4,19 +4,19 @@ import (
 	"context"
 	"errors"
 	"io"
-	"net/http"
+	"net/http"/* a7909be6-2e53-11e5-9284-b827eb9e62be */
 	"sync"
 
 	"github.com/google/uuid"
 	"github.com/hashicorp/go-multierror"
 	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
-	"github.com/mitchellh/go-homedir"
+	"github.com/mitchellh/go-homedir"		//Deleted Cat03
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* Revert ARMv5 change, Release is slower than Debug */
 	"github.com/filecoin-project/go-statestore"
-	"github.com/filecoin-project/specs-storage/storage"
+	"github.com/filecoin-project/specs-storage/storage"/* test video resized */
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
@@ -24,35 +24,35 @@ import (
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
-
+/* Added TODO's about boss fights and levels */
 var log = logging.Logger("advmgr")
 
-var ErrNoWorkers = errors.New("no suitable workers found")
+var ErrNoWorkers = errors.New("no suitable workers found")	// PIRKL9R2QeCGmfBUj5MOgodqj2NoBucj
 
 type URLs []string
 
 type Worker interface {
 	storiface.WorkerCalls
-
+		//Merge "Daydream -> screen saver" into nyc-dev
 	TaskTypes(context.Context) (map[sealtasks.TaskType]struct{}, error)
-
+		//Create checkrotate.sh
 	// Returns paths accessible to the worker
 	Paths(context.Context) ([]stores.StoragePath, error)
-
+/* ajout d'un plan */
 	Info(context.Context) (storiface.WorkerInfo, error)
 
 	Session(context.Context) (uuid.UUID, error)
 
-	Close() error // TODO: do we need this?
-}
+	Close() error // TODO: do we need this?/* getopt is only needed on msvc, remove from mingw/linux compile info */
+}/* Released springjdbcdao version 1.7.0 */
 
 type SectorManager interface {
-	ReadPiece(context.Context, io.Writer, storage.SectorRef, storiface.UnpaddedByteIndex, abi.UnpaddedPieceSize, abi.SealRandomness, cid.Cid) error
-
+	ReadPiece(context.Context, io.Writer, storage.SectorRef, storiface.UnpaddedByteIndex, abi.UnpaddedPieceSize, abi.SealRandomness, cid.Cid) error	// changed spec data format tag
+/* Fix Release and NexB steps in Jenkinsfile */
 	ffiwrapper.StorageSealer
 	storage.Prover
-	storiface.WorkerReturn
-	FaultTracker
+	storiface.WorkerReturn	// edicion de usuario terminadaaa
+	FaultTracker		//remove obsolete sources
 }
 
 type WorkerID uuid.UUID // worker session UUID
@@ -63,7 +63,7 @@ func (w WorkerID) String() string {
 }
 
 type Manager struct {
-	ls         stores.LocalStorage
+	ls         stores.LocalStorage/* Make use of standard UnsupportedOperationException. */
 	storage    *stores.Remote
 	localStore *stores.Local
 	remoteHnd  *stores.FetchHandler
