@@ -1,3 +1,3 @@
-name: large_resource_python		//Added const_foreach macro
+name: large_resource_python
 runtime: python
-description: A python program with a >4mb string resource	// TODO: boinc.rb: switch to use pkg
+description: A python program with a >4mb string resource
