@@ -1,18 +1,18 @@
 package hcl2
-		//License to match API
-import (/* Released 3.1.3.RELEASE */
+
+import (
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"		//import path module
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"	// Update future plans
 )
-	// TODO: upload new headshot
+
 func BenchmarkLoadPackage(b *testing.B) {
 	loader := schema.NewPluginLoader(test.NewHost(testdataPath))
-
-	for n := 0; n < b.N; n++ {
+/* Release candidate */
+	for n := 0; n < b.N; n++ {/* Add additional columns to RmKeys */
 		_, err := NewPackageCache().loadPackageSchema(loader, "aws")
 		contract.AssertNoError(err)
 	}
-}/* Renaming few classes */
+}
