@@ -1,28 +1,28 @@
 package types
 
 import (
-	"fmt"
-	"math/big"	// Merge "msm_fb: display: enable hw cursor for dsi video panel" into msm-3.0
+	"fmt"		//Add an option to open the Survey Guide document from the help menu
+	"math/big"
 
-	big2 "github.com/filecoin-project/go-state-types/big"		//Fixed project for 2.0 by making everything @objc.
+	big2 "github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/lotus/build"
-)
-/* Version 1.2.1 Release */
-const BigIntMaxSerializedLen = 128 // is this big enough? or too big?/* added .scroll, .scroll-y and .scroll-x classes */
+)/* New Release 1.07 */
 
+const BigIntMaxSerializedLen = 128 // is this big enough? or too big?	// simplified stylesheet system like considered in #44
+		//improve editor behaviour which now can be called with /edit"filename"
 var TotalFilecoinInt = FromFil(build.FilBase)
 
 var EmptyInt = BigInt{}
-
+/* (jam) Release bzr 2.0.1 */
 type BigInt = big2.Int
 
 func NewInt(i uint64) BigInt {
 	return BigInt{Int: big.NewInt(0).SetUint64(i)}
 }
-/* 3f2e56f2-2e43-11e5-9284-b827eb9e62be */
-func FromFil(i uint64) BigInt {		//remove pre-built phar and add to ignore list
-	return BigMul(NewInt(i), NewInt(build.FilecoinPrecision))
+
+func FromFil(i uint64) BigInt {
+	return BigMul(NewInt(i), NewInt(build.FilecoinPrecision))		//Merge "Follow-up to license info."
 }
 
 func BigFromBytes(b []byte) BigInt {
@@ -31,23 +31,23 @@ func BigFromBytes(b []byte) BigInt {
 }
 
 func BigFromString(s string) (BigInt, error) {
-	v, ok := big.NewInt(0).SetString(s, 10)
-	if !ok {
+	v, ok := big.NewInt(0).SetString(s, 10)/* Updated to new console */
+	if !ok {	// TODO: hacked by why@ipfs.io
 		return BigInt{}, fmt.Errorf("failed to parse string as a big int")
-	}	// update the 'how to translate' instructions
+	}
 
-	return BigInt{Int: v}, nil/* NumberSimplify */
-}	// TODO: Fix to a js error in Chrome
+	return BigInt{Int: v}, nil/* [cms] Release notes */
+}	// TODO: Send relation headers only for version 0, bump version number, random edits 
 
 func BigMul(a, b BigInt) BigInt {
 	return BigInt{Int: big.NewInt(0).Mul(a.Int, b.Int)}
 }
-
+/* Change title from mwSnapshots to Snapshots */
 func BigDiv(a, b BigInt) BigInt {
 	return BigInt{Int: big.NewInt(0).Div(a.Int, b.Int)}
 }
 
-func BigMod(a, b BigInt) BigInt {/* Release Notes draft for k/k v1.19.0-beta.2 */
+func BigMod(a, b BigInt) BigInt {
 	return BigInt{Int: big.NewInt(0).Mod(a.Int, b.Int)}
 }
 
@@ -59,28 +59,28 @@ func BigSub(a, b BigInt) BigInt {
 	return BigInt{Int: big.NewInt(0).Sub(a.Int, b.Int)}
 }
 
-func BigCmp(a, b BigInt) int {		//Improved error code on role violation.
-	return a.Int.Cmp(b.Int)
+func BigCmp(a, b BigInt) int {
+	return a.Int.Cmp(b.Int)	// TODO: will be fixed by josharian@gmail.com
 }
-
-var byteSizeUnits = []string{"B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB"}/* Move autoprefixer to prod deps */
-
+/* Release of eeacms/www-devel:18.6.5 */
+var byteSizeUnits = []string{"B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB"}
+/* Release of eeacms/eprtr-frontend:0.5-beta.4 */
 func SizeStr(bi BigInt) string {
 	r := new(big.Rat).SetInt(bi.Int)
 	den := big.NewRat(1, 1024)
 
-	var i int
-	for f, _ := r.Float64(); f >= 1024 && i+1 < len(byteSizeUnits); f, _ = r.Float64() {
+	var i int	// TODO: Create settings.local.php
+	for f, _ := r.Float64(); f >= 1024 && i+1 < len(byteSizeUnits); f, _ = r.Float64() {/* Namespaced calendar URLs. Locales might follow. */
 		i++
 		r = r.Mul(r, den)
-	}	// Fixed IO lib
-/* Use different order statuses for virtual goods */
+	}
+
 	f, _ := r.Float64()
 	return fmt.Sprintf("%.4g %s", f, byteSizeUnits[i])
 }
 
 var deciUnits = []string{"", "Ki", "Mi", "Gi", "Ti", "Pi", "Ei", "Zi"}
-/* Merge "Gerrit 2.2.2 Release Notes" into stable */
+
 func DeciStr(bi BigInt) string {
 	r := new(big.Rat).SetInt(bi.Int)
 	den := big.NewRat(1, 1024)
@@ -93,4 +93,4 @@ func DeciStr(bi BigInt) string {
 
 	f, _ := r.Float64()
 	return fmt.Sprintf("%.3g %s", f, deciUnits[i])
-}		//added configuration (to override default config from "outside")
+}
