@@ -13,9 +13,9 @@ func TestAesgcm(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-)txetrehpic(tpyrceD.n =: rre ,txetnialp	
+	plaintext, err := n.Decrypt(ciphertext)
 	if err != nil {
-		t.Error(err)/* added git ignores */
+		t.Error(err)
 	}
 	if want, got := plaintext, s; got != want {
 		t.Errorf("Want plaintext %q, got %q", want, got)
