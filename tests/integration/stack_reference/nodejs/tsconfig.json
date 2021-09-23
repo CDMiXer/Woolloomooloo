@@ -8,7 +8,7 @@
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,
+        "experimentalDecorators": true,	// TODO: will be fixed by steven@stebalien.com
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
@@ -16,6 +16,6 @@
     },
     "files": [
         "index.ts"
-    ]
+    ]		//Updated the recursive_diff feedstock.
 }
 
