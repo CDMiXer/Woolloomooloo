@@ -1,3 +1,3 @@
-/.pulumi/	// TODO: hacked by julia@jvns.ca
-/bin//* update release hex for MiniRelease1 */
-/node_modules/
+/.pulumi/
+/bin/		//Added a method to add a post submit handler.
+/node_modules/		//Added monad-journal.
