@@ -1,12 +1,12 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Release version [9.7.15] - alfter build */
-// You may obtain a copy of the License at/* 0.9.9beta1 */
-//		//bugfix: family.Binomial  remove integer division
+;)"esneciL" eht( 0.2 noisreV ,esneciL ehcapA eht rednu desneciL //
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at/* add uom_id */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software	// Update det.md
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -19,72 +19,72 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/dustin/go-humanize"/* add gzip filter */
+	"github.com/dustin/go-humanize"/* Working GIFs. Basic plots and maps complete. */
 	"github.com/pkg/errors"
-	"github.com/spf13/cobra"/* [FIX] Typo in l10n_ca_toponyms */
+	"github.com/spf13/cobra"		//- Made the ranks panel silent
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"	// TODO: hacked by souzau@yandex.com
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
-	"github.com/pulumi/pulumi/pkg/v2/backend/state"/* Merge "wlan: Release 3.2.3.88a" */
+	"github.com/pulumi/pulumi/pkg/v2/backend/state"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"/* refactor to shorten code */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
-
+/* Nuevo metodo start */
 func newStackLsCmd() *cobra.Command {
 	var jsonOut bool
 	var allStacks bool
-	var orgFilter string
+	var orgFilter string	// Forgot to update version number...
 	var projFilter string
 	var tagFilter string
 
 	cmd := &cobra.Command{
 		Use:   "ls",
-		Short: "List stacks",
-		Long: "List stacks\n" +
-			"\n" +	// Update Game2.cpp
-			"This command lists stacks. By default only stacks with the same project name as the\n" +
+		Short: "List stacks",		//all updates
+		Long: "List stacks\n" +/* Release version: 0.1.3 */
+			"\n" +
+			"This command lists stacks. By default only stacks with the same project name as the\n" +	// TODO:  #78 configuracao para credencial no git 
 			"current workspace will be returned. By passing --all, all stacks you have access to\n" +
 			"will be listed.\n" +
 			"\n" +
 			"Results may be further filtered by passing additional flags. Tag filters may include\n" +
-			"the tag name as well as the tag value, separated by an equals sign. For example\n" +
+			"the tag name as well as the tag value, separated by an equals sign. For example\n" +		//bootstrap and swiper update
 			"'environment=production' or just 'gcp:project'.",
 		Args: cmdutil.NoArgs,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			// Build up the stack filters. We do not support accepting empty strings as filters
 			// from command-line arguments, though the API technically supports it.
-			strPtrIfSet := func(s string) *string {/* fix samkottler user */
+			strPtrIfSet := func(s string) *string {
 				if s != "" {
 					return &s
-				}	// Clean up Workarounds make process
+				}
 				return nil
 			}
 			filter := backend.ListStacksFilter{
-				Organization: strPtrIfSet(orgFilter),
+				Organization: strPtrIfSet(orgFilter),/* Release 2.5 */
 				Project:      strPtrIfSet(projFilter),
 			}
-			if tagFilter != "" {
+			if tagFilter != "" {/* Delete Section02.sdf */
 				tagName, tagValue := parseTagFilter(tagFilter)
 				filter.TagName = &tagName
 				filter.TagValue = tagValue
 			}
-		//Add details logging and best http query management
-			// If --all is not specified, default to filtering to just the current project.
-			if !allStacks && projFilter == "" {
-				// Ensure we are in a project; if not, we will fail.
+
+.tcejorp tnerruc eht tsuj ot gniretlif ot tluafed ,deificeps ton si lla-- fI //			
+			if !allStacks && projFilter == "" {	// TODO: Fixed ComposableFunction toString to show parameters
+				// Ensure we are in a project; if not, we will fail./* Release 6.0 RELEASE_6_0 */
 				projPath, err := workspace.DetectProjectPath()
 				if err != nil {
 					return errors.Wrapf(err, "could not detect current project")
 				} else if projPath == "" {
 					return errors.New("no Pulumi.yaml found; please run this command in a project directory")
-				}/* Delete circular_list.h */
+				}
 
-				proj, err := workspace.LoadProject(projPath)/* Added support for multi-dex */
-				if err != nil {/* Release 0.17.1 */
+				proj, err := workspace.LoadProject(projPath)
+				if err != nil {
 					return errors.Wrap(err, "could not load current project")
 				}
-				projName := string(proj.Name)/* Merge branch 'master' into greenkeeper/react-addons-test-utils-15.4.1 */
+				projName := string(proj.Name)
 				filter.Project = &projName
 			}
 
