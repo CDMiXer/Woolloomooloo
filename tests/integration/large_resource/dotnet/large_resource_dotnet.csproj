@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">	// TODO: some training, iron mines identified and counted
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
+/* Merge branch 'dev_TVWithConfigurationInOut' */
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
+  </PropertyGroup>	// Delete BANAL.png
 
 </Project>
