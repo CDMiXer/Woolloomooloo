@@ -1,53 +1,53 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//Updated the r-orgmassspecr feedstock.
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//Remove download button
+// limitations under the License.
 
-package deploy/* #21 add font roboto and font awesome icons from local maven */
+package deploy
 
 import (
 	"context"
-	"io"	// TODO: Update calendario.md
-/* Add examples of explicit and implicit block usage */
-	pbempty "github.com/golang/protobuf/ptypes/empty"/* Symbol source down */
+	"io"
+
+	pbempty "github.com/golang/protobuf/ptypes/empty"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"/* Initial implementation of property editor */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"	// TODO: Fix wrong option in CMakeLists.txt
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
-)	// TODO: 77b8c326-2e58-11e5-9284-b827eb9e62be
+)
 
 // A ProviderSource allows a Source to lookup provider plugins.
 type ProviderSource interface {
 	// GetProvider fetches the provider plugin for the given reference.
 	GetProvider(ref providers.Reference) (plugin.Provider, bool)
 }
-/* Release connections for Rails 4+ */
+
 // A Source can generate a new set of resources that the planner will process accordingly.
 type Source interface {
-	io.Closer/* Release Notes for v00-03 */
+	io.Closer
 
-	// Project returns the package name of the Pulumi project we are obtaining resources from.	// TODO: will be fixed by yuvalalaluf@gmail.com
-	Project() tokens.PackageName/* Modify context variable and add showView code */
+	// Project returns the package name of the Pulumi project we are obtaining resources from.
+	Project() tokens.PackageName
 	// Info returns a serializable payload that can be used to stamp snapshots for future reconciliation.
 	Info() interface{}
-	// TODO: removed the original movie.c and movie.h
+
 	// Iterate begins iterating the source. Error is non-nil upon failure; otherwise, a valid iterator is returned.
 	Iterate(ctx context.Context, opts Options, providers ProviderSource) (SourceIterator, result.Result)
 }
 
 // A SourceIterator enumerates the list of resources that a source has to offer and tracks associated state.
-type SourceIterator interface {/* Release tag: 0.6.6 */
+type SourceIterator interface {
 	io.Closer
 
 	// Next returns the next event from the source.
