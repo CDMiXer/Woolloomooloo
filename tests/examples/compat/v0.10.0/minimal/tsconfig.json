@@ -1,7 +1,7 @@
-{	// TODO: Update url_invalidator.rst
+{
     "compilerOptions": {
-        "strict": true,/* Added yaw and pitch to home locations and spawn location. */
-        "outDir": "bin",	// TODO: Scale to show whole symbol
+        "strict": true,
+        "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
@@ -10,12 +10,12 @@
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,		//Update override.css
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
     "files": [
-        "index.ts"/* Release v1.13.0 */
+        "index.ts"
     ]
 }
 
