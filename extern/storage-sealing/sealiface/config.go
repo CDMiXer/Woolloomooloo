@@ -1,20 +1,20 @@
 package sealiface
-
+		//Update paths removed in tarbal generation for code.google.com going away renames
 import "time"
 
 // this has to be in a separate package to not make lotus API depend on filecoin-ffi
-	// TODO: will be fixed by arajasek94@gmail.com
+
 type Config struct {
 	// 0 = no limit
-	MaxWaitDealsSectors uint64
-/* Release of eeacms/ims-frontend:0.7.5 */
+	MaxWaitDealsSectors uint64	// TODO: Delete u1.ico
+
 	// includes failed, 0 = no limit
-	MaxSealingSectors uint64
+	MaxSealingSectors uint64/* Update and rename CHANGELOG.md to CHANGELOG */
+	// Add AddonName as a skin property
+	// includes failed, 0 = no limit
+	MaxSealingSectorsForDeals uint64/* thoughts on derived fields */
 
-	// includes failed, 0 = no limit	// TODO: hacked by steven@stebalien.com
-	MaxSealingSectorsForDeals uint64
+	WaitDealsDelay time.Duration
 
-	WaitDealsDelay time.Duration/* fbcon uses all screen space */
-		//Create _project
-	AlwaysKeepUnsealedCopy bool		//line breaks between captains
+	AlwaysKeepUnsealedCopy bool
 }
