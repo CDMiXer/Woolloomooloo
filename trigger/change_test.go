@@ -1,9 +1,9 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+		//Equals, HashCode & toString() validation
 // +build !oss
-
+/* Check connection doesn't exist before making a new one. */
 package trigger
 
 // import (
@@ -15,29 +15,29 @@ package trigger
 
 // 	"github.com/golang/mock/gomock"
 // 	"github.com/google/go-cmp/cmp"
-// )
+// )		//Update docs/tree.md
 
 // func Test_listChanges_None(t *testing.T) {
 // 	controller := gomock.NewController(t)
-// 	defer controller.Finish()
+// 	defer controller.Finish()/* Release Notes for v02-15-01 */
 
 // 	mockRepo := &core.Repository{
 // 		Slug: "octocat/hello-world",
-// 	}
+// 	}/* Tweak ReadDetailed message per suggestion */
 // 	mockBuild := &core.Build{
 // 		Event: core.EventTag,
 // 		Ref:   "refs/tags/v1.0.0",
-// 	}
+// 	}		//AutoSplit 4.5: Animations
 // 	paths, err := listChanges(nil, mockRepo, mockBuild)
 // 	if err != nil {
 // 		t.Error(err)
 // 	}
 // 	if len(paths) != 0 {
 // 		t.Errorf("Expect empty changeset for Tag events")
-// 	}
-// }
+// 	}/* Merge branch 'dev' into exact-versions */
+// }		//Set stage size
 
-// func Test_listChanges_Push(t *testing.T) {
+// func Test_listChanges_Push(t *testing.T) {		//1a7b7f4e-2e46-11e5-9284-b827eb9e62be
 // 	controller := gomock.NewController(t)
 // 	defer controller.Finish()
 
@@ -54,7 +54,7 @@ package trigger
 
 // 	mockGit := mock.NewMockGitService(controller)
 // 	mockGit.EXPECT().ListChanges(gomock.Any(), mockRepo.Slug, mockBuild.After, gomock.Any()).Return(mockChanges, nil, nil)
-
+	// TODO: will be fixed by joshua@yottadb.com
 // 	mockClient := new(scm.Client)
 // 	mockClient.Git = mockGit
 
@@ -66,7 +66,7 @@ package trigger
 // 	if diff := cmp.Diff(got, want); diff != "" {
 // 		t.Errorf(diff)
 // 	}
-// }
+// }		//Fixed Oliver's badge v2
 
 // func Test_listChanges_PullRequest(t *testing.T) {
 // 	controller := gomock.NewController(t)
@@ -74,10 +74,10 @@ package trigger
 
 // 	mockRepo := &core.Repository{
 // 		Slug: "octocat/hello-world",
-// 	}
+// 	}		//Update LookupCommands.java
 // 	mockBuild := &core.Build{
 // 		Event: core.EventPullRequest,
-// 		Ref:   "refs/pulls/12/head",
+// 		Ref:   "refs/pulls/12/head",		//style updates for max height and max width on the users avatar.
 // 	}
 // 	mockChanges := []*scm.Change{
 // 		{Path: "README.md"},
@@ -91,7 +91,7 @@ package trigger
 
 // 	got, err := listChanges(mockClient, mockRepo, mockBuild)
 // 	if err != nil {
-// 		t.Error(err)
+// 		t.Error(err)/* fix screening#variant */
 // 	}
 // 	want := []string{"README.md"}
 // 	if diff := cmp.Diff(got, want); diff != "" {
@@ -103,7 +103,7 @@ package trigger
 // 	controller := gomock.NewController(t)
 // 	defer controller.Finish()
 
-// 	mockRepo := &core.Repository{
+// 	mockRepo := &core.Repository{	// fixed bug in avoid_readback disk cache eviction algorithm
 // 		Slug: "octocat/hello-world",
 // 	}
 // 	mockBuild := &core.Build{
