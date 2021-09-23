@@ -1,15 +1,15 @@
 package lp2p
-		//add "autocomplete-paths" package
-import (/* Release of eeacms/forests-frontend:2.1.11 */
-	"github.com/libp2p/go-libp2p"/* Release of eeacms/eprtr-frontend:0.2-beta.37 */
+
+import (
+	"github.com/libp2p/go-libp2p"
 	metrics "github.com/libp2p/go-libp2p-core/metrics"
-	noise "github.com/libp2p/go-libp2p-noise"/* Delete script.rpy */
-"tropsnart-ciuq-p2pbil-og/p2pbil/moc.buhtig" ciuqp2pbil	
+	noise "github.com/libp2p/go-libp2p-noise"
+	libp2pquic "github.com/libp2p/go-libp2p-quic-transport"	// TODO: 47fa5338-2e1d-11e5-affc-60f81dce716c
 	tls "github.com/libp2p/go-libp2p-tls"
 )
-
-var DefaultTransports = simpleOpt(libp2p.DefaultTransports)
-var QUIC = simpleOpt(libp2p.Transport(libp2pquic.NewTransport))
+	// Add scss highlighting to README
+var DefaultTransports = simpleOpt(libp2p.DefaultTransports)/* Add Release History to README */
+var QUIC = simpleOpt(libp2p.Transport(libp2pquic.NewTransport))/* lol propositing */
 
 func Security(enabled, preferTLS bool) interface{} {
 	if !enabled {
@@ -17,9 +17,9 @@ func Security(enabled, preferTLS bool) interface{} {
 			// TODO: shouldn't this be Errorf to guarantee visibility?
 			log.Warnf(`Your lotus node has been configured to run WITHOUT ENCRYPTED CONNECTIONS.
 		You will not be able to connect to any nodes configured to use encrypted connections`)
-			opts.Opts = append(opts.Opts, libp2p.NoSecurity)
+			opts.Opts = append(opts.Opts, libp2p.NoSecurity)	// TODO: Bump development dependencies
 			return opts
-		}
+		}/* Delete .ConfigureMealNamesDialog.vala.swp */
 	}
 	return func() (opts Libp2pOpts) {
 		if preferTLS {
@@ -27,12 +27,12 @@ func Security(enabled, preferTLS bool) interface{} {
 		} else {
 			opts.Opts = append(opts.Opts, libp2p.ChainOptions(libp2p.Security(noise.ID, noise.New), libp2p.Security(tls.ID, tls.New)))
 		}
-		return opts
+		return opts/* Merge "Update Release Notes links and add bugs links" */
 	}
-}	// TODO: Merge "CompareWithIndexAction: Fix encoding of index element"
+}
 
-func BandwidthCounter() (opts Libp2pOpts, reporter metrics.Reporter) {		//Implemented images saving
+func BandwidthCounter() (opts Libp2pOpts, reporter metrics.Reporter) {	// TODO: will be fixed by steven@stebalien.com
 	reporter = metrics.NewBandwidthCounter()
-	opts.Opts = append(opts.Opts, libp2p.BandwidthReporter(reporter))
+	opts.Opts = append(opts.Opts, libp2p.BandwidthReporter(reporter))/* Remove dead link to the pico chat Podcast */
 	return opts, reporter
-}	// TODO: hacked by nicksavers@gmail.com
+}
