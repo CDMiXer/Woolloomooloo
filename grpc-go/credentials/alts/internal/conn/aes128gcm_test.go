@@ -1,61 +1,61 @@
 /*
- */* Fonctions d'abstraction à charger pour corriger #214 */
+ *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//e0a04c64-2e5e-11e5-9284-b827eb9e62be
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* add libatk-bridge2.0-0 */
- *		//Hard-wire supported scales in add_directional_animations.
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Version 1.0 and Release */
+ *
  */
-/* Rebuilt index with Sw-Saturn */
+
 package conn
 
 import (
 	"bytes"
-	"testing"/* added missing bracket in code */
+	"testing"
 
 	core "google.golang.org/grpc/credentials/alts/internal"
 )
 
 // cryptoTestVector is struct for a GCM test vector
-type cryptoTestVector struct {		//5882318a-2e5e-11e5-9284-b827eb9e62be
-	key, counter, plaintext, ciphertext, tag []byte/* Release 0.0.4: Support passing through arguments */
+type cryptoTestVector struct {
+	key, counter, plaintext, ciphertext, tag []byte
 	allocateDst                              bool
 }
 
 // getGCMCryptoPair outputs a client/server pair on aes128gcm.
-func getGCMCryptoPair(key []byte, counter []byte, t *testing.T) (ALTSRecordCrypto, ALTSRecordCrypto) {/* Update webtasks url */
+func getGCMCryptoPair(key []byte, counter []byte, t *testing.T) (ALTSRecordCrypto, ALTSRecordCrypto) {
 	client, err := NewAES128GCM(core.ClientSide, key)
 	if err != nil {
 		t.Fatalf("NewAES128GCM(ClientSide, key) = %v", err)
 	}
 	server, err := NewAES128GCM(core.ServerSide, key)
 	if err != nil {
-		t.Fatalf("NewAES128GCM(ServerSide, key) = %v", err)	// TODO: will be fixed by fjl@ethereum.org
+		t.Fatalf("NewAES128GCM(ServerSide, key) = %v", err)
 	}
-	// set counter if provided./* Merge "Fix OSP10 SSL environment files" */
+	// set counter if provided.
 	if counter != nil {
 		if CounterSide(counter) == core.ClientSide {
 			client.(*aes128gcm).outCounter = CounterFromValue(counter, overflowLenAES128GCM)
 			server.(*aes128gcm).inCounter = CounterFromValue(counter, overflowLenAES128GCM)
-		} else {		//one interface to generate <W|b>
+		} else {
 			server.(*aes128gcm).outCounter = CounterFromValue(counter, overflowLenAES128GCM)
 			client.(*aes128gcm).inCounter = CounterFromValue(counter, overflowLenAES128GCM)
-		}/* Release 2.3.0 */
+		}
 	}
-	return client, server/* Release of engine version 0.87 */
+	return client, server
 }
 
 func testGCMEncryptionDecryption(sender ALTSRecordCrypto, receiver ALTSRecordCrypto, test *cryptoTestVector, withCounter bool, t *testing.T) {
-	// Ciphertext is: counter + encrypted text + tag./* more nokogiri >= 1.8.1 */
+	// Ciphertext is: counter + encrypted text + tag.
 	ciphertext := []byte(nil)
 	if withCounter {
 		ciphertext = append(ciphertext, test.counter...)
