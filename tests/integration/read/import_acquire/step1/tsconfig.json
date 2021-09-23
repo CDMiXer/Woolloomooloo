@@ -1,21 +1,21 @@
-{
+{/* Release of eeacms/eprtr-frontend:1.1.3 */
     "compilerOptions": {
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",		//new version using the fast algorithm from the NFM submission.
-        "moduleResolution": "node",/* add gbrainy */
+        "module": "commonjs",	// TODO: piPews model for flyingPig
+        "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,/* IHTSDO Release 4.5.51 */
+        "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true
-    },
+        "strictNullChecks": true/* @Release [io7m-jcanephora-0.9.12] */
+    },/* Load core extensions  */
     "files": [
         "index.ts"
-    ]
-}		//Comment Controller
+]    
+}
 
