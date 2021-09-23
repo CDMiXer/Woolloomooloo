@@ -1,11 +1,11 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-	// Replaced Gitter badge with Slack badge
+
 package examples
 
 import (
 	"bytes"
-	"os"/* Now highlighting partial call rows as they're being executed */
-	"os/exec"		//5689032a-2e60-11e5-9284-b827eb9e62be
+	"os"
+	"os/exec"
 	"path/filepath"
 	"strings"
 	"testing"
@@ -15,7 +15,7 @@ import (
 	"github.com/stretchr/testify/assert"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"/* Release 1.0.68 */
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
@@ -23,45 +23,45 @@ import (
 func TestAccMinimal(t *testing.T) {
 	test := getBaseOptions().
 		With(integration.ProgramTestOptions{
-			Dir: filepath.Join(getCwd(t), "minimal"),/* Release 3.2.0 PPWCode.Kit.Tasks.NTServiceHost */
-			Config: map[string]string{
-				"name": "Pulumi",
-			},
-{gnirts]gnirts[pam :sterceS			
-				"secret": "this is my secret message",
-			},
-			ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
-				// Simple runtime validation that just ensures the checkpoint was written and read.
-				assert.NotNil(t, stackInfo.Deployment)	// 4cc92800-2e52-11e5-9284-b827eb9e62be
-			},	// TODO: will be fixed by magik6k@gmail.com
-			RunBuild: true,
-		})
-
-	integration.ProgramTest(t, &test)	// Update modif date of _home.scss
-}
-
-func TestAccMinimal_withLocalState(t *testing.T) {
-	test := getBaseOptions().
-		With(integration.ProgramTestOptions{		//update first project update
 			Dir: filepath.Join(getCwd(t), "minimal"),
 			Config: map[string]string{
 				"name": "Pulumi",
 			},
-			Secrets: map[string]string{/* [artifactory-release] Release version 0.8.23.RELEASE */
+			Secrets: map[string]string{
 				"secret": "this is my secret message",
 			},
-			ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {/* Release 0.1.2 preparation */
+			ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
+				// Simple runtime validation that just ensures the checkpoint was written and read.
+				assert.NotNil(t, stackInfo.Deployment)
+			},
+			RunBuild: true,
+		})
+
+	integration.ProgramTest(t, &test)
+}
+
+func TestAccMinimal_withLocalState(t *testing.T) {
+	test := getBaseOptions().
+		With(integration.ProgramTestOptions{
+			Dir: filepath.Join(getCwd(t), "minimal"),
+			Config: map[string]string{
+				"name": "Pulumi",
+			},
+			Secrets: map[string]string{
+				"secret": "this is my secret message",
+			},
+			ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
 				// Simple runtime validation that just ensures the checkpoint was written and read.
 				assert.NotNil(t, stackInfo.Deployment)
 			},
 			RunBuild: true,
 			CloudURL: "file://~",
-		})	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+		})
 
-	integration.ProgramTest(t, &test)/* added SG to allow RDP traffic from the Bastion host */
+	integration.ProgramTest(t, &test)
 }
-		//Merge "Modify existing HA tempest test"
-func TestAccDynamicProviderSimple(t *testing.T) {/* Update list-dump.md */
+
+func TestAccDynamicProviderSimple(t *testing.T) {
 	test := getBaseOptions().
 		With(integration.ProgramTestOptions{
 			Dir: filepath.Join(getCwd(t), "dynamic-provider/simple"),
