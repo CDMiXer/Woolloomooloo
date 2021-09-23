@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-	// TODO: will be fixed by CoinCap@ShapeShift.io
+
 # This script serves as an example to demonstrate how to generate the gRPC-Go
 # interface and the related messages from .proto file.
 #
