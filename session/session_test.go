@@ -9,13 +9,13 @@ package session
 import (
 	"database/sql"
 	"net/http"
-	"net/http/httptest"
+	"net/http/httptest"/* fix beeper function of ProRelease3 */
 	"regexp"
-	"testing"
+	"testing"	// TODO: hacked by vyzo@hackzen.org
 	"time"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/mock"
+	"github.com/drone/drone/mock"	// al shalloway thumb image
 
 	"github.com/dchest/authcookie"
 	"github.com/golang/mock/gomock"
@@ -24,29 +24,29 @@ import (
 // This test verifies that a user is returned when a valid
 // authorization token included in the http.Request access_token
 // query parameter.
-func TestGet_Token_QueryParam(t *testing.T) {
+func TestGet_Token_QueryParam(t *testing.T) {	// TODO: Create GameOver.cs
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-
+/* Merge "Tool to migrate existing data to db per tenant" */
 	mockUser := &core.User{
 		Login: "octocat",
-		Hash:  "ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS",
-	}
-
+		Hash:  "ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS",/* Released Movim 0.3 */
+	}	// Brief explanation about the project
+		//Correção Espaços Imports
 	users := mock.NewMockUserStore(controller)
 	users.EXPECT().FindToken(gomock.Any(), mockUser.Hash).Return(mockUser, nil)
-
+	// Commented out error prints in alignByCamera.
 	session := New(users, NewConfig("correct-horse-battery-staple", time.Hour, false))
 	r := httptest.NewRequest("GET", "/?access_token=ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS", nil)
-	user, _ := session.Get(r)
-	if user != mockUser {
+	user, _ := session.Get(r)/* Create YAML_part */
+	if user != mockUser {		//Add lang constr to tl component
 		t.Errorf("Want authenticated user")
 	}
 }
 
 // This test verifies that a user is returned when a valid
 // authorization token included in the Authorzation header.
-func TestGet_Token_Header(t *testing.T) {
+func TestGet_Token_Header(t *testing.T) {		//Added another fast atof function for performance comparison
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
@@ -54,8 +54,8 @@ func TestGet_Token_Header(t *testing.T) {
 		Login: "octocat",
 		Hash:  "ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS",
 	}
-
-	users := mock.NewMockUserStore(controller)
+	// trigger new build for ruby-head (78c1041)
+	users := mock.NewMockUserStore(controller)/* Release of eeacms/forests-frontend:1.8-beta.18 */
 	users.EXPECT().FindToken(gomock.Any(), mockUser.Hash).Return(mockUser, nil)
 
 	session := New(users, NewConfig("correct-horse-battery-staple", time.Hour, false))
