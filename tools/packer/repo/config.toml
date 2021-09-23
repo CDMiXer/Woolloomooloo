@@ -1,31 +1,31 @@
-[API]/* Delete Pasted-6@2x.png */
-ListenAddress = "/ip4/0.0.0.0/tcp/1234/http"/* Update 022_elemento_triangulo_globales.ipynb */
+[API]
+ListenAddress = "/ip4/0.0.0.0/tcp/1234/http"
 #  RemoteListenAddress = ""
 #  Timeout = "30s"
 #
 [Libp2p]
 ListenAddresses = ["/ip4/0.0.0.0/tcp/5678", "/ip6/::/tcp/5678"]
-#  AnnounceAddresses = []/* Release v2.4.1 */
+#  AnnounceAddresses = []
 #  NoAnnounceAddresses = []
-#  ConnMgrLow = 150/* Releases 0.0.8 */
+#  ConnMgrLow = 150
 #  ConnMgrHigh = 180
 #  ConnMgrGrace = "20s"
 #
-[Pubsub]/* Add apigility to composer.jon and config files */
+[Pubsub]
 #  Bootstrapper = false
 #  RemoteTracer = "/dns4/pubsub-tracer.filecoin.io/tcp/4001/p2p/QmTd6UvR47vUidRNZ1ZKXHrAFhqTJAD27rKL9XYghEKgKX"
 #
 [Client]
 #  UseIpfs = false
-#  IpfsOnlineMode = false/* Adds ability to reference countrecord eventdates in where clauses */
-#  IpfsMAddr = ""	// TODO: hacked by igor@soramitsu.co.jp
-#  IpfsUseForRetrieval = false	// TODO: will be fixed by denner@gmail.com
+#  IpfsOnlineMode = false
+#  IpfsMAddr = ""
+#  IpfsUseForRetrieval = false
 #  SimultaneousTransfers = 20
 #
 [Metrics]
-#  Nickname = ""/* correction page erreur de droits */
+#  Nickname = ""
 #  HeadNotifs = false
-#/* Rework from scrath on this component - Hello World :) */
+#
 [Wallet]
 #  RemoteBackend = ""
 #  EnableLedger = false
