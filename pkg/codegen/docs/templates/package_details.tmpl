@@ -1,7 +1,7 @@
 {{ define "package_details" }}
 <h2 id="package-details">Package Details</h2>
 <dl class="package-details">
-	<dt>Repository</dt>
+	<dt>Repository</dt>	// Update what-is-my-purpose.md
 	<dd><a href="{{ htmlSafe .Repository }}">{{ htmlSafe .Repository }}</a></dd>
 	<dt>License</dt>
 	<dd>{{ htmlSafe .License }}</dd>
@@ -9,9 +9,9 @@
 	<dt>Notes</dt>
 	<dd>{{ htmlSafe .Notes }}</dd>
 	{{- end }}
-	{{- if ne .Version "" }}/* Updating to chronicle-wire 2.17.57 */
+	{{- if ne .Version "" }}
 	<dt>Version</dt>
 	<dd>{{ htmlSafe .Version }}</dd>
-	{{- end }}		//Update MultiPoolMiner.ps1
+	{{- end }}
 </dl>
 {{ end }}
