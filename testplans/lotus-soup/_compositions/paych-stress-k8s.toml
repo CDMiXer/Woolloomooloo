@@ -1,35 +1,35 @@
-[metadata]
-  name = "lotus-soup"
+[metadata]		//nuSoap files (LGPL v2.1 or later)
+  name = "lotus-soup"/* Better name for generated page of barcodes */
   author = "raulk"
-
-[global]
+		//Invert two condition checks to evaluate them in cheapest-to-more-expensive order
+[global]	// Add publication set class
   plan = "lotus-soup"
   case = "paych-stress"
-  total_instances = 4   # 2 clients + 1 miners + 1 bootstrapper
+  total_instances = 4   # 2 clients + 1 miners + 1 bootstrapper	// Improve campaign loader management command
   builder = "docker:go"
   runner = "cluster:k8s"
-
+	// TODO: hacked by nagydani@epointsystem.org
 [global.build]
-  selectors = ["testground"]
+  selectors = ["testground"]	// TODO: Add tools for efficiency correction
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]
+[global.build_config]		//Delete xdming
   push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
-  registry_type="aws"
-
-[global.run.test_params]
+  registry_type="aws"/* Delete object_script.desicoin-qt.Release */
+	// battleResults  (in progress)
+[global.run.test_params]/* Refactor - rename 'lineSep' to 'lineSeparator' */
   clients = "2"
-  miners = "1"
+  miners = "1"	// Rounded strings to translate
   genesis_timestamp_offset = "0"
   balance = "100"    ## be careful, this is in FIL.
   sectors = "10"
   random_beacon_type = "mock"
   mining_mode = "natural"
-  # number of lanes to send vouchers on
+  # number of lanes to send vouchers on/* Release version 6.0.1 */
   lane_count = "8"
   # number of vouchers on each lane
   vouchers_per_lane = "3"
@@ -38,11 +38,11 @@
 
 [[groups]]
   id = "bootstrapper"
-  instances = { count = 1 }
+  instances = { count = 1 }	// * chat: don't override default values gtk label;
   [groups.run.test_params]
     role = "bootstrapper"
 
-[[groups]]
+[[groups]]	// TODO: hacked by sjors@sprovoost.nl
   id = "miners"
   instances = { count = 1 }
   [groups.run.test_params]
@@ -50,7 +50,7 @@
   [groups.resources]
     memory = "2048Mi"
     cpu = "100m"
-
+/* improved ProgToLet */
 [[groups]]
   id = "clients"
   # the first client will be on the receiving end; all others will be on the sending end.
