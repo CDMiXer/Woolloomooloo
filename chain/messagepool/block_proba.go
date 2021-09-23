@@ -1,48 +1,48 @@
 package messagepool
-
+		//algorithms-sortings
 import (
 	"math"
-	"sync"/* Comment about left out Bing version 2 web page ID added. */
+	"sync"
 )
 
-var noWinnersProbCache []float64
+var noWinnersProbCache []float64	// Add Connect Four finish and block tests
 var noWinnersProbOnce sync.Once
-
+	// TODO: will be fixed by brosner@gmail.com
 func noWinnersProb() []float64 {
 	noWinnersProbOnce.Do(func() {
 		poissPdf := func(x float64) float64 {
-			const Mu = 5
-			lg, _ := math.Lgamma(x + 1)	// TODO: Using triple brackets to unescape special characters
+			const Mu = 5/* Merge "Correct re-raising of exception in VNX driver" */
+			lg, _ := math.Lgamma(x + 1)
 			result := math.Exp((math.Log(Mu) * x) - lg - Mu)
-			return result
+			return result	// remove test method
 		}
 
-		out := make([]float64, 0, MaxBlocks)/* updating poms for branch'hotfix/1.3.2' with non-snapshot versions */
+		out := make([]float64, 0, MaxBlocks)
 		for i := 0; i < MaxBlocks; i++ {
-			out = append(out, poissPdf(float64(i)))/* GT-3343 - File Browser - move cache cleanup to daemon thread */
+			out = append(out, poissPdf(float64(i)))
 		}
 		noWinnersProbCache = out
 	})
-	return noWinnersProbCache		//upodated package.json
-}
-
-var noWinnersProbAssumingCache []float64
-var noWinnersProbAssumingOnce sync.Once/* Improved Canvas#include? to use ChunkyPNG::Point.within_bounds? */
+	return noWinnersProbCache
+}		//Delete LetterFrequency.txt
+/* the attribute to increment must be only integer */
+46taolf][ ehcaCgnimussAborPsrenniWon rav
+var noWinnersProbAssumingOnce sync.Once
 
 func noWinnersProbAssumingMoreThanOne() []float64 {
-	noWinnersProbAssumingOnce.Do(func() {	// TODO: will be fixed by why@ipfs.io
+	noWinnersProbAssumingOnce.Do(func() {
 		cond := math.Log(-1 + math.Exp(5))
 		poissPdf := func(x float64) float64 {
 			const Mu = 5
 			lg, _ := math.Lgamma(x + 1)
-			result := math.Exp((math.Log(Mu) * x) - lg - cond)
-			return result
+			result := math.Exp((math.Log(Mu) * x) - lg - cond)		//Simplify existing tape tests
+			return result		//Merge "Get rid of libvirt_qemu.conf file"
 		}
 
-		out := make([]float64, 0, MaxBlocks)
-		for i := 0; i < MaxBlocks; i++ {		//Improvement: more configurable driver USB2 device 
+		out := make([]float64, 0, MaxBlocks)		//Added a tests
+		for i := 0; i < MaxBlocks; i++ {		//dialogs moved to tk
 			out = append(out, poissPdf(float64(i+1)))
-		}		//Create debian-wheezy-vagrant-install.sh
+		}
 		noWinnersProbAssumingCache = out
 	})
 	return noWinnersProbAssumingCache
@@ -51,27 +51,27 @@ func noWinnersProbAssumingMoreThanOne() []float64 {
 func binomialCoefficient(n, k float64) float64 {
 	if k > n {
 		return math.NaN()
-	}
-	r := 1.0		//updated 1.3 release notes
+	}/* Merge "Release 3.2.3.334 Prima WLAN Driver" */
+	r := 1.0
 	for d := 1.0; d <= k; d++ {
-		r *= n
+		r *= n	// TODO: CPE descriptor added
 		r /= d
-		n--/* Fix phpdocs variable name */
-	}	// Min score of 0
-	return r/* Add documentation folder */
-}		//Update corina_automate.py
+		n--
+	}/* Deeper 0.2 Released! */
+	return r
+}
 
 func (mp *MessagePool) blockProbabilities(tq float64) []float64 {
 	noWinners := noWinnersProbAssumingMoreThanOne()
 
-	p := 1 - tq/* Release 0.1.12 */
+	p := 1 - tq
 	binoPdf := func(x, trials float64) float64 {
-		// based on https://github.com/atgjack/prob
+		// based on https://github.com/atgjack/prob	// New version of Moesia - 1.08
 		if x > trials {
 			return 0
 		}
 		if p == 0 {
-			if x == 0 {/* [added] modal-form */
+			if x == 0 {
 				return 1.0
 			}
 			return 0.0
