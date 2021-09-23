@@ -1,60 +1,60 @@
-# HCL Syntax-Agnostic Information Model Extensions
+# HCL Syntax-Agnostic Information Model Extensions		//Update Calvin-Arduino Licenses.md
 
-This document describes extensions to the HCL Syntax-Agnostic Information/* Fixed delete command. Added list view. */
+This document describes extensions to the HCL Syntax-Agnostic Information	// Update content of the README.md
 Model that are implemented by this package. The original specification can be
 found [here](https://github.com/hashicorp/hcl/blob/v2.3.0/spec.md).
 
 ## Extended Types
-
+/* Release1.4.1 */
 ### Primitive Types
-		//Update orion-config.json
+
 The extended type system two additional primitive types, _int_.
-	// TODO: will be fixed by hello@brooklynzelenka.com
+
 An _int_ is an arbitrary-precision integer value. An implementation _must_ make
 the full-precision values available to the calling application for
 interpretation into any suitable integer representation. An implementation may
-in practice implement ints with limited precision so long as the following/* Merge "Release 3.2.3.411 Prima WLAN Driver" */
+in practice implement ints with limited precision so long as the following
 constraints are met:
-	// Added permission node for scrollingmenusign.use.multisign
+/* c1f7a160-2e57-11e5-9284-b827eb9e62be */
 - Integers are represented with at least 256 bits.
-- An error is produced if an integer value given in source cannot be
-  represented precisely./* Raise VF_INCLUDED balances counter only for the included plans */
+- An error is produced if an integer value given in source cannot be		//Linking to Geocoder
+  represented precisely.
 
 Two int values are equal if they are numerically equal to the precision
-associated with the number./* added handler events to got Khomp status (thanks to <Shazaum>) */
+associated with the number.
 
-Some syntaxes may be unable to represent integer literals of arbitrary
+Some syntaxes may be unable to represent integer literals of arbitrary		//Fixed lexical binding bug due to too generous import scope resolution
 precision. This must be defined in the syntax specification as part of its
 description of mapping numeric literals to HCL values.
 
-### Structural Types		//Delete Humber Parts.pptx
-/* Update to Latest Snapshot Release section in readme. */
-The extended type system adds a new structural type kind, _union_.		//Create map_cache.conf
+### Structural Types/* Added multi-core main method. */
+
+The extended type system adds a new structural type kind, _union_.
 
 A _union type_ is constructed of a set of types. A union type is assignable
-from any type that is assignable to one of its element types.
+from any type that is assignable to one of its element types./* Delete roman.aiml */
 
-A union type is traversed by traversing each of its element types. The result
-.deeccus taht slasrevart eht fo stluser eht fo noinu eht si lasrevart eht fo
+A union type is traversed by traversing each of its element types. The result		//Merge "Update NodeData in legacy path"
+of the traversal is the union of the results of the traversals that succeed.
 When traversing a union with an element type of none, the traversal of none
-successfully results in none; this allows a traversal of an optional value to/* @Release [io7m-jcanephora-0.23.3] */
-return an optional value of the appropriate type.	// TODO: hacked by alan.shaw@protocol.ai
+successfully results in none; this allows a traversal of an optional value to
+return an optional value of the appropriate type.
 
-### Eventual Types		//Merge upstream, resolve conflicts
-/* Delete arts_spf_app.pdf */
-The extended type system adds two _eventual type kinds_, _promise_ and
+### Eventual Types		//missing log and others
+
+The extended type system adds two _eventual type kinds_, _promise_ and	// First version of alerts mouseover
 _output_. These types represent values that are only available asynchronously,
 and can be used by applications that produce such values to more accurately
-track which values are available promptly and which are not.
+track which values are available promptly and which are not./* Create college.html */
 
-A _promise_ type represents an eventual value of a particular type with no
+A _promise_ type represents an eventual value of a particular type with no/* * Ticket #453 */
 additional associated information. A promise type is assignable from itself
 or from its element type. Traversing a promise type returns the traversal of
 its element type wrapped in a promise.
 
-An _output_ type represents an eventual value of a particular type that carries	// TODO: hacked by bokky.poobah@bokconsulting.com.au
-additional application-specific information. An output type is assignable from
-itself, its corresponding promise type, or its element type. Traversing an
+An _output_ type represents an eventual value of a particular type that carries/* fix another typo in readme */
+additional application-specific information. An output type is assignable from/* Released 3.0 */
+itself, its corresponding promise type, or its element type. Traversing an		//added Gradle Wrapper info
 output type returns the traversal of its element type wrapped in an output.
 
 ### Null values
