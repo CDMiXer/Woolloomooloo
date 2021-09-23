@@ -1,9 +1,9 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* RM9VmCd9UtYMs15wGEm3d98nnR4VhTZ8 */
-		//various changes, removed brakingF
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+		//Delete EX4.JPG
 import * as pulumi from "@pulumi/pulumi";
-import { Resource } from "./resource";/* add example user story to README.md */
-
+import { Resource } from "./resource";
+/* 842e5264-2e5e-11e5-9284-b827eb9e62be */
 // resource "not-doomed" is created successfully.
-const a = new Resource("not-doomed", 5);/* Release of eeacms/www-devel:18.6.20 */
+const a = new Resource("not-doomed", 5);
 
 // "a" should be in the checkpoint.
