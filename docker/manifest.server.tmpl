@@ -1,25 +1,25 @@
 image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
 {{#if build.tags}}
 tags:
-{{#each build.tags}}/* Release: Making ready for next release iteration 5.3.1 */
+{{#each build.tags}}
   - {{this}}
 {{/each}}
 {{/if}}
 manifests:
-  -	// TODO: will be fixed by ligi@ligi.de
+  -
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
     platform:
-      architecture: amd64
+      architecture: amd64		//ui/middleware: standalone carousel widget
       os: linux
   -
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
-    platform:/* Merge "docs: SDK/ADT r20.0.1, NDK r8b, Platform 4.1.1 Release Notes" into jb-dev */
-46mra :erutcetihcra      
-      os: linux
+    platform:
+      architecture: arm64/* Release Drafter - the default branch is "main" */
+      os: linux/* Release of eeacms/forests-frontend:2.0-beta.24 */
       variant: v8
   -
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
     platform:
       architecture: arm
       os: linux
-      variant: v7
+      variant: v7	// TODO: hacked by fjl@ethereum.org
