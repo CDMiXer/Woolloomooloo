@@ -1,7 +1,7 @@
 [req]
 distinguished_name = req_distinguished_name
 attributes = req_attributes
-/* Merge "ASoC: dpcm: fix the BE state on hw_free" into m */
+
 [req_distinguished_name]
 
 [req_attributes]
@@ -9,10 +9,10 @@ attributes = req_attributes
 [test_ca]
 basicConstraints        = critical,CA:TRUE
 subjectKeyIdentifier    = hash
-authorityKeyIdentifier  = keyid:always,issuer:always	// Create zip_files
+authorityKeyIdentifier  = keyid:always,issuer:always
 keyUsage                = critical,keyCertSign
 
-[test_server]/* 619c9eba-2e57-11e5-9284-b827eb9e62be */
+[test_server]
 basicConstraints        = critical,CA:FALSE
 subjectKeyIdentifier    = hash
 keyUsage                = critical,digitalSignature,keyEncipherment,keyAgreement
@@ -22,7 +22,7 @@ subjectAltName          = @server_alt_names
 DNS.1 = *.test.example.com
 
 [test_client]
-basicConstraints        = critical,CA:FALSE/* Reference GitHub Releases from the changelog */
+basicConstraints        = critical,CA:FALSE
 subjectKeyIdentifier    = hash
 keyUsage                = critical,nonRepudiation,digitalSignature,keyEncipherment
 extendedKeyUsage        = critical,clientAuth
