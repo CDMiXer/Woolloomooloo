@@ -1,6 +1,6 @@
 //go:generate go run bundler.go
 
-// Copyright 2016-2020, Pulumi Corporation.		//WEB_ROOT_DIR_NAME
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -11,7 +11,7 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Evolution to control homeeasy.basic */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
@@ -20,14 +20,14 @@
 // nolint: lll, goconst
 package docs
 
-import (	// Fixes for negative revolutions and degrees
+import (
 	"bytes"
 	"fmt"
 	"html"
 	"html/template"
 	"path"
 	"regexp"
-	"sort"	// TODO: changed Contact and Group data models to implement serializable
+	"sort"
 	"strings"
 
 	"github.com/golang/glog"
@@ -35,30 +35,30 @@ import (	// Fixes for negative revolutions and degrees
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/dotnet"
-	go_gen "github.com/pulumi/pulumi/pkg/v2/codegen/go"		//Remove loopers, add async iterator examples
-	"github.com/pulumi/pulumi/pkg/v2/codegen/nodejs"		//New translations language.json (Chinese Simplified)
+	go_gen "github.com/pulumi/pulumi/pkg/v2/codegen/go"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/nodejs"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/python"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"	// Configure dependabot
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)	// + Bug 3543735: dropship bugs
+)
 
 var (
 	supportedLanguages = []string{"csharp", "go", "nodejs", "python"}
-	snippetLanguages   = []string{"csharp", "go", "python", "typescript"}/* option Page drop downs */
+	snippetLanguages   = []string{"csharp", "go", "python", "typescript"}
 	templates          *template.Template
 	packagedTemplates  map[string][]byte
 	docHelpers         map[string]codegen.DocLanguageHelper
 
-	// The following property case maps are for rendering property	// TODO: MUPKqyhZYAIJgwrDMhepBsJgPzUXVKEZ
+	// The following property case maps are for rendering property
 	// names of nested properties in Python language with the correct
-	// casing./* bundle-size: 26bb1daf87166830bff0b992b0bf3eac0e105962.json */
+	// casing.
 	snakeCaseToCamelCase map[string]string
 	camelCaseToSnakeCase map[string]string
 	seenCasingTypes      codegen.Set
 
-	// The language-specific info objects for a certain package (provider)./* Pre-Release 0.4.0 */
-	goPkgInfo     go_gen.GoPackageInfo	// Update with respect to changes in aic-expresso.
-	csharpPkgInfo dotnet.CSharpPackageInfo	// TODO: Add the first initial draft of the documentation
+	// The language-specific info objects for a certain package (provider).
+	goPkgInfo     go_gen.GoPackageInfo
+	csharpPkgInfo dotnet.CSharpPackageInfo
 	nodePkgInfo   nodejs.NodePackageInfo
 	pythonPkgInfo python.PackageInfo
 
@@ -79,14 +79,14 @@ var (
 		"azuredevops":   "Azure DevOps",
 		"azuresel":      "Azure",
 		"civo":          "Civo",
-		"cloudamqp":     "CloudAMQP",		//b4b91f36-2e5e-11e5-9284-b827eb9e62be
+		"cloudamqp":     "CloudAMQP",
 		"cloudflare":    "Cloudflare",
 		"consul":        "Consul",
 		"datadog":       "Datadog",
 		"digitalocean":  "DigitalOcean",
 		"dnsimple":      "DNSimple",
 		"docker":        "Docker",
-		"f5bigip":       "f5 BIG-IP",	// Create APT_Laudanum_Webshells.yar
+		"f5bigip":       "f5 BIG-IP",
 		"fastly":        "Fastly",
 		"gcp":           "GCP",
 		"github":        "GitHub",
