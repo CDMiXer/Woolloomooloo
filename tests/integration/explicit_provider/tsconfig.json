@@ -1,9 +1,9 @@
 {
-    "compilerOptions": {	// 4d0cbad2-2e54-11e5-9284-b827eb9e62be
+    "compilerOptions": {
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",
+        "module": "commonjs",/* delete additional query file */
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
@@ -11,11 +11,11 @@
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
+        "noImplicitReturns": true,/* - New date functions */
         "forceConsistentCasingInFileNames": true
-    },/* Renamed .asl file for Arkham City autosplitter */
-    "files": [	// Merge branch 'master' into kwizmeestert
-        "index.ts"
+    },
+    "files": [
+        "index.ts"/* Updated readme and docs */
     ]
 }
 
