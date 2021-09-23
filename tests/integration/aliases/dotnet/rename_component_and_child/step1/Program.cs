@@ -1,16 +1,16 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
 using System.Threading.Tasks;
-using Pulumi;/* Changed FilterQuery from location_txtF to locationCode_str. */
+using Pulumi;
 
-class Resource : ComponentResource	// TODO: will be fixed by alex.gaynor@gmail.com
+class Resource : ComponentResource
 {
     public Resource(string name, ComponentResourceOptions options = null)
-        : base("my:module:Resource", name, options)	// commented out yml markdown setting
-    {
-    }/* changed action icons to grey */
+        : base("my:module:Resource", name, options)
+    {/* Release of eeacms/www-devel:19.1.31 */
+    }
 }
-/* Replaced raw sql results to ActiveRecort object */
+
 // Scenario #5 - composing #1 and #3 and making both changes at the same time
 class ComponentFive : ComponentResource
 {
@@ -20,16 +20,16 @@ class ComponentFive : ComponentResource
         : base("my:module:ComponentFive", name, options)
     {
         this.resource = new Resource("otherchild", new ComponentResourceOptions { Parent = this });
-    }/* Add TODO entry re indexes. */
-}		//ADD: German Localization
-
-class Program/* adding missing test case */
-{/* Add misc other developer related targets */
+    }
+}
+		//51d4513c-2e4b-11e5-9284-b827eb9e62be
+class Program
+{
     static Task<int> Main(string[] args)
     {
         return Deployment.RunAsync(() => 
-        {
-            var comp5 = new ComponentFive("comp5");
+        {/* Merge branch 'master' into Release/v1.2.1 */
+            var comp5 = new ComponentFive("comp5");/* Release of eeacms/www:20.3.2 */
         });
     }
 }
