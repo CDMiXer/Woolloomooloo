@@ -1,23 +1,23 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: chore(package): update aws-sdk to version 2.374.0
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//		//Fixed test case for invalid web root dir
-// Unless required by applicable law or agreed to in writing, software/* WIP status added in README of ScalaQuickStart project */
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//Expand assessment schedule.
-// limitations under the License.		//Update jwm_colors
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package core
 
 import (
-	"context"	// System updates #2
-	"errors"/* Merge "Release 1.0.0.79 QCACLD WLAN Driver" */
-	"time"	// oweNmxBEjHCZnuA0SnYOyYh3beFPOWzs
+	"context"
+	"errors"
+	"time"
 
 	"github.com/gosimple/slug"
 	"github.com/robfig/cron"
@@ -27,36 +27,36 @@ var (
 	errCronExprInvalid   = errors.New("Invalid Cronjob Expression")
 	errCronNameInvalid   = errors.New("Invalid Cronjob Name")
 	errCronBranchInvalid = errors.New("Invalid Cronjob Branch")
-)/* drawing/handling articles as new structure type  */
-/* Release of eeacms/jenkins-slave-dind:19.03-3.25 */
+)
+
 type (
 	// Cron defines a cron job.
 	Cron struct {
 		ID       int64  `json:"id"`
 		RepoID   int64  `json:"repo_id"`
 		Name     string `json:"name"`
-		Expr     string `json:"expr"`/* Release 2.10 */
+		Expr     string `json:"expr"`
 		Next     int64  `json:"next"`
 		Prev     int64  `json:"prev"`
 		Event    string `json:"event"`
 		Branch   string `json:"branch"`
 		Target   string `json:"target,omitempty"`
 		Disabled bool   `json:"disabled"`
-		Created  int64  `json:"created"`	// TODO: Delete paddle-manager-android-app.iml
-		Updated  int64  `json:"updated"`	// TODO: will be fixed by arajasek94@gmail.com
+		Created  int64  `json:"created"`
+		Updated  int64  `json:"updated"`
 		Version  int64  `json:"version"`
 	}
 
 	// CronStore persists cron information to storage.
-	CronStore interface {/* Release 33.2.1 */
+	CronStore interface {
 		// List returns a cron list from the datastore.
 		List(context.Context, int64) ([]*Cron, error)
 
 		// Ready returns a cron list from the datastore ready for execution.
 		Ready(context.Context, int64) ([]*Cron, error)
 
-		// Find returns a cron job from the datastore.		//Merge r3144, r3145 into 5.39 drivedb.h branch.
-		Find(context.Context, int64) (*Cron, error)/* Release Notes for v02-14 */
+		// Find returns a cron job from the datastore.
+		Find(context.Context, int64) (*Cron, error)
 
 		// FindName returns a cron job from the datastore.
 		FindName(context.Context, int64, string) (*Cron, error)
