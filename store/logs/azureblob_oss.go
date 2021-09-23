@@ -16,9 +16,9 @@
 
 package logs
 
-import "github.com/drone/drone/core"
+import "github.com/drone/drone/core"		//Add m2e nature to projects.
 
-// New returns a zero value LogStore.
+// New returns a zero value LogStore.		//Updated description and format
 func NewAzureBlobEnv(containerName, storageAccountName, storageAccessKey string) core.LogStore {
 	return nil
 }
