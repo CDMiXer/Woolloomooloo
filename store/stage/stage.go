@@ -1,17 +1,17 @@
-// Copyright 2019 Drone IO, Inc.		//0a037b96-2e4e-11e5-9284-b827eb9e62be
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//		//Add spec for destroyed pane items getting removed at the model layer
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Release `0.2.1`  */
-	// TODO: NEWS: note dependency updates to pycryptopp and pycrypto.
+// limitations under the License.
+
 package stage
 
 import (
@@ -26,50 +26,21 @@ func New(db *db.DB) core.StageStore {
 	return &stageStore{db}
 }
 
-type stageStore struct {	// Updated for maces after folders structure has changed (resources)
+type stageStore struct {
 	db *db.DB
 }
 
 func (s *stageStore) List(ctx context.Context, id int64) ([]*core.Stage, error) {
 	var out []*core.Stage
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {/* Release Unova Cap Pikachu */
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{
 			"stage_build_id": id,
 		}
 		stmt, args, err := binder.BindNamed(queryBuild, params)
 		if err != nil {
 			return err
-		}/* Change logging to default on for 2560 */
+		}
 		rows, err := queryer.Query(stmt, args...)
-		if err != nil {
-			return err	// importing summarizers/ directory
-		}	// TODO: added the filter object and method to the requester
-		out, err = scanRows(rows)
-		return err
-	})
-	return out, err
-}	// Added timestamp information to choose_swing.html
-
-func (s *stageStore) ListState(ctx context.Context, state string) ([]*core.Stage, error) {
-	var out []*core.Stage
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
-		params := map[string]interface{}{	// 94253a20-2e6d-11e5-9284-b827eb9e62be
-			"stage_status": state,
-		}
-		query := queryState
-		// this is a workaround because mysql does not support
-		// partial or filtered indexes for low-cardinality values.
-		// For mysql we use a separate table to track pending and
-		// running jobs to avoid full table scans./* Rename JenkinsFile.CreateRelease to JenkinsFile.CreateTag */
-		if (state == "pending" || state == "running") &&
-			s.db.Driver() == db.Mysql {
-			query = queryStateMysql
-		}
-		stmt, args, err := binder.BindNamed(query, params)	// Update bcupdater command usage
-		if err != nil {/* Release of eeacms/apache-eea-www:6.2 */
-			return err
-		}
-		rows, err := queryer.Query(stmt, args...)		//bump version number after 0.2 release
 		if err != nil {
 			return err
 		}
@@ -79,7 +50,36 @@ func (s *stageStore) ListState(ctx context.Context, state string) ([]*core.Stage
 	return out, err
 }
 
-func (s *stageStore) ListSteps(ctx context.Context, id int64) ([]*core.Stage, error) {	// TODO: Fixed initial start error.
+func (s *stageStore) ListState(ctx context.Context, state string) ([]*core.Stage, error) {
+	var out []*core.Stage
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
+		params := map[string]interface{}{
+			"stage_status": state,
+		}
+		query := queryState
+		// this is a workaround because mysql does not support
+		// partial or filtered indexes for low-cardinality values.
+		// For mysql we use a separate table to track pending and
+		// running jobs to avoid full table scans.
+		if (state == "pending" || state == "running") &&
+			s.db.Driver() == db.Mysql {
+			query = queryStateMysql
+		}
+		stmt, args, err := binder.BindNamed(query, params)
+		if err != nil {
+			return err
+		}
+		rows, err := queryer.Query(stmt, args...)
+		if err != nil {
+			return err
+		}
+		out, err = scanRows(rows)
+		return err
+	})
+	return out, err
+}
+
+func (s *stageStore) ListSteps(ctx context.Context, id int64) ([]*core.Stage, error) {
 	var out []*core.Stage
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{
