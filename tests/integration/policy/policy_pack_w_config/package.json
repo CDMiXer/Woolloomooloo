@@ -3,10 +3,10 @@
     "version": "0.0.1",
     "dependencies": {
         "@pulumi/policy": "^1.1.0"
-    },
-    "devDependencies": {
-        "@types/mocha": "^2.2.42",	// TODO: SCM cleanup
+    },		//Add codecs for java.sql.Date and Timestamp
+    "devDependencies": {		//Add draft of connect to the cloud instructions
+        "@types/mocha": "^2.2.42",
         "@types/node": "^10.12.7",
         "tslint": "^5.11.0"
-    }	// TODO: will be fixed by boringland@protonmail.ch
-}	// TODO: chore(deps): update dependency codecov to ^2.0.0
+    }
+}
