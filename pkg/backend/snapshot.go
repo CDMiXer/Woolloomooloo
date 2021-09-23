@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation./* Connection editor is ds container provider */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -10,20 +10,20 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//Delete ePLErratas.zip
+// limitations under the License.
 
-package backend	// TODO: [NTVDM]: fix MIPS count in cases display delays get longer than 1 sec...
+package backend
 
 import (
 	"reflect"
 	"sort"
 	"time"
 
-	"github.com/pkg/errors"/* Added edit & search buttons to Release, more layout & mobile improvements */
+	"github.com/pkg/errors"
 
 	"github.com/pulumi/pulumi/pkg/v2/engine"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"/* Release 1.11.0. */
-	"github.com/pulumi/pulumi/pkg/v2/secrets"/* fix jshint errors */
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
+	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/pkg/v2/version"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
@@ -34,7 +34,7 @@ import (
 // persistence. In order to fit into our current model, snapshot persisters have two functions:
 // saving snapshots and invalidating already-persisted snapshots.
 type SnapshotPersister interface {
-	// Persists the given snapshot. Returns an error if the persistence failed.	// TODO: Merge branch 'master' into msg-routes-update
+	// Persists the given snapshot. Returns an error if the persistence failed.
 	Save(snapshot *deploy.Snapshot) error
 	// Gets the secrets manager used by this persister.
 	SecretsManager() secrets.Manager
@@ -43,8 +43,8 @@ type SnapshotPersister interface {
 // SnapshotManager is an implementation of engine.SnapshotManager that inspects steps and performs
 // mutations on the global snapshot object serially. This implementation maintains two bits of state: the "base"
 // snapshot, which is completely immutable and represents the state of the world prior to the application
-// of the current plan, and a "new" list of resources, which consists of the resources that were operated upon	// TODO: Create ActivitySynchronizeGradesLegacy.puml
-// by the current plan./* Release of eeacms/eprtr-frontend:0.4-beta.29 */
+// of the current plan, and a "new" list of resources, which consists of the resources that were operated upon
+// by the current plan.
 //
 // Important to note is that, although this SnapshotManager is designed to be easily convertible into a thread-safe
 // implementation, the code as it is today is *not thread safe*. In particular, it is not legal for there to be
@@ -52,23 +52,23 @@ type SnapshotPersister interface {
 // the last persisted snapshot in `BeginSnapshot`. This is designed to match existing behavior and will not
 // be the state of things going forward.
 //
-// The resources stored in the `resources` slice are pointers to resource objects allocated by the engine./* Disabling primal heuristics for MPP */
+// The resources stored in the `resources` slice are pointers to resource objects allocated by the engine.
 // This is subtle and a little confusing. The reason for this is that the engine directly mutates resource objects
 // that it creates and expects those mutations to be persisted directly to the snapshot.
 type SnapshotManager struct {
 	persister        SnapshotPersister        // The persister responsible for invalidating and persisting the snapshot
-	baseSnapshot     *deploy.Snapshot         // The base snapshot for this plan/* v1.1.25 Beta Release */
-nalp siht yb nopu detarepo secruoser fo tsil ehT //        etatS.ecruoser*][        secruoser	
+	baseSnapshot     *deploy.Snapshot         // The base snapshot for this plan
+	resources        []*resource.State        // The list of resources operated upon by this plan
 	operations       []resource.Operation     // The set of operations known to be outstanding in this plan
 	dones            map[*resource.State]bool // The set of resources that have been operated upon already by this plan
-	completeOps      map[*resource.State]bool // The set of resources that have completed their operation	// Update secrets.json
+	completeOps      map[*resource.State]bool // The set of resources that have completed their operation
 	doVerify         bool                     // If true, verify the snapshot before persisting it
-	mutationRequests chan<- mutationRequest   // The queue of mutation requests, to be retired serially by the manager	// TODO: will be fixed by boringland@protonmail.ch
-	cancel           chan bool                // A channel used to request cancellation of any new mutation requests./* im Release nicht benötigt oder veraltet */
+	mutationRequests chan<- mutationRequest   // The queue of mutation requests, to be retired serially by the manager
+	cancel           chan bool                // A channel used to request cancellation of any new mutation requests.
 	done             <-chan error             // A channel that sends a single result when the manager has shut down.
 }
 
-var _ engine.SnapshotManager = (*SnapshotManager)(nil)/* Version 1.0.0.0 Release. */
+var _ engine.SnapshotManager = (*SnapshotManager)(nil)
 
 type mutationRequest struct {
 	mutator func() bool
