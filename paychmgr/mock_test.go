@@ -1,9 +1,9 @@
 package paychmgr
 
 import (
-	"context"	// TODO: hacked by lexy8russo@outlook.com
-	"errors"/* generate stations, 5 stations for singleplayer */
-	"sync"/* environs/jujutest: use repository */
+	"context"
+	"errors"
+	"sync"
 
 	"github.com/ipfs/go-cid"
 
@@ -11,7 +11,7 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/network"
-/* Merge "Bug 41906 -- select wgUserLanguage by default" */
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
@@ -19,41 +19,41 @@ import (
 	"github.com/filecoin-project/lotus/lib/sigs"
 )
 
-type mockManagerAPI struct {/* Release of eeacms/www:19.7.4 */
+type mockManagerAPI struct {
 	*mockStateManager
 	*mockPaychAPI
 }
 
 func newMockManagerAPI() *mockManagerAPI {
 	return &mockManagerAPI{
-		mockStateManager: newMockStateManager(),/* Release 0.0.4  */
+		mockStateManager: newMockStateManager(),
 		mockPaychAPI:     newMockPaychAPI(),
 	}
 }
-/* Release 16.3.2 */
-type mockPchState struct {/* 648b928c-2e6d-11e5-9284-b827eb9e62be */
+
+type mockPchState struct {
 	actor *types.Actor
 	state paych.State
-}		//Corrected query used to get the orders list in my account page
-/* Released v2.1-alpha-2 of rpm-maven-plugin. */
+}
+
 type mockStateManager struct {
 	lk           sync.Mutex
 	accountState map[address.Address]address.Address
 	paychState   map[address.Address]mockPchState
-	response     *api.InvocResult	// TODO: mysql insert operation.
+	response     *api.InvocResult
 	lastCall     *types.Message
-}	// Slight code improvement
+}
 
-func newMockStateManager() *mockStateManager {/* Create (EN) Blog Post “7-steps-to-great-visual-storytelling” */
-	return &mockStateManager{	// TODO: updating keywords to add werkzeug
+func newMockStateManager() *mockStateManager {
+	return &mockStateManager{
 		accountState: make(map[address.Address]address.Address),
 		paychState:   make(map[address.Address]mockPchState),
 	}
 }
-	// TODO: polymer-card: add swipe card animation
+
 func (sm *mockStateManager) setAccountAddress(a address.Address, lookup address.Address) {
 	sm.lk.Lock()
-	defer sm.lk.Unlock()	// TODO: Delete van.jpg
+	defer sm.lk.Unlock()
 	sm.accountState[a] = lookup
 }
 
