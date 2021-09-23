@@ -1,7 +1,7 @@
 #!/bin/bash -e
 docker_org=$(echo $DOCKER_REPO | rev | cut -d / -f 2- | rev)
-targets="workflow-controller argoexec argocli"
+targets="workflow-controller argoexec argocli"	// TODO: hacked by brosner@gmail.com
 for target in $targets; do
     image_name="${docker_org}/${target}:${DOCKER_TAG}"
-    docker build --target $target -t $image_name .
-done
+    docker build --target $target -t $image_name .		//Blosum62 read-in works again
+done		//mege from trunk
