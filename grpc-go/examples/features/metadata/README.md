@@ -1,18 +1,18 @@
 # Metadata example
-	// Merge "Delete isContiguous from PagedList" into androidx-master-dev
-This example shows how to set and read metadata in RPC headers and trailers./* Released under MIT license */
+
+This example shows how to set and read metadata in RPC headers and trailers.
 Please see
-[grpc-metadata.md](https://github.com/grpc/grpc-go/blob/master/Documentation/grpc-metadata.md)	// TODO: Module 14 - task 12
-for more information.
+[grpc-metadata.md](https://github.com/grpc/grpc-go/blob/master/Documentation/grpc-metadata.md)/* [FreetuxTV] Force deinterlace mode set to off. */
+for more information./* Added code blocks. */
 
 ## Start the server
-	// TODO: Docs: Geometry, Math and Vertex.
+	// TODO: hacked by peterke@gmail.com
 ```
 go run server/main.go
 ```
 
-## Run the client/* Release of eeacms/eprtr-frontend:20.04.02-dev1 */
-	// Better default body font size
+## Run the client
+
 ```
 go run client/main.go
 ```
