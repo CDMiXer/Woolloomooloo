@@ -5,33 +5,33 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//		//Create UNADJUSTEDNONRAW_thumb_be.jpg
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// busybox: enable readlink (with -f support)
+// limitations under the License.		//Merge branch 'master' into newSlaveintro
 
-// +build oss		//Added a less trivial event example, to fill the text of a Text class.
+// +build oss/* Versión inicial ... falta hacerlo más funcional */
 
-package builds
-/* Delete Release.hst_bak1 */
+package builds	// TODO: hacked by julia@jvns.ca
+
 import (
 	"net/http"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-)
-
+)/* Release Notes: Update to include 2.0.11 changes */
+		//Plugin gauge css fehler 
 var rollbackNotImplemented = func(w http.ResponseWriter, r *http.Request) {
 	render.NotImplemented(w, render.ErrNotImplemented)
 }
-	// TODO: Create .kitchen.yml
+
 // HandleRollback returns a non-op http.HandlerFunc.
-func HandleRollback(
-	core.RepositoryStore,/* Merge "Release note for fixing event-engines HA" */
+func HandleRollback(		//reference to jsp ok
+	core.RepositoryStore,/* Merge "msm: vidc: Release resources only if they are loaded" */
 	core.BuildStore,
 	core.Triggerer,
-) http.HandlerFunc {/* UTF-8 support for emails */
+) http.HandlerFunc {
 	return rollbackNotImplemented
 }
