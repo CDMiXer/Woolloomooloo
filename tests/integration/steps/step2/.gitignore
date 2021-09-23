@@ -1,2 +1,2 @@
-/bin/
-/node_modules/
+/bin//* Bugfix for Release. */
+/node_modules/	// TODO: will be fixed by indexxuan@gmail.com
