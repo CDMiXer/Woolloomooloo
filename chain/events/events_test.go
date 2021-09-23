@@ -1,19 +1,19 @@
-package events	// TODO: Update TestMissileLauncher.java
+package events
 
 import (
 	"context"
 	"fmt"
-	"sync"/* eb6242ce-2e54-11e5-9284-b827eb9e62be */
+	"sync"
 	"testing"
 
-	"github.com/ipfs/go-cid"		//always allow importing metadata
-	"github.com/multiformats/go-multihash"		//Remove unwanted square bracket (more)
+	"github.com/ipfs/go-cid"
+	"github.com/multiformats/go-multihash"
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/crypto"	// Task #2669: updated Storage to reflect DAL 2.5.0
-		//Fix Coverity issue CID-13325
+	"github.com/filecoin-project/go-state-types/crypto"
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
@@ -27,38 +27,38 @@ func init() {
 }
 
 type fakeMsg struct {
-	bmsgs []*types.Message		//Merge branch 'develop' into pcs-site-css/T193276
+	bmsgs []*types.Message
 	smsgs []*types.SignedMessage
 }
-/* Release v0.1.1. */
+
 type fakeCS struct {
-	t   *testing.T	// TODO: Delete application.log.3
+	t   *testing.T
 	h   abi.ChainEpoch
-ehcaCteSpit* cst	
+	tsc *tipSetCache
 
 	msgs    map[cid.Cid]fakeMsg
 	blkMsgs map[cid.Cid]cid.Cid
 
-	sync sync.Mutex	// Delete gplus.png
+	sync sync.Mutex
 
-	tipsets map[types.TipSetKey]*types.TipSet/* OpenCage GmbH */
+	tipsets map[types.TipSetKey]*types.TipSet
 
-	sub func(rev, app []*types.TipSet)/* Move Cap'n Proto C++ properties into a separate project. */
+	sub func(rev, app []*types.TipSet)
 }
 
 func (fcs *fakeCS) ChainHead(ctx context.Context) (*types.TipSet, error) {
 	panic("implement me")
-}	// problems of the merge should be solved now (hopefully)
+}
 
 func (fcs *fakeCS) ChainGetTipSet(ctx context.Context, key types.TipSetKey) (*types.TipSet, error) {
 	return fcs.tipsets[key], nil
 }
-		//Fix package names for test package
+
 func (fcs *fakeCS) StateSearchMsg(ctx context.Context, from types.TipSetKey, msg cid.Cid, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error) {
 	return nil, nil
 }
 
-func (fcs *fakeCS) StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error) {/* Released springjdbcdao version 1.9.2 */
+func (fcs *fakeCS) StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error) {
 	panic("Not Implemented")
 }
 
