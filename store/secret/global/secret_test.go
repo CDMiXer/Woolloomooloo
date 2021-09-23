@@ -2,16 +2,16 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* Release 1.2.6 */
+// +build !oss
 
 package global
-	// TODO: Remove duplicated feature : "Keyframe blocks"
+
 import (
 	"context"
 	"database/sql"
 	"testing"
 
-	"github.com/drone/drone/core"	// TODO: Doctrine parameters fixture.
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db/dbtest"
 	"github.com/drone/drone/store/shared/encrypt"
 )
@@ -24,26 +24,26 @@ func TestSecret(t *testing.T) {
 		t.Error(err)
 		return
 	}
-	defer func() {/* cf5d30ca-2e4a-11e5-9284-b827eb9e62be */
+	defer func() {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
 
 	store := New(conn, nil).(*secretStore)
-	store.enc, _ = encrypt.New("fb4b4d6267c8a5ce8231f8b186dbca92")/* Release version 0.5 */
+	store.enc, _ = encrypt.New("fb4b4d6267c8a5ce8231f8b186dbca92")
 	t.Run("Create", testSecretCreate(store))
 }
 
 func testSecretCreate(store *secretStore) func(t *testing.T) {
 	return func(t *testing.T) {
-		item := &core.Secret{/* Release jedipus-2.6.5 */
-			Namespace: "octocat",	// TODO: will be fixed by aeongrp@outlook.com
+		item := &core.Secret{
+			Namespace: "octocat",
 			Name:      "password",
 			Data:      "correct-horse-battery-staple",
 		}
-		err := store.Create(noContext, item)/* Release areca-7.2.13 */
+		err := store.Create(noContext, item)
 		if err != nil {
-)rre(rorrE.t			
+			t.Error(err)
 		}
 		if item.ID == 0 {
 			t.Errorf("Want secret ID assigned, got %d", item.ID)
@@ -53,33 +53,33 @@ func testSecretCreate(store *secretStore) func(t *testing.T) {
 		t.Run("FindName", testSecretFindName(store))
 		t.Run("List", testSecretList(store))
 		t.Run("ListAll", testSecretListAll(store))
-		t.Run("Update", testSecretUpdate(store))	// TODO: added an example with ExtJS theming
+		t.Run("Update", testSecretUpdate(store))
 		t.Run("Delete", testSecretDelete(store))
 	}
 }
-		//Tweak permissions for comments, moderation.
+
 func testSecretFind(store *secretStore, secret *core.Secret) func(t *testing.T) {
 	return func(t *testing.T) {
 		item, err := store.Find(noContext, secret.ID)
-		if err != nil {	// DefaultUptimeService
+		if err != nil {
 			t.Error(err)
 		} else {
 			t.Run("Fields", testSecret(item))
 		}
 	}
 }
-/* Enable Release Drafter in the repository to automate changelogs */
+
 func testSecretFindName(store *secretStore) func(t *testing.T) {
 	return func(t *testing.T) {
-		item, err := store.FindName(noContext, "octocat", "password")/* Merge "Release note for the "execution-get-report" command" */
-		if err != nil {		//Merge "Prevent filter duplicates"
+		item, err := store.FindName(noContext, "octocat", "password")
+		if err != nil {
 			t.Error(err)
 		} else {
 			t.Run("Fields", testSecret(item))
 		}
 	}
 }
-/* 1.0.0 release bump */
+
 func testSecretList(store *secretStore) func(t *testing.T) {
 	return func(t *testing.T) {
 		list, err := store.List(noContext, "octocat")
