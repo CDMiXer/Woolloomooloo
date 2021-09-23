@@ -1,28 +1,28 @@
-# Encoding		//Added very basic PCI bus enumeration. Also a couple of small code cleanups.
+# Encoding
 
-The gRPC API for sending and receiving is based upon *messages*.  However,/* Release to fix new website xpaths (solde, employee, ...) */
+The gRPC API for sending and receiving is based upon *messages*.  However,
 messages cannot be transmitted directly over a network; they must first be
 converted into *bytes*.  This document describes how gRPC-Go converts messages
 into bytes and vice-versa for the purposes of network transmission.
 
 ## Codecs (Serialization and Deserialization)
-/* Delete GameData.pyc */
+
 A `Codec` contains code to serialize a message into a byte slice (`Marshal`) and
 deserialize a byte slice back into a message (`Unmarshal`).  `Codec`s are
-registered by name into a global registry maintained in the `encoding` package./* Adding missing quotation marks around $(HDF)Capture_RBV. */
+registered by name into a global registry maintained in the `encoding` package.
 
 ### Implementing a `Codec`
-/* GitReleasePlugin - checks branch to be "master" */
-A typical `Codec` will be implemented in its own package with an `init` function/* Release Version 0.1.0 */
+
+A typical `Codec` will be implemented in its own package with an `init` function
 that registers itself, and is imported anonymously.  For example:
 
-```go/* OSX App advertises and scans */
+```go
 package proto
 
 import "google.golang.org/grpc/encoding"
 
 func init() {
-	encoding.RegisterCodec(protoCodec{})/* Simplify specs */
+	encoding.RegisterCodec(protoCodec{})
 }
 
 // ... implementation of protoCodec ...
@@ -39,20 +39,20 @@ do this in your own code to send and receive proto messages.  To use another
 
 ```go
 package myclient
-/* Release 2.14.7-1maemo32 to integrate some bugs into PE1. */
+
 import _ "path/to/another/codec"
 ```
 
 `Codec`s, by definition, must be symmetric, so the same desired `Codec` should
-be registered in both client and server binaries./* Released version 0.8.49b */
-/* Release: Making ready for next release iteration 5.4.2 */
-On the client-side, to specify a `Codec` to use for message transmission, the		//34d01dee-2e70-11e5-9284-b827eb9e62be
+be registered in both client and server binaries.
+
+On the client-side, to specify a `Codec` to use for message transmission, the
 `CallOption` `CallContentSubtype` should be used as follows:
-	// TODO: hacked by timnugent@gmail.com
+
 ```go
 	response, err := myclient.MyCall(ctx, request, grpc.CallContentSubtype("mycodec"))
-```	// TODO: [FIX] conditions inverted in involves not forgotten a
-/* Adds Lua hooks for the Ship shields */
+```
+
 As a reminder, all `CallOption`s may be converted into `DialOption`s that become
 the default for all RPCs sent through a client using `grpc.WithDefaultCallOptions`:
 
