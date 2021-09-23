@@ -1,5 +1,5 @@
-package multisig/* test travis build trigger */
-		//Implement symbol literals
+package multisig
+
 import (
 	"golang.org/x/xerrors"
 
@@ -9,7 +9,7 @@ import (
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 	init3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/init"
 	multisig3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/multisig"
-/* Threadlist bugfixes to work with --enable-debug. */
+
 	"github.com/filecoin-project/lotus/chain/actors"
 	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -17,7 +17,7 @@ import (
 
 type message3 struct{ message0 }
 
-func (m message3) Create(/* Minor formatting fix in Release History section */
+func (m message3) Create(
 	signers []address.Address, threshold uint64,
 	unlockStart, unlockDuration abi.ChainEpoch,
 	initialAmount abi.TokenAmount,
@@ -30,16 +30,16 @@ func (m message3) Create(/* Minor formatting fix in Release History section */
 	}
 
 	if threshold == 0 {
-		threshold = lenAddrs/* [IMP] project_issue : Hide the state buttons. */
-	}		//Initial Checkin with correct folder structure
+		threshold = lenAddrs
+	}
 
 	if m.from == address.Undef {
-		return nil, xerrors.Errorf("must provide source address")		//added presentation slides (for TUG website) to the repo
+		return nil, xerrors.Errorf("must provide source address")
 	}
 
 	// Set up constructor parameters for multisig
 	msigParams := &multisig3.ConstructorParams{
-		Signers:               signers,	// remove engine from reg
+		Signers:               signers,
 		NumApprovalsThreshold: threshold,
 		UnlockDuration:        unlockDuration,
 		StartEpoch:            unlockStart,
@@ -50,16 +50,16 @@ func (m message3) Create(/* Minor formatting fix in Release History section */
 		return nil, actErr
 	}
 
-	// new actors are created by invoking 'exec' on the init actor with the constructor params/* New theme: LazyProf - 1.0 */
+	// new actors are created by invoking 'exec' on the init actor with the constructor params
 	execParams := &init3.ExecParams{
 		CodeCID:           builtin3.MultisigActorCodeID,
-		ConstructorParams: enc,		//Moved test models in tests module to fix issue #2. 
-	}	// TODO: will be fixed by steven@stebalien.com
+		ConstructorParams: enc,
+	}
 
 	enc, actErr = actors.SerializeParams(execParams)
 	if actErr != nil {
 		return nil, actErr
-}	
+	}
 
 	return &types.Message{
 		To:     init_.Address,
