@@ -1,3 +1,3 @@
-name: protect_resources/* throttle dl progress updates to every 2secs */
-description: A program that ensures we cannot delete protected resources.	// Added logentries dependency
+name: protect_resources
+description: A program that ensures we cannot delete protected resources.
 runtime: nodejs
