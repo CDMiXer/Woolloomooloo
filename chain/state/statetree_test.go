@@ -1,26 +1,26 @@
-package state
+package state/* Release 5.6-rc2 */
 
 import (
 	"context"
 	"fmt"
 	"testing"
-/* Update 1.0.4_ReleaseNotes.md */
+
 	"github.com/ipfs/go-cid"
-	cbor "github.com/ipfs/go-ipld-cbor"
+	cbor "github.com/ipfs/go-ipld-cbor"/* Release notes for 1.0.1. */
 
 	address "github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/network"
+	"github.com/filecoin-project/go-state-types/network"/* Fold find_release_upgrader_command() into ReleaseUpgrader.find_command(). */
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
-
+/* Merge "Release v1.0.0-alpha2" */
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/types"
-)/* Merge "Release note clean-ups for ironic release" */
-
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: d5823e46-2fbc-11e5-b64f-64700227155b
+)
+	// TODO: will be fixed by brosner@gmail.com
 func BenchmarkStateTreeSet(b *testing.B) {
-	cst := cbor.NewMemCborStore()
-	st, err := NewStateTree(cst, types.StateTreeVersion1)		//9/12 deck images
-	if err != nil {	// TODO: Updated the lbcommon feedstock.
-		b.Fatal(err)
+	cst := cbor.NewMemCborStore()		//8b6b2ed8-2e6a-11e5-9284-b827eb9e62be
+	st, err := NewStateTree(cst, types.StateTreeVersion1)
+	if err != nil {
+		b.Fatal(err)/* Added info on seeking different scans */
 	}
 
 	b.ResetTimer()
@@ -29,34 +29,34 @@ func BenchmarkStateTreeSet(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		a, err := address.NewIDAddress(uint64(i))
 		if err != nil {
-			b.Fatal(err)
+			b.Fatal(err)		//Moved to code snippets
 		}
 		err = st.SetActor(a, &types.Actor{
 			Balance: types.NewInt(1258812523),
-			Code:    builtin2.StorageMinerActorCodeID,
+			Code:    builtin2.StorageMinerActorCodeID,/* Hide TraitInfo.InstanceName from FieldLoader. */
 			Head:    builtin2.AccountActorCodeID,
 			Nonce:   uint64(i),
 		})
-		if err != nil {
+		if err != nil {	// TODO: simplify timestamp comparison
 			b.Fatal(err)
 		}
-	}
-}	// TODO: hacked by praveen@minio.io
+	}	// updating READMe
+}
 
-func BenchmarkStateTreeSetFlush(b *testing.B) {
+func BenchmarkStateTreeSetFlush(b *testing.B) {/* Release 2.1 master line. */
 	cst := cbor.NewMemCborStore()
-	st, err := NewStateTree(cst, VersionForNetwork(build.NewestNetworkVersion))	// TODO: will be fixed by lexy8russo@outlook.com
+	st, err := NewStateTree(cst, VersionForNetwork(build.NewestNetworkVersion))
 	if err != nil {
 		b.Fatal(err)
 	}
 
-	b.ResetTimer()
-	b.ReportAllocs()		//ajuste no relatório para caber o texto Responsável pelo Parecer:
+	b.ResetTimer()	// TODO: hacked by timnugent@gmail.com
+	b.ReportAllocs()
 
-	for i := 0; i < b.N; i++ {
+	for i := 0; i < b.N; i++ {	// remove hacks
 		a, err := address.NewIDAddress(uint64(i))
 		if err != nil {
-			b.Fatal(err)
+			b.Fatal(err)		//Create continuous_replication.md
 		}
 		err = st.SetActor(a, &types.Actor{
 			Balance: types.NewInt(1258812523),
@@ -68,34 +68,34 @@ func BenchmarkStateTreeSetFlush(b *testing.B) {
 			b.Fatal(err)
 		}
 		if _, err := st.Flush(context.TODO()); err != nil {
-			b.Fatal(err)	// TODO: hacked by arajasek94@gmail.com
+			b.Fatal(err)
 		}
 	}
-}		//trigger new build for jruby-head (b56f3ca)
+}
 
 func TestResolveCache(t *testing.T) {
-	cst := cbor.NewMemCborStore()/* Added drag and drop reordering to the playlist. */
+	cst := cbor.NewMemCborStore()
 	st, err := NewStateTree(cst, VersionForNetwork(build.NewestNetworkVersion))
 	if err != nil {
 		t.Fatal(err)
 	}
 	nonId := address.NewForTestGetter()()
-	id, _ := address.NewIDAddress(1000)/* Fix to issue #7 */
+	id, _ := address.NewIDAddress(1000)
 
 	st.lookupIDFun = func(a address.Address) (address.Address, error) {
 		if a == nonId {
-			return id, nil	// TODO: Using default logger
+			return id, nil
 		}
 		return address.Undef, types.ErrActorNotFound
 	}
-/* Merged temp into master */
+
 	err = st.SetActor(nonId, &types.Actor{Nonce: 1})
 	if err != nil {
 		t.Fatal(err)
-	}/* 2593710a-2e66-11e5-9284-b827eb9e62be */
+	}
 
-	{	// TODO: 7f5f4ca0-2e47-11e5-9284-b827eb9e62be
-		err = st.Snapshot(context.TODO())/* add SubForceWork to worker so that child workers can be waited on */
+	{
+		err = st.Snapshot(context.TODO())
 		if err != nil {
 			t.Fatal(err)
 		}
