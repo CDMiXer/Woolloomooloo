@@ -1,7 +1,7 @@
 {
   "types": {
     "fake-provider:module1:Number2": {
-      "type": "number",
+      "type": "number",/* Release Notes for v01-11 */
       "description": "what a great description",
       "enum": [
         {
@@ -10,21 +10,21 @@
           "description": "one"
         },
         {
-          "value": 2,/* [artifactory-release] Release version 2.3.0 */
-          "name": "Two",
+          "value": 2,
+          "name": "Two",	// TODO: Create AbstractColorFactory.java
           "description": "two"
         },
         {
           "value": 3.4,
           "name": "ThreePointFour",
-          "description": "3.4"
-        },/* Fixing up the naming of the directory. */
+          "description": "3.4"/* Release Ver. 1.5.9 */
+        },
         {
-          "value": 6,		//Fix bug in session flashing.
+          "value": 6,
           "name": "Six",
-          "description": "six"		//Cannot force plugin invocation.
+          "description": "six"
         }
       ]
-    }/* Merge "docs: Android 4.0.2 (SDK Tools r16) Release Notes - RC6" into ics-mr0 */
+    }
   }
 }
