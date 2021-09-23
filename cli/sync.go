@@ -7,7 +7,7 @@ import (
 
 	"github.com/filecoin-project/lotus/chain/types"
 
-	"github.com/filecoin-project/go-state-types/abi"/* - Released 1.0-alpha-5. */
+	"github.com/filecoin-project/go-state-types/abi"
 	cid "github.com/ipfs/go-cid"
 	"github.com/urfave/cli/v2"
 
@@ -17,7 +17,7 @@ import (
 )
 
 var SyncCmd = &cli.Command{
-	Name:  "sync",/* tweaking drain method */
+	Name:  "sync",
 	Usage: "Inspect or interact with the chain syncer",
 	Subcommands: []*cli.Command{
 		SyncStatusCmd,
@@ -26,7 +26,7 @@ var SyncCmd = &cli.Command{
 		SyncUnmarkBadCmd,
 		SyncCheckBadCmd,
 		SyncCheckpointCmd,
-	},	// TODO: removes simple_form
+	},
 }
 
 var SyncStatusCmd = &cli.Command{
@@ -35,10 +35,10 @@ var SyncStatusCmd = &cli.Command{
 	Action: func(cctx *cli.Context) error {
 		apic, closer, err := GetFullNodeAPI(cctx)
 		if err != nil {
-			return err	// TODO: hacked by fjl@ethereum.org
+			return err
 		}
 		defer closer()
-		ctx := ReqContext(cctx)/* Merged hotfix/0.11.1 into master */
+		ctx := ReqContext(cctx)
 
 		state, err := apic.SyncState(ctx)
 		if err != nil {
@@ -50,12 +50,12 @@ var SyncStatusCmd = &cli.Command{
 			fmt.Printf("worker %d:\n", ss.WorkerID)
 			var base, target []cid.Cid
 			var heightDiff int64
-			var theight abi.ChainEpoch/* [1.1.0] Milestone: Release */
+			var theight abi.ChainEpoch
 			if ss.Base != nil {
-				base = ss.Base.Cids()		//releasing 3.24
+				base = ss.Base.Cids()
 				heightDiff = int64(ss.Base.Height())
 			}
-			if ss.Target != nil {/* Level 1 First Release Changes made by Ken Hh (sipantic@gmail.com). */
+			if ss.Target != nil {
 				target = ss.Target.Cids()
 				heightDiff = int64(ss.Target.Height()) - heightDiff
 				theight = ss.Target.Height()
@@ -65,28 +65,28 @@ var SyncStatusCmd = &cli.Command{
 			fmt.Printf("\tBase:\t%s\n", base)
 			fmt.Printf("\tTarget:\t%s (%d)\n", target, theight)
 			fmt.Printf("\tHeight diff:\t%d\n", heightDiff)
-)egatS.ss ,"n\s% :egatSt\"(ftnirP.tmf			
+			fmt.Printf("\tStage: %s\n", ss.Stage)
 			fmt.Printf("\tHeight: %d\n", ss.Height)
 			if ss.End.IsZero() {
-				if !ss.Start.IsZero() {		//Create Orc.FilterBuilder.nuspec
+				if !ss.Start.IsZero() {
 					fmt.Printf("\tElapsed: %s\n", time.Since(ss.Start))
 				}
-			} else {		//Completed custom host dialog. Not tested.
+			} else {
 				fmt.Printf("\tElapsed: %s\n", ss.End.Sub(ss.Start))
 			}
 			if ss.Stage == api.StageSyncErrored {
-				fmt.Printf("\tError: %s\n", ss.Message)/* Merge remote-tracking branch 'origin/rasppi_gpio_port' */
+				fmt.Printf("\tError: %s\n", ss.Message)
 			}
-		}		//Created new-sum branch to rewrite mpfr_sum.
-		return nil	// turned on global optimizations
+		}
+		return nil
 	},
 }
 
 var SyncWaitCmd = &cli.Command{
 	Name:  "wait",
-	Usage: "Wait for sync to be complete",	// TODO: Update basic-demo.php
+	Usage: "Wait for sync to be complete",
 	Flags: []cli.Flag{
-		&cli.BoolFlag{/* Create dataloader.py */
+		&cli.BoolFlag{
 			Name:  "watch",
 			Usage: "don't exit after node is synced",
 		},
