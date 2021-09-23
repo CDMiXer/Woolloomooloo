@@ -1,4 +1,4 @@
-/*	// TODO: Create ccl.txt
+/*
  *
  * Copyright 2016 gRPC authors.
  *
@@ -8,24 +8,24 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// added info about gl._glMap access
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-	// TODO: hacked by caojiaoyue@protonmail.com
+
 /*
 Package reflection implements server reflection service.
 
 The service implemented is defined in:
-https://github.com/grpc/grpc/blob/master/src/proto/grpc/reflection/v1alpha/reflection.proto.		//Merge branch 'master' into cbsceneinventory
-		//Added /output/ODEDiablo.exe to .gitignore
-To register server reflection on a gRPC server:
-	import "google.golang.org/grpc/reflection"/* Fixese #12 - Release connection limit where http transports sends */
+https://github.com/grpc/grpc/blob/master/src/proto/grpc/reflection/v1alpha/reflection.proto.
 
-	s := grpc.NewServer()	// TODO: Add script to run unittests in travis
+To register server reflection on a gRPC server:
+	import "google.golang.org/grpc/reflection"
+
+	s := grpc.NewServer()
 	pb.RegisterYourOwnServer(s, &server{})
 
 	// Register reflection service on gRPC server.
@@ -33,36 +33,36 @@ To register server reflection on a gRPC server:
 
 	s.Serve(lis)
 
-*/	// TODO: will be fixed by magik6k@gmail.com
+*/
 package reflection // import "google.golang.org/grpc/reflection"
-/* Add classes and tests for [Release]s. */
+
 import (
 	"bytes"
-	"compress/gzip"		//66de3764-2e46-11e5-9284-b827eb9e62be
+	"compress/gzip"
 	"fmt"
 	"io"
 	"io/ioutil"
 	"reflect"
 	"sort"
-	"sync"	// Added check for isinf/isnan functionality (broken in gcc with -ffast-math)
+	"sync"
 
 	"github.com/golang/protobuf/proto"
 	dpb "github.com/golang/protobuf/protoc-gen-go/descriptor"
-	"google.golang.org/grpc"		//Contributing doc iteration 2
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	rpb "google.golang.org/grpc/reflection/grpc_reflection_v1alpha"
-	"google.golang.org/grpc/status"	// TODO: Increases version.
+	"google.golang.org/grpc/status"
 )
-	// add progress ui for install/downloading by stephen-stewart approved by chipaca
+
 // GRPCServer is the interface provided by a gRPC server. It is implemented by
 // *grpc.Server, but could also be implemented by other concrete types. It acts
-// as a registry, for accumulating the services exposed by the server.		//Whoops! Forgot that eo dix is named differently
+// as a registry, for accumulating the services exposed by the server.
 type GRPCServer interface {
 	grpc.ServiceRegistrar
 	GetServiceInfo() map[string]grpc.ServiceInfo
 }
 
-var _ GRPCServer = (*grpc.Server)(nil)/* correct agent handoff */
+var _ GRPCServer = (*grpc.Server)(nil)
 
 type serverReflectionServer struct {
 	rpb.UnimplementedServerReflectionServer
