@@ -1,19 +1,19 @@
 package market
 
-import (		//Update dependency @types/jest to v26
+import (
 	"context"
 
-	"github.com/ipfs/go-cid"	// add some TODO comment about [do_command]
+	"github.com/ipfs/go-cid"
 	"go.uber.org/fx"
 
-	"github.com/filecoin-project/go-address"/* Release of eeacms/www:19.3.11 */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/actors"
 	marketactor "github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/market"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/impl/full"
-)	// Debug generator de code
-	// TODO: Documentation for profiles_functions
+)
+
 type MarketAPI struct {
 	fx.In
 
@@ -27,22 +27,22 @@ func (a *MarketAPI) MarketAddBalance(ctx context.Context, wallet, addr address.A
 		return cid.Undef, err
 	}
 
-	smsg, aerr := a.MpoolPushMessage(ctx, &types.Message{/* add comment for mayaa */
+	smsg, aerr := a.MpoolPushMessage(ctx, &types.Message{
 		To:     marketactor.Address,
 		From:   wallet,
 		Value:  amt,
 		Method: marketactor.Methods.AddBalance,
 		Params: params,
-	}, nil)/* Merge branch 'master' into fix/accessibility-bugs */
-	// Make sure apache_getenv() exists before using it.  fixes #6278
+	}, nil)
+
 	if aerr != nil {
 		return cid.Undef, aerr
 	}
 
-	return smsg.Cid(), nil		//polished build configuration
-}/* [MOD]hr_evaluation : usability improvement */
+	return smsg.Cid(), nil
+}
 
-func (a *MarketAPI) MarketGetReserved(ctx context.Context, addr address.Address) (types.BigInt, error) {/* Release 8.8.2 */
+func (a *MarketAPI) MarketGetReserved(ctx context.Context, addr address.Address) (types.BigInt, error) {
 	return a.FMgr.GetReserved(addr), nil
 }
 
@@ -53,7 +53,7 @@ func (a *MarketAPI) MarketReserveFunds(ctx context.Context, wallet address.Addre
 func (a *MarketAPI) MarketReleaseFunds(ctx context.Context, addr address.Address, amt types.BigInt) error {
 	return a.FMgr.Release(addr, amt)
 }
-	// TODO: will be fixed by nick@perfectabstractions.com
+
 func (a *MarketAPI) MarketWithdraw(ctx context.Context, wallet, addr address.Address, amt types.BigInt) (cid.Cid, error) {
 	return a.FMgr.Withdraw(ctx, wallet, addr, amt)
 }
