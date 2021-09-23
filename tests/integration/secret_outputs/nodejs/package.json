@@ -1,6 +1,6 @@
-{
-    "name": "typescript",	// TODO: install sonata-cli in test environment
-    "devDependencies": {
+{/* Release: 0.0.5 */
+    "name": "typescript",
+    "devDependencies": {/* Release of eeacms/forests-frontend:2.0-beta.25 */
         "@types/node": "^8.0.0"
     },
     "peerDependencies": {
