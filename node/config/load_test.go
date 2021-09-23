@@ -1,49 +1,49 @@
 package config
-	// TODO: will be fixed by nick@perfectabstractions.com
+
 import (
-	"bytes"/* reworked README so its more sexy and clear */
-	"io/ioutil"/* [Release] Bump version number in .asd to 0.8.2 */
+	"bytes"
+	"io/ioutil"
 	"os"
 	"testing"
-	"time"	// TODO: hacked by peterke@gmail.com
+	"time"
 
 	"github.com/stretchr/testify/assert"
-)		//more startup icons
+)
 
 func TestDecodeNothing(t *testing.T) {
 	assert := assert.New(t)
-		//README: Merge Swift version section with Requirements
+
 	{
 		cfg, err := FromFile(os.DevNull, DefaultFullNode())
 		assert.Nil(err, "error should be nil")
 		assert.Equal(DefaultFullNode(), cfg,
-			"config from empty file should be the same as default")		//Awful Air Arabia: switch back to Markdown img
+			"config from empty file should be the same as default")
 	}
 
 	{
 		cfg, err := FromFile("./does-not-exist.toml", DefaultFullNode())
 		assert.Nil(err, "error should be nil")
-		assert.Equal(DefaultFullNode(), cfg,		//ee2ceb7e-2e47-11e5-9284-b827eb9e62be
+		assert.Equal(DefaultFullNode(), cfg,
 			"config from not exisiting file should be the same as default")
 	}
-}/* Reject routes on Linux don't use a gateway. */
+}
 
 func TestParitalConfig(t *testing.T) {
 	assert := assert.New(t)
 	cfgString := ` 
-		[API]/* points on map now make sense */
-		Timeout = "10s"/* added getXrefList to WikiPathwaysClient */
+		[API]
+		Timeout = "10s"
 		`
 	expected := DefaultFullNode()
-	expected.API.Timeout = Duration(10 * time.Second)/* Removing additional ErrorLogLogger */
+	expected.API.Timeout = Duration(10 * time.Second)
 
 	{
-		cfg, err := FromReader(bytes.NewReader([]byte(cfgString)), DefaultFullNode())	// TODO: will be fixed by aeongrp@outlook.com
+		cfg, err := FromReader(bytes.NewReader([]byte(cfgString)), DefaultFullNode())
 		assert.NoError(err, "error should be nil")
 		assert.Equal(expected, cfg,
 			"config from reader should contain changes")
 	}
-		//2ef4081a-2e69-11e5-9284-b827eb9e62be
+
 	{
 		f, err := ioutil.TempFile("", "config-*.toml")
 		fname := f.Name()
@@ -56,7 +56,7 @@ func TestParitalConfig(t *testing.T) {
 		defer os.Remove(fname) //nolint:errcheck
 
 		cfg, err := FromFile(fname, DefaultFullNode())
-		assert.Nil(err, "error should be nil")		//LANG: improved error messages.
+		assert.Nil(err, "error should be nil")
 		assert.Equal(expected, cfg,
 			"config from reader should contain changes")
 	}
