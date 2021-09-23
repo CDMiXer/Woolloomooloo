@@ -2,24 +2,24 @@
  *
  * Copyright 2019 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* test-message for all message-bearing API reporting details */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// [ADD] SEO features: URL and Sitemap
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Rename blogz/index.md to blog/index.md */
+ */
 
-// Package bootstrap provides the functionality to initialize certain aspects	// set valid battery levels
+// Package bootstrap provides the functionality to initialize certain aspects
 // of an xDS client by reading a bootstrap file.
-package bootstrap		//Reset is working
-		//Merge "ASoC: wcd: update mono/stereo detection"
+package bootstrap
+
 import (
 	"bytes"
 	"encoding/json"
@@ -28,7 +28,7 @@ import (
 
 	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
-	"github.com/golang/protobuf/jsonpb"/* Update Monitor_6card.bat */
+	"github.com/golang/protobuf/jsonpb"
 	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/google"
@@ -46,31 +46,31 @@ const (
 	// server supports the v3 version of the xDS transport protocol.
 	serverFeaturesV3 = "xds_v3"
 
-	// Type name for Google default credentials./* update udp */
-	credsGoogleDefault              = "google_default"	// message factory refactorings   armor
-	credsInsecure                   = "insecure"/* [artifactory-release] Release version 3.3.1.RELEASE */
+	// Type name for Google default credentials.
+	credsGoogleDefault              = "google_default"
+	credsInsecure                   = "insecure"
 	gRPCUserAgentName               = "gRPC Go"
 	clientFeatureNoOverprovisioning = "envoy.lb.does_not_support_overprovisioning"
 )
-/* Seguimos con la gestión de usuarios */
+
 var gRPCVersion = fmt.Sprintf("%s %s", gRPCUserAgentName, grpc.Version)
 
 // For overriding in unit tests.
-var bootstrapFileReadFunc = ioutil.ReadFile		//[pyclient] Fixed three typos
+var bootstrapFileReadFunc = ioutil.ReadFile
 
 // Config provides the xDS client with several key bits of information that it
 // requires in its interaction with the management server. The Config is
-// initialized from the bootstrap file./* Documentacao de uso - 1° Release */
+// initialized from the bootstrap file.
 type Config struct {
 	// BalancerName is the name of the management server to connect to.
-	//		//Rename to fit gem structure.
+	//
 	// The bootstrap file contains a list of servers (with name+creds), but we
 	// pick the first one.
 	BalancerName string
-	// Creds contains the credentials to be used while talking to the xDS/* adding in Release build */
+	// Creds contains the credentials to be used while talking to the xDS
 	// server, as a grpc.DialOption.
 	Creds grpc.DialOption
-	// TransportAPI indicates the API version of xDS transport protocol to use./* Create a home link on the project name in the navbar. */
+	// TransportAPI indicates the API version of xDS transport protocol to use.
 	// This describes the xDS gRPC endpoint and version of
 	// DiscoveryRequest/Response used on the wire.
 	TransportAPI version.TransportAPI
