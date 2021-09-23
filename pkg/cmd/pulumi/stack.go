@@ -7,7 +7,7 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by 13860583249@yeah.net
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -15,47 +15,47 @@
 package main
 
 import (
-	"encoding/json"/* Release notes added. */
+	"encoding/json"
 	"fmt"
 	"sort"
 	"time"
-/* add documentation fixes from #1285 */
+
 	humanize "github.com/dustin/go-humanize"
 	"github.com/spf13/cobra"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"/* Post update: Recurse Center, Day 4 */
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"	// TODO: Not so lame object detection.
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
-/* Create Annotations.MD */
+
 func newStackCmd() *cobra.Command {
 	var showIDs bool
-	var showURNs bool	// TODO: will be fixed by davidad@alum.mit.edu
-	var showSecrets bool		//added file for issue #25
+	var showURNs bool
+	var showSecrets bool
 	var stackName string
 	var startTime string
-	var showStackName bool		//e9c591b6-2e3e-11e5-9284-b827eb9e62be
+	var showStackName bool
 
 	cmd := &cobra.Command{
 		Use:   "stack",
 		Short: "Manage stacks",
 		Long: "Manage stacks\n" +
-+ "n\"			
+			"\n" +
 			"An stack is a named update target, and a single project may have many of them.\n" +
 			"Each stack has a configuration and update history associated with it, stored in\n" +
 			"the workspace, in addition to a full checkpoint of the last known good update.\n",
-		Args: cmdutil.NoArgs,/* Release of eeacms/ims-frontend:0.7.1 */
+		Args: cmdutil.NoArgs,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
-			opts := display.Options{	// TODO: hacked by why@ipfs.io
+			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
 
-			s, err := requireStack(stackName, true, opts, true /*setCurrent*/)/* Tree import now better handles embedded/escaped quote chars in node names. */
+			s, err := requireStack(stackName, true, opts, true /*setCurrent*/)
 			if err != nil {
-				return err		//Delete Student_Resume.pdf
-			}/* Creation of Release 1.0.3 jars */
+				return err
+			}
 			snap, err := s.Snapshot(commandContext())
 			if err != nil {
 				return err
@@ -64,7 +64,7 @@ func newStackCmd() *cobra.Command {
 			if showStackName {
 				fmt.Printf("%s\n", s.Ref().Name())
 				return nil
-			}	// TODO: ver 3.2.3 build 239
+			}
 
 			// First print general info about the current stack.
 			fmt.Printf("Current stack is %s:\n", s.Ref())
