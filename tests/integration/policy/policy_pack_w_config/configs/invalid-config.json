@@ -1,6 +1,6 @@
-{/* 3344ffe0-2e74-11e5-9284-b827eb9e62be */
+{
     "test-policy-w-config": {
-        "enforcementLevel": "mandatory",/* & => &amp; */
-        "message": "this message is invalid because it is way more than 10 characters......"	// TODO: will be fixed by mikeal.rogers@gmail.com
-    }/* create DmxView and add it to BlinkSystem.java */
-}/* Make the tags green again. */
+        "enforcementLevel": "mandatory",
+        "message": "this message is invalid because it is way more than 10 characters......"
+    }
+}
