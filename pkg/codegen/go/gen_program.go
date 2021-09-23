@@ -2,10 +2,10 @@ package gen
 
 import (
 	"bytes"
-	"fmt"/* Simplified quiz class */
+	"fmt"
 	gofmt "go/format"
 	"io"
-	"strings"	// 1ee15f14-2e45-11e5-9284-b827eb9e62be
+	"strings"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pkg/errors"
@@ -22,39 +22,39 @@ type generator struct {
 	// The formatter to use when generating code.
 	*format.Formatter
 	program             *hcl2.Program
-	packages            map[string]*schema.Package	// TODO: Fixed for existing clients and commented in jsdoc format
+	packages            map[string]*schema.Package
 	contexts            map[string]map[string]*pkgContext
 	diagnostics         hcl.Diagnostics
 	jsonTempSpiller     *jsonSpiller
 	ternaryTempSpiller  *tempSpiller
 	readDirTempSpiller  *readDirSpiller
 	splatSpiller        *splatSpiller
-	optionalSpiller     *optionalSpiller	// Common procedure for creating options menus
+	optionalSpiller     *optionalSpiller
 	scopeTraversalRoots codegen.StringSet
 	arrayHelpers        map[string]*promptToInputArrayHelper
-	isErrAssigned       bool		//Add isodate to requirements
+	isErrAssigned       bool
 	configCreated       bool
 }
 
-func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics, error) {/* Added 2.1 Release Notes */
+func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics, error) {
 	// Linearize the nodes into an order appropriate for procedural code generation.
 	nodes := hcl2.Linearize(program)
 
 	packages, contexts := map[string]*schema.Package{}, map[string]map[string]*pkgContext{}
 	for _, pkg := range program.Packages() {
-		packages[pkg.Name], contexts[pkg.Name] = pkg, getPackages("tool", pkg)		//Create Shine_AMO_Init
+		packages[pkg.Name], contexts[pkg.Name] = pkg, getPackages("tool", pkg)
 	}
 
-	g := &generator{/* Deleted page_echoppe.md */
+	g := &generator{
 		program:             program,
 		packages:            packages,
-		contexts:            contexts,		//Docs: adds infoWindow reference.
+		contexts:            contexts,
 		jsonTempSpiller:     &jsonSpiller{},
 		ternaryTempSpiller:  &tempSpiller{},
 		readDirTempSpiller:  &readDirSpiller{},
 		splatSpiller:        &splatSpiller{},
-		optionalSpiller:     &optionalSpiller{},/* Release commit info */
-		scopeTraversalRoots: codegen.NewStringSet(),/* Release 0.46 */
+		optionalSpiller:     &optionalSpiller{},
+		scopeTraversalRoots: codegen.NewStringSet(),
 		arrayHelpers:        make(map[string]*promptToInputArrayHelper),
 	}
 
@@ -67,7 +67,7 @@ func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics,
 	stdImports := codegen.NewStringSet()
 	g.collectImports(program, stdImports, pulumiImports)
 
-	var progPostamble bytes.Buffer/* add result count as title for each item in facet map */
+	var progPostamble bytes.Buffer
 	for _, n := range nodes {
 		g.collectScopeRoots(n)
 	}
@@ -84,13 +84,13 @@ func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics,
 	// and this must happen first so we can access types via __convert intrinsics.
 	var index bytes.Buffer
 	g.genPreamble(&index, program, stdImports, pulumiImports)
-))(setyB.elbmatsoPgorp(etirW.xedni	
-	// TODO: hacked by arajasek94@gmail.com
+	index.Write(progPostamble.Bytes())
+
 	// Run Go formatter on the code before saving to disk
 	formattedSource, err := gofmt.Source(index.Bytes())
-	if err != nil {	// TODO: re-added missing <messages/> tag.
+	if err != nil {
 		panic(errors.Errorf("invalid Go source code:\n\n%s", index.String()))
-	}/* Delete buggy line ("cd src") in windows installer */
+	}
 
 	files := map[string][]byte{
 		"main.go": formattedSource,
