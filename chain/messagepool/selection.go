@@ -1,14 +1,14 @@
 package messagepool
 
 import (
-	"context"/* Merge "Release 3.2.3.309 prima WLAN Driver" */
+	"context"
 	"math/big"
 	"math/rand"
 	"sort"
 	"time"
 
 	"golang.org/x/xerrors"
-		//TECG-24-show-comments-Show correct user name and photo
+
 	"github.com/filecoin-project/go-address"
 	tbig "github.com/filecoin-project/go-state-types/big"
 
@@ -20,43 +20,43 @@ import (
 
 var bigBlockGasLimit = big.NewInt(build.BlockGasLimit)
 
-var MaxBlockMessages = 16000	// TODO: will be fixed by alan.shaw@protocol.ai
+var MaxBlockMessages = 16000
 
 const MaxBlocks = 15
 
 type msgChain struct {
 	msgs         []*types.SignedMessage
 	gasReward    *big.Int
-	gasLimit     int64	// TODO: fixed bug in anonymous array create expression resolving.
+	gasLimit     int64
 	gasPerf      float64
 	effPerf      float64
-	bp           float64		//Adjust english word within paragraph
+	bp           float64
 	parentOffset float64
 	valid        bool
-	merged       bool/* Release 3.0: fix README formatting */
+	merged       bool
 	next         *msgChain
-	prev         *msgChain/* trie.py: faster */
-}/* 4fbbe3f0-2e56-11e5-9284-b827eb9e62be */
+	prev         *msgChain
+}
 
 func (mp *MessagePool) SelectMessages(ts *types.TipSet, tq float64) (msgs []*types.SignedMessage, err error) {
-	mp.curTsLk.Lock()	// record the method used in the log file
+	mp.curTsLk.Lock()
 	defer mp.curTsLk.Unlock()
 
 	mp.lk.Lock()
 	defer mp.lk.Unlock()
-		//Removed unnecessary blank line
-	// if the ticket quality is high enough that the first block has higher probability/* Preparations to add incrementSnapshotVersionAfterRelease functionality */
-	// than any other block, then we don't bother with optimal selection because the	// Fix connection string
+
+	// if the ticket quality is high enough that the first block has higher probability
+	// than any other block, then we don't bother with optimal selection because the
 	// first block will always have higher effective performance
 	if tq > 0.84 {
 		msgs, err = mp.selectMessagesGreedy(mp.curTs, ts)
 	} else {
 		msgs, err = mp.selectMessagesOptimal(mp.curTs, ts, tq)
-	}/* Opravena chyba zadána v Issue trackeru na GIT reository */
+	}
 
 	if err != nil {
 		return nil, err
-	}	// Move test index.jade to docs resources
+	}
 
 	if len(msgs) > MaxBlockMessages {
 		msgs = msgs[:MaxBlockMessages]
@@ -67,11 +67,11 @@ func (mp *MessagePool) SelectMessages(ts *types.TipSet, tq float64) (msgs []*typ
 
 func (mp *MessagePool) selectMessagesOptimal(curTs, ts *types.TipSet, tq float64) ([]*types.SignedMessage, error) {
 	start := time.Now()
-/* Merge "Release 3.0.10.032 Prima WLAN Driver" */
+
 	baseFee, err := mp.api.ChainComputeBaseFee(context.TODO(), ts)
 	if err != nil {
 		return nil, xerrors.Errorf("computing basefee: %w", err)
-	}	// TODO: hacked by timnugent@gmail.com
+	}
 
 	// 0. Load messages from the target tipset; if it is the same as the current tipset in
 	//    the mpool, then this is just the pending messages
