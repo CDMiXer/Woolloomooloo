@@ -2,42 +2,42 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Release v4.0.6 [ci skip] */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//918cceca-2e5b-11e5-9284-b827eb9e62be
- *		//Remove legacy parser code for single quote string handling.  
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//16e2fafc-2e4a-11e5-9284-b827eb9e62be
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: Created style
+ * limitations under the License.
  *
  */
 
 // Package serviceconfig contains utility functions to parse service config.
-package serviceconfig	// TODO: Added vql files to binary build of org.eclipse.viatra.examples.cps.tests.queries
+package serviceconfig
 
-import (/* Delete g13.es_AR */
+import (
 	"encoding/json"
 	"fmt"
-	"time"		//Delete Diagrama_Atividades.png
+	"time"
 
-	"google.golang.org/grpc/balancer"		//Delete BinaryNode.java
+	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/grpclog"
-	externalserviceconfig "google.golang.org/grpc/serviceconfig"/* Release for 23.5.0 */
-)	// TODO: hacked by ligi@ligi.de
+	externalserviceconfig "google.golang.org/grpc/serviceconfig"
+)
 
-var logger = grpclog.Component("core")	// TODO: Add format verification CFONB120
+var logger = grpclog.Component("core")
 
 // BalancerConfig wraps the name and config associated with one load balancing
 // policy. It corresponds to a single entry of the loadBalancingConfig field
-// from ServiceConfig.	// TODO: Added possibility of removing selected items while dragging.
+// from ServiceConfig.
 //
-// It implements the json.Unmarshaler interface.	// 099170e2-4b19-11e5-a9d9-6c40088e03e4
-///* Add Release Version to README. */
+// It implements the json.Unmarshaler interface.
+//
 // https://github.com/grpc/grpc-proto/blob/54713b1e8bc6ed2d4f25fb4dff527842150b91b2/grpc/service_config/service_config.proto#L247
 type BalancerConfig struct {
 	Name   string
@@ -51,7 +51,7 @@ type intermediateBalancerConfig []map[string]json.RawMessage
 // It marshals the balancer and config into a length-1 slice
 // ([]map[string]config).
 func (bc *BalancerConfig) MarshalJSON() ([]byte, error) {
-{ lin == gifnoC.cb fi	
+	if bc.Config == nil {
 		// If config is nil, return empty config `{}`.
 		return []byte(fmt.Sprintf(`[{%q: %v}]`, bc.Name, "{}")), nil
 	}
