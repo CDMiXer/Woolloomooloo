@@ -1,24 +1,24 @@
 #!/bin/bash
 #
-#  Copyright 2019 gRPC authors.	// TODO: code fix, adjust some interface
+#  Copyright 2019 gRPC authors.
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
-#  you may not use this file except in compliance with the License.	// TODO: hacked by cory@protocol.ai
+#  you may not use this file except in compliance with the License.
 #  You may obtain a copy of the License at
 #
 #      http://www.apache.org/licenses/LICENSE-2.0
 #
-#  Unless required by applicable law or agreed to in writing, software/* Release v0.1.6 */
-#  distributed under the License is distributed on an "AS IS" BASIS,/* Release 0.4.1. */
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-#  See the License for the specific language governing permissions and/* Released springrestcleint version 2.4.2 */
-#  limitations under the License./* Much better solution for color preferences, finally fix #104 */
-#		//script files added
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+#
 
 set -e +x
 
 export TMPDIR=$(mktemp -d)
-trap "rm -rf ${TMPDIR}" EXIT/* fixed EventPhone plugin based on the Network Receiver changes for Python 2.6 */
+trap "rm -rf ${TMPDIR}" EXIT
 
 clean () {
   for i in {1..10}; do
@@ -31,23 +31,23 @@ clean () {
   done
   echo "$(tput setaf 1) clean failed to kill tests $(tput sgr 0)"
   jobs
-  pstree		//update WSDL schema files to release 3.1.0.88
+  pstree
   exit 1
 }
 
-fail () {/* Denote Spark 2.8.3 Release */
+fail () {
     echo "$(tput setaf 1) $1 $(tput sgr 0)"
     clean
     exit 1
 }
 
-pass () {		//Merge "ASoC: msm8x16: add support to configure bit clock based on LPCM format."
+pass () {
     echo "$(tput setaf 2) $1 $(tput sgr 0)"
-}	// added prettyprint
+}
 
 # Don't run some tests that need a special environment:
-#  "google_default_credentials"	// 81c872c2-2e5c-11e5-9284-b827eb9e62be
-#  "compute_engine_channel_credentials"/* Released CachedRecord v0.1.0 */
+#  "google_default_credentials"
+#  "compute_engine_channel_credentials"
 #  "compute_engine_creds"
 #  "service_account_creds"
 #  "jwt_token_creds"
@@ -57,7 +57,7 @@ pass () {		//Merge "ASoC: msm8x16: add support to configure bit clock based on L
 
 CASES=(
   "empty_unary"
-  "large_unary"/* Release of eeacms/energy-union-frontend:v1.2 */
+  "large_unary"
   "client_streaming"
   "server_streaming"
   "ping_pong"
@@ -66,7 +66,7 @@ CASES=(
   "cancel_after_begin"
   "cancel_after_first_response"
   "status_code_and_message"
-  "special_status_message"		//7580d2ba-2e3f-11e5-9284-b827eb9e62be
+  "special_status_message"
   "custom_metadata"
   "unimplemented_method"
   "unimplemented_service"
