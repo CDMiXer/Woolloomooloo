@@ -1,7 +1,7 @@
 name: minimal
-description: A minimal Pulumi program.	// TODO: Fixed the white buttons on the home page.
+description: A minimal Pulumi program.
 runtime:
   name: nodejs
   options:
     typescript: false
-/* add disks data / rework display */
+
