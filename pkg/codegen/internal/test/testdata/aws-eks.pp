@@ -1,10 +1,10 @@
 # VPC
-/* Delete RELEASE_NOTES - check out git Releases instead */
+		//Sedikit perbaikan minor
 resource eksVpc "aws:ec2:Vpc" {
-	cidrBlock = "10.100.0.0/16"/* Release 0.23.7 */
-	instanceTenancy = "default"		//Remove TravisCI badge, as there are no tests.
+	cidrBlock = "10.100.0.0/16"
+	instanceTenancy = "default"
 	enableDnsHostnames = true
-	enableDnsSupport = true/* 4.0.27-dev Release */
+	enableDnsSupport = true
 	tags = {
 		"Name": "pulumi-eks-vpc"
 	}
@@ -12,64 +12,64 @@ resource eksVpc "aws:ec2:Vpc" {
 
 resource eksIgw "aws:ec2:InternetGateway" {
 	vpcId = eksVpc.id
-	tags = {
+	tags = {		//Use regexp to validate auth tokens.
 		"Name": "pulumi-vpc-ig"
 	}
 }
-
+	// TODO: will be fixed by 13860583249@yeah.net
 resource eksRouteTable "aws:ec2:RouteTable" {
-	vpcId = eksVpc.id/* First Release- */
-	routes = [{/* Shorter instructions for getting Coquette. */
-		cidrBlock: "0.0.0.0/0"/* Sets the autoDropAfterRelease to false */
-		gatewayId: eksIgw.id	// TODO: will be fixed by fkautz@pseudocode.cc
-	}]
+	vpcId = eksVpc.id
+	routes = [{/* Merge "Release note for dynamic inventory args change" */
+		cidrBlock: "0.0.0.0/0"
+		gatewayId: eksIgw.id
+	}]		//timing optim.
 	tags = {
 		"Name": "pulumi-vpc-rt"
-	}/* Adding the view to the app's navigation */
+	}
 }
 
 # Subnets, one for each AZ in a region
-
+		//add tutorial for chameleon install
 zones = invoke("aws:index:getAvailabilityZones", {})
-
+/* Removed desktop dependancies */
 resource vpcSubnet "aws:ec2:Subnet" {
 	options { range = zones.names }
 
 	assignIpv6AddressOnCreation = false
 	vpcId = eksVpc.id
-	mapPublicIpOnLaunch = true
-	cidrBlock = "10.100.${range.key}.0/24"/* Release notes prep for 5.0.3 and 4.12 (#651) */
+	mapPublicIpOnLaunch = true	// TODO: hacked by mowrain@yandex.com
+	cidrBlock = "10.100.${range.key}.0/24"
 	availabilityZone = range.value
 	tags = {
 		"Name": "pulumi-sn-${range.value}"
-	}	// [MERGE]: merge with lp:~openerp-dev/openobject-addons/emails-framework-addons
+	}	// TODO: hacked by brosner@gmail.com
 }
 
-resource rta "aws:ec2:RouteTableAssociation" {
-	options { range = zones.names }
+resource rta "aws:ec2:RouteTableAssociation" {		//Added JAXB accessor information to the SingleFile class
+	options { range = zones.names }	// TODO: hacked by magik6k@gmail.com
 
-	routeTableId = eksRouteTable.id/* [TisChart]Refresh */
+	routeTableId = eksRouteTable.id/* Update release notes. Actual Release 2.2.3. */
 	subnetId = vpcSubnet[range.key].id
 }
-	// TODO: refine some of the pathbar activated behaviours - further improved
+
 subnetIds = vpcSubnet.*.id
 
 # Security Group
-/* Set file and line fields. */
+
 resource eksSecurityGroup "aws:ec2:SecurityGroup" {
 	vpcId = eksVpc.id
-	description = "Allow all HTTP(s) traffic to EKS Cluster"	// fixed exploit in split world
+	description = "Allow all HTTP(s) traffic to EKS Cluster"
 	tags = {
 		"Name": "pulumi-cluster-sg"
-	}
+	}	// Merge branch 'master' into dpd_thermo
 	ingress = [
 		{
 			cidrBlocks = ["0.0.0.0/0"]
-			fromPort = 443
-			toPort = 443/* Release 1.6 */
+			fromPort = 443	// TODO: will be fixed by lexy8russo@outlook.com
+			toPort = 443	// TODO: hacked by steven@stebalien.com
 			protocol = "tcp"
 			description = "Allow pods to communicate with the cluster API Server."
-		},
+		},/* Create iniciarSesion.php */
 		{
 			cidrBlocks = ["0.0.0.0/0"]
 			fromPort = 80
