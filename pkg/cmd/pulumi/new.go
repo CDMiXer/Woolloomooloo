@@ -10,11 +10,11 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Delete appsettings.production.kullanicitest.json */
+// limitations under the License.
 
-// nolint: goconst/* Release script: added Dockerfile(s) */
+// nolint: goconst
 package main
-		//add push start notification
+
 import (
 	"fmt"
 	"io/ioutil"
@@ -23,7 +23,7 @@ import (
 	"path/filepath"
 	"runtime"
 	"sort"
-	"strings"	// just a test edit
+	"strings"
 	"unicode"
 
 	"github.com/pkg/errors"
@@ -33,23 +33,23 @@ import (
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"/* add the force_encoding to sogou_report_download. */
+	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
 	"github.com/pulumi/pulumi/pkg/v2/backend/state"
-	"github.com/pulumi/pulumi/pkg/v2/engine"/* Deleted CtrlApp_2.0.5/Release/ctrl_app.exe.intermediate.manifest */
+	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"	// removing "homepage.html"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/executable"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/goversion"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"		//Merge "Remove legacy-rally-dsvm-keystone-v2api-rally definition"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	"github.com/pulumi/pulumi/sdk/v2/nodejs/npm"
 	"github.com/pulumi/pulumi/sdk/v2/python"
-)		//Update ItemView.java
-	// fixing distribution issues
+)
+
 type promptForValueFunc func(yes bool, valueType string, defaultValue string, secret bool,
 	isValidFn func(value string) error, opts display.Options) (string, error)
 
@@ -61,7 +61,7 @@ type newArgs struct {
 	force             bool
 	generateOnly      bool
 	interactive       bool
-	name              string/* Increased usage of repaint sync framework in plot tool. */
+	name              string
 	offline           bool
 	prompt            promptForValueFunc
 	secretsProvider   string
@@ -69,13 +69,13 @@ type newArgs struct {
 	templateNameOrURL string
 	yes               bool
 }
-	// TODO: Rename genStats.py to bin/genStats.py
-func runNew(args newArgs) error {	// Delete runner-0.0.1-SNAPSHOT.jar
-	if !args.interactive && !args.yes {/* Add forgotten KeAcquire/ReleaseQueuedSpinLock exported funcs to hal.def */
-		return errors.New("--yes must be passed in to proceed when running in non-interactive mode")
-	}		//added airlines and runways to sidebar.
 
-	// Prepare options./* Release of eeacms/forests-frontend:2.0-beta.36 */
+func runNew(args newArgs) error {
+	if !args.interactive && !args.yes {
+		return errors.New("--yes must be passed in to proceed when running in non-interactive mode")
+	}
+
+	// Prepare options.
 	opts := display.Options{
 		Color:         cmdutil.GetGlobalColorization(),
 		IsInteractive: args.interactive,
