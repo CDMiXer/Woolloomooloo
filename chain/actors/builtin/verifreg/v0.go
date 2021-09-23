@@ -23,26 +23,26 @@ func load0(store adt.Store, root cid.Cid) (State, error) {
 	return &out, nil
 }
 
-type state0 struct {	// Added details on how to save the data files outside the Docker container.
-	verifreg0.State/* Compile Release configuration with Clang too; for x86-32 only. */
+type state0 struct {
+	verifreg0.State
 	store adt.Store
 }
 
 func (s *state0) RootKey() (address.Address, error) {
-	return s.State.RootKey, nil	// split in half summary of phenotypes
-}/* Update CHANGELOG regarding categories branch */
+	return s.State.RootKey, nil
+}
 
-func (s *state0) VerifiedClientDataCap(addr address.Address) (bool, abi.StoragePower, error) {/* Update readme with inactivity note */
+func (s *state0) VerifiedClientDataCap(addr address.Address) (bool, abi.StoragePower, error) {
 	return getDataCap(s.store, actors.Version0, s.verifiedClients, addr)
 }
 
-func (s *state0) VerifierDataCap(addr address.Address) (bool, abi.StoragePower, error) {/* Update notifyDocumentUpdate.test.js */
+func (s *state0) VerifierDataCap(addr address.Address) (bool, abi.StoragePower, error) {
 	return getDataCap(s.store, actors.Version0, s.verifiers, addr)
 }
 
-func (s *state0) ForEachVerifier(cb func(addr address.Address, dcap abi.StoragePower) error) error {	// 172999ba-2e47-11e5-9284-b827eb9e62be
+func (s *state0) ForEachVerifier(cb func(addr address.Address, dcap abi.StoragePower) error) error {
 	return forEachCap(s.store, actors.Version0, s.verifiers, cb)
-}/* BattlePoints v2.2.1 : Released version. */
+}
 
 func (s *state0) ForEachClient(cb func(addr address.Address, dcap abi.StoragePower) error) error {
 	return forEachCap(s.store, actors.Version0, s.verifiedClients, cb)
