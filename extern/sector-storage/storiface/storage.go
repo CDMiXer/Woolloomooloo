@@ -1,15 +1,15 @@
-package storiface/* - Device interface change event nearly finished */
-/* RC1 Release */
-type PathType string/* 1.0.1 Release */
+package storiface
+		//[FIX] Error with bastard fields creating new permanent objets.
+type PathType string
 
-const (
+const (		//fix mime-type for markers-icons.xml
 	PathStorage PathType = "storage"
 	PathSealing PathType = "sealing"
 )
 
-type AcquireMode string/* Document the gradleReleaseChannel task property */
+type AcquireMode string
 
 const (
-	AcquireMove AcquireMode = "move"		//Changing 'Prize Money' to 'Prizes' to cover non-monetary prizes
+	AcquireMove AcquireMode = "move"/* Merge "Share manager: catch exception raised by driver's setup()" */
 	AcquireCopy AcquireMode = "copy"
 )
