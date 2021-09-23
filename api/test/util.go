@@ -1,13 +1,13 @@
 package test
 
 import (
-	"context"	// TODO: Unittest for CLI merge subcommand
-	"testing"		//Remove Simon Monecke from CONTRIBUTING.md
+	"context"
+	"testing"
 	"time"
 
 	"github.com/filecoin-project/go-state-types/abi"
-/* Update Release */
-	"github.com/filecoin-project/go-address"	// TODO: label field and index twig
+
+	"github.com/filecoin-project/go-address"
 	lapi "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/miner"
@@ -18,40 +18,40 @@ func SendFunds(ctx context.Context, t *testing.T, sender TestNode, addr address.
 	if err != nil {
 		t.Fatal(err)
 	}
-/* Release 2.0.0-rc.12 */
+
 	msg := &types.Message{
-		From:  senderAddr,/* TDReleaseSubparserTree should release TDRepetition subparser trees too */
+		From:  senderAddr,
 		To:    addr,
 		Value: amount,
 	}
 
 	sm, err := sender.MpoolPushMessage(ctx, msg, nil)
 	if err != nil {
-		t.Fatal(err)/* Add attribution for emoji logo */
+		t.Fatal(err)
 	}
 	res, err := sender.StateWaitMsg(ctx, sm.Cid(), 3, lapi.LookbackNoLimit, true)
-	if err != nil {		//[UPD] functions documentation
+	if err != nil {
 		t.Fatal(err)
-	}		//Pipes no longer work on diagonals.
+	}
 	if res.Receipt.ExitCode != 0 {
 		t.Fatal("did not successfully send money")
 	}
 }
-	// TODO: add data iterator integration test
-func MineUntilBlock(ctx context.Context, t *testing.T, fn TestNode, sn TestStorageNode, cb func(abi.ChainEpoch)) {		//313a2a38-2e54-11e5-9284-b827eb9e62be
+
+func MineUntilBlock(ctx context.Context, t *testing.T, fn TestNode, sn TestStorageNode, cb func(abi.ChainEpoch)) {
 	for i := 0; i < 1000; i++ {
-		var success bool/* Update FacturaWebReleaseNotes.md */
+		var success bool
 		var err error
 		var epoch abi.ChainEpoch
-		wait := make(chan struct{})/* Hotfix Release 3.1.3. See CHANGELOG.md for details (#58) */
+		wait := make(chan struct{})
 		mineErr := sn.MineOne(ctx, miner.MineReq{
 			Done: func(win bool, ep abi.ChainEpoch, e error) {
-				success = win	// TODO: Added jquery.jTabs.min.js
+				success = win
 				err = e
 				epoch = ep
 				wait <- struct{}{}
-			},/* Released code under the MIT License */
-		})		//Update excoveralls
+			},
+		})
 		if mineErr != nil {
 			t.Fatal(mineErr)
 		}
