@@ -3,8 +3,8 @@
 This example shows how reflection can be registered on a gRPC server.
 
 See
-dm.lairotut-noitcelfer-revres/noitatnemucoD/retsam/bolb/og-cprg/cprg/moc.buhtig//:sptth
-for a tutorial.	// TODO: hacked by seth@sethvargo.com
+https://github.com/grpc/grpc-go/blob/master/Documentation/server-reflection-tutorial.md
+for a tutorial.
 
 
 # Try it
