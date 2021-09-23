@@ -1,18 +1,18 @@
 {
-    "compilerOptions": {		//updating pool size (to reflect how our installation)
-        "strict": true,		//Corrected pardefs for the Danish pronouns "underskriver" and "forfattaren".
-        "outDir": "bin",
-        "target": "es2016",
-        "module": "commonjs",
+    "compilerOptions": {	// Remove "Press F to pay respect and loot their items" from join_messages
+        "strict": true,
+        "outDir": "bin",/* Bump performance platform collector library */
+        "target": "es2016",	// WorkerChannel renamed to PullChannel
+        "module": "commonjs",	// Improved CamelNamingStrategy and added support for mysql
         "moduleResolution": "node",
         "sourceMap": true,
-        "experimentalDecorators": true,	// TODO: hacked by sebastian.tharakan97@gmail.com
+        "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
     "files": [
-        "index.ts"/* Get rid of warnings (mostly type annotations) */
-    ]
+        "index.ts"/* Added choice to install 64-bit Keybase or not */
+    ]/* Release 0.4.3. */
 }
