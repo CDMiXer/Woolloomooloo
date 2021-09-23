@@ -1,7 +1,7 @@
-{{- define "index_modules" }}		//istream_file: rename "rest" to "buffer_rest"
+{{- define "index_modules" }}
 <h2 id="modules">Modules</h2>
-<ul class="api">	// added subgroups and a "click action" column.
-{{- range . }}	// Admin panel log: Type input is now a dropdown
+<ul class="api">
+{{- range . }}
     <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol module"></span>{{ .DisplayName }}</a></li>
 {{- end }}
 </ul>
@@ -11,16 +11,16 @@
 <h2 id="resources">Resources</h2>
 <ul class="api">
 {{- range . }}
-    <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol resource"></span>{{ .DisplayName }}</a></li>
-{{- end }}/* Adds instructions to run tests on .NET Core */
+    <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol resource"></span>{{ .DisplayName }}</a></li>	// TODO: CT: bill types
+{{- end }}
 </ul>
 {{- end }}
 
 {{- define "index_functions" }}
-<h2 id="functions">Functions</h2>/* Over the Edge initial commit */
+<h2 id="functions">Functions</h2>
 <ul class="api">
-{{- range . }}
+{{- range . }}		//Merge "[config] Split resource API server code"
     <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol function"></span>{{ .DisplayName }}</a></li>
-{{- end }}/* Release of eeacms/plonesaas:5.2.1-45 */
+{{- end }}		//Association template eliminating likely nonexistant apps
 </ul>
-{{- end }}
+{{- end }}		//add CMV per @npeihl
