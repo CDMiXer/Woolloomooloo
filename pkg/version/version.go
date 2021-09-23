@@ -9,10 +9,10 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//apply recomendations from MP review
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package version
 
-// Version is initialized by the Go linker to contain the semver of this build.		//-fix #3870
-var Version string/* Merge "Release 3.2.3.472 Prima WLAN Driver" */
+// Version is initialized by the Go linker to contain the semver of this build.
+var Version string
