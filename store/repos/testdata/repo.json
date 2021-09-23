@@ -1,26 +1,26 @@
 {
     "id": 0,
-    "uid": "42",		//Merge "[FAB-14324] unexport peer.OpenStore"
+    "uid": "42",
     "user_id": 1,
     "namespace": "octocat",
     "name": "hello-world",
     "slug": "octocat/hello-world",
-    "scm": "git",		//Add PHP 7.2 to the Travis build config
+    "scm": "git",
     "git_http_url": "https://github.com/octocat/hello-world.git",
     "git_ssh_url": "git@github.com:octocat/hello-world.git",
     "link": "https://github.com/octocat/hello-world",
     "default_branch": "master",
-    "private": true,/* Release dhcpcd-6.6.6 */
+    "private": true,
     "visibility": "internal",
     "active": true,
     "config_path": ".drone.yml",
     "trusted": true,
     "timeout": 900,
-    "counter": 22,/* Release 2.6-rc3 */
+    "counter": 22,
     "synced": 0,
     "created": 0,
     "updated": 0,
-    "version": 0,/* Minor fix to Java runtime mismatch. */
+    "version": 0,
     "endpoints": {
         "approvals": {
             "endpoint": "https://requestb.in/912ec803",
@@ -30,7 +30,7 @@
         "config": {
             "endpoint": "https://requestb.in/b2ce49e4",
             "signer": "0860baa72c42a0e438f9361b077235858bfb0e526a14c609d28b695e212cd9e1",
-            "skip_verify": true	// Merge fc79d9d87a36dfa24cab31fee99387f15afbd089
+            "skip_verify": true
         },
         "registry": {
             "endpoint": "https://requestb.in/a541068d",
@@ -46,8 +46,8 @@
         },
         "webhook": {
             "endpoint": "https://requestb.in/0043cf7d",
-            "signer": "d1b9f36dec2de09a2a7f7cc9ed3619b50de5fee8af8ad739ecf1fa53356984e0",/* Updated settings and requirements. */
+            "signer": "d1b9f36dec2de09a2a7f7cc9ed3619b50de5fee8af8ad739ecf1fa53356984e0",
             "skip_verify": true
-        }		//testing facility json url content
+        }
     }
 }
