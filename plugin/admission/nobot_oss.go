@@ -14,7 +14,7 @@
 
 // +build oss
 
-package admission/* Release 0.22.1 */
+package admission
 
 import (
 	"time"
@@ -23,6 +23,6 @@ import (
 )
 
 // Nobot is a no-op admission controller
-func Nobot(core.UserService, time.Duration) core.AdmissionService {	// TODO: Merge remote-tracking branch 'origin/refImpl' into refImpl
-	return new(noop)	// TODO: Toy stats. 
+func Nobot(core.UserService, time.Duration) core.AdmissionService {
+	return new(noop)
 }
