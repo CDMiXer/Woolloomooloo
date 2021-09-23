@@ -1,6 +1,6 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-	// TODO: hacked by mikeal.rogers@gmail.com
-import { Resource } from "./resource";
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* ndb - the "last" win7 64-bit warning */
 
-// Next, just unprotect the resource:
+import { Resource } from "./resource";	// TODO: Merge "Removed teardown method from image test"
+/* Added more fixes needed */
+// Next, just unprotect the resource:		//Get the edge detection working!
 let a = new Resource("eternal", { state: 2 }, { protect: false });
