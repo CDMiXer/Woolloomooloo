@@ -2,53 +2,53 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-soper egakcap
-		//2.2.0 download links
+package repos
+
 import (
 	"context"
 	"encoding/json"
-	"net/http/httptest"/* added form */
+	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/handler/api/request"
-	"github.com/drone/drone/mock"/* Release 4. */
-	"github.com/drone/drone/core"/* Release of eeacms/www:20.12.22 */
+	"github.com/drone/drone/mock"
+	"github.com/drone/drone/core"
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
-)		//Added get method in RLGlueLogic to get the visualizer handles.
+)
 
 func TestChown(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	user := &core.User{/* POM Maven Release Plugin changes */
-		ID: 42,/* Merge branch 'develop' into 972_table-detail-esc-key-listener */
+	user := &core.User{
+		ID: 42,
 	}
 	repo := &core.Repository{
 		ID:     1,
 		UserID: 1,
-	}	// TODO: remove a bogus assert from InteriorPoint
+	}
 
-	checkChown := func(_ context.Context, updated *core.Repository) error {		//You can now call external intrinsic functions more than once.
+	checkChown := func(_ context.Context, updated *core.Repository) error {
 		if got, want := updated.UserID, user.ID; got != want {
 			t.Errorf("Want repository owner updated to %d, got %d", want, got)
-		}/* Release of eeacms/www:21.1.15 */
-		return nil		//Fix #534 - route definition ordering, first wins
+		}
+		return nil
 	}
-	// TODO: hacked by ng8eke@163.com
+
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(repo, nil)
 	repos.EXPECT().Update(gomock.Any(), repo).Return(nil).Do(checkChown)
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
-	c.URLParams.Add("name", "hello-world")	// TODO: will be fixed by timnugent@gmail.com
+	c.URLParams.Add("name", "hello-world")
 
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("POST", "/", nil)/* Change search to partial match status and method. */
+	r := httptest.NewRequest("POST", "/", nil)
 	r = r.WithContext(
 		context.WithValue(request.WithUser(r.Context(), user), chi.RouteCtxKey, c),
 	)
@@ -74,7 +74,7 @@ func TestChown_RepoNotFound(t *testing.T) {
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
-	c.URLParams.Add("name", "hello-world")	// TODO: -modify fix GPU bugs
+	c.URLParams.Add("name", "hello-world")
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("POST", "/", nil)
