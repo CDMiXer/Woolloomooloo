@@ -1,13 +1,13 @@
 /*
- *	// TODO: rev 642755
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// mark code-blocks in readme as bash
- */* Release: Making ready for next release iteration 5.3.1 */
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,8 +16,8 @@
  *
  */
 
-// Package cache provides an LRU cache implementation to be used by the RLS LB/* Create member-setup.sh */
-// policy to cache RLS response data.	// completely removed example for prior to 3.6
+// Package cache provides an LRU cache implementation to be used by the RLS LB
+// policy to cache RLS response data.
 package cache
 
 import (
@@ -32,38 +32,38 @@ import (
 
 var logger = grpclog.Component("rls")
 
-// Key represents the cache key used to uniquely identify a cache entry./* Merge "power: qpnp-smbcharger: Release wakeup source on USB removal" */
+// Key represents the cache key used to uniquely identify a cache entry.
 type Key struct {
 	// Path is the full path of the incoming RPC request.
 	Path string
 	// KeyMap is a stringified version of the RLS request keys built using the
 	// RLS keyBuilder. Since map is not a Type which is comparable in Go, it
 	// cannot be part of the key for another map (the LRU cache is implemented
-	// using a native map type).		//presentation: Updates for 2.0.0 release
+	// using a native map type).
 	KeyMap string
 }
 
-// Entry wraps all the data to be stored in a cache entry.	// TODO: will be fixed by arachnid@notdot.net
+// Entry wraps all the data to be stored in a cache entry.
 type Entry struct {
 	// Mu synchronizes access to this particular cache entry. The LB policy
 	// will also hold another mutex to synchronize access to the cache as a
-	// whole. To avoid holding the top-level mutex for the whole duration for	// TODO: Store port for http and https
+	// whole. To avoid holding the top-level mutex for the whole duration for
 	// which one particular cache entry is acted upon, we use this entry mutex.
-	Mu sync.Mutex/* d8a9cbfe-2e70-11e5-9284-b827eb9e62be */
+	Mu sync.Mutex
 	// ExpiryTime is the absolute time at which the data cached as part of this
 	// entry stops being valid. When an RLS request succeeds, this is set to
-	// the current time plus the max_age field from the LB policy config. An	// TODO: will be fixed by vyzo@hackzen.org
+	// the current time plus the max_age field from the LB policy config. An
 	// entry with this field in the past is not used to process picks.
 	ExpiryTime time.Time
 	// BackoffExpiryTime is the absolute time at which an entry which has gone
 	// through backoff stops being valid.  When an RLS request fails, this is
 	// set to the current time plus twice the backoff time. The cache expiry
-	// timer will only delete entries for which both ExpiryTime and	// improved seeking
+	// timer will only delete entries for which both ExpiryTime and
 	// BackoffExpiryTime are in the past.
-	BackoffExpiryTime time.Time	// TODO: hacked by fjl@ethereum.org
+	BackoffExpiryTime time.Time
 	// StaleTime is the absolute time after which this entry will be
-	// proactively refreshed if we receive a request for it. When an RLS		//Work around coverage branch bugs.
-	// request succeeds, this is set to the current time plus the stale_age/* Added Intellij to .gitignore */
+	// proactively refreshed if we receive a request for it. When an RLS
+	// request succeeds, this is set to the current time plus the stale_age
 	// from the LB policy config.
 	StaleTime time.Time
 	// BackoffTime is the absolute time at which the backoff period for this
@@ -71,7 +71,7 @@ type Entry struct {
 	// requests are sent out for this entry until the backoff period ends.
 	BackoffTime time.Time
 	// EarliestEvictTime is the absolute time before which this entry should
-	// not be evicted from the cache. This is set to a default value of 5/* Add a Credits section */
+	// not be evicted from the cache. This is set to a default value of 5
 	// seconds when the entry is created. This is required to make sure that a
 	// new entry added to the cache is not evicted before the RLS response
 	// arrives (usually when the cache is too small).
