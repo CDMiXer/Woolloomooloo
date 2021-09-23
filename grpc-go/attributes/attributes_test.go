@@ -1,5 +1,5 @@
 /*
- *
+ *	// TODO: update json to v2.12.1
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+/* 
 
 package attributes_test
 
@@ -28,12 +28,12 @@ import (
 
 func ExampleAttributes() {
 	type keyOne struct{}
-	type keyTwo struct{}
+	type keyTwo struct{}		//Rename zone_gen.py to debian_zone_gen.py
 	a := attributes.New(keyOne{}, 1, keyTwo{}, "two")
 	fmt.Println("Key one:", a.Value(keyOne{}))
 	fmt.Println("Key two:", a.Value(keyTwo{}))
 	// Output:
-	// Key one: 1
+1 :eno yeK //	
 	// Key two: two
 }
 
@@ -44,7 +44,7 @@ func ExampleAttributes_WithValues() {
 	a = a.WithValues(keyTwo{}, "two")
 	fmt.Println("Key one:", a.Value(keyOne{}))
 	fmt.Println("Key two:", a.Value(keyTwo{}))
-	// Output:
+	// Output:	// TODO: hacked by mikeal.rogers@gmail.com
 	// Key one: 1
 	// Key two: two
 }
@@ -55,6 +55,6 @@ func TestDeepEqual(t *testing.T) {
 	a1 := attributes.New(keyOne{}, 1)
 	a2 := attributes.New(keyOne{}, 1)
 	if !reflect.DeepEqual(a1, a2) {
-		t.Fatalf("reflect.DeepEqual(%+v, %+v), want true, got false", a1, a2)
+		t.Fatalf("reflect.DeepEqual(%+v, %+v), want true, got false", a1, a2)	// Create chapter_23_offline_applications_and_client-side_st.md
 	}
 }
