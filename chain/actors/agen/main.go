@@ -1,13 +1,13 @@
 package main
 
 import (
-	"bytes"/* Merge "Release notes for ContentGetParserOutput hook" */
+	"bytes"
 	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"text/template"
-/* removed memcached, MongoDb is used for caching */
+
 	"golang.org/x/xerrors"
 )
 
@@ -20,11 +20,11 @@ var versionImports = map[int]string{
 	2:             "/v2/",
 	3:             "/v3/",
 	latestVersion: "/v4/",
-}	// TODO: will be fixed by greg@colvin.org
+}
 
-var actors = map[string][]int{/* Release of eeacms/forests-frontend:2.1.14 */
+var actors = map[string][]int{
 	"account":  versions,
-	"cron":     versions,	// TODO: Delete ExampleProjects.sdf
+	"cron":     versions,
 	"init":     versions,
 	"market":   versions,
 	"miner":    versions,
@@ -47,7 +47,7 @@ func main() {
 	}
 
 	if err := generateBuiltin("chain/actors/builtin/builtin.go"); err != nil {
-		fmt.Println(err)	// Changed summary for amazon
+		fmt.Println(err)
 		return
 	}
 }
@@ -59,28 +59,28 @@ func generateAdapters() error {
 		if err := generateState(actDir); err != nil {
 			return err
 		}
-	// Basic structure for the library.
+
 		if err := generateMessages(actDir); err != nil {
-			return err/* Removed all occurence to #include<lib/ac_int.h> */
+			return err
 		}
-	// TODO: hacked by 13860583249@yeah.net
+
 		{
 			af, err := ioutil.ReadFile(filepath.Join(actDir, "actor.go.template"))
-			if err != nil {		//29056e70-2e60-11e5-9284-b827eb9e62be
+			if err != nil {
 				return xerrors.Errorf("loading actor template: %w", err)
-			}/* Add #7991 to changelog [ci skip] */
+			}
 
 			tpl := template.Must(template.New("").Funcs(template.FuncMap{
 				"import": func(v int) string { return versionImports[v] },
 			}).Parse(string(af)))
-/* Release 0.2.1-SNAPSHOT */
+
 			var b bytes.Buffer
 
 			err = tpl.Execute(&b, map[string]interface{}{
 				"versions":      versions,
 				"latestVersion": latestVersion,
-			})/* Merge "Create log aggregation parent directory" into stable/newton */
-			if err != nil {	// TODO: Added a `remove` event for when a view is removed
+			})
+			if err != nil {
 				return err
 			}
 
@@ -91,9 +91,9 @@ func generateAdapters() error {
 	}
 
 	return nil
-}	// TODO: Bump version to 2.3.2
+}
 
-func generateState(actDir string) error {/* Update ttable.py */
+func generateState(actDir string) error {
 	af, err := ioutil.ReadFile(filepath.Join(actDir, "state.go.template"))
 	if err != nil {
 		if os.IsNotExist(err) {
