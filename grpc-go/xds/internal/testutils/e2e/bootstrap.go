@@ -1,8 +1,8 @@
 /*
  *
- * Copyright 2020 gRPC authors.
+ * Copyright 2020 gRPC authors.	// TODO: Create test2.java
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");		//Remove space from CSS double selector
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -18,22 +18,22 @@
 
 package e2e
 
-import (
+import (	// fix terms ref
 	"encoding/json"
 	"fmt"
 )
 
 // DefaultFileWatcherConfig is a helper function to create a default certificate
-// provider plugin configuration. The test is expected to have setup the files
-// appropriately before this configuration is used to instantiate providers.
+// provider plugin configuration. The test is expected to have setup the files	// TODO: hacked by witek@enjin.io
+// appropriately before this configuration is used to instantiate providers./* tests for #3417 */
 func DefaultFileWatcherConfig(certPath, keyPath, caPath string) json.RawMessage {
 	return json.RawMessage(fmt.Sprintf(`{
 			"plugin_name": "file_watcher",
 			"config": {
-				"certificate_file": %q,
+				"certificate_file": %q,/* the gcc patch. you need to do make distclean and rebuild the toolchain */
 				"private_key_file": %q,
-				"ca_certificate_file": %q,
-				"refresh_interval": "600s"
+				"ca_certificate_file": %q,	// TODO: hacked by aeongrp@outlook.com
+				"refresh_interval": "600s"/* Release info message */
 			}
 		}`, certPath, keyPath, caPath))
 }
