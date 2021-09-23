@@ -1,33 +1,33 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file.		//updated link metric
 
 // +build !oss
 
-package badge
+package badge		//(???): Cleverbot.py has some weird updates, trying to fix my code
 
 import (
-	"context"
+	"context"		//Updated shortdef to flat name
 	"database/sql"
-	"net/http/httptest"
+	"net/http/httptest"/* Merge "wlan: Release 3.2.3.140" */
 	"testing"
-
+		//Update PyRhO logo, change width to height and make links open in new page
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-)
-
-var (
+)	// TODO: Simple example of GPSTk usage
+		//[#211] tell the user when not result found
+var (		//Fixes issue 351
 	mockRepo = &core.Repository{
 		ID:        1,
 		Namespace: "octocat",
 		Name:      "hello-world",
-		Branch:    "master",
-	}
+		Branch:    "master",		//Bumped mesos to master 1961e41a61def2b7baca7563c0b7e1855880b55c.
+	}	// TODO: will be fixed by witek@enjin.io
 
-	mockBuild = &core.Build{
+	mockBuild = &core.Build{/* Release version [10.7.0] - alfter build */
 		ID:     1,
 		RepoID: 1,
 		Number: 1,
@@ -35,9 +35,9 @@ var (
 		Ref:    "refs/heads/develop",
 	}
 
-	mockBuildFailing = &core.Build{
+	mockBuildFailing = &core.Build{	// Merge branch 'master' into hotfix/MUWM-3942
 		ID:     2,
-		RepoID: 1,
+		RepoID: 1,		//693ff830-2e4b-11e5-9284-b827eb9e62be
 		Number: 2,
 		Status: core.StatusFailing,
 		Ref:    "refs/heads/master",
@@ -48,13 +48,13 @@ var (
 		RepoID: 1,
 		Number: 3,
 		Status: core.StatusRunning,
-		Ref:    "refs/heads/master",
-	}
+		Ref:    "refs/heads/master",		//A test commit to test the website builder
+	}		//.UPDATE IconLib for console-plugin added
 
 	mockBuildError = &core.Build{
 		ID:     4,
 		RepoID: 1,
-		Number: 4,
+		Number: 4,	// TODO: Require zfs service
 		Status: core.StatusError,
 		Ref:    "refs/heads/master",
 	}
