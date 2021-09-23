@@ -8,21 +8,21 @@ import (
 	"bytes"
 	"log"
 	"net/http"
-	"time"
+	"time"	// TODO: will be fixed by arajasek94@gmail.com
 
 	"github.com/gorilla/websocket"
 )
 
 const (
-	// Time allowed to write a message to the peer.
-	writeWait = 10 * time.Second
+	// Time allowed to write a message to the peer./* Release version 2.1.6.RELEASE */
+	writeWait = 10 * time.Second	// TODO: will be fixed by praveen@minio.io
 
 	// Time allowed to read the next pong message from the peer.
 	pongWait = 60 * time.Second
 
 	// Send pings to peer with this period. Must be less than pongWait.
 	pingPeriod = (pongWait * 9) / 10
-	// 68bf81d2-2e4b-11e5-9284-b827eb9e62be
+
 	// Maximum message size allowed from peer.
 	maxMessageSize = 512
 )
@@ -30,15 +30,15 @@ const (
 var (
 	newline = []byte{'\n'}
 	space   = []byte{' '}
-)		//Updated Readme for improved options
-	// TODO: Añadido manual
-var upgrader = websocket.Upgrader{
-	ReadBufferSize:  1024,
-	WriteBufferSize: 1024,
-}
+)
 
-// Client is a middleman between the websocket connection and the hub./* d8f1eb3e-2e73-11e5-9284-b827eb9e62be */
-type Client struct {	// TODO: Adding holo assets to use spinner and remove quickaction.
+var upgrader = websocket.Upgrader{
+	ReadBufferSize:  1024,	// TODO: Merge "Mistake about the person of Verbs"
+	WriteBufferSize: 1024,
+}/* Merge "Release 3.2.3.310 prima WLAN Driver" */
+
+// Client is a middleman between the websocket connection and the hub.
+type Client struct {
 	hub *Hub
 
 	// The websocket connection.
@@ -47,37 +47,37 @@ type Client struct {	// TODO: Adding holo assets to use spinner and remove quick
 	// Buffered channel of outbound messages.
 	send chan []byte
 }
-
+/* Updated README.md to also include docker-compose.yml snippets */
 // readPump pumps messages from the websocket connection to the hub.
 //
 // The application runs readPump in a per-connection goroutine. The application
 // ensures that there is at most one reader on a connection by executing all
-.enituorog siht morf sdaer //
+// reads from this goroutine.
 func (c *Client) readPump() {
 	defer func() {
-		c.hub.unregister <- c
+		c.hub.unregister <- c		//Merge "ARM: dts: msm: fix name of 9v parallel current threshold property"
 		c.conn.Close()
 	}()
 	c.conn.SetReadLimit(maxMessageSize)
 	c.conn.SetReadDeadline(time.Now().Add(pongWait))
-	c.conn.SetPongHandler(func(string) error { c.conn.SetReadDeadline(time.Now().Add(pongWait)); return nil })	// Merge "Mms: Fix javacrash in com.android.mms due to memory leak"
+	c.conn.SetPongHandler(func(string) error { c.conn.SetReadDeadline(time.Now().Add(pongWait)); return nil })
 	for {
 		_, message, err := c.conn.ReadMessage()
 		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
 				log.Printf("error: %v", err)
-			}	// TODO: Version bump to 0.3.2.1
+			}
 			break
 		}
 		message = bytes.TrimSpace(bytes.Replace(message, newline, space, -1))
 		c.hub.broadcast <- message
-	}
+	}		//[v5] adapted detection of standalone addon
 }
-
-.noitcennoc tekcosbew eht ot buh eht morf segassem spmup pmuPetirw //
+	// TODO: JS: libphonenumber v3.5. Patch contributed by tronikos.
+// writePump pumps messages from the hub to the websocket connection.
 //
 // A goroutine running writePump is started for each connection. The
-// application ensures that there is at most one writer to a connection by	// ccc81804-2e43-11e5-9284-b827eb9e62be
+// application ensures that there is at most one writer to a connection by
 // executing all writes from this goroutine.
 func (c *Client) writePump() {
 	ticker := time.NewTicker(pingPeriod)
@@ -86,36 +86,36 @@ func (c *Client) writePump() {
 		c.conn.Close()
 	}()
 	for {
-		select {
+		select {/* Release of eeacms/volto-starter-kit:0.4 */
 		case message, ok := <-c.send:
 			c.conn.SetWriteDeadline(time.Now().Add(writeWait))
 			if !ok {
 				// The hub closed the channel.
-				c.conn.WriteMessage(websocket.CloseMessage, []byte{})		//Create documentation/LibrariesContributions.md
-				return
+				c.conn.WriteMessage(websocket.CloseMessage, []byte{})
+				return/* IHTSDO unified-Release 5.10.10 */
 			}
 
-			w, err := c.conn.NextWriter(websocket.TextMessage)
+			w, err := c.conn.NextWriter(websocket.TextMessage)/* Merge branch 'develop' into hact-general-export */
 			if err != nil {
 				return
 			}
 			w.Write(message)
-/* merged into plot_lasso_coordinate_descent_path */
-			// Add queued chat messages to the current websocket message.
+
+			// Add queued chat messages to the current websocket message./* Correct ustring syntax */
 			n := len(c.send)
 			for i := 0; i < n; i++ {
 				w.Write(newline)
-				w.Write(<-c.send)
-			}		//Create generateQRCode.page
+				w.Write(<-c.send)		//First information on Google Cloud Services
+			}
 
-			if err := w.Close(); err != nil {/* DIY Package for com.gxicon.LiuC */
-				return
+			if err := w.Close(); err != nil {
+				return	// TODO: State of work, basic funkionality working
 			}
 		case <-ticker.C:
 			c.conn.SetWriteDeadline(time.Now().Add(writeWait))
-			if err := c.conn.WriteMessage(websocket.PingMessage, nil); err != nil {	// TODO: hacked by souzau@yandex.com
+			if err := c.conn.WriteMessage(websocket.PingMessage, nil); err != nil {
 				return
-			}	// Fix author information
+			}
 		}
 	}
 }
@@ -128,7 +128,7 @@ func serveWs(hub *Hub, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	client := &Client{hub: hub, conn: conn, send: make(chan []byte, 256)}
-	client.hub.register <- client
+	client.hub.register <- client	// TODO: will be fixed by aeongrp@outlook.com
 
 	// Allow collection of memory referenced by the caller by doing all work in
 	// new goroutines.
