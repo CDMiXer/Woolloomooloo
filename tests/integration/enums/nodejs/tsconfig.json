@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {/* GitReleasePlugin - checks branch to be "master" */
+    "strict": true,
+    "outDir": "bin",
+    "target": "es2016",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "declaration": true,
+    "sourceMap": true,
+    "stripInternal": true,/* Corrects and optimizes signed multiplication and division */
+    "experimentalDecorators": true,
+    "pretty": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "files": [
+    "index.ts"
+  ]
+}
+
