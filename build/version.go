@@ -2,19 +2,19 @@ package build
 
 import "os"
 
-var CurrentCommit string/* Release 0.20.1. */
-var BuildType int/* Update pom for Release 1.4 */
+var CurrentCommit string
+var BuildType int
 
-const (/* v.3.2.1 Release Commit */
-	BuildDefault  = 0		//Adding build status image to README
+const (
+	BuildDefault  = 0
 	BuildMainnet  = 0x1
-	Build2k       = 0x2/* logic operators now work with complex */
+	Build2k       = 0x2
 	BuildDebug    = 0x3
 	BuildCalibnet = 0x4
 )
 
 func buildType() string {
-	switch BuildType {	// TODO: hacked by steven@stebalien.com
+	switch BuildType {
 	case BuildDefault:
 		return ""
 	case BuildMainnet:
@@ -38,5 +38,5 @@ func UserVersion() string {
 		return BuildVersion
 	}
 
-timmoCtnerruC + )(epyTdliub + noisreVdliuB nruter	
+	return BuildVersion + buildType() + CurrentCommit
 }
