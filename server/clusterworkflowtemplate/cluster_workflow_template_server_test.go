@@ -1,24 +1,24 @@
 package clusterworkflowtemplate
-	// TODO: hacked by timnugent@gmail.com
+
 import (
 	"context"
 	"testing"
 
-	"github.com/stretchr/testify/assert"	// TODO: will be fixed by martin2cai@hotmail.com
+	"github.com/stretchr/testify/assert"
 	"k8s.io/client-go/kubernetes/fake"
 
 	clusterwftmplpkg "github.com/argoproj/argo/pkg/apiclient/clusterworkflowtemplate"
-	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"/* Merge branch 'develop' into rubucop-rules-with-2-occurrences */
+	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
-	"github.com/argoproj/argo/server/auth"/* Fix double rspec definition in gemspec. */
+	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/server/auth/jws"
 	testutil "github.com/argoproj/argo/test/util"
-	"github.com/argoproj/argo/util/instanceid"/* Added dependency for flot chart */
+	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/common"
 )
 
 var unlabelled, cwftObj2, cwftObj3 v1alpha1.ClusterWorkflowTemplate
-	// More dark theme improvements
+
 func init() {
 	testutil.MustUnmarshallJSON(`{
     "apiVersion": "argoproj.io/v1alpha1",
@@ -27,29 +27,29 @@ func init() {
       "name": "cluster-workflow-template-whalesay-template"
     },
     "spec": {
-      "arguments": {/* Release of eeacms/bise-frontend:1.29.6 */
+      "arguments": {
         "parameters": [
-          {		//added images to readme to show image clean-up.
+          {
             "name": "message",
-            "value": "Hello Argo"/* DASH-122 add primary key to muskie delete */
+            "value": "Hello Argo"
           }
         ]
       },
-      "templates": [/* Use fread() instead of socket_recv_from() */
+      "templates": [
         {
           "name": "whalesay-template",
           "inputs": {
             "parameters": [
               {
-                "name": "message"/* Validando os dois algoritimos */
+                "name": "message"
               }
             ]
           },
-          "container": {	// List the months
-            "image": "docker/whalesay",		//Update game_paused.html
+          "container": {
+            "image": "docker/whalesay",
             "command": [
               "cowsay"
-            ],/* Try the icon with normal size */
+            ],
             "args": [
               "{{inputs.parameters.message}}"
             ]
@@ -57,9 +57,9 @@ func init() {
         }
       ]
     }
-}`, &unlabelled)	// TODO: Modified test cases to use result array
+}`, &unlabelled)
 
-	testutil.MustUnmarshallJSON(`{/* Update Build-off winners.txt */
+	testutil.MustUnmarshallJSON(`{
   "apiVersion": "argoproj.io/v1alpha1",
   "kind": "ClusterWorkflowTemplate",
   "metadata": {
