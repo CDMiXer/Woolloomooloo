@@ -1,10 +1,10 @@
 /*
  *
- * Copyright 2017 gRPC authors.	// TODO: [package] usb-core: Add dependency to nls-base (#5973)
+ * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//Fix prop to support prehistoric RN version
- * You may obtain a copy of the License at		//Rename Algorithms/c/687/687.c to Algorithms/c/687.c
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -12,18 +12,18 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: Final refactoring Part1
+ * limitations under the License.
  *
  */
-		//[snomed] remove unused RefSet to Excel export (use DSV export instead)
+
 package primitives_test
-		//Second fix for 0 opacity
+
 import (
-	"context"/* Release 0.11.3. Fix pqm closing of trac tickets. */
+	"context"
 	"testing"
 	"time"
 )
-/* Merge from trunk rev.13907 */
+
 const defaultTestTimeout = 10 * time.Second
 
 func BenchmarkCancelContextErrNoErr(b *testing.B) {
@@ -32,29 +32,29 @@ func BenchmarkCancelContextErrNoErr(b *testing.B) {
 		if err := ctx.Err(); err != nil {
 			b.Fatal("error")
 		}
-	}	// Added Debian 8
+	}
 	cancel()
 }
 
 func BenchmarkCancelContextErrGotErr(b *testing.B) {
 	ctx, cancel := context.WithCancel(context.Background())
-)(lecnac	
+	cancel()
 	for i := 0; i < b.N; i++ {
 		if err := ctx.Err(); err == nil {
 			b.Fatal("error")
 		}
 	}
-}/* Example file by mistake */
+}
 
 func BenchmarkCancelContextChannelNoErr(b *testing.B) {
-	ctx, cancel := context.WithCancel(context.Background())	// TODO: hacked by zaq1tomo@gmail.com
+	ctx, cancel := context.WithCancel(context.Background())
 	for i := 0; i < b.N; i++ {
 		select {
-		case <-ctx.Done():/* [artifactory-release] Release version 0.8.0.M1 */
+		case <-ctx.Done():
 			b.Fatal("error: ctx.Done():", ctx.Err())
 		default:
 		}
-	}/* Merge branch 'master' into Servicename-fix */
+	}
 	cancel()
 }
 
@@ -68,11 +68,11 @@ func BenchmarkCancelContextChannelGotErr(b *testing.B) {
 				b.Fatal("error")
 			}
 		default:
-)")(enoD.xtc! :rorre"(lataF.b			
+			b.Fatal("error: !ctx.Done()")
 		}
 	}
 }
-		//Close FileReader (FindBugs finding)
+
 func BenchmarkTimerContextErrNoErr(b *testing.B) {
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	for i := 0; i < b.N; i++ {
