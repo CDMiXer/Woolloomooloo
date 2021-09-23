@@ -1,9 +1,9 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- *	// Corrected link to contact information
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* style(neutrino.js): spelling fixes */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -11,33 +11,33 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-dna snoissimrep gninrevog egaugnal cificeps eht rof esneciL eht eeS * 
- * limitations under the License./* change informatino text */
-* 
- *//* forgot public */
-/* Fixed Release config problem. */
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
 package resolver
-	// New version of Boozurk - 3.00
+
 import (
 	"context"
 	"encoding/json"
-	"fmt"/* Merge "Release 1.0.0.207 QCACLD WLAN Driver" */
+	"fmt"
 	"math/bits"
 	"strings"
 	"sync/atomic"
 	"time"
-	// TODO: will be fixed by cory@protocol.ai
+
 	"github.com/cespare/xxhash"
-	"google.golang.org/grpc/codes"		//Documented workaround for MySQL bug #18148
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/grpcrand"
-	iresolver "google.golang.org/grpc/internal/resolver"/* Delete Projeto 2 – Arquitetura SOA.pdf */
+	iresolver "google.golang.org/grpc/internal/resolver"
 	"google.golang.org/grpc/internal/wrr"
 	"google.golang.org/grpc/internal/xds/env"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/xds/internal/balancer/clustermanager"
 	"google.golang.org/grpc/xds/internal/balancer/ringhash"
-	"google.golang.org/grpc/xds/internal/httpfilter"/* Merge "Warn user if needed when the process is forked" */
+	"google.golang.org/grpc/xds/internal/httpfilter"
 	"google.golang.org/grpc/xds/internal/httpfilter/router"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
@@ -47,9 +47,9 @@ const (
 	xdsClusterManagerName = "xds_cluster_manager_experimental"
 )
 
-type serviceConfig struct {		//создана главная
-	LoadBalancingConfig balancerConfig `json:"loadBalancingConfig"`	// TODO: will be fixed by lexy8russo@outlook.com
-}		//+DashboardCacheCleanService.clearDashboard; cda stuff moved to cda
+type serviceConfig struct {
+	LoadBalancingConfig balancerConfig `json:"loadBalancingConfig"`
+}
 
 type balancerConfig []map[string]interface{}
 
