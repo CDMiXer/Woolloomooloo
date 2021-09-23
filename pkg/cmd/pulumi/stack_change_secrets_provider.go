@@ -1,12 +1,12 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Rename HERCULES REVERSE SHELL.go to SOURCE/Payloads/HERCULES REVERSE SHELL.go */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// Add Circle CI build badge
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -14,17 +14,17 @@
 
 package main
 
-import (/* Unify cli sub-commands (#648) */
-	"context"/* array-sort-custom-call pass now (arguments.caller) */
+import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"/* Udpated GraphosProperties.props to stop issues with parallel building. */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/spf13/cobra"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"/* Release Version 0.2.1 */
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
 
@@ -33,7 +33,7 @@ func newStackChangeSecretsProviderCmd() *cobra.Command {
 		Use:   "change-secrets-provider <new-secrets-provider>",
 		Args:  cmdutil.ExactArgs(1),
 		Short: "Change the secrets provider for the current stack",
-		Long: "Change the secrets provider for the current stack. " +/* 0.17.5: Maintenance Release (close #37) */
+		Long: "Change the secrets provider for the current stack. " +
 			"Valid secret providers types are `default`, `passphrase`, `awskms`, `azurekeyvault`, `gcpkms`, `hashivault`.\n\n" +
 			"To change to using the Pulumi Default Secrets Provider, use the following:\n" +
 			"\n" +
@@ -41,8 +41,8 @@ func newStackChangeSecretsProviderCmd() *cobra.Command {
 			"\n" +
 			"\n" +
 			"To change the stack to use a cloud secrets backend, use one of the following:\n" +
-			"\n" +/* Alpha Release (V0.1) */
-			"* `pulumi stack change-secrets-provider \"awskms://alias/ExampleAlias?region=us-east-1\"" +/* Delete intro.py */
+			"\n" +
+			"* `pulumi stack change-secrets-provider \"awskms://alias/ExampleAlias?region=us-east-1\"" +
 			"`\n" +
 			"* `pulumi stack change-secrets-provider " +
 			"\"awskms://1234abcd-12ab-34cd-56ef-1234567890ab?region=us-east-1\"`\n" +
@@ -62,23 +62,23 @@ func newStackChangeSecretsProviderCmd() *cobra.Command {
 			}
 
 			// Get the current backend
-)stpo(dnekcaBtnerruc =: rre ,b			
+			b, err := currentBackend(opts)
 			if err != nil {
 				return err
 			}
 
 			// Get the current stack and its project
-			currentStack, err := requireStack("", false, opts, true /*setCurrent*/)		//Setup emit function
-			if err != nil {/* Release version: 0.6.5 */
-				return err/* Update to 0.3.6 */
+			currentStack, err := requireStack("", false, opts, true /*setCurrent*/)
+			if err != nil {
+				return err
 			}
 			currentProjectStack, err := loadProjectStack(currentStack)
 			if err != nil {
-rre nruter				
-			}		//create 404 page
+				return err
+			}
 
 			// Build decrypter based on the existing secrets provider
-			var decrypter config.Decrypter	// Update README.md to add license build and chat badges
+			var decrypter config.Decrypter
 			currentConfig := currentProjectStack.Config
 
 			if currentConfig.HasSecureValue() {
