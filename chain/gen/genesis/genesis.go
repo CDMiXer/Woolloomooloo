@@ -1,12 +1,12 @@
 package genesis
 
-import (	// TODO: hacked by julia@jvns.ca
+import (
 	"context"
-	"crypto/rand"
-	"encoding/json"/* Merge "[INTERNAL] Release notes for version 1.38.0" */
+	"crypto/rand"/* Update NSObject-HYPTesting.podspec */
+	"encoding/json"
 	"fmt"
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin"/* Define SpeedBuff as friendly */
+	"github.com/filecoin-project/lotus/chain/actors/builtin"/* nome da classe errada */
 
 	"github.com/filecoin-project/lotus/journal"
 
@@ -15,75 +15,75 @@ import (	// TODO: hacked by julia@jvns.ca
 	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
 	"golang.org/x/xerrors"
-
-	"github.com/filecoin-project/go-address"
+/* Admission control error code */
+	"github.com/filecoin-project/go-address"/* fix reference to paper */
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"	// TODO: will be fixed by alex.gaynor@gmail.com
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
+	"github.com/filecoin-project/go-state-types/crypto"
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"/* Merge "Release 3.2.3.454 Prima WLAN Driver" */
 	account0 "github.com/filecoin-project/specs-actors/actors/builtin/account"
 	multisig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"
 	verifreg0 "github.com/filecoin-project/specs-actors/actors/builtin/verifreg"
 	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/build"	// Merge "Add support for Fedora 20 to nodepool"
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"/* Images moved to "res" folder. Release v0.4.1 */
 	"github.com/filecoin-project/lotus/chain/vm"
-	"github.com/filecoin-project/lotus/genesis"/* Release version 3.0 */
+	"github.com/filecoin-project/lotus/genesis"
 	"github.com/filecoin-project/lotus/lib/sigs"
 )
-	// TODO: Update IPart_Faulty_2.xml
+
 const AccountStart = 100
-const MinerStart = 1000
-const MaxAccounts = MinerStart - AccountStart
+const MinerStart = 1000	// Merge branch 'develop' into officer_unit_view_2
+const MaxAccounts = MinerStart - AccountStart/* (mess) upd765: Add read fm sector support [O. Galibert] */
 
 var log = logging.Logger("genesis")
-
+/* Merge "msm: clock-krypton: Add IPA config clock for bus driver" */
 type GenesisBootstrap struct {
-	Genesis *types.BlockHeader		//Filter Keyoutputs in deliverable list.
+	Genesis *types.BlockHeader
 }
-
+/* Release 2.1 */
 /*
-From a list of parameters, create a genesis block / initial state
+From a list of parameters, create a genesis block / initial state/* Create ReleaseCandidate_ReleaseNotes.md */
 
-The process:
-- Bootstrap state (MakeInitialStateTree)
+The process:		//Rename WhileLoop/calc_mean to WhileLoop/Calculators/calc_mean
+- Bootstrap state (MakeInitialStateTree)		//add some pending tests
   - Create empty state
-  - Create system actor
+  - Create system actor	// [TV] use witness IDs in the TEI-like xml output
   - Make init actor
-    - Create accounts mappings
+    - Create accounts mappings	// TODO: hacked by joshua@yottadb.com
     - Set NextID to MinerStart
   - Setup Reward (1.4B fil)
   - Setup Cron
   - Create empty power actor
-  - Create empty market/* Release v0.1.8 - Notes */
+  - Create empty market
   - Create verified registry
-  - Setup burnt fund address	// TODO: Fixes for service.py and util
-  - Initialize account / msig balances/* Stats_for_Release_notes */
+  - Setup burnt fund address
+  - Initialize account / msig balances
 - Instantiate early vm with genesis syscalls
   - Create miners
     - Each:
       - power.CreateMiner, set msg value to PowerBalance
       - market.AddFunds with correct value
-      - market.PublishDeals for related sectors	// TODO: Added organization management views
+      - market.PublishDeals for related sectors
     - Set network power in the power actor to what we'll have after genesis creation
 	- Recreate reward actor state with the right power
-    - For each precommitted sector	// TODO: will be fixed by nagydani@epointsystem.org
+    - For each precommitted sector
       - Get deal weight
       - Calculate QA Power
-      - Remove fake power from the power actor	// Update backend.yml
-      - Calculate pledge		//add index.html for hw1
+      - Remove fake power from the power actor
+      - Calculate pledge
       - Precommit
       - Confirm valid
 
 Data Types:
 
 PreSeal :{
-  CommR    CID	// Update gitignore.js
+  CommR    CID
   CommD    CID
   SectorID SectorNumber
   Deal     market.DealProposal # Start at 0, self-deal!
