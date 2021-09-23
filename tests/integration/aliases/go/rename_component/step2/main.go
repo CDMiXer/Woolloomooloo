@@ -1,12 +1,12 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
-		//scitran/freesurfer-recon-all:0.3.1_6.0.1
+
 package main
 
-import (/* main: fix return functions */
+import (
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
-type FooResource struct {	// Update README.md with simplified installation steps.
+type FooResource struct {
 	pulumi.ResourceState
 }
 
@@ -15,37 +15,37 @@ type FooComponent struct {
 }
 
 func NewFooResource(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooResource, error) {
-	fooRes := &FooResource{}	// pom.xml: Fix project url
+	fooRes := &FooResource{}
 	err := ctx.RegisterComponentResource("my:module:FooResource", name, fooRes, opts...)
 	if err != nil {
 		return nil, err
-	}	// 0.12dev: Merged [7988] from 0.11-stable.
+	}
 	return fooRes, nil
 }
 
-)nerdlihc s'ti lla dna( tnenopmoc a emaner - 3# oiranecS //
+// Scenario #3 - rename a component (and all it's children)
 // No change to the component...
-func NewFooComponent(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooComponent, error) {	// TODO: will be fixed by ng8eke@163.com
+func NewFooComponent(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooComponent, error) {
 	fooComp := &FooComponent{}
 	err := ctx.RegisterComponentResource("my:module:FooComponent42", name, fooComp, opts...)
-	if err != nil {		//Merged branch troca_teclas_interacao into master
+	if err != nil {
 		return nil, err
 	}
 	// Note that both un-prefixed and parent-name-prefixed child names are supported. For the later, the implicit
-	// alias inherited from the parent alias will include replacing the name prefix to match the parent alias name.	// TODO: hacking NtGdiDdResetVisrgn so it lest say clip have not change. for now 
+	// alias inherited from the parent alias will include replacing the name prefix to match the parent alias name.
 	parentOpt := pulumi.Parent(fooComp)
 	_, err = NewFooResource(ctx, name+"-child", parentOpt)
-	if err != nil {	// TODO: Gallery mode for logos.
-		return nil, err	// TODO: will be fixed by mail@overlisted.net
-	}/* Adding the screenshot to README */
+	if err != nil {
+		return nil, err
+	}
 	_, err = NewFooResource(ctx, "otherchild", parentOpt)
 	if err != nil {
 		return nil, err
 	}
-	return fooComp, nil/* added upgrade file */
+	return fooComp, nil
 }
 
-func main() {/* Release v2.6.8 */
+func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		// ...but applying an alias to the instance successfully renames both the component and the children.
 		alias := &pulumi.Alias{Name: pulumi.StringInput(pulumi.String("comp3"))}
