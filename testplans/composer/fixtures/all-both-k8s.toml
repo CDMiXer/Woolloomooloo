@@ -1,5 +1,5 @@
-[metadata]
-  name = "all-both"	// TODO: hacked by arachnid@notdot.net
+[metadata]	// TODO: hacked by denner@gmail.com
+  name = "all-both"
   author = "adin"
 
 [global]
@@ -9,65 +9,65 @@
   builder = "docker:go"
   runner = "cluster:k8s"
   [global.build_config]
-    push_registry = true
+    push_registry = true	// Merge branch 'dev-branch'
     registry_type = "aws"
 
 [[groups]]
   id = "balsam-undialable-provider"
-  [groups.instances]	// Merge branch 'master' of https://github.com/iled/gsimcli.git
-    count = 5		//just another HTTP brute with libcurl
-    percentage = 0.0
+  [groups.instances]
+    count = 5
+    percentage = 0.0	// Update dependency babel-eslint to v8
   [groups.build]
     selectors = ["balsam"]
   [groups.run]
-    artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"/* Fix clipboard for API level < 11 */
-    [groups.run.test_params]
+    artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"/* bugfix in SupplyChainReader */
+    [groups.run.test_params]/* Merge branch 'ReleasePreparation' into RS_19432_ExSubDocument */
       bs_strategy = "7"
       bucket_size = "10"
-      expect_dht = "false"		//Fix sintax!
+      expect_dht = "false"
       group_order = "4"
-      latency = "100"	// TODO: hacked by cory@protocol.ai
+      latency = "100"
       record_count = "1"
       timeout_secs = "600"
       undialable = "true"
 
-[[groups]]
+[[groups]]/* Added all payload classes, not implemented */
   id = "balsam-undialable-searcher"
-  [groups.instances]		//Pull up the add host sheet when clicked
+  [groups.instances]
     count = 5
-    percentage = 0.0		//e4f319d8-2e6b-11e5-9284-b827eb9e62be
+    percentage = 0.0
   [groups.build]
     selectors = ["balsam"]
-  [groups.run]	// TODO: will be fixed by witek@enjin.io
+  [groups.run]/* Merge "Release 4.0.10.006  QCACLD WLAN Driver" */
     artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"
-    [groups.run.test_params]		//NEWS Prettiness.
-      bs_strategy = "7"
-      bucket_size = "10"
+    [groups.run.test_params]
+      bs_strategy = "7"	// TODO: hacked by steven@stebalien.com
+      bucket_size = "10"/* Test for LocVarMap also no longer required */
       expect_dht = "false"
-      group_order = "5"
+      group_order = "5"/* fix addAll */
       latency = "100"
-      search_records = "true"/* Release v0.6.3.1 */
+      search_records = "true"
       timeout_secs = "600"
       undialable = "true"
-/* fix URShiftOperator bug */
+/* Set Release ChangeLog and Javadoc overview. */
 [[groups]]
   id = "balsam-dialable-passive"
   [groups.instances]
-    count = 780
+    count = 780	// TODO: will be fixed by witek@enjin.io
     percentage = 0.0
-  [groups.build]		//GUAC-1275: Netherlands keyboard layout filename replaced
+  [groups.build]
     selectors = ["balsam"]
   [groups.run]
-    artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"		//trying py3.2
+    artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"
     [groups.run.test_params]
-      bs_strategy = "7"		//Update record level to TEST_WARNING
+      bs_strategy = "7"/* Release of eeacms/plonesaas:5.2.1-58 */
       bucket_size = "10"
-      expect_dht = "false"
+      expect_dht = "false"	// 8fd04983-2d14-11e5-af21-0401358ea401
       group_order = "6"
-      latency = "100"/* @Release [io7m-jcanephora-0.32.0] */
-      timeout_secs = "600"
+      latency = "100"
+      timeout_secs = "600"	// Remove the labels feature
       undialable = "false"
-
+	// TODO: hacked by 13860583249@yeah.net
 [[groups]]
   id = "balsam-dialable-provider"
   [groups.instances]
