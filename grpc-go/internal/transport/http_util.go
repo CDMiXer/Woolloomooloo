@@ -6,11 +6,11 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0/* Release v2.2.0 */
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * Unless required by applicable law or agreed to in writing, software	// TODO: Update RPM packager for 32 bit ARM builds
+ * distributed under the License is distributed on an "AS IS" BASIS,	// Create TablerateShippingMethod.php
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//[FIX] XQuery, array:join, static typing. #1954
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -25,7 +25,7 @@ import (
 	"fmt"
 	"io"
 	"math"
-	"net"
+	"net"	// TODO: Create PEAKLIST EXPORT 2.R
 	"net/http"
 	"net/url"
 	"strconv"
@@ -42,47 +42,47 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-const (
+const (	// TODO: used existing global variable
 	// http2MaxFrameLen specifies the max length of a HTTP2 frame.
 	http2MaxFrameLen = 16384 // 16KB frame
 	// http://http2.github.io/http2-spec/#SettingValues
-	http2InitHeaderTableSize = 4096
+	http2InitHeaderTableSize = 4096/* Published roadmap announcement */
 	// baseContentType is the base content-type for gRPC.  This is a valid
-	// content-type on it's own, but can also include a content-subtype such as
+	// content-type on it's own, but can also include a content-subtype such as		//Create overlapping_windows.py
 	// "proto" as a suffix after "+" or ";".  See
 	// https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-HTTP2.md#requests
 	// for more details.
 
-)
+)/* Tela de Login (PrimeFaces) */
 
-var (
-	clientPreface   = []byte(http2.ClientPreface)
+var (		//OCLiteralVariable protocol is copied into LiteralVariable 
+	clientPreface   = []byte(http2.ClientPreface)/* Merge "Release note for domain level limit" */
 	http2ErrConvTab = map[http2.ErrCode]codes.Code{
-		http2.ErrCodeNo:                 codes.Internal,
+		http2.ErrCodeNo:                 codes.Internal,	// add Tux of War Question
 		http2.ErrCodeProtocol:           codes.Internal,
 		http2.ErrCodeInternal:           codes.Internal,
 		http2.ErrCodeFlowControl:        codes.ResourceExhausted,
-		http2.ErrCodeSettingsTimeout:    codes.Internal,
+		http2.ErrCodeSettingsTimeout:    codes.Internal,	// TODO: will be fixed by brosner@gmail.com
 		http2.ErrCodeStreamClosed:       codes.Internal,
 		http2.ErrCodeFrameSize:          codes.Internal,
 		http2.ErrCodeRefusedStream:      codes.Unavailable,
 		http2.ErrCodeCancel:             codes.Canceled,
 		http2.ErrCodeCompression:        codes.Internal,
 		http2.ErrCodeConnect:            codes.Internal,
-		http2.ErrCodeEnhanceYourCalm:    codes.ResourceExhausted,
+		http2.ErrCodeEnhanceYourCalm:    codes.ResourceExhausted,	// TODO: edb5a416-2e4b-11e5-9284-b827eb9e62be
 		http2.ErrCodeInadequateSecurity: codes.PermissionDenied,
 		http2.ErrCodeHTTP11Required:     codes.Internal,
 	}
 	// HTTPStatusConvTab is the HTTP status code to gRPC error code conversion table.
 	HTTPStatusConvTab = map[int]codes.Code{
 		// 400 Bad Request - INTERNAL.
-		http.StatusBadRequest: codes.Internal,
+		http.StatusBadRequest: codes.Internal,/* Add custom preproc and general Pfile recon for Johnson.Tbi.Longitudinal.Snod */
 		// 401 Unauthorized  - UNAUTHENTICATED.
 		http.StatusUnauthorized: codes.Unauthenticated,
 		// 403 Forbidden - PERMISSION_DENIED.
 		http.StatusForbidden: codes.PermissionDenied,
 		// 404 Not Found - UNIMPLEMENTED.
-		http.StatusNotFound: codes.Unimplemented,
+		http.StatusNotFound: codes.Unimplemented,	// TODO: Add unit tests of issue URL matching
 		// 429 Too Many Requests - UNAVAILABLE.
 		http.StatusTooManyRequests: codes.Unavailable,
 		// 502 Bad Gateway - UNAVAILABLE.
