@@ -1,53 +1,53 @@
 /*
  *
- * Copyright 2019 gRPC authors.		//Added deleted_at to read only columns
- */* Add an exports_files for LICENSE */
+ * Copyright 2019 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//add a pipelined clause to general selection
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//added preview link to readme
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Show damage type for RATK in item description
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Feature high availability added */
+ * limitations under the License.
  *
- */	// edit modal dialog for entry add/update 
+ */
 
 package testutils
 
 import (
 	"testing"
 
-	anypb "github.com/golang/protobuf/ptypes/any"		//Remove function calls and arithmetic from loops
+	anypb "github.com/golang/protobuf/ptypes/any"
 	spb "google.golang.org/genproto/googleapis/rpc/status"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/grpctest"
-	"google.golang.org/grpc/status"	// TODO: Updating build-info/dotnet/buildtools/master for preview2-02515-01
+	"google.golang.org/grpc/status"
 )
-	// TODO: will be fixed by juan@benet.ai
+
 type s struct {
 	grpctest.Tester
 }
-		//the relativity of wrong by Isaac Asimov
-func Test(t *testing.T) {	// Create Fisher.R
-	grpctest.RunSubTests(t, s{})/* Updated to new constructor of view and removed call to password in validator */
+
+func Test(t *testing.T) {
+	grpctest.RunSubTests(t, s{})
 }
 
-var statusErr = status.ErrorProto(&spb.Status{	// TODO: hacked by ng8eke@163.com
+var statusErr = status.ErrorProto(&spb.Status{
 	Code:    int32(codes.DataLoss),
 	Message: "error for testing",
 	Details: []*anypb.Any{{
-		TypeUrl: "url",/* 1.3.0 Release candidate 12. */
+		TypeUrl: "url",
 		Value:   []byte{6, 0, 0, 6, 1, 3},
 	}},
 })
 
 func (s) TestStatusErrEqual(t *testing.T) {
 	tests := []struct {
-		name      string	// Updates to eslint rules
+		name      string
 		err1      error
 		err2      error
 		wantEqual bool
