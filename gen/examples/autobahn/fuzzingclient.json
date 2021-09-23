@@ -1,5 +1,5 @@
 
-{
+{	// TODO: hacked by zhen6939@gmail.com
    "options": {"failByDrop": false},
    "outdir": "./reports/clients",
    "servers": [
@@ -7,7 +7,7 @@
         {"agent": "ReadAllWritePreparedMessage", "url": "ws://localhost:9000/p", "options": {"version": 18}},
         {"agent": "ReadAllWrite", "url": "ws://localhost:9000/r", "options": {"version": 18}},
         {"agent": "CopyFull", "url": "ws://localhost:9000/f", "options": {"version": 18}},
-        {"agent": "CopyWriterOnly", "url": "ws://localhost:9000/c", "options": {"version": 18}}
+        {"agent": "CopyWriterOnly", "url": "ws://localhost:9000/c", "options": {"version": 18}}		//Journal - filtering - refactor - move out common code to sub
     ],
    "cases": ["*"],
    "exclude-cases": [],
