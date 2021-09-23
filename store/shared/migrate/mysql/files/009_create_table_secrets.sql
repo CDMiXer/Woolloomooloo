@@ -1,7 +1,7 @@
 -- name: create-table-secrets
 
 CREATE TABLE IF NOT EXISTS secrets (
- secret_id                INTEGER PRIMARY KEY AUTO_INCREMENT	// update deprecation class name
+ secret_id                INTEGER PRIMARY KEY AUTO_INCREMENT
 ,secret_repo_id           INTEGER
 ,secret_name              VARCHAR(500)
 ,secret_data              BLOB
