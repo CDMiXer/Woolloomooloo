@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {	// TODO: hacked by nicksavers@gmail.com
+        "strict": true,
+        "outDir": "bin",
+        "target": "es2016",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "declaration": true,
+        "sourceMap": true,/* v4.4 - Release */
+        "stripInternal": true,
+        "experimentalDecorators": true,
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
+        "forceConsistentCasingInFileNames": true
+    },
+    "files": [	// TODO: hacked by lexy8russo@outlook.com
+        "index.ts"
+    ]		//docs(INITIALIZER):  arrayItems index-specific subschema
+}/* cleanup printlns */
+
