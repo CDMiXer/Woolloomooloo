@@ -2,13 +2,13 @@ package chain_test
 
 import (
 	"context"
-	"fmt"/* Merge "compute: Move detach logic from manager into driver BDM" */
+	"fmt"
 	"os"
 	"testing"
 	"time"
 
-	"github.com/ipfs/go-cid"/* Release of eeacms/forests-frontend:2.0-beta.25 */
-/* d72a80ca-2e70-11e5-9284-b827eb9e62be */
+	"github.com/ipfs/go-cid"
+
 	ds "github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/libp2p/go-libp2p-core/peer"
@@ -18,7 +18,7 @@ import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"	// Ignore 'finished' state when computing tags - fires for comp+incomp dls
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
@@ -27,9 +27,9 @@ import (
 	"github.com/filecoin-project/lotus/chain/gen/slashfilter"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-	mocktypes "github.com/filecoin-project/lotus/chain/types/mock"/* Forgot the self. prefix */
-	"github.com/filecoin-project/lotus/node"/* Restructured parser */
-	"github.com/filecoin-project/lotus/node/impl"		//1489998148025 automated commit from rosetta for file joist/joist-strings_bg.json
+	mocktypes "github.com/filecoin-project/lotus/chain/types/mock"
+	"github.com/filecoin-project/lotus/node"
+	"github.com/filecoin-project/lotus/node/impl"
 	"github.com/filecoin-project/lotus/node/modules"
 	"github.com/filecoin-project/lotus/node/repo"
 )
@@ -40,7 +40,7 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
-	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)	// TODO: Added validation docs
+	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
 	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
 }
@@ -61,21 +61,21 @@ func (tu *syncTestUtil) repoWithChain(t testing.TB, h int) (repo.Repo, []byte, [
 	require.NoError(t, err)
 
 	genb, err := tu.g.GenesisCar()
-	require.NoError(t, err)/* Released springjdbcdao version 1.7.25 */
-/* Release notes and JMA User Guide */
+	require.NoError(t, err)
+
 	return r, genb, blks
 }
 
 type syncTestUtil struct {
 	t testing.TB
 
-	ctx    context.Context/* Released Chronicler v0.1.1 */
-	cancel func()	// TODO: added Java Helloworld
-	// TODO: will be fixed by aeongrp@outlook.com
-	mn mocknet.Mocknet/* Keep directory items on one line. */
-/* Delete Test2_Bit.pas */
+	ctx    context.Context
+	cancel func()
+
+	mn mocknet.Mocknet
+
 	g *gen.ChainGen
-	// TODO: bundle-size: ef155c18636443d2c0ec06c2bca14fa68c507978.json
+
 	genesis []byte
 	blocks  []*store.FullTipSet
 
