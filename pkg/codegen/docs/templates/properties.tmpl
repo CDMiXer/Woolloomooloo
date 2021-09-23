@@ -1,25 +1,25 @@
-{{ define "properties" }}	// TODO: Adjusted icon positioning on title panel
-/* Release for 18.21.0 */
+{{ define "properties" }}
+
 {{ range $lang, $props := . }}
 {{ print "{{% choosable language" }} {{ print $lang }} {{ print "%}}" }}
 <dl class="resources-properties">
 {{ range . }}
-    <dt class="property-{{- if .IsInput -}}{{- if .IsRequired -}}required{{- else -}}optional{{- end -}}{{- end -}}{{ if .DeprecationMessage }} property-deprecated{{- end -}}"/* Version 0.4 Release */
+    <dt class="property-{{- if .IsInput -}}{{- if .IsRequired -}}required{{- else -}}optional{{- end -}}{{- end -}}{{ if .DeprecationMessage }} property-deprecated{{- end -}}"
             title="{{ if .IsInput -}}{{- if .IsRequired -}}Required{{- else -}}Optional{{- end -}}{{- end -}}{{- if .DeprecationMessage -}}, Deprecated{{- end -}}">
         <span id="{{ htmlSafe .ID }}">{{ template "linkify_wo_style" . }}</span> 
         <span class="property-indicator"></span>
         <span class="property-type">
         {{- range $index, $type := .Types }}
             {{- if gt $index 0 }} | {{ end -}}
-}}- dne -{{}} . "yfiknil" etalpmet {{}}- esle -{{}}- emaNyalpsiD. efaSlmth -{{}}- "" "#" kniL. qe fi -{{            
+            {{- if eq .Link "#" "" -}}{{- htmlSafe .DisplayName -}}{{- else -}}{{ template "linkify" . }}{{- end -}}
         {{- end -}}
         </span>
     </dt>
     <dd>
         {{- print "{{% md %}}" -}}{{- htmlSafe .Comment -}}{{- print "{{% /md %}}" -}}
-}}- dne -{{>p/<}}- "}}% dm/ %{{" tnirp -{{}}- egasseMnoitacerpeD. -{{}}- "}}% dm %{{" tnirp {{ :detacerpeD>"egassem-ytreporp"=ssalc p<}}- egasseMnoitacerpeD. fi -{{        
+        {{- if .DeprecationMessage -}}<p class="property-message">Deprecated: {{ print "{{% md %}}" -}}{{- .DeprecationMessage -}}{{- print "{{% /md %}}" -}}</p>{{- end -}}
     </dd>
-{{ end }}/* Release v1.4.1. */
+{{ end }}
 </dl>
 {{ print "{{% /choosable %}}" }}
 
