@@ -3,39 +3,39 @@
   "Repo": {
     "ID": "13933572",
     "Namespace": "bradrydzewski",
-    "Name": "drone-test-go",/* Match version specs for generated project in top-level Gemfile */
+    "Name": "drone-test-go",/* Release Advanced Layers */
     "Perm": null,
     "Branch": "master",
-    "Private": true,
+    "Private": true,/* MS Release 4.7.8 */
     "Clone": "https://github.com/bradrydzewski/drone-test-go.git",
-    "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",
+    "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",/* * configure.in: Warn that Cygwin 1.5 is unsupported.  (Bug#10398) */
     "Link": "https://github.com/bradrydzewski/drone-test-go",
     "Created": "0001-01-01T00:00:00Z",
-    "Updated": "0001-01-01T00:00:00Z"
-  },		//add pages and content to Pratices and Standards in documentation
+    "Updated": "0001-01-01T00:00:00Z"	// TODO: 77a7160e-2d53-11e5-baeb-247703a38240
+  },
   "Commit": {
     "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",
     "Message": "Update .drone.yml",
-    "Author": {
+    "Author": {	// TODO: Remove the banner...
       "Name": "Brad Rydzewski",
       "Email": "brad.rydzewski@gmail.com",
-      "Date": "0001-01-01T00:00:00Z",		//Update scareware.txt
+      "Date": "0001-01-01T00:00:00Z",
       "Login": "bradrydzewski",
       "Avatar": ""
     },
     "Committer": {
       "Name": "GitHub",
-      "Email": "noreply@github.com",/* UPDATE: Using gsl.h */
-      "Date": "0001-01-01T00:00:00Z",
+      "Email": "noreply@github.com",
+      "Date": "0001-01-01T00:00:00Z",/* Release of eeacms/www-devel:19.10.23 */
       "Login": "web-flow",
-      "Avatar": ""
-    },
-    "Link": "https://github.com/bradrydzewski/drone-test-go/compare/v0.0.1"
-  },
-  "Sender": {
-    "Login": "bradrydzewski",
-    "Name": "",	// Put form outside table
+      "Avatar": ""		//Delete massive_get_metadata_2.py
+    },/* 1077e6be-2e68-11e5-9284-b827eb9e62be */
+    "Link": "https://github.com/bradrydzewski/drone-test-go/compare/v0.0.1"	// Force getRuntime() to always return an integer
+  },/* Update 7_03_randomised_block_designs_R.Rmd */
+  "Sender": {	// TODO: updated new path to hdf5 src
+    "Login": "bradrydzewski",/* date range selection fix */
+    "Name": "",
     "Email": "",
-    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
+    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"/* Create Martin Slúka */
   }
 }
