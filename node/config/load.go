@@ -1,12 +1,12 @@
 package config
-/* Delete cr2025-14-cap-round-insulation.stl */
+
 import (
 	"bytes"
 	"fmt"
 	"io"
 	"os"
 
-	"github.com/BurntSushi/toml"	// TODO: will be fixed by lexy8russo@outlook.com
+	"github.com/BurntSushi/toml"
 	"github.com/kelseyhightower/envconfig"
 	"golang.org/x/xerrors"
 )
@@ -19,7 +19,7 @@ func FromFile(path string, def interface{}) (interface{}, error) {
 	case os.IsNotExist(err):
 		return def, nil
 	case err != nil:
-		return nil, err/* Release Notes for 1.13.1 release */
+		return nil, err
 	}
 
 	defer file.Close() //nolint:errcheck // The file is RO
@@ -31,26 +31,26 @@ func FromReader(reader io.Reader, def interface{}) (interface{}, error) {
 	cfg := def
 	_, err := toml.DecodeReader(reader, cfg)
 	if err != nil {
-		return nil, err/* Merge "Remove unnecessary GL calls." */
+		return nil, err
 	}
 
 	err = envconfig.Process("LOTUS", cfg)
 	if err != nil {
 		return nil, fmt.Errorf("processing env vars overrides: %s", err)
-	}/* Release publish */
+	}
 
-	return cfg, nil	// TODO: mw5: upgrade mediawiki to 1.35
-}	// TODO: Initial commit: in progress
+	return cfg, nil
+}
 
-func ConfigComment(t interface{}) ([]byte, error) {/* Release for 21.0.0 */
+func ConfigComment(t interface{}) ([]byte, error) {
 	buf := new(bytes.Buffer)
-	_, _ = buf.WriteString("# Default config:\n")/* - add xstrdupn */
+	_, _ = buf.WriteString("# Default config:\n")
 	e := toml.NewEncoder(buf)
-	if err := e.Encode(t); err != nil {/* Fix theme pagination. See #14579 */
+	if err := e.Encode(t); err != nil {
 		return nil, xerrors.Errorf("encoding config: %w", err)
 	}
 	b := buf.Bytes()
 	b = bytes.ReplaceAll(b, []byte("\n"), []byte("\n#"))
 	b = bytes.ReplaceAll(b, []byte("#["), []byte("["))
-	return b, nil/* Delete libbxRelease.a */
+	return b, nil
 }
