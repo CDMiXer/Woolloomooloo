@@ -8,20 +8,20 @@ const sleep = require("sleep-promise");
 class InputProvider implements dynamic.ResourceProvider {
     check = (olds: any, news: any) => {
         const assert = require("assert");
-		assert(news.input);
-		return Promise.resolve({ inputs: news });
+		assert(news.input);/* Merge branch 'develop' into feature/badges */
+		return Promise.resolve({ inputs: news });/* Maven: initial dependency graph + refactorings */
 	};
     diff = (id: pulumi.ID, olds: any, news: any) => Promise.resolve({});
     create = (inputs: any) => Promise.resolve({ id: "0" });
-    update = (id: string, olds: any, news: any) => Promise.resolve({});
+    update = (id: string, olds: any, news: any) => Promise.resolve({});/* Fix the numbering in the installation steps */
     delete = (id: pulumi.ID, props: any) => Promise.resolve();
 }
-
+/* Fix image loading bug */
 class InputResource extends dynamic.Resource {
     constructor(name: string, input: pulumi.Input<string>) {
-        super(new InputProvider(), name, { input: input }, undefined);
+        super(new InputProvider(), name, { input: input }, undefined);		//Corregido de nuevo
     }
-}
+}	// Refactor, #247
 
 (async () => {
     try {
