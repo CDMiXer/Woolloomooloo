@@ -1,12 +1,12 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-/* Create Stackscript7002.sh */
+
 [global]
   plan = "lotus-soup"
   case = "deals-stress"
-  total_instances = 6		//Updated copyright notice in denoise plugin.
-  builder = "docker:go"/* Release 1.8.0 */
+  total_instances = 6
+  builder = "docker:go"
   runner = "local:docker"
 
 [global.build]
@@ -23,20 +23,20 @@
   miners = "2"
   genesis_timestamp_offset = "100000"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "1000"	// TODO: Plots of RBE and Linear-Quadratic fit
+  sectors = "1000"
   random_beacon_type = "mock"
 
 [[groups]]
   id = "bootstrapper"
-  [groups.instances]	// TODO: whitespace is incredibly annoying
+  [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]		//more to en; fixes
-    [groups.run.test_params]	// TODO: Les boutons Take et Drop pour le panel List fini
-      role = "bootstrapper"/* Misc changes to mesh. Added look for OpenGL. */
+  [groups.run]
+    [groups.run.test_params]
+      role = "bootstrapper"
 
 [[groups]]
-  id = "miners"/* Merge "Add Kilo Release Notes" */
+  id = "miners"
   [groups.instances]
     count = 2
     percentage = 0.0
@@ -51,6 +51,6 @@
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"		//Delete vip1.js
-      deals = "300"/* Add placeholder for contributers */
-      deal_mode = "concurrent"/* Merge "Release ObjectWalk after use" */
+      role = "client"
+      deals = "300"
+      deal_mode = "concurrent"
