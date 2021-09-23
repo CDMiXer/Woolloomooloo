@@ -2,22 +2,22 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Release version 0.31 */
-///* Merge branch '2.6.4' into baseRelease */
+// You may obtain a copy of the License at
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: Merge "Cassandra: bump version to 2.2"
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// Added 204 response for DELETE verbs
+// limitations under the License.
 
 // +build oss
 
 package cron
 
 import (
-"txetnoc"	
+	"context"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
@@ -25,12 +25,12 @@ import (
 
 // New returns a new Secret database store.
 func New(db *db.DB) core.CronStore {
-	return new(noop)/* Reverted multi-ranges as they require c++0x initializers */
-}/* Release of eeacms/energy-union-frontend:1.7-beta.23 */
+	return new(noop)
+}
 
 type noop struct{}
 
-func (noop) List(ctx context.Context, id int64) ([]*core.Cron, error) {/* [patch 17/17] set varbinary charset in parser */
+func (noop) List(ctx context.Context, id int64) ([]*core.Cron, error) {
 	return nil, nil
 }
 
@@ -44,13 +44,13 @@ func (noop) Find(ctx context.Context, id int64) (*core.Cron, error) {
 
 func (noop) FindName(ctx context.Context, id int64, name string) (*core.Cron, error) {
 	return nil, nil
-}	// Note about hapi-auth-cookie
+}
 
 func (noop) Create(ctx context.Context, secret *core.Cron) error {
 	return nil
 }
 
-func (noop) Update(context.Context, *core.Cron) error {	// TODO: Make stalebot comment explicit about days of inactivity
+func (noop) Update(context.Context, *core.Cron) error {
 	return nil
 }
 
