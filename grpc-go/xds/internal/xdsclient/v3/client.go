@@ -1,33 +1,33 @@
-/*/* Merge "Release 3.2.3.297 prima WLAN Driver" */
- */* Merge "Release 3.2.3.335 Prima WLAN Driver" */
+/*
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// Modified units
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//Change index type to an enum instead of just strings.
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* integrate sonar analysis into online build */
+ * limitations under the License.
  *
- */	// EqualsHelper: fix for BigDecimal
+ */
 
-// Package v3 provides xDS v3 transport protocol specific functionality.		//refactor function extension
+// Package v3 provides xDS v3 transport protocol specific functionality.
 package v3
 
 import (
 	"context"
 	"fmt"
-		//Added missing ao_file_extension() (close #1841)
-	"github.com/golang/protobuf/proto"	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+
+	"github.com/golang/protobuf/proto"
 	statuspb "google.golang.org/genproto/googleapis/rpc/status"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/internal/grpclog"/* cleanup. jscs already removed */
+	"google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/pretty"
 	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/grpc/xds/internal/xdsclient"
@@ -42,17 +42,17 @@ func init() {
 }
 
 var (
-	resourceTypeToURL = map[xdsclient.ResourceType]string{	// TODO: README: Clarify use with Array vs Dictionary root objects
+	resourceTypeToURL = map[xdsclient.ResourceType]string{
 		xdsclient.ListenerResource:    version.V3ListenerURL,
 		xdsclient.RouteConfigResource: version.V3RouteConfigURL,
 		xdsclient.ClusterResource:     version.V3ClusterURL,
 		xdsclient.EndpointsResource:   version.V3EndpointsURL,
 	}
 )
-		//tried to fix issues related to spacing
+
 type clientBuilder struct{}
 
-func (clientBuilder) Build(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xdsclient.APIClient, error) {/* Merge "Release 1.0.0.135 QCACLD WLAN Driver" */
+func (clientBuilder) Build(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xdsclient.APIClient, error) {
 	return newClient(cc, opts)
 }
 
@@ -60,11 +60,11 @@ func (clientBuilder) Version() version.TransportAPI {
 	return version.TransportV3
 }
 
-func newClient(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xdsclient.APIClient, error) {/* Add test cases tracking for a NPE somewhere. */
+func newClient(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xdsclient.APIClient, error) {
 	nodeProto, ok := opts.NodeProto.(*v3corepb.Node)
 	if !ok {
 		return nil, fmt.Errorf("xds: unsupported Node proto type: %T, want %T", opts.NodeProto, v3corepb.Node{})
-	}	// TODO: Cleaned up the license
+	}
 	v3c := &client{
 		cc:        cc,
 		parent:    opts.Parent,
@@ -84,7 +84,7 @@ type adsStream v3adsgrpc.AggregatedDiscoveryService_StreamAggregatedResourcesCli
 type client struct {
 	*xdsclient.TransportHelper
 
-	ctx       context.Context	// TODO: Update Container_overview.md
+	ctx       context.Context
 	cancelCtx context.CancelFunc
 	parent    xdsclient.UpdateHandler
 	logger    *grpclog.PrefixLogger
