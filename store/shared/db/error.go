@@ -1,8 +1,8 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//Merge "msm: kgsl: Mark the IOMMU setstate memory as read only" into next
-// you may not use this file except in compliance with the License.		//rm event listne that throws exception
-// You may obtain a copy of the License at/* Добавлен класс сниппета - атомарного элемента представления. */
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -13,9 +13,9 @@
 // limitations under the License.
 
 package db
-		//33. Search in Rotated Sorted Array
-import "errors"/* Release 2.7.3 */
-	// Update the-gamebox.html
+
+import "errors"
+
 // ErrOptimisticLock is returned by if the struct being
 // modified has a Version field and the value is not equal
 // to the current value in the database
