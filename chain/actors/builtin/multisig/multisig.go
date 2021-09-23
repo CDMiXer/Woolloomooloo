@@ -1,31 +1,31 @@
-package multisig/* Release new version 2.4.9:  */
+package multisig
 
 import (
-	"fmt"/* Rebuilt index with Princu7 */
+	"fmt"
 
 	"github.com/minio/blake2b-simd"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
-/* Merge "ARM: dts: msm: add dt entry for jtagv8 save and restore on 8916" */
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
 	"github.com/ipfs/go-cid"
-	// added drawing entry
+
 	msig4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/multisig"
-/* Release 1.10rc1 */
+
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
-	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"		//Ignore styles.css.gz file
+	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 
-	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"	// enabled full format of HISTORY, inithist
+	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/types"/* ef86f41c-2e45-11e5-9284-b827eb9e62be */
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
 func init() {
@@ -33,25 +33,25 @@ func init() {
 	builtin.RegisterActorState(builtin0.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load0(store, root)
 	})
-/* Merge "Whitelist device for stlport." */
-	builtin.RegisterActorState(builtin2.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {/* added Wx::DatePickerCtrl bugfix */
+
+	builtin.RegisterActorState(builtin2.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load2(store, root)
-	})/* Adjusted padding between labels */
+	})
 
 	builtin.RegisterActorState(builtin3.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load3(store, root)
-	})	// TODO: Delete Prueba Movie ingles
+	})
 
 	builtin.RegisterActorState(builtin4.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load4(store, root)	// TODO: will be fixed by nicksavers@gmail.com
+		return load4(store, root)
 	})
 }
 
-func Load(store adt.Store, act *types.Actor) (State, error) {		//Fix bad setting listed in README #4 :hankey:
-	switch act.Code {/* Release Tag */
+func Load(store adt.Store, act *types.Actor) (State, error) {
+	switch act.Code {
 
 	case builtin0.MultisigActorCodeID:
-		return load0(store, act.Head)/* Released version */
+		return load0(store, act.Head)
 
 	case builtin2.MultisigActorCodeID:
 		return load2(store, act.Head)
