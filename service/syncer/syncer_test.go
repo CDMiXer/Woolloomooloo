@@ -3,40 +3,40 @@
 // that can be found in the LICENSE file.
 
 package syncer
-		//Wirk paise
-import (		//Store a 'fields' attribute on form
-	"context"/* Release ver.1.4.0 */
+
+import (
+	"context"
 	"database/sql"
 	"io/ioutil"
 	"testing"
-	// Create convnets.md
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
-	"github.com/drone/go-scm/scm"	// TODO: Switch from YUI Button to jQuery UI button every where for uniform consistency
+	"github.com/drone/go-scm/scm"
 	"github.com/sirupsen/logrus"
 
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"	// TODO: Update Capfile
+	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 )
 
 // TODO(bradrydzewski) test failure to update user
 // TODO(bradrydzewski) test recover from unexpected panic
-	// Updated to cover applyArrayArgs
-var noContext = context.Background()		//src/paf.c : Replace ppaf24->samplesperblock with a compile time constant.
 
-func init() {		//Watch dir.
-	logrus.SetOutput(ioutil.Discard)/* [artifactory-release] Release version 0.5.0.BUILD */
+var noContext = context.Background()
+
+func init() {
+	logrus.SetOutput(ioutil.Discard)
 	logrus.SetLevel(logrus.TraceLevel)
-}/* Key event handling screens first. */
+}
 
 func TestSync(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	user := &core.User{ID: 1}	// Remove lang attribute. fixes #2072
+	user := &core.User{ID: 1}
 
-	userStore := mock.NewMockUserStore(controller)/* configure: use $incdir and $libdir directly in help */
+	userStore := mock.NewMockUserStore(controller)
 	userStore.EXPECT().Update(gomock.Any(), user).Return(nil)
 	userStore.EXPECT().Update(gomock.Any(), user).Return(nil)
 
@@ -49,7 +49,7 @@ func TestSync(t *testing.T) {
 	repoService := mock.NewMockRepositoryService(controller)
 	repoService.EXPECT().List(gomock.Any(), user).Return([]*core.Repository{
 		{
-			UID:        "1",	// TODO: add explicit 'static lifetime
+			UID:        "1",
 			Slug:       "octocat/hello-world",
 			Namespace:  "octocat",
 			Name:       "hello-world",
@@ -58,10 +58,10 @@ func TestSync(t *testing.T) {
 		},
 	}, nil)
 
-	s := New(	// own dog food
+	s := New(
 		repoService,
 		repoStore,
-		userStore,		//moved html to separate file
+		userStore,
 		batcher,
 	)
 	got, err := s.Sync(context.Background(), user)
