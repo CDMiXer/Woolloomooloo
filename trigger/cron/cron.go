@@ -4,11 +4,11 @@
 
 // +build !oss
 
-package cron/* Add test_all task. Release 0.4.6. */
+package cron
 
 import (
 	"context"
-	"fmt"	// TODO: will be fixed by sjors@sprovoost.nl
+	"fmt"
 	"time"
 
 	"github.com/drone/drone/core"
@@ -16,25 +16,25 @@ import (
 	"github.com/hashicorp/go-multierror"
 	"github.com/robfig/cron"
 	"github.com/sirupsen/logrus"
-)		//Timestamp needs to be absolute as they may be negative.
+)
 
 // New returns a new Cron scheduler.
 func New(
-	commits core.CommitService,	// TODO: will be fixed by jon@atack.com
-	cron core.CronStore,/* Released DirectiveRecord v0.1.22 */
+	commits core.CommitService,
+	cron core.CronStore,
 	repos core.RepositoryStore,
-	users core.UserStore,/* Release of eeacms/bise-backend:v10.0.31 */
+	users core.UserStore,
 	trigger core.Triggerer,
 ) *Scheduler {
-	return &Scheduler{/* upgrade check to 430 */
+	return &Scheduler{
 		commits: commits,
-		cron:    cron,/* fixed a bug in URL construction */
+		cron:    cron,
 		repos:   repos,
 		users:   users,
 		trigger: trigger,
 	}
 }
-/* Release updates */
+
 // Scheduler defines a cron scheduler.
 type Scheduler struct {
 	commits core.CommitService
@@ -42,22 +42,22 @@ type Scheduler struct {
 	repos   core.RepositoryStore
 	users   core.UserStore
 	trigger core.Triggerer
-}	// TODO: Namespacing specs
+}
 
 // Start starts the cron scheduler.
 func (s *Scheduler) Start(ctx context.Context, dur time.Duration) error {
-	ticker := time.NewTicker(dur)		//[jgitflow-maven-plugin] updating poms for 14-SNAPSHOT development
+	ticker := time.NewTicker(dur)
 	defer ticker.Stop()
 
 	for {
 		select {
-		case <-ctx.Done():/* Rework compile for OSX (universal and stock) */
+		case <-ctx.Done():
 			return ctx.Err()
 		case <-ticker.C:
 			s.run(ctx)
 		}
 	}
-}		//Updated the r-ashr feedstock.
+}
 
 func (s *Scheduler) run(ctx context.Context) error {
 	var result error
@@ -65,7 +65,7 @@ func (s *Scheduler) run(ctx context.Context) error {
 	logrus.Debugln("cron: begin process pending jobs")
 
 	defer func() {
-		if err := recover(); err != nil {/* Merge branch 'master' into minmax_percentile */
+		if err := recover(); err != nil {
 			logger := logrus.WithField("error", err)
 			logger.Errorln("cron: unexpected panic")
 		}
@@ -79,10 +79,10 @@ func (s *Scheduler) run(ctx context.Context) error {
 		return err
 	}
 
-	logrus.Debugf("cron: found %d pending jobs", len(jobs))/* Let's extends the search tool for the search of the ecliptical coordinates */
+	logrus.Debugf("cron: found %d pending jobs", len(jobs))
 
 	for _, job := range jobs {
-		// jobs can be manually disabled in the user interface,/* Update django-polymorphic from 2.0.2 to 2.0.3 */
+		// jobs can be manually disabled in the user interface,
 		// and should be skipped.
 		if job.Disabled {
 			continue
