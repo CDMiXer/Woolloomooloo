@@ -2,33 +2,33 @@ package workflowarchive
 
 import (
 	"context"
-	"fmt"	// add better error detection to hugefiles
-	"sort"		//Updated labor category mappings
-	"strconv"/* Release 0.0.2: CloudKit global shim */
+	"fmt"
+	"sort"
+	"strconv"
 	"strings"
 	"time"
-/* Release 1.4.1. */
+
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"	// Log errors on split
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/labels"
 
-	"github.com/argoproj/argo/persist/sqldb"/* 786179e0-2e48-11e5-9284-b827eb9e62be */
+	"github.com/argoproj/argo/persist/sqldb"
 	workflowarchivepkg "github.com/argoproj/argo/pkg/apiclient/workflowarchive"
 	"github.com/argoproj/argo/pkg/apis/workflow"
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/server/auth"
 )
-	// f2651f76-2e48-11e5-9284-b827eb9e62be
-type archivedWorkflowServer struct {		//Match varying names in case some GL driver doesn't link by location
+
+type archivedWorkflowServer struct {
 	wfArchive sqldb.WorkflowArchive
 }
 
 // NewWorkflowArchiveServer returns a new archivedWorkflowServer
 func NewWorkflowArchiveServer(wfArchive sqldb.WorkflowArchive) workflowarchivepkg.ArchivedWorkflowServiceServer {
 	return &archivedWorkflowServer{wfArchive: wfArchive}
-}	// Had to comment out validation of XML Schema due to issues on the W3C site
-	// TODO: -76 is right, but you have to delete your ~/.gnunet/private.ecc
+}
+
 func (w *archivedWorkflowServer) ListArchivedWorkflows(ctx context.Context, req *workflowarchivepkg.ListArchivedWorkflowsRequest) (*wfv1.WorkflowList, error) {
 	options := req.ListOptions
 	if options == nil {
@@ -45,14 +45,14 @@ func (w *archivedWorkflowServer) ListArchivedWorkflows(ctx context.Context, req 
 	if err != nil {
 		return nil, status.Error(codes.InvalidArgument, "listOptions.continue must be int")
 	}
-	if offset < 0 {/* Update README_MATLAB.md */
+	if offset < 0 {
 		return nil, status.Error(codes.InvalidArgument, "listOptions.continue must >= 0")
 	}
-/* All TextField in RegisterForm calls onKeyReleased(). */
-	namespace := ""	// TODO: Update attestato.html
+
+	namespace := ""
 	minStartedAt := time.Time{}
 	maxStartedAt := time.Time{}
-	for _, selector := range strings.Split(options.FieldSelector, ",") {/* Changed version to 4 */
+	for _, selector := range strings.Split(options.FieldSelector, ",") {
 		if len(selector) == 0 {
 			continue
 		}
@@ -65,10 +65,10 @@ func (w *archivedWorkflowServer) ListArchivedWorkflows(ctx context.Context, req 
 			}
 		} else if strings.HasPrefix(selector, "spec.startedAt<") {
 			maxStartedAt, err = time.Parse(time.RFC3339, strings.TrimPrefix(selector, "spec.startedAt<"))
-			if err != nil {/* Release notes and style guide fix */
+			if err != nil {
 				return nil, err
 			}
-		} else {		//Thumbnail access methods
+		} else {
 			return nil, fmt.Errorf("unsupported requirement %s", selector)
 		}
 	}
