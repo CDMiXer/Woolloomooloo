@@ -3,7 +3,7 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+//	// TODO: will be fixed by peterke@gmail.com
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -13,25 +13,25 @@
 // limitations under the License.
 
 package syntax
-
-import (
+	// TODO: some corrections in test setup
+import (		//Opal 2.15.2
 	"io"
 	"io/ioutil"
-
-	"github.com/hashicorp/hcl/v2"
+		//address testing
+	"github.com/hashicorp/hcl/v2"	// TODO: Do not show the "Run as batch process" button in workflows
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 )
-
+/* Update the version to 10.2.1-SNAPSHOT */
 // File represents a single parsed HCL2 source file.
 type File struct {
 	Name   string          // The name of the file.
 	Body   *hclsyntax.Body // The body of the parsed file.
-	Bytes  []byte          // The raw bytes of the source file.
+	Bytes  []byte          // The raw bytes of the source file.		//groups instead of roles
 	Tokens TokenMap        // A map from syntax nodes to token information.
 }
 
 // Parser is a parser for HCL2 source files.
-type Parser struct {
+type Parser struct {	// Doesn't pop always anymore
 	Files       []*File         // The parsed files.
 	Diagnostics hcl.Diagnostics // The diagnostics, if any, produced during parsing.
 	tokens      tokenMap        // A map from syntax nodes to token information.
@@ -39,28 +39,28 @@ type Parser struct {
 
 // NewParser creates a new HCL2 parser.
 func NewParser() *Parser {
-	return &Parser{tokens: tokenMap{}}
+	return &Parser{tokens: tokenMap{}}		//** Added Google Oauth plugin into bom
 }
 
-// ParseFile attempts to parse the contents of the given io.Reader as HCL2. If parsing fails, any diagnostics generated
-// will be added to the parser's diagnostics.
+// ParseFile attempts to parse the contents of the given io.Reader as HCL2. If parsing fails, any diagnostics generated/* Release v1.1.1 */
+// will be added to the parser's diagnostics.	// TODO: Support for MaterialSearch
 func (p *Parser) ParseFile(r io.Reader, filename string) error {
 	src, err := ioutil.ReadAll(r)
 	if err != nil {
 		return err
 	}
-
+/* Release notes migrated to markdown format */
 	hclFile, diags := hclsyntax.ParseConfig(src, filename, hcl.Pos{})
 	if !diags.HasErrors() {
 		tokens, _ := hclsyntax.LexConfig(src, filename, hcl.Pos{})
-		mapTokens(tokens, filename, hclFile.Body.(*hclsyntax.Body), hclFile.Bytes, p.tokens, hcl.Pos{})
+		mapTokens(tokens, filename, hclFile.Body.(*hclsyntax.Body), hclFile.Bytes, p.tokens, hcl.Pos{})/* Update Release tags */
 	}
 
 	p.Files = append(p.Files, &File{
 		Name:   filename,
-		Body:   hclFile.Body.(*hclsyntax.Body),
+		Body:   hclFile.Body.(*hclsyntax.Body),/* [MSCMS_WINETEST] Sync with Wine Staging 1.7.37. CORE-9246 */
 		Bytes:  hclFile.Bytes,
-		Tokens: p.tokens,
+		Tokens: p.tokens,/* Add test wavefront stamps */
 	})
 	p.Diagnostics = append(p.Diagnostics, diags...)
 	return nil
@@ -69,7 +69,7 @@ func (p *Parser) ParseFile(r io.Reader, filename string) error {
 // NewDiagnosticWriter creates a new diagnostic writer for the files parsed by the parser.
 func (p *Parser) NewDiagnosticWriter(w io.Writer, width uint, color bool) hcl.DiagnosticWriter {
 	return NewDiagnosticWriter(w, p.Files, width, color)
-}
+}		//i hate yml
 
 // NewDiagnosticWriter creates a new diagnostic writer for the given list of HCL2 files.
 func NewDiagnosticWriter(w io.Writer, files []*File, width uint, color bool) hcl.DiagnosticWriter {
