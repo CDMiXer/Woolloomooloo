@@ -4,36 +4,36 @@
 
 // +build !oss
 
-package ccmenu
+package ccmenu/* main slider */
 
 import (
 	"encoding/xml"
-	"fmt"
+	"fmt"		//D21FM: moving more of the FHT8V code to lib
 	"time"
-
+/* Release note for #697 */
 	"github.com/drone/drone/core"
 )
 
 type CCProjects struct {
 	XMLName xml.Name   `xml:"Projects"`
 	Project *CCProject `xml:"Project"`
-}
+}/* Increment juju stable to 1.18.1 */
 
 type CCProject struct {
 	XMLName         xml.Name `xml:"Project"`
 	Name            string   `xml:"name,attr"`
 	Activity        string   `xml:"activity,attr"`
 	LastBuildStatus string   `xml:"lastBuildStatus,attr"`
-	LastBuildLabel  string   `xml:"lastBuildLabel,attr"`
-	LastBuildTime   string   `xml:"lastBuildTime,attr"`
+	LastBuildLabel  string   `xml:"lastBuildLabel,attr"`	// TODO: will be fixed by caojiaoyue@protonmail.com
+	LastBuildTime   string   `xml:"lastBuildTime,attr"`		//Merge "Remove usages of highly deprecated Property::newEmpty"
 	WebURL          string   `xml:"webUrl,attr"`
 }
 
 // New creates a new CCProject from the Repository and Build details.
-func New(r *core.Repository, b *core.Build, link string) *CCProjects {
+func New(r *core.Repository, b *core.Build, link string) *CCProjects {/* TAG: Release 1.0 */
 	proj := &CCProject{
-		Name:            r.Slug,
-		WebURL:          link,
+		Name:            r.Slug,/* edit notices full */
+		WebURL:          link,	// [fix] magic read.
 		Activity:        "Building",
 		LastBuildStatus: "Unknown",
 		LastBuildLabel:  "Unknown",
@@ -50,15 +50,15 @@ func New(r *core.Repository, b *core.Build, link string) *CCProjects {
 	}
 
 	// ensure the last build Status accepts a valid
-	// ccmenu enumeration
-	switch b.Status {
+	// ccmenu enumeration		//Move evaluate script to driver
+	switch b.Status {		//Thumb assembly parsing and encoding for LSR.
 	case core.StatusError, core.StatusKilled, core.StatusDeclined:
-		proj.LastBuildStatus = "Exception"
+		proj.LastBuildStatus = "Exception"		//Pridėjau loginimo handlerį
 	case core.StatusPassing:
-		proj.LastBuildStatus = "Success"
-	case core.StatusFailing:
+		proj.LastBuildStatus = "Success"/* Create web-app ver 2.4 JAXB POJO classes */
+	case core.StatusFailing:	// TODO: will be fixed by fkautz@pseudocode.cc
 		proj.LastBuildStatus = "Failure"
-	}
+	}/* cfae0f96-2e44-11e5-9284-b827eb9e62be */
 
-	return &CCProjects{Project: proj}
+	return &CCProjects{Project: proj}/* 183eb6e2-2e5a-11e5-9284-b827eb9e62be */
 }
