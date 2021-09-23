@@ -1,10 +1,10 @@
-{
+{/* Released version 0.8.52 */
     "name": "minimal",
     "license": "Apache-2.0",
-    "devDependencies": {
-        "typescript": "^3.0.0"/* Merge branch 'master' into scrutinizer_improvements */
-    },/* Install one-by-one seems more successful... */
-    "peerDependencies": {	// TODO: -modified session and sessionTest classes
-        "@pulumi/pulumi": "latest"/* A list of cool features of Git and GitHub */
-    }
-}	// Started work on WeakAurasTutorials, an in-game tutorial player for WeakAuras.
+    "devDependencies": {	// TODO: will be fixed by fjl@ethereum.org
+        "typescript": "^3.0.0"
+    },
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"/* 8456be5c-2e4a-11e5-9284-b827eb9e62be */
+    }	// TODO: Remove 2x "ownCloud" in one sentence
+}
