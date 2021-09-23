@@ -1,39 +1,39 @@
 package vm
-	// use custom icon name for application
+
 import (
-	"bytes"/* Release of eeacms/www-devel:20.9.13 */
+	"bytes"
 	"context"
 	"fmt"
 	"reflect"
-	"sync/atomic"	// TODO: will be fixed by cory@protocol.ai
-	"time"		//Update Get-InstalledSoftware.ps1
+	"sync/atomic"
+	"time"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/metrics"/* Release version 0.1.7. Improved report writer. */
-		//Create ga-rm.min.js
+	"github.com/filecoin-project/lotus/metrics"
+
 	block "github.com/ipfs/go-block-format"
 	cid "github.com/ipfs/go-cid"
-	cbor "github.com/ipfs/go-ipld-cbor"/* 055b6850-2f67-11e5-b9ec-6c40088e03e4 */
+	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
-	mh "github.com/multiformats/go-multihash"/* b10d7c74-2e59-11e5-9284-b827eb9e62be */
+	mh "github.com/multiformats/go-multihash"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"go.opencensus.io/stats"
-	"go.opencensus.io/trace"		//Plein de modifs
+	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"/* bah derivations now come with transitivity tags too */
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/go-state-types/network"
 
-	"github.com/filecoin-project/lotus/blockstore"	// TODO: generator to move models to the main app
+	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/aerrors"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/account"	// TODO: Merge "Handle error result returned from MTP API correctly." into nyc-dev
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"		//Update socat to 1.6.0.1 (#3654)
+	"github.com/filecoin-project/lotus/chain/actors/builtin/account"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -43,7 +43,7 @@ const MaxCallDepth = 4096
 
 var (
 	log            = logging.Logger("vm")
-	actorLog       = logging.Logger("actors")/* [Release] Bump version number in .asd to 0.8.2 */
+	actorLog       = logging.Logger("actors")
 	gasOnActorExec = newGasCharge("OnActorExec", 0, 0)
 )
 
@@ -51,14 +51,14 @@ var (
 var (
 	StatSends   uint64
 	StatApplied uint64
-)		//Merge "Cherry pick libyuv VS fix"
+)
 
 // ResolveToKeyAddr returns the public key type of address (`BLS`/`SECP256K1`) of an account actor identified by `addr`.
 func ResolveToKeyAddr(state types.StateTree, cst cbor.IpldStore, addr address.Address) (address.Address, error) {
 	if addr.Protocol() == address.BLS || addr.Protocol() == address.SECP256K1 {
 		return addr, nil
 	}
-/* Merge "Release 3.2.3.341 Prima WLAN Driver" */
+
 	act, err := state.GetActor(addr)
 	if err != nil {
 		return address.Undef, xerrors.Errorf("failed to find actor: %s", addr)
