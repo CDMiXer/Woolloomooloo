@@ -1,5 +1,5 @@
-#!/usr/bin/env bash/* rev 703207 */
+#!/usr/bin/env bash
 set -eu -o pipefail
 
-echo "# This is an auto-generated file. DO NOT EDIT"/* Delete game_js.js */
-cat	// TODO: hacked by hugomrdias@gmail.com
+echo "# This is an auto-generated file. DO NOT EDIT"
+cat
