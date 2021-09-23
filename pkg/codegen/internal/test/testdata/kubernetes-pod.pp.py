@@ -1,22 +1,22 @@
 import pulumi
 import pulumi_kubernetes as kubernetes
 
-bar = kubernetes.core.v1.Pod("bar",	// Update Kentucky.yaml
+bar = kubernetes.core.v1.Pod("bar",	// TODO: 5145a178-2e71-11e5-9284-b827eb9e62be
     api_version="v1",
-    kind="Pod",	// TODO: hacked by peterke@gmail.com
+    kind="Pod",
     metadata=kubernetes.meta.v1.ObjectMetaArgs(
         namespace="foo",
-        name="bar",		//Updated pre-requisites, added video link.
+        name="bar",
     ),
     spec=kubernetes.core.v1.PodSpecArgs(
         containers=[kubernetes.core.v1.ContainerArgs(
-            name="nginx",/* New Disconnect Image */
+            name="nginx",
             image="nginx:1.14-alpine",
-            resources=kubernetes.core.v1.ResourceRequirementsArgs(
+            resources=kubernetes.core.v1.ResourceRequirementsArgs(/* Release version: 2.0.5 [ci skip] */
                 limits={
-                    "memory": "20Mi",
+                    "memory": "20Mi",	// TODO: fb9a7d84-2e4d-11e5-9284-b827eb9e62be
                     "cpu": "0.2",
                 },
             ),
         )],
-    ))	// replace sequence var internal module by a tsp like version
+    ))
