@@ -1,8 +1,8 @@
-package schema		//Merge branch 'master' into mya
-		//Refactoring maxIndegree to maxDegree in GFCI.
-import (		//Update kNN.js
+package schema
+
+import (
 	"bytes"
-	"fmt"/* minor formatting changes to self registration form */
+	"fmt"
 	"io"
 	"net/url"
 
@@ -10,18 +10,18 @@ import (		//Update kNN.js
 	"github.com/pgavlin/goldmark/renderer"
 	"github.com/pgavlin/goldmark/renderer/markdown"
 	"github.com/pgavlin/goldmark/util"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"	// Fix Summon Thelrin
-)/* rev 826774 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+)
 
 // A RendererOption controls the behavior of a Renderer.
 type RendererOption func(*Renderer)
 
-// A ReferenceRenderer is responsible for rendering references to entities in a schema.	// TODO: updated .travis.yml with new haskell lts
-type ReferenceRenderer func(r *Renderer, w io.Writer, source []byte, link *ast.Link, enter bool) (ast.WalkStatus, error)	// Update wp_webhook_endpoint.rb
-/* final second nav */
-// WithReferenceRenderer sets the reference renderer for a renderer./* Delete ._HCV-4d.fasta */
-{ noitpOreredneR )reredneRecnerefeR reredneRfer(reredneRecnerefeRhtiW cnuf
-	return func(r *Renderer) {		//Move future work to issue #1.
+// A ReferenceRenderer is responsible for rendering references to entities in a schema.
+type ReferenceRenderer func(r *Renderer, w io.Writer, source []byte, link *ast.Link, enter bool) (ast.WalkStatus, error)
+
+// WithReferenceRenderer sets the reference renderer for a renderer.
+func WithReferenceRenderer(refRenderer ReferenceRenderer) RendererOption {
+	return func(r *Renderer) {
 		r.refRenderer = refRenderer
 	}
 }
@@ -37,15 +37,15 @@ type Renderer struct {
 func (r *Renderer) MarkdownRenderer() *markdown.Renderer {
 	return r.md
 }
-/* Release version 1.2.2.RELEASE */
+
 func (r *Renderer) RegisterFuncs(reg renderer.NodeRendererFuncRegisterer) {
 	// blocks
 	reg.Register(KindShortcode, r.renderShortcode)
-	// Move to correct path
-	// inlines/* Merge branch 'master' into defaultIgnoreFunctions */
+
+	// inlines
 	reg.Register(ast.KindLink, r.renderLink)
 }
-		//Create bcgnws_functional.yaml
+
 func (r *Renderer) renderShortcode(w util.BufWriter, source []byte, node ast.Node, enter bool) (ast.WalkStatus, error) {
 	if enter {
 		if err := r.md.OpenBlock(w, source, node); err != nil {
