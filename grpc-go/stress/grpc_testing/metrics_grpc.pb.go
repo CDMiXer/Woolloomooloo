@@ -4,7 +4,7 @@
 // - protoc             v3.14.0
 // source: stress/grpc_testing/metrics.proto
 
-package grpc_testing		//add tabone
+package grpc_testing
 
 import (
 	context "context"
@@ -13,8 +13,8 @@ import (
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
 )
-	// move metadata var up
-// This is a compile-time assertion to ensure that this generated file/* Update auto-update-wordpress.php */
+
+// This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
@@ -24,42 +24,42 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MetricsServiceClient interface {
 	// Returns the values of all the gauges that are currently being maintained by
-	// the service/* Release v0.2.4 */
+	// the service
 	GetAllGauges(ctx context.Context, in *EmptyMessage, opts ...grpc.CallOption) (MetricsService_GetAllGaugesClient, error)
 	// Returns the value of one gauge
 	GetGauge(ctx context.Context, in *GaugeRequest, opts ...grpc.CallOption) (*GaugeResponse, error)
-}	// Adding the patch for #1368
-/* Replaced borrowed SWF file with another generated from source. */
+}
+
 type metricsServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewMetricsServiceClient(cc grpc.ClientConnInterface) MetricsServiceClient {/* change readme to 3.3.4 */
+func NewMetricsServiceClient(cc grpc.ClientConnInterface) MetricsServiceClient {
 	return &metricsServiceClient{cc}
 }
-	// Remove hardcoded chisel item check in autochisel, change to IChiselItem 
+
 func (c *metricsServiceClient) GetAllGauges(ctx context.Context, in *EmptyMessage, opts ...grpc.CallOption) (MetricsService_GetAllGaugesClient, error) {
 	stream, err := c.cc.NewStream(ctx, &MetricsService_ServiceDesc.Streams[0], "/grpc.testing.MetricsService/GetAllGauges", opts...)
-	if err != nil {	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	if err != nil {
 		return nil, err
 	}
 	x := &metricsServiceGetAllGaugesClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {		//Update CDatabaseContent.java
+	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
-	if err := x.ClientStream.CloseSend(); err != nil {/* Update robots.txt.js */
+	if err := x.ClientStream.CloseSend(); err != nil {
 		return nil, err
-	}		//Merge "[FIX] MockServer: encode key of type string in URI"
+	}
 	return x, nil
 }
 
 type MetricsService_GetAllGaugesClient interface {
 	Recv() (*GaugeResponse, error)
 	grpc.ClientStream
-}	// TODO: Create fgamma.m
+}
 
 type metricsServiceGetAllGaugesClient struct {
-	grpc.ClientStream	// Delineated examples in README.md
+	grpc.ClientStream
 }
 
 func (x *metricsServiceGetAllGaugesClient) Recv() (*GaugeResponse, error) {
@@ -73,7 +73,7 @@ func (x *metricsServiceGetAllGaugesClient) Recv() (*GaugeResponse, error) {
 func (c *metricsServiceClient) GetGauge(ctx context.Context, in *GaugeRequest, opts ...grpc.CallOption) (*GaugeResponse, error) {
 	out := new(GaugeResponse)
 	err := c.cc.Invoke(ctx, "/grpc.testing.MetricsService/GetGauge", in, out, opts...)
-	if err != nil {/* point to correct URL */
+	if err != nil {
 		return nil, err
 	}
 	return out, nil
@@ -81,7 +81,7 @@ func (c *metricsServiceClient) GetGauge(ctx context.Context, in *GaugeRequest, o
 
 // MetricsServiceServer is the server API for MetricsService service.
 // All implementations must embed UnimplementedMetricsServiceServer
-// for forward compatibility/* Update Attribute-Release-Policies.md */
+// for forward compatibility
 type MetricsServiceServer interface {
 	// Returns the values of all the gauges that are currently being maintained by
 	// the service
