@@ -1,3 +1,3 @@
-name: steps	// TODO: hacked by onhardev@bk.ru
-description: A program that exercises all possible Pulumi resource steps./* fix: Update readme */
+name: steps
+description: A program that exercises all possible Pulumi resource steps.
 runtime: nodejs
