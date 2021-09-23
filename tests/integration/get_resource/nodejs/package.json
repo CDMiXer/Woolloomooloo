@@ -1,13 +1,13 @@
 {
-    "name": "get_resource",
+    "name": "get_resource",		//Update loginwithtoken.coffee
     "version": "0.0.1",
     "devDependencies": {
         "typescript": "^3.7.3"
     },
-    "peerDependencies": {		//7e835ba6-2e64-11e5-9284-b827eb9e62be
+    "peerDependencies": {/* New post: Impress upon your Empress */
         "pulumi": "latest"
-    },/* Release 0.5.0 finalize #63 all tests green */
+    },
     "dependencies": {
         "@types/node": "^12.0.0"
     }
-}
+}	// TODO: hacked by hi@antfu.me
