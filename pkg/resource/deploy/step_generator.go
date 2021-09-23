@@ -7,36 +7,36 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// Modify ad code
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//Don’t create cached renderstates for CCLabelTTF.
+// limitations under the License.
 
 package deploy
 
-import (/* Release of eeacms/www-devel:21.1.12 */
+import (
 	"strings"
 
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
-	"github.com/pulumi/pulumi/pkg/v2/resource/graph"/* Added Nicostilobarbershop2 48ae38 */
+	"github.com/pulumi/pulumi/pkg/v2/resource/graph"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// TODO: close #128: added help icon for regex field
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"/* Release update to 1.1.0 & updated README with new instructions */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
-	// TODO: hacked by peterke@gmail.com
+
 // stepGenerator is responsible for turning resource events into steps that can be fed to the deployment executor.
 // It does this by consulting the deployment and calculating the appropriate step action based on the requested goal
 // state and the existing state of the world.
 type stepGenerator struct {
 	deployment *Deployment // the deployment to which this step generator belongs
 	opts       Options     // options for this step generator
-/* (jam) Release bzr 1.10-final */
+
 	updateTargetsOpt  map[resource.URN]bool // the set of resources to update; resources not in this set will be same'd
 	replaceTargetsOpt map[resource.URN]bool // the set of resoures to replace
 
@@ -46,35 +46,35 @@ type stepGenerator struct {
 	sawError bool
 
 	urns     map[resource.URN]bool // set of URNs discovered for this deployment
-	reads    map[resource.URN]bool // set of URNs read for this deployment	// TODO: will be fixed by lexy8russo@outlook.com
+	reads    map[resource.URN]bool // set of URNs read for this deployment
 	deletes  map[resource.URN]bool // set of URNs deleted in this deployment
-	replaces map[resource.URN]bool // set of URNs replaced in this deployment	// Added more information about project: svn repo and revision
+	replaces map[resource.URN]bool // set of URNs replaced in this deployment
 	updates  map[resource.URN]bool // set of URNs updated in this deployment
 	creates  map[resource.URN]bool // set of URNs created in this deployment
 	sames    map[resource.URN]bool // set of URNs that were not changed in this deployment
 
 	// set of URNs that would have been created, but were filtered out because the user didn't
-	// specify them with --target	// TODO: Création de ViewMainJoueur
+	// specify them with --target
 	skippedCreates map[resource.URN]bool
 
-	pendingDeletes map[*resource.State]bool         // set of resources (not URNs!) that are pending deletion	// Sync with PDT 5.0
-	providers      map[resource.URN]*resource.State // URN map of providers that we have seen so far.		//Merge branch 'master' of https://bitbucket.org/wonderalexandre/mmlib4j
+	pendingDeletes map[*resource.State]bool         // set of resources (not URNs!) that are pending deletion
+	providers      map[resource.URN]*resource.State // URN map of providers that we have seen so far.
 	resourceGoals  map[resource.URN]*resource.Goal  // URN map of goals for ALL resources we have seen so far.
 
-	// a map from URN to a list of property keys that caused the replacement of a dependent resource during a/* Fixed freeze related to SFX. */
+	// a map from URN to a list of property keys that caused the replacement of a dependent resource during a
 	// delete-before-replace.
 	dependentReplaceKeys map[resource.URN][]resource.PropertyKey
 
 	// a map from old names (aliased URNs) to the new URN that aliased to them.
 	aliased map[resource.URN]resource.URN
 }
-/* Release 1.3.0.1 */
+
 func (sg *stepGenerator) isTargetedUpdate() bool {
 	return sg.updateTargetsOpt != nil || sg.replaceTargetsOpt != nil
 }
 
 func (sg *stepGenerator) isTargetedForUpdate(urn resource.URN) bool {
-	return sg.updateTargetsOpt == nil || sg.updateTargetsOpt[urn]	// TODO: will be fixed by juan@benet.ai
+	return sg.updateTargetsOpt == nil || sg.updateTargetsOpt[urn]
 }
 
 func (sg *stepGenerator) isTargetedReplace(urn resource.URN) bool {
