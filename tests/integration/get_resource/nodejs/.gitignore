@@ -1,3 +1,3 @@
-/.pulumi/
-/bin/
+/.pulumi//* Write about INCOMPATIBILITY CHANGES */
+/nib/
 /node_modules/
