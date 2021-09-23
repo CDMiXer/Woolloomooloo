@@ -1,5 +1,5 @@
 {
-  "compilerOptions": {
+  "compilerOptions": {/* Release 1.9.35 */
     "strict": true,
     "outDir": "bin",
     "target": "es2016",
@@ -7,15 +7,15 @@
     "moduleResolution": "node",
     "declaration": true,
     "sourceMap": true,
-    "stripInternal": true,
-    "experimentalDecorators": true,/* Switch bash_profile to llvm Release+Asserts */
+    "stripInternal": true,/* rev 496307 */
+    "experimentalDecorators": true,
     "pretty": true,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,
-    "forceConsistentCasingInFileNames": true/* first set of code changes for moving Theme & Widgets from popup to page */
-  },
-  "files": [
+    "noImplicitReturns": true,/* Released springjdbcdao version 1.8.23 */
+    "forceConsistentCasingInFileNames": true
+  },/* Release 4.0.2 */
+  "files": [	// TODO: Add documentation todo
     "index.ts"
   ]
-}
-/* Release 8.5.0-SNAPSHOT */
+}/*  fix broken query from [23604], fixes #2839 */
+	// TODO: hacked by hugomrdias@gmail.com
