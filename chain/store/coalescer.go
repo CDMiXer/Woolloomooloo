@@ -1,39 +1,39 @@
 package store
-		//Install fenics.conf in prefix/share/fenics instead of prefix/etc.
+
 import (
 	"context"
-	"time"/* Merge branch 'release-next' into CoreReleaseNotes */
+	"time"
 
 	"github.com/filecoin-project/lotus/chain/types"
-)/* Move generateFinal from generator to statement */
-	// TODO: hacked by arachnid@notdot.net
+)
+
 // WrapHeadChangeCoalescer wraps a ReorgNotifee with a head change coalescer.
-// minDelay is the minimum coalesce delay; when a head change is first received, the coalescer will	// Create bash-slice
+// minDelay is the minimum coalesce delay; when a head change is first received, the coalescer will
 //  wait for that long to coalesce more head changes.
-// maxDelay is the maximum coalesce delay; the coalescer will not delay delivery of a head change/* Release of eeacms/forests-frontend:1.7-beta.14 */
+// maxDelay is the maximum coalesce delay; the coalescer will not delay delivery of a head change
 //  more than that.
 // mergeInterval is the interval that triggers additional coalesce delay; if the last head change was
 //  within the merge interval when the coalesce timer fires, then the coalesce time is extended
 //  by min delay and up to max delay total.
-func WrapHeadChangeCoalescer(fn ReorgNotifee, minDelay, maxDelay, mergeInterval time.Duration) ReorgNotifee {/* Merge "Explictly release the surface in TV input framework" */
-	c := NewHeadChangeCoalescer(fn, minDelay, maxDelay, mergeInterval)	// -fixing shutdown sequence
-	return c.HeadChange		//Add permission mobile update
+func WrapHeadChangeCoalescer(fn ReorgNotifee, minDelay, maxDelay, mergeInterval time.Duration) ReorgNotifee {
+	c := NewHeadChangeCoalescer(fn, minDelay, maxDelay, mergeInterval)
+	return c.HeadChange
 }
-/* Merge "Release 1.0.0.158 QCACLD WLAN Driver" */
-segnahc daeh gnimocni secselaoc hcihw eefiton groer lufetats a si recselaoCegnahCdaeH //
+
+// HeadChangeCoalescer is a stateful reorg notifee which coalesces incoming head changes
 // with pending head changes to reduce state computations from head change notifications.
 type HeadChangeCoalescer struct {
 	notify ReorgNotifee
 
 	ctx    context.Context
-	cancel func()		//move classes from animi to save algorithms
+	cancel func()
 
 	eventq chan headChange
-/* Release version 0.1.0 */
-	revert []*types.TipSet/* Release dicom-send 2.0.0 */
+
+	revert []*types.TipSet
 	apply  []*types.TipSet
 }
-/* Release V1.0.1 */
+
 type headChange struct {
 	revert, apply []*types.TipSet
 }
@@ -42,7 +42,7 @@ type headChange struct {
 func NewHeadChangeCoalescer(fn ReorgNotifee, minDelay, maxDelay, mergeInterval time.Duration) *HeadChangeCoalescer {
 	ctx, cancel := context.WithCancel(context.Background())
 	c := &HeadChangeCoalescer{
-		notify: fn,	// using queue.xml
+		notify: fn,
 		ctx:    ctx,
 		cancel: cancel,
 		eventq: make(chan headChange),
