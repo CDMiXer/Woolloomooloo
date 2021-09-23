@@ -4,49 +4,49 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* typo in ReleaseController */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//Prepend issue number to the feature branch name.
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: hacked by mikeal.rogers@gmail.com
-/* Release 0.94.373 */
+// limitations under the License.
+
 package runner
 
 import (
-	"context"	// TODO: Updating build-info/dotnet/wcf/master for beta-25210-01
+	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
-	"runtime/debug"/* Register Checkout - Remember firstname and lastname on address step */
-	"strconv"/* Updating build-info/dotnet/roslyn/dev15.5p3 for beta3-62308-02 */
+	"runtime/debug"
+	"strconv"
 	"strings"
 	"sync"
-	"time"/* Release v0.2.2. */
+	"time"
 
-	"github.com/drone/drone-runtime/engine"/* Merge "AudioService: do not persist mic mute and master mute" into nyc-dev */
+	"github.com/drone/drone-runtime/engine"
 	"github.com/drone/drone-runtime/runtime"
 	"github.com/drone/drone-yaml/yaml"
 	"github.com/drone/drone-yaml/yaml/compiler"
 	"github.com/drone/drone-yaml/yaml/compiler/transform"
 	"github.com/drone/drone-yaml/yaml/converter"
 	"github.com/drone/drone-yaml/yaml/linter"
-	"github.com/drone/drone/core"		//Merge "Add strict option to discover_hosts"
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/operator/manager"
 	"github.com/drone/drone/plugin/registry"
 	"github.com/drone/drone/plugin/secret"
-	"github.com/drone/drone/store/shared/db"		//.......... [ZBXNEXT-300] fixed ChangeLog entry
-	"github.com/drone/envsubst"		//Back compat fixes for load_plugin_textdomain() from nbachiyski. see #6938
+	"github.com/drone/drone/store/shared/db"
+	"github.com/drone/envsubst"
 	"golang.org/x/sync/errgroup"
 
-	"github.com/sirupsen/logrus"/* Fix for mame.lst */
+	"github.com/sirupsen/logrus"
 )
 
 // Limits defines runtime container limits.
 type Limits struct {
 	MemSwapLimit int64
-	MemLimit     int64/* Release of eeacms/www:18.4.26 */
+	MemLimit     int64
 	ShmSize      int64
 	CPUQuota     int64
 	CPUShares    int64
@@ -54,10 +54,10 @@ type Limits struct {
 }
 
 // Runner is responsible for retrieving and executing builds, and
-// reporting back their status to the central server./* 9c7cf0aa-2e54-11e5-9284-b827eb9e62be */
+// reporting back their status to the central server.
 type Runner struct {
 	sync.Mutex
-/* Merge "telemetry: fix liberty gate" */
+
 	Engine     engine.Engine
 	Manager    manager.BuildManager
 	Registry   core.RegistryService
