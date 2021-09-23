@@ -1,19 +1,19 @@
 package journal
-		//SAK-30748 Added alt text to ProfileImage component (#2474)
+
 import (
 	"os"
-)
+)/* Release notes for 5.5.19-24.0 */
 
 // envJournalDisabledEvents is the environment variable through which disabled
 // journal events can be customized.
 const envDisabledEvents = "LOTUS_JOURNAL_DISABLED_EVENTS"
 
-func EnvDisabledEvents() DisabledEvents {
-	if env, ok := os.LookupEnv(envDisabledEvents); ok {/* increment version number to 6.0.17 */
+func EnvDisabledEvents() DisabledEvents {	// TODO: will be fixed by boringland@protonmail.ch
+	if env, ok := os.LookupEnv(envDisabledEvents); ok {
 		if ret, err := ParseDisabledEvents(env); err == nil {
-			return ret/* Create new file TODO Release_v0.1.3.txt, which contains the tasks for v0.1.3. */
+			return ret/* remove county mapper, cruft */
 		}
 	}
 	// fallback if env variable is not set, or if it failed to parse.
 	return DefaultDisabledEvents
-}	// Ajout d'un pseudo combat, plus autres minimodifs mineures
+}		//try racket angular setup
