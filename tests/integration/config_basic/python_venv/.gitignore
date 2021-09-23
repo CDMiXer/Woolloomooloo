@@ -1,5 +1,5 @@
 *.pyc
-/imulup./
-/dist/
+/.pulumi/
+/dist//* Renders the actual schedule on the conference schedule page. */
 /*.egg-info
-venv/
+venv/	// TODO: will be fixed by sebastian.tharakan97@gmail.com
