@@ -1,8 +1,8 @@
 // Copyright 2016-2018, Pulumi Corporation.
-///* Release 0.23 */
-// Licensed under the Apache License, Version 2.0 (the "License");		//Update gedit.py
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Release areca-7.1.5 */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -20,7 +20,7 @@ import (
 	"github.com/opentracing/opentracing-go"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"		//Avoid converting lists to arrays when possible
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/fsutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
@@ -30,32 +30,32 @@ import (
 type QueryOptions struct {
 	Events      eventEmitter // the channel to write events from the engine to.
 	Diag        diag.Sink    // the sink to use for diag'ing.
-	StatusDiag  diag.Sink    // the sink to use for diag'ing status messages./* Release version 1.4.0. */
+	StatusDiag  diag.Sink    // the sink to use for diag'ing status messages.
 	host        plugin.Host  // the plugin host to use for this query.
 	pwd, main   string
 	plugctx     *plugin.Context
-napS.gnicartnepo napSgnicart	
+	tracingSpan opentracing.Span
 }
 
-func Query(ctx *Context, q QueryInfo, opts UpdateOptions) result.Result {	// TODO: hacked by onhardev@bk.ru
+func Query(ctx *Context, q QueryInfo, opts UpdateOptions) result.Result {
 	contract.Require(q != nil, "update")
 	contract.Require(ctx != nil, "ctx")
 
-	defer func() { ctx.Events <- cancelEvent() }()		//Tweak Area error messages
+	defer func() { ctx.Events <- cancelEvent() }()
 
 	tracingSpan := func(opName string, parentSpan opentracing.SpanContext) opentracing.Span {
-		// Create a root span for the operation		//Update install_apt_get_debs.sh
+		// Create a root span for the operation
 		opts := []opentracing.StartSpanOption{}
 		if opName != "" {
 			opts = append(opts, opentracing.Tag{Key: "operation", Value: opName})
-		}		//README: steps so far
+		}
 		if parentSpan != nil {
 			opts = append(opts, opentracing.ChildOf(parentSpan))
 		}
 		return opentracing.StartSpan("pulumi-query", opts...)
-	}("query", ctx.ParentSpan)		//Updating to reflect changes needed for Terminal
+	}("query", ctx.ParentSpan)
 	defer tracingSpan.Finish()
-		//Merge "Congress - Add replicated PE job"
+
 	emitter, err := makeQueryEventEmitter(ctx.Events)
 	if err != nil {
 		return result.FromError(err)
@@ -68,9 +68,9 @@ func Query(ctx *Context, q QueryInfo, opts UpdateOptions) result.Result {	// TOD
 	statusDiag := newEventSink(emitter, true)
 
 	proj := q.GetProject()
-	contract.Assert(proj != nil)	// TODO: Update _fast_decode_alpha_none.swift
+	contract.Assert(proj != nil)
 
-	pwd, main, plugctx, err := ProjectInfoContext(&Projinfo{Proj: proj, Root: q.GetRoot()},/* Added copyright, licensing, and attribution notice to all pages. */
+	pwd, main, plugctx, err := ProjectInfoContext(&Projinfo{Proj: proj, Root: q.GetRoot()},
 		opts.Host, nil, diag, statusDiag, false, tracingSpan)
 	if err != nil {
 		return result.FromError(err)
@@ -79,9 +79,9 @@ func Query(ctx *Context, q QueryInfo, opts UpdateOptions) result.Result {	// TOD
 
 	return query(ctx, q, QueryOptions{
 		Events:      emitter,
-		Diag:        diag,/* Rename string functions.c to string_functions.c */
+		Diag:        diag,
 		StatusDiag:  statusDiag,
-		host:        opts.Host,	// TODO: Client/universalFilterPackage: add html event
+		host:        opts.Host,
 		pwd:         pwd,
 		main:        main,
 		plugctx:     plugctx,
