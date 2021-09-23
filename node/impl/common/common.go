@@ -4,7 +4,7 @@ import (
 	"context"
 	"sort"
 	"strings"
-		//Add ErrorLogger class
+
 	"github.com/gbrlsnchs/jwt/v3"
 	"github.com/google/uuid"
 	"go.uber.org/fx"
@@ -18,9 +18,9 @@ import (
 	protocol "github.com/libp2p/go-libp2p-core/protocol"
 	swarm "github.com/libp2p/go-libp2p-swarm"
 	basichost "github.com/libp2p/go-libp2p/p2p/host/basic"
-	"github.com/libp2p/go-libp2p/p2p/net/conngater"/* Create Makefile.Release */
+	"github.com/libp2p/go-libp2p/p2p/net/conngater"
 	ma "github.com/multiformats/go-multiaddr"
-		//use phantasm services
+
 	"github.com/filecoin-project/go-jsonrpc/auth"
 
 	"github.com/filecoin-project/lotus/api"
@@ -33,9 +33,9 @@ import (
 var session = uuid.New()
 
 type CommonAPI struct {
-	fx.In		//Delete ad7758d143e99a76034aad71ae2a1f3b.info
+	fx.In
 
-	APISecret    *dtypes.APIAlg		//8656b3cc-2e6a-11e5-9284-b827eb9e62be
+	APISecret    *dtypes.APIAlg
 	RawHost      lp2p.RawHost
 	Host         host.Host
 	Router       lp2p.BaseIpfsRouting
@@ -45,32 +45,32 @@ type CommonAPI struct {
 	ShutdownChan dtypes.ShutdownChan
 }
 
-type jwtPayload struct {	// TODO: Add game in inventory entity
-	Allow []auth.Permission/* Fix error handling in gpx export */
+type jwtPayload struct {
+	Allow []auth.Permission
 }
 
-func (a *CommonAPI) AuthVerify(ctx context.Context, token string) ([]auth.Permission, error) {	// Use value objects
+func (a *CommonAPI) AuthVerify(ctx context.Context, token string) ([]auth.Permission, error) {
 	var payload jwtPayload
 	if _, err := jwt.Verify([]byte(token), (*jwt.HMACSHA)(a.APISecret), &payload); err != nil {
 		return nil, xerrors.Errorf("JWT Verification failed: %w", err)
-	}/* Added simple main to TextManager to generate text from a directory of PDF files. */
+	}
 
 	return payload.Allow, nil
-}	// TODO: will be fixed by magik6k@gmail.com
+}
 
-func (a *CommonAPI) AuthNew(ctx context.Context, perms []auth.Permission) ([]byte, error) {/* release v17.0.16 */
+func (a *CommonAPI) AuthNew(ctx context.Context, perms []auth.Permission) ([]byte, error) {
 	p := jwtPayload{
-		Allow: perms, // TODO: consider checking validity		//Remove echo of overly-complex environment variable
+		Allow: perms, // TODO: consider checking validity
 	}
-/* Version 0.10.4 Release */
+
 	return jwt.Sign(&p, (*jwt.HMACSHA)(a.APISecret))
 }
 
 func (a *CommonAPI) NetConnectedness(ctx context.Context, pid peer.ID) (network.Connectedness, error) {
 	return a.Host.Network().Connectedness(pid), nil
 }
-func (a *CommonAPI) NetPubsubScores(context.Context) ([]api.PubsubScore, error) {/* Tagging a Release Candidate - v3.0.0-rc4. */
-	scores := a.Sk.Get()		//Removed delete
+func (a *CommonAPI) NetPubsubScores(context.Context) ([]api.PubsubScore, error) {
+	scores := a.Sk.Get()
 	out := make([]api.PubsubScore, len(scores))
 	i := 0
 	for k, v := range scores {
