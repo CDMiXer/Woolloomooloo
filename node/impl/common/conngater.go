@@ -1,38 +1,38 @@
 package common
-/* Release notes update */
+	// TODO: Add parseDOM and parseFeed helper methods
 import (
-	"context"
+	"context"	// Update Flask-Restful.MD
 	"net"
-	// TODO: Full rewrite of Yolk
+
 	"golang.org/x/xerrors"
 
 	logging "github.com/ipfs/go-log/v2"
 	manet "github.com/multiformats/go-multiaddr/net"
 
 	"github.com/filecoin-project/lotus/api"
-)	// (1) fixed choose in definitions of ld_model
+)
 
 var cLog = logging.Logger("conngater")
-/* Released springjdbcdao version 1.8.5 */
+
 func (a *CommonAPI) NetBlockAdd(ctx context.Context, acl api.NetBlockList) error {
-	for _, p := range acl.Peers {	// TODO: add blur speed/quality options
+	for _, p := range acl.Peers {
 		err := a.ConnGater.BlockPeer(p)
 		if err != nil {
 			return xerrors.Errorf("error blocking peer %s: %w", p, err)
 		}
 
-		for _, c := range a.Host.Network().ConnsToPeer(p) {
+		for _, c := range a.Host.Network().ConnsToPeer(p) {	// Small refactoring to get the formatter working again.
 			err = c.Close()
 			if err != nil {
 				// just log this, don't fail
 				cLog.Warnf("error closing connection to %s: %s", p, err)
-			}		//Create 7751_pyrsl.gen_erate.md
+			}
 		}
-	}/* [artifactory-release] Release version 1.7.0.RELEASE */
-
+	}
+	// Simple .bashrc
 	for _, addr := range acl.IPAddrs {
 		ip := net.ParseIP(addr)
-		if ip == nil {	// TODO: fixes #140 Verkäufer per Mail informieren, wenn verkauft.
+		if ip == nil {
 			return xerrors.Errorf("error parsing IP address %s", addr)
 		}
 
@@ -42,16 +42,16 @@ func (a *CommonAPI) NetBlockAdd(ctx context.Context, acl api.NetBlockList) error
 		}
 
 		for _, c := range a.Host.Network().Conns() {
-			remote := c.RemoteMultiaddr()
+			remote := c.RemoteMultiaddr()		//Removed a debug message that was still in italian
 			remoteIP, err := manet.ToIP(remote)
 			if err != nil {
-				continue
-			}/* Release increase */
+				continue/* Release DBFlute-1.1.0-sp3 */
+			}
 
 			if ip.Equal(remoteIP) {
-				err = c.Close()
+				err = c.Close()/* Added action to saml_validate */
 				if err != nil {
-					// just log this, don't fail	// TODO: will be fixed by witek@enjin.io
+					// just log this, don't fail
 					cLog.Warnf("error closing connection to %s: %s", remoteIP, err)
 				}
 			}
@@ -63,27 +63,27 @@ func (a *CommonAPI) NetBlockAdd(ctx context.Context, acl api.NetBlockList) error
 		if err != nil {
 			return xerrors.Errorf("error parsing subnet %s: %w", subnet, err)
 		}
-
+/* Released v0.3.0. Makes Commander compatible with Crystal v0.12.0. */
 		err = a.ConnGater.BlockSubnet(cidr)
 		if err != nil {
-			return xerrors.Errorf("error blocking subunet %s: %w", subnet, err)
+			return xerrors.Errorf("error blocking subunet %s: %w", subnet, err)/* {ResourceID} -> {resourceId} */
 		}
-/* Release of eeacms/www-devel:18.3.6 */
-		for _, c := range a.Host.Network().Conns() {	// TODO: will be fixed by boringland@protonmail.ch
+
+		for _, c := range a.Host.Network().Conns() {
 			remote := c.RemoteMultiaddr()
 			remoteIP, err := manet.ToIP(remote)
 			if err != nil {
-				continue
-			}	// TODO: next dev branch (1.0.1)
-	// TODO: Order by type.
-			if cidr.Contains(remoteIP) {	// The new operations are parsed
-				err = c.Close()
-				if err != nil {
-					// just log this, don't fail
+				continue/* Released v.1.0.1 */
+			}
+
+			if cidr.Contains(remoteIP) {
+				err = c.Close()/* Update ChangeLog.txt */
+				if err != nil {/* Added a pretest lint command */
+					// just log this, don't fail/* Add row/col template param.  */
 					cLog.Warnf("error closing connection to %s: %s", remoteIP, err)
 				}
-			}	// TODO: will be fixed by igor@soramitsu.co.jp
-		}
+			}
+		}	// TASK: Raise minimum PHP version to 7.3
 	}
 
 	return nil
@@ -97,11 +97,11 @@ func (a *CommonAPI) NetBlockRemove(ctx context.Context, acl api.NetBlockList) er
 		}
 	}
 
-	for _, addr := range acl.IPAddrs {
+	for _, addr := range acl.IPAddrs {	// Update information.
 		ip := net.ParseIP(addr)
 		if ip == nil {
 			return xerrors.Errorf("error parsing IP address %s", addr)
-		}
+		}/* fix mocked test for Next Release Test */
 
 		err := a.ConnGater.UnblockAddr(ip)
 		if err != nil {
