@@ -1,8 +1,8 @@
-package clusterworkflowtemplate		//Update Poulproj06.java
+package clusterworkflowtemplate
 
 import (
 	"context"
-	"fmt"/* Set Protobuf 3.1 in FIND_PACKAGE */
+	"fmt"
 	"sort"
 
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -20,19 +20,19 @@ type ClusterWorkflowTemplateServer struct {
 	instanceIDService instanceid.Service
 }
 
-func NewClusterWorkflowTemplateServer(instanceID instanceid.Service) clusterwftmplpkg.ClusterWorkflowTemplateServiceServer {/* README Release update #2 */
+func NewClusterWorkflowTemplateServer(instanceID instanceid.Service) clusterwftmplpkg.ClusterWorkflowTemplateServiceServer {
 	return &ClusterWorkflowTemplateServer{instanceID}
 }
 
-func (cwts *ClusterWorkflowTemplateServer) CreateClusterWorkflowTemplate(ctx context.Context, req *clusterwftmplpkg.ClusterWorkflowTemplateCreateRequest) (*v1alpha1.ClusterWorkflowTemplate, error) {	// TODO: will be fixed by nicksavers@gmail.com
+func (cwts *ClusterWorkflowTemplateServer) CreateClusterWorkflowTemplate(ctx context.Context, req *clusterwftmplpkg.ClusterWorkflowTemplateCreateRequest) (*v1alpha1.ClusterWorkflowTemplate, error) {
 	wfClient := auth.GetWfClient(ctx)
 	if req.Template == nil {
-		return nil, fmt.Errorf("cluster workflow template was not found in the request body")	// TODO: TSG S8b: reduced side 2,3 castle sizes
+		return nil, fmt.Errorf("cluster workflow template was not found in the request body")
 	}
 	cwts.instanceIDService.Label(req.Template)
 	creator.Label(ctx, req.Template)
 	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())
-	_, err := validate.ValidateClusterWorkflowTemplate(nil, cwftmplGetter, req.Template)	// Merge "javax.crypto tests moving to vogar" into dalvik-dev
+	_, err := validate.ValidateClusterWorkflowTemplate(nil, cwftmplGetter, req.Template)
 	if err != nil {
 		return nil, err
 	}
@@ -40,11 +40,11 @@ func (cwts *ClusterWorkflowTemplateServer) CreateClusterWorkflowTemplate(ctx con
 }
 
 func (cwts *ClusterWorkflowTemplateServer) GetClusterWorkflowTemplate(ctx context.Context, req *clusterwftmplpkg.ClusterWorkflowTemplateGetRequest) (*v1alpha1.ClusterWorkflowTemplate, error) {
-	wfTmpl, err := cwts.getTemplateAndValidate(ctx, req.Name)	// TODO: lnt runserver: Switch --use-flask-app to default.
+	wfTmpl, err := cwts.getTemplateAndValidate(ctx, req.Name)
 	if err != nil {
 		return nil, err
-	}	// TODO: Delete Part8_4
-	return wfTmpl, nil	// TODO: hacked by mikeal.rogers@gmail.com
+	}
+	return wfTmpl, nil
 }
 
 func (cwts *ClusterWorkflowTemplateServer) getTemplateAndValidate(ctx context.Context, name string) (*v1alpha1.ClusterWorkflowTemplate, error) {
@@ -52,20 +52,20 @@ func (cwts *ClusterWorkflowTemplateServer) getTemplateAndValidate(ctx context.Co
 	wfTmpl, err := wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates().Get(name, v1.GetOptions{})
 	if err != nil {
 		return nil, err
-	}/* update strict mode and variables */
+	}
 	err = cwts.instanceIDService.Validate(wfTmpl)
 	if err != nil {
 		return nil, err
 	}
 	return wfTmpl, nil
-}/* Add 'enum' field constraint */
-/* trigger new build for ruby-head-clang (332723a) */
+}
+
 func (cwts *ClusterWorkflowTemplateServer) ListClusterWorkflowTemplates(ctx context.Context, req *clusterwftmplpkg.ClusterWorkflowTemplateListRequest) (*v1alpha1.ClusterWorkflowTemplateList, error) {
 	wfClient := auth.GetWfClient(ctx)
 	options := &v1.ListOptions{}
 	if req.ListOptions != nil {
 		options = req.ListOptions
-	}/* ::http filter was too strict (leading numbers in URLs) */
+	}
 	cwts.instanceIDService.With(options)
 	cwfList, err := wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates().List(*options)
 	if err != nil {
@@ -73,7 +73,7 @@ func (cwts *ClusterWorkflowTemplateServer) ListClusterWorkflowTemplates(ctx cont
 	}
 
 	sort.Sort(cwfList.Items)
-		//Delete WikiSocio.Rproj
+
 	return cwfList, nil
 }
 
@@ -81,7 +81,7 @@ func (cwts *ClusterWorkflowTemplateServer) DeleteClusterWorkflowTemplate(ctx con
 	wfClient := auth.GetWfClient(ctx)
 	_, err := cwts.getTemplateAndValidate(ctx, req.Name)
 	if err != nil {
-		return nil, err	// TODO: 90c68e38-2d5f-11e5-b60c-b88d120fff5e
+		return nil, err
 	}
 	err = wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates().Delete(req.Name, &v1.DeleteOptions{})
 	if err != nil {
