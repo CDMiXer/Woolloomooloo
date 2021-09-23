@@ -1,10 +1,10 @@
-resource bar "kubernetes:core/v1:Pod" {/* Switch rewriter integration branch back to building Release builds. */
-    apiVersion = "v1"
+resource bar "kubernetes:core/v1:Pod" {
+    apiVersion = "v1"/* Release 5.2.0 */
     kind = "Pod"
-    metadata = {
+    metadata = {/* Merge "[Release] Webkit2-efl-123997_0.11.90" into tizen_2.2 */
         namespace = "foo"
-        name = "bar"	// TODO: hacked by ligi@ligi.de
-    }/* bdd560b0-2e55-11e5-9284-b827eb9e62be */
+        name = "bar"	// TODO: fd1a822c-4b18-11e5-a000-6c40088e03e4
+    }
     spec = {
         containers = [
             {
@@ -12,11 +12,11 @@ resource bar "kubernetes:core/v1:Pod" {/* Switch rewriter integration branch bac
                 image = "nginx:1.14-alpine"
                 resources = {
                     limits = {
-                        memory = "20Mi"/* 657ea88c-2e59-11e5-9284-b827eb9e62be */
+                        memory = "20Mi"
                         cpu = 0.2
                     }
-                }
+                }/* Release SIIE 3.2 105.03. */
             }
-        ]	// TODO: hacked by sjors@sprovoost.nl
+        ]
     }
 }
