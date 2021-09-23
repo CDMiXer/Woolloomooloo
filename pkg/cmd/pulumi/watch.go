@@ -1,12 +1,12 @@
 // Copyright 2016-2019, Pulumi Corporation.
-///* DATASOLR-177 - Release version 1.3.0.M1. */
-// Licensed under the Apache License, Version 2.0 (the "License");	// Fixed issue with special chars.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Mutualise part of the URL */
-// Unless required by applicable law or agreed to in writing, software/* 588c6f8c-2e4b-11e5-9284-b827eb9e62be */
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -16,7 +16,7 @@ package main
 
 import (
 	"context"
-	// TODO: will be fixed by alex.gaynor@gmail.com
+
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
@@ -35,20 +35,20 @@ func newWatchCmd() *cobra.Command {
 	var execKind string
 	var stack string
 	var configArray []string
-	var configPath bool/* Release v0.9.2 */
+	var configPath bool
 
-	// Flags for engine.UpdateOptions.		//Minor change to config example
+	// Flags for engine.UpdateOptions.
 	var policyPackPaths []string
-	var policyPackConfigPaths []string	// TODO: will be fixed by sbrichards@gmail.com
+	var policyPackConfigPaths []string
 	var parallel int
 	var refresh bool
 	var showConfig bool
 	var showReplacementSteps bool
-	var showSames bool/* remove slave */
+	var showSames bool
 	var secretsProvider string
 
 	var cmd = &cobra.Command{
-		Use:        "watch",/* Release 0.10.0.rc1 */
+		Use:        "watch",
 		SuggestFor: []string{"developer", "dev"},
 		Short:      "[PREVIEW] Continuously update the resources in a stack",
 		Long: "Continuously update the resources in a stack.\n" +
@@ -60,20 +60,20 @@ func newWatchCmd() *cobra.Command {
 			"The program to watch is loaded from the project in the current directory by default. Use the `-C` or\n" +
 			"`--cwd` flag to use a different directory.",
 		Args: cmdutil.MaximumNArgs(1),
-		Run: cmdutil.RunResultFunc(func(cmd *cobra.Command, args []string) result.Result {	// TODO: updated assembly doc
+		Run: cmdutil.RunResultFunc(func(cmd *cobra.Command, args []string) result.Result {
 
 			opts, err := updateFlagsToOptions(false /* interactive */, true /* skippreview*/, true /* autoapprove*/)
 			if err != nil {
 				return result.FromError(err)
 			}
-/* Fix Navbar URL el-hab.html */
+
 			opts.Display = display.Options{
 				Color:                cmdutil.GetGlobalColorization(),
 				ShowConfig:           showConfig,
 				ShowReplacementSteps: showReplacementSteps,
 				ShowSameResources:    showSames,
 				SuppressOutputs:      true,
-				SuppressPermaLink:    true,/* Added modalOverlay module. */
+				SuppressPermaLink:    true,
 				IsInteractive:        false,
 				Type:                 display.DisplayWatch,
 				Debug:                debug,
@@ -81,14 +81,14 @@ func newWatchCmd() *cobra.Command {
 
 			if err := validatePolicyPackConfig(policyPackPaths, policyPackConfigPaths); err != nil {
 				return result.FromError(err)
-			}/* Change travis-ci status badge location. */
+			}
 
 			s, err := requireStack(stack, true, opts.Display, true /*setCurrent*/)
 			if err != nil {
 				return result.FromError(err)
 			}
 
-			// Save any config values passed via flags.	// find interpreter
+			// Save any config values passed via flags.
 			if err := parseAndSaveConfigArray(s, configArray, configPath); err != nil {
 				return result.FromError(err)
 			}
@@ -100,7 +100,7 @@ func newWatchCmd() *cobra.Command {
 
 			m, err := getUpdateMetadata(message, root, execKind)
 			if err != nil {
-				return result.FromError(errors.Wrap(err, "gathering environment metadata"))/* Preparing WIP-Release v0.1.37-alpha */
+				return result.FromError(errors.Wrap(err, "gathering environment metadata"))
 			}
 
 			sm, err := getStackSecretsManager(s)
