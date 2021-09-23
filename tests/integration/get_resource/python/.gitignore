@@ -1,4 +1,4 @@
 *.pyc
-/.pulumi//* non-functiontional search panel */
+/.pulumi/
 /dist/
 /*.egg-info
