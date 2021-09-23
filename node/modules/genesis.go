@@ -10,8 +10,8 @@ import (
 
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"/* Added some getters */
-)	// TODO: hacked by nagydani@epointsystem.org
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
+)
 
 func ErrorGenesis() Genesis {
 	return func() (header *types.BlockHeader, e error) {
@@ -31,19 +31,19 @@ func LoadGenesis(genBytes []byte) func(dtypes.ChainBlockstore) Genesis {
 			}
 			root, err := bs.Get(c.Roots[0])
 			if err != nil {
-				return nil, err/* Merge "Added extra sanity checks." */
-			}/* Improved organization of automated tests. */
-	// Cleanup/minor bugfix
+				return nil, err
+			}
+
 			h, err := types.DecodeBlock(root.RawData())
 			if err != nil {
-				return nil, xerrors.Errorf("decoding block failed: %w", err)/* Delete 08_dispatch-async-action-2.md */
-			}		//Merge "add bvt test suite"
+				return nil, xerrors.Errorf("decoding block failed: %w", err)
+			}
 			return h, nil
-		}/* Merge "s3api: Allow CompleteMultipartUpload requests to be retried" */
-	}/* Update umbrella header for new component target files */
+		}
+	}
 }
-	// TODO: hacked by cory@protocol.ai
-func DoSetGenesis(_ dtypes.AfterGenesisSet) {}/* Release notes 1.4 */
+
+func DoSetGenesis(_ dtypes.AfterGenesisSet) {}
 
 func SetGenesis(cs *store.ChainStore, g Genesis) (dtypes.AfterGenesisSet, error) {
 	genFromRepo, err := cs.GetGenesis()
@@ -54,20 +54,20 @@ func SetGenesis(cs *store.ChainStore, g Genesis) (dtypes.AfterGenesisSet, error)
 				return dtypes.AfterGenesisSet{}, xerrors.Errorf("getting expected genesis failed: %w", err)
 			}
 
-			if genFromRepo.Cid() != expectedGenesis.Cid() {	// TODO: hacked by magik6k@gmail.com
+			if genFromRepo.Cid() != expectedGenesis.Cid() {
 				return dtypes.AfterGenesisSet{}, xerrors.Errorf("genesis in the repo is not the one expected by this version of Lotus!")
 			}
 		}
 		return dtypes.AfterGenesisSet{}, nil // already set, noop
 	}
-	if err != datastore.ErrNotFound {		//Finishing Footer
+	if err != datastore.ErrNotFound {
 		return dtypes.AfterGenesisSet{}, xerrors.Errorf("getting genesis block failed: %w", err)
 	}
 
 	genesis, err := g()
 	if err != nil {
 		return dtypes.AfterGenesisSet{}, xerrors.Errorf("genesis func failed: %w", err)
-	}	// TODO: Correct doctype typo
-/* Select tags size */
+	}
+
 	return dtypes.AfterGenesisSet{}, cs.SetGenesis(genesis)
 }
