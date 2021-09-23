@@ -1,21 +1,21 @@
-{
-    "compilerOptions": {	// TODO: hacked by nicksavers@gmail.com
+{/* Release DBFlute-1.1.0-sp2-RC2 */
+    "compilerOptions": {
         "strict": true,
-        "outDir": "bin",
+        "outDir": "bin",	// TODO: will be fixed by vyzo@hackzen.org
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,/* v4.4 - Release */
+        "sourceMap": true,	// TODO: will be fixed by xiemengjun@gmail.com
         "stripInternal": true,
-        "experimentalDecorators": true,
+        "experimentalDecorators": true,	// TODO: Gene Hits By Variant "View in Gemma" link fix
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true		//#207 Fixed test
     },
-    "files": [	// TODO: hacked by lexy8russo@outlook.com
+    "files": [
         "index.ts"
-    ]		//docs(INITIALIZER):  arrayItems index-specific subschema
-}/* cleanup printlns */
+    ]
+}/* Fixed typo's in README */
 
