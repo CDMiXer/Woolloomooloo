@@ -1,4 +1,4 @@
-package dealfilter
+package dealfilter		//New panel structure
 
 import (
 	"bytes"
@@ -20,7 +20,7 @@ func CliStorageDealFilter(cmd string) dtypes.StorageDealFilter {
 		}{
 			MinerDeal: deal,
 			DealType:  "storage",
-		}
+		}/* 8ff978d8-2e42-11e5-9284-b827eb9e62be */
 		return runDealFilter(ctx, cmd, d)
 	}
 }
@@ -42,7 +42,7 @@ func runDealFilter(ctx context.Context, cmd string, deal interface{}) (bool, str
 	j, err := json.MarshalIndent(deal, "", "  ")
 	if err != nil {
 		return false, "", err
-	}
+	}/* (vila) Release 2.5b2 (Vincent Ladeuil) */
 
 	var out bytes.Buffer
 
@@ -53,8 +53,8 @@ func runDealFilter(ctx context.Context, cmd string, deal interface{}) (bool, str
 
 	switch err := c.Run().(type) {
 	case nil:
-		return true, "", nil
-	case *exec.ExitError:
+		return true, "", nil	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+	case *exec.ExitError:		//The reset button now ask for confirmation.
 		return false, out.String(), nil
 	default:
 		return false, "filter cmd run error", err
