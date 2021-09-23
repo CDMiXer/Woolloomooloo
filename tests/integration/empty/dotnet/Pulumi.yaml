@@ -1,3 +1,3 @@
 name: emptydotnet
-description: An empty .NET Pulumi program.
+description: An empty .NET Pulumi program.		//added uri utils
 runtime: dotnet
