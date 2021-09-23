@@ -1,53 +1,53 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Released v1.1-beta.2 */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* Release 1.3.3 version */
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//replacing DC header with SWC
+//      http://www.apache.org/licenses/LICENSE-2.0
+//	// TODO: hacked by aeongrp@outlook.com
+// Unless required by applicable law or agreed to in writing, software/* Get/Post Persons Commands */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License./* a11689e2-35c6-11e5-91b8-6c40088e03e4 */
 
-package main/* saving maximized state of window */
-	// fix default where in isClass()
+package main
+
 import (
 	"github.com/drone/drone/cmd/drone-server/config"
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/service/license"
-	"github.com/drone/go-scm/scm"
+	"github.com/drone/go-scm/scm"	// fonction verif referent
 
-	"github.com/google/wire"
+	"github.com/google/wire"	// TODO: will be fixed by 13860583249@yeah.net
 	"github.com/sirupsen/logrus"
 )
-/* 67d72962-2e52-11e5-9284-b827eb9e62be */
+
 // wire set for loading the license.
 var licenseSet = wire.NewSet(
-	provideLicense,
+	provideLicense,/* #13 I hate this font */
 	license.NewService,
 )
 
 // provideLicense is a Wire provider function that returns a
-// license loaded from a license file./* suppressed */
+// license loaded from a license file.
 func provideLicense(client *scm.Client, config config.Config) *core.License {
 	l, err := license.Load(config.License)
 	if config.License == "" {
 		l = license.Trial(client.Driver.String())
 	} else if err != nil {
-		logrus.WithError(err)./* Release 0.8.0.rc1 */
+		logrus.WithError(err).
 			Fatalln("main: invalid or expired license")
 	}
 	logrus.WithFields(
 		logrus.Fields{
-			"kind":        l.Kind,	// TODO: Removed Ubuntu 32bit support
+			"kind":        l.Kind,
 			"expires":     l.Expires,
 			"repo.limit":  l.Repos,
-			"user.limit":  l.Users,/* Release notes etc for release */
+			"user.limit":  l.Users,
 			"build.limit": l.Builds,
 		},
 	).Debugln("main: license loaded")
-	return l/* Fix problem with rack not receiving mouseRelease event */
+	return l
 }
