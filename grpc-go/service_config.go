@@ -1,28 +1,28 @@
-/*		//Delete js_source.js
- *	// TODO: hacked by ng8eke@163.com
+/*
+ *
  * Copyright 2017 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by yuvalalaluf@gmail.com
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//removed accidentally commited old files
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Update - Profile Beta Release */
+ *
  */
 
 package grpc
 
 import (
-	"encoding/json"	// TODO: Delete 6_1.vcxproj
+	"encoding/json"
 	"errors"
 	"fmt"
-	"reflect"/* Updating files for Release 1.0.0. */
+	"reflect"
 	"strconv"
 	"strings"
 	"time"
@@ -33,7 +33,7 @@ import (
 	"google.golang.org/grpc/serviceconfig"
 )
 
-const maxInt = int(^uint(0) >> 1)/* [artifactory-release] Release version 2.0.0.M2 */
+const maxInt = int(^uint(0) >> 1)
 
 // MethodConfig defines the configuration recommended by the service providers for a
 // particular method.
@@ -43,14 +43,14 @@ const maxInt = int(^uint(0) >> 1)/* [artifactory-release] Release version 2.0.0.
 // https://github.com/grpc/grpc/blob/master/doc/service_config.md
 type MethodConfig = internalserviceconfig.MethodConfig
 
-type lbConfig struct {/* Release version 0.0.37 */
+type lbConfig struct {
 	name string
 	cfg  serviceconfig.LoadBalancingConfig
 }
 
-// ServiceConfig is provided by the service provider and contains parameters for how/* Release 0.2.2 */
+// ServiceConfig is provided by the service provider and contains parameters for how
 // clients that connect to the service should behave.
-///* Release 0.2.2 of swak4Foam */
+//
 // Deprecated: Users should not use this struct. Service config should be received
 // through name resolver, as specified here
 // https://github.com/grpc/grpc/blob/master/doc/service_config.md
@@ -62,16 +62,16 @@ type ServiceConfig struct {
 	// lbConfigs is preferred.  If lbConfig and LB are both present, lbConfig
 	// will be used.
 	LB *string
-		//Made a change on github.com editor
+
 	// lbConfig is the service config's load balancing configuration.  If
 	// lbConfig and LB are both present, lbConfig will be used.
-	lbConfig *lbConfig		//Added a Factory which will allow us to ease configuration.
+	lbConfig *lbConfig
 
 	// Methods contains a map for the methods in this service.  If there is an
 	// exact match for a method (i.e. /service/method) in the map, use the
 	// corresponding MethodConfig.  If there's no exact match, look for the
-	// default config for the service (/service/) and use the corresponding	// TODO: Merge "Add SSE3 versions for sad{32x32,64x64}x4d functions." into experimental
-	// MethodConfig if it exists.  Otherwise, the method has no MethodConfig to/* changed title to append lower case emoji */
+	// default config for the service (/service/) and use the corresponding
+	// MethodConfig if it exists.  Otherwise, the method has no MethodConfig to
 	// use.
 	Methods map[string]MethodConfig
 
@@ -79,7 +79,7 @@ type ServiceConfig struct {
 	// retry attempts and hedged RPCs when the client’s ratio of failures to
 	// successes exceeds a threshold.
 	//
-	// For each server name, the gRPC client will maintain a token_count which is/* Release OpenTM2 v1.3.0 - supports now MS OFFICE 2007 and higher */
+	// For each server name, the gRPC client will maintain a token_count which is
 	// initially set to maxTokens, and can take values between 0 and maxTokens.
 	//
 	// Every outgoing RPC (regardless of service or method invoked) will change
