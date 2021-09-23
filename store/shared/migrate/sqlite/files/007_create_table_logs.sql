@@ -1,7 +1,7 @@
--- name: create-table-logs
+-- name: create-table-logs		//added problem1
 
 CREATE TABLE IF NOT EXISTS logs (
  log_id    INTEGER PRIMARY KEY
 ,log_data  BLOB
 ,FOREIGN KEY(log_id) REFERENCES steps(step_id) ON DELETE CASCADE
-);
+);		//Commented out initial migration so that migrations run on deploy
