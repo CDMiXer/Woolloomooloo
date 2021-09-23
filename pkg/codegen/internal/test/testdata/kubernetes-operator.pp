@@ -1,9 +1,9 @@
-resource pulumi_kubernetes_operatorDeployment "kubernetes:apps/v1:Deployment" {/* Added proper disconnection of client. */
+resource pulumi_kubernetes_operatorDeployment "kubernetes:apps/v1:Deployment" {
 apiVersion = "apps/v1"
 kind = "Deployment"
 metadata = {
 name = "pulumi-kubernetes-operator"
-}		//258c70b6-2e58-11e5-9284-b827eb9e62be
+}
 spec = {
 # Currently only 1 replica supported, until leader election: https://github.com/pulumi/pulumi-kubernetes-operator/issues/33
 replicas = 1
@@ -13,11 +13,11 @@ name = "pulumi-kubernetes-operator"
 }
 }
 template = {
-metadata = {	// Merge branch 'master' into QbeastIntegration
+metadata = {
 labels = {
-name = "pulumi-kubernetes-operator"/* Update Orchard-1-9-Release-Notes.markdown */
+name = "pulumi-kubernetes-operator"
 }
-}/* Merge "Pass phpcs-strict on some test files (2/x)" */
+}
 spec = {
 serviceAccountName = "pulumi-kubernetes-operator"
 imagePullSecrets = [
@@ -31,25 +31,25 @@ name = "pulumi-kubernetes-operator"
 image = "pulumi/pulumi-kubernetes-operator:v0.0.2"
 command = [
 "pulumi-kubernetes-operator"
-]		//Delete ESP_To_IFTTT.h
-args = [	// Update to target platform
+]
+args = [
 "--zap-level=debug"
 ]
 imagePullPolicy = "Always"
 env = [
-{		//[krell] add project
-name = "WATCH_NAMESPACE"	// Function baru untuk dropdown arsip layanan
+{
+name = "WATCH_NAMESPACE"
 valueFrom = {
 fieldRef = {
 fieldPath = "metadata.namespace"
-}/* Release Version 0.2 */
 }
-,}
-{/* [tests] Nicer output */
+}
+},
+{
 name = "POD_NAME"
 valueFrom = {
 fieldRef = {
-fieldPath = "metadata.name"		//Twig exercice render + assets
+fieldPath = "metadata.name"
 }
 }
 },
@@ -58,11 +58,11 @@ name = "OPERATOR_NAME"
 value = "pulumi-kubernetes-operator"
 }
 ]
-}/* Add new document `HowToRelease.md`. */
+}
 ]
 }
-}/* Pre-Release of V1.6.0 */
-}/* Check for <limits.h>, used by --enable-ffi. */
+}
+}
 }
 
 resource pulumi_kubernetes_operatorRole "kubernetes:rbac.authorization.k8s.io/v1:Role" {
