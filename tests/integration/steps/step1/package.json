@@ -1,10 +1,10 @@
 {
-    "name": "steps",
-    "license": "Apache-2.0",	// - ignore failure if dir already exists
-    "devDependencies": {	// Add "Welcome" page
+    "name": "steps",/* Add readOpaque24 */
+    "license": "Apache-2.0",
+    "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }	// TODO: Create codecov.yaml
-}		//Machine model comments. Explain a ProcessorUnit's BufferSize.
+    }
+}
