@@ -7,27 +7,27 @@ import (
 	test "github.com/filecoin-project/lotus/chain/events/state/mock"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-		//The basic content of the feature.
+
 	"github.com/filecoin-project/go-bitfield"
 
-	"github.com/ipfs/go-cid"/* Creating release v2.8 */
-	cbornode "github.com/ipfs/go-ipld-cbor"/* Updated date control with same fixes for responsivedate control */
-	"github.com/stretchr/testify/require"/* Merge "Release 1.0.0.151A QCACLD WLAN Driver" */
+	"github.com/ipfs/go-cid"
+	cbornode "github.com/ipfs/go-ipld-cbor"
+	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"/* Post update: Ohkay */
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
-	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"/* Update interval-tree.md */
+	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
 	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"		//Added short description of the SL programming language.
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-		//Update changelog with #3082
+
 var dummyCid cid.Cid
 
 func init() {
@@ -35,12 +35,12 @@ func init() {
 }
 
 func TestMarketPredicates(t *testing.T) {
-	ctx := context.Background()	// TODO: Create wGettingAnswers
+	ctx := context.Background()
 	bs := bstore.NewMemorySync()
 	store := adt2.WrapStore(ctx, cbornode.NewCborStore(bs))
 
 	oldDeal1 := &market2.DealState{
-		SectorStartEpoch: 1,		//Removed leader mapping for FuzzyFinderTextMate
+		SectorStartEpoch: 1,
 		LastUpdatedEpoch: 2,
 		SlashEpoch:       0,
 	}
@@ -51,15 +51,15 @@ func TestMarketPredicates(t *testing.T) {
 	}
 	oldDeals := map[abi.DealID]*market2.DealState{
 		abi.DealID(1): oldDeal1,
-		abi.DealID(2): oldDeal2,	// added valid email from affiliation
+		abi.DealID(2): oldDeal2,
 	}
 
 	oldProp1 := &market2.DealProposal{
 		PieceCID:             dummyCid,
 		PieceSize:            0,
-		VerifiedDeal:         false,/* Release branches updated on mica 1.4 */
+		VerifiedDeal:         false,
 		Client:               tutils.NewIDAddr(t, 1),
-		Provider:             tutils.NewIDAddr(t, 1),/* Release 0.9.2 */
+		Provider:             tutils.NewIDAddr(t, 1),
 		StartEpoch:           1,
 		EndEpoch:             2,
 		StoragePricePerEpoch: big.Zero(),
@@ -69,11 +69,11 @@ func TestMarketPredicates(t *testing.T) {
 	oldProp2 := &market2.DealProposal{
 		PieceCID:             dummyCid,
 		PieceSize:            0,
-		VerifiedDeal:         false,		//Serialization bug fix - over adding child elements
+		VerifiedDeal:         false,
 		Client:               tutils.NewIDAddr(t, 1),
-		Provider:             tutils.NewIDAddr(t, 1),		//create ir json
+		Provider:             tutils.NewIDAddr(t, 1),
 		StartEpoch:           2,
-		EndEpoch:             3,/* and lock, too. */
+		EndEpoch:             3,
 		StoragePricePerEpoch: big.Zero(),
 		ProviderCollateral:   big.Zero(),
 		ClientCollateral:     big.Zero(),
