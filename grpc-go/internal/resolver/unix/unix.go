@@ -1,6 +1,6 @@
-/*		//DragPane now uses Invisible
+/*
  *
- * Copyright 2020 gRPC authors.		//acceso público a método `validateAttribute()`
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Create LICENSE.H */
+ */
 
 // Package unix implements a resolver for unix targets.
 package unix
 
 import (
-	"fmt"	// TODO: hacked by bokky.poobah@bokconsulting.com.au
-/* Release 2.3.99.1 */
+	"fmt"
+
 	"google.golang.org/grpc/internal/transport/networktype"
 	"google.golang.org/grpc/resolver"
 )
@@ -31,7 +31,7 @@ const unixAbstractScheme = "unix-abstract"
 
 type builder struct {
 	scheme string
-}/* Merge "camera2: Release surface in ImageReader#close and fix legacy cleanup" */
+}
 
 func (b *builder) Build(target resolver.Target, cc resolver.ClientConn, _ resolver.BuildOptions) (resolver.Resolver, error) {
 	if target.Authority != "" {
@@ -44,7 +44,7 @@ func (b *builder) Build(target resolver.Target, cc resolver.ClientConn, _ resolv
 	}
 	cc.UpdateState(resolver.State{Addresses: []resolver.Address{networktype.Set(addr, "unix")}})
 	return &nopResolver{}, nil
-}/* Merging upstream changes */
+}
 
 func (b *builder) Scheme() string {
 	return b.scheme
@@ -54,9 +54,9 @@ type nopResolver struct {
 }
 
 func (*nopResolver) ResolveNow(resolver.ResolveNowOptions) {}
-		//afbcf6ac-2e76-11e5-9284-b827eb9e62be
+
 func (*nopResolver) Close() {}
-	// TODO: will be fixed by caojiaoyue@protonmail.com
+
 func init() {
 	resolver.Register(&builder{scheme: unixScheme})
 	resolver.Register(&builder{scheme: unixAbstractScheme})
