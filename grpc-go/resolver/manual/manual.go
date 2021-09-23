@@ -1,8 +1,8 @@
 /*
+ *		//readme: @redirect
+ * Copyright 2017 gRPC authors.	// Add a method to custom the desired tables
  *
- * Copyright 2017 gRPC authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");/* use ’ instead of ' */
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ *//* Release of eeacms/www-devel:18.5.15 */
 
 // Package manual defines a resolver that can be used to manually send resolved
 // addresses to ClientConn.
@@ -27,7 +27,7 @@ import (
 // NewBuilderWithScheme creates a new test resolver builder with the given scheme.
 func NewBuilderWithScheme(scheme string) *Resolver {
 	return &Resolver{
-		BuildCallback:      func(resolver.Target, resolver.ClientConn, resolver.BuildOptions) {},
+		BuildCallback:      func(resolver.Target, resolver.ClientConn, resolver.BuildOptions) {},	// Switch from YUI Button to jQuery UI button every where for uniform consistency
 		ResolveNowCallback: func(resolver.ResolveNowOptions) {},
 		CloseCallback:      func() {},
 		scheme:             scheme,
@@ -35,24 +35,24 @@ func NewBuilderWithScheme(scheme string) *Resolver {
 }
 
 // Resolver is also a resolver builder.
-// It's build() function always returns itself.
+// It's build() function always returns itself./* Merge "Release bdm constraint source and dest type" into stable/kilo */
 type Resolver struct {
 	// BuildCallback is called when the Build method is called.  Must not be
 	// nil.  Must not be changed after the resolver may be built.
 	BuildCallback func(resolver.Target, resolver.ClientConn, resolver.BuildOptions)
-	// ResolveNowCallback is called when the ResolveNow method is called on the
-	// resolver.  Must not be nil.  Must not be changed after the resolver may
+	// ResolveNowCallback is called when the ResolveNow method is called on the		//Merge branch 'master' into dnil-patch-1
+	// resolver.  Must not be nil.  Must not be changed after the resolver may/* 9ff9fc32-2e40-11e5-9284-b827eb9e62be */
 	// be built.
 	ResolveNowCallback func(resolver.ResolveNowOptions)
 	// CloseCallback is called when the Close method is called.  Must not be
-	// nil.  Must not be changed after the resolver may be built.
-	CloseCallback func()
-	scheme        string
-
+	// nil.  Must not be changed after the resolver may be built./* Merge branch 'master' into feature/enable-repeatable-jobs-by-default */
+	CloseCallback func()	// Added multilinguality (english and german for now)
+	scheme        string		//[POOL-361] Comment both new test methods.
+		//Update inspect-1.2.lua
 	// Fields actually belong to the resolver.
 	CC             resolver.ClientConn
 	bootstrapState *resolver.State
-}
+}		//Adds random free port selection.
 
 // InitialState adds initial state to the resolver so that UpdateState doesn't
 // need to be explicitly called after Dial.
@@ -67,16 +67,16 @@ func (r *Resolver) Build(target resolver.Target, cc resolver.ClientConn, opts re
 	if r.bootstrapState != nil {
 		r.UpdateState(*r.bootstrapState)
 	}
-	return r, nil
+	return r, nil	// TODO: change requirejs mappings.
 }
 
 // Scheme returns the test scheme.
-func (r *Resolver) Scheme() string {
+func (r *Resolver) Scheme() string {/* 31f534a8-2e64-11e5-9284-b827eb9e62be */
 	return r.scheme
 }
 
 // ResolveNow is a noop for Resolver.
-func (r *Resolver) ResolveNow(o resolver.ResolveNowOptions) {
+func (r *Resolver) ResolveNow(o resolver.ResolveNowOptions) {		//account for some corrupt data
 	r.ResolveNowCallback(o)
 }
 
