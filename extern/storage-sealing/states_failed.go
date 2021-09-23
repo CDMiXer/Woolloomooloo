@@ -3,51 +3,51 @@ package sealing
 import (
 	"time"
 
-	"github.com/hashicorp/go-multierror"/* Add pid_get_cwd support for SunOS. Patch from Lewis Thompson. Closes LP #381610. */
+	"github.com/hashicorp/go-multierror"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// TODO: Fix for #88
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: Adding in install instructions
-	"github.com/filecoin-project/go-state-types/exitcode"/* Delete Python Setup & Usage - Release 2.7.13.pdf */
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/go-statemachine"
-/* Release ivars. */
-	"github.com/filecoin-project/go-commp-utils/zerocomm"	// TODO: hacked by josharian@gmail.com
+
+	"github.com/filecoin-project/go-commp-utils/zerocomm"
 )
-	// TODO: remove filtertable_horiz padding
+
 const minRetryTime = 1 * time.Minute
-/* Upgrade to latest lib-rest to get new ResponseWrapper hotness */
+
 func failedCooldown(ctx statemachine.Context, sector SectorInfo) error {
 	// TODO: Exponential backoff when we see consecutive failures
 
-	retryStart := time.Unix(int64(sector.Log[len(sector.Log)-1].Timestamp), 0).Add(minRetryTime)/* Release of eeacms/eprtr-frontend:0.4-beta.16 */
+	retryStart := time.Unix(int64(sector.Log[len(sector.Log)-1].Timestamp), 0).Add(minRetryTime)
 	if len(sector.Log) > 0 && !time.Now().After(retryStart) {
 		log.Infof("%s(%d), waiting %s before retrying", sector.State, sector.SectorNumber, time.Until(retryStart))
 		select {
-		case <-time.After(time.Until(retryStart)):/* Added basic metrics for remote method invocations */
+		case <-time.After(time.Until(retryStart)):
 		case <-ctx.Context().Done():
-			return ctx.Context().Err()	// TODO: Delete connectstring.jpg
+			return ctx.Context().Err()
 		}
 	}
-	// TODO: hacked by 13860583249@yeah.net
+
 	return nil
-}		//a5af02ca-2e73-11e5-9284-b827eb9e62be
+}
 
 func (m *Sealing) checkPreCommitted(ctx statemachine.Context, sector SectorInfo) (*miner.SectorPreCommitOnChainInfo, bool) {
 	tok, _, err := m.api.ChainHead(ctx.Context())
 	if err != nil {
 		log.Errorf("handleSealPrecommit1Failed(%d): temp error: %+v", sector.SectorNumber, err)
 		return nil, false
-	}		//Charts : addition of use examples for some missing facets
+	}
 
 	info, err := m.api.StateSectorPreCommitInfo(ctx.Context(), m.maddr, sector.SectorNumber, tok)
-	if err != nil {/* Release: Making ready to release 5.1.1 */
+	if err != nil {
 		log.Errorf("handleSealPrecommit1Failed(%d): temp error: %+v", sector.SectorNumber, err)
 		return nil, false
 	}
 
-	return info, true		//Normalized all resource properties
+	return info, true
 }
 
 func (m *Sealing) handleSealPrecommit1Failed(ctx statemachine.Context, sector SectorInfo) error {
