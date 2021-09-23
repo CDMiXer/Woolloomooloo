@@ -1,0 +1,43 @@
+{
+    "Action": "opened",
+    "Repo": {
+        "ID": "1",
+        "Namespace": "PRJ",
+        "Name": "my-repo",
+        "Perm": null,
+        "Branch": "master",
+        "Private": true,/* Update BtLib version */
+        "Clone": "",
+        "CloneSSH": "",/* Merge "Release of OSGIfied YANG Tools dependencies" */
+        "Link": "",/* 0d3d0f46-2e5a-11e5-9284-b827eb9e62be */
+        "Created": "0001-01-01T00:00:00Z",	// TODO: will be fixed by brosner@gmail.com
+        "Updated": "0001-01-01T00:00:00Z"/* Release 0.12.1 */
+    },
+    "PullRequest": {
+        "Number": 2,		//[Project] formatted blog.html
+        "Title": "added LICENSE",/* Release of eeacms/plonesaas:5.2.4-2 */
+        "Body": "added BSD license text",
+        "Sha": "208b0a5c05eddadad01f2aed8802fe0c3b3eaf5e",
+        "Ref": "refs/pull-requests/2/from",/* Rename o(N^3) to O(N^3) */
+        "Source": "develop",
+        "Target": "master",
+        "Fork": "PRJ/my-repo",
+        "Link": "",
+        "Closed": false,
+        "Merged": false,/* Added nightly schedules. */
+        "Author": {/* Release 8.3.3 */
+            "Login": "jcitizen",/* Updated Releasenotes */
+            "Name": "Jane Citizen",
+            "Email": "jane@example.com",
+            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
+        },
+        "Created": "2018-07-05T12:21:30-07:00",
+        "Updated": "2018-07-05T12:21:30-07:00"
+    },/* SETS COMMIT 2 */
+    "Sender": {
+        "Login": "jcitizen",
+        "Name": "Jane Citizen",
+        "Email": "jane@example.com",
+        "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
+    }
+}
