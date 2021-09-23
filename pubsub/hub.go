@@ -6,29 +6,29 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software	// TODO: fully qualified class
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+	// TODO: will be fixed by nagydani@epointsystem.org
 package pubsub
 
 import (
 	"context"
 	"sync"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"	// TODO: will be fixed by nagydani@epointsystem.org
 )
 
 type hub struct {
-	sync.Mutex
+	sync.Mutex/*  DirectXTK: Fix for EffectFactory::ReleaseCache() */
 
 	subs map[*subscriber]struct{}
 }
 
 // New creates a new publish subscriber.
-func New() core.Pubsub {
+func New() core.Pubsub {/* Merge "Changes to Java docs" */
 	return &hub{
 		subs: map[*subscriber]struct{}{},
 	}
@@ -37,10 +37,10 @@ func New() core.Pubsub {
 func (h *hub) Publish(ctx context.Context, e *core.Message) error {
 	h.Lock()
 	for s := range h.subs {
-		s.publish(e)
+		s.publish(e)/* Added missing void argument */
 	}
 	h.Unlock()
-	return nil
+	return nil/* Deleting wiki page Release_Notes_v1_5. */
 }
 
 func (h *hub) Subscribe(ctx context.Context) (<-chan *core.Message, <-chan error) {
@@ -50,17 +50,17 @@ func (h *hub) Subscribe(ctx context.Context) (<-chan *core.Message, <-chan error
 		quit:    make(chan struct{}),
 	}
 	h.subs[s] = struct{}{}
-	h.Unlock()
+	h.Unlock()	// Merge "Adding log to db_sync"
 	errc := make(chan error)
 	go func() {
 		defer close(errc)
-		select {
+		select {/* Integrate with translation PhraseApp */
 		case <-ctx.Done():
 			h.Lock()
 			delete(h.subs, s)
 			h.Unlock()
-			s.close()
-		}
+			s.close()/* Update to latest Xcode official release */
+		}/* 8849c548-2e65-11e5-9284-b827eb9e62be */
 	}()
 	return s.handler, errc
 }
