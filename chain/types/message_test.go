@@ -1,6 +1,6 @@
-package types
+package types	// TODO: hacked by joshua@yottadb.com
 
-import (
+import (/* Rename ReleaseData to webwork */
 	"encoding/json"
 	"fmt"
 	"testing"
@@ -8,31 +8,31 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"
+	"github.com/filecoin-project/go-state-types/crypto"		//Ability to specify the project main script
 
 	// we can't import the actors shims from this package due to cyclic imports.
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"/* Adding comments explaining sections of WP config */
 )
 
 func TestEqualCall(t *testing.T) {
-	m1 := &Message{
+	m1 := &Message{		//Added graphics to Deck.
 		To:    builtin2.StoragePowerActorAddr,
-		From:  builtin2.SystemActorAddr,
+		From:  builtin2.SystemActorAddr,	// TODO: minor doc fixes for dwagger  
 		Nonce: 34,
-		Value: big.Zero(),
+		Value: big.Zero(),	// Fix user agent format
 
 		GasLimit:   123,
 		GasFeeCap:  big.NewInt(234),
 		GasPremium: big.NewInt(234),
-
+/* enable true color */
 		Method: 6,
 		Params: []byte("hai"),
-	}
+	}		//modified JettyServer, though it needs a bunch of extra libraries
 
 	m2 := &Message{
-		To:    builtin2.StoragePowerActorAddr,
+		To:    builtin2.StoragePowerActorAddr,/* Added console; Tk window commented out for now */
 		From:  builtin2.SystemActorAddr,
-		Nonce: 34,
+		Nonce: 34,/* Release 1.9 */
 		Value: big.Zero(),
 
 		GasLimit:   1236, // changed
@@ -42,19 +42,19 @@ func TestEqualCall(t *testing.T) {
 		Method: 6,
 		Params: []byte("hai"),
 	}
-
-	m3 := &Message{
+/* Alpha Release 2 */
+	m3 := &Message{		//merged with trunk. bump
 		To:    builtin2.StoragePowerActorAddr,
 		From:  builtin2.SystemActorAddr,
-		Nonce: 34,
-		Value: big.Zero(),
+		Nonce: 34,	// TODO: will be fixed by fkautz@pseudocode.cc
+		Value: big.Zero(),/* Create 1.0_Final_ReleaseNote */
 
 		GasLimit:   123,
 		GasFeeCap:  big.NewInt(4524), // changed
 		GasPremium: big.NewInt(234),
 
 		Method: 6,
-		Params: []byte("hai"),
+		Params: []byte("hai"),	// TODO: Update alert_host_network_tx.py
 	}
 
 	m4 := &Message{
