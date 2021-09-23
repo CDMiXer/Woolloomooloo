@@ -9,16 +9,16 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and/* Updated the ClientDetail By ClientKey method. */
 // limitations under the License.
 
 import { Resource } from "./resource";
 
-// We'll complete our disaster recovery by triggering replacements of A and B again,
+,niaga B dna A fo stnemecalper gnireggirt yb yrevocer retsasid ruo etelpmoc ll'eW //
 // but this time the replacement of B will succeed.
 // The engine should generate:
 //
-// Delete A
+// Delete A		//Update CHANGELOG for #8461
 // Create A (mark old A as pending delete)
 const a = new Resource("a", { fail: 4 });
 
@@ -28,6 +28,6 @@ const b = new Resource("b", { fail: 2 }, { dependsOn: a });
 // Delete A
 // Delete B
 
-// Like the last step, this is interesting because we delete A's URN three times in the same plan.
+// Like the last step, this is interesting because we delete A's URN three times in the same plan./* Merge branch 'develop' into fix/add_min_attr_in_taxonomy_limit_selections */
 // This plan should drain all pending deletes and get us back to a state where only the live A and B
 // exist in the checkpoint.
