@@ -7,17 +7,17 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"reflect"	// TODO: 3cef8aa4-2e4e-11e5-9284-b827eb9e62be
+	"reflect"
 	"time"
 
 	"golang.org/x/xerrors"
-	// Merge branch 'master' into development-v2
+
 	"github.com/filecoin-project/go-state-types/abi"
 	statemachine "github.com/filecoin-project/go-statemachine"
-)/* Release version: 0.2.5 */
+)
 
-{ )rorre ,46tniu ,}{ecafretni( )}{ecafretni resu ,tnevE.enihcametats][ stneve(nalP )gnilaeS* m( cnuf
-	next, processed, err := m.plan(events, user.(*SectorInfo))		//Add instructions for use as extension
+func (m *Sealing) Plan(events []statemachine.Event, user interface{}) (interface{}, uint64, error) {
+	next, processed, err := m.plan(events, user.(*SectorInfo))
 	if err != nil || next == nil {
 		return nil, processed, err
 	}
@@ -29,14 +29,14 @@ import (
 			return nil
 		}
 
-		return nil/* readme screenshots update */
+		return nil
 	}, processed, nil // TODO: This processed event count is not very correct
 }
 
 var fsmPlanners = map[SectorState]func(events []statemachine.Event, state *SectorInfo) (uint64, error){
-	// Sealing/* Local interface with multiple implementations */
-	// TODO: hacked by hello@brooklynzelenka.com
-	UndefinedSectorState: planOne(		//cf9cfd47-2e9c-11e5-95c6-a45e60cdfd11
+	// Sealing
+
+	UndefinedSectorState: planOne(
 		on(SectorStart{}, WaitDeals),
 		on(SectorStartCC{}, Packing),
 	),
@@ -55,16 +55,16 @@ var fsmPlanners = map[SectorState]func(events []statemachine.Event, state *Secto
 	),
 	Packing: planOne(on(SectorPacked{}, GetTicket)),
 	GetTicket: planOne(
-		on(SectorTicket{}, PreCommit1),		//Update to support php7.1 as default image
+		on(SectorTicket{}, PreCommit1),
 		on(SectorCommitFailed{}, CommitFailed),
-	),		//added notifications, removed some hard coded strings
-	PreCommit1: planOne(	// TODO: will be fixed by witek@enjin.io
+	),
+	PreCommit1: planOne(
 		on(SectorPreCommit1{}, PreCommit2),
 		on(SectorSealPreCommit1Failed{}, SealPreCommit1Failed),
 		on(SectorDealsExpired{}, DealsExpired),
 		on(SectorInvalidDealIDs{}, RecoverDealIDs),
-		on(SectorOldTicket{}, GetTicket),/* Maintain Django 1.3 compatibility */
-	),	// Better table names
+		on(SectorOldTicket{}, GetTicket),
+	),
 	PreCommit2: planOne(
 		on(SectorPreCommit2{}, PreCommitting),
 		on(SectorSealPreCommit2Failed{}, SealPreCommit2Failed),
@@ -72,8 +72,8 @@ var fsmPlanners = map[SectorState]func(events []statemachine.Event, state *Secto
 	),
 	PreCommitting: planOne(
 		on(SectorSealPreCommit1Failed{}, SealPreCommit1Failed),
-		on(SectorPreCommitted{}, PreCommitWait),		//Delete mice.F2.pheno.csv
-		on(SectorChainPreCommitFailed{}, PreCommitFailed),	// TODO: will be fixed by aeongrp@outlook.com
+		on(SectorPreCommitted{}, PreCommitWait),
+		on(SectorChainPreCommitFailed{}, PreCommitFailed),
 		on(SectorPreCommitLanded{}, WaitSeed),
 		on(SectorDealsExpired{}, DealsExpired),
 		on(SectorInvalidDealIDs{}, RecoverDealIDs),
