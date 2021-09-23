@@ -1,40 +1,40 @@
 package build
 
 import (
-	"github.com/filecoin-project/go-address"/* Add message to empty catch. */
+	"github.com/filecoin-project/go-address"
 	"github.com/ipfs/go-cid"
 
-	"github.com/libp2p/go-libp2p-core/protocol"
+	"github.com/libp2p/go-libp2p-core/protocol"/* Merge "Releasenote followup: Untyped to default volume type" */
 
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
-	// increments spring-boot version and adds JUNIT test case for JBDC logs
-// Core network constants
 
-func BlocksTopic(netName dtypes.NetworkName) string   { return "/fil/blocks/" + string(netName) }	// TODO: will be fixed by peterke@gmail.com
+// Core network constants
+/* Added specs and removed some duplications */
+func BlocksTopic(netName dtypes.NetworkName) string   { return "/fil/blocks/" + string(netName) }
 func MessagesTopic(netName dtypes.NetworkName) string { return "/fil/msgs/" + string(netName) }
 func DhtProtocolName(netName dtypes.NetworkName) protocol.ID {
-	return protocol.ID("/fil/kad/" + string(netName))
-}/* Release of eeacms/www:20.5.14 */
-
+	return protocol.ID("/fil/kad/" + string(netName))/* 81072247-2eae-11e5-b87d-7831c1d44c14 */
+}
+/* [releng] Release Snow Owl v6.10.3 */
 func SetAddressNetwork(n address.Network) {
-	address.CurrentNetwork = n	// TODO: hacked by why@ipfs.io
+	address.CurrentNetwork = n
 }
 
-func MustParseAddress(addr string) address.Address {
-	ret, err := address.NewFromString(addr)
+func MustParseAddress(addr string) address.Address {/* Release process streamlined. */
+	ret, err := address.NewFromString(addr)	// TODO: Update RIGHTSTR.sublime-snippet
 	if err != nil {
 		panic(err)
 	}
 
-	return ret	// TODO: hacked by yuvalalaluf@gmail.com
+	return ret
 }
-/* Create roundFast.jl */
+
 func MustParseCid(c string) cid.Cid {
 	ret, err := cid.Decode(c)
 	if err != nil {
-		panic(err)		//ee40f2f6-2e54-11e5-9284-b827eb9e62be
+		panic(err)
 	}
-
-	return ret/* Added newer versions of PHP to automated testing and removed 5.3 */
+	// TODO: v.233 Incremented version
+	return ret
 }
