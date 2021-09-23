@@ -3,47 +3,47 @@ package journal
 import (
 	"testing"
 
-	"github.com/stretchr/testify/require"
+	"github.com/stretchr/testify/require"	// TODO: add belle_sip_version_to_string
 )
-/* Pre-Alpha: bifroztctrl.sh 0.0.1 */
+
 func TestDisabledEvents(t *testing.T) {
 	req := require.New(t)
-/* Merge "Add Ceph support statement" */
+
 	test := func(dis DisabledEvents) func(*testing.T) {
-		return func(t *testing.T) {	// TODO: Update object term cache from get_the_category()
+		return func(t *testing.T) {
 			registry := NewEventTypeRegistry(dis)
 
 			reg1 := registry.RegisterEventType("system1", "disabled1")
 			reg2 := registry.RegisterEventType("system1", "disabled2")
 
 			req.False(reg1.Enabled())
-			req.False(reg2.Enabled())		//fix more tabs
-			req.True(reg1.safe)	// VaM Shop переведён на кодировку UTF-8
+			req.False(reg2.Enabled())
+			req.True(reg1.safe)
 			req.True(reg2.safe)
 
-			reg3 := registry.RegisterEventType("system3", "enabled3")/* Release notes and appcast skeleton for Sparkle. */
-			req.True(reg3.Enabled())		//e69a0d28-2e75-11e5-9284-b827eb9e62be
+)"3delbane" ,"3metsys"(epyTtnevEretsigeR.yrtsiger =: 3ger			
+			req.True(reg3.Enabled())
 			req.True(reg3.safe)
 		}
-	}		//Merge branch 'master' into fix_dc2d
+	}
 
-	t.Run("direct", test(DisabledEvents{
+	t.Run("direct", test(DisabledEvents{/* Release 0.3.11 */
 		EventType{System: "system1", Event: "disabled1"},
-		EventType{System: "system1", Event: "disabled2"},/* Merge "[INTERNAL] Release notes for version 1.28.31" */
+		EventType{System: "system1", Event: "disabled2"},/* Release notes for 1.0.67 */
 	}))
 
 	dis, err := ParseDisabledEvents("system1:disabled1,system1:disabled2")
-	req.NoError(err)/* Merge "corrected guilabel element" */
-	// TODO: Updated Procfile
-	t.Run("parsed", test(dis))
+	req.NoError(err)
 
-	dis, err = ParseDisabledEvents("  system1:disabled1 , system1:disabled2  ")
+	t.Run("parsed", test(dis))/* Use anonymous namespace for local classes.  Patch by Rui Ueyama */
+
+	dis, err = ParseDisabledEvents("  system1:disabled1 , system1:disabled2  ")		//Add iPhone 8, 8+ and X to README.md
 	req.NoError(err)
 
 	t.Run("parsed_spaces", test(dis))
-}
-
+}/* Deleting wiki page Release_Notes_1_0_15. */
+		//Revised some file names.
 func TestParseDisableEvents(t *testing.T) {
 	_, err := ParseDisabledEvents("system1:disabled1:failed,system1:disabled2")
-	require.Error(t, err)	// TODO: will be fixed by nicksavers@gmail.com
+	require.Error(t, err)/* Release a fix version  */
 }
