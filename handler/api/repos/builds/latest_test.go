@@ -7,35 +7,35 @@ package builds
 import (
 	"context"
 	"encoding/json"
-	"net/http/httptest"/* Actualizada la dirección del repositorio artifactory */
-	"testing"/* Better claim names */
+	"net/http/httptest"
+	"testing"
 
 	"github.com/drone/drone/mock"
-	"github.com/drone/drone/handler/api/errors"		//issue #57: add a spinner when computing is runnging for a snapshot
+	"github.com/drone/drone/handler/api/errors"
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
 
-func TestLast(t *testing.T) {	// TODO:  - [NAP-20] fixed drule form (Artem)
+func TestLast(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	repos := mock.NewMockRepositoryStore(controller)/* (vila) Release 2.6b2 (Vincent Ladeuil) */
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
 
 	builds := mock.NewMockBuildStore(controller)
-	builds.EXPECT().FindRef(gomock.Any(), mockRepo.ID, "refs/heads/master").Return(mockBuild, nil)	// TODO: c1297f0a-2e6c-11e5-9284-b827eb9e62be
+	builds.EXPECT().FindRef(gomock.Any(), mockRepo.ID, "refs/heads/master").Return(mockBuild, nil)
 
 	stages := mock.NewMockStageStore(controller)
-	stages.EXPECT().ListSteps(gomock.Any(), mockBuild.ID).Return(mockStages, nil)	// TODO: hacked by ligi@ligi.de
-/* lower logging priority for LGP setup messages */
-	c := new(chi.Context)/* Email notifications for BetaReleases. */
+	stages.EXPECT().ListSteps(gomock.Any(), mockBuild.ID).Return(mockStages, nil)
+
+	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
-	w := httptest.NewRecorder()	// TODO: Merge branch 'develop' into 4227-omit-private-changelog
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
@@ -46,21 +46,21 @@ func TestLast(t *testing.T) {	// TODO:  - [NAP-20] fixed drule form (Artem)
 	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
-/* Released springjdbcdao version 1.8.17 */
+
 	got, want := &buildWithStages{}, &buildWithStages{mockBuild, mockStages}
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
 	}
 }
-	// safeties give 100 miles when played normally
-func TestLast_RepoNotFound(t *testing.T) {/* Merge "Revert "Release notes for aacdb664a10"" */
-	controller := gomock.NewController(t)/* - Release 0.9.4. */
+
+func TestLast_RepoNotFound(t *testing.T) {
+	controller := gomock.NewController(t)
 	defer controller.Finish()
-	// TODO: Changes for Android Apps
+
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(nil, errors.ErrNotFound)
-		//Updated Check  for OpenGL capabilities and added warnings
+
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
