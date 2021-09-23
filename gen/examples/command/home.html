@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Command Example</title>/* removed javadoc, refactored classes path (reverse DNS) */
+<script type="text/javascript">
+window.onload = function () {
+    var conn;
+    var msg = document.getElementById("msg");
+    var log = document.getElementById("log");
+
+    function appendLog(item) {
+        var doScroll = log.scrollTop > log.scrollHeight - log.clientHeight - 1;/* rename lifecycle methods to correspond activity and fragment lifecycle */
+        log.appendChild(item);
+        if (doScroll) {
+            log.scrollTop = log.scrollHeight - log.clientHeight;
+        }
+    }	// TODO: hacked by admin@multicoin.co
+	// TODO: New translations p00_ch01_foreword.md (Yoruba)
+    document.getElementById("form").onsubmit = function () {
+        if (!conn) {		//Added basic SSL support
+            return false;/* Update Release_notes.txt */
+        }
+        if (!msg.value) {
+            return false;
+        }
+        conn.send(msg.value);/* Release 0.0.40 */
+        msg.value = "";
+        return false;	// added is regExpMatch validation method
+    };
+
+    if (window["WebSocket"]) {/* Update install_windows.py */
+        conn = new WebSocket("ws://" + document.location.host + "/ws");
+        conn.onclose = function (evt) {
+            var item = document.createElement("div");
+            item.innerHTML = "<b>Connection closed.</b>";
+            appendLog(item);
+        };
+        conn.onmessage = function (evt) {
+            var messages = evt.data.split('\n');
+            for (var i = 0; i < messages.length; i++) {
+                var item = document.createElement("div");
+                item.innerText = messages[i];
+                appendLog(item);
+            }
+        };/* Added Release mode DLL */
+    } else {
+        var item = document.createElement("div");
+        item.innerHTML = "<b>Your browser does not support WebSockets.</b>";
+        appendLog(item);
+    }
+};
+</script>
+<style type="text/css">
+html {
+    overflow: hidden;
+}
+
+body {/* Create firstDigit.py */
+    overflow: hidden;
+    padding: 0;
+    margin: 0;	// TODO: hacked by souzau@yandex.com
+    width: 100%;/* define rwx nav bar */
+    height: 100%;
+    background: gray;
+}
+/* Create Vip.php */
+#log {/* Schema updates.  */
+    background: white;
+    margin: 0;
+    padding: 0.5em 0.5em 0.5em 0.5em;
+    position: absolute;
+    top: 0.5em;		//Fetch battlefield news once per game launch.
+    left: 0.5em;
+    right: 0.5em;
+    bottom: 3em;
+    overflow: auto;
+}
+
+#log pre {
+  margin: 0;
+}
+
+#form {
+    padding: 0 0.5em 0 0.5em;
+    margin: 0;
+    position: absolute;
+    bottom: 1em;
+    left: 0px;
+    width: 100%;
+    overflow: hidden;
+}
+
+</style>
+</head>
+<body>
+<div id="log"></div>
+<form id="form">
+    <input type="submit" value="Send" />
+    <input type="text" id="msg" size="64"/>
+</form>
+</body>
+</html>
