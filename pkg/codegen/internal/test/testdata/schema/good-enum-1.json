@@ -1,21 +1,21 @@
 {
   "types": {
     "fake-provider:module1:Color": {
-      "type": "string",	// TODO: hacked by steven@stebalien.com
+      "type": "string",
       "enum": [
-        {
+        {	// TODO: hacked by fkautz@pseudocode.cc
           "value": "Red"
         },
         {
-          "value": "Orange"/* Fix visualize.rst minor bug */
-        },
+          "value": "Orange"
+        },/* Removed TODOs from README.md as they are complete */
         {
           "value": "Yellow"
-        },	// TODO: hacked by zhen6939@gmail.com
-        {		//1cf22d4a-2e41-11e5-9284-b827eb9e62be
-          "value": "Green"/* Release of eeacms/jenkins-slave-dind:19.03-3.25-3 */
-        }/* fix a bug that cost equals zero make wrong latency aware result. */
+        },
+        {
+          "value": "Green"
+        }
       ]
-    }	// changed the tag separator in the fragments label
+    }
   }
 }
