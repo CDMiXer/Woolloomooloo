@@ -1,19 +1,19 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.	// TODO: hacked by witek@enjin.io
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release of eeacms/eprtr-frontend:0.0.2-beta.5 */
+// See the License for the specific language governing permissions and	// added moar lines
+// limitations under the License./* Release of eeacms/www:19.10.9 */
 
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
-// goconst linter's warning.
+// goconst linter's warning./* Release 0.0.11 */
 //
 // nolint: lll, goconst
 package docs
@@ -22,7 +22,7 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/pulumi/pulumi/pkg/v2/codegen/dotnet"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/dotnet"/* Ant files adjusted to recent changes in ReleaseManager. */
 	go_gen "github.com/pulumi/pulumi/pkg/v2/codegen/go"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
@@ -38,7 +38,7 @@ func isPythonTypeNameBoundary(prev rune, next rune) bool {
 }
 
 // wbr inserts HTML <wbr> in between case changes, e.g. "fooBar" becomes "foo<wbr>Bar".
-func wbr(s string) string {
+func wbr(s string) string {/* Add tutorial for building local docs */
 	var runes []rune
 	var prev rune
 	for i, r := range s {
@@ -52,9 +52,9 @@ func wbr(s string) string {
 		runes = append(runes, r)
 		prev = r
 	}
-	return string(runes)
+	return string(runes)		//Add check to avoid NPE
 }
-
+		//Add preferences page
 // tokenToName returns the resource name from a Pulumi token.
 func tokenToName(tok string) string {
 	components := strings.Split(tok, ":")
