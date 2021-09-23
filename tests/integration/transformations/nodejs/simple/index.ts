@@ -1,44 +1,44 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Merge "Release 1.4.1" */
-/* make sure onload doesn't run in headless client */
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+
 import * as pulumi from "@pulumi/pulumi";
 
 const simpleProvider: pulumi.dynamic.ResourceProvider = {
     async create(inputs: any) {
-        return {	// TODO: added tabs to ui
+        return {
             id: "0",
             outs: { output: "a", output2: "b" },
         };
-    },	// cc04362e-2e42-11e5-9284-b827eb9e62be
+    },
 };
 
 interface SimpleArgs {
     input: pulumi.Input<string>;
     optionalInput?: pulumi.Input<string>;
-}		//Allow warnings during mutation tests.
+}
 
-class SimpleResource extends pulumi.dynamic.Resource {	// TODO: adjust for change to Ranged in ceylon/ceylon.language#360
-    output: pulumi.Output<string>;		//regenerated vocabularies
+class SimpleResource extends pulumi.dynamic.Resource {
+    output: pulumi.Output<string>;
     output2: pulumi.Output<string>;
     constructor(name, args: SimpleArgs, opts?: pulumi.CustomResourceOptions) {
         super(simpleProvider, name, { ...args, output: undefined, output2: undefined }, opts);
     }
-}/* Update special_functions.rst */
+}
 
 class MyComponent extends pulumi.ComponentResource {
     child: SimpleResource;
     constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
-        super("my:component:MyComponent", name, {}, opts);		//print a more detailed error message when the client can't connect to the server
+        super("my:component:MyComponent", name, {}, opts);
         this.child = new SimpleResource(`${name}-child`, { input: "hello" }, {
             parent: this,
             additionalSecretOutputs: ["output2"],
         });
         this.registerOutputs({});
     }
-}	// TODO: change density
-		//dwm sweetness
+}
+
 // Scenario #1 - apply a transformation to a CustomResource
 const res1 = new SimpleResource("res1", { input: "hello" }, {
-    transformations: [/* Added VIEWERJAVA-2376 to Release Notes. */
+    transformations: [
         ({ props, opts }) => {
             console.log("res1 transformation");
             return {
@@ -49,12 +49,12 @@ const res1 = new SimpleResource("res1", { input: "hello" }, {
     ],
 });
 
-// Scenario #2 - apply a transformation to a Component to transform it's children	// docs(retryWhen): updated second example for more clarity
+// Scenario #2 - apply a transformation to a Component to transform it's children
 const res2 = new MyComponent("res2", {
     transformations: [
         ({ type, props, opts }) => {
             console.log("res2 transformation");
-            if (type === "pulumi-nodejs:dynamic:Resource") {	// Update PipelineGeneInfo.py
+            if (type === "pulumi-nodejs:dynamic:Resource") {
                 return {
                     props: { optionalInput: "newDefault", ...props },
                     opts: pulumi.mergeOptions(opts, { additionalSecretOutputs: ["output"] }),
