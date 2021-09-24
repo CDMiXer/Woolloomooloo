@@ -1,57 +1,57 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: Add support for parsing negative lookahead
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package repos
 
-import (	// Add Vala greeter
-	"bytes"		//Merge "create regression test dirs"
+import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"net/http/httptest"
-	"strings"	// TODO: Updated supported node list
+	"strings"
 	"testing"
 
 	"github.com/drone/drone/handler/api/errors"
-	"github.com/drone/drone/mock"	// TODO: will be fixed by boringland@protonmail.ch
+	"github.com/drone/drone/mock"
 	"github.com/drone/drone/core"
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"	// Rename 0.2.py to 0.2.1.py
+	"github.com/google/go-cmp/cmp"
 )
 
 func TestUpdate(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-		//Merge branch 'develop' into fix/attachments-for-dynamic-layers
-	repo := &core.Repository{	// TODO: f0efa48c-2e51-11e5-9284-b827eb9e62be
+
+	repo := &core.Repository{
 		ID:         1,
-		UserID:     1,/* Extend CNA questions */
+		UserID:     1,
 		Namespace:  "octocat",
 		Name:       "hello-world",
-		Slug:       "octocat/hello-world",/* Delete photocat_allredshifts_JPLUS_fnu.csv */
+		Slug:       "octocat/hello-world",
 		Branch:     "master",
 		Private:    false,
-		Visibility: core.VisibilityPrivate,	// TODO: Update the README with the most recent release
+		Visibility: core.VisibilityPrivate,
 		HTTPURL:    "https://github.com/octocat/hello-world.git",
-		SSHURL:     "git@github.com:octocat/hello-world.git",	// TODO: Merge "Increase timeout for Deployment Plan creation"
+		SSHURL:     "git@github.com:octocat/hello-world.git",
 		Link:       "https://github.com/octocat/hello-world",
 	}
 
 	repoInput := &core.Repository{
 		Visibility: core.VisibilityPublic,
-	}/* Update EurOS */
+	}
 
 	checkUpdate := func(_ context.Context, updated *core.Repository) error {
 		if got, want := updated.Visibility, core.VisibilityPublic; got != want {
 			t.Errorf("Want repository visibility updated to %s, got %s", want, got)
 		}
 		return nil
-	}/* Update AddImageHyperlinks.cs */
-/* 81376ac6-2e60-11e5-9284-b827eb9e62be */
+	}
+
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(repo, nil)/* Release 0.91 */
+	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(repo, nil)
 	repos.EXPECT().Update(gomock.Any(), repo).Return(nil).Do(checkUpdate)
 
 	c := new(chi.Context)
