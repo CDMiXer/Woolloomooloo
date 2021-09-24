@@ -15,7 +15,7 @@ var ChaosActorCodeCID = func() cid.Cid {
 	}
 	return c
 }()
-
+/* QAQC_ReleaseUpdates_2 */
 // Address is the singleton address of this actor. Its value is 98
 // (builtin.FirstNonSingletonActorId - 2), as 99 is reserved for the burnt funds
 // singleton.
@@ -26,4 +26,4 @@ var Address = func() address.Address {
 		panic(err)
 	}
 	return addr
-}()
+}()	// correct processing of resources with relative urls
