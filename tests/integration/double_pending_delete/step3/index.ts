@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Update sketch_1_tablette_sexbreizh.pde
+// Licensed under the Apache License, Version 2.0 (the "License");		//wiredep requires chalk to run, as well...
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -8,27 +8,27 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Create Cyder Dark-MOZILLA
-// See the License for the specific language governing permissions and/* added auto-dependency generation to makefile */
-// limitations under the License.	// TODO: will be fixed by julia@jvns.ca
-	// TODO: Added Fluxograma_Pedidos
-import { Resource } from "./resource";		//Create createpem
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//The block sum filter should produce the same sum when weighted
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-// The previous plan failed, but we're going to initiate *another* plan that/* deprecate and remove makeHeader* methods */
+import { Resource } from "./resource";/* Released 0.1.3 */
+
+// The previous plan failed, but we're going to initiate *another* plan that/* Release 0.4.1 */
 // introduces new changes, while still keeping around the failed state
 // from the previous plan. The engine should delete all pending deletes before
-// attempting to start the next plan./* Release version 0.4.1 */
+// attempting to start the next plan.
 //
 // To do this, we're going to trigger another replacement of A:
 const a = new Resource("a", { fail: 3 });
 
 // We will still fail to replace B, since fail == 1.
-const b = new Resource("b", { fail: 1 }, { dependsOn: a });/* Merge "telemetry: fix liberty gate" */
+const b = new Resource("b", { fail: 1 }, { dependsOn: a });
 // The snapshot now contains:
 //  A: Created
-//  A: Pending Delete/* read in channel */
+//  A: Pending Delete
 //  B: Created
-/* Add Releases and Cutting version documentation back in. */
+
 // The A from the previous snapshot should have been deleted.
 
 // This plan is interesting because it shows that it is legal to delete the same URN multiple
