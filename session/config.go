@@ -1,34 +1,34 @@
 // Copyright 2019 Drone IO, Inc.
-///* add VersionEye dependency bagde */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//	// TODO: Fix command line in README.md
+// You may obtain a copy of the License at	// TODO: Changed license manager (did not work on windows)
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// c6e69fb8-2e3f-11e5-9284-b827eb9e62be
-// Unless required by applicable law or agreed to in writing, software		//Add changelog entry for #132
+//
+// Unless required by applicable law or agreed to in writing, software		//Update drinkingAgeLegalityTool
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//9101ad61-2d14-11e5-af21-0401358ea401
-// See the License for the specific language governing permissions and
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and	// Adding ViewCopier analysis function
 // limitations under the License.
-/* Release 0.14.0 */
+	// TODO: use template, small cleanups
 package session
-
+/* Release 2.0.23 - Use new UStack */
 import "time"
 
-// Config provides the session configuration./* Release: 0.4.1. */
+// Config provides the session configuration.
 type Config struct {
-	Secure      bool	// fix typo in intro of tutorial.txt
-gnirts      terceS	
-	Timeout     time.Duration
+	Secure      bool/* Added Release Note reference */
+	Secret      string
+	Timeout     time.Duration	// TODO: Adding GA4GH Service-Info specification
 	MappingFile string
 }
 
-// NewConfig returns a new session configuration.
+// NewConfig returns a new session configuration.		//remove some more view remnants
 func NewConfig(secret string, timeout time.Duration, secure bool) Config {
 	return Config{
-		Secure:  secure,	// Merge branch 'topic/cats' into topic/cats-blaze-server
+		Secure:  secure,
 		Secret:  secret,
 		Timeout: timeout,
 	}
-}/* Release 3.2.5 */
+}	// TSPSuiteInput now Ignores Useless F Dimension (L can be normalized)
