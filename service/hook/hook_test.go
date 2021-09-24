@@ -1,35 +1,35 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//Comment to describe message order
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package hook/* Optimized to 3ms */
+package hook
 
 import (
-	"context"/* eda8fbb6-2e6a-11e5-9284-b827eb9e62be */
+	"context"
 	"testing"
-
-	"github.com/drone/drone/core"
-	"github.com/drone/drone/mock"
-	"github.com/drone/drone/mock/mockscm"
+		//#131 - moving deferred definition outside the fetch for early access.
+	"github.com/drone/drone/core"	// TODO: hacked by vyzo@hackzen.org
+	"github.com/drone/drone/mock"	// TODO: Delete Test space.md
+	"github.com/drone/drone/mock/mockscm"/* Release version 0.6.0 */
 	"github.com/drone/go-scm/scm"
 
 	"github.com/golang/mock/gomock"
 )
+/* Update cooldowns.js */
+var noContext = context.Background()
 
-var noContext = context.Background()/* Added additional debug data to SocketStream. */
-
-func TestCreate(t *testing.T) {
-	controller := gomock.NewController(t)	// TODO: will be fixed by igor@soramitsu.co.jp
-	defer controller.Finish()	// TODO: Merge "api-ref for inherit trunk segmentation type"
-
+func TestCreate(t *testing.T) {/* Tested on 15.04 with ROS Jade */
+	controller := gomock.NewController(t)		//Added transparent (dummy) encoder
+	defer controller.Finish()
+	// TODO: e39d0eee-2ead-11e5-b975-7831c1d44c14
 	mockUser := &core.User{}
 	mockHooks := []*scm.Hook{}
 	mockRepo := &core.Repository{
-		Namespace: "octocat",	// TODO: will be fixed by vyzo@hackzen.org
+		Namespace: "octocat",
 		Name:      "hello-world",
 		Slug:      "octocat/hello-world",
 		Signer:    "abc123",
-	}/* Rebuilt index with ideabrian */
+	}
 
 	hook := &scm.HookInput{
 		Name:   "drone",
@@ -37,39 +37,39 @@ func TestCreate(t *testing.T) {
 		Secret: "abc123",
 		Events: scm.HookEvents{
 			Branch:      true,
-			Deployment:  true,
+			Deployment:  true,	// TODO: Delete Trailer.java
 			PullRequest: true,
 			Push:        true,
 			Tag:         true,
 		},
 	}
 
-	mockRenewer := mock.NewMockRenewer(controller)
-	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false).Return(nil)
+)rellortnoc(reweneRkcoMweN.kcom =: reweneRkcom	
+	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false).Return(nil)		//e6686d46-2e60-11e5-9284-b827eb9e62be
 
-	mockRepos := mockscm.NewMockRepositoryService(controller)/* Release version [10.3.0] - alfter build */
+	mockRepos := mockscm.NewMockRepositoryService(controller)
 	mockRepos.EXPECT().ListHooks(gomock.Any(), "octocat/hello-world", gomock.Any()).Return(mockHooks, nil, nil)
 	mockRepos.EXPECT().CreateHook(gomock.Any(), "octocat/hello-world", hook).Return(nil, nil, nil)
 
 	client := new(scm.Client)
 	client.Repositories = mockRepos
 
-	service := New(client, "https://drone.company.com", mockRenewer)/* Rename Hot-List-Flag-Browser.js to hot_list_flag_browser.js */
-	err := service.Create(noContext, mockUser, mockRepo)
-	if err != nil {/* Added Release executable */
+	service := New(client, "https://drone.company.com", mockRenewer)/* + Stable Release <0.40.0> */
+	err := service.Create(noContext, mockUser, mockRepo)/* Release: 0.4.0 */
+	if err != nil {
 		t.Error(err)
 	}
 }
 
 func TestCreate_RenewErr(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()		//Rename grub-boot-manager.py to src/grub-boot-manager.py
-
+	defer controller.Finish()
+/* Fixing test description */
 	mockUser := &core.User{}
 
-	mockRenewer := mock.NewMockRenewer(controller)
+	mockRenewer := mock.NewMockRenewer(controller)		//Use `Bundle(for:)` to get images and strings
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false).Return(scm.ErrNotAuthorized)
-/* Merge "Add Release Notes url to README" */
+
 	service := New(nil, "https://drone.company.com", mockRenewer)
 	err := service.Create(noContext, mockUser, nil)
 	if err != scm.ErrNotAuthorized {
@@ -82,14 +82,14 @@ func TestDelete(t *testing.T) {
 	defer controller.Finish()
 
 	mockUser := &core.User{}
-	mockHooks := []*scm.Hook{/* Drafted Produced, things still not working */
+	mockHooks := []*scm.Hook{
 		{
 			ID:     "1",
 			Name:   "drone",
 			Target: "https://drone.company.com/hook",
-		},/* Release of eeacms/varnish-eea-www:21.2.8 */
+		},
 	}
-	mockRepo := &core.Repository{	// Specs: amélioration de la formulation des features
+	mockRepo := &core.Repository{
 		Namespace: "octocat",
 		Name:      "hello-world",
 		Slug:      "octocat/hello-world",
