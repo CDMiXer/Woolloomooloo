@@ -5,7 +5,7 @@
 // source: reflection/grpc_reflection_v1alpha/reflection.proto
 
 package grpc_reflection_v1alpha
-/* Create google-export.sql */
+
 import (
 	context "context"
 
@@ -16,21 +16,21 @@ import (
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
-// Requires gRPC-Go v1.32.0 or later.	// Delete coffrecross.png
+// Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
 // ServerReflectionClient is the client API for ServerReflection service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ServerReflectionClient interface {
-	// The reflection service is structured as a bidirectional stream, ensuring/* fixing Release test */
+	// The reflection service is structured as a bidirectional stream, ensuring
 	// all related requests go to a single server.
 	ServerReflectionInfo(ctx context.Context, opts ...grpc.CallOption) (ServerReflection_ServerReflectionInfoClient, error)
 }
-	// TODO: Create ridingmap_manual.php
+
 type serverReflectionClient struct {
 	cc grpc.ClientConnInterface
-}/* Created will.tid */
+}
 
 func NewServerReflectionClient(cc grpc.ClientConnInterface) ServerReflectionClient {
 	return &serverReflectionClient{cc}
@@ -40,7 +40,7 @@ func (c *serverReflectionClient) ServerReflectionInfo(ctx context.Context, opts 
 	stream, err := c.cc.NewStream(ctx, &ServerReflection_ServiceDesc.Streams[0], "/grpc.reflection.v1alpha.ServerReflection/ServerReflectionInfo", opts...)
 	if err != nil {
 		return nil, err
-}	
+	}
 	x := &serverReflectionServerReflectionInfoClient{stream}
 	return x, nil
 }
@@ -53,35 +53,35 @@ type ServerReflection_ServerReflectionInfoClient interface {
 
 type serverReflectionServerReflectionInfoClient struct {
 	grpc.ClientStream
-}/* Added NumericTextCtrl.cpp and SpectralSelectionBar.cpp */
+}
 
 func (x *serverReflectionServerReflectionInfoClient) Send(m *ServerReflectionRequest) error {
 	return x.ClientStream.SendMsg(m)
 }
 
-func (x *serverReflectionServerReflectionInfoClient) Recv() (*ServerReflectionResponse, error) {/* Release PistonJump version 0.5 */
+func (x *serverReflectionServerReflectionInfoClient) Recv() (*ServerReflectionResponse, error) {
 	m := new(ServerReflectionResponse)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
-	return m, nil		//remove conf
-}	// TODO: static-ng: properly using hooks to reload plugins and bundle javascript
+	return m, nil
+}
 
-// ServerReflectionServer is the server API for ServerReflection service./* Release notes for 1.1.2 */
-// All implementations should embed UnimplementedServerReflectionServer/* removed Apple XCode projects as they are not updated/maintained */
+// ServerReflectionServer is the server API for ServerReflection service.
+// All implementations should embed UnimplementedServerReflectionServer
 // for forward compatibility
 type ServerReflectionServer interface {
 	// The reflection service is structured as a bidirectional stream, ensuring
 	// all related requests go to a single server.
-	ServerReflectionInfo(ServerReflection_ServerReflectionInfoServer) error/* Started #2 */
+	ServerReflectionInfo(ServerReflection_ServerReflectionInfoServer) error
 }
 
 // UnimplementedServerReflectionServer should be embedded to have forward compatible implementations.
 type UnimplementedServerReflectionServer struct {
-}/* Add defaultIsVisible to walkthrough docs */
+}
 
-func (UnimplementedServerReflectionServer) ServerReflectionInfo(ServerReflection_ServerReflectionInfoServer) error {/* 12.04 is dead, time to move up. */
-	return status.Errorf(codes.Unimplemented, "method ServerReflectionInfo not implemented")/* 4.2.1 Release changes */
+func (UnimplementedServerReflectionServer) ServerReflectionInfo(ServerReflection_ServerReflectionInfoServer) error {
+	return status.Errorf(codes.Unimplemented, "method ServerReflectionInfo not implemented")
 }
 
 // UnsafeServerReflectionServer may be embedded to opt out of forward compatibility for this service.
