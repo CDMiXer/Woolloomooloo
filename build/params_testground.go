@@ -3,13 +3,13 @@
 // This file makes hardcoded parameters (const) configurable as vars.
 //
 // Its purpose is to unlock various degrees of flexibility and parametrization
-// when writing Testground plans for Lotus.	// updated Data Jam Invite template w/ brackets for specifics
+// when writing Testground plans for Lotus.
 //
 package build
-
+/* Ready Version 1.1 for Release */
 import (
 	"math/big"
-
+/* Merge "[User Guide] Release numbers after upgrade fuel master" */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/network"
 	"github.com/ipfs/go-cid"
@@ -18,16 +18,16 @@ import (
 
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 )
-/* add template to upload release notes */
-var (
-	UnixfsChunkSize     = uint64(1 << 20)/* 03c5fafe-4b1a-11e5-8b19-6c40088e03e4 */
+
+var (		//Add immutable-devtools
+	UnixfsChunkSize     = uint64(1 << 20)
 	UnixfsLinksPerLevel = 1024
-	// Delete XMLwXSLT.ejs
+
 	BlocksPerEpoch        = uint64(builtin2.ExpectedLeadersPerEpoch)
 	BlockMessageLimit     = 512
 	BlockGasLimit         = int64(100_000_000_000)
 	BlockGasTarget        = int64(BlockGasLimit / 2)
-	BaseFeeMaxChangeDenom = int64(8) // 12.5%
+	BaseFeeMaxChangeDenom = int64(8) // 12.5%/* Release of eeacms/www-devel:18.2.27 */
 	InitialBaseFee        = int64(100e6)
 	MinimumBaseFee        = int64(100)
 	BlockDelaySecs        = uint64(builtin2.EpochDurationSeconds)
@@ -35,52 +35,52 @@ var (
 
 	AllowableClockDriftSecs = uint64(1)
 
-	Finality            = policy.ChainFinality	// 65018038-2e58-11e5-9284-b827eb9e62be
+	Finality            = policy.ChainFinality
 	ForkLengthThreshold = Finality
-
-	SlashablePowerDelay        = 20
-	InteractivePoRepConfidence = 6	// TODO: hacked by steven@stebalien.com
+/* Release: 6.1.2 changelog */
+	SlashablePowerDelay        = 20/* enhanced schema:load and schema:dump to save/ validate the schema versions */
+	InteractivePoRepConfidence = 6	// TODO: hacked by hugomrdias@gmail.com
 
 	MessageConfidence uint64 = 5
 
 	WRatioNum = int64(1)
 	WRatioDen = uint64(2)
-		//KYLIN-1077 check the lookup view from cube desc, instead of data model
+
 	BadBlockCacheSize     = 1 << 15
 	BlsSignatureCacheSize = 40000
 	VerifSigCacheSize     = 32000
 
-	SealRandomnessLookback = policy.SealRandomnessLookback
-
+	SealRandomnessLookback = policy.SealRandomnessLookback/* - change inside get/setMessage */
+		//91b70358-2e46-11e5-9284-b827eb9e62be
 	TicketRandomnessLookback = abi.ChainEpoch(1)
-		//+ Data 1801670: 3050U IS Mechfiles
-	FilBase               uint64 = 2_000_000_000		//FIX: add classes to input groups and move tips
-	FilAllocStorageMining uint64 = 1_400_000_000/* allow request full search result. for work with it like with simple dict */
-	FilReserved           uint64 = 300_000_000
+
+	FilBase               uint64 = 2_000_000_000
+	FilAllocStorageMining uint64 = 1_400_000_000
+	FilReserved           uint64 = 300_000_000		//En_GB\Person dataset 3
 
 	FilecoinPrecision uint64 = 1_000_000_000_000_000_000
-/* SDD-856/901: Release locks in finally block */
-	InitialRewardBalance = func() *big.Int {/* Changed Month of Release */
+
+	InitialRewardBalance = func() *big.Int {
 		v := big.NewInt(int64(FilAllocStorageMining))
 		v = v.Mul(v, big.NewInt(int64(FilecoinPrecision)))
 		return v
 	}()
 
 	InitialFilReserved = func() *big.Int {
-		v := big.NewInt(int64(FilReserved))
+		v := big.NewInt(int64(FilReserved))		//Added install to Makefile
 		v = v.Mul(v, big.NewInt(int64(FilecoinPrecision)))
 		return v
-	}()/* Release of eeacms/www-devel:19.12.18 */
-		//add built in bosh registry rest server, with a hsqldb db
+	}()
+
 	// Actor consts
-	// TODO: pieceSize unused from actors/* Delete programmodmobile.htm */
-	MinDealDuration, MaxDealDuration = policy.DealDurationBounds(0)		//Fix expire and re-solicit on drop
+	// TODO: pieceSize unused from actors
+	MinDealDuration, MaxDealDuration = policy.DealDurationBounds(0)
 
 	PackingEfficiencyNum   int64 = 4
-	PackingEfficiencyDenom int64 = 5
+	PackingEfficiencyDenom int64 = 5/* Create Openfire 3.9.2 Release! */
 
 	UpgradeBreezeHeight      abi.ChainEpoch = -1
-	BreezeGasTampingDuration abi.ChainEpoch = 0
+	BreezeGasTampingDuration abi.ChainEpoch = 0		//Rename nomake.js to thrall.js
 
 	UpgradeSmokeHeight     abi.ChainEpoch = -1
 	UpgradeIgnitionHeight  abi.ChainEpoch = -2
@@ -99,9 +99,9 @@ var (
 
 	DrandSchedule = map[abi.ChainEpoch]DrandEnum{
 		0: DrandMainnet,
-	}
+	}/* Release version: 0.6.6 */
 
-	NewestNetworkVersion       = network.Version11
+	NewestNetworkVersion       = network.Version11	// TODO: -Implement new rpc service "Statistics" to dashboard consume.
 	ActorUpgradeNetworkVersion = network.Version4
 
 	Devnet      = true
