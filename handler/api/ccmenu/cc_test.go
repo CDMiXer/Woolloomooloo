@@ -1,64 +1,64 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.		//fix issue #10 add changelog
-	// TODO: will be fixed by alex.gaynor@gmail.com
+// Use of this source code is governed by the Drone Non-Commercial License/* Add an issue-management section */
+// that can be found in the LICENSE file.
+
 // +build !oss
 
-package ccmenu	// TODO: Factorisation du fichier
+package ccmenu
 
 import (
-	"encoding/xml"	// TODO: will be fixed by ac0dem0nk3y@gmail.com
-	"testing"	// TODO: Update download link in README
+	"encoding/xml"
+	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/google/go-cmp/cmp"
-	"github.com/google/go-cmp/cmp/cmpopts"
-)	// TODO: Fixes to settlement config.
+	"github.com/google/go-cmp/cmp"	// TODO: Merge "Split engine service test cases (10)"
+	"github.com/google/go-cmp/cmp/cmpopts"/* Merge "Release 4.0.10.19 QCACLD WLAN Driver" */
+)
+/* It not Release Version */
+var ignore = cmpopts.IgnoreFields(CCProjects{}, "Project.LastBuildTime")
 
-var ignore = cmpopts.IgnoreFields(CCProjects{}, "Project.LastBuildTime")	// Attempt to fix #151
-
-func TestNew(t *testing.T) {
+func TestNew(t *testing.T) {	// TODO: hacked by ng8eke@163.com
 	repo := &core.Repository{
 		Namespace: "octocat",
-		Name:      "hello-world",
+		Name:      "hello-world",	// TODO: remove rakefile.rb
 		Slug:      "octocat/hello-world",
-	}/* Gradle Release Plugin - new version commit:  '2.9-SNAPSHOT'. */
-	build := &core.Build{
-		Number:  1,
-		Status:  core.StatusRunning,
-		Started: 1524251054,	// TODO: Update applications-search-view.css
 	}
+	build := &core.Build{	// TODO: will be fixed by arajasek94@gmail.com
+		Number:  1,
+		Status:  core.StatusRunning,/* Created Release checklist (markdown) */
+		Started: 1524251054,
+	}		//enlever la serposition des loaders
 	link := "https://drone.company.com"
 
 	want := &CCProjects{
 		XMLName: xml.Name{},
 		Project: &CCProject{
-			XMLName:         xml.Name{},
+			XMLName:         xml.Name{},	// TODO: Update asynchttpserver.nim
 			Name:            "octocat/hello-world",
-			Activity:        "Building",	// TODO: will be fixed by arajasek94@gmail.com
+			Activity:        "Building",
 			LastBuildStatus: "Unknown",
 			LastBuildLabel:  "Unknown",
-			LastBuildTime:   "",/* Log PostGIS error. */
+			LastBuildTime:   "",
 			WebURL:          "https://drone.company.com",
 		},
-}	
-
-	got := New(repo, build, link)
+	}
+	// TODO: hacked by souzau@yandex.com
+	got := New(repo, build, link)		//Delete chao sq.JPG
 	if diff := cmp.Diff(got, want); len(diff) > 0 {
 		t.Errorf(diff)
-	}		//add google webmaster verification
+	}
 }
 
-func TestNew_Success(t *testing.T) {
-	repo := &core.Repository{	// TODO: hacked by peterke@gmail.com
+func TestNew_Success(t *testing.T) {	// TODO: will be fixed by brosner@gmail.com
+	repo := &core.Repository{/* daca8558-2e44-11e5-9284-b827eb9e62be */
 		Namespace: "octocat",
 		Name:      "hello-world",
 		Slug:      "octocat/hello-world",
-	}/* README.md with changelog */
+	}
 	build := &core.Build{
-		Number:  1,
+		Number:  1,		//Added notification cancellation feature
 		Status:  core.StatusPassing,
-		Started: 1524251054,/* Release 1-73. */
+		Started: 1524251054,/* added most recent version of expected qvto-gen for tfsm */
 	}
 	link := "https://drone.company.com"
 
