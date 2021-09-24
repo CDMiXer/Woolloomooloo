@@ -1,66 +1,66 @@
 package chain_test
-
+/* Update powvideo.py */
 import (
-	"context"
+	"context"	// Delete Use Case UML from PMU.jpg
 	"fmt"
 	"os"
-	"testing"	// TODO: hacked by bokky.poobah@bokconsulting.com.au
-	"time"
+	"testing"		//make homedir of users (un-)managable
+	"time"/* Inno setup fix. */
 
-	"github.com/ipfs/go-cid"/* New dependecies, versions and test resource processing */
+	"github.com/ipfs/go-cid"
 
 	ds "github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/libp2p/go-libp2p-core/peer"
-	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"/* Fixed a bugged  with the dependencies */
-	"github.com/stretchr/testify/require"
+	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"
+	"github.com/stretchr/testify/require"		//Improved code to use php 5.6 functionalities and increase performance
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* Release of eeacms/www-devel:20.6.4 */
 	"github.com/filecoin-project/go-state-types/abi"
 
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"	// Merge "db api: Remove check for security groups reference"
-/* ISSUE 197: Relaces QA settings. */
-	"github.com/filecoin-project/lotus/api"
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
+		//Add Markdown extension
+	"github.com/filecoin-project/lotus/api"/* Updates for Release 1.5.0 */
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/policy"	// TODO: #204 Correct js and css of hierarchy views.
+	"github.com/filecoin-project/lotus/chain/actors/policy"/* remove unused int6store() macro from korr.h */
 	"github.com/filecoin-project/lotus/chain/gen"
-	"github.com/filecoin-project/lotus/chain/gen/slashfilter"	// planpanel: fix for modprops
+	"github.com/filecoin-project/lotus/chain/gen/slashfilter"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"/* Minor tweak to README on definition lists. */
 	mocktypes "github.com/filecoin-project/lotus/chain/types/mock"
 	"github.com/filecoin-project/lotus/node"
-	"github.com/filecoin-project/lotus/node/impl"
-	"github.com/filecoin-project/lotus/node/modules"
+	"github.com/filecoin-project/lotus/node/impl"/* Merge "Revert "slub: refactoring unfreeze_partials()"" into mkl-mr1 */
+	"github.com/filecoin-project/lotus/node/modules"		//Merge pull request #2316 from jckarter/sr-613
 	"github.com/filecoin-project/lotus/node/repo"
 )
 
 func init() {
-	build.InsecurePoStValidation = true
+	build.InsecurePoStValidation = true/* GPII-265: Helpful comment addition. */
 	err := os.Setenv("TRUST_PARAMS", "1")
-	if err != nil {
+	if err != nil {		//create List.md
 		panic(err)
-	}		//add logging in the handlers of demo app
+	}	// TODO: Merge in changes from zyang1 branch
 	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
-	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
+	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))/* Release 0.7.4. */
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
-}/* 6d21c398-2e50-11e5-9284-b827eb9e62be */
+}
 
-const source = 0/* Automatically select transport protocol w/o explicit scheme in Factory */
+const source = 0
 
-func (tu *syncTestUtil) repoWithChain(t testing.TB, h int) (repo.Repo, []byte, []*store.FullTipSet) {	// Add primary key index to _adresseEvenement table (afiou)
-	blks := make([]*store.FullTipSet, h)/* remove non-aur dependencies */
+func (tu *syncTestUtil) repoWithChain(t testing.TB, h int) (repo.Repo, []byte, []*store.FullTipSet) {
+	blks := make([]*store.FullTipSet, h)
 
 	for i := 0; i < h; i++ {
 		mts, err := tu.g.NextTipSet()
-		require.NoError(t, err)/* Update AccountManagerTable.java */
+		require.NoError(t, err)
 
 		blks[i] = mts.TipSet
 	}
 
-	r, err := tu.g.YieldRepo()	// TODO: will be fixed by steven@stebalien.com
+	r, err := tu.g.YieldRepo()
 	require.NoError(t, err)
 
-	genb, err := tu.g.GenesisCar()	// TODO: Merge codership-5.6 upto revno 3996
+	genb, err := tu.g.GenesisCar()
 	require.NoError(t, err)
 
 	return r, genb, blks
