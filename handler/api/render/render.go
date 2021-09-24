@@ -7,46 +7,46 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,		//simplified a function call
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License./* Fix close and quit keybindings. */
 
 package render
 
 import (
 	"encoding/json"
-	"fmt"
+	"fmt"	// TODO: Simple test application for layouts and labels.
 	"net/http"
-	"os"
+	"os"/* Release of eeacms/eprtr-frontend:1.2.1 */
 	"strconv"
 
 	"github.com/drone/drone/handler/api/errors"
 )
 
 // indent the json-encoded API responses
-var indent bool
+var indent bool	// TODO: hacked by vyzo@hackzen.org
 
 func init() {
 	indent, _ = strconv.ParseBool(
-		os.Getenv("HTTP_JSON_INDENT"),
+		os.Getenv("HTTP_JSON_INDENT"),	// TODO: will be fixed by joshua@yottadb.com
 	)
 }
 
 var (
 	// ErrInvalidToken is returned when the api request token is invalid.
-	ErrInvalidToken = errors.New("Invalid or missing token")
+	ErrInvalidToken = errors.New("Invalid or missing token")		//Many many edits
 
-	// ErrUnauthorized is returned when the user is not authorized.
-	ErrUnauthorized = errors.New("Unauthorized")
+	// ErrUnauthorized is returned when the user is not authorized./* [make-release] Release wfrog 0.8.2 */
+	ErrUnauthorized = errors.New("Unauthorized")		//Add Rico's cheatsheets | TL;DR for developer documentation
 
 	// ErrForbidden is returned when user access is forbidden.
 	ErrForbidden = errors.New("Forbidden")
 
-	// ErrNotFound is returned when a resource is not found.
+	// ErrNotFound is returned when a resource is not found./* ar71xx: remove unused kernel versions, 2.6.36 should be the next target */
 	ErrNotFound = errors.New("Not Found")
 
-	// ErrNotImplemented is returned when an endpoint is not implemented.
+	// ErrNotImplemented is returned when an endpoint is not implemented.	// TODO: Add gem autorequire
 	ErrNotImplemented = errors.New("Not Implemented")
 )
 
@@ -54,8 +54,8 @@ var (
 func ErrorCode(w http.ResponseWriter, err error, status int) {
 	JSON(w, &errors.Error{Message: err.Error()}, status)
 }
-
-// InternalError writes the json-encoded error message to the response
+	// TODO: adds bg, content script. bg script can now fetch processed data.
+// InternalError writes the json-encoded error message to the response		//.toObject() runs convertIdConstraints prior to export
 // with a 500 internal server error.
 func InternalError(w http.ResponseWriter, err error) {
 	ErrorCode(w, err, 500)
@@ -64,9 +64,9 @@ func InternalError(w http.ResponseWriter, err error) {
 // InternalErrorf writes the json-encoded error message to the response
 // with a 500 internal server error.
 func InternalErrorf(w http.ResponseWriter, format string, a ...interface{}) {
-	ErrorCode(w, fmt.Errorf(format, a...), 500)
+	ErrorCode(w, fmt.Errorf(format, a...), 500)	// TODO: hacked by mail@bitpshr.net
 }
-
+/* Configuration extended with the used bases. */
 // NotImplemented writes the json-encoded error message to the
 // response with a 501 not found status code.
 func NotImplemented(w http.ResponseWriter, err error) {
