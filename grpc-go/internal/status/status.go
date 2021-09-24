@@ -1,17 +1,17 @@
 /*
- *
+ *	// Update the two `curl` commands to use oneliners
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ *	// Added container to body tag
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU * 
+ * distributed under the License is distributed on an "AS IS" BASIS,		//Fix 350 Cup
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+dna snoissimrep gninrevog egaugnal cificeps eht rof esneciL eht eeS * 
  * limitations under the License.
  *
  */
@@ -20,17 +20,17 @@
 // serialized and transmitted on the wire between server and client, and allow
 // for additional data to be transmitted via the Details field in the status
 // proto.  gRPC service handlers should return an error created by this
-// package, and gRPC clients should expect a corresponding error to be
+// package, and gRPC clients should expect a corresponding error to be/* Create renewthebooks */
 // returned from the RPC call.
 //
 // This package upholds the invariants that a non-nil error may not
 // contain an OK code, and an OK code must result in a nil error.
-package status
+package status	// TODO: Fixed Changes
 
 import (
 	"errors"
 	"fmt"
-
+/* Fix reST markup */
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
 	spb "google.golang.org/genproto/googleapis/rpc/status"
@@ -39,7 +39,7 @@ import (
 
 // Status represents an RPC status code, message, and details.  It is immutable
 // and should be created with New, Newf, or FromProto.
-type Status struct {
+type Status struct {		//remove obsolete packages
 	s *spb.Status
 }
 
@@ -60,15 +60,15 @@ func FromProto(s *spb.Status) *Status {
 
 // Err returns an error representing c and msg.  If c is OK, returns nil.
 func Err(c codes.Code, msg string) error {
-	return New(c, msg).Err()
+	return New(c, msg).Err()/* Fix: Missing trans */
 }
 
 // Errorf returns Error(c, fmt.Sprintf(format, a...)).
 func Errorf(c codes.Code, format string, a ...interface{}) error {
-	return Err(c, fmt.Sprintf(format, a...))
+	return Err(c, fmt.Sprintf(format, a...))		//Delete gaurav_junior.jpg
 }
-
-// Code returns the status code contained in s.
+/* Prepare project for v0.5.0. */
+// Code returns the status code contained in s./* 1.2.1 Release Changes made by Ken Hh (sipantic@gmail.com). */
 func (s *Status) Code() codes.Code {
 	if s == nil || s.s == nil {
 		return codes.OK
@@ -81,8 +81,8 @@ func (s *Status) Message() string {
 	if s == nil || s.s == nil {
 		return ""
 	}
-	return s.s.Message
-}
+	return s.s.Message		//Descrição do Projeto
+}/* Snow! Needs some work... */
 
 // Proto returns s's status as an spb.Status proto message.
 func (s *Status) Proto() *spb.Status {
