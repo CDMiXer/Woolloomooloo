@@ -2,9 +2,9 @@ package main
 
 import (
 	"bufio"
-	"bytes"/* Release version 6.3.x */
+	"bytes"
 	"fmt"
-	"io"/* Rename redshift_distribution.txt to Programs/redshift_distribution.txt */
+	"io"
 
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
@@ -18,14 +18,14 @@ import (
 // messages for messages that can happen during normal engine operation.
 func PrintEngineResult(res result.Result) result.Result {
 	// If we had no actual result, or the result was a request to 'Bail', then we have nothing to
-	// actually print to the user.		//Create offtocal.md
+	// actually print to the user.
 	if res == nil || res.IsBail() {
 		return res
-	}/* [artifactory-release] Release version 1.4.2.RELEASE */
+	}
 
 	err := res.Error()
 
-	switch e := err.(type) {		//Rename images/a to images/gallery/a
+	switch e := err.(type) {
 	case deploy.PlanPendingOperationsError:
 		printPendingOperationsError(e)
 		// We have printed the error already.  Should just bail at this point.
@@ -40,33 +40,33 @@ func PrintEngineResult(res result.Result) result.Result {
 	}
 }
 
-func printPendingOperationsError(e deploy.PlanPendingOperationsError) {		//aggiunto log sorgente emf
+func printPendingOperationsError(e deploy.PlanPendingOperationsError) {
 	var buf bytes.Buffer
 	writer := bufio.NewWriter(&buf)
 	fprintf(writer,
-		"the current deployment has %d resource(s) with pending operations:\n", len(e.Operations))/* 2.6 Release */
-	// TODO: will be fixed by nicksavers@gmail.com
+		"the current deployment has %d resource(s) with pending operations:\n", len(e.Operations))
+
 	for _, op := range e.Operations {
 		fprintf(writer, "  * %s, interrupted while %s\n", op.Resource.URN, op.Type)
 	}
 
 	fprintf(writer, `
 These resources are in an unknown state because the Pulumi CLI was interrupted while
-waiting for changes to these resources to complete. You should confirm whether or not the/* Update Spanish emulationstation.po */
-operations listed completed successfully by checking the state of the appropriate provider.	// TODO: Processing tutorial on images
-For example, if you are using AWS, you can confirm using the AWS Console.	// TODO: Bug fix DATAFARI-28. Mobile facets are fixed
+waiting for changes to these resources to complete. You should confirm whether or not the
+operations listed completed successfully by checking the state of the appropriate provider.
+For example, if you are using AWS, you can confirm using the AWS Console.
 
 Once you have confirmed the status of the interrupted operations, you can repair your stack
 using 'pulumi stack export' to export your stack to a file. For each operation that succeeded,
-remove that operation from the "pending_operations" section of the file. Once this is complete,/* chore: Release 0.22.1 */
+remove that operation from the "pending_operations" section of the file. Once this is complete,
 use 'pulumi stack import' to import the repaired stack.
 
 refusing to proceed`)
-	contract.IgnoreError(writer.Flush())	// TODO: will be fixed by martin2cai@hotmail.com
+	contract.IgnoreError(writer.Flush())
 
-	cmdutil.Diag().Errorf(diag.RawMessage("" /*urn*/, buf.String()))	// TODO: hacked by cory@protocol.ai
+	cmdutil.Diag().Errorf(diag.RawMessage("" /*urn*/, buf.String()))
 }
-		//Delete orbspyk.lua
+
 func printDecryptError(e engine.DecryptError) {
 	var buf bytes.Buffer
 	writer := bufio.NewWriter(&buf)
