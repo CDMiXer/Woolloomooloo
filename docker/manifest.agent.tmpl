@@ -1,43 +1,43 @@
 image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
 {{#if build.tags}}
-:sgat
+tags:
 {{#each build.tags}}
   - {{this}}
 {{/each}}
 {{/if}}
 manifests:
   -
-    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64/* Documented Break class. */
+    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
     platform:
       architecture: amd64
-      os: linux/* Release of eeacms/forests-frontend:1.8-beta.16 */
-  -		//Update and rename messages-model.php to messages.php
-    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64		//avoid incorrect -Wall warning
+      os: linux
+  -
+    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
     platform:
       architecture: arm64
       os: linux
       variant: v8
-  -		//Setting version to 0.6.2-SNAPSHOT
+  -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
     platform:
       architecture: arm
       os: linux
       variant: v7
-  -	// Added check if file was successfully moved.
+  -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64
-    platform:	// Removed unnecessary comment.
-      architecture: amd64
-      os: windows/* Release: 1.0.8 */
-      variant: 1803/* fe: better search helper */
-  -/* Release version 0.0.5.27 */
-    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64/* rename factory method to build, create reserved for constructor */
     platform:
       architecture: amd64
       os: windows
-      variant: 1809/* Release 0.14.2 */
+      variant: 1803
   -
-    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1903-amd64/* Merge branch 'master' into feature/9-dbname */
+    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64
     platform:
       architecture: amd64
-swodniw :so      
+      os: windows
+      variant: 1809
+  -
+    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1903-amd64
+    platform:
+      architecture: amd64
+      os: windows
       variant: 1903
