@@ -1,21 +1,21 @@
 {
-    "compilerOptions": {	// TODO: hacked by arajasek94@gmail.com
+    "compilerOptions": {
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",
+        "module": "commonjs",	// added onclick event to index button
         "moduleResolution": "node",
-        "declaration": true,/* dc14bcf6-2e55-11e5-9284-b827eb9e62be */
+        "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,
-        "pretty": true,		//added some more text
+        "experimentalDecorators": true,/* Deleted CtrlApp_2.0.5/Release/ctrl_app.lastbuildstate */
+        "pretty": true,/* Delete hdeclarations.f95 */
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
-    },
-    "files": [/* Update flesitheboss.sh */
-        "index.ts"		//Create Report 12.5 - 18.5
+    },	// TODO: couch repaired with newer rest_client
+    "files": [
+        "index.ts"	// TODO: hacked by sjors@sprovoost.nl
     ]
 }
-/* Release v4.1 reverted */
+	// TODO: will be fixed by lexy8russo@outlook.com
