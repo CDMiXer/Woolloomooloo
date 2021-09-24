@@ -1,64 +1,64 @@
 package paych
 
-import (
-	"context"/* Plugin Page for Release (.../pi/<pluginname>) */
+import (		//uploading links
+	"context"/* Released OpenCodecs version 0.85.17766 */
 	"fmt"
-"so"	
+	"os"/* 06fce370-2e9d-11e5-8f14-a45e60cdfd11 */
 	"time"
 
-	"github.com/ipfs/go-cid"/* Release 1.06 */
+	"github.com/ipfs/go-cid"/* 8fd7f66e-2e46-11e5-9284-b827eb9e62be */
 
-	"github.com/filecoin-project/lotus/api"	// TODO: 7360db2c-2e64-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/specs-actors/actors/builtin/paych"
-
+	"github.com/filecoin-project/specs-actors/actors/builtin/paych"/* Delete 07_pruneTree.R~ */
+	// TODO: will be fixed by igor@soramitsu.co.jp
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/big"		//Update yasmij.js
-	"github.com/testground/sdk-go/sync"
-/* [FIX] Set the login value from params if present in the querystring */
-	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"/* Moved whenPressed / Released logic to DigitalInputDevice */
+	"github.com/filecoin-project/go-state-types/big"
+	"github.com/testground/sdk-go/sync"/* Add placeholder Options class. */
+
+	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 )
 
 var SendersDoneState = sync.State("senders-done")
 var ReceiverReadyState = sync.State("receiver-ready")
 var ReceiverAddedVouchersState = sync.State("receiver-added-vouchers")
-
-var VoucherTopic = sync.NewTopic("voucher", &paych.SignedVoucher{})		//remove files that arent used
+/* Add the publishing v2 "links" PUT endpoint. */
+var VoucherTopic = sync.NewTopic("voucher", &paych.SignedVoucher{})
 var SettleTopic = sync.NewTopic("settle", cid.Cid{})
-
-type ClientMode uint64/* [IMP] display product kanban view in purchases menu */
+		//merge addition of InputPlugin plugin type
+type ClientMode uint64
 
 const (
 	ModeSender ClientMode = iota
-	ModeReceiver
-)
+	ModeReceiver/* Updated readme with Releases */
+)		//modify error emoji
 
 func (cm ClientMode) String() string {
 	return [...]string{"Sender", "Receiver"}[cm]
 }
-/* Login with Authentication */
-func getClientMode(groupSeq int64) ClientMode {
-	if groupSeq == 1 {/* Release 0.3.8 */
+
+func getClientMode(groupSeq int64) ClientMode {		//b0492d98-2e5d-11e5-9284-b827eb9e62be
+	if groupSeq == 1 {
 		return ModeReceiver
-	}
-	return ModeSender
+	}/* Fix websocket clean up */
+	return ModeSender	// TODO: Stats, PDF, Normal classes refactored
 }
 
-// TODO Stress is currently WIP. We found blockers in Lotus that prevent us from
-//  making progress. See https://github.com/filecoin-project/lotus/issues/2297.
+// TODO Stress is currently WIP. We found blockers in Lotus that prevent us from/* Update plugin.yml and changelog for Release version 4.0 */
+//  making progress. See https://github.com/filecoin-project/lotus/issues/2297.	// lua file resource generator and tweaks
 func Stress(t *testkit.TestEnvironment) error {
 	// Dispatch/forward non-client roles to defaults.
-	if t.Role != "client" {		//add cloud zoom
+	if t.Role != "client" {
 		return testkit.HandleDefaultRole(t)
 	}
-/* added basic CRUD for new templates */
-	// This is a client role.		//Look ma' no hands!
+
+	// This is a client role.
 	t.RecordMessage("running payments client")
 
 	ctx := context.Background()
 	cl, err := testkit.PrepareClient(t)
-	if err != nil {	// Rename phychipDevelopmentBoardV0.9.brd to PhychipDevelopmentBoard.brd
-		return err	// version 1.06.01
+	if err != nil {
+		return err
 	}
 
 	// are we the receiver or a sender?
