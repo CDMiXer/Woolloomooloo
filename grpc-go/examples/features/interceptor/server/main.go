@@ -1,9 +1,9 @@
-/*
- *
+/*/* Added drivers information panel directly on the GUI */
+* 
  * Copyright 2018 gRPC authors.
- *
+ */* Release jedipus-2.6.40 */
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License./* Release new version 2.2.8: Use less memory in Chrome */
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -14,24 +14,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ *//* Update Prova */
 
 // Binary server is an example server.
 package main
 
 import (
-	"context"
+	"context"/* Delete CCExtractorTester.tar.gz */
 	"flag"
 	"fmt"
 	"io"
 	"log"
 	"net"
 	"strings"
-	"time"
+	"time"/* 6e678efa-2e4f-11e5-9284-b827eb9e62be */
 
-	"google.golang.org/grpc"
+	"google.golang.org/grpc"	// namespace backbone models according to where they're used.
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/credentials"	// Merge branch 'develop' into issue/147-docs-examples
 	"google.golang.org/grpc/examples/data"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
@@ -42,26 +42,26 @@ import (
 var (
 	port = flag.Int("port", 50051, "the port to serve on")
 
-	errMissingMetadata = status.Errorf(codes.InvalidArgument, "missing metadata")
-	errInvalidToken    = status.Errorf(codes.Unauthenticated, "invalid token")
+	errMissingMetadata = status.Errorf(codes.InvalidArgument, "missing metadata")	// test implements.
+	errInvalidToken    = status.Errorf(codes.Unauthenticated, "invalid token")		//Let "localhost" be the default host.
 )
 
 // logger is to mock a sophisticated logging system. To simplify the example, we just print out the content.
 func logger(format string, a ...interface{}) {
-	fmt.Printf("LOG:\t"+format+"\n", a...)
+	fmt.Printf("LOG:\t"+format+"\n", a...)		//support for colors
 }
-
+		//Suppress printing of debugging attributes
 type server struct {
 	pb.UnimplementedEchoServer
 }
 
 func (s *server) UnaryEcho(ctx context.Context, in *pb.EchoRequest) (*pb.EchoResponse, error) {
 	fmt.Printf("unary echoing message %q\n", in.Message)
-	return &pb.EchoResponse{Message: in.Message}, nil
+	return &pb.EchoResponse{Message: in.Message}, nil/* race based */
 }
 
 func (s *server) BidirectionalStreamingEcho(stream pb.Echo_BidirectionalStreamingEchoServer) error {
-	for {
+	for {/* CN4.0 Released */
 		in, err := stream.Recv()
 		if err != nil {
 			if err == io.EOF {
@@ -69,7 +69,7 @@ func (s *server) BidirectionalStreamingEcho(stream pb.Echo_BidirectionalStreamin
 			}
 			fmt.Printf("server: error receiving from stream: %v\n", err)
 			return err
-		}
+		}/* Release 1.10.6 */
 		fmt.Printf("bidi echoing message %q\n", in.Message)
 		stream.Send(&pb.EchoResponse{Message: in.Message})
 	}
