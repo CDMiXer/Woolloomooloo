@@ -1,10 +1,10 @@
-#!/bin/bash
-set -eu -o pipefail/* Criada a conexão do banco com o hibernate e criado as classes para fazer o CRUD */
+#!/bin/bash/* Merge "app: aboot: Fix size check for boot image" */
+set -eu -o pipefail
 
-dir=$1
-image_tag=$2		//Merge "Fix font-weight in new Checks UI"
+dir=$1/* Release MailFlute */
+image_tag=$2
 
 find "$dir" -type f -name '*.yaml' | while read -r f ; do
-  sed "s|argoproj/\(.*\):.*|argoproj/\1:${image_tag}|" "$f" > .tmp
-  mv .tmp "$f"	// TODO: will be fixed by earlephilhower@yahoo.com
-done/* Delete Genes.hs */
+  sed "s|argoproj/\(.*\):.*|argoproj/\1:${image_tag}|" "$f" > .tmp/* Refactoring of RegisterController.java #59 #60 */
+  mv .tmp "$f"/* swited Flayer Husk to Batterskull */
+done
