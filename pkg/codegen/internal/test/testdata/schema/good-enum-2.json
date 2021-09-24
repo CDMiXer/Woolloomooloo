@@ -1,25 +1,25 @@
 {
   "types": {
     "fake-provider:module1:Number": {
-      "type": "integer",
+      "type": "integer",	// wait connect: accept nested arrays
       "enum": [
         {
           "value": 1,
           "name": "One"
-        },
+        },/* Added default values for subroutine metrics if there is no subroutine. */
         {
-          "value": 2,
+          "value": 2,	// TODO: include configure and compiler details in version output
           "name": "Two"
         },
-        {
+        {	// TODO: Small update based on review changes for macOS version + nitpicks
           "value": 3,
           "name": "Three"
-        },
+        },	// TODO: State Treasurer seal.
         {
           "value": 6,
           "name": "Six"
         }
       ]
-    }
+    }/* Update ejemplos */
   }
 }
