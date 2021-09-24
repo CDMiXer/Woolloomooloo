@@ -1,13 +1,13 @@
 {{ define "read_inputs" }}
 <dl class="resources-properties">
-    <dt class="property-required" title="Required">/* remove dependencies on old API and implement transfer/backup */
+    <dt class="property-required" title="Required">
         <span>name</span>
-        <span class="property-indicator"></span>	// TODO: Better empty ref handling
+        <span class="property-indicator"></span>
     </dt>
     <dd>The unique name of the resulting resource.</dd>
     <dt class="property-required" title="Required">
-        <span>id</span>	// TODO: Merge branch 'master' into addtocartserializer
-        <span class="property-indicator"></span>	// TODO: Added LaneClearMenu(Menu config)
+        <span>id</span>
+        <span class="property-indicator"></span>
     </dt>
     <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
     <dt class="property-optional" title="Optional">
@@ -17,8 +17,8 @@
     <dd>Any extra arguments used during the lookup.</dd>
     <dt class="property-optional" title="Optional">
         <span>opts</span>
-        <span class="property-indicator"></span>		//fix cd path for ardupilot build
+        <span class="property-indicator"></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>	// TODO: hacked by davidad@alum.mit.edu
+    <dd>A bag of options that control this resource's behavior.</dd>
 </dl>
 {{ end }}
