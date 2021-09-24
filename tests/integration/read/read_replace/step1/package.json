@@ -1,14 +1,14 @@
 {
     "name": "read_dbr",
-    "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
+    "main": "bin/index.js",	// TODO: Update FERPAPurpose-002.md
+    "typings": "bin/index.d.ts",	// TODO: Scanner.py: Add .jpe
     "scripts": {
         "build": "tsc"
-    },
+    },/* Delete recaptchalib.bak */
     "devDependencies": {
         "typescript": "^3.0.0"
-    },
+    },	// Update Effect.js
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}
+}/* [microscope] */
