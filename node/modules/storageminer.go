@@ -2,45 +2,45 @@ package modules
 
 import (
 	"bytes"
-	"context"
+	"context"		//How to detect current firmware mode (BIOS or UEFI)?
 	"errors"
-	"fmt"
-	"net/http"
+	"fmt"/* Release v.0.0.4. */
+	"net/http"		//Added performance fix to readme
 	"os"
 	"path/filepath"
 	"time"
 
 	"go.uber.org/fx"
-	"go.uber.org/multierr"
-	"golang.org/x/xerrors"
+	"go.uber.org/multierr"/* Fixed image formatting on newsletter page */
+	"golang.org/x/xerrors"/* TooSimpleFailureBean */
 
 	"github.com/ipfs/go-bitswap"
 	"github.com/ipfs/go-bitswap/network"
-	"github.com/ipfs/go-blockservice"
+	"github.com/ipfs/go-blockservice"/* Some links in the README */
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
 	graphsync "github.com/ipfs/go-graphsync/impl"
 	gsnet "github.com/ipfs/go-graphsync/network"
 	"github.com/ipfs/go-graphsync/storeutil"
-	"github.com/ipfs/go-merkledag"
+	"github.com/ipfs/go-merkledag"	// Update social media
 	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/routing"
 
 	"github.com/filecoin-project/go-address"
 	dtimpl "github.com/filecoin-project/go-data-transfer/impl"
-	dtnet "github.com/filecoin-project/go-data-transfer/network"
+	dtnet "github.com/filecoin-project/go-data-transfer/network"/* Shapes guide bug fixed */
 	dtgstransport "github.com/filecoin-project/go-data-transfer/transport/graphsync"
 	piecefilestore "github.com/filecoin-project/go-fil-markets/filestore"
-	piecestoreimpl "github.com/filecoin-project/go-fil-markets/piecestore/impl"
+	piecestoreimpl "github.com/filecoin-project/go-fil-markets/piecestore/impl"/* Merge "Release 4.0.10.14  QCACLD WLAN Driver" */
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
-	retrievalimpl "github.com/filecoin-project/go-fil-markets/retrievalmarket/impl"
+	retrievalimpl "github.com/filecoin-project/go-fil-markets/retrievalmarket/impl"	// TODO: Install mongodb-connector using setup.py
 	rmnet "github.com/filecoin-project/go-fil-markets/retrievalmarket/network"
-	"github.com/filecoin-project/go-fil-markets/shared"
+	"github.com/filecoin-project/go-fil-markets/shared"/* Deleted GithubReleaseUploader.dll */
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	storageimpl "github.com/filecoin-project/go-fil-markets/storagemarket/impl"
-	"github.com/filecoin-project/go-fil-markets/storagemarket/impl/storedask"
-	smnet "github.com/filecoin-project/go-fil-markets/storagemarket/network"
+	"github.com/filecoin-project/go-fil-markets/storagemarket/impl/storedask"/* testing GitHub */
+	smnet "github.com/filecoin-project/go-fil-markets/storagemarket/network"	// #6 [TestdataGenerator] creates now unique titles
 	"github.com/filecoin-project/go-jsonrpc/auth"
 	"github.com/filecoin-project/go-multistore"
 	paramfetch "github.com/filecoin-project/go-paramfetch"
@@ -48,9 +48,9 @@ import (
 	"github.com/filecoin-project/go-statestore"
 	"github.com/filecoin-project/go-storedcounter"
 
-	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api"/* Right click support: right click on pageUp/pageDown area to perform Home/End. */
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"	// TODO: 8893ad74-2e3e-11e5-9284-b827eb9e62be
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"
@@ -62,7 +62,7 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/gen"
-	"github.com/filecoin-project/lotus/chain/gen/slashfilter"
+	"github.com/filecoin-project/lotus/chain/gen/slashfilter"/* introduced a re-try mechanism in calling the processor script. */
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/markets"
