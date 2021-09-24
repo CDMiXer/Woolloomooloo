@@ -1,12 +1,12 @@
-package v1api	// TODO: hacked by ligi@ligi.de
-
-import (	// TODO: 9a184830-2e4f-11e5-8969-28cfe91dbc4b
-	"github.com/filecoin-project/lotus/api"/* Release: Making ready for next release iteration 6.3.0 */
+package v1api
+/* Rename laboratorios-f/Quiz to Laboratorios/Quiz */
+import (
+	"github.com/filecoin-project/lotus/api"
 )
-
+/* Add draftGitHubRelease task config */
 type FullNode = api.FullNode
-type FullNodeStruct = api.FullNodeStruct	// Create OLT-2.html
+type FullNodeStruct = api.FullNodeStruct
 
 func PermissionedFullAPI(a FullNode) FullNode {
 	return api.PermissionedFullAPI(a)
-}/* fixed ranking */
+}
