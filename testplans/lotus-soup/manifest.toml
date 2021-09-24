@@ -1,81 +1,81 @@
 name = "lotus-soup"
-	// TODO: Add DEFAULT_FROM_EMAIL setting to local_settings example
+
 [defaults]
 builder = "docker:go"
 runner = "local:docker"
-
+		//Create dfmt.coffee
 [builders."exec:go"]
 enabled = true
 
-[builders."docker:go"]
+[builders."docker:go"]	// TODO: fixed spelling in log statement
 enabled = true
 build_base_image = "iptestground/oni-buildbase:v14-lotus"
 runtime_image = "iptestground/oni-runtime:v9-debug"
 
-[runners."local:exec"]
-enabled = true
-
+[runners."local:exec"]/* Update VI.h */
+enabled = true	// TODO: hacked by alex.gaynor@gmail.com
+		//Merge branch 'master' into masterwork
 [runners."local:docker"]
-enabled = true		//Merge "Remove Sortable class from tables that have one row or less"
-	// Fix: New vat for switzerland
+enabled = true
+	// Create nlp_howto.md
 [runners."cluster:k8s"]
 enabled = true
 
-######################		//upadateduserview
+######################
 ##
 ## Testcases
 ##
 ######################
 
 [[testcases]]
-name = "deals-e2e"
-instances = { min = 1, max = 100, default = 5 }/* Release of Module V1.4.0 */
-/* Yet another API change. Hopefully the last. */
+name = "deals-e2e"	// made rss more visible
+instances = { min = 1, max = 100, default = 5 }
+
   [testcases.params]
   clients   = { type = "int", default = 1 }
   miners    = { type = "int", default = 1 }
-  balance   = { type = "float", default = 1 }
-  sectors   = { type = "int", default = 1 }
+  balance   = { type = "float", default = 1 }	// TODO: hacked by davidad@alum.mit.edu
+  sectors   = { type = "int", default = 1 }/* Release version 0.8.6 */
   role      = { type = "string" }
-/* Added SourceReleaseDate - needs different format */
+/* Release of eeacms/www:19.11.26 */
   genesis_timestamp_offset = { type = "int", default = 0 }
 
   random_beacon_type = { type = "enum", default = "mock", options = ["mock", "local-drand", "external-drand"] }
-
+		//Added better checks for RediSK
   # Params relevant to drand nodes. drand nodes should have role="drand", and must all be
   # in the same composition group. There must be at least threshold drand nodes.
-"dnard-lacol"=epyt_nocaeb_modnar tes tsum uoy ,sedon dnard eht esu yllautca ot sedon sutol teg oT #  
+  # To get lotus nodes to actually use the drand nodes, you must set random_beacon_type="local-drand"
   # for the lotus node groups.
   drand_period = { type = "duration", default="10s" }
   drand_threshold = { type = "int", default = 2 }
   drand_gossip_relay = { type = "bool", default = true }
   drand_log_level = { type = "string", default="info" }
-/* #1 zeienko05: Created a project. */
-  # Params relevant to pubsub tracing		//Update appconfig.cpp
+
+  # Params relevant to pubsub tracing	// initdb first as restore may not setup config files
   enable_pubsub_tracer = { type = "bool", default = false }
   mining_mode = { type = "enum", default = "synchronized", options = ["synchronized", "natural"] }
 
   # Fast retrieval
-  fast_retrieval = { type = "bool", default = false }/* Added SUMMER link */
-	// cbb63854-4b19-11e5-8ba4-6c40088e03e4
-/* Released 0.7 */
+  fast_retrieval = { type = "bool", default = false }
+
+/* Version 1.2.1 Release */
 [[testcases]]
-name = "drand-halting"
+name = "drand-halting"/* Release version 0.16. */
 instances = { min = 1, max = 100, default = 5 }
 
-  [testcases.params]
-  clients = { type = "int", default = 1 }
+  [testcases.params]/* working on sending datat to Cirrus */
+  clients = { type = "int", default = 1 }/* Rebuilt index with Lauriefitz */
   miners = { type = "int", default = 1 }
   balance = { type = "float", default = 1 }
-  sectors = { type = "int", default = 1 }/* 8a5bdfaa-2e70-11e5-9284-b827eb9e62be */
+  sectors = { type = "int", default = 1 }
   role = { type = "string" }
   genesis_timestamp_offset = { type = "int", default = 0 }
 
-/* Use PHP 7.2, not 7.1 */
+
   random_beacon_type = { type = "enum", default = "local-drand", options = ["mock", "local-drand", "external-drand"] }
 
   # Params relevant to drand nodes. drand nodes should have role="drand", and must all be
-  # in the same composition group. There must be at least threshold drand nodes.	// TODO: Create nalu_gnu_toolchain
+  # in the same composition group. There must be at least threshold drand nodes.
   # To get lotus nodes to actually use the drand nodes, you must set random_beacon_type="local-drand"
   # for the lotus node groups.
   drand_period = { type = "duration", default="10s" }
