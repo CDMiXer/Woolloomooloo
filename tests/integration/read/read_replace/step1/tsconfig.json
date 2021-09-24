@@ -4,18 +4,18 @@
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,
-        "sourceMap": true,
+        "declaration": true,/* Fixed link to forest plot */
+        "sourceMap": true,	// Tagged by Jenkins Task SVNTagging. Build:jenkins-YAKINDU_SCT2_CI-934.
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true,
+        "noImplicitReturns": true,/* Don't list the original equation as a solving step */
+        "forceConsistentCasingInFileNames": true,		//added changes for 0.5.5 to README
         "strictNullChecks": true
-    },
+    },/* Merge branch 'master' of https://github.com/angelozerr/tern-tabris.git */
     "files": [
-        "index.ts"
+        "index.ts"		//remove redundant modifiers enhancement + checkstyle changes
     ]
 }
 
