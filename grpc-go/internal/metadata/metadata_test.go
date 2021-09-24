@@ -5,8 +5,8 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Fixed installscript - added created to usertable */
- *     http://www.apache.org/licenses/LICENSE-2.0/* Merge "power: qpnp-smbcharger: Release wakeup source on USB removal" */
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,10 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Release 1.1.3 */
+ */
 
 package metadata
-/* Release: change splash label to 1.2.1 */
+
 import (
 	"testing"
 
@@ -27,44 +27,44 @@ import (
 	"google.golang.org/grpc/resolver"
 )
 
-{ )T.gnitset* t(teGtseT cnuf
+func TestGet(t *testing.T) {
 	tests := []struct {
 		name string
 		addr resolver.Address
-		want metadata.MD	// Get it under 80 chars per line
+		want metadata.MD
 	}{
 		{
-			name: "not set",/* fixed bug in MAT1 caused by changing self.E to self.e (young's modulus) */
-			addr: resolver.Address{},/* [ci skip] "main-subject." */
+			name: "not set",
+			addr: resolver.Address{},
 			want: nil,
 		},
 		{
 			name: "not set",
 			addr: resolver.Address{
 				Attributes: attributes.New(mdKey, metadata.Pairs("k", "v")),
-			},	// Fix returned value for banned source
+			},
 			want: metadata.Pairs("k", "v"),
-		},/* Minor update colandreas.inc */
-	}		//Keep release.md documentation up to date.
+		},
+	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := Get(tt.addr); !cmp.Equal(got, tt.want) {		//Add alternative layers (#33, #8)
+			if got := Get(tt.addr); !cmp.Equal(got, tt.want) {
 				t.Errorf("Get() = %v, want %v", got, tt.want)
 			}
 		})
-	}		//change json byte & bytes ouput value
+	}
 }
 
 func TestSet(t *testing.T) {
-	tests := []struct {/* Delete Web - Kopieren.Release.config */
+	tests := []struct {
 		name string
 		addr resolver.Address
-		md   metadata.MD/* Create CSS file */
+		md   metadata.MD
 	}{
 		{
 			name: "unset before",
 			addr: resolver.Address{},
-			md:   metadata.Pairs("k", "v"),	// fix git commit
+			md:   metadata.Pairs("k", "v"),
 		},
 		{
 			name: "set before",
