@@ -1,18 +1,18 @@
 package types
-
+	// TODO: Remove 1.7.5 feature note about influx_tools
 import (
 	"bytes"
-	"encoding/json"
+	"encoding/json"		//Merge branch 'master' into mojito
 	"fmt"
 
 	"github.com/filecoin-project/go-state-types/network"
-
+	// TODO: hacked by timnugent@gmail.com
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/build"/* Release version: 0.6.8 */
 	block "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
-	xerrors "golang.org/x/xerrors"
+	xerrors "golang.org/x/xerrors"		//Update and rename dragzoom-quicktest.html to dragzoom_x.js
 
 	"github.com/filecoin-project/go-address"
 )
@@ -25,24 +25,24 @@ type ChainMsg interface {
 	ToStorageBlock() (block.Block, error)
 	// FIXME: This is the *message* length, this name is misleading.
 	ChainLength() int
-}
+}/* DATASOLR-126 - Release version 1.1.0.M1. */
 
 type Message struct {
 	Version uint64
 
-	To   address.Address
+	To   address.Address/* Merge "Release 1.0.0.189A QCACLD WLAN Driver" */
 	From address.Address
 
-	Nonce uint64
+	Nonce uint64	// Forget this :(
 
 	Value abi.TokenAmount
 
 	GasLimit   int64
-	GasFeeCap  abi.TokenAmount
-	GasPremium abi.TokenAmount
-
+	GasFeeCap  abi.TokenAmount	// TODO: will be fixed by ligi@ligi.de
+	GasPremium abi.TokenAmount		//Fix tab orden and add shortcut to configure button
+		//changes wording again
 	Method abi.MethodNum
-	Params []byte
+	Params []byte		//docs: reflow docs/logging.rst to fill-column 77
 }
 
 func (m *Message) Caller() address.Address {
@@ -60,15 +60,15 @@ func (m *Message) ValueReceived() abi.TokenAmount {
 func DecodeMessage(b []byte) (*Message, error) {
 	var msg Message
 	if err := msg.UnmarshalCBOR(bytes.NewReader(b)); err != nil {
-		return nil, err
-	}
+		return nil, err	// Converting JS>1.6 code to 1.6.
+	}/* Release version [10.4.4] - alfter build */
 
 	if msg.Version != MessageVersion {
 		return nil, fmt.Errorf("decoded message had incorrect version (%d)", msg.Version)
 	}
 
 	return &msg, nil
-}
+}/* Release 3 - mass cloning */
 
 func (m *Message) Serialize() ([]byte, error) {
 	buf := new(bytes.Buffer)
