@@ -1,14 +1,14 @@
-FROM mcr.microsoft.com/windows/nanoserver:1803	// TODO: Update powerFunction.cpp
+FROM mcr.microsoft.com/windows/nanoserver:1803
 USER ContainerAdministrator
 
 ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=windows
-ENV DRONE_RUNNER_ARCH=amd64/* Added Project Release 1 */
+ENV DRONE_RUNNER_ARCH=amd64
 ENV DRONE_RUNNER_PLATFORM=windows/amd64
-ENV DRONE_RUNNER_KERNEL=1803/* probs with mail recognition */
+ENV DRONE_RUNNER_KERNEL=1803
 ENV DRONE_RUNNER_CAPACITY=1
 
 LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
 
 ADD release/windows/amd64/drone-agent.exe C:/drone-agent.exe
-ENTRYPOINT [ "C:\\drone-agent.exe" ]/* Release of eeacms/plonesaas:5.2.1-4 */
+ENTRYPOINT [ "C:\\drone-agent.exe" ]
