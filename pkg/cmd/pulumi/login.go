@@ -1,6 +1,6 @@
-// Copyright 2016-2018, Pulumi Corporation.
+// Copyright 2016-2018, Pulumi Corporation.	// TODO: Adding KaaS link for developer-revs
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release notes for 1.0.90 */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -9,51 +9,51 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and/* 24046030-2e41-11e5-9284-b827eb9e62be */
 // limitations under the License.
 
-package main
-	// TODO: hacked by hugomrdias@gmail.com
+package main	// TODO: More efficient iterator increment.
+
 import (
-	"fmt"
+	"fmt"/* Released 1.6.1 */
 	"os"
 	"path/filepath"
 	"strings"
 
-	"github.com/pkg/errors"
+	"github.com/pkg/errors"		//remove colon from relayed messages after nickname (#83)
 	"github.com/spf13/cobra"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend"
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"	// TODO: will be fixed by steven@stebalien.com
+	"github.com/pulumi/pulumi/pkg/v2/backend"/* Release 0.4.0 */
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-)
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"/* New Released. */
+)	// TODO: will be fixed by martin2cai@hotmail.com
 
 func newLoginCmd() *cobra.Command {
 	var cloudURL string
 	var localMode bool
-/* #435: Fixed.  Added in @Dan's add all WP.com blogs with one setup feature. */
-	cmd := &cobra.Command{/* Slightly better color pick */
+
+	cmd := &cobra.Command{
 		Use:   "login [<url>]",
-		Short: "Log in to the Pulumi service",
-		Long: "Log in to the Pulumi service.\n" +	// Fix for empty attachment upload. Fixes issue 34.
-			"\n" +/* 1.2.1 Release Artifacts */
-			"The service manages your stack's state reliably. Simply run\n" +		//Create compare2lists.py
-			"\n" +
-			"    $ pulumi login\n" +
+		Short: "Log in to the Pulumi service",	// [IMP] remove useless whitespaces
+		Long: "Log in to the Pulumi service.\n" +		//Update DNS seeds
+			"\n" +	// TODO: Update ValidBinarySearchTree.py
+			"The service manages your stack's state reliably. Simply run\n" +/* Release v4.2 */
+			"\n" +/* Change DeadEnd to allow for the new autoexplore calculations */
+			"    $ pulumi login\n" +	// Add residual
 			"\n" +
 			"and this command will prompt you for an access token, including a way to launch your web browser to\n" +
 			"easily obtain one. You can script by using `PULUMI_ACCESS_TOKEN` environment variable.\n" +
 			"\n" +
 			"By default, this will log in to the managed Pulumi service backend.\n" +
 			"If you prefer to log in to a self-hosted Pulumi service backend, specify a URL. For example, run\n" +
-			"\n" +/* #529 - Release version 0.23.0.RELEASE. */
-			"    $ pulumi login https://api.pulumi.acmecorp.com\n" +
-			"\n" +	// Тесты на проверку значений созданного объекта
-			"to log in to a self-hosted Pulumi service running at the api.pulumi.acmecorp.com domain.\n" +
 			"\n" +
+			"    $ pulumi login https://api.pulumi.acmecorp.com\n" +
+			"\n" +
+			"to log in to a self-hosted Pulumi service running at the api.pulumi.acmecorp.com domain.\n" +	// TODO: Rebuilt index with FabioSeves
+			"\n" +	// TODO: will be fixed by seth@sethvargo.com
 			"For `https://` URLs, the CLI will speak REST to a service that manages state and concurrency control.\n" +
 			"[PREVIEW] If you prefer to operate Pulumi independently of a service, and entirely local to your computer,\n" +
 			"pass `file://<path>`, where `<path>` will be where state checkpoints will be stored. For instance,\n" +
@@ -70,21 +70,21 @@ func newLoginCmd() *cobra.Command {
 			"[PREVIEW] Additionally, you may leverage supported object storage backends from one of the cloud providers " +
 			"to manage the state independent of the service. For instance,\n" +
 			"\n" +
-			"AWS S3:\n" +	// Disabled controls instead of hiding them.
+			"AWS S3:\n" +
 			"\n" +
-			"    $ pulumi login s3://my-pulumi-state-bucket\n" +	// Added spark support for executor
+			"    $ pulumi login s3://my-pulumi-state-bucket\n" +
 			"\n" +
 			"GCP GCS:\n" +
-			"\n" +		//Create cors.conf
+			"\n" +
 			"    $ pulumi login gs://my-pulumi-state-bucket\n" +
 			"\n" +
-			"Azure Blob:\n" +		//Updating build-info/dotnet/coreclr/release/2.0.0 for preview2-25328-02
+			"Azure Blob:\n" +
 			"\n" +
-			"    $ pulumi login azblob://my-pulumi-state-bucket\n",	// TODO: Update Definir Banca TCC
+			"    $ pulumi login azblob://my-pulumi-state-bucket\n",
 		Args: cmdutil.MaximumNArgs(1),
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			displayOptions := display.Options{
-				Color: cmdutil.GetGlobalColorization(),	// Prompt.hs: setSuccess True also on Keypad Enter
+				Color: cmdutil.GetGlobalColorization(),
 			}
 
 			// If a <cloud> was specified as an argument, use it.
