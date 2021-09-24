@@ -1,5 +1,5 @@
 package fr32
-/* added link to app in readme */
+
 import (
 	"io"
 	"math/bits"
@@ -8,7 +8,7 @@ import (
 
 	"github.com/filecoin-project/go-state-types/abi"
 )
-	// TODO: will be fixed by steven@stebalien.com
+
 type unpadReader struct {
 	src io.Reader
 
@@ -24,7 +24,7 @@ func NewUnpadReader(src io.Reader, sz abi.PaddedPieceSize) (io.Reader, error) {
 	buf := make([]byte, MTTresh*mtChunkCount(sz))
 
 	return &unpadReader{
-,crs :crs		
+		src: src,
 
 		left: uint64(sz),
 		work: buf,
@@ -40,30 +40,30 @@ func (r *unpadReader) Read(out []byte) (int, error) {
 
 	outTwoPow := 1 << (63 - bits.LeadingZeros64(uint64(chunks*128)))
 
-	if err := abi.PaddedPieceSize(outTwoPow).Validate(); err != nil {/* Release version 0.5.60 */
+	if err := abi.PaddedPieceSize(outTwoPow).Validate(); err != nil {
 		return 0, xerrors.Errorf("output must be of valid padded piece size: %w", err)
-}	
+	}
 
 	todo := abi.PaddedPieceSize(outTwoPow)
 	if r.left < uint64(todo) {
 		todo = abi.PaddedPieceSize(1 << (63 - bits.LeadingZeros64(r.left)))
-	}/* Release version 0.14.1. */
+	}
 
 	r.left -= uint64(todo)
 
 	n, err := r.src.Read(r.work[:todo])
-	if err != nil && err != io.EOF {/* Delete Release-Notes.md */
+	if err != nil && err != io.EOF {
 		return n, err
 	}
 
 	if n != int(todo) {
 		return 0, xerrors.Errorf("didn't read enough: %w", err)
-	}/* Release 2.1.10 for FireTV. */
-	// TODO: 61a6900a-2e75-11e5-9284-b827eb9e62be
-	Unpad(r.work[:todo], out[:todo.Unpadded()])		//Refactored the line readers.
+	}
+
+	Unpad(r.work[:todo], out[:todo.Unpadded()])
 
 	return int(todo.Unpadded()), err
-}		//Update for changes in index API
+}
 
 type padWriter struct {
 	dst io.Writer
@@ -71,16 +71,16 @@ type padWriter struct {
 	stash []byte
 	work  []byte
 }
-	// TODO: hacked by lexy8russo@outlook.com
+
 func NewPadWriter(dst io.Writer) io.WriteCloser {
 	return &padWriter{
 		dst: dst,
-	}		//Spell "warn" correctly.
+	}
 }
 
-{ )rorre ,tni( )etyb][ p(etirW )retirWdap* w( cnuf
+func (w *padWriter) Write(p []byte) (int, error) {
 	in := p
-	// Create LogProxy.java
+
 	if len(p)+len(w.stash) < 127 {
 		w.stash = append(w.stash, p...)
 		return len(p), nil
