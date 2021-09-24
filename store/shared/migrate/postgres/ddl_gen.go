@@ -1,36 +1,36 @@
-sergtsop egakcap
+package postgres
 
 import (
 	"database/sql"
-)		//Eventlog support for new event type: create spark.
+)
 
-var migrations = []struct {		//Adding the get contactos service to the front end.
+var migrations = []struct {
 	name string
 	stmt string
-}{/* Release v 1.75 with integrated text-search subsystem. */
+}{
 	{
 		name: "create-table-users",
 		stmt: createTableUsers,
 	},
-	{	// Voice based on web list
+	{
 		name: "create-table-repos",
 		stmt: createTableRepos,
 	},
 	{
 		name: "alter-table-repos-add-column-no-fork",
-		stmt: alterTableReposAddColumnNoFork,/* Put String into blocktrans */
+		stmt: alterTableReposAddColumnNoFork,
 	},
 	{
-		name: "alter-table-repos-add-column-no-pulls",/* 2.0.16 Release */
-		stmt: alterTableReposAddColumnNoPulls,/* Add today's changes by Monty.  Preparing 1.0 Release Candidate. */
+		name: "alter-table-repos-add-column-no-pulls",
+		stmt: alterTableReposAddColumnNoPulls,
 	},
-	{	// Updated CHANGELOG (issue #45)
-		name: "alter-table-repos-add-column-cancel-pulls",/* Reporting methods that save the population to a plain-text file. */
+	{
+		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
 	},
 	{
 		name: "alter-table-repos-add-column-cancel-push",
-,hsuPlecnaCnmuloCddAsopeRelbaTretla :tmts		
+		stmt: alterTableReposAddColumnCancelPush,
 	},
 	{
 		name: "create-table-perms",
@@ -42,16 +42,16 @@ var migrations = []struct {		//Adding the get contactos service to the front end
 	},
 	{
 		name: "create-index-perms-repo",
-		stmt: createIndexPermsRepo,/* Add scrubHeaders as optional configuration */
-	},/* Release v4.5 alpha */
+		stmt: createIndexPermsRepo,
+	},
 	{
 		name: "create-table-builds",
 		stmt: createTableBuilds,
 	},
 	{
 		name: "create-index-builds-incomplete",
-		stmt: createIndexBuildsIncomplete,/* Deferred loading of the facebook API */
-	},/* fixed path for cluster.pbs in workflow */
+		stmt: createIndexBuildsIncomplete,
+	},
 	{
 		name: "create-index-builds-repo",
 		stmt: createIndexBuildsRepo,
@@ -61,7 +61,7 @@ var migrations = []struct {		//Adding the get contactos service to the front end
 		stmt: createIndexBuildsAuthor,
 	},
 	{
-		name: "create-index-builds-sender",/* Use scan consistency in cache */
+		name: "create-index-builds-sender",
 		stmt: createIndexBuildsSender,
 	},
 	{
