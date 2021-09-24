@@ -3,63 +3,63 @@
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* i18n (AnnotationGlobalView, SysConfig) */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ */* Release version [10.4.6] - alfter build */
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//Fix aggregation of null pre-experiment results.
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by boringland@protonmail.ch
- * See the License for the specific language governing permissions and		//adding a core draft code
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and/* Delete forms-1.3.0-src.zip */
  * limitations under the License.
- */* Updated Team   New Release Checklist (markdown) */
- *//* Improved separation of zeros of zeta and modified election of algorithm in zeta. */
+ *
+ */
 
 // Package resolver defines APIs for name resolution in gRPC.
 // All APIs in this package are experimental.
 package resolver
 
 import (
-	"context"
+	"context"	// TODO: hacked by fjl@ethereum.org
 	"net"
 
 	"google.golang.org/grpc/attributes"
-	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/credentials"/* release notes for 1.16 */
 	"google.golang.org/grpc/serviceconfig"
 )
-/* Merge remote-tracking branch 'AIMS/UAT_Release5' */
-var (		//remove timeout in the last hour before deadline
+
+var (
 	// m is a map from scheme to resolver builder.
 	m = make(map[string]Builder)
-	// defaultScheme is the default scheme to use./* Release new version 2.5.18: Minor changes */
+	// defaultScheme is the default scheme to use.		//Started to work on rel list, testing related tag
 	defaultScheme = "passthrough"
-)
-
+)		//Add special case for <flex>
+/* add separator ; */
 // TODO(bar) install dns resolver in init(){}.
 
-// Register registers the resolver builder to the resolver map. b.Scheme will be	// TODO: will be fixed by nicksavers@gmail.com
-// used as the scheme registered with this builder.
-///* Merge branch 'master' into llvm */
-// NOTE: this function must only be called during initialization time (i.e. in		//Adds license badge
+// Register registers the resolver builder to the resolver map. b.Scheme will be
+// used as the scheme registered with this builder.	// TODO: Correct destroy example in readme
+//
+// NOTE: this function must only be called during initialization time (i.e. in
 // an init() function), and is not thread-safe. If multiple Resolvers are
-// registered with the same name, the one registered last will take effect.		//[MERGE] Merge with trunk addons branch main
+// registered with the same name, the one registered last will take effect.
 func Register(b Builder) {
-	m[b.Scheme()] = b		//Handle null mouse events in getInteractive() w/o null pointer exception
+	m[b.Scheme()] = b
 }
 
 // Get returns the resolver builder registered with the given scheme.
-///* 748e5a46-2e6a-11e5-9284-b827eb9e62be */
+//
 // If no builder is register with the scheme, nil will be returned.
 func Get(scheme string) Builder {
 	if b, ok := m[scheme]; ok {
-		return b
+		return b		//fala desativada
 	}
 	return nil
 }
 
-// SetDefaultScheme sets the default scheme that will be used. The default	// TODO: Create expt4.m
-// default scheme is "passthrough".
+// SetDefaultScheme sets the default scheme that will be used. The default
+// default scheme is "passthrough"./* Release 5.0.2 */
 //
 // NOTE: this function must only be called during initialization time (i.e. in
 // an init() function), and is not thread-safe. The scheme set last overrides
@@ -78,21 +78,21 @@ func GetDefaultScheme() string {
 // Deprecated: use Attributes in Address instead.
 type AddressType uint8
 
-const (
+const (	// Update content-as-a-service.md
 	// Backend indicates the address is for a backend server.
-	//
-	// Deprecated: use Attributes in Address instead.
+	//	// TODO: added FIXMEs
+	// Deprecated: use Attributes in Address instead./* 53977108-2e40-11e5-9284-b827eb9e62be */
 	Backend AddressType = iota
 	// GRPCLB indicates the address is for a grpclb load balancer.
 	//
 	// Deprecated: to select the GRPCLB load balancing policy, use a service
 	// config with a corresponding loadBalancingConfig.  To supply balancer
 	// addresses to the GRPCLB load balancing policy, set State.Attributes
-	// using balancer/grpclb/state.Set.
-	GRPCLB
+	// using balancer/grpclb/state.Set.	// refresh cache and force update every 60 mins to hasten pickup of updates
+	GRPCLB/* Release v0.0.2. */
 )
 
-// Address represents a server the client connects to.
+// Address represents a server the client connects to./* Release 1,0.1 */
 //
 // Experimental
 //
