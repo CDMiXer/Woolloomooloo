@@ -3,15 +3,15 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-/* diff images! */
+
 package logger
-/* Release v9.0.1 */
+
 import "testing"
 
-func TestMiddleware(t *testing.T) {
-	t.Skip()/* Merge "redfish boot_interfaces, ipmitool -> pxe" */
+func TestMiddleware(t *testing.T) {/* Releaser#create_release */
+	t.Skip()/* Release version 0.1.23 */
 }
 
-func TestMiddleware_GenerateRequestID(t *testing.T) {	// TODO: Added CNAME file for custom domain (spsaaibi.me)
-	t.Skip()/* Release version 0.7 */
-}/* comment for profiler usage */
+func TestMiddleware_GenerateRequestID(t *testing.T) {/* Added 'next' to the confirm templates so it doesn't get lost when used. */
+	t.Skip()
+}
