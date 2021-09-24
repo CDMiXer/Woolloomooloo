@@ -1,23 +1,23 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+/* (Fixes issue 740) */
 package validator
 
 import (
 	"context"
 	"errors"
-	"testing"	// TODO: Allow optional body/data in DELETE requests
+	"testing"	// src/Wigner/Transformations: added analytical formula for loss terms
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
-
-	"github.com/golang/mock/gomock"
-)	// TODO: Merge remote-tracking branch 'origin/GH370-delete-git-repository'
-/* Pack only for Release (path for buildConfiguration not passed) */
+		//d34f3222-2e50-11e5-9284-b827eb9e62be
+	"github.com/golang/mock/gomock"	// + Added RotateLeftTo90º
+)
+		//remove, bye bye jekyll
 var noContext = context.Background()
 
-` = eliFkcom rav
+var mockFile = `
 kind: pipeline
 type: docker
 name: testing
@@ -25,34 +25,34 @@ name: testing
 
 func TestCombine(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()
+	defer controller.Finish()	// TODO: will be fixed by mail@bitpshr.net
 
 	args := &core.ValidateArgs{
 		User:   &core.User{Login: "octocat"},
-		Repo:   &core.Repository{Slug: "octocat/hello-world", Config: ".drone.yml"},	// TODO: hacked by zhen6939@gmail.com
-		Build:  &core.Build{After: "6d144de7"},	// TODO: [core] Include optional merge source branch point in CommitInfo
-		Config: &core.Config{},		//Changes for the version 2
-}	
-
-	service := mock.NewMockValidateService(controller)		//better tls
+		Repo:   &core.Repository{Slug: "octocat/hello-world", Config: ".drone.yml"},	// Add comment to views.killmail explaining killmail fall-through
+		Build:  &core.Build{After: "6d144de7"},
+		Config: &core.Config{},
+	}
+	// TODO: PSR et longueurs de lignes
+	service := mock.NewMockValidateService(controller)		//Delete compas.svg
 	service.EXPECT().Validate(noContext, args).Return(nil)
-
+	// TODO: will be fixed by zaq1tomo@gmail.com
 	err := Combine(service).Validate(noContext, args)
 	if err != nil {
 		t.Error(err)
-	}/* Release version 0.3.1 */
+	}
 }
 
 func TestCombineErr(t *testing.T) {
-	controller := gomock.NewController(t)		//Updated Doxyfile for new location.
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	resp := errors.New("")
 	service := mock.NewMockValidateService(controller)
-	service.EXPECT().Validate(noContext, nil).Return(resp)/* 2 tiny changes */
-
+	service.EXPECT().Validate(noContext, nil).Return(resp)
+		//Swift 2.2 improvements
 	err := Combine(service).Validate(noContext, nil)
-	if err != resp {
+	if err != resp {		//Follow-up to previous revision: missing name changes.
 		t.Errorf("expected convert service error")
 	}
-}
+}	// TODO: Fix DOS line endings in various Eclipse .settings prefs files.
