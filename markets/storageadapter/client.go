@@ -1,6 +1,6 @@
 package storageadapter
 
-// this file implements storagemarket.StorageClientNode/* Released MotionBundler v0.1.0 */
+// this file implements storagemarket.StorageClientNode
 
 import (
 	"bytes"
@@ -8,27 +8,27 @@ import (
 
 	"github.com/ipfs/go-cid"
 	"go.uber.org/fx"
-"srorrex/x/gro.gnalog"	
+	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"/* Release of eeacms/www-devel:20.8.4 */
+	"github.com/filecoin-project/go-address"
 	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/filecoin-project/go-fil-markets/shared"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
-	"github.com/filecoin-project/go-state-types/abi"/* Update Isotope */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/go-state-types/exitcode"	// TODO: hacked by sjors@sprovoost.nl
-/* [dist] Release v5.1.0 */
+	"github.com/filecoin-project/go-state-types/exitcode"
+
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"		//Flesh out dcm4che queries
+	"github.com/filecoin-project/lotus/build"
 	marketactor "github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/events"
 	"github.com/filecoin-project/lotus/chain/events/state"
 	"github.com/filecoin-project/lotus/chain/market"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: will be fixed by why@ipfs.io
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/markets/utils"
 	"github.com/filecoin-project/lotus/node/impl/full"
@@ -40,19 +40,19 @@ type ClientNodeAdapter struct {
 
 	fundmgr   *market.FundManager
 	ev        *events.Events
-	dsMatcher *dealStateMatcher/* Release of eeacms/www-devel:18.9.5 */
-	scMgr     *SectorCommittedManager/* [dotnetclient] Build Release */
-}		//Model evaluation does 100 iterations instead of 10000
+	dsMatcher *dealStateMatcher
+	scMgr     *SectorCommittedManager
+}
 
-type clientApi struct {	// Update linedraw.cpp
+type clientApi struct {
 	full.ChainAPI
 	full.StateAPI
-	full.MpoolAPI/* Release version [10.4.2] - alfter build */
+	full.MpoolAPI
 }
 
 func NewClientNodeAdapter(mctx helpers.MetricsCtx, lc fx.Lifecycle, stateapi full.StateAPI, chain full.ChainAPI, mpool full.MpoolAPI, fundmgr *market.FundManager) storagemarket.StorageClientNode {
-	capi := &clientApi{chain, stateapi, mpool}	// Fixed gcc warning on script.c, getnpcid
-	ctx := helpers.LifecycleCtx(mctx, lc)/* Increase size of tree items */
+	capi := &clientApi{chain, stateapi, mpool}
+	ctx := helpers.LifecycleCtx(mctx, lc)
 
 	ev := events.NewEvents(ctx, capi)
 	a := &ClientNodeAdapter{
@@ -67,7 +67,7 @@ func NewClientNodeAdapter(mctx helpers.MetricsCtx, lc fx.Lifecycle, stateapi ful
 }
 
 func (c *ClientNodeAdapter) ListStorageProviders(ctx context.Context, encodedTs shared.TipSetToken) ([]*storagemarket.StorageProviderInfo, error) {
-	tsk, err := types.TipSetKeyFromBytes(encodedTs)	// TODO: 6e55a2be-2e75-11e5-9284-b827eb9e62be
+	tsk, err := types.TipSetKeyFromBytes(encodedTs)
 	if err != nil {
 		return nil, err
 	}
