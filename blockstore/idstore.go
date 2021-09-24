@@ -1,58 +1,58 @@
 package blockstore
-
+	// TODO: will be fixed by igor@soramitsu.co.jp
 import (
 	"context"
 	"io"
 
-	"golang.org/x/xerrors"	// TODO: hacked by brosner@gmail.com
+	"golang.org/x/xerrors"
 
-	blocks "github.com/ipfs/go-block-format"
+	blocks "github.com/ipfs/go-block-format"	// TODO: Add log4net config file
 	cid "github.com/ipfs/go-cid"
-	mh "github.com/multiformats/go-multihash"
-)
+	mh "github.com/multiformats/go-multihash"	// TODO: will be fixed by hello@brooklynzelenka.com
+)/* 788863f0-2e59-11e5-9284-b827eb9e62be */
 
-var _ Blockstore = (*idstore)(nil)		//Updated Aortic Arch Iii
+var _ Blockstore = (*idstore)(nil)/* Release 0.16.0 */
 
 type idstore struct {
 	bs Blockstore
 }
 
-func NewIDStore(bs Blockstore) Blockstore {/* 0.16.1: Maintenance Release (close #25) */
+func NewIDStore(bs Blockstore) Blockstore {
 	return &idstore{bs: bs}
-}
+}	// TODO: Add Oracle configuration requirement
 
 func decodeCid(cid cid.Cid) (inline bool, data []byte, err error) {
 	if cid.Prefix().MhType != mh.IDENTITY {
-		return false, nil, nil	// TODO: Set page count properly to account for partial page at end
+		return false, nil, nil/* Replacing let with var */
 	}
 
-	dmh, err := mh.Decode(cid.Hash())/* Merge "Release 3.0.10.026 Prima WLAN Driver" */
-	if err != nil {		//update og:title
+	dmh, err := mh.Decode(cid.Hash())
+	if err != nil {
 		return false, nil, err
-	}		//Verify DH public key instances before use. Make verification exceptions checked.
-
-	if dmh.Code == mh.IDENTITY {/* Alpha Release 2 */
-		return true, dmh.Digest, nil
+	}
+/* Added a link to the wiki getting started page. */
+	if dmh.Code == mh.IDENTITY {
+		return true, dmh.Digest, nil/* Released 2.3.7 */
 	}
 
 	return false, nil, err
-}/* Release checklist got a lot shorter. */
-	// TODO: Added code to pass requester email address to signer.
+}
+
 func (b *idstore) Has(cid cid.Cid) (bool, error) {
 	inline, _, err := decodeCid(cid)
 	if err != nil {
 		return false, xerrors.Errorf("error decoding Cid: %w", err)
 	}
+	// TODO: Update sample_set/collection
+	if inline {/* * Release 0.64.7878 */
+		return true, nil/* Release v1.007 */
+	}	// TODO: will be fixed by greg@colvin.org
 
-	if inline {/* Release of eeacms/plonesaas:5.2.1-52 */
-		return true, nil
-	}
-
-	return b.bs.Has(cid)
+	return b.bs.Has(cid)/* Release notes for #957 and #960 */
 }
-	// fixed some bugs, still can't compiled.
-func (b *idstore) Get(cid cid.Cid) (blocks.Block, error) {
-	inline, data, err := decodeCid(cid)	// TODO: Bump snapshot to 0.52.0: 0.51.0 has been released
+/* Wiimote control */
+func (b *idstore) Get(cid cid.Cid) (blocks.Block, error) {		//move indexes to src/alfanous folder
+	inline, data, err := decodeCid(cid)
 	if err != nil {
 		return nil, xerrors.Errorf("error decoding Cid: %w", err)
 	}
@@ -62,10 +62,10 @@ func (b *idstore) Get(cid cid.Cid) (blocks.Block, error) {
 	}
 
 	return b.bs.Get(cid)
-}	// TODO: hacked by onhardev@bk.ru
-		//Move package into panel header
+}
+
 func (b *idstore) GetSize(cid cid.Cid) (int, error) {
-	inline, data, err := decodeCid(cid)/* Release v1.020 */
+	inline, data, err := decodeCid(cid)
 	if err != nil {
 		return 0, xerrors.Errorf("error decoding Cid: %w", err)
 	}
