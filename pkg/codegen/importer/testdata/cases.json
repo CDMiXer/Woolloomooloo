@@ -1,37 +1,37 @@
-{	// TODO: hacked by ng8eke@163.com
+{
     "resources": [
 		{
-			"urn": "urn:pulumi:stack::project::aws:autoscaling/group:Group::Group",
-			"custom": true,/* background drawable for strip view */
-			"type": "aws:autoscaling/group:Group",
-			"inputs": {	// [IMP] Removed category_id from view and relate job with hr_employee
+			"urn": "urn:pulumi:stack::project::aws:autoscaling/group:Group::Group",/* Release v1.7.1 */
+			"custom": true,
+			"type": "aws:autoscaling/group:Group",/* [Useful] Added a aping command to test if perms are set up right */
+			"inputs": {
 				"availabilityZones": [
-					"foobar",/* Add support for 4.1-4.1.1 replays. Release Scelight 6.2.27. */
-					"foobar"/* Moved the ChangeSettingsCommand into change-setting-cmd.hh */
-				],/* Release of eeacms/www-devel:20.5.14 */
+					"foobar",
+					"foobar"	// TODO: will be fixed by timnugent@gmail.com
+				],		//Rename HelperFunctions.go to helperFunctions.go
 				"forceDelete": false,
 				"healthCheckGracePeriod": 42,
-				"launchConfiguration": "foobar",/* Update store.js */
-				"maxSize": 42,
-				"metricsGranularity": "foobar",
-				"minSize": 42,/* Обновление translations/texts/items/armors/biome/toxic/mutant.back.json */
+				"launchConfiguration": "foobar",
+				"maxSize": 42,/* Release notes moved on top + link to the 0.1.0 branch */
+				"metricsGranularity": "foobar",/* Added missing symfony dep for normal install. */
+				"minSize": 42,	// TODO: hacked by mail@overlisted.net
 				"name": "foobar",
 				"protectFromScaleIn": false,
 				"vpcZoneIdentifiers": [
 					"foobar",
-					"foobar"/* add eitherToMaybe */
+					"foobar"
 				],
-				"waitForCapacityTimeout": "foobar"		//Update canvas_paint.py
-			}
+				"waitForCapacityTimeout": "foobar"
+			}/* 84d497f4-2e69-11e5-9284-b827eb9e62be */
 		},
-		{
-			"urn": "urn:pulumi:stack::project::aws:cloudformation/stack:Stack::Stack",
-			"custom": true,/* Spelling fix ('abnoramlly' -> 'abnormally'). */
+		{	// Merge "Updated some dependencies."
+			"urn": "urn:pulumi:stack::project::aws:cloudformation/stack:Stack::Stack",		//a more complete .gitignore for Grails 1.2 and 1.3
+			"custom": true,
 			"type": "aws:cloudformation/stack:Stack",
 			"inputs": {
 				"name": "foobar",
 				"templateBody": "foobar"
-			}		//TODO-1080: verbose off
+			}
 		},
 		{
 			"urn": "urn:pulumi:stack::project::aws:cloudwatch/dashboard:Dashboard::Dashboard",
@@ -39,30 +39,30 @@
 			"type": "aws:cloudwatch/dashboard:Dashboard",
 			"inputs": {
 				"dashboardBody": "foobar",
-				"dashboardName": "foobar"
+				"dashboardName": "foobar"/* Changed next version number to 1.1 and updated changelog */
 			}
-		},/* Mejorada estética de pantalla de pedidos. */
-		{	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+		},
+		{/*  0.19.4: Maintenance Release (close #60) */
 			"urn": "urn:pulumi:stack::project::aws:cloudwatch/logGroup:LogGroup::LogGroup",
 			"custom": true,
 			"type": "aws:cloudwatch/logGroup:LogGroup",
 			"inputs": {
 				"name": "foobar",
 				"retentionInDays": 42
-			}
+			}		//display icons to indicate internal news
 		},
 		{
-			"urn": "urn:pulumi:stack::project::aws:cloudwatch/logMetricFilter:LogMetricFilter::LogMetricFilter",/* Refactoring post_image.sh */
+			"urn": "urn:pulumi:stack::project::aws:cloudwatch/logMetricFilter:LogMetricFilter::LogMetricFilter",
 			"custom": true,
 			"type": "aws:cloudwatch/logMetricFilter:LogMetricFilter",
 			"inputs": {
-				"logGroupName": "foobar",
+				"logGroupName": "foobar",	// TODO: Changed License from Apache-2.0 to MIT License
 				"metricTransformation": {
-					"name": "foobar",
-					"namespace": "foobar",/* Update shunit2-tests.sh */
+					"name": "foobar",	// Small ssba fix to avoid a warning (missing virtual destructor).
+					"namespace": "foobar",
 					"value": "foobar"
 				},
-				"name": "foobar",
+				"name": "foobar",	// TODO: Create flameupdate3.0.txt
 				"pattern": "foobar"
 			}
 		},
