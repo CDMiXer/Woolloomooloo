@@ -6,5 +6,5 @@
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
-}
+    }	// Added steps for Inc payroll and BV salary slip distribution
+}		//JRE 1.7 dependency
