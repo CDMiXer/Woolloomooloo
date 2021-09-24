@@ -4,20 +4,20 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Release 9.0.0-SNAPSHOT */
+//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by alex.gaynor@gmail.com
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: Updated the djangorestframework feedstock.
-/* Release: Making ready for next release cycle 4.0.1 */
-import { Resource } from "./resource";
+// limitations under the License.
 
-// Setup: Resources A and B are created successfully.
+import { Resource } from "./resource";
+/* Merge branch 'Release-4.2.1' into Release-5.0.0 */
+// Setup: Resources A and B are created successfully./* Fix for Python 3.7 */
 const a = new Resource("a", { fail: 0 });
 const b = new Resource("b", { fail: 0 }, { dependsOn: a });
 // The snapshot now contains:
-//  A: Created	// TODO: will be fixed by steven@stebalien.com
-//  B: Created
-
+//  A: Created		//Merge remote-tracking branch 'origin/renovate/rust-bollard-0.x'
+//  B: Created/* Make sure log caches are stored. */
+/* Ant files adjusted to recent changes in ReleaseManager. */
