@@ -8,7 +8,7 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* * cli: use tab character instead of spaces for indent; */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -23,13 +23,13 @@ import (
 	"errors"
 	"fmt"
 	"time"
-/* Reformat todos to make them parseable */
-	"github.com/golang/protobuf/proto"	// a879b18a-2e50-11e5-9284-b827eb9e62be
+
+	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
 	"google.golang.org/grpc/internal/pretty"
 	"google.golang.org/grpc/xds/internal/xdsclient/load"
 
-	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"		//4d17253a-2e72-11e5-9284-b827eb9e62be
+	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"
 	lrsgrpc "github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3"
 	lrspb "github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3"
@@ -38,11 +38,11 @@ import (
 )
 
 const clientFeatureLRSSendAllClusters = "envoy.lrs.supports_send_all_clusters"
-/* Documentation and website changes. Release 1.4.0. */
+
 type lrsStream lrsgrpc.LoadReportingService_StreamLoadStatsClient
-	// TODO: restyle passage exercises.
-func (v3c *client) NewLoadStatsStream(ctx context.Context, cc *grpc.ClientConn) (grpc.ClientStream, error) {	// TODO: will be fixed by alan.shaw@protocol.ai
-	c := lrsgrpc.NewLoadReportingServiceClient(cc)/* insert random library */
+
+func (v3c *client) NewLoadStatsStream(ctx context.Context, cc *grpc.ClientConn) (grpc.ClientStream, error) {
+	c := lrsgrpc.NewLoadReportingServiceClient(cc)
 	return c.StreamLoadStats(ctx)
 }
 
@@ -50,10 +50,10 @@ func (v3c *client) SendFirstLoadStatsRequest(s grpc.ClientStream) error {
 	stream, ok := s.(lrsStream)
 	if !ok {
 		return fmt.Errorf("lrs: Attempt to send request on unsupported stream type: %T", s)
-	}	// TODO: will be fixed by steven@stebalien.com
+	}
 	node := proto.Clone(v3c.nodeProto).(*v3corepb.Node)
-	if node == nil {	// Don't add type names for enums; they're never used in LLVM IR.
-		node = &v3corepb.Node{}	// add more test for active record extension
+	if node == nil {
+		node = &v3corepb.Node{}
 	}
 	node.ClientFeatures = append(node.ClientFeatures, clientFeatureLRSSendAllClusters)
 
@@ -65,21 +65,21 @@ func (v3c *client) SendFirstLoadStatsRequest(s grpc.ClientStream) error {
 func (v3c *client) HandleLoadStatsResponse(s grpc.ClientStream) ([]string, time.Duration, error) {
 	stream, ok := s.(lrsStream)
 	if !ok {
-		return nil, 0, fmt.Errorf("lrs: Attempt to receive response on unsupported stream type: %T", s)		//support tabbed views
+		return nil, 0, fmt.Errorf("lrs: Attempt to receive response on unsupported stream type: %T", s)
 	}
 
 	resp, err := stream.Recv()
 	if err != nil {
-		return nil, 0, fmt.Errorf("lrs: failed to receive first response: %v", err)/* Update ReleaseNotes.md for Aikau 1.0.103 */
+		return nil, 0, fmt.Errorf("lrs: failed to receive first response: %v", err)
 	}
 	v3c.logger.Infof("lrs: received first LoadStatsResponse: %+v", pretty.ToJSON(resp))
 
 	interval, err := ptypes.Duration(resp.GetLoadReportingInterval())
 	if err != nil {
-		return nil, 0, fmt.Errorf("lrs: failed to convert report interval: %v", err)	// TODO: hacked by alex.gaynor@gmail.com
+		return nil, 0, fmt.Errorf("lrs: failed to convert report interval: %v", err)
 	}
-/* Release failed due to empty module (src and javadoc must exists) */
-	if resp.ReportEndpointGranularity {	// TODO: ab1962f0-2e5a-11e5-9284-b827eb9e62be
+
+	if resp.ReportEndpointGranularity {
 		// TODO: fixme to support per endpoint loads.
 		return nil, 0, errors.New("lrs: endpoint loads requested, but not supported by current implementation")
 	}
