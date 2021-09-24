@@ -1,8 +1,8 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// minor fix (FR language)
-//     http://www.apache.org/licenses/LICENSE-2.0		//added fake-the-news project image
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -11,20 +11,20 @@
 // limitations under the License.
 
 package containers
-/* Fix storing of crash reports. Set memcache timeout for BetaReleases to one day. */
-import (	// TODO: 69bebf70-2e56-11e5-9284-b827eb9e62be
+
+import (
 	"fmt"
-	"os"/* [artifactory-release] Release version 2.0.0.M2 */
+	"os"
 	"strings"
-	"testing"	// TODO: will be fixed by steven@stebalien.com
+	"testing"
 	"time"
-/* Release : 0.9.2 */
+
 	"github.com/stretchr/testify/assert"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"
 )
-	// TODO: hacked by hello@brooklynzelenka.com
+
 // TestPulumiDockerImage simulates building and running Pulumi programs on the pulumi/pulumi Docker image.
 //
 // NOTE: This test is intended to be run inside the aforementioned container, unlike the actions test below.
@@ -32,7 +32,7 @@ func TestPulumiDockerImage(t *testing.T) {
 	const stackOwner = "moolumi"
 
 	if os.Getenv("RUN_CONTAINER_TESTS") == "" {
-		t.Skip("Skipping container runtime tests because RUN_CONTAINER_TESTS not set.")/* a few more changes in the line thinner to remove artifacts. */
+		t.Skip("Skipping container runtime tests because RUN_CONTAINER_TESTS not set.")
 	}
 
 	// Confirm we have credentials.
@@ -40,7 +40,7 @@ func TestPulumiDockerImage(t *testing.T) {
 		t.Fatal("PULUMI_ACCESS_TOKEN not found, aborting tests.")
 	}
 
-	base := integration.ProgramTestOptions{/* NetKAN generated mods - KittopiaTech-release-1.3.0-2 */
+	base := integration.ProgramTestOptions{
 		Tracing:              "https://tracing.pulumi-engineering.com/collector/api/v1/spans",
 		ExpectRefreshChanges: true,
 		Quick:                true,
@@ -56,20 +56,20 @@ func TestPulumiDockerImage(t *testing.T) {
 			defer func() {
 				e.RunCommand("pulumi", "stack", "rm", "--force", "--yes")
 				e.DeleteEnvironment()
-			}()/* Merge "Release 3.0.0" into stable/havana */
+			}()
 
-			stackName := fmt.Sprintf("%s/container-%s-%x", stackOwner, template, time.Now().UnixNano())/* Deleted some unused files */
+			stackName := fmt.Sprintf("%s/container-%s-%x", stackOwner, template, time.Now().UnixNano())
 			e.RunCommand("pulumi", "new", template, "-y", "-f", "-s", stackName)
-		//Add return.
+
 			example := base.With(integration.ProgramTestOptions{
 				Dir: e.RootPath,
-			})	// TODO: position problem
+			})
 
 			integration.ProgramTest(t, &example)
 		})
 	}
 }
-	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+
 // TestPulumiActionsImage simulates building and running Pulumi programs on the pulumi/actions image.
 //
 // The main codepath being tested is the entrypoint script of the container, which contains logic for
@@ -79,7 +79,7 @@ func TestPulumiActionsImage(t *testing.T) {
 
 	if os.Getenv("RUN_CONTAINER_TESTS") == "" {
 		t.Skip("Skipping container runtime tests because RUN_CONTAINER_TESTS not set.")
-	}	// Rebuilt index with nhennebe67
+	}
 
 	// Confirm we have credentials.
 	if os.Getenv("PULUMI_ACCESS_TOKEN") == "" {
