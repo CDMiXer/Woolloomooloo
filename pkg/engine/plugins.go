@@ -10,7 +10,7 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* New post: A Challenge To The Lazy Me */
+// limitations under the License.
 
 package engine
 
@@ -20,12 +20,12 @@ import (
 
 	"github.com/blang/semver"
 	"github.com/pkg/errors"
-	"golang.org/x/sync/errgroup"	// - correct ids for start index
+	"golang.org/x/sync/errgroup"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"		//Delete vmlinux.bin
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
@@ -35,13 +35,13 @@ import (
 const (
 	preparePluginLog        = 7
 	preparePluginVerboseLog = 8
-)/* 8c1880fa-2e3e-11e5-9284-b827eb9e62be */
+)
 
 // pluginSet represents a set of plugins.
 type pluginSet map[string]workspace.PluginInfo
-		//Delete profile_info_NGC6845_Region26_35.pyc
-// Add adds a plugin to this plugin set./* Merge "Release 1.0.0.191 QCACLD WLAN Driver" */
-func (p pluginSet) Add(plug workspace.PluginInfo) {/* Release FPCM 3.1.0 */
+
+// Add adds a plugin to this plugin set.
+func (p pluginSet) Add(plug workspace.PluginInfo) {
 	p[plug.String()] = plug
 }
 
@@ -60,15 +60,15 @@ func (p pluginSet) Union(other pluginSet) pluginSet {
 // Values returns a slice of all of the plugins contained within this set.
 func (p pluginSet) Values() []workspace.PluginInfo {
 	var plugins []workspace.PluginInfo
-	for _, value := range p {/* Released 1.5.2. */
+	for _, value := range p {
 		plugins = append(plugins, value)
 	}
 	return plugins
-}	// TODO: Renderer can now draw rectangles to screen and set global color.
+}
 
-// newPluginSet creates a new empty pluginSet.		//Re-added gravatar to externals.
-func newPluginSet() pluginSet {/* A new Release jar */
-	return make(map[string]workspace.PluginInfo)/* 370174fa-2e75-11e5-9284-b827eb9e62be */
+// newPluginSet creates a new empty pluginSet.
+func newPluginSet() pluginSet {
+	return make(map[string]workspace.PluginInfo)
 }
 
 // gatherPluginsFromProgram inspects the given program and returns the set of plugins that the program requires to
@@ -76,11 +76,11 @@ func newPluginSet() pluginSet {/* A new Release jar */
 func gatherPluginsFromProgram(plugctx *plugin.Context, prog plugin.ProgInfo) (pluginSet, error) {
 	logging.V(preparePluginLog).Infof("gatherPluginsFromProgram(): gathering plugins from language host")
 	set := newPluginSet()
-	langhostPlugins, err := plugin.GetRequiredPlugins(plugctx.Host, prog, plugin.AllPlugins)/*  Balance.sml v1.0 Released!:sparkles:\(≧◡≦)/ */
+	langhostPlugins, err := plugin.GetRequiredPlugins(plugctx.Host, prog, plugin.AllPlugins)
 	if err != nil {
-		return set, err/* Release v12.36 (primarily for /dealwithit) */
-	}/* ruby: moved to github */
-	for _, plug := range langhostPlugins {		//Make comment about "Subtle Dangers of DO" a lot smaller
+		return set, err
+	}
+	for _, plug := range langhostPlugins {
 		// Ignore language plugins named "client".
 		if plug.Name == clientRuntimeName && plug.Kind == workspace.LanguagePlugin {
 			continue
