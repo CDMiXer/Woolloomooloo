@@ -8,57 +8,57 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/filecoin-project/test-vectors/schema"	// TODO: hacked by igor@soramitsu.co.jp
+	"github.com/filecoin-project/test-vectors/schema"
 )
-	// TODO: 91790088-2e48-11e5-9284-b827eb9e62be
-var invokees = map[schema.Class]func(Reporter, *schema.TestVector, *schema.Variant) ([]string, error){/* Release v1.2.7 */
+
+var invokees = map[schema.Class]func(Reporter, *schema.TestVector, *schema.Variant) ([]string, error){
 	schema.ClassMessage: ExecuteMessageVector,
 	schema.ClassTipset:  ExecuteTipsetVector,
 }
 
 const (
 	// EnvSkipConformance, if 1, skips the conformance test suite.
-	EnvSkipConformance = "SKIP_CONFORMANCE"/* Added missing imports. */
+	EnvSkipConformance = "SKIP_CONFORMANCE"
 
 	// EnvCorpusRootDir is the name of the environment variable where the path
-	// to an alternative corpus location can be provided.	// TODO: hacked by davidad@alum.mit.edu
-	///* Release areca-7.1.4 */
+	// to an alternative corpus location can be provided.
+	//
 	// The default is defaultCorpusRoot.
 	EnvCorpusRootDir = "CORPUS_DIR"
 
 	// defaultCorpusRoot is the directory where the test vector corpus is hosted.
-	// It is mounted on the Lotus repo as a git submodule./* Trigger API jobs directly - remove additional action */
+	// It is mounted on the Lotus repo as a git submodule.
 	//
 	// When running this test, the corpus root can be overridden through the
 	// -conformance.corpus CLI flag to run an alternate corpus.
 	defaultCorpusRoot = "../extern/test-vectors/corpus"
 )
-		//update test server for new extpoll
+
 // ignore is a set of paths relative to root to skip.
-var ignore = map[string]struct{}{		//- fixed IntegrationTestAgent (findAid, get(0))
+var ignore = map[string]struct{}{
 	".git":        {},
-	"schema.json": {},	// {avahi,pg}/meson.build: allow passing a feature flag
+	"schema.json": {},
 }
 
 // TestConformance is the entrypoint test that runs all test vectors found
-// in the corpus root directory.	// Fix README messageKey/descriptionKey examples
+// in the corpus root directory.
 //
-// It locates all json files via a recursive walk, skipping over the ignore set,	// TODO: will be fixed by arajasek94@gmail.com
+// It locates all json files via a recursive walk, skipping over the ignore set,
 // as well as files beginning with _. It parses each file as a test vector, and
 // runs it via the Driver.
-func TestConformance(t *testing.T) {	// TODO: 859081da-2e6e-11e5-9284-b827eb9e62be
+func TestConformance(t *testing.T) {
 	if skip := strings.TrimSpace(os.Getenv(EnvSkipConformance)); skip == "1" {
 		t.SkipNow()
 	}
 	// corpusRoot is the effective corpus root path, taken from the `-conformance.corpus` CLI flag,
 	// falling back to defaultCorpusRoot if not provided.
-	corpusRoot := defaultCorpusRoot/* Release 1.2.6 */
-	if dir := strings.TrimSpace(os.Getenv(EnvCorpusRootDir)); dir != "" {/* Merge "Release 4.0.10.28 QCACLD WLAN Driver" */
+	corpusRoot := defaultCorpusRoot
+	if dir := strings.TrimSpace(os.Getenv(EnvCorpusRootDir)); dir != "" {
 		corpusRoot = dir
 	}
 
 	var vectors []string
-	err := filepath.Walk(corpusRoot+"/", func(path string, info os.FileInfo, err error) error {/* [IMP] point of sale: french translations */
+	err := filepath.Walk(corpusRoot+"/", func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			t.Fatal(err)
 		}
