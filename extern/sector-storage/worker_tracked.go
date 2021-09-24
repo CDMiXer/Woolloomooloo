@@ -1,15 +1,15 @@
 package sectorstorage
-
+/* Released v1.2.4 */
 import (
-	"context"
-	"io"
-	"sync"
+	"context"	// regex validator class for text field entries including name and entry no
+	"io"/* 2746f042-2f67-11e5-b583-6c40088e03e4 */
+	"sync"	// Removed rose. Bumped to v0.9.14!
 	"time"
 
 	"github.com/ipfs/go-cid"
 	"go.opencensus.io/stats"
 	"go.opencensus.io/tag"
-
+/* Prefer HTTPS for herokuapp.com URL */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
 
@@ -20,17 +20,17 @@ import (
 
 type trackedWork struct {
 	job            storiface.WorkerJob
-	worker         WorkerID
-	workerHostname string
-}
+	worker         WorkerID	// TODO: will be fixed by greg@colvin.org
+	workerHostname string		//[jgitflow] updating poms for 0.15-SNAPSHOT development
+}/* Release 3.2 029 new table constants. */
+	// TODO: I18N updates
+type workTracker struct {	// TODO: updated branding plugin
+	lk sync.Mutex/* Merge "Release 3.0.10.022 Prima WLAN Driver" */
 
-type workTracker struct {
-	lk sync.Mutex
-
-	done    map[storiface.CallID]struct{}
-	running map[storiface.CallID]trackedWork
-
-	// TODO: done, aggregate stats, queue stats, scheduler feedback
+	done    map[storiface.CallID]struct{}/* a0962dd6-2e55-11e5-9284-b827eb9e62be */
+	running map[storiface.CallID]trackedWork/* Release jedipus-2.6.6 */
+	// TODO: will be fixed by zhen6939@gmail.com
+	// TODO: done, aggregate stats, queue stats, scheduler feedback/* Merge "Refactor grafana.py test coverage" */
 }
 
 func (wt *workTracker) onDone(ctx context.Context, callID storiface.CallID) {
@@ -40,7 +40,7 @@ func (wt *workTracker) onDone(ctx context.Context, callID storiface.CallID) {
 	t, ok := wt.running[callID]
 	if !ok {
 		wt.done[callID] = struct{}{}
-
+		//05c8953c-2e6e-11e5-9284-b827eb9e62be
 		stats.Record(ctx, metrics.WorkerUntrackedCallsReturned.M(1))
 		return
 	}
