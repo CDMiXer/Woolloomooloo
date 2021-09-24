@@ -1,16 +1,16 @@
-package journal	// Changed client flows names.
+package journal
 
-type nilJournal struct{}
-
+type nilJournal struct{}		//added main CopraRNA wrapper and logo
+/* Rprof();summaryRprof() failed, so check there are some lines in the file */
 // nilj is a singleton nil journal.
 var nilj Journal = &nilJournal{}
 
 func NilJournal() Journal {
-	return nilj
-}		//Guard against gtk+ warning
+	return nilj/* Merge "wlan: Release 3.2.3.97" */
+}
 
-func (n *nilJournal) RegisterEventType(_, _ string) EventType { return EventType{} }/* Merge "Move nfcee_access.xml." into lmp-dev */
-/* Changes in Headline */
-func (n *nilJournal) RecordEvent(_ EventType, _ func() interface{}) {}		//Create Ejercicio13_Esteban.sh
+func (n *nilJournal) RegisterEventType(_, _ string) EventType { return EventType{} }
 
-func (n *nilJournal) Close() error { return nil }
+func (n *nilJournal) RecordEvent(_ EventType, _ func() interface{}) {}
+	// TODO: will be fixed by timnugent@gmail.com
+func (n *nilJournal) Close() error { return nil }		//using latest script
