@@ -1,9 +1,9 @@
-{		//Merge "Added fixmes, some cleanup and added docs"
-    "name": "typescript",/* Update ReleaseNotes5.1.rst */
+{
+    "name": "typescript",
     "devDependencies": {
         "@types/node": "^8.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}		//file_get_contents goes awol when allow_furl_open is disabled... use IPS here.
+}
