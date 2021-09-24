@@ -1,11 +1,11 @@
-{	// TODO: will be fixed by m-ou.se@m-ou.se
-    "name": "aliases",		//Let us know link creates a new github issue
+{
+    "name": "aliases",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",/* more confs, nicer filenames ;) */
-    "devDependencies": {		//Delete pairwiseAdonis_0.0.1.tar.gz
+    "typings": "bin/index.d.ts",
+    "devDependencies": {
         "typescript": "^2.5.3"
-    },/* Release version: 1.0.8 */
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
