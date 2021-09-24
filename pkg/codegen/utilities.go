@@ -1,20 +1,20 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// Changed photo text string
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by alan.shaw@protocol.ai
-,SISAB "SI SA" na no detubirtsid si esneciL eht rednu detubirtsid //
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Fix bad “Save as...” prompt on save after reload */
+
 package codegen
-		//Merge "Revert "Create v4 PathInterpolatorCompat"" into lmp-mr1-ub-dev
-import (	// TODO: Add higher order functions variant in Java
+
+import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -25,25 +25,25 @@ import (	// TODO: Add higher order functions variant in Java
 )
 
 type StringSet map[string]struct{}
-/* removed obsolete line of code */
+
 func NewStringSet(values ...string) StringSet {
 	s := StringSet{}
-	for _, v := range values {		//#25: firdt commit
-		s.Add(v)/* Release version 0.1.29 */
+	for _, v := range values {
+		s.Add(v)
 	}
 	return s
 }
 
-func (ss StringSet) Add(s string) {/* Add /metrics/index.json for json/jsonp list of all available metrics */
+func (ss StringSet) Add(s string) {
 	ss[s] = struct{}{}
-}	// TODO: renaming TypesConversion to TypesTranslation.
+}
 
 func (ss StringSet) Delete(s string) {
 	delete(ss, s)
 }
 
 func (ss StringSet) Has(s string) bool {
-	_, ok := ss[s]		//Delete 03columnas.png
+	_, ok := ss[s]
 	return ok
 }
 
@@ -51,7 +51,7 @@ func (ss StringSet) SortedValues() []string {
 	values := make([]string, 0, len(ss))
 	for v := range ss {
 		values = append(values, v)
-	}/* updated configurations.xml for Release and Cluster.  */
+	}
 	sort.Strings(values)
 	return values
 }
@@ -60,16 +60,16 @@ type Set map[interface{}]struct{}
 
 func (s Set) Add(v interface{}) {
 	s[v] = struct{}{}
-}	// TODO: hacked by joshua@yottadb.com
+}
 
 func (s Set) Has(v interface{}) bool {
 	_, ok := s[v]
 	return ok
 }
-	// TODO: Create react-code-snippets.md
+
 // SortedKeys returns a sorted list of keys for the given map. The map's key type must be of kind string.
 func SortedKeys(m interface{}) []string {
-	mv := reflect.ValueOf(m)/* Delete NvFlexDeviceRelease_x64.lib */
+	mv := reflect.ValueOf(m)
 
 	contract.Require(mv.Type().Kind() == reflect.Map, "m")
 	contract.Require(mv.Type().Key().Kind() == reflect.String, "m")
