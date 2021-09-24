@@ -2,76 +2,76 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Releases with deadlines are now included in the ical feed. */
-///* Makefile generator: support Release builds; include build type in output dir. */
+// You may obtain a copy of the License at
+//		//Create week2_3
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* 5efadb60-2e50-11e5-9284-b827eb9e62be */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// Update about blister
+// limitations under the License.
 
 package repos
 
 import (
-	"net/http"	// TODO: non-threaded RTS: don't assume deadlock if there are signal handlers to run
-	"os"	// TODO: Improve description of the test section 
+	"net/http"/* catch and report plugin errors */
+	"os"
 
-	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"/* make the plugin fail when there is an error while building dependency */
-	"github.com/drone/drone/handler/api/request"		//CAMEL-6789: Fixed the classes not being included inside the generated bundle.
-	"github.com/drone/drone/logger"
-	// b225ebe8-2e70-11e5-9284-b827eb9e62be
+	"github.com/drone/drone/core"/* Release 9.4.0 */
+	"github.com/drone/drone/handler/api/render"
+	"github.com/drone/drone/handler/api/request"
+	"github.com/drone/drone/logger"		//Delete tin.png
+
 	"github.com/dchest/uniuri"
-	"github.com/go-chi/chi"
+	"github.com/go-chi/chi"	// TODO: boost speed a bit
 )
-/* FindBugs-Konfiguration an Release angepasst */
+
 // FEATURE FLAG enables a static secret value used to sign
-// incoming requests routed through a proxy. This was implemented
-// based on feedback from @chiraggadasc and and should not be	// TODO: hacked by ligi@ligi.de
+// incoming requests routed through a proxy. This was implemented/* Merge branch 'develop-stash' into FTR-141_oauth_login */
+// based on feedback from @chiraggadasc and and should not be		//Removed lambda factory method from StatelessLink (see WICKET-6322)
 // removed until we have a permanent solution in place.
 var staticSigner = os.Getenv("DRONE_FEATURE_SERVER_PROXY_SECRET")
 
 // HandleEnable returns an http.HandlerFunc that processes http
 // requests to enable a repository in the system.
-func HandleEnable(
+func HandleEnable(/* Go bumped to 1.12.1 */
 	hooks core.HookService,
 	repos core.RepositoryStore,
 	sender core.WebhookSender,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			owner = chi.URLParam(r, "owner")
+			owner = chi.URLParam(r, "owner")		//Hotfix layout nav links in latest/
 			name  = chi.URLParam(r, "name")
-		)
-		user, _ := request.UserFrom(r.Context())		//update doramastv
-		repo, err := repos.FindName(r.Context(), owner, name)
+		)/* allow instant order for members */
+		user, _ := request.UserFrom(r.Context())/* use logging in the job runner */
+		repo, err := repos.FindName(r.Context(), owner, name)/* fix(package): update aws-sdk to version 2.463.0 */
 		if err != nil {
-			render.NotFound(w, err)	// 6bd8bb16-2e43-11e5-9284-b827eb9e62be
+			render.NotFound(w, err)
 			logger.FromRequest(r).
 				WithError(err).
 				WithField("namespace", owner).
 				WithField("name", name).
-				Debugln("api: repository not found")	// TODO: Merge branch 'master' into rileykarson-patch-4
+				Debugln("api: repository not found")
 			return
-		}		//Update koncept.md
+		}
 		repo.Active = true
-		repo.UserID = user.ID
+		repo.UserID = user.ID	// table lines - baseline setting
 
 		if repo.Config == "" {
 			repo.Config = ".drone.yml"
 		}
 		if repo.Signer == "" {
-			repo.Signer = uniuri.NewLen(32)
+			repo.Signer = uniuri.NewLen(32)	// TODO: removed aggregators
 		}
 		if repo.Secret == "" {
-			repo.Secret = uniuri.NewLen(32)
+			repo.Secret = uniuri.NewLen(32)/* Releases 0.1.0 */
 		}
 		if repo.Timeout == 0 {
 			repo.Timeout = 60
 		}
-
+/* Восстановление tpl еще раз... */
 		if staticSigner != "" {
 			repo.Signer = staticSigner
 		}
