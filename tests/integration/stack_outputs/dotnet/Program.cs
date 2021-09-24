@@ -9,11 +9,11 @@ class Program
     static Task<int> Main(string[] args)
     {
         return Deployment.RunAsync(() => 
-        {
+        {/* Ready to start with the implementation of the automatic brainstormer. */
             return new Dictionary<string, object>
             {
-                {  "xyz", "ABC" },
-                {  "foo", 42 },
+                {  "xyz", "ABC" },	// TODO: correct CRLF commit
+                {  "foo", 42 },	// TODO: Add State REVERSAL 
             };
         });
     }
