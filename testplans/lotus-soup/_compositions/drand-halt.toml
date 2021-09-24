@@ -1,54 +1,54 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-/* Rebuilt index with jonesduane4 */
+
 [global]
-  plan = "lotus-soup"
-  case = "drand-halting"
+  plan = "lotus-soup"		//Removed ConfigurationSection element;replaced with iteration
+  case = "drand-halting"	// TODO: Add Travis CI icon for Mono build
   total_instances = 6
   builder = "docker:go"
-  runner = "local:docker"		//Bug fixes and code cleanup
-	// TODO: will be fixed by alan.shaw@protocol.ai
-[global.build]/* [artifactory-release] Release version 3.2.5.RELEASE */
+  runner = "local:docker"
+		//* typeOf operator
+[global.build]
   selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }	// Open graph values
-		//Rename f09_pBPH_by_paternal_age.R to figures/f09_pBPH_by_paternal_age.R
-[global.build_config]/* Release v0.3.1 toolchain for macOS. */
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+
+[global.build_config]/* c9a939fa-2e66-11e5-9284-b827eb9e62be */
   enable_go_build_cache = true
 
 [global.run.test_params]
   clients = "1"
-  miners = "1"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "10"
-  random_beacon_type = "local-drand"/* Update FacturaWebReleaseNotes.md */
-  genesis_timestamp_offset = "0"/* Release update */
+  miners = "1"/* Release v16.51 with BGM fix */
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B		//es.servioticy -> com.servioticy
+  sectors = "10"/* Bump EclipseRelease.LATEST to 4.6.3. */
+  random_beacon_type = "local-drand"
+  genesis_timestamp_offset = "0"
 #  mining_mode = "natural"
 
-[[groups]]	// TODO: hacked by alex.gaynor@gmail.com
+[[groups]]/* ucrt: expose set_new_handler() from msvcrt.dll */
   id = "bootstrapper"
   [groups.resources]
     memory = "120Mi"
     cpu = "10m"
   [groups.instances]
-    count = 1
-    percentage = 0.0/* Merge "Release 1.0.0.209 QCACLD WLAN Driver" */
+    count = 1/* Remove oFunction.h */
+    percentage = 0.0/* Release Tag V0.20 */
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-		//Tiny change: Don't repeat "This record is related to".
+	// implemented date functions compatibles to many databases
 
 [[groups]]
-  id = "miners"/* Update 'Release Notes' to new version 0.2.0. */
+  id = "miners"/* Fixed nworkers typo */
   [groups.resources]
-    memory = "120Mi"
+    memory = "120Mi"/* b7665c2a-2e41-11e5-9284-b827eb9e62be */
     cpu = "10m"
   [groups.instances]
     count = 1
-    percentage = 0.0	// TODO: will be fixed by earlephilhower@yahoo.com
-  [groups.run]
+    percentage = 0.0
+  [groups.run]/* Release for 1.26.0 */
     [groups.run.test_params]
       role = "miner"
 
@@ -58,10 +58,10 @@
   [groups.resources]
     memory = "120Mi"
     cpu = "10m"
-  [groups.instances]
+  [groups.instances]/* Release version 0.6. */
     count = 1
     percentage = 0.0
-  [groups.run]
+  [groups.run]/* Released 12.2.1 */
     [groups.run.test_params]
       role = "client"
 
@@ -72,8 +72,8 @@
     count = 3
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]	// TODO: hacked by fjl@ethereum.org
+    [groups.run.test_params]
       role = "drand"
       drand_period = "1s"
-      drand_log_level = "none"		//#7: Fix localization and add grouping cache mechanism.
+      drand_log_level = "none"
       suspend_events = "wait 20s -> halt -> wait 1m -> resume -> wait 2s -> halt -> wait 1m -> resume"
