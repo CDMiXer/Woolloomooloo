@@ -5,11 +5,11 @@
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
-    },
+    },/* Update config of my atom settings */
     "devDependencies": {
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"/* Forgot to delete a file */
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"/* Release of eeacms/www-devel:20.2.24 */
     }
 }
