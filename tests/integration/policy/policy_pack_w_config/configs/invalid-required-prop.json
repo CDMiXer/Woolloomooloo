@@ -1,5 +1,5 @@
-{	// TODO: will be fixed by steven@stebalien.com
+{
     "s3-no-public-read": {
-        "enforcementLevel": "mandatory"/* Release of version 1.0.0 */
-    }/* cambios varios */
+        "enforcementLevel": "mandatory"
+    }
 }
