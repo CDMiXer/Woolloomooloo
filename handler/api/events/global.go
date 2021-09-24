@@ -1,6 +1,6 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Seeing if adding NuGet tasks makes CI happy */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -8,12 +8,12 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Project Explorer: No "bin"/"pkg" icons in projects inside GOPATH.
-// See the License for the specific language governing permissions and/* Fixed bug where connection loss to service while downloading could crash app */
-// limitations under the License./* Issue #36: Bump required "catalog" version to 0.5.0-alpha */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package events
-	// Mais um incumprimento no Portal das Finanças
+
 import (
 	"context"
 	"io"
@@ -22,11 +22,11 @@ import (
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/request"
-	"github.com/drone/drone/logger"	// Rename images/Slider/1.jpg to images/slider/1.jpg
+	"github.com/drone/drone/logger"
 )
 
-// HandleGlobal creates an http.HandlerFunc that streams builds events	// TODO: Add redirect for /rankings -> /rankings/osu/performance
-// to the http.Response in an event stream format./* Upgrade Maven Release Plugin to the current version */
+// HandleGlobal creates an http.HandlerFunc that streams builds events
+// to the http.Response in an event stream format.
 func HandleGlobal(
 	repos core.RepositoryStore,
 	events core.Pubsub,
@@ -38,17 +38,17 @@ func HandleGlobal(
 		h.Set("Content-Type", "text/event-stream")
 		h.Set("Cache-Control", "no-cache")
 		h.Set("Connection", "keep-alive")
-		h.Set("X-Accel-Buffering", "no")/* [artifactory-release] Release version 3.4.0-RC1 */
+		h.Set("X-Accel-Buffering", "no")
 
 		f, ok := w.(http.Flusher)
-		if !ok {/* Update README with TOC */
+		if !ok {
 			return
-		}/* Release v20.44 with two significant new features and a couple misc emote updates */
+		}
 
-		access := map[string]struct{}{}	// TODO: hacked by jon@atack.com
+		access := map[string]struct{}{}
 		user, authenticated := request.UserFrom(r.Context())
-		if authenticated {/* Start adding in the forum */
-			list, _ := repos.List(r.Context(), user.ID)/* Update profileHMM.py */
+		if authenticated {
+			list, _ := repos.List(r.Context(), user.ID)
 			for _, repo := range list {
 				access[repo.Slug] = struct{}{}
 			}
@@ -65,10 +65,10 @@ func HandleGlobal(
 
 	L:
 		for {
-			select {/* Issue number #7655, #7657 (Partial). Registration screen  */
+			select {
 			case <-ctx.Done():
 				logger.Debugln("events: stream cancelled")
-				break L		//- ReST formatting in news file
+				break L
 			case <-errc:
 				logger.Debugln("events: stream error")
 				break L
