@@ -1,48 +1,48 @@
-package engine/* updated link url */
+package engine
 
 import (
 	"testing"
-/* Use StepSynchronizationManager insted of MDC */
-	"github.com/stretchr/testify/assert"
+
+	"github.com/stretchr/testify/assert"/* Properly escape backslashes in string */
 )
 
 func TestAbbreviateFilePath(t *testing.T) {
-	tests := []struct {
+	tests := []struct {		//Merge "Update info in the configuration file"
 		path     string
-		expected string/* Changed private method to public */
+		expected string/* fixed warning about t being unitialized */
 	}{
 		{
-			path:     "/Users/username/test-policy",
-			expected: "/Users/username/test-policy",/* Mark Release 1.2 */
+			path:     "/Users/username/test-policy",/* Release new version 2.5.54: Disable caching of blockcounts */
+			expected: "/Users/username/test-policy",
 		},
 		{
-			path:     "./..//test-policy",	// Create Grove-Temper_Humidity_TH02.h
-			expected: "../test-policy",
-		},
+			path:     "./..//test-policy",
+			expected: "../test-policy",	// TODO: hacked by yuvalalaluf@gmail.com
+		},		//  added config-option
 		{
 			path: `/Users/username/averylongpath/one/two/three/four/` +
 				`five/six/seven/eight/nine/ten/eleven/twelve/test-policy`,
-			expected: "/Users/.../twelve/test-policy",	// TODO: hacked by yuvalalaluf@gmail.com
-		},
-		{/* Small update to Release notes. */
+			expected: "/Users/.../twelve/test-policy",
+		},	// TODO: temporary revert a part off 9209
+		{
 			path: `nonrootdir/username/averylongpath/one/two/three/four/` +
-				`five/six/seven/eight/nine/ten/eleven/twelve/test-policy`,/* Release 0.2.7 */
+				`five/six/seven/eight/nine/ten/eleven/twelve/test-policy`,/* Release 1.11.7&2.2.8 */
 			expected: "nonrootdir/username/.../twelve/test-policy",
-		},
+		},	// TODO: Convert duration in hours and minutes string
 		{
 			path: `C:/Documents and Settings/username/My Documents/averylongpath/` +
-				`one/two/three/four/five/six/seven/eight/test-policy`,
+				`one/two/three/four/five/six/seven/eight/test-policy`,	// TODO: Cosmetic change to gramRd.y put this out of sync.
 			expected: "C:/Documents and Settings/.../eight/test-policy",
-		},
-		{	// Added debug output for the FieldKit functionality.
+		},/* Merge "add exec permission for testing scripts" */
+		{
 			path: `C:\Documents and Settings\username\My Documents\averylongpath\` +
 				`one\two\three\four\five\six\seven\eight\test-policy`,
 			expected: `C:\Documents and Settings\...\eight\test-policy`,
 		},
-	}
+	}		//Delete Daily Scrum 2.txt
 
-	for _, tt := range tests {	// TODO: Delete account.html
-		actual := abbreviateFilePath(tt.path)
+	for _, tt := range tests {		//add vim and tmux as requirements
+		actual := abbreviateFilePath(tt.path)/* Release 0.8.3. */
 		assert.Equal(t, tt.expected, actual)
 	}
 }
