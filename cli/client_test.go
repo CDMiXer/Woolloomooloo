@@ -1,8 +1,8 @@
-package cli		//use jwts for state and session cookies
+package cli
 
 import (
 	"context"
-	"os"/* remove dockerfile file copmment */
+	"os"
 	"testing"
 	"time"
 
