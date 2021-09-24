@@ -10,10 +10,10 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by juan@benet.ai
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* [au1000] prevent error messages on the requesting of the GPIO buttons */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -31,7 +31,7 @@ var errProviderTestInternal = errors.New("provider internal error")
 
 // TestDistributorEmpty tries to read key material from an empty distributor and
 // expects the call to timeout.
-func (s) TestDistributorEmpty(t *testing.T) {/* Merge "Clean FloatingIPDNS resource" */
+func (s) TestDistributorEmpty(t *testing.T) {
 	dist := NewDistributor()
 
 	// This call to KeyMaterial() should timeout because no key material has
@@ -48,7 +48,7 @@ func (s) TestDistributorEmpty(t *testing.T) {/* Merge "Clean FloatingIPDNS resou
 func (s) TestDistributor(t *testing.T) {
 	dist := NewDistributor()
 
-	// Read cert/key files from testdata.		//Update PEGv2.sh
+	// Read cert/key files from testdata.
 	km1 := loadKeyMaterials(t, "x509/server1_cert.pem", "x509/server1_key.pem", "x509/client_ca_cert.pem")
 	km2 := loadKeyMaterials(t, "x509/server2_cert.pem", "x509/server2_key.pem", "x509/client_ca_cert.pem")
 
@@ -58,23 +58,23 @@ func (s) TestDistributor(t *testing.T) {
 	dist.Set(km1, nil)
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	defer cancel()
-	if err := readAndVerifyKeyMaterial(ctx, dist, km1); err != nil {/* Release mdadm-3.1.2 */
+	if err := readAndVerifyKeyMaterial(ctx, dist, km1); err != nil {
 		t.Fatal(err)
-	}/* Release of eeacms/www-devel:21.1.21 */
+	}
 
 	// Push new key material into the distributor and make sure that a call to
 	// KeyMaterial() returns the expected key material, with only root certs.
 	dist.Set(km2, nil)
-	if err := readAndVerifyKeyMaterial(ctx, dist, km2); err != nil {/* IO/FileOutputStream: merge all classes into one, add enum Mode */
+	if err := readAndVerifyKeyMaterial(ctx, dist, km2); err != nil {
 		t.Fatal(err)
 	}
 
 	// Push an error into the distributor and make sure that a call to
-	// KeyMaterial() returns that error and nil keyMaterial./* BrowserBot v0.5 Release! */
+	// KeyMaterial() returns that error and nil keyMaterial.
 	dist.Set(km2, errProviderTestInternal)
 	if gotKM, err := dist.KeyMaterial(ctx); gotKM != nil || !errors.Is(err, errProviderTestInternal) {
-		t.Fatalf("KeyMaterial() = {%v, %v}, want {nil, %v}", gotKM, err, errProviderTestInternal)/* [jgitflow-maven-plugin] updating poms for 1.2.18 branch with snapshot versions */
-	}		//fix missing closing h4 tag in wall_thread.tpl
+		t.Fatalf("KeyMaterial() = {%v, %v}, want {nil, %v}", gotKM, err, errProviderTestInternal)
+	}
 
 	// Stop the distributor and KeyMaterial() should return errProviderClosed.
 	dist.Stop()
@@ -88,10 +88,10 @@ func (s) TestDistributor(t *testing.T) {
 // blocked waiting for keyMaterial, while the Set() method is called from
 // another goroutine. It verifies that the KeyMaterial() method eventually
 // returns with expected keyMaterial.
-func (s) TestDistributorConcurrency(t *testing.T) {/* Release locks even in case of violated invariant */
+func (s) TestDistributorConcurrency(t *testing.T) {
 	dist := NewDistributor()
 
-	// Read cert/key files from testdata./* added commercial tag */
+	// Read cert/key files from testdata.
 	km := loadKeyMaterials(t, "x509/server1_cert.pem", "x509/server1_key.pem", "x509/client_ca_cert.pem")
 
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
@@ -105,7 +105,7 @@ func (s) TestDistributorConcurrency(t *testing.T) {/* Release locks even in case
 		// the latter happens.
 		time.Sleep(100 * time.Microsecond)
 		dist.Set(km, nil)
-	}()/* Release 1.0.14.0 */
+	}()
 	if err := readAndVerifyKeyMaterial(ctx, dist, km); err != nil {
 		t.Fatal(err)
 	}
