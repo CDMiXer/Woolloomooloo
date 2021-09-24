@@ -1,15 +1,15 @@
-{
+{/* 0.12.2 Release */
     "name": "duplicate_urns",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",		//exec association specs for every dialect
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {
+    "scripts": {	// TODO: [add]some io tests
         "build": "tsc"
-    },
+    },/* Release v0.3.1.3 */
     "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
+    }		//find incremental flag
 }
