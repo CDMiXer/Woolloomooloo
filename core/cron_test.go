@@ -2,6 +2,6 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss	// TODO: hacked by martin2cai@hotmail.com
+// +build !oss
 
-package core/* Schema: number multivalued */
+package core/* Release 0.0.4  */
