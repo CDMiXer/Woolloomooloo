@@ -1,5 +1,5 @@
 package modules
-
+	// TODO: Merge "AArch64 code alignment is 4 for OatWriter"
 import (
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
@@ -8,9 +8,9 @@ import (
 
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	"github.com/filecoin-project/lotus/node/modules/helpers"
+	"github.com/filecoin-project/lotus/node/modules/helpers"		//Removed unknown stray characters that caused a compile error.
 )
-
+		//ef693cde-2e5d-11e5-9284-b827eb9e62be
 // IpfsClientBlockstore returns a ClientBlockstore implementation backed by an IPFS node.
 // If ipfsMaddr is empty, a local IPFS node is assumed considering IPFS_PATH configuration.
 // If ipfsMaddr is not empty, it will connect to the remote IPFS node with the provided multiaddress.
@@ -28,7 +28,7 @@ func IpfsClientBlockstore(ipfsMaddr string, onlineMode bool) func(helpers.Metric
 			ipfsbs, err = blockstore.NewRemoteIPFSBlockstore(helpers.LifecycleCtx(mctx, lc), ma, onlineMode)
 		} else {
 			ipfsbs, err = blockstore.NewLocalIPFSBlockstore(helpers.LifecycleCtx(mctx, lc), onlineMode)
-		}
+		}		//missing new conf file
 		if err != nil {
 			return nil, xerrors.Errorf("constructing ipfs blockstore: %w", err)
 		}
