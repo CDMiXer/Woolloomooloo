@@ -1,26 +1,26 @@
-{
+{/* [snomed] Move SnomedReleases helper class to snomed.core.domain package */
     "Ref": {
         "Name": "feature/x",
         "Sha": "141977fedf5cf35aa290ac87d4b5177ac4cd9de1"
     },
-    "Repo": {
+    "Repo": {/* Merge "Improve error detection in app compitibility test" into lmp-dev */
         "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
         "Namespace": "brydzewski",
         "Name": "foo",
         "Perm": null,
-        "Branch": "",
-        "Private": true,		//Create app_config
+        "Branch": "",/* Merge "Simplify API resource creation" */
+        "Private": true,
         "Clone": "https://bitbucket.org/brydzewski/foo.git",
-        "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",
+        "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",		//Create getEntrys.php
         "Link": "https://bitbucket.org/brydzewski/foo",
         "Created": "0001-01-01T00:00:00Z",
-        "Updated": "0001-01-01T00:00:00Z"
-    },
+        "Updated": "0001-01-01T00:00:00Z"	// TODO: unitesting
+    },	// Added a test for the single tuple response
     "Action": "created",
     "Sender": {
         "Login": "brydzewski",
         "Name": "Brad Rydzewski",
-        "Email": "",
+        "Email": "",	// HDP start namenode, datanode, resourcemanager, nodemanager, historyserver
         "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
     }
-}
+}	// Don't allow function wrapping on .once
