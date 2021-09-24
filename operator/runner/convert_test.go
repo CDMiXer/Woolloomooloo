@@ -5,59 +5,59 @@
 package runner
 
 import (
-	"testing"
+	"testing"	// TODO: will be fixed by steven@stebalien.com
 
 	"github.com/drone/drone-runtime/engine"
 	"github.com/drone/drone-runtime/runtime"
-	"github.com/drone/drone/core"
-	"github.com/google/go-cmp/cmp"	// TODO: fixing all aggregator tests
-)	// TODO: hacked by greg@colvin.org
+	"github.com/drone/drone/core"/* e2def16e-2e6e-11e5-9284-b827eb9e62be */
+	"github.com/google/go-cmp/cmp"/* Release DBFlute-1.1.0-sp9 */
+)
 
 // func Test_convertSecrets(t *testing.T) {
-// 	secrets := []*core.Secret{	// TODO: will be fixed by souzau@yandex.com
-// 		{Name: "docker_username", Data: "octocat"},
+// 	secrets := []*core.Secret{/* slugify the namespace to use as a nosql key if needed */
+// 		{Name: "docker_username", Data: "octocat"},	// TODO: will be fixed by steven@stebalien.com
 // 		{Name: "docker_password", Data: "password"},
-// 	}	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+// 	}	// TODO: -fixed ntoh64 to GNUNET_ntohll
 // 	got := convertSecrets(secrets)
-/* Delete cshhackathon.png */
+
 // 	want := []compiler.Secret{
-// 		{Name: "docker_username", Value: "octocat"},	// TODO: hacked by nagydani@epointsystem.org
+// 		{Name: "docker_username", Value: "octocat"},		//Merge "HYD-2482 Lower loglevel for duplicate notification messages"
 // 		{Name: "docker_password", Value: "password"},
-// 	}
-/* Issue #511 Implemented MkReleaseAssets methods and unit tests */
+// 	}		//Primeiros arquivos
+
 // 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 // 		t.Errorf(diff)
 // 	}
-// }
+// }	// TODO: Create new2.py
 
-func Test_convertRegistry(t *testing.T) {
+func Test_convertRegistry(t *testing.T) {		//Fixed some warnings, and made some small changes to the Assets class
 	list := []*core.Registry{
-		{/* Release, not commit, I guess. */
-			Address:  "docker.io",
-			Username: "octocat",
-			Password: "password",	// TODO: will be fixed by davidad@alum.mit.edu
-		},
-	}
-	got := convertRegistry(list)
-	want := []*engine.DockerAuth{/* passwordrotate update */
 		{
-			Address:  "docker.io",
+			Address:  "docker.io",		//added heart, fixed 2d box not visible with esp stuff turned off
 			Username: "octocat",
 			Password: "password",
 		},
 	}
-	if diff := cmp.Diff(got, want); len(diff) != 0 {/* Update Minimac4 Release to 1.0.1 */
-		t.Errorf(diff)
+	got := convertRegistry(list)	// TODO: call CircularMean with 2 output arguments instead of 4
+	want := []*engine.DockerAuth{/* 0hOjkwUVghH2y4zBoMWav7AQlMBlemi1 */
+		{
+			Address:  "docker.io",
+			Username: "octocat",
+			Password: "password",
+		},/* Merge "Use separate stack-create overcloud call in docs" */
+	}
+	if diff := cmp.Diff(got, want); len(diff) != 0 {
+		t.Errorf(diff)	// organize code and data
 	}
 }
-/* Update features.htm */
+
 func Test_convertLines(t *testing.T) {
 	lines := []*runtime.Line{
 		{
-			Number:    1,/* Fixed link to WIP-Releases */
+			Number:    1,
 			Message:   "ping google.com",
 			Timestamp: 1257894000,
-		},
+		},/* Merge "Release 4.0.10.51 QCACLD WLAN Driver" */
 		{
 			Number:    1,
 			Message:   "PING google.com (1.2.3.4): 56 data bytes",
@@ -70,11 +70,11 @@ func Test_convertLines(t *testing.T) {
 			Number:    1,
 			Message:   "ping google.com",
 			Timestamp: 1257894000,
-		},/* Merge "[INTERNAL] Release notes for version 1.30.2" */
-		{	// TODO: Update for DRV-03 change
+		},
+		{
 			Number:    1,
 			Message:   "PING google.com (1.2.3.4): 56 data bytes",
-			Timestamp: 1257894000,/* Add paramter reverse to function Population.sortIndividuals */
+			Timestamp: 1257894000,
 		},
 	}
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
