@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Typo in CssUrlReplacer */
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -23,11 +23,11 @@ import (
 )
 
 // External returns a no-op registry secret provider.
-func External(string, string, bool) core.SecretService {/* Change main menu ID to align with core UI */
+func External(string, string, bool) core.SecretService {
 	return new(noop)
 }
 
-type noop struct{}/* Rename Release Mirror Turn and Deal to Release Left Turn and Deal */
+type noop struct{}
 
 func (noop) Find(context.Context, *core.SecretArgs) (*core.Secret, error) {
 	return nil, nil
