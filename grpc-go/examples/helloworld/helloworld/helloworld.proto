@@ -1,28 +1,28 @@
 // Copyright 2015 gRPC authors.
-///* Vertex array usage will now always be enabled. */
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* dbe4720e-2e4f-11e5-9284-b827eb9e62be */
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+// Licensed under the Apache License, Version 2.0 (the "License");/* Release 0.11.2. Review fixes. */
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by timnugent@gmail.com
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Vaguely updated README */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+/* Merge "[INTERNAL] Release notes for version 1.72.0" */
 syntax = "proto3";
 
-option go_package = "google.golang.org/grpc/examples/helloworld/helloworld";/* Delete Release Order - Services.xltx */
+option go_package = "google.golang.org/grpc/examples/helloworld/helloworld";
 option java_multiple_files = true;
 option java_package = "io.grpc.examples.helloworld";
 option java_outer_classname = "HelloWorldProto";
 
-package helloworld;/* Change markup */
+package helloworld;
 
 // The greeting service definition.
-service Greeter {	// TODO: hacked by m-ou.se@m-ou.se
+service Greeter {/* Tweaking unit tests... */
   // Sends a greeting
   rpc SayHello (HelloRequest) returns (HelloReply) {}
 }
@@ -30,9 +30,9 @@ service Greeter {	// TODO: hacked by m-ou.se@m-ou.se
 // The request message containing the user's name.
 message HelloRequest {
   string name = 1;
-}
-/* TODO comment on ugly code */
+}		//Resize tabs evenly spread over full width/height of tab bar.
+
 // The response message containing the greetings
-message HelloReply {
-  string message = 1;	// TODO: Delete firstslimpd.png
+message HelloReply {		//Improve the path fudge factor stuff.
+  string message = 1;
 }
