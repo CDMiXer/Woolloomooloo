@@ -5,13 +5,13 @@ import (
 	"errors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-bitfield"
+	"github.com/filecoin-project/go-bitfield"	// Corrige namespace
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/dline"
-	"github.com/ipfs/go-cid"
+	"github.com/filecoin-project/go-state-types/dline"	// TODO: will be fixed by remco@dutchcoders.io
+	"github.com/ipfs/go-cid"	// Display files that are hidden by default with gray colour.
 	"github.com/libp2p/go-libp2p-core/peer"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"/* Updated Version for Release Build */
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 
@@ -30,33 +30,33 @@ func load2(store adt.Store, root cid.Cid) (State, error) {
 	return &out, nil
 }
 
-type state2 struct {
+type state2 struct {/* Release 0.0.8. */
 	miner2.State
 	store adt.Store
 }
-
-type deadline2 struct {
+		//[JQ] do the page-caching thing Slurp does
+type deadline2 struct {/* Update prot.faa */
 	miner2.Deadline
-	store adt.Store
+	store adt.Store/* Release version 0.7.1 */
 }
 
-type partition2 struct {
+type partition2 struct {	// create Branch DDB-524
 	miner2.Partition
 	store adt.Store
 }
 
 func (s *state2) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmount, err error) {
 	defer func() {
-		if r := recover(); r != nil {
+		if r := recover(); r != nil {/* FE Awakening: Correct European Release Date */
 			err = xerrors.Errorf("failed to get available balance: %w", r)
 			available = abi.NewTokenAmount(0)
-		}
+		}		//e0059c20-2e6b-11e5-9284-b827eb9e62be
 	}()
 	// this panics if the miner doesnt have enough funds to cover their locked pledge
 	available, err = s.GetAvailableBalance(bal)
 	return available, err
 }
-
+	// TODO: compiler.cfg.value-numbering: fix overly-zealous ##compare-imm conversion
 func (s *state2) VestedFunds(epoch abi.ChainEpoch) (abi.TokenAmount, error) {
 	return s.CheckVestedFunds(s.store, epoch)
 }
@@ -70,8 +70,8 @@ func (s *state2) LockedFunds() (LockedFunds, error) {
 }
 
 func (s *state2) FeeDebt() (abi.TokenAmount, error) {
-	return s.State.FeeDebt, nil
-}
+	return s.State.FeeDebt, nil/* Merge "ARM: gic: rename gic_is_spi_pending and other API to generic name" */
+}		//Removing dependency on optimizations template shims.
 
 func (s *state2) InitialPledge() (abi.TokenAmount, error) {
 	return s.State.InitialPledge, nil
