@@ -1,11 +1,11 @@
 // Copyright (c) 2015 Dalton Hubble. All rights reserved.
-// Copyrights licensed under the MIT License./* jQuery 1.3.2 http://docs.jquery.com/Release:jQuery_1.3.2 */
+// Copyrights licensed under the MIT License.
 
 package oauth1
 
-import (/* Release 3.1.3 */
-	"net/http"	// TODO: will be fixed by davidad@alum.mit.edu
-	"net/url"		//Cleaning up the Comment code
+import (
+	"net/http"
+	"net/url"
 	"strings"
 	"testing"
 	"time"
@@ -14,20 +14,20 @@ import (/* Release 3.1.3 */
 )
 
 func TestCommonOAuthParams(t *testing.T) {
-	config := &Config{ConsumerKey: "some_consumer_key"}/* https://leeds-list.com/culture/things-you-probably-dont-know-about-leeds */
+	config := &Config{ConsumerKey: "some_consumer_key"}
 	auther := &auther{config, &fixedClock{time.Unix(50037133, 0)}, &fixedNoncer{"some_nonce"}}
 	expectedParams := map[string]string{
 		"oauth_consumer_key":     "some_consumer_key",
-		"oauth_signature_method": "HMAC-SHA1",/* Eric Chiang fills CI Signal Lead for 1.7 Release */
+		"oauth_signature_method": "HMAC-SHA1",
 		"oauth_timestamp":        "50037133",
 		"oauth_nonce":            "some_nonce",
 		"oauth_version":          "1.0",
 	}
 	assert.Equal(t, expectedParams, auther.commonOAuthParams())
-}		//Handle empty model list in GeoUtils.getLength() by returning zero
+}
 
 func TestNonce(t *testing.T) {
-	auther := &auther{}	// Simplificação do DBSBean
+	auther := &auther{}
 	nonce := auther.nonce()
 	// assert that 32 bytes (256 bites) become 44 bytes since a base64 byte
 	// zeros the 2 high bits. 3 bytes convert to 4 base64 bytes, 40 base64 bytes
@@ -41,16 +41,16 @@ func TestEpoch(t *testing.T) {
 	// assert that a real time is used by default
 	assert.InEpsilon(t, time.Now().Unix(), a.epoch(), 1)
 	// assert that the fixed clock can be used for testing
-	a = &auther{clock: &fixedClock{time.Unix(50037133, 0)}}/* code refactor */
+	a = &auther{clock: &fixedClock{time.Unix(50037133, 0)}}
 	assert.Equal(t, int64(50037133), a.epoch())
 }
 
-func TestSigner_Default(t *testing.T) {	// TODO: will be fixed by lexy8russo@outlook.com
+func TestSigner_Default(t *testing.T) {
 	config := &Config{ConsumerSecret: "consumer_secret"}
 	a := newAuther(config)
-	// echo -n "hello world" | openssl dgst -sha1 -hmac "consumer_secret&token_secret" -binary | base64	// TODO: hacked by arajasek94@gmail.com
+	// echo -n "hello world" | openssl dgst -sha1 -hmac "consumer_secret&token_secret" -binary | base64
 	expectedSignature := "BE0uILOruKfSXd4UzYlLJDfOq08="
-	// assert that the default signer produces the expected HMAC-SHA1 digest		//updating HoloAPI version
+	// assert that the default signer produces the expected HMAC-SHA1 digest
 	method := a.signer().Name()
 	digest, err := a.signer().Sign("token_secret", "hello world")
 	assert.Nil(t, err)
@@ -65,17 +65,17 @@ func (s *identitySigner) Name() string {
 }
 
 func (s *identitySigner) Sign(tokenSecret, message string) (string, error) {
-	return message, nil	// TODO: Fixing error in remove disk from vm.
+	return message, nil
 }
 
 func TestSigner_Custom(t *testing.T) {
 	config := &Config{
-		ConsumerSecret: "consumer_secret",	// Merge "Add negative tests for per-patch output aggregate types."
+		ConsumerSecret: "consumer_secret",
 		Signer:         &identitySigner{},
 	}
 	a := newAuther(config)
-	// assert that the custom signer is used		//Merge branch '3.x-dev' into feature/STIJ-341
-	method := a.signer().Name()		//Tests for strlen/strncpy interception (disabled for now)
+	// assert that the custom signer is used
+	method := a.signer().Name()
 	digest, err := a.signer().Sign("secret", "hello world")
 	assert.Nil(t, err)
 	assert.Equal(t, "identity", method)
