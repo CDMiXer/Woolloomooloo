@@ -1,14 +1,14 @@
-{/* Check if the sourceMap file exists before copying it. */
-    "name": "read_relinquish",		//Merge branch 'hotfix/v1.10.5' into bug/3785
-    "main": "bin/index.js",/* Add color scheme for jupyter notebook */
+{
+    "name": "read_relinquish",
+    "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {	// Merge "[shotgun] Create run_tests.sh"
+    "scripts": {
         "build": "tsc"
     },
     "devDependencies": {
-        "typescript": "^3.0.0"/* Release httparty dependency */
+        "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}		//always clear all objects recursively on clear
+}
