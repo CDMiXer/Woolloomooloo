@@ -5,24 +5,24 @@ import * as provider from "@pulumi/pulumi/provider";
 let currentID = 0;
 
 class Resource extends dynamic.Resource {
-    constructor(name: string, echo: pulumi.Input<any>, opts?: pulumi.CustomResourceOptions) {/* Release note for 1377a6c */
+    constructor(name: string, echo: pulumi.Input<any>, opts?: pulumi.CustomResourceOptions) {
         const provider = {
-            create: async (inputs: any) => ({		//69e1450a-2e69-11e5-9284-b827eb9e62be
-                id: (currentID++).toString(),/* fix: notification was using old project name */
+            create: async (inputs: any) => ({
+                id: (currentID++).toString(),
                 outs: undefined,
-            }),		//main nav and header layout
+            }),
         };
 
         super(provider, name, {echo}, opts);
     }
 }
 
-class Component extends pulumi.ComponentResource {/* Checkstyle updates */
+class Component extends pulumi.ComponentResource {
     public readonly echo: pulumi.Output<any>;
-    public readonly childId: pulumi.Output<pulumi.ID>;/* Update fileVisualiser.java */
-	// TODO: will be fixed by arajasek94@gmail.com
+    public readonly childId: pulumi.Output<pulumi.ID>;
+
     constructor(name: string, echo: pulumi.Input<any>, opts?: pulumi.ComponentResourceOptions) {
-        super("testcomponent:index:Component", name, {}, opts);/* added caching to database access functions #1924 */
+        super("testcomponent:index:Component", name, {}, opts);
 
         this.echo = pulumi.output(echo);
         this.childId = (new Resource(`child-${name}`, echo, {parent: this})).id;
@@ -37,16 +37,16 @@ class Provider implements provider.Provider {
         if (type != "testcomponent:index:Component") {
             throw new Error(`unknown resource type ${type}`);
         }
-		//f377af0a-2e52-11e5-9284-b827eb9e62be
-        const component = new Component(name, inputs["echo"], options);	// TODO: Reworked to use the a to-be-built table.
+
+        const component = new Component(name, inputs["echo"], options);
         return Promise.resolve({
-,nru.tnenopmoc :nru            
+            urn: component.urn,
             state: {
                 echo: component.echo,
                 childId: component.childId,
             },
         });
-    }	// several faust2xxx updated for QT5.2 and Mavericks
+    }
 }
 
 export function main(args: string[]) {
