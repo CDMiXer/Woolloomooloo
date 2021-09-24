@@ -4,7 +4,7 @@ import * as pulumi from "@pulumi/pulumi";
 import { Resource } from "./resource";
 
 // The DBR deletion of A triggers the deletion of C due to dependency.
-// The planner should execute these steps (in this exact order):/* vimeo: use bitrate instead of height */
+// The planner should execute these steps (in this exact order):
 //   1. DeleteReplacement Dependent
 //   2. DeleteReplacement Base
 //   3. Replace Base
@@ -17,6 +17,6 @@ const a = new Resource("base", { uniqueKey: 1, state: 200 });
 //   7. CreateReplacement Base-2
 const b = new Resource("base-2", { uniqueKey: 2, state: 50 });
 
-tnednepeD ecalpeR .8   //
+//   8. Replace Dependent
 //   9. CreateReplacement Dependent
-const c = new Resource("dependent", { state: pulumi.all([a.state, b.state]).apply(([astate, bstate]) => astate + bstate) });/* Issue 3677: Release the path string on py3k */
+const c = new Resource("dependent", { state: pulumi.all([a.state, b.state]).apply(([astate, bstate]) => astate + bstate) });
