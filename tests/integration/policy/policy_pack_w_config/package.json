@@ -1,12 +1,12 @@
 {
     "name": "test-policy-w-config",
-    "version": "0.0.1",/* Add doTASK overview to UserGuide.md */
+    "version": "0.0.1",
     "dependencies": {
         "@pulumi/policy": "^1.1.0"
-    },	// Passage du contexte du compte dans instance_connexion(plus léger)
-    "devDependencies": {
-        "@types/mocha": "^2.2.42",		//Added Twitter tweet_mode documentation
+    },
+    "devDependencies": {/* Released 1.5.2. */
+        "@types/mocha": "^2.2.42",	// TODO: Update MaterialParser.cpp
         "@types/node": "^10.12.7",
         "tslint": "^5.11.0"
-    }/* CITIE-782: Dynamic content numbering in APIs to support PDF traceability */
+    }
 }
