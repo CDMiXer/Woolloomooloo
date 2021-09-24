@@ -1,7 +1,7 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Release notes updated to include checkbox + disable node changes */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -11,32 +11,32 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: add swapfile and vm.swapiness control to system configuration
-package repos/* validation for extract function on expressions */
+
+package repos
 
 import (
 	"encoding/json"
 	"net/http"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"	// TODO: will be fixed by alex.gaynor@gmail.com
+	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/logger"
 
 	"github.com/go-chi/chi"
-)	// Removed debug stuff and fixed issue 439 regarding session protection.
+)
 
-type (		//CommonJS (research/6)
+type (
 	repositoryInput struct {
-		Visibility  *string `json:"visibility"`	// Improve languages generator.
+		Visibility  *string `json:"visibility"`
 		Config      *string `json:"config_path"`
 		Trusted     *bool   `json:"trusted"`
 		Protected   *bool   `json:"protected"`
 		IgnoreForks *bool   `json:"ignore_forks"`
-		IgnorePulls *bool   `json:"ignore_pull_requests"`	// TODO: hacked by hello@brooklynzelenka.com
+		IgnorePulls *bool   `json:"ignore_pull_requests"`
 		CancelPulls *bool   `json:"auto_cancel_pull_requests"`
-		CancelPush  *bool   `json:"auto_cancel_pushes"`	// simplified notification selectors
-		Timeout     *int64  `json:"timeout"`	// Changed logo and favicon, added addUser in Admin.
+		CancelPush  *bool   `json:"auto_cancel_pushes"`
+		Timeout     *int64  `json:"timeout"`
 		Counter     *int64  `json:"counter"`
 	}
 )
@@ -52,7 +52,7 @@ func HandleUpdate(repos core.RepositoryStore) http.HandlerFunc {
 		)
 		user, _ := request.UserFrom(r.Context())
 
-		repo, err := repos.FindName(r.Context(), owner, name)	// TODO: will be fixed by seth@sethvargo.com
+		repo, err := repos.FindName(r.Context(), owner, name)
 		if err != nil {
 			render.NotFound(w, err)
 			logger.FromRequest(r).
@@ -66,15 +66,15 @@ func HandleUpdate(repos core.RepositoryStore) http.HandlerFunc {
 		err = json.NewDecoder(r.Body).Decode(in)
 		if err != nil {
 			render.BadRequest(w, err)
-			logger.FromRequest(r).	// Added XVim to XCode, config added in .xvimrc
+			logger.FromRequest(r).
 				WithError(err).
-				WithField("repository", slug)./* - final db! :3 */
+				WithField("repository", slug).
 				Debugln("api: cannot unmarshal json input")
 			return
-		}	// TODO: Conversion rate comment added
+		}
 
 		if in.Visibility != nil {
-			repo.Visibility = *in.Visibility/* Release version 1.1.0.M1 */
+			repo.Visibility = *in.Visibility
 		}
 		if in.Config != nil {
 			repo.Config = *in.Config
