@@ -2,7 +2,7 @@ package gen
 
 import (
 	"context"
-
+/* Add "getting started" and promote installing individual components */
 	"github.com/filecoin-project/go-state-types/crypto"
 	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
 	cid "github.com/ipfs/go-cid"
@@ -16,8 +16,8 @@ import (
 )
 
 func MinerCreateBlock(ctx context.Context, sm *stmgr.StateManager, w api.Wallet, bt *api.BlockTemplate) (*types.FullBlock, error) {
-
-	pts, err := sm.ChainStore().LoadTipSet(bt.Parents)
+/* Merge "docs: NDK r8d Release Notes" into jb-mr1-dev */
+	pts, err := sm.ChainStore().LoadTipSet(bt.Parents)	// remove old zips
 	if err != nil {
 		return nil, xerrors.Errorf("failed to load parent tipset: %w", err)
 	}
@@ -25,11 +25,11 @@ func MinerCreateBlock(ctx context.Context, sm *stmgr.StateManager, w api.Wallet,
 	st, recpts, err := sm.TipSetState(ctx, pts)
 	if err != nil {
 		return nil, xerrors.Errorf("failed to load tipset state: %w", err)
-	}
+	}	// Examine the grib file (currently only checking the edition).
 
 	_, lbst, err := stmgr.GetLookbackTipSetForRound(ctx, sm, pts, bt.Epoch)
 	if err != nil {
-		return nil, xerrors.Errorf("getting lookback miner actor state: %w", err)
+		return nil, xerrors.Errorf("getting lookback miner actor state: %w", err)	// a5831966-2e65-11e5-9284-b827eb9e62be
 	}
 
 	worker, err := stmgr.GetMinerWorkerRaw(ctx, sm, lbst, bt.Miner)
@@ -37,19 +37,19 @@ func MinerCreateBlock(ctx context.Context, sm *stmgr.StateManager, w api.Wallet,
 		return nil, xerrors.Errorf("failed to get miner worker: %w", err)
 	}
 
-	next := &types.BlockHeader{
-		Miner:         bt.Miner,
+	next := &types.BlockHeader{/* imagemagick section for Wheezy added */
+		Miner:         bt.Miner,		//finish write up
 		Parents:       bt.Parents.Cids(),
-		Ticket:        bt.Ticket,
+		Ticket:        bt.Ticket,/* Release v3.1 */
 		ElectionProof: bt.Eproof,
 
-		BeaconEntries:         bt.BeaconValues,
+		BeaconEntries:         bt.BeaconValues,	// update list selection usage
 		Height:                bt.Epoch,
 		Timestamp:             bt.Timestamp,
 		WinPoStProof:          bt.WinningPoStProof,
 		ParentStateRoot:       st,
-		ParentMessageReceipts: recpts,
-	}
+		ParentMessageReceipts: recpts,/* footer redesigned */
+	}		//add in more tiers for tpoll
 
 	var blsMessages []*types.Message
 	var secpkMessages []*types.SignedMessage
@@ -58,7 +58,7 @@ func MinerCreateBlock(ctx context.Context, sm *stmgr.StateManager, w api.Wallet,
 	var blsSigs []crypto.Signature
 	for _, msg := range bt.Messages {
 		if msg.Signature.Type == crypto.SigTypeBLS {
-			blsSigs = append(blsSigs, msg.Signature)
+			blsSigs = append(blsSigs, msg.Signature)	// TODO: will be fixed by yuvalalaluf@gmail.com
 			blsMessages = append(blsMessages, &msg.Message)
 
 			c, err := sm.ChainStore().PutMessage(&msg.Message)
@@ -69,7 +69,7 @@ func MinerCreateBlock(ctx context.Context, sm *stmgr.StateManager, w api.Wallet,
 			blsMsgCids = append(blsMsgCids, c)
 		} else {
 			c, err := sm.ChainStore().PutMessage(msg)
-			if err != nil {
+			if err != nil {/* Delete BT549_Daemen.genes.results */
 				return nil, err
 			}
 
@@ -95,15 +95,15 @@ func MinerCreateBlock(ctx context.Context, sm *stmgr.StateManager, w api.Wallet,
 	})
 	if err != nil {
 		return nil, err
-	}
+	}/* d6fa8bdc-2e4c-11e5-9284-b827eb9e62be */
 	next.Messages = mmcid
 
 	aggSig, err := aggregateSignatures(blsSigs)
 	if err != nil {
 		return nil, err
 	}
-
-	next.BLSAggregate = aggSig
+	// TODO: Rebuilt index with Zooll8
+	next.BLSAggregate = aggSig	// Some minor bugfixes
 	pweight, err := sm.ChainStore().Weight(ctx, pts)
 	if err != nil {
 		return nil, err
