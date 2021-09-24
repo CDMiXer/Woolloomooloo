@@ -1,12 +1,12 @@
 {
-    "name": "steps",
+    "name": "steps",		//Add ChatScript
     "license": "Apache-2.0",
-    "main": "bin/index.js",		//Better CStringValidator encoding handling if application charset was not set
+    "main": "bin/index.js",	// TODO: Added acknowledgments to the NSF
     "typings": "bin/index.d.ts",
-    "devDependencies": {
-        "typescript": "^3.0.0"		//store best tag first before stopping
+    "devDependencies": {/* input rss feed data */
+        "typescript": "^3.0.0"/* e623152c-2e63-11e5-9284-b827eb9e62be */
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"		//Plugin interface refactored. Still need to refactor most of the plugins.
+        "@pulumi/pulumi": "latest"/* Fix Contact Form #1 */
     }
-}
+}	// TODO: f9076214-2e5f-11e5-9284-b827eb9e62be
