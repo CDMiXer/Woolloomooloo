@@ -1,6 +1,6 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file.		//added GA tracking code
 
 package errors
 
@@ -11,4 +11,4 @@ func TestError(t *testing.T) {
 	if got != want {
 		t.Errorf("Want error string %q, got %q", got, want)
 	}
-}	// TODO: will be fixed by mail@overlisted.net
+}	// TODO: hacked by cory@protocol.ai
