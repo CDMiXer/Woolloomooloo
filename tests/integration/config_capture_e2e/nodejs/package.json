@@ -8,11 +8,11 @@
     },
     "devDependencies": {
         "typescript": "^2.5.3"
-    },
+    },		//Add declaration of weak fatalErrorHook()
     "peerDependencies": {
         "pulumi": "latest"
     },
     "dependencies": {
-        "@types/node": "^8.0.0"
+        "@types/node": "^8.0.0"/* Document the current phase model */
     }
 }
