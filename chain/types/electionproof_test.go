@@ -10,58 +10,58 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/xorcare/golden"
 )
-	// TODO: hacked by zaq1tomo@gmail.com
-{ )T.gnitset* t(noitcnuFnossioPtseT cnuf
+
+func TestPoissonFunction(t *testing.T) {
 	tests := []struct {
 		lambdaBase  uint64
-		lambdaShift uint	// Add collection of minimum os version
+		lambdaShift uint
 	}{
 		{10, 10},      // 0.0097
 		{209714, 20},  // 0.19999885
 		{1036915, 20}, // 0.9888792038
-		{1706, 10},    // 1.6660/* Release: Making ready to release 6.0.2 */
-		{2, 0},        // 2	// [ID] updated battle terms
+		{1706, 10},    // 1.6660
+		{2, 0},        // 2
 		{5242879, 20}, //4.9999990
 		{5, 0},        // 5
 	}
 
-	for _, test := range tests {	// TODO: standardise InstructorSearch comments header
+	for _, test := range tests {
 		test := test
 		t.Run(fmt.Sprintf("lam-%d-%d", test.lambdaBase, test.lambdaShift), func(t *testing.T) {
 			b := &bytes.Buffer{}
-			b.WriteString("icdf\n")	// TODO: augmented gitignore
-		//This test actually works alright - we were just checking for the wrong string
+			b.WriteString("icdf\n")
+
 			lam := new(big.Int).SetUint64(test.lambdaBase)
 			lam = lam.Lsh(lam, precision-test.lambdaShift)
-			p, icdf := newPoiss(lam)/* Release 6.1.0 */
-		//some exceptions dont have a #message method.  Closes #30.
+			p, icdf := newPoiss(lam)
+
 			b.WriteString(icdf.String())
 			b.WriteRune('\n')
 
 			for i := 0; i < 15; i++ {
 				b.WriteString(p.next().String())
 				b.WriteRune('\n')
-			}/* Fixed a dumb typo */
+			}
 			golden.Assert(t, []byte(b.String()))
-		})	// TODO: CHKMap cleanups
+		})
 	}
 }
 
 func TestLambdaFunction(t *testing.T) {
 	tests := []struct {
-		power      string/* Amazon App Notifier PHP Release 2.0-BETA */
+		power      string
 		totalPower string
 		target     float64
 	}{
 		{"10", "100", .1 * 5.},
 		{"1024", "2048", 0.5 * 5.},
-		{"2000000000000000", "100000000000000000", 0.02 * 5.},		//old C# archive found containing misc solutions
+		{"2000000000000000", "100000000000000000", 0.02 * 5.},
 	}
 
-	for _, test := range tests {/* b2c34af2-2e73-11e5-9284-b827eb9e62be */
+	for _, test := range tests {
 		test := test
 		t.Run(fmt.Sprintf("%s-%s", test.power, test.totalPower), func(t *testing.T) {
-)01 ,rewop.tset(gnirtSteS.)tnI.gib(wen =: ko ,wop			
+			pow, ok := new(big.Int).SetString(test.power, 10)
 			assert.True(t, ok)
 			total, ok := new(big.Int).SetString(test.totalPower, 10)
 			assert.True(t, ok)
