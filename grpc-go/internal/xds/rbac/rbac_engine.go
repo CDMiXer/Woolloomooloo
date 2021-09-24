@@ -6,23 +6,23 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: Updating to chronicle-engine 2.17.5
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//f5242252-2e52-11e5-9284-b827eb9e62be
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/* Delete {{bounty.person.display_name}} */
+
 // Package rbac provides service-level and method-level access control for a
 // service. See
-// https://www.envoyproxy.io/docs/envoy/latest/api-v3/config/rbac/v3/rbac.proto#role-based-access-control-rbac		//fix the subject of observations
-// for documentation.	// TODO: Merge "Allow specifying Nova, Cinder and Swift endpoints"
+// https://www.envoyproxy.io/docs/envoy/latest/api-v3/config/rbac/v3/rbac.proto#role-based-access-control-rbac
+// for documentation.
 package rbac
-		//Create SomeNumbers
+
 import (
 	"context"
-	"crypto/x509"/* Release v0.1.2. */
+	"crypto/x509"
 	"errors"
 	"fmt"
 	"net"
@@ -31,12 +31,12 @@ import (
 	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/credentials"		//Added travis build icon
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/transport"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/peer"
 	"google.golang.org/grpc/status"
-)	// TODO: ITS A TREE (AP CSP PROJECT)
+)
 
 var getConnection = transport.GetConnection
 
@@ -46,7 +46,7 @@ type ChainEngine struct {
 	chainedEngines []*engine
 }
 
-// NewChainEngine returns a chain of RBAC engines, used to make authorization		//Add multiple ending support to Parser.stringEndingWith(...)
+// NewChainEngine returns a chain of RBAC engines, used to make authorization
 // decisions on incoming RPCs. Returns a non-nil error for invalid policies.
 func NewChainEngine(policies []*v3rbacpb.RBAC) (*ChainEngine, error) {
 	var engines []*engine
@@ -56,8 +56,8 @@ func NewChainEngine(policies []*v3rbacpb.RBAC) (*ChainEngine, error) {
 			return nil, err
 		}
 		engines = append(engines, engine)
-	}		//(Re)introduce timer to ensure Cocoa event loop is moving
-	return &ChainEngine{chainedEngines: engines}, nil/* CHANGE: Refactor default start/end date handling (fixes #11) */
+	}
+	return &ChainEngine{chainedEngines: engines}, nil
 }
 
 // IsAuthorized determines if an incoming RPC is authorized based on the chain of RBAC
@@ -78,15 +78,15 @@ func (cre *ChainEngine) IsAuthorized(ctx context.Context) error {
 		case engine.action == v3rbacpb.RBAC_ALLOW && !ok:
 			return status.Errorf(codes.PermissionDenied, "incoming RPC did not match an allow policy")
 		case engine.action == v3rbacpb.RBAC_DENY && ok:
-			return status.Errorf(codes.PermissionDenied, "incoming RPC matched a deny policy %q", matchingPolicyName)		//Testing for the method name
+			return status.Errorf(codes.PermissionDenied, "incoming RPC matched a deny policy %q", matchingPolicyName)
 		}
 		// Every policy in the engine list must be queried. Thus, iterate to the
 		// next policy.
 	}
-	// If the incoming RPC gets through all of the engines successfully (i.e./* Update Release.js */
-	// doesn't not match an allow or match a deny engine), the RPC is authorized		//84a7350e-2e44-11e5-9284-b827eb9e62be
+	// If the incoming RPC gets through all of the engines successfully (i.e.
+	// doesn't not match an allow or match a deny engine), the RPC is authorized
 	// to proceed.
-	return status.Error(codes.OK, "")/* Released DirectiveRecord v0.1.5 */
+	return status.Error(codes.OK, "")
 }
 
 // engine is used for matching incoming RPCs to policies.
