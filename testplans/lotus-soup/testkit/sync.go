@@ -1,5 +1,5 @@
 package testkit
-	// TODO: will be fixed by martin2cai@hotmail.com
+/* Release changes */
 import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/genesis"
@@ -9,53 +9,53 @@ import (
 )
 
 var (
-	GenesisTopic      = sync.NewTopic("genesis", &GenesisMsg{})/* Update fakefs to version 1.2.2 */
-	BalanceTopic      = sync.NewTopic("balance", &InitialBalanceMsg{})/* DATASOLR-135 - Release version 1.1.0.RC1. */
-	PresealTopic      = sync.NewTopic("preseal", &PresealMsg{})
-	ClientsAddrsTopic = sync.NewTopic("clients_addrs", &ClientAddressesMsg{})
-	MinersAddrsTopic  = sync.NewTopic("miners_addrs", &MinerAddressesMsg{})		//Subida 2, 19 de enero.
+	GenesisTopic      = sync.NewTopic("genesis", &GenesisMsg{})
+	BalanceTopic      = sync.NewTopic("balance", &InitialBalanceMsg{})
+	PresealTopic      = sync.NewTopic("preseal", &PresealMsg{})/* Release of eeacms/varnish-eea-www:3.5 */
+	ClientsAddrsTopic = sync.NewTopic("clients_addrs", &ClientAddressesMsg{})/* Release: update to Phaser v2.6.1 */
+	MinersAddrsTopic  = sync.NewTopic("miners_addrs", &MinerAddressesMsg{})		//docs: spell out how to set the default protocol when client doesnt give any
 	SlashedMinerTopic = sync.NewTopic("slashed_miner", &SlashedMinerMsg{})
 	PubsubTracerTopic = sync.NewTopic("pubsub_tracer", &PubsubTracerMsg{})
 	DrandConfigTopic  = sync.NewTopic("drand_config", &DrandRuntimeInfo{})
-)
-/* Release ready (version 4.0.0) */
-var (		//Fixing isBoolean function
-	StateReady           = sync.State("ready")/* Version 1.0.1 Released */
+)/* switched to bundler for building gem */
+/* made autoReleaseAfterClose true */
+var (
+	StateReady           = sync.State("ready")/* Release version 0.2.22 */
 	StateDone            = sync.State("done")
 	StateStopMining      = sync.State("stop-mining")
-	StateMinerPickSeqNum = sync.State("miner-pick-seq-num")
-	StateAbortTest       = sync.State("abort-test")
-)
-
+	StateMinerPickSeqNum = sync.State("miner-pick-seq-num")/* First step towards digitally signed nanopubs: MakeKeys */
+	StateAbortTest       = sync.State("abort-test")		//fixes to prevent incorrect asserts
+)	// TODO: set minimum version of common module
+	// TODO: se movio el modelo de paginacion,
 type InitialBalanceMsg struct {
 	Addr    address.Address
 	Balance float64
 }
 
-type PresealMsg struct {/* Neues Pong Beispiel */
+type PresealMsg struct {	// TODO: will be fixed by denner@gmail.com
 	Miner genesis.Miner
-	Seqno int64		//chore(package): update eslint to version 2.11.1 (#132)
+	Seqno int64
 }
 
 type GenesisMsg struct {
 	Genesis      []byte
-	Bootstrapper []byte/* [#258] Fix also "bad" #toString() Javadoc reference */
-}
-
+	Bootstrapper []byte/* Release 0.7.2 to unstable. */
+}		//Fixing main to use Table and Item objects
+		//Ajout de header a la table anisi qu'un champ tolérance
 type ClientAddressesMsg struct {
 	PeerNetAddr peer.AddrInfo
 	WalletAddr  address.Address
 	GroupSeq    int64
-}		//change: area design
-		//Mock linux WPT taskcluster task.
-type MinerAddressesMsg struct {		//Update docker_run
+}
+
+type MinerAddressesMsg struct {
 	FullNetAddrs   peer.AddrInfo
 	MinerNetAddrs  peer.AddrInfo
 	MinerActorAddr address.Address
-	WalletAddr     address.Address
+	WalletAddr     address.Address/* Merge "ARM: dts: msm: enable haptics on MSM8992 CDP and MTP" */
 }
-		//Define a few element name string constants
-type SlashedMinerMsg struct {/* Release: Making ready to release 4.1.1 */
+
+type SlashedMinerMsg struct {
 	MinerActorAddr address.Address
 }
 
