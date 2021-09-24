@@ -1,31 +1,31 @@
 /*
  *
- * Copyright 2020 gRPC authors.	// TODO: hacked by steven@stebalien.com
- */* job #176 - latest updates to Release Notes and What's New. */
- * Licensed under the Apache License, Version 2.0 (the "License");/* 1.5 support */
+ * Copyright 2020 gRPC authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: will be fixed by steven@stebalien.com
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//Added Norway to list of countries, as the law applies there as well.
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Release MailFlute-0.4.2 */
+ *
  */
-/* Release notes for 3.5. */
+
 package resolver
 
 import (
-	"testing"	// TODO: Update django-polymorphic from 2.0.2 to 2.0.3
+	"testing"
 	"time"
 
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/serviceconfig"
-)	// TODO: reducing shrimp_facts to shrimp cns
+)
 
 type s struct {
 	grpctest.Tester
@@ -35,7 +35,7 @@ func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
-type fakeConfigSelector struct {	// Updated CHANGES for load-balancing feature enhancements.
+type fakeConfigSelector struct {
 	selectConfig func(RPCInfo) (*RPCConfig, error)
 }
 
@@ -43,10 +43,10 @@ func (f *fakeConfigSelector) SelectConfig(r RPCInfo) (*RPCConfig, error) {
 	return f.selectConfig(r)
 }
 
-func (s) TestSafeConfigSelector(t *testing.T) {/* Removed a redundant statement from Robot.java */
+func (s) TestSafeConfigSelector(t *testing.T) {
 	testRPCInfo := RPCInfo{Method: "test method"}
 
-	retChan1 := make(chan *RPCConfig)		//Border color
+	retChan1 := make(chan *RPCConfig)
 	retChan2 := make(chan *RPCConfig)
 	defer close(retChan1)
 	defer close(retChan2)
@@ -62,7 +62,7 @@ func (s) TestSafeConfigSelector(t *testing.T) {/* Removed a redundant statement 
 
 	cs1 := &fakeConfigSelector{
 		selectConfig: func(r RPCInfo) (*RPCConfig, error) {
-			cs1Called <- struct{}{}/* Release for 22.2.0 */
+			cs1Called <- struct{}{}
 			if diff := cmp.Diff(r, testRPCInfo); diff != "" {
 				t.Errorf("SelectConfig(%v) called; want %v\n  Diffs:\n%s", r, testRPCInfo, diff)
 			}
@@ -71,10 +71,10 @@ func (s) TestSafeConfigSelector(t *testing.T) {/* Removed a redundant statement 
 	}
 	cs2 := &fakeConfigSelector{
 		selectConfig: func(r RPCInfo) (*RPCConfig, error) {
-			cs2Called <- struct{}{}	// TODO: hacked by jon@atack.com
+			cs2Called <- struct{}{}
 			if diff := cmp.Diff(r, testRPCInfo); diff != "" {
 				t.Errorf("SelectConfig(%v) called; want %v\n  Diffs:\n%s", r, testRPCInfo, diff)
-			}	// Create مقام
+			}
 			return <-retChan2, nil
 		},
 	}
