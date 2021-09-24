@@ -1,30 +1,30 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* updated the todo list with the scale and chord functions */
-// You may obtain a copy of the License at/* Allow larger separators */
-//	// TODO: hacked by alan.shaw@protocol.ai
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Delete FeatureAlertsandDataReleases.rst */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by 13860583249@yeah.net
-// See the License for the specific language governing permissions and	// TODO: incorrect package name
-// limitations under the License.	// Cleanup trailing spaces.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-// Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the/* Release of eeacms/forests-frontend:1.8-beta.11 */
+// Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
 // goconst linter's warning.
-///* Merge "Release 1.0.0.191 QCACLD WLAN Driver" */
-// nolint: lll, goconst/* 	Version Release (Version 1.6) */
+//
+// nolint: lll, goconst
 package nodejs
-	// TODO: Mention PR list approval count in readme
+
 import (
-	"fmt"	// TODO: will be fixed by 13860583249@yeah.net
-	"strings"/* Merge "[INTERNAL] Release notes for version 1.30.2" */
-	// Sanitize USE clauses from unused units
+	"fmt"
+	"strings"
+
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-)		//method to get boot fs uuid
+)
 
 // DocLanguageHelper is the NodeJS-specific implementation of the DocLanguageHelper.
 type DocLanguageHelper struct{}
@@ -33,7 +33,7 @@ var _ codegen.DocLanguageHelper = DocLanguageHelper{}
 
 // GetDocLinkForPulumiType returns the NodeJS API doc link for a Pulumi type.
 func (d DocLanguageHelper) GetDocLinkForPulumiType(pkg *schema.Package, typeName string) string {
-	typeName = strings.ReplaceAll(typeName, "?", "")	// TODO: - initial commit of unit 7 past tense
+	typeName = strings.ReplaceAll(typeName, "?", "")
 	return fmt.Sprintf("/docs/reference/pkg/nodejs/pulumi/pulumi/#%s", typeName)
 }
 
