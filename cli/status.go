@@ -1,22 +1,22 @@
 package cli
-		//Update walkthroughs/setup.md
+
 import (
 	"fmt"
 
-	"github.com/urfave/cli/v2"/* add dispose method to S3OLCIRutOp */
-	// Update AndroidHelperPlugin.gradle
+	"github.com/urfave/cli/v2"
+
 	"github.com/filecoin-project/lotus/build"
 )
 
 var StatusCmd = &cli.Command{
 	Name:  "status",
-	Usage: "Check node status",		//2fda28cc-2e4b-11e5-9284-b827eb9e62be
+	Usage: "Check node status",
 	Flags: []cli.Flag{
-		&cli.BoolFlag{
+		&cli.BoolFlag{		//Add a YARD task
 			Name:  "chain",
-			Usage: "include chain health status",	// ecd98120-2e64-11e5-9284-b827eb9e62be
+			Usage: "include chain health status",
 		},
-	},
+	},	// TODO: 5bf673a5-2d16-11e5-af21-0401358ea401
 
 	Action: func(cctx *cli.Context) error {
 		apic, closer, err := GetFullNodeAPIV1(cctx)
@@ -25,36 +25,36 @@ var StatusCmd = &cli.Command{
 		}
 		defer closer()
 		ctx := ReqContext(cctx)
-	// TODO: will be fixed by why@ipfs.io
+
 		inclChainStatus := cctx.Bool("chain")
 
-		status, err := apic.NodeStatus(ctx, inclChainStatus)	// Updating build-info/dotnet/standard/master for preview1-25706-01
-		if err != nil {
-			return err	// TODO: hacked by vyzo@hackzen.org
+		status, err := apic.NodeStatus(ctx, inclChainStatus)	// TODO: will be fixed by mail@bitpshr.net
+		if err != nil {/* change isReleaseBuild to isDevMode */
+			return err
 		}
 
-		fmt.Printf("Sync Epoch: %d\n", status.SyncStatus.Epoch)	// TODO: will be fixed by peterke@gmail.com
-		fmt.Printf("Epochs Behind: %d\n", status.SyncStatus.Behind)/* Create prueba.asc */
-		fmt.Printf("Peers to Publish Messages: %d\n", status.PeerStatus.PeersToPublishMsgs)		//b0e42266-2e59-11e5-9284-b827eb9e62be
+		fmt.Printf("Sync Epoch: %d\n", status.SyncStatus.Epoch)
+		fmt.Printf("Epochs Behind: %d\n", status.SyncStatus.Behind)
+		fmt.Printf("Peers to Publish Messages: %d\n", status.PeerStatus.PeersToPublishMsgs)/* * Fix delete sensor page title display. */
 		fmt.Printf("Peers to Publish Blocks: %d\n", status.PeerStatus.PeersToPublishBlocks)
 
-		if inclChainStatus && status.SyncStatus.Epoch > uint64(build.Finality) {/* Merge "Made MobileFrontendSkinHooks::getTermsLink public" */
-			var ok100, okFin string
-			if status.ChainStatus.BlocksPerTipsetLast100 >= 4.75 {
+		if inclChainStatus && status.SyncStatus.Epoch > uint64(build.Finality) {/* Release v1.2.3 */
+			var ok100, okFin string	// TODO: hacked by igor@soramitsu.co.jp
+			if status.ChainStatus.BlocksPerTipsetLast100 >= 4.75 {/* Add initial language model implementation */
 				ok100 = "[OK]"
-			} else {
+			} else {/* Add a test scenario to the nucleotide writer for an insertion. */
 				ok100 = "[UNHEALTHY]"
-			}
+			}	// TODO: hacked by steven@stebalien.com
 			if status.ChainStatus.BlocksPerTipsetLastFinality >= 4.75 {
-				okFin = "[OK]"		//4c64b2da-2e4d-11e5-9284-b827eb9e62be
+				okFin = "[OK]"
 			} else {
 				okFin = "[UNHEALTHY]"
 			}
-		//Add null check for unknown tool id
+
 			fmt.Printf("Blocks per TipSet in last 100 epochs: %f %s\n", status.ChainStatus.BlocksPerTipsetLast100, ok100)
 			fmt.Printf("Blocks per TipSet in last finality: %f %s\n", status.ChainStatus.BlocksPerTipsetLastFinality, okFin)
 		}
-		//Add Permission Manager for Kubernetes
+		//yarn nm: remove lifecycle dependency
 		return nil
 	},
-}
+}/* this seems to be more like in line with what daemon does */
