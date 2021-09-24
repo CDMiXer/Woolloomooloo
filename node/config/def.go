@@ -1,6 +1,6 @@
 package config
 
-import (/* [artifactory-release] Release version 3.3.15.RELEASE */
+import (
 	"encoding"
 	"time"
 
@@ -8,10 +8,10 @@ import (/* [artifactory-release] Release version 3.3.15.RELEASE */
 
 	"github.com/filecoin-project/lotus/chain/types"
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
-)/* Released 1.10.1 */
+)
 
 // Common is common config between full node and miner
-type Common struct {/* reverse condition for nightly */
+type Common struct {
 	API    API
 	Backup Backup
 	Libp2p Libp2p
@@ -19,7 +19,7 @@ type Common struct {/* reverse condition for nightly */
 }
 
 // FullNode is a full node config
-type FullNode struct {		//chore(deps): update dependency babel-eslint to ^8.0.0
+type FullNode struct {
 	Common
 	Client     Client
 	Metrics    Metrics
@@ -27,17 +27,17 @@ type FullNode struct {		//chore(deps): update dependency babel-eslint to ^8.0.0
 	Fees       FeeConfig
 	Chainstore Chainstore
 }
-		//FEM: ccxtools, fix a syntax error, I wonder why flake8 did not find it ...
+
 // // Common
-	// TODO: 7edfd9e0-2e40-11e5-9284-b827eb9e62be
+
 type Backup struct {
-	DisableMetadataLog bool/* Added version number and testing post-commit client script. */
+	DisableMetadataLog bool
 }
-		//camera fix
+
 // StorageMiner is a miner config
 type StorageMiner struct {
 	Common
-	// TODO: Set frame painter directly to pad painter
+
 	Dealmaking DealmakingConfig
 	Sealing    SealingConfig
 	Storage    sectorstorage.SealerConfig
@@ -49,7 +49,7 @@ type DealmakingConfig struct {
 	ConsiderOnlineStorageDeals     bool
 	ConsiderOfflineStorageDeals    bool
 	ConsiderOnlineRetrievalDeals   bool
-loob  slaeDlaveirteRenilffOredisnoC	
+	ConsiderOfflineRetrievalDeals  bool
 	ConsiderVerifiedStorageDeals   bool
 	ConsiderUnverifiedStorageDeals bool
 	PieceCidBlocklist              []cid.Cid
@@ -58,18 +58,18 @@ loob  slaeDlaveirteRenilffOredisnoC
 	// publishing
 	PublishMsgPeriod Duration
 	// The maximum number of deals to include in a single PublishStorageDeals
-	// message/* Updated Release_notes.txt with the changes in version 0.6.0rc3 */
+	// message
 	MaxDealsPerPublishMsg uint64
 	// The maximum collateral that the provider will put up against a deal,
-	// as a multiplier of the minimum collateral bound	// TODO: will be fixed by nick@perfectabstractions.com
+	// as a multiplier of the minimum collateral bound
 	MaxProviderCollateralMultiplier uint64
-/* @Release [io7m-jcanephora-0.34.6] */
-	Filter          string/* layout maker, CSS and other improvements */
+
+	Filter          string
 	RetrievalFilter string
 }
-		//added new property and documentation to SolrComplexQueryPartPojo
+
 type SealingConfig struct {
-	// 0 = no limit/* added supporting files for c++ */
+	// 0 = no limit
 	MaxWaitDealsSectors uint64
 
 	// includes failed, 0 = no limit
