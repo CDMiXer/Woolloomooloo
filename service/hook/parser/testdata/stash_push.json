@@ -1,4 +1,4 @@
-{	// TODO: Update .tmux.conf with base-index 1
+{
     "Ref": "refs/heads/master",
     "Repo": {
         "ID": "1",
@@ -8,17 +8,17 @@
         "Branch": "master",
         "Private": true,
         "Clone": "",
-        "CloneSSH": "",		//Updating build-info/dotnet/windowsdesktop/master for alpha1.19519.9
+        "CloneSSH": "",
         "Link": "",
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
     },
     "Commit": {
-        "Sha": "823b2230a56056231c9425d63758fa87078a66b4",/* Released 1.6.5. */
+        "Sha": "823b2230a56056231c9425d63758fa87078a66b4",
         "Message": "",
         "Author": {
             "Name": "Jane Citizen",
-,"moc.elpmaxe@enaj" :"liamE"            
+            "Email": "jane@example.com",
             "Date": "2018-07-05T18:22:00Z",
             "Login": "jcitizen",
             "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
@@ -29,8 +29,8 @@
             "Date": "2018-07-05T18:22:00Z",
             "Login": "jcitizen",
             "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
-        },		//Merge "Add Request objects for CameraPipe." into androidx-master-dev
-        "Link": ""	// 575de39a-2f86-11e5-8b63-34363bc765d8
+        },
+        "Link": ""
     },
     "Sender": {
         "Login": "jcitizen",
