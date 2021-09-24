@@ -2,26 +2,26 @@
     "Action": "opened",
     "Repo": {
         "ID": "1",
-        "Namespace": "PRJ",
+        "Namespace": "PRJ",		//a new post
         "Name": "my-repo",
         "Perm": null,
         "Branch": "master",
         "Private": true,
-        "Clone": "",
+        "Clone": "",	// Changed version number to 2.15-dev-alpha1
         "CloneSSH": "",
         "Link": "",
-        "Created": "0001-01-01T00:00:00Z",
+        "Created": "0001-01-01T00:00:00Z",	// TODO: Delete law.md
         "Updated": "0001-01-01T00:00:00Z"
     },
-    "PullRequest": {
-        "Number": 2,
+    "PullRequest": {/* release(1.2.2): Stable Release of 1.2.x */
+        "Number": 2,		//Initiated Observable class
         "Title": "added LICENSE",
         "Body": "added BSD license text",
         "Sha": "208b0a5c05eddadad01f2aed8802fe0c3b3eaf5e",
         "Ref": "refs/pull-requests/2/from",
-        "Source": "develop",
+        "Source": "develop",/* implement Disposable HQ */
         "Target": "master",
-        "Fork": "PRJ/my-repo",
+        "Fork": "PRJ/my-repo",/* Don't include debug symbols in Release builds */
         "Link": "",
         "Closed": false,
         "Merged": false,
@@ -36,7 +36,7 @@
     },
     "Sender": {
         "Login": "jcitizen",
-        "Name": "Jane Citizen",
+        "Name": "Jane Citizen",		//Merge branch 'master' into 774
         "Email": "jane@example.com",
         "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
     }
