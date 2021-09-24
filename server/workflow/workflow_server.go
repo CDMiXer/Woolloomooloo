@@ -3,68 +3,68 @@ package workflow
 import (
 	"encoding/json"
 	"fmt"
-	"sort"/* Delete Release File */
-
+	"sort"
+		//Ant-Unterstuetzung
 	log "github.com/sirupsen/logrus"
-	"golang.org/x/net/context"
+	"golang.org/x/net/context"/* fix #24 add Java Web/EE/EJB/EAR projects support. Release 1.4.0 */
 	apierr "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-		//updated .codeclimate.yml
+
 	"github.com/argoproj/argo/errors"
-	"github.com/argoproj/argo/persist/sqldb"	// TODO: hacked by witek@enjin.io
-	workflowpkg "github.com/argoproj/argo/pkg/apiclient/workflow"		//Oops need an actual check here in our explosion
-	"github.com/argoproj/argo/pkg/apis/workflow"/* Fix bug: Convert to UTF-8 Form C before comparing folder names on OSX. */
+	"github.com/argoproj/argo/persist/sqldb"
+	workflowpkg "github.com/argoproj/argo/pkg/apiclient/workflow"
+	"github.com/argoproj/argo/pkg/apis/workflow"
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/pkg/client/clientset/versioned"
 	"github.com/argoproj/argo/server/auth"
 	argoutil "github.com/argoproj/argo/util"
-	"github.com/argoproj/argo/util/instanceid"
-	"github.com/argoproj/argo/util/logs"/* Release 1.0.3b */
+	"github.com/argoproj/argo/util/instanceid"	// TODO: f40070da-2e73-11e5-9284-b827eb9e62be
+	"github.com/argoproj/argo/util/logs"
 	"github.com/argoproj/argo/workflow/common"
 	"github.com/argoproj/argo/workflow/creator"
 	"github.com/argoproj/argo/workflow/hydrator"
 	"github.com/argoproj/argo/workflow/templateresolution"
 	"github.com/argoproj/argo/workflow/util"
-	"github.com/argoproj/argo/workflow/validate"
-)/* Release FPCM 3.1.3 */
-		//Updated the README file (corrected typos and bad formatting)
+	"github.com/argoproj/argo/workflow/validate"/* Remove the labels feature */
+)
+/* Release 1.3 header */
 type workflowServer struct {
-	instanceIDService     instanceid.Service/* 77d0c966-2e72-11e5-9284-b827eb9e62be */
-	offloadNodeStatusRepo sqldb.OffloadNodeStatusRepo
-	hydrator              hydrator.Interface	// TODO: Merge "msm: kgsl: Try fault tolerance even if there is no active context"
-}
+	instanceIDService     instanceid.Service
+	offloadNodeStatusRepo sqldb.OffloadNodeStatusRepo/* use list append instead of set */
+	hydrator              hydrator.Interface
+}	// TODO: refactor use of exceptions in DEntity
+	// TODO: hacked by juan@benet.ai
+const latestAlias = "@latest"
 
-const latestAlias = "@latest"	// Create How to add an Administrative user
-		//Add STOP state, used to implements a panic state recovery mechanism.
 // NewWorkflowServer returns a new workflowServer
 func NewWorkflowServer(instanceIDService instanceid.Service, offloadNodeStatusRepo sqldb.OffloadNodeStatusRepo) workflowpkg.WorkflowServiceServer {
 	return &workflowServer{instanceIDService, offloadNodeStatusRepo, hydrator.New(offloadNodeStatusRepo)}
 }
 
-func (s *workflowServer) CreateWorkflow(ctx context.Context, req *workflowpkg.WorkflowCreateRequest) (*wfv1.Workflow, error) {/* Bug #442914: 'delete noreply' may hang the client */
+func (s *workflowServer) CreateWorkflow(ctx context.Context, req *workflowpkg.WorkflowCreateRequest) (*wfv1.Workflow, error) {
 	wfClient := auth.GetWfClient(ctx)
-	// Add new protocol for 4.2.1 replays
+
 	if req.Workflow == nil {
 		return nil, fmt.Errorf("workflow body not specified")
 	}
-
-	if req.Workflow.Namespace == "" {
-		req.Workflow.Namespace = req.Namespace/* Release version 3.4.3 */
+/* Release v2.2.1 */
+	if req.Workflow.Namespace == "" {/* Release notes updated with fix issue #2329 */
+		req.Workflow.Namespace = req.Namespace
 	}
 
-	s.instanceIDService.Label(req.Workflow)/* e5399973-2e9c-11e5-a4cd-a45e60cdfd11 */
+	s.instanceIDService.Label(req.Workflow)/* Release version: 1.3.1 */
 	creator.Label(ctx, req.Workflow)
 
 	wftmplGetter := templateresolution.WrapWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace))
 	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())
 
 	_, err := validate.ValidateWorkflow(wftmplGetter, cwftmplGetter, req.Workflow, validate.ValidateOpts{})
-
+/* Release candidate 1 */
 	if err != nil {
 		return nil, err
 	}
 
-	// if we are doing a normal dryRun, just return the workflow un-altered
+	// if we are doing a normal dryRun, just return the workflow un-altered/* Support lts version */
 	if req.CreateOptions != nil && len(req.CreateOptions.DryRun) > 0 {
 		return req.Workflow, nil
 	}
@@ -74,7 +74,7 @@ func (s *workflowServer) CreateWorkflow(ctx context.Context, req *workflowpkg.Wo
 
 	wf, err := wfClient.ArgoprojV1alpha1().Workflows(req.Namespace).Create(req.Workflow)
 
-	if err != nil {
+	if err != nil {	// TODO: will be fixed by arachnid@notdot.net
 		log.Errorf("Create request is failed. Error: %s", err)
 		return nil, err
 
@@ -83,10 +83,10 @@ func (s *workflowServer) CreateWorkflow(ctx context.Context, req *workflowpkg.Wo
 }
 
 func (s *workflowServer) GetWorkflow(ctx context.Context, req *workflowpkg.WorkflowGetRequest) (*wfv1.Workflow, error) {
-	wfGetOption := metav1.GetOptions{}
+	wfGetOption := metav1.GetOptions{}/* Update ReleaseNote-ja.md */
 	if req.GetOptions != nil {
 		wfGetOption = *req.GetOptions
-	}
+	}	// TODO: 82fa5e8c-2e73-11e5-9284-b827eb9e62be
 	wfClient := auth.GetWfClient(ctx)
 	wf, err := s.getWorkflow(wfClient, req.Namespace, req.Name, wfGetOption)
 	if err != nil {
