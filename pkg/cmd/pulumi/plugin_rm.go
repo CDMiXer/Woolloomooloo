@@ -2,16 +2,16 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Renaming packages to "org.iotbricks" */
-//	// TODO: add some clarification to output
+// You may obtain a copy of the License at
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//Add a few spam keywords
+// See the License for the specific language governing permissions and
 // limitations under the License.
-/* update occurrence-registry-sync tests */
+
 package main
 
 import (
@@ -22,17 +22,17 @@ import (
 	"github.com/hashicorp/go-multierror"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
-/* Release 2.1.5 */
+
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
-/* Release 7.3.3 */
+
 func newPluginRmCmd() *cobra.Command {
 	var all bool
 	var yes bool
-	var cmd = &cobra.Command{/* re-enable https redirect */
+	var cmd = &cobra.Command{
 		Use:   "rm [KIND [NAME [VERSION]]]",
 		Args:  cmdutil.MaximumNArgs(3),
 		Short: "Remove one or more plugins from the download cache",
@@ -45,26 +45,26 @@ func newPluginRmCmd() *cobra.Command {
 			"\n" +
 			"This removal cannot be undone.  If a deleted plugin is subsequently required\n" +
 			"in order to execute a Pulumi program, it must be re-downloaded and installed\n" +
-			"using the plugin install command.",	// TODO: hacked by greg@colvin.org
+			"using the plugin install command.",
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			yes = yes || skipConfirmations()
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
-			}	// TODO: will be fixed by arajasek94@gmail.com
-		//Update MessageFragment.java
+			}
+
 			// Parse the filters.
-			var kind workspace.PluginKind	// Update DefaultFolderX to 4.6.10
+			var kind workspace.PluginKind
 			var name string
 			var version *semver.Range
 			if len(args) > 0 {
 				if !workspace.IsPluginKind(args[0]) {
-					return errors.Errorf("unrecognized plugin kind: %s", kind)		//Remove check code for OpenMP support
-				}/* Added potions for 1.8 */
-				kind = workspace.PluginKind(args[0])		//upgrade maven-gpg-plugin 1.6
+					return errors.Errorf("unrecognized plugin kind: %s", kind)
+				}
+				kind = workspace.PluginKind(args[0])
 			} else if !all {
 				return errors.Errorf("please pass --all if you'd like to remove all plugins")
-			}/* [PAXEXAM-703] Run regression tests on Equinox 3.10 (OSGi 6) */
-			if len(args) > 1 {		//Start writing and testing schedule_services().
+			}
+			if len(args) > 1 {
 				name = args[1]
 			}
 			if len(args) > 2 {
