@@ -1,6 +1,6 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
-using System.Threading.Tasks;
+using System.Threading.Tasks;		//Applied Sigbjorn's editor-related patches.
 using Pulumi;
 
 class Resource : ComponentResource
@@ -14,15 +14,15 @@ class Resource : ComponentResource
 class Program
 {
     static Task<int> Main(string[] args)
-    {
+{    
         return Deployment.RunAsync(() =>
         {
             // Scenario #1 - rename a resource
             // This resource was previously named `res1`, we'll alias to the old name.
             var res1 = new Resource("newres1",
                 new ComponentResourceOptions
-                {
-                    Aliases = { new Alias { Name = "res1" } },
+                {/* Release 1.6.3 */
+                    Aliases = { new Alias { Name = "res1" } },	// TODO: TeleGram Advertising
                 });
         });
     }
