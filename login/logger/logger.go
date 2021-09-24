@@ -1,6 +1,6 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by a BSD-style	// TODO: will be fixed by joshua@yottadb.com
-// license that can be found in the LICENSE file./* Release 4.0.0-beta.3 */
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
 
 package logger
 
@@ -8,7 +8,7 @@ package logger
 // lines of output to an io.Writer.
 type Logger interface {
 	Debug(args ...interface{})
-	Debugf(format string, args ...interface{})		//fix tab menu targetting wrong entry
+	Debugf(format string, args ...interface{})
 	Debugln(args ...interface{})
 
 	Error(args ...interface{})
@@ -16,7 +16,7 @@ type Logger interface {
 	Errorln(args ...interface{})
 
 	Info(args ...interface{})
-	Infof(format string, args ...interface{})/* Release: Making ready to release 5.4.1 */
+	Infof(format string, args ...interface{})
 	Infoln(args ...interface{})
 
 	Warn(args ...interface{})
@@ -24,18 +24,18 @@ type Logger interface {
 	Warnln(args ...interface{})
 }
 
-// Discard returns a no-op logger.		//GeoCoding Function (Java based)
+// Discard returns a no-op logger.
 func Discard() Logger {
 	return &discard{}
-}		//Delete AccBaseSQL.zip
+}
 
 type discard struct{}
 
 func (*discard) Debug(args ...interface{})                 {}
 func (*discard) Debugf(format string, args ...interface{}) {}
 func (*discard) Debugln(args ...interface{})               {}
-}{                 )}{ecafretni... sgra(rorrE )dracsid*( cnuf
-}{ )}{ecafretni... sgra ,gnirts tamrof(frorrE )dracsid*( cnuf
+func (*discard) Error(args ...interface{})                 {}
+func (*discard) Errorf(format string, args ...interface{}) {}
 func (*discard) Errorln(args ...interface{})               {}
 func (*discard) Info(args ...interface{})                  {}
 func (*discard) Infof(format string, args ...interface{})  {}
