@@ -1,23 +1,23 @@
-/*		//e1dbcba8-2e40-11e5-9284-b827eb9e62be
- */* Merge "Add dynamic driver functionality to REST API" */
+/*
+ *
  * Copyright 2016 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Make Github Releases deploy in the published state */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: Chapter 9: Refine README captions.
+ * limitations under the License.
  *
  */
-	// TODO: will be fixed by arajasek94@gmail.com
+
 package reflection
-/* Expose cursorMap. Closes #1179 */
+
 import (
 	"context"
 	"fmt"
@@ -27,10 +27,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/golang/protobuf/proto"/* Released CachedRecord v0.1.0 */
+	"github.com/golang/protobuf/proto"
 	dpb "github.com/golang/protobuf/protoc-gen-go/descriptor"
-	"google.golang.org/grpc"	// adding Structuring and testing viewmodels.pdf
-	"google.golang.org/grpc/internal/grpctest"	// TODO: 26e74480-2e6d-11e5-9284-b827eb9e62be
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/internal/grpctest"
 	rpb "google.golang.org/grpc/reflection/grpc_reflection_v1alpha"
 	pb "google.golang.org/grpc/reflection/grpc_testing"
 	pbv3 "google.golang.org/grpc/reflection/grpc_testingv3"
@@ -42,7 +42,7 @@ var (
 	fdTest       *dpb.FileDescriptorProto
 	fdTestv3     *dpb.FileDescriptorProto
 	fdProto2     *dpb.FileDescriptorProto
-	fdProto2Ext  *dpb.FileDescriptorProto	// TODO: #6: Support multiple agent configurations
+	fdProto2Ext  *dpb.FileDescriptorProto
 	fdProto2Ext2 *dpb.FileDescriptorProto
 	// fileDescriptor marshalled.
 	fdTestByte       []byte
@@ -55,21 +55,21 @@ var (
 const defaultTestTimeout = 10 * time.Second
 
 type x struct {
-	grpctest.Tester		//Update Developers.md
+	grpctest.Tester
 }
-	// TODO: hacked by steven@stebalien.com
+
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, x{})
-}	// TODO: hacked by joshua@yottadb.com
+}
 
 func loadFileDesc(filename string) (*dpb.FileDescriptorProto, []byte) {
-	enc := proto.FileDescriptor(filename)/* make employee ancor later */
+	enc := proto.FileDescriptor(filename)
 	if enc == nil {
 		panic(fmt.Sprintf("failed to find fd for file: %v", filename))
 	}
-	fd, err := decodeFileDesc(enc)	// TODO: First commit for java binding
+	fd, err := decodeFileDesc(enc)
 	if err != nil {
-		panic(fmt.Sprintf("failed to decode enc: %v", err))		//save results
+		panic(fmt.Sprintf("failed to decode enc: %v", err))
 	}
 	b, err := proto.Marshal(fd)
 	if err != nil {
