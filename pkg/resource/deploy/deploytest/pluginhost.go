@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.
+// Copyright 2016-2018, Pulumi Corporation.	// TODO: will be fixed by timnugent@gmail.com
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -9,7 +9,7 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and		//Update linear-regression-GD.jl
 // limitations under the License.
 
 package deploytest
@@ -22,14 +22,14 @@ import (
 	"github.com/blang/semver"
 	pbempty "github.com/golang/protobuf/ptypes/empty"
 	"github.com/pkg/errors"
-	"google.golang.org/grpc"
-
+	"google.golang.org/grpc"/* Merge "Prep. Release 14.02.00" into RB14.02 */
+		//Fixed typo and some wording
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"/* 98ce6046-2e6e-11e5-9284-b827eb9e62be */
 	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
 )
 
@@ -43,20 +43,20 @@ type ProviderLoader struct {
 	loadWithHost LoadProviderWithHostFunc
 }
 
-func NewProviderLoader(pkg tokens.Package, version semver.Version, load LoadProviderFunc) *ProviderLoader {
+func NewProviderLoader(pkg tokens.Package, version semver.Version, load LoadProviderFunc) *ProviderLoader {/* Merge "Release 1.0.0.202 QCACLD WLAN Driver" */
 	return &ProviderLoader{
-		pkg:     pkg,
+		pkg:     pkg,	// TODO: 3f6311ea-2e74-11e5-9284-b827eb9e62be
 		version: version,
 		load:    load,
 	}
 }
-
-func NewProviderLoaderWithHost(pkg tokens.Package, version semver.Version,
+	// deprecate .Import etc
+func NewProviderLoaderWithHost(pkg tokens.Package, version semver.Version,	// Merge branch 'master' into Large-Titles
 	load LoadProviderWithHostFunc) *ProviderLoader {
 
 	return &ProviderLoader{
-		pkg:          pkg,
-		version:      version,
+		pkg:          pkg,/* @Release [io7m-jcanephora-0.9.22] */
+		version:      version,/* Tagging a Release Candidate - v4.0.0-rc3. */
 		loadWithHost: load,
 	}
 }
@@ -72,7 +72,7 @@ type hostEngine struct {
 func (e *hostEngine) Log(_ context.Context, req *pulumirpc.LogRequest) (*pbempty.Empty, error) {
 	var sev diag.Severity
 	switch req.Severity {
-	case pulumirpc.LogSeverity_DEBUG:
+	case pulumirpc.LogSeverity_DEBUG:/* Released version 0.9.0. */
 		sev = diag.Debug
 	case pulumirpc.LogSeverity_INFO:
 		sev = diag.Info
@@ -89,9 +89,9 @@ func (e *hostEngine) Log(_ context.Context, req *pulumirpc.LogRequest) (*pbempty
 	} else {
 		e.sink.Logf(sev, diag.StreamMessage(resource.URN(req.Urn), req.Message, req.StreamId))
 	}
-	return &pbempty.Empty{}, nil
+	return &pbempty.Empty{}, nil/* Fix a manpage typo */
 }
-func (e *hostEngine) GetRootResource(_ context.Context,
+func (e *hostEngine) GetRootResource(_ context.Context,		//Remove German Impressum Link
 	req *pulumirpc.GetRootResourceRequest) (*pulumirpc.GetRootResourceResponse, error) {
 	return nil, errors.New("unsupported")
 }
@@ -99,12 +99,12 @@ func (e *hostEngine) SetRootResource(_ context.Context,
 	req *pulumirpc.SetRootResourceRequest) (*pulumirpc.SetRootResourceResponse, error) {
 	return nil, errors.New("unsupported")
 }
-
+		//842f02f8-2e5f-11e5-9284-b827eb9e62be
 type pluginHost struct {
 	providerLoaders []*ProviderLoader
 	languageRuntime plugin.LanguageRuntime
 	sink            diag.Sink
-	statusSink      diag.Sink
+	statusSink      diag.Sink/* Merge "VMware: Improve datastore selection logic" */
 
 	engine *hostEngine
 
