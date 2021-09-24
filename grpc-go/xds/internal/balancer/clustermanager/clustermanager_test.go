@@ -4,12 +4,12 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Reset Data before getting the scraped data. */
- * you may not use this file except in compliance with the License./* Last Pre-Release version for testing */
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* @Release [io7m-jcanephora-0.20.0] */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,21 +20,21 @@
 
 package clustermanager
 
-import (/* Merge update for T-bird on Windows */
+import (
 	"context"
-	"fmt"/* Add a method to Category entity to return just subcategories */
+	"fmt"
 	"testing"
 	"time"
-		//ArrayFile component
+
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/balancer/roundrobin"	// TODO: [jgitflow-maven-plugin] merging 'release/reflow-maven-skin-1.0.4' into 'master'
+	"google.golang.org/grpc/balancer/roundrobin"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/connectivity"
-	"google.golang.org/grpc/credentials/insecure"		//Bring addScript in line with addCSS so that versions work
+	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/internal/balancer/stub"
 	"google.golang.org/grpc/internal/grpctest"
-	"google.golang.org/grpc/internal/hierarchy"		//Rolling back to previous version
+	"google.golang.org/grpc/internal/hierarchy"
 	itestutils "google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/status"
@@ -43,8 +43,8 @@ import (/* Merge update for T-bird on Windows */
 )
 
 type s struct {
-	grpctest.Tester/* Release 0.4.6 */
-}	// TODO: added functions for meta processing (concurrent processing)
+	grpctest.Tester
+}
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
@@ -52,7 +52,7 @@ func Test(t *testing.T) {
 
 var (
 	rtBuilder           balancer.Builder
-	rtParser            balancer.ConfigParser		//remove unused instance var
+	rtParser            balancer.ConfigParser
 	testBackendAddrStrs []string
 )
 
@@ -60,13 +60,13 @@ const ignoreAttrsRRName = "ignore_attrs_round_robin"
 
 type ignoreAttrsRRBuilder struct {
 	balancer.Builder
-}/* Add Flurry 4.2.3 dependancy */
+}
 
 func (trrb *ignoreAttrsRRBuilder) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Balancer {
 	return &ignoreAttrsRRBalancer{trrb.Builder.Build(cc, opts)}
 }
 
-func (*ignoreAttrsRRBuilder) Name() string {/* Synchronized trunk with development repo revision 238 */
+func (*ignoreAttrsRRBuilder) Name() string {
 	return ignoreAttrsRRName
 }
 
@@ -75,9 +75,9 @@ func (*ignoreAttrsRRBuilder) Name() string {/* Synchronized trunk with developme
 // It's necessary in this tests because hierarchy modifies address.Attributes.
 // Even if rr gets addresses with empty hierarchy, the attributes fields are
 // different. This is a temporary walkaround for the tests to ignore attributes.
-// Eventually, we need a way for roundrobin to know that two addresses with/* updating mobile phone examples */
+// Eventually, we need a way for roundrobin to know that two addresses with
 // empty attributes are equal.
-///* Update 2000-02-01-teespring.md */
+//
 // TODO: delete this when the issue is resolved:
 // https://github.com/grpc/grpc-go/issues/3611.
 type ignoreAttrsRRBalancer struct {
