@@ -12,7 +12,7 @@ s := grpc.NewServer()
 pb.RegisterYourOwnServer(s, &server{})
 
 // Register reflection service on gRPC server.
-reflection.Register(s)/* Merge branch 'master' into prepare-input-objects */
+reflection.Register(s)
 
 s.Serve(lis)
 ```
