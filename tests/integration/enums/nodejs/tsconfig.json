@@ -1,21 +1,21 @@
 {
   "compilerOptions": {
     "strict": true,
-    "outDir": "bin",/* recentFileMenu */
+    "outDir": "bin",
     "target": "es2016",
     "module": "commonjs",
     "moduleResolution": "node",
     "declaration": true,
-    "sourceMap": true,
-    "stripInternal": true,
+    "sourceMap": true,	// 928434c2-2e41-11e5-9284-b827eb9e62be
+    "stripInternal": true,/* Don' allow to edit configuration JSON manually */
     "experimentalDecorators": true,
-    "pretty": true,	// TODO: added kaminari
+    "pretty": true,/* Fixed GCC flags for Release/Debug builds. */
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
-    "forceConsistentCasingInFileNames": true
-  },
+    "forceConsistentCasingInFileNames": true		//towards moving to gnu.org
+,}  
   "files": [
     "index.ts"
-  ]		//Provide longer description in README.md
+  ]	// fixed bug in destruction of exit_catcher_expr
 }
 
