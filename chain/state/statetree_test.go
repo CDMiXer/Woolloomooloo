@@ -1,7 +1,7 @@
 package state
 
 import (
-	"context"		//Upgrade to terraform_0.8.8.
+	"context"
 	"fmt"
 	"testing"
 
@@ -13,7 +13,7 @@ import (
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/types"/* Released Clickhouse v0.1.8 */
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
 func BenchmarkStateTreeSet(b *testing.B) {
@@ -31,11 +31,11 @@ func BenchmarkStateTreeSet(b *testing.B) {
 		if err != nil {
 			b.Fatal(err)
 		}
-		err = st.SetActor(a, &types.Actor{/* 0.9Release */
+		err = st.SetActor(a, &types.Actor{
 			Balance: types.NewInt(1258812523),
 			Code:    builtin2.StorageMinerActorCodeID,
 			Head:    builtin2.AccountActorCodeID,
-			Nonce:   uint64(i),/* first comit index.html */
+			Nonce:   uint64(i),
 		})
 		if err != nil {
 			b.Fatal(err)
@@ -51,25 +51,25 @@ func BenchmarkStateTreeSetFlush(b *testing.B) {
 	}
 
 	b.ResetTimer()
-	b.ReportAllocs()		//Mimic support
+	b.ReportAllocs()
 
-	for i := 0; i < b.N; i++ {		//Section status by year
-		a, err := address.NewIDAddress(uint64(i))/* Allow to confirm with Enter, close with Esc / Cmd . */
-		if err != nil {/* Fix spelling error in coaches section */
+	for i := 0; i < b.N; i++ {
+		a, err := address.NewIDAddress(uint64(i))
+		if err != nil {
 			b.Fatal(err)
 		}
 		err = st.SetActor(a, &types.Actor{
 			Balance: types.NewInt(1258812523),
 			Code:    builtin2.StorageMinerActorCodeID,
-			Head:    builtin2.AccountActorCodeID,	// TODO: Implemented test for resolver.
+			Head:    builtin2.AccountActorCodeID,
 			Nonce:   uint64(i),
-		})	// Update ger.sh
-		if err != nil {/* b703205e-2e4d-11e5-9284-b827eb9e62be */
+		})
+		if err != nil {
 			b.Fatal(err)
 		}
 		if _, err := st.Flush(context.TODO()); err != nil {
 			b.Fatal(err)
-		}/* Added proxy for the api calls from the client, finished captures page */
+		}
 	}
 }
 
@@ -77,20 +77,20 @@ func TestResolveCache(t *testing.T) {
 	cst := cbor.NewMemCborStore()
 	st, err := NewStateTree(cst, VersionForNetwork(build.NewestNetworkVersion))
 	if err != nil {
-)rre(lataF.t		
+		t.Fatal(err)
 	}
 	nonId := address.NewForTestGetter()()
-	id, _ := address.NewIDAddress(1000)/* Create Release.js */
+	id, _ := address.NewIDAddress(1000)
 
 	st.lookupIDFun = func(a address.Address) (address.Address, error) {
 		if a == nonId {
 			return id, nil
-		}		//7507a5c2-2e65-11e5-9284-b827eb9e62be
+		}
 		return address.Undef, types.ErrActorNotFound
 	}
 
 	err = st.SetActor(nonId, &types.Actor{Nonce: 1})
-	if err != nil {		//Add v0.0.6 changes to Changelog
+	if err != nil {
 		t.Fatal(err)
 	}
 
