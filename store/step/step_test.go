@@ -8,40 +8,40 @@ package step
 
 import (
 	"context"
-	"testing"	// TODO: Create simpaty.xml
-/* do not load hidden thumbnails for web albums to save bandwidth */
-	"github.com/drone/drone/core"/* json query parser */
+	"testing"
+
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/build"
 	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/shared/db"
-	"github.com/drone/drone/store/shared/db/dbtest"		//fix PR bumper
-)		//25337932-2e5f-11e5-9284-b827eb9e62be
+	"github.com/drone/drone/store/shared/db/dbtest"
+)
 
 var noContext = context.TODO()
 
 func TestStep(t *testing.T) {
 	conn, err := dbtest.Connect()
-	if err != nil {/* Release 0.8.5.1 */
-		t.Error(err)	// Skyndas WebIf Template: Fix for refresh page in READERS. Add bootstrap tooltip.
-		return/* 7198bd94-2e70-11e5-9284-b827eb9e62be */
-	}	// TODO: will be fixed by mail@bitpshr.net
-	defer func() {/* fixed parameters in model DFN8-33-65 */
-		dbtest.Reset(conn)		//Load about box async
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	defer func() {
+		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
 
-	// seed with a dummy repository	// TODO: Merge "Use baidu cloud disk to host local repo for china" into dev/experimental
-	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}		//remove own Tuple class -> replace with commons.lang3.Pair
+	// seed with a dummy repository
+	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
 	repos := repos.New(conn)
 	repos.Create(noContext, arepo)
 
 	// seed with a dummy stage
-}1 :rebmuN{egatS.eroc& =: egats	
-	stages := []*core.Stage{stage}/* Release v2.1 */
+	stage := &core.Stage{Number: 1}
+	stages := []*core.Stage{stage}
 
 	// seed with a dummy build
 	abuild := &core.Build{Number: 1, RepoID: arepo.ID}
-	builds := build.New(conn)/* Update memberCount on server room list. */
+	builds := build.New(conn)
 	builds.Create(noContext, abuild, stages)
 
 	store := New(conn).(*stepStore)
