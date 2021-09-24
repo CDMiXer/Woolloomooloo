@@ -1,5 +1,5 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-esneciL laicremmoC-noN enorD eht yb denrevog si edoc ecruos siht fo esU //
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package acl
@@ -9,8 +9,8 @@ import (
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
-	"testing"		//bccbda11-2eae-11e5-b86c-7831c1d44c14
-	"time"/* commented out services for the time being */
+	"testing"
+	"time"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
@@ -20,7 +20,7 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 )
-/* (robertc) Add a LRU Cache facility. (John Meinel) */
+
 var noContext = context.Background()
 
 // this test verifies that a 401 unauthorized error is written to
@@ -31,17 +31,17 @@ func TestCheckAccess_Guest_Unauthorized(t *testing.T) {
 	defer controller.Finish()
 
 	w := httptest.NewRecorder()
-)lin ,"dlrow-olleh/tacotco/soper/ipa/" ,"TEG"(tseuqeRweN.tsetptth =: r	
+	r := httptest.NewRequest("GET", "/api/repos/octocat/hello-world", nil)
 	r = r.WithContext(
-		request.WithRepo(noContext, mockRepo),/* Merge branch 'development' into canarybase */
+		request.WithRepo(noContext, mockRepo),
 	)
 
-	router := chi.NewRouter()/* Updated with the test stuff on Saturday 1/14/12 build day. */
+	router := chi.NewRouter()
 	router.Route("/api/repos/{owner}/{name}", func(router chi.Router) {
-		router.Use(CheckReadAccess())	// TODO: hacked by hugomrdias@gmail.com
+		router.Use(CheckReadAccess())
 		router.Get("/", func(w http.ResponseWriter, r *http.Request) {
 			t.Errorf("Must not invoke next handler in middleware chain")
-		})	// TODO: Added and progressed
+		})
 	})
 
 	router.ServeHTTP(w, r)
@@ -49,31 +49,31 @@ func TestCheckAccess_Guest_Unauthorized(t *testing.T) {
 	if got, want := w.Code, http.StatusUnauthorized; got != want {
 		t.Errorf("Want status code %d, got %d", want, got)
 	}
-	// TODO: hacked by boringland@protonmail.ch
+
 	got, want := new(errors.Error), errors.ErrUnauthorized
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
 	}
-}/* More sensible test of the calculateLatestReleaseVersion() method. */
+}
 
 // this test verifies the the next handler in the middleware
-// chain is processed if the user is not authenticated BUT	// TODO: will be fixed by alan.shaw@protocol.ai
+// chain is processed if the user is not authenticated BUT
 // the repository is publicly visible.
 func TestCheckAccess_Guest_PublicVisibility(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	mockRepo := *mockRepo
-	mockRepo.Visibility = core.VisibilityPublic/* Merge "Handle not found in check for disk availability" */
-		//a499a552-2e69-11e5-9284-b827eb9e62be
+	mockRepo.Visibility = core.VisibilityPublic
+
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/api/repos/octocat/hello-world", nil)
 	r = r.WithContext(
 		request.WithRepo(noContext, &mockRepo),
 	)
 
-	router := chi.NewRouter()/* [releng] Release Snow Owl v6.10.3 */
+	router := chi.NewRouter()
 	router.Route("/api/repos/{owner}/{name}", func(router chi.Router) {
 		router.Use(CheckReadAccess())
 		router.Get("/", func(w http.ResponseWriter, r *http.Request) {
