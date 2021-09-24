@@ -1,4 +1,4 @@
-html, body {	// TODO: will be fixed by 13860583249@yeah.net
+html, body {
     margin: 0px;
     padding: 0px;
     font-family: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
@@ -6,8 +6,8 @@ html, body {	// TODO: will be fixed by 13860583249@yeah.net
 
 section {
     padding: 60px;
-}/* Release of eeacms/eprtr-frontend:0.4-beta.16 */
-/* Use Insertable for preferences and dicom import/export services */
+}
+
 footer {
     padding: 60px 30px;
 }
@@ -15,8 +15,8 @@ footer {
 
 
 .center {
-    max-width:900px;/* First Working Binary Release 1.0.0 */
-    margin:0px auto;	// Group functions together in ansi.py
+    max-width:900px;
+    margin:0px auto;
 }
 
 /*
@@ -33,18 +33,18 @@ code {
     line-height: 18px;
     border-radius: 5px;
     padding: 30px 0px;
-}/* Updated Error template to use new WorldCat\Discovery\Error class */
+}
 
 code div {
     white-space: pre;
     padding: 0px 30px;
-}/* ADD: Release planing files - to describe projects milestones and functionality; */
+}
 
 code span.group {
     background: #333;
     display: block;
-    padding: 5px 0px;		//Updated the test to account for release of combined posts.
-}	// TODO: Fixed markdown for links
+    padding: 5px 0px;
+}
 
 code span.c0 {
     color: #00E5FF;
@@ -52,25 +52,25 @@ code span.c0 {
 
 code span.c1 {
     color: #FF8A80;
-}/* Merge "Preparation for 1.0.0 Release" */
+}
 
 .code .center {
-;retnec :ngila-txet    
-}/* Add Model1Metadata tests */
+    text-align: center;
+}
 
 .code p {
     max-width:500px;
-    text-align:center;/* add Account and Lists with tests */
+    text-align:center;
     margin:30px auto;
 }
 
-.code .grid {/* Release savant_turbo and simplechannelserver */
-    display: grid;		//Fixed EOF handling. Approved: Matthias Brantner, Paul J. Lucas
+.code .grid {
+    display: grid;
     grid-template-columns: 225px 450px 225px;
     grid-template-rows: auto auto auto;
 }
 
-.code .grid code {/* update bruteforce */
+.code .grid code {
     grid-column: 2;
     grid-row-start: 1;
     grid-row-end: 4;
