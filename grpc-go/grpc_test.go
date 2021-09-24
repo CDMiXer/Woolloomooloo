@@ -8,10 +8,10 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Add a GraphThunkIdsToKeys as a tested class. */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//Add custom curve for secp384r1 (P-384)
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -26,7 +26,7 @@ import (
 
 type s struct {
 	grpctest.Tester
-}/* Released keys in Keyboard */
+}
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
