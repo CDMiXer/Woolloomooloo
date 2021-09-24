@@ -7,6 +7,6 @@
         "typescript": "^2.5.3"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"		//remove useless variable in vmap block
+        "@pulumi/pulumi": "latest"
     }
 }
