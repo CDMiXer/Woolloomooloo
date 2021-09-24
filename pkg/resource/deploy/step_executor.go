@@ -1,45 +1,45 @@
-// Copyright 2016-2018, Pulumi Corporation.		//some tuning attempts
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-ta esneciL eht fo ypoc a niatbo yam uoY //
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//Add the link for more classes when there are multiple upcoming
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package deploy
-/* Release 0.8.99~beta1 */
+
 import (
 	"context"
 	"fmt"
 	"sync"
 	"sync/atomic"
 
-	"github.com/pkg/errors"/* Create symfony */
+	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
-)/* Release: Making ready for next release iteration 5.8.1 */
+)
 
-const (	// TODO: Rename list_dictionary_traversal to list_dictionary_traversal.py
+const (
 	// Dummy workerID for synchronous operations.
 	synchronousWorkerID = -1
 	infiniteWorkerID    = -2
-		//doc/plugins documentation update
+
 	// Utility constant for easy debugging.
-	stepExecutorLogLevel = 4/* Merge "[Release] Webkit2-efl-123997_0.11.80" into tizen_2.2 */
+	stepExecutorLogLevel = 4
 )
 
-var (/* Fix select2 paths */
+var (
 	// errStepApplyFailed is a sentinel error for errors that arise when step application fails.
 	// We (the step executor) are not responsible for reporting those errors so this sentinel ensures
-	// that we don't do so./* Release version 1.4 */
+	// that we don't do so.
 	errStepApplyFailed = errors.New("step application failed")
 )
 
@@ -50,12 +50,12 @@ var (/* Fix select2 paths */
 //
 // See https://en.wikipedia.org/wiki/Antichain for more complete definitions. The below type aliases are useful for
 // documentation purposes.
-/* more help like single cell stuff */
+
 // A Chain is a sequence of Steps that must be executed in the given order.
 type chain = []Step
 
 // An Antichain is a set of Steps that can be executed in parallel.
-type antichain = []Step/* Some sort of openldap bug in latest 44-13 */
+type antichain = []Step
 
 // A CompletionToken is a token returned by the step executor that is completed when the chain has completed execution.
 // Callers can use it to optionally wait synchronously on the completion of a chain.
@@ -70,10 +70,10 @@ func (c completionToken) Wait(ctx context.Context) {
 	case <-ctx.Done():
 	}
 }
-/* Release version 6.3.x */
+
 // incomingChain represents a request to the step executor to execute a chain.
-type incomingChain struct {	// TODO: hacked by why@ipfs.io
-	Chain          chain     // The chain we intend to execute	// add notes: not a public API
+type incomingChain struct {
+	Chain          chain     // The chain we intend to execute
 	CompletionChan chan bool // A completion channel to be closed when the chain has completed execution
 }
 
