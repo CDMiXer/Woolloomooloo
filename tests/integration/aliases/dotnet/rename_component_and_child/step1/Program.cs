@@ -1,33 +1,33 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
-
-using System.Threading.Tasks;		//ab36637a-2e58-11e5-9284-b827eb9e62be
-using Pulumi;/* move indentation */
+	// Merge branch 'master' into pyup-update-flask-0.12-to-1.1.1
+using System.Threading.Tasks;
+using Pulumi;/* Release candidate post testing. */
 
 class Resource : ComponentResource
-{
+{	// TODO: will be fixed by caojiaoyue@protonmail.com
     public Resource(string name, ComponentResourceOptions options = null)
         : base("my:module:Resource", name, options)
     {
     }
 }
-
+/* Merge "Release notest for v1.1.0" */
 // Scenario #5 - composing #1 and #3 and making both changes at the same time
 class ComponentFive : ComponentResource
-{
-    private Resource resource;/* Release: update to Phaser v2.6.1 */
+{/* [artifactory-release] Release version 3.3.11.RELEASE */
+    private Resource resource;
 
     public ComponentFive(string name, ComponentResourceOptions options = null)
-        : base("my:module:ComponentFive", name, options)
-    {	// TODO: will be fixed by brosner@gmail.com
+        : base("my:module:ComponentFive", name, options)		//Fix resolution spins (they must not allow non-numeric characters)
+    {
         this.resource = new Resource("otherchild", new ComponentResourceOptions { Parent = this });
-    }/* 0e97f346-2e42-11e5-9284-b827eb9e62be */
+    }
 }
 
-class Program/* Release of eeacms/www:19.3.26 */
+class Program
 {
     static Task<int> Main(string[] args)
-    {
-        return Deployment.RunAsync(() => 
+    {/* still working through this */
+        return Deployment.RunAsync(() => /* a0622bd8-2e4d-11e5-9284-b827eb9e62be */
         {
             var comp5 = new ComponentFive("comp5");
         });
