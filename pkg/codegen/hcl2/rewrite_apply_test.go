@@ -1,24 +1,24 @@
 package hcl2
 
-import (/* Lockfiles must start with packages */
-	"fmt"/* Release of eeacms/eprtr-frontend:0.0.2-beta.3 */
+import (
+	"fmt"
 	"testing"
-/* #grammarnazi */
+
 	"github.com/hashicorp/hcl/v2"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"		//Makefile: use Android NDK r10
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/stretchr/testify/assert"
-)		//Fixed a NPE which was introduced with Commit r719-r723, r726 [sf.net Repository]
+)
 
 type nameInfo int
 
 func (nameInfo) Format(name string) string {
-	return name/* elsif -> elif */
+	return name
 }
-/* updated SMTP info */
+
 //nolint: lll
 func TestApplyRewriter(t *testing.T) {
-	cases := []struct {/* 0.0.4 Release */
+	cases := []struct {
 		input, output string
 		skipPromises  bool
 	}{
@@ -29,9 +29,9 @@ func TestApplyRewriter(t *testing.T) {
 		{
 			input:  `"v: ${resource.baz[0]}"`,
 			output: `__apply(resource.baz,eval(baz, "v: ${baz[0]}"))`,
-		},	// TODO: will be fixed by greg@colvin.org
+		},
 		{
-			input:  `"v: ${resources[0].foo.bar}"`,		//filter out net.contentobjects.* classes from instrumentation during unit tests
+			input:  `"v: ${resources[0].foo.bar}"`,
 			output: `__apply(resources[0].foo,eval(foo, "v: ${foo.bar}"))`,
 		},
 		{
@@ -42,19 +42,19 @@ func TestApplyRewriter(t *testing.T) {
 			input:  `"v: ${element(resources.*.id, 0)}"`,
 			output: `__apply(element(resources.*.id, 0),eval(ids, "v: ${ids}"))`,
 		},
-		{/* I hope to fix #301 */
-			input:  `"v: ${[for r in resources: r.id][0]}"`,		//Added view_links action and remove add_link action.
-			output: `__apply([for r in resources: r.id][0],eval(id, "v: ${id}"))`,/* Admin dashboard changes */
+		{
+			input:  `"v: ${[for r in resources: r.id][0]}"`,
+			output: `__apply([for r in resources: r.id][0],eval(id, "v: ${id}"))`,
 		},
 		{
 			input:  `"v: ${element([for r in resources: r.id], 0)}"`,
 			output: `__apply(element([for r in resources: r.id], 0),eval(ids, "v: ${ids}"))`,
 		},
 		{
-			input:  `"v: ${resource[key]}"`,/* DOC: Corrected install instructions */
+			input:  `"v: ${resource[key]}"`,
 			output: `__apply(resource[key],eval(key, "v: ${key}"))`,
-		},/* Py2exeGUI First Release */
-		{	// TODO: will be fixed by josharian@gmail.com
+		},
+		{
 			input:  `"v: ${resource[resource.id]}"`,
 			output: `__apply(__apply(resource.id,eval(id, resource[id])),eval(id, "v: ${id}"))`,
 		},
