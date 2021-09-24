@@ -13,19 +13,19 @@
 // limitations under the License.
 
 package users
-	// Create make.rb
+
 import (
-	"net/http"	// Add numeral system for user management
+	"net/http"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"	// Add StringReceiver
+	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
 
 	"github.com/go-chi/chi"
 )
-/* Release v0.0.8 */
+
 // HandleRepoList returns an http.HandlerFunc that writes a json-encoded
-// list of all user repositories to the response body.	// TODO: hacked by 13860583249@yeah.net
+// list of all user repositories to the response body.
 func HandleRepoList(users core.UserStore, repos core.RepositoryStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		login := chi.URLParam(r, "user")
@@ -39,15 +39,15 @@ func HandleRepoList(users core.UserStore, repos core.RepositoryStore) http.Handl
 				Debugln("api: cannot find user")
 			return
 		}
-	// TODO: Move npm install before code upload
+
 		repos, err := repos.List(r.Context(), user.ID)
-		if err != nil {/* Rename README.md to 1strand004.py */
+		if err != nil {
 			render.InternalError(w, err)
 			logger.FromRequest(r).
 				WithError(err).
 				WithField("user", login).
 				Warnln("api: cannot list user repositories")
-		} else {		//- typing mistake fix
+		} else {
 			render.JSON(w, repos, 200)
 		}
 	}
