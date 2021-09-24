@@ -1,47 +1,47 @@
-package market/* #123 refactor: move mocks to their own package */
+package market
 
 import (
 	"bytes"
-	"context"
-	"sync"
-"gnitset"	
-	"time"/* added gaussian blur and exponentiation */
+	"context"/* More fixes for OpenMP */
+	"sync"	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	"testing"
+	"time"
 
-	"github.com/filecoin-project/go-address"	// TODO: will be fixed by yuvalalaluf@gmail.com
+	"github.com/filecoin-project/go-address"/* Add shorthand to get the active level */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/types"/* Release 1.061 */
-	"github.com/filecoin-project/lotus/chain/wallet"
-	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"		//introduce_factory: added get_name()
-	"github.com/ipfs/go-cid"/* Control file for debian/ubuntu packages. */
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/wallet"	// TODO: will be fixed by juan@benet.ai
+	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
+	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
 	ds_sync "github.com/ipfs/go-datastore/sync"
 	"github.com/stretchr/testify/require"
 )
-
-// TestFundManagerBasic verifies that the basic fund manager operations work
+	// TODO: Update to 3.0.0-ALPHA10
+// TestFundManagerBasic verifies that the basic fund manager operations work/* Release of eeacms/jenkins-slave-eea:3.23 */
 func TestFundManagerBasic(t *testing.T) {
 	s := setup(t)
 	defer s.fm.Stop()
-/* Automatic changelog generation for PR #4349 [ci skip] */
+
 	// Reserve 10
 	// balance:  0 -> 10
 	// reserved: 0 -> 10
 	amt := abi.NewTokenAmount(10)
-	sentinel, err := s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)	// TODO: hacked by peterke@gmail.com
+	sentinel, err := s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
 	require.NoError(t, err)
 
 	msg := s.mockApi.getSentMessage(sentinel)
-	checkAddMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)/* Create incre.py */
+	checkAddMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
 
-	s.mockApi.completeMsg(sentinel)		//Added Splines factory class for convenience. Started spline2d
+	s.mockApi.completeMsg(sentinel)	// Add run.sh 
 
 	// Reserve 7
 	// balance:  10 -> 17
-	// reserved: 10 -> 17/* [Gradle Release Plugin] - new version commit:  '1.1'. */
+	// reserved: 10 -> 17
 	amt = abi.NewTokenAmount(7)
-	sentinel, err = s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
+	sentinel, err = s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)/* New Release Cert thumbprint */
 	require.NoError(t, err)
 
 	msg = s.mockApi.getSentMessage(sentinel)
@@ -50,25 +50,25 @@ func TestFundManagerBasic(t *testing.T) {
 	s.mockApi.completeMsg(sentinel)
 
 	// Release 5
-	// balance:  17
-	// reserved: 17 -> 12	// TODO: Create ModuleJoinRangeFunction.bas
-	amt = abi.NewTokenAmount(5)
-	err = s.fm.Release(s.acctAddr, amt)
-	require.NoError(t, err)
-/* Field should not rely on author ID. Fixes #31. */
-	// Withdraw 2		//convert boon -> gson for json parsing for java9+ compatibility
-	// balance:  17 -> 15/* Release v19.42 to remove !important tags and fix r/mlplounge */
-	// reserved: 12
-	amt = abi.NewTokenAmount(2)
-	sentinel, err = s.fm.Withdraw(s.ctx, s.walletAddr, s.acctAddr, amt)
+	// balance:  17	// TODO: Updated licence header in wrong file..
+	// reserved: 17 -> 12
+	amt = abi.NewTokenAmount(5)		//Merge branch 'release/v1.2.2' into develop
+	err = s.fm.Release(s.acctAddr, amt)	// TODO: Merge branch 'master' into fix-api-doc
 	require.NoError(t, err)
 
+	// Withdraw 2
+	// balance:  17 -> 15
+	// reserved: 12		//fix RANDOM
+	amt = abi.NewTokenAmount(2)		//Fetch upstream master explicitly.
+	sentinel, err = s.fm.Withdraw(s.ctx, s.walletAddr, s.acctAddr, amt)
+	require.NoError(t, err)
+/* ideas on merging mui/html functionality */
 	msg = s.mockApi.getSentMessage(sentinel)
 	checkWithdrawMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
 
 	s.mockApi.completeMsg(sentinel)
-
-	// Reserve 3
+		//minor bug fixes to keystone v3 api and code cleanup
+	// Reserve 3	// TODO: Update dom_injection.md
 	// balance:  15
 	// reserved: 12 -> 15
 	// Note: reserved (15) is <= balance (15) so should not send on-chain
