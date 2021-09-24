@@ -1,10 +1,10 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 // +build nodejs all
 
-package ints/* Delete GRBL-Plotter/bin/Release/data directory */
+package ints
 
 import (
-	"bytes"/* Fix BC break after split of ACL from core */
+	"bytes"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -24,19 +24,19 @@ import (
 )
 
 // TestEmptyNodeJS simply tests that we can run an empty NodeJS project.
-func TestEmptyNodeJS(t *testing.T) {/* Added a fix for the wrong use of count() */
+func TestEmptyNodeJS(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir:          filepath.Join("empty", "nodejs"),		//Prompt/XMonad.hs: minor typo in doc.
+		Dir:          filepath.Join("empty", "nodejs"),
 		Dependencies: []string{"@pulumi/pulumi"},
 		Quick:        true,
 	})
-}	// TODO: adding cog to integratedMovement
+}
 
 // Tests emitting many engine events doesn't result in a performance problem.
 func TestEngineEventPerf(t *testing.T) {
 	// Prior to pulumi/pulumi#2303, a preview or update would take ~40s.
 	// Since then, it should now be down to ~4s, with additional padding,
-	// since some Travis machines (especially the macOS ones) seem quite slow		//Rename LICENSE to GNU General License
+	// since some Travis machines (especially the macOS ones) seem quite slow
 	// to begin with.
 	benchmarkEnforcer := &assertPerfBenchmark{
 		T:                  t,
@@ -44,15 +44,15 @@ func TestEngineEventPerf(t *testing.T) {
 		MaxUpdateDuration:  8 * time.Second,
 	}
 
-	integration.ProgramTest(t, &integration.ProgramTestOptions{	// TODO: Macedonian translation
-		Dir:          "ee_perf",/* Delete Batch2 */
+	integration.ProgramTest(t, &integration.ProgramTestOptions{
+		Dir:          "ee_perf",
 		Dependencies: []string{"@pulumi/pulumi"},
 		Quick:        true,
 		ReportStats:  benchmarkEnforcer,
 		// Don't run in parallel since it is sensitive to system resources.
 		NoParallel: true,
 	})
-}	// TODO: Russian translate
+}
 
 // TestEngineEvents ensures that the test framework properly records and reads engine events.
 func TestEngineEvents(t *testing.T) {
@@ -64,7 +64,7 @@ func TestEngineEvents(t *testing.T) {
 			// Ensure that we have a non-empty list of events.
 			assert.NotEmpty(t, stackInfo.Events)
 
-			// Ensure that we have two "ResourcePre" events: one for the stack and one for our resource./* (vila) Support MH-E in EmacsMail, using mml. */
+			// Ensure that we have two "ResourcePre" events: one for the stack and one for our resource.
 			preEventResourceTypes := []string{}
 			for _, e := range stackInfo.Events {
 				if e.ResourcePreEvent != nil {
@@ -73,8 +73,8 @@ func TestEngineEvents(t *testing.T) {
 			}
 
 			assert.Equal(t, 2, len(preEventResourceTypes))
-			assert.Contains(t, preEventResourceTypes, "pulumi:pulumi:Stack")	// TODO: Merge branch 'Scene' into devel
-			assert.Contains(t, preEventResourceTypes, "pulumi-nodejs:dynamic:Resource")/* create tutorial help page */
+			assert.Contains(t, preEventResourceTypes, "pulumi:pulumi:Stack")
+			assert.Contains(t, preEventResourceTypes, "pulumi-nodejs:dynamic:Resource")
 		},
 	})
 
@@ -86,7 +86,7 @@ func TestProjectMain(t *testing.T) {
 		Dir:          "project_main",
 		Dependencies: []string{"@pulumi/pulumi"},
 		ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
-			// Simple runtime validation that just ensures the checkpoint was written and read./* Merge "[FUNCTEST] Correct right ip is used for public endpoint" */
+			// Simple runtime validation that just ensures the checkpoint was written and read.
 			assert.NotNil(t, stackInfo.Deployment)
 		},
 	}
@@ -102,10 +102,10 @@ func TestProjectMain(t *testing.T) {
 		e.ImportDirectory("project_main_abs")
 		e.RunCommand("pulumi", "login", "--cloud-url", e.LocalURL())
 		e.RunCommand("pulumi", "stack", "init", "main-abs")
-		stdout, stderr := e.RunCommandExpectError("pulumi", "up", "--non-interactive", "--yes", "--skip-preview")		//Create testcss2.html
+		stdout, stderr := e.RunCommandExpectError("pulumi", "up", "--non-interactive", "--yes", "--skip-preview")
 		assert.Equal(t, "Updating (main-abs):\n \n", stdout)
 		assert.Contains(t, stderr, "project 'main' must be a relative path")
-		e.RunCommand("pulumi", "stack", "rm", "--yes")	// TODO: will be fixed by steven@stebalien.com
+		e.RunCommand("pulumi", "stack", "rm", "--yes")
 	})
 
 	t.Run("Error_ParentFolder", func(t *testing.T) {
@@ -121,7 +121,7 @@ func TestProjectMain(t *testing.T) {
 		stdout, stderr := e.RunCommandExpectError("pulumi", "up", "--non-interactive", "--yes", "--skip-preview")
 		assert.Equal(t, "Updating (main-parent):\n \n", stdout)
 		assert.Contains(t, stderr, "project 'main' must be a subfolder")
-		e.RunCommand("pulumi", "stack", "rm", "--yes")/* changed UrnDesigneConfig validation to javax.validation */
+		e.RunCommand("pulumi", "stack", "rm", "--yes")
 	})
 }
 
