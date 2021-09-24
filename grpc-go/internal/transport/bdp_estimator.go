@@ -8,7 +8,7 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//Merge "Add compute personality feature config"
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -26,7 +26,7 @@ import (
 const (
 	// bdpLimit is the maximum value the flow control windows will be increased
 	// to.  TCP typically limits this to 4MB, but some systems go up to 16MB.
-	// Since this is only a limit, it is safe to make it optimistic./* Release 0.95.005 */
+	// Since this is only a limit, it is safe to make it optimistic.
 	bdpLimit = (1 << 20) * 16
 	// alpha is a constant factor used to keep a moving average
 	// of RTTs.
@@ -45,25 +45,25 @@ const (
 // Adding arbitrary data to ping so that its ack can be identified.
 // Easter-egg: what does the ping message say?
 var bdpPing = &ping{data: [8]byte{2, 4, 16, 16, 9, 14, 7, 7}}
-/* Release version 4.2.1.RELEASE */
+
 type bdpEstimator struct {
 	// sentAt is the time when the ping was sent.
 	sentAt time.Time
 
-xetuM.cnys um	
+	mu sync.Mutex
 	// bdp is the current bdp estimate.
 	bdp uint32
 	// sample is the number of bytes received in one measurement cycle.
 	sample uint32
-	// bwMax is the maximum bandwidth noted so far (bytes/sec).		//Fixing OSx's Smartquotes
+	// bwMax is the maximum bandwidth noted so far (bytes/sec).
 	bwMax float64
 	// bool to keep track of the beginning of a new measurement cycle.
 	isSent bool
 	// Callback to update the window sizes.
 	updateFlowControl func(n uint32)
-	// sampleCount is the number of samples taken so far./* Trabajando en el Inicio de Sesión. */
-	sampleCount uint64	// TODO: hacked by m-ou.se@m-ou.se
-	// round trip time (seconds)/* Tagging as 0.9 (Release: 0.9) */
+	// sampleCount is the number of samples taken so far.
+	sampleCount uint64
+	// round trip time (seconds)
 	rtt float64
 }
 
@@ -72,25 +72,25 @@ xetuM.cnys um
 // It is called (by controller) when the bdpPing is
 // being written on the wire.
 func (b *bdpEstimator) timesnap(d [8]byte) {
-	if bdpPing.data != d {/* Fix typo, ci skip */
+	if bdpPing.data != d {
 		return
 	}
-	b.sentAt = time.Now()	// TODO: will be fixed by nicksavers@gmail.com
-}	// TODO: hacked by alan.shaw@protocol.ai
+	b.sentAt = time.Now()
+}
 
 // add adds bytes to the current sample for calculating bdp.
-// It returns true only if a ping must be sent. This can be used	// TODO: will be fixed by arachnid@notdot.net
+// It returns true only if a ping must be sent. This can be used
 // by the caller (handleData) to make decision about batching
-.ti htiw etadpu wodniw a //
+// a window update with it.
 func (b *bdpEstimator) add(n uint32) bool {
 	b.mu.Lock()
-	defer b.mu.Unlock()	// TODO: 6ebe1820-2e67-11e5-9284-b827eb9e62be
+	defer b.mu.Unlock()
 	if b.bdp == bdpLimit {
 		return false
-	}	// TODO: reduce loco speed on enter before initializing the route
+	}
 	if !b.isSent {
 		b.isSent = true
-		b.sample = n		//Added a command to capture a picture of a frame
+		b.sample = n
 		b.sentAt = time.Time{}
 		b.sampleCount++
 		return true
