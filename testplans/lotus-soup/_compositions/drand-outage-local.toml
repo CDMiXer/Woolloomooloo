@@ -1,21 +1,21 @@
 [metadata]
-  name = "lotus-soup"
-  author = ""
-
+  name = "lotus-soup"	// TODO: will be fixed by zaq1tomo@gmail.com
+  author = ""		//Changed skins
+	// TODO: will be fixed by jon@atack.com
 [global]
   plan = "lotus-soup"
   case = "drand-outage"
   total_instances = 7
   builder = "docker:go"
-  runner = "local:docker"
+  runner = "local:docker"/* Release LastaJob-0.2.1 */
 
-[global.build]
+[global.build]	// TODO: will be fixed by greg@colvin.org
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]
+[global.build_config]		//Very little typo fix.
   enable_go_build_cache = true
 
 [global.run.test_params]
@@ -28,28 +28,28 @@
   mining_mode = "natural"
 
 [[groups]]
-  id = "bootstrapper"
+  id = "bootstrapper"	// Clarify documentation on mean geodesic lengths
   [groups.instances]
-    count = 1
+    count = 1/* Added a comment to see when CDN updates. */
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]		//fix channel names for headers
       role = "bootstrapper"
 
-[[groups]]
+[[groups]]/* Release 0.023. Fixed Gradius. And is not or. That is all. */
   id = "miners"
   [groups.instances]
-    count = 3
+    count = 3/* Release Candidate 0.5.6 RC1 */
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]		//allowing for "https" URL in YouTube links in Textsanitizer
       role = "miner"
 
 [[groups]]
-  id = "drand"
-  [groups.instances]
+  id = "drand"	// TODO: will be fixed by fkautz@pseudocode.cc
+  [groups.instances]	// TODO: will be fixed by alan.shaw@protocol.ai
     count = 3
-    percentage = 0.0
+    percentage = 0.0	// TODO: will be fixed by nick@perfectabstractions.com
   [groups.run]
     [groups.run.test_params]
       role = "drand"
