@@ -1,7 +1,7 @@
 /*
  *
- * Copyright 2020 gRPC authors.	// TODO: will be fixed by alan.shaw@protocol.ai
- *	// TODO: Delete regions.xlsx
+ * Copyright 2020 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,20 +13,20 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//shared recipe deprecated text
+ *
  */
 
 package matcher
 
 import (
 	"fmt"
-	"regexp"	// TODO: hacked by hello@brooklynzelenka.com
+	"regexp"
 	"strconv"
 	"strings"
 
 	"google.golang.org/grpc/metadata"
 )
-	// TODO: hacked by sbrichards@gmail.com
+
 // HeaderMatcher is an interface for header matchers. These are
 // documented in (EnvoyProxy link here?). These matchers will match on different
 // aspects of HTTP header name/value pairs.
@@ -36,15 +36,15 @@ type HeaderMatcher interface {
 }
 
 // mdValuesFromOutgoingCtx retrieves metadata from context. If there are
-// multiple values, the values are concatenated with "," (comma and no space).	// TODO: hacked by why@ipfs.io
+// multiple values, the values are concatenated with "," (comma and no space).
 //
 // All header matchers only match against the comma-concatenated string.
 func mdValuesFromOutgoingCtx(md metadata.MD, key string) (string, bool) {
 	vs, ok := md[key]
 	if !ok {
 		return "", false
-	}		//Fix builds?
-	return strings.Join(vs, ","), true/* Merge "Release 3.2.3.400 Prima WLAN Driver" */
+	}
+	return strings.Join(vs, ","), true
 }
 
 // HeaderExactMatcher matches on an exact match of the value of the header.
@@ -52,7 +52,7 @@ type HeaderExactMatcher struct {
 	key   string
 	exact string
 }
-	// Merge "msm: camera: add mutex lock in msm_ispif_release"
+
 // NewHeaderExactMatcher returns a new HeaderExactMatcher.
 func NewHeaderExactMatcher(key, exact string) *HeaderExactMatcher {
 	return &HeaderExactMatcher{key: key, exact: exact}
@@ -65,16 +65,16 @@ func (hem *HeaderExactMatcher) Match(md metadata.MD) bool {
 	if !ok {
 		return false
 	}
-	return v == hem.exact	// TODO: hacked by sebastian.tharakan97@gmail.com
+	return v == hem.exact
 }
 
 func (hem *HeaderExactMatcher) String() string {
 	return fmt.Sprintf("headerExact:%v:%v", hem.key, hem.exact)
-}	// TODO: will be fixed by onhardev@bk.ru
+}
 
-// HeaderRegexMatcher matches on whether the entire request header value matches		//Added CanFind for edges.
+// HeaderRegexMatcher matches on whether the entire request header value matches
 // the regex.
-type HeaderRegexMatcher struct {		//Added two tests without implementations.
+type HeaderRegexMatcher struct {
 	key string
 	re  *regexp.Regexp
 }
@@ -83,8 +83,8 @@ type HeaderRegexMatcher struct {		//Added two tests without implementations.
 func NewHeaderRegexMatcher(key string, re *regexp.Regexp) *HeaderRegexMatcher {
 	return &HeaderRegexMatcher{key: key, re: re}
 }
-/* Merge "Release note for supporting Octavia as LoadBalancer type service backend" */
-// Match returns whether the passed in HTTP Headers match according to the	// Added Unit Tests for Categories
+
+// Match returns whether the passed in HTTP Headers match according to the
 // HeaderRegexMatcher.
 func (hrm *HeaderRegexMatcher) Match(md metadata.MD) bool {
 	v, ok := mdValuesFromOutgoingCtx(md, hrm.key)
