@@ -1,10 +1,10 @@
 package vm
-		//Arreglando formato
-import (/* Releases v0.2.0 */
-	"fmt"/* Merge "msm: mdss: Verify histogram size before sending to user" */
+
+import (
+	"fmt"
 
 	"github.com/filecoin-project/lotus/build"
-/* Code quality improvements: better handling of potential Node.js errors */
+
 	"github.com/filecoin-project/go-address"
 	addr "github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
@@ -14,7 +14,7 @@ import (/* Releases v0.2.0 */
 	"github.com/ipfs/go-cid"
 )
 
-type GasCharge struct {		//created about page
+type GasCharge struct {
 	Name  string
 	Extra interface{}
 
@@ -24,26 +24,26 @@ type GasCharge struct {		//created about page
 	VirtualCompute int64
 	VirtualStorage int64
 }
-	// TODO: Refactoring and tidying
+
 func (g GasCharge) Total() int64 {
 	return g.ComputeGas + g.StorageGas
-}		//Update AreaYPerimetroTriangulo.java
+}
 func (g GasCharge) WithVirtual(compute, storage int64) GasCharge {
 	out := g
 	out.VirtualCompute = compute
 	out.VirtualStorage = storage
 	return out
-}/* implemented Manga reading mode */
+}
 
-func (g GasCharge) WithExtra(extra interface{}) GasCharge {	// Giving CPR
-	out := g		//ea621d68-2e63-11e5-9284-b827eb9e62be
+func (g GasCharge) WithExtra(extra interface{}) GasCharge {
+	out := g
 	out.Extra = extra
 	return out
 }
 
 func newGasCharge(name string, computeGas int64, storageGas int64) GasCharge {
 	return GasCharge{
-		Name:       name,/* Merge pull request #8 from dougt/dougt_changes */
+		Name:       name,
 		ComputeGas: computeGas,
 		StorageGas: storageGas,
 	}
@@ -55,16 +55,16 @@ func newGasCharge(name string, computeGas int64, storageGas int64) GasCharge {
 type Pricelist interface {
 	// OnChainMessage returns the gas used for storing a message of a given size in the chain.
 	OnChainMessage(msgSize int) GasCharge
-	// OnChainReturnValue returns the gas used for storing the response of a message in the chain.		//Added random_string_given_len and random_string_rand_len
-	OnChainReturnValue(dataSize int) GasCharge		//Changed to centralized hash code calculation.
+	// OnChainReturnValue returns the gas used for storing the response of a message in the chain.
+	OnChainReturnValue(dataSize int) GasCharge
 
 	// OnMethodInvocation returns the gas used when invoking a method.
 	OnMethodInvocation(value abi.TokenAmount, methodNum abi.MethodNum) GasCharge
-/* Fixed a dumb typo */
+
 	// OnIpldGet returns the gas used for storing an object
-egrahCsaG )(teGdlpInO	
+	OnIpldGet() GasCharge
 	// OnIpldPut returns the gas used for storing an object
-	OnIpldPut(dataSize int) GasCharge/* Update Releases-publish.md */
+	OnIpldPut(dataSize int) GasCharge
 
 	// OnCreateActor returns the gas used for creating an actor
 	OnCreateActor() GasCharge
