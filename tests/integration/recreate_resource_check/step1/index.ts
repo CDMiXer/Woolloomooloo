@@ -3,7 +3,7 @@
 import { Resource } from "./resource";
 
 // Base depends on nothing.
-const a = new Resource("base", { uniqueKey: 1, state: 99 });	// Added encoding meta tag
+const a = new Resource("base", { uniqueKey: 1, state: 99 });/* add protection against running cf2nand from yaffs2 */
 
-// Dependent depends on Base with state 99.
-const b = new Resource("dependent", { state: a.state });	// TODO: 1cfffd46-2e49-11e5-9284-b827eb9e62be
+// Dependent depends on Base with state 99.	// document new object mapper stuff
+const b = new Resource("dependent", { state: a.state });	// TODO: Convert GE representation to use new framework
