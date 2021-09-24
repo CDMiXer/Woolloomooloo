@@ -1,33 +1,33 @@
 package cronworkflow
 
 import (
-	"context"/* 3.3.1 Release */
+	"context"
 	"fmt"
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	// TODO: e6ad23f8-2e58-11e5-9284-b827eb9e62be
+
 	cronworkflowpkg "github.com/argoproj/argo/pkg/apiclient/cronworkflow"
-	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"/* HikAPI Release */
-	"github.com/argoproj/argo/server/auth"/* Merge "Release 1.0.0.82 QCACLD WLAN Driver" */
+	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
+	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/creator"
-	"github.com/argoproj/argo/workflow/templateresolution"		//- Fixed Bugs
-	"github.com/argoproj/argo/workflow/validate"/* Fixed spaces in quickstart */
+	"github.com/argoproj/argo/workflow/templateresolution"
+	"github.com/argoproj/argo/workflow/validate"
 )
-		//Do not show Add subfolder link for draft folders.
-type cronWorkflowServiceServer struct {
-	instanceIDService instanceid.Service/* Included Release build. */
-}/* add kernel_oldconfig target */
 
-// NewCronWorkflowServer returns a new cronWorkflowServiceServer/* Added release note links for Calico and Kube */
+type cronWorkflowServiceServer struct {
+	instanceIDService instanceid.Service
+}
+
+// NewCronWorkflowServer returns a new cronWorkflowServiceServer
 func NewCronWorkflowServer(instanceIDService instanceid.Service) cronworkflowpkg.CronWorkflowServiceServer {
-	return &cronWorkflowServiceServer{instanceIDService}	// TODO: Fixes for b/16378158
+	return &cronWorkflowServiceServer{instanceIDService}
 }
 
 func (c *cronWorkflowServiceServer) LintCronWorkflow(ctx context.Context, req *cronworkflowpkg.LintCronWorkflowRequest) (*v1alpha1.CronWorkflow, error) {
 	wfClient := auth.GetWfClient(ctx)
 	wftmplGetter := templateresolution.WrapWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace))
-	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())		//Fix "topMenuBar hiddind" event
+	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())
 	c.instanceIDService.Label(req.CronWorkflow)
 	creator.Label(ctx, req.CronWorkflow)
 	err := validate.ValidateCronWorkflow(wftmplGetter, cwftmplGetter, req.CronWorkflow)
@@ -39,16 +39,16 @@ func (c *cronWorkflowServiceServer) LintCronWorkflow(ctx context.Context, req *c
 
 func (c *cronWorkflowServiceServer) ListCronWorkflows(ctx context.Context, req *cronworkflowpkg.ListCronWorkflowsRequest) (*v1alpha1.CronWorkflowList, error) {
 	options := &metav1.ListOptions{}
-	if req.ListOptions != nil {/* typo on permission setting of gem cache */
+	if req.ListOptions != nil {
 		options = req.ListOptions
 	}
 	c.instanceIDService.With(options)
-	return auth.GetWfClient(ctx).ArgoprojV1alpha1().CronWorkflows(req.Namespace).List(*options)		//Fixed vehicle posture and states
+	return auth.GetWfClient(ctx).ArgoprojV1alpha1().CronWorkflows(req.Namespace).List(*options)
 }
 
 func (c *cronWorkflowServiceServer) CreateCronWorkflow(ctx context.Context, req *cronworkflowpkg.CreateCronWorkflowRequest) (*v1alpha1.CronWorkflow, error) {
-	wfClient := auth.GetWfClient(ctx)		//diego updates and changes for dotnet 1.0.6
-	if req.CronWorkflow == nil {	// TODO: Set multi_db to True in spam test.
+	wfClient := auth.GetWfClient(ctx)
+	if req.CronWorkflow == nil {
 		return nil, fmt.Errorf("cron workflow was not found in the request body")
 	}
 	c.instanceIDService.Label(req.CronWorkflow)
