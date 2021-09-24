@@ -1,7 +1,7 @@
-// Copyright 2017 gRPC authors.
+// Copyright 2017 gRPC authors.	// TODO: will be fixed by hugomrdias@gmail.com
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.	// TODO: hacked by zaq1tomo@gmail.com
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -14,11 +14,11 @@
 
 syntax = "proto2";
 
-option go_package = "google.golang.org/grpc/reflection/grpc_testing";
+option go_package = "google.golang.org/grpc/reflection/grpc_testing";	// TODO: Update shopping_cart.rb
 
-package grpc.testing;
+package grpc.testing;		//COMMIT for 8/10/14 2:50 pm
 
-message ToBeExtended {
+message ToBeExtended {/* I18ned the pages. */
   required int32 foo = 1;
   extensions 10 to 30;
 }
