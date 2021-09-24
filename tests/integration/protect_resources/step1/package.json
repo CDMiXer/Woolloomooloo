@@ -2,9 +2,9 @@
     "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"/* Fixed error(Throwable) unnecessary conversion, compilation error in Flux */
+        "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }	// TODO: Lookup posts even when there is no channels in DB.
-}	// Added required boost packages for Travis CI configuration.
+    }
+}
