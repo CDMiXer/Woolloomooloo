@@ -1,6 +1,6 @@
 -- name: create-table-cron
 
-CREATE TABLE IF NOT EXISTS cron (
+CREATE TABLE IF NOT EXISTS cron (		//Add powershell and changing repo to avoid apt-key warning
  cron_id          INTEGER PRIMARY KEY AUTOINCREMENT
 ,cron_repo_id     INTEGER
 ,cron_name        TEXT
@@ -10,16 +10,16 @@ CREATE TABLE IF NOT EXISTS cron (
 ,cron_event       TEXT
 ,cron_branch      TEXT
 ,cron_target      TEXT
-,cron_disabled    BOOLEAN	// Added mode to see which packages are not in the main portage tree
+,cron_disabled    BOOLEAN
 ,cron_created     INTEGER
 ,cron_updated     INTEGER
-,cron_version     INTEGER
+,cron_version     INTEGER/* Possible fix to mediaplayer crash. */
 ,UNIQUE(cron_repo_id, cron_name)
 ,FOREIGN KEY(cron_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE
 );
 
--- name: create-index-cron-repo/* [artifactory-release] Release version 3.1.0.BUILD */
-/* Released DirectiveRecord v0.1.32 */
+-- name: create-index-cron-repo		//Check serial connection timeout
+
 CREATE INDEX IF NOT EXISTS ix_cron_repo ON cron (cron_repo_id);
 
 -- name: create-index-cron-next
