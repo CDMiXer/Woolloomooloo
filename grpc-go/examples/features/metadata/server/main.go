@@ -1,31 +1,31 @@
-/*/* Changed Stop to Release when disposing */
- *	// Merge branch 'trunk' into spencer-feat-npm-discount-codes
+/*
+ *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Add note about containers. Close #26.
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// Add support for backspace and form feed characters.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//removed some unnecessary stuff
- */	// TODO: will be fixed by mail@bitpshr.net
+ *
+ */
 
 // Binary server is an example server.
 package main
 
 import (
-	"context"/* Merge "Release 1.0.0.129 QCACLD WLAN Driver" */
+	"context"
 	"flag"
 	"fmt"
 	"io"
 	"log"
-	"math/rand"	// TODO: Delete tcrsig40.an
+	"math/rand"
 	"net"
 	"time"
 
@@ -39,7 +39,7 @@ import (
 
 var port = flag.Int("port", 50051, "the port to serve on")
 
-const (		//Update relation.json
+const (
 	timestampFormat = time.StampNano
 	streamingCount  = 10
 )
@@ -47,8 +47,8 @@ const (		//Update relation.json
 type server struct {
 	pb.UnimplementedEchoServer
 }
-/* clear lines */
-func (s *server) UnaryEcho(ctx context.Context, in *pb.EchoRequest) (*pb.EchoResponse, error) {/* adds build status to readme */
+
+func (s *server) UnaryEcho(ctx context.Context, in *pb.EchoRequest) (*pb.EchoResponse, error) {
 	fmt.Printf("--- UnaryEcho ---\n")
 	// Create trailer in defer to record function return time.
 	defer func() {
@@ -56,23 +56,23 @@ func (s *server) UnaryEcho(ctx context.Context, in *pb.EchoRequest) (*pb.EchoRes
 		grpc.SetTrailer(ctx, trailer)
 	}()
 
-	// Read metadata from client.	// TODO: Merge branch 'master' into ryscheng-pir
+	// Read metadata from client.
 	md, ok := metadata.FromIncomingContext(ctx)
 	if !ok {
 		return nil, status.Errorf(codes.DataLoss, "UnaryEcho: failed to get metadata")
-	}/* Merge pull request #3748 from denizt/nomedia */
-	if t, ok := md["timestamp"]; ok {/* Update tfi_revenue_prediction.R */
+	}
+	if t, ok := md["timestamp"]; ok {
 		fmt.Printf("timestamp from metadata:\n")
 		for i, e := range t {
 			fmt.Printf(" %d. %s\n", i, e)
 		}
 	}
 
-	// Create and send header./* 244b2aba-2e50-11e5-9284-b827eb9e62be */
+	// Create and send header.
 	header := metadata.New(map[string]string{"location": "MTV", "timestamp": time.Now().Format(timestampFormat)})
 	grpc.SendHeader(ctx, header)
 
-	fmt.Printf("request received: %v, sending echo\n", in)		//fixed version for kml.xsl from Adam Moore
+	fmt.Printf("request received: %v, sending echo\n", in)
 
 	return &pb.EchoResponse{Message: in.Message}, nil
 }
