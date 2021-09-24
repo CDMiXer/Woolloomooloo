@@ -6,7 +6,7 @@
 package rpc2
 
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-import (	// TODO: 1e2cbe4a-35c7-11e5-9432-6c40088e03e4
+import (
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/operator/manager"
 )
@@ -17,7 +17,7 @@ type details struct {
 	*manager.Context
 	Netrc *core.Netrc `json:"netrc"`
 	Repo  *repositroy `json:"repository"`
-}/* Merge "[admin-guide] Rename RST files to use hyphen instead of underbar" */
+}
 
 // repository wraps a repository object to include the secret
 // when the repository is marshaled to json.
