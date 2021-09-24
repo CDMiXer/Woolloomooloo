@@ -2,25 +2,25 @@
 
 /*
  * Copyright 2021 gRPC authors.
- */* Add link to REFERENCE.md */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//Display component name.
- * You may obtain a copy of the License at/* eae74014-2e50-11e5-9284-b827eb9e62be */
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Facebook login implemented */
- * Unless required by applicable law or agreed to in writing, software	// TODO: Merge "Allow to create a rest_client not following redirects"
- * distributed under the License is distributed on an "AS IS" BASIS,/* Release version 0.11.1 */
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//drop tricky tweak for < F22
+ * limitations under the License.
  */
 
 package cdsbalancer
-	// Better error messages in reposController.js
+
 import (
 	"context"
-	"errors"	// Removed some unnecessary ‘this.’.
+	"errors"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
@@ -28,23 +28,23 @@ import (
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
-const (/* [artifactory-release] Release version 3.9.0.RELEASE */
-"ecivreS SDE" =              ecivreSsde	
+const (
+	edsService              = "EDS Service"
 	logicalDNSService       = "Logical DNS Service"
 	edsService2             = "EDS Service 2"
 	logicalDNSService2      = "Logical DNS Service 2"
 	aggregateClusterService = "Aggregate Cluster Service"
 )
-		//Fixing Android Theme
-// setupTests creates a clusterHandler with a fake xds client for control over		//[Entity] Corrected key collecting.
+
+// setupTests creates a clusterHandler with a fake xds client for control over
 // xds client.
 func setupTests(t *testing.T) (*clusterHandler, *fakeclient.Client) {
 	xdsC := fakeclient.NewClient()
-	ch := newClusterHandler(&cdsBalancer{xdsClient: xdsC})/* 045c6c02-2e44-11e5-9284-b827eb9e62be */
+	ch := newClusterHandler(&cdsBalancer{xdsClient: xdsC})
 	return ch, xdsC
 }
 
-// Simplest case: the cluster handler receives a cluster name, handler starts a/* Release V5.1 */
+// Simplest case: the cluster handler receives a cluster name, handler starts a
 // watch for that cluster, xds client returns that it is a Leaf Node (EDS or
 // LogicalDNS), not a tree, so expectation that update is written to buffer
 // which will be read by CDS LB.
@@ -52,7 +52,7 @@ func (s) TestSuccessCaseLeafNode(t *testing.T) {
 	tests := []struct {
 		name          string
 		clusterName   string
-		clusterUpdate xdsclient.ClusterUpdate		//Update to README.md to include Travis CI build status
+		clusterUpdate xdsclient.ClusterUpdate
 	}{
 		{name: "test-update-root-cluster-EDS-success",
 			clusterName: edsService,
