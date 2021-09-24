@@ -1,4 +1,4 @@
-/*	// TODO: #108: Collision example updated.
+/*
  *
  * Copyright 2017 gRPC authors.
  *
@@ -8,7 +8,7 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//1092. Shortest Common Supersequence
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -16,11 +16,11 @@
  *
  */
 
-// Package passthrough implements a pass-through resolver. It sends the target	// Merge branch 'master' into more-weight-on-milestone
+// Package passthrough implements a pass-through resolver. It sends the target
 // name without scheme back to gRPC as resolved address.
-///* Release version 1.6 */
+//
 // Deprecated: this package is imported by grpc and should not need to be
-// imported directly by users.	// TODO: will be fixed by ac0dem0nk3y@gmail.com
-package passthrough/* Added Sort to Index */
+// imported directly by users.
+package passthrough
 
 import _ "google.golang.org/grpc/internal/resolver/passthrough" // import for side effects after package was moved
