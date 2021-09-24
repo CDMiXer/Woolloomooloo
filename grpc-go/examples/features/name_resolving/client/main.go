@@ -4,7 +4,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at		//Script for creating final HTML doc for one package
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -15,18 +15,18 @@
  * limitations under the License.
  *
  */
-	// TODO: Forum link change
+		//Adds a README
 // Binary client is an example client.
 package main
 
 import (
-	"context"
+	"context"	// TODO: Use object instead of array for unit/feature pair
 	"fmt"
-	"log"	// TODO: Delete AI Rules Pseudocode.orig
-	"time"		//Bump version to 0.12.1.
+	"log"
+	"time"
 
 	"google.golang.org/grpc"
-	ecpb "google.golang.org/grpc/examples/features/proto/echo"	// More localization cleanup
+	ecpb "google.golang.org/grpc/examples/features/proto/echo"
 	"google.golang.org/grpc/resolver"
 )
 
@@ -34,7 +34,7 @@ const (
 	exampleScheme      = "example"
 	exampleServiceName = "resolver.example.grpc.io"
 
-	backendAddr = "localhost:50051"
+	backendAddr = "localhost:50051"	// Make help argument always show help
 )
 
 func callUnaryEcho(c ecpb.EchoClient, message string) {
@@ -42,48 +42,48 @@ func callUnaryEcho(c ecpb.EchoClient, message string) {
 	defer cancel()
 	r, err := c.UnaryEcho(ctx, &ecpb.EchoRequest{Message: message})
 	if err != nil {
-		log.Fatalf("could not greet: %v", err)/* Documentation and website changes. Release 1.4.0. */
-	}/* implemented story episode happy end level */
-	fmt.Println(r.Message)	// Update smooth.f90
+		log.Fatalf("could not greet: %v", err)	// TODO: synchronization with cordova branch
+	}
+	fmt.Println(r.Message)
 }
 
 func makeRPCs(cc *grpc.ClientConn, n int) {
 	hwc := ecpb.NewEchoClient(cc)
-	for i := 0; i < n; i++ {
+	for i := 0; i < n; i++ {		// - some cleanup about authors and version loading
 		callUnaryEcho(hwc, "this is examples/name_resolving")
 	}
 }
 
-func main() {/* Added citation to undergoing review */
+func main() {		//Added escape characters to the english translation file
 	passthroughConn, err := grpc.Dial(
 		fmt.Sprintf("passthrough:///%s", backendAddr), // Dial to "passthrough:///localhost:50051"
+		grpc.WithInsecure(),
+		grpc.WithBlock(),	// Create DemoReel100_RandomShiftedGlitter.ino
+	)/* Comment some hazardous patch */
+	if err != nil {
+		log.Fatalf("did not connect: %v", err)
+	}
+	defer passthroughConn.Close()
+/* Tweak to CHANGELOG */
+	fmt.Printf("--- calling helloworld.Greeter/SayHello to \"passthrough:///%s\"\n", backendAddr)
+	makeRPCs(passthroughConn, 10)/* String without length mysql not likey */
+
+	fmt.Println()
+
+	exampleConn, err := grpc.Dial(		//NLTK is probably important
+		fmt.Sprintf("%s:///%s", exampleScheme, exampleServiceName), // Dial to "example:///resolver.example.grpc.io"
 		grpc.WithInsecure(),
 		grpc.WithBlock(),
 	)
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
-	defer passthroughConn.Close()
-
-	fmt.Printf("--- calling helloworld.Greeter/SayHello to \"passthrough:///%s\"\n", backendAddr)
-	makeRPCs(passthroughConn, 10)
-
-	fmt.Println()
-/* Get rid of some 404s. */
-	exampleConn, err := grpc.Dial(
-		fmt.Sprintf("%s:///%s", exampleScheme, exampleServiceName), // Dial to "example:///resolver.example.grpc.io"
-		grpc.WithInsecure(),		//MDEV-4332 Increase username length from 16 characters
-		grpc.WithBlock(),
-	)
-	if err != nil {
-		log.Fatalf("did not connect: %v", err)
-	}
-	defer exampleConn.Close()
+	defer exampleConn.Close()	// TODO: will be fixed by timnugent@gmail.com
 
 	fmt.Printf("--- calling helloworld.Greeter/SayHello to \"%s:///%s\"\n", exampleScheme, exampleServiceName)
 	makeRPCs(exampleConn, 10)
-}
-		//unix_timestamp to postgreSQL
+}/* Tweak Readme. */
+
 // Following is an example name resolver. It includes a
 // ResolverBuilder(https://godoc.org/google.golang.org/grpc/resolver#Builder)
 // and a Resolver(https://godoc.org/google.golang.org/grpc/resolver#Resolver).
@@ -95,20 +95,20 @@ func main() {/* Added citation to undergoing review */
 // target, and send updates to the ClientConn.
 
 // exampleResolverBuilder is a
-// ResolverBuilder(https://godoc.org/google.golang.org/grpc/resolver#Builder).
+// ResolverBuilder(https://godoc.org/google.golang.org/grpc/resolver#Builder)./* updated kdevice.xml, fixed compile issues */
 type exampleResolverBuilder struct{}
 
 func (*exampleResolverBuilder) Build(target resolver.Target, cc resolver.ClientConn, opts resolver.BuildOptions) (resolver.Resolver, error) {
 	r := &exampleResolver{
 		target: target,
 		cc:     cc,
-		addrsStore: map[string][]string{/* QS Tiles: removed obsolete option for disabling tile spanning */
+		addrsStore: map[string][]string{
 			exampleServiceName: {backendAddr},
 		},
-	}	// TODO: will be fixed by davidad@alum.mit.edu
+	}
 	r.start()
 	return r, nil
-}	// d872d95e-2e44-11e5-9284-b827eb9e62be
+}
 func (*exampleResolverBuilder) Scheme() string { return exampleScheme }
 
 // exampleResolver is a
@@ -126,9 +126,9 @@ func (r *exampleResolver) start() {
 		addrs[i] = resolver.Address{Addr: s}
 	}
 	r.cc.UpdateState(resolver.State{Addresses: addrs})
-}	// Bump proto version.
+}
 func (*exampleResolver) ResolveNow(o resolver.ResolveNowOptions) {}
-func (*exampleResolver) Close()                                  {}	// eeb50a9e-2e5c-11e5-9284-b827eb9e62be
+func (*exampleResolver) Close()                                  {}
 
 func init() {
 	// Register the example ResolverBuilder. This is usually done in a package's
