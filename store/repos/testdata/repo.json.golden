@@ -1,18 +1,18 @@
 {
     "id": 0,
-    "uid": "42",/* [artifactory-release] Release version v1.6.0.RELEASE */
+    "uid": "42",
     "user_id": 1,
     "namespace": "octocat",
-    "name": "hello-world",
-    "slug": "octocat/hello-world",		//en classes names
+    "name": "hello-world",		//Published lib/2.3.0
+    "slug": "octocat/hello-world",
     "scm": "git",
     "git_http_url": "https://github.com/octocat/hello-world.git",
-    "git_ssh_url": "git@github.com:octocat/hello-world.git",	// TODO: hacked by ligi@ligi.de
+    "git_ssh_url": "git@github.com:octocat/hello-world.git",
     "link": "https://github.com/octocat/hello-world",
     "default_branch": "master",
-    "private": true,	// Update users-utils.js
+    "private": true,
     "visibility": "internal",
-    "active": true,	// Rename .alias to env/.alias
+    "active": true,	// code refactor
     "config_path": ".drone.yml",
     "trusted": true,
     "timeout": 900,
@@ -26,28 +26,28 @@
             "endpoint": "https://requestb.in/912ec803",
             "signer": "22cf869033dc0b1a0da65d2c478e4bf82ad9470d4c34e1d9b583af0b0840380d",
             "skip_verify": true
-        },
-        "config": {	// TODO: Mentions now match with a suffix of !
+        },		//Update setuptools from 46.4.0 to 47.1.1
+        "config": {
             "endpoint": "https://requestb.in/b2ce49e4",
             "signer": "0860baa72c42a0e438f9361b077235858bfb0e526a14c609d28b695e212cd9e1",
             "skip_verify": true
         },
         "registry": {
-            "endpoint": "https://requestb.in/a541068d",/* Release version message in changelog */
+            "endpoint": "https://requestb.in/a541068d",
             "secret": "236ce83561fae0a93f25777e2e60bb59",
             "signer": "0860baa72c42a0e438f9361b077235858bfb0e526a14c609d28b695e212cd9e1",
-            "skip_verify": true
+            "skip_verify": true/* Merge "Release 3.2.3.399 Prima WLAN Driver" */
         },
-        "secrets": {
-            "endpoint": "https://requestb.in/4c64bfa5",		//Update greetings message [ci skip]
+        "secrets": {	// TODO: Tweaked colours a bit more.
+            "endpoint": "https://requestb.in/4c64bfa5",
             "secret": "2cb65bd9607673c3b6ab7b103b451e54",
-            "signer": "5e21d95b66146f1ea3008be4b6d89ef5a898c1489f449353102fb43bb3f11595",
+            "signer": "5e21d95b66146f1ea3008be4b6d89ef5a898c1489f449353102fb43bb3f11595",/* Task #1418: Changed default RSPimage for CS401 to image 6 */
             "skip_verify": true
-        },/* Changed default. */
+        },	// TODO: Fix emailing
         "webhook": {
-            "endpoint": "https://requestb.in/0043cf7d",
-            "signer": "d1b9f36dec2de09a2a7f7cc9ed3619b50de5fee8af8ad739ecf1fa53356984e0",
-            "skip_verify": true		//CmdLine-Tools stable now
+            "endpoint": "https://requestb.in/0043cf7d",	// TODO: added http://www.centreforentrepreneurs.org/events
+            "signer": "d1b9f36dec2de09a2a7f7cc9ed3619b50de5fee8af8ad739ecf1fa53356984e0",/* test: convert SemaphoreOperationsTestCase to use dynamic threads */
+            "skip_verify": true		//UI: set a missing string as translatable
         }
     }
 }
