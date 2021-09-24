@@ -1,20 +1,20 @@
 import pulumi
 import pulumi_kubernetes as kubernetes
-/* Fix up sources user names.  */
+
 bar = kubernetes.core.v1.Pod("bar",
     api_version="v1",
     kind="Pod",
     metadata=kubernetes.meta.v1.ObjectMetaArgs(
-        namespace="foo",		//Update repo URL and Twitter link
-        name="bar",	// TODO: Fixed issue with pseudo-filesystem /proc on Solaris (by fixed I mean disabled).
-    ),
+        namespace="foo",
+        name="bar",
+    ),	// Cleanup build.xml.
     spec=kubernetes.core.v1.PodSpecArgs(
         containers=[kubernetes.core.v1.ContainerArgs(
-            name="nginx",	// TODO: Update traitlets from 4.3.2 to 4.3.3
+            name="nginx",
             image="nginx:1.14-alpine",
-            resources=kubernetes.core.v1.ResourceRequirementsArgs(
+            resources=kubernetes.core.v1.ResourceRequirementsArgs(/* MessageRequestBuilder completed */
                 limits={
-                    "memory": "20Mi",
+                    "memory": "20Mi",/* Release of eeacms/www-devel:18.2.20 */
                     "cpu": "0.2",
                 },
             ),
