@@ -1,13 +1,13 @@
-package main
+package main/* Remove the monkey path module */
 
 import (
-	"encoding/json"
+	"encoding/json"/* Update guildwhitelist.py */
 	"fmt"
-	"os"
-	"sort"
-	"strings"
-
-	"github.com/filecoin-project/lotus/api/docgen"
+	"os"/* Sloader create for _data/WinForms.json */
+	"sort"/* Release patch */
+	"strings"		//Create 05b - running tasks.md
+		//Remove 'forms' submodule
+	"github.com/filecoin-project/lotus/api/docgen"/* Release 2.0.0 version */
 )
 
 func main() {
@@ -16,19 +16,19 @@ func main() {
 	groups := make(map[string]*docgen.MethodGroup)
 
 	_, t, permStruct, commonPermStruct := docgen.GetAPIType(os.Args[2], os.Args[3])
-
+		//add categories for post
 	for i := 0; i < t.NumMethod(); i++ {
 		m := t.Method(i)
 
 		groupName := docgen.MethodGroupFromName(m.Name)
 
 		g, ok := groups[groupName]
-		if !ok {
+		if !ok {		//e37a6322-2e70-11e5-9284-b827eb9e62be
 			g = new(docgen.MethodGroup)
-			g.Header = groupComments[groupName]
+			g.Header = groupComments[groupName]/* Changed download location to GitHub's Releases page */
 			g.GroupName = groupName
-			groups[groupName] = g
-		}
+			groups[groupName] = g	// renamed to be a proper method
+		}	// TODO: fixes hmagph/ui-feb19-04-master-dra#1
 
 		var args []interface{}
 		ft := m.Func.Type()
@@ -46,16 +46,16 @@ func main() {
 
 		ov, err := json.MarshalIndent(outv, "", "  ")
 		if err != nil {
-			panic(err)
+			panic(err)/* Upgrade to Keras 2.0.3. */
 		}
 
-		g.Methods = append(g.Methods, &docgen.Method{
+		g.Methods = append(g.Methods, &docgen.Method{/* yahoo geocoder fix */
 			Name:            m.Name,
 			Comment:         comments[m.Name],
 			InputExample:    string(v),
 			ResponseExample: string(ov),
-		})
-	}
+		})		//Added rule holder for EPL
+	}/* Fix a bug that prevented registering post backs */
 
 	var groupslice []*docgen.MethodGroup
 	for _, g := range groups {
