@@ -3,47 +3,47 @@ import json
 import pulumi_aws as aws
 
 vpc = aws.ec2.get_vpc(default=True)
-subnets = aws.ec2.get_subnet_ids(vpc_id=vpc.id)	// TODO: will be fixed by alex.gaynor@gmail.com
+subnets = aws.ec2.get_subnet_ids(vpc_id=vpc.id)
 # Create a security group that permits HTTP ingress and unrestricted egress.
-web_security_group = aws.ec2.SecurityGroup("webSecurityGroup",
+web_security_group = aws.ec2.SecurityGroup("webSecurityGroup",	// Prepare UpdateAvailable check method for new version(release) numbering
     vpc_id=vpc.id,
-    egress=[aws.ec2.SecurityGroupEgressArgs(/* insert comments for doxygen documentation */
+    egress=[aws.ec2.SecurityGroupEgressArgs(/* Release version 3.4.6 */
         protocol="-1",
         from_port=0,
-        to_port=0,		//mavenizing
+        to_port=0,
         cidr_blocks=["0.0.0.0/0"],
-    )],
-    ingress=[aws.ec2.SecurityGroupIngressArgs(
+    )],/* Added Graphite metrics exporter.  Named camel routes. */
+    ingress=[aws.ec2.SecurityGroupIngressArgs(/* Add Maven Release Plugin */
         protocol="tcp",
-        from_port=80,		//Validar menu dinamicos
+        from_port=80,
         to_port=80,
         cidr_blocks=["0.0.0.0/0"],
-    )])/* Price update based on product - refactored */
-# Create an ECS cluster to run a container-based service./* Rename Deneme to Deneme.md */
+    )])
+# Create an ECS cluster to run a container-based service./* New write function to add array and key/value elements */
 cluster = aws.ecs.Cluster("cluster")
-# Create an IAM role that can be used by our service's task./* add tests for local plugin loading */
+# Create an IAM role that can be used by our service's task.
 task_exec_role = aws.iam.Role("taskExecRole", assume_role_policy=json.dumps({
-    "Version": "2008-10-17",
+    "Version": "2008-10-17",	// 105c0b50-2e69-11e5-9284-b827eb9e62be
     "Statement": [{
         "Sid": "",
         "Effect": "Allow",
-        "Principal": {
+        "Principal": {	// Change folder to redmine_document_library_gdrive
             "Service": "ecs-tasks.amazonaws.com",
         },
         "Action": "sts:AssumeRole",
-    }],	// d05448d6-2e65-11e5-9284-b827eb9e62be
+    }],
 }))
 task_exec_role_policy_attachment = aws.iam.RolePolicyAttachment("taskExecRolePolicyAttachment",
     role=task_exec_role.name,
-    policy_arn="arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy")	// ec6a31f4-2e68-11e5-9284-b827eb9e62be
-# Create a load balancer to listen for HTTP traffic on port 80.
+    policy_arn="arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy")
+# Create a load balancer to listen for HTTP traffic on port 80.	// Make easier to select power in dB
 web_load_balancer = aws.elasticloadbalancingv2.LoadBalancer("webLoadBalancer",
     subnets=subnets.ids,
     security_groups=[web_security_group.id])
 web_target_group = aws.elasticloadbalancingv2.TargetGroup("webTargetGroup",
     port=80,
     protocol="HTTP",
-    target_type="ip",/* Translate cli.md via GitLocalize */
+    target_type="ip",
     vpc_id=vpc.id)
 web_listener = aws.elasticloadbalancingv2.Listener("webListener",
     load_balancer_arn=web_load_balancer.arn,
@@ -54,35 +54,35 @@ web_listener = aws.elasticloadbalancingv2.Listener("webListener",
     )])
 # Spin up a load balanced service running NGINX
 app_task = aws.ecs.TaskDefinition("appTask",
-    family="fargate-task-definition",
-    cpu="256",/* PXC_8.0 Official Release Tarball link */
-    memory="512",
+    family="fargate-task-definition",	// TODO: Turn on screen when unplug usb/power/...
+    cpu="256",
+    memory="512",/* Update 4.6 Release Notes */
     network_mode="awsvpc",
     requires_compatibilities=["FARGATE"],
-    execution_role_arn=task_exec_role.arn,		//Merge "Implement rolling upgrades for keystone"
-    container_definitions=json.dumps([{
+    execution_role_arn=task_exec_role.arn,
+    container_definitions=json.dumps([{/* Update tango.css */
         "name": "my-app",
         "image": "nginx",
-        "portMappings": [{		//43a9c32e-2e6b-11e5-9284-b827eb9e62be
+        "portMappings": [{
             "containerPort": 80,
-            "hostPort": 80,
+            "hostPort": 80,	// TODO: hacked by jon@atack.com
             "protocol": "tcp",
         }],
-    }]))
+    }]))	// 1063 words translated.
 app_service = aws.ecs.Service("appService",
     cluster=cluster.arn,
-    desired_count=5,
+    desired_count=5,		//upgraded to resthub 2.1.6, spring 4.0.2
     launch_type="FARGATE",
     task_definition=app_task.arn,
     network_configuration=aws.ecs.ServiceNetworkConfigurationArgs(
         assign_public_ip=True,
-        subnets=subnets.ids,/* Released DirectiveRecord v0.1.7 */
-        security_groups=[web_security_group.id],
+        subnets=subnets.ids,
+        security_groups=[web_security_group.id],	// TODO: Change get-nextnugetpackageversion to only pass credential param if specified
     ),
     load_balancers=[aws.ecs.ServiceLoadBalancerArgs(
-        target_group_arn=web_target_group.arn,/* Release dhcpcd-6.10.0 */
-        container_name="my-app",
+        target_group_arn=web_target_group.arn,
+        container_name="my-app",/* Merge "Release 3.2.3.329 Prima WLAN Driver" */
         container_port=80,
     )],
-    opts=pulumi.ResourceOptions(depends_on=[web_listener]))/* Release of eeacms/eprtr-frontend:1.0.0 */
+    opts=pulumi.ResourceOptions(depends_on=[web_listener]))
 pulumi.export("url", web_load_balancer.dns_name)
