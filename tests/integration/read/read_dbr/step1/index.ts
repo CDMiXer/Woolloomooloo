@@ -1,10 +1,10 @@
-// Copyright 2016-2018, Pulumi Corporation./* EV3 Gyrosensor for use with the sensorframework */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Fix handlebar comments in javascript snippet */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,4 +19,4 @@ import { Resource } from "./resource";
 const a = new Resource("a", { state: 42 }, { id: "existing-id"} );
 const b = new Resource("b", { state: a.state.apply((b: any) => b + 1)});
 const c = new Resource("c", { state: b.state }, { id: "another-existing-id" })
-		//Add link to documentation in README.md
+
