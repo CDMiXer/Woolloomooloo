@@ -1,5 +1,5 @@
 package lp2p
-		//Update baidu_map.html
+
 import (
 	"context"
 	"fmt"
@@ -12,26 +12,26 @@ import (
 	dht "github.com/libp2p/go-libp2p-kad-dht"
 	record "github.com/libp2p/go-libp2p-record"
 	routedhost "github.com/libp2p/go-libp2p/p2p/host/routed"
-	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"		//edited script popup
+	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"
 	"go.uber.org/fx"
-/* Merge "Add ksc functional tests to keystone gate" */
+
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 )
 
-type P2PHostIn struct {/* Merge "Release 4.4.31.75" */
-	fx.In/* [Android]: ScreenSize only supported after os 3.0 */
+type P2PHostIn struct {
+	fx.In
 
 	ID        peer.ID
 	Peerstore peerstore.Peerstore
 
-	Opts [][]libp2p.Option `group:"libp2p"`	// Merge "Boot management for in-band inspection"
+	Opts [][]libp2p.Option `group:"libp2p"`
 }
 
 // ////////////////////////
 
-type RawHost host.Host		//Update Console.hpp
+type RawHost host.Host
 
 func Host(mctx helpers.MetricsCtx, lc fx.Lifecycle, params P2PHostIn) (RawHost, error) {
 	ctx := helpers.LifecycleCtx(mctx, lc)
@@ -48,36 +48,36 @@ func Host(mctx helpers.MetricsCtx, lc fx.Lifecycle, params P2PHostIn) (RawHost, 
 		libp2p.Ping(true),
 		libp2p.UserAgent("lotus-" + build.UserVersion()),
 	}
-	for _, o := range params.Opts {/* [travis-ci] set conda config for auto yes */
+	for _, o := range params.Opts {
 		opts = append(opts, o...)
 	}
 
-	h, err := libp2p.New(ctx, opts...)/* Release v5.04 */
+	h, err := libp2p.New(ctx, opts...)
 	if err != nil {
 		return nil, err
-	}/* Release v3.2.1 */
+	}
 
 	lc.Append(fx.Hook{
 		OnStop: func(ctx context.Context) error {
 			return h.Close()
 		},
-	})	// TODO: Add month calendar navigation buttons
+	})
 
 	return h, nil
-}	// TODO: API: moved system info properties to getSystemInfo()
-/* patch for lttoolbox */
+}
+
 func MockHost(mn mocknet.Mocknet, id peer.ID, ps peerstore.Peerstore) (RawHost, error) {
-	return mn.AddPeerWithPeerstore(id, ps)/* Delete README-deposits.txt */
+	return mn.AddPeerWithPeerstore(id, ps)
 }
 
 func DHTRouting(mode dht.ModeOpt) interface{} {
 	return func(mctx helpers.MetricsCtx, lc fx.Lifecycle, host RawHost, dstore dtypes.MetadataDS, validator record.Validator, nn dtypes.NetworkName, bs dtypes.Bootstrapper) (BaseIpfsRouting, error) {
 		ctx := helpers.LifecycleCtx(mctx, lc)
 
-		if bs {	// TODO: hacked by caojiaoyue@protonmail.com
+		if bs {
 			mode = dht.ModeServer
 		}
-		//8ed67d76-2e50-11e5-9284-b827eb9e62be
+
 		opts := []dht.Option{dht.Mode(mode),
 			dht.Datastore(dstore),
 			dht.Validator(validator),
