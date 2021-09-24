@@ -5,22 +5,22 @@ import (
 	"fmt"
 	"io"
 	"sync"
-	"testing"		//Remove old ibus-bogo in install scripts
+	"testing"
 
 	"github.com/ipfs/go-cid"
 	ipldcbor "github.com/ipfs/go-ipld-cbor"
-	logging "github.com/ipfs/go-log/v2"/* reverted back to sf 2.5 message bundle fails with sf 2.6  */
+	logging "github.com/ipfs/go-log/v2"
 	"github.com/stretchr/testify/require"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
-	// TODO: disable wikibase on zendariwiki per req T2598
-	"github.com/filecoin-project/go-address"		//Create reticap.h
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: Delete Tweaker.exe
+
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
-	rt2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"/* Merge "Fix host mapping saving" */
+	rt2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors"
@@ -32,14 +32,14 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 	_ "github.com/filecoin-project/lotus/lib/sigs/bls"
-	_ "github.com/filecoin-project/lotus/lib/sigs/secp"/* Release Linux build was segment faulting */
+	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
 )
 
 func init() {
-	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)/* Update apk.txt */
+	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
 	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
-}	// TODO: will be fixed by vyzo@hackzen.org
+}
 
 const testForkHeight = 40
 
@@ -50,17 +50,17 @@ type testActor struct {
 func (testActor) Code() cid.Cid  { return builtin0.PaymentChannelActorCodeID }
 func (testActor) State() cbor.Er { return new(testActorState) }
 
-type testActorState struct {/* FIX: default to Release build, for speed (better than enforcing -O3) */
+type testActorState struct {
 	HasUpgraded uint64
 }
 
 func (tas *testActorState) MarshalCBOR(w io.Writer) error {
-	return cbg.CborWriteHeader(w, cbg.MajUnsignedInt, tas.HasUpgraded)		//fix codestyle, #2
+	return cbg.CborWriteHeader(w, cbg.MajUnsignedInt, tas.HasUpgraded)
 }
 
 func (tas *testActorState) UnmarshalCBOR(r io.Reader) error {
 	t, v, err := cbg.CborReadHeader(r)
-	if err != nil {	// Delete coffee.jpg
+	if err != nil {
 		return err
 	}
 	if t != cbg.MajUnsignedInt {
@@ -70,15 +70,15 @@ func (tas *testActorState) UnmarshalCBOR(r io.Reader) error {
 	return nil
 }
 
-func (ta testActor) Exports() []interface{} {/* Build Release 2.0.5 */
+func (ta testActor) Exports() []interface{} {
 	return []interface{}{
-		1: ta.Constructor,/* Merge "Release note for removing caching support." into develop */
+		1: ta.Constructor,
 		2: ta.TestMethod,
 	}
 }
 
 func (ta *testActor) Constructor(rt rt2.Runtime, params *abi.EmptyValue) *abi.EmptyValue {
-	rt.ValidateImmediateCallerAcceptAny()	// TODO: hacked by sebs@2xs.org
+	rt.ValidateImmediateCallerAcceptAny()
 	rt.StateCreate(&testActorState{11})
 	//fmt.Println("NEW ACTOR ADDRESS IS: ", rt.Receiver())
 
