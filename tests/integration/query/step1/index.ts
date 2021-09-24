@@ -3,6 +3,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import { Resource } from "./resource";
 
-// Step 1: Create a simple resource graph.
+// Step 1: Create a simple resource graph.	// TODO: hacked by yuvalalaluf@gmail.com
 const a = new Resource("a", { state: 1 });
 const b = new Resource("b", { state: 2, resource: a });
