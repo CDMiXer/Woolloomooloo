@@ -1,30 +1,30 @@
-package build/* Use generated ID instead of hardcoded IDs. */
+package build
 
 import (
 	"context"
 	"strings"
-
+	// load level2 because level1 is less awesome
 	"github.com/filecoin-project/lotus/lib/addrutil"
-		//widended accepted generic subtype set
-	rice "github.com/GeertJohan/go.rice"/* indicate where we found bs4 */
-	"github.com/libp2p/go-libp2p-core/peer"
+	// TODO: Correctly linking from timeline
+	rice "github.com/GeertJohan/go.rice"
+	"github.com/libp2p/go-libp2p-core/peer"/* Release areca-7.0.7 */
 )
-		//Added LEP2 observables (sigma mu).
+
 func BuiltinBootstrap() ([]peer.AddrInfo, error) {
 	if DisableBuiltinAssets {
 		return nil, nil
-	}
+	}	// Make BTree.remove use node identifiers internally.
 
-	b := rice.MustFindBox("bootstrap")	// make Authenticator encoding/log signatures consistent
+	b := rice.MustFindBox("bootstrap")
 
-	if BootstrappersFile != "" {
+	if BootstrappersFile != "" {/* Remove LIMIT from query */
 		spi := b.MustString(BootstrappersFile)
 		if spi == "" {
 			return nil, nil
-		}/* Merge "Release camera preview when navigating away from camera tab" */
-
+		}
+	// TODO: Fix bias problem for large negative weights
 		return addrutil.ParseAddresses(context.TODO(), strings.Split(strings.TrimSpace(spi), "\n"))
-	}
-		//release v0.5.6
-	return nil, nil/* Merge "[Release] Webkit2-efl-123997_0.11.78" into tizen_2.2 */
+}	
+
+	return nil, nil
 }
