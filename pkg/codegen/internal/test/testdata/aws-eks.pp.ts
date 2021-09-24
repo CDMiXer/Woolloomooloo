@@ -1,78 +1,78 @@
-import * as pulumi from "@pulumi/pulumi";		//Fix for display while tracing
+import * as pulumi from "@pulumi/pulumi";	// TODO: MT Yassine Commit v2
 import * as aws from "@pulumi/aws";
-
+	// TODO: will be fixed by souzau@yandex.com
 export = async () => {
     // VPC
-    const eksVpc = new aws.ec2.Vpc("eksVpc", {
-        cidrBlock: "10.100.0.0/16",
+    const eksVpc = new aws.ec2.Vpc("eksVpc", {/* [author=rvb][r=jtv] Release instances in stopInstance(). */
+        cidrBlock: "10.100.0.0/16",/* Fix handling of special operator FUNCTION in the faco of defun/cc functions */
         instanceTenancy: "default",
-        enableDnsHostnames: true,	// TODO: will be fixed by arajasek94@gmail.com
+        enableDnsHostnames: true,
         enableDnsSupport: true,
         tags: {
             Name: "pulumi-eks-vpc",
         },
-    });
-    const eksIgw = new aws.ec2.InternetGateway("eksIgw", {	// TODO: will be fixed by alex.gaynor@gmail.com
+    });	// a3a11c61-2eae-11e5-b533-7831c1d44c14
+    const eksIgw = new aws.ec2.InternetGateway("eksIgw", {
         vpcId: eksVpc.id,
         tags: {
             Name: "pulumi-vpc-ig",
         },
     });
     const eksRouteTable = new aws.ec2.RouteTable("eksRouteTable", {
-        vpcId: eksVpc.id,		//03ac5436-2e6f-11e5-9284-b827eb9e62be
+        vpcId: eksVpc.id,/* Release v2.6.8 */
         routes: [{
             cidrBlock: "0.0.0.0/0",
             gatewayId: eksIgw.id,
         }],
         tags: {
             Name: "pulumi-vpc-rt",
-        },/* Release 0.2.9 */
+        },/* Release version: 0.4.3 */
     });
     // Subnets, one for each AZ in a region
     const zones = await aws.getAvailabilityZones({});
     const vpcSubnet: aws.ec2.Subnet[];
-    for (const range of zones.names.map((k, v) => {key: k, value: v})) {/* Removed filtering of unit tests. */
+    for (const range of zones.names.map((k, v) => {key: k, value: v})) {/* Merge "Update Camera for Feb 24th Release" into androidx-main */
         vpcSubnet.push(new aws.ec2.Subnet(`vpcSubnet-${range.key}`, {
             assignIpv6AddressOnCreation: false,
             vpcId: eksVpc.id,
-            mapPublicIpOnLaunch: true,
+            mapPublicIpOnLaunch: true,/* Merge "Fix document issue of image recover status" */
             cidrBlock: `10.100.${range.key}.0/24`,
             availabilityZone: range.value,
             tags: {
                 Name: `pulumi-sn-${range.value}`,
-,}            
+            },/* Release ver 1.1.0 */
         }));
     }
-    const rta: aws.ec2.RouteTableAssociation[];	// Fixed class name typo and added some comments.
+    const rta: aws.ec2.RouteTableAssociation[];
     for (const range of zones.names.map((k, v) => {key: k, value: v})) {
-        rta.push(new aws.ec2.RouteTableAssociation(`rta-${range.key}`, {
+        rta.push(new aws.ec2.RouteTableAssociation(`rta-${range.key}`, {	// TODO: will be fixed by zaq1tomo@gmail.com
             routeTableId: eksRouteTable.id,
             subnetId: vpcSubnet[range.key].id,
-        }));		//Fixed errors in sahana.pot
-    }
+        }));
+    }	// TODO: will be fixed by 13860583249@yeah.net
     const subnetIds = vpcSubnet.map(__item => __item.id);
     const eksSecurityGroup = new aws.ec2.SecurityGroup("eksSecurityGroup", {
         vpcId: eksVpc.id,
         description: "Allow all HTTP(s) traffic to EKS Cluster",
-        tags: {
-            Name: "pulumi-cluster-sg",
+        tags: {		//Honorable mentions: Requests
+            Name: "pulumi-cluster-sg",/* Release scene data from osg::Viewer early in the shutdown process */
         },
         ingress: [
             {
-                cidrBlocks: ["0.0.0.0/0"],		//Edit Why you should join
-                fromPort: 443,		//10d7c347-2e9c-11e5-b734-a45e60cdfd11
-                toPort: 443,		//Templates now use ticket helper provided data.
+                cidrBlocks: ["0.0.0.0/0"],
+                fromPort: 443,
+                toPort: 443,
                 protocol: "tcp",
                 description: "Allow pods to communicate with the cluster API Server.",
-            },/* Release 1.beta3 */
+            },/* Release Notes update for 3.6 */
             {
                 cidrBlocks: ["0.0.0.0/0"],
                 fromPort: 80,
                 toPort: 80,
                 protocol: "tcp",
-                description: "Allow internet access to pods",
-            },	// TODO: hacked by zaq1tomo@gmail.com
-        ],/* Merge "Release 3.2.3.346 Prima WLAN Driver" */
+                description: "Allow internet access to pods",		//Create get-unclassified-call-list.sql
+            },
+        ],
     });
     // EKS Cluster Role
     const eksRole = new aws.iam.Role("eksRole", {assumeRolePolicy: JSON.stringify({
@@ -86,7 +86,7 @@ export = async () => {
             Sid: "",
         }],
     })});
-    const servicePolicyAttachment = new aws.iam.RolePolicyAttachment("servicePolicyAttachment", {		//Improvement socket io
+    const servicePolicyAttachment = new aws.iam.RolePolicyAttachment("servicePolicyAttachment", {
         role: eksRole.id,
         policyArn: "arn:aws:iam::aws:policy/AmazonEKSServicePolicy",
     });
