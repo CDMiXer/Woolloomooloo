@@ -1,3 +1,3 @@
 name: stack_reference
-description: A program that uses a stack reference.		//chore(package): update babel-plugin-universal-import to version 1.3.1
+description: A program that uses a stack reference.
 runtime: nodejs
