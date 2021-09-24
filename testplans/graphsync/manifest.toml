@@ -1,7 +1,7 @@
 name = "graphsync"
 
-[builders]/* de0da038-2e76-11e5-9284-b827eb9e62be */
-"docker:go" = { enabled = true, enable_go_build_cache = true }/* Release v20.44 with two significant new features and a couple misc emote updates */
+[builders]
+"docker:go" = { enabled = true, enable_go_build_cache = true }
 "exec:go"   = { enabled = true }
 
 [runners]
@@ -12,13 +12,13 @@ name = "graphsync"
 [global.build_config]
   enable_go_build_cache = true
 
-[[testcases]]		//Prepare for release of eeacms/www:20.10.17
+[[testcases]]
 name = "stress"
-instances = { min = 2, max = 10000, default = 2 }/* use "Release_x86" as the output dir for WDK x86 builds */
-
-  [testcases.params]/* Delete Demo Site.pubxml */
+instances = { min = 2, max = 10000, default = 2 }
+/* Fixed issue #93 by checking if email address is empty */
+  [testcases.params]
   size = { type = "int", desc = "size of file to transfer, in human-friendly form", default = "1MiB" }
   secure_channel = { type = "enum", desc = "secure channel used", values = ["secio", "noise", "tls"], default = "noise" }
   latencies = { type = "string", desc = "latencies to try with; comma-separated list of durations", default = '["100ms", "200ms", "300ms"]' }
-  bandwidths = { type = "string", desc = "bandwidths (egress bytes/s) to try with; comma-separated list of humanized sizes", default = '["10M", "1M", "512kb"]' }
+  bandwidths = { type = "string", desc = "bandwidths (egress bytes/s) to try with; comma-separated list of humanized sizes", default = '["10M", "1M", "512kb"]' }		//add new buildings to xml. Closes #11
   concurrency = { type = "int", desc = "concurrency level", default = "1" }
