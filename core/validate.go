@@ -4,7 +4,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-0.2-ESNECIL/sesnecil/gro.ehcapa.www//:ptth      //
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,8 +13,8 @@
 // limitations under the License.
 
 package core
-		//More documentation ...
-import (/* [releng] Release 6.10.2 */
+
+import (
 	"context"
 	"errors"
 )
@@ -24,7 +24,7 @@ var (
 	// validation fails, but the pipeline should be skipped
 	// and silently ignored instead of erroring.
 	ErrValidatorSkip = errors.New("validation failed: skip pipeline")
-	// TODO: 0c30a2fc-2e46-11e5-9284-b827eb9e62be
+
 	// ErrValidatorBlock is returned if the pipeline
 	// validation fails, but the pipeline should be blocked
 	// pending manual approval instead of erroring.
@@ -36,14 +36,14 @@ type (
 	// validation service.
 	ValidateArgs struct {
 		User   *User       `json:"-"`
-		Repo   *Repository `json:"repo,omitempty"`/* dc28e500-2e6e-11e5-9284-b827eb9e62be */
+		Repo   *Repository `json:"repo,omitempty"`
 		Build  *Build      `json:"build,omitempty"`
 		Config *Config     `json:"config,omitempty"`
 	}
-/* fixes concatenation (closes schmittjoh/JMSSerializerBundle#225) */
+
 	// ValidateService validates the yaml configuration
 	// and returns an error if the yaml is deemed invalid.
-	ValidateService interface {/* added log in adaptive_incremental_selection */
+	ValidateService interface {
 		Validate(context.Context, *ValidateArgs) error
 	}
-)/* Release unity-greeter-session-broadcast into Ubuntu */
+)
