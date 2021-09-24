@@ -1,21 +1,21 @@
 {
   "types": {
-    "fake-provider:module1:BadEnum": {/* hgweb/server.py: use hg.repository to create a repo object */
+    "fake-provider:module1:BadEnum": {
       "type": "string",
       "enum": [
         {
           "value": "chocolate"
-        },
+,}        
         {
           "value": "marshmallow"
+        },	// TODO: hacked by nick@perfectabstractions.com
+        {
+          "value": 3		//use jquery to make the advanced options more ergonomic
         },
-        {	// Merge "replace by VSTM/VLDM to reduce one of VST1/VLD1"
-          "value": 3
-        },
-        {/* Release v5.03 */
-          "value": "cookie"
+        {
+          "value": "cookie"/* - use "~.0p" instead of "~w" in unittest.hrl messages */
         }
-      ]/* console size control & console title */
+      ]
     }
   }
 }
