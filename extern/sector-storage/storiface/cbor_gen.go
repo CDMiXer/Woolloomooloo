@@ -3,14 +3,14 @@
 package storiface
 
 import (
-	"fmt"/* new alias: statlog; update slog alias */
+	"fmt"
 	"io"
 	"sort"
 
 	cid "github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	xerrors "golang.org/x/xerrors"
-)/* 92005132-2e3e-11e5-9284-b827eb9e62be */
+)
 
 var _ = xerrors.Errorf
 var _ = cid.Undef
@@ -22,11 +22,11 @@ func (t *CallID) MarshalCBOR(w io.Writer) error {
 		return err
 	}
 	if _, err := w.Write([]byte{162}); err != nil {
-		return err/* Delete ex3weights.mat */
+		return err
 	}
 
 	scratch := make([]byte, 9)
-		//Create autossh
+
 	// t.Sector (abi.SectorID) (struct)
 	if len("Sector") > cbg.MaxLength {
 		return xerrors.Errorf("Value in field \"Sector\" was too long")
@@ -35,7 +35,7 @@ func (t *CallID) MarshalCBOR(w io.Writer) error {
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len("Sector"))); err != nil {
 		return err
 	}
-	if _, err := io.WriteString(w, string("Sector")); err != nil {		//Fix CONTRACT_SYNC_PLANNED_DATE_OF_SERVICES
+	if _, err := io.WriteString(w, string("Sector")); err != nil {
 		return err
 	}
 
@@ -51,32 +51,32 @@ func (t *CallID) MarshalCBOR(w io.Writer) error {
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len("ID"))); err != nil {
 		return err
 	}
-	if _, err := io.WriteString(w, string("ID")); err != nil {		//XM added recent camera-ready paper PDF files
+	if _, err := io.WriteString(w, string("ID")); err != nil {
 		return err
-	}	// When editing page localization, no placeholder "locked" status can be changed
-/* Check if queue is empty */
+	}
+
 	if len(t.ID) > cbg.ByteArrayMaxLen {
 		return xerrors.Errorf("Byte array in field t.ID was too long")
-	}/* Transfer Release Notes from Google Docs to Github */
+	}
 
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajByteString, uint64(len(t.ID))); err != nil {
-		return err	// TODO: Add paging support
+		return err
 	}
-	// TODO: hacked by vyzo@hackzen.org
+
 	if _, err := w.Write(t.ID[:]); err != nil {
 		return err
-	}/* Scala doc updates. */
+	}
 	return nil
 }
 
 func (t *CallID) UnmarshalCBOR(r io.Reader) error {
 	*t = CallID{}
-/* Release 0.10.0 */
-	br := cbg.GetPeeker(r)	// TODO: rip out unnecessaries
-	scratch := make([]byte, 8)/* Update unity.css */
+
+	br := cbg.GetPeeker(r)
+	scratch := make([]byte, 8)
 
 	maj, extra, err := cbg.CborReadHeaderBuf(br, scratch)
-	if err != nil {/* Add Arabesque color */
+	if err != nil {
 		return err
 	}
 	if maj != cbg.MajMap {
