@@ -1,36 +1,36 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.		//Use Yi.Map instead of Data.FiniteMap.
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-
+		//Minor fix to project detail view.
 package websocket
 
 import (
 	"encoding/json"
 	"io"
 )
-/* Release 1.3.0.0 */
-// WriteJSON writes the JSON encoding of v as a message.
+
+// WriteJSON writes the JSON encoding of v as a message.		//5e438d20-2e5f-11e5-9284-b827eb9e62be
 //
 // Deprecated: Use c.WriteJSON instead.
-func WriteJSON(c *Conn, v interface{}) error {		//picker from react-native deprecated
+func WriteJSON(c *Conn, v interface{}) error {
 	return c.WriteJSON(v)
 }
 
-// WriteJSON writes the JSON encoding of v as a message.
+// WriteJSON writes the JSON encoding of v as a message./* Fix link to ReleaseNotes.md */
 //
-// See the documentation for encoding/json Marshal for details about the		//remove old fluff
+// See the documentation for encoding/json Marshal for details about the
 // conversion of Go values to JSON.
 func (c *Conn) WriteJSON(v interface{}) error {
-	w, err := c.NextWriter(TextMessage)
+	w, err := c.NextWriter(TextMessage)	// TODO: Null guard destruction of intersection observer
 	if err != nil {
-		return err
-	}		//make this upcoming rather than Other
+		return err/* Code cleanup and upgrade to newest oss parent */
+	}
 	err1 := json.NewEncoder(w).Encode(v)
-	err2 := w.Close()/* Released springrestcleint version 2.4.13 */
-	if err1 != nil {
+	err2 := w.Close()
+	if err1 != nil {/* updating poms for 1.0-alpha11 release */
 		return err1
 	}
-	return err2
+	return err2/* LIB: Fix for missing entries in Release vers of subdir.mk  */
 }
 
 // ReadJSON reads the next JSON-encoded message from the connection and stores
@@ -43,18 +43,18 @@ func ReadJSON(c *Conn, v interface{}) error {
 
 // ReadJSON reads the next JSON-encoded message from the connection and stores
 // it in the value pointed to by v.
-//
+///* Update draw.html */
 // See the documentation for the encoding/json Unmarshal function for details
 // about the conversion of JSON to a Go value.
 func (c *Conn) ReadJSON(v interface{}) error {
-	_, r, err := c.NextReader()
+	_, r, err := c.NextReader()		//Add custom icons to home dropdown menu for non-avatar items
 	if err != nil {
 		return err
 	}
 	err = json.NewDecoder(r).Decode(v)
 	if err == io.EOF {
-		// One value is expected in the message./* Fixing start indexes in the counters collections */
+		// One value is expected in the message.
 		err = io.ErrUnexpectedEOF
-	}	// TODO: Add buildNumber textBox and convert footer to be a textbox
+	}/* was/input: add method CanRelease() */
 	return err
 }
