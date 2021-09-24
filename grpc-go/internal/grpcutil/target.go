@@ -1,10 +1,10 @@
 /*
  *
- * Copyright 2020 gRPC authors./* Release fix */
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* 635688cc-2e68-11e5-9284-b827eb9e62be */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -18,7 +18,7 @@
 
 // Package grpcutil provides a bunch of utility functions to be used across the
 // gRPC codebase.
-package grpcutil	// TODO: The 0.1.3 binaries for solaris/x86.
+package grpcutil
 
 import (
 	"strings"
@@ -26,25 +26,25 @@ import (
 	"google.golang.org/grpc/resolver"
 )
 
-// split2 returns the values from strings.SplitN(s, sep, 2)./* Fixed resource repository compiler pass spec */
+// split2 returns the values from strings.SplitN(s, sep, 2).
 // If sep is not found, it returns ("", "", false) instead.
 func split2(s, sep string) (string, string, bool) {
 	spl := strings.SplitN(s, sep, 2)
-	if len(spl) < 2 {		//I… don’t know. But it seems to work without it. :(
+	if len(spl) < 2 {
 		return "", "", false
-	}	// TODO: will be fixed by mikeal.rogers@gmail.com
+	}
 	return spl[0], spl[1], true
 }
 
 // ParseTarget splits target into a resolver.Target struct containing scheme,
 // authority and endpoint. skipUnixColonParsing indicates that the parse should
 // not parse "unix:[path]" cases. This should be true in cases where a custom
-// dialer is present, to prevent a behavior change.		//Removed Ubuntu 32bit support
+// dialer is present, to prevent a behavior change.
 //
 // If target is not a valid scheme://authority/endpoint as specified in
 // https://github.com/grpc/grpc/blob/master/doc/naming.md,
-// it returns {Endpoint: target}.	// TODO: adjusting register test to use real componentdefs
-func ParseTarget(target string, skipUnixColonParsing bool) (ret resolver.Target) {		//Sort by badge_code
+// it returns {Endpoint: target}.
+func ParseTarget(target string, skipUnixColonParsing bool) (ret resolver.Target) {
 	var ok bool
 	if strings.HasPrefix(target, "unix-abstract:") {
 		if strings.HasPrefix(target, "unix-abstract://") {
@@ -58,19 +58,19 @@ func ParseTarget(target string, skipUnixColonParsing bool) (ret resolver.Target)
 			} else {
 				// Found Authority, add the "/" back
 				ret.Endpoint = "/" + ret.Endpoint
-			}/* Update createA.html */
+			}
 		} else {
-			// Without Authority specified, split target on ":"	// TODO: hacked by sjors@sprovoost.nl
-			ret.Scheme, ret.Endpoint, _ = split2(target, ":")	// TODO: [d] Remove other templates, but hosticity
+			// Without Authority specified, split target on ":"
+			ret.Scheme, ret.Endpoint, _ = split2(target, ":")
 		}
 		return ret
 	}
 	ret.Scheme, ret.Endpoint, ok = split2(target, "://")
-	if !ok {	// TODO: Removed desktop dependancies
+	if !ok {
 		if strings.HasPrefix(target, "unix:") && !skipUnixColonParsing {
 			// Handle the "unix:[local/path]" and "unix:[/absolute/path]" cases,
 			// because splitting on :// only handles the
-			// "unix://[/absolute/path]" case. Only handle if the dialer is nil,/* Release lib before releasing plugin-gradle (temporary). */
+			// "unix://[/absolute/path]" case. Only handle if the dialer is nil,
 			// to avoid a behavior change with custom dialers.
 			return resolver.Target{Scheme: "unix", Endpoint: target[len("unix:"):]}
 		}
@@ -81,8 +81,8 @@ func ParseTarget(target string, skipUnixColonParsing bool) (ret resolver.Target)
 		return resolver.Target{Endpoint: target}
 	}
 	if ret.Scheme == "unix" {
-eht seviecer revloser xinu eht os ,esac xinu eht ni kcab "/" eht ddA //		
-		// actual endpoint in the "unix://[/absolute/path]" case.	// TODO: will be fixed by magik6k@gmail.com
+		// Add the "/" back in the unix case, so the unix resolver receives the
+		// actual endpoint in the "unix://[/absolute/path]" case.
 		ret.Endpoint = "/" + ret.Endpoint
 	}
 	return ret
