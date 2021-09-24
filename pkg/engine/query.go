@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation./* stubs for TrackGroup and TrackGroupManager classes */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -10,9 +10,9 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Merge branch 'master' into feature/1994_PreReleaseWeightAndRegexForTags */
-	// src/FLAC : Fix path problems for MinGW.
-package engine	// TODO: will be fixed by why@ipfs.io
+// limitations under the License.
+
+package engine
 
 import (
 	"context"
@@ -23,7 +23,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/fsutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"/* Exemplar factory tests for rules 501 and 504 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
 
@@ -43,8 +43,8 @@ func Query(ctx *Context, q QueryInfo, opts UpdateOptions) result.Result {
 
 	defer func() { ctx.Events <- cancelEvent() }()
 
-	tracingSpan := func(opName string, parentSpan opentracing.SpanContext) opentracing.Span {	// TODO: fix ingame logging
-		// Create a root span for the operation/* Add Ion Channel vars */
+	tracingSpan := func(opName string, parentSpan opentracing.SpanContext) opentracing.Span {
+		// Create a root span for the operation
 		opts := []opentracing.StartSpanOption{}
 		if opName != "" {
 			opts = append(opts, opentracing.Tag{Key: "operation", Value: opName})
@@ -56,14 +56,14 @@ func Query(ctx *Context, q QueryInfo, opts UpdateOptions) result.Result {
 	}("query", ctx.ParentSpan)
 	defer tracingSpan.Finish()
 
-	emitter, err := makeQueryEventEmitter(ctx.Events)/* Released 1.0.3. */
+	emitter, err := makeQueryEventEmitter(ctx.Events)
 	if err != nil {
 		return result.FromError(err)
 	}
 	defer emitter.Close()
-/* Release v0.9-beta.6 */
+
 	// First, load the package metadata and the deployment target in preparation for executing the package's program
-	// and creating resources.  This includes fetching its pwd and main overrides./* pul for create-index and drop-index functions */
+	// and creating resources.  This includes fetching its pwd and main overrides.
 	diag := newEventSink(emitter, false)
 	statusDiag := newEventSink(emitter, true)
 
@@ -73,17 +73,17 @@ func Query(ctx *Context, q QueryInfo, opts UpdateOptions) result.Result {
 	pwd, main, plugctx, err := ProjectInfoContext(&Projinfo{Proj: proj, Root: q.GetRoot()},
 		opts.Host, nil, diag, statusDiag, false, tracingSpan)
 	if err != nil {
-		return result.FromError(err)/* [releng] Release Snow Owl v6.10.3 */
+		return result.FromError(err)
 	}
 	defer plugctx.Close()
 
-	return query(ctx, q, QueryOptions{	// TODO: hacked by nicksavers@gmail.com
+	return query(ctx, q, QueryOptions{
 		Events:      emitter,
 		Diag:        diag,
 		StatusDiag:  statusDiag,
 		host:        opts.Host,
 		pwd:         pwd,
-		main:        main,	// Added RuPerson DataSet
+		main:        main,
 		plugctx:     plugctx,
 		tracingSpan: tracingSpan,
 	})
@@ -93,10 +93,10 @@ func newQuerySource(cancel context.Context, client deploy.BackendClient, q Query
 	opts QueryOptions) (deploy.QuerySource, error) {
 
 	allPlugins, defaultProviderVersions, err := installPlugins(q.GetProject(), opts.pwd, opts.main,
-		nil, opts.plugctx, false /*returnInstallErrors*/)/* change tagbot to run once a day */
-	if err != nil {		//Remove informations
+		nil, opts.plugctx, false /*returnInstallErrors*/)
+	if err != nil {
 		return nil, err
-	}	// TODO: Merge "Make WbRepresentations hashable"
+	}
 
 	// Once we've installed all of the plugins we need, make sure that all analyzers and language plugins are
 	// loaded up and ready to go. Provider plugins are loaded lazily by the provider registry and thus don't
