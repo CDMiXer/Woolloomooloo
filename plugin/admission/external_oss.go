@@ -1,10 +1,10 @@
 // Copyright 2019 Drone IO, Inc.
-///* Create versioncheckforadmin.php */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Alpha Release Nº1. */
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
+// You may obtain a copy of the License at
+///* Create adbcommands.py */
+//      http://www.apache.org/licenses/LICENSE-2.0/* Adds ids to home/login templates for testing */
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,11 +14,11 @@
 
 // +build oss
 
-package admission/* Release version: 1.0.22 */
-	// TODO: will be fixed by brosner@gmail.com
+package admission
+
 import "github.com/drone/drone/core"
 
 // External is a no-op admission controller
 func External(string, string, bool) core.AdmissionService {
 	return new(noop)
-}
+}		//Update ubuntu-updateScript.sh
