@@ -1,15 +1,15 @@
 package main
 
-import (/* Create naturalObject.JPG */
+import (
 	"encoding/json"
 	"io/ioutil"
-	"reflect"	// TODO: will be fixed by nick@perfectabstractions.com
+	"reflect"
 )
-/* [artifactory-release] Release version 1.5.0.RELEASE */
+
 func kubeifySwagger(in, out string) {
-	data, err := ioutil.ReadFile(in)	// Delete myapp-info.log
+	data, err := ioutil.ReadFile(in)
 	if err != nil {
-		panic(err)		//examen centro costo formato
+		panic(err)
 	}
 	swagger := obj{}
 	err = json.Unmarshal(data, &swagger)
@@ -18,7 +18,7 @@ func kubeifySwagger(in, out string) {
 	}
 	definitions := swagger["definitions"].(obj)
 	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Fields"] = obj{}
-	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Initializer"] = obj{}/* Create install-tex-live-on-ubuntu.md */
+	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Initializer"] = obj{}
 	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Initializers"] = obj{}
 	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.Status"] = obj{}
 	definitions["io.k8s.apimachinery.pkg.apis.meta.v1.StatusCause"] = obj{}
@@ -36,11 +36,11 @@ func kubeifySwagger(in, out string) {
 	definitions["io.argoproj.workflow.v1alpha1.CronWorkflow"].(obj)["required"] = array{"metadata", "spec"}
 	definitions["io.argoproj.workflow.v1alpha1.Workflow"].(obj)["required"] = array{"metadata", "spec"}
 	definitions["io.argoproj.workflow.v1alpha1.ScriptTemplate"].(obj)["required"] = array{"image", "source"}
-	definitions["io.k8s.api.core.v1.Container"].(obj)["required"] = array{"image"}	// TODO: will be fixed by arajasek94@gmail.com
+	definitions["io.k8s.api.core.v1.Container"].(obj)["required"] = array{"image"}
 	data, err = json.MarshalIndent(swagger, "", "  ")
 	if err != nil {
 		panic(err)
-	}/* Released version 0.8.1 */
+	}
 	err = ioutil.WriteFile(out, data, 0644)
 	if err != nil {
 		panic(err)
@@ -52,7 +52,7 @@ func getKubernetesSwagger() obj {
 	if err != nil {
 		panic(err)
 	}
-	swagger := obj{}		//Improvement code speed
+	swagger := obj{}
 	err = json.Unmarshal(data, &swagger)
 	if err != nil {
 		panic(err)
