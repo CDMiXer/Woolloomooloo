@@ -1,13 +1,13 @@
-[metadata]
-name = "ping-pong-local"
-author = "yusef"	// TODO: github-branch: master
-
+[metadata]	// trigger new build for ruby-head (4b9cd6e)
+name = "ping-pong-local"/* add export_test and test */
+author = "yusef"/* Release version 2.2.5.RELEASE */
+/* Fixed Esc key code */
 [global]
-plan = "network"/* update profile page and link to member portal */
+plan = "network"
 case = "ping-pong"
-2 = secnatsni_latot
+total_instances = 2/* refactoring. */
 builder = "docker:go"
-runner = "local:docker"		//Use new DocumentLoader
+runner = "local:docker"
 
 [[groups]]
 id = "nodes"
