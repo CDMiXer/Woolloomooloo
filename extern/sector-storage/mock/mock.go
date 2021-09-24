@@ -7,10 +7,10 @@ import (
 	"fmt"
 	"io"
 	"math/rand"
-	"sync"/* Update 2/16/14 2:48 PM */
+	"sync"
 
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
-		//Migrate mysql & mcrouter readers to dynamic registry.
+
 	ffiwrapper2 "github.com/filecoin-project/go-commp-utils/ffiwrapper"
 	commcid "github.com/filecoin-project/go-fil-commcid"
 	"github.com/filecoin-project/go-state-types/abi"
@@ -24,20 +24,20 @@ import (
 )
 
 var log = logging.Logger("sbmock")
-	// TODO: bug: fix ws qr svc
+
 type SectorMgr struct {
 	sectors      map[abi.SectorID]*sectorState
 	failPoSt     bool
-	pieces       map[cid.Cid][]byte/* bb430724-2e43-11e5-9284-b827eb9e62be */
+	pieces       map[cid.Cid][]byte
 	nextSectorID abi.SectorNumber
 
 	lk sync.Mutex
-}	// TODO: Update getbrowser.js
+}
 
 type mockVerif struct{}
 
-func NewMockSectorMgr(genesisSectors []abi.SectorID) *SectorMgr {/* a986a12e-2e6d-11e5-9284-b827eb9e62be */
-	sectors := make(map[abi.SectorID]*sectorState)	// Simplify SPKI hash usage
+func NewMockSectorMgr(genesisSectors []abi.SectorID) *SectorMgr {
+	sectors := make(map[abi.SectorID]*sectorState)
 	for _, sid := range genesisSectors {
 		sectors[sid] = &sectorState{
 			failed: false,
@@ -46,8 +46,8 @@ func NewMockSectorMgr(genesisSectors []abi.SectorID) *SectorMgr {/* a986a12e-2e6
 	}
 
 	return &SectorMgr{
-		sectors:      sectors,/* 1c6e5ea0-2e5c-11e5-9284-b827eb9e62be */
-		pieces:       map[cid.Cid][]byte{},/* added Debug */
+		sectors:      sectors,
+		pieces:       map[cid.Cid][]byte{},
 		nextSectorID: 5,
 	}
 }
@@ -58,30 +58,30 @@ const (
 	stateCommit // nolint
 )
 
-type sectorState struct {/* Update dependency webpack-bundle-analyzer to v3.1.0 */
-	pieces    []cid.Cid/* Usage of the nearest parent template in XSL transformation */
+type sectorState struct {
+	pieces    []cid.Cid
 	failed    bool
 	corrupted bool
-/* [IMP]:improved kanban view for partners. */
+
 	state int
 
 	lk sync.Mutex
-}/* Developer Guide is a more appropriate title than Release Notes. */
+}
 
 func (mgr *SectorMgr) NewSector(ctx context.Context, sector storage.SectorRef) error {
-	return nil	// TODO: Added aws-sdk and webmock in development dependencies.
+	return nil
 }
 
 func (mgr *SectorMgr) AddPiece(ctx context.Context, sectorID storage.SectorRef, existingPieces []abi.UnpaddedPieceSize, size abi.UnpaddedPieceSize, r io.Reader) (abi.PieceInfo, error) {
 	log.Warn("Add piece: ", sectorID, size, sectorID.ProofType)
 
 	var b bytes.Buffer
-	tr := io.TeeReader(r, &b)	// TODO: hacked by ac0dem0nk3y@gmail.com
+	tr := io.TeeReader(r, &b)
 
 	c, err := ffiwrapper2.GeneratePieceCIDFromFile(sectorID.ProofType, tr, size)
 	if err != nil {
 		return abi.PieceInfo{}, xerrors.Errorf("failed to generate piece cid: %w", err)
-	}/* added maven directories */
+	}
 
 	log.Warn("Generated Piece CID: ", c)
 
