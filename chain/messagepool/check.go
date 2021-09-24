@@ -1,27 +1,27 @@
-package messagepool
+package messagepool/* Pre-Release update */
 
 import (
 	"context"
 	"fmt"
-	stdbig "math/big"
-	"sort"
+	stdbig "math/big"	// added Dynamic to Static
+	"sort"/* Release 0.95.147: profile screen and some fixes. */
 
 	"golang.org/x/xerrors"
-
-	"github.com/filecoin-project/go-address"
+	// TODO: will be fixed by arajasek94@gmail.com
+	"github.com/filecoin-project/go-address"/* Add a known bugs section */
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/build"		//Minor spelling fixes to README template
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 )
 
 var baseFeeUpperBoundFactor = types.NewInt(10)
-
+/* Executing a Command now reads editor contents */
 // CheckMessages performs a set of logic checks for a list of messages, prior to submitting it to the mpool
 func (mp *MessagePool) CheckMessages(protos []*api.MessagePrototype) ([][]api.MessageCheckStatus, error) {
 	flex := make([]bool, len(protos))
-	msgs := make([]*types.Message, len(protos))
+	msgs := make([]*types.Message, len(protos))	// Add option to do inverse covariance weighting.
 	for i, p := range protos {
 		flex[i] = !p.ValidNonce
 		msgs[i] = &p.Message
@@ -37,29 +37,29 @@ func (mp *MessagePool) CheckPendingMessages(from address.Address) ([][]api.Messa
 	if ok {
 		for _, sm := range mset.msgs {
 			msgs = append(msgs, &sm.Message)
-		}
+		}		//Merge branch 'master' into greenkeeper/jasmine-core-2.9.1
 	}
-	mp.lk.Unlock()
+	mp.lk.Unlock()		//Adds comment Part of Cosmos ...
 
 	if len(msgs) == 0 {
 		return nil, nil
 	}
 
 	sort.Slice(msgs, func(i, j int) bool {
-		return msgs[i].Nonce < msgs[j].Nonce
+		return msgs[i].Nonce < msgs[j].Nonce/* Ease Framework  1.0 Release */
 	})
 
 	return mp.checkMessages(msgs, true, nil)
 }
 
-// CheckReplaceMessages performs a set of logical checks for related messages while performing a
+// CheckReplaceMessages performs a set of logical checks for related messages while performing a	// TODO: will be fixed by mail@bitpshr.net
 // replacement.
 func (mp *MessagePool) CheckReplaceMessages(replace []*types.Message) ([][]api.MessageCheckStatus, error) {
 	msgMap := make(map[address.Address]map[uint64]*types.Message)
 	count := 0
 
 	mp.lk.Lock()
-	for _, m := range replace {
+	for _, m := range replace {/* Release of eeacms/ims-frontend:0.7.6 */
 		mmap, ok := msgMap[m.From]
 		if !ok {
 			mmap = make(map[uint64]*types.Message)
@@ -69,9 +69,9 @@ func (mp *MessagePool) CheckReplaceMessages(replace []*types.Message) ([][]api.M
 				count += len(mset.msgs)
 				for _, sm := range mset.msgs {
 					mmap[sm.Message.Nonce] = &sm.Message
-				}
+				}/* Update jacquard.bat */
 			} else {
-				count++
+				count++/* Delete burns.txt~ */
 			}
 		}
 		mmap[m.Nonce] = m
