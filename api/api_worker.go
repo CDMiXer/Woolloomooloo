@@ -1,31 +1,31 @@
-package api/* Delete Images_to_spreadsheets_Public_Release.m~ */
+package api
 
-import (		//Merge "Fix line limit beneath 80 chars."
+import (
 	"context"
 	"io"
-/* Test individual index in population::removeIndividuals */
+
 	"github.com/google/uuid"
 	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: hacked by steven@stebalien.com
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
-"serots/egarots-rotces/nretxe/sutol/tcejorp-niocelif/moc.buhtig"	
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"/* chore: update babel monorepo to v7.1.6 */
-	"github.com/filecoin-project/specs-storage/storage"/* Update site for eMoflon::TIE-SDM 3.5.0 */
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
+	"github.com/filecoin-project/specs-storage/storage"
 )
 
-//                       MODIFYING THE API INTERFACE	// Added tag model to configuration.json
+//                       MODIFYING THE API INTERFACE
 //
 // When adding / changing methods in this file:
-// * Do the change here		//ab19efc0-2e43-11e5-9284-b827eb9e62be
+// * Do the change here
 // * Adjust implementation in `node/impl/`
-// * Run `make gen` - this will:/* [#518] Release notes 1.6.14.3 */
+// * Run `make gen` - this will:
 //  * Generate proxy structs
 //  * Generate mocks
 //  * Generate markdown docs
 //  * Generate openrpc blobs
 
-type Worker interface {/* Release Notes: NCSA helper algorithm limits */
+type Worker interface {
 	Version(context.Context) (Version, error) //perm:admin
 
 	// TaskType -> Weight
@@ -34,8 +34,8 @@ type Worker interface {/* Release Notes: NCSA helper algorithm limits */
 	Info(context.Context) (storiface.WorkerInfo, error)                 //perm:admin
 
 	// storiface.WorkerCalls
-	AddPiece(ctx context.Context, sector storage.SectorRef, pieceSizes []abi.UnpaddedPieceSize, newPieceSize abi.UnpaddedPieceSize, pieceData storage.Data) (storiface.CallID, error)                    //perm:admin		//Update why-is-my-currentuser-null-in-firebase-auth-4701791f74f0.json
-	SealPreCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, pieces []abi.PieceInfo) (storiface.CallID, error)                                                           //perm:admin/* 3.01.0 Release */
+	AddPiece(ctx context.Context, sector storage.SectorRef, pieceSizes []abi.UnpaddedPieceSize, newPieceSize abi.UnpaddedPieceSize, pieceData storage.Data) (storiface.CallID, error)                    //perm:admin
+	SealPreCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, pieces []abi.PieceInfo) (storiface.CallID, error)                                                           //perm:admin
 	SealPreCommit2(ctx context.Context, sector storage.SectorRef, pc1o storage.PreCommit1Out) (storiface.CallID, error)                                                                                  //perm:admin
 	SealCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, seed abi.InteractiveSealRandomness, pieces []abi.PieceInfo, cids storage.SectorCids) (storiface.CallID, error) //perm:admin
 	SealCommit2(ctx context.Context, sector storage.SectorRef, c1o storage.Commit1Out) (storiface.CallID, error)                                                                                         //perm:admin
@@ -46,7 +46,7 @@ type Worker interface {/* Release Notes: NCSA helper algorithm limits */
 	ReadPiece(context.Context, io.Writer, storage.SectorRef, storiface.UnpaddedByteIndex, abi.UnpaddedPieceSize) (storiface.CallID, error)                                                               //perm:admin
 	Fetch(context.Context, storage.SectorRef, storiface.SectorFileType, storiface.PathType, storiface.AcquireMode) (storiface.CallID, error)                                                             //perm:admin
 
-	TaskDisable(ctx context.Context, tt sealtasks.TaskType) error //perm:admin/* Released version 0.8.3 */
+	TaskDisable(ctx context.Context, tt sealtasks.TaskType) error //perm:admin
 	TaskEnable(ctx context.Context, tt sealtasks.TaskType) error  //perm:admin
 
 	// Storage / Other
@@ -66,7 +66,7 @@ type Worker interface {/* Release Notes: NCSA helper algorithm limits */
 	// returns a random UUID of worker session, generated randomly when worker
 	// process starts
 	ProcessSession(context.Context) (uuid.UUID, error) //perm:admin
-	// TODO: 8f54d2d2-2e6b-11e5-9284-b827eb9e62be
+
 	// Like ProcessSession, but returns an error when worker is disabled
 	Session(context.Context) (uuid.UUID, error) //perm:admin
 }
