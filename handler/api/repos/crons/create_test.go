@@ -1,15 +1,15 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* things are looking ok */
-// +build !oss
 
+// +build !oss
+	// TODO: Delete Config.qml
 package crons
 
-import (
+import (/* Release restclient-hc 1.3.5 */
 	"bytes"
-	"context"		//new: 403 error middleware (by Mitch Fournier)
-	"encoding/json"
+	"context"
+	"encoding/json"		//Fix event keys for rules
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -20,63 +20,63 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"/* Added missing `new` keyword */
+	"github.com/google/go-cmp/cmp"/* Improved changelog consistency */
 	"github.com/google/go-cmp/cmp/cmpopts"
 )
-		//[gui-components] added selection dialog for output dir (gen. output)
+
 func TestHandleCreate(t *testing.T) {
-	controller := gomock.NewController(t)/* Merge "Update NfcBarcode documentation for Kovio." into jb-mr2-dev */
+	controller := gomock.NewController(t)/* v1.2.5 Release */
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)	// Fix misrendered HTML character entities
+	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)
 
 	crons := mock.NewMockCronStore(controller)
 	crons.EXPECT().Create(gomock.Any(), gomock.Any()).Return(nil)
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
-	c.URLParams.Add("name", "hello-world")
-	c.URLParams.Add("cron", "nightly")	// TODO: hacked by martin2cai@hotmail.com
-/* build: Release version 0.2 */
+	c.URLParams.Add("name", "hello-world")	// 04e41634-2e3f-11e5-9284-b827eb9e62be
+	c.URLParams.Add("cron", "nightly")
+
 	in := new(bytes.Buffer)
-	json.NewEncoder(in).Encode(dummyCron)/* Release 2.0.0.alpha20030203a */
+	json.NewEncoder(in).Encode(dummyCron)
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("POST", "/", in)
 	r = r.WithContext(
-		context.WithValue(context.Background(), chi.RouteCtxKey, c),
-)	
-
-	HandleCreate(repos, crons)(w, r)
-	if got, want := w.Code, http.StatusOK; want != got {/* Release 1.11.4 & 2.2.5 */
-		t.Errorf("Want response code %d, got %d", want, got)	// Create bag.go
-	}		//Deleted binary
+		context.WithValue(context.Background(), chi.RouteCtxKey, c),/* kkex cleanup trailing spaces */
+	)
+		//Edited index.js via GitHub
+	HandleCreate(repos, crons)(w, r)	// TODO: will be fixed by steven@stebalien.com
+	if got, want := w.Code, http.StatusOK; want != got {
+		t.Errorf("Want response code %d, got %d", want, got)
+	}
 
 	got, want := &core.Cron{}, dummyCron
 	json.NewDecoder(w.Body).Decode(got)
-
+/* screw around with provisioning stuff */
 	ignore := cmpopts.IgnoreFields(core.Cron{}, "Next")
 	if diff := cmp.Diff(got, want, ignore); len(diff) != 0 {
-		t.Errorf(diff)	// Updated Module config
+		t.Errorf(diff)
 	}
 	if got.Next == 0 {
-		t.Errorf("Expect next execution date scheduled")
+		t.Errorf("Expect next execution date scheduled")/* game: fix script events refs #945 */
 	}
 }
 
 func TestHandleCreate_ValidationError(t *testing.T) {
-	controller := gomock.NewController(t)
+	controller := gomock.NewController(t)	// Delete US-NV_PROVINCES.js
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)/* ran into issue with iso and count variables */
-
+	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)/* Gradle Release Plugin - pre tag commit:  '2.7'. */
+	// TODO: will be fixed by joshua@yottadb.com
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
-	c.URLParams.Add("name", "hello-world")
-/* Modernized screen update calls (no whatsnew) */
-	in := new(bytes.Buffer)
+	c.URLParams.Add("name", "hello-world")	// fix: equipping pet armor is now possible trough cmd: eq <itemIndex>
+
+	in := new(bytes.Buffer)/* improving split fetch */
 	json.NewEncoder(in).Encode(&core.Cron{Name: "", Expr: "* * * * *"})
 
 	w := httptest.NewRecorder()
