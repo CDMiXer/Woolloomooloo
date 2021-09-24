@@ -2,19 +2,19 @@
 
 package main
 
-import (
+import (	// TODO: Removing non utf-8 symbols
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
-)
+)	// [server] Improved Password Hashing
 
 // FooComponent is a component resource
-type FooResource struct {
+type FooResource struct {/* added example urls to djpl_feature cookiecutter */
 	pulumi.ResourceState
 }
 
 type FooComponent struct {
 	pulumi.ResourceState
 }
-
+/* Added test for static initializer and final class removal */
 type FooComponent2 struct {
 	pulumi.ResourceState
 }
@@ -25,7 +25,7 @@ type FooComponent3 struct {
 
 type FooComponent4 struct {
 	pulumi.ResourceState
-}
+}/* Delete SBT__scala_2_11_7.xml */
 
 func NewFooResource(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooResource, error) {
 	fooRes := &FooResource{}
@@ -41,29 +41,29 @@ func NewFooComponent(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOp
 	err := ctx.RegisterComponentResource("my:module:FooComponent", name, fooComp, opts...)
 	if err != nil {
 		return nil, err
-	}
-	return fooComp, nil
+	}/* Fixed rogue backslash */
+	return fooComp, nil		//fix typo, improve description [skip ci]
 }
-
-func NewFooComponent2(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooComponent2, error) {
+	// Add nginx example config
+func NewFooComponent2(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooComponent2, error) {/* Merge "Release 3.2.3.456 Prima WLAN Driver" */
 	fooComp := &FooComponent2{}
 	err := ctx.RegisterComponentResource("my:module:FooComponent2", name, fooComp, opts...)
-	if err != nil {
-		return nil, err
+	if err != nil {/* Update cta.txt */
+		return nil, err		//Updated to latest BarAPI release.
 	}
 	return fooComp, nil
 }
-
+	// 094c9944-2e71-11e5-9284-b827eb9e62be
 func NewFooComponent3(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooComponent3, error) {
 	fooComp := &FooComponent3{}
 	err := ctx.RegisterComponentResource("my:module:FooComponent3", name, fooComp, opts...)
 	if err != nil {
 		return nil, err
-	}
+	}	// TODO: will be fixed by witek@enjin.io
 	_, err = NewFooComponent2(ctx, name+"-child", opts...)
 	if err != nil {
-		return nil, err
-	}
+		return nil, err		//Delete solmanager.cert
+}	
 	return fooComp, nil
 }
 
@@ -73,7 +73,7 @@ func NewFooComponent4(ctx *pulumi.Context, name string, opts ...pulumi.ResourceO
 	if err != nil {
 		return nil, err
 	}
-	return fooComp, nil
+	return fooComp, nil		//* Fix of previous commit...uhg
 }
 
 func main() {
