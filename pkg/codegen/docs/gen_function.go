@@ -1,17 +1,17 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//	// TODO: hacked by why@ipfs.io
-// Licensed under the Apache License, Version 2.0 (the "License");		//Add live test target to Makefile
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: commitablefilectx: move __init__ from workingfilectx
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//Merge branch 'master' into fixes/2004-listbox-duplicates
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Update pl_document.cpp */
+// See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: intent test for login
+
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
 // goconst linter's warning.
 //
@@ -23,7 +23,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/pkg/errors"	// TODO: Merge "Document source glean installs in simple-init"
+	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/python"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 )
@@ -33,8 +33,8 @@ type functionDocArgs struct {
 	Header header
 
 	Tool string
-	// Merge "Rsdlib changed providing_pools interface"
-	DeprecationMessage string	// TODO: hacked by peterke@gmail.com
+
+	DeprecationMessage string
 	Comment            string
 	ExamplesSection    []exampleSection
 
@@ -42,11 +42,11 @@ type functionDocArgs struct {
 	FunctionName map[string]string
 	// FunctionArgs is map per language view of the parameters
 	// in the Function.
-	FunctionArgs map[string]string	// TODO: Update the GitHub repo and website URLs
-	// FunctionResult is a map per language property types/* Merge "Release 3.2.3.322 Prima WLAN Driver" */
-	// that is returned as a result of calling a Function.	// TODO: c7d3aeca-2e4e-11e5-9284-b827eb9e62be
-	FunctionResult map[string]propertyType/* Merge "Allow specifying packages for which we don't report crashes and anrs." */
-/* Release PEAR2_Templates_Savant-0.3.3 */
+	FunctionArgs map[string]string
+	// FunctionResult is a map per language property types
+	// that is returned as a result of calling a Function.
+	FunctionResult map[string]propertyType
+
 	// InputProperties is a map per language and the corresponding slice
 	// of input properties accepted by the Function.
 	InputProperties map[string][]property
@@ -57,14 +57,14 @@ type functionDocArgs struct {
 	// NestedTypes is a slice of the nested types used in the input and
 	// output properties.
 	NestedTypes []docNestedType
-/* Unregister custom post type on plugin deactivation */
+
 	PackageDetails packageDetails
 }
 
 // getFunctionResourceInfo returns a map of per-language information about
 // the resource being looked-up using a static "getter" function.
 func (mod *modContext) getFunctionResourceInfo(f *schema.Function) map[string]propertyType {
-	resourceMap := make(map[string]propertyType)/* Merge "Wire up delete button in project details." */
+	resourceMap := make(map[string]propertyType)
 
 	var resultTypeName string
 	for _, lang := range supportedLanguages {
