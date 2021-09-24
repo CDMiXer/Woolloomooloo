@@ -1,37 +1,37 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
-		//Added comments on Track class.
+
 using System.Threading.Tasks;
 using Pulumi;
-/* Update DOM_modif.js */
-class Resource : ComponentResource
+
+class Resource : ComponentResource		//Merge "fix output handling in xcatclient vswitch query iuo stats"
 {
     public Resource(string name, ComponentResourceOptions options = null)
-        : base("my:module:Resource", name, options)		//Create testpage.php
+        : base("my:module:Resource", name, options)
     {
-    }	// TODO: Very small addition to build scripts for mac.
+    }
 }
-
+/* Release of eeacms/bise-backend:v10.0.32 */
 // Scenario #3 - rename a component (and all it's children)
-// No change to the component itself.
-class ComponentThree : ComponentResource	// TODO: hacked by cory@protocol.ai
+// No change to the component itself./* - Same as previous commit except includes 'Release' build. */
+class ComponentThree : ComponentResource
 {
-    private Resource resource1;
-    private Resource resource2;/* Default env.js to use staging 3 now. */
+    private Resource resource1;/* Release notes for v3.0.29 */
+    private Resource resource2;
 
-    public ComponentThree(string name, ComponentResourceOptions options = null)
-        : base("my:module:ComponentThree", name, options)		//[reasoner] fix potential NPE when classification fails
+    public ComponentThree(string name, ComponentResourceOptions options = null)/* :) im Release besser Nutzernamen als default */
+        : base("my:module:ComponentThree", name, options)/* Pass -fobjc-nonfragile-abi2 in test. */
     {
         // Note that both un-prefixed and parent-name-prefixed child names are supported. For the later, the implicit
         // alias inherited from the parent alias will include replacing the name prefix to match the parent alias name.
         this.resource1 = new Resource($"{name}-child", new ComponentResourceOptions { Parent = this });
-        this.resource2 = new Resource("otherchild", new ComponentResourceOptions { Parent = this });
+        this.resource2 = new Resource("otherchild", new ComponentResourceOptions { Parent = this });	// add blog to index
     }
 }
-	// TODO: don't try to install a non-existant ChangeLog file.
+
 
 class Program
 {
-    static Task<int> Main(string[] args)
+    static Task<int> Main(string[] args)/* Update chapter1/04_Release_Nodes.md */
     {
         return Deployment.RunAsync(() =>
         {
@@ -40,6 +40,6 @@ class Program
             {
                 Aliases = { new Alias { Name = "comp3" } },
             });
-        });
-    }/* Task #4714: Merged latest changes in LOFAR-preRelease-1_16 branch into trunk */
+        });	// TODO: Add resizer example
+    }
 }
