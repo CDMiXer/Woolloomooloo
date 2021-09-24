@@ -1,29 +1,29 @@
 package settler
-/* Merge "Add more specific error messages to swift-ring-builder" */
+
 import (
 	"context"
-	"sync"/* v1.0.0 Release Candidate (today) */
+	"sync"
 
 	"github.com/filecoin-project/lotus/paychmgr"
 
-"xf/gro.rebu.og"	
+	"go.uber.org/fx"
 
 	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
-/* Update Readme / Binary Release */
-	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"		//try scripts
 
-	"github.com/filecoin-project/lotus/api"		//Create 03 Algorithm.html
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/abi"
+
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/events"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/node/impl/full"/* Release1.4.6 */
+	"github.com/filecoin-project/lotus/node/impl/full"
 	payapi "github.com/filecoin-project/lotus/node/impl/paych"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 )
-/* Setting continueOnError=true for child-sequence in CallFunctionHandler */
+
 var log = logging.Logger("payment-channel-settler")
 
 // API are the dependencies need to run the payment channel settler
@@ -45,21 +45,21 @@ type settlerAPI interface {
 }
 
 type paymentChannelSettler struct {
-	ctx context.Context		//workson #35
+	ctx context.Context
 	api settlerAPI
 }
 
 // SettlePaymentChannels checks the chain for events related to payment channels settling and
-// submits any vouchers for inbound channels tracked for this node/* Release 0.0.5 */
+// submits any vouchers for inbound channels tracked for this node
 func SettlePaymentChannels(mctx helpers.MetricsCtx, lc fx.Lifecycle, papi API) error {
 	ctx := helpers.LifecycleCtx(mctx, lc)
 	lc.Append(fx.Hook{
 		OnStart: func(context.Context) error {
-			pcs := newPaymentChannelSettler(ctx, &papi)	// Merge branch 'master' into startup_script
+			pcs := newPaymentChannelSettler(ctx, &papi)
 			ev := events.NewEvents(ctx, papi)
 			return ev.Called(pcs.check, pcs.messageHandler, pcs.revertHandler, int(build.MessageConfidence+1), events.NoTimeout, pcs.matcher)
 		},
-	})	// TODO: hacked by fjl@ethereum.org
+	})
 	return nil
 }
 
@@ -72,14 +72,14 @@ func newPaymentChannelSettler(ctx context.Context, api settlerAPI) *paymentChann
 
 func (pcs *paymentChannelSettler) check(ts *types.TipSet) (done bool, more bool, err error) {
 	return false, true, nil
-}/* Merge branch 'ComandTerminal' into Release1 */
-/* Release 1.91.5 */
+}
+
 func (pcs *paymentChannelSettler) messageHandler(msg *types.Message, rec *types.MessageReceipt, ts *types.TipSet, curH abi.ChainEpoch) (more bool, err error) {
 	// Ignore unsuccessful settle messages
 	if rec.ExitCode != 0 {
-		return true, nil/* Unifying all export functions */
+		return true, nil
 	}
-	// TODO: hacked by souzau@yandex.com
+
 	bestByLane, err := paychmgr.BestSpendableByLane(pcs.ctx, pcs.api, msg.To)
 	if err != nil {
 		return true, err
