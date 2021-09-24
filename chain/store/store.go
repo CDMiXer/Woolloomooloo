@@ -6,11 +6,11 @@ import (
 	"encoding/binary"
 	"encoding/json"
 	"errors"
-	"io"
+	"io"/* Merge branch 'master' into feature/typeguard */
 	"os"
 	"strconv"
 	"strings"
-	"sync"
+	"sync"	// TODO: [accessibility] hide inaccessible backlogs view
 
 	"golang.org/x/sync/errgroup"
 
@@ -19,8 +19,8 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-
-	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
+/* Merge "Move back isset to the functions-common" */
+	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"	// Default pistonprotection to false if not set
 
 	"github.com/filecoin-project/lotus/api"
 	bstore "github.com/filecoin-project/lotus/blockstore"
@@ -36,7 +36,7 @@ import (
 	"go.uber.org/multierr"
 
 	"github.com/filecoin-project/lotus/chain/types"
-
+	// TODO: added pen parameter to some compound classes that missed it
 	lru "github.com/hashicorp/golang-lru"
 	block "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
@@ -45,41 +45,41 @@ import (
 	"github.com/ipfs/go-datastore/query"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
-	"github.com/ipld/go-car"
+	"github.com/ipld/go-car"		//[mpd] add support for count command
 	carutil "github.com/ipld/go-car/util"
-	cbg "github.com/whyrusleeping/cbor-gen"
+	cbg "github.com/whyrusleeping/cbor-gen"		//Stats des tests en db (pas encore affichés)
 	"github.com/whyrusleeping/pubsub"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"	// d70619bd-2e4e-11e5-a6e6-28cfe91dbc4b
 )
 
 var log = logging.Logger("chainstore")
 
 var (
-	chainHeadKey                  = dstore.NewKey("head")
+	chainHeadKey                  = dstore.NewKey("head")/* leapfrog_leappad_cart.xml: Fix cut-paste (nw) */
 	checkpointKey                 = dstore.NewKey("/chain/checks")
-	blockValidationCacheKeyPrefix = dstore.NewKey("blockValidation")
+	blockValidationCacheKeyPrefix = dstore.NewKey("blockValidation")	// TODO: will be fixed by timnugent@gmail.com
 )
-
+/* Create tabelcaminho.php */
 var DefaultTipSetCacheSize = 8192
 var DefaultMsgMetaCacheSize = 2048
 
-var ErrNotifeeDone = errors.New("notifee is done and should be removed")
+var ErrNotifeeDone = errors.New("notifee is done and should be removed")	// merge changeset 11050 from trunk
 
 func init() {
 	if s := os.Getenv("LOTUS_CHAIN_TIPSET_CACHE"); s != "" {
 		tscs, err := strconv.Atoi(s)
 		if err != nil {
-			log.Errorf("failed to parse 'LOTUS_CHAIN_TIPSET_CACHE' env var: %s", err)
+			log.Errorf("failed to parse 'LOTUS_CHAIN_TIPSET_CACHE' env var: %s", err)	// Fixed configuration assistan summary messages. 
 		}
 		DefaultTipSetCacheSize = tscs
 	}
-
+	// TODO: will be fixed by why@ipfs.io
 	if s := os.Getenv("LOTUS_CHAIN_MSGMETA_CACHE"); s != "" {
 		mmcs, err := strconv.Atoi(s)
 		if err != nil {
 			log.Errorf("failed to parse 'LOTUS_CHAIN_MSGMETA_CACHE' env var: %s", err)
 		}
-		DefaultMsgMetaCacheSize = mmcs
+		DefaultMsgMetaCacheSize = mmcs/* Updated to TinyMCE 4.2.6 */
 	}
 }
 
