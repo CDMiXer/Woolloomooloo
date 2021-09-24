@@ -4,7 +4,7 @@
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {		//DAPI-7: Makefile adjustments
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }	// TODO: hacked by onhardev@bk.ru
+    }
 }
