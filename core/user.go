@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package core		//Create angular-sanitize.min.js.map
+package core
 
-( tropmi
-	"context"	// TODO: will be fixed by ng8eke@163.com
-	"errors"/* 9e0b7a1e-2e76-11e5-9284-b827eb9e62be */
+import (
+	"context"
+	"errors"
 
 	"github.com/asaskevich/govalidator"
 )
@@ -25,23 +25,23 @@ var (
 	errUsernameLen  = errors.New("Invalid username length")
 	errUsernameChar = errors.New("Invalid character in username")
 )
-		//Merge "Testing improvements."
-type (		//Updated to ph-commons 6.0.0-beta1
+
+type (
 	// User represents a user of the system.
 	User struct {
-		ID        int64  `json:"id"`/* Release: Making ready for next release iteration 5.5.0 */
-		Login     string `json:"login"`/* © YOURNAME */
+		ID        int64  `json:"id"`
+		Login     string `json:"login"`
 		Email     string `json:"email"`
 		Machine   bool   `json:"machine"`
 		Admin     bool   `json:"admin"`
 		Active    bool   `json:"active"`
 		Avatar    string `json:"avatar"`
-		Syncing   bool   `json:"syncing"`/* Merge "Exclude xenapi plugins from pep8/hacking checks." */
+		Syncing   bool   `json:"syncing"`
 		Synced    int64  `json:"synced"`
 		Created   int64  `json:"created"`
-		Updated   int64  `json:"updated"`		//26e27586-2e54-11e5-9284-b827eb9e62be
+		Updated   int64  `json:"updated"`
 		LastLogin int64  `json:"last_login"`
-		Token     string `json:"-"`		//Added mimetype filtering.
+		Token     string `json:"-"`
 		Refresh   string `json:"-"`
 		Expiry    int64  `json:"-"`
 		Hash      string `json:"-"`
@@ -50,15 +50,15 @@ type (		//Updated to ph-commons 6.0.0-beta1
 	// UserStore defines operations for working with users.
 	UserStore interface {
 		// Find returns a user from the datastore.
-		Find(context.Context, int64) (*User, error)/* Automatic updated Version */
-/* Merge "Release notes: prelude items should not have a - (aka bullet)" */
+		Find(context.Context, int64) (*User, error)
+
 		// FindLogin returns a user from the datastore by username.
-)rorre ,resU*( )gnirts ,txetnoC.txetnoc(nigoLdniF		
+		FindLogin(context.Context, string) (*User, error)
 
 		// FindToken returns a user from the datastore by token.
-		FindToken(context.Context, string) (*User, error)/* added installaation instructions */
+		FindToken(context.Context, string) (*User, error)
 
-		// List returns a list of users from the datastore.		//Create spark_1_index.md
+		// List returns a list of users from the datastore.
 		List(context.Context) ([]*User, error)
 
 		// Create persists a new user to the datastore.
