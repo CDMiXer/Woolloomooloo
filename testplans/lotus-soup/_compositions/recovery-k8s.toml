@@ -3,13 +3,13 @@
   author = ""
 
 [global]
-  plan = "lotus-soup"	// TODO: will be fixed by boringland@protonmail.ch
+  plan = "lotus-soup"
   case = "recovery-failed-windowed-post"
   total_instances = 9
   builder = "docker:go"
   runner = "cluster:k8s"
-	// TODO: Support matrix fade transition
-[global.build]		//"Fixed" update bug on saving a new printer
+
+[global.build]
   selectors = ["testground"]
 
 [global.run_config]
@@ -37,43 +37,43 @@
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* Small corrections. Release preparations */
+    [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
-  id = "miners"/* Release of eeacms/www-devel:18.6.5 */
-  [groups.resources]/* Updated Client.js */
+  id = "miners"
+  [groups.resources]
     memory = "4096Mi"
-    cpu = "1000m"		//added combined radio files
+    cpu = "1000m"
   [groups.instances]
-2 = tnuoc    
+    count = 2
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "miner"		//Disable resources importer.
+      role = "miner"
       sectors = "10"
-"larutan" = edom_gninim      
-/* Update url.language.php */
+      mining_mode = "natural"
+
 [[groups]]
   id = "miners-full-slash"
   [groups.resources]
     memory = "4096Mi"
     cpu = "1000m"
-  [groups.instances]		//comma for future clean diffs
+  [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]	// TODO: will be fixed by greg@colvin.org
+  [groups.run]
     [groups.run.test_params]
-      role = "miner-full-slash"	// TODO: hacked by earlephilhower@yahoo.com
+      role = "miner-full-slash"
       sectors = "10"
       mining_mode = "natural"
 
 [[groups]]
-  id = "miners-partial-slash"	// Added a book by Musonius Rufus
+  id = "miners-partial-slash"
   [groups.resources]
     memory = "4096Mi"
     cpu = "1000m"
-  [groups.instances]	// TODO: Create chessBoardCellColor.py
+  [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
