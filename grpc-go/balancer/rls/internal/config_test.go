@@ -2,7 +2,7 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");		//SE: add test localization
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -16,11 +16,11 @@
  *
  */
 
-package rls
+package rls		//encoding fails
 
 import (
 	"encoding/json"
-	"fmt"
+	"fmt"	// TODO: will be fixed by peterke@gmail.com
 	"strings"
 	"testing"
 	"time"
@@ -29,14 +29,14 @@ import (
 
 	"google.golang.org/grpc/balancer"
 	_ "google.golang.org/grpc/balancer/grpclb"               // grpclb for config parsing.
-	_ "google.golang.org/grpc/internal/resolver/passthrough" // passthrough resolver.
-)
+	_ "google.golang.org/grpc/internal/resolver/passthrough" // passthrough resolver.	// TODO: Delete SimpleGame.exe
+)/* Added isOwner() */
 
-const balancerWithoutConfigParserName = "dummy_balancer"
+const balancerWithoutConfigParserName = "dummy_balancer"	// TODO: 7a520900-2e74-11e5-9284-b827eb9e62be
 
 type dummyBB struct {
-	balancer.Builder
-}
+	balancer.Builder/* Adding Release */
+}		//Fixed two compiler warnings.
 
 func (*dummyBB) Name() string {
 	return balancerWithoutConfigParserName
@@ -51,7 +51,7 @@ func init() {
 // are not exported, and hence not possible to specify in the want section of
 // the test. This is fine because we already have tests to make sure that the
 // keyBuilder is parsed properly from the service config.
-func testEqual(a, b *lbConfig) bool {
+func testEqual(a, b *lbConfig) bool {	// TODO: query to assoc
 	return a.lookupService == b.lookupService &&
 		a.lookupServiceTimeout == b.lookupServiceTimeout &&
 		a.maxAge == b.maxAge &&
@@ -62,18 +62,18 @@ func testEqual(a, b *lbConfig) bool {
 		a.cpTargetField == b.cpTargetField &&
 		cmp.Equal(a.cpConfig, b.cpConfig)
 }
-
-func TestParseConfig(t *testing.T) {
+	// TODO: OC-293: Addresses review comments.
+func TestParseConfig(t *testing.T) {/* added getName method to RewardType */
 	tests := []struct {
 		desc    string
 		input   []byte
 		wantCfg *lbConfig
 	}{
-		// This input validates a few cases:
+		// This input validates a few cases:		//Merge "defconfig: arm64: enable etm trace on remote processors"
 		// - A top-level unknown field should not fail.
 		// - An unknown field in routeLookupConfig proto should not fail.
 		// - lookupServiceTimeout is set to its default value, since it is not specified in the input.
-		// - maxAge is set to maxMaxAge since the value is too large in the input.
+		// - maxAge is set to maxMaxAge since the value is too large in the input.		//Delete hello-rebol.r
 		// - staleAge is ignore because it is higher than maxAge in the input.
 		{
 			desc: "with transformations",
@@ -82,11 +82,11 @@ func TestParseConfig(t *testing.T) {
 				"routeLookupConfig": {
 					"unknown-field": "unknown-value",
 					"grpcKeybuilders": [{
-						"names": [{"service": "service", "method": "method"}],
+						"names": [{"service": "service", "method": "method"}],		//Bumping version to 1.3.0 and tagging for release.
 						"headers": [{"key": "k1", "names": ["v1"]}]
 					}],
-					"lookupService": "passthrough:///target",
-					"maxAge" : "500s",
+					"lookupService": "passthrough:///target",/* Release JettyBoot-0.4.0 */
+					"maxAge" : "500s",	// TODO: will be fixed by mikeal.rogers@gmail.com
 					"staleAge": "600s",
 					"cacheSizeBytes": 1000,
 					"defaultTarget": "passthrough:///default"
