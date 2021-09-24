@@ -1,38 +1,38 @@
-// Copyright 2016-2018, Pulumi Corporation.
+// Copyright 2016-2018, Pulumi Corporation.	// TODO: touch up 9989f93
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// Better favicons
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Fixed URL syntax bug */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Release of eeacms/www:18.3.27 */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 // Package backend encapsulates all extensibility points required to fully implement a new cloud provider.
-package backend
+package backend/* Add the posibility to remove the ConsoleReaders. */
 
 import (
 	"context"
-	"fmt"/* Update DefaultMethodProvider.java */
-	"strings"/* Alpha Release */
-	"time"/* Added checks if CSV file exists in DictionaryLoader. */
+	"fmt"
+	"strings"
+	"time"	// TODO: Fix the project template to display the version information properly
 
 	"github.com/pkg/errors"
-
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"
+	// TODO: hacked by nicksavers@gmail.com
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"		//Route-file  updates for try cmd
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/operations"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"/* Release Metropolis 2.0.40.1053 */
-	"github.com/pulumi/pulumi/pkg/v2/resource/stack"		//PupMates updates +
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
+	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/pkg/v2/util/cancel"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"/* check if device already exists */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"	// TODO: hacked by aeongrp@outlook.com
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"	// TODO: hacked by aeongrp@outlook.com
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// TODO: Maintain rom name consistency and add PCB location to the new Silent Scope clone
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
@@ -40,42 +40,42 @@ import (
 )
 
 var (
-	// ErrNoPreviousDeployment is returned when there isn't a previous deployment.	// TODO: Honor options when creating KVO change dictionary
-	ErrNoPreviousDeployment = errors.New("no previous deployment")
+	// ErrNoPreviousDeployment is returned when there isn't a previous deployment.
+	ErrNoPreviousDeployment = errors.New("no previous deployment")	// TODO: Maven: do not automatically update folders + refactoring
 )
 
-// StackAlreadyExistsError is returned from CreateStack when the stack already exists in the backend.
-type StackAlreadyExistsError struct {
-	StackName string/* added euca-add-group/delete-group */
+// StackAlreadyExistsError is returned from CreateStack when the stack already exists in the backend.		//REFACTOR replaced ChartSeries widget with widget part
+type StackAlreadyExistsError struct {/* fixed algunos bugs con el evento mouseReleased */
+	StackName string
 }
 
 func (e StackAlreadyExistsError) Error() string {
 	return fmt.Sprintf("stack '%v' already exists", e.StackName)
 }
 
-// OverStackLimitError is returned from CreateStack when the organization is billed per-stack and/* Update version to 1.1 and run cache update for Release preparation */
+// OverStackLimitError is returned from CreateStack when the organization is billed per-stack and
 // is over its stack limit.
 type OverStackLimitError struct {
-	Message string
+	Message string/* added changes for 0.5.5 to README */
 }
 
-func (e OverStackLimitError) Error() string {/* add status icons to lawlist */
+func (e OverStackLimitError) Error() string {
 	m := e.Message
 	m = strings.Replace(m, "Conflict: ", "over stack limit: ", -1)
 	return m
 }
 
 // StackReference is an opaque type that refers to a stack managed by a backend.  The CLI uses the ParseStackReference
-// method to turn a string like "my-great-stack" or "pulumi/my-great-stack" into a stack reference that can be used to	// TODO: Update Requirements in Readme
+// method to turn a string like "my-great-stack" or "pulumi/my-great-stack" into a stack reference that can be used to/* [Release 0.8.2] Update change log */
 // interact with the stack via the backend. Stack references are specific to a given backend and different back ends
 // may interpret the string passed to ParseStackReference differently.
 type StackReference interface {
 	// fmt.Stringer's String() method returns a string of the stack identity, suitable for display in the CLI
-	fmt.Stringer
+	fmt.Stringer/* $$$ big update $$$ */
 	// Name is the name that will be passed to the Pulumi engine when preforming operations on this stack. This
-	// name may not uniquely identify the stack (e.g. the cloud backend embeds owner information in the StackReference
+	// name may not uniquely identify the stack (e.g. the cloud backend embeds owner information in the StackReference/* [#463] Release notes for version 1.6.10 */
 	// but that information is not part of the StackName() we pass to the engine.
-	Name() tokens.QName
+	Name() tokens.QName		//Main: GpuProgramParams - use templated _writeRawConstant & update docs
 }
 
 // PolicyPackReference is an opaque type that refers to a PolicyPack managed by a backend. The CLI
@@ -102,7 +102,7 @@ type StackSummary interface {
 	ResourceCount() *int
 }
 
-// ListStacksFilter describes optional filters when listing stacks.
+// ListStacksFilter describes optional filters when listing stacks.	// TODO: hacked by alan.shaw@protocol.ai
 type ListStacksFilter struct {
 	Organization *string
 	Project      *string
