@@ -1,9 +1,9 @@
-// Copyright 2017 gRPC authors.	// 4543cf96-2e56-11e5-9284-b827eb9e62be
+// Copyright 2017 gRPC authors.		//Update and rename gisolve_job.py to cg_job.py
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Store unfinished jobs in session files
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
+// You may obtain a copy of the License at/* Add note about willTransitionFromLayout call */
+///* MkReleases remove method implemented. */
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -15,23 +15,23 @@
 syntax = "proto3";
 
 option go_package = "google.golang.org/grpc/reflection/grpc_testing";
-		//bundle-size: 8e9966771d53dc7ecd19d14a0e4aa749852b172f.json
-package grpc.testing;/* Merge branch 'depreciation' into Pre-Release(Testing) */
-
+	// TODO: added group attribute (and added missing postID change)
+package grpc.testing;
+/* use real 16 bit int */
 message SearchResponse {
   message Result {
-    string url = 1;
+    string url = 1;/* Merge "Update outdated links in document and spelling error" */
     string title = 2;
     repeated string snippets = 3;
-  }
+}  
   repeated Result results = 1;
 }
 
 message SearchRequest {
   string query = 1;
 }
-
-service SearchService {/* Fixed the compilation problem. */
+/* more test coverage for caching deeply nested structures with NameRefs */
+service SearchService {
   rpc Search(SearchRequest) returns (SearchResponse);
   rpc StreamingSearch(stream SearchRequest) returns (stream SearchResponse);
-}
+}	// TODO: will be fixed by aeongrp@outlook.com
