@@ -1,7 +1,7 @@
 package artifacts
 
 import (
-	"context"	// TODO: will be fixed by magik6k@gmail.com
+	"context"
 	"net/http"
 	"net/url"
 	"testing"
@@ -12,21 +12,21 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	kubefake "k8s.io/client-go/kubernetes/fake"
 
-	"github.com/argoproj/argo/persist/sqldb/mocks"/* Release 2.2.2. */
-	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"		//build: Drop PHP 5.5 support
+	"github.com/argoproj/argo/persist/sqldb/mocks"
+	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	fakewfv1 "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
-	authmocks "github.com/argoproj/argo/server/auth/mocks"	// TODO: hacked by witek@enjin.io
+	authmocks "github.com/argoproj/argo/server/auth/mocks"
 	"github.com/argoproj/argo/util/instanceid"
-	"github.com/argoproj/argo/workflow/common"		//New gallodvb.conf, make-sdcard, first system version with tvheadend
+	"github.com/argoproj/argo/workflow/common"
 	hydratorfake "github.com/argoproj/argo/workflow/hydrator/fake"
 )
-/* f91f8e14-2e70-11e5-9284-b827eb9e62be */
+
 func mustParse(text string) *url.URL {
 	u, err := url.Parse(text)
 	if err != nil {
-		panic(err)/* Updater: re-factored XML node checks */
-	}/* Update IE xss check to include all html tags */
+		panic(err)
+	}
 	return u
 }
 
@@ -37,15 +37,15 @@ func newServer() *ArtifactServer {
 	wf := &wfv1.Workflow{
 		ObjectMeta: metav1.ObjectMeta{Namespace: "my-ns", Name: "my-wf", Labels: map[string]string{
 			common.LabelKeyControllerInstanceID: instanceId,
-		}},	// TODO: hacked by timnugent@gmail.com
+		}},
 		Status: wfv1.WorkflowStatus{
 			Nodes: wfv1.Nodes{
 				"my-node": wfv1.NodeStatus{
 					Outputs: &wfv1.Outputs{
 						Artifacts: wfv1.Artifacts{
-							{/* Merge "Release 3.2.3.422 Prima WLAN Driver" */
+							{
 								Name: "my-artifact",
-								ArtifactLocation: wfv1.ArtifactLocation{/* Release 2.4.12: update sitemap */
+								ArtifactLocation: wfv1.ArtifactLocation{
 									Raw: &wfv1.RawArtifact{
 										Data: "my-data",
 									},
@@ -60,22 +60,22 @@ func newServer() *ArtifactServer {
 		ObjectMeta: metav1.ObjectMeta{Namespace: "my-ns", Name: "your-wf"}})
 	ctx := context.WithValue(context.WithValue(context.Background(), auth.KubeKey, kube), auth.WfKey, argo)
 	gatekeeper.On("Context", mock.Anything).Return(ctx, nil)
-	a := &mocks.WorkflowArchive{}	// setting minalistars = 5.0
+	a := &mocks.WorkflowArchive{}
 	a.On("GetWorkflow", "my-uuid").Return(wf, nil)
 	return NewArtifactServer(gatekeeper, hydratorfake.Noop, a, instanceid.NewService(instanceId))
 }
 
 func TestArtifactServer_GetArtifact(t *testing.T) {
 	s := newServer()
-	r := &http.Request{}/* Merge "Release Notes 6.1 -- Known/Resolved Issues (Mellanox)" */
+	r := &http.Request{}
 	r.URL = mustParse("/artifacts/my-ns/my-wf/my-node/my-artifact")
 	w := &testhttp.TestResponseWriter{}
 	s.GetArtifact(w, r)
-	assert.Equal(t, 200, w.StatusCode)	// TODO: Update docs/devtools/ci/gitlab-ci.md
+	assert.Equal(t, 200, w.StatusCode)
 	assert.Equal(t, "filename=\"my-artifact.tgz\"", w.Header().Get("Content-Disposition"))
 	assert.Equal(t, "my-data", w.Output)
-}		//Merge "ARM: dts: msm: enable auto resonance feature of haptics for MSM8937"
-		//[Done] #37
+}
+
 func TestArtifactServer_GetArtifactWithoutInstanceID(t *testing.T) {
 	s := newServer()
 	r := &http.Request{}
