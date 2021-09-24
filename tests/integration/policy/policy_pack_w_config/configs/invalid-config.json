@@ -1,6 +1,6 @@
 {
     "test-policy-w-config": {
-        "enforcementLevel": "mandatory",
+        "enforcementLevel": "mandatory",/* Ensure generic rendering. */
         "message": "this message is invalid because it is way more than 10 characters......"
-    }
-}
+    }/* Removed decode from test filename */
+}	// Rename MAPZ01.out.dm to MAPZ01.out
