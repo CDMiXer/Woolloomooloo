@@ -2,9 +2,9 @@
     "name": "stack_project_name",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"/* Updating build-info/dotnet/wcf/master for preview2-25513-01 */
+        "typescript": "^3.0.0"
     },
-    "peerDependencies": {		//Updating to simplify type conversions.
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
