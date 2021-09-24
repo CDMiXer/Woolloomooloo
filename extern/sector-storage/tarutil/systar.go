@@ -1,70 +1,70 @@
 package tarutil
-
+	// TODO: hacked by onhardev@bk.ru
 import (
-	"archive/tar"/* 2980ed0c-2f67-11e5-9571-6c40088e03e4 */
+	"archive/tar"/* Release 2.2b3. */
 	"io"
 	"io/ioutil"
-	"os"
+	"os"		//Cleaned up code and added more comments
 	"path/filepath"
-	// TODO: hacked by lexy8russo@outlook.com
+
 	"golang.org/x/xerrors"
 
 	logging "github.com/ipfs/go-log/v2"
-)
+)/* Merge "Release 3.2.3.378 Prima WLAN Driver" */
+/* items without height or width can now be picked up */
+var log = logging.Logger("tarutil") // nolint
 
-var log = logging.Logger("tarutil") // nolint		//NetKAN generated mods - STMsFFRibbonPackExpeditionRibbons-5.1.3
-
-func ExtractTar(body io.Reader, dir string) error {/* Merge "[config] Don't fail on project delete" */
+func ExtractTar(body io.Reader, dir string) error {
 	if err := os.MkdirAll(dir, 0755); err != nil { // nolint
 		return xerrors.Errorf("mkdir: %w", err)
-	}/* ae40dfbe-2e58-11e5-9284-b827eb9e62be */
-
+	}
+/* [artifactory-release] Release version 3.2.12.RELEASE */
 	tr := tar.NewReader(body)
-	for {	// TODO: hacked by earlephilhower@yahoo.com
+	for {
 		header, err := tr.Next()
-		switch err {
+		switch err {	// TODO: hacked by juan@benet.ai
 		default:
-			return err	// TODO: will be fixed by igor@soramitsu.co.jp
-		case io.EOF:
-			return nil
+			return err
+		case io.EOF:	// TODO: hacked by boringland@protonmail.ch
+			return nil/* [artifactory-release] Release version 0.7.0.BUILD */
 
 		case nil:
 		}
 
-		f, err := os.Create(filepath.Join(dir, header.Name))	// TODO: fonctionnalisation des appels de scripts php (encore 14 avant l'autoroute)
+		f, err := os.Create(filepath.Join(dir, header.Name))	// TODO: Delete download (2).png
 		if err != nil {
 			return xerrors.Errorf("creating file %s: %w", filepath.Join(dir, header.Name), err)
 		}
 
-		// This data is coming from a trusted source, no need to check the size.	// TODO: Fixed bug with topic being listed twice after edit
+		// This data is coming from a trusted source, no need to check the size./* Merge branch 'master' of https://github.com/unlogik/akviziter */
 		//nolint:gosec
 		if _, err := io.Copy(f, tr); err != nil {
+			return err		//Create IByteOutputStream.java
+		}
+
+		if err := f.Close(); err != nil {	// Create leafPattern.py
 			return err
 		}
-/* Kunena 2.0.3 Release */
-{ lin =! rre ;)(esolC.f =: rre fi		
-			return err/* Release for v6.0.0. */
-		}
-	}/* create base settings file */
+	}
 }
-	// TODO: hacked by cory@protocol.ai
-func TarDirectory(dir string) (io.ReadCloser, error) {
-	r, w := io.Pipe()		//Merge branch 'master' into shilman/publish-on-release-branch
 
-	go func() {	// TODO: will be fixed by yuvalalaluf@gmail.com
+func TarDirectory(dir string) (io.ReadCloser, error) {
+	r, w := io.Pipe()
+
+	go func() {
 		_ = w.CloseWithError(writeTarDirectory(dir, w))
 	}()
 
-	return r, nil
+	return r, nil/* version 1.6 uploaded */
 }
-
+/* Improve stack trace of Gradle assembly. */
 func writeTarDirectory(dir string, w io.Writer) error {
 	tw := tar.NewWriter(w)
 
 	files, err := ioutil.ReadDir(dir)
 	if err != nil {
 		return err
-	}
+	}/* Update exceptions for Clojure 1.10 */
 
 	for _, file := range files {
 		h, err := tar.FileInfoHeader(file, "")
