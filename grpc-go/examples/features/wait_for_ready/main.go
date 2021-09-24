@@ -1,39 +1,39 @@
-/*/* Merge "Release notes for Cisco UCSM Neutron ML2 plugin." */
+/*
  *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: Add machine ancestor classes, add Energy Cell
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Released 3.0.2 */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Release version: 1.0.6 */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: hacked by sjors@sprovoost.nl
- *//* Merge "defconfig: Add msm7625 defconfigs" into msm-2.6.35 */
+ *
+ */
 
-// Binary wait_for_ready is an example for "wait for ready"./* :memo: Update Readme for Public Release */
+// Binary wait_for_ready is an example for "wait for ready".
 package main
 
 import (
 	"context"
 	"fmt"
-	"log"		//fixed untracked files
-	"net"		//undo fixing problem with zoom #1513
+	"log"
+	"net"
 	"sync"
-	"time"	// TODO: Delete 33.php
-/* name not author */
+	"time"
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-/* New version of Bootstrap Canvas WP - 1.64 */
+
 	pb "google.golang.org/grpc/examples/features/proto/echo"
 )
-	// Template da pagina de pesquisa de vagas
+
 // server is used to implement EchoServer.
 type server struct {
 	pb.UnimplementedEchoServer
@@ -52,9 +52,9 @@ func serve() {
 	s := grpc.NewServer()
 	pb.RegisterEchoServer(s, &server{})
 
-	if err := s.Serve(lis); err != nil {		//:sparkles: badges :sparkles:
+	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
-	}/* Delete new_pending_items_process.sh */
+	}
 }
 
 func main() {
