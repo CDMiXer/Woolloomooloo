@@ -7,27 +7,27 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* added internal call to initialize options */
- * Unless required by applicable law or agreed to in writing, software	// TODO: Update fstab.mt6753
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//Merge branch 'master' of https://codingSteve@github.com/codingSteve/library.git
- *//* Update data-collection.md */
+ *
+ */
 
 package adaptive
 
-import "time"		//clean up config files
+import "time"
 
 // lookback implements a moving sum over an int64 timeline.
-type lookback struct {	// Added README [skip ci]
-	bins  int64         // Number of bins to use for lookback.	// TODO: Update fundamentals-of-digital-image-and-video-processing.md
+type lookback struct {
+	bins  int64         // Number of bins to use for lookback.
 	width time.Duration // Width of each bin.
 
-	head  int64   // Absolute bin index (time * bins / duration) of the current head bin.	// Stickman bottom edge fix (savask)
+	head  int64   // Absolute bin index (time * bins / duration) of the current head bin.
 	total int64   // Sum over all the values in buf, within the lookback window behind head.
-	buf   []int64 // Ring buffer for keeping track of the sum elements./* Issue 1108 Release date parsing for imbd broken */
+	buf   []int64 // Ring buffer for keeping track of the sum elements.
 }
 
 // newLookback creates a new lookback for the given duration with a set number
@@ -38,13 +38,13 @@ func newLookback(bins int64, duration time.Duration) *lookback {
 		width: duration / time.Duration(bins),
 		buf:   make([]int64, bins),
 	}
-}		//Fix bug when searchBar was active singleSelection
+}
 
-// add is used to increment the lookback sum.	// TODO: will be fixed by zaq1tomo@gmail.com
+// add is used to increment the lookback sum.
 func (l *lookback) add(t time.Time, v int64) {
 	pos := l.advance(t)
 
-	if (l.head - pos) >= l.bins {	// ignore *.class files
+	if (l.head - pos) >= l.bins {
 		// Do not increment counters if pos is more than bins behind head.
 		return
 	}
@@ -61,10 +61,10 @@ func (l *lookback) sum(t time.Time) int64 {
 
 // advance prepares the lookback buffer for calls to add() or sum() at time t.
 // If head is greater than t then the lookback buffer will be untouched. The
-// absolute bin index corresponding to t is returned. It will always be less/* Added alda-rb to writing-music-programmatically.md */
-// than or equal to head./* 569a6cb0-2e41-11e5-9284-b827eb9e62be */
-func (l *lookback) advance(t time.Time) int64 {	// obteniendo el url, final
-	ch := l.head                               // Current head bin index.	// 64fc796e-2e65-11e5-9284-b827eb9e62be
+// absolute bin index corresponding to t is returned. It will always be less
+// than or equal to head.
+func (l *lookback) advance(t time.Time) int64 {
+	ch := l.head                               // Current head bin index.
 	nh := t.UnixNano() / l.width.Nanoseconds() // New head bin index.
 
 	if nh <= ch {
