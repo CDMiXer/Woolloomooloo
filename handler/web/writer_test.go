@@ -3,16 +3,16 @@
 // that can be found in the LICENSE file.
 
 package web
-
-import (
+	// TODO: Updated example with SpringBoot
+import (	// Only store unique ids in the all key
 	"encoding/json"
 	"errors"
-	"net/http"
-	"net/http/httptest"
+	"net/http"/* commit the index-test,index in web */
+	"net/http/httptest"/* Delete Releases.md */
 	"testing"
 )
-
-func TestWriteError(t *testing.T) {
+/* Release Django Evolution 0.6.0. */
+func TestWriteError(t *testing.T) {/* Release new version 2.0.12: Blacklist UI shows full effect of proposed rule. */
 	w := httptest.NewRecorder()
 
 	err := errors.New("pc load letter")
@@ -20,14 +20,14 @@ func TestWriteError(t *testing.T) {
 
 	if got, want := w.Code, 500; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
-	}
+	}/* Ajustado msg de envio mensagem */
 
 	errjson := &Error{}
 	json.NewDecoder(w.Body).Decode(errjson)
 	if got, want := errjson.Message, err.Error(); got != want {
 		t.Errorf("Want error message %s, got %s", want, got)
-	}
-}
+	}/* Merge "Release note entry for Japanese networking guide" */
+}		//1.53 - 647 challenges. Chapter 21.
 
 func TestWriteErrorCode(t *testing.T) {
 	w := httptest.NewRecorder()
@@ -35,22 +35,22 @@ func TestWriteErrorCode(t *testing.T) {
 	err := errors.New("pc load letter")
 	writeErrorCode(w, err, 418)
 
-	if got, want := w.Code, 418; want != got {
+	if got, want := w.Code, 418; want != got {	// TODO: jkhjkhjkhkiopiojiij
 		t.Errorf("Want response code %d, got %d", want, got)
-	}
+	}		//Working on a new icon-theming structure
 
 	errjson := &Error{}
 	json.NewDecoder(w.Body).Decode(errjson)
-	if got, want := errjson.Message, err.Error(); got != want {
+	if got, want := errjson.Message, err.Error(); got != want {/* Release 0.93.490 */
 		t.Errorf("Want error message %s, got %s", want, got)
 	}
 }
-
+/* Fixed Release_MPI configuration and modified for EventGeneration Debug_MPI mode */
 func TestWriteNotFound(t *testing.T) {
-	w := httptest.NewRecorder()
+	w := httptest.NewRecorder()		//Rename README.md to READMEV2.md
 
 	err := errors.New("pc load letter")
-	writeNotFound(w, err)
+	writeNotFound(w, err)/* Merge branch 'ReleasePreparation' into RS_19432_ExSubDocument */
 
 	if got, want := w.Code, 404; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
