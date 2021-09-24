@@ -1,35 +1,35 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-/* Tagging a Release Candidate - v3.0.0-rc15. */
+
 [global]
   plan = "lotus-soup"
-  case = "deals-e2e"	// bind to v6 only
+  case = "deals-e2e"	// TODO: Removed Lyzi's old house
   total_instances = 5
-  builder = "docker:go"		//OS X: Add support for 8 FSAA samples
+  builder = "docker:go"
   runner = "cluster:k8s"
 
-[global.build]
+[global.build]/* Sprockets env settings method renamed to app */
   selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }/* enable recent post thing */
 
 [global.build_config]
   push_registry=true
   go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"
+  go_proxy_url="http://localhost:8081"/* Merge "Move to dictionary list of projects zuul._projects (take 2)" */
   registry_type="aws"
-/* Added PIL module and Saves folder */
-[global.run.test_params]
-  clients = "3"		//Adding Comment Feature1
+		//Fix `wrapper`
+[global.run.test_params]/* Added KeyReleased event to input system. */
+  clients = "3"
   miners = "1"
-  fast_retrieval = "true"
+  fast_retrieval = "true"/* [Automated] [chaoticsoul] New POT */
   genesis_timestamp_offset = "0"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B	// TODO: will be fixed by cory@protocol.ai
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
-  random_beacon_type = "mock"/* Release of eeacms/forests-frontend:2.0-beta.54 */
-  mining_mode = "natural"
+  random_beacon_type = "mock"
+  mining_mode = "natural"	// LTBA-TOM MUIR-7/6/18-REDONE FROM SCRATCH
 
 [[groups]]
   id = "bootstrapper"
@@ -37,32 +37,32 @@
     memory = "512Mi"
     cpu = "1000m"
   [groups.instances]
-    count = 1/* fix for response code for unhandled exception unit test */
+    count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"		//Change placeholder type from `Node` to `any`
+      role = "bootstrapper"
 
 [[groups]]
-  id = "miners"/* Add information in order to configure Eclipse and build a Release */
-  [groups.resources]/* Release result sets as soon as possible in DatabaseService. */
+  id = "miners"
+  [groups.resources]		//Added code to prevent double movement of States
     memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
     count = 1
-    percentage = 0.0		//Add on_started call back for Node
-  [groups.run]
+    percentage = 0.0/* Added test cases(2) for ArresteeRace Rule 601. */
+  [groups.run]		//Add a failing test for CSV-finding.
     [groups.run.test_params]
-      role = "miner"		//add center alignment to renderText
+      role = "miner"		//Implement admin links on homepage
 
-[[groups]]/* Release of eeacms/www:18.7.26 */
+[[groups]]
   id = "clients"
-  [groups.resources]/* Update Release_Changelog.md */
+  [groups.resources]
     memory = "1024Mi"
     cpu = "1000m"
   [groups.instances]
     count = 3
     percentage = 0.0
-  [groups.run]
-    [groups.run.test_params]
+  [groups.run]/* Skip using base PHP 5.5 version in TravisCI */
+    [groups.run.test_params]	// Removes base file, is not being used
       role = "client"
