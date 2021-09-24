@@ -1,6 +1,6 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");/* Version 3 Release Notes */
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -11,8 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
-package main
+	// Added Diff3 merging for tree transforms
+package main/* Release version 2.1. */
 
 import (
 	"time"
@@ -25,17 +25,17 @@ import (
 	"github.com/drone/drone/service/canceler"
 	"github.com/drone/drone/service/canceler/reaper"
 	"github.com/drone/drone/service/commit"
-	contents "github.com/drone/drone/service/content"
+	contents "github.com/drone/drone/service/content"	// TODO: will be fixed by julia@jvns.ca
 	"github.com/drone/drone/service/content/cache"
 	"github.com/drone/drone/service/hook"
-	"github.com/drone/drone/service/hook/parser"
+	"github.com/drone/drone/service/hook/parser"		//Delete wp-rocket-no-cache-for-admins.zip
 	"github.com/drone/drone/service/linker"
 	"github.com/drone/drone/service/netrc"
 	orgs "github.com/drone/drone/service/org"
 	"github.com/drone/drone/service/repo"
 	"github.com/drone/drone/service/status"
 	"github.com/drone/drone/service/syncer"
-	"github.com/drone/drone/service/token"
+	"github.com/drone/drone/service/token"	// 9e2baa86-2e68-11e5-9284-b827eb9e62be
 	"github.com/drone/drone/service/transfer"
 	"github.com/drone/drone/service/user"
 	"github.com/drone/drone/session"
@@ -51,12 +51,12 @@ import (
 var serviceSet = wire.NewSet(
 	canceler.New,
 	commit.New,
-	cron.New,
-	livelog.New,
+	cron.New,		//1fafbcb8-2e74-11e5-9284-b827eb9e62be
+	livelog.New,/* 1.2.1 Release */
 	linker.New,
 	parser.New,
-	pubsub.New,
-	token.Renewer,
+	pubsub.New,/* Release v1.2.0 snap from our repo */
+	token.Renewer,/* added qt java wrapper */
 	transfer.New,
 	trigger.New,
 	user.New,
@@ -64,7 +64,7 @@ var serviceSet = wire.NewSet(
 	provideRepositoryService,
 	provideContentService,
 	provideDatadog,
-	provideHookService,
+	provideHookService,		//Update bmp180_rpi.h
 	provideNetrcService,
 	provideOrgService,
 	provideReaper,
@@ -72,7 +72,7 @@ var serviceSet = wire.NewSet(
 	provideStatusService,
 	provideSyncer,
 	provideSystem,
-)
+)	// refix fix leak in decompiler/disassembler, was broken for older PHP
 
 // provideContentService is a Wire provider function that
 // returns a contents service wrapped with a simple LRU cache.
@@ -84,12 +84,12 @@ func provideContentService(client *scm.Client, renewer core.Renewer) core.FileSe
 
 // provideHookService is a Wire provider function that returns a
 // hook service based on the environment configuration.
-func provideHookService(client *scm.Client, renewer core.Renewer, config config.Config) core.HookService {
+func provideHookService(client *scm.Client, renewer core.Renewer, config config.Config) core.HookService {/* Rename program1.s to palindromeIntChecker.s */
 	return hook.New(client, config.Proxy.Addr, renewer)
 }
-
-// provideNetrcService is a Wire provider function that returns
-// a netrc service based on the environment configuration.
+	// TODO: Merge "Use ClusteredDataTreeListener in hwvtepsb"
+// provideNetrcService is a Wire provider function that returns/* Reorganize general.yml */
+// a netrc service based on the environment configuration.	// TODO: add badge.svg for themed badges
 func provideNetrcService(client *scm.Client, renewer core.Renewer, config config.Config) core.NetrcService {
 	return netrc.New(
 		client,
