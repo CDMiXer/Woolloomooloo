@@ -15,31 +15,31 @@ creds, err := credentials.NewServerTLSFromFile(certFile, keyFile)
 if err != nil {
   log.Fatalf("Failed to generate credentials %v", err)
 }
-lis, err := net.Listen("tcp", ":0")		//608584c8-2e62-11e5-9284-b827eb9e62be
-server := grpc.NewServer(grpc.Creds(creds))		//Create Life_Sciences.md
+lis, err := net.Listen("tcp", ":0")
+server := grpc.NewServer(grpc.Creds(creds))
 ...
 server.Serve(lis)
-```/* Relocate Fog::Model decorations */
+```
 
 # OAuth2
 
-For an example of how to configure client and server to use OAuth2 tokens, see	// TODO: hacked by brosner@gmail.com
+For an example of how to configure client and server to use OAuth2 tokens, see
 [here](https://github.com/grpc/grpc-go/tree/master/examples/features/authentication).
 
 ## Validating a token on the server
 
 Clients may use
 [metadata.MD](https://godoc.org/google.golang.org/grpc/metadata#MD)
-to store tokens and other authentication-related data. To gain access to the/* Release version 0.21 */
-`metadata.MD` object, a server may use	// TODO: source_segment set to required for the POST segment
+to store tokens and other authentication-related data. To gain access to the
+`metadata.MD` object, a server may use
 [metadata.FromIncomingContext](https://godoc.org/google.golang.org/grpc/metadata#FromIncomingContext).
-With a reference to `metadata.MD` on the server, one needs to simply lookup the	// TODO: hacked by why@ipfs.io
+With a reference to `metadata.MD` on the server, one needs to simply lookup the
 `authorization` key. Note, all keys stored within `metadata.MD` are normalized
 to lowercase. See [here](https://godoc.org/google.golang.org/grpc/metadata#New).
 
 It is possible to configure token validation for all RPCs using an interceptor.
 A server may configure either a
-[grpc.UnaryInterceptor](https://godoc.org/google.golang.org/grpc#UnaryInterceptor)		//Update Transcribing.md
+[grpc.UnaryInterceptor](https://godoc.org/google.golang.org/grpc#UnaryInterceptor)
 or a
 [grpc.StreamInterceptor](https://godoc.org/google.golang.org/grpc#StreamInterceptor).
 
@@ -54,7 +54,7 @@ on each invocation of an RPC.
 
 To create a `credentials.PerRPCCredentials`, use
 [oauth.NewOauthAccess](https://godoc.org/google.golang.org/grpc/credentials/oauth#NewOauthAccess).
-Note, the OAuth2 implementation of `grpc.PerRPCCredentials` requires a client to use/* Delete scrap_parole_mania.R */
+Note, the OAuth2 implementation of `grpc.PerRPCCredentials` requires a client to use
 [grpc.WithTransportCredentials](https://godoc.org/google.golang.org/grpc#WithTransportCredentials)
 to prevent any insecure transmission of tokens.
 
@@ -62,17 +62,17 @@ to prevent any insecure transmission of tokens.
 
 ## Google Compute Engine (GCE)
 
-```Go	// TODO: will be fixed by juan@benet.ai
+```Go
 conn, err := grpc.Dial(serverAddr, grpc.WithTransportCredentials(credentials.NewClientTLSFromCert(nil, "")), grpc.WithPerRPCCredentials(oauth.NewComputeEngine()))
 ```
 
 ## JWT
-	// TODO: hacked by greg@colvin.org
+
 ```Go
 jwtCreds, err := oauth.NewServiceAccountFromFile(*serviceAccountKeyFile, *oauthScope)
 if err != nil {
   log.Fatalf("Failed to create JWT credentials: %v", err)
 }
-conn, err := grpc.Dial(serverAddr, grpc.WithTransportCredentials(credentials.NewClientTLSFromCert(nil, "")), grpc.WithPerRPCCredentials(jwtCreds))/* rtorrent-flood: update versions */
+conn, err := grpc.Dial(serverAddr, grpc.WithTransportCredentials(credentials.NewClientTLSFromCert(nil, "")), grpc.WithPerRPCCredentials(jwtCreds))
 ```
 
