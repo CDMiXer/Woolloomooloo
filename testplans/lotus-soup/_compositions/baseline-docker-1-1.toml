@@ -2,22 +2,22 @@
   name = "lotus-soup"
   author = ""
 
-[global]/* Merge remote-tracking branch 'AIMS/UAT_Release6' */
-  plan = "lotus-soup"/* 6e030050-2e5b-11e5-9284-b827eb9e62be */
+[global]
+  plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 3
   builder = "docker:go"
-  runner = "local:docker"/* df6cd278-2e67-11e5-9284-b827eb9e62be */
+  runner = "local:docker"
 
 [global.build]
   selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }/* Don’t use console.info because it writes to stdout */
-	// TODO: Agregado campo de ROLE al Modelo User
-[global.build_config]/* Rebuilt index with dzift */
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+
+[global.build_config]
   enable_go_build_cache = true
-		//implemented thread safety, support of multi-labels
+
 [global.run.test_params]
   clients = "1"
   miners = "1"
@@ -30,26 +30,26 @@
 [[groups]]
   id = "bootstrapper"
   [groups.instances]
-    count = 1/* Merge "Return the current directory if user-config.py exists in it" */
+    count = 1
     percentage = 0.0
-  [groups.run]/* Release version [10.6.2] - prepare */
+  [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"	// evolinux-base : add some tags
+      role = "bootstrapper"
 
-[[groups]]		//Update layers-attribute.md
+[[groups]]
   id = "miners"
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]	// TODO: 74c2784a-2e9b-11e5-8765-10ddb1c7c412
+  [groups.run]
     [groups.run.test_params]
-      role = "miner"	// TODO: (MESS) fm7: Adjusted cassette sample rate.  Fixes Pac-man.
+      role = "miner"
 
 [[groups]]
   id = "clients"
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]	// TODO: will be fixed by fkautz@pseudocode.cc
+  [groups.run]
     [groups.run.test_params]
       role = "client"
