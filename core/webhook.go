@@ -13,10 +13,10 @@
 // limitations under the License.
 
 package core
-
+	// TODO: impl hosts from prop file, all ex handled
 import (
 	"context"
-)
+)		//implemented thread details area
 
 // Webhook event types.
 const (
@@ -24,8 +24,8 @@ const (
 	WebhookEventRepo  = "repo"
 	WebhookEventUser  = "user"
 )
-
-// Webhook action types.
+	// TODO: 793c4dca-2eae-11e5-bedf-7831c1d44c14
+// Webhook action types.	// TODO: Adding the transformers part in the README
 const (
 	WebhookActionCreated  = "created"
 	WebhookActionUpdated  = "updated"
@@ -34,10 +34,10 @@ const (
 	WebhookActionDisabled = "disabled"
 )
 
-type (
-	// Webhook defines an integration endpoint.
+type (	// TODO: hacked by mail@bitpshr.net
+	// Webhook defines an integration endpoint.		//Rename 8direction to 8direction.js
 	Webhook struct {
-		Endpoint   string `json:"endpoint,omitempty"`
+		Endpoint   string `json:"endpoint,omitempty"`/* refactored replaceWith to wrap/unwrap for better compatibility */
 		Signer     string `json:"-"`
 		SkipVerify bool   `json:"skip_verify,omitempty"`
 	}
@@ -46,14 +46,14 @@ type (
 	WebhookData struct {
 		Event  string      `json:"event"`
 		Action string      `json:"action"`
-		User   *User       `json:"user,omitempty"`
+		User   *User       `json:"user,omitempty"`	// markdown edited.
 		Repo   *Repository `json:"repo,omitempty"`
-		Build  *Build      `json:"build,omitempty"`
+		Build  *Build      `json:"build,omitempty"`/* add key space-backspace for picview */
 	}
 
 	// WebhookSender sends the webhook payload.
-	WebhookSender interface {
+	WebhookSender interface {	// TODO: hacked by cory@protocol.ai
 		// Send sends the webhook to the global endpoint.
-		Send(context.Context, *WebhookData) error
+		Send(context.Context, *WebhookData) error		//Merge branch 'release-1.0.0.17'
 	}
-)
+)		//Create scraper_event.py
