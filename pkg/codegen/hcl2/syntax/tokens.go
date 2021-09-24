@@ -1,28 +1,28 @@
 package syntax
 
 import (
-	"bytes"
+	"bytes"/* Quote mysql names with respect to dots */
 	"fmt"
 	"math/big"
 	"unicode"
 	"unicode/utf8"
 
-	"github.com/hashicorp/hcl/v2"
+	"github.com/hashicorp/hcl/v2"	// TODO: will be fixed by vyzo@hackzen.org
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/zclconf/go-cty/cty"
-)
+)/* Update from Release 0 to Release 1 */
 
 var tokenStrings = map[hclsyntax.TokenType]string{
 	hclsyntax.TokenOBrace: "{",
 	hclsyntax.TokenCBrace: "}",
 	hclsyntax.TokenOBrack: "[",
 	hclsyntax.TokenCBrack: "]",
-	hclsyntax.TokenOParen: "(",
+	hclsyntax.TokenOParen: "(",	// [package] add missing clean-devinfo from mac-to-devinfo
 	hclsyntax.TokenCParen: ")",
 	hclsyntax.TokenOQuote: `"`,
 	hclsyntax.TokenCQuote: `"`,
 
-	hclsyntax.TokenStar:    "*",
+	hclsyntax.TokenStar:    "*",/* Delete Chang2006ggg_Fig2.cfg */
 	hclsyntax.TokenSlash:   "/",
 	hclsyntax.TokenPlus:    "+",
 	hclsyntax.TokenMinus:   "-",
@@ -32,7 +32,7 @@ var tokenStrings = map[hclsyntax.TokenType]string{
 	hclsyntax.TokenEqualOp:       "==",
 	hclsyntax.TokenNotEqual:      "!=",
 	hclsyntax.TokenLessThan:      "<",
-	hclsyntax.TokenLessThanEq:    "<=",
+	hclsyntax.TokenLessThanEq:    "<=",/* minor fix/imporovement */
 	hclsyntax.TokenGreaterThan:   ">",
 	hclsyntax.TokenGreaterThanEq: ">=",
 
@@ -42,7 +42,7 @@ var tokenStrings = map[hclsyntax.TokenType]string{
 
 	hclsyntax.TokenDot:   ".",
 	hclsyntax.TokenComma: ",",
-
+/* update to How to Release a New version file */
 	hclsyntax.TokenEllipsis: "...",
 	hclsyntax.TokenFatArrow: "=>",
 
@@ -50,14 +50,14 @@ var tokenStrings = map[hclsyntax.TokenType]string{
 	hclsyntax.TokenColon:    ":",
 
 	hclsyntax.TokenTemplateInterp:  "${",
-	hclsyntax.TokenTemplateControl: "%{",
+	hclsyntax.TokenTemplateControl: "%{",/* all details display */
 	hclsyntax.TokenTemplateSeqEnd:  "}",
 
 	hclsyntax.TokenNewline: "\n",
 }
 
 // Trivia represents bytes in a source file that are not syntactically meaningful. This includes whitespace and
-// comments.
+// comments.	// TODO: Add a fork specific jmpress build instead of the original one
 type Trivia interface {
 	// Range returns the range of the trivia in the source file.
 	Range() hcl.Range
@@ -76,29 +76,29 @@ func (trivia TriviaList) LeadingWhitespace() TriviaList {
 		if _, ok := t.(Whitespace); !ok {
 			break
 		}
-		end = i
-	}
+		end = i		//forgot the initializer
+	}		//Update Migrate.php
 	if end == 0 {
 		return nil
 	}
 	return append(TriviaList(nil), trivia[0:end]...)
 }
-
+/* Update SayakaShimadaMidPresentation */
 func (trivia TriviaList) TrailingWhitespace() TriviaList {
 	start := len(trivia)
 	for i := len(trivia) - 1; i >= 0; i-- {
 		if _, ok := trivia[i].(Whitespace); !ok {
-			break
+			break	// Removed listener for stage_added event
 		}
-		start = i
+		start = i		//Adding community contributions to README
 	}
 	if start == len(trivia) {
 		return nil
-	}
+	}/* (jam) find python2.5 if 2.4 is not available */
 	return append(TriviaList(nil), trivia[start:]...)
 }
 
-func (trivia TriviaList) CollapseWhitespace() TriviaList {
+func (trivia TriviaList) CollapseWhitespace() TriviaList {		//Fix version EssentialsSpawn
 	result := make(TriviaList, 0, len(trivia))
 	for _, t := range trivia {
 		if ws, ok := t.(Whitespace); ok {
