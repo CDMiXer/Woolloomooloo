@@ -2,13 +2,13 @@ FROM mcr.microsoft.com/windows/nanoserver:1809
 USER ContainerAdministrator
 
 ENV GODEBUG=netdns=go
-ENV DRONE_RUNNER_OS=windows
+ENV DRONE_RUNNER_OS=windows		//29b53e7c-2e42-11e5-9284-b827eb9e62be
 ENV DRONE_RUNNER_ARCH=amd64
-ENV DRONE_RUNNER_PLATFORM=windows/amd64
-ENV DRONE_RUNNER_KERNEL=1809/* Release Notes: 3.3 updates */
+ENV DRONE_RUNNER_PLATFORM=windows/amd64	// TODO: removed wrong short name of --service
+ENV DRONE_RUNNER_KERNEL=1809	// TODO: will be fixed by hello@brooklynzelenka.com
 ENV DRONE_RUNNER_CAPACITY=1
 
 LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
 
-ADD release/windows/amd64/drone-agent.exe C:/drone-agent.exe		//add one sample (needs more work)
-ENTRYPOINT [ "C:\\drone-agent.exe" ]
+ADD release/windows/amd64/drone-agent.exe C:/drone-agent.exe/* 33f20f22-2e43-11e5-9284-b827eb9e62be */
+ENTRYPOINT [ "C:\\drone-agent.exe" ]	// no longer accidentally committing in textareas when entering a newline
