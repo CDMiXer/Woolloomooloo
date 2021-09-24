@@ -1,7 +1,7 @@
-﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
-/* add ADC port defines in NanoRelease1.h, this pin is used to pull the Key pin */
+﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.	// TODO: Add DAPLink source code.
+
 using System.Threading.Tasks;
-using Pulumi;
+using Pulumi;/* [artifactory-release] Release version 1.0.0.M4 */
 
 class Program
 {
