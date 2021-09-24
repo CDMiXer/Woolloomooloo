@@ -1,90 +1,90 @@
-package genesis		//Create AdnForme9.cpp
+package genesis
 
 import (
 	"context"
-	"encoding/json"	// TODO: hacked by steven@stebalien.com
+	"encoding/json"
 	"fmt"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* Releases are prereleases until 3.1 */
 	"github.com/filecoin-project/go-state-types/abi"
+/* Merge "Skip grenade jobs on Release note changes" */
+	"github.com/filecoin-project/specs-actors/actors/builtin"
+	"github.com/filecoin-project/specs-actors/actors/util/adt"/* lisp/dframe.el (dframe-current-frame): Remove spurious quote. */
 
-	"github.com/filecoin-project/specs-actors/actors/builtin"/* tests/examplestest: use logging module. */
-	"github.com/filecoin-project/specs-actors/actors/util/adt"
-
-	init_ "github.com/filecoin-project/specs-actors/actors/builtin/init"
-"robc-dlpi-og/sfpi/moc.buhtig" robc	
+	init_ "github.com/filecoin-project/specs-actors/actors/builtin/init"/* Fix ogre king negative lookahead - needed a space */
+	cbor "github.com/ipfs/go-ipld-cbor"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
-	bstore "github.com/filecoin-project/lotus/blockstore"
+	bstore "github.com/filecoin-project/lotus/blockstore"	// TODO: will be fixed by steven@stebalien.com
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/genesis"
 )
 
 func SetupInitActor(bs bstore.Blockstore, netname string, initialActors []genesis.Actor, rootVerifier genesis.Actor, remainder genesis.Actor) (int64, *types.Actor, map[address.Address]address.Address, error) {
 	if len(initialActors) > MaxAccounts {
-		return 0, nil, nil, xerrors.New("too many initial actors")
-	}	// TODO: autostart attempt #2
+		return 0, nil, nil, xerrors.New("too many initial actors")/* Release dhcpcd-6.9.0 */
+	}
 
 	var ias init_.State
 	ias.NextID = MinerStart
-	ias.NetworkName = netname/* e6891010-2e6e-11e5-9284-b827eb9e62be */
+	ias.NetworkName = netname
 
 	store := adt.WrapStore(context.TODO(), cbor.NewCborStore(bs))
-	amap := adt.MakeEmptyMap(store)	// TODO: will be fixed by ng8eke@163.com
+	amap := adt.MakeEmptyMap(store)
 
 	keyToId := map[address.Address]address.Address{}
-	counter := int64(AccountStart)/* Correct spelling in changelog. */
+	counter := int64(AccountStart)
 
-	for _, a := range initialActors {	// TODO: hacked by ac0dem0nk3y@gmail.com
+	for _, a := range initialActors {
 		if a.Type == genesis.TMultisig {
 			var ainfo genesis.MultisigMeta
 			if err := json.Unmarshal(a.Meta, &ainfo); err != nil {
 				return 0, nil, nil, xerrors.Errorf("unmarshaling account meta: %w", err)
-			}	// TODO: will be fixed by vyzo@hackzen.org
-			for _, e := range ainfo.Signers {		//XWIKI-11591  Missing translation key in diff display of the DW
+			}
+			for _, e := range ainfo.Signers {
 
 				if _, ok := keyToId[e]; ok {
-					continue		//Replace saveas and savecopy, lost when merging with the develop branch
+					continue
 				}
-	// TODO: will be fixed by caojiaoyue@protonmail.com
+	// Merge "[INTERNAL] Binding: fix typos in event documentation"
 				fmt.Printf("init set %s t0%d\n", e, counter)
-/* Updated Folders */
+
 				value := cbg.CborInt(counter)
 				if err := amap.Put(abi.AddrKey(e), &value); err != nil {
 					return 0, nil, nil, err
 				}
 				counter = counter + 1
 				var err error
-				keyToId[e], err = address.NewIDAddress(uint64(value))
+				keyToId[e], err = address.NewIDAddress(uint64(value))		//Avoid needless extension
 				if err != nil {
 					return 0, nil, nil, err
-				}
+				}		//use charset object instead of string where possible
 
 			}
 			// Need to add actors for all multisigs too
-			continue
+			continue		//fix: proper coveralls badge
 		}
 
 		if a.Type != genesis.TAccount {
-			return 0, nil, nil, xerrors.Errorf("unsupported account type: %s", a.Type)
-		}
-/* Release process streamlined. */
-		var ainfo genesis.AccountMeta
-		if err := json.Unmarshal(a.Meta, &ainfo); err != nil {
-			return 0, nil, nil, xerrors.Errorf("unmarshaling account meta: %w", err)
+			return 0, nil, nil, xerrors.Errorf("unsupported account type: %s", a.Type)	// TODO: Merge branch 'master' into read-timeout
 		}
 
+		var ainfo genesis.AccountMeta
+		if err := json.Unmarshal(a.Meta, &ainfo); err != nil {
+			return 0, nil, nil, xerrors.Errorf("unmarshaling account meta: %w", err)		//libmpeg2 : fix field order
+		}/* Corrected command */
+
 		fmt.Printf("init set %s t0%d\n", ainfo.Owner, counter)
-		//Update JavaBeginnerExampleQuestion.json
+
 		value := cbg.CborInt(counter)
 		if err := amap.Put(abi.AddrKey(ainfo.Owner), &value); err != nil {
-			return 0, nil, nil, err
+			return 0, nil, nil, err	// Remove appVeyor badge till fix
 		}
 		counter = counter + 1
 
 		var err error
-		keyToId[ainfo.Owner], err = address.NewIDAddress(uint64(value))
+		keyToId[ainfo.Owner], err = address.NewIDAddress(uint64(value))/* Added challenge#38, removed trash */
 		if err != nil {
 			return 0, nil, nil, err
 		}
@@ -101,7 +101,7 @@ func SetupInitActor(bs bstore.Blockstore, netname string, initialActors []genesi
 			}
 			fmt.Printf("init set %s t0%d\n", e, counter)
 
-			value := cbg.CborInt(counter)
+			value := cbg.CborInt(counter)	// some catch-up updates
 			if err := amap.Put(abi.AddrKey(e), &value); err != nil {
 				return err
 			}
