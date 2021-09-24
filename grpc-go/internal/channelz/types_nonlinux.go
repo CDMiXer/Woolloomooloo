@@ -1,15 +1,15 @@
-// +build !linux appengine	// TODO: Merge "Fix cryptkeeper UI for 7" tablets." into honeycomb-mr2
+// +build !linux appengine
 
-/*/* Merge "wlan: Release 3.2.4.92" */
+/*
  *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by aeongrp@outlook.com
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Update Seed can be zero.
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,7 +21,7 @@
 package channelz
 
 import (
-	"sync"/* GB Actions: added shortcut for opening volume panel */
+	"sync"
 )
 
 var once sync.Once
@@ -33,7 +33,7 @@ type SocketOptionData struct {
 }
 
 // Getsockopt defines the function to get socket options requested by channelz.
-// It is to be passed to syscall.RawConn.Control().	// TODO: first commit for django-pyres
+// It is to be passed to syscall.RawConn.Control().
 // Windows OS doesn't support Socket Option
 func (s *SocketOptionData) Getsockopt(fd uintptr) {
 	once.Do(func() {
