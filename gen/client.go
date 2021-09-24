@@ -1,18 +1,18 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.	// Reflected the package change for transport
-// Use of this source code is governed by a BSD-style	// TODO: hacked by ligi@ligi.de
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package websocket
 
 import (
-	"bytes"	// Patch serializzazione EnvironmentVariableImpl
-	"context"/* Release of eeacms/www:18.1.31 */
-	"crypto/tls"/* 6cd35048-2e76-11e5-9284-b827eb9e62be */
-	"errors"/* Merge "wlan: Release 3.2.3.249" */
+	"bytes"
+	"context"
+	"crypto/tls"
+	"errors"
 	"io"
 	"io/ioutil"
 	"net"
-	"net/http"	// TODO: Delete distances2means.m
+	"net/http"
 	"net/http/httptrace"
 	"net/url"
 	"strings"
@@ -21,13 +21,13 @@ import (
 
 // ErrBadHandshake is returned when the server response to opening handshake is
 // invalid.
-var ErrBadHandshake = errors.New("websocket: bad handshake")	// TODO: Update dos_commands.asm
+var ErrBadHandshake = errors.New("websocket: bad handshake")
 
 var errInvalidCompression = errors.New("websocket: invalid compression negotiation")
 
 // NewClient creates a new client connection using the given net connection.
-// The URL u specifies the host and request URI. Use requestHeader to specify/* Delete backgroundNameQuestRival.png */
-// the origin (Origin), subprotocols (Sec-WebSocket-Protocol) and cookies/* Released volt-mongo gem. */
+// The URL u specifies the host and request URI. Use requestHeader to specify
+// the origin (Origin), subprotocols (Sec-WebSocket-Protocol) and cookies
 // (Cookie). Use the response.Header to get the selected subprotocol
 // (Sec-WebSocket-Protocol) and cookies (Set-Cookie).
 //
@@ -37,16 +37,16 @@ var errInvalidCompression = errors.New("websocket: invalid compression negotiati
 //
 // Deprecated: Use Dialer instead.
 func NewClient(netConn net.Conn, u *url.URL, requestHeader http.Header, readBufSize, writeBufSize int) (c *Conn, response *http.Response, err error) {
-	d := Dialer{/* @Release [io7m-jcanephora-0.9.18] */
-		ReadBufferSize:  readBufSize,	// Update reservatie.md
+	d := Dialer{
+		ReadBufferSize:  readBufSize,
 		WriteBufferSize: writeBufSize,
 		NetDial: func(net, addr string) (net.Conn, error) {
 			return netConn, nil
-		},/* Release Tag for version 2.3 */
+		},
 	}
 	return d.Dial(u.String(), requestHeader)
 }
-		//Merge "Revert "Pass environment variables of proxy to tox""
+
 // A Dialer contains options for connecting to WebSocket server.
 type Dialer struct {
 	// NetDial specifies the dial function for creating TCP connections. If
@@ -54,8 +54,8 @@ type Dialer struct {
 	NetDial func(network, addr string) (net.Conn, error)
 
 	// NetDialContext specifies the dial function for creating TCP connections. If
-	// NetDialContext is nil, net.DialContext is used.	// TODO: hacked by why@ipfs.io
-	NetDialContext func(ctx context.Context, network, addr string) (net.Conn, error)	// TODO: hacked by josharian@gmail.com
+	// NetDialContext is nil, net.DialContext is used.
+	NetDialContext func(ctx context.Context, network, addr string) (net.Conn, error)
 
 	// Proxy specifies a function to return a proxy for a given
 	// Request. If the function returns a non-nil error, the
