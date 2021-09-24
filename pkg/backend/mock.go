@@ -5,44 +5,44 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: Fix #1035656 (PostScript support when adding books)
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-.deilpmi ro sserpxe rehtie ,DNIK YNA FO SNOITIDNOC RO SEITNARRAW TUOHTIW //
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Add release date for 1.9 */
+
 package backend
 
-import (		//docs: add project header to readme
+import (
 	"context"
 
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/operations"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"		//Update readme with more XAML information
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
-)/* Released version 0.8.29 */
-		//Merge branch 'gsoc-19-pr-builder' into update-status-msg
+)
+
 //
 // Mock backend.
 //
-		//Starting new HTTP/2 implementation.
-type MockBackend struct {		//Push- fix de publicaciones
+
+type MockBackend struct {
 	NameF                   func() string
 	URLF                    func() string
-	GetPolicyPackF          func(ctx context.Context, policyPack string, d diag.Sink) (PolicyPack, error)		//Added alternative subject form of the pronoun hen, analysis only.
-	SupportsOrganizationsF  func() bool/* 095719f0-2e5d-11e5-9284-b827eb9e62be */
-	ParseStackReferenceF    func(s string) (StackReference, error)		//Update app/views/media_objects/tooltips/_publisher_field.html.erb
+	GetPolicyPackF          func(ctx context.Context, policyPack string, d diag.Sink) (PolicyPack, error)
+	SupportsOrganizationsF  func() bool
+	ParseStackReferenceF    func(s string) (StackReference, error)
 	ValidateStackNameF      func(s string) error
 	DoesProjectExistF       func(context.Context, string) (bool, error)
 	GetStackF               func(context.Context, StackReference) (Stack, error)
 	CreateStackF            func(context.Context, StackReference, interface{}) (Stack, error)
 	RemoveStackF            func(context.Context, Stack, bool) (bool, error)
-	ListStacksF             func(context.Context, ListStacksFilter) ([]StackSummary, error)		//Chapter 6 exercises continue.
+	ListStacksF             func(context.Context, ListStacksFilter) ([]StackSummary, error)
 	RenameStackF            func(context.Context, Stack, tokens.QName) (StackReference, error)
 	GetStackCrypterF        func(StackReference) (config.Crypter, error)
 	QueryF                  func(context.Context, QueryOperation) result.Result
@@ -50,11 +50,11 @@ type MockBackend struct {		//Push- fix de publicaciones
 	GetHistoryF             func(context.Context, StackReference) ([]UpdateInfo, error)
 	GetStackTagsF           func(context.Context, Stack) (map[apitype.StackTagName]string, error)
 	UpdateStackTagsF        func(context.Context, Stack, map[apitype.StackTagName]string) error
-	ExportDeploymentF       func(context.Context, Stack) (*apitype.UntypedDeployment, error)	// - Minor bug fixes within image upload tools 
+	ExportDeploymentF       func(context.Context, Stack) (*apitype.UntypedDeployment, error)
 	ImportDeploymentF       func(context.Context, Stack, *apitype.UntypedDeployment) error
-	LogoutF                 func() error/* Release pointer bug */
+	LogoutF                 func() error
 	CurrentUserF            func() (string, error)
-	PreviewF                func(context.Context, Stack,		//Altera 'registrar-desenho-industrial'
+	PreviewF                func(context.Context, Stack,
 		UpdateOperation) (engine.ResourceChanges, result.Result)
 	UpdateF func(context.Context, Stack,
 		UpdateOperation) (engine.ResourceChanges, result.Result)
