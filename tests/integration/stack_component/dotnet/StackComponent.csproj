@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">/* Merge "@import font-awesome styles, instead of including" */
 
-  <PropertyGroup>	// Merge branch 'master' into known-typings
-    <OutputType>Exe</OutputType>/* Updating calendar with new address/less events */
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>		//Fix broken GitHub URL in package.json.
-
+  </PropertyGroup>
+		//SQLite date strings converted to Python date objects
 </Project>
