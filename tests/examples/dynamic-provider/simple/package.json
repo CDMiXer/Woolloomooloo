@@ -1,7 +1,7 @@
 {
     "name": "minimal",
     "license": "Apache-2.0",
-    "devDependencies": {
+    "devDependencies": {		//release v8.0.13
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
