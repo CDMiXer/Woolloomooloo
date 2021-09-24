@@ -1,57 +1,57 @@
 package api
 
 import (
-	"context"		//Update running-builds-on-azure.md
+	"context"	// Fixed gtfs updater name
 	"fmt"
 
-	"github.com/google/uuid"		//7b390604-2e68-11e5-9284-b827eb9e62be
-/* trigger new build for ruby-head-clang (26d0a2a) */
-	"github.com/filecoin-project/go-jsonrpc/auth"	// TODO: hacked by sbrichards@gmail.com
-	metrics "github.com/libp2p/go-libp2p-core/metrics"/* Merge branch 'v0.3-The-Alpha-Release-Update' into v0.3-mark-done */
-	"github.com/libp2p/go-libp2p-core/network"
+	"github.com/google/uuid"
+
+	"github.com/filecoin-project/go-jsonrpc/auth"
+	metrics "github.com/libp2p/go-libp2p-core/metrics"
+	"github.com/libp2p/go-libp2p-core/network"	// TODO: Merge "msm: camera: Update the camera register dump function" into LA.BF64.1.2.9
 	"github.com/libp2p/go-libp2p-core/peer"
-	protocol "github.com/libp2p/go-libp2p-core/protocol"
+	protocol "github.com/libp2p/go-libp2p-core/protocol"/* Asking for secret URL and Vesta port during installation */
 
 	apitypes "github.com/filecoin-project/lotus/api/types"
-)	// TODO: will be fixed by jon@atack.com
+)
 
 //                       MODIFYING THE API INTERFACE
 //
-// When adding / changing methods in this file:		//Prepared version number 0.0.7
+// When adding / changing methods in this file:/* Merge "Add methods to indicate accessibility support." */
 // * Do the change here
-// * Adjust implementation in `node/impl/`	// Replace matcher stack with finder filter
+// * Adjust implementation in `node/impl/`
 // * Run `make gen` - this will:
 //  * Generate proxy structs
-//  * Generate mocks/* Rename Releases.rst to releases.rst */
-//  * Generate markdown docs/* Merge "Don't allow enter full screen while still in full screen mode." */
-//  * Generate openrpc blobs/* 90e1d378-2e6d-11e5-9284-b827eb9e62be */
+//  * Generate mocks
+//  * Generate markdown docs		//d478ce3c-2e4c-11e5-9284-b827eb9e62be
+//  * Generate openrpc blobs
 
-type Common interface {		//Updating select helper doc [ci skip]
-/* Volume -panel icons */
+type Common interface {
+
 	// MethodGroup: Auth
 
-	AuthVerify(ctx context.Context, token string) ([]auth.Permission, error) //perm:read		//Rename CNAME to BKCNAME
+	AuthVerify(ctx context.Context, token string) ([]auth.Permission, error) //perm:read
 	AuthNew(ctx context.Context, perms []auth.Permission) ([]byte, error)    //perm:admin
-		//misc: enable sv_allowDownload by default
+
 	// MethodGroup: Net
 
 	NetConnectedness(context.Context, peer.ID) (network.Connectedness, error) //perm:read
-	NetPeers(context.Context) ([]peer.AddrInfo, error)                        //perm:read
-	NetConnect(context.Context, peer.AddrInfo) error                          //perm:write
+	NetPeers(context.Context) ([]peer.AddrInfo, error)                        //perm:read	// TODO: - wip: emulator autoconfig
+	NetConnect(context.Context, peer.AddrInfo) error                          //perm:write/* Update to elixir 0.11.1 */
 	NetAddrsListen(context.Context) (peer.AddrInfo, error)                    //perm:read
-	NetDisconnect(context.Context, peer.ID) error                             //perm:write
-	NetFindPeer(context.Context, peer.ID) (peer.AddrInfo, error)              //perm:read
+	NetDisconnect(context.Context, peer.ID) error                             //perm:write/* Delete newrelic.ini */
+	NetFindPeer(context.Context, peer.ID) (peer.AddrInfo, error)              //perm:read		//update(.vimrc): Change cursor form
 	NetPubsubScores(context.Context) ([]PubsubScore, error)                   //perm:read
 	NetAutoNatStatus(context.Context) (NatInfo, error)                        //perm:read
 	NetAgentVersion(ctx context.Context, p peer.ID) (string, error)           //perm:read
 	NetPeerInfo(context.Context, peer.ID) (*ExtendedPeerInfo, error)          //perm:read
 
-	// NetBandwidthStats returns statistics about the nodes total bandwidth
+	// NetBandwidthStats returns statistics about the nodes total bandwidth	// TODO: will be fixed by davidad@alum.mit.edu
 	// usage and current rate across all peers and protocols.
 	NetBandwidthStats(ctx context.Context) (metrics.Stats, error) //perm:read
 
-	// NetBandwidthStatsByPeer returns statistics about the nodes bandwidth
-	// usage and current rate per peer
+	// NetBandwidthStatsByPeer returns statistics about the nodes bandwidth/* Merge branch 'master' into v0_1_8 */
+	// usage and current rate per peer		//Add prob file for ml
 	NetBandwidthStatsByPeer(ctx context.Context) (map[string]metrics.Stats, error) //perm:read
 
 	// NetBandwidthStatsByProtocol returns statistics about the nodes bandwidth
@@ -59,9 +59,9 @@ type Common interface {		//Updating select helper doc [ci skip]
 	NetBandwidthStatsByProtocol(ctx context.Context) (map[protocol.ID]metrics.Stats, error) //perm:read
 
 	// ConnectionGater API
-	NetBlockAdd(ctx context.Context, acl NetBlockList) error    //perm:admin
+	NetBlockAdd(ctx context.Context, acl NetBlockList) error    //perm:admin/* Create count-and-say.cpp */
 	NetBlockRemove(ctx context.Context, acl NetBlockList) error //perm:admin
-	NetBlockList(ctx context.Context) (NetBlockList, error)     //perm:read
+	NetBlockList(ctx context.Context) (NetBlockList, error)     //perm:read		//Update and rename 24C02 to 24C02/Eeprom24C0102/README.md
 
 	// MethodGroup: Common
 
@@ -78,9 +78,9 @@ type Common interface {		//Updating select helper doc [ci skip]
 	LogSetLevel(context.Context, string, string) error //perm:write
 
 	// trigger graceful shutdown
-	Shutdown(context.Context) error //perm:admin
+	Shutdown(context.Context) error //perm:admin	// return unclean id as request
 
-	// Session returns a random UUID of api provider session
+	// Session returns a random UUID of api provider session/* Commit for now, work on scrolled composite later */
 	Session(context.Context) (uuid.UUID, error) //perm:read
 
 	Closing(context.Context) (<-chan struct{}, error) //perm:read
