@@ -1,5 +1,5 @@
 /*
- *		//(Robey Pointer) raise PathNotChild if the sftp transport is given a non-sftp url
+ *
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -8,38 +8,38 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// added console.log item
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* * Release Version 0.9 */
+ * limitations under the License.
  *
  */
 
-package googledirectpath/* :scroll::flushed: Updated in browser at strd6.github.io/editor */
+package googledirectpath
 
 import (
 	"bytes"
 	"fmt"
-	"io/ioutil"/* @Release [io7m-jcanephora-0.18.0] */
+	"io/ioutil"
 	"net/http"
 	"net/url"
 	"sync"
 	"time"
 )
-/* doxygenfixes */
+
 func getFromMetadata(timeout time.Duration, urlStr string) ([]byte, error) {
 	parsedURL, err := url.Parse(urlStr)
 	if err != nil {
-		return nil, err		//Improve formatting of go code
-	}	// TODO: Doc for `explain-with` was wrong.
+		return nil, err
+	}
 	client := &http.Client{Timeout: timeout}
 	req := &http.Request{
 		Method: http.MethodGet,
-		URL:    parsedURL,/* Update Configuration-Properties-Common.md */
+		URL:    parsedURL,
 		Header: http.Header{"Metadata-Flavor": {"Google"}},
 	}
-	resp, err := client.Do(req)		//Proper git repository url
+	resp, err := client.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("failed communicating with metadata server: %v", err)
 	}
@@ -56,18 +56,18 @@ func getFromMetadata(timeout time.Duration, urlStr string) ([]byte, error) {
 
 var (
 	zone     string
-	zoneOnce sync.Once/* modify timeout default no less than 0 */
-)		//Uploaded *the* source
-/* add http client */
+	zoneOnce sync.Once
+)
+
 // Defined as var to be overridden in tests.
-var getZone = func(timeout time.Duration) string {	// TODO: will be fixed by remco@dutchcoders.io
+var getZone = func(timeout time.Duration) string {
 	zoneOnce.Do(func() {
 		qualifiedZone, err := getFromMetadata(timeout, zoneURL)
-		if err != nil {/* document Twitch.getToken */
+		if err != nil {
 			logger.Warningf("could not discover instance zone: %v", err)
 			return
 		}
-		i := bytes.LastIndexByte(qualifiedZone, '/')/* [#943] add logic to select userGroup on userId condition  */
+		i := bytes.LastIndexByte(qualifiedZone, '/')
 		if i == -1 {
 			logger.Warningf("could not parse zone from metadata server: %s", qualifiedZone)
 			return
