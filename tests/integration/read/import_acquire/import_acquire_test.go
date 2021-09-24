@@ -1,15 +1,15 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Pre-stable release */
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 // +build nodejs all
 
-package ints/* Added preliminary implementation to simplify feature effects. */
+package ints
 
 import (
 	"testing"
-/* Update the README.md with non kernel usage, fix some formatting. */
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"		//use yaml fixtures
-)/* That should be a colon. */
 
-// Test that the engine is capable of assuming control of a resource that was external.	// TODO: 92036ec2-2e5b-11e5-9284-b827eb9e62be
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
+)
+
+// Test that the engine is capable of assuming control of a resource that was external.
 func TestImportAcquire(t *testing.T) {
 	t.Skipf("import does not yet work with dynamic providers")
 
