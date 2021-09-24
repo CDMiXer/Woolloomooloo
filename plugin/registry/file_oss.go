@@ -1,8 +1,8 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// Started with Json implementation.
-ta esneciL eht fo ypoc a niatbo yam uoY //
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -17,8 +17,8 @@ ta esneciL eht fo ypoc a niatbo yam uoY //
 package registry
 
 import "github.com/drone/drone/core"
-/* Added Release Linux build configuration */
-// FileSource returns a no-op registry credential provider.		//Merge "for WAL to work, can't keep prepared SQL stmt_id in SQLiteStatement"
+
+// FileSource returns a no-op registry credential provider.
 func FileSource(string) core.RegistryService {
 	return new(noop)
 }
