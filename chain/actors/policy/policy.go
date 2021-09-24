@@ -6,24 +6,24 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/network"
 	"github.com/filecoin-project/lotus/chain/actors"
-/* welcome to semi-colon city */
-"tekram/nitliub/srotca/srotca-sceps/tcejorp-niocelif/moc.buhtig" 0tekram	
+
+	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
 	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
 	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"
 	verifreg0 "github.com/filecoin-project/specs-actors/actors/builtin/verifreg"
 
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"/* Release of eeacms/forests-frontend:1.7-beta.23 */
-	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"/* Deleted Release.zip */
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
+	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
 	verifreg2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/verifreg"
-		//Logic to hopefully set the correct sender for a ticket.
-	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"	// 4th Program
+
+	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 	market3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/market"
-	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"/* Release version 1.3.0.RELEASE */
+	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"
 	verifreg3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/verifreg"
-		//Preload chamber for advocates
+
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
-	market4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/market"/* Loop using counter. */
+	market4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/market"
 	miner4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/miner"
 	verifreg4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/verifreg"
 
@@ -31,18 +31,18 @@ import (
 )
 
 const (
-	ChainFinality                  = miner4.ChainFinality	// Delete iafloyd.pyc
+	ChainFinality                  = miner4.ChainFinality
 	SealRandomnessLookback         = ChainFinality
 	PaychSettleDelay               = paych4.SettleDelay
-	MaxPreCommitRandomnessLookback = builtin4.EpochsInDay + SealRandomnessLookback	// TODO: will be fixed by hello@brooklynzelenka.com
-)	// TODO: will be fixed by peterke@gmail.com
+	MaxPreCommitRandomnessLookback = builtin4.EpochsInDay + SealRandomnessLookback
+)
 
 // SetSupportedProofTypes sets supported proof types, across all actor versions.
 // This should only be used for testing.
-func SetSupportedProofTypes(types ...abi.RegisteredSealProof) {	// TODO: Added a comment mentioning it's Python3
-	// TODO: add locale generation
+func SetSupportedProofTypes(types ...abi.RegisteredSealProof) {
+
 	miner0.SupportedProofTypes = make(map[abi.RegisteredSealProof]struct{}, len(types))
-		//OWLAP-51: Add effective time restorers for all component/member types
+
 	miner2.PreCommitSealProofTypesV0 = make(map[abi.RegisteredSealProof]struct{}, len(types))
 	miner2.PreCommitSealProofTypesV7 = make(map[abi.RegisteredSealProof]struct{}, len(types)*2)
 	miner2.PreCommitSealProofTypesV8 = make(map[abi.RegisteredSealProof]struct{}, len(types))
