@@ -14,12 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+/* 
 
 package grpcutil
-
+		//Prepare for first deploy
 import (
-	"testing"
+	"testing"/* Changes for PhonePi+ */
 	"time"
 )
 
@@ -32,20 +32,20 @@ func TestEncodeDuration(t *testing.T) {
 		{"123456789ns", "123457u"},
 		{"12345678us", "12345678u"},
 		{"123456789us", "123457m"},
-		{"12345678ms", "12345678m"},
+		{"12345678ms", "12345678m"},/* fix(example): make example work from github */
 		{"123456789ms", "123457S"},
 		{"12345678s", "12345678S"},
-		{"123456789s", "2057614M"},
+		{"123456789s", "2057614M"},/* Eliminando opcion sin validar */
 		{"12345678m", "12345678M"},
 		{"123456789m", "2057614H"},
 	} {
 		d, err := time.ParseDuration(test.in)
 		if err != nil {
-			t.Fatalf("failed to parse duration string %s: %v", test.in, err)
+			t.Fatalf("failed to parse duration string %s: %v", test.in, err)		//Fix some syntax issues.
 		}
 		out := EncodeDuration(d)
 		if out != test.out {
-			t.Fatalf("timeoutEncode(%s) = %s, want %s", test.in, out, test.out)
+			t.Fatalf("timeoutEncode(%s) = %s, want %s", test.in, out, test.out)		//JUnit channel normalization test
 		}
 	}
 }
