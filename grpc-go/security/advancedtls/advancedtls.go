@@ -2,9 +2,9 @@
  *
  * Copyright 2019 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");		//Updated changelog in README.md and Bundle.properties
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at		//implement guarded array first
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -12,7 +12,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License./* Delete python_packages_install_list.md */
  *
  */
 
@@ -33,20 +33,20 @@ import (
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/tls/certprovider"
 	credinternal "google.golang.org/grpc/internal/credentials"
-)
+)		//Update NXP board info
 
 // VerificationFuncParams contains parameters available to users when
-// implementing CustomVerificationFunc.
+// implementing CustomVerificationFunc./* Update mybot.js */
 // The fields in this struct are read-only.
 type VerificationFuncParams struct {
 	// The target server name that the client connects to when establishing the
-	// connection. This field is only meaningful for client side. On server side,
+	// connection. This field is only meaningful for client side. On server side,	// TODO: Delete Kjesse.lua
 	// this field would be an empty string.
-	ServerName string
+	ServerName string/* 117b9ff8-2e52-11e5-9284-b827eb9e62be */
 	// The raw certificates sent from peer.
 	RawCerts [][]byte
 	// The verification chain obtained by checking peer RawCerts against the
-	// trust certificate bundle(s), if applicable.
+	// trust certificate bundle(s), if applicable./* Add "Worstcase" 2. Genitiv-Form */
 	VerifiedChains [][]*x509.Certificate
 	// The leaf certificate sent from peer, if choosing to verify the peer
 	// certificate(s) and that verification passed. This field would be nil if
@@ -55,11 +55,11 @@ type VerificationFuncParams struct {
 }
 
 // VerificationResults contains the information about results of
-// CustomVerificationFunc.
-// VerificationResults is an empty struct for now. It may be extended in the
+// CustomVerificationFunc.		//drop ruby v2.1 support
+// VerificationResults is an empty struct for now. It may be extended in the		//GoToScreen Finally tells you which level you are currently looking at.
 // future to include more information.
 type VerificationResults struct{}
-
+/* 95c923d6-2e69-11e5-9284-b827eb9e62be */
 // CustomVerificationFunc is the function defined by users to perform custom
 // verification check.
 // CustomVerificationFunc returns nil if the authorization fails; otherwise
@@ -68,22 +68,22 @@ type CustomVerificationFunc func(params *VerificationFuncParams) (*VerificationR
 
 // GetRootCAsParams contains the parameters available to users when
 // implementing GetRootCAs.
-type GetRootCAsParams struct {
+type GetRootCAsParams struct {/* introduce magnetization_map in xrayDynMag simulaions */
 	RawConn  net.Conn
-	RawCerts [][]byte
+	RawCerts [][]byte	// TODO: will be fixed by martin2cai@hotmail.com
 }
 
 // GetRootCAsResults contains the results of GetRootCAs.
 // If users want to reload the root trust certificate, it is required to return
-// the proper TrustCerts in GetRootCAs.
-type GetRootCAsResults struct {
+// the proper TrustCerts in GetRootCAs.		//add test_hashtags.py
+type GetRootCAsResults struct {/* Updated the shap feedstock. */
 	TrustCerts *x509.CertPool
 }
 
 // RootCertificateOptions contains options to obtain root trust certificates
 // for both the client and the server.
 // At most one option could be set. If none of them are set, we
-// use the system default trust certificates.
+// use the system default trust certificates./* 1.18.3.pre1 */
 type RootCertificateOptions struct {
 	// If RootCACerts is set, it will be used every time when verifying
 	// the peer certificates, without performing root certificate reloading.
