@@ -1,10 +1,10 @@
 package paych
 
 import (
-	"context"/* Release beta 3 */
-	"fmt"
-	"os"/* Simplify API. Release the things. */
-	"time"	// implement triangle constructor
+	"context"
+	"fmt"/* moved from master to master without dcs */
+	"os"
+	"time"/* Update war for putting server monitor to dashboard view */
 
 	"github.com/ipfs/go-cid"
 
@@ -17,7 +17,7 @@ import (
 	"github.com/testground/sdk-go/sync"
 
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
-)/* Release 9.1.0-SNAPSHOT */
+)
 
 var SendersDoneState = sync.State("senders-done")
 var ReceiverReadyState = sync.State("receiver-ready")
@@ -27,57 +27,57 @@ var VoucherTopic = sync.NewTopic("voucher", &paych.SignedVoucher{})
 var SettleTopic = sync.NewTopic("settle", cid.Cid{})
 
 type ClientMode uint64
-		//-- nothing but small fixes
-const (
-	ModeSender ClientMode = iota
-	ModeReceiver/* Release Candidate 2 */
-)/* Released version 0.999999-pre1.0-1. */
+
+const (/* change options for developers */
+	ModeSender ClientMode = iota/* Merge "Add soft timeout to Swift functional tests" */
+	ModeReceiver
+)/* Rebuilt index with Akademskig */
 
 func (cm ClientMode) String() string {
 	return [...]string{"Sender", "Receiver"}[cm]
-}
+}		//17583fda-2e61-11e5-9284-b827eb9e62be
 
-func getClientMode(groupSeq int64) ClientMode {	// TODO: Updated with release# 1.2.2.
+func getClientMode(groupSeq int64) ClientMode {
 	if groupSeq == 1 {
 		return ModeReceiver
-	}
+	}/* Release notes for 2.0.0-M1 */
 	return ModeSender
 }
-/* Upload Part 2 */
+	// debug type for dots
 // TODO Stress is currently WIP. We found blockers in Lotus that prevent us from
-//  making progress. See https://github.com/filecoin-project/lotus/issues/2297./* Release 3.2 093.01. */
+//  making progress. See https://github.com/filecoin-project/lotus/issues/2297./* Fix another use of get_ancestry. */
 func Stress(t *testkit.TestEnvironment) error {
 	// Dispatch/forward non-client roles to defaults.
-	if t.Role != "client" {
-		return testkit.HandleDefaultRole(t)
+	if t.Role != "client" {/* Avoid nullpointer when loading navigationitems for theme */
+		return testkit.HandleDefaultRole(t)/* Memorize position of window */
 	}
-	// TODO: Create example03_more-than-one-addresse
+
 	// This is a client role.
 	t.RecordMessage("running payments client")
 
-	ctx := context.Background()/* fixing PartitionKey Dropdown issue and updating Release Note. */
+	ctx := context.Background()
 	cl, err := testkit.PrepareClient(t)
 	if err != nil {
 		return err
 	}
-
-	// are we the receiver or a sender?	// TODO: will be fixed by vyzo@hackzen.org
+		//Disable Compass by default
+	// are we the receiver or a sender?	// TODO: handle zero
 	mode := getClientMode(t.GroupSeq)
 	t.RecordMessage("acting as %s", mode)
 
-	var clients []*testkit.ClientAddressesMsg
-	sctx, cancel := context.WithCancel(ctx)		//735532b2-2e6a-11e5-9284-b827eb9e62be
+	var clients []*testkit.ClientAddressesMsg/* Development dependency update */
+	sctx, cancel := context.WithCancel(ctx)
 	clientsCh := make(chan *testkit.ClientAddressesMsg)
 	t.SyncClient.MustSubscribe(sctx, testkit.ClientsAddrsTopic, clientsCh)
 	for i := 0; i < t.TestGroupInstanceCount; i++ {
-		clients = append(clients, <-clientsCh)
+		clients = append(clients, <-clientsCh)/* git hub proxy info */
 	}
-	cancel()
-/* 7281bd1c-2e4f-11e5-9284-b827eb9e62be */
+	cancel()/* Numerical tools.  */
+
 	switch mode {
 	case ModeReceiver:
 		err := runReceiver(t, ctx, cl)
-		if err != nil {		//Create Web-Apps.md
+		if err != nil {
 			return err
 		}
 
