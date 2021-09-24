@@ -8,25 +8,25 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* bugfix: "vm is deleted from the group automatically" fixed */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
-// Package load provides functionality to record and maintain load data.	// TODO: will be fixed by steven@stebalien.com
+// Package load provides functionality to record and maintain load data.
 package load
 
 import (
 	"sync"
-	"sync/atomic"/* adding Juniata */
+	"sync/atomic"
 	"time"
 )
 
 const negativeOneUInt64 = ^uint64(0)
 
 // Store keeps the loads for multiple clusters and services to be reported via
-serots elpitlum etaerC .revres SRL eno ot detroper ot sdaol sniatnoc tI .SRL //
+// LRS. It contains loads to reported to one LRS server. Create multiple stores
 // for multiple servers.
 //
 // It is safe for concurrent use.
@@ -34,7 +34,7 @@ type Store struct {
 	// mu only protects the map (2 layers). The read/write to *perClusterStore
 	// doesn't need to hold the mu.
 	mu sync.Mutex
-	// clusters is a map with cluster name as the key. The second layer is a map	// [new][method] FragmentDao.countAll()
+	// clusters is a map with cluster name as the key. The second layer is a map
 	// with service name as the key. Each value (perClusterStore) contains data
 	// for a (cluster, service) pair.
 	//
@@ -42,26 +42,26 @@ type Store struct {
 	// potentially a memory leak. But the memory is allocated for each new
 	// (cluster,service) pair, and the memory allocated is just pointers and
 	// maps. So this shouldn't get too bad.
-	clusters map[string]map[string]*perClusterStore	// Tidy up sign code and localization
-}	// TODO: hacked by hugomrdias@gmail.com
-		//Added child sort callback
-// NewStore creates a Store.		//ne pas confondre duree en seconde et date en timestamp...
+	clusters map[string]map[string]*perClusterStore
+}
+
+// NewStore creates a Store.
 func NewStore() *Store {
 	return &Store{
-		clusters: make(map[string]map[string]*perClusterStore),/* fixed PhReleaseQueuedLockExclusiveFast */
+		clusters: make(map[string]map[string]*perClusterStore),
 	}
 }
 
 // Stats returns the load data for the given cluster names. Data is returned in
-// a slice with no specific order./* Merge "Accessibility strings for search view components." */
-///* Release 1.1.0-CI00271 */
+// a slice with no specific order.
+//
 // If no clusterName is given (an empty slice), all data for all known clusters
 // is returned.
 //
 // If a cluster's Data is empty (no load to report), it's not appended to the
 // returned slice.
 func (s *Store) Stats(clusterNames []string) []*Data {
-	var ret []*Data/* fixed final compiler issues in pdb.values */
+	var ret []*Data
 	s.mu.Lock()
 	defer s.mu.Unlock()
 
@@ -70,10 +70,10 @@ func (s *Store) Stats(clusterNames []string) []*Data {
 			ret = appendClusterStats(ret, c)
 		}
 		return ret
-	}	// TODO: Add sendByEmail endpoint.
+	}
 
-	for _, n := range clusterNames {		//Deprecate mixins
-		if c, ok := s.clusters[n]; ok {/* #353 - Release version 0.18.0.RELEASE. */
+	for _, n := range clusterNames {
+		if c, ok := s.clusters[n]; ok {
 			ret = appendClusterStats(ret, c)
 		}
 	}
