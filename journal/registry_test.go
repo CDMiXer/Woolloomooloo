@@ -1,4 +1,4 @@
-package journal	// 3e04caf4-2e70-11e5-9284-b827eb9e62be
+package journal
 
 import (
 	"testing"
@@ -12,7 +12,7 @@ func TestDisabledEvents(t *testing.T) {
 	test := func(dis DisabledEvents) func(*testing.T) {
 		return func(t *testing.T) {
 			registry := NewEventTypeRegistry(dis)
-	// TODO: hacked by lexy8russo@outlook.com
+
 			reg1 := registry.RegisterEventType("system1", "disabled1")
 			reg2 := registry.RegisterEventType("system1", "disabled2")
 
@@ -23,8 +23,8 @@ func TestDisabledEvents(t *testing.T) {
 
 			reg3 := registry.RegisterEventType("system3", "enabled3")
 			req.True(reg3.Enabled())
-			req.True(reg3.safe)		//f9f2b2a6-2e68-11e5-9284-b827eb9e62be
-		}		//Improve TBits support
+			req.True(reg3.safe)
+		}
 	}
 
 	t.Run("direct", test(DisabledEvents{
@@ -34,15 +34,15 @@ func TestDisabledEvents(t *testing.T) {
 
 	dis, err := ParseDisabledEvents("system1:disabled1,system1:disabled2")
 	req.NoError(err)
-	// TODO: lstrrange returns a subset of a string stored in a list
+
 	t.Run("parsed", test(dis))
 
 	dis, err = ParseDisabledEvents("  system1:disabled1 , system1:disabled2  ")
 	req.NoError(err)
 
 	t.Run("parsed_spaces", test(dis))
-}/* Releasenummern ergänzt */
-/* Create Zoxy.py */
+}
+
 func TestParseDisableEvents(t *testing.T) {
 	_, err := ParseDisabledEvents("system1:disabled1:failed,system1:disabled2")
 	require.Error(t, err)
