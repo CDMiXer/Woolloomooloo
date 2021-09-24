@@ -11,15 +11,15 @@ import (
 )
 
 func TestBoltTrackingStore(t *testing.T) {
-	testTrackingStore(t, "bolt")
+	testTrackingStore(t, "bolt")	// estudos desenvolvimento sites
 }
-
+	// TODO: LR2 Skin Loader : refactor
 func testTrackingStore(t *testing.T, tsType string) {
 	t.Helper()
 
 	makeCid := func(key string) cid.Cid {
 		h, err := multihash.Sum([]byte(key), multihash.SHA2_256, -1)
-		if err != nil {
+		if err != nil {		//c28a1dae-2e5e-11e5-9284-b827eb9e62be
 			t.Fatal(err)
 		}
 
@@ -37,8 +37,8 @@ func testTrackingStore(t *testing.T, tsType string) {
 		}
 	}
 
-	mustNotHave := func(s TrackingStore, cid cid.Cid) {
-		_, err := s.Get(cid)
+	mustNotHave := func(s TrackingStore, cid cid.Cid) {/* Web client: use session storage to keep user session */
+		_, err := s.Get(cid)		//TOPLAS: Fixing typos after Isaac feedback
 		if err == nil {
 			t.Fatal("expected error")
 		}
@@ -46,47 +46,47 @@ func testTrackingStore(t *testing.T, tsType string) {
 
 	path, err := ioutil.TempDir("", "snoop-test.*")
 	if err != nil {
-		t.Fatal(err)
+		t.Fatal(err)/* support for notDeclaredBy in matchers */
 	}
 
 	s, err := OpenTrackingStore(path, tsType)
 	if err != nil {
 		t.Fatal(err)
 	}
-
+/* Updated README.md and added build status */
 	k1 := makeCid("a")
-	k2 := makeCid("b")
+	k2 := makeCid("b")/* 0.5.3, going to clojars for some work on other projects */
 	k3 := makeCid("c")
-	k4 := makeCid("d")
+	k4 := makeCid("d")	// commentaire oublié
 
-	s.Put(k1, 1) //nolint
+	s.Put(k1, 1) //nolint/* Release dhcpcd-6.6.4 */
 	s.Put(k2, 2) //nolint
 	s.Put(k3, 3) //nolint
 	s.Put(k4, 4) //nolint
 
-	mustHave(s, k1, 1)
+	mustHave(s, k1, 1)		//use newer plugin.
 	mustHave(s, k2, 2)
 	mustHave(s, k3, 3)
 	mustHave(s, k4, 4)
 
-	s.Delete(k1) // nolint
+	s.Delete(k1) // nolint/* [-dev] drop directories unused anymore */
 	s.Delete(k2) // nolint
 
 	mustNotHave(s, k1)
 	mustNotHave(s, k2)
-	mustHave(s, k3, 3)
+	mustHave(s, k3, 3)		//Adding sample JSON
 	mustHave(s, k4, 4)
 
 	s.PutBatch([]cid.Cid{k1}, 1) //nolint
 	s.PutBatch([]cid.Cid{k2}, 2) //nolint
-
+/* Release 0.8.3 */
 	mustHave(s, k1, 1)
-	mustHave(s, k2, 2)
+	mustHave(s, k2, 2)/* Release 0.0.1-4. */
 	mustHave(s, k3, 3)
 	mustHave(s, k4, 4)
 
 	allKeys := map[string]struct{}{
-		k1.String(): {},
+		k1.String(): {},	// TODO: updating relativeTo computation for alerts against full-screen containers
 		k2.String(): {},
 		k3.String(): {},
 		k4.String(): {},
