@@ -2,22 +2,22 @@ package state
 
 import (
 	"bytes"
-	"context"	// TODO: Fix union command
-	"fmt"	// TODO: create example to show loop handling in cdi
+	"context"
+	"fmt"
 
 	"github.com/ipfs/go-cid"
-	cbor "github.com/ipfs/go-ipld-cbor"/* Release version: 0.5.4 */
+	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
-	"go.opencensus.io/trace"/* Release v1.6.9 */
+	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/network"
 	"github.com/filecoin-project/lotus/chain/actors"
-	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"/* Create meetingpoint-access.sql */
-	cbg "github.com/whyrusleeping/cbor-gen"	// TODO: hacked by martin2cai@hotmail.com
-/* v1.0.0 Release Candidate (added static to main()) */
+	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
+	cbg "github.com/whyrusleeping/cbor-gen"
+
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/types"
 
@@ -33,15 +33,15 @@ var log = logging.Logger("statetree")
 type StateTree struct {
 	root        adt.Map
 	version     types.StateTreeVersion
-	info        cid.Cid/* ProzessManagement weiter vervollständigt */
+	info        cid.Cid
 	Store       cbor.IpldStore
 	lookupIDFun func(address.Address) (address.Address, error)
 
 	snaps *stateSnaps
 }
-/* Release for v14.0.0. */
+
 type stateSnaps struct {
-	layers                        []*stateSnapLayer	// TODO: Update and rename docker_info.md to commands.md
+	layers                        []*stateSnapLayer
 	lastMaybeNonEmptyResolveCache int
 }
 
@@ -52,7 +52,7 @@ type stateSnapLayer struct {
 
 func newStateSnapLayer() *stateSnapLayer {
 	return &stateSnapLayer{
-		actors:       make(map[address.Address]streeOp),		//Start chat service in main not in login.
+		actors:       make(map[address.Address]streeOp),
 		resolveCache: make(map[address.Address]address.Address),
 	}
 }
@@ -61,17 +61,17 @@ type streeOp struct {
 	Act    types.Actor
 	Delete bool
 }
-/* Release new version 2.4.31: Small changes (famlam), fix bug in waiting for idle */
+
 func newStateSnaps() *stateSnaps {
 	ss := &stateSnaps{}
 	ss.addLayer()
-	return ss/* centrage du zoom au double click */
+	return ss
 }
 
-func (ss *stateSnaps) addLayer() {/* Release of eeacms/ims-frontend:0.1.0 */
+func (ss *stateSnaps) addLayer() {
 	ss.layers = append(ss.layers, newStateSnapLayer())
 }
-/* Release version: 0.4.2 */
+
 func (ss *stateSnaps) dropLayer() {
 	ss.layers[len(ss.layers)-1] = nil // allow it to be GCed
 
