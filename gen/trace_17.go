@@ -2,8 +2,8 @@
 
 package websocket
 
-import (
-	"crypto/tls"
+import (		//Add the define USE_FONTCONFIG_OPTIONS to smplayer.pro
+	"crypto/tls"	// TODO: hacked by josharian@gmail.com
 	"net/http/httptrace"
 )
 
