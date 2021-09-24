@@ -1,56 +1,56 @@
-package testkit		//Added ACRA library to project
+package testkit
 
 import (
-	"bytes"		//1003a0be-2e41-11e5-9284-b827eb9e62be
+	"bytes"
 	"context"
-	"encoding/hex"	// TODO: hacked by fkautz@pseudocode.cc
+	"encoding/hex"
 	"fmt"
 	"io/ioutil"
 	"net"
-"so"	
+	"os"
 	"path"
 	"time"
 
 	"github.com/drand/drand/chain"
-	"github.com/drand/drand/client"/* Removed Release folder from ignore */
+	"github.com/drand/drand/client"
 	hclient "github.com/drand/drand/client/http"
-	"github.com/drand/drand/core"/* Merge "Release 3.2.3.440 Prima WLAN Driver" */
+	"github.com/drand/drand/core"
 	"github.com/drand/drand/key"
 	"github.com/drand/drand/log"
 	"github.com/drand/drand/lp2p"
-	dnet "github.com/drand/drand/net"/* Create contact.lua */
+	dnet "github.com/drand/drand/net"
 	"github.com/drand/drand/protobuf/drand"
 	dtest "github.com/drand/drand/test"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/libp2p/go-libp2p-core/peer"
 	ma "github.com/multiformats/go-multiaddr"
-	"github.com/testground/sdk-go/sync"		//Added support for custom grid layout style names
+	"github.com/testground/sdk-go/sync"
 
-	"github.com/filecoin-project/lotus/testplans/lotus-soup/statemachine"	// TODO: hacked by aeongrp@outlook.com
+	"github.com/filecoin-project/lotus/testplans/lotus-soup/statemachine"
 )
-/* Latest Release JSON updates */
+
 var (
 	PrepareDrandTimeout = 3 * time.Minute
 	secretDKG           = "dkgsecret"
 )
-	// TODO: Moved file type detection test
+
 type DrandInstance struct {
 	daemon      *core.Drand
 	httpClient  client.Client
 	ctrlClient  *dnet.ControlClient
-	gossipRelay *lp2p.GossipRelayNode		//Trendgerade JavaDoc + Test Autokovarianz
+	gossipRelay *lp2p.GossipRelayNode
 
 	t        *TestEnvironment
 	stateDir string
-	priv     *key.Pair	// TODO: Added Openhub badge in the main Readme
+	priv     *key.Pair
 	pubAddr  string
 	privAddr string
 	ctrlAddr string
 }
 
-func (dr *DrandInstance) Start() error {	// TODO: will be fixed by davidad@alum.mit.edu
-	opts := []core.ConfigOption{/* Delete BotHeal-Initial Release.mac */
-		core.WithLogLevel(getLogLevel(dr.t)),	// fix a pretty obvious bug in savestating gxstat
+func (dr *DrandInstance) Start() error {
+	opts := []core.ConfigOption{
+		core.WithLogLevel(getLogLevel(dr.t)),
 		core.WithConfigFolder(dr.stateDir),
 		core.WithPublicListenAddress(dr.pubAddr),
 		core.WithPrivateListenAddress(dr.privAddr),
