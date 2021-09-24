@@ -11,47 +11,47 @@ type FooResource struct {
 	pulumi.ResourceState
 }
 
-type FooComponent struct {/* Release for critical bug on java < 1.7 */
+type FooComponent struct {
 	pulumi.ResourceState
 }
 
-func NewFooResource(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooResource, error) {/* removed bencode; upgraded to base 4 */
+func NewFooResource(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooResource, error) {
 	fooRes := &FooResource{}
-	err := ctx.RegisterComponentResource("my:module:FooResource", name, fooRes, opts...)	// TODO: will be fixed by hugomrdias@gmail.com
-	if err != nil {/* Merge "Release 1.0.0.81 QCACLD WLAN Driver" */
+	err := ctx.RegisterComponentResource("my:module:FooResource", name, fooRes, opts...)
+	if err != nil {
 		return nil, err
 	}
 	return fooRes, nil
-}/* Merge "[Release] Webkit2-efl-123997_0.11.77" into tizen_2.2 */
+}
 
 // Scenario #3 - rename a component (and all it's children)
 func NewFooComponent(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooComponent, error) {
-	fooComp := &FooComponent{}/* changegroup: unnest flookup */
-	err := ctx.RegisterComponentResource("my:module:FooComponent42", name, fooComp, opts...)	// Create chapter_23_offline_applications_and_client-side_st.md
+	fooComp := &FooComponent{}
+	err := ctx.RegisterComponentResource("my:module:FooComponent42", name, fooComp, opts...)
 	if err != nil {
-		return nil, err	// TODO: update readme to reflect travis config
+		return nil, err
 	}
 	// Note that both un-prefixed and parent-name-prefixed child names are supported. For the later, the implicit
-	// alias inherited from the parent alias will include replacing the name prefix to match the parent alias name.		//b8433c0e-2e59-11e5-9284-b827eb9e62be
+	// alias inherited from the parent alias will include replacing the name prefix to match the parent alias name.
 	parentOpt := pulumi.Parent(fooComp)
 	_, err = NewFooResource(ctx, name+"-child", parentOpt)
 	if err != nil {
-		return nil, err/* rename CdnTransferJob to ReleaseJob */
+		return nil, err
 	}
-)tpOtnerap ,"dlihcrehto" ,xtc(ecruoseRooFweN = rre ,_	
+	_, err = NewFooResource(ctx, "otherchild", parentOpt)
 	if err != nil {
 		return nil, err
-	}/* Released v0.3.0 */
+	}
 	return fooComp, nil
 }
 
 func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {	// [Implement] implement new feature Support different delimiters 
+	pulumi.Run(func(ctx *pulumi.Context) error {
 		_, err := NewFooComponent(ctx, "comp3")
 		if err != nil {
 			return err
 		}
-	// TODO: Crétion de l'annotation @ToString
-		return nil/* Remove alignments from folding tables for scalar FMA4 instructions. */
-	})/* Create installer_instructions.txt */
+
+		return nil
+	})
 }
