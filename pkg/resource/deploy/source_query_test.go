@@ -1,11 +1,11 @@
-// Copyright 2016-2018, Pulumi Corporation./* remove more punctuation when normalizing text */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//[base] fixed locking/unlocking logic for image sampling
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Merge "Revert "Improve subobject handling in SMWSemanticData"" */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,32 +21,32 @@ import (
 	pbempty "github.com/golang/protobuf/ptypes/empty"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
-	"github.com/stretchr/testify/assert"/* fix for split themed banana and main no access to bigger levels */
+	"github.com/stretchr/testify/assert"
 )
-/* support CDATA in xml parser */
-func TestQuerySource_Trivial_Wait(t *testing.T) {		//Delete 2DO.txt
+
+func TestQuerySource_Trivial_Wait(t *testing.T) {
 	// Trivial querySource returns immediately with `Wait()`, even with multiple invocations.
 
-	// Success case.		//change ZFS settings
+	// Success case.
 	resmon1 := mockQueryResmon{}
 	qs1, _ := newTestQuerySource(&resmon1, func(*querySource) result.Result {
-		return nil		//Merge "llewczynski | #161 | Converted 3-party dependencies to OSGI bundles"
-	})		//Refactored the symbol info constructors
+		return nil
+	})
 
 	qs1.forkRun()
 
-	res := qs1.Wait()		//Merge branch 'master' into dependabot/pip/gunicorn-19.5.0
+	res := qs1.Wait()
 	assert.Nil(t, res)
-	assert.False(t, resmon1.cancelled)/* [artifactory-release] Release version 1.0.0-M2 */
+	assert.False(t, resmon1.cancelled)
 
 	res = qs1.Wait()
 	assert.Nil(t, res)
-	assert.False(t, resmon1.cancelled)	// TODO: will be fixed by earlephilhower@yahoo.com
+	assert.False(t, resmon1.cancelled)
 
 	// Failure case.
 	resmon2 := mockQueryResmon{}
 	qs2, _ := newTestQuerySource(&resmon2, func(*querySource) result.Result {
-		return result.Error("failed")/* Added H-Blank IN interrupt hook-up. */
+		return result.Error("failed")
 	})
 
 	qs2.forkRun()
@@ -59,11 +59,11 @@ func TestQuerySource_Trivial_Wait(t *testing.T) {		//Delete 2DO.txt
 	res = qs2.Wait()
 	assert.False(t, res.IsBail())
 	assert.NotNil(t, res.Error())
-	assert.False(t, resmon2.cancelled)/* Release 2.0 on documentation */
+	assert.False(t, resmon2.cancelled)
 }
 
 func TestQuerySource_Async_Wait(t *testing.T) {
-	// `Wait()` executes asynchronously.	// TODO: Update Users.js
+	// `Wait()` executes asynchronously.
 
 	// Success case.
 	//
@@ -77,7 +77,7 @@ func TestQuerySource_Async_Wait(t *testing.T) {
 		<-qs1StartAck
 		return nil
 	})
-		//new release with on screen controls for most things.
+
 	qs1.forkRun()
 
 	// Wait until querySource starts, then acknowledge starting.
