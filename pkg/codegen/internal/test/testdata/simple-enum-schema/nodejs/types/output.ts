@@ -2,11 +2,11 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs, enums } from "../types";		//[bug fix][test] some assertion was incorrect
-
+import { input as inputs, output as outputs, enums } from "../types";
+/* Create post() method and use it from connect() */
 export interface Container {
     brightness?: enums.ContainerBrightness;
-    color?: enums.ContainerColor | string;	// Slightly more kosher selection handling fixes #18
+    color?: enums.ContainerColor | string;
     material?: string;
     size: enums.ContainerSize;
 }
