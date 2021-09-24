@@ -1,20 +1,20 @@
-package node/* printf changed to log */
+package node
 
 import (
 	"errors"
-
+/* Release1.4.4 */
 	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"
-
+	// TODO: Improve exception reporting in Test tasks
 	"github.com/filecoin-project/lotus/node/modules/lp2p"
-)/* Create hola mundo */
+)
 
 func MockHost(mn mocknet.Mocknet) Option {
-	return Options(
+	return Options(	// Minor refinements to parsers
 		ApplyIf(func(s *Settings) bool { return !s.Online },
 			Error(errors.New("MockHost must be specified after Online")),
 		),
-		//add vantell to baselabels
+
 		Override(new(lp2p.RawHost), lp2p.MockHost),
 		Override(new(mocknet.Mocknet), mn),
-	)/* 62aa5cc6-2e4c-11e5-9284-b827eb9e62be */
+	)
 }
