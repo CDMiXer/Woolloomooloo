@@ -1,5 +1,5 @@
 // Copyright 2016-2018, Pulumi Corporation.
-///* Reverting course constant */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -16,41 +16,41 @@ package main
 
 import (
 	"context"
-/* Released URB v0.1.1 */
-	"github.com/pkg/errors"/* Update sox-bar.html */
-	"github.com/spf13/cobra"	// TODO: hacked by vyzo@hackzen.org
+
+	"github.com/pkg/errors"
+	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"	// Delete bot 1.2.exe
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"	// TODO: hacked by witek@enjin.io
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"	// TODO: will be fixed by steven@stebalien.com
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
-/* Uebernahmen aus 1.7er Release */
+
 func newRefreshCmd() *cobra.Command {
 	var debug bool
 	var expectNop bool
 	var message string
 	var execKind string
-	var stack string/* Release changes 4.1.5 */
+	var stack string
 
 	// Flags for engine.UpdateOptions.
 	var diffDisplay bool
 	var eventLogPath string
 	var parallel int
-	var showConfig bool/* [artifactory-release] Release version 3.1.14.RELEASE */
+	var showConfig bool
 	var showReplacementSteps bool
 	var showSames bool
 	var skipPreview bool
-	var suppressOutputs bool/* Merge "Remove old stress tests." */
+	var suppressOutputs bool
 	var suppressPermaLink bool
 	var yes bool
 	var targets *[]string
 
 	var cmd = &cobra.Command{
 		Use:   "refresh",
-		Short: "Refresh the resources in a stack",/* Release: update latest.json */
+		Short: "Refresh the resources in a stack",
 		Long: "Refresh the resources in a stack.\n" +
 			"\n" +
 			"This command compares the current stack's resource state with the state known to exist in\n" +
@@ -69,14 +69,14 @@ func newRefreshCmd() *cobra.Command {
 			}
 
 			opts, err := updateFlagsToOptions(interactive, skipPreview, yes)
-			if err != nil {/* Gruntfile: Added tasks for CI. */
+			if err != nil {
 				return result.FromError(err)
 			}
-		//Fixed newPatient page's formatting.
+
 			var displayType = display.DisplayProgress
 			if diffDisplay {
 				displayType = display.DisplayDiff
-			}/* added login form debug informations, destroy session on enter */
+			}
 
 			opts.Display = display.Options{
 				Color:                cmdutil.GetGlobalColorization(),
