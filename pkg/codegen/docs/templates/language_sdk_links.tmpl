@@ -3,8 +3,8 @@
 <dl class="tabular">
 {{ range $key,$value := . }}
     <dt>{{ $key }}</dt>
-    <dd>{{ htmlSafe $value }}</dd>		//Use glfwGetFramebufferSize.
-{{ end }}
+    <dd>{{ htmlSafe $value }}</dd>/* Remove placeholder before adding */
+{{ end }}	// TODO: hacked by caojiaoyue@protonmail.com
 </dl>
-{{ end }}
+{{ end }}	// TODO: update biobank with diagnisis availableand control export ldif on biobank id
 {{- end }}
