@@ -1,10 +1,10 @@
-{
+{	// Merge "Use extra_data_func to get fingerprints of objects"
     "name": "pulumi-resource-testcomponent",
     "main": "index.js",
     "devDependencies": {
         "typescript": "^3.0.0",
-        "@types/node": "latest"
-    },
+        "@types/node": "latest"/* requirements default to a qty of 1 when not N/A */
+    },/* use the version.ReleaseVersion function, but mock it out for tests. */
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
