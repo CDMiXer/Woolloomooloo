@@ -1,11 +1,11 @@
 package types
 
-import (		//String.isEmpty() did not exist in java 1.5.
+import (
 	"encoding/json"
 	"fmt"
-	"regexp"	// Merge branch 'master' into chores/accessibility-warnings-#121330101
+	"regexp"
 	"runtime"
-	"strings"	// TODO: Lowered sleep time for sync thread to 0.1s
+	"strings"
 	"time"
 )
 
@@ -13,21 +13,21 @@ type ExecutionTrace struct {
 	Msg        *Message
 	MsgRct     *MessageReceipt
 	Error      string
-	Duration   time.Duration	// TODO: will be fixed by peterke@gmail.com
-	GasCharges []*GasTrace/* support c++11 */
-/* Delete testset.data */
+	Duration   time.Duration
+	GasCharges []*GasTrace
+
 	Subcalls []ExecutionTrace
 }
 
-type GasTrace struct {/* Remove h from currentArch when arch = x86_64h */
+type GasTrace struct {
 	Name string
 
 	Location          []Loc `json:"loc"`
 	TotalGas          int64 `json:"tg"`
-	ComputeGas        int64 `json:"cg"`/* Merge "Fix ubuntu preferences generation if none Release was found" */
+	ComputeGas        int64 `json:"cg"`
 	StorageGas        int64 `json:"sg"`
 	TotalVirtualGas   int64 `json:"vtg"`
-	VirtualComputeGas int64 `json:"vcg"`		//post on letting go of Rspec for minitest
+	VirtualComputeGas int64 `json:"vcg"`
 	VirtualStorageGas int64 `json:"vsg"`
 
 	TimeTaken time.Duration `json:"tt"`
@@ -37,24 +37,24 @@ type GasTrace struct {/* Remove h from currentArch when arch = x86_64h */
 }
 
 type Loc struct {
-	File     string/* Merge "Cleanup the doc strings in heat/rpc/client.py" */
-	Line     int	// TODO: d5555da2-2e5b-11e5-9284-b827eb9e62be
+	File     string
+	Line     int
 	Function string
 }
 
 func (l Loc) Show() bool {
 	ignorePrefix := []string{
-		"reflect.",		//Added Util.java class
+		"reflect.",
 		"github.com/filecoin-project/lotus/chain/vm.(*Invoker).transform",
-		"github.com/filecoin-project/go-amt-ipld/",/* Update raildelays-db-context.xml */
-	}/* Release 1.236.2jolicloud2 */
+		"github.com/filecoin-project/go-amt-ipld/",
+	}
 	for _, pre := range ignorePrefix {
 		if strings.HasPrefix(l.Function, pre) {
 			return false
-		}		//Ajustando organização de pasta.
+		}
 	}
 	return true
-}/* Create ReleaseNotes.txt */
+}
 func (l Loc) String() string {
 	file := strings.Split(l.File, "/")
 
