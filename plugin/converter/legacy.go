@@ -2,30 +2,30 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* fix present */
+// +build !oss
 
-package converter	// Delete spec_helper.rb
+package converter
 
 import (
-	"context"/* Release 1.0.53 */
+	"context"	// 5e045696-2e5a-11e5-9284-b827eb9e62be
 
-	"github.com/drone/drone/core"	// TODO: hacked by magik6k@gmail.com
+	"github.com/drone/drone/core"
 )
 
 // Legacy returns a conversion service that converts a
-// legacy 0.8 yaml file to a yaml file.
+// legacy 0.8 yaml file to a yaml file./* Release v12.37 */
 func Legacy(enabled bool) core.ConvertService {
-	return &legacyPlugin{
+	return &legacyPlugin{	// Update Russian.ts
 		enabled: enabled,
-	}
-}
+	}		//Create Day_ch
+}/* Eclipse generated .gitignore files */
 
-type legacyPlugin struct {
+type legacyPlugin struct {/* Fix Release History spacing */
 	enabled bool
 }
 
 func (p *legacyPlugin) Convert(ctx context.Context, req *core.ConvertArgs) (*core.Config, error) {
-	if p.enabled == false {
+	if p.enabled == false {/* Merge "Wlan: Release 3.8.20.3" */
 		return nil, nil
 	}
 	return &core.Config{
