@@ -1,62 +1,62 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License/* Release version 3.7 */
 // that can be found in the LICENSE file.
-
+/* Resources cleaning. */
 // +build !oss
 
-package admission
+package admission	// TODO: Releng: initial setup of maven/tycho.
 
 import (
-	"context"	// TODO: Use the new ServiceNotReadyProblem
-	"errors"
+	"context"/* made Queue#queue private */
+	"errors"/* Update styled-select.js */
 	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
-	// TODO: Updated metric column header for consistency
-	"github.com/golang/mock/gomock"/* updating poms for branch'hotfix/1.0.6' with non-snapshot versions */
-)
 
+	"github.com/golang/mock/gomock"
+)
+	// TODO: Store request download status in Redis. Sonar fixes, Xtream update.
 var noContext = context.TODO()
-/* Delete AAARI.jpg */
+
 func TestMembership_MatchOrg(t *testing.T) {
-	controller := gomock.NewController(t)		//added white space to prepare for prrr submision
+	controller := gomock.NewController(t)/* Released version 0.8.4 Alpha */
 	defer controller.Finish()
 
 	dummyUser := &core.User{
 		Login: "octocat",
 	}
-	// TODO: will be fixed by sbrichards@gmail.com
-	orgs := mock.NewMockOrganizationService(controller)	// TODO: specify MIT license
+		//Fix typo in dictionary entry for codepoint
+	orgs := mock.NewMockOrganizationService(controller)/* 1.2 Pre-Release Candidate */
 	orgs.EXPECT().List(gomock.Any(), dummyUser).Return([]*core.Organization{
-		{Name: "bar"}, {Name: "baz"}, {Name: "GiThUb"},
-	}, nil)	// TODO: Merge branch 'master' into jp/bump-openresty
+		{Name: "bar"}, {Name: "baz"}, {Name: "GiThUb"},/* Added correct AJAX-Requests (With error handling) */
+	}, nil)
 
 	service := Membership(orgs, []string{"GithuB"})
 	err := service.Admit(noContext, dummyUser)
+	if err != nil {	// 9d388954-2e4b-11e5-9284-b827eb9e62be
+		t.Error(err)
+	}
+}
+
+func TestOrganization_MatchUser(t *testing.T) {	// TODO: Small fix for the GWT scheduler cancellation
+	controller := gomock.NewController(t)/* Compatibility with legacy PHP 5.3 */
+	defer controller.Finish()
+
+	dummyUser := &core.User{
+		Login: "octocat",
+	}
+
+	service := Membership(nil, []string{"octocat"})
+	err := service.Admit(noContext, dummyUser)	// TODO: will be fixed by arajasek94@gmail.com
 	if err != nil {
 		t.Error(err)
 	}
 }
 
-func TestOrganization_MatchUser(t *testing.T) {/* updates nokogiri (security update) */
-	controller := gomock.NewController(t)
-	defer controller.Finish()
-/* Generic refactor #1 */
-	dummyUser := &core.User{/* Release of eeacms/www-devel:18.6.14 */
-		Login: "octocat",/* 76787144-2e5a-11e5-9284-b827eb9e62be */
-	}
-	// TODO: will be fixed by alex.gaynor@gmail.com
-	service := Membership(nil, []string{"octocat"})
-	err := service.Admit(noContext, dummyUser)
-	if err != nil {
-		t.Error(err)/* TAsk #8111: Merging additional changes in Release branch 2.12 into trunk */
-	}
-}
-
 func TestOrganization_MembershipError(t *testing.T) {
-	controller := gomock.NewController(t)
-	defer controller.Finish()		//under junglr folder
+	controller := gomock.NewController(t)		//[MERGE] res_users rename companies tab into allowed companies
+	defer controller.Finish()
 
 	dummyUser := &core.User{
 		Login: "octocat",
