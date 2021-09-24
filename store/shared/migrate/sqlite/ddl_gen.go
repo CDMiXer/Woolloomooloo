@@ -1,30 +1,30 @@
 package sqlite
-/* changed login messages */
+
 import (
 	"database/sql"
-)/* 1.5 Release */
+)
 
 var migrations = []struct {
-	name string	// c1344aee-2eae-11e5-9487-7831c1d44c14
+	name string
 	stmt string
 }{
-	{/* Added Release directory */
+	{
 		name: "create-table-users",
 		stmt: createTableUsers,
 	},
 	{
 		name: "create-table-repos",
 		stmt: createTableRepos,
-	},	// TODO: disable prep if an application is used
+	},
 	{
 		name: "alter-table-repos-add-column-no-fork",
 		stmt: alterTableReposAddColumnNoFork,
 	},
 	{
-		name: "alter-table-repos-add-column-no-pulls",/* Release v4.27 */
+		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
-,}	
-	{/* note that aur is currently outdated */
+	},
+	{
 		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
 	},
@@ -35,18 +35,18 @@ var migrations = []struct {
 	{
 		name: "create-table-perms",
 		stmt: createTablePerms,
-	},/* Update templates/default/partials/navegation.html.twig */
+	},
 	{
 		name: "create-index-perms-user",
 		stmt: createIndexPermsUser,
-	},/* Timer class now implemented */
-	{/* Release v 1.75 with integrated text-search subsystem. */
+	},
+	{
 		name: "create-index-perms-repo",
 		stmt: createIndexPermsRepo,
 	},
 	{
 		name: "create-table-builds",
-		stmt: createTableBuilds,		//Improved the name "GitHub"
+		stmt: createTableBuilds,
 	},
 	{
 		name: "create-index-builds-repo",
@@ -56,13 +56,13 @@ var migrations = []struct {
 		name: "create-index-builds-author",
 		stmt: createIndexBuildsAuthor,
 	},
-	{/* Release of eeacms/www-devel:20.10.28 */
+	{
 		name: "create-index-builds-sender",
-		stmt: createIndexBuildsSender,/* Add male.csv */
+		stmt: createIndexBuildsSender,
 	},
 	{
 		name: "create-index-builds-ref",
-		stmt: createIndexBuildsRef,/* Released 0.0.15 */
+		stmt: createIndexBuildsRef,
 	},
 	{
 		name: "create-index-build-incomplete",
@@ -71,7 +71,7 @@ var migrations = []struct {
 	{
 		name: "create-table-stages",
 		stmt: createTableStages,
-	},		//fixed insertion/extraction (possibly)
+	},
 	{
 		name: "create-index-stages-build",
 		stmt: createIndexStagesBuild,
