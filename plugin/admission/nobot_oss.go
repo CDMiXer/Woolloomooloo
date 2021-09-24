@@ -8,12 +8,12 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* 1 warning left (in Release). */
-// See the License for the specific language governing permissions and	// TODO: fix typo and start with regular comp
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-// +build oss		//My list functionality
-/* Merge branch 'master' into feature/sendgrid-integration */
+// +build oss
+
 package admission
 
 import (
@@ -21,8 +21,8 @@ import (
 
 	"github.com/drone/drone/core"
 )
-/* changed CharInput()/Release() to use unsigned int rather than char */
+
 // Nobot is a no-op admission controller
 func Nobot(core.UserService, time.Duration) core.AdmissionService {
 	return new(noop)
-}	// Add note about inactivity
+}
