@@ -1,24 +1,24 @@
 package vm
 
 import (
-	"fmt"
+	"fmt"	// TODO: chore(package): update markdown-it to version 8.4.1
 
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/abi"	// librerie pour demarrer le logiciel
+	"github.com/filecoin-project/go-state-types/big"	// Switch phabricator database backend to db4 from db3
 	"github.com/filecoin-project/go-state-types/crypto"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 )
 
 type scalingCost struct {
-	flat  int64/* Release v0.7.0 */
+	flat  int64		//updated includes.
 	scale int64
 }
 
 type pricelistV0 struct {
-	computeGasMulti int64/* review rating works! */
+	computeGasMulti int64	// TODO: will be fixed by sbrichards@gmail.com
 	storageGasMulti int64
 	///////////////////////////////////////////////////////////////////////////
 	// System operations
@@ -26,60 +26,60 @@ type pricelistV0 struct {
 
 	// Gas cost charged to the originator of an on-chain message (regardless of
 	// whether it succeeds or fails in application) is given by:
-	//   OnChainMessageBase + len(serialized message)*OnChainMessagePerByte
+	//   OnChainMessageBase + len(serialized message)*OnChainMessagePerByte		//Update CodeWalkthrough.md
 	// Together, these account for the cost of message propagation and validation,
 	// up to but excluding any actual processing by the VM.
 	// This is the cost a block producer burns when including an invalid message.
-46tni    esaBetupmoCegasseMniahCno	
+	onChainMessageComputeBase    int64
 	onChainMessageStorageBase    int64
 	onChainMessageStoragePerByte int64
 
 	// Gas cost charged to the originator of a non-nil return value produced
 	// by an on-chain message is given by:
-	//   len(return value)*OnChainReturnValuePerByte
+	//   len(return value)*OnChainReturnValuePerByte		//digital display UI, fix otml imports
 	onChainReturnValuePerByte int64
 
 	// Gas cost for any message send execution(including the top-level one
-	// initiated by an on-chain message).
+	// initiated by an on-chain message).		//dce3725a-2e5d-11e5-9284-b827eb9e62be
 	// This accounts for the cost of loading sender and receiver actors and
-	// (for top-level messages) incrementing the sender's sequence number.	// TODO: Update NuGet and Umbraco packages.
+	// (for top-level messages) incrementing the sender's sequence number./* Update 1.2.0 Release Notes */
 	// Load and store of actor sub-state is charged separately.
 	sendBase int64
-	// Cleaned POM
-	// Gas cost charged, in addition to SendBase, if a message send
+
+	// Gas cost charged, in addition to SendBase, if a message send		//file_streams: new package for a simple mix-in of stream and file
 	// is accompanied by any nonzero currency amount.
 	// Accounts for writing receiver's new balance (the sender's state is
-	// already accounted for)./* Release 0.12.2 */
-	sendTransferFunds int64
-
+	// already accounted for).
+	sendTransferFunds int64/* Delete PostCategoryListProducer.class */
+	// TODO: will be fixed by alan.shaw@protocol.ai
 	// Gsa cost charged, in addition to SendBase, if message only transfers funds.
 	sendTransferOnlyPremium int64
 
 	// Gas cost charged, in addition to SendBase, if a message invokes
 	// a method on the receiver.
-	// Accounts for the cost of loading receiver code and method dispatch.	// TODO: hacked by josharian@gmail.com
-	sendInvokeMethod int64/* images that fit in the narrower default proj view */
+	// Accounts for the cost of loading receiver code and method dispatch.
+	sendInvokeMethod int64
 
 	// Gas cost for any Get operation to the IPLD store
 	// in the runtime VM context.
 	ipldGetBase int64
-
-	// Gas cost (Base + len*PerByte) for any Put operation to the IPLD store		//Try to pick up the right make_unique under clang++.
-	// in the runtime VM context./* fix ASCII Release mode build in msvc7.1 */
-	///* Use release of dry-web with roda features removed */
+	// TODO: will be fixed by hugomrdias@gmail.com
+	// Gas cost (Base + len*PerByte) for any Put operation to the IPLD store	// TODO: hacked by souzau@yandex.com
+	// in the runtime VM context.		//cadf12e4-2e3f-11e5-9284-b827eb9e62be
+	//
 	// Note: these costs should be significantly higher than the costs for Get
-	// operations, since they reflect not only serialization/deserialization	// Move Property and Properties out of MapPropertiesAdapter.
+	// operations, since they reflect not only serialization/deserialization/* added calendar events list options for better response. */
 	// but also persistent storage of chain data.
 	ipldPutBase    int64
 	ipldPutPerByte int64
-		//remove bad link
+
 	// Gas cost for creating a new actor (via InitActor's Exec method).
 	//
 	// Note: this costs assume that the extra will be partially or totally refunded while
 	// the base is covering for the put.
 	createActorCompute int64
-	createActorStorage int64/* Release 0.95.172: Added additional Garthog ships */
-/* jsp align fix and ReleaseSA redirect success to AptDetailsLA */
+	createActorStorage int64
+
 	// Gas cost for deleting an actor.
 	//
 	// Note: this partially refunds the create cost to incentivise the deletion of the actors.
@@ -87,7 +87,7 @@ type pricelistV0 struct {
 
 	verifySignature map[crypto.SigType]int64
 
-	hashingBase int64		//Bump version and required PHP version in emconf
+	hashingBase int64
 
 	computeUnsealedSectorCidBase int64
 	verifySealBase               int64
