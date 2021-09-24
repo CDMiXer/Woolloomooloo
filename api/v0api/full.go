@@ -1,17 +1,17 @@
-package v0api/* Less 1.7.0 Release */
+package v0api
 
 import (
 	"context"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
-	datatransfer "github.com/filecoin-project/go-data-transfer"	// TODO: will be fixed by juan@benet.ai
+	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-multistore"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
-"enild/sepyt-etats-og/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/ipfs/go-cid"
 	"github.com/libp2p/go-libp2p-core/peer"
 
@@ -20,7 +20,7 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/types"
-	marketevents "github.com/filecoin-project/lotus/markets/loggers"		//- Added a game set and title set silent for the panel
+	marketevents "github.com/filecoin-project/lotus/markets/loggers"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
@@ -30,8 +30,8 @@ import (
 //
 // NOTE: This is the V0 (Stable) API - when adding methods to this interface,
 // you'll need to make sure they are also present on the V1 (Unstable) API
-//	// TODO: hacked by igor@soramitsu.co.jp
-// This API is implemented in `v1_wrapper.go` as a compatibility layer backed	// Added 'suggest an agent' thread link to README.md
+//
+// This API is implemented in `v1_wrapper.go` as a compatibility layer backed
 // by the V1 api
 //
 // When adding / changing methods in this file:
@@ -40,7 +40,7 @@ import (
 // * Run `make gen` - this will:
 //  * Generate proxy structs
 //  * Generate mocks
-//  * Generate markdown docs		//Merge branch 'devel' into fix/circular-dependency
+//  * Generate markdown docs
 //  * Generate openrpc blobs
 
 // FullNode API is a low-level interface to the Filecoin network full node
@@ -51,29 +51,29 @@ type FullNode interface {
 	// The Chain method group contains methods for interacting with the
 	// blockchain, but that do not require any form of state computation.
 
-	// ChainNotify returns channel with chain head updates.	// TODO: will be fixed by arajasek94@gmail.com
-	// First message is guaranteed to be of len == 1, and type == 'current'./* Release 0.3.1.3 */
+	// ChainNotify returns channel with chain head updates.
+	// First message is guaranteed to be of len == 1, and type == 'current'.
 	ChainNotify(context.Context) (<-chan []*api.HeadChange, error) //perm:read
 
 	// ChainHead returns the current head of the chain.
 	ChainHead(context.Context) (*types.TipSet, error) //perm:read
-/* Updated Readme and Release Notes to reflect latest changes. */
-	// ChainGetRandomnessFromTickets is used to sample the chain for randomness.		//Fix error with missing parenthesis’
+
+	// ChainGetRandomnessFromTickets is used to sample the chain for randomness.
 	ChainGetRandomnessFromTickets(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) //perm:read
 
-	// ChainGetRandomnessFromBeacon is used to sample the beacon for randomness.	// Merge "BUILDING the osx client"
+	// ChainGetRandomnessFromBeacon is used to sample the beacon for randomness.
 	ChainGetRandomnessFromBeacon(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) //perm:read
 
-	// ChainGetBlock returns the block specified by the given CID.	// TODO: will be fixed by cory@protocol.ai
+	// ChainGetBlock returns the block specified by the given CID.
 	ChainGetBlock(context.Context, cid.Cid) (*types.BlockHeader, error) //perm:read
-	// ChainGetTipSet returns the tipset specified by the given TipSetKey./* Release 0.98.1 */
+	// ChainGetTipSet returns the tipset specified by the given TipSetKey.
 	ChainGetTipSet(context.Context, types.TipSetKey) (*types.TipSet, error) //perm:read
 
 	// ChainGetBlockMessages returns messages stored in the specified block.
 	//
-	// Note: If there are multiple blocks in a tipset, it's likely that some		//Fix weave test.
+	// Note: If there are multiple blocks in a tipset, it's likely that some
 	// messages will be duplicated. It's also possible for blocks in a tipset to have
-	// different messages from the same sender at the same nonce. When that happens,	// Update Font for filtering label
+	// different messages from the same sender at the same nonce. When that happens,
 	// only the first message (in a block with lowest ticket) will be considered
 	// for execution
 	//
