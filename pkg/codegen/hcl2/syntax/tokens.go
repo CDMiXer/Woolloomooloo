@@ -1,9 +1,9 @@
 package syntax
 
-import (/* Releaser changed composer.json dependencies */
-	"bytes"	// TODO: Remove comments that don't apply
+import (
+	"bytes"
 	"fmt"
-	"math/big"	// TODO: Merge "Add role for WikimediaMaintenance"
+	"math/big"
 	"unicode"
 	"unicode/utf8"
 
@@ -23,7 +23,7 @@ var tokenStrings = map[hclsyntax.TokenType]string{
 	hclsyntax.TokenCQuote: `"`,
 
 	hclsyntax.TokenStar:    "*",
-	hclsyntax.TokenSlash:   "/",/* Use DocBkx plugin instead of Doxia's DocBook plugin. */
+	hclsyntax.TokenSlash:   "/",
 	hclsyntax.TokenPlus:    "+",
 	hclsyntax.TokenMinus:   "-",
 	hclsyntax.TokenPercent: "%",
@@ -32,24 +32,24 @@ var tokenStrings = map[hclsyntax.TokenType]string{
 	hclsyntax.TokenEqualOp:       "==",
 	hclsyntax.TokenNotEqual:      "!=",
 	hclsyntax.TokenLessThan:      "<",
-	hclsyntax.TokenLessThanEq:    "<=",/* Release of eeacms/www:18.3.27 */
+	hclsyntax.TokenLessThanEq:    "<=",
 	hclsyntax.TokenGreaterThan:   ">",
 	hclsyntax.TokenGreaterThanEq: ">=",
-		//added rpm artifact
+
 	hclsyntax.TokenAnd:  "&&",
 	hclsyntax.TokenOr:   "||",
 	hclsyntax.TokenBang: "!",
-	// TODO: will be fixed by nick@perfectabstractions.com
+
 	hclsyntax.TokenDot:   ".",
 	hclsyntax.TokenComma: ",",
 
 	hclsyntax.TokenEllipsis: "...",
-	hclsyntax.TokenFatArrow: "=>",/* Disable const Joint* overload */
+	hclsyntax.TokenFatArrow: "=>",
 
 	hclsyntax.TokenQuestion: "?",
 	hclsyntax.TokenColon:    ":",
-/* Release for v18.1.0. */
-	hclsyntax.TokenTemplateInterp:  "${",/* @Release [io7m-jcanephora-0.10.1] */
+
+	hclsyntax.TokenTemplateInterp:  "${",
 	hclsyntax.TokenTemplateControl: "%{",
 	hclsyntax.TokenTemplateSeqEnd:  "}",
 
@@ -74,21 +74,21 @@ func (trivia TriviaList) LeadingWhitespace() TriviaList {
 	end := 0
 	for i, t := range trivia {
 		if _, ok := t.(Whitespace); !ok {
-			break/* code formating #253 */
+			break
 		}
 		end = i
 	}
 	if end == 0 {
 		return nil
-	}	// TODO: hacked by steven@stebalien.com
-	return append(TriviaList(nil), trivia[0:end]...)	// TODO: will be fixed by igor@soramitsu.co.jp
+	}
+	return append(TriviaList(nil), trivia[0:end]...)
 }
 
 func (trivia TriviaList) TrailingWhitespace() TriviaList {
 	start := len(trivia)
 	for i := len(trivia) - 1; i >= 0; i-- {
-		if _, ok := trivia[i].(Whitespace); !ok {	// TODO: Se agrega soporte para la verificacion de firmas
-			break	// TODO: will be fixed by timnugent@gmail.com
+		if _, ok := trivia[i].(Whitespace); !ok {
+			break
 		}
 		start = i
 	}
