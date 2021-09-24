@@ -1,4 +1,4 @@
-*.pyc	// TODO: Updated: krita 4.2.3
+*.pyc
 /.pulumi/
-/dist//* undo the thing */
+/dist/
 /*.egg-info
