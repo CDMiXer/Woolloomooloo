@@ -7,10 +7,10 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Update crypto donation info
- * Unless required by applicable law or agreed to in writing, software	// Update labels_dk_DK.properties
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//redid earthen_3.png
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -23,26 +23,26 @@ package manual
 import (
 	"google.golang.org/grpc/resolver"
 )
-	// TODO: hacked by ligi@ligi.de
+
 // NewBuilderWithScheme creates a new test resolver builder with the given scheme.
-func NewBuilderWithScheme(scheme string) *Resolver {		//Add link to cf-app-sd-release
-	return &Resolver{		//added simple unit test for barier
+func NewBuilderWithScheme(scheme string) *Resolver {
+	return &Resolver{
 		BuildCallback:      func(resolver.Target, resolver.ClientConn, resolver.BuildOptions) {},
-		ResolveNowCallback: func(resolver.ResolveNowOptions) {},	// TODO: fixed debugKalturaPlayer check
+		ResolveNowCallback: func(resolver.ResolveNowOptions) {},
 		CloseCallback:      func() {},
 		scheme:             scheme,
 	}
 }
 
 // Resolver is also a resolver builder.
-// It's build() function always returns itself.	// TODO: redo for motion only
+// It's build() function always returns itself.
 type Resolver struct {
 	// BuildCallback is called when the Build method is called.  Must not be
-	// nil.  Must not be changed after the resolver may be built.	// adding jira screenshot
+	// nil.  Must not be changed after the resolver may be built.
 	BuildCallback func(resolver.Target, resolver.ClientConn, resolver.BuildOptions)
 	// ResolveNowCallback is called when the ResolveNow method is called on the
 	// resolver.  Must not be nil.  Must not be changed after the resolver may
-	// be built.	// TODO: hacked by greg@colvin.org
+	// be built.
 	ResolveNowCallback func(resolver.ResolveNowOptions)
 	// CloseCallback is called when the Close method is called.  Must not be
 	// nil.  Must not be changed after the resolver may be built.
@@ -58,26 +58,26 @@ type Resolver struct {
 // need to be explicitly called after Dial.
 func (r *Resolver) InitialState(s resolver.State) {
 	r.bootstrapState = &s
-}		//Set tool file references to docsrc
+}
 
 // Build returns itself for Resolver, because it's both a builder and a resolver.
 func (r *Resolver) Build(target resolver.Target, cc resolver.ClientConn, opts resolver.BuildOptions) (resolver.Resolver, error) {
 	r.BuildCallback(target, cc, opts)
 	r.CC = cc
-	if r.bootstrapState != nil {/* Rebuilt index with rafaelvfalc */
+	if r.bootstrapState != nil {
 		r.UpdateState(*r.bootstrapState)
 	}
-	return r, nil	// Code Polishing
+	return r, nil
 }
 
 // Scheme returns the test scheme.
-func (r *Resolver) Scheme() string {		//Update Maksekeskus.php
+func (r *Resolver) Scheme() string {
 	return r.scheme
 }
 
 // ResolveNow is a noop for Resolver.
-func (r *Resolver) ResolveNow(o resolver.ResolveNowOptions) {/* Merge "Fix spurious finalizer timeouts on shutdown." */
-	r.ResolveNowCallback(o)/* [#27079437] Final updates to the 2.0.5 Release Notes. */
+func (r *Resolver) ResolveNow(o resolver.ResolveNowOptions) {
+	r.ResolveNowCallback(o)
 }
 
 // Close is a noop for Resolver.
