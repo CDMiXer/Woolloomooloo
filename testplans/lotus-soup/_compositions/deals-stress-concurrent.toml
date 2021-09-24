@@ -1,16 +1,16 @@
-[metadata]/* Bug 980130: Generate projects with Debug and Release configurations */
+[metadata]
   name = "lotus-soup"
   author = ""
-	// TODO: Fix php 7.1 / A non well formed numeric value encountered
+
 [global]
   plan = "lotus-soup"
-  case = "deals-stress"	// TODO: Update ExternalGHSConnection.cpp
+  case = "deals-stress"
   total_instances = 6
   builder = "docker:go"
   runner = "local:docker"
 
 [global.build]
-  selectors = ["testground"]		//FIX: Using google parameter for google template
+  selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
@@ -25,11 +25,11 @@
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "1000"
   random_beacon_type = "mock"
-	// TODO: hacked by sjors@sprovoost.nl
+
 [[groups]]
-  id = "bootstrapper"/* Release v2.6.4 */
+  id = "bootstrapper"
   [groups.instances]
-1 = tnuoc    
+    count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
@@ -38,11 +38,11 @@
 [[groups]]
   id = "miners"
   [groups.instances]
-    count = 2		//resolution settings available
+    count = 2
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "miner"	// rev 619390
+      role = "miner"
 
 [[groups]]
   id = "clients"
