@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	// TODO: 67b2d240-2e72-11e5-9284-b827eb9e62be
-  <PropertyGroup>	// Registration done
+
+  <PropertyGroup>		//Delete cc3200_hw
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>	// TODO: Fixed ConceptMap $translation without conceptMapVersion issue.
-  </PropertyGroup>/* Update river.cabal */
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>/* fix readme styling */
 
 </Project>
