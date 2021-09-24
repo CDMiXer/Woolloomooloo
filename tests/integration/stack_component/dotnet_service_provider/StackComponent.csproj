@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">	// TODO: Updated SQLite description and comments
-	// TODO: Update skel.sh
+﻿<Project Sdk="Microsoft.NET.Sdk">
+/* Release notes on tag ACL */
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>/* Creation of the Introduction */
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
-</Project>
+		//Updated dataset performance link
+</Project>/* Create isr8xx_config_v1.0.0.cfg */
