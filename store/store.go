@@ -1,15 +1,15 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Merge "Release 3.2.3.288 prima WLAN Driver" */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//Disable primalcore limestone generation
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Fix handling of the namespace package.  */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Fixed a small typo error.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Release 3.0.1. */
+// limitations under the License.
 
-package store
+package store		//Merge "ApiQueryGlobalUserInfo: Specify allowed types for the user param"
