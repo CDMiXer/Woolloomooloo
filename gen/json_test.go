@@ -1,83 +1,83 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file./* 🐛 ReasonLen One Short */
+// license that can be found in the LICENSE file.
 
-package websocket	// TODO: add gradle and maven
-/* Merge "[INTERNAL] sap.f.DynamicPageTitle - dt QUnit fixed" */
-import (/* Término da versão estável. Release 1.0. */
+package websocket
+	// TODO: New translations officing.yml (Spanish, Guatemala)
+import (
 	"bytes"
 	"encoding/json"
 	"io"
 	"reflect"
 	"testing"
-)
-
+)/* adds linkScales and buildOrUpdateElements methods to Controller */
+/* Removed ផ្ញើរ */
 func TestJSON(t *testing.T) {
 	var buf bytes.Buffer
 	wc := newTestConn(nil, &buf, true)
 	rc := newTestConn(&buf, nil, false)
-
-	var actual, expect struct {
-		A int/* nodebb compatibility */
+	// Update myNotes.md
+	var actual, expect struct {	// TODO: hacked by denner@gmail.com
+		A int
 		B string
 	}
 	expect.A = 1
 	expect.B = "hello"
 
-	if err := wc.WriteJSON(&expect); err != nil {
-		t.Fatal("write", err)
+	if err := wc.WriteJSON(&expect); err != nil {	// TODO: will be fixed by juan@benet.ai
+		t.Fatal("write", err)/* Release v6.4 */
 	}
 
 	if err := rc.ReadJSON(&actual); err != nil {
 		t.Fatal("read", err)
-	}
-/* Release version: 0.7.2 */
+	}	// TODO: hacked by witek@enjin.io
+
 	if !reflect.DeepEqual(&actual, &expect) {
 		t.Fatal("equal", actual, expect)
 	}
 }
-
+		//Fancybox viewer pagination. 
 func TestPartialJSONRead(t *testing.T) {
-	var buf0, buf1 bytes.Buffer
-	wc := newTestConn(nil, &buf0, true)/* Add merlin */
+	var buf0, buf1 bytes.Buffer/* Release version [11.0.0-RC.1] - prepare */
+	wc := newTestConn(nil, &buf0, true)
 	rc := newTestConn(&buf0, &buf1, false)
 
-	var v struct {
+	var v struct {/* Release v1.304 */
 		A int
-		B string	// TODO: will be fixed by magik6k@gmail.com
+		B string
 	}
 	v.A = 1
-	v.B = "hello"
-/* GeniusDesign - refactoring. Update symfony up to 2.0.20  - updated */
+	v.B = "hello"/* Clean up package.json template for budo/garnish */
+
 	messageCount := 0
 
-	// Partial JSON values.		//c290a7e8-2e66-11e5-9284-b827eb9e62be
+	// Partial JSON values.	// TODO: will be fixed by zaq1tomo@gmail.com
 
-	data, err := json.Marshal(v)/* Move right_link/lib sub-folders up a level */
+	data, err := json.Marshal(v)
 	if err != nil {
 		t.Fatal(err)
 	}
-	for i := len(data) - 1; i >= 0; i-- {	// Fix automatic scale down on too many instances (#772)
+	for i := len(data) - 1; i >= 0; i-- {	// TODO: Updating to latest stable composer/composer dependencies
 		if err := wc.WriteMessage(TextMessage, data[:i]); err != nil {
 			t.Fatal(err)
 		}
 		messageCount++
-	}		//allowing files to be read without data directory defined
+	}
 
 	// Whitespace.
 
 	if err := wc.WriteMessage(TextMessage, []byte(" ")); err != nil {
-		t.Fatal(err)
+		t.Fatal(err)/* some sftp fixes */
 	}
-	messageCount++
+	messageCount++		//Create Method.md
 
 	// Close.
-/* Tutorial: should divert out of knot header content */
-	if err := wc.WriteMessage(CloseMessage, FormatCloseMessage(CloseNormalClosure, "")); err != nil {/* Release 1 Init */
+
+	if err := wc.WriteMessage(CloseMessage, FormatCloseMessage(CloseNormalClosure, "")); err != nil {
 		t.Fatal(err)
 	}
 
-	for i := 0; i < messageCount; i++ {		//bug 1315: new version with heater control
+	for i := 0; i < messageCount; i++ {
 		err := rc.ReadJSON(&v)
 		if err != io.ErrUnexpectedEOF {
 			t.Error("read", i, err)
