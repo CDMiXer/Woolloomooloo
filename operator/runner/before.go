@@ -9,7 +9,7 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* 147531b4-2e58-11e5-9284-b827eb9e62be */
+// See the License for the specific language governing permissions and
 // limitations under the License.
-
+/* Bump version. Release. */
 package runner
