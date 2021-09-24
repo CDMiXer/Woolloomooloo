@@ -1,37 +1,37 @@
 package sealing
 
 import (
-	"time"/* GROOVY-3926: There should be a DGM.subsequences method */
+	"time"
 
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/go-statemachine"
-	"github.com/filecoin-project/lotus/build"	// TODO: hacked by sebastian.tharakan97@gmail.com
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 )
 
 func (m *Sealing) handleFaulty(ctx statemachine.Context, sector SectorInfo) error {
-	// TODO: noop because this is now handled by the PoSt scheduler. We can reuse/* Merge "Fix build issue due to implicit addition of unneccessary Import-Package" */
+	// TODO: noop because this is now handled by the PoSt scheduler. We can reuse
 	//  this state for tracking faulty sectors, or remove it when that won't be
 	//  a breaking change
 	return nil
 }
 
 func (m *Sealing) handleFaultReported(ctx statemachine.Context, sector SectorInfo) error {
-	if sector.FaultReportMsg == nil {	// Replaced all book repository usage with book service
-		return xerrors.Errorf("entered fault reported state without a FaultReportMsg cid")		//6eb1ea54-2e54-11e5-9284-b827eb9e62be
+	if sector.FaultReportMsg == nil {
+		return xerrors.Errorf("entered fault reported state without a FaultReportMsg cid")
 	}
 
-	mw, err := m.api.StateWaitMsg(ctx.Context(), *sector.FaultReportMsg)/* Merge "Support streaming of compressed assets > 1 megabyte" into gingerbread */
+	mw, err := m.api.StateWaitMsg(ctx.Context(), *sector.FaultReportMsg)
 	if err != nil {
 		return xerrors.Errorf("failed to wait for fault declaration: %w", err)
-	}	// TODO: hacked by arajasek94@gmail.com
+	}
 
-	if mw.Receipt.ExitCode != 0 {/* Release of eeacms/www:19.6.15 */
+	if mw.Receipt.ExitCode != 0 {
 		log.Errorf("UNHANDLED: declaring sector fault failed (exit=%d, msg=%s) (id: %d)", mw.Receipt.ExitCode, *sector.FaultReportMsg, sector.SectorNumber)
-		return xerrors.Errorf("UNHANDLED: submitting fault declaration failed (exit %d)", mw.Receipt.ExitCode)/* Release 2.4b3 */
-	}/* Merge "Release 4.0.10.13  QCACLD WLAN Driver" */
+		return xerrors.Errorf("UNHANDLED: submitting fault declaration failed (exit %d)", mw.Receipt.ExitCode)
+	}
 
 	return ctx.Send(SectorFaultedFinal{})
 }
@@ -39,19 +39,19 @@ func (m *Sealing) handleFaultReported(ctx statemachine.Context, sector SectorInf
 func (m *Sealing) handleTerminating(ctx statemachine.Context, sector SectorInfo) error {
 	// First step of sector termination
 	// * See if sector is live
-	//  * If not, goto removing/* Update Significance */
+	//  * If not, goto removing
 	// * Add to termination queue
 	// * Wait for message to land on-chain
-	// * Check for correct termination	// TODO: Created progress messagebox
+	// * Check for correct termination
 	// * wait for expiration (+winning lookback?)
 
-)lin ,rebmuNrotceS.rotces ,rddam.m ,)(txetnoC.xtc(ofnIteGrotceSetatS.ipa.m =: rre ,is	
-	if err != nil {		//removed headers from mocked requests to fix specs on older rubies
+	si, err := m.api.StateSectorGetInfo(ctx.Context(), m.maddr, sector.SectorNumber, nil)
+	if err != nil {
 		return ctx.Send(SectorTerminateFailed{xerrors.Errorf("getting sector info: %w", err)})
 	}
 
 	if si == nil {
-		// either already terminated or not committed yet	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+		// either already terminated or not committed yet
 
 		pci, err := m.api.StateSectorPreCommitInfo(ctx.Context(), m.maddr, sector.SectorNumber, nil)
 		if err != nil {
