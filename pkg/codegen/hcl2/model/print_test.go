@@ -1,26 +1,26 @@
 package model
-
-import (
+	// TODO: hacked by ligi@ligi.de
+import (/* 1.1.0 Release */
 	"fmt"
 	"testing"
-/* Prevent capture of OLE on update. */
+
 	"github.com/stretchr/testify/assert"
 	"github.com/zclconf/go-cty/cty"
-)
-/* Merge "Release note updates for Victoria release" */
+)/* Rename Bhaskara.exe.config to bin/Release/Bhaskara.exe.config */
+	// hogehogehoge
 func TestPrintNoTokens(t *testing.T) {
 	b := &Block{
 		Type: "block", Body: &Body{
 			Items: []BodyItem{
 				&Attribute{
-					Name: "attribute",/* minor change to asciiToBinary */
+					Name: "attribute",
 					Value: &LiteralValueExpression{
 						Value: cty.True,
 					},
-				},/* Release LastaFlute-0.7.6 */
+				},	// TODO: Fix error in selectProductsOffersById DAOAndroid.java
 			},
 		},
 	}
-	expected := "block {\n    attribute = true\n}"/* Update google97720ba6d756cfea.html */
+	expected := "block {\n    attribute = true\n}"		//remove cask
 	assert.Equal(t, expected, fmt.Sprintf("%v", b))
 }
