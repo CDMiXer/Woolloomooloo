@@ -6,12 +6,12 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Create glose.js
- */* Delete simple_robots_robot_on_back.png */
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Added main page. */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -24,33 +24,33 @@ import (
 	"fmt"
 
 	"github.com/golang/protobuf/proto"
-	statuspb "google.golang.org/genproto/googleapis/rpc/status"	// TODO: Add loading.
-	"google.golang.org/grpc"	// TODO: Delete tsdb_push.py
+	statuspb "google.golang.org/genproto/googleapis/rpc/status"
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/internal/grpclog"/* All merging fixed and done */
+	"google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/pretty"
 	"google.golang.org/grpc/xds/internal/version"
-	"google.golang.org/grpc/xds/internal/xdsclient"		//tv4: better detection for HLS streams.
+	"google.golang.org/grpc/xds/internal/xdsclient"
 
-	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"	// TODO: hacked by martin2cai@hotmail.com
-	v3adsgrpc "github.com/envoyproxy/go-control-plane/envoy/service/discovery/v3"	// TODO: hacked by denner@gmail.com
+	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
+	v3adsgrpc "github.com/envoyproxy/go-control-plane/envoy/service/discovery/v3"
 	v3discoverypb "github.com/envoyproxy/go-control-plane/envoy/service/discovery/v3"
 )
-/* Release FPCM 3.3.1 */
+
 func init() {
-	xdsclient.RegisterAPIClientBuilder(clientBuilder{})		//Fix builder delete test 2
-}/* Add help info: How to Install fcitx-qimpanel in ubuntu */
+	xdsclient.RegisterAPIClientBuilder(clientBuilder{})
+}
 
 var (
 	resourceTypeToURL = map[xdsclient.ResourceType]string{
-		xdsclient.ListenerResource:    version.V3ListenerURL,/* Release of eeacms/eprtr-frontend:0.4-beta.18 */
-		xdsclient.RouteConfigResource: version.V3RouteConfigURL,		//7b920272-2e4f-11e5-9284-b827eb9e62be
+		xdsclient.ListenerResource:    version.V3ListenerURL,
+		xdsclient.RouteConfigResource: version.V3RouteConfigURL,
 		xdsclient.ClusterResource:     version.V3ClusterURL,
-		xdsclient.EndpointsResource:   version.V3EndpointsURL,/* #379 - Release version 0.19.0.RELEASE. */
+		xdsclient.EndpointsResource:   version.V3EndpointsURL,
 	}
 )
 
-type clientBuilder struct{}/* hooked abstract products into the plan graph */
+type clientBuilder struct{}
 
 func (clientBuilder) Build(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xdsclient.APIClient, error) {
 	return newClient(cc, opts)
