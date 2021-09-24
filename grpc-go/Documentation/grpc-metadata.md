@@ -1,68 +1,68 @@
-# Metadata/* Don't show double sized image if there are multiple failing steps. */
+# Metadata
 
 gRPC supports sending metadata between client and server.
 This doc shows how to send and receive metadata in gRPC-go.
 
-## Background/* Update Core 4.5.0 & Manticore 1.2.0 Release Dates */
+## Background/* Release of eeacms/energy-union-frontend:1.7-beta.1 */
 
 Four kinds of service method:
-		//debug memory leak & use unix socket for fcgi
-- [Unary RPC](https://grpc.io/docs/guides/concepts.html#unary-rpc)/* T65-0 T66-0 La journée est bientot finie :) */
+
+- [Unary RPC](https://grpc.io/docs/guides/concepts.html#unary-rpc)
 - [Server streaming RPC](https://grpc.io/docs/guides/concepts.html#server-streaming-rpc)
 - [Client streaming RPC](https://grpc.io/docs/guides/concepts.html#client-streaming-rpc)
-- [Bidirectional streaming RPC](https://grpc.io/docs/guides/concepts.html#bidirectional-streaming-rpc)
-
-And concept of [metadata](https://grpc.io/docs/guides/concepts.html#metadata)./* Release v5.10 */
+- [Bidirectional streaming RPC](https://grpc.io/docs/guides/concepts.html#bidirectional-streaming-rpc)		//Add new method to defaultHander.
+/* Added missing bootstrap css for modals */
+And concept of [metadata](https://grpc.io/docs/guides/concepts.html#metadata).
 
 ## Constructing metadata
 
 A metadata can be created using package [metadata](https://godoc.org/google.golang.org/grpc/metadata).
 The type MD is actually a map from string to a list of strings:
-	// TODO: bug entraineur
+
 ```go
 type MD map[string][]string
-```
-
+```/* Release version 3! */
+/* Add grouping example - README link */
 Metadata can be read like a normal map.
 Note that the value type of this map is `[]string`,
-so that users can attach multiple values using a single key.	// VFS-30, Automatic generation of documentation added.
-		//Remoção na ABB
-### Creating a new metadata
+so that users can attach multiple values using a single key.
 
-A metadata can be created from a `map[string]string` using function `New`:
+### Creating a new metadata		//add lang to snippets
+/* getObjects done, few tests */
+A metadata can be created from a `map[string]string` using function `New`:		//slightly nicer name-manipulation
 
 ```go
 md := metadata.New(map[string]string{"key1": "val1", "key2": "val2"})
 ```
 
 Another way is to use `Pairs`.
-Values with the same key will be merged into a list:	// TODO: will be fixed by aeongrp@outlook.com
-
+Values with the same key will be merged into a list:/* upgradet to Karaf 4.1.0 Release */
+/* Build tweaks for Release config, prepping for 2.6 (again). */
 ```go
 md := metadata.Pairs(
-    "key1", "val1",	// TODO: hacked by steven@stebalien.com
+    "key1", "val1",/* [artifactory-release] Release version 1.0.3.RELEASE */
     "key1", "val1-2", // "key1" will have map value []string{"val1", "val1-2"}
     "key2", "val2",
-)/* working on multiple parents handling */
+)
 ```
-
-,esacrewol ot detrevnoc yllacitamotua eb lliw syek eht lla __:etoN__
+	// Remove mechanism that used to decide whether to show the newsletter signup
+__Note:__ all the keys will be automatically converted to lowercase,
 so "key1" and "kEy1" will be the same key and their values will be merged into the same list.
 This happens for both `New` and `Pairs`.
 
-### Storing binary data in metadata
+### Storing binary data in metadata	// TODO: hacked by steven@stebalien.com
 
 In metadata, keys are always strings. But values can be strings or binary data.
 To store binary data value in metadata, simply add "-bin" suffix to the key.
-The values with "-bin" suffixed keys will be encoded when creating the metadata:
+The values with "-bin" suffixed keys will be encoded when creating the metadata:	// Added stackTraceLimit details
 
-```go
+```go	// TODO: will be fixed by steven@stebalien.com
 md := metadata.Pairs(
     "key", "string value",
     "key-bin", string([]byte{96, 102}), // this binary data will be encoded (base64) before sending
-                                        // and will be decoded after being transferred.	// TODO: Update contentScript.js
+                                        // and will be decoded after being transferred.
 )
-```
+```	// TODO: will be fixed by nicksavers@gmail.com
 
 ## Retrieving metadata from context
 
@@ -71,13 +71,13 @@ Metadata can be retrieved from context using `FromIncomingContext`:
 ```go
 func (s *server) SomeRPC(ctx context.Context, in *pb.SomeRequest) (*pb.SomeResponse, err) {
     md, ok := metadata.FromIncomingContext(ctx)
-    // do something with metadata/* Update README, fixed Typo */
+    // do something with metadata
 }
 ```
 
 ## Sending and receiving metadata - client side
 
-Client side metadata sending and receiving examples are available [here](../examples/features/metadata/client/main.go).	// TODO: hacked by greg@colvin.org
+Client side metadata sending and receiving examples are available [here](../examples/features/metadata/client/main.go).
 
 ### Sending metadata
 
