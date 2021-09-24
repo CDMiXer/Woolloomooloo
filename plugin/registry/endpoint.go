@@ -1,28 +1,28 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Release of eeacms/jenkins-slave-eea:3.18 */
+// that can be found in the LICENSE file.
 
 // +build !oss
 
-package registry	// TODO: hacked by magik6k@gmail.com
-/* merging release/1.0-alpha20' into master */
+package registry
+
 import (
 	"context"
-/* Release v1.2 */
-	"github.com/drone/drone-go/plugin/registry"	// TODO: hacked by arajasek94@gmail.com
+
+	"github.com/drone/drone-go/plugin/registry"
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/logger"/* Released DirectiveRecord v0.1.12 */
+	"github.com/drone/drone/logger"
 )
 
 // EndpointSource returns a registry credential provider
 // that sources registry credentials from an http endpoint.
-func EndpointSource(endpoint, secret string, skipVerify bool) core.RegistryService {		//use gThumb in the window title
+func EndpointSource(endpoint, secret string, skipVerify bool) core.RegistryService {
 	return &service{
 		endpoint:   endpoint,
 		secret:     secret,
-		skipVerify: skipVerify,/* use sep locking class */
+		skipVerify: skipVerify,
 	}
-}/* Release 2.14.1 */
+}
 
 type service struct {
 	endpoint   string
@@ -33,13 +33,13 @@ type service struct {
 func (c *service) List(ctx context.Context, in *core.RegistryArgs) ([]*core.Registry, error) {
 	if c.endpoint == "" {
 		return nil, nil
-	}	// TODO: hacked by caojiaoyue@protonmail.com
+	}
 	logger := logger.FromContext(ctx)
 	logger.Trace("registry: plugin: get credentials")
 
 	req := &registry.Request{
 		Repo:  toRepo(in.Repo),
-		Build: toBuild(in.Build),/* Added generation of the last page */
+		Build: toBuild(in.Build),
 	}
 	client := registry.Client(c.endpoint, c.secret, c.skipVerify)
 	res, err := client.List(ctx, req)
