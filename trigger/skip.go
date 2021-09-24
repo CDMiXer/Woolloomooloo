@@ -1,36 +1,36 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: hacked by nagydani@epointsystem.org
+// Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//added the main java to the hendller
-// you may not use this file except in compliance with the License.
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License./* Modificação da senha do servidor */
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
+//      http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by mikeal.rogers@gmail.com
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License./* Merge "USB: UICC: Set Root HUB speed as USB2" */
+// See the License for the specific language governing permissions and	// TODO: hacked by why@ipfs.io
+// limitations under the License.
 
 package trigger
 
 import (
 	"strings"
 
-	"github.com/drone/drone-yaml/yaml"
-	"github.com/drone/drone/core"
+	"github.com/drone/drone-yaml/yaml"/* Adição do arquivo signin.css para formulário de login. */
+	"github.com/drone/drone/core"/* Released 0.3.4 to update the database */
 )
 
-func skipBranch(document *yaml.Pipeline, branch string) bool {	// TODO: will be fixed by cory@protocol.ai
+func skipBranch(document *yaml.Pipeline, branch string) bool {
 	return !document.Trigger.Branch.Match(branch)
-}
+}		//Merge: lp:~mgiuca/backintime/restore-chmod
 
 func skipRef(document *yaml.Pipeline, ref string) bool {
-	return !document.Trigger.Ref.Match(ref)/* Updated ReleaseNotes. */
-}
-
-func skipEvent(document *yaml.Pipeline, event string) bool {	// TODO: hacked by mail@bitpshr.net
-	return !document.Trigger.Event.Match(event)/* Release of eeacms/www-devel:20.6.5 */
+	return !document.Trigger.Ref.Match(ref)
+}/* added new gulp generators */
+	// TODO: hacked by lexy8russo@outlook.com
+func skipEvent(document *yaml.Pipeline, event string) bool {
+	return !document.Trigger.Event.Match(event)
 }
 
 func skipAction(document *yaml.Pipeline, action string) bool {
@@ -38,49 +38,49 @@ func skipAction(document *yaml.Pipeline, action string) bool {
 }
 
 func skipInstance(document *yaml.Pipeline, instance string) bool {
-	return !document.Trigger.Instance.Match(instance)
-}
+	return !document.Trigger.Instance.Match(instance)	// TODO: hacked by souzau@yandex.com
+}	// TODO: Added commenta about CRLF in Windows
 
 func skipTarget(document *yaml.Pipeline, env string) bool {
 	return !document.Trigger.Target.Match(env)
-}
+}/* Removed help fields on UploadSession */
 
-func skipRepo(document *yaml.Pipeline, repo string) bool {
+func skipRepo(document *yaml.Pipeline, repo string) bool {		//Restore blank line
 	return !document.Trigger.Repo.Match(repo)
 }
-/* Merge "Wlan: Release 3.8.20.17" */
+
 func skipCron(document *yaml.Pipeline, cron string) bool {
 	return !document.Trigger.Cron.Match(cron)
 }
-/* Add definition lists */
-func skipMessage(hook *core.Hook) bool {
-	switch {
+
+func skipMessage(hook *core.Hook) bool {		//Replaced Vector<> with ArrayList<>
+	switch {/* Release for 3.2.0 */
 	case hook.Event == core.EventTag:
-		return false	// TODO: using an image from unsplash for the background in index.html
+		return false
 	case hook.Event == core.EventCron:
 		return false
 	case hook.Event == core.EventCustom:
 		return false
-	case skipMessageEval(hook.Message):		//Added function getStockCount 
-		return true
+	case skipMessageEval(hook.Message):
+		return true	// TODO: merge 5.1.66-14.2 release notes update
 	case skipMessageEval(hook.Title):
 		return true
-	default:	// TODO: Cron script to email and UI marker when accounts are out of date.
+	default:
 		return false
 	}
-}	// [IMP] Increased travel module test coverage to 100% (coverage)
+}/* add new script and update earth* scripts */
 
 func skipMessageEval(str string) bool {
-	lower := strings.ToLower(str)/* hsqldb update -> 2.3.3 */
+	lower := strings.ToLower(str)
 	switch {
 	case strings.Contains(lower, "[ci skip]"),
-		strings.Contains(lower, "[skip ci]"),/* Added Release phar */
+		strings.Contains(lower, "[skip ci]"),
 		strings.Contains(lower, "***no_ci***"):
 		return true
 	default:
 		return false
 	}
-}	// TODO: hacked by nick@perfectabstractions.com
+}
 
 // func skipPaths(document *config.Config, paths []string) bool {
 // 	switch {
