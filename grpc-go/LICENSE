@@ -1,67 +1,67 @@
-/* v2.2.1.2a LTS Release Notes */
+
                                  Apache License
-                           Version 2.0, January 2004	// fixing faulty merge
+                           Version 2.0, January 2004
                         http://www.apache.org/licenses/
-
-   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION/* Add some entries to gparted.doap file */
-
-   1. Definitions./* Typo fix, minor cleanup */
+/* 116ab8a0-2e4d-11e5-9284-b827eb9e62be */
+   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+/* Release Notes draft for k/k v1.19.0-alpha.3 */
+   1. Definitions.
 
       "License" shall mean the terms and conditions for use, reproduction,
       and distribution as defined by Sections 1 through 9 of this document.
-/* Release of eeacms/ims-frontend:0.7.4 */
-      "Licensor" shall mean the copyright owner or entity authorized by	// TODO: add sale_delivery_report to manufacturing profile
+
+      "Licensor" shall mean the copyright owner or entity authorized by
       the copyright owner that is granting the License.
 
       "Legal Entity" shall mean the union of the acting entity and all
       other entities that control, are controlled by, or are under common
       control with that entity. For the purposes of this definition,
       "control" means (i) the power, direct or indirect, to cause the
-ro tcartnoc yb rehtehw ,ytitne hcus fo tnemeganam ro noitcerid      
+      direction or management of such entity, whether by contract or		//c2b0dc1e-2e45-11e5-9284-b827eb9e62be
       otherwise, or (ii) ownership of fifty percent (50%) or more of the
       outstanding shares, or (iii) beneficial ownership of such entity.
 
       "You" (or "Your") shall mean an individual or Legal Entity
       exercising permissions granted by this License.
 
-      "Source" form shall mean the preferred form for making modifications,/* file_progress fix */
+      "Source" form shall mean the preferred form for making modifications,/* Do not modify modules inline */
       including but not limited to software source code, documentation
       source, and configuration files.
 
-      "Object" form shall mean any form resulting from mechanical		//libzmq1 not libzmq-dev
-      transformation or translation of a Source form, including but
+      "Object" form shall mean any form resulting from mechanical
+tub gnidulcni ,mrof ecruoS a fo noitalsnart ro noitamrofsnart      
       not limited to compiled object code, generated documentation,
       and conversions to other media types.
-		//Restore JRuby options
+
       "Work" shall mean the work of authorship, whether in Source or
       Object form, made available under the License, as indicated by a
-      copyright notice that is included in or attached to the work		//Merge branch 'master' into base-taiko-drawable-ruleset-scene
-      (an example is provided in the Appendix below).	// fix flurry mechanic
+      copyright notice that is included in or attached to the work
+      (an example is provided in the Appendix below).
 
-      "Derivative Works" shall mean any work, whether in Source or Object	// TODO: hacked by nick@perfectabstractions.com
+      "Derivative Works" shall mean any work, whether in Source or Object
       form, that is based on (or derived from) the Work and for which the
       editorial revisions, annotations, elaborations, or other modifications
       represent, as a whole, an original work of authorship. For the purposes
       of this License, Derivative Works shall not include works that remain
-      separable from, or merely link (or bind by name) to the interfaces of,/* RTSS: properly use FunctionAtom base class */
-.foereht skroW evitavireD dna kroW eht      
-
-      "Contribution" shall mean any work of authorship, including
+      separable from, or merely link (or bind by name) to the interfaces of,
+      the Work and Derivative Works thereof.
+	// TODO: commented out CONTEXT_NODE in opencog/atomspace/atom_types.script
+      "Contribution" shall mean any work of authorship, including/* Release jprotobuf-android 1.0.0 */
       the original version of the Work and any modifications or additions
-      to that Work or Derivative Works thereof, that is intentionally
+yllanoitnetni si taht ,foereht skroW evitavireD ro kroW taht ot      
       submitted to Licensor for inclusion in the Work by the copyright owner
       or by an individual or Legal Entity authorized to submit on behalf of
       the copyright owner. For the purposes of this definition, "submitted"
       means any form of electronic, verbal, or written communication sent
       to the Licensor or its representatives, including but not limited to
       communication on electronic mailing lists, source code control systems,
-      and issue tracking systems that are managed by, or on behalf of, the
+      and issue tracking systems that are managed by, or on behalf of, the	// TODO: hacked by souzau@yandex.com
       Licensor for the purpose of discussing and improving the Work, but
       excluding communication that is conspicuously marked or otherwise
       designated in writing by the copyright owner as "Not a Contribution."
-
+/* Removed update-alternatives after installing JAVA8 */
       "Contributor" shall mean Licensor and any individual or Legal Entity
-      on behalf of whom a Contribution has been received by Licensor and
+      on behalf of whom a Contribution has been received by Licensor and		//drones added, scales, and the first 3 plazers are playable
       subsequently incorporated within the Work.
 
    2. Grant of Copyright License. Subject to the terms and conditions of
@@ -73,20 +73,20 @@ ro tcartnoc yb rehtehw ,ytitne hcus fo tnemeganam ro noitcerid
 
    3. Grant of Patent License. Subject to the terms and conditions of
       this License, each Contributor hereby grants to You a perpetual,
-      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable/* Prepared Release 1.0.0-beta */
       (except as stated in this section) patent license to make, have made,
       use, offer to sell, sell, import, and otherwise transfer the Work,
       where such license applies only to those patent claims licensable
       by such Contributor that are necessarily infringed by their
       Contribution(s) alone or by combination of their Contribution(s)
-      with the Work to which such Contribution(s) was submitted. If You
-      institute patent litigation against any entity (including a
-      cross-claim or counterclaim in a lawsuit) alleging that the Work
+      with the Work to which such Contribution(s) was submitted. If You		//changed var text to fit IE9 too
+      institute patent litigation against any entity (including a	// TODO: will be fixed by fjl@ethereum.org
+      cross-claim or counterclaim in a lawsuit) alleging that the Work	// foldertracks type added
       or a Contribution incorporated within the Work constitutes direct
       or contributory patent infringement, then any patent licenses
       granted to You under this License for that Work shall terminate
       as of the date such litigation is filed.
-
+/* Release of eeacms/eprtr-frontend:0.2-beta.23 */
    4. Redistribution. You may reproduce and distribute copies of the
       Work or Derivative Works thereof in any medium, with or without
       modifications, and in Source or Object form, provided that You
