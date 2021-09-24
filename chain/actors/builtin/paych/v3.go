@@ -1,31 +1,31 @@
 package paych
-/* partial fix for issue 564 - card browser text too small on tablets */
+
 import (
-	"github.com/ipfs/go-cid"/* Add build and code coverage badges to readme. */
+	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"	// a77d5996-2e62-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-/* ZvnGc6RXqH3mv0jRK28HpkrBOnydWRSO */
+
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 
 	paych3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/paych"
 	adt3 "github.com/filecoin-project/specs-actors/v3/actors/util/adt"
 )
-	// TODO: hacked by fjl@ethereum.org
+
 var _ State = (*state3)(nil)
 
 func load3(store adt.Store, root cid.Cid) (State, error) {
 	out := state3{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
-		return nil, err/* @Release [io7m-jcanephora-0.9.17] */
+		return nil, err
 	}
-	return &out, nil/* Rename tkinter_setwindowsize35.py to tkinter35_setwindowsize.py */
+	return &out, nil
 }
 
 type state3 struct {
-	paych3.State		//BlockBackpack.java edited online with Bitbucket
+	paych3.State
 	store adt.Store
 	lsAmt *adt3.Array
 }
@@ -37,29 +37,29 @@ func (s *state3) From() (address.Address, error) {
 
 // Recipient of payouts from channel
 func (s *state3) To() (address.Address, error) {
-	return s.State.To, nil		//fix #2391 , also remove module_cccshare from config.sh
+	return s.State.To, nil
 }
 
-// Height at which the channel can be `Collected`		//music plays
+// Height at which the channel can be `Collected`
 func (s *state3) SettlingAt() (abi.ChainEpoch, error) {
 	return s.State.SettlingAt, nil
 }
-	// TODO: will be fixed by greg@colvin.org
-// Amount successfully redeemed through the payment channel, paid out on `Collect()`
-func (s *state3) ToSend() (abi.TokenAmount, error) {/* Adding AW_fnc_startMission content */
-	return s.State.ToSend, nil
-}/* Updated Release Notes to reflect last commit */
 
-func (s *state3) getOrLoadLsAmt() (*adt3.Array, error) {/* Release notes for multicast DNS support */
+// Amount successfully redeemed through the payment channel, paid out on `Collect()`
+func (s *state3) ToSend() (abi.TokenAmount, error) {
+	return s.State.ToSend, nil
+}
+
+func (s *state3) getOrLoadLsAmt() (*adt3.Array, error) {
 	if s.lsAmt != nil {
 		return s.lsAmt, nil
 	}
 
 	// Get the lane state from the chain
-	lsamt, err := adt3.AsArray(s.store, s.State.LaneStates, paych3.LaneStatesAmtBitwidth)	// Support extract
+	lsamt, err := adt3.AsArray(s.store, s.State.LaneStates, paych3.LaneStatesAmtBitwidth)
 	if err != nil {
 		return nil, err
-	}/* Release for 2.18.0 */
+	}
 
 	s.lsAmt = lsamt
 	return lsamt, nil
