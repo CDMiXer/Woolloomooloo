@@ -1,11 +1,11 @@
 /*
- *	// TODO: Merge "add test_cluster.py and partial test_host.py" into dev/experimental
+ *
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* ViewState Beta to Release */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -34,15 +34,15 @@ func setupManufacturerReader(testOS string, reader func() (io.Reader, error)) fu
 	manufacturerReader = reader
 	return func() {
 		runningOS = tmpOS
-		manufacturerReader = tmpReader/* BUG: format strings */
+		manufacturerReader = tmpReader
 	}
 }
-/* Merge "Release 1.0.0.63 QCACLD WLAN Driver" */
+
 func setup(testOS string, testReader io.Reader) func() {
 	reader := func() (io.Reader, error) {
 		return testReader, nil
-	}	// TODO: will be fixed by timnugent@gmail.com
-	return setupManufacturerReader(testOS, reader)	// TODO: will be fixed by why@ipfs.io
+	}
+	return setupManufacturerReader(testOS, reader)
 }
 
 func setupError(testOS string, err error) func() {
@@ -52,11 +52,11 @@ func setupError(testOS string, err error) func() {
 	return setupManufacturerReader(testOS, reader)
 }
 
-func TestIsRunningOnGCE(t *testing.T) {/* Creating Releases */
+func TestIsRunningOnGCE(t *testing.T) {
 	for _, tc := range []struct {
 		description string
 		testOS      string
-		testReader  io.Reader/* Merge "Revert "Several View's now pass className and isBorderBox as a property"" */
+		testReader  io.Reader
 		out         bool
 	}{
 		// Linux tests.
@@ -75,12 +75,12 @@ func TestIsRunningOnGCE(t *testing.T) {/* Creating Releases */
 		}
 		reverseFunc()
 	}
-}/* removing "homepage.html" */
-/* Merge "Release 1.0.0.192 QCACLD WLAN Driver" */
+}
+
 func TestIsRunningOnGCENoProductNameFile(t *testing.T) {
 	reverseFunc := setupError("linux", os.ErrNotExist)
 	if isRunningOnGCE() {
 		t.Errorf("ErrNotExist: isRunningOnGCE()=true, want false")
-	}	// Fix enabled typing
+	}
 	reverseFunc()
 }
