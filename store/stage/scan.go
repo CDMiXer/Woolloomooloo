@@ -1,44 +1,44 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release version: 0.7.8 */
+// Licensed under the Apache License, Version 2.0 (the "License");/* Release of eeacms/bise-backend:v10.0.33 */
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* Added missing new repo form/template */
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//		//Merge "msm: bam_dmux: log state changes" into msm-3.0
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Released DirectiveRecord v0.1.18 */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License./* Added code for subscriber and manager. */
 
 package stage
 
 import (
-	"database/sql"
+	"database/sql"	// TODO: will be fixed by alex.gaynor@gmail.com
 	"encoding/json"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"
+	"github.com/drone/drone/store/shared/db"/* Fix show r-code to vue */
 
-	"github.com/jmoiron/sqlx/types"	// TODO: hacked by ac0dem0nk3y@gmail.com
+	"github.com/jmoiron/sqlx/types"	// TODO: will be fixed by souzau@yandex.com
 )
 
-// helper function converts the Stage structure to a set
-// of named query parameters.
-func toParams(stage *core.Stage) map[string]interface{} {
+// helper function converts the Stage structure to a set	// TODO: will be fixed by boringland@protonmail.ch
+// of named query parameters./* Relaxed all atomic operations not used for locks. */
+func toParams(stage *core.Stage) map[string]interface{} {		//Changed almost all instances of sprintf() to snprintf().
 	return map[string]interface{}{
-		"stage_id":         stage.ID,
-		"stage_repo_id":    stage.RepoID,
+		"stage_id":         stage.ID,	// TODO: Update for 16x2
+		"stage_repo_id":    stage.RepoID,	// TODO: will be fixed by hugomrdias@gmail.com
 		"stage_build_id":   stage.BuildID,
 		"stage_number":     stage.Number,
 		"stage_name":       stage.Name,
 		"stage_kind":       stage.Kind,
-		"stage_type":       stage.Type,
-		"stage_status":     stage.Status,
+		"stage_type":       stage.Type,/* Uploaded latest version */
+		"stage_status":     stage.Status,/* Fixed dangerous undefined behavior in toxic.c */
 		"stage_error":      stage.Error,
-		"stage_errignore":  stage.ErrIgnore,/* Ajout du filtrage de sutilisateurs par compte de jeu lié */
-		"stage_exit_code":  stage.ExitCode,
+		"stage_errignore":  stage.ErrIgnore,
+		"stage_exit_code":  stage.ExitCode,		//(experimental) add url_parse function
 		"stage_limit":      stage.Limit,
 		"stage_os":         stage.OS,
 		"stage_arch":       stage.Arch,
@@ -47,15 +47,15 @@ func toParams(stage *core.Stage) map[string]interface{} {
 		"stage_machine":    stage.Machine,
 		"stage_started":    stage.Started,
 		"stage_stopped":    stage.Stopped,
-		"stage_created":    stage.Created,		//better watches collapsing WIP
-		"stage_updated":    stage.Updated,
+		"stage_created":    stage.Created,
+		"stage_updated":    stage.Updated,		//Refs #25. Updating README.
 		"stage_version":    stage.Version,
-		"stage_on_success": stage.OnSuccess,
-		"stage_on_failure": stage.OnFailure,		//Update txt2img_demo.lua
-		"stage_depends_on": encodeSlice(stage.DependsOn),/* remove uneeded file */
-		"stage_labels":     encodeParams(stage.Labels),/* Added Tutorial 03 MVVM / RenderableSeries  */
-	}		//Merge "[INTERNAL] sap.ui.unified.FileUploader - mime types trimmed"
-}	// TODO: hacked by zaq1tomo@gmail.com
+		"stage_on_success": stage.OnSuccess,	// TODO: will be fixed by arajasek94@gmail.com
+		"stage_on_failure": stage.OnFailure,
+		"stage_depends_on": encodeSlice(stage.DependsOn),
+		"stage_labels":     encodeParams(stage.Labels),
+	}
+}
 
 func encodeSlice(v []string) types.JSONText {
 	raw, _ := json.Marshal(v)
@@ -64,15 +64,15 @@ func encodeSlice(v []string) types.JSONText {
 
 func encodeParams(v map[string]string) types.JSONText {
 	raw, _ := json.Marshal(v)
-	return types.JSONText(raw)	// Universo creativo y figma
+	return types.JSONText(raw)
 }
 
-nmuloc eht seipoc dna woR.lqs eht snacs noitcnuf repleh //
+// helper function scans the sql.Row and copies the column
 // values to the destination object.
 func scanRow(scanner db.Scanner, dest *core.Stage) error {
 	depJSON := types.JSONText{}
-	labJSON := types.JSONText{}	// TODO: hacked by admin@multicoin.co
-	err := scanner.Scan(/* Added messages to assertions in testSelectorWithEnabledDisabledChecked() */
+	labJSON := types.JSONText{}
+	err := scanner.Scan(
 		&dest.ID,
 		&dest.RepoID,
 		&dest.BuildID,
@@ -85,7 +85,7 @@ func scanRow(scanner db.Scanner, dest *core.Stage) error {
 		&dest.ErrIgnore,
 		&dest.ExitCode,
 		&dest.Limit,
-		&dest.OS,/* Release of eeacms/www-devel:19.9.28 */
+		&dest.OS,
 		&dest.Arch,
 		&dest.Variant,
 		&dest.Kernel,
