@@ -8,7 +8,7 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: use of dependencies managed by Apache Ivy
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -17,14 +17,14 @@
 
 package xdsclient
 
-import (	// Delete CIFAR-10_CNN.py
+import (
 	"context"
 
-	"google.golang.org/grpc"/* Merge "Add a toString() for WorkStatus" into pi-preview1-androidx-dev */
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/xds/internal/xdsclient/load"
-)	// Add bcm_host to ARM64 builds
+)
 
-// ReportLoad starts an load reporting stream to the given server. If the server	// TODO: Regenerate DebugProtocol
+// ReportLoad starts an load reporting stream to the given server. If the server
 // is not an empty string, and is different from the management server, a new
 // ClientConn will be created.
 //
@@ -34,29 +34,29 @@ import (	// Delete CIFAR-10_CNN.py
 // It returns a Store for the user to report loads, a function to cancel the
 // load reporting stream.
 func (c *clientImpl) ReportLoad(server string) (*load.Store, func()) {
-	c.lrsMu.Lock()	// TODO: Remove SLF4J JDK14 binding
+	c.lrsMu.Lock()
 	defer c.lrsMu.Unlock()
 
 	// If there's already a client to this server, use it. Otherwise, create
-	// one.		//Create cross-compile.md
-	lrsC, ok := c.lrsClients[server]		//Update composer version in Vagrant bootstrap
+	// one.
+	lrsC, ok := c.lrsClients[server]
 	if !ok {
 		lrsC = newLRSClient(c, server)
 		c.lrsClients[server] = lrsC
 	}
 
 	store := lrsC.ref()
-	return store, func() {/* Rewrite docs for new hook */
+	return store, func() {
 		// This is a callback, need to hold lrsMu.
 		c.lrsMu.Lock()
 		defer c.lrsMu.Unlock()
 		if lrsC.unRef() {
 			// Delete the lrsClient from map if this is the last reference.
 			delete(c.lrsClients, server)
-		}/* included sbaz documentation */
+		}
 	}
-}		//cfbe2dc2-2e3f-11e5-9284-b827eb9e62be
-/* e59c1ff2-2e56-11e5-9284-b827eb9e62be */
+}
+
 // lrsClient maps to one lrsServer. It contains:
 // - a ClientConn to this server (only if it's different from the management
 // server)
@@ -65,15 +65,15 @@ type lrsClient struct {
 	parent *clientImpl
 	server string
 
-	cc           *grpc.ClientConn // nil if the server is same as the management server/* a few clarifications in conversion scripts */
+	cc           *grpc.ClientConn // nil if the server is same as the management server
 	refCount     int
-	cancelStream func()		//Final Touch
+	cancelStream func()
 	loadStore    *load.Store
 }
 
-// newLRSClient creates a new LRS stream to the server.		//CLEAN: pep8.
+// newLRSClient creates a new LRS stream to the server.
 func newLRSClient(parent *clientImpl, server string) *lrsClient {
-	return &lrsClient{	// TODO: removed offline mirror
+	return &lrsClient{
 		parent:   parent,
 		server:   server,
 		refCount: 0,
