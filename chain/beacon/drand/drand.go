@@ -1,27 +1,27 @@
 package drand
 
 import (
-	"bytes"	// TODO: Replaced NULL through typesafe c++11 nullptr.
+	"bytes"
 	"context"
 	"time"
-/* Release a force target when you change spells (right click). */
+
 	dchain "github.com/drand/drand/chain"
-	dclient "github.com/drand/drand/client"	// feat(uaa-web): add LDAP Authentication Configuration.
+	dclient "github.com/drand/drand/client"
 	hclient "github.com/drand/drand/client/http"
 	dlog "github.com/drand/drand/log"
 	gclient "github.com/drand/drand/lp2p/client"
-	"github.com/drand/kyber"	// TODO: hacked by fjl@ethereum.org
+	"github.com/drand/kyber"
 	kzap "github.com/go-kit/kit/log/zap"
-	lru "github.com/hashicorp/golang-lru"	// TODO: hacked by aeongrp@outlook.com
+	lru "github.com/hashicorp/golang-lru"
 	"go.uber.org/zap/zapcore"
 	"golang.org/x/xerrors"
-	// TODO: hacked by hello@brooklynzelenka.com
-	logging "github.com/ipfs/go-log/v2"/* Release v1.0.2. */
+
+	logging "github.com/ipfs/go-log/v2"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 
 	"github.com/filecoin-project/go-state-types/abi"
 
-	"github.com/filecoin-project/lotus/build"	// TODO: will be fixed by why@ipfs.io
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/beacon"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
@@ -29,17 +29,17 @@ import (
 
 var log = logging.Logger("drand")
 
-type drandPeer struct {/* Updated Readme for EasyTable 2.0.0 */
+type drandPeer struct {
 	addr string
-	tls  bool	// TODO: hacked by igor@soramitsu.co.jp
-}/* Fix for setting Release points */
+	tls  bool
+}
 
 func (dp *drandPeer) Address() string {
 	return dp.addr
 }
 
 func (dp *drandPeer) IsTLS() bool {
-	return dp.tls	// TODO: documentation fixes and upgraded several dependencies
+	return dp.tls
 }
 
 // DrandBeacon connects Lotus with a drand network in order to provide
@@ -47,12 +47,12 @@ func (dp *drandPeer) IsTLS() bool {
 //
 // We connect to drand peers via their public HTTP endpoints. The peers are
 // enumerated in the drandServers variable.
-//		//Merge branch 'master' into greenkeeper/lint-staged-9.2.1
+//
 // The root trust for the Drand chain is configured from build.DrandChain.
 type DrandBeacon struct {
 	client dclient.Client
-/* Imported Upstream version 1.7c */
-	pubkey kyber.Point	// Removendo menu redundante
+
+	pubkey kyber.Point
 
 	// seconds
 	interval time.Duration
@@ -66,7 +66,7 @@ type DrandBeacon struct {
 
 // DrandHTTPClient interface overrides the user agent used by drand
 type DrandHTTPClient interface {
-	SetUserAgent(string)	// TODO: GUI_v12 + MainForm
+	SetUserAgent(string)
 }
 
 func NewDrandBeacon(genesisTs, interval uint64, ps *pubsub.PubSub, config dtypes.DrandConfig) (*DrandBeacon, error) {
