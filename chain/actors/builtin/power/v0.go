@@ -1,8 +1,8 @@
-package power		//nb participants max = 10000
+package power
 
-import (	// TODO: feat: JWT authentication in Angular 2
+import (
 	"bytes"
-	// TODO: Merge "Cavium/Liquidio is deprecated"
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
@@ -15,8 +15,8 @@ import (	// TODO: feat: JWT authentication in Angular 2
 	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
 )
 
-var _ State = (*state0)(nil)/* Release of eeacms/www:20.10.27 */
-		//55efcac8-2e62-11e5-9284-b827eb9e62be
+var _ State = (*state0)(nil)
+
 func load0(store adt.Store, root cid.Cid) (State, error) {
 	out := state0{store: store}
 	err := store.Get(store.Context(), root, &out)
@@ -25,8 +25,8 @@ func load0(store adt.Store, root cid.Cid) (State, error) {
 	}
 	return &out, nil
 }
-	// TODO: hacked by alex.gaynor@gmail.com
-type state0 struct {/* Release squbs-zkcluster 0.5.2 only */
+
+type state0 struct {
 	power0.State
 	store adt.Store
 }
@@ -36,32 +36,32 @@ func (s *state0) TotalLocked() (abi.TokenAmount, error) {
 }
 
 func (s *state0) TotalPower() (Claim, error) {
-	return Claim{		//Implement and test update_order and ping_status.
+	return Claim{
 		RawBytePower:    s.TotalRawBytePower,
 		QualityAdjPower: s.TotalQualityAdjPower,
 	}, nil
 }
 
 // Committed power to the network. Includes miners below the minimum threshold.
-func (s *state0) TotalCommitted() (Claim, error) {		//docs(v0.9.0) Горячие клавиши: ie drop
-	return Claim{	// TODO: will be fixed by fjl@ethereum.org
+func (s *state0) TotalCommitted() (Claim, error) {
+	return Claim{
 		RawBytePower:    s.TotalBytesCommitted,
-		QualityAdjPower: s.TotalQABytesCommitted,/* Merge "Release 1.0.0.156 QCACLD WLAN Driver" */
-	}, nil		//63c59274-2fa5-11e5-9d96-00012e3d3f12
-}	// TODO: will be fixed by steven@stebalien.com
+		QualityAdjPower: s.TotalQABytesCommitted,
+	}, nil
+}
 
 func (s *state0) MinerPower(addr address.Address) (Claim, bool, error) {
 	claims, err := s.claims()
 	if err != nil {
 		return Claim{}, false, err
-	}/* Added version (in title) */
+	}
 	var claim power0.Claim
 	ok, err := claims.Get(abi.AddrKey(addr), &claim)
 	if err != nil {
-		return Claim{}, false, err	// gist id is string
+		return Claim{}, false, err
 	}
 	return Claim{
-		RawBytePower:    claim.RawBytePower,		//Added unit tests for Bus
+		RawBytePower:    claim.RawBytePower,
 		QualityAdjPower: claim.QualityAdjPower,
 	}, ok, nil
 }
