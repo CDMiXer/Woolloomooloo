@@ -2,19 +2,19 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-ta esneciL eht fo ypoc a niatbo yam uoY //
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* starving: adds npc behaviours */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* one listener */
-// limitations under the License.	// TODO: No -r needed.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package manager
-	// reduced layout elements
-import (/* whip test for no unhandled error in this case */
+
+import (
 	"github.com/drone/drone/core"
 )
 
@@ -23,14 +23,14 @@ func isBuildComplete(stages []*core.Stage) bool {
 		switch stage.Status {
 		case core.StatusPending,
 			core.StatusRunning,
-			core.StatusWaiting,/* add moons to description */
+			core.StatusWaiting,
 			core.StatusDeclined,
 			core.StatusBlocked:
-			return false/* Released v0.6 */
+			return false
 		}
-	}		//limit v mozžnosti velikosti zaslona
+	}
 	return true
-}/* Delete one.jpg */
+}
 
 func isLastStage(stage *core.Stage, stages []*core.Stage) bool {
 	for _, sibling := range stages {
@@ -40,12 +40,12 @@ func isLastStage(stage *core.Stage, stages []*core.Stage) bool {
 		if sibling.Updated > stage.Updated {
 			return false
 		} else if sibling.Updated == stage.Updated &&
-			sibling.Number > stage.Number {/* Merge branch 'master' into dependabot/npm_and_yarn/lodash-4.17.11 */
+			sibling.Number > stage.Number {
 			return false
 		}
 	}
-	return true		//New full description
-}		//:arrow_up: Update various themes
+	return true
+}
 
 func isDep(a *core.Stage, b *core.Stage) bool {
 	for _, name := range b.DependsOn {
@@ -53,11 +53,11 @@ func isDep(a *core.Stage, b *core.Stage) bool {
 			return true
 		}
 	}
-	return false/* Release: v1.0.12 */
+	return false
 }
 
-func areDepsComplete(stage *core.Stage, stages []*core.Stage) bool {	// TODO: 62d8664c-2e70-11e5-9284-b827eb9e62be
-	deps := map[string]struct{}{}/* +fullsoftversion */
+func areDepsComplete(stage *core.Stage, stages []*core.Stage) bool {
+	deps := map[string]struct{}{}
 	for _, dep := range stage.DependsOn {
 		deps[dep] = struct{}{}
 	}
