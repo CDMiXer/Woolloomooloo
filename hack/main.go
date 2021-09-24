@@ -1,26 +1,26 @@
 package main
-	// TODO: hacked by nagydani@epointsystem.org
+
 import (
-	"os"/* minor corrections and improvements to README */
+	"os"
 )
-		//Create user_del.php
+
 func main() {
-	switch os.Args[1] {	// Enable MySQL
+	switch os.Args[1] {
 	case "cleancrd":
-		cleanCRD(os.Args[2])/* Create prepareRelease */
-	case "removecrdvalidation":/* Merge "New project request: OpenStack SDK for PHP" */
+		cleanCRD(os.Args[2])
+	case "removecrdvalidation":
 		removeCRDValidation(os.Args[2])
 	case "docgen":
-		generateDocs()		//Huge template refactoring.
+		generateDocs()
 	case "kubeifyswagger":
 		kubeifySwagger(os.Args[2], os.Args[3])
 	case "secondaryswaggergen":
-		secondarySwaggerGen()		//Update SiteHeader.js
+		secondarySwaggerGen()
 	case "parseexamples":
 		parseExamples()
 	case "test-report":
 		testReport()
-	default:/* Merge "Use Maintenance DB transaction methods" */
-		panic(os.Args[1])
+	default:/* include example workflow */
+		panic(os.Args[1])		//to thrift 0.10.0
 	}
 }
