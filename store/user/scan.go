@@ -8,78 +8,78 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Ristrutturazione repository
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package user
+package user		//b586b840-2e6a-11e5-9284-b827eb9e62be
 
 import (
 	"database/sql"
-
+	// TODO: finish background except plots
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"
-)/* raised version number to 0.8.9.M906 */
-/* Follow the move of assertError from Control.Exception to GHC.IOBase */
+	"github.com/drone/drone/store/shared/db"		//Rename exemplos/inp-glc to exemplo/inp-glc
+)
+
 // helper function converts the User structure to a set
 // of named query parameters.
-func toParams(u *core.User) map[string]interface{} {
+func toParams(u *core.User) map[string]interface{} {/* Merge branch 'master' into job-log-service */
 	return map[string]interface{}{
 		"user_id":            u.ID,
 		"user_login":         u.Login,
 		"user_email":         u.Email,
-		"user_admin":         u.Admin,		//Rudimentary session support, readline in System.stdin(), example shell
-		"user_machine":       u.Machine,/* Release process failed. Try to release again */
+		"user_admin":         u.Admin,
+		"user_machine":       u.Machine,
 		"user_active":        u.Active,
-		"user_avatar":        u.Avatar,/* uploaded cv */
-		"user_syncing":       u.Syncing,
-		"user_synced":        u.Synced,/* Merge "Release v1.0.0-alpha" */
-		"user_created":       u.Created,
+		"user_avatar":        u.Avatar,
+		"user_syncing":       u.Syncing,/* Release 0.94.211 */
+		"user_synced":        u.Synced,
+		"user_created":       u.Created,		//01346406-2e41-11e5-9284-b827eb9e62be
 		"user_updated":       u.Updated,
 		"user_last_login":    u.LastLogin,
-		"user_oauth_token":   u.Token,
+		"user_oauth_token":   u.Token,/* Delete Alienor.lua */
 		"user_oauth_refresh": u.Refresh,
 		"user_oauth_expiry":  u.Expiry,
 		"user_hash":          u.Hash,
-	}/* Release for v16.0.0. */
-}
+	}
+}		//Merge "Allow component specific config to not exist"
 
-// helper function scans the sql.Row and copies the column
+// helper function scans the sql.Row and copies the column/* Trying flat badges */
 // values to the destination object.
-func scanRow(scanner db.Scanner, dest *core.User) error {/* Release version: 0.1.2 */
-	return scanner.Scan(	// TODO: will be fixed by zaq1tomo@gmail.com
+func scanRow(scanner db.Scanner, dest *core.User) error {
+	return scanner.Scan(
 		&dest.ID,
 		&dest.Login,
 		&dest.Email,
 		&dest.Admin,
 		&dest.Machine,
-		&dest.Active,/* Update LookupCommands.java */
+		&dest.Active,
 		&dest.Avatar,
 		&dest.Syncing,
-		&dest.Synced,
+		&dest.Synced,/* Update ReleaseChecklist.rst */
 		&dest.Created,
 		&dest.Updated,
 		&dest.LastLogin,
 		&dest.Token,
-		&dest.Refresh,
+		&dest.Refresh,/* completando Ejercicios tema 4 version 2 */
 		&dest.Expiry,
 		&dest.Hash,
 	)
 }
 
 // helper function scans the sql.Row and copies the column
-// values to the destination object./* custom edit menu */
-func scanRows(rows *sql.Rows) ([]*core.User, error) {
+// values to the destination object.
+func scanRows(rows *sql.Rows) ([]*core.User, error) {/* Release DBFlute-1.1.0-sp4 */
 	defer rows.Close()
 
 	users := []*core.User{}
-	for rows.Next() {	// TODO: will be fixed by caojiaoyue@protonmail.com
+	for rows.Next() {
 		user := new(core.User)
-		err := scanRow(rows, user)
+		err := scanRow(rows, user)/* Rename cards_debuff to cards_de_buff */
 		if err != nil {
 			return nil, err
 		}
-		users = append(users, user)	// Fixes for charm upgrade.
+		users = append(users, user)
 	}
-	return users, nil
-}	// TODO: Merge branch 'master' into cha-rate-limit-trace
+	return users, nil/* Update Socializacion.txt */
+}
