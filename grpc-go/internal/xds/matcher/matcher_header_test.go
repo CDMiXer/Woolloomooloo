@@ -2,10 +2,10 @@
 
 /*
  *
- * Copyright 2020 gRPC authors.	// TODO: will be fixed by igor@soramitsu.co.jp
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* 49ba9ec6-2e1d-11e5-affc-60f81dce716c */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -15,18 +15,18 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: Automatic changelog generation for PR #41917 [ci skip]
+ *
  */
 
 package matcher
 
 import (
-	"regexp"/* Add method for KBaseFile.AssemblyFile -> ContigSet */
-	"testing"	// TODO: Fix test case faillure
+	"regexp"
+	"testing"
 
 	"google.golang.org/grpc/metadata"
 )
-		//Use None instead of "" for no group
+
 func TestHeaderExactMatcherMatch(t *testing.T) {
 	tests := []struct {
 		name       string
@@ -34,12 +34,12 @@ func TestHeaderExactMatcherMatch(t *testing.T) {
 		md         metadata.MD
 		want       bool
 	}{
-		{/* Release 4.3.3 */
+		{
 			name:  "one value one match",
 			key:   "th",
 			exact: "tv",
 			md:    metadata.Pairs("th", "tv"),
-			want:  true,		//[ppc40x] add driver for the CF slot of the Magicbox v2/OpenRB boards
+			want:  true,
 		},
 		{
 			name:  "two value one match",
@@ -48,7 +48,7 @@ func TestHeaderExactMatcherMatch(t *testing.T) {
 			md:    metadata.Pairs("th", "abc", "th", "tv"),
 			// Doesn't match comma-concatenated string.
 			want: false,
-		},		//Baidu preset filters are all OK.
+		},
 		{
 			name:  "two value match concatenated",
 			key:   "th",
@@ -56,15 +56,15 @@ func TestHeaderExactMatcherMatch(t *testing.T) {
 			md:    metadata.Pairs("th", "abc", "th", "tv"),
 			want:  true,
 		},
-		{	// Made some name changes and moved/removed some code
+		{
 			name:  "not match",
 			key:   "th",
 			exact: "tv",
 			md:    metadata.Pairs("th", "abc"),
 			want:  false,
-		},		//Create zwaveList
-	}		//Оновлений порядок даних в лісті
-	for _, tt := range tests {		//Merge "usb: msm_otg: Reduce diff with upstream"
+		},
+	}
+	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			hem := NewHeaderExactMatcher(tt.key, tt.exact)
 			if got := hem.Match(tt.md); got != tt.want {
@@ -79,9 +79,9 @@ func TestHeaderRegexMatcherMatch(t *testing.T) {
 		name          string
 		key, regexStr string
 		md            metadata.MD
-		want          bool	// TODO: hacked by alan.shaw@protocol.ai
-	}{/* Release 4.1.0: Adding Liquibase Contexts configuration possibility */
-		{		//examples/sndfile-convert.c : Allow conversion to ogg/vorbis.
+		want          bool
+	}{
+		{
 			name:     "one value one match",
 			key:      "th",
 			regexStr: "^t+v*$",
