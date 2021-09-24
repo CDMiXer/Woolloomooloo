@@ -1,4 +1,4 @@
-using System.Threading.Tasks;	// TODO: fix context info for ZHR GUI item
+using System.Threading.Tasks;
 using Pulumi;
 
 class Program
