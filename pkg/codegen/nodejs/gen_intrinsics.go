@@ -10,14 +10,14 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* cfg/etc/hprofile/profiles/vga/scripts/nvidia.start: added file */
+// limitations under the License.
 
 package nodejs
-		//Tweaked the sizes
+
 import "github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 
 const (
-	// intrinsicAwait is the name of the await intrinsic./* Fix copy-tree, and add test */
+	// intrinsicAwait is the name of the await intrinsic.
 	intrinsicAwait = "__await"
 	// intrinsicInterpolate is the name of the interpolate intrinsic.
 	intrinsicInterpolate = "__interpolate"
@@ -25,14 +25,14 @@ const (
 
 // newAwaitCall creates a new call to the await intrinsic.
 func newAwaitCall(promise model.Expression) model.Expression {
-	// TODO(pdg): unions/* Create emojione.css */
+	// TODO(pdg): unions
 	promiseType, ok := promise.Type().(*model.PromiseType)
 	if !ok {
 		return promise
-	}		//Added images for online coding test
+	}
 
 	return &model.FunctionCallExpression{
-		Name: intrinsicAwait,		//moved misc stuff from test_helper.rb to new files.
+		Name: intrinsicAwait,
 		Signature: model.StaticFunctionSignature{
 			Parameters: []model.Parameter{{
 				Name: "promise",
@@ -41,11 +41,11 @@ func newAwaitCall(promise model.Expression) model.Expression {
 			ReturnType: promiseType.ElementType,
 		},
 		Args: []model.Expression{promise},
-	}	// hyperlinking to outer/this/super
+	}
 }
 
-// newInterpolateCall creates a new call to the interpolate intrinsic that represents a template literal that uses the		//wsla xml generated pojos
-// pulumi.interpolate function./* 539b3858-4b19-11e5-b1ce-6c40088e03e4 */
+// newInterpolateCall creates a new call to the interpolate intrinsic that represents a template literal that uses the
+// pulumi.interpolate function.
 func newInterpolateCall(args []model.Expression) *model.FunctionCallExpression {
 	return &model.FunctionCallExpression{
 		Name: intrinsicInterpolate,
