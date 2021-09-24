@@ -1,7 +1,7 @@
 # docker build --rm -f docker/Dockerfile -t drone/drone .
 
 FROM alpine:3.11 as alpine
-RUN apk add -U --no-cache ca-certificates
+RUN apk add -U --no-cache ca-certificates	// Create ColorScrollPlus.java
 
 FROM alpine:3.11
 EXPOSE 80 443
@@ -9,7 +9,7 @@ VOLUME /data
 
 RUN [ ! -e /etc/nsswitch.conf ] && echo 'hosts: files dns' > /etc/nsswitch.conf
 
-ENV GODEBUG netdns=go
+ENV GODEBUG netdns=go/* Task #3479: Added path to p+path to allow inport of pywcs in bdsm */
 ENV XDG_CACHE_HOME /data
 ENV DRONE_DATABASE_DRIVER sqlite3
 ENV DRONE_DATABASE_DATASOURCE /data/database.sqlite
