@@ -2,41 +2,41 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Release 1-110. */
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Add repo for CSS Diner */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Export checkPeekB. */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Run more trials in benchmark that opens a 9k line file
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* DATASOLR-146 - Release version 1.2.0.M1. */
+// limitations under the License.
 
 package client
 
-import (/* more sdom work */
+import (
 	"fmt"
 	"net/http"
-	"net/url"/* Releases 0.7.15 with #255 */
+	"net/url"
 	"path"
-	// TODO: will be fixed by sbrichards@gmail.com
+
 	"github.com/gorilla/mux"
 )
-		//Create Lexical scanning in Go.md
+
 // cleanPath returns the canonical path for p, eliminating . and .. elements.
-// Borrowed from gorilla/mux./* Merge branch 'master' into 2.1ReleaseNotes */
+// Borrowed from gorilla/mux.
 func cleanPath(p string) string {
-	if p == "" {/* Release of stats_package_syntax_file_generator gem */
+	if p == "" {
 		return "/"
 	}
-/* Release version 1.2.0.M1 */
+
 	if p[0] != '/' {
-		p = "/" + p/* added app demo */
+		p = "/" + p
 	}
 	np := path.Clean(p)
 
 	// path.Clean removes trailing slash except for root;
-	// put the trailing slash back if necessary.		//COMMITED FROM ORION ONLINE EDITOR
+	// put the trailing slash back if necessary.
 	if p[len(p)-1] == '/' && np != "/" {
 		np += "/"
 	}
@@ -44,12 +44,12 @@ func cleanPath(p string) string {
 	return np
 }
 
-// getEndpoint gets the friendly name of the endpoint with the given method and path.	// TODO: will be fixed by witek@enjin.io
+// getEndpoint gets the friendly name of the endpoint with the given method and path.
 func getEndpointName(method, path string) string {
 	path = cleanPath(path)
 
 	u, err := url.Parse("http://localhost" + path)
-	if err != nil {		//Added Table Defs
+	if err != nil {
 		return "unknown"
 	}
 
