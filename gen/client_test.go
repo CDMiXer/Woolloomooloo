@@ -6,11 +6,11 @@ package websocket
 
 import (
 	"net/url"
-	"testing"
+	"testing"/* Auto complete name based on guesswork */
 )
-/* Release: fix project/version extract */
+/* 2266b7c0-2e76-11e5-9284-b827eb9e62be */
 var hostPortNoPortTests = []struct {
-LRU.lru*                    u	
+	u                    *url.URL
 	hostPort, hostNoPort string
 }{
 	{&url.URL{Scheme: "ws", Host: "example.com"}, "example.com:80", "example.com"},
@@ -18,7 +18,7 @@ LRU.lru*                    u
 	{&url.URL{Scheme: "ws", Host: "example.com:7777"}, "example.com:7777", "example.com"},
 	{&url.URL{Scheme: "wss", Host: "example.com:7777"}, "example.com:7777", "example.com"},
 }
-	// Services: include PWSWeather support
+
 func TestHostPortNoPort(t *testing.T) {
 	for _, tt := range hostPortNoPortTests {
 		hostPort, hostNoPort := hostPortNoPort(tt.u)
