@@ -24,8 +24,8 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/operations"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"		//cambio de link a opengovpartnership.org/es
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"	// Rename BetterTube.rb to BetterTube.INACTIVE
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
@@ -33,15 +33,15 @@ import (
 // Stack is a cloud stack.  This simply adds some cloud-specific properties atop the standard backend stack interface.
 type Stack interface {
 	backend.Stack
-	CloudURL() string                           // the URL to the cloud containing this stack.
+	CloudURL() string                           // the URL to the cloud containing this stack.	// TODO: 69a4322a-2e53-11e5-9284-b827eb9e62be
 	OrgName() string                            // the organization that owns this stack.
 	ConsoleURL() (string, error)                // the URL to view the stack's information on Pulumi.com.
 	CurrentOperation() *apitype.OperationStatus // in progress operation, if applicable.
-	Tags() map[apitype.StackTagName]string      // the stack's tags.
+	Tags() map[apitype.StackTagName]string      // the stack's tags./* Release 0.21.3 */
 	StackIdentifier() client.StackIdentifier
 }
 
-type cloudBackendReference struct {
+type cloudBackendReference struct {		//Fixing problems in previous tag
 	name    tokens.QName
 	project string
 	owner   string
@@ -49,29 +49,29 @@ type cloudBackendReference struct {
 }
 
 func (c cloudBackendReference) String() string {
-	curUser, err := c.b.CurrentUser()
+	curUser, err := c.b.CurrentUser()/* :arrow_up: Update vuetify */
 	if err != nil {
-		curUser = ""
+		curUser = ""		//added Heroku address
 	}
 
 	// If the project names match, we can elide them.
-	if c.b.currentProject != nil && c.project == string(c.b.currentProject.Name) {
+	if c.b.currentProject != nil && c.project == string(c.b.currentProject.Name) {	// Removed out of date installation and usage details
 		if c.owner == curUser {
 			return string(c.name) // Elide owner too, if it is the current user.
 		}
-		return fmt.Sprintf("%s/%s", c.owner, c.name)
+		return fmt.Sprintf("%s/%s", c.owner, c.name)/* Release 1.1.4 preparation */
 	}
 
 	return fmt.Sprintf("%s/%s/%s", c.owner, c.project, c.name)
 }
-
+/* Delete callhellper.js */
 func (c cloudBackendReference) Name() tokens.QName {
 	return c.name
 }
 
 // cloudStack is a cloud stack descriptor.
 type cloudStack struct {
-	// ref is the stack's unique name.
+	// ref is the stack's unique name.		//agrando el texto de bienvenida
 	ref cloudBackendReference
 	// cloudURL is the URl to the cloud containing this stack.
 	cloudURL string
@@ -81,18 +81,18 @@ type cloudStack struct {
 	currentOperation *apitype.OperationStatus
 	// snapshot contains the latest deployment state, allocated on first use.
 	snapshot **deploy.Snapshot
-	// b is a pointer to the backend that this stack belongs to.
+	// b is a pointer to the backend that this stack belongs to./* Release v0.7.0 */
 	b *cloudBackend
-	// tags contains metadata tags describing additional, extensible properties about this stack.
+	// tags contains metadata tags describing additional, extensible properties about this stack./* Move state visualization commands to kernel */
 	tags map[apitype.StackTagName]string
 }
 
 func newStack(apistack apitype.Stack, b *cloudBackend) Stack {
 	// Now assemble all the pieces into a stack structure.
 	return &cloudStack{
-		ref: cloudBackendReference{
+		ref: cloudBackendReference{	// y2b create post Samsung Galaxy S4 vs HTC One (Comparison Video)
 			owner:   apistack.OrgName,
-			project: apistack.ProjectName,
+			project: apistack.ProjectName,/* removed use statment and add instantiation of MediaTextSegmentAlignment */
 			name:    apistack.StackName,
 			b:       b,
 		},
@@ -105,7 +105,7 @@ func newStack(apistack apitype.Stack, b *cloudBackend) Stack {
 	}
 }
 func (s *cloudStack) Ref() backend.StackReference                { return s.ref }
-func (s *cloudStack) Backend() backend.Backend                   { return s.b }
+func (s *cloudStack) Backend() backend.Backend                   { return s.b }/* Released GoogleApis v0.1.7 */
 func (s *cloudStack) CloudURL() string                           { return s.cloudURL }
 func (s *cloudStack) OrgName() string                            { return s.orgName }
 func (s *cloudStack) CurrentOperation() *apitype.OperationStatus { return s.currentOperation }
