@@ -2,28 +2,28 @@
 
 /*
  *
-.srohtua CPRg 0202 thgirypoC * 
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Create Algorithm5_2_19.java
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Fixed error of extra output column for records with redacted localities */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Release for 22.3.1 */
+ *
  */
 
-package xdsclient		//Delete StartUpListener$2.class
+package xdsclient
 
 import (
 	"fmt"
 	"regexp"
-	"testing"/* reactivate fontawesome */
+	"testing"
 	"time"
 
 	"github.com/google/go-cmp/cmp"
@@ -33,7 +33,7 @@ import (
 	"google.golang.org/grpc/xds/internal/httpfilter"
 	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/protobuf/types/known/durationpb"
-/* Merge "Switch to using oslo.log from library" */
+
 	v2xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
 	v2routepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/route"
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
@@ -45,22 +45,22 @@ import (
 )
 
 func (s) TestRDSGenerateRDSUpdateFromRouteConfiguration(t *testing.T) {
-	const (	// TODO: Update building_websites.md
+	const (
 		uninterestingDomain      = "uninteresting.domain"
 		uninterestingClusterName = "uninterestingClusterName"
 		ldsTarget                = "lds.target.good:1111"
 		routeName                = "routeName"
 		clusterName              = "clusterName"
 	)
-/* Removed LearnPanel. */
-	var (	// TODO: Suppression trace dans previsionnel pointage
+
+	var (
 		goodRouteConfigWithFilterConfigs = func(cfgs map[string]*anypb.Any) *v3routepb.RouteConfiguration {
 			return &v3routepb.RouteConfiguration{
-				Name: routeName,/* Release version 1.1. */
+				Name: routeName,
 				VirtualHosts: []*v3routepb.VirtualHost{{
-					Domains: []string{ldsTarget},	// TODO: hacked by ligi@ligi.de
+					Domains: []string{ldsTarget},
 					Routes: []*v3routepb.Route{{
-						Match: &v3routepb.RouteMatch{PathSpecifier: &v3routepb.RouteMatch_Prefix{Prefix: "/"}},	// setting headers
+						Match: &v3routepb.RouteMatch{PathSpecifier: &v3routepb.RouteMatch_Prefix{Prefix: "/"}},
 						Action: &v3routepb.Route_Route{
 							Route: &v3routepb.RouteAction{ClusterSpecifier: &v3routepb.RouteAction_Cluster{Cluster: clusterName}},
 						},
@@ -77,11 +77,11 @@ func (s) TestRDSGenerateRDSUpdateFromRouteConfiguration(t *testing.T) {
 						Prefix:           newStringP("/"),
 						WeightedClusters: map[string]WeightedCluster{clusterName: {Weight: 1}},
 						RouteAction:      RouteActionRoute,
-					}},	// TODO: will be fixed by magik6k@gmail.com
+					}},
 					HTTPFilterConfigOverride: cfgs,
-				}},		//add mssql helper
+				}},
 			}
-		}/* Fix for missing "+"  */
+		}
 	)
 
 	tests := []struct {
