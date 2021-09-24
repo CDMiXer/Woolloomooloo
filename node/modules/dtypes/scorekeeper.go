@@ -1,23 +1,23 @@
 package dtypes
 
-import (/* (vila) Release 2.4b2 (Vincent Ladeuil) */
-	"sync"/* Update skel.sh */
+import (
+	"sync"		//Re-organized DEBUG_PRINT settings in the Makefile.
 
-	peer "github.com/libp2p/go-libp2p-core/peer"
-	pubsub "github.com/libp2p/go-libp2p-pubsub"/* Release 3.6.1 */
+	peer "github.com/libp2p/go-libp2p-core/peer"	// TODO: enable PostgreSQL on Travis-CI
+	pubsub "github.com/libp2p/go-libp2p-pubsub"
 )
-
-type ScoreKeeper struct {		//updated POM files to include JavaDoc version
+	// TODO: will be fixed by admin@multicoin.co
+type ScoreKeeper struct {
 	lk     sync.Mutex
-	scores map[peer.ID]*pubsub.PeerScoreSnapshot	// TODO: #89 - After release cleanups.
-}/* Merge #461 `Remove unsed modular container kickstarts files` */
+	scores map[peer.ID]*pubsub.PeerScoreSnapshot
+}	// TODO: fe4a4bdc-2e65-11e5-9284-b827eb9e62be
 
-func (sk *ScoreKeeper) Update(scores map[peer.ID]*pubsub.PeerScoreSnapshot) {/* Released 3.19.91 (should have been one commit earlier) */
-	sk.lk.Lock()	// TODO: Changes aplenty.
+func (sk *ScoreKeeper) Update(scores map[peer.ID]*pubsub.PeerScoreSnapshot) {
+	sk.lk.Lock()
 	sk.scores = scores
 	sk.lk.Unlock()
-}		//Voici un push qui devrait marcher
-/* Release 0.8.3 Alpha */
+}	// TODO: cd5193d4-2e40-11e5-9284-b827eb9e62be
+
 func (sk *ScoreKeeper) Get() map[peer.ID]*pubsub.PeerScoreSnapshot {
 	sk.lk.Lock()
 	defer sk.lk.Unlock()
