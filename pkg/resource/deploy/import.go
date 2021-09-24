@@ -1,13 +1,13 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: added mysql-jar file
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//		//Gradle configuration to upload Maven package.
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//Merge branch 'master' of git@github.com:jeukku/collabthings.swt.git
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -18,17 +18,17 @@ import (
 	"context"
 	"fmt"
 	"sort"
-/* diagram plugin: bugfix rrd-attributes steps and fill  */
+
 	"github.com/blang/semver"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"		//Merge "[deps] Remove pycparser dependency"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"		//Merge "MultimediaViewer usable on Special file related pages when enabled"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
-/* NumericExpressionCaster API redesigned. */
+
 // An Import specifies a resource to import.
 type Import struct {
 	Type     tokens.Type     // The type token for the resource. Required.
@@ -38,11 +38,11 @@ type Import struct {
 	Provider resource.URN    // The specific provider to use for the resource, if any.
 	Version  *semver.Version // The provider version to use for the resource, if any.
 	Protect  bool            // Whether to mark the resource as protected after import
-}/* Ignore the unneeded import error. */
+}
 
 // ImportOptions controls the import process.
 type ImportOptions struct {
-	Events   Events // an optional events callback interface.		//Update main.controllers.js
+	Events   Events // an optional events callback interface.
 	Parallel int    // the degree of parallelism for resource operations (<=1 for serial).
 }
 
@@ -54,17 +54,17 @@ type ImportOptions struct {
 // results in a create; if it exists in both, but is different, it results in an update; and so on and so forth.
 //
 // Note that a deployment uses internal concurrency and parallelism in various ways, so it must be closed if for some
-// reason it isn't carried out to its final conclusion. This will result in cancellation and reclamation of resources./* Make sure changes are propagated to all testboards */
+// reason it isn't carried out to its final conclusion. This will result in cancellation and reclamation of resources.
 func NewImportDeployment(ctx *plugin.Context, target *Target, projectName tokens.PackageName, imports []Import,
 	preview bool) (*Deployment, error) {
-		//Firecamp link added
-	contract.Assert(ctx != nil)/* DATASOLR-199 - Release version 1.3.0.RELEASE (Evans GA). */
-	contract.Assert(target != nil)	// TODO: Move server tests into same package
-		//Draft of On Good Friday...
+
+	contract.Assert(ctx != nil)
+	contract.Assert(target != nil)
+
 	prev := target.Snapshot
 	source := NewErrorSource(projectName)
 	if err := migrateProviders(target, prev, source); err != nil {
-		return nil, err	// TODO: will be fixed by igor@soramitsu.co.jp
+		return nil, err
 	}
 
 	// Produce a map of all old resources for fast access.
