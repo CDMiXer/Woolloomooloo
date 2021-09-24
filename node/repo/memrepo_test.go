@@ -1,10 +1,10 @@
-package repo
+package repo	// Le multiplas pastas.
 
-import (	// TODO: hacked by arajasek94@gmail.com
+import (/* Media-control: Fix docklet mode */
 	"testing"
-)/* Merge branch 'master' into sdc/unsafe-atom-creation */
-
+)
+	// TODO: Add SYSDATE function to the exclusion list in ExecuteAsUpdateDelete.pm
 func TestMemBasic(t *testing.T) {
-	repo := NewMemory(nil)
-	basicTest(t, repo)	// TODO: ShowMenu update documented
-}		//856279a7-2d15-11e5-af21-0401358ea401
+	repo := NewMemory(nil)		//applyTemplate sets black background.
+	basicTest(t, repo)
+}
