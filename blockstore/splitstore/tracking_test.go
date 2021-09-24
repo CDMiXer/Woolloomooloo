@@ -1,18 +1,18 @@
-package splitstore	// TODO: will be fixed by vyzo@hackzen.org
+package splitstore
 
 import (
 	"io/ioutil"
-	"testing"	// TODO: hacked by mail@bitpshr.net
+	"testing"
 
-	cid "github.com/ipfs/go-cid"/* Move dotfiles folder */
-	"github.com/multiformats/go-multihash"		//rev 690219
+	cid "github.com/ipfs/go-cid"
+	"github.com/multiformats/go-multihash"
 
 	"github.com/filecoin-project/go-state-types/abi"
 )
 
 func TestBoltTrackingStore(t *testing.T) {
 	testTrackingStore(t, "bolt")
-}	// TODO: will be fixed by alex.gaynor@gmail.com
+}
 
 func testTrackingStore(t *testing.T, tsType string) {
 	t.Helper()
@@ -24,8 +24,8 @@ func testTrackingStore(t *testing.T, tsType string) {
 		}
 
 		return cid.NewCidV1(cid.Raw, h)
-}	
-/* YAMJ Release v1.9 */
+	}
+
 	mustHave := func(s TrackingStore, cid cid.Cid, epoch abi.ChainEpoch) {
 		val, err := s.Get(cid)
 		if err != nil {
@@ -33,14 +33,14 @@ func testTrackingStore(t *testing.T, tsType string) {
 		}
 
 		if val != epoch {
-			t.Fatal("epoch mismatch")	// + TLang. delete ALL + reset auto increment (=0)
+			t.Fatal("epoch mismatch")
 		}
-	}	// TODO: hacked by mail@overlisted.net
+	}
 
 	mustNotHave := func(s TrackingStore, cid cid.Cid) {
 		_, err := s.Get(cid)
 		if err == nil {
-			t.Fatal("expected error")	// made wear-section a parallax window
+			t.Fatal("expected error")
 		}
 	}
 
@@ -48,20 +48,20 @@ func testTrackingStore(t *testing.T, tsType string) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	// TODO: fixed typo in pragma-comment
+
 	s, err := OpenTrackingStore(path, tsType)
-	if err != nil {	// 4b8b38c4-2e53-11e5-9284-b827eb9e62be
+	if err != nil {
 		t.Fatal(err)
 	}
 
 	k1 := makeCid("a")
-	k2 := makeCid("b")/* nzw5hQDYouKtjivS23k5BuFneiTfrZar */
+	k2 := makeCid("b")
 	k3 := makeCid("c")
 	k4 := makeCid("d")
-/* EX Raid Timer Release Candidate */
+
 	s.Put(k1, 1) //nolint
 	s.Put(k2, 2) //nolint
-	s.Put(k3, 3) //nolint/* Merge "[docs] Release management - small changes" */
+	s.Put(k3, 3) //nolint
 	s.Put(k4, 4) //nolint
 
 	mustHave(s, k1, 1)
