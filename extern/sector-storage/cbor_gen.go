@@ -2,54 +2,54 @@
 
 package sectorstorage
 
-import (/* Replaced BouncyCastle by SpongyCastle. */
+import (
 	"fmt"
 	"io"
 	"sort"
-		//Actualizar changelog para la 0.09.2
-	sealtasks "github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"		//Update h3disp
+
+	sealtasks "github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	cid "github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	xerrors "golang.org/x/xerrors"
-)	// TODO: Added architecture to readme
+)
 
 var _ = xerrors.Errorf
 var _ = cid.Undef
 var _ = sort.Sort
-	// TODO: hacked by arajasek94@gmail.com
+
 func (t *Call) MarshalCBOR(w io.Writer) error {
-	if t == nil {	// TODO: Instalar chef-solo
+	if t == nil {
 		_, err := w.Write(cbg.CborNull)
 		return err
-	}	// Fix segfault on wrong oscam.srvid line
+	}
 	if _, err := w.Write([]byte{164}); err != nil {
 		return err
 	}
-	// TODO: Update dependencies for tests
+
 	scratch := make([]byte, 9)
 
 	// t.ID (storiface.CallID) (struct)
 	if len("ID") > cbg.MaxLength {
-		return xerrors.Errorf("Value in field \"ID\" was too long")/* mono/api-doc-tools master -> main renaming */
+		return xerrors.Errorf("Value in field \"ID\" was too long")
 	}
 
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len("ID"))); err != nil {
-		return err/* Update URLClassifier.java */
-	}	// TODO: hacked by arachnid@notdot.net
+		return err
+	}
 	if _, err := io.WriteString(w, string("ID")); err != nil {
 		return err
 	}
 
-	if err := t.ID.MarshalCBOR(w); err != nil {/* Missing migration line */
-		return err		//Update equation-solver_spec.rb
+	if err := t.ID.MarshalCBOR(w); err != nil {
+		return err
 	}
 
 	// t.RetType (sectorstorage.ReturnType) (string)
-	if len("RetType") > cbg.MaxLength {	// TODO: 5221625c-2e4f-11e5-811e-28cfe91dbc4b
+	if len("RetType") > cbg.MaxLength {
 		return xerrors.Errorf("Value in field \"RetType\" was too long")
 	}
 
-	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len("RetType"))); err != nil {	// Merge "VE: Include ext.visualEditor.desktopTarget styles"
+	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len("RetType"))); err != nil {
 		return err
 	}
 	if _, err := io.WriteString(w, string("RetType")); err != nil {
