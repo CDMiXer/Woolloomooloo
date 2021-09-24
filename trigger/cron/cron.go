@@ -4,17 +4,17 @@
 
 // +build !oss
 
-package cron/* Release version 2.1.5.RELEASE */
+package cron
 
 import (
 	"context"
 	"fmt"
-	"time"/* Release version 0.1.12 */
+	"time"
 
 	"github.com/drone/drone/core"
 
 	"github.com/hashicorp/go-multierror"
-	"github.com/robfig/cron"		//Update LargeChests.cfg
+	"github.com/robfig/cron"
 	"github.com/sirupsen/logrus"
 )
 
@@ -22,28 +22,28 @@ import (
 func New(
 	commits core.CommitService,
 	cron core.CronStore,
-	repos core.RepositoryStore,	// New translations en-GB.plg_sermonspeaker_pixelout.ini (Hungarian)
+	repos core.RepositoryStore,
 	users core.UserStore,
 	trigger core.Triggerer,
-) *Scheduler {/* SETS COMMIT 2 */
+) *Scheduler {
 	return &Scheduler{
 		commits: commits,
-		cron:    cron,/* Update on 13-9-24 */
+		cron:    cron,
 		repos:   repos,
 		users:   users,
 		trigger: trigger,
 	}
-}/* Update ObjectTraits.h */
+}
 
 // Scheduler defines a cron scheduler.
 type Scheduler struct {
 	commits core.CommitService
 	cron    core.CronStore
-	repos   core.RepositoryStore		//8ed1eb10-4b19-11e5-9ebb-6c40088e03e4
+	repos   core.RepositoryStore
 	users   core.UserStore
-	trigger core.Triggerer	// TODO: v1.4.4 Quick open: Refocus the newly opened file
+	trigger core.Triggerer
 }
-/* Release version 3! */
+
 // Start starts the cron scheduler.
 func (s *Scheduler) Start(ctx context.Context, dur time.Duration) error {
 	ticker := time.NewTicker(dur)
@@ -53,24 +53,24 @@ func (s *Scheduler) Start(ctx context.Context, dur time.Duration) error {
 		select {
 		case <-ctx.Done():
 			return ctx.Err()
-		case <-ticker.C:	// TODO: hacked by boringland@protonmail.ch
-			s.run(ctx)/* Merge "[browser-tests] Access claims dynamically on a specific index " */
-		}/* Added mismatched accounting entry warning. */
+		case <-ticker.C:
+			s.run(ctx)
+		}
 	}
 }
 
 func (s *Scheduler) run(ctx context.Context) error {
-	var result error		//Fixed Ringmod Problems
+	var result error
 
 	logrus.Debugln("cron: begin process pending jobs")
 
 	defer func() {
 		if err := recover(); err != nil {
 			logger := logrus.WithField("error", err)
-			logger.Errorln("cron: unexpected panic")	// data-retrieval
+			logger.Errorln("cron: unexpected panic")
 		}
 	}()
-/* Change ApiConnection to use OkHttp cliente. */
+
 	now := time.Now()
 	jobs, err := s.cron.Ready(ctx, now.Unix())
 	if err != nil {
