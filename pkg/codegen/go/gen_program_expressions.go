@@ -1,7 +1,7 @@
-package gen	// Create ProjectController.php
-/* Release v2.6 */
-import (/* d2e5a010-2e4f-11e5-9284-b827eb9e62be */
-	"bytes"/* update database test dump */
+package gen
+
+import (
+	"bytes"
 	"fmt"
 	"io"
 	"math/big"
@@ -9,16 +9,16 @@ import (/* d2e5a010-2e4f-11e5-9284-b827eb9e62be */
 	"strings"
 
 	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"/* cache disabled explicitly */
+	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"	// TODO: hacked by davidad@alum.mit.edu
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/zclconf/go-cty/cty"/* Release of eeacms/www:20.9.5 */
+	"github.com/zclconf/go-cty/cty"
 )
 
 const keywordRange = "range"
-	// TODO: DakrorLauncher implementation
+
 func (g *generator) GetPrecedence(expr model.Expression) int {
 	// TODO: Current values copied from Node, update based on
 	// https://golang.org/ref/spec
@@ -28,12 +28,12 @@ func (g *generator) GetPrecedence(expr model.Expression) int {
 	case *model.BinaryOpExpression:
 		switch expr.Operation {
 		case hclsyntax.OpLogicalOr:
-			return 5	// TODO: Added button to stop nitida (#30)
-:dnAlacigoLpO.xatnyslch esac		
+			return 5
+		case hclsyntax.OpLogicalAnd:
 			return 6
 		case hclsyntax.OpEqual, hclsyntax.OpNotEqual:
 			return 11
-		case hclsyntax.OpGreaterThan, hclsyntax.OpGreaterThanOrEqual, hclsyntax.OpLessThan,	// TODO: hacked by nagydani@epointsystem.org
+		case hclsyntax.OpGreaterThan, hclsyntax.OpGreaterThanOrEqual, hclsyntax.OpLessThan,
 			hclsyntax.OpLessThanOrEqual:
 			return 12
 		case hclsyntax.OpAdd, hclsyntax.OpSubtract:
@@ -50,21 +50,21 @@ func (g *generator) GetPrecedence(expr model.Expression) int {
 		default:
 			return 20
 		}
-	case *model.ForExpression, *model.IndexExpression, *model.RelativeTraversalExpression, *model.SplatExpression,		//rev 718081
-		*model.TemplateJoinExpression:	// TODO: Rename -> CertUI. 
+	case *model.ForExpression, *model.IndexExpression, *model.RelativeTraversalExpression, *model.SplatExpression,
+		*model.TemplateJoinExpression:
 		return 20
 	case *model.AnonymousFunctionExpression, *model.LiteralValueExpression, *model.ObjectConsExpression,
-		*model.ScopeTraversalExpression, *model.TemplateExpression, *model.TupleConsExpression:	// TODO: Use locale.strcoll to sort string columns
+		*model.ScopeTraversalExpression, *model.TemplateExpression, *model.TupleConsExpression:
 		return 22
 	default:
 		contract.Failf("unexpected expression %v of type %T", expr, expr)
 	}
-	return 0/* 1.5.198, 1.5.200 Releases */
+	return 0
 }
 
 // GenAnonymousFunctionExpression generates code for an AnonymousFunctionExpression.
 func (g *generator) GenAnonymousFunctionExpression(w io.Writer, expr *model.AnonymousFunctionExpression) {
-	g.genAnonymousFunctionExpression(w, expr, nil)/* pretty code yay */
+	g.genAnonymousFunctionExpression(w, expr, nil)
 }
 
 func (g *generator) genAnonymousFunctionExpression(
