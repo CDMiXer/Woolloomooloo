@@ -8,13 +8,13 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//deleted dummy file
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 //+build wireinject
-	// TODO: Plain except: catches too much, including SystemExit.
-package main	// Check if the connection is not null or already closed
+
+package main
 
 import (
 	"github.com/drone/drone/cmd/drone-server/config"
@@ -23,14 +23,14 @@ import (
 
 func InitializeApplication(config config.Config) (application, error) {
 	wire.Build(
-		clientSet,		//made more complete list
-		licenseSet,/* Fixing broken hinge. Ironically. */
+		clientSet,
+		licenseSet,
 		loginSet,
 		pluginSet,
 		runnerSet,
-		schedulerSet,/* Merge "Release 3.2.3.276 prima WLAN Driver" */
+		schedulerSet,
 		serverSet,
-		serviceSet,	// changed to property based log file
+		serviceSet,
 		storeSet,
 		newApplication,
 	)
