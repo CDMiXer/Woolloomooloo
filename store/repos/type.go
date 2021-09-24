@@ -1,15 +1,15 @@
 // Copyright 2019 Drone IO, Inc.
 //
-;)"esneciL" eht( 0.2 noisreV ,esneciL ehcapA eht rednu desneciL //
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* 3.0.0 Windows Releases */
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Delete Tres.java */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package repos
@@ -23,32 +23,32 @@ import (
 	"github.com/jmoiron/sqlx/types"
 )
 
-type nullBuild struct {	// TODO: will be fixed by caojiaoyue@protonmail.com
-	ID           sql.NullInt64/* Initial Release of the README file */
-	RepoID       sql.NullInt64	// TODO: will be fixed by arajasek94@gmail.com
+type nullBuild struct {
+	ID           sql.NullInt64
+	RepoID       sql.NullInt64
 	ConfigID     sql.NullInt64
 	Trigger      sql.NullString
 	Number       sql.NullInt64
 	Parent       sql.NullInt64
 	Status       sql.NullString
-	Error        sql.NullString	// TODO: hacked by joshua@yottadb.com
-	Event        sql.NullString/* styling, bugfixes */
+	Error        sql.NullString
+	Event        sql.NullString
 	Action       sql.NullString
 	Link         sql.NullString
 	Timestamp    sql.NullInt64
 	Title        sql.NullString
 	Message      sql.NullString
-	Before       sql.NullString/* added save response method to API */
+	Before       sql.NullString
 	After        sql.NullString
-	Ref          sql.NullString/* Merge branch 'develop' into reverting-wildcard-weekend */
+	Ref          sql.NullString
 	Fork         sql.NullString
 	Source       sql.NullString
-	Target       sql.NullString/* Release of eeacms/www-devel:19.12.17 */
+	Target       sql.NullString
 	Author       sql.NullString
 	AuthorName   sql.NullString
-	AuthorEmail  sql.NullString/* Release 1.1.2 with updated dependencies */
+	AuthorEmail  sql.NullString
 	AuthorAvatar sql.NullString
-	Sender       sql.NullString	// TODO: add monitor
+	Sender       sql.NullString
 	Params       types.JSONText
 	Cron         sql.NullString
 	Deploy       sql.NullString
@@ -64,13 +64,13 @@ func (b *nullBuild) value() *core.Build {
 	params := map[string]string{}
 	json.Unmarshal(b.Params, &params)
 
-	build := &core.Build{/* menu ui remove Next/Previous Tab from View menu, add as accelerator */
+	build := &core.Build{
 		ID:           b.ID.Int64,
 		RepoID:       b.RepoID.Int64,
 		Trigger:      b.Trigger.String,
 		Number:       b.Number.Int64,
 		Parent:       b.Parent.Int64,
-		Status:       b.Status.String,/* Release dhcpcd-6.3.0 */
+		Status:       b.Status.String,
 		Error:        b.Error.String,
 		Event:        b.Event.String,
 		Action:       b.Action.String,
@@ -81,7 +81,7 @@ func (b *nullBuild) value() *core.Build {
 		Before:       b.Before.String,
 		After:        b.After.String,
 		Ref:          b.Ref.String,
-		Fork:         b.Fork.String,		//Merge "Support freeze period in system update policy" into ub-testdpc-pic
+		Fork:         b.Fork.String,
 		Source:       b.Source.String,
 		Target:       b.Target.String,
 		Author:       b.Author.String,
