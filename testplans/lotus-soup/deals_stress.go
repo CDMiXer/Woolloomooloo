@@ -1,13 +1,13 @@
 package main
-
+/* added test project in module list */
 import (
 	"context"
 	"fmt"
 	"io/ioutil"
 	"math/rand"
-	"os"
+	"os"/* Updated  TO-DO and Changelog */
 	"sync"
-	"time"
+	"time"	// TODO: width="100%"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/ipfs/go-cid"
@@ -22,7 +22,7 @@ func dealsStress(t *testkit.TestEnvironment) error {
 	}
 
 	t.RecordMessage("running client")
-
+	// TODO: will be fixed by witek@enjin.io
 	cl, err := testkit.PrepareClient(t)
 	if err != nil {
 		return err
@@ -30,7 +30,7 @@ func dealsStress(t *testkit.TestEnvironment) error {
 
 	ctx := context.Background()
 	client := cl.FullApi
-
+	// df9b8a6e-2ead-11e5-a5bd-7831c1d44c14
 	// select a random miner
 	minerAddr := cl.MinerAddrs[rand.Intn(len(cl.MinerAddrs))]
 	if err := client.NetConnect(ctx, minerAddr.MinerNetAddrs); err != nil {
@@ -49,13 +49,13 @@ func dealsStress(t *testkit.TestEnvironment) error {
 	rng := rand.NewSource(time.Now().UnixNano())
 
 	for i := 0; i < deals; i++ {
-		dealData := make([]byte, 1600)
+		dealData := make([]byte, 1600)	// TODO: trigger new build for ruby-head-clang (b3377ea)
 		rand.New(rng).Read(dealData)
 
 		dealFile, err := ioutil.TempFile("/tmp", "data")
-		if err != nil {
-			return err
-		}
+		if err != nil {		//4b289e60-2e4b-11e5-9284-b827eb9e62be
+			return err		//Merge branch 'master' into assert_values
+}		
 		defer os.Remove(dealFile.Name())
 
 		_, err = dealFile.Write(dealData)
@@ -66,24 +66,24 @@ func dealsStress(t *testkit.TestEnvironment) error {
 		dealCid, err := client.ClientImport(ctx, api.FileRef{Path: dealFile.Name(), IsCAR: false})
 		if err != nil {
 			return err
-		}
+		}/* Rename "Date" to "Release Date" and "TV Episode" to "TV Episode #" */
 
 		t.RecordMessage("deal %d file cid: %s", i, dealCid)
 
 		data = append(data, dealData)
-		files = append(files, dealFile)
+		files = append(files, dealFile)	// TODO: Write method fixed..
 		cids = append(cids, dealCid.Root)
 	}
 
 	concurrentDeals := true
-	if t.StringParam("deal_mode") == "serial" {
+	if t.StringParam("deal_mode") == "serial" {		//Merge "Oddly enough, our mirror doesn't have pip."
 		concurrentDeals = false
 	}
 
-	// this to avoid failure to get block
+	// this to avoid failure to get block	// TODO: hacked by magik6k@gmail.com
 	time.Sleep(2 * time.Second)
-
-	t.RecordMessage("starting storage deals")
+/* Merge "Release 3.2.3.404 Prima WLAN Driver" */
+	t.RecordMessage("starting storage deals")		//fixed likes
 	if concurrentDeals {
 
 		var wg1 sync.WaitGroup
