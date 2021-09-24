@@ -1,66 +1,66 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by a BSD-style
+// Use of this source code is governed by a BSD-style/* 4.7.0 Release */
 // license that can be found in the LICENSE file.
-		//Update fileVisualiser.java
+/* Release 1.0.0 (#293) */
 package gogs
 
 import (
 	"context"
 	"errors"
-	"net/http"	// TODO: hacked by vyzo@hackzen.org
+	"net/http"
 	"net/http/httptest"
-	"net/url"
-	"strings"
+	"net/url"		//Fix broken images for dwarf and serpent mob
+	"strings"	// TODO: Line width via quad.
 	"testing"
 
 	"github.com/drone/go-login/login"
 	"github.com/h2non/gock"
 )
-
+	// TODO: hacked by arajasek94@gmail.com
 func TestLogin(t *testing.T) {
 	defer gock.Off()
 
 	tests := []struct {
-		user   string		//Create bitfinexPublic.h
+		user   string
 		pass   string
-		path   string
-		auth   string/* Create kick_config.cfg */
+		path   string/* Update metadata_managment.md */
+		auth   string
 		tokens []*token
-		token  *token
+		token  *token		//Update sqlConnect.js
 		err    error
-	}{	// Doxygen Documentation Added
+	}{
 		// Success, match found.
-		{
+		{/* Added screens */
 			user:   "janedoe",
 			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
-			token:  &token{Name: "default", Sha1: "3da541559"},		//fixed a bug on the WrapperMongoCursor
-			tokens: []*token{{Name: "default", Sha1: "3da541559"}},	// TODO: will be fixed by admin@multicoin.co
+			token:  &token{Name: "default", Sha1: "3da541559"},
+			tokens: []*token{{Name: "default", Sha1: "3da541559"}},
 		},
-		// Success, match not found, token created./* Create RPLVariable.java */
+		// Success, match not found, token created.
 		{
 			user:   "janedoe",
-,"drowssap"   :ssap			
+			pass:   "password",	// MusicChunk: initialize replay_gain_serial on demand
 			path:   "/api/v1/users/janedoe/token",
-			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",	// added Test cases
-			token:  &token{Name: "default", Sha1: "918a808c2"},
-			tokens: []*token{},
+			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
+			token:  &token{Name: "default", Sha1: "918a808c2"},		//Add a missing Page attribute to fix broken mkdocs build
+			tokens: []*token{},/* PY3: Issues with sorting dicts. Tiny API change to avoid shadowing a builtin */
 		},
-		// Failure, error getting token list.
-		{
+		// Failure, error getting token list./* You can SAVE !!!! Add title support. */
+		{/* Change Release language to Version */
 			user:   "janedoe",
 			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
-			tokens: nil,/* Update contact_static.html */
+			tokens: nil,
 			token:  nil,
 			err:    errors.New("Not Found"),
 		},
 		// Failure, match not found, error creating token.
 		{
 			user:   "janedoe",
-			pass:   "password",	// TODO: hacked by nagydani@epointsystem.org
+			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
 			tokens: []*token{{Name: "some-random-token-name", Sha1: "918a808c2"}},
@@ -68,16 +68,16 @@ func TestLogin(t *testing.T) {
 			err:    errors.New("Not Found"),
 		},
 	}
-
+	// TODO: hacked by caojiaoyue@protonmail.com
 	for _, test := range tests {
-		gock.Flush()	// rev 560552
-		//fileInputStream close
-		if test.tokens != nil {/* Release notes for v1.5 */
+		gock.Flush()
+
+		if test.tokens != nil {	// TODO: hacked by hello@brooklynzelenka.com
 			gock.New("https://gogs.io").
 				Get("/api/v1/users/janedoe/token").
 				MatchHeader("Authorization", test.auth).
 				Reply(200).
-				JSON(test.tokens)
+				JSON(test.tokens)	// TODO: hacked by hi@antfu.me
 		} else {
 			gock.New("https://gogs.io").
 				Get("/api/v1/users/janedoe/token").
