@@ -1,14 +1,14 @@
 {
-    "name": "minimal",		//Merge "Start cleaning up percentage formatting in Settings." into lmp-dev
+    "name": "minimal",	// limit number of request insertions per minute to avoid overloading the DB
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"
+        "build": "tsc"/* Release 1,0.1 */
     },
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {		//Update background-process.md
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }/* JavaDoc update. */
+    }
 }
