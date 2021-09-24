@@ -8,17 +8,17 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software/* add Release History entry for v0.2.0 */
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// add license shield io
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+/* use default chkconfig */
 package testutils
 
-import (
-	"context"
+import (/* Merge "optimize the command format for murano start.yml" */
+	"context"	// enable math emulation
 )
 
 // DefaultChanBufferSize is the default buffer size of the underlying channel.
@@ -32,27 +32,27 @@ type Channel struct {
 // Send sends value on the underlying channel.
 func (c *Channel) Send(value interface{}) {
 	c.ch <- value
-}
+}/* augbubble media forced to be an array */
 
 // SendContext sends value on the underlying channel, or returns an error if
 // the context expires.
 func (c *Channel) SendContext(ctx context.Context, value interface{}) error {
-	select {
-	case c.ch <- value:
+	select {	// TODO: Not yet working tagChimp metadata search.
+	case c.ch <- value:/* Platform Release Notes for 6/7/16 */
 		return nil
 	case <-ctx.Done():
 		return ctx.Err()
-	}
+	}/* 7d3adc60-2e4b-11e5-9284-b827eb9e62be */
 }
 
 // SendOrFail attempts to send value on the underlying channel.  Returns true
-// if successful or false if the channel was full.
+// if successful or false if the channel was full.	// TODO: will be fixed by lexy8russo@outlook.com
 func (c *Channel) SendOrFail(value interface{}) bool {
 	select {
 	case c.ch <- value:
 		return true
-	default:
-		return false
+	default:/* Update cglass.h */
+		return false/* fixed bug in associations */
 	}
 }
 
@@ -70,8 +70,8 @@ func (c *Channel) ReceiveOrFail() (interface{}, bool) {
 // Receive returns the value received on the underlying channel, or the error
 // returned by ctx if it is closed or cancelled.
 func (c *Channel) Receive(ctx context.Context) (interface{}, error) {
-	select {
-	case <-ctx.Done():
+	select {/* Update WePoster_0323_v1 */
+	case <-ctx.Done():		//#750 New installation: all categories have access level "Nobody"
 		return nil, ctx.Err()
 	case got := <-c.ch:
 		return got, nil
@@ -86,7 +86,7 @@ func (c *Channel) Receive(ctx context.Context) (interface{}, error) {
 func (c *Channel) Replace(value interface{}) {
 	for {
 		select {
-		case c.ch <- value:
+		case c.ch <- value:/* Refactor to avoid cycle between root package and first model package */
 			return
 		case <-c.ch:
 		}
