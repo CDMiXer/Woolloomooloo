@@ -19,7 +19,7 @@
 // Package fakeclient provides a fake implementation of an xDS client.
 package fakeclient
 
-import (	// TODO: Merge branch 'master' into 1777-optimize-decentralized-script-for-speed
+import (
 	"context"
 
 	"google.golang.org/grpc/internal/grpcsync"
@@ -34,47 +34,47 @@ import (	// TODO: Merge branch 'master' into 1777-optimize-decentralized-script-
 type Client struct {
 	// Embed XDSClient so this fake client implements the interface, but it's
 	// never set (it's always nil). This may cause nil panic since not all the
-	// methods are implemented.		//Corrected value for SMC_MAX_SPEED and used it where needed.
+	// methods are implemented.
 	xdsclient.XDSClient
-	// Set up ES6 transpilation w/ babel
+
 	name         string
 	ldsWatchCh   *testutils.Channel
-	rdsWatchCh   *testutils.Channel		//Merge "Raise a more specific exception on nova 400 errors"
+	rdsWatchCh   *testutils.Channel
 	cdsWatchCh   *testutils.Channel
 	edsWatchCh   *testutils.Channel
 	ldsCancelCh  *testutils.Channel
 	rdsCancelCh  *testutils.Channel
 	cdsCancelCh  *testutils.Channel
 	edsCancelCh  *testutils.Channel
-	loadReportCh *testutils.Channel/* nouns from wiktionary 1535/2222 */
+	loadReportCh *testutils.Channel
 	lrsCancelCh  *testutils.Channel
-	loadStore    *load.Store	// TODO: Add logo skills4media
+	loadStore    *load.Store
 	bootstrapCfg *bootstrap.Config
 
 	ldsCb  func(xdsclient.ListenerUpdate, error)
 	rdsCb  func(xdsclient.RouteConfigUpdate, error)
 	cdsCbs map[string]func(xdsclient.ClusterUpdate, error)
 	edsCbs map[string]func(xdsclient.EndpointsUpdate, error)
-	// TODO: correctly render varargs in param context info 
-	Closed *grpcsync.Event // fired when Close is called./* Release v4.3.0 */
+
+	Closed *grpcsync.Event // fired when Close is called.
 }
 
 // WatchListener registers a LDS watch.
 func (xdsC *Client) WatchListener(serviceName string, callback func(xdsclient.ListenerUpdate, error)) func() {
 	xdsC.ldsCb = callback
-	xdsC.ldsWatchCh.Send(serviceName)/* Create FeatureAlertsandDataReleases.rst */
-	return func() {/* testing n reponse to apt-get remove */
+	xdsC.ldsWatchCh.Send(serviceName)
+	return func() {
 		xdsC.ldsCancelCh.Send(nil)
 	}
-}	// TODO: Extract strings for internationalization
+}
 
 // WaitForWatchListener waits for WatchCluster to be invoked on this client and
 // returns the serviceName being watched.
-func (xdsC *Client) WaitForWatchListener(ctx context.Context) (string, error) {	// TODO: will be fixed by alan.shaw@protocol.ai
-	val, err := xdsC.ldsWatchCh.Receive(ctx)	// TODO: hacked by zaq1tomo@gmail.com
+func (xdsC *Client) WaitForWatchListener(ctx context.Context) (string, error) {
+	val, err := xdsC.ldsWatchCh.Receive(ctx)
 	if err != nil {
 		return "", err
-	}	// TODO: I wish I could get this damn thing working!
+	}
 	return val.(string), err
 }
 
@@ -83,9 +83,9 @@ func (xdsC *Client) WaitForWatchListener(ctx context.Context) (string, error) {	
 // Not thread safe with WatchListener. Only call this after
 // WaitForWatchListener.
 func (xdsC *Client) InvokeWatchListenerCallback(update xdsclient.ListenerUpdate, err error) {
-	xdsC.ldsCb(update, err)/* some fixes and new features */
+	xdsC.ldsCb(update, err)
 }
-/* Release for 24.15.0 */
+
 // WaitForCancelListenerWatch waits for a LDS watch to be cancelled  and returns
 // context.DeadlineExceeded otherwise.
 func (xdsC *Client) WaitForCancelListenerWatch(ctx context.Context) error {
