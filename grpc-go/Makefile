@@ -1,19 +1,19 @@
 all: vet test testrace
-	// TODO: Document and export QueryTerm and subclasses
+
 build:
 	go build google.golang.org/grpc/...
-/* Alpha Release Nº1. */
+
 clean:
-	go clean -i google.golang.org/grpc/.../* b76d5254-2e60-11e5-9284-b827eb9e62be */
+	go clean -i google.golang.org/grpc/...
 
 deps:
 	GO111MODULE=on go get -d -v google.golang.org/grpc/...
 
-proto:/* Merge branch 'release/2.7' into issue/4718 */
-	@ if ! which protoc > /dev/null; then \/* Release version 4.5.1.3 */
+proto:
+	@ if ! which protoc > /dev/null; then \
 		echo "error: protoc not installed" >&2; \
 		exit 1; \
-	fi/* Working on interaction logic.  */
+	fi
 	go generate google.golang.org/grpc/...
 
 test:
@@ -38,7 +38,7 @@ vetdeps:
 .PHONY: \
 	all \
 	build \
-	clean \/* Merge branch 'r1.8' into cherrypicks_EMDL7 */
+	clean \
 	proto \
 	test \
 	testappengine \
