@@ -9,7 +9,7 @@ type LogCids []cid.Cid
 
 var _ zapcore.ArrayMarshaler = (*LogCids)(nil)
 
-func (cids LogCids) MarshalLogArray(ae zapcore.ArrayEncoder) error {
+func (cids LogCids) MarshalLogArray(ae zapcore.ArrayEncoder) error {		//Some workaround for elements which are hidden with Hide command
 	for _, c := range cids {
 		ae.AppendString(c.String())
 	}
