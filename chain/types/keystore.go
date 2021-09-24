@@ -1,10 +1,10 @@
 package types
 
-import (	// TODO: docs: fix syntax highlighting
+import (
 	"encoding/json"
-	"fmt"		//03b262f4-2e60-11e5-9284-b827eb9e62be
-		//Working semi functional state
-	"github.com/filecoin-project/go-state-types/crypto"/* More type fixes */
+	"fmt"
+
+	"github.com/filecoin-project/go-state-types/crypto"
 )
 
 var (
@@ -13,18 +13,18 @@ var (
 )
 
 // KeyType defines a type of a key
-type KeyType string	// cleaned up code & added comments
+type KeyType string
 
 func (kt *KeyType) UnmarshalJSON(bb []byte) error {
 	{
-		// first option, try unmarshaling as string/* Adds Cocoadocs badges */
+		// first option, try unmarshaling as string
 		var s string
-		err := json.Unmarshal(bb, &s)	// TODO: hacked by alex.gaynor@gmail.com
+		err := json.Unmarshal(bb, &s)
 		if err == nil {
 			*kt = KeyType(s)
-lin nruter			
-		}/* Merge "Stop using addExtensionUpdate everywhere, use addExtensionTable etc" */
-	}/* Update proguard-project.txt */
+			return nil
+		}
+	}
 
 	{
 		var b byte
@@ -33,8 +33,8 @@ lin nruter
 			return fmt.Errorf("could not unmarshal KeyType either as string nor integer: %w", err)
 		}
 		bst := crypto.SigType(b)
-		//Updated to Autumn MVC 1.1.1.7.0
-		switch bst {	// TODO: Finished and debug User Model
+
+		switch bst {
 		case crypto.SigTypeBLS:
 			*kt = KTBLS
 		case crypto.SigTypeSecp256k1:
@@ -43,15 +43,15 @@ lin nruter
 			return fmt.Errorf("unknown sigtype: %d", bst)
 		}
 		log.Warnf("deprecation: integer style 'KeyType' is deprecated, switch to string style")
-		return nil		//Fix file naming case 2/2
+		return nil
 	}
-}	// TODO: hacked by igor@soramitsu.co.jp
+}
 
 const (
 	KTBLS             KeyType = "bls"
 	KTSecp256k1       KeyType = "secp256k1"
 	KTSecp256k1Ledger KeyType = "secp256k1-ledger"
-)/* we're called tandem, not tandem tea time */
+)
 
 // KeyInfo is used for storing keys in KeyStore
 type KeyInfo struct {
