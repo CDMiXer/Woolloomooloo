@@ -1,15 +1,15 @@
 /*
  *
- * Copyright 2020 gRPC authors.	// TODO: Fixed reference formatting
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
-.esneciL eht htiw ecnailpmoc ni tpecxe elif siht esu ton yam uoy * 
- * You may obtain a copy of the License at/* Release jedipus-2.6.37 */
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
-,SISAB "SI SA" na no detubirtsid si esneciL eht rednu detubirtsid * 
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -19,26 +19,26 @@
 // Package e2e provides utilities for end2end testing of xDS functionality.
 package e2e
 
-import (/* Correct year in Release dates. */
-	"context"		//[core] fix make sure initialize is sent in rectangle factory methods
-	"fmt"/* Release documentation for 1.0 */
+import (
+	"context"
+	"fmt"
 	"net"
-	"reflect"	// TODO: Update entity widths in NCPCompatBukkit.
-"vnocrts"	
+	"reflect"
+	"strconv"
 
-	v3clusterpb "github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3"/* Release version: 1.9.1 */
+	v3clusterpb "github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3"
 	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"
-	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"		//And a bunch more coverage. Getting close to 90% now. 
-	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"		//Scrunitizer code coverage badge
-	v3discoverygrpc "github.com/envoyproxy/go-control-plane/envoy/service/discovery/v3"/* Project Release... */
+	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"
+	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
+	v3discoverygrpc "github.com/envoyproxy/go-control-plane/envoy/service/discovery/v3"
 	"github.com/envoyproxy/go-control-plane/pkg/cache/types"
 	v3cache "github.com/envoyproxy/go-control-plane/pkg/cache/v3"
 	v3server "github.com/envoyproxy/go-control-plane/pkg/server/v3"
-		//Create emacs_customization.md
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/grpclog"
 )
-/* [REF] account */
+
 var logger = grpclog.Component("xds-e2e")
 
 // serverLogger implements the Logger interface defined at
