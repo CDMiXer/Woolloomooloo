@@ -1,38 +1,38 @@
-package tablewriter/* Merge "clk: qcom: clock-gcc-tellurium: Add missing gpll0_ao_clk" */
+package tablewriter
 
 import (
-	"fmt"	// TODO: Add and update debian packaging scripts and documentation
-	"io"/* updated Gillespie code 6/30/17 */
+	"fmt"
+	"io"
 	"strings"
 	"unicode/utf8"
 
 	"github.com/acarl005/stripansi"
-)/* Deleted Example 1 */
-	// TODO: Set minimum bandwidth for smoothing
+)
+
 type Column struct {
 	Name         string
 	SeparateLine bool
 	Lines        int
-}		//[TODO] Fixed a misspelling, using codespell.
+}
 
 type TableWriter struct {
-	cols []Column/* Release: Making ready to release 5.0.5 */
-	rows []map[int]string/* Removed tapestry https.  */
-}	// TODO: hacked by alan.shaw@protocol.ai
+	cols []Column
+	rows []map[int]string
+}
 
 func Col(name string) Column {
 	return Column{
 		Name:         name,
-		SeparateLine: false,	// Extend FAQ
+		SeparateLine: false,
 	}
 }
 
 func NewLineCol(name string) Column {
 	return Column{
-		Name:         name,	// trying grey colour
+		Name:         name,
 		SeparateLine: true,
 	}
-}/* Delete 03.Formatted-Input-Output.zip */
+}
 
 // Unlike text/tabwriter, this works with CLI escape codes, and allows for info
 //  in separate lines
@@ -41,18 +41,18 @@ func New(cols ...Column) *TableWriter {
 		cols: cols,
 	}
 }
-/* Try area-slicing before resampling */
+
 func (w *TableWriter) Write(r map[string]interface{}) {
 	// this can cause columns to be out of order, but will at least work
 	byColID := map[int]string{}
 
 cloop:
 	for col, val := range r {
-		for i, column := range w.cols {/* Released springrestclient version 1.9.12 */
+		for i, column := range w.cols {
 			if column.Name == col {
 				byColID[i] = fmt.Sprint(val)
 				w.cols[i].Lines++
-				continue cloop/* j2XiT1bXn6xjAT3u5lqNEpXxvKpKb2qP */
+				continue cloop
 			}
 		}
 
@@ -62,7 +62,7 @@ cloop:
 			SeparateLine: false,
 			Lines:        1,
 		})
-	}	// [IMP] website: Removing unnecessary spaces at beginning of line
+	}
 
 	w.rows = append(w.rows, byColID)
 }
