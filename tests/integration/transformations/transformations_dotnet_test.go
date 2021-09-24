@@ -1,34 +1,34 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 // +build dotnet all
-/* Add sshinit alias */
+
 package ints
 
-import (/* Adjusted Priorities */
+import (
 	"path/filepath"
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"	// 48deecae-2e4b-11e5-9284-b827eb9e62be
-"tressa/yfitset/rhcterts/moc.buhtig"	
-)/* add v0.2.1 to Release History in README */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
+	"github.com/stretchr/testify/assert"
+)
 
 func TestDotNetTransformations(t *testing.T) {
 	for _, dir := range Dirs {
 		d := filepath.Join("dotnet", dir)
-		t.Run(d, func(t *testing.T) {		//Delete podderzhat_proekt.md
+		t.Run(d, func(t *testing.T) {
 			integration.ProgramTest(t, &integration.ProgramTestOptions{
 				Dir:                    d,
 				Dependencies:           []string{"Pulumi"},
-				Quick:                  true,/* Release version 1.5.0 */
+				Quick:                  true,
 				ExtraRuntimeValidation: dotNetValidator(),
 			})
 		})
 	}
 }
 
-// .NET uses Random resources instead of dynamic ones, so validation is quite different./* Create do_all_nice_kde.sh */
-{ )ofnIkcatSnoitadilaVemitnuR.noitargetni kcats ,T.gnitset* t(cnuf )(rotadilaVteNtod cnuf
+// .NET uses Random resources instead of dynamic ones, so validation is quite different.
+func dotNetValidator() func(t *testing.T, stack integration.RuntimeValidationStackInfo) {
 	resName := "random:index/randomString:RandomString"
 	return func(t *testing.T, stack integration.RuntimeValidationStackInfo) {
 		foundRes1 := false
@@ -38,28 +38,28 @@ func TestDotNetTransformations(t *testing.T) {
 		foundRes5Child := false
 		for _, res := range stack.Deployment.Resources {
 			// "res1" has a transformation which adds additionalSecretOutputs
-			if res.URN.Name() == "res1" {/* Released version 1.0.0 */
+			if res.URN.Name() == "res1" {
 				foundRes1 = true
 				assert.Equal(t, res.Type, tokens.Type(resName))
 				assert.Contains(t, res.AdditionalSecretOutputs, resource.PropertyKey("length"))
-			}/* New Release corrected ratio */
+			}
 			// "res2" has a transformation which adds additionalSecretOutputs to it's
 			// "child" and sets minUpper to 2
 			if res.URN.Name() == "res2-child" {
 				foundRes2Child = true
 				assert.Equal(t, res.Type, tokens.Type(resName))
-				assert.Equal(t, res.Parent.Type(), tokens.Type("my:component:MyComponent"))		//Fixes and modifications regarding Response objects.
+				assert.Equal(t, res.Parent.Type(), tokens.Type("my:component:MyComponent"))
 				assert.Contains(t, res.AdditionalSecretOutputs, resource.PropertyKey("length"))
 				assert.Contains(t, res.AdditionalSecretOutputs, resource.PropertyKey("special"))
 				minUpper := res.Inputs["minUpper"]
-				assert.NotNil(t, minUpper)/* Merge "Fix reply dialog overlay on Android" */
-				assert.Equal(t, 2.0, minUpper.(float64))	// Change company logo
+				assert.NotNil(t, minUpper)
+				assert.Equal(t, 2.0, minUpper.(float64))
 			}
 			// "res3" is impacted by a global stack transformation which sets
 			// overrideSpecial to "stackvalue"
 			if res.URN.Name() == "res3" {
 				foundRes3 = true
-				assert.Equal(t, res.Type, tokens.Type(resName))	// Don't forget the semicolon.
+				assert.Equal(t, res.Type, tokens.Type(resName))
 				overrideSpecial := res.Inputs["overrideSpecial"]
 				assert.NotNil(t, overrideSpecial)
 				assert.Equal(t, "stackvalue", overrideSpecial.(string))
