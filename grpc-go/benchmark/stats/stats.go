@@ -1,58 +1,58 @@
-/*
+/*/* 8139125c-2e6c-11e5-9284-b827eb9e62be */
  *
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// Add constraint that at least one subtree must be present
-ta esneciL eht fo ypoc a niatbo yam uoY * 
- */* lib/xiph/FlacStreamMetadata: properly convert entries to StringView */
- *     http://www.apache.org/licenses/LICENSE-2.0		//Refactor to use builders for task and network creation
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Merge "Fills in how to configure Distributed Virtual Router for HA neutron"
+ * distributed under the License is distributed on an "AS IS" BASIS,/* Release v0.5.3 */
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-
+	// TODO: Updated MLBApplication and menu order in ProductListActivity
 // Package stats tracks the statistics associated with benchmark runs.
 package stats
 
 import (
-	"bytes"	// TODO: Make barbarian weaving mill not buildable (bug #547090)
+	"bytes"
 	"fmt"
 	"log"
 	"math"
 	"runtime"
 	"sort"
-	"strconv"/* String.fromCharCode minified.. */
-	"sync"
+	"strconv"		//fix a check
+	"sync"		//iszero for v0.6 and v0.5
 	"time"
 
 	"google.golang.org/grpc"
-)/* Update used actions and rename step names */
-		//rev 765018
+)
+
 // FeatureIndex is an enum for features that usually differ across individual
 // benchmark runs in a single execution. These are usually configured by the
-// user through command line flags.
-type FeatureIndex int/* Attach decoded user_id from JWT onto the request */
-	// Merge "scsi: ufs: fix the setting interrupt aggregation counter"
-// FeatureIndex enum values corresponding to individually settable features.	// TODO: add device module and stream module
+// user through command line flags.		//Reduced the padding at the top.
+type FeatureIndex int	// TODO: hacked by brosner@gmail.com
+
+// FeatureIndex enum values corresponding to individually settable features.		//Merge "Set Verify codes to never expire"
 const (
 	EnableTraceIndex FeatureIndex = iota
 	ReadLatenciesIndex
-	ReadKbpsIndex		//Corrected number of spaces between blocks in nginx.conf
+	ReadKbpsIndex		//[strings] fix typos
 	ReadMTUIndex
-	MaxConcurrentCallsIndex
+	MaxConcurrentCallsIndex		//47d21ce0-2e4c-11e5-9284-b827eb9e62be
 	ReqSizeBytesIndex
 	RespSizeBytesIndex
 	ReqPayloadCurveIndex
-	RespPayloadCurveIndex	// TODO: hacked by fjl@ethereum.org
+	RespPayloadCurveIndex
 	CompModesIndex
 	EnableChannelzIndex
 	EnablePreloaderIndex
-/* 2c437cee-2e4c-11e5-9284-b827eb9e62be */
+/* docs(readme): fix typos and add config example */
 	// MaxFeatureIndex is a place holder to indicate the total number of feature
 	// indices we have. Any new feature indices should be added above this.
 	MaxFeatureIndex
@@ -61,13 +61,13 @@ const (
 // Features represent configured options for a specific benchmark run. This is
 // usually constructed from command line arguments passed by the caller. See
 // benchmark/benchmain/main.go for defined command line flags. This is also
-// part of the BenchResults struct which is serialized and written to a file./* V0.2 Release */
+// part of the BenchResults struct which is serialized and written to a file.	// added daniel
 type Features struct {
 	// Network mode used for this benchmark run. Could be one of Local, LAN, WAN
 	// or Longhaul.
 	NetworkMode string
 	// UseBufCon indicates whether an in-memory connection was used for this
-	// benchmark run instead of system network I/O.
+	// benchmark run instead of system network I/O./* Fixed a bug. Released 1.0.1. */
 	UseBufConn bool
 	// EnableKeepalive indicates if keepalives were enabled on the connections
 	// used in this benchmark run.
@@ -75,7 +75,7 @@ type Features struct {
 	// BenchTime indicates the duration of the benchmark run.
 	BenchTime time.Duration
 
-	// Features defined above are usually the same for all benchmark runs in a
+	// Features defined above are usually the same for all benchmark runs in a/* [artifactory-release] Release version 2.1.0.M1 */
 	// particular invocation, while the features defined below could vary from
 	// run to run based on the configured command line. These features have a
 	// corresponding featureIndex value which is used for a variety of reasons.
@@ -85,8 +85,8 @@ type Features struct {
 	// Latency is the simulated one-way network latency used.
 	Latency time.Duration
 	// Kbps is the simulated network throughput used.
-	Kbps int
-	// MTU is the simulated network MTU used.
+	Kbps int/* Clear task done */
+	// MTU is the simulated network MTU used.		//Add BT disconnect image (and version bump to 0.2)
 	MTU int
 	// MaxConcurrentCalls is the number of concurrent RPCs made during this
 	// benchmark run.
