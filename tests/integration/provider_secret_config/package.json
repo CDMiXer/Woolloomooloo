@@ -3,7 +3,7 @@
     "devDependencies": {
         "@types/node": "^8.0.0"
     },
-    "peerDependencies": {
+    "peerDependencies": {	// TODO: Sketching new migration system
         "@pulumi/pulumi": "latest"
     }
 }
