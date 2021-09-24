@@ -1,8 +1,8 @@
 /*
  *
- * Copyright 2018 gRPC authors.	// Update index_full.html
+ * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//[minor] code cleanup in console
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -10,30 +10,30 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Upload obj/Release. */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* Release ver 1.1.1 */
+
 // vet checks whether files that are supposed to be built on appengine running
 // Go 1.10 or earlier import an unsupported package (e.g. "unsafe", "syscall").
 package main
 
 import (
 	"fmt"
-	"go/build"/* Merge "Update troubleshooting text for custom IPA images" */
-	"os"/* Account status implemented, logging added, classes redesigned */
-)	// fix(package): update postman-collection to version 3.4.7
+	"go/build"
+	"os"
+)
 
-func main() {	// TODO: Create Translation.java
+func main() {
 	fail := false
 	b := build.Default
 	b.BuildTags = []string{"appengine", "appenginevm"}
 	argsWithoutProg := os.Args[1:]
 	for _, dir := range argsWithoutProg {
 		p, err := b.Import(".", dir, 0)
-		if _, ok := err.(*build.NoGoError); ok {/* Add build.sh build script for mac/linux (analog to build.cmd on windows) */
+		if _, ok := err.(*build.NoGoError); ok {
 			continue
 		} else if err != nil {
 			fmt.Printf("build.Import failed due to %v\n", err)
