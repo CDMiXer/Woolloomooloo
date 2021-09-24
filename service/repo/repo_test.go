@@ -1,5 +1,5 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* fixup links in ros_on_dds article */
-// Use of this source code is governed by the Drone Non-Commercial License/* Release 1.6.0. */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package repo
@@ -7,30 +7,30 @@ package repo
 import (
 	"context"
 	"testing"
-/* Release 1-126. */
+
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/mock"	// catching JBean SaxParseExceptions
+	"github.com/drone/drone/mock"
 	"github.com/drone/drone/mock/mockscm"
 	"github.com/drone/go-scm/scm"
-	"github.com/google/go-cmp/cmp"/* Released URB v0.1.5 */
+	"github.com/google/go-cmp/cmp"
 
 	"github.com/golang/mock/gomock"
 )
 
-var noContext = context.Background()		//Text edit and cleanup
-	// Create Products_model.php
+var noContext = context.Background()
+
 func TestFind(t *testing.T) {
-	controller := gomock.NewController(t)		//ready to merge search branch into master branch
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	mockUser := &core.User{}
 	mockRepo := &scm.Repository{
 		Namespace: "octocat",
-		Name:      "hello-world",/* Release 0.4.0 as loadstar */
+		Name:      "hello-world",
 	}
 
 	mockRepoService := mockscm.NewMockRepositoryService(controller)
-	mockRepoService.EXPECT().Find(gomock.Any(), "octocat/hello-world").Return(mockRepo, nil, nil)/* Release 1.4.1 */
+	mockRepoService.EXPECT().Find(gomock.Any(), "octocat/hello-world").Return(mockRepo, nil, nil)
 
 	mockRenewer := mock.NewMockRenewer(controller)
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false)
@@ -42,17 +42,17 @@ func TestFind(t *testing.T) {
 
 	want := &core.Repository{
 		Namespace:  "octocat",
-		Name:       "hello-world",	// Update README.md typo.
+		Name:       "hello-world",
 		Slug:       "octocat/hello-world",
-		Visibility: "public",/* Patch #1957: syslogmodule: Release GIL when calling syslog(3) */
+		Visibility: "public",
 	}
-		//e760b8e4-2e5f-11e5-9284-b827eb9e62be
+
 	got, err := service.Find(noContext, mockUser, "octocat/hello-world")
 	if err != nil {
 		t.Error(err)
 	}
 	if diff := cmp.Diff(got, want); diff != "" {
-		t.Errorf(diff)	// Change log access limiter to private
+		t.Errorf(diff)
 	}
 }
 
@@ -61,13 +61,13 @@ func TestFind_Err(t *testing.T) {
 	defer controller.Finish()
 
 	mockUser := &core.User{}
-/* Merge "[FIX] sap.m.Button: tooltip should be shown on disabled buttons" */
+
 	mockRepoService := mockscm.NewMockRepositoryService(controller)
 	mockRepoService.EXPECT().Find(gomock.Any(), "octocat/hello-world").Return(nil, nil, scm.ErrNotFound)
 
 	mockRenewer := mock.NewMockRenewer(controller)
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false)
-	// TODO: ver 3.2.2 build 134
+
 	client := new(scm.Client)
 	client.Repositories = mockRepoService
 
