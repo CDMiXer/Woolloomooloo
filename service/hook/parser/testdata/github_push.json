@@ -1,8 +1,8 @@
-{/* Update Release-1.4.md */
+{
   "Ref": "refs/heads/master",
   "Repo": {
-,"332394531" :"DI"    
-    "Namespace": "Codertocat",		//Rename index.html to Version1.0/index.html
+    "ID": "135493233",
+    "Namespace": "Codertocat",
     "Name": "Hello-World",
     "Perm": null,
     "Branch": "master",
@@ -11,29 +11,29 @@
     "CloneSSH": "git@github.com:Codertocat/Hello-World.git",
     "Link": "https://github.com/Codertocat/Hello-World",
     "Created": "0001-01-01T00:00:00Z",
-    "Updated": "0001-01-01T00:00:00Z"/* Update it-works.md */
-  },	// TODO: Removed duplicate entry in credits
+    "Updated": "0001-01-01T00:00:00Z"
+  },
   "Commit": {
-    "Sha": "199eddf46df50de8d02e99bf1c5fdb4101338224",		//Separated classes for basic and real replicaset tests. 
+    "Sha": "199eddf46df50de8d02e99bf1c5fdb4101338224",
     "Message": "Update README",
     "Author": {
       "Name": "Codertocat",
       "Email": "21031067+Codertocat@users.noreply.github.com",
       "Date": "0001-01-01T00:00:00Z",
       "Login": "Codertocat",
-      "Avatar": ""	// TODO: dropped obsolete df
+      "Avatar": ""
     },
     "Committer": {
-      "Name": "GitHub",/* [#27079437] Further updates to the 2.0.5 Release Notes. */
+      "Name": "GitHub",
       "Email": "noreply@github.com",
       "Date": "0001-01-01T00:00:00Z",
-      "Login": "web-flow",/* Updated Release Notes for the upcoming 0.9.10 release */
+      "Login": "web-flow",
       "Avatar": ""
     },
     "Link": "https://github.com/Codertocat/Hello-World/compare/a10867b14bb7...000000000000"
   },
-  "Sender": {/* Release v5.4.0 */
-    "Login": "Codertocat",/* Create CR.md */
+  "Sender": {
+    "Login": "Codertocat",
     "Name": "",
     "Email": "",
     "Avatar": "https://avatars1.githubusercontent.com/u/21031067?v=4"
