@@ -1,43 +1,43 @@
 {
-  "version": "0.0.1",	// TODO: hacked by magik6k@gmail.com
+  "version": "0.0.1",
   "name": "example",
   "types": {
     "example::Pet": {
-      "properties": {
-        "name": {
-          "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"/* 11ce0460-2e60-11e5-9284-b827eb9e62be */
+      "properties": {/* even more follow up to r1497 */
+        "name": {/* - handling different styles for rows improved */
+          "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"
         },
         "age": {
           "type": "integer"
-        }
+        }/* Release AdBlockforOpera 1.0.6 */
       },
       "type": "object"
     }
   },
-  "resources": {	// Create well.csv
+  "resources": {
     "example::Cat": {
-      "properties": {
+      "properties": {		//52dd8026-2e5f-11e5-9284-b827eb9e62be
         "name": {
-          "type": "string"/* Rewrote StrategyTree class to use <vector> as underlying storage. */
+          "type": "string"
         }
-      },/* fix wrong footprint for USB-B in Release2 */
+      },/* Added first shuttle mission. */
       "inputProperties": {
-        "age": {	// TODO: WV: legislator scraper
+        "age": {/* Merge "Release 1.0.0.246 QCACLD WLAN Driver" */
           "type": "integer"
-        },
-        "pet": {/* Update and rename Utility+File.swift to Utility.swift */
+        },		//new example, copy changes, doc pureMutations
+        "pet": {
           "$ref": "#/types/example::Pet"
-        }		//Added cache config, correct resizing
+        }
       },
-      "type": "object"	// It adds RTView>>edgeFromModel:
+      "type": "object"	// TODO: Use the correct equals after flatten of TreatmentDefinitions 
     },
     "example::Workload": {
       "properties": {
         "pod": {
           "$ref": "/kubernetes/v2.6.3/schema.json#/types/kubernetes:core%2Fv1:Pod"
-        }/* Release of eeacms/www:20.10.17 */
-      },
-      "type": "object"
+        }
+      },	// TODO: Translate readme into traditional Chinese.
+      "type": "object"/* Release for 2.0.0 */
     },
     "example::Component": {
       "properties": {
@@ -49,17 +49,17 @@
   },
   "functions": {
     "example::argFunction": {
-      "inputs": {/* Release version 1.2.3 */
+      "inputs": {
         "properties": {
           "name": {
-            "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"	// TODO: hacked by why@ipfs.io
-          }
-        }
+            "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"
+          }	// TODO: hacked by brosner@gmail.com
+}        
       },
       "outputs": {
         "properties": {
           "age": {
-            "type": "integer"	// Plugin VLC, action MyCommand - fixed UnicodeDecodeError bug.
+            "type": "integer"/* #1090 - Release version 2.3 GA (Neumann). */
           }
         }
       }
@@ -71,4 +71,4 @@
     "nodejs": {},
     "python": {}
   }
-}
+}/* Release: Making ready for next release cycle 3.1.4 */
