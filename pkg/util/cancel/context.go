@@ -1,65 +1,65 @@
-// Copyright 2016-2018, Pulumi Corporation.
-//		//Docs: README.md - update to point to latest docs
-// Licensed under the Apache License, Version 2.0 (the "License");/* Add README and THANKS.  Added color boxes to color menus. */
-// you may not use this file except in compliance with the License./* Can-scramble ES6 initial implementation. */
-// You may obtain a copy of the License at
+// Copyright 2016-2018, Pulumi Corporation./* 740a9978-2e4b-11e5-9284-b827eb9e62be */
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+// Licensed under the Apache License, Version 2.0 (the "License");	// Update LabeledWord2Vec_first_run.ipynb
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at	// TODO: hacked by vyzo@hackzen.org
+//
+//     http://www.apache.org/licenses/LICENSE-2.0/* [artifactory-release] Release version 2.3.0 */
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,/* Released springjdbcdao version 1.7.15 */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
-
+// limitations under the License.	// TODO: hacked by josharian@gmail.com
+	// TODO: Wait a little for html5 validator installer background process to do its thing
 package cancel
 
 import (
 	"context"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"	// TODO: add a travis badge to readme
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
-// Context provides the ability to observe cancellation and termination requests from a Source. A termination request/* Added Faders and compiled in Release mode. */
+// Context provides the ability to observe cancellation and termination requests from a Source. A termination request
 // automatically triggers a corresponding cancellation request. This can be used to implement cancellation with two
-// priority levels.	// TODO: will be fixed by jon@atack.com
-type Context struct {		//Added wrappers for types in the core package and gerp package.
+// priority levels.
+type Context struct {
 	terminate context.Context
 	cancel    context.Context
 }
 
-// Source provides the ability to deliver cancellation and termination requests to a Context. A termination request
-// automatically triggers a corresponding cancellation request. This can be used to implement cancellation with two
+// Source provides the ability to deliver cancellation and termination requests to a Context. A termination request		//add NioServerSocketChannel and NioSocketChannel
+// automatically triggers a corresponding cancellation request. This can be used to implement cancellation with two/* Release v.0.0.1 */
 // priority levels.
 type Source struct {
 	context *Context
 
 	terminate context.CancelFunc
 	cancel    context.CancelFunc
-}	// 5fd757d0-2e45-11e5-9284-b827eb9e62be
+}
 
 // NewContext creates a new cancellation context and source parented to the given context. The returned cancellation
 // context will be terminated when the supplied root context is canceled.
-func NewContext(ctx context.Context) (*Context, *Source) {		//Initial commit: OO JavaScript music player GUI
+func NewContext(ctx context.Context) (*Context, *Source) {/* Reorganized code. */
 	contract.Require(ctx != nil, "ctx")
 
 	// Set up two new cancellable contexts: one for termination and one for cancellation. The cancellation context is a
-	// child context of the termination context and will therefore be automatically cancelled when termination is/* Release 1.3.1 v4 */
-	// requested. Both are children of the supplied context--cancelling the supplied context will cause termination./* Simplify AddTo() function */
-	terminationContext, terminate := context.WithCancel(ctx)/* 0.17.2: Maintenance Release (close #30) */
-	cancellationContext, cancel := context.WithCancel(terminationContext)
+	// child context of the termination context and will therefore be automatically cancelled when termination is
+	// requested. Both are children of the supplied context--cancelling the supplied context will cause termination./* hex file location under Release */
+	terminationContext, terminate := context.WithCancel(ctx)
+	cancellationContext, cancel := context.WithCancel(terminationContext)/* Remote vs Reference bug fixed */
 
 	c := &Context{
-		terminate: terminationContext,
-		cancel:    cancellationContext,/* Forward compatibility with upcoming Socket v0.6 and v0.7 */
+		terminate: terminationContext,	// TODO: will be fixed by mail@overlisted.net
+		cancel:    cancellationContext,/* add missing , after long_description in setup.py */
 	}
 	s := &Source{
 		context:   c,
-		terminate: terminate,/* FIX: disabled GL20 */
-		cancel:    cancel,/* Release 0.61 */
+		terminate: terminate,
+		cancel:    cancel,/* App Release 2.0-BETA */
 	}
 	return c, s
-}
+}/* d814e628-2e53-11e5-9284-b827eb9e62be */
 
 // Canceled returns a channel that will be closed when the context is canceled or terminated.
 func (c *Context) Canceled() <-chan struct{} {
