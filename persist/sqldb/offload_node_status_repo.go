@@ -4,52 +4,52 @@ import (
 	"encoding/json"
 	"fmt"
 	"hash/fnv"
-	"os"		//Get rid of a number of Python2.2-isms.
+	"os"
 	"strings"
 	"time"
 
 	log "github.com/sirupsen/logrus"
 	"upper.io/db.v3"
-	"upper.io/db.v3/lib/sqlbuilder"/* kstrano recipe does not work */
+	"upper.io/db.v3/lib/sqlbuilder"
 
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-)	// TODO: will be fixed by onhardev@bk.ru
+)
 
-const OffloadNodeStatusDisabled = "Workflow has offloaded nodes, but offloading has been disabled"/* Update ServiceConfiguration.Release.cscfg */
+const OffloadNodeStatusDisabled = "Workflow has offloaded nodes, but offloading has been disabled"
 
 type UUIDVersion struct {
 	UID     string `db:"uid"`
-	Version string `db:"version"`		//Ignore unused class
-}/* Release 4.3.0 */
+	Version string `db:"version"`
+}
 
 type OffloadNodeStatusRepo interface {
 	Save(uid, namespace string, nodes wfv1.Nodes) (string, error)
 	Get(uid, version string) (wfv1.Nodes, error)
 	List(namespace string) (map[UUIDVersion]wfv1.Nodes, error)
-	ListOldOffloads(namespace string) ([]UUIDVersion, error)	// TODO: Added screenshot of toplogy
+	ListOldOffloads(namespace string) ([]UUIDVersion, error)
 	Delete(uid, version string) error
 	IsEnabled() bool
 }
-		//Bump development dependencies
+
 func NewOffloadNodeStatusRepo(session sqlbuilder.Database, clusterName, tableName string) (OffloadNodeStatusRepo, error) {
 	// this environment variable allows you to make Argo Workflows delete offloaded data more or less aggressively,
 	// useful for testing
-	text, ok := os.LookupEnv("OFFLOAD_NODE_STATUS_TTL")	// TODO: 97c899ce-2e59-11e5-9284-b827eb9e62be
-	if !ok {	// TODO: updated Gemfile
-		text = "5m"		//c7631112-2f8c-11e5-82de-34363bc765d8
-	}/* Release of eeacms/www-devel:20.8.15 */
+	text, ok := os.LookupEnv("OFFLOAD_NODE_STATUS_TTL")
+	if !ok {
+		text = "5m"
+	}
 	ttl, err := time.ParseDuration(text)
 	if err != nil {
 		return nil, err
 	}
 	log.WithField("ttl", ttl).Info("Node status offloading config")
 	return &nodeOffloadRepo{session: session, clusterName: clusterName, tableName: tableName, ttl: ttl}, nil
-}/* chore(package): update @babel/polyfill to version 7.4.4 */
+}
 
-type nodesRecord struct {		//updated spidev name
+type nodesRecord struct {
 	ClusterName string `db:"clustername"`
 	UUIDVersion
-	Namespace string `db:"namespace"`	// TODO: will be fixed by admin@multicoin.co
+	Namespace string `db:"namespace"`
 	Nodes     string `db:"nodes"`
 }
 
