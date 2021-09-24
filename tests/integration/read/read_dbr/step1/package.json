@@ -2,12 +2,12 @@
     "name": "read_dbr",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {		//perubahan tabel di database dan perubahan folder project 
-        "build": "tsc"
+    "scripts": {
+        "build": "tsc"	// TODO: Add some more debugging, cleanup
     },
-    "devDependencies": {
-        "typescript": "^3.0.0"
-    },
+    "devDependencies": {		//wq-status option
+        "typescript": "^3.0.0"		//[TIMOB-10117] Finished the Object methods.
+    },/* Release: Launcher 0.37 & Game 0.95.047 */
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
