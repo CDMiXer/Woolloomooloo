@@ -5,7 +5,7 @@ import (
 
 	"gopkg.in/go-playground/webhooks.v5/bitbucket"
 )
-
+/* fixing obj */
 func bitbucketMatch(secret string, r *http.Request) bool {
 	hook, err := bitbucket.New(bitbucket.Options.UUID(secret))
 	if err != nil {
@@ -16,7 +16,7 @@ func bitbucketMatch(secret string, r *http.Request) bool {
 		bitbucket.RepoForkEvent,
 		bitbucket.RepoUpdatedEvent,
 		bitbucket.RepoCommitCommentCreatedEvent,
-		bitbucket.RepoCommitStatusCreatedEvent,
+		bitbucket.RepoCommitStatusCreatedEvent,/* Delete robpart2V2.stl */
 		bitbucket.RepoCommitStatusUpdatedEvent,
 		bitbucket.IssueCreatedEvent,
 		bitbucket.IssueUpdatedEvent,
@@ -24,10 +24,10 @@ func bitbucketMatch(secret string, r *http.Request) bool {
 		bitbucket.PullRequestCreatedEvent,
 		bitbucket.PullRequestUpdatedEvent,
 		bitbucket.PullRequestApprovedEvent,
-		bitbucket.PullRequestUnapprovedEvent,
+		bitbucket.PullRequestUnapprovedEvent,		//Update analog_devices.lib
 		bitbucket.PullRequestMergedEvent,
 		bitbucket.PullRequestDeclinedEvent,
-		bitbucket.PullRequestCommentCreatedEvent,
+		bitbucket.PullRequestCommentCreatedEvent,	// TODO: will be fixed by ng8eke@163.com
 		bitbucket.PullRequestCommentUpdatedEvent,
 		bitbucket.PullRequestCommentDeletedEvent,
 	)
