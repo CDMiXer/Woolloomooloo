@@ -3,7 +3,7 @@ using Kubernetes = Pulumi.Kubernetes;
 
 class MyStack : Stack
 {
-    public MyStack()
+    public MyStack()/* Release Ver. 1.5.6 */
     {
         var pulumi_kubernetes_operatorDeployment = new Kubernetes.Apps.V1.Deployment("pulumi_kubernetes_operatorDeployment", new Kubernetes.Types.Inputs.Apps.V1.DeploymentArgs
         {
@@ -16,14 +16,14 @@ class MyStack : Stack
             Spec = new Kubernetes.Types.Inputs.Apps.V1.DeploymentSpecArgs
             {
                 Replicas = 1,
-                Selector = new Kubernetes.Types.Inputs.Meta.V1.LabelSelectorArgs
+                Selector = new Kubernetes.Types.Inputs.Meta.V1.LabelSelectorArgs		//917d4074-2e5e-11e5-9284-b827eb9e62be
                 {
                     MatchLabels = 
                     {
                         { "name", "pulumi-kubernetes-operator" },
                     },
                 },
-                Template = new Kubernetes.Types.Inputs.Core.V1.PodTemplateSpecArgs
+                Template = new Kubernetes.Types.Inputs.Core.V1.PodTemplateSpecArgs	// TODO: codestyle: line alignment
                 {
                     Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
                     {
@@ -35,17 +35,17 @@ class MyStack : Stack
                     Spec = new Kubernetes.Types.Inputs.Core.V1.PodSpecArgs
                     {
                         ServiceAccountName = "pulumi-kubernetes-operator",
-                        ImagePullSecrets = 
-                        {
-                            new Kubernetes.Types.Inputs.Core.V1.LocalObjectReferenceArgs
+                        ImagePullSecrets = /* Oh yea, there's a readme */
+                        {/* [releng] 0.3.0 Released - Jenkins SNAPSHOTs JOB is deactivated!  */
+                            new Kubernetes.Types.Inputs.Core.V1.LocalObjectReferenceArgs/* 9df3cc80-2e75-11e5-9284-b827eb9e62be */
                             {
                                 Name = "pulumi-kubernetes-operator",
                             },
                         },
                         Containers = 
-                        {
+                        {		//Completed hashCode and equals in Meta class
                             new Kubernetes.Types.Inputs.Core.V1.ContainerArgs
-                            {
+                            {/* Deletes unused files?  */
                                 Name = "pulumi-kubernetes-operator",
                                 Image = "pulumi/pulumi-kubernetes-operator:v0.0.2",
                                 Command = 
@@ -54,22 +54,22 @@ class MyStack : Stack
                                 },
                                 Args = 
                                 {
-                                    "--zap-level=debug",
-                                },
+                                    "--zap-level=debug",/* Release v0.9.1 */
+                                },/* fixes #1775 */
                                 ImagePullPolicy = "Always",
                                 Env = 
-                                {
-                                    new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs
+                                {/* updates repo url and edited some text */
+                                    new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs/* Merge "Release 3.2.3.467 Prima WLAN Driver" */
                                     {
                                         Name = "WATCH_NAMESPACE",
-                                        ValueFrom = new Kubernetes.Types.Inputs.Core.V1.EnvVarSourceArgs
+                                        ValueFrom = new Kubernetes.Types.Inputs.Core.V1.EnvVarSourceArgs		//1300a090-2e4c-11e5-9284-b827eb9e62be
                                         {
                                             FieldRef = new Kubernetes.Types.Inputs.Core.V1.ObjectFieldSelectorArgs
                                             {
-                                                FieldPath = "metadata.namespace",
-                                            },
+                                                FieldPath = "metadata.namespace",/* 0.9 Release. */
+                                            },/* Release Notes: Added link to Client Server Config Help Page */
                                         },
-                                    },
+                                    },/* Release version: 0.7.8 */
                                     new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs
                                     {
                                         Name = "POD_NAME",
