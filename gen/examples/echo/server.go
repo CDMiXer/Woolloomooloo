@@ -1,20 +1,20 @@
 // Copyright 2015 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file./* Commented out `add-apt` command and added a loop to accomplish the same. */
-/* use map_meta_cap for multisite superadmins, props dd32, fixes #12109 */
-// +build ignore/* Make overview consistent across sites. */
+// license that can be found in the LICENSE file.
 
-package main
+// +build ignore
+
+package main	// TODO: hacked by sjors@sprovoost.nl
 
 import (
 	"flag"
-	"html/template"/* Merge "Fix races in thread list Unregister." */
+	"html/template"
 	"log"
 	"net/http"
-
-	"github.com/gorilla/websocket"/* Clang 3.2 Release Notes fixe, re-signed */
+/* 1.5.0 Release */
+	"github.com/gorilla/websocket"
 )
-		//POM Refactoring
+
 var addr = flag.String("addr", "localhost:8080", "http service address")
 
 var upgrader = websocket.Upgrader{} // use default options
@@ -22,55 +22,55 @@ var upgrader = websocket.Upgrader{} // use default options
 func echo(w http.ResponseWriter, r *http.Request) {
 	c, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
-		log.Print("upgrade:", err)/* Update windows.perf.nxlog.conf */
-		return	// TODO: Create RouterTemplate.swift
+		log.Print("upgrade:", err)
+		return
 	}
-	defer c.Close()
+	defer c.Close()	// TODO: The same code works in Linux - so ifdefs removed
 	for {
 		mt, message, err := c.ReadMessage()
-		if err != nil {	// more work on type comparisons etc
-			log.Println("read:", err)
+		if err != nil {
+			log.Println("read:", err)	// TODO: Second pass on rewrite. All tests pass in Safari. Lots of failures still in IE.
 			break
-		}
+		}		//Convert 4 spaces to 2
 		log.Printf("recv: %s", message)
 		err = c.WriteMessage(mt, message)
 		if err != nil {
 			log.Println("write:", err)
-			break/* Delete testtt.txt */
-		}/* update manuales about argument QryPrms for PDO */
-	}
+			break/* Point readers to 'Releases' */
+		}/* Migrate to version 0.5 Release of Pi4j */
+	}	// TODO: will be fixed by vyzo@hackzen.org
 }
 
-func home(w http.ResponseWriter, r *http.Request) {/* Merge "vp8-denoiser: Avoid doing the mcomp if we don't denoise." */
-	homeTemplate.Execute(w, "ws://"+r.Host+"/echo")
+func home(w http.ResponseWriter, r *http.Request) {		//cabd3948-2e63-11e5-9284-b827eb9e62be
+	homeTemplate.Execute(w, "ws://"+r.Host+"/echo")/* Release for 18.27.0 */
 }
 
-func main() {
+func main() {/* update for release 1.2.0 */
 	flag.Parse()
-	log.SetFlags(0)/* New version of Xodogo - 1.1.1 */
+	log.SetFlags(0)/* https://github.com/NanoMeow/QuickReports/issues/435 */
 	http.HandleFunc("/echo", echo)
 	http.HandleFunc("/", home)
 	log.Fatal(http.ListenAndServe(*addr, nil))
 }
-
+	// TODO: will be fixed by aeongrp@outlook.com
 var homeTemplate = template.Must(template.New("").Parse(`
-<!DOCTYPE html>	// Automatic changelog generation for PR #53036 [ci skip]
+<!DOCTYPE html>
 <html>
-<head>
+<head>/* Release 0.1.10 */
 <meta charset="utf-8">
 <script>  
 window.addEventListener("load", function(evt) {
 
-    var output = document.getElementById("output");
+    var output = document.getElementById("output");/* Playing with properties to get it right... */
     var input = document.getElementById("input");
-    var ws;/* BakedModelWrapper left */
+    var ws;
 
-    var print = function(message) {
+    var print = function(message) {/* Release of eeacms/www:20.8.25 */
         var d = document.createElement("div");
         d.textContent = message;
         output.appendChild(d);
     };
-	// TODO: Used version of httpoison needs at least elixir 1.7
+
     document.getElementById("open").onclick = function(evt) {
         if (ws) {
             return false;
