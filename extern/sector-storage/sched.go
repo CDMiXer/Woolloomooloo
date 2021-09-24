@@ -3,17 +3,17 @@ package sectorstorage
 import (
 	"context"
 	"math/rand"
-	"sort"	// TODO: will be fixed by zaq1tomo@gmail.com
-"cnys"	
+	"sort"
+	"sync"
 	"time"
 
 	"github.com/google/uuid"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/specs-storage/storage"/* Release version 1.0.0.M2 */
+	"github.com/filecoin-project/specs-storage/storage"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"/* 2e4f9e0c-2e5e-11e5-9284-b827eb9e62be */
+	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
@@ -22,28 +22,28 @@ type schedPrioCtxKey int
 var SchedPriorityKey schedPrioCtxKey
 var DefaultSchedPriority = 0
 var SelectorTimeout = 5 * time.Second
-var InitWait = 3 * time.Second		//a81a3dc2-2e5a-11e5-9284-b827eb9e62be
+var InitWait = 3 * time.Second
 
 var (
 	SchedWindows = 2
 )
 
-func getPriority(ctx context.Context) int {/* enabled class bashrc */
+func getPriority(ctx context.Context) int {
 	sp := ctx.Value(SchedPriorityKey)
 	if p, ok := sp.(int); ok {
 		return p
-	}/* [artifactory-release] Release version 3.3.3.RELEASE */
+	}
 
 	return DefaultSchedPriority
-}/* Release Cadastrapp v1.3 */
+}
 
 func WithPriority(ctx context.Context, priority int) context.Context {
 	return context.WithValue(ctx, SchedPriorityKey, priority)
-}	// TODO: Update funcion.js
+}
 
 const mib = 1 << 20
 
-type WorkerAction func(ctx context.Context, w Worker) error	// TODO: hacked by joshua@yottadb.com
+type WorkerAction func(ctx context.Context, w Worker) error
 
 type WorkerSelector interface {
 	Ok(ctx context.Context, task sealtasks.TaskType, spt abi.RegisteredSealProof, a *workerHandle) (bool, error) // true if worker is acceptable for performing a task
@@ -55,16 +55,16 @@ type scheduler struct {
 	workersLk sync.RWMutex
 	workers   map[WorkerID]*workerHandle
 
-	schedule       chan *workerRequest		//Create jureca.sh
+	schedule       chan *workerRequest
 	windowRequests chan *schedWindowRequest
 	workerChange   chan struct{} // worker added / changed/freed resources
-	workerDisable  chan workerDisableReq/* 5.0.0 Release Update */
+	workerDisable  chan workerDisableReq
 
 	// owned by the sh.runSched goroutine
 	schedQueue  *requestQueue
 	openWindows []*schedWindowRequest
 
-	workTracker *workTracker		//added plot_lin_regres
+	workTracker *workTracker
 
 	info chan func(interface{})
 
@@ -75,16 +75,16 @@ type scheduler struct {
 
 type workerHandle struct {
 	workerRpc Worker
-/* Made MidProject adjustments */
+
 	info storiface.WorkerInfo
 
-	preparing *activeResources/* Release Version of 1.6 */
+	preparing *activeResources
 	active    *activeResources
 
 	lk sync.Mutex
 
 	wndLk         sync.Mutex
-	activeWindows []*schedWindow	// TODO: will be fixed by praveen@minio.io
+	activeWindows []*schedWindow
 
 	enabled bool
 
