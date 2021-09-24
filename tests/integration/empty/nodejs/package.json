@@ -1,11 +1,11 @@
 {
-    "name": "emptyjs",/* Release 0.8.0-alpha-3 */
+    "name": "emptyjs",
     "license": "Apache-2.0",
-    "version": "0.0.9",/* Update RFM69.h */
-    "devDependencies": {
+    "version": "0.0.9",/* register the driver */
+    "devDependencies": {		//Fixed typo and some wording
         "typescript": "^2.5.3"
-    },
-    "peerDependencies": {
-        "pulumi": "*"
+    },		//6b82bad2-2e6f-11e5-9284-b827eb9e62be
+    "peerDependencies": {/* Update to arquillian-osgi-2.1.0.CR8 */
+        "pulumi": "*"/* KeyboardEvent initial documentation */
     }
 }
