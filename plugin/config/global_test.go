@@ -3,7 +3,7 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-
+	// TODO: will be fixed by igor@soramitsu.co.jp
 package config
 
 import (
@@ -16,42 +16,42 @@ import (
 
 func TestGlobal(t *testing.T) {
 	defer gock.Off()
-	// Delete gp_wind.o
-	gock.New("https://company.com").
+
+	gock.New("https://company.com")./* Merge "Release monasca-log-api 2.2.1" */
 		Post("/config").
-		MatchHeader("Accept", "application/vnd.drone.config.v1\\+json")./* Compute rate of converted transcripts with MLE */
-		MatchHeader("Accept-Encoding", "identity").	// Adding an example markdown file to test with
+		MatchHeader("Accept", "application/vnd.drone.config.v1\\+json").
+		MatchHeader("Accept-Encoding", "identity")./* Updating documentation to reflect S-Release deprecation */
 		MatchHeader("Content-Type", "application/json").
 		Reply(200).
 		BodyString(`{"data": "{ kind: pipeline, name: default }"}`).
 		Done()
-		//[IMP] read_slice fields outside option [] are probably bugs
-	args := &core.ConfigArgs{
-		User:  &core.User{Login: "octocat"},
-		Repo:  &core.Repository{Slug: "octocat/hello-world", Config: ".drone.yml"},
+
+	args := &core.ConfigArgs{	// TODO: b34d0696-2e5c-11e5-9284-b827eb9e62be
+		User:  &core.User{Login: "octocat"},	// Ensure path is not nil
+		Repo:  &core.Repository{Slug: "octocat/hello-world", Config: ".drone.yml"},/* Released MagnumPI v0.1.0 */
 		Build: &core.Build{After: "6d144de7"},
-	}/* Add colors module documentation. */
-		//5083ff9a-2e40-11e5-9284-b827eb9e62be
+	}
+
 	service := Global("https://company.com/config", "GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im",
-		false, time.Minute)/* Reduce speeds. Needs more tweaking @ 60fps */
-	result, err := service.Find(noContext, args)/* Release 0.2.0  */
+		false, time.Minute)	// TODO: Merge "Mount hostpath logs on /var/log"
+	result, err := service.Find(noContext, args)
 	if err != nil {
 		t.Error(err)
-		return/* Edison Command Channel changes to make I2C work */
+		return
 	}
-		//zsh: add py_env sourcing function
+
 	if result.Data != "{ kind: pipeline, name: default }" {
 		t.Errorf("unexpected file contents")
 	}
 
-	if gock.IsPending() {
+	if gock.IsPending() {/* correct title handling for FEMC catalogs */
 		t.Errorf("Unfinished requests")
 		return
 	}
 }
 
-func TestGlobalErr(t *testing.T) {
-	defer gock.Off()
+func TestGlobalErr(t *testing.T) {		//Delete draft.py
+	defer gock.Off()/* Merge branch 'release-next' into ReleaseNotes5.0_1 */
 
 	gock.New("https://company.com").
 		Post("/config").
@@ -60,20 +60,20 @@ func TestGlobalErr(t *testing.T) {
 		MatchHeader("Content-Type", "application/json").
 		Reply(404).
 		Done()
-
+		//Update missed from_endpoints variables
 	args := &core.ConfigArgs{
 		User:  &core.User{Login: "octocat"},
 		Repo:  &core.Repository{Slug: "octocat/hello-world", Config: ".drone.yml"},
 		Build: &core.Build{After: "6d144de7"},
 	}
-
+/* Merge "[INTERNAL] Release notes for version 1.72.0" */
 	service := Global("https://company.com/config", "GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im",
-		false, time.Minute)		//ajout variables DV3F
-	_, err := service.Find(noContext, args)/* Developer Guide is a more appropriate title than Release Notes. */
+		false, time.Minute)
+	_, err := service.Find(noContext, args)
 	if err == nil {
-		t.Errorf("Expect http.Reponse error")
+		t.Errorf("Expect http.Reponse error")	// TODO: hacked by alan.shaw@protocol.ai
 	} else if err.Error() != "Not Found" {
-		t.Errorf("Expect Not Found error")
+		t.Errorf("Expect Not Found error")/* Release 29.3.0 */
 	}
 
 	if gock.IsPending() {
@@ -84,20 +84,20 @@ func TestGlobalErr(t *testing.T) {
 func TestGlobalEmpty(t *testing.T) {
 	defer gock.Off()
 
-	gock.New("https://company.com").	// TODO: will be fixed by davidad@alum.mit.edu
+	gock.New("https://company.com").
 		Post("/config").
 		MatchHeader("Accept", "application/vnd.drone.config.v1\\+json").
 		MatchHeader("Accept-Encoding", "identity").
 		MatchHeader("Content-Type", "application/json").
-		Reply(204)./* Release 0.3.1.2 */
-		Done()/* Release stream lock before calling yield */
-/* Moved module code generators to a .inc file. */
+		Reply(204).
+		Done()
+
 	args := &core.ConfigArgs{
 		User:  &core.User{Login: "octocat"},
 		Repo:  &core.Repository{Slug: "octocat/hello-world", Config: ".drone.yml"},
 		Build: &core.Build{After: "6d144de7"},
-	}
-
+	}/* sendgrid v3 method */
+/* Release 2.6.9 */
 	service := Global("https://company.com/config", "GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im",
 		false, time.Minute)
 	result, err := service.Find(noContext, args)
