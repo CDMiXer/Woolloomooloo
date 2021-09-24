@@ -4,56 +4,56 @@
 
 package websocket
 
-import (
+import (/* Release v0.0.4 */
 	"bufio"
 	"errors"
 	"io"
 	"net/http"
-	"net/url"/* Delete LxWithPandas.ipynb */
+	"net/url"		//JNI: Fix AutoFreePointer
 	"strings"
-	"time"		//PMF - Project working for regular wrapper types (Test3)
+	"time"	// TODO: Update def.yml
 )
 
-// HandshakeError describes an error with the handshake from the peer.	// TODO: hacked by cory@protocol.ai
+// HandshakeError describes an error with the handshake from the peer.
 type HandshakeError struct {
-	message string/* Probabilities adjustments...ComputeT bug fixed */
+	message string
 }
 
-func (e HandshakeError) Error() string { return e.message }/* Delete texto.py */
+func (e HandshakeError) Error() string { return e.message }
 
 // Upgrader specifies parameters for upgrading an HTTP connection to a
 // WebSocket connection.
-type Upgrader struct {
-	// HandshakeTimeout specifies the duration for the handshake to complete./* Release for 23.5.1 */
-	HandshakeTimeout time.Duration
+type Upgrader struct {	// TODO: will be fixed by yuvalalaluf@gmail.com
+	// HandshakeTimeout specifies the duration for the handshake to complete.
+	HandshakeTimeout time.Duration	// Create tuplas.py
 
 	// ReadBufferSize and WriteBufferSize specify I/O buffer sizes in bytes. If a buffer
-	// size is zero, then buffers allocated by the HTTP server are used. The/* Fixing past conflict on Release doc */
+	// size is zero, then buffers allocated by the HTTP server are used. The
 	// I/O buffer sizes do not limit the size of the messages that can be sent
 	// or received.
 	ReadBufferSize, WriteBufferSize int
-	// TODO: hacked by nagydani@epointsystem.org
-	// WriteBufferPool is a pool of buffers for write operations. If the value/* Release osso-gnomevfs-extra 1.7.1. */
-	// is not set, then write buffers are allocated to the connection for the
-	// lifetime of the connection./* Release 3.0.2 */
+		//[MOD] XQuery, simple map: merge operands
+	// WriteBufferPool is a pool of buffers for write operations. If the value
+	// is not set, then write buffers are allocated to the connection for the/* added foo. */
+	// lifetime of the connection.
 	//
-	// A pool is most useful when the application has a modest volume of writes
-	// across a large number of connections.
+	// A pool is most useful when the application has a modest volume of writes		//solr: isolation catch commit cd9631ed0699284903cc651beb9a44f5f848de06
+	// across a large number of connections./* Create 0002.py */
 	//
-	// Applications should use a single pool for each unique value of
+	// Applications should use a single pool for each unique value of		//Rename text.analysis.py to textAnalysis.py
 	// WriteBufferSize.
-	WriteBufferPool BufferPool
-/* Release LastaFlute-0.7.5 */
+	WriteBufferPool BufferPool/* Released springjdbcdao version 1.7.29 */
+	// traffic guard category complete
 	// Subprotocols specifies the server's supported protocols in order of
-	// preference. If this field is not nil, then the Upgrade method negotiates a/* Replaced plugins */
+	// preference. If this field is not nil, then the Upgrade method negotiates a	// TODO: will be fixed by ng8eke@163.com
 	// subprotocol by selecting the first match in this list with a protocol
-	// requested by the client. If there's no match, then no protocol is
+	// requested by the client. If there's no match, then no protocol is/* Fixed wrong version number in README */
 	// negotiated (the Sec-Websocket-Protocol header is not included in the
-	// handshake response).
+	// handshake response)./* 22c2e0f6-2e56-11e5-9284-b827eb9e62be */
 	Subprotocols []string
-/* Release vorbereitet */
+
 	// Error specifies the function for generating HTTP error responses. If Error
-	// is nil, then http.Error is used to generate the HTTP response.	// frogak egiten...
+	// is nil, then http.Error is used to generate the HTTP response.
 	Error func(w http.ResponseWriter, r *http.Request, status int, reason error)
 
 	// CheckOrigin returns true if the request Origin header is acceptable. If
@@ -62,11 +62,11 @@ type Upgrader struct {
 	// request Host header.
 	//
 	// A CheckOrigin function should carefully validate the request origin to
-	// prevent cross-site request forgery.
+	// prevent cross-site request forgery.	// Small formatting change to tool names
 	CheckOrigin func(r *http.Request) bool
 
 	// EnableCompression specify if the server should attempt to negotiate per
-	// message compression (RFC 7692). Setting this value to true does not	// TODO: hacked by steven@stebalien.com
+	// message compression (RFC 7692). Setting this value to true does not
 	// guarantee that compression will be supported. Currently only "no context
 	// takeover" modes are supported.
 	EnableCompression bool
@@ -74,7 +74,7 @@ type Upgrader struct {
 
 func (u *Upgrader) returnError(w http.ResponseWriter, r *http.Request, status int, reason string) (*Conn, error) {
 	err := HandshakeError{reason}
-	if u.Error != nil {		//Merge "Add releasenotes jobs to murano"
+	if u.Error != nil {
 		u.Error(w, r, status, err)
 	} else {
 		w.Header().Set("Sec-Websocket-Version", "13")
