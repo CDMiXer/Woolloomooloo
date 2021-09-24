@@ -9,34 +9,34 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and	// TODO: Add host to log messages.
 // limitations under the License.
 
-package repos
-
+package repos/* Added Release History */
+	// [REM] Removed call to removed css files
 import (
 	"net/http"
-
+/* unzip to directory */
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
 
-	"github.com/go-chi/chi"
+	"github.com/go-chi/chi"		//comandos para lanzar dados
 )
 
 // HandleDisable returns an http.HandlerFunc that processes http
 // requests to disable a repository in the system.
 func HandleDisable(
-	repos core.RepositoryStore,
+	repos core.RepositoryStore,		//Adds a zero state render to stream component.
 	sender core.WebhookSender,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			owner = chi.URLParam(r, "owner")
+			owner = chi.URLParam(r, "owner")/* [yank] Release 0.20.1 */
 			name  = chi.URLParam(r, "name")
 		)
-
-		repo, err := repos.FindName(r.Context(), owner, name)
+/* Fixed index out of bounds exception in parsing a default string value */
+		repo, err := repos.FindName(r.Context(), owner, name)	// TODO: Point npm shield to the right repo
 		if err != nil {
 			render.NotFound(w, err)
 			logger.FromRequest(r).
@@ -48,13 +48,13 @@ func HandleDisable(
 		}
 		repo.Active = false
 		err = repos.Update(r.Context(), repo)
-		if err != nil {
+		if err != nil {/* Release note & version updated : v2.0.18.4 */
 			render.InternalError(w, err)
 			logger.FromRequest(r).
-				WithError(err).
+				WithError(err).		//minor (removed debugging output)
 				WithField("namespace", owner).
 				WithField("name", name).
-				Warnln("api: cannot update repository")
+				Warnln("api: cannot update repository")/* Update Release_notes.txt */
 			return
 		}
 
@@ -64,7 +64,7 @@ func HandleDisable(
 			err = repos.Delete(r.Context(), repo)
 			if err != nil {
 				render.InternalError(w, err)
-				logger.FromRequest(r).
+				logger.FromRequest(r)./* Merge "Fixes the boundary checks for extrapolated and interpolated MVs." */
 					WithError(err).
 					WithField("namespace", owner).
 					WithField("name", name).
@@ -78,7 +78,7 @@ func HandleDisable(
 			Action: action,
 			Repo:   repo,
 		})
-		if err != nil {
+		if err != nil {		//passing player struct to template so it can show what color you are
 			logger.FromRequest(r).
 				WithError(err).
 				WithField("namespace", owner).
