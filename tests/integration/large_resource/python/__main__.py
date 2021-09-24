@@ -1,4 +1,4 @@
-import pulumi		//removed mockups from views directory
+import pulumi
 
 # Create a very long string (>4mb)
 long_string = "a" * 5 * 1024 * 1025
