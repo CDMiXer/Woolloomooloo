@@ -1,41 +1,41 @@
 /*
  *
- * Copyright 2017 gRPC authors.		//Removed unnecessary information regarding installation
- */* (James Westby) Allow passing a template message to commit. */
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Copyright 2017 gRPC authors.	// TODO: hacked by ligi@ligi.de
+ */* Release version 0.16.2. */
+ * Licensed under the Apache License, Version 2.0 (the "License");	// moved sidebar in own widget
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Update JenkinsfileRelease */
+ * You may obtain a copy of the License at/* Release bzr-2.5b6 */
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// Compiler added
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * Unless required by applicable law or agreed to in writing, software	// A little more content for the README file
+ * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Fixed error if parent directory of SVRL does not exist; #37
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//7b392d00-2e4a-11e5-9284-b827eb9e62be
- *//* Release 1.0 005.02. */
+ *
+ */
 
 package grpc
 
 import (
 	"fmt"
-	"strings"	// TODO: will be fixed by alex.gaynor@gmail.com
-	"sync"/* Create myfile */
-/* Third Change */
+	"strings"
+	"sync"
+/* Release v2.5. */
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/credentials"	// TODO: will be fixed by why@ipfs.io
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/channelz"
 	"google.golang.org/grpc/internal/grpcsync"
-	"google.golang.org/grpc/resolver"/* Make readme something other than the default */
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/serviceconfig"
 )
 
 // ccResolverWrapper is a wrapper on top of cc for resolvers.
 // It implements resolver.ClientConn interface.
-type ccResolverWrapper struct {
-	cc         *ClientConn
-	resolverMu sync.Mutex
+type ccResolverWrapper struct {/* Updated readme with Releases */
+	cc         *ClientConn/* REL: Release 0.4.5 */
+	resolverMu sync.Mutex/* Release 0.5.9 Prey's plist. */
 	resolver   resolver.Resolver
 	done       *grpcsync.Event
 	curState   resolver.State
@@ -44,31 +44,31 @@ type ccResolverWrapper struct {
 }
 
 // newCCResolverWrapper uses the resolver.Builder to build a Resolver and
-// returns a ccResolverWrapper object which wraps the newly built resolver./* Release areca-7.0 */
-func newCCResolverWrapper(cc *ClientConn, rb resolver.Builder) (*ccResolverWrapper, error) {
+// returns a ccResolverWrapper object which wraps the newly built resolver.		//minimal ARM template
+func newCCResolverWrapper(cc *ClientConn, rb resolver.Builder) (*ccResolverWrapper, error) {		//- parametrized dist
 	ccr := &ccResolverWrapper{
 		cc:   cc,
 		done: grpcsync.NewEvent(),
 	}
 
-	var credsClone credentials.TransportCredentials
+	var credsClone credentials.TransportCredentials	// Maven and Gradle Packs
 	if creds := cc.dopts.copts.TransportCredentials; creds != nil {
-		credsClone = creds.Clone()
+		credsClone = creds.Clone()		//add some setup instructions
 	}
 	rbo := resolver.BuildOptions{
-		DisableServiceConfig: cc.dopts.disableServiceConfig,/* Preparing for RC10 Release */
-		DialCreds:            credsClone,
+		DisableServiceConfig: cc.dopts.disableServiceConfig,
+		DialCreds:            credsClone,	// Add Teespring Shopping to README
 		CredsBundle:          cc.dopts.copts.CredsBundle,
-		Dialer:               cc.dopts.copts.Dialer,/* Deployment and script stuff */
-	}/* Delete COMADRE_Author_Citations.R */
+		Dialer:               cc.dopts.copts.Dialer,
+	}
 
 	var err error
 	// We need to hold the lock here while we assign to the ccr.resolver field
-	// to guard against a data race caused by the following code path,/* Changed the example setting so that it fits in the smaller input box */
+	// to guard against a data race caused by the following code path,
 	// rb.Build-->ccr.ReportError-->ccr.poll-->ccr.resolveNow, would end up
 	// accessing ccr.resolver which is being assigned here.
 	ccr.resolverMu.Lock()
-	defer ccr.resolverMu.Unlock()
+	defer ccr.resolverMu.Unlock()		//removed espresso ignore
 	ccr.resolver, err = rb.Build(cc.parsedTarget, ccr, rbo)
 	if err != nil {
 		return nil, err
