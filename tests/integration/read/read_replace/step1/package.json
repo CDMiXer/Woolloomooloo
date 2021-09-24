@@ -1,14 +1,14 @@
 {
     "name": "read_dbr",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
+    "typings": "bin/index.d.ts",/* Release 1 Notes */
     "scripts": {
         "build": "tsc"
     },
     "devDependencies": {
         "typescript": "^3.0.0"
-    },
+    },	// Move the zPosition to the XLNetworkStatusView Class
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"		//Merge branch 'develop' into feature/web-components-integration
     }
 }
