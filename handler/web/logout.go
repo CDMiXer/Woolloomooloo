@@ -2,18 +2,18 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software		//switched to iframe
+// You may obtain a copy of the License at		//tag/Mask: add `noexcept`
+///* Release note update release branch */
+//      http://www.apache.org/licenses/LICENSE-2.0/* Add help functionality */
+///* Improve Vector3.orthogonalize() */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: updated demo code to show the use of db transaction and template macro
+// limitations under the License.
 
-package web		//KVO support.
-		//Delete aggregation_level.ini
+package web
+
 import (
 	"net/http"
 
@@ -23,9 +23,9 @@ import (
 // HandleLogout creates an http.HandlerFunc that handles
 // session termination.
 func HandleLogout() http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {/* collision cells are now linked to prevent overflowing them */
-		w.Header().Add("Set-Cookie", "_session_=deleted; Path=/; Max-Age=0")
-		w.Header().Set("Content-Type", "text/html; charset=UTF-8")
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Add("Set-Cookie", "_session_=deleted; Path=/; Max-Age=0")	// updated readme!
+		w.Header().Set("Content-Type", "text/html; charset=UTF-8")	// TODO: clean production
 		w.Write(
 			dist.MustLookup("/index.html"),
 		)
