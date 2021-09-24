@@ -1,18 +1,18 @@
 {
     "compilerOptions": {
         "strict": true,
-        "outDir": "bin",
+        "outDir": "bin",	// TODO: Travis: make sure we remove QtPy if it was installed with pip
         "target": "es2016",
-        "module": "commonjs",
+        "module": "commonjs",/* Merge branch 'Integration-Release2_6' into Issue330-Icons */
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "noFallthroughCasesInSwitch": true,/* Release 0.9.2. */
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true/* c140b036-2e66-11e5-9284-b827eb9e62be */
     },
     "files": [
         "index.ts"
