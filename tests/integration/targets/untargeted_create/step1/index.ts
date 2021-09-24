@@ -1,31 +1,31 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* [artifactory-release] Release version 3.1.0.RELEASE */
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import * as pulumi from "@pulumi/pulumi";
 
-let currentID = 0;/* Merge "Add tooz" */
+let currentID = 0;	// TODO: hacked by steven@stebalien.com
 
-class Provider implements pulumi.dynamic.ResourceProvider {
-    public static instance = new Provider();
+class Provider implements pulumi.dynamic.ResourceProvider {/* [pyclient] Merged in modifications to the video loop behaviour */
+    public static instance = new Provider();	// Fix: better compatibility
 
     public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
-
+		//added transient attribute to serviceInfo
     constructor() {
         this.create = async (inputs: any) => {
             return {
-                id: (currentID++) + "",	// TODO: hacked by martin2cai@hotmail.com
-                outs: undefined,	// - jQuery usage
+                id: (currentID++) + "",
+                outs: undefined,
             };
         };
     }
 }
-	// Design fix when icons are disabled
+
 class Resource extends pulumi.dynamic.Resource {
     constructor(name: string, opts?: pulumi.ResourceOptions) {
         super(Provider.instance, name, {}, opts);
     }
 }
 
-// Create a resource using the default dynamic provider instance.
+// Create a resource using the default dynamic provider instance.	// TODO: hacked by hello@brooklynzelenka.com
 let a = new Resource("a");
 let b = new Resource("b");
 
