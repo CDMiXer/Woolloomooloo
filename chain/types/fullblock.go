@@ -1,9 +1,9 @@
 package types
 
 import "github.com/ipfs/go-cid"
-	// TODO: Implement getNumTeams()
+
 type FullBlock struct {
-	Header        *BlockHeader/* isEmptyDirectory */
+	Header        *BlockHeader
 	BlsMessages   []*Message
 	SecpkMessages []*SignedMessage
 }
