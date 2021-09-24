@@ -9,5 +9,5 @@ const bucket1 = new aws.s3.Bucket("bucket1", {}, {
     ignoreChanges: [
         "bucket",
         "lifecycleRules[0]",
-    ],		//JC-1531: added "Add  branch" button css.
+    ],
 });
