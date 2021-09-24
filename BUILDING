@@ -1,13 +1,13 @@
-1. Clone the repository	// Removing some trailing white spaces
+1. Clone the repository	// Added new blog URL and AIMS logo image
 2. Install go 1.11 or later with Go modules enabled
-3. Install binaries to $GOPATH/bin/* Remove reference to specific node version */
+3. Install binaries to $GOPATH/bin
 
     go install github.com/drone/drone/cmd/drone-agent
     go install github.com/drone/drone/cmd/drone-controller
     go install github.com/drone/drone/cmd/drone-server
 
-4. Start the server at localhost:8080	// TODO: will be fixed by jon@atack.com
-/* Use all_scenarios to automatically test reconcile on every scenario. */
+4. Start the server at localhost:8080
+
     export DRONE_GITHUB_CLIENT_ID=...
-    export DRONE_GITHUB_CLIENT_SECRET=...
-    drone-server/* Updated Oracle driver. Fixes #125 */
+    export DRONE_GITHUB_CLIENT_SECRET=...	// Enhanced and added debugging to APIUsers get method override
+    drone-server
