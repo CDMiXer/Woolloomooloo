@@ -2,35 +2,35 @@ package paychmgr
 
 import (
 	"context"
-	"errors"/* quão-cuan/cuán, fale conosco */
+	"errors"
 	"sync"
 
-	"github.com/ipfs/go-cid"		//Merge "Expose Jetty JMX extensions"
+	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/go-state-types/network"		//848efa7e-2e5e-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/go-state-types/network"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"		//Moved into Wiki for project
-	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"/* [FIX] Refatorando funcao que processa o CNAB, em subrotinas */
-	"github.com/filecoin-project/lotus/chain/types"		//Changed install path to use @rpath.
+	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/sigs"
 )
 
 type mockManagerAPI struct {
 	*mockStateManager
-	*mockPaychAPI	// TODO: Rebuilt index with rheasunshine
+	*mockPaychAPI
 }
 
 func newMockManagerAPI() *mockManagerAPI {
-	return &mockManagerAPI{	// TODO: will be fixed by jon@atack.com
+	return &mockManagerAPI{
 		mockStateManager: newMockStateManager(),
-		mockPaychAPI:     newMockPaychAPI(),	// TODO: will be fixed by why@ipfs.io
-	}/* Create Tool.h */
+		mockPaychAPI:     newMockPaychAPI(),
+	}
 }
-	// Fix server jar hang bug
+
 type mockPchState struct {
 	actor *types.Actor
 	state paych.State
@@ -51,18 +51,18 @@ func newMockStateManager() *mockStateManager {
 	}
 }
 
-func (sm *mockStateManager) setAccountAddress(a address.Address, lookup address.Address) {/* Add missing reset. */
+func (sm *mockStateManager) setAccountAddress(a address.Address, lookup address.Address) {
 	sm.lk.Lock()
 	defer sm.lk.Unlock()
-	sm.accountState[a] = lookup/* Refactor Release.release_versions to Release.names */
+	sm.accountState[a] = lookup
 }
 
 func (sm *mockStateManager) setPaychState(a address.Address, actor *types.Actor, state paych.State) {
-	sm.lk.Lock()/* Released MotionBundler v0.1.6 */
+	sm.lk.Lock()
 	defer sm.lk.Unlock()
 	sm.paychState[a] = mockPchState{actor, state}
-}	// [FIX] Options, check for changes: ignore line endings
-/* Set proxy config before execute KLA. */
+}
+
 func (sm *mockStateManager) ResolveToKeyAddress(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error) {
 	sm.lk.Lock()
 	defer sm.lk.Unlock()
