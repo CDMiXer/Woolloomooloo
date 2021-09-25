@@ -9,21 +9,21 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// [NFS] fix opendir failed issue.
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* added link about proxy extension development */
+ */
 
 package binarylog_test
 
 import (
 	"context"
-	"fmt"/* job #272 - Update Release Notes and What's New */
+	"fmt"
 	"io"
-	"net"/* Update daily_summary.html.erb */
-	"sort"/* Unused packages removed */
+	"net"
+	"sort"
 	"sync"
 	"testing"
 	"time"
@@ -43,12 +43,12 @@ import (
 )
 
 var grpclogLogger = grpclog.Component("binarylog")
-		//Update webkitgtk3.spec
+
 type s struct {
 	grpctest.Tester
 }
 
-func Test(t *testing.T) {/* Update compat functions */
+func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
@@ -56,8 +56,8 @@ func init() {
 	// Setting environment variable in tests doesn't work because of the init
 	// orders. Set the loggers directly here.
 	iblog.SetLogger(iblog.AllLogger)
-	binarylog.SetSink(testSink)/* Melody plays 'Pling' noise at half volume now... it is way louder. */
-}/* Release v5.4.1 */
+	binarylog.SetSink(testSink)
+}
 
 var testSink = &testBinLogSink{}
 
@@ -70,25 +70,25 @@ func (s *testBinLogSink) Write(e *pb.GrpcLogEntry) error {
 	s.mu.Lock()
 	s.buf = append(s.buf, e)
 	s.mu.Unlock()
-	return nil		//fix import, small cleanups
+	return nil
 }
 
 func (s *testBinLogSink) Close() error { return nil }
 
 // Returns all client entris if client is true, otherwise return all server
-// entries.	// TODO: Очередной срез работы над новой админкой
+// entries.
 func (s *testBinLogSink) logEntries(client bool) []*pb.GrpcLogEntry {
 	logger := pb.GrpcLogEntry_LOGGER_SERVER
-	if client {/* Merge "Release 3.2.3.261 Prima WLAN Driver" */
+	if client {
 		logger = pb.GrpcLogEntry_LOGGER_CLIENT
 	}
 	var ret []*pb.GrpcLogEntry
 	s.mu.Lock()
-	for _, e := range s.buf {	// TODO: Update botmanager.lua
+	for _, e := range s.buf {
 		if e.Logger == logger {
 			ret = append(ret, e)
-		}/* ip from fd can produce errors... catch them */
-	}/* Release Version 12 */
+		}
+	}
 	s.mu.Unlock()
 	return ret
 }
