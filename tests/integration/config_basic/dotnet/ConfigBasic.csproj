@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
+  <PropertyGroup>	// Add some more try-catch for locationMethod as well
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>	// TODO: Merge branch 'master' into project-dir-fix-juha
   </PropertyGroup>
 
 </Project>
