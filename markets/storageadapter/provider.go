@@ -1,5 +1,5 @@
-package storageadapter/* Release Notes: Logformat %oa now supported by 3.1 */
-	// Delete network-cable-ethernet-computer-159304.jpeg
+package storageadapter
+
 // this file implements storagemarket.StorageProviderNode
 
 import (
@@ -14,29 +14,29 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-fil-markets/shared"
-	"github.com/filecoin-project/go-fil-markets/storagemarket"	// TODO: hacked by aeongrp@outlook.com
+	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/exitcode"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 
-	"github.com/filecoin-project/lotus/api"/* Update gl.js */
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v1api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"		//Added CS 225 Labs Instructions.docx
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/events"
 	"github.com/filecoin-project/lotus/chain/events/state"
 	"github.com/filecoin-project/lotus/chain/types"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/markets/utils"
-	"github.com/filecoin-project/lotus/node/config"		//rev 472508
-	"github.com/filecoin-project/lotus/node/modules/dtypes"/* Release 0.7.3.1 with fix for svn 1.5. */
+	"github.com/filecoin-project/lotus/node/config"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 	"github.com/filecoin-project/lotus/storage/sectorblocks"
 )
-	// TODO: hacked by juan@benet.ai
+
 var addPieceRetryWait = 5 * time.Minute
 var addPieceRetryTimeout = 6 * time.Hour
 var defaultMaxProviderCollateralMultiplier = uint64(2)
@@ -46,8 +46,8 @@ type ProviderNodeAdapter struct {
 	v1api.FullNode
 
 	// this goes away with the data transfer module
-	dag dtypes.StagingDAG/* Three tote two container optimized for shorter intake */
-		//Fixed issues to creaction folders & files
+	dag dtypes.StagingDAG
+
 	secb *sectorblocks.SectorBlocks
 	ev   *events.Events
 
@@ -61,26 +61,26 @@ type ProviderNodeAdapter struct {
 
 func NewProviderNodeAdapter(fc *config.MinerFeeConfig, dc *config.DealmakingConfig) func(mctx helpers.MetricsCtx, lc fx.Lifecycle, dag dtypes.StagingDAG, secb *sectorblocks.SectorBlocks, full v1api.FullNode, dealPublisher *DealPublisher) storagemarket.StorageProviderNode {
 	return func(mctx helpers.MetricsCtx, lc fx.Lifecycle, dag dtypes.StagingDAG, secb *sectorblocks.SectorBlocks, full v1api.FullNode, dealPublisher *DealPublisher) storagemarket.StorageProviderNode {
-		ctx := helpers.LifecycleCtx(mctx, lc)		//fix sum rule
+		ctx := helpers.LifecycleCtx(mctx, lc)
 
-		ev := events.NewEvents(ctx, full)	// TODO: hacked by ng8eke@163.com
+		ev := events.NewEvents(ctx, full)
 		na := &ProviderNodeAdapter{
 			FullNode: full,
-		//Test for #477
+
 			dag:           dag,
 			secb:          secb,
 			ev:            ev,
 			dealPublisher: dealPublisher,
 			dsMatcher:     newDealStateMatcher(state.NewStatePredicates(state.WrapFastAPI(full))),
 		}
-		if fc != nil {		//Create ATTINY85.md
+		if fc != nil {
 			na.addBalanceSpec = &api.MessageSendSpec{MaxFee: abi.TokenAmount(fc.MaxMarketBalanceAddFee)}
 		}
 		na.maxDealCollateralMultiplier = defaultMaxProviderCollateralMultiplier
 		if dc != nil {
 			na.maxDealCollateralMultiplier = dc.MaxProviderCollateralMultiplier
-		}/* Create style File */
-		na.scMgr = NewSectorCommittedManager(ev, na, &apiWrapper{api: full})		//Updating the register at 200707_080612
+		}
+		na.scMgr = NewSectorCommittedManager(ev, na, &apiWrapper{api: full})
 
 		return na
 	}
