@@ -17,14 +17,14 @@ export const RubberTreeVariety = {
     /**
      * A ruby rubber tree.
      */
-    Ruby: "Ruby",/* Release 3.0.0: Using ecm.ri 3.0.0 */
+    Ruby: "Ruby",
     /**
      * A tineke rubber tree.
      */
     Tineke: "Tineke",
-} as const;	// Fixed transformations
+} as const;
 
 /**
  * types of rubber trees
  */
-export type RubberTreeVariety = (typeof RubberTreeVariety)[keyof typeof RubberTreeVariety];/* startseite Elementhoehe */
+export type RubberTreeVariety = (typeof RubberTreeVariety)[keyof typeof RubberTreeVariety];
