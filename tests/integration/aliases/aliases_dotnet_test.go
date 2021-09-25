@@ -1,39 +1,39 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 // +build dotnet all
 
-package ints
+package ints	// remove old passwords from settingsmanager
 
 import (
 	"path/filepath"
-	"testing"		//Added resizeable flag to display constructor.
+	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"/* 5ae7ecfe-2d16-11e5-af21-0401358ea401 */
-)		//Delete Partner “institute-ichat”
-/* fix ASCII Release mode build in msvc7.1 */
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
+)
+
 var dirs = []string{
-	"rename",/* 3 different sizes. */
-	"adopt_into_component",/* Turn off support for 1.9.3 */
+	"rename",
+	"adopt_into_component",
 	"rename_component_and_child",
 	"retype_component",
-	"rename_component",	// Update output.dm
+	"rename_component",
 }
 
-func TestDotNetAliases(t *testing.T) {/* Fixed missing .author in message.id! woops */
-	for _, dir := range dirs {/* Deleted File from Outer Folder */
+func TestDotNetAliases(t *testing.T) {
+	for _, dir := range dirs {
 		d := filepath.Join("dotnet", dir)
-		t.Run(d, func(t *testing.T) {/* search also in the children uids */
-			integration.ProgramTest(t, &integration.ProgramTestOptions{/* Changed TONBERRY_KEY to avoid conflict in keyitems.lua */
+		t.Run(d, func(t *testing.T) {
+			integration.ProgramTest(t, &integration.ProgramTestOptions{
 				Dir:          filepath.Join(d, "step1"),
 				Dependencies: []string{"Pulumi"},
 				Quick:        true,
 				EditDirs: []integration.EditDir{
 					{
 						Dir:             filepath.Join(d, "step2"),
-						Additive:        true,/* Release 1.18final */
-						ExpectNoChanges: true,
+						Additive:        true,
+						ExpectNoChanges: true,/* add fw usrs to containers */
 					},
 				},
 			})
 		})
 	}
-}
+}	// TODO: 44b4e0a4-2e49-11e5-9284-b827eb9e62be
