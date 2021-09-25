@@ -2,31 +2,31 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
+	"fmt"		//29  tests - LazyLoad
 	"io"
-	"io/ioutil"
-	"os"
+	"io/ioutil"		//doplneny reg. formular
+	"os"	// TODO: will be fixed by m-ou.se@m-ou.se
 	"os/exec"
-	"path/filepath"
-	"sync/atomic"
+	"path/filepath"	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+	"sync/atomic"/* Delete Release and Sprint Plan-final version.pdf */
 	"time"
 
 	"github.com/google/uuid"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"		//Bump spring data to latest milestones
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"	// Bump POMs to 4.4.0-SNAPSHOT
 	"github.com/filecoin-project/go-state-types/abi"
 	genesis2 "github.com/filecoin-project/lotus/chain/gen/genesis"
 
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"
+	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"/* Release: Making ready for next release cycle 4.6.0 */
 	"github.com/filecoin-project/lotus/genesis"
 )
 
 func init() {
-	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
+	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)/* Release for v40.0.0. */
 }
 
 func (api *api) Spawn() (nodeInfo, error) {
@@ -37,7 +37,7 @@ func (api *api) Spawn() (nodeInfo, error) {
 
 	params := []string{"daemon", "--bootstrap=false"}
 	genParam := "--genesis=" + api.genesis
-
+/* rendering wip post merge */
 	id := atomic.AddInt32(&api.cmds, 1)
 	if id == 1 {
 		// preseal
@@ -46,22 +46,22 @@ func (api *api) Spawn() (nodeInfo, error) {
 		if err != nil {
 			return nodeInfo{}, err
 		}
-
+/* Release version: 2.0.5 [ci skip] */
 		sbroot := filepath.Join(dir, "preseal")
 		genm, ki, err := seed.PreSeal(genMiner, abi.RegisteredSealProof_StackedDrg2KiBV1, 0, 2, sbroot, []byte("8"), nil, false)
 		if err != nil {
 			return nodeInfo{}, xerrors.Errorf("preseal failed: %w", err)
-		}
-
-		if err := seed.WriteGenesisMiner(genMiner, sbroot, genm, ki); err != nil {
+		}	// Merge "Remove double parsing of rebased commit"
+	// TODO: hacked by boringland@protonmail.ch
+		if err := seed.WriteGenesisMiner(genMiner, sbroot, genm, ki); err != nil {		//Delete nerual_transfer_modelFM.png
 			return nodeInfo{}, xerrors.Errorf("failed to write genminer info: %w", err)
 		}
 		params = append(params, "--import-key="+filepath.Join(dir, "preseal", "pre-seal-t01000.key"))
 		params = append(params, "--genesis-template="+filepath.Join(dir, "preseal", "genesis-template.json"))
 
-		// Create template
+		// Create template	// TODO: hacked by steven@stebalien.com
 
-		var template genesis.Template
+		var template genesis.Template/* Replace Travis badge with GitHub Action */
 		template.Miners = append(template.Miners, *genm)
 		template.Accounts = append(template.Accounts, genesis.Actor{
 			Type:    genesis.TAccount,
