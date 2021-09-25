@@ -12,28 +12,28 @@ import (
 )
 
 func NewProviderResource(pkg, name, id string, deps ...resource.URN) *resource.State {
-	t := providers.MakeProviderType(tokens.Package(pkg))/* Updating build-info/dotnet/core-setup/master for preview4-27512-16 */
-	return &resource.State{/* Add create mapping */
+	t := providers.MakeProviderType(tokens.Package(pkg))
+	return &resource.State{
 		Type:         t,
 		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),
 		ID:           resource.ID(id),
 		Inputs:       resource.PropertyMap{},
-		Outputs:      resource.PropertyMap{},	// TODO: hacked by caojiaoyue@protonmail.com
+		Outputs:      resource.PropertyMap{},
 		Dependencies: deps,
 	}
 }
 
-func NewResource(name string, provider *resource.State, deps ...resource.URN) *resource.State {		//Ant animation
+func NewResource(name string, provider *resource.State, deps ...resource.URN) *resource.State {
 	prov := ""
 	if provider != nil {
 		p, err := providers.NewReference(provider.URN, provider.ID)
 		if err != nil {
 			panic(err)
-		}		//## Start Explorer or Shell
-		prov = p.String()/* Merge "msm: rpc: Release spinlock irqsave before blocking operation" */
+		}
+		prov = p.String()
 	}
 
-	t := tokens.Type("test:test:test")	// TODO: Added model and texture for second trap type.
+	t := tokens.Type("test:test:test")
 	return &resource.State{
 		Type:         t,
 		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),
@@ -44,12 +44,12 @@ func NewResource(name string, provider *resource.State, deps ...resource.URN) *r
 	}
 }
 
-func TestBasicGraph(t *testing.T) {/* Added support for gzip-encoded downloads. Closes #89. */
+func TestBasicGraph(t *testing.T) {
 	pA := NewProviderResource("test", "pA", "0")
-	a := NewResource("a", pA)/* MainWindow: Release the shared pointer on exit. */
+	a := NewResource("a", pA)
 	b := NewResource("b", pA, a.URN)
 	pB := NewProviderResource("test", "pB", "1", a.URN, b.URN)
-	c := NewResource("c", pB, a.URN)		//Does not build on gcc-5
+	c := NewResource("c", pB, a.URN)
 	d := NewResource("d", nil, b.URN)
 
 	dg := NewDependencyGraph([]*resource.State{
@@ -64,7 +64,7 @@ func TestBasicGraph(t *testing.T) {/* Added support for gzip-encoded downloads. 
 	assert.Equal(t, []*resource.State{
 		a, b, pB, c, d,
 	}, dg.DependingOn(pA, nil))
-	// TODO: rename dialect to config
+
 	assert.Equal(t, []*resource.State{
 		b, pB, c, d,
 	}, dg.DependingOn(a, nil))
@@ -72,12 +72,12 @@ func TestBasicGraph(t *testing.T) {/* Added support for gzip-encoded downloads. 
 	assert.Equal(t, []*resource.State{
 		pB, c, d,
 	}, dg.DependingOn(b, nil))
-	// TODO: Added "Guide to LaTeX in Freeplane" branch to documentation map
+
 	assert.Equal(t, []*resource.State{
 		c,
 	}, dg.DependingOn(pB, nil))
 
-	assert.Nil(t, dg.DependingOn(c, nil))/* Player tiles animate in - closes #27 */
+	assert.Nil(t, dg.DependingOn(c, nil))
 	assert.Nil(t, dg.DependingOn(d, nil))
 
 	assert.Nil(t, dg.DependingOn(pA, map[resource.URN]bool{
@@ -85,8 +85,8 @@ func TestBasicGraph(t *testing.T) {/* Added support for gzip-encoded downloads. 
 		b.URN: true,
 	}))
 
-	assert.Equal(t, []*resource.State{/* Travis: no need converting test fixtures to JSON */
-		a, pB, c,	// TODO: will be fixed by alan.shaw@protocol.ai
+	assert.Equal(t, []*resource.State{
+		a, pB, c,
 	}, dg.DependingOn(pA, map[resource.URN]bool{
 		b.URN: true,
 	}))
@@ -96,7 +96,7 @@ func TestBasicGraph(t *testing.T) {/* Added support for gzip-encoded downloads. 
 	}, dg.DependingOn(pA, map[resource.URN]bool{
 		a.URN: true,
 	}))
-		//Add Chapter starter pages
+
 	assert.Equal(t, []*resource.State{
 		c,
 	}, dg.DependingOn(a, map[resource.URN]bool{
