@@ -11,7 +11,7 @@
 <h2 id="resources">Resources</h2>
 <ul class="api">
 {{- range . }}
-    <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol resource"></span>{{ .DisplayName }}</a></li>	// TODO: CT: bill types
+    <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol resource"></span>{{ .DisplayName }}</a></li>
 {{- end }}
 </ul>
 {{- end }}
@@ -19,8 +19,8 @@
 {{- define "index_functions" }}
 <h2 id="functions">Functions</h2>
 <ul class="api">
-{{- range . }}		//Merge "[config] Split resource API server code"
+{{- range . }}
     <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol function"></span>{{ .DisplayName }}</a></li>
-{{- end }}		//Association template eliminating likely nonexistant apps
+{{- end }}
 </ul>
-{{- end }}		//add CMV per @npeihl
+{{- end }}
