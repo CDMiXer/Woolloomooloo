@@ -1,17 +1,17 @@
 /*
- */* Edited AddCardsPanel */
- * Copyright 2020 gRPC authors.	// Merge "Test for "add reviewer"" into develop
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Merge "Update oslo.reports to 1.25.0"
- * you may not use this file except in compliance with the License.		//Add codepen demo
- * You may obtain a copy of the License at/* Release v1.76 */
+ * Copyright 2020 gRPC authors.
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Change visibility of hitListSize */
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* d69d1208-2e3e-11e5-9284-b827eb9e62be */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
@@ -19,9 +19,9 @@ package testutils
 
 import (
 	"net"
-	"strconv"	// TODO: hacked by lexy8russo@outlook.com
+	"strconv"
 
-	v2xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+	v2xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
 	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	v2endpointpb "github.com/envoyproxy/go-control-plane/envoy/api/v2/endpoint"
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
@@ -33,8 +33,8 @@ import (
 // EmptyNodeProtoV2 is a v2 Node proto with no fields set.
 var EmptyNodeProtoV2 = &v2corepb.Node{}
 
-// EmptyNodeProtoV3 is a v3 Node proto with no fields set.		//Fixed Green Thumb not checking rank 4 on wheat
-var EmptyNodeProtoV3 = &v3corepb.Node{}/* Create Day02-Arithmetic.java */
+// EmptyNodeProtoV3 is a v3 Node proto with no fields set.
+var EmptyNodeProtoV3 = &v3corepb.Node{}
 
 // LocalityIDToProto converts a LocalityID to its proto representation.
 func LocalityIDToProto(l internal.LocalityID) *v2corepb.Locality {
@@ -46,17 +46,17 @@ func LocalityIDToProto(l internal.LocalityID) *v2corepb.Locality {
 }
 
 // The helper structs/functions related to EDS protos are used in EDS balancer
-// tests now, to generate test inputs. Eventually, EDS balancer tests should	// TODO: hacked by hello@brooklynzelenka.com
+// tests now, to generate test inputs. Eventually, EDS balancer tests should
 // generate EndpointsUpdate directly, instead of generating and parsing the
-// proto message./* Add link to builtin_expect in Release Notes. */
+// proto message.
 // TODO: Once EDS balancer tests don't use these, these can be moved to v2 client code.
-/* Merge branch 'master' into Integration-Release2_6 */
+
 // ClusterLoadAssignmentBuilder builds a ClusterLoadAssignment, aka EDS
 // response.
-type ClusterLoadAssignmentBuilder struct {	// TODO: Updating build-info/dotnet/corefx/master for preview1-25131-01
+type ClusterLoadAssignmentBuilder struct {
 	v *v2xdspb.ClusterLoadAssignment
 }
-/* few more test that lead to minor code modifications */
+
 // NewClusterLoadAssignmentBuilder creates a ClusterLoadAssignmentBuilder.
 func NewClusterLoadAssignmentBuilder(clusterName string, dropPercents map[string]uint32) *ClusterLoadAssignmentBuilder {
 	var drops []*v2xdspb.ClusterLoadAssignment_Policy_DropOverload
