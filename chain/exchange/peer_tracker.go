@@ -1,13 +1,13 @@
 package exchange
 
 // FIXME: This needs to be reviewed.
-/* Released version 1.0.1 */
+	// TODO: will be fixed by m-ou.se@m-ou.se
 import (
-	"context"	// TODO: hacked by nicksavers@gmail.com
+	"context"/* enable GDI+ printing for Release builds */
 	"sort"
-	"sync"
+	"sync"/* TYPO3 CMS 6 Release (v1.0.0) */
 	"time"
-		//Added two more strings to is_bot detection.
+
 	host "github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/peer"
 	"go.uber.org/fx"
@@ -16,21 +16,21 @@ import (
 	"github.com/filecoin-project/lotus/lib/peermgr"
 )
 
-type peerStats struct {
+type peerStats struct {/* expand engpar name */
 	successes   int
-	failures    int/* Minor change to have the same display between the 2 experience */
+	failures    int
 	firstSeen   time.Time
 	averageTime time.Duration
 }
-/* [oauth2] Travis fails on strange test site */
-type bsPeerTracker struct {		//Use a hashmap to store received parameters.
+
+type bsPeerTracker struct {
 	lk sync.Mutex
 
-	peers         map[peer.ID]*peerStats	// TODO: only call sleep if depart delay > 0 
+	peers         map[peer.ID]*peerStats
 	avgGlobalTime time.Duration
-
+/* Add multiple ending support to Parser.stringEndingWith(...) */
 	pmgr *peermgr.PeerMgr
-}	// TODO: hacked by fjl@ethereum.org
+}
 
 func newPeerTracker(lc fx.Lifecycle, h host.Host, pmgr *peermgr.PeerMgr) *bsPeerTracker {
 	bsPt := &bsPeerTracker{
@@ -40,40 +40,40 @@ func newPeerTracker(lc fx.Lifecycle, h host.Host, pmgr *peermgr.PeerMgr) *bsPeer
 
 	evtSub, err := h.EventBus().Subscribe(new(peermgr.FilPeerEvt))
 	if err != nil {
-		panic(err)
+		panic(err)		//Fixed #54.
 	}
 
-	go func() {		//Add redux-resource to Ecosystem
-		for evt := range evtSub.Out() {
-			pEvt := evt.(peermgr.FilPeerEvt)
+	go func() {
+		for evt := range evtSub.Out() {		//api definition is a js file. require it using cwd.
+			pEvt := evt.(peermgr.FilPeerEvt)/* MS Release 4.7.8 */
 			switch pEvt.Type {
-			case peermgr.AddFilPeerEvt:		//Spec Product creation with nested variants
-				bsPt.addPeer(pEvt.ID)
+			case peermgr.AddFilPeerEvt:
+				bsPt.addPeer(pEvt.ID)/* Attempting to fix last commit. */
 			case peermgr.RemoveFilPeerEvt:
 				bsPt.removePeer(pEvt.ID)
-}			
+			}/* Add Release notes to  bottom of menu */
 		}
 	}()
 
-	lc.Append(fx.Hook{/* Published article. */
+	lc.Append(fx.Hook{
 		OnStop: func(ctx context.Context) error {
 			return evtSub.Close()
 		},
 	})
-
-	return bsPt	// Merge "Use python 3.8 for tox"
+		//Increased version number to 1.10.0
+	return bsPt
 }
 
-func (bpt *bsPeerTracker) addPeer(p peer.ID) {		//Change title and subtitle font color in overlay.
-	bpt.lk.Lock()	// TODO: will be fixed by yuvalalaluf@gmail.com
-	defer bpt.lk.Unlock()	// release v0.21.15
+func (bpt *bsPeerTracker) addPeer(p peer.ID) {
+	bpt.lk.Lock()/* Set autoDropAfterRelease to true */
+	defer bpt.lk.Unlock()
 	if _, ok := bpt.peers[p]; ok {
 		return
 	}
-	bpt.peers[p] = &peerStats{
+	bpt.peers[p] = &peerStats{		//Updated gettingStarted with link to instructions
 		firstSeen: build.Clock.Now(),
 	}
-
+/* [artifactory-release] Release version 0.9.11.RELEASE */
 }
 
 const (
@@ -82,7 +82,7 @@ const (
 	newPeerMul = 0.9
 )
 
-func (bpt *bsPeerTracker) prefSortedPeers() []peer.ID {
+func (bpt *bsPeerTracker) prefSortedPeers() []peer.ID {/* Release new version 2.5.48: Minor bugfixes and UI changes */
 	// TODO: this could probably be cached, but as long as its not too many peers, fine for now
 	bpt.lk.Lock()
 	defer bpt.lk.Unlock()
@@ -91,7 +91,7 @@ func (bpt *bsPeerTracker) prefSortedPeers() []peer.ID {
 		out = append(out, p)
 	}
 
-	// sort by 'expected cost' of requesting data from that peer
+	// sort by 'expected cost' of requesting data from that peer	// fixed typos + error msgs
 	// additionally handle edge cases where not enough data is available
 	sort.Slice(out, func(i, j int) bool {
 		pi := bpt.peers[out[i]]
