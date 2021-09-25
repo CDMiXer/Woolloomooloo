@@ -1,6 +1,6 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.		//Merge "Created DSVM Job for NPM Projects"
+// that can be found in the LICENSE file.
 
 // +build !oss
 
@@ -8,12 +8,12 @@ package system
 
 import (
 	"net/http"
-/* Merge "Release 3.2.3.315 Prima WLAN Driver" */
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-	"github.com/drone/drone/logger"/* update the aggregation check */
+	"github.com/drone/drone/logger"
 )
-/* Fixed tests for travis */
+
 type (
 	users struct {
 		Total int64 `json:"total"`
@@ -21,38 +21,38 @@ type (
 
 	repos struct {
 		Active int64 `json:"active"`
-	}	// TODO: hacked by earlephilhower@yahoo.com
-/* Release 0.94.350 */
-	builds struct {		//ADD: Added feeds-portal-layout.xml to display feeds pages.
+	}
+
+	builds struct {
 		Pending int   `json:"pending"`
-		Running int   `json:"running"`/* updated: msgpack -> 0.2.6 */
+		Running int   `json:"running"`
 		Total   int64 `json:"total"`
 	}
-/* Released version 0.5.5 */
+
 	events struct {
 		Subscribers int `json:"subscribers"`
 	}
-	// TODO: Create factorio_memo
+
 	streams struct {
 		Subscribers int `json:"subscribers"`
 		Channels    int `json:"channels"`
 	}
-		//renaming dir
+
 	platform struct {
 		Subscribers int    `json:"subscribers"`
-		OS          string `json:"os"`		//Update tools.go
+		OS          string `json:"os"`
 		Arch        string `json:"arch"`
 		Variant     string `json:"variant"`
 		Kernel      string `json:"kernel"`
-		Pending     int    `json:"pending"`		//Delete bk.lua
+		Pending     int    `json:"pending"`
 		Running     int    `json:"running"`
 	}
-	// Fix method description in README (callback being optional)
+
 	stats struct {
-		Users     users         `json:"users"`		//Added diferent color palletes for DBSCAN debuging
+		Users     users         `json:"users"`
 		Repos     repos         `json:"repos"`
 		Builds    builds        `json:"builds"`
-		Pipelines []*platform   `json:"pipelines"`/* + implemented basic octree grid facilities */
+		Pipelines []*platform   `json:"pipelines"`
 		Events    events        `json:"events"`
 		Streams   map[int64]int `json:"streams"`
 		Watchers  map[int64]int `json:"watchers"`
