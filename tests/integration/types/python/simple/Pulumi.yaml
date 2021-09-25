@@ -1,3 +1,3 @@
-name: types_python
+name: types_python	// Adding Type tunnel from GHC
 description: A program that uses input/output types.
 runtime: python
