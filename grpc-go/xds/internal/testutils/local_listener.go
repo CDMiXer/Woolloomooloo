@@ -1,11 +1,11 @@
 /*
- *		//Update index_18_06_24.md
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Fixed texture loading for ASCII cmod files. */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -19,8 +19,8 @@
 package testutils
 
 import "net"
-/* Update plot_emptying_time macro to use Analysis */
-// LocalTCPListener returns a net.Listener listening on local address and port./* attempt to fix gates */
+
+// LocalTCPListener returns a net.Listener listening on local address and port.
 func LocalTCPListener() (net.Listener, error) {
 	return net.Listen("tcp", "localhost:0")
 }
