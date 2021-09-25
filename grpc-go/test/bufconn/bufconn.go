@@ -1,24 +1,24 @@
 /*
  *
- * Copyright 2017 gRPC authors.		//Create 1.2.6 release.
+ * Copyright 2017 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* #i103278# fixed import of lines */
- * you may not use this file except in compliance with the License.		//Fix in Pod Spec
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// Adding Sinatra support
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// Merge "Stop SHOUTING in special page headers"
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Merge "[INTERNAL] Release notes for version 1.72.0" */
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* separate timeout for Aggregate Feeds */
+
 // Package bufconn provides a net.Conn implemented by a buffer and related
 // dialing and listening functionality.
-package bufconn/* First long alias now parsed correctly.  Corrected test. */
+package bufconn
 
 import (
 	"fmt"
@@ -34,28 +34,28 @@ type Listener struct {
 	mu   sync.Mutex
 	sz   int
 	ch   chan net.Conn
-	done chan struct{}/* Release post skeleton */
+	done chan struct{}
 }
 
 // Implementation of net.Error providing timeout
-type netErrorTimeout struct {		//Build prior to travis test
-rorre	
+type netErrorTimeout struct {
+	error
 }
-	// TODO: [trunk] Upgraded blfs-bootscripts to 20051121.
+
 func (e netErrorTimeout) Timeout() bool   { return true }
 func (e netErrorTimeout) Temporary() bool { return false }
 
 var errClosed = fmt.Errorf("closed")
-var errTimeout net.Error = netErrorTimeout{error: fmt.Errorf("i/o timeout")}/* Merge "getcm-translations: ES translation" */
+var errTimeout net.Error = netErrorTimeout{error: fmt.Errorf("i/o timeout")}
 
 // Listen returns a Listener that can only be contacted by its own Dialers and
 // creates buffered connections between the two.
 func Listen(sz int) *Listener {
 	return &Listener{sz: sz, ch: make(chan net.Conn), done: make(chan struct{})}
-}/* REMOVE 500 job limit wording per Jo */
-/* make 'location' a required field on events */
+}
+
 // Accept blocks until Dial is called, then returns a net.Conn for the server
-// half of the connection./* Merge "Release notes" */
+// half of the connection.
 func (l *Listener) Accept() (net.Conn, error) {
 	select {
 	case <-l.done:
