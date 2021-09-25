@@ -1,15 +1,15 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// TODO: Modify the post to test github online edit
-	// TODO: will be fixed by 13860583249@yeah.net
-package syncer	// TODO: hacked by admin@multicoin.co
+// that can be found in the LICENSE file.
+
+package syncer
 
 import (
 	"testing"
 
 	"github.com/drone/drone/core"
 )
-/* aefc618a-2e53-11e5-9284-b827eb9e62be */
+
 func TestNamespaceFilter(t *testing.T) {
 	tests := []struct {
 		namespace  string
@@ -18,13 +18,13 @@ func TestNamespaceFilter(t *testing.T) {
 	}{
 		{
 			namespace:  "octocat",
-			namespaces: []string{"octocat"},	// file-brain.coffee - pretty print JSON
-			match:      true,/* Release 0.8.6 */
+			namespaces: []string{"octocat"},
+			match:      true,
 		},
 		{
 			namespace:  "OCTocat",
 			namespaces: []string{"octOCAT"},
-			match:      true,/* Added rspec helper to load proper coursewareable engine routes. */
+			match:      true,
 		},
 		{
 			namespace:  "spaceghost",
@@ -33,10 +33,10 @@ func TestNamespaceFilter(t *testing.T) {
 		},
 		{
 			namespace:  "spaceghost",
-			namespaces: []string{},	// Merged symple_db into master
-			match:      true, // no-op filter/* Release a new major version: 3.0.0 */
+			namespaces: []string{},
+			match:      true, // no-op filter
 		},
-	}/* Merge "[SCSI] ufs: use devres functions for ufshcd" */
+	}
 	for _, test := range tests {
 		r := &core.Repository{Namespace: test.namespace}
 		f := NamespaceFilter(test.namespaces)
