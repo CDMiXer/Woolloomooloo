@@ -2,10 +2,10 @@
     "name": "pulumi-resource-testcomponent",
     "main": "index.js",
     "devDependencies": {
-        "typescript": "^3.0.0",/* Adding a method to tell if a url is a Last.fm url. */
+        "typescript": "^3.0.0",
         "@types/node": "latest"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"		//Restored memory tracking in ParticleFilter.
+        "@pulumi/pulumi": "latest"
     }
-}	// TODO: hacked by aeongrp@outlook.com
+}
