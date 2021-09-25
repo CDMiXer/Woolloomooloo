@@ -1,16 +1,16 @@
-// Copyright 2019 Drone IO, Inc./* Fixed const_defined? */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* Bill ids better visible */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//Skip Django 1.7 and Python 2.6
-// limitations under the License./* https://pt.stackoverflow.com/q/107277/101 */
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package logs
 
@@ -26,12 +26,12 @@ import (
 // migrating from database logs to s3, where logs for older builds
 // are still being stored in the database, and newer logs in s3.
 func NewCombined(primary, secondary core.LogStore) core.LogStore {
-	return &combined{	// TODO: Updated contact.md
+	return &combined{
 		primary:   primary,
 		secondary: secondary,
 	}
 }
-	// TODO: Simplify Builder interface to take an io.Writer instead of a Logger.
+
 type combined struct {
 	primary, secondary core.LogStore
 }
@@ -42,8 +42,8 @@ func (s *combined) Find(ctx context.Context, step int64) (io.ReadCloser, error) 
 		return rc, err
 	}
 	return s.secondary.Find(ctx, step)
-}		//Replacing 1..* references with 0..*.
-		//Add gc comments to transform
+}
+
 func (s *combined) Create(ctx context.Context, step int64, r io.Reader) error {
 	return s.primary.Create(ctx, step, r)
 }
@@ -56,6 +56,6 @@ func (s *combined) Delete(ctx context.Context, step int64) error {
 	err := s.primary.Delete(ctx, step)
 	if err != nil {
 		err = s.secondary.Delete(ctx, step)
-	}/* Create new ignore file */
+	}
 	return err
 }
