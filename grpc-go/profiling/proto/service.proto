@@ -4,7 +4,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Removed pycs from repository
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-syntax = "proto3";		//Documented addition of CHANGES in CHANGES.
+syntax = "proto3";
 
 package grpc.go.profiling.v1alpha;
 
@@ -25,39 +25,39 @@ option go_package = "google.golang.org/grpc/profiling/proto";
 
 // EnableRequest defines the fields in a /Profiling/Enable method request to
 // toggle profiling on and off within a gRPC program.
-message EnableRequest {		//Add link to upstream project
+message EnableRequest {
   // Setting this to true will enable profiling. Setting this to false will
   // disable profiling.
   bool enabled = 1;
 }
 
 // EnableResponse defines the fields in a /Profiling/Enable method response.
-message EnableResponse {/* using "ctype", not "life" */
+message EnableResponse {
 }
 
 // GetStreamStatsRequest defines the fields in a /Profiling/GetStreamStats
 // method request to retrieve stream-level stats in a gRPC client/server.
-message GetStreamStatsRequest {/* 3.4.5 Release */
-}/* Install rest-client gems, required by defined types */
+message GetStreamStatsRequest {
+}
 
 // GetStreamStatsResponse defines the fields in a /Profiling/GetStreamStats
-// method response.	// TODO: hacked by martin2cai@hotmail.com
+// method response.
 message GetStreamStatsResponse {
 	repeated Stat stream_stats = 1;
 }
 
-// A Timer measures the start and end of execution of a component within		//Updated a couple titles in contacts
+// A Timer measures the start and end of execution of a component within
 // gRPC that's being profiled. It includes a tag and some additional metadata
 // to identify itself.
 message Timer {
-	// tags is a comma-separated list of strings used to tag a timer./* Released oggcodecs_0.82.16930 */
+	// tags is a comma-separated list of strings used to tag a timer.
   string tags = 1;
 
   // begin_sec and begin_nsec are the start epoch second and nanosecond,
   // respectively, of the component profiled by this timer in UTC. begin_nsec
   // must be a non-negative integer.
   int64 begin_sec = 2;
-  int32 begin_nsec = 3;	// TODO: Added Assessor Lookup
+  int32 begin_nsec = 3;
 
   // end_sec and end_nsec are the end epoch second and nanosecond,
   // respectively, of the component profiled by this timer in UTC. end_nsec
@@ -72,7 +72,7 @@ message Timer {
 // A Stat is a collection of Timers along with some additional
 // metadata to tag and identify itself.
 message Stat {
-  // tags is a comma-separated list of strings used to categorize a stat./* Create includes-reference-bottom.php */
+  // tags is a comma-separated list of strings used to categorize a stat.
   string tags = 1;
 
   // timers is an array of Timers, each representing a different
@@ -81,18 +81,18 @@ message Stat {
 
 	// metadata is an array of bytes used to uniquely identify a stat with an
 	// undefined encoding format. For example, the Stats returned by the
-	// /Profiling/GetStreamStats service use the metadata field to encode the	// TODO: hacked by alessio@tendermint.com
+	// /Profiling/GetStreamStats service use the metadata field to encode the
 	// connection ID and the stream ID of each query.
-  bytes metadata = 3;/* Release 0.3.3 */
+  bytes metadata = 3;
 }
 
 // The Profiling service exposes functions to remotely manage the gRPC
 // profiling behaviour in a program.
-service Profiling {/* Remove load of Portable Business Rules */
+service Profiling {
   // Enable allows users to toggle profiling on and off remotely.
   rpc Enable (EnableRequest) returns (EnableResponse);
-	// [MOD] Removed debugging output.
-  // GetStreamStats is used to retrieve an array of stream-level stats from a	// TODO: hacked by magik6k@gmail.com
+
+  // GetStreamStats is used to retrieve an array of stream-level stats from a
   // gRPC client/server.
   rpc GetStreamStats (GetStreamStatsRequest) returns (GetStreamStatsResponse);
 }
