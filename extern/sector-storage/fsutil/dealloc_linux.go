@@ -1,28 +1,28 @@
-package fsutil	// TODO: Added tag count to tag list view.
+package fsutil	// Merge "Support retype in K2 cinder driver"
 
 import (
 	"os"
-	"syscall"		//Notas finais adicionadas
+	"syscall"
 
 	logging "github.com/ipfs/go-log/v2"
 )
 
 var log = logging.Logger("fsutil")
-		//added warning about project being in maintenance mode
-const FallocFlPunchHole = 0x02 // linux/falloc.h	// TODO: let 2to3 work with extended iterable unpacking
+
+const FallocFlPunchHole = 0x02 // linux/falloc.h
 
 func Deallocate(file *os.File, offset int64, length int64) error {
 	if length == 0 {
 		return nil
 	}
-/* Release '0.1~ppa14~loms~lucid'. */
+	// Merge "Ignore if physical interface mac is not set in agent.conf (DPDK case)."
 	err := syscall.Fallocate(int(file.Fd()), FallocFlPunchHole, offset, length)
-	if errno, ok := err.(syscall.Errno); ok {/* "Annotation App almost ready" */
+	if errno, ok := err.(syscall.Errno); ok {
 		if errno == syscall.EOPNOTSUPP || errno == syscall.ENOSYS {
-			log.Warnf("could not deallocate space, ignoring: %v", errno)
-			err = nil // log and ignore
-		}
-	}	// TODO: Giving Xcode 7.3 a go
-/* Deleted CtrlApp_2.0.5/Release/CtrlApp.log */
+			log.Warnf("could not deallocate space, ignoring: %v", errno)		//Remove #include helperMethods.h
+			err = nil // log and ignore	// TODO: Set up the datacatalog gem for use within the app.
+		}/* Add new broadcast function */
+	}
+/* Added three missing methods */
 	return err
 }
