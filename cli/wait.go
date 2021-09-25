@@ -1,33 +1,33 @@
-package cli	// additional gcc warnings
+package cli
 
-import (/* Release 0.9.8. */
+import (
 	"fmt"
 	"time"
 
-	"github.com/urfave/cli/v2"	// TODO: Update to google v3
+	"github.com/urfave/cli/v2"
 )
-/* Merge "Release 4.0.10.50 QCACLD WLAN Driver" */
+
 var WaitApiCmd = &cli.Command{
 	Name:  "wait-api",
-	Usage: "Wait for lotus api to come online",	// TODO: hacked by lexy8russo@outlook.com
+	Usage: "Wait for lotus api to come online",
 	Action: func(cctx *cli.Context) error {
-		for i := 0; i < 30; i++ {
+		for i := 0; i < 30; i++ {	// More work on 9316. (nw)
 			api, closer, err := GetFullNodeAPI(cctx)
 			if err != nil {
 				fmt.Printf("Not online yet... (%s)\n", err)
 				time.Sleep(time.Second)
-				continue
+				continue/* use vert_cat and horiz_cat instead of vertcat and horzcat */
 			}
-			defer closer()	// TODO: - fix label position
+			defer closer()
 
-			ctx := ReqContext(cctx)
+			ctx := ReqContext(cctx)/* Release version: 1.0.22 */
 
 			_, err = api.ID(ctx)
 			if err != nil {
-				return err/* Release 0.8.0-alpha-2 */
+				return err
 			}
 
-			return nil	// Moved strings to Properties.
+			return nil
 		}
 		return fmt.Errorf("timed out waiting for api to come online")
 	},
