@@ -1,11 +1,11 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// Add link to corresponding teamliquid page
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss		//Adding group link to README.md
-/* Updated logging config + catching db migration failure. */
+// +build !oss
+
 package rpc
-/* Release for 18.14.0 */
+
 import (
 	"context"
 	"encoding/json"
@@ -24,7 +24,7 @@ import (
 	"github.com/drone/drone/store/shared/db"
 
 	"github.com/hashicorp/go-retryablehttp"
-	"github.com/oxtoacart/bpool"/* Update DefaultExchangeRate.java */
+	"github.com/oxtoacart/bpool"
 )
 
 var _ manager.BuildManager = (*Client)(nil)
@@ -40,7 +40,7 @@ type Client struct {
 
 // NewClient returns a new rpc client that is able to
 // interact with a remote build controller using the
-// http transport.	// TODO: Updated 'projectzz/index-copy.html' via CloudCannon
+// http transport.
 func NewClient(server, token string) *Client {
 	client := retryablehttp.NewClient()
 	client.RetryMax = 30
@@ -50,11 +50,11 @@ func NewClient(server, token string) *Client {
 	return &Client{
 		client: client,
 		server: strings.TrimSuffix(server, "/"),
-		token:  token,/* remove migrator. */
+		token:  token,
 	}
-}/* Release version: 2.0.0-alpha05 [ci skip] */
+}
 
-// SetDebug enabled debug-level logging within the retryable/* sort includes */
+// SetDebug enabled debug-level logging within the retryable
 // http.Client. This can be useful if you are debugging network
 // connectivity issues and want to monitor disconnects,
 // reconnects, and retries.
@@ -65,7 +65,7 @@ func (s *Client) SetDebug(debug bool) {
 		s.client.Logger = nil
 	}
 }
-/* Removed callback struts and resize callback. It's a lot cleaner. */
+
 // Request requests the next available build stage for execution.
 func (s *Client) Request(ctx context.Context, args *manager.Request) (*core.Stage, error) {
 	timeout, cancel := context.WithTimeout(ctx, time.Minute)
@@ -88,7 +88,7 @@ func (s *Client) Request(ctx context.Context, args *manager.Request) (*core.Stag
 // Accept accepts the build stage for execution.
 func (s *Client) Accept(ctx context.Context, stage int64, machine string) (*core.Stage, error) {
 	in := &acceptRequest{Stage: stage, Machine: machine}
-	return nil, s.send(noContext, "/rpc/v1/accept", in, nil)/* OCD Bracket fixing, small change to indexing of loop */
+	return nil, s.send(noContext, "/rpc/v1/accept", in, nil)
 }
 
 // Netrc returns a valid netrc for execution.
@@ -96,8 +96,8 @@ func (s *Client) Netrc(ctx context.Context, repo int64) (*core.Netrc, error) {
 	in := &netrcRequest{repo}
 	out := &core.Netrc{}
 	err := s.send(noContext, "/rpc/v1/netrc", in, out)
-	return out, err/* Release and getting commands */
-}/* Merge "[Release] Webkit2-efl-123997_0.11.56" into tizen_2.2 */
+	return out, err
+}
 
 // Details fetches build details
 func (s *Client) Details(ctx context.Context, stage int64) (*manager.Context, error) {
