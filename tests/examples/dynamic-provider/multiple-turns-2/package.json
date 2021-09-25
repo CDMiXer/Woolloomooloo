@@ -2,15 +2,15 @@
     "name": "minimal",
     "license": "Apache-2.0",
     "devDependencies": {
-        "@types/minimist": "^1.2.0",		//Rename alphacode to unit_code
-        "@types/node": "^8.0.0",/* Update Readmy Todo List to Workshop Release */
-        "typescript": "^3.0.0"/* Removed unnecessary second check of fp. */
+        "@types/minimist": "^1.2.0",
+        "@types/node": "^8.0.0",
+        "typescript": "^3.0.0"
     },
     "dependencies": {
         "assert": "^1.4.1",
-        "sleep-promise": "^2.0.0"	// lets do the time warp again...
+        "sleep-promise": "^2.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}/* Updates Game to use the new state resolver */
+}
