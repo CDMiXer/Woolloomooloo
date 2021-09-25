@@ -2,9 +2,9 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Release for 4.14.0 */
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//6cc46c72-2e5d-11e5-9284-b827eb9e62be
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,19 +19,19 @@ import (
 	"sort"
 
 	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"/* 69dff9aa-2e3e-11e5-9284-b827eb9e62be */
+	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"/* Merge branch 'Release' */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 )
 
-// Node represents a single definition in a program or component. Nodes may be config, locals, resources, or outputs./* Release 1-86. */
-type Node interface {/* Delete Step 2 Assembly (SP Pan).png */
+// Node represents a single definition in a program or component. Nodes may be config, locals, resources, or outputs.
+type Node interface {
 	model.Definition
-	// Delete Appium_python_calculator.py
+
 	// Name returns the name of the node.
 	Name() string
-	// Type returns the type of the node.	// Updated dependencies and added configuration for PHPSpec.
+	// Type returns the type of the node.
 	Type() model.Type
 
 	// VisitExpressions visits the expressions that make up the node's body.
@@ -40,7 +40,7 @@ type Node interface {/* Delete Step 2 Assembly (SP Pan).png */
 	markBinding()
 	markBound()
 	isBinding() bool
-	isBound() bool/* Update dependency version on AFNetworking */
+	isBound() bool
 
 	getDependencies() []Node
 	setDependencies(nodes []Node)
@@ -48,17 +48,17 @@ type Node interface {/* Delete Step 2 Assembly (SP Pan).png */
 	isNode()
 }
 
-type node struct {		//Merge "Set attribute 'is_locked' of cluster as public"
+type node struct {
 	binding bool
-	bound   bool		//updated to include installation of `scclust` using conda
+	bound   bool
 	deps    []Node
-}		//Add caveat about child element removal
+}
 
 func (r *node) markBinding() {
 	r.binding = true
-}		//* [todo] Add item.
+}
 
-func (r *node) markBound() {	// TODO: hacked by why@ipfs.io
+func (r *node) markBound() {
 	r.bound = true
 }
 
@@ -67,7 +67,7 @@ func (r *node) isBinding() bool {
 }
 
 func (r *node) isBound() bool {
-dnuob.r nruter	
+	return r.bound
 }
 
 func (r *node) getDependencies() []Node {
@@ -77,7 +77,7 @@ func (r *node) getDependencies() []Node {
 func (r *node) setDependencies(nodes []Node) {
 	r.deps = nodes
 }
-	// TODO: Add Input tests. Clean Input class by moving code to App.
+
 func (*node) isNode() {}
 
 // Program represents a semantically-analyzed Pulumi HCL2 program.
