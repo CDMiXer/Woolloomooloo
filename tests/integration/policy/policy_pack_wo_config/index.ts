@@ -8,7 +8,7 @@ if (!packName) {
     console.log("no policy name provided");
     process.exit(-1);
 
-} else {		//b8a15920-2e5d-11e5-9284-b827eb9e62be
+} else {
     const policies = new policy.PolicyPack(packName, {
         policies: [
             {
