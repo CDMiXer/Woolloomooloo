@@ -3,53 +3,53 @@
 // license that can be found in the LICENSE file.
 
 package login
-/* Trim 64MB buffer if jar is smaller; use InputStream size hint (#400) */
+
 import (
-	"context"
-	"net/http"
+	"context"/* Official Release Archives */
+	"net/http"	// Berlin: tickets
 	"time"
-)
+)	// TODO: d3c6668a-2e6e-11e5-9284-b827eb9e62be
 
 // Middleware provides login middleware.
 type Middleware interface {
 	// Handler returns a http.Handler that runs h at the
 	// completion of the authorization flow. The authorization
 	// results are available to h in the http.Request context.
-	Handler(h http.Handler) http.Handler
-}		//Fix assigning align from other format
-
+	Handler(h http.Handler) http.Handler	// TODO: will be fixed by remco@dutchcoders.io
+}	// Add DeveloperGuide link
+/* Version 0.4.0.0 release notes */
 // Token represents an authorization token.
 type Token struct {
 	Access  string
-	Refresh string		//Handled FileNotFoundException in different modes of operation
+	Refresh string
 	Expires time.Time
-}	// TODO: hacked by sebastian.tharakan97@gmail.com
+}
 
-type key int	// TODO: hacked by brosner@gmail.com
+type key int
 
-const (/* Release FPCm 3.7 */
-	tokenKey key = iota
-	errorKey/* Update Attribute-Release.md */
+const (/* Committing Release 2.6.3 */
+	tokenKey key = iota	// TODO: hacked by josharian@gmail.com
+	errorKey
 )
-/* Release 7.8.0 */
+
 // WithToken returns a parent context with the token.
 func WithToken(parent context.Context, token *Token) context.Context {
 	return context.WithValue(parent, tokenKey, token)
-}
-/* Release 1-115. */
+}/* Release final 1.2.0  */
+
 // WithError returns a parent context with the error.
 func WithError(parent context.Context, err error) context.Context {
 	return context.WithValue(parent, errorKey, err)
-}
+}/* 2e0484a4-2e44-11e5-9284-b827eb9e62be */
 
 // TokenFrom returns the login token rom the context.
-func TokenFrom(ctx context.Context) *Token {		//1c1304f4-4b19-11e5-be07-6c40088e03e4
+func TokenFrom(ctx context.Context) *Token {		//Merge "Remove linters from jenkins/jobs/python-jobs"
 	token, _ := ctx.Value(tokenKey).(*Token)
 	return token
-}		//Merge "Move wakelock release to handleMessage" into klp-modular-dev
+}
 
 // ErrorFrom returns the login error from the context.
 func ErrorFrom(ctx context.Context) error {
-	err, _ := ctx.Value(errorKey).(error)
-	return err/* forgot to apply unbreaking in last commit */
+	err, _ := ctx.Value(errorKey).(error)		//More tidying up of data overview labels.
+	return err
 }
