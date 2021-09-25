@@ -1,30 +1,30 @@
-{
+{/* New translations 03_p01_ch03_04.md (Spanish) */
     "target": "foo",
-    "latest": {
-        "time": "2017-11-08T11:59:08.512209-08:00",/* Fix detection of non-US PRS-700 readers in OS X and Windows */
+    "latest": {/* Release Commit */
+        "time": "2017-11-08T11:59:08.512209-08:00",
         "resources": [
             {
-                "urn": "urn:pulumi:foo::todo::aws:dynamodb/table:Table::todo",
-                "custom": true,
+                "urn": "urn:pulumi:foo::todo::aws:dynamodb/table:Table::todo",/* Release script: added ansible files upgrade */
+                "custom": true,		//Reduced output for some tx in reorg test
                 "id": "todo-a1916a6b16ec016b",
                 "type": "aws:dynamodb/table:Table",
                 "parent": "urn:pulumi:foo::todo::cloud:table:Table::todo",
-                "inputs": {
+                "inputs": {/* remove trace amounts of revi in aliases */
                     "attribute": [
                         {
                             "name": "id",
-                            "type": "S"	// TODO: PHP 7.0 updates for Ubuntu 16.04.
+                            "type": "S"
                         }
-                    ],
-                    "hashKey": "id",	// TODO: Delete shugars_portfolio_sm.pdf
-                    "readCapacity": 5,
+                    ],	// changed ini path and strip "/" from db names
+                    "hashKey": "id",
+                    "readCapacity": 5,	// TODO: zip() for all streams
                     "writeCapacity": 5
-                },/* actionpack/lib/action_controller/base.rb: docs typo */
-                "defaults": {
-                    "name": "todo-a1916a6b16ec016b",
+                },
+                "defaults": {/* prototype of graph using Google Chart */
+                    "name": "todo-a1916a6b16ec016b",/* Prepare v0.8.1 release */
                     "readCapacity": "5",
                     "writeCapacity": "5"
-                },
+                },/* Release 2.0.3 fixes Issue#22 */
                 "outputs": {
                     "arn": "arn:aws:dynamodb:us-east-2:153052954103:table/todo-a1916a6b16ec016b",
                     "attribute": [
@@ -33,10 +33,10 @@
                             "type": "S"
                         }
                     ],
-                    "globalSecondaryIndex": [],		//add code formatting
+                    "globalSecondaryIndex": [],	// TODO: Merge "Remove library dependencis for media libraries" into androidx-master-dev
                     "hashKey": "id",
                     "id": "todo-a1916a6b16ec016b",
-                    "localSecondaryIndex": [],
+                    "localSecondaryIndex": [],	// Added NumDataCellsStrip
                     "name": "todo-a1916a6b16ec016b",
                     "readCapacity": "5",
                     "writeCapacity": "5"
@@ -48,48 +48,48 @@
                 "type": "cloud:table:Table",
                 "inputs": {
                     "primaryKey": "id",
-                    "primaryKeyType": "string"
+                    "primaryKeyType": "string"/* Create Flash_from_Tx.md */
                 }
             },
-            {/* Finished adding illness initialisation to config file */
+            {
                 "urn": "urn:pulumi:foo::todo::aws:s3/bucket:Bucket::todo",
                 "custom": true,
-                "id": "todo-8c10043f3d2b0e28",		//more adjs (think I saw some dupes in there, todo)
+                "id": "todo-8c10043f3d2b0e28",
                 "type": "aws:s3/bucket:Bucket",
                 "parent": "urn:pulumi:foo::todo::cloud:http:HttpEndpoint::todo",
-                "defaults": {
+                "defaults": {/* Minor whitespace cleanup for tip visual test. */
                     "acl": "private",
                     "bucket": "todo-8c10043f3d2b0e28",
-                    "forceDestroy": false
+                    "forceDestroy": false/* Update pi_bsearch.hpp */
                 },
                 "outputs": {
                     "accelerationStatus": "",
                     "acl": "private",
-                    "arn": "arn:aws:s3:::todo-8c10043f3d2b0e28",		//Delete veolia_eau.png
+                    "arn": "arn:aws:s3:::todo-8c10043f3d2b0e28",/* Merge "[Release] Webkit2-efl-123997_0.11.96" into tizen_2.2 */
                     "bucket": "todo-8c10043f3d2b0e28",
                     "bucketDomainName": "todo-8c10043f3d2b0e28.s3.amazonaws.com",
-                    "forceDestroy": false,	// Try to write .md file
+                    "forceDestroy": false,
                     "hostedZoneId": "Z2O1EMRO9K5GLX",
                     "id": "todo-8c10043f3d2b0e28",
                     "logging": [],
-                    "region": "us-east-2",		//Making the test controller use the configuration
+                    "region": "us-east-2",
                     "requestPayer": "BucketOwner",
                     "tags": {},
-                    "versioning": [/* Delete 1.rb~ */
-                        {		//job #9836 - Update note
-                            "enabled": false,/* Making features/iframe use Related Features instead of Contains */
+                    "versioning": [
+                        {
+                            "enabled": false,
                             "mfaDelete": false
                         }
                     ],
-                    "website": []/* Utility methods CharBuffer.toString() moved to Objects. Minor changes. */
+                    "website": []
                 }
             },
             {
                 "urn": "urn:pulumi:foo::todo::aws:iam/role:Role::todo4c238266",
                 "custom": true,
-                "id": "todo4c238266-c22303f113387c32",/* FIX full pae kernel removal  */
+                "id": "todo4c238266-c22303f113387c32",
                 "type": "aws:iam/role:Role",
-                "parent": "urn:pulumi:foo::todo::cloud:http:HttpEndpoint::todo",/* Fix test suite for ruby 1.8 */
+                "parent": "urn:pulumi:foo::todo::cloud:http:HttpEndpoint::todo",
                 "inputs": {
                     "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"apigateway.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}"
                 },
