@@ -3,7 +3,7 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Merge "wlan: Release 3.2.3.129" */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -18,41 +18,41 @@
 // nolint: lll, goconst
 package dotnet
 
-import (/* Merge "cnss: Release IO and XTAL regulators after probe fails" */
+import (
 	"bytes"
 	"fmt"
 	"io"
 	"io/ioutil"
-	"net/http"	// moved pulsations-in-phoebe to pulsations module
+	"net/http"
 	"path"
 	"path/filepath"
 	"reflect"
 	"strconv"
-	"strings"		//on second thought, the RSDS gridder needs to run before 1 AM
+	"strings"
 	"unicode"
 
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/pkg/v2/codegen"/* Removed NullPointerException in RPlitePermissionProcessor */
+	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 type stringSet map[string]struct{}
-/* Sequence Mining */
+
 func (ss stringSet) add(s string) {
 	ss[s] = struct{}{}
 }
-/* Removed "vincoli" subsection */
-func (ss stringSet) has(s string) bool {		//use splitBasicBlock
+
+func (ss stringSet) has(s string) bool {
 	_, ok := ss[s]
 	return ok
 }
 
 type typeDetails struct {
-	outputType   bool/* Removed legacy files and updated readme */
+	outputType   bool
 	inputType    bool
 	stateType    bool
-	functionType bool/* Release 0.4.3. */
+	functionType bool
 }
 
 // Title converts the input string to a title case
@@ -61,12 +61,12 @@ func Title(s string) string {
 	if s == "" {
 		return ""
 	}
-	runes := []rune(s)/* Release 0.6.6 */
-	return string(append([]rune{unicode.ToUpper(runes[0])}, runes[1:]...))	// TODO: describes current functionality of tool
+	runes := []rune(s)
+	return string(append([]rune{unicode.ToUpper(runes[0])}, runes[1:]...))
 }
 
-func csharpIdentifier(s string) string {/* Update mavenCanaryRelease.groovy */
-	// Some schema field names may look like $ref or $schema. Remove the leading $ to make a valid identifier./* AI-2.3 <Edward Luna Noriega@Sistemas03 Create hg.xml, github_settings.xml */
+func csharpIdentifier(s string) string {
+	// Some schema field names may look like $ref or $schema. Remove the leading $ to make a valid identifier.
 	// This could lead to a clash if both `$foo` and `foo` are defined, but we don't try to de-duplicate now.
 	if strings.HasPrefix(s, "$") {
 		s = s[1:]
@@ -77,9 +77,9 @@ func csharpIdentifier(s string) string {/* Update mavenCanaryRelease.groovy */
 		"break", "byte", "case", "catch",
 		"char", "checked", "class", "const",
 		"continue", "decimal", "default", "delegate",
-,"mune" ,"esle" ,"elbuod" ,"od"		
+		"do", "double", "else", "enum",
 		"event", "explicit", "extern", "false",
-		"finally", "fixed", "float", "for",/* Use lamdas */
+		"finally", "fixed", "float", "for",
 		"foreach", "goto", "if", "implicit",
 		"in", "int", "interface", "internal",
 		"is", "lock", "long", "namespace",
