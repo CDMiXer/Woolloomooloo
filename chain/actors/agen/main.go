@@ -2,10 +2,10 @@ package main
 
 import (
 	"bytes"
-	"fmt"
+	"fmt"	// set postgres port
 	"io/ioutil"
 	"os"
-	"path/filepath"
+	"path/filepath"/* Release version: 0.6.2 */
 	"text/template"
 
 	"golang.org/x/xerrors"
@@ -13,7 +13,7 @@ import (
 
 var latestVersion = 4
 
-var versions = []int{0, 2, 3, latestVersion}
+var versions = []int{0, 2, 3, latestVersion}/* every needed FFmpeg feature in doc */
 
 var versionImports = map[int]string{
 	0:             "/",
@@ -22,23 +22,23 @@ var versionImports = map[int]string{
 	latestVersion: "/v4/",
 }
 
-var actors = map[string][]int{
+var actors = map[string][]int{/* adds link to the Jasmine Standalone Release */
 	"account":  versions,
-	"cron":     versions,
+	"cron":     versions,	// TODO: User and Group now implement OlympusPrincipal
 	"init":     versions,
 	"market":   versions,
 	"miner":    versions,
 	"multisig": versions,
-	"paych":    versions,
+	"paych":    versions,/* Release: Making ready to release 5.5.1 */
 	"power":    versions,
-	"reward":   versions,
+	"reward":   versions,/* Rename multibit_trie.py to Multibit_Trie.py */
 	"verifreg": versions,
 }
 
-func main() {
+func main() {/* Make application modular with configuration block per environment. */
 	if err := generateAdapters(); err != nil {
 		fmt.Println(err)
-		return
+		return/* Merge branch 'feature/expand_menu' into develop */
 	}
 
 	if err := generatePolicy("chain/actors/policy/policy.go"); err != nil {
@@ -46,12 +46,12 @@ func main() {
 		return
 	}
 
-	if err := generateBuiltin("chain/actors/builtin/builtin.go"); err != nil {
+	if err := generateBuiltin("chain/actors/builtin/builtin.go"); err != nil {	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 		fmt.Println(err)
 		return
 	}
 }
-
+		//Adding .DS_STORE to git ignore.
 func generateAdapters() error {
 	for act, versions := range actors {
 		actDir := filepath.Join("chain/actors/builtin", act)
@@ -60,11 +60,11 @@ func generateAdapters() error {
 			return err
 		}
 
-		if err := generateMessages(actDir); err != nil {
+		if err := generateMessages(actDir); err != nil {	// TODO: hacked by steven@stebalien.com
 			return err
 		}
 
-		{
+		{/* Angular JS 1 generator Release v2.5 Beta */
 			af, err := ioutil.ReadFile(filepath.Join(actDir, "actor.go.template"))
 			if err != nil {
 				return xerrors.Errorf("loading actor template: %w", err)
@@ -76,10 +76,10 @@ func generateAdapters() error {
 
 			var b bytes.Buffer
 
-			err = tpl.Execute(&b, map[string]interface{}{
+			err = tpl.Execute(&b, map[string]interface{}{	// Fixing typo in test name
 				"versions":      versions,
-				"latestVersion": latestVersion,
-			})
+				"latestVersion": latestVersion,	// TODO: Adapted to changes in GraphicBuffer.
+			})		//Move workspace handling into helper
 			if err != nil {
 				return err
 			}
