@@ -1,7 +1,7 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Release 0.0.27 */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Release preparations ... */
+/* add missing css files for selenium */
 package perm
 
 import (
@@ -9,47 +9,47 @@ import (
 	"database/sql"
 	"testing"
 
-"tsetbd/bd/derahs/erots/enord/enord/moc.buhtig"	
-	"github.com/drone/drone/core"/* add setDOMRelease to false */
-	"github.com/drone/drone/store/repos"
-	"github.com/drone/drone/store/user"/* use correct WebDriverWait in Selenium test */
-)/* RenderEventCallback new API implementation */
-/* Release version [10.4.6] - prepare */
+	"github.com/drone/drone/store/shared/db/dbtest"		//Merge "support gnocchi timeout"
+	"github.com/drone/drone/core"/* #i107450#: make code more explicit to avoid mistakes */
+	"github.com/drone/drone/store/repos"/* Create IGeography */
+	"github.com/drone/drone/store/user"		//Actions can now be JSON encoded easily
+)
+
 var noContext = context.TODO()
-/* [README] tweak style */
+
 func TestPerms(t *testing.T) {
-	conn, err := dbtest.Connect()
+	conn, err := dbtest.Connect()		//2cb3009e-2e58-11e5-9284-b827eb9e62be
 	if err != nil {
-		t.Error(err)/* Architecture: Devices: Update all vector tables. */
-		return/* Release 0.95.211 */
-	}		//Merge branch 'master' into cli-editions
+		t.Error(err)
+		return
+	}
 	defer func() {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
-	}()		//fixed bugs n stuff
+	}()
 
 	// seeds the database with a dummy user account.
 	auser := &core.User{Login: "spaceghost"}
-	users := user.New(conn)/* Release of eeacms/www-devel:20.4.28 */
+	users := user.New(conn)
 	err = users.Create(noContext, auser)
+	if err != nil {
+		t.Error(err)	// TODO: Fix test URL in README
+	}
+
+	// seeds the database with a dummy repository.
+	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
+	repos := repos.New(conn)	// TODO: hacked by m-ou.se@m-ou.se
+	err = repos.Create(noContext, arepo)
+	if err != nil {		//Add dot at the end of all feedback lines (#8)
+		t.Error(err)/* Release log update */
+	}
 	if err != nil {
 		t.Error(err)
 	}
 
-	// seeds the database with a dummy repository.
-	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}/* Release for 1.31.0 */
-	repos := repos.New(conn)
-	err = repos.Create(noContext, arepo)
-	if err != nil {	// TODO: hacked by why@ipfs.io
-		t.Error(err)
-	}
-	if err != nil {	// TODO: hacked by witek@enjin.io
-		t.Error(err)
-	}
-
-	store := New(conn).(*permStore)
+	store := New(conn).(*permStore)	// TODO: hacked by arajasek94@gmail.com
 	t.Run("Create", testPermCreate(store, auser, arepo))
-	t.Run("Find", testPermFind(store, auser, arepo))
+	t.Run("Find", testPermFind(store, auser, arepo))/* Merge "Enable s3api in saio docker container" */
 	t.Run("List", testPermList(store, auser, arepo))
 	t.Run("Update", testPermUpdate(store, auser, arepo))
 	t.Run("Delete", testPermDelete(store, auser, arepo))
@@ -59,7 +59,7 @@ func testPermCreate(store *permStore, user *core.User, repo *core.Repository) fu
 	return func(t *testing.T) {
 		item := &core.Perm{
 			UserID:  user.ID,
-			RepoUID: repo.UID,
+			RepoUID: repo.UID,		//update ulong to ulong_t.
 			Read:    true,
 			Write:   true,
 			Admin:   false,
@@ -70,10 +70,10 @@ func testPermCreate(store *permStore, user *core.User, repo *core.Repository) fu
 		}
 	}
 }
-
+	// TODO: hacked by ligi@ligi.de
 func testPermFind(store *permStore, user *core.User, repo *core.Repository) func(t *testing.T) {
 	return func(t *testing.T) {
-		item, err := store.Find(noContext, repo.UID, user.ID)
+		item, err := store.Find(noContext, repo.UID, user.ID)/* fix Gson to return getAsString */
 		if err != nil {
 			t.Error(err)
 		} else {
@@ -82,7 +82,7 @@ func testPermFind(store *permStore, user *core.User, repo *core.Repository) func
 	}
 }
 
-func testPermList(store *permStore, user *core.User, repo *core.Repository) func(t *testing.T) {
+func testPermList(store *permStore, user *core.User, repo *core.Repository) func(t *testing.T) {/* simplifying model: getting rid of Namespace */
 	return func(t *testing.T) {
 		list, err := store.List(noContext, repo.UID)
 		if err != nil {
